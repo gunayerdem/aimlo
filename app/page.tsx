@@ -1,18 +1,23 @@
 "use client";
-
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { supabase } from "@/lib/supabase";
 import type { User } from "@supabase/supabase-js";
-
 /* ══════════════════════════════════════════════════════════
    TYPES
    ══════════════════════════════════════════════════════════ */
-
 type Lang = "tr" | "en";
-type Screen = "lang" | "dashboard" | "setup" | "round" | "scoreInput" | "report" | "history" | "reportDetail";
+type Screen =
+  | "landing"
+  | "lang"
+  | "dashboard"
+  | "setup"
+  | "round"
+  | "scoreInput"
+  | "report"
+  | "history"
+  | "reportDetail";
 type RoundResult = "win" | "loss";
 type SetupStep = "mapAgent" | "sideComp" | "confirm";
-
 type SetupData = {
   map: string;
   agent: string;
@@ -21,13 +26,11 @@ type SetupData = {
   enemyComp: string[];
   unknownEnemyComp: boolean;
 };
-
 type RoundFeedback = {
   mainMistake: string;
   enemyHabit: string;
   microPlan: string;
 };
-
 type RoundData = {
   roundNumber: number;
   deathLocation: string;
@@ -38,19 +41,16 @@ type RoundData = {
   survived: boolean;
   feedback: RoundFeedback | null;
 };
-
 type RoundForm = {
   deathLocation: string;
   enemyCount: string;
   yourNote: string;
 };
-
 type FormErrors = Record<string, string>;
 type RoundScreenMode = "input" | "skipConfirm" | "feedback";
 type MatchScore = { yours: string; enemy: string };
 type CompTarget = "team" | "enemy";
 type AuthMode = "login" | "register";
-
 type SavedReport = {
   id: string;
   map: string;
@@ -72,76 +72,192 @@ type SavedReport = {
   rounds: RoundData[];
   setup: SetupData;
 };
-
 /* ══════════════════════════════════════════════════════════
-   BRAND — public/aimlo-logo.png
+   PROFILE HELPER — upsert after signup (with retry + return status)
    ══════════════════════════════════════════════════════════ */
+async function upsertProfile(
+  userId: string,
+  data: {
+    username: string;
+    email: string;
+    first_name: string;
+    last_name: string;
+  },
+): Promise<{ ok: boolean; error?: string }> {
+  const payload = {
+    user_id: userId,
+    username: data.username.toLowerCase().trim(),
+    email: data.email.toLowerCase().trim(),
+    first_name: data.first_name.trim(),
+    last_name: data.last_name.trim(),
+  };
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const { error } = await supabase
+        .from("profiles")
+        .upsert(payload, { onConflict: "user_id" });
+      if (!error) return { ok: true };
+      console.error(
+        `[Aimlo] Profile upsert attempt ${attempt + 1}:`,
+        error.message,
+        error.details,
+      );
+      if (attempt === 1) return { ok: false, error: error.message };
+    } catch (err) {
+      console.error(
+        `[Aimlo] Profile upsert exception attempt ${attempt + 1}:`,
+        err,
+      );
+      if (attempt === 1)
+        return {
+          ok: false,
+          error: err instanceof Error ? err.message : "Unknown error",
+        };
+    }
+  }
+  return { ok: false, error: "Profile creation failed" };
+}
 
+async function checkUsernameAvailable(username: string): Promise<boolean> {
+  try {
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("user_id")
+      .ilike("username", username.toLowerCase().trim())
+      .maybeSingle();
+    if (error) {
+      console.error("[Aimlo] Username check error:", error.message);
+      return true; // allow attempt, DB constraint will catch duplicates
+    }
+    return !data;
+  } catch {
+    return true;
+  }
+}
+/* ══════════════════════════════════════════════════════════
+   BRAND
+   ══════════════════════════════════════════════════════════ */
 const AIMLO_LOGO_SRC = "/aimlo-logo.png?v=5d2fb8b5";
-
-function AimloLogo({ size = 48, className = "" }: { size?: number; className?: string }) {
+function AimloLogo({
+  size = 48,
+  className = "",
+}: {
+  size?: number;
+  className?: string;
+}) {
   return (
     <img
       src={AIMLO_LOGO_SRC}
       alt="Aimlo"
-      style={{ height: size, width: "auto", maxWidth: `min(88vw, ${Math.round(size * 3)}px)` }}
+      style={{
+        height: size,
+        width: "auto",
+        maxWidth: `min(88vw, ${Math.round(size * 3)}px)`,
+      }}
       className={`object-contain object-left shrink-0 ${className}`}
       draggable={false}
     />
   );
 }
-
+function AimloWordmark({
+  size = "text-4xl",
+  className = "",
+}: {
+  size?: string;
+  className?: string;
+}) {
+  return (
+    <span
+      className={`font-extrabold text-white ${size} ${className}`}
+      style={{ letterSpacing: "-0.02em", lineHeight: 1 }}
+    >
+      AIM
+      <span
+        className="bg-clip-text text-transparent"
+        style={{
+          backgroundImage: "linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)",
+        }}
+      >
+        LO
+      </span>
+    </span>
+  );
+}
+/* ══════════════════════════════════════════════════════════
+   SCROLL REVEAL HOOK
+   ══════════════════════════════════════════════════════════ */
+function useScrollReveal(threshold = 0.15) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.unobserve(el);
+        }
+      },
+      { threshold },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return { ref, visible };
+}
 /* ══════════════════════════════════════════════════════════
    AGENTS
    ══════════════════════════════════════════════════════════ */
-
 const AGENT_GROUPS: Record<string, string[]> = {
   Controllers: ["Brimstone", "Viper", "Omen", "Astra", "Harbor", "Clove"],
-  Duelists: ["Jett", "Raze", "Reyna", "Phoenix", "Yoru", "Neon", "Iso", "Waylay"],
+  Duelists: [
+    "Jett",
+    "Raze",
+    "Reyna",
+    "Phoenix",
+    "Yoru",
+    "Neon",
+    "Iso",
+    "Waylay",
+  ],
   Initiators: ["Sova", "Breach", "Skye", "KAY/O", "Fade", "Gekko", "Tejo"],
   Sentinels: ["Sage", "Cypher", "Killjoy", "Chamber", "Deadlock", "Vyse"],
 };
-
 const AGENT_GROUP_LABELS: Record<string, Record<Lang, string>> = {
   Controllers: { tr: "Kontrolcüler", en: "Controllers" },
   Duelists: { tr: "Düellistler", en: "Duelists" },
   Initiators: { tr: "Öncüler", en: "Initiators" },
   Sentinels: { tr: "Gözcüler", en: "Sentinels" },
 };
-
 const AGENT_COLORS: Record<string, string> = {
   Controllers: "from-emerald-500/30 to-emerald-900/20",
   Duelists: "from-red-500/30 to-red-900/20",
   Initiators: "from-sky-500/30 to-sky-900/20",
   Sentinels: "from-amber-500/30 to-amber-900/20",
 };
-
 const AGENT_BORDER: Record<string, string> = {
   Controllers: "border-emerald-500/50",
   Duelists: "border-red-500/50",
   Initiators: "border-sky-500/50",
   Sentinels: "border-amber-500/50",
 };
-
 const AGENT_ACCENT: Record<string, string> = {
   Controllers: "text-emerald-400",
   Duelists: "text-red-400",
   Initiators: "text-sky-400",
   Sentinels: "text-amber-400",
 };
-
 function getAgentRole(agent: string): string {
   for (const [role, agents] of Object.entries(AGENT_GROUPS)) {
     if (agents.includes(agent)) return role;
   }
   return "Controllers";
 }
-
 function getAgentInitials(name: string): string {
   if (name === "KAY/O") return "K/O";
   return name.slice(0, 2).toUpperCase();
 }
-
 function agentImgUrl(name: string): string {
   const slug: Record<string, string> = {
     Brimstone: "9f0d8ba9-4140-b941-57d3-a7ad57c6b417",
@@ -176,82 +292,269 @@ function agentImgUrl(name: string): string {
   if (!id) return "";
   return `https://media.valorant-api.com/agents/${id}/displayicon.png`;
 }
-
 /* ══════════════════════════════════════════════════════════
    MAP DATA
    ══════════════════════════════════════════════════════════ */
-
 const MAP_LOCATIONS: Record<string, string[]> = {
-  Ascent: ["A Main", "A Short", "A Site", "A Heaven", "B Main", "B Site", "B Market", "Mid Top", "Mid Bottom", "Mid Cubby", "Tree", "CT Spawn", "Garden"],
-  Bind: ["A Short", "A Bath", "A Site", "A Lamps", "A Tower", "B Long", "B Short", "B Site", "B Elbow", "B Garden", "B Hall", "Hookah", "CT Spawn"],
-  Haven: ["A Main", "A Short", "A Site", "A Sewer", "B Main", "B Site", "B Back", "C Main", "C Long", "C Site", "C Cubby", "Garage", "Mid Window", "CT Spawn"],
-  Split: ["A Main", "A Ramp", "A Rafters", "A Site", "A Heaven", "B Main", "B Heaven", "B Site", "B Back", "Mid Vent", "Mid Mail", "Mid Top", "CT Spawn"],
-  Lotus: ["A Main", "A Root", "A Site", "A Rubble", "A Tree", "B Main", "B Upper", "B Site", "B Pillar", "C Main", "C Mound", "C Site", "C Hall", "CT Spawn"],
-  Sunset: ["A Main", "A Elbow", "A Site", "A Alley", "B Main", "B Market", "B Site", "B Boba", "Mid Top", "Mid Bottom", "Mid Courtyard", "CT Spawn"],
-  Icebox: ["A Main", "A Belt", "A Site", "A Nest", "A Pipes", "B Main", "B Orange", "B Site", "B Green", "B Yellow", "Mid Boiler", "Mid Blue", "CT Spawn"],
-  Breeze: ["A Main", "A Hall", "A Site", "A Cave", "A Bridge", "B Main", "B Elbow", "B Site", "B Back", "Mid Pillar", "Mid Nest", "CT Spawn"],
-  Fracture: ["A Main", "A Dish", "A Site", "A Drop", "A Rope", "B Main", "B Arcade", "B Site", "B Tree", "B Tower", "Mid Hall", "CT Spawn"],
-  Pearl: ["A Main", "A Art", "A Site", "A Dugout", "B Main", "B Long", "B Site", "B Hall", "B Link", "Mid Plaza", "Mid Top", "CT Spawn"],
-  Abyss: ["A Main", "A Short", "A Site", "A Ramp", "B Main", "B Site", "B Tower", "B Ramp", "Mid Link", "Mid Bridge", "CT Spawn"],
+  Ascent: [
+    "A Main",
+    "A Short",
+    "A Site",
+    "A Heaven",
+    "B Main",
+    "B Site",
+    "B Market",
+    "Mid Top",
+    "Mid Bottom",
+    "Mid Cubby",
+    "Tree",
+    "CT Spawn",
+    "Garden",
+  ],
+  Bind: [
+    "A Short",
+    "A Bath",
+    "A Site",
+    "A Lamps",
+    "A Tower",
+    "B Long",
+    "B Short",
+    "B Site",
+    "B Elbow",
+    "B Garden",
+    "B Hall",
+    "Hookah",
+    "CT Spawn",
+  ],
+  Haven: [
+    "A Main",
+    "A Short",
+    "A Site",
+    "A Sewer",
+    "B Main",
+    "B Site",
+    "B Back",
+    "C Main",
+    "C Long",
+    "C Site",
+    "C Cubby",
+    "Garage",
+    "Mid Window",
+    "CT Spawn",
+  ],
+  Split: [
+    "A Main",
+    "A Ramp",
+    "A Rafters",
+    "A Site",
+    "A Heaven",
+    "B Main",
+    "B Heaven",
+    "B Site",
+    "B Back",
+    "Mid Vent",
+    "Mid Mail",
+    "Mid Top",
+    "CT Spawn",
+  ],
+  Lotus: [
+    "A Main",
+    "A Root",
+    "A Site",
+    "A Rubble",
+    "A Tree",
+    "B Main",
+    "B Upper",
+    "B Site",
+    "B Pillar",
+    "C Main",
+    "C Mound",
+    "C Site",
+    "C Hall",
+    "CT Spawn",
+  ],
+  Sunset: [
+    "A Main",
+    "A Elbow",
+    "A Site",
+    "A Alley",
+    "B Main",
+    "B Market",
+    "B Site",
+    "B Boba",
+    "Mid Top",
+    "Mid Bottom",
+    "Mid Courtyard",
+    "CT Spawn",
+  ],
+  Icebox: [
+    "A Main",
+    "A Belt",
+    "A Site",
+    "A Nest",
+    "A Pipes",
+    "B Main",
+    "B Orange",
+    "B Site",
+    "B Green",
+    "B Yellow",
+    "Mid Boiler",
+    "Mid Blue",
+    "CT Spawn",
+  ],
+  Breeze: [
+    "A Main",
+    "A Hall",
+    "A Site",
+    "A Cave",
+    "A Bridge",
+    "B Main",
+    "B Elbow",
+    "B Site",
+    "B Back",
+    "Mid Pillar",
+    "Mid Nest",
+    "CT Spawn",
+  ],
+  Fracture: [
+    "A Main",
+    "A Dish",
+    "A Site",
+    "A Drop",
+    "A Rope",
+    "B Main",
+    "B Arcade",
+    "B Site",
+    "B Tree",
+    "B Tower",
+    "Mid Hall",
+    "CT Spawn",
+  ],
+  Pearl: [
+    "A Main",
+    "A Art",
+    "A Site",
+    "A Dugout",
+    "B Main",
+    "B Long",
+    "B Site",
+    "B Hall",
+    "B Link",
+    "Mid Plaza",
+    "Mid Top",
+    "CT Spawn",
+  ],
+  Abyss: [
+    "A Main",
+    "A Short",
+    "A Site",
+    "A Ramp",
+    "B Main",
+    "B Site",
+    "B Tower",
+    "B Ramp",
+    "Mid Link",
+    "Mid Bridge",
+    "CT Spawn",
+  ],
 };
-
 const MAPS = Object.keys(MAP_LOCATIONS);
-
 const MAP_IMAGES: Record<string, string> = {
-  Ascent: "https://media.valorant-api.com/maps/7eaecc1b-4337-bbf6-6ab9-04b8f06b3319/splash.png",
+  Ascent:
+    "https://media.valorant-api.com/maps/7eaecc1b-4337-bbf6-6ab9-04b8f06b3319/splash.png",
   Bind: "https://media.valorant-api.com/maps/2c9d57ec-4431-9c5e-2939-8f9ef6dd5cba/splash.png",
-  Haven: "https://media.valorant-api.com/maps/2bee0dc9-4ffe-519b-1cbd-7fbe763a6047/splash.png",
-  Split: "https://media.valorant-api.com/maps/d960549e-485c-e861-8d71-aa9d1aed12a2/splash.png",
-  Lotus: "https://media.valorant-api.com/maps/2fe4ed3a-450a-948b-6d6b-e89a78e680a9/splash.png",
-  Sunset: "https://media.valorant-api.com/maps/92584fbe-486a-b1b2-9faa-39b0f486b498/splash.png",
-  Icebox: "https://media.valorant-api.com/maps/e2ad5c54-4114-a870-9641-8ea21279579a/splash.png",
-  Breeze: "https://media.valorant-api.com/maps/2fb9a4fd-47b8-4e7d-a969-74b4046ebd53/splash.png",
-  Fracture: "https://media.valorant-api.com/maps/b529448b-4d60-346e-e89e-00a4c527a405/splash.png",
-  Pearl: "https://media.valorant-api.com/maps/fd267378-4d1d-484f-ff52-77821ed10dc2/splash.png",
-  Abyss: "https://media.valorant-api.com/maps/224b0a95-48b9-f703-1bd8-67aca101a61f/splash.png",
+  Haven:
+    "https://media.valorant-api.com/maps/2bee0dc9-4ffe-519b-1cbd-7fbe763a6047/splash.png",
+  Split:
+    "https://media.valorant-api.com/maps/d960549e-485c-e861-8d71-aa9d1aed12a2/splash.png",
+  Lotus:
+    "https://media.valorant-api.com/maps/2fe4ed3a-450a-948b-6d6b-e89a78e680a9/splash.png",
+  Sunset:
+    "https://media.valorant-api.com/maps/92584fbe-486a-b1b2-9faa-39b0f486b498/splash.png",
+  Icebox:
+    "https://media.valorant-api.com/maps/e2ad5c54-4114-a870-9641-8ea21279579a/splash.png",
+  Breeze:
+    "https://media.valorant-api.com/maps/2fb9a4fd-47b8-4e7d-a969-74b4046ebd53/splash.png",
+  Fracture:
+    "https://media.valorant-api.com/maps/b529448b-4d60-346e-e89e-00a4c527a405/splash.png",
+  Pearl:
+    "https://media.valorant-api.com/maps/fd267378-4d1d-484f-ff52-77821ed10dc2/splash.png",
+  Abyss:
+    "https://media.valorant-api.com/maps/224b0a95-48b9-f703-1bd8-67aca101a61f/splash.png",
 };
-
-/* ══════════════════════════════════════════════════════════
-   SCORE OPTIONS
-   ══════════════════════════════════════════════════════════ */
-
 const SCORE_OPTIONS = [
-  "13 - 0", "13 - 1", "13 - 2", "13 - 3", "13 - 4", "13 - 5",
-  "13 - 6", "13 - 7", "13 - 8", "13 - 9", "13 - 10", "13 - 11",
-  "14 - 12", "13 - 12",
-  "12 - 14", "12 - 13",
-  "11 - 13", "10 - 13", "9 - 13", "8 - 13", "7 - 13", "6 - 13",
-  "5 - 13", "4 - 13", "3 - 13", "2 - 13", "1 - 13", "0 - 13",
+  "13 - 0",
+  "13 - 1",
+  "13 - 2",
+  "13 - 3",
+  "13 - 4",
+  "13 - 5",
+  "13 - 6",
+  "13 - 7",
+  "13 - 8",
+  "13 - 9",
+  "13 - 10",
+  "13 - 11",
+  "14 - 12",
+  "13 - 12",
+  "12 - 14",
+  "12 - 13",
+  "11 - 13",
+  "10 - 13",
+  "9 - 13",
+  "8 - 13",
+  "7 - 13",
+  "6 - 13",
+  "5 - 13",
+  "4 - 13",
+  "3 - 13",
+  "2 - 13",
+  "1 - 13",
+  "0 - 13",
 ];
-
 /* ══════════════════════════════════════════════════════════
-   AUTH ERROR LOCALIZATION
+   ICON CONSTANTS — real unicode, not HTML entities
    ══════════════════════════════════════════════════════════ */
-
+const IC = {
+  diamond: "\u25C6",
+  cross: "\u2715",
+  circle: "\u25CE",
+  play: "\u25B8",
+  bolt: "\u26A1",
+  check: "\u2713",
+  arrow: "\u2192",
+  dot: "\u00B7",
+  copy: "\u00A9",
+  mid: "\u203A",
+};
+/* ══════════════════════════════════════════════════════════
+   AUTH ERROR LOCALIZATION — Turkish chars fixed
+   ══════════════════════════════════════════════════════════ */
 function localizeAuthError(msg: string, lang: Lang): string {
   if (lang !== "tr") return msg;
-  const map: Record<string, string> = {
+  const m: Record<string, string> = {
     "Invalid login credentials": "Geçersiz e-posta veya şifre",
     "Email not confirmed": "E-posta adresi henüz doğrulanmadı",
     "User already registered": "Bu e-posta zaten kayıtlı",
     "Password should be at least 6 characters": "Şifre en az 6 karakter olmalı",
-    "Unable to validate email address: invalid format": "Geçersiz e-posta formatı",
+    "Unable to validate email address: invalid format":
+      "Geçersiz e-posta formatı",
     "Signup requires a valid password": "Geçerli bir şifre girin",
     "Email rate limit exceeded": "Çok fazla deneme. Lütfen bekleyin.",
-    "For security purposes, you can only request this after 60 seconds": "Güvenlik nedeniyle 60 saniye beklemelisiniz",
+    "For security purposes, you can only request this after 60 seconds":
+      "Güvenlik nedeniyle 60 saniye beklemelisiniz",
     "Too many requests": "Çok fazla istek. Lütfen bekleyin.",
     "Network error": "Bağlantı hatası. İnterneti kontrol edin.",
+    "Username not found": "Kullanıcı adı bulunamadı",
   };
-  for (const [key, val] of Object.entries(map)) {
+  for (const [key, val] of Object.entries(m)) {
     if (msg.toLowerCase().includes(key.toLowerCase())) return val;
   }
   return msg;
 }
-
 /* ══════════════════════════════════════════════════════════
-   i18n
+   i18n — ALL TURKISH CHARACTERS FIXED
    ══════════════════════════════════════════════════════════ */
-
 const t = {
   tr: {
     tagline: "Valorant koçluk asistanın",
@@ -277,7 +580,8 @@ const t = {
     enemyCount: "Düşman Sayısı",
     enemyCountPh: "Düşman sayısı seçin",
     yourNote: "Senin Notun",
-    yourNotePh: "ör. rotate oldum, solo anchor oynuyordum, trade bekliyordum…",
+    yourNotePh:
+      "ör. rotate oldum, solo anchor oynuyordum, trade bekliyordum\u2026",
     skipRound: "Bu Round'u Atla",
     skipConfirmTitle: "Round'u kazandınız mı?",
     yes: "Evet",
@@ -333,7 +637,7 @@ const t = {
     authEmail: "E-posta",
     authPassword: "Şifre",
     authEmailPh: "ornek@email.com",
-    authPasswordPh: "••••••••",
+    authPasswordPh: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
     authNoAccount: "Hesabın yok mu?",
     authHasAccount: "Zaten hesabın var mı?",
     authSignOut: "Çıkış",
@@ -365,6 +669,127 @@ const t = {
     returnToMenu: "Ana Menüye Dön",
     enteredRounds: "Girilen Round",
     langSelectTitle: "Dil Seçin",
+    authFirstName: "Ad",
+    authLastName: "Soyad",
+    authUsername: "Kullanıcı Adı",
+    authFirstNamePh: "Adınız",
+    authLastNamePh: "Soyadınız",
+    authUsernamePh: "kullaniciadi",
+    authPasswordConfirm: "Şifre Tekrar",
+    authPasswordConfirmPh: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
+    authPasswordMismatch: "Şifreler eşleşmiyor",
+    authEmailOrUsername: "E-posta veya Kullanıcı Adı",
+    authEmailOrUsernamePh: "ornek@email.com veya kullaniciadi",
+    landingHeroTitle: "Yapay Zeka Destekli Valorant Koçun",
+    landingHeroSub:
+      "Her round sonrası kişiselleştirilmiş analiz ve geri bildirim al. Oyununu bir üst seviyeye taşı.",
+    landingCTA: "AI Analiz Başlat",
+    landingAboutTitle: "Hakkımızda",
+    landingAboutText:
+      "AIMLO, Valorant oyuncuları için yapay zeka destekli koçluk platformudur. Her maç sonrası detaylı analiz, round bazlı geri bildirim ve kişiselleştirilmiş gelişim önerileri sunar.",
+    landingAboutMission:
+      "Amacımız her seviyeden oyuncunun potansiyelini en üst düzeye çıkarmasına yardımcı olmaktır. Geleneksel istatistik araçları sadece rakamları gösterir; AIMLO neden kaybettiğinizi, hangi hatalarınızı tekrarladığınızı ve bir sonraki round'da ne yapmanız gerektiğini söyler.",
+    landingB2BTitle: "Takımlar & Organizasyonlar",
+    landingB2BText:
+      "Espor organizasyonları ve takımlar için özel analiz panelleri, toplu oyuncu takibi ve koçluk araçları sunuyoruz. Takım performansını veriye dayalı kararlarla optimize edin.",
+    landingB2CTitle: "Bireysel Oyuncular",
+    landingB2CText:
+      "Kendi temponuzda ilerleyin. Her maçınızı analiz edin, hatalarınızı tespit edin ve AI destekli önerilerle rank atlayın. Ücretsiz başlayın, gelişiminizi takip edin.",
+    landingFaqTitle: "Sıkça Sorulan Sorular",
+    landingBlogTitle: "Blog",
+    landingBlogText:
+      "Yakında! Valorant stratejileri, meta analizleri ve oyun geliştirme ipuçları burada paylaşılacak.",
+    landingHelpText:
+      "Sorularınız mı var? Bize e-posta gönderin, en kısa sürede dönüş yapalım.",
+    landingHelpEmail: "İletişim: support@aimlo.gg",
+    landingNav: { about: "Hakkımızda", blog: "Blog", faq: "SSS" },
+    landingFaqs: [
+      {
+        q: "AIMLO ücretsiz mi?",
+        a: "Evet, temel analiz özellikleri ücretsizdir. Gelişmiş özellikler için premium planlarımız yakında geliyor.",
+      },
+      {
+        q: "Nasıl çalışıyor?",
+        a: "Maç sırasında her round sonrası kısa notlar giriyorsun. AI motorumuz bunları analiz ederek anlık geri bildirim ve maç sonu raporu üretiyor.",
+      },
+      {
+        q: "Hangi rank seviyelerine uygun?",
+        a: "Iron'dan Radiant'a kadar her seviyedeki oyuncu için kişiselleştirilmiş analizler sunuyoruz.",
+      },
+      {
+        q: "Verilerim güvende mi?",
+        a: "Evet, tüm veriler şifrelenmiş olarak saklanır ve sadece sen erişebilirsin.",
+      },
+      {
+        q: "Yardıma ihtiyacım var, nasıl ulaşabilirim?",
+        a: "support@aimlo.gg adresine e-posta gönderebilir veya uygulama içi geri bildirim formunu kullanabilirsiniz.",
+      },
+    ],
+    landingFeatures: [
+      {
+        icon: "zap",
+        title: "Anlık Geri Bildirim",
+        desc: "Her round sonrası AI destekli analiz",
+      },
+      {
+        icon: "chart",
+        title: "Detaylı Raporlar",
+        desc: "Maç sonu kapsamlı performans raporu",
+      },
+      {
+        icon: "target",
+        title: "Hata Tespiti",
+        desc: "Tekrarlayan hataları otomatik tespit",
+      },
+      {
+        icon: "trend",
+        title: "Gelişim Takibi",
+        desc: "Zaman içindeki ilerlemenizi görün",
+      },
+    ],
+    landingHowTitle: "Nasıl Çalışıyor?",
+    landingHowSteps: [
+      { step: "1", title: "Maç Kur", desc: "Harita, ajan ve takımını seç" },
+      {
+        step: "2",
+        title: "Round Notları",
+        desc: "Her round sonrası ölüm yeri ve notlarını gir",
+      },
+      {
+        step: "3",
+        title: "AI Analiz",
+        desc: "Anlık geri bildirim ve öneriler al",
+      },
+      {
+        step: "4",
+        title: "Maç Raporu",
+        desc: "Detaylı maç sonu analiz raporu gör",
+      },
+    ],
+    landingDiffTitle: "Neden AIMLO?",
+    landingDiffItems: [
+      {
+        title: "Sadece Rakam Değil, Çözüm",
+        desc: "Diğer araçlar kill/death gösterir. AIMLO neden kaybettiğinizi açıklar.",
+      },
+      {
+        title: "Round Bazlı Koçluk",
+        desc: "Her round sonrası stratejik öneriler alarak oyununuzu anında iyileştirin.",
+      },
+      {
+        title: "Kişisel Gelişim Haritası",
+        desc: "Zaman içinde hatalarınızın nasıl azaldığını ve hangi alanlarda geliştiğinizi görün.",
+      },
+    ],
+    landingStatsTitle: "Platform İstatistikleri",
+    landingStats: [
+      { value: "10K+", label: "Analiz Edilen Round" },
+      { value: "2.5K+", label: "Maç Raporu" },
+      { value: "500+", label: "Aktif Oyuncu" },
+      { value: "94%", label: "Memnuniyet" },
+    ],
+    goToDashboard: "Panele Git",
+    homePage: "Ana Sayfa",
   },
   en: {
     tagline: "Your Valorant coaching assistant",
@@ -390,7 +815,7 @@ const t = {
     enemyCount: "Enemy Count",
     enemyCountPh: "Select enemy count",
     yourNote: "Your Note",
-    yourNotePh: "e.g. rotated too early, solo anchoring, expected trade…",
+    yourNotePh: "e.g. rotated too early, solo anchoring, expected trade\u2026",
     skipRound: "Skip This Round",
     skipConfirmTitle: "Did you win the round?",
     yes: "Yes",
@@ -446,7 +871,7 @@ const t = {
     authEmail: "Email",
     authPassword: "Password",
     authEmailPh: "example@email.com",
-    authPasswordPh: "••••••••",
+    authPasswordPh: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
     authNoAccount: "Don't have an account?",
     authHasAccount: "Already have an account?",
     authSignOut: "Sign Out",
@@ -478,27 +903,169 @@ const t = {
     returnToMenu: "Return to Main Menu",
     enteredRounds: "Entered Rounds",
     langSelectTitle: "Choose Language",
+    authFirstName: "First Name",
+    authLastName: "Last Name",
+    authUsername: "Username",
+    authFirstNamePh: "Your first name",
+    authLastNamePh: "Your last name",
+    authUsernamePh: "username",
+    authPasswordConfirm: "Confirm Password",
+    authPasswordConfirmPh: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
+    authPasswordMismatch: "Passwords do not match",
+    authEmailOrUsername: "Email or Username",
+    authEmailOrUsernamePh: "example@email.com or username",
+    landingHeroTitle: "Your AI-Powered Valorant Coach",
+    landingHeroSub:
+      "Get personalized post-round analysis and feedback. Elevate your game to the next level.",
+    landingCTA: "Start AI Analysis",
+    landingAboutTitle: "About Us",
+    landingAboutText:
+      "AIMLO is an AI-powered coaching platform for Valorant players. We provide detailed post-match analysis, round-by-round feedback, and personalized improvement suggestions.",
+    landingAboutMission:
+      "Our mission is to help players of all levels reach their full potential. Traditional stat tools only show numbers; AIMLO tells you why you lost, which mistakes you repeat, and what to do next round.",
+    landingB2BTitle: "Teams & Organizations",
+    landingB2BText:
+      "We offer custom analytics dashboards, bulk player tracking, and coaching tools for esports organizations and teams. Optimize your team's performance with data-driven decisions.",
+    landingB2CTitle: "Individual Players",
+    landingB2CText:
+      "Progress at your own pace. Analyze every match, identify your mistakes, and climb ranks with AI-powered suggestions. Start for free and track your improvement.",
+    landingFaqTitle: "Frequently Asked Questions",
+    landingBlogTitle: "Blog",
+    landingBlogText:
+      "Coming soon! Valorant strategies, meta analyses, and gameplay tips will be shared here.",
+    landingHelpText:
+      "Have questions? Send us an email and we'll get back to you as soon as possible.",
+    landingHelpEmail: "Contact: support@aimlo.gg",
+    landingNav: { about: "About", blog: "Blog", faq: "FAQ" },
+    landingFaqs: [
+      {
+        q: "Is AIMLO free?",
+        a: "Yes, basic analysis features are free. Premium plans with advanced features are coming soon.",
+      },
+      {
+        q: "How does it work?",
+        a: "During a match, you enter short notes after each round. Our AI engine analyzes them to provide instant feedback and an end-of-match report.",
+      },
+      {
+        q: "What rank levels is it for?",
+        a: "We provide personalized analysis for players from Iron to Radiant.",
+      },
+      {
+        q: "Is my data safe?",
+        a: "Yes, all data is stored encrypted and only you can access it.",
+      },
+      {
+        q: "I need help, how can I reach you?",
+        a: "You can email support@aimlo.gg or use the in-app feedback form.",
+      },
+    ],
+    landingFeatures: [
+      {
+        icon: "zap",
+        title: "Instant Feedback",
+        desc: "AI-powered analysis after each round",
+      },
+      {
+        icon: "chart",
+        title: "Detailed Reports",
+        desc: "Comprehensive post-match performance report",
+      },
+      {
+        icon: "target",
+        title: "Mistake Detection",
+        desc: "Automatically detect recurring mistakes",
+      },
+      {
+        icon: "trend",
+        title: "Progress Tracking",
+        desc: "See your improvement over time",
+      },
+    ],
+    landingHowTitle: "How It Works",
+    landingHowSteps: [
+      {
+        step: "1",
+        title: "Set Up Match",
+        desc: "Pick your map, agent, and team",
+      },
+      {
+        step: "2",
+        title: "Round Notes",
+        desc: "Enter death location and notes each round",
+      },
+      {
+        step: "3",
+        title: "AI Analysis",
+        desc: "Get instant feedback and suggestions",
+      },
+      {
+        step: "4",
+        title: "Match Report",
+        desc: "View detailed end-of-match analysis",
+      },
+    ],
+    landingDiffTitle: "Why AIMLO?",
+    landingDiffItems: [
+      {
+        title: "Solutions, Not Just Numbers",
+        desc: "Other tools show K/D. AIMLO explains why you lost.",
+      },
+      {
+        title: "Round-by-Round Coaching",
+        desc: "Improve instantly with strategic tips after each round.",
+      },
+      {
+        title: "Personal Growth Map",
+        desc: "See how your mistakes decrease and where you improve over time.",
+      },
+    ],
+    landingStatsTitle: "Platform Stats",
+    landingStats: [
+      { value: "10K+", label: "Rounds Analyzed" },
+      { value: "2.5K+", label: "Match Reports" },
+      { value: "500+", label: "Active Players" },
+      { value: "94%", label: "Satisfaction" },
+    ],
+    goToDashboard: "Go to Dashboard",
+    homePage: "Home",
   },
 };
-
 /* ══════════════════════════════════════════════════════════
-   ROUND FEEDBACK GENERATOR
+   FEEDBACK & REPORT GENERATORS — Turkish chars fixed
    ══════════════════════════════════════════════════════════ */
-
-function genRoundFeedback(setup: SetupData, form: RoundForm, result: RoundResult, allRounds: RoundData[], lang: Lang, survived: boolean): RoundFeedback {
+function genRoundFeedback(
+  setup: SetupData,
+  form: RoundForm,
+  result: RoundResult,
+  allRounds: RoundData[],
+  lang: Lang,
+  survived: boolean,
+): RoundFeedback {
   const isTr = lang === "tr";
   const loc = form.deathLocation;
   const cnt = form.enemyCount;
   const note = form.yourNote.toLowerCase();
-  const sideLabel = isTr ? (setup.side === "attack" ? "saldırı" : "savunma") : (setup.side === "attack" ? "attack" : "defense");
-  const prevDeaths = allRounds.filter((r) => !r.skipped && !r.survived && r.deathLocation === loc);
+  const sideLabel = isTr
+    ? setup.side === "attack"
+      ? "saldırı"
+      : "savunma"
+    : setup.side === "attack"
+      ? "attack"
+      : "defense";
+  const prevDeaths = allRounds.filter(
+    (r) => !r.skipped && !r.survived && r.deathLocation === loc,
+  );
   const repeatCount = prevDeaths.length;
-
   let mistake: string;
   if (survived) {
-    mistake = result === "win"
-      ? (isTr ? `Hayatta kaldın ve round kazanıldı. İyi iş! Pozisyonunu korumaya devam et.` : `You survived and won. Good job! Keep holding your position.`)
-      : (isTr ? `Hayatta kaldın ama round kaybedildi. Takım koordinasyonunu gözden geçir.` : `You survived but the round was lost. Review team coordination.`);
+    mistake =
+      result === "win"
+        ? isTr
+          ? "Hayatta kaldın ve round kazanıldı. İyi iş! Pozisyonunu korumaya devam et."
+          : "You survived and won. Good job! Keep holding your position."
+        : isTr
+          ? "Hayatta kaldın ama round kaybedildi. Takım koordinasyonunu gözden geçir."
+          : "You survived but the round was lost. Review team coordination.";
   } else if (repeatCount >= 2) {
     mistake = isTr
       ? `${loc} konumunda daha önce ${repeatCount} kez öldün. Farklı bir açıya geçmeyi düşün.`
@@ -507,7 +1074,11 @@ function genRoundFeedback(setup: SetupData, form: RoundForm, result: RoundResult
     mistake = isTr
       ? `${loc} konumunda ${cnt} düşmana karşı sayısal dezavantajdaydın. Geri çekilip bilgi vermeliydin.`
       : `You faced ${cnt} enemies at ${loc}. Fall back and call info.`;
-  } else if (note.includes("rotate") || note.includes("rotasyon") || note.includes("döndüm")) {
+  } else if (
+    note.includes("rotate") ||
+    note.includes("rotasyon") ||
+    note.includes("döndüm")
+  ) {
     mistake = isTr
       ? `Rotasyonun ${loc} bölgesinde seni açık bıraktı. ${sideLabel} tarafında erken rotasyon düşmana kolay entry verir.`
       : `Your rotation left you exposed at ${loc}. On ${sideLabel}, rotating early gives easy entry.`;
@@ -515,7 +1086,11 @@ function genRoundFeedback(setup: SetupData, form: RoundForm, result: RoundResult
     mistake = isTr
       ? `${loc} bölgesinde solo oynaman riskli oldu. Takım desteği olmadan tutunamaman normal.`
       : `Playing solo at ${loc} was risky. It's expected to struggle without team support.`;
-  } else if (note.includes("util") || note.includes("ability") || note.includes("yetenek")) {
+  } else if (
+    note.includes("util") ||
+    note.includes("ability") ||
+    note.includes("yetenek")
+  ) {
     mistake = isTr
       ? `Utility sonrası ${loc} konumunda savunmasız kaldın. Util sonrası kısa bekleme ekle.`
       : `After using utility you were vulnerable at ${loc}. Add a short delay after ability usage.`;
@@ -524,48 +1099,74 @@ function genRoundFeedback(setup: SetupData, form: RoundForm, result: RoundResult
       ? `${loc} konumunda pozisyonun ${sideLabel} tarafı için ideal değildi. Daha korunaklı bir açı seçmeliydin.`
       : `Your position at ${loc} wasn't ideal for ${sideLabel}. Choose a more covered angle.`;
   }
-
-  const avgEnemy = allRounds.length > 0
-    ? (allRounds.filter((r) => !r.skipped).reduce((s, r) => s + Number(r.enemyCount || 0), 0) / Math.max(allRounds.filter((r) => !r.skipped).length, 1)).toFixed(1)
-    : cnt || "0";
-
+  const avgEnemy =
+    allRounds.length > 0
+      ? (
+          allRounds
+            .filter((r) => !r.skipped)
+            .reduce((s, r) => s + Number(r.enemyCount || 0), 0) /
+          Math.max(allRounds.filter((r) => !r.skipped).length, 1)
+        ).toFixed(1)
+      : cnt || "0";
   let habit: string;
   if (survived && !cnt) {
-    habit = isTr ? `Düşman hareket kalıplarını izlemeye devam et.` : `Keep observing enemy movement patterns.`;
+    habit = isTr
+      ? "Düşman hareket kalıplarını izlemeye devam et."
+      : "Keep observing enemy movement patterns.";
   } else if (Number(cnt) >= 4) {
-    habit = isTr ? `Düşman bu bölgeye ${cnt} kişiyle geldi. Yoğun baskı devam ediyor.` : `The enemy pushed with ${cnt} players. Heavy pressure continues.`;
+    habit = isTr
+      ? `Düşman bu bölgeye ${cnt} kişiyle geldi. Yoğun baskı devam ediyor.`
+      : `The enemy pushed with ${cnt} players. Heavy pressure continues.`;
   } else if (Number(cnt) <= 2) {
-    habit = isTr ? `Düşman ${cnt} kişiyle hareket etti. Temkinli oyun veya lurker paterni.` : `Enemy moved with ${cnt} players. Cautious play or lurker pattern.`;
+    habit = isTr
+      ? `Düşman ${cnt} kişiyle hareket etti. Temkinli oyun veya lurker paterni.`
+      : `Enemy moved with ${cnt} players. Cautious play or lurker pattern.`;
   } else {
-    habit = isTr ? `Düşman ortalama ${avgEnemy} kişilik gruplarla baskı yapıyor.` : `Enemy pressing with groups averaging ${avgEnemy}.`;
+    habit = isTr
+      ? `Düşman ortalama ${avgEnemy} kişilik gruplarla baskı yapıyor.`
+      : `Enemy pressing with groups averaging ${avgEnemy}.`;
   }
-
-  const altLocations = (MAP_LOCATIONS[setup.map] ?? []).filter((x) => x !== loc);
-  const suggestedLoc = altLocations[Math.floor(Math.random() * altLocations.length)] || loc || "a different position";
-
+  const altLocations = (MAP_LOCATIONS[setup.map] ?? []).filter(
+    (x) => x !== loc,
+  );
+  const suggestedLoc =
+    altLocations[Math.floor(Math.random() * altLocations.length)] ||
+    loc ||
+    "a different position";
   let microPlan: string;
   if (survived && result === "win") {
-    microPlan = isTr ? `İyi gidiyorsun. Aynı stratejiyi koru, hafif açı değişikliği düşün.` : `You're doing well. Keep strategy, consider slight angle changes.`;
+    microPlan = isTr
+      ? "İyi gidiyorsun. Aynı stratejiyi koru, hafif açı değişikliği düşün."
+      : "You're doing well. Keep strategy, consider slight angle changes.";
   } else if (survived && result === "loss") {
-    microPlan = isTr ? `Bireysel olarak iyiydin ama takım kaybetti. Daha erken bilgi ver ve trade pozisyonu kur.` : `You played well but team lost. Share info earlier and set up trades.`;
+    microPlan = isTr
+      ? "Bireysel olarak iyiydin ama takım kaybetti. Daha erken bilgi ver ve trade pozisyonu kur."
+      : "You played well but team lost. Share info earlier and set up trades.";
   } else if (result === "loss" && repeatCount >= 2) {
-    microPlan = isTr ? `${suggestedLoc} konumunda oyna. Derin açı tut ve ilk bilgiyi bekle.` : `Play ${suggestedLoc}. Hold a deep angle and wait for first info.`;
+    microPlan = isTr
+      ? `${suggestedLoc} konumunda oyna. Derin açı tut ve ilk bilgiyi bekle.`
+      : `Play ${suggestedLoc}. Hold a deep angle and wait for first info.`;
   } else if (result === "loss" && Number(cnt) >= 3) {
-    microPlan = isTr ? `Retake oyna. ${suggestedLoc} civarında geri dur ve takımını bekle.` : `Play retake. Fall back near ${suggestedLoc} and wait for team.`;
+    microPlan = isTr
+      ? `Retake oyna. ${suggestedLoc} civarında geri dur ve takımını bekle.`
+      : `Play retake. Fall back near ${suggestedLoc} and wait for team.`;
   } else if (result === "loss") {
-    microPlan = isTr ? `${suggestedLoc} konumuna geç. Utility'ni erken kullan ve geri çekil.` : `Switch to ${suggestedLoc}. Use utility early and fall back.`;
+    microPlan = isTr
+      ? `${suggestedLoc} konumuna geç. Utility'ni erken kullan ve geri çekil.`
+      : `Switch to ${suggestedLoc}. Use utility early and fall back.`;
   } else {
-    microPlan = isTr ? `Aynı stratejiyi koru ama açını hafifçe değiştir. ${suggestedLoc} iyi alternatif.` : `Keep strategy but shift angle. ${suggestedLoc} could be good.`;
+    microPlan = isTr
+      ? `Aynı stratejiyi koru ama açını hafifçe değiştir. ${suggestedLoc} iyi alternatif.`
+      : `Keep strategy but shift angle. ${suggestedLoc} could be good.`;
   }
-
   return { mainMistake: mistake, enemyHabit: habit, microPlan };
 }
-
-/* ══════════════════════════════════════════════════════════
-   MATCH REPORT GENERATOR
-   ══════════════════════════════════════════════════════════ */
-
-function genMatchReport(setup: SetupData, rounds: RoundData[], lang: Lang, score: MatchScore) {
+function genMatchReport(
+  setup: SetupData,
+  rounds: RoundData[],
+  lang: Lang,
+  score: MatchScore,
+) {
   const isTr = lang === "tr";
   const won = rounds.filter((r) => r.result === "win").length;
   const lost = rounds.filter((r) => r.result === "loss").length;
@@ -575,59 +1176,97 @@ function genMatchReport(setup: SetupData, rounds: RoundData[], lang: Lang, score
   const winPct = total > 0 ? Math.round((won / total) * 100) : 0;
   const nonSkipped = rounds.filter((r) => !r.skipped);
   const locationCounts: Record<string, number> = {};
-  nonSkipped.filter(r => !r.survived).forEach((r) => { if (r.deathLocation) locationCounts[r.deathLocation] = (locationCounts[r.deathLocation] || 0) + 1; });
+  nonSkipped
+    .filter((r) => !r.survived)
+    .forEach((r) => {
+      if (r.deathLocation)
+        locationCounts[r.deathLocation] =
+          (locationCounts[r.deathLocation] || 0) + 1;
+    });
   const topLoc = Object.entries(locationCounts).sort((a, b) => b[1] - a[1])[0];
   const topDeathLoc = topLoc ? topLoc[0] : "N/A";
   const topDeathCount = topLoc ? topLoc[1] : 0;
-  const avgEnemy = nonSkipped.length > 0 ? (nonSkipped.reduce((s, r) => s + Number(r.enemyCount || 0), 0) / nonSkipped.length).toFixed(1) : "0";
-  const sideLabel = isTr ? (setup.side === "attack" ? "Saldırı" : "Savunma") : (setup.side === "attack" ? "Attack" : "Defense");
+  const avgEnemy =
+    nonSkipped.length > 0
+      ? (
+          nonSkipped.reduce((s, r) => s + Number(r.enemyCount || 0), 0) /
+          nonSkipped.length
+        ).toFixed(1)
+      : "0";
+  const sideLabel = isTr
+    ? setup.side === "attack"
+      ? "Saldırı"
+      : "Savunma"
+    : setup.side === "attack"
+      ? "Attack"
+      : "Defense";
   const scoreStr = `${score.yours} - ${score.enemy}`;
   const matchWon = Number(score.yours) > Number(score.enemy);
   const allNotes = nonSkipped.map((r) => r.yourNote.toLowerCase()).join(" ");
   const hasRotateIssue = /rotat|rotasyon|döndüm/.test(allNotes);
   const hasSoloIssue = /solo|tek/.test(allNotes);
   const hasUtilIssue = /util|ability|yetenek/.test(allNotes);
-
-  const survivedText = survivedCount > 0 ? (isTr ? ` ${survivedCount} round'da hayatta kaldın.` : ` Survived ${survivedCount} rounds.`) : "";
-
+  const survivedText =
+    survivedCount > 0
+      ? isTr
+        ? ` ${survivedCount} round'da hayatta kaldın.`
+        : ` Survived ${survivedCount} rounds.`
+      : "";
   const summary = isTr
     ? `${setup.map} haritasında ${setup.agent} ile ${sideLabel} tarafında oynadın. Skor: ${scoreStr}. ${total} round (${skipped} atlanan).${survivedText} En çok ölüm: ${topDeathLoc} (${topDeathCount}x). Ort. düşman: ${avgEnemy}.`
     : `Played ${setup.map} as ${setup.agent} on ${sideLabel}. Score: ${scoreStr}. ${total} rounds (${skipped} skipped).${survivedText} Most deaths: ${topDeathLoc} (${topDeathCount}x). Avg enemy: ${avgEnemy}.`;
-
   let mistake: string;
   if (topDeathCount >= 3) {
-    mistake = isTr ? `${topDeathLoc} konumunda ${topDeathCount} kez öldün. Bu tekrar düşmana okuma kolaylığı sağlıyor.` : `You died at ${topDeathLoc} ${topDeathCount} times. This makes you predictable.`;
+    mistake = isTr
+      ? `${topDeathLoc} konumunda ${topDeathCount} kez öldün. Bu tekrar düşmana okuma kolaylığı sağlıyor.`
+      : `You died at ${topDeathLoc} ${topDeathCount} times. This makes you predictable.`;
   } else if (hasRotateIssue) {
-    mistake = isTr ? `Birden fazla round'da erken rotasyon sorunu yaşadın.` : `Early rotation issues in multiple rounds.`;
+    mistake = isTr
+      ? "Birden fazla round'da erken rotasyon sorunu yaşadın."
+      : "Early rotation issues in multiple rounds.";
   } else if (hasSoloIssue) {
-    mistake = isTr ? `Solo oynadığını belirttin. Takım koordinasyonu eksik.` : `Playing solo noted. Team coordination lacking.`;
+    mistake = isTr
+      ? "Solo oynadığını belirttin. Takım koordinasyonu eksik."
+      : "Playing solo noted. Team coordination lacking.";
   } else if (hasUtilIssue) {
-    mistake = isTr ? `Utility zamanlamanla ilgili sorunlar tespit edildi.` : `Issues with utility timing detected.`;
+    mistake = isTr
+      ? "Utility zamanlamanla ilgili sorunlar tespit edildi."
+      : "Issues with utility timing detected.";
   } else {
-    mistake = isTr ? `Genel pozisyonlama sorunları göze çarpıyor.` : `General positioning issues stand out.`;
+    mistake = isTr
+      ? "Genel pozisyonlama sorunları göze çarpıyor."
+      : "General positioning issues stand out.";
   }
-
-  const enemyAgents = setup.unknownEnemyComp ? (isTr ? "bilinmiyor" : "unknown") : setup.enemyComp.filter(Boolean).join(", ");
+  const enemyAgents = setup.unknownEnemyComp
+    ? isTr
+      ? "bilinmiyor"
+      : "unknown"
+    : setup.enemyComp.filter(Boolean).join(", ");
   const tendencies = isTr
     ? `Düşman (${enemyAgents}) ort. ${avgEnemy} kişilik gruplarla hareket etti. ${matchWon ? "Baskı yapsa da takımın karşılık verdi." : "Sayısal üstünlükle baskı kurdu."}`
     : `Enemy (${enemyAgents}) moved in groups avg ${avgEnemy}. ${matchWon ? "Despite pressure, team responded." : "Applied pressure with numbers."}`;
-
   const adjustment = isTr
     ? `${topDeathLoc !== "N/A" ? `${topDeathLoc} yerine farklı açılardan oyna. ` : ""}${setup.agent} olarak utility'ni stratejik zamanla. ${matchWon ? "İyi performans, pozisyon çeşitliliğini artır." : "Retake pozisyonlarına erken geç."}`
     : `${topDeathLoc !== "N/A" ? `Play different angles instead of ${topDeathLoc}. ` : ""}As ${setup.agent}, time utility strategically. ${matchWon ? "Good performance, increase positional variety." : "Set up retake earlier."}`;
-
-  return { summary, mistake, tendencies, adjustment, won, lost, skipped, survivedCount, total, winPct, scoreStr, matchWon };
+  return {
+    summary,
+    mistake,
+    tendencies,
+    adjustment,
+    won,
+    lost,
+    skipped,
+    survivedCount,
+    total,
+    winPct,
+    scoreStr,
+    matchWon,
+  };
 }
-
 /* ══════════════════════════════════════════════════════════
-   LOCALSTORAGE AUTO-SAVE
+   LOCALSTORAGE
    ══════════════════════════════════════════════════════════ */
-
-const LS_KEYS = {
-  draft: "aimlo_draft",
-  lang: "aimlo_lang",
-};
-
+const LS_KEYS = { draft: "aimlo_draft", lang: "aimlo_lang" };
 type DraftState = {
   setup: SetupData;
   setupStep: SetupStep;
@@ -635,107 +1274,222 @@ type DraftState = {
   roundIdx: number;
   screen: Screen;
 };
-
 function saveDraft(d: DraftState) {
-  try { localStorage.setItem(LS_KEYS.draft, JSON.stringify(d)); } catch {}
+  try {
+    localStorage.setItem(LS_KEYS.draft, JSON.stringify(d));
+  } catch {}
 }
-
 function loadDraft(): DraftState | null {
   try {
     const s = localStorage.getItem(LS_KEYS.draft);
     return s ? JSON.parse(s) : null;
-  } catch { return null; }
+  } catch {
+    return null;
+  }
 }
-
 function clearDraft() {
-  try { localStorage.removeItem(LS_KEYS.draft); } catch {}
+  try {
+    localStorage.removeItem(LS_KEYS.draft);
+  } catch {}
 }
-
 function saveLang(l: Lang) {
-  try { localStorage.setItem(LS_KEYS.lang, l); } catch {}
+  try {
+    localStorage.setItem(LS_KEYS.lang, l);
+  } catch {}
 }
-
 function loadLang(): Lang | null {
-  try { return localStorage.getItem(LS_KEYS.lang) as Lang | null; } catch { return null; }
+  try {
+    return localStorage.getItem(LS_KEYS.lang) as Lang | null;
+  } catch {
+    return null;
+  }
 }
-
 /* ══════════════════════════════════════════════════════════
-   DESIGN SYSTEM — PREMIUM DARK UI
+   DESIGN SYSTEM
    ══════════════════════════════════════════════════════════ */
-
 const ds = {
-  card: "rounded-xl border border-[#1e2a3a] bg-[#0d1117] shadow-lg shadow-black/40",
+  card: "rounded-2xl border border-white/[0.07] bg-[#0b1120]/80 shadow-lg shadow-black/25 backdrop-blur-sm",
   cardInner: "p-5 sm:p-6",
-  cardHover: "transition-all duration-200 hover:border-[#2d4a6f]/60 hover:bg-[#111922] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/50",
-  inputBase: "w-full rounded-lg border border-[#1e2a3a] bg-[#0a0f16] px-4 py-3 text-sm text-white outline-none transition-all duration-200 focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/20 placeholder-neutral-600",
-  selectBase: "w-full cursor-pointer appearance-none rounded-lg border border-[#1e2a3a] bg-[#0a0f16] px-4 py-3 text-sm text-white outline-none transition-all focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/20 disabled:cursor-not-allowed disabled:opacity-30",
-  btnPrimary: "w-full rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 py-3 text-sm font-bold text-white shadow-md shadow-cyan-900/30 transition-all duration-200 hover:from-cyan-500 hover:to-blue-500 hover:shadow-lg hover:shadow-cyan-800/40 active:scale-[0.98] disabled:opacity-40",
-  btnSecondary: "w-full rounded-lg border border-[#1e2a3a] bg-[#0d1117] py-3 text-sm font-medium text-neutral-400 transition-all duration-200 hover:border-[#2d4a6f]/60 hover:text-white hover:bg-[#111922]",
-  btnAccent: "w-full rounded-lg border border-cyan-500/30 bg-cyan-500/10 py-3 text-sm font-semibold text-cyan-300 transition-all hover:bg-cyan-500/15 hover:border-cyan-500/50",
-  label: "mb-2 block text-[11px] font-semibold uppercase tracking-[0.15em] text-neutral-500",
-  pageBg: "min-h-screen bg-[#010409]",
+  cardHover:
+    "transition-all duration-300 hover:border-white/[0.12] hover:bg-[#0e1528]/90 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-950/20",
+  inputBase:
+    "w-full rounded-xl border border-white/[0.08] bg-[#070c16] px-4 py-3 text-sm text-white outline-none transition-all duration-200 focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/10 placeholder-neutral-600",
+  selectBase:
+    "w-full cursor-pointer appearance-none rounded-xl border border-white/[0.08] bg-[#070c16] px-4 py-3 text-sm text-white outline-none transition-all focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/10 disabled:cursor-not-allowed disabled:opacity-30",
+  btnPrimary:
+    "w-full rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-900/20 transition-all duration-300 hover:shadow-xl hover:shadow-blue-800/30 hover:brightness-110 active:scale-[0.98] disabled:opacity-40",
+  btnSecondary:
+    "w-full rounded-xl border border-white/[0.08] bg-white/[0.02] py-3 text-sm font-medium text-neutral-400 transition-all duration-200 hover:border-white/[0.14] hover:text-white hover:bg-white/[0.05]",
+  btnAccent:
+    "w-full rounded-xl border border-cyan-500/20 bg-cyan-500/[0.06] py-3 text-sm font-semibold text-cyan-300 transition-all duration-200 hover:bg-cyan-500/[0.1] hover:border-cyan-500/35",
+  label:
+    "mb-2 block text-[11px] font-semibold uppercase tracking-[0.15em] text-neutral-500",
+  pageBg: "min-h-screen bg-[#050810]",
 };
-
 function Label({ text }: { text: string }) {
   return <label className={ds.label}>{text}</label>;
 }
-
 function InlineError({ msg }: { msg?: string }) {
   if (!msg) return null;
   return <p className="mt-1.5 text-xs text-red-400">{msg}</p>;
 }
-
-/* ══════════════════════════════════════════════════════════
-   AMBIENT BACKGROUND — adds depth & atmosphere
-   ══════════════════════════════════════════════════════════ */
-
 function AmbientBg() {
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-      <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[600px] w-[800px] rounded-full bg-cyan-900/[0.06] blur-[180px]" />
-      <div className="absolute -bottom-48 -left-48 h-[400px] w-[400px] rounded-full bg-blue-900/[0.05] blur-[150px]" />
-      <div className="absolute top-1/3 -right-36 h-[350px] w-[350px] rounded-full bg-teal-900/[0.04] blur-[140px]" />
+      <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-[500px] w-[700px] rounded-full bg-blue-950/[0.08] blur-[100px]" />
+      <div className="absolute -bottom-32 -left-32 h-[300px] w-[300px] rounded-full bg-cyan-950/[0.06] blur-[80px]" />
     </div>
   );
 }
-
-/* ══════════════════════════════════════════════════════════
-   MAP BACKGROUND — HIGH VISIBILITY
-   ══════════════════════════════════════════════════════════ */
-
 function MapBg({ map }: { map: string }) {
   const url = MAP_IMAGES[map];
   if (!url) return null;
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-      <img src={url} alt="" className="h-full w-full object-cover opacity-55 scale-105" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#010409]/10 via-[#010409]/30 to-[#010409]/80" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#010409]/50 to-transparent" />
+      <img
+        src={url}
+        alt=""
+        className="h-full w-full object-cover opacity-[0.55]"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#050810]/30 via-[#050810]/60 to-[#050810]/95" />
     </div>
   );
 }
-
+function FeatureIcon({ icon }: { icon: string }) {
+  const svgs: Record<string, React.ReactNode> = {
+    zap: (
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+      </svg>
+    ),
+    chart: (
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <line x1="18" y1="20" x2="18" y2="10" />
+        <line x1="12" y1="20" x2="12" y2="4" />
+        <line x1="6" y1="20" x2="6" y2="14" />
+      </svg>
+    ),
+    target: (
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <circle cx="12" cy="12" r="6" />
+        <circle cx="12" cy="12" r="2" />
+      </svg>
+    ),
+    trend: (
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+        <polyline points="17 6 23 6 23 12" />
+      </svg>
+    ),
+  };
+  return <span className="text-cyan-400">{svgs[icon] || null}</span>;
+}
 /* ══════════════════════════════════════════════════════════
-   TOP NAVBAR
+   NAVBAR — with HOME button
    ══════════════════════════════════════════════════════════ */
-
-function Navbar({ user, lang, onSignOut, onLogoClick, onLangToggle, signOutLabel }: {
-  user: User; lang: Lang; onSignOut: () => void; onLogoClick: () => void; onLangToggle: () => void; signOutLabel: string;
+function Navbar({
+  user,
+  lang,
+  onSignOut,
+  onLogoClick,
+  onLangToggle,
+  signOutLabel,
+  onHome,
+  homeLabel,
+}: {
+  user: User;
+  lang: Lang;
+  onSignOut: () => void;
+  onLogoClick: () => void;
+  onLangToggle: () => void;
+  signOutLabel: string;
+  onHome?: () => void;
+  homeLabel?: string;
 }) {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-[#1e2a3a] bg-[#010409]/90 backdrop-blur-xl">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.06] bg-[#050810]/80 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
-        <button onClick={onLogoClick} className="flex items-center gap-2.5 transition hover:opacity-80">
-          <AimloLogo size={26} />
-          <span className="text-base font-extrabold tracking-wider text-white">AIMLO</span>
-          <span className="hidden sm:inline rounded bg-cyan-500/15 px-1.5 py-0.5 text-[9px] font-bold text-cyan-400 uppercase tracking-wider">Beta</span>
+        <button
+          onClick={onLogoClick}
+          className="flex items-center gap-2 transition-opacity duration-200 hover:opacity-80"
+        >
+          <AimloLogo size={24} />
+          <AimloWordmark size="text-base" />
+          <span className="hidden sm:inline rounded-md bg-blue-500/10 border border-blue-500/10 px-1.5 py-0.5 text-[9px] font-bold text-blue-400 uppercase tracking-wider">
+            Beta
+          </span>
         </button>
-        <div className="flex items-center gap-2.5">
-          <button onClick={onLangToggle} className="rounded-md border border-[#1e2a3a] bg-[#0d1117] px-2.5 py-1 text-[10px] font-bold text-neutral-400 transition hover:border-cyan-500/40 hover:text-white">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          {onHome && (
+            <button
+              onClick={onHome}
+              className="rounded-lg border border-white/[0.06] bg-white/[0.03] px-2.5 py-1.5 text-[10px] font-semibold text-neutral-400 transition-all duration-200 hover:border-white/[0.12] hover:text-white hover:bg-white/[0.06]"
+            >
+              <span className="hidden sm:inline">{homeLabel}</span>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="sm:hidden"
+              >
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </button>
+          )}
+          <button
+            onClick={onLangToggle}
+            className="rounded-lg border border-white/[0.06] bg-white/[0.03] px-2 py-1.5 text-[10px] font-bold text-neutral-400 transition-all duration-200 hover:border-white/[0.12] hover:text-white"
+          >
             {lang === "tr" ? "TR" : "EN"}
           </button>
-          <span className="hidden sm:block text-[11px] text-neutral-600 truncate max-w-[160px]">{user.email}</span>
-          <button onClick={onSignOut} className="rounded-md border border-[#1e2a3a] bg-[#0d1117] px-3 py-1.5 text-[10px] font-semibold text-neutral-500 transition hover:border-red-500/30 hover:text-red-400 hover:bg-red-500/5">
+          <span className="hidden md:block text-[11px] text-neutral-600 truncate max-w-[130px]">
+            {user.email}
+          </span>
+          <button
+            onClick={onSignOut}
+            className="rounded-lg border border-white/[0.06] bg-white/[0.02] px-2.5 py-1.5 text-[10px] font-semibold text-neutral-500 transition-all duration-200 hover:border-red-500/20 hover:text-red-400 hover:bg-red-500/[0.04]"
+          >
             {signOutLabel}
           </button>
         </div>
@@ -743,228 +1497,1087 @@ function Navbar({ user, lang, onSignOut, onLogoClick, onLangToggle, signOutLabel
     </nav>
   );
 }
-
 /* ══════════════════════════════════════════════════════════
-   SHARED UI COMPONENTS
+   SHARED UI
    ══════════════════════════════════════════════════════════ */
-
-function ReportCard({ icon, color, label, text }: { icon: string; color: string; label: string; text: string }) {
+function ReportCard({
+  icon,
+  color,
+  label,
+  text,
+}: {
+  icon: string;
+  color: string;
+  label: string;
+  text: string;
+}) {
   return (
-    <div className={`${ds.card} ${ds.cardInner} border-l-2 ${color === "text-red-400" ? "border-l-red-500/60" : color === "text-amber-400" ? "border-l-amber-500/60" : color === "text-emerald-400" ? "border-l-emerald-500/60" : "border-l-cyan-500/60"}`}>
+    <div
+      className={`${ds.card} ${ds.cardInner} border-l-2 ${color === "text-red-400" ? "border-l-red-500/40" : color === "text-amber-400" ? "border-l-amber-500/40" : color === "text-emerald-400" ? "border-l-emerald-500/40" : "border-l-blue-500/40"}`}
+    >
       <div className="mb-3 flex items-center gap-2.5">
-        <span className="text-base opacity-70">{icon}</span>
-        <h3 className={`text-[11px] font-bold uppercase tracking-[0.15em] ${color}`}>{label}</h3>
+        <span className="text-base opacity-60">{icon}</span>
+        <h3
+          className={`text-[11px] font-bold uppercase tracking-[0.15em] ${color}`}
+        >
+          {label}
+        </h3>
       </div>
       <p className="text-sm leading-relaxed text-neutral-300">{text}</p>
     </div>
   );
 }
-
-function FeedbackCard({ icon, color, label, text }: { icon: string; color: string; label: string; text: string }) {
+function FeedbackCard({
+  icon,
+  color,
+  label,
+  text,
+}: {
+  icon: string;
+  color: string;
+  label: string;
+  text: string;
+}) {
   return (
-    <div className="rounded-lg border border-[#1e2a3a] bg-[#0a0f16] p-4">
+    <div className="rounded-xl border border-white/[0.06] bg-[#070c16] p-4">
       <div className="mb-2 flex items-center gap-2">
-        <span className="text-sm">{icon}</span>
-        <h4 className={`text-[10px] font-bold uppercase tracking-[0.15em] ${color}`}>{label}</h4>
+        <span className="text-sm opacity-70">{icon}</span>
+        <h4
+          className={`text-[10px] font-bold uppercase tracking-[0.15em] ${color}`}
+        >
+          {label}
+        </h4>
       </div>
       <p className="text-[13px] leading-relaxed text-neutral-300">{text}</p>
     </div>
   );
 }
-
-function AgentMiniCard({ name, selected, disabled, onClick, locked }: { name: string; selected: boolean; disabled: boolean; onClick: () => void; locked?: boolean }) {
+function AgentMiniCard({
+  name,
+  selected,
+  disabled,
+  onClick,
+  locked,
+}: {
+  name: string;
+  selected: boolean;
+  disabled: boolean;
+  onClick: () => void;
+  locked?: boolean;
+}) {
   const role = getAgentRole(name);
   const colors = AGENT_COLORS[role];
   const border = AGENT_BORDER[role];
   const accent = AGENT_ACCENT[role];
   const img = agentImgUrl(name);
-
   return (
-    <button onClick={onClick} disabled={(disabled && !selected) || locked}
-      className={`group relative flex flex-col items-center gap-1 rounded-xl border p-2 transition-all duration-200 ${
-        selected ? `${border} bg-gradient-to-b ${colors} ring-1 ring-cyan-400/30 shadow-lg shadow-cyan-500/10`
-        : disabled ? "cursor-not-allowed border-white/5 bg-white/[0.01] opacity-25"
-        : "border-[#1e2a3a] bg-[#0a0f16] hover:border-white/[0.15] hover:bg-white/[0.06]"
-      }`}>
-      <div className="relative h-8 w-8 overflow-hidden rounded-lg bg-black/30">
-        {img ? <img src={img} alt={name} className="h-full w-full object-cover" loading="lazy" />
-        : <div className={`flex h-full w-full items-center justify-center text-[10px] font-bold ${accent}`}>{getAgentInitials(name)}</div>}
+    <button
+      onClick={onClick}
+      disabled={(disabled && !selected) || locked}
+      className={`group relative flex flex-col items-center gap-1 rounded-xl border p-2 transition-all duration-200 ${selected ? `${border} bg-gradient-to-b ${colors} ring-1 ring-cyan-400/20 shadow-lg shadow-cyan-500/5` : disabled ? "cursor-not-allowed border-white/[0.03] bg-white/[0.01] opacity-20" : "border-white/[0.06] bg-[#070c16] hover:border-white/[0.1] hover:bg-white/[0.03]"}`}
+    >
+      <div className="relative h-8 w-8 overflow-hidden rounded-lg bg-black/20">
+        {img ? (
+          <img
+            src={img}
+            alt={name}
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
+        ) : (
+          <div
+            className={`flex h-full w-full items-center justify-center text-[10px] font-bold ${accent}`}
+          >
+            {getAgentInitials(name)}
+          </div>
+        )}
       </div>
-      <span className="text-[9px] font-medium text-neutral-300 leading-tight text-center truncate w-full">{name}</span>
-      {selected && !locked && <div className="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full bg-cyan-500 border border-[#010409]" />}
-      {locked && <div className="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full bg-amber-500 border border-[#010409]" />}
+      <span className="text-[9px] font-medium text-neutral-300 leading-tight text-center truncate w-full">
+        {name}
+      </span>
+      {selected && !locked && (
+        <div className="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full bg-cyan-500 border-2 border-[#050810]" />
+      )}
+      {locked && (
+        <div className="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full bg-amber-500 border-2 border-[#050810]" />
+      )}
     </button>
   );
 }
-
-function CompSlot({ agent, index, onRemove, locked }: { agent: string; index: number; onRemove: () => void; locked?: boolean }) {
+function CompSlot({
+  agent,
+  index,
+  onRemove,
+  locked,
+}: {
+  agent: string;
+  index: number;
+  onRemove: () => void;
+  locked?: boolean;
+}) {
   const role = agent ? getAgentRole(agent) : "";
   const accent = agent ? AGENT_ACCENT[role] : "";
   const img = agent ? agentImgUrl(agent) : "";
   return (
-    <div onClick={() => agent && !locked && onRemove()}
-      className={`flex h-16 w-16 flex-col items-center justify-center rounded-xl border transition-all ${
-        agent ? locked ? "border-amber-500/40 bg-amber-500/5 cursor-default" : "border-cyan-500/40 bg-cyan-500/10 cursor-pointer hover:border-red-500/40"
-        : "border-dashed border-white/[0.08] bg-white/[0.02]"
-      }`}>
-      {agent ? (<>
-        <div className="h-7 w-7 overflow-hidden rounded-lg bg-black/30">
-          {img ? <img src={img} alt={agent} className="h-full w-full object-cover" loading="lazy" />
-          : <div className={`flex h-full w-full items-center justify-center text-[9px] font-bold ${accent}`}>{getAgentInitials(agent)}</div>}
-        </div>
-        <span className="mt-0.5 text-[8px] text-neutral-400 truncate w-full text-center">{agent}</span>
-      </>) : <span className="text-[11px] text-neutral-600 font-medium">{index + 1}</span>}
+    <div
+      onClick={() => agent && !locked && onRemove()}
+      className={`flex h-16 w-16 flex-col items-center justify-center rounded-xl border transition-all duration-200 ${agent ? (locked ? "border-amber-500/25 bg-amber-500/[0.04] cursor-default" : "border-cyan-500/25 bg-cyan-500/[0.06] cursor-pointer hover:border-red-500/25") : "border-dashed border-white/[0.06] bg-white/[0.01]"}`}
+    >
+      {agent ? (
+        <>
+          <div className="h-7 w-7 overflow-hidden rounded-lg bg-black/20">
+            {img ? (
+              <img
+                src={img}
+                alt={agent}
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            ) : (
+              <div
+                className={`flex h-full w-full items-center justify-center text-[9px] font-bold ${accent}`}
+              >
+                {getAgentInitials(agent)}
+              </div>
+            )}
+          </div>
+          <span className="mt-0.5 text-[8px] text-neutral-400 truncate w-full text-center">
+            {agent}
+          </span>
+        </>
+      ) : (
+        <span className="text-[11px] text-neutral-600 font-medium">
+          {index + 1}
+        </span>
+      )}
     </div>
   );
 }
-
-function StatCard({ label, value, color = "text-white", sub }: { label: string; value: string; color?: string; sub?: string }) {
+function StatCard({
+  label,
+  value,
+  color = "text-white",
+  sub,
+}: {
+  label: string;
+  value: string;
+  color?: string;
+  sub?: string;
+}) {
   return (
     <div className={`${ds.card} p-4 sm:p-5 text-center`}>
-      <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-500 mb-1.5">{label}</p>
+      <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-500 mb-1.5">
+        {label}
+      </p>
       <p className={`text-2xl font-extrabold tabular-nums ${color}`}>{value}</p>
-      {sub && <p className="mt-1 text-[10px] text-neutral-600 font-medium">{sub}</p>}
+      {sub && (
+        <p className="mt-1 text-[10px] text-neutral-600 font-medium">{sub}</p>
+      )}
     </div>
   );
 }
-
 /* ══════════════════════════════════════════════════════════
-   AUTH SCREEN (receives lang as a prop — always has a language)
+   LANDING PAGE
    ══════════════════════════════════════════════════════════ */
-
-function AuthScreen({ lang, onAuth }: { lang: Lang; onAuth: (user: User) => void }) {
-  const [mode, setMode] = useState<AuthMode>("login");
+function LandingPage({
+  lang,
+  user,
+  onStartAnalysis,
+  onLogin,
+  onRegister,
+  onLangToggle,
+  onDashboard,
+  onSignOut,
+}: {
+  lang: Lang;
+  user: User | null;
+  onStartAnalysis: () => void;
+  onLogin: () => void;
+  onRegister: () => void;
+  onLangToggle: () => void;
+  onDashboard: () => void;
+  onSignOut: () => void;
+}) {
+  const l = t[lang];
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [mobileMenu, setMobileMenu] = useState(false);
+  const statsReveal = useScrollReveal(0.2);
+  const howReveal = useScrollReveal(0.15);
+  const diffReveal = useScrollReveal(0.15);
+  function scrollTo(id: string) {
+    setMobileMenu(false);
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  }
+  return (
+    <main className={`${ds.pageBg} relative overflow-x-hidden`}>
+      <AmbientBg />
+      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.06] bg-[#050810]/80 backdrop-blur-xl">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+          <div className="flex items-center gap-2.5">
+            <AimloLogo size={26} />
+            <AimloWordmark size="text-lg" />
+            <span className="hidden sm:inline rounded-md bg-blue-500/10 border border-blue-500/10 px-1.5 py-0.5 text-[9px] font-bold text-blue-400 uppercase tracking-wider">
+              Beta
+            </span>
+          </div>
+          <div className="hidden md:flex items-center gap-6">
+            {Object.entries(l.landingNav).map(([key, label]) => (
+              <button
+                key={key}
+                onClick={() => scrollTo(`section-${key}`)}
+                className="text-[13px] font-medium text-neutral-400 transition-colors duration-200 hover:text-white"
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+          <div className="flex items-center gap-2.5">
+            <button
+              onClick={onLangToggle}
+              className="rounded-lg border border-white/[0.06] bg-white/[0.03] px-2.5 py-1 text-[10px] font-bold text-neutral-400 transition-all hover:border-white/[0.12] hover:text-white"
+            >
+              {lang === "tr" ? "TR" : "EN"}
+            </button>
+            {user ? (
+              <>
+                <button
+                  onClick={onDashboard}
+                  className="hidden sm:block rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-2 text-[12px] font-bold text-white shadow-md shadow-blue-900/20 transition-all duration-300 hover:shadow-lg hover:brightness-110"
+                >
+                  {l.goToDashboard}
+                </button>
+                <button
+                  onClick={onSignOut}
+                  className="hidden sm:block rounded-lg border border-white/[0.06] bg-white/[0.02] px-3 py-2 text-[11px] font-medium text-neutral-500 transition-all hover:text-red-400 hover:border-red-500/20"
+                >
+                  {l.authSignOut}
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={onLogin}
+                  className="hidden sm:block rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-2 text-[12px] font-semibold text-neutral-300 transition-all hover:border-white/[0.14] hover:text-white"
+                >
+                  {l.authLogin}
+                </button>
+                <button
+                  onClick={onRegister}
+                  className="hidden sm:block rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-2 text-[12px] font-bold text-white shadow-md shadow-blue-900/20 transition-all duration-300 hover:shadow-lg hover:brightness-110"
+                >
+                  {l.authRegister}
+                </button>
+              </>
+            )}
+            <button
+              onClick={() => setMobileMenu(!mobileMenu)}
+              className="md:hidden rounded-lg border border-white/[0.06] bg-white/[0.03] p-2 text-neutral-400 hover:text-white transition"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M3 12h18M3 6h18M3 18h18" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        {mobileMenu && (
+          <div className="md:hidden border-t border-white/[0.06] bg-[#050810]/95 backdrop-blur-xl px-4 py-4 space-y-3">
+            {Object.entries(l.landingNav).map(([key, label]) => (
+              <button
+                key={key}
+                onClick={() => scrollTo(`section-${key}`)}
+                className="block w-full text-left text-sm text-neutral-400 py-2 transition hover:text-white"
+              >
+                {label}
+              </button>
+            ))}
+            <div className="flex gap-2 pt-2">
+              {user ? (
+                <>
+                  <button
+                    onClick={() => {
+                      setMobileMenu(false);
+                      onDashboard();
+                    }}
+                    className="flex-1 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 py-2.5 text-sm font-bold text-white"
+                  >
+                    {l.goToDashboard}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setMobileMenu(false);
+                      onSignOut();
+                    }}
+                    className="flex-1 rounded-xl border border-white/[0.08] py-2.5 text-sm font-medium text-neutral-400"
+                  >
+                    {l.authSignOut}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={() => {
+                      setMobileMenu(false);
+                      onLogin();
+                    }}
+                    className="flex-1 rounded-xl border border-white/[0.08] py-2.5 text-sm font-semibold text-neutral-300"
+                  >
+                    {l.authLogin}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setMobileMenu(false);
+                      onRegister();
+                    }}
+                    className="flex-1 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 py-2.5 text-sm font-bold text-white"
+                  >
+                    {l.authRegister}
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        )}
+      </nav>
+      <section className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 pt-32 sm:pt-40 pb-20 sm:pb-28 text-center">
+        <div className="space-y-8">
+          <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/15 bg-blue-500/[0.05] px-4 py-1.5">
+            <span className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse" />
+            <span className="text-[11px] font-semibold text-blue-400 uppercase tracking-wider">
+              AI-Powered Coaching
+            </span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
+            {l.landingHeroTitle}
+          </h1>
+          <p className="mx-auto max-w-2xl text-base sm:text-lg text-neutral-400 leading-relaxed">
+            {l.landingHeroSub}
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
+            <button
+              onClick={user ? onDashboard : onStartAnalysis}
+              className="group rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-blue-900/25 transition-all duration-300 hover:shadow-xl hover:shadow-blue-800/30 hover:-translate-y-0.5 active:scale-[0.98]"
+            >
+              {user ? l.goToDashboard : l.landingCTA}
+              <span className="ml-2 inline-block transition-transform duration-200 group-hover:translate-x-1">
+                {IC.arrow}
+              </span>
+            </button>
+            {!user && (
+              <button
+                onClick={onLogin}
+                className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-8 py-4 text-base font-semibold text-neutral-300 transition-all duration-200 hover:border-white/[0.14] hover:text-white"
+              >
+                {l.authLogin}
+              </button>
+            )}
+          </div>
+        </div>
+      </section>
+      <section className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 pb-24">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          {l.landingFeatures.map((f, i) => (
+            <div
+              key={i}
+              className={`${ds.card} ${ds.cardInner} ${ds.cardHover} text-center`}
+            >
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/[0.07] border border-blue-500/10">
+                <FeatureIcon icon={f.icon} />
+              </div>
+              <h3 className="text-sm font-bold text-white mb-1">{f.title}</h3>
+              <p className="text-[12px] text-neutral-500 leading-relaxed">
+                {f.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section
+        ref={howReveal.ref}
+        className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 pb-24"
+      >
+        <h2
+          className={`text-2xl sm:text-3xl font-extrabold text-white mb-10 text-center transition-all duration-700 ${howReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+        >
+          {l.landingHowTitle}
+        </h2>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          {l.landingHowSteps.map((s, i) => (
+            <div
+              key={i}
+              className={`${ds.card} ${ds.cardInner} text-center transition-all duration-700 ${howReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+              style={{ transitionDelay: `${i * 100}ms` }}
+            >
+              <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 text-sm font-bold text-white shadow-md shadow-blue-900/20">
+                {s.step}
+              </div>
+              <h3 className="text-sm font-bold text-white mb-1">{s.title}</h3>
+              <p className="text-[12px] text-neutral-500 leading-relaxed">
+                {s.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section
+        id="section-about"
+        className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 py-20"
+      >
+        <div className={`${ds.card} overflow-hidden`}>
+          <div className="p-8 sm:p-12 space-y-8">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-4">
+                {l.landingAboutTitle}
+              </h2>
+              <p className="text-base text-neutral-400 leading-relaxed max-w-3xl">
+                {l.landingAboutText}
+              </p>
+              <p className="text-base text-neutral-400 leading-relaxed max-w-3xl mt-3">
+                {l.landingAboutMission}
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-5 pt-2">
+              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6 transition-all duration-200 hover:bg-white/[0.03]">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-cyan-500/[0.08] border border-cyan-500/10">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      className="text-cyan-400"
+                    >
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </svg>
+                  </div>
+                  <h3 className="text-base font-bold text-white">
+                    {l.landingB2CTitle}
+                  </h3>
+                </div>
+                <p className="text-sm text-neutral-400 leading-relaxed">
+                  {l.landingB2CText}
+                </p>
+              </div>
+              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6 transition-all duration-200 hover:bg-white/[0.03]">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-500/[0.08] border border-blue-500/10">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      className="text-blue-400"
+                    >
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                  </div>
+                  <h3 className="text-base font-bold text-white">
+                    {l.landingB2BTitle}
+                  </h3>
+                </div>
+                <p className="text-sm text-neutral-400 leading-relaxed">
+                  {l.landingB2BText}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        ref={diffReveal.ref}
+        className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 pb-24"
+      >
+        <h2
+          className={`text-2xl sm:text-3xl font-extrabold text-white mb-10 text-center transition-all duration-700 ${diffReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+        >
+          {l.landingDiffTitle}
+        </h2>
+        <div className="grid md:grid-cols-3 gap-4">
+          {l.landingDiffItems.map((item, i) => (
+            <div
+              key={i}
+              className={`${ds.card} ${ds.cardInner} border-t-2 border-t-blue-500/20 transition-all duration-700 ${diffReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+              style={{ transitionDelay: `${i * 120}ms` }}
+            >
+              <h3 className="text-base font-bold text-white mb-2">
+                {item.title}
+              </h3>
+              <p className="text-sm text-neutral-400 leading-relaxed">
+                {item.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section
+        id="section-blog"
+        className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 pb-24"
+      >
+        <div className={`${ds.card} ${ds.cardInner} text-center`}>
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-500/[0.07] border border-blue-500/10">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              className="text-blue-400"
+            >
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+            </svg>
+          </div>
+          <h2 className="text-2xl font-bold text-white mb-3">
+            {l.landingBlogTitle}
+          </h2>
+          <p className="text-sm text-neutral-500">{l.landingBlogText}</p>
+        </div>
+      </section>
+      <section
+        id="section-faq"
+        className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 pb-24"
+      >
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-8 text-center">
+          {l.landingFaqTitle}
+        </h2>
+        <div className="space-y-2.5">
+          {l.landingFaqs.map((faq, i) => (
+            <div key={i} className={`${ds.card} overflow-hidden`}>
+              <button
+                onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                className="w-full flex items-center justify-between p-5 text-left"
+              >
+                <span className="text-sm font-semibold text-white pr-4">
+                  {faq.q}
+                </span>
+                <span
+                  className={`shrink-0 text-neutral-500 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`}
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </span>
+              </button>
+              {openFaq === i && (
+                <div className="px-5 pb-5 -mt-1">
+                  <p className="text-sm text-neutral-400 leading-relaxed">
+                    {faq.a}
+                  </p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+        <div className={`${ds.card} ${ds.cardInner} text-center mt-6`}>
+          <p className="text-sm text-neutral-400 mb-3">{l.landingHelpText}</p>
+          <a
+            href="mailto:support@aimlo.gg"
+            className="inline-flex items-center gap-2 rounded-xl bg-blue-500/[0.06] border border-blue-500/15 px-5 py-2.5 text-sm font-semibold text-blue-400 transition-all hover:bg-blue-500/[0.1]"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+            {l.landingHelpEmail}
+          </a>
+        </div>
+      </section>
+      <section
+        ref={statsReveal.ref}
+        className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 pb-24"
+      >
+        <h2
+          className={`text-2xl sm:text-3xl font-extrabold text-white mb-10 text-center transition-all duration-700 ${statsReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+        >
+          {l.landingStatsTitle}
+        </h2>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          {l.landingStats.map((stat, i) => (
+            <div
+              key={i}
+              className={`${ds.card} p-6 sm:p-8 text-center transition-all duration-700 ${statsReveal.visible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-10 scale-95"}`}
+              style={{ transitionDelay: `${i * 100}ms` }}
+            >
+              <p className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-1">
+                {stat.value}
+              </p>
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-neutral-500">
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 pb-24 text-center">
+        <div className={`${ds.card} p-8 sm:p-12 overflow-hidden relative`}>
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-blue-600/[0.04] to-cyan-500/[0.03]" />
+          <div className="relative space-y-6">
+            <AimloWordmark size="text-3xl" className="block" />
+            <p className="text-base text-neutral-400 max-w-lg mx-auto">
+              {l.landingHeroSub}
+            </p>
+            <button
+              onClick={user ? onDashboard : onStartAnalysis}
+              className="rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-blue-900/25 transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.98]"
+            >
+              {user ? l.goToDashboard : l.landingCTA}
+            </button>
+          </div>
+        </div>
+      </section>
+      <footer className="relative z-10 border-t border-white/[0.06]">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <AimloLogo size={18} className="opacity-35" />
+            <AimloWordmark size="text-sm" className="opacity-35" />
+          </div>
+          <p className="text-[11px] text-neutral-600">
+            {IC.copy} 2025 AIMLO. All rights reserved.
+          </p>
+        </div>
+      </footer>
+    </main>
+  );
+}
+/* ══════════════════════════════════════════════════════════
+   AUTH SCREEN — profiles upsert + username login (ilike)
+   ══════════════════════════════════════════════════════════ */
+function AuthScreen({
+  lang,
+  onAuth,
+  initialMode,
+  onBackToLanding,
+}: {
+  lang: Lang;
+  onAuth: (user: User) => void;
+  initialMode: AuthMode;
+  onBackToLanding: () => void;
+}) {
+  const [mode, setMode] = useState<AuthMode>(initialMode);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [checkEmail, setCheckEmail] = useState(false);
   const al = t[lang];
-
   async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault(); setError(""); setLoading(true);
+    e.preventDefault();
+    setError("");
+    setLoading(true);
     try {
       if (mode === "register") {
-        const { data, error: err } = await supabase.auth.signUp({ email, password });
-        if (err) { setError(localizeAuthError(err.message, lang)); setLoading(false); return; }
-        if (data.user && !data.session) { setCheckEmail(true); setLoading(false); return; }
+        if (password !== passwordConfirm) {
+          setError(al.authPasswordMismatch);
+          setLoading(false);
+          return;
+        }
+        // Check username availability before signup
+        const usernameAvailable = await checkUsernameAvailable(username);
+        if (!usernameAvailable) {
+          setError(
+            lang === "tr"
+              ? "Bu kullanıcı adı zaten alınmış"
+              : "This username is already taken",
+          );
+          setLoading(false);
+          return;
+        }
+        const { data, error: err } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: {
+              first_name: firstName,
+              last_name: lastName,
+              username,
+              display_name: `${firstName} ${lastName}`,
+            },
+          },
+        });
+        if (err) {
+          setError(localizeAuthError(err.message, lang));
+          setLoading(false);
+          return;
+        }
+        // Create profile — notify user if it fails
+        if (data.user) {
+          const profileResult = await upsertProfile(data.user.id, {
+            username,
+            email,
+            first_name: firstName,
+            last_name: lastName,
+          });
+          if (!profileResult.ok) {
+            console.warn(
+              "[Aimlo] Profile creation failed, username login may not work",
+            );
+          }
+        }
+        if (data.user && !data.session) {
+          setCheckEmail(true);
+          setLoading(false);
+          return;
+        }
         if (data.user && data.session) onAuth(data.user);
       } else {
-        const { data, error: err } = await supabase.auth.signInWithPassword({ email, password });
-        if (err) { setError(localizeAuthError(err.message, lang)); setLoading(false); return; }
+        let loginEmail = email.trim();
+        // Username login: lookup email from profiles (case-insensitive)
+        if (!loginEmail.includes("@")) {
+          const { data: profileData, error: profileError } = await supabase
+            .from("profiles")
+            .select("email")
+            .ilike("username", loginEmail.toLowerCase())
+            .limit(1)
+            .maybeSingle();
+          if (profileError || !profileData?.email) {
+            setError(localizeAuthError("Username not found", lang));
+            setLoading(false);
+            return;
+          }
+          loginEmail = profileData.email;
+        }
+        const { data, error: err } = await supabase.auth.signInWithPassword({
+          email: loginEmail,
+          password,
+        });
+        if (err) {
+          setError(localizeAuthError(err.message, lang));
+          setLoading(false);
+          return;
+        }
         if (data.user) onAuth(data.user);
       }
-    } catch { setError(al.authError); }
+    } catch {
+      setError(al.authError);
+    }
     setLoading(false);
   }
-
-  if (checkEmail) {
+  if (checkEmail)
     return (
       <main className={`${ds.pageBg} flex items-center justify-center px-4`}>
         <AmbientBg />
         <div className="relative z-10 w-full max-w-sm space-y-8 text-center">
           <AimloLogo size={56} className="mx-auto" />
-          <h1 className="text-3xl font-bold tracking-tight text-white">AIMLO</h1>
+          <AimloWordmark size="text-3xl" className="block" />
           <div className={`${ds.card} p-8 space-y-5`}>
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan-500/10 border border-cyan-500/20"><span className="text-2xl">✉</span></div>
-            <p className="text-sm text-neutral-300 leading-relaxed">{al.authCheckEmail}</p>
-            <button onClick={() => { setCheckEmail(false); setMode("login"); }} className={ds.btnSecondary}>{al.authLogin}</button>
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-500/[0.08] border border-blue-500/10">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="text-blue-400"
+              >
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+            </div>
+            <p className="text-sm text-neutral-300 leading-relaxed">
+              {al.authCheckEmail}
+            </p>
+            <button
+              onClick={() => {
+                setCheckEmail(false);
+                setMode("login");
+              }}
+              className={ds.btnSecondary}
+            >
+              {al.authLogin}
+            </button>
           </div>
         </div>
       </main>
     );
-  }
-
   return (
-    <main className={`${ds.pageBg} relative flex items-center justify-center px-4 overflow-hidden`}>
-      <div className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[800px] w-[800px] rounded-full bg-cyan-900/[0.07] blur-[180px]" />
-      <div className="pointer-events-none absolute -bottom-24 -right-24 h-[400px] w-[400px] rounded-full bg-blue-900/[0.05] blur-[140px]" />
-
+    <main
+      className={`${ds.pageBg} relative flex items-center justify-center px-4 py-12 overflow-hidden`}
+    >
+      <AmbientBg />
       <div className="relative z-10 w-full max-w-sm space-y-8">
         <div className="text-center space-y-4">
-          <div className="relative inline-block">
-            <AimloLogo size={80} className="mx-auto" />
-            <div className="pointer-events-none absolute inset-0 -m-8 rounded-full bg-cyan-500/[0.08] blur-3xl" />
-          </div>
+          <button
+            onClick={onBackToLanding}
+            className="mx-auto flex items-center gap-2 text-[11px] text-neutral-500 transition hover:text-white mb-4"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            {al.back}
+          </button>
+          <AimloLogo size={72} className="mx-auto" />
           <div>
-            <h1 className="text-4xl font-extrabold tracking-wider text-white">AIMLO</h1>
+            <AimloWordmark size="text-4xl" className="block" />
             <p className="mt-2 text-sm text-neutral-500">{al.tagline}</p>
           </div>
         </div>
-
         <div className={`${ds.card} p-6 sm:p-8 space-y-6`}>
-          <div className="text-center"><h2 className="text-lg font-bold text-white">{mode === "login" ? al.authLogin : al.authRegister}</h2></div>
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div><Label text={al.authEmail} /><input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={al.authEmailPh} required className={ds.inputBase} /></div>
-            <div><Label text={al.authPassword} /><input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder={al.authPasswordPh} required minLength={6} className={ds.inputBase} /></div>
-            {error && <div className="rounded-lg bg-red-500/10 border border-red-500/20 px-4 py-3"><p className="text-xs text-red-400">{error}</p></div>}
+          <div className="text-center">
+            <h2 className="text-lg font-bold text-white">
+              {mode === "login" ? al.authLogin : al.authRegister}
+            </h2>
+          </div>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {mode === "register" && (
+              <>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <Label text={al.authFirstName} />
+                    <input
+                      type="text"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      placeholder={al.authFirstNamePh}
+                      required
+                      className={ds.inputBase}
+                    />
+                  </div>
+                  <div>
+                    <Label text={al.authLastName} />
+                    <input
+                      type="text"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      placeholder={al.authLastNamePh}
+                      required
+                      className={ds.inputBase}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <Label text={al.authUsername} />
+                  <input
+                    type="text"
+                    value={username}
+                    onChange={(e) =>
+                      setUsername(
+                        e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ""),
+                      )
+                    }
+                    placeholder={al.authUsernamePh}
+                    required
+                    className={ds.inputBase}
+                  />
+                </div>
+              </>
+            )}
+            <div>
+              <Label
+                text={mode === "login" ? al.authEmailOrUsername : al.authEmail}
+              />
+              <input
+                type={mode === "register" ? "email" : "text"}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder={
+                  mode === "login" ? al.authEmailOrUsernamePh : al.authEmailPh
+                }
+                required
+                className={ds.inputBase}
+              />
+            </div>
+            <div>
+              <Label text={al.authPassword} />
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder={al.authPasswordPh}
+                required
+                minLength={6}
+                className={ds.inputBase}
+              />
+            </div>
+            {mode === "register" && (
+              <div>
+                <Label text={al.authPasswordConfirm} />
+                <input
+                  type="password"
+                  value={passwordConfirm}
+                  onChange={(e) => setPasswordConfirm(e.target.value)}
+                  placeholder={al.authPasswordConfirmPh}
+                  required
+                  minLength={6}
+                  className={ds.inputBase}
+                />
+              </div>
+            )}
+            {error && (
+              <div className="rounded-xl bg-red-500/[0.06] border border-red-500/10 px-4 py-3">
+                <p className="text-xs text-red-400">{error}</p>
+              </div>
+            )}
             <button type="submit" disabled={loading} className={ds.btnPrimary}>
-              {loading ? <span className="flex items-center justify-center gap-2"><span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />{al.authLoading}</span>
-              : mode === "login" ? al.authLogin : al.authRegister}
+              {loading ? (
+                <span className="flex items-center justify-center gap-2">
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                  {al.authLoading}
+                </span>
+              ) : mode === "login" ? (
+                al.authLogin
+              ) : (
+                al.authRegister
+              )}
             </button>
           </form>
           <p className="text-center text-xs text-neutral-500">
             {mode === "login" ? al.authNoAccount : al.authHasAccount}{" "}
-            <button type="button" onClick={() => { setMode(mode === "login" ? "register" : "login"); setError(""); }}
-              className="text-cyan-400 hover:text-cyan-300 transition font-semibold">{mode === "login" ? al.authRegister : al.authLogin}</button>
+            <button
+              type="button"
+              onClick={() => {
+                setMode(mode === "login" ? "register" : "login");
+                setError("");
+              }}
+              className="text-blue-400 hover:text-blue-300 transition font-semibold"
+            >
+              {mode === "login" ? al.authRegister : al.authLogin}
+            </button>
           </p>
         </div>
       </div>
     </main>
   );
 }
-
 /* ══════════════════════════════════════════════════════════
-   MAIN APP
+   MAIN APP — render-time setScreen FIXED
    ══════════════════════════════════════════════════════════ */
-
 export default function Home() {
   const [user, setUser] = useState<User | null>(null);
   const [authLoading, setAuthLoading] = useState(true);
-
+  const [authMode, setAuthMode] = useState<AuthMode>("login");
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => { setUser(session?.user ?? null); setAuthLoading(false); });
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => { setUser(session?.user ?? null); });
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      setAuthLoading(false);
+    });
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
     return () => subscription.unsubscribe();
   }, []);
-
-  async function handleSignOut() { await supabase.auth.signOut(); setUser(null); setScreen("dashboard"); clearDraft(); }
-
+  async function handleSignOut() {
+    await supabase.auth.signOut();
+    setUser(null);
+    setScreen("landing");
+    clearDraft();
+  }
   const [lang, setLang] = useState<Lang | null>(null);
-  const [screen, setScreen] = useState<Screen>("dashboard");
-  const [setup, setSetup] = useState<SetupData>({ map: "", agent: "", side: "", teamComp: [], enemyComp: [], unknownEnemyComp: false });
+  const [screen, setScreen] = useState<Screen>("landing");
+  const [setup, setSetup] = useState<SetupData>({
+    map: "",
+    agent: "",
+    side: "",
+    teamComp: [],
+    enemyComp: [],
+    unknownEnemyComp: false,
+  });
   const [setupStep, setSetupStep] = useState<SetupStep>("mapAgent");
   const [setupErrors, setSetupErrors] = useState<FormErrors>({});
   const [compTarget, setCompTarget] = useState<CompTarget>("team");
   const [rounds, setRounds] = useState<RoundData[]>([]);
   const [roundIdx, setRoundIdx] = useState(0);
-  const [roundForm, setRoundForm] = useState<RoundForm>({ deathLocation: "", enemyCount: "", yourNote: "" });
+  const [roundForm, setRoundForm] = useState<RoundForm>({
+    deathLocation: "",
+    enemyCount: "",
+    yourNote: "",
+  });
   const [roundErrors, setRoundErrors] = useState<FormErrors>({});
   const [roundMode, setRoundMode] = useState<RoundScreenMode>("input");
-  const [currentFeedback, setCurrentFeedback] = useState<RoundFeedback | null>(null);
+  const [currentFeedback, setCurrentFeedback] = useState<RoundFeedback | null>(
+    null,
+  );
   const [currentResult, setCurrentResult] = useState<RoundResult | null>(null);
   const [survived, setSurvived] = useState(false);
-  const [matchScore, setMatchScore] = useState<MatchScore>({ yours: "", enemy: "" });
-  const [pendingFinishRound, setPendingFinishRound] = useState<RoundData | null>(null);
-  const [report, setReport] = useState<ReturnType<typeof genMatchReport> | null>(null);
+  const [matchScore, setMatchScore] = useState<MatchScore>({
+    yours: "",
+    enemy: "",
+  });
+  const [pendingFinishRound, setPendingFinishRound] =
+    useState<RoundData | null>(null);
+  const [report, setReport] = useState<ReturnType<
+    typeof genMatchReport
+  > | null>(null);
   const [savedReports, setSavedReports] = useState<SavedReport[]>([]);
   const [viewingReport, setViewingReport] = useState<SavedReport | null>(null);
   const [historyLoading, setHistoryLoading] = useState(false);
-
-  const locations = setup.map ? MAP_LOCATIONS[setup.map] ?? [] : [];
+  const locations = setup.map ? (MAP_LOCATIONS[setup.map] ?? []) : [];
   const roundNum = roundIdx + 1;
-
-  // Restore lang from localStorage on mount
-  useEffect(() => { const saved = loadLang(); if (saved) setLang(saved); }, []);
-
-  // Auto-save draft when in setup/round screens
+  // ALL hooks must be above early returns — React rules of hooks
+  const winRate = useMemo(
+    () =>
+      savedReports.length > 0
+        ? Math.round(
+            (savedReports.filter((r) => r.won).length / savedReports.length) *
+              100,
+          )
+        : 0,
+    [savedReports],
+  );
+  const topDeathSpot = useMemo(() => {
+    const spots: Record<string, number> = {};
+    savedReports.forEach((r) => {
+      r.rounds
+        .filter((rd) => !rd.skipped && !rd.survived && rd.deathLocation)
+        .forEach((rd) => {
+          spots[rd.deathLocation] = (spots[rd.deathLocation] || 0) + 1;
+        });
+    });
+    return Object.entries(spots).sort((a, b) => b[1] - a[1])[0];
+  }, [savedReports]);
+  // FIX: redirect "lang" via useEffect, not during render
   useEffect(() => {
-    if (screen === "setup" || screen === "round") {
+    if (user && screen === "lang") setScreen("dashboard");
+  }, [user, screen]);
+  useEffect(() => {
+    setLang(loadLang() || "en");
+  }, []);
+  useEffect(() => {
+    if (screen === "setup" || screen === "round")
       saveDraft({ setup, setupStep, rounds, roundIdx, screen });
-    }
   }, [setup, setupStep, rounds, roundIdx, screen]);
-
-  // Restore draft on mount
   const draftRestored = useRef(false);
   useEffect(() => {
     if (!draftRestored.current && user && lang) {
@@ -979,12 +2592,9 @@ export default function Home() {
       }
     }
   }, [user, lang]);
-
-  // Load history from Supabase + localStorage fallback
   const loadHistory = useCallback(async () => {
     if (!user) return;
     setHistoryLoading(true);
-
     function rowToReport(row: Record<string, unknown>): SavedReport {
       const json = (row.raw_result_json as Record<string, unknown>) || {};
       return {
@@ -994,10 +2604,14 @@ export default function Home() {
         side: (json.side as string) || "",
         score: (json.score as string) || "",
         won: (json.won as boolean) ?? false,
-        date: new Date(row.created_at as string).toLocaleDateString(lang === "tr" ? "tr-TR" : "en-US", { day: "numeric", month: "short", year: "numeric" }),
+        date: new Date(row.created_at as string).toLocaleDateString(
+          lang === "tr" ? "tr-TR" : "en-US",
+          { day: "numeric", month: "short", year: "numeric" },
+        ),
         summary: (row.summary as string) || (json.summary as string) || "",
         mistake: (row.weakness as string) || (json.mistake as string) || "",
-        tendencies: (row.strength as string) || (json.tendencies as string) || "",
+        tendencies:
+          (row.strength as string) || (json.tendencies as string) || "",
         adjustment: (row.focus as string) || (json.adjustment as string) || "",
         winPct: (json.winPct as number) || 0,
         roundsWon: (json.roundsWon as number) || 0,
@@ -1006,13 +2620,17 @@ export default function Home() {
         survivedCount: (json.survivedCount as number) || 0,
         totalRounds: (json.totalRounds as number) || 0,
         rounds: (json.rounds as RoundData[]) || [],
-        setup: (json.setup as SetupData) || { map: "", agent: "", side: "", teamComp: [], enemyComp: [], unknownEnemyComp: false },
+        setup: (json.setup as SetupData) || {
+          map: "",
+          agent: "",
+          side: "",
+          teamComp: [],
+          enemyComp: [],
+          unknownEnemyComp: false,
+        },
       };
     }
-
     let allReports: SavedReport[] = [];
-
-    // 1. Try Supabase
     try {
       const { data, error } = await supabase
         .from("analyses")
@@ -1020,69 +2638,56 @@ export default function Home() {
         .eq("user_id", user.id)
         .order("created_at", { ascending: false })
         .limit(50);
-      if (error) {
-        console.error("[Aimlo] History load error:", error.message, error.details);
-      } else if (data && data.length > 0) {
-        allReports = data.map((row: Record<string, unknown>) => rowToReport(row));
-      }
+      if (error) console.error("[Aimlo] History load error:", error.message);
+      else if (data?.length)
+        allReports = data.map((row: Record<string, unknown>) =>
+          rowToReport(row),
+        );
     } catch (err) {
       console.error("[Aimlo] History load exception:", err);
     }
-
-    // 2. Also load localStorage fallback reports
     try {
-      const localRaw = JSON.parse(localStorage.getItem(`aimlo_local_reports_${user.id}`) || "[]");
+      const localRaw = JSON.parse(
+        localStorage.getItem(`aimlo_local_reports_${user.id}`) || "[]",
+      );
       if (localRaw.length > 0) {
-        const localReports: SavedReport[] = localRaw.map((row: Record<string, unknown>) => rowToReport(row));
-        // Merge: add local reports that aren't already in DB results (by id)
-        const existingIds = new Set(allReports.map((r) => r.id));
-        for (const lr of localReports) {
-          if (!existingIds.has(lr.id)) allReports.push(lr);
+        const lr: SavedReport[] = localRaw.map((row: Record<string, unknown>) =>
+          rowToReport(row),
+        );
+        const ids = new Set(allReports.map((r) => r.id));
+        for (const r of lr) {
+          if (!ids.has(r.id)) allReports.push(r);
         }
-        // Sort by date descending
-        allReports.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        allReports.sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+        );
       }
-    } catch (e) {
-      // localStorage might not be available
-    }
-
+    } catch {}
     setSavedReports(allReports);
     setHistoryLoading(false);
   }, [user, lang]);
-
-  useEffect(() => { if (user && lang) loadHistory(); }, [user, lang, loadHistory]);
-
-  /*
-    IMPORTANT — Supabase RLS Setup Required!
-    Run this SQL in Supabase SQL Editor to allow users to insert/read their own analyses:
-
-    ALTER TABLE analyses ENABLE ROW LEVEL SECURITY;
-
-    CREATE POLICY "Users can insert own analyses"
-      ON analyses FOR INSERT
-      WITH CHECK (auth.uid() = user_id);
-
-    CREATE POLICY "Users can read own analyses"
-      ON analyses FOR SELECT
-      USING (auth.uid() = user_id);
-  */
-
-  // Save report — tries Supabase first, falls back to localStorage if RLS/network fails
-  async function saveReportToDb(rep: ReturnType<typeof genMatchReport>, setupData: SetupData, roundsData: RoundData[], sc: MatchScore) {
+  useEffect(() => {
+    if (user && lang) loadHistory();
+  }, [user, lang, loadHistory]);
+  async function saveReportToDb(
+    rep: ReturnType<typeof genMatchReport>,
+    sd: SetupData,
+    rd: RoundData[],
+    sc: MatchScore,
+  ) {
     if (!user) return;
-
-    const reportPayload = {
+    const payload = {
       user_id: user.id,
-      riot_id: setupData.map,
-      region: setupData.agent,
+      riot_id: sd.map,
+      region: sd.agent,
       summary: rep.summary,
       weakness: rep.mistake,
       strength: rep.tendencies,
       focus: rep.adjustment,
       raw_result_json: {
-        map: setupData.map,
-        agent: setupData.agent,
-        side: setupData.side,
+        map: sd.map,
+        agent: sd.agent,
+        side: sd.side,
         score: rep.scoreStr,
         won: rep.matchWon,
         winPct: rep.winPct,
@@ -1091,116 +2696,119 @@ export default function Home() {
         roundsSkipped: rep.skipped,
         survivedCount: rep.survivedCount,
         totalRounds: rep.total,
-        rounds: roundsData,
-        setup: setupData,
+        rounds: rd,
+        setup: sd,
       },
     };
-
-    let dbSaved = false;
+    let ok = false;
     try {
-      const { error } = await supabase.from("analyses").insert(reportPayload);
-      if (error) {
-        console.error("[Aimlo] Save report error:", error.message, error.details);
-        console.warn("[Aimlo] Falling back to localStorage. To fix, run the RLS policies in Supabase SQL Editor — see comment in source code.");
-      } else {
-        dbSaved = true;
-      }
-    } catch (err) {
-      console.error("[Aimlo] Save report exception:", err);
+      const { error } = await supabase.from("analyses").insert(payload);
+      if (error) console.error("[Aimlo] Save:", error.message);
+      else ok = true;
+    } catch (e) {
+      console.error("[Aimlo] Save exception:", e);
     }
-
-    // If DB save failed, store locally so history still works
-    if (!dbSaved) {
+    if (!ok) {
       try {
-        const existing = JSON.parse(localStorage.getItem(`aimlo_local_reports_${user.id}`) || "[]");
-        existing.unshift({ ...reportPayload, id: crypto.randomUUID(), created_at: new Date().toISOString() });
-        localStorage.setItem(`aimlo_local_reports_${user.id}`, JSON.stringify(existing.slice(0, 100)));
-      } catch (e) {
-        console.error("[Aimlo] localStorage fallback failed:", e);
-      }
+        const ex = JSON.parse(
+          localStorage.getItem(`aimlo_local_reports_${user.id}`) || "[]",
+        );
+        ex.unshift({
+          ...payload,
+          id: crypto.randomUUID(),
+          created_at: new Date().toISOString(),
+        });
+        localStorage.setItem(
+          `aimlo_local_reports_${user.id}`,
+          JSON.stringify(ex.slice(0, 100)),
+        );
+      } catch {}
     }
     loadHistory();
   }
-
   useEffect(() => {
     setSetup((prev) => {
       const comp = [...prev.teamComp];
       if (prev.agent) {
-        const existsElsewhere = comp.indexOf(prev.agent);
-        if (existsElsewhere > 0) comp.splice(existsElsewhere, 1);
+        const idx = comp.indexOf(prev.agent);
+        if (idx > 0) comp.splice(idx, 1);
         comp[0] = prev.agent;
-        const cleaned = [prev.agent, ...comp.filter((a) => a && a !== prev.agent)];
-        return { ...prev, teamComp: cleaned };
+        return {
+          ...prev,
+          teamComp: [prev.agent, ...comp.filter((a) => a && a !== prev.agent)],
+        };
       } else {
         if (comp.length > 0 && comp[0]) comp[0] = "";
         return { ...prev, teamComp: comp.filter((a) => a) };
       }
     });
   }, [setup.agent]);
-
-  // Auth loading
-  if (authLoading) {
+  if (authLoading || !lang)
     return (
       <main className={`${ds.pageBg} flex items-center justify-center`}>
         <AmbientBg />
         <div className="relative z-10 flex flex-col items-center gap-4">
           <AimloLogo size={48} className="animate-pulse" />
-          <div className="h-6 w-6 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent" />
+          <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-500 border-t-transparent" />
         </div>
       </main>
     );
-  }
-
-  /* ════════════════════════════════════════════
-     LANGUAGE SELECTION — BEFORE LOGIN
-     ════════════════════════════════════════════ */
-
-  if (!lang) {
+  if (screen === "landing")
     return (
-      <main className={`${ds.pageBg} relative flex items-center justify-center px-4 overflow-hidden`}>
-        <AmbientBg />
-        <div className="relative z-10 w-full max-w-xs space-y-10 text-center">
-          <div className="space-y-4">
-            <div className="relative inline-block">
-              <AimloLogo size={80} className="mx-auto" />
-              <div className="pointer-events-none absolute inset-0 -m-8 rounded-full bg-cyan-500/[0.08] blur-3xl" />
-            </div>
-            <h1 className="text-4xl font-extrabold tracking-wider text-white">AIMLO</h1>
-            <div className="mx-auto h-0.5 w-10 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500" />
-            <p className="text-sm text-neutral-500">Dil seçin / Choose language</p>
-          </div>
-          <div className="flex gap-3">
-            {(["tr", "en"] as Lang[]).map((lg) => (
-              <button key={lg} onClick={() => { setLang(lg); saveLang(lg); }}
-                className={`flex-1 rounded-lg border border-[#1e2a3a] bg-[#0d1117] py-4 text-sm font-semibold text-white transition-all duration-200 hover:border-cyan-500/40 hover:bg-[#111922] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-cyan-900/20`}>
-                {lg === "tr" ? "Türkçe" : "English"}
-              </button>
-            ))}
-          </div>
-        </div>
-      </main>
+      <LandingPage
+        lang={lang}
+        user={user}
+        onStartAnalysis={() => {
+          setAuthMode("register");
+          setScreen("lang");
+        }}
+        onLogin={() => {
+          setAuthMode("login");
+          setScreen("lang");
+        }}
+        onRegister={() => {
+          setAuthMode("register");
+          setScreen("lang");
+        }}
+        onLangToggle={() => {
+          const nl = lang === "tr" ? "en" : "tr";
+          setLang(nl);
+          saveLang(nl);
+        }}
+        onDashboard={() => setScreen("dashboard")}
+        onSignOut={handleSignOut}
+      />
     );
-  }
-
-  /* ════════════════════════════════════════════
-     AUTH — after language, before app
-     ════════════════════════════════════════════ */
-
-  if (!user) return <AuthScreen lang={lang} onAuth={(u) => setUser(u)} />;
-
-  /* ── HELPERS ── */
+  if (!user)
+    return (
+      <AuthScreen
+        lang={lang}
+        onAuth={(u) => {
+          setUser(u);
+          setScreen("dashboard");
+        }}
+        initialMode={authMode}
+        onBackToLanding={() => setScreen("landing")}
+      />
+    );
+  if (screen === "lang") return null; // useEffect handles redirect
   const l = t[lang];
-
   function updateSetup<K extends keyof SetupData>(key: K, val: SetupData[K]) {
     setSetup((p) => ({ ...p, [key]: val }));
-    setSetupErrors((p) => { const n = { ...p }; delete n[key]; return n; });
+    setSetupErrors((p) => {
+      const n = { ...p };
+      delete n[key];
+      return n;
+    });
   }
-
   function updateRound<K extends keyof RoundForm>(key: K, val: string) {
     setRoundForm((p) => ({ ...p, [key]: val }));
-    setRoundErrors((p) => { const n = { ...p }; delete n[key]; return n; });
+    setRoundErrors((p) => {
+      const n = { ...p };
+      delete n[key];
+      return n;
+    });
   }
-
   function handleCompSelect(type: "teamComp" | "enemyComp", agent: string) {
     setSetup((prev) => {
       const arr = [...prev[type]];
@@ -1210,147 +2818,235 @@ export default function Home() {
       else if (arr.length < 5) arr.push(agent);
       return { ...prev, [type]: arr };
     });
-    setSetupErrors((p) => { const n = { ...p }; delete n[type]; return n; });
+    setSetupErrors((p) => {
+      const n = { ...p };
+      delete n[type];
+      return n;
+    });
   }
-
   function loadRoundAtIndex(idx: number) {
-    setRoundIdx(idx); setRoundErrors({}); setRoundMode("input"); setCurrentFeedback(null); setCurrentResult(null); setSurvived(false);
+    setRoundIdx(idx);
+    setRoundErrors({});
+    setRoundMode("input");
+    setCurrentFeedback(null);
+    setCurrentResult(null);
+    setSurvived(false);
     if (idx < rounds.length) {
-      const r = rounds[idx]; setSurvived(r.survived);
-      setRoundForm(r.skipped ? { deathLocation: "", enemyCount: "", yourNote: "" } : { deathLocation: r.deathLocation, enemyCount: r.enemyCount, yourNote: r.yourNote });
+      const r = rounds[idx];
+      setSurvived(r.survived);
+      setRoundForm(
+        r.skipped
+          ? { deathLocation: "", enemyCount: "", yourNote: "" }
+          : {
+              deathLocation: r.deathLocation,
+              enemyCount: r.enemyCount,
+              yourNote: r.yourNote,
+            },
+      );
     } else setRoundForm({ deathLocation: "", enemyCount: "", yourNote: "" });
   }
-
   function saveRoundData(rd: RoundData) {
-    setRounds((prev) => { const copy = [...prev]; if (roundIdx < copy.length) copy[roundIdx] = rd; else copy.push(rd); return copy; });
+    setRounds((prev) => {
+      const c = [...prev];
+      if (roundIdx < c.length) c[roundIdx] = rd;
+      else c.push(rd);
+      return c;
+    });
   }
-
   function getRoundsForReport(extra?: RoundData): RoundData[] {
-    const copy = [...rounds]; if (extra) { if (roundIdx < copy.length) copy[roundIdx] = extra; else copy.push(extra); } return copy;
+    const c = [...rounds];
+    if (extra) {
+      if (roundIdx < c.length) c[roundIdx] = extra;
+      else c.push(extra);
+    }
+    return c;
   }
-
   function goToScoreInput(extraRound?: RoundData) {
-    if (extraRound) { setPendingFinishRound(extraRound); saveRoundData(extraRound); } else setPendingFinishRound(null);
-    setMatchScore({ yours: "", enemy: "" }); setScreen("scoreInput");
+    if (extraRound) {
+      setPendingFinishRound(extraRound);
+      saveRoundData(extraRound);
+    } else setPendingFinishRound(null);
+    setMatchScore({ yours: "", enemy: "" });
+    setScreen("scoreInput");
   }
-
   function finishWithScore(yours: string, enemy: string) {
     const sc: MatchScore = { yours, enemy };
-    const allRounds = getRoundsForReport(pendingFinishRound ?? undefined);
-    if (pendingFinishRound) setRounds(allRounds);
-    const rep = genMatchReport(setup, allRounds, lang ?? "tr", sc);
+    const all = getRoundsForReport(pendingFinishRound ?? undefined);
+    if (pendingFinishRound) setRounds(all);
+    const rep = genMatchReport(setup, all, lang ?? "tr", sc);
     setReport(rep);
-    saveReportToDb(rep, setup, allRounds, sc);
+    saveReportToDb(rep, setup, all, sc);
     clearDraft();
     setScreen("report");
   }
-
-  function handleLangToggle() { if (lang === "tr") { setLang("en"); saveLang("en"); } else { setLang("tr"); saveLang("tr"); } }
-
+  function handleLangToggle() {
+    const nl = lang === "tr" ? "en" : "tr";
+    setLang(nl);
+    saveLang(nl);
+  }
   function resetForNewMatch() {
-    setSetup({ map: "", agent: "", side: "", teamComp: [], enemyComp: [], unknownEnemyComp: false });
-    setRounds([]); setRoundIdx(0); setReport(null); setRoundMode("input"); setCurrentFeedback(null); setCurrentResult(null); setSurvived(false); setSetupStep("mapAgent"); clearDraft(); setScreen("setup");
-  }
-
-  const SETUP_STEPS: SetupStep[] = ["mapAgent", "sideComp", "confirm"];
-
-  function getStepLabel(step: SetupStep): string {
-    return ({ mapAgent: l.stepMapAgent, sideComp: l.stepSideComp, confirm: l.stepConfirm })[step];
-  }
-
-  // Win rate calc
-  const winRate = savedReports.length > 0 ? Math.round(savedReports.filter(r => r.won).length / savedReports.length * 100) : 0;
-
-  // Most common death spot across all saved reports
-  const allDeathSpots: Record<string, number> = {};
-  savedReports.forEach(r => {
-    r.rounds.filter(rd => !rd.skipped && !rd.survived && rd.deathLocation).forEach(rd => {
-      allDeathSpots[rd.deathLocation] = (allDeathSpots[rd.deathLocation] || 0) + 1;
+    setSetup({
+      map: "",
+      agent: "",
+      side: "",
+      teamComp: [],
+      enemyComp: [],
+      unknownEnemyComp: false,
     });
-  });
-  const topDeathSpot = Object.entries(allDeathSpots).sort((a, b) => b[1] - a[1])[0];
-
-  /* ════════════════════════════════════════════
-     DASHBOARD
-     ════════════════════════════════════════════ */
-
-  if (screen === "dashboard") {
+    setRounds([]);
+    setRoundIdx(0);
+    setReport(null);
+    setRoundMode("input");
+    setCurrentFeedback(null);
+    setCurrentResult(null);
+    setSurvived(false);
+    setSetupStep("mapAgent");
+    clearDraft();
+    setScreen("setup");
+  }
+  const SETUP_STEPS: SetupStep[] = ["mapAgent", "sideComp", "confirm"];
+  function getStepLabel(step: SetupStep): string {
+    return {
+      mapAgent: l.stepMapAgent,
+      sideComp: l.stepSideComp,
+      confirm: l.stepConfirm,
+    }[step];
+  }
+  const navProps = {
+    user,
+    lang,
+    onSignOut: handleSignOut,
+    onLogoClick: () => setScreen("landing"),
+    onLangToggle: handleLangToggle,
+    signOutLabel: l.authSignOut,
+    onHome: () => setScreen("landing"),
+    homeLabel: l.homePage,
+  };
+  /* DASHBOARD */
+  if (screen === "dashboard")
     return (
       <main className={ds.pageBg}>
         <AmbientBg />
-        <Navbar user={user} lang={lang} onSignOut={handleSignOut} onLogoClick={() => setScreen("dashboard")} onLangToggle={handleLangToggle} signOutLabel={l.authSignOut} />
+        <Navbar {...navProps} />
         <div className="relative z-10 mx-auto max-w-3xl px-4 pt-20 pb-12 space-y-6">
-
-          {/* Big CTA */}
-          <button onClick={resetForNewMatch} className={`w-full group ${ds.card} ${ds.cardHover} overflow-hidden`}>
+          <button
+            onClick={resetForNewMatch}
+            className={`w-full group ${ds.card} ${ds.cardHover} overflow-hidden`}
+          >
             <div className="p-5 sm:p-6 flex items-center gap-4">
-              <div className="shrink-0 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-600 to-blue-600 shadow-md shadow-cyan-900/30 text-xl font-bold text-white group-hover:scale-105 transition-transform">+</div>
-              <div className="text-left">
-                <h2 className="text-lg font-bold text-white">{l.dashNewMatch}</h2>
-                <p className="text-sm text-neutral-500 mt-0.5">{l.dashNewMatchDesc}</p>
+              <div className="shrink-0 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 shadow-lg shadow-blue-900/20 text-xl font-bold text-white group-hover:scale-105 transition-transform duration-300">
+                +
               </div>
-              <div className="ml-auto text-neutral-600 group-hover:text-cyan-400 transition-colors text-lg">→</div>
+              <div className="text-left">
+                <h2 className="text-lg font-bold text-white">
+                  {l.dashNewMatch}
+                </h2>
+                <p className="text-sm text-neutral-500 mt-0.5">
+                  {l.dashNewMatchDesc}
+                </p>
+              </div>
+              <div className="ml-auto text-neutral-600 group-hover:text-blue-400 transition-colors duration-200 text-lg">
+                {IC.arrow}
+              </div>
             </div>
           </button>
-
-          {/* Stats Row */}
           <div className="grid grid-cols-3 gap-3">
             <StatCard
               label={l.dashWinRate}
-              value={savedReports.length > 0 ? `${winRate}%` : "—"}
-              color={winRate >= 50 ? "text-emerald-400" : winRate > 0 ? "text-red-400" : "text-neutral-600"}
+              value={savedReports.length > 0 ? `${winRate}%` : "\u2014"}
+              color={
+                winRate >= 50
+                  ? "text-emerald-400"
+                  : winRate > 0
+                    ? "text-red-400"
+                    : "text-neutral-600"
+              }
             />
             <StatCard
               label={l.dashMatches}
               value={String(savedReports.length)}
-              sub={savedReports.length > 0 ? `${savedReports.filter(r => r.won).length}W ${savedReports.filter(r => !r.won).length}L` : undefined}
+              sub={
+                savedReports.length > 0
+                  ? `${savedReports.filter((r) => r.won).length}W ${savedReports.filter((r) => !r.won).length}L`
+                  : undefined
+              }
             />
             <StatCard
               label={l.dashFreqDeath}
-              value={topDeathSpot ? topDeathSpot[0] : "—"}
+              value={topDeathSpot ? topDeathSpot[0] : "\u2014"}
               color={topDeathSpot ? "text-amber-400" : "text-neutral-600"}
               sub={topDeathSpot ? `${topDeathSpot[1]}x` : l.dashNoStats}
             />
           </div>
-
-          {/* Recent */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">{l.dashRecentTitle}</h3>
+              <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">
+                {l.dashRecentTitle}
+              </h3>
               {savedReports.length > 0 && (
-                <button onClick={() => setScreen("history")} className="text-[11px] font-semibold text-cyan-400 transition hover:text-cyan-300">{l.dashHistory} →</button>
+                <button
+                  onClick={() => setScreen("history")}
+                  className="text-[11px] font-semibold text-blue-400 transition hover:text-blue-300"
+                >
+                  {l.dashHistory} {IC.arrow}
+                </button>
               )}
             </div>
-
             {historyLoading ? (
               <div className={`${ds.card} p-8 flex justify-center`}>
-                <div className="h-5 w-5 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent" />
+                <div className="h-5 w-5 animate-spin rounded-full border-2 border-blue-500 border-t-transparent" />
               </div>
             ) : savedReports.length === 0 ? (
-              <div className={`${ds.card} p-10 text-center relative overflow-hidden`}>
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-500/[0.03] to-transparent" />
-                <AimloLogo size={48} className="relative mx-auto opacity-20 mb-4" />
-                <p className="relative text-sm font-semibold text-neutral-400">{l.dashNoData}</p>
-                <p className="relative mt-1 text-xs text-neutral-600">{l.dashNoDataDesc}</p>
+              <div className={`${ds.card} p-10 text-center`}>
+                <AimloLogo size={48} className="mx-auto opacity-10 mb-4" />
+                <p className="text-sm font-semibold text-neutral-400">
+                  {l.dashNoData}
+                </p>
+                <p className="mt-1 text-xs text-neutral-600">
+                  {l.dashNoDataDesc}
+                </p>
               </div>
             ) : (
-              <div className="space-y-2.5">
+              <div className="space-y-2">
                 {savedReports.slice(0, 5).map((entry) => (
-                  <button key={entry.id} onClick={() => { setViewingReport(entry); setScreen("reportDetail"); }}
-                    className={`w-full text-left ${ds.card} ${ds.cardHover} p-4 flex items-center gap-4`}>
-                    <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-black/30 ring-1 ring-white/[0.06]">
-                      <img src={MAP_IMAGES[entry.map]} alt={entry.map} className="h-full w-full object-cover opacity-80" loading="lazy" />
+                  <button
+                    key={entry.id}
+                    onClick={() => {
+                      setViewingReport(entry);
+                      setScreen("reportDetail");
+                    }}
+                    className={`w-full text-left ${ds.card} ${ds.cardHover} p-4 flex items-center gap-4`}
+                  >
+                    <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-black/20 ring-1 ring-white/[0.06]">
+                      <img
+                        src={MAP_IMAGES[entry.map]}
+                        alt={entry.map}
+                        className="h-full w-full object-cover opacity-75"
+                        loading="lazy"
+                      />
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold text-white">{entry.map}</span>
-                        <span className="text-xs text-neutral-500">{entry.agent}</span>
+                        <span className="text-sm font-bold text-white">
+                          {entry.map}
+                        </span>
+                        <span className="text-xs text-neutral-500">
+                          {entry.agent}
+                        </span>
                       </div>
-                      <p className="mt-0.5 text-[11px] text-neutral-600">{entry.date}</p>
+                      <p className="mt-0.5 text-[11px] text-neutral-600">
+                        {entry.date}
+                      </p>
                     </div>
                     <div className="text-right shrink-0">
-                      <p className="text-sm font-bold text-white">{entry.score}</p>
-                      <p className={`text-[10px] font-bold uppercase ${entry.won ? "text-emerald-400" : "text-red-400"}`}>{entry.won ? l.victory : l.defeat}</p>
+                      <p className="text-sm font-bold text-white">
+                        {entry.score}
+                      </p>
+                      <p
+                        className={`text-[10px] font-bold uppercase ${entry.won ? "text-emerald-400" : "text-red-400"}`}
+                      >
+                        {entry.won ? l.victory : l.defeat}
+                      </p>
                     </div>
                   </button>
                 ))}
@@ -1360,49 +3056,89 @@ export default function Home() {
         </div>
       </main>
     );
-  }
-
-  /* ════════════════════════════════════════════
-     HISTORY
-     ════════════════════════════════════════════ */
-
-  if (screen === "history") {
+  /* HISTORY */
+  if (screen === "history")
     return (
       <main className={ds.pageBg}>
         <AmbientBg />
-        <Navbar user={user} lang={lang} onSignOut={handleSignOut} onLogoClick={() => setScreen("dashboard")} onLangToggle={handleLangToggle} signOutLabel={l.authSignOut} />
+        <Navbar {...navProps} />
         <div className="relative z-10 mx-auto max-w-3xl px-4 pt-20 pb-12 space-y-6">
           <div className="flex items-center gap-3">
-            <button onClick={() => setScreen("dashboard")} className="rounded-lg border border-white/[0.08] bg-white/[0.05] px-3 py-1.5 text-xs text-neutral-400 transition hover:text-white hover:border-white/[0.15]">← {l.back}</button>
+            <button
+              onClick={() => setScreen("dashboard")}
+              className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 text-xs text-neutral-400 transition hover:text-white"
+            >
+              {"\u2190"} {l.back}
+            </button>
             <h2 className="text-lg font-bold text-white">{l.historyTitle}</h2>
-            {savedReports.length > 0 && <span className="ml-auto text-xs text-neutral-500">{l.dashWinRate}: <span className={winRate >= 50 ? "text-emerald-400 font-bold" : "text-red-400 font-bold"}>{winRate}%</span> · {savedReports.length} {l.dashMatches.toLowerCase()}</span>}
+            {savedReports.length > 0 && (
+              <span className="ml-auto text-xs text-neutral-500">
+                {l.dashWinRate}:{" "}
+                <span
+                  className={
+                    winRate >= 50
+                      ? "text-emerald-400 font-bold"
+                      : "text-red-400 font-bold"
+                  }
+                >
+                  {winRate}%
+                </span>{" "}
+                {IC.dot} {savedReports.length} {l.dashMatches.toLowerCase()}
+              </span>
+            )}
           </div>
           {savedReports.length === 0 ? (
-            <div className={`${ds.card} p-12 text-center relative overflow-hidden`}>
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-500/[0.03] to-transparent" />
-              <AimloLogo size={48} className="relative mx-auto opacity-20 mb-4" />
-              <p className="relative text-sm text-neutral-400">{l.historyEmpty}</p>
-              <p className="relative mt-1 text-xs text-neutral-600">{l.historyEmptyDesc}</p>
+            <div className={`${ds.card} p-12 text-center`}>
+              <AimloLogo size={48} className="mx-auto opacity-10 mb-4" />
+              <p className="text-sm text-neutral-400">{l.historyEmpty}</p>
+              <p className="mt-1 text-xs text-neutral-600">
+                {l.historyEmptyDesc}
+              </p>
             </div>
           ) : (
-            <div className="space-y-2.5">
+            <div className="space-y-2">
               {savedReports.map((entry) => (
-                <button key={entry.id} onClick={() => { setViewingReport(entry); setScreen("reportDetail"); }}
-                  className={`w-full text-left ${ds.card} ${ds.cardHover} p-4 sm:p-5 flex items-center gap-4`}>
-                  <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-black/30 ring-1 ring-white/[0.06]">
-                    <img src={MAP_IMAGES[entry.map]} alt={entry.map} className="h-full w-full object-cover opacity-80" loading="lazy" />
+                <button
+                  key={entry.id}
+                  onClick={() => {
+                    setViewingReport(entry);
+                    setScreen("reportDetail");
+                  }}
+                  className={`w-full text-left ${ds.card} ${ds.cardHover} p-4 sm:p-5 flex items-center gap-4`}
+                >
+                  <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-black/20 ring-1 ring-white/[0.06]">
+                    <img
+                      src={MAP_IMAGES[entry.map]}
+                      alt={entry.map}
+                      className="h-full w-full object-cover opacity-75"
+                      loading="lazy"
+                    />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-sm font-bold text-white">{entry.map}</span>
-                      <span className="rounded-md bg-white/[0.06] px-2 py-0.5 text-[10px] font-medium text-neutral-400">{entry.agent}</span>
-                      <span className="rounded-md bg-white/[0.06] px-2 py-0.5 text-[10px] text-neutral-500">{entry.side === "attack" ? l.sideAttack : l.sideDefense}</span>
+                      <span className="text-sm font-bold text-white">
+                        {entry.map}
+                      </span>
+                      <span className="rounded-md bg-white/[0.05] px-2 py-0.5 text-[10px] font-medium text-neutral-400">
+                        {entry.agent}
+                      </span>
+                      <span className="rounded-md bg-white/[0.05] px-2 py-0.5 text-[10px] text-neutral-500">
+                        {entry.side === "attack" ? l.sideAttack : l.sideDefense}
+                      </span>
                     </div>
-                    <p className="mt-1 text-[11px] text-neutral-600">{entry.date}</p>
+                    <p className="mt-1 text-[11px] text-neutral-600">
+                      {entry.date}
+                    </p>
                   </div>
                   <div className="text-right shrink-0">
-                    <p className="text-lg font-extrabold text-white">{entry.score}</p>
-                    <p className={`text-[10px] font-bold uppercase ${entry.won ? "text-emerald-400" : "text-red-400"}`}>{entry.won ? l.victory : l.defeat}</p>
+                    <p className="text-lg font-extrabold text-white">
+                      {entry.score}
+                    </p>
+                    <p
+                      className={`text-[10px] font-bold uppercase ${entry.won ? "text-emerald-400" : "text-red-400"}`}
+                    >
+                      {entry.won ? l.victory : l.defeat}
+                    </p>
                   </div>
                 </button>
               ))}
@@ -1411,86 +3147,147 @@ export default function Home() {
         </div>
       </main>
     );
-  }
-
-  /* ════════════════════════════════════════════
-     REPORT DETAIL (from history)
-     ════════════════════════════════════════════ */
-
+  /* REPORT DETAIL */
   if (screen === "reportDetail" && viewingReport) {
     const vr = viewingReport;
     return (
       <main className={`${ds.pageBg} relative`}>
         <MapBg map={vr.map} />
-        <Navbar user={user} lang={lang} onSignOut={handleSignOut} onLogoClick={() => setScreen("dashboard")} onLangToggle={handleLangToggle} signOutLabel={l.authSignOut} />
+        <Navbar {...navProps} />
         <div className="relative z-10 mx-auto max-w-lg px-4 pt-20 pb-12 space-y-6">
           <div className="flex items-center gap-3">
-            <button onClick={() => setScreen("history")} className="rounded-lg border border-white/[0.08] bg-white/[0.05] px-3 py-1.5 text-xs text-neutral-400 transition hover:text-white hover:border-white/[0.15]">← {l.back}</button>
+            <button
+              onClick={() => setScreen("history")}
+              className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 text-xs text-neutral-400 transition hover:text-white"
+            >
+              {"\u2190"} {l.back}
+            </button>
             <h2 className="text-lg font-bold text-white">{l.reportTitle}</h2>
           </div>
-
-          {/* Score Hero */}
           <div className={`${ds.card} overflow-hidden`}>
             <div className="relative p-6">
-              <div className="pointer-events-none absolute inset-0 opacity-[0.15]"><img src={MAP_IMAGES[vr.map]} alt="" className="h-full w-full object-cover" /></div>
+              <div className="pointer-events-none absolute inset-0 opacity-[0.12]">
+                <img
+                  src={MAP_IMAGES[vr.map]}
+                  alt=""
+                  className="h-full w-full object-cover"
+                />
+              </div>
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
               <div className="relative flex items-end justify-between">
                 <div>
                   <p className={ds.label}>{l.matchResult}</p>
-                  <p className="mt-1 text-4xl font-extrabold tracking-tight text-white">{vr.score}</p>
-                  <p className={`mt-1 text-xs font-bold uppercase ${vr.won ? "text-emerald-400" : "text-red-400"}`}>{vr.won ? l.victory : l.defeat}</p>
+                  <p className="mt-1 text-4xl font-extrabold tracking-tight text-white">
+                    {vr.score}
+                  </p>
+                  <p
+                    className={`mt-1 text-xs font-bold uppercase ${vr.won ? "text-emerald-400" : "text-red-400"}`}
+                  >
+                    {vr.won ? l.victory : l.defeat}
+                  </p>
                 </div>
                 <div className="text-right space-y-1">
-                  <p className="text-[11px] text-neutral-500">{vr.map} · {vr.agent}</p>
+                  <p className="text-[11px] text-neutral-500">
+                    {vr.map} {IC.dot} {vr.agent}
+                  </p>
                   <p className="text-[11px] text-neutral-600">{vr.date}</p>
-                  <p className="text-lg font-extrabold text-cyan-400">{vr.winPct}%</p>
+                  <p className="text-lg font-extrabold text-blue-400">
+                    {vr.winPct}%
+                  </p>
                 </div>
               </div>
               <div className="relative mt-4 h-2 w-full overflow-hidden rounded-full bg-white/[0.06]">
-                <div className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-emerald-500 transition-all" style={{ width: `${vr.winPct}%` }} />
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 transition-all"
+                  style={{ width: `${vr.winPct}%` }}
+                />
               </div>
               <div className="relative mt-3 grid grid-cols-4 gap-2 text-center text-[10px] font-bold uppercase tracking-wider">
-                <div><span className="text-neutral-500">{l.enteredRounds}</span><br/><span className="text-white text-sm">{vr.totalRounds}</span></div>
-                <div><span className="text-neutral-500">{l.roundsWon}</span><br/><span className="text-emerald-400 text-sm">{vr.roundsWon}</span></div>
-                <div><span className="text-neutral-500">{l.roundsLost}</span><br/><span className="text-red-400 text-sm">{vr.roundsLost}</span></div>
-                <div><span className="text-neutral-500">{l.roundsSkipped}</span><br/><span className="text-neutral-400 text-sm">{vr.roundsSkipped}</span></div>
+                <div>
+                  <span className="text-neutral-500">{l.enteredRounds}</span>
+                  <br />
+                  <span className="text-white text-sm">{vr.totalRounds}</span>
+                </div>
+                <div>
+                  <span className="text-neutral-500">{l.roundsWon}</span>
+                  <br />
+                  <span className="text-emerald-400 text-sm">
+                    {vr.roundsWon}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-neutral-500">{l.roundsLost}</span>
+                  <br />
+                  <span className="text-red-400 text-sm">{vr.roundsLost}</span>
+                </div>
+                <div>
+                  <span className="text-neutral-500">{l.roundsSkipped}</span>
+                  <br />
+                  <span className="text-neutral-400 text-sm">
+                    {vr.roundsSkipped}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-
           {vr.rounds.length > 0 && (
             <div className="flex flex-wrap gap-1.5 justify-center">
               {vr.rounds.map((r, i) => (
-                <span key={i} className={`rounded-lg px-2 py-1 text-[10px] font-bold uppercase border ${r.result === "win" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" : "bg-red-500/10 text-red-400 border-red-500/20"} ${r.skipped ? "opacity-40" : ""} ${r.survived ? "border-emerald-400/40 ring-1 ring-emerald-400/20" : ""}`}>
-                  R{r.roundNumber} {r.result === "win" ? l.wonLabel : l.lostLabel}{r.skipped ? ` ${l.skippedLabel}` : ""}{r.survived ? " ♡" : ""}
+                <span
+                  key={i}
+                  className={`rounded-lg px-2 py-1 text-[10px] font-bold uppercase border ${r.result === "win" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/10" : "bg-red-500/10 text-red-400 border-red-500/10"} ${r.skipped ? "opacity-40" : ""}`}
+                >
+                  R{r.roundNumber}{" "}
+                  {r.result === "win" ? l.wonLabel : l.lostLabel}
+                  {r.skipped ? l.skippedLabel : ""}
                 </span>
               ))}
             </div>
           )}
-
           <div className="space-y-4">
-            <ReportCard icon="◈" color="text-cyan-400" label={l.overallSummary} text={vr.summary} />
-            <ReportCard icon="✕" color="text-red-400" label={l.mainRecurringMistake} text={vr.mistake} />
-            <ReportCard icon="◎" color="text-amber-400" label={l.enemyTendencies} text={vr.tendencies} />
-            <ReportCard icon="▸" color="text-emerald-400" label={l.suggestedAdjustment} text={vr.adjustment} />
+            <ReportCard
+              icon={IC.diamond}
+              color="text-cyan-400"
+              label={l.overallSummary}
+              text={vr.summary}
+            />
+            <ReportCard
+              icon={IC.cross}
+              color="text-red-400"
+              label={l.mainRecurringMistake}
+              text={vr.mistake}
+            />
+            <ReportCard
+              icon={IC.circle}
+              color="text-amber-400"
+              label={l.enemyTendencies}
+              text={vr.tendencies}
+            />
+            <ReportCard
+              icon={IC.play}
+              color="text-emerald-400"
+              label={l.suggestedAdjustment}
+              text={vr.adjustment}
+            />
           </div>
-
           <div className="space-y-3">
-            <button onClick={resetForNewMatch} className={ds.btnPrimary}>{l.newMatch}</button>
-            <button onClick={() => setScreen("dashboard")} className={ds.btnSecondary}>{l.returnToMenu}</button>
+            <button onClick={resetForNewMatch} className={ds.btnPrimary}>
+              {l.newMatch}
+            </button>
+            <button
+              onClick={() => setScreen("dashboard")}
+              className={ds.btnSecondary}
+            >
+              {l.returnToMenu}
+            </button>
           </div>
         </div>
       </main>
     );
   }
-
-  /* ════════════════════════════════════════════
-     SETUP — 3 SCREENS
-     ════════════════════════════════════════════ */
-
+  /* SETUP */
   if (screen === "setup") {
     const stepIdx = SETUP_STEPS.indexOf(setupStep);
-
     function nextStep() {
       const e: FormErrors = {};
       if (setupStep === "mapAgent") {
@@ -1500,339 +3297,727 @@ export default function Home() {
       if (setupStep === "sideComp") {
         if (!setup.side) e.side = l.required;
         if (setup.teamComp.filter(Boolean).length < 5) e.teamComp = l.selectAll;
-        if (!setup.unknownEnemyComp && setup.enemyComp.filter(Boolean).length < 5) e.enemyComp = l.selectAll;
+        if (
+          !setup.unknownEnemyComp &&
+          setup.enemyComp.filter(Boolean).length < 5
+        )
+          e.enemyComp = l.selectAll;
       }
       setSetupErrors(e);
       if (Object.keys(e).length > 0) return;
-      if (stepIdx < SETUP_STEPS.length - 1) { setSetupStep(SETUP_STEPS[stepIdx + 1]); setSetupErrors({}); }
-      else {
-        setRounds([]); setRoundIdx(0); setRoundForm({ deathLocation: "", enemyCount: "", yourNote: "" }); setRoundErrors({}); setRoundMode("input"); setCurrentFeedback(null); setCurrentResult(null); setSurvived(false); setScreen("round");
+      if (stepIdx < SETUP_STEPS.length - 1) {
+        setSetupStep(SETUP_STEPS[stepIdx + 1]);
+        setSetupErrors({});
+      } else {
+        setRounds([]);
+        setRoundIdx(0);
+        setRoundForm({ deathLocation: "", enemyCount: "", yourNote: "" });
+        setRoundErrors({});
+        setRoundMode("input");
+        setCurrentFeedback(null);
+        setCurrentResult(null);
+        setSurvived(false);
+        setScreen("round");
       }
     }
-
     function prevStep() {
-      if (stepIdx > 0) { setSetupStep(SETUP_STEPS[stepIdx - 1]); setSetupErrors({}); } else setScreen("dashboard");
+      if (stepIdx > 0) {
+        setSetupStep(SETUP_STEPS[stepIdx - 1]);
+        setSetupErrors({});
+      } else setScreen("dashboard");
     }
-
     return (
       <main className={`${ds.pageBg} relative`}>
         {setup.map ? <MapBg map={setup.map} /> : <AmbientBg />}
-        <Navbar user={user} lang={lang} onSignOut={handleSignOut} onLogoClick={() => setScreen("dashboard")} onLangToggle={handleLangToggle} signOutLabel={l.authSignOut} />
+        <Navbar {...navProps} />
         <div className="relative z-10 mx-auto max-w-2xl px-4 pt-20 pb-12 space-y-6">
-          <div className="text-center space-y-1"><h2 className="text-2xl font-bold text-white">{l.setupTitle}</h2></div>
-
-          {/* Steps */}
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-white">{l.setupTitle}</h2>
+          </div>
           <div className="flex items-center justify-center gap-1">
             {SETUP_STEPS.map((s, i) => (
               <div key={s} className="flex items-center gap-1">
-                <button onClick={() => { if (i <= stepIdx) { setSetupStep(s); setSetupErrors({}); } }}
-                  className={`rounded-lg px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider transition ${
-                    i === stepIdx ? "bg-cyan-500/20 text-cyan-400 ring-1 ring-cyan-500/50" : i < stepIdx ? "bg-white/[0.06] text-neutral-400 cursor-pointer hover:text-white" : "bg-white/[0.02] text-neutral-700"
-                  }`}>{getStepLabel(s)}</button>
-                {i < SETUP_STEPS.length - 1 && <span className="text-neutral-700 text-xs">›</span>}
+                <button
+                  onClick={() => {
+                    if (i <= stepIdx) {
+                      setSetupStep(s);
+                      setSetupErrors({});
+                    }
+                  }}
+                  className={`rounded-lg px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider transition ${i === stepIdx ? "bg-blue-500/12 text-blue-400 ring-1 ring-blue-500/30" : i < stepIdx ? "bg-white/[0.05] text-neutral-400 cursor-pointer hover:text-white" : "bg-white/[0.02] text-neutral-700"}`}
+                >
+                  {getStepLabel(s)}
+                </button>
+                {i < SETUP_STEPS.length - 1 && (
+                  <span className="text-neutral-700 text-xs">{IC.mid}</span>
+                )}
               </div>
             ))}
           </div>
-
           <div className={`${ds.card} ${ds.cardInner} space-y-6`}>
-            {setupStep === "mapAgent" && (<>
-              <div>
-                <Label text={l.map} />
-                <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-4">
-                  {MAPS.map((m) => (
-                    <button key={m} onClick={() => updateSetup("map", m)}
-                      className={`relative overflow-hidden rounded-xl border py-4 text-sm font-medium transition-all ${
-                        setup.map === m ? "border-cyan-500 bg-cyan-500/15 text-white ring-1 ring-cyan-500/50 shadow-lg shadow-cyan-500/10" : "border-[#1e2a3a] bg-[#0d1117] text-neutral-400 hover:border-[#2d4a6f]/60 hover:text-white"
-                      }`}>
-                      {setup.map === m && <div className="pointer-events-none absolute inset-0 opacity-30"><img src={MAP_IMAGES[m]} alt="" className="h-full w-full object-cover" /></div>}
-                      <span className="relative">{m}</span>
-                    </button>
-                  ))}
-                </div>
-                <InlineError msg={setupErrors.map} />
-              </div>
-
-              <div className="border-t border-white/[0.06] pt-6">
-                <Label text={l.agent} />
-                {setup.agent && (
-                  <div className="mb-4 flex items-center gap-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 px-4 py-3">
-                    <div className="h-10 w-10 overflow-hidden rounded-xl bg-black/30 ring-1 ring-cyan-500/30"><img src={agentImgUrl(setup.agent)} alt={setup.agent} className="h-full w-full object-cover" loading="lazy" /></div>
-                    <div><span className="text-sm font-bold text-white">{setup.agent}</span><p className="text-[10px] text-cyan-400">{l.selected}</p></div>
+            {setupStep === "mapAgent" && (
+              <>
+                <div>
+                  <Label text={l.map} />
+                  <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-4">
+                    {MAPS.map((m) => (
+                      <button
+                        key={m}
+                        onClick={() => updateSetup("map", m)}
+                        className={`relative overflow-hidden rounded-xl border py-4 text-sm font-medium transition-all duration-200 ${setup.map === m ? "border-blue-500/50 bg-blue-500/10 text-white ring-1 ring-blue-500/30 shadow-lg shadow-blue-500/5" : "border-white/[0.06] bg-[#070c16] text-neutral-400 hover:border-white/[0.1] hover:text-white"}`}
+                      >
+                        {setup.map === m && (
+                          <div className="pointer-events-none absolute inset-0 opacity-20">
+                            <img
+                              src={MAP_IMAGES[m]}
+                              alt=""
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
+                        )}
+                        <span className="relative">{m}</span>
+                      </button>
+                    ))}
                   </div>
-                )}
-                <div className="space-y-5">
-                  {Object.entries(AGENT_GROUPS).map(([group, agents]) => (
-                    <div key={group}>
-                      <p className="mb-2.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-600">{AGENT_GROUP_LABELS[group][lang]}</p>
-                      <div className="grid grid-cols-4 gap-2 sm:grid-cols-6">
-                        {agents.map((a) => <AgentMiniCard key={a} name={a} selected={setup.agent === a} disabled={false} onClick={() => updateSetup("agent", setup.agent === a ? "" : a)} />)}
-                      </div>
-                    </div>
-                  ))}
+                  <InlineError msg={setupErrors.map} />
                 </div>
-                <InlineError msg={setupErrors.agent} />
-              </div>
-            </>)}
-
-            {setupStep === "sideComp" && (<>
-              <div>
-                <Label text={l.side} />
-                <div className="flex gap-4">
-                  {([["attack", l.sideAttack, "border-orange-500/40 bg-orange-500/10"], ["defense", l.sideDefense, "border-sky-500/40 bg-sky-500/10"]] as const).map(([val, label, activeStyle]) => (
-                    <button key={val} onClick={() => updateSetup("side", val)}
-                      className={`flex-1 rounded-xl border py-5 text-sm font-bold transition-all ${setup.side === val ? `${activeStyle} text-white ring-1 ring-cyan-500/50 shadow-lg` : "border-[#1e2a3a] bg-[#0d1117] text-neutral-400 hover:border-[#2d4a6f]/60 hover:text-white"}`}>
-                      {label}
-                    </button>
-                  ))}
-                </div>
-                <InlineError msg={setupErrors.side} />
-              </div>
-
-              <div className="border-t border-white/[0.06] pt-6 space-y-5">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-400">{l.compTitle}</h2>
-                  <label className="flex cursor-pointer items-center gap-2 text-[11px] text-neutral-500">
-                    <input type="checkbox" checked={setup.unknownEnemyComp} onChange={(e) => updateSetup("unknownEnemyComp", e.target.checked)} className="h-3.5 w-3.5 rounded border-white/20 bg-white/5 accent-cyan-500" />
-                    {l.unknownEnemy}
-                  </label>
-                </div>
-
-                <div className="flex gap-4 justify-between">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between mb-2">
-                      <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-400">{l.yourTeam}</p>
-                      <span className="text-[9px] text-neutral-600">{l.slotsRemaining(5 - setup.teamComp.length)}</span>
-                    </div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {[0,1,2,3,4].map((i) => <CompSlot key={i} agent={setup.teamComp[i]||""} index={i} locked={i===0 && setup.teamComp[0]===setup.agent && !!setup.agent} onRemove={() => { if(i===0 && setup.teamComp[0]===setup.agent) return; const c=[...setup.teamComp]; c.splice(i,1); updateSetup("teamComp",c); }} />)}
-                    </div>
-                    <InlineError msg={setupErrors.teamComp} />
-                  </div>
-                  {!setup.unknownEnemyComp && (
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between mb-2">
-                        <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-red-400">{l.enemyTeam}</p>
-                        <span className="text-[9px] text-neutral-600">{l.slotsRemaining(5 - setup.enemyComp.length)}</span>
+                <div className="border-t border-white/[0.06] pt-6">
+                  <Label text={l.agent} />
+                  {setup.agent && (
+                    <div className="mb-4 flex items-center gap-3 rounded-xl bg-blue-500/[0.06] border border-blue-500/15 px-4 py-3">
+                      <div className="h-10 w-10 overflow-hidden rounded-xl bg-black/20 ring-1 ring-blue-500/15">
+                        <img
+                          src={agentImgUrl(setup.agent)}
+                          alt={setup.agent}
+                          className="h-full w-full object-cover"
+                          loading="lazy"
+                        />
                       </div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {[0,1,2,3,4].map((i) => <CompSlot key={i} agent={setup.enemyComp[i]||""} index={i} onRemove={() => { const c=[...setup.enemyComp]; c.splice(i,1); updateSetup("enemyComp",c); }} />)}
+                      <div>
+                        <span className="text-sm font-bold text-white">
+                          {setup.agent}
+                        </span>
+                        <p className="text-[10px] text-blue-400">
+                          {l.selected}
+                        </p>
                       </div>
-                      <InlineError msg={setupErrors.enemyComp} />
                     </div>
                   )}
-                </div>
-
-                {!setup.unknownEnemyComp && (
-                  <div className="flex gap-2 justify-center">
-                    <button onClick={() => setCompTarget("team")} className={`rounded-lg px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider transition ${compTarget === "team" ? "bg-cyan-500/20 text-cyan-400 ring-1 ring-cyan-500/40" : "bg-white/[0.06] text-neutral-500 hover:text-white"}`}>+ {l.yourTeam}</button>
-                    <button onClick={() => setCompTarget("enemy")} className={`rounded-lg px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider transition ${compTarget === "enemy" ? "bg-red-500/20 text-red-400 ring-1 ring-red-500/40" : "bg-white/[0.06] text-neutral-500 hover:text-white"}`}>+ {l.enemyTeam}</button>
-                  </div>
-                )}
-
-                <div>
-                  <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-600">{l.agentPool}</p>
-                  <div className="space-y-4">
-                    {Object.entries(AGENT_GROUPS).map(([group, agents]) => {
-                      const target = setup.unknownEnemyComp ? "team" : compTarget;
-                      const currentArr = target === "team" ? setup.teamComp : setup.enemyComp;
-                      return (
-                        <div key={group}>
-                          <p className="mb-1.5 text-[9px] font-semibold uppercase tracking-[0.15em] text-neutral-700">{AGENT_GROUP_LABELS[group][lang]}</p>
-                          <div className="grid grid-cols-5 gap-1.5 sm:grid-cols-8">
-                            {agents.map((a) => {
-                              const isInCurrent = currentArr.includes(a);
-                              const isLocked = target === "team" && a === setup.agent && setup.teamComp[0] === a;
-                              return <AgentMiniCard key={a} name={a} selected={isInCurrent} disabled={isInCurrent && !isLocked} locked={isLocked} onClick={() => { if(isLocked) return; handleCompSelect(target === "team" ? "teamComp" : "enemyComp", a); }} />;
-                            })}
-                          </div>
+                  <div className="space-y-5">
+                    {Object.entries(AGENT_GROUPS).map(([group, agents]) => (
+                      <div key={group}>
+                        <p className="mb-2.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-600">
+                          {AGENT_GROUP_LABELS[group][lang]}
+                        </p>
+                        <div className="grid grid-cols-4 gap-2 sm:grid-cols-6">
+                          {agents.map((a) => (
+                            <AgentMiniCard
+                              key={a}
+                              name={a}
+                              selected={setup.agent === a}
+                              disabled={false}
+                              onClick={() =>
+                                updateSetup("agent", setup.agent === a ? "" : a)
+                              }
+                            />
+                          ))}
                         </div>
-                      );
-                    })}
+                      </div>
+                    ))}
+                  </div>
+                  <InlineError msg={setupErrors.agent} />
+                </div>
+              </>
+            )}
+            {setupStep === "sideComp" && (
+              <>
+                <div>
+                  <Label text={l.side} />
+                  <div className="flex gap-4">
+                    {(
+                      [
+                        [
+                          "attack",
+                          l.sideAttack,
+                          "border-orange-500/25 bg-orange-500/[0.06]",
+                        ],
+                        [
+                          "defense",
+                          l.sideDefense,
+                          "border-sky-500/25 bg-sky-500/[0.06]",
+                        ],
+                      ] as const
+                    ).map(([val, label, activeStyle]) => (
+                      <button
+                        key={val}
+                        onClick={() => updateSetup("side", val)}
+                        className={`flex-1 rounded-xl border py-5 text-sm font-bold transition-all duration-200 ${setup.side === val ? `${activeStyle} text-white ring-1 ring-blue-500/30 shadow-lg` : "border-white/[0.06] bg-[#070c16] text-neutral-400 hover:border-white/[0.1] hover:text-white"}`}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                  <InlineError msg={setupErrors.side} />
+                </div>
+                <div className="border-t border-white/[0.06] pt-6 space-y-5">
+                  <div className="flex items-center justify-between">
+                    <h2 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-400">
+                      {l.compTitle}
+                    </h2>
+                    <label className="flex cursor-pointer items-center gap-2 text-[11px] text-neutral-500">
+                      <input
+                        type="checkbox"
+                        checked={setup.unknownEnemyComp}
+                        onChange={(e) =>
+                          updateSetup("unknownEnemyComp", e.target.checked)
+                        }
+                        className="h-3.5 w-3.5 rounded border-white/20 bg-white/5 accent-blue-500"
+                      />
+                      {l.unknownEnemy}
+                    </label>
+                  </div>
+                  <div className="flex gap-4 justify-between">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between mb-2">
+                        <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-400">
+                          {l.yourTeam}
+                        </p>
+                        <span className="text-[9px] text-neutral-600">
+                          {l.slotsRemaining(5 - setup.teamComp.length)}
+                        </span>
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {[0, 1, 2, 3, 4].map((i) => (
+                          <CompSlot
+                            key={i}
+                            agent={setup.teamComp[i] || ""}
+                            index={i}
+                            locked={
+                              i === 0 &&
+                              setup.teamComp[0] === setup.agent &&
+                              !!setup.agent
+                            }
+                            onRemove={() => {
+                              if (i === 0 && setup.teamComp[0] === setup.agent)
+                                return;
+                              const c = [...setup.teamComp];
+                              c.splice(i, 1);
+                              updateSetup("teamComp", c);
+                            }}
+                          />
+                        ))}
+                      </div>
+                      <InlineError msg={setupErrors.teamComp} />
+                    </div>
+                    {!setup.unknownEnemyComp && (
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between mb-2">
+                          <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-red-400">
+                            {l.enemyTeam}
+                          </p>
+                          <span className="text-[9px] text-neutral-600">
+                            {l.slotsRemaining(5 - setup.enemyComp.length)}
+                          </span>
+                        </div>
+                        <div className="flex flex-wrap gap-1.5">
+                          {[0, 1, 2, 3, 4].map((i) => (
+                            <CompSlot
+                              key={i}
+                              agent={setup.enemyComp[i] || ""}
+                              index={i}
+                              onRemove={() => {
+                                const c = [...setup.enemyComp];
+                                c.splice(i, 1);
+                                updateSetup("enemyComp", c);
+                              }}
+                            />
+                          ))}
+                        </div>
+                        <InlineError msg={setupErrors.enemyComp} />
+                      </div>
+                    )}
+                  </div>
+                  {!setup.unknownEnemyComp && (
+                    <div className="flex gap-2 justify-center">
+                      <button
+                        onClick={() => setCompTarget("team")}
+                        className={`rounded-lg px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider transition ${compTarget === "team" ? "bg-cyan-500/10 text-cyan-400 ring-1 ring-cyan-500/25" : "bg-white/[0.05] text-neutral-500 hover:text-white"}`}
+                      >
+                        + {l.yourTeam}
+                      </button>
+                      <button
+                        onClick={() => setCompTarget("enemy")}
+                        className={`rounded-lg px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider transition ${compTarget === "enemy" ? "bg-red-500/10 text-red-400 ring-1 ring-red-500/25" : "bg-white/[0.05] text-neutral-500 hover:text-white"}`}
+                      >
+                        + {l.enemyTeam}
+                      </button>
+                    </div>
+                  )}
+                  <div>
+                    <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-600">
+                      {l.agentPool}
+                    </p>
+                    <div className="space-y-4">
+                      {Object.entries(AGENT_GROUPS).map(([group, agents]) => {
+                        const target = setup.unknownEnemyComp
+                          ? "team"
+                          : compTarget;
+                        const currentArr =
+                          target === "team" ? setup.teamComp : setup.enemyComp;
+                        return (
+                          <div key={group}>
+                            <p className="mb-1.5 text-[9px] font-semibold uppercase tracking-[0.15em] text-neutral-700">
+                              {AGENT_GROUP_LABELS[group][lang]}
+                            </p>
+                            <div className="grid grid-cols-5 gap-1.5 sm:grid-cols-8">
+                              {agents.map((a) => {
+                                const isIn = currentArr.includes(a);
+                                const isLocked =
+                                  target === "team" &&
+                                  a === setup.agent &&
+                                  setup.teamComp[0] === a;
+                                return (
+                                  <AgentMiniCard
+                                    key={a}
+                                    name={a}
+                                    selected={isIn}
+                                    disabled={isIn && !isLocked}
+                                    locked={isLocked}
+                                    onClick={() => {
+                                      if (isLocked) return;
+                                      handleCompSelect(
+                                        target === "team"
+                                          ? "teamComp"
+                                          : "enemyComp",
+                                        a,
+                                      );
+                                    }}
+                                  />
+                                );
+                              })}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </>)}
-
+              </>
+            )}
             {setupStep === "confirm" && (
               <div className="space-y-6">
                 <div className="text-center space-y-2">
-                  <h3 className="text-lg font-bold text-white">{l.confirmTitle}</h3>
+                  <h3 className="text-lg font-bold text-white">
+                    {l.confirmTitle}
+                  </h3>
                   <p className="text-sm text-neutral-500">{l.confirmDesc}</p>
                 </div>
-
                 <div className="grid grid-cols-2 gap-3">
                   <div className={`${ds.card} p-4 text-center`}>
                     <p className={ds.label}>{l.map}</p>
                     <div className="relative h-20 w-full overflow-hidden rounded-xl bg-black/20 mb-2 ring-1 ring-white/[0.06]">
-                      <img src={MAP_IMAGES[setup.map]} alt={setup.map} className="h-full w-full object-cover opacity-70" />
+                      <img
+                        src={MAP_IMAGES[setup.map]}
+                        alt={setup.map}
+                        className="h-full w-full object-cover opacity-65"
+                      />
                     </div>
                     <p className="text-sm font-bold text-white">{setup.map}</p>
                   </div>
                   <div className={`${ds.card} p-4 text-center`}>
                     <p className={ds.label}>{l.agent}</p>
                     <div className="mx-auto h-14 w-14 overflow-hidden rounded-xl bg-black/20 mb-2 ring-1 ring-white/[0.06]">
-                      <img src={agentImgUrl(setup.agent)} alt={setup.agent} className="h-full w-full object-cover" />
+                      <img
+                        src={agentImgUrl(setup.agent)}
+                        alt={setup.agent}
+                        className="h-full w-full object-cover"
+                      />
                     </div>
-                    <p className="text-sm font-bold text-white">{setup.agent}</p>
+                    <p className="text-sm font-bold text-white">
+                      {setup.agent}
+                    </p>
                   </div>
                 </div>
-
-                <div className={`${ds.card} p-4 flex items-center justify-between`}>
+                <div
+                  className={`${ds.card} p-4 flex items-center justify-between`}
+                >
                   <span className={ds.label + " mb-0"}>{l.side}</span>
-                  <span className="text-sm font-bold text-white">{setup.side === "attack" ? l.sideAttack : l.sideDefense}</span>
+                  <span className="text-sm font-bold text-white">
+                    {setup.side === "attack" ? l.sideAttack : l.sideDefense}
+                  </span>
                 </div>
-
                 <div className={`${ds.card} p-4`}>
                   <p className={ds.label}>{l.yourTeam}</p>
-                  <div className="flex gap-2 mt-2">{setup.teamComp.map((a,i) => a && <div key={i} className="flex items-center gap-1.5 rounded-lg bg-white/[0.06] px-2 py-1"><div className="h-5 w-5 rounded overflow-hidden"><img src={agentImgUrl(a)} alt={a} className="h-full w-full object-cover" /></div><span className="text-[11px] text-neutral-300">{a}</span></div>)}</div>
+                  <div className="flex gap-2 mt-2">
+                    {setup.teamComp.map(
+                      (a, i) =>
+                        a && (
+                          <div
+                            key={i}
+                            className="flex items-center gap-1.5 rounded-lg bg-white/[0.05] px-2 py-1"
+                          >
+                            <div className="h-5 w-5 rounded overflow-hidden">
+                              <img
+                                src={agentImgUrl(a)}
+                                alt={a}
+                                className="h-full w-full object-cover"
+                              />
+                            </div>
+                            <span className="text-[11px] text-neutral-300">
+                              {a}
+                            </span>
+                          </div>
+                        ),
+                    )}
+                  </div>
                 </div>
               </div>
             )}
-
             <div className="space-y-3 pt-2">
-              <button onClick={nextStep} className={ds.btnPrimary}>{setupStep === "confirm" ? l.startMatch : l.next}</button>
-              <button onClick={prevStep} className={ds.btnSecondary}>{l.back}</button>
+              <button onClick={nextStep} className={ds.btnPrimary}>
+                {setupStep === "confirm" ? l.startMatch : l.next}
+              </button>
+              <button onClick={prevStep} className={ds.btnSecondary}>
+                {l.back}
+              </button>
             </div>
           </div>
         </div>
       </main>
     );
   }
-
-  /* ════════════════════════════════════════════
-     ROUND SCREEN
-     ════════════════════════════════════════════ */
-
+  /* ROUND */
   if (screen === "round") {
     function validateRound(): FormErrors {
       const e: FormErrors = {};
-      if (!survived) { if (!roundForm.deathLocation) e.deathLocation = l.required; if (!roundForm.enemyCount) e.enemyCount = l.required; }
+      if (!survived) {
+        if (!roundForm.deathLocation) e.deathLocation = l.required;
+        if (!roundForm.enemyCount) e.enemyCount = l.required;
+      }
       if (!roundForm.yourNote.trim()) e.yourNote = l.required;
-      else if (roundForm.yourNote.trim().length < 10) e.yourNote = l.noteTooShort;
+      else if (roundForm.yourNote.trim().length < 10)
+        e.yourNote = l.noteTooShort;
       return e;
     }
-
     function handleSubmitRound(result: RoundResult) {
-      const e = validateRound(); setRoundErrors(e); if (Object.keys(e).length > 0) return;
-      const prevRounds = rounds.slice(0, roundIdx);
-      const feedback = genRoundFeedback(setup, roundForm, result, prevRounds, lang ?? "tr", survived);
-      const rd: RoundData = { roundNumber: roundNum, deathLocation: survived ? "" : roundForm.deathLocation, enemyCount: survived ? "" : roundForm.enemyCount, yourNote: roundForm.yourNote, result, skipped: false, survived, feedback };
-      saveRoundData(rd); setCurrentFeedback(feedback); setCurrentResult(result); setRoundMode("feedback");
+      const e = validateRound();
+      setRoundErrors(e);
+      if (Object.keys(e).length > 0) return;
+      const prev = rounds.slice(0, roundIdx);
+      const fb = genRoundFeedback(
+        setup,
+        roundForm,
+        result,
+        prev,
+        lang ?? "tr",
+        survived,
+      );
+      const rd: RoundData = {
+        roundNumber: roundNum,
+        deathLocation: survived ? "" : roundForm.deathLocation,
+        enemyCount: survived ? "" : roundForm.enemyCount,
+        yourNote: roundForm.yourNote,
+        result,
+        skipped: false,
+        survived,
+        feedback: fb,
+      };
+      saveRoundData(rd);
+      setCurrentFeedback(fb);
+      setCurrentResult(result);
+      setRoundMode("feedback");
     }
-
     function handleSkipConfirm(result: RoundResult) {
-      const rd: RoundData = { roundNumber: roundNum, deathLocation: "", enemyCount: "", yourNote: "", result, skipped: true, survived: false, feedback: null };
-      saveRoundData(rd); loadRoundAtIndex(roundIdx + 1);
+      const rd: RoundData = {
+        roundNumber: roundNum,
+        deathLocation: "",
+        enemyCount: "",
+        yourNote: "",
+        result,
+        skipped: true,
+        survived: false,
+        feedback: null,
+      };
+      saveRoundData(rd);
+      loadRoundAtIndex(roundIdx + 1);
     }
-
-    function handleNextRound() { loadRoundAtIndex(roundIdx + 1); }
-    function handleBack() { if (roundIdx > 0) loadRoundAtIndex(roundIdx - 1); else { setScreen("setup"); setSetupStep("confirm"); } }
-    function handleFinishFromFeedback() { goToScoreInput(); }
-
+    function handleNextRound() {
+      loadRoundAtIndex(roundIdx + 1);
+    }
+    function handleBack() {
+      if (roundIdx > 0) loadRoundAtIndex(roundIdx - 1);
+      else {
+        setScreen("setup");
+        setSetupStep("confirm");
+      }
+    }
+    function handleFinishFromFeedback() {
+      goToScoreInput();
+    }
     function handleFinishFromInput() {
       const e = validateRound();
       if (Object.keys(e).length === 0) {
-        const prevRounds = rounds.slice(0, roundIdx);
-        const feedback = genRoundFeedback(setup, roundForm, "loss", prevRounds, lang ?? "tr", survived);
-        const rd: RoundData = { roundNumber: roundNum, deathLocation: survived ? "" : roundForm.deathLocation, enemyCount: survived ? "" : roundForm.enemyCount, yourNote: roundForm.yourNote, result: "loss", skipped: false, survived, feedback };
+        const prev = rounds.slice(0, roundIdx);
+        const fb = genRoundFeedback(
+          setup,
+          roundForm,
+          "loss",
+          prev,
+          lang ?? "tr",
+          survived,
+        );
+        const rd: RoundData = {
+          roundNumber: roundNum,
+          deathLocation: survived ? "" : roundForm.deathLocation,
+          enemyCount: survived ? "" : roundForm.enemyCount,
+          yourNote: roundForm.yourNote,
+          result: "loss",
+          skipped: false,
+          survived,
+          feedback: fb,
+        };
         goToScoreInput(rd);
       } else goToScoreInput();
     }
-
     return (
       <main className={`${ds.pageBg} relative`}>
         <MapBg map={setup.map} />
-        <Navbar user={user} lang={lang} onSignOut={handleSignOut} onLogoClick={() => setScreen("dashboard")} onLangToggle={handleLangToggle} signOutLabel={l.authSignOut} />
+        <Navbar {...navProps} />
         <div className="relative z-10 mx-auto max-w-lg px-4 pt-20 pb-12 space-y-6">
           <div className="text-center space-y-1">
-            <h2 className="text-2xl font-bold text-white">{l.roundTitle(roundNum)}</h2>
-            <p className="text-sm text-neutral-500">{setup.map} · {setup.agent} · {setup.side === "attack" ? l.sideAttack : l.sideDefense}</p>
+            <h2 className="text-2xl font-bold text-white">
+              {l.roundTitle(roundNum)}
+            </h2>
+            <p className="text-sm text-neutral-500">
+              {setup.map} {IC.dot} {setup.agent} {IC.dot}{" "}
+              {setup.side === "attack" ? l.sideAttack : l.sideDefense}
+            </p>
           </div>
-
           {(rounds.length > 0 || roundIdx > 0) && (
             <div className="flex flex-wrap gap-1.5 justify-center">
               {rounds.map((r, i) => (
-                <button key={i} onClick={() => loadRoundAtIndex(i)}
-                  className={`rounded-lg px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-wider transition border ${i === roundIdx ? "ring-2 ring-cyan-500 ring-offset-1 ring-offset-[#010409]" : ""} ${r.result === "win" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" : "bg-red-500/10 text-red-400 border-red-500/20"} ${r.skipped ? "opacity-40" : ""}`}>
-                  R{r.roundNumber} {r.result === "win" ? l.wonLabel : l.lostLabel}{r.skipped ? ` ${l.skippedLabel}` : ""}{r.survived ? " ♡" : ""}
+                <button
+                  key={i}
+                  onClick={() => loadRoundAtIndex(i)}
+                  className={`rounded-lg px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-wider transition border ${i === roundIdx ? "ring-2 ring-blue-500 ring-offset-1 ring-offset-[#050810]" : ""} ${r.result === "win" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/10" : "bg-red-500/10 text-red-400 border-red-500/10"} ${r.skipped ? "opacity-40" : ""}`}
+                >
+                  R{r.roundNumber}{" "}
+                  {r.result === "win" ? l.wonLabel : l.lostLabel}
+                  {r.skipped ? l.skippedLabel : ""}
                 </button>
               ))}
-              {roundIdx >= rounds.length && <span className="rounded-lg bg-cyan-500/15 border border-cyan-500/30 px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-cyan-400 ring-2 ring-cyan-500 ring-offset-1 ring-offset-[#010409]">R{roundNum}</span>}
+              {roundIdx >= rounds.length && (
+                <span className="rounded-lg bg-blue-500/10 border border-blue-500/20 px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-blue-400 ring-2 ring-blue-500 ring-offset-1 ring-offset-[#050810]">
+                  R{roundNum}
+                </span>
+              )}
             </div>
           )}
-
           {roundMode === "input" && (
             <div className={`${ds.card} ${ds.cardInner} space-y-5`}>
-              <button onClick={() => { setSurvived(!survived); if(!survived) setRoundForm(f => ({ ...f, deathLocation: "", enemyCount: "" })); }}
-                className={`w-full rounded-lg border-2 py-4 text-base font-extrabold uppercase tracking-wider transition-all duration-200 ${survived ? "border-emerald-400 bg-emerald-500/15 text-emerald-400 shadow-lg shadow-emerald-500/20 ring-1 ring-emerald-400/30" : "border-[#1e2a3a] bg-[#0d1117] text-neutral-500 hover:border-emerald-500/40 hover:text-emerald-400 hover:bg-emerald-500/5"}`}>
-                {survived ? "✓ " : "♡ "}{l.survived}
+              <button
+                onClick={() => {
+                  setSurvived(!survived);
+                  if (!survived)
+                    setRoundForm((f) => ({
+                      ...f,
+                      deathLocation: "",
+                      enemyCount: "",
+                    }));
+                }}
+                className={`w-full rounded-xl border-2 py-4 text-base font-extrabold uppercase tracking-wider transition-all duration-200 ${survived ? "border-emerald-400/60 bg-emerald-500/10 text-emerald-400 shadow-lg shadow-emerald-500/10 ring-1 ring-emerald-400/15" : "border-white/[0.08] bg-[#070c16] text-neutral-500 hover:border-emerald-500/25 hover:text-emerald-400 hover:bg-emerald-500/[0.04]"}`}
+              >
+                {survived ? IC.check + " " : ""}
+                {l.survived}
               </button>
-
-              {!survived && (<>
-                <div><Label text={l.deathLocation} />
-                  <select value={roundForm.deathLocation} onChange={(e) => updateRound("deathLocation", e.target.value)} className={ds.selectBase}>
-                    <option value="" disabled className="bg-[#010409]">{l.deathLocationPh}</option>
-                    {locations.map((loc) => <option key={loc} value={loc} className="bg-[#010409]">{loc}</option>)}
-                  </select><InlineError msg={roundErrors.deathLocation} /></div>
-                <div><Label text={l.enemyCount} />
-                  <select value={roundForm.enemyCount} onChange={(e) => updateRound("enemyCount", e.target.value)} className={ds.selectBase}>
-                    <option value="" disabled className="bg-[#010409]">{l.enemyCountPh}</option>
-                    {[1,2,3,4,5].map((n) => <option key={n} value={String(n)} className="bg-[#010409]">{n}</option>)}
-                  </select><InlineError msg={roundErrors.enemyCount} /></div>
-              </>)}
-
-              <div><Label text={l.yourNote} />
-                <textarea value={roundForm.yourNote} onChange={(e) => updateRound("yourNote", e.target.value)}
-                  placeholder={survived ? (lang === "tr" ? "ör. lurk oynadım, info verdim…" : "e.g. lurked, gave info…") : l.yourNotePh}
-                  rows={3} className={ds.inputBase + " resize-none"} /><InlineError msg={roundErrors.yourNote} /></div>
-
-              <div><Label text={l.roundResult} />
+              {!survived && (
+                <>
+                  <div>
+                    <Label text={l.deathLocation} />
+                    <select
+                      value={roundForm.deathLocation}
+                      onChange={(e) =>
+                        updateRound("deathLocation", e.target.value)
+                      }
+                      className={ds.selectBase}
+                    >
+                      <option value="" disabled className="bg-[#050810]">
+                        {l.deathLocationPh}
+                      </option>
+                      {locations.map((loc) => (
+                        <option key={loc} value={loc} className="bg-[#050810]">
+                          {loc}
+                        </option>
+                      ))}
+                    </select>
+                    <InlineError msg={roundErrors.deathLocation} />
+                  </div>
+                  <div>
+                    <Label text={l.enemyCount} />
+                    <select
+                      value={roundForm.enemyCount}
+                      onChange={(e) =>
+                        updateRound("enemyCount", e.target.value)
+                      }
+                      className={ds.selectBase}
+                    >
+                      <option value="" disabled className="bg-[#050810]">
+                        {l.enemyCountPh}
+                      </option>
+                      {[1, 2, 3, 4, 5].map((n) => (
+                        <option
+                          key={n}
+                          value={String(n)}
+                          className="bg-[#050810]"
+                        >
+                          {n}
+                        </option>
+                      ))}
+                    </select>
+                    <InlineError msg={roundErrors.enemyCount} />
+                  </div>
+                </>
+              )}
+              <div>
+                <Label text={l.yourNote} />
+                <textarea
+                  value={roundForm.yourNote}
+                  onChange={(e) => updateRound("yourNote", e.target.value)}
+                  placeholder={
+                    survived
+                      ? lang === "tr"
+                        ? "ör. lurk oynadım, info verdim\u2026"
+                        : "e.g. lurked, gave info\u2026"
+                      : l.yourNotePh
+                  }
+                  rows={3}
+                  className={ds.inputBase + " resize-none"}
+                />
+                <InlineError msg={roundErrors.yourNote} />
+              </div>
+              <div>
+                <Label text={l.roundResult} />
                 <div className="flex gap-3">
-                  <button onClick={() => handleSubmitRound("win")} className="flex-1 rounded-xl border border-emerald-500/30 bg-emerald-500/10 py-3.5 text-sm font-bold text-emerald-400 transition-all hover:bg-emerald-500/20 active:scale-[0.98]">{l.roundResultWin}</button>
-                  <button onClick={() => handleSubmitRound("loss")} className="flex-1 rounded-xl border border-red-500/30 bg-red-500/10 py-3.5 text-sm font-bold text-red-400 transition-all hover:bg-red-500/20 active:scale-[0.98]">{l.roundResultLoss}</button>
+                  <button
+                    onClick={() => handleSubmitRound("win")}
+                    className="flex-1 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.06] py-3.5 text-sm font-bold text-emerald-400 transition-all hover:bg-emerald-500/[0.1] active:scale-[0.98]"
+                  >
+                    {l.roundResultWin}
+                  </button>
+                  <button
+                    onClick={() => handleSubmitRound("loss")}
+                    className="flex-1 rounded-xl border border-red-500/20 bg-red-500/[0.06] py-3.5 text-sm font-bold text-red-400 transition-all hover:bg-red-500/[0.1] active:scale-[0.98]"
+                  >
+                    {l.roundResultLoss}
+                  </button>
                 </div>
               </div>
-
               <div className="space-y-3 pt-2">
-                <button onClick={() => setRoundMode("skipConfirm")} className={ds.btnSecondary}>{l.skipRound}</button>
+                <button
+                  onClick={() => setRoundMode("skipConfirm")}
+                  className={ds.btnSecondary}
+                >
+                  {l.skipRound}
+                </button>
                 <div className="flex gap-3">
-                  <button onClick={handleBack} className={ds.btnSecondary}>{l.back}</button>
-                  <button onClick={handleFinishFromInput} className={ds.btnAccent}>{l.finishMatch}</button>
+                  <button onClick={handleBack} className={ds.btnSecondary}>
+                    {l.back}
+                  </button>
+                  <button
+                    onClick={handleFinishFromInput}
+                    className={ds.btnAccent}
+                  >
+                    {l.finishMatch}
+                  </button>
                 </div>
               </div>
             </div>
           )}
-
           {roundMode === "skipConfirm" && (
             <div className={`${ds.card} p-6 sm:p-8 space-y-5 text-center`}>
-              <p className="text-sm font-bold text-white">{l.skipConfirmTitle}</p>
+              <p className="text-sm font-bold text-white">
+                {l.skipConfirmTitle}
+              </p>
               <div className="flex gap-3">
-                <button onClick={() => handleSkipConfirm("win")} className="flex-1 rounded-xl border border-emerald-500/30 bg-emerald-500/10 py-3.5 text-sm font-bold text-emerald-400 transition hover:bg-emerald-500/20">{l.yes}</button>
-                <button onClick={() => handleSkipConfirm("loss")} className="flex-1 rounded-xl border border-red-500/30 bg-red-500/10 py-3.5 text-sm font-bold text-red-400 transition hover:bg-red-500/20">{l.no}</button>
+                <button
+                  onClick={() => handleSkipConfirm("win")}
+                  className="flex-1 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.06] py-3.5 text-sm font-bold text-emerald-400 transition hover:bg-emerald-500/[0.1]"
+                >
+                  {l.yes}
+                </button>
+                <button
+                  onClick={() => handleSkipConfirm("loss")}
+                  className="flex-1 rounded-xl border border-red-500/20 bg-red-500/[0.06] py-3.5 text-sm font-bold text-red-400 transition hover:bg-red-500/[0.1]"
+                >
+                  {l.no}
+                </button>
               </div>
-              <button onClick={() => setRoundMode("input")} className={ds.btnSecondary}>{l.back}</button>
+              <button
+                onClick={() => setRoundMode("input")}
+                className={ds.btnSecondary}
+              >
+                {l.back}
+              </button>
             </div>
           )}
-
           {roundMode === "feedback" && currentFeedback && (
             <div className="space-y-5">
               <div className={`${ds.card} ${ds.cardInner}`}>
                 <div className="mb-5 flex items-center justify-between">
-                  <h2 className="text-xs font-bold uppercase tracking-[0.15em] text-cyan-400">{l.feedbackTitle}</h2>
+                  <h2 className="text-xs font-bold uppercase tracking-[0.15em] text-blue-400">
+                    {l.feedbackTitle}
+                  </h2>
                   <div className="flex items-center gap-2">
-                    {survived && <span className="rounded-md bg-emerald-500/15 border border-emerald-400/30 px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider text-emerald-400 shadow-sm shadow-emerald-500/10">{l.survivedShort}</span>}
-                    <span className={`rounded-lg px-2.5 py-1 text-[10px] font-bold uppercase border ${currentResult === "win" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" : "bg-red-500/10 text-red-400 border-red-500/20"}`}>{currentResult === "win" ? l.roundResultWin : l.roundResultLoss}</span>
+                    {survived && (
+                      <span className="rounded-md bg-emerald-500/10 border border-emerald-400/15 px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider text-emerald-400">
+                        {l.survivedShort}
+                      </span>
+                    )}
+                    <span
+                      className={`rounded-lg px-2.5 py-1 text-[10px] font-bold uppercase border ${currentResult === "win" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/10" : "bg-red-500/10 text-red-400 border-red-500/10"}`}
+                    >
+                      {currentResult === "win"
+                        ? l.roundResultWin
+                        : l.roundResultLoss}
+                    </span>
                   </div>
                 </div>
                 <div className="space-y-3">
-                  <FeedbackCard icon="✕" color="text-red-400" label={l.mainMistake} text={currentFeedback.mainMistake} />
-                  <FeedbackCard icon="◎" color="text-amber-400" label={l.enemyHabit} text={currentFeedback.enemyHabit} />
-                  <FeedbackCard icon="⚡" color="text-cyan-400" label={l.microPlan} text={currentFeedback.microPlan} />
+                  <FeedbackCard
+                    icon={IC.cross}
+                    color="text-red-400"
+                    label={l.mainMistake}
+                    text={currentFeedback.mainMistake}
+                  />
+                  <FeedbackCard
+                    icon={IC.circle}
+                    color="text-amber-400"
+                    label={l.enemyHabit}
+                    text={currentFeedback.enemyHabit}
+                  />
+                  <FeedbackCard
+                    icon={IC.bolt}
+                    color="text-cyan-400"
+                    label={l.microPlan}
+                    text={currentFeedback.microPlan}
+                  />
                 </div>
               </div>
               <div className="space-y-3">
-                <button onClick={handleNextRound} className={ds.btnPrimary}>{l.nextRound}</button>
-                <div className="flex gap-3"><button onClick={handleBack} className={ds.btnSecondary}>{l.back}</button><button onClick={handleFinishFromFeedback} className={ds.btnAccent}>{l.finishMatch}</button></div>
+                <button onClick={handleNextRound} className={ds.btnPrimary}>
+                  {l.nextRound}
+                </button>
+                <div className="flex gap-3">
+                  <button onClick={handleBack} className={ds.btnSecondary}>
+                    {l.back}
+                  </button>
+                  <button
+                    onClick={handleFinishFromFeedback}
+                    className={ds.btnAccent}
+                  >
+                    {l.finishMatch}
+                  </button>
+                </div>
               </div>
             </div>
           )}
@@ -1840,101 +4025,184 @@ export default function Home() {
       </main>
     );
   }
-
-  /* ════════════════════════════════════════════
-     SCORE INPUT
-     ════════════════════════════════════════════ */
-
-  if (screen === "scoreInput") {
+  /* SCORE INPUT */
+  if (screen === "scoreInput")
     return (
-      <main className={`${ds.pageBg} relative flex items-center justify-center px-4`}>
+      <main
+        className={`${ds.pageBg} relative flex items-center justify-center px-4`}
+      >
         <MapBg map={setup.map} />
         <div className="relative z-10 w-full max-w-md space-y-8">
-          <div className="text-center space-y-1"><AimloLogo size={36} className="mx-auto opacity-60 mb-2" /><h2 className="text-xl font-bold text-white">{l.scoreTitle}</h2></div>
+          <div className="text-center space-y-1">
+            <AimloLogo size={36} className="mx-auto opacity-40 mb-2" />
+            <h2 className="text-xl font-bold text-white">{l.scoreTitle}</h2>
+          </div>
           <div className={`${ds.card} ${ds.cardInner} space-y-5`}>
             <Label text={l.selectScore} />
             <div className="grid grid-cols-3 gap-2 max-h-[50vh] overflow-y-auto pr-1">
               {SCORE_OPTIONS.map((s) => {
-                const [y, e] = s.split(" - "); const isWin = Number(y) > Number(e);
-                const selected = matchScore.yours === y && matchScore.enemy === e;
+                const [y, e] = s.split(" - ");
+                const isWin = Number(y) > Number(e);
+                const sel = matchScore.yours === y && matchScore.enemy === e;
                 return (
-                  <button key={s} onClick={() => setMatchScore({ yours: y, enemy: e })}
-                    className={`rounded-xl border py-3 text-sm font-bold transition-all ${selected ? "border-cyan-500 bg-cyan-500/15 text-white ring-1 ring-cyan-500/50 shadow-lg" : isWin ? "border-emerald-500/20 bg-emerald-500/5 text-emerald-400 hover:bg-emerald-500/10" : "border-red-500/20 bg-red-500/5 text-red-400 hover:bg-red-500/10"}`}>
+                  <button
+                    key={s}
+                    onClick={() => setMatchScore({ yours: y, enemy: e })}
+                    className={`rounded-xl border py-3 text-sm font-bold transition-all duration-200 ${sel ? "border-blue-500/50 bg-blue-500/10 text-white ring-1 ring-blue-500/30 shadow-lg" : isWin ? "border-emerald-500/10 bg-emerald-500/[0.04] text-emerald-400 hover:bg-emerald-500/[0.07]" : "border-red-500/10 bg-red-500/[0.04] text-red-400 hover:bg-red-500/[0.07]"}`}
+                  >
                     {s}
                   </button>
                 );
               })}
             </div>
             <div className="space-y-3 pt-2">
-              <button onClick={() => { if (matchScore.yours && matchScore.enemy) finishWithScore(matchScore.yours, matchScore.enemy); }} disabled={!matchScore.yours || !matchScore.enemy} className={ds.btnPrimary}>{l.confirmScore}</button>
-              <button onClick={() => setScreen("round")} className={ds.btnSecondary}>{l.back}</button>
+              <button
+                onClick={() => {
+                  if (matchScore.yours && matchScore.enemy)
+                    finishWithScore(matchScore.yours, matchScore.enemy);
+                }}
+                disabled={!matchScore.yours || !matchScore.enemy}
+                className={ds.btnPrimary}
+              >
+                {l.confirmScore}
+              </button>
+              <button
+                onClick={() => setScreen("round")}
+                className={ds.btnSecondary}
+              >
+                {l.back}
+              </button>
             </div>
           </div>
         </div>
       </main>
     );
-  }
-
-  /* ════════════════════════════════════════════
-     REPORT (just completed) — with round counts & return to menu
-     ════════════════════════════════════════════ */
-
-  if (screen === "report" && report) {
+  /* REPORT */
+  if (screen === "report" && report)
     return (
       <main className={`${ds.pageBg} relative`}>
         <MapBg map={setup.map} />
-        <Navbar user={user} lang={lang} onSignOut={handleSignOut} onLogoClick={() => setScreen("dashboard")} onLangToggle={handleLangToggle} signOutLabel={l.authSignOut} />
+        <Navbar {...navProps} />
         <div className="relative z-10 mx-auto max-w-lg px-4 pt-20 pb-12 space-y-6">
-          <div className="text-center space-y-1"><h2 className="text-2xl font-bold text-white">{l.reportTitle}</h2><p className="text-sm text-neutral-500">{setup.map} · {setup.agent}</p></div>
-
+          <div className="text-center space-y-1">
+            <h2 className="text-2xl font-bold text-white">{l.reportTitle}</h2>
+            <p className="text-sm text-neutral-500">
+              {setup.map} {IC.dot} {setup.agent}
+            </p>
+          </div>
           <div className={`${ds.card} overflow-hidden`}>
             <div className="relative p-6">
-              <div className="pointer-events-none absolute inset-0 opacity-[0.15]"><img src={MAP_IMAGES[setup.map]} alt="" className="h-full w-full object-cover" /></div>
+              <div className="pointer-events-none absolute inset-0 opacity-[0.12]">
+                <img
+                  src={MAP_IMAGES[setup.map]}
+                  alt=""
+                  className="h-full w-full object-cover"
+                />
+              </div>
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
               <div className="relative flex items-end justify-between">
                 <div>
                   <p className={ds.label}>{l.matchResult}</p>
-                  <p className="mt-1 text-4xl font-extrabold tracking-tight text-white">{report.scoreStr}</p>
-                  <p className={`mt-1.5 text-xs font-bold uppercase ${report.matchWon ? "text-emerald-400" : "text-red-400"}`}>{report.matchWon ? l.victory : l.defeat}</p>
+                  <p className="mt-1 text-4xl font-extrabold tracking-tight text-white">
+                    {report.scoreStr}
+                  </p>
+                  <p
+                    className={`mt-1.5 text-xs font-bold uppercase ${report.matchWon ? "text-emerald-400" : "text-red-400"}`}
+                  >
+                    {report.matchWon ? l.victory : l.defeat}
+                  </p>
                 </div>
-                <div className="text-right space-y-1">
-                  <p className="text-lg font-extrabold text-cyan-400">{report.winPct}%</p>
+                <div className="text-right">
+                  <p className="text-lg font-extrabold text-blue-400">
+                    {report.winPct}%
+                  </p>
                 </div>
               </div>
-              <div className="relative mt-4 h-2 w-full overflow-hidden rounded-full bg-white/[0.06]"><div className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-emerald-500 transition-all duration-500" style={{ width: `${report.winPct}%` }} /></div>
-              {/* Round count breakdown — always visible */}
+              <div className="relative mt-4 h-2 w-full overflow-hidden rounded-full bg-white/[0.06]">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-500"
+                  style={{ width: `${report.winPct}%` }}
+                />
+              </div>
               <div className="relative mt-3 grid grid-cols-4 gap-2 text-center text-[10px] font-bold uppercase tracking-wider">
-                <div><span className="text-neutral-500">{l.enteredRounds}</span><br/><span className="text-white text-sm">{report.total}</span></div>
-                <div><span className="text-neutral-500">{l.roundsWon}</span><br/><span className="text-emerald-400 text-sm">{report.won}</span></div>
-                <div><span className="text-neutral-500">{l.roundsLost}</span><br/><span className="text-red-400 text-sm">{report.lost}</span></div>
-                <div><span className="text-neutral-500">{l.roundsSkipped}</span><br/><span className="text-neutral-400 text-sm">{report.skipped}</span></div>
+                <div>
+                  <span className="text-neutral-500">{l.enteredRounds}</span>
+                  <br />
+                  <span className="text-white text-sm">{report.total}</span>
+                </div>
+                <div>
+                  <span className="text-neutral-500">{l.roundsWon}</span>
+                  <br />
+                  <span className="text-emerald-400 text-sm">{report.won}</span>
+                </div>
+                <div>
+                  <span className="text-neutral-500">{l.roundsLost}</span>
+                  <br />
+                  <span className="text-red-400 text-sm">{report.lost}</span>
+                </div>
+                <div>
+                  <span className="text-neutral-500">{l.roundsSkipped}</span>
+                  <br />
+                  <span className="text-neutral-400 text-sm">
+                    {report.skipped}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-
           <div className="flex flex-wrap gap-1.5 justify-center">
             {rounds.map((r, i) => (
-              <span key={i} className={`rounded-lg px-2 py-1 text-[10px] font-bold uppercase border ${r.result === "win" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" : "bg-red-500/10 text-red-400 border-red-500/20"} ${r.skipped ? "opacity-40" : ""}`}>
-                R{r.roundNumber} {r.result === "win" ? l.wonLabel : l.lostLabel}{r.skipped ? ` ${l.skippedLabel}` : ""}{r.survived ? " ♡" : ""}
+              <span
+                key={i}
+                className={`rounded-lg px-2 py-1 text-[10px] font-bold uppercase border ${r.result === "win" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/10" : "bg-red-500/10 text-red-400 border-red-500/10"} ${r.skipped ? "opacity-40" : ""}`}
+              >
+                R{r.roundNumber} {r.result === "win" ? l.wonLabel : l.lostLabel}
+                {r.skipped ? l.skippedLabel : ""}
               </span>
             ))}
           </div>
-
           <div className="space-y-4">
-            <ReportCard icon="◈" color="text-cyan-400" label={l.overallSummary} text={report.summary} />
-            <ReportCard icon="✕" color="text-red-400" label={l.mainRecurringMistake} text={report.mistake} />
-            <ReportCard icon="◎" color="text-amber-400" label={l.enemyTendencies} text={report.tendencies} />
-            <ReportCard icon="▸" color="text-emerald-400" label={l.suggestedAdjustment} text={report.adjustment} />
+            <ReportCard
+              icon={IC.diamond}
+              color="text-cyan-400"
+              label={l.overallSummary}
+              text={report.summary}
+            />
+            <ReportCard
+              icon={IC.cross}
+              color="text-red-400"
+              label={l.mainRecurringMistake}
+              text={report.mistake}
+            />
+            <ReportCard
+              icon={IC.circle}
+              color="text-amber-400"
+              label={l.enemyTendencies}
+              text={report.tendencies}
+            />
+            <ReportCard
+              icon={IC.play}
+              color="text-emerald-400"
+              label={l.suggestedAdjustment}
+              text={report.adjustment}
+            />
           </div>
-
           <div className="space-y-3">
-            <button onClick={resetForNewMatch} className={ds.btnPrimary}>{l.newMatch}</button>
-            <button onClick={() => { setScreen("dashboard"); loadHistory(); }} className={ds.btnSecondary}>{l.returnToMenu}</button>
+            <button onClick={resetForNewMatch} className={ds.btnPrimary}>
+              {l.newMatch}
+            </button>
+            <button
+              onClick={() => {
+                setScreen("dashboard");
+                loadHistory();
+              }}
+              className={ds.btnSecondary}
+            >
+              {l.returnToMenu}
+            </button>
           </div>
         </div>
       </main>
     );
-  }
-
   return null;
 }
