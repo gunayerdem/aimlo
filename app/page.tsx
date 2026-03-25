@@ -59,6 +59,7 @@ type SavedReport = {
   score: string;
   won: boolean;
   date: string;
+  rawDate: string; // ISO string for reliable sorting
   summary: string;
   mistake: string;
   tendencies: string;
@@ -72,6 +73,27 @@ type SavedReport = {
   rounds: RoundData[];
   setup: SetupData;
 };
+/* ══════════════════════════════════════════════════════════
+   RESPONSE VALIDATORS
+   ══════════════════════════════════════════════════════════ */
+function isValidFeedback(obj: unknown): obj is RoundFeedback {
+  if (!obj || typeof obj !== "object") return false;
+  const o = obj as Record<string, unknown>;
+  return (
+    typeof o.mainMistake === "string" &&
+    typeof o.enemyHabit === "string" &&
+    typeof o.microPlan === "string"
+  );
+}
+function isValidReport(obj: unknown): obj is ReturnType<typeof genMatchReport> {
+  if (!obj || typeof obj !== "object") return false;
+  const o = obj as Record<string, unknown>;
+  return (
+    typeof o.summary === "string" &&
+    typeof o.scoreStr === "string" &&
+    typeof o.winPct === "number"
+  );
+}
 /* ══════════════════════════════════════════════════════════
    PROFILE HELPER — upsert after signup (with retry + return status)
    ══════════════════════════════════════════════════════════ */
@@ -706,23 +728,23 @@ const t = {
     landingFaqs: [
       {
         q: "AIMLO ücretsiz mi?",
-        a: "Evet, temel analiz özellikleri ücretsizdir. Gelişmiş özellikler için premium planlarımız yakında geliyor.",
+        a: "Evet, AIMLO'nun temel analiz ve koçluk özellikleri tamamen ücretsizdir. Maç kurulumu, round bazlı geri bildirim ve maç sonu raporu gibi tüm çekirdek özellikler ücretsiz planda yer alır. Gelişmiş AI destekli derinlemesine analiz, geçmiş maç karşılaştırması ve kişiselleştirilmiş gelişim haritası gibi premium özellikler ise yakında sunulacaktır.",
       },
       {
         q: "Nasıl çalışıyor?",
-        a: "Maç sırasında her round sonrası kısa notlar giriyorsun. AI motorumuz bunları analiz ederek anlık geri bildirim ve maç sonu raporu üretiyor.",
+        a: "AIMLO, maç sırasında her round sonrası girdiğin kısa notları yapay zeka motoruyla analiz eder. Ölüm konumun, karşılaştığın düşman sayısı ve kendi notların üzerinden anlık koçluk geri bildirimi üretir. Maç sonunda ise tüm round verilerini birleştirerek tekrarlayan hatalarını, düşman eğilimlerini ve stratejik öneriler içeren kapsamlı bir rapor oluşturur.",
       },
       {
         q: "Hangi rank seviyelerine uygun?",
-        a: "Iron'dan Radiant'a kadar her seviyedeki oyuncu için kişiselleştirilmiş analizler sunuyoruz.",
+        a: "AIMLO, Iron'dan Radiant'a kadar her seviyedeki Valorant oyuncusu için tasarlanmıştır. Analiz motoru, oyuncunun seviyesine göre öneriler üretir. Düşük ranklarda temel pozisyonlama ve rotasyon hataları vurgulanırken, yüksek ranklarda utility zamanlaması, trade pozisyonları ve takım koordinasyonu gibi daha ileri konulara odaklanılır.",
       },
       {
         q: "Verilerim güvende mi?",
-        a: "Evet, tüm veriler şifrelenmiş olarak saklanır ve sadece sen erişebilirsin.",
+        a: "Kesinlikle. Tüm kullanıcı verileri Supabase altyapısı üzerinde şifrelenmiş olarak saklanır ve Row Level Security (RLS) politikalarıyla korunur. Hiçbir kullanıcı başka bir kullanıcının verilerine erişemez. Maç analizlerin, round notların ve raporların yalnızca senin hesabın tarafından görüntülenebilir.",
       },
       {
         q: "Yardıma ihtiyacım var, nasıl ulaşabilirim?",
-        a: "support@aimlo.gg adresine e-posta gönderebilir veya uygulama içi geri bildirim formunu kullanabilirsiniz.",
+        a: "Herhangi bir sorun, öneri veya geri bildirim için support@aimlo.gg adresine e-posta gönderebilirsin. Ekibimiz genellikle 24 saat içinde dönüş yapar. Ayrıca uygulama içi geri bildirim formunu da kullanabilirsin. Topluluk desteği ve güncellemeler için sosyal medya kanallarımızı da takip edebilirsin.",
       },
     ],
     landingFeatures: [
@@ -790,6 +812,7 @@ const t = {
     ],
     goToDashboard: "Panele Git",
     homePage: "Ana Sayfa",
+    dashTopAgent: "En Çok Kullanılan Ajan",
   },
   en: {
     tagline: "Your Valorant coaching assistant",
@@ -940,23 +963,23 @@ const t = {
     landingFaqs: [
       {
         q: "Is AIMLO free?",
-        a: "Yes, basic analysis features are free. Premium plans with advanced features are coming soon.",
+        a: "Yes, AIMLO's core coaching features are completely free. This includes match setup, round-by-round feedback, and end-of-match reports. Premium features like advanced AI-powered deep analysis, historical match comparison, and personalized improvement roadmaps will be available in upcoming plans.",
       },
       {
         q: "How does it work?",
-        a: "During a match, you enter short notes after each round. Our AI engine analyzes them to provide instant feedback and an end-of-match report.",
+        a: "AIMLO analyzes the short notes you enter after each round using its AI engine. Based on your death location, enemy count, and personal notes, it generates instant coaching feedback. At the end of the match, all round data is combined to produce a comprehensive report covering recurring mistakes, enemy tendencies, and strategic recommendations.",
       },
       {
         q: "What rank levels is it for?",
-        a: "We provide personalized analysis for players from Iron to Radiant.",
+        a: "AIMLO is designed for every Valorant player from Iron to Radiant. The analysis engine adapts its suggestions to your level. Lower-ranked players receive guidance on positioning and rotation fundamentals, while higher-ranked players get insights on utility timing, trade setups, and team coordination.",
       },
       {
         q: "Is my data safe?",
-        a: "Yes, all data is stored encrypted and only you can access it.",
+        a: "Absolutely. All user data is stored encrypted on Supabase infrastructure and protected by Row Level Security (RLS) policies. No user can access another user's data. Your match analyses, round notes, and reports are only viewable by your own account.",
       },
       {
         q: "I need help, how can I reach you?",
-        a: "You can email support@aimlo.gg or use the in-app feedback form.",
+        a: "For any issues, suggestions, or feedback, you can email us at support@aimlo.gg. Our team typically responds within 24 hours. You can also use the in-app feedback form for quick reports. Follow our social media channels for community support and updates.",
       },
     ],
     landingFeatures: [
@@ -1028,6 +1051,7 @@ const t = {
     ],
     goToDashboard: "Go to Dashboard",
     homePage: "Home",
+    dashTopAgent: "Most Used Agent",
   },
 };
 /* ══════════════════════════════════════════════════════════
@@ -1359,63 +1383,113 @@ function FeatureIcon({ icon }: { icon: string }) {
   const svgs: Record<string, React.ReactNode> = {
     zap: (
       <svg
-        width="22"
-        height="22"
+        width="26"
+        height="26"
         viewBox="0 0 24 24"
         fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+        <polygon
+          points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
+          fill="rgba(34,211,238,0.15)"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        />
       </svg>
     ),
     chart: (
       <svg
-        width="22"
-        height="22"
+        width="26"
+        height="26"
         viewBox="0 0 24 24"
         fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <line x1="18" y1="20" x2="18" y2="10" />
-        <line x1="12" y1="20" x2="12" y2="4" />
-        <line x1="6" y1="20" x2="6" y2="14" />
+        <rect
+          x="15"
+          y="10"
+          width="6"
+          height="10"
+          rx="1"
+          fill="rgba(34,211,238,0.15)"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        />
+        <rect
+          x="9"
+          y="4"
+          width="6"
+          height="16"
+          rx="1"
+          fill="rgba(59,130,246,0.12)"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        />
+        <rect
+          x="3"
+          y="14"
+          width="6"
+          height="6"
+          rx="1"
+          fill="rgba(34,211,238,0.1)"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        />
       </svg>
     ),
     target: (
       <svg
-        width="22"
-        height="22"
+        width="26"
+        height="26"
         viewBox="0 0 24 24"
         fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <circle cx="12" cy="12" r="10" />
-        <circle cx="12" cy="12" r="6" />
-        <circle cx="12" cy="12" r="2" />
+        <circle
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          opacity="0.4"
+        />
+        <circle
+          cx="12"
+          cy="12"
+          r="6"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          opacity="0.6"
+        />
+        <circle cx="12" cy="12" r="2.5" fill="currentColor" opacity="0.8" />
       </svg>
     ),
     trend: (
       <svg
-        width="22"
-        height="22"
+        width="26"
+        height="26"
         viewBox="0 0 24 24"
         fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
-        <polyline points="17 6 23 6 23 12" />
+        <path
+          d="M1 18 L8.5 10.5 L13.5 15.5 L23 6"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        />
+        <path
+          d="M1 18 L8.5 10.5 L13.5 15.5 L23 6 L23 18 Z"
+          fill="rgba(34,211,238,0.08)"
+        />
+        <polyline
+          points="17 6 23 6 23 12"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        />
       </svg>
     ),
   };
@@ -1887,8 +1961,11 @@ function LandingPage({
               key={i}
               className={`${ds.card} ${ds.cardInner} ${ds.cardHover} text-center`}
             >
-              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/[0.07] border border-blue-500/10">
-                <FeatureIcon icon={f.icon} />
+              <div className="relative mx-auto mb-4">
+                <div className="absolute inset-0 m-auto h-12 w-12 rounded-xl bg-blue-500/[0.12] blur-xl" />
+                <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/[0.12] to-cyan-500/[0.08] border border-blue-500/15 shadow-lg shadow-blue-900/10">
+                  <FeatureIcon icon={f.icon} />
+                </div>
               </div>
               <h3 className="text-sm font-bold text-white mb-1">{f.title}</h3>
               <p className="text-[12px] text-neutral-500 leading-relaxed">
@@ -1914,8 +1991,76 @@ function LandingPage({
               className={`${ds.card} ${ds.cardInner} text-center transition-all duration-700 ${howReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
               style={{ transitionDelay: `${i * 100}ms` }}
             >
-              <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 text-sm font-bold text-white shadow-md shadow-blue-900/20">
-                {s.step}
+              <div className="relative mx-auto mb-4">
+                <div className="absolute inset-0 m-auto h-10 w-10 rounded-full bg-blue-500/20 blur-lg" />
+                <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 shadow-lg shadow-blue-900/25 ring-1 ring-white/10">
+                  {i === 0 && (
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    >
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        strokeWidth="0"
+                        fill="rgba(255,255,255,0.15)"
+                      />
+                      <path d="M12 6v6l4 2" />
+                      <circle cx="12" cy="12" r="9" />
+                    </svg>
+                  )}
+                  {i === 1 && (
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    >
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                    </svg>
+                  )}
+                  {i === 2 && (
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    >
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                    </svg>
+                  )}
+                  {i === 3 && (
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    >
+                      <line x1="18" y1="20" x2="18" y2="10" />
+                      <line x1="12" y1="20" x2="12" y2="4" />
+                      <line x1="6" y1="20" x2="6" y2="14" />
+                    </svg>
+                  )}
+                </div>
+                <span className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#0b1120] ring-2 ring-blue-500/30 text-[9px] font-bold text-blue-400">
+                  {s.step}
+                </span>
               </div>
               <h3 className="text-sm font-bold text-white mb-1">{s.title}</h3>
               <p className="text-[12px] text-neutral-500 leading-relaxed">
@@ -1942,56 +2087,76 @@ function LandingPage({
                 {l.landingAboutMission}
               </p>
             </div>
-            <div className="grid md:grid-cols-2 gap-5 pt-2">
-              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6 transition-all duration-200 hover:bg-white/[0.03]">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-cyan-500/[0.08] border border-cyan-500/10">
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      className="text-cyan-400"
-                    >
-                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                      <circle cx="12" cy="7" r="4" />
-                    </svg>
+            <div className="grid md:grid-cols-2 gap-5 pt-4">
+              <div className="relative rounded-2xl border border-cyan-500/10 bg-gradient-to-br from-cyan-500/[0.04] to-transparent p-7 transition-all duration-300 hover:border-cyan-500/20 hover:from-cyan-500/[0.07] group overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/[0.04] rounded-full blur-[60px] group-hover:bg-cyan-500/[0.08] transition-all duration-500" />
+                <div className="relative">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/20 to-cyan-600/10 border border-cyan-500/15 shadow-lg shadow-cyan-900/10">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        className="text-cyan-400"
+                      >
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white">
+                        {l.landingB2CTitle}
+                      </h3>
+                      <p className="text-[10px] text-cyan-400/70 font-medium uppercase tracking-wider">
+                        {lang === "tr"
+                          ? "Kendi hızında ilerle"
+                          : "Progress at your pace"}
+                      </p>
+                    </div>
                   </div>
-                  <h3 className="text-base font-bold text-white">
-                    {l.landingB2CTitle}
-                  </h3>
+                  <p className="text-sm text-neutral-400 leading-relaxed">
+                    {l.landingB2CText}
+                  </p>
                 </div>
-                <p className="text-sm text-neutral-400 leading-relaxed">
-                  {l.landingB2CText}
-                </p>
               </div>
-              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6 transition-all duration-200 hover:bg-white/[0.03]">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-500/[0.08] border border-blue-500/10">
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      className="text-blue-400"
-                    >
-                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                      <circle cx="9" cy="7" r="4" />
-                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                    </svg>
+              <div className="relative rounded-2xl border border-blue-500/10 bg-gradient-to-br from-blue-500/[0.04] to-transparent p-7 transition-all duration-300 hover:border-blue-500/20 hover:from-blue-500/[0.07] group overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/[0.04] rounded-full blur-[60px] group-hover:bg-blue-500/[0.08] transition-all duration-500" />
+                <div className="relative">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/15 shadow-lg shadow-blue-900/10">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        className="text-blue-400"
+                      >
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white">
+                        {l.landingB2BTitle}
+                      </h3>
+                      <p className="text-[10px] text-blue-400/70 font-medium uppercase tracking-wider">
+                        {lang === "tr"
+                          ? "Veriye dayalı kararlar"
+                          : "Data-driven decisions"}
+                      </p>
+                    </div>
                   </div>
-                  <h3 className="text-base font-bold text-white">
-                    {l.landingB2BTitle}
-                  </h3>
+                  <p className="text-sm text-neutral-400 leading-relaxed">
+                    {l.landingB2BText}
+                  </p>
                 </div>
-                <p className="text-sm text-neutral-400 leading-relaxed">
-                  {l.landingB2BText}
-                </p>
               </div>
             </div>
           </div>
@@ -2004,7 +2169,8 @@ function LandingPage({
         <h2
           className={`text-2xl sm:text-3xl font-extrabold text-white mb-10 text-center transition-all duration-700 ${diffReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
         >
-          {l.landingDiffTitle}
+          {lang === "tr" ? "Neden " : "Why "}
+          <AimloWordmark size="text-2xl sm:text-3xl" className="inline" />?
         </h2>
         <div className="grid md:grid-cols-3 gap-4">
           {l.landingDiffItems.map((item, i) => (
@@ -2027,25 +2193,145 @@ function LandingPage({
         id="section-blog"
         className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 pb-24"
       >
-        <div className={`${ds.card} ${ds.cardInner} text-center`}>
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-500/[0.07] border border-blue-500/10">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="text-blue-400"
-            >
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-            </svg>
-          </div>
-          <h2 className="text-2xl font-bold text-white mb-3">
-            {l.landingBlogTitle}
-          </h2>
-          <p className="text-sm text-neutral-500">{l.landingBlogText}</p>
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-8 text-center">
+          {l.landingBlogTitle}
+        </h2>
+        <div className="grid md:grid-cols-3 gap-4">
+          {/* Agents — 5 agent portraits composite */}
+          <a
+            href="https://playvalorant.com/en-us/agents/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${ds.card} overflow-hidden group cursor-pointer ${ds.cardHover}`}
+          >
+            <div className="relative h-40 overflow-hidden bg-gradient-to-br from-[#0d1a2d] to-[#0b1120]">
+              <div className="absolute inset-0 flex items-center justify-center gap-[-8px]">
+                {[
+                  "add6443a-41bd-e414-f6ad-e58d267f4e95",
+                  "a3bfb853-43b2-7238-a4f1-ad90e9e46bcc",
+                  "569fdd95-4d10-43ab-ca70-79becc718b46",
+                  "dade69b4-4f5a-8528-247b-219e5a1facd6",
+                  "8e253930-4c05-31dd-1b6c-968525494517",
+                ].map((id, i) => (
+                  <img
+                    key={id}
+                    src={`https://media.valorant-api.com/agents/${id}/displayicon.png`}
+                    alt=""
+                    className="h-20 w-20 object-contain opacity-50 group-hover:opacity-75 transition-all duration-500"
+                    style={{
+                      marginLeft: i > 0 ? "-12px" : "0",
+                      zIndex: 5 - i,
+                      filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.5))",
+                    }}
+                    loading="lazy"
+                  />
+                ))}
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0b1120] via-[#0b1120]/30 to-transparent" />
+              <div className="absolute bottom-3 left-4 flex items-center gap-2">
+                <span className="rounded-md bg-cyan-500/20 border border-cyan-500/20 px-2 py-0.5 text-[9px] font-bold text-cyan-400 uppercase tracking-wider">
+                  {lang === "tr" ? "Rehber" : "Guide"}
+                </span>
+              </div>
+            </div>
+            <div className="p-4">
+              <h3 className="text-sm font-bold text-white mb-1 group-hover:text-cyan-300 transition-colors">
+                {lang === "tr" ? "Tüm Ajanlar" : "All Agents"}
+              </h3>
+              <p className="text-[12px] text-neutral-500 leading-relaxed">
+                {lang === "tr"
+                  ? "Her ajanın yetenekleri, rolleri ve en iyi stratejileri"
+                  : "Abilities, roles, and best strategies for every agent"}
+              </p>
+            </div>
+          </a>
+          {/* Weapons — Vandal display icon */}
+          <a
+            href="https://playvalorant.com/en-us/arsenal/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${ds.card} overflow-hidden group cursor-pointer ${ds.cardHover}`}
+          >
+            <div className="relative h-40 overflow-hidden bg-gradient-to-br from-[#1a1510] to-[#0b1120]">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <img
+                  src="https://media.valorant-api.com/weapons/9c82e19d-4575-0200-1a81-3eacf00cf872/displayicon.png"
+                  alt="Vandal"
+                  className="h-24 w-auto object-contain opacity-45 group-hover:opacity-70 group-hover:scale-105 transition-all duration-500"
+                  style={{
+                    filter: "drop-shadow(0 4px 16px rgba(245,158,11,0.15))",
+                  }}
+                  loading="lazy"
+                />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0b1120] via-[#0b1120]/20 to-transparent" />
+              <div className="absolute bottom-3 left-4">
+                <span className="rounded-md bg-amber-500/20 border border-amber-500/20 px-2 py-0.5 text-[9px] font-bold text-amber-400 uppercase tracking-wider">
+                  {lang === "tr" ? "Cephanelik" : "Arsenal"}
+                </span>
+              </div>
+            </div>
+            <div className="p-4">
+              <h3 className="text-sm font-bold text-white mb-1 group-hover:text-amber-300 transition-colors">
+                {lang === "tr" ? "Tüm Silahlar" : "All Weapons"}
+              </h3>
+              <p className="text-[12px] text-neutral-500 leading-relaxed">
+                {lang === "tr"
+                  ? "Silah istatistikleri, hasar değerleri ve spray pattern rehberi"
+                  : "Weapon stats, damage values, and spray pattern guide"}
+              </p>
+            </div>
+          </a>
+          {/* Patch Notes — map splash background */}
+          <a
+            href="https://playvalorant.com/en-us/news/game-updates/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${ds.card} overflow-hidden group cursor-pointer ${ds.cardHover}`}
+          >
+            <div className="relative h-40 overflow-hidden">
+              <img
+                src="https://media.valorant-api.com/maps/7eaecc1b-4337-bbf6-6ab9-04b8f06b3319/splash.png"
+                alt="Patch Notes"
+                className="h-full w-full object-cover opacity-30 group-hover:opacity-50 group-hover:scale-105 transition-all duration-500"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0b1120] via-[#0b1120]/40 to-purple-900/10" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="rounded-2xl bg-purple-500/10 border border-purple-500/15 p-3 backdrop-blur-sm group-hover:bg-purple-500/15 transition-all duration-300">
+                  <svg
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    className="text-purple-400"
+                  >
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                  </svg>
+                </div>
+              </div>
+              <div className="absolute bottom-3 left-4">
+                <span className="rounded-md bg-purple-500/20 border border-purple-500/20 px-2 py-0.5 text-[9px] font-bold text-purple-400 uppercase tracking-wider">
+                  {lang === "tr" ? "Güncelleme" : "Updates"}
+                </span>
+              </div>
+            </div>
+            <div className="p-4">
+              <h3 className="text-sm font-bold text-white mb-1 group-hover:text-purple-300 transition-colors">
+                {lang === "tr" ? "Son Patch Notları" : "Latest Patch Notes"}
+              </h3>
+              <p className="text-[12px] text-neutral-500 leading-relaxed">
+                {lang === "tr"
+                  ? "Valorant'ın en son değişiklikleri, denge ayarları ve yenilikler"
+                  : "Latest Valorant changes, balance updates, and new features"}
+              </p>
+            </div>
+          </a>
         </div>
       </section>
       <section
@@ -2155,14 +2441,53 @@ function LandingPage({
         </div>
       </section>
       <footer className="relative z-10 border-t border-white/[0.06]">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <AimloLogo size={18} className="opacity-35" />
-            <AimloWordmark size="text-sm" className="opacity-35" />
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 py-10">
+          <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
+            <div className="flex flex-col items-center md:items-start gap-2">
+              <div className="flex items-center gap-2">
+                <AimloLogo size={22} className="opacity-50" />
+                <AimloWordmark size="text-base" className="opacity-50" />
+              </div>
+              <p className="text-[11px] text-neutral-600 max-w-xs text-center md:text-left">
+                {lang === "tr"
+                  ? "Yapay zeka destekli Valorant koçluk platformu."
+                  : "AI-powered Valorant coaching platform."}
+              </p>
+            </div>
+            <div className="flex items-center gap-6">
+              <a
+                href="mailto:support@aimlo.gg"
+                className="text-[11px] text-neutral-500 hover:text-white transition-colors"
+              >
+                support@aimlo.gg
+              </a>
+              <button
+                onClick={() =>
+                  document
+                    .getElementById("section-about")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="text-[11px] text-neutral-500 hover:text-white transition-colors"
+              >
+                {l.landingNav.about}
+              </button>
+              <button
+                onClick={() =>
+                  document
+                    .getElementById("section-faq")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="text-[11px] text-neutral-500 hover:text-white transition-colors"
+              >
+                {l.landingNav.faq}
+              </button>
+            </div>
           </div>
-          <p className="text-[11px] text-neutral-600">
-            {IC.copy} 2025 AIMLO. All rights reserved.
-          </p>
+          <div className="mt-6 pt-6 border-t border-white/[0.04] text-center">
+            <p className="text-[10px] text-neutral-700">
+              {IC.copy} 2025 AIMLO. All rights reserved.
+            </p>
+          </div>
         </div>
       </footer>
     </main>
@@ -2242,8 +2567,16 @@ function AuthScreen({
           });
           if (!profileResult.ok) {
             console.warn(
-              "[Aimlo] Profile creation failed, username login may not work",
+              "[Aimlo] Profile creation failed:",
+              profileResult.error,
             );
+            // Non-blocking warning — user can still use email login
+            setError(
+              lang === "tr"
+                ? "Hesap oluşturuldu ancak profil kaydedilemedi. Kullanıcı adı ile giriş çalışmayabilir."
+                : "Account created but profile could not be saved. Username login may not work.",
+            );
+            // Don't block — continue with auth flow after brief display
           }
         }
         if (data.user && !data.session) {
@@ -2487,10 +2820,16 @@ export default function Home() {
   const [authLoading, setAuthLoading] = useState(true);
   const [authMode, setAuthMode] = useState<AuthMode>("login");
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      setAuthLoading(false);
-    });
+    supabase.auth
+      .getSession()
+      .then(({ data: { session } }) => {
+        setUser(session?.user ?? null);
+        setAuthLoading(false);
+      })
+      .catch((err) => {
+        console.error("[Aimlo] getSession error:", err);
+        setAuthLoading(false);
+      });
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -2499,7 +2838,11 @@ export default function Home() {
     return () => subscription.unsubscribe();
   }, []);
   async function handleSignOut() {
-    await supabase.auth.signOut();
+    try {
+      await supabase.auth.signOut();
+    } catch (err) {
+      console.error("[Aimlo] signOut error:", err);
+    }
     setUser(null);
     setScreen("landing");
     clearDraft();
@@ -2543,6 +2886,9 @@ export default function Home() {
   const [savedReports, setSavedReports] = useState<SavedReport[]>([]);
   const [viewingReport, setViewingReport] = useState<SavedReport | null>(null);
   const [historyLoading, setHistoryLoading] = useState(false);
+  const [feedbackLoading, setFeedbackLoading] = useState(false);
+  const [reportLoading, setReportLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const locations = setup.map ? (MAP_LOCATIONS[setup.map] ?? []) : [];
   const roundNum = roundIdx + 1;
   // ALL hooks must be above early returns — React rules of hooks
@@ -2566,6 +2912,14 @@ export default function Home() {
         });
     });
     return Object.entries(spots).sort((a, b) => b[1] - a[1])[0];
+  }, [savedReports]);
+  const topAgent = useMemo(() => {
+    const agents: Record<string, number> = {};
+    savedReports.forEach((r) => {
+      if (r.agent) agents[r.agent] = (agents[r.agent] || 0) + 1;
+    });
+    const top = Object.entries(agents).sort((a, b) => b[1] - a[1])[0];
+    return top ? { name: top[0], count: top[1] } : null;
   }, [savedReports]);
   // FIX: redirect "lang" via useEffect, not during render
   useEffect(() => {
@@ -2597,6 +2951,9 @@ export default function Home() {
     setHistoryLoading(true);
     function rowToReport(row: Record<string, unknown>): SavedReport {
       const json = (row.raw_result_json as Record<string, unknown>) || {};
+      const rawDateStr = (row.created_at as string) || new Date().toISOString();
+      const parsedDate = new Date(rawDateStr);
+      const isValidDate = !isNaN(parsedDate.getTime());
       return {
         id: (row.id as string) || crypto.randomUUID(),
         map: (json.map as string) || (row.riot_id as string) || "",
@@ -2604,10 +2961,16 @@ export default function Home() {
         side: (json.side as string) || "",
         score: (json.score as string) || "",
         won: (json.won as boolean) ?? false,
-        date: new Date(row.created_at as string).toLocaleDateString(
-          lang === "tr" ? "tr-TR" : "en-US",
-          { day: "numeric", month: "short", year: "numeric" },
-        ),
+        rawDate: isValidDate
+          ? parsedDate.toISOString()
+          : new Date().toISOString(),
+        date: isValidDate
+          ? parsedDate.toLocaleDateString(lang === "tr" ? "tr-TR" : "en-US", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            })
+          : "",
         summary: (row.summary as string) || (json.summary as string) || "",
         mistake: (row.weakness as string) || (json.mistake as string) || "",
         tendencies:
@@ -2659,7 +3022,8 @@ export default function Home() {
           if (!ids.has(r.id)) allReports.push(r);
         }
         allReports.sort(
-          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+          (a, b) =>
+            new Date(b.rawDate).getTime() - new Date(a.rawDate).getTime(),
         );
       }
     } catch {}
@@ -2676,10 +3040,12 @@ export default function Home() {
     sc: MatchScore,
   ) {
     if (!user) return;
+    // NOTE: DB columns riot_id/region are legacy names; they store map/agent respectively.
+    // raw_result_json contains the canonical field names.
     const payload = {
       user_id: user.id,
-      riot_id: sd.map,
-      region: sd.agent,
+      riot_id: sd.map, // legacy: stores map name
+      region: sd.agent, // legacy: stores agent name
       summary: rep.summary,
       weakness: rep.mistake,
       strength: rep.tendencies,
@@ -2869,15 +3235,41 @@ export default function Home() {
     setMatchScore({ yours: "", enemy: "" });
     setScreen("scoreInput");
   }
-  function finishWithScore(yours: string, enemy: string) {
+  async function finishWithScore(yours: string, enemy: string) {
+    if (reportLoading) return; // prevent double submit
     const sc: MatchScore = { yours, enemy };
     const all = getRoundsForReport(pendingFinishRound ?? undefined);
     if (pendingFinishRound) setRounds(all);
-    const rep = genMatchReport(setup, all, lang ?? "tr", sc);
+    setReportLoading(true);
+    setScreen("report");
+    let rep: ReturnType<typeof genMatchReport>;
+    try {
+      const res = await fetch("/api/ai/report", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          setup,
+          rounds: all,
+          lang: lang ?? "tr",
+          score: sc,
+        }),
+      });
+      if (res.ok) {
+        const json = await res.json();
+        rep = isValidReport(json)
+          ? json
+          : genMatchReport(setup, all, lang ?? "tr", sc);
+      } else {
+        rep = genMatchReport(setup, all, lang ?? "tr", sc);
+      }
+    } catch {
+      rep = genMatchReport(setup, all, lang ?? "tr", sc);
+    } finally {
+      setReportLoading(false);
+    }
     setReport(rep);
     saveReportToDb(rep, setup, all, sc);
     clearDraft();
-    setScreen("report");
   }
   function handleLangToggle() {
     const nl = lang === "tr" ? "en" : "tr";
@@ -2934,8 +3326,34 @@ export default function Home() {
             className={`w-full group ${ds.card} ${ds.cardHover} overflow-hidden`}
           >
             <div className="p-5 sm:p-6 flex items-center gap-4">
-              <div className="shrink-0 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 shadow-lg shadow-blue-900/20 text-xl font-bold text-white group-hover:scale-105 transition-transform duration-300">
-                +
+              <div className="relative shrink-0">
+                <div className="absolute inset-0 m-auto h-12 w-12 rounded-2xl bg-blue-500/25 blur-xl group-hover:bg-blue-500/35 transition-all duration-500" />
+                <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 shadow-lg shadow-blue-900/30 group-hover:scale-105 group-hover:shadow-xl transition-all duration-300 ring-1 ring-white/10">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      opacity="0.2"
+                      fill="white"
+                      strokeWidth="0"
+                    />
+                    <path
+                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10"
+                      strokeWidth="0"
+                    />
+                    <polygon points="10 8 16 12 10 16 10 8" fill="white" />
+                  </svg>
+                </div>
               </div>
               <div className="text-left">
                 <h2 className="text-lg font-bold text-white">
@@ -2950,7 +3368,7 @@ export default function Home() {
               </div>
             </div>
           </button>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <StatCard
               label={l.dashWinRate}
               value={savedReports.length > 0 ? `${winRate}%` : "\u2014"}
@@ -2977,6 +3395,34 @@ export default function Home() {
               color={topDeathSpot ? "text-amber-400" : "text-neutral-600"}
               sub={topDeathSpot ? `${topDeathSpot[1]}x` : l.dashNoStats}
             />
+            {/* Top Agent Card */}
+            <div className={`${ds.card} p-4 sm:p-5 text-center`}>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-500 mb-1.5">
+                {l.dashTopAgent}
+              </p>
+              {topAgent ? (
+                <div className="flex flex-col items-center gap-1.5">
+                  <div className="h-8 w-8 rounded-lg overflow-hidden bg-black/20 ring-1 ring-white/[0.06]">
+                    <img
+                      src={agentImgUrl(topAgent.name)}
+                      alt={topAgent.name}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                  <p className="text-sm font-extrabold text-cyan-400">
+                    {topAgent.name}
+                  </p>
+                  <p className="text-[10px] text-neutral-600 font-medium">
+                    {topAgent.count}x
+                  </p>
+                </div>
+              ) : (
+                <p className="text-2xl font-extrabold tabular-nums text-neutral-600">
+                  {"\u2014"}
+                </p>
+              )}
+            </div>
           </div>
           <div className="space-y-3">
             <div className="flex items-center justify-between">
@@ -3699,19 +4145,49 @@ export default function Home() {
         e.yourNote = l.noteTooShort;
       return e;
     }
-    function handleSubmitRound(result: RoundResult) {
+    async function handleSubmitRound(result: RoundResult) {
       const e = validateRound();
       setRoundErrors(e);
       if (Object.keys(e).length > 0) return;
+      if (isSubmitting) return; // debounce
+      setIsSubmitting(true);
+      setFeedbackLoading(true);
       const prev = rounds.slice(0, roundIdx);
-      const fb = genRoundFeedback(
-        setup,
-        roundForm,
-        result,
-        prev,
-        lang ?? "tr",
-        survived,
-      );
+      const fallbackFb = () =>
+        genRoundFeedback(
+          setup,
+          roundForm,
+          result,
+          prev,
+          lang ?? "tr",
+          survived,
+        );
+      let fb: RoundFeedback;
+      try {
+        const res = await fetch("/api/ai/feedback", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            setup,
+            form: roundForm,
+            result,
+            allRounds: prev,
+            lang: lang ?? "tr",
+            survived,
+          }),
+        });
+        if (res.ok) {
+          const json = await res.json();
+          fb = isValidFeedback(json) ? json : fallbackFb();
+        } else {
+          fb = fallbackFb();
+        }
+      } catch {
+        fb = fallbackFb();
+      } finally {
+        setFeedbackLoading(false);
+        setIsSubmitting(false);
+      }
       const rd: RoundData = {
         roundNumber: roundNum,
         deathLocation: survived ? "" : roundForm.deathLocation,
@@ -3897,20 +4373,33 @@ export default function Home() {
               </div>
               <div>
                 <Label text={l.roundResult} />
-                <div className="flex gap-3">
-                  <button
-                    onClick={() => handleSubmitRound("win")}
-                    className="flex-1 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.06] py-3.5 text-sm font-bold text-emerald-400 transition-all hover:bg-emerald-500/[0.1] active:scale-[0.98]"
-                  >
-                    {l.roundResultWin}
-                  </button>
-                  <button
-                    onClick={() => handleSubmitRound("loss")}
-                    className="flex-1 rounded-xl border border-red-500/20 bg-red-500/[0.06] py-3.5 text-sm font-bold text-red-400 transition-all hover:bg-red-500/[0.1] active:scale-[0.98]"
-                  >
-                    {l.roundResultLoss}
-                  </button>
-                </div>
+                {feedbackLoading ? (
+                  <div className="flex items-center justify-center gap-3 py-6">
+                    <div className="h-5 w-5 animate-spin rounded-full border-2 border-blue-500 border-t-transparent" />
+                    <span className="text-sm text-neutral-400">
+                      {lang === "tr"
+                        ? "AI analiz ediyor..."
+                        : "AI analyzing..."}
+                    </span>
+                  </div>
+                ) : (
+                  <div className="flex gap-3">
+                    <button
+                      onClick={() => handleSubmitRound("win")}
+                      disabled={isSubmitting}
+                      className="flex-1 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.06] py-3.5 text-sm font-bold text-emerald-400 transition-all hover:bg-emerald-500/[0.1] active:scale-[0.98] disabled:opacity-40"
+                    >
+                      {l.roundResultWin}
+                    </button>
+                    <button
+                      onClick={() => handleSubmitRound("loss")}
+                      disabled={isSubmitting}
+                      className="flex-1 rounded-xl border border-red-500/20 bg-red-500/[0.06] py-3.5 text-sm font-bold text-red-400 transition-all hover:bg-red-500/[0.1] active:scale-[0.98] disabled:opacity-40"
+                    >
+                      {l.roundResultLoss}
+                    </button>
+                  </div>
+                )}
               </div>
               <div className="space-y-3 pt-2">
                 <button
@@ -4061,10 +4550,19 @@ export default function Home() {
                   if (matchScore.yours && matchScore.enemy)
                     finishWithScore(matchScore.yours, matchScore.enemy);
                 }}
-                disabled={!matchScore.yours || !matchScore.enemy}
+                disabled={
+                  !matchScore.yours || !matchScore.enemy || reportLoading
+                }
                 className={ds.btnPrimary}
               >
-                {l.confirmScore}
+                {reportLoading ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                    {lang === "tr" ? "Oluşturuluyor..." : "Generating..."}
+                  </span>
+                ) : (
+                  l.confirmScore
+                )}
               </button>
               <button
                 onClick={() => setScreen("round")}
@@ -4078,6 +4576,22 @@ export default function Home() {
       </main>
     );
   /* REPORT */
+  if (screen === "report" && (reportLoading || !report))
+    return (
+      <main className={`${ds.pageBg} relative`}>
+        <MapBg map={setup.map} />
+        <Navbar {...navProps} />
+        <div className="relative z-10 mx-auto max-w-lg px-4 pt-40 flex flex-col items-center gap-5">
+          <AimloLogo size={48} className="animate-pulse" />
+          <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-500 border-t-transparent" />
+          <p className="text-sm text-neutral-400">
+            {lang === "tr"
+              ? "AI rapor oluşturuyor..."
+              : "AI generating report..."}
+          </p>
+        </div>
+      </main>
+    );
   if (screen === "report" && report)
     return (
       <main className={`${ds.pageBg} relative`}>
