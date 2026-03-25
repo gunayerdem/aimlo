@@ -2923,7 +2923,7 @@ export default function Home() {
   }, [savedReports]);
   // FIX: redirect "lang" via useEffect, not during render
   useEffect(() => {
-    if (user && screen === "lang") setScreen("dashboard");
+    if (user && screen === "lang") setScreen("landing");
   }, [user, screen]);
   useEffect(() => {
     setLang(loadLang() || "en");
