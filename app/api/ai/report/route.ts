@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { verifyAuthAndRateLimit } from "@/lib/api-auth";
 
 /**
  * POST /api/ai/report
@@ -321,7 +322,7 @@ Each field: 1-3 sentences max. Be specific, actionable. No markdown, no code blo
       const note = (r.yourNote || "")
         .replace(/["\\\n\r\t]/g, " ")
         .slice(0, 150);
-      return `R${r.roundNumber}: ${r.result}${r.survived ? " (alive)" : ` died@${r.deathLocation || "?"} vs ${r.enemyCount || "?"}`} ${note}`;
+      return `R${r.roundNumber}: ${r.result}${r.survived ? " (alive)" : ` died@${r.deathLocation || "?"} vs ${r.enemyCount || "?"}`} <note>${note}</note>`;
     })
     .join("\n");
 
@@ -350,14 +351,15 @@ Rounds:\n${roundSummary}`;
       signal: controller.signal,
     });
 
-    clearTimeout(timeoutId);
-
     if (!response.ok) {
+      clearTimeout(timeoutId);
       console.error(`[Aimlo AI] Report API ${response.status}`);
       return stats;
     }
 
+    // Parse body with timeout still active
     const data = await response.json();
+    clearTimeout(timeoutId);
     const text: string = data?.content?.[0]?.text || "";
 
     // Parse AI JSON — try direct first, then regex fallback
@@ -412,6 +414,10 @@ Rounds:\n${roundSummary}`;
    ══════════════════════════════════════════════════════════ */
 export async function POST(request: NextRequest) {
   try {
+    // Auth + rate limit check
+    const auth = await verifyAuthAndRateLimit(request);
+    if (!auth.ok) return auth.response;
+
     let rawBody: unknown;
     try {
       rawBody = await request.json();

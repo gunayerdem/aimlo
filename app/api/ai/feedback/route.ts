@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { verifyAuthAndRateLimit } from "@/lib/api-auth";
 
 /**
  * POST /api/ai/feedback
@@ -494,7 +495,7 @@ Each field: 1-2 sentences max. Be specific. No markdown, no code blocks, just JS
 
   const userPrompt = `Map: ${setup.map}, Agent: ${setup.agent}, Side: ${setup.side}
 ${survived ? "Player survived this round." : `Death location: ${form.deathLocation}, Enemies faced: ${form.enemyCount}`}
-Player note: ${safeNote}
+<user_note>${safeNote}</user_note>
 Round result: ${result}
 Previous rounds: ${roundCount} played, ${roundsWon} won
 Repeated death at same location: ${repeatDeaths} times`;
@@ -519,14 +520,15 @@ Repeated death at same location: ${repeatDeaths} times`;
       signal: controller.signal,
     });
 
-    clearTimeout(timeoutId);
-
     if (!response.ok) {
+      clearTimeout(timeoutId);
       console.error(`[Aimlo AI] API ${response.status}`);
       return generateDeterministicFeedback(body);
     }
 
+    // Parse body with timeout still active
     const data = await response.json();
+    clearTimeout(timeoutId);
     const text: string = data?.content?.[0]?.text || "";
 
     // Try direct JSON parse first, then regex fallback
@@ -578,6 +580,10 @@ Repeated death at same location: ${repeatDeaths} times`;
    ══════════════════════════════════════════════════════════ */
 export async function POST(request: NextRequest) {
   try {
+    // Auth + rate limit check
+    const auth = await verifyAuthAndRateLimit(request);
+    if (!auth.ok) return auth.response;
+
     let rawBody: unknown;
     try {
       rawBody = await request.json();

@@ -74,6 +74,21 @@ type SavedReport = {
   setup: SetupData;
 };
 /* ══════════════════════════════════════════════════════════
+   AUTH TOKEN HELPER — for API calls
+   ══════════════════════════════════════════════════════════ */
+async function getAuthHeaders(): Promise<Record<string, string>> {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
+  if (session?.access_token) {
+    headers["Authorization"] = `Bearer ${session.access_token}`;
+  }
+  return headers;
+}
+/* ══════════════════════════════════════════════════════════
    RESPONSE VALIDATORS
    ══════════════════════════════════════════════════════════ */
 function isValidFeedback(obj: unknown): obj is RoundFeedback {
@@ -142,16 +157,16 @@ async function upsertProfile(
 
 async function checkUsernameAvailable(username: string): Promise<boolean> {
   try {
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("user_id")
-      .ilike("username", username.toLowerCase().trim())
-      .maybeSingle();
+    // Use secure RPC function instead of direct table query
+    const { data: foundEmail, error } = await supabase.rpc(
+      "lookup_email_by_username",
+      { lookup_username: username.toLowerCase().trim() },
+    );
     if (error) {
       console.error("[Aimlo] Username check error:", error.message);
       return true; // allow attempt, DB constraint will catch duplicates
     }
-    return !data;
+    return !foundEmail; // null means username is available
   } catch {
     return true;
   }
@@ -562,10 +577,14 @@ function localizeAuthError(msg: string, lang: Lang): string {
     "Unable to validate email address: invalid format":
       "Geçersiz e-posta formatı",
     "Signup requires a valid password": "Geçerli bir şifre girin",
-    "Email rate limit exceeded": "Çok fazla deneme. Lütfen bekleyin.",
+    "Email rate limit exceeded":
+      "Çok fazla deneme yapıldı. Lütfen 1-2 dakika bekleyip tekrar deneyin.",
     "For security purposes, you can only request this after 60 seconds":
-      "Güvenlik nedeniyle 60 saniye beklemelisiniz",
-    "Too many requests": "Çok fazla istek. Lütfen bekleyin.",
+      "Güvenlik nedeniyle 60 saniye beklemeniz gerekiyor. Lütfen biraz sonra tekrar deneyin.",
+    "over_email_send_rate_limit":
+      "E-posta gönderim limiti aşıldı. Lütfen birkaç dakika bekleyin.",
+    "Too many requests":
+      "Çok fazla istek gönderildi. Lütfen 1-2 dakika bekleyip tekrar deneyin.",
     "Network error": "Bağlantı hatası. İnterneti kontrol edin.",
     "Username not found": "Kullanıcı adı bulunamadı",
   };
@@ -627,7 +646,7 @@ const t = {
     roundsSkipped: "Atlanan",
     newMatch: "Yeni Maç",
     required: "Bu alan zorunlu",
-    noteTooShort: "En az 10 karakter girin",
+    noteTooShort: "En az 3 karakter girin",
     selectAll: "Tüm slotları doldurun",
     wonLabel: "G",
     lostLabel: "M",
@@ -862,7 +881,7 @@ const t = {
     roundsSkipped: "Skipped",
     newMatch: "New Match",
     required: "This field is required",
-    noteTooShort: "Enter at least 10 characters",
+    noteTooShort: "Enter at least 3 characters",
     selectAll: "Fill all slots",
     wonLabel: "W",
     lostLabel: "L",
@@ -1557,8 +1576,14 @@ function Navbar({
           >
             {lang === "tr" ? "TR" : "EN"}
           </button>
-          <span className="hidden md:block text-[11px] text-neutral-600 truncate max-w-[130px]">
-            {user.email}
+          <span className="hidden sm:flex items-center gap-1.5 rounded-lg border border-white/[0.06] bg-white/[0.03] px-2.5 py-1.5">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-cyan-400 shrink-0">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <span className="text-[11px] font-semibold text-neutral-300 truncate max-w-[120px]">
+              {user.user_metadata?.username || user.user_metadata?.first_name || user.email?.split("@")[0] || "User"}
+            </span>
           </span>
           <button
             onClick={onSignOut}
@@ -1820,6 +1845,15 @@ function LandingPage({
                 >
                   {l.goToDashboard}
                 </button>
+                <span className="hidden sm:flex items-center gap-1.5 rounded-lg border border-white/[0.06] bg-white/[0.03] px-2.5 py-1.5">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-cyan-400 shrink-0">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                  <span className="text-[11px] font-semibold text-neutral-300 truncate max-w-[100px]">
+                    {user.user_metadata?.username || user.user_metadata?.first_name || user.email?.split("@")[0] || "User"}
+                  </span>
+                </span>
                 <button
                   onClick={onSignOut}
                   className="hidden sm:block rounded-lg border border-white/[0.06] bg-white/[0.02] px-3 py-2 text-[11px] font-medium text-neutral-500 transition-all hover:text-red-400 hover:border-red-500/20"
@@ -2521,6 +2555,32 @@ function AuthScreen({
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    // Client-side email format check — prevents unnecessary Supabase calls & rate limits
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (mode === "register" && !emailRegex.test(email.trim())) {
+      setError(
+        lang === "tr"
+          ? "Geçerli bir e-posta adresi girin"
+          : "Please enter a valid email address",
+      );
+      return;
+    }
+    if (mode === "register" && username.trim().length < 3) {
+      setError(
+        lang === "tr"
+          ? "Kullanıcı adı en az 3 karakter olmalı"
+          : "Username must be at least 3 characters",
+      );
+      return;
+    }
+    if (mode === "register" && password.length < 6) {
+      setError(
+        lang === "tr"
+          ? "Şifre en az 6 karakter olmalı"
+          : "Password must be at least 6 characters",
+      );
+      return;
+    }
     setLoading(true);
     try {
       if (mode === "register") {
@@ -2587,20 +2647,18 @@ function AuthScreen({
         if (data.user && data.session) onAuth(data.user);
       } else {
         let loginEmail = email.trim();
-        // Username login: lookup email from profiles (case-insensitive)
+        // Username login: secure RPC lookup (SECURITY DEFINER function)
         if (!loginEmail.includes("@")) {
-          const { data: profileData, error: profileError } = await supabase
-            .from("profiles")
-            .select("email")
-            .ilike("username", loginEmail.toLowerCase())
-            .limit(1)
-            .maybeSingle();
-          if (profileError || !profileData?.email) {
+          const { data: foundEmail, error: rpcError } = await supabase
+            .rpc("lookup_email_by_username", {
+              lookup_username: loginEmail.toLowerCase(),
+            });
+          if (rpcError || !foundEmail) {
             setError(localizeAuthError("Username not found", lang));
             setLoading(false);
             return;
           }
-          loginEmail = profileData.email;
+          loginEmail = foundEmail as string;
         }
         const { data, error: err } = await supabase.auth.signInWithPassword({
           email: loginEmail,
@@ -2889,8 +2947,28 @@ export default function Home() {
   const [feedbackLoading, setFeedbackLoading] = useState(false);
   const [reportLoading, setReportLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [verifiedBanner, setVerifiedBanner] = useState<
+    "success" | "error" | null
+  >(null);
   const locations = setup.map ? (MAP_LOCATIONS[setup.map] ?? []) : [];
   const roundNum = roundIdx + 1;
+  // Check for email verification callback (?verified=true)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const verified = params.get("verified");
+    if (verified === "true") {
+      setVerifiedBanner("success");
+      // Clean URL
+      window.history.replaceState({}, "", window.location.pathname);
+      // Auto-hide after 6 seconds
+      setTimeout(() => setVerifiedBanner(null), 6000);
+    } else if (verified === "error") {
+      setVerifiedBanner("error");
+      window.history.replaceState({}, "", window.location.pathname);
+      setTimeout(() => setVerifiedBanner(null), 6000);
+    }
+  }, []);
   // ALL hooks must be above early returns — React rules of hooks
   const winRate = useMemo(
     () =>
@@ -2937,12 +3015,21 @@ export default function Home() {
     if (!draftRestored.current && user && lang) {
       draftRestored.current = true;
       const draft = loadDraft();
-      if (draft && (draft.screen === "setup" || draft.screen === "round")) {
+      if (
+        draft &&
+        (draft.screen === "setup" || draft.screen === "round") &&
+        draft.setup?.map &&
+        Array.isArray(draft.rounds) &&
+        typeof draft.roundIdx === "number"
+      ) {
         setSetup(draft.setup);
         setSetupStep(draft.setupStep);
         setRounds(draft.rounds);
         setRoundIdx(draft.roundIdx);
         setScreen(draft.screen);
+      } else if (draft) {
+        // Invalid draft shape — clear it
+        clearDraft();
       }
     }
   }, [user, lang]);
@@ -3026,7 +3113,13 @@ export default function Home() {
             new Date(b.rawDate).getTime() - new Date(a.rawDate).getTime(),
         );
       }
-    } catch {}
+    } catch (localErr) {
+      // Clear corrupted localStorage data
+      console.error("[Aimlo] Local reports parse failed, clearing:", localErr);
+      try {
+        localStorage.removeItem(`aimlo_local_reports_${user.id}`);
+      } catch {}
+    }
     setSavedReports(allReports);
     setHistoryLoading(false);
   }, [user, lang]);
@@ -3119,9 +3212,37 @@ export default function Home() {
         </div>
       </main>
     );
+  // ── Email verification banner (shows on any screen) ──
+  const VerifiedBanner = verifiedBanner ? (
+    <div
+      className={`fixed top-0 left-0 right-0 z-[100] flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold transition-all duration-300 ${
+        verifiedBanner === "success"
+          ? "bg-emerald-500/20 border-b border-emerald-500/30 text-emerald-300"
+          : "bg-red-500/20 border-b border-red-500/30 text-red-300"
+      }`}
+    >
+      <span>
+        {verifiedBanner === "success"
+          ? lang === "tr"
+            ? "✓ E-posta başarıyla doğrulandı! Artık giriş yapabilirsiniz."
+            : "✓ Email verified successfully! You can now sign in."
+          : lang === "tr"
+            ? "✕ E-posta doğrulama başarısız oldu. Lütfen tekrar deneyin."
+            : "✕ Email verification failed. Please try again."}
+      </span>
+      <button
+        onClick={() => setVerifiedBanner(null)}
+        className="ml-2 rounded-md px-2 py-0.5 text-xs opacity-70 hover:opacity-100 transition"
+      >
+        ✕
+      </button>
+    </div>
+  ) : null;
   if (screen === "landing")
     return (
-      <LandingPage
+      <>
+        {VerifiedBanner}
+        <LandingPage
         lang={lang}
         user={user}
         onStartAnalysis={() => {
@@ -3144,6 +3265,7 @@ export default function Home() {
         onDashboard={() => setScreen("dashboard")}
         onSignOut={handleSignOut}
       />
+      </>
     );
   if (!user)
     return (
@@ -3157,7 +3279,13 @@ export default function Home() {
         onBackToLanding={() => setScreen("landing")}
       />
     );
-  if (screen === "lang") return null; // useEffect handles redirect
+  // useEffect redirects "lang" screen — show loading spinner briefly
+  if (screen === "lang")
+    return (
+      <main className={`${ds.pageBg} flex items-center justify-center`}>
+        <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-500 border-t-transparent" />
+      </main>
+    );
   const l = t[lang];
   function updateSetup<K extends keyof SetupData>(key: K, val: SetupData[K]) {
     setSetup((p) => ({ ...p, [key]: val }));
@@ -3235,18 +3363,22 @@ export default function Home() {
     setMatchScore({ yours: "", enemy: "" });
     setScreen("scoreInput");
   }
+  const finishLockRef = useRef(false);
   async function finishWithScore(yours: string, enemy: string) {
-    if (reportLoading) return; // prevent double submit
+    if (reportLoading || finishLockRef.current) return;
+    finishLockRef.current = true;
     const sc: MatchScore = { yours, enemy };
     const all = getRoundsForReport(pendingFinishRound ?? undefined);
     if (pendingFinishRound) setRounds(all);
+    setReport(null); // clear stale report
     setReportLoading(true);
     setScreen("report");
     let rep: ReturnType<typeof genMatchReport>;
     try {
+      const reportAuthHeaders = await getAuthHeaders();
       const res = await fetch("/api/ai/report", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: reportAuthHeaders,
         body: JSON.stringify({
           setup,
           rounds: all,
@@ -3266,6 +3398,7 @@ export default function Home() {
       rep = genMatchReport(setup, all, lang ?? "tr", sc);
     } finally {
       setReportLoading(false);
+      finishLockRef.current = false;
     }
     setReport(rep);
     saveReportToDb(rep, setup, all, sc);
@@ -4141,15 +4274,17 @@ export default function Home() {
         if (!roundForm.enemyCount) e.enemyCount = l.required;
       }
       if (!roundForm.yourNote.trim()) e.yourNote = l.required;
-      else if (roundForm.yourNote.trim().length < 10)
+      else if (roundForm.yourNote.trim().length < 3)
         e.yourNote = l.noteTooShort;
       return e;
     }
+    const submitLockRef = useRef(false);
     async function handleSubmitRound(result: RoundResult) {
       const e = validateRound();
       setRoundErrors(e);
       if (Object.keys(e).length > 0) return;
-      if (isSubmitting) return; // debounce
+      if (isSubmitting || submitLockRef.current) return;
+      submitLockRef.current = true;
       setIsSubmitting(true);
       setFeedbackLoading(true);
       const prev = rounds.slice(0, roundIdx);
@@ -4164,9 +4299,10 @@ export default function Home() {
         );
       let fb: RoundFeedback;
       try {
+        const authHeaders = await getAuthHeaders();
         const res = await fetch("/api/ai/feedback", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: authHeaders,
           body: JSON.stringify({
             setup,
             form: roundForm,
@@ -4187,6 +4323,7 @@ export default function Home() {
       } finally {
         setFeedbackLoading(false);
         setIsSubmitting(false);
+        submitLockRef.current = false;
       }
       const rd: RoundData = {
         roundNumber: roundNum,
@@ -4718,5 +4855,20 @@ export default function Home() {
         </div>
       </main>
     );
-  return null;
+  // Fallback — should never reach here, redirect to landing
+  return (
+    <main className={`${ds.pageBg} flex items-center justify-center`}>
+      <div className="text-center space-y-4">
+        <p className="text-neutral-500 text-sm">
+          {lang === "tr" ? "Sayfa bulunamadı" : "Page not found"}
+        </p>
+        <button
+          onClick={() => setScreen("landing")}
+          className={ds.btnPrimary + " max-w-xs mx-auto"}
+        >
+          {lang === "tr" ? "Ana Sayfaya Dön" : "Go to Home"}
+        </button>
+      </div>
+    </main>
+  );
 }
