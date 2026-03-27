@@ -37,7 +37,9 @@ export function saveLang(l: Lang) {
 
 export function loadLang(): Lang | null {
   try {
-    return localStorage.getItem(LS_KEYS.lang) as Lang | null;
+    const val = localStorage.getItem(LS_KEYS.lang);
+    if (val === "tr" || val === "en") return val;
+    return null;
   } catch {
     return null;
   }

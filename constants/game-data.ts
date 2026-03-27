@@ -6,8 +6,8 @@ import type { Lang } from "@/types";
 // ── Agent Groups ──
 export const AGENT_GROUPS: Record<string, string[]> = {
   Controllers: ["Brimstone", "Viper", "Omen", "Astra", "Harbor", "Clove"],
-  Duelists: ["Jett", "Raze", "Reyna", "Phoenix", "Yoru", "Neon", "Iso", "Waylay"],
-  Initiators: ["Sova", "Breach", "Skye", "KAY/O", "Fade", "Gekko", "Tejo"],
+  Duelists: ["Jett", "Raze", "Reyna", "Phoenix", "Yoru", "Neon", "Iso", "Waylay", "Veto"],
+  Initiators: ["Sova", "Breach", "Skye", "KAY/O", "Fade", "Gekko", "Tejo", "Miks"],
   Sentinels: ["Sage", "Cypher", "Killjoy", "Chamber", "Deadlock", "Vyse"],
 };
 
@@ -66,7 +66,7 @@ const AGENT_SLUGS: Record<string, string> = {
   Yoru: "7f94d92c-4234-0a36-9646-3a87eb8b5c89",
   Neon: "bb2a4828-46eb-8cd1-e765-15848195d751",
   Iso: "0e38b510-41a8-5780-5e8f-568b2a4f2d6c",
-  Waylay: "efba5359-4016-a1e5-7626-b1ae76895940",
+  Waylay: "df1cb487-4902-002e-5c17-d28e83e78588",
   Sova: "320b2a48-4d9b-a075-30f1-1f93a9b638fa",
   Breach: "5f8d3a7f-467b-97f3-062c-13acf203c006",
   Skye: "6f2a04ca-43e0-be17-7f36-b3908627744d",
@@ -80,6 +80,8 @@ const AGENT_SLUGS: Record<string, string> = {
   Chamber: "22697a3d-45bf-8dd7-4fec-84a9e28c69d7",
   Deadlock: "cc8b64c8-4b25-4ff9-6e7f-37b4da43d235",
   Vyse: "efba5359-4016-a1e5-7626-b1ae76895940",
+  Miks: "7c8a4701-4de6-9355-b254-e09bc2a34b72",
+  Veto: "92eeef5d-43b5-1d4a-8d03-b3927a09034b",
 };
 
 export function agentImgUrl(name: string): string {

@@ -49,9 +49,10 @@ function isValidFeedback(obj: unknown): obj is RoundFeedback {
   if (!obj || typeof obj !== "object") return false;
   const o = obj as Record<string, unknown>;
   return (
-    typeof o.mainMistake === "string" &&
-    typeof o.enemyHabit === "string" &&
-    typeof o.microPlan === "string"
+    typeof o.deathAnalysis === "string" &&
+    Array.isArray(o.enemyPatterns) &&
+    o.enemyPatterns.every((p: unknown) => typeof p === "string") &&
+    typeof o.nextRoundPlan === "string"
   );
 }
 function isValidReport(obj: unknown): obj is ReturnType<typeof genMatchReport> {
@@ -128,7 +129,7 @@ async function checkUsernameAvailable(username: string): Promise<boolean> {
 /* ══════════════════════════════════════════════════════════
    BRAND
    ══════════════════════════════════════════════════════════ */
-const AIMLO_LOGO_SRC = "/aimlo-logo.png?v=5d2fb8b5";
+const AIMLO_LOGO_SRC = "/aimlo-logo.png";
 function AimloLogo({
   size = 48,
   className = "",
@@ -241,14 +242,16 @@ const t = {
     nextRound: "Sonraki Round",
     finishMatch: "Maçı Bitir",
     feedbackTitle: "Round Geri Bildirimi",
-    mainMistake: "Ana Hata",
-    enemyHabit: "Düşman Alışkanlığı",
-    microPlan: "Sonraki Round Mikro Planı",
+    deathAnalysis: "Ölüm Analizi",
+    enemyPatterns: "Düşman Analizi",
+    nextRoundPlan: "Sonraki Round Planı",
     reportTitle: "Maç Raporu",
     overallSummary: "Genel Maç Özeti",
     mainRecurringMistake: "Ana Tekrarlayan Hata",
     enemyTendencies: "Düşman Eğilimleri",
     suggestedAdjustment: "Önerilen Düzenleme",
+    bestRound: "En İyi Round",
+    decisionScore: "Karar Verme Puanı",
     matchResult: "Maç Sonucu",
     finalScore: "Final Skoru",
     roundsPlayed: "Oynanan Round",
@@ -297,8 +300,9 @@ const t = {
     authError: "Bir hata oluştu",
     authCheckEmail: "E-postanı kontrol et! Doğrulama linki gönderdik.",
     dashTitle: "Kontrol Paneli",
-    dashNewMatch: "Yeni Maç Başlat",
-    dashNewMatchDesc: "Yeni bir maç analizi ve koçluk oturumu başlat",
+    dashSub: "Geçmiş raporlarını görüntüle veya AIMLO Desktop'ı indir",
+    dashNewMatch: "Manuel Analiz",
+    dashNewMatchDesc: "Canlı analiz için AIMLO Desktop kullanın",
     dashRecentTitle: "Son Analizler",
     dashNoData: "Henüz analiz yok",
     dashNoDataDesc: "İlk maçını analiz etmek için yeni bir analiz başlat",
@@ -335,7 +339,7 @@ const t = {
     landingHeroTitle: "Yapay Zeka Destekli Valorant Koçun",
     landingHeroSub:
       "Her round sonrası kişiselleştirilmiş analiz ve geri bildirim al. Oyununu bir üst seviyeye taşı.",
-    landingCTA: "AI Analiz Başlat",
+    landingCTA: "Uygulamayı İndir",
     landingAboutTitle: "Hakkımızda",
     landingAboutText:
       "AIMLO, Valorant oyuncuları için yapay zeka destekli koçluk platformudur. Her maç sonrası detaylı analiz, round bazlı geri bildirim ve kişiselleştirilmiş gelişim önerileri sunar.",
@@ -443,6 +447,33 @@ const t = {
     goToDashboard: "Panele Git",
     homePage: "Ana Sayfa",
     dashTopAgent: "En Çok Kullanılan Ajan",
+    dashAISummary: "AI Analiz Özeti",
+    dashMostMistake: "En Sık Hata",
+    dashStrength: "Güçlü Yön",
+    dashImproveArea: "Gelişim Alanı",
+    dashAgentPerf: "Ajan Performansı",
+    dashMapPerf: "Harita Performansı",
+    dashLiveOnly: "Canlı feedback için desktop uygulamasını kullanın",
+    downloadTitle: "AIMLO Desktop İndir",
+    downloadSub: "Canlı AI koçluk için masaüstü uygulamasını kullan",
+    downloadFeature1: "Otomatik izleme",
+    downloadFeature2: "Overlay feedback",
+    downloadFeature3: "Canlı analiz",
+    downloadBtn: "İndir",
+    historyFilterMap: "Harita Filtresi",
+    historyFilterAgent: "Ajan Filtresi",
+    historyFilterResult: "Sonuç",
+    historyAll: "Tümü",
+    historyWins: "Galibiyetler",
+    historyLosses: "Mağlubiyetler",
+    reportRoundTimeline: "Round Zaman Çizelgesi",
+    reportRoundFeedback: "Round Geri Bildirimi",
+    reportPerfMetrics: "Performans Metrikleri",
+    reportDeaths: "Ölüm",
+    reportSurvivedRounds: "Hayatta Kalınan",
+    reportTopDeathLoc: "En Çok Ölüm Yeri",
+    reportWinRate: "Kazanma Oranı",
+    noFeedback: "Bu round için geri bildirim yok",
   },
   en: {
     tagline: "Your Valorant coaching assistant",
@@ -476,14 +507,16 @@ const t = {
     nextRound: "Next Round",
     finishMatch: "Finish Match",
     feedbackTitle: "Round Feedback",
-    mainMistake: "Main Mistake",
-    enemyHabit: "Enemy Habit",
-    microPlan: "Next Round Micro Plan",
+    deathAnalysis: "Death Analysis",
+    enemyPatterns: "Enemy Analysis",
+    nextRoundPlan: "Next Round Plan",
     reportTitle: "Match Report",
     overallSummary: "Overall Match Summary",
     mainRecurringMistake: "Main Recurring Mistake",
     enemyTendencies: "Enemy Tendencies",
     suggestedAdjustment: "Suggested Adjustment",
+    bestRound: "Best Round",
+    decisionScore: "Decision Score",
     matchResult: "Match Result Overview",
     finalScore: "Final Score",
     roundsPlayed: "Rounds Played",
@@ -532,8 +565,9 @@ const t = {
     authError: "An error occurred",
     authCheckEmail: "Check your email! We sent a verification link.",
     dashTitle: "Dashboard",
-    dashNewMatch: "Start New Match",
-    dashNewMatchDesc: "Start a new match analysis and coaching session",
+    dashSub: "View past reports or download AIMLO Desktop",
+    dashNewMatch: "Manual Analysis",
+    dashNewMatchDesc: "Use AIMLO Desktop for live analysis",
     dashRecentTitle: "Recent Analyses",
     dashNoData: "No analyses yet",
     dashNoDataDesc: "Start your first analysis to begin improving",
@@ -570,7 +604,7 @@ const t = {
     landingHeroTitle: "Your AI-Powered Valorant Coach",
     landingHeroSub:
       "Get personalized post-round analysis and feedback. Elevate your game to the next level.",
-    landingCTA: "Start AI Analysis",
+    landingCTA: "Download App",
     landingAboutTitle: "About Us",
     landingAboutText:
       "AIMLO is an AI-powered coaching platform for Valorant players. We provide detailed post-match analysis, round-by-round feedback, and personalized improvement suggestions.",
@@ -682,6 +716,33 @@ const t = {
     goToDashboard: "Go to Dashboard",
     homePage: "Home",
     dashTopAgent: "Most Used Agent",
+    dashAISummary: "AI Analysis Summary",
+    dashMostMistake: "Most Common Mistake",
+    dashStrength: "Strength",
+    dashImproveArea: "Area to Improve",
+    dashAgentPerf: "Agent Performance",
+    dashMapPerf: "Map Performance",
+    dashLiveOnly: "Use desktop app for live feedback",
+    downloadTitle: "Download AIMLO Desktop",
+    downloadSub: "Use the desktop app for live AI coaching",
+    downloadFeature1: "Auto tracking",
+    downloadFeature2: "Overlay feedback",
+    downloadFeature3: "Live analysis",
+    downloadBtn: "Download",
+    historyFilterMap: "Map Filter",
+    historyFilterAgent: "Agent Filter",
+    historyFilterResult: "Result",
+    historyAll: "All",
+    historyWins: "Wins",
+    historyLosses: "Losses",
+    reportRoundTimeline: "Round Timeline",
+    reportRoundFeedback: "Round Feedback",
+    reportPerfMetrics: "Performance Metrics",
+    reportDeaths: "Deaths",
+    reportSurvivedRounds: "Survived",
+    reportTopDeathLoc: "Top Death Location",
+    reportWinRate: "Win Rate",
+    noFeedback: "No feedback for this round",
   },
 };
 /* ══════════════════════════════════════════════════════════
@@ -698,7 +759,8 @@ function genRoundFeedback(
   const isTr = lang === "tr";
   const loc = form.deathLocation;
   const cnt = form.enemyCount;
-  const note = form.yourNote.toLowerCase();
+  const note = (form.yourNote || "").toLowerCase();
+  const agent = setup.agent;
   const sideLabel = isTr
     ? setup.side === "attack"
       ? "saldırı"
@@ -706,114 +768,158 @@ function genRoundFeedback(
     : setup.side === "attack"
       ? "attack"
       : "defense";
+  const enemyAgents = setup.unknownEnemyComp
+    ? []
+    : (setup.enemyComp || []).filter(Boolean);
   const prevDeaths = allRounds.filter(
     (r) => !r.skipped && !r.survived && r.deathLocation === loc,
   );
   const repeatCount = prevDeaths.length;
-  let mistake: string;
+  const nonSkipped = allRounds.filter((r) => !r.skipped);
+
+  let deathAnalysis: string;
   if (survived) {
-    mistake =
+    deathAnalysis =
       result === "win"
         ? isTr
-          ? "Hayatta kaldın ve round kazanıldı. İyi iş! Pozisyonunu korumaya devam et."
-          : "You survived and won. Good job! Keep holding your position."
+          ? `${agent} olarak ${loc} civarında hayatta kaldın ve round kazanıldı. Pozisyon tutman ve trade setup'ın doğruydu.`
+          : `As ${agent}, you survived near ${loc} and won the round. Your positioning and trade setup were correct.`
         : isTr
-          ? "Hayatta kaldın ama round kaybedildi. Takım koordinasyonunu gözden geçir."
-          : "You survived but the round was lost. Review team coordination.";
+          ? `${agent} olarak hayatta kaldın ama round kaybedildi. Takım koordinasyonu eksik — retake sırasında trade pozisyonu kurulamamış olabilir.`
+          : `As ${agent}, you survived but the round was lost. Team coordination was lacking — trade positions may not have been set up during retake.`;
   } else if (repeatCount >= 2) {
-    mistake = isTr
-      ? `${loc} konumunda daha önce ${repeatCount} kez öldün. Farklı bir açıya geçmeyi düşün.`
-      : `You've died at ${loc} ${repeatCount} times before. Consider switching to a different angle.`;
+    deathAnalysis = isTr
+      ? `${loc} konumunda ${repeatCount}. kez öldün — düşman bu açıyı okuyor. ${sideLabel} tarafında aynı peek noktasını tekrar kullanmak overpeek hatası. ${agent} olarak farklı bir angle'dan swing atmalısın.`
+      : `Died at ${loc} for the ${repeatCount}th time — enemy is reading this angle. Repeating the same peek point on ${sideLabel} is an overpeek error. As ${agent}, you need to swing from a different angle.`;
   } else if (Number(cnt) >= 3) {
-    mistake = isTr
-      ? `${loc} konumunda ${cnt} düşmana karşı sayısal dezavantajdaydın. Geri çekilip bilgi vermeliydin.`
-      : `You faced ${cnt} enemies at ${loc}. Fall back and call info.`;
+    deathAnalysis = isTr
+      ? `${loc} konumunda ${cnt} düşmana karşı izole kaldın — trade setup yoktu. ${sideLabel} tarafında ${cnt}v1 engage etmek sayısal dezavantaj.`
+      : `Isolated at ${loc} against ${cnt} enemies — no trade setup. Engaging ${cnt}v1 on ${sideLabel} is a numbers disadvantage.`;
   } else if (
     note.includes("rotate") ||
     note.includes("rotasyon") ||
     note.includes("döndüm")
   ) {
-    mistake = isTr
-      ? `Rotasyonun ${loc} bölgesinde seni açık bıraktı. ${sideLabel} tarafında erken rotasyon düşmana kolay entry verir.`
-      : `Your rotation left you exposed at ${loc}. On ${sideLabel}, rotating early gives easy entry.`;
+    deathAnalysis = isTr
+      ? `${loc} bölgesinde rotasyon sırasında yakalandın. ${sideLabel} tarafında timing hatası — rotasyon sırasında crosshair placement'ın hazır değildi.`
+      : `Caught during rotation at ${loc}. Timing error on ${sideLabel} — your crosshair placement wasn't ready during rotation.`;
   } else if (note.includes("solo") || note.includes("tek")) {
-    mistake = isTr
-      ? `${loc} bölgesinde solo oynaman riskli oldu. Takım desteği olmadan tutunamaman normal.`
-      : `Playing solo at ${loc} was risky. It's expected to struggle without team support.`;
+    deathAnalysis = isTr
+      ? `${loc} bölgesinde solo anchor oynarken öldün — trade alacak teammate yoktu. ${agent} olarak izole pozisyonda kalmak riskli.`
+      : `Died solo anchoring at ${loc} — no teammate to trade. As ${agent}, staying isolated is risky.`;
   } else if (
     note.includes("util") ||
     note.includes("ability") ||
     note.includes("yetenek")
   ) {
-    mistake = isTr
-      ? `Utility sonrası ${loc} konumunda savunmasız kaldın. Util sonrası kısa bekleme ekle.`
-      : `After using utility you were vulnerable at ${loc}. Add a short delay after ability usage.`;
+    deathAnalysis = isTr
+      ? `${loc} konumunda utility kullandıktan sonra savunmasız kaldın. ${agent} ability'sini kullandıktan sonra reposition yapmalısın.`
+      : `Vulnerable at ${loc} after using utility. After using ${agent} ability, you need to reposition.`;
   } else {
-    mistake = isTr
-      ? `${loc} konumunda pozisyonun ${sideLabel} tarafı için ideal değildi. Daha korunaklı bir açı seçmeliydin.`
-      : `Your position at ${loc} wasn't ideal for ${sideLabel}. Choose a more covered angle.`;
+    deathAnalysis = isTr
+      ? `${loc} konumunda ${sideLabel} tarafı için crosshair placement'ın ideal değildi. ${agent} olarak daha korunaklı bir off-angle tut.`
+      : `Your crosshair placement at ${loc} wasn't ideal for ${sideLabel}. As ${agent}, hold a more covered off-angle.`;
   }
+
   const avgEnemy =
-    allRounds.length > 0
+    nonSkipped.length > 0
       ? (
-          allRounds
-            .filter((r) => !r.skipped)
-            .reduce((s, r) => s + Number(r.enemyCount || 0), 0) /
-          Math.max(allRounds.filter((r) => !r.skipped).length, 1)
+          nonSkipped.reduce((s, r) => s + Number(r.enemyCount || 0), 0) /
+          Math.max(nonSkipped.length, 1)
         ).toFixed(1)
       : cnt || "0";
-  let habit: string;
-  if (survived && !cnt) {
-    habit = isTr
-      ? "Düşman hareket kalıplarını izlemeye devam et."
-      : "Keep observing enemy movement patterns.";
-  } else if (Number(cnt) >= 4) {
-    habit = isTr
-      ? `Düşman bu bölgeye ${cnt} kişiyle geldi. Yoğun baskı devam ediyor.`
-      : `The enemy pushed with ${cnt} players. Heavy pressure continues.`;
-  } else if (Number(cnt) <= 2) {
-    habit = isTr
-      ? `Düşman ${cnt} kişiyle hareket etti. Temkinli oyun veya lurker paterni.`
-      : `Enemy moved with ${cnt} players. Cautious play or lurker pattern.`;
+  const recentLosses = allRounds
+    .filter((r) => !r.skipped && !r.survived && r.result === "loss")
+    .slice(-3);
+  const recentDeathLocs = recentLosses.map((r) => r.deathLocation).filter(Boolean);
+  const enemyAgentStr = enemyAgents.length > 0 ? enemyAgents.join(", ") : (isTr ? "bilinmeyen" : "unknown");
+
+  const patterns: string[] = [];
+  if (isTr) {
+    if (Number(cnt) >= 4) {
+      patterns.push(`Düşman ${loc} bölgesine ${cnt} kişilik full execute yapıyor — ağır baskı paterni`);
+    } else if (Number(cnt) >= 2) {
+      patterns.push(`Düşman ${loc} bölgesine ${cnt} kişiyle peek atıyor — coordinated peek paterni`);
+    }
+    if (recentDeathLocs.length >= 2) {
+      const uniqueLocs = [...new Set(recentDeathLocs)];
+      if (uniqueLocs.length === 1) {
+        patterns.push(`Son ${recentLosses.length} round'da düşman sürekli ${uniqueLocs[0]} bölgesine baskı yapıyor`);
+      } else {
+        patterns.push(`Düşman ${uniqueLocs.join(" ve ")} arasında split push deniyor`);
+      }
+    }
+    patterns.push(`Düşman (${enemyAgentStr}) ortalama ${avgEnemy} kişilik gruplarla hareket ediyor`);
+    if (enemyAgents.some((a) => ["Jett", "Reyna", "Neon", "Raze"].includes(a))) {
+      const duelist = enemyAgents.find((a) => ["Jett", "Reyna", "Neon", "Raze"].includes(a));
+      patterns.push(`${duelist} agresif entry atıyor — flash/smoke ile karşıla`);
+    }
   } else {
-    habit = isTr
-      ? `Düşman ortalama ${avgEnemy} kişilik gruplarla baskı yapıyor.`
-      : `Enemy pressing with groups averaging ${avgEnemy}.`;
+    if (Number(cnt) >= 4) {
+      patterns.push(`Enemy running ${cnt}-man full execute on ${loc} — heavy pressure pattern`);
+    } else if (Number(cnt) >= 2) {
+      patterns.push(`Enemy peeking ${loc} with ${cnt} players — coordinated peek pattern`);
+    }
+    if (recentDeathLocs.length >= 2) {
+      const uniqueLocs = [...new Set(recentDeathLocs)];
+      if (uniqueLocs.length === 1) {
+        patterns.push(`Enemy has pushed ${uniqueLocs[0]} for the last ${recentLosses.length} rounds`);
+      } else {
+        patterns.push(`Enemy attempting split push between ${uniqueLocs.join(" and ")}`);
+      }
+    }
+    patterns.push(`Enemy (${enemyAgentStr}) moving in groups averaging ${avgEnemy} players`);
+    if (enemyAgents.some((a) => ["Jett", "Reyna", "Neon", "Raze"].includes(a))) {
+      const duelist = enemyAgents.find((a) => ["Jett", "Reyna", "Neon", "Raze"].includes(a));
+      patterns.push(`${duelist} taking aggressive entry — counter with flash/smoke`);
+    }
   }
+  while (patterns.length < 3) {
+    patterns.push(
+      isTr
+        ? "Düşman hareket kalıplarını izlemeye devam et — daha fazla round verisi gerekli"
+        : "Continue observing enemy movement patterns — more round data needed",
+    );
+  }
+
   const altLocations = (MAP_LOCATIONS[setup.map] ?? []).filter(
     (x) => x !== loc,
   );
+  const locIndex =
+    altLocations.length > 0
+      ? ((setup.map.length + allRounds.length) % altLocations.length)
+      : 0;
   const suggestedLoc =
-    altLocations[Math.floor(Math.random() * altLocations.length)] ||
-    loc ||
-    "a different position";
-  let microPlan: string;
+    altLocations[locIndex] || loc || "a different position";
+
+  let nextRoundPlan: string;
   if (survived && result === "win") {
-    microPlan = isTr
-      ? "İyi gidiyorsun. Aynı stratejiyi koru, hafif açı değişikliği düşün."
-      : "You're doing well. Keep strategy, consider slight angle changes.";
+    nextRoundPlan = isTr
+      ? `Aynı ${loc} setup'ını koru ama açını hafifçe kaydır. ${agent} utility'sini round başında kullan, agresif peek yapma.`
+      : `Keep the same ${loc} setup but shift your angle slightly. Use ${agent} utility early in the round, avoid aggressive peeks.`;
   } else if (survived && result === "loss") {
-    microPlan = isTr
-      ? "Bireysel olarak iyiydin ama takım kaybetti. Daha erken bilgi ver ve trade pozisyonu kur."
-      : "You played well but team lost. Share info earlier and set up trades.";
+    nextRoundPlan = isTr
+      ? `${agent} olarak daha erken bilgi ver. Trade pozisyonunu teammate'inin yanında kur. Retake'e hazır ol.`
+      : `As ${agent}, share info earlier. Set up your trade position next to your teammate. Be ready for retake.`;
   } else if (result === "loss" && repeatCount >= 2) {
-    microPlan = isTr
-      ? `${suggestedLoc} konumunda oyna. Derin açı tut ve ilk bilgiyi bekle.`
-      : `Play ${suggestedLoc}. Hold a deep angle and wait for first info.`;
+    nextRoundPlan = isTr
+      ? `${suggestedLoc} konumuna geç, ${loc} artık okunuyor. ${agent} olarak off-angle tut, jiggle peek ile bilgi topla.`
+      : `Switch to ${suggestedLoc}, ${loc} is being read. As ${agent}, hold an off-angle, jiggle peek for info.`;
   } else if (result === "loss" && Number(cnt) >= 3) {
-    microPlan = isTr
-      ? `Retake oyna. ${suggestedLoc} civarında geri dur ve takımını bekle.`
-      : `Play retake. Fall back near ${suggestedLoc} and wait for team.`;
+    nextRoundPlan = isTr
+      ? `Retake oyna — ${suggestedLoc} civarında geri pozisyon al. ${agent} utility'sini retake için sakla. Takımını bekle.`
+      : `Play retake — fall back near ${suggestedLoc}. Save ${agent} utility for retake. Wait for team.`;
   } else if (result === "loss") {
-    microPlan = isTr
-      ? `${suggestedLoc} konumuna geç. Utility'ni erken kullan ve geri çekil.`
-      : `Switch to ${suggestedLoc}. Use utility early and fall back.`;
+    nextRoundPlan = isTr
+      ? `${suggestedLoc} konumuna rotate et. ${agent} ability'lerini ${loc} girişini kontrol etmek için kullan, sonra geri çekil.`
+      : `Rotate to ${suggestedLoc}. Use ${agent} abilities to control ${loc} entrance, then fall back.`;
   } else {
-    microPlan = isTr
-      ? `Aynı stratejiyi koru ama açını hafifçe değiştir. ${suggestedLoc} iyi alternatif.`
-      : `Keep strategy but shift angle. ${suggestedLoc} could be good.`;
+    nextRoundPlan = isTr
+      ? `Aynı stratejiyi koru. ${suggestedLoc} alternatif olarak hazır tut. ${agent} utility'sini bilgi amaçlı kullan.`
+      : `Keep the same strategy. Have ${suggestedLoc} ready as alternative. Use ${agent} utility for info.`;
   }
-  return { mainMistake: mistake, enemyHabit: habit, microPlan };
+
+  return { deathAnalysis, enemyPatterns: patterns.slice(0, 4), nextRoundPlan };
 }
 function genMatchReport(
   setup: SetupData,
@@ -856,7 +962,7 @@ function genMatchReport(
       : "Defense";
   const scoreStr = `${score.yours} - ${score.enemy}`;
   const matchWon = Number(score.yours) > Number(score.enemy);
-  const allNotes = nonSkipped.map((r) => r.yourNote.toLowerCase()).join(" ");
+  const allNotes = nonSkipped.map((r) => (r.yourNote || "").toLowerCase()).join(" ");
   const hasRotateIssue = /rotat|rotasyon|döndüm/.test(allNotes);
   const hasSoloIssue = /solo|tek/.test(allNotes);
   const hasUtilIssue = /util|ability|yetenek/.test(allNotes);
@@ -902,11 +1008,37 @@ function genMatchReport(
   const adjustment = isTr
     ? `${topDeathLoc !== "N/A" ? `${topDeathLoc} yerine farklı açılardan oyna. ` : ""}${setup.agent} olarak utility'ni stratejik zamanla. ${matchWon ? "İyi performans, pozisyon çeşitliliğini artır." : "Retake pozisyonlarına erken geç."}`
     : `${topDeathLoc !== "N/A" ? `Play different angles instead of ${topDeathLoc}. ` : ""}As ${setup.agent}, time utility strategically. ${matchWon ? "Good performance, increase positional variety." : "Set up retake earlier."}`;
+
+  const bestRoundData = nonSkipped.find((r) => r.result === "win" && r.survived);
+  const bestRound = bestRoundData
+    ? isTr
+      ? `Round ${bestRoundData.roundNumber} — ${bestRoundData.deathLocation || setup.map} bölgesinde hayatta kalarak round kazandın. Pozisyon tutma ve trade setup doğruydu.`
+      : `Round ${bestRoundData.roundNumber} — Won the round surviving at ${bestRoundData.deathLocation || setup.map}. Positioning and trade setup were correct.`
+    : isTr
+      ? `Bu maçta öne çıkan bir round bulunamadı. Hayatta kalma oranını artırmaya odaklan.`
+      : `No standout round found this match. Focus on improving survival rate.`;
+
+  const survivalPct = nonSkipped.length > 0 ? survivedCount / nonSkipped.length : 0;
+  const deathVariety = Object.keys(locationCounts).length;
+  let scoreNum = 5;
+  if (winPct >= 60) scoreNum += 2;
+  else if (winPct >= 45) scoreNum += 1;
+  if (survivalPct >= 0.4) scoreNum += 1;
+  if (deathVariety >= 3) scoreNum += 1;
+  if (topDeathCount >= 4) scoreNum -= 2;
+  else if (topDeathCount >= 3) scoreNum -= 1;
+  scoreNum = Math.max(1, Math.min(10, scoreNum));
+  const decisionScore = isTr
+    ? `${scoreNum}/10 — ${scoreNum >= 7 ? "İyi karar verme, pozisyon çeşitliliği var" : scoreNum >= 5 ? "Ortalama karar verme, tekrarlayan hatalar var" : "Zayıf karar verme, aynı hataları tekrarlıyorsun"}`
+    : `${scoreNum}/10 — ${scoreNum >= 7 ? "Good decision making with positional variety" : scoreNum >= 5 ? "Average decision making with recurring mistakes" : "Weak decision making, repeating the same errors"}`;
+
   return {
     summary,
     mistake,
     tendencies,
     adjustment,
+    bestRound,
+    decisionScore,
     won,
     lost,
     skipped,
@@ -1091,8 +1223,7 @@ function Navbar({
           onClick={onLogoClick}
           className="flex items-center gap-2 transition-opacity duration-200 hover:opacity-80"
         >
-          <AimloLogo size={24} />
-          <AimloWordmark size="text-base" />
+          <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 90, width: 'auto' }} draggable={false} />
           <span className="hidden sm:inline rounded-md bg-blue-500/10 border border-blue-500/10 px-1.5 py-0.5 text-[9px] font-bold text-blue-400 uppercase tracking-wider">
             Beta
           </span>
@@ -1361,8 +1492,7 @@ function LandingPage({
       <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.06] bg-[#050810]/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
           <div className="flex items-center gap-2.5">
-            <AimloLogo size={26} />
-            <AimloWordmark size="text-lg" />
+            <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 90, width: 'auto' }} draggable={false} />
             <span className="hidden sm:inline rounded-md bg-blue-500/10 border border-blue-500/10 px-1.5 py-0.5 text-[9px] font-bold text-blue-400 uppercase tracking-wider">
               Beta
             </span>
@@ -1516,22 +1646,43 @@ function LandingPage({
             {l.landingHeroSub}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
-            <button
-              onClick={user ? onDashboard : onStartAnalysis}
-              className="group rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-blue-900/25 transition-all duration-300 hover:shadow-xl hover:shadow-blue-800/30 hover:-translate-y-0.5 active:scale-[0.98]"
-            >
-              {user ? l.goToDashboard : l.landingCTA}
-              <span className="ml-2 inline-block transition-transform duration-200 group-hover:translate-x-1">
-                {IC.arrow}
-              </span>
-            </button>
-            {!user && (
-              <button
-                onClick={onLogin}
-                className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-8 py-4 text-base font-semibold text-neutral-300 transition-all duration-200 hover:border-white/[0.14] hover:text-white"
-              >
-                {l.authLogin}
-              </button>
+            {user ? (
+              <>
+                <button
+                  onClick={onDashboard}
+                  className="group rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-blue-900/25 transition-all duration-300 hover:shadow-xl hover:shadow-blue-800/30 hover:-translate-y-0.5 active:scale-[0.98]"
+                >
+                  {l.goToDashboard}
+                  <span className="ml-2 inline-block transition-transform duration-200 group-hover:translate-x-1">{IC.arrow}</span>
+                </button>
+                <button
+                  onClick={() => document.getElementById("download-section")?.scrollIntoView({ behavior: "smooth" })}
+                  className="rounded-xl border border-cyan-500/20 bg-cyan-500/5 px-8 py-4 text-base font-semibold text-cyan-400 transition-all duration-200 hover:bg-cyan-500/10 hover:border-cyan-500/30"
+                >
+                  <span className="mr-2">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline-block"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+                  </span>
+                  {l.landingCTA}
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => document.getElementById("download-section")?.scrollIntoView({ behavior: "smooth" })}
+                  className="group rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-blue-900/25 transition-all duration-300 hover:shadow-xl hover:shadow-blue-800/30 hover:-translate-y-0.5 active:scale-[0.98]"
+                >
+                  <span className="mr-2">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline-block"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+                  </span>
+                  {l.landingCTA}
+                </button>
+                <button
+                  onClick={onLogin}
+                  className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-8 py-4 text-base font-semibold text-neutral-300 transition-all duration-200 hover:border-white/[0.14] hover:text-white"
+                >
+                  {l.authLogin}
+                </button>
+              </>
             )}
           </div>
         </div>
@@ -1752,7 +1903,7 @@ function LandingPage({
           className={`text-2xl sm:text-3xl font-extrabold text-white mb-10 text-center transition-all duration-700 ${diffReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
         >
           {lang === "tr" ? "Neden " : "Why "}
-          <AimloWordmark size="text-2xl sm:text-3xl" className="inline" />?
+          <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 88, width: 'auto', display: 'inline-block', verticalAlign: 'middle' }} draggable={false} />?
         </h2>
         <div className="grid md:grid-cols-3 gap-4">
           {l.landingDiffItems.map((item, i) => (
@@ -1916,6 +2067,41 @@ function LandingPage({
           </a>
         </div>
       </section>
+      {/* ─── Download Section ─── */}
+      <section id="download-section" className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 pb-28">
+        <div className={`${ds.card} overflow-hidden relative`}>
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
+          <div className="p-8 sm:p-12 text-center relative">
+            <div className="pointer-events-none absolute top-0 right-0 h-60 w-60 rounded-full bg-cyan-900/10 blur-[100px]" />
+            <div className="relative">
+              <img src="/aimlo-logo.png" alt="AIMLO" className="mx-auto mb-6" style={{ height: 120, width: 'auto' }} draggable={false} />
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+                {lang === "tr" ? "Desktop'ı İndir" : "Download Desktop"}
+              </h2>
+              <p className="text-base text-neutral-400 mb-6 max-w-xl mx-auto">
+                {lang === "tr"
+                  ? "AI destekli Valorant koçunu masaüstüne indir. Oyununu otomatik izlesin, round sonrası anında feedback versin."
+                  : "Download the AI-powered Valorant coach. Auto-watches your game, gives instant post-round feedback."}
+              </p>
+              <div className="flex flex-wrap justify-center gap-3 mb-6">
+                {[
+                  lang === "tr" ? "🎯 Otomatik oyun izleme" : "🎯 Auto game tracking",
+                  lang === "tr" ? "⚡ Round sonrası AI feedback" : "⚡ Post-round AI feedback",
+                  lang === "tr" ? "🖥️ Overlay desteği" : "🖥️ Overlay support",
+                ].map((f, i) => (
+                  <span key={i} className="rounded-lg bg-white/[0.04] border border-white/[0.06] px-3 py-1.5 text-xs text-neutral-400">{f}</span>
+                ))}
+              </div>
+              <button className="rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-10 py-4 text-base font-bold text-white shadow-lg shadow-blue-900/25 transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.98]">
+                <span className="mr-2">⬇</span>
+                {lang === "tr" ? "Windows için İndir" : "Download for Windows"}
+              </button>
+              <p className="mt-3 text-xs text-neutral-600">Windows 10+ · 100MB · {lang === "tr" ? "Ücretsiz" : "Free"}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section
         id="section-faq"
         className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 pb-24"
@@ -2009,7 +2195,7 @@ function LandingPage({
         <div className={`${ds.card} p-8 sm:p-12 overflow-hidden relative`}>
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-blue-600/[0.04] to-cyan-500/[0.03]" />
           <div className="relative space-y-6">
-            <AimloWordmark size="text-3xl" className="block" />
+            <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 160, width: 'auto' }} draggable={false} className="mx-auto" />
             <p className="text-base text-neutral-400 max-w-lg mx-auto">
               {l.landingHeroSub}
             </p>
@@ -2027,8 +2213,7 @@ function LandingPage({
           <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
             <div className="flex flex-col items-center md:items-start gap-2">
               <div className="flex items-center gap-2">
-                <AimloLogo size={22} className="opacity-50" />
-                <AimloWordmark size="text-base" className="opacity-50" />
+                <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 56, width: 'auto', opacity: 0.6 }} draggable={false} />
               </div>
               <p className="text-[11px] text-neutral-600 max-w-xs text-center md:text-left">
                 {lang === "tr"
@@ -2229,8 +2414,7 @@ function AuthScreen({
       <main className={`${ds.pageBg} flex items-center justify-center px-4`}>
         <AmbientBg />
         <div className="relative z-10 w-full max-w-sm space-y-8 text-center">
-          <AimloLogo size={56} className="mx-auto" />
-          <AimloWordmark size="text-3xl" className="block" />
+          <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 160, width: 'auto' }} draggable={false} className="mx-auto" />
           <div className={`${ds.card} p-8 space-y-5`}>
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-500/[0.08] border border-blue-500/10">
               <svg
@@ -2285,9 +2469,8 @@ function AuthScreen({
             </svg>
             {al.back}
           </button>
-          <AimloLogo size={72} className="mx-auto" />
+          <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 160, width: 'auto' }} draggable={false} className="mx-auto" />
           <div>
-            <AimloWordmark size="text-4xl" className="block" />
             <p className="mt-2 text-sm text-neutral-500">{al.tagline}</p>
           </div>
         </div>
@@ -2492,9 +2675,13 @@ export default function Home() {
   const [savedReports, setSavedReports] = useState<SavedReport[]>([]);
   const [viewingReport, setViewingReport] = useState<SavedReport | null>(null);
   const [historyLoading, setHistoryLoading] = useState(false);
+  const [historyFilterMap, setHistoryFilterMap] = useState("");
+  const [historyFilterAgent, setHistoryFilterAgent] = useState("");
+  const [historyFilterResult, setHistoryFilterResult] = useState<"all" | "wins" | "losses">("all");
   const [feedbackLoading, setFeedbackLoading] = useState(false);
   const [reportLoading, setReportLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [downloadBannerDismissed, setDownloadBannerDismissed] = useState(false);
   const [verifiedBanner, setVerifiedBanner] = useState<
     "success" | "error" | null
   >(null);
@@ -2505,17 +2692,19 @@ export default function Home() {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
     const verified = params.get("verified");
+    let timer: ReturnType<typeof setTimeout> | undefined;
     if (verified === "true") {
       setVerifiedBanner("success");
       // Clean URL
       window.history.replaceState({}, "", window.location.pathname);
       // Auto-hide after 6 seconds
-      setTimeout(() => setVerifiedBanner(null), 6000);
+      timer = setTimeout(() => setVerifiedBanner(null), 6000);
     } else if (verified === "error") {
       setVerifiedBanner("error");
       window.history.replaceState({}, "", window.location.pathname);
-      setTimeout(() => setVerifiedBanner(null), 6000);
+      timer = setTimeout(() => setVerifiedBanner(null), 6000);
     }
+    return () => { if (timer) clearTimeout(timer); };
   }, []);
   // ALL hooks must be above early returns — React rules of hooks
   const finishLockRef = useRef(false);
@@ -2549,6 +2738,70 @@ export default function Home() {
     const top = Object.entries(agents).sort((a, b) => b[1] - a[1])[0];
     return top ? { name: top[0], count: top[1] } : null;
   }, [savedReports]);
+  // Agent performance: win rate + match count per agent
+  const agentPerf = useMemo(() => {
+    const map: Record<string, { wins: number; total: number }> = {};
+    savedReports.forEach((r) => {
+      if (!r.agent) return;
+      if (!map[r.agent]) map[r.agent] = { wins: 0, total: 0 };
+      map[r.agent].total++;
+      if (r.won) map[r.agent].wins++;
+    });
+    return Object.entries(map)
+      .map(([name, d]) => ({ name, wins: d.wins, total: d.total, wr: d.total > 0 ? Math.round((d.wins / d.total) * 100) : 0 }))
+      .sort((a, b) => b.total - a.total);
+  }, [savedReports]);
+  // Map performance: win rate + match count per map
+  const mapPerf = useMemo(() => {
+    const m: Record<string, { wins: number; total: number }> = {};
+    savedReports.forEach((r) => {
+      if (!r.map) return;
+      if (!m[r.map]) m[r.map] = { wins: 0, total: 0 };
+      m[r.map].total++;
+      if (r.won) m[r.map].wins++;
+    });
+    return Object.entries(m)
+      .map(([name, d]) => ({ name, wins: d.wins, total: d.total, wr: d.total > 0 ? Math.round((d.wins / d.total) * 100) : 0 }))
+      .sort((a, b) => b.total - a.total);
+  }, [savedReports]);
+  // AI summary: most common mistake, strength, area to improve
+  const aiSummary = useMemo(() => {
+    if (savedReports.length === 0) return null;
+    // Most common mistake — aggregate from mistake field
+    const mistakes: Record<string, number> = {};
+    savedReports.forEach((r) => {
+      if (r.mistake) {
+        const key = r.mistake.slice(0, 80);
+        mistakes[key] = (mistakes[key] || 0) + 1;
+      }
+    });
+    const topMistake = Object.entries(mistakes).sort((a, b) => b[1] - a[1])[0];
+    // Strength — best agent by win rate (min 2 matches)
+    const bestAgent = agentPerf.filter((a) => a.total >= 2).sort((a, b) => b.wr - a.wr)[0];
+    // Improvement area — worst map by win rate (min 2 matches)
+    const worstMap = mapPerf.filter((m) => m.total >= 2).sort((a, b) => a.wr - b.wr)[0];
+    return {
+      topMistake: topMistake ? topMistake[0] : null,
+      strength: bestAgent ? `${bestAgent.name} (${bestAgent.wr}% WR)` : null,
+      improveArea: worstMap ? `${worstMap.name} (${worstMap.wr}% WR)` : null,
+    };
+  }, [savedReports, agentPerf, mapPerf]);
+  // Filtered reports for history screen
+  const filteredReports = useMemo(() => {
+    let filtered = savedReports;
+    if (historyFilterMap) filtered = filtered.filter((r) => r.map === historyFilterMap);
+    if (historyFilterAgent) filtered = filtered.filter((r) => r.agent === historyFilterAgent);
+    if (historyFilterResult === "wins") filtered = filtered.filter((r) => r.won);
+    if (historyFilterResult === "losses") filtered = filtered.filter((r) => !r.won);
+    return filtered;
+  }, [savedReports, historyFilterMap, historyFilterAgent, historyFilterResult]);
+  const filteredWinRate = useMemo(() => {
+    if (filteredReports.length === 0) return 0;
+    return Math.round((filteredReports.filter((r) => r.won).length / filteredReports.length) * 100);
+  }, [filteredReports]);
+  // Unique maps and agents for filter dropdowns
+  const uniqueMaps = useMemo(() => [...new Set(savedReports.map((r) => r.map).filter(Boolean))].sort(), [savedReports]);
+  const uniqueAgents = useMemo(() => [...new Set(savedReports.map((r) => r.agent).filter(Boolean))].sort(), [savedReports]);
   // FIX: redirect "lang" via useEffect, not during render
   useEffect(() => {
     if (user && screen === "lang") setScreen("landing");
@@ -2613,6 +2866,8 @@ export default function Home() {
         tendencies:
           (row.strength as string) || (json.tendencies as string) || "",
         adjustment: (row.focus as string) || (json.adjustment as string) || "",
+        bestRound: (json.bestRound as string) || "",
+        decisionScore: (json.decisionScore as string) || "",
         winPct: (json.winPct as number) || 0,
         roundsWon: (json.roundsWon as number) || 0,
         roundsLost: (json.roundsLost as number) || 0,
@@ -2742,13 +2997,28 @@ export default function Home() {
         const idx = comp.indexOf(prev.agent);
         if (idx > 0) comp.splice(idx, 1);
         comp[0] = prev.agent;
+        const newComp = [prev.agent, ...comp.filter((a) => a && a !== prev.agent)];
+        // Avoid unnecessary re-renders if teamComp hasn't actually changed
+        if (
+          newComp.length === prev.teamComp.length &&
+          newComp.every((a, i) => a === prev.teamComp[i])
+        ) {
+          return prev;
+        }
         return {
           ...prev,
-          teamComp: [prev.agent, ...comp.filter((a) => a && a !== prev.agent)],
+          teamComp: newComp,
         };
       } else {
+        const newComp = comp.filter((a) => a);
+        if (
+          newComp.length === prev.teamComp.length &&
+          newComp.every((a, i) => a === prev.teamComp[i])
+        ) {
+          return prev;
+        }
         if (comp.length > 0 && comp[0]) comp[0] = "";
-        return { ...prev, teamComp: comp.filter((a) => a) };
+        return { ...prev, teamComp: newComp };
       }
     });
   }, [setup.agent]);
@@ -2757,7 +3027,7 @@ export default function Home() {
       <main className={`${ds.pageBg} flex items-center justify-center`}>
         <AmbientBg />
         <div className="relative z-10 flex flex-col items-center gap-4">
-          <AimloLogo size={48} className="animate-pulse" />
+          <AimloLogo size={72} className="animate-pulse" />
           <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-500 border-t-transparent" />
         </div>
       </main>
@@ -3003,53 +3273,52 @@ export default function Home() {
         <AmbientBg />
         <Navbar {...navProps} />
         <div className="relative z-10 mx-auto max-w-3xl px-4 pt-20 pb-12 space-y-6">
-          <button
-            onClick={resetForNewMatch}
-            className={`w-full group ${ds.card} ${ds.cardHover} overflow-hidden`}
-          >
-            <div className="p-5 sm:p-6 flex items-center gap-4">
-              <div className="relative shrink-0">
-                <div className="absolute inset-0 m-auto h-12 w-12 rounded-2xl bg-blue-500/25 blur-xl group-hover:bg-blue-500/35 transition-all duration-500" />
-                <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 shadow-lg shadow-blue-900/30 group-hover:scale-105 group-hover:shadow-xl transition-all duration-300 ring-1 ring-white/10">
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      opacity="0.2"
-                      fill="white"
-                      strokeWidth="0"
-                    />
-                    <path
-                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10"
-                      strokeWidth="0"
-                    />
-                    <polygon points="10 8 16 12 10 16 10 8" fill="white" />
-                  </svg>
-                </div>
-              </div>
-              <div className="text-left">
-                <h2 className="text-lg font-bold text-white">
-                  {l.dashNewMatch}
-                </h2>
-                <p className="text-sm text-neutral-500 mt-0.5">
-                  {l.dashNewMatchDesc}
-                </p>
-              </div>
-              <div className="ml-auto text-neutral-600 group-hover:text-blue-400 transition-colors duration-200 text-lg">
-                {IC.arrow}
+          {/* ── Dashboard Greeting ── */}
+          <div className="text-center space-y-1">
+            <h1 className="text-xl font-bold text-white">{l.dashTitle}</h1>
+            <p className="text-sm text-neutral-500">{l.dashSub}</p>
+          </div>
+          {/* ── Premium Download Promotion Card (dismissible) ── */}
+          {!downloadBannerDismissed && (
+            <div className="relative w-full group rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-950/20">
+              <div className="absolute inset-0 rounded-2xl" style={{ padding: "1.5px", background: "linear-gradient(135deg, #06B6D4, #3B82F6)", WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)", WebkitMaskComposite: "xor", maskComposite: "exclude" }} />
+              <div className="relative rounded-2xl bg-[#0b1120]/95 p-5 sm:p-6">
+                <button
+                  onClick={() => setDownloadBannerDismissed(true)}
+                  className="absolute top-3 right-3 z-10 flex h-7 w-7 items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.08] text-neutral-500 hover:text-white hover:bg-white/[0.08] transition-all duration-200"
+                  aria-label="Close"
+                >
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M2 2l8 8M10 2l-8 8"/></svg>
+                </button>
+                <a
+                  href="#download-section"
+                  onClick={(e) => { e.preventDefault(); document.getElementById("download-section")?.scrollIntoView({ behavior: "smooth" }); setScreen("landing"); }}
+                  className="block"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="relative shrink-0">
+                      <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 56, width: 'auto' }} draggable={false} />
+                    </div>
+                    <div className="text-left min-w-0 flex-1">
+                      <h2 className="text-lg font-bold text-white">{l.downloadTitle}</h2>
+                      <p className="text-sm text-neutral-400 mt-0.5">{l.downloadSub}</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {[l.downloadFeature1, l.downloadFeature2, l.downloadFeature3].map((feat, i) => (
+                      <span key={i} className="rounded-lg bg-cyan-500/[0.06] border border-cyan-500/10 px-3 py-1 text-[10px] font-semibold text-cyan-400/80">{feat}</span>
+                    ))}
+                  </div>
+                  <div className="mt-4">
+                    <span className="rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-6 py-2.5 text-xs font-bold text-white shadow-lg shadow-blue-900/20 group-hover:shadow-xl group-hover:brightness-110 transition-all duration-300 inline-block">
+                      {l.downloadBtn}
+                    </span>
+                  </div>
+                </a>
               </div>
             </div>
-          </button>
+          )}
+          {/* ── Stats Grid ── */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <StatCard
               label={l.dashWinRate}
@@ -3077,7 +3346,6 @@ export default function Home() {
               color={topDeathSpot ? "text-amber-400" : "text-neutral-600"}
               sub={topDeathSpot ? `${topDeathSpot[1]}x` : l.dashNoStats}
             />
-            {/* Top Agent Card */}
             <div className={`${ds.card} p-4 sm:p-5 text-center`}>
               <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-500 mb-1.5">
                 {l.dashTopAgent}
@@ -3085,27 +3353,84 @@ export default function Home() {
               {topAgent ? (
                 <div className="flex flex-col items-center gap-1.5">
                   <div className="h-8 w-8 rounded-lg overflow-hidden bg-black/20 ring-1 ring-white/[0.06]">
-                    <img
-                      src={agentImgUrl(topAgent.name)}
-                      alt={topAgent.name}
-                      className="h-full w-full object-cover"
-                      loading="lazy"
-                    />
+                    <img src={agentImgUrl(topAgent.name)} alt={topAgent.name} className="h-full w-full object-cover" loading="lazy" />
                   </div>
-                  <p className="text-sm font-extrabold text-cyan-400">
-                    {topAgent.name}
-                  </p>
-                  <p className="text-[10px] text-neutral-600 font-medium">
-                    {topAgent.count}x
-                  </p>
+                  <p className="text-sm font-extrabold text-cyan-400">{topAgent.name}</p>
+                  <p className="text-[10px] text-neutral-600 font-medium">{topAgent.count}x</p>
                 </div>
               ) : (
-                <p className="text-2xl font-extrabold tabular-nums text-neutral-600">
-                  {"\u2014"}
-                </p>
+                <p className="text-2xl font-extrabold tabular-nums text-neutral-600">{"\u2014"}</p>
               )}
             </div>
           </div>
+          {/* ── AI ANALİZ ÖZETİ ── */}
+          {aiSummary && (
+            <div className="space-y-3">
+              <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">
+                {l.dashAISummary}
+              </h3>
+              <div className={`${ds.card} ${ds.cardInner}`}>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="space-y-1.5">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-red-400">{l.dashMostMistake}</p>
+                    <p className="text-[13px] leading-relaxed text-neutral-300 line-clamp-3">{aiSummary.topMistake || "\u2014"}</p>
+                  </div>
+                  <div className="space-y-1.5">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-emerald-400">{l.dashStrength}</p>
+                    <p className="text-[13px] leading-relaxed text-neutral-300">{aiSummary.strength || "\u2014"}</p>
+                  </div>
+                  <div className="space-y-1.5">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-amber-400">{l.dashImproveArea}</p>
+                    <p className="text-[13px] leading-relaxed text-neutral-300">{aiSummary.improveArea || "\u2014"}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          {/* ── AJAN PERFORMANSI ── */}
+          {agentPerf.length > 0 && (
+            <div className="space-y-3">
+              <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">
+                {l.dashAgentPerf}
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+                {agentPerf.map((ap) => (
+                  <div key={ap.name} className={`${ds.card} p-3 text-center`}>
+                    <div className="h-8 w-8 rounded-lg overflow-hidden bg-black/20 ring-1 ring-white/[0.06] mx-auto mb-1.5">
+                      <img src={agentImgUrl(ap.name)} alt={ap.name} className="h-full w-full object-cover" loading="lazy" />
+                    </div>
+                    <p className="text-[11px] font-bold text-white truncate">{ap.name}</p>
+                    <p className={`text-lg font-extrabold tabular-nums ${ap.wr >= 50 ? "text-emerald-400" : "text-red-400"}`}>{ap.wr}%</p>
+                    <p className="text-[9px] text-neutral-600 font-medium">{ap.wins}W {ap.total - ap.wins}L</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          {/* ── HARİTA PERFORMANSI ── */}
+          {mapPerf.length > 0 && (
+            <div className="space-y-3">
+              <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">
+                {l.dashMapPerf}
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+                {mapPerf.map((mp) => (
+                  <div key={mp.name} className={`${ds.card} overflow-hidden`}>
+                    <div className="relative h-16">
+                      <img src={MAP_IMAGES[mp.name]} alt={mp.name} className="h-full w-full object-cover opacity-50" loading="lazy" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0b1120] to-transparent" />
+                    </div>
+                    <div className="p-3 text-center -mt-3 relative">
+                      <p className="text-[11px] font-bold text-white">{mp.name}</p>
+                      <p className={`text-lg font-extrabold tabular-nums ${mp.wr >= 50 ? "text-emerald-400" : "text-red-400"}`}>{mp.wr}%</p>
+                      <p className="text-[9px] text-neutral-600 font-medium">{mp.wins}W {mp.total - mp.wins}L</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          {/* ── Recent Matches ── */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">
@@ -3126,53 +3451,31 @@ export default function Home() {
               </div>
             ) : savedReports.length === 0 ? (
               <div className={`${ds.card} p-10 text-center`}>
-                <AimloLogo size={48} className="mx-auto opacity-10 mb-4" />
-                <p className="text-sm font-semibold text-neutral-400">
-                  {l.dashNoData}
-                </p>
-                <p className="mt-1 text-xs text-neutral-600">
-                  {l.dashNoDataDesc}
-                </p>
+                <AimloLogo size={72} className="mx-auto opacity-10 mb-4" />
+                <p className="text-sm font-semibold text-neutral-400">{l.dashNoData}</p>
+                <p className="mt-1 text-xs text-neutral-600">{l.dashNoDataDesc}</p>
               </div>
             ) : (
               <div className="space-y-2">
                 {savedReports.slice(0, 5).map((entry) => (
                   <button
                     key={entry.id}
-                    onClick={() => {
-                      setViewingReport(entry);
-                      setScreen("reportDetail");
-                    }}
+                    onClick={() => { setViewingReport(entry); setScreen("reportDetail"); }}
                     className={`w-full text-left ${ds.card} ${ds.cardHover} p-4 flex items-center gap-4`}
                   >
                     <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-black/20 ring-1 ring-white/[0.06]">
-                      <img
-                        src={MAP_IMAGES[entry.map]}
-                        alt={entry.map}
-                        className="h-full w-full object-cover opacity-75"
-                        loading="lazy"
-                      />
+                      <img src={MAP_IMAGES[entry.map]} alt={entry.map} className="h-full w-full object-cover opacity-75" loading="lazy" />
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold text-white">
-                          {entry.map}
-                        </span>
-                        <span className="text-xs text-neutral-500">
-                          {entry.agent}
-                        </span>
+                        <span className="text-sm font-bold text-white">{entry.map}</span>
+                        <span className="text-xs text-neutral-500">{entry.agent}</span>
                       </div>
-                      <p className="mt-0.5 text-[11px] text-neutral-600">
-                        {entry.date}
-                      </p>
+                      <p className="mt-0.5 text-[11px] text-neutral-600">{entry.date}</p>
                     </div>
                     <div className="text-right shrink-0">
-                      <p className="text-sm font-bold text-white">
-                        {entry.score}
-                      </p>
-                      <p
-                        className={`text-[10px] font-bold uppercase ${entry.won ? "text-emerald-400" : "text-red-400"}`}
-                      >
+                      <p className="text-sm font-bold text-white">{entry.score}</p>
+                      <p className={`text-[10px] font-bold uppercase ${entry.won ? "text-emerald-400" : "text-red-400"}`}>
                         {entry.won ? l.victory : l.defeat}
                       </p>
                     </div>
@@ -3199,72 +3502,99 @@ export default function Home() {
               {"\u2190"} {l.back}
             </button>
             <h2 className="text-lg font-bold text-white">{l.historyTitle}</h2>
-            {savedReports.length > 0 && (
+            {filteredReports.length > 0 && (
               <span className="ml-auto text-xs text-neutral-500">
                 {l.dashWinRate}:{" "}
-                <span
-                  className={
-                    winRate >= 50
-                      ? "text-emerald-400 font-bold"
-                      : "text-red-400 font-bold"
-                  }
-                >
-                  {winRate}%
+                <span className={filteredWinRate >= 50 ? "text-emerald-400 font-bold" : "text-red-400 font-bold"}>
+                  {filteredWinRate}%
                 </span>{" "}
-                {IC.dot} {savedReports.length} {l.dashMatches.toLowerCase()}
+                {IC.dot} {filteredReports.length} {l.dashMatches.toLowerCase()}
               </span>
             )}
           </div>
+          {/* ── Filters ── */}
+          {savedReports.length > 0 && (
+            <div className={`${ds.card} p-4`}>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label className="text-[10px] font-semibold uppercase tracking-[0.12em] text-neutral-500 mb-1 block">{l.historyFilterMap}</label>
+                  <select
+                    value={historyFilterMap}
+                    onChange={(e) => setHistoryFilterMap(e.target.value)}
+                    className={ds.selectBase + " !py-2 !text-xs"}
+                  >
+                    <option value="">{l.historyAll}</option>
+                    {uniqueMaps.map((m) => <option key={m} value={m}>{m}</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label className="text-[10px] font-semibold uppercase tracking-[0.12em] text-neutral-500 mb-1 block">{l.historyFilterAgent}</label>
+                  <select
+                    value={historyFilterAgent}
+                    onChange={(e) => setHistoryFilterAgent(e.target.value)}
+                    className={ds.selectBase + " !py-2 !text-xs"}
+                  >
+                    <option value="">{l.historyAll}</option>
+                    {uniqueAgents.map((a) => <option key={a} value={a}>{a}</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label className="text-[10px] font-semibold uppercase tracking-[0.12em] text-neutral-500 mb-1 block">{l.historyFilterResult}</label>
+                  <select
+                    value={historyFilterResult}
+                    onChange={(e) => setHistoryFilterResult(e.target.value as "all" | "wins" | "losses")}
+                    className={ds.selectBase + " !py-2 !text-xs"}
+                  >
+                    <option value="all">{l.historyAll}</option>
+                    <option value="wins">{l.historyWins}</option>
+                    <option value="losses">{l.historyLosses}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          )}
+          {/* ── Filtered Stats ── */}
+          {filteredReports.length > 0 && (historyFilterMap || historyFilterAgent || historyFilterResult !== "all") && (
+            <div className="grid grid-cols-3 gap-3">
+              <StatCard label={l.dashWinRate} value={`${filteredWinRate}%`} color={filteredWinRate >= 50 ? "text-emerald-400" : "text-red-400"} />
+              <StatCard label={l.dashMatches} value={String(filteredReports.length)} sub={`${filteredReports.filter((r) => r.won).length}W ${filteredReports.filter((r) => !r.won).length}L`} />
+              <StatCard label={l.dashFreqDeath} value={(() => { const s: Record<string, number> = {}; filteredReports.forEach((r) => r.rounds.filter((rd) => !rd.skipped && !rd.survived && rd.deathLocation).forEach((rd) => { s[rd.deathLocation] = (s[rd.deathLocation] || 0) + 1; })); const top = Object.entries(s).sort((a, b) => b[1] - a[1])[0]; return top ? top[0] : "\u2014"; })()} color="text-amber-400" />
+            </div>
+          )}
           {savedReports.length === 0 ? (
             <div className={`${ds.card} p-12 text-center`}>
-              <AimloLogo size={48} className="mx-auto opacity-10 mb-4" />
+              <AimloLogo size={72} className="mx-auto opacity-10 mb-4" />
               <p className="text-sm text-neutral-400">{l.historyEmpty}</p>
-              <p className="mt-1 text-xs text-neutral-600">
-                {l.historyEmptyDesc}
-              </p>
+              <p className="mt-1 text-xs text-neutral-600">{l.historyEmptyDesc}</p>
+            </div>
+          ) : filteredReports.length === 0 ? (
+            <div className={`${ds.card} p-10 text-center`}>
+              <p className="text-sm text-neutral-400">{l.dashNoData}</p>
             </div>
           ) : (
             <div className="space-y-2">
-              {savedReports.map((entry) => (
+              {filteredReports.map((entry) => (
                 <button
                   key={entry.id}
-                  onClick={() => {
-                    setViewingReport(entry);
-                    setScreen("reportDetail");
-                  }}
+                  onClick={() => { setViewingReport(entry); setScreen("reportDetail"); }}
                   className={`w-full text-left ${ds.card} ${ds.cardHover} p-4 sm:p-5 flex items-center gap-4`}
                 >
                   <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-black/20 ring-1 ring-white/[0.06]">
-                    <img
-                      src={MAP_IMAGES[entry.map]}
-                      alt={entry.map}
-                      className="h-full w-full object-cover opacity-75"
-                      loading="lazy"
-                    />
+                    <img src={MAP_IMAGES[entry.map]} alt={entry.map} className="h-full w-full object-cover opacity-75" loading="lazy" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-sm font-bold text-white">
-                        {entry.map}
-                      </span>
-                      <span className="rounded-md bg-white/[0.05] px-2 py-0.5 text-[10px] font-medium text-neutral-400">
-                        {entry.agent}
-                      </span>
+                      <span className="text-sm font-bold text-white">{entry.map}</span>
+                      <span className="rounded-md bg-white/[0.05] px-2 py-0.5 text-[10px] font-medium text-neutral-400">{entry.agent}</span>
                       <span className="rounded-md bg-white/[0.05] px-2 py-0.5 text-[10px] text-neutral-500">
                         {entry.side === "attack" ? l.sideAttack : l.sideDefense}
                       </span>
                     </div>
-                    <p className="mt-1 text-[11px] text-neutral-600">
-                      {entry.date}
-                    </p>
+                    <p className="mt-1 text-[11px] text-neutral-600">{entry.date}</p>
                   </div>
                   <div className="text-right shrink-0">
-                    <p className="text-lg font-extrabold text-white">
-                      {entry.score}
-                    </p>
-                    <p
-                      className={`text-[10px] font-bold uppercase ${entry.won ? "text-emerald-400" : "text-red-400"}`}
-                    >
+                    <p className="text-lg font-extrabold text-white">{entry.score}</p>
+                    <p className={`text-[10px] font-bold uppercase ${entry.won ? "text-emerald-400" : "text-red-400"}`}>
                       {entry.won ? l.victory : l.defeat}
                     </p>
                   </div>
@@ -3278,6 +3608,14 @@ export default function Home() {
   /* REPORT DETAIL */
   if (screen === "reportDetail" && viewingReport) {
     const vr = viewingReport;
+    // Compute per-match metrics
+    const vrDeaths = vr.rounds.filter((r) => !r.skipped && !r.survived).length;
+    const vrSurvivedRounds = vr.rounds.filter((r) => !r.skipped && r.survived).length;
+    const vrDeathLocs: Record<string, number> = {};
+    vr.rounds.filter((r) => !r.skipped && !r.survived && r.deathLocation).forEach((r) => {
+      vrDeathLocs[r.deathLocation] = (vrDeathLocs[r.deathLocation] || 0) + 1;
+    });
+    const vrTopDeathLoc = Object.entries(vrDeathLocs).sort((a, b) => b[1] - a[1])[0];
     return (
       <main className={`${ds.pageBg} relative`}>
         <MapBg map={vr.map} />
@@ -3292,129 +3630,137 @@ export default function Home() {
             </button>
             <h2 className="text-lg font-bold text-white">{l.reportTitle}</h2>
           </div>
+          {/* ── Score Header ── */}
           <div className={`${ds.card} overflow-hidden`}>
             <div className="relative p-6">
               <div className="pointer-events-none absolute inset-0 opacity-[0.12]">
-                <img
-                  src={MAP_IMAGES[vr.map]}
-                  alt=""
-                  className="h-full w-full object-cover"
-                />
+                <img src={MAP_IMAGES[vr.map]} alt="" className="h-full w-full object-cover" />
               </div>
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
               <div className="relative flex items-end justify-between">
                 <div>
                   <p className={ds.label}>{l.matchResult}</p>
-                  <p className="mt-1 text-4xl font-extrabold tracking-tight text-white">
-                    {vr.score}
-                  </p>
-                  <p
-                    className={`mt-1 text-xs font-bold uppercase ${vr.won ? "text-emerald-400" : "text-red-400"}`}
-                  >
+                  <p className="mt-1 text-4xl font-extrabold tracking-tight text-white">{vr.score}</p>
+                  <p className={`mt-1 text-xs font-bold uppercase ${vr.won ? "text-emerald-400" : "text-red-400"}`}>
                     {vr.won ? l.victory : l.defeat}
                   </p>
                 </div>
                 <div className="text-right space-y-1">
-                  <p className="text-[11px] text-neutral-500">
-                    {vr.map} {IC.dot} {vr.agent}
-                  </p>
+                  <p className="text-[11px] text-neutral-500">{vr.map} {IC.dot} {vr.agent}</p>
                   <p className="text-[11px] text-neutral-600">{vr.date}</p>
-                  <p className="text-lg font-extrabold text-blue-400">
-                    {vr.winPct}%
-                  </p>
+                  <p className="text-lg font-extrabold text-blue-400">{vr.winPct}%</p>
                 </div>
               </div>
               <div className="relative mt-4 h-2 w-full overflow-hidden rounded-full bg-white/[0.06]">
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 transition-all"
-                  style={{ width: `${vr.winPct}%` }}
-                />
+                <div className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 transition-all" style={{ width: `${vr.winPct}%` }} />
               </div>
               <div className="relative mt-3 grid grid-cols-4 gap-2 text-center text-[10px] font-bold uppercase tracking-wider">
-                <div>
-                  <span className="text-neutral-500">{l.enteredRounds}</span>
-                  <br />
-                  <span className="text-white text-sm">{vr.totalRounds}</span>
-                </div>
-                <div>
-                  <span className="text-neutral-500">{l.roundsWon}</span>
-                  <br />
-                  <span className="text-emerald-400 text-sm">
-                    {vr.roundsWon}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-neutral-500">{l.roundsLost}</span>
-                  <br />
-                  <span className="text-red-400 text-sm">{vr.roundsLost}</span>
-                </div>
-                <div>
-                  <span className="text-neutral-500">{l.roundsSkipped}</span>
-                  <br />
-                  <span className="text-neutral-400 text-sm">
-                    {vr.roundsSkipped}
-                  </span>
-                </div>
+                <div><span className="text-neutral-500">{l.enteredRounds}</span><br /><span className="text-white text-sm">{vr.totalRounds}</span></div>
+                <div><span className="text-neutral-500">{l.roundsWon}</span><br /><span className="text-emerald-400 text-sm">{vr.roundsWon}</span></div>
+                <div><span className="text-neutral-500">{l.roundsLost}</span><br /><span className="text-red-400 text-sm">{vr.roundsLost}</span></div>
+                <div><span className="text-neutral-500">{l.roundsSkipped}</span><br /><span className="text-neutral-400 text-sm">{vr.roundsSkipped}</span></div>
               </div>
             </div>
           </div>
+          {/* ── Performance Metrics ── */}
+          <div className="space-y-3">
+            <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">{l.reportPerfMetrics}</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <StatCard label={l.reportWinRate} value={`${vr.winPct}%`} color={vr.winPct >= 50 ? "text-emerald-400" : "text-red-400"} />
+              <StatCard label={l.reportDeaths} value={String(vrDeaths)} color="text-red-400" />
+              <StatCard label={l.reportSurvivedRounds} value={String(vrSurvivedRounds)} color="text-emerald-400" />
+              <StatCard label={l.reportTopDeathLoc} value={vrTopDeathLoc ? vrTopDeathLoc[0] : "\u2014"} color="text-amber-400" sub={vrTopDeathLoc ? `${vrTopDeathLoc[1]}x` : undefined} />
+            </div>
+          </div>
+          {/* ── Round-by-Round Timeline ── */}
           {vr.rounds.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 justify-center">
-              {vr.rounds.map((r, i) => (
-                <span
-                  key={i}
-                  className={`rounded-lg px-2 py-1 text-[10px] font-bold uppercase border ${r.result === "win" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/10" : "bg-red-500/10 text-red-400 border-red-500/10"} ${r.skipped ? "opacity-40" : ""}`}
-                >
-                  R{r.roundNumber}{" "}
-                  {r.result === "win" ? l.wonLabel : l.lostLabel}
-                  {r.skipped ? l.skippedLabel : ""}
-                </span>
-              ))}
+            <div className="space-y-3">
+              <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">{l.reportRoundTimeline}</h3>
+              <div className="flex flex-wrap gap-1.5 justify-center">
+                {vr.rounds.map((r, i) => (
+                  <button
+                    key={i}
+                    onClick={() => {
+                      const el = document.getElementById(`round-detail-${i}`);
+                      el?.scrollIntoView({ behavior: "smooth", block: "center" });
+                    }}
+                    className={`rounded-lg px-2.5 py-1.5 text-[10px] font-bold uppercase border cursor-pointer transition-all duration-200 hover:scale-105 ${r.result === "win" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/15 hover:bg-emerald-500/20" : "bg-red-500/10 text-red-400 border-red-500/15 hover:bg-red-500/20"} ${r.skipped ? "opacity-40" : ""}`}
+                  >
+                    R{r.roundNumber} {r.result === "win" ? l.wonLabel : l.lostLabel}{r.skipped ? l.skippedLabel : ""}
+                  </button>
+                ))}
+              </div>
+              {/* ── Round Details with AI Feedback ── */}
+              <div className="space-y-2 mt-4">
+                <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">{l.reportRoundFeedback}</h3>
+                {vr.rounds.map((r, i) => (
+                  <div
+                    key={i}
+                    id={`round-detail-${i}`}
+                    className={`${ds.card} p-4 border-l-2 ${r.result === "win" ? "border-l-emerald-500/40" : "border-l-red-500/40"}`}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <span className={`text-xs font-bold ${r.result === "win" ? "text-emerald-400" : "text-red-400"}`}>
+                        Round {r.roundNumber} {r.result === "win" ? l.wonLabel : l.lostLabel}
+                        {r.survived ? ` ${IC.dot} ${l.survivedShort}` : ""}
+                      </span>
+                      {!r.skipped && r.deathLocation && (
+                        <span className="text-[10px] text-neutral-500">{r.deathLocation}</span>
+                      )}
+                    </div>
+                    {r.skipped ? (
+                      <p className="text-[11px] text-neutral-600 italic">{l.roundsSkipped}</p>
+                    ) : r.feedback ? (
+                      <div className="space-y-2">
+                        {r.feedback.deathAnalysis && (
+                          <div>
+                            <span className="text-[9px] font-bold uppercase tracking-wider text-red-400/70">{l.deathAnalysis}</span>
+                            <p className="text-[12px] text-neutral-300 leading-relaxed">{r.feedback.deathAnalysis}</p>
+                          </div>
+                        )}
+                        {r.feedback.enemyPatterns && r.feedback.enemyPatterns.length > 0 && (
+                          <div>
+                            <span className="text-[9px] font-bold uppercase tracking-wider text-amber-400/70">{l.enemyPatterns}</span>
+                            <p className="text-[12px] text-neutral-300 leading-relaxed">{Array.isArray(r.feedback.enemyPatterns) ? r.feedback.enemyPatterns.join(" \u2022 ") : String(r.feedback.enemyPatterns)}</p>
+                          </div>
+                        )}
+                        {r.feedback.nextRoundPlan && (
+                          <div>
+                            <span className="text-[9px] font-bold uppercase tracking-wider text-cyan-400/70">{l.nextRoundPlan}</span>
+                            <p className="text-[12px] text-neutral-300 leading-relaxed">{r.feedback.nextRoundPlan}</p>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <p className="text-[11px] text-neutral-600 italic">{l.noFeedback}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           )}
+          {/* ── Report Cards ── */}
           <div className="space-y-4">
-            <ReportCard
-              icon={IC.diamond}
-              color="text-cyan-400"
-              label={l.overallSummary}
-              text={vr.summary}
-            />
-            <ReportCard
-              icon={IC.cross}
-              color="text-red-400"
-              label={l.mainRecurringMistake}
-              text={vr.mistake}
-            />
-            <ReportCard
-              icon={IC.circle}
-              color="text-amber-400"
-              label={l.enemyTendencies}
-              text={vr.tendencies}
-            />
-            <ReportCard
-              icon={IC.play}
-              color="text-emerald-400"
-              label={l.suggestedAdjustment}
-              text={vr.adjustment}
-            />
+            <ReportCard icon={IC.diamond} color="text-cyan-400" label={l.overallSummary} text={vr.summary} />
+            <ReportCard icon={IC.cross} color="text-red-400" label={l.mainRecurringMistake} text={vr.mistake} />
+            <ReportCard icon={IC.circle} color="text-amber-400" label={l.enemyTendencies} text={vr.tendencies} />
+            <ReportCard icon={IC.play} color="text-emerald-400" label={l.suggestedAdjustment} text={vr.adjustment} />
+            {vr.bestRound && <ReportCard icon={IC.bolt} color="text-blue-400" label={l.bestRound} text={vr.bestRound} />}
+            {vr.decisionScore && <ReportCard icon={IC.diamond} color="text-purple-400" label={l.decisionScore} text={vr.decisionScore} />}
           </div>
           <div className="space-y-3">
-            <button onClick={resetForNewMatch} className={ds.btnPrimary}>
-              {l.newMatch}
-            </button>
-            <button
-              onClick={() => setScreen("dashboard")}
-              className={ds.btnSecondary}
-            >
-              {l.returnToMenu}
-            </button>
+            <button onClick={resetForNewMatch} className={ds.btnPrimary}>{l.newMatch}</button>
+            <button onClick={() => setScreen("dashboard")} className={ds.btnSecondary}>{l.returnToMenu}</button>
           </div>
         </div>
       </main>
     );
   }
-  /* SETUP */
+  /* SETUP — redirected to dashboard (manual analysis removed from web app) */
   if (screen === "setup") {
+    setScreen("dashboard");
+  }
+  if (false as boolean) { /* setup disabled — use AIMLO Desktop */
     const stepIdx = SETUP_STEPS.indexOf(setupStep);
     function nextStep() {
       const e: FormErrors = {};
@@ -3814,8 +4160,11 @@ export default function Home() {
       </main>
     );
   }
-  /* ROUND */
+  /* ROUND — redirected to dashboard (manual analysis removed from web app) */
   if (screen === "round") {
+    setScreen("dashboard");
+  }
+  if (false as boolean) { /* round disabled — use AIMLO Desktop */
     function validateRound(): FormErrors {
       const e: FormErrors = {};
       if (!survived) {
@@ -4160,20 +4509,20 @@ export default function Home() {
                   <FeedbackCard
                     icon={IC.cross}
                     color="text-red-400"
-                    label={l.mainMistake}
-                    text={currentFeedback.mainMistake}
+                    label={l.deathAnalysis}
+                    text={currentFeedback.deathAnalysis}
                   />
                   <FeedbackCard
                     icon={IC.circle}
                     color="text-amber-400"
-                    label={l.enemyHabit}
-                    text={currentFeedback.enemyHabit}
+                    label={l.enemyPatterns}
+                    text={Array.isArray(currentFeedback.enemyPatterns) ? currentFeedback.enemyPatterns.join(" \u2022 ") : String(currentFeedback.enemyPatterns)}
                   />
                   <FeedbackCard
                     icon={IC.bolt}
                     color="text-cyan-400"
-                    label={l.microPlan}
-                    text={currentFeedback.microPlan}
+                    label={l.nextRoundPlan}
+                    text={currentFeedback.nextRoundPlan}
                   />
                 </div>
               </div>
@@ -4199,8 +4548,11 @@ export default function Home() {
       </main>
     );
   }
-  /* SCORE INPUT */
-  if (screen === "scoreInput")
+  /* SCORE INPUT — redirected to dashboard (manual analysis removed from web app) */
+  if (screen === "scoreInput") {
+    setScreen("dashboard");
+  }
+  if (false as boolean) /* scoreInput disabled — use AIMLO Desktop */
     return (
       <main
         className={`${ds.pageBg} relative flex items-center justify-center px-4`}
@@ -4208,7 +4560,7 @@ export default function Home() {
         <MapBg map={setup.map} />
         <div className="relative z-10 w-full max-w-md space-y-8">
           <div className="text-center space-y-1">
-            <AimloLogo size={36} className="mx-auto opacity-40 mb-2" />
+            <AimloLogo size={56} className="mx-auto opacity-40 mb-2" />
             <h2 className="text-xl font-bold text-white">{l.scoreTitle}</h2>
           </div>
           <div className={`${ds.card} ${ds.cardInner} space-y-5`}>
@@ -4267,7 +4619,7 @@ export default function Home() {
         <MapBg map={setup.map} />
         <Navbar {...navProps} />
         <div className="relative z-10 mx-auto max-w-lg px-4 pt-40 flex flex-col items-center gap-5">
-          <AimloLogo size={48} className="animate-pulse" />
+          <AimloLogo size={72} className="animate-pulse" />
           <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-500 border-t-transparent" />
           <p className="text-sm text-neutral-400">
             {lang === "tr"
@@ -4385,6 +4737,22 @@ export default function Home() {
               label={l.suggestedAdjustment}
               text={report.adjustment}
             />
+            {report.bestRound && (
+              <ReportCard
+                icon={IC.bolt}
+                color="text-blue-400"
+                label={l.bestRound}
+                text={report.bestRound}
+              />
+            )}
+            {report.decisionScore && (
+              <ReportCard
+                icon={IC.diamond}
+                color="text-purple-400"
+                label={l.decisionScore}
+                text={report.decisionScore}
+              />
+            )}
           </div>
           <div className="space-y-3">
             <button onClick={resetForNewMatch} className={ds.btnPrimary}>

@@ -8,7 +8,10 @@ export type Screen =
   | "scoreInput"
   | "report"
   | "history"
-  | "reportDetail";
+  | "reportDetail"
+  | "_setup_disabled"
+  | "_round_disabled"
+  | "_scoreInput_disabled";
 export type RoundResult = "win" | "loss";
 export type SetupStep = "mapAgent" | "sideComp" | "confirm";
 export type SetupData = {
@@ -20,9 +23,9 @@ export type SetupData = {
   unknownEnemyComp: boolean;
 };
 export type RoundFeedback = {
-  mainMistake: string;
-  enemyHabit: string;
-  microPlan: string;
+  deathAnalysis: string;
+  enemyPatterns: string[];
+  nextRoundPlan: string;
 };
 export type RoundData = {
   roundNumber: number;
@@ -52,11 +55,13 @@ export type SavedReport = {
   score: string;
   won: boolean;
   date: string;
-  rawDate: string; // ISO string for reliable sorting
+  rawDate: string;
   summary: string;
   mistake: string;
   tendencies: string;
   adjustment: string;
+  bestRound: string;
+  decisionScore: string;
   winPct: number;
   roundsWon: number;
   roundsLost: number;

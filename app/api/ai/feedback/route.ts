@@ -44,9 +44,9 @@ type FeedbackRequest = {
 };
 
 type FeedbackResponse = {
-  mainMistake: string;
-  enemyHabit: string;
-  microPlan: string;
+  deathAnalysis: string;
+  enemyPatterns: string[];
+  nextRoundPlan: string;
 };
 
 /* ══════════════════════════════════════════════════════════
@@ -309,12 +309,13 @@ function isValidFeedbackShape(obj: unknown): obj is FeedbackResponse {
   if (!obj || typeof obj !== "object") return false;
   const o = obj as Record<string, unknown>;
   return (
-    typeof o.mainMistake === "string" &&
-    o.mainMistake.length > 0 &&
-    typeof o.enemyHabit === "string" &&
-    o.enemyHabit.length > 0 &&
-    typeof o.microPlan === "string" &&
-    o.microPlan.length > 0
+    typeof o.deathAnalysis === "string" &&
+    o.deathAnalysis.length > 0 &&
+    Array.isArray(o.enemyPatterns) &&
+    o.enemyPatterns.length > 0 &&
+    o.enemyPatterns.every((p: unknown) => typeof p === "string") &&
+    typeof o.nextRoundPlan === "string" &&
+    o.nextRoundPlan.length > 0
   );
 }
 
@@ -337,6 +338,10 @@ function generateDeterministicFeedback(
     : setup.side === "attack"
       ? "attack"
       : "defense";
+  const agent = setup.agent;
+  const enemyAgents = setup.unknownEnemyComp
+    ? []
+    : (setup.enemyComp || []).filter(Boolean);
 
   // Safe filter — tolerate broken allRounds entries
   const safeRounds = (allRounds || []).filter(
@@ -346,52 +351,61 @@ function generateDeterministicFeedback(
     (r) => !r.skipped && !r.survived && r.deathLocation === loc,
   );
   const repeatCount = prevDeaths.length;
+  const nonSkipped = safeRounds.filter((r) => !r.skipped);
 
-  let mistake: string;
+  // Current round number for references
+  const currentRound = safeRounds.length + 1;
+
+  // --- DEATH ANALYSIS (3-layer: observation + inference + recommendation) ---
+  let deathAnalysis: string;
   if (survived) {
-    mistake =
+    deathAnalysis =
       result === "win"
         ? isTr
-          ? "Hayatta kaldın ve round kazanıldı. İyi iş! Pozisyonunu korumaya devam et."
-          : "You survived and won. Good job! Keep holding your position."
+          ? `R${currentRound}: ${loc} bölgesinde ${agent} olarak hayatta kaldın. Trade setup'ın çalıştı, pozisyon doğruydu. Aynı açıyı bir sonraki round değiştir — düşman okuyacak.`
+          : `R${currentRound}: Survived at ${loc} as ${agent}. Trade setup worked, positioning was correct. Shift this angle next round — enemy will read it.`
         : isTr
-          ? "Hayatta kaldın ama round kaybedildi. Takım koordinasyonunu gözden geçir."
-          : "You survived but the round was lost. Review team coordination.";
+          ? `R${currentRound}: ${agent} olarak hayatta kaldın ama round kaybedildi. Retake sırasında trade pozisyonu kurulmadı. Utility'ni retake zamanlamasına sakla, erken harcama.`
+          : `R${currentRound}: Survived as ${agent} but round lost. No trade position set during retake. Save utility for retake timing, don't use early.`;
   } else if (repeatCount >= 2) {
-    mistake = isTr
-      ? `${loc} konumunda daha önce ${repeatCount} kez öldün. Farklı bir açıya geçmeyi düşün.`
-      : `You've died at ${loc} ${repeatCount} times before. Consider switching to a different angle.`;
+    deathAnalysis = isTr
+      ? `R${currentRound}: ${loc}'da ${repeatCount}. ölüm. Düşman bu açıyı okuyor, dry peek'leri cezalandırıyor. ${agent} olarak farklı angle'dan wide swing at veya utility ile açıyı temizle.`
+      : `R${currentRound}: Death #${repeatCount} at ${loc}. Enemy reads this angle, punishes dry peeks. As ${agent}, wide swing from a different angle or clear with utility.`;
   } else if (Number(cnt) >= 3) {
-    mistake = isTr
-      ? `${loc} konumunda ${cnt} düşmana karşı sayısal dezavantajdaydın. Geri çekilip bilgi vermeliydin.`
-      : `You faced ${cnt} enemies at ${loc}. Fall back and call info.`;
+    deathAnalysis = isTr
+      ? `R${currentRound}: ${loc}'da ${cnt} düşmana karşı izole kaldın. Trade setup yoktu, ${cnt}v1 sayısal dezavantaj. Geri çekil, info ver, takımını bekle.`
+      : `R${currentRound}: Isolated at ${loc} vs ${cnt} enemies. No trade setup, ${cnt}v1 is a numbers loss. Fall back, call info, wait for team.`;
+  } else if (note.includes("overpeek") || note.includes("peek")) {
+    deathAnalysis = isTr
+      ? `R${currentRound}: ${loc}'da overpeek — açıyı fazla açtın. Düşman crosshair hazırdı. ${agent} olarak jiggle peek ile info topla, commit etme.`
+      : `R${currentRound}: Overpeeked at ${loc} — angle too wide. Enemy crosshair was ready. As ${agent}, jiggle peek for info, don't commit.`;
   } else if (
     note.includes("rotate") ||
     note.includes("rotasyon") ||
     note.includes("döndüm")
   ) {
-    mistake = isTr
-      ? `Rotasyonun ${loc} bölgesinde seni açık bıraktı. ${sideLabel} tarafında erken rotasyon düşmana kolay entry verir.`
-      : `Your rotation left you exposed at ${loc}. On ${sideLabel}, rotating early gives easy entry.`;
+    deathAnalysis = isTr
+      ? `R${currentRound}: ${loc}'da rotasyon sırasında yakalandın. Timing hatası — crosshair placement hazır değildi. Rotasyonda her köşeyi pre-aim yap.`
+      : `R${currentRound}: Caught rotating at ${loc}. Timing error — crosshair placement wasn't ready. Pre-aim every corner during rotation.`;
   } else if (note.includes("solo") || note.includes("tek")) {
-    mistake = isTr
-      ? `${loc} bölgesinde solo oynaman riskli oldu. Takım desteği olmadan tutunamaman normal.`
-      : `Playing solo at ${loc} was risky. It's expected to struggle without team support.`;
+    deathAnalysis = isTr
+      ? `R${currentRound}: ${loc}'da solo anchor — trade alacak kimse yoktu. ${agent} olarak izole pozisyon riskli. Teammate trade açısını bekle, sonra peek at.`
+      : `R${currentRound}: Solo anchor at ${loc} — no one to trade. As ${agent}, isolated position is risky. Wait for teammate trade angle, then peek.`;
   } else if (
     note.includes("util") ||
     note.includes("ability") ||
     note.includes("yetenek")
   ) {
-    mistake = isTr
-      ? `Utility sonrası ${loc} konumunda savunmasız kaldın. Util sonrası kısa bekleme ekle.`
-      : `After using utility you were vulnerable at ${loc}. Add a short delay after ability usage.`;
+    deathAnalysis = isTr
+      ? `R${currentRound}: ${loc}'da ${agent} utility sonrası savunmasız kaldın. Ability kullandıktan sonra reposition yap — aynı yerde durma, off-angle'a geç.`
+      : `R${currentRound}: Vulnerable at ${loc} after ${agent} utility. Reposition after ability use — don't hold same spot, shift to off-angle.`;
   } else {
-    mistake = isTr
-      ? `${loc} konumunda pozisyonun ${sideLabel} tarafı için ideal değildi. Daha korunaklı bir açı seçmeliydin.`
-      : `Your position at ${loc} wasn't ideal for ${sideLabel}. Choose a more covered angle.`;
+    deathAnalysis = isTr
+      ? `R${currentRound}: ${loc}'da ${sideLabel} tarafında crosshair placement zayıftı. ${agent} olarak off-angle tut, ilk info'yu bekle, dry peek atma.`
+      : `R${currentRound}: Weak crosshair placement at ${loc} on ${sideLabel}. As ${agent}, hold off-angle, wait for first info, no dry peeks.`;
   }
 
-  const nonSkipped = safeRounds.filter((r) => !r.skipped);
+  // --- ENEMY PATTERNS ---
   const avgEnemy =
     nonSkipped.length > 0
       ? (
@@ -400,26 +414,62 @@ function generateDeterministicFeedback(
         ).toFixed(1)
       : cnt || "0";
 
-  let habit: string;
-  if (survived && !cnt) {
-    habit = isTr
-      ? "Düşman hareket kalıplarını izlemeye devam et."
-      : "Keep observing enemy movement patterns.";
-  } else if (Number(cnt) >= 4) {
-    habit = isTr
-      ? `Düşman bu bölgeye ${cnt} kişiyle geldi. Yoğun baskı devam ediyor.`
-      : `The enemy pushed with ${cnt} players. Heavy pressure continues.`;
-  } else if (Number(cnt) <= 2) {
-    habit = isTr
-      ? `Düşman ${cnt} kişiyle hareket etti. Temkinli oyun veya lurker paterni.`
-      : `Enemy moved with ${cnt} players. Cautious play or lurker pattern.`;
+  const recentLosses = safeRounds
+    .filter((r) => !r.skipped && !r.survived && r.result === "loss")
+    .slice(-3);
+  const recentDeathLocs = recentLosses.map((r) => r.deathLocation).filter(Boolean);
+  const enemyAgentStr = enemyAgents.length > 0 ? enemyAgents.join(", ") : (isTr ? "bilinmeyen" : "unknown");
+
+  const patterns: string[] = [];
+  if (isTr) {
+    if (Number(cnt) >= 4) {
+      patterns.push(`Düşman ${loc} bölgesine ${cnt} kişilik full execute yapıyor — ağır baskı paterni`);
+    } else if (Number(cnt) >= 2) {
+      patterns.push(`Düşman ${loc} bölgesine ${cnt} kişiyle peek atıyor — coordinated peek paterni`);
+    }
+    if (recentDeathLocs.length >= 2) {
+      const uniqueLocs = [...new Set(recentDeathLocs)];
+      if (uniqueLocs.length === 1) {
+        patterns.push(`Son ${recentLosses.length} round'da düşman sürekli ${uniqueLocs[0]} bölgesine baskı yapıyor`);
+      } else {
+        patterns.push(`Düşman ${uniqueLocs.join(" ve ")} arasında split push deniyor`);
+      }
+    }
+    patterns.push(`Düşman (${enemyAgentStr}) ortalama ${avgEnemy} kişilik gruplarla hareket ediyor`);
+    if (enemyAgents.some((a) => ["Jett", "Reyna", "Neon", "Raze"].includes(a))) {
+      const duelist = enemyAgents.find((a) => ["Jett", "Reyna", "Neon", "Raze"].includes(a));
+      patterns.push(`${duelist} agresif entry atıyor — flash/smoke ile karşıla`);
+    }
   } else {
-    habit = isTr
-      ? `Düşman ortalama ${avgEnemy} kişilik gruplarla baskı yapıyor.`
-      : `Enemy pressing with groups averaging ${avgEnemy}.`;
+    if (Number(cnt) >= 4) {
+      patterns.push(`Enemy running ${cnt}-man full execute on ${loc} — heavy pressure pattern`);
+    } else if (Number(cnt) >= 2) {
+      patterns.push(`Enemy peeking ${loc} with ${cnt} players — coordinated peek pattern`);
+    }
+    if (recentDeathLocs.length >= 2) {
+      const uniqueLocs = [...new Set(recentDeathLocs)];
+      if (uniqueLocs.length === 1) {
+        patterns.push(`Enemy has pushed ${uniqueLocs[0]} for the last ${recentLosses.length} rounds`);
+      } else {
+        patterns.push(`Enemy attempting split push between ${uniqueLocs.join(" and ")}`);
+      }
+    }
+    patterns.push(`Enemy (${enemyAgentStr}) moving in groups averaging ${avgEnemy} players`);
+    if (enemyAgents.some((a) => ["Jett", "Reyna", "Neon", "Raze"].includes(a))) {
+      const duelist = enemyAgents.find((a) => ["Jett", "Reyna", "Neon", "Raze"].includes(a));
+      patterns.push(`${duelist} taking aggressive entry — counter with flash/smoke`);
+    }
+  }
+  // Ensure at least 3 patterns
+  while (patterns.length < 3) {
+    patterns.push(
+      isTr
+        ? "Düşman hareket kalıplarını izlemeye devam et — daha fazla round verisi gerekli"
+        : "Continue observing enemy movement patterns — more round data needed",
+    );
   }
 
-  // Deterministic location suggestion — hash-based, not random
+  // --- NEXT ROUND PLAN ---
   const altLocations = (MAP_LOCATIONS[setup.map] ?? []).filter(
     (x) => x !== loc,
   );
@@ -433,34 +483,34 @@ function generateDeterministicFeedback(
     loc ||
     (isTr ? "farklı bir pozisyon" : "a different position");
 
-  let microPlan: string;
+  let nextRoundPlan: string;
   if (survived && result === "win") {
-    microPlan = isTr
-      ? "İyi gidiyorsun. Aynı stratejiyi koru, hafif açı değişikliği düşün."
-      : "You're doing well. Keep strategy, consider slight angle changes.";
+    nextRoundPlan = isTr
+      ? `Aynı ${loc} setup'ını koru ama açını hafifçe kaydır. ${agent} utility'sini round başında kullan, agresif peek yapma.`
+      : `Keep the same ${loc} setup but shift your angle slightly. Use ${agent} utility early in the round, avoid aggressive peeks.`;
   } else if (survived && result === "loss") {
-    microPlan = isTr
-      ? "Bireysel olarak iyiydin ama takım kaybetti. Daha erken bilgi ver ve trade pozisyonu kur."
-      : "You played well but team lost. Share info earlier and set up trades.";
+    nextRoundPlan = isTr
+      ? `${agent} olarak daha erken bilgi ver. Trade pozisyonunu teammate'inin yanında kur. Retake'e hazır ol.`
+      : `As ${agent}, share info earlier. Set up your trade position next to your teammate. Be ready for retake.`;
   } else if (result === "loss" && repeatCount >= 2) {
-    microPlan = isTr
-      ? `${suggestedLoc} konumunda oyna. Derin açı tut ve ilk bilgiyi bekle.`
-      : `Play ${suggestedLoc}. Hold a deep angle and wait for first info.`;
+    nextRoundPlan = isTr
+      ? `${suggestedLoc} konumuna geç, ${loc} artık okunuyor. ${agent} olarak off-angle tut, jiggle peek ile bilgi topla, commit etme.`
+      : `Switch to ${suggestedLoc}, ${loc} is being read. As ${agent}, hold an off-angle, jiggle peek for info, don't commit.`;
   } else if (result === "loss" && Number(cnt) >= 3) {
-    microPlan = isTr
-      ? `Retake oyna. ${suggestedLoc} civarında geri dur ve takımını bekle.`
-      : `Play retake. Fall back near ${suggestedLoc} and wait for team.`;
+    nextRoundPlan = isTr
+      ? `Retake oyna — ${suggestedLoc} civarında geri pozisyon al. ${agent} utility'sini retake için sakla. Takımını bekle, solo engage etme.`
+      : `Play retake — fall back near ${suggestedLoc}. Save ${agent} utility for retake. Wait for team, don't solo engage.`;
   } else if (result === "loss") {
-    microPlan = isTr
-      ? `${suggestedLoc} konumuna geç. Utility'ni erken kullan ve geri çekil.`
-      : `Switch to ${suggestedLoc}. Use utility early and fall back.`;
+    nextRoundPlan = isTr
+      ? `${suggestedLoc} konumuna rotate et. ${agent} ability'lerini ${loc} girişini kontrol etmek için kullan, sonra geri çekil.`
+      : `Rotate to ${suggestedLoc}. Use ${agent} abilities to control ${loc} entrance, then fall back.`;
   } else {
-    microPlan = isTr
-      ? `Aynı stratejiyi koru ama açını hafifçe değiştir. ${suggestedLoc} iyi alternatif.`
-      : `Keep strategy but shift angle. ${suggestedLoc} could be good.`;
+    nextRoundPlan = isTr
+      ? `Aynı stratejiyi koru. ${suggestedLoc} alternatif olarak hazır tut. ${agent} utility'sini agresif değil, bilgi amaçlı kullan.`
+      : `Keep the same strategy. Have ${suggestedLoc} ready as alternative. Use ${agent} utility for info, not aggression.`;
   }
 
-  return { mainMistake: mistake, enemyHabit: habit, microPlan };
+  return { deathAnalysis, enemyPatterns: patterns.slice(0, 4), nextRoundPlan };
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -469,16 +519,76 @@ function generateDeterministicFeedback(
 async function generateAIFeedback(
   body: FeedbackRequest,
 ): Promise<FeedbackResponse> {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) return generateDeterministicFeedback(body);
+  const apiKey = process.env.AIMLO_AI_KEY || process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    console.log("[Aimlo AI] No API key found, using deterministic fallback");
+    return generateDeterministicFeedback(body);
+  }
 
   const { setup, form, result, allRounds, lang, survived } = body;
   const isTr = lang === "tr";
 
-  const systemPrompt = `You are AIMLO, an expert Valorant coach. Analyze the round data and give actionable feedback.
-Respond ONLY in ${isTr ? "Turkish" : "English"}.
-Return ONLY valid JSON with exactly these 3 string fields: mainMistake, enemyHabit, microPlan.
-Each field: 1-2 sentences max. Be specific. No markdown, no code blocks, just JSON.`;
+  // Load knowledge base for context-aware coaching
+  let knowledgeBase = "";
+  try {
+    const { buildFeedbackSystemPrompt } = await import("@/lib/ai-knowledge");
+    knowledgeBase = buildFeedbackSystemPrompt(setup.map, setup.agent, lang);
+  } catch (e) {
+    console.log("[Aimlo] Knowledge base not available, using default prompt");
+  }
+
+  const systemPrompt = knowledgeBase || `Sen AIMLO, Radiant seviye profesyonel Valorant koçusun. Espor takımlarına koçluk yapmış, VCT maçları analiz etmiş bir uzmansın.
+
+KESİN KURALLAR:
+1. ASLA şunları söyleme: "dikkatli ol", "daha iyi oyna", "farklı dene", "sabırlı ol", "takım olarak çalışın"
+2. Her cümlende somut veri referansı olsun: ajan adı, pozisyon adı, round numarası, düşman sayısı
+3. Boş motivasyon cümlesi YASAK. Her kelime bilgi taşımalı.
+4. Kısa cümleler kur. Max 15 kelime. Paragraf YASAK.
+5. Oyun terimlerini kullan: overpeek, dry peek, trade, swing, jiggle peek, shoulder peek, lurk, anchor, retake, default, execute, fake, stack, contact play, info play, utility dump, flash+trade, post-plant, anti-eco
+6. "sen" diye hitap et, "siz" kullanma
+
+DEATH ANALYSIS FORMAT:
+- İlk cümle: NE OLDU — pozisyon + düşman + silah
+- İkinci cümle: NEDEN OLDU — taktiksel hata analizi
+- Üçüncü cümle: NE YAPMALISIN — spesifik çözüm
+
+ÖRNEKLER (bu kalitede yaz):
+❌ KÖTÜ: "A Short'ta pozisyonun ideal değildi. Daha korunaklı bir açı seçmeliydin."
+✅ İYİ: "A Short'ta Jett'in Op'una dry peek attın. Utility kullanmadan bu açıya çıkmak intihar — Jett pozisyon değiştirmediği sürece her round aynı sonuç. Drone/flash at, trade kur, solo peek ATMA."
+
+❌ KÖTÜ: "Düşman baskı yapıyor. Dikkatli olmalısın."
+✅ İYİ: "2 rounddur 3 kişi B main'den push yapıyorlar. Omen her seferinde smoke atıp Breach aftershock ile giriyor. Retake pozisyonuna geç, anchor'ı B market'e çek."
+
+❌ KÖTÜ: "Farklı bir strateji deneyin."
+✅ İYİ: "3R B heavy oynadılar. Mid fake göster — Sova drone'u mid'e at, Omen smoke B main — sonra 4 kişi A split: 2 main, 2 short. Jett'in Op'unu flash ile kapat."
+
+ENEMY ANALYSIS FORMAT:
+- Array olarak döndür, 3-4 madde
+- Her madde: "[süre] [ne] — [detay]"
+- Kısa, keskin, pattern bazlı
+- Sadece gözlemlenen pattern'leri yaz, tahmin etme
+- Eğer tekrarlayan pattern varsa round sayısını belirt
+
+ÖRNEKLER:
+✅ ["2R 3 kişi B push — Omen smoke + Breach flash ile", "Jett A Short Op — 3 rounddur aynı açı, değiştirmedi", "Cypher B site setup — tripwire B main, cam market", "Eco sonrası agresif oynuyorlar — Spectre ile push gelir"]
+
+NEXT ROUND PLAN FORMAT:
+- İlk satır: NE yapılacak (execute planı, kısa)
+- İkinci satır: NASIL (utility kullanımı, pozisyon)
+- Üçüncü satır: RİSK YÖNETİMİ (anchor, fallback)
+
+ÖRNEKLER:
+✅ "B fake → A execute. Omen smoke B main, Sova drone A main. Flash+trade ile Jett'in Op açısını temizle. B'ye Cypher anchor bırak, trip B main'e koy."
+✅ "Eco round — 5 kişi B short stack. İlk temas sonrası trade chain kur. Op varsa smoke at, yoksa swing."
+
+${isTr ? "Türkçe yaz." : "Write in English."}
+Return ONLY valid JSON:
+{
+  "deathAnalysis": "3 katman: gözlem + çıkarım + öneri",
+  "enemyPatterns": ["pattern 1", "pattern 2", "pattern 3"],
+  "nextRoundPlan": "ne + nasıl + risk yönetimi"
+}
+No markdown, no code blocks, just JSON.`;
 
   // Sanitized user prompt — note is truncated and escaped
   const safeNote = form.yourNote.replace(/["\\\n\r\t]/g, " ").slice(0, 300);
@@ -493,12 +603,32 @@ Each field: 1-2 sentences max. Be specific. No markdown, no code blocks, just JS
       ).length
     : 0;
 
-  const userPrompt = `Map: ${setup.map}, Agent: ${setup.agent}, Side: ${setup.side}
-${survived ? "Player survived this round." : `Death location: ${form.deathLocation}, Enemies faced: ${form.enemyCount}`}
-<user_note>${safeNote}</user_note>
-Round result: ${result}
-Previous rounds: ${roundCount} played, ${roundsWon} won
-Repeated death at same location: ${repeatDeaths} times`;
+  // Build recent rounds summary for context
+  const safeRounds = Array.isArray(allRounds)
+    ? allRounds.filter(
+        (r): r is RoundData => r != null && typeof r === "object" && !r.skipped,
+      )
+    : [];
+  const recentRounds = safeRounds.slice(-3).map((r) => {
+    const rNote = (r.yourNote || "").replace(/["\\\n\r\t]/g, " ").slice(0, 100);
+    return `R${r.roundNumber}: ${r.result}${r.survived ? ", hayatta" : `, öldü@${r.deathLocation || "?"}, ${r.enemyCount || "?"} düşman`}${rNote ? `, "${rNote}"` : ""}`;
+  }).join("\n");
+
+  const enemyCompStr = setup.unknownEnemyComp
+    ? "bilinmiyor"
+    : (setup.enemyComp || []).filter(Boolean).join(", ");
+
+  const userPrompt = `Maç: ${setup.map}, ${setup.agent}, ${setup.side}, Skor: ${roundsWon}-${roundCount - roundsWon}
+
+Son round'lar:
+${recentRounds || "İlk round"}
+
+ŞU ANKİ ROUND:
+R${roundCount + 1}: ${result}${survived ? ", hayatta kaldı" : `, öldü@${form.deathLocation}, ${form.enemyCount} düşman`}${safeNote ? `, "${safeNote}"` : ""}
+
+Oyuncu ajanı: ${setup.agent}
+Düşman ajanları: ${enemyCompStr}
+Aynı konumda tekrar ölüm: ${repeatDeaths} kez`;
 
   try {
     const controller = new AbortController();
@@ -513,7 +643,7 @@ Repeated death at same location: ${repeatDeaths} times`;
       },
       body: JSON.stringify({
         model: "claude-haiku-4-5-20251001",
-        max_tokens: 300,
+        max_tokens: 500,
         system: systemPrompt,
         messages: [{ role: "user", content: userPrompt }],
       }),
@@ -536,7 +666,8 @@ Repeated death at same location: ${repeatDeaths} times`;
     try {
       parsed = JSON.parse(text);
     } catch {
-      const jsonMatch = text.match(/\{[^{}]*\}/);
+      // Match JSON object that may contain arrays (for enemyPatterns)
+      const jsonMatch = text.match(/\{[\s\S]*\}/);
       if (!jsonMatch) {
         console.error("[Aimlo AI] No JSON in response");
         return generateDeterministicFeedback(body);
@@ -551,9 +682,9 @@ Repeated death at same location: ${repeatDeaths} times`;
 
     if (isValidFeedbackShape(parsed)) {
       return {
-        mainMistake: parsed.mainMistake.slice(0, 500),
-        enemyHabit: parsed.enemyHabit.slice(0, 500),
-        microPlan: parsed.microPlan.slice(0, 500),
+        deathAnalysis: parsed.deathAnalysis.slice(0, 500),
+        enemyPatterns: parsed.enemyPatterns.slice(0, 4).map((p: string) => p.slice(0, 200)),
+        nextRoundPlan: parsed.nextRoundPlan.slice(0, 500),
       };
     }
 
@@ -580,9 +711,18 @@ Repeated death at same location: ${repeatDeaths} times`;
    ══════════════════════════════════════════════════════════ */
 export async function POST(request: NextRequest) {
   try {
-    // Auth + rate limit check
-    const auth = await verifyAuthAndRateLimit(request);
-    if (!auth.ok) return auth.response;
+    // Auth + rate limit check — reject unauthenticated requests
+    let userId: string;
+    try {
+      const auth = await verifyAuthAndRateLimit(request);
+      if (!auth.ok) {
+        return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+      }
+      userId = auth.userId;
+    } catch (e) {
+      console.warn("[Aimlo] Auth check failed:", e);
+      return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+    }
 
     let rawBody: unknown;
     try {
@@ -590,6 +730,8 @@ export async function POST(request: NextRequest) {
     } catch {
       return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
     }
+
+    console.log(`[AIMLO] AI request from user: ${userId}`);
 
     const validation = validateRequest(rawBody);
     if (!validation.valid) {

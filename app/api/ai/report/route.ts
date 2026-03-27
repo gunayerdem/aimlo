@@ -42,6 +42,8 @@ type ReportResponse = {
   mistake: string;
   tendencies: string;
   adjustment: string;
+  bestRound: string;
+  decisionScore: string;
   won: number;
   lost: number;
   skipped: number;
@@ -171,6 +173,8 @@ function isValidAITextFields(
   mistake: string;
   tendencies: string;
   adjustment: string;
+  bestRound: string;
+  decisionScore: string;
 } {
   if (!obj || typeof obj !== "object") return false;
   const o = obj as Record<string, unknown>;
@@ -182,7 +186,11 @@ function isValidAITextFields(
     typeof o.tendencies === "string" &&
     o.tendencies.length > 0 &&
     typeof o.adjustment === "string" &&
-    o.adjustment.length > 0
+    o.adjustment.length > 0 &&
+    typeof o.bestRound === "string" &&
+    o.bestRound.length > 0 &&
+    typeof o.decisionScore === "string" &&
+    o.decisionScore.length > 0
   );
 }
 
@@ -243,47 +251,82 @@ function generateDeterministicReport(body: ReportRequest): ReportResponse {
         ? ` ${survivedCount} round'da hayatta kaldın.`
         : ` Survived ${survivedCount} rounds.`
       : "";
+  // Identify death rounds for references
+  const deathRounds = nonSkipped
+    .filter((r) => !r.survived && r.deathLocation === topDeathLoc)
+    .map((r) => `R${r.roundNumber}`);
+  const deathRoundStr = deathRounds.slice(0, 3).join(", ");
+
   const summary = isTr
-    ? `${setup.map} haritasında ${setup.agent} ile ${sideLabel} tarafında oynadın. Skor: ${scoreStr}. ${total} round (${skipped} atlanan).${survivedText} En çok ölüm: ${topDeathLoc} (${topDeathCount}x). Ort. düşman: ${avgEnemy}.`
-    : `Played ${setup.map} as ${setup.agent} on ${sideLabel}. Score: ${scoreStr}. ${total} rounds (${skipped} skipped).${survivedText} Most deaths: ${topDeathLoc} (${topDeathCount}x). Avg enemy: ${avgEnemy}.`;
+    ? `${setup.map} — ${setup.agent} ${sideLabel}. Skor: ${scoreStr}. ${total} round, ${won}W/${lost}L.${survivedText} ${topDeathLoc !== "N/A" ? `${topDeathLoc}'da ${topDeathCount}x ölüm — bu pozisyon okunuyor.` : ""} Ort. düşman temas: ${avgEnemy} kişi.`
+    : `${setup.map} — ${setup.agent} ${sideLabel}. Score: ${scoreStr}. ${total} rounds, ${won}W/${lost}L.${survivedText} ${topDeathLoc !== "N/A" ? `${topDeathCount}x death at ${topDeathLoc} — this position is being read.` : ""} Avg enemy contact: ${avgEnemy}.`;
   let mistake: string;
   if (topDeathCount >= 3) {
     mistake = isTr
-      ? `${topDeathLoc} konumunda ${topDeathCount} kez öldün. Bu tekrar düşmana okuma kolaylığı sağlıyor.`
-      : `You died at ${topDeathLoc} ${topDeathCount} times. This makes you predictable.`;
+      ? `GÖZLEM: ${topDeathLoc}'da ${topDeathCount} ölüm (${deathRoundStr}). ÇIKARIM: Düşman bu açıyı okuyor, crosshair hazır tutuyor. ÖNERİ: ${setup.agent} olarak off-angle'a geç veya utility ile açıyı temizleyip peek at.`
+      : `OBSERVATION: ${topDeathCount} deaths at ${topDeathLoc} (${deathRoundStr}). INFERENCE: Enemy reads this angle, holds crosshair. RECOMMENDATION: As ${setup.agent}, shift to off-angle or clear with utility before peeking.`;
   } else if (hasRotateIssue) {
     mistake = isTr
-      ? "Birden fazla round'da erken rotasyon sorunu yaşadın."
-      : "Early rotation issues in multiple rounds.";
+      ? `GÖZLEM: Birden fazla round'da rotasyon sırasında ölüm. ÇIKARIM: Timing hatası — crosshair placement hazır değildi, düşman rotasyonu okuyor. ÖNERİ: ${setup.agent} olarak rotasyonda her köşeyi pre-aim yap, ability ile info topla.`
+      : `OBSERVATION: Deaths during rotation in multiple rounds. INFERENCE: Timing error — crosshair placement wasn't ready, enemy reads rotations. RECOMMENDATION: As ${setup.agent}, pre-aim every corner during rotation, use ability for info.`;
   } else if (hasSoloIssue) {
     mistake = isTr
-      ? "Solo oynadığını belirttin. Takım koordinasyonu eksik."
-      : "Playing solo noted. Team coordination lacking.";
+      ? `GÖZLEM: Solo anchor pozisyonlarında izole ölümler. ÇIKARIM: Trade alacak teammate yoktu, ${setup.agent} izole pozisyonda savunmasız. ÖNERİ: Teammate trade açısını bekle, crossfire kur, solo peek atma.`
+      : `OBSERVATION: Isolated deaths in solo anchor positions. INFERENCE: No teammate for trade, ${setup.agent} vulnerable in isolation. RECOMMENDATION: Wait for teammate trade angle, set up crossfire, no solo peeks.`;
   } else if (hasUtilIssue) {
     mistake = isTr
-      ? "Utility zamanlamanla ilgili sorunlar tespit edildi."
-      : "Issues with utility timing detected.";
+      ? `GÖZLEM: ${setup.agent} utility sonrası savunmasız kalınan round'lar var. ÇIKARIM: Ability kullandıktan sonra aynı pozisyonda duruyorsun — düşman bunu cezalandırıyor. ÖNERİ: Utility sonrası reposition yap, off-angle'a geç.`
+      : `OBSERVATION: Rounds where ${setup.agent} was vulnerable after utility use. INFERENCE: Holding same position after ability — enemy punishes this. RECOMMENDATION: Reposition after utility, shift to off-angle.`;
   } else {
     mistake = isTr
-      ? "Genel pozisyonlama sorunları göze çarpıyor."
-      : "General positioning issues stand out.";
+      ? `GÖZLEM: ${topDeathLoc !== "N/A" ? `${topDeathLoc}'da` : `${setup.map}'de`} tekrarlayan pozisyonlama hataları. ÇIKARIM: Crosshair placement ve angle seçimi zayıf — düşman ilk peek'i kazanıyor. ÖNERİ: ${setup.agent} olarak off-angle tut, jiggle peek ile info topla.`
+      : `OBSERVATION: Recurring positioning errors ${topDeathLoc !== "N/A" ? `at ${topDeathLoc}` : `on ${setup.map}`}. INFERENCE: Weak crosshair placement and angle selection — enemy wins first peek. RECOMMENDATION: As ${setup.agent}, hold off-angle, jiggle peek for info.`;
   }
   const enemyAgents = setup.unknownEnemyComp
     ? isTr
       ? "bilinmiyor"
       : "unknown"
     : (setup.enemyComp || []).filter(Boolean).join(", ");
+  const enemyDuelist = (setup.enemyComp || []).find((a) => ["Jett", "Reyna", "Neon", "Raze"].includes(a));
   const tendencies = isTr
-    ? `Düşman (${enemyAgents}) ort. ${avgEnemy} kişilik gruplarla hareket etti. ${matchWon ? "Baskı yapsa da takımın karşılık verdi." : "Sayısal üstünlükle baskı kurdu."}`
-    : `Enemy (${enemyAgents}) moved in groups avg ${avgEnemy}. ${matchWon ? "Despite pressure, team responded." : "Applied pressure with numbers."}`;
+    ? `Düşman (${enemyAgents}) ort. ${avgEnemy} kişilik gruplarla hareket etti. ${enemyDuelist ? `${enemyDuelist} agresif entry aldı — flash/smoke ile karşıla.` : ""} ${matchWon ? "Baskı yaptılar ama takım trade setup ile karşılık verdi." : `Sayısal üstünlükle ${topDeathLoc !== "N/A" ? topDeathLoc : "site"} baskısı kurdu.`}`
+    : `Enemy (${enemyAgents}) moved in groups avg ${avgEnemy}. ${enemyDuelist ? `${enemyDuelist} took aggressive entries — counter with flash/smoke.` : ""} ${matchWon ? "They pressured but team countered with trade setups." : `Applied numbers pressure on ${topDeathLoc !== "N/A" ? topDeathLoc : "site"}.`}`;
   const adjustment = isTr
-    ? `${topDeathLoc !== "N/A" ? `${topDeathLoc} yerine farklı açılardan oyna. ` : ""}${setup.agent} olarak utility'ni stratejik zamanla. ${matchWon ? "İyi performans, pozisyon çeşitliliğini artır." : "Retake pozisyonlarına erken geç."}`
-    : `${topDeathLoc !== "N/A" ? `Play different angles instead of ${topDeathLoc}. ` : ""}As ${setup.agent}, time utility strategically. ${matchWon ? "Good performance, increase positional variety." : "Set up retake earlier."}`;
+    ? `${topDeathLoc !== "N/A" ? `${topDeathLoc} yerine off-angle'lardan oyna — bu açı okunuyor. ` : ""}${setup.agent} utility'sini retake/info için sakla, erken harcama. ${matchWon ? "Pozisyon çeşitliliğini artır — aynı setup 2 round üst üste kullanma." : "Retake pozisyonlarına erken geç, site anchor'ını trade destekli kur."}`
+    : `${topDeathLoc !== "N/A" ? `Play off-angles instead of ${topDeathLoc} — this angle is being read. ` : ""}Save ${setup.agent} utility for retake/info, don't use early. ${matchWon ? "Increase positional variety — don't repeat same setup 2 rounds in a row." : "Set up retake positions early, anchor site with trade support."}`;
+
+  // Best round — find a won round where player survived
+  const bestRoundData = nonSkipped.find((r) => r.result === "win" && r.survived);
+  const bestRound = bestRoundData
+    ? isTr
+      ? `R${bestRoundData.roundNumber}: ${bestRoundData.deathLocation || setup.map} bölgesinde ${setup.agent} olarak hayatta kaldın. Trade setup doğruydu, pozisyon tutma isabetliydi. Bu setup tekrarlanabilir — açıyı hafifçe kaydır.`
+      : `R${bestRoundData.roundNumber}: Survived at ${bestRoundData.deathLocation || setup.map} as ${setup.agent}. Trade setup was correct, positioning was on point. This setup is repeatable — shift the angle slightly.`
+    : isTr
+      ? `Hayatta kalınan round yok. ${setup.agent} olarak trade pozisyonu kur — solo peek'leri azalt, teammate desteği bekle.`
+      : `No rounds survived. As ${setup.agent}, set up trade positions — reduce solo peeks, wait for teammate support.`;
+
+  // Decision score — based on survival, win rate, death repetition
+  const survivalPct = nonSkipped.length > 0 ? survivedCount / nonSkipped.length : 0;
+  const deathVariety = Object.keys(locationCounts).length;
+  let score_num = 5;
+  if (winPct >= 60) score_num += 2;
+  else if (winPct >= 45) score_num += 1;
+  if (survivalPct >= 0.4) score_num += 1;
+  if (deathVariety >= 3) score_num += 1; // not dying at same spot
+  if (topDeathCount >= 4) score_num -= 2; // very repetitive deaths
+  else if (topDeathCount >= 3) score_num -= 1;
+  score_num = Math.max(1, Math.min(10, score_num));
+  const decisionScore = isTr
+    ? `${score_num}/10 — ${score_num >= 7 ? `Pozisyon çeşitliliği iyi, ${setup.agent} utility zamanlaması doğru` : score_num >= 5 ? `${topDeathLoc !== "N/A" ? `${topDeathLoc}'da tekrar ölümler` : "Tekrarlayan pozisyon hataları"}, trade setup'lar eksik` : `Aynı açılarda ölüm tekrarı, ${setup.agent} utility'si etkisiz kullanılıyor`}`
+    : `${score_num}/10 — ${score_num >= 7 ? `Good positional variety, ${setup.agent} utility timing correct` : score_num >= 5 ? `${topDeathLoc !== "N/A" ? `Repeat deaths at ${topDeathLoc}` : "Recurring position errors"}, trade setups lacking` : `Repeating deaths at same angles, ${setup.agent} utility used ineffectively`}`;
+
   return {
     summary,
     mistake,
     tendencies,
     adjustment,
+    bestRound,
+    decisionScore,
     won,
     lost,
     skipped,
@@ -299,7 +342,7 @@ function generateDeterministicReport(body: ReportRequest): ReportResponse {
    AI REPORT — with timeout, validation, safe prompt
    ══════════════════════════════════════════════════════════ */
 async function generateAIReport(body: ReportRequest): Promise<ReportResponse> {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.AIMLO_AI_KEY || process.env.ANTHROPIC_API_KEY;
   const stats = generateDeterministicReport(body);
 
   if (!apiKey) return stats;
@@ -307,10 +350,53 @@ async function generateAIReport(body: ReportRequest): Promise<ReportResponse> {
   const { setup, rounds, lang, score } = body;
   const isTr = lang === "tr";
 
-  const systemPrompt = `You are AIMLO, an expert Valorant analyst. Generate a match report.
-Respond ONLY in ${isTr ? "Turkish" : "English"}.
-Return ONLY valid JSON with exactly these 4 string fields: summary, mistake, tendencies, adjustment.
-Each field: 1-3 sentences max. Be specific, actionable. No markdown, no code blocks, just JSON.`;
+  // Load knowledge base for comprehensive match analysis
+  let knowledgeBase = "";
+  try {
+    const { buildReportSystemPrompt } = await import("@/lib/ai-knowledge");
+    knowledgeBase = buildReportSystemPrompt(setup.map, setup.agent, lang);
+  } catch (e) {
+    console.log("[Aimlo] Knowledge base not available, using default prompt");
+  }
+
+  const systemPrompt = knowledgeBase || `Sen AIMLO, Radiant seviye profesyonel Valorant analist ve koçsun. Espor takımlarına koçluk yapmış, VCT maçları analiz etmiş bir uzmansın.
+
+KESİN KURALLAR:
+1. ASLA şunları söyleme: "dikkatli ol", "daha iyi oyna", "farklı dene", "sabırlı ol", "takım olarak çalışın"
+2. Her cümlende somut veri referansı olsun: ajan adı, pozisyon adı, round numarası, düşman sayısı
+3. Boş motivasyon cümlesi YASAK. Her kelime bilgi taşımalı.
+4. Kısa cümleler kur. Max 15 kelime. Paragraf YASAK.
+5. Oyun terimlerini kullan: overpeek, dry peek, trade, swing, jiggle peek, shoulder peek, lurk, anchor, retake, default, execute, fake, stack, contact play, info play, utility dump, flash+trade, post-plant, anti-eco
+6. "sen" diye hitap et, "siz" kullanma
+
+RAPOR ALANLARI:
+- summary: Neden kazanıldı/kaybedildi (1 keskin cümle) + skor, hayatta kalma, öne çıkan veri. Spesifik round ve pozisyon referansı ver.
+- mistake: Top 3 tekrarlayan hata. Her hata round numarası içermeli (R4, R7, R11 gibi). Taktiksel neden + spesifik çözüm.
+- tendencies: Düşman pattern özeti. Ajan bazlı analiz. Round referansları ile pattern'leri göster.
+- adjustment: Spesifik pozisyon, utility zamanlama, rotasyon değişiklikleri. Harita callout'ları ve ajan ability isimleri kullan.
+- bestRound: Spesifik round numarası + ne yaptın, neden işe yaradı, tekrarlanabilir mi. 3 katman analiz.
+- decisionScore: "X/10 — kısa gerekçe" formatı. Hayatta kalma, pozisyon çeşitliliği, utility bazlı.
+
+AIMLO KOÇLUK KALİTE STANDARDI:
+- Her feedback Radiant seviye koç kalitesinde olmalı
+- Generic tavsiye = başarısızlık
+- Her cümlede ajan adı, pozisyon adı veya round referansı olmalı
+- Düşman analizi pattern bazlı olmalı, anlık değil
+- Sonraki round planı uygulanabilir, spesifik ve takım bazlı olmalı
+- Oyuncuya "ne yapma" değil "ne yap" söyle
+- Kısa, keskin, güvenli ton. Koç gibi konuş, arkadaş gibi değil.
+
+${isTr ? "Türkçe yaz." : "Write in English."}
+Return ONLY valid JSON with exactly these 6 string fields:
+{
+  "summary": "neden kazanıldı/kaybedildi + veriler",
+  "mistake": "top 3 hata + round referansları",
+  "tendencies": "düşman pattern özeti",
+  "adjustment": "spesifik değişiklikler",
+  "bestRound": "round no + taktiksel gerekçe",
+  "decisionScore": "X/10 — gerekçe"
+}
+No markdown, no code blocks, just JSON.`;
 
   // Build round summary — truncated, sanitized
   const safeRounds = (rounds || []).filter(
@@ -344,7 +430,7 @@ Rounds:\n${roundSummary}`;
       },
       body: JSON.stringify({
         model: "claude-haiku-4-5-20251001",
-        max_tokens: 500,
+        max_tokens: 700,
         system: systemPrompt,
         messages: [{ role: "user", content: userPrompt }],
       }),
@@ -367,7 +453,7 @@ Rounds:\n${roundSummary}`;
     try {
       parsed = JSON.parse(text);
     } catch {
-      const jsonMatch = text.match(/\{[^{}]*\}/);
+      const jsonMatch = text.match(/\{[\s\S]*\}/);
       if (!jsonMatch) {
         console.error("[Aimlo AI] No JSON in report response");
         return stats;
@@ -388,6 +474,8 @@ Rounds:\n${roundSummary}`;
         mistake: parsed.mistake.slice(0, 1000),
         tendencies: parsed.tendencies.slice(0, 1000),
         adjustment: parsed.adjustment.slice(0, 1000),
+        bestRound: parsed.bestRound.slice(0, 500),
+        decisionScore: parsed.decisionScore.slice(0, 200),
       };
     }
 
@@ -414,9 +502,18 @@ Rounds:\n${roundSummary}`;
    ══════════════════════════════════════════════════════════ */
 export async function POST(request: NextRequest) {
   try {
-    // Auth + rate limit check
-    const auth = await verifyAuthAndRateLimit(request);
-    if (!auth.ok) return auth.response;
+    // Auth + rate limit check — reject unauthenticated requests
+    let userId: string;
+    try {
+      const auth = await verifyAuthAndRateLimit(request);
+      if (!auth.ok) {
+        return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+      }
+      userId = auth.userId;
+    } catch (e) {
+      console.warn("[Aimlo] Auth check failed:", e);
+      return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+    }
 
     let rawBody: unknown;
     try {
@@ -424,6 +521,8 @@ export async function POST(request: NextRequest) {
     } catch {
       return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
     }
+
+    console.log(`[AIMLO] AI request from user: ${userId}`);
 
     const validation = validateRequest(rawBody);
     if (!validation.valid) {

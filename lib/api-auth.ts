@@ -10,8 +10,19 @@ const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT_WINDOW_MS = 60_000; // 1 minute
 const RATE_LIMIT_MAX = 20; // max 20 requests per minute per user
 
+let lastCleanup = Date.now();
+
 function checkRateLimit(userId: string): boolean {
   const now = Date.now();
+
+  // Lazy cleanup: every 60s, purge expired entries (serverless-safe)
+  if (now - lastCleanup > 60_000) {
+    lastCleanup = now;
+    for (const [key, entry] of rateLimitMap) {
+      if (now > entry.resetAt) rateLimitMap.delete(key);
+    }
+  }
+
   const entry = rateLimitMap.get(userId);
 
   if (!entry || now > entry.resetAt) {
@@ -27,15 +38,7 @@ function checkRateLimit(userId: string): boolean {
   return true;
 }
 
-// Clean up old entries periodically (prevent memory leak)
-setInterval(() => {
-  const now = Date.now();
-  for (const [key, entry] of rateLimitMap) {
-    if (now > entry.resetAt) {
-      rateLimitMap.delete(key);
-    }
-  }
-}, 60_000);
+// Cleanup happens lazily during checkRateLimit calls (serverless-safe, no setInterval)
 
 // ── Auth verification ──
 export async function verifyAuthAndRateLimit(
