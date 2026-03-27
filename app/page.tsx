@@ -460,6 +460,22 @@ const t = {
     downloadFeature2: "Overlay feedback",
     downloadFeature3: "Canlı analiz",
     downloadBtn: "İndir",
+    navDownload: "Uygulamayı İndir",
+    aiInsightTitle: "AI INSIGHT",
+    aiInsightNoData: "Henüz yeterli veri yok. Birkaç maç analiz et, AI seni tanısın.",
+    aiInsightMoreData: "Daha fazla maç verisi gerekiyor.",
+    problemAreasTitle: "PROBLEM BÖLGELERİ",
+    problemDeathZone: "Ölüm Bölgesi",
+    problemWeakMap: "Zayıf Harita",
+    problemPattern: "Tekrarlayan Hata",
+    problemNoData: "Veri yok",
+    problemDeathDesc: "kez öldün",
+    problemMapDesc: "winrate",
+    problemPatternDesc: "tekrarlayan ölüm bölgesi",
+    matchInsightStrong: "Güçlü maç",
+    matchInsightRepeat: "pozisyon tekrarı",
+    matchInsightDeaths: "ölüm",
+    matchInsightBadLoss: "Zor maç — ana sorunu analiz et",
     historyFilterMap: "Harita Filtresi",
     historyFilterAgent: "Ajan Filtresi",
     historyFilterResult: "Sonuç",
@@ -729,6 +745,22 @@ const t = {
     downloadFeature2: "Overlay feedback",
     downloadFeature3: "Live analysis",
     downloadBtn: "Download",
+    navDownload: "Download App",
+    aiInsightTitle: "AI INSIGHT",
+    aiInsightNoData: "Not enough data yet. Analyze a few matches so AI can learn your patterns.",
+    aiInsightMoreData: "Need more match data.",
+    problemAreasTitle: "PROBLEM AREAS",
+    problemDeathZone: "Death Zone",
+    problemWeakMap: "Weak Map",
+    problemPattern: "Recurring Pattern",
+    problemNoData: "No data",
+    problemDeathDesc: "deaths",
+    problemMapDesc: "winrate",
+    problemPatternDesc: "recurring death zone",
+    matchInsightStrong: "Strong match",
+    matchInsightRepeat: "position repeat",
+    matchInsightDeaths: "deaths",
+    matchInsightBadLoss: "Tough match — analyze the main issue",
     historyFilterMap: "Map Filter",
     historyFilterAgent: "Agent Filter",
     historyFilterResult: "Result",
@@ -1206,6 +1238,8 @@ function Navbar({
   signOutLabel,
   onHome,
   homeLabel,
+  onDownload,
+  downloadLabel,
 }: {
   user: User;
   lang: Lang;
@@ -1215,6 +1249,8 @@ function Navbar({
   signOutLabel: string;
   onHome?: () => void;
   homeLabel?: string;
+  onDownload?: () => void;
+  downloadLabel?: string;
 }) {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.06] bg-[#050810]/80 backdrop-blur-xl">
@@ -1247,6 +1283,19 @@ function Navbar({
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                 <polyline points="9 22 9 12 15 12 15 22" />
               </svg>
+            </button>
+          )}
+          {onDownload && (
+            <button
+              onClick={onDownload}
+              className="hidden sm:flex items-center gap-1.5 rounded-lg border border-cyan-500/20 bg-cyan-500/[0.06] px-2.5 py-1.5 text-[10px] font-semibold text-cyan-400 transition-all duration-200 hover:border-cyan-500/30 hover:bg-cyan-500/[0.1]"
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              {downloadLabel}
             </button>
           )}
           <button
@@ -2284,6 +2333,8 @@ function AuthScreen({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [checkEmail, setCheckEmail] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
   const al = t[lang];
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -2541,28 +2592,82 @@ function AuthScreen({
             </div>
             <div>
               <Label text={al.authPassword} />
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder={al.authPasswordPh}
-                required
-                minLength={6}
-                className={ds.inputBase}
-              />
+              <div style={{ position: "relative" }}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  required
+                  minLength={6}
+                  className={ds.inputBase}
+                  style={{ paddingRight: 40 }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={{
+                    position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)",
+                    background: "none", border: "none", cursor: "pointer",
+                    color: "rgba(255,255,255,0.3)", padding: 0, display: "flex", alignItems: "center",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.6)"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.3)"; }}
+                  tabIndex={-1}
+                >
+                  {showPassword ? (
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                      <line x1="1" y1="1" x2="23" y2="23"/>
+                    </svg>
+                  ) : (
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                      <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                  )}
+                </button>
+              </div>
             </div>
             {mode === "register" && (
               <div>
                 <Label text={al.authPasswordConfirm} />
-                <input
-                  type="password"
-                  value={passwordConfirm}
-                  onChange={(e) => setPasswordConfirm(e.target.value)}
-                  placeholder={al.authPasswordConfirmPh}
-                  required
-                  minLength={6}
-                  className={ds.inputBase}
-                />
+                <div style={{ position: "relative" }}>
+                  <input
+                    type={showPasswordConfirm ? "text" : "password"}
+                    value={passwordConfirm}
+                    onChange={(e) => setPasswordConfirm(e.target.value)}
+                    placeholder="••••••••"
+                    required
+                    minLength={6}
+                    className={ds.inputBase}
+                    style={{ paddingRight: 40 }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
+                    style={{
+                      position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)",
+                      background: "none", border: "none", cursor: "pointer",
+                      color: "rgba(255,255,255,0.3)", padding: 0, display: "flex", alignItems: "center",
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.6)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.3)"; }}
+                    tabIndex={-1}
+                  >
+                    {showPasswordConfirm ? (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                        <line x1="1" y1="1" x2="23" y2="23"/>
+                      </svg>
+                    ) : (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    )}
+                  </button>
+                </div>
               </div>
             )}
             {error && (
@@ -2697,12 +2802,12 @@ export default function Home() {
       setVerifiedBanner("success");
       // Clean URL
       window.history.replaceState({}, "", window.location.pathname);
-      // Auto-hide after 6 seconds
-      timer = setTimeout(() => setVerifiedBanner(null), 6000);
+      // Auto-hide after 8 seconds
+      timer = setTimeout(() => setVerifiedBanner(null), 8000);
     } else if (verified === "error") {
       setVerifiedBanner("error");
       window.history.replaceState({}, "", window.location.pathname);
-      timer = setTimeout(() => setVerifiedBanner(null), 6000);
+      timer = setTimeout(() => setVerifiedBanner(null), 8000);
     }
     return () => { if (timer) clearTimeout(timer); };
   }, []);
@@ -2786,6 +2891,86 @@ export default function Home() {
       improveArea: worstMap ? `${worstMap.name} (${worstMap.wr}% WR)` : null,
     };
   }, [savedReports, agentPerf, mapPerf]);
+  // AI Insight — coaching-style top message
+  const aiInsight = useMemo(() => {
+    const ll = t[lang ?? "en"];
+    if (savedReports.length < 2) return ll.aiInsightNoData;
+
+    const deathSpots: Record<string, number> = {};
+    savedReports.forEach(r => r.rounds?.filter(rd => !rd.skipped && !rd.survived && rd.deathLocation)
+      .forEach(rd => { deathSpots[rd.deathLocation] = (deathSpots[rd.deathLocation] || 0) + 1; }));
+    const topDeath = Object.entries(deathSpots).sort((a, b) => b[1] - a[1])[0];
+
+    const recent = savedReports.slice(0, 5);
+    const recentWR = recent.length > 0 ? recent.filter(r => r.won).length / recent.length * 100 : 0;
+
+    const mapWR: Record<string, { w: number; t: number }> = {};
+    savedReports.forEach(r => {
+      if (!mapWR[r.map]) mapWR[r.map] = { w: 0, t: 0 };
+      mapWR[r.map].t++;
+      if (r.won) mapWR[r.map].w++;
+    });
+    const worst = Object.entries(mapWR).filter(e => e[1].t >= 2).sort((a, b) => (a[1].w / a[1].t) - (b[1].w / b[1].t))[0];
+
+    let text = "";
+    if (lang === "tr") {
+      if (topDeath) text += `${topDeath[0]}'de ${topDeath[1]} kez öldün — en zayıf bölgen. `;
+      if (recentWR < 40) text += "Son maçlarda performans düşük. ";
+      else if (recentWR > 60) text += "Performansın yükselişte. ";
+      if (worst) text += `${worst[0]}'te winrate %${Math.round(worst[1].w / worst[1].t * 100)} — strateji değişikliği öneriyorum.`;
+    } else {
+      if (topDeath) text += `Died ${topDeath[1]} times at ${topDeath[0]} — your weakest spot. `;
+      if (recentWR < 40) text += "Recent performance is declining. ";
+      else if (recentWR > 60) text += "Performance is improving. ";
+      if (worst) text += `${worst[0]} winrate ${Math.round(worst[1].w / worst[1].t * 100)}% — consider changing strategy.`;
+    }
+    return text || ll.aiInsightMoreData;
+  }, [savedReports, lang]);
+  // Problem areas — three weakest points
+  const problemAreas = useMemo(() => {
+    const deathSpots: Record<string, number> = {};
+    savedReports.forEach(r => r.rounds?.filter(rd => !rd.skipped && !rd.survived && rd.deathLocation)
+      .forEach(rd => { deathSpots[rd.deathLocation] = (deathSpots[rd.deathLocation] || 0) + 1; }));
+    const topDeath = Object.entries(deathSpots).sort((a, b) => b[1] - a[1])[0];
+
+    const mapWR: Record<string, { w: number; t: number }> = {};
+    savedReports.forEach(r => {
+      if (!r.map) return;
+      if (!mapWR[r.map]) mapWR[r.map] = { w: 0, t: 0 };
+      mapWR[r.map].t++;
+      if (r.won) mapWR[r.map].w++;
+    });
+    const worstMap = Object.entries(mapWR).filter(e => e[1].t >= 2).sort((a, b) => (a[1].w / a[1].t) - (b[1].w / b[1].t))[0];
+
+    // Pattern: find if any death location appears 3+ times in recent matches
+    const recentDeaths: Record<string, number> = {};
+    savedReports.slice(0, 5).forEach(r => r.rounds?.filter(rd => !rd.skipped && !rd.survived && rd.deathLocation)
+      .forEach(rd => { recentDeaths[rd.deathLocation] = (recentDeaths[rd.deathLocation] || 0) + 1; }));
+    const repeatingSpot = Object.entries(recentDeaths).filter(e => e[1] >= 3).sort((a, b) => b[1] - a[1])[0];
+
+    return {
+      deathSpot: topDeath ? { name: topDeath[0], count: topDeath[1] } : null,
+      worstMap: worstMap ? { name: worstMap[0], wr: Math.round(worstMap[1].w / worstMap[1].t * 100) } : null,
+      pattern: repeatingSpot ? { name: repeatingSpot[0], count: repeatingSpot[1] } : null,
+    };
+  }, [savedReports]);
+  // Match mini insight helper
+  const getMatchInsight = useCallback((entry: SavedReport): string | null => {
+    if (!entry.rounds || entry.rounds.length === 0) return null;
+    const ll = t[lang ?? "en"];
+    const deaths: Record<string, number> = {};
+    entry.rounds.filter(rd => !rd.skipped && !rd.survived && rd.deathLocation)
+      .forEach(rd => { deaths[rd.deathLocation] = (deaths[rd.deathLocation] || 0) + 1; });
+    const topRepeat = Object.entries(deaths).filter(e => e[1] >= 3).sort((a, b) => b[1] - a[1])[0];
+    if (topRepeat) {
+      return lang === "tr"
+        ? `${topRepeat[0]}'de ${topRepeat[1]} ${ll.matchInsightDeaths} — ${ll.matchInsightRepeat}`
+        : `${topRepeat[1]} ${ll.matchInsightDeaths} at ${topRepeat[0]} — ${ll.matchInsightRepeat}`;
+    }
+    if (entry.won && entry.winPct >= 60) return ll.matchInsightStrong;
+    if (!entry.won && entry.winPct <= 30) return ll.matchInsightBadLoss;
+    return null;
+  }, [lang]);
   // Filtered reports for history screen
   const filteredReports = useMemo(() => {
     let filtered = savedReports;
@@ -3035,24 +3220,28 @@ export default function Home() {
   // ── Email verification banner (shows on any screen) ──
   const VerifiedBanner = verifiedBanner ? (
     <div
-      className={`fixed top-0 left-0 right-0 z-[100] flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-[100] flex items-center justify-center gap-3 px-6 py-4 text-base font-bold shadow-lg transition-all duration-300 ${
         verifiedBanner === "success"
-          ? "bg-emerald-500/20 border-b border-emerald-500/30 text-emerald-300"
-          : "bg-red-500/20 border-b border-red-500/30 text-red-300"
+          ? "bg-emerald-500/25 border-b-2 border-emerald-400/50 text-emerald-200"
+          : "bg-red-500/25 border-b-2 border-red-400/50 text-red-200"
       }`}
+      style={{ backdropFilter: "blur(12px)" }}
     >
+      <span className={`text-lg ${verifiedBanner === "success" ? "text-emerald-400" : "text-red-400"}`}>
+        {verifiedBanner === "success" ? "✓" : "✕"}
+      </span>
       <span>
         {verifiedBanner === "success"
           ? lang === "tr"
-            ? "✓ E-posta başarıyla doğrulandı! Artık giriş yapabilirsiniz."
-            : "✓ Email verified successfully! You can now sign in."
+            ? "E-posta başarıyla doğrulandı! Giriş yapabilirsiniz."
+            : "Email verified successfully! You can now sign in."
           : lang === "tr"
-            ? "✕ E-posta doğrulama başarısız oldu. Lütfen tekrar deneyin."
-            : "✕ Email verification failed. Please try again."}
+            ? "E-posta doğrulama başarısız oldu. Lütfen tekrar deneyin."
+            : "Email verification failed. Please try again."}
       </span>
       <button
         onClick={() => setVerifiedBanner(null)}
-        className="ml-2 rounded-md px-2 py-0.5 text-xs opacity-70 hover:opacity-100 transition"
+        className="ml-3 rounded-lg px-3 py-1 text-sm opacity-70 hover:opacity-100 transition hover:bg-white/10"
       >
         ✕
       </button>
@@ -3265,6 +3454,11 @@ export default function Home() {
     signOutLabel: l.authSignOut,
     onHome: () => setScreen("landing"),
     homeLabel: l.homePage,
+    onDownload: () => {
+      setScreen("landing");
+      setTimeout(() => document.getElementById("download-section")?.scrollIntoView({ behavior: "smooth" }), 100);
+    },
+    downloadLabel: l.navDownload,
   };
   /* DASHBOARD */
   if (screen === "dashboard")
@@ -3278,46 +3472,14 @@ export default function Home() {
             <h1 className="text-xl font-bold text-white">{l.dashTitle}</h1>
             <p className="text-sm text-neutral-500">{l.dashSub}</p>
           </div>
-          {/* ── Premium Download Promotion Card (dismissible) ── */}
-          {!downloadBannerDismissed && (
-            <div className="relative w-full group rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-950/20">
-              <div className="absolute inset-0 rounded-2xl" style={{ padding: "1.5px", background: "linear-gradient(135deg, #06B6D4, #3B82F6)", WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)", WebkitMaskComposite: "xor", maskComposite: "exclude" }} />
-              <div className="relative rounded-2xl bg-[#0b1120]/95 p-5 sm:p-6">
-                <button
-                  onClick={() => setDownloadBannerDismissed(true)}
-                  className="absolute top-3 right-3 z-10 flex h-7 w-7 items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.08] text-neutral-500 hover:text-white hover:bg-white/[0.08] transition-all duration-200"
-                  aria-label="Close"
-                >
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M2 2l8 8M10 2l-8 8"/></svg>
-                </button>
-                <a
-                  href="#download-section"
-                  onClick={(e) => { e.preventDefault(); document.getElementById("download-section")?.scrollIntoView({ behavior: "smooth" }); setScreen("landing"); }}
-                  className="block"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="relative shrink-0">
-                      <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 56, width: 'auto' }} draggable={false} />
-                    </div>
-                    <div className="text-left min-w-0 flex-1">
-                      <h2 className="text-lg font-bold text-white">{l.downloadTitle}</h2>
-                      <p className="text-sm text-neutral-400 mt-0.5">{l.downloadSub}</p>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    {[l.downloadFeature1, l.downloadFeature2, l.downloadFeature3].map((feat, i) => (
-                      <span key={i} className="rounded-lg bg-cyan-500/[0.06] border border-cyan-500/10 px-3 py-1 text-[10px] font-semibold text-cyan-400/80">{feat}</span>
-                    ))}
-                  </div>
-                  <div className="mt-4">
-                    <span className="rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-6 py-2.5 text-xs font-bold text-white shadow-lg shadow-blue-900/20 group-hover:shadow-xl group-hover:brightness-110 transition-all duration-300 inline-block">
-                      {l.downloadBtn}
-                    </span>
-                  </div>
-                </a>
-              </div>
+          {/* ── AI INSIGHT (first thing user sees) ── */}
+          <div className={`${ds.card} ${ds.cardInner} border-l-2 border-l-cyan-500/60`}>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-cyan-400 text-sm">&#x1f9e0;</span>
+              <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-cyan-400">{l.aiInsightTitle}</span>
             </div>
-          )}
+            <p className="text-sm text-neutral-300 leading-relaxed">{aiInsight}</p>
+          </div>
           {/* ── Stats Grid ── */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <StatCard
@@ -3363,6 +3525,49 @@ export default function Home() {
               )}
             </div>
           </div>
+          {/* ── PROBLEM AREAS ── */}
+          {savedReports.length >= 2 && (problemAreas.deathSpot || problemAreas.worstMap || problemAreas.pattern) && (
+            <div className="space-y-3">
+              <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">
+                {l.problemAreasTitle}
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className={`${ds.card} ${ds.cardInner} border-l-2 border-l-red-500/40`}>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-red-400 mb-1.5">{l.problemDeathZone}</p>
+                  {problemAreas.deathSpot ? (
+                    <>
+                      <p className="text-sm font-extrabold text-white">{problemAreas.deathSpot.name}</p>
+                      <p className="text-[10px] text-neutral-500 mt-0.5">{problemAreas.deathSpot.count}x {l.problemDeathDesc}</p>
+                    </>
+                  ) : (
+                    <p className="text-sm text-neutral-600">{l.problemNoData}</p>
+                  )}
+                </div>
+                <div className={`${ds.card} ${ds.cardInner} border-l-2 border-l-amber-500/40`}>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-amber-400 mb-1.5">{l.problemWeakMap}</p>
+                  {problemAreas.worstMap ? (
+                    <>
+                      <p className="text-sm font-extrabold text-white">{problemAreas.worstMap.name}</p>
+                      <p className="text-[10px] text-neutral-500 mt-0.5">{problemAreas.worstMap.wr}% {l.problemMapDesc}</p>
+                    </>
+                  ) : (
+                    <p className="text-sm text-neutral-600">{l.problemNoData}</p>
+                  )}
+                </div>
+                <div className={`${ds.card} ${ds.cardInner} border-l-2 border-l-purple-500/40`}>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-purple-400 mb-1.5">{l.problemPattern}</p>
+                  {problemAreas.pattern ? (
+                    <>
+                      <p className="text-sm font-extrabold text-white">{problemAreas.pattern.name}</p>
+                      <p className="text-[10px] text-neutral-500 mt-0.5">{problemAreas.pattern.count}x {l.problemPatternDesc}</p>
+                    </>
+                  ) : (
+                    <p className="text-sm text-neutral-600">{l.problemNoData}</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
           {/* ── AI ANALİZ ÖZETİ ── */}
           {aiSummary && (
             <div className="space-y-3">
@@ -3457,30 +3662,40 @@ export default function Home() {
               </div>
             ) : (
               <div className="space-y-2">
-                {savedReports.slice(0, 5).map((entry) => (
-                  <button
-                    key={entry.id}
-                    onClick={() => { setViewingReport(entry); setScreen("reportDetail"); }}
-                    className={`w-full text-left ${ds.card} ${ds.cardHover} p-4 flex items-center gap-4`}
-                  >
-                    <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-black/20 ring-1 ring-white/[0.06]">
-                      <img src={MAP_IMAGES[entry.map]} alt={entry.map} className="h-full w-full object-cover opacity-75" loading="lazy" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold text-white">{entry.map}</span>
-                        <span className="text-xs text-neutral-500">{entry.agent}</span>
+                {savedReports.slice(0, 5).map((entry) => {
+                  const insight = getMatchInsight(entry);
+                  return (
+                    <button
+                      key={entry.id}
+                      onClick={() => { setViewingReport(entry); setScreen("reportDetail"); }}
+                      className={`w-full text-left ${ds.card} ${ds.cardHover} p-4`}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-black/20 ring-1 ring-white/[0.06]">
+                          <img src={MAP_IMAGES[entry.map]} alt={entry.map} className="h-full w-full object-cover opacity-75" loading="lazy" />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-bold text-white">{entry.map}</span>
+                            <span className="text-xs text-neutral-500">{entry.agent}</span>
+                          </div>
+                          <p className="mt-0.5 text-[11px] text-neutral-600">{entry.date}</p>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <p className="text-sm font-bold text-white">{entry.score}</p>
+                          <p className={`text-[10px] font-bold uppercase ${entry.won ? "text-emerald-400" : "text-red-400"}`}>
+                            {entry.won ? l.victory : l.defeat}
+                          </p>
+                        </div>
                       </div>
-                      <p className="mt-0.5 text-[11px] text-neutral-600">{entry.date}</p>
-                    </div>
-                    <div className="text-right shrink-0">
-                      <p className="text-sm font-bold text-white">{entry.score}</p>
-                      <p className={`text-[10px] font-bold uppercase ${entry.won ? "text-emerald-400" : "text-red-400"}`}>
-                        {entry.won ? l.victory : l.defeat}
-                      </p>
-                    </div>
-                  </button>
-                ))}
+                      {insight && (
+                        <p className="mt-2 text-[11px] text-cyan-400/70 pl-16">
+                          &#x1f4a1; &ldquo;{insight}&rdquo;
+                        </p>
+                      )}
+                    </button>
+                  );
+                })}
               </div>
             )}
           </div>
