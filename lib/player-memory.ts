@@ -186,7 +186,7 @@ export async function updatePlayerMemory(
     );
 
     if (error) {
-      console.error("[Aimlo] Player memory save error:", error.message);
+      console.error("[Aimlo] Player memory save failed");
     }
   } catch (err) {
     console.error("[Aimlo] Player memory update failed:", err);

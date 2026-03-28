@@ -55,6 +55,22 @@ KURALLAR:
    VALIDATION
    ══════════════════════════════════════════════════════════ */
 
+// Allowed context fields — prevents prompt injection via extra fields
+const ALLOWED_CONTEXT_FIELDS = [
+  "totalMatches", "winRate", "recentWinRate", "olderWinRate", "trend",
+  "deathClusters", "topDeathLocation", "mapStats", "worstMap",
+  "agentStats", "mostPlayedAgent", "survivalRate", "averageDeathsPerMatch",
+  "recentMatches",
+];
+
+function sanitizeContext(raw: Record<string, unknown>): Record<string, unknown> {
+  const clean: Record<string, unknown> = {};
+  for (const key of ALLOWED_CONTEXT_FIELDS) {
+    if (key in raw) clean[key] = raw[key];
+  }
+  return clean;
+}
+
 function isValidContext(obj: unknown): obj is { context: Record<string, unknown> } {
   if (!obj || typeof obj !== "object") return false;
   const o = obj as Record<string, unknown>;
@@ -103,6 +119,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Sanitize context — only allow known fields (prevents prompt injection)
+    const safeContext = sanitizeContext(body.context as Record<string, unknown>);
+
     // Get API key
     const apiKey = process.env.AIMLO_AI_KEY || process.env.ANTHROPIC_API_KEY;
     if (!apiKey) {
@@ -114,7 +133,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Call Anthropic
-    const contextJson = JSON.stringify(body.context, null, 2);
+    const contextJson = JSON.stringify(safeContext, null, 2);
     const userPrompt = `Aşağıdaki oyuncu verisini analiz et ve coaching insight üret:\n\n${contextJson}`;
 
     const controller = new AbortController();
