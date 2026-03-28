@@ -127,7 +127,7 @@ async function upstashRateCheck(key, limit, windowSec) {
             remaining: Math.max(0, limit - count)
         };
     } catch (e) {
-        console.warn("[Aimlo] Upstash rate check failed, falling back to memory:", e);
+        console.warn("[Aimlo] Upstash rate check failed, falling back to memory");
         return memoryRateCheck(key, limit, windowSec);
     }
 }
