@@ -2,6 +2,8 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { supabase } from "@/lib/supabase";
 import { saveDraft, loadDraft, clearDraft, saveLang, loadLang } from "@/lib/storage";
+import { calculateSkillProfile } from "@/lib/skill-system";
+import { analyzePlaystyle } from "@/lib/playstyle-system";
 import { ds } from "@/constants/design";
 import {
   AGENT_GROUPS, AGENT_GROUP_LABELS, AGENT_COLORS, AGENT_BORDER, AGENT_ACCENT,
@@ -2954,6 +2956,42 @@ export default function Home() {
       pattern: repeatingSpot ? { name: repeatingSpot[0], count: repeatingSpot[1] } : null,
     };
   }, [savedReports]);
+
+  // ── Skill Profile (from lib) ──
+  const webSkillProfile = useMemo(() => {
+    if (savedReports.length < 2) return null;
+    const matchData = savedReports.map(r => ({
+      won: r.won,
+      map: r.map,
+      agent: r.agent,
+      rounds: (r.rounds || []).map(rd => ({
+        deathLocation: rd.deathLocation,
+        survived: rd.survived,
+        skipped: rd.skipped,
+        result: rd.result,
+        enemyCount: rd.enemyCount,
+        yourNote: rd.yourNote,
+      })),
+    }));
+    return calculateSkillProfile(matchData);
+  }, [savedReports]);
+
+  // ── Playstyle (from lib) ──
+  const webPlaystyle = useMemo(() => {
+    if (savedReports.length < 3) return null;
+    const matchData = savedReports.map(r => ({
+      won: r.won,
+      agent: r.agent,
+      rounds: (r.rounds || []).map(rd => ({
+        deathLocation: rd.deathLocation,
+        survived: rd.survived,
+        skipped: rd.skipped,
+        result: rd.result,
+      })),
+    }));
+    return analyzePlaystyle(matchData);
+  }, [savedReports]);
+
   // Match mini insight helper
   const getMatchInsight = useCallback((entry: SavedReport): string | null => {
     if (!entry.rounds || entry.rounds.length === 0) return null;
@@ -3565,6 +3603,67 @@ export default function Home() {
                     <p className="text-sm text-neutral-600">{l.problemNoData}</p>
                   )}
                 </div>
+              </div>
+            </div>
+          )}
+          {/* ── PERFORMANS SKORU ── */}
+          {webSkillProfile && webSkillProfile.overall > 0 && (
+            <div className="space-y-3">
+              <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">
+                {lang === "tr" ? "PERFORMANS SKORU" : "PERFORMANCE SCORE"}
+              </h3>
+              <div className={`${ds.card} ${ds.cardInner} border-l-2 border-l-cyan-500/60`}>
+                {/* Overall + Rank */}
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="flex flex-col items-center justify-center w-14 h-14 rounded-lg bg-gradient-to-br from-red-500/10 to-cyan-500/10 ring-1 ring-red-500/20">
+                    <span className="text-2xl font-black text-white leading-none">{webSkillProfile.overall}</span>
+                    <span className="text-[7px] font-bold text-neutral-500 uppercase tracking-wider">Overall</span>
+                  </div>
+                  <div className={`px-3 py-1 rounded text-xs font-extrabold tracking-wider ${
+                    webSkillProfile.overall >= 75 ? "bg-emerald-500/10 text-emerald-400 ring-1 ring-emerald-500/20" :
+                    webSkillProfile.overall >= 50 ? "bg-amber-500/10 text-amber-400 ring-1 ring-amber-500/20" :
+                    "bg-red-500/10 text-red-400 ring-1 ring-red-500/20"
+                  }`}>
+                    {webSkillProfile.rank}
+                  </div>
+                </div>
+                {/* Score Bars */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {[
+                    { label: lang === "tr" ? "Hayatta Kalma" : "Survival", value: webSkillProfile.survival, color: "bg-emerald-500", text: "text-emerald-400" },
+                    { label: lang === "tr" ? "Pozisyon" : "Positioning", value: webSkillProfile.positioning, color: "bg-blue-500", text: "text-blue-400" },
+                    { label: lang === "tr" ? "Karar Verme" : "Decision", value: webSkillProfile.decisionMaking, color: "bg-cyan-500", text: "text-cyan-400" },
+                  ].map(s => (
+                    <div key={s.label} className="bg-black/20 rounded p-3">
+                      <div className="flex justify-between items-center mb-1.5">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-500">{s.label}</span>
+                        <span className={`text-sm font-extrabold ${s.text}`}>{s.value}</span>
+                      </div>
+                      <div className="h-1 rounded-full bg-white/5">
+                        <div className={`h-full rounded-full ${s.color} transition-all duration-500`} style={{ width: `${s.value}%` }} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+          {/* ── OYUN TARZI ── */}
+          {webPlaystyle && webPlaystyle.archetype !== "unknown" && (
+            <div className="space-y-3">
+              <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">
+                {lang === "tr" ? "OYUN TARZI" : "PLAYSTYLE"}
+              </h3>
+              <div className={`${ds.card} ${ds.cardInner} border-l-2 border-l-purple-500/60`}>
+                <p className="text-lg font-black text-white mb-1">{webPlaystyle.archetypeLabel}</p>
+                <p className="text-xs text-neutral-400 leading-relaxed mb-3">{webPlaystyle.archetypeDescription}</p>
+                {webPlaystyle.mismatch && webPlaystyle.mismatch.detected && (
+                  <div className="bg-red-500/8 border border-red-500/20 rounded p-3 mb-3">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-red-400 mb-1">{lang === "tr" ? "UYARI" : "WARNING"}</p>
+                    <p className="text-xs text-red-300/80">{webPlaystyle.mismatch.message}</p>
+                  </div>
+                )}
+                <p className="text-xs text-neutral-500 italic">{webPlaystyle.coachMessage}</p>
               </div>
             </div>
           )}
