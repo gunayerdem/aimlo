@@ -3009,6 +3009,26 @@ export default function Home() {
     if (!entry.won && entry.winPct <= 30) return ll.matchInsightBadLoss;
     return null;
   }, [lang]);
+  // ── Premium dashboard helpers ──
+  function generateMiniMatchInsight(report: SavedReport): string | null {
+    if (!report.rounds || report.rounds.length === 0) return null;
+    const deaths: Record<string, number> = {};
+    report.rounds.filter(r => !r.skipped && !r.survived && r.deathLocation)
+      .forEach(r => { deaths[r.deathLocation] = (deaths[r.deathLocation] || 0) + 1; });
+    const top = Object.entries(deaths).sort((a,b) => b[1]-a[1])[0];
+    if (top && top[1] >= 2) return `${top[0]}'de ${top[1]}x death — position repeat`;
+    if (report.won && Number(report.score?.split(/[-–]/)?.[0]) >= 13) return lang === "tr" ? "Güçlü maç performansı" : "Strong match performance";
+    if (!report.won) return lang === "tr" ? "Gelişim alanları tespit edildi" : "Improvement areas detected";
+    return null;
+  }
+  function getMatchTagWeb(report: SavedReport): { label: string; color: string } | null {
+    const played = report.rounds ? report.rounds.filter(r => !r.skipped).length : 0;
+    const survRate = report.rounds ? report.rounds.filter(r => !r.skipped && r.survived).length / Math.max(played, 1) : 0.5;
+    if (report.won && survRate > 0.55) return { label: "Dominant", color: "#10b981" };
+    if (!report.won && survRate < 0.3) return { label: lang === "tr" ? "Riskli" : "Risky", color: "#ef4444" };
+    if (report.won) return { label: lang === "tr" ? "Kontrollü" : "Controlled", color: "#22d3ee" };
+    return { label: lang === "tr" ? "Gelişim" : "Growth", color: "#f59e0b" };
+  }
   // Filtered reports for history screen
   const filteredReports = useMemo(() => {
     let filtered = savedReports;
@@ -3499,181 +3519,182 @@ export default function Home() {
     downloadLabel: l.navDownload,
   };
   /* DASHBOARD */
-  if (screen === "dashboard")
+  if (screen === "dashboard") {
+    const dashDisplayName = user?.user_metadata?.first_name || user?.user_metadata?.username || user?.email?.split("@")[0] || "Player";
     return (
       <main className={ds.pageBg}>
         <AmbientBg />
         <Navbar {...navProps} />
-        <div className="relative z-10 mx-auto max-w-3xl px-4 pt-20 pb-12 space-y-6">
-          {/* ── Dashboard Greeting ── */}
-          <div className="text-center space-y-1">
-            <h1 className="text-xl font-bold text-white">{l.dashTitle}</h1>
-            <p className="text-sm text-neutral-500">{l.dashSub}</p>
-          </div>
-          {/* ── AI INSIGHT (first thing user sees) ── */}
-          <div className={`${ds.card} ${ds.cardInner} border-l-2 border-l-cyan-500/60`}>
-            <div className="flex items-center gap-2 mb-3">
-              <span className="text-cyan-400 text-sm">&#x1f9e0;</span>
-              <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-cyan-400">{l.aiInsightTitle}</span>
-            </div>
-            <p className="text-sm text-neutral-300 leading-relaxed">{aiInsight}</p>
-          </div>
-          {/* ── Stats Grid ── */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <StatCard
-              label={l.dashWinRate}
-              value={savedReports.length > 0 ? `${winRate}%` : "\u2014"}
-              color={
-                winRate >= 50
-                  ? "text-emerald-400"
-                  : winRate > 0
-                    ? "text-red-400"
-                    : "text-neutral-600"
-              }
-            />
-            <StatCard
-              label={l.dashMatches}
-              value={String(savedReports.length)}
-              sub={
-                savedReports.length > 0
-                  ? `${savedReports.filter((r) => r.won).length}W ${savedReports.filter((r) => !r.won).length}L`
-                  : undefined
-              }
-            />
-            <StatCard
-              label={l.dashFreqDeath}
-              value={topDeathSpot ? topDeathSpot[0] : "\u2014"}
-              color={topDeathSpot ? "text-amber-400" : "text-neutral-600"}
-              sub={topDeathSpot ? `${topDeathSpot[1]}x` : l.dashNoStats}
-            />
-            <div className={`${ds.card} p-4 sm:p-5 text-center`}>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-500 mb-1.5">
-                {l.dashTopAgent}
-              </p>
-              {topAgent ? (
-                <div className="flex flex-col items-center gap-1.5">
-                  <div className="h-8 w-8 rounded-lg overflow-hidden bg-black/20 ring-1 ring-white/[0.06]">
-                    <img src={agentImgUrl(topAgent.name)} alt={topAgent.name} className="h-full w-full object-cover" loading="lazy" />
-                  </div>
-                  <p className="text-sm font-extrabold text-cyan-400">{topAgent.name}</p>
-                  <p className="text-[10px] text-neutral-600 font-medium">{topAgent.count}x</p>
-                </div>
-              ) : (
-                <p className="text-2xl font-extrabold tabular-nums text-neutral-600">{"\u2014"}</p>
-              )}
-            </div>
-          </div>
-          {/* ── PROBLEM AREAS ── */}
-          {savedReports.length >= 2 && (problemAreas.deathSpot || problemAreas.worstMap || problemAreas.pattern) && (
-            <div className="space-y-3">
-              <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">
-                {l.problemAreasTitle}
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div className={`${ds.card} ${ds.cardInner} border-l-2 border-l-red-500/40`}>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-red-400 mb-1.5">{l.problemDeathZone}</p>
-                  {problemAreas.deathSpot ? (
-                    <>
-                      <p className="text-sm font-extrabold text-white">{problemAreas.deathSpot.name}</p>
-                      <p className="text-[10px] text-neutral-500 mt-0.5">{problemAreas.deathSpot.count}x {l.problemDeathDesc}</p>
-                    </>
-                  ) : (
-                    <p className="text-sm text-neutral-600">{l.problemNoData}</p>
-                  )}
-                </div>
-                <div className={`${ds.card} ${ds.cardInner} border-l-2 border-l-amber-500/40`}>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-amber-400 mb-1.5">{l.problemWeakMap}</p>
-                  {problemAreas.worstMap ? (
-                    <>
-                      <p className="text-sm font-extrabold text-white">{problemAreas.worstMap.name}</p>
-                      <p className="text-[10px] text-neutral-500 mt-0.5">{problemAreas.worstMap.wr}% {l.problemMapDesc}</p>
-                    </>
-                  ) : (
-                    <p className="text-sm text-neutral-600">{l.problemNoData}</p>
-                  )}
-                </div>
-                <div className={`${ds.card} ${ds.cardInner} border-l-2 border-l-purple-500/40`}>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-purple-400 mb-1.5">{l.problemPattern}</p>
-                  {problemAreas.pattern ? (
-                    <>
-                      <p className="text-sm font-extrabold text-white">{problemAreas.pattern.name}</p>
-                      <p className="text-[10px] text-neutral-500 mt-0.5">{problemAreas.pattern.count}x {l.problemPatternDesc}</p>
-                    </>
-                  ) : (
-                    <p className="text-sm text-neutral-600">{l.problemNoData}</p>
-                  )}
-                </div>
+        <div className="relative z-10 mx-auto max-w-3xl px-4 pt-20 pb-12">
+
+          {/* ═══ HERO ═══ */}
+          <div className="relative overflow-hidden rounded-xl border border-[#1e2a3a]/60 bg-gradient-to-br from-[#0a1628] via-[#0d1117] to-[#0a0f16] p-8 mb-8" style={{ minHeight: 200 }}>
+            {/* Ambient glow */}
+            <div className="pointer-events-none absolute top-0 right-0 w-96 h-96 rounded-full bg-cyan-500/[0.04] blur-[120px]" />
+            <div className="pointer-events-none absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-blue-500/[0.03] blur-[100px]" />
+
+            {/* Agent splash (right side) */}
+            {topAgent && (
+              <div className="absolute right-0 top-0 bottom-0 w-1/3 overflow-hidden">
+                <img
+                  src={agentImgUrl(topAgent.name)}
+                  alt=""
+                  className="h-full w-auto object-cover opacity-20"
+                  style={{ maskImage: 'linear-gradient(to left, rgba(0,0,0,0.6), transparent)', WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,0.6), transparent)' }}
+                />
               </div>
-            </div>
-          )}
-          {/* ── PERFORMANS SKORU ── */}
-          {webSkillProfile && webSkillProfile.overall > 0 && (
-            <div className="space-y-3">
-              <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">
-                {lang === "tr" ? "PERFORMANS SKORU" : "PERFORMANCE SCORE"}
-              </h3>
-              <div className={`${ds.card} ${ds.cardInner} border-l-2 border-l-cyan-500/60`}>
-                {/* Overall + Rank */}
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="flex flex-col items-center justify-center w-14 h-14 rounded-lg bg-gradient-to-br from-red-500/10 to-cyan-500/10 ring-1 ring-red-500/20">
-                    <span className="text-2xl font-black text-white leading-none">{webSkillProfile.overall}</span>
-                    <span className="text-[7px] font-bold text-neutral-500 uppercase tracking-wider">Overall</span>
-                  </div>
-                  <div className={`px-3 py-1 rounded text-xs font-extrabold tracking-wider ${
-                    webSkillProfile.overall >= 75 ? "bg-emerald-500/10 text-emerald-400 ring-1 ring-emerald-500/20" :
-                    webSkillProfile.overall >= 50 ? "bg-amber-500/10 text-amber-400 ring-1 ring-amber-500/20" :
-                    "bg-red-500/10 text-red-400 ring-1 ring-red-500/20"
-                  }`}>
-                    {webSkillProfile.rank}
-                  </div>
+            )}
+
+            <div className="relative z-10">
+              <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-400/60 mb-2">AI-POWERED VALORANT COACH</p>
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-1">
+                {l.dashTitle}, <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">{dashDisplayName}</span>
+              </h1>
+              <p className="text-sm text-neutral-500 mb-6">{l.dashSub}</p>
+
+              {/* Quick stats row */}
+              <div className="flex items-center gap-6 flex-wrap">
+                <div>
+                  <span className="text-2xl font-black text-white">{savedReports.length}</span>
+                  <span className="text-xs text-neutral-500 ml-1.5">{l.dashMatches}</span>
                 </div>
-                {/* Score Bars */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {[
-                    { label: lang === "tr" ? "Hayatta Kalma" : "Survival", value: webSkillProfile.survival, color: "bg-emerald-500", text: "text-emerald-400" },
-                    { label: lang === "tr" ? "Pozisyon" : "Positioning", value: webSkillProfile.positioning, color: "bg-blue-500", text: "text-blue-400" },
-                    { label: lang === "tr" ? "Karar Verme" : "Decision", value: webSkillProfile.decisionMaking, color: "bg-cyan-500", text: "text-cyan-400" },
-                  ].map(s => (
-                    <div key={s.label} className="bg-black/20 rounded p-3">
-                      <div className="flex justify-between items-center mb-1.5">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-500">{s.label}</span>
-                        <span className={`text-sm font-extrabold ${s.text}`}>{s.value}</span>
-                      </div>
-                      <div className="h-1 rounded-full bg-white/5">
-                        <div className={`h-full rounded-full ${s.color} transition-all duration-500`} style={{ width: `${s.value}%` }} />
-                      </div>
+                <div className="w-px h-8 bg-white/[0.06]" />
+                <div>
+                  <span className={`text-2xl font-black ${winRate >= 50 ? 'text-emerald-400' : 'text-red-400'}`}>{savedReports.length > 0 ? `${winRate}%` : '\u2014'}</span>
+                  <span className="text-xs text-neutral-500 ml-1.5">Win Rate</span>
+                </div>
+                <div className="w-px h-8 bg-white/[0.06]" />
+                {topAgent && (
+                  <div className="flex items-center gap-2">
+                    <img src={agentImgUrl(topAgent.name)} alt="" className="w-7 h-7 rounded-lg ring-1 ring-cyan-500/30" />
+                    <div>
+                      <span className="text-sm font-bold text-white">{topAgent.name}</span>
+                      <span className="text-[10px] text-neutral-500 block">{lang === "tr" ? "En çok oynanan" : "Most played"}</span>
                     </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-          {/* ── OYUN TARZI ── */}
-          {webPlaystyle && webPlaystyle.archetype !== "unknown" && (
-            <div className="space-y-3">
-              <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">
-                {lang === "tr" ? "OYUN TARZI" : "PLAYSTYLE"}
-              </h3>
-              <div className={`${ds.card} ${ds.cardInner} border-l-2 border-l-purple-500/60`}>
-                <p className="text-lg font-black text-white mb-1">{webPlaystyle.archetypeLabel}</p>
-                <p className="text-xs text-neutral-400 leading-relaxed mb-3">{webPlaystyle.archetypeDescription}</p>
-                {webPlaystyle.mismatch && webPlaystyle.mismatch.detected && (
-                  <div className="bg-red-500/8 border border-red-500/20 rounded p-3 mb-3">
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-red-400 mb-1">{lang === "tr" ? "UYARI" : "WARNING"}</p>
-                    <p className="text-xs text-red-300/80">{webPlaystyle.mismatch.message}</p>
                   </div>
                 )}
-                <p className="text-xs text-neutral-500 italic">{webPlaystyle.coachMessage}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* ═══ AI INSIGHT ═══ */}
+          <div className="rounded-xl border border-cyan-500/10 bg-gradient-to-br from-[#0a1628]/90 to-[#0d1117]/95 p-6 mb-6 relative overflow-hidden">
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-cyan-500/[0.03] to-transparent" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-1 h-5 rounded-full bg-cyan-400" style={{ boxShadow: '0 0 8px rgba(34,211,238,0.5)' }} />
+                  <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-cyan-400">AI INSIGHT</span>
+                  <span className="rounded-md bg-cyan-500/[0.08] border border-cyan-500/15 px-2 py-0.5 text-[9px] font-semibold text-cyan-400/70">AI</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[9px] text-neutral-600">{savedReports.length} {l.dashMatches.toLowerCase()} {lang === "tr" ? "analizi" : "analyzed"}</span>
+                  <span className="rounded bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 text-[9px] font-bold text-amber-400">{lang === "tr" ? "ORTA G\u00dcVEN" : "MED CONFIDENCE"}</span>
+                </div>
+              </div>
+              <p className="text-[15px] leading-relaxed text-neutral-200 mb-4">{aiInsight}</p>
+              <button className="rounded-lg bg-cyan-500/[0.08] border border-cyan-500/20 px-4 py-2 text-[11px] font-semibold text-cyan-400 transition hover:bg-cyan-500/15">
+                {lang === "tr" ? "Detayl\u0131 Analiz \u2192" : "Detailed Analysis \u2192"}
+              </button>
+            </div>
+          </div>
+
+          {/* ═══ PROBLEM AREAS ═══ */}
+          {savedReports.length >= 2 && (problemAreas.deathSpot || problemAreas.worstMap || problemAreas.pattern) && (
+            <div className="mb-8">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-1 h-4 rounded-full bg-red-400" style={{ boxShadow: '0 0 6px rgba(239,68,68,0.4)' }} />
+                <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-red-400">{l.problemAreasTitle}</span>
+                <div className="flex-1 h-px bg-white/[0.03]" />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="rounded-lg border border-red-500/10 bg-gradient-to-b from-red-500/[0.04] to-transparent p-5 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-red-500 via-red-400 to-transparent" />
+                  <p className="text-[9px] font-bold uppercase tracking-[0.1em] text-red-400/70 mb-2">{l.problemDeathZone}</p>
+                  <p className="text-lg font-extrabold text-white">{problemAreas.deathSpot?.name || '\u2014'}</p>
+                  <p className="text-[11px] text-neutral-500 mt-1">{problemAreas.deathSpot ? `${problemAreas.deathSpot.count}x ${l.problemDeathDesc}` : l.problemNoData}</p>
+                </div>
+                <div className="rounded-lg border border-amber-500/10 bg-gradient-to-b from-amber-500/[0.04] to-transparent p-5 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-500 via-amber-400 to-transparent" />
+                  <p className="text-[9px] font-bold uppercase tracking-[0.1em] text-amber-400/70 mb-2">{l.problemWeakMap}</p>
+                  <p className="text-lg font-extrabold text-white">{problemAreas.worstMap?.name || '\u2014'}</p>
+                  <p className="text-[11px] text-neutral-500 mt-1">{problemAreas.worstMap ? `${problemAreas.worstMap.wr}% ${l.problemMapDesc}` : l.problemNoData}</p>
+                </div>
+                <div className="rounded-lg border border-purple-500/10 bg-gradient-to-b from-purple-500/[0.04] to-transparent p-5 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-500 via-purple-400 to-transparent" />
+                  <p className="text-[9px] font-bold uppercase tracking-[0.1em] text-purple-400/70 mb-2">{l.problemPattern}</p>
+                  <p className="text-lg font-extrabold text-white">{problemAreas.pattern?.name || '\u2014'}</p>
+                  <p className="text-[11px] text-neutral-500 mt-1">{problemAreas.pattern ? `${problemAreas.pattern.count}x ${l.problemPatternDesc}` : l.problemNoData}</p>
+                </div>
               </div>
             </div>
           )}
-          {/* ── AI ANALİZ ÖZETİ ── */}
+
+          {/* ═══ PERFORMANS SKORU ═══ */}
+          {webSkillProfile && webSkillProfile.overall > 0 && (
+            <div className="rounded-xl border border-[#1e2a3a]/60 bg-gradient-to-br from-[#0a1628]/90 to-[#0d1117]/95 p-6 mb-6 relative overflow-hidden">
+              <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-cyan-500/[0.04] blur-[80px]" />
+              <div className="relative text-center mb-6">
+                <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-cyan-400 mb-4">{lang === "tr" ? "SEV\u0130YE & \u0130LERLEME" : "LEVEL & PROGRESS"}</div>
+                <div className="text-5xl font-black text-cyan-400 mb-1" style={{ textShadow: '0 0 30px rgba(34,211,238,0.3)' }}>
+                  {webSkillProfile.overall}
+                </div>
+                <div className="text-sm font-bold text-white mb-1">{webSkillProfile.rank}</div>
+                <div className="text-xs text-neutral-500">{webSkillProfile.explanations?.decisionMaking || ''}</div>
+              </div>
+              {/* 3 metric bars */}
+              <div className="grid grid-cols-3 gap-6">
+                {[
+                  { label: lang === "tr" ? 'Hayatta Kalma' : 'Survival', value: webSkillProfile.survival, color: '#10b981' },
+                  { label: lang === "tr" ? 'Pozisyonlama' : 'Positioning', value: webSkillProfile.positioning, color: '#3b82f6' },
+                  { label: lang === "tr" ? 'Karar Verme' : 'Decision Making', value: webSkillProfile.decisionMaking, color: '#22d3ee' },
+                ].map((s, i) => (
+                  <div key={i} className="text-center">
+                    <div className="text-xl font-extrabold mb-1" style={{ color: s.color, textShadow: `0 0 12px ${s.color}30` }}>{s.value}</div>
+                    <div className="text-[9px] font-semibold uppercase tracking-[0.08em] text-neutral-500 mb-2">{s.label}</div>
+                    <div className="h-1.5 bg-white/[0.04] rounded-full overflow-hidden">
+                      <div className="h-full rounded-full" style={{ width: `${s.value}%`, background: s.color, boxShadow: `0 0 8px ${s.color}50` }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ═══ OYUN TARZI ═══ */}
+          {webPlaystyle && webPlaystyle.archetype !== "unknown" && (
+            <div className="mb-6">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-1 h-4 rounded-full bg-purple-400" style={{ boxShadow: '0 0 6px rgba(167,139,250,0.4)' }} />
+                <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-purple-400">{lang === "tr" ? "OYUN TARZI" : "PLAYSTYLE"}</span>
+                <div className="flex-1 h-px bg-white/[0.03]" />
+              </div>
+              <div className="rounded-xl border border-purple-500/10 bg-gradient-to-br from-purple-500/[0.04] to-[#0d1117]/95 p-6 relative overflow-hidden">
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-purple-500/[0.03] to-transparent" />
+                <div className="relative">
+                  <p className="text-lg font-black text-white mb-1">{webPlaystyle.archetypeLabel}</p>
+                  <p className="text-xs text-neutral-400 leading-relaxed mb-3">{webPlaystyle.archetypeDescription}</p>
+                  {webPlaystyle.mismatch && webPlaystyle.mismatch.detected && (
+                    <div className="bg-red-500/[0.08] border border-red-500/20 rounded-lg p-3 mb-3">
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-red-400 mb-1">{lang === "tr" ? "UYARI" : "WARNING"}</p>
+                      <p className="text-xs text-red-300/80">{webPlaystyle.mismatch.message}</p>
+                    </div>
+                  )}
+                  <p className="text-xs text-neutral-500 italic">{webPlaystyle.coachMessage}</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ═══ AI ANALİZ ÖZETİ ═══ */}
           {aiSummary && (
-            <div className="space-y-3">
-              <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">
-                {l.dashAISummary}
-              </h3>
-              <div className={`${ds.card} ${ds.cardInner}`}>
+            <div className="mb-6">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-1 h-4 rounded-full bg-blue-400" style={{ boxShadow: '0 0 6px rgba(96,165,250,0.4)' }} />
+                <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-blue-400">{l.dashAISummary}</span>
+                <div className="flex-1 h-px bg-white/[0.03]" />
+              </div>
+              <div className="rounded-xl border border-[#1e2a3a]/60 bg-gradient-to-br from-[#0a1628]/90 to-[#0d1117]/95 p-6">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="space-y-1.5">
                     <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-red-400">{l.dashMostMistake}</p>
@@ -3691,42 +3712,51 @@ export default function Home() {
               </div>
             </div>
           )}
-          {/* ── AJAN PERFORMANSI ── */}
+
+          {/* ═══ AJAN PERFORMANSI ═══ */}
           {agentPerf.length > 0 && (
-            <div className="space-y-3">
-              <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">
-                {l.dashAgentPerf}
-              </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+            <div className="mb-6">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-1 h-4 rounded-full bg-cyan-400" style={{ boxShadow: '0 0 6px rgba(34,211,238,0.4)' }} />
+                <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-cyan-400">{l.dashAgentPerf}</span>
+                <div className="flex-1 h-px bg-white/[0.03]" />
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
                 {agentPerf.map((ap) => (
-                  <div key={ap.name} className={`${ds.card} p-3 text-center`}>
-                    <div className="h-8 w-8 rounded-lg overflow-hidden bg-black/20 ring-1 ring-white/[0.06] mx-auto mb-1.5">
+                  <div key={ap.name} className="rounded-xl border border-[#1e2a3a]/60 bg-gradient-to-b from-[#0a1628]/80 to-[#0d1117]/90 p-4 text-center relative overflow-hidden transition hover:border-[#2d4a6f]/40 hover:shadow-lg hover:shadow-black/20">
+                    <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-500/40 via-cyan-400/20 to-transparent" />
+                    <div className="h-10 w-10 rounded-xl overflow-hidden bg-black/30 ring-1 ring-white/[0.08] mx-auto mb-2" style={{ filter: 'saturate(1.2)' }}>
                       <img src={agentImgUrl(ap.name)} alt={ap.name} className="h-full w-full object-cover" loading="lazy" />
                     </div>
                     <p className="text-[11px] font-bold text-white truncate">{ap.name}</p>
-                    <p className={`text-lg font-extrabold tabular-nums ${ap.wr >= 50 ? "text-emerald-400" : "text-red-400"}`}>{ap.wr}%</p>
+                    <p className={`text-xl font-extrabold tabular-nums ${ap.wr >= 50 ? "text-emerald-400" : "text-red-400"}`} style={{ textShadow: ap.wr >= 50 ? '0 0 10px rgba(16,185,129,0.2)' : '0 0 10px rgba(239,68,68,0.2)' }}>{ap.wr}%</p>
                     <p className="text-[9px] text-neutral-600 font-medium">{ap.wins}W {ap.total - ap.wins}L</p>
                   </div>
                 ))}
               </div>
             </div>
           )}
-          {/* ── HARİTA PERFORMANSI ── */}
+
+          {/* ═══ HARİTA PERFORMANSI ═══ */}
           {mapPerf.length > 0 && (
-            <div className="space-y-3">
-              <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">
-                {l.dashMapPerf}
-              </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+            <div className="mb-6">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-1 h-4 rounded-full bg-blue-400" style={{ boxShadow: '0 0 6px rgba(96,165,250,0.4)' }} />
+                <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-blue-400">{l.dashMapPerf}</span>
+                <div className="flex-1 h-px bg-white/[0.03]" />
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
                 {mapPerf.map((mp) => (
-                  <div key={mp.name} className={`${ds.card} overflow-hidden`}>
-                    <div className="relative h-16">
-                      <img src={MAP_IMAGES[mp.name]} alt={mp.name} className="h-full w-full object-cover opacity-50" loading="lazy" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0b1120] to-transparent" />
+                  <div key={mp.name} className="rounded-xl border border-[#1e2a3a]/60 overflow-hidden transition hover:border-[#2d4a6f]/40 hover:shadow-lg hover:shadow-black/20">
+                    <div className="relative h-20">
+                      <img src={MAP_IMAGES[mp.name]} alt={mp.name} className="h-full w-full object-cover opacity-60" loading="lazy" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0b1120] via-[#0b1120]/60 to-transparent" />
+                      <div className="absolute bottom-2 left-0 right-0 text-center">
+                        <p className="text-[11px] font-bold text-white drop-shadow-lg">{mp.name}</p>
+                      </div>
                     </div>
-                    <div className="p-3 text-center -mt-3 relative">
-                      <p className="text-[11px] font-bold text-white">{mp.name}</p>
-                      <p className={`text-lg font-extrabold tabular-nums ${mp.wr >= 50 ? "text-emerald-400" : "text-red-400"}`}>{mp.wr}%</p>
+                    <div className="p-3 text-center bg-gradient-to-b from-[#0a1628]/90 to-[#0d1117]/95">
+                      <p className={`text-xl font-extrabold tabular-nums ${mp.wr >= 50 ? "text-emerald-400" : "text-red-400"}`} style={{ textShadow: mp.wr >= 50 ? '0 0 10px rgba(16,185,129,0.2)' : '0 0 10px rgba(239,68,68,0.2)' }}>{mp.wr}%</p>
                       <p className="text-[9px] text-neutral-600 font-medium">{mp.wins}W {mp.total - mp.wins}L</p>
                     </div>
                   </div>
@@ -3734,12 +3764,13 @@ export default function Home() {
               </div>
             </div>
           )}
-          {/* ── Recent Matches ── */}
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-500">
-                {l.dashRecentTitle}
-              </h3>
+
+          {/* ═══ RECENT MATCHES ═══ */}
+          <div className="mb-6">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-1 h-4 rounded-full bg-emerald-400" style={{ boxShadow: '0 0 6px rgba(52,211,153,0.4)' }} />
+              <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-emerald-400">{l.dashRecentTitle}</span>
+              <div className="flex-1 h-px bg-white/[0.03]" />
               {savedReports.length > 0 && (
                 <button
                   onClick={() => setScreen("history")}
@@ -3750,11 +3781,11 @@ export default function Home() {
               )}
             </div>
             {historyLoading ? (
-              <div className={`${ds.card} p-8 flex justify-center`}>
-                <div className="h-5 w-5 animate-spin rounded-full border-2 border-blue-500 border-t-transparent" />
+              <div className="rounded-xl border border-[#1e2a3a]/60 bg-[#0a1628]/80 p-8 flex justify-center">
+                <div className="h-5 w-5 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent" />
               </div>
             ) : savedReports.length === 0 ? (
-              <div className={`${ds.card} p-10 text-center`}>
+              <div className="rounded-xl border border-[#1e2a3a]/60 bg-gradient-to-br from-[#0a1628]/80 to-[#0d1117]/90 p-10 text-center">
                 <AimloLogo size={72} className="mx-auto opacity-10 mb-4" />
                 <p className="text-sm font-semibold text-neutral-400">{l.dashNoData}</p>
                 <p className="mt-1 text-xs text-neutral-600">{l.dashNoDataDesc}</p>
@@ -3762,36 +3793,34 @@ export default function Home() {
             ) : (
               <div className="space-y-2">
                 {savedReports.slice(0, 5).map((entry) => {
-                  const insight = getMatchInsight(entry);
+                  const miniInsight = generateMiniMatchInsight(entry);
+                  const tag = getMatchTagWeb(entry);
                   return (
-                    <button
-                      key={entry.id}
-                      onClick={() => { setViewingReport(entry); setScreen("reportDetail"); }}
-                      className={`w-full text-left ${ds.card} ${ds.cardHover} p-4`}
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-black/20 ring-1 ring-white/[0.06]">
-                          <img src={MAP_IMAGES[entry.map]} alt={entry.map} className="h-full w-full object-cover opacity-75" loading="lazy" />
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm font-bold text-white">{entry.map}</span>
-                            <span className="text-xs text-neutral-500">{entry.agent}</span>
-                          </div>
-                          <p className="mt-0.5 text-[11px] text-neutral-600">{entry.date}</p>
-                        </div>
-                        <div className="text-right shrink-0">
-                          <p className="text-sm font-bold text-white">{entry.score}</p>
-                          <p className={`text-[10px] font-bold uppercase ${entry.won ? "text-emerald-400" : "text-red-400"}`}>
-                            {entry.won ? l.victory : l.defeat}
-                          </p>
-                        </div>
+                    <button key={entry.id} onClick={() => { setViewingReport(entry); setScreen("reportDetail"); }}
+                      className="w-full text-left rounded-lg border border-[#1e2a3a]/60 bg-gradient-to-r from-[#0a1628]/80 to-[#0d1117]/90 p-4 flex items-center gap-4 transition-all duration-200 hover:border-[#2d4a6f]/40 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/30 mb-2">
+                      <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg ring-1 ring-white/[0.06]">
+                        <img src={MAP_IMAGES[entry.map]} alt="" className="h-full w-full object-cover opacity-80" />
+                        <div className={`absolute inset-0 ${entry.won ? 'bg-emerald-500/10' : 'bg-red-500/10'}`} />
                       </div>
-                      {insight && (
-                        <p className="mt-2 text-[11px] text-cyan-400/70 pl-16">
-                          &#x1f4a1; &ldquo;{insight}&rdquo;
+                      <div className="flex items-center gap-2 shrink-0">
+                        <img src={agentImgUrl(entry.agent)} alt="" className="w-8 h-8 rounded-lg ring-1 ring-white/10" style={{ filter: 'saturate(1.2)' }} />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="text-sm font-bold text-white">{entry.map}</span>
+                          <span className="text-xs text-neutral-600">&middot;</span>
+                          <span className="text-xs text-neutral-500">{entry.agent}</span>
+                          {tag && <span className="rounded bg-white/[0.04] px-1.5 py-0.5 text-[9px] font-semibold" style={{ color: tag.color }}>{tag.label}</span>}
+                        </div>
+                        <p className="mt-0.5 text-[11px] text-neutral-600">{entry.date}</p>
+                        {miniInsight && <p className="mt-1 text-[10px] text-cyan-400/60">{miniInsight}</p>}
+                      </div>
+                      <div className="text-right shrink-0">
+                        <p className="text-lg font-extrabold text-white tracking-tight">{entry.score}</p>
+                        <p className={`text-[10px] font-bold uppercase ${entry.won ? 'text-emerald-400' : 'text-red-400'}`}>
+                          {entry.won ? l.victory : l.defeat}
                         </p>
-                      )}
+                      </div>
                     </button>
                   );
                 })}
@@ -3801,6 +3830,7 @@ export default function Home() {
         </div>
       </main>
     );
+  }
   /* HISTORY */
   if (screen === "history")
     return (
