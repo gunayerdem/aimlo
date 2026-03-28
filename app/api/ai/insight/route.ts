@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAuthAndRateLimit } from "@/lib/api-auth";
+import { loadKnowledge } from "@/lib/knowledge-loader";
 
 /**
  * POST /api/ai/insight
@@ -15,15 +16,17 @@ const AI_TIMEOUT_MS = 20_000;
 const MAX_PAYLOAD_BYTES = 100_000; // 100KB max
 const ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages";
 
-const SYSTEM_PROMPT = `Sen AIMLO, premium Valorant coaching intelligence system'sin.
+const BASE_SYSTEM_PROMPT = `Sen AIMLO, premium Valorant coaching intelligence system'sin.
 
 KURALLAR:
 - Boş konuşma yok, genel tavsiye yok
-- Her yorum veriye dayalı olacak
-- İstatistik tekrarı yerine YORUM üret
-- Belirsizlik varsa dürüst söyle
+- Her yorum veriye dayalı olacak — sayılar, yüzdeler, pozisyon isimleri kullan
+- İstatistik tekrarı yerine YORUM üret — neden önemli, ne yapılmalı
+- Belirsizlik varsa dürüst söyle — "veri sınırlı" demek her zaman izin verilir
 - Türkçe yanıt ver
 - JSON formatında döndür
+- Attack/defense taraf ayrımı varsa bunu mutlaka yorumla
+- Side split verisini değerlendir — hangi tarafta zayıfsın net söyle
 
 ÇIKTI FORMATI:
 {
@@ -43,13 +46,27 @@ KURALLAR:
   "growthPlan": {
     "dailyFocus": "bugünkü ana odak",
     "tasks": [
-      {"category": "positioning|decision|mechanical|trade", "task": "spesifik görev", "reason": "neden"}
+      {"category": "positioning|decision|mechanical|trade|side-awareness", "task": "spesifik görev", "reason": "neden"}
     ]
   },
   "matchSummaries": [
     {"matchIndex": 0, "miniInsight": "bu maça özgü kısa yorum"}
   ]
 }`;
+
+// Confidence-aware prompt additions
+const CONFIDENCE_PROMPTS: Record<string, string> = {
+  calibrating: "\n\nDİKKAT: Veri çok sınırlı (kalibrasyon aşaması). Kesin ifadeler kullanma. 'Henüz yeterli veri yok ama ilk gözlemler...' gibi ihtimalli dil kullan. Güçlü tavsiye verme.",
+  low: "\n\nDİKKAT: Veri sınırlı. İhtimalli dil kullan — 'görünüyor ki', 'muhtemelen', 'erken verilere göre'. Kesin kalıp tespiti yapma. Genel yönelim göster ama 'her zaman' gibi ifadelerden kaçın.",
+  medium: "\n\nVeri orta düzeyde. Gözlenen pattern'leri belirt ama 'bu trend devam ederse' gibi koşullu dil kullanabilirsin. Net tavsiye verebilirsin ama kesin kalıp tespitinde dikkatli ol.",
+  high: "\n\nVeri yeterli. Net, doğrudan ve güvenli ifadeler kullanabilirsin. Pattern'leri kesin olarak belirt. Somut, uygulanabilir tavsiyeler ver.",
+};
+
+function buildSystemPrompt(confidenceLevel: string, knowledgeContext: string): string {
+  const confidenceAddition = CONFIDENCE_PROMPTS[confidenceLevel] || CONFIDENCE_PROMPTS.medium;
+  const knowledgePart = knowledgeContext ? `\n\nKOÇLUK BİLGİ KAYNAĞI:\n${knowledgeContext}` : "";
+  return BASE_SYSTEM_PROMPT + confidenceAddition + knowledgePart;
+}
 
 /* ══════════════════════════════════════════════════════════
    VALIDATION
@@ -58,9 +75,11 @@ KURALLAR:
 // Allowed context fields — prevents prompt injection via extra fields
 const ALLOWED_CONTEXT_FIELDS = [
   "totalMatches", "winRate", "recentWinRate", "olderWinRate", "trend",
-  "deathClusters", "topDeathLocation", "mapStats", "worstMap",
+  "deathClusters", "topDeathLocation", "repeatedDeathLocations",
+  "mapStats", "worstMap", "bestMap",
   "agentStats", "mostPlayedAgent", "survivalRate", "averageDeathsPerMatch",
-  "recentMatches",
+  "tradeRate", "sideSplit", "confidence", "currentStreak", "consistencyScore",
+  "recentMatches", "rank",
 ];
 
 function sanitizeContext(raw: Record<string, unknown>): Record<string, unknown> {
@@ -132,6 +151,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Load rank-aware knowledge for the insight task
+    const rank = (safeContext.rank as string) || undefined;
+    const agent = (safeContext.mostPlayedAgent as string) || undefined;
+    const knowledgeContext = loadKnowledge("insight", { rank, agent });
+
+    // Determine confidence level from context (if provided by desktop)
+    const confidenceLevel = typeof safeContext.confidence === "object" && safeContext.confidence !== null
+      ? String((safeContext.confidence as Record<string, unknown>).level || "medium")
+      : "medium";
+
+    // Build confidence-aware system prompt with knowledge
+    const systemPrompt = buildSystemPrompt(confidenceLevel, knowledgeContext);
+
     // Call Anthropic
     const contextJson = JSON.stringify(safeContext, null, 2);
     const userPrompt = `Aşağıdaki oyuncu verisini analiz et ve coaching insight üret:\n\n${contextJson}`;
@@ -149,7 +181,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         model: "claude-haiku-4-5-20251001",
         max_tokens: 1500,
-        system: SYSTEM_PROMPT,
+        system: systemPrompt,
         messages: [{ role: "user", content: userPrompt }],
       }),
       signal: controller.signal,
