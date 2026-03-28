@@ -462,7 +462,7 @@ MATCH INSIGHTS (pre-computed):
       }
     }
   } catch (e) {
-    console.log("[Aimlo] Player memory not available:", e);
+    console.log("[Aimlo] Player memory not available");
   }
 
   const scoringContext = `
@@ -540,10 +540,7 @@ ${scoringContext}`;
       };
     }
 
-    console.error(
-      "[Aimlo AI] Report invalid shape:",
-      JSON.stringify(parsed).slice(0, 200),
-    );
+    console.error("[Aimlo AI] Report invalid shape");
     return stats;
   } catch (err) {
     if (err instanceof DOMException && err.name === "AbortError") {
@@ -615,7 +612,7 @@ export async function POST(request: NextRequest) {
         });
       }
     } catch (e) {
-      console.log("[Aimlo] Player memory update failed:", e);
+      console.log("[Aimlo] Player memory update failed");
     }
 
     return NextResponse.json(report);

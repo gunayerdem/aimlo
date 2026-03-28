@@ -78,15 +78,12 @@ export async function upsertProfile(
         .upsert(payload, { onConflict: "user_id" });
       if (!error) return { ok: true };
       console.error(
-        `[Aimlo] Profile upsert attempt ${attempt + 1}:`,
-        error.message,
-        error.details,
+        `[Aimlo] Profile upsert attempt ${attempt + 1} failed`,
       );
       if (attempt === 1) return { ok: false, error: error.message };
     } catch (err) {
       console.error(
-        `[Aimlo] Profile upsert exception attempt ${attempt + 1}:`,
-        err,
+        `[Aimlo] Profile upsert exception attempt ${attempt + 1}`,
       );
       if (attempt === 1)
         return {
@@ -106,7 +103,7 @@ export async function checkUsernameAvailable(username: string): Promise<boolean>
       { lookup_username: username.toLowerCase().trim() },
     );
     if (error) {
-      console.error("[Aimlo] Username check error:", error.message);
+      console.error("[Aimlo] Username check failed");
       return true; // allow attempt, DB constraint will catch duplicates
     }
     return !foundEmail; // null means username is available
