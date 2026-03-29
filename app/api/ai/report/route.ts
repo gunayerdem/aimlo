@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAuthAndRateLimit } from "@/lib/api-auth";
-import { checkOutputQuality } from "@/evals/generic-detector";
+import { checkOutputQuality, scoreFields } from "@/evals/generic-detector";
 import { computeMatchInsights, analyzeRoundPatterns } from "@/lib/round-engine";
 import { calculatePlayerScore } from "@/lib/scoring";
 import { generateImprovementPlan } from "@/lib/improvement-plan";
@@ -678,12 +678,17 @@ export async function POST(request: NextRequest) {
       console.log("[Aimlo] Player memory update failed");
     }
 
-    // Output quality gate
+    // Output quality gate with field-level scoring
     const qc = checkOutputQuality({
       summary: typeof report.summary === "string" ? report.summary : undefined,
       mistake: typeof report.mistake === "string" ? report.mistake : undefined,
     });
-    console.log(`[Aimlo AI] Report quality: ${qc.score}/100${qc.passed ? "" : " — " + qc.issues[0]}`);
+    const fs = scoreFields({
+      summary: typeof report.summary === "string" ? report.summary : undefined,
+      mistake: typeof report.mistake === "string" ? report.mistake : undefined,
+      adjustment: typeof report.adjustment === "string" ? report.adjustment : undefined,
+    });
+    console.log(`[Aimlo AI] Report quality: ${qc.score}/100${fs.weakest ? ` (weakest: ${fs.weakest})` : ""}`);
 
 
     return NextResponse.json(report);
