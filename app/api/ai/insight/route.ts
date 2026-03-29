@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAuthAndRateLimit } from "@/lib/api-auth";
 import { loadKnowledge } from "@/lib/knowledge-loader";
+import { checkOutputQuality } from "@/evals/generic-detector";
 
 /**
  * POST /api/ai/insight
@@ -302,6 +303,23 @@ export async function POST(request: NextRequest) {
         { error: "AI returned unexpected shape" },
         { status: 502 },
       );
+    }
+
+    // Output quality validation — reject generic/weak output
+    const p = parsed as Record<string, unknown>;
+    const di = p.dashboardInsight as Record<string, unknown> | undefined;
+    const qualityCheck = checkOutputQuality({
+      insight: typeof di?.insight === "string" ? di.insight : undefined,
+      summary: typeof di?.reasoning === "string" ? di.reasoning : undefined,
+    }, {
+      map: typeof safeContext.recentMatches === "object" ? undefined : undefined,
+      agent: typeof safeContext.mostPlayedAgent === "string" ? safeContext.mostPlayedAgent as string : undefined,
+    });
+
+    if (!qualityCheck.passed) {
+      console.warn(`[Aimlo AI] Insight quality low (${qualityCheck.score}/100): ${qualityCheck.issues.slice(0, 3).join(", ")}`);
+      // Still return the output — quality check is advisory for now
+      // Future: retry once if score < 50
     }
 
     return NextResponse.json(parsed);

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAuthAndRateLimit } from "@/lib/api-auth";
+import { checkOutputQuality } from "@/evals/generic-detector";
 import { analyzeRoundPatterns, generateDeathContext, generateNextRoundPlan } from "@/lib/round-engine";
 import { calculatePlayerScore } from "@/lib/scoring";
 import { generateImprovementPlan } from "@/lib/improvement-plan";
@@ -851,6 +852,16 @@ export async function POST(request: NextRequest) {
     }
 
     const feedback = await generateAIFeedback(validation.data);
+
+    // Output quality validation
+    const qualityCheck = checkOutputQuality(feedback, {
+      map: validation.data.setup?.map,
+      agent: validation.data.setup?.agent,
+    });
+    if (!qualityCheck.passed) {
+      console.warn(`[Aimlo AI] Feedback quality low (${qualityCheck.score}/100): ${qualityCheck.issues.slice(0, 3).join(", ")}`);
+    }
+
     return NextResponse.json(feedback);
   } catch (err) {
     console.error(

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAuthAndRateLimit } from "@/lib/api-auth";
+import { checkOutputQuality } from "@/evals/generic-detector";
 import { computeMatchInsights, analyzeRoundPatterns } from "@/lib/round-engine";
 import { calculatePlayerScore } from "@/lib/scoring";
 import { generateImprovementPlan } from "@/lib/improvement-plan";
@@ -675,6 +676,15 @@ export async function POST(request: NextRequest) {
       }
     } catch (e) {
       console.log("[Aimlo] Player memory update failed");
+    }
+
+    // Output quality validation
+    const qualityCheck = checkOutputQuality({
+      summary: typeof report.summary === "string" ? report.summary : undefined,
+      mistake: typeof report.mistake === "string" ? report.mistake : undefined,
+    });
+    if (!qualityCheck.passed) {
+      console.warn(`[Aimlo AI] Report quality low (${qualityCheck.score}/100): ${qualityCheck.issues.slice(0, 3).join(", ")}`);
     }
 
     return NextResponse.json(report);
