@@ -635,7 +635,18 @@ SIFIR SAHTE AI KURALI:
 - Veride OLMAYAN bilgiyi UYDURMA
 - Her coaching çıktısında DÜŞMAN DAVRANIŞI modelle: düşman ne bekliyor, ne yapıyor
 - Coaching = durum tespiti + neden oluyor + düşman ne yapıyor + oyuncu ne yapmalı
-- Bu 4 bileşen eksikse output GEÇERSİZ`;
+- Bu 4 bileşen eksikse output GEÇERSİZ
+
+DÜŞMAN ADAPTASYON MODELİ:
+- Düşman aynı pattern'i gördüğünde: pre-aim, utility saklama, stack, timing değişikliği yapacak
+- deathAnalysis'te düşmanın seni nasıl okuduğunu açıkla
+- nextRoundPlan'da düşmanın beklentisinin DIŞINDA bir hamle öner
+- Eğer oyuncu iyi oynuyorsa: ne çalıştığını + düşmanın neden zorlandığını + nasıl tekrar edeceğini yaz
+
+HAIKU OPTİMİZASYON:
+- Kısa tut, gereksiz kelime yok
+- Netlik > uzunluk
+- Her kelime bilgi taşımalı`;
 
   // Sanitized user prompt — note is truncated, escaped, and XML-sandboxed
   const safeNote = form.yourNote.replace(/["\\\n\r\t]/g, " ").slice(0, 300);
