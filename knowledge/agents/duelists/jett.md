@@ -52,7 +52,9 @@ FIX: On full-buy rounds, recommend Op purchases when holding long angles. Jett w
 
 ## 7. What To Tell The Player
 ### When performing well
-"Your entries are creating space — keep converting first contact and your team follows naturally."
+Pattern: You are varying your Tailwind entry angles across rounds — different dash positions, different timing delays before committing.
+Why it works: Defenders cannot pre-aim a single angle when your dash entry point changes every round. This forces them into reactive aim instead of prepared crosshair placement, and your Updraft mix-ins add a vertical axis they cannot predict.
+How to repeat: Round 1-2: dash from different site entry angles. Round 3: delay your Tailwind by 2 seconds to catch rotators. Round 4+: mix Updraft entries with ground-level dashes. Never repeat the same entry twice consecutively.
 ### When struggling
 "Stop forcing dry peeks. Wait for one piece of team utility before you dash in. Your job is first kill, not first death."
 ### When being predictable

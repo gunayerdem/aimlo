@@ -56,7 +56,10 @@ Sova is the precision info-gatherer who turns map knowledge into a science. His 
 
 ## 7. What To Tell The Player
 
-**When performing well**: "Your lineup library is paying off. The team is entering sites with full information and your post-plant Shock Darts are closing rounds. Keep expanding the lineup collection."
+**When performing well**:
+Pattern: You are landing Recon Bolts at advanced lineup positions that require enemies to look away from the entry path to destroy, and saving both Shock Darts for post-plant lineups on the default defuse spot.
+Why it works: A Recon Bolt placed high on a ceiling or behind cover forces defenders to choose between shooting the dart and watching your team's entry angle — they cannot do both. This creates a 1-2 second window where your team enters against distracted defenders. Shock Darts on default defuse deny 4+ seconds each, totaling 8+ seconds of defuse denial from a safe position the enemy cannot punish.
+How to repeat: Step 1: Fire Recon Bolt from a learned lineup that lands where enemies must turn away from the team's entry to destroy it. Step 2: Follow with Owl Drone for 4-5 seconds maximum to tag remaining positions. Step 3: After plant, move to your Shock Dart lineup spot and fire the first dart when you hear defuse audio. Hold the second dart for the retry attempt. Learn 2+ alternate dart positions per site so enemies cannot predict and pre-aim your scan.
 
 **When struggling**: "Your darts are landing in low-value positions. Go back to custom games and refine your lineups. A Sova without lineups is bringing a toolkit without the tools."
 

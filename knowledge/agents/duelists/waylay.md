@@ -54,7 +54,9 @@ FIX: Emphasize that Waylay's recon is team utility. Every piece of information g
 
 ## 7. What To Tell The Player
 ### When performing well
-"Your intel is feeding directly into kills. Keep running the recon-to-entry pipeline — your team is executing smarter because of your information."
+Pattern: You are deploying your recon ability before every entry, acting on the gathered intel within 2-3 seconds, and calling out defender positions to your team before swinging.
+Why it works: The recon-first approach reveals at least one defender position before you commit, turning a blind entry into a pre-aimed duel. Acting within 2-3 seconds of the reveal means the defender has not had time to reposition, so your crosshair is already on their angle. Your callout gives teammates the exact position to trade if you fall.
+How to repeat: Step 1: Deploy recon ability toward the site's most common hold angle. Step 2: Call out whatever is revealed to the team immediately. Step 3: Peek the revealed position within 2-3 seconds while the information is still accurate. On rounds where recon reveals no one, communicate the clear and redirect the team's execute to the occupied site.
 ### When struggling
 "Pick one role per round: either lead with recon and commit to the entry, or support with info and let a teammate trade you. Do not do neither."
 ### When being predictable

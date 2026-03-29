@@ -60,7 +60,10 @@ Viper is the territorial controller who excels at locking down areas with persis
 
 ## 7. What To Tell The Player
 
-**When performing well**: "Your fuel management is clean and your Snake Bite lineups are winning post-plants. Keep varying your wall angles to stay unpredictable."
+**When performing well**:
+Pattern: You are toggling Toxic Screen off within 5-6 seconds of the team entering site to conserve fuel, then activating Poison Cloud for post-plant denial, and landing Snake Bite lineups on the default defuse spot.
+Why it works: Deactivating the wall early preserves 40-50% of your fuel pool for the Poison Cloud phase, meaning you have orb denial available during the entire post-plant. Snake Bite on the defuse position forces the enemy off spike for its full duration, and with two charges you can deny 8+ seconds total — enough for the spike to reach half-timer.
+How to repeat: Step 1: Activate Toxic Screen for the execute, deactivate it once your team is through the choke. Step 2: Toggle Poison Cloud on after plant to deny the retake angle. Step 3: When you hear defuse audio, throw Snake Bite lineup one at default defuse. Hold lineup two for the second defuse attempt. Alternate between 2-3 wall angles per site across rounds.
 
 **When struggling**: "Your fuel is running dry too fast. Toggle the wall off once the team is on site. Save orb fuel for post-plant denial. Two abilities running equals zero abilities soon."
 

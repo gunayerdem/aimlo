@@ -55,7 +55,10 @@ Cypher is the intelligence backbone of any defensive setup. He does not hold sit
 
 ## 7. What To Tell The Player
 
-**Performing well**: "Your information game is generating advantages before fights even start. Keep rotating your setups to stay unpredictable."
+**Performing well**:
+Pattern: You are rotating your Trapwire placements between rounds — setup A for rounds 1-2, setup B for rounds 3-4 — and calling Spycam intel to your team before they peek any angle.
+Why it works: Attackers who memorize your wire placement from round 1 walk into a completely different setup on round 3, triggering a wire they did not expect. Your Spycam callouts before teammates peek give them a pre-aimed crosshair position — they swing with full knowledge of the enemy's exact location while the enemy does not know the peek is coming.
+How to repeat: Step 1: Prepare 3 distinct Trapwire setups per site and rotate between them every 2 rounds. Step 2: Place Spycam at the start of each round and call out enemy positions before your team takes any fight. Step 3: After Neural Theft, immediately relay all gathered positions. On attack, always place at least one Trapwire covering the flank path behind your team's push.
 
 **Struggling**: "Your utility is either too predictable or not generating usable intel. Focus on placing tripwires where they catch early aggression, not deep site. Communicate every trigger immediately."
 

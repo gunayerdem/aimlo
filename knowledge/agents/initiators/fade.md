@@ -56,7 +56,10 @@ Fade is the aggressive info-gatherer who chains abilities together to create cas
 
 ## 7. What To Tell The Player
 
-**When performing well**: "Your ability chains are creating chaos that the team is capitalizing on. The Haunt placement is forcing enemies to choose between shooting the eye and watching for your team. Keep that pressure up."
+**When performing well**:
+Pattern: You are chaining Haunt-into-Prowler-into-Seize within a 3-5 second window, throwing Haunt at angles that require enemies to turn away from the entry path to destroy the eye.
+Why it works: Haunt placed behind or above defenders forces a choice — shoot the eye and expose your back to the entry, or ignore it and get tagged with a trail that Prowler will chase. The Prowler follow-up on a tagged enemy delivers a guaranteed nearsight, and Seize on their escape route locks them in place. The full chain strips a defender of vision, movement, and positioning within 5 seconds.
+How to repeat: Step 1: Throw Haunt above or behind the most common hold angle, using wall bounces to hide the approach. Step 2: The moment Haunt lands, send Prowler toward the revealed position. Step 3: If the enemy attempts to flee, throw Seize at their escape route. Call "pushing now" so the team enters during the nearsight window. Alternate Haunt throw positions each round to prevent pre-aim destruction.
 
 **When struggling**: "Your abilities are disconnected. Stop using them one at a time. Throw Haunt, then immediately send Prowler to the revealed position, then Seize if they try to run. The chain is everything."
 

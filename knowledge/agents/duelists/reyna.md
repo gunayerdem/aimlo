@@ -52,7 +52,9 @@ FIX: Coach controlled aggression during Empress. The ult amplifies her kit but d
 
 ## 7. What To Tell The Player
 ### When performing well
-"You are converting kills into round control. Keep chaining Devour and take the next fight at full HP."
+Pattern: You are choosing Devour over Dismiss after kills in covered positions, entering each successive duel at full HP, and using Leer placed inside walls where enemies cannot shoot it before swinging.
+Why it works: Devour after a kill in a safe spot regenerates you to full health, which means you win the next duel with an HP advantage that other duelists cannot replicate. Wall-placed Leer forces defenders to either peek blind or reposition, giving you a free first shot either way.
+How to repeat: Step 1: Throw Leer through a wall surface near the angle you are about to peek. Step 2: Swing immediately while the enemy is nearsighted. Step 3: After the kill, Devour if behind cover, Dismiss only if exposed to a second angle. Repeat the Leer-peek-Devour cycle for each subsequent defender on site.
 ### When struggling
 "Your aim is not landing right now. Play for trades — let a teammate go first and use Leer to support their entry."
 ### When being predictable

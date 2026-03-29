@@ -52,7 +52,9 @@ FIX: Drill the wall-sprint-slide sequence as muscle memory. Walls first, sprint 
 
 ## 7. What To Tell The Player
 ### When performing well
-"Your speed is creating chaos they cannot handle. Keep the tempo high and make sure your team is right behind you."
+Pattern: You are deploying Fast Lane walls before every sprint entry, and your slide-peek distance is landing you at the correct 10-15 meter engagement range.
+Why it works: Fast Lane splits the defenders' crossfire into isolated 1v1s, and your sprint-to-slide timing closes the distance before they can adjust. Defenders who are walled off cannot trade their teammate, turning a 1v2 into sequential 1v1s in your favor.
+How to repeat: Step 1: Cast Fast Lane to divide the site before sprinting. Step 2: Sprint through the corridor your walls create. Step 3: Begin slide at 10-15 meters from the first expected contact point. After site is taken, save Overdrive for retake scenarios where 2+ enemies are confirmed alive.
 ### When struggling
 "Slow down by one second. Use your walls before you sprint. Speed without setup is just feeding."
 ### When being predictable

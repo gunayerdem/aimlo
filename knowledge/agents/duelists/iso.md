@@ -52,7 +52,9 @@ FIX: Review wall angles per site. The wall should be deployed as part of the exe
 
 ## 7. What To Tell The Player
 ### When performing well
-"Your shield management is giving you the edge in every duel. Keep stacking and keep forcing fights — you are winning the attrition war."
+Pattern: You are activating Double Tap before every engagement, shooting the shield orb after each kill, and using your wall to isolate defenders into sequential 1v1 fights.
+Why it works: The Double Tap shield absorbs one hit, meaning you survive encounters that would kill any other duelist at equal HP. Collecting the orb after each kill refreshes that shield for the next fight — across a 3-kill site take, that is three extra hits absorbed. Your wall splits 2v1 situations into two 1v1s where your shield gives you the advantage each time.
+How to repeat: Step 1: Activate Double Tap during the approach. Step 2: Deploy wall to cut off the second defender before peeking the first. Step 3: Win the duel, immediately shoot the orb, then peek the isolated second player with a fresh shield. Use Kill Contract on the enemy anchor player holding site, not on damaged or low-impact targets.
 ### When struggling
 "You are taking fights without your shield active. Activate Double Tap before every peek. If you missed the orb, slow down and reset."
 ### When being predictable

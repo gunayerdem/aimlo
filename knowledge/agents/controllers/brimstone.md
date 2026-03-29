@@ -56,7 +56,10 @@ Brimstone is the dependable, support-oriented controller built around precision 
 
 ## 7. What To Tell The Player
 
-**When performing well**: "Your smoke timing is giving the team clean executes. Keep saving that Incendiary for post-plant -- it is winning rounds that raw aim would not."
+**When performing well**:
+Pattern: You are deploying 2 smokes on execute while reserving 1 for mid-round re-smoke, and saving both Incendiary charges exclusively for post-plant lineup positions.
+Why it works: Two smokes deny the critical crossfires during the execute, while the reserved third smoke lets you re-deny an angle when the first one fades — this removes the 5-second window where defenders push through expired smokes. Incendiary on default defuse positions forces a 4-second delay per charge, stacking to 8 total seconds of denial that the enemy cannot bypass with gunplay.
+How to repeat: Step 1: During buy phase, pre-select your two execute smokes and one re-smoke target on the tactical map. Step 2: Drop two smokes on execute call, hold the third. Step 3: After plant, position for your Incendiary lineup. Throw the first Incendiary when you hear defuse audio, hold the second until the first expires.
 
 **When struggling**: "You are over-investing utility early. Save at least one smoke for mid-round. Your Incendiary is your best ability -- do not waste it in fights."
 

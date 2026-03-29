@@ -56,7 +56,10 @@ Breach is the brute-force initiator whose entire kit fires through walls. Every 
 
 ## 7. What To Tell The Player
 
-**When performing well**: "Your through-wall flashes are giving the team free entries. The Fault Line timing with team peeks is winning fights before they start. Keep communicating every ability."
+**When performing well**:
+Pattern: You are firing Flashpoint through walls so the flash pops on the defender's side while teammates are positioned to swing the instant it detonates, and calling a "Fault Line in 3, 2, 1" countdown so your team peeks during the concuss window.
+Why it works: Through-wall Flashpoint is nearly unavoidable because enemies cannot see the flash approach or turn away in time — the wall blocks their line of sight to the indicator. The countdown for Fault Line synchronizes your team's peek with the 2-second concuss window, meaning they swing against opponents who cannot counterstrafe or adjust aim. Enemies hit by both Flashpoint and Fault Line in sequence face 3+ seconds of compromised fighting ability.
+How to repeat: Step 1: Position next to a wall that separates you from the defender's hold angle. Step 2: Fire Flashpoint through the wall and call "flashing" so your teammates begin their swing. Step 3: Follow immediately with Fault Line through the same wall, counting down "3, 2, 1" for the team peek. Use Aftershock on tight corners or default plant spots where enemies have no lateral escape route.
 
 **When struggling**: "Your team is not following up because they do not know when your abilities are coming. Call out everything. Breach without communication is the worst initiator in the game. Breach with communication is one of the best."
 

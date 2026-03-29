@@ -59,7 +59,10 @@ Killjoy is the definitive site anchor in Valorant. Where other sentinels trade b
 
 ## 7. What To Tell The Player
 
-**Performing well**: "Your setups are forcing the enemy to spend utility and time just to get onto site. Keep varying your nanoswarm positions so they cannot predict the damage zones."
+**Performing well**:
+Pattern: You are placing Alarmbot and Nanoswarm within 3 meters of each other so the vulnerability debuff overlaps with the grenade detonation, and rotating your Turret position every 2-3 rounds to a different off-angle.
+Why it works: The Alarmbot vulnerability debuff increases the damage Nanoswarm deals by a significant multiplier — enemies caught in both take near-lethal damage from a single swarm charge. Rotating the Turret prevents enemies from pre-aiming its position on peek, which means they must spend a full ability or 2-3 seconds searching for it, delaying their execute by the time your team needs to rotate.
+How to repeat: Step 1: Place Alarmbot at the chokepoint entrance, then place Nanoswarm directly on top of the Alarmbot position. Step 2: Position Turret at a different off-angle than last round, where enemies must fully commit into site to destroy it. Step 3: Hold your second Nanoswarm for post-plant or a second chokepoint. Use Lockdown from behind walls or enclosed spaces where enemies must physically enter to destroy the device.
 
 **Struggling**: "Your utility is getting cleared too easily. Spread your setup across multiple angles instead of stacking everything in one corridor. Remember — turret is for info first, damage second."
 

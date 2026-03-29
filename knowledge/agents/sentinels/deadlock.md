@@ -55,7 +55,10 @@ Deadlock is the sentinel of chokepoint supremacy. While other sentinels spread t
 
 ## 7. What To Tell The Player
 
-**Performing well**: "Your chokepoint denial is forcing the enemy to burn utility just to walk onto site. Keep layering GravNet and Sonic Sensors to create multi-threat paths."
+**Performing well**:
+Pattern: You are placing Barrier Mesh on the enemy's preferred entry path (identified from the first 2-3 rounds), layering Sonic Sensor behind the mesh to catch anyone who clears it, and holding GravNet reactively for when you hear the push begin.
+Why it works: Barrier Mesh on the primary attack path forces enemies to either destroy the orbs (costing 3-5 seconds and revealing position) or reroute to the secondary path — where your team holds crossfires. Sonic Sensor behind the mesh catches anyone who commits through the orb destruction, delivering a concuss right as they enter. Reactive GravNet on the detected push grounds sprinting attackers mid-rush, fragmenting their group into easy individual targets.
+How to repeat: Step 1: Watch which entry the enemy favors in rounds 1-3, then place Barrier Mesh on that path from round 4 onward. Step 2: Place Sonic Sensor behind or adjacent to the mesh to catch enemies who push through. Step 3: Hold GravNet in hand and throw it when you hear footsteps committing to the push. Use Annihilation only in tight corridors or post-plant on an isolated defuser where teammates cannot easily shoot the cocoon free.
 
 **Struggling**: "Your Barrier Mesh is not blocking the right entry, or your GravNet timing is off. Watch which path the enemy prefers and place your mesh there. Hold GravNet until you hear the push."
 

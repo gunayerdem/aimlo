@@ -52,7 +52,9 @@ FIX: Coach ult usage as a site-entry tool, not a frag-hunting tool. The goal of 
 
 ## 7. What To Tell The Player
 ### When performing well
-"Your flash discipline is winning first duels. Keep self-healing between fights — your sustain is what separates you from other duelists."
+Pattern: You are swinging immediately behind every Curveball pop and using Hot Hands to heal back to full HP between each duel sequence.
+Why it works: The instant swing catches enemies during the 1.1-second blind window before they recover. Healing with Hot Hands between fights means you enter each new duel at full HP while opponents accumulate chip damage with no way to recover — this compounds across a site take into a 20-40 HP advantage per fight.
+How to repeat: Step 1: Throw Curveball and begin your wide-peek before it pops. Step 2: After the kill, drop Hot Hands behind cover and heal while repositioning. Step 3: Alternate between left-curve and right-curve Curveballs each round so enemies cannot predict which direction to turn.
 ### When struggling
 "You are not swinging behind your own flash. Throw the Curveball and immediately wide-peek. If you flash and wait, the blind expires before you arrive."
 ### When being predictable

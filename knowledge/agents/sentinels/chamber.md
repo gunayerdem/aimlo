@@ -56,7 +56,10 @@ Chamber is the sentinel who plays like a duelist. His kit rewards mechanical pre
 
 ## 7. What To Tell The Player
 
-**Performing well**: "Your peek-and-teleport discipline is generating kills without giving the enemy anything in return. Keep managing Headhunter economy and making Tour de Force rounds count."
+**Performing well**:
+Pattern: You are executing the one-shot-then-Rendezvous-teleport loop consistently — peeking an aggressive angle, firing one shot with Tour de Force or a rifle, and teleporting to safety before the enemy can trade.
+Why it works: The single-shot-then-teleport pattern generates a kill without giving the enemy a tradeable body. Defenders who try to swing your position find empty space because Rendezvous has already moved you to safety. Over a half, this accumulates 2-3 free kills that cost the enemy a full buy each time while Chamber's team loses nothing.
+How to repeat: Step 1: Pre-place Rendezvous anchor within 1-2 seconds of your aggressive peek angle before the round starts. Step 2: Hold the angle and fire exactly one shot — hit or miss, teleport immediately. Step 3: Never re-peek from the same angle after teleporting. On Tour de Force rounds, save the rifle money and communicate to the team that they can redistribute economy. Place Trademark on the highest-traffic flank path and rotate it based on which direction enemies attacked the previous round.
 
 **Struggling**: "You are dying on peeks too often, which means either your teleport placement is too slow or you are re-peeking when you should be teleporting. One shot, one teleport. Every time."
 
