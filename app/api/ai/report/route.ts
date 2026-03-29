@@ -678,14 +678,13 @@ export async function POST(request: NextRequest) {
       console.log("[Aimlo] Player memory update failed");
     }
 
-    // Output quality validation
-    const qualityCheck = checkOutputQuality({
+    // Output quality gate
+    const qc = checkOutputQuality({
       summary: typeof report.summary === "string" ? report.summary : undefined,
       mistake: typeof report.mistake === "string" ? report.mistake : undefined,
     });
-    if (!qualityCheck.passed) {
-      console.warn(`[Aimlo AI] Report quality low (${qualityCheck.score}/100): ${qualityCheck.issues.slice(0, 3).join(", ")}`);
-    }
+    console.log(`[Aimlo AI] Report quality: ${qc.score}/100${qc.passed ? "" : " — " + qc.issues[0]}`);
+
 
     return NextResponse.json(report);
   } catch (err) {

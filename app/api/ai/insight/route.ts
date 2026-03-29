@@ -237,92 +237,63 @@ export async function POST(request: NextRequest) {
     const lang = typeof safeContext.lang === "string" ? safeContext.lang : "tr";
     const systemPrompt = buildSystemPrompt(confidenceLevel, knowledgeContext, tone, lang);
 
-    // Call Anthropic
+    // Call Anthropic with quality gate (single retry if weak)
     const contextJson = JSON.stringify(safeContext, null, 2);
-    const userPrompt = `Aşağıdaki oyuncu verisini analiz et ve coaching insight üret:\n\n${contextJson}`;
+    const baseUserPrompt = `Aşağıdaki oyuncu verisini analiz et ve coaching insight üret:\n\n${contextJson}`;
+    const agentCtx = typeof safeContext.mostPlayedAgent === "string" ? safeContext.mostPlayedAgent as string : undefined;
 
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), AI_TIMEOUT_MS);
+    const callAI = async (userPrompt: string): Promise<unknown | null> => {
+      const ctrl = new AbortController();
+      const tid = setTimeout(() => ctrl.abort(), AI_TIMEOUT_MS);
+      const res = await fetch(ANTHROPIC_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-api-key": apiKey, "anthropic-version": "2023-06-01" },
+        body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: 1500, system: systemPrompt, messages: [{ role: "user", content: userPrompt }] }),
+        signal: ctrl.signal,
+      });
+      if (!res.ok) { clearTimeout(tid); return null; }
+      const d = await res.json(); clearTimeout(tid);
+      const t: string = d?.content?.[0]?.text || "";
+      try { return JSON.parse(t); } catch {
+        const m = t.match(/\{[\s\S]*\}/);
+        if (m) try { return JSON.parse(m[0]); } catch { /* */ }
+      }
+      return null;
+    };
 
-    const response = await fetch(ANTHROPIC_API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify({
-        model: "claude-haiku-4-5-20251001",
-        max_tokens: 1500,
-        system: systemPrompt,
-        messages: [{ role: "user", content: userPrompt }],
-      }),
-      signal: controller.signal,
-    });
+    const scoreOutput = (obj: unknown): number => {
+      if (!isValidInsightShape(obj)) return 0;
+      const p = obj as Record<string, unknown>;
+      const di = p.dashboardInsight as Record<string, unknown> | undefined;
+      return checkOutputQuality({
+        insight: typeof di?.insight === "string" ? di.insight : undefined,
+        summary: typeof di?.reasoning === "string" ? di.reasoning : undefined,
+      }, { agent: agentCtx }).score;
+    };
 
-    if (!response.ok) {
-      clearTimeout(timeoutId);
-      console.error(`[Aimlo AI] Insight API ${response.status}`);
-      return NextResponse.json(
-        { error: "AI analysis failed" },
-        { status: 502 },
-      );
+    // First attempt
+    let output = await callAI(baseUserPrompt);
+    if (!output || !isValidInsightShape(output)) {
+      console.error("[Aimlo AI] Insight: invalid response");
+      return NextResponse.json({ error: "AI analysis failed" }, { status: 502 });
     }
 
-    const data = await response.json();
-    clearTimeout(timeoutId);
-    const text: string = data?.content?.[0]?.text || "";
+    const score1 = scoreOutput(output);
+    console.log(`[Aimlo AI] Insight quality: ${score1}/100`);
 
-    // Parse JSON from response
-    let parsed: unknown;
-    try {
-      parsed = JSON.parse(text);
-    } catch {
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
-      if (!jsonMatch) {
-        console.error("[Aimlo AI] Insight: no JSON in response");
-        return NextResponse.json(
-          { error: "AI returned invalid format" },
-          { status: 502 },
-        );
-      }
-      try {
-        parsed = JSON.parse(jsonMatch[0]);
-      } catch {
-        console.error("[Aimlo AI] Insight: invalid JSON extracted");
-        return NextResponse.json(
-          { error: "AI returned invalid format" },
-          { status: 502 },
-        );
+    // Quality gate: retry once if below threshold
+    if (score1 < 70) {
+      const regenPrompt = baseUserPrompt + "\n\n--- QUALITY ENFORCEMENT ---\nPrevious output was too generic. You MUST:\n- Include specific position names (A Short, B Main, etc.)\n- Reference round numbers or percentages\n- Model enemy behavior explicitly\n- Give a clear actionable fix\nDo NOT return vague coaching.";
+
+      const retry = await callAI(regenPrompt);
+      if (retry && isValidInsightShape(retry)) {
+        const score2 = scoreOutput(retry);
+        console.log(`[Aimlo AI] Insight regen quality: ${score2}/100 (was ${score1})`);
+        if (score2 > score1) { output = retry; }
       }
     }
 
-    if (!isValidInsightShape(parsed)) {
-      console.error("[Aimlo AI] Insight: invalid shape");
-      return NextResponse.json(
-        { error: "AI returned unexpected shape" },
-        { status: 502 },
-      );
-    }
-
-    // Output quality validation — reject generic/weak output
-    const p = parsed as Record<string, unknown>;
-    const di = p.dashboardInsight as Record<string, unknown> | undefined;
-    const qualityCheck = checkOutputQuality({
-      insight: typeof di?.insight === "string" ? di.insight : undefined,
-      summary: typeof di?.reasoning === "string" ? di.reasoning : undefined,
-    }, {
-      map: typeof safeContext.recentMatches === "object" ? undefined : undefined,
-      agent: typeof safeContext.mostPlayedAgent === "string" ? safeContext.mostPlayedAgent as string : undefined,
-    });
-
-    if (!qualityCheck.passed) {
-      console.warn(`[Aimlo AI] Insight quality low (${qualityCheck.score}/100): ${qualityCheck.issues.slice(0, 3).join(", ")}`);
-      // Still return the output — quality check is advisory for now
-      // Future: retry once if score < 50
-    }
-
-    return NextResponse.json(parsed);
+    return NextResponse.json(output);
   } catch (err) {
     if (err instanceof DOMException && err.name === "AbortError") {
       console.error("[Aimlo AI] Insight request timed out");

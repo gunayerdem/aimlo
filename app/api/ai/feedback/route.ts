@@ -789,17 +789,20 @@ ${patternContext}`;
     }
 
     if (isValidFeedbackShape(parsed)) {
-      return {
+      const result = {
         deathAnalysis: parsed.deathAnalysis.slice(0, 500),
         enemyPatterns: parsed.enemyPatterns.slice(0, 4).map((p: string) => p.slice(0, 200)),
         nextRoundPlan: parsed.nextRoundPlan.slice(0, 500),
       };
+      // Quality check (advisory — no retry for real-time feedback to preserve latency)
+      const qc = checkOutputQuality(result, { map: setup.map, agent: setup.agent });
+      if (!qc.passed) {
+        console.warn(`[Aimlo AI] Feedback quality: ${qc.score}/100 — ${qc.issues[0] || "low score"}`);
+      }
+      return result;
     }
 
-    console.error(
-      "[Aimlo AI] Invalid shape:",
-      JSON.stringify(parsed).slice(0, 200),
-    );
+    console.error("[Aimlo AI] Invalid shape");
     return generateDeterministicFeedback(body);
   } catch (err) {
     if (err instanceof DOMException && err.name === "AbortError") {
