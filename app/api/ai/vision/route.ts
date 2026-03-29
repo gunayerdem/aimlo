@@ -61,10 +61,31 @@ type RoundFeedback = {
    VALIDATION
    ══════════════════════════════════════════════════════════ */
 
+// Base64 character set regex (A-Z, a-z, 0-9, +, /, =)
+const BASE64_REGEX = /^[A-Za-z0-9+/]+=*$/;
+const MAX_IMAGE_BYTES = 4_000_000; // 4MB decoded max (~5.3MB base64)
+
 function isValidVisionRequest(obj: unknown): obj is VisionRequest {
   if (!obj || typeof obj !== "object") return false;
   const o = obj as Record<string, unknown>;
-  return typeof o.image === "string" && o.image.length > 100;
+  if (typeof o.image !== "string") return false;
+  const img = o.image as string;
+  // Minimum length for a real image
+  if (img.length < 1000) return false;
+  // Max size check (base64 is ~33% larger than decoded)
+  if (img.length > MAX_IMAGE_BYTES * 1.4) return false;
+  // Validate base64 character set (check first 1000 chars for performance)
+  if (!BASE64_REGEX.test(img.slice(0, 1000))) return false;
+  // Check PNG header in decoded bytes (first 4 bytes: 0x89 0x50 0x4E 0x47)
+  try {
+    const header = atob(img.slice(0, 12));
+    const isPng = header.charCodeAt(0) === 0x89 && header.charCodeAt(1) === 0x50;
+    const isJpeg = header.charCodeAt(0) === 0xFF && header.charCodeAt(1) === 0xD8;
+    if (!isPng && !isJpeg) return false;
+  } catch {
+    return false; // Invalid base64
+  }
+  return true;
 }
 
 function isValidFeedbackShape(obj: unknown): obj is RoundFeedback {

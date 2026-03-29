@@ -627,7 +627,15 @@ YASAK CÜMLELER (bunları asla kullanma):
 - "pozisyonunu geliştir"
 - "takımınla oyna"
 - "utility kullan"
-Her cümlende pozisyon ismi, round numarası veya sayısal veri olmalı.`;
+- "iyi gidiyorsun"
+- "gelişmeye devam et"
+Her cümlende pozisyon ismi, round numarası veya sayısal veri olmalı.
+
+SIFIR SAHTE AI KURALI:
+- Veride OLMAYAN bilgiyi UYDURMA
+- Her coaching çıktısında DÜŞMAN DAVRANIŞI modelle: düşman ne bekliyor, ne yapıyor
+- Coaching = durum tespiti + neden oluyor + düşman ne yapıyor + oyuncu ne yapmalı
+- Bu 4 bileşen eksikse output GEÇERSİZ`;
 
   // Sanitized user prompt — note is truncated, escaped, and XML-sandboxed
   const safeNote = form.yourNote.replace(/["\\\n\r\t]/g, " ").slice(0, 300);
@@ -824,7 +832,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
     }
 
-    console.log(`[AIMLO] AI request from user: ${userId}`);
+    console.log("[AIMLO] AI feedback request");
 
     const validation = validateRequest(rawBody);
     if (!validation.valid) {
