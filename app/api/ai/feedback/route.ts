@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAuthAndRateLimit } from "@/lib/api-auth";
-import { checkOutputQuality } from "@/evals/generic-detector";
+import { checkOutputQuality, scoreFields } from "@/evals/generic-detector";
 import { analyzeRoundPatterns, generateDeathContext, generateNextRoundPlan } from "@/lib/round-engine";
 import { calculatePlayerScore } from "@/lib/scoring";
 import { generateImprovementPlan } from "@/lib/improvement-plan";
@@ -794,11 +794,47 @@ ${patternContext}`;
         enemyPatterns: parsed.enemyPatterns.slice(0, 4).map((p: string) => p.slice(0, 200)),
         nextRoundPlan: parsed.nextRoundPlan.slice(0, 500),
       };
-      // Quality check (advisory — no retry for real-time feedback to preserve latency)
+
+      // Field-level quality gate
       const qc = checkOutputQuality(result, { map: setup.map, agent: setup.agent });
-      if (!qc.passed) {
-        console.warn(`[Aimlo AI] Feedback quality: ${qc.score}/100 — ${qc.issues[0] || "low score"}`);
+      const fs = scoreFields({
+        deathAnalysis: result.deathAnalysis,
+        enemyPatterns: result.enemyPatterns.join(" "),
+        nextRoundPlan: result.nextRoundPlan,
+      }, { map: setup.map, agent: setup.agent });
+
+      console.log(`[Aimlo AI] Feedback quality: ${qc.score}/100${fs.weakest ? ` (weakest: ${fs.weakest})` : ""}`);
+
+      // Micro-gate: if score < 65, repair weakest field with single compact regen
+      if (qc.score < 65 && fs.weakest && apiKey) {
+        const fieldLabel = fs.weakest === "deathAnalysis" ? "ölüm analizi"
+          : fs.weakest === "nextRoundPlan" ? "sonraki round planı"
+          : "düşman pattern analizi";
+        const repairPrompt = `Aşağıdaki ${fieldLabel} çok genel. Daha spesifik yaz:\n- Pozisyon ismi ekle\n- Düşman davranışı modelle\n- Somut aksiyon ver\n\nMevcut: "${fs.weakest === "deathAnalysis" ? result.deathAnalysis : fs.weakest === "nextRoundPlan" ? result.nextRoundPlan : result.enemyPatterns.join("; ")}"\n\nSadece düzeltilmiş metni döndür, JSON yok.`;
+
+        try {
+          const rc = new AbortController();
+          const rt = setTimeout(() => rc.abort(), 8000); // 8s tight timeout
+          const rr = await fetch("https://api.anthropic.com/v1/messages", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "x-api-key": apiKey, "anthropic-version": "2023-06-01" },
+            body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: 200, system: "Kısa, keskin, veri destekli Valorant coaching yaz. Generic cümle YASAK.", messages: [{ role: "user", content: repairPrompt }] }),
+            signal: rc.signal,
+          });
+          clearTimeout(rt);
+          if (rr.ok) {
+            const rd = await rr.json();
+            const repaired = rd?.content?.[0]?.text?.trim();
+            if (repaired && repaired.length > 20) {
+              if (fs.weakest === "deathAnalysis") result.deathAnalysis = repaired.slice(0, 500);
+              else if (fs.weakest === "nextRoundPlan") result.nextRoundPlan = repaired.slice(0, 500);
+              else result.enemyPatterns = [repaired.slice(0, 200), ...result.enemyPatterns.slice(1)];
+              console.log(`[Aimlo AI] Feedback field repaired: ${fs.weakest}`);
+            }
+          }
+        } catch { /* repair failed — use original */ }
       }
+
       return result;
     }
 
@@ -808,10 +844,7 @@ ${patternContext}`;
     if (err instanceof DOMException && err.name === "AbortError") {
       console.error("[Aimlo AI] Request timed out");
     } else {
-      console.error(
-        "[Aimlo AI] Exception:",
-        err instanceof Error ? err.message : "unknown",
-      );
+      console.error("[Aimlo AI] Exception");
     }
     return generateDeterministicFeedback(body);
   }

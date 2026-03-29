@@ -371,3 +371,60 @@ export function checkOutputQuality(
     },
   };
 }
+
+// --------------- Field-level scoring ---------------
+
+export interface FieldScore {
+  field: string;
+  score: number; // 0-100
+  weak: boolean;
+  issues: string[];
+}
+
+/**
+ * Score individual fields separately to identify which is weakest.
+ * Returns per-field scores + the name of the weakest field.
+ */
+export function scoreFields(
+  fields: Record<string, string | string[] | undefined>,
+  context?: { map?: string; agent?: string },
+): { scores: FieldScore[]; weakest: string | null } {
+  const results: FieldScore[] = [];
+
+  for (const [name, value] of Object.entries(fields)) {
+    if (!value) continue;
+    const text = Array.isArray(value) ? value.join(" ") : value;
+    let s = 100;
+    const issues: string[] = [];
+
+    // Forbidden phrases
+    const forbidden = findForbiddenPhrases(text);
+    if (forbidden.length > 0) { s -= 20 * forbidden.length; issues.push("generic phrase"); }
+
+    // Word count
+    if (countWords(text) < MIN_WORD_COUNT) { s -= 15; issues.push("too short"); }
+
+    // Numeric references
+    const numRefs = countNumericReferences(text);
+    if (numRefs === 0) { s -= 25; issues.push("no data reference"); }
+
+    // Position reference
+    if (!containsAny(text, VALORANT_POSITIONS)) { s -= 15; issues.push("no position"); }
+
+    // Agent reference
+    if (context?.agent && !toLower(text).includes(toLower(context.agent))) {
+      if (!containsAny(text, VALORANT_AGENTS)) { s -= 10; issues.push("no agent"); }
+    }
+
+    results.push({ field: name, score: Math.max(0, Math.min(100, s)), weak: s < 60, issues });
+  }
+
+  // Find weakest
+  let weakest: string | null = null;
+  let minScore = 101;
+  for (const r of results) {
+    if (r.score < minScore) { minScore = r.score; weakest = r.field; }
+  }
+
+  return { scores: results, weakest };
+}
