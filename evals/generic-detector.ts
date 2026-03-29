@@ -33,6 +33,17 @@ const FORBIDDEN_PHRASES: string[] = [
   "improve positioning",
   "play with team",
   "use utility",
+  "farklı dene",
+  "farklı bir şey dene",
+  "daha iyi oyna",
+  "gelişmeye devam et",
+  "iyi gidiyorsun",
+  "be better",
+  "try different",
+  "keep improving",
+  "daha verimli kullan",
+  "daha agresif oyna",
+  "daha yaratıcı kullan",
 ];
 
 const VALORANT_MAPS: string[] = [
@@ -141,7 +152,7 @@ const SIDE_KEYWORDS: string[] = [
 ];
 
 const MIN_WORD_COUNT = 10;
-const PASS_THRESHOLD = 60;
+const PASS_THRESHOLD = 65;
 
 // --------------- Helpers ---------------
 
@@ -272,7 +283,7 @@ export function checkOutputQuality(
       issues.push(
         `Forbidden phrase(s) in ${field.name}: ${found.map((p) => `"${p}"`).join(", ")}`
       );
-      score -= 15 * found.length;
+      score -= 30 * found.length;
     }
   }
 
@@ -291,10 +302,9 @@ export function checkOutputQuality(
   const numericReferenceCount = countNumericReferences(allText);
   if (numericReferenceCount === 0) {
     issues.push("No numeric references (stats, percentages, round numbers) found in output");
-    score -= 20;
-  } else if (numericReferenceCount <= 2) {
-    // Acceptable but not great -- small deduction
-    score -= 5;
+    score -= 25;
+  } else if (numericReferenceCount <= 1) {
+    score -= 10;
   }
   // 3+ is good, no deduction
 
@@ -305,7 +315,7 @@ export function checkOutputQuality(
 
   if (!hasMapReference) {
     issues.push("No Valorant map name referenced in output");
-    score -= 10;
+    score -= 15;
   }
 
   // --- Agent reference ---
@@ -322,7 +332,7 @@ export function checkOutputQuality(
   const hasPositionReference = containsAny(allText, VALORANT_POSITIONS);
   if (!hasPositionReference) {
     issues.push("No Valorant position callout referenced in output");
-    score -= 10;
+    score -= 25;
   }
 
   // --- Side reference ---
@@ -337,7 +347,7 @@ export function checkOutputQuality(
   const hasEnemyBehavior = ENEMY_KEYWORDS.some(k => allTextLower.includes(k));
   if (!hasEnemyBehavior) {
     issues.push("No enemy behavior modeling in output");
-    score -= 15;
+    score -= 25;
   }
 
   // --- Actionability check (clear next step) ---
@@ -345,15 +355,15 @@ export function checkOutputQuality(
   const hasAction = ACTION_KEYWORDS.some(k => allTextLower.includes(k));
   if (!hasAction) {
     issues.push("No actionable next step in output");
-    score -= 15;
+    score -= 25;
   }
 
   // --- Vague verb / fake specificity detection ---
   const VAGUE_PATTERNS = ["geliştir", "improve", "adjust", "iyileştir", "düzelt", "farklı dene", "daha iyi", "try different", "be better"];
   const vagueCount = VAGUE_PATTERNS.filter(p => allTextLower.includes(p)).length;
-  if (vagueCount >= 2) {
-    issues.push(`Multiple vague verbs detected (${vagueCount})`);
-    score -= 10 * vagueCount;
+  if (vagueCount >= 1) {
+    issues.push(`Vague verbs detected (${vagueCount})`);
+    score -= 15 * vagueCount;
   }
 
   // --- Repeated template detection ---
