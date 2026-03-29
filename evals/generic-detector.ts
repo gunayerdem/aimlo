@@ -332,6 +332,30 @@ export function checkOutputQuality(
     score -= 5;
   }
 
+  // --- Enemy behavior presence check ---
+  const ENEMY_KEYWORDS = ["düşman", "enemy", "rakip", "opponent", "pre-aim", "exploit", "adapt", "bekliy", "okuy", "stack", "rotate"];
+  const hasEnemyBehavior = ENEMY_KEYWORDS.some(k => allTextLower.includes(k));
+  if (!hasEnemyBehavior) {
+    issues.push("No enemy behavior modeling in output");
+    score -= 15;
+  }
+
+  // --- Actionability check (clear next step) ---
+  const ACTION_KEYWORDS = ["yap", "dene", "değiştir", "geç", "koy", "at", "tut", "oyna", "switch", "change", "use ", "try ", "hold", "play "];
+  const hasAction = ACTION_KEYWORDS.some(k => allTextLower.includes(k));
+  if (!hasAction) {
+    issues.push("No actionable next step in output");
+    score -= 15;
+  }
+
+  // --- Vague verb / fake specificity detection ---
+  const VAGUE_PATTERNS = ["geliştir", "improve", "adjust", "iyileştir", "düzelt", "farklı dene", "daha iyi", "try different", "be better"];
+  const vagueCount = VAGUE_PATTERNS.filter(p => allTextLower.includes(p)).length;
+  if (vagueCount >= 2) {
+    issues.push(`Multiple vague verbs detected (${vagueCount})`);
+    score -= 10 * vagueCount;
+  }
+
   // --- Repeated template detection ---
   if (fields.length >= 2) {
     const firstWords = fields.map((f) => getFirstNWords(f.text, 5));

@@ -690,6 +690,39 @@ export async function POST(request: NextRequest) {
     });
     console.log(`[Aimlo AI] Report quality: ${qc.score}/100${fs.weakest ? ` (weakest: ${fs.weakest})` : ""}`);
 
+    // Field-level refinement if quality is low
+    const apiKey = process.env.AIMLO_AI_KEY || process.env.ANTHROPIC_API_KEY;
+    if (qc.score < 65 && fs.weakest && apiKey && typeof (report as Record<string, unknown>)[fs.weakest] === "string") {
+      const weakText = (report as Record<string, unknown>)[fs.weakest] as string;
+      const fieldMap: Record<string, string> = { summary: "maç özeti", mistake: "ana hata analizi", adjustment: "düzeltme önerisi" };
+      const refinePrompt = `Bu ${fieldMap[fs.weakest] || fs.weakest} zayıf. Yeniden yaz. KURALLAR:
+1. Pozisyon ismi ZORUNLU (A Short, B Main, Mid vb.)
+2. Düşman davranışı ZORUNLU
+3. Somut aksiyon ZORUNLU
+4. "Geliştir", "dikkatli ol" YASAK
+Mevcut: "${weakText}"
+Sadece düzeltilmiş metni döndür.`;
+
+      try {
+        const rc = new AbortController();
+        const rt = setTimeout(() => rc.abort(), 10000);
+        const rr = await fetch("https://api.anthropic.com/v1/messages", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "x-api-key": apiKey, "anthropic-version": "2023-06-01" },
+          body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: 300, system: "Radiant Valorant koçu. Her cümlede pozisyon + düşman + aksiyon ZORUNLU.", messages: [{ role: "user", content: refinePrompt }] }),
+          signal: rc.signal,
+        });
+        clearTimeout(rt);
+        if (rr.ok) {
+          const rd = await rr.json();
+          const refined = rd?.content?.[0]?.text?.trim();
+          if (refined && refined.length > 30) {
+            (report as Record<string, unknown>)[fs.weakest] = refined.slice(0, 600);
+            console.log(`[Aimlo AI] Report field refined: ${fs.weakest}`);
+          }
+        }
+      } catch { /* refinement failed — keep original */ }
+    }
 
     return NextResponse.json(report);
   } catch (err) {
