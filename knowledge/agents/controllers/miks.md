@@ -58,7 +58,10 @@ Miks is the newest addition to the controller roster, bringing a distinct approa
 
 ## 7. What To Tell The Player
 
-**When performing well**: "Your fundamentals are translating well to Miks. You are getting smokes out on time and finding unique angles with his kit. Keep building on that foundation."
+**When performing well**:
+Pattern: You are delivering smokes within 2 seconds of execute calls, using Miks' unique area-control tools to deny at least one position that other controllers cannot reach, and communicating every ability deployment to your team.
+Why it works: Fast smoke timing denies the defender reaction window — the 2-second threshold is the maximum before defenders can reposition to off-angles. Miks' unique denial tools cover geometry that standard smokes miss, which means defenders who have memorized how to play around Omen or Brimstone smokes encounter an unfamiliar denial shape they have not practiced against.
+How to repeat: Step 1: Pre-select smoke targets during buy phase so execution is instant on the call. Step 2: After smokes land, deploy Miks' unique area-control ability at the position where defenders typically dodge standard smokes. Step 3: Call out every ability placement to teammates so they know which angles are denied. Between rounds, identify one setup per site that only Miks enables and rotate it into your plan.
 
 **When struggling**: "Go back to basics. Forget the fancy Miks-specific tech for now. Smoke the right spots, deny the right chokes, and stay alive. The unique plays come after the fundamentals are solid."
 

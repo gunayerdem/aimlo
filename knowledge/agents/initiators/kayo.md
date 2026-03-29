@@ -56,7 +56,10 @@ KAY/O is the suppression-based initiator who shuts down enemy abilities to creat
 
 ## 7. What To Tell The Player
 
-**When performing well**: "Your suppress is hitting the right targets and your flash timing is giving the team clean entries. The callouts on knife hits are driving smart rotations."
+**When performing well**:
+Pattern: You are landing ZERO/POINT on confirmed defender positions 3-5 seconds into the round, calling out the suppress count immediately, and alternating between overhand and underhand FLASH/DRIVE each round.
+Why it works: Throwing the knife at 3-5 seconds catches defenders after they have settled into their hold positions but before they expect the execute. The suppress count callout ("knife hit two") tells the team exactly how many defenders are on that site, turning a guess into confirmed intel. Alternating flash types prevents enemies from building a turn-timing habit — overhand has a visible arc they can track, but underhand pops instantly around corners.
+How to repeat: Step 1: Throw ZERO/POINT at the most common defender anchor position 3-5 seconds into the round. Step 2: Immediately call the suppress count to the team. Step 3: On execute, throw FLASH/DRIVE using the opposite type from last round (overhand if last was underhand, and vice versa). Save FRAG/MENT for post-plant denial on the default defuse position.
 
 **When struggling**: "Your knife is missing. Learn where enemies hold on each site and throw the knife to those positions. A knife that hits zero is not just no value -- it is negative value because it tells the enemy you are pushing."
 

@@ -56,7 +56,10 @@ Astra is the macro-strategic controller who commands the entire map from the ast
 
 ## 7. What To Tell The Player
 
-**When performing well**: "Your star pre-placement is reading the enemy correctly. The Gravity Well and Nova Pulse activations are disrupting their executes before they begin."
+**When performing well**:
+Pattern: You are pre-placing stars at enemy-favored choke points during buy phase, activating Gravity Well at doorways where enemies cannot escape the pull radius, and following up with Nova Pulse to concuss pulled enemies before your team peeks.
+Why it works: Gravity Well at a tight doorway catches enemies mid-push with no lateral space to escape the pull. The immediate Nova Pulse concuss on pulled targets leaves them unable to counterstrafe or aim for 2+ seconds — your team enters during that concuss window against opponents who cannot fight back. Pre-placing during buy phase means zero astral entries during live combat, keeping your body safe.
+How to repeat: Step 1: Place 3 stars for Nebula smokes and 2 stars at choke-point doorways during buy phase. Step 2: On execute, activate Nebula smokes first, then trigger Gravity Well at the choke where defenders anchor. Step 3: Immediately follow with Nova Pulse on the same star location. Recall unused stars between rounds and reposition based on the enemy's attack pattern from the previous round.
 
 **When struggling**: "Stop entering astral form mid-fight. Place your stars in the buy phase, trust your reads, and activate from the physical world. Your body is getting killed while you are in the sky."
 

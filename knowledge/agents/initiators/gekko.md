@@ -56,7 +56,10 @@ Gekko is the reclaim-based initiator whose creatures can be picked up and reused
 
 ## 7. What To Tell The Player
 
-**When performing well**: "Your reclaim discipline is generating double the utility of any other initiator. The Wingman plants are saving lives and the double-Dizzy rounds are overwhelming defenders."
+**When performing well**:
+Pattern: You are reclaiming creature globules after every deployment, using Dizzy from unexpected heights or through smokes, and sending Wingman to plant when the site has 1-2 defenders remaining.
+Why it works: Reclaiming every globule means you get Dizzy twice per round — that is two site-wide blinds compared to one from any other initiator. Dizzy through smokes or over walls cannot be pre-aimed because the creature's approach is hidden. Wingman plant removes the most dangerous moment in a round (the exposed planter) by letting a creature absorb the risk while your team holds crossfires.
+How to repeat: Step 1: Send Dizzy from behind a smoke or over a wall, then immediately push to where the globule will land. Step 2: Reclaim the globule and hold it for a second Dizzy later in the round. Step 3: Once the site is taken with 1-2 defenders remaining, send Wingman to plant while your team covers. Place Mosh on the spike after plant to deny the first defuse attempt. Prioritize reclaim positioning in every post-fight movement.
 
 **When struggling**: "You are leaving globules on the ground. Every expired globule is a wasted ability next round. Make reclaim your first instinct after every creature use -- even if it means taking a slightly worse position."
 

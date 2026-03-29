@@ -55,7 +55,10 @@ Sage occupies a unique space among sentinels — she is the only agent whose pri
 
 ## 7. What To Tell The Player
 
-**Performing well**: "Your healing priorities and wall placements are creating consistent round advantages. Keep making smart res decisions — a skipped res is better than a double death."
+**Performing well**:
+Pattern: You are healing the teammate who is about to take the next fight rather than whoever took damage most recently, placing Barrier Orb at diagonal angles that block sightlines rather than perpendicular walls that are easily boosted over, and only using Resurrection when you have wall cover or teammate protection for the animation.
+Why it works: Prioritizing the next fighter means your team always enters duels at maximum HP advantage — healing a lurker in spawn provides zero value compared to healing the entry fragger about to swing. Diagonal walls force enemies to reposition entirely rather than simply boosting over, buying 15-20 seconds of delay. Wall-covered Resurrection prevents the double-death scenario where both Sage and the resurrected teammate are killed during the animation.
+How to repeat: Step 1: Before using Healing Orb, ask "who is taking the next fight?" and heal that player. Step 2: Place Barrier Orb diagonally across chokepoints so enemies cannot see over or boost past it. Step 3: Before any Resurrection, place a wall between the body and the nearest enemy sightline. If you cannot wall off the body, skip the res and play the round with the numbers advantage instead.
 
 **Struggling**: "Your heal timing and wall placement need work. Focus on healing the player about to take the next fight, and place walls that actually change the geometry of the fight — not just delay it by 3 seconds."
 

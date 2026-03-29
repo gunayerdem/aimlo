@@ -52,7 +52,9 @@ FIX: Shift grenade usage earlier in the round to create space, not later to farm
 
 ## 7. What To Tell The Player
 ### When performing well
-"Your utility sequencing is creating clean entries for the team. Keep chaining Boombot into grenade into satchel."
+Pattern: You are executing the full Boombot-into-Paint Shells-into-Blast Pack sequence before entering site, with each ability feeding the next.
+Why it works: Boombot forces defenders to reveal their position or reposition. Paint Shells then lands on the revealed spot, forcing them further off-angle. By the time your Blast Pack entry arrives, the defender is displaced and off-crosshair, giving you a free duel.
+How to repeat: Step 1: Send Boombot toward the most common hold angle. Step 2: Throw Paint Shells at whatever position Boombot locked onto or flushed. Step 3: Blast Pack in once the grenade detonates. Maintain this sequence every execute round, varying which angle Boombot scouts first.
 ### When struggling
 "Stop satcheling into the unknown. Send the Boombot first, let it do its job, then follow the information it gives you."
 ### When being predictable

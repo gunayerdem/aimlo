@@ -59,7 +59,10 @@ Tejo is the newest initiator on the roster, applying initiator fundamentals -- i
 
 ## 7. What To Tell The Player
 
-**When performing well**: "Your initiator fundamentals are carrying over well to Tejo. You are gathering info, displacing enemies, and supporting the team's entries. Keep refining what makes Tejo unique from other initiators."
+**When performing well**:
+Pattern: You are using Tejo's scouting tools to confirm defender positions before every execute, following up with his displacement ability to force at least one defender off their anchor hold, and communicating every reveal to the team within 1 second.
+Why it works: Pre-execute scouting removes the guessing game for your team, turning blind site takes into informed pushes. The displacement forces the anchoring defender to abandon a prepared crosshair position and re-establish aim from a worse angle — during that 1-2 second repositioning window, your duelist enters against a defender who is mid-movement. Instant callouts let teammates pre-aim the revealed position before the fight even begins.
+How to repeat: Step 1: Deploy scouting ability toward the site's primary hold position before the execute call. Step 2: Call out the revealed defender's position to the team immediately. Step 3: Fire displacement ability at the confirmed position to force them off their angle, then call "pushing now" so the team enters during the repositioning window. Vary which site you scout first each round so enemies cannot predict your team's target.
 
 **When struggling**: "Go back to initiator basics. Every round, your job is: give the team info before the fight, displace at least one enemy during the execute, and support the entry. Do that with Tejo's kit, and the specific mechanics will develop."
 

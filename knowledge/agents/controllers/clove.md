@@ -56,7 +56,10 @@ Clove is the aggressive, self-sustaining controller who breaks the mold of the t
 
 ## 7. What To Tell The Player
 
-**When performing well**: "Your aggression is creating space and your smokes are still getting placed. The post-death smokes are keeping the team alive after your entries. Strong balance."
+**When performing well**:
+Pattern: You are placing smokes for the team before taking your entry duel, using Meddle to decay enemies 1-2 seconds before your teammates peek, and activating Pick-Me-Up after kills to sustain through the next fight with overheal.
+Why it works: Smoking before entry-fragging ensures your team has vision denial even if you die — the controller job is done regardless of the duel outcome. Meddle timed 1-2 seconds before teammates peek means defenders are decayed (taking more damage) at the exact moment the gunfight begins. Pick-Me-Up overheal lets you take the second duel with 50+ extra HP that decays over time, so fighting immediately while the overheal is at maximum is the window of peak value.
+How to repeat: Step 1: Place smokes on execute call before committing to any fight. Step 2: Throw Meddle at the contested angle, then call for teammates to peek as the decay lands. Step 3: After a kill, activate Pick-Me-Up and immediately take the next fight while overheal is highest. If you die, use the post-death smoke window to place a smoke your team still needs — do not waste it on uncontested angles.
 
 **When struggling**: "You are dying before getting smokes out. Smokes first, fight second. Clove is aggressive but still a controller -- the team needs your utility before your frags."
 

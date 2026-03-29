@@ -56,7 +56,10 @@ Harbor is the fluid controller who uses water-based barriers to create dynamic, 
 
 ## 7. What To Tell The Player
 
-**When performing well**: "Your team is pushing behind your utility and taking sites cleanly. The High Tide bends are denying the right angles. Keep the aggression up."
+**When performing well**:
+Pattern: You are bending High Tide around corners to deny 3+ defender angles simultaneously, casting Cascade only when your team is within trade distance, and placing Cove on spike for protected plants.
+Why it works: A curved High Tide covers angles that a straight wall would miss — the bend denies both the close hold and the deep-site angle in a single cast, forcing defenders to reposition or fight blind. Cascade timed with team proximity means they push through the moving shield together, arriving on site as a group rather than staggered. Cove on spike gives the planter a destructible bubble that buys 2-3 seconds of immunity from crossfire.
+How to repeat: Step 1: Communicate "pushing with Cascade" and confirm teammates are within 5 meters before casting. Step 2: Deploy High Tide with a deliberate bend through the site's corner to cut off both the close and deep hold positions. Step 3: Once on site, drop Cove on the plant spot before the spike goes down. Use Reckoning on wide-area sites where enemies have multiple hiding spots to flush them into the open.
 
 **When struggling**: "Your Cascade is going out without the team behind it. Communicate the push. If the team is not following, hold Cascade until they are ready to commit."
 

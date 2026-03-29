@@ -62,7 +62,10 @@ Vyse is a trap-based sentinel who controls space through metallic constructs tha
 
 ## 7. What To Tell The Player
 
-**Performing well**: "Your trap placement is forcing enemies to fight on your terms. Keep spreading your constructs across multiple angles to maximize the threat web."
+**Performing well**:
+Pattern: You are spreading traps across 2-3 entry angles rather than stacking them on one path, placing weapon disruption zones at the first chokepoint enemies must pass through, and saving at least one trap for post-plant placement near the spike.
+Why it works: Distributed traps mean a single Sova dart or Fade haunt cannot reveal and neutralize your entire setup — enemies must clear each angle individually, spending 2-3 abilities instead of one. Weapon disruption at the entry chokepoint forces enemies to fight with malfunctioning weapons at the exact moment they commit, which is the moment they are most vulnerable. Post-plant traps near the spike force defusers to clear constructs before touching the spike, adding 3-5 seconds of forced delay.
+How to repeat: Step 1: Place one trap at each of the site's 2-3 entry paths rather than clustering them. Step 2: Deploy weapon disruption zone at the primary chokepoint where enemies must pass to execute. Step 3: On attack, save one trap and place it adjacent to the spike before planting. Use wall tech in tight corridors where there is no alternate sightline for enemies to bypass it.
 
 **Struggling**: "Your traps are getting cleared too easily or placed in low-traffic areas. Watch which paths enemies actually use and concentrate your utility there. Deploy everything before you take fights."
 

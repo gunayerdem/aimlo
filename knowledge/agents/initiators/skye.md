@@ -56,7 +56,10 @@ Skye is the versatile initiator who combines flashes, healing, and scouting into
 
 ## 7. What To Tell The Player
 
-**When performing well**: "Your flash timing is getting the team clean entries and the healing is keeping HP economy strong. The flexibility is showing -- you are adapting utility to what the round needs."
+**When performing well**:
+Pattern: You are popping Guiding Light 0.5 seconds before your teammate's peek, listening for the hit audio cue, and using Regrowth between fights to restore team HP before the next engagement.
+Why it works: The 0.5-second lead time means the blind is active at the exact moment your teammate swings — any earlier and the blind fades, any later and the defender fires first. The hit audio cue from Guiding Light confirms an enemy is blinded, giving the team a guaranteed window to peek. Regrowth between fights accumulates a 20-40 HP advantage across the team over multiple engagements, which compounds into winning duels that would otherwise be coin flips.
+How to repeat: Step 1: Pop Guiding Light above or to the side of the entry angle (never in the entry path) 0.5 seconds before the teammate peeks. Step 2: Listen for the hit cue and immediately call "flashed" so the team swings. Step 3: After the fight, group behind cover and Regrowth anyone below 100 HP before taking the next angle. Send Trailblazer from varied paths each round to prevent pre-aim destruction.
 
 **When struggling**: "You are team-flashing. Call every bird before popping it and wait until your teammate is ready to peek. The flash exists for them, not for you."
 

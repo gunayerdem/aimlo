@@ -58,7 +58,10 @@ Veto is the information-denial sentinel. While Cypher gathers intelligence and K
 
 ## 7. What To Tell The Player
 
-**Performing well**: "You are making the enemy play blind. Every wasted recon attempt is utility they cannot use during the actual execute. Keep denying and communicating to your team what you have disrupted."
+**Performing well**:
+Pattern: You are holding your interference abilities until the enemy deploys their recon tool (Sova dart, Fade haunt, drone), then activating disruption at the moment the scan begins, and calling out every successful denial to your team within 1 second.
+Why it works: Timing interference to the moment of enemy recon deployment wastes their cooldown entirely — they have spent an ability and received zero information in return. This forces them to either execute blind or invest a second recon ability, depleting their utility budget before the fight even starts. Your callout ("their dart is jammed") tells teammates the enemy is operating without intel, which means your team can hold aggressive positions that would normally be punished by a successful scan.
+How to repeat: Step 1: Listen for the audio cue of enemy recon deployment (dart bounce, drone buzz, haunt throw). Step 2: Activate interference the moment you hear it — not before. Step 3: Immediately call out "no info from that [ability name]" so your team knows the enemy is blind. Against teams that rush without recon, switch to standard sentinel positioning and gunplay — save interference for post-plant or retake situations where the enemy needs info to push.
 
 **Struggling**: "Your interference timing is off — you are either too early or too late. Hold your denial until you see or hear the enemy recon ability activate. If they are rushing without recon, focus on positioning and gunplay instead."
 

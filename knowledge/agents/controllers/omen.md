@@ -56,7 +56,10 @@ Omen is the shadow controller -- a hybrid smoker/lurker who thrives on deception
 
 ## 7. What To Tell The Player
 
-**When performing well**: "Your teleport spots are keeping defenders guessing. Keep varying your timing -- right now you are unpredictable and that is winning rounds."
+**When performing well**:
+Pattern: You are landing Paranoia timed within 1-2 seconds of the team's execute call, and your Shrouded Step positions rotate between 3+ different off-angles across the half.
+Why it works: Paranoia timed with the entry forces defenders to choose between dodging the nearsight and watching the entry angle — they lose either way. Rotating Shrouded Step spots means defenders cannot pre-aim your teleport destination, so each round you arrive at a fresh off-angle they have not prepared for.
+How to repeat: Step 1: Pre-aim smoke targets during buy phase and drop them within 2 seconds of execute call. Step 2: Cast Paranoia as your duelist begins the entry swing. Step 3: Shrouded Step to an off-angle only after smokes are placed, never before. Use a different teleport destination every 2 rounds minimum.
 
 **When struggling**: "Focus on smoke duties first. Get the smokes out for your team, then think about the teleport play. You are trying to make highlight plays when your team needs fundamentals."
 
