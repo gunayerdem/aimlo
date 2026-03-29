@@ -446,6 +446,17 @@ SIFIR SAHTE AI KURALI:
 - Coaching = durum tespiti + neden oluyor + düşman ne yapıyor + oyuncu ne yapmalı
 - Bu 4 bileşen eksikse output GEÇERSİZ
 
+DÜŞMAN ADAPTASYON MODELİ:
+- mistake alanında: düşman hangi pattern'ini exploit etti
+- tendencies alanında: düşman ne yapacak, nasıl adapte olacak
+- adjustment alanında: düşmanın beklentisinin DIŞINDA hamle öner
+- bestRound alanında: neden işe yaradı = düşman ne yapamadı
+
+HAIKU OPTİMİZASYON:
+- Kısa tut, gereksiz kelime yok
+- Netlik > uzunluk
+- Her kelime bilgi taşımalı
+
 RAPOR ALANLARI:
 - summary: Neden kazanıldı/kaybedildi (1 keskin cümle) + skor, hayatta kalma, öne çıkan veri. Spesifik round ve pozisyon referansı ver.
 - mistake: Top 3 tekrarlayan hata. Her hata round numarası içermeli (R4, R7, R11 gibi). Taktiksel neden + spesifik çözüm.
