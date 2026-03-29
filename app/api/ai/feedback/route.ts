@@ -810,22 +810,35 @@ ${patternContext}`;
         const fieldLabel = fs.weakest === "deathAnalysis" ? "ölüm analizi"
           : fs.weakest === "nextRoundPlan" ? "sonraki round planı"
           : "düşman pattern analizi";
-        const repairPrompt = `Aşağıdaki ${fieldLabel} çok genel. Daha spesifik yaz:\n- Pozisyon ismi ekle\n- Düşman davranışı modelle\n- Somut aksiyon ver\n\nMevcut: "${fs.weakest === "deathAnalysis" ? result.deathAnalysis : fs.weakest === "nextRoundPlan" ? result.nextRoundPlan : result.enemyPatterns.join("; ")}"\n\nSadece düzeltilmiş metni döndür, JSON yok.`;
+        const currentText = fs.weakest === "deathAnalysis" ? result.deathAnalysis : fs.weakest === "nextRoundPlan" ? result.nextRoundPlan : result.enemyPatterns.join("; ");
+        const repairPrompt = `Bu ${fieldLabel} ZAYIF. Yeniden yaz. ZORUNLU kurallar:
+1. Spesifik pozisyon ismi OLMALI (A Short, B Main, Mid vb.)
+2. Düşman davranışı OLMALI: düşman ne yapıyor, ne exploit ediyor
+3. Somut aksiyon OLMALI: oyuncu bir sonraki round'da ne yapacak
+4. "Geliştir", "dikkatli ol", "daha iyi" YASAK
+Harita: ${setup.map}. Agent: ${setup.agent}.
+Mevcut zayıf metin: "${currentText}"
+Sadece düzeltilmiş metni döndür.`;
 
         try {
           const rc = new AbortController();
-          const rt = setTimeout(() => rc.abort(), 8000); // 8s tight timeout
+          const rt = setTimeout(() => rc.abort(), 8000);
           const rr = await fetch("https://api.anthropic.com/v1/messages", {
             method: "POST",
             headers: { "Content-Type": "application/json", "x-api-key": apiKey, "anthropic-version": "2023-06-01" },
-            body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: 200, system: "Kısa, keskin, veri destekli Valorant coaching yaz. Generic cümle YASAK.", messages: [{ role: "user", content: repairPrompt }] }),
+            body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: 200, system: "Sen Radiant Valorant koçusun. Her cümlede pozisyon + düşman davranışı + aksiyon ZORUNLU. Generic = FAIL.", messages: [{ role: "user", content: repairPrompt }] }),
             signal: rc.signal,
           });
           clearTimeout(rt);
           if (rr.ok) {
             const rd = await rr.json();
             const repaired = rd?.content?.[0]?.text?.trim();
-            if (repaired && repaired.length > 20) {
+            // Validate repair is actually better — must have position/enemy keywords
+            const rLower = (repaired || "").toLowerCase();
+            const posWords = ["a short", "a long", "a main", "b short", "b long", "b main", "mid", "heaven", "hell", "market", "garage", "hookah", "catwalk", "cubby", "elbow", "lobby"];
+            const hasPosition = posWords.some(p => rLower.includes(p));
+            const hasEnemy = ["düşman", "enemy", "rakip", "pre-aim", "exploit", "okuy", "bekliy"].some(k => rLower.includes(k));
+            if (repaired && repaired.length > 30 && (hasPosition || hasEnemy)) {
               if (fs.weakest === "deathAnalysis") result.deathAnalysis = repaired.slice(0, 500);
               else if (fs.weakest === "nextRoundPlan") result.nextRoundPlan = repaired.slice(0, 500);
               else result.enemyPatterns = [repaired.slice(0, 200), ...result.enemyPatterns.slice(1)];
