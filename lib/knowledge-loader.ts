@@ -99,17 +99,87 @@ function getAgentRoleFile(agent: string): string | null {
   return match ? `agents/${match[1]}.md` : null;
 }
 
+/**
+ * Resolve the best knowledge file for a specific agent.
+ * Tries per-agent file first, falls back to role file.
+ *   e.g. agents/duelists/jett.md → agents/duelists.md
+ */
+export function getAgentFile(agentName: string): string | null {
+  // Resolve role via case-insensitive lookup
+  const role = resolveAgentRole(agentName);
+  if (!role) return null;
+
+  const agentSlug = agentName.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const perAgentPath = `agents/${role}/${agentSlug}.md`;
+  const perAgentFull = path.join(KNOWLEDGE_DIR, perAgentPath);
+
+  if (fs.existsSync(perAgentFull)) {
+    return perAgentPath;
+  }
+  // Fallback to role file
+  return `agents/${role}.md`;
+}
+
+/** Resolve an agent name to its role string (case-insensitive). */
+function resolveAgentRole(agentName: string): string | null {
+  if (AGENT_ROLE_MAP[agentName]) return AGENT_ROLE_MAP[agentName];
+  const match = Object.entries(AGENT_ROLE_MAP).find(
+    ([key]) => key.toLowerCase() === agentName.toLowerCase()
+  );
+  return match ? match[1] : null;
+}
+
+/**
+ * Load up to `limit` matchup files relevant to the player agent vs enemy agents.
+ * Tries specific agent matchups first, then falls back to role-vs-role.
+ */
+function loadMatchupFiles(
+  playerAgent: string,
+  enemyAgents: string[],
+  limit: number = 2
+): string[] {
+  const results: string[] = [];
+  const playerRole = resolveAgentRole(playerAgent);
+  const playerSlug = playerAgent.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+  for (const enemy of enemyAgents) {
+    if (results.length >= limit) break;
+
+    const enemySlug = enemy.toLowerCase().replace(/[^a-z0-9]/g, "");
+    const enemyRole = resolveAgentRole(enemy);
+
+    // Try specific agent vs agent matchup
+    const specificPath = `matchups/${playerSlug}_vs_${enemySlug}.md`;
+    const specificContent = loadFile(specificPath);
+    if (specificContent) {
+      results.push(specificContent);
+      continue;
+    }
+
+    // Try role vs role matchup
+    if (playerRole && enemyRole) {
+      const rolePath = `matchups/${playerRole}_vs_${enemyRole}.md`;
+      const roleContent = loadFile(rolePath);
+      if (roleContent) {
+        results.push(roleContent);
+      }
+    }
+  }
+
+  return results;
+}
+
 // ── Main loader function ──────────────────────────────────
 
 /**
  * Load concatenated knowledge based on task type and context.
  *
  * Task loading rules:
- *   insight          → core coaching + rank
- *   feedback         → core coaching + map + agent + rank
- *   report           → core coaching + map + agent + rank + pro-analysis + radiant-tips
- *   critical-mistake → core coaching + map + rank
- *   growth-plan      → core coaching + rank + agent
+ *   insight          → core + rank + per-agent file
+ *   feedback         → core + rank + map + per-agent + enemy agents + up to 2 matchups
+ *   report           → core + rank + map + per-agent + enemy agents + up to 2 matchups + pro-analysis + radiant-tips
+ *   critical-mistake → core + rank + map + per-agent
+ *   growth-plan      → core + rank + per-agent
  */
 export function loadKnowledge(task: TaskType, options: LoadOptions = {}): string {
   const { map, agent, rank, enemyAgents } = options;
@@ -131,25 +201,33 @@ export function loadKnowledge(task: TaskType, options: LoadOptions = {}): string
     if (mapContent) sections.push(mapContent);
   }
 
-  // Agent knowledge — included for feedback, report, growth-plan
-  if (agent && (task === "feedback" || task === "report" || task === "growth-plan")) {
-    const agentFile = getAgentRoleFile(agent);
+  // Agent knowledge — included for insight, feedback, report, critical-mistake, growth-plan
+  if (agent) {
+    const agentFile = getAgentFile(agent);
     if (agentFile) {
       const agentContent = loadFile(agentFile);
       if (agentContent) sections.push(agentContent);
     }
   }
 
-  // Enemy agent knowledge — included for feedback and report when provided
+  // Enemy agent knowledge — included for feedback and report (per-agent files)
   if (enemyAgents?.length && (task === "feedback" || task === "report")) {
-    const loadedRoles = new Set<string>();
+    const loadedFiles = new Set<string>();
     for (const enemyAgent of enemyAgents) {
-      const roleFile = getAgentRoleFile(enemyAgent);
-      if (roleFile && !loadedRoles.has(roleFile)) {
-        loadedRoles.add(roleFile);
-        const content = loadFile(roleFile);
+      const enemyFile = getAgentFile(enemyAgent);
+      if (enemyFile && !loadedFiles.has(enemyFile)) {
+        loadedFiles.add(enemyFile);
+        const content = loadFile(enemyFile);
         if (content) sections.push(content);
       }
+    }
+  }
+
+  // Matchup knowledge — included for feedback and report
+  if (agent && enemyAgents?.length && (task === "feedback" || task === "report")) {
+    const matchupContents = loadMatchupFiles(agent, enemyAgents, 2);
+    for (const mc of matchupContents) {
+      sections.push(mc);
     }
   }
 
