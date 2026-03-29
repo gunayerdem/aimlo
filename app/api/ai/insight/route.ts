@@ -68,9 +68,11 @@ const TONE_PROMPTS: Record<string, string> = {
 - Doğrudan konuş, yuvarlama
 - Hata varsa net söyle, yumuşatma
 - Övgü sadece gerçekten kazanıldıysa
-- "Aynı hatayı tekrar ediyorsun" gibi baskılı dil kullan
 - Kısa cümleler, fluff yok
-- Koç gibi konuş, arkadaş gibi değil`,
+- Koç gibi konuş, arkadaş gibi değil
+- Sert ton SADECE tekrar eden hatalarda ve ciddi sorunlarda kullan
+- Her output'ta aynı sert kalıbı tekrarlama — cümle yapısını çeşitle
+- "bu kabul edilemez" gibi kalıpları her çıktıda KULLANMA, sadece gerçekten kritik ve tekrar eden pattern'lerde kullan`,
   balanced: `\n\nTON: DENGELİ KOÇ
 - Net ama saygılı
 - Hataları belirt, açıkla, yönlendir
@@ -92,12 +94,10 @@ DOĞRU: "utility kullanmadan entry atıyorsun", "aynı setup'a tekrar giriyorsun
 
 // Cross-match personalization instruction
 const PERSONALIZATION_RULE = `\n\nKİŞİSELLEŞTİRME KURALI:
-Her output'ta en az 1 cross-match referansı olmalı.
-Örnekler:
-- "Son maçlarda A Short sorunu azalmış ama B Main'de yeni bir pattern oluşmuş"
-- "Trend verilerine göre defense tarafın iyileşiyor"
+Eğer context'te birden fazla maç verisi varsa, cross-match referansı yap:
+- "Son maçlarda A Short sorunu azalmış ama B Main'de yeni pattern oluşmuş"
 - "Bu pattern 3+ maçta tekrar ediyor — kalıcı hale gelmiş"
-Eğer veri yetersizse: "İlk maçlar — henüz cross-match pattern çıkarmak için erken"`;
+GÜVENLİK: Sadece veride GERÇEKTEN OLAN pattern'leri referans et. Uydurma trend veya geçmiş maç referansı YAPMA. Veri yoksa veya yetersizse geçmiş maç hakkında yorum yapma — sadece mevcut veriyi analiz et.`;
 
 function buildSystemPrompt(
   confidenceLevel: string,
