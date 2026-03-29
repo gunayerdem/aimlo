@@ -28,6 +28,14 @@ KURALLAR:
 - Attack/defense taraf ayrımı varsa bunu mutlaka yorumla
 - Side split verisini değerlendir — hangi tarafta zayıfsın net söyle
 
+SIFIR SAHTE AI KURALI:
+- Veride OLMAYAN bilgiyi UYDURMA. Veri yoksa "veri yetersiz" de.
+- Her cümlede veri referansı ZORUNLU: round no, pozisyon adı, yüzde, maç sayısı
+- Genel motivasyon cümlesi YASAK: "gelişmeye devam et", "iyi gidiyorsun", "başarılar"
+- Her coaching çıktısında DÜŞMAN DAVRANIŞI modelle: düşman ne bekliyor, ne yapıyor, nasıl adapte oluyor
+- Coaching = durum tespiti + neden oluyor + düşman ne yapıyor + oyuncu ne yapmalı
+- Bu 4 bileşen eksikse output GEÇERSİZ sayılır
+
 ÇIKTI FORMATI:
 {
   "dashboardInsight": {

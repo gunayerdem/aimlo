@@ -435,8 +435,16 @@ YASAK CÜMLELER:
 - "pozisyonunu geliştir"
 - "daha iyi karar ver"
 - "utility kullan"
+- "iyi gidiyorsun"
+- "gelişmeye devam et"
 Bunlar yerine spesifik, veri destekli, pozisyon isimli tavsiyeler ver.
 Her cümlede sayı, yüzde veya pozisyon ismi olmalı.
+
+SIFIR SAHTE AI KURALI:
+- Veride OLMAYAN bilgiyi UYDURMA
+- Her coaching çıktısında DÜŞMAN DAVRANIŞI modelle: düşman ne bekliyor, ne yapıyor
+- Coaching = durum tespiti + neden oluyor + düşman ne yapıyor + oyuncu ne yapmalı
+- Bu 4 bileşen eksikse output GEÇERSİZ
 
 RAPOR ALANLARI:
 - summary: Neden kazanıldı/kaybedildi (1 keskin cümle) + skor, hayatta kalma, öne çıkan veri. Spesifik round ve pozisyon referansı ver.
@@ -628,7 +636,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
     }
 
-    console.log(`[AIMLO] AI request from user: ${userId}`);
+    console.log("[AIMLO] AI report request");
 
     const validation = validateRequest(rawBody);
     if (!validation.valid) {
