@@ -56,10 +56,14 @@ Sova is the precision info-gatherer who turns map knowledge into a science. His 
 
 ## 7. What To Tell The Player
 
-**When performing well**:
-Pattern: You are landing Recon Bolts at advanced lineup positions that require enemies to look away from the entry path to destroy, and saving both Shock Darts for post-plant lineups on the default defuse spot.
-Why it works: A Recon Bolt placed high on a ceiling or behind cover forces defenders to choose between shooting the dart and watching your team's entry angle — they cannot do both. This creates a 1-2 second window where your team enters against distracted defenders. Shock Darts on default defuse deny 4+ seconds each, totaling 8+ seconds of defuse denial from a safe position the enemy cannot punish.
-How to repeat: Step 1: Fire Recon Bolt from a learned lineup that lands where enemies must turn away from the team's entry to destroy it. Step 2: Follow with Owl Drone for 4-5 seconds maximum to tag remaining positions. Step 3: After plant, move to your Shock Dart lineup spot and fire the first dart when you hear defuse audio. Hold the second dart for the retry attempt. Learn 2+ alternate dart positions per site so enemies cannot predict and pre-aim your scan.
+### When performing well
+**Player Action:** You land Recon Bolts at ceiling/wall positions that force defenders to turn away from the entry path to destroy them, and save both Shock Darts for post-plant lineup denial on default defuse.
+**Enemy Perception:** Defenders see the Recon Bolt and immediately calculate whether they can shoot it without exposing themselves to the entry. They treat the dart as a higher-priority threat than your teammates — their attention shifts upward toward the dart location.
+**Enemy Reaction:** They are forced to either turn and shoot the dart (taking their crosshair off the entry angle for 1-2 seconds) or ignore it and get tagged (revealing their exact position to your entire team). Neither option is acceptable — both compromise their defensive hold.
+**Exploit Window:** The 1-2 second window where defenders look up to destroy the Recon Bolt is a guaranteed entry window for your team. If they ignore it, the reveal tag gives your team pre-aimed crosshair positions for the next 3-4 seconds. Post-plant, two Shock Darts deny 8+ seconds of defuse time from a position the enemy cannot punish.
+**Repeat Strategy:** Round 1: standard Recon Bolt lineup for the most common hold angle. Round 2: alternate lineup to scan a different area of the site. Round 3: fire Owl Drone instead of Recon Bolt to catch defenders who have learned to dodge the dart. Always save Shock Darts for post-plant — first dart on defuse audio, second dart on retry.
+**Enemy Adaptation:** After 4-5 rounds, defenders will pre-aim Recon Bolt landing spots to destroy it instantly, play positions outside the dart's scan radius, or push before the dart lands to catch you mid-lineup.
+**Counter-Adaptation:** When they pre-aim the dart: use a different lineup that lands the dart in an unexpected position (you should have 2-3 per site). When they dodge scan radius: the dart is still herding them into predictable positions — call those positions to your team. When they push early: skip the lineup and use Owl Drone reactively to tag the rushing enemies, then call their positions for your team to hold.
 
 **When struggling**: "Your darts are landing in low-value positions. Go back to custom games and refine your lineups. A Sova without lineups is bringing a toolkit without the tools."
 

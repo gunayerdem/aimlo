@@ -56,10 +56,14 @@ Gekko is the reclaim-based initiator whose creatures can be picked up and reused
 
 ## 7. What To Tell The Player
 
-**When performing well**:
-Pattern: You are reclaiming creature globules after every deployment, using Dizzy from unexpected heights or through smokes, and sending Wingman to plant when the site has 1-2 defenders remaining.
-Why it works: Reclaiming every globule means you get Dizzy twice per round — that is two site-wide blinds compared to one from any other initiator. Dizzy through smokes or over walls cannot be pre-aimed because the creature's approach is hidden. Wingman plant removes the most dangerous moment in a round (the exposed planter) by letting a creature absorb the risk while your team holds crossfires.
-How to repeat: Step 1: Send Dizzy from behind a smoke or over a wall, then immediately push to where the globule will land. Step 2: Reclaim the globule and hold it for a second Dizzy later in the round. Step 3: Once the site is taken with 1-2 defenders remaining, send Wingman to plant while your team covers. Place Mosh on the spike after plant to deny the first defuse attempt. Prioritize reclaim positioning in every post-fight movement.
+### When performing well
+**Player Action:** You reclaim every creature globule after deployment, use Dizzy from behind smokes or over walls for hidden approach angles, and send Wingman to plant while your team holds crossfires.
+**Enemy Perception:** Defenders expect one Dizzy blind per round (like other initiator flashes). When the second Dizzy arrives mid-round from a reclaimed globule, they believe it is a different player's ability and are caught unprepared. They underestimate Gekko's sustained utility output.
+**Enemy Reaction:** They are forced to deal with double the blind frequency — two Dizzy uses per round means two windows where they cannot see. Wingman planting forces them to either shoot the creature (revealing their position and wasting ammo on a non-player target) or let the plant go through uncontested.
+**Exploit Window:** The second Dizzy (from the reclaimed globule) arrives when defenders think all initiator flashes have been used. This unexpected blind creates a 1-2 second window where defenders have no flash counter prepared. Wingman plant removes the 4-second plant vulnerability window entirely — your team holds crossfires instead of one player being defenseless.
+**Repeat Strategy:** Fight 1: Dizzy from smoke or wall, push to globule, reclaim. Fight 2: second Dizzy from a different angle. Site taken: Wingman plants while team covers. Post-plant: Mosh on spike to deny first defuse. Prioritize reclaim positioning after every fight — the globule pickup is worth taking a slightly worse post-fight position.
+**Enemy Adaptation:** After 3-5 rounds, defenders will pre-aim Dizzy approach angles, destroy Wingman before it reaches the spike, or push to deny globule reclaim by controlling the area where it drops.
+**Counter-Adaptation:** When they pre-aim Dizzy: send it from the opposite side or through a different smoke — the hidden approach is what makes it undodgeable. When they destroy Wingman: use Wingman as bait and peek while they shoot it (they are aiming at the ground, not at you). When they deny reclaim: send a teammate to secure the globule area first, or accept the single-use and save your positioning for a better gunfight instead.
 
 **When struggling**: "You are leaving globules on the ground. Every expired globule is a wasted ability next round. Make reclaim your first instinct after every creature use -- even if it means taking a slightly worse position."
 

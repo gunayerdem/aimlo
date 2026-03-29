@@ -55,10 +55,14 @@ Cypher is the intelligence backbone of any defensive setup. He does not hold sit
 
 ## 7. What To Tell The Player
 
-**Performing well**:
-Pattern: You are rotating your Trapwire placements between rounds — setup A for rounds 1-2, setup B for rounds 3-4 — and calling Spycam intel to your team before they peek any angle.
-Why it works: Attackers who memorize your wire placement from round 1 walk into a completely different setup on round 3, triggering a wire they did not expect. Your Spycam callouts before teammates peek give them a pre-aimed crosshair position — they swing with full knowledge of the enemy's exact location while the enemy does not know the peek is coming.
-How to repeat: Step 1: Prepare 3 distinct Trapwire setups per site and rotate between them every 2 rounds. Step 2: Place Spycam at the start of each round and call out enemy positions before your team takes any fight. Step 3: After Neural Theft, immediately relay all gathered positions. On attack, always place at least one Trapwire covering the flank path behind your team's push.
+### When performing well
+**Player Action:** You rotate Trapwire placements every 2 rounds between 3 distinct setups per site, and call Spycam intel to your team before they peek any angle.
+**Enemy Perception:** Attackers memorize your round 1 wire location and plan their next entry around it. When round 3 has a completely different placement, their mental map of "safe paths" is wrong — they walk into a wire they did not expect and had no plan to avoid.
+**Enemy Reaction:** They are forced to either slow down to check for new wire positions (costing 5-10 seconds of round time) or rush and trigger the unexpected wire (revealing position + taking concuss damage). Both outcomes degrade their execute speed and give your team time to rotate.
+**Exploit Window:** The 5-10 second slowdown when attackers become wire-paranoid shrinks their execute window. If they have 30 seconds of meaningful round time, your wire rotation just took 15-30% of it. Spycam callouts before peeks give your teammates pre-aimed crosshair positions that turn 50/50 duels into 80/20 advantages.
+**Repeat Strategy:** Setup A for rounds 1-2, Setup B for rounds 3-4, Setup C for rounds 5+. Always Spycam before your team swings — call the exact number and position. After Neural Theft, relay all gathered positions within 1 second. On attack, place at least one Trapwire covering the flank behind your team's push.
+**Enemy Adaptation:** After half-time or multiple wire triggers, attackers will send a drone, Fade haunt, or KAY/O knife to clear your setup before entering, or they will shoot common wire spots pre-emptively.
+**Counter-Adaptation:** When they start clearing with recon: place wires in unconventional heights or angles that drones and haunt trajectories miss. When they shoot common spots: use the sound cue of their shooting as free intel — they just told you where they are and which site they are hitting. The wire does not need to trigger to provide value if the destruction sound gives you the same information.
 
 **Struggling**: "Your utility is either too predictable or not generating usable intel. Focus on placing tripwires where they catch early aggression, not deep site. Communicate every trigger immediately."
 

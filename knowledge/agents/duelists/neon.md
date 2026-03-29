@@ -52,9 +52,13 @@ FIX: Drill the wall-sprint-slide sequence as muscle memory. Walls first, sprint 
 
 ## 7. What To Tell The Player
 ### When performing well
-Pattern: You are deploying Fast Lane walls before every sprint entry, and your slide-peek distance is landing you at the correct 10-15 meter engagement range.
-Why it works: Fast Lane splits the defenders' crossfire into isolated 1v1s, and your sprint-to-slide timing closes the distance before they can adjust. Defenders who are walled off cannot trade their teammate, turning a 1v2 into sequential 1v1s in your favor.
-How to repeat: Step 1: Cast Fast Lane to divide the site before sprinting. Step 2: Sprint through the corridor your walls create. Step 3: Begin slide at 10-15 meters from the first expected contact point. After site is taken, save Overdrive for retake scenarios where 2+ enemies are confirmed alive.
+**Player Action:** You deploy Fast Lane walls to split site before sprinting, and your slide-peek lands at 10-15 meter engagement range — close enough to punish but far enough to react.
+**Enemy Perception:** Defenders see the Fast Lane walls and know a sprint entry is coming within 1-2 seconds. They expect you to slide out from the end of the wall corridor on the same side every time.
+**Enemy Reaction:** They are forced to choose: hold the wall exit and risk being isolated from their teammate on the other side, or back off site entirely to regroup. Defenders behind the wall cannot trade because they have no line of sight through it.
+**Exploit Window:** The 2-3 seconds where Fast Lane splits two defenders into isolated 1v1s is your kill window. The defender you slide into has zero crossfire support — their teammate is wall-blocked and cannot refrag for the full wall duration.
+**Repeat Strategy:** Round 1: Fast Lane down the middle, sprint and slide left. Round 2: same wall angle, slide right instead. Round 3: skip Fast Lane entirely and sprint raw from an off-angle to punish defenders who anchor on wall timing. Save Overdrive for post-plant when 2+ enemies must retake.
+**Enemy Adaptation:** After 3-4 rounds, defenders will play behind the wall (waiting for it to drop), pre-aim the slide endpoint, or stack the side of site your wall does not cover.
+**Counter-Adaptation:** When they play behind the wall: throw Relay Bolt through the wall to stun them during the sprint. When they pre-aim the slide endpoint: stop the sprint early and wide-peek instead of sliding. When they stack the uncovered side: angle your Fast Lane differently to split the stack, or skip walls and sprint through a completely different entry path.
 ### When struggling
 "Slow down by one second. Use your walls before you sprint. Speed without setup is just feeding."
 ### When being predictable

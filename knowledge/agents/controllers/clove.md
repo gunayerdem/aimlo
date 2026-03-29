@@ -56,10 +56,14 @@ Clove is the aggressive, self-sustaining controller who breaks the mold of the t
 
 ## 7. What To Tell The Player
 
-**When performing well**:
-Pattern: You are placing smokes for the team before taking your entry duel, using Meddle to decay enemies 1-2 seconds before your teammates peek, and activating Pick-Me-Up after kills to sustain through the next fight with overheal.
-Why it works: Smoking before entry-fragging ensures your team has vision denial even if you die — the controller job is done regardless of the duel outcome. Meddle timed 1-2 seconds before teammates peek means defenders are decayed (taking more damage) at the exact moment the gunfight begins. Pick-Me-Up overheal lets you take the second duel with 50+ extra HP that decays over time, so fighting immediately while the overheal is at maximum is the window of peak value.
-How to repeat: Step 1: Place smokes on execute call before committing to any fight. Step 2: Throw Meddle at the contested angle, then call for teammates to peek as the decay lands. Step 3: After a kill, activate Pick-Me-Up and immediately take the next fight while overheal is highest. If you die, use the post-death smoke window to place a smoke your team still needs — do not waste it on uncontested angles.
+### When performing well
+**Player Action:** You place smokes before taking any duel, time Meddle 1-2 seconds before teammates peek so defenders are decayed on contact, and activate Pick-Me-Up immediately after kills to overheal into the next fight.
+**Enemy Perception:** Defenders see a controller who is also fragging. They track you as a smoke bot who occasionally gets kills, but the real danger is the Meddle timing — they are taking fights at reduced HP without realizing it was timed to their teammate's peek.
+**Enemy Reaction:** They are forced to either fight while decayed (losing duels they should win at equal HP) or retreat from the angle to wait out the decay (giving up their hold position for 3-4 seconds). After you kill their teammate, the Pick-Me-Up overheal makes trading you much harder — they need extra shots to down you.
+**Exploit Window:** The 3-4 second decay window from Meddle creates fights where your team has a 30-50 HP advantage on every duel. Your Pick-Me-Up overheal stacks an additional 50+ HP for the next fight — the combined HP swing across two consecutive duels is 80-100 HP in your team's favor.
+**Repeat Strategy:** Every round: smokes first, Meddle the contested angle 1-2 seconds before the team peeks, entry frag, Pick-Me-Up, next fight immediately while overheal is at maximum. If you die: use the post-death smoke ability on the angle your team still needs covered — not on an already-safe sightline.
+**Enemy Adaptation:** After 3-5 rounds, defenders will push before Meddle lands to catch you mid-smoke placement, pre-aim your entry angle to kill you before Pick-Me-Up activates, or double-peek to trade through the overheal.
+**Counter-Adaptation:** When they push early: place smokes from safer positions (further back) and let a teammate take the entry instead. When they pre-aim your angle: Meddle their position first and let a teammate swing while they are decayed — use yourself as a trade-up bait. When they double-peek: Meddle the second player before they swing so they fight decayed against your overheal.
 
 **When struggling**: "You are dying before getting smokes out. Smokes first, fight second. Clove is aggressive but still a controller -- the team needs your utility before your frags."
 

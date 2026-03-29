@@ -52,9 +52,13 @@ FIX: Use less obvious TP angles. Place TP behind objects where it is harder to s
 
 ## 7. What To Tell The Player
 ### When performing well
-Pattern: You are sending Fakeout toward one site while Gatecrash is pre-placed at the opposite site, and your lurk timing varies between early-round and mid-round across different rounds.
-Why it works: The clone footsteps pull defenders toward the fake while your TP is already positioned at the real execute site. Varying your lurk timing between rounds 1 and rounds 5+ means defenders cannot establish a pattern for when to expect your flank, so they must hold the angle permanently or risk getting punished.
-How to repeat: Step 1: Pre-place Gatecrash toward the actual target site during buy phase. Step 2: Send Fakeout toward the opposite site entrance. Step 3: Wait for enemy rotation audio or minimap movement, then TP and flash on arrival. Alternate between lurking at the 20-second mark and the 45-second mark across rounds.
+**Player Action:** You send Fakeout toward one site while Gatecrash is pre-placed at the opposite site, and your lurk timing varies between 20-second and 45-second marks across rounds.
+**Enemy Perception:** Defenders hear clone footsteps at site A and believe a push is coming. They rotate 1-2 players toward the sound. Simultaneously, they lose track of where YOU actually are because Yoru's audio profile is split between two locations.
+**Enemy Reaction:** They are forced to either rotate toward the clone (leaving the real site undermanned) or ignore it (risking that this time the footsteps are real). Either choice is a losing bet — responding to the clone costs a 5-8 second rotation that leaves gaps.
+**Exploit Window:** The 5-8 second window where 1-2 defenders are mid-rotation toward the Fakeout site leaves the real target site held by 1 fewer player. Your Gatecrash TP arrives during this rotation gap, and the Blindside flash on arrival catches the remaining defender off-guard.
+**Repeat Strategy:** Round 1: Fakeout A-site, TP to B-site at 25 seconds. Round 2: play with the team (no lurk) to reset expectations. Round 3: Fakeout B-site, TP to A-site at 40 seconds. Round 4: use Dimensional Drift to walk behind defenders and flash them from behind. Never lurk two consecutive rounds.
+**Enemy Adaptation:** After 4-5 rounds, defenders will stop rotating to Fakeout sounds, pre-destroy visible Gatecrash orbs, or hold a player permanently watching your flank path.
+**Counter-Adaptation:** When they ignore clone sounds: run with the clone so the "fake" is actually real — the defender who ignores it dies. When they destroy Gatecrash: place it in hidden spots (inside smokes, behind boxes) or use its destruction sound as bait while you walk in from a different angle. When they hold your flank: TP directly into the contested site instead of lurking, using the TP as an aggressive entry tool rather than a flank tool.
 ### When struggling
 "You are playing Yoru like Jett. Stop dry-peeking. Every fight should start with a clone, a flash, or a TP — never a raw peek."
 ### When being predictable

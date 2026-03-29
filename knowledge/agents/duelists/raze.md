@@ -52,9 +52,13 @@ FIX: Shift grenade usage earlier in the round to create space, not later to farm
 
 ## 7. What To Tell The Player
 ### When performing well
-Pattern: You are executing the full Boombot-into-Paint Shells-into-Blast Pack sequence before entering site, with each ability feeding the next.
-Why it works: Boombot forces defenders to reveal their position or reposition. Paint Shells then lands on the revealed spot, forcing them further off-angle. By the time your Blast Pack entry arrives, the defender is displaced and off-crosshair, giving you a free duel.
-How to repeat: Step 1: Send Boombot toward the most common hold angle. Step 2: Throw Paint Shells at whatever position Boombot locked onto or flushed. Step 3: Blast Pack in once the grenade detonates. Maintain this sequence every execute round, varying which angle Boombot scouts first.
+**Player Action:** You chain Boombot into Paint Shells into Blast Pack entry, with each ability feeding positional intel to the next within a 4-second sequence.
+**Enemy Perception:** Defenders read you as a utility-heavy attacker who always precedes entry with Boombot scout. They expect the bot first, then grenades on their position, then the satchel entry from the same direction.
+**Enemy Reaction:** They are forced to shoot the Boombot (revealing their position and taking their crosshair off the entry angle) or reposition away from it (abandoning their prepared hold). Either response displaces them from their chosen crosshair placement.
+**Exploit Window:** The 1-2 seconds a defender spends shooting Boombot or dodging Paint Shells leaves their crosshair off the entry angle. Your Blast Pack arrives during this displacement window when they are mid-reposition with no stable aim.
+**Repeat Strategy:** Round 1: Boombot to the most common hold angle, grenade the position, satchel in. Round 2: send Boombot to a different angle on the same site. Round 3: skip Boombot entirely and satchel fast to punish defenders who wait for the bot before holding. Vary which ability leads.
+**Enemy Adaptation:** After 4-5 rounds, defenders will pre-destroy Boombot from safe angles, play positions outside Paint Shells radius, or push through the utility sequence before you arrive.
+**Counter-Adaptation:** When they pre-destroy the bot: use its destruction sound as a free position confirm and grenade that spot immediately. When they dodge grenades: satchel to where they repositioned (the dodge direction is predictable — always away from the grenade). When they push through your sequence: hold an off-angle with a rifle and let them walk into you instead of satcheling.
 ### When struggling
 "Stop satcheling into the unknown. Send the Boombot first, let it do its job, then follow the information it gives you."
 ### When being predictable

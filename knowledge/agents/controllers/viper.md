@@ -60,10 +60,14 @@ Viper is the territorial controller who excels at locking down areas with persis
 
 ## 7. What To Tell The Player
 
-**When performing well**:
-Pattern: You are toggling Toxic Screen off within 5-6 seconds of the team entering site to conserve fuel, then activating Poison Cloud for post-plant denial, and landing Snake Bite lineups on the default defuse spot.
-Why it works: Deactivating the wall early preserves 40-50% of your fuel pool for the Poison Cloud phase, meaning you have orb denial available during the entire post-plant. Snake Bite on the defuse position forces the enemy off spike for its full duration, and with two charges you can deny 8+ seconds total — enough for the spike to reach half-timer.
-How to repeat: Step 1: Activate Toxic Screen for the execute, deactivate it once your team is through the choke. Step 2: Toggle Poison Cloud on after plant to deny the retake angle. Step 3: When you hear defuse audio, throw Snake Bite lineup one at default defuse. Hold lineup two for the second defuse attempt. Alternate between 2-3 wall angles per site across rounds.
+### When performing well
+**Player Action:** You toggle Toxic Screen off within 5-6 seconds of entry to conserve fuel, activate Poison Cloud for post-plant, and land Snake Bite lineups on default defuse — managing fuel across all three phases of the round.
+**Enemy Perception:** Defenders see a Viper who always has fuel for post-plant denial. They expect to wait out the wall and push when fuel runs dry, but your early toggle means you have 40-50% fuel remaining when they expect you to be empty.
+**Enemy Reaction:** They are forced to either retake through active Poison Cloud (taking decay damage and fighting with reduced HP) or wait for fuel to deplete (losing 15-20 seconds they do not have). Snake Bite on defuse forces them off spike for its full duration — they cannot power through it without dying.
+**Exploit Window:** The post-plant phase where defenders expect your fuel to be depleted but Poison Cloud is still active creates a 10-15 second window where they hesitate, unsure whether to push or wait. Each Snake Bite adds 4 seconds of defuse denial — two charges stack to 8 seconds, which combined with Poison Cloud denial can run the spike timer.
+**Repeat Strategy:** Execute phase: Toxic Screen on for entry, off within 5 seconds. Post-plant: Poison Cloud on immediately after plant. Defuse denial: first Snake Bite on defuse audio, second Snake Bite when the first expires. Alternate between 2-3 Toxic Screen angles per site so defenders cannot pre-position for the same wall.
+**Enemy Adaptation:** After 4-5 rounds, defenders will push through the wall early (before you toggle off) to catch you mid-setup, send utility to clear Poison Cloud placement, or split the retake from two angles to avoid Snake Bite stacking.
+**Counter-Adaptation:** When they push early through the wall: leave it on longer and fight them in the decay zone where they take 50 instant HP reduction. When they clear Poison Cloud: place it in a non-standard position that still covers the retake angle. When they split-retake: reposition your Snake Bite lineup to the secondary defuse position and call it to your team so they cover the other angle.
 
 **When struggling**: "Your fuel is running dry too fast. Toggle the wall off once the team is on site. Save orb fuel for post-plant denial. Two abilities running equals zero abilities soon."
 

@@ -62,10 +62,14 @@ Vyse is a trap-based sentinel who controls space through metallic constructs tha
 
 ## 7. What To Tell The Player
 
-**Performing well**:
-Pattern: You are spreading traps across 2-3 entry angles rather than stacking them on one path, placing weapon disruption zones at the first chokepoint enemies must pass through, and saving at least one trap for post-plant placement near the spike.
-Why it works: Distributed traps mean a single Sova dart or Fade haunt cannot reveal and neutralize your entire setup — enemies must clear each angle individually, spending 2-3 abilities instead of one. Weapon disruption at the entry chokepoint forces enemies to fight with malfunctioning weapons at the exact moment they commit, which is the moment they are most vulnerable. Post-plant traps near the spike force defusers to clear constructs before touching the spike, adding 3-5 seconds of forced delay.
-How to repeat: Step 1: Place one trap at each of the site's 2-3 entry paths rather than clustering them. Step 2: Deploy weapon disruption zone at the primary chokepoint where enemies must pass to execute. Step 3: On attack, save one trap and place it adjacent to the spike before planting. Use wall tech in tight corridors where there is no alternate sightline for enemies to bypass it.
+### When performing well
+**Player Action:** You spread traps across 2-3 entry angles (not stacked on one), place weapon disruption at the first chokepoint attackers must pass, and save one trap for post-plant placement near the spike.
+**Enemy Perception:** Attackers expect a sentinel setup concentrated on one path (like Killjoy or Cypher). When they clear one angle and discover traps on the second and third as well, they realize a single recon ability cannot neutralize your entire defense — their standard clearing routine fails.
+**Enemy Reaction:** They are forced to spend 2-3 clearing abilities instead of one (each trap on a different angle requires separate attention). Entering through the weapon disruption zone forces them to fight with malfunctioning weapons at the moment of maximum commitment. Post-plant traps force defusers to clear constructs before touching spike, adding 3-5 seconds of mandatory delay.
+**Exploit Window:** The 3-5 seconds defusers spend clearing post-plant traps is denial time equivalent to a Viper Snake Bite — but it requires no lineup and no positioning. The distributed trap setup costs attackers 2-3 abilities and 6-10 seconds total clearing time, which is 20-30% of their available round time spent on utility destruction instead of fighting.
+**Repeat Strategy:** Round 1: trap at entries A, B, and C; weapon disruption at the main choke. Round 2: shift each trap 2 meters from original position (same angles, different spots). Round 3: consolidate two traps on one angle and leave one angle open — punish attackers who autopilot through the "safe" path. On attack: always save one trap for post-plant spike defense.
+**Enemy Adaptation:** After 4-5 rounds, attackers will use multi-target clearing abilities (Raze grenade, Brimstone molly) to destroy distributed traps efficiently, speed-execute before you can place all traps, or bait trap triggers to waste your setup.
+**Counter-Adaptation:** When they AoE-clear: place traps further apart so no single AoE can hit two at once. When they speed-execute: pre-place traps during buy phase and hold weapon disruption for reactive deployment on the push. When they bait triggers: hold manual detonation timing until you see a full commit, not a single baiter.
 
 **Struggling**: "Your traps are getting cleared too easily or placed in low-traffic areas. Watch which paths enemies actually use and concentrate your utility there. Deploy everything before you take fights."
 

@@ -58,10 +58,16 @@ Miks is the newest addition to the controller roster, bringing a distinct approa
 
 ## 7. What To Tell The Player
 
-**When performing well**:
-Pattern: You are delivering smokes within 2 seconds of execute calls, using Miks' unique area-control tools to deny at least one position that other controllers cannot reach, and communicating every ability deployment to your team.
-Why it works: Fast smoke timing denies the defender reaction window — the 2-second threshold is the maximum before defenders can reposition to off-angles. Miks' unique denial tools cover geometry that standard smokes miss, which means defenders who have memorized how to play around Omen or Brimstone smokes encounter an unfamiliar denial shape they have not practiced against.
-How to repeat: Step 1: Pre-select smoke targets during buy phase so execution is instant on the call. Step 2: After smokes land, deploy Miks' unique area-control ability at the position where defenders typically dodge standard smokes. Step 3: Call out every ability placement to teammates so they know which angles are denied. Between rounds, identify one setup per site that only Miks enables and rotate it into your plan.
+### When performing well
+> ⚠️ PATCH-SENSITIVE: Enemy modeling for Miks is based on role fundamentals. Specific counter-adaptation patterns will solidify as the meta evolves.
+
+**Player Action:** You deliver smokes within 2 seconds of execute calls, deploy area-denial in positions where defenders dodge standard smokes, and communicate every ability placement to your team.
+**Enemy Perception:** Defenders have memorized how to play around Omen/Brimstone/Viper smoke shapes, but Miks' denial covers geometry they are not practiced against. They reposition to their standard "smoke-dodge" spot and discover it is also denied.
+**Enemy Reaction:** They are forced to fall back further than they would against any other controller (their rehearsed dodge spot is denied), find a completely new position mid-round, or push through the denial and take damage. Each option costs 2-4 seconds of indecision.
+**Exploit Window:** The 2-4 seconds defenders spend discovering their default dodge position is denied and relocating further back is dead time where your team enters uncontested. This window is widest in the first 5 rounds before defenders learn Miks-specific positioning.
+**Repeat Strategy:** Round 1: standard smokes + area denial on the most common dodge spot. Round 2: shift the denial to cover where defenders relocated after round 1. Round 3: use denial in the original spot again — defenders who adjusted back will be caught. Call every placement so teammates know which angles are safe to walk through.
+**Enemy Adaptation:** After 5+ rounds, defenders will learn Miks-specific positioning (holding spots that are safe from both standard smokes and Miks denial), time their aggression before your abilities deploy, or switch to retake-heavy setups that avoid the denial entirely.
+**Counter-Adaptation:** When they learn Miks-specific positions: your denial now herds them into predictable fallback spots — call those positions to your team for pre-aimed swings. When they aggress before abilities: hold smokes for reactive use instead of proactive placement. When they play retake: take site freely, then use denial on the retake paths instead of the entry paths.
 
 **When struggling**: "Go back to basics. Forget the fancy Miks-specific tech for now. Smoke the right spots, deny the right chokes, and stay alive. The unique plays come after the fundamentals are solid."
 

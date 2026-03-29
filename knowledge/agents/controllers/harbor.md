@@ -56,10 +56,14 @@ Harbor is the fluid controller who uses water-based barriers to create dynamic, 
 
 ## 7. What To Tell The Player
 
-**When performing well**:
-Pattern: You are bending High Tide around corners to deny 3+ defender angles simultaneously, casting Cascade only when your team is within trade distance, and placing Cove on spike for protected plants.
-Why it works: A curved High Tide covers angles that a straight wall would miss — the bend denies both the close hold and the deep-site angle in a single cast, forcing defenders to reposition or fight blind. Cascade timed with team proximity means they push through the moving shield together, arriving on site as a group rather than staggered. Cove on spike gives the planter a destructible bubble that buys 2-3 seconds of immunity from crossfire.
-How to repeat: Step 1: Communicate "pushing with Cascade" and confirm teammates are within 5 meters before casting. Step 2: Deploy High Tide with a deliberate bend through the site's corner to cut off both the close and deep hold positions. Step 3: Once on site, drop Cove on the plant spot before the spike goes down. Use Reckoning on wide-area sites where enemies have multiple hiding spots to flush them into the open.
+### When performing well
+**Player Action:** You bend High Tide around corners to deny 3+ angles simultaneously, cast Cascade only when teammates are within 5-meter trade distance, and drop Cove on spike for protected plants.
+**Enemy Perception:** Defenders see a wall that bends around their position — unlike standard smoke coverage, they cannot play the edge of Harbor's wall because the curve extends past their off-angle. They believe the wall will go straight and position to exploit the gap, but the bend eliminates it.
+**Enemy Reaction:** They are forced to fully retreat from the wall (giving up site control) or push through it blind. Defenders who try to play the gap between where a normal wall ends and where the bend continues are caught in the open with the wall curving past them.
+**Exploit Window:** The 2-3 seconds where defenders realize the High Tide bend covers their off-angle and must reposition is your team's entry window. Cascade arriving with 4-5 grouped teammates during this window creates an overwhelming site hit against retreating defenders.
+**Repeat Strategy:** Round 1: bend High Tide to cut close + deep angles, Cascade with team grouped. Round 2: bend the wall the opposite direction to cover the angle defenders relocated to. Round 3: straight wall (no bend) to confuse defenders who expect the curve. Always Cove the plant spot before the planter commits.
+**Enemy Adaptation:** After 3-5 rounds, defenders will push through Cascade before the team arrives, shoot Cove immediately to deny the protected plant, or play completely off-site for retake to avoid the wall entirely.
+**Counter-Adaptation:** When they push Cascade: call the push and have your team hold short — let them walk through the shield into your crossfires. When they destroy Cove: delay Cove placement until the moment the planter taps spike (minimizing destruction time). When they play retake: take site for free, plant with Cove, and use Reckoning during their retake approach to slow and reveal them across the full site.
 
 **When struggling**: "Your Cascade is going out without the team behind it. Communicate the push. If the team is not following, hold Cascade until they are ready to commit."
 

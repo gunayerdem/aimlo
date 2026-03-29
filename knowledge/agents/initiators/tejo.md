@@ -59,10 +59,16 @@ Tejo is the newest initiator on the roster, applying initiator fundamentals -- i
 
 ## 7. What To Tell The Player
 
-**When performing well**:
-Pattern: You are using Tejo's scouting tools to confirm defender positions before every execute, following up with his displacement ability to force at least one defender off their anchor hold, and communicating every reveal to the team within 1 second.
-Why it works: Pre-execute scouting removes the guessing game for your team, turning blind site takes into informed pushes. The displacement forces the anchoring defender to abandon a prepared crosshair position and re-establish aim from a worse angle — during that 1-2 second repositioning window, your duelist enters against a defender who is mid-movement. Instant callouts let teammates pre-aim the revealed position before the fight even begins.
-How to repeat: Step 1: Deploy scouting ability toward the site's primary hold position before the execute call. Step 2: Call out the revealed defender's position to the team immediately. Step 3: Fire displacement ability at the confirmed position to force them off their angle, then call "pushing now" so the team enters during the repositioning window. Vary which site you scout first each round so enemies cannot predict your team's target.
+### When performing well
+> ⚠️ PATCH-SENSITIVE: Enemy modeling for Tejo is based on role fundamentals. Specific counter-adaptation patterns will solidify as the meta evolves.
+
+**Player Action:** You scout defender positions before every execute, follow up with displacement to force the anchor off their hold, and communicate every reveal to the team within 1 second of the scan.
+**Enemy Perception:** Defenders see their positions revealed before every push and feel they cannot hold any angle without being displaced. They believe the attacking team has perfect reads, but the real advantage is Tejo's scout-then-displace pipeline that turns every execute into a pre-aimed site hit.
+**Enemy Reaction:** They are forced to either hold their position and get displaced (abandoning prepared crosshair placement during the 1-2 second reposition) or pre-rotate before the scout (giving up their anchor position for free). Both choices degrade the quality of their defensive hold.
+**Exploit Window:** The 1-2 second window where a displaced defender is mid-reposition with no stable crosshair is your team's entry window. The scout reveal gives your duelist a pre-aimed angle, and the displacement ensures the defender is not holding it when the swing arrives.
+**Repeat Strategy:** Round 1: scout the primary hold, displace confirmed position, team enters during reposition. Round 2: scout the secondary hold to catch defenders who shifted off the primary. Round 3: skip the scout and execute fast — defenders who wait for the scan before committing are caught unprepared by the speed change. Call every reveal within 1 second.
+**Enemy Adaptation:** After 3-5 rounds, defenders will play positions outside scout range, hold retake setups instead of on-site anchors, or push through your scout timing to catch you mid-ability.
+**Counter-Adaptation:** When they play outside scout range: use the scout to confirm the site is soft, then take it for free and set up post-plant. When they play retake: your scout becomes a retake-denial tool instead — scan the retake path and displace the lead retaker. When they push your scout timing: hold an off-angle and let teammates call the push while you support with displacement on the aggressor.
 
 **When struggling**: "Go back to initiator basics. Every round, your job is: give the team info before the fight, displace at least one enemy during the execute, and support the entry. Do that with Tejo's kit, and the specific mechanics will develop."
 

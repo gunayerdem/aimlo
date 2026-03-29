@@ -52,9 +52,13 @@ FIX: Coach ult usage as a site-entry tool, not a frag-hunting tool. The goal of 
 
 ## 7. What To Tell The Player
 ### When performing well
-Pattern: You are swinging immediately behind every Curveball pop and using Hot Hands to heal back to full HP between each duel sequence.
-Why it works: The instant swing catches enemies during the 1.1-second blind window before they recover. Healing with Hot Hands between fights means you enter each new duel at full HP while opponents accumulate chip damage with no way to recover — this compounds across a site take into a 20-40 HP advantage per fight.
-How to repeat: Step 1: Throw Curveball and begin your wide-peek before it pops. Step 2: After the kill, drop Hot Hands behind cover and heal while repositioning. Step 3: Alternate between left-curve and right-curve Curveballs each round so enemies cannot predict which direction to turn.
+**Player Action:** You swing within 0.3 seconds of every Curveball pop, alternate left-curve and right-curve between rounds, and use Hot Hands to heal to full HP between each duel.
+**Enemy Perception:** Defenders track your Curveball direction from the previous round and prepare to turn that way. When you switch curve direction, their turn goes the wrong way and they eat the full 1.1-second blind.
+**Enemy Reaction:** They are forced to guess which direction to turn before the flash pops. Wrong guesses mean 1.1 seconds of full blindness. Right guesses still cost 0.3-0.5 seconds of reaction time — and you are already swinging during that window.
+**Exploit Window:** The 0.3-1.1 second window between Curveball pop and enemy vision recovery is your guaranteed first-shot opportunity. With alternating curve directions, even players who guess correctly lose 0.3 seconds — enough for you to land the opening shot.
+**Repeat Strategy:** Round 1: right-curve flash, swing immediately. Round 2: left-curve same angle. Round 3: right-curve from a different position. Between every kill, drop Hot Hands behind cover and heal to full before the next fight. Enter each successive duel at 150 HP while defenders sit at 100 or less.
+**Enemy Adaptation:** After 4-5 rounds, defenders will pre-turn away from both directions (playing with back turned), hold deeper positions outside flash range, or push aggressively before you can flash.
+**Counter-Adaptation:** When they pre-turn: delay your peek by 0.5 seconds so they turn back thinking the flash failed, then catch them mid-rotation. When they hold deep: use Blaze wall to cut off their deep position and force them into flash range. When they push you: drop Hot Hands in the doorway as area denial and fight from behind the fire.
 ### When struggling
 "You are not swinging behind your own flash. Throw the Curveball and immediately wide-peek. If you flash and wait, the blind expires before you arrive."
 ### When being predictable

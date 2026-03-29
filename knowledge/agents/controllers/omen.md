@@ -56,10 +56,14 @@ Omen is the shadow controller -- a hybrid smoker/lurker who thrives on deception
 
 ## 7. What To Tell The Player
 
-**When performing well**:
-Pattern: You are landing Paranoia timed within 1-2 seconds of the team's execute call, and your Shrouded Step positions rotate between 3+ different off-angles across the half.
-Why it works: Paranoia timed with the entry forces defenders to choose between dodging the nearsight and watching the entry angle — they lose either way. Rotating Shrouded Step spots means defenders cannot pre-aim your teleport destination, so each round you arrive at a fresh off-angle they have not prepared for.
-How to repeat: Step 1: Pre-aim smoke targets during buy phase and drop them within 2 seconds of execute call. Step 2: Cast Paranoia as your duelist begins the entry swing. Step 3: Shrouded Step to an off-angle only after smokes are placed, never before. Use a different teleport destination every 2 rounds minimum.
+### When performing well
+**Player Action:** You land Paranoia within 1-2 seconds of the execute call to blind defenders during entry, and rotate your Shrouded Step destination between 3+ different off-angles across the half.
+**Enemy Perception:** Defenders track your teleport position from the previous round and pre-aim that spot. When you teleport to a different off-angle, they are aiming at empty space while you hold an uncontested sightline behind them.
+**Enemy Reaction:** They are forced to clear your previous teleport spot (wasting 1-2 seconds and attention) AND watch for a new angle. Some defenders assign a player to watch the last known TP spot — that player is now anchored to a useless position for the rest of the round.
+**Exploit Window:** The 1-2 seconds defenders spend checking your previous Shrouded Step location is dead time where your team's entry goes uncontested. Combined with Paranoia blinding the other defenders, the site has 1-2 seconds where nobody is watching the main entry.
+**Repeat Strategy:** Round 1: smoke + Paranoia on execute, Shrouded Step to high-ground off-angle. Round 2: same smokes, teleport to a ground-level flank instead. Round 3: skip the teleport entirely and play default — punish defenders who over-rotate looking for you. Place smokes before every TP, never after.
+**Enemy Adaptation:** After 4-5 rounds, defenders will pre-clear common TP spots with utility (molly, grenade), assign a dedicated player to watch for TP audio, or push through your smokes before you can teleport.
+**Counter-Adaptation:** When they utility-clear TP spots: use Shrouded Step during the Paranoia blind when they cannot see or hear the animation clearly. When they push through smokes: hold an angle behind your own smoke and catch them mid-push. When they dedicate a player to TP-watch: that is one fewer defender on site, so your team has a numbers advantage at the entry point.
 
 **When struggling**: "Focus on smoke duties first. Get the smokes out for your team, then think about the teleport play. You are trying to make highlight plays when your team needs fundamentals."
 
