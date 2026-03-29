@@ -62,10 +62,54 @@ const CONFIDENCE_PROMPTS: Record<string, string> = {
   high: "\n\nVeri yeterli. Net, doğrudan ve güvenli ifadeler kullanabilirsin. Pattern'leri kesin olarak belirt. Somut, uygulanabilir tavsiyeler ver.",
 };
 
-function buildSystemPrompt(confidenceLevel: string, knowledgeContext: string): string {
+// Tone modes — controls coaching style
+const TONE_PROMPTS: Record<string, string> = {
+  strict: `\n\nTON: SERT KOÇ
+- Doğrudan konuş, yuvarlama
+- Hata varsa net söyle, yumuşatma
+- Övgü sadece gerçekten kazanıldıysa
+- "Aynı hatayı tekrar ediyorsun" gibi baskılı dil kullan
+- Kısa cümleler, fluff yok
+- Koç gibi konuş, arkadaş gibi değil`,
+  balanced: `\n\nTON: DENGELİ KOÇ
+- Net ama saygılı
+- Hataları belirt, açıkla, yönlendir
+- Başarıyı tanı ama abartma
+- Öğretici ton, ne yapılmalı odaklı`,
+  analytical: `\n\nTON: ANALİTİK
+- Sıfır duygu, saf veri ve mantık
+- "Veriler X gösteriyor, bu Y anlamına geliyor, Z yapılmalı"
+- Yorum değil analiz
+- Rakamlar ve pattern'ler konuşsun`,
+};
+
+// Hybrid language rules — gaming terms stay English
+const HYBRID_LANGUAGE_RULE = `\n\nDİL KURALI:
+Cümleler Türkçe olacak AMA oyun terimleri İngilizce kalacak.
+İngilizce KALACAK terimler: peek, trade, dash, entry, utility, angle, timing, setup, execute, rotate, lurk, anchor, retake, default, swing, jiggle, smoke, flash, molly, lineup, post-plant, anti-eco, eco, save, force buy, op, spray, one-tap, crosshair, off-angle, site, plant, defuse, clutch, ace
+YANLIŞ: "yetenek kullan", "tuzak kur", "kurulum yap"
+DOĞRU: "utility kullanmadan entry atıyorsun", "aynı setup'a tekrar giriyorsun", "post-plant positioning'in zayıf"`;
+
+// Cross-match personalization instruction
+const PERSONALIZATION_RULE = `\n\nKİŞİSELLEŞTİRME KURALI:
+Her output'ta en az 1 cross-match referansı olmalı.
+Örnekler:
+- "Son maçlarda A Short sorunu azalmış ama B Main'de yeni bir pattern oluşmuş"
+- "Trend verilerine göre defense tarafın iyileşiyor"
+- "Bu pattern 3+ maçta tekrar ediyor — kalıcı hale gelmiş"
+Eğer veri yetersizse: "İlk maçlar — henüz cross-match pattern çıkarmak için erken"`;
+
+function buildSystemPrompt(
+  confidenceLevel: string,
+  knowledgeContext: string,
+  tone?: string,
+  lang?: string,
+): string {
   const confidenceAddition = CONFIDENCE_PROMPTS[confidenceLevel] || CONFIDENCE_PROMPTS.medium;
+  const toneAddition = TONE_PROMPTS[tone || "strict"] || TONE_PROMPTS.strict;
   const knowledgePart = knowledgeContext ? `\n\nKOÇLUK BİLGİ KAYNAĞI:\n${knowledgeContext}` : "";
-  return BASE_SYSTEM_PROMPT + confidenceAddition + knowledgePart;
+  const langRule = (lang === "en") ? "" : HYBRID_LANGUAGE_RULE;
+  return BASE_SYSTEM_PROMPT + toneAddition + confidenceAddition + PERSONALIZATION_RULE + langRule + knowledgePart;
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -79,7 +123,7 @@ const ALLOWED_CONTEXT_FIELDS = [
   "mapStats", "worstMap", "bestMap",
   "agentStats", "mostPlayedAgent", "survivalRate", "averageDeathsPerMatch",
   "tradeRate", "sideSplit", "confidence", "currentStreak", "consistencyScore",
-  "recentMatches", "rank",
+  "recentMatches", "rank", "tone", "lang",
 ];
 
 function sanitizeContext(raw: Record<string, unknown>): Record<string, unknown> {
@@ -162,7 +206,10 @@ export async function POST(request: NextRequest) {
       : "medium";
 
     // Build confidence-aware system prompt with knowledge
-    const systemPrompt = buildSystemPrompt(confidenceLevel, knowledgeContext);
+    // Extract tone and lang from context
+    const tone = typeof safeContext.tone === "string" ? safeContext.tone : "strict";
+    const lang = typeof safeContext.lang === "string" ? safeContext.lang : "tr";
+    const systemPrompt = buildSystemPrompt(confidenceLevel, knowledgeContext, tone, lang);
 
     // Call Anthropic
     const contextJson = JSON.stringify(safeContext, null, 2);

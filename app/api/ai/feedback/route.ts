@@ -331,6 +331,19 @@ const CONFIDENCE_PROMPTS: Record<string, string> = {
   high: "\nVeri yeterli. Net, doğrudan, somut ifadeler kullan.",
 };
 
+// Tone modes
+const TONE_PROMPTS: Record<string, string> = {
+  strict: `\nTON: SERT KOÇ — Doğrudan konuş, hata varsa net söyle, övgü sadece kazanıldıysa. Kısa cümleler, fluff yok. Koç gibi konuş, arkadaş gibi değil.`,
+  balanced: `\nTON: DENGELİ KOÇ — Net ama saygılı. Hataları belirt, açıkla, yönlendir. Öğretici ton.`,
+  analytical: `\nTON: ANALİTİK — Sıfır duygu, saf veri ve mantık. Rakamlar ve pattern'ler konuşsun.`,
+};
+
+// Hybrid language — gaming terms stay English
+const HYBRID_LANGUAGE_RULE = `\nDİL KURALI: Cümleler Türkçe AMA oyun terimleri İngilizce kalacak. İngilizce KALACAK: peek, trade, dash, entry, utility, angle, timing, setup, execute, rotate, lurk, anchor, retake, default, swing, smoke, flash, molly, lineup, post-plant, anti-eco, op, crosshair, off-angle, site, plant, defuse, clutch. YANLIŞ: "yetenek kullan", "tuzak kur" DOĞRU: "utility kullanmadan entry atıyorsun"`;
+
+// Cross-match personalization
+const PERSONALIZATION_RULE = `\nKİŞİSELLEŞTİRME: Her output'ta en az 1 cross-match referansı olmalı. Örnek: "Son maçlarda A Short sorunu azalmış ama B Main'de yeni pattern oluşmuş". Veri yetersizse: "İlk maçlar — henüz cross-match pattern çıkarmak için erken"`;
+
 /* ══════════════════════════════════════════════════════════
    DETERMINISTIC FEEDBACK — stable, no Math.random
    ══════════════════════════════════════════════════════════ */
@@ -606,7 +619,7 @@ Return ONLY valid JSON:
   "nextRoundPlan": "ne + nasıl + risk yönetimi"
 }
 No markdown, no code blocks, just JSON.
-${confidenceAddition}
+${confidenceAddition}${TONE_PROMPTS["strict"]}${isTr ? HYBRID_LANGUAGE_RULE : ""}${PERSONALIZATION_RULE}
 
 YASAK CÜMLELER (bunları asla kullanma):
 - "daha dikkatli oyna"
