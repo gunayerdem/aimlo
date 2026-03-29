@@ -56,10 +56,14 @@ KAY/O is the suppression-based initiator who shuts down enemy abilities to creat
 
 ## 7. What To Tell The Player
 
-**When performing well**:
-Pattern: You are landing ZERO/POINT on confirmed defender positions 3-5 seconds into the round, calling out the suppress count immediately, and alternating between overhand and underhand FLASH/DRIVE each round.
-Why it works: Throwing the knife at 3-5 seconds catches defenders after they have settled into their hold positions but before they expect the execute. The suppress count callout ("knife hit two") tells the team exactly how many defenders are on that site, turning a guess into confirmed intel. Alternating flash types prevents enemies from building a turn-timing habit — overhand has a visible arc they can track, but underhand pops instantly around corners.
-How to repeat: Step 1: Throw ZERO/POINT at the most common defender anchor position 3-5 seconds into the round. Step 2: Immediately call the suppress count to the team. Step 3: On execute, throw FLASH/DRIVE using the opposite type from last round (overhand if last was underhand, and vice versa). Save FRAG/MENT for post-plant denial on the default defuse position.
+### When performing well
+**Player Action:** You land ZERO/POINT on defender positions at the 3-5 second mark, call the suppress count to your team instantly, and alternate overhand/underhand FLASH/DRIVE each round.
+**Enemy Perception:** Defenders who get suppressed feel their kit disappear and panic — they lose confidence in their hold position because they cannot use abilities to escape or counter-peek. The suppress count callout tells your team the exact site stack, but enemies do not know you have that information.
+**Enemy Reaction:** Suppressed defenders are forced to either hold their angle with gunplay only (no flashes, no smokes, no escape tools) or retreat to a position where losing abilities matters less. Non-suppressed defenders hear the knife land and know it missed them — they tighten their hold on the un-knifed site, which tells your team where the rest of the defenders are.
+**Exploit Window:** The 8-second suppress window strips all abilities from hit defenders — during this window, your team fights against gunplay-only opponents who have no utility to delay or escape. A suppressed Jett cannot dash, a suppressed Sage cannot wall, a suppressed Omen cannot smoke. The timing at 3-5 seconds catches them after settling but before executing any defensive utility.
+**Repeat Strategy:** Round 1: ZERO/POINT at the primary anchor position, call "knife hit 2" so team knows site stack. Round 2: knife the secondary site to check the opposite setup. Round 3: fake the knife sound by throwing FRAG/MENT (similar audio cue) and execute the site that flinches. Alternate overhand and underhand FLASH/DRIVE — never the same type twice in a row.
+**Enemy Adaptation:** After 4-5 rounds, defenders will play outside the knife radius, split across sites to minimize suppress count, or rush before the 3-5 second knife timing.
+**Counter-Adaptation:** When they dodge the knife radius: the dodge itself tells you where they are — call the new position. When they split across sites: the suppress count confirms the split, so your team executes the weaker site. When they rush early: use FRAG/MENT to hold the choke and FLASH/DRIVE to blind the rushers — KAY/O's kit is also strong on defense.
 
 **When struggling**: "Your knife is missing. Learn where enemies hold on each site and throw the knife to those positions. A knife that hits zero is not just no value -- it is negative value because it tells the enemy you are pushing."
 

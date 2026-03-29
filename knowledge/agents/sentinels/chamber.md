@@ -56,10 +56,14 @@ Chamber is the sentinel who plays like a duelist. His kit rewards mechanical pre
 
 ## 7. What To Tell The Player
 
-**Performing well**:
-Pattern: You are executing the one-shot-then-Rendezvous-teleport loop consistently — peeking an aggressive angle, firing one shot with Tour de Force or a rifle, and teleporting to safety before the enemy can trade.
-Why it works: The single-shot-then-teleport pattern generates a kill without giving the enemy a tradeable body. Defenders who try to swing your position find empty space because Rendezvous has already moved you to safety. Over a half, this accumulates 2-3 free kills that cost the enemy a full buy each time while Chamber's team loses nothing.
-How to repeat: Step 1: Pre-place Rendezvous anchor within 1-2 seconds of your aggressive peek angle before the round starts. Step 2: Hold the angle and fire exactly one shot — hit or miss, teleport immediately. Step 3: Never re-peek from the same angle after teleporting. On Tour de Force rounds, save the rifle money and communicate to the team that they can redistribute economy. Place Trademark on the highest-traffic flank path and rotate it based on which direction enemies attacked the previous round.
+### When performing well
+**Player Action:** You execute the one-shot-then-Rendezvous-teleport loop on a different aggressive angle each round — fire one shot with Tour de Force or rifle, teleport to safety before the trade arrives.
+**Enemy Perception:** Attackers see a player who gets a pick and vanishes. They swing the angle to trade and find empty space. Over 3-4 rounds, they build a model that you always peek from specific positions — but because you rotate the peek angle, the model is always one round behind.
+**Enemy Reaction:** They are forced to either avoid your known peek angles (giving up map control on those sightlines for free) or commit 2 players to swing you (one baits, one trades) — but the teleport makes even the 2-player trade fail because there is no body to trade. Some will commit utility (flash, drone) to your angle before peeking, which wastes resources on a position you may have already left.
+**Exploit Window:** The 0.5-second Rendezvous teleport means the enemy's trade attempt arrives at an empty position. Over a half, this accumulates 2-3 free kills with zero deaths — each kill costs the enemy 3000+ credits in economy while your team invests nothing. Tour de Force rounds let you save rifle money for the team.
+**Repeat Strategy:** Round 1: aggressive angle A, one shot, TP. Round 2: aggressive angle B. Round 3: hold passively from the TP position instead (punish enemies who push your old angle looking for you). Rotate Trademark to cover whichever flank the enemy attacked from last round. Never re-peek the same angle after teleporting.
+**Enemy Adaptation:** After 4-5 rounds, attackers will pre-aim your rotating angles, destroy the Rendezvous anchor with utility, or flash/smoke your position before committing.
+**Counter-Adaptation:** When they pre-aim your angles: hold a passive off-angle instead and let them walk past you — the one-shot TP works from behind as well as from the front. When they destroy the anchor: place it further from the peek so destruction requires committing into a dangerous position. When they flash/smoke your angle: play a different site entirely for 1-2 rounds, then return when they stop investing utility into your position.
 
 **Struggling**: "You are dying on peeks too often, which means either your teleport placement is too slow or you are re-peeking when you should be teleporting. One shot, one teleport. Every time."
 

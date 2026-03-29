@@ -55,10 +55,14 @@ Deadlock is the sentinel of chokepoint supremacy. While other sentinels spread t
 
 ## 7. What To Tell The Player
 
-**Performing well**:
-Pattern: You are placing Barrier Mesh on the enemy's preferred entry path (identified from the first 2-3 rounds), layering Sonic Sensor behind the mesh to catch anyone who clears it, and holding GravNet reactively for when you hear the push begin.
-Why it works: Barrier Mesh on the primary attack path forces enemies to either destroy the orbs (costing 3-5 seconds and revealing position) or reroute to the secondary path — where your team holds crossfires. Sonic Sensor behind the mesh catches anyone who commits through the orb destruction, delivering a concuss right as they enter. Reactive GravNet on the detected push grounds sprinting attackers mid-rush, fragmenting their group into easy individual targets.
-How to repeat: Step 1: Watch which entry the enemy favors in rounds 1-3, then place Barrier Mesh on that path from round 4 onward. Step 2: Place Sonic Sensor behind or adjacent to the mesh to catch enemies who push through. Step 3: Hold GravNet in hand and throw it when you hear footsteps committing to the push. Use Annihilation only in tight corridors or post-plant on an isolated defuser where teammates cannot easily shoot the cocoon free.
+### When performing well
+**Player Action:** You place Barrier Mesh on the enemy's preferred entry path (read from rounds 1-3), layer Sonic Sensor behind the mesh, and hold GravNet reactively for committed pushes.
+**Enemy Perception:** Attackers see the Barrier Mesh blocking their primary route and believe they can clear the orbs quickly (3-5 seconds). They do not anticipate the Sonic Sensor behind the mesh — they plan their timing around orb destruction, not around a concuss that fires the moment they step through.
+**Enemy Reaction:** They are forced to either destroy the mesh orbs (costing 3-5 seconds of round time, revealing position through shooting sounds, and triggering the Sonic Sensor concuss on entry) or reroute to the secondary path (where your team has crossfires prepared). GravNet on the committed push grounds sprinting attackers and fragments their group into isolated targets.
+**Exploit Window:** The 3-5 seconds attackers spend clearing Barrier Mesh gives your team full rotation time. The Sonic Sensor concuss hits the moment they step through the cleared mesh — they are concussed at the worst possible moment (mid-entry with no cover). GravNet on rushers grounds them for 2+ seconds, turning a coordinated 5-man push into 5 individual fights.
+**Repeat Strategy:** Rounds 1-3: identify the enemy's favored entry. Round 4: Barrier Mesh on that path, Sonic Sensor behind it. Rounds 5-6: shift the mesh to the secondary path if they adapted. Hold GravNet in hand — throw only on confirmed push audio. Annihilation in tight corridors or on isolated defusers where teammates cannot shoot the cocoon free.
+**Enemy Adaptation:** After 4-5 rounds, attackers will use AoE utility to clear mesh + sensor simultaneously, split their attack to avoid the mesh path, or execute the other site entirely to make your mesh irrelevant.
+**Counter-Adaptation:** When they AoE-clear: spread mesh and sensor apart so one ability cannot destroy both. When they split: use GravNet on the split group (grounding 2-3 players gives your team the numbers advantage on one side). When they avoid your site: rotate the mesh to the other site next round, or play retake and use GravNet + Annihilation to stop the post-plant attempt.
 
 **Struggling**: "Your Barrier Mesh is not blocking the right entry, or your GravNet timing is off. Watch which path the enemy prefers and place your mesh there. Hold GravNet until you hear the push."
 

@@ -54,9 +54,15 @@ FIX: Emphasize that Waylay's recon is team utility. Every piece of information g
 
 ## 7. What To Tell The Player
 ### When performing well
-Pattern: You are deploying your recon ability before every entry, acting on the gathered intel within 2-3 seconds, and calling out defender positions to your team before swinging.
-Why it works: The recon-first approach reveals at least one defender position before you commit, turning a blind entry into a pre-aimed duel. Acting within 2-3 seconds of the reveal means the defender has not had time to reposition, so your crosshair is already on their angle. Your callout gives teammates the exact position to trade if you fall.
-How to repeat: Step 1: Deploy recon ability toward the site's most common hold angle. Step 2: Call out whatever is revealed to the team immediately. Step 3: Peek the revealed position within 2-3 seconds while the information is still accurate. On rounds where recon reveals no one, communicate the clear and redirect the team's execute to the occupied site.
+> ⚠️ PATCH-SENSITIVE: Enemy modeling for Waylay is based on role fundamentals. Specific counter-adaptation patterns will solidify as the meta evolves.
+
+**Player Action:** You deploy recon before every entry, act on gathered intel within 2-3 seconds, and call defender positions to your team before swinging — combining duelist aggression with initiator information flow.
+**Enemy Perception:** Defenders see a duelist who always knows where they are before peeking. They believe your aim is exceptional, but the real advantage is that every fight is pre-aimed because your recon revealed their position 2 seconds ago.
+**Enemy Reaction:** They are forced to reposition after every recon scan (costing 2-3 seconds of round time and abandoning prepared positions) or hold and fight against a player who already knows their exact angle.
+**Exploit Window:** The 2-3 second window between recon reveal and defender reposition is your kill window. The defender is either still in the scanned position (giving you a pre-aimed duel) or mid-movement to a new position (giving you a shot at a moving target with no crosshair placement).
+**Repeat Strategy:** Round 1: recon the primary hold angle, peek within 2 seconds, call the position. Round 2: recon a secondary angle to catch defenders who shifted off the primary. Round 3: skip recon and dry-peek to punish defenders who wait for the scan before committing to their hold. Vary the recon-to-entry timing between instant and delayed.
+**Enemy Adaptation:** After 3-5 rounds, defenders will reposition pre-emptively before your recon lands, play positions that are difficult to scan, or push aggressively during your recon deployment to catch you mid-ability.
+**Counter-Adaptation:** When they pre-reposition: use recon to confirm the new positions rather than the old ones — the information is still valuable even if they moved. When they play anti-scan positions: clear those spots with duelist aggression and save recon for later in the round. When they push during deployment: hold an off-angle and let them walk into your crosshair while expecting you to be mid-ability.
 ### When struggling
 "Pick one role per round: either lead with recon and commit to the entry, or support with info and let a teammate trade you. Do not do neither."
 ### When being predictable

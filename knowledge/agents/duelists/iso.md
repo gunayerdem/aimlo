@@ -52,9 +52,13 @@ FIX: Review wall angles per site. The wall should be deployed as part of the exe
 
 ## 7. What To Tell The Player
 ### When performing well
-Pattern: You are activating Double Tap before every engagement, shooting the shield orb after each kill, and using your wall to isolate defenders into sequential 1v1 fights.
-Why it works: The Double Tap shield absorbs one hit, meaning you survive encounters that would kill any other duelist at equal HP. Collecting the orb after each kill refreshes that shield for the next fight — across a 3-kill site take, that is three extra hits absorbed. Your wall splits 2v1 situations into two 1v1s where your shield gives you the advantage each time.
-How to repeat: Step 1: Activate Double Tap during the approach. Step 2: Deploy wall to cut off the second defender before peeking the first. Step 3: Win the duel, immediately shoot the orb, then peek the isolated second player with a fresh shield. Use Kill Contract on the enemy anchor player holding site, not on damaged or low-impact targets.
+**Player Action:** You activate Double Tap before every engagement, collect the shield orb after each kill, and deploy your wall to split 2v1 situations into sequential isolated 1v1s.
+**Enemy Perception:** Defenders see you surviving shots that should kill any other agent. They think you are getting lucky headshots, but the real pattern is that your Double Tap shield absorbs the first bullet in every fight, giving you an extra 100ms to land your return shot.
+**Enemy Reaction:** They are forced to either commit extra shots to break through the shield (delaying their kill time by 100-200ms) or reposition to avoid the wall isolation. Defenders behind your wall cannot trade their teammate and must wait for it to drop — by then, you have refreshed your shield from the first kill.
+**Exploit Window:** The 100-200ms delay the shield forces on enemy kill-time is your advantage window in every duel. Across a 3-kill site take, that is three fights where you survive one extra bullet. The wall isolation means each fight is 1v1 with shield advantage — no crossfire to negate it.
+**Repeat Strategy:** Pre-fight: activate Double Tap during approach. Fight 1: deploy wall to isolate defenders, peek the exposed one. Between fights: shoot the orb immediately (do not delay — the shield refresh is time-sensitive). Fight 2: peek the second defender with fresh shield. Use Kill Contract on the enemy Op player or anchor who will not reposition.
+**Enemy Adaptation:** After 4-5 rounds, defenders will body-shot spam to burn through the shield before aiming for the head, avoid positions where your wall can isolate them, or play retake (giving up site) to deny the 1v1 isolation.
+**Counter-Adaptation:** When they body-shot spam: strafe unpredictably — the shield buys you time to counterstrafe and headshot while they commit to body shots. When they avoid wall positions: angle the wall differently or use it to cut off their rotation path instead of isolating on site. When they play retake: take site for free, plant, and use Kill Contract during the retake to pull their best player into a 1v1 arena where your shield still matters.
 ### When struggling
 "You are taking fights without your shield active. Activate Double Tap before every peek. If you missed the orb, slow down and reset."
 ### When being predictable

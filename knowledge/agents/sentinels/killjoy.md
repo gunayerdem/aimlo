@@ -59,10 +59,14 @@ Killjoy is the definitive site anchor in Valorant. Where other sentinels trade b
 
 ## 7. What To Tell The Player
 
-**Performing well**:
-Pattern: You are placing Alarmbot and Nanoswarm within 3 meters of each other so the vulnerability debuff overlaps with the grenade detonation, and rotating your Turret position every 2-3 rounds to a different off-angle.
-Why it works: The Alarmbot vulnerability debuff increases the damage Nanoswarm deals by a significant multiplier — enemies caught in both take near-lethal damage from a single swarm charge. Rotating the Turret prevents enemies from pre-aiming its position on peek, which means they must spend a full ability or 2-3 seconds searching for it, delaying their execute by the time your team needs to rotate.
-How to repeat: Step 1: Place Alarmbot at the chokepoint entrance, then place Nanoswarm directly on top of the Alarmbot position. Step 2: Position Turret at a different off-angle than last round, where enemies must fully commit into site to destroy it. Step 3: Hold your second Nanoswarm for post-plant or a second chokepoint. Use Lockdown from behind walls or enclosed spaces where enemies must physically enter to destroy the device.
+### When performing well
+**Player Action:** You place Alarmbot and Nanoswarm within 3 meters of each other so vulnerability overlaps with detonation, and rotate Turret position every 2-3 rounds to a different off-angle.
+**Enemy Perception:** Attackers learn the Turret position from rounds 1-2 and plan to pre-aim it on entry. When round 3 has the Turret in a new off-angle, they waste 1-2 seconds checking the old spot before finding the new one. They also underestimate Nanoswarm damage — until the Alarmbot vulnerability multiplier turns a survivable swarm into a near-lethal one.
+**Enemy Reaction:** They are forced to either clear the Turret first (spending a full ability or 2-3 seconds searching for the new position) or ignore it (getting tagged and taking chip damage that reveals their push direction). Entering through the Alarmbot-Nanoswarm combo without clearing both costs 100+ HP from the vulnerability-amplified swarm.
+**Exploit Window:** The 2-3 seconds attackers spend locating the rotated Turret delays their execute and gives your team rotation time. The Alarmbot-Nanoswarm combo deals near-lethal damage in a 1-second burst — attackers who trigger it enter site at 10-30 HP, making every subsequent gunfight a one-shot kill for your team.
+**Repeat Strategy:** Rounds 1-2: Turret at off-angle A, Alarmbot + Nanoswarm at the main choke. Rounds 3-4: Turret at off-angle B, Alarmbot shifted 2 meters from original position. Round 5+: Turret at off-angle C, swap Nanoswarm to the secondary choke. Hold second Nanoswarm for post-plant or flank coverage. Lockdown from behind walls only.
+**Enemy Adaptation:** After 4-5 rounds, attackers will send recon (drones, darts) to locate your setup, use AoE abilities to destroy Alarmbot + swarms from range, or rush through before you can detonate Nanoswarm.
+**Counter-Adaptation:** When they recon your setup: place Alarmbot in spots that drones cannot easily reach (behind boxes, in corners with narrow angles). When they AoE-clear: spread your setup wider so a single ability cannot destroy both — force them to spend two abilities instead of one. When they rush through: detonate Nanoswarm immediately on Alarmbot trigger (do not wait) — the 0.5-second detonation delay is fast enough to catch sprinting enemies if the placement is tight.
 
 **Struggling**: "Your utility is getting cleared too easily. Spread your setup across multiple angles instead of stacking everything in one corridor. Remember — turret is for info first, damage second."
 

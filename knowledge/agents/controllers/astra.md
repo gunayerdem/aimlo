@@ -56,10 +56,14 @@ Astra is the macro-strategic controller who commands the entire map from the ast
 
 ## 7. What To Tell The Player
 
-**When performing well**:
-Pattern: You are pre-placing stars at enemy-favored choke points during buy phase, activating Gravity Well at doorways where enemies cannot escape the pull radius, and following up with Nova Pulse to concuss pulled enemies before your team peeks.
-Why it works: Gravity Well at a tight doorway catches enemies mid-push with no lateral space to escape the pull. The immediate Nova Pulse concuss on pulled targets leaves them unable to counterstrafe or aim for 2+ seconds — your team enters during that concuss window against opponents who cannot fight back. Pre-placing during buy phase means zero astral entries during live combat, keeping your body safe.
-How to repeat: Step 1: Place 3 stars for Nebula smokes and 2 stars at choke-point doorways during buy phase. Step 2: On execute, activate Nebula smokes first, then trigger Gravity Well at the choke where defenders anchor. Step 3: Immediately follow with Nova Pulse on the same star location. Recall unused stars between rounds and reposition based on the enemy's attack pattern from the previous round.
+### When performing well
+**Player Action:** You pre-place all 5 stars during buy phase, activate Gravity Well at tight doorways where enemies cannot escape the pull radius, and immediately follow with Nova Pulse to concuss pulled targets before your team swings.
+**Enemy Perception:** Defenders see stars placed on their choke points and know utility is coming, but they cannot tell WHICH activation (smoke, pull, or concuss) until it fires. They must guess whether to hold position or retreat before they know what the star will do.
+**Enemy Reaction:** They are forced to either abandon the choke pre-emptively (giving up the angle for free) or hold and gamble that the star is a smoke, not a Gravity Well. If they guess wrong and get pulled, the Nova Pulse follow-up concusses them for 2+ seconds with no counterplay — they cannot shoot, strafe, or reposition.
+**Exploit Window:** The 2-second concuss window from the Gravity Well into Nova Pulse combo is a guaranteed free-kill window for your team. Defenders caught in the combo are unable to counterstrafe or aim for the full 2 seconds — enough for any teammate to swing and kill them before they recover.
+**Repeat Strategy:** Round 1: Gravity Well + Nova Pulse at the main choke, Nebula smokes on crossfires. Round 2: activate the choke stars as Nebula smokes instead (defenders who retreated give up the angle for nothing). Round 3: Gravity Well the secondary choke where defenders relocated. Recall and reposition unused stars between rounds based on enemy patterns.
+**Enemy Adaptation:** After 3-5 rounds, defenders will play further from star positions (outside pull radius), destroy stars with utility, or stagger their positions so only one player is caught by the combo.
+**Counter-Adaptation:** When they play far from stars: recall and place new stars deeper into their fallback positions between rounds. When they destroy stars: place stars in concealed spots (behind boxes, inside walls) where destruction requires committing. When they stagger positions: use Gravity Well on the isolated player and Nebula smoke on the second — your team fights 5v1 then 5v1 sequentially instead of 5v2.
 
 **When struggling**: "Stop entering astral form mid-fight. Place your stars in the buy phase, trust your reads, and activate from the physical world. Your body is getting killed while you are in the sky."
 

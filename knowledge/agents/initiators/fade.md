@@ -56,10 +56,14 @@ Fade is the aggressive info-gatherer who chains abilities together to create cas
 
 ## 7. What To Tell The Player
 
-**When performing well**:
-Pattern: You are chaining Haunt-into-Prowler-into-Seize within a 3-5 second window, throwing Haunt at angles that require enemies to turn away from the entry path to destroy the eye.
-Why it works: Haunt placed behind or above defenders forces a choice — shoot the eye and expose your back to the entry, or ignore it and get tagged with a trail that Prowler will chase. The Prowler follow-up on a tagged enemy delivers a guaranteed nearsight, and Seize on their escape route locks them in place. The full chain strips a defender of vision, movement, and positioning within 5 seconds.
-How to repeat: Step 1: Throw Haunt above or behind the most common hold angle, using wall bounces to hide the approach. Step 2: The moment Haunt lands, send Prowler toward the revealed position. Step 3: If the enemy attempts to flee, throw Seize at their escape route. Call "pushing now" so the team enters during the nearsight window. Alternate Haunt throw positions each round to prevent pre-aim destruction.
+### When performing well
+**Player Action:** You chain Haunt into Prowler into Seize within a 3-5 second window, placing the Haunt eye behind or above defenders so destroying it requires them to turn away from entry.
+**Enemy Perception:** Defenders hear the Haunt throw and must immediately decide: shoot the eye (turning away from the entry path) or ignore it and get tagged with a terror trail. They experience Fade's kit as an escalating trap — each ability compounds the previous one's punishment.
+**Enemy Reaction:** They are forced into a lose-lose-lose sequence. Shooting Haunt: costs 1 second of crosshair time on entry. Ignoring Haunt: terror trail reveals them AND sends Prowler directly to their position. Running from Prowler: Seize locks their escape route. The full chain strips vision, movement, and aim within 5 seconds with no single correct counterplay.
+**Exploit Window:** The 2-3 second Prowler nearsight on a tagged enemy is the kill window — your team swings against a defender who cannot see, is pinned by Seize, and has already spent 1-2 seconds dealing with Haunt. The total debuff chain lasts 5+ seconds, which is long enough for a full site entry.
+**Repeat Strategy:** Round 1: Haunt from a wall-bounce angle, Prowler to the tagged position, Seize on escape. Round 2: Haunt from the opposite side of the site to catch defenders who shifted positions. Round 3: skip Haunt and send Prowler raw — defenders who wait for Haunt audio before holding are caught off-guard by the Prowler arriving first.
+**Enemy Adaptation:** After 3-5 rounds, defenders will pre-aim Haunt landing spots to destroy it in under 0.5 seconds, play deeper positions outside Seize range, or push before the chain begins.
+**Counter-Adaptation:** When they instant-destroy Haunt: use wall-bounce trajectories that hide the eye's approach until the last moment. When they play deep: Seize their deep position first (before Haunt) to lock them in place, then Haunt over the locked enemy. When they push early: Prowler the push to nearsight the aggressors and call your team to collapse on the blinded rushers.
 
 **When struggling**: "Your abilities are disconnected. Stop using them one at a time. Throw Haunt, then immediately send Prowler to the revealed position, then Seize if they try to run. The chain is everything."
 

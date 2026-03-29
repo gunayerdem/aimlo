@@ -56,10 +56,14 @@ Brimstone is the dependable, support-oriented controller built around precision 
 
 ## 7. What To Tell The Player
 
-**When performing well**:
-Pattern: You are deploying 2 smokes on execute while reserving 1 for mid-round re-smoke, and saving both Incendiary charges exclusively for post-plant lineup positions.
-Why it works: Two smokes deny the critical crossfires during the execute, while the reserved third smoke lets you re-deny an angle when the first one fades — this removes the 5-second window where defenders push through expired smokes. Incendiary on default defuse positions forces a 4-second delay per charge, stacking to 8 total seconds of denial that the enemy cannot bypass with gunplay.
-How to repeat: Step 1: During buy phase, pre-select your two execute smokes and one re-smoke target on the tactical map. Step 2: Drop two smokes on execute call, hold the third. Step 3: After plant, position for your Incendiary lineup. Throw the first Incendiary when you hear defuse audio, hold the second until the first expires.
+### When performing well
+**Player Action:** You deploy 2 smokes on execute while reserving 1 for mid-round re-smoke, and save both Incendiary charges exclusively for post-plant lineup denial on default defuse.
+**Enemy Perception:** Defenders see reliable smoke coverage with no gaps. They expect the standard 2-smoke pattern and plan to push through the moment smokes fade. They do not account for your reserved third smoke.
+**Enemy Reaction:** They are forced to wait out the initial smokes (losing 15 seconds of round time) or push through blind. When the first smoke fades and they push, the re-smoke catches them in the open with no cover — they are mid-rotation in a denied sightline.
+**Exploit Window:** The 3-5 second window where defenders commit to pushing an expired smoke, only to be re-smoked mid-push, leaves them stranded in no-man's-land with their rotation committed and no cover. Post-plant, your two Incendiaries deny 8 total seconds of defuse time — enough to burn 40% of the defuse timer.
+**Repeat Strategy:** Rounds 1-3: deploy 2 smokes on execute, hold the third for the first re-smoke timing. After plant, position for Incendiary lineup and throw only on defuse audio. Round 4+: vary which smoke you hold for re-smoke (sometimes hold the second instead of the third) to change which sightline reopens first.
+**Enemy Adaptation:** After 4-5 rounds, defenders will time their pushes to beat the re-smoke, pre-aim the Incendiary lineup spots to kill you before you throw, or stack aggression before your smokes land.
+**Counter-Adaptation:** When they time pushes: vary re-smoke timing by 2-3 seconds so they cannot predict the window. When they hunt your lineup position: use a different lineup spot or throw Incendiary from a shorter distance with a riskier but unexpected angle. When they aggress early: use Stim Beacon on your team and fight — Brimstone with combat stim and teammates beats a rushed push.
 
 **When struggling**: "You are over-investing utility early. Save at least one smoke for mid-round. Your Incendiary is your best ability -- do not waste it in fights."
 

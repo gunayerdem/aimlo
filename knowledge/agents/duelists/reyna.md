@@ -52,9 +52,13 @@ FIX: Coach controlled aggression during Empress. The ult amplifies her kit but d
 
 ## 7. What To Tell The Player
 ### When performing well
-Pattern: You are choosing Devour over Dismiss after kills in covered positions, entering each successive duel at full HP, and using Leer placed inside walls where enemies cannot shoot it before swinging.
-Why it works: Devour after a kill in a safe spot regenerates you to full health, which means you win the next duel with an HP advantage that other duelists cannot replicate. Wall-placed Leer forces defenders to either peek blind or reposition, giving you a free first shot either way.
-How to repeat: Step 1: Throw Leer through a wall surface near the angle you are about to peek. Step 2: Swing immediately while the enemy is nearsighted. Step 3: After the kill, Devour if behind cover, Dismiss only if exposed to a second angle. Repeat the Leer-peek-Devour cycle for each subsequent defender on site.
+**Player Action:** You throw Leer through wall surfaces where it cannot be shot, swing during the nearsight window, then Devour from cover to heal to full HP before the next duel.
+**Enemy Perception:** Defenders see a Reyna winning every duel at full HP. They believe you are hitting difficult shots, but the real advantage is the Leer-Devour cycle that gives you a nearsight advantage on entry AND full HP regeneration between kills. They cannot figure out why trading you is so difficult.
+**Enemy Reaction:** They are forced to either fight nearsighted (losing the duel) or turn to shoot the Leer (taking their crosshair off the entry angle for 0.5-1 second). After you Devour, they cannot chip you down across fights — every duel resets to full HP vs their accumulated damage.
+**Exploit Window:** The 2-second nearsight from wall-placed Leer (which they cannot pre-shoot) creates a guaranteed first-shot window. The Devour heal between kills means each subsequent duel compounds your HP advantage by 20-50 HP over the next defender.
+**Repeat Strategy:** Fight 1: Leer through wall, swing, kill, Devour behind cover. Fight 2: Leer a different wall angle, swing at full HP, kill, Devour again. Fight 3: if Empress is available, activate it for infinite soul orbs and chain through remaining defenders. Always Devour from cover, Dismiss only when exposed to a second angle.
+**Enemy Adaptation:** After 3-4 rounds, defenders will hold positions where the Leer cannot reach through walls, double-peek you so the second player trades during your Devour animation, or push aggressively before you can set up the Leer.
+**Counter-Adaptation:** When they play anti-Leer positions: throw Leer in the open but from a high angle that requires them to look up (away from your swing angle). When they double-peek: Dismiss instead of Devour to become invulnerable during the trade attempt, then reposition. When they push early: hold a passive angle and let them walk into your Leer at close range where reaction time is eliminated.
 ### When struggling
 "Your aim is not landing right now. Play for trades — let a teammate go first and use Leer to support their entry."
 ### When being predictable

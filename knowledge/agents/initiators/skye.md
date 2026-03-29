@@ -56,10 +56,14 @@ Skye is the versatile initiator who combines flashes, healing, and scouting into
 
 ## 7. What To Tell The Player
 
-**When performing well**:
-Pattern: You are popping Guiding Light 0.5 seconds before your teammate's peek, listening for the hit audio cue, and using Regrowth between fights to restore team HP before the next engagement.
-Why it works: The 0.5-second lead time means the blind is active at the exact moment your teammate swings — any earlier and the blind fades, any later and the defender fires first. The hit audio cue from Guiding Light confirms an enemy is blinded, giving the team a guaranteed window to peek. Regrowth between fights accumulates a 20-40 HP advantage across the team over multiple engagements, which compounds into winning duels that would otherwise be coin flips.
-How to repeat: Step 1: Pop Guiding Light above or to the side of the entry angle (never in the entry path) 0.5 seconds before the teammate peeks. Step 2: Listen for the hit cue and immediately call "flashed" so the team swings. Step 3: After the fight, group behind cover and Regrowth anyone below 100 HP before taking the next angle. Send Trailblazer from varied paths each round to prevent pre-aim destruction.
+### When performing well
+**Player Action:** You pop Guiding Light 0.5 seconds before your teammate's peek, call the hit audio cue immediately, and Regrowth your team between every fight to maintain a rolling HP advantage.
+**Enemy Perception:** Defenders see flashes timed perfectly with peeks and believe the entry player has exceptional coordination. They do not realize the hit cue is giving your team a confirmed-blind signal — they think teammates are guessing when to swing.
+**Enemy Reaction:** They are forced to either turn away from every Guiding Light (losing 0.5-1 second of crosshair time on the entry) or eat the flash and fight blind. Turning away repeatedly trains a flinch response that you can exploit by sending the bird without popping it — they turn away from a flash that never pops.
+**Exploit Window:** The 0.5-1 second window between the flash pop and your teammate's peek arrival is a guaranteed first-shot window against a blinded defender. Between fights, each Regrowth session adds 20-40 HP across the team — over 3 engagements, that is 60-120 HP of advantage that compounds every duel from a coin flip into a favorable trade.
+**Repeat Strategy:** Fight 1: Guiding Light from above, call hit cue, teammate swings. Between fights: Regrowth anyone below 100 HP behind cover. Fight 2: Guiding Light from a side angle (never the same trajectory twice). Fight 3: send Trailblazer from a varied path to scout before the flash. Always listen for the hit cue — no hit means no enemy, redirect.
+**Enemy Adaptation:** After 4-5 rounds, defenders will pre-turn on every flash sound (reducing blind duration to 0.3 seconds), hold deeper positions outside Trailblazer pathing, or rush before you can set up the flash-peek timing.
+**Counter-Adaptation:** When they pre-turn every flash: send Guiding Light and do NOT pop it — they turn for nothing and your teammate catches them mid-rotation looking the wrong way. When they hold deep: Trailblazer into their position to force them to shoot it (revealing location) or take the concuss. When they rush: Regrowth your team to full HP and hold the angle — rushers against full-HP defenders with a flash in hand lose the trade math.
 
 **When struggling**: "You are team-flashing. Call every bird before popping it and wait until your teammate is ready to peek. The flash exists for them, not for you."
 

@@ -52,9 +52,13 @@ FIX: On full-buy rounds, recommend Op purchases when holding long angles. Jett w
 
 ## 7. What To Tell The Player
 ### When performing well
-Pattern: You are varying your Tailwind entry angles across rounds — different dash positions, different timing delays before committing.
-Why it works: Defenders cannot pre-aim a single angle when your dash entry point changes every round. This forces them into reactive aim instead of prepared crosshair placement, and your Updraft mix-ins add a vertical axis they cannot predict.
-How to repeat: Round 1-2: dash from different site entry angles. Round 3: delay your Tailwind by 2 seconds to catch rotators. Round 4+: mix Updraft entries with ground-level dashes. Never repeat the same entry twice consecutively.
+**Player Action:** You vary your Tailwind dash entry angles and mix Updraft vertical peeks across rounds — never the same entry twice.
+**Enemy Perception:** Defenders cannot build a mental model of where you will appear. They expect ground-level after 2 ground entries, then you Updraft. They hold close after a close dash, then you dash deep.
+**Enemy Reaction:** They are forced into reactive aim instead of prepared crosshair placement. Some start pre-aiming one angle and gambling — others spread their crosshair placement thin trying to cover multiple options.
+**Exploit Window:** The 0.5-1 second recalibration time when a defender realizes you are NOT where they expected creates a free first-shot opportunity. This window is largest on the 3rd-4th different entry of the half.
+**Repeat Strategy:** Rounds 1-2: different ground-level entry angles. Round 3: Updraft entry to punish ground-level pre-aim. Round 4: delay dash by 2 seconds to catch early rotators. Never repeat the same entry in consecutive rounds.
+**Enemy Adaptation:** After 5+ rounds, smart defenders will play deeper (off the angle entirely), stack the site with 2 players, or save utility specifically for your entry timing.
+**Counter-Adaptation:** When defenders play deep: slow your entry and clear angles methodically instead of dashing in. When they stack: fake presence at one site (Cloudburst + footstep) then rotate. When they save utility for you: let a teammate bait the utility before you dash.
 ### When struggling
 "Stop forcing dry peeks. Wait for one piece of team utility before you dash in. Your job is first kill, not first death."
 ### When being predictable
