@@ -333,7 +333,7 @@ const CONFIDENCE_PROMPTS: Record<string, string> = {
 
 // Tone modes
 const TONE_PROMPTS: Record<string, string> = {
-  strict: `\nTON: SERT KOÇ — Doğrudan konuş, hata varsa net söyle, övgü sadece kazanıldıysa. Kısa cümleler, fluff yok. Koç gibi konuş, arkadaş gibi değil.`,
+  strict: `\nTON: SERT KOÇ — Doğrudan konuş, hata varsa net söyle, övgü sadece kazanıldıysa. Kısa cümleler, fluff yok. Koç gibi konuş, arkadaş gibi değil. Sert ton SADECE tekrar eden ve ciddi hatalarda. Aynı sert kalıbı her output'ta tekrarlama. "Bu kabul edilemez" gibi ifadeleri sadece gerçekten kritik pattern'lerde kullan.`,
   balanced: `\nTON: DENGELİ KOÇ — Net ama saygılı. Hataları belirt, açıkla, yönlendir. Öğretici ton.`,
   analytical: `\nTON: ANALİTİK — Sıfır duygu, saf veri ve mantık. Rakamlar ve pattern'ler konuşsun.`,
 };
@@ -342,7 +342,7 @@ const TONE_PROMPTS: Record<string, string> = {
 const HYBRID_LANGUAGE_RULE = `\nDİL KURALI: Cümleler Türkçe AMA oyun terimleri İngilizce kalacak. İngilizce KALACAK: peek, trade, dash, entry, utility, angle, timing, setup, execute, rotate, lurk, anchor, retake, default, swing, smoke, flash, molly, lineup, post-plant, anti-eco, op, crosshair, off-angle, site, plant, defuse, clutch. YANLIŞ: "yetenek kullan", "tuzak kur" DOĞRU: "utility kullanmadan entry atıyorsun"`;
 
 // Cross-match personalization
-const PERSONALIZATION_RULE = `\nKİŞİSELLEŞTİRME: Her output'ta en az 1 cross-match referansı olmalı. Örnek: "Son maçlarda A Short sorunu azalmış ama B Main'de yeni pattern oluşmuş". Veri yetersizse: "İlk maçlar — henüz cross-match pattern çıkarmak için erken"`;
+const PERSONALIZATION_RULE = `\nKİŞİSELLEŞTİRME: Eğer önceki round'larda tekrar eden pattern varsa referans et. GÜVENLİK: Sadece veride GERÇEKTEN OLAN pattern'leri referans et. Uydurma trend YAPMA. Veri yoksa geçmiş round'lar hakkında yorum yapma.`;
 
 /* ══════════════════════════════════════════════════════════
    DETERMINISTIC FEEDBACK — stable, no Math.random
