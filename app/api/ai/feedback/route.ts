@@ -623,31 +623,29 @@ No markdown, no code blocks, just JSON.
 ${confidenceAddition}${TONE_PROMPTS["strict"]}${isTr ? HYBRID_LANGUAGE_RULE : ""}${PERSONALIZATION_RULE}
 
 YASAK CÜMLELER (bunları asla kullanma):
-- "daha dikkatli oyna"
-- "bilgi topla"
-- "pozisyonunu geliştir"
-- "takımınla oyna"
-- "utility kullan"
-- "iyi gidiyorsun"
-- "gelişmeye devam et"
-Her cümlende pozisyon ismi, round numarası veya sayısal veri olmalı.
+- "daha dikkatli oyna", "dikkatli ol", "bilgi topla", "pozisyonunu geliştir"
+- "takımınla oyna", "utility kullan", "iyi gidiyorsun", "gelişmeye devam et"
+- "farklı dene", "daha iyi oyna", "daha verimli kullan", "daha agresif oyna"
+Her cümlende MİKRO-POZİSYON ismi olmalı (A Short, B Main entry, Generator off-angle — "site" veya "mid" tek başına KABUL EDİLMEZ).
+
+FORMAT KURALI:
+- deathAnalysis: max 3 cümle (sorun + neden + düşman davranışı)
+- nextRoundPlan: max 2 cümle, MİNİMUM 2 varyasyon ("A yap VEYA B yap")
+- Tek fix YASAK — düşman tek fix'e adapte olur
 
 SIFIR SAHTE AI KURALI:
 - Veride OLMAYAN bilgiyi UYDURMA
-- Her coaching çıktısında DÜŞMAN DAVRANIŞI modelle: düşman ne bekliyor, ne yapıyor
 - Coaching = durum tespiti + neden oluyor + düşman ne yapıyor + oyuncu ne yapmalı
 - Bu 4 bileşen eksikse output GEÇERSİZ
 
-DÜŞMAN ADAPTASYON MODELİ:
-- Düşman aynı pattern'i gördüğünde: pre-aim, utility saklama, stack, timing değişikliği yapacak
-- deathAnalysis'te düşmanın seni nasıl okuduğunu açıkla
-- nextRoundPlan'da düşmanın beklentisinin DIŞINDA bir hamle öner
-- Eğer oyuncu iyi oynuyorsa: ne çalıştığını + düşmanın neden zorlandığını + nasıl tekrar edeceğini yaz
+DÜŞMAN MODELİ (ZORUNLU):
+- deathAnalysis'te düşmanın seni NASIL okuduğunu açıkla (pre-aim, timing, util)
+- nextRoundPlan'da düşmanın beklentisinin DIŞINDA hamle öner
+- COUNTER-ADAPTATION: "Bu fix'i de öğrenirse..." ile sonraki adımı belirt
 
-HAIKU OPTİMİZASYON:
-- Kısa tut, gereksiz kelime yok
-- Netlik > uzunluk
-- Her kelime bilgi taşımalı`;
+OPTİMİZASYON:
+- Max 4 cümle toplam. Her kelime bilgi taşımalı.
+- Netlik > uzunluk`;
 
   // Sanitized user prompt — note is truncated, escaped, and XML-sandboxed
   const safeNote = form.yourNote.replace(/["\\\n\r\t]/g, " ").slice(0, 300);
