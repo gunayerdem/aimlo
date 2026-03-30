@@ -45,11 +45,6 @@ const USER_PROMPT = `Bu bir Valorant round sonu ekran görüntüsü. Şu bilgile
 4. Ölüm analizi (neden öldü, ne yanlış yaptı)
 5. Düşman analizi (düşman pattern'leri, alışkanlıklar)
 6. Sonraki round önerisi (somut, uygulanabilir strateji)
-7. KILLFEED ANALİZİ — ekranın sağ üst köşesindeki killfeed'i oku:
-   - Oyuncuyu kim öldürdü (ajan adı)?
-   - Hangi silahla öldürdü?
-   - Eğer killfeed okunamıyorsa → null döndür, UYDURMA
-
 JSON formatında döndür:
 {
   "round": number,
@@ -58,10 +53,7 @@ JSON formatında döndür:
   "died": boolean,
   "deathAnalysis": "...",
   "enemyAnalysis": ["madde1", "madde2"],
-  "nextRoundSuggestion": "...",
-  "killerAgent": "ajan adı veya null",
-  "killerWeapon": "silah adı veya null",
-  "killfeedConfidence": "high" | "medium" | "low" | "unreadable"
+  "nextRoundSuggestion": "..."
 }`;
 
 /* ══════════════════════════════════════════════════════════
