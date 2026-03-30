@@ -90,9 +90,24 @@ const USER_PROMPT = `Bu bir Valorant round sonu ekran görüntüsü. Şu bilgile
    - 0 sinyal → hata iddiası YASAK
    - "aim'ini geliştir", "daha dikkatli ol" YASAK — sadece GÖRÜNEN hatayı belirt
 
+   BAĞLAM DOĞRULAMA (KRİTİK — yanlış hata tespitini önler):
+   Hata iddiası yapmadan ÖNCE şunları kontrol et:
+   - Aktif çatışma mı? Oyuncu trade alıyorsa veya düşmanla exchange yapıyorsa "açık kalma" hata DEĞİLDİR
+   - Reposition anı mı? Oyuncu pozisyon değiştirirken yakalanmışsa, bu bir hata olabilir ama kesin değil
+   - İlk temas mı? Oyuncu peek alıp ilk teması kaybettiyse farklı, açık alanda yürürken vurulduysa farklı
+   - Kasıtlı oyun mu? Wide swing trade setup olabilir, agresif peek bilgi toplama olabilir
+
+   DOĞRULAMA SONUCU:
+   - Hata sinyalleri VAR + bağlam destekliyor → "Bu açıdan fazla açık kaldın — cover kullanmamak hataydı"
+   - Hata sinyalleri VAR + bağlam belirsiz → "Bu pozisyonda açık kalmış görünüyorsun, ancak bu bir trade/çatışma anı olabilir"
+   - Hata sinyalleri VAR + bağlam çelişiyor → hata iddiası YAPMA (aktif trade = normal gameplay)
+   - Bağlam okunamıyorsa → "kesin hata demek için yeterli bağlam yok" ekle
+
    deathAnalysis'te bu kanıtları kullan:
-   DOĞRU: "B Main girişinde açık kaldın, cover kullanmadan wide swing yaptın, düşman dar angle'dan bekliyordu"
+   DOĞRU: "B Main girişinde cover kullanmadan wide swing yaptın ve düşman dar angle'dan bekliyordu — aktif çatışma değil, pozisyon hatası"
+   DOĞRU: "Açık alanda vuruldun ama bu bir trade anı olabilir — kesin hata demek zor"
    YANLIŞ: "aim'in kötüydü" veya "daha dikkatli oynasaydın"
+   YANLIŞ: Çatışma ortasında açık kalmayı "pozisyon hatası" olarak etiketlemek
 
 JSON formatında döndür:
 {
