@@ -45,6 +45,10 @@ const USER_PROMPT = `Bu bir Valorant round sonu ekran görüntüsü. Şu bilgile
 4. Ölüm analizi (neden öldü, ne yanlış yaptı)
 5. Düşman analizi (düşman pattern'leri, alışkanlıklar)
 6. Sonraki round önerisi (somut, uygulanabilir strateji)
+7. KILLFEED ANALİZİ — ekranın sağ üst köşesindeki killfeed'i oku:
+   - Oyuncuyu kim öldürdü (ajan adı)?
+   - Hangi silahla öldürdü?
+   - Eğer killfeed okunamıyorsa → null döndür, UYDURMA
 
 JSON formatında döndür:
 {
@@ -54,7 +58,10 @@ JSON formatında döndür:
   "died": boolean,
   "deathAnalysis": "...",
   "enemyAnalysis": ["madde1", "madde2"],
-  "nextRoundSuggestion": "..."
+  "nextRoundSuggestion": "...",
+  "killerAgent": "ajan adı veya null",
+  "killerWeapon": "silah adı veya null",
+  "killfeedConfidence": "high" | "medium" | "low" | "unreadable"
 }`;
 
 /* ══════════════════════════════════════════════════════════
@@ -82,6 +89,9 @@ type RoundFeedback = {
   deathAnalysis: string;
   enemyAnalysis: string[];
   nextRoundSuggestion: string;
+  killerAgent?: string | null;
+  killerWeapon?: string | null;
+  killfeedConfidence?: string;
 };
 
 /* ══════════════════════════════════════════════════════════
@@ -133,6 +143,9 @@ const DEFAULT_FEEDBACK: RoundFeedback = {
   deathAnalysis: "Analiz yapılamadı.",
   enemyAnalysis: ["Analiz yapılamadı."],
   nextRoundSuggestion: "Dikkatli oyna, bilgi topla.",
+  killerAgent: null,
+  killerWeapon: null,
+  killfeedConfidence: "unreadable",
 };
 
 /* ══════════════════════════════════════════════════════════
@@ -254,6 +267,13 @@ export async function POST(request: NextRequest) {
 
     if (isValidFeedbackShape(parsed)) {
       const fb = parsed as RoundFeedback;
+      // Validate killfeed data — only pass if confidence is meaningful
+      const validAgents = ["jett","reyna","raze","phoenix","neon","yoru","iso","waylay","sage","cypher","killjoy","chamber","deadlock","vyse","veto","omen","brimstone","viper","astra","harbor","clove","miks","sova","fade","skye","kayo","kay/o","gekko","breach","tejo"];
+      const rawKiller = typeof fb.killerAgent === "string" ? fb.killerAgent.toLowerCase().trim() : null;
+      const killerAgent = rawKiller && validAgents.includes(rawKiller) ? fb.killerAgent!.trim() : null;
+      const killerWeapon = typeof fb.killerWeapon === "string" && fb.killerWeapon.trim().length > 1 ? fb.killerWeapon.trim().slice(0, 30) : null;
+      const killfeedConfidence = typeof fb.killfeedConfidence === "string" && ["high","medium","low","unreadable"].includes(fb.killfeedConfidence) ? fb.killfeedConfidence : "unreadable";
+
       return NextResponse.json({
         round: typeof fb.round === "number" ? fb.round : 0,
         score: typeof fb.score === "string" ? fb.score.slice(0, 10) : "?-?",
@@ -262,6 +282,9 @@ export async function POST(request: NextRequest) {
         deathAnalysis: fb.deathAnalysis.slice(0, 500),
         enemyAnalysis: fb.enemyAnalysis.slice(0, 5).map((s) => String(s).slice(0, 200)),
         nextRoundSuggestion: fb.nextRoundSuggestion.slice(0, 500),
+        killerAgent: killerAgent,
+        killerWeapon: killerWeapon,
+        killfeedConfidence: killfeedConfidence,
       });
     }
 
