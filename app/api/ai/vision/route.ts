@@ -42,7 +42,12 @@ ZAMANSAL TUTARLILIK:
 - 2+ round aynı pozisyon = "tekrar eden" pattern
 - 3+ round yakın zamanda (son 5 round içinde) = "güçlü pattern — zamanlama olarak da tutarlı"
 - Eski ve yeni round'lar farklı pozisyonsa = "yeni pattern gelişiyor olabilir"
-- Tek round + tek pozisyon = KESİNLİKLE pattern iddiası yapma`;
+- Tek round + tek pozisyon = KESİNLİKLE pattern iddiası yapma
+
+ENTRY PATH COACHING:
+- Art arda aynı bölgede ölüm = "aynı entry çizgisi cezalandırılıyor" → giriş değiştirmeli
+- Entry değişikliği tespit edilmişse → pozitif geri bildirim ver ("giriş çizgini değiştirdin — iyi")
+- Entry pattern GÜÇLÜ ise → "entry tamamen okunabilir, düşman seni bekliyor" kesin dil kullan`;
 
 const USER_PROMPT = `Bu bir Valorant round sonu ekran görüntüsü. Şu bilgileri çıkar ve Türkçe coaching feedback ver:
 
@@ -252,7 +257,37 @@ export async function POST(request: NextRequest) {
         }
       }
 
-      userPromptWithHistory += `\n\nSon round geçmişi (gözlemlenmiş):\n${historyLines.join("\n")}\n${patternNote}${posNote}`;
+      // Entry path inference — detect repeated entry behavior from death positions
+      let entryNote = "";
+      if (posEntries.length >= 2) {
+        // Check consecutive rounds with same death position → repeated entry path
+        let consecutiveCount = 1;
+        let consecutivePos = "";
+        for (let i = 1; i < posEntries.length; i++) {
+          if (posEntries[i].pos === posEntries[i - 1].pos && posEntries[i].round - posEntries[i - 1].round <= 2) {
+            consecutiveCount++;
+            consecutivePos = posEntries[i].pos;
+          } else {
+            consecutiveCount = 1;
+          }
+        }
+
+        // Detect area variation — did player change entry area?
+        const uniqueAreas = [...new Set(posEntries.map(e => e.pos))];
+        const lastPos = posEntries[posEntries.length - 1]?.pos;
+        const prevPositions = posEntries.slice(0, -1).map(e => e.pos);
+        const isNewArea = lastPos && prevPositions.length > 0 && !prevPositions.includes(lastPos);
+
+        if (consecutiveCount >= 3) {
+          entryNote = `\nEntry pattern (GÜÇLÜ): ${consecutivePos} bölgesinden ${consecutiveCount} round art arda entry yapıyorsun — giriş çizgin tamamen okunabilir.`;
+        } else if (consecutiveCount >= 2) {
+          entryNote = `\nEntry pattern: ${consecutivePos} bölgesinden art arda entry — okunabilir hale geliyor olabilir.`;
+        } else if (isNewArea && uniqueAreas.length >= 2) {
+          entryNote = `\nEntry değişikliği: Önceki round'larda ${prevPositions[prevPositions.length - 1]} bölgesindeydin, şimdi ${lastPos} — giriş çizgini değiştirdin.`;
+        }
+      }
+
+      userPromptWithHistory += `\n\nSon round geçmişi (gözlemlenmiş):\n${historyLines.join("\n")}\n${patternNote}${posNote}${entryNote}`;
     }
 
     // Call Anthropic Vision
