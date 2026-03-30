@@ -35,7 +35,14 @@ YASAK KESİNLİK (kanıtsız söylenemez):
 - "Her round aynı şeyi yapıyorlar" — kanıt yoksa YASAK
 - "Düşman seni kesin okudu" — gözlem değil tahmin
 
-KURAL: Kanıt yoksa tarihsel iddia yapma. Sadece mevcut round'u yorumla.`;
+KURAL: Kanıt yoksa tarihsel iddia yapma. Sadece mevcut round'u yorumla.
+
+ZAMANSAL TUTARLILIK:
+- Tek round'da tespit edilen pozisyon = "bu round'da" dil
+- 2+ round aynı pozisyon = "tekrar eden" pattern
+- 3+ round yakın zamanda (son 5 round içinde) = "güçlü pattern — zamanlama olarak da tutarlı"
+- Eski ve yeni round'lar farklı pozisyonsa = "yeni pattern gelişiyor olabilir"
+- Tek round + tek pozisyon = KESİNLİKLE pattern iddiası yapma`;
 
 const USER_PROMPT = `Bu bir Valorant round sonu ekran görüntüsü. Şu bilgileri çıkar ve Türkçe coaching feedback ver:
 
@@ -218,16 +225,32 @@ export async function POST(request: NextRequest) {
         ? `Pattern: Son ${total} round'un ${deathCount}'${deathCount > 1 ? "inde" : "unda"} ölüm → tekrar eden sorun kanıtlanmış`
         : `Son ${total} round'da ${deathCount} ölüm`;
 
-      // Position pattern detection from memory (medium+ confidence entries)
-      const deathPositions = roundHistory
+      // Position pattern detection with temporal stability scoring
+      const posEntries = roundHistory
         .filter((r: Record<string, unknown>) => r.died && r.death_position && (r.position_confidence === "high" || r.position_confidence === "medium"))
-        .map((r: Record<string, unknown>) => (r.death_position as string).toLowerCase());
+        .map((r: Record<string, unknown>) => ({
+          pos: (r.death_position as string).toLowerCase(),
+          round: r.round_index as number,
+        }));
+
       const posCounts: Record<string, number> = {};
-      deathPositions.forEach(p => { posCounts[p] = (posCounts[p] || 0) + 1; });
+      posEntries.forEach(e => { posCounts[e.pos] = (posCounts[e.pos] || 0) + 1; });
       const topPos = Object.entries(posCounts).sort((a, b) => b[1] - a[1])[0];
-      const posNote = topPos && topPos[1] >= 2
-        ? `\nPosition pattern (KANITLANMIŞ): ${topPos[0]} bölgesinde ${topPos[1]} kez öldün`
-        : "";
+
+      // Temporal stability: check if deaths at same position are RECENT (not spread across 10+ rounds)
+      let posNote = "";
+      if (topPos && topPos[1] >= 2) {
+        const matchingRounds = posEntries.filter(e => e.pos === topPos[0]).map(e => e.round);
+        const recentRounds = matchingRounds.slice(-3); // last 3 occurrences
+        const span = recentRounds.length >= 2 ? recentRounds[recentRounds.length - 1] - recentRounds[0] : 0;
+        const isRecent = span <= 5; // within last 5 rounds = temporally clustered
+
+        if (topPos[1] >= 3 && isRecent) {
+          posNote = `\nPosition pattern (GÜÇLÜ — ${topPos[1]} kez, son ${span + 1} round içinde): ${topPos[0]} bölgesinde tekrar eden ölüm. Bu pattern zamanlama olarak da tutarlı.`;
+        } else if (topPos[1] >= 2) {
+          posNote = `\nPosition pattern (KANITLANMIŞ): ${topPos[0]} bölgesinde ${topPos[1]} kez öldün`;
+        }
+      }
 
       userPromptWithHistory += `\n\nSon round geçmişi (gözlemlenmiş):\n${historyLines.join("\n")}\n${patternNote}${posNote}`;
     }
