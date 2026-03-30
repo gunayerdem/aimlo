@@ -187,17 +187,32 @@ export async function POST(request: NextRequest) {
     let userPromptWithHistory = USER_PROMPT;
     const roundHistory = (body as VisionRequest).roundHistory;
     if (roundHistory && Array.isArray(roundHistory) && roundHistory.length > 0) {
-      const historyLines = roundHistory.map((r) => {
+      const historyLines = roundHistory.map((r: Record<string, unknown>) => {
         const status = r.died ? "öldü" : "hayatta kaldı";
-        const confidence = r.death_detected_confidence === "observed" ? ` (güven: observed)` : "";
-        return `R${r.round_index}: ${status}${confidence}`;
+        const confidence = r.death_detected_confidence === "observed" ? " (güven: observed)" : "";
+        // Include killer info if available (HIGH confidence only from memory safety gate)
+        const killerInfo = r.killer_agent ? ` → killer: ${r.killer_agent}` : "";
+        const weaponInfo = r.killer_weapon ? ` (${r.killer_weapon})` : "";
+        return `R${r.round_index}: ${status}${confidence}${killerInfo}${weaponInfo}`;
       });
       const deathCount = roundHistory.filter((r) => r.died).length;
       const total = roundHistory.length;
       const patternNote = deathCount >= total * 0.5
         ? `Pattern: Son ${total} round'un ${deathCount}'${deathCount > 1 ? "inde" : "unda"} ölüm → tekrar eden sorun kanıtlanmış`
         : `Son ${total} round'da ${deathCount} ölüm`;
-      userPromptWithHistory += `\n\nSon round geçmişi (gözlemlenmiş):\n${historyLines.join("\n")}\n${patternNote}`;
+
+      // Killer pattern detection from memory (HIGH confidence entries only)
+      const killerAgents = roundHistory
+        .filter((r: Record<string, unknown>) => r.died && r.killer_agent && r.killfeed_confidence === "high")
+        .map((r: Record<string, unknown>) => r.killer_agent as string);
+      const killerCounts: Record<string, number> = {};
+      killerAgents.forEach(a => { killerCounts[a] = (killerCounts[a] || 0) + 1; });
+      const topKiller = Object.entries(killerCounts).sort((a, b) => b[1] - a[1])[0];
+      const killerNote = topKiller && topKiller[1] >= 2
+        ? `\nKiller pattern (KANITLANMIŞ): ${topKiller[0]} tarafından ${topKiller[1]} kez öldürüldün`
+        : "";
+
+      userPromptWithHistory += `\n\nSon round geçmişi (gözlemlenmiş):\n${historyLines.join("\n")}\n${patternNote}${killerNote}`;
     }
 
     // Call Anthropic Vision
