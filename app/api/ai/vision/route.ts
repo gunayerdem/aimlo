@@ -76,6 +76,24 @@ const USER_PROMPT = `Bu bir Valorant round sonu ekran görüntüsü. Şu bilgile
    Mümkünse alt-bölge ekle: "B Main entry", "A Site back left", "Mid top close"
    Sadece ana bölge biliniyorsa: "B Main", "A Short"
 
+8. MEKANİK HATA TESPİTİ — ölüm anındaki frame'den GÖRÜNEN kanıtlara dayanarak:
+   Aşağıdaki sinyalleri kontrol et (sadece GÖRÜNEN şeyleri raporla, tahmin YASAK):
+
+   Sinyal 1 — AÇIK KALMA: Oyuncu açık mı, kapalı mı? Duvar/kutu arkasında mı yoksa açık alanda mı?
+   Sinyal 2 — AÇI TİPİ: Dar angle mi tutuyor, geniş swing mi yapmış, off-angle mı?
+   Sinyal 3 — COVER DURUMU: Yakınında sığınacak yer var mı? Kullanmış mı?
+   Sinyal 4 — TEHDİT YÖNÜ: Düşman nereden vuruyor/bakıyor?
+
+   HATA TESPİT KURALI:
+   - 2+ sinyal destekliyorsa → hata iddiası yapılabilir
+   - 1 sinyal → "olabilir" dili kullan
+   - 0 sinyal → hata iddiası YASAK
+   - "aim'ini geliştir", "daha dikkatli ol" YASAK — sadece GÖRÜNEN hatayı belirt
+
+   deathAnalysis'te bu kanıtları kullan:
+   DOĞRU: "B Main girişinde açık kaldın, cover kullanmadan wide swing yaptın, düşman dar angle'dan bekliyordu"
+   YANLIŞ: "aim'in kötüydü" veya "daha dikkatli oynasaydın"
+
 JSON formatında döndür:
 {
   "round": number,
