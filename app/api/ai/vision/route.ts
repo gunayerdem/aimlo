@@ -44,10 +44,12 @@ ZAMANSAL TUTARLILIK:
 - Eski ve yeni round'lar farklı pozisyonsa = "yeni pattern gelişiyor olabilir"
 - Tek round + tek pozisyon = KESİNLİKLE pattern iddiası yapma
 
-ENTRY PATH COACHING:
-- Art arda aynı bölgede ölüm = "aynı entry çizgisi cezalandırılıyor" → giriş değiştirmeli
-- Entry değişikliği tespit edilmişse → pozitif geri bildirim ver ("giriş çizgini değiştirdin — iyi")
-- Entry pattern GÜÇLÜ ise → "entry tamamen okunabilir, düşman seni bekliyor" kesin dil kullan`;
+ÖLÜM BÖLGESİ COACHING:
+- Art arda aynı bölgede ölüm = "bu bölgede tekrar cezalandırılıyorsun"
+- Ölüm bölgesi değişmişse → not et ("ölüm bölgesi değişti")
+- YASAK: "aynı yerden giriyorsun", "entry yapıyorsun", "giriş çizgin" — ölüm pozisyonu ≠ giriş yolu
+- Sadece NEREDE öldüğünü biliyoruz, NASIL oraya geldiğini BİLMİYORUZ
+- "Bu bölgede ölüyorsun" DOĞRU, "bu bölgeden entry yapıyorsun" YANLIŞ`;
 
 const USER_PROMPT = `Bu bir Valorant round sonu ekran görüntüsü. Şu bilgileri çıkar ve Türkçe coaching feedback ver:
 
@@ -257,10 +259,11 @@ export async function POST(request: NextRequest) {
         }
       }
 
-      // Entry path inference — detect repeated entry behavior from death positions
-      let entryNote = "";
+      // Death zone pattern — repeated deaths at same location (NOT entry path inference)
+      // We know WHERE the player died, NOT how they got there
+      let deathZoneNote = "";
       if (posEntries.length >= 2) {
-        // Check consecutive rounds with same death position → repeated entry path
+        // Check consecutive rounds dying at same position
         let consecutiveCount = 1;
         let consecutivePos = "";
         for (let i = 1; i < posEntries.length; i++) {
@@ -272,22 +275,21 @@ export async function POST(request: NextRequest) {
           }
         }
 
-        // Detect area variation — did player change entry area?
-        const uniqueAreas = [...new Set(posEntries.map(e => e.pos))];
+        // Detect area change — died at different location than before
         const lastPos = posEntries[posEntries.length - 1]?.pos;
         const prevPositions = posEntries.slice(0, -1).map(e => e.pos);
         const isNewArea = lastPos && prevPositions.length > 0 && !prevPositions.includes(lastPos);
 
         if (consecutiveCount >= 3) {
-          entryNote = `\nEntry pattern (GÜÇLÜ): ${consecutivePos} bölgesinden ${consecutiveCount} round art arda entry yapıyorsun — giriş çizgin tamamen okunabilir.`;
+          deathZoneNote = `\nDeath zone pattern (GÜÇLÜ): ${consecutivePos} bölgesinde ${consecutiveCount} round art arda öldün — bu bölgede tekrar cezalandırılıyorsun.`;
         } else if (consecutiveCount >= 2) {
-          entryNote = `\nEntry pattern: ${consecutivePos} bölgesinden art arda entry — okunabilir hale geliyor olabilir.`;
-        } else if (isNewArea && uniqueAreas.length >= 2) {
-          entryNote = `\nEntry değişikliği: Önceki round'larda ${prevPositions[prevPositions.length - 1]} bölgesindeydin, şimdi ${lastPos} — giriş çizgini değiştirdin.`;
+          deathZoneNote = `\nDeath zone pattern: ${consecutivePos} bölgesinde art arda ölüm — bu bölge sorun oluşturuyor olabilir.`;
+        } else if (isNewArea) {
+          deathZoneNote = `\nÖlüm bölgesi değişti: önceki round'larda ${prevPositions[prevPositions.length - 1]} bölgesindeydin, şimdi ${lastPos}.`;
         }
       }
 
-      userPromptWithHistory += `\n\nSon round geçmişi (gözlemlenmiş):\n${historyLines.join("\n")}\n${patternNote}${posNote}${entryNote}`;
+      userPromptWithHistory += `\n\nSon round geçmişi (gözlemlenmiş):\n${historyLines.join("\n")}\n${patternNote}${posNote}${deathZoneNote}`;
     }
 
     // Call Anthropic Vision
