@@ -45,11 +45,22 @@ const USER_PROMPT = `Bu bir Valorant round sonu ekran görüntüsü. Şu bilgile
 4. Ölüm analizi (neden öldü, ne yanlış yaptı)
 5. Düşman analizi (düşman pattern'leri, alışkanlıklar)
 6. Sonraki round önerisi (somut, uygulanabilir strateji)
-7. ÖLÜM POZİSYONU — eğer oyuncu öldüyse, spectator kamera açısından ve HUD bilgisinden:
-   - Hangi harita bölgesinde öldü? (örn: "A Short", "B Main", "Mid Catwalk")
-   - Valorant callout isimleri kullan
-   - Emin değilsen "unknown" döndür, UYDURMA
-   - Emin olduğun seviyeyi belirt
+7. ÖLÜM POZİSYONU — ÇOK SİNYALLİ ANALİZ (ZORUNLU):
+   Eğer oyuncu öldüyse, aşağıdaki BAĞIMSIZ sinyalleri ayrı ayrı kontrol et:
+
+   Sinyal A — MİNİMAP: Sol alt köşedeki minimap'te oyuncu ikonu nerede? Okunabiliyorsa bölge tahmini yap, okunamıyorsa null.
+   Sinyal B — SAHNE GEOMETRİSİ: Spectator kamerasında görünen duvarlar, kutular, yapılar hangi bölgeye ait? (örn: Ascent A Short'un dar geçidi, Bind Hookah'ın penceresi)
+   Sinyal C — KAMERA YÖNÜ: Spectator kameranın baktığı yön ve açı hangi bölgeyi gösteriyor?
+   Sinyal D — ÇEVRESEL İPUÇLARI: Görünen text, tabela, zemin rengi, ışık kaynakları hangi bölgeye işaret ediyor?
+
+   KONSENSÜS KURALI:
+   - 2+ sinyal aynı bölgeyi gösteriyorsa → o bölgeyi döndür, confidence = high
+   - 1 sinyal varsa → döndür ama confidence = medium
+   - Sinyaller çelişiyorsa VEYA hiçbir sinyal yoksa → "unknown" döndür
+   - UYDURMA POZİSYON YASAK
+
+   Mümkünse alt-bölge ekle: "B Main entry", "A Site back left", "Mid top close"
+   Sadece ana bölge biliniyorsa: "B Main", "A Short"
 
 JSON formatında döndür:
 {
@@ -61,7 +72,8 @@ JSON formatında döndür:
   "enemyAnalysis": ["madde1", "madde2"],
   "nextRoundSuggestion": "...",
   "deathPosition": "bölge adı veya unknown",
-  "positionConfidence": "high" | "medium" | "low"
+  "positionConfidence": "high" | "medium" | "low",
+  "positionSignals": 0-4
 }`;
 
 /* ══════════════════════════════════════════════════════════
@@ -94,6 +106,7 @@ type RoundFeedback = {
   killfeedConfidence?: string;
   deathPosition?: string | null;
   positionConfidence?: string;
+  positionSignals?: number;
 };
 
 /* ══════════════════════════════════════════════════════════
@@ -150,6 +163,7 @@ const DEFAULT_FEEDBACK: RoundFeedback = {
   killfeedConfidence: "unreadable",
   deathPosition: null,
   positionConfidence: "low",
+  positionSignals: 0,
 };
 
 /* ══════════════════════════════════════════════════════════
@@ -292,14 +306,31 @@ export async function POST(request: NextRequest) {
       const killerWeapon = typeof fb.killerWeapon === "string" && fb.killerWeapon.trim().length > 1 ? fb.killerWeapon.trim().slice(0, 30) : null;
       const killfeedConfidence = typeof fb.killfeedConfidence === "string" && ["high","medium","low","unreadable"].includes(fb.killfeedConfidence) ? fb.killfeedConfidence : "unreadable";
 
-      // Death position extraction — from spectator cam / scene analysis (NOT minimap icons)
-      const deathPosition = typeof (fb as Record<string, unknown>).deathPosition === "string"
-        ? ((fb as Record<string, unknown>).deathPosition as string).slice(0, 50)
+      // Multi-signal death position extraction
+      const rawPos = (fb as Record<string, unknown>).deathPosition;
+      const deathPosition = typeof rawPos === "string" && rawPos !== "unknown" && rawPos.length > 1
+        ? (rawPos as string).slice(0, 50)
         : "unknown";
       const posConfRaw = typeof (fb as Record<string, unknown>).positionConfidence === "string"
         ? (fb as Record<string, unknown>).positionConfidence as string
         : "low";
-      const positionConfidence = ["high", "medium", "low"].includes(posConfRaw) ? posConfRaw : "low";
+      const posSignals = typeof (fb as Record<string, unknown>).positionSignals === "number"
+        ? (fb as Record<string, unknown>).positionSignals as number
+        : 0;
+
+      // CONSENSUS GATE: require 2+ signals for position to be stored
+      // Single signal → downgrade to low confidence (won't be stored in memory)
+      let positionConfidence: string;
+      if (deathPosition === "unknown" || posSignals < 1) {
+        positionConfidence = "low";
+      } else if (posSignals >= 2 && posConfRaw === "high") {
+        positionConfidence = "high";
+      } else if (posSignals >= 2) {
+        positionConfidence = "medium";
+      } else {
+        // Single signal → force low (won't enter memory)
+        positionConfidence = "low";
+      }
 
       return NextResponse.json({
         round: typeof fb.round === "number" ? fb.round : 0,
@@ -309,8 +340,9 @@ export async function POST(request: NextRequest) {
         deathAnalysis: fb.deathAnalysis.slice(0, 500),
         enemyAnalysis: fb.enemyAnalysis.slice(0, 5).map((s) => String(s).slice(0, 200)),
         nextRoundSuggestion: fb.nextRoundSuggestion.slice(0, 500),
-        deathPosition: deathPosition !== "unknown" ? deathPosition : null,
+        deathPosition: deathPosition !== "unknown" && positionConfidence !== "low" ? deathPosition : null,
         positionConfidence: positionConfidence,
+        positionSignals: posSignals,
       });
     }
 
