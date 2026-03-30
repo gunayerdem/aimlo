@@ -447,6 +447,12 @@ SIFIR SAHTE AI KURALI:
 - Coaching = durum tespiti + neden oluyor + düşman ne yapıyor + oyuncu ne yapmalı
 - Bu 4 bileşen eksikse output GEÇERSİZ
 
+KANIT SEVİYESİ:
+- Veri kanıtlıyorsa → kesin dil ("Son 5 maçta 3 kez A Short'ta öldün")
+- Veri gösteriyorsa ama kesin değilse → çıkarım dili ("Bu pattern tekrar ediyor olabilir")
+- Veri yoksa → iddia yapma ("Bu konuda yeterli veri yok")
+- "Düşman seni okuyor" → SADECE tekrar eden ölüm pattern'i kanıtlanmışsa söylenebilir
+
 DÜŞMAN MODELİ (ZORUNLU):
 - mistake: düşman hangi pattern'ini exploit etti + NASIL (pre-aim, timing, util)
 - tendencies: düşman ne yapacak, nasıl adapte olacak

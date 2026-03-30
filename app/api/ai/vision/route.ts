@@ -16,8 +16,26 @@ const AI_TIMEOUT_MS = 15_000;
 const MAX_PAYLOAD_BYTES = 5_000_000; // 5MB max (base64 images are large)
 const ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages";
 
-const SYSTEM_PROMPT =
-  "Sen AIMLO, profesyonel bir Valorant koçusun. Ekran görüntüsünü analiz et ve round feedback ver. JSON formatında döndür.";
+const SYSTEM_PROMPT = `Sen AIMLO, profesyonel bir Valorant koçusun. Ekran görüntüsünü analiz et ve round feedback ver. JSON formatında döndür.
+
+KANIT POLİTİKASI (ZORUNLU):
+Sana verilen round geçmişi GERÇEK gözlemlerdir. Bu verilere göre konuş:
+
+GÖZLEMLENEN (kesin dille söylenebilir):
+- "Son X round'da Y kez öldün" — eğer roundHistory bunu kanıtlıyorsa
+- "Bu round öldün" — eğer died=true ise
+
+ÇIKARIM (ihtimalli dille söylenmeli):
+- "Bu tekrar, giriş açının okunabilir hale geldiğini gösteriyor olabilir"
+- "Muhtemelen düşman bu açıyı tutuyor"
+Çıkarım kelimeleri: "olabilir", "muhtemelen", "gösteriyor olabilir", "yüksek ihtimalle"
+
+YASAK KESİNLİK (kanıtsız söylenemez):
+- "Jett 3 rounddur seni burada bekliyor" — killer bilgisi yoksa YASAK
+- "Her round aynı şeyi yapıyorlar" — kanıt yoksa YASAK
+- "Düşman seni kesin okudu" — gözlem değil tahmin
+
+KURAL: Kanıt yoksa tarihsel iddia yapma. Sadece mevcut round'u yorumla.`;
 
 const USER_PROMPT = `Bu bir Valorant round sonu ekran görüntüsü. Şu bilgileri çıkar ve Türkçe coaching feedback ver:
 
@@ -43,8 +61,17 @@ JSON formatında döndür:
    TYPES
    ══════════════════════════════════════════════════════════ */
 
+type RoundEvidenceEntry = {
+  round_index: number;
+  died: boolean;
+  round_won: boolean;
+  death_detected_confidence: string;
+  timestamp: number;
+};
+
 type VisionRequest = {
   image: string; // base64-encoded PNG
+  roundHistory?: RoundEvidenceEntry[];
 };
 
 type RoundFeedback = {
@@ -143,6 +170,23 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(DEFAULT_FEEDBACK);
     }
 
+    // Build round history context for the user prompt
+    let userPromptWithHistory = USER_PROMPT;
+    const roundHistory = (body as VisionRequest).roundHistory;
+    if (roundHistory && Array.isArray(roundHistory) && roundHistory.length > 0) {
+      const historyLines = roundHistory.map((r) => {
+        const status = r.died ? "öldü" : "hayatta kaldı";
+        const confidence = r.death_detected_confidence === "observed" ? ` (güven: observed)` : "";
+        return `R${r.round_index}: ${status}${confidence}`;
+      });
+      const deathCount = roundHistory.filter((r) => r.died).length;
+      const total = roundHistory.length;
+      const patternNote = deathCount >= total * 0.5
+        ? `Pattern: Son ${total} round'un ${deathCount}'${deathCount > 1 ? "inde" : "unda"} ölüm → tekrar eden sorun kanıtlanmış`
+        : `Son ${total} round'da ${deathCount} ölüm`;
+      userPromptWithHistory += `\n\nSon round geçmişi (gözlemlenmiş):\n${historyLines.join("\n")}\n${patternNote}`;
+    }
+
     // Call Anthropic Vision
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), AI_TIMEOUT_MS);
@@ -172,7 +216,7 @@ export async function POST(request: NextRequest) {
               },
               {
                 type: "text",
-                text: USER_PROMPT,
+                text: userPromptWithHistory,
               },
             ],
           },
