@@ -45,6 +45,12 @@ const USER_PROMPT = `Bu bir Valorant round sonu ekran görüntüsü. Şu bilgile
 4. Ölüm analizi (neden öldü, ne yanlış yaptı)
 5. Düşman analizi (düşman pattern'leri, alışkanlıklar)
 6. Sonraki round önerisi (somut, uygulanabilir strateji)
+7. ÖLÜM POZİSYONU — eğer oyuncu öldüyse, spectator kamera açısından ve HUD bilgisinden:
+   - Hangi harita bölgesinde öldü? (örn: "A Short", "B Main", "Mid Catwalk")
+   - Valorant callout isimleri kullan
+   - Emin değilsen "unknown" döndür, UYDURMA
+   - Emin olduğun seviyeyi belirt
+
 JSON formatında döndür:
 {
   "round": number,
@@ -53,7 +59,9 @@ JSON formatında döndür:
   "died": boolean,
   "deathAnalysis": "...",
   "enemyAnalysis": ["madde1", "madde2"],
-  "nextRoundSuggestion": "..."
+  "nextRoundSuggestion": "...",
+  "deathPosition": "bölge adı veya unknown",
+  "positionConfidence": "high" | "medium" | "low"
 }`;
 
 /* ══════════════════════════════════════════════════════════
@@ -84,6 +92,8 @@ type RoundFeedback = {
   killerAgent?: string | null;
   killerWeapon?: string | null;
   killfeedConfidence?: string;
+  deathPosition?: string | null;
+  positionConfidence?: string;
 };
 
 /* ══════════════════════════════════════════════════════════
@@ -138,6 +148,8 @@ const DEFAULT_FEEDBACK: RoundFeedback = {
   killerAgent: null,
   killerWeapon: null,
   killfeedConfidence: "unreadable",
+  deathPosition: null,
+  positionConfidence: "low",
 };
 
 /* ══════════════════════════════════════════════════════════
@@ -182,10 +194,9 @@ export async function POST(request: NextRequest) {
       const historyLines = roundHistory.map((r: Record<string, unknown>) => {
         const status = r.died ? "öldü" : "hayatta kaldı";
         const confidence = r.death_detected_confidence === "observed" ? " (güven: observed)" : "";
-        // Include killer info if available (HIGH confidence only from memory safety gate)
-        const killerInfo = r.killer_agent ? ` → killer: ${r.killer_agent}` : "";
-        const weaponInfo = r.killer_weapon ? ` (${r.killer_weapon})` : "";
-        return `R${r.round_index}: ${status}${confidence}${killerInfo}${weaponInfo}`;
+        // Include position info if available
+        const posInfo = r.death_position ? ` @ ${r.death_position}` : "";
+        return `R${r.round_index}: ${status}${confidence}${posInfo}`;
       });
       const deathCount = roundHistory.filter((r) => r.died).length;
       const total = roundHistory.length;
@@ -193,18 +204,18 @@ export async function POST(request: NextRequest) {
         ? `Pattern: Son ${total} round'un ${deathCount}'${deathCount > 1 ? "inde" : "unda"} ölüm → tekrar eden sorun kanıtlanmış`
         : `Son ${total} round'da ${deathCount} ölüm`;
 
-      // Killer pattern detection from memory (HIGH confidence entries only)
-      const killerAgents = roundHistory
-        .filter((r: Record<string, unknown>) => r.died && r.killer_agent && r.killfeed_confidence === "high")
-        .map((r: Record<string, unknown>) => r.killer_agent as string);
-      const killerCounts: Record<string, number> = {};
-      killerAgents.forEach(a => { killerCounts[a] = (killerCounts[a] || 0) + 1; });
-      const topKiller = Object.entries(killerCounts).sort((a, b) => b[1] - a[1])[0];
-      const killerNote = topKiller && topKiller[1] >= 2
-        ? `\nKiller pattern (KANITLANMIŞ): ${topKiller[0]} tarafından ${topKiller[1]} kez öldürüldün`
+      // Position pattern detection from memory (medium+ confidence entries)
+      const deathPositions = roundHistory
+        .filter((r: Record<string, unknown>) => r.died && r.death_position && (r.position_confidence === "high" || r.position_confidence === "medium"))
+        .map((r: Record<string, unknown>) => (r.death_position as string).toLowerCase());
+      const posCounts: Record<string, number> = {};
+      deathPositions.forEach(p => { posCounts[p] = (posCounts[p] || 0) + 1; });
+      const topPos = Object.entries(posCounts).sort((a, b) => b[1] - a[1])[0];
+      const posNote = topPos && topPos[1] >= 2
+        ? `\nPosition pattern (KANITLANMIŞ): ${topPos[0]} bölgesinde ${topPos[1]} kez öldün`
         : "";
 
-      userPromptWithHistory += `\n\nSon round geçmişi (gözlemlenmiş):\n${historyLines.join("\n")}\n${patternNote}${killerNote}`;
+      userPromptWithHistory += `\n\nSon round geçmişi (gözlemlenmiş):\n${historyLines.join("\n")}\n${patternNote}${posNote}`;
     }
 
     // Call Anthropic Vision
@@ -281,6 +292,15 @@ export async function POST(request: NextRequest) {
       const killerWeapon = typeof fb.killerWeapon === "string" && fb.killerWeapon.trim().length > 1 ? fb.killerWeapon.trim().slice(0, 30) : null;
       const killfeedConfidence = typeof fb.killfeedConfidence === "string" && ["high","medium","low","unreadable"].includes(fb.killfeedConfidence) ? fb.killfeedConfidence : "unreadable";
 
+      // Death position extraction — from spectator cam / scene analysis (NOT minimap icons)
+      const deathPosition = typeof (fb as Record<string, unknown>).deathPosition === "string"
+        ? ((fb as Record<string, unknown>).deathPosition as string).slice(0, 50)
+        : "unknown";
+      const posConfRaw = typeof (fb as Record<string, unknown>).positionConfidence === "string"
+        ? (fb as Record<string, unknown>).positionConfidence as string
+        : "low";
+      const positionConfidence = ["high", "medium", "low"].includes(posConfRaw) ? posConfRaw : "low";
+
       return NextResponse.json({
         round: typeof fb.round === "number" ? fb.round : 0,
         score: typeof fb.score === "string" ? fb.score.slice(0, 10) : "?-?",
@@ -289,9 +309,8 @@ export async function POST(request: NextRequest) {
         deathAnalysis: fb.deathAnalysis.slice(0, 500),
         enemyAnalysis: fb.enemyAnalysis.slice(0, 5).map((s) => String(s).slice(0, 200)),
         nextRoundSuggestion: fb.nextRoundSuggestion.slice(0, 500),
-        killerAgent: killerAgent,
-        killerWeapon: killerWeapon,
-        killfeedConfidence: killfeedConfidence,
+        deathPosition: deathPosition !== "unknown" ? deathPosition : null,
+        positionConfidence: positionConfidence,
       });
     }
 
