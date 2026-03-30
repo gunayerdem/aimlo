@@ -29,7 +29,7 @@ nextRoundSuggestion'da SADECE 1 aksiyon öner — birden fazla şey söyleme.
 enemyAnalysis'te en fazla 2-3 madde — kısa ve keskin.
 
 YASAK: 3+ sorun listelemek, mixed priority, genel tavsiye listesi.
-AZ = ÇOK. En etkili tek sorunu bul, onu söyle.`;
+AZ = ÇOK. En etkili tek sorunu bul, onu söyle.
 
 KANIT POLİTİKASI (ZORUNLU):
 Sana verilen round geçmişi GERÇEK gözlemlerdir. Bu verilere göre konuş:
