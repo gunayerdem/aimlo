@@ -99,25 +99,23 @@ export function validateClaims(
   claims: ExtractedClaims,
   memory: RoundMemoryEntry[],
 ): ValidationResult {
-  // Filter to reliable entries only (died + position with medium/high confidence)
-  const reliableDeaths = memory.filter(r =>
-    r.died &&
-    r.death_position &&
-    (r.position_confidence === "high" || r.position_confidence === "medium")
-  );
-
   const totalRounds = memory.length;
 
-  // Window: use claimed window or all available
-  const windowSize = claims.claimedWindow || totalRounds;
+  // FIX #1: Window MUST be strict — only use last N rounds for windowed claims
+  const windowSize = claims.claimedWindow
+    ? Math.min(claims.claimedWindow, totalRounds)
+    : totalRounds;
   const windowEntries = memory.slice(-windowSize);
+
+  // FIX #2: ONLY count HIGH or MEDIUM confidence — LOW NEVER counted
   const windowDeaths = windowEntries.filter(r =>
-    r.died &&
-    r.death_position &&
+    r.died === true &&
+    typeof r.death_position === "string" &&
+    r.death_position.length > 0 &&
     (r.position_confidence === "high" || r.position_confidence === "medium")
   );
 
-  // Count matching position
+  // Count matching position within window
   let actualCount = 0;
   if (claims.claimedPosition) {
     const posLower = claims.claimedPosition.toLowerCase();
@@ -128,23 +126,23 @@ export function validateClaims(
     actualCount = windowDeaths.length;
   }
 
-  // Validate count
+  // Validate count — claimed must be <= actual
   const countValid = claims.claimedCount === null || claims.claimedCount <= actualCount;
 
-  // Validate position exists in memory
+  // Validate position exists in windowed memory
   const positionValid = claims.claimedPosition === null || actualCount > 0;
 
-  // Validate repetition claim
+  // FIX #4: Repetition requires actualCount >= 2, no exceptions
   const repetitionValid = !claims.repetitionClaim || actualCount >= 2;
 
   // Determine rewrite level
   let rewriteLevel: 1 | 2 | 3;
   if (countValid && positionValid && repetitionValid) {
-    rewriteLevel = 1; // all valid
+    rewriteLevel = 1;
   } else if (positionValid && actualCount >= 1) {
-    rewriteLevel = 2; // position exists but count/repetition overclaimed
+    rewriteLevel = 2;
   } else {
-    rewriteLevel = 3; // only current round data available
+    rewriteLevel = 3;
   }
 
   return {
@@ -172,40 +170,56 @@ export function rewriteUnsafeClaims(
 
   if (validation.rewriteLevel === 2) {
     // Position valid but count/repetition overclaimed
-    // Replace specific count claims with safer language
     if (claims.claimedCount !== null && !validation.countValid) {
-      // Replace "3 kez" with actual count or "birden fazla kez"
       const countRegex = new RegExp(`${claims.claimedCount}\\s*kez`, "gi");
       if (validation.actualCount >= 2) {
         result = result.replace(countRegex, `${validation.actualCount} kez`);
       } else {
-        result = result.replace(countRegex, "birden fazla kez");
+        result = result.replace(countRegex, "");
       }
     }
 
     if (claims.claimedWindow !== null) {
-      // Replace specific window with vaguer "son roundlarda"
       const windowRegex = new RegExp(`son\\s+${claims.claimedWindow}\\s*round`, "gi");
       result = result.replace(windowRegex, "son roundlarda");
+    }
+
+    // FIX #3+#4: If repetition invalid, strip ALL repetition language at level 2 too
+    if (!validation.repetitionValid) {
+      for (const keyword of REPETITION_KEYWORDS) {
+        if (result.toLowerCase().includes(keyword)) {
+          result = result.replace(new RegExp(keyword, "gi"), "");
+        }
+      }
     }
   }
 
   if (validation.rewriteLevel === 3) {
-    // Only current round valid — strip all historical claims
-    // Replace repetition language with current-round-only phrasing
+    // No memory support — strip ALL historical and repetition claims
     for (const keyword of REPETITION_KEYWORDS) {
       if (result.toLowerCase().includes(keyword)) {
         result = result.replace(new RegExp(keyword, "gi"), "bu round'da");
       }
     }
 
-    // If position was claimed but not in memory, keep position if from current frame
-    // but remove pattern language
+    // Remove count claims entirely
     if (claims.claimedCount !== null) {
       const countRegex = new RegExp(`${claims.claimedCount}\\s*kez`, "gi");
       result = result.replace(countRegex, "");
     }
+
+    // Remove window claims
+    if (claims.claimedWindow !== null) {
+      const windowRegex = new RegExp(`son\\s+${claims.claimedWindow}\\s*(round|maç)`, "gi");
+      result = result.replace(windowRegex, "");
+    }
+
+    // Remove "pattern" word if no pattern proven
+    result = result.replace(/\bpattern\b/gi, "");
   }
+
+  // Clean up double spaces and trailing punctuation issues
+  result = result.replace(/\s{2,}/g, " ").trim();
 
   return result.trim();
 }
