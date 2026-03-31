@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAuthAndRateLimit } from "@/lib/api-auth";
+import { realityCheck } from "@/lib/reality-checker";
 
 /**
  * POST /api/ai/vision
@@ -438,14 +439,29 @@ export async function POST(request: NextRequest) {
         positionConfidence = "low";
       }
 
+      // Reality check: verify AI claims against actual round memory
+      const memoryForCheck = (roundHistory || []).map((r: Record<string, unknown>) => ({
+        round_index: r.round_index as number,
+        died: !!r.died,
+        death_position: r.death_position as string | null | undefined,
+        position_confidence: r.position_confidence as string | undefined,
+      }));
+
+      const checkedAnalysis = realityCheck(fb.deathAnalysis, memoryForCheck);
+      const checkedSuggestion = realityCheck(fb.nextRoundSuggestion, memoryForCheck);
+
+      if (checkedAnalysis.modified || checkedSuggestion.modified) {
+        console.log(`[Aimlo AI] Reality check: deathAnalysis rewrite=${checkedAnalysis.rewriteLevel}, suggestion rewrite=${checkedSuggestion.rewriteLevel}`);
+      }
+
       return NextResponse.json({
         round: typeof fb.round === "number" ? fb.round : 0,
         score: typeof fb.score === "string" ? fb.score.slice(0, 10) : "?-?",
         result: fb.result === "win" ? "win" : "loss",
         died: !!fb.died,
-        deathAnalysis: fb.deathAnalysis.slice(0, 500),
+        deathAnalysis: checkedAnalysis.text.slice(0, 500),
         enemyAnalysis: fb.enemyAnalysis.slice(0, 5).map((s) => String(s).slice(0, 200)),
-        nextRoundSuggestion: fb.nextRoundSuggestion.slice(0, 500),
+        nextRoundSuggestion: checkedSuggestion.text.slice(0, 500),
         deathPosition: deathPosition !== "unknown" && positionConfidence !== "low" ? deathPosition : null,
         positionConfidence: positionConfidence,
         positionSignals: posSignals,
