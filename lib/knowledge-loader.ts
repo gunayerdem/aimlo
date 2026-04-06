@@ -20,6 +20,7 @@ export const AGENT_ROLE_MAP: Record<string, string> = {
   Yoru: "duelists",
   Neon: "duelists",
   Iso: "duelists",
+  Waylay: "duelists",
   // Controllers
   Brimstone: "controllers",
   Omen: "controllers",
@@ -27,6 +28,7 @@ export const AGENT_ROLE_MAP: Record<string, string> = {
   Viper: "controllers",
   Harbor: "controllers",
   Clove: "controllers",
+  Miks: "controllers",
   // Initiators
   Sova: "initiators",
   Breach: "initiators",
@@ -34,6 +36,7 @@ export const AGENT_ROLE_MAP: Record<string, string> = {
   Fade: "initiators",
   "KAY/O": "initiators",
   Gekko: "initiators",
+  Tejo: "initiators",
   // Sentinels
   Sage: "sentinels",
   Cypher: "sentinels",
@@ -41,6 +44,7 @@ export const AGENT_ROLE_MAP: Record<string, string> = {
   Chamber: "sentinels",
   Deadlock: "sentinels",
   Vyse: "sentinels",
+  Veto: "sentinels",
 };
 
 // ── Rank-to-file mapping ──────────────────────────────────
@@ -87,22 +91,11 @@ function getRankFile(rank: string | undefined | null): string {
   return RANK_FILE_MAP[normalized] ?? DEFAULT_RANK_FILE;
 }
 
-function getAgentRoleFile(agent: string): string | null {
-  // Try exact match first
-  if (AGENT_ROLE_MAP[agent]) {
-    return `agents/${AGENT_ROLE_MAP[agent]}.md`;
-  }
-  // Try case-insensitive match
-  const match = Object.entries(AGENT_ROLE_MAP).find(
-    ([key]) => key.toLowerCase() === agent.toLowerCase()
-  );
-  return match ? `agents/${match[1]}.md` : null;
-}
-
 /**
- * Resolve the best knowledge file for a specific agent.
- * Tries per-agent file first, falls back to role file.
- *   e.g. agents/duelists/jett.md → agents/duelists.md
+ * Resolve the knowledge file for a specific agent.
+ * Returns the per-agent file path if it exists.
+ *   e.g. Jett → agents/duelists/jett.md
+ * Returns null if no role mapping or no per-agent file is found.
  */
 export function getAgentFile(agentName: string): string | null {
   // Resolve role via case-insensitive lookup
@@ -116,8 +109,7 @@ export function getAgentFile(agentName: string): string | null {
   if (fs.existsSync(perAgentFull)) {
     return perAgentPath;
   }
-  // Fallback to role file
-  return `agents/${role}.md`;
+  return null;
 }
 
 /** Resolve an agent name to its role string (case-insensitive). */

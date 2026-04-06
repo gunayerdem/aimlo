@@ -55,20 +55,30 @@ export function getMapKnowledge(map: string): string {
 }
 
 /**
- * Get agent role knowledge based on the player's agent
+ * Get agent knowledge based on the player's agent.
+ * Loads the per-agent file from the role subdirectory
+ * (e.g. agents/duelists/jett.md). Correct role classifications
+ * reflect the authoritative subfile layout — Veto is a sentinel,
+ * Miks is a controller.
  */
 export function getAgentKnowledge(agent: string): string {
-  // Determine role
-  const duelists = ["Jett", "Raze", "Reyna", "Phoenix", "Yoru", "Neon", "Iso", "Waylay", "Veto"];
-  const controllers = ["Brimstone", "Viper", "Omen", "Astra", "Harbor", "Clove"];
-  const initiators = ["Sova", "Breach", "Skye", "KAY/O", "Fade", "Gekko", "Tejo", "Miks"];
-  const sentinels = ["Sage", "Cypher", "Killjoy", "Chamber", "Deadlock", "Vyse"];
+  const duelists = ["Jett", "Raze", "Reyna", "Phoenix", "Yoru", "Neon", "Iso", "Waylay"];
+  const controllers = ["Brimstone", "Viper", "Omen", "Astra", "Harbor", "Clove", "Miks"];
+  const initiators = ["Sova", "Breach", "Skye", "KAY/O", "Fade", "Gekko", "Tejo"];
+  const sentinels = ["Sage", "Cypher", "Killjoy", "Chamber", "Deadlock", "Vyse", "Veto"];
 
-  if (duelists.includes(agent)) return loadFile("agents/duelists.md");
-  if (controllers.includes(agent)) return loadFile("agents/controllers.md");
-  if (initiators.includes(agent)) return loadFile("agents/initiators.md");
-  if (sentinels.includes(agent)) return loadFile("agents/sentinels.md");
-  return "";
+  let role: string | null = null;
+  if (duelists.includes(agent)) role = "duelists";
+  else if (controllers.includes(agent)) role = "controllers";
+  else if (initiators.includes(agent)) role = "initiators";
+  else if (sentinels.includes(agent)) role = "sentinels";
+  if (!role) return "";
+
+  const slug = agent.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const perAgent = loadFile(`agents/${role}/${slug}.md`);
+  if (perAgent) return perAgent;
+  // Fallback: concatenate all files in the role directory
+  return loadDir(`agents/${role}`);
 }
 
 /**

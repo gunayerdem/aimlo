@@ -149,8 +149,16 @@ type RoundEvidenceEntry = {
   timestamp: number;
 };
 
+const VALID_IMAGE_FORMATS = ["image/png", "image/jpeg", "image/webp", "image/gif"] as const;
+type ImageFormat = typeof VALID_IMAGE_FORMATS[number];
+
+const DEFAULT_MAX_TOKENS = 400;
+const MAX_TOKENS_CAP = 512;
+
 type VisionRequest = {
-  image: string; // base64-encoded PNG
+  image: string; // base64-encoded image
+  imageFormat?: string; // e.g. "image/jpeg" — defaults to "image/png"
+  maxTokens?: number; // client-requested max tokens — capped at 512
   roundHistory?: RoundEvidenceEntry[];
 };
 
@@ -262,6 +270,26 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(DEFAULT_FEEDBACK);
     }
 
+    // Resolve imageFormat (default: image/png for backward compat)
+    const rawFormat = (body as VisionRequest).imageFormat;
+    const resolvedMediaType: ImageFormat =
+      typeof rawFormat === "string" && (VALID_IMAGE_FORMATS as readonly string[]).includes(rawFormat)
+        ? (rawFormat as ImageFormat)
+        : "image/png";
+    if (rawFormat && rawFormat !== resolvedMediaType) {
+      console.log(`[Aimlo AI] imageFormat rejected: "${rawFormat}" → default "image/png"`);
+    } else {
+      console.log(`[Aimlo AI] imageFormat: ${resolvedMediaType}`);
+    }
+
+    // Resolve maxTokens (default: 400, cap: 512)
+    const rawMaxTokens = (body as VisionRequest).maxTokens;
+    let resolvedMaxTokens = DEFAULT_MAX_TOKENS;
+    if (typeof rawMaxTokens === "number" && rawMaxTokens > 0) {
+      resolvedMaxTokens = Math.min(rawMaxTokens, MAX_TOKENS_CAP);
+    }
+    console.log(`[Aimlo AI] maxTokens: requested=${rawMaxTokens ?? "none"}, resolved=${resolvedMaxTokens}`);
+
     // Build round history context for the user prompt
     let userPromptWithHistory = USER_PROMPT;
     const roundHistory = (body as VisionRequest).roundHistory;
@@ -349,11 +377,18 @@ export async function POST(request: NextRequest) {
         "Content-Type": "application/json",
         "x-api-key": apiKey,
         "anthropic-version": "2023-06-01",
+        "anthropic-beta": "prompt-caching-2024-07-31",
       },
       body: JSON.stringify({
         model: "claude-haiku-4-5-20251001",
-        max_tokens: 500,
-        system: SYSTEM_PROMPT,
+        max_tokens: resolvedMaxTokens,
+        system: [
+          {
+            type: "text",
+            text: SYSTEM_PROMPT,
+            cache_control: { type: "ephemeral" },
+          },
+        ],
         messages: [
           {
             role: "user",
@@ -362,7 +397,7 @@ export async function POST(request: NextRequest) {
                 type: "image",
                 source: {
                   type: "base64",
-                  media_type: "image/png",
+                  media_type: resolvedMediaType,
                   data: body.image,
                 },
               },
@@ -385,6 +420,13 @@ export async function POST(request: NextRequest) {
 
     const data = await response.json();
     clearTimeout(timeoutId);
+
+    // Log prompt cache metrics
+    const cacheCreation = data?.usage?.cache_creation_input_tokens ?? 0;
+    const cacheRead = data?.usage?.cache_read_input_tokens ?? 0;
+    const inputTokens = data?.usage?.input_tokens ?? 0;
+    console.log(`[CACHE] creation=${cacheCreation}, read=${cacheRead}, input=${inputTokens}`);
+
     const text: string = data?.content?.[0]?.text || "";
 
     // Parse JSON from response
