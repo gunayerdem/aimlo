@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAuthAndRateLimit } from "@/lib/api-auth";
 import { realityCheck } from "@/lib/reality-checker";
+import { loadVisionKnowledge } from "@/lib/knowledge-loader";
 
 /**
  * POST /api/ai/vision
@@ -160,6 +161,11 @@ type VisionRequest = {
   imageFormat?: string; // e.g. "image/jpeg" — defaults to "image/png"
   maxTokens?: number; // client-requested max tokens — capped at 512
   roundHistory?: RoundEvidenceEntry[];
+  map?: string; // e.g. "Ascent", "Bind"
+  agent?: string; // e.g. "Jett", "Omen"
+  rank?: string; // e.g. "gold", "immortal"
+  enemyComp?: string[]; // e.g. ["Jett", "Omen", "Sova"]
+  patternContext?: string; // Rust client pattern analysis
 };
 
 type RoundFeedback = {
@@ -290,6 +296,48 @@ export async function POST(request: NextRequest) {
     }
     console.log(`[Aimlo AI] maxTokens: requested=${rawMaxTokens ?? "none"}, resolved=${resolvedMaxTokens}`);
 
+    // ── KB context loading (RAG-lite) ──────────────────────
+    const reqMap = typeof (body as VisionRequest).map === "string" ? (body as VisionRequest).map : undefined;
+    const reqAgent = typeof (body as VisionRequest).agent === "string" ? (body as VisionRequest).agent : undefined;
+    const reqRank = typeof (body as VisionRequest).rank === "string" ? (body as VisionRequest).rank : undefined;
+    const reqEnemyComp = Array.isArray((body as VisionRequest).enemyComp) ? (body as VisionRequest).enemyComp : undefined;
+    const reqPatternContext = typeof (body as VisionRequest).patternContext === "string" ? (body as VisionRequest).patternContext : undefined;
+
+    const kb = loadVisionKnowledge({
+      map: reqMap,
+      agent: reqAgent,
+      rank: reqRank,
+      enemyAgents: reqEnemyComp,
+    });
+
+    if (kb.files.length > 0) {
+      console.log(`[KB] selected: ${kb.files.join(", ")}`);
+    }
+
+    // Build system prompt array — static prompt (cached) + dynamic KB + patternContext
+    const systemBlocks: Array<{ type: "text"; text: string; cache_control?: { type: "ephemeral" } }> = [
+      {
+        type: "text",
+        text: SYSTEM_PROMPT,
+        cache_control: { type: "ephemeral" },
+      },
+    ];
+
+    if (kb.content) {
+      systemBlocks.push({
+        type: "text",
+        text: kb.content,
+        cache_control: { type: "ephemeral" },
+      });
+    }
+
+    if (reqPatternContext) {
+      systemBlocks.push({
+        type: "text",
+        text: `[PATTERN CONTEXT — Rust Client]\n${reqPatternContext.slice(0, 2000)}`,
+      });
+    }
+
     // Build round history context for the user prompt
     let userPromptWithHistory = USER_PROMPT;
     const roundHistory = (body as VisionRequest).roundHistory;
@@ -382,13 +430,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         model: "claude-haiku-4-5-20251001",
         max_tokens: resolvedMaxTokens,
-        system: [
-          {
-            type: "text",
-            text: SYSTEM_PROMPT,
-            cache_control: { type: "ephemeral" },
-          },
-        ],
+        system: systemBlocks,
         messages: [
           {
             role: "user",

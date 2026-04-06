@@ -234,3 +234,67 @@ export function loadKnowledge(task: TaskType, options: LoadOptions = {}): string
 
   return sections.join("\n\n---\n\n");
 }
+
+/* ══════════════════════════════════════════════════════════
+   Vision-specific loader — max 4 files, returns file list
+   Priority: map > agent > rank > matchup (1)
+   ══════════════════════════════════════════════════════════ */
+
+interface VisionKnowledgeResult {
+  content: string;
+  files: string[];
+}
+
+export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeResult {
+  const { map, agent, rank, enemyAgents } = options;
+  const sections: string[] = [];
+  const files: string[] = [];
+  const MAX_FILES = 4;
+
+  // 1. Map knowledge (highest priority for vision — positional coaching)
+  if (map && files.length < MAX_FILES) {
+    const mapSlug = map.toLowerCase().replace(/[^a-z]/g, "");
+    const mapPath = `maps/${mapSlug}.md`;
+    const content = loadFile(mapPath);
+    if (content) {
+      sections.push(`[HARİTA BİLGİSİ — ${map}]\n${content}`);
+      files.push(mapPath);
+    }
+  }
+
+  // 2. Agent knowledge
+  if (agent && files.length < MAX_FILES) {
+    const agentFile = getAgentFile(agent);
+    if (agentFile) {
+      const content = loadFile(agentFile);
+      if (content) {
+        sections.push(`[AGENT BİLGİSİ — ${agent}]\n${content}`);
+        files.push(agentFile);
+      }
+    }
+  }
+
+  // 3. Rank knowledge
+  if (files.length < MAX_FILES) {
+    const rankFile = getRankFile(rank);
+    const content = loadFile(`ranks/${rankFile}`);
+    if (content) {
+      sections.push(`[RANK BİLGİSİ — ${rank || "default"}]\n${content}`);
+      files.push(`ranks/${rankFile}`);
+    }
+  }
+
+  // 4. Matchup knowledge (1 file max — best match)
+  if (agent && enemyAgents?.length && files.length < MAX_FILES) {
+    const matchups = loadMatchupFiles(agent, enemyAgents, 1);
+    if (matchups.length > 0) {
+      sections.push(`[EŞLEŞME BİLGİSİ]\n${matchups[0]}`);
+      files.push("matchups/(best-match)");
+    }
+  }
+
+  return {
+    content: sections.join("\n\n---\n\n"),
+    files,
+  };
+}
