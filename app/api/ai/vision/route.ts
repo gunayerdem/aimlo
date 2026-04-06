@@ -80,6 +80,15 @@ type VisionRequest = {
   rank?: string; // e.g. "gold", "immortal"
   enemyComp?: string[]; // e.g. ["Jett", "Omen", "Sova"]
   patternContext?: string; // Rust client pattern analysis
+  // Client-provided round context (used to enrich AI prompt)
+  round?: number;
+  score?: string;
+  result?: string;
+  died?: boolean;
+  deathTiming?: string;
+  bannerType?: string;
+  combatReportVisible?: boolean;
+  scoreChanged?: boolean;
 };
 
 type PatternData = {
@@ -315,8 +324,24 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    // Build round context from client-provided data
+    const reqBody = body as VisionRequest;
+    const contextParts: string[] = [];
+    if (typeof reqBody.round === "number") contextParts.push(`Round: ${reqBody.round}`);
+    if (typeof reqBody.score === "string") contextParts.push(`Skor: ${reqBody.score}`);
+    if (typeof reqBody.result === "string") contextParts.push(`Sonuç: ${reqBody.result}`);
+    if (typeof reqBody.died === "boolean") contextParts.push(`Öldü: ${reqBody.died ? "evet" : "hayır"}`);
+    if (typeof reqBody.deathTiming === "string") contextParts.push(`Ölüm zamanı: ${reqBody.deathTiming}`);
+    if (typeof reqBody.bannerType === "string") contextParts.push(`Banner: ${reqBody.bannerType}`);
+    if (typeof reqBody.combatReportVisible === "boolean") contextParts.push(`Combat report: ${reqBody.combatReportVisible ? "görünür" : "gizli"}`);
+    if (typeof reqBody.scoreChanged === "boolean") contextParts.push(`Skor değişti: ${reqBody.scoreChanged ? "evet" : "hayır"}`);
+
+    const clientContext = contextParts.length > 0
+      ? `\n\nClient context (doğrulanmış bilgi):\n${contextParts.join("\n")}`
+      : "";
+
     // Build round history context for the user prompt
-    let userPromptWithHistory = USER_PROMPT;
+    let userPromptWithHistory = USER_PROMPT + clientContext;
     const roundHistory = (body as VisionRequest).roundHistory;
     if (roundHistory && Array.isArray(roundHistory) && roundHistory.length > 0) {
       const historyLines = roundHistory.map((r: Record<string, unknown>) => {
@@ -433,7 +458,8 @@ export async function POST(request: NextRequest) {
 
     if (!response.ok) {
       clearTimeout(timeoutId);
-      console.error(`[Aimlo AI] Vision API ${response.status}`);
+      const errorBody = await response.text().catch(() => "unreadable");
+      console.error(`[Aimlo AI] Vision API ${response.status}: ${errorBody.slice(0, 500)}`);
       return NextResponse.json(DEFAULT_FEEDBACK);
     }
 
@@ -447,6 +473,10 @@ export async function POST(request: NextRequest) {
     console.log(`[CACHE] creation=${cacheCreation}, read=${cacheRead}, input=${inputTokens}`);
 
     const text: string = data?.content?.[0]?.text || "";
+    if (!text) {
+      console.error("[Aimlo AI] Empty response from API. Full data:", JSON.stringify(data).slice(0, 500));
+      return NextResponse.json(DEFAULT_FEEDBACK);
+    }
 
     // Parse JSON from response
     let parsed: unknown;
@@ -458,9 +488,11 @@ export async function POST(request: NextRequest) {
         try {
           parsed = JSON.parse(jsonMatch[0]);
         } catch {
+          console.error("[Aimlo AI] JSON parse failed (regex fallback). Raw text:", text.slice(0, 300));
           return NextResponse.json(DEFAULT_FEEDBACK);
         }
       } else {
+        console.error("[Aimlo AI] No JSON found in response. Raw text:", text.slice(0, 300));
         return NextResponse.json(DEFAULT_FEEDBACK);
       }
     }
@@ -539,6 +571,7 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    console.error("[Aimlo AI] Response shape validation failed. Parsed:", JSON.stringify(parsed).slice(0, 300));
     return NextResponse.json(DEFAULT_FEEDBACK);
   } catch (err) {
     if (err instanceof DOMException && err.name === "AbortError") {
