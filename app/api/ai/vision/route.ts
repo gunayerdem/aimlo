@@ -102,11 +102,6 @@ type PatternData = {
   wasRepeatedMistake?: boolean;
 };
 
-const PATTERN_DATA_ALLOWED_KEYS = [
-  "deathLocation", "peekType", "utilUsed", "traded",
-  "deathTiming", "enemyWeapon", "mapControl", "wasRepeatedMistake",
-] as const;
-
 const PEEK_TYPES = ["dry_peek", "util_peek", "jiggle", "wide_swing", "holding", "unknown"];
 const DEATH_TIMINGS = ["early", "mid", "late", "post_plant"];
 const MAP_CONTROLS = ["full_control", "partial_control", "no_control", "contested"];
@@ -225,6 +220,7 @@ const DEFAULT_FEEDBACK: RoundFeedback = {
   deathPosition: null,
   positionConfidence: "low",
   positionSignals: 0,
+  patternData: null,
 };
 
 /* ══════════════════════════════════════════════════════════
@@ -564,6 +560,9 @@ export async function POST(request: NextRequest) {
         deathAnalysis: checkedAnalysis.text.slice(0, 500),
         enemyAnalysis: fb.enemyAnalysis.slice(0, 5).map((s) => String(s).slice(0, 200)),
         nextRoundSuggestion: checkedSuggestion.text.slice(0, 500),
+        killerAgent,
+        killerWeapon,
+        killfeedConfidence,
         deathPosition: deathPosition !== "unknown" && positionConfidence !== "low" ? deathPosition : null,
         positionConfidence: positionConfidence,
         positionSignals: posSignals,
