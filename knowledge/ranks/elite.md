@@ -1,38 +1,76 @@
-# Elite Coaching Profile — Radiant, Pro-Adjacent
+# Elit Koçluk Profili — Radiant, Pro-Seviye
 
-## Coaching Tone
-Peer-level and data-driven. These players know the game as well as any coach. Do not lecture. Present data, highlight patterns, and offer perspective they may have missed because they are inside the game rather than watching from outside. Use precise language. Reference specific rounds, exact timings, and measurable patterns. Treat every interaction as a film review session between equals.
+## Koçluk Tonu
+Eşit seviye ve veriye dayalı. Bu oyuncular oyunu herhangi bir koç kadar iyi biliyor. Ders verme. Veri sun, patternleri vurgula ve oyunun içinde oldukları için kaçırmış olabilecekleri perspektifleri öner. Kesin bir dil kullan. Belirli round'lara, tam zamanlamalara ve ölçülebilir patternlere referans ver. Her etkileşimi eşitler arası film inceleme oturumu olarak ele al.
 
-## Priority Coaching Areas
+## Öncelikli Koçluk Alanları
 
-### Micro-Timing
-At Radiant, fights are decided by 100-200ms margins. Coaching should identify micro-timing edges: the difference between peeking at 1:23 and 1:25 based on enemy rotation speed, the exact moment a smoke blooms versus when the enemy expects the push through it, the delay between a flash pop and the optimal swing window. These margins are invisible in the moment but visible in review. Quantify them.
+### Mikro-Zamanlama
+Radiant'ta dövüşler 100-200ms marjlarla belirlenir. Koçluk, mikro-zamanlama avantajlarını tespit etmeli.
 
-### Team Coordination Gaps
-Individual play at this level is near-optimal. The remaining improvement comes from team-level execution. Identify gaps in coordination: "Your Sova drone expired 1.5 seconds before your team swung. That gap gave the anchor time to reposition. Tighten the timing to 0.5 seconds." Coaching at this level is often about synchronization, not individual decision-making.
+- **IF** oyuncu smoke açılma anında push yapıyorsa
+- **MEANING** düşman push'u tam o anda bekliyor, hazırlıklı
+- **COUNTER** smoke açılması ile düşmanın push beklentisi arasındaki farkı ölç. Flash patlaması ile optimal swing penceresi arasındaki gecikmeyi belirle
+- **WHY** bu marjlar oyun anında görünmez ama incelemede görünür — onları sayısallaştırmak somut avantaj sağlar
 
-### Mental Consistency
-Radiant players know the right play in every situation — when they are thinking clearly. Tilt, fatigue, and overconfidence create decision gaps that do not exist in their normal play. Coaching should identify when mental state affected decisions: "Rounds 8-11 you took increasingly aggressive fights after losing the 1v1 in round 7. Your aggression pattern correlates with the loss streak, not with tactical rationale."
+- **IF** peek zamanlaması düşman rotate hızına göre ayarlanmamışsa
+- **MEANING** 1:23 ile 1:25 arasındaki peek farkı, düşmanın pozisyonda olup olmadığını belirler
+- **COUNTER** düşman rotate hızını ölç ve peek zamanlamasını buna göre ayarla
+- **WHY** zamanlama hassasiyeti, bu seviyede mekanik beceriden daha fazla round belirler
 
-### Anti-Strat Preparation
-At this level, opponents study patterns across games, not just within a single match. If a player runs the same A-execute three times across different matches, opponents at Radiant will anti-strat it. Coaching should address cross-match predictability and deliberate variation in strategic defaults.
+### Takım Koordinasyon Boşlukları
+Bu seviyede bireysel oyun neredeyse optimal. Kalan gelişim takım seviyesi uygulamadan gelir.
 
-## Common Mistakes at This Level
+- **IF** Sova drone'u takım swing yapmadan bir vuruşluk önce bitiyorsa
+- **MEANING** bu boşluk anchor'a yeniden pozisyon alma zamanı verdi
+- **COUNTER** zamanlamayı sıkılaştır, swing drone bittikten hemen sonra olmalı
+- **WHY** bu seviyede koçluk sıklıkla senkronizasyonla ilgili, bireysel karar vermeyle değil
 
-- **Overconfidence in mechanical advantage**: Believing "I can out-aim this player" and taking suboptimal fights because of it. At Radiant, mechanical skill gaps are razor-thin. A 51/49 aim duel is still a coin flip. Coach expected-value thinking: take fights where positioning, utility, and information give you 70%+ odds, not 51%.
-- **Tilt in crucial rounds**: Losing composure on match point, overtime, or after a tilting death. The decision quality drops measurably: ego peeks increase, utility usage becomes reactive, and positioning defaults to aggressive. Coach recognition of tilt indicators and pre-planned reset routines.
-- **Predictable default patterns**: Running the same default setup (positions, timing, utility sequence) because it is comfortable and usually works. At Radiant, "usually works" means opponents are already preparing the counter. Coach conscious variation in defaults every 2-3 rounds.
-- **Ignoring economy edges**: Not tracking the enemy economy precisely enough. At this level, knowing the enemy has 3900 credits (and therefore likely light shield + Vandal, no utility) should change how you play the round. Coach granular economy reads.
-- **Overcomplicating round plans**: Adding unnecessary complexity to a round that could be won with a simpler approach. A 4v3 does not need a split execute — it needs methodical space clearing. Coach simplicity in favorable situations.
+### Zihinsel Tutarlılık
+Radiant oyuncular her durumda doğru oyunu bilir — net düşündüklerinde. Tilt, yorgunluk ve aşırı özgüven, normal oyunlarında var olmayan karar boşlukları yaratır.
 
-## What to Emphasize
+- **IF** oyuncu 7. round'daki 1v1 kaybından sonra 8-11. roundlarda giderek artan agresif dövüşler alıyorsa
+- **MEANING** agresyon paterni kayıp serisiyle ilişkili, taktik gerekçeyle değil
+- **COUNTER** zihinsel durumun kararları ne zaman etkilediğini tespit et, tilt göstergelerinin farkındalığını ve önceden planlanmış sıfırlama rutinlerini öğret
+- **WHY** zihinsel tutarlılık, mekanik tutarlılık kadar round kazandırır
 
-The core message: **margins are small, and consistency plus adaptation win.** A Radiant player does not need to learn new skills — they need to execute existing skills at a higher consistency rate and adapt faster than their opponents. The difference between Radiant 200 RR and 600 RR is not mechanical — it is how often the player makes the optimal decision under pressure and how quickly they read and adjust to the enemy's adjustments.
+### Anti-Strat Hazırlığı
+Bu seviyede rakipler, tek bir maç içinde değil maçlar arasında patternleri inceler.
 
-## Interpreting Death Patterns
+- **IF** oyuncu farklı maçlarda aynı A-execute'u üç kez çalıştırıyorsa
+- **MEANING** Radiant seviye rakipler buna anti-strat hazırlayacak
+- **COUNTER** maçlar arası tahmin edilebilirliği ele al, stratejik varsayılanlarda bilinçli çeşitlilik uygula
+- **WHY** maçlar arası tutarlılık, bu seviyede istismar edilecek bir zayıflık haline gelir
 
-At Radiant, even small patterns get punished. If a player holds the same angle two rounds in a row, the opponent may already have a counter ready for round three. Coaching should treat every repeated behavior as a potential liability: "You held heaven twice. Even if they have not countered it yet, assume they will. Vary proactively."
+## Bu Seviyede Yaygın Hatalar
 
-Death patterns at this level often reveal **opponent quality** as much as player mistakes. If a player dies to the same opponent repeatedly, analyze whether the opponent has a specific read or if the player is giving away information (sound cues, utility patterns, timing tells). Sometimes the fix is not changing position but changing the information leak that leads to the death.
+- **Mekanik avantaja aşırı güven**: "Bu oyuncuyu aim'le geçebilirim" diye inanıp suboptimal dövüşlere girmek. Radiant'ta mekanik beceri farkları son derece ince. %51/49 aim düellosu hala yazı-tura. Beklenen-değer düşüncesini öğret: pozisyon, utility ve bilginin %70+ şans verdiği dövüşlere gir, %51 değil.
 
-In close matches (13-11, overtime), death patterns in the final rounds deserve extra scrutiny. Decision quality under pressure is the primary differentiator. If the player's deaths in rounds 20+ show different characteristics than rounds 1-12 (more aggressive, less utility, faster commits), the issue is mental, not tactical. Coach composure and process adherence under pressure.
+- **Belirleyici roundlarda tilt**: Maç pointi, uzatma ya da sinir bozucu bir ölümden sonra soğukkanlılığını kaybetme. Karar kalitesi ölçülebilir şekilde düşer: ego peek'ler artar, utility kullanımı reaktif olur, pozisyonlanma agresife döner. Tilt göstergelerinin farkındalığını ve önceden planlanmış sıfırlama rutinlerini öğret.
+
+- **Tahmin edilebilir default patternleri**: Rahat ve çoğu zaman işe yaradığı için aynı default kurulumunu (pozisyonlar, zamanlama, utility sırası) çalıştırma. Radiant'ta "çoğu zaman işe yarıyor" rakiplerin zaten karşı hazırlık yaptığı anlamına gelir. Her 2-3 round'da default'larda bilinçli çeşitlilik öğret.
+
+- **Ekonomi avantajlarını göz ardı etme**: Düşman ekonomisini yeterince hassas takip etmeme. Bu seviyede düşmanın 3900 kredi olduğunu bilmek (yani muhtemelen hafif kalkan + Vandal, utility yok) o round'u nasıl oynayacağını değiştirmeli. Ayrıntılı ekonomi okumaları öğret.
+
+- **Round planlarını gereksiz karmaşıklaştırma**: Daha basit yaklaşımla kazanılabilecek bir round'a gereksiz karmaşıklık ekleme. 4v3 split execute gerektirmez — metodik alan temizliği gerektirir. Avantajlı durumlarda basitliği öğret.
+
+## Neyi Vurgulamalı
+
+Temel mesaj: **marjlar küçük, tutarlılık ve adaptasyon kazandırır.** Radiant oyuncunun yeni beceriler öğrenmesine gerek yok — mevcut becerileri daha yüksek tutarlılık oranında uygulaması ve rakiplerinden daha hızlı adapte olması gerekiyor. Radiant 200 RR ile 600 RR arasındaki fark mekanik değil — baskı altında ne sıklıkla optimal kararı verdiği ve düşmanın ayarlamalarına ne kadar hızlı okuyup uyum sağladığı.
+
+## Ölüm Patternlerini Yorumlama
+
+- **IF** oyuncu aynı açıyı üst üste iki round tutuyorsa
+- **MEANING** Radiant'ta küçük patternler bile cezalandırılır. Rakip üçüncü round için karşı hazırlık yapmış olabilir
+- **COUNTER** her tekrarlanan davranışı potansiyel zafiyet olarak ele al: "İki kez heaven tuttun. Henüz karşı oynamamış olsalar bile oynayacaklarını varsay. Proaktif olarak çeşitle"
+- **WHY** proaktif çeşitleme, düşmanın karşı oyun geliştirmesini engeller
+
+- **IF** oyuncu aynı rakibe karşı sürekli ölüyorsa
+- **MEANING** bu, oyuncu hatası kadar **rakip kalitesini** de ortaya koyar. Rakibin belirli bir okuması olabilir ya da oyuncu bilgi sızdırıyor olabilir (ses ipuçları, utility patternleri, zamanlama işaretleri)
+- **COUNTER** düzeltme sıklıkla pozisyon değiştirmek değil, ölüme yol açan bilgi sızıntısını değiştirmek
+- **WHY** bilgi sızıntısını kapatmak, pozisyon değişiminden daha kalıcı bir çözüm sağlar
+
+- **IF** yakın maçlarda (13-11, uzatma) son roundlardaki ölüm patternleri farklı özellikler gösteriyorsa (daha agresif, daha az utility, daha hızlı commit)
+- **MEANING** sorun taktik değil zihinsel. Baskı altında karar kalitesi düşmüş
+- **COUNTER** baskı altında soğukkanlılık ve süreçlerine bağlılık öğret
+- **WHY** baskı altında sürecine sadık kalmak, bu seviyede birincil ayrıştırıcıdır

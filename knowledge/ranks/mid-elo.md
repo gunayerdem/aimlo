@@ -1,41 +1,79 @@
-# Mid Elo Coaching Profile — Gold, Platinum, Diamond
+# Orta Elo Koçluk Profili — Gold, Platinum, Diamond
 
-## Coaching Tone
-Direct and tactical. These players have the fundamentals — they can aim, they know maps, they buy correctly most of the time. The bottleneck is decision-making, not mechanics. Be concise. Skip the basics. Talk to them like a player who should know better, because they usually do. Frame feedback around choices, not skills.
+## Koçluk Tonu
+Doğrudan ve taktiksel. Bu oyuncuların temelleri var — nişan alabiliyorlar, haritaları biliyorlar, çoğu zaman doğru alışveriş yapıyorlar. Darboğazları karar verme, mekanik değil. Kısa ve öz ol. Temelleri atla. Daha iyisini bilmesi gereken bir oyuncuyla konuşur gibi konuş, çünkü biliyorlar. Geri bildirimi beceriler değil, seçimler etrafında çerçevele.
 
-## Priority Coaching Areas
+## Öncelikli Koçluk Alanları
 
-### Utility Timing
-Mid-elo players have utility but use it at the wrong time. Smokes too early (expire before the execute), flashes with no one ready to swing, mollies used reactively instead of proactively. Coaching should focus on when to use utility, not how. "Hold your smoke until you hear footsteps in main" is the level of specificity needed.
+### Utility Zamanlaması
+Orta elo oyuncuların utility'si var ama yanlış zamanda kullanıyorlar. Smoke'lar çok erken (execute'dan önce biter), flash'lar kimse swing yapmaya hazır değilken, molly'ler proaktif yerine reaktif kullanılıyor.
 
-### Trade Setups
-Solo peeking is the single biggest fixable habit in Gold-Diamond. Players know what trading is but fail to set it up. Coach explicit buddy systems: "You and your duo peek together, 1-2 second gap maximum. First player peeks wide, second player holds the off-angle for the refrag." If a player dies without a trade, the problem is positioning before the fight, not the fight itself.
+- **IF** oyuncu smoke'u execute'dan çok önce atıyorsa
+- **MEANING** smoke süresi dolduğunda takım henüz harekete geçmemiş oluyor, giriş açığa çıkıyor
+- **COUNTER** smoke'u takım harekete geçmeye hazır olana kadar tut, "main'de ayak sesi duyunca smoke at" gibi tetikleyiciler kullan
+- **WHY** doğru zamanlanmış utility, düşmana tepki verme penceresi bırakmaz
+
+### Trade Kurulumları
+Solo peek yapmak Gold-Diamond arasında düzeltilmesi en kolay alışkanlık. Oyuncular trade'in ne olduğunu bilir ama kurulumunu yapamaz.
+
+- **IF** oyuncu sürekli tek başına peek yapıp destek almadan ölüyorsa
+- **MEANING** ölümü trade edilemiyor, takım sayı dezavantajına düşüyor
+- **COUNTER** açık buddy sistemi kur: "İkiniz birlikte peek yapın. İlk oyuncu wide peek yapar, ikinci oyuncu refrag için off-angle tutar"
+- **WHY** trade kurulumu her ölümü bir değişime çevirir, sayı avantajını korur
 
 ### Site Anchoring
-Defenders in mid-elo over-rotate or give up site too early. Teach the difference between "playing retake" and "giving up site for free." An anchor's job is to delay, get information, and use utility to slow the push — not to get a kill and die. One piece of utility plus a fallback position is the anchor formula.
+Orta eloda defansçılar çok erken rotate yapar ya da site'ı çok çabuk terk eder. "Retake oynamak" ile "site'ı bedavaya vermek" arasındaki farkı öğret.
 
-### Crossfire Setups
-Two players holding the same angle is wasted firepower. Teach crossfire geometry: if Player A holds the left side, Player B holds the right side so the attacker cannot clear both simultaneously. This is the single highest-value defensive concept for mid-elo.
+- **IF** anchor oyuncu ilk temas anında site'ı terk ediyorsa
+- **MEANING** düşmanlar serbest site alır, retake zorlaşır
+- **COUNTER** anchor'ın görevi geciktirmek, bilgi almak ve utility ile push'u yavaşlatmak — kill alıp ölmek değil. Bir utility + geri çekilme pozisyonu anchor formülü
+- **WHY** geciktirme, takıma rotate zamanı verir ve düşmanı utility harcamaya zorlar
 
-### Anti-Read Play
-Predictability is the primary killer at this rank. Players develop habits — same peek, same timing, same position every round. By round 5, the enemy team has a read. Coach conscious variation: different angle each round, vary timing between early and late peeks, alternate aggression and passive play.
+### Crossfire Kurulumları
+İki oyuncunun aynı açıyı tutması ateş gücü israfı. Crossfire geometrisini öğret: A oyuncusu sol tarafı tutarsa, B oyuncusu sağ tarafı tutar, böylece saldırgan ikisini aynı anda temizleyemez.
 
-## Common Mistakes at This Level
+- **IF** iki defansçı aynı açıyı yan yana tutuyorsa
+- **MEANING** saldırgan tek bir peek ile ikisini de görebilir, crossfire avantajı sıfır
+- **COUNTER** oyuncuları karşılıklı açılara yerleştir, saldırganın tek hareketle ikisini de temizleyemeyeceği şekilde
+- **WHY** crossfire düşmanı iki yönden aynı anda ateş altına alır, peek yapma şansını yarıya düşürür
 
-- **Predictable peeks**: Same angle, same timing, every round. The enemy team adapts faster than the player does. Coach round-to-round variation as a deliberate practice.
-- **Poor post-plant positioning**: Players plant the spike and then stand next to it or peek aggressively. Teach default post-plant setups: plant for a specific position, then hold that position with utility.
-- **Ego peeking**: Taking fights they do not need to take. A defender with man advantage who peeks and dies turns a 4v3 into a 3v3. Teach "hold your advantage, make them come to you."
-- **Bad timing on rotations**: Rotating too early (leaving site open) or too late (arriving after site is taken). Teach information-based rotation: rotate on confirmed info, not on sound cues alone.
-- **Wasting utility in the first 15 seconds**: All smokes and flashes gone before mid-round. Then the retake or late-round play has zero utility. Teach utility budgeting: save at least one ability for post-plant or retake.
+### Anti-Read Oyunu
+Tahmin edilebilirlik bu rankta en büyük ölüm sebebi. Oyuncular alışkanlıklar geliştirir — aynı peek, aynı zamanlama, her round aynı pozisyon. 5. round'a kadar düşman takım okumayı yapar.
 
-## What to Emphasize
+- **IF** oyuncu her round aynı açıdan, aynı zamanlamayla peek yapıyorsa
+- **MEANING** düşman takım pozisyonu önceden nişan alır, avantaj tamamen düşmanın
+- **COUNTER** bilinçli çeşitlilik uygula: her round farklı açı, erken ve geç peek arasında değişim, saldırgan ve pasif oyun arasında geçiş
+- **WHY** tahmin edilemezlik, düşmanın hazırlık yapmasını engeller
 
-The core coaching message for mid-elo is: **"You know the mechanics — now be smarter about when and where."** Every piece of feedback should reinforce that the player's aim and ability usage are adequate, but their decisions around timing, positioning, and reading the enemy are what hold them back. This reframes improvement as a thinking problem, not a practice problem.
+## Bu Seviyede Yaygın Hatalar
 
-## Interpreting Death Patterns
+- **Tahmin edilebilir peek'ler**: Her round aynı açı, aynı zamanlama. Düşman takım oyuncudan daha hızlı adapte olur. Round-round çeşitliliği bilinçli pratik olarak öğret.
 
-When a mid-elo player dies at the same position repeatedly, the cause is almost always **predictability**, not poor positioning. They chose a good spot but used it too many times. The coaching response is to suggest variation: "Round 4 you held the same angle as rounds 1-3. By now the enemy pre-aims it. Switch to the off-angle or delay your peek by 3 seconds."
+- **Kötü post-plant pozisyonlanması**: Oyuncular spike'ı diker ve yanında durur ya da agresif peek yapar. Varsayılan post-plant kurulumlarını öğret: belirli bir pozisyon için dik, sonra o pozisyonu utility ile tut.
 
-Deaths in post-plant situations suggest a setup problem, not an aim problem. Check where they planted and where they positioned — the plant spot likely did not support their hold position.
+- **Ego peek**: Almak zorunda olmadıkları dövüşlere girme. Sayı avantajına sahip defansçının peek yapıp ölmesi 4v3'ü 3v3'e çevirir. "Avantajını koru, onların sana gelmesini sağla" öğret.
 
-A pattern of deaths in 1vX situations where X is small (1v1, 1v2) suggests the player is arriving to fights late because of poor rotation timing or lurking too long. The fix is faster information processing, not faster aim.
+- **Rotate zamanlamasında hata**: Çok erken rotate etme (site'ı açık bırakma) ya da çok geç (site alındıktan sonra varma). Bilgiye dayalı rotate öğret: onaylanmış bilgiyle rotate et, tek başına ses ipuçlarıyla değil.
+
+- **Erken round'da utility israfı**: Tüm smoke'lar ve flash'lar mid-round'dan önce biter. Sonra retake ya da geç round oyununda sıfır utility kalır. Utility bütçelemesi öğret: post-plant ya da retake için en az bir yetenek sakla.
+
+## Neyi Vurgulamalı
+
+Orta elo için temel koçluk mesajı: **"Mekaniği biliyorsun — şimdi ne zaman ve nerede konusunda daha akıllı ol."** Her geri bildirim, oyuncunun nişan ve yetenek kullanımının yeterli olduğunu ama zamanlama, pozisyonlanma ve düşmanı okuma konusundaki kararlarının onu geride tuttuğunu pekiştirmeli. Bu, gelişimi pratik sorunu değil, düşünme sorunu olarak yeniden çerçeveler.
+
+## Ölüm Patternlerini Yorumlama
+
+- **IF** orta elo oyuncu aynı pozisyonda sürekli ölüyorsa
+- **MEANING** neden neredeyse her zaman **tahmin edilebilirlik**, kötü pozisyonlanma değil. İyi bir nokta seçtiler ama çok fazla kullandılar
+- **COUNTER** çeşitlilik öner: "4. round'da 1-3. round'larla aynı açıyı tuttun. Düşman artık önceden nişan alıyor. Off-angle'a geç ya da peek'ini birkaç vuruşluk geciktir"
+- **WHY** pozisyon değişimi, düşmanın okuma yapmasını engeller
+
+- **IF** post-plant durumlarında ölümler yaşanıyorsa
+- **MEANING** sorun aim değil kurulum. Nereye diktiklerini ve nerede konumlandıklarını kontrol et — dikilme noktası tutma pozisyonlarını desteklemiyor
+- **COUNTER** plant noktasını tutma pozisyonuna göre seç, sonra o pozisyona çekil
+- **WHY** plant ve pozisyon uyumu, post-plant başarısının temelidir
+
+- **IF** 1vX durumlarında ölümler yoğunlaşıyorsa (X küçükken: 1v1, 1v2)
+- **MEANING** oyuncu kötü rotate zamanlaması ya da çok uzun lurk yüzünden dövüşlere geç kalıyor
+- **COUNTER** düzeltme daha hızlı bilgi işleme, daha hızlı nişan değil
+- **WHY** zamanında bilgi, doğru pozisyonda olmayı sağlar

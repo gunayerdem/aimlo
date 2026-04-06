@@ -1,76 +1,81 @@
-# AGENT: Sova
+# AJAN: Sova
 
-## 1. Role Identity
-Sova is the precision info-gatherer who turns map knowledge into a science. His Recon Bolt lineups, Shock Dart damage spots, and Owl Drone scouting provide the most consistent, repeatable information-gathering toolkit in the game. Sova rewards preparation and lineup mastery -- the more lineups a player knows, the more dangerous Sova becomes. He is the initiator who gathers intel before the fight starts so the team can enter with full information.
+## 1. Rol Kimliği
+Sova, harita bilgisini bir bilime dönüştüren hassas bilgi toplayıcıdır. Recon Bolt lineup'ları, Shock Dart hasar noktaları ve Owl Drone keşfi, oyundaki en tutarlı, tekrarlanabilir bilgi toplama araç setini sağlar. Sova, hazırlığı ve lineup ustalığını ödüllendirir -- bir oyuncu ne kadar çok lineup bilirse Sova o kadar tehlikeli olur. Dövüş başlamadan önce bilgi toplayan ve takımın tam bilgiyle girmesini sağlayan initiator'dür.
 
-## 2. Core Responsibilities
-- Gather pre-fight information using Recon Bolt at learned lineup positions for every site
-- Scout with Owl Drone to get real-time reads on enemy positions before executes
-- Deliver post-plant Shock Dart lineups to deny defuse and chip health from safe positions
-- Use Hunter's Fury to punish revealed enemies, deny defuse, or cut off rotations through walls
-- Establish a two-step info protocol: drone for initial reads, then Recon Bolt to confirm
-- Provide the team with actionable intel every round -- Sova should never enter a site blind
+## 2. Temel Sorumluluklar
+- Her site için öğrenilmiş lineup pozisyonlarında Recon Bolt kullanarak dövüş öncesi bilgi toplamak
+- Execute'lardan önce düşman pozisyonları hakkında gerçek zamanlı okumalar almak için Owl Drone ile keşif yapmak
+- Güvenli pozisyonlardan defuse'u engellemek ve can kıpmak için post-plant Shock Dart lineup'ları gerçekleştirmek
+- Ortaya çıkarılmış düşmanları cezalandırmak, defuse'u engellemek veya duvarlar arkasından rotate'ları kesmek için Hunter's Fury kullanmak
+- İki adımlı bilgi protokolü oluşturmak: ilk okumalar için drone, sonra doğrulamak için Recon Bolt
+- Her tur takıma eyleme dönüştürülebilir bilgi sağlamak -- Sova asla bir site'a kör girmemeli
 
-## 3. Common Mistakes
-- Using Recon Bolt without knowing lineups, resulting in darts that scan empty space or are instantly shot
-- Droning for too long and dying in the physical body to a push or lurk
-- Shock Darts used casually for chip damage instead of saved for post-plant lineups
-- Hunter's Fury fired blindly without any info on enemy positions
-- Only learning attack lineups and having no defensive Recon Bolt setups
-- Recon Bolt fired too early on defense, scanning areas before attackers have committed
+## 3. Sık Yapılan Hatalar
+- Lineup bilmeden Recon Bolt kullanmak, boş alan tarayan veya anında vurulan dart'larla sonuçlanmak
+- Çok uzun drone kullanmak ve fiziksel gövdede push veya lurk'e ölüm
+- Shock Dart'ları post-plant lineup'ları için saklamak yerine rastgele chip hasarı için kullanmak
+- Hunter's Fury'yi düşman pozisyonları hakkında hiçbir bilgi olmadan körüne ateşlemek
+- Yalnızca atak lineup'ları öğrenmek ve savunma Recon Bolt kurulumlarına sahip olmamak
+- Savunmada Recon Bolt'u, saldıranlar bağlanmadan çok erken ateşlemek
 
-## 4. Pattern -> Meaning
+## 4. Örüntü -> Anlam
 
-**IF** Recon Bolts are consistently destroyed within 1 second of landing
-**MEANING** The player is using common, well-known dart spots that enemies immediately recognize
-**FIX** Learn advanced dart positions -- high ceilings, behind boxes, off-angle bounces. The dart should require enemies to look away from the team's entry path to destroy it.
+**IF** Recon Bolt'lar indikten kısa bir süre sonra sürekli yok ediliyor
+**MEANING** Oyuncu, düşmanların hemen tanıdığı yaygın, bilinen dart noktaları kullanıyor
+**COUNTER** İleri dart pozisyonları öğrenin -- yüksek tavanlar, kutuların arkası, off-angle sekmeleri. Dart, yok etmek için düşmanların takımın giriş yolundan bakışlarını çevirmesini gerektirmeli.
+**WHY** Zor-ulaşılır dart pozisyonları savunucuları ikili bir ikilemle karşı karşıya bırakır: ya dart'ı vur (entry'den bakışını çevir) ya da etiketlenmeyi kabul et (pozisyon ifşa olur); yaygın noktalar bu ikilemi ortadan kaldırır.
 
-**IF** Owl Drone is used but the player dies during or immediately after droning
-**MEANING** The player is droning from an unsafe position or droning for too long
-**FIX** Drone from behind cover, limit drone time to 4-5 seconds, and have a teammate watch your body. Info gathering is worthless if it costs a life.
+**IF** Owl Drone kullanılıyor ama oyuncu drone sırasında veya hemen sonra ölüyor
+**MEANING** Oyuncu güvenli olmayan bir pozisyondan drone yapıyor veya çok uzun drone kullanıyor
+**COUNTER** Kapağın arkasından drone yapın, drone süresini kısa tutun ve bir takım arkadaşının gövdenizi izlemesini sağlayın. Bir hayata mal olan bilgi toplama değersizdir.
+**WHY** Güvenli pozisyondan kısa drone kullanımı, hem bilgi sağlar hem de oyuncunun hayatını korur; güvenli olmayan konumdan uzun drone ise düşmanlara savunmasız gövdeyi cezalandırma fırsatı verir.
 
-**IF** both Shock Darts are used before the spike is planted
-**MEANING** Post-plant denial -- Sova's highest-value play -- is gone
-**FIX** On attack, save both Shock Darts for post-plant unless the round requires them to take space. The post-plant lineup kills win rounds that mechanical skill cannot.
+**IF** her iki Shock Dart da spike dikilmeden önce kullanılıyor
+**MEANING** Post-plant engellemesi -- Sova'nın en yüksek değerli oyunu -- elden çıkmış
+**COUNTER** Atak'ta, tur alan almak için gerektirmediği sürece her iki Shock Dart'ı post-plant için saklayın. Post-plant lineup kill'leri, mekanik becerinin kazanamayacağı turları kazanır.
+**WHY** Post-plant Shock Dart'ları, düşmanların güvenle defuse yapmasını engeller ve Sova'ya uzak bir pozisyondan turları kazandırma potansiyeli verir; bu seçenek erken kullanım ile ortadan kalkar.
 
-**IF** Hunter's Fury is used in clutch situations without prior info
-**MEANING** The player treats the ult as a blind damage tool rather than a precision finisher
-**FIX** Always pair Hunter's Fury with Recon Bolt or Owl Drone info. Fire the blasts at confirmed or recently revealed positions, not at guesses.
+**IF** Hunter's Fury önceden bilgi olmadan clutch durumlarda kullanılıyor
+**MEANING** Oyuncu ult'i hassas bitirici yerine kör hasar aracı olarak kullanıyor
+**COUNTER** Hunter's Fury'yi her zaman Recon Bolt veya Owl Drone bilgisiyle eşleştirin. Ateşleri tahminlere değil, doğrulanmış veya yakın zamanda ortaya çıkarılmış pozisyonlara atın.
+**WHY** Bilgi destekli Hunter's Fury, ateşlerin doğrulanmış pozisyonlara gitmesini sağlar ve isabet oranını dramatik olarak arttırır; kör atışlar ise değerli ult'i düşük olasılıklı tahminlere harcar.
 
-**IF** the player has fewer than 3 Recon Bolt lineups per site on their main maps
-**MEANING** Lineup library is insufficient for consistent value
-**FIX** Learn 5+ lineups per map minimum: 2 per attack site, 2 defensive, and 1 early-round default. This is non-negotiable for serious Sova play.
+**IF** oyuncunun ana haritalarında site başına 3'ten az Recon Bolt lineup'ı var
+**MEANING** Lineup kütüphanesi tutarlı değer için yetersiz
+**COUNTER** Harita başına en az 5+ lineup öğrenin: atak site başına 2, savunma 2 ve 1 erken tur varsayılanı. Bu, ciddi Sova oyunu için pazarlık konusu değildir.
+**WHY** Geniş bir lineup kütüphanesi, Sova'nın her tur ve her durum için güvenilir bilgi sağlamasını garanti eder; sınırlı lineup'lar onu belirli site'larda veya savunmada değersiz bırakır.
 
-## 5. Map Interactions
-- **Ascent**: Top-tier Sova map. Open sky allows full Recon Bolt creativity. Long sightlines for Hunter's Fury. Shock Dart lineups for A and B sites are well-established.
-- **Breeze**: Strong pick. Wide open spaces and high ceilings make Recon Bolt excellent. Shock Dart lineups from spawn onto both sites.
-- **Haven**: Three sites means more lineups to learn but Recon Bolt covers each site well. Owl Drone through long corridors provides deep info.
-- **Bind**: Viable but tight ceilings limit some Recon Bolt angles. Shock Dart through teleporters creates unexpected damage.
-- **Icebox**: Recon Bolt on A site and B site rafters is strong. Open roof on A site enables creative dart spots.
+## 5. Harita Etkileşimleri
+- **Ascent**: Üst düzey Sova haritası. Açık gökyüzü tam Recon Bolt yaratıcılığı sağlar. Hunter's Fury için uzun görüş hatları. A ve B site'ları için Shock Dart lineup'ları yerleşik.
+- **Breeze**: Güçlü seçim. Geniş açık alanlar ve yüksek tavanlar Recon Bolt'u mükemmel kılar. Spawn'dan her iki site'a Shock Dart lineup'ları.
+- **Haven**: Üç site öğrenilecek daha fazla lineup demek ama Recon Bolt her site'i iyi kaplar. Uzun koridorlardan Owl Drone derin bilgi sağlar.
+- **Bind**: Geçerli ama dar tavanlar bazı Recon Bolt açılarını sınırlar. Teleporter'lardan Shock Dart beklenmedik hasar yaratır.
+- **Icebox**: A site ve B site rafterlarında Recon Bolt güçlü. A site'taki açık çatı yaratıcı dart noktaları sağlar.
 
-## 6. Matchup Notes
-- Against Omen: Recon Bolt reveals Omen's teleport position. Drone can chase Omen through smokes to confirm his location.
-- Against Cypher: Sova's info competes with Cypher's. On attack, Recon Bolt can scan for tripwire setups without committing utility to trigger them.
-- Paired with a duelist: Drone first, Recon second, duelist enters with full info. This is the gold standard initiator-duelist protocol.
-- Against Viper: Recon Bolt scans through Viper's wall and smoke. Sova is one of the best agents at countering Viper's setup.
+## 6. Eşleşme Notları
+- Omen'e karşı: Recon Bolt, Omen'in teleport pozisyonunu ortaya çıkarır. Drone, konumunu doğrulamak için smoke'ların içinden Omen'i takip edebilir.
+- Cypher'a karşı: Sova'nın bilgisi Cypher'ınkiyle rekabet eder. Atak'ta, Recon Bolt tetiklemek için utility harcamadan tripwire kurulumlarını tarayabilir.
+- Duelist ile eşleşme: önce Drone, sonra Recon, duelist tam bilgiyle girer. Bu, altın standart initiator-duelist protokolüdür.
+- Viper'a karşı: Recon Bolt, Viper'ın wall ve smoke'unun içinden tarar. Sova, Viper kurulumunu counter'lamada en iyi ajanlardan biridir.
 
-## 7. What To Tell The Player
+## 7. Oyuncuya Ne Söylenmeli
 
-### When performing well
-**Player Action:** You land Recon Bolts at ceiling/wall positions that force defenders to turn away from the entry path to destroy them, and save both Shock Darts for post-plant lineup denial on default defuse.
-**Enemy Perception:** Defenders see the Recon Bolt and immediately calculate whether they can shoot it without exposing themselves to the entry. They treat the dart as a higher-priority threat than your teammates — their attention shifts upward toward the dart location.
-**Enemy Reaction:** They are forced to either turn and shoot the dart (taking their crosshair off the entry angle for 1-2 seconds) or ignore it and get tagged (revealing their exact position to your entire team). Neither option is acceptable — both compromise their defensive hold.
-**Exploit Window:** The 1-2 second window where defenders look up to destroy the Recon Bolt is a guaranteed entry window for your team. If they ignore it, the reveal tag gives your team pre-aimed crosshair positions for the next 3-4 seconds. Post-plant, two Shock Darts deny 8+ seconds of defuse time from a position the enemy cannot punish.
-**Repeat Strategy:** Round 1: standard Recon Bolt lineup for the most common hold angle. Round 2: alternate lineup to scan a different area of the site. Round 3: fire Owl Drone instead of Recon Bolt to catch defenders who have learned to dodge the dart. Always save Shock Darts for post-plant — first dart on defuse audio, second dart on retry.
-**Enemy Adaptation:** After 4-5 rounds, defenders will pre-aim Recon Bolt landing spots to destroy it instantly, play positions outside the dart's scan radius, or push before the dart lands to catch you mid-lineup.
-**Counter-Adaptation:** When they pre-aim the dart: use a different lineup that lands the dart in an unexpected position (you should have 2-3 per site). When they dodge scan radius: the dart is still herding them into predictable positions — call those positions to your team. When they push early: skip the lineup and use Owl Drone reactively to tag the rushing enemies, then call their positions for your team to hold.
+### İyi performans gösterirken
+**Oyuncu Eylemi:** Recon Bolt'ları, savunucuların yok etmek için entry yolundan bakışlarını çevirmesini gerektiren tavan/duvar pozisyonlarına indiriyorsun ve her iki Shock Dart'ı varsayılan defuse üzerinde post-plant lineup engellemesi için saklıyorsun.
+**Düşman Algısı:** Savunucular Recon Bolt'u görür ve kendilerini ifşa etmeden vurabileceklerini hesaplar. Dart'ı takım arkadaşlarından daha yüksek öncelikli tehdit olarak görürler -- odakları dart konumuna doğru yukarı kayar.
+**Düşman Tepkisi:** Ya dönüp dart'ı vurmak (entry açısından crosshair'i kısa bir süre çekme) ya da görmezden gelip etiketlenmek (kesin pozisyonlarını tüm takıma ifşa etme) zorunda kalırlar. Hiçbir seçenek kabul edilebilir değildir -- her ikisi de savunma tutuşlarını tehlikeye atar.
+**Faydalanma Penceresi:** Savunucuların Recon Bolt'u yok etmek için yukarı baktığı kısa pencere, takım için garantili giriş penceresidir. Görmezden gelirlerse, reveal etiketi takıma sonraki kısa süre için önceden nişanlanmış crosshair pozisyonları verir. Post-plant'te iki Shock Dart, düşmanların cezalandıramayacağı bir pozisyondan ciddi miktarda defuse zamanı engeller.
+**Tekrar Stratejisi:** Tur 1: en yaygın tutma açısı için standart Recon Bolt lineup'ı. Tur 2: site'ın farklı bir bölgesini taramak için alternatif lineup. Tur 3: dart'tan kaçınmayı öğrenen savunucuları yakalamak için Recon Bolt yerine Owl Drone gönderin. Shock Dart'ları her zaman post-plant için saklayın -- ilk dart defuse sesinde, sonraki dart tekrar denemede.
+**Düşman Adaptasyonu:** 4-5 tur sonra savunucular Recon Bolt iniş noktalarını anında yok etmek için önceden nişan alacak, dart'ın tarama yarıçapının dışında pozisyon oynayacak veya lineup sırasında sizi yakalamak için dart inmeden push yapacak.
+**Karşı-Adaptasyon:** Dart'ı önceden nişan alırlarsa: dart'ı beklenmedik bir pozisyona indiren farklı bir lineup kullanın (site başına 2-3 tane olmalı). Tarama yarıçapından kaçınırlarsa: dart yine de onları tahmin edilebilir pozisyonlara yönlendirir -- bu pozisyonları takıma bildirin. Erken push yaparlarsa: lineup'ı atlayın ve koşucu düşmanları etiketlemek için Owl Drone'u reaktif olarak kullanın, sonra pozisyonları takımın tutması için bildirin.
 
-**When struggling**: "Your darts are landing in low-value positions. Go back to custom games and refine your lineups. A Sova without lineups is bringing a toolkit without the tools."
+**Zorlanırken**: "Dart'ların düşük değerli pozisyonlara iniyor. Özel oyunlara dönüp lineup'larını rafine et. Lineup'sız Sova, araçları olmayan bir araç çantası getirmektir."
 
-**When being predictable**: "Enemies are pre-aiming your dart positions and shooting them instantly. You need alternate dart spots for the same site. Two lineup options per site minimum so they cannot autopilot the dart destroy."
+**Tahmin edilebilir olunca**: "Düşmanlar dart pozisyonlarını önceden nişan alıyor ve anında vuruyor. Aynı site için alternatif dart noktalarına ihtiyacın var. Site başına en az iki lineup seçeneği olmalı ki otopilotta dart yok edemesinler."
 
-## 8. Rank Modulation
-- **Low (Iron-Silver)**: Learn 1 Recon Bolt lineup per site on your main maps. Use Owl Drone at the start of executes. Save Shock Darts for post-plant.
-- **Mid (Gold-Platinum)**: Expand to 3+ lineups per site. Introduce Shock Dart post-plant lineups. Two-step info protocol: drone then dart.
-- **High (Diamond-Ascendant)**: Full lineup library including defensive and retake darts. Hunter's Fury comboed with Recon info. Advanced bounce dart spots.
-- **Elite (Immortal-Radiant)**: Adaptive dart selection based on opponent tendencies. Creative drone pathing that avoids common shoot-down angles. Shock Dart timing varied to avoid counter-lineups.
+## 8. Rank Modülasyonu
+- **Düşük (Iron-Silver)**: Ana haritalarınızda site başına 1 Recon Bolt lineup'ı öğrenin. Execute'ların başında Owl Drone kullanın. Shock Dart'ları post-plant için saklayın.
+- **Orta (Gold-Platinum)**: Site başına 3+ lineup'a genişletin. Post-plant için Shock Dart lineup'ları tanıtın. İki adımlı bilgi protokolü: önce drone sonra dart.
+- **Yüksek (Diamond-Ascendant)**: Savunma ve retake dart'ları dahil tam lineup kütüphanesi. Recon bilgisiyle kombinlenmiş Hunter's Fury. İleri sekme dart noktaları.
+- **Elit (Immortal-Radiant)**: Rakip eğilimlerine dayalı adaptif dart seçimi. Yaygın vurulma açılarından kaçınan yaratıcı drone patikaları. Counter-lineup'lardan kaçınmak için çeşitlendirilmiş Shock Dart zamanlaması.

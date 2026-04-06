@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAuthAndRateLimit } from "@/lib/api-auth";
 import { realityCheck } from "@/lib/reality-checker";
+import { loadVisionKnowledge } from "@/lib/knowledge-loader";
 
 /**
  * POST /api/ai/vision
@@ -17,125 +18,39 @@ const AI_TIMEOUT_MS = 15_000;
 const MAX_PAYLOAD_BYTES = 5_000_000; // 5MB max (base64 images are large)
 const ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages";
 
-const SYSTEM_PROMPT = `Sen AIMLO, profesyonel bir Valorant koçusun. Ekran görüntüsünü analiz et ve round feedback ver. JSON formatında döndür.
+const SYSTEM_PROMPT = `Sen AIMLO, Valorant koçusun. Screenshot'tan round feedback ver, JSON döndür.
 
-ÖNCELİKLENDİRME (KRİTİK):
-Birden fazla sorun tespit etsen bile, deathAnalysis'te SADECE en önemli 1 soruna odaklan.
-Öncelik sırası:
-1. TEKRAR EDEN pattern (round geçmişinde kanıtlanmış) — en yüksek öncelik
-2. NET mekanik hata (açık kalma + cover yok — bağlam destekliyor) — yüksek öncelik
-3. Tek round gözlemi — düşük öncelik
+KURALLAR:
+- deathAnalysis: SADECE 1 sorun. Öncelik: tekrar eden pattern > mekanik hata > tek gözlem.
+- nextRoundSuggestion: SADECE 1 aksiyon.
+- enemyAnalysis: max 2-3 madde.
+- Kanıtlı bilgi kesin dille, çıkarım ihtimalli dille ("olabilir","muhtemelen"). Kanıtsız tarihsel iddia YASAK.
+- Tek round = pattern iddiası YASAK. 2+ round aynı pozisyon = "tekrar eden".
+- Ölüm pozisyonu ≠ giriş yolu. Sadece NEREDE öldüğünü biliyoruz.
 
-nextRoundSuggestion'da SADECE 1 aksiyon öner — birden fazla şey söyleme.
-enemyAnalysis'te en fazla 2-3 madde — kısa ve keskin.
+patternData (opsiyonel, sadece tespit edileni doldur — emin değilsen KOYMA):
+deathLocation: string — callout, küçük harf+underscore ("a_long","b_main")
+peekType: "dry_peek"|"util_peek"|"jiggle"|"wide_swing"|"holding"|"unknown"
+utilUsed: boolean — ölümden önce ability kullandı mı
+traded: boolean — takım trade aldı mı
+deathTiming: "early"|"mid"|"late"|"post_plant"
+enemyWeapon: string — küçük harf ("vandal","operator")
+mapControl: "full_control"|"partial_control"|"no_control"|"contested"
+wasRepeatedMistake: boolean — patternContext'te benzer hata varsa true
+Hayatta kalınan round: sadece mapControl+utilUsed doldur.`;
 
-YASAK: 3+ sorun listelemek, mixed priority, genel tavsiye listesi.
-AZ = ÇOK. En etkili tek sorunu bul, onu söyle.
+const USER_PROMPT = `Valorant round sonu screenshot'u. Türkçe coaching feedback ver.
 
-KANIT POLİTİKASI (ZORUNLU):
-Sana verilen round geçmişi GERÇEK gözlemlerdir. Bu verilere göre konuş:
+ÖLÜM POZİSYONU — 4 sinyal kontrol et: minimap, sahne geometrisi, kamera yönü, çevresel ipuçları.
+2+ sinyal aynı bölge → confidence=high. 1 sinyal → medium. Çelişi/yok → "unknown". Uydurma YASAK.
+Alt-bölge ekle mümkünse: "B Main entry", "A Site back left".
 
-GÖZLEMLENEN (kesin dille söylenebilir):
-- "Son X round'da Y kez öldün" — eğer roundHistory bunu kanıtlıyorsa
-- "Bu round öldün" — eğer died=true ise
+MEKANİK HATA — sadece GÖRÜNEN kanıtlar (açık kalma, açı tipi, cover durumu, tehdit yönü).
+2+ sinyal → hata iddiası. 1 sinyal → "olabilir". 0 → iddia YASAK.
+Trade/çatışma anı = hata DEĞİL. "aim'ini geliştir" YASAK.
 
-ÇIKARIM (ihtimalli dille söylenmeli):
-- "Bu tekrar, giriş açının okunabilir hale geldiğini gösteriyor olabilir"
-- "Muhtemelen düşman bu açıyı tutuyor"
-Çıkarım kelimeleri: "olabilir", "muhtemelen", "gösteriyor olabilir", "yüksek ihtimalle"
-
-YASAK KESİNLİK (kanıtsız söylenemez):
-- "Jett 3 rounddur seni burada bekliyor" — killer bilgisi yoksa YASAK
-- "Her round aynı şeyi yapıyorlar" — kanıt yoksa YASAK
-- "Düşman seni kesin okudu" — gözlem değil tahmin
-
-KURAL: Kanıt yoksa tarihsel iddia yapma. Sadece mevcut round'u yorumla.
-
-ZAMANSAL TUTARLILIK:
-- Tek round'da tespit edilen pozisyon = "bu round'da" dil
-- 2+ round aynı pozisyon = "tekrar eden" pattern
-- 3+ round yakın zamanda (son 5 round içinde) = "güçlü pattern — zamanlama olarak da tutarlı"
-- Eski ve yeni round'lar farklı pozisyonsa = "yeni pattern gelişiyor olabilir"
-- Tek round + tek pozisyon = KESİNLİKLE pattern iddiası yapma
-
-ÖLÜM BÖLGESİ COACHING:
-- Art arda aynı bölgede ölüm = "bu bölgede tekrar cezalandırılıyorsun"
-- Ölüm bölgesi değişmişse → not et ("ölüm bölgesi değişti")
-- YASAK: "aynı yerden giriyorsun", "entry yapıyorsun", "giriş çizgin" — ölüm pozisyonu ≠ giriş yolu
-- Sadece NEREDE öldüğünü biliyoruz, NASIL oraya geldiğini BİLMİYORUZ
-- "Bu bölgede ölüyorsun" DOĞRU, "bu bölgeden entry yapıyorsun" YANLIŞ`;
-
-const USER_PROMPT = `Bu bir Valorant round sonu ekran görüntüsü. Şu bilgileri çıkar ve Türkçe coaching feedback ver:
-
-1. Skor
-2. Round sonucu (win/loss)
-3. Oyuncu öldü mü
-4. Ölüm analizi (neden öldü, ne yanlış yaptı)
-5. Düşman analizi (düşman pattern'leri, alışkanlıklar)
-6. Sonraki round önerisi (somut, uygulanabilir strateji)
-7. ÖLÜM POZİSYONU — ÇOK SİNYALLİ ANALİZ (ZORUNLU):
-   Eğer oyuncu öldüyse, aşağıdaki BAĞIMSIZ sinyalleri ayrı ayrı kontrol et:
-
-   Sinyal A — MİNİMAP: Sol alt köşedeki minimap'te oyuncu ikonu nerede? Okunabiliyorsa bölge tahmini yap, okunamıyorsa null.
-   Sinyal B — SAHNE GEOMETRİSİ: Spectator kamerasında görünen duvarlar, kutular, yapılar hangi bölgeye ait? (örn: Ascent A Short'un dar geçidi, Bind Hookah'ın penceresi)
-   Sinyal C — KAMERA YÖNÜ: Spectator kameranın baktığı yön ve açı hangi bölgeyi gösteriyor?
-   Sinyal D — ÇEVRESEL İPUÇLARI: Görünen text, tabela, zemin rengi, ışık kaynakları hangi bölgeye işaret ediyor?
-
-   KONSENSÜS KURALI:
-   - 2+ sinyal aynı bölgeyi gösteriyorsa → o bölgeyi döndür, confidence = high
-   - 1 sinyal varsa → döndür ama confidence = medium
-   - Sinyaller çelişiyorsa VEYA hiçbir sinyal yoksa → "unknown" döndür
-   - UYDURMA POZİSYON YASAK
-
-   Mümkünse alt-bölge ekle: "B Main entry", "A Site back left", "Mid top close"
-   Sadece ana bölge biliniyorsa: "B Main", "A Short"
-
-8. MEKANİK HATA TESPİTİ — ölüm anındaki frame'den GÖRÜNEN kanıtlara dayanarak:
-   Aşağıdaki sinyalleri kontrol et (sadece GÖRÜNEN şeyleri raporla, tahmin YASAK):
-
-   Sinyal 1 — AÇIK KALMA: Oyuncu açık mı, kapalı mı? Duvar/kutu arkasında mı yoksa açık alanda mı?
-   Sinyal 2 — AÇI TİPİ: Dar angle mi tutuyor, geniş swing mi yapmış, off-angle mı?
-   Sinyal 3 — COVER DURUMU: Yakınında sığınacak yer var mı? Kullanmış mı?
-   Sinyal 4 — TEHDİT YÖNÜ: Düşman nereden vuruyor/bakıyor?
-
-   HATA TESPİT KURALI:
-   - 2+ sinyal destekliyorsa → hata iddiası yapılabilir
-   - 1 sinyal → "olabilir" dili kullan
-   - 0 sinyal → hata iddiası YASAK
-   - "aim'ini geliştir", "daha dikkatli ol" YASAK — sadece GÖRÜNEN hatayı belirt
-
-   BAĞLAM DOĞRULAMA (KRİTİK — yanlış hata tespitini önler):
-   Hata iddiası yapmadan ÖNCE şunları kontrol et:
-   - Aktif çatışma mı? Oyuncu trade alıyorsa veya düşmanla exchange yapıyorsa "açık kalma" hata DEĞİLDİR
-   - Reposition anı mı? Oyuncu pozisyon değiştirirken yakalanmışsa, bu bir hata olabilir ama kesin değil
-   - İlk temas mı? Oyuncu peek alıp ilk teması kaybettiyse farklı, açık alanda yürürken vurulduysa farklı
-   - Kasıtlı oyun mu? Wide swing trade setup olabilir, agresif peek bilgi toplama olabilir
-
-   DOĞRULAMA SONUCU:
-   - Hata sinyalleri VAR + bağlam destekliyor → "Bu açıdan fazla açık kaldın — cover kullanmamak hataydı"
-   - Hata sinyalleri VAR + bağlam belirsiz → "Bu pozisyonda açık kalmış görünüyorsun, ancak bu bir trade/çatışma anı olabilir"
-   - Hata sinyalleri VAR + bağlam çelişiyor → hata iddiası YAPMA (aktif trade = normal gameplay)
-   - Bağlam okunamıyorsa → "kesin hata demek için yeterli bağlam yok" ekle
-
-   deathAnalysis'te bu kanıtları kullan:
-   DOĞRU: "B Main girişinde cover kullanmadan wide swing yaptın ve düşman dar angle'dan bekliyordu — aktif çatışma değil, pozisyon hatası"
-   DOĞRU: "Açık alanda vuruldun ama bu bir trade anı olabilir — kesin hata demek zor"
-   YANLIŞ: "aim'in kötüydü" veya "daha dikkatli oynasaydın"
-   YANLIŞ: Çatışma ortasında açık kalmayı "pozisyon hatası" olarak etiketlemek
-
-JSON formatında döndür:
-{
-  "round": number,
-  "score": "X-Y",
-  "result": "win" | "loss",
-  "died": boolean,
-  "deathAnalysis": "...",
-  "enemyAnalysis": ["madde1", "madde2"],
-  "nextRoundSuggestion": "...",
-  "deathPosition": "bölge adı veya unknown",
-  "positionConfidence": "high" | "medium" | "low",
-  "positionSignals": 0-4
-}`;
+JSON döndür:
+{"round":number,"score":"X-Y","result":"win"|"loss","died":boolean,"deathAnalysis":"...","enemyAnalysis":["..."],"nextRoundSuggestion":"...","deathPosition":"bölge|unknown","positionConfidence":"high"|"medium"|"low","positionSignals":0-4,"patternData":{"deathLocation":"a_long","peekType":"dry_peek","utilUsed":false,"traded":false,"deathTiming":"early","enemyWeapon":"operator","mapControl":"no_control","wasRepeatedMistake":true}}`;
 
 /* ══════════════════════════════════════════════════════════
    TYPES
@@ -149,10 +64,89 @@ type RoundEvidenceEntry = {
   timestamp: number;
 };
 
+const VALID_IMAGE_FORMATS = ["image/png", "image/jpeg", "image/webp", "image/gif"] as const;
+type ImageFormat = typeof VALID_IMAGE_FORMATS[number];
+
+const DEFAULT_MAX_TOKENS = 450;
+const MAX_TOKENS_CAP = 512;
+
 type VisionRequest = {
-  image: string; // base64-encoded PNG
+  image: string; // base64-encoded image
+  imageFormat?: string; // e.g. "image/jpeg" — defaults to "image/png"
+  maxTokens?: number; // client-requested max tokens — capped at 512
   roundHistory?: RoundEvidenceEntry[];
+  map?: string; // e.g. "Ascent", "Bind"
+  agent?: string; // e.g. "Jett", "Omen"
+  rank?: string; // e.g. "gold", "immortal"
+  enemyComp?: string[]; // e.g. ["Jett", "Omen", "Sova"]
+  patternContext?: string; // Rust client pattern analysis
+  // Client-provided round context (used to enrich AI prompt)
+  round?: number;
+  score?: string;
+  result?: string;
+  died?: boolean;
+  deathTiming?: string;
+  bannerType?: string;
+  combatReportVisible?: boolean;
+  scoreChanged?: boolean;
 };
+
+type PatternData = {
+  deathLocation?: string;
+  peekType?: string;
+  utilUsed?: boolean;
+  traded?: boolean;
+  deathTiming?: string;
+  enemyWeapon?: string;
+  mapControl?: string;
+  wasRepeatedMistake?: boolean;
+};
+
+const PEEK_TYPES = ["dry_peek", "util_peek", "jiggle", "wide_swing", "holding", "unknown"];
+const DEATH_TIMINGS = ["early", "mid", "late", "post_plant"];
+const MAP_CONTROLS = ["full_control", "partial_control", "no_control", "contested"];
+
+function sanitizePatternData(raw: unknown): PatternData | null {
+  if (!raw || typeof raw !== "object") return null;
+  const src = raw as Record<string, unknown>;
+  const safe: PatternData = {};
+  let hasField = false;
+
+  if (typeof src.deathLocation === "string" && src.deathLocation.length > 0) {
+    safe.deathLocation = src.deathLocation.toLowerCase().replace(/[^a-z0-9_]/g, "").slice(0, 30);
+    hasField = true;
+  }
+  if (typeof src.peekType === "string" && PEEK_TYPES.includes(src.peekType)) {
+    safe.peekType = src.peekType;
+    hasField = true;
+  }
+  if (typeof src.utilUsed === "boolean") {
+    safe.utilUsed = src.utilUsed;
+    hasField = true;
+  }
+  if (typeof src.traded === "boolean") {
+    safe.traded = src.traded;
+    hasField = true;
+  }
+  if (typeof src.deathTiming === "string" && DEATH_TIMINGS.includes(src.deathTiming)) {
+    safe.deathTiming = src.deathTiming;
+    hasField = true;
+  }
+  if (typeof src.enemyWeapon === "string" && src.enemyWeapon.length > 0) {
+    safe.enemyWeapon = src.enemyWeapon.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 20);
+    hasField = true;
+  }
+  if (typeof src.mapControl === "string" && MAP_CONTROLS.includes(src.mapControl)) {
+    safe.mapControl = src.mapControl;
+    hasField = true;
+  }
+  if (typeof src.wasRepeatedMistake === "boolean") {
+    safe.wasRepeatedMistake = src.wasRepeatedMistake;
+    hasField = true;
+  }
+
+  return hasField ? safe : null;
+}
 
 type RoundFeedback = {
   round: number;
@@ -168,6 +162,7 @@ type RoundFeedback = {
   deathPosition?: string | null;
   positionConfidence?: string;
   positionSignals?: number;
+  patternData?: unknown;
 };
 
 /* ══════════════════════════════════════════════════════════
@@ -225,6 +220,7 @@ const DEFAULT_FEEDBACK: RoundFeedback = {
   deathPosition: null,
   positionConfidence: "low",
   positionSignals: 0,
+  patternData: null,
 };
 
 /* ══════════════════════════════════════════════════════════
@@ -262,8 +258,86 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(DEFAULT_FEEDBACK);
     }
 
+    // Resolve imageFormat (default: image/png for backward compat)
+    const rawFormat = (body as VisionRequest).imageFormat;
+    const resolvedMediaType: ImageFormat =
+      typeof rawFormat === "string" && (VALID_IMAGE_FORMATS as readonly string[]).includes(rawFormat)
+        ? (rawFormat as ImageFormat)
+        : "image/png";
+    if (rawFormat && rawFormat !== resolvedMediaType) {
+      console.log(`[Aimlo AI] imageFormat rejected: "${rawFormat}" → default "image/png"`);
+    } else {
+      console.log(`[Aimlo AI] imageFormat: ${resolvedMediaType}`);
+    }
+
+    // Resolve maxTokens (default: 400, cap: 512)
+    const rawMaxTokens = (body as VisionRequest).maxTokens;
+    let resolvedMaxTokens = DEFAULT_MAX_TOKENS;
+    if (typeof rawMaxTokens === "number" && rawMaxTokens > 0) {
+      resolvedMaxTokens = Math.min(rawMaxTokens, MAX_TOKENS_CAP);
+    }
+    console.log(`[Aimlo AI] maxTokens: requested=${rawMaxTokens ?? "none"}, resolved=${resolvedMaxTokens}`);
+
+    // ── KB context loading (RAG-lite) ──────────────────────
+    const reqMap = typeof (body as VisionRequest).map === "string" ? (body as VisionRequest).map : undefined;
+    const reqAgent = typeof (body as VisionRequest).agent === "string" ? (body as VisionRequest).agent : undefined;
+    const reqRank = typeof (body as VisionRequest).rank === "string" ? (body as VisionRequest).rank : undefined;
+    const reqEnemyComp = Array.isArray((body as VisionRequest).enemyComp) ? (body as VisionRequest).enemyComp : undefined;
+    const reqPatternContext = typeof (body as VisionRequest).patternContext === "string" ? (body as VisionRequest).patternContext : undefined;
+
+    const kb = loadVisionKnowledge({
+      map: reqMap,
+      agent: reqAgent,
+      rank: reqRank,
+      enemyAgents: reqEnemyComp,
+    });
+
+    if (kb.files.length > 0) {
+      console.log(`[KB] selected: ${kb.files.join(", ")}`);
+    }
+
+    // Build system prompt array — static prompt (cached) + dynamic KB + patternContext
+    const systemBlocks: Array<{ type: "text"; text: string; cache_control?: { type: "ephemeral" } }> = [
+      {
+        type: "text",
+        text: SYSTEM_PROMPT,
+        cache_control: { type: "ephemeral" },
+      },
+    ];
+
+    if (kb.content) {
+      systemBlocks.push({
+        type: "text",
+        text: kb.content,
+        cache_control: { type: "ephemeral" },
+      });
+    }
+
+    if (reqPatternContext) {
+      systemBlocks.push({
+        type: "text",
+        text: `[PATTERN CONTEXT — Rust Client]\n${reqPatternContext.slice(0, 2000)}`,
+      });
+    }
+
+    // Build round context from client-provided data
+    const reqBody = body as VisionRequest;
+    const contextParts: string[] = [];
+    if (typeof reqBody.round === "number") contextParts.push(`Round: ${reqBody.round}`);
+    if (typeof reqBody.score === "string") contextParts.push(`Skor: ${reqBody.score}`);
+    if (typeof reqBody.result === "string") contextParts.push(`Sonuç: ${reqBody.result}`);
+    if (typeof reqBody.died === "boolean") contextParts.push(`Öldü: ${reqBody.died ? "evet" : "hayır"}`);
+    if (typeof reqBody.deathTiming === "string") contextParts.push(`Ölüm zamanı: ${reqBody.deathTiming}`);
+    if (typeof reqBody.bannerType === "string") contextParts.push(`Banner: ${reqBody.bannerType}`);
+    if (typeof reqBody.combatReportVisible === "boolean") contextParts.push(`Combat report: ${reqBody.combatReportVisible ? "görünür" : "gizli"}`);
+    if (typeof reqBody.scoreChanged === "boolean") contextParts.push(`Skor değişti: ${reqBody.scoreChanged ? "evet" : "hayır"}`);
+
+    const clientContext = contextParts.length > 0
+      ? `\n\nClient context (doğrulanmış bilgi):\n${contextParts.join("\n")}`
+      : "";
+
     // Build round history context for the user prompt
-    let userPromptWithHistory = USER_PROMPT;
+    let userPromptWithHistory = USER_PROMPT + clientContext;
     const roundHistory = (body as VisionRequest).roundHistory;
     if (roundHistory && Array.isArray(roundHistory) && roundHistory.length > 0) {
       const historyLines = roundHistory.map((r: Record<string, unknown>) => {
@@ -349,11 +423,12 @@ export async function POST(request: NextRequest) {
         "Content-Type": "application/json",
         "x-api-key": apiKey,
         "anthropic-version": "2023-06-01",
+        "anthropic-beta": "prompt-caching-2024-07-31",
       },
       body: JSON.stringify({
-        model: "claude-haiku-4-5-20251001",
-        max_tokens: 500,
-        system: SYSTEM_PROMPT,
+        model: "claude-sonnet-4-20250514",
+        max_tokens: resolvedMaxTokens,
+        system: systemBlocks,
         messages: [
           {
             role: "user",
@@ -362,7 +437,7 @@ export async function POST(request: NextRequest) {
                 type: "image",
                 source: {
                   type: "base64",
-                  media_type: "image/png",
+                  media_type: resolvedMediaType,
                   data: body.image,
                 },
               },
@@ -379,13 +454,25 @@ export async function POST(request: NextRequest) {
 
     if (!response.ok) {
       clearTimeout(timeoutId);
-      console.error(`[Aimlo AI] Vision API ${response.status}`);
+      const errorBody = await response.text().catch(() => "unreadable");
+      console.error(`[Aimlo AI] Vision API ${response.status}: ${errorBody.slice(0, 500)}`);
       return NextResponse.json(DEFAULT_FEEDBACK);
     }
 
     const data = await response.json();
     clearTimeout(timeoutId);
+
+    // Log prompt cache metrics
+    const cacheCreation = data?.usage?.cache_creation_input_tokens ?? 0;
+    const cacheRead = data?.usage?.cache_read_input_tokens ?? 0;
+    const inputTokens = data?.usage?.input_tokens ?? 0;
+    console.log(`[CACHE] creation=${cacheCreation}, read=${cacheRead}, input=${inputTokens}`);
+
     const text: string = data?.content?.[0]?.text || "";
+    if (!text) {
+      console.error("[Aimlo AI] Empty response from API. Full data:", JSON.stringify(data).slice(0, 500));
+      return NextResponse.json(DEFAULT_FEEDBACK);
+    }
 
     // Parse JSON from response
     let parsed: unknown;
@@ -397,9 +484,11 @@ export async function POST(request: NextRequest) {
         try {
           parsed = JSON.parse(jsonMatch[0]);
         } catch {
+          console.error("[Aimlo AI] JSON parse failed (regex fallback). Raw text:", text.slice(0, 300));
           return NextResponse.json(DEFAULT_FEEDBACK);
         }
       } else {
+        console.error("[Aimlo AI] No JSON found in response. Raw text:", text.slice(0, 300));
         return NextResponse.json(DEFAULT_FEEDBACK);
       }
     }
@@ -454,6 +543,15 @@ export async function POST(request: NextRequest) {
         console.log(`[Aimlo AI] Reality check: deathAnalysis rewrite=${checkedAnalysis.rewriteLevel}, suggestion rewrite=${checkedSuggestion.rewriteLevel}`);
       }
 
+      // Extract and sanitize patternData (whitelist filter — only known fields pass)
+      let patternData: PatternData | null = null;
+      try {
+        patternData = sanitizePatternData((fb as Record<string, unknown>).patternData);
+      } catch {
+        console.log("[PATTERN-DATA] parse error — returning null");
+      }
+      console.log(`[PATTERN-DATA] ${JSON.stringify(patternData)}`);
+
       return NextResponse.json({
         round: typeof fb.round === "number" ? fb.round : 0,
         score: typeof fb.score === "string" ? fb.score.slice(0, 10) : "?-?",
@@ -462,12 +560,17 @@ export async function POST(request: NextRequest) {
         deathAnalysis: checkedAnalysis.text.slice(0, 500),
         enemyAnalysis: fb.enemyAnalysis.slice(0, 5).map((s) => String(s).slice(0, 200)),
         nextRoundSuggestion: checkedSuggestion.text.slice(0, 500),
+        killerAgent,
+        killerWeapon,
+        killfeedConfidence,
         deathPosition: deathPosition !== "unknown" && positionConfidence !== "low" ? deathPosition : null,
         positionConfidence: positionConfidence,
         positionSignals: posSignals,
+        patternData,
       });
     }
 
+    console.error("[Aimlo AI] Response shape validation failed. Parsed:", JSON.stringify(parsed).slice(0, 300));
     return NextResponse.json(DEFAULT_FEEDBACK);
   } catch (err) {
     if (err instanceof DOMException && err.name === "AbortError") {

@@ -1,79 +1,85 @@
-# AGENT: Cypher
+# AJAN: Cypher
 
-## 1. Role Identity
-Cypher is the intelligence backbone of any defensive setup. He does not hold sites through raw firepower or healing — he holds them through knowledge. A well-played Cypher knows where every attacker is before the fight begins and denies information about his own team's positioning. His value scales exponentially with game sense: a Cypher who reads the map correctly turns a 5v5 into a series of ambushes.
+## 1. Rol Kimliği
+Cypher, her savunma kurulumunun istihbarat omurgasıdır. Site'ları ham ateş gücü veya iyileştirmeyle tutmaz — bilgiyle tutar. İyi oynanan bir Cypher, dövüş başlamadan önce her saldırganın nerede olduğunu bilir ve kendi takımının konumu hakkındaki bilgiyi engeller. Değeri oyun okumayla katlanarak artar: haritayı doğru okuyan bir Cypher, 5v5'i bir dizi pusuya dönüştürür.
 
-## 2. Core Responsibilities
-- **Early-round information gathering**: Tripwires and camera must produce actionable intel within the first 15 seconds of a round. Cypher should communicate enemy presence or absence before his team commits to rotations.
-- **Flank denial**: At minimum one tripwire must cover a flank path. This is non-negotiable on attack rounds.
-- **Site anchor (defense)**: Cypher is expected to hold a site solo or near-solo, freeing teammates to stack or roam. His utility should buy 10-15 seconds of delay without requiring a gunfight.
-- **Neural Theft timing**: Ultimate should be used when it provides rotation-critical information, not just for confirming kills. Best used mid-round when enemy positions are ambiguous.
-- **Post-plant information**: Camera placement during post-plant must watch defuse angles, not entry paths.
+## 2. Temel Sorumluluklar
+- **Round başı bilgi toplama**: Tripwire ve kamera round'un ilk anlarında uygulanabilir istihbarat üretmelidir. Cypher, takımı rotation'lara taahhüt etmeden önce düşman varlığını veya yokluğunu bildirmelidir.
+- **Flank engelleme**: En az bir tripwire flank yolunu kapatmalıdır. Bu, atak round'larında tartışılmaz kuraldır.
+- **Site anchor (savunma)**: Cypher'ın tek başına veya neredeyse tek başına site tutması, takım arkadaşlarını stack veya roam yapmaları için serbest bırakması beklenir. Utility'si silah dövüşü gerektirmeden ciddi gecikme sağlamalıdır.
+- **Neural Theft zamanlaması**: Ultimate, yalnızca kill onaylamak için değil, rotation açısından hayati bilgi sağladığında kullanılmalıdır. Düşman pozisyonlarının belirsiz olduğu round ortasında kullanımı en iyisidir.
+- **Post-plant bilgisi**: Post-plant sırasında kamera yerleşimi giriş yollarını değil, defuse açılarını izlemelidir.
 
-## 3. Common Mistakes
-- Placing tripwires at the same height and position every round, making them trivially predictable by round 4-5.
-- Using camera during setup phase and losing it before it provides any mid-round value.
-- Holding camera view too long and dying while spectating. The camera is a tool, not a substitute for positioning.
-- Neural Theft on a body when only 1-2 enemies remain and their positions are already known — wastes the ultimate's strategic window.
-- Placing both tripwires on the same site on defense, leaving the team with zero flank coverage on rotations.
-- Forgetting to pick up and redeploy utility after rotations.
+## 3. Sık Yapılan Hatalar
+- Tripwire'ları her round aynı yükseklik ve pozisyona yerleştirmek, round 4-5'te önemsiz derecede tahmin edilebilir hale getirmek.
+- Kamerayı kurulum aşamasında kullanmak ve round ortası değer sağlamadan önce kaybetmek.
+- Kamera görüntüsünü çok uzun tutmak ve izlerken ölmek. Kamera bir araçtır, konumlandırma yerine geçmez.
+- Yalnızca 1-2 düşman kaldığında ve pozisyonları zaten biliniyorken bir beden üzerinde Neural Theft kullanmak — ultimate'in stratejik penceresini boşa harcar.
+- Savunmada her iki tripwire'ı aynı site'a yerleştirmek, rotation'larda takımı sıfır flank korumasıyla bırakmak.
+- Rotation sonrası utility'yi toplayıp yeniden yerleştirmeyi unutmak.
 
-## 4. Pattern to Meaning
+## 4. Kalıptan Anlama
 
-**IF** Cypher consistently gets kills off tripwire intel but team still loses rounds
-**MEANING** He is hoarding information instead of communicating it. The tripwires work, but the team does not benefit.
-**FIX** Coach player on immediate callouts the moment a wire triggers, not after confirming the kill.
+**IF** Cypher tripwire istihbaratından sürekli kill alıyor ama takım hala round kaybediyorsa
+**MEANING** Bilgiyi paylaşmak yerine biriktiriyor. Tripwire'lar çalışıyor ama takım fayda görmüyor.
+**COUNTER** Oyuncuya tel tetiklendiği anda anında çağrı yapmasını öğret, kill onayladıktan sonra değil.
+**WHY** Paylaşılmayan istihbarat değersizdir; anlık çağrılar takımın önceden nişanlamasını ve pozisyon avantajı almasını sağlar.
 
-**IF** Cypher's camera gets destroyed within the first 20 seconds of most rounds
-**MEANING** Camera placements are too predictable or too exposed. Enemy team has scouted his spots.
-**FIX** Rotate between 3-4 camera positions per map. Use off-angle placements that require utility to clear.
+**IF** Cypher'ın kamerası çoğu round'da round'un ilk bölümünde yok ediliyorsa
+**MEANING** Kamera yerleşimleri çok tahmin edilebilir veya çok açık. Düşman takım spotlarını keşfetmiş.
+**COUNTER** Harita başına 3-4 kamera pozisyonu arasında dön. Temizlenmesi utility gerektiren off-angle yerleşimler kullan.
+**WHY** Tahmin edilebilir kamera round ortası istihbarat sağlamadan ölür; rotasyon düşmanı sürekli farklı yerleri kontrol etmeye zorlar.
 
-**IF** Cypher dies first on defense regularly
-**MEANING** He is playing too aggressively for his role. Sentinel deaths early are catastrophic — the site becomes unanchored.
-**FIX** Pull back positioning. Cypher should take fights only after utility has provided an advantage.
+**IF** Cypher savunmada düzenli olarak ilk ölüyorsa
+**MEANING** Rolü için çok agresif oynuyor. Sentinel ölümleri erken aşamada felakettir — site anchor'suz kalır.
+**COUNTER** Konumlandırmayı geri çek. Cypher yalnızca utility avantaj sağladıktan sonra dövüşe girmeli.
+**WHY** Erken ölen sentinel, site'ın tüm bilgi ve gecikme katmanını yok eder; takım bilgi karanlığında kalır.
 
-**IF** Neural Theft is unused in rounds where Cypher's team had kills
-**MEANING** Player is saving ultimate unnecessarily or forgetting the ability in firefight pressure.
-**FIX** Build habit: after any kill when 3+ enemies remain, immediately evaluate Neural Theft value.
+**IF** Neural Theft, Cypher'ın takımının kill aldığı round'larda kullanılmıyorsa
+**MEANING** Oyuncu ultimate'i gereksiz yere saklıyor veya dövüş baskısında yeteneği unutuyor.
+**COUNTER** Alışkanlık oluştur: 3+ düşman kaldığında herhangi bir kill'den sonra Neural Theft değerini anında değerlendir.
+**WHY** Kullanılmayan ultimate sıfır değer üretir; 3+ düşman kaldığında konum bilgisi rotation kararlarını temelden değiştirir.
 
-**IF** Tripwires are placed but never trigger across multiple rounds
-**MEANING** Either the enemy is avoiding that path entirely (Cypher needs to rotate wire placement) or wires are placed too deep in site where enemies have already cleared by the time they trigger.
-**FIX** Move wires to earlier chokepoints where they catch aggression, not late entries.
+**IF** Tripwire'lar yerleştirilmiş ama birden fazla round boyunca hiç tetiklenmiyorsa
+**MEANING** Ya düşman o yoldan tamamen kaçınıyor (Cypher tel yerleşimini değiştirmeli) ya da teller düşmanların tetiklediğinde çoktan temizlemiş olduğu kadar site derininde yerleştirilmiş.
+**COUNTER** Telleri agresyonu yakalayacak erken choke noktalarına taşı, geç girişlere değil.
+**WHY** Derin teller saldırganlar zaten içeri girdikten sonra tetiklenir; erken choke telleri push başlamadan bilgi verir.
 
-## 5. Map Interactions
-- **Bind**: Exceptionally strong. Two short-range sites with many flank paths. Cypher can lock down B site solo and provide A info with camera from mid.
-- **Haven**: Three sites stretch his utility thin. Best used anchoring C site with both wires and using camera to watch mid/garage.
-- **Ascent**: Strong on B site. Tripwire in market and lane controls two approach angles. Camera mid provides cross-map intel.
-- **Split**: Excellent in mid control. Tripwires in vents and mid mail cover the two most common aggression paths.
-- **Sunset**: Camera angles into mid corridor are high-value. Tripwires on B main and A elbow are standard but effective.
+## 5. Harita Etkileşimleri
+- **Bind**: Son derece güçlü. Birçok flank yoluna sahip iki kısa menzilli site. Cypher B site'ı tek başına kilitleyebilir ve mid'den kamerayla A bilgisi sağlayabilir.
+- **Haven**: Üç site utility'sini geriyor. En iyi C site'ı her iki telle anchor'layıp mid/garage'ı izlemek için kamera kullanılarak oynanır.
+- **Ascent**: B site'ta güçlü. Market ve lane'de tripwire iki yaklaşım açısını kontrol eder. Mid'de kamera harita geneli istihbarat sağlar.
+- **Split**: Mid kontrolünde mükemmel. Vent'ler ve mid mail'deki tripwire'lar en yaygın iki agresyon yolunu kapsar.
+- **Sunset**: Mid koridoruna kamera açıları yüksek değerli. B main ve A elbow'daki tripwire'lar standart ama verimli.
+- **Corrode**: Dar koridorlar ve sınırlı giriş yolları Cypher için ideal. Tripwire koridor girişlerini tamamen kontrol eder — saldırganlar tetiklemeden geçemediği için erken bilgi garanti. Kamera Mid Pipes bölgesi ve koridor kesişimlerinde çok yüksek değer üretiyor. Corrode'un kompakt yapısı Cypher'ın leash mesafesini sorun olmaktan çıkarıyor.
 
-## 6. Matchup Notes
-- Struggles against **Sova/Fade** who can reveal his position and force utility repositioning.
-- Strong against **lurk-heavy compositions** — tripwires punish solo flankers.
-- Weak against **fast executes** that overwhelm his site before he can relay information.
-- Neural Theft is especially valuable against teams running **split strategies** where late-round positioning is unclear.
+## 6. Eşleşme Notları
+- Pozisyonunu açığa çıkarabilen ve utility yeniden konumlandırma zorlayan **Sova/Fade**'e karşı zorlanır.
+- **Lurk-ağırlıklı kompozisyonlara** karşı güçlü — tripwire'lar solo flank yapanları cezalandırır.
+- Bilgiyi aktaramadan site'ı ezen **hızlı execute'lara** karşı zayıf.
+- Neural Theft, geç round konumlandırmasının belirsiz olduğu **split strateji** uygulayan takımlara karşı özellikle değerlidir.
 
-## 7. What To Tell The Player
+## 7. Oyuncuya Ne Söylenmeli
 
-### When performing well
-**Player Action:** You rotate Trapwire placements every 2 rounds between 3 distinct setups per site, and call Spycam intel to your team before they peek any angle.
-**Enemy Perception:** Attackers memorize your round 1 wire location and plan their next entry around it. When round 3 has a completely different placement, their mental map of "safe paths" is wrong — they walk into a wire they did not expect and had no plan to avoid.
-**Enemy Reaction:** They are forced to either slow down to check for new wire positions (costing 5-10 seconds of round time) or rush and trigger the unexpected wire (revealing position + taking concuss damage). Both outcomes degrade their execute speed and give your team time to rotate.
-**Exploit Window:** The 5-10 second slowdown when attackers become wire-paranoid shrinks their execute window. If they have 30 seconds of meaningful round time, your wire rotation just took 15-30% of it. Spycam callouts before peeks give your teammates pre-aimed crosshair positions that turn 50/50 duels into 80/20 advantages.
-**Repeat Strategy:** Setup A for rounds 1-2, Setup B for rounds 3-4, Setup C for rounds 5+. Always Spycam before your team swings — call the exact number and position. After Neural Theft, relay all gathered positions within 1 second. On attack, place at least one Trapwire covering the flank behind your team's push.
-**Enemy Adaptation:** After half-time or multiple wire triggers, attackers will send a drone, Fade haunt, or KAY/O knife to clear your setup before entering, or they will shoot common wire spots pre-emptively.
-**Counter-Adaptation:** When they start clearing with recon: place wires in unconventional heights or angles that drones and haunt trajectories miss. When they shoot common spots: use the sound cue of their shooting as free intel — they just told you where they are and which site they are hitting. The wire does not need to trigger to provide value if the destruction sound gives you the same information.
+### İyi performans gösterirken
+**Oyuncu Eylemi:** Trapwire yerleşimlerini site başına 3 farklı kurulum arasında her 2 round'da döndürüyorsun ve herhangi bir açıyı peek'lemeden önce Spycam istihbaratını takımına çağırıyorsun.
+**Düşman Algısı:** Saldırganlar round 1 tel konumunu ezberler ve sonraki girişlerini buna göre planlar. Round 3'te tamamen farklı bir yerleşim olduğunda, "güvenli yollar" zihinsel haritaları yanlış olur — beklemedikleri ve kaçınma planları olmayan bir tele yürürler.
+**Düşman Tepkisi:** Ya yeni tel pozisyonlarını kontrol etmek için yavaşlamak (round zamanından ciddi kayıp) ya da acele edip beklenmedik teli tetiklemek (pozisyon açığa çıkar + concuss hasarı alır) zorunda kalırlar. Her iki sonuç da execute hızlarını düşürür ve takımına rotate zamanı verir.
+**Faydalanma Penceresi:** Saldırganlar tel paranoyası yaşadığında oluşan yavaşlama execute pencerelerini daraltır. Anlamlı round zamanları varsa tel rotasyonun bunun %15-30'unu aldı. Peek'lerden önce Spycam çağrıları takım arkadaşlarına önceden nişanlanmış crosshair pozisyonları verir ve 50/50 düelloları 80/20 avantaja dönüştürür.
+**Tekrar Stratejisi:** Round 1-2 için Kurulum A, round 3-4 için Kurulum B, round 5+ için Kurulum C. Takımın swing yapmasından önce her zaman Spycam — tam sayı ve pozisyon çağır. Neural Theft sonrası toplanan tüm pozisyonları anında aktar. Atak'ta takımın push'unun arkasındaki flank'ı kapsayan en az bir Trapwire yerleştir.
+**Düşman Adaptasyonu:** Devre arası veya birden fazla tel tetiklenmesinden sonra saldırganlar girmeden önce kurulumunu temizlemek için drone, Fade haunt veya KAY/O bıçağı gönderecek ya da yaygın tel noktalarını önceden ateşleyecek.
+**Karşı Adaptasyon:** Keşifle temizlemeye başladıklarında: drone ve haunt yörüngelerinin kaçırdığı alışılmadık yükseklik veya açılara tel yerleştir. Yaygın noktaları ateşlediklerinde: ateş sesini bedava istihbarat olarak kullan — sana nerede olduklarını ve hangi site'a vurduklarını söylediler. Yok etme sesi aynı bilgiyi sağlıyorsa telin tetiklenmesine gerek yoktur.
 
-**Struggling**: "Your utility is either too predictable or not generating usable intel. Focus on placing tripwires where they catch early aggression, not deep site. Communicate every trigger immediately."
+**Zorlanan**: "Utility'n ya çok tahmin edilebilir ya da kullanılabilir istihbarat üretmiyor. Tripwire'ları derin site değil, erken agresyonu yakalayacak yerlere yerleştirmeye odaklan. Her tetiklenmeyi anında ilet."
 
-**Predictable**: "The enemy is pre-clearing your setups every round. You need to rotate your tripwire and camera positions. Use at least 3 different setups per site and vary which rounds you use each."
+**Tahmin edilebilir**: "Düşman her round kurulumlarını önceden temizliyor. Tripwire ve kamera pozisyonlarını döndürmen gerekiyor. Site başına en az 3 farklı kurulum kullan ve her round hangisini kullandığını değiştir."
 
-## 8. Rank Modulation
+## 8. Rütbe Modülasyonu
 
-**Low (Iron-Silver)**: Players rarely vary tripwire placement. Camera is either unused or watched for too long. Focus on teaching the basics: place wire, get info, call it out.
+**Düşük (Iron-Silver)**: Oyuncular tripwire yerleşimini nadiren değiştirir. Kamera ya kullanılmaz ya da çok uzun izlenir. Temelleri öğretmeye odaklan: tel yerleştir, bilgi al, çağır.
 
-**Mid (Gold-Platinum)**: Tripwires are functional but predictable after pistol rounds. Camera angles are decent but not creative. Focus on setup rotation and Neural Theft timing.
+**Orta (Gold-Platinum)**: Tripwire'lar işlevsel ama pistol round'lardan sonra tahmin edilebilir. Kamera açıları iyi ama yaratıcı değil. Kurulum rotasyonu ve Neural Theft zamanlamasına odaklan.
 
-**High (Diamond-Ascendant)**: Information flow is good but communication may lag. Cypher mains here need to focus on adapting mid-round — picking up and redeploying wires based on reads.
+**Yüksek (Diamond-Ascendant)**: Bilgi akışı iyi ama iletişim gecikebilir. Buradaki Cypher main'lerin round ortasında adapte olmaya — okumalara göre telleri toplayıp yeniden yerleştirmeye odaklanması gerekiyor.
 
-**Elite (Immortal-Radiant)**: Cypher's value is entirely in unpredictability and communication speed. At this level, every setup must be unique or reactive. Neural Theft timing becomes a team-coordinated decision, not a solo choice.
+**Elit (Immortal-Radiant)**: Cypher'ın değeri tamamen öngörülemezlik ve iletişim hızındadır. Bu seviyede her kurulum benzersiz veya reaktif olmalıdır. Neural Theft zamanlaması solo karar değil, takımla koordine edilmiş bir karar haline gelir.

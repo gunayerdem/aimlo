@@ -1,34 +1,46 @@
-# MATCHUP: Anti-Information Defense
+# MATCHUP: Bilgi Engelleme Savunması
 
-## Interaction Identity
-Modern Valorant attacks depend on information: where are the defenders, how many are on site, is the rotation coming? Anti-information defense strips all of that away. This is not a specific agent matchup — it is a defensive philosophy where the team actively hides, misdirects, and denies every piece of intel the attackers try to gather. When it works, attackers execute onto sites without knowing whether they face one defender or four. When it fails, the defense is spread thin and easily picked apart.
+## Etkileşim Kimliği
+Modern Valorant atakları bilgiye bağımlıdır: savunmacılar nerede, site'ta kaç kişi var, rotate geliyor mu? Bilgi engelleme savunması tüm bunları ortadan kaldırır. Bu belirli bir ajan matchup'ı değildir — takımın aktif olarak gizlendiği, yanılttığı ve saldırganın toplamaya çalıştığı her bilgiyi engellediği bir savunma felsefesidir. Çalıştığında saldıranlar site'a bir savunmaciyla mı dört savunmaciyla mı karşılaşacaklarını bilmeden execute eder. Başarısız olduğunda savunma ince yayılır ve kolayca parçalanır.
 
-## Common Punish Patterns
-**Anti-info defense punishing attackers**: Defenders play off-angles that drones and darts do not cover. Rotation sounds are masked or rotations happen before recon arrives. Fake utility deployment (using abilities on one site while stacking another) creates false reads. Players hold positions that are outside standard scan ranges, surviving the initiator sweep.
+## Yaygın Cezalandırma Kalıpları
 
-**Attackers punishing anti-info defense**: Extended drone time that covers unconventional angles. Multiple recon sources deployed simultaneously (dart + drone + haunt) that are impossible to all avoid. Process-of-elimination reads — if they are not here, they must be there. Fast map control that forces defenders to reveal positions through gunfight rather than giving them time to hide.
+**IF**: Savunmacılar drone ve dart'ın kapsamadığı off-angle'larda oynuyor ve rotate sesleri maskeleniyor veya rotate recon gelmeden yapılıyor
+**MEANING**: Savunma bilgi toplamaya karşı aktif olarak gizleniyor. Sahte yetenek kullanımı (bir site'ta yetenek kullanırken diğer site'i yığma) yanlış okumalar oluşturuyor. Oyuncular standart tarama menzilinin dışında tutarak initiator taramasını atlatıyor.
+**COUNTER**: Alışılmadık açıları kapsayan uzun süreli drone zamanı. Aynı anda birden fazla recon kaynağı (dart + drone + haunt) — hepsinden kaçınmak imkânsız. Eleme mantığı okumaları — burada değilse orada olmalı. Savunmacıları gizlenme zamanı vermek yerine silah kavgası yoluyla pozisyon açmaya zorlayan hızlı harita kontrolü.
+**WHY**: Tek bir bilgi kaynağı anti-bilgi savunmasına karşı yetersizdir — birden fazla kaynak aracılığı ile doğrulama gerekir.
 
-## What Repeated Failure Means
-If the **anti-info defense** keeps getting read correctly, the defenders are either hiding in the same off-angles every round (becoming predictable) or failing to coordinate their deception. Fakes require team buy-in to work.
+**IF**: Saldıranlar yığılmış site'lara sürekli execute ediyor ve recon'larına güveniyor
+**MEANING**: Tek bir bilgi kaynağına fazla güveniyorlar. Bir dart bir alanın güvenli olduğunu teyit eder — site'in tamamı değil.
+**COUNTER**: Birden fazla bilgi kaynağı birleştirilmeli veya doğrulamak için harita kontrolüne push edilmeli. Tek bir taramaya güvenmek yerine derin harita kontrolü ile teyit et.
+**WHY**: Savunmacılar dart'ın kapsamadığı açılarda gizleniyor — başka açıları da taraman gerekir.
 
-If **attackers** keep executing onto stacked sites, they are relying too much on one source of information. One dart does not confirm a site is safe — it confirms a small area is clear. They need to combine multiple info sources or push for map control to verify.
+**IF**: Savunmacılar her raund aynı off-angle'larda gizleniyor ve saldıranlar bu pozisyonları raundlar içinde öğreniyor
+**MEANING**: Anti-bilgi savunması tahmin edilebilir hale geldi. İlk raundlarda çalışan off-angle pozisyonlar artık saldıranların pre-aim listesine girdi. Savunmacı gizlendiğini düşünürken saldıran onu beklemeye başladı.
+**COUNTER**: Off-angle rotasyonu takımla koordine et — her oyuncu raunddan raunda pozisyon değiştirmeli. Aynı oyuncu her raund aynı off-angle'ı tutmamalı. Saldıranların pre-aim örüntüsünü fark edince o pozisyonu bir iki raund boş bırak, sonra geri dön.
+**WHY**: Gizlenme tek seferlik bir araç değildir — tahmin edilebilir hale gelen bir off-angle gizlenme olmaktan çıkar, tuzağa dönüşür.
 
-## What AIMLO Should Say
-### When player is on the punished side
-**Attackers hitting stacked sites**: "You are trusting your recon too much. One scan does not mean the site is clear — defenders are hiding in angles your dart does not cover. Use multiple sources of intel or push for deep map control before committing."
+## Tekrarlayan Başarısızlık Ne Anlama Gelir
+**Anti-bilgi savunması** sürekli doğru okunuyorsa, savunmacılar ya her raund aynı off-angle'larda gizleniyor (tahmin edilebilir hale geliyor) ya da aldatmalarını koordine etmekte başarısız oluyor. Fake'ler çalışabilmek için takım uyumu gerektirir.
 
-**Anti-info defense getting exposed**: "Your hiding spots are becoming predictable. The enemy is scanning your off-angles specifically. Rotate your positions every few rounds and coordinate fakes with your team — one player's utility on the wrong site sells the deception."
+**Saldıranlar** sürekli yığılmış site'lara execute ediyorsa, tek bir bilgi kaynağına çok fazla güveniyorlar. Push öncesi derin harita kontrolü veya doğrulama için birden fazla bilgi kaynağı birleştirmeli.
 
-### When player is on the punishing side
-**Anti-info defense working**: "The enemy is confused and over-committing to their reads. Keep rotating your positions and varying your stack timings. They are tilting because their information tools are unreliable."
+## AIMLO Ne Demeli
+### Oyuncu cezalandırılan taraftayken
+**Saldıranlar yığılmış site'lara çarpıyorken**: "Recon'una fazla güveniyorsun. Tek bir tarama site'in temiz olduğu anlamına gelmez — savunmacılar dart'ının kapsamadığı açılarda gizleniyor. Birden fazla bilgi kaynağı kullan veya commit etmeden önce derin harita kontrolüne push et."
 
-**Attackers breaking through the deception**: "Your multi-layered info gathering is working. Keep scanning from different angles and using process of elimination. Do not let them hide — force them to reveal."
+**Anti-bilgi savunması ifşa ediliyorken**: "Gizlenme noktaların tahmin edilebilir hale geliyor. Düşman off-angle'larını özellikle tarıyor. Pozisyonlarını birkaç raundda bir değiştir ve takımınla fake koordine et — bir oyuncunun yanlış site'taki yeteneği aldatmayı satar."
 
-## Rank Modulation
-**LOW**: Neither side understands information warfare. Attackers push without scanning, defenders stand in default positions. This matchup does not exist at this level.
+### Oyuncu cezalandıran taraftayken
+**Anti-bilgi savunması çalışıyorken**: "Düşman kafası karışık ve okumalarını abartıp commit ediyor. Pozisyonlarını ve yığılma zamanlamalarını değiştirmeye devam et. Bilgi araçları güvenilmez olduğu için tilt oluyorlar."
 
-**MID**: Attackers scan but trust one source of info. Defenders play off-angles occasionally. Coach attackers to verify with multiple sources and defenders to coordinate hides.
+**Saldıranlar aldatmayı aşıyorken**: "Çok katmanlı bilgi toplaman çalışıyor. Farklı açılardan taramaya ve eleme mantığı kullanmaya devam et. Gizlenmelerine izin verme — açığa çıkmaya zorla."
 
-**HIGH**: Both sides play the information game actively. Coach the meta-game — how to fake info, how to detect fakes, how to use timing tells.
+## Rank Modülasyonu
+**LOW**: Hiçbir taraf bilgi savaşını anlamaz. Saldıranlar taramadan push eder, savunmacılar varsayılan pozisyonlarda durur. Bu matchup bu seviyede mevcut değildir.
 
-**ELITE**: Information warfare is the round. Every position, every util usage, every sound is a deliberate signal or misdirection. Coach subtlety and reading patterns across multiple rounds.
+**MID**: Saldıranlar tarar ama tek bir bilgi kaynağına güvenirler. Savunmacılar ara sıra off-angle oynar. Saldıranlara birden fazla kaynakla doğrulama, savunmacılara koordineli gizlenme öğret.
+
+**HIGH**: Her iki taraf da bilgi oyununu aktif olarak oynar. Meta-oyunu öğret — bilgiyi nasıl fake'lersin, fake'leri nasıl tespit edersin, zamanlama ipuçlarını nasıl kullanırsın.
+
+**ELITE**: Bilgi savaşı raundun kendisidir. Her pozisyon, her yetenek kullanımı, her ses kasıtlı bir sinyal veya yanıltmacadır. İncelik ve birden fazla raund üzerinden kalıp okumayı öğret.

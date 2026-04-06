@@ -20,6 +20,7 @@ export const AGENT_ROLE_MAP: Record<string, string> = {
   Yoru: "duelists",
   Neon: "duelists",
   Iso: "duelists",
+  Waylay: "duelists",
   // Controllers
   Brimstone: "controllers",
   Omen: "controllers",
@@ -27,6 +28,7 @@ export const AGENT_ROLE_MAP: Record<string, string> = {
   Viper: "controllers",
   Harbor: "controllers",
   Clove: "controllers",
+  Miks: "controllers",
   // Initiators
   Sova: "initiators",
   Breach: "initiators",
@@ -34,6 +36,7 @@ export const AGENT_ROLE_MAP: Record<string, string> = {
   Fade: "initiators",
   "KAY/O": "initiators",
   Gekko: "initiators",
+  Tejo: "initiators",
   // Sentinels
   Sage: "sentinels",
   Cypher: "sentinels",
@@ -41,6 +44,7 @@ export const AGENT_ROLE_MAP: Record<string, string> = {
   Chamber: "sentinels",
   Deadlock: "sentinels",
   Vyse: "sentinels",
+  Veto: "sentinels",
 };
 
 // ── Rank-to-file mapping ──────────────────────────────────
@@ -87,22 +91,11 @@ function getRankFile(rank: string | undefined | null): string {
   return RANK_FILE_MAP[normalized] ?? DEFAULT_RANK_FILE;
 }
 
-function getAgentRoleFile(agent: string): string | null {
-  // Try exact match first
-  if (AGENT_ROLE_MAP[agent]) {
-    return `agents/${AGENT_ROLE_MAP[agent]}.md`;
-  }
-  // Try case-insensitive match
-  const match = Object.entries(AGENT_ROLE_MAP).find(
-    ([key]) => key.toLowerCase() === agent.toLowerCase()
-  );
-  return match ? `agents/${match[1]}.md` : null;
-}
-
 /**
- * Resolve the best knowledge file for a specific agent.
- * Tries per-agent file first, falls back to role file.
- *   e.g. agents/duelists/jett.md → agents/duelists.md
+ * Resolve the knowledge file for a specific agent.
+ * Returns the per-agent file path if it exists.
+ *   e.g. Jett → agents/duelists/jett.md
+ * Returns null if no role mapping or no per-agent file is found.
  */
 export function getAgentFile(agentName: string): string | null {
   // Resolve role via case-insensitive lookup
@@ -116,8 +109,7 @@ export function getAgentFile(agentName: string): string | null {
   if (fs.existsSync(perAgentFull)) {
     return perAgentPath;
   }
-  // Fallback to role file
-  return `agents/${role}.md`;
+  return null;
 }
 
 /** Resolve an agent name to its role string (case-insensitive). */
@@ -241,4 +233,68 @@ export function loadKnowledge(task: TaskType, options: LoadOptions = {}): string
   }
 
   return sections.join("\n\n---\n\n");
+}
+
+/* ══════════════════════════════════════════════════════════
+   Vision-specific loader — max 4 files, returns file list
+   Priority: map > agent > rank > matchup (1)
+   ══════════════════════════════════════════════════════════ */
+
+interface VisionKnowledgeResult {
+  content: string;
+  files: string[];
+}
+
+export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeResult {
+  const { map, agent, rank, enemyAgents } = options;
+  const sections: string[] = [];
+  const files: string[] = [];
+  const MAX_FILES = 4;
+
+  // 1. Map knowledge (highest priority for vision — positional coaching)
+  if (map && files.length < MAX_FILES) {
+    const mapSlug = map.toLowerCase().replace(/[^a-z]/g, "");
+    const mapPath = `maps/${mapSlug}.md`;
+    const content = loadFile(mapPath);
+    if (content) {
+      sections.push(`[HARİTA BİLGİSİ — ${map}]\n${content}`);
+      files.push(mapPath);
+    }
+  }
+
+  // 2. Agent knowledge
+  if (agent && files.length < MAX_FILES) {
+    const agentFile = getAgentFile(agent);
+    if (agentFile) {
+      const content = loadFile(agentFile);
+      if (content) {
+        sections.push(`[AGENT BİLGİSİ — ${agent}]\n${content}`);
+        files.push(agentFile);
+      }
+    }
+  }
+
+  // 3. Rank knowledge
+  if (files.length < MAX_FILES) {
+    const rankFile = getRankFile(rank);
+    const content = loadFile(`ranks/${rankFile}`);
+    if (content) {
+      sections.push(`[RANK BİLGİSİ — ${rank || "default"}]\n${content}`);
+      files.push(`ranks/${rankFile}`);
+    }
+  }
+
+  // 4. Matchup knowledge (1 file max — best match)
+  if (agent && enemyAgents?.length && files.length < MAX_FILES) {
+    const matchups = loadMatchupFiles(agent, enemyAgents, 1);
+    if (matchups.length > 0) {
+      sections.push(`[EŞLEŞME BİLGİSİ]\n${matchups[0]}`);
+      files.push("matchups/(best-match)");
+    }
+  }
+
+  return {
+    content: sections.join("\n\n---\n\n"),
+    files,
+  };
 }

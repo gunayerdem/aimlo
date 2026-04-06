@@ -1,34 +1,61 @@
-# MATCHUP: Sova vs Killjoy
+# EŞLEŞME: Sova vs Killjoy
 
-## Interaction Identity
-Sova is the surgical removal tool for Killjoy's entire defensive ecosystem. Recon Bolt reveals every piece of placed utility. Owl Drone scouts exact positions and can be sacrificed to trigger alarmbots. Shock Darts destroy utility through walls from total safety. This is not a close-range brawl — it is a methodical dismantling from distance. Sova does not need to peek Killjoy's site to ruin her round. He does it from across the map.
+## Etkileşim Kimliği
+Sova, Killjoy'un tüm savunma ekosisteminin cerrahi kaldırım aracıdır. Recon Bolt yerleşmiş her yetenek aracını ortaya çıkarır. Owl Drone tam pozisyonları keşfeder ve alarmbot'ları tetiklemek için feda edilebilir. Shock Dart'lar yetenek araçlarını duvarlardan tamamen güvenli şekilde yok eder. Bu yakın mesafe kavgası değildir — mesafeden sistematik parçalamadır. Sova, Killjoy'un site'ına peek etmeden raundunu mahvetmek için haritanın diğer ucundan yapar.
 
-## Common Punish Patterns
-**Sova punishing Killjoy**: Recon Bolt at round start reveals turret, alarmbot, and nanoswarm positions for the whole team. Shock Dart lineups destroy turret and alarmbot from safety. Owl Drone flies through site, triggering alarmbots and identifying nanoswarm positions for the team to avoid. Hunter's Fury can destroy utility through walls while simultaneously threatening Killjoy herself.
+## Yaygın Cezalandırma Kalıpları
 
-**Killjoy punishing Sova**: Placing utility outside Recon Bolt radius — if Sova darts the expected spot, utility is safe in the unconventional one. Turret positioned to tag Owl Drone immediately, destroying it before it completes its scout. Nanoswarms hidden in positions the Recon Bolt does not scan. Playing away from utility so that even if Sova reveals the setup, Killjoy herself is not exposed.
+### Sova Killjoy'u Cezalandırırken
 
-## What Repeated Failure Means
-If **Killjoy** keeps getting her entire setup revealed and destroyed by Sova, her utility is placed in the spots his standard lineups cover. She is playing textbook setups against an agent designed to counter textbooks. She needs unconventional placement that Sova's prepared lineups miss.
+**IF**: Recon Bolt raund başında turret, alarmbot ve nanoswarm pozisyonlarını tüm takım için ortaya çıkarıyor
+**MEANING**: Killjoy'un tüm kurulumu görülür hale geliyor — sürpriz değeri sıfır
+**COUNTER**: Killjoy yetenek araçlarını Recon Bolt yarıçapının dışına koymalı — beklenen noktaya dart atılırsa araçlar alışılmadık noktada güvende
+**WHY**: Scan tüm savunma yapısını ifşa eder
 
-If **Sova** is not dismantling Killjoy's setup, his lineups are outdated or he is using recon on players instead of utility. Against Killjoy, Sova's primary target is her kit, not her position.
+**IF**: Shock Dart lineup'ları turret ve alarmbot'u güvenli mesafeden yok ediyor
+**MEANING**: Killjoy hiçbir risk almadan yetenek araç kaybediyor
+**COUNTER**: Turret'i Owl Drone'u anında etiketleyecek pozisyona koyarak drone'u tarama tamamlanmadan yok etmeli
+**WHY**: Lineup'lar sıfır risk ile yetenek araç yıkımı sağlar
 
-## What AIMLO Should Say
-### When player is on the punished side
-**Killjoy getting dismantled by Sova**: "Your setup is in all the spots Sova's lineups are designed to hit. Move your turret and alarmbot to positions his standard darts do not cover. If he has to improvise his lineups, his clearing takes longer and is less reliable."
+**IF**: Owl Drone site'tan uçarak alarmbot'ları tetikliyor ve nanoswarm pozisyonlarını takımın kaçınması için belirliyor
+**MEANING**: Drone ucuz bir fedakârlık aracı olarak tüm tuzak yapısını ifşa ediyor
+**COUNTER**: Nanoswarm'ları Recon Bolt'un taramadığı pozisyonlarda saklamalı
+**WHY**: Drone hem tetikleme hem bilgi toplama yapar
 
-**Sova failing to clear Killjoy**: "Focus on utility, not players. Your Recon Bolt should reveal her turret and alarmbot first. Follow up with Shock Darts to destroy them. The site take is free once her setup is gone."
+### Killjoy Sova'yı Cezalandırırken
 
-### When player is on the punishing side
-**Sova dismantling Killjoy**: "You are removing her entire defense from across the map. Keep your lineups updated and target her utility positions first every round."
+**IF**: Yetenek araçları standart lineup'ların kapsamadığı alışılmadık pozisyonlarda
+**MEANING**: Sova'nın hazırlanmış lineup'ları boş yerlere düşüyor
+**COUNTER**: Sova emprovize tarama yaparak alışılmadık noktaları kapsamalı
+**WHY**: Ders kitabı yerleştirmelerine karşı tasarlanmış lineup'lar alışılmadık kurulumları kaçırır
 
-**Killjoy surviving Sova's scans**: "Your creative placement is making his lineups miss. Keep rotating between unconventional spots and he will never lock in reliable clearing patterns."
+**IF**: Killjoy yetenek araçlarından uzakta oynayarak kurulum ifşa edilse bile kendisi ortaya çıkmıyorsa
+**MEANING**: Sova yetenek aracını buluyor ama Killjoy'un kişisel pozisyonunu bilemiyor
+**COUNTER**: Sova recon'u iki amaçlı kullanmalı — hem yetenek araç hem oyuncu pozisyonu
+**WHY**: Kurulum bilgisi ile oyuncu pozisyonu ayrı bilgi parçalarıdır
 
-## Rank Modulation
-**LOW**: Sova does not have Killjoy-specific lineups. Killjoy places utility in default spots. The counter barely exists. Coach Sova to learn one recon lineup per site that reveals Killjoy's common positions.
+## Tekrarlanan Başarısızlık Ne Anlama Gelir
+**Killjoy** sürekli tüm kurulumu ifşa edilip Sova tarafından yok ediliyorsa, yetenek araçları onun standart lineup'larının kapladığı noktalarda. Ders kitabı kurulumları, ders kitabını counter'lamak için tasarlanmış ajana karşı kullanıyor. Sova'nın hazırlanmış lineup'larının kaçıracağı alışılmadık yerleştirme gerekir.
 
-**MID**: Sova has basic lineups but does not follow up with Shock Darts. Killjoy does not adapt to being scanned. Coach the full sequence: scan, shock, push.
+**Sova** Killjoy kurulumunu parçalayamıyorsa, lineup'ları güncel değil veya recon'u yetenek araç yerine oyunculara kullanıyor. Killjoy'a karşı Sova'nın birincil hedefi oyuncu pozisyonu değil, onun kitidir.
 
-**HIGH**: Sova systematically clears and Killjoy starts hiding utility creatively. Coach Killjoy on unconventional placements and Sova on improvised scanning.
+## AIMLO Ne Demeli
 
-**ELITE**: Both sides play the lineup meta-game. Killjoy's setup is designed specifically to dodge Sova's known lineups. Sova must innovate new angles every game. Coach continuous innovation.
+### Oyuncu cezalandırılan taraftayken
+**Killjoy Sova tarafından parçalanıyorsa**: "Kurulumun Sova'nın lineup'larının vurmak için tasarlandığı tüm noktalarda. Turret ve alarmbot'u onun standart dart'larının kapsamadığı pozisyonlara taşı. Lineup'larını emprovize etmek zorunda kalırsa, temizlik daha uzun sürer ve daha az güvenilir olur."
+
+**Sova Killjoy'u temizleyemiyorsa**: "Oyunculara değil yetenek aracına odaklan. Recon Bolt'un önce turret ve alarmbot'u ortaya çıkarmalı. Shock Dart'larla takip et ve yok et. Kurulumu gidince site alma bedava."
+
+### Oyuncu cezalandıran taraftayken
+**Sova Killjoy'u parçalıyorsa**: "Onun tüm savunmasını haritanın diğer ucundan kaldırıyorsun. Lineup'larını güncel tut ve her raund önce yetenek araç pozisyonlarını hedefle."
+
+**Killjoy Sova'nın taramalarından kurtuluyorsa**: "Yaratıcı yerleştirmelerin onun lineup'larını kaçırtıyor. Alışılmadık noktalar arasında dolaşmaya devam et ve güvenilir temizleme kalıpları kuramasın."
+
+## Rank Modülasyonu
+**LOW**: Sova'nın Killjoy'a özel lineup'ları yok. Killjoy yetenek aracını varsayılan noktalara koyar. Counter neredeyse mevcut değil. Sova'ya her site için Killjoy'un yaygın pozisyonlarını ortaya çıkaran bir recon lineup'ı öğretmeyi öğret.
+
+**MID**: Sova'nın temel lineup'ları var ama Shock Dart ile takip etmiyor. Killjoy taranmaya adapte olmuyor. Tam sekans öğret: tara, shock, push.
+
+**HIGH**: Sova sistematik temizler ve Killjoy yaratıcı saklama yapar. Killjoy'a alışılmadık yerleştirmeler, Sova'ya emprovize tarama öğret.
+
+**ELITE**: İki taraf da lineup meta-oyununu oynuyor. Killjoy'un kurulumu özellikle Sova'nın bilinen lineup'larından kaçınmak için tasarlanmış. Sova her maç yeni açılar icat etmeli. Sürekli yenilik öğret.

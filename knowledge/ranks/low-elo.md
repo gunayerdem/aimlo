@@ -1,47 +1,87 @@
-# Low Elo Coaching Profile — Iron, Bronze, Silver
+# Düşük Elo Koçluk Profili — Iron, Bronze, Silver
 
-## Coaching Tone
-Supportive, patient, and fundamental-focused. These players are still building core habits. Avoid overwhelming them with advanced concepts. Celebrate correct decisions even when execution fails. Frame every correction as a simple, actionable step — not a list of everything wrong.
+## Koçluk Tonu
+Destekleyici, sabırlı ve temellere odaklı. Bu oyuncular hala temel alışkanlıklar oluşturuyor. İleri seviye kavramlarla bunaltmaktan kaçın. Uygulama başarısız olsa bile doğru kararları kutla. Her düzeltmeyi basit, uygulanabilir bir adım olarak sun — yanlış olan her şeyi listelemek yerine.
 
-## Priority Coaching Areas
+## Öncelikli Koçluk Alanları
 
 ### Crosshair Placement
-The single highest-impact improvement at this level. Most low-elo deaths come from crosshairs aimed at the ground or at body level. Coaching should constantly reinforce: keep your crosshair at head height, pre-aim common angles before you get there, and stop adjusting mid-fight.
+Bu seviyede en yüksek etkiye sahip gelişim alanı. Düşük elo ölümlerinin çoğu crosshair'in yere ya da vücut hizasına doğru tutulmasından kaynaklanır.
 
-### Basic Positioning
-Teach one position per site, not five. Players at this level need a "home base" — a default spot they go to every round until it becomes automatic. Wide-open positions in the middle of site are the most common bad habit. Emphasize playing near cover at all times.
+- **IF** oyuncu crosshair'ini sürekli vücut seviyesinde ya da aşağıda tutuyorsa
+- **MEANING** her düelloyu dezavantajlı başlıyor, headshot alma ihtimali çok düşük
+- **COUNTER** crosshair'i her zaman baş seviyesinde tut, köşelere girmeden önce yaygın açıları önceden nişan al
+- **WHY** baş seviyesinde crosshair tutmak, aim ayarlaması gerektirmeden anında headshot fırsatı verir
 
-### Stop Moving While Shooting
-Running and shooting is the number one mechanical mistake below Silver. The coaching message is simple: stop, shoot, then move. Do not introduce counter-strafing yet — just standing still before firing is a massive upgrade at this rank.
+### Temel Pozisyonlanma
+Her site için tek bir pozisyon öğret, beş tane değil. Bu seviyedeki oyuncuların bir "ana üs" pozisyonuna ihtiyacı var — her round otomatik olarak gittikleri varsayılan bir nokta. Site ortasında açıkta durmak en yaygın kötü alışkanlık.
 
-### Basic Utility Usage
-Teach utility as simple cause-and-effect. "Smoke the entrance before peeking" is enough. Do not teach lineups, one-ways, or advanced timing. One correct smoke per round is better than three wasted abilities.
+- **IF** oyuncu site ortasında açıkta duruyorsa
+- **MEANING** birden fazla açıdan görünür halde, cover'sız savunmasız kalıyor
+- **COUNTER** her zaman cover yakınında oyna, tek bir güvenli pozisyon seç ve her round oraya git
+- **WHY** cover yakınında oynamak, vurulduğunda geri çekilme şansı verir ve düşmana daha az hedef sunar
 
-### Understanding Buy Rounds
-Most low-elo players buy every round or save at random. Teach the binary: full buy or save. If the team cannot all buy rifles and shields, everyone saves. Keep it simple.
+### Ateş Ederken Durma
+Koşarak ateş etmek Silver altında bir numaralı mekanik hata. Koçluk mesajı basit: dur, ateş et, sonra hareket et. Henüz counter-strafing öğretme — ateş etmeden önce hareketsiz durmak bu rankta büyük bir gelişim.
 
-## Common Mistakes at This Level
+- **IF** oyuncu hareket ederken ateş ediyorsa
+- **MEANING** mermiler hedefe gitmez, saçılım çok yüksek olur
+- **COUNTER** ateş etmeden önce tamamen dur, sonra ateş et, sonra tekrar hareket et
+- **WHY** hareket halindeyken silah isabeti son derece düşük, durmak isabeti dramatik şekilde artırır
 
-- **Wide swinging into multiple enemies**: Players peek without knowing how many opponents hold the angle. Teach them to jiggle or use utility before committing.
-- **Standing still after getting a kill**: The "freeze" response — player gets a kill and stops moving, becoming an easy target. Coach them to reposition immediately after every engagement.
-- **Not checking common angles**: Players walk past deadly positions without clearing them. Teach a short checklist of 2-3 angles to clear on each site they play.
-- **Buying every round regardless of economy**: No concept of team economy. Teach save/buy cadence as a team rule, not individual choice.
-- **Reloading in the open**: Reload behind cover, always. This one tip saves multiple deaths per game.
+### Temel Utility Kullanımı
+Utility'yi basit sebep-sonuç ilişkisi olarak öğret. "Peek yapmadan önce girişi smoke'la" yeterli. Lineup, one-way ya da ileri seviye zamanlama öğretme. Round başına doğru kullanılmış bir smoke, üç boş yere harcanan yetenekten daha iyidir.
 
-## What to AVOID in Coaching
+- **IF** oyuncu hiçbir utility kullanmadan site'a giriyorsa
+- **MEANING** düşmanlar hazır pozisyonlarından seni bekliyor, avantajsız dövüşüyorsun
+- **COUNTER** site'a girmeden önce en az bir smoke ya da flash kullan
+- **WHY** utility düşman görmüş alanını keser ve sana güvenli giriş açısı sağlar
 
-Do NOT mention or teach:
-- Counter-strafing mechanics (they need to stop moving first)
-- Advanced utility lineups (one basic smoke/flash is enough)
-- Team strategies or complex executes (they cannot coordinate yet)
-- Off-angles or jiggle peeking (teach basic angles first)
-- Economy math beyond "buy together or save together"
-- Rotation timing or lurk plays
+### Alış-Veriş Roundlarını Anlama
+Düşük elo oyuncuların çoğu her round alışveriş yapar ya da rastgele save yapar. İkili sistemi öğret: tam alışveriş ya da save. Takım tüfekleri ve kalkan alamıyorsa, herkes save yapar.
 
-## Interpreting Death Patterns
+- **IF** takımın yarısı tam alışveriş yapıp yarısı save yapıyorsa
+- **MEANING** ne tam güç ne de gerçek bir save elde edilir, her iki round da zayıf kalır
+- **COUNTER** takım olarak karar ver: ya herkes alır ya herkes save yapar
+- **WHY** koordineli ekonomi, gun round'larda tam güçle savaşma şansı verir
 
-When a low-elo player dies at the same spot repeatedly, the cause is almost always **lack of awareness of alternatives** — not inability to execute. They literally do not know another position exists. The correct coaching response is to suggest one specific alternative position, not to critique their mechanics at the current one. Say "try playing from X instead" rather than "you keep dying because you peek wrong."
+## Bu Seviyede Yaygın Hatalar
 
-Repeated deaths to the same enemy agent suggest the player does not understand that agent's abilities. A brief one-sentence explanation of the threat is more useful than tactical counterplay advice.
+- **Birden fazla düşmana karşı wide swing yapma**: Oyuncular kaç kişinin açıyı tuttuğunu bilmeden peek yapar. Commit etmeden önce jiggle ya da utility kullanmayı öğret.
 
-Death clustering in early rounds (pistol + first gun round) usually means poor buy decisions or running into site without utility. Address economy and patience, not aim.
+- **Kill aldıktan sonra hareketsiz kalma**: "Donma" tepkisi — oyuncu kill alır ve hareket etmeyi bırakır, kolay hedef olur. Her karşılaşma sonrası hemen reposition yapmayı öğret.
+
+- **Yaygın açıları kontrol etmeme**: Oyuncular ölümcül pozisyonları temizlemeden geçerler. Oynadıkları her site için 2-3 açılık kısa bir kontrol listesi öğret.
+
+- **Ekonomiden bağımsız her round alışveriş yapma**: Takım ekonomisi kavramı yok. Save/buy ritmini bireysel değil takım kuralı olarak öğret.
+
+- **Açıkta reload yapma**: Her zaman cover arkasında reload yap. Bu tek ipucu oyun başına birden fazla ölümü önler.
+
+## Koçlukta KAÇINILMASI Gerekenler
+
+Bahsetme veya öğretme:
+- Counter-strafing mekaniği (önce durmayı öğrenmeliler)
+- İleri seviye utility lineup'ları (tek temel smoke/flash yeterli)
+- Takım stratejileri veya karmaşık execute'lar (henüz koordine olamazlar)
+- Off-angle ya da jiggle peek (önce temel açıları öğret)
+- "Birlikte al ya da birlikte save yap" ötesinde ekonomi matematiği
+- Rotate zamanlaması ya da lurk oyunları
+
+## Ölüm Patternlerini Yorumlama
+
+Düşük elo oyuncu aynı noktada sürekli ölüyorsa, neden neredeyse her zaman **alternatiflerin farkında olmama** — uygulama yetersizliği değil. Başka bir pozisyonun var olduğunu bilmiyorlar. Doğru koçluk yanıtı tek bir alternatif pozisyon önermek, mevcut pozisyondaki mekaniği eleştirmek değil. "Şuradaki peek'in yanlış" yerine "bunun yerine X'den oynamayı dene" de.
+
+- **IF** oyuncu aynı noktada sürekli ölüyorsa
+- **MEANING** alternatif pozisyonların farkında değil, tek bildiği noktayı tekrarlıyor
+- **COUNTER** o bölge için tek bir alternatif pozisyon öner
+- **WHY** yeni bir pozisyon öğrenme, mekanik düzeltmeden çok daha hızlı sonuç verir
+
+- **IF** oyuncu aynı düşman ajanına karşı sürekli ölüyorsa
+- **MEANING** o ajanın yeteneklerini anlamıyor
+- **COUNTER** tehdidin ne olduğunu tek cümlede açıkla
+- **WHY** tehdidi anlamak, taktik karşı oyun tavsiyesinden daha yararlı
+
+- **IF** erken roundlarda (pistol + ilk gun round) ölümler yoğunlaşıyorsa
+- **MEANING** kötü alışveriş kararları veya utility olmadan site'a koşma
+- **COUNTER** ekonomi ve sabır konusunu ele al, nişan değil
+- **WHY** erken round ölümleri aim değil karar kalitesiyle ilgili

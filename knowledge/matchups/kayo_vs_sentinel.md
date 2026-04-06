@@ -1,34 +1,61 @@
-# MATCHUP: KAY/O vs Sentinel
+# EŞLEŞME: KAY/O vs Sentinel
 
-## Interaction Identity
-KAY/O is the universal sentinel counter. His ZERO/POINT knife suppresses all abilities in a radius, turning sentinels into vanilla riflers with no utility for 8 seconds. Every sentinel's value comes from their kit — tripwires, turrets, alarmbots, cameras, traps — and KAY/O disables all of it simultaneously. This matchup is binary: when the suppress lands, the sentinel is helpless. When it misses or the sentinel plays outside the radius, KAY/O wasted his signature for nothing. The entire interaction revolves around the knife's radius and the sentinel's positioning relative to it.
+## Etkileşim Kimliği
+KAY/O evrensel sentinel karşıtıdır. ZERO/POINT bıçağı belirli bir alan içindeki tüm yetenekleri suppress eder ve sentinel'ları yetenek kullanamayan sade tüfekçilere dönüştürür. Her sentinel'in değeri kendi kitinden gelir — tripwire'lar, turret'lar, alarmbot'lar, kameralar, tuzaklar — ve KAY/O bunların hepsini aynı anda devre dışı bırakır. Bu eşleşmede iki sonuç vardır: suppress isabetli olursa sentinel savunmasız kalır. İsabet etmezse veya sentinel yarıçapın dışında kalırsa, KAY/O imza yeteneğini boşa harcamış olur. Tüm etkileşim bıçağın yarıçapı ve sentinel'in buna göre konumlanması etrafında döner.
 
-## Common Punish Patterns
-**KAY/O punishing sentinels**: ZERO/POINT thrown into site disables all placed utility — turrets go offline, tripwires deactivate, cameras shut down. The suppress window gives the attacking team a free site take against a defenseless sentinel. Flash/knife combo means the sentinel is both blind and suppressed. KAY/O ultimate makes the entire suppress zone permanent for its duration, completely neutralizing sentinel setups.
+## Yaygın Cezalandırma Kalıpları
 
-**Sentinel punishing KAY/O**: Playing outside the knife radius so suppress does not affect placed utility. Replacing utility during the suppress downtime (if not suppressed personally). Baiting the knife — showing utility in one spot but playing from another, so the knife targets the wrong area. After suppress ends, immediately redeploying utility that KAY/O already used his knife on.
+### KAY/O Sentinel'i Cezalandırırken
 
-## What Repeated Failure Means
-If the **sentinel** keeps getting suppressed and their site falls, they are playing too close to their utility — the knife hits both them and their setup. They need to play at a distance where the suppress might hit the utility OR them, but not both.
+**IF**: KAY/O ZERO/POINT'i site'a atıp tüm yerleşmiş yetenek araçları devre dışı kalıyor
+**MEANING**: Sentinel'in tüm savunma yapısını tek bir bıçakla sıfırlıyor
+**COUNTER**: Sentinel, yetenek araçlarıyla kendi arasında mesafe bırakmalı — bıçak hem araçlarını hem kendisini vuramasın
+**WHY**: Suppress penceresi takım için karşılık gelmeden site alma imkânı yaratır
 
-If **KAY/O** keeps failing to disable the sentinel setup, his knife placement is off — either thrown at the wrong angle, at the wrong time, or at a site where the sentinel's utility is spread beyond the suppress radius.
+**IF**: KAY/O flash + knife kombosu kullanıyorsa
+**MEANING**: Sentinel hem kör hem suppress altında — dövemediği ve kullanamadığı bir durumda
+**COUNTER**: Sentinel bıçak yarıçapının dışında konumlanarak en azından yetenek araçlarını aktif tutmalı
+**WHY**: İki yeteneğin birleşimi sentinel'in tüm katkısını ortadan kaldırır
 
-## What AIMLO Should Say
-### When player is on the punished side
-**Sentinel getting suppressed**: "KAY/O's knife is shutting down your entire site. Play further from your utility so his suppress cannot hit both. If he suppresses your utility, you should still have your gun and positioning. If he suppresses you, your utility should still be active."
+**IF**: KAY/O ultimate açtığında suppress alanı süreklileşiyor
+**MEANING**: Sentinel'in tüm site kurulumu süresi boyunca tamamen etkisiz
+**COUNTER**: Site'tan geri çekilip ultimate bitene kadar yeniden konumlanmak
+**WHY**: Kalıcı suppress alanı standart bıçaktan çok daha geniş ve uzun süreli baskı yaratır
 
-**KAY/O missing the suppress**: "Your knife is landing in the wrong spot. The sentinel's utility is not where you think it is. Use your flash or teammates to scout the setup first, then throw the knife to cover the actual utility positions."
+### Sentinel KAY/O'yu Cezalandırırken
 
-### When player is on the punishing side
-**KAY/O disabling the sentinel**: "Your suppress is winning the site before the fight starts. Keep timing the knife right before the team pushes so the suppress window covers the entire execute."
+**IF**: Sentinel bıçak yarıçapının dışında oynuyor ve yetenek araçları etkilenmiyor
+**MEANING**: KAY/O imza yeteneğini boşa harcadı
+**COUNTER**: KAY/O bıçağı atmadan önce yetenek araç konumlarını keşfetmeli
+**WHY**: Yarıçap dışındaki yetenek araçları suppress'ten etkilenmez
 
-**Sentinel surviving the suppress**: "Your distance from your utility is protecting you. Keep playing split from your setup so KAY/O cannot neutralize everything with one knife."
+**IF**: Sentinel bir noktada yetenek aracı gösterip farklı yerden oynuyorsa
+**MEANING**: Bıçak yanlış alana atılıyor — bait başarılı
+**COUNTER**: KAY/O flash veya takımıyla birlikte kurulumu önce keşfetmeli, sonra bıçağı gerçek konumlara atmalı
+**WHY**: Yanlış hedefe atılan bıçak tüm saldırı planını zayıflatır
 
-## Rank Modulation
-**LOW**: KAY/O does not target sentinel utility with suppress — uses it randomly. Sentinels play on top of their utility. Coach KAY/O to aim knife at known utility positions.
+## Tekrarlanan Başarısızlık Ne Anlama Gelir
+**Sentinel** sürekli suppress yiyip site'i kaybediyorsa, yetenek araçlarına çok yakın oynuyor — bıçak hem onu hem kurulumunu vuruyor. Suppress'in yetenek araçlarını VEYA kendisini vurabilEceği ama ikisini birden vuramayacağı bir mesafede oynamalı.
 
-**MID**: Suppress lands on utility sometimes but timing is inconsistent. Sentinels start moving away from utility. Coach precise knife timing and team coordination around the suppress window.
+**KAY/O** sentinel kurulumunu devre dışı bırakamıyor mu? Bıçak yerleştirmesi hatalı — yanlış açıda, yanlış zamanda veya sentinel'in yetenek araçlarının suppress yarıçapının ötesine yayıldığı bir site'a atılıyor.
 
-**HIGH**: KAY/O suppress is a core part of the attack plan. Sentinels play split. Coach the sentinel on when to play far vs. close to utility based on KAY/O knife timing patterns.
+## AIMLO Ne Demeli
 
-**ELITE**: Both sides adapt every round. KAY/O varies knife timing and angle; the sentinel varies utility and personal positioning. Coach the read-and-adapt game.
+### Oyuncu cezalandırılan taraftayken
+**Sentinel suppress yiyorsa**: "KAY/O'nun bıçağı tüm site'ini kapatıyor. Yetenek araçlarından daha uzakta oyna ki suppress ikisini birden vuramasın. Yetenek araçlarını suppress ederse, senin silah ve pozisyon avantajın hâlâ olmalı. Seni suppress ederse, yetenek araçların hâlâ aktif kalmalı."
+
+**KAY/O suppress ıskalatıyorsa**: "Bıçağın yanlış noktaya düşüyor. Sentinel'in yetenek araçları senin düşündüğün yerde değil. Önce flash veya takım arkadaşlarınla kurulumu keşfet, sonra bıçağı gerçek yetenek aracı konumlarına at."
+
+### Oyuncu cezalandıran taraftayken
+**KAY/O sentinel'i devre dışı bırakıyorsa**: "Suppress'in dövüş başlamadan site'i kazandırıyor. Bıçağı takım push'undan hemen önce zamanlayarak suppress penceresinin tüm execute'u kaplamasını sağla."
+
+**Sentinel suppress'ten kurtuluyorsa**: "Yetenek araçlarından uzak durman seni koruyor. Kurulumundan ayrı oynamaya devam et ki KAY/O tek bıçakla her şeyi etkisiz bırakmasın."
+
+## Rank Modülasyonu
+**LOW**: KAY/O suppress'i sentinel yetenek araçlarına yönlendirmiyor — rastgele kullanıyor. Sentinel'lar yetenek araçlarının üstünde oynuyor. KAY/O'ya bıçağı bilinen yetenek aracı pozisyonlarına atmayı öğret.
+
+**MID**: Suppress yetenek araçlarına isabet ediyor ama zamanlama tutarsız. Sentinel'lar yetenek araçlarından uzaklaşmaya başlıyor. Net bıçak zamanlaması ve suppress penceresi etrafında takım koordinasyonunu öğret.
+
+**HIGH**: KAY/O suppress'i saldırı planının temel parçası. Sentinel'lar ayrık oynuyor. Sentinel'a KAY/O bıçak zamanlama kalıplarına göre yetenek araçlarına yakın mı uzak mı oynaması gerektiğini öğret.
+
+**ELITE**: İki taraf da her raund adapte oluyor. KAY/O bıçak zamanlama ve açısını değiştiriyor; sentinel yetenek aracı ve kişisel konumunu değiştiriyor. Okuma-ve-adapte oyununu öğret.

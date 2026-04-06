@@ -1,34 +1,61 @@
-# MATCHUP: Raze vs Killjoy
+# EŞLEŞME: Raze vs Killjoy
 
-## Interaction Identity
-Raze is Killjoy's worst nightmare. Every piece of Killjoy's kit sits on the ground, stationary, waiting to do its job. Every piece of Raze's kit is explosive and mobile. Boom Bot scouts and clears alarmbots. Paint Shells (grenades) destroy turrets, nanoswarms, and alarmbots from safe distance. Blast Packs let Raze fly over ground-level traps. This is the hardest counter in the sentinel category — Raze does not just fight Killjoy, she erases Killjoy's contribution to the round.
+## Etkileşim Kimliği
+Raze, Killjoy'un en büyük kabusu. Killjoy'un kitinin her parçası yerde, hareketsiz, görevini yapmak için bekliyor. Raze'in kitinin her parçası patlayıcı ve hareketli. Boom Bot keşfeder ve alarmbot'ları temizler. Paint Shell'ler (granatlar) turret, nanoswarm ve alarmbot'ları güvenli mesafeden yok eder. Blast Pack'ler Raze'in yer seviyesindeki trap'lerin üstünden uçmasını sağlar. Bu, sentinel kategorisindeki en sert counter'dır — Raze sadece Killjoy'la dövüşmez, Killjoy'un raunda katkısını siler.
 
-## Common Punish Patterns
-**Raze punishing Killjoy**: Boom Bot sent into site triggers alarmbots and takes nanoswarm damage instead of a player. Grenades tossed at turret positions destroy it from safety — Killjoy cannot shoot back. Blast Pack over nanoswarm placement areas bypasses the damage zone entirely. Showstopper rocket into site destroys any remaining utility while threatening the kill.
+## Yaygın Cezalandırma Kalıpları
 
-**Killjoy punishing Raze**: Hiding utility in positions Raze's Boom Bot does not path through. Placing turret in elevated positions where grenades have to be aimed precisely. Nanoswarm placement outside the expected Boom Bot path — if the bot goes left, swarms are on the right. Lockdown forces Raze out of an area even if she has cleared the other utility.
+### Raze Killjoy'u Cezalandırırken
 
-## What Repeated Failure Means
-If **Killjoy** keeps losing her entire setup to Raze, she is placing utility in predictable ground-level clusters where one grenade or Boom Bot run clears everything. She needs to spread utility vertically and across unconventional positions.
+**IF**: Boom Bot site'a gönderilerek alarmbot'ları tetikliyor ve nanoswarm hasarını oyuncu yerine alıyor
+**MEANING**: Killjoy'un bilgi ve hasar araçları bir bot üzerine harcanıyor
+**COUNTER**: Killjoy yetenek araçlarını Boom Bot'un yol almadığı konumlara saklamalı
+**WHY**: Boom Bot ucuz bir fedakarlık aracı olarak tüm tuzakları tüketir
 
-If **Raze** is not clearing Killjoy's setup despite having the tools, she is wasting Boom Bot on player hunting instead of utility clearing, or throwing grenades at empty spots. She needs to prioritize utility destruction before entry.
+**IF**: Granatlar turret pozisyonlarına güvenli mesafeden atılıp yok ediliyor
+**MEANING**: Killjoy karşılık ateş edemez — turret tek taraflı yok ediliyor
+**COUNTER**: Turret'ı granatların hassas nişanlanmasını gerektiren yükseltilmiş pozisyonlara yerleştirmeli
+**WHY**: Yer seviyesindeki turret granat için kolay hedef
 
-## What AIMLO Should Say
-### When player is on the punished side
-**Killjoy losing setup to Raze**: "Raze's kit hard-counters yours when your utility is on the ground in expected spots. Elevate your turret, hide your alarmbot off the main Boom Bot path, and spread your nanoswarms away from your other utility."
+**IF**: Blast Pack ile nanoswarm yerleştirme alanları tamamen bypass ediliyor
+**MEANING**: Hasar bölgesi hava yolu ile anlamsız
+**COUNTER**: Nanoswarm'ları beklenen Boom Bot yolunun dışına koymak — bot sola giderse swarm'lar sağda olmalı
+**WHY**: Satchel ile uçuş yer seviyesi hasar bölgelerini tamamen atlar
 
-**Raze failing to clear Killjoy**: "You have the best tools in the game for destroying her setup. Send Boom Bot first to trigger alarmbots, then grenade the turret. Do not waste your explosives on player kills when Killjoy's utility is the real threat."
+### Killjoy Raze'i Cezalandırırken
 
-### When player is on the punishing side
-**Raze dismantling Killjoy**: "You are erasing her site defense with utility alone. Keep clearing her setup before your team pushes and she becomes a non-factor."
+**IF**: Yetenek araçları Raze'in Boom Bot'unun yol almadığı pozisyonlarda saklı
+**MEANING**: Boom Bot temizleme süreci boş geçiyor — yetenek araçları sağlam
+**COUNTER**: Raze yetenek aracı yıkımını girişten önce öncelik sırasına almalı, Boom Bot'u oyuncu avına değil
+**WHY**: Saklı yetenek araçları standart temizleme kalıbını bozar
 
-**Killjoy surviving Raze**: "Your hidden placements are forcing Raze to guess. Keep varying your utility positions so her clearing pattern does not match your setup."
+**IF**: Lockdown Raze'i diğer yetenek araçları temizlenmiş olsa bile alandan atıyorsa
+**MEANING**: Ultimate tüm yetenek aracı yıkımını geçersiz kılar
+**COUNTER**: Raze Lockdown cihazını yok etmeyi önceliklendirmeli veya zamanlama ile kaçmalı
+**WHY**: Lockdown tüm bölge kontrolünü tek başına sağlar
 
-## Rank Modulation
-**LOW**: Raze does not use Boom Bot for utility clearing. Killjoy places everything in default spots. The counter-matchup barely functions. Coach Raze to clear utility intentionally.
+## Tekrarlanan Başarısızlık Ne Anlama Gelir
+**Killjoy** sürekli tüm kurulumunu Raze'e kaybediyorsa, yetenek araçlarını tek bir granat veya Boom Bot koşusunun her şeyi temizlediği tahmin edilebilir yer seviyesi kümelerine yerleştiriyor. Yetenek araçlarını dikey ve alışılmadık pozisyonlara yaymalı.
 
-**MID**: Raze starts clearing some utility but inconsistently. Killjoy does not adapt placement. Coach Killjoy to spread and elevate utility against Raze specifically.
+**Raze** araçlara sahip olmasına rağmen Killjoy kurulumunu temizleyemiyorsa, Boom Bot'u yetenek aracı temizleme yerine oyuncu avına kullanıyor veya granatları boş noktalara atıyor. Giriş öncesi yetenek aracı yıkımını önceliklendirmeli.
 
-**HIGH**: Both sides understand the dynamic. Killjoy hides utility creatively; Raze clears methodically. Coach the adaptation game.
+## AIMLO Ne Demeli
 
-**ELITE**: Killjoy's setup must be completely reimagined against Raze compositions. Raze's clearing must be systematic and cover unconventional spots. Coach both to study each other's patterns between rounds.
+### Oyuncu cezalandırılan taraftayken
+**Killjoy kurulumunu Raze'e kaybediyorsa**: "Raze'in kiti, yetenek araçların beklenen yerlerde yerdeyken seninkini tamamen counter'lıyor. Turret'ı yukarı al, alarmbot'u ana Boom Bot yolundan sakla ve nanoswarm'ları diğer yetenek araçlarından ayır."
+
+**Raze Killjoy'u temizleyemiyorsa**: "Onun kurulumunu yok etmek için oyundaki en iyi araçlara sahipsin. Önce Boom Bot gönderip alarmbot'ları tetikle, sonra turret'ı granatla. Killjoy'un yetenek aracı gerçek tehditken patlayıcıları oyuncu öldürmek için harcama."
+
+### Oyuncu cezalandıran taraftayken
+**Raze Killjoy'u parçalıyorsa**: "Onun site savunmasını sadece yetenek aracıyla siliyorsun. Takım push etmeden önce kurulumunu temizlemeye devam et ve o etkisiz bir faktör olsun."
+
+**Killjoy Raze'e karşı ayakta kalıyorsa**: "Saklı yerleştirmelerin Raze'i tahmin yapmaya zorluyor. Yetenek aracı pozisyonlarını çeşitlendirmeye devam et ki onun temizleme kalıbı kurulumunla uyuşmasın."
+
+## Rank Modülasyonu
+**LOW**: Raze Boom Bot'u yetenek aracı temizleme için kullanmaz. Killjoy her şeyi varsayılan noktalara koyar. Counter-eşleşmesi zar zor işler. Raze'e bilinçli yetenek aracı temizlemeyi öğret.
+
+**MID**: Raze biraz yetenek aracı temizlemeye başlar ama tutarsız. Killjoy yerleştirmeyi adapte etmez. Killjoy'a özellikle Raze'e karşı yetenek aracını yaymasını ve yukarı almasını öğret.
+
+**HIGH**: İki taraf da dinamiği anlar. Killjoy yaratıcı saklama yapar; Raze sistematik temizler. Adaptasyon oyununu öğret.
+
+**ELITE**: Killjoy'un kurulumu Raze kompozisyonlarına karşı tamamen yeniden tasarlanmalı. Raze'in temizliği sistematik olmalı ve alışılmadık noktaları kapsamalı. Her ikisine raundlar arası birbirinin kalıplarını incelemeyi öğret.

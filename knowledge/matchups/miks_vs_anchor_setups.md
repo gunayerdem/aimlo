@@ -1,36 +1,58 @@
-# MATCHUP: Miks vs Anchor Setups
+# EŞLEŞME: Miks vs Anchor Kurulumları
 
-> **PATCH-SENSITIVE NOTE**: Miks is a newer agent. Ability values, cooldowns, and interactions may change significantly between patches. Always verify current patch notes before applying coaching advice.
+> **YAMA DUYARLILIĞI NOTU**: Miks yeni bir ajandır. Yetenek değerleri, bekleme süreleri ve etkileşimler yamalar arasında belirgin şekilde değişebilir. Koçluk tavsiyesi uygulamadan önce güncel yama notlarını doğrulayın.
 
-## Interaction Identity
-Miks is designed to destabilize entrenched defensive positions. His kit provides tools to displace, disrupt, and force repositioning from defenders who want to sit in one spot and hold. Anchor setups — where a single sentinel (Killjoy, Cypher, Deadlock) locks down a site with layered utility and positional advantage — are Miks' primary target. His abilities force the anchor player to move, which disengages them from their utility and ruins the timing of their setup. The question is whether Miks can force enough displacement to break the anchor or whether the anchor's utility absorbs the disruption.
+## Etkileşim Kimliği
+Miks, yerleşik savunma pozisyonlarını istikrarsızlaştırmak için tasarlanmıştır. Kiti, tek bir noktada oturup tutmak isteyen savunucuları yerleştirmek, bozmak ve yeniden konumlanmaya zorlamak için araçlar sağlar. Anchor kurulumları — tek bir sentinel'in (Killjoy, Cypher, Deadlock) katmanlı yetenek aracı ve pozisyon avantajıyla site'i kilitlediği durumlar — Miks'in birincil hedefidir. Yetenekleri anchor oyuncusunu hareket ettirmeye zorlar, bu da onu yetenek araçlarından ayırır ve kurulum zamanlamasını bozar. Soru şu: Miks anchor'ı kırmak için yeterli yer değiştirme yaratabilir mi, yoksa anchor'ın yetenek araçları bozulmayı absorbe mi eder?
 
-## Common Punish Patterns
-**Miks punishing anchor setups**: Displacement abilities push the sentinel off their prepared position, separating them from turrets, cameras, and nanoswarms. Disruption utility deactivates or interferes with placed defensive tools. Miks creates zones where standing still is dangerous, which is exactly what anchoring requires. His kit turns the sentinel's greatest strength (static setup) into their vulnerability.
+## Yaygın Cezalandırma Kalıpları
 
-**Anchor setup punishing Miks**: Deep defensive positioning that Miks' abilities cannot reach. Layered utility that continues functioning even if the player is displaced. Crossfire from a second defender that punishes Miks while he uses displacement abilities (they often require line-of-sight or positioning commitment). Repositioning traps that catch Miks in the position he forced the anchor away from.
+### Miks Anchor Kurulumlarını Cezalandırırken
 
-## What Repeated Failure Means
-If **anchor setups** keep getting broken by Miks, the sentinel is playing too close to the entry where Miks' displacement reaches them. They need to anchor from deeper positions or have a teammate covering the angle where Miks operates.
+**IF**: Miks'in yer değiştirme yetenekleri sentinel'i hazırlanmış pozisyonundan itiyor
+**MEANING**: Sentinel turret, kamera ve nanoswarm'lardan ayrılmış oluyor
+**COUNTER**: Anchor, Miks'in yeteneklerinin ulaşamayacağı derin savunma pozisyonlarında oynamalı
+**WHY**: Yetenek araçlarından ayrılan sentinel, site koruması sağlamaz
 
-If **Miks** keeps failing to break the anchor, his displacement is not reaching the sentinel's actual position, or the sentinel's utility continues working even after they are moved. He needs better intel on the anchor's exact position before committing abilities.
+**IF**: Miks hareketsiz kalmanın tehlikeli olduğu bölgeler yaratıyorsa
+**MEANING**: Anchor'lamanın gerektirdiği statik oyun doğrudan cezalandırılıyor
+**COUNTER**: Katmanlı yetenek araçları yerleştirerek oyuncu yer değiştirse bile çalışmasını sağlamak
+**WHY**: Sentinel'in en büyük gücü (statik kurulum) zayıflığına dönüşüyor
 
-## What AIMLO Should Say
-### When player is on the punished side
-**Anchor getting displaced by Miks**: "He is pushing you off your setup. Play deeper so his displacement cannot reach you, or have a teammate hold the angle where he uses his abilities. If you get moved, your utility stops protecting the site."
+### Anchor Kurulumu Miks'i Cezalandırırken
 
-**Miks failing to break anchor**: "Your displacement is not reaching the sentinel. Either get closer before using it or coordinate with a teammate to flush the anchor toward you. Blind displacement into deep positions wastes your kit."
+**IF**: Anchor, Miks'in yeteneklerinin ulaşamadığı derin pozisyonlarda oynuyor
+**MEANING**: Yer değiştirme yetenekleri boşa yere kullanılmış oluyor
+**COUNTER**: Miks, yer değiştirme kullanmadan önce anchor'ın tam pozisyonu hakkında daha iyi istihbarat edinmeli
+**WHY**: Derin pozisyonlar yer değiştirme menzilinin dışında kalır
 
-### When player is on the punishing side
-**Miks breaking the anchor**: "You are forcing the sentinel off their setup every round. Keep displacing them early in the execute so their utility is orphaned when your team pushes."
+**IF**: İkinci bir savunucu Miks yer değiştirme yeteneği kullanırken crossfire oluşturuyorsa
+**MEANING**: Miks pozisyon taahhüdünde bulunurken cezalandırılıyor
+**COUNTER**: Miks yetenek kullanmadan önce takım desteği ve pozisyon güvenliğini sağlamalı
+**WHY**: Yer değiştirme yetenekleri görüş hattı veya pozisyon taahhüdü gerektirir
 
-**Anchor holding against Miks**: "Your deep positioning is out of his displacement range. Keep playing from depth and let your utility handle the chokepoint while you stay safe."
+## Tekrarlanan Başarısızlık Ne Anlama Gelir
+**Anchor kurulumları** sürekli Miks tarafından kırılıyorsa, sentinel Miks'in yer değiştirme menzilinin içindeki giriş noktasına çok yakın oynuyor. Daha derin pozisyonlardan anchor yapmalı veya Miks'in çalıştığı açıda bir takım arkadaşı tutmalı.
 
-## Rank Modulation
-**LOW**: Neither side understands the displacement mechanic. Anchors play default, Miks uses abilities randomly. Coach Miks to target the sentinel specifically.
+**Miks** anchor'ı kıramıyorsa, yer değiştirmesi sentinel'in gerçek pozisyonuna ulaşamıyor veya sentinel'in yetenek araçları oyuncu hareket ettirilse bile çalışmaya devam ediyor. Yetenek kullanmadan önce anchor'ın tam pozisyonu hakkında daha iyi istihbarat edinmeli.
 
-**MID**: Miks starts targeting anchors but inconsistently. Anchors do not adapt depth. Coach both on positioning around displacement range.
+## AIMLO Ne Demeli
 
-**HIGH**: Both sides play around displacement zones. Coach the information game — Miks needs to know where the anchor is, the anchor needs to predict Miks' approach.
+### Oyuncu cezalandırılan taraftayken
+**Anchor Miks tarafından itiliyorsa**: "Seni kurulumundan itiyor. Daha derinden oyna ki yer değiştirmesi sana ulaşamasın, veya bir takım arkadaşı onun yetenek kullandığı açıyı tutsun. Hareket ettirilirsen yetenek araçların site'i korumaz."
 
-**ELITE**: The matchup is about pre-round reads and positioning adjustments. Miks and the anchor are both adapting round-to-round. Coach pattern variation and read-based depth changes.
+**Miks anchor'ı kıramazsa**: "Yer değiştirmen sentinel'e ulaşamıyor. Ya kullanmadan önce daha yakın pozisyon al ya da takım arkadaşınla koordine olup anchor'ı sana doğru sürükle. Derin pozisyonlara kör yer değiştirme kitini boşa harcar."
+
+### Oyuncu cezalandıran taraftayken
+**Miks anchor'ı kırıyorsa**: "Sentinel'i her raund kurulumundan atıyorsun. Execute sırasında erken yer değiştir ki takım push ettiğinde yetenek araçları sahipsiz kalsın."
+
+**Anchor Miks'e karşı tutuyorsa**: "Derin pozisyonun onun yer değiştirme menzilinin dışında. Derinlikten oynamaya devam et ve yetenek araçlarının choke noktasını idare etmesine izin ver, sen güvenlikte kal."
+
+## Rank Modülasyonu
+**LOW**: İki taraf da yer değiştirme mekaniğini anlamamış. Anchor'lar varsayılan oynar, Miks yetenekleri rastgele kullanır. Miks'e sentinel'i spesifik olarak hedeflemesini öğret.
+
+**MID**: Miks anchor'ları hedeflemeye başlıyor ama tutarsız. Anchor'lar derinlik adapte etmiyor. Her ikisine yer değiştirme menzili etrafında konumlanmayı öğret.
+
+**HIGH**: İki taraf da yer değiştirme bölgelerinde oynuyor. Bilgi oyununu öğret — Miks anchor'ın nerede olduğunu bilmeli, anchor Miks'in yaklaşımını tahmin etmeli.
+
+**ELITE**: Eşleşmede raund öncesi okumalar ve pozisyon ayarlamaları belirleyici. Miks ve anchor ikisi de raunddan raunda adapte oluyor. Kalıp çeşitlemesi ve okuma bazlı derinlik değişiklikleri öğret.

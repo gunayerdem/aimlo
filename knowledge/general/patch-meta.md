@@ -1,252 +1,204 @@
-# Patch Meta Analysis — Radiant-Level Knowledge
+# Patch Meta Analizi -- Radiant Seviye Bilgi Bankası
 
-## Current Meta Overview (Episode 9-10 Era)
+## Güncel Meta Genel Bakış (Episode 9-10 Dönemi)
 
-The Valorant meta has shifted significantly through Episodes 9 and 10. Multiple agent reworks, weapon balance passes, and map pool changes have created a dynamic metagame that rewards flexibility over one-tricking.
+Valorant meta'si Episode 9 ve 10 boyunca büyük değişimler geçirdi. Çoklu ajan yeniden tasarımları, silah denge geçirleri ve harita havuzu değişiklikleri esnekliği one-trick'ten daha çok ödüllendiren dinamik bir meta oluşturdu.
 
-## Recent Agent Changes and Impact
+---
 
-### Major Agent Adjustments
+## Ajan Değişiklikleri ve Etkileri
 
-#### Jett
+### Jett
 
-Jett has gone through several cycles of nerfs since her dominance in early Valorant. Key changes over the competitive lifespan:
+IF Jett main'iysen ve dash nerf'lerinden sonra uyum sağlayamadıysan
+MEANING Tailwind artık anlık reaktif dash değil, zamanlama pencereli aktivasyon -- fight öncesi dash kararı vermeni gerektiriyor
+COUNTER dash'i fight ÖNCESINDE aktive et, agresyona commit edeceksen; reaktif kaçış olarak bekleme
+WHY Jett hala en güçlü Operator ajanı dash kaçışı sayesinde, ama artık zorunlu pick değil
 
-- **Tailwind (Dash) rework**: Changed from instant reactive dash to a 12-second activation window. This shifted Jett from a "get out of jail free" agent to one that must commit to aggression pre-fight. The activation window forces Jett players to decide when to dash BEFORE the fight, not during.
-- **Impact**: Jett's pick rate in professional play dropped from near 100% to ~60-70% on maps where she was dominant. Chamber and Raze absorbed much of her role on certain maps.
-- **Current state**: Jett remains the strongest Operator agent due to dash escape, but she is no longer a must-pick. Teams evaluate whether Jett or Raze is better per map.
+- **Pick oranı etkisi**: Pro oyunda yaklaşık %100'den ~%60-70'e düştü.
+- **Güncel durum**: Chamber ve Raze belirli haritalarda rolünün bir kısmını emdi. Takımlar harita bazında Jett veya Raze'i değerlendiriyor.
 
-#### Chamber
+### Chamber
 
-- **Multiple nerfs**: Chamber's Trademark (trap) range reduced, Headhunter (sheriff ability) cost increased, Tour De Force (ult Op) slow duration reduced, Rendezvous (TP) range significantly reduced.
-- **Impact**: Chamber went from the most picked agent in professional play to a situational pick. The TP range nerf means he can no longer hold extremely aggressive angles and TP across the site. He must play closer to his anchors.
-- **Current viability**: Strong on maps with tight angles where his reduced TP range is not a problem (Breeze, Ascent). Weaker on maps requiring long rotations.
+IF Chamber oynuyorsan ve eski agresif TP-Op stilini uyguluyorsan
+MEANING TP menzil nerf'i artık site'in öteki ucundan agresif açı tutup TP ile kaçmanın mümkün olmadığını gösteriyor
+COUNTER anchor'larına yakın oyna, dar açıların TP menzilini aşmadığı haritalarda seç (Breeze, Ascent)
+WHY azaltılmış TP menzili Chamber'ı yakın anchor oyununa zorluyor; uzun rotasyon gerektiren haritalarda zayıf
 
-#### Killjoy
+- **Çoklu nerf'ler**: Trademark menzili, Headhunter maliyeti, Tour De Force slow süresi, Rendezvous menzili azaltıldı.
+- **Güncel uygulanabilirlik**: Dar açıların TP menzilini aşmadığı haritalarda güçlü. Uzun rotasyon gerektiren haritalarda zayıf.
 
-- **Turret and Lockdown adjustments**: Turret received HP buffs in some patches, making it harder to destroy casually. Lockdown radius adjusted.
-- **Impact**: Killjoy remains the most consistent sentinel in the game. Her ability to hold a site solo with turret + alarmbot + nanoswarm is unmatched.
-- **Current state**: Near-mandatory pick on most maps. Only Cypher competes for the sentinel slot, and Killjoy wins on most maps due to her retake potential with Lockdown.
+### Killjoy
 
-#### Cypher
+IF sentinel seçeceksen ve harita spesifik bir neden yoksa
+MEANING Killjoy turret + alarmbot + nanoswarm ile site'i tek başına tutma kapasitesi rakipsiz
+COUNTER Killjoy'u varsayılan sentinel pick olarak kullan; sadece Cypher spesifik harita avantajı olduğunda (dar chokepoint'ler) alternatif
+WHY Lockdown retake potansiyeli onu neredeyse her haritada zorunlu yapıyor
 
-- **Rework/buffs**: Cypher received significant quality-of-life improvements. Trapwire placement improvements, Neural Theft (ult) reworked to provide real-time enemy locations instead of a single snapshot.
-- **Impact**: Cypher rose from near-zero professional pick rate to a competitive alternative to Killjoy on specific maps. His info-gathering is now superior to Killjoy's, though his site-hold is weaker.
-- **Current state**: Strong on maps with narrow chokepoints where tripwires are hard to avoid (Ascent A-Main, Bind B-Long). The Neural Theft rework made him viable as a late-round info tool.
+### Cypher
 
-#### Deadlock
+- **Yeniden tasarım**: Trapwire yerleştirme iyileştirmeleri, Neural Theft (ult) tek snapshot yerine gerçek zamanlı düşman konumları sağlayacak şekilde yeniden tasarlandı.
+- **Güncel durum**: Dar chokepoint'lerin tripwire'lardan kaçınmayı zorlaştırdığı haritalarda güçlü (Ascent A-Main, Bind B-Long). Neural Theft yeniden tasarımı onu geç-round bilgi aracı olarak uygun kıldı.
 
-- **Post-release buffs**: Deadlock launched weak and received multiple buffs to GravNet (net trap) and Barrier Mesh (wall).
-- **Impact**: Deadlock occupies a niche as an anti-rush sentinel. Her wall can completely block a chokepoint for several seconds, and her ult (Annihilation) is a guaranteed kill if it connects.
-- **Current state**: Situational pick on maps with tight corridors. Not a replacement for Killjoy or Cypher in most compositions, but can surprise opponents who are not prepared for her utility.
+### Deadlock
 
-#### Iso
+- **Çıkış sonrası buff'lar**: Zayıf çıktı, GravNet ve Barrier Mesh'e çoklu buff aldı.
+- **Güncel durum**: Dar koridorlu haritalarda durumsal pick. Killjoy veya Cypher'ın çoğu kompozisyondaki yerini almaz, ama hazırlıksız rakipleri şaşırtabilir.
 
-- **Adjustments since launch**: Iso's Double Tap (shield) and Kill Contract (ult) received tuning. Double Tap duration extended, making him more viable in multi-kill scenarios.
-- **Impact**: Iso found a niche as a second duelist on certain maps. His shield allows him to take duels with a significant advantage, and his wall provides unique site-entry utility.
-- **Current state**: Picked on maps where double-duelist compositions are strong (Pearl, Lotus). Not a primary duelist replacement but a strong flex pick.
+### Iso
 
-#### Clove
+IF çift-duelist kompozisyonu düşünüyorsan
+MEANING Iso'nun kalkanı düellolarda avantaj sağlar, duvarı benzersiz site-entry utility'si sunar
+COUNTER Iso'yu çift-duelist kompozisyonlarının güçlü olduğu haritalarda seç (Pearl, Lotus)
+WHY birincil duelist yerine geçmez ama güçlü flex pick'tir
 
-- **Release and meta impact**: Clove introduced a self-resurrect mechanic to the controller role. Their smokes persist after death, and they can activate their ult to revive.
-- **Impact**: Clove changed how teams think about controller death. Previously, a dead controller meant no smokes. Clove's post-death smokes and potential resurrect make them more expendable in aggressive plays.
-- **Current state**: Competitive alternative to Omen on maps where aggressive controller play is viable. The self-rez is powerful but situational.
+### Clove
 
-#### Vyse
+- **Meta etkisi**: Controller rolüne özel diriliş mekaniği getirdi. Ölümden sonra smoke'ları devam eder.
+- **Güncel durum**: Agresif controller oyununun uygun olduğu haritalarda Omen'e rekabetçi alternatif. Self-rez güçlü ama durumsal.
 
-- **Newest sentinel addition**: Vyse brought unique mechanics with her steel-based abilities. Her Shear (wall ability) and Arc Rose (trap) provide distinct site-hold patterns.
-- **Impact**: Vyse offers a different sentinel philosophy: area denial through damage and zoning rather than information gathering. Her kit punishes grouped-up pushes.
-- **Current state**: Seeing experimentation in professional play. May settle as a map-specific pick where her zone denial complements the composition better than Killjoy's information-based defense.
+### Vyse
 
-### Initiator Meta
+- **En yeni sentinel**: Çelik tabanlı yeteneklerle benzersiz mekanikler. Shear (duvar) ve Arc Rose (tuzak) farklı site-hold pattern'leri sağlar.
+- **Güncel durum**: Profesyonel oyunda deneme aşamasında. Bölge inkarının kompozisyonu Killjoy'un bilgi tabanlı savunmasından daha iyi tamamladığı harita-spesifik pick olarak oturabilir.
 
-The initiator role has the most competitive agent pool in the game:
+### Initiator Meta'si
 
-- **Sova**: Still strong on large, open maps (Ascent, Breeze). Recon Bolt provides unmatched info. Weaker on tight maps where the dart has limited sightlines.
-- **Fade**: The default initiator on most maps. Prowlers for info, Seize for area denial, Nightfall for retakes. Extremely versatile.
-- **Skye**: Remains strong for flash-heavy compositions. Her dog (Trailblazer) provides info and concuss. Preferred on maps with lots of corners to clear.
-- **Breach**: The aggression initiator. Strongest on tight maps (Fracture, Lotus) where his flashes and stun go through walls. Weak on open maps.
-- **KAY/O**: The counter-utility initiator. His knife (ZERO/POINT) suppresses abilities in an area. Valuable against ability-heavy compositions. Strong on every map but not the best on any.
-- **Gekko**: Flash (Wingman) that can plant/defuse the spike, Mosh Pit for area denial. Unique kit that enables creative strategies. Strong on maps where the Wingman plant is valuable.
+- **Sova**: Büyük, açık haritalarda hala güçlü (Ascent, Breeze). Dar haritalarda zayıf.
+- **Fade**: Çoğu haritada varsayılan initiator. Prowler bilgi, Seize alan inkar, Nightfall retake. Son derece çok yönlü.
+- **Skye**: Flash-yoğun kompozisyonlarda güçlü. Trailblazer bilgi ve sersemletme sağlar.
+- **Breach**: Agresyon initiator'u. Dar haritalarda en güçlü (Fracture, Lotus) -- flash ve stun duvarlardan geçer.
+- **KAY/O**: Counter-utility initiator. Knife (ZERO/POINT) bir alandaki yetenekleri bastırır. Her haritada güçlü ama hiçbirinde en iyi değil.
+- **Gekko**: Spike plant/defuse yapabilen flash (Wingman), alan inkar için Mosh Pit. Yaratıcı stratejiler mümkün kılar.
 
-## Weapon Balance Changes
+---
 
-### Rifle Meta
+## Silah Denge Değişiklikleri
 
-The Vandal vs Phantom debate continues to define the rifle meta:
+### Tüfek Meta'si
 
-- **Vandal**: 156 headshot at all ranges. 1-tap potential makes it the choice for confident aimers. The spray pattern is harder to control.
-- **Phantom**: 140 headshot at close range (0-15m), 124 at 15-30m, 116 at 30-50m. Higher fire rate, easier spray, and the suppressed shots (no tracers) make it better for spraying through smokes.
-- **Current split**: Approximately 55% Phantom / 45% Vandal in professional play. The Phantom's consistency edges out the Vandal's one-tap potential at the highest level where spray transfers and smoke sprays are common.
+IF Vandal mı Phantom mı seçmekte kararsızsan
+MEANING Vandal her mesafede 156 headshot (tek vuruş potansiyeli), Phantom daha yüksek atış hızı, kolay spray ve izleyici yok (smoke spray)
+COUNTER hassas aim'e güveniyorsan Vandal; spray transfer ve smoke spray yapıyorsan Phantom
+WHY pro oyunda yaklaşık %55 Phantom / %45 Vandal -- Phantom'ın tutarlılığı Vandal'ın tek vuruş potansiyelini en üst seviyede geride bırakıyor
 
-### SMG Balance
+### SMG Dengesi
 
-- **Spectre**: The dominant eco/force buy weapon. Run-and-gun accuracy makes it lethal at close range. Frequently picked on force buy rounds.
-- **Stinger**: Cheaper but less accurate. Burst fire mode at range is usable. Picked when the team needs to save a few hundred credits per player.
+- **Spectre**: Baskın eco/force buy silahı. Yakın mesafede run-and-gun accuracy'si öldürücü.
+- **Stinger**: Daha ucuz ama daha az hassas. Oyuncu başına birkaç yüz kredi tasarruf gerektiğinde seçilebilir.
 
-### Shotgun State
+### Operator Ekonomisi
 
-- **Judge**: Auto-shotgun that dominates close range. Used on eco rounds for site rushes. Can be devastating against unsuspecting full-buy teams on force rounds.
-- **Bucky**: The budget shotgun. Right-click slug at medium range can one-shot headshot. Niche pick for tight corners.
+Operator 4,700 kredi ile büyük ekonomik yatırım. Takımlar çoğunlukla round başına maksimum bir Operator alır, Jett veya Chamber oyuncusuna verilir. Her mesafede tek atış gövde kill'i onu oyundaki en güçlü silah yapar, ama kaybetmenin ekonomik riski alımları muhafazakar tutar.
 
-### Operator Economy
+---
 
-The Operator at 4,700 credits is a major economic investment. Teams typically buy one Operator per round maximum, given to the Jett or Chamber player. The weapon's one-shot body kill at all ranges makes it the most impactful gun in the game, but the economic risk of losing it keeps purchases conservative.
+## Harita Havuzu ve Meta Etkisi
 
-## Map Pool Rotation Impact
+### Harita Özellikleri
 
-### Current Map Pool
+- **Saldırgan taraflı haritalar** (Lotus, Pearl, Fracture): Saldırganlara çoklu yol sağlar, savunucu rotasyonlarını zorlaştırır.
+- **Savunucu taraflı haritalar** (Ascent, Split, Bind): Dar choke point'ler savunucuyu kayırır. Saldırganlara güçlü utility gerekir.
+- **Dengeli haritalar** (Haven, Icebox, Sunset): Büyük örneklemde yaklaşık 50/50. Adaptasyonu ödüllendirir.
 
-The active map pool rotates periodically. Maps are added and removed to keep the competitive landscape fresh.
+IF yeni harita havuza girerse
+MEANING meta 2-3 hafta boyunca kararsız olur, takımlar kompozisyon ve strateji dener
+COUNTER yeni haritada güçlü kompozisyonları erken bulan takımlar belirgin avantaj kazanır
+WHY erken adapte olan meta'yı şekillendirir; bekleyen takip eder
 
-### Map Characteristics and Meta Impact
+---
 
-- **Attacker-sided maps** (Lotus, Pearl, Fracture): These maps have multiple pathways for attackers, making defender rotations difficult. Teams on defense need strong utility and coordination.
-- **Defender-sided maps** (Ascent, Split, Bind): Tight chokepoints favor defenders. Attackers need strong utility to break through.
-- **Balanced maps** (Haven, Icebox, Sunset): Roughly 50/50 across large sample sizes. These maps reward adaptability.
-- **When a new map enters the pool**, the meta is unstable for 2-3 weeks as teams experiment with compositions and strategies. Early adopters who find strong compositions on new maps gain a significant advantage.
-
-## Current Strongest Compositions by Map
+## Harita Bazlı En Güçlü Kompozisyonlar
 
 ### Ascent
 - Jett, Sova, KAY/O, Omen, Killjoy
-- Reasoning: Mid control is key. Sova recon covers mid and sites. KAY/O knife suppresses defender utility. Jett OPs aggressively with dash escape.
+- **Sebep**: Mid kontrol anahtar. Sova recon mid ve site'ları kapsar. KAY/O knife savunucu utility'sini bastırır.
 
 ### Bind
 - Raze, Skye, Brimstone, Fade, Cypher
-- Reasoning: No mid means rotations go through teleporters. Raze's satchels enable aggressive site takes. Brimstone's smokes cover specific chokepoints perfectly. Cypher's trips watch teleporter flanks.
+- **Sebep**: Mid yok, rotasyonlar teleporter'lardan geçiyor. Raze satchel'ları agresif site take mümkün kılar. Cypher trip'leri teleporter flank'larını izler.
 
 ### Haven
 - Jett, Breach, Omen, Killjoy, Sova/Fade
-- Reasoning: Three sites mean defenders are spread thin. Breach enables aggressive peeks through walls. Killjoy's Lockdown is devastating for retakes on any of the three sites.
+- **Sebep**: Üç site savunucuları ince yayar. Breach duvarlardan agresif peek'ler mümkün kılar.
 
 ### Lotus
 - Raze, Fade, Omen, Killjoy, Breach/KAY/O
-- Reasoning: Rotating doors and destructible walls create unique dynamics. Raze's explosives open walls and clear tight spaces. Fade's prowlers navigate the complex geometry.
+- **Sebep**: Döner kapılar ve yıkılabilir duvarlar benzersiz dinamikler oluşturur. Raze patlayıcıları duvarları açar.
 
-### Icebox
-- Jett, Sova, Viper, Sage, KAY/O/Chamber
-- Reasoning: Double-controller (Viper + second smoker is optional depending on comp) dominates Icebox. Viper's wall splits the site. Sage's wall creates new angles. Sova darts cover open sites.
+---
 
-## Rising Agent Picks and Why
+## Yükselen ve Düşen Ajan Pick'leri
 
-### Cypher (Rising)
-- The Neural Theft rework made Cypher a legitimate pick. Real-time enemy location data for the entire team is game-changing for mid-round decision making.
-- Trapwire improvements make him less frustrating to play and more consistent in catching pushes.
+### Yükselen
 
-### Gekko (Rising)
-- Wingman's ability to plant and defuse the spike opens unique strategies. A Gekko can send Wingman to plant while the team holds the site from outside.
-- Mosh Pit is one of the best post-plant denial tools, covering a huge area for several seconds.
-- Teams are finding more creative uses for his kit as the agent matures in the meta.
+- **Cypher**: Neural Theft yeniden tasarımı gerçek zamanlı düşman konum verisi sağlıyor. Trapwire iyileştirmeleri tutarlılığı artırdı.
+- **Gekko**: Wingman'ın spike plant/defuse yeteneğine sahip olması benzersiz stratejiler açıyor.
+- **Clove**: Controller'da self-resurrect benzersiz. Ölümden sonra smoke'lar takımı asla controller utility'siz bırakmaz.
+- **Harbor**: Cove (kalkan kubbe) güvenli plant ve defuse mümkün kılar. Duvarı oyundaki en uzun süreli yönlü smoke.
 
-### Clove (Rising)
-- Self-resurrect on a controller is unique. Clove can smoke aggressively, die, revive, and continue providing utility.
-- Post-death smokes ensure the team is never without controller utility after a pick.
+### Düşen
 
-### Harbor (Rising on Specific Maps)
-- Harbor's Cove (shield dome) is unique utility that enables safe plants and defuses.
-- His wall is the longest-lasting directional smoke in the game, enabling creative site splits.
-- Strong as a secondary controller alongside Viper or Omen.
+IF Reyna veya Phoenix oynuyorsan pro oyunda
+MEANING Reyna'nın kit'i tamamen bencil (heal, dismiss, ult) -- sıfır takım utility'si sağlar. Phoenix'in kit'i daha yeni ajanlar tarafından güç kaymasına uğradı.
+COUNTER takım utility'si sağlayan bir alternatife geç -- bireysel snowball potansiyeli pro seviyede yeterli değil
+WHY utility round sonuçlarını belirlediği pro seviyede, Reyna/Phoenix seçmek çok fazla takım değerinden fedakarlık eder
 
-## Declining Agent Picks and Why
+- **Astra**: Yıldızlardaki geri çağırma zamanlayıcısı hızlı tempolu oyunlara karşı onu daha az duyarlı kılar.
+- **Yoru**: Kit'i güçlü ama son derece takım-bağımlı ve mekanik olarak zorlaştırıcı. Pick oranı özel Yoru oyuncusu olan takımlara göre dalgalanır.
 
-### Astra (Declining)
-- The recall timer on stars makes her less responsive to fast-paced plays. In a meta that values speed and aggression, Astra's setup-heavy style is less effective.
-- Omen and Brimstone provide similar value with less coordination overhead.
+---
 
-### Reyna (Declining in Pro Play)
-- Reyna's kit is entirely self-serving (heal, dismiss, ult). She provides zero team utility.
-- At the professional level, where utility determines round outcomes, picking Reyna over another duelist sacrifices too much team value.
-- She remains popular in ranked because her snowball potential (heal after kill) is strong in uncoordinated games.
+## Main'in Nerf Yediğinde Adaptasyon
 
-### Phoenix (Declining)
-- Phoenix's kit has been power-crept by newer agents. His flash is shorter and less versatile than KAY/O's or Skye's. His wall is outclassed by most controller utility.
-- Run It Back (ult) is a weaker version of Clove's resurrect because it returns you to the cast location, which enemies can camp.
+### Adım 1: Şiddeti Değerlendir
 
-### Yoru (Niche)
-- Yoru's kit is powerful but extremely team-dependent and mechanically demanding. His fakeout (clone) and dimensional drift (ult) require precise coordination.
-- In pro play, his pick rate fluctuates based on whether a team has a dedicated Yoru specialist. He is rarely a default pick.
+IF hafif nerf geldiyse (sayı ayarı)
+MEANING ajanın hala uygulanabilir -- oyun stilini yeni sayılara uyarla ama değiştirme
+COUNTER aynı ajana devam et, yeni mekanik değerleri öğren
+WHY hafif nerf ajan değiştirmeyi gerektirmez
 
-## Predicted Meta Shifts
+IF orta nerf geldiyse (yetenek yeniden tasarımı)
+MEANING ajanın farklı çalışıyor -- yetenek zamanlamaları ve kullanımını yeniden öğrenmek gerek
+COUNTER custom oyunlarda zaman geçir, yeni yetenek zamanlamalarını pratik et
+WHY yeniden tasarım eski kas hafızasını geçersiz kılar
 
-### Short-Term Predictions (Next 1-2 Patches)
+IF ağır nerf geldiyse (temel değişiklik)
+MEANING ajanın önceki rolünde artık uygulanabilir olmayabilir
+COUNTER geçiş planla: aktarılabilir becerileri belirle, yeni ajanda 10-15 unrated oyun oyna, harita başına 3-5 temel lineup/setup öğren
+WHY ajan ustalığı zaman alır ama beceriler aktarılır
 
-1. **Sentinel diversity will increase.** Vyse and the Cypher rework give teams three viable sentinels. Expect more map-specific sentinel picks rather than Killjoy every game.
-2. **Double initiator compositions will remain standard.** The information advantage of two initiators (Fade + KAY/O, Sova + Breach) is too valuable to give up.
-3. **Controller will remain a single-pick role** on most maps, with Viper being the exception (she often pairs with another controller as a secondary).
+### Beceri Aktarımı
 
-### Long-Term Predictions (Next 1-2 Episodes)
+| Eski Ajan | Aktarım Hedefleri | Neden |
+|---|---|---|
+| Jett | Raze, Neon, Chamber | Benzer entry/Op odaklı roller |
+| Killjoy | Cypher, Deadlock, Sage | Benzer sentinel/bilgi kit'i |
+| Chamber | Jett (Op odaklı), Killjoy (sentinel) | Op veya sentinel mekanikleri aktarılır |
 
-1. **Agent reworks will continue.** Riot regularly updates underperforming agents. Expect Phoenix, Reyna, and possibly Brimstone to receive significant changes.
-2. **New agents will continue to push composition diversity.** Each new agent release shifts the meta for 2-4 weeks before settling.
-3. **Map pool rotations will reset team preparation.** Teams that adapt quickly to new maps gain a significant competitive advantage.
+---
 
-## Adapting When Your Main Gets Nerfed
+## Ranked İçin Meta Okuma
 
-### Step 1: Assess the Severity
+### Rank Modülasyonu
 
-- **Light nerf (number tuning)**: Your agent is still viable. Adjust your playstyle to the new numbers but do not switch.
-- **Medium nerf (ability rework)**: Your agent functions differently. Spend time in custom games relearning ability timings and usage.
-- **Heavy nerf (fundamental change)**: Your agent may no longer be viable in their previous role. Consider switching.
+#### Immortal+ İçin
 
-### Step 2: Identify Transferable Skills
+IF pro meta'yı takip ediyorsan
+MEANING pro meta ranked'e 2-3 hafta içinde yansır
+COUNTER pro kompozisyonları doğrudan uyarla, ajan pick oranlarını takip et
+WHY bu seviyede koordineli execution mümkün, pro setup'ları çalışır
 
-If you played Jett and she gets nerfed, your skills transfer to:
-- **Raze**: Similar entry fragger role, aggressive playstyle.
-- **Neon**: Speed-based duelist with dash mechanics.
-- **Chamber**: Operator-focused play if your Jett was Op-centric.
+#### Diamond-Ascendant İçin
 
-If you played Killjoy and she gets nerfed:
-- **Cypher**: Similar sentinel kit, information-focused.
-- **Deadlock**: Alternative sentinel with different site-hold mechanics.
-- **Sage**: Simpler sentinel if Killjoy's replacement is too complex.
+IF pro kompozisyonları birebir kopyalamaya çalışıyorsan
+MEANING pro kompozisyonlar koordineli execution gerektirir, solo queue'da karmaşık pro setup'ları çalıştıramayabilirsin
+COUNTER basitleştir: self-sufficient ajanlarla (Reyna, Sage, Killjoy) pro prensiplerini uygula
+WHY konforsuz meta pick yerine iyi oynanan konfor pick her zaman üstündür
 
-### Step 3: Transition Plan
+#### Gold-Platinum İçin
 
-1. Spend 10-15 unrated games on the new agent before taking them to ranked.
-2. Learn 3-5 core lineups/setups per map for the new agent.
-3. Watch professional players who specialize in the new agent.
-4. Accept a temporary rank drop during the transition. Skill transfers, but agent mastery takes time.
-
-## Off-Meta Picks That Work and Why
-
-### Brimstone on Defense-Heavy Maps
-
-- Brimstone is often considered an attack-only controller, but his instant smokes and Stim Beacon make him strong on defense too.
-- His ult (Orbital Strike) is one of the best post-plant denial tools in the game: 7 seconds of zone denial on any point of the map.
-- On maps like Bind where rotations are short and sites are compact, Brimstone's fast smokes outclass Omen's slower, more flexible kit.
-
-### Breach on Open Maps (Normally Considered Bad)
-
-- Breach's conventional weakness is open maps where his through-wall abilities have fewer walls to work with.
-- However, on maps like Ascent, Breach's Aftershock clears predictable corners, and his flashes go through the walls that DO exist in chokepoints.
-- Pro teams occasionally pull out Breach on traditionally bad maps to surprise opponents who are unprepared for his utility patterns.
-
-### Sage as a Pseudo-Controller
-
-- Sage's wall can function as a temporary smoke, blocking sightlines for 30+ seconds (longer than any smoke).
-- On Icebox, Sage is nearly mandatory because her wall creates entirely new angles and positions on B-Site.
-- Her heal and resurrect provide value that no other sentinel offers. In close games, a mid-round resurrection can swing the entire match.
-
-### Neon in Structured Play
-
-- Neon is often dismissed as a "run and gun" agent, but her High Gear (sprint) and Fast Lane (walls) enable the fastest executes in the game.
-- On maps with long rotations (Breeze, Pearl), Neon's speed allows her to arrive at sites before defenders can set up.
-- Her ult (Overdrive) is essentially a free weapon with perfect running accuracy, making her the strongest eco-round duelist in the game.
-- Neon works best in compositions that commit to fast executes rather than slow defaults.
-
-### Chamber on Eco Rounds
-
-- Even post-nerf, Chamber's Headhunter (ability Sheriff with 8 bullets at 100 credits per bullet) makes him the strongest eco-round agent in the game.
-- For 800 credits, Chamber has a weapon that one-taps heads at any range with better accuracy than the regular Sheriff.
-- His Tour De Force (ult Op) saves the team 4,700 credits whenever it is available, making him an economy multiplier.
-- On teams with tight economics, Chamber's kit effectively gives the team an extra 2,000-5,000 credits of value per half.
-
-## Meta Reading for Ranked Play
-
-### How to Read the Current Meta for Your Rank
-
-1. **Watch professional play.** Pro meta trickles down to ranked within 2-3 weeks. If pros start picking a new composition, expect to see it in your games soon.
-2. **Check pick rate websites.** Sites like blitz.gg and tracker.gg show agent pick rates by rank. What works at Radiant may not work at Gold.
-3. **Adapt, do not copy.** Pro compositions require coordinated execution. In solo queue, simpler compositions with self-sufficient agents (Reyna, Sage, Killjoy) often perform better than complex pro setups.
-4. **Meta is a guideline, not a rule.** A comfort pick played well beats a meta pick played poorly. If you have 500 hours on Phoenix and 10 hours on Fade, Phoenix is your better choice regardless of meta.
+IF meta'yı takip etmeye çalışıyorsan
+MEANING bu elo'da mekanik gelişim meta bilgisinden daha fazla fark yaratır
+COUNTER 2-3 ajan havuzu oluştur, bunları derinlemesine öğren, meta yerine temel becerilere odaklan
+WHY 500 saat Phoenix deneyimi 10 saat Fade deneyiminden her zaman üstündür, meta ne derse desin

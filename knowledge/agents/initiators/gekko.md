@@ -1,76 +1,81 @@
-# AGENT: Gekko
+# AJAN: Gekko
 
-## 1. Role Identity
-Gekko is the reclaim-based initiator whose creatures can be picked up and reused after deployment. This reclaim mechanic makes Gekko the most utility-efficient initiator in the game -- where other initiators use an ability once, Gekko can use it twice or more per round. Wingman can plant and defuse spike, Dizzy flashes and provides info, Mosh clears areas with delayed damage, and Thrash concusses enemies in a zone. Gekko thrives in chaotic, fast-paced rounds where his creature recycling generates overwhelming utility pressure.
+## 1. Rol Kimliği
+Gekko, yaratıklarının kullanıldıktan sonra toplanıp yeniden kullanılabildiği geri-alma tabanlı initiator'dür. Bu geri-alma mekaniği, Gekko'yu oyundaki en utility-verimli initiator yapar -- diğer initiator'lar bir yeteneği bir kez kullanırken, Gekko tur başına iki veya daha fazla kez kullanabilir. Wingman spike dikebilir ve defuse edebilir, Dizzy flash ve bilgi sağlar, Mosh gecikmeli hasarla alanları temizler ve Thrash bir bölgede düşmanları concuss eder. Gekko, yaratık geri dönüşümünün baskıcı utility baskısı ürettiği kaotik, hızlı turlarda başarılı olur.
 
-## 2. Core Responsibilities
-- Reclaim creatures after every use to maximize utility per round -- this is Gekko's defining mechanic
-- Use Wingman for spike plant and defuse in situations where it is too dangerous for a player
-- Flash with Dizzy before entries, reclaim the globule, and flash again for a second wave
-- Clear areas with Mosh to deny positions or force enemies to move for the team
-- Deploy Thrash for its large-area concuss to enable site takes and retakes
-- Maintain creature pickup discipline -- dying before reclaiming a creature wastes Gekko's entire advantage
+## 2. Temel Sorumluluklar
+- Tur başına utility'yi maksimize etmek için her kullanımdan sonra yaratıkları geri almak -- bu Gekko'nun tanımlayıcı mekaniği
+- Bir oyuncunun yapması çok tehlikeli olan durumlarda spike dikme ve defuse için Wingman kullanmak
+- Girişlerden önce Dizzy ile flash yapmak, globül'ü geri almak ve ikinci dalga için tekrar flash yapmak
+- Pozisyonları engellemek veya düşmanları takım için hareket etmeye zorlamak için Mosh ile alanları temizlemek
+- Geniş alanlı concuss'u için Thrash kullanarak site almaları ve retake'leri mümkün kılmak
+- Yaratık toplama disiplinini korumak -- bir yaratığı geri almadan ölmek Gekko'nun tüm avantajını boşa harcar
 
-## 3. Common Mistakes
-- Not picking up creature globules after use -- this negates Gekko's entire kit advantage
-- Wingman sent to plant in positions where enemies will kill it before the plant completes
-- Mosh thrown directly at enemies who simply walk out instead of placing it to deny areas
-- Dizzy sent through obvious angles where it is shot down before blinding anyone
-- Thrash steered for too long, leaving Gekko's body vulnerable
-- Playing too far back to reclaim creatures safely, which means not being close enough to contribute to fights
+## 3. Sık Yapılan Hatalar
+- Kullanımdan sonra yaratık globül'lerini toplamamak -- bu Gekko'nun tüm kit avantajını geçersiz kılar
+- Wingman'i, plant tamamlanmadan önce düşmanların öldüreceği pozisyonlara plant için göndermek
+- Mosh'u, alan engellemek yerine kolayca yürüyüp çıkabilecekleri yere doğrudan düşmanlara atmak
+- Dizzy'yi, kimseyi kör etmeden vurularak düşürüleceği belirgin açılardan göndermek
+- Thrash'i çok uzun yönlendirmek, Gekko'nun gövdesini savunmasız bırakmak
+- Yaratıkları güvenle geri almak için çok geride oynama, bu da dövüşlere katkıda bulunacak kadar yakın olmamak anlamına gelir
 
-## 4. Pattern -> Meaning
+## 4. Örüntü -> Anlam
 
-**IF** creature globules expire on the ground unreclaimed multiple times per half
-**MEANING** The player is not prioritizing reclaim, wasting Gekko's core mechanic
-**FIX** After every creature use, make reclaim the immediate next action. Build the habit: use creature, push to globule, pick up, reposition. If the globule is in a dangerous spot, smoke it or have a teammate cover.
+**IF** yaratık globül'leri yarı başına birden fazla kez yerde toplanmadan süreleri doluyor
+**MEANING** Oyuncu geri almayı önceliklendirmiyor, Gekko'nun temel mekaniğini boşa harcıyor
+**COUNTER** Her yaratık kullanımından sonra geri almayı hemen sonraki eylem yapın. Alışkanlık oluşturun: yaratık kullan, globül'e doğru push yap, topla, yeniden konumlan. Globül tehlikeli bir yerdeyse smoke atın veya bir takım arkadaşının korumasını sağlayın.
+**WHY** Geri alma, Gekko'nun tek kullanımlık yeteneklerini çift kullanıma çevirir; her kaçırılmış globül, o turun geri kalanında takım için kaybolmuş utility demektir.
 
-**IF** Wingman is sent to plant but dies before completing the plant
-**MEANING** Wingman is being sent into crossfire without the site being sufficiently cleared
-**FIX** Wingman plant works best when 1-2 enemies remain on site maximum, or when the team has smoked off angles. Wingman is a safe plant tool, not a first-contact tool.
+**IF** Wingman plant için gönderiliyor ama plant'ı tamamlamadan ölüyor
+**MEANING** Wingman, site yeterince temizlenmeden crossfire'a gönderiliyor
+**COUNTER** Wingman plant, site'ta en fazla 1-2 düşman kaldığında veya takım açıları smoke'ladığında en iyi çalışır. Wingman güvenli plant aracıdır, ilk temas aracı değil.
+**WHY** Wingman'in HP'si düşüktür ve crossfire'da hızla ölür; temizlenmiş veya smoke'lanmış bir site, plant'ın tamamlanmasını sağlar ve takımın görüş hattına maruz kalmadan plant yapabilmesini mümkün kılar.
 
-**IF** Mosh consistently deals zero damage
-**MEANING** Enemies have time and space to walk out of the Mosh zone
-**FIX** Mosh should be placed where enemies cannot easily escape -- on spike for post-plant denial, in corners during clears, or timed with other utility that restricts movement (Seize, Gravity Well, etc.).
+**IF** Mosh sürekli sıfır hasar veriyor
+**MEANING** Düşmanların Mosh bölgesinden yürüyüp çıkmak için zamanı ve alanı var
+**COUNTER** Mosh, düşmanların kolayca kaçamayacağı yerlere yerleştirilmeli -- post-plant engellemesi için spike üzerine, temizlikler sırasında köşelere veya hareketi kısıtlayan diğer utility ile zamanlanmış (Seize, Gravity Well, vb.).
+**WHY** Sınırlı kaçış yolu olan alanlarda Mosh, düşmanları ya hasarı yemeye ya da güçlü pozisyonları bırakmaya zorlar; açık alanda ise kolayca kaçınılır ve sıfır etki yaratır.
 
-**IF** Dizzy is destroyed before blinding anyone
-**MEANING** Dizzy is being sent through pre-aimed angles
-**FIX** Send Dizzy over walls, through smokes, or from unexpected heights. The blind is powerful but the creature is fragile -- approach angles matter.
+**IF** Dizzy kimseyi kör etmeden yok ediliyor
+**MEANING** Dizzy önceden nişan alınmış açılardan gönderiliyor
+**COUNTER** Dizzy'yi duvarların üzerinden, smoke'ların içinden veya beklenmedik yüksekliklerden gönderin. Blind güçlü ama yaratık kırılgan -- yaklaşım açıları her şeyi değiştirir.
+**WHY** Beklenmedik açılardan gelen Dizzy, savunuculara tepki zamanı bırakmaz; önceden nişan alınmış açılardan gönderildiğinde ise savunucular onu blind aktive olmadan yok eder.
 
-**IF** the player gets kills but has used each ability only once per round
-**MEANING** They are fragging but not utilizing Gekko's reclaim advantage
-**FIX** Reclaim turns one creature into two uses per round. Over a half, that is dozens of extra utility activations. The frags are good, but the reclaim is what makes Gekko Gekko.
+**IF** oyuncu kill alıyor ama her yeteneği tur başına yalnızca bir kez kullandı
+**MEANING** Frag alıyor ama Gekko'nun geri alma avantajını kullanmıyor
+**COUNTER** Geri alma, bir yaratığı tur başına iki kullanıma çevirir. Bir yarı boyunca bu, düzinelerce ekstra utility aktivasyonu demektir. Frag'lar iyi ama geri alma, Gekko'yu Gekko yapan şeydir.
+**WHY** Geri alma olmadan Gekko, diğer initiator'larla aynı utility hacmine düşer; çift kullanım farkı, onu eşsiz kılan verimlilik avantajıdır.
 
-## 5. Map Interactions
-- **Bind**: Wingman through teleporters for spike plant is unique to Gekko. Tight corridors make Dizzy hard to dodge. Mosh in hookah denies the position entirely.
-- **Sunset**: Strong pick. Mid fights suit Gekko's aggressive creature cycling. Wingman plant on B site is reliable.
-- **Haven**: Three sites give multiple Mosh denial spots. Thrash on C site long is devastating due to the narrow corridor.
-- **Lotus**: Rotating doors create Dizzy approach angles enemies cannot predict. Wingman through doors for plant.
-- **Split**: Tight spaces make Mosh inescapable. Dizzy through A ramp blind is strong. Reclaim is easier in confined areas.
+## 5. Harita Etkileşimleri
+- **Bind**: Wingman'in teleporter'lardan spike plant için gönderilmesi Gekko'ya özgü. Dar koridorlar Dizzy'den kaçınmayı zorlaştırır. Hookah'ta Mosh pozisyonu tamamen engeller.
+- **Sunset**: Güçlü seçim. Mid dövüşleri Gekko'nun agresif yaratık döngüsüne uyar. B site'ta Wingman plant güvenilirdir.
+- **Haven**: Üç site birden fazla Mosh engelleme noktası verir. C site long'da Thrash, dar koridor nedeniyle yıkıcıdır.
+- **Lotus**: Dönen kapılar düşmanların tahmin edemeyeceği Dizzy yaklaşım açıları yaratır. Kapılardan plant için Wingman.
+- **Split**: Dar alanlar Mosh'tan kaçınmayı imkansız kılar. A ramp'tan Dizzy blind güçlü. Sınırlı alanlarda geri alma daha kolay.
 
-## 6. Matchup Notes
-- Against Killjoy: Mosh can destroy Killjoy utility if placed on turret or alarmbot positions. Wingman can bait Killjoy traps.
-- Against Cypher: Dizzy triggers tripwires without player risk. Wingman can scout and clear utility paths.
-- Paired with a controller: Dizzy through controller smokes blinds without enemies seeing the creature approach. High synergy.
-- Against Chamber: Wingman plant denies Chamber the op-peek on the planter. Safe spike plant is Gekko's unique advantage.
+## 6. Eşleşme Notları
+- Killjoy'a karşı: Mosh, turret veya alarmbot pozisyonlarına yerleştirildiğinde Killjoy utility'sini yok edebilir. Wingman, Killjoy tuzaklarını çekmek için yem olabilir.
+- Cypher'a karşı: Dizzy, oyuncu riski olmadan tripwire'ları tetikler. Wingman keşif yapabilir ve utility yollarını temizleyebilir.
+- Controller ile eşleşme: Controller smoke'larının içinden Dizzy, düşmanların yaratık yaklaşımını görmeden kör eder. Yüksek sinerji.
+- Chamber'a karşı: Wingman plant, Chamber'ın diken üzerine op-peek'ini engeller. Güvenli spike plant, Gekko'nun benzersiz avantajıdır.
 
-## 7. What To Tell The Player
+## 7. Oyuncuya Ne Söylenmeli
 
-### When performing well
-**Player Action:** You reclaim every creature globule after deployment, use Dizzy from behind smokes or over walls for hidden approach angles, and send Wingman to plant while your team holds crossfires.
-**Enemy Perception:** Defenders expect one Dizzy blind per round (like other initiator flashes). When the second Dizzy arrives mid-round from a reclaimed globule, they believe it is a different player's ability and are caught unprepared. They underestimate Gekko's sustained utility output.
-**Enemy Reaction:** They are forced to deal with double the blind frequency — two Dizzy uses per round means two windows where they cannot see. Wingman planting forces them to either shoot the creature (revealing their position and wasting ammo on a non-player target) or let the plant go through uncontested.
-**Exploit Window:** The second Dizzy (from the reclaimed globule) arrives when defenders think all initiator flashes have been used. This unexpected blind creates a 1-2 second window where defenders have no flash counter prepared. Wingman plant removes the 4-second plant vulnerability window entirely — your team holds crossfires instead of one player being defenseless.
-**Repeat Strategy:** Fight 1: Dizzy from smoke or wall, push to globule, reclaim. Fight 2: second Dizzy from a different angle. Site taken: Wingman plants while team covers. Post-plant: Mosh on spike to deny first defuse. Prioritize reclaim positioning after every fight — the globule pickup is worth taking a slightly worse post-fight position.
-**Enemy Adaptation:** After 3-5 rounds, defenders will pre-aim Dizzy approach angles, destroy Wingman before it reaches the spike, or push to deny globule reclaim by controlling the area where it drops.
-**Counter-Adaptation:** When they pre-aim Dizzy: send it from the opposite side or through a different smoke — the hidden approach is what makes it undodgeable. When they destroy Wingman: use Wingman as bait and peek while they shoot it (they are aiming at the ground, not at you). When they deny reclaim: send a teammate to secure the globule area first, or accept the single-use and save your positioning for a better gunfight instead.
+### İyi performans gösterirken
+**Oyuncu Eylemi:** Her yaratık kullanımından sonra globül'ü geri alıyorsun, Dizzy'yi gizli yaklaşım açıları için smoke'ların arkasından veya duvarların üzerinden gönderiyorsun ve takım crossfire tutarken Wingman'i plant için gönderiyorsun.
+**Düşman Algısı:** Savunucular tur başına bir Dizzy blind'ı bekler (diğer initiator flash'ları gibi). Geri alınmış globül'den gelen ikinci Dizzy tur ortasında ulaştığında, bunu farklı bir oyuncunun yeteneği sanırlar ve hazırlıksız yakalanırlar. Gekko'nun sürdürülebilir utility çıktısını hafife alırlar.
+**Düşman Tepkisi:** İki kat blind sıklığıyla başa çıkmak zorunda kalırlar -- tur başına iki Dizzy kullanımı, göremeyecekleri iki pencere demektir. Wingman'in plant yapması, onları ya yaratığı vurmaya (pozisyonlarını ifşa eder ve oyuncu olmayan hedefe mermi harcar) ya da plant'ın engelsiz geçmesine izin vermeye zorlar.
+**Faydalanma Penceresi:** İkinci Dizzy (geri alınan globül'den), savunucular tüm initiator flash'larının kullanıldığını düşündüğünde gelir. Bu beklenmedik blind, savunucuların hazır flash karşılığı olmadığı bir pencere yaratır. Wingman plant, plant savunmasızlık penceresini tamamen kaldırır -- takımınız bir oyuncunun savunmasız kalması yerine crossfire tutar.
+**Tekrar Stratejisi:** Dönüş 1: Smoke veya duvardan Dizzy, globül'e doğru push, geri al. Dönüş 2: farklı açıdan ikinci Dizzy. Site alınca: takım korurken Wingman plant yapar. Post-plant: ilk defuse'u engellemek için spike'a Mosh. Her dövüş sonrasında geri alma konumlanmasına öncelik verin -- globül toplama, dövüş sonrası biraz daha kötü bir pozisyon almaya değer.
+**Düşman Adaptasyonu:** 3-5 tur sonra savunucular Dizzy yaklaşım açılarını önceden nişan alır, Wingman'i spike'a ulaşmadan yok eder veya globül'ün düştüğü bölgeyi kontrol ederek geri almayı engellemek için push yapar.
+**Karşı-Adaptasyon:** Dizzy'yi önceden nişan alırlarsa: karşı taraftan veya farklı bir smoke'tan gönderin -- onu kaçınılmaz yapan gizli yaklaşımdır. Wingman'i yok ederlerse: onlar vururken Wingman'i yem olarak kullanın ve peek yapın (yere nişan alıyorlar, size değil). Geri almayı engelerlerse: önce globül bölgesini güvenliğe almak için bir takım arkadaşı gönderin veya tek kullanımı kabul edin ve daha iyi bir silah dövüşü için konumlanmanızı koruyun.
 
-**When struggling**: "You are leaving globules on the ground. Every expired globule is a wasted ability next round. Make reclaim your first instinct after every creature use -- even if it means taking a slightly worse position."
+**Zorlanırken**: "Globül'leri yerde bırakıyorsun. Her süresi dolan globül, sonraki turda boşa giden bir yetenek. Her yaratık kullanımından sonra geri almayı ilk içgüdü yap -- biraz daha kötü bir pozisyon almak anlamına gelse bile."
 
-**When being predictable**: "Same Dizzy angle every round. Enemies pre-aim it and kill it instantly. Send Dizzy from different heights, through smokes, or over walls. The blind is only useful if the creature survives to activate."
+**Tahmin edilebilir olunca**: "Her tur aynı Dizzy açısı. Düşmanlar önceden nişan alıp anında öldürüyor. Dizzy'yi farklı yüksekliklerden, smoke'ların içinden veya duvarların üzerinden gönderin. Blind yalnızca yaratık aktive olacak kadar hayatta kalırsa faydalıdır."
 
-## 8. Rank Modulation
-- **Low (Iron-Silver)**: Focus on using Dizzy before pushes and picking up the globule after. Learn Wingman plant on one site per map. Keep it simple.
-- **Mid (Gold-Platinum)**: Consistent reclaim on all creatures. Mosh for post-plant denial. Wingman defuse in clutch rounds. Double-Dizzy rounds.
-- **High (Diamond-Ascendant)**: Reclaim pathing integrated into gunfight positioning. Mosh timed with teammate utility for inescapable zones. Thrash on coordinated executes.
-- **Elite (Immortal-Radiant)**: Creature recycling maximized every round. Wingman plant/defuse used as a standard tool, not a desperation play. Mosh denial patterns varied to avoid predictability.
+## 8. Rank Modülasyonu
+- **Düşük (Iron-Silver)**: Push'lardan önce Dizzy kullanmaya ve sonrasında globül'ü toplamaya odaklanın. Harita başına bir site'ta Wingman plant öğrenin. Basit tutun.
+- **Orta (Gold-Platinum)**: Tüm yaratıklardan tutarlı geri alma. Post-plant engellemesi için Mosh. Clutch turlarda Wingman defuse. Çift-Dizzy turları.
+- **Yüksek (Diamond-Ascendant)**: Silah dövüşü konumlandırmasına entegre edilmiş geri alma patikaları. Kaçınılmaz bölgeler için takım arkadaşı utility'siyle zamanlanmış Mosh. Koordineli execute'larda Thrash.
+- **Elit (Immortal-Radiant)**: Her turda maksimize edilmiş yaratık geri dönüşümü. Standart araç olarak kullanılan Wingman plant/defuse, çaresizlik oyunu değil. Tahmin edilebilirlikten kaçınmak için çeşitlendirilmiş Mosh engelleme kalıpları.

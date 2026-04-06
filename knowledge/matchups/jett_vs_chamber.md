@@ -1,34 +1,46 @@
 # MATCHUP: Jett vs Chamber
 
-## Interaction Identity
-The mirror of aggressive sentinel play. Both Jett and Chamber take aggressive peeks and escape with mobility — Jett with dash, Chamber with teleport. When they face each other, it becomes a duel between two players who both expect to get the first shot and escape. The difference: Jett's escape is instant and directional; Chamber's is fixed to a pre-placed anchor. This matchup is decided by who controls the terms of the duel — angle, timing, and whether the escape route is viable after the shot.
+## Etkileşim Kimliği
+Agresif sentinel oyununun ayna matchup'i. Hem Jett hem Chamber agresif peek alıp hareketle kaçar — Jett dash ile, Chamber teleport ile. Karşılaşmalarında, her ikisi de ilk atışı atıp kaçmayı bekleyen iki oyuncu arasında bir duel olur. Fark: Jett'in kaçışı anlık ve yönlüdür; Chamber'ınki önceden yerleştirilmiş bir anchor'a sabitlenmiştir. Bu matchup duel'un şartlarını kimin kontrol ettiğine bağlıdır — açı, zamanlama ve atışından sonra kaçış yolunun geçerliliği.
 
-## Common Punish Patterns
-**Jett punishing Chamber**: Dash into close range where Chamber's OP/Headhunter advantage disappears. Jett's directional dash lets her reposition to an angle Chamber's fixed TP does not cover — she peeks from an unexpected spot after the first exchange. Updraft onto an elevation where Chamber's anchor does not provide escape. Jett can chase a teleporting Chamber because she knows the anchor location.
+## Yaygın Cezalandırma Kalıpları
 
-**Chamber punishing Jett**: Headhunter one-taps Jett during her dash animation (she moves predictably during dash). Tour de Force at long range gives Chamber the first-shot advantage. Chamber holds the angle with TP ready — if Jett dashes through, Chamber shoots and TPs to safety. The fixed anchor means Chamber can take the same duel repeatedly from a safe reset position.
+**IF**: Jett dash ile yakın mesafeye atlayarak Chamber'ın OP/Headhunter avantajını ortadan kaldırıyorsa
+**MEANING**: Jett'in yönlü dash'i, Chamber'ın sabit TP'sinin kapsamadığı bir açıya repoziyon almasına izin verir — ilk değişimden sonra beklenmedik bir noktadan peek eder. Updraft ile Chamber'ın anchor'ının kaçış sağlamadığı bir yüksekliğe çıkabilir. Jett anchor konumunu bildiği için TP eden Chamber'ı kovalayabilir.
+**COUNTER**: Headhunter Jett'i dash animasyonu sırasında tek atışta öldürür (dash sırasında tahmin edilebilir hareket eder). Tour de Force uzun mesafede Chamber'a ilk atış avantajı verir. Chamber TP hazır halde açıyı tutar — Jett dash'la geçerse Chamber atar ve TP ile güvenliğe çekilir. Sabit anchor Chamber'ın aynı duel'u güvenli reset pozisyonundan tekrar tekrar almasına izin verir.
+**WHY**: Mesafe bu matchup'i belirler — Jett yakında kazanır, Chamber uzakta kazanır.
 
-## What Repeated Failure Means
-If **Jett** keeps dying to Chamber, she is taking long-range duels where his OP/Headhunter advantage matters. She needs to close the distance with utility support or avoid the sightline entirely. Jett wins this matchup in close quarters, not at range.
+**IF**: Chamber TP anchor'ı tahmin edilebilir hale gelmiş ve Jett onu anchor noktasına kovalıyorsa
+**MEANING**: Aynı peek-ve-TP dizisini her raund alıyor. Jett nereye gideceğini okuyor ve TP bir kaçış değil, tahmin edilebilir bir hedef oluyor.
+**COUNTER**: Anchor pozisyonunu her raund değiştir. Aynı peek-ve-TP dizisini tekrarlama. TP hedefi biliniyorsa TP kaçış değil — tahmin edilebilir bir gidiş noktasıdır.
+**WHY**: Sabit anchor tekrar edildikçe okunabilir hale gelir — çeşitlendirme zorunludur.
 
-If **Chamber** keeps losing to Jett, his TP anchor is too predictable and Jett is chasing him to the anchor spot. He needs to vary his anchor position and stop taking the same peek-and-TP sequence every round.
+**IF**: Jett updraft ile yüksek bir açı tutuyor ve Chamber'ın Rendezvous anchor'ı bu yüksekliği kapsamıyorsa
+**MEANING**: Jett yerden yüksek bir pozisyondan peek alıyor ve Chamber'ın TP'si aşağıda kaldığı için kaçış hattı bu açıyı korumak yerine Jett'e açık bırakıyor. Chamber'ın standart TP yerleşimi yere dayalıdır — yüksek açılar TP mesafesi ve los gereksinimleri nedeniyle zayıf kapsam alır.
+**COUNTER**: Rendezvous anchor'ını yüksek yerlere (sandıklar, platformlar) yerleştir ki Jett'in tercih ettiği yüksekliği TP ile kapsayabilesin. Yüksek Jett pozisyonunu Tour de Force ile long range'den baskıla — yukarıdaki Jett önce seni göremez. Jett updraft kullanmadan peek almaya zorla: sightline'ı smoke ile kapa, zorunlu yerden duel'a çek.
+**WHY**: TP anchor'ı peek pozisyonuna uygun yerleştirilmezse Chamber'ın kaçışı onu Jett'in baskı altında tuttuğu alana bırakır.
 
-## What AIMLO Should Say
-### When player is on the punished side
-**Jett losing to Chamber**: "Stop taking long-range duels against his OP. You win this fight up close — smoke his sightline, flash, and close the gap. At range, his weapon advantage is unbeatable."
+## Tekrarlayan Başarısızlık Ne Anlama Gelir
+**Jett** Chamber'a sürekli ölüyorsa, OP/Headhunter avantajının geçerli olduğu uzun mesafe duel'leri alıyor. Yetenek desteği ile mesafeyi kapatmalı veya sightline'ı tamamen kaçınmalı. Jett bu matchup'i yakın mesafede kazanır, mesafede değil.
 
-**Chamber losing to Jett**: "She is reading your TP and chasing you to your anchor. Move your anchor every round. If she knows where you are going, the TP is not an escape — it is a predictable destination."
+**Chamber** Jett'e sürekli kaybediyorsa, TP anchor'ı çok tahmin edilebilir ve Jett onu anchor noktasına kovalıyordur. Anchor pozisyonunu değiştirmeli ve her raund aynı peek-ve-TP dizisini almaktan vazgeçmeli.
 
-### When player is on the punishing side
-**Jett dominating Chamber**: "You are forcing close-range fights where his OP is a liability. Keep closing the distance and denying him the long sightline he needs."
+## AIMLO Ne Demeli
+### Oyuncu cezalandırılan taraftayken
+**Jett Chamber'a kaybediyorken**: "OP'sine karşı uzun mesafe duel almaktan vazgeç. Bu kavgayı yakında kazanırsın — sightline'ını smoke'la, flash at ve mesafeyi kapat. Mesafede silah avantajı yenemez."
 
-**Chamber winning the duel**: "Your angle control is superior at range. Keep forcing these long-range exchanges and do not let her close the gap."
+**Chamber Jett'e kaybediyorken**: "TP'ni okuyor ve anchor'ına kovalıyor. Anchor'ını her raund değiştir. Nereye gideceğin biliniyorsa TP bir kaçış değil — tahmin edilebilir bir hedef."
 
-## Rank Modulation
-**LOW**: Neither player uses their escape well. Fights are just standard aim duels. The mobility matchup barely exists.
+### Oyuncu cezalandıran taraftayken
+**Jett Chamber'ı domine ediyorken**: "OP'sunun dezavantaj olduğu yakın mesafe dövüşleri zorluyorsun. Mesafeyi kapatmaya devam et ve ihtiyaç duyduğu uzun sightline'ı verme."
 
-**MID**: Both start using escape abilities but predictably. Coach variation in escape angles and anchor placement.
+**Chamber duel'u kazanıyorken**: "Mesafedeki açı kontrolün üstün. Bu uzun mesafe değişimlerini zorlamaya devam et ve mesafeyi kapatmasına izin verme."
 
-**HIGH**: The duel is about positioning and pre-aim. Coach Jett to force CQC and Chamber to maintain range.
+## Rank Modülasyonu
+**LOW**: Hiçbir oyuncu kaçışını iyi kullanmaz. Kavgalar standart aim duel'leridir. Hareket matchup'i neredeyse yok.
 
-**ELITE**: Both players read each other's positioning perfectly. The matchup is decided by which player forces the engagement on their terms — close or far. Coach the spacing game.
+**MID**: Her ikisi de kaçış yeteneklerini kullanmaya başlar ama tahmin edilebilir. Kaçış açıları ve anchor yerleştirmesinde çeşitlendirme öğret.
+
+**HIGH**: Duel pozisyonlama ve önceden hedefleme ile ilgilidir. Jett'e yakın mesafeyi zorlama, Chamber'a mesafe koruma öğret.
+
+**ELITE**: Her iki oyuncu birbirinin pozisyonlamasını mükemmel okur. Matchup hangi oyuncunun çatışmayı kendi şartlarında zorlayacağına bağlıdır — yakın ya da uzak. Mesafe oyununu öğret.

@@ -1,80 +1,85 @@
-# AGENT: Chamber
+# AJAN: Chamber
 
-## 1. Role Identity
-Chamber is the sentinel who plays like a duelist. His kit rewards mechanical precision above all else — Headhunter is a Sheriff on steroids, Tour de Force is a free Operator, and his teleport anchor lets him take aggressive peeks that no other sentinel can survive. Chamber does not hold sites through utility stacking or information webs. He holds them by being too dangerous to peek. His weakness is that when his aim is off, he contributes almost nothing to the team's defensive structure compared to a Killjoy or Cypher.
+## 1. Rol Kimliği
+Chamber, duelist gibi oynayan sentinel'dir. Kit'i mekanik beceriyi her şeyin üstünde ödüllendirir — Headhunter steroidli bir Sheriff'tir, Tour de Force bedava bir Operator'dür ve teleport anchor'u başka hiçbir sentinel'in hayatta kalamayacağı agresif peek'ler almasını sağlar. Chamber, site'ları utility yığma veya bilgi ağlarıyla tutmaz. Onları peek'lenmesi çok tehlikeli olarak tutuyordur. Zayıf noktası, nişanı bozuk olduğunda takımın savunma yapısına Killjoy veya Cypher'a kıyasla neredeyse hiçbir katkı sağlamamasıdır.
 
-## 2. Core Responsibilities
-- **Aggressive angle holding**: Chamber's teleport anchor allows him to hold angles that would be suicidal for other agents. He peeks, takes a shot, and teleports to safety. This is his core loop.
-- **Headhunter economy management**: The pistol costs credits per bullet. Reckless spam turns an economic advantage into a drain. Headhunter should be used in pistol rounds and eco rounds as a primary weapon, and in buy rounds as a sidearm for specific situations.
-- **Tour de Force as economy tool**: His ultimate Operator saves 4700 credits. Rounds where Chamber has Tour de Force should influence the team's buy strategy — he does not need a rifle.
-- **Trademark as flank alert**: With only one trap, Chamber's information utility is minimal. Trademark must cover the single most dangerous flank path, period.
-- **Teleport placement discipline**: The anchor point must be pre-placed before the round begins. Reactive teleport placement mid-round is too slow and too loud.
+## 2. Temel Sorumluluklar
+- **Agresif açı tutma**: Chamber'ın teleport anchor'u, diğer ajanlar için intihar olacak açıları tutmasını sağlar. Peek yapar, ateş eder ve güvenliğe teleport olur. Bu onun temel döngüsüdür.
+- **Headhunter ekonomi yönetimi**: Tabanca mermi başına kredi harcar. Kontrolsüz spam, ekonomik avantajı dezavantaja çevirir. Headhunter pistol round ve eco round'larda birincil silah olarak, buy round'larda ise belirli durumlar için yedek silah olarak kullanılmalıdır.
+- **Tour de Force ekonomi aracı olarak**: Ultimate Operator'ü 4700 kredi tasarruf sağlar. Chamber'ın Tour de Force'u olduğu round'lar takımın satın alma stratejisini etkilemelidir — tüfek almasına gerek yoktur.
+- **Trademark flank uyarısı olarak**: Tek bir tuzakla Chamber'ın bilgi utility'si asgaridir. Trademark en tehlikeli flank yolunu kapsamalıdır, nokta.
+- **Teleport yerleştirme disiplini**: Anchor noktası round başlamadan önce yerleştirilmelidir. Round ortasında reaktif teleport yerleştirme çok yavaş ve çok gürültülüdür.
 
-## 3. Common Mistakes
-- Using Headhunter bullets like a Vandal — spraying multiple shots instead of disciplined one-taps. Each miss is wasted credits.
-- Placing teleport anchors too far from the aggressive angle, resulting in a delayed escape that gets Chamber killed mid-teleport.
-- Forgetting to place Trademark entirely, leaving the team with zero flank coverage from their sentinel.
-- Taking Tour de Force into close-range fights instead of playing it at long angles where the Operator excels.
-- Playing passively with Chamber. His entire kit rewards aggression — a passive Chamber is a worse version of every other sentinel.
-- Ego-peeking without teleport anchor placed, dying, and leaving the site completely undefended.
+## 3. Sık Yapılan Hatalar
+- Headhunter mermilerini Vandal gibi kullanmak — disiplinli one-tap yerine birden fazla atış spam'lemek. Her ıskalama boşa harcanan kredidir.
+- Teleport anchor'ları agresif açıdan çok uzağa yerleştirmek, gecikmiş kaçış nedeniyle Chamber'ın teleport sırasında ölmesine yol açmak.
+- Trademark yerleştirmeyi tamamen unutmak, takımı sentinel'lerinden sıfır flank koruması ile bırakmak.
+- Tour de Force'u Operator'ün parlak olduğu uzun açılar yerine yakın mesafe dövüşlere sokmak.
+- Chamber ile pasif oynamak. Tüm kit'i agresyonu ödüllendirir — pasif Chamber, diğer tüm sentinel'lerin daha kötü versiyonudur.
+- Teleport anchor yerleştirmeden ego-peek yapmak, ölmek ve site'ı tamamen savunmasız bırakmak.
 
-## 4. Pattern to Meaning
+## 4. Kalıptan Anlama
 
-**IF** Chamber is frequently dying on aggressive peeks despite having teleport placed
-**MEANING** Anchor is either too far away (slow TP) or he is re-peeking after the first shot instead of teleporting immediately.
-**FIX** One peek, one shot, teleport. No exceptions. If the first shot misses, the play is over — teleport and reposition.
+**IF** Chamber, teleport yerleştirilmiş olmasına rağmen agresif peek'lerde sık sık ölüyorsa
+**MEANING** Anchor ya çok uzakta (yavaş TP) ya da ilk atıştan sonra teleport yerine tekrar peek yapıyor.
+**COUNTER** Bir peek, bir atış, teleport. İstisna yok. İlk atış ıskaladıysa hamle bitmiştir — teleport yap ve yeniden konumlan.
+**WHY** Tekrar peek, teleport avantajını sıfırlar ve Chamber'ı trade'e açık bırakır; tek atış disiplini onu öldürülemez kılan şeydir.
 
-**IF** Chamber has low Headhunter accuracy (below 40%)
-**MEANING** Player is using the pistol as a spam weapon instead of a precision tool. Headhunter rewards crosshair discipline.
-**FIX** Only pull Headhunter for deliberate single-shot opportunities. If the player cannot hit headshots consistently, they should use a normal sidearm.
+**IF** Chamber'ın Headhunter isabeti düşükse (%40 altı)
+**MEANING** Oyuncu tabancayı hassas araç yerine spam silah olarak kullanıyor. Headhunter crosshair disiplinini ödüllendirir.
+**COUNTER** Headhunter'ı yalnızca planlı tek atış fırsatları için çek. Oyuncu sürekli headshot vuramıyorsa normal yedek silah kullanmalıdır.
+**WHY** Her ıskalanan Headhunter mermisi doğrudan kredi kaybıdır; spam modunda ekonomik avantaj kaybolur.
 
-**IF** Tour de Force is available but Chamber buys a rifle anyway
-**MEANING** Player is not using the economic advantage of the ultimate. Tour de Force IS his weapon for the round.
-**FIX** When Tour de Force is up, buy utility and save the rifle money. Communicate to the team that they can redistribute economy.
+**IF** Tour de Force hazır ama Chamber yine de tüfek alıyorsa
+**MEANING** Oyuncu ultimate'in ekonomik avantajını kullanmıyor. Tour de Force o round'un silahıdır.
+**COUNTER** Tour de Force hazır olduğunda utility al ve tüfek parasını biriktir. Takıma ekonomiyi yeniden dağıtabileceklerini ilet.
+**WHY** Bedava Operator varken tüfek almak 4700 kredilik avantajı çöpe atar ve takım ekonomisini zayıflatır.
 
-**IF** Trademark is destroyed or never triggers across multiple rounds
-**MEANING** Either trap placement is too obvious (destroyed) or covering a path enemies never use (never triggers).
-**FIX** Rotate Trademark position based on enemy attack patterns. It only needs to cover one path — make sure it is the right one.
+**IF** Trademark birden fazla round boyunca yok ediliyor veya hiç tetiklemiyorsa
+**MEANING** Ya tuzak yerleşimi çok bariz (yok ediliyor) ya da düşmanların hiç kullanmadığı bir yolu koruyor (hiç tetiklemiyor).
+**COUNTER** Trademark pozisyonunu düşman saldırı kalıplarına göre değiştir. Tek bir yolu kapsaması yeterli — doğru yol olduğundan emin ol.
+**WHY** Tetiklenmeyen veya anında yok edilen tuzak sıfır bilgi üretir; adaptif yerleşim Trademark'ın tek tuzak sınırlamasını telafi eder.
 
-**IF** Chamber has high kills but team still loses on defense
-**MEANING** He is getting kills but not creating space or stalling for the team. Frags without strategic value are empty.
-**FIX** Focus on kills that delay the execute or force enemy utility. A kill at the 1:30 mark is worth more than a kill at 0:15.
+**IF** Chamber yüksek kill alıyor ama takım savunmada hala kaybediyorsa
+**MEANING** Kill alıyor ama takım için alan yaratmıyor veya oyalama sağlamıyor. Stratejik değeri olmayan frag'ler boştur.
+**COUNTER** Execute'u geciktiren veya düşman utility'sini zorlayan kill'lere odaklan. 1:30'daki bir kill, 0:15'teki bir kill'den çok daha değerlidir.
+**WHY** Sentinel kill'leri zaman kazandırdığında takım rotate edebilir; round sonu kill'leri savunma yapısına katkı sağlamaz.
 
-## 5. Map Interactions
-- **Breeze**: Best Chamber map. Long sightlines at A hall and B main are perfect for Tour de Force and Headhunter. Teleport anchor behind tube or pillar enables safe re-peeks.
-- **Icebox**: Strong on A site holding long angles from rafters with TP anchor to safety behind site.
-- **Haven**: Viable at A long or C long where his Operator angles shine. Mid is less effective due to multiple close-range paths.
-- **Ascent**: Mid control with Tour de Force is oppressive. TP from mid catwalk to market or tiles is a proven setup.
-- **Lotus**: Difficult map for Chamber. Short sightlines and multiple entry paths reduce his angle-holding value.
+## 5. Harita Etkileşimleri
+- **Breeze**: En iyi Chamber haritası. A hall ve B main'deki uzun sightline'lar Tour de Force ve Headhunter için mükemmel. Tube veya pillar arkasına teleport anchor güvenli re-peek sağlar.
+- **Icebox**: A site'ta rafters'tan uzun açıları tutarken TP anchor ile site arkasına güvenli geri çekilme sağlar.
+- **Haven**: A long veya C long'da Operator açılarının parlak olduğu yerlerde uygulanabilir. Mid, birden fazla yakın mesafe yol nedeniyle daha az verimlidir.
+- **Ascent**: Mid kontrolü Tour de Force ile ezicidir. Mid catwalk'tan market veya tiles'a TP kanıtlanmış bir kurulum.
+- **Lotus**: Chamber için zor harita. Kısa sightline'lar ve çoklu giriş yolları açı tutma değerini düşürür.
 
-## 6. Matchup Notes
-- **Jett** can dash through his sightlines, making Tour de Force duels a 50/50 rather than an advantage.
-- Weak against **flash-heavy compositions** that deny his angle hold and force close-range fights.
-- Strong against **slow default compositions** that walk into his crosshair repeatedly.
-- **Raze Boom Bot** forces him to teleport early, wasting his aggressive positioning.
-- Trademark is less effective than Cypher/Killjoy traps, making Chamber teams weaker on flank denial.
+## 6. Eşleşme Notları
+- **Jett** sightline'larından dash yapabilir, Tour de Force düellolarını avantaj yerine 50/50'ye çevirir.
+- **Flash-ağırlıklı kompozisyonlara** karşı zayıf — açı tutmayı engeller ve yakın mesafe dövüş zorlar.
+- **Yavaş default kompozisyonlara** karşı güçlü — crosshair'ine defalarca yürürler.
+- **Raze Boom Bot** onu erken teleport olmaya zorlar, agresif konumlandırmasını boşa çıkarır.
+- Trademark, Cypher/Killjoy tuzaklarından daha az verimlidir, bu da Chamber takımlarını flank engelleme konusunda daha zayıf kılar.
 
-## 7. What To Tell The Player
+## 7. Oyuncuya Ne Söylenmeli
 
-### When performing well
-**Player Action:** You execute the one-shot-then-Rendezvous-teleport loop on a different aggressive angle each round — fire one shot with Tour de Force or rifle, teleport to safety before the trade arrives.
-**Enemy Perception:** Attackers see a player who gets a pick and vanishes. They swing the angle to trade and find empty space. Over 3-4 rounds, they build a model that you always peek from specific positions — but because you rotate the peek angle, the model is always one round behind.
-**Enemy Reaction:** They are forced to either avoid your known peek angles (giving up map control on those sightlines for free) or commit 2 players to swing you (one baits, one trades) — but the teleport makes even the 2-player trade fail because there is no body to trade. Some will commit utility (flash, drone) to your angle before peeking, which wastes resources on a position you may have already left.
-**Exploit Window:** The 0.5-second Rendezvous teleport means the enemy's trade attempt arrives at an empty position. Over a half, this accumulates 2-3 free kills with zero deaths — each kill costs the enemy 3000+ credits in economy while your team invests nothing. Tour de Force rounds let you save rifle money for the team.
-**Repeat Strategy:** Round 1: aggressive angle A, one shot, TP. Round 2: aggressive angle B. Round 3: hold passively from the TP position instead (punish enemies who push your old angle looking for you). Rotate Trademark to cover whichever flank the enemy attacked from last round. Never re-peek the same angle after teleporting.
-**Enemy Adaptation:** After 4-5 rounds, attackers will pre-aim your rotating angles, destroy the Rendezvous anchor with utility, or flash/smoke your position before committing.
-**Counter-Adaptation:** When they pre-aim your angles: hold a passive off-angle instead and let them walk past you — the one-shot TP works from behind as well as from the front. When they destroy the anchor: place it further from the peek so destruction requires committing into a dangerous position. When they flash/smoke your angle: play a different site entirely for 1-2 rounds, then return when they stop investing utility into your position.
+### İyi performans gösterirken
+**Oyuncu Eylemi:** Her round farklı bir agresif açıda tek-atış-sonra-Rendezvous-teleport döngüsünü uyguluyorsun — Tour de Force veya tüfekle bir atış yap, trade gelmeden önce güvenliğe teleport ol.
+**Düşman Algısı:** Saldırganlar pick alıp kaybolan bir oyuncu görüyor. Trade için açıyı swing yapıyorlar ve boş alan buluyorlar. 3-4 round sonra belirli pozisyonlardan her zaman peek yaptığın modeli oluşturuyorlar — ama peek açısını döndürdüğün için model her zaman bir round geride kalıyor.
+**Düşman Tepkisi:** Ya bilinen peek açılarından kaçınmak (o sightline'larda bedava harita kontrolü vermek) ya da 2 oyuncu göndermek (biri yem, biri trade) zorunda kalıyorlar — ama teleport 2 kişilik trade'i bile başarısız kılıyor çünkü trade edilecek bir beden yok. Bazıları peek'lemeden önce açına utility (flash, drone) harcayacak, bu da zaten terk etmiş olabileceğin bir pozisyona kaynak israfıdır.
+**Faydalanma Penceresi:** Anlık Rendezvous teleport'u düşmanın trade girişiminin boş pozisyona ulaşması anlamına gelir. Bir yarı boyunca bu, sıfır ölümle 2-3 bedava kill biriktirir — her kill düşmana 3000+ kredi ekonomi maliyeti çıkarırken takımın hiçbir şey yatırmıyor. Tour de Force round'ları takım için tüfek parası biriktirmenizi sağlar.
+**Tekrar Stratejisi:** Round 1: agresif açı A, bir atış, TP. Round 2: agresif açı B. Round 3: TP pozisyonundan pasif tut (eski açını arayan düşmanları cezalandır). Trademark'ı düşmanın son round saldırdığı flank'ı kapatacak şekilde döndür. Teleport ettikten sonra asla aynı açıdan tekrar peek yapma.
+**Düşman Adaptasyonu:** 4-5 round sonra saldırganlar dönen açılarını önceden nişanlayacak, Rendezvous anchor'unu utility ile yok edecek veya taahhüt etmeden önce pozisyonunu flash/smoke yapacak.
+**Karşı Adaptasyon:** Açılarını önceden nişanladıklarında: pasif off-angle tut ve yanından geçmelerine izin ver — tek atış TP arkadan da önden olduğu kadar iyi çalışır. Anchor'u yok ettiklerinde: anchor'u peek'ten daha uzağa yerleştir, böylece yok etme tehlikeli bir pozisyona girmeyi gerektirir. Açını flash/smoke yaptıklarında: 1-2 round tamamen farklı bir site oyna, sonra pozisyonuna utility yatırmayı bıraktıklarında geri dön.
 
-**Struggling**: "You are dying on peeks too often, which means either your teleport placement is too slow or you are re-peeking when you should be teleporting. One shot, one teleport. Every time."
+**Zorlanan**: "Peek'lerde çok sık ölüyorsun, bu ya teleport yerleşiminin çok yavaş olduğu ya da teleport olman gereken yerde tekrar peek yaptığın anlamına geliyor. Bir atış, bir teleport. Her seferinde."
 
-**Predictable**: "The enemy knows your angles and is pre-aiming or flashing your peek spots. Rotate your aggressive positions each round. Use different anchor points and vary your timing — do not peek at the same moment every round."
+**Tahmin edilebilir**: "Düşman açılarını biliyor ve peek noktalarını önceden nişanlıyor veya flash atıyor. Agresif pozisyonlarını her round döndür. Farklı anchor noktaları kullan ve zamalamanı değiştir — her round aynı anda peek yapma."
 
-## 8. Rank Modulation
+## 8. Rütbe Modülasyonu
 
-**Low (Iron-Silver)**: Players treat Chamber like a duelist without the teleport discipline. Headhunter is wasted on spam. Teach the basic loop: place anchor, hold angle, one shot, teleport.
+**Düşük (Iron-Silver)**: Oyuncular Chamber'a teleport disiplini olmadan duelist gibi davranıyor. Headhunter spam'e harcanıyor. Temel döngüyü öğret: anchor yerleştir, açı tut, bir atış, teleport.
 
-**Mid (Gold-Platinum)**: Peek-and-TP is functional but predictable. Headhunter aim is decent but economy management is poor. Focus on angle variety and Tour de Force economy awareness.
+**Orta (Gold-Platinum)**: Peek-ve-TP işlevsel ama tahmin edilebilir. Headhunter nişanı iyi ama ekonomi yönetimi zayıf. Açı çeşitliliği ve Tour de Force ekonomi farkındalığına odaklan.
 
-**High (Diamond-Ascendant)**: Chamber players here have strong mechanics but may over-invest in aggressive plays at the cost of team structure. Focus on balancing aggression with sentinel responsibilities.
+**Yüksek (Diamond-Ascendant)**: Buradaki Chamber oyuncuları güçlü mekaniklere sahip ama agresif oyunlara takım yapısı pahasına aşırı yatırım yapabilir. Agresyonu sentinel sorumluluklarıyla dengelemeye odaklan.
 
-**Elite (Immortal-Radiant)**: Chamber is a precision instrument. Every TP placement, every Headhunter bullet, every Tour de Force round must be optimized. At this level, the difference between a great Chamber and a liability is consistency under pressure.
+**Elit (Immortal-Radiant)**: Chamber hassas bir enstrümandır. Her TP yerleşimi, her Headhunter mermisi, her Tour de Force round'u optimize edilmelidir. Bu seviyede harika bir Chamber ile yük olan bir Chamber arasındaki fark baskı altında tutarlılıktır.

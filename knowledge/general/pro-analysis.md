@@ -1,327 +1,264 @@
-# Pro Scene Analysis - Radiant Coaching Knowledge Base
+# Pro Sah Analizi -- Radiant Koçluk Bilgi Bankası
 
-This document covers VCT meta evolution, top team strategies, key player analysis, and pro-level patterns. Use this to understand what the best players in the world do and why, so you can apply it to your own play.
-
----
-
-## VCT 2024-2025 Meta Evolution
-
-### The Chamber Decline Era (Early 2024)
-- Chamber received significant nerfs in late 2023 (Rendezvous range reduction, Headhunter cost increase, Tour De Force fire rate reduction). This shifted the meta away from "Chamber on every map."
-- Jett reclaimed the primary Op duelist role on most maps. Teams that relied on Chamber's TP-Op playstyle had to rework their entire defensive identity.
-- Killjoy and Cypher saw increased pick rates as the sentinel meta shifted from aggressive Op play (Chamber) to passive setup play (KJ/Cypher).
-
-### The Double Initiator Meta (Mid 2024)
-- Teams realized that double initiator compositions (e.g., Sova + Skye, Fade + KAY/O, Fade + Gekko) provided superior info and entry support compared to single initiator + double duelist.
-- Maps like Lotus, Haven, and Pearl were dominated by double initiator comps where the flash initiator supported the duelist entry while the info initiator scanned from safety.
-- KAY/O's suppression became increasingly valued as teams relied more on abilities. ZERO/POINT countering an entire site's defensive utility became a key execute tool.
-
-### The Controller Renaissance (Late 2024)
-- Viper remained mandatory on Breeze and Icebox. Harbor saw increased play as a co-controller alongside Viper.
-- Clove entered the meta as a hybrid controller-duelist, particularly on maps where aggressive controller play had value (Sunset, Bind).
-- Omen received buffs to smoke duration and recharge time, making him the default solo controller on most maps.
-- Astra saw pocket picks in specific team compositions where Cosmic Divide could decide rounds.
-
-### Agent Composition Convergence (2025)
-- The meta settled around "standard" compositions: 1 duelist, 1 controller, 1-2 initiators, 1-2 sentinels.
-- Flex players became the most valuable role -- players who could switch between Fade, Skye, KAY/O, and Gekko based on map and opponent.
-- The single-duelist meta meant the duelist player had to be an elite mechanical player. Teams with average duelist players fell behind.
-- Sentinel bans in map veto started influencing picks -- teams would ban maps where their sentinel player was weakest.
+VCT meta evrimi, üst düzey takım stratejileri, oyuncu analizi ve pro-seviye pattern'leri. Dünyanın en iyi oyuncularının ne yaptığını ve neden yaptığını anlamak için bu bilgiyi kullan, kendi oyununa uygula.
 
 ---
 
-## Top Team Strategies
+## VCT 2024-2025 Meta Evrimi
+
+### Chamber Düşüşü (2024 Başı)
+
+IF takımın Chamber'ın TP-Op stiline bağımlı kaldıysa
+MEANING nerf'ler sonrası Rendezvous menzili kısaldı, Headhunter maliyeti arttı, Tour De Force atış hızı düştü
+COUNTER savunma kimliğini yeniden kur -- Jett birincil Op duelist rolunu geri aldı, Killjoy/Cypher pasif setup oyununa geç
+WHY Chamber artık "her haritada zorunlu" değil; TP menzil kısıtlaması agresif açı tutma stilini çöküyor
+
+### Çift Initiator Meta'si (2024 Ortası)
+
+IF tek initiator + çift duelist kompozisyonu kullanıyorsan
+MEANING bilgi toplama ve entry destek kapasiten sınırlı kalıyor
+COUNTER çift initiator dene (Sova + Skye, Fade + KAY/O, Fade + Gekko) -- flash initiator duelist entry'sini desteklerken bilgi initiator'u güvenli mesafeden tarama yapar
+WHY çift initiator hem bilgi hem entry desteği sağlayarak tek initiator'dan çok daha fazla round kontrolü veriyor
+
+### Controller Rönesansı (2024 Sonu)
+
+- Viper Breeze ve Icebox'ta zorunlu kaldı. Harbor co-controller olarak yükseldi.
+- Clove hybrid controller-duelist olarak meta'ya girdi -- agresif controller oyununun değerli olduğu haritalarda (Sunset, Bind).
+- Omen smoke süresi ve recharge buff'ları aldı, çoğu haritada varsayılan solo controller oldu.
+- Astra Cosmic Divide round belirleyebildiği spesifik kompozisyonlarda pocket pick olarak kaldı.
+
+### Ajan Kompozisyonu Yakınsaması (2025)
+
+- Meta "standart" kompozisyonlara oturdu: 1 duelist, 1 controller, 1-2 initiator, 1-2 sentinel.
+- Flex oyuncular en değerli rol haline geldi -- harita ve rakibe göre Fade, Skye, KAY/O ve Gekko arasında geçiş yapabilen oyuncular.
+- Tek-duelist meta'si duelist oyuncusunun elit mekanik oyuncu olması gerektiği anlamına geliyor.
+
+---
+
+## Üst Düzey Takım Stratejileri
 
 ### Fnatic (EMEA)
-- **Identity**: Structured, utility-heavy play with mid-round adaptations. Fnatic is the most disciplined team in the world.
-- **Default protocol**: Fnatic runs defaults (spreading across the map for info) more than any other team. They gather info for 30-40 seconds before committing to a site.
-- **Mid control**: Fnatic prioritizes mid control on every map. They believe controlling mid gives them the option to hit either site, keeping defenders guessing.
-- **Key strength**: Their retakes are the best in the world. Even when they lose a site, their coordinated utility usage on retake wins the round.
-- **Weakness**: When pressured with fast executes, their default style can be caught off guard. Teams that rush before Fnatic can gather info have success.
+
+IF rakibin hızlı execute yapıyorsa Fnatic'e karşı
+MEANING default stili hazırlıksız yakalanabilir
+COUNTER bilgi toplama fazını bitmeden baskılayarak Fnatic'in okuma yapmasını engelle
+WHY Fnatic'in gücü bilgi toplama ve mid-round adaptasyonda; hız bunu bozar
+
+- **Kimlik**: Yapılandırılmış, utility-yoğun oyun, mid-round adaptasyonlarla. Dünyanın en disiplinli takımı.
+- **Default protokolu**: Fnatic diğer tüm takımlardan fazla default çalıştırıyor. Commit etmeden önce uzun default fazıyla bilgi toplar.
+- **Mid kontrolü**: Her haritada mid kontrolünü önceliklendirir -- mid kontrolü her iki site'i vurma opsiyonu verir.
+- **Retake ustalığı**: Dünyanın en iyi retake'lerini yapar. Koordineli utility kullanımıyla kaybettikleri site'ları bile geri alır.
 
 ### Sentinels (Americas)
-- **Identity**: Star player-driven with TenZ as the centerpiece. Their strategy orbits around creating space for TenZ to take fights.
-- **Execution style**: Fast executes with heavy flash support. Sentinels burn through utility quickly to overwhelm sites.
-- **Key strength**: Individual talent. When TenZ and zekken are hitting shots, Sentinels are nearly unbeatable in raw firepower.
-- **Weakness**: When star players have off-games, the team structure doesn't compensate. Less adaptable than teams like Fnatic or DRX.
-- **Signature play**: Zekken's Yoru flanks combined with TenZ's entry on the opposite side creates a pincer that's extremely hard to defend.
+
+IF yıldız oyuncular kötü bir gün geçiriyorsa
+MEANING takım yapısı bunu telafi edemiyor, adaptasyon kapasitesi Fnatic veya DRX'in gerisinde
+COUNTER yıldız oyuncu merkezli takımlara karşı, yıldızı susturmaya odaklan -- double peek, utility ile engelle
+WHY TenZ ve zekken vuruyorken Sentinels durdurulamaz; susturulunca yapı yetersiz kalır
+
+- **Kimlik**: TenZ merkezli yıldız oyuncu stratejisi. Strateji TenZ'e alan yaratma etrafında döner.
+- **Execute stili**: Ağır flash desteğiyle hızlı execute'ler. Utility'yi hızla harcayarak site'ları bunaltır.
+- **Özel hamle**: zekken'in Yoru flank'ları + TenZ'in karşı taraftan entry'si kıskaç oluşturur.
 
 ### DRX (Pacific)
-- **Identity**: The most strategically diverse team in the world. DRX has unique strategies for every map and opponent.
-- **Preparation**: DRX is known for studying opponents exhaustively. They develop anti-strats for specific teams, changing their entire composition and approach.
-- **Key strength**: Adaptation. DRX rarely repeats the same strategy twice in a series. If something fails in Map 1, they completely change their approach in Map 2.
-- **Weakness**: Over-complexity. Sometimes DRX outsmarts themselves, running strategies that are theoretically sound but too complicated to execute under pressure.
+
+IF DRX bir seride aynı stratejiyi iki kez kullanırsa
+MEANING bu nadirdir ama olursa, okuma fırsatı doğmuştur
+COUNTER DRX'in pattern'ini kır -- her haritada farklı yaklaşım bekle, hazırlıksız yakalanma
+WHY DRX rakiplerini derinlemesine çalışır ve anti-strat geliştirir; ama aşırı karmaşıklık baskıları altında geri tepebilir
+
+- **Kimlik**: Stratejik olarak dünyanın en çeşitli takımı. Her harita ve rakip için benzersiz stratejileri var.
+- **Adaptasyon gücü**: Seri içinde aynı stratejiyi nadiren tekrarlar. Map 1'de başarısız olan tamamen değiştirilir.
 
 ### Paper Rex / PRX (Pacific)
-- **Identity**: Chaos. PRX plays the fastest, most aggressive Valorant in the world. They do not wait for info -- they create it by running at enemies.
-- **Pace**: PRX's average execute time is the lowest in pro play. They hit sites within 15-20 seconds of round start, leaving defenders no time to set up.
-- **Key players**: f0rsakeN on Neon and Jinggg on Raze are the mechanical backbone. Their movement and aim allow PRX to run hyper-aggressive strategies that would fail with lesser individual skill.
-- **Key strength**: Unpredictability through speed. Defenders cannot prepare for timing they've never seen.
-- **Weakness**: Against teams that can match their pace (Sentinels, LOUD), the chaos style becomes a coinflip. PRX's win rate against elite teams is inconsistent.
+
+IF PRX'e karşı oynuyorsan
+MEANING kaos ve hız -- bilgi beklemeden düşmana koşar, en hızlı execute zamanlamasına sahip
+COUNTER site stack yap, crossfire kur, erken utility kullan -- PRX'in hızı hazırlıklıysan avantajına dönüşür
+WHY PRX'in gücü tahmin edilemezlik; ama buna hazır bir takım için kaos sikke atışı haline gelir
+
+- **Tempo**: PRX'in ortalama execute zamanı pro oyundaki en düşük. Site'ları erken fazda hızla alır.
+- **Mekanik omurga**: f0rsakeN (Neon) ve Jinggg (Raze) -- hareket ve aim kapasiteleri hiper-agresif stratejilerin çalışması için gerekli bireysel beceriyi sağlar.
 
 ### LOUD (Americas)
-- **Identity**: Balanced aggression. LOUD combines structured play with explosive individual talent.
-- **Aspas factor**: Aspas is arguably the best player in the world. LOUD's strategy is designed to get him into 1v1 situations where his aim is overwhelming.
-- **Less as support**: Less provides the info and utility that enables Aspas's aggression. Their synergy is one of the best duelist-initiator pairings in VCT.
-- **Key strength**: Clutch factor. LOUD wins more 1v1 and 2v2 situations than any team in VCT history, driven by Aspas and Less's individual skill.
-- **Weakness**: When Aspas is shut down (double peeked, utility-denied), LOUD's backup plans are less refined than teams like Fnatic or DRX.
 
-### EDward Gaming / EDG (China)
-- **Identity**: Disciplined, utility-optimized play with ZmjjKK as the firepower engine.
-- **ZmjjKK**: One of the most mechanically gifted players in the world. His Jett and Chamber play is at the absolute peak of what is humanly possible.
-- **Key strength**: Utility efficiency. EDG wastes less utility per round than almost any team. Every smoke, flash, and scan has a purpose.
-- **Weakness**: Can be rigid. When their prepared strategies are read, they are slower to adapt mid-series than Western teams.
+IF Aspas'ı susturabilirsen (double peek, utility ile engelleme)
+MEANING LOUD'un yedek planları Fnatic veya DRX kadar rafine değil
+COUNTER Aspas'ı izole düellolara sokmamak LOUD'u zayıflatır; çift peek ve utility baskısı uygula
+WHY Aspas dünyanın en iyi oyuncusu olarak gösteriliyor -- 1v1 clutch kazanma oranı VCT tarihinin en yükseğinden
 
-### Leviat&aacute;n (Americas)
-- **Identity**: Aggressive, duel-oriented play with an emphasis on aim discipline.
-- **Key strength**: Their economy management is among the best. They win more eco and force-buy rounds than average, often through smart pistol and Spectre play.
-- **Weakness**: In long, drawn-out tactical matches, Leviat&aacute;n can struggle against more strategic teams.
+- **Kimlik**: Dengeli saldırganlık. Yapılı oyunu patlayıcı bireysel yetenekle birleştir.
+- **Less desteği**: Less'in bilgi ve utility'si Aspas'ın saldırganlığını mümkün kılar. En iyi duelist-initiator eşleşmelerinden biri.
+
+### EDward Gaming / EDG (Çin)
+
+- **Kimlik**: Disiplinli, utility-optimize oyun. ZmjjKK ateş gücü motoru.
+- **ZmjjKK**: Dünyanın mekanik olarak en yetenekli oyuncularından biri. Jett ve Chamber oyunu insani sınırın zirvesinde.
+- **Utility verimliliği**: EDG round başına diğer takımlardan daha az utility israf eder. Her smoke, flash ve scan'ın amacı var.
+- **Zayıflık**: Hazırlanmış stratejileri okunduğunda, seri içinde Batılı takımlardan yavaş adapte olabilir.
+
+### Leviatan (Americas)
+
+- **Kimlik**: Agresif, düello odaklı oyun.
+- **Güç**: Ekonomi yönetimi en iyilerden. Eco ve force-buy round'larını ortalamadan fazla kazanır.
+- **Zayıflık**: Uzun, taktiksel maçlarda daha stratejik takımlara karşı zorluk çekebilir.
 
 ### Gen.G (Pacific)
-- **Identity**: Korean discipline meets firepower. Gen.G runs tight, methodical executes with minimal wasted utility.
-- **Key strength**: Post-plant discipline. Gen.G's post-plant setups are among the most well-rehearsed, with lineups and crossfires for every plant position.
-- **Weakness**: Slow to adapt within a single map. Their rigidity can be exploited by teams that vary their approach round to round.
+
+- **Kimlik**: Kore disiplini + ateş gücü. Minimum utility israfıyla sıkma, yöntemli execute'ler çalıştırır.
+- **Post-plant disiplini**: Gen.G'nin post-plant setup'ları en iyi prova edilmişlerden. Her plant pozisyonu için lineup ve crossfire mevcut.
+- **Zayıflık**: Tek harita içinde adaptasyonda yavaş. Katılıkları round round yaklaşımını değiştiren takımlar tarafından exploit edilebilir.
 
 ### T1 (Pacific)
-- **Identity**: Flexible compositions with strong individual players.
-- **Key strength**: Map pool depth. T1 can play any map competently, making them dangerous in best-of-3 and best-of-5 formats.
-- **Weakness**: Lack of a single dominant strategy can mean they are "good at everything, great at nothing" in peak matchups.
+
+- **Kimlik**: Esnek kompozisyonlar, güçlü bireysel oyuncular.
+- **Güç**: Harita havuzu derinliği. Her haritayı yetkin şekilde oynayabilir.
+- **Zayıflık**: Tek bir baskın stratejinin olmaması, zirve maçlarda "her şeyde iyi, hiçbir şeyde harika değil" anlamına gelebilir.
 
 ---
 
-## Key Player Styles and Habits
+## Oyuncu Stilleri ve Alışkanlıklar
 
-### TenZ (Sentinels) - Duelist
-- **Sensitivity**: Plays on relatively low sensitivity (0.22 at 1600 DPI equivalent range). His aim style is wrist-based with arm adjustments.
-- **Peek style**: Wide swings with pre-aim. TenZ does not jiggle -- he commits to the peek and relies on raw reaction time to win the fight.
-- **Crosshair placement**: Head-level, always. TenZ rarely adjusts vertically during a fight because his pre-aim is precise.
-- **Weakness to exploit**: TenZ occasionally takes ego peeks when he should play for the team. Baiting his aggression can catch him off-guard.
-- **Agents**: Jett (primary), Raze, Iso.
+### TenZ (Sentinels) -- Duelist
 
-### Aspas (LOUD) - Duelist
-- **Style**: The most aggressive duelist in pro play. Aspas takes fights that no other player would. His confidence in his aim leads to highlight-reel plays but also occasional overcommitment.
-- **Movement**: Uses counter-strafe and wide swings with precise timing. His A-D strafe is the fastest in pro play.
-- **Clutch ability**: Aspas has one of the highest 1v1 clutch win rates in VCT history. In 1vX situations, he plays time and aims for isolated fights.
-- **Agents**: Jett (primary), Raze, Reyna (pocket pick).
-- **Key habit**: Watches flanks obsessively. Aspas checks his minimap more frequently than most duelists, which is why he rarely gets caught off-guard.
+IF TenZ'e karşı oynuyorsan
+MEANING geniş swing + pre-aim kullanır, jiggle yapmaz, ham reaksiyon süresine güvenir
+COUNTER onun agresyon baitleyerek, ego peek'lerini cezalandırabilirsin
+WHY TenZ zaman zaman takım için oynaması gereken yerde ego peek atar; bu açığı kullan
 
-### Demon1 (100T/EG) - Duelist
-- **Style**: Methodical and patient compared to Aspas. Demon1 waits for the right moment to strike rather than forcing fights.
-- **Op play**: One of the best Op players in the world. His Op timing is precise -- he peeks for exactly the time needed to take a shot, then repositions.
-- **Agents**: Jett (primary), Chamber (secondary).
-- **Key habit**: Demon1's positioning favors off-angles. He rarely holds the "obvious" angle, preferring spots where enemies pre-aim incorrectly.
+- **Peek stili**: Geniş swing + pre-aim. Peek'e commit eder, fight'ı ham reaksiyon süresiyle kazanmayı hedefler.
+- **Crosshair placement**: Her zaman baş seviyesinde. Fight sırasında dikey ayarlama yapmaz çünkü pre-aim'i hassas.
+- **Ajanlar**: Jett (birincil), Raze, Iso.
 
-### Chronicle (Fnatic) - Flex/Sentinel
-- **Style**: The IGL who never makes mistakes. Chronicle's decision-making is the foundation of Fnatic's success.
-- **Utility usage**: His utility efficiency is the best in the world. Every Recon Bolt, Tripwire, and flash has a specific purpose in Fnatic's strategy.
-- **Agents**: Sova, Cypher, KAY/O (flex).
-- **Key habit**: Chronicle plays the round timer. He knows exactly how long each play takes and times his utility to give the team maximum window for execution.
+### Aspas (LOUD) -- Duelist
 
-### Less (LOUD) - Initiator
-- **Style**: Aggressive initiator who creates space for Aspas. His drone and dart usage is designed to push enemies out of position for Aspas to punish.
-- **Agents**: Sova, Fade, Skye.
-- **Key habit**: Less uses Hunter's Fury offensively more than any other Sova player. His ult timing on post-plant situations is devastating.
+IF Aspas'a karşı 1v1 clutch'taysan
+MEANING VCT tarihinin en yüksek 1v1 clutch kazanma oranlarından birine sahip
+COUNTER izole fight verme, utility ile pozisyonunu gör, pre-aim ile avantaj kur
+WHY Aspas 1vX durumlarında zamanı oynar ve izole fight'lar arar; aynı şeyi ona karşı yapamazsın
 
-### ZmjjKK (EDG) - Duelist
-- **Style**: Pure mechanical skill. ZmjjKK's aim is frequently cited as the best in the world. His flick shots and reaction time are superhuman.
-- **Agents**: Jett, Chamber.
-- **Key habit**: ZmjjKK rarely overthinks. He takes the first duel he sees and relies on mechanics. This simplicity is his strength -- he doesn't get caught in analysis paralysis.
+- **Hareket**: Counter-strafe ve geniş swing'leri hassas zamanlamayla kullanır. A-D strafe'i pro oyundaki en hızlı.
+- **Ajanlar**: Jett (birincil), Raze, Reyna (pocket pick).
+- **Özel alışkanlık**: Flank'ları obsesif kontrol eder. Minimap'i çoğu duelist'ten daha sık kontrol eder.
 
-### yay (Retired) - Sentinel/Duelist
-- **Legacy**: "El Diablo" defined the Chamber meta. His Op play on Chamber was the benchmark that every other player was measured against.
-- **Style**: Patient, precise, and almost robotic. yay took minimal unnecessary risks. His kill-to-death ratio was consistently the best in NA because he never forced fights.
-- **Key lesson**: yay's style teaches that consistency wins more than flashy plays. Doing the right thing every round beats doing the highlight-reel thing occasionally.
+### Demon1 -- Duelist
 
----
+- **Stil**: Aspas'a kıyasla yöntemli ve sabırlı. Dövüş zorlamak yerine doğru anı bekler.
+- **Op oyunu**: Dünyanın en iyi Op oyuncularından. Peek zamanlama hassas -- atış için gereken süre kadar peek yapar, sonra yeniden pozisyonlanır.
+- **Özel alışkanlık**: Off-angle'ları tercih eder. Nadiren "belli" açıyı tutar.
 
-## Pro Round Patterns and Anti-Strats
+### Chronicle (Fnatic) -- Flex/Sentinel
 
-### Standard Default Pattern
-1. **0:00-0:15**: Team spreads across map. Controller smokes Mid, sentinel sets up site, initiator throws initial info dart/drone.
-2. **0:15-0:35**: Gather info. Initiator darts reveal defender positions. Team holds for audio cues.
-3. **0:35-0:55**: Commit to a site or fake. If info shows light defense, fast execute. If stacked, fake and rotate.
-4. **0:55-1:30**: Execute or split push. Smokes go down, flashes fire, duelist entries. Plant within 10 seconds of execute start.
-5. **1:30-end**: Post-plant. Hold angles, deny defuse with utility, play time.
+- **Stil**: Hata yapmayan IGL. Karar verme kalitesi Fnatic'in başarısının temeli.
+- **Utility verimliliği**: Dünyanın en iyisi. Her Recon Bolt, Tripwire ve flash'ın Fnatic stratejisinde belirli bir amacı var.
+- **Özel alışkanlık**: Round timer'ı oynar. Her hamlenin ne kadar sürdüğünü bilir ve utility'sini takıma maksimum execute penceresi verecek şekilde zamanlar.
 
-### Anti-Strat Patterns
-- **Against fast teams (PRX, Sentinels)**: Stack 3 players on the expected push site. The key is having numbers to trade the entry kill. Utility stacking (KAY/O suppress + Killjoy setup + Sage wall) overwhelms fast pushes.
-- **Against slow teams (Fnatic, DRX)**: Push early. If the enemy defaults for 30+ seconds, aggressive peeks during their info-gathering phase catch them off-guard. Push through the smoke at 0:15 when they expect passive play.
-- **Against Op teams**: Use 5 utility pieces on the Op angle before peeking. Flash, smoke, drone, suppress, then swing. Never dry peek an Op in pro play.
-- **Against lurk teams**: Send one player to deep flank check every round. Clearing the lurk removes the late-round threat.
+### ZmjjKK (EDG) -- Duelist
+
+- **Stil**: Saf mekanik beceri. Aim'i dünyanın en iyisi olarak gösterilir.
+- **Özel alışkanlık**: Nadiren aşırı düşünür. Gördüğü ilk düelloyu alır ve mekaniğe güvenir. Bu sadelik onun gücü -- analiz felcine yakalanmaz.
+
+### yay (Emekli) -- Sentinel/Duelist
+
+IF tutarlılık odaklı bir stil öğrenmek istiyorsan
+MEANING yay "El Diablo" Chamber meta'sını tanımladı, minimum gereksiz risk aldı
+COUNTER yay'ın stilini örne -- tutarlılık gösterişli oyunlardan daha çok kazandırır
+WHY her round doğru şeyi yapmak, ara sıra highlight-reel şeyi yapmaktan üstündür
 
 ---
 
-## Economy Meta at Pro Level
+## Pro Round Pattern'leri ve Anti-Strat'lar
 
-### Full Buy Rounds
-- Standard full buy: Phantom/Vandal + full utility + heavy armor (3900-4500 creds).
-- Op buy: 4700 creds (Op) + light armor (400) + basic utility. Only Op players (Jett, Chamber) buy Op regularly.
-- Team coordinates buys. If one player can't full buy, the team either forces together or saves together. Split buying is the worst outcome.
+### Standart Default Pattern
 
-### Force Buy Rounds
-- After losing pistol: Teams typically force buy Round 2 with Spectre (1600) + armor (400-1000) + partial utility.
-- The "anti-eco force" after a loss is increasingly common. Rather than saving for a full buy on Round 3, teams force on Round 2 with Spectres. Win rate for Round 2 force buys has increased as teams optimize their force-buy executes.
-- Force buy utility priority: smokes > flashes > scans > mollies. Vision denial is the most important utility on a force.
+1. **Erken faz**: Takım haritaya yayılır. Controller mid smoke'u atar, sentinel site kurar, initiator ilk bilgi dart/drone atar.
+2. **Bilgi toplama**: Initiator dart'ları savunucu pozisyonlarını açığa çıkarır. Takım ses ipuçları için bekler.
+3. **Commit veya fake**: Bilgi zayıf savunma gösteriyorsa hızlı execute. Stack varsa fake ve rotate.
+4. **Execute**: Smoke'lar iner, flash'lar atılır, duelist entry yapar. Execute başladığında hemen plant.
+5. **Post-plant**: Açıları tut, utility ile defuse deny et, zamanı oyna.
 
-### Eco Round Strategies
-- **Full eco (0-1900 creds)**: Classic/Shorty + no armor. Play for info and exit kills. Plant the spike for bonus creds (300 per player). Don't force fights.
-- **Light buy (1900-3000 creds)**: Marshal (950) or Spectre (1600) + light armor. Play for picks and trades. One pick can snowball the round.
-- **Bonus round (after winning pistol)**: Keep Spectre/Stinger from previous round, buy full utility. The bonus round is critical -- winning it puts the team up 3-0.
+### Anti-Strat Pattern'leri
 
-### Economy Exploits
-- **Spike plant bonus**: Every player gets 300 creds for a planted spike, even in a loss. Always plant on eco rounds.
-- **Kill reward**: Each kill is 200 creds. If your eco round gets 2-3 kills before losing, the team's economy improves significantly.
-- **The "steal" economy**: On eco rounds, target the enemy's Op player. If you kill them and steal the Op, you gain 4700 creds of value and deny it from the enemy.
-- **Op save**: If an Op player survives a lost round, saving the Op (not dying) preserves 4700 creds for the next round. Always save the Op if the round is lost.
+IF hızlı takım'a karşı oynuyorsan (PRX, Sentinels)
+MEANING beklenen push site'ına 3 oyuncu stack'le, entry kill'i trade edecek sayıda ol
+COUNTER utility stack (KAY/O suppress + Killjoy setup + Sage wall) hızlı push'ları bunaltır
+WHY hızlı takımlar sayı üstünlüğüne ve sürprize güveniyorlar; stack bunu yok eder
 
----
+IF yavaş takım'a karşı oynuyorsan (Fnatic, DRX)
+MEANING uzun default fazında bilgi toplarlar
+COUNTER erken agresif peek at -- bilgi toplama fazlarında beklemedikleri baskılar onları hazırlıksız yakalar
+WHY pasif savunmaya karşı erken push düşman ritmini bozar
 
-## Clutch Statistics and Patterns
-
-### 1v1 Clutch Win Rates
-- At pro level, 1v1 clutch scenarios are won approximately 50% of the time. The advantage is almost nonexistent -- it comes down to info, positioning, and aim.
-- **Time advantage**: The player with more time (attacker with spike down, defender with spike not planted) has a slight edge because they can play for info.
-- **Sound advantage**: The player who knows the other's position (from audio cues, utility, or recent kills) wins significantly more 1v1s.
-
-### 1v2 and 1v3 Clutch Methodology
-- **1v2**: Achievable. The key is isolating fights. Never take a 1v2 fight simultaneously. Reposition to take two 1v1 fights.
-- **1v3**: Rare but possible. Requires utility to stall or deny enemy pushes while picking off isolated players. Time pressure is your enemy -- if the clock is running, play aggressive. If you have time, play patient.
-- **1v4 and 1v5**: Save the gun unless the bomb is planted and you have post-plant utility. The expected value of saving a gun (3000-4700 creds) outweighs the <5% chance of winning the clutch.
-
-### Clutch Decision Tree
-1. **Spike planted?** If yes, you have time pressure on the enemy. If no, you have time pressure.
-2. **Do you know enemy positions?** If yes, plan isolated fights. If no, use utility to gather info first.
-3. **How much time is left?** Under 30 seconds -- play aggressive. Over 30 seconds -- play patient.
-4. **How much HP do you have?** Under 50 HP -- play angle advantage, never repeak. Over 50 HP -- you can take trades.
-5. **Do you have utility?** If yes, use it to isolate fights. If no, play pure aim duels.
+IF Op takımına karşı oynuyorsan
+MEANING Op açısını dry peek etmek pro oyunda intiharıdır
+COUNTER Op açısına peek etmeden önce 5 utility parçası kullan: flash, smoke, drone, suppress, sonra swing
+WHY Op'a karşı utility yığınlaması hayatta kalma şansını dramatik şekilde artırır
 
 ---
 
-## Map Pick/Ban Tendencies
+## Ekonomi Meta'si (Pro Seviye)
 
-### Map Pool Structure
-- Each team has approximately 3-4 "strong" maps and 2-3 "weak" maps. Best-of-3 veto is about forcing the opponent onto their weak maps.
-- **Ban 1**: Both teams ban their worst map.
-- **Pick 1**: Each team picks their strongest remaining map.
-- **Remaining**: The decider map is the one neither team banned or picked -- usually a map both teams are comfortable on but neither dominates.
+### Full Buy Round'ları
 
-### Regional Map Preferences
-- **Americas**: Historically strong on Bind and Ascent. Aggressive play styles suit close-range maps.
-- **EMEA**: Historically strong on Haven and Breeze. Structured play suits large, multi-site maps.
-- **Pacific**: Historically strong on Lotus and Split. Creative agent compositions thrive on maps with unique mechanics (doors, teleporters).
-- **China**: Historically strong on Icebox and Pearl. Disciplined utility usage shines on maps with defined chokepoints.
+- Standart full buy: Phantom/Vandal + full utility + heavy armor (3,900-4,500 kredi).
+- Op buy: 4,700 (Op) + light armor (400) + temel utility. Sadece Op oyuncular (Jett, Chamber) düzenli Op alır.
+- Takım buy'ları koordine eder. Bir oyuncu full buy yapamazsa, takım ya birlikte force yapar ya birlikte save yapar.
+
+### Force Buy Round'ları
+
+- Pistol kaybettikten sonra: Takımlar 2. round'da Spectre (1,600) + armor (400-1,000) + kısmi utility ile force buy yapar.
+- Kayıp sonrası "anti-eco force" yaygınlaşıyor. 3. round full buy için save yapmak yerine 2. round'da Spectre ile force. Round 2 force buy kazanma oranı takımlar force-buy execute'lerini optimize ettikçe artmıştır.
+
+### Eco Round Stratejileri
+
+IF full eco'daysan (0-1,900 kredi)
+MEANING Classic/Shorty + armor yok -- fight'ları zorlamak anlamsız
+COUNTER bilgi topla, çıkış kill'leri ara, bonus kredi için spike plant et (oyuncu başına 300)
+WHY eco round'u kazanma hedefi değil, ekonomi hazırlama ve bilgi toplama fazıdır
+
+IF light buy'daysan (1,900-3,000 kredi)
+MEANING Marshal (950) veya Spectre (1,600) + light armor -- pick potansiyelin var
+COUNTER pick ve trade odaklı oyna; bir pick snowball edebilir
+WHY tek bir pick round'u çevirebilir ve düşman silahını çalarsın
 
 ---
 
-## Agent Composition Meta by Map
+## Harita Bazlı Ajan Kompozisyonları
 
 ### Ascent
-- **Standard**: Jett, Omen, Sova/Fade, KAY/O, Killjoy/Cypher
-- **Variant**: Iso replaces Jett for Contingency wall mid-take. Breach replaces KAY/O for wall flash value.
+- **Standart**: Jett, Sova, KAY/O, Omen, Killjoy/Cypher
+- **Varyant**: Iso mid-take için Contingency wall ile Jett'in yerini alır.
 
 ### Bind
-- **Standard**: Raze, Brimstone/Omen, Skye/Fade, Breach/KAY/O, Cypher/Killjoy
-- **Variant**: Clove replaces traditional controller for aggressive hybrid play.
-
-### Breeze
-- **Standard**: Jett, Viper + Omen/Harbor (double controller), Sova, Cypher/Killjoy
-- **Variant**: Chamber replaces Jett for Op play with Rendezvous escape.
+- **Standart**: Raze, Skye/Fade, Brimstone/Omen, Breach/KAY/O, Cypher/Killjoy
+- **Varyant**: Clove agresif hybrid oyun için geleneksel controller'ın yerini alır.
 
 ### Haven
-- **Standard**: Jett/Raze, Omen/Astra, Sova/Fade, Breach/Skye, Killjoy/Cypher
-- **Variant**: Phoenix as secondary duelist. Triple initiator (Sova + Skye + KAY/O) dropping the second duelist.
+- **Standart**: Jett/Raze, Omen/Astra, Sova/Fade, Breach/Skye, Killjoy/Cypher
+- **Varyant**: Üç site savunucu yayılıyor; Killjoy Lockdown herhangi bir site retake'i için yıkıcı.
 
 ### Icebox
-- **Standard**: Jett, Viper + Omen/Harbor, Sova, Killjoy/Sage
-- **Variant**: Sage wall for A-site boost + Killjoy B-site anchor.
+- **Standart**: Jett, Viper + Omen/Harbor, Sova, Killjoy/Sage
+- **Varyant**: Sage wall A-site boost + Killjoy B-site anchor.
 
 ### Lotus
-- **Standard**: Raze, Omen/Harbor, Fade, Gekko/Skye, Killjoy/Deadlock
-- **Variant**: Double controller (Omen + Harbor) dropping the second initiator.
-
-### Pearl
-- **Standard**: Jett/Neon, Astra/Omen, Fade, Skye/KAY/O, Killjoy/Cypher
-- **Variant**: Iso for mid-corridor Contingency pushes.
-
-### Split
-- **Standard**: Raze/Jett, Omen, Breach/Skye, KAY/O/Fade, Cypher/Killjoy/Sage
-- **Variant**: Sage wall on A for guaranteed stall. Neon for fast entries.
-
-### Sunset
-- **Standard**: Neon/Raze, Omen/Clove, Fade/Skye, KAY/O/Gekko, Killjoy/Cypher
-- **Variant**: Clove as aggressive controller with duelist-like entries.
-
-### Fracture
-- **Standard**: Neon/Raze, Brimstone, Breach, Fade/KAY/O, Killjoy/Cypher
-- **Variant**: Double initiator (Breach + Fade) for maximum utility pressure.
-
-### Abyss
-- **Standard**: Jett, Omen, Fade/Sova, Skye/KAY/O, Killjoy/Cypher
-- **Variant**: Vertical-focused agents (Jett Updraft, Raze satchel) gain value on this map.
+- **Standart**: Raze, Fade, Omen/Harbor, Gekko/Skye, Killjoy/Deadlock
+- **Varyant**: Çift controller (Omen + Harbor) ikinci initiator'u düşürür.
 
 ---
 
-## Timeout Usage Patterns
+## Rank Modülasyonu
 
-### When to Call Timeout
-- **After losing 3+ rounds in a row**: Break the enemy's momentum and reset mentality.
-- **Before a critical eco/force round**: Plan the buy strategy as a team.
-- **When the enemy switches strategy**: If they go from default to fast execute, timeout to adjust defensive setup.
-- **Before a map point**: Whether winning or losing, the next round deserves maximum preparation.
+### Immortal+ İçin
 
-### What to Discuss in Timeout
-1. **Economy check**: Can we buy? Should we save? Force?
-2. **Enemy patterns**: What have they been doing? What adjustments should we make?
-3. **Agent utility plan**: Who uses what utility, and when?
-4. **Mental reset**: Deep breath, refocus, commit to the next round.
+IF pro analiz bilgisini oyununa uygulamak istiyorsan
+MEANING bu seviyede takım koordinasyonu ve anti-strat bilgisi fark yaratır
+COUNTER pro pattern'lerini doğrudan uygula: default protokolleri, trade buddy sistemi, ekonomi koordinasyonu
+WHY Immortal+ seviyede bireysel mekanik yeterli değil; taktiksel derinlik rank atlatır
 
----
+### Diamond-Ascendant İçin
 
-## Pistol Round Strategies at Pro Level
-
-### Attack Side Pistol
-- **Ghost rush**: All 5 buy Ghost (500) and rush a site. The Ghost's first-shot accuracy and 3-shot kill at medium range make it the default pistol buy.
-- **Utility + Classic**: Some players buy abilities instead of a Ghost, relying on Classic right-click at close range. Common for Brimstone (smokes), Sage (wall), and initiators (dart/flash).
-- **Frenzy push**: Buy Frenzy (450) and rush tight spaces. The automatic fire overwhelms Classic users in close range.
-- **Sheriff gamble**: One player buys Sheriff (800, no armor) for one-shot headshot potential. High risk, high reward. Usually the duelist or Op player.
-
-### Defense Side Pistol
-- **Standard setup**: Buy utility + Classic/Shorty. Hold angles where Classic is effective.
-- **Ghost hold**: Buy Ghost and hold long angles where the Ghost's accuracy outperforms Classic.
-- **Stacking**: Put 3 players on the most-likely attack site. If you guess right, the crossfire overwhelms the pistol rush.
-
----
-
-## Anti-Eco Strategies
-
-### When You Have Guns vs. Eco
-- **Do NOT play passive.** The worst thing you can do against an eco is let them close the distance. Classics and Shorties are deadly at close range.
-- **Hold long angles.** Vandal/Phantom at distance beats Classic/Frenzy at distance 100% of the time.
-- **Clear utility first.** Eco rounds often rely on ability-based plays (Raze ult, Jett knives, Reyna dismiss). Respect enemy utility even on eco.
-- **Don't give up the Op.** If your team has an Op, do not let the eco team steal it. An Op in the hands of a saving team on the next round is a disaster.
-
-### Common Anti-Eco Mistakes
-1. **Rushing into the eco team** - You have better guns. Let them come to you.
-2. **Wide swinging into Classic right-click** - The Classic right-click at close range does 234 damage. Do not give close-range fights to eco players.
-3. **Not buying armor on anti-eco** - "They're on eco, I don't need armor." Wrong. A Classic headshot does 78 damage. Without armor, two body shots + headshot kills you.
-4. **Splitting up against eco** - Stay together. Crossfire beats eco plays.
-
----
-
-## Double Op Setups
-
-### When to Run Double Op
-- On CT side when you have a big economy lead
-- On maps with two long sightlines that demand separate Op coverage (Haven A Long + C Long, Breeze A Halls + B Tunnel)
-- When you have two players who can Op effectively (Jett + Chamber, or any two players with Rendezvous/Tailwind)
-
-### Double Op Positioning
-- The two Op players should NEVER hold adjacent angles. They should hold opposite sides of the map or cover completely different sightlines.
-- If one Op gets a pick, the other Op should reposition immediately -- the enemy will push the side where the Op just picked, not the other side.
-- Team utility should support both Op players: smokes for repositioning, flashes for re-peeking.
-
-### Counter to Double Op
-- Spend 3-4 utility pieces on one Op angle, then push the site where the other Op cannot rotate fast enough.
-- Force close-range engagements. Both Ops become liabilities in close quarters.
-- Use KAY/O ZERO/POINT to suppress both Ops if they are within range. Without abilities, they cannot escape.
-- Save utility for the second Op. Many teams spend everything on the first and have nothing left for the second.
+IF pro stratejileri ranked'e uyarlamak istiyorsan
+MEANING solo queue'da tam pro kompozisyonu execute etmek güç
+COUNTER basitleştir: temel default kavramını kullan (2-1-2 yerleşim), trade buddy bul, ekonomi iletişimi yap
+WHY pro stratejilerin sadeleştirilmiş versiyonları bile ranked'de büyük fark yaratır; karmaşık planları birebir kopyalama
