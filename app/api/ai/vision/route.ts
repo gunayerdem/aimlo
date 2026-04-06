@@ -64,7 +64,39 @@ ZAMANSAL TUTARLILIK:
 - Ölüm bölgesi değişmişse → not et ("ölüm bölgesi değişti")
 - YASAK: "aynı yerden giriyorsun", "entry yapıyorsun", "giriş çizgin" — ölüm pozisyonu ≠ giriş yolu
 - Sadece NEREDE öldüğünü biliyoruz, NASIL oraya geldiğini BİLMİYORUZ
-- "Bu bölgede ölüyorsun" DOĞRU, "bu bölgeden entry yapıyorsun" YANLIŞ`;
+- "Bu bölgede ölüyorsun" DOĞRU, "bu bölgeden entry yapıyorsun" YANLIŞ
+
+YAPISAL VERİ ÇIKTISI:
+Koçluk metnine ek olarak, her response'ta "patternData" JSON objesi döndür.
+Bu veri oyuncunun tekrarlayan hatalarını tespit eden pattern motorunu besler.
+
+patternData alanları (hepsi opsiyonel — sadece tespit edebildiklerini doldur):
+
+deathLocation: string — Ölüm lokasyonu. Küçük harf + underscore callout formatı.
+  Örnekler: "a_long", "b_main", "mid_window", "ct_spawn", "hookah". Bilmiyorsan KOYMA.
+
+peekType: "dry_peek" | "util_peek" | "jiggle" | "wide_swing" | "holding" | "unknown"
+  dry_peek=utility'siz açıdan çıkmak, util_peek=flash/smoke/drone arkasından,
+  jiggle=shoulder peek, wide_swing=geniş açı, holding=angle tutarken öldürülmek.
+
+utilUsed: boolean — Ölümden önce ability kullanılmış mı?
+
+traded: boolean — Takım arkadaşı trade aldı mı? (ölümden sonra 5sn içinde takım kill)
+
+deathTiming: "early" | "mid" | "late" | "post_plant"
+  early=ilk 15sn, mid=15-45sn, late=45sn+, post_plant=spike sonrası.
+
+enemyWeapon: string — Öldüren silah. Küçük harf. Örnekler: "vandal", "operator". Bilmiyorsan KOYMA.
+
+mapControl: "full_control" | "partial_control" | "no_control" | "contested"
+  Ölüm anında takımın harita kontrolü.
+
+wasRepeatedMistake: boolean — patternContext'te benzer hata varsa true.
+
+KURALLAR:
+- Emin olmadığın alanı KOYMA — yanlış veri doğru veriden kötü
+- Hayatta kalınan round'da sadece mapControl ve utilUsed doldurulabilir
+- Koçluk metni kalitesini DÜŞÜRME — patternData ekstra görev`;
 
 const USER_PROMPT = `Bu bir Valorant round sonu ekran görüntüsü. Şu bilgileri çıkar ve Türkçe coaching feedback ver:
 
@@ -135,7 +167,17 @@ JSON formatında döndür:
   "nextRoundSuggestion": "...",
   "deathPosition": "bölge adı veya unknown",
   "positionConfidence": "high" | "medium" | "low",
-  "positionSignals": 0-4
+  "positionSignals": 0-4,
+  "patternData": {
+    "deathLocation": "a_long",
+    "peekType": "dry_peek",
+    "utilUsed": false,
+    "traded": false,
+    "deathTiming": "early",
+    "enemyWeapon": "operator",
+    "mapControl": "no_control",
+    "wasRepeatedMistake": true
+  }
 }`;
 
 /* ══════════════════════════════════════════════════════════
@@ -153,7 +195,7 @@ type RoundEvidenceEntry = {
 const VALID_IMAGE_FORMATS = ["image/png", "image/jpeg", "image/webp", "image/gif"] as const;
 type ImageFormat = typeof VALID_IMAGE_FORMATS[number];
 
-const DEFAULT_MAX_TOKENS = 400;
+const DEFAULT_MAX_TOKENS = 450;
 const MAX_TOKENS_CAP = 512;
 
 type VisionRequest = {
@@ -167,6 +209,68 @@ type VisionRequest = {
   enemyComp?: string[]; // e.g. ["Jett", "Omen", "Sova"]
   patternContext?: string; // Rust client pattern analysis
 };
+
+type PatternData = {
+  deathLocation?: string;
+  peekType?: string;
+  utilUsed?: boolean;
+  traded?: boolean;
+  deathTiming?: string;
+  enemyWeapon?: string;
+  mapControl?: string;
+  wasRepeatedMistake?: boolean;
+};
+
+const PATTERN_DATA_ALLOWED_KEYS = [
+  "deathLocation", "peekType", "utilUsed", "traded",
+  "deathTiming", "enemyWeapon", "mapControl", "wasRepeatedMistake",
+] as const;
+
+const PEEK_TYPES = ["dry_peek", "util_peek", "jiggle", "wide_swing", "holding", "unknown"];
+const DEATH_TIMINGS = ["early", "mid", "late", "post_plant"];
+const MAP_CONTROLS = ["full_control", "partial_control", "no_control", "contested"];
+
+function sanitizePatternData(raw: unknown): PatternData | null {
+  if (!raw || typeof raw !== "object") return null;
+  const src = raw as Record<string, unknown>;
+  const safe: PatternData = {};
+  let hasField = false;
+
+  if (typeof src.deathLocation === "string" && src.deathLocation.length > 0) {
+    safe.deathLocation = src.deathLocation.toLowerCase().replace(/[^a-z0-9_]/g, "").slice(0, 30);
+    hasField = true;
+  }
+  if (typeof src.peekType === "string" && PEEK_TYPES.includes(src.peekType)) {
+    safe.peekType = src.peekType;
+    hasField = true;
+  }
+  if (typeof src.utilUsed === "boolean") {
+    safe.utilUsed = src.utilUsed;
+    hasField = true;
+  }
+  if (typeof src.traded === "boolean") {
+    safe.traded = src.traded;
+    hasField = true;
+  }
+  if (typeof src.deathTiming === "string" && DEATH_TIMINGS.includes(src.deathTiming)) {
+    safe.deathTiming = src.deathTiming;
+    hasField = true;
+  }
+  if (typeof src.enemyWeapon === "string" && src.enemyWeapon.length > 0) {
+    safe.enemyWeapon = src.enemyWeapon.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 20);
+    hasField = true;
+  }
+  if (typeof src.mapControl === "string" && MAP_CONTROLS.includes(src.mapControl)) {
+    safe.mapControl = src.mapControl;
+    hasField = true;
+  }
+  if (typeof src.wasRepeatedMistake === "boolean") {
+    safe.wasRepeatedMistake = src.wasRepeatedMistake;
+    hasField = true;
+  }
+
+  return hasField ? safe : null;
+}
 
 type RoundFeedback = {
   round: number;
@@ -182,6 +286,7 @@ type RoundFeedback = {
   deathPosition?: string | null;
   positionConfidence?: string;
   positionSignals?: number;
+  patternData?: unknown;
 };
 
 /* ══════════════════════════════════════════════════════════
@@ -538,6 +643,15 @@ export async function POST(request: NextRequest) {
         console.log(`[Aimlo AI] Reality check: deathAnalysis rewrite=${checkedAnalysis.rewriteLevel}, suggestion rewrite=${checkedSuggestion.rewriteLevel}`);
       }
 
+      // Extract and sanitize patternData (whitelist filter — only known fields pass)
+      let patternData: PatternData | null = null;
+      try {
+        patternData = sanitizePatternData((fb as Record<string, unknown>).patternData);
+      } catch {
+        console.log("[PATTERN-DATA] parse error — returning null");
+      }
+      console.log(`[PATTERN-DATA] ${JSON.stringify(patternData)}`);
+
       return NextResponse.json({
         round: typeof fb.round === "number" ? fb.round : 0,
         score: typeof fb.score === "string" ? fb.score.slice(0, 10) : "?-?",
@@ -549,6 +663,7 @@ export async function POST(request: NextRequest) {
         deathPosition: deathPosition !== "unknown" && positionConfidence !== "low" ? deathPosition : null,
         positionConfidence: positionConfidence,
         positionSignals: posSignals,
+        patternData,
       });
     }
 
