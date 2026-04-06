@@ -1,75 +1,80 @@
-# AGENT: Jett
+# AJAN: Jett
 
-## 1. Role Identity
-- Jett is the premier space-creating duelist whose vertical mobility and instant repositioning make her the default pick for aggressive opening plays and Op (Operator) aggression.
-- Pick Jett when the team needs a dedicated entry fragger who can take aggressive angles and escape punishment, or when running an Op-centric playstyle. Choose her over Raze when vertical mobility matters more than area denial, and over Neon when precision picks outweigh speed-based rushes.
-- Jett's core identity is the self-sufficient angle holder and entry fragger who trades her cooldown economy for high-impact opening kills and instant repositioning.
+## 1. Rol Kimliği
+- Jett, dikey hareketliliği ve anında yeniden konumlanma becerisiyle agresif açılış hamleleri ve Op (Operator) saldırganlığı için varsayılan tercih olan, alan yaratan birincil duelist'tir.
+- Takımın agresif açılar alıp cezalandırmadan kaçabilen özel bir entry fragger'a ya da Op merkezli bir oyun tarzına ihtiyacı olduğunda Jett seçilmelidir. Dikey hareketlilik alan kontrolünden daha fazla önem taşıdığında Raze yerine, hassas pick'ler hız temelli push'lardan daha değerli olduğunda Neon yerine tercih edilmelidir.
+- Jett'in temel kimliği, cooldown ekonomisini yüksek değerli açılış kill'leri ve anında yeniden konumlanma karşılığında kullanan, kendi kendine yeten açı tutucu ve entry fragger'dır.
 
-## 2. Core Responsibilities
-- **Attack-side duties:** Create first contact by dash-peeking or updraft-peeking into contested space. Take the opening duel on entries. Use smokes to cross dangerous sightlines for the team. Carry the Op on long angles when the economy supports it.
-- **Defense-side duties:** Hold aggressive off-angles with the Op or rifles, using Tailwind to escape after getting a pick. Use updraft to hold unexpected vertical positions. Provide early aggression and fall back safely.
-- **What the team expects:** First kills on attack. Aggressive Op holds on defense. Jett players are expected to convert dash-peeks into trades or kills, not to lurk passively.
+## 2. Temel Sorumluluklar
+- **Atak tarafı görevleri:** Dash-peek veya updraft-peek ile ilk temas oluşturmak. Entry'lerde açılış düellosunu almak. Takım için tehlikeli sightline'ları geçmek adına smoke kullanmak. Ekonomi uygun olduğunda uzun açılarda Op taşımak.
+- **Defans tarafı görevleri:** Op veya tüfeklerle agresif off-angle'lar tutup, pick aldıktan sonra Tailwind ile kaçmak. Updraft ile beklenmedik dikey pozisyonlar tutmak. Erken agresyon sağlayıp güvenle geri çekilmek.
+- **Takımın beklentisi:** Atakta ilk kill'ler. Defansta agresif Op tutuşları. Jett oyuncularından dash-peek'leri trade veya kill'e dönüştürmesi beklenir, pasif lurk yapması değil.
 
-## 3. Common Mistakes
-1. **Wasting Tailwind on retreat instead of entry** — Dash is Jett's most valuable cooldown. Using it to run away from fights she should not have taken means it is unavailable for the actual site execute. The dash should be pre-committed to aggression, not used as a panic button.
-2. **Holding float too long after updraft** — Floating makes Jett a slow-moving aerial target. Players hold the float expecting to line up a shot, but good opponents will track the predictable arc. Tap float briefly or not at all.
-3. **Predictable dash-out angles** — Dashing out the same spot (e.g., A Short on Ascent) every round trains enemies to pre-aim it. After two successful dash-peeks from the same position, the opponent will hold it. Vary the angle or timing.
-4. **Using all three Blade Storm knives immediately** — Players panic-spam right-click at medium range. Left-click picks are more reliable beyond close range. Right-click burst should be reserved for point-blank situations.
-5. **Smoking for self instead of team** — Jett's smokes are short-duration and should be used to cross sightlines for the whole team, not just to cover her own reposition. Selfish smoke usage leaves the team exposed.
-6. **Taking Op duels without dash available** — Holding an aggressive Op angle without Tailwind ready means death if the shot misses. Jett's Op power comes entirely from the ability to escape; without dash, she is just an expensive static target.
-7. **Ignoring post-plant positioning** — Jett players often stay aggressive after plant instead of using updraft to reach off-angle positions that are difficult to clear in retake.
+## 3. Sık Yapılan Hatalar
+1. **Tailwind'i entry yerine kaçış için harcamak** — Dash, Jett'in en değerli cooldown'udur. Almaması gereken dövüşlerden kaçmak için kullanmak, asıl site execute sırasında dash'in kullanılamaz olması demektir. Dash agresyona ön-taahhüt edilmeli, panik butonu olarak kullanılmamalıdır.
+2. **Updraft sonrası çok uzun süre havada kalmak** — Havada süzülmek Jett'i yavaş hareket eden bir hava hedefi yapar. Oyuncular atış hizalamayı beklerken havada kalır, ama iyi rakipler öngörülebilir yayı takip eder. Kısa dokunuşlarla süzülün ya da hiç süzülmeyin.
+3. **Öngörülebilir dash-out açıları** — Her round aynı noktadan (ör. Ascent A Short) dash ile çıkmak düşmanları o noktayı önceden nişanlamaya alıştırır. Aynı pozisyondan iki başarılı dash-peek sonrası rakip o noktayı tutacaktır. Açıyı veya zamanlamayı değiştirin.
+4. **Blade Storm bıçaklarını hepsini hemen kullanmak** — Oyuncular orta mesafede sağ tık ile panikle spam yapar. Yakın mesafe dışında sol tık pick'ler daha güvenilirdir. Sağ tık patlaması yakın mesafe durumları için saklanmalıdır.
+5. **Smoke'u takım yerine kendisi için kullanmak** — Jett'in smoke'ları kısa süreli olup tüm takımın sightline geçmesi için kullanılmalıdır, yalnızca kendi yeniden konumlanmasını kapamak için değil. Bencil smoke kullanımı takımı açık bırakır.
+6. **Dash olmadan Op düellosu almak** — Tailwind hazır olmadan agresif Op açısı tutmak, atış ıskalanırsa ölüm demektir. Jett'in Op gücü tamamen kaçış yeteneğinden gelir; dash olmadan pahalı bir sabit hedeften ibarettir.
+7. **Post-plant konumlanmayı ihmal etmek** — Jett oyuncuları plant sonrası agresif kalmaya devam eder, retake sırasında temizlenmesi zor off-angle pozisyonlara ulaşmak için updraft kullanmak yerine.
 
-## 4. Pattern -> Meaning
-IF: Player dies within 3 seconds of round start on attack frequently
-MEANING: They are dry-peeking without utility or team support, treating Jett's mobility as a substitute for teamwork
-FIX: Recommend waiting for at least one piece of team utility before committing to the entry peek. Dash should follow a flash or smoke, not replace it.
+## 4. Kalıp -> Anlam
+IF: Oyuncu atak tarafında round'un açılış anlarında sık ölüyor
+MEANING: Utility veya takım desteği olmadan kuru peek yapıyor, Jett'in hareketliliğini takım oyununun yerine koyuyor
+COUNTER: En az bir takım utility'si bekledikten sonra entry peek'e geçmesini öner. Dash bir flash veya smoke'u takip etmeli, onların yerine geçmemeli.
+WHY: Utility desteksiz entry, Jett'in hız avantajını anlamsızlaştırır ve ilk temas öncesi bilgi olmadan ölüm olasılığını artırır.
 
-IF: Player averages fewer than 0.5 first kills per attack round
-MEANING: They are not fulfilling the entry role and are likely playing passively or lurking
-FIX: Coach the player on committing to first contact. Jett without entry impact is a wasted pick — suggest switching agents if the playstyle is passive.
+IF: Oyuncu atak round'u başına ortalama 0.5'ten az ilk kill alıyor
+MEANING: Entry rolünü yerine getirmiyor, muhtemelen pasif oynuyor veya lurk yapıyor
+COUNTER: Oyuncuyu ilk temasa geçme konusunda koçla. Entry etkisi olmayan Jett boşa harcanmış bir pick'tir — oyun tarzı pasifse ajan değiştirmeyi öner.
+WHY: Jett'in tüm kit'i entry etrafında tasarlanmıştır; pasif oynamak, takımı utility'siz bir duelist ile bırakır.
 
-IF: Player has high kill count but low first-kill percentage
-MEANING: They are cleaning up rounds rather than creating them. Playing for KDA instead of impact.
-FIX: Emphasize that Jett's value is in opening rounds, not closing them. Redirect focus to first-duel win rate.
+IF: Oyuncunun kill sayısı yüksek ama ilk kill yüzdesi düşük
+MEANING: Round'ları açmak yerine temizliyor. Etki yerine KDA için oynuyor.
+COUNTER: Jett'in değerinin round'ları açmakta olduğunu vurgula, kapatmakta değil. Odağı ilk düello kazanma oranına yönlendir.
+WHY: Temizlik kill'leri zaten kazanılmakta olan round'lara katkı sağlar; açılış kill'leri round'un kazanılıp kazanılmayacağını belirler.
 
-IF: Player dies frequently after getting one kill on defense
-MEANING: They are not using Tailwind to escape after the pick, or dash is on cooldown from earlier misuse
-FIX: Drill the one-and-done pattern: peek, kill, dash out. Review dash usage logs to find where cooldown was wasted.
+IF: Oyuncu defansta bir kill aldıktan sonra sık ölüyor
+MEANING: Pick sonrası kaçmak için Tailwind kullanmıyor veya dash daha önceki yanlış kullanımdan dolayı cooldown'da
+COUNTER: Tek vuruş kalıbını çalıştır: peek, kill, dash ile çık. Cooldown'un nerede harcandığını bulmak için dash kullanım kayıtlarını incele.
+WHY: Jett'in defans değeri kill alıp hayatta kalmaktır; trade verilmek takımı sayısal dezavantaja sokar.
 
-IF: Player has very low Op purchase rate despite playing Jett
-MEANING: They may not understand Jett's economic role or lack confidence with the Op
-FIX: On full-buy rounds, recommend Op purchases when holding long angles. Jett without Op is viable but should be a conscious choice, not a habit.
+IF: Oyuncu Jett oynamasına rağmen çok düşük Op satın alma oranına sahip
+MEANING: Jett'in ekonomik rolünü anlamıyor olabilir veya Op ile kendine güvenmiyor olabilir
+COUNTER: Tam alım round'larında uzun açılar tutarken Op satın almayı öner. Op'suz Jett geçerlidir ama bilinçli bir tercih olmalıdır, alışkanlık değil.
+WHY: Op-Jett kombinasyonu Jett'in dash kaçışı sayesinde oyundaki en güvenli agresif Op oyununu sunar.
 
-## 5. Map Interactions
-- **Strong maps:** Ascent (A Short dash aggression, Mid control with Op), Breeze (long sightlines reward Op-Jett), Haven (C Long holds, A Short aggression), Lotus (A Main and C Main have strong dash-peek angles).
-- **Weak maps:** Fracture (multi-angle entries reduce dash value, too many close-range fights), Pearl (limited vertical play, corridors reduce mobility advantage).
-- **Position-specific:** On Ascent A Short, dash-out picks are high-value but become predictable after two rounds — mix in updraft or delay timing. On Breeze, Jett should prioritize mid control with Op from A side pillar.
+## 5. Harita Etkileşimleri
+- **Güçlü haritalar:** Ascent (A Short dash agresyonu, Op ile Mid kontrolü), Breeze (uzun sightline'lar Op-Jett'i ödüllendirir), Haven (C Long tutuşları, A Short agresyonu), Lotus (A Main ve C Main güçlü dash-peek açılarına sahip).
+- **Zayıf haritalar:** Fracture (çok açılı entry'ler dash değerini düşürür, çok fazla yakın mesafe dövüşü), Pearl (sınırlı dikey oyun, koridorlar hareketlilik avantajını azaltır).
+- **Pozisyona özel:** Ascent A Short'ta dash-out pick'ler yüksek değerli ama iki round sonra öngörülebilir hale gelir — updraft karıştırın veya zamanlama geciktirin. Breeze'de Jett, A tarafı sütunundan Op ile mid kontrolünü önceliklendirmeli.
 
-## 6. Matchup Notes
-- **Struggles against:** Chamber (can match Op aggression and punish overextension with Trademark), Cypher (trapwires catch dash-based aggression), Killjoy (turret tags through smokes, revealing dash direction).
-- **Counters:** Slow, immobile controllers who hold static positions. Jett can overwhelm Viper or Brimstone setups with speed and verticality.
-- **Adaptation:** Against double-sentinel compositions, Jett should avoid predictable dash routes and instead use updraft to bypass ground-level utility. Against aggressive enemy duelists, prioritize winning the first-duel rather than trading.
+## 6. Eşleşme Notları
+- **Zorlandığı ajanlar:** Chamber (Op agresyonunu karşılayabilir ve Trademark ile aşırı uzanmayı cezalandırır), Cypher (tripwire'lar dash tabanlı agresyonu yakalar), Killjoy (turret smoke'lar arasından etiketler, dash yönünü açığa çıkarır).
+- **Baskıladığı ajanlar:** Statik pozisyonlar tutan yavaş, hareketsiz controller'lar. Jett, hız ve dikeylik ile Viper veya Brimstone kurulumlarını alt edebilir.
+- **Adaptasyon:** Çift sentinel kompozisyonlara karşı Jett öngörülebilir dash rotalarından kaçınmalı ve yer seviyesi utility'yi atlamak için updraft kullanmalıdır. Agresif düşman duelist'lere karşı trade yerine ilk düelloyu kazanmayı önceliklendirin.
 
-## 7. What To Tell The Player
-### When performing well
-**Player Action:** You vary your Tailwind dash entry angles and mix Updraft vertical peeks across rounds — never the same entry twice.
-**Enemy Perception:** Defenders cannot build a mental model of where you will appear. They expect ground-level after 2 ground entries, then you Updraft. They hold close after a close dash, then you dash deep.
-**Enemy Reaction:** They are forced into reactive aim instead of prepared crosshair placement. Some start pre-aiming one angle and gambling — others spread their crosshair placement thin trying to cover multiple options.
-**Exploit Window:** The 0.5-1 second recalibration time when a defender realizes you are NOT where they expected creates a free first-shot opportunity. This window is largest on the 3rd-4th different entry of the half.
-**Repeat Strategy:** Rounds 1-2: different ground-level entry angles. Round 3: Updraft entry to punish ground-level pre-aim. Round 4: delay dash by 2 seconds to catch early rotators. Never repeat the same entry in consecutive rounds.
-**Enemy Adaptation:** After 5+ rounds, smart defenders will play deeper (off the angle entirely), stack the site with 2 players, or save utility specifically for your entry timing.
-**Counter-Adaptation:** When defenders play deep: slow your entry and clear angles methodically instead of dashing in. When they stack: fake presence at one site (Cloudburst + footstep) then rotate. When they save utility for you: let a teammate bait the utility before you dash.
-### When struggling
-"Stop forcing dry peeks. Wait for one piece of team utility before you dash in. Your job is first kill, not first death."
-### When being predictable
-"They are pre-aiming your dash angle. Change your entry point or delay your timing by two seconds."
+## 7. Oyuncuya Ne Söylenmeli
+### İyi oynarken
+**Oyuncu Aksiyonu:** Tailwind dash entry açılarını çeşitlendiriyorsun ve round'lar arasında Updraft dikey peek'lerini karıştırıyorsun — asla aynı entry iki kez yok.
+**Düşman Algısı:** Savunucular nerede belireceğine dair zihinsel bir model oluşturamazlar. 2 yer seviyesi entry'den sonra yer seviyesi beklerler, sen Updraft yaparsın. Yakın dash'ten sonra yakın beklerler, sen derine dash atarsın.
+**Düşman Tepkisi:** Hazırlanmış crosshair yerleşimi yerine tepkisel nişan almaya zorlanırlar. Bazıları bir açıyı önceden nişanlayıp kumar oynar — diğerleri birden fazla seçeneği kapamaya çalışarak crosshair yerleşimini seyreltir.
+**Fırsat Penceresi:** Bir savunucunun beklediği yerde OLMADIĞINI fark ettiğindeki anlık yeniden kalibrasyon anı bedava ilk atış fırsatı yaratır. Bu pencere yarının 3-4. farklı entry'sinde en geniştir.
+**Tekrar Stratejisi:** 1-2. round: farklı yer seviyesi entry açıları. 3. round: yer seviyesi önceden nişanlamayı cezalandırmak için Updraft entry. 4. round: erken dönenları yakalamak için dash'i kısa bir an geciktir. Arka arkaya round'larda aynı entry'yi tekrarlama.
+**Düşman Adaptasyonu:** 5+ round sonra akıllı savunucular daha derinde oynayacak (açıdan tamamen uzaklaşarak), site'ı 2 oyuncuyla yığacak veya senin entry zamanlamana özel utility saklayacaktır.
+**Karşı Adaptasyon:** Savunucular derin oynadığında: entry'yi yavaşlat ve dash atmak yerine açıları metodik olarak temizle. Yığdıklarında: bir site'ta varlık taklit et (Cloudburst + ayak sesi) sonra rotate yap. Sana özel utility sakladıklarında: sen dash atmadan önce bir takım arkadaşının utility'yi çekmesini sağla.
+### Zorlanırken
+"Kuru peek zorlamayı bırak. Dash atmadan önce bir takım utility'si bekle. Senin işin ilk kill, ilk ölüm değil."
+### Öngörülebilir olduğunda
+"Dash açını önceden nişanlıyorlar. Entry noktanı değiştir veya zamanlamanı kısa bir an geciktir."
 
-## 8. Rank Modulation
-### Low Elo (Iron-Silver)
-Focus on understanding that Jett's job is entry, not lurking. Practice basic dash-peek timing. Do not buy the Op until comfortable with rifles first. Learn one smoke crossing per map.
-### Mid Elo (Gold-Diamond)
-Develop dash economy awareness — track when dash is available before taking fights. Start incorporating updraft into post-plant positions. Learn two to three Op angles per map with escape routes.
-### High Elo (Ascendant-Immortal)
-Master timing variation on entry. Develop float-peek discipline (short taps, not long floats). Coordinate dash entries with team flashes. Recognize when to switch off Jett in agent select based on map and enemy comp.
-### Elite (Radiant)
-Focus on meta-level reads: when opponents expect your dash, when to delay, when to fake the entry and rotate. Blade Storm economy optimization. Micro-adjust float timing based on opponent reaction patterns from earlier rounds.
+## 8. Rank Modülasyonu
+### Düşük Elo (Iron-Silver)
+Jett'in işinin entry olduğunu, lurk olmadığını anlamaya odaklan. Temel dash-peek zamanlaması çalış. Tüfeklerle rahat olmadan Op satın alma. Harita başına bir smoke geçişi öğren.
+### Orta Elo (Gold-Diamond)
+Dash ekonomisi farkındalığı geliştir — dövüşe girmeden önce dash'in mevcut olup olmadığını takip et. Updraft'ı post-plant pozisyonlarına dahil etmeye başla. Harita başına iki-üç Op açısını kaçış rotalarıyla birlikte öğren.
+### Yüksek Elo (Ascendant-Immortal)
+Entry'de zamanlama çeşitliliğinde ustalaş. Float-peek disiplini geliştir (kısa dokunuşlar, uzun süzülme değil). Dash entry'leri takım flash'leriyle koordine et. Harita ve düşman kompozisyonuna göre ajan seçiminde Jett'ten çıkmayı ne zaman gerektiğini tanı.
+### Elit (Radiant)
+Meta seviyesi okumalara odaklan: rakipler dash'ini ne zaman bekliyor, ne zaman geciktirmeli, ne zaman entry taklit edip rotate yapmalı. Blade Storm ekonomi optimizasyonu. Önceki round'lardan rakip tepki kalıplarına göre float zamanlamasını mikro-ayarla.

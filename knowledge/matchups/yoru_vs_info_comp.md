@@ -1,34 +1,61 @@
-# MATCHUP: Yoru vs Info Comp
+# EŞLEŞME: Yoru vs Bilgi Kompozisyonu
 
-## Interaction Identity
-Yoru is the infiltrator — his teleport, decoy, and dimensional drift let him bypass standard defensive structures entirely. Info-heavy compositions (Sova + Cypher, Fade + Killjoy) rely on knowing where every attacker is at all times. Yoru breaks this model because he operates in places the information tools do not cover. His decoy triggers traps without consequence, his teleport puts him behind information lines, and his ultimate lets him walk through entire setups invulnerable. This matchup is about whether the info comp can track Yoru's real position or whether he creates chaos behind their lines.
+## Etkileşim Kimliği
+Yoru sızmaıcıdır — teleport'u, tuzağı ve boyutsal drifti standart savunma yapılarını tamamen bypass etmesini sağlar. Bilgi yoğun kompozisyonlar (Sova + Cypher, Fade + Killjoy) her saldırganın her an nerede olduğunu bilmeye dayanır. Yoru bu modeli kırar çünkü bilgi araçlarının kapsamadığı yerlerde faaliyet gösterir. Tuzağı trap'leri sonuçsuz tetikler, teleport'u onu bilgi hatlarının arkasına koyar ve ultimate'i tüm kurulumların arasından dokunulmaz yürümesini sağlar. Bu eşleşmede bilgi kompozisyonunun Yoru'nun gerçek pozisyonunu izleyip izleyemeyeceği veya onun hatlarının arkasında kaos yaratıp yaratamayacağı belirlenir.
 
-## Common Punish Patterns
-**Yoru punishing info comp**: Fakeout (decoy) triggers Cypher tripwires and Killjoy alarmbots, wasting the sentinel's information tools on a clone. Gatecrash teleport into backline positions that cameras and turrets do not cover. Dimensional Drift walks through entire defensive setups, gathering positions for the team to exploit. Flash into teleport arrival catches defenders who are watching the wrong angle.
+## Yaygın Cezalandırma Kalıpları
 
-**Info comp punishing Yoru**: Multiple layers of information mean even if Yoru decoys past one, another catches his real position. Turret placement that watches teleport landing spots. Fade Haunt reveals Yoru even during unconventional positioning. Process of elimination — if the decoy triggered the wire, the real Yoru is elsewhere, and that knowledge is valuable.
+### Yoru Bilgi Kompozisyonunu Cezalandırırken
 
-## What Repeated Failure Means
-If the **info comp** keeps getting fooled by Yoru, they are treating every trigger as a real player and not communicating. The team needs to learn to identify decoy triggers (audio cue, movement pattern) and call them out so the actual Yoru is hunted.
+**IF**: Fakeout (tuzak) Cypher tripwire'larını ve Killjoy alarmbot'larını tetikleyerek sentinel'in bilgi araçlarını klona harcıyor
+**MEANING**: Bilgi araçları sahte hedefe tüketildi — gerçek pozisyon gizli
+**COUNTER**: Birden fazla bilgi katmanı kullanarak Yoru birinden geçse bile diğerinin gerçek pozisyonu yakalaması
+**WHY**: Tuzak tetiklemeleri bilgi araçlarını boşa harcar
 
-If **Yoru** keeps getting caught despite his kit, the info comp has layered their tools so densely that even teleporting behind the first line puts him in front of the second. He needs to study the setup layout and teleport beyond all layers, not just past the first one.
+**IF**: Gatecrash teleport ile kameraların ve turret'ların kapsamadığı arka hat pozisyonlarına geçiliyor
+**MEANING**: Bilgi hattının arkasında — tespit edilemiyor
+**COUNTER**: Turret yerleştirmesi teleport iniş noktalarını izlemeli
+**WHY**: Teleport bilgi ağının arkasına geçiş sağlar
 
-## What AIMLO Should Say
-### When player is on the punished side
-**Info comp confused by Yoru**: "His decoy is wasting your traps. Learn the audio difference between a real player and a Fakeout trigger. When a wire triggers but the movement sounds wrong, it is the decoy — immediately hunt the real Yoru at an alternate position."
+**IF**: Dimensional Drift tüm savunma kurulumlarının içinden dokunulmaz yürüyerek takımın istismar edeceği pozisyonları topluyor
+**MEANING**: Tüm savunma yapısı ifşa ediliyor — sıfır risk
+**COUNTER**: Eleme yöntemi — tuzak teli tetiklediyse gerçek Yoru başka yerde ve bu bilgi değerli
+**WHY**: Ultimate dokunulmazlık sağlar — fiziksel müdahale imkânsız
 
-**Yoru getting caught**: "Their information web is too deep — you are teleporting past the first layer into the second. Study their setup: where are ALL the cameras, wires, and turrets? Teleport past the deepest one, not the first one."
+### Bilgi Kompozisyonu Yoru'yu Cezalandırırken
 
-### When player is on the punishing side
-**Yoru creating chaos**: "You are making their information tools unreliable. Keep sending decoys into their setup and teleporting to angles they do not expect. The more they doubt their own info, the easier your team's real push becomes."
+**IF**: Birden fazla bilgi katmanı Yoru birinden tuzakla geçse bile diğerinin gerçek pozisyonunu yakalaması
+**MEANING**: Bilgi ağı yeterince yoğun — teleport bile ikinci katmana takılıyor
+**COUNTER**: Yoru kurulum düzenini inceleyerek en derin katmanın ötesine teleport etmeli, sadece ilk katmanın ötesine değil
+**WHY**: Katmanlı bilgi tek bypass'ı telafi eder
 
-**Info comp tracking Yoru**: "You are identifying his fakes and tracking his real position. Keep layering your info tools so that even his teleport puts him in another detection zone."
+**IF**: Fade Haunt alışılmadık konumlanmada bile Yoru'yu ifşa ediyorsa
+**MEANING**: Haunt açısı Yoru'nun tüm flank rotalarını kapsıyor
+**COUNTER**: Yoru Haunt zamanlamasını okuyup ifşa penceresinden önce pozisyon değiştirmeli
+**WHY**: Haunt geniş alan taraması yapar — geleneksel yaklaşımlara bağımlı değildir
 
-## Rank Modulation
-**LOW**: Yoru does not use decoy strategically. Info comps do not exist. The matchup is irrelevant.
+## Tekrarlanan Başarısızlık Ne Anlama Gelir
+**Bilgi kompozisyonu** sürekli Yoru tarafından aldatılıyorsa, her tetiklemeyi gerçek oyuncu olarak değerlendirip iletişim kurmuyor. Takım tuzak tetiklemelerini (ses ipucu, hareket kalıbı) tanımayı öğrenmeli ve gerçek Yoru'nun alternatif pozisyondan avlanmasını sağlamak için çağrı yapmalı.
 
-**MID**: Yoru starts using Fakeout but info players do not recognize it. Coach info players on decoy recognition and Yoru on deliberate decoy-into-teleport combos.
+**Yoru** kitine rağmen sürekli yakalanıyorsa, bilgi kompozisyonu araçlarını o kadar yoğun katmanlamış ki ilk hattın arkasına teleport etmek onu ikinci hattın önüne koyuyor. Kurulum düzenini inceleyerek TÜM katmanların ötesine teleport etmeli, sadece ilkinin değil.
 
-**HIGH**: Both sides adapt. Yoru varies decoy timing; info comp players learn decoy tells. Coach the mind game layer.
+## AIMLO Ne Demeli
 
-**ELITE**: Yoru's value is in creating systemic distrust of the info comp's tools. At this level, the mere threat of Yoru makes every tripwire trigger uncertain. Coach the psychological warfare aspect.
+### Oyuncu cezalandırılan taraftayken
+**Bilgi kompozisyonu Yoru tarafından karıştırılmışsa**: "Tuzağı trap'lerini boşa harcıyor. Gerçek oyuncu ile Fakeout tetiklemesi arasındaki ses farkını öğren. Bir tel tetikleniyor ama hareket sesi yanlış geliyorsa, tuzaktır — hemen alternatif pozisyonda gerçek Yoru'yu avla."
+
+**Yoru yakalanıyorsa**: "Bilgi ağları çok derin — ilk katmanın arkasına teleport ediyorsun ama ikincisinin önüne düşüyorsun. Kurulumu incele: TÜM kameralar, teller ve turret'lar nerede? En derinine teleport et, ilkine değil."
+
+### Oyuncu cezalandıran taraftayken
+**Yoru kaos yaratıyorsa**: "Bilgi araçlarını güvensiz kılıyorsun. Kurulumlarına tuzak göndermeye ve beklemedikleri açılara teleport etmeye devam et. Kendi bilgilerinden ne kadar şüphe duyarlarsa, takımının gerçek push'u o kadar kolay olur."
+
+**Bilgi kompozisyonu Yoru'yu izliyorsa**: "Sahtelerini tanımlayıp gerçek pozisyonunu izliyorsunuz. Bilgi araçlarını katmanlamayı sürdürün ki teleport bile onu başka bir tespit bölgesine koysun."
+
+## Rank Modülasyonu
+**LOW**: Yoru tuzağı stratejik kullanmaz. Bilgi kompozisyonları mevcut değil. Eşleşmede anlam yok.
+
+**MID**: Yoru Fakeout kullanmaya başlar ama bilgi oyuncuları tanımıyor. Bilgi oyuncularına tuzak tanıma, Yoru'ya bilinçli tuzak-teleport komboları öğret.
+
+**HIGH**: İki taraf da adapte olur. Yoru tuzak zamanlamasını çeşitlendirir; bilgi kompozisyonu oyuncuları tuzak işaretlerini öğrenir. Zihin oyunu katmanını öğret.
+
+**ELITE**: Yoru'nun değeri bilgi kompozisyonunun araçlarında sistemik güvensizlik yaratmaktadır. Bu seviyede, sadece Yoru'nun varlığı her tripwire tetiklemesini belirsiz kılar. Psikolojik savaş yönünü öğret.

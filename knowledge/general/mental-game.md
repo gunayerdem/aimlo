@@ -1,247 +1,322 @@
-# Mental Game — Radiant-Level Knowledge
+# Mental Oyun -- Radiant Seviye Bilgi Bankası
 
-## Tilt Recognition and Management
+---
 
-Tilt is the single biggest reason good players perform below their level. Recognizing tilt before it controls your play is the first skill every competitive player must develop.
+## Tilt Tanıma ve Yönetimi
 
-### Tilt Warning Signs
+Tilt iyi oyuncuların seviyelerinin altında performans göstermesinin en büyük sebebi. Tilt'i oyununu kontrol etmeden önce tanımak her rekabetçi oyuncunun geliştirmesi gereken ilk beceridir.
 
-| Stage | Signs | Impact on Play |
+### Tilt Uyarı İşaretleri
+
+| Aşama | Belirtiler | Oyun Üzerindeki Etki |
 |---|---|---|
-| Stage 1 (Mild) | Sighing, complaining about team internally | Slightly more aggressive peeks, less patience |
-| Stage 2 (Moderate) | Typing in chat, blaming teammates out loud | Dry-peeking without utility, ego challenging |
-| Stage 3 (Severe) | Throwing ability usage, not communicating | Sprinting into sites, ignoring strategy |
-| Stage 4 (Full Tilt) | AFK moments, toxic voice comms, intentional misplays | Game is lost; you are hurting your team |
+| Aşama 1 (Hafif) | İç sesle şikayet, oflamak | Biraz daha agresif peek'ler, daha az sabır |
+| Aşama 2 (Orta) | Chat'e yazmak, takım arkadaşlarını sesli suçlama | Utility olmadan dry-peek, ego meydan okuma |
+| Aşama 3 (Şiddetli) | Utility'yi savurma, iletişimi kesme | Site'lara sprint atma, stratejiyi görmezden gelme |
+| Aşama 4 (Tam Tilt) | AFK anları, toksik sesli iletişim, kasıtlı hatalı oyun | Oyun kayıp; takımına zarar veriyorsun |
 
-### Tilt Management Techniques
+### Tilt Yönetim Teknikleri
 
-1. **The 3-Second Rule.** After dying, take 3 seconds before speaking or pressing any key. This prevents impulsive reactions. Watch your death with a calm mind and extract useful information (where you died, what killed you, what you could have done differently).
+IF öldüğün anda sinirle hareket ediyorsan (hemen peek atma, agresif karar verme)
+MEANING dürtüsel tepkiler verimsiz kararlara dönüşüyor
+COUNTER öldükten sonra kısa bir durakla -- herhangi bir tuşa basmadan veya konuşmadan önce bekle; ölümünü sakin bir zihinle izle ve taktiksel ders çıkar
+WHY duraklama dürtüsel tepkileri engeller ve ölümleri bilgiye çevirir
 
-2. **Reframe deaths as information.** Every death teaches you something. "I died because they hold that off-angle" is useful. "I died because this game is unfair" is tilt talking. Force yourself to extract a tactical lesson from every death.
+IF "bu oyun adaletsiz" diye düşünüyorsan
+MEANING tilt konuşuyor, taktiksel analiz yapamıyorsun
+COUNTER her ölümü yeniden çerçevele: "oradan tutuyorlarmış, off-angle" taktiksel ders verir; "adaletsiz" hiçbir şey öğretmez
+WHY her ölümden bir ders çıkarmak tilt'i bilgiye dönüştürür
 
-3. **Physical reset.** Between rounds, unclench your jaw, relax your shoulders, stretch your mouse hand for 2 seconds. Physical tension amplifies mental tilt. Breaking the physical response breaks the mental spiral.
+IF fiziksel gerilim hissediyorsan (sıkılı çene, gergin omuzlar, sıkışmış fare eli)
+MEANING fiziksel gerilim mental tilt'i amplify eder
+COUNTER round'lar arasında çeneni gevşet, omuzlarını rahatlat, fare elini kısa esne
+WHY fiziksel tepkiyi kırmak mental spirali kırar
 
-4. **Process over outcome.** Focus on whether you made the RIGHT decision, not whether you won or lost the round. A correct play that fails due to RNG or opponent aim is not your fault. An incorrect play that succeeds due to luck is not a good habit.
+IF bir takım arkadaşı toksik davranıyorsa ve tilt'ine katkı yapıyorsa
+MEANING onun iletişimini kaybetmektense performans kaybını tilt'ten yemek daha kötü
+COUNTER sustur. İletişim kaybı tilt kaybı alt düşer. Stabilize olunca sesini açabilirsin
+WHY toksik takım arkadaşı iki kişiyi düşürür; susturmak zararı bir kişiyle sınırlar
 
-5. **Mute and focus.** If a teammate is toxic and contributing to your tilt, mute them. The information loss from missing their comms is less than the performance loss from tilt. You can unmute later if you stabilize.
+---
 
-## Performance Anxiety Handling
+## Performans Kaygısı
 
-Performance anxiety (ranked anxiety, ladder anxiety) affects players at every rank, including Radiant. The fear of losing RR or deranking causes players to play passively, avoid ranked, or choke in critical moments.
+Performans kaygısı (ranked kaygısı, merdiven kaygısı) Radiant dahil her rankta oyuncuları etkiler. RR kaybetme veya rank düşme korkusu pasif oynamaya, ranked'den kaçınmaya veya belirleyici anlarda tıkanmaya neden olur.
 
-### Root Causes
+### Kök Nedenler
 
-- **Attachment to rank.** Your rank is a badge, not your identity. A Radiant player who drops to Immortal 3 is still a Radiant-level player having a bad streak.
-- **Fear of being judged.** In solo queue, this manifests as fear of being bottom frag or getting flamed.
-- **Outcome fixation.** Focusing on winning/losing rather than improving.
+IF rankına bağlanmışsan ve onu kimliğinin bir parçası olarak görüyorsan
+MEANING Immortal 3'e düşen Radiant oyuncu hala Radiant seviye oyuncu -- kötü bir seri geçiyor
+COUNTER rankı bir rozet olarak gör, kimliğin olarak değil
+WHY rank geçmiş performansını yansıtır, güncel becerisini değil
 
-### Solutions
+IF kazanma/kaybetmeye odaklanıyorsan
+MEANING sonuç odaklı düşünce kontrol edemediğin şeylere stres yaratır
+COUNTER süreç hedefleri koy: "bu maçta her peek öncesi utility kullanacağım" -- bu senin kontrolünde
+WHY süreç hedefleri her zaman kontrolünde; sonuç hedefleri değil
 
-1. **Set process goals, not outcome goals.** Instead of "I must win this game," set "I will use my utility before every peek" or "I will call every enemy position I see." These are in your control.
+### Çözümler
 
-2. **Play a set number of games.** Commit to playing 3 ranked games per session regardless of results. This prevents the pattern of stopping after one loss.
+1. **Süreç hedefleri belirle**: "Bu maçı kazanmalıyım" yerine "Her gördüğüm düşman pozisyonunu çağırdım mı?" sor.
+2. **Sabit sayıda oyun oyna**: Sonuç ne olursa olsun seans başına 3 ranked oyun oyna. Bu bir kayıptan sonra durma pattern'ini önler.
+3. **Ranked öncesi ısın**: Aim antrenmanı (Aimlabs veya Range) ardından bir unrated soğuk-başlangıç kaygısını kaldırır.
+4. **Varyansı kabul et**: Pro oyuncular bile %40-45 kazanma oranlı günler yaşarlar. 50 oyun boyunca gerçek becerilerin ortaya çıkar.
+5. **RR'den koп**: Rank Rating dalgalanır. Rankına haftalar ve aylar boyunca bak, tek tek oyunlara değil.
 
-3. **Warm up properly before ranked.** 10-15 minutes of aim training (Aimlabs or the Range) followed by one unrated or spike rush removes the cold-start anxiety.
+---
 
-4. **Accept variance.** Even professional players have 40-45% win rate days. Over 50 games, your true skill averages out. One game is noise; fifty games are signal.
+## Isınma Rutini Önerileri
 
-5. **Detach from RR.** Rank Rating fluctuates. Look at your rank over weeks and months, not individual games. If you are improving, the rank follows eventually.
+### Seans Öncesi Isınma
 
-## Warm-Up Routine Recommendations
+| Faz | Aktivite |
+|---|---|
+| Faz 1: El ısınması | Elleri 20 kez aç-kapa, bilek rotasyonları, parmak esneme |
+| Faz 2: Tracking aim | Aimlabs/Kovaaks tracking senaryoları veya Range hareketli bot'lar |
+| Faz 3: Flick aim | Aimlabs gridshot veya Range flick pratiği |
+| Faz 4: Counter-strafe pratiği | Range bot'larıyla strafe ve counter-strafe, ilk atış hassasiyetine odaklan |
+| Faz 5: Deathmatch | Bir deathmatch oyunu. Crosshair placement ve köşe pre-aim'e odaklan, skor tablosu tepesine değil |
 
-### Pre-Session Warm-Up (15-20 Minutes)
+### Oyunlar Arası Mola
 
-| Phase | Duration | Activity |
+- Ayağa kalk ve esne.
+- Su iç.
+- Hızlı el ve bilek esneme.
+- Kaybettiysen, NE YAPABİLİRDİN diye düşün -- takım ne yaptı yanlış değil, SEN ne yapabilirdin.
+
+### Aşırı Isınmadan Kaçın
+
+IF uzun süre aim antrenmanı yapıyorsan ranked öncesi
+MEANING elin yoruluyor ve aim antrenman pattern'i gerçek oyunlara tam aktarılmıyor
+COUNTER ısınmanın amacı motor sistemini aktive etmek, onu tüketmek değil -- kısa ve odaklı tut
+WHY amaç hazırlık, gelişim değil; biri kısa, diğeri uzun sürer
+
+---
+
+## Round Arası Mental Reset
+
+Her Valorant round'u yeni bir başlangıçtır. Önceki round'un sonucu bu round'daki karar vermeni etkilememeli.
+
+### Hızlı Reset Protokolu
+
+1. **Nefes al**: Kas gerilimini bırak.
+2. **Kabul et**: Önceki round sonucunu kabul et. "Kaybettik, tamam."
+3. **Planla**: Bu round'un planına odaklan. "A-Short'dayım, flash'tan sonra peek atacağım."
+4. **Hazır**: Ekrana tam odak.
+
+### Round'lar Arası Negatif Duyguları Taşıma
+
+IF one-tap yedin ve sinirlendin
+MEANING "şanssızım" düşüncesi tilt'e dönüşüyor
+COUNTER rakip iyi bir atış yaptı, kabul et ve devam et -- intikam düellosu arama
+WHY sinir taşırsan crosshair placement ve pozisyonlaman gelecek round'da bozulur
+
+IF spray'i kaçırdın
+MEANING olur, pro'lar bile milyonların önünde sahnede kaçırıyor
+COUNTER "kendimi kanıtlama" fight'ı zorlamaktan kaçın -- gelecek round'u normal oyna
+WHY intikam düellosu = dürtüsel karar = düşük başarı oranı
+
+IF takım arkadaşı hata yaptıysa
+MEANING takım arkadaşlarını kontrol edemezsin
+COUNTER kendi kontrolünde olana odaklan: utility'n, pozisyonun, iletişimin
+WHY onların hatalarına mental enerji harcarsan kendi oyunun için daha az kalır
+
+---
+
+## Güveni Küçük Zaferlerle Oluşturma
+
+Güven kalıcı bir özellik değil. Round round küçük zaferlerle inşa edilir.
+
+### Küçük Zafer Örnekleri
+
+- Round başında headshot tutturma
+- Değer sağlayan utility kullanımı (kör eden flash, görüş çizgisini kapatan smoke)
+- Doğru rotasyon çağrısı
+- Tehlike altındayken round'dan sağ çıkma
+- Clutch kazanma (1v1 bile olsa)
+- First blood alma
+
+### Güven Spirali
+
+IF oyun kötü başlıyorsa
+MEANING ilk birkaç round kötü gittiyse bile HERHANGİ bir alanda küçük zafer bul
+COUNTER kayıp round'da bile 100+ hasar vermek aim'inin çalıştığını gösterir; bunu güven temeli yap
+WHY güven birikir -- bir iyi round sonrakini kolaylaştırır çünkü rahatlarsın ve daha iyi kararlar verirsin
+
+---
+
+## Toksik Takım Arkadaşlarıyla Baş Etme
+
+### Toksisite Yönetim Protokolu
+
+IF takım arkadaşı toksik davranıyorsa
+MEANING onun performansı düşüyor VE 1-2 başka oyuncuyu da aşağı çekiyor
+COUNTER 1. ihlal: görmezden gel. 2. ihlal: "Oyuna odaklanalım" de. 3. ihlal: sesli iletişimini sustur
+WHY toksik oyuncuyla tartışmak İKİNİZİN de tilt olmasını garanti eder -- 1 yerine 2 düşük performans
+
+**Asla karşılık verme.** Toksisite'ye katılmak takımda 2 düşük performanslı oyuncu oluşturur.
+
+### Toksisite'nin Gizli Maliyeti
+
+Bir toksik oyuncusu olan takım fiilen 4.5'e 5 oynar çünkü toksik oyuncunun performansı düşer VE 1-2 başka oyuncuyu aşağı çeker. Erken susturmak bunu 4'e 5'e minimize eder (iletişimini kaybedersin ama mentalini kurtarırsın) -- bu 3'e 5'ten iyidir.
+
+---
+
+## Uzun Seans Odak Yönetimi
+
+### Seans Uzunluğu Rehberi
+
+| Seans Uzunluğu | Tavsiye | Sebep |
 |---|---|---|
-| Phase 1: Hand warm-up | 2 min | Open and close hands 20 times, wrist rotations, finger stretches |
-| Phase 2: Tracking aim | 5 min | Aimlabs/Kovaaks tracking scenarios or Range moving bots |
-| Phase 3: Flick aim | 5 min | Aimlabs gridshot or Range flick practice on medium bots |
-| Phase 4: Counter-strafe practice | 3 min | Range bots with strafing and counter-strafing, focus on first-shot accuracy |
-| Phase 5: Deathmatch | 5 min | One deathmatch game. Focus on crosshair placement and pre-aiming corners, NOT on topping the scoreboard |
+| 1-3 oyun | Gelişim için optimal | Zirve odak, iyi karar verme |
+| 4-6 oyun | Molalarla kabul edilebilir | Her 2 oyunda 5-10 dk mola al |
+| 7-9 oyun | Azalan getiri | Odak ve reaksiyon süresi bozulur; hatalar artar |
+| 10+ oyun | Zararlı | Yorgunluk kötü alışkanlıklar oluşturur, tilt amplify olur |
 
-### Between Games (2-3 Minutes)
+### Odak Bozulma Belirtileri
 
-- Stand up and stretch.
-- Drink water.
-- Quick hand and wrist stretches.
-- If you lost the previous game, take 2-3 minutes to think about what you could have done better. Not what your team did wrong — what YOU could have done.
+IF minimap'i kontrol etmeyi bırakıyorsan, yetenek almayı unutuyorsan, veya 3 round önce başarısız olan agresif peek'i tekrarlıyorsan
+MEANING odağın bozulmuş, yorgunluk başlamış
+COUNTER ranked oynamayı bırak -- unrated, aim antrenmanı, veya tamamen dur
+WHY yorgunken ranked oynamak RR kaybetmenin ve kötü alışkanlıklar geliştirmenin en hızlı yolu
 
-### Important: Do Not Over-Warm-Up
+---
 
-More than 30 minutes of aim training before ranked is counterproductive. Your hand fatigues, and the aim training pattern does not transfer perfectly to real games. The warm-up's purpose is to activate your motor system, not to exhaust it.
+## Geri Dönüş Zihniyeti
 
-## Between-Round Mental Reset
+### 0-5 Başlangıç
 
-Each round in Valorant is a fresh start. The previous round's outcome should not affect your decision-making this round.
+IF 0-5 gerideysen
+MEANING yarı 12 round, 7 round daha var -- bu bitmemiş değil
+COUNTER düşmanın aynı stratejiyi tekrarlayıp tekrarlamadığını kontrol et; bir adaptasyon birden fazla round'u çevirebilir
+WHY 0-5'te bir thrifty veya clutch kazanma 5-5'teki temiz kazançtan daha fazla momentum oluşturur
 
-### The 5-Second Reset Protocol
+### 2-10 Açık
 
-1. **Second 1-2**: Take a breath. Release muscle tension.
-2. **Second 3**: Acknowledge the previous round result. "We lost that, okay."
-3. **Second 4**: Focus on this round's plan. "I am playing A-Short, I will peek after the flash."
-4. **Second 5**: Ready. Full focus on the screen.
+IF 2-10 gerideysen
+MEANING matematiksel olarak sonraki 13 round'un 11'ini kazanman gerekiyor -- çok zor ama imkansız değil
+COUNTER küçük hedeflere böl: "bu round'u kazan", sonra "sonraki round'u kazan" -- toplam açığa bakma
+WHY rakip 11-5'te 3 round'luk seride sinirlenmeye başlar; momentum psikolojiktir
 
-### Carrying Negative Emotions Between Rounds
+### Geri Dönüş Psikolojisi
 
-- **After getting one-tapped**: You are not "unlucky." The opponent hit a good shot. Acknowledge it and move on. If you carry frustration, your crosshair placement and positioning degrade in the next round.
-- **After whiffing a spray**: It happens to every player. Pros whiff on stage in front of millions. The key is to not take a "revenge duel" — forcing a fight to "prove" you can hit shots. Play the next round normally.
-- **After a teammate misplay**: You cannot control teammates. Focus on what you can control: your utility, your positioning, your communication. If you spend mental energy on their mistakes, you have less for your own game.
+IF kaybederken takım susuyorsa
+MEANING sessizlik kaybı hızlandırır
+COUNTER geride kaldığında DAHA FAZLA iletişim kur -- sesli ve pozitif kalan takımlar geri dönüş bulur
+WHY iletişim takımı birleştirip organize eder; sessizlik bireysel kaosa dönüştürür
 
-## Confidence Building Through Small Wins
+---
 
-Confidence is not a permanent trait. It is built round by round through small wins.
+## Overtime Mental Hazırlık
 
-### What Counts as a Small Win
+### Overtime Öncesi
 
-- Landing a headshot in the opening 10 seconds.
-- Successfully using a piece of utility that provides value (a flash that blinds, a smoke that blocks a sightline).
-- Making a correct rotation call.
-- Surviving a round where you were in danger.
-- Winning a clutch (any clutch, even 1v1).
-- Getting first blood.
+IF overtime başlıyorsa
+MEANING derin nefes al, tamamen resetle
+COUNTER hızlı takım konuşması: "temiz round, birbirimize güvenelim, en iyi malzememizi oynayalım"
+WHY overtime deney zamanı değil -- en iyi stratejini seç
 
-### Building a Confidence Spiral
+### Maç Noktası Baskısı
 
-- Start each game by focusing on the FIRST small win. A good pistol round start gives confidence for the next 5 rounds.
-- If the first few rounds go badly, find a small win in ANY area. Even dealing 100+ damage in a lost round means your aim is working.
-- Confidence compounds. One good round makes the next round easier because you are relaxed and making better decisions.
+IF maç noktasındaysan
+MEANING rakip çaresiz -- agresyon, off-angle'lar ve riskli oyunlar bekle
+COUNTER disiplinli oyna, panik rush yapma -- sakin kal ve temelleri uygula
+WHY maç noktası karşısında yapılacak en kötü şey panik site rush'ı
 
-## Dealing with Toxic Teammates
+---
 
-### Toxicity Management Protocol
+## Solo Queue Mental Çerçevesi
 
-1. **First offense**: Ignore. One negative comment does not require a response.
-2. **Second offense**: Calmly say "Let's focus on the game." Do not engage in argument.
-3. **Third offense or continuous**: Mute voice comms for that player. You lose their callouts but gain mental stability.
-4. **Never reciprocate.** Engaging in toxicity guarantees that BOTH of you tilt, and now your team has two underperforming players instead of one.
-5. **Report after the game.** Not during. Reporting mid-game wastes time and mental focus.
+### Kontrol Edemediğin Şeyleri Kabul Et
 
-### The Hidden Cost of Toxicity
+Kontrol edemezsin: takım arkadaşı ajan seçleri, beceri seviyeleri, iletişimleri, tilt'leri, sunucu performansı, düşman smurf'ler.
 
-A team with one toxic player effectively plays 4.5v5 because the toxic player's performance degrades AND they drag down one or two other players' performance. Muting early minimizes this to 4v5 (you lose their comms but save your mental), which is better than 3v5 (toxic player drags two others down).
+Kontrol edebilirsin: senin ajan seçimin, utility kullanımın, iletişimin, pozisyonun, mental durumun, gelişimin.
 
-## Focus Management During Long Sessions
+### Solo Queue Sözleşmesi
 
-### Session Length Guidelines
+IF solo queue'ya giriyorsan
+MEANING bazı oyunlar kazanılamaz, bazıları bedava kazanç -- senin performansının önem kazandığı yer %60-70'lik "sana bağlı" oyunlar
+COUNTER o oyunları tutarlı kazan ve tırmanırsın
+WHY uzun vadede becerinç ortalamaya çıkar; tek oyun gürültü, elli oyun sinyal
 
-| Session Length | Recommendation | Reasoning |
-|---|---|---|
-| 1-3 games | Optimal for improvement | Peak focus, good decision-making |
-| 4-6 games | Acceptable with breaks | Take 5-10 min break every 2 games |
-| 7-9 games | Diminishing returns | Focus and reaction time degrade; errors increase |
-| 10+ games | Harmful | Fatigue causes bad habits, tilt is amplified, RR loss likely |
+### Solo Queue İletişim
 
-### Focus Degradation Signs
+IF kimse çağırmıyorsa
+MEANING default olarak IGL sen oluyorsun -- birisi çağırmalı
+COUNTER ilk iletişim kuran ol: başlangıçta "başarılar" de, çağrı yap, tonu belirle
+WHY takımına uyum sağla -- koordineli kötü plan 5 bireysel iyi plandan üstündür
 
-- You stop checking the minimap.
-- You forget to buy abilities.
-- You take the same aggressive peek that failed 3 rounds ago.
-- You stop communicating.
-- Your crosshair is drifting away from head level.
-- You miss sounds you would normally hear (footsteps, abilities).
+---
 
-When you notice these signs, stop playing ranked. Switch to unrated, aim training, or stop entirely. Playing ranked while fatigued is the fastest way to lose RR and develop bad habits.
+## Kayıp Serisi Yönetimi
 
-## Comeback Mentality
+### 3 Kayıp Kuralı
 
-### 0-5 Start
+IF arka arkaya 3 kayıp olduysa
+MEANING tilt, yorgunluk veya kötü matchmaking döngüsünde olma olasılığın yüksek
+COUNTER ranked oynamayı bırak, mola al (ideal olarak birkaç saat veya ertesi gün)
+WHY 3 kayıp sonrası devam etmek çoğu durumda daha fazla kayba yol açar
 
-- This is not over. The half is 12 rounds. You have 7 more rounds to close the gap.
-- Check if the enemy is doing the same strategy repeatedly. If so, one adaptation can swing multiple rounds.
-- Focus on economy. A 0-5 team often has max loss bonus (2,900 per round), meaning your buys can be strong despite the deficit.
-- Get ONE round. Breaking a loss streak changes the energy of the entire team. A thrifty or clutch win at 0-5 generates more momentum than a clean win at 5-5.
+### Kayıp Serisinden Sonra
 
-### 2-10 Deficit
+1. "RR'mi geri alayım" diye hemen ranked'e girme -- bu çaresizlik zihniyeti daha fazla kayba yol açar.
+2. Kaybedilen oyunlardan birinin replay'ini izle. YANLIŞ yaptığın BİR şey ve DOĞRU yaptığın BİR şey bul.
+3. Güven yeniden inşa etmek için aim antrenmanı veya unrated oyna.
+4. Sakin ve odaklı hissettiğinde ranked'e gir, kızgın veya çaresiz değilken.
 
-- Mathematically, you need to win 11 of the next 13 rounds to tie. This is extremely difficult but not impossible if the half switch favors you.
-- Defense to attack switch: If you were on defense at 2-10, your attack half may be stronger on an attacker-sided map.
-- Focus on winning the pistol round of the second half. Winning pistol into 3-10 makes 5-10 achievable, and then it is a 5-2 needed to force overtime.
-- Talk to the team: "We've got side switch, let's win the pistol and take it from there." Reframe the challenge as smaller, achievable goals.
+---
 
-### Comeback Psychology
+## Rank Kaygısı
 
-- Never look at the total deficit. Break it into small goals: "Win this round," then "Win the next round."
-- The opponent is thinking about closing. They get nervous at 11-5 when you are on a 3-round streak. Momentum is psychological.
-- Communicate MORE when behind. Teams that go silent when losing accelerate their loss. Teams that stay loud and positive find comebacks.
+### Rank Geriden Gelen Gösterge
 
-## Overtime Mental Preparation
+IF rankın geçmiş performansını yansıtıyorsa, güncel becerisini değil
+MEANING pratik ve VOD review ile geliştğini biliyorsan rankın yetişecek
+COUNTER rankın var olmadığı gibi oyna -- aynı kararları Gold 3'te ve Platinum 1'de verirsin
+WHY rank milestone'larında (Gold 3-Platinum 1, Diamond 3-Ascendant 1, Immortal 3-Radiant) korku pasif oynamaya neden olur
 
-### Before Overtime Begins
+### Promotion Oyunları
 
-- Deep breath. Reset completely.
-- Quick team talk: "Clean round, trust each other, play our best stuff."
-- Economy: Everyone has limited credits. Discuss the buy as a team.
-- Pick your best strategy. Overtime is not the time for experiments.
+Valorant'ta "promotion oyunu" yok -- RR sürekli. Ama oyuncular 90+ RR'da psikolojik olarak promotion oyunları oluşturur. Bu eklenen baskınç daha kötü performansa neden olur. Her oyunu RR'dan bağımsız olarak aynı şekilde oyna.
 
-### Match Point Pressure
+---
 
-- When you are at match point, the opponent is desperate. They will play unpredictably — expect aggression, off-angles, and risky plays.
-- When the opponent has match point, YOU might be desperate. Recognize this and play disciplined. The worst thing to do on match point against is panic rush a site.
-- Take the timeout if available. Even 30 seconds of calm discussion can settle nerves.
+## VOD Review Zihniyeti
 
-## Solo Queue Mental Framework
+### Kendi VOD'larını Nasıl İncelersin
 
-### Accept What You Cannot Control
+IF VOD izliyorsan
+MEANING amaç belirle: "savunma round'larındaki pozisyonlamayı görmek istiyorum" veya "utility kullanımımı kontrol etmek istiyorum"
+COUNTER amaçlı izle, pattern'leri bul (tek hata değil, 3+ kez tekrarlanan hataları), karar odaklı ol (aim değil)
+WHY yapılandırılmamış VOD review belirsiz hisler üretir; yapılı review spesifik düzeltmeler çıkarır
 
-You cannot control: teammate agent picks, teammate skill level, teammate communication, teammate tilt, server performance, enemy smurfs.
+### VOD Review Sıklığı
 
-You CAN control: your agent pick, your utility usage, your communication, your positioning, your mental state, your improvement.
+- Rekabetçi oyuncular: Her 5 oyuna 1 VOD review.
+- Gelişim odaklı oyuncular: Her 3 oyuna 1 VOD, kayıplara odaklanarak.
+- Aşırı review yapma. Analiz felci gerçek. Review et, 1-2 odak alanı belirle, sonra pratik et.
 
-### The Solo Queue Contract
+### Her Review'dan Ne Çıkarılmalı
 
-When you queue solo, you accept that some games are unwinnable and some are free wins. What matters is your performance in the 60-70% of games that are "decided by you." Win those consistently and you climb.
+- **Bir mekanik iyileştirme**: Geç counter-strafe, düşük crosshair placement, spray yerine burst yapılabilecek durum.
+- **Bir taktiksel iyileştirme**: Yavaş rotasyon, israf edilen utility, tahmin edilebilir pozisyon.
+- **Bir pozitif alışkanlık**: İyi yaptığın ve devam ettirmen gereken bir şey. İyi alışkanlıkları pekiştirmek kötü olanları düzeltmek kadar değerli.
 
-### Solo Queue Communication
+---
 
-- Be the first to communicate. Say "Good luck" at the start. Make calls. This sets the tone for the team.
-- If nobody is calling, you become the IGL by default. Someone has to call, and it might as well be you.
-- Adapt to your team. If they want to rush, rush with them. A coordinated bad plan beats five individual good plans.
+## Rank Modülasyonu
 
-## Loss Streak Management
+### Immortal+ İçin
 
-### The 3-Loss Rule
+IF mental oyunun mekanik seviyene yetişemiyorsa
+MEANING tilt, kayıp serisi yönetimi ve performans kaygısı seni geri tutuyor
+COUNTER bu dokümandaki tilt yönetimi ve round arası reset protokollerini bilinçlice uygula
+WHY Immortal+'da mekanik fark küçük; mental fark büyük -- mental üstünlük = tutarlı performans
 
-After 3 consecutive losses, stop playing ranked. The probability that you are tilted, fatigued, or in a bad matchmaking cycle is high. Take a break (minimum 30 minutes, ideally 2+ hours or next day).
+### Diamond-Ascendant İçin
 
-### After a Loss Streak
-
-1. Do not immediately queue ranked to "get your RR back." This desperation mindset leads to more losses.
-2. Watch a replay of one of the lost games. Find ONE thing you did wrong and ONE thing you did right.
-3. Play an aim trainer or unrated to rebuild confidence.
-4. Queue ranked when you feel calm and focused, not angry or desperate.
-
-## Rank Anxiety Handling
-
-### Rank Is a Trailing Indicator
-
-Your rank reflects your PAST performance, not your CURRENT skill. If you are improving through practice and VOD review, your rank will catch up. It always does over enough games.
-
-### Rank Milestones Cause Anxiety
-
-Players commonly experience anxiety at rank milestones: Gold 3 to Platinum 1, Diamond 3 to Ascendant 1, Immortal 3 to Radiant. The fear of "falling back" creates passive play. The solution is to play as if your rank does not exist. You would make the same decisions at Gold 3 and Platinum 1. The badge next to your name does not change the game.
-
-### Promotion Games
-
-There is no "promotion game" in Valorant — RR is continuous. But players psychologically create promotion games when they are at 90+ RR. This added pressure causes worse performance. Treat every game identically regardless of your RR.
-
-## VOD Review Mindset
-
-### How to Review Your Own VODs
-
-1. **Watch with purpose.** Before pressing play, define what you are looking for: "I want to see my positioning on defensive rounds" or "I want to check my utility usage."
-2. **Be honest, not harsh.** "I should have been further back" is useful. "I'm garbage" is not. Clinical analysis, not self-punishment.
-3. **Find patterns, not incidents.** A single mistake is noise. If you make the same mistake 3+ times in a game, it is a pattern that needs fixing.
-4. **Focus on decisions, not aim.** Your aim in the VOD already happened. What matters is: Did you take the right fight? Were you positioned correctly? Did you use utility before peeking?
-5. **Watch the minimap.** Your own VOD shows the full minimap with teammate and enemy positions (post-round). Check if your rotations and positioning were optimal given the information available.
-
-### VOD Review Frequency
-
-- Competitive players: Review 1 VOD per 5 games played.
-- Improvement-focused players: Review 1 VOD per 3 games, focusing on losses.
-- Do not over-review. Paralysis by analysis is real. Review, identify 1-2 focus areas, then go practice.
-
-### What to Extract from Each Review
-
-- **One mechanical improvement**: A counter-strafe that was late, crosshair placement that was low, a spray that could have been a burst.
-- **One tactical improvement**: A rotation that was slow, utility that was wasted, a position that was predictable.
-- **One positive habit**: Something you did well that you should keep doing. Reinforcing good habits is as important as fixing bad ones.
+IF ranked kaygısı ve tilt ile mücadele ediyorsan
+MEANING süreç hedefleri koymak ve 3 kayıp kuralını uygulamak en büyük gelişim alanın
+COUNTER her seans öncesi 1-2 süreç hedefi belirle, 3 kayıptan sonra dur, VOD review'i alışkanlık yap
+WHY bu seviyede mental disiplin rankını mekanik gelişimden daha hızlı ileri taşır

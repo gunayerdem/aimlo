@@ -1,34 +1,46 @@
 # MATCHUP: Duelist vs Sentinel
 
-## Interaction Identity
-The fundamental tension of Valorant site takes. Duelists exist to create space and get first kills; sentinels exist to deny space and punish aggression. This matchup determines whether a site take costs the attackers 0 utility or all of it. When a duelist walks into a sentinel setup unprepared, they die. When a duelist clears the setup first, the sentinel becomes a vanilla rifler. The entire attacking meta revolves around how efficiently duelists can neutralize sentinel utility before committing.
+## Etkileşim Kimliği
+Valorant site alımlarının temel gerilimi. Duelist'ler alan açmak ve ilk kill almak için vardır; sentinel'ler alan engellemek ve agresyonu cezalandırmak için vardır. Bu matchup bir site alımının saldıranlara sıfır yetenek mi yoksa tamamını mı mal edeceğini belirler. Bir duelist hazırlıksız olarak sentinel kurulumuna yürürse ölür. Duelist önce kurulumu temizlerse sentinel sıradan bir tüfekçi olur. Tüm saldırı metası duelist'lerin commit etmeden önce sentinel yeteneklerini ne kadar verimli nötralize edebildiği etrafında döner.
 
-## Common Punish Patterns
-**Sentinel punishing duelist**: Tripwires, alarmbots, and turrets detect the duelist's approach before they can peek. The sentinel pre-positions off the angle the duelist expects, turning a 50/50 gunfight into an ambush. Nanoswarms, GravNets, and slow orbs punish the duelist's forward momentum — the very thing that makes them effective.
+## Yaygın Cezalandırma Kalıpları
 
-**Duelist punishing sentinel**: Dash, dismiss, or movement abilities let the duelist bypass or survive trap utility. Flashes (if available) force the sentinel off their angle. Aggressive peeking overwhelms sentinels who are watching utility instead of holding crosshairs. The fastest duelists push before the sentinel can react to their own trap triggers.
+**IF**: Tripwire, alarmbot ve turret duelist'in yaklaşmasını peek edebilmeden tespit ediyorsa ve sentinel duelist'in beklediği açının dışında pozisyon alıyorsa
+**MEANING**: 50/50 silah kavgası pusuyа dönüşür. Nanoswarm, GravNet ve slow orb duelist'in ileri momentumunu cezalandırır — onları güçlü kılan tam da bu özellik.
+**COUNTER**: Dash, dismiss veya hareket yetenekleri duelist'in tuzak yeteneklerini bypass etmesine veya hayatta kalmasına izin verir. Flash sentinel'ı açısından zorlar. Agresif peek yetenek izleyen sentinel'leri ezer. En hızlı duelist'ler sentinel kendi tuzak tetiklemesine tepki veremeden push eder.
+**WHY**: Sentinel kurulumu bilgi ve gecikme sağlar — duelist bunu hız veya yetenek temizliğiyle aşmak zorundadır.
 
-## What Repeated Failure Means
-If the **duelist** keeps dying to sentinel setups, it means they are dry-peeking into prepared positions without clearing utility first. They are treating every site take as a raw aim duel when it is actually a utility puzzle. This player lacks patience and map awareness.
+**IF**: Duelist yetenek temizlemeden hazır pozisyonlara kuru peek yaparak sentinel kurulumuna sürekli ölüyorsa
+**MEANING**: Her site alımını ham aim duel'u gibi ele alıyor, aslında bu bir yetenek bulmacası. Bu oyuncunun sabrı ve harita farkındalığı eksik.
+**COUNTER**: Commit etmeden önce tuzakları temizlemek için takımın flash ve bilgi yeteneklerini kullan. Hız nanoswarm'a koşarsan işe yaramaz.
+**WHY**: Entry önce bir yetenek problemidir, sonra aim problemi.
 
-If the **sentinel** keeps losing to duelists despite having utility deployed, it means their setups are either too predictable (enemy knows exactly where everything is) or too passive (utility provides information but the sentinel does not act on it in time).
+**IF**: Sentinel her raund aynı köşelere ve geçiş noktalarına yetenek koyuyorsa ve duelist kurulumun nerede biteceğini önceden biliyorsa
+**MEANING**: Tahmin edilebilir kurulum avantajını yok eder. Duelist tuzakları görmeden bypass edebilir çünkü tam olarak nerede olduklarını öğrenmiştir. Sentinel yetenekleri artık bilgi değil, kaçınma antrenmanı sağlar.
+**COUNTER**: Sentinel yetenek pozisyonlarını raund-raund değiştirmeli; duelist'e her raund aynı temizleme rutininin işe yaramayacağını öğretmeli. Beklenmedik açılardan kurulum, duelist commit ettikten sonra gerçek sürpriz sağlar.
+**WHY**: Statik kurulum statik savunmadır — uyum sağlayan sentinel, öğrenen duelist'e karşı daima avantajlıdır.
 
-## What AIMLO Should Say
-### When player is on the punished side
-**Duelist dying to setups**: "Stop dry-peeking into sentinel sites. Your entry is a utility problem first and an aim problem second. Use your team's flashes and info to clear traps before you commit. Your speed is useless if you run into a nanoswarm."
+## Tekrarlayan Başarısızlık Ne Anlama Gelir
+**Duelist** sentinel kurulumuna sürekli ölüyorsa, önce yetenek temizlemeden hazır pozisyonlara kuru peek yapıyor. Her site alımını ham aim duel'u gibi ele alıyor ama aslında bu bir yetenek bulmacası. Bu oyuncunun sabrı ve harita farkındalığı eksik.
 
-**Sentinel losing to duelists**: "Your setups are not working because they are predictable. The enemy duelist knows your tripwire is there before they even peek. Rotate your utility positions and play off your own traps — when the alarm triggers, you should already be in position to punish."
+**Sentinel** yetenek konumlandırmasına rağmen duelist'lere sürekli kaybediyorsa, kurulumu ya çok tahmin edilebilir (düşman her şeyin nerede olduğunu biliyor) ya da çok pasif (yetenek bilgi sağlar ama sentinel zamanında harekete geçmiyor).
 
-### When player is on the punishing side
-**Duelist clearing setups effectively**: "You are dismantling their site before they can fight back. Keep using utility to clear traps and maintain this pressure — sentinel players tilt hard when their setup gets nullified round after round."
+## AIMLO Ne Demeli
+### Oyuncu cezalandırılan taraftayken
+**Duelist kurulumlara ölüyorken**: "Sentinel site'larına kuru peek yapmayı bırak. Entry'n önce bir yetenek problemi, sonra aim problemi. Commit etmeden önce tuzakları temizlemek için takımının flash ve bilgi yeteneklerini kullan. Nanoswarm'a koşarsan hızın işe yaramaz."
 
-**Sentinel shutting down duelists**: "Your setups are doing the work. The enemy duelist is frustrated and starting to make impatient plays. Keep varying your positions so they cannot adapt."
+**Sentinel duelist'lere kaybediyorken**: "Kurulumların çalışmıyor çünkü tahmin edilebilir. Düşman duelist peek etmeden önce tripwire'ının orada olduğunu biliyor. Yetenek pozisyonlarını değiştir ve kendi tuzakların üzerinden oyna — alarm tetiklenince cezalandırmak için zaten pozisyonda olmalısın."
 
-## Rank Modulation
-**LOW**: Duelists W-key into traps without thinking. Sentinels place utility but forget to play off it. Coach basic cause-and-effect: trap triggers mean enemy is there, act on it.
+### Oyuncu cezalandıran taraftayken
+**Duelist kurulumları verimli temizliyorken**: "Savaşmadan site'larını söküyorsun. Tuzakları temizlemek için yetenek kullanmaya devam et ve bu baskıyı sürdür — sentinel oyuncular kurulumu raund raund boşa gidince sert tilt oluyor."
 
-**MID**: Duelists start clearing some utility but are inconsistent. Sentinels have decent setups but repeat them. Coach utility clearing discipline for duelists, setup rotation for sentinels.
+**Sentinel duelist'leri durduruyor**: "Kurulumların işi yapıyor. Düşman duelist sınırlı ve sabırsız hamle yapmaya başlıyor. Pozisyonlarını değiştirmeye devam et ki uyum sağlayamasınlar."
 
-**HIGH**: Both sides understand the dynamic. The matchup becomes about timing and reads — who adapts faster mid-game. Coach adaptability and round-to-round variation.
+## Rank Modülasyonu
+**LOW**: Duelist'ler düşünmeden tuzaklara W-key yapar. Sentinel'ler yetenek koyar ama üzerinden oynamayı unutur. Temel sebep-sonuç öğret: tuzak tetiklenmesi düşman orada demektir, harekete geç.
 
-**ELITE**: The duelist-sentinel interaction is solved at the mechanical level. The advantage goes to whichever side reads the other's adaptation faster. Coach meta-reads and tendency tracking across halves.
+**MID**: Duelist'ler bazı yetenekleri temizlemeye başlar ama tutarsız. Sentinel'lerin makul kurulumları var ama tekrar ederler. Duelist'lere yetenek temizleme disiplini, sentinel'lere kurulum rotasyonu öğret.
+
+**HIGH**: Her iki taraf da dinamiği anlar. Matchup zamanlama ve okumalara dönüşür — oyun ortasında kim daha hızlı uyum sağlar. Uyum yeteneğini ve raund-raund değişiklik öğret.
+
+**ELITE**: Duelist-sentinel etkileşimi mekanik seviyede çözülmüştür. Avantaj diğer tarafın uyumunu daha hızlı okuyan tarafa gider. Meta-okumalar ve yarılar boyunca eğilim takibi öğret.

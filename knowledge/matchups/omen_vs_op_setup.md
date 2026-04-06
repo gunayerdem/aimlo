@@ -1,34 +1,61 @@
-# MATCHUP: Omen vs OP Setup
+# EŞLEŞME: Omen vs OP Kurulumu
 
-## Interaction Identity
-Operator setups rely on static sightline control — the OP player holds a long angle and punishes anyone who peeks it. Omen's entire kit is designed to manipulate sightlines. His smokes block the OP angle, his paranoia blinds the OP player through walls, and his teleports let him appear behind or beside the angle the OP is watching. This matchup asks: can Omen deny the OP its sightline and reposition around it, or can the OP player adapt fast enough to catch Omen's repositions?
+## Etkileşim Kimliği
+Operator kurulumları statik sightline kontrolüne dayanır — OP oyuncusu uzun bir açı tutar ve peek eden herkesi cezalandırır. Omen'in tüm kiti sightline manipülasyonu için tasarlanmıştır. Smoke'ları OP açısını kapatır, paranoia'sı OP oyuncusunu duvarlardan kör eder ve teleport'ları OP'un izlediği açının arkasına veya yanına çıkmasını sağlar. Bu eşleşmede soru şu: Omen OP'a sightline'ını inkâr edip etrafında konumlanabilir mi, yoksa OP oyuncusu Omen'in yeniden konumlanmasını yakalayacak kadar hızlı adapte olabilir mi?
 
-## Common Punish Patterns
-**Omen punishing OP setup**: Smoke directly on the OP sightline, denying the angle entirely without risk. Paranoia through the wall at the OP player's known position forces them to reposition or fight blind. Shrouded Step to a flanking position while the OP player watches the smoked angle. From the Shadows (ultimate) into the OP player's backline, turning the angle completely around.
+## Yaygın Cezalandırma Kalıpları
 
-**OP setup punishing Omen**: Repositioning off the smoked angle before Omen pushes through. Pre-aiming the smoke edge because Omen players love to push their own smoke. Listening for Shrouded Step audio cues and rotating to cover the new angle. Quick-scoping Omen during his teleport arrival animation when he is briefly vulnerable.
+### Omen OP Kurulumunu Cezalandırırken
 
-## What Repeated Failure Means
-If the **OP player** keeps getting neutralized by Omen's smokes and repositions, they are holding the same angle after it is smoked instead of moving. An OP behind smoke is a useless OP. They need to reposition the moment the smoke lands.
+**IF**: Omen smoke'u doğrudan OP sightline'ına koyuyor ve açıyı risksiz kapatıyor
+**MEANING**: OP'un sightline kontrolü tamamen iptal edildi
+**COUNTER**: OP oyuncusu smoke'lanmış açıdan push gelmeden önce yeniden konumlanmalı
+**WHY**: Smoke arkasındaki OP işe yaramaz bir OP'tur
 
-If **Omen** keeps dying despite smoking the OP, he is pushing through his own smoke predictably or teleporting to positions the OP player can hear and pre-aim. His repositions are too obvious.
+**IF**: Omen Paranoia'yı OP oyuncusunun bilinen pozisyonuna duvardan atıyor
+**MEANING**: OP oyuncusu yeniden konumlanmak veya kör dövüşmek zorunda
+**COUNTER**: OP oyuncusu Paranoia açısını tahmin edip önceden farklı açıya geçmeli
+**WHY**: Kör OP oyuncusu hem atış yapamaz hem pozisyon tutamaz
 
-## What AIMLO Should Say
-### When player is on the punished side
-**OP player neutralized by Omen**: "The moment Omen smokes your angle, you must move. Do not wait behind the smoke hoping he peeks — reposition to a new sightline. Your OP is only valuable when you have a clear angle."
+**IF**: Omen Shrouded Step ile smoke'lu açıyı izleyen OP'un farklı tarafına geçiyor
+**MEANING**: OP oyuncusu yanlış açıyı izliyor, Omen flank pozisyonunda
+**COUNTER**: OP oyuncusu Shrouded Step ses ipuçlarını dinleyip yeni açıyı kapatmalı
+**WHY**: Teleport, OP'un izlediği açıyı tamamen anlamsız kılar
 
-**Omen dying to OP despite smoking**: "Your smokes are landing but your follow-up is predictable. Stop pushing through your own smoke into the OP — he is pre-aiming the edge. Teleport to a completely different angle or wait for the smoke to fade and re-smoke from a new position."
+### OP Kurulumu Omen'i Cezalandırırken
 
-### When player is on the punishing side
-**Omen shutting down the OP**: "Your smoke control is making their OP worthless. Keep denying the sightline and use Paranoia to force repositioning. The OP player is frustrated and will start making positioning errors."
+**IF**: OP oyuncusu smoke'lanmış açıdan Omen push etmeden önce yeniden konumlanıyor
+**MEANING**: Smoke'un yaratması gereken fırsat penceresi kapanıyor
+**COUNTER**: Omen smoke sonrası push yerine teleport ile tamamen farklı açıya geçmeli
+**WHY**: Yeniden konumlanan OP yeni sightline ile avantajını korur
 
-**OP player adapting to Omen**: "You are repositioning off smokes correctly and catching his teleport arrivals. Keep varying your fallback positions so Omen cannot predict where you go when smoked."
+**IF**: OP oyuncusu smoke kenarını on-aim'liyor çünkü Omen oyuncuları kendi smoke'larından push etmeyi seviyor
+**MEANING**: Tahmin edilebilir push cezalandırılıyor
+**COUNTER**: Omen smoke'undan push etmeyi bırakıp farklı açıdan teleport etmeli
+**WHY**: Smoke kenarı push en çok beklenen hareket
 
-## Rank Modulation
-**LOW**: Omen does not smoke OP angles deliberately. OP players hold the same spot all round. Coach Omen to identify and smoke OP sightlines specifically.
+## Tekrarlanan Başarısızlık Ne Anlama Gelir
+**OP oyuncusu** sürekli Omen'in smoke ve yeniden konumlanmalarıyla etkisiz kalıyorsa, smoke'landıktan sonra hareket etmek yerine aynı açıda bekliyor. Smoke arkasındaki OP işe yaramaz. Smoke düştüğü anda yeniden konumlanmalı.
 
-**MID**: Omen smokes the OP but then dry-peeks through his own smoke. OP does not reposition. Coach both on the next step — Omen should teleport, OP should move.
+**Omen** OP'u smoke'lamasına rağmen sürekli ölüyorsa, kendi smoke'ünden tahmin edilebilir şekilde push ediyor veya OP oyuncusunun duyabilip on-aim yapabileceği pozisyonlara teleport ediyor. Yeniden konumlanmaları çok bariz.
 
-**HIGH**: Both sides play the repositioning game. Coach timing — how long to hold the smoke before pushing, when to teleport, and reading TP audio cues.
+## AIMLO Ne Demeli
 
-**ELITE**: The interaction is a chess match. Omen places smokes to force specific repositions he has pre-aimed. The OP player fakes repositions and holds unexpected angles. Coach reads and adaptation speed.
+### Oyuncu cezalandırılan taraftayken
+**OP oyuncusu Omen tarafından etkisiz kalıyorsa**: "Omen açını smoke'ladığı anda hareket etmelisin. Smoke arkasında peek etmesini bekleyerek bekleme — yeni sightline'a yeniden konumlan. OP'un sadece temiz açın olduğunda değerli."
+
+**Omen OP'u smoke'lamasına rağmen ölüyorsa**: "Smoke'ların düşüyor ama devamı tahmin edilebilir. Kendi smoke'ünden OP'a doğru push etmeyi bırak — kenarı on-aim'liyor. Tamamen farklı açıya teleport et veya smoke'un bitmesini bekleyip yeni pozisyondan yeniden smoke'la."
+
+### Oyuncu cezalandıran taraftayken
+**Omen OP'u kapatıyor**: "Smoke kontrolün OP'larını işe yaramaz kılıyor. Sightline'ı inkâr etmeye devam et ve Paranoia ile yeniden konumlanmaya zorla. OP oyuncusu sınırlı ve pozisyon hataları yapacak."
+
+**OP oyuncusu Omen'e adapte oluyorsa**: "Smoke'lardan doğru yeniden konumlanıp teleport varışlarını yakalıyorsun. Geri çekilme pozisyonlarını çeşitlendirmeye devam et ki Omen smoke'landığında nereye gittiğini tahmin edemesin."
+
+## Rank Modülasyonu
+**LOW**: Omen OP açılarına bilinçli smoke atmıyor. OP oyuncuları tüm raund aynı yerde tutar. Omen'e OP sightline'larını tespit edip spesifik olarak smoke'lamasını öğret.
+
+**MID**: Omen OP'u smoke'luyor ama sonra kendi smoke'ünden kuru peek yapıyor. OP yeniden konumlanmıyor. Her ikisine bir sonraki adımı öğret — Omen teleport etmeli, OP hareket etmeli.
+
+**HIGH**: İki taraf da yeniden konumlanma oyunu oynuyor. Zamanlama öğret — push etmeden önce smoke'u ne kadar tutmak, ne zaman teleport etmek ve TP ses ipuçlarını okumak.
+
+**ELITE**: Etkileşim satranç maçına dönüyor. Omen, on-aim yaptığı spesifik yeniden konumlanmaları zorlamak için smoke'lar yerleştiriyor. OP oyuncusu sahte yeniden konumlanmalar yapıp beklenmedik açılarda tutuyor. Okumaları ve adaptasyon hızını öğret.

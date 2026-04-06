@@ -1,34 +1,46 @@
 # MATCHUP: Jett vs Cypher
 
-## Interaction Identity
-Jett is the epitome of speed and verticality; Cypher is the master of ground-level intel. This matchup tests whether Jett's mobility can outpace Cypher's information web. Jett's updraft and dash let her bypass tripwires entirely, and her aggressive peeks can overwhelm a Cypher who is watching his camera instead of holding a crosshair. But a Cypher who reads Jett's movement pattern can turn her aggression into a free kill callout for his team. This is speed versus foresight.
+## Etkileşim Kimliği
+Jett hız ve dikeyliğin somut halidir; Cypher yer seviyesi istihbaratın ustası. Bu matchup Jett'in hareketliliğinin Cypher'ın bilgi ağını aşıp aşamayacağını test eder. Jett'in updraft ve dash'i tripwire'ları tamamen bypass etmesine izin verir ve agresif peek'ler kamerasını izlerken crosshair tutmayan bir Cypher'ı ezebilir. Ancak Jett'in hareket kalıbını okuyan bir Cypher, onun agresyonunu takımı için bedava kill bilgisine çevirebilir. Bu hız vs. öngörü.
 
-## Common Punish Patterns
-**Jett punishing Cypher**: Updraft over low tripwires, making ground-level traps useless. Dash through camera sightlines before Cypher can tag her. Aggressive peeks into Cypher's site force him to fight mechanically — something he is not built to do. Tailwind after taking a fight lets Jett escape the punish that Cypher's information should have enabled.
+## Yaygın Cezalandırma Kalıpları
 
-**Cypher punishing Jett**: Camera spots Jett's approach angle before she commits, allowing pre-aim. Tripwires at heights that catch updraft landings. Neural Theft after a teammate kills Jett (or vice versa) reveals the team's post-Jett plan. Cage placement that masks Cypher's reposition, negating Jett's speed advantage because she cannot track where he went.
+**IF**: Jett updraft ile alçak tripwire'ların üstünden aşar, dash ile kamera sightline'larından Cypher etiketleyemeden geçer ve agresif peek'ler Cypher'ı mekanik savaşa zorlarsa
+**MEANING**: Jett Cypher'ın yer seviyesi bilgi sistemini hareketlilikle devre dışı bırakıyor. Tailwind bir kavga aldıktan sonra Cypher'ın bilgisinin sağlaması gereken cezalandırmadan kaçışına izin verir.
+**COUNTER**: Kamera Jett'in commit etmeden önce yaklaşım açısını tespit eder ve önceden hedefleme sağlar. Updraft iniş noktalarını yakalayan yükseklikte tripwire'lar. Bir takım arkadaşı Jett'i öldürdükten sonra Neural Theft takımın Jett-sonrası planını açığa çıkarır. Cage yerleştirmesi Cypher'ın repozyonunu maskeler ve Jett'in hız avantajını nötralize eder çünkü nereye gittiğini takip edemez.
+**WHY**: Jett'in kiti özellikle yer seviyesi yeteneği yok saymak için tasarlanmıştır — Cypher ya uyum sağlamalı ya da ham silah oyununa geri dönmeli.
 
-## What Repeated Failure Means
-If **Jett** keeps dying to Cypher's setups, she is not using her mobility to bypass traps — she is running through them on the ground like any other agent. She has forgotten that her kit is specifically designed to ignore ground-level utility.
+**IF**: Cypher Jett'in hareket kalıplarını okuyup commit etmeden önce yakalıyorsa
+**MEANING**: Cypher kamera açılarını Jett'in olası entry yollarını izlemek için uyarlamış ve trap'leri Jett'in hareket kalıplarına göre konumlandırmıştır.
+**COUNTER**: Jett entry yollarını ve zamanlamasını çeşitlendirmeli. Her zaman aynı açıdan girme. Bypass ile temizleme arasında değiş — tahmin edilemez kal.
+**WHY**: Kalıp okunduğunda hız artık avantaj değildir — çeşitlendirme gerekir.
 
-If **Cypher** keeps losing to Jett despite having utility deployed, his tripwires are placed at ground level where Jett bypasses them, and he is watching camera when she peeks him. He needs to adapt his setup to anti-air coverage or abandon utility in favor of raw gunplay against Jett specifically.
+**IF**: Jett dash ile temizleme yerine kamera sightline'larına doğrudan girerken Cypher Neural Theft ile öldürme sonrası takımın pozisyonunu açığa çıkarıyorsa
+**MEANING**: Jett hareketliliğini bilgi kovası olarak kullanıyor — hızla giriyor ama Cypher için değerli bilgi üretiyor. Neural Theft Jett'i öldürdükten sonra takımın rotate planını ve kalan kit durumunu gösterir. Jett bu sayede sadece bir kill değil, bir bilgi kaynağına dönüşür.
+**COUNTER**: Jett Cypher'a commit etmeden önce kamerayı yok etmeli ya da bölgeyi smoke ile maskelemeli. Kamera kör olduğunda Neural Theft değersizleşir. Jett öldürme almak zorunda olmadığı durumlarda agresif peek yerine bilgi toplamadan geçmeli.
+**WHY**: Cypher'ın değeri kill'den değil bilgiden gelir — Jett kamerayı susturmadan agresif oynayarak Cypher'a en güçlü silahını bedavaya verir.
 
-## What AIMLO Should Say
-### When player is on the punished side
-**Jett dying to Cypher**: "You have updraft and dash — use them. Do not walk through doorways with tripwires. Jump over them, dash past cameras, and take fights before Cypher can relay info to his team."
+## Tekrarlayan Başarısızlık Ne Anlama Gelir
+**Jett** Cypher'ın kurulumuna sürekli ölüyorsa, trap'leri bypass etmek için hareketliliğini kullanmıyor — diğer ajanlar gibi yerden yürüyordur. Kitinin özellikle yer seviyesi yeteneği yok saymak için tasarlandığını unutmuştur.
 
-**Cypher losing to Jett**: "Your ground-level traps do not catch Jett. Place tripwires higher to catch updraft landings, or accept that your info tools are less effective against her and focus on gun positioning. Do not be on camera when she peeks."
+**Cypher** yetenek konumlandırmasına rağmen Jett'e sürekli kaybediyorsa, tripwire'lar Jett'in bypass ettiği yer seviyesinde ve Jett peek ederken kamerada. Kurulumunu hava kapsamasına uyarlamalı veya Jett'e karşı özellikle yetenek yerine ham silah oyununa dönmeli.
 
-### When player is on the punishing side
-**Jett bypassing Cypher**: "You are making his kit irrelevant by playing above it. Keep using verticality and speed to deny him info."
+## AIMLO Ne Demeli
+### Oyuncu cezalandırılan taraftayken
+**Jett Cypher'a ölüyorken**: "Updraft ve dash'in var — kullan. Tripwire olan kapılardan yürüme. Üstlerinden atla, kameralardan dash'la geç ve Cypher takımına bilgi aktaramadan kavgaya gir."
 
-**Cypher reading Jett**: "You are catching her patterns before she commits. Keep adapting your camera angles to watch her likely entry paths."
+**Cypher Jett'e kaybediyorken**: "Yer seviyesi trap'lerin Jett'i yakalamaz. Tripwire'ları updraft inişlerini yakalamak için daha yukarı koy veya Jett'e karşı bilgi araçlarının daha az verimli olduğunu kabul et ve silah pozisyonlamasına odaklan. Jett peek ederken kamerada olma."
 
-## Rank Modulation
-**LOW**: Jett does not use updraft to bypass wires. Cypher places wires where they catch anyone. The matchup is generic.
+### Oyuncu cezalandıran taraftayken
+**Jett Cypher'ı bypass ediyorken**: "Üstünden oynayarak kitini alakasız kılıyorsun. Dikeylik ve hız kullanarak ona bilgi vermeyi engellemeye devam et."
 
-**MID**: Jett starts jumping over wires occasionally. Cypher does not adapt height. Coach Cypher to raise wire placement against mobile agents.
+**Cypher Jett'i okuyorken**: "Commit etmeden önce kalıplarını yakalıyorsun. Kamera açılarını olası entry yollarını izlemek için uyarlamaya devam et."
 
-**HIGH**: Both sides adapt round-to-round. Coach Jett on timing (when to bypass vs. when to clear) and Cypher on reading Jett's preferred entry.
+## Rank Modülasyonu
+**LOW**: Jett wire'ları bypass etmek için updraft kullanmaz. Cypher wire'ları herkesi yakalayacak şekilde koyar. Matchup jenerik.
 
-**ELITE**: Jett's bypass is assumed. Cypher's value against Jett shifts entirely to camera intel and Neural Theft timing. The wire game is secondary.
+**MID**: Jett ara sıra wire'ların üstünden atlamaya başlar. Cypher yüksekliğe uyum sağlamaz. Cypher'a mobil ajanlara karşı wire yerleştirme yükseltmeyi öğret.
+
+**HIGH**: Her iki taraf da raund-raund uyum sağlar. Jett'e zamanlama (ne zaman bypass ne zaman temizle), Cypher'a Jett'in tercih ettiği entry'yi okuma öğret.
+
+**ELITE**: Jett'in bypass'ı varsayılan. Cypher'ın Jett'e karşı değeri tamamen kamera istihbaratı ve Neural Theft zamanlamasına kayar. Wire oyunu ikincil olur.

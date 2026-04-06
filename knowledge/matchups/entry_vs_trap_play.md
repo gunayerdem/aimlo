@@ -1,34 +1,46 @@
-# MATCHUP: Entry vs Trap Play
+# MATCHUP: Entry vs Trap Oyunu
 
-## Interaction Identity
-Entry fraggers live on momentum — the faster they get onto site, the less time defenders have to set up crossfires. Trap players live on preparation — the more time they have, the more deadly the site becomes. This matchup is a direct collision between speed and preparation. The entry's question is: can I clear or bypass the traps fast enough that my momentum is preserved? The trap player's question is: can my setup survive long enough to slow the entry and create a punish window?
+## Etkileşim Kimliği
+Entry fragger'lar momentumla yaşarlar — site'a ne kadar hızlı ulaşırlarsa savunmacıların crossfire kurma zamanı o kadar az olur. Trap oyuncuları hazırlıkla yaşarlar — ne kadar zamanları olursa site o kadar ölümcül olur. Bu matchup hız ile hazırlık arasında doğrudan bir çarpışmadır. Entry'nin sorusu: trap'leri momentumumu koruyacak kadar hızlı temizleyebilir veya bypass edebilir miyim? Trap oyuncusunun sorusu: kurulumum entry'i yavaşlatacak ve cezalandırma penceresi oluşturacak kadar dayanabilir mi?
 
-## Common Punish Patterns
-**Trap player punishing entry**: Tripwires in doorways catch rushing entries. Alarmbots at chokepoints trigger vulnerability before the gunfight. Nanoswarms on default paths deal damage before the entry can clear them. Turrets force the entry to choose between clearing the turret (losing momentum) or ignoring it (getting tagged in the back). Sonic sensors concuss entries who run through, punishing the very speed they depend on.
+## Yaygın Cezalandırma Kalıpları
 
-**Entry punishing trap player**: Fast execution with teammate utility (flash + entry) overwhelms the trap before the sentinel can react. Destroying visible traps from range before pushing. Using movement abilities (Jett updraft, Raze satchel) to bypass ground-level traps entirely. Coordinate with initiators to reveal trap locations before entry commits.
+**IF**: Kapılardaki tripwire'lar rush eden entry'leri yakalıyor, choke noktalarındaki alarmbot'lar silah kavgasından önce vulnerability tetikliyor ve default yollardaki nanoswarm'lar entry temizleyemeden hasar veriyorsa
+**MEANING**: Trap oyuncusu entry'nin momentumunu kullanan bir savunma engeli oluşturmuştur. Turret entry'i temizlemek (momentum kaybetmek) ile yok saymak (arkadan etiketlenmek) arasında seçmeye zorlar. Sonic sensor'lar koşan entry'leri concuss eder — bağımlı oldukları hızı cezalandırır.
+**COUNTER**: Takım arkadaşının yeteneği ile hızlı execute (flash + entry) trap sentinel tepki veremeden ezer. Görünür trap'leri push etmeden önce mesafeden yok et. Hareket yetenekleri (Jett updraft, Raze satchel) ile yer seviyesindeki trap'leri bypass et. Trap konumlarını entry commit etmeden önce açığa çıkarmak için initiator'larla koordine et.
+**WHY**: Entry momentumu trap'in gecikme fonksiyonu ile çatışır — bir taraf galip gelmek zorundadır.
 
-## What Repeated Failure Means
-If the **entry** keeps dying to traps, they are rushing without clearing or gathering intel. They treat every site take like a dry push when trap utility requires a methodical approach. This player has a speed addiction — they need to learn that 3 seconds of utility clearing saves their life.
+**IF**: Entry yetenek konumlandırmasına rağmen trap oyuncusunu sürekli eziyorsa
+**MEANING**: Trap'ler birbirine çok yakın (bir flash her şeyi temizler) veya trap oyuncusu tetiklemeleri değerlendirmek için yeteneklerine çok uzak oynuyor. Trap'ler yalnızca gecikmeyi kullanacak birisi pozisyondaysa avantaj sağlar.
+**COUNTER**: Trap'leri birden fazla açıya yay ki tek bir flash her şeyi temizlemesin. Yeteneklerinin duyulabilir mesafesinde oyna ki tetikleme anında yavaşlamış veya hasarlı düşmana peek edebil.
+**WHY**: Harekete geçilemeyen trap yalnızca bilgi verir — cezalandırma kapasitesi olmayan bilgi boşa harcanır.
 
-If the **trap player** keeps getting overwhelmed despite having utility deployed, their traps are too close together (one flash clears everything) or they are playing too far from their utility to capitalize on triggers. The traps provide an advantage only if someone is positioned to exploit the delay.
+**IF**: Entry her raund aynı rotadan ve aynı zamanlamada giriyor, trap oyuncusu ilk wave'i temizlendikten sonra iç yollara yedek tuzak kuruyorsa
+**MEANING**: Öngörülebilir giriş zamanlaması trap oyuncusuna ikinci kademe kurulum fırsatı tanır. Entry site'a girdikten sonra hâlâ tehlike altındadır çünkü iç alan kontrol edilmemiştir. Hız sadece giriş noktasında işe yarar, site içinde değil.
+**COUNTER**: Entry'nin giriş rotasını ve zamanlamasını raund-raund değiştirmesi gerekir. Erken push, gecikmeli push ve sahte commit arasında dönüşüm yaparak trap oyuncusunun kurulum zamanlamasını bozar. Site içinde yavaşlamak ve köşeleri temizlemek ikinci kademe kurulumdan korunur.
+**WHY**: Tutarsız zamanlama trap oyuncusunun hazırlık döngüsünü kırar — tahmin edilemeyen entry, hazır savunmadan her zaman avantajlıdır.
 
-## What AIMLO Should Say
-### When player is on the punished side
-**Entry dying to traps**: "You are running into prepared positions blind. Slow down by 3 seconds — use a drone, a flash, or a teammate's utility to check the common trap spots before you push. Your speed only matters once the path is clear."
+## Tekrarlayan Başarısızlık Ne Anlama Gelir
+**Entry** trap'lere sürekli ölüyorsa, temizlemeden veya bilgi toplamadan rush ediyor. Her site alımını kuru push gibi ele alıyor ama trap yeteneği sistematik yaklaşım gerektirir. Bu oyuncunun hız bağımlılığı var — kısa bir yetenek temizleme anının hayatını kurtardığını öğrenmesi lazım.
 
-**Trap player getting rushed**: "Your traps are placed but you are too far away to benefit. Play within earshot of your utility so that when it triggers, you can immediately peek the slowed or damaged enemy."
+**Trap oyuncusu** yeteneği konumlandırılmasına rağmen sürekli eziliyorsa, trap'ler birbirine çok yakın (bir flash her şeyi temizler) veya tetiklemeleri değerlendirmek için yeteneklerine çok uzak oynuyor. Trap'ler yalnızca gecikmeyi kullanacak birisi pozisyondaysa avantaj sağlar.
 
-### When player is on the punishing side
-**Entry clearing traps smoothly**: "You are dismantling their defense before committing. Keep this discipline — the trap player is running out of ideas and will start over-stacking, which opens other angles."
+## AIMLO Ne Demeli
+### Oyuncu cezalandırılan taraftayken
+**Entry trap'lere ölüyorken**: "Hazırlanmış pozisyonlara kör koşuyorsun. Bir nefes al — drone, flash veya takım arkadaşının yeteneği ile yaygın tuzak noktalarını kontrol et, ondan sonra push yap. Yol temiz olana kadar hızın anlamsız."
 
-**Trap player shutting down entries**: "Your setup is doing the work. Every round they have to spend utility clearing your traps is a round they have less for the actual site take."
+**Trap oyuncusu rush yiyorken**: "Trap'lerin yerleşik ama faydalanmak için çok uzaktasın. Yeteneklerinin duyulabilir mesafesinde oyna ki tetikleme anında yavaşlamış veya hasarlı düşmana hemen peek edebil."
 
-## Rank Modulation
-**LOW**: Entries never check for traps. Trap players place utility and forget about it. Coach awareness on both sides — entries should check common spots, trap players should play off triggers.
+### Oyuncu cezalandıran taraftayken
+**Entry trap'leri temiz şekilde aşıyorken**: "Commit etmeden önce savunmayı söküyorsun. Bu disiplini koru — trap oyuncusu çaresiz kalacak ve aşırı yığma yapmaya başlayacak, bu da diğer açıları açar."
 
-**MID**: Entries sometimes clear utility but are inconsistent. Trap players have functional setups but do not adapt. Coach consistency for entries and variation for trap players.
+**Trap oyuncusu entry'leri durduruyor**: "Kurulumun işi yapıyor. Her raund trap'lerini temizlemek için yetenek harcamak zorunda kalmaları gerçek site alımı için daha az yetenekleri olduğu anlamına gelir."
 
-**HIGH**: Both sides understand the interaction. The matchup becomes about adaptability — who changes their approach faster. Coach round-to-round reads.
+## Rank Modülasyonu
+**LOW**: Entry'ler trap kontrolü yapmaz. Trap oyuncuları yetenek koyar ve unutur. Her iki tarafta da farkındalık öğret — entry'ler yaygın noktaları kontrol etmeli, trap oyuncuları tetiklemeler üzerinden oynamalı.
 
-**ELITE**: Trap placement and entry clearing are both precise. The edge goes to whichever side is less predictable. Coach meta-level pattern breaking.
+**MID**: Entry'ler yetenek temizler ama tutarsız. Trap oyuncuları fonksiyonel kurulumlara sahip ama uyum sağlamaz. Entry'lere tutarlılık, trap oyuncularına çeşitlendirme öğret.
+
+**HIGH**: Her iki taraf da etkileşimi anlar. Matchup uyum yeteneğine dönüşür — kim yaklaşımını daha hızlı değiştirir. Raund-raund okumalar öğret.
+
+**ELITE**: Trap yerleştirme ve entry temizleme ikisi de hassas. Üstünlük daha az tahmin edilebilir tarafa gider. Meta-seviye kalıp kırmayı öğret.

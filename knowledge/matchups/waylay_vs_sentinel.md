@@ -1,36 +1,63 @@
-# MATCHUP: Waylay vs Sentinel
+# EŞLEŞME: Waylay vs Sentinel
 
-> **PATCH-SENSITIVE NOTE**: Waylay is a newer agent. Ability values, cooldowns, and interactions may change significantly between patches. Always verify current patch notes before applying coaching advice.
+> **YAMA DUYARLILIĞI NOTU**: Waylay yeni bir ajandır. Yetenek değerleri, bekleme aralıkları ve etkileşimler yamalar arasında belirgin şekilde değişebilir. Koçluk tavsiyesi uygulamadan önce güncel yama notlarını doğrulayın.
 
-## Interaction Identity
-Waylay specializes in ambush and deception — they approach from angles the defense does not expect and create openings through misdirection. Sentinels rely on covering known approach angles with traps and information tools. This matchup tests whether Waylay can find the gap in the sentinel's coverage or whether the sentinel's web is thorough enough to catch even unconventional approaches. Waylay wants to make the sentinel's preparation irrelevant by attacking from where there is no preparation.
+## Etkileşim Kimliği
+Waylay pusu ve aldatmada uzmandır — savunmanın beklemediği açılardan yaklaşır ve yanıltma yoluyla açıklar yaratır. Sentinel'lar bilinen yaklaşım açılarını trap'ler ve bilgi araçlarıyla kapatmaya güvenirler. Bu eşleşmede Waylay'in sentinel kapsamasındaki boşluğu bulup bulamayacağı veya sentinel'in ağının alışılmadık yaklaşımları bile yakalayacak kadar kapsamlı olup olmadığı test edilir. Waylay, sentinel'in hazırlığının geçerli olmadığı yerden saldırarak hazırlığını anlamsız kılmak ister.
 
-## Common Punish Patterns
-**Waylay punishing sentinel**: Approaching from angles that bypass standard trap placement. Using deception abilities to draw sentinel attention to one path while actually entering from another. Ambush positioning that catches the sentinel while they are watching utility or camera. Exploiting the fact that most sentinel setups are designed for standard entry paths — Waylay does not use standard paths.
+## Yaygın Cezalandırma Kalıpları
 
-**Sentinel punishing Waylay**: Wide coverage that catches unconventional approaches (tripwires on unusual paths, cameras watching off-angles). Multiple information layers that reveal Waylay even if they bypass the first trap. Team communication that identifies Waylay's misdirection early. Playing off the assumption that if the expected path is quiet, the unexpected path is active.
+### Waylay Sentinel'ı Cezalandırırken
 
-## What Repeated Failure Means
-If **sentinels** keep getting ambushed by Waylay, their trap coverage has gaps in off-angles. They are only covering the textbook approach paths and leaving creative entries open. Against Waylay, sentinels must think about WHERE the player will NOT be expected, and trap those spots.
+**IF**: Waylay standart trap yerleştirmesini bypass eden açılardan yaklaşıyorsa
+**MEANING**: Sentinel'ın savunma ağı kapsanmamış yollar bırakmış
+**COUNTER**: Sentinel alışılmadık yaklaşımları yakalayan geniş kapsam kullanmalı — alışılmadık yollarda tripwire, off-angle'ları izleyen kameralar
+**WHY**: Standart yerleştirme sadece standart yolları kapsar
 
-If **Waylay** keeps getting caught despite flanking, the sentinel has adapted their coverage to include off-angles, or the team is communicating well enough to track Waylay's presence through process of elimination. Waylay needs new angles or better timing.
+**IF**: Aldatma yetenekleri sentinel'in ilgisini bir yola çekerken gerçek giriş başka yerden yapılıyorsa
+**MEANING**: Sentinel yanlış yönü izliyor — gerçek tehdit başka yerde
+**COUNTER**: Birden fazla bilgi katmanı kullanarak ilk trap bypass edilse bile ikincisinin gerçek pozisyonu yakalaması
+**WHY**: Tek bilgi katmanı aldatmaya karşı kırılgandır
 
-## What AIMLO Should Say
-### When player is on the punished side
-**Sentinel getting ambushed**: "Your traps are covering the expected paths, but Waylay does not use expected paths. Place at least one tripwire or sensor on an off-angle approach that you would normally leave open. Think about where you would go if you wanted to bypass your own setup."
+**IF**: Pusu konumlanması sentinel'i yetenek aracı veya kamera izlerken yakalıyorsa
+**MEANING**: Sentinel'in odağı başka yerdeyken savunmasız
+**COUNTER**: Takım iletişimi Waylay'in yanıltmasını erken tespit etmeli
+**WHY**: Yetenek aracı kullanan sentinel çevresine karşı savunmasız
 
-**Waylay getting caught**: "The sentinel has adapted to cover your flanks. You need new angles or you need to time your approach for when their utility is on cooldown or their attention is elsewhere. Coordinate your flank timing with your team's pressure on the default path."
+### Sentinel Waylay'ı Cezalandırırken
 
-### When player is on the punishing side
-**Waylay bypassing the sentinel**: "Your flanks are making their setup irrelevant. Keep varying your approach paths and timing so they cannot predict which angle you will use."
+**IF**: Geniş kapsam alışılmadık yaklaşımları yakalıyorsa (alışılmadık yollarda tripwire, off-angle'ları izleyen kameralar)
+**MEANING**: Waylay'in flank rotaları bile kapsam altında
+**COUNTER**: Waylay yeni açılar bulmalı veya yetenek araçları bekleme aralığındeyken ya da sentinel'in odağı başka yerdeyken zamanlamasını ayarlamalı
+**WHY**: Geniş kapsam yaratıcı rotaları bile yakalar
 
-**Sentinel catching Waylay**: "Your expanded coverage is working. Keep maintaining off-angle traps and communicating Waylay's likely position based on where they are NOT showing."
+**IF**: Eleme yöntemiyle — beklenen yol sessizse beklenmedik yol aktif
+**MEANING**: Waylay'in yokluğu bile bilgi veriyor
+**COUNTER**: Waylay flank zamanlamasını takımın varsayılan yoldaki baskısıyla koordine etmeli
+**WHY**: Görüş alanı dışındaki bilgi, görülen bilgi kadar değerlidir
 
-## Rank Modulation
-**LOW**: Waylay does not flank creatively — they walk the standard path. Sentinels place standard traps. The matchup is irrelevant. Coach Waylay on off-angle approaches.
+## Tekrarlanan Başarısızlık Ne Anlama Gelir
+**Sentinel'lar** sürekli Waylay tarafından pusuya düşürülüyorsa, trap kapsamlarında off-angle boşlukları var. Sadece ders kitabı yaklaşım yollarını kapatıp yaratıcı girişleri açık bırakıyorlar. Waylay'a karşı sentinel'lar kendi kurulumlarını bypass etmek isteseler NEREYE gideceklerini düşünüp o noktaları tuzaklamalı.
 
-**MID**: Waylay starts flanking but uses the same route repeatedly. Sentinels do not adapt coverage. Coach sentinel to expand trap coverage and Waylay to vary routes.
+**Waylay** flank yapmasına rağmen sürekli yakalanıyorsa, sentinel kapsamını off-angle'ları da içerecek şekilde adapte etmiş veya takım Waylay'in varlığını eleme yöntemiyle izleyecek kadar iyi iletişim kuruyor. Waylay yeni açılar veya daha iyi zamanlama bulmalı.
 
-**HIGH**: Both sides adapt. The matchup becomes about timing and prediction. Coach timing discipline — when to flank early vs. late, when to shift trap coverage.
+## AIMLO Ne Demeli
 
-**ELITE**: Waylay's approach is a team-coordinated strategy, not a solo flank. The sentinel must read whether main pressure is the real push or the distraction. Coach team-level read patterns.
+### Oyuncu cezalandırılan taraftayken
+**Sentinel pusuya düşürülüyorsa**: "Trap'lerin beklenen yolları kapsıyor ama Waylay beklenen yolları kullanmaz. En az bir tripwire veya sensoru normalde açık bırakacağın off-angle yaklaşıma koy. Kendi kurulumunu bypass etmek istesen nereye giderdin onu düşün."
+
+**Waylay yakalanıyorsa**: "Sentinel flanklarını kapatacak şekilde adapte oldu. Yeni açılar bulmalısın veya yaklaşımını yetenek araçları bekleme aralığındeyken ya da odağı başka yerdeyken zamalamalısın. Flank zamanlamanı takımının varsayılan yoldaki baskısıyla koordine et."
+
+### Oyuncu cezalandıran taraftayken
+**Waylay sentinel'ı bypass ediyorsa**: "Flanklarının kurulumlarını anlamsız kılıyor. Yaklaşım yollarını ve zamanlamanı çeşitlendirmeye devam et ki hangi açıyı kullanacağını tahmin edemesinler."
+
+**Sentinel Waylay'ı yakalıyorsa**: "Geniş kapsamın çalışıyor. Off-angle trap'leri korumaya devam et ve Waylay'in olası pozisyonunu GÖZÜKMEDIĞI yere göre ilet."
+
+## Rank Modülasyonu
+**LOW**: Waylay yaratıcı flank yapmaz — standart yolda yürür. Sentinel'lar standart trap'ler koyar. Eşleşmede anlam yok. Waylay'a off-angle yaklaşımları öğret.
+
+**MID**: Waylay flank yapmaya başlar ama aynı rotayı tekrarlar. Sentinel'lar kapsamını adapte etmez. Sentinel'a trap kapsamını genişletmeyi, Waylay'a rotaları çeşitlendirmeyi öğret.
+
+**HIGH**: İki taraf da adapte olur. Eşleşmede zamanlama ve tahmin belirleyici olur. Zamanlama disiplini öğret — ne zaman erken vs. geç flank, ne zaman trap kapsamını kaydırmak.
+
+**ELITE**: Waylay'in yaklaşımı takım koordineli bir strateji, solo flank değil. Sentinel ana baskının gerçek push mu yoksa odak dağıtma mı olduğunu okumalı. Takım seviyesinde okuma kalıplarını öğret.

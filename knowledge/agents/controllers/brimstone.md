@@ -1,76 +1,85 @@
-# AGENT: Brimstone
+# AJAN: Brimstone
 
-## 1. Role Identity
-Brimstone is the dependable, support-oriented controller built around precision utility and post-plant dominance. He excels at enabling fast executes with instant triple smokes and punishing post-plant scenarios with Incendiary lineups. His kit is straightforward but rewards preparation and lineup knowledge. Brimstone is the most reliable smoker in the game -- no travel time, no recall mechanics, just consistent denial.
+## 1. Rol Kimliği
+Brimstone, hassas yetenek ve post-plant hakimiyeti etrafında inşa edilmiş güvenilir, destek odaklı controller'dır. Anlık üçlü smoke'larla hızlı execute'ları mümkün kılma ve Incendiary lineup'larıyla post-plant senaryolarını cezalandırma konusunda uzmanlaşmıştır. Kit'i basittir ama hazırlık ve lineup bilgisini ödüllendirir. Brimstone oyundaki en güvenilir smoker'dır -- seyahat zamanı yok, geri çağırma mekaniği yok, sadece tutarlı engelleme.
 
-## 2. Core Responsibilities
-- Deliver fast, simultaneous smokes for site executes using the tactical map
-- Master Incendiary lineups for post-plant denial on every played map
-- Use Stim Beacon to boost team fire rate during entries and retakes
-- Deploy Orbital Strike for post-plant pressure, retake denial, or forcing enemies off spike
-- Maintain smoke economy -- three smokes per round means planning which chokes to deny and when
-- Anchor the team's strategic pace; Brimstone sets the tempo of executes
+## 2. Temel Sorumluluklar
+- Taktik haritayı kullanarak site execute'ları için hızlı, eşzamanlı smoke'lar sunmak
+- Oynanan her haritada post-plant engellemesi için Incendiary lineup'larını ustalaştırmak
+- Entry'ler ve retake'ler sırasında takımın ateş hızını artırmak için Stim Beacon kullanmak
+- Post-plant baskısı, retake engelleme veya düşmanları spike'tan uzaklaştırmak için Orbital Strike kullanmak
+- Smoke ekonomisini korumak -- round başına üç smoke, hangi choke'ların ne zaman engelleneceğini planlamak demektir
+- Takımın stratejik temposunu anchor'lamak; Brimstone execute'ların temposunu belirler
 
-## 3. Common Mistakes
-- Using all three smokes on the initial execute with none reserved for retake denial
-- Ignoring Stim Beacon entirely or placing it where no teammates benefit
-- Orbital Strike used for kills rather than area denial -- it is a zoning tool, not a frag hunter
-- Incendiary thrown reactively during fights instead of saved for post-plant lineups
-- Standing too far back on attack, making the smoke radius unable to reach key positions
-- Not learning Incendiary lineups, reducing Brimstone to a smoke-only agent
+## 3. Sık Yapılan Hatalar
+- Üç smoke'un hepsini ilk execute'ta kullanıp retake engellemesi için hiçbir şey bırakmamak
+- Stim Beacon'ı tamamen görmezden gelmek veya hiçbir takım arkadaşının yararlanamayacağı yere koymak
+- Orbital Strike'ı kill'ler için kullanmak, alan engelleme yerine -- bu bir bölge aracıdır, frag avcısı değil
+- Incendiary'yi post-plant lineup'ları için saklamak yerine dövüşler sırasında reaktif olarak atmak
+- Atak'ta çok geride durmak, smoke yarıçapının kilit pozisyonlara ulaşamamasına neden olmak
+- Incendiary lineup'larını öğrenmemek, Brimstone'u yalnızca smoke ajanına indirgemek
 
-## 4. Pattern -> Meaning
+## 4. Kalıp -> Anlam
 
-**IF** the player drops all three smokes at execute start every round
-**MEANING** They have no smoke economy -- retakes and mid-round adjustments have no utility
-**FIX** Budget smokes: use two for execute, save one for retake denial or mid-round re-smoke
+**IF** oyuncu her round execute başlangıcında üç smoke'un hepsini atıyor
+**MEANING** Smoke ekonomisi yok -- retake'ler ve round ortası ayarlamalarında yetenek kalmıyor
+**COUNTER** Smoke'ları bütçeleyin: execute için iki tane kullanın, retake engelleme veya round ortası yeniden dumanlama için bir tane saklayın.
+**WHY** Üçünü birden harcamak takımı round'un ikinci yarısında tamamen korumasız bırakır; reserve smoke esneklik sağlar.
 
-**IF** Incendiary is used in the buy phase or thrown casually in fights
-**MEANING** The player does not understand Brimstone's post-plant value
-**FIX** Save Incendiary for post-plant 100% of the time on attack. Learn 2 lineups per site per map minimum.
+**IF** Incendiary satın alma aşamasında kullanılıyor veya dövüşlerde gelişigüzel atılıyor
+**MEANING** Oyuncu Brimstone'un post-plant değerini anlamıyor
+**COUNTER** Atak round'larında Incendiary'yi %100 post-plant için saklayın. Harita başına site başına en az 2 lineup öğrenin.
+**WHY** Incendiary Brimstone'un en güçlü yeteneğidir ve post-plant'te defuse'u zorla geciktiren başka hiçbir yeteneğiyle değiştirilemez.
 
-**IF** Orbital Strike consistently gets zero value (no kills, no denial)
-**MEANING** Timing is off -- ult is either too early or too late relative to spike state
-**FIX** On attack, Orbital the spike when defuse sounds begin. On defense, Orbital the spike before attackers plant to force repositioning.
+**IF** Orbital Strike sürekli sıfır değer alıyor (kill yok, engelleme yok)
+**MEANING** Zamanlama yanlış -- ult spike durumuna göre ya çok erken ya çok geç
+**COUNTER** Atak'ta, defuse sesi başladığında spike'ı Orbital ile vurun. Savunmada, atakçılar plant yapmadan önce spike'ı Orbital ile vurup yeniden konumlanmalarını zorlayın.
+**WHY** Orbital Strike en iyi şekilde spike zamanlamasıyla eşleştiğinde çalışır; bağımsız kullanım zaman baskısı oluşturamaz.
 
-**IF** Stim Beacon is never purchased or always unused at round end
-**MEANING** The player undervalues the combat buff
-**FIX** Place Stim Beacon at execute entry point right as the team pushes. The fire rate boost on Phantom and Spectre is measurably impactful.
+**IF** Stim Beacon asla satın alınmıyor veya round sonunda her zaman kullanılmamış kalıyor
+**MEANING** Oyuncu savaş buff'ını küçümsüyor
+**COUNTER** Takım push yaparken execute giriş noktasına Stim Beacon yerleştirin. Phantom ve Spectre'daki ateş hızı artışı ölçülebilir şekilde etkilidir.
+**WHY** Stim Beacon entry sırasında aim düellolarını takımın lehine çevirir; bedelsiz avantajı atlamak gereksiz kayıptır.
 
-**IF** smokes consistently land slightly off target or leave gaps
-**MEANING** Tactical map placement is imprecise
-**FIX** Practice smoke placement in custom games. The edges of Brimstone smokes matter -- a gap of even a sliver creates a one-way for the opponent.
+**IF** smoke'lar sürekli hedeften hafif sapıyor veya boşluklar bırakıyor
+**MEANING** Taktik harita yerleşimi hassas değil
+**COUNTER** Custom oyunlarda smoke yerleşimini pratik yapın. Brimstone smoke'larının kenarları fark eder -- bir kıl payı bile boşluk rakip için one-way yaratır.
+**WHY** Smoke boşlukları savunuculara ücretsiz bilgi verir ve execute'un amacını tamamen baltalayabilir.
 
-## 5. Map Interactions
-- **Bind**: Top-tier pick. Small map means smoke radius covers everything. Incendiary lineups for both sites are well-documented and devastating.
-- **Fracture**: Strong choice. Dual-site attack paths benefit from instant triple smoke. Stim Beacon on breach entries is high impact.
-- **Split**: Smoke radius covers A and B chokes cleanly. Post-plant Incendiary on both sites is reliable.
-- **Sunset**: Mid doors and B market benefit from instant smokes. Orbital Strike on B site post-plant is strong.
-- **Ascent**: Viable but smoke radius can struggle to reach deep positions from safe spots. Requires aggressive positioning on attack.
+## 5. Harita Etkileşimleri
+- **Bind**: Birinci sınıf seçim. Küçük harita, smoke yarıçapının her şeyi kapsaması anlamına gelir. Her iki site için Incendiary lineup'ları iyi belgelenmiş ve yıkıcıdır.
+- **Fracture**: Güçlü seçim. Çift site atak yolları anlık üçlü smoke'tan faydalanır. Breach entry'lerinde Stim Beacon yüksek etkilidir.
+- **Split**: Smoke yarıçapı A ve B choke'larını temiz şekilde kapsar. Her iki site'ta post-plant Incendiary güvenilirdir.
+- **Sunset**: Mid kapılar ve B market anlık smoke'lardan faydalanır. B site post-plant'te Orbital Strike güçlüdür.
+- **Ascent**: Uygulanabilir ama smoke yarıçapı güvenli noktalardan derin pozisyonlara ulaşmakta zorlanabilir. Atak'ta agresif konumlanma gerektirir.
+- **Breeze**: Harita çok büyük -- smoke menzili A site spawn'dan B site'a ulaşmaz. Brimstone burada C-tier; Viper tercih edilir.
+- **Haven**: Üç site üç duman şarjını zorlar. Tüm site'ları verimli dumanlamak zor ama retake smoke'ları hâlâ değerlidir. B-tier.
+- **Icebox**: Oynanabilir ama Viper'ın wall ve orb kombinasyonu burada kesinlikle daha iyidir. B-tier.
+- **Lotus**: Harita büyük ama Brimstone çoğu duman noktasına ulaşabilir. Dönen kapılar lineup'ları zorlaştırıyor. B-tier.
 
-## 6. Matchup Notes
-- Against Viper: Brimstone smokes outlast Viper's orb (19s vs 15s) but Viper has permanent wall. Brimstone wins the fast execute; Viper wins the slow default.
-- Against aggressive duelists: Stim Beacon makes your entry fraggers win more aim duels. Place it before the push, not after.
-- On retake: Brimstone is the strongest retake smoker because he can place smokes from any distance without line of sight.
-- Paired with a Viper: Double controller on larger maps gives Brimstone freedom to save smokes for retake while Viper handles initial denial.
+## 6. Eşleşme Notları
+- Viper'a karşı: Brimstone smoke'ları Viper'ın orb'undan daha uzun sürer (19sn vs 15sn) ama Viper kalıcı duvara sahiptir. Brimstone hızlı execute'u kazanır; Viper yavaş default'u kazanır.
+- Agresif duelist'lere karşı: Stim Beacon entry fragger'larınızın daha fazla aim düellosu kazanmasını sağlar. Push'tan önce yerleştirin, sonra değil.
+- Retake'te: Brimstone en güçlü retake smoker'dır çünkü görüş hattı olmadan herhangi bir mesafeden smoke yerleştirebilir.
+- Viper ile eşleşme: Büyük haritalarda çift controller, Viper ilk engellemeyi hallederken Brimstone'a smoke'ları retake için saklama özgürlüğü verir.
 
-## 7. What To Tell The Player
+## 7. Oyuncuya Ne Söylenmeli
 
-### When performing well
-**Player Action:** You deploy 2 smokes on execute while reserving 1 for mid-round re-smoke, and save both Incendiary charges exclusively for post-plant lineup denial on default defuse.
-**Enemy Perception:** Defenders see reliable smoke coverage with no gaps. They expect the standard 2-smoke pattern and plan to push through the moment smokes fade. They do not account for your reserved third smoke.
-**Enemy Reaction:** They are forced to wait out the initial smokes (losing 15 seconds of round time) or push through blind. When the first smoke fades and they push, the re-smoke catches them in the open with no cover — they are mid-rotation in a denied sightline.
-**Exploit Window:** The 3-5 second window where defenders commit to pushing an expired smoke, only to be re-smoked mid-push, leaves them stranded in no-man's-land with their rotation committed and no cover. Post-plant, your two Incendiaries deny 8 total seconds of defuse time — enough to burn 40% of the defuse timer.
-**Repeat Strategy:** Rounds 1-3: deploy 2 smokes on execute, hold the third for the first re-smoke timing. After plant, position for Incendiary lineup and throw only on defuse audio. Round 4+: vary which smoke you hold for re-smoke (sometimes hold the second instead of the third) to change which sightline reopens first.
-**Enemy Adaptation:** After 4-5 rounds, defenders will time their pushes to beat the re-smoke, pre-aim the Incendiary lineup spots to kill you before you throw, or stack aggression before your smokes land.
-**Counter-Adaptation:** When they time pushes: vary re-smoke timing by 2-3 seconds so they cannot predict the window. When they hunt your lineup position: use a different lineup spot or throw Incendiary from a shorter distance with a riskier but unexpected angle. When they aggress early: use Stim Beacon on your team and fight — Brimstone with combat stim and teammates beats a rushed push.
+### İyi performans gösterdiğinde
+**Oyuncu Eylemi:** Execute'ta 2 smoke atarken round ortası yeniden dumanlama için 1 saklıyorsunuz ve her iki Incendiary şarjını yalnızca varsayılan defuse noktasında post-plant lineup engellemesi için saklıyorsunuz.
+**Düşman Algısı:** Savunucular boşluksuz güvenilir smoke kapsaması görüyor. Standart 2 smoke kalıbını bekleyip smoke'lar sönünce push yapmayı planlıyorlar. Sakladığınız üçüncü smoke'u hesaba katmıyorlar.
+**Düşman Tepkisi:** İlk smoke'ları beklemeye zorlanıyorlar (round süresinden ciddi kayıp) veya kör olarak push yapıyorlar. İlk smoke sönüp push yaptıklarında, yeniden dumanlama onları sipersiz açıkta yakalıyor -- rotasyonları commit edilmiş ve korumaları yok.
+**Fırsat Penceresi:** Savunucuların sönmüş smoke'a commit edip push yaptığı ama yeniden dumanlanarak push ortasında mahsur kaldığı pencere, onları commit edilmiş rotasyon ve sipersiz olarak hiç kimsenin arazisinde bırakır. Post-plant'te iki Incendiary'niz defuse zamanlayıcısının %40'ını yakan ciddi miktarda defuse süresi engeller.
+**Tekrar Stratejisi:** Round 1-3: execute'ta 2 smoke atın, üçüncüyü ilk yeniden dumanlama zamanlaması için tutun. Plant sonrası, Incendiary lineup pozisyonuna geçin ve yalnızca defuse sesi duyulduğunda atın. Round 4+: hangi sightline'ın ilk açılacağını değiştirmek için yeniden dumanlama için tuttuğunuz smoke'u değiştirin (üçüncüyü değil ikinciyi tutun).
+**Düşman Adaptasyonu:** 4-5 round sonra savunucular yeniden dumanlamayı yenmek için push'larını zamanlayacak, siz atmadan önce Incendiary lineup noktalarına önceden nişan alıp sizi öldürecek veya smoke'larınız düşmeden önce agresyon yığacak.
+**Karşı Adaptasyon:** Push'ları zamanladıklarında: pencereyi tahmin edememeleri için yeniden dumanlama zamanlamasını hafifçe değiştirin. Lineup pozisyonunuzu avladıklarında: farklı bir lineup noktası kullanın veya Incendiary'yi daha yakın mesafeden daha riskli ama beklenmedik bir açıyla atın. Erken agresyon yaptıklarında: takımınıza Stim Beacon kullanın ve dövüşün -- savaş stim'li Brimstone ve takım arkadaşları acele push'u yener.
 
-**When struggling**: "You are over-investing utility early. Save at least one smoke for mid-round. Your Incendiary is your best ability -- do not waste it in fights."
+**Zorlandığında**: "Yeteneğe erken fazla yatırım yapıyorsunuz. Round ortası için en az bir smoke saklayın. Incendiary en iyi yeteneğiniz -- dövüşlerde boşa harcamayın."
 
-**When being predictable**: "Opponents are playing around your Incendiary timing because you throw it at the same post-plant moment every round. Vary the delay -- sometimes throw it immediately, sometimes wait for the defuse sound."
+**Tahmin edilebilir olduğunda**: "Rakipler Incendiary zamanlamanızı çözmüş çünkü her round aynı post-plant anında atıyorsunuz. Gecikmeyi değiştirin -- ara sıra anında atın, ara sıra defuse sesini bekleyin."
 
-## 8. Rank Modulation
-- **Low (Iron-Silver)**: Focus on placing all three smokes correctly for executes. Do not worry about lineups yet -- just smoke the right spots and stay alive.
-- **Mid (Gold-Platinum)**: Learn 2 Incendiary lineups per site. Start using Stim Beacon on entries. Save one smoke for retakes on defense.
-- **High (Diamond-Ascendant)**: Full lineup library for Incendiary. Orbital Strike timing relative to spike timer. Smoke economy management across the round.
-- **Elite (Immortal-Radiant)**: Adaptive smoke timing based on opponent tendencies. Vary Incendiary timing to avoid being predictable. Stim Beacon placed optimally for team trades, not personal use.
+## 8. Rütbe Ayarı
+- **Düşük (Iron-Silver)**: Execute'lar için üç smoke'u doğru yerleştirmeye odaklanın. Lineup'lar hakkında henüz endişelenmeyin -- sadece doğru yerleri dumanlayın ve hayatta kalın.
+- **Orta (Gold-Platinum)**: Site başına 2 Incendiary lineup öğrenin. Entry'lerde Stim Beacon kullanmaya başlayın. Savunmada retake'ler için bir smoke saklayın.
+- **Yüksek (Diamond-Ascendant)**: Incendiary için tam lineup kütüphanesi. Spike zamanlayıcısına göre Orbital Strike zamanlaması. Round boyunca smoke ekonomisi yönetimi.
+- **Elit (Immortal-Radiant)**: Rakip eğilimlerine göre uyarlanabilir smoke zamanlaması. Tahmin edilebilirliği önlemek için Incendiary zamanlamasını değiştirin. Stim Beacon kişisel kullanım için değil, takım trade'leri için en uygun şekilde yerleştirilir.

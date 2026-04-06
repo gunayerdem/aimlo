@@ -1,102 +1,110 @@
-# Team Dynamics — Radiant-Level Knowledge
+# Takım Dinamikleri -- Radiant Seviye Bilgi Bankası
 
-## IGL Decision-Making Framework
+---
 
-The In-Game Leader (IGL) is the most important role in competitive Valorant. A great IGL turns five individual players into a coordinated unit. Here is the decision framework used at the highest level.
+## IGL Karar Verme Çerçevesi
 
-### Pre-Round Decision (5-Second Window During Buy Phase)
+In-Game Leader (IGL) rekabetçi Valorant'ta belirleyici roldür. Harika bir IGL beş bireysel oyuncuyu koordineli bir takıma dönüştürür.
 
-1. **Read the economy.** Check your team's credits and infer the enemy's credits. Decide buy type.
-2. **Read the scoreboard.** Which of their players are performing? Which are struggling? Target the weak link.
-3. **Read the history.** What did they do last round on this side? If they stacked B last round, they may stack A this round (or double-down on B expecting you to adjust).
-4. **Call the strategy.** Default, execute, or set play. Communicate clearly: "We're defaulting A-control, look for picks, be ready to rotate B."
+### Round Öncesi Karar (Buy Fazı Penceresi)
 
-### Mid-Round Adaptation (Real-Time, 3-Second Decisions)
+1. **Ekonomiyi oku.** Takımının kredilerini kontrol et ve düşmanın kredilerini çıkarım yap. Buy turunu belirle.
+2. **Skor tablosunu oku.** Hangi oyuncular performans gösteriyor? Hangileri zorlanıyor? Zayıf halkayı hedefle.
+3. **Geçmişi oku.** Geçen round bu tarafta ne yaptılar? B stack yaptılarsa bu round A stack yapabilirler (veya senin uyum sağlayacağını düşünerek B'yi tekrarlayabilirler).
+4. **Stratejiyi çağır.** Default, execute veya set play. Net iletişim kur: "A-kontrol default yapıyoruz, pick arayın, B'ye rotate etmeye hazır olun."
 
-The IGL must process information and call adjustments within 3 seconds. Delayed calls are worse than wrong calls.
+### Mid-Round Adaptasyon (Gerçek Zamanlı, Hızlı Kararlar)
+
+IGL bilgiyi işlemeli ve dar bir pencere içinde ayarlamalar çağırmalı. Gecikmeli çağrılar yanlış çağrılardan daha kötüdür.
 
 ```
-Information received (e.g., "Two seen B-Main"):
-├── Evaluate: Is this a fake or real pressure?
-│   ├── Only 2 seen, could be split → Call: "Hold positions, don't rotate yet."
-│   └── 3+ seen, utility used → Call: "Rotate to B, A-anchor hold."
-├── Evaluate: Do we have numbers advantage?
-│   ├── We have 5v4 → Call: "Push with numbers, trade everything."
-│   └── We are 3v4 → Call: "Play passive, play for picks, don't force."
-└── Evaluate: Time remaining?
-    ├── 40+ seconds → Call: "Slow down, reset, take new map control."
-    └── <30 seconds → Call: "Execute now, no more waiting."
+Bilgi alındı (örn. "İkisi B-Main'de görüldü"):
++-- Değerlendir: Fake mi yoksa gerçek baskı mı?
+|   +-- Sadece 2 görüldü, split olabilir --> Çağrı: "Pozisyonları tutun, henüz rotate etmeyin."
+|   +-- 3+ görüldü, utility kullanıldı --> Çağrı: "B'ye rotate, A-anchor tut."
++-- Değerlendir: Sayı avantajımız var mı?
+|   +-- 5'e 4'üz --> Çağrı: "Sayıyla push, her şeyi trade et."
+|   +-- 3'e 4'üz --> Çağrı: "Pasif oyna, pick odaklı, zorlama."
++-- Değerlendir: Kalan zaman?
+    +-- Bol zaman var --> Çağrı: "Yavaşla, resetle, yeni harita kontrolu al."
+    +-- Zaman azalıyor --> Çağrı: "Şimdi execute, daha fazla bekleme."
 ```
 
-### Post-Round Analysis (10-Second Window)
+### Round Sonrası Analiz (Round'lar Arası Kısa Pencere)
 
-After each round, the IGL should quickly assess:
-- What worked? What did not?
-- Did the enemy adjust from last round?
-- Do we need to change our approach?
-- Are any teammates tilted or underperforming? If so, adjust role assignments.
+Her round sonrası IGL hızla değerlendirmeli:
+- Ne çalıştı? Ne çalışmadı?
+- Düşman geçen round'dan ayarlama yaptı mı?
+- Yaklaşımımızı değiştirmemiz gerekiyor mu?
+- Herhangi bir takım arkadaşı tilt veya düşük performansta mı? Öyle ise rol atamalarını ayarla.
 
-## When to Call Timeout
+---
 
-Valorant gives each team one tactical timeout per half. Using it at the right time can swing multiple rounds.
+## Timeout Ne Zaman Çağırılmalı
 
-### Call Timeout When:
+Valorant her takıma yarı başına bir taktiksel timeout verir. Doğru zamanda kullanmak birden fazla round'u çevirebilir.
 
-1. **3+ rounds lost in a row.** The momentum is against you. A timeout breaks the enemy's rhythm and resets your team's mental state.
-2. **Opponent found a strategy you cannot counter.** If they ran the same execute 3 rounds in a row and you have no answer, timeout to discuss a counter.
-3. **Your team is arguing or tilting.** Use the timeout as a mental reset. Do not discuss strategy; instead, say "reset, deep breath, next round is a new round."
-4. **Before a critical eco round.** If you must win the next round to stay in the game, timeout to plan a perfect execute.
-5. **Opponent's timeout follow-up.** If the opponent calls a timeout and wins the next round with a new strategy, consider calling your own timeout to respond.
+### Timeout Çağır:
 
-### Do NOT Call Timeout When:
+1. **Arka arkaya 3+ round kaybedildiğinde.** Momentum sana karşı. Timeout düşmanın ritmini kırar ve takımının mental durumunu resetler.
+2. **Rakip counter edemediğin bir strateji bulduğunda.** Aynı execute'yu 3 round üst üste yaptıysa ve cevap yoksa, counter tartışmak için timeout.
+3. **Takımın tartışıyor veya tilt oluyorsa.** Timeout'u mental reset olarak kullan. Strateji tartışma; bunun yerine "resetle, derin nefes, gelecek round yeni round" de.
+4. **Belirleyici eco round öncesi.** Sonraki round'u kazanmak zorundaysan, mükemmel execute planlamak için timeout.
+5. **Rakibin timeout sonrası.** Rakip timeout çağırıp yeni stratejiyle kazanırsa, yanıt vermek için kendi timeout'unu düşün.
 
-- You are winning and have momentum. Do not slow yourself down.
-- After losing one round. One round loss is normal variance.
-- During overtime. Save it for a critical moment (like if you lose the first OT round).
-- When the problem is purely mechanical (your players are whiffing shots). A timeout cannot fix aim.
+### Timeout ÇAĞIRMA:
 
-## Communication Protocols
+- Kazanıyorsan ve momentum sendeyse. Kendini yavaşlatma.
+- Bir round kaybettikten sonra. Bir round kaybı normal varyans.
+- Overtime sırasında. Belirleyici an için sakla (örn. ilk OT round'unu kaybedersen).
+- Sorun tamamen mekanikse (oyuncuların atışları kaçırıyor). Timeout aim düzeltmez.
 
-### What to Call
+---
 
-| Situation | Call Format | Example |
+## İletişim Protokolleri
+
+### Ne Çağırmalı
+
+| Durum | Çağrı Formatı | Örnek |
 |---|---|---|
-| Enemy spotted | "[Number] [Agent] [Location]" | "Two, Jett and Omen, B-Main" |
-| Ability used | "[Agent] [Ability] [Location]" | "Sova drone, Mid" |
-| Damage dealt | "[Agent] [HP remaining] [Location]" | "Jett lit 120, A-Short" |
-| Kill confirmed | "[Agent] killed [Location]" | "Jett killed, A-Site" |
-| Rotation detected | "Rotating [Direction], [Number] seen" | "Rotating B to A, heard three" |
-| Need help | "Need help [Location]" | "Need help B-Main, two pushing" |
-| Ultimate status | "[Agent] ult ready/not ready" | "Raze ult ready" |
-| Economy call | "Full buy / Force / Save / Eco" | "Team save this round" |
+| Düşman görüldü | "[Sayı] [Ajan] [Konum]" | "İki, Jett ve Omen, B-Main" |
+| Yetenek kullanıldı | "[Ajan] [Yetenek] [Konum]" | "Sova drone, Mid" |
+| Hasar verildi | "[Ajan] [Kalan HP] [Konum]" | "Jett lit 120, A-Short" |
+| Kill onaylandı | "[Ajan] öldürüldü [Konum]" | "Jett öldürüldü, A-Site" |
+| Rotasyon tespit edildi | "[Yön]'e rotate, [Sayı] görüldü" | "B'den A'ya rotate, üç duyuldu" |
+| Yardım gerek | "Yardım [Konum]" | "Yardım B-Main, iki push yapıyor" |
+| Ultimate durumu | "[Ajan] ult hazır/hazır değil" | "Raze ult hazır" |
+| Ekonomi çağrısı | "Full buy / Force / Save / Eco" | "Bu round takım save" |
 
-### When to Call
+### Ne Zaman Çağırmalı
 
-- **Immediately** when you see or hear an enemy. Delayed info is useless info.
-- **Once** per piece of information. Do not repeat yourself unless asked. Repeating clutters comms.
-- **Not during clutch.** When a teammate is in a 1vX, GO SILENT unless you have critical info (e.g., "They are defusing" or "Last player is behind you"). Never backseat.
-- **Between rounds** for strategy discussion. Not during the round unless it is a tactical call.
+- **Anında** düşman gördüğünde veya duyduğunda. Gecikmeli bilgi işe yaramaz bilgi.
+- **Bir kez** her bilgi parçası için. Sorulmadıkça kendini tekrarlama. Tekrar iletişimi tıkar.
+- **Clutch sırasında değil.** Takım arkadaşı 1vX'teyken SUS -- gerekli bilgi (örn. "Defuse ediyorlar" veya "Son oyuncu arkanda") dışında. Asla arka koltuk sürücülüğü yapma.
+- **Round'lar arasında** strateji tartışması için. Round sırasında değil (taktiksel çağrı değilse).
 
-### How to Call
+### Nasıl Çağırmalı
 
-- **Short and specific.** "Jett A-Short" not "I think there might be a Jett somewhere near A."
-- **Confident tone.** Even if uncertain, speak clearly. Mumbled calls are missed calls.
-- **No blame during the round.** "Nice try" after a lost duel, never "Why did you peek that?"
-- **Positive comms.** "Good hold" when someone gets a kill. Team morale directly affects performance.
+- **Kısa ve spesifik.** "Jett A-Short" -- "Bence A civarlarında bir yerlerde Jett olabilir" değil.
+- **Güvenli ton.** Emin değilsen bile net konuş. Mırıldanan çağrılar kaçırılan çağrılardır.
+- **Round sırasında suçlama yok.** Kaybedilen düellodan sonra "İyi deneme" -- asla "Neden oradan peek attın?"
+- **Pozitif iletişim.** Kill aldığında "İyi tutma". Takım morali performansı doğrudan etkiler.
 
-## Role Distribution
+---
 
-### The Five Standard Roles
+## Rol Dağılımı
 
-1. **Duelist / Entry Fragger**: First into the site, creates space by getting kills or forcing enemies to reposition.
-2. **Initiator**: Gathers info and sets up the entry. Flashes, drones, recon abilities.
-3. **Controller**: Uses smokes, walls, and area-denial to control sightlines and block information.
-4. **Sentinel**: Anchors sites on defense, provides flank watch on attack. Utility-based site denial.
-5. **Flex**: Adapts role based on map and composition. Can play second duelist, second controller, or second initiator.
+### Beş Standart Rol
 
-### Role Distribution by Map
+1. **Duelist / Entry Fragger**: Site'a ilk giren, kill alarak veya düşmanları yeniden pozisyonlamaya zorlayarak alan yaratır.
+2. **Initiator**: Bilgi toplar ve entry'yi kurar. Flash'lar, drone'lar, recon yetenekler.
+3. **Controller**: Smoke'lar, duvarlar ve alan inkarı ile görüş çizgilerini kontrol eder ve bilgiyi engeller.
+4. **Sentinel**: Savunmada site'ları anchor'lar, saldırıda flank koruması sağlar. Utility tabanlı site inkarı.
+5. **Flex**: Harita ve kompozisyona göre rol adapte eder. Takip duelist, takip controller veya takip initiator oynayabilir.
 
-| Map | Entry | Initiator | Controller | Sentinel | Flex |
+### Harita Bazlı Rol Dağılımı
+
+| Harita | Entry | Initiator | Controller | Sentinel | Flex |
 |---|---|---|---|---|---|
 | Ascent | Jett/Raze | Sova/KAY/O | Omen/Astra | Killjoy/Cypher | KAY/O/Fade |
 | Bind | Raze/Jett | Skye/Fade | Brimstone/Viper | Sage/Cypher | Fade/Skye |
@@ -109,270 +117,364 @@ Valorant gives each team one tactical timeout per half. Using it at the right ti
 | Sunset | Raze/Neon | Breach/Fade | Omen/Astra | Killjoy/Cypher | Skye/KAY/O |
 | Abyss | Jett/Raze | Sova/Fade | Omen/Viper | Killjoy/Sage | KAY/O/Cypher |
 
-## Entry Fragger Responsibilities
+---
 
-### On Attack
+## Entry Fragger Sorumlulukları
 
-1. **Be the first through the choke.** After the initiator flashes or drones, you go in. No hesitation.
-2. **Create space.** Even if you die, your entry forces the defender to reveal their position, allowing your team to trade.
-3. **Call what you see.** As you enter, call enemy positions immediately. "One heaven, one default" is the most valuable info your team can get.
-4. **Do not bait.** An entry fragger who waits for teammates to go first is failing their role.
-5. **Know when to slow down.** Entry does not mean "always rush." Sometimes the entry is a slow peek after utility.
+### Saldırıda
 
-### On Defense
+IF initiator entry noktasına flash veya drone atmışsa
+MEANING choke geçici olarak temizlenmiş ve savunucular yerinden edilmiş
+COUNTER savunucular off-angle tutacak veya entry'yi stack'leyecek; bazıları flash zamanlamasını re-peek etmeye çalışacak
+WHY entry flash patladığında hemen gitmeli -- tereddüt savunucuların toparlanıp yeniden nişanlamasına izin verir
 
-1. **Play aggressive early, then fall back.** Take an early-round peek to gather info, then fall back to your defensive position.
-2. **Play retake roles.** Entry fraggers on defense often play off-site and retake with their team rather than anchoring.
-3. **Op aggressively.** If the entry is a Jett or Chamber, holding aggressive Operator angles on defense is standard. Dash/TP out after the pick.
+1. **Choke'dan ilk geçen ol.** Initiator flash veya drone attıktan sonra sen gir. Tereddüt yok.
+2. **Alan yarat.** Ölsen bile, entry'n savunucuyu pozisyonunu açıklamaya zorlar, takımının trade almasını sağlar.
+3. **Gördüğünü çağır.** Girerken düşman pozisyonlarını hemen çağır. "Bir heaven, bir default" takımının alabileceği en değerli bilgi.
+4. **Bait yapma.** Takım arkadaşlarının önce gitmesini bekleyen entry fragger rolünde başarısız oluyor.
+5. **Ne zaman yavaşlamayı bil.** Entry her zaman "rush" demek değildir. Entry utility sonrası yavaş peek de olabilir.
 
-### Entry Success Metrics
+### Savunmada
 
-- **First Kill %**: A good entry fragger should have a first-kill percentage above 15% of total rounds played.
-- **Trade Rate**: When the entry dies, their team should trade within 3 seconds 70%+ of the time.
-- **FKFD (First Kill to First Death Ratio)**: Above 1.0 means you get more opening kills than opening deaths. Top entries are at 1.2+.
+IF savunmada entry rolü oynuyorsan
+MEANING mobilite ve mekanik kapasiten erken round etkisi yaratmaya yeter
+COUNTER saldırganlara yaygın agresif peek noktalarını pre-aim edecek; tahmin edilebilirsen seni bedavaya trade ederler
+WHY agresif erken peek takımına bedava bilgi ve potansiyel sayı üstünlüğü verir, ama trade edilmeden önce geri çekilmelisin
 
-## Anchor Responsibilities
+1. **Erken agresif oyna, sonra geri çekil.** Bilgi toplamak için erken-round peek at, sonra savunma pozisyonuna dön.
+2. **Retake rolleri oyna.** Savunmada entry fragger'lar çoğu zaman site dışından oynar ve anchor'lamak yerine takım ile retake yapar.
+3. **Agresif Op tut.** Entry Jett veya Chamber ise, savunmada agresif Operator açıları tutmak standart. Pick sonrası dash/TP ile çık.
 
-The anchor is the player who stays on a bombsite when the rest of the team rotates or pushes.
+### Entry Başarı Metrikleri
 
-### Core Duties
+- **First Kill %**: İyi entry fragger oynanan toplam round'ların %15'inin üzerinde first-kill yüzdesine sahip olmalı.
+- **Trade Oranı**: Entry öldüğünde takımı hemen trade almalı -- zamanın %70'inde.
+- **FKFD (First Kill - First Death Oranı)**: 1.0 üstünde açılış ölümlerinden fazla açılış kill almak demek. Üst entry'ler 1.2+ seviyesinde.
 
-1. **Hold the site until help arrives.** You do not need to get kills; you need to DELAY the attackers. Use utility to stall: smokes, mollies, slowing abilities.
-2. **Call the execute early.** The moment you see utility or multiple enemies committing to your site, call it. A 2-second earlier rotation call wins rounds.
-3. **Stay alive.** A dead anchor cannot provide information or stall. Play behind cover, use utility from safety.
-4. **Retake timing.** If overwhelmed, fall back and wait for teammates. Do not die on site alone. A living anchor who gives up site is better than a dead anchor who got one kill.
+---
 
-### Anchor Utility Usage
+## Anchor Sorumlulukları
 
-- **First util**: Use a stalling ability (smoke, slow, molly) when you hear/see the attackers approaching. This buys 3-5 seconds.
-- **Second util**: If they push through the first stall, use your next ability. Each ability buys time for rotations.
-- **Gun timing**: Only take a gunfight after you have used your stalling utility AND your team is close to rotating. If you die before rotations arrive, the site is free.
+Anchor takımın geri kalanı rotate edip push yaparken bombsite'da kalan oyuncudur.
 
-## Lurker Responsibilities
+### Temel Görevler
 
-The lurker plays away from the team, gathering information and threatening flanks.
+IF saldırganlara senin site'ına utility ve oyuncu commit etmeye başlıyorsa
+MEANING bu gerçek execute, fake değil
+COUNTER hız ve koordineli utility ile bunaltmaya çalışacaklar
+WHY görev geciktirmek ve hayatta kalmak -- oyaladığın her an takım arkadaşlarına rotate için zaman verir
 
-### Core Principles
+1. **Yardım gelene kadar site'ı tut.** Kill almak zorunda değilsin; saldırganları GECİKTİRMEN gerekiyor. Oyalamak için utility kullan: smoke, molly, yavaşlatma yetenekleri.
+2. **Execute'yu erken çağır.** Site'ına utility veya birden fazla düşman commit ettiğini gördüğünde çağır. Erken rotasyon çağrısı round kazandırır.
+3. **Hayatta kal.** Ölü anchor bilgi sağlayamaz veya oyalayamaz. Cover arkasında oyna, güvenli yerden utility kullan.
+4. **Retake zamanlama.** Bunalırsan geri çekil ve takım arkadaşlarını bekle. Site'ta tek başına ölmek yerine hayatta kalıp site'i veren anchor daha iyidir.
 
-1. **Information first.** Your primary job is to tell the team what you hear. If you hear rotations away from you, the team knows the other site is light.
-2. **Flanking is secondary.** A good lurk is not about getting a backstab kill. It is about making the enemy paranoid about their flank, forcing them to hold angles away from the execute.
-3. **Timing.** The lurker's push must be timed with the team's execute. Too early and you die before the team moves. Too late and the team has already taken the site without you.
-4. **Map control.** The lurker often controls mid or a side area, giving the team a rotation option. If the main execute fails, the team can rotate to the lurker's side.
+### Anchor Utility Kullanımı
 
-### When to Lurk vs When to Group
+IF saldırganlara site'ına yaklaşıyorsa
+MEANING ayak sesleri duyuyorsun, utility görüyorsun veya recon onay var
+COUNTER stall'unu rush'layarak geçmeye veya utility'ni erken bait etmeye çalışacaklar
+WHY her utility parçası takımına değerli rotasyon zamanı kazandırır -- hepsini aynı anda değil, sırayla harca
 
-- **Lurk**: When the team is running a default or slow execute. The lurker's information helps the IGL decide which site to hit.
-- **Group**: When the team is running a fast execute or a 5-man rush. Every body matters for the hit, and the lurker's delayed arrival weakens the push.
+- **İlk utility**: Saldırganları duyduğunda/gördüğünde oyalama yeteneğini kullan (smoke, slow, molly). Bu kısa gecikme penceresi kazandırır.
+- **Sonraki utility**: İlk stall'dan geçerlerse sonraki yeteneğini kullan. Her yetenek rotasyonlar için zaman kazandırır.
+- **Silah zamanlama**: Sadece oyalama utility'ni kullandıktan VE takımın rotate etmeye yakın olduğundan sonra silahlı fight al. Rotasyonlar gelmeden önce ölürsen site bedava.
 
-## Support Player Responsibilities
+---
 
-The support player (usually the controller or second initiator) enables the team's strategy.
+## Lurker Sorumlulukları
 
-1. **Smoke timing.** Smokes must be placed BEFORE the entry goes in, not after. A late smoke exposes the entry.
-2. **Flash timing.** The flash should pop as the entry is about to peek, not before (the enemy recovers) or after (the entry is already dead).
-3. **Trade positioning.** The support follows the entry at 3-5m distance. Close enough to trade the kill if the entry dies, far enough to not get hit by the same spray.
-4. **Post-plant setup.** After the spike is planted, the support uses remaining utility to deny defuse (mollies, smokes on spike).
+Lurker takımdan ayrı oynayarak bilgi toplayan ve flank tehdidi oluşturan oyuncudur.
 
-## Trade Buddy Assignment
+### Temel Prensipler
 
-Every player should have a designated trade buddy. If Player A dies, Player B immediately kills the enemy who killed A.
+IF lurk rolü atanmışsa sana
+MEANING ana gruptan ayrı çalışarak istihbarat toplar ve flank tehdidi oluşturursun
+COUNTER düşmanlar tripwire koyacak, flank açıları tutacak veya seni avlamaya oyuncu gönderecek
+WHY mevcudiyetin düşmanı arkasını izlemeye kaynak ayırmaya zorlar, takımının vurduğu site'daki tutmayı zayıflatır
 
-### Rules
+1. **Önce bilgi.** Birincil görev takıma ne duyduğunu söylemek. Senden uzağa rotasyon duyarsan, takım diğer site'ın zayıf olduğunu bilir.
+2. **Flanklama bonus.** İyi lurk arkadan kill almak değil. Düşmanı flank'ı konusunda paranoyak yaparak onları execute'dan uzağa açı tutmaya zorlamaktır.
+3. **Zamanlama.** Lurker'ın push'u takımın execute'u ile zamanlanmalı. Çok erken ve takım hareket etmeden ölürsün. Çok geç ve takım sensiz site'ı almış olur.
+4. **Harita kontrolu.** Lurker mid veya bir taraf bölgesi kontrol ederek takıma rotasyon opsiyonu verir.
 
-1. **2-2-1 split**: Two pairs of trade buddies, plus one player (usually the lurker or anchor) who operates solo.
-2. **The entry's trade buddy is the most important assignment.** This player must follow the entry within 1-2 seconds.
-3. **Spacing**: Trade buddies should be 3-5 meters apart. Less than 3m and both die to the same utility. More than 5m and the trade is too slow.
-4. **Crossfire**: Ideally, trade buddies hold slightly different angles so that the enemy who kills one is exposed to the other.
+### Ne Zaman Lurk vs Ne Zaman Gruplanma
 
-## Rotation Priority Order
+IF takım default veya yavaş execute çalıştırıyorsa
+MEANING commit etmeden önce bilgi toplama zamanı var
+COUNTER düşman agresif push yaparak lurker'ı bulmaya çalışabilir; flanker'ı flankla
+WHY lurker'ın bilgisi IGL'in hangi site'i vuracağına karar vermesine yardımcı olur
 
-When the IGL calls a rotation, players should rotate in a specific order:
+IF takım hızlı execute veya 5 kişi rush çalıştırıyorsa
+MEANING her oyuncu vuruşta gerekli
+COUNTER lurker'ın gecikmeli varışı push'u zayıflatır -- bunun yerine gruplan
+WHY hızlı execute'da saldırı gücünü bölmek round'u tehlikeye atar
 
-1. **Closest player to the rotation site** moves first. They arrive soonest.
-2. **Support/Controller** rotates second to provide utility for the retake.
-3. **Entry fragger** rotates third to lead the retake push.
-4. **Anchor of the OTHER site** rotates last (if at all). Someone must hold the original site in case of a fake.
-5. **Lurker** may or may not rotate. If the lurker is in a flanking position, they should stay for the backstab. If they are far away, they rotate.
+---
 
-### Rotation Speed
+## Destek Oyuncu Sorumlulukları
 
-- Running rotation: Audible to enemies within 40m. Use when speed is critical (spike is planted, team is dying).
-- Walking rotation: Silent but slow. Use when uncertain whether it is a fake.
-- Partial rotation: One or two players rotate, others hold. Use when the IGL suspects a split or fake.
+Destek oyuncu (controller veya initiator) takımın stratejisini mümkün kılar.
 
-## Default Play Calling System
+IF entry'nin arkasındaki destek oyuncusuysan
+MEANING utility'n ve pozisyonun entry'yi güçlendirmek ve trade'leri temizlemek için var
+COUNTER düşmanlar geç utility'yi veya entry öldükten sonra destek'in pozisyon dışına düşmüşlüğün cezalandıracak
+WHY hassas utility zamanlama ve entry'nin arkasında doğru mesafe, kazanılmış site take ile başarısız olanı ayırır
 
-A "default" is the team's standard opening without committing to a specific site. Its purpose is to gather information and take map control.
+1. **Smoke zamanlama.** Smoke'lar entry girmeden ÖNCE yerleştirilmeli, sonra değil. Geç smoke entry'yi açıkta bırakır.
+2. **Flash zamanlama.** Flash entry peek yapmak üzereyken patlamalı -- önce değil (düşman toparlanır), sonra değil (entry çoktan olmuştur).
+3. **Trade pozisyonu.** Destek entry'yi yakın-ama-güvenli mesafede takip eder. Trade almak için yeterince yakın, aynı spray'dan vurulmamak için yeterince uzak.
+4. **Post-plant kurulumu.** Spike plant edildikten sonra destek kalan utility ile defuse deny eder (molly'ler, spike üzerinde smoke'lar).
 
-### Standard Default Structure
+---
 
-1. **Two players** take A-side map control (main/short).
-2. **Two players** take B-side map control (main/long).
-3. **One player** (usually lurker or flex) takes mid control.
-4. Goal: Gather information about enemy positions, look for picks, then call the execute based on what you find.
+## Trade Buddy Ataması
 
-### Default to Execute Transition
+Her oyuncunun belirli bir trade buddy'si olmalı. Oyuncu A ölürse, Oyuncu B A'yı öldüren düşmanı hemen öldürür.
+
+### Kurallar
+
+IF trade buddy'n girip öldüyse
+MEANING bir düşman fight alarak pozisyonunu açığa çıkardı
+COUNTER düşman yeniden pozisyonlanmadan veya cover'a dönmeden önce trade almalısın
+WHY buddy'ni yeterince yakın takip etmelisin ki düşman tepki veremeden refrag al
+
+1. **2-2-1 bölünme**: İki çift trade buddy, artı solo çalışan bir oyuncu (lurker veya anchor).
+2. **Entry'nin trade buddy'si belirleyici atama.** Bu oyuncu entry'yi hemen takip etmeli.
+3. **Mesafe**: Trade buddy'ler yakın-ama-güvenli mesafe korumalı. Çok yakın ve ikisi aynı utility'den ölür. Çok uzak ve trade çok yavaş.
+4. **Crossfire**: İdeal olarak, trade buddy'ler biraz farklı açılar tutar, böylece birini öldüren düşman diğerine açık kalır.
+
+---
+
+## Rotasyon Öncelik Sırası
+
+IGL rotasyon çağırdığında oyuncular belirli sırada rotate etmeli:
+
+1. **Rotasyon site'ına en yakın oyuncu** önce hareket eder. En çabuk ulaşır.
+2. **Destek/Controller** retake için utility sağlamak üzere sonraki rotate eder.
+3. **Entry fragger** retake push'unu yönetmek için ondan sonra rotate eder.
+4. **DİĞER site'in anchor'u** en son rotate eder (eğer rotate ederse). Fake durumunda biri orijinal site'i tutmalı.
+5. **Lurker** rotate edebilir veya etmeyebilir. Flanklama pozisyonundaysa backstab için kalsın. Uzaktaysa rotate etsin.
+
+### Rotasyon Hızı
+
+- Koşarak rotasyon: Orta mesafeden düşmana duyulur. Hız gerektiğinde kullan (spike plant edilmiş, takım ölüyor).
+- Yürüyerek rotasyon: Sessiz ama yavaş. Fake olup olmadığından emin değilsen kullan.
+- Kısmi rotasyon: Bir veya iki oyuncu rotate eder, diğerleri tutar. IGL split veya fake şüphelediğinde kullan.
+
+---
+
+## Default Oyun Çağrısı Sistemi
+
+"Default" takımın belirli bir site'a commit etmeden standart açılışı. Amacı bilgi toplamak ve harita kontrolu almak.
+
+### Standart Default Yapısı
+
+1. **İki oyuncu** A-tarafı harita kontrolu alır (main/short).
+2. **İki oyuncu** B-tarafı harita kontrolu alır (main/long).
+3. **Bir oyuncu** (lurker veya flex) mid kontrolu alır.
+4. Hedef: Düşman pozisyonları hakkında bilgi topla, pick ara, sonra bulduklarına göre execute çağır.
+
+### Default'tan Execute'ya Geçiş
+
+IF takım default çalıştırıyorsa
+MEANING round başındaki bilgi toplama fazındasın
+COUNTER düşman harita kontrolunu inkar etmek için agresif push yapabilir veya site stack'lemek için erken rotate edebilir
+WHY default fazı IGL'e doğru execute'yu çağırmak için yeterli veri sağlar -- bu fazı aceleye getirmek takımını kör bırakır
 
 ```
-Default Phase (first 30 seconds):
-  → Take map control, gather info, get picks if available.
-  → IGL listens for team calls: "A is one player," "B has two."
+Default Fazı (erken round):
+  --> Harita kontrolu al, bilgi topla, mevcutsa pick al.
+  --> IGL takım çağrılarını dinler: "A tek kişi," "B iki kişi."
 
-Decision Point (30-45 seconds in):
-  → IGL calls: "Execute A" or "Execute B" or "Keep defaulting."
-  → If they stacked one site → hit the other.
-  → If they are spread evenly → hit the site where you got a pick.
-  → If you got no info → execute the IGL's pre-planned strategy.
+Karar Noktası (mid-round):
+  --> IGL çağırır: "Execute A" veya "Execute B" veya "Default'a devam."
+  --> Bir site'ı stack'lemişlerse --> diğerini vur.
+  --> Eşit yayılmışlarsa --> pick aldığın site'ı vur.
+  --> Bilgi almadıysan --> IGL'in önceden planlanmış stratejisini execute et.
 
-Execute Phase (45-70 seconds in):
-  → All players converge on the called site.
-  → Entry goes in after smoke/flash combo.
-  → Plant within 10-15 seconds of starting the execute.
+Execute Fazı (geç round):
+  --> Tüm oyuncular çağrılan site'a yaklaşıyor.
+  --> Entry smoke/flash kombosu sonrası girer.
+  --> Site'a girer girmez hemen plant.
 ```
 
-## Mid-Round Adaptation Framework
+---
 
-### Triggers for Mid-Round Changes
+## Mid-Round Adaptasyon Çerçevesi
 
-| Trigger | Adaptation |
+### Mid-Round Değişiklikler İçin Tetikleyiciler
+
+| Tetikleyici | Adaptasyon |
 |---|---|
-| Entry fragger gets first blood | Accelerate the push; you have numbers advantage |
-| Entry fragger dies on peek | Slow down; trade the kill, then reassess |
-| Opponent rotates early (heard footsteps) | Opposite site may be light; consider quick rotate |
-| Your smoke gets one-wayed | Do not push through; use flash or wait for smoke to fade |
-| You find site is stacked (3+ defenders) | Immediate rotation or slow down and play for picks |
-| Time is below 30 seconds | Must commit to the closest site; no time to rotate |
-| Teammate disconnects (4v5) | Default to more passive play; avoid trades, play for picks |
+| Entry fragger first blood alıyor | Push'u hızlandır; sayı avantajın var |
+| Entry fragger peek'te ölüyor | Yavaşla; kill'i trade et, sonra yeniden değerlendir |
+| Rakip erken rotate ediyor (ayak sesleri duyuldu) | Karşı site hafif olabilir; hızlı rotate düşün |
+| Smoke'un one-way edildi | İçinden push etme; flash kullan veya smoke'un kaybolmasını bekle |
+| Site stack'lenmiş buldun (3+ savunucu) | Hemen rotasyon veya yavaşla ve pick odaklı oyna |
+| Zaman azalıyor | En yakın site'a commit etmek zorundasın; rotate için zaman yok |
+| Takım arkadaşı bağlantı koptu (4'e 5) | Daha pasif oyuna geç; trade'lerden kaçın, pick odaklı oyna |
 
-## Pistol Round Role Assignments
+---
 
-Pistol rounds have different dynamics because everyone has limited utility and no rifles.
+## Pistol Round Rol Atamaları
 
-### Attack Pistol
+Pistol round'ları farklı dinamiklere sahiptir çünkü herkesin sınırlı utility'si var ve tüfek yok.
 
-- **Entry**: Buy Ghost (500) + remaining on abilities. The Ghost's accuracy at range gives the entry a chance to pick off defenders holding angles.
-- **Support**: Buy Light Shield (400) + remaining on abilities. The extra 25 HP means you survive one extra Classic hit, crucial for trading.
-- **Controller**: Buy full abilities. Smokes are more valuable on pistol because enemies cannot spray through them accurately.
-- **Sentinel**: Buy tripwires/alarms + Light Shield. Flank watch is critical because pistol rounds have more chaotic movement.
-- **Flex**: Adapt based on team needs. If everyone has Ghost, consider buying a Frenzy (450) for close-range fights.
+### Saldırı Pistol
 
-### Defense Pistol
+IF takımın saldırı pistol'daysa
+MEANING tüfek yok, sınırlı utility, her kredi değerli
+COUNTER savunucular Classic ve Shorty ile dar açılarda tutacak; bazıları site stack'leyecek
+WHY pistol-round alışları ekonomi yolunu tanımlar -- pistol kazanmak çoğu zaman sonraki iki round'u bedavaya kazanmak demek
 
-- **Anchors**: Buy Light Shield + Shorty (150) + abilities. The Shorty one-shots at close range, perfect for holding tight corners on site.
-- **Aggressive peeker**: Buy Ghost (500). Take an early fight at range where the Ghost is strongest.
-- **Stack or spread**: Many pro teams stack 3-2 on pistol. The extra player compensates for lower kill times with pistols.
+- **Entry**: Ghost (500) + kalan yeteneklere. Ghost'un mesafedeki hassasiyeti entry'ye açı tutan savunucuları vurma şansı verir.
+- **Destek**: Light Shield (400) + kalan yeteneklere. Ekstra 25 HP bir Classic vuruşuna daha dayanmak demek, trade marjı.
+- **Controller**: Full yetenek al. Smoke'lar pistol'da daha değerli çünkü düşmanlar içinden hassas spray yapamaz.
+- **Sentinel**: Tripwire/alarm + Light Shield. Kaotik hareket pattern'leri nedeniyle pistol round'larında flank izleme gerekli.
+- **Flex**: Takım ihtiyacına göre uyarla. Herkes Ghost aldıysa, yakın mesafe fight'lar için Frenzy (450) düşün.
 
-## Anti-Eco Role Adjustments
+### Savunma Pistol
 
-When the enemy is on eco (Classics/Ghosts only), adjust your approach:
+- **Anchor'lar**: Light Shield + Shorty (150) + yetenekler. Shorty yakın mesafede tek atış öldürücü, site'ta dar köşeler için mükemmel.
+- **Agresif peek yapan**: Ghost (500). Ghost'un en güçlü olduğu mesafede erken fight al.
+- **Stack veya yayılma**: Birçok pro takım pistol'da 3-2 stack yapar. Ekstra oyuncu pistollerle daha düşük kill sürelerini telafi eder.
 
-1. **Do not hold tight angles.** Eco players will rush and swing wide. If you hold a tight corner, a Classic right-click will one-burst you.
-2. **Play distance.** Rifles beat pistols at medium-to-long range. Do not let eco players get into close range.
-3. **Utility is more valuable.** Smokes and mollies deny the eco team's only strategy (rushing). Use utility liberally.
-4. **Do not ego peek.** Even on anti-eco, you can die to a Sheriff headshot. Play fundamentals.
-5. **Save Operator for gun rounds.** Do not waste Operator on anti-eco. The risk of losing a 4,700 weapon to a running Classic is too high.
+---
 
-## Man Advantage Protocols
+## Anti-Eco Rol Ayarlamaları
 
-### 4v3 Protocol
+IF düşman eco'daysa (Classic/Ghost'lar)
+MEANING düşük silahlar var ve kaos, rush ve yakın mesafe right-click'lere güvenecekler
+COUNTER geniş swing yaparak dar açılarda seni hazırlıksız yakalamaya çalışacaklar
+WHY mesafe ve temelleri oynaman gerekiyor -- eco'ya tüfek round'u kaybetmek ekonomi ve moral için yıkıcı
 
-- You have a numbers advantage. Play tempo, do not rush.
-- Take map control patiently. The 3-player team must make desperate moves.
-- On attack: Default into execute. You can afford to trade 1-for-1 because you will still have numbers.
-- On defense: Spread out. One player per site, one mid, one floating. They cannot hit any site without being outnumbered.
+1. **Dar açılarda tutma.** Eco oyuncular rush yapıp geniş swing atacak. Dar köşe tutarsan Classic right-click seni tek burst'ta öldürür.
+2. **Mesafe oyna.** Tüfekler orta-uzun mesafede tabancaları yener. Eco oyuncularını yakın mesafeye sokma.
+3. **Utility daha değerli.** Smoke'lar ve molly'ler eco takımının tek stratejisini (rush) inkar eder. Utility'yi bol kullan.
+4. **Ego peek atma.** Anti-eco'da bile Sheriff headshot'tan ölebilirsin. Temelleri oyna.
+5. **Operator'u tüfek round'larına sakla.** Anti-eco'da Operator israf etme. 4,700'lük silahı koşan Classic'e kaybetme riski çok yüksek.
 
-### 3v2 Protocol
+---
 
-- Similar to 4v3 but more aggressive tempo.
-- On attack with spike planted: Play two watching spike, one lurking for info. They cannot retake effectively with 2 players.
-- On defense: Stack the most likely site, gamble on the other.
+## Sayı Avantajı Protokolleri
 
-### 5v4 Protocol
+### 4'e 3 Protokolu
 
-- Maximum map control. Spread to all areas.
-- On attack: You can send the lurker alone because even 4v4 on the execute is favorable with good utility.
-- On defense: Play standard but more aggressively. Trade any fight confidently.
+IF takımın 4'e 3 avantajı varsa
+MEANING rakibi birer kişi fazla sayıyla geçiyorsun ve risk almak zorundalar
+COUNTER çaresiz hareketler yaparak hızlı pick aramaya veya umutsuz execute yapmaya çalışacaklar
+WHY tempo oyna, haritayı yay ve ilk hamleyi onlara yaptır -- trade hediye etme
 
-## Man Disadvantage Protocols
+### 3'e 2 Protokolu
 
-### 2v3 Protocol (You Have 2)
+IF takımın 3'e 2 avantajı varsa
+MEANING round ağır şekilde lehine ama bedava değil
+COUNTER ikili seni izole yakalamaya veya kahramanlık oyunu oynamaya çalışacak
+WHY crossfire'ları koru ve birlikte oyna -- solo düello bulmalarına izin verme
 
-- **Attack (need to plant)**: You must find one pick to equalize. Use utility to create a favorable 1v1 duel. If you get the pick, it becomes a 2v2 and you have momentum.
-- **Defense (need to defuse)**: Play together. Do not split up. Two players in crossfire can beat three who push one at a time.
+### 5'e 4 Protokolu
 
-### 2v4 Protocol
+IF takımın 5'e 4 avantajı varsa
+MEANING maksimum harita kontrolu mümkün
+COUNTER düşman fight'tan kaçınıp eşitlemek için pick aramaya çalışacak
+WHY haritayı yay, lurker'ı solo gönder ve her çatışmayı güvenle oyna -- execute'da 4'e 4 bile iyi utility ile lehine
 
-- Attack: Likely a save unless match point. The math is heavily against you.
-- Defense: Play for two quick picks to bring it to 2v2. If the attackers have not planted, play time. If they have planted, you need utility to stall and retake.
+---
 
-### 3v5 Protocol (You Have 3)
+## Sayı Dezavantajı Protokolleri
 
-- This is a round you should generally not try to win straight-up.
-- On attack: Play for information and picks. If you get 2 quick kills, it becomes a 3v3 and winnable.
-- On defense: Stack one site, gamble. You cannot spread 3 players across the map effectively. If they hit your stacked site, you might win. If they hit the empty site, you save.
+### 2'ye 3 Protokolu (Sende 2 Var)
 
-## When to Play for Picks vs Execute
+IF takımın 2'ye 3 gerideyse
+MEANING yarışabilmek için bir pick alarak eşitlemek zorundasın
+COUNTER seni trade etmeye veya güvenli oynayıp saat tüketmeye çalışacaklar
+WHY avantajlı 1'e 1 düello izole etmek için utility kullan -- pick alırsan momentum ile 2'ye 2 olur
 
-### Play for Picks When:
+### 2'ye 4 Protokolu
 
-- You have numbers advantage (4v3, 5v4). You can afford to trade.
-- You have strong OP/angles set up. Let the defense rotate into your picks.
-- The opponent has been running fast executes. Slowing the tempo disrupts their rhythm.
-- Your initiator has recon abilities to find isolated enemies.
-- You have already established map control.
+IF takımın 2'ye 4 gerideyse
+MEANING round neredeyse kesinlikle kayıp
+COUNTER bunaltıcı sayı ve utility ile push yapacaklar
+WHY maç noktası değilse save yap -- matematik çok sana karşı
 
-### Execute When:
+### 3'e 5 Protokolu (Sende 3 Var)
 
-- Time is below 40 seconds. Not enough time for a pick play.
-- You have full utility and a rehearsed execute.
-- Score is desperate (need to win multiple rounds in a row).
-- The opponent is playing retake style (fewer players on site).
-- You have identified the weak side of the map (fewer defenders).
+IF takımın 3'e 5 gerideyse
+MEANING bu round'u düz kazanmak aşırı zor
+COUNTER herhangi bir site'ı sayı ve utility ile doldurabilirler
+WHY bir site'ı stack'le ve kumar oyna -- 3 oyuncuyu harita boyunca yayamazsın; boş site'ı vururlarsa silah koru
 
-## Map Control Priority System
+---
 
-### Priority Tiers
+## Pick Odaklı mı Execute mi Kararı
 
-| Tier | Areas | Why |
+### Pick Odaklı Oyna:
+
+IF sayı avantajın, güçlü açıların var veya rakip rush yapıyorsa
+MEANING koşullar sabır ve onların sana gelmesini beklemeyi kayırıyor
+COUNTER yavaş oynayıp inkar edebilirler ama bu sana bilgi verir
+WHY pick oyunları full utility veya pozisyon commit etmeden düşmanın sayısını tüketir
+
+### Execute Yap:
+
+IF zaman azalıyor, full utility'n var veya skor agresyon gerektiriyorsa
+MEANING daha fazla beklemek sana zarar verir
+COUNTER savunucular tahmin edilen site'ı stack'leyecek veya agresif anti-execute utility oynayacak
+WHY full utility ile prova edilmiş execute hazırlanmış savunmayı bile bunaltır
+
+---
+
+## Harita Kontrolu Öncelik Sistemi
+
+### Öncelik Kademeleri
+
+| Kademe | Alanlar | Neden |
 |---|---|---|
-| Tier 1 (Must control) | Mid on most maps | Controls rotations, enables splits |
-| Tier 2 (Should control) | Short/connector areas | Enables faster executes and fakes |
-| Tier 3 (Nice to control) | Deep map areas near sites | Sets up executes but commits you |
-| Tier 4 (Luxury) | Enemy spawn-side areas | Only achievable with full map control |
+| Kademe 1 (Kontrol etmeli) | Çoğu haritada Mid | Rotasyonları kontrol eder, split'leri mümkün kılar |
+| Kademe 2 (Kontrol etmeli) | Short/connector alanları | Daha hızlı execute ve fake'leri mümkün kılar |
+| Kademe 3 (Kontrol etmek iyi) | Site'lara yakın derin harita alanları | Execute'leri kurar ama seni commit eder |
+| Kademe 4 (Lüks) | Düşman spawn-tarafı alanlar | Sadece tam harita kontroluyla ulaşılabilir |
 
-### Map-Specific Mid Control
+---
 
-- **Ascent Mid**: Controlling mid gives access to both A (through catwalk) and B (through market). The team that controls Ascent mid controls the game.
-- **Split Mid**: Mid gives access to A (heaven) and B (mail). Defenders often stack mid because of its importance.
-- **Haven Mid (Garage)**: Garage connects to A and C. Controlling garage enables splits on both sites.
-- **Icebox Mid**: Mid tube connects A and B. Control of mid tube forces defenders to rotate the long way.
-- **Lotus Mid**: The rotating doors make mid control complex. Door timings add ~1.5 seconds to rotations.
+## Site Vuruş Zamanlama Pencereleri
 
-## Site Hit Timing Windows
+### Hızlı Execute (Round Başında Hemen)
 
-The optimal time to execute a site hit depends on the map and whether you have established map control.
+IF round başında hemen execute ediyorsan
+MEANING savunucular kurulmadan önce yakalamaya çalışıyorsun
+COUNTER erken-round pozisyonları olan agresif savunucular hazır olacak
+WHY hızlı execute'lar pasif/retake-tarzı savunmaları cezalandırır ama erken bilgisi olan takımlara karşı yüksek risk
 
-### Fast Execute (0-20 seconds into round)
+### Orta-Tempo Execute (Harita Kontrolu Sonrası)
 
-- Used to catch defenders off-guard before they are set up.
-- Requires the team to sprint to the site (noisy, detected easily).
-- Works when the opponent plays passive/retake style and does not have early information.
-- Risk: If they have aggressive early positions, you run into a prepared defense.
+IF önce harita kontrolu alıp sonra execute ediyorsan
+MEANING takım commit etmeden önce bilgi toplar ve utility'yi yöntemli kullanır
+COUNTER savunucular harita kontrolunu contest etmeye veya vuracağını düşündükleri site'ı stack'lemek için erken rotate etmeye çalışacak
+WHY bu standart profesyonel zamanlama -- bilgi toplama ile plant edip post-plant oynayacak zaman arasında denge kurar
 
-### Mid-Tempo Execute (25-45 seconds into round)
+### Geç Execute (Savunucu Utility'sini Tüketme)
 
-- Standard timing. Take map control first, then execute.
-- Gives the team time to gather information and use utility methodically.
-- This is the most common timing in professional play.
+IF round'un derinliklerine kadar execute etmeden bekliyorsan
+MEANING savunucu utility'sini tüketmeye çalışıyorsun -- smoke'ları ve molly'leri süreleri dolacak
+COUNTER rakip geç zamanlamayı okuyabilir ve süresi dolan saldırgan utility'si ile agresif push yapabilir
+WHY geç execute'lar savunucuları round boyunca pasif tutan güçlü harita kontrolun olduğunda en iyi çalışır
 
-### Late Execute (45-70 seconds into round)
+---
 
-- Used to burn the opponent's utility (smokes, mollies expire after ~15-20 seconds).
-- Risk: If the opponent reads the late timing, they can aggressively push with expired attacker utility.
-- Works best when you have established strong map control that keeps the defenders passive.
+## Rank Modülasyonu
 
-### Desperation Execute (70+ seconds, <30 remaining)
+### Immortal+ İçin
 
-- The team must plant NOW. No time for finesse.
-- All utility dumped at once, team rushes site together.
-- The defenders know it is coming. Success depends on mechanical outplay.
+IF takım dinamiklerini üst düzeye taşımak istiyorsan
+MEANING bu seviyede IGL kalitesi, iletişim disiplini ve rol uyumu round'ları belirler
+COUNTER mid-round adaptasyon çerçevesini, trade buddy atamasını ve rotasyon öncelik sırasını bilinçlice uygula
+WHY Immortal+'da bireysel mekanikler yakın; takım koordinasyonu maçları kazandırır
+
+### Diamond-Ascendant İçin
+
+IF solo queue'da takım dinamiklerini iyileştirmek istiyorsan
+MEANING tam IGL kontrolu olmasa bile temel iletişim ve trade buddy prensipleri uygulanabilir
+COUNTER her round en az 1 bilgi çağrısı yap, 1 trade buddy bul, ekonomi çağrılarını başlat
+WHY basit takım dinamikleri bile ranked'de büyük fark yaratır -- iletişim kuran takım avantajlıdır

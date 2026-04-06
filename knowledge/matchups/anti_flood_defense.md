@@ -1,34 +1,46 @@
-# MATCHUP: Anti-Flood Defense
+# MATCHUP: Flood'a Karşı Savunma
 
-## Interaction Identity
-Flood (or rush) is the simplest attack in Valorant: all five players run onto a site simultaneously, overwhelming defenders with sheer numbers. Anti-flood defense is the discipline of surviving that initial wave. This matchup matters because flood attacks exploit the most common defensive weakness — isolated players dying before help arrives. Anti-flood is not about winning the 1v5; it is about surviving the first 5 seconds, buying time for rotations, and converting the defense into a retake or a traded fight.
+## Etkileşim Kimliği
+Flood (veya rush) Valorant'taki en basit ataktır: beş oyuncu aynı anda bir site'a koşar ve savunmayı sayısal üstünlükle ezer. Anti-flood savunma bu ilk dalganın üzerinden gelme disiplinidir. Bu matchup büyük ağırlık taşır çünkü flood atakları en yaygın savunma zayıflığını kullanır — yardım gelmeden ölen izole oyuncular. Anti-flood 1v5 kazanmakla ilgili değildir; ilk dalgayı atlatmak, rotate için zaman kazanmak ve savunmayı retake veya trade edilmiş dövüşe çevirmekle ilgilidir.
 
-## Common Punish Patterns
-**Flood punishing defense**: Five players push a single chokepoint with flashes and utility. The lone anchor dies before they can call for help. The site is taken in under 10 seconds, giving rotators no time to arrive. Numbers advantage means even bad aim produces trades. The second site defender arrives to a 1v4 instead of helping a teammate in a 2v5.
+## Yaygın Cezalandırma Kalıpları
 
-**Anti-flood defense punishing the rush**: Pre-placed area denial (molly, nanoswarm, slow orb) forces the rush to stall at the chokepoint. Crossfire positioning where the anchor and a teammate catch the rush from two angles. Utility stacking on the entry point — smoke + molly + tripwire creates a gauntlet that damages and slows the rush. Early aggression from a defender catches the rush before it reaches the chokepoint, disrupting the timing.
+**IF**: Beş oyuncu tek bir choke'tan flash ve yetenek ile push ediyor ve tek anchor yardım çağırmadan ölüyor
+**MEANING**: Site rotate'cular ulaşamadan alınmıştır. Sayısal üstünlük kötü nişan bile olsa trade üretiyor. Site'daki diğer savunmacı 2v5 yerine 1v4'e geliyor.
+**COUNTER**: Önceden yerleştirilmiş alan engelleme (molly, nanoswarm, slow orb) rush'ı choke'ta durdurur. Crossfire pozisyonlama — anchor ve takım arkadaşı rush'ı iki açıdan yakalar. Giriş noktasına yetenek yığma (smoke + molly + tripwire) rush'ı yaralar ve yavaşlatan bir engel oluşturur.
+**WHY**: Flood tek bir noktayı ezmekle çalışır — o noktada gecikme yetenek yığını geçişi imkânsız kılar.
 
-## What Repeated Failure Means
-If the **defense** keeps getting flooded, the anchor player is either dying too fast (bad positioning), not using delay utility (not placing mollies or slows), or the team is rotating too slowly. A flood should be anticipated on specific maps and sites.
+**IF**: Rush önceden yerleştirilmiş alan engellemesine takılıyor ve choke'ta yığılıyor
+**MEANING**: Savunma gecikme yeteneğini doğru zamanda konumlandırmış ve rush'ı durduran bir engel oluşturmuştur.
+**COUNTER**: Saldırganlar push etmeden önce yeteneğini temizlemeli (bunu gerçek bir flood olmaktan çıkarır) veya daha az savunma açısı olan başka bir site'a flood etmeli. B'de alan engelleme varsa bunun yerine A'ya flood et.
+**WHY**: Gecikme yeteneği içinden yürümek rush'ın tek avantajını — hızı — ortadan kaldırır.
 
-If the **flood** keeps failing, the attack team is pushing into pre-placed area denial without clearing it, or they are flooding a site that has too many crossfire angles. They need to either clear utility first (making it not a true flood) or pick a site with fewer defensive angles.
+**IF**: Flood takım çok sayıda flash ve smoke ile giriş öncesi savunmanın tüm gecikme yeteneğini tüketiyor
+**MEANING**: Saldırganlar yetenek önce harcayıp savunmanın alan engellemesini boşalttı. Molly, nanoswarm ve slow orb kullanıldı — savunma artık choke'ta durmak yerine açık duel'a girmek zorunda. Savunmanın yetenek deposu bitti, rush'ın ikinci dalgası temiz geçebilir.
+**COUNTER**: Yetenek rotasyonunu yönet — hepsini raund başında yerleştirme. Rush sürerken yeni yetenek şarj edenler (Killjoy nanoswarm, Sage slow) ikinci dalga için rezervde tutar. Birden fazla choke noktasına gecikme yeteneği yay ki saldırganlar hepsini tek seferde temizleyemesin.
+**WHY**: Savunmanın yetenek deposu tükenirse flood'un önündeki tek engel bireysel duel olur — sayısal üstünlük bu duel'u her zaman saldırgan lehine çevirir.
 
-## What AIMLO Should Say
-### When player is on the punished side
-**Defense getting flooded**: "You are dying before your team can rotate because you have no delay utility in front of you. Place molly, slow, or trap utility at the entry before the round starts. Your job is not to kill all five — it is to survive 10 seconds so your team arrives."
+## Tekrarlayan Başarısızlık Ne Anlama Gelir
+**Savunma** sürekli flood yiyorsa, anchor oyuncu ya çok hızlı ölüyor (kötü pozisyonlama), gecikme yeteneği kullanmıyor (molly veya slow koymuyor), ya da takım çok yavaş rotate ediyor. Belirli harita ve site'larda flood beklenmeli.
 
-**Flood failing**: "Your rush is hitting prepared defenses. Either clear the utility before pushing or change which site you flood. If they have area denial on B, flood A instead of walking through nanoswarms."
+**Flood** sürekli başarısız oluyorsa, saldırı takımı önceden yerleştirilmiş alan engellemesinin içine temizlemeden push ediyor veya çok fazla crossfire açısı olan bir site'a flood ediyor. Ya önce yetenek temizlemeli ya da daha az savunma açısına sahip bir site seçmeli.
 
-### When player is on the punishing side
-**Anti-flood defense working**: "Your delay utility is buying time for rotations perfectly. Keep pre-placing area denial at the rush entry and vary your crossfire angles so the rushers cannot pre-aim you."
+## AIMLO Ne Demeli
+### Oyuncu cezalandırılan taraftayken
+**Savunma flood yiyorken**: "Takımın rotate edemeden ölüyorsun çünkü önünde gecikme yeteneği yok. Raund başlamadan önce girişte molly, slow veya trap yeteneği yerleştir. Görev beşini de öldürme değil — takımın gelene kadar hayatta kalmak."
 
-**Flood overwhelming defense**: "Your rush is taking sites before they can respond. Keep this tempo but be ready to adapt — smart defenders will start pre-stacking the site you keep flooding."
+**Flood başarısız oluyorken**: "Rush'un hazırlanmış savunmaya çarpıyor. Ya push etmeden önce yeteneğini temizle ya da flood ettiğin site'i değiştir. Alan engelleme B'deyse, nanoswarm'ların içinden yürümeye devam etme, A'ya flood et."
 
-## Rank Modulation
-**LOW**: Rushes are common and defenders have no answer. Teach defenders to place delay utility at site entries and play for time, not kills.
+### Oyuncu cezalandıran taraftayken
+**Anti-flood savunma çalışıyorken**: "Gecikme yeteneklerin rotate için mükemmel zaman kazandırıyor. Rush girişine alan engelleme koymaya devam et ve crossfire açılarını değiştir ki rusher'lar seni önceden hedefleyemesin."
 
-**MID**: Defenders start using delay utility but inconsistently. Rushes still work when defenders are caught unprepared. Coach consistent pre-round utility placement and rotation awareness.
+**Flood savunmayı eziyorken**: "Rush'un onlar tepki veremeden site alıyor. Bu tempoyu koru ama uyum sağlamaya hazır ol — akıllı savunmacılar sürekli flood ettiğin site'e ön-yığılma yapmaya başlayacak."
 
-**HIGH**: Anti-flood utility is standard but rushes still work with proper clearing. Coach the attackers to clear utility before rushing and the defenders to layer multiple delay tools.
+## Rank Modülasyonu
+**LOW**: Rush'lar yaygındır ve savunmacıların cevabı yoktur. Savunmacılara site girişlerine gecikme yeteneği yerleştirmeyi ve kill değil zaman için oynamayı öğret.
 
-**ELITE**: Pure floods are rare because defenders are prepared. The meta shifts to flood-fakes — rushing sounds and utility that simulate a flood but pulling back. Coach reading real floods vs. fakes.
+**MID**: Savunmacılar gecikme yeteneği kullanmaya başlar ama tutarsız. Rush'lar savunmacılar hazırlıksız yakalanınca hâlâ çalışır. Tutarlı raund öncesi yetenek yerleştirme ve rotate farkındalığını öğret.
+
+**HIGH**: Anti-flood yetenek standarttır ama rush'lar düzgün temizlemeyle hâlâ çalışır. Saldırganlara rush etmeden önce yetenek temizlemeyi, savunmacılara birden fazla gecikme aracı katmanlamayı öğret.
+
+**ELITE**: Saf flood'lar nadirdir çünkü savunmacılar hazırdır. Meta flood-fake'lere kayar — rush sesleri ve flood simüle eden yetenek ama geri çekilme. Gerçek flood ile fake okumayı öğret.

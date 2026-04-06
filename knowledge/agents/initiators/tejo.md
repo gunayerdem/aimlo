@@ -1,81 +1,106 @@
-# AGENT: Tejo
+# AJAN: Tejo
 
-> **PATCH-SENSITIVE**: Tejo is a newer agent. Ability values, cooldowns, and mechanics may change between patches. Verify current stats before coaching sessions.
+## 1. Rol Kimliği
+Tejo, keşif ve yıkımı tek boru hattında birleştiren initiator. Stealth Drone ile gizli bilgi toplar, Special Delivery ile savunucuları concuss eder, Guided Salvo ile iki ayrı noktaya füze yağdırarak alan inkar eder ve Armageddon ile tüm bir koridor boyunca hava saldırısı başlatır. Diğer initiator'lardan farkı: bilgi topladıktan sonra aynı kit içinde doğrudan hasar ve alan kontrolü sunması. Sova bilgi verir ama hasar sınırlıdır; Breach yerinden eder ama bilgi toplamaz. Tejo ikisini aynı tur içinde yapabilir. Zayıf tarafı: her yetenek bağımsız yüksek değer taşıdığı için yanlış sırayla kullanıldığında kit'in sinerjisi çöker.
 
-## 1. Role Identity
-Tejo is the newest initiator on the roster, applying initiator fundamentals -- information gathering, enemy displacement, and entry support -- through a distinctive kit that is still finding its place in the competitive meta. As a recent addition, Tejo's optimal playstyle, team synergies, and map preferences are actively evolving with community discovery and balance patches. Players picking up Tejo should have a strong grasp of initiator fundamentals before layering on his specific mechanics.
+## 2. Yetenek Seti
+- **Stealth Drone (C)** — Gizli drone fırlatır, doğrudan kontrol edilir. Tekrar ateşleyerek darbe gönderir; vurulan düşmanları Suppress ve Reveal eder. Bilgi toplama ile baskılama tek yetenekte birleşir.
+- **Special Delivery (Q)** — Yapışkan bomba. İlk yüzeye yapışır ve patlar, patlama alanındaki düşmanları concuss eder. Giriş öncesi köşe temizleme ve savunucu yerinden etme aracı.
+- **Guided Salvo (E)** — İmza yeteneği. İki farklı hedef noktasına füze deploy eder. Alan inkarı ve pozisyon bozma. Çift hedefleme sayesinde düşmanı iki yönden sıkıştırır.
+- **Armageddon (X)** — Ultimate. Taktik harita açılır, başlangıç noktası ve yön seçilir, seçilen hat boyunca art arda patlamalar yağar. Tüm bir koridoru temizleyen veya retake'i imkansız kılan büyük ölçekli yıkım aracı.
 
-## 2. Core Responsibilities
-- Gather information for the team before site takes using Tejo's scouting tools
-- Displace or disrupt enemies holding positions to create entry opportunities for duelists and the team
-- Support team executes with initiator utility that forces enemies to reposition or take unfavorable fights
-- Communicate ability results clearly -- teammates may be unfamiliar with what Tejo's utility reveals or affects
-- Maintain initiator discipline: use abilities for the team's benefit, not personal aggression
-- Adapt to patch changes and emerging meta understanding as the community refines Tejo's role
+## 3. Temel Sorumluluklar
+- Execute öncesi Stealth Drone ile savunucu pozisyonlarını ortaya çıkar ve Suppress ile silahsız bırak
+- Special Delivery ile concuss uygulayarak duelist'in giriş anını hazırla
+- Guided Salvo ile site'ın iki farklı tutma açısını aynı anda inkar et
+- Armageddon'u doğrulanmış düşman yoğunluğuna veya retake yollarına yönlendir
+- Her yetenek kullanımını takıma çağır: "Drone gidiyor B main", "Concuss A short'a düşüyor", "Salvo iki noktaya geliyor"
+- Drone-sonra-concuss-sonra-salvo boru hattını sıralı tut; sıra bozulursa kit'in sinerjisi kaybolur
 
-## 3. Common Mistakes
-- Playing Tejo like an established initiator (Sova, Fade) without understanding his unique kit timing and strengths
-- Neglecting core initiator responsibilities (info, displacement) while experimenting with kit-specific plays
-- Failing to communicate when abilities reveal or affect enemies -- the team needs the callout
-- Not adjusting playstyle between patches when Tejo's numbers get tuned
-- Overcommitting to niche Tejo-specific plays instead of providing reliable, round-by-round initiator value
-- Tunnel vision on one aspect of the kit while ignoring other abilities that provide team value
+## 4. Sık Yapılan Hatalar
+- Stealth Drone'u takım desteği olmadan açık alanda pilotlamak — drone vurulur, bilgi gelmez, Tejo savunmasız kalır
+- Special Delivery'yi düşman pozisyonu doğrulanmadan rastgele atmak — concuss boşa gider
+- Guided Salvo'nun iki hedefini aynı noktaya yakın seçmek — çift hedefleme avantajı kaybolur
+- Armageddon'u bilgi olmadan spekülatif alana harcamak — 8 ult puanı boşa gider
+- Tüm utility'yi tur başında harcayıp post-plant için boş kalmak
+- Drone suppress'ini takıma çağırmamak — suppress penceresi kısa, takım farkında olmazsa avantaj kaybolur
+- Tejo'yu Sova gibi oynamak: Sova uzak mesafe lineup ajanı, Tejo orta mesafe boru hattı ajanı
 
-## 4. Pattern -> Meaning
+## 5. Kalıp -> Anlam
 
-**IF** the player provides no usable info to the team despite using abilities
-**MEANING** Abilities are aimed at wrong positions or used without a plan for what the info enables
-**FIX** Before using any ability, have a plan: "I am scouting B site to see if we can push." If the info does not change the team's decision, the ability was wasted.
+**IF** Stealth Drone her turda aynı rotadan gönderiliyor
+**MEANING** Düşman drone rotasını ezberlemiş ve önceden nişan alıyor
+**COUNTER** Her turda farklı rotadan drone gönder. Bir turda A main'den, sonraki turda mid'den, üçüncüde B long'dan. Drone'un "stealth" özelliği yalnızca rota tahmin edilemezken işe yarar.
+**WHY** Tahmin edilebilir drone = anında vurulma = sıfır bilgi ve boşa giden suppress fırsatı
 
-**IF** teammates do not follow up on Tejo's initiator utility
-**MEANING** Communication gap or mistimed utility -- the team did not know it was coming or it came at the wrong time
-**FIX** Call out every ability use with a countdown. "Utility going B site in 3, 2, 1, push." Initiator utility only has value if the team acts on it.
+**IF** Special Delivery concuss'u düşmana isabet ediyor ama takım follow-up yapmıyor
+**MEANING** Concuss zamanlaması ile takımın push zamanlaması uyuşmuyor veya çağrı yapılmamış
+**COUNTER** Concuss öncesi geri sayım çağır: "Concuss A short'a geliyor, 3, 2, 1, girin." Concuss penceresi dar; takım hazır değilse avantaj buharlaşır.
+**WHY** Takipsiz concuss = düşman toparlanır = yetenek değeri sıfıra düşer
 
-**IF** the player's impact fluctuates wildly between rounds
-**MEANING** They are relying on specific setups rather than adaptable initiator play
-**FIX** Build a default utility plan for every round type: attacking each site, defending, retaking. Consistency is more important than occasional brilliance on a new agent.
+**IF** Guided Salvo'nun iki hedefi sürekli boş alanlara düşüyor
+**MEANING** Hedefleme bilgiye dayanmıyor, tahmini yapılıyor
+**COUNTER** Salvo'yu her zaman Stealth Drone veya takım arkadaşı bilgisinden sonra kullan. Drone reveal etti → salvo o noktaya ve kaçış rotasına. Bilgisiz salvo israftır.
+**WHY** Bilgi destekli salvo düşmanı iki yönden sıkıştırır; bilgisiz salvo boş zemine füze yağdırır
 
-**IF** ability usage patterns mirror another initiator exactly
-**MEANING** The player has not explored what makes Tejo distinct from Sova, Fade, or Breach
-**FIX** Identify 2-3 things Tejo can do that other initiators cannot. Build plays around those unique advantages. If you play Tejo like Sova, just play Sova.
+**IF** Armageddon patlamaları düşman pozisyonlarını ıskalıyor
+**MEANING** Hat yönü yanlış seçilmiş veya düşman yoğunluğu doğrulanmadan ateşlenmiş
+**COUNTER** Armageddon öncesi mutlaka Stealth Drone veya takım bilgisiyle düşman konumunu doğrula. Hat yönünü düşmanın kaçış rotasını kesen açıda seç.
+**WHY** Doğrulanmış bilgiyle Armageddon koridoru temizler; bilgisiz Armageddon pahalı havai fişek gösterisi olur
 
-**IF** the player switches off Tejo after a few bad rounds
-**MEANING** They expect immediate mastery on a new agent and lack patience for the learning curve
-**FIX** New agents require 20-30 games minimum to develop comfort. Track improvement per session, not per round. The learning curve is steeper because the community has not solved Tejo yet.
+**IF** Tejo her turda drone → concuss → salvo sırasını mekanik olarak tekrarlıyor
+**MEANING** Boru hattı tahmin edilebilir hale gelmiş, düşman her adımı beklemeye başlamış
+**COUNTER** Sırayı değiştir: bir turda concuss önce at (erken agresyon), sonraki turda salvo ile aç (alan inkarı öncelikli), üçüncüde drone'u atla ve hızlı execute yap. Tahmin edilemezlik Tejo'nun silahı.
+**WHY** Sabit sıra = düşman her adıma hazırlanır = kit'in sürpriz değeri ölür
 
-## 5. Map Interactions
-- **General**: Tejo's map viability is still being established. Test him on multiple maps before committing to a map pool.
-- **Open maps (Breeze, Icebox)**: Evaluate whether Tejo's scouting range and displacement tools cover the wide spaces these maps demand.
-- **Tight maps (Bind, Split)**: Initiator fundamentals transfer well. Tejo should provide reliable value in confined spaces where displacement is impactful.
-- **Three-site maps (Haven, Lotus)**: Ability economy across three sites requires discipline. Assess whether Tejo's cooldowns and charges support three-site coverage.
-- **Note**: Map-specific guidance will evolve rapidly. Revisit after each patch update.
+**IF** Tejo saldırıda tüm utility'sini site girişinde harcıyor, post-plant için hiçbir şey kalmıyor
+**MEANING** Yetenek bütçelemesi eksik — Armageddon veya Guided Salvo post-plant'ta da büyük değer taşır
+**COUNTER** Saldırıda en az Guided Salvo'yu veya Special Delivery'yi post-plant için sakla. Salvo defuse noktasını iki yönden inkar eder; concuss retake yapanları durdurur.
+**WHY** Post-plant Tejo = defuse inkarı makinesi; giriş-odaklı Tejo = spike dikildikten sonra yarım ajan
 
-## 6. Matchup Notes
-- Against established initiators: Tejo must offer something Sova, Fade, or Breach do not. If the opposing initiator provides more reliable value, consider whether Tejo is the right pick.
-- Against sentinels: Standard initiator dynamics apply. Tejo's displacement should force sentinels off their setups.
-- Against aggressive duelists: Tejo's info tools should provide early warning of pushes, same as any initiator.
-- Paired with a second initiator: Running Tejo alongside an established initiator reduces risk while allowing the player to learn the agent in a supported environment.
-- **Caution**: Matchup understanding is preliminary. Avoid rigid assumptions until the meta stabilizes.
+**IF** Stealth Drone suppress'i uygulanıyor ama takım suppress süresince push yapmıyor
+**MEANING** Suppress'in ne anlama geldiği takıma aktarılmamış — suppress edilen düşman yetenek kullanamaz
+**COUNTER** Her suppress'i anında çağır: "Suppress edildi, yetenekleri kapalı, şimdi girin." Suppress penceresi kapandığında düşman tam kapasiteye döner.
+**WHY** Suppress = düşman silah dışında hiçbir şey kullanamaz = takımın en büyük giriş penceresi
 
-## 7. What To Tell The Player
+**IF** Tejo savunmada utility'yi tur başında harcayıp turun geri kalanında boş kalıyor
+**MEANING** Savunmada utility dağılımı yanlış — tüm kit tek dalga için harcanmış
+**COUNTER** Savunmada drone'u erken uyarı için kullan, concuss ve salvo'yu mid-round veya retake için sakla. Armageddon retake sırasında site'ı temizlemek için idealdir.
+**WHY** Erken harcanan utility = turun geri kalanında vanilya ajan = savunmanın en zayıf halkası
 
-### When performing well
-> ⚠️ PATCH-SENSITIVE: Enemy modeling for Tejo is based on role fundamentals. Specific counter-adaptation patterns will solidify as the meta evolves.
+## 6. Harita Etkileşimleri
+- **Bind**: Dar alanlar Special Delivery concuss'undan kaçışı zorlaştırır. Teleporter çıkışlarında Guided Salvo çift hedef yerleştirmesi düşmanı her iki yönden sıkıştırır. A short'ta drone → concuss → salvo boru hattı tam execute kalitesi sağlar. Hookah'da Armageddon tüm koridoru temizler.
+- **Split**: Orta alan kontrolü için Stealth Drone idealdir — dar mid'de drone gizliliği korunur. A ramp ve B main'de Special Delivery concuss kaçınılması güçtür. Guided Salvo A heaven + A main'i aynı anda inkar edebilir. Armageddon B main koridoru boyunca savunucuları pozisyonlarından atar.
+- **Haven**: Üç site Tejo'nun keşif bileşenini ödüllendirir — drone ile hangi site'ın yumuşak olduğunu belirle. C long'da drone → concuss → salvo boru hattı execute kalitesini artırır. Armageddon garage boyunca rotasyonları keser. A long'da Guided Salvo'nun çift hedefi A site'ı iki yönden inkar eder.
+- **Ascent**: A main ve B main'de Stealth Drone bilgi toplamak için uygun koridorlar sunar. Mid'de Special Delivery catwalk savunucularını concuss eder. Guided Salvo A site'ta tree + generator açılarını aynı anda kaplar. Armageddon B main boyunca execute desteği verir.
+- **Sunset**: Mid koridoru Stealth Drone için doğal güzergah. B market'ta Special Delivery yapışkan bombası dar alanda kaçınılmaz. A main'de Guided Salvo çift hedef yerleştirmesi push kalitesini artırır.
+- **Lotus**: Dönen kapılar drone rotalarını çeşitlendirmek için fırsat yaratır. Dar B main koridoru Special Delivery ve Guided Salvo için idealdir. C site'ın çoklu girişleri Armageddon'un hat yönü seçimini ödüllendirir.
 
-**Player Action:** You scout defender positions before every execute, follow up with displacement to force the anchor off their hold, and communicate every reveal to the team within 1 second of the scan.
-**Enemy Perception:** Defenders see their positions revealed before every push and feel they cannot hold any angle without being displaced. They believe the attacking team has perfect reads, but the real advantage is Tejo's scout-then-displace pipeline that turns every execute into a pre-aimed site hit.
-**Enemy Reaction:** They are forced to either hold their position and get displaced (abandoning prepared crosshair placement during the 1-2 second reposition) or pre-rotate before the scout (giving up their anchor position for free). Both choices degrade the quality of their defensive hold.
-**Exploit Window:** The 1-2 second window where a displaced defender is mid-reposition with no stable crosshair is your team's entry window. The scout reveal gives your duelist a pre-aimed angle, and the displacement ensures the defender is not holding it when the swing arrives.
-**Repeat Strategy:** Round 1: scout the primary hold, displace confirmed position, team enters during reposition. Round 2: scout the secondary hold to catch defenders who shifted off the primary. Round 3: skip the scout and execute fast — defenders who wait for the scan before committing are caught unprepared by the speed change. Call every reveal within 1 second.
-**Enemy Adaptation:** After 3-5 rounds, defenders will play positions outside scout range, hold retake setups instead of on-site anchors, or push through your scout timing to catch you mid-ability.
-**Counter-Adaptation:** When they play outside scout range: use the scout to confirm the site is soft, then take it for free and set up post-plant. When they play retake: your scout becomes a retake-denial tool instead — scan the retake path and displace the lead retaker. When they push your scout timing: hold an off-angle and let teammates call the push while you support with displacement on the aggressor.
+## 7. Eşleştirme Notları
+- **Sova karşı**: İkisi de bilgi toplar ama farklı yollarla. Sova uzak mesafe lineup ajanı, Tejo orta mesafe boru hattı ajanı. Aynı takımda çift bilgi katmanı sağlarlar: Sova geniş tarama, Tejo hedefli suppress ve hasar.
+- **Fade karşı**: Fade debuff + bilgi, Tejo suppress + hasar. Fade Prowler ile yakın takip, Tejo drone ile gizli keşif. Rakip Fade varsa Stealth Drone'un gizliliği Prowler'a karşı avantajdır — Prowler ses çıkarır, drone gizlidir.
+- **KAY/O karşı**: KAY/O suppress'i Tejo'nun tüm boru hattını devre dışı bırakır. KAY/O knife attığında Tejo yeteneksiz kalır. Bu eşleşmede KAY/O'nun suppress zamanlamasını oku ve utility'ni suppress penceresi dışında kullan.
+- **Sentinel'lara karşı**: Stealth Drone ile Killjoy turret ve Cypher tripwire pozisyonlarını ortaya çıkar. Special Delivery concuss'u sentinel'ları kurulumlarından çıkmaya zorlar. Guided Salvo ile sentinel utility'sini iki noktadan yok et.
+- **Chamber karşı**: Chamber Op tutarken Stealth Drone ile pozisyonunu reveal et, Special Delivery ile concuss uygula — concuss altında Op tutmak imkansızdır. Guided Salvo Chamber'ın teleport noktasını ve mevcut pozisyonunu aynı anda hedefler.
+- **Agresif duelist'lere karşı**: Stealth Drone erken push'ları tespit eder. Special Delivery agresif peek yapan duelist'i concuss ile durdurur. Drone'u erken uyarı sistemi olarak kullan.
 
-**When struggling**: "Go back to initiator basics. Every round, your job is: give the team info before the fight, displace at least one enemy during the execute, and support the entry. Do that with Tejo's kit, and the specific mechanics will develop."
+## 8. Oyuncuya Ne Söylenmeli
 
-**When being predictable**: "Opponents are already reading your utility patterns. On a new agent, they are studying you harder than they would a Sova or Fade. Vary your ability timing, angles, and target sites."
+### İyi performans gösterdiğinde
+**Oyuncu Eylemi:** Her execute öncesi Stealth Drone ile savunucu pozisyonlarını suppress ediyorsun, Special Delivery ile concuss uygulayarak giriş penceresi açıyorsun ve Guided Salvo ile iki farklı tutma açısını aynı anda inkar ediyorsun.
+**Düşman Algısı:** Savunucular her push öncesi suppress edildiğini, concuss yediğini ve iki noktadan füze geldiğini görüyor. Site tutmak için kullandıkları her yetenek Tejo tarafından devre dışı bırakılıyor veya pozisyonları inkar ediliyor. Saldıran takımın mükemmel koordinasyonu olduğuna inanıyorlar ama asıl avantaj Tejo'nun drone → suppress → concuss → salvo boru hattı.
+**Tekrar Stratejisi:** Tur 1: birincil tutma açısına drone gönder, suppress et, concuss at, salvo ile iki açıyı inkar et. Tur 2: ikincil açıya drone gönder — taşınan savunucuları yakala. Tur 3: drone'u atla, hızlı concuss + salvo execute yap — drone bekleyen savunucular hız değişikliğine hazırlıksız kalır.
 
-## 8. Rank Modulation
-- **Low (Iron-Silver)**: Play Tejo as a straightforward initiator. Use scouting abilities before pushes. Focus on providing info and staying alive.
-- **Mid (Gold-Platinum)**: Start exploring Tejo-specific plays that other initiators cannot replicate. Learn 1-2 unique setups per map.
-- **High (Diamond-Ascendant)**: Develop a Tejo-specific playbook. Stay current on patches. Integrate Tejo's unique mechanics into standard execute and retake plans.
-- **Elite (Immortal-Radiant)**: Pioneer Tejo strategies. At this level, early mastery of a new agent before opponents learn to counter it is a significant competitive advantage. Balance innovation with reliability.
+**Zorlandığında**: "Boru hattına dön. Drone ile bilgi topla, concuss ile giriş aç, salvo ile alan inkar et. Bu sırayı takıma çağırarak uygula. Sıra doğru olduğunda kit kendini gösterir."
+
+**Tahmin edilebilir olduğunda**: "Düşman her adımını beklemeye başladı. Sırayı değiştir: concuss ile aç, drone'u sonraya sakla, salvo'yu post-plant'ta kullan. Aynı boru hattını farklı sırayla çalıştır."
+
+## 9. Rank Modülasyonu
+
+**Düşük (Iron-Silver)**: Tejo'yu basit bir initiator olarak oyna. Her turda "önce drone, sonra dövüş" mantrasını uygula. Special Delivery'yi sadece takım push yapacakken at. Guided Salvo'yu tek hedefe bile olsa kullanmayı öğren — kullanılmayan salvo sıfır değer taşır. Armageddon'u koridorlara yönlendir, açık alanlara değil.
+
+**Orta (Gold-Platinum)**: Drone → concuss → salvo boru hattını hızlandırmaya başla. Her haritada 2-3 drone rotası öğren. Guided Salvo'nun çift hedefleme avantajını kullanmaya başla — iki farklı tutma açısını aynı anda hedefle. Concuss çağrılarını tutarlı yap: "Concuss düşüyor, girin."
+
+**Yüksek (Diamond-Ascendant)**: Boru hattı sırasını tur tur değiştir. Armageddon'u retake inkarı olarak kullanmaya başla — sadece execute aracı değil. Guided Salvo'yu post-plant defuse inkarı olarak sakla. Drone suppress zamanlamasını takımın swing zamanlamasıyla senkronize et.
+
+**Elit (Immortal-Radiant)**: Tejo stratejilerini öncüle. Boru hattı sıralamasını her turda bilinçli olarak değiştir. Armageddon hat yönünü düşmanın retake rotasyonunu okuyarak seç. Suppress pencerelerini takımla koordine et — suppress anında tam takım swing'i. Bu seviyede Tejo'nun değeri tahmin edilemez boru hattı sıralamasında yatar.

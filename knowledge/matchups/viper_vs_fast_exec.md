@@ -1,34 +1,66 @@
-# MATCHUP: Viper vs Fast Execute
+# EŞLEŞME: Viper vs Hızlı Execute
 
-## Interaction Identity
-Viper is the queen of prolonged site control — her Toxic Screen and Poison Cloud create zones of vulnerability and visual denial that make extended fights painful for attackers. Fast executes try to bypass this entirely by taking the site before Viper's toxin has time to matter. This matchup is a race between the execute speed and Viper's ability to activate and position her utility. If the execute hits before Viper's screen is up, she is just a player with a gun. If her screen is active when they push, every attacker enters site decayed and blind.
+## Etkileşim Kimliği
+Viper, uzun süreli site kontrolünün kraliçesidir — Toxic Screen ve Poison Cloud'u, uzun dövüşleri saldırganlar için acımasız kılan güvenlik açığı ve görsel inkâr bölgeleri yaratır. Hızlı execute'lar Viper'ın toksininin fark etme zamanı bulamadan site alarak bunu tamamen bypass etmeye çalışır. Bu eşleşmede execute hızı ile Viper'ın yetenek aracını aktive edip konumlandırma becerisi arasında yarış vardır. Execute Viper'ın screen'i kalkmadan vurursa, o sadece elinde silah olan bir oyuncudur. Screen push ettiklerinde aktifse, her saldırgan site'a decay'li ve kör girer.
 
-## Common Punish Patterns
-**Fast execute punishing Viper**: Rushing through the Toxic Screen before it activates or during its cooldown window. Pushing while Viper's fuel is depleted after extended early-round use. Executing from an angle that the Toxic Screen does not cover — the screen is a line, not a dome. Five-player flood that overwhelms the decay damage through sheer numbers.
+## Yaygın Cezalandırma Kalıpları
 
-**Viper punishing fast execute**: Pre-activated Toxic Screen cuts the entry path in half, splitting the execute and decaying everyone who pushes through. Snake Bite on the entry point deals damage during the push — rushing players take 25+ damage before the gunfight. Poison Cloud on the plant spot forces the execute team to fight inside vulnerability. Viper's Pit on site makes the entire post-plant a nightmare — every retaker enters with 1hp decay.
+### Hızlı Execute Viper'ı Cezalandırırken
 
-## What Repeated Failure Means
-If **Viper** keeps getting overwhelmed by fast executes, her screen is either not positioned on the entry path or not activated in time. She may also be using fuel on early-round smoke and not having enough for the actual execute.
+**IF**: Toxic Screen aktive olmadan veya bekleme aralığı penceresinde içinden rush ediliyorsa
+**MEANING**: Viper'ın birincil kontrol aracı devrede değil — savunma zayıf
+**COUNTER**: Viper screen'i raund başında entry yoluna ön-aktive etmeli
+**WHY**: Aktive olmamış screen sıfır değer sağlar
 
-If the **fast execute** keeps failing against Viper, the team is pushing through her toxin instead of around it. They need to either execute from an angle the screen does not cover or wait for her fuel to deplete before committing.
+**IF**: Viper'ın yakıtı uzun süreli erken raund kullanımının ardından tükendiğinde push ediliyorsa
+**MEANING**: Yakıt tükendiğinde tüm toksin kontrolü kapanır
+**COUNTER**: Viper yakıtını execute penceresi için saklamalı — erken raund kontrol için fazla harcamamalı
+**WHY**: Yakıt yönetimi Viper'ın tüm değerini belirler
 
-## What AIMLO Should Say
-### When player is on the punished side
-**Viper overwhelmed by speed**: "Your screen is not ready when they push. Either pre-activate it at round start on the entry path, or save your fuel for the execute window. If you use fuel for early-round control, you will not have it when the rush comes."
+**IF**: Toxic Screen'in kapsamadığı açıdan execute ediliyorsa — screen bir çizgidir, kubbe değil
+**MEANING**: Savunma yapısında kapsanmamış açı boşluğu var
+**COUNTER**: Viper screen açısını en olası entry yolunu kaplayacak şekilde ayarlamalı
+**WHY**: Tek çizgi savunma çoklu açı saldırısına karşı kırılgandır
 
-**Fast execute failing vs Viper**: "You are running through her toxin and taking fights decayed. Either push from an angle her screen does not cover or wait for her fuel to run out. Five players at 100hp lose to three players when they are all decayed."
+### Viper Hızlı Execute'u Cezalandırırken
 
-### When player is on the punishing side
-**Viper stopping the execute**: "Your screen is splitting their push perfectly. Keep your fuel managed for the execute window and they will never take your site cleanly."
+**IF**: Ön-aktive Toxic Screen entry yolunu ikiye bölüyor, execute'u ayırıp içinden geçen herkesi decay'lıyor
+**MEANING**: Push birliği kırılıyor — saldırganlar bölünmüş ve zayıflamış
+**COUNTER**: Execute takımı screen'in kapsamadığı açıdan push etmeli veya yakıt bitmesini beklemeli
+**WHY**: Screen push'u fiziksel olarak bölüp decay hasarı verir
 
-**Fast execute beating Viper**: "You are hitting before her toxin matters. Keep the execute speed up and vary which angle you push from so she cannot pre-position the screen."
+**IF**: Snake Bite entry noktasında push sırasında hasar veriyorsa
+**MEANING**: Rush eden oyuncular silah dövüşünden önce 25+ hasar alıyor
+**COUNTER**: Entry noktasını değiştirmek veya Snake Bite'ı tetikleyip geri çekilmek
+**WHY**: Entry noktası hasarı silah dövüşü öncesi dezavantaj yaratır
 
-## Rank Modulation
-**LOW**: Viper does not time screen activation with pushes. Fast executes happen randomly. Coach Viper on pre-activating screen on the default entry.
+**IF**: Viper's Pit site'ta tüm post-plant'ı kabusa çeviriyor
+**MEANING**: Her retake eden 1hp decay ile giriyor
+**COUNTER**: Pit'i long-range yetenek araçlarıyla (lineup'lar, drone'lar) zorlayıp Viper'ı içinden çıkmaya zorlamalı
+**WHY**: Pit içindeki Viper neredeyse yenilmez — içinden çıkmaya zorlamak gerekir
 
-**MID**: Viper's screen is up but positioned poorly. Fast executes push through toxin instead of around. Coach both on screen angle awareness and alternate entry paths.
+## Tekrarlanan Başarısızlık Ne Anlama Gelir
+**Viper** sürekli hızlı execute'larla eziliyorsa, screen'i ya entry yolunda değil ya da zamanında aktive edilmiyor. Ayrıca erken raund smoke için yakıt kullanıp gerçek execute için yeterli yakıtı kalmamış olabilir.
 
-**HIGH**: Viper's fuel management is tested. Fast executes try to bait early fuel use. Coach fuel economy and timing discipline.
+**Hızlı execute** sürekli Viper'a karşı başarısızsa, takım toksininden geçiyor yerine etrafında dolanmalı. Screen'in kapsamadığı açıdan execute etmeliler veya yakıtının bitmesini beklemeliler.
 
-**ELITE**: The matchup is about fuel management and execute timing at the highest level. Viper must read when the execute is coming and the execute team must read her fuel state. Coach read-based timing.
+## AIMLO Ne Demeli
+
+### Oyuncu cezalandırılan taraftayken
+**Viper hız karşısında eziliyorsa**: "Screen'in push ettiklerinde hazır değil. Ya raund başında entry yoluna ön-aktive et, ya da yakıtını execute penceresi için sakla. Erken raund kontrol için yakıt kullanırsan rush geldiğinde elinde kalmaz."
+
+**Hızlı execute Viper'a karşı başarısızsa**: "Onun toksini içinden koşuyorsunuz ve decay'li dövüşüyorsunuz. Ya screen'inin kapsamadığı açıdan push edin ya da yakıtının bitmesini bekleyin. 100hp'lik beş oyuncu, hepsi decay'liyken üç oyuncuya kaybeder."
+
+### Oyuncu cezalandıran taraftayken
+**Viper execute'u durduruyorsa**: "Screen'in push'larını mükemmel bölüyor. Yakıtını execute penceresi için yönetimli tut ve site'ini temiz alamazlar."
+
+**Hızlı execute Viper'ı yeniyorsa**: "Toksini fark etmeden vuruyorsunuz. Execute hızını yüksek tutun ve push açınızı çeşitlendirin ki screen'i ön-pozisyonlayamasın."
+
+## Rank Modülasyonu
+**LOW**: Viper screen aktivasyonunu push'larla zamanlamaz. Hızlı execute'lar rastgele olur. Viper'a varsayılan entry'ye screen ön-aktive etmeyi öğret.
+
+**MID**: Viper'ın screen'i aktif ama kötü konumlanmış. Hızlı execute'lar etrafında dolanmak yerine toksinden geçer. Her ikisine screen açı farkındalığı ve alternatif entry yolları öğret.
+
+**HIGH**: Viper'ın yakıt yönetimi test ediliyor. Hızlı execute'lar erken yakıt kullanımını bait etmeye çalışıyor. Yakıt ekonomisi ve zamanlama disiplini öğret.
+
+**ELITE**: Eşleşmede yakıt yönetimi ve execute zamanlaması en üst seviyede belirleyici. Viper execute'un ne zaman geleceğini okumalı ve execute takımı onun yakıt durumunu okumalı. Okuma bazlı zamanlama öğret.

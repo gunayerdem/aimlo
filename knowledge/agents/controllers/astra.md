@@ -1,76 +1,81 @@
-# AGENT: Astra
+# AJAN: Astra
 
-## 1. Role Identity
-Astra is the macro-strategic controller who commands the entire map from the astral plane. She is the most cerebral agent in Valorant -- her kit requires pre-placing stars before the round begins and activating them reactively based on how the round develops. Astra rewards game sense, prediction, and macro awareness above all else. She is the ultimate IGL controller, turning map reads into utility.
+## 1. Rol Kimliği
+Astra, astral düzlemden tüm haritaya hükmeden makro-stratejik controller'dır. Valorant'taki en zihinsel ajandır -- kit'i round başlamadan önce yıldızların önceden yerleştirilmesini ve round'un gelişimine göre reaktif olarak aktive edilmesini gerektirir. Astra her şeyin üstünde oyun anlayışını, öngörüyü ve makro farkındalığı ödüllendirir. O nihai IGL controller'dır, harita okumalarını yeteneğe dönüştürür.
 
-## 2. Core Responsibilities
-- Pre-place stars at strategic positions before the round based on predicted enemy movements
-- Activate Nebula (smoke), Nova Pulse (concuss), or Gravity Well (pull) from any placed star
-- Use Cosmic Divide to split the map with a massive wall that blocks sound and bullets
-- Recall misplaced stars to reposition utility as the round evolves
-- Function as the team's strategic anchor, reading enemy patterns and reacting with star activations
-- Manage star economy -- five stars per round, each one a potential smoke, stun, or pull
+## 2. Temel Sorumluluklar
+- Tahmin edilen düşman hareketlerine göre round'dan önce yıldızları stratejik pozisyonlara önceden yerleştirmek
+- Yerleştirilmiş herhangi bir yıldızdan Nebula (smoke), Nova Pulse (sersemletme) veya Gravity Well (çekme) aktive etmek
+- Ses ve mermileri engelleyen devasa bir duvarla haritayı bölmek için Cosmic Divide kullanmak
+- Round ilerledikçe yeteneği yeniden konumlandırmak için yanlış yerleştirilmiş yıldızları geri çağırmak
+- Takımın stratejik anchor'ı olarak işlev görmek, düşman kalıplarını okuyup yıldız aktivasyonlarıyla tepki vermek
+- Yıldız ekonomisini yönetmek -- round başına beş yıldız, her biri potansiyel smoke, stun veya çekme
 
-## 3. Common Mistakes
-- Placing all five stars before the round and never recalling or adjusting during the round
-- Using stars exclusively as smokes, ignoring Nova Pulse and Gravity Well entirely
-- Entering the astral plane during active gunfights, leaving the physical body completely vulnerable
-- Cosmic Divide placement that blocks teammate rotations or audio information
-- Pre-placing stars too aggressively in enemy territory where they get activated before the player is ready
-- Recall animation delays causing critical gaps in utility coverage at the worst moments
+## 3. Sık Yapılan Hatalar
+- Beş yıldızı da round'dan önce yerleştirip round sırasında asla geri çağırmamak veya ayarlamamak
+- Yıldızları yalnızca smoke olarak kullanmak, Nova Pulse ve Gravity Well'i tamamen göz ardı etmek
+- Aktif silah dövüşleri sırasında astral düzleme girmek, fiziksel bedeni tamamen savunmasız bırakmak
+- Takım arkadaşı rotasyonlarını veya ses bilgisini engelleyen Cosmic Divide yerleşimi
+- Yıldızları düşman bölgesine çok agresif şekilde önceden yerleştirmek, oyuncu hazır olmadan aktive edilmeleri
+- Geri çağırma animasyonu gecikmeleri yüzünden en kötü anlarda yetenek kapsamında boşluklar yaratmak
 
-## 4. Pattern -> Meaning
+## 4. Kalıp -> Anlam
 
-**IF** the player enters astral form more than 2-3 times per round in active play
-**MEANING** They are spending too much time in the astral plane and not enough in the gunfight
-**FIX** Pre-place stars during buy phase and first 10 seconds. During active play, minimize astral entries to quick recall-and-reposition only.
+**IF** oyuncu aktif oyun sırasında round başına 2-3'ten fazla kez astral forma giriyor
+**MEANING** Astral düzlemde çok fazla, silah dövüşünde yeterli vakit geçirmiyorlar
+**COUNTER** Satın alma aşamasında ve round'un ilk anlarında yıldızları önceden yerleştirin. Aktif oyun sırasında astral girişlerini yalnızca hızlı geri çağır-ve-yeniden konumla ile sınırlayın.
+**WHY** Her astral giriş bedeni savunmasız bırakır; minimize etmek hayatta kalma oranını doğrudan artırır.
 
-**IF** all stars are used as smokes and Nova Pulse / Gravity Well are never activated
-**MEANING** The player is using Astra as a worse Omen instead of leveraging her unique abilities
-**FIX** Budget stars: 3 for smokes, 1 for Gravity Well on choke points, 1 for Nova Pulse on common push lanes. Every round should include at least one non-smoke activation.
+**IF** tüm yıldızlar smoke olarak kullanılıyor ve Nova Pulse / Gravity Well asla aktive edilmiyor
+**MEANING** Oyuncu Astra'yı benzersiz yeteneklerinden yararlanmak yerine daha kötü bir Omen olarak kullanıyor
+**COUNTER** Yıldızları bütçeleyin: 3 smoke için, 1 choke noktalarında Gravity Well için, 1 yaygın push koridorlarında Nova Pulse için. Her round en az bir smoke dışı aktivasyon içermelidir.
+**WHY** Gravity Well ve Nova Pulse Astra'yı diğer controller'lardan ayıran şeydir; yalnızca smoke atmak onun benzersiz avantajını tamamen boşa harcar.
 
-**IF** Gravity Well is used on open space rather than tight choke points
-**MEANING** The pull radius is wasted when enemies can simply walk away
-**FIX** Place Gravity Well stars at doorways, narrow corridors, and corners where enemies cannot escape the pull. The pull into concuss combo is Astra's signature play.
+**IF** Gravity Well dar choke noktaları yerine açık alanda kullanılıyor
+**MEANING** Düşmanlar kolayca uzaklaşabildiğinde çekme yarıçapı boşa gider
+**COUNTER** Gravity Well yıldızlarını düşmanların çekimden kaçamayacağı kapı girişlerine, dar koridorlara ve köşelere yerleştirin. Çekme + sersemletme kombosu Astra'nın imza oyunudur.
+**WHY** Dar alanlar kaçış rotalarını ortadan kaldırır ve çekme + sersemletme kombosunun tamamlanma oranını maksimize eder.
 
-**IF** Cosmic Divide is deployed late in rounds with few players alive
-**MEANING** The ult's macro value is wasted in clutch situations
-**FIX** Cosmic Divide is strongest in 4v4 or 5v5 situations to split the map in half. Use it early in executes or retakes to isolate defenders, not as a last-resort wall.
+**IF** Cosmic Divide az oyuncu hayattayken round'ların sonlarında kullanılıyor
+**MEANING** Ult'un makro değeri clutch durumlarında boşa gidiyor
+**COUNTER** Cosmic Divide 4v4 veya 5v5 durumlarında haritayı ikiye bölmek için en güçlüdür. Son çare duvarı olarak değil, execute'ların veya retake'lerin başında savunucuları izole etmek için kullanın.
+**WHY** Tam takım dövüşleri Cosmic Divide'ın etki alanını maksimize eder; az kişili round'lar duvarın makro bölme değerini minimize eder.
 
-**IF** stars are recalled and repositioned frequently without purpose
-**MEANING** The player lacks a pre-round plan and is scrambling reactively
-**FIX** Before each round, place stars based on a specific read -- "they pushed B last two rounds, so stars go B." Commit to the plan unless hard info says otherwise.
+**IF** yıldızlar amaçsızca sık sık geri çağrılıp yeniden konumlandırılıyor
+**MEANING** Oyuncunun round öncesi planı yok ve reaktif olarak çabalıyor
+**COUNTER** Her round'dan önce belirli bir okumaya dayalı yıldız yerleştirin -- "son iki round B'ye push yaptılar, yıldızlar B'ye gidiyor." Kesin bilgi aksini söylemedikçe plana sadık kalın.
+**WHY** Amaçsız yeniden konumlandırma zamanı ve yıldız ekonomisini boşa harcar; commit edilmiş planlar daha yüksek değerli aktivasyonlar üretir.
 
-## 5. Map Interactions
-- **Breeze**: Cosmic Divide across mid is a game-changer. Star placement at A and B halls enables cross-map control.
-- **Haven**: Three sites demand careful star budgeting. Cosmic Divide shines here to isolate a site from rotators.
-- **Lotus**: Rotating doors and three sites make Astra's flexible star placement valuable. Gravity Well at door chokes is strong.
-- **Pearl**: Long mid corridor benefits from Gravity Well and Nova Pulse. Cosmic Divide across mid controls the entire map flow.
-- **Ascent**: A main and B main are prime Gravity Well positions. Stars at mid give info on catwalk and market pushes.
+## 5. Harita Etkileşimleri
+- **Breeze**: Mid boyunca Cosmic Divide oyunu değiştirir. A ve B hall'larda yıldız yerleşimi harita çapında kontrol sağlar.
+- **Haven**: Üç site titiz yıldız bütçelemesi gerektirir. Cosmic Divide bir site'ı rotasyonculardan izole etmek için burada parlar.
+- **Lotus**: Dönen kapılar ve üç site Astra'nın esnek yıldız yerleşimini değerli kılar. Kapı choke'larında Gravity Well güçlüdür.
+- **Pearl**: Uzun mid koridoru Gravity Well ve Nova Pulse'tan faydalanır. Mid boyunca Cosmic Divide tüm harita akışını kontrol eder.
+- **Ascent**: A main ve B main birincil Gravity Well pozisyonlarıdır. Mid'deki yıldızlar catwalk ve market push'ları hakkında bilgi verir.
 
-## 6. Matchup Notes
-- Against Sova: Recon Bolt reveals Astra's physical position during astral form. Time astral entries to avoid Sova recon timing.
-- Against Breach: Aftershock can hit Astra's body while in astral form. Never enter astral near common Breach utility paths.
-- Against rush comps: Gravity Well and Nova Pulse punish fast pushes. Pre-place stars at entry points and react quickly.
-- Paired with a sentinel: Sentinel holds site, Astra provides cross-map control without needing to physically rotate.
+## 6. Eşleşme Notları
+- Sova'ya karşı: Recon Bolt astral formdayken Astra'nın fiziksel pozisyonunu ortaya çıkarır. Sova recon zamanlamasından kaçınmak için astral girişleri zamanlayın.
+- Breach'e karşı: Aftershock astral formdayken Astra'nın bedenine isabet edebilir. Yaygın Breach yetenek yolları yakınında asla astral forma girmeyin.
+- Rush comp'lara karşı: Gravity Well ve Nova Pulse hızlı push'ları cezalandırır. Yıldızları giriş noktalarına önceden yerleştirin ve hızlı tepki verin.
+- Sentinel ile eşleşme: Sentinel site'ı tutar, Astra fiziksel olarak rotate etmeye gerek kalmadan harita çapında kontrol sağlar.
 
-## 7. What To Tell The Player
+## 7. Oyuncuya Ne Söylenmeli
 
-### When performing well
-**Player Action:** You pre-place all 5 stars during buy phase, activate Gravity Well at tight doorways where enemies cannot escape the pull radius, and immediately follow with Nova Pulse to concuss pulled targets before your team swings.
-**Enemy Perception:** Defenders see stars placed on their choke points and know utility is coming, but they cannot tell WHICH activation (smoke, pull, or concuss) until it fires. They must guess whether to hold position or retreat before they know what the star will do.
-**Enemy Reaction:** They are forced to either abandon the choke pre-emptively (giving up the angle for free) or hold and gamble that the star is a smoke, not a Gravity Well. If they guess wrong and get pulled, the Nova Pulse follow-up concusses them for 2+ seconds with no counterplay — they cannot shoot, strafe, or reposition.
-**Exploit Window:** The 2-second concuss window from the Gravity Well into Nova Pulse combo is a guaranteed free-kill window for your team. Defenders caught in the combo are unable to counterstrafe or aim for the full 2 seconds — enough for any teammate to swing and kill them before they recover.
-**Repeat Strategy:** Round 1: Gravity Well + Nova Pulse at the main choke, Nebula smokes on crossfires. Round 2: activate the choke stars as Nebula smokes instead (defenders who retreated give up the angle for nothing). Round 3: Gravity Well the secondary choke where defenders relocated. Recall and reposition unused stars between rounds based on enemy patterns.
-**Enemy Adaptation:** After 3-5 rounds, defenders will play further from star positions (outside pull radius), destroy stars with utility, or stagger their positions so only one player is caught by the combo.
-**Counter-Adaptation:** When they play far from stars: recall and place new stars deeper into their fallback positions between rounds. When they destroy stars: place stars in concealed spots (behind boxes, inside walls) where destruction requires committing. When they stagger positions: use Gravity Well on the isolated player and Nebula smoke on the second — your team fights 5v1 then 5v1 sequentially instead of 5v2.
+### İyi performans gösterdiğinde
+**Oyuncu Eylemi:** Satın alma aşamasında 5 yıldızın hepsini önceden yerleştiriyorsunuz, düşmanların çekme yarıçapından kaçamayacağı dar kapı girişlerinde Gravity Well aktive ediyorsunuz ve takımınız swing yapmadan önce çekilmiş hedefleri sersemletmek için hemen Nova Pulse ile takip ediyorsunuz.
+**Düşman Algısı:** Savunucular choke noktalarına yerleştirilmiş yıldızlar görüyor ve yetenek geleceğini biliyorlar, ama ateşlenene kadar HANGİ aktivasyonun (smoke, çekme veya sersemletme) olacağını söyleyemiyorlar. Yıldızın ne yapacağını bilmeden pozisyonda kalmak mı yoksa geri çekilmek mi karar vermek zorundalar.
+**Düşman Tepkisi:** Ya choke'u önceden terk etmeye (açıyı bedavaya vererek) ya da tutup yıldızın smoke olduğuna bahse girmeye zorlanıyorlar. Yanlış tahmin edip çekilirse, Nova Pulse takibi onları karşılık koyamayacakları bir süre sersemletiyor -- ateş edemiyorlar, strafe yapamıyorlar, yeniden konumlanamıyorlar.
+**Fırsat Penceresi:** Gravity Well + Nova Pulse kombosundaki sersemletme penceresi takımınız için garantili ücretsiz kill penceresidir. Komboya yakalanan savunucular tüm bu süre boyunca karşı strafe veya nişan alamaz -- herhangi bir takım arkadaşının swing yapıp toparlanmadan önce onları öldürmesi için yeterli.
+**Tekrar Stratejisi:** Round 1: ana choke'ta Gravity Well + Nova Pulse, crossfire'larda Nebula smoke'ları. Round 2: choke yıldızlarını bunun yerine Nebula smoke olarak aktive edin (geri çekilen savunucular boşuna açıyı terk eder). Round 3: savunucuların yer değiştirdiği diğer choke'a Gravity Well. Round'lar arasında düşman kalıplarına göre kullanılmayan yıldızları geri çağırıp yeniden konumlandırın.
+**Düşman Adaptasyonu:** 3-5 round sonra savunucular yıldız pozisyonlarından uzağa (çekme yarıçapı dışına) oynayacak, yıldızları yetenek ile yok edecek veya komboya yalnızca bir oyuncunun yakalanması için pozisyonlarını kademeli ayıracak.
+**Karşı Adaptasyon:** Yıldızlardan uzak oynadıklarında: round'lar arasında yeni yıldızları geri çekilme pozisyonlarına daha derine yerleştirmek için geri çağırın. Yıldızları yok ettiklerinde: yıldızları yok etmenin commit gerektirdiği gizli noktalara (kutuların arkası, duvarların içi) yerleştirin. Pozisyonları kademeli ayırdıklarında: izole edilmiş oyuncuya Gravity Well, diğerine Nebula smoke kullanın -- takım 5v2 yerine sırayla 5v1 sonra 5v1 dövüşür.
 
-**When struggling**: "Stop entering astral form mid-fight. Place your stars in the buy phase, trust your reads, and activate from the physical world. Your body is getting killed while you are in the sky."
+**Zorlandığında**: "Dövüş ortasında astral forma girmeyi bırakın. Yıldızlarınızı satın alma aşamasında yerleştirin, okumalarınıza güvenin ve fiziksel dünyadan aktive edin. Siz gökyüzündeyken bedeniniz öldürülüyor."
 
-**When being predictable**: "Opponents are avoiding your star positions because you place them identically every round. Move 2-3 stars to different positions each round based on what you saw the previous round."
+**Tahmin edilebilir olduğunda**: "Rakipler yıldız pozisyonlarınızdan kaçınıyor çünkü her round aynı şekilde yerleştiriyorsunuz. Önceki round'da gördüklerinize göre her round 2-3 yıldızı farklı pozisyonlara taşıyın."
 
-## 8. Rank Modulation
-- **Low (Iron-Silver)**: Use Astra as a simple smoker. Place 3-4 stars at common smoke spots and activate Nebula when the team needs smokes. Ignore advanced mechanics.
-- **Mid (Gold-Platinum)**: Introduce Gravity Well at choke points. Start using the recall mechanic to reposition stars mid-round. Learn one Nova Pulse combo per map.
-- **High (Diamond-Ascendant)**: Full star economy management. Gravity Well plus Nova Pulse combos. Cosmic Divide used proactively for executes and retakes.
-- **Elite (Immortal-Radiant)**: Adaptive star placement based on round-by-round opponent reads. Minimal astral entries during live play. Cosmic Divide timing dictates entire round outcomes.
+## 8. Rütbe Ayarı
+- **Düşük (Iron-Silver)**: Astra'yı basit smoker olarak kullanın. 3-4 yıldızı yaygın smoke noktalarına yerleştirin ve takım smoke'a ihtiyaç duyduğunda Nebula aktive edin. Gelişmiş mekanikleri göz ardı edin.
+- **Orta (Gold-Platinum)**: Choke noktalarında Gravity Well tanıtın. Round ortasında yıldızları yeniden konumlandırmak için geri çağırma mekaniğini kullanmaya başlayın. Harita başına bir Nova Pulse kombosu öğrenin.
+- **Yüksek (Diamond-Ascendant)**: Tam yıldız ekonomisi yönetimi. Gravity Well artı Nova Pulse komboları. Cosmic Divide execute'lar ve retake'ler için proaktif olarak kullanılır.
+- **Elit (Immortal-Radiant)**: Round round rakip okumalarına göre uyarlanabilir yıldız yerleşimi. Canlı oyun sırasında minimal astral girişler. Cosmic Divide zamanlaması tüm round sonuçlarını belirler.

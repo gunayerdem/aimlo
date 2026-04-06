@@ -1,79 +1,84 @@
-# AGENT: Sage
+# AJAN: Sage
 
-## 1. Role Identity
-Sage occupies a unique space among sentinels — she is the only agent whose primary value comes from sustain and resurrection rather than information or traps. Her wall and slow orbs provide area denial, but her healing and ultimate make her the team's lifeline. A good Sage player understands triage: who to heal, when to wall, and whether a resurrection is worth the risk or a death sentence. She is not a passive agent — she is a decision-maker whose choices directly determine round outcomes.
+## 1. Rol Kimliği
+Sage, sentinel'ler arasında benzersiz bir yer kaplar — birincil değeri bilgi veya tuzaklar yerine dayanıklılık ve diriltmeden gelen tek ajandır. Duvarı ve slow orb'ları alan engelleme sağlar, ama iyileştirmesi ve ultimate'i onu takımın can damarı yapar. İyi bir Sage oyuncusu triyajı anlar: kimi iyileştireceğini, ne zaman duvar koyacağını ve diriltmenin riski almaya değer mi yoksa ölüm fermanı mı olduğunu. Pasif bir ajan değildir — kararları doğrudan round sonuçlarını belirleyen bir karar vericidir.
 
-## 2. Core Responsibilities
-- **Healing discipline**: Heal is not a reflex — it is a resource. Prioritizing the right teammate at the right time (entry fragger before a push, not the lurker hiding in spawn) is the core Sage skill.
-- **Wall placement**: Barrier Orb defines map geometry. Offensive walls create elevation advantages and block sightlines during executes. Defensive walls buy time and force utility from attackers.
-- **Slow orb timing**: Slow orbs are most effective as reactive tools — dropped on rushes to fragment the enemy push, or placed post-plant to delay defuse. Pre-placed slow orbs are predictable.
-- **Resurrect decision-making**: The hardest part of playing Sage. Resurrecting in an unsafe position gets two players killed. The question is never "can I res?" but "should I res?"
-- **Passive site hold**: Sage holds sites by making them expensive to take. Wall + slow orb on a chokepoint buys 15-20 seconds without firing a shot.
+## 2. Temel Sorumluluklar
+- **İyileştirme disiplini**: İyileştirme refleks değildir — kaynaktır. Doğru takım arkadaşını doğru zamanda önceliklendirmek (push öncesi entry fragger, spawn'da saklanan lurker değil) temel Sage becerisidir.
+- **Duvar yerleşimi**: Barrier Orb harita geometrisini tanımlar. Hücum duvarları yükseklik avantajı yaratır ve execute sırasında sightline'ları kapatır. Savunma duvarları zaman kazandırır ve saldırganlardan utility zorlar.
+- **Slow orb zamanlaması**: Slow orb'lar reaktif araç olarak en verimlidir — rush'larda düşman push'unu parçalamak için atılır veya post-plant'te defuse geciktirmek için yerleştirilir. Önceden yerleştirilen slow orb'lar tahmin edilebilirdir.
+- **Resurrect karar verme**: Sage oynamanın en zor kısmı. Güvensiz pozisyonda diriltmek iki oyuncunun ölmesine yol açar. Soru asla "diriltebilir miyim?" değil, "diriltmeli miyim?" olmalıdır.
+- **Pasif site tutma**: Sage site'ları almayı pahalı kılarak tutar. Choke noktasında duvar + slow orb tek mermi atmadan ciddi gecikme sağlar.
 
-## 3. Common Mistakes
-- Healing the first teammate who takes damage regardless of their role or the round context. A 120hp lurker matters less than a 100hp entry fragger about to take a fight.
-- Using wall at round start in the same position every round. By round 3, attackers will just boost over it or break it with utility.
-- Panic-resurrecting a teammate in the open, resulting in both Sage and the resurrected player dying.
-- Holding heal for too long waiting for the "perfect" moment, ending rounds with unused heal charges.
-- Using slow orb too early on a site where it dissipates before the enemy push arrives.
-- Standing still during resurrect instead of using wall to create cover for the animation.
+## 3. Sık Yapılan Hatalar
+- Rolleri veya round bağlamı fark etmeksizin hasar alan ilk takım arkadaşını iyileştirmek. 120hp lurker, dövüşe girmek üzere olan 100hp entry fragger'dan daha az fark eder.
+- Her round aynı pozisyonda round başı duvar kullanmak. Round 3'te saldırganlar üstünden atlayacak veya utility ile kıracak.
+- Açık alanda panikle takım arkadaşı diriltmek, hem Sage'in hem diriltilen oyuncunun ölmesiyle sonuçlanmak.
+- "Mükemmel" anı bekleyerek iyileştirmeyi çok uzun tutmak, round'ları kullanılmamış iyileştirme şarjlarıyla bitirmek.
+- Düşman push'u gelmeden dağılan bir site'ta slow orb'u çok erken kullanmak.
+- Diriltme sırasında animasyon için siper oluşturmak yerine hareketsiz durmak, duvar kullanmamak.
 
-## 4. Pattern to Meaning
+## 4. Kalıptan Anlama
 
-**IF** Sage consistently heals the same player every round regardless of context
-**MEANING** She is defaulting to habit rather than evaluating who needs healing most for the round's strategy.
-**FIX** Teach triage: heal the player about to take the next fight, not the one who just took damage.
+**IF** Sage bağlam fark etmeksizin her round aynı oyuncuyu iyileştiriyorsa
+**MEANING** Değerlendirme yerine alışkanlığa başvuruyor, round stratejisi için en çok kimin iyileştirmeye ihtiyacı olduğunu değerlendirmiyor.
+**COUNTER** Triyaj öğret: son hasar alanı değil, sonraki dövüşe girecek oyuncuyu iyileştir.
+**WHY** Dövüşmeyen oyuncuyu iyileştirmek HP'yi boşa harcar; sonraki düello sahibini iyileştirmek doğrudan round kazanma olasılığını artırır.
 
-**IF** Sage walls break or become irrelevant within 5 seconds of placement on defense
-**MEANING** Wall placement is too predictable or too thin. Enemy team has learned to shoot it out or boost over it.
-**FIX** Vary wall angles. Use diagonal walls that block sightlines rather than perpendicular walls that just delay. Rotate wall positions each round.
+**IF** Sage duvarları savunmada yerleştirildikten kısa bir süre sonra kırılıyor veya anlamsızlaşıyorsa
+**MEANING** Duvar yerleşimi çok tahmin edilebilir veya çok ince. Düşman takım vurup kırmayı veya üstünden atlamayı öğrenmiş.
+**COUNTER** Duvar açılarını değiştir. Sadece geciktiren dik duvarlar yerine sightline'ları tamamen kapatan çapraz duvarlar kullan. Duvar pozisyonlarını her round döndür.
+**WHY** Tahmin edilebilir duvarlar anında counter'lanır; açı çeşitliliği düşmanı her round yeni bir engelle karşılaştırır.
 
-**IF** Resurrection gets Sage killed more than 40% of the time
-**MEANING** Player is resurrecting without securing the area first. The res animation is a commitment — it requires safety.
-**FIX** Never res without wall cover or teammate protection. If the body is in the open and enemies are alive, often the correct play is to not res at all.
+**IF** Resurrect zamanının %40'ından fazlasında Sage'in ölmesiyle sonuçlanıyorsa
+**MEANING** Oyuncu alanı güvence altına almadan diriltme yapıyor. Diriltme animasyonu taahhüttür — güvenlik gerektirir.
+**COUNTER** Duvar siperi veya takım arkadaşı koruması olmadan asla diriltme yapma. Beden açık alandaysa ve düşmanlar hayattaysa, doğru hamle diriltmemektir.
+**WHY** Ölü Sage + ölü diriltilen oyuncu = 2 kayıp; diriltmekten vazgeçmek bariz kayıptan iyidir.
 
-**IF** Sage has high heal output but low round win contribution
-**MEANING** She is playing as a heal bot instead of an active participant. Healing is one tool — wall, slow, and positioning are equally important.
-**FIX** Focus on wall plays that create space for the team. Sage should be making map-altering decisions, not standing behind teammates pressing heal.
+**IF** Sage yüksek iyileştirme çıktısına sahip ama düşük round kazanma katkısı varsa
+**MEANING** Aktif katılımcı yerine iyileştirme botu olarak oynuyor. İyileştirme tek araçtır — duvar, slow ve konumlandırma eşit derecede fark yaratır.
+**COUNTER** Takım için alan yaratan duvar hamlelerine odaklan. Sage harita değiştiren kararlar vermeli, takım arkadaşlarının arkasında durup iyileştirme tuşuna basmamalı.
+**WHY** İyileştirme botu Sage kit'inin yarısını kullanmaz; duvar ve slow round sonuçlarını doğrudan etkiler.
 
-**IF** Slow orbs are rarely used or always used at round start
-**MEANING** Player either forgets about slow orb or uses it as a pre-round ritual instead of a reactive tool.
-**FIX** Save slow orb for enemy aggression or post-plant situations. Reactive slow orbs on a rushing team are devastating.
+**IF** Slow orb'lar nadiren kullanılıyor veya her zaman round başında kullanılıyorsa
+**MEANING** Oyuncu ya slow orb'u unutuyor ya da reaktif araç yerine round öncesi ritüeli olarak kullanıyor.
+**COUNTER** Slow orb'u düşman agresyonu veya post-plant durumları için sakla. Rush yapan takıma atılan reaktif slow orb'lar yıkıcıdır.
+**WHY** Proaktif slow orb düşman gelmeden dağılır; reaktif kullanım taahhüt edilmiş push'u tam anında yakalar.
 
-## 5. Map Interactions
-- **Bind**: Wall on B site hookah window is iconic for a reason — it completely denies one entry path. Slow orb at B long during pushes fragments the attack.
-- **Split**: Sage wall mid is one of the most impactful walls in the game. It can cut off mid entirely, forcing attackers to choose A or B without mid control.
-- **Icebox**: Wall on B site creates elevation for off-angle fights. A site wall can block the zipline approach or create cover on rafters.
-- **Sunset**: Wall across mid corridor controls the map's central artery. Slow orbs at A main during execute slow the attack to a crawl.
-- **Haven**: Wall at C site garage entrance buys significant time. Slow orb at A long during pushes is high-value.
+## 5. Harita Etkileşimleri
+- **Bind**: B site hookah penceresinde duvar bir nedenden ikoniktir — bir giriş yolunu tamamen engeller. Push sırasında B long'da slow orb saldırıyı parçalar.
+- **Split**: Sage mid duvarı oyundaki en guclu duvarlardan biridir. Mid'i tamamen kesebilir, saldırganları mid kontrolü olmadan A veya B seçmeye zorlar.
+- **Icebox**: B site'ta duvar off-angle dövüşleri için yükseklik yaratır. A site duvarı zipline yaklaşımını kapatabilir veya rafters'ta siper yaratabilir.
+- **Sunset**: Mid koridorunda duvar haritanın merkezi arterini kontrol eder. Execute sırasında A main'de slow orb'lar saldırıyı sürünmeye çevirir.
+- **Haven**: C site garage girişindeki duvar ciddi zaman kazandırır. Push sırasında A long'da slow orb yüksek değerlidir.
 
-## 6. Matchup Notes
-- **Raze** grenades destroy Sage walls quickly, reducing their value as stall tools.
-- Strong against **eco rounds** and **force buys** where healing keeps teammates alive through chip damage that would otherwise compound.
-- Resurrection is highest value against teams running **pick-based strategies** that rely on getting an early kill to create a 5v4.
-- Weak against **coordinated fast executes** that overwhelm wall and slow orb simultaneously.
+## 6. Eşleşme Notları
+- **Raze** bombaları Sage duvarlarını hızla yok eder, oyalama aracı olarak değerini düşürür.
+- İyileştirmenin takım arkadaşlarını normalde birikerek kayba yol açacak yıpratma hasarından hayatta tuttuğu **eco round'lar** ve **force buy'lara** karşı güçlü.
+- Resurrect, erken kill alarak 5v4 yaratmaya güvenen **pick tabanlı stratejiler** uygulayan takımlara karşı en yüksek değerdedir.
+- Duvarı ve slow orb'u aynı anda ezen **koordineli hızlı execute'lara** karşı zayıf.
 
-## 7. What To Tell The Player
+## 7. Oyuncuya Ne Söylenmeli
 
-### When performing well
-**Player Action:** You heal the teammate about to take the next fight (not the last one damaged), place Barrier Orb diagonally to block sightlines completely, and only Resurrect behind wall cover or with teammate protection.
-**Enemy Perception:** Attackers see a team where the entry player is always at full HP despite taking chip damage in prior fights. They believe the team is avoiding damage, but the real advantage is targeted Healing Orb on the next fighter — creating a perpetual HP advantage in every duel.
-**Enemy Reaction:** They are forced to commit extra damage to kill an entry who is always at 150 HP. Diagonal walls block their sightline completely (no boosting over), forcing them to either wait 30+ seconds for it to decay, spend 3+ seconds breaking it, or reroute entirely. Either option costs them the round's tempo.
-**Exploit Window:** The 15-20 second delay a diagonal Barrier Orb creates is enough time for your team to rotate or set up a crossfire. Each Healing Orb creates a 20-50 HP advantage on the next duel — across a half, that is 6-8 duels where your team has the HP edge. Resurrection behind wall cover creates a 6v5 that the enemy cannot interrupt.
-**Repeat Strategy:** Every round: identify who is fighting next and heal them pre-fight. Place Barrier Orb diagonally at the main choke — vary the angle by 15-30 degrees each round. For Resurrection: wall first, res second, never reverse the order. Use Slow Orb reactively on pushes, not proactively on empty paths.
-**Enemy Adaptation:** After 3-5 rounds, attackers will bring wall-break utility (Raze grenades, Breach Aftershock), rush before the wall goes up, or bait the Resurrection by pushing the body's location.
-**Counter-Adaptation:** When they break walls: place the wall deeper (further from the choke) so they must commit into the open to use their break utility. When they rush: Slow Orb the choke as they sprint and wall behind the slow — the double-layer of slowed movement + wall stops any rush. When they bait res: skip the Resurrection and use the numbers advantage instead — the threat of res forces them to commit a player to body-watch, which is one fewer player on the execute.
+### İyi performans gösterirken
+**Oyuncu Eylemi:** Sonraki dövüşe girecek takım arkadaşını iyileştiriyorsun (son hasar alanı değil), Barrier Orb'u sightline'ları tamamen kapatacak şekilde çapraz yerleştiriyorsun ve yalnızca duvar siperi veya takım arkadaşı korumasıyla Resurrect yapıyorsun.
+**Düşman Algısı:** Saldırganlar, önceki dövüşlerde yıpratma hasarı almasına rağmen entry oyuncusunun her zaman tam HP'de olduğu bir takım görüyor. Takımın hasardan kaçındığını düşünüyorlar, ama asıl avantaj sonraki dövüşçüye hedefli İyileştirme Orbü — her düelloda sürekli HP avantajı yaratıyor.
+**Düşman Tepkisi:** Her zaman 150 HP olan bir entry'yi öldürmek için ekstra hasar vermek zorunda kalıyorlar. Çapraz duvarlar sightline'larını tamamen kapatır (üstünden atlama yok), ya duvarın çürümesini uzun süre beklemek, kısa süre harcayarak kırmak ya da tamamen rota değiştirmek zorunda kalırlar. Her seçenek round temposuna mal olur.
+**Faydalanma Penceresi:** Çapraz Barrier Orb'un yarattığı gecikme takımının rotate etmesi veya crossfire kurması için yeterlidir. Her İyileştirme Orbü sonraki düelloda 20-50 HP avantajı yaratır — bir yarı boyunca bu, takımının HP üstünlüğüne sahip olduğu 6-8 düellodur. Duvar siperi arkasında Resurrect düşmanın müdahale edemeyeceği 6v5 yaratır.
+**Tekrar Stratejisi:** Her round: sonra kimin dövüşeceğini belirle ve dövüş öncesi iyileştir. Ana choke'a çapraz Barrier Orb yerleştir — açıyı her round 15-30 derece değiştir. Resurrect için: önce duvar, sonra diriltme, sırayı asla ters çevirme. Slow Orb'u boş yollara proaktif değil, push'lara reaktif kullan.
+**Düşman Adaptasyonu:** 3-5 round sonra saldırganlar duvar kırma utility'si (Raze bombaları, Breach Aftershock) getirecek, duvar kalkmadan rush yapacak veya beden konumuna push yaparak Resurrect'i yemleyecek.
+**Karşı Adaptasyon:** Duvarları kırdıklarında: duvarı daha derine (choke'tan uzağa) yerleştir, kırma utility'lerini kullanmak için açık alana taahhüt etmeleri gereksin. Rush yaptıklarında: sprint yaparken choke'a Slow Orb at ve slow'un arkasına duvar koy — yavaşlatılmış hareket + duvar çifte katmanı her rush'ı durdurur. Diriltmeyi yemlediklerinde: Resurrect'i atla ve sayı avantajını kullan — diriltme tehdidi onları beden izlemeye bir oyuncu ayırmaya zorlar, bu execute'ta bir oyuncu eksik demektir.
 
-**Struggling**: "Your heal timing and wall placement need work. Focus on healing the player about to take the next fight, and place walls that actually change the geometry of the fight — not just delay it by 3 seconds."
+**Zorlanan**: "İyileştirme zamanlaması ve duvar yerleşimin çalışma istiyor. Sonraki dövüşe girecek oyuncuyu iyileştirmeye odaklan ve dövüşün geometrisini sadece geciktirmekle kalmayıp gerçekten değiştiren duvarlar yerleştir."
 
-**Predictable**: "Your walls are in the same spot every round and the enemy knows exactly when your slow orb is coming. Mix up your wall angles, hold slow orb for reactive use, and consider offensive walls on attack for elevation plays."
+**Tahmin edilebilir**: "Duvarların her round aynı yerde ve düşman slow orb'unun ne zaman geleceğini biliyor. Duvar açılarını karıştır, slow orb'u reaktif kullanım için sakla ve atak'ta yükseklik oyunları için hücum duvarları düşün."
 
-## 8. Rank Modulation
+## 8. Rütbe Modülasyonu
 
-**Low (Iron-Silver)**: Players heal themselves first, wall the same spot every round, and resurrect in the open. Teach the basics: heal teammates, wall for cover during res, slow orb on rushes.
+**Düşük (Iron-Silver)**: Oyuncular önce kendilerini iyileştirir, her round aynı noktaya duvar koyar ve açık alanda diriltme yapar. Temelleri öğret: takım arkadaşlarını iyileştir, diriltme için siper duvarı koy, rush'lara slow orb at.
 
-**Mid (Gold-Platinum)**: Healing is decent but wall creativity is low. Resurrection timing is inconsistent — sometimes genius, sometimes suicidal. Focus on wall variety and res discipline.
+**Orta (Gold-Platinum)**: İyileştirme iyi ama duvar yaratıcılığı düşük. Resurrect zamanlaması tutarsız — kimi zaman dahice, kimi zaman intihar. Duvar çeşitliliği ve diriltme disiplinine odaklan.
 
-**High (Diamond-Ascendant)**: Sage players here understand triage but may over-save abilities. Walls are good but not game-changing. Push offensive wall creativity and post-plant slow orb lineups.
+**Yüksek (Diamond-Ascendant)**: Buradaki Sage oyuncuları triyajı anlıyor ama yetenekleri aşırı saklayabilir. Duvarlar iyi ama oyun değiştirici değil. Hücum duvarı yaratıcılığını ve post-plant slow orb lineup'larını geliştirmeye yönelt.
 
-**Elite (Immortal-Radiant)**: Sage's value is entirely in decision quality. Wall placements must be innovative, heal timing must be perfect, and every res must be a calculated risk. At this level, a bad res loses rounds outright.
+**Elit (Immortal-Radiant)**: Sage'in değeri tamamen karar kalitesindedir. Duvar yerleşimleri yenilikçi olmalı, iyileştirme zamanlaması kusursuz olmalı ve her diriltme hesaplanmış risk olmalıdır. Bu seviyede kötü bir diriltme doğrudan round kaybettirir.

@@ -1,76 +1,81 @@
-# AGENT: Clove
+# AJAN: Clove
 
-## 1. Role Identity
-Clove is the aggressive, self-sustaining controller who breaks the mold of the traditional passive smoker. Their defining mechanic is the ability to use smokes even after dying, keeping the team's vision denial active from beyond the grave. Combined with self-resurrection, overheal on kills, and a decay ability, Clove is the controller who wants to fight alongside their duelists rather than behind them. Clove rewards players who can frag while still fulfilling smoke responsibilities.
+## 1. Rol Kimliği
+Clove, geleneksel pasif smoker kalıbını kıran agresif, kendi kendini idame ettiren controller'dır. Tanımlayıcı mekaniği, öldükten sonra bile smoke kullanabilmesidir ve takımın görüş engelleme yeteneğini mezarın ötesinden aktif tutar. Kendini diriltme, kill'lerde fazla can ve decay yeteneğiyle birleştiğinde, Clove duelist'lerinin yanında dövüşmek isteyen controller'dır. Clove, smoke sorumluluklarını yerine getirirken frag atabilen oyuncuları ödüllendirir.
 
-## 2. Core Responsibilities
-- Provide smokes for team executes both while alive and after death
-- Use Meddle (decay) to soften enemies before team pushes or during retakes
-- Activate Pick-Me-Up on kills to gain overheal and maintain aggressive positioning
-- Time Not Dead Yet (self-res) to re-enter rounds after dying, turning lost fights into second chances
-- Play aggressively on entries -- Clove is designed to fight, die, smoke from death, and potentially self-res
-- Balance aggression with smoke timing; the team still needs smokes even when Clove is fragging
+## 2. Temel Sorumluluklar
+- Hem hayattayken hem de öldükten sonra takım execute'ları için smoke'lar sağlamak
+- Takım push'ları veya retake'ler öncesinde düşmanları zayıflatmak için Meddle (decay) kullanmak
+- Kill'lerde fazla can kazanıp agresif konumlanmayı sürdürmek için Pick-Me-Up aktive etmek
+- Öldükten sonra round'lara yeniden girmek için Not Dead Yet'i (kendini diriltme) zamanlayarak kaybedilen dövüşleri yeni fırsatlara çevirmek
+- Entry'lerde agresif oynamak -- Clove dövüşmek, ölmek, ölümden smoke atmak ve potansiyel olarak kendini diriltmek için tasarlanmıştır
+- Agresyonu smoke zamanlamasıyla dengelemek; Clove frag atarken bile takımın hâlâ smoke'lara ihtiyacı vardır
 
-## 3. Common Mistakes
-- Self-resurrecting into the same position where they died, getting killed immediately again
-- Prioritizing kills over smokes -- Clove dead without having smoked is worse than Clove dead with smokes out
-- Meddle used at range on irrelevant targets instead of enemies the team is actively fighting
-- Pick-Me-Up overheal chased aggressively into bad positions -- the overheal is a bonus, not a reason to overextend
-- Not Dead Yet used immediately on every death rather than assessing whether the res is safe
-- Forgetting that post-death smokes still consume the ability -- do not waste them after dying in an unwinnable round
+## 3. Sık Yapılan Hatalar
+- Öldüğü pozisyonda kendini diriltip anında tekrar öldürülmek
+- Kill'leri smoke'lardan öncelikli tutmak -- smoke atmadan ölen Clove, smoke atan ölen Clove'dan daha kötüdür
+- Meddle'ı takımın aktif olarak dövüştüğü düşmanlar yerine alakasız hedeflere menzilden kullanmak
+- Pick-Me-Up fazla canının kötü pozisyonlara agresif olarak kovalanması -- fazla can bonus'tur, aşırı uzanmak için gerekçe değil
+- Diriliş güvenli mi değerlendirmeden her ölümde anında Not Dead Yet kullanmak
+- Kazanılamaz bir round'da öldükten sonra post-death smoke'ların hâlâ yeteneği tükettiğini unutmak -- boşa harcamayın
 
-## 4. Pattern -> Meaning
+## 4. Kalıp -> Anlam
 
-**IF** Clove uses Not Dead Yet and dies within 3 seconds of resurrection every time
-**MEANING** The player is self-resurrecting in dangerous positions without clearing angles first
-**FIX** Only self-res when teammates are nearby to trade or when the position is safe. After res, reposition before re-engaging -- do not peek from the death spot.
+**IF** Clove Not Dead Yet kullanıyor ve her seferinde diriliş sonrası anında ölüyor
+**MEANING** Oyuncu açıları temizlemeden tehlikeli pozisyonlarda kendini diriltiyoir
+**COUNTER** Yalnızca takım arkadaşları trade edecek kadar yakındayken veya pozisyon güvenliyken kendini diriltin. Diriliş sonrası yeniden çatışmaya girmeden önce yeniden konumlanın -- ölüm noktasından peek yapmayın.
+**WHY** Ölüm noktasında diriliş düşmana önceden nişanlanmış ücretsiz kill verir; yeniden konumlanma bu avantajı ortadan kaldırır.
 
-**IF** smokes are consistently placed only while alive, never post-death
-**MEANING** The player is not leveraging Clove's defining mechanic
-**FIX** After dying, immediately assess if the team needs smokes. The post-death smoke window is a critical advantage that no other controller has.
+**IF** smoke'lar sürekli yalnızca hayattayken yerleştiriliyor, post-death asla
+**MEANING** Oyuncu Clove'un tanımlayıcı mekaniğini kullanmıyor
+**COUNTER** Öldükten sonra anında takımın smoke'a ihtiyacı olup olmadığını değerlendirin. Post-death smoke penceresi başka hiçbir controller'ın sahip olmadığı hayati bir avantajdır.
+**WHY** Post-death smoke Clove'u benzersiz kılan şeydir; kullanmamak onu standart bir controller'a indirger ve seçim gerekçesini ortadan kaldırır.
 
-**IF** Meddle is used at the start of rounds before any contact
-**MEANING** The decay is wasted -- it has a short duration and needs to connect with active fights
-**FIX** Meddle should be used 1-2 seconds before the team peeks. The decay window must overlap with gunfight timing.
+**IF** Meddle herhangi bir temasdan önce round'ların başında kullanılıyor
+**MEANING** Decay boşa gidiyor -- kısa süreli ve aktif dövüşlerle bağlantılı olması gerekiyor
+**COUNTER** Meddle takım peek yapmadan az önce kullanılmalıdır. Decay penceresi silah dövüşü zamanlamasıyla örtüşmelidir.
+**WHY** Decay zamanla azalır; dövüş temasından uzakta kullanmak HP azaltmanın süresini düşman temas etmeden önce doldurur.
 
-**IF** Pick-Me-Up overheal causes the player to take increasingly aggressive duels
-**MEANING** The overheal is creating false confidence and overextension
-**FIX** Overheal decays. Use the temporary HP advantage to hold a stronger position, not to push further forward. The overheal buys safety, not aggression.
+**IF** Pick-Me-Up fazla canı oyuncunun giderek daha agresif düellolar almasına neden oluyor
+**MEANING** Fazla can yanlış güven ve aşırı uzanma yaratıyor
+**COUNTER** Fazla can azalır. Geçici HP avantajını daha ileri push yapmak için değil, daha güçlü pozisyon tutmak için kullanın. Fazla can güvenlik sağlar, agresyon değil.
+**WHY** Azalan fazla can zamanla yok olur; aşırı uzanma sizi HP azaldığında dezavantajlı bir dövüşe hapseder.
 
-**IF** the player consistently entry frags but the team has no smokes
-**MEANING** They are playing Clove as a duelist and neglecting controller duties
-**FIX** Smoke first, then fight. Even if Clove dies entry fragging, the smokes need to be out. The aggression only works if the team's vision denial is already handled.
+**IF** oyuncu sürekli entry frag atıyor ama takımda smoke yok
+**MEANING** Clove'u duelist olarak oynayıp controller görevlerini ihmal ediyorlar
+**COUNTER** Önce smoke, sonra dövüş. Clove entry frag atarken ölse bile smoke'ların atılmış olması gerekir. Agresyon yalnızca takımın görüş engelleme zaten halledilmişse işe yarar.
+**WHY** Smoke'suz entry takımı açığa çıkarır; controller rolü her zaman frag potansiyelinin önünde gelir.
 
-## 5. Map Interactions
-- **Sunset**: Strong pick. Mid control fights suit Clove's aggressive style. Post-death smokes for B market or mid doors keep the team covered.
-- **Ascent**: A main and B main aggression with Pick-Me-Up overheal. Meddle through mid doors is high value.
-- **Bind**: Tight chokes make Meddle effective. Self-res in hookah or showers can catch rotators off-guard.
-- **Haven**: Three sites give multiple opportunities for aggressive peeks and self-res repositioning.
-- **Split**: Aggressive mid takes with overheal. Post-death smokes at ramps keep the team in play.
+## 5. Harita Etkileşimleri
+- **Sunset**: Güçlü seçim. Mid kontrol dövüşleri Clove'un agresif stiline uyar. B market veya mid kapılar için post-death smoke'lar takımı korumalı tutar.
+- **Ascent**: A main ve B main agresyonu Pick-Me-Up fazla canıyla. Mid kapılardan Meddle yüksek değerlidir.
+- **Bind**: Dar choke'lar Meddle'ı verimli kılar. Hookah veya shower'larda kendini diriltme rotasyoncuları hazırlıksız yakalayabilir.
+- **Haven**: Üç site agresif peek'ler ve kendini diriltme yeniden konumlanması için birden fazla fırsat verir.
+- **Split**: Fazla canla agresif mid alma. Ramp'larda post-death smoke'lar takımı oyunda tutar.
 
-## 6. Matchup Notes
-- Against Sage: Sage wall does not block Meddle. Clove's decay can hit players behind Sage utility.
-- Against Chamber: Chamber's Rendezvous can escape Meddle. Time decay when Chamber has already used his teleport.
-- Paired with a duelist: Clove and the duelist can double-entry. If Clove dies, smokes still come out. If Clove survives, Pick-Me-Up sustains the push.
-- Against Fade: Haunt reveals Clove's death position, making self-res timing obvious. Vary the res timing.
+## 6. Eşleşme Notları
+- Sage'e karşı: Sage duvarı Meddle'ı engellemez. Clove'un decay'i Sage yeteneğinin arkasındaki oyunculara isabet edebilir.
+- Chamber'a karşı: Chamber'ın Rendezvous'su Meddle'dan kaçabilir. Chamber teleportunu zaten kullandığında decay zamanlaması yapın.
+- Duelist ile eşleşme: Clove ve duelist çift entry yapabilir. Clove ölürse smoke'lar yine çıkar. Clove hayatta kalırsa Pick-Me-Up push'u sürdürür.
+- Fade'e karşı: Haunt Clove'un ölüm pozisyonunu ortaya çıkarır ve kendini diriltme zamanlamasını belli eder. Diriliş zamanlamasını değiştirin.
 
-## 7. What To Tell The Player
+## 7. Oyuncuya Ne Söylenmeli
 
-### When performing well
-**Player Action:** You place smokes before taking any duel, time Meddle 1-2 seconds before teammates peek so defenders are decayed on contact, and activate Pick-Me-Up immediately after kills to overheal into the next fight.
-**Enemy Perception:** Defenders see a controller who is also fragging. They track you as a smoke bot who occasionally gets kills, but the real danger is the Meddle timing — they are taking fights at reduced HP without realizing it was timed to their teammate's peek.
-**Enemy Reaction:** They are forced to either fight while decayed (losing duels they should win at equal HP) or retreat from the angle to wait out the decay (giving up their hold position for 3-4 seconds). After you kill their teammate, the Pick-Me-Up overheal makes trading you much harder — they need extra shots to down you.
-**Exploit Window:** The 3-4 second decay window from Meddle creates fights where your team has a 30-50 HP advantage on every duel. Your Pick-Me-Up overheal stacks an additional 50+ HP for the next fight — the combined HP swing across two consecutive duels is 80-100 HP in your team's favor.
-**Repeat Strategy:** Every round: smokes first, Meddle the contested angle 1-2 seconds before the team peeks, entry frag, Pick-Me-Up, next fight immediately while overheal is at maximum. If you die: use the post-death smoke ability on the angle your team still needs covered — not on an already-safe sightline.
-**Enemy Adaptation:** After 3-5 rounds, defenders will push before Meddle lands to catch you mid-smoke placement, pre-aim your entry angle to kill you before Pick-Me-Up activates, or double-peek to trade through the overheal.
-**Counter-Adaptation:** When they push early: place smokes from safer positions (further back) and let a teammate take the entry instead. When they pre-aim your angle: Meddle their position first and let a teammate swing while they are decayed — use yourself as a trade-up bait. When they double-peek: Meddle the second player before they swing so they fight decayed against your overheal.
+### İyi performans gösterdiğinde
+**Oyuncu Eylemi:** Herhangi bir düello almadan önce smoke'ları yerleştiriyorsunuz, savunucuların temasta decayed olması için takım arkadaşları peek yapmadan az önce Meddle zamanlıyorsunuz ve bir sonraki dövüşe fazla canla girmek için kill'lerden hemen sonra Pick-Me-Up aktive ediyorsunuz.
+**Düşman Algısı:** Savunucular aynı zamanda frag atan bir controller görüyor. Sizi ara sıra kill alan bir smoke botu olarak takip ediyorlar, ama asıl tehlike Meddle zamanlaması -- takım arkadaşının peek'ine zamanlandığını fark etmeden azaltılmış HP ile dövüşüyorlar.
+**Düşman Tepkisi:** Ya decayed iken dövüşmeye (eşit HP'de kazanmaları gereken düelloları kaybederek) ya da decay'in geçmesini beklemek için açıdan çekilmeye (tutma pozisyonlarını kısa bir süreliğine terk ederek) zorlanıyorlar. Takım arkadaşlarını öldürdükten sonra Pick-Me-Up fazla canı sizi trade etmeyi çok zorlaştırır -- sizi indirmek için fazladan mermi gerekir.
+**Fırsat Penceresi:** Meddle'ın decay penceresi, takımınızın her düelloda 30-50 HP avantajına sahip olduğu dövüşler yaratır. Pick-Me-Up fazla canınız bir sonraki dövüş için ek 50+ HP yığar -- art arda iki düellodaki birleşik HP farkı takımınızın lehine 80-100 HP'dir.
+**Tekrar Stratejisi:** Her round: önce smoke'lar, çekişmeli açıya takım peek yapmadan az önce Meddle, entry frag, Pick-Me-Up, fazla can maksimumken hemen sonraki dövüş. Ölürseniz: takımınızın hâlâ korunmaya ihtiyaç duyduğu açıda post-death smoke yeteneğini kullanın -- zaten güvenli bir sightline'da değil.
+**Düşman Adaptasyonu:** 3-5 round sonra savunucular Meddle gelmeden önce sizi smoke yerleştirme ortasında yakalamak için push yapacak, Pick-Me-Up aktive olmadan öldürmek için entry açınıza önceden nişan alacak veya fazla canı aşmak için çift peek yapacak.
+**Karşı Adaptasyon:** Erken push yaptıklarında: smoke'ları daha güvenli pozisyonlardan (daha geride) yerleştirin ve entry'yi bir takım arkadaşına bırakın. Açınıza önceden nişan aldıklarında: önce pozisyonlarına Meddle atın ve decayed iken bir takım arkadaşının swing yapmasını sağlayın -- kendinizi trade-up yemi olarak kullanın. Çift peek yaptıklarında: swing yapmadan önce ikinci oyuncuya Meddle atın böylece fazla canınıza karşı decayed dövüşsünler.
 
-**When struggling**: "You are dying before getting smokes out. Smokes first, fight second. Clove is aggressive but still a controller -- the team needs your utility before your frags."
+**Zorlandığında**: "Smoke'ları çıkarmadan ölüyorsunuz. Önce smoke'lar, sonra dövüş. Clove agresiftir ama hâlâ bir controller'dır -- takım frag'larınızdan önce yeteneğinize ihtiyaç duyar."
 
-**When being predictable**: "Opponents expect the self-res now. They are camping your death position. Either skip the res and let the team play off your trade, or delay the res until they rotate away."
+**Tahmin edilebilir olduğunda**: "Rakipler artık kendini diriltmeyi bekliyor. Ölüm pozisyonunuzu kamp ediyorlar. Ya diriliş'i atlayın ve takımın trade'inizden oynamasına izin verin, ya da rotate edip uzaklaşana kadar diriliş'i geciktirin."
 
-## 8. Rank Modulation
-- **Low (Iron-Silver)**: Focus on placing smokes for the team. Use self-res sparingly. Do not chase fights for Pick-Me-Up -- just smoke and support.
-- **Mid (Gold-Platinum)**: Introduce aggressive peeking with Pick-Me-Up. Start using post-death smokes consistently. Meddle on team pushes.
-- **High (Diamond-Ascendant)**: Balance entry fragging with smoke timing. Self-res only in safe positions. Meddle timed precisely with team peeks.
-- **Elite (Immortal-Radiant)**: Full aggression-and-utility integration. Post-death smokes placed proactively for team reads. Self-res used strategically to force enemy repositioning, even if not planning to fight immediately.
+## 8. Rütbe Ayarı
+- **Düşük (Iron-Silver)**: Takım için smoke yerleştirmeye odaklanın. Kendini diriltmeyi tutumlu kullanın. Pick-Me-Up için dövüş kovalamayın -- sadece smoke atın ve destek olun.
+- **Orta (Gold-Platinum)**: Pick-Me-Up ile agresif peek'leri tanıtın. Post-death smoke'ları tutarlı şekilde kullanmaya başlayın. Takım push'larında Meddle.
+- **Yüksek (Diamond-Ascendant)**: Entry fragging ile smoke zamanlamasını dengeleyin. Kendini diriltmeyi yalnızca güvenli pozisyonlarda kullanın. Meddle takım peek'leriyle hassas şekilde zamanlanır.
+- **Elit (Immortal-Radiant)**: Tam agresyon ve yetenek entegrasyonu. Post-death smoke'lar takım okumaları için proaktif olarak yerleştirilir. Kendini diriltme, hemen dövüşmeyi planlamasanız bile düşmanı yeniden konumlanmaya zorlamak için stratejik olarak kullanılır.

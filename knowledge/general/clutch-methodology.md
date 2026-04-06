@@ -1,280 +1,323 @@
-# Clutch Methodology — Radiant-Level Knowledge
+# Clutch Metodolojisi -- Radiant Seviye Bilgi Bankası
 
-## The Clutch Mindset
+---
 
-Clutching is not about aim. At the Radiant level, every player can shoot. Clutching is about information asymmetry, time management, and forcing the opponent into predictable patterns. The player with more information wins the clutch.
+## Clutch Zihniyeti
 
-## 1v1 Methodology
+Clutch aim ile ilgili değil. Radiant seviyede herkes ateş edebilir. Clutch bilgi asimetrisi, zaman yönetimi ve rakibi tahmin edilebilir pattern'lere zorlama ile ilgili. Daha fazla bilgiye sahip oyuncu clutch'ı kazanır.
 
-The 1v1 is the most common clutch scenario. The outcome depends on who has more information and who controls the tempo.
+---
 
-### Core Principles
+## 1v1 Metodolojisi
 
-1. **Time is your weapon.** If you have spike planted, every second that passes benefits you. If you need to plant or defuse, time is your enemy.
-2. **Sound is information.** In a 1v1, every sound you make narrows down your position. Every sound they make reveals theirs. Shift-walk constantly.
-3. **Never take a fair fight.** Use utility, positioning, or timing to give yourself an advantage before taking the duel.
+1v1 en yaygın clutch senaryosu. Sonuç kimin daha fazla bilgiye sahip olduğuna ve tempoyu kimin kontrol ettiğine bağlıdır.
 
-### Attacker 1v1 (Spike Planted)
+### Temel Prensipler
 
-1. **Plant in the safest default position.** Open plant (center of site) gives you the most post-plant angles. Avoid corner plants that limit your options.
-2. **Immediately reposition after plant.** The defender heard the plant sound from a specific location. Move to a different angle.
-3. **Set up crossfire on the spike.** Position so that the defender must expose their back to you to defuse, or must clear your angle before defusing.
-4. **Listen for footsteps approaching.** If the defender is running, they are desperate for time. Hold a tight angle and let them come to you.
-5. **If the defender is walking, bait with sound.** Make a small sound (weapon switch, single step) to force them to react, then hold the angle they check.
-6. **Count their abilities.** If they used their flash already, they cannot flash you before peeking. If they have a smoke, expect it on the spike.
+IF spike plant edilmişse ve senin tarafındaysa
+MEANING geçen her an sana yarar -- zaman senin silahın
+COUNTER sabırla oyna, savunucunun sana gelmesini bekle
+WHY zamanın sende olduğunda acele etmek avantajı yok eder
 
-### Defender 1v1 (Spike Planted, Need to Defuse)
+IF plant etmen veya defuse etmen gerekiyorsa
+MEANING zaman sana karşı çalışıyor
+COUNTER hızlı karar ver ve uygula -- aşırı düşünme
+WHY zaman baskısı altında tereddüt = round kaybı
 
-1. **Calculate time remaining.** You need 7 seconds for full defuse, 3.5 seconds for half defuse. If there are <10 seconds on the spike, you MUST commit to the defuse or try a half-defuse play.
-2. **Clear angles methodically.** Do not rush the spike. Clear the most common post-plant positions first.
-3. **Use utility to clear.** A molly/grenade on the spike area forces the post-plant player to reposition, revealing them.
-4. **Fake defuse.** Tap the spike for 0.3-0.5 seconds (the enemy hears the defuse sound), immediately pull off and aim at the angle the attacker will peek. This is the single most effective 1v1 technique in Valorant.
-5. **Double fake.** Fake defuse once, then fake again. By the second fake, many players will commit to their peek. Hold the angle after the second fake.
-6. **Commit timing.** If you have 15+ seconds: clear angles first, then fake, then commit. If you have 10-15 seconds: one fake then commit. If under 10 seconds: commit immediately (you may not have time for a fake).
+### Saldırgan 1v1 (Spike Plant Edilmiş)
 
-### Sound Baiting in 1v1
+1. **En güvenli default pozisyona plant et.** Açık plant (site merkezi) en fazla post-plant açısı verir. Opsiyonları sınırlayan köşe plant'lerden kaçın.
+2. **Plant sonrası hemen reposition et.** Savunucu plant sesini belirli bir konumdan duydu. Farklı bir açıya geç.
+3. **Spike üzerinde crossfire kur.** Savunucunun defuse için sana arkasını dönmesi veya açını temizlemesi gereken pozisyon al.
+4. **Yaklaşan ayak seslerini dinle.** Savunucu koşuyorsa, zaman için çaresiz. Dar açı tut ve gelmesini bekle.
+5. **Savunucu yürüyorsa, sesle bait yap.** Küçük bir ses çıkar (silah değiştirme, tek adım) tepki vermeye zorla, sonra kontrol ettiği açıyı tut.
+6. **Yeteneklerini say.** Flash'ını zaten kullandıysa, peek yapmadan önce seni flash'layamaz. Smoke'u varsa spike üzerine bekle.
 
-- **Weapon switch bait**: Switch to knife and back. The equip sound may cause the opponent to peek or reposition.
-- **Reload bait**: Start a reload animation (audible to enemy), cancel it by switching weapons, then hold the angle the enemy peeks.
-- **Fake plant/defuse**: The starting sound of plant or defuse is the most effective bait because it demands an immediate response from the opponent.
-- **Single footstep**: Take one running step then immediately shift-walk. The single footstep gives a general location but not your exact position, creating ambiguity.
+### Savunucu 1v1 (Spike Plant Edilmiş, Defuse Gerekli)
 
-## 1v2 Methodology
+1. **Kalan zamanı hesapla.** Full defuse tüm defuse süresini alır; yarı-defuse ilerleme kaydeder. Spike zamanlayıcısı son fazındaysa defuse'a COMMIT etmek veya yarı-defuse oynamak zorundasın.
+2. **Açıları yöntemli temizle.** Spike'a koşma. Önce en yaygın post-plant pozisyonları temizle.
+3. **Temizlemek için utility kullan.** Spike alanına molly/el bombası saldırgan post-plant oyuncusunu yeniden pozisyonlamaya zorlayarak onu açığa çıkarır.
+4. **Fake defuse.** Spike'a kısa süreliğine dokun (düşman defuse sesini duyar), hemen çek ve saldırganın peek yapacağı açıyı tut. Bu Valorant'taki en güçlü 1v1 tekniği.
+5. **Çift fake.** Bir kez fake defuse, sonra tekrar fake. İkinci fake'te birçok oyuncu peek'e commit eder. Sonrasında açıyı tut.
+6. **Commit zamanlama.** Spike zamanlayıcısı erken fazda (bol zaman): önce açıları temizle, sonra fake, sonra commit. Zamanlayıcı orta fazda (sınırlı zaman): bir fake sonra commit. Zamanlayıcı son fazda: hemen commit et (fake için zaman olmayabilir).
 
-The 1v2 is winnable but requires strict discipline. The fundamental rule: NEVER fight two players simultaneously.
+### 1v1'de Ses Bait Teknikleri
 
-### Core Principles
+- **Silah değiştirme bait**: Bıçak ve geri değiştir. Equip sesi rakibin peek veya reposition yapmasına neden olabilir.
+- **Reload bait**: Reload animasyonu başlat (düşmana duyulur), silah değiştirerek iptal et, sonra düşmanın peek yaptığı açıyı tut.
+- **Fake plant/defuse**: Plant veya defuse'un başlama sesi en güçlü bait çünkü rakipten anında tepki talep eder.
+- **Tek ayak sesi**: Bir koşan adım at sonra hemen shift-walk yap. Tek ayak sesi genel konum verir ama tam pozisyonu değil, belirsizlik oluşturur.
 
-1. **Isolate fights.** Position yourself so you can only be seen by one enemy at a time. Use walls, boxes, smokes, or distance to separate them.
-2. **Fight the closer player first.** If both enemies are approaching, the closer one is the bigger threat. Kill them first, then reposition before the second can trade.
-3. **Use the spike as a tool.** In a 1v2 post-plant, the spike forces both enemies to come to you. You choose the engagement.
-4. **Bait the trade.** Kill one player, then IMMEDIATELY reposition before the second player can refrag you. Do not ego-peek the second player from the same angle.
+---
 
-### 1v2 Attacker (Spike Planted)
+## 1v2 Metodolojisi
 
-1. Play an off-angle that watches the most likely approach.
-2. Kill the first player who appears.
-3. Immediately rotate to a new angle. The second player saw the killfeed and knows your general area.
-4. The second player must now decide: defuse (and risk dying) or clear you (and risk time running out).
-5. This decision pressure is your advantage. Let them choose wrong.
+1v2 kazanılabilir ama sıkı disiplin gerektirir. Temel kural: ASLA iki oyuncuyla aynı anda savaşma.
 
-### 1v2 Defender (Need to Retake)
+### Temel Prensipler
 
-1. Identify where both attackers are (or likely are) from sound and teammate information.
-2. Use utility to isolate one player. Smoke off one, then fight the other.
-3. After the first kill, reposition and approach the second player from an unexpected angle.
-4. If you cannot isolate, consider saving (see save vs try decision below).
+IF iki düşmana karşı clutch'taysan
+MEANING aynı anda iki oyuncunun seni görebildiği bir fight almak neredeyse garanti kayıp
+COUNTER kendini aynı anda sadece bir düşman tarafından görülebilecek şekilde pozisyonla -- duvarlar, kutular, smoke'lar veya mesafe ile onları ayır
+WHY fight'ları izole etmek 1v2'yi iki ayrı 1v1'e çevirir, ki bu çok daha kazanılabilir
 
-### Common 1v2 Mistakes
+### 1v2 Saldırgan (Spike Plant Edilmiş)
 
-- **Wide-peeking into both.** You peek one player, but the second sees you from a cross angle. You die instantly.
-- **Not repositioning after the first kill.** The second player pre-aims your known position and wins the refrag.
-- **Spending too much time.** Overthinking uses clock. Make a plan in 3 seconds, execute it.
-- **Using all abilities on the first fight.** You need utility for the second fight too. Budget your abilities.
+1. En olası yaklaşımı izleyen off-angle'dan oyna.
+2. Beliren ilk oyuncuyu öldür.
+3. Hemen yeni açıya rotate et. Diğer oyuncu killfeed'den gördü ve genel alanını biliyor.
+4. Diğer oyuncu şimdi karar vermeli: defuse (ve ölme riski) mi yoksa seni temizle (ve zamanın bitmesi riski) mi.
+5. Bu karar baskısı senin avantajın. Yanlış seçim yapmasına izin ver.
 
-## 1v3+ Methodology
+### 1v2 Savunucu (Retake Gerekli)
 
-### When to Try vs When to Save
+1. Her iki saldırganın nerede olduğunu (veya olma ihtimalinin yüksek olduğu yeri) ses ve takım arkadaşlarından belirle.
+2. Birini izole etmek için utility kullan. Birini smoke'la, sonra diğerini fight et.
+3. İlk kill sonrası reposition yap ve diğer oyuncuya beklenmedik açıdan yaklaş.
+4. İzole edemiyorsan, save yapmayı düşün (aşağıdaki save vs deneme kararına bak).
 
-The decision to try or save depends on multiple factors calculated in real-time:
+### Yaygın 1v2 Hataları
+
+- **İkisine birden geniş peek.** Bir oyuncuya peek atıyorsun ama diğeri seni cross açıdan görüyor. Anında ölürsün.
+- **İlk kill sonrası reposition etmeme.** Diğer oyuncu bilinen pozisyonu pre-aim eder ve refrag'ı kazanır.
+- **Çok fazla zaman harcama.** Aşırı düşünmek saat tüketir. Hemen plan yap, uygula.
+- **Tüm yetenekleri ilk fight'ta kullanma.** Diğer fight için de utility'ye ihtiyacın var. Yeteneklerini bütçele.
+
+---
+
+## 1v3+ Metodolojisi
+
+### Ne Zaman Denemeli vs Ne Zaman Save Etmeli
+
+Deneme veya save kararı gerçek zamanlı hesaplanan birden fazla faktöre bağlıdır:
 
 ```
-SAVE if ALL of the following are true:
-- You have a rifle worth 2,900+
-- Your team's economy is weak (cannot full buy next round without your savings)
-- Score is not desperate (not match point, not 10-12 down)
-- The 1v3+ odds are genuinely low (enemies are healthy, have utility, know your area)
-- Your ult is not available (if ult is available, it might swing odds enough to try)
+SAVE et eğer TÜMÜ doğruysa:
+- 2,900+ değerinde tüfeğin var
+- Takımının ekonomisi zayıf (senin tasarrufun olmadan gelecek round full buy yapılamaz)
+- Skor çaresiz değil (maç noktası değil, 10-12 geride değil)
+- 1v3+ şansları gerçekten düşük (düşmanlar sağlıklı, utility'leri var, alanını biliyorlar)
+- Ult'un hazır değil (ult hazırsa şansları denemeye yetecek kadar çevirebilir)
 
-TRY if ANY of the following are true:
-- It is match point (you lose anyway if you save)
-- Score is desperate (2-10, you need miracle rounds)
-- Spike is planted and you have strong post-plant abilities (Brimstone molly, Viper molly, KAY/O knife)
-- You have ult that can win it (Raze ult, Neon ult, Chamber ult in a 1v3)
-- Enemy economy is broken (winning this round devastates them)
-- You have a pistol/SMG (not worth saving; might as well try)
+DENE eğer HERHANGİ biri doğruysa:
+- Maç noktası (save yapsan da kaybedersin)
+- Skor çaresiz (2-10, mucize round'lar gerekiyor)
+- Spike plant edilmiş ve güçlü post-plant yeteneklerin var (Brimstone molly, Viper molly, KAY/O knife)
+- Kazandıracak ult'un var (Raze ult, Neon ult, Chamber ult 1v3'te)
+- Düşman ekonomisi kırılmış (bu round'u kazanmak onları mahveder)
+- Tabanca/SMG'n var (save etmeye değmez; deneyebilirsin)
 ```
 
-### 1v3 Execution Pattern
+### 1v3 Uygulama Pattern'i
 
-1. **Create chaos.** Use your most disruptive ability to separate enemies. Smokes, flashes, mollies, anything that breaks their coordination.
-2. **Get the first kill for free.** You need at least one kill where the second and third enemies cannot trade. Lurk, rotate, or use off-angles.
-3. **After the first kill, it becomes a 1v2.** Apply 1v2 methodology.
-4. **Speed kills.** In a 1v3, time is rarely on your side (especially on defense). Act faster than in a 1v1. Aggression can catch opponents off guard because they do not expect you to push.
+1. **Kaos yarat.** En bozucu yeteneğinle düşmanları ayır. Smoke'lar, flash'lar, molly'ler, koordinasyonlarını kıran her şey.
+2. **İlk kill'i bedavaya al.** Diğerlerin trade yapamayacağı en az bir kill gerekiyor. Lurk, rotate veya off-angle kullan.
+3. **İlk kill sonrası 1v2 olur.** 1v2 metodolojisini uygula.
+4. **Hız öldürür.** 1v3'te zaman nadiren senden yana (özellikle savunmada). 1v1'den daha hızlı hareket et. Agresyon rakipleri hazırlıksız yakalayabilir çünkü push etmeni beklemiyorlar.
 
-### 1v4 and 1v5
+### 1v4 ve 1v5
 
-These are almost always saves unless it is match point. The exception is if you have:
-- Raze Showstopper in a tight area (potential multi-kill)
-- Neon ultimate in close quarters
-- Spike planted with Brimstone/Viper/KAY/O post-plant lineups that can stall multiple defuse attempts
-- Chamber Tour De Force from a safe angle where you can pick off defusers one at a time
+Bunlar maç noktası değilse neredeyse her zaman save. İstisna:
+- Dar alanda Raze Showstopper (potansiyel çoklu kill)
+- Yakın mesafede Neon ultimate
+- Spike plant edilmiş ve Brimstone/Viper/KAY/O post-plant lineup'larıyla birden fazla defuse girişimini oyalama
+- Güvenli açıdan defuse edenleri tek tek vurabileceğin Chamber Tour De Force
 
-Even then, the expected win rate for a 1v4 is below 5%. Save your weapon and economy for a round you can actually win.
+Yine de 1v4'te beklenen kazanma oranı %5'in altında. Silahını ve ekonomini gerçekten kazanabilecek bir round için koru.
 
-## Spike-Based Clutch Strategies
+---
 
-### Post-Plant Positioning Tiers
+## Spike Bazlı Clutch Stratejileri
 
-**Tier 1 — On-site, close to spike (5-10m)**
-- Pros: Can hear defuse clearly, can shoot defuser directly.
-- Cons: Enemies will clear you first, predictable.
-- Best for: 1v1 situations where you can hold a tight angle.
+### Post-Plant Pozisyonlama Kademeleri
 
-**Tier 2 — Off-site, line of sight to spike (10-20m)**
-- Pros: Harder to find, can still see the spike.
-- Cons: May not hear defuse over distance noise, may need to peek to confirm defuse.
-- Best for: 1v2 and 1v3 where enemies will clear site.
+**Kademe 1 -- Site üzerinde, spike'a yakın (5-10m)**
+- Artı: Defuse'u net duyar, defuse edeni doğrudan vurabilir.
+- Eksi: Düşmanlar seni önce temizler, tahmin edilebilir.
+- En iyisi: Dar açı tutabileceğin 1v1 durumları.
 
-**Tier 3 — Deep lurk, no line of sight (20m+)**
-- Pros: Almost impossible to find quickly, forces enemies to choose between clearing and defusing.
-- Cons: Must rely on sound to know when to re-engage, may not be able to stop a committed defuse.
-- Best for: Brimstone/Viper with post-plant lineups (can molly the spike from far away).
+**Kademe 2 -- Site dışında, spike'a görüş hattı (10-20m)**
+- Artı: Bulması zor, hala spike'ı görebilir.
+- Eksi: Mesafe gürültüsü üzerinden defuse'u duyamayabilir, onaylamak için peek yapması gerekebilir.
+- En iyisi: Düşmanların site'ı temizleyeceği 1v2 ve 1v3.
 
-### Defuse Timing Mind Games
+**Kademe 3 -- Derin lurk, görüş hattı yok (20m+)**
+- Artı: Hızla bulması neredeyse imkansız, düşmanları temizleme ve defuse arasında seçim yapmaya zorlar.
+- Eksi: Ne zaman yeniden çatışmaya gireceğini bilmek için sese güvenmeli, commit edilmiş defuse'u durduramayabilir.
+- En iyisi: Post-plant lineup'ları olan Brimstone/Viper (uzaktan spike'a molly atabilir).
 
-| Scenario | Attacker Action | Defender Counter |
+### Defuse Zamanlama Zihin Oyunları
+
+| Senaryo | Saldırgan Eylemi | Savunucu Counter'ı |
 |---|---|---|
-| Defender taps spike (0.3s) | Peek and shoot | Was a fake; defender holds angle |
-| Defender commits to defuse | Push and kill | Teammate watches the push angle |
-| Defender half-defuses (3.5s) | Must stop defuse or lose round | Was just getting half; stops and fights |
-| Defender sticks full defuse (7s) | Must kill in 7 seconds or lose | Committed; teammates protect |
+| Savunucu spike'a dokunur (kısa) | Peek at ve vur | Fake'ti; savunucu açı tutuyor |
+| Savunucu defuse'a commit eder | Push et ve öldür | Takım arkadaşı push açısını izliyor |
+| Savunucu yarı defuse yapar (yarım) | Defuse'u durdurmalı veya round'u kaybetmeli | Sadece yarısı alıyordu; durup fight ediyor |
+| Savunucu full defuse'a yapışıyor | Full defuse süresi içinde öldürmeli veya kaybet | Commit etti; takım arkadaşları koruyor |
 
-### Half Defuse Strategy
+### Yarı Defuse Stratejisi
 
-Half defuse is when the defender taps the spike for 3.5 seconds, saving 50% progress. The next defuse attempt only needs 3.5 seconds.
+Yarı defuse savunucunun spike'a full defuse süresinin yarısı kadar dokunarak %50 ilerleme kaydetmesi. Sonraki defuse girişimi sadece kalan yarıyı gerektiriyor.
 
-- **When to half defuse**: When you have time (15+ seconds on spike) and need to clear angles. Get half, fight, then finish with a quick 3.5-second defuse.
-- **Counter to half defuse**: If you hear the defuse sound for more than 2 seconds, the defender is likely committing to at least half. You MUST peek and stop them, because a half-defused spike is extremely dangerous for the attacker.
-- **Double half trap**: Get half (3.5s), fight, then "commit" to the second half (3.5s). The attacker expects you to fake the second one, but you actually commit. Timing mind game.
+IF defuse sesini kısa dokunuştan ötede devam ediyorsan duyuyorsan
+MEANING savunucu en azından yarıya commit ediyordur
+COUNTER peek etmeli ve durdurmalısın, çünkü yarı-defuse edilmiş spike saldırgan için son derece tehlikeli
+WHY yarı defuse kalan zamanı yarılayarak savunucuya büyük esneklik verir
 
-### Stick vs Fake Decision Matrix
+### Stick vs Fake Karar Matrisi
 
 ```
-Spike timer > 20 seconds:
-  → Fake defuse first. You have time.
-  → After fake, hold angle for 3-5 seconds.
-  → Then commit to full defuse or half defuse.
+Spike zamanlayıcısı erken faz (bol zaman):
+  --> Önce fake defuse. Zamanın var.
+  --> Fake sonrası düşman tepkisi için açıyı kısa tut.
+  --> Sonra full defuse veya yarı defuse'a commit et.
 
-Spike timer 10-20 seconds:
-  → One quick fake (0.5s), then commit.
-  → Or half defuse if you already have half.
+Spike zamanlayıcısı orta faz (sınırlı zaman):
+  --> Bir hızlı fake, sonra commit.
+  --> Veya yarın varsa yarı defuse.
 
-Spike timer < 10 seconds:
-  → You MUST commit now. No time for fakes.
-  → If you don't have half defuse progress, you need 7 seconds. Commit at 8 seconds minimum.
-  → If you have half, commit at 4.5 seconds minimum (buffer for getting on spike).
+Spike zamanlayıcısı geç faz (acil):
+  --> Şimdi commit etmek ZORUNDASIN. Fake için zaman yok.
+  --> Yarı defuse ilerlemen yoksa full defuse süresi gerekiyor. Matematiksel olarak imkansız olmadan önce commit et.
+  --> Yarın varsa daha erken commit et -- spike'ta daha az zamana ihtiyacın var.
 
-Spike timer < 7 seconds and no half:
-  → Impossible to defuse. Save weapon or attempt kill for eco/ult points.
+Spike zamanlayıcısı geri dönüş noktasını geçti (full defuse süresinden az kaldı, yarı yok):
+  --> Defuse imkansız. Silah koru veya eco/ult puanları için kill girişi yap.
 ```
 
-## Agent-Specific Clutch Patterns
+---
 
-### Chamber TP Clutch Patterns
+## Ajan Spesifik Clutch Pattern'leri
 
-Chamber's Rendezvous (teleport) is one of the strongest clutch tools in the game.
+### Chamber TP Clutch Pattern'leri
 
-1. **Anchor placement**: Place one TP anchor at your fighting position, one at a safe retreat. After getting a kill, TP to the retreat anchor to avoid the trade.
-2. **Post-plant TP**: Place an anchor near the spike and one far away. Fight from far away; if they defuse, TP to the close anchor and shoot the defuser.
-3. **Fake-TP bait**: TP creates a loud sound at the destination. TP to one anchor, but then walk back toward where you came from. Enemies rush the TP sound, find nothing, and you catch them from behind.
-4. **Headhunter eco clutch**: Chamber's Headhunter (ability Sheriff with 8 bullets) is perfect for eco clutches. One headshot at any range = kill. No need to rifle.
+Chamber'ın Rendezvous'su (teleport) oyundaki en güçlü clutch araçlarından biri.
 
-### Jett Dash Clutch Patterns
+1. **Anchor yerleştirme**: Bir TP anchor'ı savaş pozisyonuna, birini güvenli geri çekilmeye koy. Kill aldıktan sonra trade'den kaçınmak için geri çekilme anchor'ına TP yap.
+2. **Post-plant TP**: Spike'a yakın bir anchor ve uzağa bir anchor koy. Uzaktan fight et; defuse ederlerse yakın anchor'a TP at ve defuse edeni vur.
+3. **Fake-TP bait**: TP varış noktasında yüksek ses çıkarır. Bir anchor'a TP at, ama sonra geldiğin yere doğru geri yürü. Düşmanlar TP sesine koşar, hiçbir şey bulamaz ve sen arkadan yakalarsın.
+4. **Headhunter eco clutch**: Chamber'ın Headhunter'ı (yetenek Sheriff, 8 mermi) eco clutch'lar için mükemmel. Her mesafede headshot = kill. Tüfeğe gerek yok.
 
-1. **Dash after peek**: Peek an angle aggressively, get the kill, dash out before the trade arrives. This is the fundamental Jett 1vX pattern.
-2. **Updraft peek**: Updraft above a box or wall, get info or a kill from an unexpected angle, then dash away.
-3. **Bladestorm clutch**: Jett's ultimate gives her perfect accuracy while moving. In a 1vX, she can run-and-gun with Bladestorm, making her nearly impossible to hit while she maintains perfect accuracy. Each kill refreshes the blades.
-4. **Smoke escape**: Throw a smoke at your feet, dash through it. The enemy cannot see you leave but hears the dash. Creates complete positional ambiguity.
+### Jett Dash Clutch Pattern'leri
 
-### Omen TP Clutch Patterns
+1. **Peek sonrası dash**: Agresif açı peek et, kill al, trade gelmeden dash ile çık. Temel Jett 1vX pattern'i.
+2. **Updraft peek**: Bir kutu veya duvar üzerine updraft at, beklenmedik açıdan bilgi veya kill al, sonra dash ile kaç.
+3. **Bladestorm clutch**: Jett'in ultimate'i hareket halinde mükemmel hassasiyet verir. 1vX'te Bladestorm ile run-and-gun yapabilir, vurulması neredeyse imkansızken mükemmel hassasiyeti korur. Her kill blade'leri yeniler.
+4. **Smoke kaçışı**: Ayağına smoke at, içinden dash yap. Düşman senin ayrıldığını göremez ama dash'ı duyar. Tam pozisyonel belirsizlik oluşturur.
 
-1. **Shrouded Step fake-out**: TP to a position, but then immediately walk back. The enemy hears the TP arrival sound and checks that location, but you are already gone.
-2. **TP to high ground**: Omen can TP to boxes, heaven, ledges. In a clutch, unexpected vertical positioning wins rounds because enemies default to checking head-level angles.
-3. **Dark Cover + TP**: Smoke an area, then TP into or behind the smoke. When the smoke fades, you are in an unexpected position.
-4. **Ultimate clutch**: In a 1v1, Omen's ult can TP to the spike to plant/defuse from anywhere on the map. The cancel mechanic means you can use it as a scouting tool: ult, see if the enemy is near the spike, cancel if they are (you reappear at your original location with full health).
+### Omen TP Clutch Pattern'leri
+
+1. **Shrouded Step fake-out**: Pozisyona TP at, ama sonra hemen geri yürü. Düşman TP varış sesini duyar ve o konumu kontrol eder, ama sen çoktan gitmişsin.
+2. **Yukarı TP**: Omen kutulara, heaven'a, çıkıntılara TP yapabilir. Clutch'ta beklenmedik dikey pozisyonlama round kazandırır çünkü düşmanlar varsayılan olarak baş-seviyesi açıları kontrol eder.
+3. **Dark Cover + TP**: Bir alanı smoke'la, sonra smoke'un içine veya arkasına TP yap. Smoke kalktığında beklenmedik pozisyondasın.
+4. **Ultimate clutch**: 1v1'de Omen'in ult'u haritanın herhangi bir yerine plant/defuse için TP yapabilir. İptal mekaniği onu keşif aracı olarak kullanmana izin verir: ult at, düşmanın spike yakınında olup olmadığını gör, oradaysa iptal et (orijinal konumuna tam HP ile dönersin).
 
 ### Brimstone Post-Plant Clutch
 
-1. **Molly lineups**: Brimstone's incendiary can be bounced off walls to land on the spike from safe positions 20-30m away. Learn 2-3 lineups per plant position per map.
-2. **Double molly**: With both his molly and his ultimate (Orbital Strike), Brimstone can deny the spike for ~14 seconds total (molly duration + ult + timing). In a 45-second spike timer, denying 14 seconds is massive.
-3. **Stim beacon**: Often forgotten in clutches, the stim beacon gives increased fire rate and equip speed. Pop it before your duel.
+1. **Molly lineup'ları**: Brimstone'un incendiary'si duvarlardan sekerektirmek 20-30m uzaktan güvenli pozisyonlardan spike'a düşebilir. Her plant pozisyonu başına harita başına 2-3 lineup öğren.
+2. **Çift inkar**: Hem molly'si hem ultimate'i (Orbital Strike) ile Brimstone spike'ı molly süresi + ult + zamanlama içeren toplam süre boyunca inkar edebilir. Bu yığın inkar post-plant'te yıkıcı.
+3. **Stim beacon**: Clutch'larda unutulur, stim beacon artırılmış atış hızı ve equip hızı verir. Düellodan önce çalıştır.
 
 ### Viper Post-Plant Clutch
 
-1. **Snake Bite lineups**: Similar to Brimstone, Viper's Snake Bite can land on the spike from far away. She has two charges, each denying the spike for ~6.5 seconds.
-2. **Pit + Snake Bite**: If Viper's Pit is active over the spike, combined with Snake Bites for denial, the defender must push through poison and molly to defuse. Nearly unwinnable for the defender without utility.
-3. **Wall/orb toggling**: In a clutch, toggling the wall or orb on and off can force enemies to reposition or peek at predictable times.
+1. **Snake Bite lineup'ları**: Brimstone'a benzer, Viper'ın Snake Bite'ı uzaktan spike'a ulaşabilir. İki şarjı var, her biri büyük bir süre boyunca spike'ı inkar eder.
+2. **Pit + Snake Bite**: Viper's Pit spike üzerinde aktifse, Snake Bite'larla inkar birleşince savunucu defuse için zehir ve molly'den geçmek zorunda. Utility olmadan savunucu için neredeyse kazanılamaz.
+3. **Wall/orb toggle**: Clutch'ta duvarı veya orb'u açıp kapatmak düşmanları yeniden pozisyonlamaya veya tahmin edilebilir zamanlarda peek yapmaya zorlayabilir.
 
-## Common Clutch Mistakes by Rank
+---
+
+## Rank Bazlı Yaygın Clutch Hataları
 
 ### Iron-Silver
-- Running instead of walking. Sound gives away position constantly.
-- Not using abilities at all. Die with full utility.
-- Panicking and taking the first fight they see, even if it is unfavorable.
-- Ignoring the spike timer completely.
+- Yürümek yerine koşmak. Ses sürekli pozisyon veriyor.
+- Yetenek kullanmamak. Full utility ile ölmek.
+- Paniklemek ve olumsuz olsa bile gördüğü ilk fight'ı almak.
+- Spike zamanlayıcısını tamamen görmezden gelmek.
 
 ### Gold-Platinum
-- Using all abilities on the first fight, having nothing for remaining enemies.
-- Not repositioning after a kill. Stay in the same spot and get traded.
-- Over-rotating. Hear one sound and sprint across the map, making noise.
-- Not tracking enemy utility. Do not know if the enemy has a flash left.
+- Tüm yetenekleri ilk fight'ta kullanıp, kalan düşmanlar için hiçbir şey kalmaması.
+- Kill sonrası reposition yapmamak. Aynı yerde kalıp trade yemek.
+- Aşırı rotate. Bir ses duyup haritanın öteki ucuna sprint atarak gürültü çıkarma.
+- Düşman utility'sini takip etmemek. Düşmanın flash'ı kalıp kalmadığını bilmemek.
 
 ### Diamond-Ascendant
-- Being too passive. Waiting so long that time runs out or enemies set up crossfires.
-- Predictable patterns. Always play the same post-plant position. Pro teams study your tendencies.
-- Not considering save vs try. Ego-peeking 1v4s instead of saving a 4,700 credit Operator.
-- Poor time management in defuse scenarios. Not calculating whether they have time for a fake.
+- Çok pasif olmak. O kadar bekliyorsun ki zaman bitiyor veya düşmanlar crossfire kuruyor.
+- Tahmin edilebilir pattern'ler. Her zaman aynı post-plant pozisyonu oynamak.
+- Save vs deneme değerlendirilmemesi. 1v4'lerde Op save etmek yerine ego-peek.
+- Defuse senaryolarında zayıf zaman yönetimi. Fake için zaman olup olmadığını hesaplamamak.
 
 ### Immortal-Radiant
-- Micro-mistakes: peeking 1 pixel too wide, counter-strafing 10ms too slow.
-- Utility timing: using a smoke 0.5 seconds too late, allowing the enemy to get info before it blocks.
-- Not adapting to the specific opponents. At this level, you should know if the enemy tends to peek on fakes or hold for the commit.
-- Economy misjudgment: trying a clutch when saving would guarantee a full buy next round in a critical economy situation.
+- Mikro-hatalar: bir kesir kadar fazla geniş peek, bir frame kadar yavaş counter-strafe.
+- Utility zamanlama: smoke'u bir an geç deploy etmek, engelmeden önce düşmana bilgi almaya izin vermek.
+- Spesifik rakiplere uyum sağlamamak. Bu seviyede düşmanın fake'lerde peek yapıp yapmama eğilimini bilmelisin.
+- Ekonomi yanlış değerlendirmesi: save'in gelecek round'da full buy'ı garanti edeceği durumda clutch denemek.
 
-## Pro Clutch Patterns from VCT
+---
 
-### The TenZ 1v4 Pattern
+## VCT'den Pro Clutch Pattern'leri
 
-TenZ's famous clutches often follow a specific pattern: aggressive entry with Jett dash to get an opening kill, immediate reposition with dash or smoke, then methodical 1v1s against separated opponents. His mechanical advantage allows him to take duels that lower-ranked players should avoid. Do not replicate this unless your aim is genuinely at a similar level.
+### TenZ 1v4 Pattern'i
 
-### The yay Chamber 1v3 Pattern
+TenZ'in meşhur clutch'ları belirli bir pattern'i takip eder: Jett dash ile agresif entry yaparak açılış kill'i al, dash veya smoke ile hemen reposition, sonra ayrılmış rakiplere karşı yöntemli 1v1'ler. Mekanik avantajı daha düşük ranklı oyuncuların kaçınması gereken düelloları almasına izin verir. Aim'in gerçekten benzer seviyede değilse bunu kopyalama.
 
-yay (formerly of OpTic/NRG) popularized the Chamber TP clutch style: hold an aggressive angle with the Operator, get one pick, TP to safety. From the new position, hold another angle. This turns a 1v3 into three separate 1v1s where he always has the positional advantage. The key lesson is that Chamber's TP fundamentally changes clutch dynamics by removing the trade threat.
+### yay Chamber 1v3 Pattern'i
 
-### The Derke Aggression Pattern
+yay (OpTic/NRG) Chamber TP clutch stilini popülerleştirdi: Operator ile agresif açı tut, bir pick al, güvenliğe TP yap. Yeni pozisyondan başka bir açı tut. Bu 1v3'ü her zaman pozisyonel avantajın olduğu üç ayrı 1v1'e çevirir. Temel ders Chamber'ın TP'sinin trade tehdidini ortadan kaldırarak clutch dinamiklerini temelden değiştirmesidir.
 
-Derke (Fnatic) is known for aggressive clutch plays. When he is in a 1v2, he often pushes immediately rather than waiting. This works because opponents expect the solo player to play passively. The surprise wide swing catches both enemies off guard. This is a high-risk, high-reward style that works best when your aim is significantly better than your opponents.
+### Derke Agresyon Pattern'i
 
-## Retake vs Save Decision Math
+Derke (Fnatic) agresif clutch oyunlarıyla bilinir. 1v2'de beklemek yerine hemen push yapar. Bu çalışır çünkü rakipler solo oyuncunun pasif oynamasını bekler. Sürpriz geniş swing her iki düşmanı da hazırlıksız yakalar. Bu yüksek-risk, yüksek-ödül stili aim'in rakiplerinden büyük ölçüde daha iyi olduğunda en iyi çalışır.
 
-When deciding whether to retake a site or save, calculate:
+---
+
+## Retake vs Save Karar Matematiği
+
+Bir site'ı retake mi yoksa save mi yapacağına karar verirken hesapla:
 
 ```
-Value of trying = (Win probability) x (Round win value: 3,000 + denying enemy economy)
-                - (Lose probability) x (Weapon + shield value lost)
+Deneme değeri = (Kazanma olasılığı) x (Round kazanma değeri: 3,000 + düşman ekonomisini inkar)
+              - (Kaybetme olasılığı) x (Kaybedilen silah + shield değeri)
 
-Value of saving = Weapon value saved (2,900 for Vandal, 4,700 for Op)
-                + Shield value saved (0-1,000)
-                + Guaranteed economy boost for next round
+Save değeri = Korunan silah değeri (Vandal için 2,900, Op için 4,700)
+            + Korunan shield değeri (0-1,000)
+            + Gelecek round için garanti ekonomi artışı
 
-If Value of trying > Value of saving → Retake
-If Value of saving > Value of trying → Save
+Deneme değeri > Save değeri ise --> Retake
+Save değeri > Deneme değeri ise --> Save
 ```
 
-### Quick Reference
+### Hızlı Referans
 
-| Situation | Win Probability Estimate | Decision |
+| Durum | Tahmini Kazanma Olasılığı | Karar |
 |---|---|---|
-| 1v1, spike planted, you have utility | 40-55% | TRY |
-| 1v2, spike planted, you have strong post-plant | 20-30% | TRY if not desperate economy |
-| 1v2, spike planted, no utility | 10-15% | SAVE unless match point |
-| 1v3, any scenario | 5-10% | SAVE unless match point |
-| 1v3, with ult (Raze/Chamber/Neon) | 10-20% | TRY if ult is impactful |
-| 1v4+ | <5% | SAVE always (except match point) |
-| Any 1vX, match point against | Any | TRY (nothing to save for) |
-| Any 1vX, you have a pistol/SMG | Any | TRY (not worth saving a cheap weapon) |
+| 1v1, spike plant edilmiş, utility'n var | %40-55 | DENE |
+| 1v2, spike plant edilmiş, güçlü post-plant | %20-30 | Çaresiz ekonomi değilse DENE |
+| 1v2, spike plant edilmiş, utility yok | %10-15 | Maç noktası değilse SAVE |
+| 1v3, herhangi senaryo | %5-10 | Maç noktası değilse SAVE |
+| 1v3, ult ile (Raze/Chamber/Neon) | %10-20 | Ult güçlü ise DENE |
+| 1v4+ | <%5 | HER ZAMAN SAVE (maç noktası hariç) |
+| Herhangi 1vX, sana karşı maç noktası | Herhangi | DENE (save edecek bir şey yok) |
+| Herhangi 1vX, tabanca/SMG'n var | Herhangi | DENE (ucuz silahı save etmeye değmez) |
 
-### Ult Point Consideration
+### Ult Puan Değerlendirmesi
 
-Even if you lose the clutch, getting kills earns ult points. Sometimes taking a fight (even a losing one) is worth it for the ult charge alone, especially for high-impact ults like Sage resurrection, Viper pit, or Chamber's Tour De Force. If you need 1 more kill for your ult and the ult would win the next round, take the fight.
+Clutch'ı kaybetsen bile kill almak ult puanı kazandırır. Fight almak (kaybedilen bile) sadece ult şarjı için değerli olabilir, özellikle Sage resurrection, Viper pit veya Chamber Tour De Force gibi yüksek değerli ult'lar için. Ult'una 1 kill daha lazımsa ve o ult gelecek round'u kazandıracaksa, fight al.
+
+---
+
+## Rank Modülasyonu
+
+### Immortal+ İçin
+
+IF clutch durumlarında mikro-kararlarını geliştirmek istiyorsan
+MEANING bu seviyede clutch sonuçları bilgi asimetrisi ve zaman yönetimiyle belirlenir
+COUNTER fake defuse zamanlamalarını, ses bait tekniklerini ve ajan-spesifik clutch pattern'lerini prova et
+WHY Immortal+ clutch'larında mekanik fark minimal; karar kalitesi belirleyici faktör
+
+### Diamond-Ascendant İçin
+
+IF clutch round'larında tutarlı olarak başarısız oluyorsan
+MEANING yaygın hatalar: reposition etmeme, tüm utility'yi ilk fight'ta kullanma, save vs deneme değerlendirmemesi
+COUNTER her clutch sonrası replay izle ve hangi hatayı yaptığını kategorize et; save karar matrisini ezberle
+WHY clutch round'ları maç başına 3-5 round oluşturur; bunların yarısı bile kazanma oranını dramatik artırır
