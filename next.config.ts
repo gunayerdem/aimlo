@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Include knowledge base markdown files in serverless function bundles
+  // (required for fs.readFileSync in knowledge-loader.ts on Vercel)
+  outputFileTracingIncludes: {
+    "/api/ai/vision": ["./knowledge/**/*.md"],
+    "/api/ai/feedback": ["./knowledge/**/*.md"],
+  },
   async headers() {
     return [
       {
