@@ -1739,6 +1739,80 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
 
       </section>
 
+      {/* ─── APP MOCKUP — floating dashboard preview ─── */}
+      <section className="relative z-10 mx-auto max-w-4xl px-5 sm:px-8 pb-16 animate-slide-up stagger-5">
+        <div className="relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-1 shadow-2xl shadow-black/50" style={{ background: "linear-gradient(135deg, rgba(255,70,85,0.03), rgba(77,124,255,0.03))" }}>
+          {/* Browser chrome bar */}
+          <div className="flex items-center gap-2 px-4 py-2.5 border-b border-white/[0.06]">
+            <div className="flex gap-1.5">
+              <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
+            </div>
+            <div className="flex-1 mx-8">
+              <div className="mx-auto max-w-xs rounded-md bg-white/[0.04] border border-white/[0.06] px-3 py-1 text-[10px] text-neutral-600 text-center">aimlo.xyz/dashboard</div>
+            </div>
+          </div>
+          {/* Fake dashboard content */}
+          <div className="p-5 sm:p-8 space-y-4">
+            {/* Top stats row */}
+            <div className="grid grid-cols-3 gap-3">
+              {[
+                { label: lang === "tr" ? "Round Kazanma" : "Round Win %", value: "67%", color: "#FF4655" },
+                { label: lang === "tr" ? "K/D Oranı" : "K/D Ratio", value: "1.42", color: "#4D7CFF" },
+                { label: lang === "tr" ? "AI Skoru" : "AI Score", value: "8.4", color: "#B44DFF" },
+              ].map((s, i) => (
+                <div key={i} className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4 text-center">
+                  <p className="text-2xl sm:text-3xl font-bold" style={{ color: s.color }}>{s.value}</p>
+                  <p className="text-[10px] text-neutral-600 mt-1 uppercase tracking-wider">{s.label}</p>
+                </div>
+              ))}
+            </div>
+            {/* Fake AI feedback card */}
+            <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4">
+              <div className="flex items-center gap-2 mb-3">
+                <img src="/aimlo-logo.png" alt="" className="w-5 h-auto" />
+                <span className="text-[11px] font-bold text-[#FF4655] uppercase tracking-wider">AI {lang === "tr" ? "Analiz" : "Analysis"}</span>
+                <span className="text-[9px] text-neutral-600 ml-auto">Round 8</span>
+              </div>
+              <div className="space-y-2">
+                <div className="h-2.5 rounded-full bg-white/[0.04] w-full" />
+                <div className="h-2.5 rounded-full bg-white/[0.04] w-4/5" />
+                <div className="h-2.5 rounded-full bg-white/[0.04] w-3/5" />
+              </div>
+            </div>
+            {/* Performance bars */}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4">
+                <p className="text-[10px] text-neutral-500 mb-2 uppercase tracking-wider">{lang === "tr" ? "Beceri Profili" : "Skill Profile"}</p>
+                {["Aim", "Utility", "Positioning", "Game Sense"].map((skill, j) => (
+                  <div key={j} className="flex items-center gap-2 mb-1.5">
+                    <span className="text-[9px] text-neutral-600 w-16">{skill}</span>
+                    <div className="flex-1 h-1.5 rounded-full bg-white/[0.04] overflow-hidden">
+                      <div className="h-full rounded-full" style={{ width: `${[72, 85, 60, 78][j]}%`, background: `linear-gradient(90deg, #FF4655, #4D7CFF)` }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4">
+                <p className="text-[10px] text-neutral-500 mb-2 uppercase tracking-wider">{lang === "tr" ? "Maç Özeti" : "Match Summary"}</p>
+                <div className="flex items-end justify-center gap-1 h-16">
+                  {[40, 65, 55, 80, 45, 70, 90, 60, 75, 85, 50, 95, 70].map((h, j) => (
+                    <div key={j} className="w-2 rounded-sm transition-all" style={{ height: `${h}%`, background: j < 7 ? "rgba(255,70,85,0.5)" : "rgba(77,124,255,0.5)" }} />
+                  ))}
+                </div>
+                <div className="flex justify-between mt-2">
+                  <span className="text-[9px] text-[#FF4655]">T: 7</span>
+                  <span className="text-[9px] text-[#4D7CFF]">CT: 6</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Glow effect behind mockup */}
+          <div className="pointer-events-none absolute -inset-4 rounded-3xl bg-gradient-to-b from-[#FF4655]/[0.04] to-[#4D7CFF]/[0.02] blur-2xl -z-10" />
+        </div>
+      </section>
+
       {/* ─── RANK SHOWCASE ─── */}
       <section className="relative z-10 mx-auto max-w-6xl px-5 sm:px-8 pb-28">
         <div className="section-divider mb-16" />
@@ -1902,6 +1976,67 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* ─── SOCIAL PROOF — Testimonials ─── */}
+      <section className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pb-28">
+        <div className="section-divider mb-16" />
+        <p className="text-center text-[11px] uppercase tracking-[0.2em] text-[#FF4655]/50 font-semibold mb-4">
+          {lang === "tr" ? "Topluluk" : "Community"}
+        </p>
+        <h2 className="text-3xl sm:text-[44px] font-semibold text-white tracking-tight text-center mb-6 leading-tight" style={{ letterSpacing: '-1.5px' }}>
+          {lang === "tr" ? "Oyuncular Ne Diyor?" : "What Players Say"}
+        </h2>
+        <div className="flex items-center justify-center gap-6 mb-12">
+          <div className="flex -space-x-2">
+            {[
+              "add6443a-41bd-e414-f6ad-e58d267f4e95",
+              "eb93336a-449b-9c1b-0a54-a891f7921d69",
+              "569fdd95-4d10-43ab-ca70-79becc718b46",
+              "a3bfb853-43b2-7238-a4f1-ad90e9e46bcc",
+              "8e253930-4c05-31dd-1b6c-968525494517",
+            ].map((id) => (
+              <img key={id} src={`https://media.valorant-api.com/agents/${id}/displayiconsmall.png`} alt="" className="w-8 h-8 rounded-full border-2 border-black object-cover bg-white/5" loading="lazy" />
+            ))}
+          </div>
+          <div>
+            <div className="flex gap-0.5 mb-0.5">
+              {[1,2,3,4,5].map(s => (
+                <svg key={s} width="14" height="14" viewBox="0 0 24 24" fill="#FF4655" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              ))}
+            </div>
+            <p className="text-[12px] text-neutral-400"><span className="text-white font-semibold">500+</span> {lang === "tr" ? "aktif oyuncu" : "active players"}</p>
+          </div>
+        </div>
+        <div className="grid md:grid-cols-3 gap-4">
+          {(lang === "tr" ? [
+            { name: "Yusuf K.", rank: "Diamond", text: "Round sonrası AI feedback sayesinde positioning hatalarımı düzelttim. 2 haftada Gold'dan Diamond'a çıktım.", color: "#B489FF" },
+            { name: "Elif S.", rank: "Platinum", text: "Hata tespiti özelliği müthiş. Aynı peek hatalarını tekrar tekrar yaptığımı fark etmemi sağladı.", color: "#32B8B8" },
+            { name: "Arda M.", rank: "Immortal", text: "Detaylı maç raporları ile takım olarak zayıf yönlerimizi gördük. Turnuva hazırlığında çok işe yaradı.", color: "#FF4655" },
+          ] : [
+            { name: "Alex K.", rank: "Diamond", text: "Post-round AI feedback helped me fix positioning mistakes. Climbed from Gold to Diamond in 2 weeks.", color: "#B489FF" },
+            { name: "Sarah M.", rank: "Platinum", text: "The mistake detection feature is amazing. It showed me I was repeating the same peek errors.", color: "#32B8B8" },
+            { name: "James R.", rank: "Immortal", text: "Detailed match reports helped our team identify weak points. Invaluable for tournament prep.", color: "#FF4655" },
+          ]).map((t, i) => (
+            <div key={i} className="card-xtract p-6 group">
+              <div className="flex gap-0.5 mb-3">
+                {[1,2,3,4,5].map(s => (
+                  <svg key={s} width="12" height="12" viewBox="0 0 24 24" fill="#FF4655" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                ))}
+              </div>
+              <p className="text-[13px] text-neutral-400 leading-relaxed mb-4">&ldquo;{t.text}&rdquo;</p>
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold" style={{ background: `${t.color}15`, color: t.color, border: `1px solid ${t.color}25` }}>
+                  {t.name.charAt(0)}
+                </div>
+                <div>
+                  <p className="text-[12px] font-semibold text-white">{t.name}</p>
+                  <p className="text-[10px] font-medium" style={{ color: t.color }}>{t.rank}</p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
