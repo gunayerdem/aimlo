@@ -1923,8 +1923,24 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
                 <line x1="1" y1="12" x2="5" y2="12" stroke="#4D7CFF" strokeWidth="1.5"/>
                 <line x1="19" y1="12" x2="23" y2="12" stroke="#4D7CFF" strokeWidth="1.5"/>
               </svg>,
-              // 3 — AI Analysis: AIMLO logo
-              <img key="h2" src="/aimlo-logo.png" alt="AI" className="w-8 h-auto object-contain" style={{ filter: "drop-shadow(0 0 6px rgba(255,70,85,0.4))" }} />,
+              // 3 — AI Analysis: neural brain network
+              <svg key="h2" width="28" height="28" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="4" r="1.5" fill="#FF4655"/>
+                <circle cx="5" cy="8" r="1.5" fill="#FF4655" opacity="0.7"/>
+                <circle cx="19" cy="8" r="1.5" fill="#FF4655" opacity="0.7"/>
+                <circle cx="12" cy="12" r="2" fill="#FF4655"/>
+                <circle cx="5" cy="16" r="1.5" fill="#4D7CFF" opacity="0.7"/>
+                <circle cx="19" cy="16" r="1.5" fill="#4D7CFF" opacity="0.7"/>
+                <circle cx="12" cy="20" r="1.5" fill="#4D7CFF"/>
+                <line x1="12" y1="4" x2="12" y2="12" stroke="#FF4655" strokeWidth="0.8" opacity="0.5"/>
+                <line x1="5" y1="8" x2="12" y2="12" stroke="#FF4655" strokeWidth="0.8" opacity="0.4"/>
+                <line x1="19" y1="8" x2="12" y2="12" stroke="#FF4655" strokeWidth="0.8" opacity="0.4"/>
+                <line x1="12" y1="12" x2="5" y2="16" stroke="#4D7CFF" strokeWidth="0.8" opacity="0.4"/>
+                <line x1="12" y1="12" x2="19" y2="16" stroke="#4D7CFF" strokeWidth="0.8" opacity="0.4"/>
+                <line x1="12" y1="12" x2="12" y2="20" stroke="#4D7CFF" strokeWidth="0.8" opacity="0.5"/>
+                <line x1="5" y1="8" x2="5" y2="16" stroke="#B44DFF" strokeWidth="0.5" opacity="0.3"/>
+                <line x1="19" y1="8" x2="19" y2="16" stroke="#B44DFF" strokeWidth="0.5" opacity="0.3"/>
+              </svg>,
               // 4 — Match Report: stats chart
               <svg key="h3" width="28" height="28" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="3" width="20" height="18" rx="2" stroke="#B44DFF" strokeWidth="1.5" fill="rgba(180,77,255,0.06)"/>
