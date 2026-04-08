@@ -1991,13 +1991,13 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
         <div className="flex items-center justify-center gap-6 mb-12">
           <div className="flex -space-x-2">
             {[
-              "add6443a-41bd-e414-f6ad-e58d267f4e95",
-              "eb93336a-449b-9c1b-0a54-a891f7921d69",
-              "569fdd95-4d10-43ab-ca70-79becc718b46",
-              "a3bfb853-43b2-7238-a4f1-ad90e9e46bcc",
-              "8e253930-4c05-31dd-1b6c-968525494517",
-            ].map((id) => (
-              <img key={id} src={`https://media.valorant-api.com/agents/${id}/displayicon.png`} alt="" className="w-8 h-8 rounded-full border-2 border-black object-cover bg-white/5" loading="lazy" />
+              { letter: "Y", color: "#FF4655" },
+              { letter: "E", color: "#4D7CFF" },
+              { letter: "A", color: "#B44DFF" },
+              { letter: "M", color: "#ECB73E" },
+              { letter: "K", color: "#32B8B8" },
+            ].map((u, i) => (
+              <div key={i} className="w-8 h-8 rounded-full border-2 border-black flex items-center justify-center text-[11px] font-bold" style={{ background: `${u.color}20`, color: u.color }}>{u.letter}</div>
             ))}
           </div>
           <div>
