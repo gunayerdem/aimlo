@@ -1816,9 +1816,9 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       {/* ─── RANK SHOWCASE ─── */}
       <section className="relative z-10 mx-auto max-w-6xl px-5 sm:px-8 pb-28">
         <div className="section-divider mb-16" />
-        <p className="text-center text-[11px] uppercase tracking-[0.2em] text-neutral-600 font-semibold mb-4 animate-slide-up stagger-4">
-          {lang === "tr" ? "Her seviyeye uygun koçluk" : "Coaching for every rank"}
-        </p>
+        <h2 className="text-center text-3xl sm:text-[44px] font-semibold text-white tracking-tight mb-10 animate-slide-up stagger-4" style={{ letterSpacing: '-1.5px' }}>
+          {lang === "tr" ? "Her Seviyeye Uygun Koçluk" : "Coaching for Every Rank"}
+        </h2>
         <div className="flex items-end justify-center gap-2 sm:gap-4 animate-slide-up stagger-5">
           {rankShowcase.map((rank, i) => {
             // Radiant is tallest, scaling up from Iron
