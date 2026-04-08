@@ -3286,27 +3286,27 @@ export default function Home() {
         <div className="relative z-10 mx-auto max-w-3xl px-4 pt-20 pb-12">
 
           {/* ═══ HERO ═══ */}
-          <div className="relative overflow-hidden rounded-xl border border-[#1e2a3a]/60 bg-gradient-to-br from-[#0a1628] via-[#0d1117] to-[#0a0f16] p-8 mb-8" style={{ minHeight: 200 }}>
+          <div className="relative rounded-xl border border-[#1e2a3a]/60 bg-gradient-to-br from-[#0a1628] via-[#0d1117] to-[#0a0f16] p-8 mb-8 overflow-visible" style={{ minHeight: 240 }}>
             {/* Ambient glow */}
             <div className="pointer-events-none absolute top-0 right-0 w-96 h-96 rounded-full bg-[#FF4655]/[0.06] blur-[120px]" />
             <div className="pointer-events-none absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-[#4D7CFF]/[0.04] blur-[100px]" />
 
-            {/* Agent full portrait — standing on left, overflowing */}
+            {/* Agent full portrait — right side, standing tall, overflowing top */}
             {topAgent && (
-              <div className="absolute -left-4 -bottom-2 w-[200px] overflow-visible pointer-events-none" style={{ zIndex: 1 }}>
+              <div className="absolute right-4 -top-16 pointer-events-none" style={{ zIndex: 3, width: '220px' }}>
                 <img
                   src={agentFullPortrait(topAgent.name)}
                   alt={topAgent.name}
-                  className="w-full h-auto object-contain animate-float-slow"
+                  className="w-full h-auto object-contain"
                   style={{
-                    filter: `drop-shadow(0 0 40px rgba(255,70,85,0.2)) drop-shadow(5px 0 30px rgba(0,0,0,0.7)) saturate(1.3)`,
+                    filter: `drop-shadow(0 0 50px rgba(255,70,85,0.25)) drop-shadow(0 10px 30px rgba(0,0,0,0.8)) saturate(1.4)`,
                   }}
                 />
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-32 h-20 rounded-full bg-[#FF4655]/[0.08] blur-[40px] animate-glow-pulse" />
+                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-40 h-24 rounded-full bg-[#FF4655]/[0.10] blur-[50px] animate-glow-pulse" />
               </div>
             )}
 
-            <div className="relative z-10 pl-[180px] sm:pl-[200px]">
+            <div className="relative z-10 max-w-[60%]">
               <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#FF4655]/60 mb-2">AI-POWERED VALORANT COACH</p>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-1">
                 {l.dashTitle}, <span className="bg-gradient-to-r from-[#FF4655] to-[#4D7CFF] bg-clip-text text-transparent">{dashDisplayName}</span>
@@ -3760,17 +3760,17 @@ export default function Home() {
         <MapBg map={vr.map} />
         <Navbar {...navProps} />
 
-        {/* Agent standing on left side of page — full portrait */}
-        <div className="hidden lg:block fixed left-4 bottom-0 z-20 pointer-events-none" style={{ width: '250px' }}>
+        {/* Agent standing on left side of page — full portrait, cinematic */}
+        <div className="hidden lg:block fixed left-8 bottom-0 z-20 pointer-events-none" style={{ width: '300px' }}>
           <img
             src={agentFullPortrait(vr.agent)}
             alt={vr.agent}
             className="w-full h-auto object-contain animate-float-slow"
             style={{
-              filter: `drop-shadow(0 0 50px rgba(255,70,85,0.2)) drop-shadow(10px 0 40px rgba(0,0,0,0.8)) saturate(1.3)`,
+              filter: `drop-shadow(0 0 60px rgba(255,70,85,0.25)) drop-shadow(10px 0 50px rgba(0,0,0,0.9)) saturate(1.4)`,
             }}
           />
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-40 h-24 rounded-full bg-[#FF4655]/[0.08] blur-[40px]" />
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-48 h-32 rounded-full bg-[#FF4655]/[0.10] blur-[60px] animate-glow-pulse" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-lg px-4 pt-20 pb-12 space-y-6">
