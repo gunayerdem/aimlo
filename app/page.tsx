@@ -2366,27 +2366,27 @@ function AuthScreen({
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35">{al.authFirstName}</label>
-                    <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder={al.authFirstNamePh} required className={inputCls} />
+                    <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="" required className={inputCls} />
                   </div>
                   <div>
                     <label className="mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35">{al.authLastName}</label>
-                    <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder={al.authLastNamePh} required className={inputCls} />
+                    <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="" required className={inputCls} />
                   </div>
                 </div>
                 <div>
                   <label className="mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35">{al.authUsername}</label>
-                  <input type="text" value={username} onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ""))} placeholder={al.authUsernamePh} required className={inputCls} />
+                  <input type="text" value={username} onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ""))} placeholder="" required className={inputCls} />
                 </div>
               </>
             )}
             <div>
               <label className="mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35">{mode === "login" ? al.authEmailOrUsername : al.authEmail}</label>
-              <input type={mode === "register" ? "email" : "text"} value={email} onChange={(e) => setEmail(e.target.value)} placeholder={mode === "login" ? al.authEmailOrUsernamePh : al.authEmailPh} required className={inputCls} />
+              <input type={mode === "register" ? "email" : "text"} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="" required className={inputCls} />
             </div>
             <div>
               <label className="mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35">{al.authPassword}</label>
               <div className="relative">
-                <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" required minLength={6} className={inputCls} style={{ paddingRight: 44 }} />
+                <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="" required minLength={6} className={inputCls} style={{ paddingRight: 44 }} />
                 <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-600 hover:text-[#FF6B77] transition" tabIndex={-1}>
                   {showPassword ? "🙈" : "👁️"}
                 </button>
@@ -2396,7 +2396,7 @@ function AuthScreen({
               <div>
                 <label className="mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35">{al.authPasswordConfirm}</label>
                 <div className="relative">
-                  <input type={showPasswordConfirm ? "text" : "password"} value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} placeholder="••••••••" required minLength={6} className={inputCls} style={{ paddingRight: 44 }} />
+                  <input type={showPasswordConfirm ? "text" : "password"} value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} placeholder="" required minLength={6} className={inputCls} style={{ paddingRight: 44 }} />
                   <button type="button" onClick={() => setShowPasswordConfirm(!showPasswordConfirm)} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-600 hover:text-[#FF6B77] transition" tabIndex={-1}>
                     {showPasswordConfirm ? "🙈" : "👁️"}
                   </button>
