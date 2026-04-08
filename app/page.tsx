@@ -1819,9 +1819,6 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
         <p className="text-center text-[11px] uppercase tracking-[0.2em] text-neutral-600 font-semibold mb-4 animate-slide-up stagger-4">
           {lang === "tr" ? "Her seviyeye uygun koçluk" : "Coaching for every rank"}
         </p>
-        <h2 className="text-2xl sm:text-3xl font-semibold text-white text-center mb-12 animate-slide-up stagger-4" style={{ letterSpacing: '-1px' }}>
-          {lang === "tr" ? "Iron'dan Radiant'a Kadar" : "From Iron to Radiant"}
-        </h2>
         <div className="flex items-end justify-center gap-2 sm:gap-4 animate-slide-up stagger-5">
           {rankShowcase.map((rank, i) => {
             // Radiant is tallest, scaling up from Iron
