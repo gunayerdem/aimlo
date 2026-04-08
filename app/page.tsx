@@ -3285,57 +3285,82 @@ export default function Home() {
         <Navbar {...navProps} />
         <div className="relative z-10 mx-auto max-w-3xl px-4 pt-20 pb-12">
 
-          {/* ═══ HERO ═══ */}
-          <div className="relative overflow-hidden rounded-xl border border-[#1e2a3a]/60 bg-gradient-to-br from-[#0a1628] via-[#0d1117] to-[#0a0f16] p-8 mb-8" style={{ minHeight: 200 }}>
-            {/* Ambient glow */}
-            <div className="pointer-events-none absolute top-0 right-0 w-96 h-96 rounded-full bg-[#FF4655]/[0.06] blur-[120px]" />
-            <div className="pointer-events-none absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-[#4D7CFF]/[0.04] blur-[100px]" />
+          {/* ═══ HERO — Cinematic agent splash ═══ */}
+          <div className="relative overflow-visible rounded-2xl border border-white/[0.06] bg-gradient-to-br from-[#0a0f1a] via-[#080c14] to-black mb-8 animate-slide-up" style={{ minHeight: 280 }}>
+            {/* Ambient glows */}
+            <div className="pointer-events-none absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full bg-[#FF4655]/[0.07] blur-[150px]" />
+            <div className="pointer-events-none absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-[#4D7CFF]/[0.05] blur-[120px]" />
 
-            {/* Agent splash (right side) — large, animated, majestic */}
+            {/* Agent — full body, overflowing, cinematic */}
             {topAgent && (
-              <div className="absolute -right-8 -top-4 -bottom-4 w-1/2 overflow-hidden pointer-events-none">
+              <div className="absolute -right-4 sm:right-0 -top-16 bottom-0 w-[55%] sm:w-[45%] overflow-visible pointer-events-none" style={{ zIndex: 2 }}>
                 <img
-                  src={agentImgUrl(topAgent.name)}
-                  alt=""
-                  className="h-[120%] w-auto object-cover animate-float-slow"
+                  src={`https://media.valorant-api.com/agents/${(() => {
+                    // Map agent name to full portrait UUID
+                    const agentUUIDs: Record<string, string> = {
+                      "Jett": "add6443a-41bd-e414-f6ad-e58d267f4e95",
+                      "Phoenix": "eb93336a-449b-9c1b-0a54-a891f7921d69",
+                      "Sage": "569fdd95-4d10-43ab-ca70-79becc718b46",
+                      "Reyna": "a3bfb853-43b2-7238-a4f1-ad90e9e46bcc",
+                      "Omen": "8e253930-4c05-31dd-1b6c-968525494517",
+                      "Cypher": "117ed9e3-49f3-6512-3ccf-0cada7e3823b",
+                      "Viper": "707eab51-4836-f488-046a-cda6bf494859",
+                      "Sova": "320b2a48-4d9b-a075-30f1-1f93a9b638fa",
+                      "Killjoy": "1e58de9c-4950-5125-93e9-a0aee9f98746",
+                      "Breach": "5f8d3a7f-467b-97f3-062c-13acf203c006",
+                      "Raze": "f94c3b30-42be-e959-889c-5aa313dba261",
+                      "Skye": "6f2a04ca-43e0-be17-7f36-b3908627744d",
+                      "Yoru": "7f94d92c-4234-0a36-9646-3a87eb8b5c89",
+                      "Astra": "41fb69c1-4189-7b37-f117-bcaf1e96f1bf",
+                      "Chamber": "22697a3d-45bf-8dd7-4fec-84a9e28c69d7",
+                      "Neon": "bb2a4828-46eb-8cd1-e765-15848195d751",
+                      "Fade": "dade69b4-4f5a-8528-247b-219e5a1facd6",
+                      "Harbor": "95b78ed7-4637-86d9-7e41-71ba8c293152",
+                      "Gekko": "e370fa57-4757-3604-3648-499e1f642d3f",
+                      "Deadlock": "cc8b64c8-4b25-4ff3-6e51-4fae5c160000",
+                      "Iso": "0e38b510-41a8-5780-5e8f-568b2a4f2d6c",
+                      "Clove": "1dbf2edd-4729-0984-3115-daa5eed44993",
+                    };
+                    return agentUUIDs[topAgent.name] || "add6443a-41bd-e414-f6ad-e58d267f4e95";
+                  })()}/fullportrait.png`}
+                  alt={topAgent.name}
+                  className="h-[340px] sm:h-[380px] w-auto object-contain animate-float-slow"
                   style={{
-                    opacity: 0.35,
-                    filter: `drop-shadow(0 0 40px rgba(255,70,85,0.2)) saturate(1.3)`,
-                    maskImage: 'linear-gradient(to left, rgba(0,0,0,0.8) 20%, transparent 80%)',
-                    WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,0.8) 20%, transparent 80%)',
+                    filter: `drop-shadow(0 0 60px rgba(255,70,85,0.25)) drop-shadow(0 20px 40px rgba(0,0,0,0.8)) saturate(1.4)`,
+                    transform: 'translateY(-20px)',
                   }}
+                  loading="eager"
                 />
                 {/* Glow ring behind agent */}
-                <div className="absolute top-1/2 right-16 -translate-y-1/2 w-48 h-48 rounded-full bg-[#FF4655]/[0.08] blur-[60px] animate-glow-pulse" />
+                <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full bg-[#FF4655]/[0.10] blur-[80px] animate-glow-pulse" />
               </div>
             )}
 
-            <div className="relative z-10">
-              <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#FF4655]/60 mb-2">AI-POWERED VALORANT COACH</p>
-              <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-1">
-                {l.dashTitle}, <span className="bg-gradient-to-r from-[#FF4655] to-[#4D7CFF] bg-clip-text text-transparent">{dashDisplayName}</span>
+            {/* Content — left side */}
+            <div className="relative z-10 p-8 sm:p-10 max-w-[55%]">
+              <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#FF4655]/50 mb-3 animate-slide-up stagger-1">AI-POWERED VALORANT COACH</p>
+              <h1 className="text-3xl sm:text-[42px] font-bold text-white leading-[1.1] mb-1 animate-slide-up stagger-1" style={{ letterSpacing: '-1.5px' }}>
+                {l.dashTitle},
               </h1>
-              <p className="text-sm text-neutral-500 mb-6">{l.dashSub}</p>
+              <h1 className="text-3xl sm:text-[42px] font-bold leading-[1.1] mb-3 animate-slide-up stagger-2" style={{ letterSpacing: '-1.5px' }}>
+                <span className="bg-gradient-to-r from-[#FF4655] to-[#4D7CFF] bg-clip-text text-transparent">{dashDisplayName}</span>
+              </h1>
+              <p className="text-[13px] text-neutral-500 mb-8 animate-slide-up stagger-2">{l.dashSub}</p>
 
-              {/* Quick stats row */}
-              <div className="flex items-center gap-6 flex-wrap">
+              {/* Stats — big numbers */}
+              <div className="flex items-end gap-8 animate-slide-up stagger-3">
                 <div>
-                  <span className="text-2xl font-black text-white">{savedReports.length}</span>
-                  <span className="text-xs text-neutral-500 ml-1.5">{l.dashMatches}</span>
+                  <span className="text-4xl font-black text-white">{savedReports.length}</span>
+                  <p className="text-[9px] text-neutral-600 uppercase tracking-wider mt-1">{l.dashMatches}</p>
                 </div>
-                <div className="w-px h-8 bg-white/[0.06]" />
                 <div>
-                  <span className={`text-2xl font-black ${winRate >= 50 ? 'text-emerald-400' : 'text-red-400'}`}>{savedReports.length > 0 ? `${winRate}%` : '\u2014'}</span>
-                  <span className="text-xs text-neutral-500 ml-1.5">Win Rate</span>
+                  <span className={`text-4xl font-black ${winRate >= 50 ? 'text-emerald-400' : 'text-[#FF4655]'}`}>{savedReports.length > 0 ? `${winRate}%` : '\u2014'}</span>
+                  <p className="text-[9px] text-neutral-600 uppercase tracking-wider mt-1">Win Rate</p>
                 </div>
-                <div className="w-px h-8 bg-white/[0.06]" />
                 {topAgent && (
-                  <div className="flex items-center gap-2">
-                    <img src={agentImgUrl(topAgent.name)} alt="" className="w-7 h-7 rounded-lg ring-1 ring-[#FF4655]/30" />
-                    <div>
-                      <span className="text-sm font-bold text-white">{topAgent.name}</span>
-                      <span className="text-[10px] text-neutral-500 block">{lang === "tr" ? "En çok oynanan" : "Most played"}</span>
-                    </div>
+                  <div>
+                    <span className="text-4xl font-black text-white">{topAgent.name}</span>
+                    <p className="text-[9px] text-neutral-600 uppercase tracking-wider mt-1">{lang === "tr" ? "En çok oynanan" : "Main Agent"}</p>
                   </div>
                 )}
               </div>
