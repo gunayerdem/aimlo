@@ -45,6 +45,16 @@ select option { background: #000; color: #ededed; }
   to { opacity: 1; }
 }
 
+@keyframes match-card-enter {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.match-card-enter {
+  animation: match-card-enter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
 @keyframes float-slow {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }

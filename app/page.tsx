@@ -2954,6 +2954,46 @@ export default function Home() {
     }
     loadHistory();
   }
+
+  /* ══════════════════════════════════════════════════════════
+     DELETE REPORT — remove from Supabase + localStorage
+     ══════════════════════════════════════════════════════════ */
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
+
+  async function deleteReport(reportId: string) {
+    if (!user) return;
+    setDeletingId(reportId);
+    try {
+      const headers = await getAuthHeaders();
+      const { error } = await supabase
+        .from("analyses")
+        .delete()
+        .eq("id", reportId)
+        .eq("user_id", user.id);
+      if (error) {
+        console.error("[Aimlo] Delete report:", error.message);
+      }
+      // Remove from localStorage fallback too
+      try {
+        const key = `aimlo_local_reports_${user.id}`;
+        const raw = localStorage.getItem(key);
+        if (raw) {
+          const arr = JSON.parse(raw) as unknown[];
+          const filtered = arr.filter((r: any) => r?.id !== reportId);
+          localStorage.setItem(key, JSON.stringify(filtered));
+        }
+      } catch {}
+      // Update state immediately
+      setSavedReports((prev) => prev.filter((r) => r.id !== reportId));
+    } catch (err) {
+      console.error("[Aimlo] Delete report error:", err);
+    } finally {
+      setDeletingId(null);
+      setConfirmDeleteId(null);
+    }
+  }
+
   useEffect(() => {
     setSetup((prev) => {
       const comp = [...prev.teamComp];
@@ -3254,15 +3294,22 @@ export default function Home() {
             <div className="pointer-events-none absolute top-0 right-0 w-96 h-96 rounded-full bg-[#FF4655]/[0.06] blur-[120px]" />
             <div className="pointer-events-none absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-[#4D7CFF]/[0.04] blur-[100px]" />
 
-            {/* Agent splash (right side) */}
+            {/* Agent splash (right side) — large, animated, majestic */}
             {topAgent && (
-              <div className="absolute right-0 top-0 bottom-0 w-1/3 overflow-hidden">
+              <div className="absolute -right-8 -top-4 -bottom-4 w-1/2 overflow-hidden pointer-events-none">
                 <img
                   src={agentImgUrl(topAgent.name)}
                   alt=""
-                  className="h-full w-auto object-cover opacity-20"
-                  style={{ maskImage: 'linear-gradient(to left, rgba(0,0,0,0.6), transparent)', WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,0.6), transparent)' }}
+                  className="h-[120%] w-auto object-cover animate-float-slow"
+                  style={{
+                    opacity: 0.35,
+                    filter: `drop-shadow(0 0 40px rgba(255,70,85,0.2)) saturate(1.3)`,
+                    maskImage: 'linear-gradient(to left, rgba(0,0,0,0.8) 20%, transparent 80%)',
+                    WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,0.8) 20%, transparent 80%)',
+                  }}
                 />
+                {/* Glow ring behind agent */}
+                <div className="absolute top-1/2 right-16 -translate-y-1/2 w-48 h-48 rounded-full bg-[#FF4655]/[0.08] blur-[60px] animate-glow-pulse" />
               </div>
             )}
 
@@ -3555,115 +3602,149 @@ export default function Home() {
   /* HISTORY */
   if (screen === "history")
     return (
-      <main className={ds.pageBg}>
+      <main className="min-h-screen bg-black">
         <AmbientBg />
         <Navbar {...navProps} />
-        <div className="relative z-10 mx-auto max-w-3xl px-4 pt-20 pb-12 space-y-6">
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setScreen("dashboard")}
-              className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 text-xs text-neutral-400 transition hover:text-white"
-            >
-              {"\u2190"} {l.back}
+        <div className="relative z-10 mx-auto max-w-4xl px-4 pt-20 pb-12">
+
+          {/* ═══ HEADER — Valorant career style ═══ */}
+          <div className="mb-8 animate-slide-up">
+            <button onClick={() => setScreen("dashboard")} className="text-[12px] text-neutral-600 transition hover:text-white mb-4 flex items-center gap-1">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+              {l.back}
             </button>
-            <h2 className="text-lg font-bold text-white">{l.historyTitle}</h2>
+            <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2" style={{ letterSpacing: '-1.5px' }}>
+              {lang === "tr" ? "Maç " : "Match "}<span className="bg-gradient-to-r from-[#FF4655] to-[#4D7CFF] bg-clip-text text-transparent">{lang === "tr" ? "Geçmişi" : "History"}</span>
+            </h1>
+            {/* Stats bar */}
             {filteredReports.length > 0 && (
-              <span className="ml-auto text-xs text-neutral-500">
-                {l.dashWinRate}:{" "}
-                <span className={filteredWinRate >= 50 ? "text-emerald-400 font-bold" : "text-red-400 font-bold"}>
-                  {filteredWinRate}%
-                </span>{" "}
-                {IC.dot} {filteredReports.length} {l.dashMatches.toLowerCase()}
-              </span>
-            )}
-          </div>
-          {/* ── Filters ── */}
-          {savedReports.length > 0 && (
-            <div className={`${ds.card} p-4`}>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div>
-                  <label className="text-[10px] font-semibold uppercase tracking-[0.12em] text-neutral-500 mb-1 block">{l.historyFilterMap}</label>
-                  <select
-                    value={historyFilterMap}
-                    onChange={(e) => setHistoryFilterMap(e.target.value)}
-                    className={ds.selectBase + " !py-2 !text-xs"}
-                  >
-                    <option value="">{l.historyAll}</option>
-                    {uniqueMaps.map((m) => <option key={m} value={m}>{m}</option>)}
-                  </select>
+              <div className="flex items-center gap-6 mt-4">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl font-black text-white">{filteredReports.length}</span>
+                  <span className="text-[11px] text-neutral-500 uppercase tracking-wider">{l.dashMatches}</span>
                 </div>
-                <div>
-                  <label className="text-[10px] font-semibold uppercase tracking-[0.12em] text-neutral-500 mb-1 block">{l.historyFilterAgent}</label>
-                  <select
-                    value={historyFilterAgent}
-                    onChange={(e) => setHistoryFilterAgent(e.target.value)}
-                    className={ds.selectBase + " !py-2 !text-xs"}
-                  >
-                    <option value="">{l.historyAll}</option>
-                    {uniqueAgents.map((a) => <option key={a} value={a}>{a}</option>)}
-                  </select>
+                <div className="w-px h-6 bg-white/[0.06]" />
+                <div className="flex items-center gap-2">
+                  <span className={`text-2xl font-black ${filteredWinRate >= 50 ? "text-emerald-400" : "text-[#FF4655]"}`}>{filteredWinRate}%</span>
+                  <span className="text-[11px] text-neutral-500 uppercase tracking-wider">{l.dashWinRate}</span>
                 </div>
-                <div>
-                  <label className="text-[10px] font-semibold uppercase tracking-[0.12em] text-neutral-500 mb-1 block">{l.historyFilterResult}</label>
-                  <select
-                    value={historyFilterResult}
-                    onChange={(e) => setHistoryFilterResult(e.target.value as "all" | "wins" | "losses")}
-                    className={ds.selectBase + " !py-2 !text-xs"}
-                  >
-                    <option value="all">{l.historyAll}</option>
-                    <option value="wins">{l.historyWins}</option>
-                    <option value="losses">{l.historyLosses}</option>
-                  </select>
+                <div className="w-px h-6 bg-white/[0.06]" />
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl font-black text-emerald-400">{filteredReports.filter(r => r.won).length}</span>
+                  <span className="text-[9px] text-neutral-600">W</span>
+                  <span className="text-2xl font-black text-[#FF4655]">{filteredReports.filter(r => !r.won).length}</span>
+                  <span className="text-[9px] text-neutral-600">L</span>
                 </div>
               </div>
+            )}
+          </div>
+
+          {/* ═══ FILTERS ═══ */}
+          {savedReports.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-6 animate-slide-up stagger-1">
+              <select value={historyFilterMap} onChange={(e) => setHistoryFilterMap(e.target.value)} className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-2 text-[11px] text-neutral-300 outline-none transition hover:border-white/[0.15] focus:border-[#FF4655]/30">
+                <option value="">{l.historyFilterMap}: {l.historyAll}</option>
+                {uniqueMaps.map((m) => <option key={m} value={m}>{m}</option>)}
+              </select>
+              <select value={historyFilterAgent} onChange={(e) => setHistoryFilterAgent(e.target.value)} className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-2 text-[11px] text-neutral-300 outline-none transition hover:border-white/[0.15] focus:border-[#FF4655]/30">
+                <option value="">{l.historyFilterAgent}: {l.historyAll}</option>
+                {uniqueAgents.map((a) => <option key={a} value={a}>{a}</option>)}
+              </select>
+              <select value={historyFilterResult} onChange={(e) => setHistoryFilterResult(e.target.value as "all" | "wins" | "losses")} className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-2 text-[11px] text-neutral-300 outline-none transition hover:border-white/[0.15] focus:border-[#FF4655]/30">
+                <option value="all">{l.historyFilterResult}: {l.historyAll}</option>
+                <option value="wins">{l.historyWins}</option>
+                <option value="losses">{l.historyLosses}</option>
+              </select>
             </div>
           )}
-          {/* ── Filtered Stats ── */}
-          {filteredReports.length > 0 && (historyFilterMap || historyFilterAgent || historyFilterResult !== "all") && (
-            <div className="grid grid-cols-3 gap-3">
-              <StatCard label={l.dashWinRate} value={`${filteredWinRate}%`} color={filteredWinRate >= 50 ? "text-emerald-400" : "text-red-400"} />
-              <StatCard label={l.dashMatches} value={String(filteredReports.length)} sub={`${filteredReports.filter((r) => r.won).length}W ${filteredReports.filter((r) => !r.won).length}L`} />
-              <StatCard label={l.dashFreqDeath} value={(() => { const s: Record<string, number> = {}; filteredReports.forEach((r) => r.rounds.filter((rd) => !rd.skipped && !rd.survived && rd.deathLocation).forEach((rd) => { s[rd.deathLocation] = (s[rd.deathLocation] || 0) + 1; })); const top = Object.entries(s).sort((a, b) => b[1] - a[1])[0]; return top ? top[0] : "\u2014"; })()} color="text-amber-400" />
-            </div>
-          )}
+
+          {/* ═══ MATCH LIST — Valorant style ═══ */}
           {savedReports.length === 0 ? (
-            <div className={`${ds.card} p-12 text-center`}>
+            <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-16 text-center animate-slide-up">
               <AimloLogo size={72} className="mx-auto opacity-10 mb-4" />
               <p className="text-sm text-neutral-400">{l.historyEmpty}</p>
               <p className="mt-1 text-xs text-neutral-600">{l.historyEmptyDesc}</p>
             </div>
           ) : filteredReports.length === 0 ? (
-            <div className={`${ds.card} p-10 text-center`}>
+            <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-10 text-center animate-slide-up">
               <p className="text-sm text-neutral-400">{l.dashNoData}</p>
             </div>
           ) : (
             <div className="space-y-2">
-              {filteredReports.map((entry) => (
-                <button
+              {filteredReports.map((entry, idx) => (
+                <div
                   key={entry.id}
-                  onClick={() => { setViewingReport(entry); setScreen("reportDetail"); }}
-                  className={`w-full text-left ${ds.card} ${ds.cardHover} p-4 sm:p-5 flex items-center gap-4`}
+                  className="match-card-enter group relative rounded-xl overflow-hidden border border-white/[0.06] hover:border-white/[0.12] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/30"
+                  style={{ animationDelay: `${idx * 60}ms` }}
                 >
-                  <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-black/20 ring-1 ring-white/[0.06]">
-                    <img src={MAP_IMAGES[entry.map]} alt={entry.map} className="h-full w-full object-cover opacity-75" loading="lazy" />
+                  {/* Map background */}
+                  <div className="absolute inset-0">
+                    <img src={MAP_IMAGES[entry.map]} alt="" className="h-full w-full object-cover opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500" loading="lazy" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50" />
                   </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-sm font-bold text-white">{entry.map}</span>
-                      <span className="rounded-md bg-white/[0.05] px-2 py-0.5 text-[10px] font-medium text-neutral-400">{entry.agent}</span>
-                      <span className="rounded-md bg-white/[0.05] px-2 py-0.5 text-[10px] text-neutral-500">
-                        {entry.side === "attack" ? l.sideAttack : l.sideDefense}
-                      </span>
+
+                  {/* Win/loss indicator bar */}
+                  <div className={`absolute left-0 top-0 bottom-0 w-1 ${entry.won ? "bg-emerald-400" : "bg-[#FF4655]"}`} style={{ boxShadow: entry.won ? "0 0 10px rgba(52,211,153,0.4)" : "0 0 10px rgba(255,70,85,0.4)" }} />
+
+                  <div className="relative flex items-center gap-4 p-4 sm:p-5 pl-5">
+                    {/* Agent portrait */}
+                    <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg ring-1 ring-white/[0.08]">
+                      <img src={agentImgUrl(entry.agent)} alt={entry.agent} className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-300" loading="lazy" style={{ filter: "saturate(1.2)" }} />
                     </div>
-                    <p className="mt-1 text-[11px] text-neutral-600">{entry.date}</p>
+
+                    {/* Map thumbnail */}
+                    <div className="relative h-12 w-20 shrink-0 overflow-hidden rounded-lg ring-1 ring-white/[0.06] hidden sm:block">
+                      <img src={MAP_IMAGES[entry.map]} alt={entry.map} className="h-full w-full object-cover opacity-80" loading="lazy" />
+                    </div>
+
+                    {/* Info */}
+                    <div className="min-w-0 flex-1" onClick={() => { setViewingReport(entry); setScreen("reportDetail"); }} style={{ cursor: "pointer" }}>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-sm font-bold text-white">{entry.map}</span>
+                        <span className="text-[11px] text-neutral-500">{entry.agent}</span>
+                        <span className={`rounded px-1.5 py-0.5 text-[9px] font-bold uppercase ${entry.won ? "bg-emerald-500/10 text-emerald-400" : "bg-[#FF4655]/10 text-[#FF4655]"}`}>
+                          {entry.won ? l.victory : l.defeat}
+                        </span>
+                      </div>
+                      <p className="mt-1 text-[10px] text-neutral-600">{entry.date} · {entry.side === "attack" ? l.sideAttack : l.sideDefense}</p>
+                    </div>
+
+                    {/* Score */}
+                    <div className="text-right shrink-0 mr-2" onClick={() => { setViewingReport(entry); setScreen("reportDetail"); }} style={{ cursor: "pointer" }}>
+                      <p className="text-xl font-black text-white tracking-tight">{entry.score}</p>
+                    </div>
+
+                    {/* Delete button */}
+                    {confirmDeleteId === entry.id ? (
+                      <div className="flex items-center gap-1.5 shrink-0">
+                        <button
+                          onClick={() => deleteReport(entry.id)}
+                          disabled={deletingId === entry.id}
+                          className="rounded-lg bg-[#FF4655]/10 border border-[#FF4655]/30 px-3 py-1.5 text-[10px] font-bold text-[#FF4655] transition hover:bg-[#FF4655]/20 disabled:opacity-50"
+                        >
+                          {deletingId === entry.id ? "..." : (lang === "tr" ? "Sil" : "Delete")}
+                        </button>
+                        <button
+                          onClick={() => setConfirmDeleteId(null)}
+                          className="rounded-lg bg-white/[0.04] border border-white/[0.08] px-2.5 py-1.5 text-[10px] text-neutral-500 transition hover:text-white"
+                        >
+                          {lang === "tr" ? "İptal" : "Cancel"}
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => setConfirmDeleteId(entry.id)}
+                        className="shrink-0 rounded-lg p-2 text-neutral-700 opacity-0 group-hover:opacity-100 transition-all duration-200 hover:text-[#FF4655] hover:bg-[#FF4655]/[0.06]"
+                        title={lang === "tr" ? "Maçı sil" : "Delete match"}
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="3 6 5 6 21 6"/>
+                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                        </svg>
+                      </button>
+                    )}
                   </div>
-                  <div className="text-right shrink-0">
-                    <p className="text-lg font-extrabold text-white">{entry.score}</p>
-                    <p className={`text-[10px] font-bold uppercase ${entry.won ? "text-emerald-400" : "text-red-400"}`}>
-                      {entry.won ? l.victory : l.defeat}
-                    </p>
-                  </div>
-                </button>
+                </div>
               ))}
             </div>
           )}
