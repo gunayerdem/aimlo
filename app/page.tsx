@@ -1091,10 +1091,68 @@ function InlineError({ msg }: { msg?: string }) {
   return <p className="mt-1.5 text-xs text-red-400">{msg}</p>;
 }
 function AmbientBg() {
+  // Deterministic particle positions to avoid hydration mismatch
+  const particles = useMemo(() => [
+    { l: 12, t: 8, d: 0.2, dur: 4.2, o: 0.35, s: 2 },
+    { l: 87, t: 15, d: 1.1, dur: 5.1, o: 0.3, s: 2.5 },
+    { l: 34, t: 22, d: 0.8, dur: 3.8, o: 0.45, s: 1.8 },
+    { l: 65, t: 5, d: 2.3, dur: 6.2, o: 0.28, s: 2.2 },
+    { l: 8, t: 45, d: 1.5, dur: 4.5, o: 0.4, s: 1.8 },
+    { l: 92, t: 38, d: 0.3, dur: 5.5, o: 0.32, s: 2.5 },
+    { l: 45, t: 62, d: 3.1, dur: 3.5, o: 0.38, s: 2 },
+    { l: 73, t: 75, d: 0.7, dur: 4.8, o: 0.25, s: 3 },
+    { l: 22, t: 85, d: 2.0, dur: 5.8, o: 0.42, s: 1.8 },
+    { l: 55, t: 92, d: 1.8, dur: 4.1, o: 0.3, s: 2.2 },
+    { l: 3, t: 68, d: 0.5, dur: 6.5, o: 0.27, s: 2.5 },
+    { l: 78, t: 52, d: 2.8, dur: 3.3, o: 0.36, s: 1.5 },
+    { l: 41, t: 35, d: 1.3, dur: 5.3, o: 0.33, s: 2.8 },
+    { l: 96, t: 72, d: 3.5, dur: 4.6, o: 0.29, s: 2 },
+    { l: 18, t: 18, d: 0.9, dur: 5.9, o: 0.43, s: 2 },
+    { l: 60, t: 42, d: 2.5, dur: 3.6, o: 0.31, s: 2.8 },
+    { l: 30, t: 55, d: 1.7, dur: 4.3, o: 0.37, s: 1.8 },
+    { l: 82, t: 28, d: 3.3, dur: 5.7, o: 0.26, s: 2.5 },
+    { l: 50, t: 80, d: 0.1, dur: 4.9, o: 0.39, s: 2.2 },
+    { l: 15, t: 95, d: 2.2, dur: 3.9, o: 0.34, s: 2 },
+    // Extra particles for denser starfield
+    { l: 5, t: 30, d: 0.4, dur: 5.2, o: 0.28, s: 1.5 },
+    { l: 25, t: 12, d: 1.6, dur: 4.4, o: 0.35, s: 2.2 },
+    { l: 48, t: 48, d: 2.7, dur: 3.7, o: 0.22, s: 2.8 },
+    { l: 70, t: 30, d: 0.9, dur: 6.1, o: 0.4, s: 1.8 },
+    { l: 90, t: 60, d: 3.2, dur: 4.0, o: 0.33, s: 2 },
+    { l: 38, t: 78, d: 1.4, dur: 5.6, o: 0.29, s: 2.5 },
+    { l: 62, t: 18, d: 2.1, dur: 3.4, o: 0.36, s: 1.6 },
+    { l: 85, t: 85, d: 0.6, dur: 5.0, o: 0.25, s: 3 },
+    { l: 16, t: 58, d: 3.8, dur: 4.7, o: 0.38, s: 1.5 },
+    { l: 72, t: 45, d: 1.0, dur: 5.4, o: 0.31, s: 2.2 },
+    { l: 43, t: 10, d: 2.4, dur: 3.9, o: 0.42, s: 1.8 },
+    { l: 58, t: 70, d: 0.3, dur: 6.3, o: 0.27, s: 2.5 },
+    { l: 95, t: 20, d: 1.8, dur: 4.2, o: 0.35, s: 2 },
+    { l: 28, t: 42, d: 3.0, dur: 5.1, o: 0.3, s: 1.5 },
+    { l: 7, t: 88, d: 2.6, dur: 3.6, o: 0.4, s: 2.2 },
+    { l: 68, t: 58, d: 0.8, dur: 4.8, o: 0.33, s: 2.8 },
+    { l: 52, t: 25, d: 1.2, dur: 5.5, o: 0.28, s: 1.8 },
+    { l: 35, t: 95, d: 3.4, dur: 4.3, o: 0.36, s: 2 },
+    { l: 80, t: 10, d: 0.1, dur: 5.8, o: 0.44, s: 1.5 },
+    { l: 20, t: 65, d: 2.9, dur: 3.2, o: 0.32, s: 2.5 },
+  ], []);
+
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-      <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-[500px] w-[700px] rounded-full bg-blue-950/[0.08] blur-[100px]" />
-      <div className="absolute -bottom-32 -left-32 h-[300px] w-[300px] rounded-full bg-cyan-950/[0.06] blur-[80px]" />
+      {particles.map((p, i) => (
+        <div
+          key={i}
+          className="particle"
+          style={{
+            left: `${p.l}%`,
+            top: `${p.t}%`,
+            animationDelay: `${p.d}s`,
+            animationDuration: `${p.dur}s`,
+            opacity: p.o,
+            width: `${p.s}px`,
+            height: `${p.s}px`,
+          }}
+        />
+      ))}
     </div>
   );
 }
@@ -1508,803 +1566,444 @@ function StatCard({
 /* ══════════════════════════════════════════════════════════
    LANDING PAGE
    ══════════════════════════════════════════════════════════ */
-function LandingPage({
-  lang,
-  user,
-  onStartAnalysis,
-  onLogin,
-  onRegister,
-  onLangToggle,
-  onDashboard,
-  onSignOut,
-}: {
-  lang: Lang;
-  user: User | null;
-  onStartAnalysis: () => void;
-  onLogin: () => void;
-  onRegister: () => void;
-  onLangToggle: () => void;
-  onDashboard: () => void;
-  onSignOut: () => void;
-}) {
+function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangToggle, onDashboard, onSignOut }: { lang: Lang; user: User | null; onStartAnalysis: () => void; onLogin: () => void; onRegister: () => void; onLangToggle: () => void; onDashboard: () => void; onSignOut: () => void }) {
   const l = t[lang];
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [mobileMenu, setMobileMenu] = useState(false);
-  const statsReveal = useScrollReveal(0.2);
+  const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
   const howReveal = useScrollReveal(0.15);
   const diffReveal = useScrollReveal(0.15);
+  const featReveal = useScrollReveal(0.1);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setVisibleSections((prev) => new Set(prev).add(entry.target.id));
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll("[data-animate]").forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   function scrollTo(id: string) {
     setMobileMenu(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   }
+  const isVisible = (id: string) => visibleSections.has(id);
+
+  // Valorant competitive ranks — all ranks Iron → Radiant
+  const RANK_UUID = "03621f52-342b-cf4e-4f86-9350a49c6d04";
+  const rankShowcase = [
+    { tier: 3,  name: "Iron",      color: "#8C8C8C" },
+    { tier: 6,  name: "Bronze",    color: "#B97450" },
+    { tier: 9,  name: "Silver",    color: "#C0C0C0" },
+    { tier: 12, name: "Gold",      color: "#ECB73E" },
+    { tier: 15, name: "Platinum",  color: "#32B8B8" },
+    { tier: 18, name: "Diamond",   color: "#B489FF" },
+    { tier: 21, name: "Ascendant", color: "#2ECC71" },
+    { tier: 24, name: "Immortal",  color: "#FF4655" },
+    { tier: 27, name: "Radiant",   color: "#FFFFAA" },
+  ];
+
+  // Feature card data with Valorant agent portraits for rich visuals
+  const featureVisuals = [
+    { agentId: "e370fa57-4757-3604-3648-499e1f642d3f", color: "#FF4655" },  // KAY/O - instant feedback
+    { agentId: "707eab51-4836-f488-046a-cda6bf494859", color: "#4D7CFF" },  // Viper - detailed reports
+    { agentId: "117ed9e3-49f3-6512-3ccf-0cada7e3823b", color: "#B44DFF" },  // Cypher - pattern detection
+    { agentId: "22697a3d-45bf-8dd7-4fec-84a9e28c69d7", color: "#ECB73E" },  // Chamber - growth tracking
+  ];
+
+  const benefitIcons = [
+    <svg key="0" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>,
+    <svg key="1" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>,
+    <svg key="2" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 10-5.12 5.12L8 12.24"/></svg>,
+  ];
+
   return (
-    <main className={`${ds.pageBg} relative overflow-x-hidden`}>
+    <main className="min-h-screen bg-black relative overflow-x-hidden">
       <AmbientBg />
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.06] bg-[#050810]/80 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+
+      {/* ─── NAVBAR — Xtract style ─── */}
+      <nav className="fixed top-0 left-0 right-0 z-50 nav-xtract">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
           <div className="flex items-center gap-2.5">
-            <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 90, width: 'auto' }} draggable={false} />
-            <span className="hidden sm:inline rounded-md bg-blue-500/10 border border-blue-500/10 px-1.5 py-0.5 text-[9px] font-bold text-blue-400 uppercase tracking-wider">
-              Beta
-            </span>
+            <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 30, width: 'auto' }} draggable={false} />
           </div>
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-8">
             {Object.entries(l.landingNav).map(([key, label]) => (
-              <button
-                key={key}
-                onClick={() => scrollTo(`section-${key}`)}
-                className="text-[13px] font-medium text-neutral-400 transition-colors duration-200 hover:text-white"
-              >
+              <button key={key} onClick={() => scrollTo(`section-${key}`)} className="text-[13px] text-neutral-400 transition-colors duration-200 hover:text-white font-medium">
                 {label}
               </button>
             ))}
           </div>
-          <div className="flex items-center gap-2.5">
-            <button
-              onClick={onLangToggle}
-              className="rounded-lg border border-white/[0.06] bg-white/[0.03] px-2.5 py-1 text-[10px] font-bold text-neutral-400 transition-all hover:border-white/[0.12] hover:text-white"
-            >
+          <div className="flex items-center gap-3">
+            <button onClick={onLangToggle} className="rounded-lg border border-white/[0.08] px-2.5 py-1.5 text-[11px] font-semibold text-neutral-500 transition hover:text-white hover:border-white/[0.15]">
               {lang === "tr" ? "TR" : "EN"}
             </button>
             {user ? (
               <>
-                <button
-                  onClick={onDashboard}
-                  className="hidden sm:block rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-2 text-[12px] font-bold text-white shadow-md shadow-blue-900/20 transition-all duration-300 hover:shadow-lg hover:brightness-110"
-                >
+                <button onClick={onDashboard} className="btn-neon hidden sm:block rounded-lg px-5 py-2 text-[12px]">
                   {l.goToDashboard}
                 </button>
-                <span className="hidden sm:flex items-center gap-1.5 rounded-lg border border-white/[0.06] bg-white/[0.03] px-2.5 py-1.5">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-cyan-400 shrink-0">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                  </svg>
-                  <span className="text-[11px] font-semibold text-neutral-300 truncate max-w-[100px]">
-                    {user.user_metadata?.username || user.user_metadata?.first_name || user.email?.split("@")[0] || "User"}
-                  </span>
-                </span>
-                <button
-                  onClick={onSignOut}
-                  className="hidden sm:block rounded-lg border border-white/[0.06] bg-white/[0.02] px-3 py-2 text-[11px] font-medium text-neutral-500 transition-all hover:text-red-400 hover:border-red-500/20"
-                >
+                <button onClick={onSignOut} className="hidden sm:block text-[12px] text-neutral-600 transition hover:text-red-400 px-2">
                   {l.authSignOut}
                 </button>
               </>
             ) : (
               <>
-                <button
-                  onClick={onLogin}
-                  className="hidden sm:block rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-2 text-[12px] font-semibold text-neutral-300 transition-all hover:border-white/[0.14] hover:text-white"
-                >
+                <button onClick={onLogin} className="hidden sm:block text-[13px] text-neutral-400 transition hover:text-white px-2 font-medium">
                   {l.authLogin}
                 </button>
-                <button
-                  onClick={onRegister}
-                  className="hidden sm:block rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-2 text-[12px] font-bold text-white shadow-md shadow-blue-900/20 transition-all duration-300 hover:shadow-lg hover:brightness-110"
-                >
+                <button onClick={onRegister} className="btn-neon hidden sm:block rounded-lg px-5 py-2 text-[12px]">
                   {l.authRegister}
                 </button>
               </>
             )}
-            <button
-              onClick={() => setMobileMenu(!mobileMenu)}
-              className="md:hidden rounded-lg border border-white/[0.06] bg-white/[0.03] p-2 text-neutral-400 hover:text-white transition"
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M3 12h18M3 6h18M3 18h18" />
-              </svg>
+            <button onClick={() => setMobileMenu(!mobileMenu)} className="md:hidden p-2 text-neutral-400 hover:text-white transition">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
             </button>
           </div>
         </div>
         {mobileMenu && (
-          <div className="md:hidden border-t border-white/[0.06] bg-[#050810]/95 backdrop-blur-xl px-4 py-4 space-y-3">
+          <div className="md:hidden border-t border-white/[0.06] bg-black/95 backdrop-blur-xl px-5 py-4 space-y-2">
             {Object.entries(l.landingNav).map(([key, label]) => (
-              <button
-                key={key}
-                onClick={() => scrollTo(`section-${key}`)}
-                className="block w-full text-left text-sm text-neutral-400 py-2 transition hover:text-white"
-              >
-                {label}
-              </button>
+              <button key={key} onClick={() => scrollTo(`section-${key}`)} className="block w-full text-left text-sm text-neutral-400 py-2 hover:text-white transition">{label}</button>
             ))}
-            <div className="flex gap-2 pt-2">
+            <div className="flex gap-2 pt-3">
               {user ? (
                 <>
-                  <button
-                    onClick={() => {
-                      setMobileMenu(false);
-                      onDashboard();
-                    }}
-                    className="flex-1 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 py-2.5 text-sm font-bold text-white"
-                  >
-                    {l.goToDashboard}
-                  </button>
-                  <button
-                    onClick={() => {
-                      setMobileMenu(false);
-                      onSignOut();
-                    }}
-                    className="flex-1 rounded-xl border border-white/[0.08] py-2.5 text-sm font-medium text-neutral-400"
-                  >
-                    {l.authSignOut}
-                  </button>
+                  <button onClick={() => { setMobileMenu(false); onDashboard(); }} className="btn-neon flex-1 rounded-lg py-2.5 text-sm">{l.goToDashboard}</button>
+                  <button onClick={() => { setMobileMenu(false); onSignOut(); }} className="btn-ghost flex-1 rounded-lg py-2.5 text-sm">{l.authSignOut}</button>
                 </>
               ) : (
                 <>
-                  <button
-                    onClick={() => {
-                      setMobileMenu(false);
-                      onLogin();
-                    }}
-                    className="flex-1 rounded-xl border border-white/[0.08] py-2.5 text-sm font-semibold text-neutral-300"
-                  >
-                    {l.authLogin}
-                  </button>
-                  <button
-                    onClick={() => {
-                      setMobileMenu(false);
-                      onRegister();
-                    }}
-                    className="flex-1 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 py-2.5 text-sm font-bold text-white"
-                  >
-                    {l.authRegister}
-                  </button>
+                  <button onClick={() => { setMobileMenu(false); onLogin(); }} className="btn-ghost flex-1 rounded-lg py-2.5 text-sm">{l.authLogin}</button>
+                  <button onClick={() => { setMobileMenu(false); onRegister(); }} className="btn-neon flex-1 rounded-lg py-2.5 text-sm">{l.authRegister}</button>
                 </>
               )}
             </div>
           </div>
         )}
       </nav>
-      <section className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 pt-32 sm:pt-40 pb-20 sm:pb-28 text-center">
-        <div className="space-y-8">
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/15 bg-blue-500/[0.05] px-4 py-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse" />
-            <span className="text-[11px] font-semibold text-blue-400 uppercase tracking-wider">
-              AI-Powered Coaching
-            </span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
-            {l.landingHeroTitle}
-          </h1>
-          <p className="mx-auto max-w-2xl text-base sm:text-lg text-neutral-400 leading-relaxed">
-            {l.landingHeroSub}
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
-            {user ? (
-              <>
-                <button
-                  onClick={onDashboard}
-                  className="group rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-blue-900/25 transition-all duration-300 hover:shadow-xl hover:shadow-blue-800/30 hover:-translate-y-0.5 active:scale-[0.98]"
-                >
-                  {l.goToDashboard}
-                  <span className="ml-2 inline-block transition-transform duration-200 group-hover:translate-x-1">{IC.arrow}</span>
-                </button>
-                <button
-                  onClick={() => document.getElementById("download-section")?.scrollIntoView({ behavior: "smooth" })}
-                  className="rounded-xl border border-cyan-500/20 bg-cyan-500/5 px-8 py-4 text-base font-semibold text-cyan-400 transition-all duration-200 hover:bg-cyan-500/10 hover:border-cyan-500/30"
-                >
-                  <span className="mr-2">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline-block"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
-                  </span>
-                  {l.landingCTA}
-                </button>
-              </>
-            ) : (
-              <>
-                <button
-                  onClick={() => document.getElementById("download-section")?.scrollIntoView({ behavior: "smooth" })}
-                  className="group rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-blue-900/25 transition-all duration-300 hover:shadow-xl hover:shadow-blue-800/30 hover:-translate-y-0.5 active:scale-[0.98]"
-                >
-                  <span className="mr-2">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline-block"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
-                  </span>
-                  {l.landingCTA}
-                </button>
-                <button
-                  onClick={onLogin}
-                  className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-8 py-4 text-base font-semibold text-neutral-300 transition-all duration-200 hover:border-white/[0.14] hover:text-white"
-                >
-                  {l.authLogin}
-                </button>
-              </>
-            )}
+
+      {/* ─── HERO — Xtract style with orb ─── */}
+      <section className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pt-32 sm:pt-44 pb-16 sm:pb-24 text-center">
+        {/* Background orbs */}
+        <div className="hero-orb" style={{ top: '10%', right: '-10%' }} />
+        <div className="hero-orb-inner" style={{ top: '20%', right: '5%' }} />
+
+        {/* Pill badge — Xtract style */}
+        <div className="mb-8 animate-slide-up flex justify-center">
+          <div className="pill-badge">
+            <span className="pill-tag">{lang === "tr" ? "Yeni" : "New"}</span>
+            <span>{lang === "tr" ? "AI Destekli Valorant Koçluk" : "AI-Powered Valorant Coaching"}</span>
           </div>
         </div>
-      </section>
-      <section className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 pb-24">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          {l.landingFeatures.map((f, i) => (
-            <div
-              key={i}
-              className={`${ds.card} ${ds.cardInner} ${ds.cardHover} text-center`}
-            >
-              <div className="relative mx-auto mb-4">
-                <div className="absolute inset-0 m-auto h-12 w-12 rounded-xl bg-blue-500/[0.12] blur-xl" />
-                <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/[0.12] to-cyan-500/[0.08] border border-blue-500/15 shadow-lg shadow-blue-900/10">
-                  <FeatureIcon icon={f.icon} />
-                </div>
-              </div>
-              <h3 className="text-sm font-bold text-white mb-1">{f.title}</h3>
-              <p className="text-[12px] text-neutral-500 leading-relaxed">
-                {f.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-      <section
-        ref={howReveal.ref}
-        className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 pb-24"
-      >
-        <h2
-          className={`text-2xl sm:text-3xl font-extrabold text-white mb-10 text-center transition-all duration-700 ${howReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-        >
-          {l.landingHowTitle}
-        </h2>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          {l.landingHowSteps.map((s, i) => (
-            <div
-              key={i}
-              className={`${ds.card} ${ds.cardInner} text-center transition-all duration-700 ${howReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-              style={{ transitionDelay: `${i * 100}ms` }}
-            >
-              <div className="relative mx-auto mb-4">
-                <div className="absolute inset-0 m-auto h-10 w-10 rounded-full bg-blue-500/20 blur-lg" />
-                <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 shadow-lg shadow-blue-900/25 ring-1 ring-white/10">
-                  {i === 0 && (
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="white"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    >
-                      <circle
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        strokeWidth="0"
-                        fill="rgba(255,255,255,0.15)"
-                      />
-                      <path d="M12 6v6l4 2" />
-                      <circle cx="12" cy="12" r="9" />
-                    </svg>
-                  )}
-                  {i === 1 && (
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="white"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    >
-                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-                    </svg>
-                  )}
-                  {i === 2 && (
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="white"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    >
-                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                    </svg>
-                  )}
-                  {i === 3 && (
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="white"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    >
-                      <line x1="18" y1="20" x2="18" y2="10" />
-                      <line x1="12" y1="20" x2="12" y2="4" />
-                      <line x1="6" y1="20" x2="6" y2="14" />
-                    </svg>
-                  )}
-                </div>
-                <span className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#0b1120] ring-2 ring-blue-500/30 text-[9px] font-bold text-blue-400">
-                  {s.step}
-                </span>
-              </div>
-              <h3 className="text-sm font-bold text-white mb-1">{s.title}</h3>
-              <p className="text-[12px] text-neutral-500 leading-relaxed">
-                {s.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-      <section
-        id="section-about"
-        className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 py-20"
-      >
-        <div className={`${ds.card} overflow-hidden`}>
-          <div className="p-8 sm:p-12 space-y-8">
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-4">
-                {l.landingAboutTitle}
-              </h2>
-              <p className="text-base text-neutral-400 leading-relaxed max-w-3xl">
-                {l.landingAboutText}
-              </p>
-              <p className="text-base text-neutral-400 leading-relaxed max-w-3xl mt-3">
-                {l.landingAboutMission}
-              </p>
-            </div>
-            <div className="grid md:grid-cols-2 gap-5 pt-4">
-              <div className="relative rounded-2xl border border-cyan-500/10 bg-gradient-to-br from-cyan-500/[0.04] to-transparent p-7 transition-all duration-300 hover:border-cyan-500/20 hover:from-cyan-500/[0.07] group overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/[0.04] rounded-full blur-[60px] group-hover:bg-cyan-500/[0.08] transition-all duration-500" />
-                <div className="relative">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/20 to-cyan-600/10 border border-cyan-500/15 shadow-lg shadow-cyan-900/10">
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        className="text-cyan-400"
-                      >
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                        <circle cx="12" cy="7" r="4" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-white">
-                        {l.landingB2CTitle}
-                      </h3>
-                      <p className="text-[10px] text-cyan-400/70 font-medium uppercase tracking-wider">
-                        {lang === "tr"
-                          ? "Kendi hızında ilerle"
-                          : "Progress at your pace"}
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-sm text-neutral-400 leading-relaxed">
-                    {l.landingB2CText}
-                  </p>
-                </div>
-              </div>
-              <div className="relative rounded-2xl border border-blue-500/10 bg-gradient-to-br from-blue-500/[0.04] to-transparent p-7 transition-all duration-300 hover:border-blue-500/20 hover:from-blue-500/[0.07] group overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/[0.04] rounded-full blur-[60px] group-hover:bg-blue-500/[0.08] transition-all duration-500" />
-                <div className="relative">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/15 shadow-lg shadow-blue-900/10">
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        className="text-blue-400"
-                      >
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                        <circle cx="9" cy="7" r="4" />
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-white">
-                        {l.landingB2BTitle}
-                      </h3>
-                      <p className="text-[10px] text-blue-400/70 font-medium uppercase tracking-wider">
-                        {lang === "tr"
-                          ? "Veriye dayalı kararlar"
-                          : "Data-driven decisions"}
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-sm text-neutral-400 leading-relaxed">
-                    {l.landingB2BText}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section
-        ref={diffReveal.ref}
-        className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 pb-24"
-      >
-        <h2
-          className={`text-2xl sm:text-3xl font-extrabold text-white mb-10 text-center transition-all duration-700 ${diffReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-        >
-          {lang === "tr" ? "Neden " : "Why "}
-          <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 88, width: 'auto', display: 'inline-block', verticalAlign: 'middle' }} draggable={false} />?
-        </h2>
-        <div className="grid md:grid-cols-3 gap-4">
-          {l.landingDiffItems.map((item, i) => (
-            <div
-              key={i}
-              className={`${ds.card} ${ds.cardInner} border-t-2 border-t-blue-500/20 transition-all duration-700 ${diffReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-              style={{ transitionDelay: `${i * 120}ms` }}
-            >
-              <h3 className="text-base font-bold text-white mb-2">
-                {item.title}
-              </h3>
-              <p className="text-sm text-neutral-400 leading-relaxed">
-                {item.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-      <section
-        id="section-blog"
-        className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 pb-24"
-      >
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-8 text-center">
-          {l.landingBlogTitle}
-        </h2>
-        <div className="grid md:grid-cols-3 gap-4">
-          {/* Agents — 5 agent portraits composite */}
-          <a
-            href="https://playvalorant.com/en-us/agents/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${ds.card} overflow-hidden group cursor-pointer ${ds.cardHover}`}
-          >
-            <div className="relative h-40 overflow-hidden bg-gradient-to-br from-[#0d1a2d] to-[#0b1120]">
-              <div className="absolute inset-0 flex items-center justify-center gap-[-8px]">
-                {[
-                  "add6443a-41bd-e414-f6ad-e58d267f4e95",
-                  "a3bfb853-43b2-7238-a4f1-ad90e9e46bcc",
-                  "569fdd95-4d10-43ab-ca70-79becc718b46",
-                  "dade69b4-4f5a-8528-247b-219e5a1facd6",
-                  "8e253930-4c05-31dd-1b6c-968525494517",
-                ].map((id, i) => (
-                  <img
-                    key={id}
-                    src={`https://media.valorant-api.com/agents/${id}/displayicon.png`}
-                    alt=""
-                    className="h-20 w-20 object-contain opacity-50 group-hover:opacity-75 transition-all duration-500"
-                    style={{
-                      marginLeft: i > 0 ? "-12px" : "0",
-                      zIndex: 5 - i,
-                      filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.5))",
-                    }}
-                    loading="lazy"
-                  />
-                ))}
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0b1120] via-[#0b1120]/30 to-transparent" />
-              <div className="absolute bottom-3 left-4 flex items-center gap-2">
-                <span className="rounded-md bg-cyan-500/20 border border-cyan-500/20 px-2 py-0.5 text-[9px] font-bold text-cyan-400 uppercase tracking-wider">
-                  {lang === "tr" ? "Rehber" : "Guide"}
-                </span>
-              </div>
-            </div>
-            <div className="p-4">
-              <h3 className="text-sm font-bold text-white mb-1 group-hover:text-cyan-300 transition-colors">
-                {lang === "tr" ? "Tüm Ajanlar" : "All Agents"}
-              </h3>
-              <p className="text-[12px] text-neutral-500 leading-relaxed">
-                {lang === "tr"
-                  ? "Her ajanın yetenekleri, rolleri ve en iyi stratejileri"
-                  : "Abilities, roles, and best strategies for every agent"}
-              </p>
-            </div>
-          </a>
-          {/* Weapons — Vandal display icon */}
-          <a
-            href="https://playvalorant.com/en-us/arsenal/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${ds.card} overflow-hidden group cursor-pointer ${ds.cardHover}`}
-          >
-            <div className="relative h-40 overflow-hidden bg-gradient-to-br from-[#1a1510] to-[#0b1120]">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <img
-                  src="https://media.valorant-api.com/weapons/9c82e19d-4575-0200-1a81-3eacf00cf872/displayicon.png"
-                  alt="Vandal"
-                  className="h-24 w-auto object-contain opacity-45 group-hover:opacity-70 group-hover:scale-105 transition-all duration-500"
-                  style={{
-                    filter: "drop-shadow(0 4px 16px rgba(245,158,11,0.15))",
-                  }}
-                  loading="lazy"
-                />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0b1120] via-[#0b1120]/20 to-transparent" />
-              <div className="absolute bottom-3 left-4">
-                <span className="rounded-md bg-amber-500/20 border border-amber-500/20 px-2 py-0.5 text-[9px] font-bold text-amber-400 uppercase tracking-wider">
-                  {lang === "tr" ? "Cephanelik" : "Arsenal"}
-                </span>
-              </div>
-            </div>
-            <div className="p-4">
-              <h3 className="text-sm font-bold text-white mb-1 group-hover:text-amber-300 transition-colors">
-                {lang === "tr" ? "Tüm Silahlar" : "All Weapons"}
-              </h3>
-              <p className="text-[12px] text-neutral-500 leading-relaxed">
-                {lang === "tr"
-                  ? "Silah istatistikleri, hasar değerleri ve spray pattern rehberi"
-                  : "Weapon stats, damage values, and spray pattern guide"}
-              </p>
-            </div>
-          </a>
-          {/* Patch Notes — map splash background */}
-          <a
-            href="https://playvalorant.com/en-us/news/game-updates/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${ds.card} overflow-hidden group cursor-pointer ${ds.cardHover}`}
-          >
-            <div className="relative h-40 overflow-hidden">
-              <img
-                src="https://media.valorant-api.com/maps/7eaecc1b-4337-bbf6-6ab9-04b8f06b3319/splash.png"
-                alt="Patch Notes"
-                className="h-full w-full object-cover opacity-30 group-hover:opacity-50 group-hover:scale-105 transition-all duration-500"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0b1120] via-[#0b1120]/40 to-purple-900/10" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="rounded-2xl bg-purple-500/10 border border-purple-500/15 p-3 backdrop-blur-sm group-hover:bg-purple-500/15 transition-all duration-300">
-                  <svg
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    className="text-purple-400"
-                  >
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                    <polyline points="14 2 14 8 20 8" />
-                    <line x1="16" y1="13" x2="8" y2="13" />
-                    <line x1="16" y1="17" x2="8" y2="17" />
-                  </svg>
-                </div>
-              </div>
-              <div className="absolute bottom-3 left-4">
-                <span className="rounded-md bg-purple-500/20 border border-purple-500/20 px-2 py-0.5 text-[9px] font-bold text-purple-400 uppercase tracking-wider">
-                  {lang === "tr" ? "Güncelleme" : "Updates"}
-                </span>
-              </div>
-            </div>
-            <div className="p-4">
-              <h3 className="text-sm font-bold text-white mb-1 group-hover:text-purple-300 transition-colors">
-                {lang === "tr" ? "Son Patch Notları" : "Latest Patch Notes"}
-              </h3>
-              <p className="text-[12px] text-neutral-500 leading-relaxed">
-                {lang === "tr"
-                  ? "Valorant'ın en son değişiklikleri, denge ayarları ve yenilikler"
-                  : "Latest Valorant changes, balance updates, and new features"}
-              </p>
-            </div>
-          </a>
-        </div>
-      </section>
-      {/* ─── Download Section ─── */}
-      <section id="download-section" className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 pb-28">
-        <div className={`${ds.card} overflow-hidden relative`}>
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
-          <div className="p-8 sm:p-12 text-center relative">
-            <div className="pointer-events-none absolute top-0 right-0 h-60 w-60 rounded-full bg-cyan-900/10 blur-[100px]" />
-            <div className="relative">
-              <img src="/aimlo-logo.png" alt="AIMLO" className="mx-auto mb-6" style={{ height: 120, width: 'auto' }} draggable={false} />
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
-                {lang === "tr" ? "Desktop'ı İndir" : "Download Desktop"}
-              </h2>
-              <p className="text-base text-neutral-400 mb-6 max-w-xl mx-auto">
-                {lang === "tr"
-                  ? "AI destekli Valorant koçunu masaüstüne indir. Oyununu otomatik izlesin, round sonrası anında feedback versin."
-                  : "Download the AI-powered Valorant coach. Auto-watches your game, gives instant post-round feedback."}
-              </p>
-              <div className="flex flex-wrap justify-center gap-3 mb-6">
-                {[
-                  lang === "tr" ? "🎯 Otomatik oyun izleme" : "🎯 Auto game tracking",
-                  lang === "tr" ? "⚡ Round sonrası AI feedback" : "⚡ Post-round AI feedback",
-                  lang === "tr" ? "🖥️ Overlay desteği" : "🖥️ Overlay support",
-                ].map((f, i) => (
-                  <span key={i} className="rounded-lg bg-white/[0.04] border border-white/[0.06] px-3 py-1.5 text-xs text-neutral-400">{f}</span>
-                ))}
-              </div>
-              <button className="rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-10 py-4 text-base font-bold text-white shadow-lg shadow-blue-900/25 transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.98]">
-                <span className="mr-2">⬇</span>
-                {lang === "tr" ? "Windows için İndir" : "Download for Windows"}
+
+        {/* Heading — large, tight letter-spacing like Xtract */}
+        <h1 className="text-5xl sm:text-6xl lg:text-[72px] font-semibold text-white leading-[1.08] mb-6 animate-slide-up stagger-1" style={{ letterSpacing: '-2.5px' }}>
+          {l.landingHeroTitle}
+        </h1>
+
+        {/* Sub text */}
+        <p className="mx-auto max-w-lg text-base sm:text-[17px] text-neutral-400 leading-relaxed mb-10 animate-slide-up stagger-2">
+          {l.landingHeroSub}
+        </p>
+
+        {/* CTA buttons — Xtract dual button style */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 animate-slide-up stagger-3">
+          {user ? (
+            <>
+              <button onClick={onDashboard} className="btn-neon rounded-xl px-8 py-3.5 text-[14px] flex items-center gap-2">
+                {l.goToDashboard}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
               </button>
-              <p className="mt-3 text-xs text-neutral-600">Windows 10+ · 100MB · {lang === "tr" ? "Ücretsiz" : "Free"}</p>
-            </div>
-          </div>
+              <button onClick={() => document.getElementById("download-section")?.scrollIntoView({ behavior: "smooth" })} className="btn-ghost rounded-xl px-8 py-3.5 text-[14px]">
+                {l.landingCTA}
+              </button>
+            </>
+          ) : (
+            <>
+              <button onClick={() => document.getElementById("download-section")?.scrollIntoView({ behavior: "smooth" })} className="btn-neon rounded-xl px-8 py-3.5 text-[14px] flex items-center gap-2">
+                {l.landingCTA}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+              </button>
+              <button onClick={onLogin} className="btn-ghost rounded-xl px-8 py-3.5 text-[14px]">
+                {l.authLogin}
+              </button>
+            </>
+          )}
+        </div>
+
+      </section>
+
+      {/* ─── RANK SHOWCASE ─── */}
+      <section className="relative z-10 mx-auto max-w-6xl px-5 sm:px-8 pb-28">
+        <div className="section-divider mb-16" />
+        <p className="text-center text-[11px] uppercase tracking-[0.2em] text-neutral-600 font-semibold mb-4 animate-slide-up stagger-4">
+          {lang === "tr" ? "Her seviyeye uygun koçluk" : "Coaching for every rank"}
+        </p>
+        <h2 className="text-2xl sm:text-3xl font-semibold text-white text-center mb-12 animate-slide-up stagger-4" style={{ letterSpacing: '-1px' }}>
+          {lang === "tr" ? "Iron'dan Radiant'a Kadar" : "From Iron to Radiant"}
+        </h2>
+        <div className="flex items-end justify-center gap-2 sm:gap-4 animate-slide-up stagger-5">
+          {rankShowcase.map((rank, i) => {
+            // Radiant is tallest, scaling up from Iron
+            const scale = 0.7 + (i / (rankShowcase.length - 1)) * 0.5;
+            return (
+              <div key={rank.tier} className="group relative flex flex-col items-center transition-all duration-300 hover:-translate-y-2">
+                <div
+                  className="relative rounded-xl border border-white/[0.06] bg-white/[0.02] p-2 sm:p-3 transition-all duration-300 group-hover:border-white/[0.12]"
+                  style={{
+                    boxShadow: `0 0 0 rgba(0,0,0,0)`,
+                    transition: 'all 0.3s',
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.boxShadow = `0 0 25px ${rank.color}25, 0 10px 40px rgba(0,0,0,0.3)`; e.currentTarget.style.borderColor = `${rank.color}30`; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.boxShadow = `0 0 0 rgba(0,0,0,0)`; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; }}
+                >
+                  <img
+                    src={`https://media.valorant-api.com/competitivetiers/${RANK_UUID}/${rank.tier}/largeicon.png`}
+                    alt={rank.name}
+                    className="object-contain relative z-10 transition-transform duration-300 group-hover:scale-110"
+                    style={{ width: `${scale * 64}px`, height: `${scale * 64}px`, filter: `drop-shadow(0 0 12px ${rank.color}35)` }}
+                    loading="lazy"
+                    draggable={false}
+                  />
+                </div>
+                <span className="mt-2 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider transition-colors duration-300 group-hover:text-white" style={{ color: rank.color }}>{rank.name}</span>
+              </div>
+            );
+          })}
         </div>
       </section>
 
-      <section
-        id="section-faq"
-        className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 pb-24"
-      >
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-8 text-center">
+      {/* ─── FEATURES — Xtract card grid ─── */}
+      <section ref={featReveal.ref} id="section-features" data-animate className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pb-28">
+        <div className="section-divider mb-16" />
+        <p className="text-center text-[11px] uppercase tracking-[0.2em] text-[#FF4655]/50 font-semibold mb-4">
+          {lang === "tr" ? "Özellikler" : "Features"}
+        </p>
+        <h2 className={`text-3xl sm:text-[44px] font-semibold text-white text-center mb-14 leading-tight transition-all duration-700 ${featReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ letterSpacing: '-1.5px' }}>
+          {lang === "tr" ? "AI ile Oyununu Bir Üst Seviyeye Taşı" : "Take Your Game to the Next Level with AI"}
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {l.landingFeatures.map((f, i) => {
+            const v = featureVisuals[i];
+            return (
+              <div key={i} className={`card-xtract group overflow-hidden transition-all duration-700 ${featReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`} style={{ transitionDelay: `${i * 100}ms` }}>
+                {/* Agent portrait background */}
+                <div className="relative h-32 overflow-hidden">
+                  <img
+                    src={`https://media.valorant-api.com/agents/${v.agentId}/background.png`}
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500"
+                    loading="lazy"
+                  />
+                  <img
+                    src={`https://media.valorant-api.com/agents/${v.agentId}/displayicon.png`}
+                    alt=""
+                    className="absolute right-4 top-1/2 -translate-y-1/2 h-24 w-24 object-contain opacity-30 group-hover:opacity-50 group-hover:scale-110 transition-all duration-500"
+                    style={{ filter: `drop-shadow(0 0 20px ${v.color}30)` }}
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+                  <div className="relative p-7 flex items-center h-full">
+                    <div>
+                      <h3 className="text-[17px] font-bold text-white mb-1 tracking-tight">{f.title}</h3>
+                      <p className="text-[13px] text-neutral-400 leading-relaxed max-w-[280px]">{f.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ─── HOW IT WORKS — Process steps like Xtract ─── */}
+      <section ref={howReveal.ref} id="section-how" data-animate className="relative z-10 mx-auto max-w-3xl px-5 sm:px-8 pb-28">
+        <div className="section-divider mb-16" />
+        <p className="text-center text-[11px] uppercase tracking-[0.2em] text-[#FF4655]/50 font-semibold mb-4">
+          {lang === "tr" ? "Süreç" : "Process"}
+        </p>
+        <h2 className={`text-3xl sm:text-[44px] font-semibold text-white tracking-tight text-center mb-14 leading-tight transition-all duration-700 ${howReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ letterSpacing: '-1.5px' }}>
+          {l.landingHowTitle}
+        </h2>
+        <div className="space-y-4">
+          {l.landingHowSteps.map((s, i) => {
+            const stepIcons = [
+              // 1 — Set Up Match: map pin / compass
+              <svg key="h0" width="28" height="28" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z" stroke="#FF4655" strokeWidth="1.5" fill="rgba(255,70,85,0.1)"/>
+                <circle cx="12" cy="10" r="3" stroke="#FF4655" strokeWidth="1.5" fill="rgba(255,70,85,0.15)"/>
+              </svg>,
+              // 2 — Round Notes: crosshair / target scope
+              <svg key="h1" width="28" height="28" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="9" stroke="#4D7CFF" strokeWidth="1.5" fill="rgba(77,124,255,0.06)"/>
+                <circle cx="12" cy="12" r="4" stroke="#4D7CFF" strokeWidth="1.5" fill="rgba(77,124,255,0.12)"/>
+                <circle cx="12" cy="12" r="1" fill="#4D7CFF"/>
+                <line x1="12" y1="1" x2="12" y2="5" stroke="#4D7CFF" strokeWidth="1.5"/>
+                <line x1="12" y1="19" x2="12" y2="23" stroke="#4D7CFF" strokeWidth="1.5"/>
+                <line x1="1" y1="12" x2="5" y2="12" stroke="#4D7CFF" strokeWidth="1.5"/>
+                <line x1="19" y1="12" x2="23" y2="12" stroke="#4D7CFF" strokeWidth="1.5"/>
+              </svg>,
+              // 3 — AI Analysis: AIMLO logo
+              <img key="h2" src="/aimlo-logo.png" alt="AI" className="w-8 h-auto object-contain" style={{ filter: "drop-shadow(0 0 6px rgba(255,70,85,0.4))" }} />,
+              // 4 — Match Report: stats chart
+              <svg key="h3" width="28" height="28" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="3" width="20" height="18" rx="2" stroke="#B44DFF" strokeWidth="1.5" fill="rgba(180,77,255,0.06)"/>
+                <rect x="6" y="13" width="3" height="5" rx="0.5" fill="#B44DFF" opacity="0.5"/>
+                <rect x="10.5" y="9" width="3" height="9" rx="0.5" fill="#B44DFF" opacity="0.7"/>
+                <rect x="15" y="6" width="3" height="12" rx="0.5" fill="#B44DFF" opacity="0.9"/>
+                <line x1="5" y1="7" x2="19" y2="7" stroke="#B44DFF" strokeWidth="0.5" opacity="0.2"/>
+              </svg>,
+            ];
+            const stepColors = ["#FF4655", "#4D7CFF", "#FF4655", "#B44DFF"];
+            return (
+              <div key={i} className={`group flex items-center gap-5 card-xtract p-5 sm:p-6 transition-all duration-700 ${howReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ transitionDelay: `${i * 120}ms` }}>
+                <div className="relative shrink-0 w-14 h-14 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105" style={{ background: `${stepColors[i]}08`, border: `1px solid ${stepColors[i]}18`, boxShadow: `0 0 0 rgba(0,0,0,0)` }}
+                  onMouseEnter={(e) => { e.currentTarget.style.boxShadow = `0 0 20px ${stepColors[i]}15`; e.currentTarget.style.borderColor = `${stepColors[i]}35`; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.boxShadow = `0 0 0 rgba(0,0,0,0)`; e.currentTarget.style.borderColor = `${stepColors[i]}18`; }}
+                >
+                  {stepIcons[i]}
+                  <span className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full text-[9px] font-bold text-white" style={{ background: stepColors[i] }}>{s.step}</span>
+                </div>
+                <div>
+                  <h3 className="text-[15px] font-semibold text-white mb-1 tracking-tight">{s.title}</h3>
+                  <p className="text-[13px] text-neutral-500 leading-relaxed">{s.desc}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ─── WHY AIMLO — Benefits grid like Xtract ─── */}
+      <section ref={diffReveal.ref} id="section-about" data-animate className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pb-28">
+        <div className="section-divider mb-16" />
+        <p className="text-center text-[11px] uppercase tracking-[0.2em] text-[#FF4655]/50 font-semibold mb-4">
+          {lang === "tr" ? "Avantajlar" : "Benefits"}
+        </p>
+        <h2 className={`text-3xl sm:text-[44px] font-semibold text-white tracking-tight text-center mb-14 leading-tight transition-all duration-700 ${diffReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ letterSpacing: '-1.5px' }}>
+          {lang === "tr" ? "Neden AIMLO?" : "Why AIMLO?"}
+        </h2>
+        <div className="grid md:grid-cols-3 gap-4">
+          {l.landingDiffItems.map((item, i) => {
+            const colors = ["#FF4655", "#4D7CFF", "#B44DFF"];
+            return (
+              <div key={i} className={`card-xtract p-8 group transition-all duration-500 ${diffReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`} style={{ transitionDelay: `${i * 120}ms` }}>
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-all duration-300" style={{ background: `${colors[i]}10`, border: `1px solid ${colors[i]}20`, color: colors[i] }}>
+                  {benefitIcons[i]}
+                </div>
+                <h3 className="text-[16px] font-semibold mb-2 tracking-tight" style={{ color: colors[i] }}>{item.title}</h3>
+                <p className="text-[14px] text-neutral-500 leading-relaxed">{item.desc}</p>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ─── DOWNLOAD — Premium card like Xtract ─── */}
+      <section id="download-section" data-animate className="relative z-10 mx-auto max-w-3xl px-5 sm:px-8 pb-28">
+        <div className={`download-card p-10 sm:p-16 text-center transition-all duration-700 ${isVisible("download-section") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+          <p className="text-[11px] uppercase tracking-[0.2em] text-[#FF4655]/50 font-semibold mb-4">
+            {lang === "tr" ? "Desktop Uygulaması" : "Desktop App"}
+          </p>
+          <h2 className="text-3xl sm:text-[44px] font-semibold text-white mb-5 leading-tight" style={{ letterSpacing: '-1.5px' }}>
+            {lang === "tr" ? "Hemen İndirin, Oynamaya Başlayın" : "Download Now, Start Playing"}
+          </h2>
+          <p className="text-[15px] text-neutral-400 mb-10 max-w-md mx-auto leading-relaxed">
+            {lang === "tr"
+              ? "Oyununu otomatik izlesin, round sonrası anında AI koçluk feedback'i versin."
+              : "Auto-watches your game, gives instant AI coaching after each round."}
+          </p>
+          <div className="flex flex-wrap justify-center gap-6 mb-10 text-[13px] text-neutral-400">
+            {[
+              lang === "tr" ? "Otomatik izleme" : "Auto tracking",
+              lang === "tr" ? "In-game overlay" : "In-game overlay",
+              lang === "tr" ? "Ücretsiz" : "Free",
+            ].map((t2, i2) => (
+              <span key={i2} className="flex items-center gap-2.5">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF4655" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                {t2}
+              </span>
+            ))}
+          </div>
+          <button className="btn-neon rounded-xl px-10 py-4 text-[14px] flex items-center gap-2 mx-auto">
+            {lang === "tr" ? "Windows için İndir" : "Download for Windows"}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </button>
+          <p className="mt-5 text-[11px] text-neutral-700">Windows 10+ · ~100MB</p>
+        </div>
+      </section>
+
+      {/* ─── FAQ — Xtract accordion ─── */}
+      <section id="section-faq" data-animate className="relative z-10 mx-auto max-w-2xl px-5 sm:px-8 pb-28">
+        <div className="section-divider mb-16" />
+        <p className="text-center text-[11px] uppercase tracking-[0.2em] text-[#FF4655]/50 font-semibold mb-4">FAQ</p>
+        <h2 className="text-3xl sm:text-[44px] font-semibold text-white tracking-tight text-center mb-14 leading-tight" style={{ letterSpacing: '-1.5px' }}>
           {l.landingFaqTitle}
         </h2>
-        <div className="space-y-2.5">
+        <div className="space-y-3">
           {l.landingFaqs.map((faq, i) => (
-            <div key={i} className={`${ds.card} overflow-hidden`}>
-              <button
-                onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                className="w-full flex items-center justify-between p-5 text-left"
-              >
-                <span className="text-sm font-semibold text-white pr-4">
-                  {faq.q}
-                </span>
-                <span
-                  className={`shrink-0 text-neutral-500 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`}
-                >
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
+            <div key={i} className="faq-item overflow-hidden">
+              <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between p-5 text-left">
+                <span className="text-[14px] font-medium text-white pr-4">{faq.q}</span>
+                <span className={`shrink-0 text-neutral-500 transition-transform duration-300 ${openFaq === i ? "rotate-45" : ""}`}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 </span>
               </button>
-              {openFaq === i && (
-                <div className="px-5 pb-5 -mt-1">
-                  <p className="text-sm text-neutral-400 leading-relaxed">
-                    {faq.a}
-                  </p>
+              <div className={`overflow-hidden transition-all duration-300 ${openFaq === i ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
+                <div className="px-5 pb-5">
+                  <p className="text-[13px] text-neutral-500 leading-relaxed">{faq.a}</p>
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>
-        <div className={`${ds.card} ${ds.cardInner} text-center mt-6`}>
-          <p className="text-sm text-neutral-400 mb-3">{l.landingHelpText}</p>
-          <a
-            href="mailto:support@aimlo.gg"
-            className="inline-flex items-center gap-2 rounded-xl bg-blue-500/[0.06] border border-blue-500/15 px-5 py-2.5 text-sm font-semibold text-blue-400 transition-all hover:bg-blue-500/[0.1]"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-              <polyline points="22,6 12,13 2,6" />
-            </svg>
-            {l.landingHelpEmail}
+        <div className="mt-10 text-center">
+          <p className="text-[13px] text-neutral-600 mb-2">{l.landingHelpText}</p>
+          <a href="mailto:support@aimlo.gg" className="text-[13px] text-[#FF4655] hover:text-[#FF6B77]/70 transition font-medium">
+            support@aimlo.gg
           </a>
         </div>
       </section>
-      <section
-        ref={statsReveal.ref}
-        className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 pb-24"
-      >
-        <h2
-          className={`text-2xl sm:text-3xl font-extrabold text-white mb-10 text-center transition-all duration-700 ${statsReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-        >
-          {l.landingStatsTitle}
+
+      {/* ─── FINAL CTA — like Xtract's footer CTA ─── */}
+      <section className="relative z-10 mx-auto max-w-3xl px-5 sm:px-8 pb-28 text-center">
+        <div className="section-divider mb-16" />
+        <h2 className="text-4xl sm:text-[56px] font-semibold text-white mb-5 leading-tight" style={{ letterSpacing: '-2px' }}>
+          {lang === "tr" ? "Gelişmeye hazır mısın?" : "Ready to improve?"}
         </h2>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          {l.landingStats.map((stat, i) => (
-            <div
-              key={i}
-              className={`${ds.card} p-6 sm:p-8 text-center transition-all duration-700 ${statsReveal.visible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-10 scale-95"}`}
-              style={{ transitionDelay: `${i * 100}ms` }}
-            >
-              <p className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-1">
-                {stat.value}
-              </p>
-              <p className="text-[11px] font-semibold uppercase tracking-wider text-neutral-500">
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </div>
+        <p className="text-[15px] text-neutral-400 mb-10 max-w-md mx-auto leading-relaxed">
+          {l.landingHeroSub}
+        </p>
+        <button onClick={user ? onDashboard : onStartAnalysis} className="btn-neon rounded-xl px-8 py-3.5 text-[14px] flex items-center gap-2 mx-auto">
+          {user ? l.goToDashboard : l.landingCTA}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </button>
       </section>
-      <section className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 pb-24 text-center">
-        <div className={`${ds.card} p-8 sm:p-12 overflow-hidden relative`}>
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-blue-600/[0.04] to-cyan-500/[0.03]" />
-          <div className="relative space-y-6">
-            <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 160, width: 'auto' }} draggable={false} className="mx-auto" />
-            <p className="text-base text-neutral-400 max-w-lg mx-auto">
-              {l.landingHeroSub}
-            </p>
-            <button
-              onClick={user ? onDashboard : onStartAnalysis}
-              className="rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-blue-900/25 transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.98]"
-            >
-              {user ? l.goToDashboard : l.landingCTA}
-            </button>
-          </div>
-        </div>
-      </section>
+
+      {/* ─── FOOTER — clean minimal ─── */}
       <footer className="relative z-10 border-t border-white/[0.06]">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 py-10">
-          <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
-            <div className="flex flex-col items-center md:items-start gap-2">
-              <div className="flex items-center gap-2">
-                <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 56, width: 'auto', opacity: 0.6 }} draggable={false} />
-              </div>
-              <p className="text-[11px] text-neutral-600 max-w-xs text-center md:text-left">
-                {lang === "tr"
-                  ? "Yapay zeka destekli Valorant koçluk platformu."
-                  : "AI-powered Valorant coaching platform."}
-              </p>
+        <div className="mx-auto max-w-5xl px-5 sm:px-8 py-12">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-3">
+              <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 22, width: 'auto', opacity: 0.4 }} draggable={false} />
+              <span className="text-[12px] text-neutral-600">
+                {lang === "tr" ? "AI destekli Valorant koçluk platformu" : "AI-powered Valorant coaching platform"}
+              </span>
             </div>
             <div className="flex items-center gap-6">
-              <a
-                href="mailto:support@aimlo.gg"
-                className="text-[11px] text-neutral-500 hover:text-white transition-colors"
-              >
-                support@aimlo.gg
-              </a>
-              <button
-                onClick={() =>
-                  document
-                    .getElementById("section-about")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="text-[11px] text-neutral-500 hover:text-white transition-colors"
-              >
-                {l.landingNav.about}
-              </button>
-              <button
-                onClick={() =>
-                  document
-                    .getElementById("section-faq")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="text-[11px] text-neutral-500 hover:text-white transition-colors"
-              >
-                {l.landingNav.faq}
-              </button>
+              <a href="mailto:support@aimlo.gg" className="text-[12px] text-neutral-600 hover:text-white transition">support@aimlo.gg</a>
+              <button onClick={() => document.getElementById("section-about")?.scrollIntoView({ behavior: "smooth" })} className="text-[12px] text-neutral-600 hover:text-white transition">{l.landingNav.about}</button>
+              <button onClick={() => document.getElementById("section-faq")?.scrollIntoView({ behavior: "smooth" })} className="text-[12px] text-neutral-600 hover:text-white transition">{l.landingNav.faq}</button>
             </div>
           </div>
-          <div className="mt-6 pt-6 border-t border-white/[0.04] text-center">
-            <p className="text-[10px] text-neutral-700">
-              {IC.copy} 2025 AIMLO. All rights reserved.
-            </p>
+          <div className="mt-8 pt-6 border-t border-white/[0.04] text-center">
+            <p className="text-[11px] text-neutral-800">{IC.copy} 2025 AIMLO. All rights reserved.</p>
           </div>
         </div>
       </footer>
@@ -2464,246 +2163,117 @@ function AuthScreen({
   }
   if (checkEmail)
     return (
-      <main className={`${ds.pageBg} flex items-center justify-center px-4`}>
+      <main className="min-h-screen bg-[#030711] flex items-center justify-center px-4">
         <AmbientBg />
-        <div className="relative z-10 w-full max-w-sm space-y-8 text-center">
-          <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 160, width: 'auto' }} draggable={false} className="mx-auto" />
-          <div className={`${ds.card} p-8 space-y-5`}>
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-500/[0.08] border border-blue-500/10">
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                className="text-blue-400"
-              >
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                <polyline points="22,6 12,13 2,6" />
-              </svg>
+        <div className="relative z-10 w-full max-w-sm space-y-8 text-center animate-slide-up-big">
+          <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 34, width: 'auto' }} draggable={false} className="mx-auto opacity-30" />
+          <div className="card-glow rounded-2xl p-10 space-y-6">
+            <div className="relative mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#FF4655]/[0.06] border border-[#FF4655]/15">
+              <span className="text-3xl">✉️</span>
+              <span className="absolute inset-0 rounded-2xl animate-ping bg-[#FF4655]/[0.05]" style={{ animationDuration: '2s' }} />
             </div>
-            <p className="text-sm text-neutral-300 leading-relaxed">
-              {al.authCheckEmail}
-            </p>
-            <button
-              onClick={() => {
-                setCheckEmail(false);
-                setMode("login");
-              }}
-              className={ds.btnSecondary}
-            >
+            <p className="text-sm text-neutral-300 leading-relaxed">{al.authCheckEmail}</p>
+            <button onClick={() => { setCheckEmail(false); setMode("login"); }} className="btn-ghost w-full rounded-xl py-3.5 text-sm">
               {al.authLogin}
             </button>
           </div>
         </div>
       </main>
     );
+
+  const inputCls = "w-full rounded-xl border border-white/[0.06] bg-[#0a0f1e]/90 px-4 py-4 text-sm text-white outline-none transition-all duration-300 focus:border-[#FF4655]/25 focus:ring-2 focus:ring-[#FF4655]/10 focus:shadow-[0_0_20px_rgba(255,70,85,0.05)] placeholder-neutral-600";
+
   return (
-    <main
-      className={`${ds.pageBg} relative flex items-center justify-center px-4 py-12 overflow-hidden`}
-    >
+    <main className="min-h-screen bg-[#030711] relative flex items-center justify-center px-4 py-12 overflow-hidden">
       <AmbientBg />
-      <div className="relative z-10 w-full max-w-sm space-y-8">
-        <div className="text-center space-y-4">
-          <button
-            onClick={onBackToLanding}
-            className="mx-auto flex items-center gap-2 text-[11px] text-neutral-500 transition hover:text-white mb-4"
-          >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-            {al.back}
+      {/* Decorative orbiting rings */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none opacity-30">
+        <div className="absolute inset-0 rounded-full border border-[#FF4655]/[0.04] animate-rotate-slow" />
+        <div className="absolute inset-16 rounded-full border border-[#4D7CFF]/[0.03] animate-rotate-slow" style={{ animationDirection: 'reverse', animationDuration: '30s' }} />
+      </div>
+
+      <div className="relative z-10 w-full max-w-[440px] space-y-8 animate-slide-up-big">
+        <div className="text-center space-y-5">
+          <button onClick={onBackToLanding} className="mx-auto flex items-center gap-2 text-[12px] text-neutral-600 transition hover:text-[#FF6B77] hover-underline">
+            ← {al.back}
           </button>
-          <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 160, width: 'auto' }} draggable={false} className="mx-auto" />
+          <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 34, width: 'auto' }} draggable={false} className="mx-auto opacity-30" />
           <div>
+            <h2 className="text-3xl font-black text-white tracking-tight">
+              {mode === "login" ? al.authLogin : al.authRegister}
+            </h2>
             <p className="mt-2 text-sm text-neutral-500">{al.tagline}</p>
           </div>
         </div>
-        <div className={`${ds.card} p-6 sm:p-8 space-y-6`}>
-          <div className="text-center">
-            <h2 className="text-lg font-bold text-white">
-              {mode === "login" ? al.authLogin : al.authRegister}
-            </h2>
-          </div>
-          <form onSubmit={handleSubmit} className="space-y-4">
+
+        <div className="card-glow rounded-2xl p-7 sm:p-9">
+          {/* Top accent line */}
+          <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#FF4655]/20 to-transparent" />
+          <form onSubmit={handleSubmit} className="space-y-5">
             {mode === "register" && (
               <>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label text={al.authFirstName} />
-                    <input
-                      type="text"
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                      placeholder={al.authFirstNamePh}
-                      required
-                      className={ds.inputBase}
-                    />
+                    <label className="mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35">{al.authFirstName}</label>
+                    <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder={al.authFirstNamePh} required className={inputCls} />
                   </div>
                   <div>
-                    <Label text={al.authLastName} />
-                    <input
-                      type="text"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                      placeholder={al.authLastNamePh}
-                      required
-                      className={ds.inputBase}
-                    />
+                    <label className="mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35">{al.authLastName}</label>
+                    <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder={al.authLastNamePh} required className={inputCls} />
                   </div>
                 </div>
                 <div>
-                  <Label text={al.authUsername} />
-                  <input
-                    type="text"
-                    value={username}
-                    onChange={(e) =>
-                      setUsername(
-                        e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ""),
-                      )
-                    }
-                    placeholder={al.authUsernamePh}
-                    required
-                    className={ds.inputBase}
-                  />
+                  <label className="mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35">{al.authUsername}</label>
+                  <input type="text" value={username} onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ""))} placeholder={al.authUsernamePh} required className={inputCls} />
                 </div>
               </>
             )}
             <div>
-              <Label
-                text={mode === "login" ? al.authEmailOrUsername : al.authEmail}
-              />
-              <input
-                type={mode === "register" ? "email" : "text"}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder={
-                  mode === "login" ? al.authEmailOrUsernamePh : al.authEmailPh
-                }
-                required
-                className={ds.inputBase}
-              />
+              <label className="mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35">{mode === "login" ? al.authEmailOrUsername : al.authEmail}</label>
+              <input type={mode === "register" ? "email" : "text"} value={email} onChange={(e) => setEmail(e.target.value)} placeholder={mode === "login" ? al.authEmailOrUsernamePh : al.authEmailPh} required className={inputCls} />
             </div>
             <div>
-              <Label text={al.authPassword} />
-              <div style={{ position: "relative" }}>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  required
-                  minLength={6}
-                  className={ds.inputBase}
-                  style={{ paddingRight: 40 }}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  style={{
-                    position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)",
-                    background: "none", border: "none", cursor: "pointer",
-                    color: "rgba(255,255,255,0.3)", padding: 0, display: "flex", alignItems: "center",
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.6)"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.3)"; }}
-                  tabIndex={-1}
-                >
-                  {showPassword ? (
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
-                      <line x1="1" y1="1" x2="23" y2="23"/>
-                    </svg>
-                  ) : (
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                      <circle cx="12" cy="12" r="3"/>
-                    </svg>
-                  )}
+              <label className="mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35">{al.authPassword}</label>
+              <div className="relative">
+                <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" required minLength={6} className={inputCls} style={{ paddingRight: 44 }} />
+                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-600 hover:text-[#FF6B77] transition" tabIndex={-1}>
+                  {showPassword ? "🙈" : "👁️"}
                 </button>
               </div>
             </div>
             {mode === "register" && (
               <div>
-                <Label text={al.authPasswordConfirm} />
-                <div style={{ position: "relative" }}>
-                  <input
-                    type={showPasswordConfirm ? "text" : "password"}
-                    value={passwordConfirm}
-                    onChange={(e) => setPasswordConfirm(e.target.value)}
-                    placeholder="••••••••"
-                    required
-                    minLength={6}
-                    className={ds.inputBase}
-                    style={{ paddingRight: 40 }}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
-                    style={{
-                      position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)",
-                      background: "none", border: "none", cursor: "pointer",
-                      color: "rgba(255,255,255,0.3)", padding: 0, display: "flex", alignItems: "center",
-                    }}
-                    onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.6)"; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.3)"; }}
-                    tabIndex={-1}
-                  >
-                    {showPasswordConfirm ? (
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
-                        <line x1="1" y1="1" x2="23" y2="23"/>
-                      </svg>
-                    ) : (
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                        <circle cx="12" cy="12" r="3"/>
-                      </svg>
-                    )}
+                <label className="mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35">{al.authPasswordConfirm}</label>
+                <div className="relative">
+                  <input type={showPasswordConfirm ? "text" : "password"} value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} placeholder="••••••••" required minLength={6} className={inputCls} style={{ paddingRight: 44 }} />
+                  <button type="button" onClick={() => setShowPasswordConfirm(!showPasswordConfirm)} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-600 hover:text-[#FF6B77] transition" tabIndex={-1}>
+                    {showPasswordConfirm ? "🙈" : "👁️"}
                   </button>
                 </div>
               </div>
             )}
             {error && (
-              <div className="rounded-xl bg-red-500/[0.06] border border-red-500/10 px-4 py-3">
-                <p className="text-xs text-red-400">{error}</p>
+              <div className="rounded-xl bg-[#FF3D71]/[0.06] border border-[#FF3D71]/15 px-4 py-3 animate-scale-in">
+                <p className="text-xs text-[#FF3D71] font-semibold">{error}</p>
               </div>
             )}
-            <button type="submit" disabled={loading} className={ds.btnPrimary}>
+            <button type="submit" disabled={loading} className="btn-neon w-full rounded-xl py-4.5 text-sm mt-3">
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
-                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#030711]/30 border-t-[#030711]" />
                   {al.authLoading}
                 </span>
-              ) : mode === "login" ? (
-                al.authLogin
-              ) : (
-                al.authRegister
-              )}
+              ) : mode === "login" ? al.authLogin : al.authRegister}
             </button>
           </form>
-          <p className="text-center text-xs text-neutral-500">
-            {mode === "login" ? al.authNoAccount : al.authHasAccount}{" "}
-            <button
-              type="button"
-              onClick={() => {
-                setMode(mode === "login" ? "register" : "login");
-                setError("");
-              }}
-              className="text-blue-400 hover:text-blue-300 transition font-semibold"
-            >
-              {mode === "login" ? al.authRegister : al.authLogin}
-            </button>
-          </p>
         </div>
+
+        <p className="text-center text-[13px] text-neutral-500">
+          {mode === "login" ? al.authNoAccount : al.authHasAccount}{" "}
+          <button type="button" onClick={() => { setMode(mode === "login" ? "register" : "login"); setError(""); }} className="text-[#FF4655] hover:text-[#FF6B77]/70 transition font-black hover-underline">
+            {mode === "login" ? al.authRegister : al.authLogin}
+          </button>
+        </p>
       </div>
     </main>
   );
