@@ -3762,6 +3762,22 @@ export default function Home() {
       <main className={`${ds.pageBg} relative`}>
         <MapBg map={vr.map} />
         <Navbar {...navProps} />
+
+        {/* Agent standing on left side of page */}
+        <div className="hidden lg:block fixed left-0 bottom-0 z-20 pointer-events-none" style={{ width: '280px' }}>
+          <img
+            src={agentImgUrl(vr.agent)}
+            alt={vr.agent}
+            className="w-full h-auto object-contain animate-float-slow"
+            style={{
+              filter: `drop-shadow(0 0 60px rgba(255,70,85,0.2)) drop-shadow(10px 0 40px rgba(0,0,0,0.8)) saturate(1.3)`,
+              maskImage: 'linear-gradient(to top, rgba(0,0,0,1) 60%, rgba(0,0,0,0.8) 80%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1) 60%, rgba(0,0,0,0.8) 80%, transparent 100%)',
+            }}
+          />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-32 rounded-full bg-[#FF4655]/[0.08] blur-[50px]" />
+        </div>
+
         <div className="relative z-10 mx-auto max-w-lg px-4 pt-20 pb-12 space-y-6">
           <div className="flex items-center gap-3">
             <button
@@ -3772,24 +3788,9 @@ export default function Home() {
             </button>
             <h2 className="text-lg font-bold text-white">{l.reportTitle}</h2>
           </div>
-          {/* ── Score Header with Agent Portrait ── */}
-          <div className={`${ds.card} overflow-hidden relative`}>
-            {/* Agent portrait — left side, standing */}
-            <div className="absolute left-0 top-0 bottom-0 w-[35%] overflow-hidden pointer-events-none">
-              <img
-                src={agentImgUrl(vr.agent)}
-                alt={vr.agent}
-                className="h-[130%] w-auto object-cover animate-float-slow"
-                style={{
-                  opacity: 0.5,
-                  filter: `drop-shadow(0 0 30px rgba(255,70,85,0.15)) saturate(1.3)`,
-                  maskImage: 'linear-gradient(to right, rgba(0,0,0,0.8) 30%, transparent 90%)',
-                  WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,0.8) 30%, transparent 90%)',
-                  marginTop: '-15%',
-                }}
-              />
-            </div>
-            <div className="relative p-6 pl-[38%]">
+          {/* ── Score Header ── */}
+          <div className={`${ds.card} overflow-hidden`}>
+            <div className="relative p-6">
               <div className="pointer-events-none absolute inset-0 opacity-[0.12]">
                 <img src={MAP_IMAGES[vr.map]} alt="" className="h-full w-full object-cover" />
               </div>
