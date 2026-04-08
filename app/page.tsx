@@ -1997,7 +1997,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               "a3bfb853-43b2-7238-a4f1-ad90e9e46bcc",
               "8e253930-4c05-31dd-1b6c-968525494517",
             ].map((id) => (
-              <img key={id} src={`https://media.valorant-api.com/agents/${id}/displayiconsmall.png`} alt="" className="w-8 h-8 rounded-full border-2 border-black object-cover bg-white/5" loading="lazy" />
+              <img key={id} src={`https://media.valorant-api.com/agents/${id}/displayicon.png`} alt="" className="w-8 h-8 rounded-full border-2 border-black object-cover bg-white/5" loading="lazy" />
             ))}
           </div>
           <div>
