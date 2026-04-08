@@ -3243,7 +3243,7 @@ export default function Home() {
   if (screen === "dashboard") {
     const dashDisplayName = user?.user_metadata?.first_name || user?.user_metadata?.username || user?.email?.split("@")[0] || "Player";
     return (
-      <main className={ds.pageBg}>
+      <main className="min-h-screen bg-black">
         <AmbientBg />
         <Navbar {...navProps} />
         <div className="relative z-10 mx-auto max-w-3xl px-4 pt-20 pb-12">
@@ -3251,8 +3251,8 @@ export default function Home() {
           {/* ═══ HERO ═══ */}
           <div className="relative overflow-hidden rounded-xl border border-[#1e2a3a]/60 bg-gradient-to-br from-[#0a1628] via-[#0d1117] to-[#0a0f16] p-8 mb-8" style={{ minHeight: 200 }}>
             {/* Ambient glow */}
-            <div className="pointer-events-none absolute top-0 right-0 w-96 h-96 rounded-full bg-cyan-500/[0.04] blur-[120px]" />
-            <div className="pointer-events-none absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-blue-500/[0.03] blur-[100px]" />
+            <div className="pointer-events-none absolute top-0 right-0 w-96 h-96 rounded-full bg-[#FF4655]/[0.06] blur-[120px]" />
+            <div className="pointer-events-none absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-[#4D7CFF]/[0.04] blur-[100px]" />
 
             {/* Agent splash (right side) */}
             {topAgent && (
@@ -3267,9 +3267,9 @@ export default function Home() {
             )}
 
             <div className="relative z-10">
-              <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-400/60 mb-2">AI-POWERED VALORANT COACH</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#FF4655]/60 mb-2">AI-POWERED VALORANT COACH</p>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-1">
-                {l.dashTitle}, <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">{dashDisplayName}</span>
+                {l.dashTitle}, <span className="bg-gradient-to-r from-[#FF4655] to-[#4D7CFF] bg-clip-text text-transparent">{dashDisplayName}</span>
               </h1>
               <p className="text-sm text-neutral-500 mb-6">{l.dashSub}</p>
 
@@ -3287,7 +3287,7 @@ export default function Home() {
                 <div className="w-px h-8 bg-white/[0.06]" />
                 {topAgent && (
                   <div className="flex items-center gap-2">
-                    <img src={agentImgUrl(topAgent.name)} alt="" className="w-7 h-7 rounded-lg ring-1 ring-cyan-500/30" />
+                    <img src={agentImgUrl(topAgent.name)} alt="" className="w-7 h-7 rounded-lg ring-1 ring-[#FF4655]/30" />
                     <div>
                       <span className="text-sm font-bold text-white">{topAgent.name}</span>
                       <span className="text-[10px] text-neutral-500 block">{lang === "tr" ? "En çok oynanan" : "Most played"}</span>
@@ -3299,14 +3299,14 @@ export default function Home() {
           </div>
 
           {/* ═══ AI INSIGHT ═══ */}
-          <div className="rounded-xl border border-cyan-500/10 bg-gradient-to-br from-[#0a1628]/90 to-[#0d1117]/95 p-6 mb-6 relative overflow-hidden">
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-cyan-500/[0.03] to-transparent" />
+          <div className="rounded-xl border border-[#FF4655]/10 bg-gradient-to-br from-[#0a1628]/90 to-[#0d1117]/95 p-6 mb-6 relative overflow-hidden">
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#FF4655]/[0.03] to-transparent" />
             <div className="relative">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  <div className="w-1 h-5 rounded-full bg-cyan-400" style={{ boxShadow: '0 0 8px rgba(34,211,238,0.5)' }} />
-                  <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-cyan-400">AI INSIGHT</span>
-                  <span className="rounded-md bg-cyan-500/[0.08] border border-cyan-500/15 px-2 py-0.5 text-[9px] font-semibold text-cyan-400/70">AI</span>
+                  <div className="w-1 h-5 rounded-full bg-[#FF4655]" style={{ boxShadow: '0 0 8px rgba(255,70,85,0.5)' }} />
+                  <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#FF4655]">AI INSIGHT</span>
+                  <span className="rounded-md bg-[#FF4655]/[0.08] border border-[#FF4655]/15 px-2 py-0.5 text-[9px] font-semibold text-[#FF4655]/70">AI</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-[9px] text-neutral-600">{savedReports.length} {l.dashMatches.toLowerCase()} {lang === "tr" ? "analizi" : "analyzed"}</span>
@@ -3314,7 +3314,7 @@ export default function Home() {
                 </div>
               </div>
               <p className="text-[15px] leading-relaxed text-neutral-200 mb-4">{aiInsight}</p>
-              <button className="rounded-lg bg-cyan-500/[0.08] border border-cyan-500/20 px-4 py-2 text-[11px] font-semibold text-cyan-400 transition hover:bg-cyan-500/15">
+              <button className="rounded-lg bg-[#FF4655]/[0.08] border border-[#FF4655]/20 px-4 py-2 text-[11px] font-semibold text-[#FF4655] transition hover:bg-[#FF4655]/15">
                 {lang === "tr" ? "Detayl\u0131 Analiz \u2192" : "Detailed Analysis \u2192"}
               </button>
             </div>
@@ -3354,10 +3354,10 @@ export default function Home() {
           {/* ═══ PERFORMANS SKORU ═══ */}
           {webSkillProfile && webSkillProfile.overall > 0 && (
             <div className="rounded-xl border border-[#1e2a3a]/60 bg-gradient-to-br from-[#0a1628]/90 to-[#0d1117]/95 p-6 mb-6 relative overflow-hidden">
-              <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-cyan-500/[0.04] blur-[80px]" />
+              <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-[#FF4655]/[0.06] blur-[80px]" />
               <div className="relative text-center mb-6">
-                <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-cyan-400 mb-4">{lang === "tr" ? "SEV\u0130YE & \u0130LERLEME" : "LEVEL & PROGRESS"}</div>
-                <div className="text-5xl font-black text-cyan-400 mb-1" style={{ textShadow: '0 0 30px rgba(34,211,238,0.3)' }}>
+                <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#FF4655] mb-4">{lang === "tr" ? "SEV\u0130YE & \u0130LERLEME" : "LEVEL & PROGRESS"}</div>
+                <div className="text-5xl font-black text-[#FF4655] mb-1" style={{ textShadow: '0 0 30px rgba(255,70,85,0.3)' }}>
                   {webSkillProfile.overall}
                 </div>
                 <div className="text-sm font-bold text-white mb-1">{webSkillProfile.rank}</div>
@@ -3366,9 +3366,9 @@ export default function Home() {
               {/* 3 metric bars */}
               <div className="grid grid-cols-3 gap-6">
                 {[
-                  { label: lang === "tr" ? 'Hayatta Kalma' : 'Survival', value: webSkillProfile.survival, color: '#10b981' },
-                  { label: lang === "tr" ? 'Pozisyonlama' : 'Positioning', value: webSkillProfile.positioning, color: '#3b82f6' },
-                  { label: lang === "tr" ? 'Karar Verme' : 'Decision Making', value: webSkillProfile.decisionMaking, color: '#22d3ee' },
+                  { label: lang === "tr" ? 'Hayatta Kalma' : 'Survival', value: webSkillProfile.survival, color: '#FF4655' },
+                  { label: lang === "tr" ? 'Pozisyonlama' : 'Positioning', value: webSkillProfile.positioning, color: '#4D7CFF' },
+                  { label: lang === "tr" ? 'Karar Verme' : 'Decision Making', value: webSkillProfile.decisionMaking, color: '#B44DFF' },
                 ].map((s, i) => (
                   <div key={i} className="text-center">
                     <div className="text-xl font-extrabold mb-1" style={{ color: s.color, textShadow: `0 0 12px ${s.color}30` }}>{s.value}</div>
@@ -3438,14 +3438,14 @@ export default function Home() {
           {agentPerf.length > 0 && (
             <div className="mb-6">
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-1 h-4 rounded-full bg-cyan-400" style={{ boxShadow: '0 0 6px rgba(34,211,238,0.4)' }} />
-                <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-cyan-400">{l.dashAgentPerf}</span>
+                <div className="w-1 h-4 rounded-full bg-[#FF4655]" style={{ boxShadow: '0 0 6px rgba(255,70,85,0.4)' }} />
+                <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#FF4655]">{l.dashAgentPerf}</span>
                 <div className="flex-1 h-px bg-white/[0.03]" />
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
                 {agentPerf.map((ap) => (
                   <div key={ap.name} className="rounded-xl border border-[#1e2a3a]/60 bg-gradient-to-b from-[#0a1628]/80 to-[#0d1117]/90 p-4 text-center relative overflow-hidden transition hover:border-[#2d4a6f]/40 hover:shadow-lg hover:shadow-black/20">
-                    <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-500/40 via-cyan-400/20 to-transparent" />
+                    <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#FF4655]/40 via-[#FF4655]/20 to-transparent" />
                     <div className="h-10 w-10 rounded-xl overflow-hidden bg-black/30 ring-1 ring-white/[0.08] mx-auto mb-2" style={{ filter: 'saturate(1.2)' }}>
                       <img src={agentImgUrl(ap.name)} alt={ap.name} className="h-full w-full object-cover" loading="lazy" />
                     </div>
@@ -3503,7 +3503,7 @@ export default function Home() {
             </div>
             {historyLoading ? (
               <div className="rounded-xl border border-[#1e2a3a]/60 bg-[#0a1628]/80 p-8 flex justify-center">
-                <div className="h-5 w-5 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent" />
+                <div className="h-5 w-5 animate-spin rounded-full border-2 border-[#FF4655] border-t-transparent" />
               </div>
             ) : savedReports.length === 0 ? (
               <div className="rounded-xl border border-[#1e2a3a]/60 bg-gradient-to-br from-[#0a1628]/80 to-[#0d1117]/90 p-10 text-center">
@@ -3534,7 +3534,7 @@ export default function Home() {
                           {tag && <span className="rounded bg-white/[0.04] px-1.5 py-0.5 text-[9px] font-semibold" style={{ color: tag.color }}>{tag.label}</span>}
                         </div>
                         <p className="mt-0.5 text-[11px] text-neutral-600">{entry.date}</p>
-                        {miniInsight && <p className="mt-1 text-[10px] text-cyan-400/60">{miniInsight}</p>}
+                        {miniInsight && <p className="mt-1 text-[10px] text-[#FF4655]/60">{miniInsight}</p>}
                       </div>
                       <div className="text-right shrink-0">
                         <p className="text-lg font-extrabold text-white tracking-tight">{entry.score}</p>
