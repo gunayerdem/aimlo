@@ -89,6 +89,11 @@ export function agentImgUrl(name: string): string {
   if (!id) return "";
   return `https://media.valorant-api.com/agents/${id}/displayicon.png`;
 }
+export function agentFullPortrait(name: string): string {
+  const id = AGENT_SLUGS[name];
+  if (!id) return "";
+  return `https://media.valorant-api.com/agents/${id}/fullportrait.png`;
+}
 
 // ── Map Data ──
 export const MAP_LOCATIONS: Record<string, string[]> = {

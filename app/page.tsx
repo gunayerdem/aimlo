@@ -7,7 +7,7 @@ import { analyzePlaystyle } from "@/lib/playstyle-system";
 import { ds } from "@/constants/design";
 import {
   AGENT_GROUPS, AGENT_GROUP_LABELS, AGENT_COLORS, AGENT_BORDER, AGENT_ACCENT,
-  getAgentRole, getAgentInitials, agentImgUrl,
+  getAgentRole, getAgentInitials, agentImgUrl, agentFullPortrait,
   MAP_LOCATIONS, MAPS, MAP_IMAGES, SCORE_OPTIONS, IC,
 } from "@/constants/game-data";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -3291,25 +3291,22 @@ export default function Home() {
             <div className="pointer-events-none absolute top-0 right-0 w-96 h-96 rounded-full bg-[#FF4655]/[0.06] blur-[120px]" />
             <div className="pointer-events-none absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-[#4D7CFF]/[0.04] blur-[100px]" />
 
-            {/* Agent full portrait — large, overflowing, interactive */}
+            {/* Agent full portrait — standing on left, overflowing */}
             {topAgent && (
-              <div className="absolute right-0 -top-12 bottom-0 w-[45%] overflow-visible group/agent cursor-pointer" style={{ zIndex: 1 }}>
+              <div className="absolute -left-4 -bottom-2 w-[200px] overflow-visible pointer-events-none" style={{ zIndex: 1 }}>
                 <img
-                  src={agentImgUrl(topAgent.name)}
-                  alt=""
-                  className="h-[130%] w-auto object-cover animate-float-slow transition-all duration-500 group-hover/agent:scale-110 group-hover/agent:opacity-60"
+                  src={agentFullPortrait(topAgent.name)}
+                  alt={topAgent.name}
+                  className="w-full h-auto object-contain animate-float-slow"
                   style={{
-                    opacity: 0.4,
-                    filter: `drop-shadow(0 0 50px rgba(255,70,85,0.2)) saturate(1.4)`,
-                    maskImage: 'linear-gradient(to left, rgba(0,0,0,0.9) 30%, transparent 85%)',
-                    WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,0.9) 30%, transparent 85%)',
+                    filter: `drop-shadow(0 0 40px rgba(255,70,85,0.2)) drop-shadow(5px 0 30px rgba(0,0,0,0.7)) saturate(1.3)`,
                   }}
                 />
-                <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full bg-[#FF4655]/[0.08] blur-[60px] animate-glow-pulse transition-all duration-500 group-hover/agent:w-64 group-hover/agent:h-64 group-hover/agent:bg-[#FF4655]/[0.15]" />
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-32 h-20 rounded-full bg-[#FF4655]/[0.08] blur-[40px] animate-glow-pulse" />
               </div>
             )}
 
-            <div className="relative z-10">
+            <div className="relative z-10 pl-[180px] sm:pl-[200px]">
               <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#FF4655]/60 mb-2">AI-POWERED VALORANT COACH</p>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-1">
                 {l.dashTitle}, <span className="bg-gradient-to-r from-[#FF4655] to-[#4D7CFF] bg-clip-text text-transparent">{dashDisplayName}</span>
@@ -3683,9 +3680,9 @@ export default function Home() {
                   <div className={`absolute left-0 top-0 bottom-0 w-1 ${entry.won ? "bg-emerald-400" : "bg-[#FF4655]"}`} style={{ boxShadow: entry.won ? "0 0 10px rgba(52,211,153,0.4)" : "0 0 10px rgba(255,70,85,0.4)" }} />
 
                   <div className="relative flex items-center gap-4 p-4 sm:p-5 pl-5">
-                    {/* Agent portrait */}
-                    <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg ring-1 ring-white/[0.08]">
-                      <img src={agentImgUrl(entry.agent)} alt={entry.agent} className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-300" loading="lazy" style={{ filter: "saturate(1.2)" }} />
+                    {/* Agent full portrait */}
+                    <div className="relative h-14 w-10 shrink-0 overflow-hidden">
+                      <img src={agentFullPortrait(entry.agent)} alt={entry.agent} className="h-full w-auto object-contain group-hover:scale-110 transition-transform duration-300" loading="lazy" style={{ filter: "drop-shadow(0 0 8px rgba(255,70,85,0.15)) saturate(1.3)" }} />
                     </div>
 
                     {/* Map thumbnail */}
@@ -3763,19 +3760,17 @@ export default function Home() {
         <MapBg map={vr.map} />
         <Navbar {...navProps} />
 
-        {/* Agent standing on left side of page */}
-        <div className="hidden lg:block fixed left-0 bottom-0 z-20 pointer-events-none" style={{ width: '280px' }}>
+        {/* Agent standing on left side of page — full portrait */}
+        <div className="hidden lg:block fixed left-4 bottom-0 z-20 pointer-events-none" style={{ width: '250px' }}>
           <img
-            src={agentImgUrl(vr.agent)}
+            src={agentFullPortrait(vr.agent)}
             alt={vr.agent}
             className="w-full h-auto object-contain animate-float-slow"
             style={{
-              filter: `drop-shadow(0 0 60px rgba(255,70,85,0.2)) drop-shadow(10px 0 40px rgba(0,0,0,0.8)) saturate(1.3)`,
-              maskImage: 'linear-gradient(to top, rgba(0,0,0,1) 60%, rgba(0,0,0,0.8) 80%, transparent 100%)',
-              WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1) 60%, rgba(0,0,0,0.8) 80%, transparent 100%)',
+              filter: `drop-shadow(0 0 50px rgba(255,70,85,0.2)) drop-shadow(10px 0 40px rgba(0,0,0,0.8)) saturate(1.3)`,
             }}
           />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-32 rounded-full bg-[#FF4655]/[0.08] blur-[50px]" />
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-40 h-24 rounded-full bg-[#FF4655]/[0.08] blur-[40px]" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-lg px-4 pt-20 pb-12 space-y-6">
