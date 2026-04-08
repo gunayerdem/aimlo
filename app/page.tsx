@@ -3772,9 +3772,24 @@ export default function Home() {
             </button>
             <h2 className="text-lg font-bold text-white">{l.reportTitle}</h2>
           </div>
-          {/* ── Score Header ── */}
-          <div className={`${ds.card} overflow-hidden`}>
-            <div className="relative p-6">
+          {/* ── Score Header with Agent Portrait ── */}
+          <div className={`${ds.card} overflow-hidden relative`}>
+            {/* Agent portrait — left side, standing */}
+            <div className="absolute left-0 top-0 bottom-0 w-[35%] overflow-hidden pointer-events-none">
+              <img
+                src={agentImgUrl(vr.agent)}
+                alt={vr.agent}
+                className="h-[130%] w-auto object-cover animate-float-slow"
+                style={{
+                  opacity: 0.5,
+                  filter: `drop-shadow(0 0 30px rgba(255,70,85,0.15)) saturate(1.3)`,
+                  maskImage: 'linear-gradient(to right, rgba(0,0,0,0.8) 30%, transparent 90%)',
+                  WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,0.8) 30%, transparent 90%)',
+                  marginTop: '-15%',
+                }}
+              />
+            </div>
+            <div className="relative p-6 pl-[38%]">
               <div className="pointer-events-none absolute inset-0 opacity-[0.12]">
                 <img src={MAP_IMAGES[vr.map]} alt="" className="h-full w-full object-cover" />
               </div>
@@ -3790,7 +3805,7 @@ export default function Home() {
                 <div className="text-right space-y-1">
                   <p className="text-[11px] text-neutral-500">{vr.map} {IC.dot} {vr.agent}</p>
                   <p className="text-[11px] text-neutral-600">{vr.date}</p>
-                  <p className="text-lg font-extrabold text-blue-400">{vr.winPct}%</p>
+                  <p className="text-lg font-extrabold text-[#FF4655]">{vr.winPct}%</p>
                 </div>
               </div>
               <div className="relative mt-4 h-2 w-full overflow-hidden rounded-full bg-white/[0.06]">
