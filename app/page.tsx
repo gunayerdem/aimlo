@@ -3691,9 +3691,9 @@ export default function Home() {
                   <div className={`absolute left-0 top-0 bottom-0 w-1 ${entry.won ? "bg-emerald-400" : "bg-[#FF4655]"}`} style={{ boxShadow: entry.won ? "0 0 10px rgba(52,211,153,0.4)" : "0 0 10px rgba(255,70,85,0.4)" }} />
 
                   <div className="relative flex items-center gap-4 p-4 sm:p-5 pl-5">
-                    {/* Agent full portrait */}
-                    <div className="relative h-14 w-10 shrink-0 overflow-hidden">
-                      <img src={agentFullPortrait(entry.agent)} alt={entry.agent} className="h-full w-auto object-contain group-hover:scale-110 transition-transform duration-300" loading="lazy" style={{ filter: "drop-shadow(0 0 8px rgba(255,70,85,0.15)) saturate(1.3)" }} />
+                    {/* Agent icon */}
+                    <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-lg ring-1 ring-white/[0.08]">
+                      <img src={agentImgUrl(entry.agent)} alt={entry.agent} className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-300" loading="lazy" style={{ filter: "saturate(1.2)" }} />
                     </div>
 
                     {/* Map thumbnail */}
@@ -3773,17 +3773,18 @@ export default function Home() {
 
         <div className="relative z-10 mx-auto max-w-lg px-4 pt-20 pb-12 space-y-6">
 
-          {/* Agent portrait — positioned at top left, next to content */}
-          <div className="hidden sm:block absolute left-0 top-16 pointer-events-none z-20" style={{ width: '420px', marginLeft: '-180px' }}>
+          {/* Agent portrait — background right side, behind content */}
+          <div className="hidden sm:block fixed right-0 top-1/2 -translate-y-1/2 pointer-events-none" style={{ width: '400px', zIndex: 1, opacity: 0.15 }}>
             <img
               src={agentFullPortrait(vr.agent)}
               alt={vr.agent}
               className="w-full h-auto object-contain"
               style={{
-                filter: `drop-shadow(0 0 80px rgba(255,70,85,0.3)) drop-shadow(10px 0 60px rgba(0,0,0,0.9)) saturate(1.5) brightness(1.1)`,
+                filter: `drop-shadow(0 0 60px rgba(255,70,85,0.3)) saturate(1.3)`,
+                maskImage: 'linear-gradient(to left, rgba(0,0,0,0.8) 20%, transparent 80%)',
+                WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,0.8) 20%, transparent 80%)',
               }}
             />
-            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-56 h-40 rounded-full bg-[#FF4655]/[0.12] blur-[70px] animate-glow-pulse" />
           </div>
           <div className="flex items-center gap-3">
             <button
