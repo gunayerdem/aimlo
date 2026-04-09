@@ -3280,11 +3280,14 @@ export default function Home() {
   if (screen === "dashboard") {
     const dashDisplayName = user?.user_metadata?.first_name || user?.user_metadata?.username || user?.email?.split("@")[0] || "Player";
     return (
-      <main className="min-h-screen bg-black">
+      <main className="min-h-screen bg-black relative overflow-hidden">
         <AmbientBg />
+        {/* Dashboard hero orbs — red/blue glow like landing */}
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+          <div className="hero-orb absolute -top-40 left-1/2 -translate-x-1/2" />
+          <div className="hero-orb-inner absolute top-20 left-1/3" />
+        </div>
         <Navbar {...navProps} />
-
-
         <div className="relative z-10 mx-auto max-w-3xl px-4 pt-20 pb-12">
 
           {/* ═══ HERO ═══ */}
