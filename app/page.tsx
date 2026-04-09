@@ -3643,18 +3643,18 @@ export default function Home() {
             )}
           </div>
 
-          {/* ═══ FILTERS ═══ */}
+          {/* ═══ FILTERS — minimal pill style ═══ */}
           {savedReports.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-6 animate-slide-up stagger-1">
-              <select value={historyFilterMap} onChange={(e) => setHistoryFilterMap(e.target.value)} className="rounded-lg border border-white/[0.06] bg-[#0c1424] px-3 py-2 text-[11px] text-neutral-400 outline-none transition hover:border-[#FF4655]/20 focus:border-[#FF4655]/30 cursor-pointer">
+              <select value={historyFilterMap} onChange={(e) => setHistoryFilterMap(e.target.value)} className="appearance-none rounded-full border-none bg-white/[0.04] px-4 py-1.5 text-[11px] text-neutral-400 outline-none transition hover:bg-white/[0.08] hover:text-white focus:bg-white/[0.08] cursor-pointer">
                 <option value="">{l.historyFilterMap}: {l.historyAll}</option>
                 {uniqueMaps.map((m) => <option key={m} value={m}>{m}</option>)}
               </select>
-              <select value={historyFilterAgent} onChange={(e) => setHistoryFilterAgent(e.target.value)} className="rounded-lg border border-white/[0.06] bg-[#0c1424] px-3 py-2 text-[11px] text-neutral-400 outline-none transition hover:border-[#FF4655]/20 focus:border-[#FF4655]/30 cursor-pointer">
+              <select value={historyFilterAgent} onChange={(e) => setHistoryFilterAgent(e.target.value)} className="appearance-none rounded-full border-none bg-white/[0.04] px-4 py-1.5 text-[11px] text-neutral-400 outline-none transition hover:bg-white/[0.08] hover:text-white focus:bg-white/[0.08] cursor-pointer">
                 <option value="">{l.historyFilterAgent}: {l.historyAll}</option>
                 {uniqueAgents.map((a) => <option key={a} value={a}>{a}</option>)}
               </select>
-              <select value={historyFilterResult} onChange={(e) => setHistoryFilterResult(e.target.value as "all" | "wins" | "losses")} className="rounded-lg border border-white/[0.06] bg-[#0c1424] px-3 py-2 text-[11px] text-neutral-400 outline-none transition hover:border-[#FF4655]/20 focus:border-[#FF4655]/30 cursor-pointer">
+              <select value={historyFilterResult} onChange={(e) => setHistoryFilterResult(e.target.value as "all" | "wins" | "losses")} className="appearance-none rounded-full border-none bg-white/[0.04] px-4 py-1.5 text-[11px] text-neutral-400 outline-none transition hover:bg-white/[0.08] hover:text-white focus:bg-white/[0.08] cursor-pointer">
                 <option value="all">{l.historyFilterResult}: {l.historyAll}</option>
                 <option value="wins">{l.historyWins}</option>
                 <option value="losses">{l.historyLosses}</option>
@@ -3771,22 +3771,22 @@ export default function Home() {
         <MapBg map={vr.map} />
         <Navbar {...navProps} />
 
-        <div className="relative z-10 mx-auto max-w-lg px-4 pt-20 pb-12 space-y-6">
+        {/* Agent full portrait — left side, behind everything */}
+        <div className="absolute left-0 top-[200px] pointer-events-none" style={{ width: '400px', zIndex: 5 }}>
+          <img
+            src={agentFullPortrait(vr.agent)}
+            alt={vr.agent}
+            className="w-full h-auto object-contain"
+            style={{
+              opacity: 0.15,
+              filter: `drop-shadow(0 0 60px rgba(255,70,85,0.15)) saturate(1.2)`,
+              maskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, transparent 70%)',
+              WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, transparent 70%)',
+            }}
+          />
+        </div>
 
-          {/* Agent full portrait — left side, behind content */}
-          <div className="absolute left-[-60px] top-[140px] pointer-events-none" style={{ width: '420px', zIndex: 0 }}>
-            <img
-              src={agentFullPortrait(vr.agent)}
-              alt={vr.agent}
-              className="w-full h-auto object-contain"
-              style={{
-                opacity: 0.18,
-                filter: `drop-shadow(0 0 60px rgba(255,70,85,0.15)) saturate(1.2)`,
-                maskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, transparent 70%)',
-                WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, transparent 70%)',
-              }}
-            />
-          </div>
+        <div className="relative z-10 mx-auto max-w-lg px-4 pt-20 pb-12 space-y-6">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setScreen("history")}
