@@ -3773,17 +3773,17 @@ export default function Home() {
 
         <div className="relative z-10 mx-auto max-w-lg px-4 pt-20 pb-12 space-y-6">
 
-          {/* Agent portrait — right side background, visible but not blocking */}
-          <div className="absolute right-[-80px] top-[500px] pointer-events-none" style={{ width: '300px', zIndex: 1 }}>
+          {/* Agent full portrait — left side, behind content */}
+          <div className="absolute left-[-60px] top-[140px] pointer-events-none" style={{ width: '420px', zIndex: 0 }}>
             <img
               src={agentFullPortrait(vr.agent)}
               alt={vr.agent}
               className="w-full h-auto object-contain"
               style={{
-                opacity: 0.2,
-                filter: `drop-shadow(0 0 50px rgba(255,70,85,0.2)) saturate(1.3)`,
-                maskImage: 'linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, transparent 75%)',
-                WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, transparent 75%)',
+                opacity: 0.18,
+                filter: `drop-shadow(0 0 60px rgba(255,70,85,0.15)) saturate(1.2)`,
+                maskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, transparent 70%)',
+                WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, transparent 70%)',
               }}
             />
           </div>
