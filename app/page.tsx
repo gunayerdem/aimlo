@@ -3771,20 +3771,6 @@ export default function Home() {
         <MapBg map={vr.map} />
         <Navbar {...navProps} />
 
-        {/* Agent full portrait — left side, large, close-up, behind content */}
-        <div className="absolute left-[180px] top-[120px] pointer-events-none" style={{ width: '550px', zIndex: 5 }}>
-          <img
-            src={agentFullPortrait(vr.agent)}
-            alt={vr.agent}
-            className="w-full h-auto object-contain"
-            style={{
-              opacity: 0.8,
-              filter: `drop-shadow(0 0 80px rgba(255,70,85,0.25)) saturate(1.4)`,
-              maskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 45%, transparent 70%)',
-              WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 45%, transparent 70%)',
-            }}
-          />
-        </div>
 
         <div className="relative z-10 mx-auto max-w-lg px-4 pt-20 pb-12 space-y-6">
           <div className="flex items-center gap-3">
