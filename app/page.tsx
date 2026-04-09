@@ -3293,16 +3293,16 @@ export default function Home() {
 
             {/* Agent full portrait — right side, standing tall, overflowing top */}
             {topAgent && (
-              <div className="absolute right-4 -top-16 pointer-events-none" style={{ zIndex: 3, width: '220px' }}>
+              <div className="absolute right-2 -top-20 pointer-events-none" style={{ zIndex: 3, width: '260px' }}>
                 <img
                   src={agentFullPortrait(topAgent.name)}
                   alt={topAgent.name}
                   className="w-full h-auto object-contain"
                   style={{
-                    filter: `drop-shadow(0 0 50px rgba(255,70,85,0.25)) drop-shadow(0 10px 30px rgba(0,0,0,0.8)) saturate(1.4)`,
+                    filter: `drop-shadow(0 0 60px rgba(255,70,85,0.3)) drop-shadow(0 10px 40px rgba(0,0,0,0.9)) saturate(1.5) brightness(1.1)`,
                   }}
                 />
-                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-40 h-24 rounded-full bg-[#FF4655]/[0.10] blur-[50px] animate-glow-pulse" />
+                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-48 h-32 rounded-full bg-[#FF4655]/[0.12] blur-[60px] animate-glow-pulse" />
               </div>
             )}
 
@@ -3761,16 +3761,16 @@ export default function Home() {
         <Navbar {...navProps} />
 
         {/* Agent standing on left side of page — full portrait, cinematic */}
-        <div className="hidden lg:block fixed left-8 bottom-0 z-20 pointer-events-none" style={{ width: '300px' }}>
+        <div className="hidden lg:block fixed left-6 bottom-0 z-20 pointer-events-none" style={{ width: '350px' }}>
           <img
             src={agentFullPortrait(vr.agent)}
             alt={vr.agent}
-            className="w-full h-auto object-contain animate-float-slow"
+            className="w-full h-auto object-contain"
             style={{
-              filter: `drop-shadow(0 0 60px rgba(255,70,85,0.25)) drop-shadow(10px 0 50px rgba(0,0,0,0.9)) saturate(1.4)`,
+              filter: `drop-shadow(0 0 80px rgba(255,70,85,0.3)) drop-shadow(10px 0 60px rgba(0,0,0,0.9)) saturate(1.5) brightness(1.1)`,
             }}
           />
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-48 h-32 rounded-full bg-[#FF4655]/[0.10] blur-[60px] animate-glow-pulse" />
+          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-56 h-40 rounded-full bg-[#FF4655]/[0.12] blur-[70px] animate-glow-pulse" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-lg px-4 pt-20 pb-12 space-y-6">
