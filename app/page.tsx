@@ -3762,20 +3762,20 @@ export default function Home() {
         <MapBg map={vr.map} />
         <Navbar {...navProps} />
 
-        {/* Agent standing on left side of page — full portrait, cinematic */}
-        <div className="hidden lg:block fixed left-6 bottom-0 z-20 pointer-events-none" style={{ width: '350px' }}>
-          <img
-            src={agentFullPortrait(vr.agent)}
-            alt={vr.agent}
-            className="w-full h-auto object-contain"
-            style={{
-              filter: `drop-shadow(0 0 80px rgba(255,70,85,0.3)) drop-shadow(10px 0 60px rgba(0,0,0,0.9)) saturate(1.5) brightness(1.1)`,
-            }}
-          />
-          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-56 h-40 rounded-full bg-[#FF4655]/[0.12] blur-[70px] animate-glow-pulse" />
-        </div>
-
         <div className="relative z-10 mx-auto max-w-lg px-4 pt-20 pb-12 space-y-6">
+
+          {/* Agent portrait — positioned at top left, next to content */}
+          <div className="hidden sm:block absolute left-0 top-16 pointer-events-none z-20" style={{ width: '420px', marginLeft: '-180px' }}>
+            <img
+              src={agentFullPortrait(vr.agent)}
+              alt={vr.agent}
+              className="w-full h-auto object-contain"
+              style={{
+                filter: `drop-shadow(0 0 80px rgba(255,70,85,0.3)) drop-shadow(10px 0 60px rgba(0,0,0,0.9)) saturate(1.5) brightness(1.1)`,
+              }}
+            />
+            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-56 h-40 rounded-full bg-[#FF4655]/[0.12] blur-[70px] animate-glow-pulse" />
+          </div>
           <div className="flex items-center gap-3">
             <button
               onClick={() => setScreen("history")}
