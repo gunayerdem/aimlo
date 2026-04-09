@@ -3284,21 +3284,6 @@ export default function Home() {
         <AmbientBg />
         <Navbar {...navProps} />
 
-        {/* Agent full portrait — fixed right side of page */}
-        {topAgent && (
-          <div className="hidden xl:block fixed right-0 bottom-0 z-10 pointer-events-none" style={{ width: '380px' }}>
-            <img
-              src={agentFullPortrait(topAgent.name)}
-              alt={topAgent.name}
-              className="w-full h-auto object-contain"
-              style={{
-                filter: `drop-shadow(0 0 80px rgba(255,70,85,0.3)) drop-shadow(-10px 0 60px rgba(0,0,0,0.9)) saturate(1.5) brightness(1.1)`,
-                opacity: 0.85,
-              }}
-            />
-            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-56 h-40 rounded-full bg-[#FF4655]/[0.12] blur-[70px] animate-glow-pulse" />
-          </div>
-        )}
 
         <div className="relative z-10 mx-auto max-w-3xl px-4 pt-20 pb-12">
 
