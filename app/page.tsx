@@ -3283,30 +3283,44 @@ export default function Home() {
       <main className="min-h-screen bg-black">
         <AmbientBg />
         <Navbar {...navProps} />
+
+        {/* Agent full portrait — fixed right side of page */}
+        {topAgent && (
+          <div className="hidden xl:block fixed right-0 bottom-0 z-10 pointer-events-none" style={{ width: '380px' }}>
+            <img
+              src={agentFullPortrait(topAgent.name)}
+              alt={topAgent.name}
+              className="w-full h-auto object-contain"
+              style={{
+                filter: `drop-shadow(0 0 80px rgba(255,70,85,0.3)) drop-shadow(-10px 0 60px rgba(0,0,0,0.9)) saturate(1.5) brightness(1.1)`,
+                opacity: 0.85,
+              }}
+            />
+            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-56 h-40 rounded-full bg-[#FF4655]/[0.12] blur-[70px] animate-glow-pulse" />
+          </div>
+        )}
+
         <div className="relative z-10 mx-auto max-w-3xl px-4 pt-20 pb-12">
 
           {/* ═══ HERO ═══ */}
-          <div className="relative rounded-xl border border-[#1e2a3a]/60 bg-gradient-to-br from-[#0a1628] via-[#0d1117] to-[#0a0f16] p-8 mb-8 overflow-visible" style={{ minHeight: 240 }}>
+          <div className="relative overflow-hidden rounded-xl border border-[#1e2a3a]/60 bg-gradient-to-br from-[#0a1628] via-[#0d1117] to-[#0a0f16] p-8 mb-8" style={{ minHeight: 200 }}>
             {/* Ambient glow */}
             <div className="pointer-events-none absolute top-0 right-0 w-96 h-96 rounded-full bg-[#FF4655]/[0.06] blur-[120px]" />
             <div className="pointer-events-none absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-[#4D7CFF]/[0.04] blur-[100px]" />
 
-            {/* Agent full portrait — right side, standing tall, overflowing top */}
+            {/* Agent splash - background right side */}
             {topAgent && (
-              <div className="absolute right-2 -top-20 pointer-events-none" style={{ zIndex: 3, width: '260px' }}>
+              <div className="absolute right-0 top-0 bottom-0 w-1/3 overflow-hidden pointer-events-none">
                 <img
-                  src={agentFullPortrait(topAgent.name)}
-                  alt={topAgent.name}
-                  className="w-full h-auto object-contain"
-                  style={{
-                    filter: `drop-shadow(0 0 60px rgba(255,70,85,0.3)) drop-shadow(0 10px 40px rgba(0,0,0,0.9)) saturate(1.5) brightness(1.1)`,
-                  }}
+                  src={agentImgUrl(topAgent.name)}
+                  alt=""
+                  className="h-full w-auto object-cover opacity-20"
+                  style={{ maskImage: 'linear-gradient(to left, rgba(0,0,0,0.6), transparent)', WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,0.6), transparent)' }}
                 />
-                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-48 h-32 rounded-full bg-[#FF4655]/[0.12] blur-[60px] animate-glow-pulse" />
               </div>
             )}
 
-            <div className="relative z-10 max-w-[60%]">
+            <div className="relative z-10">
               <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#FF4655]/60 mb-2">AI-POWERED VALORANT COACH</p>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-1">
                 {l.dashTitle}, <span className="bg-gradient-to-r from-[#FF4655] to-[#4D7CFF] bg-clip-text text-transparent">{dashDisplayName}</span>
