@@ -3772,16 +3772,16 @@ export default function Home() {
         <Navbar {...navProps} />
 
         {/* Agent full portrait — left side, large, close-up, behind content */}
-        <div className="absolute left-[-40px] top-[120px] pointer-events-none" style={{ width: '550px', zIndex: 5 }}>
+        <div className="absolute left-[60px] top-[120px] pointer-events-none" style={{ width: '550px', zIndex: 5 }}>
           <img
             src={agentFullPortrait(vr.agent)}
             alt={vr.agent}
             className="w-full h-auto object-contain"
             style={{
-              opacity: 0.2,
-              filter: `drop-shadow(0 0 80px rgba(255,70,85,0.2)) saturate(1.4)`,
-              maskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 40%, transparent 65%)',
-              WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 40%, transparent 65%)',
+              opacity: 0.55,
+              filter: `drop-shadow(0 0 80px rgba(255,70,85,0.25)) saturate(1.4)`,
+              maskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 45%, transparent 70%)',
+              WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 45%, transparent 70%)',
             }}
           />
         </div>
