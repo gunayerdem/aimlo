@@ -1622,7 +1622,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
   ];
 
   return (
-    <main className="min-h-screen bg-black relative overflow-x-hidden">
+    <main className="min-h-screen bg-[#080c14] relative overflow-x-hidden">
       <AmbientBg />
 
       {/* ─── NAVBAR — Xtract style ─── */}
@@ -1850,6 +1850,9 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
         </div>
       </section>
 
+      {/* Ambient orb — left side */}
+      <div className="pointer-events-none absolute left-[-200px] top-[1200px] w-[500px] h-[500px] rounded-full bg-[#FF4655]/[0.06] blur-[150px] animate-orb" style={{ zIndex: 0 }} />
+
       {/* ─── FEATURES — Xtract card grid ─── */}
       <section ref={featReveal.ref} id="section-features" data-animate className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pb-28">
         <div className="section-divider mb-16" />
@@ -1967,6 +1970,9 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
         </div>
       </section>
 
+      {/* Ambient orb — right side */}
+      <div className="pointer-events-none absolute right-[-200px] top-[2200px] w-[400px] h-[400px] rounded-full bg-[#4D7CFF]/[0.05] blur-[130px] animate-orb" style={{ zIndex: 0, animationDelay: '5s' }} />
+
       {/* ─── WHY AIMLO — Benefits grid like Xtract ─── */}
       <section ref={diffReveal.ref} id="section-about" data-animate className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pb-28">
         <div className="section-divider mb-16" />
@@ -2052,6 +2058,9 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
           ))}
         </div>
       </section>
+
+      {/* Ambient orb — left side lower */}
+      <div className="pointer-events-none absolute left-[-150px] top-[3200px] w-[450px] h-[450px] rounded-full bg-[#FF4655]/[0.05] blur-[140px] animate-orb" style={{ zIndex: 0, animationDelay: '10s' }} />
 
       {/* ─── DOWNLOAD — Premium card like Xtract ─── */}
       <section id="download-section" data-animate className="relative z-10 mx-auto max-w-3xl px-5 sm:px-8 pb-28">
@@ -3280,7 +3289,7 @@ export default function Home() {
   if (screen === "dashboard") {
     const dashDisplayName = user?.user_metadata?.first_name || user?.user_metadata?.username || user?.email?.split("@")[0] || "Player";
     return (
-      <main className="min-h-screen bg-black relative overflow-hidden">
+      <main className="min-h-screen bg-[#080c14] relative overflow-hidden">
         <AmbientBg />
         {/* Dashboard hero orbs — red/blue glow like landing */}
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
@@ -3597,7 +3606,7 @@ export default function Home() {
   /* HISTORY */
   if (screen === "history")
     return (
-      <main className="min-h-screen bg-black">
+      <main className="min-h-screen bg-[#080c14]">
         <AmbientBg />
         <Navbar {...navProps} />
         <div className="relative z-10 mx-auto max-w-4xl px-4 pt-20 pb-12">

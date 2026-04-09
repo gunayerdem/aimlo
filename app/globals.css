@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000;
+  --background: #080c14;
   --foreground: #ededed;
   --neon: #FF4655;
   --accent: #FF4655;
@@ -29,7 +29,7 @@ html { scroll-behavior: smooth; }
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 10px; }
-select option { background: #000; color: #ededed; }
+select option { background: #080c14; color: #ededed; }
 
 /* ═══════════════════════════════════════════
    XTRACT-STYLE ANIMATIONS
@@ -266,7 +266,7 @@ select option { background: #000; color: #ededed; }
    ═══════════════════════════════════════════ */
 
 .nav-xtract {
-  background: rgba(0,0,0,0.7);
+  background: rgba(8,12,20,0.8);
   backdrop-filter: blur(20px) saturate(1.5);
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
