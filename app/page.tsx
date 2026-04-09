@@ -3646,15 +3646,15 @@ export default function Home() {
           {/* ═══ FILTERS ═══ */}
           {savedReports.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-6 animate-slide-up stagger-1">
-              <select value={historyFilterMap} onChange={(e) => setHistoryFilterMap(e.target.value)} className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-2 text-[11px] text-neutral-300 outline-none transition hover:border-white/[0.15] focus:border-[#FF4655]/30">
+              <select value={historyFilterMap} onChange={(e) => setHistoryFilterMap(e.target.value)} className="rounded-lg border border-white/[0.06] bg-[#0c1424] px-3 py-2 text-[11px] text-neutral-400 outline-none transition hover:border-[#FF4655]/20 focus:border-[#FF4655]/30 cursor-pointer">
                 <option value="">{l.historyFilterMap}: {l.historyAll}</option>
                 {uniqueMaps.map((m) => <option key={m} value={m}>{m}</option>)}
               </select>
-              <select value={historyFilterAgent} onChange={(e) => setHistoryFilterAgent(e.target.value)} className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-2 text-[11px] text-neutral-300 outline-none transition hover:border-white/[0.15] focus:border-[#FF4655]/30">
+              <select value={historyFilterAgent} onChange={(e) => setHistoryFilterAgent(e.target.value)} className="rounded-lg border border-white/[0.06] bg-[#0c1424] px-3 py-2 text-[11px] text-neutral-400 outline-none transition hover:border-[#FF4655]/20 focus:border-[#FF4655]/30 cursor-pointer">
                 <option value="">{l.historyFilterAgent}: {l.historyAll}</option>
                 {uniqueAgents.map((a) => <option key={a} value={a}>{a}</option>)}
               </select>
-              <select value={historyFilterResult} onChange={(e) => setHistoryFilterResult(e.target.value as "all" | "wins" | "losses")} className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-2 text-[11px] text-neutral-300 outline-none transition hover:border-white/[0.15] focus:border-[#FF4655]/30">
+              <select value={historyFilterResult} onChange={(e) => setHistoryFilterResult(e.target.value as "all" | "wins" | "losses")} className="rounded-lg border border-white/[0.06] bg-[#0c1424] px-3 py-2 text-[11px] text-neutral-400 outline-none transition hover:border-[#FF4655]/20 focus:border-[#FF4655]/30 cursor-pointer">
                 <option value="all">{l.historyFilterResult}: {l.historyAll}</option>
                 <option value="wins">{l.historyWins}</option>
                 <option value="losses">{l.historyLosses}</option>
@@ -3773,17 +3773,17 @@ export default function Home() {
 
         <div className="relative z-10 mx-auto max-w-lg px-4 pt-20 pb-12 space-y-6">
 
-          {/* Agent portrait — right side, behind content, not covering text */}
-          <div className="hidden lg:block absolute right-[-120px] top-[600px] pointer-events-none" style={{ width: '350px', zIndex: 1 }}>
+          {/* Agent portrait — right side background, visible but not blocking */}
+          <div className="absolute right-[-80px] top-[500px] pointer-events-none" style={{ width: '300px', zIndex: 1 }}>
             <img
               src={agentFullPortrait(vr.agent)}
               alt={vr.agent}
               className="w-full h-auto object-contain"
               style={{
-                opacity: 0.25,
-                filter: `drop-shadow(0 0 60px rgba(255,70,85,0.2)) saturate(1.3)`,
-                maskImage: 'linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 40%, transparent 70%)',
-                WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 40%, transparent 70%)',
+                opacity: 0.2,
+                filter: `drop-shadow(0 0 50px rgba(255,70,85,0.2)) saturate(1.3)`,
+                maskImage: 'linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, transparent 75%)',
+                WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, transparent 75%)',
               }}
             />
           </div>
