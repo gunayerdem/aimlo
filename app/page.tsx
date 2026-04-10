@@ -131,7 +131,7 @@ async function checkUsernameAvailable(username: string): Promise<boolean> {
 /* ══════════════════════════════════════════════════════════
    BRAND
    ══════════════════════════════════════════════════════════ */
-const AIMLO_LOGO_SRC = "/aimlo-logo.png";
+const AIMLO_LOGO_SRC = "/aimlo-logo.png?v=3";
 function AimloLogo({ size = 48, className = "", interactive = false }: { size?: number; className?: string; interactive?: boolean }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -1375,7 +1375,10 @@ function Navbar({
           onClick={onLogoClick}
           className="flex items-center gap-2 transition-opacity duration-200 hover:opacity-80"
         >
-          <AimloLogo size={90} interactive />
+          <AimloLogo size={60} interactive />
+          <span className="text-xl font-black tracking-wider ml-1" style={{ background: "linear-gradient(135deg, #00D4FF 0%, #A855F7 50%, #FF4690 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", filter: "drop-shadow(0 0 8px rgba(0,212,255,0.2))" }}>
+            AIMLO
+          </span>
           <span className="hidden sm:inline rounded-md bg-blue-500/10 border border-blue-500/10 px-1.5 py-0.5 text-[9px] font-bold text-blue-400 uppercase tracking-wider">
             Beta
           </span>
@@ -1684,8 +1687,11 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       {/* ─── NAVBAR — Xtract style ─── */}
       <nav className="fixed top-0 left-0 right-0 z-50 nav-xtract">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-          <div className="flex items-center gap-2.5">
-            <AimloLogo size={50} interactive />
+          <div className="flex items-center gap-2">
+            <AimloLogo size={32} interactive />
+            <span className="text-lg font-black tracking-wider" style={{ background: "linear-gradient(135deg, #00D4FF 0%, #A855F7 50%, #FF4690 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", filter: "drop-shadow(0 0 6px rgba(0,212,255,0.2))" }}>
+              AIMLO
+            </span>
           </div>
           <div className="hidden md:flex items-center gap-8">
             {Object.entries(l.landingNav).map(([key, label]) => (
@@ -1832,7 +1838,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             {/* Fake AI feedback card */}
             <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4">
               <div className="flex items-center gap-2 mb-3">
-                <img src="/aimlo-logo.png" alt="" className="w-5 h-auto" />
+                <img src="/aimlo-logo.png?v=3" alt="" className="w-5 h-auto" />
                 <span className="text-[11px] font-bold text-[#FF4655] uppercase tracking-wider">AI {lang === "tr" ? "Analiz" : "Analysis"}</span>
                 <span className="text-[9px] text-neutral-600 ml-auto">Round 8</span>
               </div>
@@ -2209,7 +2215,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
         <div className="mx-auto max-w-5xl px-5 sm:px-8 py-12">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
-              <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 22, width: 'auto', opacity: 0.4 }} draggable={false} />
+              <img src="/aimlo-logo.png?v=3" alt="AIMLO" style={{ height: 22, width: 'auto', opacity: 0.4 }} draggable={false} />
               <span className="text-[12px] text-neutral-600">
                 {lang === "tr" ? "AI destekli Valorant koçluk platformu" : "AI-powered Valorant coaching platform"}
               </span>
@@ -2384,7 +2390,7 @@ function AuthScreen({
       <main className="min-h-screen bg-[#030711] flex items-center justify-center px-4">
         <AmbientBg />
         <div className="relative z-10 w-full max-w-sm space-y-8 text-center animate-slide-up-big">
-          <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 34, width: 'auto' }} draggable={false} className="mx-auto opacity-30" />
+          <img src="/aimlo-logo.png?v=3" alt="AIMLO" style={{ height: 34, width: 'auto' }} draggable={false} className="mx-auto opacity-30" />
           <div className="card-glow rounded-2xl p-10 space-y-6">
             <div className="relative mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#FF4655]/[0.06] border border-[#FF4655]/15">
               <span className="text-3xl">✉️</span>
@@ -2415,7 +2421,7 @@ function AuthScreen({
           <button onClick={onBackToLanding} className="mx-auto flex items-center gap-2 text-[12px] text-neutral-600 transition hover:text-[#FF6B77] hover-underline">
             ← {al.back}
           </button>
-          <img src="/aimlo-logo.png" alt="AIMLO" style={{ height: 34, width: 'auto' }} draggable={false} className="mx-auto opacity-30" />
+          <img src="/aimlo-logo.png?v=3" alt="AIMLO" style={{ height: 34, width: 'auto' }} draggable={false} className="mx-auto opacity-30" />
           <div>
             <h2 className="text-3xl font-black text-white tracking-tight">
               {mode === "login" ? al.authLogin : al.authRegister}
