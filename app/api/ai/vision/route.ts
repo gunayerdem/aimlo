@@ -18,96 +18,101 @@ const AI_TIMEOUT_MS = 15_000;
 const MAX_PAYLOAD_BYTES = 5_000_000; // 5MB max (base64 images are large)
 const ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages";
 
-const SYSTEM_PROMPT = `Sen AIMLO, Radiant seviye Valorant koçusun. Screenshot'tan round feedback ver, JSON döndür.
+const SYSTEM_PROMPT = `Sen AIMLO'sun: Valorant'ta Diamond+ seviyede oynayan, brutal-honest, Türkçe konuşan bir koçsun. Görevin oyuncuya GERÇEK pattern-aware feedback vermek — generic "iyi nişan al" laflarını YASAKLIYORUM.
 
-TEMEL KURALLAR:
-- deathAnalysis: SADECE 1 sorun. Öncelik: tekrar eden pattern > mekanik hata > tek gözlem.
-- nextRoundSuggestion: SADECE 1 aksiyon.
-- enemyAnalysis: max 2-3 madde.
-- Kanıtlı bilgi kesin dille, çıkarım ihtimalli dille ("olabilir","muhtemelen"). Kanıtsız tarihsel iddia YASAK.
-- Tek round = pattern iddiası YASAK. 2+ round aynı pozisyon = "tekrar eden".
-- Ölüm pozisyonu ≠ giriş yolu. Sadece NEREDE öldüğünü biliyoruz.
-- ASLA genel feedback verme ("pozisyonunu değiştir", "dikkatli ol" YASAK).
-- Her feedback MAP-SPESİFİK, AGENT-SPESİFİK, DURUM-SPESİFİK olmalı.
-- Türkçe, kısa, direkt, aksiyon odaklı.
-- Gelen field boşsa/0/false ise o konudan bahsetme.
-- Rank coaching SEVİYESİNİ DÜŞÜRMEZ — her rank'a aynı derinlikte coaching ver.
+═══════════════════════════════════════════════
+VERİ HİYERARŞİSİ (DİKKATLE OKU)
+═══════════════════════════════════════════════
+Sana 2 kaynaktan veri geliyor:
+1. OCR / DESKTOP CLIENT verisi (killerInfo, deathLocation, deathAngle, patternContext, vs.)
+2. Round-end screenshot (ikincil kaynak)
 
-ANALİZ SIRASI (bu sırada analiz et):
+OCR/CLIENT verisi PIXEL TRUTH'tur. Screenshot'tan çıkardığın herhangi bir gözlem OCR verisiyle çelişirse → OCR'a güven, screenshot'ı yoksay. OCR "killed by cypher with operator" diyorsa deathAnalysis'te CYPHER ve OPERATOR kelimeleri GEÇMEK ZORUNDA.
 
-1. EKONOMİ ANALİZİ (credits + loadout + economyType):
-- economyType="eco" veya credits<2000: save round — Classic/shorty ile oyna, bilgi topla, ölme. Sonraki round full buy hedefle.
-- economyType="force_buy": risk/reward analiz et. Spectre/marshal ile agresif oynamalı.
-- economyType="full_buy": loadout'a göre pozisyon öner. Vandal=uzun açılar, Phantom=yakın mesafe, Operator=one-shot açılar.
-- economyType="pistol": ghost ile headshot, classic sağ tık yakın mesafe. Utility önemli.
-- credits varsa: sonraki round buy planı öner (ör: "3200 kredin var, spectre al sonraki full buy").
-- Full buy'da ölmek pahalı — takımı save'e zorluyorsun.
+═══════════════════════════════════════════════
+KURALLAR (HEPSİ ZORUNLU — HER KURAL BİR RED BAYRAĞI)
+═══════════════════════════════════════════════
+1. OCR death context'i varsa ASLA yok sayma. killerInfo varsa AI response'unda killer agent ismi geçmeli. deathLocation varsa callout geçmeli.
+2. GENERİK TAVSİYE YASAK. Şu cümleleri YAZAMAZSIN: "iyi nişan al", "aim'ini geliştir", "pozisyonunu kontrol et", "daha dikkatli ol", "konsantre ol", "soğukkanlı ol", "sabırlı ol", "dikkat et". Her cümle SPESİFİK olmak zorunda — callout, ajan ismi, silah, timing ve/veya utility içermeli.
+3. patternContext varsa ONA referans ver. "2 round üst üste cypher seni B short'tan operator'la aldı — bu sefer flash atmadan girme" gibi. Pattern yoksa generic feedback verme, bu round'a odaklan.
+4. enemyComp'u kullan. Cypher varsa trip/cam/cage'ini düşün. Killjoy varsa lockdown timing'i. Jett varsa dash timing'i. Chamber varsa Headhunter angle'ları.
+5. Map-spesifik callout kullan. Ascent'te "B Short, Market Window, Mid Courtyard, Heaven, Hell". Bind'da "Hookah, U Hall, Showers, Baths, Lamps". Yanlış map callout = sıfır güven.
+6. Sayı kullan. "30 saniye sonra push" değil "timer 16'da mid fake, 11'de B execute" gibi spesifik.
+7. Türkçe. Kısa. Direkt. Brutal. Antrenör tonu — empati yok. "sen" hitabı.
+8. Gelen field boşsa/0/false ise o konudan BAHSETME. Uydurma yasak.
+9. Her rank'a aynı derinlikte coaching ver — seviyeni düşürme.
 
-2. POZİSYON ANALİZİ (deathLocation + deathAngle + map + side):
-- Side=attack: entry timing, site execute, trade chain, utility sequencing, post-plant positioning.
-- Side=defense: anchor positioning, retake vs hold, rotation timing, info play, stack vs default.
-- deathAngle analizi: back/behind=flanked, side=crossfire, front=aim duel kaybetmiş.
-- Harita-spesifik callout kullan (A Short, B Main, Mid Window — genel "site" veya "mid" YASAK).
+═══════════════════════════════════════════════
+ANALİZ ÖNCELİK SIRASI
+═══════════════════════════════════════════════
+1. patternContext (en kritik — multi-round insight)
+2. killerInfo (kim + neyle öldürdü)
+3. deathLocation + deathAngle (nerede + hangi yönden)
+4. enemyComp (düşman composition counters)
+5. economyType + credits + loadout (ekonomi kararları)
+6. alliesAlive/enemiesAlive + spikePlanted (durum farkındalığı)
+7. healthAtDeath (HP'ye göre agresiflik tavsiyesi)
+8. ultReady (ult kullanılabilir miydi)
+9. roundTimerAtDeath (timing baskısı)
 
-3. DURUM FARKINDALIGI (alliesAlive + enemiesAlive + spikePlanted):
-- alliesAlive=0, enemiesAlive>=2: save öner, hero play YASAK.
-- alliesAlive=0, enemiesAlive=1: clutch mümkün — pozisyon avantajı, ses, utility kullan.
-- alliesAlive>=enemiesAlive: agresif trade ve execute öner.
-- alliesAlive<enemiesAlive: info topla, izolasyon kur, utility ile eşitle.
-- spikePlanted=true + attack: post-plant pozisyonuna geç, gereksiz peek atma.
-- spikePlanted=true + defense: retake stratejisi — utility ile giriş aç, spike ses bilgisi kullan.
-- spikePlanted=false + attack + zaman azalıyor: execute çağır, default oynama.
+═══════════════════════════════════════════════
+EKONOMİ SPESİFİK KURALLARI (economyType varsa UYGULA)
+═══════════════════════════════════════════════
+- economyType="eco" veya credits<2000: SAVE round. nextRoundSuggestion'da "Classic/Shorty ile bilgi topla, ölme, sonraki round full-buy hedefle" de. Full buy ile çarpışmaya girme tavsiyesi YASAK.
+- economyType="force_buy": risk/reward. Spectre/Marshal ile pick oynamayı öner.
+- economyType="full_buy": loadout'a göre spesifik angle öner. Vandal=long range, Phantom=close range, Operator=one-shot angles.
+- economyType="pistol": Ghost headshot + utility öncelik öner.
+- economyType boşsa bu konudan BAHSETME.
 
-4. HP ANALİZİ (healthAtDeath):
-- healthAtDeath < 50: "43 HP ile peek atma, trade edilemezsin — cover'da kal, info ver."
-- healthAtDeath = 150 (full): "Full HP'de öldüysen pure pozisyonlama hatası."
-- healthAtDeath 50-100: "Hasar almış olarak agresif oynama, utility ile açı temizle."
-- healthAtDeath = 0 veya gelmezse: HP'den BAHSETMEf.
+═══════════════════════════════════════════════
+coachInsight KURALI (her zaman doldur)
+═══════════════════════════════════════════════
+coachInsight DESKTOP OVERLAY'İNDE ZORUNLU FIELD — boş dönmemeli:
+- patternContext VARSA: multi-round brutal insight yaz (örn: "3 round üst üste B'de cypher operator. B'yi aç ya da A'ya yığ — cypher rotate edemiyor").
+- patternContext YOKSA: bu round'un key takeaway'ini yaz (örn: "Full HP ile B main'de open angle. Sonraki round cover arkasında hold yap, info topla." veya "45s'de solo peek = trade edilemez. Takımınla yığ, execute zamanı bekle.").
+- Kural: coachInsight HER ZAMAN en az 1 cümle — yani asla "" boş dönme, pattern yoksa round-level micro-lesson yaz.
 
-5. ULT ANALİZİ (ultReady + agent):
-- ultReady=true + öldü: "[agent] ultiyle bu durumda [spesifik ult aksiyonu] yapabilirdin."
-- Agent-spesifik ult kullanımı öner: Jett=Blade Storm eco'da, Raze=Showstopper site execute, Sova=Hunter's Fury retake, Sage=Resurrection trade sonrası.
-- ultReady=false: Ult'tan bahsetme.
+═══════════════════════════════════════════════
+ÇIKTI — SADECE JSON (başka hiçbir şey, markdown yok, code block yok)
+═══════════════════════════════════════════════
+{
+  "round": <request'teki round>,
+  "score": "<request'teki score, örn '4 - 3'>",
+  "result": "<'win' veya 'loss'>",
+  "died": <request'teki died>,
+  "deathAnalysis": "<2-3 cümle: NEDEN öldün. killerInfo/deathLocation/deathAngle/patternContext'i kullan. Spesifik ol — callout + ajan + silah içermeli.>",
+  "enemyAnalysis": [
+    "<enemyComp'a göre 1 spesifik counter-play insight>",
+    "<bu round'da gözlenmiş düşman pattern veya setup'ı>",
+    "<bu composition'a karşı en etkili utility/timing>"
+  ],
+  "nextRoundSuggestion": "<sıradaki round için TEK net plan: hangi site, hangi timing (timer bazlı), hangi util, hangi rotation. Spesifik callout ve saniye içermeli.>",
+  "coachInsight": "<ZORUNLU, asla boş bırakma. patternContext varsa: multi-round brutal insight. Örn: '3 round üst üste B site'ta cypher operator. B'yi aç ya da A default'a geç — cypher rotate edemiyor.' patternContext YOKSA: bu round'un spesifik micro-lesson'u. Örn: 'Full HP'yle B Main'de swing yaptın — cover arkasından info topla, 45s'den önce solo peek yok.'>",
+  "deathPosition": "<callout küçük harf örn 'b_main' veya 'unknown'>",
+  "positionConfidence": "<'high'|'medium'|'low'>",
+  "positionSignals": <0-4 arası>,
+  "killerAgent": "<küçük harf ajan ismi veya null>",
+  "killerWeapon": "<küçük harf silah ismi veya null>",
+  "killfeedConfidence": "<'high'|'medium'|'low'|'unreadable'>",
+  "patternData": {
+    "deathLocation": "<küçük harf callout, opsiyonel>",
+    "peekType": "<'dry_peek'|'util_peek'|'jiggle'|'wide_swing'|'holding'|'unknown', opsiyonel>",
+    "utilUsed": <boolean, opsiyonel>,
+    "traded": <boolean, opsiyonel>,
+    "deathTiming": "<'early'|'mid'|'late'|'post_plant', opsiyonel>",
+    "enemyWeapon": "<küçük harf, opsiyonel>",
+    "mapControl": "<'full_control'|'partial_control'|'no_control'|'contested', opsiyonel>",
+    "wasRepeatedMistake": <boolean, opsiyonel>
+  }
+}
 
-6. TIMING ANALİZİ (roundTimerAtDeath + deathTiming):
-- roundTimerAtDeath > 90: "Çok erken agresif olmuşsun — utility ile bilgi topla, execute zamanını bekle."
-- roundTimerAtDeath 30-60: Normal execute phase — dry peek yerine util kullan.
-- roundTimerAtDeath < 15: "Zaman baskısıyla hata yapmışsın — daha erken execute çağır."
-- roundTimerAtDeath gelmezse: sadece deathTiming (early/mid/late) kullan.
+KRİTİK: coachInsight field'ı desktop overlay'inde mor "KOÇ İÇGÖRÜSÜ" bloğunda gösteriliyor. patternContext varsa BU FIELD DOLU OLMAK ZORUNDA — pattern'e spesifik referans + brutal fix öner.`;
 
-7. KILLER INFO COACHING (killerInfo):
-- killerInfo varsa: öldüren ajanın ability'lerini, silahının avantajlarını ve counterplay'ini analiz et.
-- Operator ile öldüyse: jiggle peek, smoke, flash counter öner.
-- Vandal ile yakın mesafede öldüyse: angle advantage, pre-aim öner.
+const USER_PROMPT = `Valorant round sonu. Aşağıdaki OCR / CLIENT VERİSİ pixel truth'tur — screenshot'tan daha güvenilirdir. Çelişki varsa OCR'a güven.
 
-8. PATTERN ANALİZİ (patternContext):
-- Pattern varsa MUTLAKA bahset ve spesifik FIX öner.
-- "Son 3 rounddur aynı açıdan ölüyorsun — bu açıyı değiştir" gibi.
-- Pattern yoksa tekrar eden hata iddiası yapma.
+GÖREVİN: Aşağıdaki verileri kullanarak brutal, pattern-aware Türkçe koçluk feedback'i üret. coachInsight field'ı patternContext varsa ZORUNLU doldurulmalı. deathAnalysis killerInfo + deathLocation + deathAngle'ı YANSITMALI. Generic cümleler YASAK.
 
-patternData (opsiyonel, sadece tespit edileni doldur — emin değilsen KOYMA):
-deathLocation: string — callout, küçük harf+underscore ("a_long","b_main")
-peekType: "dry_peek"|"util_peek"|"jiggle"|"wide_swing"|"holding"|"unknown"
-utilUsed: boolean — ölümden önce ability kullandı mı
-traded: boolean — takım trade aldı mı
-deathTiming: "early"|"mid"|"late"|"post_plant"
-enemyWeapon: string — küçük harf ("vandal","operator")
-mapControl: "full_control"|"partial_control"|"no_control"|"contested"
-wasRepeatedMistake: boolean — patternContext'te benzer hata varsa true
-Hayatta kalınan round: sadece mapControl+utilUsed doldur.`;
-
-const USER_PROMPT = `Valorant round sonu screenshot'u. Türkçe coaching feedback ver.
-
-ÖLÜM POZİSYONU — 4 sinyal kontrol et: minimap, sahne geometrisi, kamera yönü, çevresel ipuçları.
-2+ sinyal aynı bölge → confidence=high. 1 sinyal → medium. Çelişi/yok → "unknown". Uydurma YASAK.
-Alt-bölge ekle mümkünse: "B Main entry", "A Site back left".
-
-MEKANİK HATA — sadece GÖRÜNEN kanıtlar (açık kalma, açı tipi, cover durumu, tehdit yönü).
-2+ sinyal → hata iddiası. 1 sinyal → "olabilir". 0 → iddia YASAK.
-Trade/çatışma anı = hata DEĞİL. "aim'ini geliştir" YASAK.
-
-JSON döndür:
-{"round":number,"score":"X-Y","result":"win"|"loss","died":boolean,"deathAnalysis":"...","enemyAnalysis":["..."],"nextRoundSuggestion":"...","deathPosition":"bölge|unknown","positionConfidence":"high"|"medium"|"low","positionSignals":0-4,"patternData":{"deathLocation":"a_long","peekType":"dry_peek","utilUsed":false,"traded":false,"deathTiming":"early","enemyWeapon":"operator","mapControl":"no_control","wasRepeatedMistake":true}}`;
+Sadece geçerli JSON döndür — markdown yok, code block yok, açıklama yok. SYSTEM prompt'ta belirtilen schema'ya tam uy.`;
 
 /* ══════════════════════════════════════════════════════════
    TYPES
@@ -229,6 +234,7 @@ type RoundFeedback = {
   deathAnalysis: string;
   enemyAnalysis: string[];
   nextRoundSuggestion: string;
+  coachInsight?: string;
   killerAgent?: string | null;
   killerWeapon?: string | null;
   killfeedConfidence?: string;
@@ -286,7 +292,8 @@ const DEFAULT_FEEDBACK: RoundFeedback = {
   died: true,
   deathAnalysis: "Analiz yapılamadı.",
   enemyAnalysis: ["Analiz yapılamadı."],
-  nextRoundSuggestion: "Dikkatli oyna, bilgi topla.",
+  nextRoundSuggestion: "Analiz yapılamadı.",
+  coachInsight: "",
   killerAgent: null,
   killerWeapon: null,
   killfeedConfidence: "unreadable",
@@ -398,34 +405,92 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Build round context from client-provided data
+    // Build round context from client-provided data — structured OCR/pixel-truth blocks.
+    // Each block only renders if at least one field is non-empty (no noise lines).
     const reqBody = body as VisionRequest;
-    const contextParts: string[] = [];
-    if (typeof reqBody.round === "number") contextParts.push(`Round: ${reqBody.round}`);
-    if (typeof reqBody.score === "string") contextParts.push(`Skor: ${reqBody.score}`);
-    if (typeof reqBody.result === "string") contextParts.push(`Sonuç: ${reqBody.result}`);
-    if (typeof reqBody.died === "boolean") contextParts.push(`Öldü: ${reqBody.died ? "evet" : "hayır"}`);
-    if (typeof reqBody.deathTiming === "string") contextParts.push(`Ölüm zamanı: ${reqBody.deathTiming}`);
-    if (typeof reqBody.bannerType === "string") contextParts.push(`Banner: ${reqBody.bannerType}`);
-    if (typeof reqBody.combatReportVisible === "boolean") contextParts.push(`Combat report: ${reqBody.combatReportVisible ? "görünür" : "gizli"}`);
-    if (typeof reqBody.scoreChanged === "boolean") contextParts.push(`Skor değişti: ${reqBody.scoreChanged ? "evet" : "hayır"}`);
-    if (typeof reqBody.side === "string") contextParts.push(`Side: ${reqBody.side}`);
-    if (typeof reqBody.mode === "string") contextParts.push(`Mode: ${reqBody.mode}`);
-    if (typeof reqBody.killerInfo === "string" && reqBody.killerInfo.length > 0) contextParts.push(`Killer info: ${reqBody.killerInfo.slice(0, 100)}`);
-    if (typeof reqBody.deathLocation === "string" && reqBody.deathLocation.length > 0) contextParts.push(`Ölüm lokasyonu: ${reqBody.deathLocation.slice(0, 50)}`);
-    if (typeof reqBody.deathAngle === "string" && reqBody.deathAngle.length > 0) contextParts.push(`Ölüm açısı: ${reqBody.deathAngle.slice(0, 30)}`);
-    if (typeof reqBody.alliesAlive === "number") contextParts.push(`Takım hayatta: ${reqBody.alliesAlive}`);
-    if (typeof reqBody.enemiesAlive === "number") contextParts.push(`Düşman hayatta: ${reqBody.enemiesAlive}`);
-    if (typeof reqBody.credits === "number") contextParts.push(`Kredi: ${reqBody.credits}`);
-    if (typeof reqBody.loadout === "string" && reqBody.loadout.length > 0) contextParts.push(`Silah: ${reqBody.loadout.slice(0, 30)}`);
-    if (typeof reqBody.economyType === "string" && reqBody.economyType.length > 0) contextParts.push(`Ekonomi: ${reqBody.economyType.slice(0, 20)}`);
-    if (typeof reqBody.spikePlanted === "boolean" && reqBody.spikePlanted) contextParts.push(`Spike: atılmış`);
-    if (typeof reqBody.healthAtDeath === "number" && reqBody.healthAtDeath > 0) contextParts.push(`HP ölümde: ${Math.min(Math.max(reqBody.healthAtDeath, 0), 150)}`);
-    if (typeof reqBody.ultReady === "boolean" && reqBody.ultReady) contextParts.push(`Ult: hazırdı`);
-    if (typeof reqBody.roundTimerAtDeath === "number" && reqBody.roundTimerAtDeath > 0) contextParts.push(`Süre kalan: ${Math.min(Math.max(reqBody.roundTimerAtDeath, 0), 140)} saniye`);
 
-    const clientContext = contextParts.length > 0
-      ? `\n\nClient context (doğrulanmış bilgi):\n${contextParts.join("\n")}`
+    // Block 1: Round durumu
+    const roundBlockLines: string[] = [];
+    if (typeof reqBody.round === "number") roundBlockLines.push(`- Round: ${reqBody.round}`);
+    if (typeof reqBody.score === "string") roundBlockLines.push(`- Skor: ${reqBody.score}`);
+    if (typeof reqBody.result === "string") roundBlockLines.push(`- Sonuç: ${reqBody.result.toUpperCase()}`);
+    if (typeof reqMap === "string") roundBlockLines.push(`- Map: ${reqMap}`);
+    if (typeof reqAgent === "string") roundBlockLines.push(`- Agent: ${reqAgent}`);
+    if (typeof reqBody.side === "string") roundBlockLines.push(`- Side: ${reqBody.side}`);
+    if (typeof reqBody.mode === "string") roundBlockLines.push(`- Mode: ${reqBody.mode}`);
+    if (Array.isArray(reqEnemyComp) && reqEnemyComp.length > 0) {
+      const comp = reqEnemyComp.filter(a => typeof a === "string" && a.length > 0).slice(0, 5).join(", ");
+      if (comp) roundBlockLines.push(`- Düşman roster: ${comp}`);
+    }
+
+    // Block 2: Ölüm bağlamı (OCR pixel truth)
+    const deathBlockLines: string[] = [];
+    if (reqBody.died === true) {
+      deathBlockLines.push(`- Öldürüldün: EVET${typeof reqBody.deathTiming === "string" ? ` (${reqBody.deathTiming} round)` : ""}`);
+      if (typeof reqBody.killerInfo === "string" && reqBody.killerInfo.length > 0) {
+        deathBlockLines.push(`- ${reqBody.killerInfo.slice(0, 120)}`);
+      }
+      if (typeof reqBody.deathLocation === "string" && reqBody.deathLocation.length > 0) {
+        deathBlockLines.push(`- Ölüm konumu (OCR): ${reqBody.deathLocation.slice(0, 50)}`);
+      }
+      if (typeof reqBody.deathAngle === "string" && reqBody.deathAngle.length > 0) {
+        deathBlockLines.push(`- Hasar yönü: ${reqBody.deathAngle.slice(0, 30)} (düşman bu açıdan geldi)`);
+      }
+      if (typeof reqBody.healthAtDeath === "number" && reqBody.healthAtDeath > 0) {
+        deathBlockLines.push(`- Ölürken HP: ${Math.min(Math.max(reqBody.healthAtDeath, 0), 150)}`);
+      }
+      if (typeof reqBody.alliesAlive === "number" || typeof reqBody.enemiesAlive === "number") {
+        const a = typeof reqBody.alliesAlive === "number" ? reqBody.alliesAlive : "?";
+        const e = typeof reqBody.enemiesAlive === "number" ? reqBody.enemiesAlive : "?";
+        deathBlockLines.push(`- Müttefik/Düşman canlı: ${a}/${e}`);
+      }
+      if (typeof reqBody.roundTimerAtDeath === "number" && reqBody.roundTimerAtDeath > 0) {
+        deathBlockLines.push(`- Round timer: ${Math.min(Math.max(reqBody.roundTimerAtDeath, 0), 140)}s kalmıştı`);
+      }
+      if (reqBody.ultReady === true) {
+        deathBlockLines.push(`- Ultin hazırdı: EVET (kullanmadın)`);
+      }
+      if (reqBody.spikePlanted === true) {
+        deathBlockLines.push(`- Spike: dikilmişti`);
+      }
+    } else if (reqBody.died === false) {
+      deathBlockLines.push(`- Öldürülmedin (hayatta kaldın)`);
+    }
+
+    // Block 3: Ekonomi
+    const econBlockLines: string[] = [];
+    if (typeof reqBody.economyType === "string" && reqBody.economyType.length > 0) {
+      econBlockLines.push(`- Buy tipi: ${reqBody.economyType.slice(0, 20)}`);
+    }
+    if (typeof reqBody.credits === "number") {
+      econBlockLines.push(`- Krediler: ${reqBody.credits}`);
+    }
+    if (typeof reqBody.loadout === "string" && reqBody.loadout.length > 0) {
+      econBlockLines.push(`- Silah: ${reqBody.loadout.slice(0, 30)}`);
+    }
+
+    // Block 4: Pattern context (multi-round history)
+    const patternBlock = (typeof reqBody.patternContext === "string" && reqBody.patternContext.length > 0)
+      ? reqBody.patternContext.slice(0, 2000)
+      : "";
+
+    // Assemble conditional context
+    const contextBlocks: string[] = [];
+    if (roundBlockLines.length > 0) {
+      contextBlocks.push(`═══════════════════════════════════════════════\nROUND DURUMU\n═══════════════════════════════════════════════\n${roundBlockLines.join("\n")}`);
+    }
+    if (deathBlockLines.length > 0) {
+      contextBlocks.push(`═══════════════════════════════════════════════\nÖLÜM BAĞLAMI (OCR PIXEL TRUTH — screenshot'tan daha güvenilir)\n═══════════════════════════════════════════════\n${deathBlockLines.join("\n")}`);
+    }
+    if (econBlockLines.length > 0) {
+      contextBlocks.push(`═══════════════════════════════════════════════\nEKONOMİ\n═══════════════════════════════════════════════\n${econBlockLines.join("\n")}`);
+    }
+    if (patternBlock) {
+      contextBlocks.push(`═══════════════════════════════════════════════\nÇOK-ROUNDLU PATTERN GEÇMİŞİ (KRİTİK — coachInsight bu pattern'e referans VERMELİ)\n═══════════════════════════════════════════════\n${patternBlock}`);
+    }
+
+    const clientContext = contextBlocks.length > 0
+      ? `\n\n${contextBlocks.join("\n\n")}`
       : "";
 
     // Build round history context for the user prompt
@@ -644,6 +709,12 @@ export async function POST(request: NextRequest) {
       }
       console.log(`[PATTERN-DATA] ${JSON.stringify(patternData)}`);
 
+      // coachInsight — always populated (pattern-aware if patternContext, else round-level micro-lesson)
+      const rawCoachInsight = typeof (fb as Record<string, unknown>).coachInsight === "string"
+        ? ((fb as Record<string, unknown>).coachInsight as string).trim().slice(0, 500)
+        : "";
+      const coachInsight = rawCoachInsight;
+
       return NextResponse.json({
         round: typeof fb.round === "number" ? fb.round : 0,
         score: typeof fb.score === "string" ? fb.score.slice(0, 10) : "?-?",
@@ -652,6 +723,7 @@ export async function POST(request: NextRequest) {
         deathAnalysis: checkedAnalysis.text.slice(0, 500),
         enemyAnalysis: fb.enemyAnalysis.slice(0, 5).map((s) => String(s).slice(0, 200)),
         nextRoundSuggestion: checkedSuggestion.text.slice(0, 500),
+        coachInsight,
         killerAgent,
         killerWeapon,
         killfeedConfidence,
