@@ -1,0 +1,217 @@
+[
+  {
+    "name": "Low data - calibrating",
+    "description": "Player with only 2 matches played. AI should use uncertain, hedging language and avoid sweeping conclusions.",
+    "context": {
+      "totalMatches": 2,
+      "winRate": 50,
+      "confidence": { "level": "calibrating", "matchesNeeded": 6 },
+      "agent": "Jett",
+      "map": "Ascent",
+      "side": {
+        "attackWinRate": 40,
+        "defenseWinRate": 60,
+        "attackRounds": 5,
+        "defenseRounds": 5
+      },
+      "deaths": [
+        { "round": 3, "position": "A Short", "killedBy": "Vandal", "side": "attack" },
+        { "round": 7, "position": "Mid", "killedBy": "Operator", "side": "defense" },
+        { "round": 11, "position": "B Main", "killedBy": "Phantom", "side": "attack" }
+      ],
+      "kills": 14,
+      "deaths_total": 12,
+      "assists": 3,
+      "kd": 1.17,
+      "adr": 142,
+      "headshots": 6,
+      "headshotPct": 35
+    },
+    "expectedBehavior": {
+      "shouldUseUncertainLanguage": true,
+      "shouldNotContain": ["her zaman", "sürekli", "kesinlikle", "always", "consistently"],
+      "shouldContainAnyOf": ["henüz", "erken", "ilk veriler", "early data", "so far", "seems"],
+      "minimumScore": 10
+    }
+  },
+  {
+    "name": "Strong pattern - high confidence",
+    "description": "Player with a clear death cluster at A Short across 8 matches. AI should identify the pattern directly and give specific advice.",
+    "context": {
+      "totalMatches": 8,
+      "winRate": 45,
+      "confidence": { "level": "established", "matchesNeeded": 0 },
+      "agent": "Killjoy",
+      "map": "Ascent",
+      "side": {
+        "attackWinRate": 50,
+        "defenseWinRate": 40,
+        "attackRounds": 48,
+        "defenseRounds": 52
+      },
+      "deaths": [
+        { "round": 2, "position": "A Short", "killedBy": "Vandal", "side": "defense" },
+        { "round": 5, "position": "A Short", "killedBy": "Phantom", "side": "defense" },
+        { "round": 6, "position": "A Short", "killedBy": "Vandal", "side": "defense" },
+        { "round": 8, "position": "A Short", "killedBy": "Operator", "side": "defense" },
+        { "round": 10, "position": "A Short", "killedBy": "Vandal", "side": "defense" },
+        { "round": 13, "position": "B Main", "killedBy": "Phantom", "side": "defense" },
+        { "round": 15, "position": "A Short", "killedBy": "Phantom", "side": "defense" },
+        { "round": 19, "position": "A Short", "killedBy": "Vandal", "side": "defense" },
+        { "round": 21, "position": "Mid", "killedBy": "Marshal", "side": "attack" }
+      ],
+      "kills": 68,
+      "deaths_total": 72,
+      "assists": 24,
+      "kd": 0.94,
+      "adr": 128,
+      "headshots": 22,
+      "headshotPct": 28,
+      "deathHeatmap": {
+        "A Short": 7,
+        "B Main": 1,
+        "Mid": 1
+      }
+    },
+    "expectedBehavior": {
+      "shouldContain": ["A Short"],
+      "shouldUseDirectLanguage": true,
+      "shouldNotContain": ["belki", "maybe", "perhaps"],
+      "minimumScore": 15
+    }
+  },
+  {
+    "name": "Side split problem",
+    "description": "Clear attack/defense imbalance. Attack win rate 30%, defense 65%. AI must identify the side weakness.",
+    "context": {
+      "totalMatches": 10,
+      "winRate": 48,
+      "confidence": { "level": "established", "matchesNeeded": 0 },
+      "agent": "Omen",
+      "map": "Haven",
+      "side": {
+        "attackWinRate": 30,
+        "defenseWinRate": 65,
+        "attackRounds": 60,
+        "defenseRounds": 60
+      },
+      "deaths": [
+        { "round": 1, "position": "A Long", "killedBy": "Vandal", "side": "attack" },
+        { "round": 3, "position": "C Long", "killedBy": "Operator", "side": "attack" },
+        { "round": 4, "position": "A Long", "killedBy": "Vandal", "side": "attack" },
+        { "round": 7, "position": "Garage", "killedBy": "Phantom", "side": "attack" },
+        { "round": 8, "position": "Mid", "killedBy": "Vandal", "side": "attack" },
+        { "round": 14, "position": "C Site", "killedBy": "Phantom", "side": "defense" },
+        { "round": 18, "position": "A Long", "killedBy": "Vandal", "side": "attack" }
+      ],
+      "kills": 85,
+      "deaths_total": 80,
+      "assists": 35,
+      "kd": 1.06,
+      "adr": 135,
+      "headshots": 30,
+      "headshotPct": 31,
+      "attackStats": {
+        "firstDeaths": 8,
+        "entries": 3,
+        "plants": 5
+      },
+      "defenseStats": {
+        "firstDeaths": 2,
+        "anchors": 12,
+        "retakes": 6
+      }
+    },
+    "expectedBehavior": {
+      "shouldMentionSide": true,
+      "shouldContainAnyOf": ["attack", "atak", "30%", "savunma", "defense"],
+      "shouldIdentifyWeakSide": "attack",
+      "minimumScore": 14
+    }
+  },
+  {
+    "name": "Map weakness",
+    "description": "Player has 0% win rate on Ascent across 4 matches while performing well on other maps. AI should flag the map-specific problem.",
+    "context": {
+      "totalMatches": 12,
+      "overallWinRate": 58,
+      "confidence": { "level": "established", "matchesNeeded": 0 },
+      "agent": "Sova",
+      "mapStats": {
+        "Ascent": { "matches": 4, "winRate": 0, "kd": 0.72, "adr": 105 },
+        "Bind": { "matches": 3, "winRate": 67, "kd": 1.35, "adr": 158 },
+        "Haven": { "matches": 3, "winRate": 100, "kd": 1.8, "adr": 175 },
+        "Split": { "matches": 2, "winRate": 50, "kd": 1.1, "adr": 140 }
+      },
+      "side": {
+        "attackWinRate": 45,
+        "defenseWinRate": 55,
+        "attackRounds": 72,
+        "defenseRounds": 72
+      },
+      "deaths": [
+        { "round": 2, "position": "Mid", "killedBy": "Vandal", "side": "defense", "map": "Ascent" },
+        { "round": 5, "position": "A Main", "killedBy": "Phantom", "side": "attack", "map": "Ascent" },
+        { "round": 9, "position": "B Main", "killedBy": "Operator", "side": "attack", "map": "Ascent" },
+        { "round": 12, "position": "Mid", "killedBy": "Vandal", "side": "defense", "map": "Ascent" }
+      ],
+      "kills": 108,
+      "deaths_total": 96,
+      "assists": 42,
+      "kd": 1.13,
+      "adr": 144,
+      "headshots": 38,
+      "headshotPct": 30
+    },
+    "expectedBehavior": {
+      "shouldContain": ["Ascent"],
+      "shouldMentionMapWeakness": true,
+      "shouldContainAnyOf": ["0%", "4 maç", "4 matches", "win rate"],
+      "minimumScore": 14
+    }
+  },
+  {
+    "name": "Generic output risk",
+    "description": "Average stats across the board with no standout patterns. This data tempts AI to fall back on generic advice. Quality check should catch any templated or banned-phrase output.",
+    "context": {
+      "totalMatches": 6,
+      "winRate": 50,
+      "confidence": { "level": "developing", "matchesNeeded": 2 },
+      "agent": "Phoenix",
+      "map": "Bind",
+      "side": {
+        "attackWinRate": 48,
+        "defenseWinRate": 52,
+        "attackRounds": 36,
+        "defenseRounds": 36
+      },
+      "deaths": [
+        { "round": 3, "position": "Hookah", "killedBy": "Vandal", "side": "attack" },
+        { "round": 6, "position": "A Short", "killedBy": "Phantom", "side": "defense" },
+        { "round": 10, "position": "B Site", "killedBy": "Vandal", "side": "attack" },
+        { "round": 15, "position": "Showers", "killedBy": "Spectre", "side": "attack" },
+        { "round": 20, "position": "A Short", "killedBy": "Phantom", "side": "defense" }
+      ],
+      "kills": 52,
+      "deaths_total": 50,
+      "assists": 15,
+      "kd": 1.04,
+      "adr": 138,
+      "headshots": 18,
+      "headshotPct": 32
+    },
+    "expectedBehavior": {
+      "shouldNotContain": [
+        "daha dikkatli oyna",
+        "dikkatli ol",
+        "bilgi topla",
+        "pozisyonunu geliştir",
+        "play carefully",
+        "gather information",
+        "improve positioning"
+      ],
+      "shouldReferenceSpecificPositions": true,
+      "minimumScore": 12
+    }
+  }
+]

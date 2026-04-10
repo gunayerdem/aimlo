@@ -1,0 +1,162 @@
+[
+  {
+    "name": "First round of match - minimal data",
+    "description": "Round 1 feedback. No history yet within this match. AI must operate with match-level context only and not hallucinate in-match patterns.",
+    "context": {
+      "matchId": "match_001",
+      "currentRound": 1,
+      "map": "Split",
+      "agent": "Sage",
+      "side": "defense",
+      "score": { "team": 0, "enemy": 0 },
+      "roundHistory": [],
+      "currentRoundEvent": {
+        "survived": false,
+        "kills": 0,
+        "deaths": 1,
+        "deathPosition": "Mid",
+        "killedBy": "Vandal",
+        "timeSurvived": 22,
+        "abilitiesUsed": ["Barrier Orb"]
+      },
+      "playerSeasonStats": {
+        "totalMatches": 5,
+        "winRate": 40,
+        "kd": 0.95,
+        "agent": "Sage",
+        "confidence": { "level": "developing" }
+      }
+    },
+    "expectedBehavior": {
+      "shouldNotReferencePatterns": true,
+      "shouldFocusOnSingleEvent": true,
+      "shouldContainAnyOf": ["Mid", "Barrier Orb", "22", "R1", "Round 1"],
+      "shouldNotContain": ["sürekli", "her raund", "every round", "pattern", "consistently"],
+      "minimumScore": 10
+    }
+  },
+  {
+    "name": "Round 10 with repeated death pattern",
+    "description": "By round 10 the player has died at B Main 4 times on attack side. The AI should identify this recurring pattern and offer specific repositioning advice.",
+    "context": {
+      "matchId": "match_002",
+      "currentRound": 10,
+      "map": "Ascent",
+      "agent": "Raze",
+      "side": "attack",
+      "score": { "team": 4, "enemy": 5 },
+      "roundHistory": [
+        { "round": 1, "side": "attack", "survived": true, "kills": 2, "deaths": 0 },
+        { "round": 2, "side": "attack", "survived": false, "kills": 0, "deaths": 1, "deathPosition": "B Main", "killedBy": "Operator" },
+        { "round": 3, "side": "attack", "survived": false, "kills": 1, "deaths": 1, "deathPosition": "B Main", "killedBy": "Vandal" },
+        { "round": 4, "side": "attack", "survived": true, "kills": 1, "deaths": 0 },
+        { "round": 5, "side": "attack", "survived": false, "kills": 0, "deaths": 1, "deathPosition": "Mid", "killedBy": "Phantom" },
+        { "round": 6, "side": "attack", "survived": false, "kills": 0, "deaths": 1, "deathPosition": "B Main", "killedBy": "Operator" },
+        { "round": 7, "side": "defense", "survived": true, "kills": 2, "deaths": 0 },
+        { "round": 8, "side": "defense", "survived": true, "kills": 1, "deaths": 0 },
+        { "round": 9, "side": "defense", "survived": false, "kills": 1, "deaths": 1, "deathPosition": "A Site", "killedBy": "Phantom" }
+      ],
+      "currentRoundEvent": {
+        "survived": false,
+        "kills": 0,
+        "deaths": 1,
+        "deathPosition": "B Main",
+        "killedBy": "Operator",
+        "timeSurvived": 18,
+        "abilitiesUsed": ["Paint Shells"]
+      },
+      "deathSummary": {
+        "B Main": 4,
+        "Mid": 1,
+        "A Site": 1
+      },
+      "playerSeasonStats": {
+        "totalMatches": 11,
+        "winRate": 52,
+        "kd": 1.1,
+        "agent": "Raze",
+        "confidence": { "level": "established" }
+      }
+    },
+    "expectedBehavior": {
+      "shouldIdentifyPattern": true,
+      "shouldContain": ["B Main"],
+      "shouldContainAnyOf": ["4", "Operator", "satchel", "Blast Pack", "farklı açı", "different angle"],
+      "shouldUseDirectLanguage": true,
+      "shouldSuggestAlternative": true,
+      "minimumScore": 15
+    }
+  },
+  {
+    "name": "Final round with established patterns",
+    "description": "Round 24 (match point). Full match history available. Player has shown strong defense but weak attack entries. AI should give a confident, data-rich summary with tactical advice for this crucial round.",
+    "context": {
+      "matchId": "match_003",
+      "currentRound": 24,
+      "map": "Haven",
+      "agent": "Fade",
+      "side": "attack",
+      "score": { "team": 12, "enemy": 11 },
+      "roundHistory": [
+        { "round": 1, "side": "attack", "survived": false, "kills": 0, "deaths": 1, "deathPosition": "A Long", "killedBy": "Vandal" },
+        { "round": 2, "side": "attack", "survived": true, "kills": 2, "deaths": 0 },
+        { "round": 3, "side": "attack", "survived": false, "kills": 1, "deaths": 1, "deathPosition": "C Long", "killedBy": "Operator" },
+        { "round": 4, "side": "attack", "survived": true, "kills": 1, "deaths": 0 },
+        { "round": 5, "side": "attack", "survived": false, "kills": 0, "deaths": 1, "deathPosition": "A Long", "killedBy": "Vandal" },
+        { "round": 6, "side": "attack", "survived": false, "kills": 0, "deaths": 1, "deathPosition": "C Long", "killedBy": "Phantom" },
+        { "round": 7, "side": "attack", "survived": true, "kills": 3, "deaths": 0 },
+        { "round": 8, "side": "attack", "survived": false, "kills": 1, "deaths": 1, "deathPosition": "Garage", "killedBy": "Vandal" },
+        { "round": 9, "side": "attack", "survived": true, "kills": 1, "deaths": 0 },
+        { "round": 10, "side": "attack", "survived": false, "kills": 0, "deaths": 1, "deathPosition": "A Long", "killedBy": "Operator" },
+        { "round": 11, "side": "attack", "survived": true, "kills": 2, "deaths": 0 },
+        { "round": 12, "side": "attack", "survived": true, "kills": 1, "deaths": 0 },
+        { "round": 13, "side": "defense", "survived": true, "kills": 2, "deaths": 0 },
+        { "round": 14, "side": "defense", "survived": true, "kills": 3, "deaths": 0 },
+        { "round": 15, "side": "defense", "survived": true, "kills": 1, "deaths": 0 },
+        { "round": 16, "side": "defense", "survived": true, "kills": 2, "deaths": 0 },
+        { "round": 17, "side": "defense", "survived": false, "kills": 1, "deaths": 1, "deathPosition": "C Site", "killedBy": "Phantom" },
+        { "round": 18, "side": "defense", "survived": true, "kills": 1, "deaths": 0 },
+        { "round": 19, "side": "defense", "survived": true, "kills": 2, "deaths": 0 },
+        { "round": 20, "side": "defense", "survived": true, "kills": 1, "deaths": 0 },
+        { "round": 21, "side": "defense", "survived": true, "kills": 3, "deaths": 0 },
+        { "round": 22, "side": "defense", "survived": false, "kills": 0, "deaths": 1, "deathPosition": "A Site", "killedBy": "Vandal" },
+        { "round": 23, "side": "defense", "survived": true, "kills": 2, "deaths": 0 }
+      ],
+      "currentRoundEvent": null,
+      "matchSummary": {
+        "attackRoundsWon": 7,
+        "attackRoundsLost": 5,
+        "defenseRoundsWon": 9,
+        "defenseRoundsLost": 2,
+        "totalKills": 33,
+        "totalDeaths": 8,
+        "attackDeaths": 6,
+        "defenseDeaths": 2,
+        "kd": 4.13,
+        "deathPositions": {
+          "A Long": 3,
+          "C Long": 2,
+          "Garage": 1,
+          "C Site": 1,
+          "A Site": 1
+        }
+      },
+      "playerSeasonStats": {
+        "totalMatches": 15,
+        "winRate": 60,
+        "kd": 1.25,
+        "agent": "Fade",
+        "confidence": { "level": "confident" }
+      }
+    },
+    "expectedBehavior": {
+      "shouldIdentifyPatterns": true,
+      "shouldContainAnyOf": ["A Long", "C Long", "Haunt", "Prowler", "Seize"],
+      "shouldMentionMatchContext": true,
+      "shouldContainAnyOf2": ["12-11", "match point", "maç puanı"],
+      "shouldUseConfidentLanguage": true,
+      "shouldGiveTacticalAdvice": true,
+      "minimumScore": 16
+    }
+  }
+]
