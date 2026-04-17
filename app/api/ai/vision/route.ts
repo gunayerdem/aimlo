@@ -368,12 +368,16 @@ export async function POST(request: NextRequest) {
       console.log(`[KB] selected: ${kb.files.join(", ")}`);
     }
 
-    // Build system prompt array — static prompt (cached) + dynamic KB + patternContext
-    const systemBlocks: Array<{ type: "text"; text: string; cache_control?: { type: "ephemeral" } }> = [
+    // Build system prompt array — static (cached 1h) + dynamic KB (cached 1h) + patternContext (uncached)
+    // 1h TTL covers a full Valorant match (typically 20-40 min) vs 5min default which only
+    // covers ~3-4 rounds before miss-rebuild. 2x write cost, but 13+ reads per match = big win.
+    type CacheControl = { type: "ephemeral"; ttl?: "5m" | "1h" };
+    type SystemBlock = { type: "text"; text: string; cache_control?: CacheControl };
+    const systemBlocks: SystemBlock[] = [
       {
         type: "text",
         text: SYSTEM_PROMPT,
-        cache_control: { type: "ephemeral" },
+        cache_control: { type: "ephemeral", ttl: "1h" },
       },
     ];
 
@@ -381,11 +385,12 @@ export async function POST(request: NextRequest) {
       systemBlocks.push({
         type: "text",
         text: kb.content,
-        cache_control: { type: "ephemeral" },
+        cache_control: { type: "ephemeral", ttl: "1h" },
       });
     }
 
     if (reqPatternContext) {
+      // patternContext changes every round — DO NOT cache (cache write overhead > benefit)
       systemBlocks.push({
         type: "text",
         text: `[PATTERN CONTEXT — Rust Client]\n${reqPatternContext.slice(0, 2000)}`,
@@ -567,7 +572,8 @@ export async function POST(request: NextRequest) {
         "Content-Type": "application/json",
         "x-api-key": apiKey,
         "anthropic-version": "2023-06-01",
-        "anthropic-beta": "prompt-caching-2024-07-31",
+        // extended-cache-ttl enables 1h ttl option (prompt-caching itself is now GA)
+        "anthropic-beta": "extended-cache-ttl-2025-04-11",
       },
       body: JSON.stringify({
         model: "claude-sonnet-4-6",
@@ -611,13 +617,16 @@ export async function POST(request: NextRequest) {
     const data = await response.json();
     clearTimeout(timeoutId);
 
-    // Log prompt cache metrics
+    // Log prompt cache metrics — R1 should show creation>0, R2+ should show read>0 (cache hit)
     const cacheCreation = data?.usage?.cache_creation_input_tokens ?? 0;
     const cacheRead = data?.usage?.cache_read_input_tokens ?? 0;
     const inputTokens = data?.usage?.input_tokens ?? 0;
     const outputTokens = data?.usage?.output_tokens ?? 0;
     const stopReason = data?.stop_reason ?? "unknown";
-    console.log(`[CACHE] creation=${cacheCreation}, read=${cacheRead}, input=${inputTokens}, output=${outputTokens}, stop=${stopReason}`);
+    const cacheHit = cacheRead > 0 ? "HIT" : cacheCreation > 0 ? "WRITE" : "MISS";
+    const totalInput = cacheCreation + cacheRead + inputTokens;
+    const cacheRatio = totalInput > 0 ? ((cacheRead / totalInput) * 100).toFixed(1) : "0.0";
+    console.log(`[CACHE ${cacheHit}] creation=${cacheCreation} read=${cacheRead} fresh=${inputTokens} total_in=${totalInput} hit_ratio=${cacheRatio}% output=${outputTokens} stop=${stopReason}`);
 
     const text: string = data?.content?.[0]?.text || "";
     if (!text) {
