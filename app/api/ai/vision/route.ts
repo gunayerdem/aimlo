@@ -79,11 +79,9 @@ coachInsight DESKTOP OVERLAY'İNDE ZORUNLU FIELD — boş dönmemeli:
 ═══════════════════════════════════════════════
 ÇIKTI — SADECE JSON (başka hiçbir şey, markdown yok, code block yok)
 ═══════════════════════════════════════════════
+SADECE bu 4 user-facing field'ı yaz. Başka field EKLEME — desktop killerInfo/deathLocation'ı zaten gönderdi, onları response'ta tekrar isteme gereği yok. Token bütçesi user içeriğe harcanacak.
+
 {
-  "round": <request'teki round>,
-  "score": "<request'teki score, örn '4 - 3'>",
-  "result": "<'win' veya 'loss'>",
-  "died": <request'teki died>,
   "deathAnalysis": "<2-3 cümle: NEDEN öldün. killerInfo/deathLocation/deathAngle/patternContext'i kullan. Spesifik ol — callout + ajan + silah içermeli.>",
   "enemyAnalysis": [
     "<enemyComp'a göre 1 spesifik counter-play insight>",
@@ -91,23 +89,7 @@ coachInsight DESKTOP OVERLAY'İNDE ZORUNLU FIELD — boş dönmemeli:
     "<bu composition'a karşı en etkili utility/timing>"
   ],
   "nextRoundSuggestion": "<sıradaki round için TEK net plan: hangi site, hangi timing (timer bazlı), hangi util, hangi rotation. Spesifik callout ve saniye içermeli.>",
-  "coachInsight": "<ZORUNLU, asla boş bırakma. patternContext varsa: multi-round brutal insight. Örn: '3 round üst üste B site'ta cypher operator. B'yi aç ya da A default'a geç — cypher rotate edemiyor.' patternContext YOKSA: bu round'un spesifik micro-lesson'u. Örn: 'Full HP'yle B Main'de swing yaptın — cover arkasından info topla, 45s'den önce solo peek yok.'>",
-  "deathPosition": "<callout küçük harf örn 'b_main' veya 'unknown'>",
-  "positionConfidence": "<'high'|'medium'|'low'>",
-  "positionSignals": <0-4 arası>,
-  "killerAgent": "<küçük harf ajan ismi veya null>",
-  "killerWeapon": "<küçük harf silah ismi veya null>",
-  "killfeedConfidence": "<'high'|'medium'|'low'|'unreadable'>",
-  "patternData": {
-    "deathLocation": "<küçük harf callout, opsiyonel>",
-    "peekType": "<'dry_peek'|'util_peek'|'jiggle'|'wide_swing'|'holding'|'unknown', opsiyonel>",
-    "utilUsed": <boolean, opsiyonel>,
-    "traded": <boolean, opsiyonel>,
-    "deathTiming": "<'early'|'mid'|'late'|'post_plant', opsiyonel>",
-    "enemyWeapon": "<küçük harf, opsiyonel>",
-    "mapControl": "<'full_control'|'partial_control'|'no_control'|'contested', opsiyonel>",
-    "wasRepeatedMistake": <boolean, opsiyonel>
-  }
+  "coachInsight": "<ZORUNLU, asla boş bırakma. patternContext varsa: multi-round brutal insight. Örn: '3 round üst üste B site'ta cypher operator. B'yi aç ya da A default'a geç — cypher rotate edemiyor.' patternContext YOKSA: bu round'un spesifik micro-lesson'u. Örn: 'Full HP'yle B Main'de swing yaptın — cover arkasından info topla, 45s'den önce solo peek yok.'>"
 }
 
 KRİTİK: coachInsight field'ı desktop overlay'inde mor "KOÇ İÇGÖRÜSÜ" bloğunda gösteriliyor. patternContext varsa BU FIELD DOLU OLMAK ZORUNDA — pattern'e spesifik referans + brutal fix öner.`;
@@ -133,8 +115,8 @@ type RoundEvidenceEntry = {
 const VALID_IMAGE_FORMATS = ["image/png", "image/jpeg", "image/webp", "image/gif"] as const;
 type ImageFormat = typeof VALID_IMAGE_FORMATS[number];
 
-const DEFAULT_MAX_TOKENS = 700;
-const MAX_TOKENS_CAP = 900; // headroom: desktop sends 600, JSON has 4 user fields + patternData + metadata
+const DEFAULT_MAX_TOKENS = 1200;
+const MAX_TOKENS_CAP = 1500; // Desktop sends 1200 — Sonnet 4.6 needs headroom to finish JSON without max_tokens truncation
 
 type VisionRequest = {
   image: string; // base64-encoded image
@@ -703,62 +685,19 @@ export async function POST(request: NextRequest) {
 
     if (isValidFeedbackShape(parsed)) {
       const fb = parsed as RoundFeedback;
-      // Validate killfeed data — only pass if confidence is meaningful
-      const validAgents = ["jett","reyna","raze","phoenix","neon","yoru","iso","waylay","sage","cypher","killjoy","chamber","deadlock","vyse","veto","omen","brimstone","viper","astra","harbor","clove","miks","sova","fade","skye","kayo","kay/o","gekko","breach","tejo"];
-      const rawKiller = typeof fb.killerAgent === "string" ? fb.killerAgent.toLowerCase().trim() : null;
-      const killerAgent = rawKiller && validAgents.includes(rawKiller) ? fb.killerAgent!.trim() : null;
-      const killerWeapon = typeof fb.killerWeapon === "string" && fb.killerWeapon.trim().length > 1 ? fb.killerWeapon.trim().slice(0, 30) : null;
-      const killfeedConfidence = typeof fb.killfeedConfidence === "string" && ["high","medium","low","unreadable"].includes(fb.killfeedConfidence) ? fb.killfeedConfidence : "unreadable";
 
-      // Multi-signal death position extraction
-      const rawPos = (fb as Record<string, unknown>).deathPosition;
-      const deathPosition = typeof rawPos === "string" && rawPos !== "unknown" && rawPos.length > 1
-        ? (rawPos as string).slice(0, 50)
-        : "unknown";
-      const posConfRaw = typeof (fb as Record<string, unknown>).positionConfidence === "string"
-        ? (fb as Record<string, unknown>).positionConfidence as string
-        : "low";
-      const posSignals = typeof (fb as Record<string, unknown>).positionSignals === "number"
-        ? (fb as Record<string, unknown>).positionSignals as number
-        : 0;
-
-      // CONSENSUS GATE: require 2+ signals for position to be stored
-      // Single signal → downgrade to low confidence (won't be stored in memory)
-      let positionConfidence: string;
-      if (deathPosition === "unknown" || posSignals < 1) {
-        positionConfidence = "low";
-      } else if (posSignals >= 2 && posConfRaw === "high") {
-        positionConfidence = "high";
-      } else if (posSignals >= 2) {
-        positionConfidence = "medium";
-      } else {
-        // Single signal → force low (won't enter memory)
-        positionConfidence = "low";
-      }
-
-      // Reality check: verify AI claims against actual round memory
+      // Reality check against round memory (modifies text if AI claims contradict observed data)
       const memoryForCheck = (roundHistory || []).map((r: Record<string, unknown>) => ({
         round_index: r.round_index as number,
         died: !!r.died,
         death_position: r.death_position as string | null | undefined,
         position_confidence: r.position_confidence as string | undefined,
       }));
-
       const checkedAnalysis = realityCheck(fb.deathAnalysis, memoryForCheck);
       const checkedSuggestion = realityCheck(fb.nextRoundSuggestion, memoryForCheck);
-
       if (checkedAnalysis.modified || checkedSuggestion.modified) {
         console.log(`[Aimlo AI] Reality check: deathAnalysis rewrite=${checkedAnalysis.rewriteLevel}, suggestion rewrite=${checkedSuggestion.rewriteLevel}`);
       }
-
-      // Extract and sanitize patternData (whitelist filter — only known fields pass)
-      let patternData: PatternData | null = null;
-      try {
-        patternData = sanitizePatternData((fb as Record<string, unknown>).patternData);
-      } catch {
-        console.log("[PATTERN-DATA] parse error — returning null");
-      }
-      console.log(`[PATTERN-DATA] ${JSON.stringify(patternData)}`);
 
       // coachInsight — always populated (pattern-aware if patternContext, else round-level micro-lesson)
       const rawCoachInsight = typeof (fb as Record<string, unknown>).coachInsight === "string"
@@ -766,22 +705,20 @@ export async function POST(request: NextRequest) {
         : "";
       const coachInsight = rawCoachInsight;
 
+      // Copy meta fields from REQUEST (desktop is source of truth for round/score/result/died —
+      // no longer asking AI to echo them back, saves tokens).
       return NextResponse.json({
-        round: typeof fb.round === "number" ? fb.round : 0,
-        score: typeof fb.score === "string" ? fb.score.slice(0, 10) : "?-?",
-        result: fb.result === "win" ? "win" : "loss",
-        died: !!fb.died,
+        round: typeof reqBody.round === "number" ? reqBody.round : 0,
+        score: typeof reqBody.score === "string" ? reqBody.score.slice(0, 10) : "?-?",
+        result: reqBody.result === "win" || reqBody.result === "loss" || reqBody.result === "WON" || reqBody.result === "LOST"
+          ? (reqBody.result.toLowerCase() === "won" ? "win" : reqBody.result.toLowerCase() === "lost" ? "loss" : reqBody.result.toLowerCase())
+          : "loss",
+        died: typeof reqBody.died === "boolean" ? reqBody.died : true,
         deathAnalysis: checkedAnalysis.text.slice(0, 500),
         enemyAnalysis: fb.enemyAnalysis.slice(0, 5).map((s) => String(s).slice(0, 200)),
         nextRoundSuggestion: checkedSuggestion.text.slice(0, 500),
         coachInsight,
-        killerAgent,
-        killerWeapon,
-        killfeedConfidence,
-        deathPosition: deathPosition !== "unknown" && positionConfidence !== "low" ? deathPosition : null,
-        positionConfidence: positionConfidence,
-        positionSignals: posSignals,
-        patternData,
+        patternData: null,
       });
     }
 
