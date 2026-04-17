@@ -129,8 +129,8 @@ type RoundEvidenceEntry = {
 const VALID_IMAGE_FORMATS = ["image/png", "image/jpeg", "image/webp", "image/gif"] as const;
 type ImageFormat = typeof VALID_IMAGE_FORMATS[number];
 
-const DEFAULT_MAX_TOKENS = 450;
-const MAX_TOKENS_CAP = 512;
+const DEFAULT_MAX_TOKENS = 700;
+const MAX_TOKENS_CAP = 900; // headroom: desktop sends 600, JSON has 4 user fields + patternData + metadata
 
 type VisionRequest = {
   image: string; // base64-encoded image
@@ -285,23 +285,24 @@ function isValidFeedbackShape(obj: unknown): obj is RoundFeedback {
   );
 }
 
-const DEFAULT_FEEDBACK: RoundFeedback = {
-  round: 0,
-  score: "?-?",
-  result: "loss",
-  died: true,
-  deathAnalysis: "Analiz yapılamadı.",
-  enemyAnalysis: ["Analiz yapılamadı."],
-  nextRoundSuggestion: "Analiz yapılamadı.",
-  coachInsight: "",
-  killerAgent: null,
-  killerWeapon: null,
-  killfeedConfidence: "unreadable",
-  deathPosition: null,
-  positionConfidence: "low",
-  positionSignals: 0,
-  patternData: null,
-};
+// ── Explicit error response builder (NO canned content fallbacks) ──
+// Frontend rejects responses containing "Analiz yapılamadı." substring,
+// so error paths MUST return non-200 + {error,message} — never fake content.
+function errorResponse(
+  code: string,
+  message: string,
+  status: number,
+  detail?: Record<string, unknown>,
+) {
+  return NextResponse.json(
+    {
+      error: code,
+      message,
+      ...(detail ? { detail } : {}),
+    },
+    { status },
+  );
+}
 
 /* ══════════════════════════════════════════════════════════
    ROUTE HANDLER
@@ -335,7 +336,7 @@ export async function POST(request: NextRequest) {
     const apiKey = process.env.AIMLO_AI_KEY || process.env.ANTHROPIC_API_KEY;
     if (!apiKey) {
       console.error("[Aimlo AI] Vision: no API key configured");
-      return NextResponse.json(DEFAULT_FEEDBACK);
+      return errorResponse("ai_unavailable", "AI service not configured (missing API key)", 503);
     }
 
     // Resolve imageFormat (default: image/png for backward compat)
@@ -583,7 +584,7 @@ export async function POST(request: NextRequest) {
         "anthropic-beta": "prompt-caching-2024-07-31",
       },
       body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
+        model: "claude-sonnet-4-6",
         max_tokens: resolvedMaxTokens,
         system: systemBlocks,
         messages: [
@@ -613,7 +614,12 @@ export async function POST(request: NextRequest) {
       clearTimeout(timeoutId);
       const errorBody = await response.text().catch(() => "unreadable");
       console.error(`[Aimlo AI] Vision API ${response.status}: ${errorBody.slice(0, 500)}`);
-      return NextResponse.json(DEFAULT_FEEDBACK);
+      return errorResponse(
+        "ai_upstream_error",
+        `Anthropic API returned ${response.status}`,
+        502,
+        { upstreamStatus: response.status, upstreamBody: errorBody.slice(0, 500) },
+      );
     }
 
     const data = await response.json();
@@ -623,31 +629,72 @@ export async function POST(request: NextRequest) {
     const cacheCreation = data?.usage?.cache_creation_input_tokens ?? 0;
     const cacheRead = data?.usage?.cache_read_input_tokens ?? 0;
     const inputTokens = data?.usage?.input_tokens ?? 0;
-    console.log(`[CACHE] creation=${cacheCreation}, read=${cacheRead}, input=${inputTokens}`);
+    const outputTokens = data?.usage?.output_tokens ?? 0;
+    const stopReason = data?.stop_reason ?? "unknown";
+    console.log(`[CACHE] creation=${cacheCreation}, read=${cacheRead}, input=${inputTokens}, output=${outputTokens}, stop=${stopReason}`);
 
     const text: string = data?.content?.[0]?.text || "";
     if (!text) {
       console.error("[Aimlo AI] Empty response from API. Full data:", JSON.stringify(data).slice(0, 500));
-      return NextResponse.json(DEFAULT_FEEDBACK);
+      return errorResponse("ai_empty_response", "Anthropic returned empty content", 502, { stopReason });
     }
 
-    // Parse JSON from response
-    let parsed: unknown;
-    try {
-      parsed = JSON.parse(text);
-    } catch {
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        try {
-          parsed = JSON.parse(jsonMatch[0]);
-        } catch {
-          console.error("[Aimlo AI] JSON parse failed (regex fallback). Raw text:", text.slice(0, 300));
-          return NextResponse.json(DEFAULT_FEEDBACK);
+    // ── Robust JSON parser: handles markdown fences, trailing junk, BOMs ──
+    function extractJSON(raw: string): { ok: true; obj: unknown } | { ok: false; reason: string } {
+      let s = raw.trim();
+      // Strip BOM
+      if (s.charCodeAt(0) === 0xFEFF) s = s.slice(1);
+      // Strip markdown code fences (```json ... ``` or ``` ... ```)
+      const fenceMatch = s.match(/^```(?:json)?\s*([\s\S]*?)```\s*$/i);
+      if (fenceMatch) s = fenceMatch[1].trim();
+      // Try direct parse
+      try { return { ok: true, obj: JSON.parse(s) }; } catch {}
+      // Find first { ... } balanced span
+      const start = s.indexOf("{");
+      if (start === -1) return { ok: false, reason: "no opening brace" };
+      let depth = 0;
+      let inStr = false;
+      let escape = false;
+      let end = -1;
+      for (let i = start; i < s.length; i++) {
+        const ch = s[i];
+        if (escape) { escape = false; continue; }
+        if (ch === "\\") { escape = true; continue; }
+        if (ch === '"') inStr = !inStr;
+        if (inStr) continue;
+        if (ch === "{") depth++;
+        else if (ch === "}") {
+          depth--;
+          if (depth === 0) { end = i; break; }
         }
-      } else {
-        console.error("[Aimlo AI] No JSON found in response. Raw text:", text.slice(0, 300));
-        return NextResponse.json(DEFAULT_FEEDBACK);
       }
+      if (end === -1) return { ok: false, reason: "unterminated JSON object" };
+      const candidate = s.slice(start, end + 1);
+      try { return { ok: true, obj: JSON.parse(candidate) }; } catch (e) {
+        return { ok: false, reason: `parse error: ${(e as Error).message}` };
+      }
+    }
+
+    const parseResult = extractJSON(text);
+    if (!parseResult.ok) {
+      console.error(`[Aimlo AI] JSON parse failed (${parseResult.reason}). Raw text:`, text.slice(0, 500));
+      return errorResponse("ai_invalid_json", `Model output was not valid JSON: ${parseResult.reason}`, 502, { rawPreview: text.slice(0, 300), stopReason });
+    }
+    let parsed: unknown = parseResult.obj;
+
+    // ── Coerce shape: enemyAnalysis can come as string, normalize to array ──
+    if (parsed && typeof parsed === "object") {
+      const obj = parsed as Record<string, unknown>;
+      if (typeof obj.enemyAnalysis === "string") {
+        // Split by newline, semicolon, or " | " or just wrap as single
+        const s = obj.enemyAnalysis as string;
+        const parts = s.split(/\n|;|\s\|\s/).map((p) => p.trim()).filter((p) => p.length > 0);
+        obj.enemyAnalysis = parts.length > 0 ? parts : [s];
+      }
+      // Nullish-safe defaults so isValidFeedbackShape passes
+      if (typeof obj.deathAnalysis !== "string") obj.deathAnalysis = "";
+      if (typeof obj.nextRoundSuggestion !== "string") obj.nextRoundSuggestion = "";
+      if (!Array.isArray(obj.enemyAnalysis)) obj.enemyAnalysis = [];
     }
 
     if (isValidFeedbackShape(parsed)) {
@@ -735,16 +782,19 @@ export async function POST(request: NextRequest) {
     }
 
     console.error("[Aimlo AI] Response shape validation failed. Parsed:", JSON.stringify(parsed).slice(0, 300));
-    return NextResponse.json(DEFAULT_FEEDBACK);
+    return errorResponse(
+      "ai_invalid_shape",
+      "Model output missing required fields (deathAnalysis/enemyAnalysis/nextRoundSuggestion)",
+      502,
+      { parsedPreview: JSON.stringify(parsed).slice(0, 300) },
+    );
   } catch (err) {
     if (err instanceof DOMException && err.name === "AbortError") {
       console.error("[Aimlo AI] Vision request timed out");
-    } else {
-      console.error(
-        "[Aimlo AI] Vision route error:",
-        err instanceof Error ? err.message : "unknown",
-      );
+      return errorResponse("ai_timeout", `Anthropic request exceeded ${AI_TIMEOUT_MS}ms`, 504);
     }
-    return NextResponse.json(DEFAULT_FEEDBACK);
+    const msg = err instanceof Error ? err.message : "unknown";
+    console.error("[Aimlo AI] Vision route error:", msg);
+    return errorResponse("ai_internal_error", msg, 500);
   }
 }

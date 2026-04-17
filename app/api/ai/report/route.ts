@@ -631,23 +631,37 @@ ${scoringContext}`;
     const data = await response.json();
     clearTimeout(timeoutId);
     const text: string = data?.content?.[0]?.text || "";
+    const stopReason = data?.stop_reason ?? "unknown";
+    const outputTokens = data?.usage?.output_tokens ?? 0;
+    console.log(`[Report AI] output=${outputTokens} stop=${stopReason}`);
 
-    // Parse AI JSON — try direct first, then regex fallback
-    let parsed: unknown;
-    try {
-      parsed = JSON.parse(text);
-    } catch {
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
-      if (!jsonMatch) {
-        console.error("[Aimlo AI] No JSON in report response");
-        return stats;
+    // Robust JSON extraction: strips markdown fences, balances braces
+    function extractJSON(raw: string): unknown | null {
+      let s = raw.trim();
+      if (s.charCodeAt(0) === 0xFEFF) s = s.slice(1);
+      const fenceMatch = s.match(/^```(?:json)?\s*([\s\S]*?)```\s*$/i);
+      if (fenceMatch) s = fenceMatch[1].trim();
+      try { return JSON.parse(s); } catch {}
+      const start = s.indexOf("{");
+      if (start === -1) return null;
+      let depth = 0, inStr = false, esc = false, end = -1;
+      for (let i = start; i < s.length; i++) {
+        const ch = s[i];
+        if (esc) { esc = false; continue; }
+        if (ch === "\\") { esc = true; continue; }
+        if (ch === '"') inStr = !inStr;
+        if (inStr) continue;
+        if (ch === "{") depth++;
+        else if (ch === "}") { depth--; if (depth === 0) { end = i; break; } }
       }
-      try {
-        parsed = JSON.parse(jsonMatch[0]);
-      } catch {
-        console.error("[Aimlo AI] Invalid JSON in report response");
-        return stats;
-      }
+      if (end === -1) return null;
+      try { return JSON.parse(s.slice(start, end + 1)); } catch { return null; }
+    }
+
+    const parsed = extractJSON(text);
+    if (parsed === null) {
+      console.error("[Aimlo AI] Report JSON parse failed. Raw:", text.slice(0, 300));
+      return stats;
     }
 
     // Validate shape + merge with stats (stats always provides numeric fields)

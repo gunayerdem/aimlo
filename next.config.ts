@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/api/ai/vision": ["./knowledge/**/*.md"],
     "/api/ai/feedback": ["./knowledge/**/*.md"],
+    "/api/ai/report": ["./knowledge/**/*.md"],
+    "/api/ai/match-report": ["./knowledge/**/*.md"],
+    "/api/ai/insight": ["./knowledge/**/*.md"],
   },
   async headers() {
     return [
