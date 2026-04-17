@@ -14,7 +14,11 @@ import { loadVisionKnowledge } from "@/lib/knowledge-loader";
  * - Accepts base64-encoded PNG screenshot
  */
 
-const AI_TIMEOUT_MS = 15_000;
+// Vercel function-level timeout — must be ≥ AI_TIMEOUT_MS or Vercel kills the request first.
+// Hobby plan: 60s max, Pro: 300s. We pick 60 to stay portable.
+export const maxDuration = 60;
+
+const AI_TIMEOUT_MS = 45_000; // Sonnet 4.6 + vision + KB prompt needs more headroom than 15s
 const MAX_PAYLOAD_BYTES = 5_000_000; // 5MB max (base64 images are large)
 const ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages";
 
