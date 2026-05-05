@@ -73,35 +73,46 @@ EKONOMİ SPESİFİK KURALLARI (economyType varsa UYGULA)
 - economyType="pistol": Ghost headshot + utility öncelik öner.
 - economyType boşsa bu konudan BAHSETME.
 
-coachInsight KURALI (her zaman doldur)
+KOÇ TONU — KRİTİK
 
-coachInsight DESKTOP OVERLAY'İNDE ZORUNLU FIELD — boş dönmemeli:
-- patternContext VARSA: multi-round brutal insight yaz (örn: "3 round üst üste B'de cypher operator. B'yi aç ya da A'ya yığ — cypher rotate edemiyor").
-- patternContext YOKSA: bu round'un key takeaway'ini yaz (örn: "Full HP ile B main'de open angle. Sonraki round cover arkasında hold yap, info topla." veya "Takım yanında yokken solo peek attın — trade edilemez. Önce takımı topla, sonra giriş.").
-- Kural: coachInsight HER ZAMAN en az 1 cümle — yani asla "" boş dönme, pattern yoksa round-level micro-lesson yaz.
+Sen oyuncuya konuşan GERÇEK BİR KOÇSUN. AI değilsin, AI gibi konuşma.
 
-ÇIKTI — SADECE JSON (başka hiçbir şey, markdown yok, code block yok)
+YASAKLI AI/ROBOT İFADELERİ (asla kullanma):
+- "tek vuruş yetti" → AI dolgu, koç söylemez
+- "basın", "sen son giren" → robotik direktif
+- "trade edilemez", "trade kazanır" → AI jargon dolu
+- "wide swing attın" + "pre-aim yapmadın" + "dash hazır değildi" → 3 cümlelik AI narration; gerçek koç tek cümleyle vurur
+- "Full HP'yle gittin ama..." → açıklayıcı AI tonu
+- "cover arkasından info topla" → AI tarzı çoklu mantık zinciri
 
-SADECE bu 4 user-facing field'ı yaz. Başka field EKLEME — desktop killerInfo/deathLocation'ı zaten gönderdi, onları response'ta tekrar isteme gereği yok. Token bütçesi user içeriğe harcanacak.
+KOÇ TONU NASIL — örnek:
+- AI tarzı: "B Main'de cypher'a operator'la headshot yedin. Düşman seni B Heaven'dan bekliyordu. Pre-aim yapmadan wide swing attın, dash hazır değildi. Full HP'yle gittin ama tek vuruş yetti."
+- KOÇ tarzı: "B Main wide swing attın, oradan op var — bir daha tekrarlama."
+
+Fark: koç TEK CÜMLEYLE hatayı söyler, açıklamaz, AI gibi adım adım anlatmaz.
+
+ÇIKTI — SADECE JSON (markdown yok, code block yok)
+
+SADECE 3 alan yaz:
 
 {
-  "deathAnalysis": "<2-3 cümle: NEDEN öldün. killerInfo/deathLocation/deathAngle/patternContext'i kullan. Spesifik ol — callout + ajan + silah içermeli.>",
+  "deathAnalysis": "<TEK CÜMLE: hatanın özü. callout + ajan/silah dahil ama koç ağzı, AI değil. Örn: 'B Main wide swing yedin, oradan cypher op var — bir daha tekrarlama.'>",
   "enemyAnalysis": [
-    "<enemyComp'a göre 1 spesifik counter-play insight>",
-    "<bu round'da gözlenmiş düşman pattern veya setup'ı>",
-    "<bu composition'a karşı en etkili utility/timing>"
+    "<1 cümle: bu round'da düşmanın yaptığı kritik şey>",
+    "<1 cümle: counter veya gözlem (utility/setup)>"
   ],
-  "nextRoundSuggestion": "<sıradaki round için TEK net plan: hangi site, hangi setup, hangi util, hangi rotation. Spesifik callout + ajan + olay tetikleyicisi (örn 'düşman A'dan rotate ettiyse', '1 düşman düşünce') içermeli. ASLA saniye/timer kullanma.>",
-  "coachInsight": "<ZORUNLU, asla boş bırakma. patternContext varsa: multi-round brutal insight. Örn: '3 round üst üste B site'ta cypher operator. B'yi aç ya da A default'a geç — cypher rotate edemiyor.' patternContext YOKSA: bu round'un spesifik micro-lesson'u. Örn: 'Full HP'yle B Main'de swing yaptın — cover arkasından info topla, takım yanında yokken solo peek yok.'>"
+  "nextRoundSuggestion": "<BASIT işleyen taktik, TEK CÜMLE. Mikro-detay verme ('dash'ini X için sakla' GİBİ ŞEYLER YASAK). Direkt taktik: 'B'yi unut, A'ya yığ default oyna' yeterli. Sade, anlaşılır, koç cümlesi.>"
 }
 
-KRİTİK: coachInsight field'ı desktop overlay'inde mor "KOÇ İÇGÖRÜSÜ" bloğunda gösteriliyor. patternContext varsa BU FIELD DOLU OLMAK ZORUNDA — pattern'e spesifik referans + brutal fix öner.`;
+NOT: enemyAnalysis 2 madde yeter (3 değil). Her madde TEK kısa cümle.
+NOT: coachInsight field'ı YOK. Yazma. Pattern varsa zaten deathAnalysis veya nextRoundSuggestion'da geçecek.
+NOT: 4-5 cümlelik açıklamalar AI tonudur — yasak. 1-2 cümle, koç gibi, direkt.`;
 
-const USER_PROMPT = `Valorant round sonu. Aşağıdaki OCR / CLIENT VERİSİ pixel truth'tur — screenshot'tan daha güvenilirdir. Çelişki varsa OCR'a güven.
+const USER_PROMPT = `Valorant round sonu. Aşağıdaki OCR/CLIENT pixel truth — screenshot'tan güvenilir.
 
-GÖREVİN: Aşağıdaki verileri kullanarak brutal, pattern-aware Türkçe koçluk feedback'i üret. coachInsight field'ı patternContext varsa ZORUNLU doldurulmalı. deathAnalysis killerInfo + deathLocation + deathAngle'ı YANSITMALI. Generic cümleler YASAK.
+GÖREVİN: Gerçek bir koç gibi, kısa ve direkt feedback ver. AI tarzı uzun açıklamalar YASAK. Her alan tek cümle (enemyAnalysis 2 madde × 1 cümle).
 
-Sadece geçerli JSON döndür — markdown yok, code block yok, açıklama yok. SYSTEM prompt'ta belirtilen schema'ya tam uy.`;
+Sadece JSON döndür — markdown yok, code block yok, başka açıklama yok.`;
 
 /* ══════════════════════════════════════════════════════════
    TYPES
@@ -118,14 +129,13 @@ type RoundEvidenceEntry = {
 const VALID_IMAGE_FORMATS = ["image/png", "image/jpeg", "image/webp", "image/gif"] as const;
 type ImageFormat = typeof VALID_IMAGE_FORMATS[number];
 
-// Real avg output for the 4-field schema (deathAnalysis 2-3 sentences,
-// enemyAnalysis 3 short items, nextRoundSuggestion 1-2 sentences,
-// coachInsight 1-2 sentences) is ~400 tokens. Cap at 700 gives 75% headroom
-// for outliers (long deaths, heavy patternContext) without enabling runaway
-// token bills. Setting a tight cap is pure cost protection — model already
-// stops at JSON close, max_tokens is just the safety ceiling.
-const DEFAULT_MAX_TOKENS = 700;
-const MAX_TOKENS_CAP = 900;
+// Tightened to coach-voice 3-field schema (deathAnalysis 1 sentence,
+// enemyAnalysis 2×1 sentence, nextRoundSuggestion 1 sentence). Real output
+// is ~120-180 tokens. 300 cap gives 60-150% headroom — generous safety.
+// Output token cost was the #1 cost driver (42% of per-call). Halving max
+// alongside coach-voice rewrite directly cuts that bill.
+const DEFAULT_MAX_TOKENS = 300;
+const MAX_TOKENS_CAP = 400;
 
 type VisionRequest = {
   image: string; // base64-encoded image
@@ -229,7 +239,8 @@ type RoundFeedback = {
   deathAnalysis: string;
   enemyAnalysis: string[];
   nextRoundSuggestion: string;
-  coachInsight?: string;
+  // coachInsight removed — purple "KOÇ İÇGÖRÜSÜ" block dropped from overlay design.
+  // Pattern-aware insight now folds into deathAnalysis or nextRoundSuggestion when relevant.
   killerAgent?: string | null;
   killerWeapon?: string | null;
   killfeedConfidence?: string;
@@ -537,7 +548,7 @@ export async function POST(request: NextRequest) {
     const ctxJson = Object.keys(ctx).length > 0 ? JSON.stringify(ctx, null, 2) : "";
     const clientContext =
       (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, screenshot'tan güvenilir]\n${ctxJson}` : "") +
-      (patternBlock ? `\n\n[PATTERN — multi-round history, coachInsight bu pattern'e referans VERMELİ]\n${patternBlock}` : "");
+      (patternBlock ? `\n\n[PATTERN — son round'lardaki tekrar eden hata. Bu varsa deathAnalysis veya nextRoundSuggestion'da koç gibi referans ver — extra alan açma]\n${patternBlock}` : "");
 
     // Build round history context for the user prompt
     let userPromptWithHistory = USER_PROMPT + clientContext;
@@ -763,11 +774,8 @@ export async function POST(request: NextRequest) {
         console.log(`[Aimlo AI] Reality check: deathAnalysis rewrite=${checkedAnalysis.rewriteLevel}, suggestion rewrite=${checkedSuggestion.rewriteLevel}`);
       }
 
-      // coachInsight — always populated (pattern-aware if patternContext, else round-level micro-lesson)
-      const rawCoachInsight = typeof (fb as Record<string, unknown>).coachInsight === "string"
-        ? ((fb as Record<string, unknown>).coachInsight as string).trim().slice(0, 500)
-        : "";
-      const coachInsight = rawCoachInsight;
+      // Note: coachInsight field removed — purple "KOÇ İÇGÖRÜSÜ" block dropped from overlay.
+      // Pattern-aware insight now folds into deathAnalysis or nextRoundSuggestion when relevant.
 
       // Copy meta fields from REQUEST (desktop is source of truth for round/score/result/died —
       // no longer asking AI to echo them back, saves tokens).
@@ -778,10 +786,10 @@ export async function POST(request: NextRequest) {
           ? (reqBody.result.toLowerCase() === "won" ? "win" : reqBody.result.toLowerCase() === "lost" ? "loss" : reqBody.result.toLowerCase())
           : "loss",
         died: typeof reqBody.died === "boolean" ? reqBody.died : true,
-        deathAnalysis: checkedAnalysis.text.slice(0, 500),
-        enemyAnalysis: fb.enemyAnalysis.slice(0, 5).map((s) => String(s).slice(0, 200)),
-        nextRoundSuggestion: checkedSuggestion.text.slice(0, 500),
-        coachInsight,
+        // Tightened length caps: 1 sentence ~150 chars, 2-item array each ~120 chars
+        deathAnalysis: checkedAnalysis.text.slice(0, 250),
+        enemyAnalysis: fb.enemyAnalysis.slice(0, 2).map((s) => String(s).slice(0, 150)),
+        nextRoundSuggestion: checkedSuggestion.text.slice(0, 250),
         patternData: null,
       });
     }
