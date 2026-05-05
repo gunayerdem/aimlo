@@ -132,5 +132,43 @@ export async function loginAction(
     return { ok: false, error: "Oturum açılamadı. Lütfen tekrar dene.", values: echo };
   }
 
+  // GATE: even if Supabase's "Confirm email" provider toggle is off (we
+  // disabled it so it wouldn't send its own template), we still require the
+  // user to have completed our OTP verification. signInWithPassword may
+  // hand back a session before email_confirmed_at is set — sign out, fire
+  // a fresh OTP, and bounce them to /verify.
+  if (!signinData.user?.email_confirmed_at) {
+    await ssr.auth.signOut();
+    try {
+      const code = generateOtp();
+      const hash = hashOtp(code, email);
+      const { data: list } = await admin.auth.admin.listUsers({ page: 1, perPage: 200 });
+      const u = list?.users.find((x) => x.email?.toLowerCase() === email);
+      if (u) {
+        await admin.auth.admin.updateUserById(u.id, {
+          user_metadata: {
+            ...u.user_metadata,
+            otp: {
+              hash,
+              expiresAt: Date.now() + OTP_TTL_MS,
+              attempts: 0,
+              purpose: "register" as const,
+            },
+          },
+        });
+        await sendOtpEmail({ to: email, code, lang: "tr", purpose: "register" });
+      }
+    } catch (e) {
+      console.error("[Aimlo login] gate OTP issue:", (e as Error).message);
+    }
+    return {
+      ok: false,
+      error:
+        "E-postan henüz doğrulanmamış. Yeni bir kod gönderdik — kayıt akışını tamamla.",
+      values: echo,
+      needsVerification: { email },
+    };
+  }
+
   redirect("/?verified=true");
 }
