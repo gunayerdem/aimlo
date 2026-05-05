@@ -2,234 +2,263 @@
 
 ## 1. Harita Karakteri
 
-Split, havuz içindeki en savunma-agirlikli harita. Saldiri tarafinda round almak icin her seyi dogru yapmak zorundasin; savunma tarafindaysan tek bir iyi pozisyon tüm round'u tasiyabilir. Bunun sebebi haritanin temel mimarisi: iki site'a açilan giris noktalari son derece dar, her iki site'ta birer Heaven pozisyonu var ve mid bölgesi haritanin tam kalbinde oturarak her seyi birbirine bagliyor. Dikey oyun Split'in DNA'sinda — rope mekanikleri, Heaven pozisyonlari ve Ramp gibi yükseklik farkliliklari yaratan bölgeler bu haritayi diger haritalardan ayiran temel unsurlar.
+Split savunma taraftayken çok daha kolay. Saldırdığında her şeyi doğru yapmak zorundasın — tek bir hata round'u bitirir. Savunmadaysan tek bir iyi pozisyon tüm round'u sırtlanır. Neden? Site girişleri dar, her iki sitede Heaven var, mid haritanın tam ortasında her şeyi birbirine bağlıyor. Dikey oyun bu haritanın özünde: rope'lar, Heaven pozisyonları, Ramp'taki yükseklik farkı — bunlar Split'i diğerlerinden ayırır.
 
-Mid kontrolu Split'te her seyin üzerinde. Mid'i kontrol eden takim Vents üzerinden A Heaven'a, Mail üzerinden B Link'e ve B Heaven'a geçis yapabiliyor. Bu da demek oluyor ki mid'i kaybettigin anda haritanin iki yarisini birbirine baglayan köprüyü kaybediyorsun. Savunma tarafinda Sage wall mid'e atildiginda saldiri takiminin seçenekleri yarisina iniyor; saldiri tarafinda mid kontrolu alindiginda her iki site'a split execute mümkün hale geliyor. Split oynamayi ögrenmek istiyorsan ilk ögrenmeni gereken sey mid'in neden bu kadar belirleyici oldugu.
+Mid'i kim tutarsa haritayı o yönetir. Mid'i alırsan Vents üzerinden A Heaven'a, Mail üzerinden B Link'e ve B Heaven'a geçebilirsin. Mid'i kaybedersen iki siteyi birbirine bağlayan yolu kaybedersin — o kadar. Savunmada Sage wall mid'e atıldığında saldırı takımının seçeneği yarıya düşer. Saldırıdayken mid kontrolü varsa her iki siteye split execute açılır. Split öğrenmek istiyorsan ilk anlaman gereken şey budur.
 
-Ramp mekanigi ile de tanismak zorundasin. A Ramp, A site'a giris icin en yaygin kullanilan rota ve ayni zamanda haritadaki en tehlikeli bölgelerden biri. Ramp'i kontrol eden takim A execute'u rahat yapar; Ramp'i kaybeden takim A Main'den girise zorlanir çünkü Heaven ve Ramp'tan gelen crossfire açilari saldirganin isini neredeyse imkansiz kilabilir. Bu yüzden A execute planliyorsan ilk hedefin Ramp kontrolu olmali.
+A Ramp'ı da tanı. A site'a girişin en yaygın rotası burası — aynı zamanda haritanın en tehlikeli bölgelerinden biri. Sen Ramp'ı tutarsan A execute rahat akar. Ramp'ı kaybedersen A Main'den girmeye çalışırsın — Heaven ve Ramp'tan gelen crossfire seni bitirir. A execute planlıyorsan ilk hedefin Ramp kontrolü olsun.
 
 ## 2. Ölüm Bölgeleri
 
-**A Ramp — Crossfire Tuzagi**
-A Ramp, Split'teki en yogun ölüm bölgesi. Buraya utility olmadan çikmak demek, A Heaven'dan ve A Site'tan gelen iki farkli açiya ayni anda maruz kalmak demek. Oyuncular burada ölüyor çünkü Ramp'in yükseklik farki ve dar yapisi savunmaciya tam bir avantaj veriyor. Koçluk baglaminda: eger bir oyuncu A Ramp'ta tekrar tekrar ölüyorsa, sorun Ramp'a çikmadan önce flash veya smoke kullanmamasidir. Ramp'a kuru çikis Split'te en yaygin ölüm sebebi.
+**A Ramp — Crossfire Tuzağı**
+A Ramp, Split'teki en yoğun ölüm noktası. Buraya util atmadan çıkıyorsan, A Heaven ve A Site'tan aynı anda iki farklı açıya giriyorsun demektir. Ramp'ın yükseklik farkı ve dar yapısı savunmacıya her şeyi veriyor. Tekrar tekrar burada ölüyorsan sorun nişan değil — Ramp'a çıkmadan önce flash ya da smoke atmıyorsun. Kuru çıkış yapma.
 
 **B Main — Dar Koridor Ölümü**
-B Main, saldiri tarafinin B site'a ulasan tek ana rotasi ve bu rota son derece dar. Savunmacilar Garage'dan, Pillar arkasindan ve B Heaven'dan bu koridoru kontrol edebiliyor. B Main'de ölümlerin çogu, saldiri takiminin kontrolsuz push yapmasindan kaynaklaniyor — flash patlamadan önce girmek, smoke'suz ilerlemek veya takim arkadaslarinin hazir olmadigi anda tek basina peek yapmak. B Main'de hayatta kalmak istiyorsan, her adimda bir utility önünde olmali.
+B Main, B site'a giden tek ana yol ve son derece dar. Savunmacılar Garage'dan, Pillar arkasından ve B Heaven'dan seni kapatıyor. B Main'de ölüyorsan sebebi şu üçünden biri:
+- Flash patlamadan girdin.
+- Smoke atmadan ilerliyorsun.
+- Takım hazır değilken tek başına peek attın.
 
-**Mid Top — Op Cenneti**
-Mid Top, savunma tarafinin Op tuttugu en klasik pozisyon. Saldiri tarafindaki oyuncular burada ölüyor çünkü mid'e kuru peek yapiyorlar ve karsida onlari bekleyen bir Operator var. Mid Top'ta Op'a karsi çözüm basit: smoke at, flash at, ancak ondan sonra swing yap. Ego peek yaparak mid'e girmeye çalismak Split'te en pahali hatalardan biri.
+Her adımının önünde bir util olmalı. Yoksa girme.
+
+**Mid Top — Op Noktası**
+Mid Top, savunmacının Op tuttuğu klasik nokta. Kuru peek atıyorsan karşıda seni bekleyen Op var. Çözümü basit: smoke at, flash at, ondan sonra swing yap. Sırayı atlama.
 
 **A Heaven (Screens) — Dikey Ölüm**
-A Heaven, savunma tarafinin en güçlü pozisyonlarindan biri. Saldiri yapan oyuncular buradan ölüyor çünkü site'a girerken yukariyi kontrol etmiyorlar. Screens arkasindan oynayan bir savunmaci, site'a giren herkesi görebiliyor ama kendisi zor görülüyor. Koçluk baglaminda: A Heaven'dan ölümler dikey farkindalik eksikligini gösteriyor. Oyuncuya site'a girmeden önce Heaven'i smoke'lamayi veya flash'lamayi ögretmen gerekiyor.
+A Heaven savunmanın en güçlü noktalarından biri. Site'a girerken Screens'e bakmıyorsan, Screens'teki adam seni görüyor ama sen onu göremiyorsun. A Heaven'dan ölüyorsan sorun dikey farkındalık. Site'a girmeden önce Heaven'ı smoke'la ya da flash'la. Bu adımı atlarsan ölürsün.
 
-**B Heaven — Hakim Pozisyon**
-B Heaven, B site'in tüm kontrolunu saglayan yükseklik. Buradan oynayan savunmaci B Main'i, B Site'i ve B Back'i görebiliyor. Saldiri yapanlar B Heaven'i smoke'lamadan site'a girdiginde, Heaven'daki oyuncu serbest vuruslar aliyor. B Heaven ölümlerinin çözümü: her B execute'da Heaven icin bir smoke ayirmak ve eger mümkünse Mail üzerinden Heaven'a split göndermek.
+**B Heaven — Hakim Konum**
+B Heaven, B site'ın tamamını kontrol eden yükseklik. Buradan savunmacı B Main'i, B Site'i ve B Back'i görüyor. Sen de B execute'a girerken Heaven'ı smoke'lamıyorsan, o adam serbest vurş alıyor. Her B execute'ta Heaven için bir smoke ayır. Mail üzerinden Heaven'a split gönderebilirsen daha iyi.
 
 ## 3. Saldiri Stratejileri — Pattern Mapping
 
 **Pattern 1: Default (2-1-2)**
-IF: Takim round basinda bilgi toplamadan execute yapiyor — 5 kisi tek bir noktaya yükleniyor veya dagilim plansiz.
-MEANING: Default oynamamayi seçmek, Split gibi dar girisli bir haritada kör oynamak demek. Rakibin nerede güçlü oldugunu bilmeden execute yaptiginizda, savunmanin en yogun oldugu noktaya gidebilirsiniz. Default dagilim (2 A Main/Ramp, 1 Mid, 2 B Main) her bölgeden bilgi toplayarak mid-round karar vermenize olanak tanir.
-COUNTER: Round'un ilk 30'unda her bölgeden bilgi al. A Ramp'tan biri peek yapsin, mid'den biri bilgi alsin, B Main'den biri Garage'i kontrol etsin. Bilgi geldikten sonra zayif tarafa rotate yap. Mid kontrolu alindiysa split execute seç; mid kapandiysa dogrudan site execute yap.
-WHY: Split'te savunma güçlü çünkü dar girisler var. Tek çözüm bilgi toplama: savunmanin hangi tarafta güçlü oldugunu anlarsan, zayif tarafi hedef alirsin. Default oynayan takim her round kumar oynuyor.
+IF: Takim round basinda bilgi toplamadan execute yapiyor — 5 kisi tek noktaya yükleniyor ya da dagilim yok.
+MEANING: Default oynamayi reddetmek, Split'te kör oynamak demektir. Rakibin nerede güçlü oldugunu bilmeden execute yaparsan, savunmanin en yogun oldugu yere dalarsin. 2 A Main/Ramp, 1 Mid, 2 B Main dagilimiyla her bölgeden bilgi toplayip orta roundda karar verirsin.
+COUNTER: Her bölgeden bilgi al. A Ramp'tan biri peek yapsin, mid'den biri bilgi alsin, B Main'den biri Garage'i kontrol etsin. Bilgi geldikten sonra zayif tarafa rotate et. Mid alindiysa split execute seç; mid kapandiysa dogrudan site'a gir.
+WHY: Split'te savunma güçlü — dar girisler var. Savunmanin hangi tarafta güçlü oldugunu anlarsan zayif tarafi hedef alirsin. Bunu yapmayan takim her round kumar oynuyor.
 
 **Pattern 2: A Execute**
 IF: Takim A execute yapiyor ama Ramp kontrolu almadan site'a giriyor — A Main'den dogrudan push.
-MEANING: Ramp kontrolu olmadan A execute yapmak, crossfire'a yürümek demek. A Heaven ve A Ramp'tan gelen iki açi seni A Main çikisinda yakalayacak. Ramp alinmamissa savunmaci Ramp'tan seninle duel almak yerine, seni bekleyip crossfire kurabilir.
-COUNTER: Öncelikle Ramp'i al. Smoke + flash ile Ramp'a çikin, Ramp kontrol edildikten sonra A Site'a girin. Smoke'lari A Heaven ve A CT'ye atin. Mid Vents üzerinden A Heaven'a split gönderin — bu savunmaciyi iki yönden baskiya alir. Spike'i Screens arkasina (A Default) plant edin. Post-plant'te A Ramp ve A Main'den crossfire kurun.
-WHY: A Ramp, A execute'un anahtar noktasi çünkü burasi alindiginda savunmacinin geri çekilme yolu kesilir ve site'a iki yönden giris mümkün olur. Ramp'siz execute, savunmaciya tek bir dar açidan ates etme lüksünü veriyor.
+MEANING: Ramp olmadan A execute yapmak crossfire'a yürümektir. A Heaven ve A Ramp'tan gelen iki açi seni A Main çikisinda yakalayacak. Savunmaci Ramp'tan duel almaz, seni bekler ve crossfire kurar.
+COUNTER: Önce Ramp'i al. Smoke + flash ile Ramp'a çikin, Ramp alininca A Site'a girin. Smoke'lari A Heaven ve A CT'ye atin. Mid Vents üzerinden A Heaven'a split gönderin — savunmaci iki yönden baski altina girer. Spike'i Screens arkasina (A Default) plant edin. Post-plant'te A Ramp ve A Main'den crossfire kurun.
+WHY: Ramp alindiginda savunmacinin geri çekilme yolu kesilir ve site'a iki yönden girersin. Ramp'siz execute, savunmaciya dar bir açidan rahatça ates etme firsati veriyor.
 
 **Pattern 3: B Execute**
-IF: Takim B execute yapiyor ama B Heaven'i smoke'lamadan site'a giriyor — Heaven'dan serbest kill'ler veriliyor.
-MEANING: B Heaven, B site'in hakim noktasi. Heaven'i smoke'lamadan girmek, yukaridan izlenen bir koridorda ilerlemek demek. Savunmaci seni görüyor, sen onu görmüyorsun — bu duel'i kazanman çok zor.
-COUNTER: B Heaven ve B CT (Back Site) icin smoke atin. B Main'den flash ile girin. Garage ve Pillar bölgelerini temizleyin. Eger mid kontrolunuz varsa, Mail üzerinden B Heaven'a split gönderin — bu savunmacinin Heaven'dan rahat oynamasini engelleyecek. Spike'i B Default'a (ortaya) plant edin.
-WHY: B Site dar oldugu icin savunmaci az utility ile çok is yapabiliyor. Heaven smoke'u bu dengeyi bozuyor çünkü savunmacinin en güçlü pozisyonunu geçici olarak devre disi birakiyor. Split olmadan execute yaptiginizda savunmaci tek bir noktadan her seyi kontrol edebiliyor; split ile iki yöne bakma zorunlulugu yaratiyorsunuz.
+IF: Takim B execute yapiyor ama B Heaven'i smoke'lamadan site'a giriyor — Heaven'dan bedava kill'ler veriliyor.
+MEANING: B Heaven, B site'in hakim noktasi. Smoke atmadan girersin, savunmaci seni görür, sen onu görmezsin. Bu duel'i kazanamazsin.
+COUNTER: B Heaven ve B CT (Back Site) icin smoke at. B Main'den flash ile gir. Garage ve Pillar'i temizle. Mid kontrolun varsa Mail üzerinden B Heaven'a split gönder — savunmaci Heaven'dan rahat oynayamaz. Spike'i B Default'a plant et.
+WHY: B Site dar oldugu icin savunmaci az utility ile çok is yapar. Heaven smoke'u bu dengeyi bozuyor — savunmacinin en güçlü pozisyonunu kapatiyorsun. Split olmadan girersin, savunmaci tek noktadan her seyi kontrol eder; split ile iki yöne bakma zorunda kalir.
 
 **Pattern 4: Mid Control**
-IF: Takim mid kontrolunu tamamen ignore ediyor — kimse mid'e bilgi almaya bile gitmiyor.
-MEANING: Mid'i ignore etmek, haritanin kalbini rakibe teslim etmek demek. Rakip mid'den Vents ile A Heaven'a, Mail ile B Link'e geçebilir. Mid kontrolu olmadan yaptiginiz her execute tek boyutlu kalir ve rakip mid'den flank atarak sizi arkadan vurabilir.
-COUNTER: Mid kontrolu icin en az bir kisi ayir. Mid Top'tan bilgi al, Vents veya Mail'e dogru ilerle. Mid'de Op varsa smoke + flash + swing. Mid'i aldiginizda seçenekleriniz katlanir: A Heaven split, B Heaven split veya dogrudan mid push. Sage varsa mid wall pozisyonunu stratejiye göre kullanin.
-WHY: Mid, Split'in merkez sinir sistemi. Burasi kontrol edildiginde her iki site'a erisilir, her iki Heaven'a geçis mümkün olur. Mid'i kontrol etmeyen takim haritanin yarisinda oynuyor.
+IF: Takim mid'i tamamen ignore ediyor — kimse bilgi almaya bile gitmiyor.
+MEANING: Mid'i ignore etmek, haritanin kalbini rakibe teslim etmektir. Rakip Vents'ten A Heaven'a, Mail'den B Link'e geçer. Her execute'un tek boyutlu kalir ve rakip mid'den flank atar, seni arkadan vurur.
+COUNTER: Mid icin en az bir kisi ayir. Mid Top'tan bilgi al, Vents veya Mail'e dogru ilerle. Mid'de Op varsa smoke + flash + swing. Mid'i alininca seceneklerin katlanir:
+- A Heaven split
+- B Heaven split
+- Dogrudan mid push
+
+Sage varsa mid wall'u stratejine göre kullan.
+WHY: Mid, Split'in merkezi. Burasi kontrol edilince her iki site'a erisirsin, her iki Heaven'a geçersin. Mid'i birakirsan haritanin yarisinda oynuyorsun.
 
 **Pattern 5: Ramp Control (A)**
-IF: Oyuncu A Ramp'a utility olmadan çikiyor — kuru peek ile yükseklik farkina ragmen duel aliyor.
-MEANING: A Ramp'in yapisi savunmaciya avantaj veriyor çünkü yukari bakan taraf dezavantajli. Kontrolsuz Ramp peek'i, savunmacinin seni daha erken görmesine ve daha kolay vurmasina olanak tanir. Ramp'a kuru çikmak Split'teki en pahali bireysel hata.
-COUNTER: Smoke + flash ile Ramp'a çik. Flash'i Ramp'in üstüne at ki Heaven'daki oyuncuyu ve Ramp tepesindeki oyuncuyu ayni anda kör et. Smoke'u savunmacinin A Heaven'dan Ramp'a bakmasini engelleyecek sekilde konumla. Ramp alininca A Site'a giris çok rahat.
-WHY: Yükseklik farki olan dar bölgeler, utility kullanan tarafa devasa avantaj saglar çünkü flash yukari bakan tarafi daha çok etkiler ve smoke görüs hattini tamamen keser. Utility olmadan bu yükseklik farkini asmayi denemek, savunmaciya bedava round vermek.
+IF: Oyuncu A Ramp'a utility olmadan çikiyor — kuru peek ile duel aliyor.
+MEANING: A Ramp'in yapisi savunmaciya avantaj veriyor — yukari bakan taraf dezavantajli. Savunmaci seni daha erken görür, daha kolay vurur. Ramp'a kuru çikmak Split'teki en pahali bireysel hatadir.
+COUNTER: Smoke + flash ile Ramp'a çik. Flash'i Ramp'in üstüne at — Heaven'daki ve Ramp tepesindeki oyuncuyu ayni anda kör et. Smoke'u A Heaven'dan Ramp'a bakisi kesecek sekilde koy. Ramp alininca A Site'a giris rahatlar.
+WHY: Dar ve yükseklik farkli bölgelerde utility kullanan taraf kazanir. Flash yukari bakan tarafi daha çok etkiler, smoke görüs hattini tamamen keser. Utility atmadan bu yükseklik farkini asmayi denersen savunmaciya bedava round veriyorsun.
 
 ## 4. Savunma Stratejileri — Pattern Mapping
 
 **Pattern 1: A Site Savunma**
-IF: Savunmaci A Heaven'da her round ayni açidan oynuyor — Screens'den degismeyen pozisyon.
-MEANING: A Heaven güçlü ama okunabilir bir pozisyon. Rakip seni her round Screens'de beklemeye basladiginda, pre-aim ile ilk kursun avantajini alir. Tekrar eden pozisyon, avantajini kaybetmis pozisyon demek.
-COUNTER: A Heaven (Screens), A Ramp agresif peek, A Elbow off-angle ve A Site içinde düsük pozisyon arasinda rotate yap. Heaven'dan kill aldigin round'un sonrasinda site seviyesine in — rakip yukariyi pre-aim edecek ve seni bulamayacak. Ramp'ta agresif oynamayi da karistir: kill al, geri çekil.
-WHY: Off-angle'lar ilk kullanildiklarinda güçlü, tekrarlandiklarinda zayif. Pozisyon çesitliligi rakibin her round birden fazla açiyi kontrol etmesini zorlar ve bu da onlarin entry hizini düsürür. Sabit pozisyon oynayan savunmaci kendi avantajini sifirliyor.
+IF: Her round A Heaven'da aynı açıdan, Screens'den oynuyorsun.
+MEANING: Rakip seni orada beklemeye başlar. İkinci round pre-aim eder, ölürsün. Pozisyon tekrarlanınca avantajını kaybedersin.
+COUNTER:
+- A Heaven'da kill aldığın round'un sonunda site seviyesine in — rakip yukarıyı pre-aim edecek, seni bulamayacak.
+- A Ramp'ta agresif peek yap, kill al, geri çekil.
+- A Elbow ve site içi düşük pozisyonu karıştır.
+WHY: Off-angle ilk kullanımda güçlü, tekrarlandığında işe yaramaz. Pozisyonu değiştirirsen rakip her round birden fazla açıyı kontrol etmek zorunda kalır — bu onların girişini yavaşlatır.
 
 **Pattern 2: B Site Savunma**
-IF: Savunmaci B Heaven'dan gereksiz peek yapiyor — pozisyonunu erkenden veriyor.
-MEANING: B Heaven hakim pozisyon ama peek yaparak pozisyonunu verdigin anda, rakip seni pre-aim edebilir veya trade alabilir. Heaven'in gücü görülmeden hakim olmaktan gelir; peek yaptigin anda bu gücü kaybedersin.
-COUNTER: B Heaven'da pasif kal, B Main push gelene kadar pozisyonunu verme. B Garage'da bir kisi Pillar arkasinda anchor oynasın. B Main'e utility dump (molly, nade) ile gecikme yarat. B Heaven rope ile B Main üzerine agresif bilgi al ama bunu sadece rakibin push timing'ini bildigin round'larda yap.
-WHY: Hakim pozisyonlar pasif oynandiklarinda en güçlü. Peek yaparak pozisyon vermek, rakibe bilgi ve açik bir hedef saglar. Savunmanin amaci round'u öldürmek, kill almak degil — B Heaven'da sabirl oynamak rakibin B execute'unu zorlastirir.
+IF: B Heaven'dan erken peek yapıyorsun — pozisyonunu veriyorsun.
+MEANING: B Heaven'ın gücü görülmeden hakim olmaktan gelir. Peek yaptığın anda rakip seni pre-aim eder ya da trade alır. O avantajı kendin sıfırlıyorsun.
+COUNTER:
+- B Heaven'da pasif kal, B Main'den push gelene kadar yerini verme.
+- B Garage'da Pillar arkasında bir kişi anchor oynasın.
+- B Main'e molly ya da nade at, push'u geciktir.
+WHY: Hakim pozisyon pasif oynanınca güçlüdür. Peek yaparak rakibe hem bilgi hem de açık hedef veriyorsun. Savunmanın amacı round'u öldürmek — B Heaven'da yerini koruyarak rakibin B execute'unu zorlaştırırsın.
 
 **Pattern 3: Mid Savunma**
-IF: Mid'i savunan oyuncu utility olmadan mid'i kontrol etmeye çalisiyor — kuru peek veya pasif bekleyis.
-MEANING: Mid'i savunmak zor çünkü Vents ve Mail iki ayri yönü kontrol etmeyi gerektiriyor. Tek bir oyuncu utility olmadan her iki yönü ayni anda tutamaz. Kuru peek yaparak mid'i savunmayi denemek, saldiri takimine mid kontrolunu teslim etmek.
-COUNTER: Sage wall mid'e atildiginda mid savunmasi büyük ölçüde çözülür — bu Split'teki en güçlü duvar pozisyonu. Sage yoksa tripwire, camera veya turret ile bilgi al. Mid Top'tan agresif peek yap ama her round degil; bazi round'larda geri çekil ve utility ile kontrol et. Mid kaybedildiginde hemen callout ver — her iki Heaven tehlike altinda.
-WHY: Mid iki yöne açilani icin tek bir oyuncunun kuru savunmasi yetersiz. Utility bu acigi kapatir: wall fiziksel olarak yolu keser, sentinel utility'si bilgi saglar. Mid kaybedildiginde savunmanin tüm yapisi çöker çünkü rakip her iki site'a Heaven'dan girebilir.
+IF: Utility kullanmadan mid'i tutmaya çalışıyorsun — kuru peek ya da pasif bekleme.
+MEANING: Vents ve Mail iki ayrı yön. Tek başına utility olmadan ikisini aynı anda tutamazsın. Kuru oynarsan mid'i saldırı takımına bırakmış olursun.
+COUNTER:
+- Sage varsa mid'e duvar at — Split'teki en güçlü duvar pozisyonu.
+- Sage yoksa tripwire, camera veya turret ile bilgi al, kuru peek yapma.
+- Mid Top'tan agresif peek yap ama her round değil; Sage wall'ı görürsen çekil, utility ile kontrol et.
+WHY: Mid düşünce her iki Heaven tehlike altına girer. O an callout ver, takımı uyar. Mid, tek bir oyuncunun kuru savunmasıyla tutulmaz — utility açığı kapatır, duvar yolu keser.
 
 **Pattern 4: Heaven Savunma (Genel)**
-IF: Takim Heaven pozisyonlarini kaybediyor ama retake oynamak yerine site'ta kalmayi deniyor.
-MEANING: Heaven kontrolu kaybedildiginde site içinde kalmak dezavantajli çünkü rakip yukaridan seni görüyor. Site'ta kalarak retake oynamanin daha zor halini seçmis oluyorsun.
-COUNTER: Heaven kaybedildiginde geri çekil ve takim arkadaslarinla birlikte retake plani yap. Retake'te Heaven'i öncelikli hedef olarak al — Heaven geri alindiginda site kontrolu çok daha kolay. Utility ile Heaven'i flush et: Raze nade, Breach aftershock, Sova dart.
-WHY: Dikey dezavantaj yukari bakan tarafi her zaman zayif birakir. Heaven'daki oyuncu seni görüyor ama sen onu zor görüyorsun. Retake oynamak yerine site'ta direnmek, bu dezavantajla sürekli savunmak zorunda kalmak demek.
+IF: Heaven kontrolü kaybedildi ama takim site'ta kalmayı deniyor.
+MEANING: Heaven'ı kaybedince rakip seni yukarıdan görür, sen onu zor görürsün. Site'ta kalarak en zor retake'i seçmiş oluyorsun.
+COUNTER:
+- Heaven kaybedilince geri çekil, takımla retake planı yap.
+- Retake'te Heaven'ı önce al — Heaven geri gelince site kontrolü kendiliğinden gelir.
+- Heaven'ı flush etmek için Raze nade, Breach aftershock ya da Sova dart kullan.
+WHY: Yukarıdan bakan her zaman avantajlıdır. Heaven'daki rakip seni görür, sen onu göremezsin. Site'ta direnmeye devam edersen bu dezavantajla her saniye savaşırsın.
 
 ## 5. Agent Tier Listesi
 
 **S Tier**
-- **Sage**: Split'teki en degerli agent. Mid wall tek basina haritanin yarisini kontrol ediyor. A Ramp wall da saldiriyi dogrudan durdurabilir. Slow orb dar koridorlarda devasa gecikme yaratir. Heal ve revive dar haritada daha da degerli çünkü trade'ler çok yakin mesafede gerçeklesiyor.
-- **Raze**: B Main satchel entry Split'e özel bir mekanik — dar koridorda boombot bilgi alir, satchel ile hizli giris yapar. Paint shells dar alanlarda çok hasar verir. Showstopper dar koridorlarda kaçilamaz.
-- **Jett**: A Ramp agresif Op oynamak icin ideal — dash ile geri çekilme garantisi var. Updraft ile Heaven pozisyonlarina erisim saglar. Tailwind dar bölgelerden çikis icin hayat kurtarici.
+- **Sage**: Split'in en değerlisi bu. Mid wall tek başına haritanın yarısını kapatıyor. A Ramp wall saldırıyı oracıkta bitirebilir. Slow orb dar koridorda karşı tarafı dondurur — trade yakın olduğu için heal ve revive burada her haritadan daha kritik.
+- **Raze**: B Main'e girişin en temiz yolu satchel. Önce boombot at, bilgi al, sonra satchel'la içeri gir. Paint shells dar alanda patladığında düşman kaçacak yer bulamaz. Showstopper koridorda çarpmamak neredeyse imkânsız.
+- **Jett**: A Ramp'ta Op oynamak istiyorsan Jett al. Vurursun, dash'le çekilirsin — açık kalmazsın. Updraft ile Heaven'a çıkarsın, tailwind ile dar bölgeden anında sıyrılırsın.
 
 **A Tier**
-- **Viper**: Mid wall çok güçlü — tüm mid'i ikiye bölebilir. A Ramp poison orb savunmayi çok rahatlatir. Toxic screen execute'larda harika görüs hatti kesimi saglar.
-- **Cypher**: B Garage tripwire + camera kombinasyonu B site savunmasini tek basina çözer. Mid Vents kontrolu icin tripwire harita genelinde en iyi bilgi alinmasini saglayan utility. Dar koridorlar Cypher utility'sinin degerini katliyor.
-- **Breach**: B Main flash + fault line combo garantili entry olusturur. Aftershock Heaven pozisyonlarini flush eder. Dar koridorlar Breach utility'sinin vurus alanini daraltir ama isabet oranini arttirir.
-- **Omen**: B Heaven TP güçlü pozisyon degisikligi saglar. Mid'den A veya B'ye flank TP haritanin split yapisini kullanir. Paranoia dar koridorlarda çok güçlü.
+- **Viper**: Mid wall'u iyi kullanırsan tüm mid'i ikiye bölersin. A Ramp'a poison orb koyduğunda savunma neredeyse ücretsiz olur. Execute sırasında toxic screen görüş hattını keser, karşı takım seni göremez.
+- **Cypher**: B Garage'a tripwire + camera koy, B site savunmasını tek başına halledersin. Mid Vents'e tripwire — harita genelinde en temiz bilgi bu. Dar koridorlar her utility'ni daha değerli kılıyor.
+- **Breach**: B Main'de flash + fault line combo at, entry garanti. Aftershock Heaven'daki düşmanı bulunduğu yerden çıkarır. Koridorda vurma alanı daralır ama isabet kesinleşir.
+- **Omen**: B Heaven'a TP at, pozisyon değiştir. Mid'den A veya B'ye flank TP haritanın yapısını tam kullanır. Paranoia dar koridorda karşı tarafı tamamen kör eder.
 
 **B Tier**
-- **Killjoy**: Lockdown dar sitelerde çok güçlü. Turret ve alarm bot bilgi saglar ama Cypher'in tripwire'lari Split'in dar yapisina daha iyi uyuyor.
-- **Sova**: Recon bolt dar alanlarda daha kolay kiriliyor ama bilgi degeri hala yüksek. Drone mid kontrolu icin kullanisli. Shock dart lineup'lari post-plant'te güçlü.
-- **Skye**: Flash'leri dar koridorlarda güçlü ama Breach'in duvarin arkasina isleyen utility'si Split'te daha degerli. Dog bilgi alimi icin iyi.
+- **Killjoy**: Lockdown dar sitede güçlü. Turret ve alarm bot bilgi verir ama Cypher'in tripwire'ları bu haritaya daha iyi oturuyor.
+- **Sova**: Recon bolt dar alanda daha kolay kırılıyor, bilgi değeri yine de var. Drone mid kontrolü için işe yarar. Shock dart post-plant'te baskı kurar.
+- **Skye**: Flash'leri koridorda etkili ama Breach duvarın arkasına işleyen utility'siyle burada daha değerli. Dog bilgi almak için kullanılabilir.
 
 ## 6. Rank Modulasyonu (4 Tier)
 
 **Iron-Silver**
-Bu seviyedeki oyuncular Split'in temel yapisini anlamiyor. En yaygin hata: 5 kisi tek bir yere yüklenmek ve mid'i tamamen unutmak. Koçluk önceligi basit: her round en az bir kisinin mid'e bilgi almaya gitmesini sagla. A Ramp'a kuru çikmak yerine bir flash at, sonra çik. B Main'de takim arkadasinin utility'sini bekle, sonra gir. Rope mekaniklerini ögret — bu seviyedeki oyuncularin çogu rope kullanmayi bilmiyor bile. Heaven pozisyonlarinin var oldugunu fark etmeyen oyuncular var; ilk adim dikey farkindalik olusturmak.
+Split'in yapısını bilmiyorsun. Bütün takım tek noktaya yükleniyor, sen mid'i yok sayıyorsun. Her roundda en az bir kişi mid'e bilgi almaya gitmeli. A Ramp'a kuru çıkma — önce flash at, sonra çık. B Main'de takım arkadaşının utility'sini bekle, sonra gir. Rope kullanmayı öğren — çoğunuz bilmiyor bile. Heaven pozisyonlarının var olduğunu fark et: aşağıya bakmayı bırak, yukarıya bak.
 
 **Gold-Platinum**
-Bu oyuncular utility kullaniyor ama koordinasyon zayif. En yaygin hata: flash atiyor ama flash patlamadan giris yapiliyor veya flash çoktan sondukten sonra peek yapiliyor. A Ramp'a smoke + flash atiyor ama smoke'un timing'i yanlis — ya çok erken sönüyor ya da çok geç atiliyor. Mid kontrolu almaya çalisiyor ama mid kaybedilince rotate etmiyor. Koçluk önceligi: utility timing'ini düzeltin. Flash patlamasiyla swing ayni ana denk gelmeli. Smoke'un süresi boyunca ne yapacagini planla. Mid kaybedildiginde hemen rotate callout'u ver.
+Utility atıyorsun ama zamanlamayı bilmiyorsun. Flash atmışsın, patlamamış, girmişsin — kör olmayan rakip seni vurmuş. Ya da flash çoktan sönmüş, hâlâ bekliyorsun. A Ramp'a smoke + flash atıyorsun ama smoke erken sönüyor, içeri girdiğinde açıksın. Mid'i kaybedince rotate etmiyorsun, duraksıyorsun.
+- Flash patlamasıyla swingın aynı anda olması lazım.
+- Smoke attıktan sonra o smoke içinde ne yapacağını önceden karar ver.
+- Mid düştüğünde hemen rotate callout ver, bekleme.
 
 **Diamond-Ascendant**
-Bu oyuncular temelleri biliyor ama okunabilir hale geliyor. Her round ayni A Heaven pozisyonunu oynayan savunmaci, her round ayni mid play'i yapan saldirgan. Koçluk önceligi: mid-round adaptasyon. Eger rakip A Ramp'i her round push ediyorsa, ikinci round'dan itibaren Ramp'ta agresif tuzak kur. Eger rakip mid kontrolu aliyorsa, erken Sage wall + agresif mid peek ile sasirt. Default oynama aliskanligi olustur — her round'u ayni execute ile açmak yerine bilgi topla, sonra karar ver. Heaven pozisyonlarini round bazinda degistir.
+Okunabilir hale geldin. Her round aynı A Heaven'dan oynayan savunmacı, her round aynı mid açılışını yapan saldırgan — rakip seni ezberledi. Rakip A Ramp'ı her round push ediyorsa ikinci rounddan itibaren Ramp'ta agresif tuzak kur. Rakip mid kontrolü alıyorsa Sage wall + agresif mid peek ile şaşırt. Her roundu aynı execute ile açma — önce bilgi topla, sonra karar ver. Heaven pozisyonunu round bazında değiştir.
 
 **Immortal-Radiant**
-Bu seviye anti-strat ve round bazinda adaptasyonla ilgili. Split, anti-strat icin en uygun haritalardan biri çünkü dar girisler ve sinirli rota sayisi rakibin ne yapacagini tahmin etmeyi kolaylastiriyor. Koçluk önceligi: rakibin default dagitimini oku ve exploit et. Rakibin mid oynayisini analiz et — wall timing'i, utility kullanimi, agresyon seviyesi. Timeout kullanarak momentum kirilmalarini yönet çünkü Split'te momentum çok belirgin. Eco round'larda site'a girmek yerine pick ara — Sheriff ile mid peek veya A Ramp peek güçlü seçenekler. Heaven kontrolunun verilip retake oynanmasi gereken round'lari ayirt et.
+Burada her round rakibin son round'da nereden girdiğine göre kurulum yap. Split dar girişler ve sınırlı rotalar sayesinde anti-strat için biçilmiş kaftan — rakibin ne yapacağını tahmin etmek kolay. Rakibin mid oynayışını analiz et: wall zamanlaması, utility kullanımı, agresyon seviyesi. Momentum kırıldığında timeout kullan — Split'te momentum çok belirgin, kırılmadan durdurmak zorundasın. Düşük ekonomili roundlarda siteye girme, pick ara: Sheriff ile mid peek veya A Ramp peek güçlü seçenek. Heaven kontrolünü ne zaman bırakıp retake oynaman gerektiğini ayırt et.
 
 ## 7. Koçluk Satirlari
 
-- "Split'te mid'i kontrol eden takim haritayi kontrol eder. Mid'e bir kisi bile göndermeyen takim haritanin yarisini görmeden oynuyor."
+- "Mid'i kontrol eden takim haritayi kontrol eder. Takimin mid'e kimseyi göndermiyorsa haritanin yarisini kör oynuyorsunuz."
 
-- "A Ramp'a utility olmadan çikiyorsan, savunmaciya bedava kill hediye ediyorsun. Bir flash, bir smoke — bunlari kullanana kadar Ramp'a adim atma."
+- "A Ramp'a utility atmadan çikiyorsan savunmaciya bedava kill veriyorsun. Bir flash, bir smoke at — ondan önce Ramp'a adim atma."
 
-- "Heaven'i smoke'lamadan site'a girmek, gözlerin kapali dövüse girmek gibi. Rakip seni görüyor, sen onu görmüyorsun — bu duel'i kazanamazsin."
+- "Heaven'i smoke'lamadan site'a giriyorsan rakip seni görüyor, sen onu göremiyorsun. O dövüşü kazanamazsin."
 
-- "B Main dar, B Main tehlikeli, ama B Main geçilebilir. Geçilebilir bir koridor — ama sadece flash önünde yürürse."
+- "B Main dar ve tehlikeli, ama geçilebilir. Tek şart: flash önünde yürüsün."
 
-- "Split'te sabirl takim kazanir. Dar girisler acele eden tarafi cezalandirir, utility kullanan tarafi ödüllendirir."
+- "Dar girişler acele eden tarafı cezalandırır, utility kullanan tarafı ödüllendirir."
 
-- "Ayni pozisyonda iki round üst üste kill aldin mi? Üçüncü round pozisyon degistir. Rakip pre-aim edecek — bos açiya ates etsin."
+- "Aynı pozisyonda iki round üst üste kill aldıysan üçüncüde pozisyon değiştir. Rakip pre-aim edecek — bos açıya ateş etsin."
 
-- "Mid wall Split'teki en güçlü tek utility. Sage'in varsa mid wall timing'ini takim stratejisine entegre et; Sage'in yoksa mid'i utility ile savunmayi planla."
+- "Mid wall Split'teki en güçlü tek utility. Sage'in varsa mid wall'ı takım stratejisine sok. Sage'in yoksa mid'i başka utility ile tut — smoke, flash, ne varsa."
 
-- "Retake'te aceleniz olmasin. Dar girisler retake'i zorlastirir ama ayni dar girisler utility ile geri alinabilir. Flash, smoke, molly — hepsini kullanin, sonra girin."
+- "Retake'te smoke ve flash atmadan girme. Dar girişler retake'i zorlaştırır ama aynı dar girişler utility ile kırılır. Flash, smoke, molly — hepsini harca, sonra gir."
 
 ## 8. Callout'lar & Pozisyon Rehberi
 
-**A Tarafi**
-- **A Main**: Saldiri tarafinin A site'a ulasan ana koridoru. Dar ve uzun, savunmacilar icin kolay kontrol edilen bölge.
-- **A Ramp**: A Main'den A Site'a çikan rampa. Yükseklik farki yaratan, haritanin en hayati kontrol bölgelerinden biri.
-- **A Heaven (Screens)**: A Site'in üstündeki yükseklik. Screens, Heaven'daki koruma duvarlari. Savunmanin en güçlü A pozisyonu.
-- **A Elbow**: A Site içindeki dirsek seklindeki açi. Off-angle oynamak icin ideal.
-- **A Site**: Spike plant bölgesi. Varsayilan plant pozisyonu Screens arkasi (A Default).
-- **A Back**: A Site'in arka tarafi, CT Spawn'a yakin bölge.
-- **A Rafters**: A tarafindaki yükseklik/platform. Yükseklik avantaji saglayan pozisyon.
-- **Sewer**: A tarafindaki alt geçis, alternatif rotasyon yolu.
+**A Tarafı**
+- **A Main**: Saldırı tarafının A site'a girdiği ana koridor. Dar ve uzun — savunma buradan kolayca seni durdurur.
+- **A Ramp**: A Main'den A Site'a çıkan rampa. Yükseklik farkı burada — bu bölgeyi kim kontrol ederse A'da üstündür.
+- **A Heaven (Screens)**: A Site'in üstündeki yükseklik. Screens, Heaven'daki duvarlar. Savunma için A'nın en güçlü noktası burasıdır.
+- **A Elbow**: A Site içindeki dirsek açısı. Off-angle atmak istiyorsan buraya gir.
+- **A Site**: Spike'ı buraya kuruyorsun. Varsayılan plant Screens arkası — buna A Default denir.
+- **A Back**: A Site'in CT Spawn'a yakın arka köşesi. Retake'te savunma buradan gelir.
+- **A Rafters**: A tarafındaki platform. Yükseklik avantajı sağlar.
+- **Sewer**: A tarafındaki alt geçit. Alternatif rotasyon yolu olarak kullan.
 
-**B Tarafi**
-- **B Main**: Saldiri tarafinin B site'a ulasan ana koridoru. Son derece dar, utility olmadan geçilmesi zor.
-- **B Garage**: B Main'in açildigi genis bölge. Pillar ve baska siper noktalari var.
-- **B Heaven**: B Site'in üstündeki yükseklik. Tüm B bölgesi üzerinde hakimiyet saglayan pozisyon.
-- **B Back**: B Site'in arka tarafi. Retake icin kullanilan dar koridor.
-- **B Pillar**: B Site içindeki sütun. Anchor oynamak icin yaygin siper noktasi.
-- **B Rafters**: B tarafindaki yükseklik/platform alani.
-- **B Site**: Spike plant bölgesi. Varsayilan plant pozisyonu B Default (orta).
+**B Tarafı**
+- **B Main**: Saldırı tarafının B'ye girdiği ana koridor. Çok dar — util atmadan buradan geçmeye çalışma.
+- **B Garage**: B Main'in açıldığı geniş alan. Pillar ve siper noktaları var, açıları iyi oku.
+- **B Heaven**: B Site'in üstündeki yükseklik. Tüm B'yi görür — savunma burayı tutarsa B'yi almak zorlaşır.
+- **B Back**: B Site'in arka koridoru. Dar ama retake'te savunma buradan işler.
+- **B Pillar**: B Site'in ortasındaki sütun. Anchor oynuyorsan klasik siper noktası.
+- **B Rafters**: B tarafındaki platform alanı. Yükseklik avantajı verir.
+- **B Site**: Spike'ı buraya kuruyorsun. Varsayılan plant ortada — buna B Default denir.
 
 **Mid**
-- **Mid Top**: Mid'in savunma tarafina yakin ucu. Op tutmak icin klasik pozisyon.
-- **Mid Bottom**: Mid'in saldiri tarafina yakin ucu.
-- **Mid Vents**: Mid'den A Heaven'a açilan geçis. Mid kontrolu alindiginda A split icin kullanilir.
-- **Mid Mail**: Mid'den B Link'e ve B Heaven'a açilan geçis. Mid kontrolu alindiginda B split icin kullanilir.
-- **Mid Rope**: Mid bölgesindeki ip mekanigi. Yukari çikmak icin kullanilir.
+- **Mid Top**: Mid'in savunma tarafına yakın ucu. Savunma op'u buradan tutar.
+- **Mid Bottom**: Mid'in saldırı tarafına yakın ucu.
+- **Mid Vents**: Mid'den A Heaven'a açılan geçit. Mid'i aldıktan sonra A'yı ikiye bölmek için kullan.
+- **Mid Mail**: Mid'den B Link ve B Heaven'a açılan geçit. Mid kontrolü varsa B'yi ikiye bölmek için kullan.
+- **Mid Rope**: Mid'deki ip mekanizması. Yukarı çıkmak için kullanılır.
 
 **Genel**
-- **CT Spawn**: Savunma takiminin baslangic noktasi.
-- **T Spawn**: Saldiri takiminin baslangic noktasi.
+- **CT Spawn**: Savunma takımının başlangıç noktası.
+- **T Spawn**: Saldırı takımının başlangıç noktası.
 
 ## 9. Post-Plant — Pattern Mapping
 
 **Pattern 1: A Site Post-Plant**
-IF: Spike A Site'a plant edildi ama takim site içinde kalmayi çalisiyor — geri çekilmiyor.
-MEANING: A Site içinde kalmak, retake yapan savunmacilara kolay hedef olmak demek. Dar girisler post-plant'te savunmacinin degil, saldirganin avantajina çalisir — ama sadece saldirgan site'i terk edip crossfire pozisyonlarina geçtiginde.
-COUNTER: Spike plant edildikten sonra hemen geri çekil. A Ramp'a bir kisi, A Main'e bir kisi — crossfire kur. Heaven'i smoke'la ki retake yapan savunmaci yukaridan bilgi alamasin. Lineup'larin varsa (Brimstone molly, Viper snake bite, KJ nano) kullan — dar bölgeler lineup'lari çok güçlü kilar çünkü kaçinacak alan yok.
-WHY: Post-plant'te amaç spike'i defuse ettirmemek, kill almak degil. Site içinde kalarak kill pesinde kosmak, retake yapan savunmacinin isini kolaylastiriyor. Crossfire pozisyonlari savunmaciyi iki açiya bakmaya zorluyor ve defuse'u engelliyor.
+IF: Spike A Site'a plant edildi ama sen ve takımın site içinde kalıyorsunuz — çekilmiyorsunuz.
+MEANING: Site içinde kalmak, retake gelen savunmacıya kolay hedef olmak demek. Dar girişler post-plant'te senin avantajına çalışır — ama ancak siteyi terk edip crossfire pozisyonuna geçersen.
+COUNTER: Plant biter bitmez geri çekil. A Ramp'a bir kişi, A Main'e bir kişi — crossfire kur. Heaven'ı smoke'la, yukarıdan bilgi almasın. Lineup'ların varsa (Brimstone molly, Viper snakebite, KJ nano) at — dar bölgede kaçacak yer yok. Lineup'ın yoksa DM'de öğren.
+WHY: Post-plant'te amacın kill almak değil, defuse ettirmemek. Site içinde kill peşinde koşarsan retake yapan savunmacının işini kendin kolaylaştırıyorsun. Crossfire savunmacıyı iki açıya bakmaya zorlar, defusu imkânsız hale getirir.
 
 **Pattern 2: B Site Post-Plant**
-IF: Spike B Site'a plant edildi ama takim B Heaven kontrolunu almamis — Heaven'dan retake geliyor.
-MEANING: B Heaven post-plant'te en tehlikeli retake pozisyonu. Heaven'dan bakan savunmaci hem spike'i hem de B Main'i görebiliyor. Heaven kontrol edilmediyse retake çok rahat yapilir.
-COUNTER: B Main'de bir kisi, B Heaven'da (eger alindiysa) veya Heaven'a smoke atarak bir kisi pozisyon alsin. B Back'i kontrol et — retake çogu zaman B Back üzerinden gelir. B Heaven kontrolun yoksa, Heaven'a sürekli smoke at ve B Main'den crossfire kur. Spike'i B Default'a plant et ki B Main'den görüs hatti olsun.
-WHY: B Site dar oldugu icin retake yapan takim sinirli rotalardan gelmek zorunda. Bu rotalar bilindiginde (B Back, B Heaven, CT yönü) her birini bir kisi ile tutmak mümkün. Post-plant Split'te çok güçlü çünkü retake rotalarinin dar olmasi savunmacinin isini zorlastiriyor.
+IF: Spike B Site'a plant edildi ama takımın B Heaven'ı almamış — Heaven'dan retake geliyor.
+MEANING: B Heaven post-plant'teki en tehlikeli retake noktası. Heaven'dan bakan savunmacı hem spike'i hem B Main'i görüyor. Heaven kontrolün yoksa retake çok rahat gelir.
+COUNTER: B Main'e bir kişi koy. Heaven aldıysan oraya gir, almadıysan sürekli smoke at. B Back'i izle — retake çoğu zaman oradan gelir. Spike'i B Default'a plant et, B Main'den görüş hattın olsun.
+WHY: B Site dar olduğu için retake yapan takım sınırlı rotadan gelmek zorunda: B Back, B Heaven, CT yönü. Bu üçünü tutarsan retake geçemiyor. Split'te post-plant güçlü çünkü savunmacı rotaları zaten kısıtlı.
 
-**Pattern 3: Lineup Kullanimi**
-IF: Takim post-plant'te lineup kullanmiyor — defuse engellemek icin peek yaparak fight aliyor.
-MEANING: Peek yaparak defuse engellemek riskli çünkü retake yapan takim seni bekliyor olabilir. Lineup'lar (molly, snake bite, nano swarm) defuse'u peek yapmadan engelliyor.
-COUNTER: Brimstone, Viper, Killjoy veya Sova gibi lineup potansiyeli olan agent'lar varsa, post-plant lineup pozisyonlarini ögrenin. Split'in dar siteleri lineup'lari çok güçlü kilar çünkü spike'in etrafinda hareket alani çok az. Plant pozisyonunu lineup'a uygun seçin — bazi lineup'lar belirli plant pozisyonlarina göre çalisiyor.
-WHY: Lineup'lar risk almadan defuse engelliyor. Peek yaptiginizda rakiple duel aliyorsunuz ve kaybetme ihtimaliniz var; lineup attiginizda rakip ya defuse'u birakir ya da ölür. Dar sitelerde lineup'lar daha da güçlü çünkü defuse yapan oyuncu kaçinacak yer bulamiyor.
+**Pattern 3: Lineup Kullanımı**
+IF: Takımın post-plant'te lineup kullanmıyor — defusu engellemek için peek atıp fight alıyor.
+MEANING: Peek atarak defus engellemek riskli. Retake yapan takım seni o açıda bekliyor olabilir. Lineup'lar (molly, snakebite, nano swarm) peek atmadan defusu engelliyor.
+COUNTER: Brimstone, Viper, Killjoy veya Sova varsa post-plant lineup pozisyonlarını öğren. Plant yerini lineup'a göre seç — bazı lineup'lar belirli plant noktalarıyla çalışıyor. Split'in dar sitelerinde lineup çok güçlü, spike etrafında hareket alanı yok.
+WHY: Lineup attığında rakip ya defusu bırakır ya ölür, sen hiç risk almıyorsun. Peek attığında duel alıyorsun ve kaybedebilirsin. Dar sitede defus yapan oyuncu zaten kaçacak yer bulamıyor — lineup'ı daha da güçlü kılıyor.
 
 ## 10. Ekonomi
 
-**Saldiri Tarafi Ekonomi Yönetimi**
-Split savunma tarafinin güçlü oldugu bir harita oldugu icin saldiri tarafinda ekonomi yönetimi çok belirleyici. Saldiri tarafinda round kaybetme orani dogal olarak daha yüksek, bu yüzden ekonomiyi dogru yönetmek her full buy'in maksimum deger üretmesini saglamali.
+**Saldırı Tarafı Ekonomi**
+Saldırıda 7-8 round kaybetmen normal — Split savunma haritası. Her full buy'ı boşa harcama — her satın almanın bir karşılığı olsun.
 
-**Force Buy Stratejisi**
-Force buy gereken round'larda B Main rush en az utility ile yapilabilir. B Main dar oldugu icin Spectre gibi ucuz silahlar yakin mesafede güçlü. Tam utility olmadan execute yapmak zor ama B Main'in dar yapisi force buy round'larinda saldiri tarafina bir sans veriyor.
+**Force Buy**
+Force buy roundunda B Main'e rush at. Spectre al — dar koridor, yakın mesafe, Spectre B Main'de Vandal kadar etkili. Utility olmadan execute deneme, tek hedefe git.
 
-**Eco Round Stratejisi**
-Eco round'larda site'a girmek yerine pick aramak çok daha verimli. Sheriff ile mid peek veya A Ramp peek güçlü seçenekler. Mid'de tek bir pick almak eco round'unu karliya çevirebilir — hem silah hem de rakibin ekonomisine hasar verirsin. Eco round'da 5 kisi site'a girmeye çalismak büyük hata çünkü utility yok ve savunma sizi dar girislerde durdurur.
+**Eco Round**
+Site'a girme. Mid veya A Ramp'tan pick ara.
+- Sheriff ile Mid peek at
+- 1 düşman düşürürsen hem silah kazanırsın hem onların ekonomisini bozarsın
 
-**Spectre Degeri**
-Spectre Split'te diger haritalara göre daha güçlü çünkü tüm savaslarin çogu yakin mesafede gerçeklesiyor. Dar koridorlar (A Main, B Main, Mid) Spectre'nin menzil dezavantajini ortadan kaldiriyor. Bonus round'larda Spectre + tam utility almak, Vandal/Phantom + az utility almaktan daha iyi olabilir.
+5 kişi site'a dalmak yasak — utility yok, dar girişlerde hepiniz ölürsünüz.
 
-**Savunma Tarafi Ekonomi**
-Savunma tarafinda ekonomi genellikle daha rahat çünkü round kazanma orani yüksek. Utility save'lemek mümkün — eger saldiri gelmedigini gördügün tarafta utility kullanmadan round biterse, bir sonraki round icin utility'ni koru. Operator Split'te çok güçlü (Mid Top, A Heaven) ama pahali; ekonomi bu yatirimi kaldirmiyorsa Spectre veya Marshal ile de iyi isler yapilabilir.
+**Spectre Değeri**
+Spectre bu haritada başka haritalara göre çok daha güçlü. A Main, B Main, Mid — hepsi yakın mesafe. Bonus roundda Vandal + az utility yerine Spectre + tam utility al.
+
+**Savunma Tarafı Ekonomi**
+Savunma tarafında ekonomin daha rahat. Saldırı gelmediği tarafa utility harcama — bir sonraki round için sakla. Operator Mid Top ve A Heaven'da güçlü ama pahalı. 1500 kredinin altındaysan Marshal veya Spectre yeterli.
 
 ## 11. Anti-Strat
 
-**Rakip her round A Ramp push yapiyorsa:**
-IF: Rakip her round A Ramp'a utility ile push yapiyor — agresif Ramp kontrolu stratejisi.
-MEANING: Rakip A execute'u Ramp kontrolu üzerine kuruyor. Bu demek oluyor ki Ramp alindiginda A execute gelecek.
-COUNTER: Ramp'i smoke'la ve agresif Heaven play yap. Ramp'a çikan oyuncuyu Heaven'dan karsi — eger rakip her round Ramp'a geliyorsa, Ramp tepesinde off-angle tut. Bir round agresif Ramp peek yap, sonraki round geri çekilip smoke + molly at. Tahmin edilemez ol.
-WHY: Tekrar eden saldiri pattern'leri savunmaciyi güçlendiren en büyük hediye. Rakibin her round ayni noktaya gelecegini biliyorsan, o noktayi her round farkli bir sekilde savunarak onlarin plan yapmalarini imkansiz kilirsin.
+**Rakip her round A Ramp push yapıyorsa:**
+IF: Rakip her round A Ramp'a utility ile push yapıyor.
+MEANING: Ramp'ı aldıktan sonra A execute gelecek. Bu kesin.
+COUNTER: Ramp'ı smoke'la, kendini Heaven'a al. Ramp tepesinde off-angle tut. Bir round agresif Ramp peek yap, bir sonraki round geri çekil ve smoke + molly at.
+WHY: Aynı noktaya her round aynı şekilde geliyorlarsa, sen her round farklı bir şey yap — planları çöker.
 
-**Rakip mid kontrolu aliyorsa:**
-IF: Rakip her round mid'e erken baskinla kontrol aliyor — agresif mid push.
-MEANING: Rakip mid'i alarak split execute seçeneklerini açiyor. Mid kaybedildiginde her iki Heaven tehlike altinda.
-COUNTER: Early Sage wall mid'e at — bu fiziksel olarak mid push'u engelliyor. Sage yoksa erken agresif mid peek yap (Op veya rifle ile). Mid'e tripwire veya camera koy ki bilgi alin. Rakibin mid push timing'ini ögrenin ve counter-utility'nizi o timing'e göre atin.
-WHY: Mid kontrolu Split'in en belirleyici unsuru. Rakip mid'i aliyorsa, mid'i savunmayi öncelik haline getirmek zorundasin çünkü mid kaybedildiginde tüm harita açiliyor.
+**Rakip mid kontrolü alıyorsa:**
+IF: Rakip erken baskınla mid kontrolü alıyor.
+MEANING: Mid giderse her iki Heaven tehlike altına girer, harita açılır.
+COUNTER: Sage varsa erken wall at, mid fiziksel olarak kapanır. Sage yoksa erken agresif mid peek yap. Killjoy tripwire veya Cypher camera koy, bilgi al.
+WHY: Mid Split'in kalbidir. Mid giderse her yer gider.
 
-**Rakip B rush yapiyorsa:**
-IF: Rakip her round hizli B Main push yapiyor — az utility ile kalabalik giris.
-MEANING: Hizli B rush dar koridorun avantajini kullanarak savunmaciyi ezmeye çalisiyor. Tek savunmacinin B Main'de 5 kisiyi durdurmas çok zor.
-COUNTER: B Main'e Breach fault line + KJ lockdown veya molly at. B Garage'da iki kisi tut (normal dagitimda bir kisi). B Heaven'dan utility dump yap — nade, molly, slow. Eger her round B rush geliyorsa, B'ye bir ekstra kisi kaydir ve mid'i sentinel utility'si ile koru.
-WHY: Rush stratejileri savunmaci hazir degilse is görüyor ama hazirlikli savunmaya karsi çok zayif. Dar koridor rush yapan tarafi da cezalandirir — bir molly veya fault line B Main'i tamamen kapatir ve rush'i durdurur.
+**Rakip B rush yapıyorsa:**
+IF: Rakip her round az utility ile kalabalık B Main push yapıyor.
+MEANING: Dar koridoru kullanarak seni ezmek istiyor. Tek başına durman imkânsız.
+COUNTER: B Main'e Breach fault line veya KJ molly at. B Garage'da iki kişi tut. B Heaven'dan nade, molly, slow dump yap.
+WHY: Rush hazırlıksız savunmaya işe yarar. Hazırlıklı savunmaya karşı dar koridordan gelen rush kendi kendini cezalandırır — bir molly B Main'i kapatır.
 
-**Rakip split execute yapiyorsa:**
-IF: Rakip mid üzerinden split execute yapiyor — A veya B'ye iki yönden giriyor.
-MEANING: Split execute koordinasyon gerektiren ama basarili oldugunda çok güçlü bir strateji. Savunmaci iki açiya bakmak zorunda kaliyor.
-COUNTER: Mid'de iki kisi tut ve erken bilgi al. Eger rakip mid'den split gelecekse, mid'deki iki kisi bunu erken yakalar ve callout verir. Site savunmacisi Mid tarafindan gelen split'e dogru dönebilir çünkü Main'den gelen push henüz gelmemis olacak.
-WHY: Split execute'un zayif noktasi zamanlama. Mid'den ve Main'den ayni anda girmek zor; eger mid push erken yakalanirsa, site savunmacisi iki açiya degil tek açiya bakar ve execute çöker.
+**Rakip split execute yapıyorsa:**
+IF: Rakip mid üzerinden split execute yapıyor, siteye iki yönden giriyor.
+MEANING: Seni iki açıya baktırıyor. Koordineli yapılırsa çok güçlü.
+COUNTER: Mid'de iki kişi tut. Mid push erken yakalanırsa site savunucusu zaten tek açıya bakar, execute çöker.
+WHY: Split execute'un zayıf noktası zamanlama. Mid ve Main'den aynı anda girmek zor — mid erken düşerse execute dağılır.
 
-**Rakip Heaven play yapiyorsa:**
-IF: Rakip Heaven pozisyonlarini agresif kullaniyor — her round Heaven'dan peek yapiyor.
-MEANING: Agresif Heaven play bilgi ve kill verir ama savunmaciyi açik pozisyona düsürüyor.
-COUNTER: Heaven'a utility dump yap — Raze nade, Breach aftershock, Sova shock dart. Bu utility'ler Heaven'daki oyuncuyu ya öldürür ya da pozisyondan çikarir. Heaven'a gelen oyuncuyu trade almak icin hazirlikli ol — Heaven'dan düsme animasyonu sirasinda oyuncu savunmasiz.
-WHY: Heaven pozisyonlari güçlü ama sinirli kaçis yolu var. Utility ile flush edilen Heaven oyuncusu ya ölür ya da rope/merdiven ile inmek zorunda kalir ve bu geçis sirasinda savunmasiz kalir.
+**Rakip Heaven play yapıyorsa:**
+IF: Rakip her round Heaven pozisyonlarını agresif kullanıyor.
+MEANING: Heaven bilgi ve kill verir ama oyuncuyu açık pozisyona düşürür.
+COUNTER: Heaven'a utility dump yap — Raze nade, Breach aftershock, Sova shock dart. Heaven oyuncusu ya ölür ya pozisyon bırakır.
+WHY: Heaven'dan kaçış yolu az. Utility ile flush edilen oyuncu rope veya merdivenle inmek zorunda kalır, o geçiş sırasında savunmasız kalır.

@@ -1,63 +1,65 @@
 # EŞLEŞME: Vyse vs Dive Kompozisyonu
 
-> **YAMA DUYARLILIĞI NOTU**: Vyse yeni bir sentinel ajandır. Yetenek değerleri, bekleme aralıkları ve etkileşimler yamalar arasında belirgin şekilde değişebilir. Koçluk tavsiyesi uygulamadan önce güncel yama notlarını doğrulayın.
+> **YAMA NOTU**: Vyse yeni bir sentinel. Yetenek değerleri yamadan yamaya değişir — buradaki kalıpları her yamadan sonra test et, yama notlarıyla karşılaştır.
 
-## Etkileşim Kimliği
-Dive kompozisyonları — Jett, Raze veya Neon'un Breach veya Gekko ile birlikte yer aldığı yapılar — hareket yetenekleri ve agresif yetenek araçlarıyla site'a sert ve hızlı saldırarak atak yapar. Bilgi yerine hız ve taahhüt ticareti yaparlar. Vyse'in trap bazlı kontrolü tam olarak bu yaklaşımı cezalandırır. Yerdeki yapılar hareket halindeki ajanları dash veya satchel sırasında yakalar, silah bozma bölgeleri entry anında ateş güçlerini düşürür ve duvar teknolojisi dalıcıların ihtiyaç duyduğu sightline'ları kapatır. Dive, o tepki veremeden ezmek ister; Vyse, trap'lerinin tepkiyi kendi yerine vermesini ister.
+## Bu Eşleşme Ne Hakkında
+Dive kompozisyonlar — Jett, Raze veya Neon yanında Breach ya da Gekko gibi destekle gelen yapılar — siteye hızlı ve sert girer. Bilgi toplamak yerine hız üzerine oynarlar. Vyse'in trap'leri tam bunu cezalandırır: Jett dash atarken trapa basar, Raze satchelle inerken silahı bozulur, duvar takip oyuncusunu keser ve dalıcı içeride yalnız kalır. Dive seni tepki vermeden ezmek ister — Vyse, trap zaten senin yerine tepki verir.
 
-## Yaygın Cezalandırma Kalıpları
+## Cezalandırma Kalıpları
 
-### Vyse Dive Kompozisyonunu Cezalandırırken
+### Vyse Dive'ı Cezalandırırken
 
-**IF**: Ön-yerleşmiş trap'ler ajanları dash veya satchel sırasında yakalıyor — hareket yeteneklerinin yer seviyesi trap'lerden geçen taahhütlü yörüngeleri var
-**MEANING**: Hareket yetenekleri tahmin edilebilir yollarda ilerliyor — trap'ler bu yolları kapatıyor
-**COUNTER**: Taahhüt etmeden önce patlayıcı yetenek aracı (Raze granatleri, Breach fault line) ile trap'leri menzilden temizlemeli
-**WHY**: Dash/satchel yörüngeleri değiştirilemez — trap o yoldaysa yakalanma kaçınılmaz
+**IF**: Jett dash atarken, Raze satchelle atlarken veya Neon slide yaparken trap'e basıyor
+**MEANING**: Hareket yeteneklerinin gittiği yer sabittir — o yol trap'liyse kaçış yok
+**COUNTER**: Dive girerken önce granat veya Boom Bot gönder, trap'i temizle, sonra atla
+**WHY**: Dash ve satchel yönünü havada değiştiremezsin — trap o noktadaysa yakalanırsın
 
-**IF**: Silah bozma bölgeleri yaygın dive pozisyonlarının iniş noktalarında aktive oluyorsa
-**MEANING**: Dalıcı baskılanmış silahlarla varıyor — entry anında ateş gücü düşük
-**COUNTER**: Birden fazla eşanlı farklı açıdan entry yaparak Vyse'in trap kapsamasını aşmalı
-**WHY**: İniş noktası bozma, dalıcıyı en savunmasız anında etkisiz kılar
+**IF**: Silah bozma alanı dalıcının iniş noktasında aktif oluyor
+**MEANING**: Dalıcı içeri girdiği anda silahı çalışmıyor — en savunmasız anında etkisiz
+**COUNTER**: Farklı iki açıdan aynı anda gir — Vyse tek noktayı bozabilir, ikisini aynı anda kapayamaz
+**WHY**: Silah bozma iniş anında vurur, bunu geçmenin tek yolu noktayı dağıtmak
 
-**IF**: Duvar teknolojisi dalma anında konuşlandırılarak takip oyuncularını entry'den kesip dalıcıyı site'ta izole ediyor
-**MEANING**: Dalıcı destek olmadan site'ta yalnız — izole ve savunmasız
-**COUNTER**: Drone veya Boom Bot'u feda ederek trap'leri gerçek dalma öncesi tetiklemeli
-**WHY**: Takipten kesilen dalıcı sayı dezavantajıyla dövüşür
+**IF**: Duvar, dalıcı girdikten hemen sonra kapanıyor ve takip oyuncularını site dışında bırakıyor
+**MEANING**: Dalıcı içeride yalnız, 1v2 veya 1v3 dövüşüyor
+**COUNTER**: Gerçek dalıştan önce drone veya Boom Bot gönder, duvarı erken tetikle
+**WHY**: Duvar tetiklendikten sonra yeniden aktif olana kadar kısa bir boşluk var — o boşlukta gir
 
-### Dive Kompozisyonu Vyse'i Cezalandırırken
+### Dive Vyse'ı Cezalandırırken
 
-**IF**: Saf hız — trap'ler aktive olmadan veya trap'lerin kapsamadığı açılardan dalınıyor
-**MEANING**: Trap'lerin tepki verecek zamanı yok veya yanlış pozisyonda
-**COUNTER**: Vyse trap'leri dalıcı iniş noktalarındaki belirli pozisyonlara koymalı, genel choke noktalarına değil
-**WHY**: Hız aktivasyon penceresini yener
+**IF**: Trap'lerin olmadığı açıdan veya trap aktive olmadan önce içeri giriliyor
+**MEANING**: Trap'ler yanlış noktada ya da geç koyuldu
+**COUNTER**: Trap'leri genel koridora değil, dalıcıların bastığı somut iniş noktasına koy
+**WHY**: Hız, trap'in aktive olma süresini geçiyor — noktayı kestirirsen hız işe yaramaz
 
-**IF**: Patlayıcı yetenek aracı taahhüt etmeden önce trap'leri menzilden temizliyorsa
-**MEANING**: Trap'ler dalma başlamadan yok ediliyor — Vyse savunmasız
-**COUNTER**: Vyse trap'leri katmanlamalı ki ilk temizleme ikinci trap'e takılsın
-**WHY**: Tek katman trap temizlemeye karşı kırılgan
+**IF**: Dive, girmeden önce granat veya drone ile trap'leri patlattıktan sonra giriyor
+**MEANING**: Tek katman trap'in var — ilki gidince içerisi açık
+**COUNTER**: Trap'leri katmanla: ilk trap patlarsa arkasında ikinci trap olsun, ya da bozma alanı ile kombine et
+**WHY**: Tek trap temizlemesi kolay — ikinci katman dalıcıyı sürprizle yakalar
 
-## Tekrarlanan Başarısızlık Ne Anlama Gelir
-**Vyse** sürekli dive tarafından eziliyorsa, trap'leri dalma yollarında değil veya sadece tek katman kapsaması var. Dive ajanlarının tahmin edilebilir iniş noktaları vardır — o belirli pozisyonları tuzaklamalı, genel choke noktalarını değil.
+## Sürekli Kaybediyorsan Ne Anlama Gelir
 
-**Dive kompozisyonu** sürekli entry'de trap'lere takılıyorsa, önce yetenek araç temizlemeden taahhüt ediyor. Hızlı bir dalma bile içeri girmeden önce Vyse'in trap'lerini sökmek için kısa bir yetenek araç temizleme anı gerektirir. Hızı ölümle takas ediyorlar.
+**Vyse sürekli dive tarafından eziliyorsa**: Trap'lerin ya yanlış noktada ya da tek katmanlı. Jett'in nereye bastığını, Raze'in nereye indiğini, Neon'un nereye kaydığını izle — trap o noktaya gider, koridorun ortasına değil.
+
+**Dive sürekli trap'e takılıyorsa**: İçeri girmeden önce tek bir yetenek bile harcamıyorsunuz. Drone at, granat at, Boom Bot gönder — trap temizlenmeden atladığın her sefer aynı sonuç çıkar.
 
 ## AIMLO Ne Demeli
 
-### Oyuncu cezalandırılan taraftayken
-**Vyse dive tarafından eziliyorsa**: "Trap'lerin onların dalma iniş noktalarında değil. Jett'in nereye dash attığını, Raze'in nereye satchel yaptığını, Neon'un nereye slide yaptığını izle — o noktalara trap gerekiyor. Genel choke noktası yerleştirmesi hareket yeteneklerini yakalamaz."
+### Oyuncu Vyse oynuyorsa
+**Dive tarafından eziliyorsa**: "Trap'lerin onların iniş noktasında değil. Jett nereye dash atıyor, Raze nereye satchel yapıyor — o noktaya koy. Koridorun ortasına trap koymak hareket yeteneğini yakalamaz."
 
-**Dive kompozisyonu trap'lere takılıyorsa**: "Dalmadan önce trap'leri temizleyin. Drone gönderin, granat atın veya trap'leri tetiklemek için bir yetenek aracı feda edin. Kısa bir temizleme anı tüm entry takımının trap ağına inmesini önler."
+**Dalıcıları yakalıyorsa**: "İniş noktalarını doğru okuyorsun. Site değişince iniş noktaları da değişir — trap'lerini o yeni noktaya taşı."
 
-### Oyuncu cezalandıran taraftayken
-**Vyse dalıcıları yakalıyorsa**: "Trap'lerin iniş noktalarında ve dalıcılar her seferinde içlerine yürüyor. Dalma kalıplarını incelemeye ve trap'leri indikleri yere ön-yerleştirmeye devam et."
+### Oyuncu Dive oynuyorsa
+**Trap'lere takılıyorsa**: "Dalmadan önce trap'i temizle. Bir drone, bir granat, bir Boom Bot yeter — önce onu patlatmadan atlama."
 
-**Dive kompozisyonu temizleyip giriyorsa**: "Dalma öncesi yetenek araç temizlemeniz çalışıyor. Vyse'in trap'leri siz taahhüt ettiğinizde gitmiş. Önce temizleme yetenek aracı gönderip hemen ardından dalmaya devam edin."
+**Temizleyip giriyorsa**: "Yetenek harcayıp önce trap'i patlattıktan sonra giriyorsun — bu doğru sıra. Bunu her girişte uygula."
 
 ## Rank Modülasyonu
-**LOW**: Bu seviyede dive kompozisyonları mevcut değil — push'lar koordinesiz. Vyse'in trap'leri rastgele oyuncuları yakalar. Temel trap yerleştirmeyi öğret.
 
-**MID**: Dive şekillenmeye başlıyor ama koordinesiz. Vyse'in trap'leri bazı entry'leri yakalar. Vyse'a iniş noktası tuzaklama, dive kompozisyonlara ön-temizleme öğret.
+**LOW**: Bu rankta dive kompozisyon yok, pushlar dağınık. Vyse'in trap'leri rastgele oyuncuları yakalar. Temel iniş noktası tuzaklama yeter — koridorun ortasına değil, oyuncunun bastığı yere koy.
 
-**HIGH**: Dive koordineli ve Vyse'in trap'leri özellikle anti-dive konumlanmalı. Vyse'a dalma kalıplarını inceleme, dive takıma temizleme sekanslarını öğret.
+**MID**: Dive şekilleniyor ama koordineli değil. Trap'ler bazı girişleri keser. Vyse'a: iniş noktasını oku, trap oraya git. Dive'a: girmeden önce bir yetenek harca, içeride sürprizle karşılaşma.
 
-**ELITE**: Dive ve anti-dive ikisi de optimize. Eşleşmede dive'ın trap'leri yeterince hızlı temizleyip temizleyemediği ve Vyse'in raundlar arası trap pozisyonlarını adapte edip edemediği belirleyici. Raunddan raunda adaptasyon hızını öğret.
+**HIGH**: Dive koordineli, Vyse'in trap'leri iniş noktalarına göre koyulmalı. Vyse'a: dalış kalıbını raunddan raunda oku, trap'i taşı. Dive'a: temizleme sırasını uygula — önce drone veya granat, sonra dal.
+
+**ELITE**: İki taraf da kalıplarını biliyor. Belirleyici olan şu: Dive, trap'leri Vyse fark etmeden önce temizler mi? Vyse, trap pozisyonunu bir önceki raunda göre değiştirir mi? Dive aynı açıdan girerse Vyse o açıyı trap'ler — Vyse aynı noktayı trap'lerse Dive oraya drone atar. Hangisi önce açı değiştirir — o kazanır.

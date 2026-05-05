@@ -9,101 +9,137 @@ tags: [matchup, viper, harbor, controller_vs_controller]
 
 ## 1. Matchup Özü
 
-Viper ve Harbor karşılaşması iki alan controller'ının savaşıdır. İkisi de smoke ile geçici örtü değil, kalıcı alan kontrolü kurar. Viper fuel ekonomisi ile çalışır — wall ve cloud aynı havuzdan içer, fuel biterse kontrol yok. Harbor charge ekonomisi ile çalışır — her utility ayrı cooldown, ama cooldown'lar uzun. Ortak özellik: ikisi de round başı commit yapar, mid-round adaptasyon zayıftır. Farklılık: Viper zehir ekonomisini taşır (damage over time), Harbor saf görüş/ses engeli taşır (damage yok). Matchup özü şudur: Viper alan kontrolüne zehirle ceza ekler, Harbor alan kontrolüne hız ekler (Cascade yürüyen smoke). Pro okuma: Viper fuel yakmadan kalıcı alan kurar, Harbor cooldown yaktıktan sonra kalıcı alan kurar. Hangisi round'un alan ekonomisini daha uzun tutarsa o kazanır.
+İki alan kontrolcüsü karşı karşıya. Ama aynı şeyi yapmıyorlar.
+
+Viper dumanına zehir ekler — wall ve cloud aynı havuzdan içer. Havuz bitince alan yok. Harbor duman atar ama zehri yok — her util ayrı bekleme süresinde çalışır, biri bitince diğeri devreye girer ama yenisi uzun sürer.
+
+Kilit fark şu: Viper haritanın bir bölümünü kilitler ve o kilidi yakıt ölçerek yönetir. Harbor her utilini ayrı atar, ama biri gidince geri gelmesi uzun sürer.
+
+Kim yakıtını veya utilini daha uzun aktif tutarsa o round'un haritasını tutar.
 
 ## 2. Kim Avantajlı?
 
-Viper pro meta'da net üstte. Breeze, Icebox, Fracture Viper comp kurucu, bu üç map'te Harbor tercih edilmez. Harbor sadece Pearl'de comp kurucu — kalan haritalarda niş pick. Genel dağılım: dokuz map'in beşinde Viper avantajlı, birinde Harbor avantajlı, üçünde nötr. Fuel ekonomisi Harbor'un cooldown ekonomisinden stratejik olarak daha güçlü — Viper round içinde fuel'i parçalı kullanabilir (tap wall, kısa cloud), Harbor binary (var ya da yok). Ult karşılaştırması: Viper's Pit vs Reckoning — Viper's Pit uzun süreli alan, Reckoning kısa süreli concussive. Pit retake çevirir, Reckoning retake açar. İkisi farklı aşamada kullanılır.
+Viper net üstte. Breeze, Icebox, Fracture, Sunset, Bind — bu haritalarda Harbor oynamak comp'unu zayıflatır.
+
+Harbor'un tek sağlam yeri Pearl. Orada Viper'dan daha iyi.
+
+Diğer haritalarda (Haven, Lotus, Split, Ascent) ikisi de ilk tercih değil — o rolü Omen alır.
+
+Neden Viper üstte? Çünkü yakıtı parça parça kullanabilirsin — duvarı kapat, yakıt kazan, tekrar aç. Harbor böyle çalışmaz: attın mı bitti, bekliyorsun. Viper round boyunca 2-3 farklı bölgeyi kapatabilir. Harbor 1-2 bölge.
+
+Ult karşılaştırması: Viper's Pit uzun süreli alan kilidi, Harbor Reckoning kısa süreli sersemletme. Pit retake çevirir. Reckoning retake açar. Farklı aşamalarda kullanılır.
 
 ## 3. Key Düellolar
 
-**IF** Viper fuel barı round başında ≤ 50%
-**MEANING** Viper round içi ikinci wall atamaz — alan kontrolü tek wall ile sınırlı, rotate alanı korunamaz
-**COUNTER** Harbor tarafı ikinci wall penceresinde High Tide kurar, haritanın diğer bölümünü Harbor alır. Viper tek alan, Harbor ikinci alan = Harbor dengeliyor
-**WHY** Viper fuel çift kullanım için yetmez, Harbor cooldown ikinci utility için yeterli. Fuel ekonomisi Viper avantajını eşitliyor.
+**IF** Viper duvarını erken kapattı, yakıt topluyor
+**MEANING** Duvar kapandığında o hat kontrolsüz. Rotate alanı açık.
+**COUNTER** Harbor tarafısın — duvarın kapandığını gördüğünde High Tide'ı o hatta bas. Viper kontrolsüz, sen doldur.
+**WHY** Viper duvarı kapatmak taktiksel yakıt hamlesi. Ama o pencerede Viper alansız. Bu pencere Harbor için ideal giriş.
 
 ---
 
-**IF** Harbor Cascade yürüyen duvar Viper cloud'ına paralel
-**MEANING** İki smoke üst üste — Cascade Viper cloud'un içinden geçer, görüş zaten kapalı, Cascade israf
-**COUNTER** Harbor Cascade'ı Viper cloud'un dışına, ikinci sightline için at. Cloud örtüsü varken ikinci örtü boşa utility
-**WHY** Harbor ve Viper aynı comp'ta olsa bile smoke'lar üst üste binmemeli. Karşı comp'ta ise Cascade Viper cloud'un zayıf bıraktığı açıyı kapatmalı.
+**IF** Harbor Cascade'ını Viper cloud'uyla aynı hatta attı
+**MEANING** İki duman üst üste — Cascade Viper cloud'un içinden geçiyor, ekstra görüş engeli sıfır, util harcandı.
+**COUNTER** Cascade'ı Viper cloud'un kapamadığı açıya at. Zaten kapalı yere ikinci duman boşa.
+**WHY** Dumanlarda üst üste binme yok — her util ayrı açıyı kapatmalı.
 
 ---
 
-**IF** Viper Snake Bite ile plant alanını zehirledi, Harbor Cove kurmuş
-**MEANING** Harbor Cove içinde Snake Bite etkisi Cove görüş engelini kırmaz ama Cove içindeki savunmacıyı damage'lar
-**COUNTER** Viper tarafı Cove görüntüsünü okur, Cove içine Snake Bite lineup atar — Cove içi savunmacı damage + smoke içinde kör
-**WHY** Cove görüş engeli, fiziksel engel değil. Snake Bite area denial damage, görüşten bağımsız çalışır. Cove Snake Bite'a karşı savunmasız.
+**IF** Viper Snake Bite plant alanına düştü, Harbor Cove kurulu
+**MEANING** Cove görüşü keser ama zehiri durdurmaz. Cove içindeki oyuncu Snake Bite hasarı alır, hem kör hem yanıyor.
+**COUNTER** Viper tarafısın — Cove'u gördüğünde içine Snake Bite lineup at. Cove savunuculara yardım etmez, zehre karşı savunmasız.
+**WHY** Cove görüş engeli, fiziksel engel değil. Snake Bite görüşten bağımsız hasar verir.
 
 ---
 
-**IF** Harbor High Tide duvarı Viper wall'u ile aynı hatta
-**MEANING** İki duvar smoke'u aynı haritada — alan kontrolü çift katlı ama tek hatta, rotate hattı kapalı
-**COUNTER** Hücum iki duvar arasında sıkışırsa execute iptal. Duvarları farklı hatlara dağıt — biri A, diğeri Mid
-**WHY** İki controller aynı comp'ta eşit alan kontrolü hedefler. Aynı hatta iki smoke redundant, zıt hatlarda iki smoke map-wide lock.
+**IF** Harbor High Tide ile Viper duvarı aynı hatta
+**MEANING** İki duvar aynı rotayı kapatıyor — çift kat ama tek hat, diğer hat açık.
+**COUNTER** Duvarları farklı hatlara dağıt. Biri A, diğeri Mid — böylece haritanın iki tarafı kapanır. Aynı hatta iki duvar boşa.
+**WHY** İki kontrolcü aynı takımdaysa farklı hatlarda çalışır: Viper dikey alan, Harbor yatay alan.
 
 ---
 
-**IF** Viper's Pit ult aktif, Harbor Reckoning hazır
-**MEANING** Viper Pit içinde avantajlı ama Pit dışında savunmasız — Reckoning Pit kenarında concussive yaparsa Viper Pit içine sıkışır
-**COUNTER** Harbor Reckoning'i Pit çıkış noktasına bas, Viper Pit içinde hapsolur, takım Pit dışında Harbor concussive avantaj
-**WHY** Viper Pit savunma silahı, Pit içi kör görüş + damage. Dışında Viper sıradan rifler. Reckoning Pit sınırında Viper'ı çıkmaya yanaşamaz hale getirir.
+**IF** Viper's Pit aktif, Harbor Reckoning hazır
+**MEANING** Pit içinde avantajlısın ama Pit dışına çıkamazsın — Reckoning Pit sınırına basılırsa içinde hapsolursun.
+**COUNTER** Harbor tarafısın — Reckoning'i Pit çıkış noktasına bas. Viper Pit'ten çıkamaz, takımın Pit dışını alır.
+**WHY** Pit savunma silahı — içi güçlü, dışı sıradan. Reckoning Pit kenarında Viper'ı kilitler.
 
 ---
 
-**IF** Harbor tüm utility'sini round başında bir siteye yıktı, Viper fuel'ini round içi dağıttı
-**MEANING** Harbor round ortasında boş, Viper round ortasında hala çalışıyor — asimetrik utility ekonomisi Viper lehine
-**COUNTER** Harbor round başı commit'ini Viper fuel stratejisine göre düzenlemeli. Round başında bir utility sakla
-**WHY** Viper fuel parçalı, Harbor cooldown binary. Aynı strateji iki karakter için çalışmaz — Harbor round başı verimciliği Viper fuel yayılımından farklı yönetim gerektirir.
+**IF** Harbor tüm utilini round başında bir siteye boşalttı
+**MEANING** Round ortasında Harbor elde yok. Viper hâlâ yakıtını yönetiyor, hâlâ çalışıyor.
+**COUNTER** Harbor tarafısın — en az bir utilini sakla. Round başı her şeyi ver, sonra yok kalma.
+**WHY** Viper yakıtı parçalı — round boyunca dağıtır. Harbor öyle çalışmaz, binary: attın mı bitti. Aynı şekilde yönetirsen round ortasında eli boş kalırsın.
 
 ---
 
-**IF** Viper wall round içi geri çekildi (wall deaktive edildi)
-**MEANING** Viper fuel kazanmak için wall'u erken kapattı — fuel geri geldi ama alan kontrolü kaybedildi
-**COUNTER** Harbor tarafı wall'un kapalı olduğu pencerede High Tide kurar, Viper alan kontrolü yok, Harbor doldurur
-**WHY** Viper wall'u açıp kapamak fuel taktik hareketi. Kapalı pencerede Viper alansız. Harbor bu pencereyi okursa alan değişimi için ideal zaman.
+**IF** Viper duvarını round başında açtı ve tüm round açık bıraktı
+**MEANING** Yakıt sürekli akıyor — round sonunda ikinci duvar veya cloud için yakıt yok.
+**COUNTER** Duvarı tap kullan. Aç, kapa, aç. Yakıtı parçalı harca, round boyunca aktif kal.
+**WHY** Duvarı sürekli açık tutmak yakıtı mahveder. Parçalı kullanım Viper'ın gerçek gücü.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
-Fuel ekonomisi ve cooldown ekonomisi arasındaki fark bu matchup'ın özü. Viper fuel: wall ve cloud tek havuzdan, round içi tap kullanım. Harbor cooldown: her utility ayrı, ama cooldown uzun — round içi tekrar kullanım zor. Takas sonucu: round içinde Viper 2-3 farklı alan kapatabilir (fuel parçalı kullanım), Harbor 1-2 alan kapatabilir. Viper utility esnekliği Harbor'dan yüksek. Harbor'un avantajı Cove — Cove round başı 2 charge ile kurulur, Viper'da eşdeğeri yok. Cove post-plant kubbe mimarisi Harbor'un tek ayırıcı silahı. Viper'ın avantajı zehir — Snake Bite damage over time, defuse engelleyici, Harbor'da eşdeğer yok. İki controller aynı comp'ta çalıştığında Viper wall + Harbor Cove kombosu post-plant savunmayı kilitler, karşı comp'ta olduklarında bu farklılık Viper lehine çalışır (zehir daima değerli).
+Viper: wall ve cloud aynı havuzdan içer. Parça parça kullanırsan round boyunca 2-3 farklı alanı kapatırsın.
 
-## 5. Map Bazlı Değişim
+Harbor: her util ayrı bekleme süresi. Round başı attın mı, geri gelmesi uzun. Round içi tekrar kullanım zor.
 
-**Breeze:** Viper favored. Breeze uzun sightline haritası, Viper wall A Main hattını keser. Harbor Breeze'de pick dışı.
+Viper'ın Harbor'da olmayan silahı: zehir. Snake Bite defuse engeller, hasarı görüşten bağımsız verir.
 
-**Icebox:** Viper favored. Mid Kitchen ve B için Viper wall comp kurucu. Harbor Icebox'ta oynanmaz.
+Harbor'un Viper'da olmayan silahı: Cove. Post-plant kupol mimarisi — Viper'da eşdeğeri yok.
 
-**Fracture:** Viper favored. İki taraflı attack yapısı Viper ult Pit için ideal. Harbor burada ikinci controller olarak dahi oynanmaz.
+Aynı takımdaysan kombo şu: Viper Snake Bite plant alanına, Harbor Cove retake'i kilitler. Karşı takımda bu kombo yok — Harbor bu matchup'ta zehirsiz kalır.
 
-**Pearl:** Harbor favored. Harbor'un tek comp kurucu haritası. Viper Pearl'de Harbor kadar değerli değil.
+## 5. Harita Bazlı Fark
 
-**Haven:** Nötr. Viper double controller comp'ta kullanılır, Harbor double controller comp'ta kullanılır. Tek controller rolde ne biri ne diğeri ilk tercih (Omen o rolü alır).
+**Breeze:** Viper. Uzun hatlar Viper duvarına uygun. Harbor burada oynamaz.
 
-**Lotus:** Nötr. Viper C Long için, Harbor double controller için. Tek controller kararı Omen'a gider.
+**Icebox:** Viper. Mid Kitchen ve B kontrolü Viper ile kurulur. Harbor Icebox'ta işe yaramaz.
 
-**Sunset:** Viper hafif avantajlı. Dar yapı Viper cloud'larına uygun, Harbor Sunset'te zorlanır.
+**Fracture:** Viper. İki taraflı saldırı yapısı Pit için ideal. Harbor burada ikinci kontrolcü bile değil.
 
-**Bind:** Nötr-Viper eğilimli. Viper Mid kontrol için, Harbor Bind'de oynanmaz.
+**Pearl:** Harbor. Harbor'un tek sağlam haritası. Viper Pearl'de Harbor kadar değerli değil.
 
-**Split:** Nötr. Viper B Main için, Harbor Split'te ikinci controller.
+**Haven:** Nötr. İkisi de tek kontrolcü rolde ilk tercih değil — Omen alır.
 
-**Ascent:** Harbor ve Viper ikisi de pick dışı, Omen rolü alır. Nötr.
+**Lotus:** Nötr. Viper C Long için, Harbor double kontrolcü seçeneği. Tek kontrolcü kararı yine Omen'a gider.
 
-## 6. Flip Moment'ler
+**Sunset:** Viper hafif üstte. Dar yapı Viper cloud'larına uygun.
 
-1. **Fuel sıfır.** Viper fuel'i sıfırladığında Viper rifler. Harbor bu pencerede alan kontrolünü tek başına alır. Viper round ekonomisi fuel yönetimi üzerinden kazanılır ya da kaybedilir.
+**Bind:** Viper eğilimli. Harbor Bind'de neredeyse hiç oynanmaz.
 
-2. **Cove vs Pit ult yarışı.** Viper's Pit ve Harbor Reckoning aynı round kullanılırsa iki alan kontrolü çakışır — hangisinin aktive önceliği olursa o round'u alır. Timing yarışı Pit lehine bükülür (Pit süresi uzun).
+**Split:** Nötr. Viper B Main için, Harbor ikinci kontrolcü olabilir.
 
-3. **Double controller comp vs single controller comp.** Rakip double controller (Viper + başka) ise Harbor tek controller çevrim olarak yetersiz kalır. Comp seçimi flip belirler.
+**Ascent:** İkisi de ilk tercih değil. Omen o rolü alır.
 
-4. **Post-plant zehir + Cove kombosu.** Viper Snake Bite + Harbor Cove aynı takımda ise retake neredeyse imkansız. Karşı comp'ta Harbor bu kombosuzluğu taşır, zehiri alamadığı için retake için Cove yeterli değil.
+## 6. Dönüm Noktaları
 
-5. **Round başı wall yönü.** Viper wall yönünü yanlış verirse Harbor High Tide doğru yöne giderse haritanın bir yarısı Harbor, diğer yarısı nötr. Yanlış yön seçimi round'un map kontrol ekonomisini tek round'da çevirir.
+1. **Yakıt sıfırlandı.** Viper yakıtı bittiğinde sıradan bir tüfekçiye döner. Harbor bu pencerede haritanın kontrolsüz bölümünü doldurur. Yakıt yönetimi bu matchup'ta kazan-kaybet çizgisi.
 
-## 7. Pro Coach Notları
+2. **Pit vs Reckoning zamanlaması.** İkisi aynı roundda kullanılırsa Pit süresi uzun, Reckoning kısa — Pit zamanlaması öne geçer. Ama Reckoning Pit sınırına basılırsa Viper içinde hapsolur.
 
-Pro sahnede Viper comp'lar VCT meta'nın omurgası, Harbor comp'lar özel durum. Koçlar Harbor'u Pearl dışında nadiren tercih eder. Viper her patch'te consistent pick, Harbor buff/nerf döngüsünde dalgalı. İki controller aynı maçta karşılaştığında maçın sonucu haritaya göre belirlenir — Breeze/Icebox ise Viper tarafı, Pearl ise Harbor tarafı. Koçluk ipucu: Viper oyuncusu Harbor ult sound cue'sunu ezberlemeli — Reckoning aktive sesi aç, Viper Pit içinde kapalı alanda hapsolmamak için Pit dışına çıkış kararı Reckoning sesine göre verilir. Harbor oyuncusu Viper fuel barını ekran UI üzerinden takip etmeli (ses cue'su yok) — fuel %50 altında ise Harbor ikinci wall penceresini basar.
+3. **Double kontrolcü vs tek kontrolcü.** Karşı takım Viper + başka bir kontrolcü getirirse Harbor tek başına yetersiz kalır. Comp seçimi bu matchup'ı başlamadan bitirebilir.
 
-Yaygın pro hata: Viper oyuncusu wall'u round başı açar ve tüm round açık bırakır. Doğru: wall'u tap kullan, fuel parçalı. İkinci hata: Harbor oyuncusu Cove'u tek oyuncunun reposition'ı için kullanır. Doğru: Cove her zaman takım savunması. Üçüncü hata: İki controller aynı takımda olduğunda smoke'lar üst üste çakışır. Doğru: Viper dikey alan, Harbor yatay alan — dağılım ayrılır.
+4. **Post-plant zehir + Cove kombosu.** Aynı takımdaysan Snake Bite + Cove retake'i neredeyse imkansız kılar. Karşı takımda bu kombo yok — Harbor zehirsiz, Cove tek başına yetmez.
+
+5. **Duvar yönü.** Viper duvarı yanlış yöne giderse Harbor doğru hatta High Tide basar, haritanın bir yarısı Harbor'da. Tek yanlış yön kararı round'un harita kontrolünü çevirir.
+
+## 7. Koç Notları
+
+**Viper oynuyorsan:**
+
+- Duvarı tap kullan — aç, kapat, aç. Sürekli açık bırakma.
+- Reckoning sesini duyduğunda Pit'ten çık. Ses geldi mi içeride kalma — Pit sınırına Reckoning basılır, hapsolursun.
+- Snake Bite'ı Cove içine at. Cove görüşü keser ama zehri durdurmaz.
+
+**Harbor oynuyorsan:**
+
+- Viper duvarının kapandığını gördüğünde High Tide'ı o hatta bas. Pencere kısa — geç kalma.
+- Cascade'ı Viper cloud'un kapamadığı açıya at. Üst üste binen duman boşa.
+- Cove'u tek kişi için değil takım savunması için kullan. Tek oyuncu reposition için Cove harcama.
+- Round başında her utilini boşaltma — en az biri sakla, round ortası için.
+
+**İki kontrolcü aynı takımdaysa:**
+
+- Viper dikey alan, Harbor yatay alan. Aynı hatta çakışma — zıt hatlara dağıt.
+- Snake Bite + Cove post-plant kombosunu önceden konuş. Spontane değil, planlı.

@@ -1,58 +1,63 @@
 # EŞLEŞME: Miks vs Anchor Kurulumları
 
-> **YAMA DUYARLILIĞI NOTU**: Miks yeni bir ajandır. Yetenek değerleri, bekleme süreleri ve etkileşimler yamalar arasında belirgin şekilde değişebilir. Koçluk tavsiyesi uygulamadan önce güncel yama notlarını doğrulayın.
+> **YAMA NOTU**: Miks yeni bir ajan. Yetenek değerleri yamadan yamaya değişiyor — buradaki menzil bilgilerini güncel yama notundaki rakamlarla karşılaştır, tutmuyorsa pozisyon ayarını buna göre yap.
 
-## Etkileşim Kimliği
-Miks, yerleşik savunma pozisyonlarını istikrarsızlaştırmak için tasarlanmıştır. Kiti, tek bir noktada oturup tutmak isteyen savunucuları yerleştirmek, bozmak ve yeniden konumlanmaya zorlamak için araçlar sağlar. Anchor kurulumları — tek bir sentinel'in (Killjoy, Cypher, Deadlock) katmanlı yetenek aracı ve pozisyon avantajıyla site'i kilitlediği durumlar — Miks'in birincil hedefidir. Yetenekleri anchor oyuncusunu hareket ettirmeye zorlar, bu da onu yetenek araçlarından ayırır ve kurulum zamanlamasını bozar. Soru şu: Miks anchor'ı kırmak için yeterli yer değiştirme yaratabilir mi, yoksa anchor'ın yetenek araçları bozulmayı absorbe mi eder?
+## Ne Oluyor Bu Eşleşmede
 
-## Yaygın Cezalandırma Kalıpları
+Miks'in tek işi seni durduğun yerden söküp atmak. Killjoy, Cypher, Deadlock gibi bir sentinel oynuyorsan ve tek noktaya kuruluyorsan — Miks tam seni hedef alıyor. Yetenekleri seni yerinden oynattığında turretinden, kamerandan, nanoswarm'ından kopuyorsun. O yüzden Miks'e karşı anchor oynamak düşündüğünden zor.
 
-### Miks Anchor Kurulumlarını Cezalandırırken
+## Cezalandırma Kalıpları
 
-**IF**: Miks'in yer değiştirme yetenekleri sentinel'i hazırlanmış pozisyonundan itiyor
-**MEANING**: Sentinel turret, kamera ve nanoswarm'lardan ayrılmış oluyor
-**COUNTER**: Anchor, Miks'in yeteneklerinin ulaşamayacağı derin savunma pozisyonlarında oynamalı
-**WHY**: Yetenek araçlarından ayrılan sentinel, site koruması sağlamaz
+### Miks Anchor'ı Kırarken
 
-**IF**: Miks hareketsiz kalmanın tehlikeli olduğu bölgeler yaratıyorsa
-**MEANING**: Anchor'lamanın gerektirdiği statik oyun doğrudan cezalandırılıyor
-**COUNTER**: Katmanlı yetenek araçları yerleştirerek oyuncu yer değiştirse bile çalışmasını sağlamak
-**WHY**: Sentinel'in en büyük gücü (statik kurulum) zayıflığına dönüşüyor
+**IF**: Miks'in yer değiştirme yeteneği seni hazırladığın pozisyondan atıyor
+**MEANING**: Turretinden, kamerandan, nanoswarm'ından kopuyorsun — araçların sahipsiz kalıyor
+**COUNTER**: Miks'in yer değiştirme menzilinin dışına çık. Daha derin dur. Ya da o açıyı takım arkadaşın kapat — o açıyı tutan kişi choke'ta, sen geride
+**WHY**: Araçlarından kopuk sentinel site'e hiçbir şey kazandırmaz
+
+**IF**: Miks hareketsiz durmanın tehlikeli olduğu bir alan yaratıyor
+**MEANING**: Anchor'ın temel gücü olan sabit duruş doğrudan cezalandırılıyor
+**COUNTER**: Araçlarını sen yerinden oynasan bile çalışacak şekilde dağıt — tek noktaya yığma
+**WHY**: Tek noktaya kilitlenen sentinel, o noktadan atıldığında işe yaramaz hale gelir
 
 ### Anchor Kurulumu Miks'i Cezalandırırken
 
-**IF**: Anchor, Miks'in yeteneklerinin ulaşamadığı derin pozisyonlarda oynuyor
-**MEANING**: Yer değiştirme yetenekleri boşa yere kullanılmış oluyor
-**COUNTER**: Miks, yer değiştirme kullanmadan önce anchor'ın tam pozisyonu hakkında daha iyi istihbarat edinmeli
-**WHY**: Derin pozisyonlar yer değiştirme menzilinin dışında kalır
+**IF**: Miks'in yer değiştirme menzilinin dışında, derin pozisyonda duruyorsun
+**MEANING**: Miks yeteneklerini boşa harcıyor, sana ulaşamıyor
+**COUNTER**: Miks yer değiştirme kullanmadan önce nerede durduğunu bilmek zorunda — kör kullanırsa kit boşa gider
+**WHY**: Derin pozisyon yer değiştirme menzilinin dışında kalır
 
-**IF**: İkinci bir savunucu Miks yer değiştirme yeteneği kullanırken crossfire oluşturuyorsa
-**MEANING**: Miks pozisyon taahhüdünde bulunurken cezalandırılıyor
-**COUNTER**: Miks yetenek kullanmadan önce takım desteği ve pozisyon güvenliğini sağlamalı
-**WHY**: Yer değiştirme yetenekleri görüş hattı veya pozisyon taahhüdü gerektirir
+**IF**: İkinci bir savunucu, Miks yeteneği kullanırken çapraz ateş kuruyor
+**MEANING**: Miks pozisyon bağladığı anda yakalanıyor
+**COUNTER**: Miks yetenek kullanmadan önce o açının temiz olduğunu bilmesi lazım — takım pozisyonu görülmeden kullanma
+**WHY**: Yer değiştirme görüş hattı veya pozisyon bağlamayı zorunlu kılar
 
-## Tekrarlanan Başarısızlık Ne Anlama Gelir
-**Anchor kurulumları** sürekli Miks tarafından kırılıyorsa, sentinel Miks'in yer değiştirme menzilinin içindeki giriş noktasına çok yakın oynuyor. Daha derin pozisyonlardan anchor yapmalı veya Miks'in çalıştığı açıda bir takım arkadaşı tutmalı.
+## Aynı Şey Sürekli Oluyor mu
 
-**Miks** anchor'ı kıramıyorsa, yer değiştirmesi sentinel'in gerçek pozisyonuna ulaşamıyor veya sentinel'in yetenek araçları oyuncu hareket ettirilse bile çalışmaya devam ediyor. Yetenek kullanmadan önce anchor'ın tam pozisyonu hakkında daha iyi istihbarat edinmeli.
+**Anchor olarak Miks'e sürekli kırılıyorsan**: Miks'in menzilinin içinde duruyorsun. Ya daha derin çekil ya da choke'u kapatan bir takım arkadaşı o açıda dursun, sen geride kal.
+
+**Miks olarak anchor'ı bir türlü kıramazsan**: Yer değiştirmen sentinel'in gerçek durduğu yere ulaşmıyor. Ya önce daha yakına gel ya da takım arkadaşın sentinel'i sana doğru sürüklesin. Nerede durduğunu bilmeden körlemesine kullanırsan kit boşa gider.
 
 ## AIMLO Ne Demeli
 
-### Oyuncu cezalandırılan taraftayken
-**Anchor Miks tarafından itiliyorsa**: "Seni kurulumundan itiyor. Daha derinden oyna ki yer değiştirmesi sana ulaşamasın, veya bir takım arkadaşı onun yetenek kullandığı açıyı tutsun. Hareket ettirilirsen yetenek araçların site'i korumaz."
+### Oyuncu cezalandırılan taraftaysa
 
-**Miks anchor'ı kıramazsa**: "Yer değiştirmen sentinel'e ulaşamıyor. Ya kullanmadan önce daha yakın pozisyon al ya da takım arkadaşınla koordine olup anchor'ı sana doğru sürükle. Derin pozisyonlara kör yer değiştirme kitini boşa harcar."
+**Anchor Miks tarafından atılıyorsa**: "Miks seni kurulumundan söküyor. Daha derin dur ki yer değiştirmesi sana ulaşamasın. Yoksa bir takım arkadaşı o açıyı tutsun. Yerinden oynarsın ve araçların sahipsiz kalır — site gider."
 
-### Oyuncu cezalandıran taraftayken
-**Miks anchor'ı kırıyorsa**: "Sentinel'i her raund kurulumundan atıyorsun. Execute sırasında erken yer değiştir ki takım push ettiğinde yetenek araçları sahipsiz kalsın."
+**Miks anchor'ı kıramazsa**: "Yer değiştirmen sentinele ulaşmıyor. Ya önce daha yakına gel ya da takım arkadaşın sentinel'i sana doğru çeksin. Nerede durduğunu bilmeden kullanırsan kit boşa gider."
 
-**Anchor Miks'e karşı tutuyorsa**: "Derin pozisyonun onun yer değiştirme menzilinin dışında. Derinlikten oynamaya devam et ve yetenek araçlarının choke noktasını idare etmesine izin ver, sen güvenlikte kal."
+### Oyuncu cezalandıran taraftaysa
 
-## Rank Modülasyonu
-**LOW**: İki taraf da yer değiştirme mekaniğini anlamamış. Anchor'lar varsayılan oynar, Miks yetenekleri rastgele kullanır. Miks'e sentinel'i spesifik olarak hedeflemesini öğret.
+**Miks anchor'ı kırıyorsa**: "Her raund sentinel'i kurulumundan atıyorsun. Push başlamadan önce yer değiştir — takım girerken araçlar sahipsiz kalsın."
 
-**MID**: Miks anchor'ları hedeflemeye başlıyor ama tutarsız. Anchor'lar derinlik adapte etmiyor. Her ikisine yer değiştirme menzili etrafında konumlanmayı öğret.
+**Anchor Miks'e karşı tutuyorsa**: "Derin duruyorsun, yer değiştirmesi sana ulaşamıyor. Öyle devam et. Araçların choke'u tutsun, sen arkada güvende kal."
 
-**HIGH**: İki taraf da yer değiştirme bölgelerinde oynuyor. Bilgi oyununu öğret — Miks anchor'ın nerede olduğunu bilmeli, anchor Miks'in yaklaşımını tahmin etmeli.
+## Rank'a Göre
 
-**ELITE**: Eşleşmede raund öncesi okumalar ve pozisyon ayarlamaları belirleyici. Miks ve anchor ikisi de raunddan raunda adapte oluyor. Kalıp çeşitlemesi ve okuma bazlı derinlik değişiklikleri öğret.
+**LOW**: İki taraf da yer değiştirme mekaniğini bilmiyor. Anchor varsayılan pozisyonda, Miks yetenekleri rastgele kullanıyor. Miks'e şunu söyle: sentinel nerede duruyor, önce oraya git, sonra yeteneği kullan.
+
+**MID**: Miks anchor'ı hedeflemeye başlıyor ama tutarsız. Anchor derinlik ayarı yapmıyor. Miks'e menzil sınırını öğret: sentinel'in tam pozisyonunu bilmeden yeteneği kullanma. Anchor'a şunu söyle: Miks girişte kullanıyorsa sen choke'tan geride dur.
+
+**HIGH**: İki taraf da menzil farkındalarında oynuyor. Miks sentinel'in tam pozisyonunu bilmeden yeteneği kullanmıyor. Anchor, Miks'in hangi girişten geleceğini okuyup derinliği ona göre ayarlıyor.
+
+**ELITE**: Raund başlamadan pozisyon okuması belirleyici. Miks ve anchor ikisi de raunddan raunda adapte oluyor. Miks sentinel'in pozisyonu değiştirdiğini görünce yeteneği farklı açıdan kullanıyor; anchor buna karşı araç dağılımını yeniden düzenliyor.

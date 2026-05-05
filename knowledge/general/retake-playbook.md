@@ -6,164 +6,144 @@ patch: "9.x"
 tags: [retake, numbers-disadvantage, clutch, utility-stack, defuse]
 ---
 
-# RETAKE PLAYBOOK — Retake Protokolleri
+# RETAKE PLAYBOOK
 
-Retake, savunmanın plant sonrası son şansıdır. Çoğu oyuncu retake'i intihar olarak oynar — plant'e koşar, peek eder, ölür. Pro seviye retake ise metodik bir iştir: bilgi, utility, timing, commit. Bu dosya retake'in temel kuralları + numbers disadvantage protokolleri.
+Çoğu oyuncu spike'a koşar, peek eder, ölür. Retake böyle oynanmaz. Önce saldırıyı temizle, sonra spike.
 
-## RETAKE'İN TEMEL PRENSİBİ
+Başlamadan önce üç şeyi bil:
+1. **Plant nerede?** Default mu, alternatif mi?
+2. **Kaç saldırı sağ?** 5v5'te gir, 2v4'te düşün.
+3. **Utility var mı?** Flash + molly yoksa girme.
 
-Retake'te kaybedilmesi gereken iki ilüzyon var:
-1. **"Spike'a ulaşmalıyım" ilüzyonu.** Spike'ı defuse etmek kill farkından sonra gelir. Önce saldırıyı temizle, sonra spike.
-2. **"Hızlı olmalıyım" ilüzyonu.** Retake hızlı değil, kontrollü olmalı. Utility + bilgi + birlikte commit.
+Bu üçü belli değilse retake kör oynamak demek.
 
-### Retake'in Üç Sorusu
+## STANDART RETAKE
 
-Retake'e başlamadan önce cevaplaman gereken üç soru:
-1. **Plant nerede?** Default mı, alternatif mi? Lineup pozisyonu nedir?
-2. **Kaç saldırı yaşıyor?** 5v5'te retake şart, 2v4'te karar round'u.
-3. **Utility var mı?** Flash + molly minimum, yoksa retake başarısız.
+### 1. Bilgi Al
 
-Bu üç sorunun cevabı retake planını belirler.
+Spike kurulduktan sonra önce tara. Sova dart, Cypher cam, Fade prowler, KAY/O knife — hangisi varsa at. Kaç kişi nerede, onu öğren. Kör girme.
 
-## STANDART RETAKE PROTOKOLÜ
+### 2. Utility Sırası
 
-### 1. Bilgi Toplama (Plant sonrası ilk pencere)
+- **İlk:** Info utility. Pozisyonları öğren.
+- **İkinci:** Smoke. Bir açıyı kapat, diğerine odaklan.
+- **Üçüncü:** Molly. Saldırıyı post-plant yerinden kaldır.
+- **Dördüncü:** Flash. Tam giriş anında, öne at.
 
-Info utility ile spike etrafını tara. Cypher cam, Sova dart, Fade prowler, KAY/O knife — hangisi varsa bırak, kaç saldırı oyuncusu nerede olduğunu öğren.
+Bu sırayı bozarsan utility çöpe gider. Molly atmadan flash atarsan rakip zaten kapandı, sen açıkta ölürsün.
 
-### 2. Utility Hazırlığı
+### 3. Birlikte Gir
 
-- Flash: peek için, retake eden ilk oyuncunun önünde patlar.
-- Molly: defuse deny değil — saldırıyı post-plant pozisyonundan çıkartmak için.
-- Smoke: iki farklı saldırı angle'ını ayırmak için, bir angle'ı gizle diğerine commit.
-- Damage utility: Breach stun, KAY/O knife, Sova dart — rakibi reveal et + hasar.
+En az 2 kişi, aynı anda, farklı açılardan. Solo girme — trade yok, utility yok, bir kill alsan bile round biter. İlk giren düşerse ikinci trade alır. Bu zincir kopmadan devam eder.
 
-### 3. Commit Timing
+### 4. Önce Temizle
 
-Retake en az 2 kişi aynı anda girmeli. Solo retake savunmanın umudu değil suicide'ıdır. 2-3 kişi aynı anda, farklı angle'lardan. Trade chain şart — ilk peek öldüğünde ikinci peek trade'i alır.
+Spike'a koşma. Saldırı post-plant çapraz ateş kuruyor. Bir tarafı temizle, sonra diğeri. Kill sayısı defuse'dan önce gelir.
 
-### 4. Site Temizleme
+### 5. Defuse
 
-Spike'a değil saldırıya odaklan. Plant sonrası saldırı crossfire'da olacak — bir tarafı temizle, sonra diğeri. Kills > defuse.
+Site temizse bir kişi defuse, biri cover. Defuse eden her zaman kapağın arkasında, açıkta değil.
 
-### 5. Spike Defuse
+## SAYISAL EZİYET DURUMLARI
 
-Site temiz olduğunda defuse. Birden fazla oyuncu yaşıyorsa bir kişi defuse yapar, diğer kişi cover verir. Defuse eden oyuncu pozisyonu belirleyicidir — olabildiğince cover'ın arkasında.
+### 5v5
 
-## NUMBERS DISADVANTAGE PROTOKOLLERİ
+Utility tam, sayı tam. 2 kişi ana açıdan flash + giriş, 1 kişi yan açıdan, 1 kişi flankt hattını kesiyor, 1 kişi smoke atıp arkadan kapanıyor.
 
-### 5v5 Retake
-Normal retake. Spread + utility stack + birlikte commit. En rahat durum — utility tam, sayı tam, sadece plan gerekli.
+### 4v5
 
-### 4v5 Retake
-En sık durum. Spread hala mümkün, utility stack hala mümkün. Trade chain'e özen göster, ölüm pahalı değil ama art arda ölüm retake'i öldürür.
+2 kişi ana açıdan flash + giriş, 1 kişi yan açıdan, 1 kişi flankt hattını kesiyor. Trade zincirine dikkat et — arka arkaya iki ölüm retake'i bitirir.
 
-**Örnek 4v5 plan:** 2 kişi main angle'dan peek (flash + entry), 1 kişi off-angle'dan, 1 kişi flank olarak rotate hattı. Trade guaranteed, crossfire'ı sen kuruyorsun.
+### 3v5 — Karar Noktası
 
-### 3v5 Retake — Karar Round'u
+Önce karar ver: retake mi, round sat mı?
 
-3v5 retake başarı oranı düşer ama doğru oynanırsa kazanılır. Karar noktası: **round satmaya mı değer, retake denemeye mi?**
+**Retake'e gir:**
+- Plant yerini biliyorsan.
+- Üç kişinin elinde utility varsa.
+- Üçü aynı anda giriyorsa — split yapma, sayın az.
 
-**Retake denemeye değerse:**
-- Plant pozisyonunu bil.
-- Utility maksimum harcayacaksın.
-- Hep birlikte gir — split yapma, numbers var.
-- Bir kill + geri çekilme kabul edilemez, commit.
+**Round'u sat:**
+- Bir sonraki round full alım yapabiliyorsan.
+- Utility bitmişse.
+- Retake kaybedersen iki round daha kaybedersin, full buy gitmez.
 
-**Satmaya değerse (ekonomi her şey):**
-- Silahları topla.
-- Harita kenarına çekil.
-- Duello kabul etme.
-- Ult point biriktir.
+Kaybedersen ekonomi bozulmuyorsa gir. Bozuluyorsa silahları topla, köşeye çekil, düelloya girme.
 
-**Karar kriteri:** Eğer retake kaybetsek ekonomi bozulmuyorsa (örneğin bir sonraki round full buy yapabiliyorsak) retake dene. Eğer retake'i kaybetmek ekonomi zincirini bozuyorsa sat.
+### 2v4 — Zor Ama Çıkış Var
 
-### 2v4 Retake — Zor Ama Mümkün
+İki şeyden biri:
 
-2v4 retake'in başarı oranı ~%15-20. Üç şey olmalı:
-1. Utility stack (flash + molly minimum)
-2. Numbers avantajı creating (yani bir taraftan peek yapıp rakibi 2v2'ye veya 1v2'ye çevir)
-3. Mükemmel trade chain
+**Ayrı açı:** İki kişi iki farklı açıdan aynı anda peek. Rakip ikisini aynı anda tutamaz. Birini takip ederken diğerinden yenir.
 
-**Split peek yaklaşım:** İki oyuncu iki farklı angle'dan aynı anda peek — rakip ikisini aynı anda tutamaz. Bir angle'dan peek için rakip döner, diğer angle'dan cover.
+**Aynı açı + flash:** İki kişi aynı açıdan, flash patladıktan sonra birlikte çık. Trade garantili.
 
-**Stack yaklaşım:** İki oyuncu aynı angle'dan peek + flash. Flash popunda birlikte çık, trade garanti.
+Bu ikisinden birini seçmeden girme. Kör 2v4'e girmek = save yapma fırsatını kaybetmek.
 
-### 1v3+ Clutch
+### 1vX Clutch
 
-Clutch oynamanın temel prensipleri:
+Spike'a koşma. Bu en sık yapılan hata.
 
-1. **Plant'e yaklaşma.** Spike'a koşmak clutch oyuncusunun yaptığı en sık hata.
-2. **Duello değil info oyunu.** Rakip 5 farklı yere bakıyor, sen bir tanesini bekle.
-3. **Defuse sesi = peek fırsatı.** Rakip defuse başlattığında savunmasız — pozisyonu açık, pozisyonu sabit.
-4. **1 kill sonrası saklan.** Multi-kill arama, 1 kill al, repositioning yap.
-5. **Patience + silent walk.** Shift walking sesi öldürür, silent + angle tut.
+Ne yapacaksın:
+1. **Off-açı bul.** Rakip normal check açılarını tarar — sen orada olma.
+2. **Bekle.** Rakip defuse başlatınca pozisyonu sabit ve açık. O an peek'in.
+3. **1 kill al, kaç.** Multi-kill arama. 1 kill, yeniden pozisyon, tekrar bekle.
+4. **Shift yürüyüşü.** Ayak sesi çıkarma, adımlarını kıs.
 
-**Clutch pozisyon seçimi:** Off-angle, unexpected spot. Rakip default check angle'larını bilir, senin işin default dışına çıkmak. Heaven'dan inmek, Hell'de saklanmak, rotate hattında beklemek — her biri bir clutch senaryosu.
+Ult'un varsa kullan. Sage resurrect, Viper pit, KJ ult, Fade ult — clutch için sakladığın ult round'u çevirir. Ult elinde dururken ölme — kullanmadıysan kaybettin.
 
-**Ult kullanımı:** Clutch'ta ult var mı? Sage ult (resurrect), Viper ult (pit), Fade ult, KJ ult — clutch için saklanan ult'lar round'u çevirir. Ult'u kullanmayıp ölmek, clutch'ı kaybetmenin adı.
+## UTILITY SIRASI — NEDEN ÖNEMLİ
 
-## UTILITY STACKING DISIPLINI
+5 flash'ın olması bir şey ifade etmez. Yanlış sırayla atılan 5 flash boşa gider.
 
-Retake'te utility aritmetik değildir — koordinasyondur. 5 flash'ın olması bir şey ifade etmez, yanlış sırayla atılan 5 flash boşa gider.
+Sıra şu:
+1. Info utility — pozisyon öğren.
+2. Smoke — bir açıyı kapat.
+3. Molly — saldırıyı yerinden kaldır.
+4. Flash — giriş anında öne at.
+5. Ult — son an için sakla.
 
-### Retake Utility Sıralaması
+Molly'yi atlayıp flash atarsan rakip post-plant'te oturuyor, flash'ı görmüyor, sen açıkta ölüyorsun.
 
-1. **Info utility (ilk):** Spike etrafını ve saldırı pozisyonlarını öğren. Dart, cam, prowler, knife.
-2. **Vision deny (ikinci):** Saldırı'nın senin yönünü görmesini engelle. Smoke.
-3. **Damage utility (üçüncü):** Saldırıyı post-plant'inden kaldır. Molly, aftershock, snake bite.
-4. **Flash (dördüncü):** Commit peek anında, entry'nin önünde.
-5. **Ult (varsa):** Clutch moment için saklanır.
+## YAYGIN HATALAR
 
-Bu sıralamayı değiştirmek utility'yi çöpe atmaktır. Molly atmadan flash atarsan rakip post-plant pozisyonunda flash'ı görmüyor, sen ölüyorsun.
+### Solo Kahraman Girişi
 
-## RETAKE TRAP'LERİ — YAYGIN HATALAR
+Tek kişi koşar, 1 kill alır, ölür. Trade yok, 1 kill + 1 ölüm = hiçbir şey. Giriş zamanını sen ver — kim nereden, hangi sırayla. "Hadi" demek yetmez.
 
-### Trap 1: Solo Heroic Retake
-Tek kişi koşarak girer, 1 kill alır, ölür. Takım "hey bekle" der ama iş olmuştur. Trade yok, utility yok, 1 kill + 1 ölüm = hiçbir şey.
+### Dağınık Giriş
 
-**Çözüm:** IGL veya en tecrübeli oyuncu retake timing'i vermeli. "3, 2, 1, go" komutu retake hayatı kurtarır.
+Üç kişi üç farklı açıdan ama aynı anda değil. Birinci girer ölür, ikinci girer ölür, üçüncü 1v5'e düşer. Aynı anda girmeyen split retake, toplu intihar.
 
-### Trap 2: Split Without Coordination
-Üç kişi üç farklı angle'dan girer ama aynı anda değil. Birinci giren ölür, ikinci giren ölür, üçüncü giren 1v5'e düşer.
+### Defuse Önce
 
-**Çözüm:** Split retake'te aynı anda commit şart. Sayı + timing + utility.
+Biri spike'a koşar, defuse başlatır, saldırı vurur. Diğerleri trade edemez çünkü plan yoktu. Önce temizle, sonra defuse.
 
-### Trap 3: Defuse Önceliği
-Biri spike'a koşar, defuse başlatır, saldırı onu vurur. Diğer oyuncular defuse eden kişiyi trade edemez çünkü kill zamanı planlanmamıştı.
+### Plant Öncesi Utility Tüketimi
 
-**Çözüm:** Defuse kills'ten sonra gelir. Önce temizle, sonra defuse.
+Retake'e girerken elde hiç utility yok — hepsi plant öncesinde harcanmış. Her round post-plant'e karşı en az bir molly + flash sakla. O utility kill için değil, retake girişi için.
 
-### Trap 4: Utility Yetersizliği
-Retake'e girerken utility tükenmiş — plant öncesinde hepsi harcanmış. Retake utility olmadan ~%10 başarı oranı.
+### Lineup'ı Görmezden Gelmek
 
-**Çözüm:** Her saldırıda utility'yi post-plant'e karşı sakla. "Kill almak için utility" değil "retake için utility" mentality.
+Rakip aynı plant noktasına sürekli molly atıyor, sen her seferinde oradan giriyorsun. Plant noktalarını öğren — hangi site'da hangi default spot, hangi lineuplar oraya çalışıyor. Lineup'ların vurduğu noktanın 2-3 adım dışından gir.
 
-### Trap 5: Lineup Ignore
-Rakip saldırıda spesifik lineup'lar atıyor. Retake'e her girişte aynı lineup seni öldürüyor ama sen plant pozisyonunu tanımıyorsun.
+## RETAKE Mİ, HOLD MU?
 
-**Çözüm:** Plant pozisyonunu öğren (hangi site hangi default spot), lineup'ların çalıştığı spot'ları bil, retake'i o spot'ların dışından yap.
+**Retake:**
+- Sayı eşit veya yakınsa (4v5, 5v5).
+- Elinde flash + molly varsa.
+- Saldırı tek noktada toplanmışsa.
 
-## RETAKE vs HOLD KARAR AĞAĞACI
+**Bekle (defuse sesine kadar):**
+- Sayı çok düşükse (2v4, 3v5).
+- Utility bitmişse.
+- Saldırı site'a yayılmışsa — her açı dolu, giren ölür.
+- Round zaten satılabilir durumdaysa.
 
-Post-plant'te iki seçenek var: retake (agresif girme) veya hold (defuse sesine kadar bekle).
+## RANK BAZINDA NOTLAR
 
-**Retake tercihi:**
-- Numbers eşit veya yakın (4v5, 5v5)
-- Utility stack var
-- Plant pozisyonu bilinmiyor, erken commit info avantajı veriyor
-- Saldırı spread etmemiş, stack'te (tek angle'a commit edilebilir)
+**Gold-Plat:** Retake'e plan yapmadan giriyorsun. Kim nereden girecek, hangi utility, hangi sırayla — bunları söylemeden "go" demek yetmez. Takımda kimse plan söylemiyorsa sen söyle: "Ben A'dan flash atıyorum, sen B'den gir."
 
-**Hold tercihi:**
-- Numbers düşük (2v4, 3v5)
-- Utility zayıf
-- Saldırı spread etmiş, retake için commit eden oyuncu angle savunmasız
-- Ekonomi round-critical değil, round satılabilir
+**Diamond-Ascendant:** Utility'yi biliyorsun ama zamanlamayı kaçırıyorsun. Flash, peek'ten önce patlar. Molly, defuse sesine değil — giriş kararına göre atılır. Info utility ilk, smoke ikinci, molly üçüncü, flash dördüncü.
 
-## RANK NOTU
-
-**Gold-Plat:** Retake'e plan yapmadan giriyorsun. "Go" demek yeterli değil — kim nereden, ne utility, hangi sırayla. IGL yoksa en tecrübeli oyuncu planı yönetmeli.
-
-**Diamond-Ascendant:** Retake utility'sini biliyorsun ama timing zayıf. Flash peek'ten önce, molly defuse sesi değil commit sesinden önce atılır. Info utility ilk, vision utility ikinci.
-
-**Immortal-Radiant:** Anti-retake ile karşılaşıyorsun — saldırı senin retake pattern'ini okumuş, seni bekliyor. Retake varyasyonu + angle rotasyonu şart. 2-3 farklı retake planı hazırla, rotate et.
+**Immortal-Radiant:** Karşı takım retake girişini okumuş, seni bekliyor. Sürekli aynı açıdan girersen hazır duruyorlar. En az 2-3 farklı retake girişin olsun — A site'da ramp'tan gir, CT'den gir, ya da ikisini aynı anda yap. Her round aynısını yapma. Rotation sesini ve hızını dinle: rakip ayak sesini sakınmadan koşarak dönüyorsa site'a geç kapandı, o boşlukta farklı açıdan gir.

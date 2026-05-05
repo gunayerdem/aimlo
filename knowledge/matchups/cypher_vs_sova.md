@@ -11,111 +11,113 @@ tags: [matchup, cypher, sova, sentinel, initiator]
 
 ## 1. Matchup Özü
 
-Cypher tripwire + cage + camera setup'ıyla Sova'nın dart reveal + shock dart lineup ağına karşı flank defend ve site anchor'layan info sentinel, Sova ise dart ile Cypher tripwire hattını haritalayan recon initiator. Matchup iki info agent'ın bilgi ekonomisini karşılaştırır — Cypher passive info (tripwire/camera), Sova active info (dart).
+İkisi de bilgi toplar — ama farklı şekilde. Cypher tuzak kurar, bekler, kamera izler. Sova dart atar, drone uçurur, aktif arar. Bu maçup şu soruya gelir: Cypher'ın kurduklarını Sova bulup silebilir mi, yoksa Cypher Sova'nın her hareketini önceden okuyabilir mi?
+
+Cypher kendi bölgesini kapatır. Sova o kapıyı kırmaya çalışır.
 
 ## 2. Kim Avantajlı?
 
-**Cypher lehine durumlar:**
-- Close range site anchor (Bind Hookah, Sunset B) — tripwire dar choke Sova entry'sini tag'ler
-- Sova utility harcanmış — dart + shock dart yok, Cypher setup serbest
-- Cypher Neural Theft ult hazır — ölü Sova'nın bilgisini takım haritasına yansıtır
-- Cypher camera Sova dart trajektörünü öngörür — dart hattından önce reposition
+**Cypher lehine:**
+- Dar geçitler — Hookah, Sunset B gibi dar yerler teli tetiklettirir, Sova girişi bozulur
+- Sova util'i harcandıysa — dart yok, drone yok, Cypher kurulumu rahat çalışır
+- Cypher ult'u hazırsa — düşen Sova'nın takım konumlarını okursun
+- Kamera teli önceden okursa — dart geçmeden repoze alırsın
 
-**Sova lehine durumlar:**
-- Sova shock dart Cypher tripwire hattında — shock dart wire'ı round başında siler
-- Sova dart Cypher camera lokasyonunu reveal ettiğinde — camera rifle ile silinir
-- Uzun sightline map'lerinde — Sova dart info Cypher setup'ını haritalar
-- Sova Hunter's Fury ult Cypher anchor'a — wall-pierce damage cover'da bile biter
+**Sova lehine:**
+- Shock dart teli patlatırsa — tel gider, Cypher o geçidi göremez
+- Dart kamerayı bulursa — takım kamerayı kırar, Cypher kör kalır
+- Uzun çizgili haritalarda — Sova dart bilgisi Cypher'ın kurulumunu haritalar
+- Hunter's Fury ult'u duvar deler — kapanın arkasında dursan bile hasar yersin
 
-**Balanced:** Haven, Ascent, Lotus gibi orta mesafeli map'lerde matchup Cypher tripwire disiplini ile Sova dart lineup ekonomisine bağlı.
+**Dengeli:** Haven, Ascent, Lotus gibi haritalarda hangisinin daha disiplinli oynadığına bağlı.
 
-## 3. Key Düellolar
+## 3. Duel Senaryoları
 
-**IF** Sova shock dart Cypher tripwire hattında patladı
-**MEANING** Wire round başında silindi, Cypher flank info kaybı, setup zayıflar
-**COUNTER** Cypher tripwire'ı shock dart lineup hattı dışı köşelere. Round-to-round wire yerleşimi varyasyon.
-**WHY** Shock dart sabit lineup hattı. Wire sabit yerleşim ise shock dart bedava. Varyasyon matchup'ın merkezi.
-
----
-
-**IF** Sova recon dart Cypher camera + tripwire lokasyonunu reveal etti
-**MEANING** Setup lokasyonu Sova takımına info, rifle ile utility silinebilir
-**COUNTER** Cypher camera + wire yerleşimini dart scan hattı dışı gizli köşelere. Kamera görünürlüğü düşük açıda.
-**WHY** Dart scan reveal area geniş. Gizli yerleşim dart scan'e karşı tek savunma.
+**IF** Sova shock dart Cypher telinin üstüne patladı
+**MEANING** Tel gitti, o geçitten artık bilgi gelmiyor, Sova oradan serbestçe girer
+**COUNTER** Teli her elde aynı yere koyma. Sova shock dart'ı belirli bir noktaya ezberlemiştir — yeri değiştirince dart boşa gider
+**WHY** Shock dart sabit bir ezber hareketidir. Sen teli döndürürsen ezberi çalışmaz.
 
 ---
 
-**IF** Cypher tripwire Sova entry hattında aktive oldu
-**MEANING** Sova tag'lendi, nearsight + slow, Sova entry'si bozulur, Cypher aim duel avantajı
-**COUNTER** Sova entry öncesi shock dart wire lokasyonunu sil. Eğer wire varsa daisy chain bypass.
-**WHY** Wire trigger nearsight + slow. Sova'nın cevabı wire'ı önceden silmek veya bypass'la geçmek.
+**IF** Sova dart Cypher kamerasını ve telini buldu
+**MEANING** Takım kurulumun nerede olduğunu biliyor, kırmak için adam ayırır
+**COUNTER** Kamerayı ve teli dart'ın taramadığı köşelere koy — duvar arkası, tavan köşesi. Dart yalnızca görüş hattındaki yüzeyleri tarar, köşedeki kamera ona görünmez. Sadece drone bulabilir.
+**WHY** Kameranın gücü gizliliktir. Bulunursa silinir.
 
 ---
 
-**IF** Cypher Neural Theft ultunu ölü Sova'ya kullandı
-**MEANING** Sova'nın bilgileri (takım pozisyonu) Cypher takımına info verilir
-**COUNTER** Sova ölürken pozisyonu cover'ı iyi olan noktada — takımı dart scan hattı dışında yerleşmeli.
-**WHY** Neural Theft post-mortem info silahı. Cypher takımına retake/push hat bilgisi sağlar.
+**IF** Sova drone, Cypher'ın kurduğu bölgeye girdi
+**MEANING** Drone kamera, tel ve duman yerlerini takıma bildiriyor
+**COUNTER** Drone'u gördüğünde vur — iki isabet düşürür. Tel drone'un yolundaysa drone tele takılır.
+**WHY** Radiant Sova'lar drone'u dumandan önce gönderir — önce drone ile kamerayı ve teli bulur, sonra giriş yapar. Erken vurursan bu sırayı bozarsın.
 
 ---
 
-**IF** Sova Hunter's Fury ultunu Cypher anchor pozisyonuna attı
-**MEANING** Ult wall-pierce damage, Cypher cover'da bile HP kaybı
-**COUNTER** Cypher Hunter's Fury ses indicator sonrası pozisyon değiştir. Ult directional — yön dışına reposition.
-**WHY** Hunter's Fury wall-pierce. Cypher cover pozisyonunu seçerken ult lineup hatlarını öngörmeli.
+**IF** Cypher teli Sova'yı yakaladı
+**MEANING** Sova yavaşladı ve kısa süre görme kaybı yaşadı — girişi bozuldu, sen avantajlısın
+**COUNTER** (Sova için) Girmeden önce shock dart ile teli sil. Tel varsa doğrudan girme, yanından dön.
+**WHY** Tel tetiklenince nearsight + yavaşlama gelir. Bu sürede Cypher seni görür, sen göremezsin.
 
 ---
 
-**IF** Sova owl drone Cypher site'ına info için uçuyor
-**MEANING** Drone tripwire + camera + cage lokasyonlarını takıma verir
-**COUNTER** Cypher drone'u rifle ile vur. Tripwire drone yoluna kurulu ise drone tripwire'da takılır.
-**WHY** Drone HP düşük, aim shot iki vuruşta siler. Tripwire drone için tuzak gibi çalışabilir.
+**IF** Cypher Neural Theft ult'unu düşen Sova'ya kullandı
+**MEANING** Sova'nın takımının konumları Cypher takımına geçti
+**COUNTER** (Sova için) Öldüğünde takımın açık alanda durmasın — dart tarama hattı dışında, örtülü yerde beklesin.
+**WHY** Ult ölümden sonra bilgi çalar. Cypher bunu geri alım veya baskı için kullanır.
 
 ---
 
-**IF** Cypher camera dart-proof pozisyonda, Sova dart camera'yı bulmuyor
-**MEANING** Camera gizli, Sova info alamıyor, Cypher info avantajlı
-**COUNTER** Sova takım info disiplini + drone ile camera lokasyonunu bul. Camera darts scan range dışındaysa drone tek seçenek.
-**WHY** Cypher camera'nın gücü gizliliktir. Gizli camera Sova için blind spot.
+**IF** Hunter's Fury ult sesi geldi ve Cypher'a yöneliyor
+**MEANING** Duvarın arkasında olsan bile hasar yersin — ult duvar deler
+**COUNTER** Ses gelince ult çizgisinin yanına geç. Önemli: çizgi yatay geliyorsa sola veya sağa değil, öne ya da geriye kaç. Çizgi boyunca hareket edersen içinde kalırsın.
+**WHY** Hunter's Fury belirli bir yönde ilerler. Yönün dışına çıkınca hasar sıfırlanır.
 
-## 4. Utility Takası
+---
 
-Cypher ekonomisi tripwire x2 + cage x2 + camera + ult (flank + info), Sova ekonomisi dart x2 + shock dart x2 + drone + ult (scan + damage). İki info agent. Cypher passive (setup), Sova active (throw). Matchup info savaşı — Cypher setup'ını Sova darts'ı siler, Cypher camera Sova darts'ını öngörür. Ult ekonomi: Neural Theft 7 point, Hunter's Fury 7 point — eşit.
+**IF** Cypher kamerası dart'ın taramadığı köşede, Sova bulamıyor
+**MEANING** Cypher bilgi alıyor, Sova kör — bilgi savaşını Cypher kazanıyor
+**COUNTER** (Sova için) Drone gönder — dart bulamazsa drone tek seçenek. Radiant Sova'lar bu yüzden drone'u erken gönderir, giriş sonraya bırakılır.
+**WHY** Dart yalnızca görüş hattını tarar. Köşedeki kamera dart'a görünmez.
 
-## 5. Map Bazlı Değişim
+## 4. Util Karşılaştırması
 
-**Bind (Cypher avantajlı):** Teleporter + Hookah Cypher meta.
+Cypher: 2 tel + 2 duman + kamera + ult. Hepsi pasif — kurarsın, beklersin.
+Sova: 2 dart + 2 shock dart + drone + ult. Hepsi aktif — atarsın, uçurursun.
 
-**Breeze (Sova avantajlı):** Uzun sightline Sova dart meta.
+İki util setinin de ult maliyeti 7 puan — eşit.
 
-**Icebox (Sova avantajlı):** Sova lineup Icebox'ta maksimum.
+Maçup şu: Sova aktif olarak Cypher'ın kurduklarını bulmaya ve silmeye çalışır. Cypher ise Sova'nın her hareketini okumaya çalışır. Kim daha iyi bilgi toplarsa round çoğunlukla onun.
 
-**Haven (Cypher avantajlı):** 3 site flank + info Cypher meta.
+## 5. Haritaya Göre Değişim
 
-**Ascent (Balanced):** Cypher A Main flank, Sova A Main dart.
+**Bind (Cypher avantajlı):** Teleporter ve Hookah dar — tel bu geçitlerde çok iş yapar.
 
-**Lotus (Cypher hafif avantajlı):** 3 site flank disiplini.
+**Breeze (Sova avantajlı):** Uzun çizgiler Sova dart'ına daha fazla yer açar.
 
-**Fracture (Cypher avantajlı):** Multi-entry flank info.
+**Icebox (Sova avantajlı):** Sova dart ezberleri bu haritada en güçlü.
 
-## 6. Flip Moment'ler
+**Haven (Cypher avantajlı):** 3 bölge — Cypher'ın flank bilgisi çok değerli.
 
-**Flip 1 — Shock dart wire sildi:** Cypher flank info kayıp.
+**Ascent (Dengeli):** A Main'de Cypher teli, A Main'de Sova dart'ı — ikisi de çalışır.
 
-**Flip 2 — Wire Sova'yı yakaladı:** Entry tag'li, Cypher aim duel avantajı.
+**Lotus (Cypher hafif avantajlı):** 3 bölge yine Cypher bilgisine değer katar.
 
-**Flip 3 — Hunter's Fury anchor bitirdi:** Ult cover'ı aşar, Cypher HP kaybı.
+**Fracture (Cypher avantajlı):** Çok girişli yapı flank bilgisini kritik yapar.
 
-**Flip 4 — Neural Theft info avantajı:** Sova ölümü Cypher takımına takım pozisyonu info.
+## 6. Maçubu Döndüren Anlar
 
-## 7. Pro Coach Notları
+**Dönüm 1 — Tel silindi:** Cypher o geçitten bilgi alamaz, Sova serbest girer.
 
-**VCT'de nasıl oynanıyor:** Cypher A tier, Sova A tier. Matchup klasik info vs info. Pro Sova oyuncuları shock dart lineup'larını Cypher wire lokasyonlarına göre öğrenir. Pro Cypher oyuncuları wire yerleşimini Sova lineup'larına göre round-to-round varyasyonla kurar.
+**Dönüm 2 — Tel Sova'yı yakaladı:** Sova girişi bozuldu, Cypher avantajlı düello.
 
-**Meta tier durumu:** Cypher A tier, Sova A tier. Head-to-head dengede.
+**Dönüm 3 — Hunter's Fury Cypher'ı bitirdi:** Ult duvar aşar, kaçmayan Cypher düşer.
 
-**** Shock dart damage tripwire HP'sini tek atışta düşürüyor mu?
+**Dönüm 4 — Neural Theft bilgiyi çaldı:** Düşen Sova Cypher takımına konum verdi.
 
-**** Cypher camera dart scan reveal'ından etkileniyor mu yoksa dart'a karşı görünmez mi?
+## 7. Koç Notu
 
-**Coach test:** "Cypher setup gizler, Sova setup'ı bulur. Gizlilik + varyasyon Cypher için, lineup bilgisi Sova için. İki info agent savaşı — disiplinli tarafın round'u."
+**Radiant'lar bu maçupta ne yapar:**
+Cypher tel yerini her elde döndürür — Sova shock dart ezberi o yerde değilse dart boşa gider. Radiant Sova'lar ise drone'u girişten önce gönderir: önce kamerayı ve teli tespit eder, sonra giriş yapar. Sırayı bozmak istiyorsan drone'u erken vur.
+
+**Temel kural:** Cypher gizler, Sova bulur. Cypher varyasyon yapmazsa Sova ezberiyle teli siler. Sova drone'u geciktirirse Cypher kör noktayı korur. Hangisi daha az tahmin edilebilirse round onun.

@@ -8,135 +8,149 @@ tags: [round-type, economy, pistol, eco, force, full-buy, anti-eco, save, decisi
 
 # ROUND PLAYBOOK — Round Tipine Göre Karar Ağacı
 
-Her round'un bir karakteri vardır. Ekonomi, önceki round, rakibin ekonomisi, taraf ve map bir araya gelerek o round'un "ne tipi olduğunu" söyler. Pro koç round başında tek soruya cevap verir: "Bu round ne oynamalıyız?" Yanlış tiple yanlış karar = round bedava kaybedilir. Bu dosya her round tipinin kararlarını içerir.
+Her round başında tek soru soruyorsun: **"Bu round ne tipi?"** Ekonomi, önceki round, rakibin parası, hangi tarafta olduğun — hepsi sana cevabı söyler. Yanlış tiple yanlış karar oynarsan o round bedavaya gider.
 
-## PISTOL ROUND — Round 1 ve 13
+## PİSTOL ROUND — Round 1 ve 13
 
-Pistol round'u oyunun en değerli round'larından biridir çünkü bir sonraki round'un ekonomisini belirler. Kazanırsan ikinci round full Classic + armor ekonomisiyle girersin ve muhtemelen üçüncüyü de alırsın. Kaybedersen force veya eco mecbur. Pistol round mechanic'lere değil karar ve disipline dayanır.
+Pistol round bir sonraki iki round'un parasını belirler. Kazanırsan ikinci round iyi silahla girersin, üçüncüyü de alırsın. Kaybedersen force veya eco zorundasın.
 
-### Pistol Buy Mantığı
+### Pistol Alışverişi
 
-**Saldırı tarafı:** Light shield + Classic + 1-2 ability. Sprey yerine kafa nişanı, utility ile entry. Classic burst mode yakın mesafede güçlü, uzak mesafede tap fire.
+**Saldırı:** Hafif zırh + Classic + 1-2 yetenek. Uzaktan tek ateş, yakında burst. Yeteneği giriş için kullan, spray için değil.
 
-**Savunma tarafı:** Light shield + Classic + 1-2 ability. Anchor pozisyonları için utility öncelik, duelist entry için ekonomi paylaşımı. Her oyuncu tam utility alma — 1-2 kişi ability'yi sonraki round'a saklayabilir.
+**Savunma:** Hafif zırh + Classic + 1-2 yetenek. Anchor oynarsan yeteneğe öncelik ver. Takımdan 1-2 kişi yeteneği bir sonraki round'a saklayabilir — harcama.
 
-**Ghost upgrade:** 2 oyuncunun Ghost + no shield olmasını düşün. Ghost tek vuruşluk kafa shot yapar, shield fark etmez. Ama no shield ilk duello kaybı = ekonomi.
+**Ghost seçeneği:** 2 kişi Ghost + zırhsız oynayabilir. Ghost tek kafada öldürür, zırh fark etmez. Ama zırhsız ilk düelloyu kaybedersen para gider — Ghost al sadece takımda başka biri zırh alıyorsa.
 
-### Pistol Strateji
+### Pistol Stratejisi
 
-**Saldırı:** Default yapma. Site'ya commit et. Pistol'de karar sayısı ne kadar az olursa o kadar iyi — takım disiplini pistol round'da her şeyi belirler. Single site execute, trade chain, utility spam.
+**Saldırı:** Tek siteye commit et. Pistol'de karar sayısı az olsun — takım aynı yere akar, yetenek spam, trade chain. Varsayılan oynama, siteyi seç ve bas.
 
-**Savunma:** Stack veya default. 2-1-2 en güvenli. Mid kontrolü al ama mid'de ölme — info pozisyonu. Anchor'ın kill rolü değil delay rolü var.
+**Savunma:** 2-1-2 en güvenlisi. Ortadan bilgi al ama ortada ölme — bilgi noktası olarak kullan. Anchor'ın işi öldürmek değil, geciktirmek.
 
-**Genel kural:** Pistol round'da ego peek yok. Her duello trade'li olsun. Ölen oyuncu post-plant'te yok, post-plant'te utility yetmezse round gider.
+**Her iki taraf:** Ego peek yok. Her düello trade'li olsun. Ölen oyuncu bomb sonrasında yok — bomb sonrası yetenek yetmezse round gider.
 
-## ANTI-ECO — Round 2 (pistol kazanan) veya rakip eco
+## ANTİ-ECO — Round 2 (pistol kazanırsan) veya rakip parasız
 
-Rakip ekonomisi sıfır ve Classic + utility'yle geldiğini biliyorsun. Sen tam ekonomiyle karşıdasın. Kazanmak %80 garanti ama %20 ihanet round sayısı da burada saklı.
+Rakip Classic + minimal yeteneğiyle geliyor. Sen tam paradasın. Kazanmak %80 garantidir — ama o %20'yi sen veriyorsun çünkü sıkışık oynuyorsun.
 
-### Anti-Eco Disiplin
+### Anti-Eco Disiplini
 
-**Spread out.** Eco rakibin en güçlü silahı surprise + Sheriff head shot. 5 kişi bir arada olursa bir Classic'le 2 kişi gidebilir, 5'li grup saçmalaması = round kaybı. Spread, tutamaçları paylaş, yakın mesafe vermeme.
+**Yayıl.** Rakibin en güçlü silahı sürpriz + Sheriff kafası. 5 kişi yığılırsa bir Classic iki kişiyi götürür. Birbirinden ayrı dur, yakın mesafe verme.
 
-**Shotgun + SMG riski.** Rakip Judge veya Spectre rush'a gidebilir. Close range angle verme, uzun sightline zorla. Shotgun'ın effective range'i dışında kal, orada senin rifle'ın kazanır.
+**Shotgun ve SMG riski.** Rakip Judge veya Spectre'la rush yapar. Yakın mesafe açı verme, uzun çizgi zorla. Tüfeğin shotgun menzili dışında kazanır.
 
-**Info ver ama peek etme.** Defender isen info al, commit etme. Saldırı isen ekonomiyi kırmak için bedava kill'lerin peşindesin ama ölüm vermesin.
+**Bilgi ver, peek etme.** Savunmadaysan bilgi al, kapanma. Saldırıdaysan bedava kill iste ama ölüm verme.
 
-### Anti-Eco Buy
+### Anti-Eco Alışverişi
 
-Savunma: Full buy ama utility minimum harcama (ult point biriktirmek için utility at ama lineup'a harcama). Saldırı: Full buy, utility harcanır ama gereksiz kalmaz.
+**Savunma:** Tam alışveriş ama yeteneğe az harca — ult puanı biriktir, hizalama için harcama.
+**Saldırı:** Tam alışveriş, yeteneği kullan ama boşa gitmesin.
 
-## FORCE BUY — $2,900-$3,900 ekonomi, round kaybı pahalı
+## FORCE — 2.900-3.900 TL arası, bu round kayıp pahalı
 
-Force round karar round'udur. Force'a mı geçmek gerekir? Cevap: "Bu round'u kaybedersek bir sonraki round eco'yu karşılayabilir miyiz?" Evet ise force. Hayır ise save ve full ekonomi kur.
+Force karar round'udur. Kendine şunu sor: **"Bu round'u kaybedersem bir sonraki round eco'yu kaldırabilir miyim?"** Evet ise force. Hayır ise save et, parayı koru.
 
-### Force Buy Kombinasyonları
+### Force Kombinasyonları
 
-**Spectre + Light Shield + 1 utility** — Standart force paketi. SMG yakın mesafede rifle'la paralel, light shield ekonomiyi koruyor.
-**Bulldog + Light Shield + 2 utility** — Rifle force, tek isabet one-shot potansiyeli.
-**Phantom eğer $2,900'un üstü** — Tam silah ama armor zayıf olur.
-**Classic + Heavy shield + utility** — Ekstrem force. Çalışabilir ama close range disiplin gerekir.
+**Spectre + hafif zırh + 1 yetenek** — Standart force. SMG yakında tüfekle eşit, zırh parayı koruyor.
+**Bulldog + hafif zırh + 2 yetenek** — Tek isabetle öldürme potansiyeli var.
+**Phantom — 2.900 üstüysen** — Tam silah ama zırh zayıf olur.
+**Classic + ağır zırh + yetenek** — En sert force. Ama yakın mesafede oynamak zorundasın.
 
-**Altın kural:** $2,900'un altında Phantom/Vandal alma. Spectre al, Bulldog al, veya Classic + shield. Rifle + no shield saçmalık.
+**Kural:** 2.900 altında Phantom veya Vandal alma. Spectre al, Bulldog al, yoksa Classic + zırh. Tüfek + zırhsız oynama.
 
 ### Force Stratejisi
 
-**Saldırı:** Tek site rush. Utility minimum, hız maksimum. Spread etme, birlikte bas. Site'a bir tane de olsa varsın ulaşmak hedef — eco rakibine karşı sürpriz + yakın mesafe avantajı.
+**Saldırı:** Tek siteye hızlı bas. Yetenek minimum, hız maksimum. Birlikte git, dağılma. Siteye bir tane bile ulaşman yeter — sürpriz + yakın mesafe avantajı rakibin tüfeğini etkisizleştirir.
 
-**Savunma:** Double stack tek site. Force oyuncuları close range oynamak isteyecek, onları sen seçtiğin noktada yakala. Info için solo anchor değil, iki kişi bir yerde.
+**Savunma:** Tek siteye çift yığın. Force oynayan takım yakın mesafe ister — sen onları kendi seçtiğin noktada karşıla. Solo anchor değil, iki kişi aynı yerde.
 
-## SAVE — Round kaybı kesin, ekonomiyi koru
+## SAVE — Round kayıp kesin, parayı koru
 
-Save round'ta üç şey kutsaldır: silah, utility, ult point. Bu üçünü korursan bir sonraki round'da ekonomi geri döner. Hepsini kaybedersen iki round daha geride kalırsın.
+Save round'da üç şey kutsaldır: **silah, yetenek, ult puanı.** Bu üçünü korursan bir sonraki round para geri döner. Kaybedersen iki round daha geride kalırsın.
 
-### Save Kararı
+### Ne Zaman Save
 
-**Ne zaman save:** Utility dump edemiyorsan, rakip utility + rifle önündeyse, savunmada 2 kişi kaldıysan ve plant olduysa, saldırıda plant yokken 3v5 altıda kaldıysan.
+**Save yap:**
+- Savunmada 2 kişi kaldı, bomb kuruldu
+- Saldırıda bomb kurulmadı, 3v5 altına düştün
+- Rakip tam yetenek + tüfekle önünde duruyor
 
-**Ne zaman save etme:** Plant oldu ve 3+ oyuncu yaşıyor — retake dene. Eco round'da rakip save moduna geçiyor — ult + kill farkı için bir deneme değer.
+**Save etme:**
+- Bomb kuruldu ve 3+ oyuncu sağ — retake dene
+- Rakip save moduna geçti — ult + kill farkı için bir deneme değer
 
-### Save Nasıl
+### Save Nasıl Yapılır
 
-Silahları al ve geri çekil. Bölgenden, haritanın uzak köşesine. Duello kabul etme, peek etme, 5 kişilik clutch denemesi yapma. Ölü oyuncular silahlarını veremedi demek. Takım save etmeye karar verdiyse herkes save eder, biri kill peşinde koşarsa save başarısız olur.
+Silahı al, haritanın uzak köşesine çekil. Düello kabul etme, peek etme, tek başına clutch arama. Ölen oyuncu silahını veremiyor demek. **Takım save kararı verdiyse herkes save eder** — biri kill peşinde koşarsa save boşa gider.
 
-**Save timing:** Geç kalma. Round ortasında save kararı verirsen çekilme yolun açık olur. Round sonunda save düşünürsen silahı kaybedersin.
+Save kararını geç verme. Çekilme yolun açıkken ver — yol kapandıktan sonra düşünürsen silahı kaybedersin.
 
-## FULL BUY — Ekonomi tam, karar oyun planında
+## FULL BUY — Para tam, karar oyun planında
 
-Full buy round'da parasal karar yok, taktik karar var. Silah ve armor kesin, utility kesin, soru: "Ne oynuyoruz?"
+Full buy round'da para tartışması bitti. Silah var, zırh var, yetenek var. Soru tek: **"Ne oynuyoruz?"**
 
-### Full Buy Planlama
+### Full Buy Planlaması
 
-**Saldırı:** Default mı execute mi fake mi? Her round aynı şey = okunur. Önceki round'un ne yaptığına bak, bu round farklı bir şey yap. Rakip stack ettiyse karşı site'a commit et. Rakip spread ettiyse split dene.
+**Saldırı:** Varsayılan mı, execute mü, fake mi? Her round aynı şeyi yaparsan okunursun. Önceki round ne oynadığına bak, bu round farklı bir şey yap.
+- Rakip stack ettiyse karşı siteye commit et
+- Rakip yayıldıysa split dene
 
-**Savunma:** Default setup mı stack mı? Rakip son 3 round nereye bastı? Stack ise tahmin, default ise info odaklı.
+**Savunma:** Varsayılan mı, yığın mı? Rakip son üç round nereye bastı?
+- Sürekli aynı yere bastıysa o siteyi ağırla
+- Değişken bastıysa varsayılan dur, ilk bilgi gelince yoğun tarafa kay
 
-**Mid-round adaptasyon:** Full buy round'da utility bolluğu var, mid-round karar değiştirmek daha kolay. Rakip bilginin gelmediği bir yere basıyorsa info ile adaptasyon yap.
+**Round ortası adaptasyon:** Full buy'da yetenek bol. Bilgi gelince plan değiştirebilirsin — rakip beklenmedik bir yere basıyorsa yeteneği orada kullan.
 
-## ECO — Minimum buy, çalma umudu
+## ECO — Minimum alışveriş, round çalma
 
-Eco round'da fiyat oyunu yok ama cesaret oyunu var. Eco'yu otomatik kayıp sayma — doğru eco setup'ı round çalar.
+Eco'yu otomatik kayıp sayma. Doğru eco setup round çalar.
 
-### Eco Buy
+### Eco Alışverişi
 
-**Sheriff + Light Shield** — Eco'nun kralı. Tek kafa shot, rifle öldürür. Uzak mesafede kullanılır.
-**Classic + utility minimum** — Spray play değil, burst play.
-**Judge/Bucky — close range map + savunmada** — Bind B anchor, Split B anchor gibi yakın mesafeli yerlerde.
-**Frenzy — hiçbir zaman ideal değil** ama yakın mesafede Classic'ten hızlı.
+**Sheriff + hafif zırh** — Eco'nun kralı. Tek kafada tüfek öldürür. Uzak mesafede kullan.
+**Classic + minimal yetenek** — Spray değil, tek ateş.
+**Judge/Bucky — yakın mesafeli noktalar + savunma** — B anchor gibi dar yerlerde. Bind B, Split B gibi.
+**Frenzy** — Hiçbir zaman ideal değil ama yakında Classic'ten hızlı.
 
 ### Eco Stratejisi
 
-**Saldırı eco:** Agresiflik değil akıllılık. Bir yerde bekle, angle tut, isabetli tek kill'ler. 1 kill + save = ekonomik kazanç. Round çalma denemesi single site rush ama yüksek koordinasyon.
+**Saldırı eco:** Bir noktada bekle, açı tut, tek isabetle kill. 1 kill + save = ekonomik kazanç. Round çalmak istiyorsan tek siteye yüksek koordinasyonla bas.
 
-**Savunma eco:** Off-angle pozisyon. Saldırı default peek'lerini bekle, Sheriff kafa shot'u için çek. Stack yap, close range için hazır ol.
+**Savunma eco:** Alışılmadık açı al. Saldırının varsayılan peek'lerini bekle, Sheriff kafası için geri çekil. Yığın yap, yakın mesafeye hazır ol.
 
-## BONUS ROUND — Eco kazandın, silahları topladın
+## BONUS ROUND — Eco kazandın, silah topladın
 
-Bonus round tehlikelidir. Pistol veya force'tan rifle + armor durumuna geçtin ama utility eksik. Rakip tam ekonomideki kadar utility'n yok.
+Bonus round tehlikelidir. Pistol veya force'tan tüfek + zırha geçtin ama yetenek eksik. Tam buy kadar yetenek yok.
 
-### Bonus Buy
+### Bonus Alışverişi
 
-Silahları topla, minimum utility al, ekonomi kontrollü. Utility eksikliği için kill'lerle kompanse et. Bonus'ta savunma = predictable default, saldırı = tek site hızlı execute.
+Silahları topla, minimum yetenek al, parayı kontrollü tut. Yetenek eksikliğini kill fazlasıyla kapa.
+- **Savunma:** Tahmin edilebilir varsayılan oynama, off-angle kur
+- **Saldırı:** Tek site, hızlı execute
 
-## ROUND PATTERN'LARI — Rakibin Ekonomisini Okuma
+## RAKİBİN PARASINI OKU
 
-**Ekonomi 0 → Eco:** Classic + Sheriff, utility minimum. Sen ekonomi avantajında.
-**Ekonomi $2,400-$3,600 → Force:** Spectre veya Bulldog, sürpriz push riski.
-**Ekonomi $3,600-$4,500 → Half-buy:** Phantom no shield veya Bulldog + shield.
-**Ekonomi $4,500+ → Full buy:** Rifle + shield + utility tam.
-**2 round üst üste kaybetti + utility kullanmadı → Save olabilir:** Saldırı için özel round çalma imkanı.
+| Rakip durumu | Beklenen silah | Senin avantajın |
+|---|---|---|
+| Para sıfır | Classic + Sheriff, minimal yetenek | Yayıl, yakın mesafe verme |
+| 2.400-3.600 arası | Spectre veya Bulldog | Yakın mesafe açı verme, uzun çizgi zorla |
+| 3.600-4.500 arası | Phantom zırhsız veya Bulldog + zırh | Yetenek baskısıyla giriş, zırh farkını kullan |
+| 4.500+ | Tam tüfek + zırh + yetenek | Açık peek verme, yetenek önce kullan |
+| 2 round üst üste kaybetti, yetenek kullanmadı | Save moduna geçti | Saldırı tarafındaysan round çalma girişimi yap |
 
-## GENEL ROUND DISIPLINI
+## ROUND DİSİPLİNİ
 
-- **Her round bir karar round'u.** Otomatik default yok. Round tipine göre karar değişir.
-- **Ekonomiyi takip et.** Kendininkini ve rakibinkini. Ekonomik bilgi karar bilgisi kadar değerli.
-- **Round satmayı öğren.** Kaybedilmiş round save round'udur. Ego için clutch arama, takım için silah topla.
-- **Round'lar arası momentum.** 2 round üst üste kaybettin mi timeout düşün. Momentum Valorant'ta skordan daha çok round belirler.
+- **Her round başında round tipini belirle.** Otomatik varsayılan oynama — tip değişirse plan değişir.
+- **Hem kendi paranı hem rakibin parasını takip et.** Rakibin parasını bilmek kendi kararını doğrudan etkiler.
+- **Kaybedilmiş round'u erken tanı.** Ego için clutch arama — silahı topla, bir sonraki round'a bak.
+- **2 round üst üste kaybettiniz ve takım aynı hatayı tekrarlıyor** — round öncesi kısa konuş, plan değiştir.
 
 ## RANK NOTU
 
-**Gold-Plat:** Ekonomi kararlarını yoksayıyorsun. $2,400 ile Vandal alma, Spectre al. Save gerektiğinde ego clutch arama, silahı topla. Force'a geçme kriterini öğren.
+**Gold-Plat:** Ekonomi kararını atlıyorsun. 2.400 TL ile Vandal alma, Spectre al. Save gerektiğinde ego clutch arama, silahı topla. Force geçiş kriterini öğren: "Kaybedersem parayı kaldırabilir miyim?"
 
-**Diamond-Ascendant:** Ekonomiyi biliyorsun ama round tipine göre strateji değiştirmiyorsun. Pistol'de default, force'ta rush, eco'da pick oyunu — her biri farklı mental.
+**Diamond-Ascendant:** Ekonomiyi biliyorsun ama round tipine göre plan değiştirmiyorsun. Pistol'de varsayılan, force'ta rush, eco'da tek pick oyunu — her birinin farklı giriş noktası, farklı yetenek sırası var. Hangi tipteysen ona göre yürüt.
 
-**Immortal-Radiant:** Rakip ekonomisini her round hesapla, ona göre anti-strat yap. Save round'da ult point kazan, full buy round'da utility dominance kur. Round tipi anti-strat'ın temelidir.
+**Immortal-Radiant:** Her round rakibin parasını hesapla, ona göre ters strateji kur. Save round'da ult puanı kazan. Full buy round'da yetenek baskısıyla siteyi fethet. Round tipi senin ters stratejinin temelidir — bunu atlarsan bilgi avantajını boşa harcarsın.

@@ -9,105 +9,124 @@ tags: [matchup, cypher, vyse, sentinel_vs_sentinel]
 
 ## 1. Matchup Özü
 
-Cypher ve Vyse sentinel role iki zıt silah kuşanır. Cypher info sentinel — camera + trapwire aktif bilgi akışı, Cypher takımının rotate planları Cypher'ın sağladığı bilgi üzerine kurulu. Vyse arsenal sentinel — Shear (metal wall), Razorvine (fiziksel engel), Arc Rose (flash), Steel Garden (ult, silah yasağı) ile duel silahları yok etme ve alan reddetme ekonomisi. Cypher rakip takımın nereye gideceğini bilir, Vyse rakibi nereye gitmemesi gerektiği yerine sıkıştırır. İki sentinel karşılaştığında farklı iş yaparlar — Cypher görür, Vyse engeller. Pro okuma: Cypher oyuncusu info üretkenliği ile bilinir, Vyse oyuncusu utility zamanlaması ile bilinir. Round içinde hangi yaklaşım rakibin planını daha iyi okumuşsa o sentinel rolünü dolduruyor.
+Bu iki sentinel aynı işi yapmıyor. Cypher bilgi sağlar — kamera + trapwire ile rakibin nereye gittiğini görürsün. Vyse alan kapatır — Shear, Razorvine, Arc Rose ile rakibi sıkıştırır, silah yasaklar. Cypher oynarsan takımın sana bakar: "neredeler?" Vyse oynarsan takımın sana bakar: "buradan geçemezler mi?" Hangi soruyu cevaplamak o round için daha gerekliyse, o ajanı seç.
 
 ## 2. Kim Avantajlı?
 
-Vyse 2024 çıkışından sonra meta'ya oturdu, Cypher klasik meta pick. İki karakterin pick rate'i yakın ama farklı haritalarda. Cypher Bind, Abyss, Fracture gibi flank zengin haritalarda favored. Vyse Icebox, Haven, Lotus, Split gibi site lockdown + ult value gerektiren haritalarda favored. Dağılım: dokuz map'in beşinde Vyse, üçünde Cypher, birinde nötr. Ult ekonomi farkı Vyse lehine — Steel Garden silah yasağı retake + post-plant için round çeviren ult, Cypher Neural Theft info ult. Steel Garden ile round garanti kazanılabilir, Neural Theft bir sonraki round için hazırlık. Meta pick order: Vyse > Cypher (patch 9.x itibariyle).
+Vyse şu an Cypher'ın önünde — ama bu haritaya göre değişir.
+
+**Cypher oyna:**
+- Bind, Abyss, Fracture — flank hatları çok, trapwire + kamera burada işe yarar
+
+**Vyse oyna:**
+- Icebox, Haven, Lotus, Split, Sunset — site kilitlemek + ult değeri burada yüksek
+
+**Fark nerede?** Vyse'nin ulti Steel Garden round çevirir — retake alanda silah çalışmaz, round bitti. Cypher'ın ulti Neural Theft bir sonraki round için bilgi verir. Ult karşılaştırması Vyse'nin lehine, tartışmasız.
 
 ## 3. Key Düellolar
 
-**IF** Cypher trapwire rotate hattına yerleşti, Vyse Razorvine aynı hatta
-**MEANING** İki utility üst üste — rakip bir utility temizlerken ikincisi tetikler, katmanlı flank savunması
-**COUNTER** Saldırı sırayla temizler — Razorvine shoot, trapwire shoot. İki utility tek hatta çift temizlik gerektirir
-**WHY** İki sentinel aynı takımda sinerji. Karşı takım için çift temizlik zaman kaybı, rotate hattı bu pencerede Cypher takımı lehine açık kalır.
+**IF** Cypher trapwire'ı flank hattına koydu, Vyse Razorvine aynı hatta
+**MEANING** İki engel üst üste — biri temizlenirken öteki tetiklenir, flank hattı çift kilitli
+**COUNTER** Rakip sırayla temizler: önce Razorvine, sonra trapwire. Temizlik sürerken o hat açık kalır — o pencerede takım o hattı gözler
+**WHY** Tek hat, çift temizlik = rakip o süre içinde rotate edemez
 
 ---
 
-**IF** Vyse Shear (metal wall) site girişine yerleştirildi, Cypher kamerası aynı site görüyor
-**MEANING** Vyse wall kısa ömürlü fiziksel engel, Cypher kamerası info kaynağı — aynı sitede iki sentinel alan kapatıyor
-**COUNTER** Saldırı Shear süresi (bağlama için) içinde commit edemez, Cypher kamerası commit zamanlamasını okur. İki utility birlikte site'ı kilitler
-**WHY** Shear proaktif area denial, kamera pasif info. İki utility farklı işlev aynı alana — rakip saldırı hem görüş hem fiziksel engelle karşılaşır.
+**IF** Vyse Shear'ı site girişine koydu, Cypher kamerası aynı siteyi görüyor
+**MEANING** Shear girişi fiziksel kapatır, kamera commit zamanlamasını okur — aynı site iki farklı kilitle kapalı
+**COUNTER** Rakip Shear doluyken girmeye çalışırsa kameradan görürsün, takımına bildir. Shear bitmeden kimse giremez zaten
+**WHY** Shear engeller, kamera bildirir — ikisi aynı anda çalışınca site almak çok pahalı olur
 
 ---
 
-**IF** Cypher kamerası Vyse utility pozisyonunu gördü
-**MEANING** Cypher kameradan Razorvine veya Arc Rose yerleşimini gözlemliyorsa Vyse utility'si önceden okundu
-**COUNTER** Vyse utility yerleşimini kameranın görüş hattı dışında yap — Vyse utility sesiz yerleştirilmez, kamera görerek info verebilir
-**WHY** Vyse utility round başı kurulur (Arc Rose, Razorvine). Kamera bu kuruluşu yakalayabilir. Kuruluş info'su rakibin rotate planını etkiler.
+**IF** Kameranla Vyse'nin Razorvine veya Arc Rose kurduğunu gördün
+**MEANING** Vyse'nin kurulumu açığa çıktı — nereye utility koyduğunu takımın biliyor
+**COUNTER** Vyse oynuyorsan utility'yi kameranın görmediği açıdan kur. Kamera sesini duyarsan pozisyon değiştir
+**WHY** Vyse utility'si round başı kurulur, değiştirilmesi zor. Kamera bu kuruluşu yakaladıysa Vyse o round utility'siz oynuyor
 
 ---
 
-**IF** Vyse Steel Garden ult aktive, silahlar round içinde kilitli
-**MEANING** Steel Garden ult alanı içinde silah ateş etmez — rakip retake/push bu alanda yapılamaz, round Vyse tarafının
-**COUNTER** Cypher takımı ult alanı dışına çıkar, ult alanı içine girmez. Ult alanı kısıtlı — dışında savunma utility ile yapılır
-**WHY** Steel Garden'ın tek zayıflığı menzil — ult alanı sınırlı, dışında silahlar çalışır. Cypher takımı ult alanı dışında pozisyon alırsa ult değeri yarıya iner.
+**IF** Vyse Steel Garden ulti aktive, sen o alanın içindesin
+**MEANING** O alanda silahın ateş etmez — retake, push, savunma hepsi durur
+**COUNTER** Ult alanını gördüğünde içine girme. Dışarıda kal, dışarıdan utility bas
+**WHY** Steel Garden'ın tek zayıflığı menzili sınırlı. Dışarıda silahın çalışır, içeride çalışmaz. Dışarıda kal
 
 ---
 
-**IF** Cypher Neural Theft ult son oyuncuda kullanıldı, Vyse takımı info alındı
-**MEANING** Neural Theft dead enemy'nin yakın takım konumlarını gösterir — Cypher takımı bir sonraki round için konum bilgisi
-**COUNTER** Vyse takımı round-to-round konum değiştirir, Neural Theft info'su bir round sonra geçersiz. Vyse bu bilgiyi nötralize edebilir
-**WHY** Neural Theft info yalnızca statik bilgidir. Dinamik savunma yapan takım için Neural Theft değeri azalır. Vyse comp rotate-heavy olduğu için Neural Theft'ten daha az zarar görür.
+**IF** Cypher Neural Theft ultini kullandın, Vyse takımının konumlarını gördün
+**MEANING** O bilgi şu anki round için değil, bir sonraki round için
+**COUNTER** Vyse oynuyorsan round bittikten sonra konumunu değiştir — Neural Theft bilgisi statik, bir round sonra geçersiz
+**WHY** Vyse takımı rotate-ağırlıklı oynarsa Neural Theft değeri düşer. Konum değiştirme alışkanlığın varsa bu ulti seni çok etkilemez
 
 ---
 
-**IF** Vyse Arc Rose flash aktive, Cypher kamera bakıyorken
-**MEANING** Arc Rose flash Cypher'ı kör eder ama kamera görüşünden — Cypher kamera kullanıyorsa flash kameradan gelir, Cypher oyuncu görüşü etkilenmez
-**COUNTER** Vyse Arc Rose'u Cypher'ın kendi pozisyonuna atmalı, kamera pozisyonuna değil. Cypher'ın fiziksel konumu hedef
-**WHY** Flash mekanikleri oyuncu görüş hattına göre çalışır. Kamera görüşü oyuncunun kendi görüşü değil. Flash kamera üzerinden dolaylı kör etmez.
+**IF** Vyse Arc Rose flashını kamerana attı, sen kameradaydın
+**MEANING** Flash oyuncunun fiziksel görüşüne göre çalışır — kamera görüşünü körleştirmez, seni körlemiyor
+**COUNTER** Vyse oynuyorsan Arc Rose'u Cypher'ın fiziksel pozisyonuna at, kameranın baktığı yere değil
+**WHY** Kamera görüşü senin görüşün sayılmaz. Flash kameradan geçmez
 
 ---
 
-**IF** Cypher aggressive info peek alıyor, Vyse Shear savunma hattında
-**MEANING** Cypher peek yaparsa Vyse Shear Cypher'ı ayırabilir — Cypher kill almaz, info da alamaz
-**COUNTER** Cypher peek öncesi Shear pozisyonunu ezberlemeli, Shear çıkış hattından bakmamalı. Info aggressive hold değil pasif hold ile
-**WHY** Cypher'ın aggressive peek alması kendi ekonomisine zarardır (Cypher ölüm toleransı düşük). Vyse utility'si Cypher'ın yanlışlığını cezalandırır.
+**IF** Cypher aggressive peek aldı, Vyse Shear o hattaydı
+**MEANING** Shear Cypher'ı ayırır — ne kill alır ne info alır, ortada kalır
+**COUNTER** Cypher oynuyorsan peek öncesi o hattaki Shear'ı kontrol et. Shear aktifse o hattan çıkma, kameradan gör
+**WHY** Shear aktifken o hattan çıkan Cypher utility'sini boşa harcıyor. Kamera çalışıyorken aynı bilgiyi peek olmadan alırsın
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
-Cypher utility: trapwire (2, info tether), camera (görsel info), Cyberzone (tripwire respawn), Neural Theft (ult, bilgi). Vyse utility: Shear (metal wall), Razorvine (engel), Arc Rose (flash), Steel Garden (ult, silah yasağı). Karşılaştırma: Info — Cypher kesin üstte (kamera pasif bilgi toplama, Vyse'de eşdeğer yok). Area denial — Vyse kesin üstte (Shear + Razorvine, Cypher'da eşdeğer yok). Damage — ikisi de yok. Flash — Vyse (Arc Rose), Cypher'da yok. Ult — Vyse Steel Garden round çevirici, Cypher Neural Theft info toplayıcı. Ult karşılaştırması Vyse lehine çok net.
+| | Cypher | Vyse |
+|---|---|---|
+| Bilgi | Kamera + trapwire (en güçlü) | Yok |
+| Alan kapatma | Yok | Shear + Razorvine (en güçlü) |
+| Flash | Yok | Arc Rose |
+| Ult | Neural Theft (bilgi) | Steel Garden (silah yasağı) |
 
-Ekonomi: İki sentinel ekonomisi cooldown tabanlı, kredi bağımlı değil. Round-round tutarlılık her ikisi için de yüksek. Takas sonucu: Vyse utility bolluğu ve işlev çeşitliliği Cypher'dan fazla, ama Cypher camera info ekonomisi tek başına değer üretir. Vyse comp'ta Cypher info'su alınamaz — Vyse comp Sova veya Fade ile info boşluğunu doldurur. Cypher comp'ta Vyse'nin area denial'ı alınamaz — Cypher comp Killjoy veya Deadlock ile ikinci sentinel olarak gelir (nadir).
+**Kısa özet:**
+- Bilgi lazımsa Cypher, kamera eşsiz
+- Alan kapatma lazımsa Vyse, Cypher'da karşılığı yok
+- Ult değeri Vyse lehine — Steel Garden round bitirir, Neural Theft bir sonraki round için hazırlar
 
-## 5. Map Bazlı Değişim
+**Takım kurulurken:** Vyse aldıysan takımın bilgi için Sova veya Fade ister. Cypher aldıysan takımın alan kapatma için Killjoy veya Deadlock ister.
 
-**Bind:** Cypher favored. Teleporter yapısı Cypher trapwire için tasarlandı. Cypher Bind comp kurucu.
+## 5. Haritaya Göre Seç
 
-**Abyss:** Cypher favored. Multi-level yapı Cypher kamera için ideal.
+**Cypher oyna:**
+- **Bind** — teleporter hatları trapwire için ideal
+- **Abyss** — çok katlı yapı kamera açılarını çoğaltır
+- **Fracture** — iki taraflı saldırı, flank savunma trapwire ile çözülür
 
-**Fracture:** Cypher favored. İki taraflı attack Cypher trapwire flank savunma için.
+**Vyse oyna:**
+- **Icebox** — geniş siteler, uzun rotate hatları Shear ile kısalır
+- **Haven** — üç site Vyse utility bolluğunu karşılıksız bırakmaz
+- **Lotus** — döner kapılar + üç site, Shear burada işe yarar
+- **Split** — A ve B girişleri Shear için ideal
+- **Sunset** — dar yapı Razorvine'ı güçlendirir
 
-**Icebox:** Vyse favored. Geniş site ve uzun rotate Vyse Shear için.
+**İkisi de gider:**
+- **Ascent** — her ikisi de iş görür, diğer comp'a göre karar ver
+- **Breeze / Pearl** — burada Killjoy veya Deadlock önce gelir, sentinel seçim ikincil
 
-**Haven:** Vyse favored. Üç site Vyse utility bolluğunu ödüllendirir.
+## 6. Round'u Döndüren Anlar
 
-**Lotus:** Vyse favored. Döner kapılar ve üç site.
+1. **Steel Garden retake alanında.** Vyse ulti aktive + sen o alandaysan round bitti. Cypher'ın buna karşı verecek eşdeğer bir şey yok. Ult sesini duyar duymaz o alandan çık.
 
-**Split:** Vyse favored. A ve B için Shear wall mimarisi.
+2. **Kamera Vyse kurulumunu yakaladı.** Round başı kameran Vyse'nin Razorvine veya Arc Rose koyduğunu gördüyse takıma bildir. Kamera silinmezse Vyse o round utility'siz oynuyor.
 
-**Sunset:** Vyse favored. Dar yapı Razorvine için.
+3. **Arc Rose fiziksel hatta geldi.** Arc Rose kameraya değil, sana gelirse kör olursun. Vyse bunu biliyorsa seni takip ediyor demektir — konumunu değiştir.
 
-**Ascent:** Nötr. İki sentinel de Ascent'ta oynanabilir.
+4. **Shear yanlış yere gitti.** Vyse Shear'ı round başı koyar, değiştiremez. Kamerayla Shear'ın nerede olduğunu gördüysen takıma söyle — o girişten rakip engelsiz girer.
 
-**Breeze:** Nötr. Breeze için Killjoy/Deadlock pick öncelikli.
+5. **Neural Theft bilgisi bir round sonra geçersiz.** Ult patlattın, konumları gördün — Vyse takımından 2 kişi kaldıysa veya spike kuruluysa o anda kullan. Round bitince Vyse takımı dağılırsa gördüğün konumlar işe yaramaz.
 
-**Pearl:** Vyse hafif avantajlı.
+## 7. Koç Notları
 
-## 6. Flip Moment'ler
+**Cypher oynuyorsan:**
+- Kamerayı bir önceki roundda Vyse takımı gördüyse aynı yere koyma — o spot artık silinir. Her round farklı açıdan kur.
+- Shear sesini öğren — Shear kurulumu ses çıkarır. Kameradayken duyarsan takıma bildir.
+- Peek öncesi o hattaki Shear'ı kontrol et. Shear aktifse o hattan çıkma.
 
-1. **Steel Garden retake.** Vyse ult aktive + retake alanında savunmacılar var = round çevirici silah. Cypher bu ult'a karşı eşdeğer silah üretemez (Neural Theft info değil kill).
-
-2. **Cypher kamerası Vyse utility yerleşimini yakalarsa.** Round başı Vyse utility kurulurken Cypher kamerası görüyorsa Vyse'nin tüm setup'ı açığa çıkar. Kamera silinmezse Vyse takımı round boyu info handikaplı.
-
-3. **Arc Rose Cypher yanlış angle'dan.** Arc Rose ancak fiziksel line-of-sight üzerinde çalışır. Cypher kamera arkasından oynarsa flash etkisiz.
-
-4. **Shear yanlış yerleştiyse.** Vyse Shear round başı karar — yanlış yerleşim saldırı için bedava push hakkı. Cypher kameradan Shear pozisyonunu gördüyse Cypher takımı bu hatayı bilgi olarak kullanır.
-
-5. **Neural Theft bir sonraki round için.** Cypher'ın tek seri etkisi bu ult. Vyse takımı round-to-round pozisyon değiştirerek bu bilgiyi nötralize eder — Cypher'ın seri avantajı Vyse karşısında azalır.
-
-## 7. Pro Coach Notları
-
-Pro sahnede Vyse çıkışından sonra sentinel pick pool'a eklendi. Cypher hala comp kurucu belirli haritalarda. İki karakter aynı maçta karşılaştığında Vyse yeni meta, Cypher klasik meta — iki felsefe çatışır. Koçluk ipucu: Cypher oyuncusu Vyse'nin Shear ses sinyalini ezberlemeli (Shear kurulum sesi var, info kaynağı). Vyse oyuncusu Cypher kamera spot'larını round başı arama rutinini uygulamalı — kamera silinmeden round oynanmaz.
-
-Yaygın pro hata: Cypher oyuncusu kameraları round-round aynı spot'a koyar. Doğru: kamera rotasyonu her round. İkinci hata: Vyse oyuncusu Razorvine'ı round başı kurar ve round boyu değişmez. Doğru: Razorvine round içi yeniden kurulabilir (charge varsa). Üçüncü hata: Vyse oyuncusu Arc Rose'u aim duel için kullanır. Doğru: Arc Rose team flash, tek oyuncunun aim avantajı için değil takım entry/retake için.
+**Vyse oynuyorsan:**
+- Razorvine round içinde yeniden kurulabilir (charge varsa). Koy, temizlenirse yeniden kur — aynı yere koyma.
+- Arc Rose'u takım girişinde veya retakede at — tekli duel anında atarsan karşı taraf giriş penceresi geçmeden toparlar.
+- Cypher kamera spotlarını round başı kontrol et. Kamera varsa sil, yoksa utility'ni kameranın görmediği açıdan kur.
+- Steel Garden'ı retake alanında veya spike üzerinde patlat. Rakip alandan çıktıktan sonra atarsan ult boşa gider.

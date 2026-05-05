@@ -8,96 +8,111 @@ tags: [utility, smoke, flash, molly, info, lineups, map-specific]
 
 # UTILITY LIBRARY — Ability Kullanım Kitabı
 
-Utility Valorant'ın DNA'sıdır. Mekaniğe sahip olmayan oyuncu bile doğru utility ile round çalabilir. Bu dosya utility kategorileri + kullanım timing'i + belirleyici map×ajan kombinasyonları.
+Mekaniğin zayıf olsa bile doğru utility ile round çalarsın. Utility atmayan oyuncu ekstra bir silahı çantada taşıyıp hiç çıkarmıyor.
 
 ## UTILITY KATEGORİLERİ
 
 ### 1. SMOKE (Vision Deny)
-Smoke rakibin sightline'ını bloklar. En temel utility kategorisi. Smoke olmadan execute yürümez, post-plant retake kurulamaz.
+Rakibin sana baktığı açıyı kapat. Smoke olmadan siteye giriş olmaz, retake kurulamaz.
 
-**Kullanım prensipleri:**
-- Smoke'u rakibin bakacağı angle'a at, kendine değil.
-- Timing: entry'den hemen önce (entry smoke'un arkasından geçer).
-- Süre sınırlı — çok erken atarsan boşa gider.
-- Post-plant için en az 1 smoke sakla.
+**Nasıl kullanırsın:**
+- Smoke'u rakibin baktığı yere at, kendin geçeceğin yere değil.
+- Entry arkadaşın smoke içinden geçer — smoke patlamadan entry girerse smoke boşa gider.
+- Post-plant için en az 1 smoke cebinde kalsın.
 
-**Smoke ajanları:** Omen, Brimstone, Viper, Astra, Harbor, Clove, Miks.
+**Smoke ajanları:** Omen, Brimstone, Viper, Astra, Harbor, Clove.
+
+---
 
 ### 2. FLASH (Blind Deny)
-Flash rakibin ekranını beyaza boyar, kısa süre kör eder. Entry'nin en sert silahı.
+Rakibin ekranını beyaza boyar, kör eder. Entry'nin en sert silahı.
 
-**Kullanım prensipleri:**
-- Flash'ı entry'nin peek'iyle aynı anda pop ettir.
-- Flash attıktan sonra beklemeyin, hemen peek yap.
-- Kendi takımını kör etme — line of sight kontrol et.
-- Pop timing ajan bazlı — her flash'ın kendi animasyon penceresi var, popup süresine göre swing timing'ini ayarla.
+**Nasıl kullanırsın:**
+- Flash patlasın, arkadaşın peek atsın — aynı anda.
+- Flash attıktan sonra arkadaşın hemen girer, bekleme olmaz.
+- Kendi takımını kör etme — flash atmadan önce takımın nerede bak.
+- Her ajanın flash animasyonu farklı; hangi ajan oynuyorsan o ajanın flash'ını custom'da öğren, swing timing'ini ona göre ayarla.
 
-**Flash ajanları:** Phoenix, Skye, KAY/O, Yoru, Breach (flash), Gekko.
+**Flash ajanları:** Phoenix, Skye, KAY/O, Yoru, Breach, Gekko.
+
+---
 
 ### 3. MOLLY / DAMAGE (Area Denial + Damage)
-Molly, snake bite, fault line aftershock — belli bir alana hasar verir. Rakibi pozisyondan kaldırır veya defuse'u engeller.
+Belirli bir alana hasar verir. Rakibi pozisyondan kaldırır veya defuse'u engeller.
 
-**Kullanım prensipleri:**
-- Molly'yi rakibin bulunduğu yere değil gitmek istediği yere at.
-- Post-plant'te defuse sesi duyulunca molly.
-- Delay + damage kombinasyonu: molly atıldığı an rakibin geri çekilmesi için hareket ettiği pencerede swing at.
-- Plant pozisyonuna göre lineup atan ajanlar (Brim, Viper) bu utility'nin ustası.
+**Nasıl kullanırsın:**
+- Molly'yi rakibin şu an durduğu yere değil, kaçmak istediği yere at.
+- Defuse sesi duyulunca molly at. Spike üzerindeyken yanar, yerinden çıkar.
+- Molly atıldığı an rakip geri çekilir — o an swing at, boş bulursun.
+- Brimstone ve Viper lineup ile post-plant molly atar — plant spot'una göre lineup öğren.
 
 **Damage ajanları:** Brimstone, Viper, KAY/O, Phoenix, Breach, Fade, Raze.
 
+---
+
 ### 4. INFO (Scan / Reveal)
-Rakibin pozisyonunu reveal eder. Info utility olmadan savunma + saldırı karar vermez.
+Rakibin nerede olduğunu gösterir. Info olmadan savunma karar veremez, saldırı rotate edemez.
 
-**Kullanım prensipleri:**
-- Round başında kullan (saldırı için defender pozisyon info'su).
-- Info'yu takımla paylaş — susarak görmek değer kaybeder.
-- Bazı info utility'ler (Sova dart) aynı zamanda damage verir.
+**Nasıl kullanırsın:**
+- Saldırıdaysan: siteye girmeden önce gönder, defender nerede bileceksin.
+- Gördüğünü takımla paylaş — sesli söylemezsen info sıfıra düşer.
+- Sova dart gibi info utility aynı zamanda hasar da verir — isabet ederse bonus.
 
-**Info ajanları:** Sova (dart), Cypher (cam, tripwire), Fade (prowler, haunt), KAY/O (knife), Gekko (dizzy, wingman), Skye (dog), Sage (slow orb info).
+**Info ajanları:** Sova (dart), Cypher (cam, tripwire), Fade (prowler, haunt), KAY/O (knife), Gekko (dizzy, wingman), Skye (dog).
+
+---
 
 ### 5. STUN / DEBUFF
-Rakibin ability'lerini veya aim'ini bozar. Entry için flash'a alternatif.
+Rakibin hareketini veya aim'ini bozar. Flash yoksa alternatif entry aracı.
 
-**Kullanım prensipleri:**
-- Stun'ın süresi var — entry stun bitmeden içeri girer.
-- Stun'a karşı duyarlı ajanlar var (Jett dash, Raze satchel gibi movement kaybı yaşayanlar).
+**Nasıl kullanırsın:**
+- Stun atıldıktan sonra arkadaşın hemen girer, stun bitmeden içeride olur.
+- Jett dash veya Raze satchel kullananlar stun altında hareket kaybeder — onlara karşı stun daha etkili.
 
 **Stun ajanları:** Breach (stun, aftershock, concussive), KAY/O (knife suppression), Fade (seize).
 
+---
+
 ### 6. WALL (Area Control)
-Wall büyük alanları bloklar, rotate hattını keser, post-plant retake'i engeller.
+Büyük alanı kapatır, rotate yolunu keser, retake'i yavaşlatır.
 
-**Kullanım prensipleri:**
-- Wall'u entry'de yakma, post-plant için sakla.
-- Wall bir alanı kapatır ama rakip patlayana kadar oraya giremez.
-- Wall ekonomisi: 1-2 wall round'u değiştirir.
+**Nasıl kullanırsın:**
+- Wall'u siteye girerken yakma — post-plant veya retake için sakla.
+- Wall bir alanı kapatır ama rakip patlatana kadar oraya giremezsin.
+- 1-2 wall doğru anda round'u tek başına değiştirir.
 
-**Wall ajanları:** Sage (wall), Phoenix (wall), Viper (wall), Harbor (wall).
+**Wall ajanları:** Sage, Phoenix, Viper, Harbor.
+
+---
 
 ### 7. MOVEMENT (Self-Play)
-Oyuncunun kendi pozisyonunu değiştirir. Escape veya entry için.
+Kendi pozisyonunu değiştirir. Kaçmak veya girmek için kullanırsın.
 
-**Kullanım prensipleri:**
-- Movement'ı entry için mi escape için mi, round başında karar ver.
-- Kullanıldıktan sonra oyuncu savunmasız — rakip bunu bilir.
+**Nasıl kullanırsın:**
+- Entry için mi kullanacaksın, kaçmak için mi — round başında karar ver, ortada kalma.
+- Kullandıktan sonra savunmasızsın — rakip bunu bilir ve bekliyordur.
 
 **Movement ajanları:** Jett (dash, updraft), Raze (satchel), Neon (sprint, slide), Yoru (teleport).
 
-### 8. TELEPORT / REPOSITION
-Haritanın uzak noktasına teleport. Unique info ve flank aracı.
+---
 
-**Kullanım prensipleri:**
-- Ses yapar — kontrol et, info yüzünden sahte kullanılabilir.
-- Teleport sonrası pozisyon hazırlıklı olmalı.
+### 8. TELEPORT / REPOSITION
+Haritanın uzak noktasına ışınlanırsın. Flank ve sahte hareket için kullanırsın.
+
+**Nasıl kullanırsın:**
+- Ses çıkarır — rakip duyarsa pozisyonun belli olur. Sahte kullanım da işe yarar.
+- Teleport sonrası vardığın yerde hazır ol — varır varmaz peek at.
 
 **Teleport ajanları:** Omen (shrouded step, teleport), Yoru (teleport), Chamber (rendezvous).
 
-### 9. HEAL / REVIVE
-Takım arkadaşını iyileştirir veya canlandırır. Özel durum utility.
+---
 
-**Kullanım prensipleri:**
-- Heal animasyonu bir vulnerability penceresidir — heal sırasında hareket kısıtlı, rakip swing atarsa ölüm garantidir.
-- Sage ult clutch için saklanır, erken kullanılmaz.
+### 9. HEAL / REVIVE
+Takım arkadaşını iyileştirir veya canlandırır.
+
+**Nasıl kullanırsın:**
+- Heal yaparken hareketin kısıtlı — rakip o an swing atarsa ölürsün. Güvenli açıda heal yap.
+- Sage ulti clutch için sakla — 2 kişi varken kullanma, 1v1 veya 1v2'de çıkar.
 
 **Heal/revive ajanları:** Sage, Skye (regrowth).
 
@@ -107,72 +122,72 @@ Takım arkadaşını iyileştirir veya canlandırır. Özel durum utility.
 
 ### ASCENT
 
-- **Omen — A Short + Mid smoke combo:** A split execute'un bel kemiği.
+- **Omen — A Short + Mid smoke combo:** A split girişinin bel kemiği.
 - **Killjoy — B Back turret + alarmbot Market:** B anchor'un lockdown kombinasyonu.
-- **Sova — Catwalk recon dart:** Round başı mid info.
-- **Brimstone — Heaven molly post-plant:** A plant için clean lineup.
-- **Breach — A Short fault line + flash:** Entry stun dominance.
+- **Sova — Catwalk recon dart:** Mid info için siteye girmeden önce at.
+- **Brimstone — Heaven molly post-plant:** A plant için temiz lineup.
+- **Breach — A Short fault line + flash:** Entry stun kombinasyonu.
 
 ### BIND
 
 - **Brimstone — A Lamps + Heaven smoke + Triple Box molly:** Bind'ın ikonik utility üçlüsü.
-- **Raze — B Long boombot:** Eşsiz info.
-- **Cypher — Teleporter tripwire + Hookah cam:** Bind'da Cypher kralı.
-- **Viper — B Long wall post-plant:** Retake window öldürür.
+- **Raze — B Long boombot:** Bedava info, rakibin pozisyonunu açar.
+- **Cypher — Teleporter tripwire + Hookah cam:** Bind'da Cypher bu ikiyle kilitler.
+- **Viper — B Long wall post-plant:** Retake penceresi kapanır.
 - **Skye — A Bath flash + Trailblazer B Long:** Dar koridor entry utility.
 
 ### HAVEN
 
-- **Omen — Garage shrouded step + B Heaven TP:** 3 site flex TP.
-- **Sova — A Long recon + C Long recon:** Round başı ikili info.
-- **Killjoy — B turret + alarmbot:** B anchor yalnız tutabilir.
-- **Cypher — Garage tripwire + mid cam:** Haven'ın info savunması.
-- **Astra — 3 site stars setup:** Map-wide smoke dominance.
+- **Omen — Garage shrouded step + B Heaven TP:** 3 site arasında flex TP.
+- **Sova — A Long recon + C Long recon:** Giriş öncesi ikili info.
+- **Killjoy — B turret + alarmbot:** B'yi yalnız tutar.
+- **Cypher — Garage tripwire + mid cam:** Haven info savunması.
+- **Astra — 3 site stars:** Map genelinde smoke kontrolü.
 
 ### SPLIT
 
-- **Sage — Mid wall:** Split'in ikonik utility'si.
-- **Breach — B Main flash + fault line:** Garanti B entry.
-- **Brimstone — A post-plant molly:** Split post-plant meta.
+- **Sage — Mid wall:** Split'in en belirleyici utility'si.
+- **Breach — B Main flash + fault line:** B entry garanti açılır.
+- **Brimstone — A post-plant molly:** Split post-plant meta lineup.
 - **Viper — Mid wall alternative + A Ramp orb:** Double controller.
-- **Killjoy — A lockdown:** Post-plant ult dominance.
+- **Killjoy — A lockdown:** Post-plant ult hakimiyeti.
 
 ### SUNSET
 
-- **Omen — Market TP:** Sunset'in en agresif Omen play'i.
-- **Cypher — Market tripwire + A Door cam:** B anchor için altın.
-- **Breach — A Elbow fault line:** Entry stun'lama.
-- **Brimstone — B Heaven molly:** Post-plant round çalma.
+- **Omen — Market TP:** Sunset'in en agresif Omen hamlesi.
+- **Cypher — Market tripwire + A Door cam:** B anchor için altın ikili.
+- **Breach — A Elbow fault line:** Entry stun açılımı.
+- **Brimstone — B Heaven molly:** Post-plant round çalar.
 - **Harbor — Market wave:** Double controller alan kontrolü.
 
 ### BREEZE
 
-- **Viper — A Tunnel wall + B Main wall:** Breeze'in long sightline'larını kes.
-- **Sova — Double dart mid:** Breeze info ağırlıklı map.
-- **Jett — Op dominance Ass position:** Breeze = Jett Op map'i.
-- **Harbor — Mid wave + B wave:** Breeze double controller için ideal.
-- **Cypher — Long sightline tripwire:** A Cave veya B Pyramid flank.
+- **Viper — A Tunnel wall + B Main wall:** Uzun sightline'ları keser.
+- **Sova — Double dart mid:** Breeze info ağırlıklı, dart atlamasını öğren.
+- **Jett — Ass pozisyonu Op:** Breeze uzun sightline'lar için Op map, Jett burada serbest.
+- **Harbor — Mid wave + B wave:** Double controller için ideal map.
+- **Cypher — Long sightline tripwire:** A Cave veya B Pyramid flank tutma.
 
 ### ICEBOX
 
-- **Viper — A wall + B wall:** Icebox meta yaratıcısı.
-- **Sage — B wall:** B execute için belirleyici.
-- **Sova — Dart mid + site recon:** Icebox info + damage.
-- **Killjoy — A anchor lockdown:** Icebox A site dominance.
-- **Harbor — Mid + site wave:** Double wall comp.
+- **Viper — A wall + B wall:** Icebox meta'sını Viper yazdı.
+- **Sage — B wall:** B girişini açar.
+- **Sova — Dart mid + site recon:** Info + hasar kombinasyonu.
+- **Killjoy — A anchor lockdown:** A site tek başına tutar.
+- **Harbor — Mid + site wave:** Double wall komp için ideal.
 
 ### LOTUS
 
 - **Astra — 3 site stars:** Lotus = Astra map'i.
 - **Omen — C Main smoke + B flex:** Single controller alternatif.
-- **Skye — B Main flash + dog:** Info + entry.
+- **Skye — B Main flash + dog:** Info + entry kombine.
 - **Killjoy — C anchor lockdown:** Lotus C için ideal.
-- **Raze — B execute satchel:** Close range B.
+- **Raze — B satchel girişi:** Yakın mesafe B girişi.
 
 ### PEARL
 
 - **Harbor — Mid wave:** Pearl post-plant meta.
-- **Astra — Mid stars + A/B flex:** Smoke dominance.
+- **Astra — Mid stars + A/B flex:** Smoke kontrolü.
 - **Fade — A prowler + B haunt:** Pearl info.
 - **Chamber — Mid rendezvous:** Pearl Op oyunu.
 - **Killjoy — B anchor:** Pearl B için ideal.
@@ -181,23 +196,23 @@ Takım arkadaşını iyileştirir veya canlandırır. Özel durum utility.
 
 - **Breach — B Main fault line:** Fracture entry stun.
 - **Brimstone — A/B molly post-plant:** Fracture lineup king.
-- **Neon — Split execute sprint:** Fracture spawn avantajı.
+- **Neon — Split girişi sprint:** Spawn mesafesini koş, rakipten önce koru.
 - **Sova — Dart arcade info:** Mid info.
 - **Killjoy — A anchor:** Fracture A lockdown.
 
 ### ABYSS
 
-- **Breach — Edge aftershock:** Abyss'in imza play'i.
-- **Sage — Bridge wall:** Map control.
-- **Raze — Bridge boombot:** Info bedava.
-- **Omen — Edge TP:** Unexpected angle.
-- **Killjoy — A turret + alarmbot Bridge:** Abyss anchor ideal.
+- **Breach — Edge aftershock:** Abyss'in imza hamlesi.
+- **Sage — Bridge wall:** Map kontrolü.
+- **Raze — Bridge boombot:** Bedava info.
+- **Omen — Edge TP:** Beklenmedik açı.
+- **Killjoy — A turret + alarmbot Bridge:** Abyss anchor kombinasyonu.
 
 ### CORRODE
 
-- **Viper — Corridor wall:** Dar koridor kapatma.
-- **Omen — Double smoke:** Corrode smoke dominance.
-- **Breach — Stun koridor:** Dar yer stun round bitirir.
+- **Viper — Corridor wall:** Dar koridoru kapatır.
+- **Omen — Double smoke:** Corrode smoke kontrolü.
+- **Breach — Stun koridor:** Dar yerde stun round bitirir.
 - **Fade — Prowler + haunt:** Corrode info için ideal.
 - **Killjoy — Lockdown:** Corrode post-plant retake.
 
@@ -205,53 +220,55 @@ Takım arkadaşını iyileştirir veya canlandırır. Özel durum utility.
 
 ## LINEUP PRENSİPLERİ — Landmark Referanslı
 
-Lineup = sabit pozisyondan sabit hedef bölgeye utility atma. İyi lineup oyuncusu map'te her plant spot'una göre lineup'ı ezberler.
+Lineup = sabit noktadan sabit plant spot'una utility atmak. Her plant spot için en az bir lineup öğren.
 
-### Lineup'ları Öğrenme Disiplini
+### Lineup'ları Nasıl Öğrenirsin
 
-- **Landmark referansı şart.** "Duvarın sağ kenarı", "çerçevenin üstü", "lambanın altı" — koordinat değil landmark.
-- **Kendi mini-haritasını kur.** Hangi spot'tan hangi landmark'a attığın senin bilgin olmalı.
-- **Bir map'te 4-6 belirleyici lineup yeter.** Her plant spot için bir tane + post-plant molly + en sık retake pozisyonu.
-- **Lineup'ı kullan ama tek yol yapma.** Lineup fail ederse alternative peek utility'si de gerekli.
+- **Landmark referansı kullan.** "Duvarın sağ kenarı", "çerçevenin üstü", "lambanın altı" — koordinat değil görsel işaret.
+- **Kendi haritanı kur.** Hangi noktadan hangi landmark'a attığını kendine not al.
+- **Map başına 4-6 lineup öğren.** Her plant spot için bir tane + post-plant molly + en sık retake pozisyonu.
+- **Tek lineup'a bağlanma.** O lineup tutmazsa elinde başka bir utility olsun.
 
-### Lineup Ajanları ve Kullanım Alanları
+### Lineup Ajanları
 
-**Brimstone:** Molly lineup'ı çok sık kullanılır. Plant'ten sonra her post-plant'te bir molly. Brim lineup meta'sında kral.
+**Brimstone:** Post-plant molly lineup'ın kralı. Spike kurulunca at, defuse ettiremezsin.
 
-**Viper:** Snake bite + orb. Snake bite molly benzeri ama decay + damage. Orb post-plant smoke olarak veya ult ile eşleştirme.
+**Viper:** Snake bite + orb kombinasyonu. Snake bite hasar + yavaşlatma verir. Orb post-plant smoke olarak veya ult ile.
 
-**Sova:** Shock bolt lineup + recon bolt. Shock damage verir, recon info. Sova lineup'ları hem saldırı hem savunma için.
+**Sova:** Shock bolt + recon bolt. Shock hasar verir, recon nerede olduklarını gösterir. Hem saldırı hem savunma lineup'ı var.
 
-**KAY/O:** Molly + flash lineup. Molly post-plant, flash entry için map-specific.
+**KAY/O:** Molly post-plant, flash entry. Map'e göre lineup öğren.
 
 ---
 
 ## UTILITY EKONOMİSİ
 
-Utility sınırlı kaynaktır. Her ajanın round başında 2-4 utility charge'ı var. Bunları nasıl harcadığın round'u belirler.
+Her ajanın round başında sınırlı utility charge'ı var. Nasıl harcadığın round'u belirler.
 
-### Utility Dağılımı — Tam Buy Round
+### Tam Buy Round
 
-- **Execute için %50-60:** Smoke, flash, molly site'a girerken.
-- **Post-plant için %30-40:** Molly, smoke, damage utility plant sonrası.
-- **Acil durum için %10:** Her oyuncuda 1 utility acil durum için saklı.
+- **Siteye giriş için harca:** Smoke, flash, molly — site'a girerken yakarsın.
+- **Post-plant için sakla:** En az 1 damage utility plant sonrasına.
+- **1 utility rotaya karşı:** Rakip mid'den çıkarsa veya flank gelirse o utility'yi yakarsın.
 
-### Utility Dağılımı — Eco/Force Round
+### Eco / Force Round
 
-- **Execute için %80:** Force'ta utility'yi beklemezsin, tamamını harca.
-- **Post-plant için %20:** Sadece en belirleyici damage utility.
-- **Ult ekonomisi:** Force round'da ult kazanmak için kill + utility.
+- **Tamamını siteye girişe harca:** Force'ta utility beklemek yoktur, içeri girerken tüketirsin.
+- **Sadece en belirleyici damage utility post-plant için:** Geri kalanı girişe.
+- **Ult için kill + utility:** Force round'da ult şarj etme fırsatın var, öldür ve utility kullan.
 
-### Utility Dağılımı — Savunma Round
+### Savunma Round
 
-- **Round başı info için %20:** Info utility bir kere.
-- **Site tutma için %50:** Hold pozisyonu için stall utility.
-- **Retake için %30:** Plant olduktan sonra retake için.
+- **Giriş öncesi info:** Info utility bir kere at, defender nerede öğren.
+- **Site tutma:** Hold pozisyonu için stall utility.
+- **Retake:** Spike kurulduktan sonra retake için en az 1 utility kalsın.
+
+---
 
 ## RANK NOTU
 
-**Gold-Plat:** Utility'yi unutuyorsun, ability'yi round boyunca elinde tutuyorsun. Utility kullanılmayan utility boş yere vardır. Her round tüm utility'yi harca — fazlası save olsun, harcama da çöp utility.
+**Gold-Plat:** Utility'yi round boyunca elinde tutuyorsun. Round bitti, ability doluydu — bu boşa harcamak. Her round tüm utility'yi kullan. Harcamadan biten utility çöptür.
 
-**Diamond-Ascendant:** Utility'yi kullanıyorsun ama timing zayıf. Flash entry'den önce patlamalı, molly defuse sesiyle atılmalı, smoke entry'nin hemen önünde. Timing disiplini utility değerini ikiye katlar.
+**Diamond-Ascendant:** Utility kullanıyorsun ama zamanlama zayıf. Flash, arkadaşın peek atmadan patlamalı. Molly, defuse sesi duyulunca atılmalı. Smoke, arkadaşın içinden geçmeden önce orada olmalı. Bu üç şeyi düzeltirsen utility değerin ikiye katlanır.
 
-**Immortal-Radiant:** Utility ekonomisi ve lineup mastery. Her map'te 5-10 lineup ezberi + timing mükemmelliği. Anti-utility play — rakibin utility'sini okuyup kendi utility'ni ona karşı kullanma.
+**Immortal-Radiant:** Utility ekonomisi ve lineup mastery. Her map'te 5-10 lineup ezberi + rakibin utility'sini okuyup kendi utility'ni ona göre kullan. Rakip smoke attıysa arkasına molly at. Rakip flash attıysa duvara dön, peek etme. Rakibin her utility'sine senin utility'nle karşılık var.

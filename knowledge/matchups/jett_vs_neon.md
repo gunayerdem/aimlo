@@ -9,107 +9,122 @@ tags: [matchup, jett, neon, duelist_vs_duelist]
 
 ## 1. Matchup Özü
 
-Jett ve Neon iki farklı hız duelist'i. Jett explosive mobility — Tailwind dash anlık patlayıcı hareket, tek yönde sıçrama. Neon sustained mobility — High Gear sprint sürekli koşma hızı, Fast Lane iki smoke duvarı hızlı geçiş için. Jett "anlık hızlan, anlık dur", Neon "sürekli hızlı kal, sürekli hareket et". İki mobility felsefesi aynı rolde karşılaştığında koridor dinamiği değişir: Jett entry pencereyi keskin açıp kapatır, Neon entry pencereyi uzun açar. Pro okuma: Jett tek-kill sonra kaçış, Neon multi-kill koşu. Round içinde hangi mobility haritanın layout'una uyuyorsa o karakter rolü dolduruyor. Jett aim silahı, Neon utility silahı ama ikisi de mobility-driven.
+Jett ve Neon ikisi de hızlı duelist ama hız tarzları tamamen farklı. Jett bir noktada patlar, durur — dash tek yönde, tek seferlik. Neon sürekli koşar — sprint bitmez, Fast Lane iki duman duvarı arasından geçer. Jett girişi keskin açar, hemen kapatır. Neon girişi uzun açık tutar, koşarken ilerler. Haritada uzun açık alanlar varsa Jett daha tehlikeli. Dar koridorlar varsa Neon daha tehlikeli. Hepsi bu.
 
 ## 2. Kim Avantajlı?
 
-Patch 9.x'te Neon Jett ile yakın meta tier'da. Neon buff serisinden sonra (2023) meta duelist. Jett klasik S tier. Harita dağılımı: Jett geniş alan + uzun sightline haritalarında üstte (Breeze, Icebox, Haven). Neon dar koridor + vertical haritalarda üstte (Split, Fracture, Sunset, Bind). Meta pick order: Jett Op-carry comp, Neon entry-carry comp. İki karakter birbirinin alternatifi değil, farklı comp rollerine yerleşirler. Double duelist comp'larda iki karakter aynı takımda görülebilir (entry + sightline). Karşı takımda karşılaştıklarında harita layout'u belirleyici.
+Haritaya göre değişir:
+
+- **Jett:** Breeze, Ascent, Haven, Icebox, Abyss — uzun açılar, yüksek noktalar var.
+- **Neon:** Split, Fracture, Sunset, Bind — dar koridorlar, Fast Lane girişe uyuyor.
+- **Nötr:** Lotus, Pearl.
+
+Karşı takımda Neon varsa dar haritada Neon'un elinde; geniş haritada senin elinde. Buna göre oyna.
 
 ## 3. Key Düellolar
 
-**IF** Neon High Gear sprint aktif, Fast Lane duvar arkasından koşuyor
-**MEANING** Neon sürekli hareket halinde, duvar smoke arkasından hedef okunamıyor — Jett Op angle'ı Neon'un hareket hattını yakalayamaz
-**COUNTER** Jett Op angle'ı Fast Lane duvar sonuna bakmalı, Neon'un çıkış noktası bilinirse pre-aim shot. Fast Lane çıkış sesi var
-**WHY** Neon Fast Lane içinde hızlı ama çıkış noktası sabit. Jett Op yeri bilirse çıkışta kill alır, Neon'un hızı duvarın içinde çalışır, dışında zayıflar.
+**IF** Neon sprint ile Fast Lane duvarları arasından koşarak geliyor
+**MEANING** Duvar içinde Neon'u göremezsin, bakış açın duvar çıkışını yakalayamaz
+**COUNTER** Fast Lane duvar sonuna bak — Neon çıkış noktası sabittir. Çıkış sesini duyduğunda pre-aim'in hazır olsun
+**WHY** Neon duvar içinde hızlıdır ama duvardan çıkınca hızı kesilir. Çıkış noktasını bilirsen çıkışta vurursun.
 
 ---
 
-**IF** Jett dash ile entry aldı, Neon High Gear ile trade tradin için koşuyor
-**MEANING** Trade hattı — Neon hızı dash trade için hızlı, Jett entry sonrası Neon yakalanma riski
-**COUNTER** Jett entry sonrası dash cooldown'da ise Neon trade hattı kısa. Dash hazırsa Jett kaçış pencere açık
-**WHY** Trade ekonomisi mesafe ve hız üzerinden çalışır. Neon trade için ideal hız kaynağı — Jett entry yapan ekip için tamamlayıcı trader.
+**IF** Jett dash ile girdi, Neon sprint ile trade için koşuyor
+**MEANING** Neon trade hattı kısa — sprint onu hızlı yaklaştırır. Jett dash bittiyse Jett sabit kalır
+**COUNTER** Jett olarak dash bittikten sonra açıkta durma — Neon trade geliyorsa kaç ya da pozisyon değiştir. Dash hazırsa bitir, değilse çekil
+**WHY** Dash bitmişken Jett savunmasızdır. Neon sprint ile bunu anında sömürür.
 
 ---
 
-**IF** Neon Relay Bolt stun + flash ekonomisi, Jett pasif Op hold
-**MEANING** Neon disrupt stun Jett'in Op hold'unu kırar, Jett stun altında shot alamaz
-**COUNTER** Jett Op angle'ında stun sesine hazırlıklı olmalı, stun duyulursa angle'dan çekil. Stun atılan yer pre-known
-**WHY** Neon'un disrupt kapasitesi Jett'in pasif hold'una zarardır. Jett dash ile stun'dan kaçabilir ama dash cooldown'da ise stun'da kalır.
+**IF** Neon Relay Bolt atıyor — stun + kör
+**MEANING** Stun vurursa pozisyonun açılır, Jett'in sniper'ı işe yaramaz
+**COUNTER** Relay Bolt sesi duyduğunda açıdan çekil. Neon stun'u geniş ama eğri değil — atacağı yeri okursun
+**WHY** Dash bitmişken stun yersen kör + hareketsiz kalırsın. Dash hazırsa stun'dan kaçabilirsin ama o ana kadar zaten hasar aldın.
 
 ---
 
-**IF** Jett Op aldı, Neon Overdrive ult aktive (sürekli damage + unlimited sprint)
-**MEANING** Neon ult hızı normal hızdan daha yüksek, Jett dash avantajı Neon ult hızı karşısında azalır
-**COUNTER** Jett Op ile uzak mesafe tutmalı — Neon ult close range silahı, uzak mesafe Jett lehine kalır
-**WHY** Neon Overdrive kısa süreli ama yoğun. Jett'in Op rolü uzak mesafe, ult yakın mesafe. İki karakterin mesafe tercihleri ult'ta da farklı.
+**IF** Neon Overdrive açtı ve sana doğru koşuyor
+**MEANING** Overdrive sprint normal hızdan çok daha hızlı — Jett dash avantajı Neon ult hızına yetişemez yakın mesafede
+**COUNTER** Uzak mesafeye çekil — Overdrive yakın mesafe silahı. Uzakta Jett lehine kalır
+**WHY** Neon ult yakına geldikçe güçlü, uzakta zayıflar. Mesafeyi sen belirle.
 
 ---
 
-**IF** Neon Fast Lane ile iki oyunculu smoke koridor oluşturdu
-**MEANING** Fast Lane iki duvar smoke hattı — içinden geçen Neon takımı görünmez, Jett bu koridoru keşfedemez
-**COUNTER** Jett Cloudburst ile Fast Lane çıkışını kendi smoke'u ile kapatabilir, ama smoke üstünden smoke verimsiz. Alternatif: Jett Updraft ile koridor üstüne çıkar
-**WHY** Fast Lane smoke duvar, yer seviyesi görüş engeli. Vertical görüş hala mevcut. Jett Updraft Fast Lane üstünden info alır.
+**IF** Neon Fast Lane ile iki kişilik koridor kurdu, site girişi yapıyorlar
+**MEANING** İki duvar arasındaki koridoru göremezsin — giriş hattı smoke içinde
+**COUNTER** Fast Lane çıkışını Cloudburst ile kapat ya da Updraft ile duman üstüne çık — çıkış noktası sabittir, pre-aim çalışır
+**WHY** Fast Lane yerde görüşü keser ama üstten açık. Updraft ile üste çıkarsın, duvar biter bitmez çıkışta hazırsın.
 
 ---
 
-**IF** Jett Blade Storm ult aktif, Neon close range ile yakın mesafeye geldi
-**MEANING** İki close range silahı çarpışıyor — Blade Storm throwing knife damage, Neon High Gear ile yakın mesafe
-**COUNTER** Jett Blade Storm right-click burst damage close range'de Neon'u tek atımda bitirir. Neon melee range'de savunmasız
-**WHY** Close range Blade Storm Jett'in en güçlü silahı. Neon close range mobilite avantajlı ama single hit ekonomisi Jett'te.
+**IF** Neon yakın mesafede Jett'e girdi, Jett Blade Storm ult açık
+**MEANING** Yakın mesafede Blade Storm sağ tık burst tek atımda biter
+**COUNTER** Sağ tıkla — burst modu yakın mesafede Neon'u anında öldürür. Sol tık atma, burst kullan
+**WHY** Neon yakında hızlı ama Blade Storm burst hasarı büyük. Neon yakın mesafeye girince avantajı sana geçer.
 
 ---
 
-**IF** Neon Fast Lane ile site içine iki oyuncu entry yaptı
-**MEANING** Neon + ikinci oyuncu Fast Lane içinden sabit hızlı giriş, entry için ideal kurulum
-**COUNTER** Jett Fast Lane çıkış noktasını pre-aim + pre-smoke (Cloudburst) kullanarak savunur. Entry hattı bilinir
-**WHY** Fast Lane tek bir koridor yaratır, giriş hattı önceden bilinir. Pre-aim çıkış shot için ideal, Neon hızı çıkışta durduğunda etkisiz.
+**IF** Neon Fast Lane içinden iki kişi site'e giriyor
+**MEANING** Giriş hattı tek koridor — çıkış noktası bilinir
+**COUNTER** Çıkış noktasına Cloudburst at, üstüne pre-aim yap. Fast Lane biter bitmez çıkışı gör
+**WHY** Fast Lane sabit çizgide gider. Neon çıkışta yavaşlar — o an senin anın.
 
-## 4. Utility Takası
+## 4. Utility Farkı
 
-Jett utility: Tailwind (dash), Updraft (vertical), Cloudburst (smoke x3), Blade Storm (ult). Neon utility: High Gear (sprint), Fast Lane (duvar smoke x2), Relay Bolt (stun + flash), Overdrive (ult, damage + sprint). Karşılaştırma: Mobility — Jett anlık (dash), Neon sürekli (sprint). İki mobility farklı işlevde. Smoke — Jett noktasal (Cloudburst), Neon hatlı (Fast Lane). Neon smoke'u hatlı, Jett smoke'u nokta. Hatlı smoke koridor kontrolü için, noktasal smoke angle kontrolü için. Disrupt — Jett yok, Neon Relay Bolt (stun + flash). Disrupt kategorisi Neon lehine tek yönlü. Damage — Jett yok (Blade Storm ult bağımlı), Neon Relay Bolt + Overdrive.
+**Jett:** Dash (anlık kaçış/giriş), Updraft (yükseğe çıkma), Cloudburst (3 küçük duman), Blade Storm (ult — fırlatma bıçağı).
+**Neon:** Sprint (sürekli hız), Fast Lane (iki çizgi duman), Relay Bolt (stun + kör), Overdrive (ult — hız + hasar).
 
-Ult karşılaştırması: Blade Storm silah ult'u (close range damage), Overdrive team rush ult'u (hız + damage). Blade Storm ekonomi ult, Overdrive execute ult. Farklı ult değer kategorileri. Jett eco round ult, Neon execute round ult.
+Önemli farklar:
+- **Hız:** Jett tek seferde, Neon sürekli. İkisi farklı işlevde — Jett kaçış/giriş, Neon koşu.
+- **Duman:** Jett'inki noktasal (açı kapatır), Neon'unki çizgisel (koridor yaratır). Karşılaştırma yok — farklı işler.
+- **Stun/Kör:** Neon'da var, Jett'te yok. Bu tek yönlü — Neon Jett'i bozabilir ama Jett Neon'u duman dışında bozmaz.
+- **Ult:** Blade Storm ekonomik — az orb, bireysel öldürme. Overdrive koşma — takım girişini hızlandırır. Biri ekonomik ult, biri takım girişi.
 
-Ekonomi: İki karakter de cooldown tabanlı. Jett her round full utility, Neon her round full utility. Takas sonucu: Neon utility çeşitliliği Jett'ten fazla (stun + flash + smoke), Jett aim ekonomisi ve vertical mobility Neon'dan fazla.
+Neon utility çeşitliliği Jett'ten fazla. Jett dash ve sniper çıkışı Neon'dan fazla.
 
-## 5. Map Bazlı Değişim
+## 5. Harita Bazlı Değişim
 
-**Breeze:** Jett favored. Uzun sightline Jett Op için.
+**Breeze:** Jett — uzun açılar sniper için.
 
-**Ascent:** Jett favored. Mid ve A Short için Jett dash.
+**Ascent:** Jett — Mid ve A Short girişi dash ile.
 
-**Haven:** Jett favored. Üç site Jett için.
+**Haven:** Jett — üç site uzun koridorlar.
 
-**Icebox:** Jett favored. Rafters + Mid Kitchen Jett için.
+**Icebox:** Jett — yüksek noktalar Updraft ile.
 
-**Split:** Neon favored. B Main ve A Ramps dar koridor Neon Fast Lane için ideal. Neon Split meta duelist.
+**Split:** Neon — B Main ve A Ramp dar, Fast Lane koridor için biçilmiş kaftan.
 
-**Fracture:** Neon favored. İki taraflı attack Neon Fast Lane için ideal.
+**Fracture:** Neon — çift taraflı giriş, Fast Lane her iki tarafta çalışır.
 
-**Sunset:** Neon favored. Dar yapı Neon için.
+**Sunset:** Neon — dar yapı, sprint avantajlı.
 
-**Bind:** Neon favored. Hookah ve A Short Neon sprint için.
+**Bind:** Neon — Hookah ve A Short sprint ile geçilir.
 
-**Lotus:** Nötr. İki karakter de oynanır.
+**Lotus:** Nötr.
 
 **Pearl:** Nötr.
 
-**Abyss:** Jett favored. Vertical Updraft için.
+**Abyss:** Jett — yüksek noktalar Updraft için.
 
-## 6. Flip Moment'ler
+## 6. Dönüm Noktaları
 
-1. **Fast Lane koridor.** Neon Fast Lane ile iki oyunculu koridor kurduğunda Jett Op angle'ı körleşir. Jett Fast Lane'e cevap vermek için Updraft vertical info gerekir.
+1. **Fast Lane kuruldu.** Neon iki oyuncuyla Fast Lane koridor açarsa Jett'in açısı kapanır. Updraft ile üstüne çık ya da çıkışa pre-aim yap.
 
-2. **Dash cooldown Jett.** Jett dash cooldown'da ise Neon High Gear ile trade hattı kısa, Jett savunmasız.
+2. **Dash bitti.** Dash bitmişken Neon sprint ile geliyorsa trade hattı kısa — Jett savunmasız. Açıkta durma.
 
-3. **Overdrive ult close range.** Neon ult close range sprint + damage. Jett dash cooldown'da ise ult dönemi savunmasız.
+3. **Overdrive yakın mesafede.** Neon ult açıkken yakına girerse Jett zor. Uzağa çekil, mesafeyi koru.
 
-4. **Blade Storm close range.** Jett ult close range, Neon yakın mesafede savunmasız. Close range mesafesi Blade Storm için ideal.
+4. **Blade Storm yakın mesafe.** Neon yakına girdi ama Jett ult açıksa — burst kullan. Neon bu durumda savunmasız.
 
-5. **Haritanın fiziksel yapısı.** Harita layout'u her iki karakter için kesin avantaj tanımlar. Split/Fracture/Sunset Neon lehine, Breeze/Ascent/Icebox Jett lehine.
+5. **Harita seni seçer.** Split veya Fracture oynuyorsanız Neon doğal olarak üstte başlar. Bunu bilip ona göre pozisyon al — Neon'un Fast Lane'i her koridorda aynı işe yarar.
 
-## 7. Pro Coach Notları
+## 7. Koç Notları
 
-Pro sahnede iki karakter de meta. Jett Op-carry comp, Neon entry-carry comp. Comp seçimi harita bazında. Çift duelist comp'ta iki karakter aynı takımda görülebilir. Koçluk ipucu: Jett oyuncusu Neon Fast Lane ses sinyalini ezberlemeli — Fast Lane duvar yerleşimi ses verir. Neon oyuncusu Jett Op angle'larını ezberlemeli, Fast Lane koridoru Jett Op angle'ını keserek entry açar.
+Jett oynuyorsan: Neon'un Fast Lane ses efektini tanı — duvar kurulunca ses çıkar. Sesi duyar duymaz Fast Lane çıkış noktasına bak. Neon çıkışta yavaşlar, o an vurursun.
 
-Yaygın pro hata: Neon oyuncusu High Gear sprint'i savaşmadan kullanır, sprint içinde aim azalır. Doğru: sprint pozisyon için, savaş için değil — sprint sonrası pozisyona girer, sonra aim. İkinci hata: Jett oyuncusu Neon karşısında Op angle'ında pasif bekler. Doğru: Neon Fast Lane tehditi varsa Jett pozisyonu değiştirir. Üçüncü hata: Relay Bolt flash + stun Neon için tek atış. Doğru: stun ve flash sıralı kullanım — stun ile hedef hareketsiz, flash ile kör.
+Neon oynuyorsan: Sprint savaş için değil, pozisyon için. Sprint ile yerine gel, sprint bitince dur ve vur. Sprint içinde ateş etme — isabet düşer. Jett Updraft ile duman üstüne çıkıyorsa Fast Lane'ini kısa tut, çıkış noktasını değiştir.
+
+Relay Bolt kullanımı: Stun önce git — hedef yavaşlar. Flash sonra git — kör kalır. Ters sıra işe yaramaz.
+
+Jett Neon karşısında pasif açı tutma — Neon Fast Lane ile açını doğrudan kapatır. Açını değiştir ya da Updraft ile üste geç.

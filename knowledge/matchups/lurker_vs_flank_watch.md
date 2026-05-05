@@ -9,113 +9,119 @@ tags: [matchup, lurker, flank-watch, role, tactical]
 
 ## 1. Matchup Özü
 
-Lurker saldırı tarafının takımından ayrılıp savunma arkasından map kontrolü + late round kill arayan solo oyuncu; flank watch savunma tarafının rotate sırasında arkasını kaplamak için bir oyuncuyu lurker hattında tutması. Matchup gizlilik ile ses disiplini arasında kurulu — lurker ayak sesini, silah sesini ve utility patlamasını saklamaya çalışır, flank watch oyuncusu bu üç sesi avlar. Round'un geç penceresinde iki taraf da bilgi peşinde.
+Lurker saldırı takımından kopuk, savunma arkasını tehdit eden solo oyuncu. Flank watch ise savunma tarafından birinin lurker hattını tutmasıdır — rotate olmadan. Bu matchup ses üzerine kurulu: lurker ayak sesi, silah sesi, util patlamasını gizler; flank watch bu üç sesi avlar.
 
 ## 2. Hangi Taraf Avantajlı
 
 **Lurker lehine:**
-- Saldırı tarafı hedef site'a 4 oyuncu ile baskı kurdu — savunma rotate'i zorla çekildi, lurker arkada boşluk
-- Flank watch oyuncusu rotate'e döndüyse — lurker'ın hattı boş
-- Lurker agent'ı bilgi araçlı (Chamber trademark, Cypher camera, Yoru clone) — pasif bilgi avantajı
-- Savunma tarafında flank watch rolü tanımsız — rotate kararı takım içinde koordinasyonsuz
-- Lurker round 3-4'te savunma patterni okudu — hangi oyuncunun rotate'e kaçtığını biliyor
+- 4 takım arkadaşın siteye baskı kurdu — savunma rotate çekildi, lurker hattı boş
+- Flank watch rotate'e döndüyse — lurker arkada serbest
+- Lurker bilen bir agent oynadın (Chamber trademark, Cypher camera, Yoru clone) — pasif bilgi kazanıyorsun
+- Savunma tarafında kimse flank watch rolünü üstlenmediyse — lurker hattını kimse tutmuyor
 
 **Flank watch lehine:**
-- Savunma tarafında flank watch rolü sabit oyuncu tarafından üstlenilmiş — rotate kararı round başı belli
-- Savunma sentinel flank hattında (Cypress tripwire + camera, Killjoy alarmbot) — lurker sesi + trap ikilemi
-- Lurker agent'ı yakın mesafe duelist (Raze, Neon) — ayak sesi yüksek, gizlilik zor
-- Flank watch oyuncusu savunma silahını info rolüne çeviriyor (headset disiplini) — lurker ayak sesini duyuyor
-- Map dar koridor + ses yayılımı yüksek (Split, Bind) — lurker ses gizleme zor
+- Savunma sentinel tuzak kurdu flank hattına (Cypher trip, Killjoy alarmbot) — lurker sesi + tuzak çifti
+- Lurker yakın mesafe duelist oynuyorsa (Raze, Neon) — ayak sesi yüksek, gizlenemez
+- Split veya Bind gibi dar haritadasın — lurker ses gizleyemiyor
+- Flank watch rolü round başında kime ait belli — beklenmedik değil
 
 ## 3. Key Düellolar
 
-**IF** Lurker saldırı push sırasında map'in zıt tarafında pozisyon aldı
-**MEANING** Saldırı push savunma utility'sini çekti, lurker bilgi + silah değerinde
-**COUNTER** Savunma flank watch oyuncusu rotate etmeden lurker hattını tutmalı, push tarafına değil lurker tarafına tepki
-**WHY** Lurker'ın değeri savunma rotate penceresinden gelir. Rotate çekildiyse lurker hattı boş, flank watch rolü terkedilirse lurker round kazanır. Flank watch sadece pasif hold değil, aktif lurker avıdır.
+**IF** Lurker saldırı push sırasında haritanın zıt tarafında pozisyon aldı
+**MEANING** Saldırı push savunma utilini çekti, lurker hem bilgi hem silah değerinde
+**COUNTER** Flank watch rotate etme — lurker hattını bırakma, push tarafına koşma
+**WHY** Lurker'ın değeri savunma rotate açığından gelir. Rotate'e gidersen lurker hattı boş kalır, round biter.
 
 ---
 
-**IF** Flank watch oyuncusu lurker hattında ayak sesi duydu
-**MEANING** Lurker pozisyon değiştiriyor, flank watch ilk bilgi sahibidir
-**COUNTER** Lurker ayak sesini saklamak için walk tuşu basmalı. Silah drop'u + reload zamanlaması lurker için ses yönetimi
-**WHY** Ayak sesi lurker'ın en büyük zayıflığı. Lurker tanım gereği sessiz olmalı — ses verdiği an avantaj flank watch'a döner. Walk disiplini lurker için silah kadar değerli.
+**IF** Flank watch oynadığın hattı tutarken ayak sesi duydun
+**MEANING** Lurker pozisyon değiştiriyor, bilgi sende
+**COUNTER** Lurker olarak ayak sesini kesmek için walk bas. Silah drop + reload'u dikkatli zamanla
+**WHY** Ayak sesi lurker'ın en büyük açığı. Ses verdiğin an avantaj karşıya geçer.
 
 ---
 
-**IF** Lurker Chamber Trademark + headhunter ile pasif hold kuruyor
-**MEANING** Lurker hatta tripwire bilgi sağlar, headhunter bir-tap kill mekaniği
-**COUNTER** Flank watch oyuncusu Chamber Trademark sesini round başı işaretle, tripwire lokasyonu bilinirse lurker'ın savunma hattı çökertilir. Sova shock dart ile trademark sök
-**WHY** Chamber lurker meta'sı trademark + TP + headhunter üçlüsü ile kurulu. Üçlünün bir ayağı kırıldığında (trademark silindi, TP kırıldı) Chamber lurker'ı standart duelist'e dönüşür.
+**IF** Lurker Chamber Trademark + Headhunter ile pasif pozisyon kurdu
+**MEANING** Tripwire sana bilgi verir, Headhunter bir vuruşla öldürür
+**COUNTER** Flank watch olarak: Trademark sesini duyduğun an takıma söyle. Sova Shock Dart ile trademark'ı sök — Chamber'ın üç ayağından biri kırılırsa sıradan duelist'e döner
+**WHY** Chamber lurker'ı trademark + TP + Headhunter üçlüsüyle çalışır. Birini bozarsan geri kalanı zayıflar.
 
 ---
 
-**IF** Savunma flank watch oyuncusu hattı terketti, rotate'e gitti
-**MEANING** Lurker hattı boş, bilgi kaynağı yok. Saldırı tarafı lurker'a bilgi akıtır, flank watch ölmüş haldedir
-**COUNTER** Savunma takım içinde flank watch rolü sabit olmalı, rotate kararı takım kaptanından gelir. Solo flank watch kararı yanlıştır
-**WHY** Flank watch rolü takım disiplini. Solo karar rotate'i çeker ve flank hattını açar. Takım disiplini olmayan flank watch savunmayı lurker'a açar.
+**IF** Flank watch oyuncusu hattı bırakıp rotate'e gitti
+**MEANING** Lurker hattı boş, bilgi kesildi — saldırı takımı lurker'a akış sağlar
+**COUNTER** Flank watch rolü takım kararı — kendi kafana rotate etme. Savunma kaptanı söylemediyse hatta kal
+**WHY** Solo rotate flank hattını açar. Lurker bunu görür, round biter.
 
 ---
 
-**IF** Lurker late round'da 2v1 situation'a düştü (savunma tarafında 2 oyuncu, lurker tek)
-**MEANING** Lurker silah sayısal dezavantajda, crossfire'a açık
-**COUNTER** Lurker silah ekonomisi yerine utility kullanmalı — smoke içine gizlen, flash pop ile ayır, tek tek takas al
-**WHY** Lurker'ın değeri 1v1 değildir — lurker 2v1'i utility ile 2x 1v1'e çevirir. Utility olmadan lurker numbers disadvantage'da kaybeder, utility ile savunma koordinasyonunu böler.
+**IF** Lurker 2'ye 1 düştü — karşı tarafta iki düşman
+**MEANING** Sayı açığındasın, aynı anda gelirirlerse çapraz ateşe girersin
+**COUNTER** Util yak — smoke at içine gir, flash ile ayır, tek tek al
+**WHY** Lurker'ın değeri 1'e 1 değil. Util ile 2'ye 1'i iki ayrı 1'e 1'e bölersin. Util yoksa kaybedersin.
 
 ---
 
-**IF** Flank watch oyuncusu silah sesi + reload sesi yakaladı
-**MEANING** Lurker silah değişimi + shot yapıyor, pozisyon bilgi verdi
-**COUNTER** Lurker reload'u savunma ses penceresinde yapmamalı — savunma ses tarafı round'un ritmine göre değişir. Plant sırasında lurker reload güvenli
-**WHY** Ses round'un ritim göstergesi. Savunma sesi yoğunken reload güvenli, sessizken reload tehlike. Lurker ses takibi savunma ses takibinden daha hassas olmalı.
+**IF** Flank watch silah sesi + reload sesi yakaladı
+**MEANING** Lurker pozisyon verdi — flank watch bilgi sahibi
+**COUNTER** Lurker olarak reload'u sessiz anlarda yapma. Spike kurulurken reload güvenli — savunma sesi o an yoğun
+**WHY** Sessizlik içindeki ses konum verir. Savunma tarafı gürültülüyken reload; tam sessizlikte reload yapma.
 
 ---
 
-**IF** Lurker ult hazır (Omen From the Shadows, Chamber Tour de Force, Yoru Dimensional Drift)
-**MEANING** Lurker ult'u late round'da crossfire bozan silah, savunma trade zinciri kopar
-**COUNTER** Savunma lurker ult ekonomisini round 1'de işaretle, ult hazır round'da flank watch çiftlenir. İki oyuncu flank watch savunmasını yapar
-**WHY** Lurker ult ekonomisi savunma trade zincirini kırar. Tek flank watch ult karşısında yetmez, çift flank watch ult karşısında sayı dengesi kurar. Ult round'ları savunma tarafı için iki kat flank watch ister.
+**IF** Lurker ulti hazır (Omen From the Shadows, Chamber Tour de Force, Yoru Dimensional Drift)
+**MEANING** Ulti savunma takımını ayırır, çapraz ateş zinciri bozulur
+**COUNTER** Flank watch olarak: Lurker'ın ulti biriktirdiğini takıma söyle. O round flank hattına iki oyuncu koy
+**WHY** Tek flank watch ulti karşısında yetmez. İki flank watch ultiyi sayıyla karşılar.
 
-## 4. Utility/Kaynak Takası
+## 4. Util ve Kaynak Dengesi
 
-Lurker utility ekonomisi minimum — round başı 2-3 slot, çekirdek kombinasyon smoke + flash + silah bilgi aracı (Chamber trademark, Cypher camera). Flank watch utility ekonomisi savunmadan gelen utility — round başı 3-4 slot, savunma rolü gereği utility'yi round boyunca saklar. Ekonomik olarak lurker savunma kill'i ile utility kazanamaz (savunma utility'si oyuncunun üstünde değil, savunma ekonomisinde), flank watch lurker kill'i ile silah kazanır. Lurker ölümü savunma lehine silah drop, flank watch ölümü saldırı lehine silah drop + bilgi. Ult ekonomisi lurker agent'ına bağlı — Chamber headhunter ult bilgi + bir-tap, Yoru Dimensional Drift pasif gözlem + kill seçimi, Omen From the Shadows rotate + surprise. Flank watch agent'ı çoğu comp'ta sentinel — Cypher ult reveal, Killjoy ult detain. Bu ult ekonomisi lurker tarafında daha esnek, flank watch tarafında daha sabit. Round içinde hangi tarafın ult ekonomisi hazır ise matchup o tarafa açık.
+**Lurker:**
+- Elinde 2-3 util — smoke, flash, bilgi aracı (trademark, camera)
+- Öldüğünde savunmaya silah bırakırsın
+- Ult: Chamber tek vuruş + bilgi, Yoru görünmez + konum seçimi, Omen ışınlanma + sürpriz
 
-## 5. Map Bazlı Değişim
+**Flank watch:**
+- 3-4 util — savunma rolü gereği util'i round boyunca saklar
+- Lurker'ı öldürürse silah kazanır
+- Ult: Cypher açığa çıkarır, Killjoy durdurur — daha sabit ama güçlü
 
-**Bind (flank watch avantajlı):** TP ekonomisi lurker için yavaş, flank watch TP sesini yakalar. Lurker Bind'da ancak A Lamps off-angle'da değer üretir.
+Lurker ulti daha esnek, flank watch ulti daha dar ama etkili. Kimin ulti hazır olduğu o round'da avantajı belirler.
 
-**Haven (lurker avantajlı):** Üç site + Garage çoklu rotate hattı lurker için ideal. Flank watch Haven'da üç ayrı hat için yetmez.
+## 5. Haritaya Göre Değişim
 
-**Split (flank watch avantajlı):** Dar koridor + vertical ses yayılımı yüksek. Lurker ayak sesi Split'te kaçınılmaz, flank watch avantajlı.
+**Bind (flank watch avantajlı):** TP sesi yakalanır. Lurker sadece A Lamps gibi açı köşelerinde değer üretebilir.
 
-**Ascent (lurker avantajlı):** Mid + A Long + B Main çoklu hat lurker için uygun. Mid kontrol lurker için rotate hattı.
+**Haven (lurker avantajlı):** Üç site + Garage. Flank watch üç hattı tek başına tutamaz.
 
-**Icebox (lurker avantajlı):** Vertical + zipline pozisyon lurker için zengin. Flank watch zipline sesini yakalar ama lurker vertical pozisyon ile pencereleri kullanır.
+**Split (flank watch avantajlı):** Dar koridor, ses her yere yayılır. Lurker ayak sesini gizleyemez.
 
-**Breeze (dengeli):** Uzun sightline lurker için iki yönlü — bilgi hattı uzun ama flank watch pozisyonu da uzak görür. Lurker Op ile pozisyon kurarsa avantajlı.
+**Ascent (lurker avantajlı):** Mid + A Long + B Main çoklu hat. Mid kontrolü lurker'a rotate hattı açar.
 
-**Lotus (lurker avantajlı):** Döner kapı lurker için gizlenme aracı. Flank watch döner kapı rotate'ini yakalayamaz.
+**Icebox (lurker avantajlı):** Dikey pozisyon + zipline. Lurker pencerelerden avantaj alır.
 
-**Sunset (dengeli):** A Main + B Market + Mid üç hat. Lurker round bazlı hat seçimi ile değer üretir.
+**Breeze (dengeli):** Uzun görüş hatları her iki tarafa da çalışır. Lurker Op oynarsa üstün.
 
-## 6. Flip Moment'ler
+**Lotus (lurker avantajlı):** Döner kapı gizlenme noktası. Flank watch döner kapı geçişini her zaman yakalayamaz.
 
-**Flip 1 — Flank watch terk:** Flank watch oyuncusu rotate'e gittiyse lurker round kazanır. Flank watch hattı tuttuysa matchup dengeli.
+**Sunset (dengeli):** A Main + B Market + Mid. Lurker saldırı push hangi hatta yoğunlaştıysa zıt hatta geçer, değer üretir.
 
-**Flip 2 — Ayak sesi yakalama:** Flank watch ayak sesi yakaladıysa lurker avantajı silinir. Lurker walk disiplini ile ses vermedi ise avantaj lurker tarafında.
+## 6. Dönüm Noktaları
 
-**Flip 3 — Sayı dengesi:** Lurker 2v1'e düştüyse utility'ye bağımlı. Utility yoksa lurker ölür, utility varsa 2v1 1v1'e çevrilir.
+**Dönüm 1 — Flank watch hattı bıraktı:** Rotate gittiyse lurker kazanır. Hatta durduysa denge korunur.
 
-**Flip 4 — Ult ekonomisi:** Lurker ult hazır + flank watch ult boş → lurker tarafı. Tersi → flank watch tarafı.
+**Dönüm 2 — Ayak sesi yakalandı:** Ses geldiyse lurker avantajı biter. Walk bastıysan ve ses vermediysen avantaj sende.
 
-**Flip 5 — Map tipi:** Dar map flank watch lehine, açık/vertical map lurker lehine. Map pick'i matchup'ın yarısı.
+**Dönüm 3 — Sayı:** 2'ye 1 düştüysen util'e bağlısın. Util yoksa ölürsün.
 
-## 7. Pro Coach Notları + Sentinels Coach Test
+**Dönüm 4 — Ulti dengesi:** Lurker ulti hazır, flank watch ulti boşsa — lurker tarafı. Tersi — flank watch tarafı.
 
-Pro sahnede lurker rolü Chamber meta'sı döneminde zirveye ulaştı, Chamber nerf sonrası Yoru ve Omen lurker rolüne geçti. Sentinels Sacy Jett ile lurker pozisyonunu kullanıyor, Türk sahnesinde Fire Flux Turko Chamber lurker meta'sının temsilcisi. Pro koçluk açısı: lurker rolü oyuncu seçimi değil takım disiplini — lurker solo oynadığı halde takımla senkronizedir, lurker hattı takım push'unun ikinci perdesidir. Flank watch koçluğu: flank watch rolünü savunma kaptanı round başı atar, rotate kararı kaptanın işi değil savunma kaptanının işi. Solo flank watch terki round kaybının en sık sebebi pro seviyede.
+**Dönüm 5 — Harita:** Dar harita flank watch'a çalışır, açık ve dikey harita lurker'a çalışır.
 
-Pro istatistik: VCT maçlarında lurker kill'leri round toplam kill'lerin %15-20'si, pro seviyede lurker rolü ekonomik değeri yüksek. Rank seviyesinde Gold-Plat oyuncular lurker'ı "geri kalmış oyuncu" olarak yorumluyor, bu yanlış — lurker taktik karardır, pasif oyun değil.
+## 7. Koç Notu
 
-**Meta tier durumu:** Chamber Tier 2 lurker, Yoru Tier 1 lurker, Omen flex lurker. Flank watch rolü savunma sentinel + flex oyuncu tarafından üstlenilir.
+Lurker oynarken takımın siteye baskı kurmadan hareket etme — baskı yoksa savunma rotate etmez, lurker hattı boş değildir. Lurker'ı taktik seçim olarak oyna: push başladığı an zıt hatta geç, bilgi topla, fırsat çıkınca girişe geç.
 
-**Sentinels Coach Test:** "Lurker solo bir oyuncu değil, takımın beşinci perdesi. Flank watch pasif bir rol değil, savunmanın arka kapı bekçisi. İki taraf da round'un geç penceresinde bilgi avcısı — lurker bilgi gizler, flank watch bilgi arar. Hangi taraf ses ekonomisini doğru yönetiyorsa round'u kazanır. Ses olmadan bilgi yok, bilgi olmadan kill yok."
+Flank watch rolünü round başında takım içinde netleştir — kim tutacak belli olmalı. Savunma kaptanı rotate kararını vermeden hattı bırakma. Solo rotate kararı verirsen flank hattı açılır, round gider.
+
+Ulti takibini her round yap: kimin ulti hazır olduğunu round başında takıma söyle. Lurker ulti hazırsa o round flank hattına iki oyuncu koy. Flank watch ulti hazırsa lurker o round hat geçişini geciktir.

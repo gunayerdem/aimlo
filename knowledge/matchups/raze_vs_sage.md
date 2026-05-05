@@ -11,111 +11,116 @@ tags: [matchup, raze, sage, duelist, sentinel]
 
 ## 1. Matchup Özü
 
-Raze nade + satchel ile Sage wall + slow orb kombosunu aşmaya çalışan explosive duelist, Sage ise wall ve slow orb ile Raze'in mobilite + damage kimliğini yavaşlatan defensive anchor. Matchup Sage'in wall timing'i ile Raze'in nade ekonomisinin takasını test eder.
+Raze, nade + satchel ile Sage'in wall + slow orb savunmasını kırmaya çalışır. Sen Sage oynuyorsan wall ve slow orb ile Raze'in hızını ve yakın mesafe hasarını boğarsın. Sen kazanmak istiyorsan: Raze oynuyorken wall'ın neresine nade atacağını bil. Sage wall'ı nade yönüne göre değil, kaçış yoluna göre kurar.
 
 ## 2. Kim Avantajlı?
 
-**Raze lehine durumlar:**
-- Close-range site'larda (Bind Hookah, Split B Main, Sunset A) — nade Sage'in wall arkası pozisyonunu damage alanıyla döver, wall wall arkasındaki Sage'i Raze nade alanından korumaz
-- Sage ult cooldown'dayken — Resurrection olmadan Sage'in trade değeri düşer
-- Raze paintshell ile wall üstüne damage — paintshell cluster wall üstü area denial kurar, wall'un arkasındaki Sage pozisyon değiştirmek zorunda
-- Raze ult hazır (Showstopper) — Showstopper Sage'i wall'ın arkasında bile öldürür (duvar delmez ama wall'u yıkıp sonra kill)
+**Raze lehine:**
+- Yakın mesafe sitelerde (Bind Hookah, Split B Main, Sunset A) — nade Sage'in wall arkasını temizler, wall hasar engeli değil
+- Sage ulti bekliyorken — Resurrection hazır değilse Sage trade yaptırmaz
+- Raze nade wall üstüne giderse — Sage pozisyon değiştirmek zorunda kalır
+- Raze ulti (Showstopper) hazırsa — wall'u yıkıp arkasındaki Sage'i de öldürür
 
-**Sage lehine durumlar:**
-- Uzun sightline site'larda (Breeze A, Icebox Mid) — Sage wall uzun açıda görüş engeli, Raze nade range'i sınırlı
-- Sage wall dar choke'ta kurulmuş — Raze dash yok, Raze sadece satchel ile wall'ı atlayabilir, satchel harcadıysa ikinci push aracı yok
-- Sage slow orb Raze'in entry hattına — slow mobility kaybı Raze'in satchel bile etkisiz hale getirir
-- Sage post-plant wall ile defuse koridorunu kapattığında — Raze nade wall'u yıkamaz, wall'un arkasına nade atmak lineup gerektirir
+**Sage lehine:**
+- Uzun açılı haritalarda (Breeze A, Icebox Mid) — Sage wall görüşü keser, Raze nade o noktaya ulaşamaz
+- Sage wall dar girişi kapattığında ve Raze satchel harcadıysa — ikinci giriş aracı yok, Raze sıkışır
+- Slow orb Raze'in giriş hattına düştüyse — satchel slow içinde başlarsa Raze hedefe ulaşamaz
+- Sage post-plant wall ile defuse koridorunu kapattığında — Raze nade lineup'ı olmadan duvarı atlayamaz
 
-**Balanced:** Haven, Ascent, Lotus gibi orta mesafeli map'lerde matchup Sage wall timing'ine bağlı.
+**Eşit avantaj — bu üç haritada (Haven, Ascent, Lotus):** Sage wall'u giriş noktasına değil B Short veya Link gibi kaçış yoluna kurarsa, Raze nade lineup öğrenmediyse ilk engele takılmaz, ama site içinde wall hâlâ Raze'i zorlar.
 
 ## 3. Key Düellolar
 
-**IF** Raze nade'i Sage wall arkasına lineup ile attı
-**MEANING** Nade wall'u aşıp arka alana damage verir, Sage wall arkasındaki defender'lar HP kaybeder
-**COUNTER** Sage wall'u nade lineup hattına açısal dikkatle kur — duvarın arkasındaki anchor pozisyonu nade lineup'ının dışında olmalı.
-**WHY** Raze nade yüksek damage area weapon, Sage wall görüş engel ama damage engeli değil. Lineup bilincindeki Raze wall'u bypass eder.
+**IF** Raze nade'ini Sage wall arkasına lineup ile attı
+**MEANING** Nade wall'u aşıp arka alana hasar verir, Sage wall arkasındaki oyuncular HP kaybeder
+**COUNTER** Wall'u kur, arkasındaki durduğun noktayı Raze'in klasik lineup açısının dışına koy. Duvarın tam gerisinde bekleme — kayılabilir.
+**WHY** Sage wall görüş keser, hasar kesmez. Lineup bilen Raze duvarı bypass eder.
 
 ---
 
 **IF** Raze satchel ile Sage wall'ını atladı
-**MEANING** Satchel boost wall'un üstünden Raze'i geçirir, Sage wall surprise value kaybeder
-**COUNTER** Sage wall'u çift katmanlı kur (yatay + dikey), ya da wall'u Raze satchel range dışına yerleştir.
-**WHY** Sage wall Raze'in satchel mobility'sine tam cevap değil. Wall'un gücü görüş + pozisyon ama satchel iki boyutu da aşar.
+**MEANING** Satchel boost wall üstünden Raze'i geçirir, wall değer kaybeder
+**COUNTER** Wall'u tek düz çizgi yerine çift katmanlı kur (yatay + dikey açı). Ya da Raze'in satchel'layabileceği alanın dışına yerleştir.
+**WHY** Satchel iki boyutu aşar: görüş ve yükseklik. Wall sadece birini kapıyorsa Raze geçer.
 
 ---
 
-**IF** Sage slow orb Raze'in entry noktasına düştü
-**MEANING** Raze satchel animasyonu slow radius'unda başlarsa satchel momentum zayıflar, Raze hedefe ulaşamaz
-**COUNTER** Raze slow orb lokasyonunu round 1'de öğren, entry hattını slow dışına taşı. Slow orb lineup'larını takım info ile temizle.
-**WHY** Slow orb Raze'in mobility kimliğini dondurur. Slow içinde Raze sıradan rifler, nade lineup'ı atmak için bile hareket sınırlı.
+**IF** Sage slow orb Raze'in giriş noktasına düştü
+**MEANING** Satchel slow içinde başlarsa momentum düşer, Raze hedefe ulaşamaz
+**COUNTER** Sage'in slow orb koyduğu noktaları ilk turda öğren. Bir sonraki turda giriş hattını slow dışına taşı.
+**WHY** Slow orb Raze'in tek silahını, hızını, etkisiz kılar. Slow içindeyken Raze sıradan bir tüfekçiye döner.
 
 ---
 
-**IF** Sage Resurrection ultunu Raze kill'i sonrası kullandı
-**MEANING** Raze'in trade kazancı geri alındı, 4v5 avantajı çöktü
-**COUNTER** Raze canlanan oyuncunun pozisyonunu okumalı — Sage yanında canlandıysa Raze nade ile ikisini birden yakalar.
-**WHY** Resurrection iki oyuncuyu pozisyonda toplar. Raze nade alan weapon — iki hedef bir noktada nade için maksimum değer.
+**IF** Sage Resurrection ültünü Raze kill'i sonrası kullandı
+**MEANING** Raze'in kazandığı trade geri alındı, sayı üstünlüğü bitti
+**COUNTER** Raze olarak baktığın şey şu: Sage canlandırdıysa, canlandırılan oyuncu Sage'in yanında çıkar. İkisi birden aynı noktada — nade için iki hedef.
+**WHY** Resurrection iki oyuncuyu aynı yerde toplar. Raze nade alan hasar silahı — iki hedef tek noktada nade için maksimum değer.
 
 ---
 
-**IF** Raze Showstopper ultunu Sage wall arkasına attı
-**MEANING** Ult roketi wall'u patlatır, wall arkasındaki Sage exposed
-**COUNTER** Sage wall'u Showstopper lineup'ına doğrudan denk düşmeyen açıyla kur. Wall sadece görüş engeli değil trajektör saptırıcı olmalı.
-**WHY** Showstopper sabit yön rocket, wall'un arkasındaki hedefe direkt isabet mümkün. Wall yön saptırıcı değilse ult wall'u ve Sage'i birlikte yıkar.
+**IF** Raze Showstopper ültünü Sage wall arkasına attı
+**MEANING** Roket wall'u patlatır, arkasındaki Sage açığa çıkar
+**COUNTER** Wall'u Raze'in roket atacağı doğrultuya denk düşmeyecek açıyla kur. Wall sadece görüş kesmez, roketin yönünü de saptırmalı.
+**WHY** Showstopper sabit yönlü roket — wall yön saptırıcı değilse roket hem wall'u hem Sage'i götürür.
 
 ---
 
-**IF** Sage heal'i ile Raze'in nade damage'ını karşıladı
-**MEANING** Heal Sage'in HP'sini geri yükler, Raze'in nade pressure'ı eskitir
-**COUNTER** Raze nade sonrası takip push — heal süresi boyunca Sage statik hedef. Nade + rifle entry kombosu heal penceresinde lethal.
-**WHY** Sage heal aktif uygulamada Sage'i statik yapar — uygulama sırasında hareket yok, bu pencere Raze'in kill fırsatı.
+**IF** Sage heal ile Raze'in nade hasarını kapattı
+**MEANING** Heal Sage'i geri yükler, nade baskısı boşa gider
+**COUNTER** Raze olarak: nade at, hemen gir. Heal uygulanırken Sage hareket edemez — o pencere kill fırsatı.
+**WHY** Sage heal aktif hâldeyken Sage sabit durur. Nade + hemen giriş kombinasyonu o pencereyi kullanır.
 
 ---
 
-**IF** Raze post-plant ayak nade lineup'ları, Sage wall defuse koridorunu kapattı
-**MEANING** Wall Raze'in nade lineup hedefini görüşten alır, nade boşa
-**COUNTER** Raze lineup'larını wall yerleşim ihtimalleriyle öğren. Alternatif lineup noktaları (wall üstü, wall yanı) hazır olmalı.
-**WHY** Wall'un gücü görüş engelinde. Lineup bilinci wall'u etkisizleştirmenin tek yolu.
+**IF** Raze post-plant nade lineup'ları, Sage wall defuse koridorunu kapattı
+**MEANING** Wall nade'in görüş hattını keser, lineup boşa gider
+**COUNTER** Raze olarak: wall'un olası yerlerini öğren, alternatif lineup noktaları hazırla — wall üstü, wall yanı. Tek lineupa bağlı kalma.
+**WHY** Wall'un gücü görüşü kesmekte. Birden fazla lineup bilirsen wall seni durduramaz.
 
 ## 4. Utility Takası
 
-Raze utility ekonomisi nade + paintshell + satchel x2 + ult, Sage ekonomisi wall + slow orb + heal + ult. Raze'in utility'si damage-focused, Sage'in utility'si space + takım ekonomisi. Matchup'ın özü Raze'in nade'inin area damage'ını Sage'in wall'u görüş engeline çevirmeye çalışması. Nade lineup bilinci olan Raze wall'u bypass eder, lineup bilinci olmayan Raze wall'un arkasında defender'ı yakalayamaz. Ult ekonomisi Sage'in lehine — Resurrection oyuncu ekonomisi, Showstopper round ekonomisi, Resurrection'ın stratejik değeri daha yüksek.
+Raze'in elinde: nade + paintshell + 2x satchel + Showstopper. Hepsi hasar veya hareket.
+Sage'in elinde: wall + slow orb + heal + Resurrection. Hepsi alan kontrolü veya takım kurtarma.
 
-## 5. Map Bazlı Değişim
+Bu maçın özeti:
+- Raze nade lineup biliyorsa → Sage wall görüş keser ama hasar önleyemez
+- Raze lineup bilmiyorsa → Sage wall arkasındaki oyuncu güvende
+- Ult kıyasında: Resurrection ölen oyuncuyu geri getirir, Showstopper turu temizler. Sage ulti bir oyuncuyu kurtarır, Raze ulti bir alanı temizler — yakınsa (skor 10-10) Sage clutch potansiyeli için kritik; öndeysen Raze hızlı round'u kapatır.
 
-**Bind (Raze avantajlı):** Hookah close range + Showers dar koridor. Raze nade ekonomisi Sage wall'unu bypass eder.
+## 5. Harita Bazlı Değişim
 
-**Split (Balanced):** A Main Sage wall meta, B Main Raze nade meta. İki tarafın da silahı işe yarar, matchup yerleşime bağlı.
+**Bind (Raze avantajlı):** Hookah yakın mesafe + Showers dar koridor. Raze nade Sage wall'u geçer.
 
-**Ascent (Sage avantajlı):** A Main Sage wall klasik pozisyon. Raze B Main entry'de close range.
+**Split (Dengeli):** A Main'de Sage wall Raze'i durdurur, B Main'de Raze nade Sage wall'u geçer. Hangi siteye saldırıyorsan o bölgenin kuralı geçerli.
 
-**Icebox (Balanced):** Sage wall Icebox A Site içinde Raze'in entry'sini keser, Mid Raze için close range.
+**Ascent (Sage avantajlı):** A Main Sage wall klasik — Raze nade o açıda wall'u geçemez. B Main'de Raze yakın mesafede, A'da wall Raze'i zorlar.
 
-**Haven (Balanced):** Sage B anchor, Raze A Short entry. Taraf site'a göre.
+**Icebox (Dengeli):** Sage wall A Site girişini keser. Mid'de Raze yakın mesafede avantajlı — iki bölge farklı davranır.
 
-**Breeze (Sage avantajlı):** Uzun açı Sage wall'un görüş gücünü maksimum eder. Raze nade range'i Breeze'de sınırlı.
+**Haven (Dengeli):** Sage B'de anchor kurar, Raze A Short'tan girer. Hangi siteye baskı yapıldığına göre üstünlük el değiştirir.
 
-**Fracture (Raze avantajlı):** Multi-entry Raze satchel mobility'sine yarar. Sage tek wall ile iki yönü tutamaz.
+**Breeze (Sage avantajlı):** Uzun açı Sage wall'un görüş gücünü en üste taşır. Raze nade o mesafede wall arkasına ulaşamaz.
 
-## 6. Flip Moment'ler
+**Fracture (Raze avantajlı):** İki yönlü giriş Raze satchel'ına yarar. Sage tek wall ile iki yönü tutamaz.
 
-**Flip 1 — Wall harcanması:** Sage wall atıldığı an round'da ikinci entry serbest. Raze nade lineup hazır ise wall harcama pencere.
+## 6. Flip Anları
 
-**Flip 2 — Nade lineup başarısı:** Raze nade'i wall arkasındaki pozisyona denk düştüyse Sage'in wall savunması çöker.
+**Flip 1 — Wall harcanması:** Sage wall attığı an tur içinde ikinci giriş serbest. Raze nade hazırsa o pencereyi kullan.
 
-**Flip 3 — Slow orb Raze satchel'ini yakaladı:** Raze satchel slow radius'unda başlarsa mobility kaybı, Sage bu pencerede Raze'i yakalar.
+**Flip 2 — Nade lineup tutması:** Raze nade wall arkasındaki noktaya denk düştüyse Sage'in savunması çöker.
 
-**Flip 4 — Resurrection round çevirme:** Doğru oyuncunun canlandırılması round'u geri alır. Yanlış oyuncu (düşük değerli) ult kaybı.
+**Flip 3 — Slow orb Raze satchel'ını yakaladı:** Satchel slow içinde başlarsa Raze durur, Sage o pencerede kill alır.
 
-## 7. Pro Coach Notları
+**Flip 4 — Resurrection tur çevirme:** Takımın en fazla utility taşıyan oyuncusu canlandırılırsa tur geri döner. Zaten ölü olan ve utility'si bitmiş oyuncu canlandırılırsa Sage ult harcandı, tur kazanılmadı.
 
-**VCT'de nasıl oynanıyor:** Sage pro meta'da map-bound sentinel (Bind, Split, Fracture'da pick). Raze vs Sage matchup'ı Sage wall timing'ine bağlı — wall erken atılırsa Raze ikinci entry serbest, wall geç atılırsa Raze ilk entry'de wall'a takılır. Pro Sage oyuncuları wall'u entry'ye değil, entry'nin kaçış rotasına kurar.
+## 7. Koç Notları
 
-**Meta tier durumu:** Raze A+ tier, Sage B tier (pro). Head-to-head Raze hafif avantajlı pro seviyede, ranked'te Sage heal + res ile matchup'ı dengeler.
+**Raze oynuyorsan:**
+Sage wall gördüğünde refleks nade atma. Önce wall'un nerede durduğunu oku. Lineup'ın varsa wall arkasına gönder — yoksa önce takımdan bilgi al, sonra gir. Wall arkasını kör geçme.
 
-**** Sage wall HP değeri patch 9.x'te güncellendi mi? Raze nade damage ile wall yıkılıyor mu?
+**Sage oynuyorsan:**
+Wall'u giriş noktasına koyma, kaçış yoluna koy. Raze satchel ile wall üstüne çıkabilir — wall'un arkasında tam altında bekleme. Raze nade attıktan hemen sonra giriyor mu? O pencerede heal kullanma, önce cover al.
 
-**** Slow orb radius ve slow debuff süresi Raze satchel animasyonunu bozuyor mu? Pratik testle doğrulanmalı.
-
-**Coach test:** "Raze Sage karşısında nade'ini wall arkasına öğrenmeli — lineup olmayan Raze Sage'in wall'una yenilir. Sage Raze karşısında wall'u görüş engeli değil, nade yön saptırıcı olarak kurmalı. İki disiplin karşılaşırsa round iki oyuncunun da aim'ine kalır."
+**Üst seviyede ne yapılır:**
+Sage oynuyorken wall'u Raze'in satchel menzilinin ucuna kur — satchel wall'u geçse bile sen duvarın kör açısında pozisyon al. Raze oynuyorken Sage'in wall'ını harcattıktan sonra ikinci girişi nade lineup ile aç. Bu iki disiplin çakışırsa crosshair placement ve ilk kurşun isabeti tutan kazanır.

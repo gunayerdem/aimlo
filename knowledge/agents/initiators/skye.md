@@ -1,81 +1,81 @@
 # AJAN: Skye
 
 ## 1. Rol Kimliği
-Skye, flash, iyileştirme ve keşfi tek bir adaptif kit'te birleştiren çok yönlü initiator'dür. Oyundaki en esnek initiator'dür -- Guiding Light (kuş flash) pop'ta yönlü bilgi verir, Trailblazer (köpek) keşif yapar ve concuss eder, Regrowth takım arkadaşlarını iyileştirir ve Seekers en yakın düşmanları takip eder. Skye, takımın tur tur ihtiyaç duyduğuna uyum sağlayan initiator'dür. Bilgi mi lazım? Köpeği gönder. Giriş mi lazım? Flash'ı patlat. Dayanıklılık mı lazım? Takımı iyileştir. Bu esneklik onu ideal yardımcı-IGL initiator yapar.
+Skye hem flash hem keşif hem iyileştirme yapan tek ajandır. Kuşla yön bilgisi alırsın, köpekle hem keşif hem sersem bırakma, Regrowth ile takımın HP'sini ayakta tutarsın, Seekers ile en yakın düşmanları bulursun. Takımın neye ihtiyacı varsa ona göre şekil verirsin turu. Bilgi lazım? Köpeği gönder. Giriş lazım? Kuşu patlat. Takım yaralı? İyileştir. Skye oynuyorsan takımın hem gözü hem kapısısın.
 
 ## 2. Temel Sorumluluklar
-- Guiding Light ile takım arkadaşları için flash yapmak, düşmanları kör ederken takımı flash'lamayacak hassas pop zamanlamasıyla
-- Push'lardan önce Trailblazer ile keşif yapmak, kilit bir savunucuyu devre dışı bırakmak için concuss kullanmak
-- Dövüşler arasında Regrowth ile takım arkadaşlarını iyileştirerek takımın HP ekonomisini sağlıklı tutmak
-- Retake'lerde veya bilgi yetersiz olduğunda düşmanları bulmak için Seekers kullanmak
-- Tur ihtiyaçlarına uyum sağlayan esnek utility sağlamak -- hızlı turlar için flash, yavaş turlar için iyileştirme
-- Flash'lanan düşmanın vurulup vurulmadığını (Guiding Light üzerindeki ses ipucu) okuyarak takıma anlık bilgi sağlamak
+- Kuşu takım arkadaşın peek atmadan hemen önce patlat, onu kör etme
+- Push'tan önce köpeği gönder, düşmanı sersem bırak
+- Dövüşler arasında yaralı takım arkadaşlarını iyileştir
+- Düşman sayısı belirsizse ya da geri alım yapıyorsan Seekers kullan
+- Flash yediğinde sesini duyarsın — hemen takıma söyle, o anda swing yapmaları lazım
 
 ## 3. Sık Yapılan Hatalar
-- Guiding Light'ı çok erken veya çok geç patlatmak, düşmanlar yerine takım arkadaşlarını kör etmek
-- Trailblazer'ı güvenli olmayan pozisyonlardan kullanmak, Skye'nın gövdesini uzun bir süre savunmasız bırakmak
-- Regrowth'u küçük hasar almış tek bir takım arkadaşında kullanmak, havuzu sonraki dövüşler için boşa harcamak
-- Seekers'ı düşmanların takip etmeden kolayca vurduğu açık alanda kullanmak
-- Flash atmadan önce takım arkadaşlarıyla iletişim kurmamak, tur kaybettiren takım-flash'larına yol açmak
-- İyileştirmeyi flash ve keşif utility'si pahasına aşırı kullanmak -- Skye önce initiator, sonra iyileştirici
+- Kuşu yanlış yönde veya yanlış anda patlatmak — takım arkadaşını kör ediyorsun, düşmanı değil
+- Köpeği her turda aynı yerden göndermek — düşmanlar önceden nişan alıyor
+- Regrowth'u az hasarlı tek kişi için harcamak — havuzu sonraki dövüş için sakla
+- Seekers'ı açıkta fırlatmak — bir şey görmeden düşüyor
+- Flash atmadan önce takıma söylememek — kim, ne zaman peek atacak, netleştir
+- İyileştirmeye takılıp flash ve köpeği unutmak — sen önce giriş açan ajansın
 
 ## 4. Örüntü -> Anlam
 
-**IF** takım arkadaşları sürekli Skye'nın Guiding Light'ı tarafından flash'landığını bildiriyor
-**MEANING** Flash pop zamanlaması veya yönü yanlış -- kuş, takım arkadaşlarının baktığı yerde patlıyor
-**COUNTER** Kuşu entry açısının üstünde veya yanında patlatın, doğrudan entry yolunda değil. Her kuştan önce "flash atıyorum" deyin. Pop zamanlaması takım arkadaşı peek zamanlamasıyla eşleşmelidir -- peek yapmadan bir vuruş önce.
-**WHY** Doğru zamanlanmış ve yönlendirilmiş flash, takım arkadaşlarının hazırlanmasını sağlar; koordinesiz flash ise kendi takım arkadaşlarını kör ederek düşman avantajı yaratır.
+**IF** Takım arkadaşların sürekli senin kuşun tarafından kör olduğunu söylüyor
+**MEANING** Kuşu yanlış yerde ya da yanlış anda patlatıyorsun — takım arkadaşın baktığı yerde patlıyor
+**COUNTER** Kuşu girişin üstünden veya yanından patlat, doğrudan önünden değil. Her kuştan önce "flash atıyorum" de. Takım arkadaşın peek atacak, tam o sırada patlat — bir adım önce değil, bir adım sonra da değil.
+**WHY** Kuş doğru yerde patlarsa düşman kör olur, takım arkadaşın görmez. Koordinesiz atarsan kendi takımı kör edip düşmana hediye verirsin.
 
-**IF** Trailblazer herhangi bir düşmana ulaşmadan yok ediliyor
-**MEANING** Köpek belirgin, önceden nişan alınmış yollardan gönderiliyor
-**COUNTER** Köpeği off-angle'lardan, kutuların üzerinden veya smoke'ların içinden gönderin. Her tur yolu değiştirin. Köpek, beklenmedik bir yönden geldiğinde en iyi çalışır.
-**WHY** Beklenmedik yollardan gelen köpek, savunucuların tepki etmesini zorlar; sürekli aynı yoldan gönderildiğinde ise savunucular önceden nişan alarak onu anında vurur.
+**IF** Köpek her seferinde düşmana ulaşamadan düşüyor
+**MEANING** Hep aynı yoldan gönderiyorsun, düşmanlar önceden biliyor
+**COUNTER** Köpeği kutuların üstünden, smoke'un içinden ya da farklı açıdan gönder. Her tur yolu değiştir. Beklenmedik yerden gelince düşman reaksiyon veremez.
+**WHY** Köpek sürpriz olduğunda düşman nişan alamaz. Aynı yolu tekrarlarsan düşman seni bekler ve köpek bir şey yapmadan düşer.
 
-**IF** Turun sonunda Regrowth havuzu dolu
-**MEANING** Oyuncu takım HP'sini korumak yerine iyileştirmeyi saklıyor
-**COUNTER** Dövüşler arasında iyileştirin, sırasında değil. Bir dövüşten sonra 2+ takım arkadaşı 100 HP'nin altındaysa sonraki çatışmadan önce iyileştirin. Tur sonunda kullanılmamış iyileştirme havuzu boşa gitmiş değerdir.
-**WHY** Dövüşler arası iyileştirme, sonraki çatışmalarda HP avantajı biriktirir; kullanılmamış havuz ise her dövüşü dezavantajlı HP ile girilen kaçırılmış fırsattır.
+**IF** Tur biter ve Regrowth havuzu hâlâ dolu
+**MEANING** İyileştirmeyi saklıyorsun — bu bir kayıp, koruma değil
+**COUNTER** Bir dövüş bitti ve 2+ kişi yaralıysa sonraki çatışmadan önce iyileştir. Kullanılmayan iyileştirme boşa giden avantajdır. Havuzu tur sonuna taşıma.
+**WHY** Dövüşler arası iyileştirme her çatışmada HP avantajı biriktirir. Saklar ve kullanmazsan her dövüşe eksik HP ile girersin.
 
-**IF** Guiding Light "isabet" ses ipucu alıyor ama hiçbir takım arkadaşı takip etmiyor
-**MEANING** Flash zamanlaması ve takım push zamanlaması senkronize değil
-**COUNTER** İsabet ipucu bir düşmanın kör olduğu anlamına gelir. Hemen "flash yediler" deyin ve takım bir vuruş içinde peek yapmalı. Bu zamanlamayı antrenmanlarda pratik yapın.
-**WHY** İsabet ipucu, düşmanların kör olduğunu doğrulanmış bilgidir; bu pencerede giriş yapmak garantili ilk-atış avantajı sağlar, takip edilmediğinde ise blind boş geçer.
+**IF** Kuş flash yedi ama hiç kimse peek atmadı
+**MEANING** Flash zamanlamanla takımın hareketi uyuşmuyor
+**COUNTER** Flash yediğinde sesini duyarsın. O anda hemen "flash yediler" de. Takım o pencerede peek atmalı. Bunu her tura uygula — 1. flash'tan itibaren.
+**WHY** Flash yedi sesi düşmanın kör olduğunun kanıtıdır. O pencerede giren takım arkadaşın garantili ilk atış avantajını alır. Takip yoksa flash boşa gider.
 
-**IF** Seekers kullanılıyor ve hemen ölüyor
-**MEANING** Seekers, çok fazla düşman görüş hattına sahip pozisyonlardan fırlatılıyor
-**COUNTER** Seekers'ı kapağın arkasından veya smoke'ların içinden kullanın. Hedeflerini bulmak için biraz zamana ihtiyaçları var. Dağılmış düşmanları bulmak için retake'lerde kullanın.
-**WHY** Kapak arkasından fırlatılan Seekers, vurulmadan hedeflere ulaşmak için zaman kazanır; açık alanda fırlatıldığında ise savunucular herhangi bir bilgi sağlamadan kolayca yok eder.
+**IF** Seekers fırlatılır fırlatılmaz düşüyor
+**MEANING** Çok fazla düşman görüş hattının olduğu yerden kullanıyorsun
+**COUNTER** Seekers'ı kapağın arkasından ya da smoke içinden kullan. Hedeflere ulaşması zaman alıyor. Geri alımda ya da düşman konumu belirsizken kullan.
+**WHY** Kapaktan fırlatılan Seekers hedefe ulaşır. Açıkta fırlatırsan düşman bilgi vermeden hemen yok eder.
 
 ## 5. Harita Etkileşimleri
-- **Haven**: Üç site, Skye'nın esnekliğinden faydalanır -- herhangi bir girişe flash, herhangi bir site'a keşif ve rotate'lar arasında iyileştirme yapabilir. A long köpek keşfi bir temel.
-- **Ascent**: A main veya B main'den Guiding Light güçlü flash entry. Bilgi için mid'e köpek. Mid dövüşlerinden sonra iyileştirme, takımı site almaları için sağlıklı tutar.
-- **Breeze**: Açık alanlar köpeği savunmasız kılar ama flash'lar geniş açıları kaplar. Retake'lerde Seekers bu geniş haritada yüksek değerli.
-- **Bind**: Dar koridorlar hookah ve showers'ta köpek keşfini çok verimli kılar. Sınırlı alanlarda flash girişleri güçlü.
-- **Lotus**: Üç site yine Skye'nın uyum yeteneğini kayırır. Dönen kapılardan köpek savunucuları hazırlıksız yakalar.
+- **Haven**: Üç site var — istediğin girişe flash at, istediğin siteye köpek gönder, rotasyonlar arasında iyileştir. A long'dan köpek keşfi standart başlangıç.
+- **Ascent**: A main veya B main'den kuş flash güçlü. Mid bilgisi için köpek gönder. Mid dövüşünden sonra iyileştir, takım site alımına sağlam girer.
+- **Breeze**: Geniş açılar köpeği zor yapar ama flash geniş alanı kapatır. Geri alımda Seekers bu haritada çok değerli — düşman her yere dağılabiliyor.
+- **Bind**: Hookah ve showers dar — köpek keşfi burada çok verimli. Flash girişleri sıkışık alanlarda güçlü.
+- **Lotus**: Üç site yine sana uyuyor. Dönen kapılardan köpek gönderirsen düşman hazırlıksız yakalanır.
 
 ## 6. Eşleşme Notları
-- Jett'e karşı: Skye'nın flash'ı Jett'i ya dash ya da öl seçiminde bırakır. Jett dash yaparsa kill almadan anahtar yeteneğini kullanmış olur. Her iki durumda da kazanç.
-- Killjoy'a karşı: Köpek, Killjoy utility'sini güvenle tetikler, oyuncu HP'si riske girmeden alarmbot ve turret'i temizler.
-- Sage'e karşı: Regrowth, Sage'in iyileştirmesiyle rekabet eder. Her ikisinin de olduğu turlarda takımın olağanüstü dayanıklılığı olur.
-- Controller ile eşleşme: Skye, controller smoke'larından flash atarak yıkıcı blind girişler yapar. Smoke'un içinden gelen flash neredeyse kaçınılmazdır.
+- **Jett'e karşı**: Kuşunu Jett'e at — ya dash atar ya kör kalır. Dash attıysa kill almadan yeteneğini harcadı. İkisi de senin lehinedir.
+- **Killjoy'a karşı**: Köpek Killjoy utility'sini senin HP'n riske girmeden tetikler. Alarmbot ve turret'i köpekle temizle, sonra gir.
+- **Sage ile birlikte**: Regrowth + Sage iyileştirmesi aynı takımda olunca takımın bir türlü bitmez. Birden fazla savaşta ayakta kalırsınız.
+- **Smoke kullanan ajanla birlikte**: Smoke'un içinden flash at — neredeyse kaçınılmazdır. Controller'ın smoke'u senin için giriş kapısıdır.
 
 ## 7. Oyuncuya Ne Söylenmeli
 
 ### İyi performans gösterirken
-**Oyuncu Eylemi:** Guiding Light'ı takım arkadaşının peek'inden bir vuruş önce patlatıyorsun, isabet ses ipucunu hemen bildiriyorsun ve yuvarlanmalı HP avantajını korumak için her dövüş arasında takımını Regrowth ile iyileştiriyorsun.
-**Düşman Algısı:** Savunucular, peek'lerle tamamlanmış zamanlanmış flash'lar görür ve entry oyuncusunun olağanüstü koordinasyona sahip olduğuna inanır. İsabet ipucunun takıma doğrulanmış-blind sinyali verdiğini anlamazlar -- takım arkadaşlarının ne zaman swing yapacağını tahmin ettiğini sanırlar.
-**Düşman Tepkisi:** Ya her Guiding Light'tan sırtlarını dönmek (entry'ye 0.5 vuruş crosshair zamanı kaybetmek) ya da flash'ı yiyip kör olarak savuşmak zorunda kalırlar. Tekrar tekrar sırtlarını dönmek, kuşu patlatmadan göndererek faydalanabileceğim bir irkilme tepkisi yetiştirir -- hiç patlamayan bir flash'tan sırt dönerler.
-**Faydalanma Penceresi:** Flash pop ile takım arkadaşının peek varışı arasındaki 0.5 vuruş penceresi, kör bir savunucuya karşı garantili ilk-atış penceresidir. Dövüşler arasında her Regrowth oturumu takıma 20-40 HP ekler -- 3 çatışma boyunca bu, her düelloyu yazı-tura'dan avantajlı trade'e çeviren 60-120 HP avantajdır.
-**Tekrar Stratejisi:** Dönüş 1: Yukarıdan Guiding Light, isabet ipucunu bildir, takım arkadaşı swing yapar. Dövüşler arası: 100 HP'nin altındaki herkesi kapağın arkasında Regrowth. Dönüş 2: Yan açıdan Guiding Light (asla aynı yol iki kez değil). Dönüş 3: Flash'tan önce keşif için çeşitlendirilmiş bir yoldan Trailblazer gönder. Her zaman isabet ipucunu dinle -- isabet yoksa düşman yok, yeniden yönlendir.
-**Düşman Adaptasyonu:** 4-5 tur sonra savunucular her flash sesinde önceden sırtlarını dönecek (blind süresini azaltarak), Trailblazer patikasının dışında daha derin pozisyonlarda tutacak veya flash-peek zamanlamasını kurmadan önce rush yapacak.
-**Karşı-Adaptasyon:** Her flash'ta sırtlarını dönerlerse: Guiding Light gönderin ve patlatMAyın -- boşuna sırt dönerler ve takım arkadaşınız onları yanlış tarafa bakarken mid-rotate'te yakalar. Derin tutarlarsa: onları ya vurmaya (konumu ifşa eder) ya da concuss'u yemeye zorlamak için pozisyonlarına Trailblazer gönderin. Rush yaparlarsa: takımı tam HP'ye Regrowth edin ve açıyı tutun -- elinde flash olan tam-HP savunuculara karşı rush yapanlar trade matematiğini kaybeder.
+**Oyuncu Eylemi:** Kuşu takım arkadaşın peek'inden hemen önce patlatıyorsun, flash sesini anında takıma bildiriyorsun, her dövüş arasında yaralı takımı iyileştiriyorsun.
+**Düşman Algısı:** Düşmanlar peek'le senkron gelen flash'lar görüyor. Takımının ne zaman swing yapacağını tahmin edemedikleri için pozisyon tutamıyorlar — bu senin verdiğin anlık bilginin sonucu.
+**Düşman Tepkisi:** Ya her kuş sesinde sırtını döner — peek'e hazırlanmak için bir adım kaybettirir — ya da kör olarak karşılar. Sırt dönüyorlarsa kuşu patlatmadan havada tut; takım arkadaşın onları yanlış bakışta yakalar.
+**Faydalanma Penceresi:** Flash sesi ile takım arkadaşının peek'i arasındaki o kısa an garantili ilk atış fırsatıdır. Her dövüş arası iyileştirme tur boyunca HP farkı biriktirir — düşman düştükçe bu fark her düelloyu lehine çevirir.
+**Tekrar Stratejisi:** Giriş: Yukarıdan kuş, flash sesini bildir, takım arkadaşı swing yapar. Dövüş arası: 100 HP altındaki herkesi kapak arkasında iyileştir. Sonraki giriş: Farklı açıdan kuş, asla aynı yolu iki kez kullanma. Gerekirse önce köpeği gönder, sonra flash'la gir. Flash sesini dinle — ses yoksa düşman yok, yönünü değiştir.
+**Düşman Adaptasyonu:** Birkaç tur sonra her kuş sesinde sırtını dönmeye, köpek yolunun dışında durmaya ya da flash-peek kurulmadan rush atmaya başlarlar.
+**Karşı-Adaptasyon:** Sırt dönüyorlarsa — kuşu gönder, patlatma. Takım arkadaşın o açıkta yakalar. Derine çekiliyorlarsa — köpeği pozisyonlarına gönder, ya vururlar (yer belli olur) ya sersem yerler. Rush yapıyorlarsa — takımı tam iyileştir ve açıyı tut. Full HP'ye rush yapan kalabalık trade matematiğini kaybeder.
 
-**Zorlanırken**: "Takım flash'ı yapıyorsun. Her kuşu patlatmadan önce söyle ve takım arkadaşın peek'e hazır olana kadar bekle. Flash onlar için var, senin için değil."
+### Zorlanırken
+"Takım flash'ı yapıyorsun. Bundan sonra her kuştan önce takıma söyle ve peek'e hazır olana kadar bekle. Kuş onlar için var, senin için değil."
 
-**Tahmin edilebilir olunca**: "Her tur aynı köpek yolu, düşmanlar önceden nişan alıyor. Farklı pozisyonlardan veya smoke'ların içinden gönderin. Concuss güçlü ama yalnızca köpek onlara ulaşacak kadar hayatta kalırsa."
+"Her tur aynı köpek yolunu kullanıyorsun, düşmanlar önceden nişan alıyor. Farklı pozisyondan ya da smoke içinden gönder. Köpek düşmana ulaşmadan düşerse sersem bırakma da olmaz."
 
 ## 8. Rank Modülasyonu
-- **Düşük (Iron-Silver)**: Takım flash'ı yapmamaya odaklanın. Her kuşu bildirin. Push'lardan önce köpek kullanın. Yaralı takım arkadaşlarını iyileştirin. Basit tutun.
-- **Orta (Gold-Platinum)**: Flash pop zamanlamasını takım arkadaşı peek'leriyle uyumlu hale getirin. Farklı açılardan köpek. Dövüşler arasında iyileştirin, sırasında değil. Flash isabet ipucunu dinleyin.
-- **Yüksek (Diamond-Ascendant)**: Blind girişler için smoke'lardan flash. Düşman utility'sini tetiklemek için köpek. Retake'ler için zamanlanmış Seekers. İyileştirme disiplini -- ne zaman iyileştirip ne zaman saklanacağını bilin.
-- **Elit (Immortal-Radiant)**: Takım arkadaşı peek'inin bir vuruş içinde flash pop zamanlaması. Utility çekmek için yem olarak köpek. Yarı boyunca takım HP ekonomisine dayalı adaptif iyileştirme yönetimi.
+- **Düşük (Iron-Silver)**: Takım flash'ı yapma. Her kuştan önce söyle. Push'tan önce köpeği gönder. Yaralı takım arkadaşını iyileştir. Bu kadar.
+- **Orta (Gold-Platinum)**: Kuşu takım arkadaşın peek'iyle senkronize et. Her turda farklı yoldan köpek gönder. Dövüş bittikten sonra iyileştir, sırasında değil. Flash sesini dinle ve hemen söyle.
+- **Yüksek (Diamond-Ascendant)**: Smoke içinden flash at, giriş kaçınılmaz olsun. Köpekle düşman utility'sini tetikle, kendin girme. Geri alımda Seekers'ı zamanlı kullan. Ne zaman iyileştirip ne zaman saklanacağını bil.
+- **Elit (Immortal-Radiant)**: Kuşu peek'in hemen öncesinde patlat — tam zamanlama. Kuşu patlatmadan beklet, düşmanın refleksini oku. Köpeği yem olarak kullan, düşman pozisyon bozunca gir. Yarı boyunca takımın HP durumuna göre iyileştirme zamanlamasını adapte et — ekonomi turunda bile 2+ kişi yaralıysa dövüş öncesi iyileştir, saklamak avantaj değil kayıptır.

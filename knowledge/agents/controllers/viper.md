@@ -1,88 +1,89 @@
 # AJAN: Viper
 
 ## 1. Rol Kimliği
-Viper, kalıcı zehirli yeteneklerle alanları kilitleme konusunda uzmanlaşan bölgesel controller'dır. Smoke tabanlı controller'ların aksine, Viper'ın duvarı ve orb'u yeniden kullanılabilir ama paylaşılan bir yakıt kaynağı tüketir; bu da yakıt yönetimini iyi bir Viper oyuncusunun tanımlayıcı becerisi yapar. Post-plant senaryolarını ve harita bölmelerini diğer tüm controller'lardan daha iyi domine eder. Viper hazırlığı, lineup bilgisini ve disiplinli kaynak yönetimini ödüllendirir.
+Viper haritayı ikiye böler. Duvar ve orb paylaşımlı bir yakıt havuzundan beslenir — ikisini birden uzun açık tutarsan ikisi de söner. Yakıtı kim iyi yönetirse o Viper kazanır. Post-plant'te diğer hiçbir controller seninle yarışamaz: spike kurulduktan sonra Viper sahaya çıkar.
 
 ## 2. Temel Sorumluluklar
-- Savunucuları izole etmek ve rotasyonları kesmek için Toxic Screen (duvar) ile site'ları bölmek
-- Yakıt ekonomisini yönetirken Poison Cloud (orb) ile choke noktalarında görüşü engellemek
-- Defuse yapanları spike'tan uzaklaştıran Snake Bite lineup'ları kullanarak post-plant senaryolarını kontrol etmek
-- Retake'lerde alan kilitleme veya agresif site tutma için Viper's Pit kullanmak
-- Yakıt toggle zamanlamasını yönetmek -- duvar/orb'u ne zaman aktive ve deaktive edeceğini bilmek temel Viper becerisidir
-- Takıma tek kaotik dövüş yerine iki ayrı dövüş veren harita bölmeleri yaratmak
+- Toxic Screen ile site'ı böl — savunucu rotasyonu kesilir, iki ayrı dövüş çıkar
+- Poison Cloud ile choke noktasını kapat — yakıt bitince kapat, post-plant için sakla
+- Snake Bite lineup'larını ezberle — post-plant kazanmanın asıl yolu bu
+- Viper's Pit'i dövüş başlamadan koy — dövüş ortasında bırakma
+- Duvarı entry geçişinden sonra kapat, sonra orb'u aç — sırayla çalıştır, aynı anda değil
 
 ## 3. Sık Yapılan Hatalar
-- Duvar ve orb'u aynı anda yakıt tükenene kadar açık bırakmak, sonra uzun bir süre hiçbir şeye sahip olmamak
-- Snake Bite post-plant lineup'larını öğrenmemek -- bu Viper'ın en yüksek değerli yeteneğidir
-- Toxic Screen'i her round aynı yere koymak, rakiplerin execute yönünü tahmin etmesine izin vermek
-- Viper's Pit'i proaktif değil reaktif kullanmak -- dövüşten önce yerleştirilmesi gerekir, sırasında değil
-- Düşmanları anlamlı şekilde engellemeden takım arkadaşının görüşünü kapatan duvar yerleşimi
-- Orb/duvarı tahmin edilebilir aralıklarla toggle etmek, rakiplerin push'larını yakıt boşluklarına zamanlamasına izin vermek
+- Duvar ve orb'u aynı anda sonuna kadar açık tutmak — ikisi birden yanarsa hiçbirin kalmaz
+- Snake Bite'ı dövüşte molly gibi kullanmak — en büyük israf; post-plant için sakla
+- Her round aynı duvara girmek — savunucular seni okur, sana göre durur
+- Viper's Pit'i panikle bırakmak — içine girip içinde kal, dışarı çıkma
+- Duvarı takım arkadaşının baktığı açıya çekmek — kör bırakırsın
+- Orb'u koyup unutmak — aç-kapat yap, bilgi al, tuzak kur
 
 ## 4. Kalıp -> Anlam
 
-**IF** yakıt yarıda birden fazla kez sıfıra düşüyor
-**MEANING** Oyuncu duvar ve orb'u aynı anda çok uzun çalıştırıyor
-**COUNTER** Toggle disiplini: execute için duvarı aktive edin, takım geçtikten sonra deaktive edin, sonra post-plant için orb'u kullanın. Nadiren ikisini birden aynı anda kısa bir pencereden fazla çalıştırın.
-**WHY** Eşzamanlı aktivasyon yakıtı iki kat hızlı harcar; sıralı kullanım toplam aktif süreyi neredeyse ikiye katlar.
+**IF** yakıt 1 round içinde birden fazla kez tamamen bitiyor
+**MEANING** Duvar ve orb'u aynı anda çok uzun çalıştırıyorsun
+**COUNTER** Sırayla kullan: takım site'a girerken duvarı aç, geçince kapat; orb'u post-plant için sakla. İkisini birlikte çok kısa pencereler dışında aynı anda açma.
+**WHY** İkisi aynı anda yandığında yakıt iki kat hızlı biter. Sırayla kullanırsan toplam aktif süren neredeyse iki katına çıkar.
 
-**IF** Snake Bite post-plant yerine doğrudan dövüşlerde kullanılıyor
-**MEANING** Oyuncu Snake Bite'ı lineup aracı yerine savaş molly'si olarak kullanıyor
-**COUNTER** Atak round'larında her iki Snake Bite'ı post-plant için saklayın. Varsayılan defuse pozisyonunu engelleyen site başına 2 lineup noktası öğrenin.
-**WHY** Snake Bite'ın post-plant değeri dövüş kullanımını çok aşar; defuse'u engellemek round kazanırken rastgele hasar nadiren belirleyicidir.
+**IF** Snake Bite her round dövüş sırasında kullanılıyor, post-plant'te değil
+**MEANING** Snake Bite'ı lineup aracı değil savaş molly'si olarak kullanıyorsun
+**COUNTER** Atak round'larında her iki Snake Bite'ı spike kurulduktan sonraya sakla. Site başına varsayılan defuse noktasını kapatan en az 2 lineup öğren.
+**WHY** Defuseyi engelleyen Snake Bite round kazandırır. Dövüşte attığın Snake Bite çoğu durumda belirleyici değildir — post-plant'teki her zaman belirleyicidir.
 
-**IF** Toxic Screen her atak round'unda aynı site'a aynı şekilde yerleştiriliyor
-**MEANING** Rakipler duvarın etrafında önceden konumlanacak ve execute'u cezalandıracak
-**COUNTER** Site başına 2-3 duvar varyasyonu hazırlayın. Hafif bir açı değişikliği bile savunucuları pozisyonlarını yeniden öğrenmeye zorlar.
-**WHY** Tahmin edilebilir duvarlar savunuculara önceden ayarlanmış pozisyon avantajı verir; varyasyon bu avantajı ortadan kaldırır.
+**IF** Toxic Screen her atak round'unda aynı yere gidiyor
+**MEANING** Savunucular seni okuyor, sana göre önceden konumlanıyor
+**COUNTER** Site başına 2-3 farklı duvar açısı hazırla. 10 derece kaydırmak bile savunucuyu pozisyonunu değiştirmeye zorlar.
+**WHY** Aynı duvar savunucuya ücretsiz avantaj verir. Değiştirince o avantajı elinden alırsın.
 
-**IF** Viper's Pit kullanılıyor ama oyuncu anında dışarı çıkıyor veya dışarıda ölüyor
-**MEANING** Oyuncu pit disiplinini anlamıyor -- Viper pit'in içinde kalmalıdır
-**COUNTER** Viper's Pit bir taahhüttür. İçinde kalın, pit içinde açı tutun ve rakipleri sizin koşullarınızda girmeye zorlayın. Ayrılmak çürümesine neden olur.
-**WHY** Pit içindeki Viper, decay ve azaltılmış görüş sayesinde her düelloda avantajlıdır; dışarı çıkmak bu avantajı tamamen siler.
+**IF** Viper's Pit atılıyor ama oyuncu anında dışarı çıkıyor ya da dışarıda ölüyor
+**MEANING** Pit'in nasıl çalıştığını anlamamışsın — Viper pit içinde kalmalı
+**COUNTER** Pit bir karardır, geri dönüşü zordur. İçine gir, içinde açı tut, rakibi kendi koşullarında girmeye zorla. Dışarı çıkarsan pit işlevsiz kalır.
+**WHY** Pit içindeki Viper her dövüşte avantajlıdır: düşman hem decay yer hem az görür. Dışarı çıkınca bu avantajın tamamı gider.
 
-**IF** orb site'a yerleştirilmiş ama round boyunca asla toggle edilmiyor
-**MEANING** Statik orb kullanımı -- oyuncu koyuyor ve unutuyor
-**COUNTER** Rakipleri tuzağa düşürmek için orb'u toggle edin. Görüşü engellemek için aktive edin, push yapıp yapmadıklarını görmek için deaktive edin, açıkta yakalamak için yeniden aktive edin.
-**WHY** Toggle edilen orb bilgi aracına dönüşür; statik orb sadece passive engelleme sağlar ve push zamanlamasını ele verir.
+**IF** Orb site'a konuyor ama round boyunca hiç aç-kapat yapılmıyor
+**MEANING** Statik orb kullanıyorsun — koyuyorsun, unutuyorsun
+**COUNTER** Orb'u tuzak gibi kullan. Kapat, düşman push yapıyor mu bak. Push yaparsa aç, açıkta yakala. Bunu tekrarla.
+**WHY** Aç-kapatan orb bilgi verir ve düşmanı ikircikli bırakır. Sabit duran orb sadece pasif engel olur, push zamanlamasını ele verir.
 
-**IF** duvar yerleşimi sürekli takım arkadaşlarının sightline'larını engelliyor
-**MEANING** Duvar açıları takımın execute planıyla hizalı değil
-**COUNTER** Round'dan önce duvar yerleşimini iletin. Duvar site'ı bölmeli, kendi takımınızın giriş yolunu engellememeli.
-**WHY** Takım arkadaşı görüşünü engelleyen duvar, düşmana avantaj verir -- takımınız kör dövüşürken savunucular hazırlıklıdır.
+**IF** Duvar her round takım arkadaşlarının baktığı açıyı kapatıyor
+**MEANING** Duvar açısı takımın giriş planıyla uyuşmuyor
+**COUNTER** Round başında duvarın nereye gideceğini takıma söyle. Duvar site'ı bölmeli, kendi takımının girişini kesmemeli.
+**WHY** Kendi takımını kör bırakırsan savunucu hazırlıklı, sen kör dövüşürsün.
 
 ## 5. Harita Etkileşimleri
-- **Breeze**: Tarihsel olarak Viper'ın en iyi haritası. Uzun sightline'lar ve açık site'lar duvar bölmelerinden faydalanır. Post-plant Snake Bite lineup'ları iyi yerleşmiştir.
-- **Icebox**: B site veya A site boyunca duvar baskın bölmeler yaratır. Tube veya A belt'te orb hayati sightline'ları engeller.
-- **Lotus**: Üç site'ın hepsinde duvar esnekliği. Kapılardan geçen B site duvarı temel stratejidir.
-- **Pearl**: B site veya mid boyunca duvar güçlü bölmeler yaratır. A main'de orb yüksek değerlidir.
-- **Fracture**: Her site'taki çift giriş noktası, bir giriş yolunu izole etmek için Toxic Screen'i son derece değerli kılar. Snake Bite post-plant lineup'ları her iki site'ta da güçlüdür.
-- **Haven**: Üç site Viper'ın duvarını herhangi bir site'ı bölmek için değerli kılar. Daha fazla potansiyel aktivasyon noktasıyla yakıt yönetimi daha talepkardır.
-- **Corrode**: Dar koridorlar Toxic Screen ile tamamen kapatılabilir -- tek bir wall tüm koridor sightline'ını keser. Poison Cloud dar geçişlerde savunucuya geçiş izni vermez. Snake Bite post-plant lineup'ları kompakt site'larda çok güçlüdür. Corrode'un dar yapısı Viper'ın alan engelleme kit'ini maksimum verimle kullanmasını sağlar.
+- **Breeze**: Viper'ın en güçlü olduğu harita. Uzun açılar ve geniş site'lar duvar bölmesiyle kapanır. Post-plant Snake Bite lineup'ları burada yüksek değer üretir.
+- **Icebox**: B veya A boyunca duvar baskın bölmeler yaratır. Tube veya A belt'te orb koy — kritik açılar kapanır.
+- **Lotus**: Üç site'ta da duvar esnekliği var. B site kapı geçişine duvar temel stratejin olsun.
+- **Pearl**: B site veya mid boyunca duvar güçlü bölmeler verir. A main'de orb yüksek değer taşır.
+- **Fracture**: Her site'ta çift giriş var. Bir girişi Toxic Screen ile kes — savunucu ikisini birden tutamaz. Snake Bite post-plant her iki site'ta da güçlüdür.
+- **Haven**: Üç site Viper duvarını her yerde değerli kılar. Daha fazla aktif nokta olduğu için yakıt takibini sıkı tut.
+- **Corrode**: Dar koridorlar Toxic Screen ile tamamen kapanır — tek bir duvar tüm sightline'ı keser. Poison Cloud dar geçişte push'u durdurur. Snake Bite lineup'ları kompakt site'larda güçlüdür. Dar yapı Viper kit'inin en çok değer ürettiği ortamdır.
 
 ## 6. Eşleşme Notları
-- Brimstone'a karşı: Viper yavaş default'ları kazanır; Brimstone hızlı execute'ları kazanır. Viper'ın duvarı (yakıtlı iken) kalıcıdır, Brimstone'un smoke'ları eninde sonunda söner.
-- Omen'e karşı: Omen Viper'ın duvarının içinden teleport olabilir. Duvar aktifken Shrouded Step ses ipuçlarını izleyin.
-- Bir diğer controller ile eşleşme: Viper wall/orb yönetirken diğer controller ek smoke sağlar. Büyük haritalarda güçlüdür.
-- Breach'e karşı: Fault Line duvarın içinden geçer. Viper, Breach'in duvardan geçen yeteneğine karşı savunmasızdır.
+- **Brimstone varsa**: Brimstone hızlı execute ister, sen yavaş default'ları kazanırsın. Brimstone smoke sönerken senin duvarlın (yakıtın varsa) hâlâ ayaktadır.
+- **Omen varsa**: Omen duvarının içinden teleport olabilir. Duvar aktifken Shrouded Step sesini dinle — içeriden geçiş yapıyorsa hazır ol.
+- **Sende başka controller yoksa**: Duvar ve orb yeterli değil, büyük haritalarda smoke boşluğu kalır. Takımdan ek smoke isteğini ilet.
+- **Karşıda Breach varsa**: Fault Line duvardan geçer. Breach olan takıma karşı duvarın içinde uzun kalmaktan kaçın — yeteneği seni vurur.
 
 ## 7. Oyuncuya Ne Söylenmeli
 
 ### İyi performans gösterdiğinde
-**Oyuncu Eylemi:** Yakıt tasarrufu için Toxic Screen'i entry'den hemen sonra kapatıyorsunuz, post-plant için Poison Cloud'u aktive ediyorsunuz ve varsayılan defuse noktasına Snake Bite lineup'larını indiriyorsunuz -- yakıtı round'un üç aşamasında yönetiyorsunuz.
-**Düşman Algısı:** Savunucular her zaman post-plant engelleme için yakıtı olan bir Viper görüyor. Duvarı bekleyip yakıt bittiğinde push yapmayı bekliyorlar, ama erken toggle'ınız sizi boş beklediklerinde %40-50 yakıtınızın kaldığı anlamına geliyor.
-**Düşman Tepkisi:** Ya aktif Poison Cloud'un içinden retake yapmaya (decay hasarı alıp azaltılmış HP ile dövüşerek) ya da yakıtın bitmesini beklemeye (sahip olmadıkları ciddi süreyi kaybederek) zorlanıyorlar. Defuse'da Snake Bite onları tam süresi boyunca spike'tan uzaklaştırıyor -- güçle geçmeye çalışırlarsa ölürler.
-**Fırsat Penceresi:** Savunucuların yakıtınızın bitmesini beklediği ama Poison Cloud'un hâlâ aktif olduğu post-plant aşaması, push mu yoksa bekleme mi konusunda tereddüt ettikleri bir pencere yaratır. Her Snake Bite defuse engelleme süresi ekler -- iki şarj üst üste binerek daha uzun engelleme sağlar ve Poison Cloud engellemesiyle birlikte spike zamanlayıcısını tüketebilir.
-**Tekrar Stratejisi:** Execute aşaması: Toxic Screen entry için açık, kısa sürede kapalı. Post-plant: plant'ten hemen sonra Poison Cloud açık. Defuse engelleme: defuse sesinde ilk Snake Bite, ilk bittiğinde sonraki Snake Bite. Savunucuların aynı duvara önceden konumlanamaması için site başına 2-3 Toxic Screen açısı arasında değişim yapın.
-**Düşman Adaptasyonu:** 4-5 round sonra savunucular sizi kurulum ortasında yakalamak için duvarın içinden erken push yapacak, siz atmadan önce öldürmek için Incendiary lineup noktalarını gözleyecek veya Snake Bite yığılmasından kaçınmak için retake'i iki açıdan bölecek.
-**Karşı Adaptasyon:** Duvardan erken push yaptıklarında: duvarı daha uzun açık bırakın ve 50 anlık HP azalması aldıkları decay bölgesinde onlarla dövüşün. Poison Cloud'u temizlediklerinde: orb'u retake açısını hâlâ kapsayan standart olmayan bir pozisyona yerleştirin. Bölünmüş retake yaptıklarında: Snake Bite lineup'ınızı alternatif defuse pozisyonuna yeniden konumlandırın ve diğer açıyı kapatmaları için takımınıza çağrı yapın.
+**Oyuncu Eylemi:** Takım site'a girerken Toxic Screen'i açıp geçince kapatıyorsun, spike kurulduktan sonra Poison Cloud'u devreye alıyorsun, defuse noktasına Snake Bite lineup indiriyorsun. Yakıtı round'un üç aşamasına bölüyorsun.
+**Düşman Algısı:** Savunucular yakıtının ne zaman biteceğini bekliyor ama erken kapattığın için post-plant'te hâlâ aktif orb'un var. Push mu yapsalar decay yer, bekleseler süre biter.
+**Düşman Tepkisi:** Ya Poison Cloud içinden retake yapar (düşük HP ile gelir), ya da bekler (süreyi kaybeder). Snake Bite defuseyi durdurur — iki şarj üst üste yığılınca spike kurucusunu zorlarsın.
+**Fırsat Penceresi:** Savunucu yakıtının bitmesini beklerken orb hâlâ açık — bu kararsızlık anı senin kazandığın andır. Her Snake Bite defuse süresini kısaltır.
+**Tekrar Stratejisi:** Entry: Toxic Screen açık, takım geçince kapat. Post-plant: plant olunca Poison Cloud aç. Defuse: defuse sesi gelince ilk Snake Bite, biter bitmez ikinci Snake Bite. Site başına 2-3 farklı Toxic Screen açısı kullan — savunucu aynı duvara alışmasın.
+**Düşman Adaptasyonu:** 4-5 round sonra savunucular şunları dener: duvar içinden erken push (seni atmadan önce öldürmek), Snake Bite noktalarını izleyip kaçmak, retake'i iki açıdan bölmek.
+**Karşı Adaptasyon:** Erken push yaparlarsa duvarı biraz daha uzun aç, decay bölgesinde karşıla. Orb'u temizlerlerse o site'ta farklı bir choke noktasına — örneğin Breeze'de B main yerine B shore'a — koy. Retake'i bölerlarsa Snake Bite'ı alternatif defuse noktasına kaydır, diğer açı için takıma çağrı yap.
 
-**Zorlandığında**: "Yakıtınız çok hızlı tükeniyor. Takım site'ta olunca duvarı kapatın. Orb yakıtını post-plant engelleme için saklayın. İki yetenek birlikte çalışır, çok geçmeden sıfır yetenek demektir."
+### Zorlandığında
+"Yakıt çok hızlı bitiyor. Takım site'ta olunca duvarı kapat. Orb'u post-plant için sakla. İkisi birlikte çalışır — aynı anda yakarsan ikisi de söner."
 
-**Tahmin edilebilir olduğunda**: "Her round aynı duvar, savunucuların önceden konumlanması demektir. Duvar varyasyonlarına ihtiyacınız var. 10 derece bile kaydırmak tüm site dinamiğini değiştirir."
+### Tahmin edilebilir olduğunda
+"Her round aynı duvar, savunucu seni okuyor. 10 derece kaydır — site dinamiği değişir, savunucu yeniden düşünmek zorunda kalır."
 
 ## 8. Rütbe Ayarı
-- **Düşük (Iron-Silver)**: Site başına bir duvar yerleşimi ve bir orb noktası öğrenin. Yakıt toggle'ı konusunda endişelenmeyin -- sadece yeteneği yerleştirin ve hayatta kalmaya odaklanın.
-- **Orta (Gold-Platinum)**: Yakıt toggle disiplinini tanıtın. Site başına 2 Snake Bite lineup öğrenin. Duvar yerleşimini değiştirmeye başlayın.
-- **Yüksek (Diamond-Ascendant)**: Tam lineup kütüphanesi. Gelişmiş yakıt yönetimi -- duvarı erken kapatın, post-plant orb için yakıt saklayın. Viper's Pit stratejik olarak kullanılır, çaresizce değil.
-- **Elit (Immortal-Radiant)**: Rakip rotasyonlarını okumaya göre uyarlanmış dinamik duvar yerleşimi. Maksimum aktif süre için yakıt mikro yönetimi. Karşı lineup'lardan kaçınmak için değiştirilmiş Snake Bite zamanlaması.
+- **Düşük (Iron-Silver)**: Site başına bir duvar noktası, bir orb noktası ezberle. Snake Bite'ı post-plant'te tutmayı hedefle — dövüşte kullanma.
+- **Orta (Gold-Platinum)**: Yakıt sıralamasını öğren: önce duvar, sonra orb. Site başına 2 Snake Bite lineup ezberle. Duvarı değiştirmeye başla.
+- **Yüksek (Diamond-Ascendant)**: Tam lineup kütüphanesi. Duvarı erken kapat, yakıtı post-plant orb için sakla. Viper's Pit'i strateji olarak koy, kaçış olarak değil.
+- **Elit (Immortal-Radiant)**: Savunucu rotasyonuna göre duvar açısını anlık değiştir. Yakıtı düşman push'una göre yönet — 1 düşman koridora girince orb aç, geri çekilince kapat. Snake Bite zamanlamasını karşı lineup'lardan kaçınmak için kaydır.

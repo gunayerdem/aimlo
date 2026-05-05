@@ -1,112 +1,112 @@
 # AJAN: Waylay
 
-> PATCH-SENSITIVE: Waylay yeni bir ajan. Koçluk tavsiyesi meta geliştikçe güncelleme gerektirebilir.
+> PATCH-SENSITIVE: Waylay yeni bir ajan. Meta değiştikçe bu notlar güncellenir.
 
 ## 1. Rol Kimliği
-- Waylay, keşif yeteneklerini agresif giriş mekanikleriyle birleştiren istihbarat-saldırgan hibrit duelist'tir. Takıma geleneksel duelist'lerin sunamadığı hem frag gücü hem düşman pozisyon bilgisi sağlar.
-- Takım kompozisyonu giriş baskısının yanında keşif değeri de gerektirdiğinde Waylay seçilmelidir. Ayrı bir initiator slotu ayıramayan takımlarda Jett veya Reyna yerine Waylay tercih edilir.
-- Waylay'in temel kimliği: her site baskınını istihbaratla besleyen, saldırganlığından ödün vermeden daha bilinçli dövüşler alan agresif duelist.
-- Diğer duelist'lerden farkı: Waylay'in her dövüşü önceden bilgilendirilmiş dövüştür. Keşif aracı pozisyonu ortaya çıkarır, giriş aracı o pozisyona saldırgan şekilde gider.
+- Waylay duelist ama kör girmiyor. Önce bakıyor, sonra dalıyor. Her turda hem düşman yerini öğreniyorsun hem de o düşmanla dövüşüyorsun.
+- Jett veya Reyna gibi girdi-öldürdü değil. Farkın şu: girdiğinde karşındakinin nerede durduğunu zaten biliyorsun.
+- Takımın ayrı bir initiator alamıyorsa, sen o boşluğu kapatıyorsun — ama frag sorumluluğundan vazgeçmeden.
+- Kısaca: önce tara, sonra gir. Bu sırayı bozarsan Waylay'in hiçbir değeri kalmaz.
 
 ## 2. Temel Sorumluluklar
-- **Atak tarafı görevleri:** Giriş öncesi keşif odaklı yetenekleri deploy et, sonra agresif araçlarla girişe commit ol. Execute başlamadan önce takıma savunucu pozisyonlarını bildir. Bilgi avantajıyla açılış düellosunu al.
-- **Defans tarafı görevleri:** Bilgi araçlarını push'ların erken tespiti için kullan. Keşif-giriş hibrit kit'iyle istihbaratla desteklenmiş güvenli peek'ler al. Toplanan bilgilere dayanarak rotasyon çağrıları yap.
-- **Takım beklentisi:** Takım Waylay'den hem açılış kill'leri hem dövüş öncesi bilgi bekler. Kör giren saf duelist'ten farklı olarak, Waylay commit etmeden önce en az bir savunucunun yerini bilmelidir. Saf initiator'dan farklı olarak, Waylay dövüşü alan kişi olmalıdır.
+- **Atak:** Site'a girmeden önce keşif yeteneğini kullan, düşman pozisyonunu gör, takıma söyle, sonra o pozisyona gir. Bu sıra şart.
+- **Defans:** Push sesini duyduğunda veya erken temas olduğunda keşif yeteneğini kullan. Nereye baktığını bilerek açı al. Rotate çağrısını keşiften sonra yap.
+- **Takım beklentisi:** Takım senden iki şey bekliyor — ilk öldürme ve dövüş öncesi bilgi. Sadece öldürürsen bilgi üretimini sıfırladın. Sadece bilgi verirsen ilk girişi boşa bıraktın. İkisini birlikte teslim et.
 
 ## 3. Sık Yapılan Hatalar
-1. **Saf duelist oynayıp keşif araçlarını görmezden gelmek** — Yalnızca agresif yetenekleri kullanan Waylay oyuncuları kit'in bilgi toplama yarısını boşa harcar. Her site baskını istihbaratla başlamalı, sonra saldırganlığa geçmeli.
-2. **Saf keşif oynayıp girişten kaçınmak** — Tam tersi hata: bilgiye odaklanan ama dövüşe commit etmeyen oyuncular. Waylay hala duelist'tir. İstihbarat doğrudan agresif oyuna beslemeli.
-3. **Yetenekleri yanlış sıralamak** — Bilgi yeteneği önce gelmeli, sonra giriş aracı. Sırayı tersine çevirmek kör giriş demektir ve Waylay'in tüm avantajını sıfırlar.
-4. **Yakın mesafede keşife aşırı bağlanmak** — Yakın mesafede bilgi toplama, dövüşmeye harcanması gereken zamanı tüketir. Menzilden keşif, yakında saldırganlık kullan.
-5. **İstihbaratı takıma iletmemek** — Waylay'in bilgi değeri paylaşıldığında katlanır. İstihbarat toplayıp çağrı yapmayan oyuncular Waylay'i standart duelist'in kötü versiyonuna indirger.
-6. **Tüm kit'i execute öncesi harcamak** — Setup aşamasında tüm cooldown'ları tüketmek, site baskını sırasında Waylay'i araçsız bırakır. Yetenekleri tur boyunca bütçele.
-7. **Duelist temellerini ihmal etmek** — Keşif hibrit kimliğine rağmen Waylay hala düel kazanmalı, alan yaratmalı ve ilk teması almalıdır. Bilgi toplama temel duelist işinin yerine geçmez.
+1. **Keşif yeteneğini hiç kullanmamak** — Sadece saldırarak oynuyorsan Waylay'in yarısını çöpe atıyorsun. Her girişten önce bir kez tara.
+2. **Tarayıp girişten kaçınmak** — Bilgiyi topluyorsun ama dövüşe girmeye korkuyorsun. Waylay hâlâ bir duelist. Tara, sonra gir.
+3. **Önce girip sonra taramak** — Sırayı ters yapıyorsun. Giriş yeteneği önce giderse kör girmiş olursun. Keşif her zaman öne geçer.
+4. **Yakın mesafede taramaya zaman harcamak** — Yakında tarama değil saldırganlık kullan. Uzaktan tara, yakında dövüş.
+5. **Gördüğünü söylememek** — "Bir kişi B'de" demek bir saniye alır. Söylemezsen o bilgi sadece sana yarar. Söylersen takımın rotate kararı değişir.
+6. **Tur başında her şeyi harcamak** — Site'a girmeden tüm yetenekleri kullanırsan site'ta savunmasız kalırsın. Yeteneği tut, içeride kullan.
+7. **Temel düeli ihmal etmek** — Tara-gir rutinine odaklanırken nişangah pozisyonunu düşürdün mü? Waylay hâlâ ilk teması sen alıyorsun. Bilgi toplamak dövüşü kazandırmaz, kazanmana zemin hazırlar.
 
 ## 4. Kalıp -> Anlam
 
-**IF** Oyuncu bilgi topluyor ama kısa süre içinde harekete geçmiyor
-**MEANING** Çok pasif oynuyor, Waylay'i duelist yerine initiator olarak kullanıyor
-**COUNTER** Bilgi-saldırganlık boru hattını koçla. Keşifin doğrudan takip oyunu olmalı. İstihbarat topla, sonra hemen ortaya çıkan pozisyona peek yap. Bilgi ile peek arası ne kadar kısaysa Waylay o kadar güçlü.
-**WHY** Geciken peek, savunucuya yer değiştirme fırsatı verir ve keşifin sağladığı pozisyon bilgisini geçersiz kılar.
+**IF** Oyuncu bilgi topluyor ama üstüne gitmiyor
+**MEANING** Waylay'i sadece bilgi aracı gibi oynuyor — dövüşü başkasına bırakıyor
+**COUNTER** Keşiften sonra anında o pozisyona gir. Gördüğün düşman yer değiştirmeden sen oraya ulaşman lazım. Tara, çağır, hemen gir — düşman kayar.
+**WHY** Bekledikçe düşman pozisyon değiştirir. Keşfin gösterdiği bilgi geçersiz olur.
 
-**IF** Oyuncu keşif yeteneklerini kullanmadan giriş yapıyor
-**MEANING** Standart duelist davranışına geçiyor, Waylay'in bilgi avantajını harcıyor
-**COUNTER** Keşif-önce sırasını drill yap. Her girişten önce bilgi aracı deploy edilmeli. İstihbaratsız giriş boşa harcanmış Waylay turu. Custom oyunda her site için "önce tara, sonra peek" rutinini tekrarla.
-**WHY** Waylay'in tüm kit değeri bilgilendirilmiş dövüşte yatar; kör giriş onu yetenekleri eksik bir Jett'e dönüştürür.
+**IF** Oyuncu keşif yeteneğini kullanmadan giriyor
+**MEANING** Sıradan duelist gibi davranıyor, Waylay'i seçmenin nedeni ortadan kalkmış
+**COUNTER** Her girişten önce keşif yeteneği zorunlu. Her site girişinde "önce tara, sonra gir" sırasını uygula. Bunu her turda tekrarla.
+**WHY** Kör girersen Waylay'den daha düşük bir Jett oluyorsun — yeteneklerin eksiğiyle aynı riski alıyorsun.
 
-**IF** Oyuncunun dövüş öncesi bilgi almasına rağmen ilk-kill oranı düşük
-**MEANING** İstihbarat nişangah avantajına dönüşmüyor, muhtemelen bilgi aldıktan sonra tereddüt ediyor
-**COUNTER** Bilgi ile saldırganlık arasındaki boşluğu minimize et. Peek, düşman hala keşif aracına tepki verirken gelmeli. Savunucu ya tarandığını biliyor (ve hareket ediyor) ya da bilmiyor (ve sen önceden nişanlısın) — her iki durumda da hemen peek et.
-**WHY** Tereddüt penceresi büyüdükçe savunucu ya pozisyon değiştirip bilgiyi geçersiz kılar ya da nişangahını keşif aracı yönüne çevirip Waylay'i karşılar.
+**IF** Oyuncu bilgiye rağmen ilk öldürme oranı düşük
+**MEANING** Gördüğü bilgiyi nişangaha çevirmekte geç kalıyor — düşman taranmış pozisyondan ayrılıyor
+**COUNTER** Keşif yeteneği düşmanı tarar taramaz gir. Düşman ya henüz tarandığını bilmiyor (önceden nişanlanmış düel), ya da kaçmaya çalışıyor (hareketli hedef). Her iki durumda da bekleme.
+**WHY** Bekledikçe düşman ya pozisyon değiştirir ya da nişangahını sana çevirir. Avantaj sıfırlanır.
 
-**IF** Oyuncu sürekli kullanılmamış yeteneklerle ölüyor
-**MEANING** Tam kit'i oyun tarzına entegre etmemiş, muhtemelen hibrit doğanın karmaşıklığından bunalmış
-**COUNTER** Kit kullanımını iki adıma sadeleştir: önce keşif, sonra giriş. Bu sırayı karmaşıklık eklemeden önce ustalaş. Her tur "tara-peek" mantrasıyla başlasın.
-**WHY** Kullanılmamış yeteneklerle ölmek, satın alınan ama hiç ateşlenmeyen silah gibidir — takım ekonomisine ve tur kazanma şansına doğrudan zarardır.
+**IF** Oyuncu yeteneklerini kullanmadan ölüyor
+**MEANING** Yeteneği ne zaman kullanacağını henüz oturtamamış
+**COUNTER** Her turu iki adıma indir: önce tara, sonra gir. Başka bir şey düşünme. Bu iki adıma hakim olmadan karmaşıklık ekleme.
+**WHY** Kullanılmayan yetenek boşa giden para — hem takım ekonomisine hem tur şansına zarar.
 
-**IF** Waylay'e rağmen takım sürekli bilgi eksikliği yaşıyor
-**MEANING** Oyuncu istihbarat iletmiyor veya keşif araçlarını hiç kullanmıyor
-**COUNTER** Waylay'in keşifinin takım utility'si olduğunu vurgula. Toplanan her bilgi parçası sesli çağrılmalı, Waylay kişisel olarak harekete geçmeyi planlasa bile. "Bir kişi B'de" çağrısı yapmak taşınan bilgiyi katlara çıkarır.
-**WHY** Paylaşılmayan istihbarat yalnızca bir dövüşü etkiler; paylaşılan istihbarat tüm takımın rotasyon ve pozisyon kararlarını iyileştirir.
+**IF** Waylay oynuyorsunuz ama takım hâlâ bilgisiz hareket ediyor
+**MEANING** Oyuncu ya taramıyor ya da gördüğünü söylemiyor
+**COUNTER** Her keşiften sonra sesli çağrı zorunlu. Kendi girişini planlasan bile "iki kişi A'da" diyorsun. Söylemesen o bilgi yalnızca bir dövüşü etkiler. Söylesen tüm takım rotasyonunu değiştirir.
+**WHY** Paylaşılan bilgi tüm takımın kararını besler. Paylaşılmayan bilgi çöpe gider.
 
-**IF** Oyuncu bilgi topladıktan sonra peek yerine geri çekilip bilgiyi takıma aktarıyor
-**MEANING** Initiator gibi davranıyor, duelist sorumluluğunu almıyor
-**COUNTER** Waylay'in bilgi toplaması kendi peek'ini beslemeli. Takım arkadaşlarına istihbarat aktarmak ek bonus ama birincil amaç Waylay'in kendisinin önceden bilgilenmiş düel almasını sağlamak. Bilgi topla, çağır, kendin peek yap.
-**WHY** Bilgiyi sadece başkalarına veren Waylay, entry yapmayan bir duelist'tir — takımda hala bir giriş boşluğu kalır.
+**IF** Oyuncu bilgiyi takıma veriyor ama kendisi girmiyor
+**MEANING** Initiator rolüne kaymış, duelist sorumluluğunu bırakmış
+**COUNTER** Keşif önce senin girişine hizmet eder, takıma vermek bonusdur. Tara, söyle, sen gir. Başkasının girmesini bekleme.
+**WHY** Kendin girmeyince takımda hâlâ bir giriş boşluğu var. Waylay seçmenin amacı o boşluğu senin kapatmandı.
 
-**IF** Oyuncu her turda aynı site'tan aynı keşif-peek sırasıyla giriyor
-**MEANING** Öngörülebilir hale gelmiş, savunucular keşif zamanlamasını ve peek açısını önceden nişanlıyor
-**COUNTER** Keşif zamanlamasını ve peek açısını tur bazında değiştir. Bazı turlarda keşifi geciktir, bazılarında farklı site'tan başla. Aynı noktadan üç tur üst üste aynı sırayı tekrarlamak savunucuya hazırlık zamanı verir.
-**WHY** Waylay'in bilgi avantajı sürpriz unsuruna bağlıdır; öngörülebilir kalıplar savunucunun keşif deploy anında agresif push yaparak Waylay'i yetenek ortasında yakalamasına yol açar.
+**IF** Oyuncu her turda aynı açıdan aynı sırayla giriyor
+**MEANING** Okunabilir hale gelmiş — düşman keşif yeteneği geldiği anda seni bekliyor
+**COUNTER** Keşif zamanlamasını ve girdiğin açıyı tur tur değiştir. Aynı noktadan üst üste aynı şeyi yaparsan düşman keşif anında seni basar. Bir tur gecikmeli tara, sonraki tur farklı açıdan gir.
+**WHY** Waylay'in avantajı sürprizde. Düşman tarama zamanını öğrenirse keşif yeteneklerini basar ve seni hazırlıksız yakalar.
 
-**IF** Oyuncu retake sırasında keşif araçlarını hiç kullanmıyor
-**MEANING** Keşif araçlarını yalnızca atak tarafı aracı olarak görüyor, defans ve retake değerini kaçırıyor
-**COUNTER** Retake öncesi keşif, site'taki düşman pozisyonlarını ortaya çıkararak takımın koordineli giriş yapmasını sağlar. Retake başlamadan önce en az bir keşif aracı deploy et.
-**WHY** Retake'te kör giriş yapmak, savunucuların avantajlı pozisyonlarına doğrudan yürümek demektir; keşif bu avantajı nötralize eder.
+**IF** Retake'te keşif yeteneği kullanmıyor
+**MEANING** Keşfi sadece atak tarafı aracı sanıyor
+**COUNTER** Retake'e girmeden önce site'ı tara. Düşman nerede duruyor, kaç kişi var — bunları bilmeden girme. En az bir keşif yeteneği retake öncesi.
+**WHY** Kör retake, düşmanın hazır beklediği açılara yürümek demek. Keşif o avantajı kaldırır.
 
 ## 5. Harita Etkileşimleri
-- **Haven — S Tier:** Üç site keşif bileşenini ödüllendirir. Waylay hangi site'ı execute edeceğine karar vermeden önce bilgi toplayabilir. C Long'da keşif-peek boru hattı tahmin edilebilir tutma noktalarını cezalandırır. A Long ve Garage'da keşif aracı savunucu dağılımını ortaya çıkararak takım rotasyonunu bilgilendirir.
-- **Ascent — S Tier:** Orta kontrol istihbarat destekli saldırganlıktan güçlü şekilde yararlanır. Catwalk ve mid'de keşif yüksek değerli. A Main'de dar choke point keşif-peek döngüsü için ideal geometri sunar. B Main'de tek bir tarama yaygın savunucu pozisyonunu elimine eder.
-- **Lotus — A Tier:** Birden fazla açıyla karmaşık düzeni dövüş öncesi bilgi toplamadan yarar sağlar. Dönen kapılarda keşif açık alan bilgisi verir. A Main ve C Main'de keşif-giriş kombinasyonu güçlüdür, ancak B site'ın dar yapısı keşif aracının erken fark edilmesine yol açabilir.
-- **Split — A Tier:** A Ramp ve B Main'deki dar koridorlar keşif-peek sırasını ödüllendirir. Orta bölgede bilgi toplamak her iki site'a rotasyon kararını besler. Dar yapı keşif aracının kaçırılmasını zorlaştırır.
-- **Breeze — B Tier:** Uzun görüş hatları keşif araçlarını değer üretmeden ifşa edebilir. Açık alan bilgi avantajını azaltır. Waylay'in tara-peek boru hattı ancak Hall ve A Cave gibi kapalı alanlarda güçlü kalır.
-- **Fracture — B Tier:** Eş zamanlı çoklu nokta girişleri Waylay'in sıralı keşif-sonra-giriş yaklaşımına tam uymaz. Yine de Arcade ve Dish gibi dar geçişlerde keşif değeri vardır.
+- **Haven — S Tier:** Üç site var, keşif değeri en yüksek burada. Hangi site'a gideceğine karar vermeden önce tara. C Long'da tara-gir döngüsü statik tutan herkesi cezalandırır. A Long ve Garage'da tek bir tarama takımın rotate kararını değiştirir.
+- **Ascent — S Tier:** Orta kontrol keşif destekli saldırganlıkla çok güçlü. Catwalk ve mid'i mutlaka tara. A Main'in dar girişi tara-gir için ideal. B Main'de tek tarama en yaygın savunucu pozisyonunu ortadan kaldırır.
+- **Lotus — A Tier:** Çok açılı karmaşık harita, bilgisiz giriş pahalıya patlar. Dönen kapılarda keşif açık alanı gösterir. A Main ve C Main'de tara-gir güçlü. B site'ın dar yapısı keşif yeteneğini erken fark ettirebilir — buna dikkat et.
+- **Split — A Tier:** A Ramp ve B Main'deki dar koridorlar tara-gir için biçilmiş kaftan. Orta bilgisi her iki site kararını da besler. Dar yapı düşmanın keşiften kaçmasını zorlaştırır.
+- **Breeze — B Tier:** Uzun görüş hatları keşif yeteneğini açığa çıkarır. Açık alanda bilgi avantajın azalır. Sadece Hall ve A Cave gibi kapalı alanlarda tara-gir döngüsü güçlü kalır.
+- **Fracture — B Tier:** Çoklu eş zamanlı giriş noktaları sıralı tara-gir yaklaşımına tam uymaz. Arcade ve Dish gibi dar geçişlerde keşif hâlâ değerli.
 
 ## 6. Eşleşme Notları
-- **Fade'e karşı — Zor:** Fade, Waylay'in pozisyonunu Haunt ile geri izleyebilir. Her iki ajan da keşif sağlar ama Fade'in keşifi Waylay'in agresif peek'ini geciktirmeye zorlar. Haunt deploy edildiğinde Waylay peek yerine önce trail'i kırmalıdır.
-- **KAY/O'ya karşı — Zor:** Suppress, keşif-giriş kombinasyonunu tamamen devre dışı bırakır. KAY/O'nun knife'ı Waylay'in keşif aracı deploy ettiği alanı ortaya çıkarır. NULL/CMD aktifken Waylay saf mekanik düellosuna zorlanır — kit avantajı sıfırlanır.
-- **Cypher'a karşı — Güçlü:** Waylay'in dövüş öncesi istihbaratı Cypher'ın tripwire kurulumlarından ve Spycam pozisyonlarından sürpriz unsurunu kaldırır. Sabit sentinel kurulumlarına karşı keşif değeri en yüksek seviyededir.
-- **Chamber'a karşı — Güçlü:** Chamber'ın Trademark pozisyonları ve statik Op tutuşları Waylay'in keşifiyle ortaya çıkar. Önceden bilgilenen Waylay, Chamber'ın kaçış mekanizmasını tetiklemeden önce pozisyon avantajı elde eder.
-- **Skye'a karşı — Dengeli:** Her iki ajan da keşif-saldırganlık alanında rekabet eder. Skye'ın flash'i ve Trailblazer'ı benzer bilgi-agresyon döngüsü sunar. Üstünlük hangi oyuncunun keşif-peek zamanlamasını daha iyi yönettiğine bağlıdır.
-- **Killjoy'a karşı — Güçlü:** Turret yerleştirmeleri ve Alarmbot pozisyonları keşifle ortaya çıkar. Waylay, Killjoy'un savunma kurulumunu tara-peek ile sistematik olarak çözer.
+- **Fade'e karşı — Zor:** Fade'in Haunt'u Waylay'in yerini geri izler. Haunt geldiğinde önce trail'i kır, sonra gir. Kırmadan girersen karşında Waylay'in nerede olduğunu bilen bir düşman olur.
+- **KAY/O'ya karşı — Zor:** Knife geldiğinde keşif yeteneğin kapanır. NULL/CMD'de saf mekanik düelloya zorlanırsın — yetenek avantajın sıfırlanır. O turda temkinli oyna, yeteneğine güvenerek açı alma.
+- **Cypher'a karşı — Güçlü:** Keşif yeteneğin Cypher'ın tripwire ve kamera pozisyonlarını ifşa eder. Statik savunuculara karşı keşfin en verimli hali budur — nereden baktığını bildiğin düşmana karşı giriyorsun.
+- **Chamber'a karşı — Güçlü:** Trademark pozisyonları ve Op tutma açıları keşifle ortaya çıkar. Nerede beklediğini öğrenince kaçış mekanizmasını tetiklemeden önce pozisyon avantajı alırsın.
+- **Skye'a karşı — Dengeli:** Skye da benzer tara-gir döngüsü oynar. Fark kim daha hızlı ve daha doğru keşif-giriş geçişi yapıyor. Zamanlama senin üstünse kazanırsın.
+- **Killjoy'a karşı — Güçlü:** Turret ve Alarmbot pozisyonlarını keşifle görürsün. Waylay, Killjoy savunma kurulumunu sistematik olarak tara-gir döngüsüyle söker.
 
 ## 7. Oyuncuya Ne Söylenmeli
 
 ### İyi performans gösterdiğinde
-**Oyuncu Aksiyonu:** Her girişten önce keşif deploy ediyorsun, toplanan istihbaratla anında aksiyon alıyorsun ve swing yapmadan önce savunucu pozisyonlarını takıma çağırıyorsun — duelist saldırganlığını initiator bilgi akışıyla birleştiriyorsun.
-**Düşman Algısı:** Savunucular peek yapmadan önce her zaman nerede olduklarını bilen bir duelist görüyor. Nişangahının olağanüstü olduğuna inanıyorlar ama gerçek avantaj her dövüşün önceden nişanlanmış olması — keşifin az önce pozisyonlarını ortaya çıkardığı için.
-**Düşman Tepkisi:** Her keşif taraması sonrası yer değiştirmek (kısa ama değerli tur süresine mal oluyor ve hazırlanmış pozisyonları terk ediyorlar) veya tutup pozisyonunu zaten bilen oyuncuya karşı savunmak zorunda kalıyorlar.
-**Fırsat Penceresi:** Keşif ortaya çıkarma ile savunucu yer değiştirmesi arasındaki kısa pencere kill penceren. Savunucu ya taranan pozisyonda (önceden nişanlanmış düel) ya da yeni pozisyona hareket halinde (nişangah yerleştirmesi olmayan hareketli hedef).
-**Tekrar Stratejisi:** Tur 1: birincil tutma açısını tara, anında peek yap, pozisyonu çağır. Tur 2: birincilden kayanları yakalamak için ikincil açıyı tara. Tur 3: keşifi atla ve kuru-peek yap — tarama için bekleyen savunucuları hız değişikliğiyle cezalandır.
-**Düşman Adaptasyonu:** 3-5 turdan sonra savunucular keşifin inmesinden önce önceden yer değiştirecek, taranması zor pozisyonlar oynayacak veya keşif deploy'u sırasında agresif push yaparak seni yetenek ortasında yakalayacak.
-**Karşı Adaptasyon:** Önceden yer değiştirdiklerinde: yeni pozisyonları doğrulamak için keşif kullan — taşınsalar bile bilgi hala değerli. Anti-tarama pozisyonlar oynuyorlarsa: o noktaları duelist saldırganlığıyla temizle ve keşifi turun ilerisine sakla. Deploy sırasında push yapıyorlarsa: off-angle tut ve seni yetenek ortasında beklerlerken nişangahına yürümelerine izin ver.
+**Oyuncu Aksiyonu:** Her girişten önce tarıyorsun, gördüğünü söylüyorsun, anında giriyorsun. Hem bilgi hem öldürme aynı turda geliyor.
+**Düşman Algısı:** Karşındakiler nişangahının çok iyi olduğunu düşünüyor. Aslında her dövüşe önceden nişanlanmış giriyorsun — keşif az önce nerede durduklarını sana söyledi.
+**Düşman Tepkisi:** Ya taranan yerden çekiliyor (hazır pozisyonu terk ediyor, değerli süre harcıyor) ya da yerinde kalıp seni bilen birine karşı savunmak zorunda kalıyor.
+**Fırsat Penceresi:** Tarama biter bitmez gir. Düşman ya hâlâ orada (önceden nişanlanmış düel) ya da kaçmaya çalışıyor (hareketli hedef). Her iki durumda da giriş anı şimdi.
+**Tur Rotasyonu:** Bir tur birincil açıyı tara, anında gir, söyle. Sonraki tur oradan kayanlara ikincil açıyı tara. Öbür tur tarama yapma, direkt gir — tarama bekleyenleri hız farkıyla cezalandır. Düşman keşfi inkar etmeye çalışırsa açıyı değiştir; keşif anında basıyorsa off-angle bekle.
+**Düşman Adaptasyonu:** Düşman birkaç temas sonra taramadan önce yer değiştirecek, zor taranan noktalara geçecek veya keşif yeteneği açılırken seni basmaya çalışacak.
+**Karşı Adaptasyon:** Önceden kayıyorlarsa — yeni pozisyonu bulmak için yine tara, bilgi hâlâ değerli. Zor noktalara geçtilerse — o noktaları saldırganlıkla temizle, keşfi daha sonraya sakla. Keşif anında basyorlarsa — off-angle bekle, sana doğru yürürlerken nişangahına girsinler.
 
 ### Zorlandığında
-"Tur başına bir rol seç: ya keşifle başla ve girişe commit et, ya da bilgiyle destekle ve takım arkadaşının seni trade etmesine izin ver. İkisini de yapmamak en kötü seçenek. Tara-peek mantrasına dön ve her turu bu sırayla aç."
+Her tur için tek karar: ya önce tara sonra kendin gir, ya da bilgiyi ver ve takım arkadaşın girsin. İkisini de yapmamak en kötü seçenek. Tara-gir sırasına dön, her turu bununla aç.
 
-### Öngörülebilir olduğunda
-"Keşif zamanlamanı okuyorlar. Bilgi aracını geciktir veya takip peek'ini önceden nişanlamalarından kaçınmak için farklı açıdan kullan. Aynı noktadan aynı zamanlama ile tarama yapmak seni tahmin edilebilir kılar."
+### Okunabilir hale geldiğinde
+Keşif zamanlamanı okuyorlar. Yeteneği geciktir ya da farklı açıdan kullan. Aynı noktadan aynı zamanlama ile üst üste aynı şeyi yapma.
 
 ## 8. Rank Modülasyonu
 
 ### Düşük Elo (Iron-Silver)
-Temel iki adıma odaklan: önce bilgi aracını kullan, sonra savaş. Optimizasyonu düşünme — yalnızca peek etmeden önce istihbarat toplama alışkanlığı oluştur. Öğrendiğin her şeyi takıma çağır. Waylay'i keşif aracı olan bir duelist olarak oyna, tersini değil. Her turda mantra: "tara, çağır, peek."
+İki adım: önce keşif yeteneği, sonra gir. Başka bir şey düşünme. Gördüğünü takıma söyle. Her tur: tara, söyle, gir. Bu sıra oturursa geri kalanı kendiliğinden gelir.
 
 ### Orta Elo (Gold-Platinum)
-Keşif ile saldırganlık arasındaki zamanlamayı geliştir — konfor arttıkça ara kısalmalı. İstihbaratı yalnızca kişisel peek'ler için değil tüm takım yararına kullanmaya başla. Her haritada hangi site'ların en yüksek keşif değeri verdiğini öğren. Yetenekleri tur başında hepsini kullanmak yerine tüm tur boyunca sıralama. Retake senaryolarında keşif aracı kullanmayı alışkanlık haline getir.
+Keşif ile giriş arasındaki süreyi kıs. Kişisel girişin yanı sıra takıma da bilgi ver — düşman siteye yığıldığında bilgiyi paylaş, düşman tekse kendin kullan. Hangi site'ların en çok keşif değeri verdiğini haritaya göre biliyorsun. Yeteneklerini tur başında hepsini harcama, içeride de kullan. Retake'lerde de taramayı unutma.
 
 ### Yüksek Elo (Diamond-Ascendant)
-Bilgi-aksiyon boru hattını anında olacak şekilde ustalaş. Keşifi adaptif kullan: kimi turda kişisel giriş için, kimi turda takım koordinasyonu için. Keşif araçlarını inkar etmeye veya yem olarak kullanmaya çalışan düşman takımlara karşı karşı-oyun geliştir. Waylay'in bu ranktaki pick değeri disiplinli kit kullanımına bağımlıdır.
+Keşif-giriş geçişi anlık olsun. Kimi turda bilgiyi takıma vererek koordine et, kimi turda kendin kullan — hangisinin daha çok değer yarattığını okuyorsun artık. Düşman keşif yeteneğini inkar etmeye çalışırsa o açıyı boş bırak ve farklı açıdan gir; yem olarak kullanmaya çalışırsa keşif atmadan direkt gir.
 
 ### Elit (Immortal-Radiant)
-Waylay'in hibrit rolünün saf duelist veya saf initiator'dan ne zaman daha fazla değer kattığı konusunda meta-seviye okumalara odaklan. Yetenek sıralaması her turda düşman savunma ayarlamalarına göre optimize edilmeli. Keşif zamanlaması kalıp okumalarını önlemek için değişmeli. Bu rankte Waylay'in bilgi değeri frag değerini aşabilir — her ikisinin de teslim edildiğinden emin ol. Rakip takımın Waylay'e özgü karşı taktiklerini round bazında oku ve kit kullanımını buna göre ayarla.
+Her turda düşman nasıl önlem aldı, buna göre keşif zamanlamasını ve açını değiştiriyorsun. Saf duelist veya saf initiator'dan hangisinin bu turda daha çok değer katacağını okuyorsun ve Waylay'i o tarafa çekiyorsun. 1 düşman düştüğünde ve takım sayı üstünlüğü varsa bilgiyi kendin için kullan, eşit veya sayı az olduğunda bilgiyi paylaş. Rakip takımın Waylay'e özel karşı planını okuyorsun ve her tur ona göre yaklaşımını değiştiriyorsun.

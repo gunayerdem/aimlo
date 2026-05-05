@@ -11,111 +11,109 @@ tags: [matchup, neon, killjoy, duelist, sentinel]
 
 ## 1. Matchup Özü
 
-Neon sprint + slide kombosuyla Killjoy'un turret + alarmbot + nanoswarm setup'ını hızla delmeye çalışan fast-flanker duelist, Killjoy ise turret + alarmbot ses hattıyla Neon'un yüksek hareket hızını bilgiye çeviren bilgi sentineli. Matchup Neon'un sprint disiplinine karşı Killjoy'un trap yerleşim varyasyonunu test eder.
+Neon sprint + slide ile Killjoy'un kurduğu tuzak hattını kırmaya çalışır. Killjoy turret + alarmbot + nanoswarm zinciriyle Neon'un hızını bilgiye çevirir. Bu maçup şu soruya gelir: Neon koridoru doğru seçerse Killjoy'u ezer. Yanlış koridora girerse Killjoy tuzağı kapanır.
 
 ## 2. Kim Avantajlı?
 
 **Neon lehine durumlar:**
-- Uzun koridor map'lerinde (Breeze, Icebox Mid, Pearl Mid) — Neon sprint hızı uzun koridoru Killjoy'un turret range'inden önce kapatır
-- Killjoy solo anchor pozisyondaysa — Neon flash + slide combo trade partner yoksa Killjoy'u tek yönde basar
-- Killjoy ult cooldown'da — Lockdown olmadan Killjoy'un retake gücü yok, Neon post-plant aggressive
-- Neon ult hazır (Overdrive) — Overdrive sırasında Neon'un beam damage turret'i + Killjoy'u tek shot'ta alabilir
+- Uzun koridor varsa (Breeze A/B hattı, Icebox Mid, Pearl Mid) — Neon sprint turretin hedef alma mesafesine girmeden koridoru kapatır
+- Killjoy yalnız anchor oynuyorsa — Neon flash + slide attığında trade yok, Killjoy tek kalır
+- Killjoy ultu bekliyorsa — Lockdown yokken post-plant agresif oyna, retake gücü düşük
+- Neon ultu hazırsa — Overdrive beam turret + Killjoy'u anında eritir
 
 **Killjoy lehine durumlar:**
-- Close-range site'larda (Bind Hookah, Sunset, Fracture B) — turret close range'de Neon'un sprint hızını tag'ler, alarmbot ses Killjoy'a önceden bilgi verir
-- Neon sprint cooldown'dayken — yüksek mobility yok, turret + rifle crossfire Neon'u düşük HP'ye indirir
-- Killjoy utility hattı Neon'un flank hattında — alarmbot + nanoswarm Neon'un flank girişini kapatır
-- Post-plant Lockdown ult durumunda — Lockdown radius içinde Neon'un sprint detain durur
+- Dar site koridorlarında (Bind Hookah, Sunset B, Fracture B) — turret Neon'u yakın mesafede yakalar, alarmbot önceden haber verir
+- Neon sprint bekliyorken — hız yok, turret + rifle çaprazı Neon'u düşük cana indirir
+- Alarmbot flank hattındaysa — Neon flanke girince Killjoy hazır bekler
+- Killjoy ultu aktifse — Lockdown içinde Neon sprint çalışmaz
 
-**Balanced:** Haven, Ascent, Lotus gibi orta mesafeli map'lerde matchup Neon'un rotate disiplinine ve Killjoy'un utility varyasyonuna bağlı.
+**Orta:** Haven, Ascent, Lotus'ta avantaj koridor seçimine göre değişir. Neon A Short/Mid seçerse Neon öne geçer, Killjoy B anchor kurarsa dengede.
 
 ## 3. Key Düellolar
 
 **IF** Neon sprint ile A Main'e giriş yaptı, Killjoy turret A Main'e bakıyor
-**MEANING** Turret Neon'un sprint sırasında tag'ler, sprint + turret damage Neon'u HP kaybıyla site'a sokar
-**COUNTER** Neon sprint öncesi turret sesini dinle. Turret var ise ilk angle'da turret'i sil (rifle shot), sonra sprint entry.
-**WHY** Neon sprint sesi turret'e bilgi vermiyor ama turret otomatik tarama yapıyor. Turret silinmeden sprint entry = bedava tag.
+**MEANING** Turret Neon'u sprint sırasında tarar ve can keser — sahaya girerken zaten hasarlısın
+**COUNTER** Turret sesini duyduğun an sprint atma. Önce rifle ile turret'i sil, sonra sprint at.
+**WHY** Turret otomatik tarama yapar. Turret silinmeden sprint = bedava can kaybı.
 
 ---
 
-**IF** Neon slide ile aggressive peek attı, Killjoy alarmbot sesini duymadı
-**MEANING** Alarmbot Neon'un slide hattında değilse Killjoy önceden bilgi almadı, slide surprise value maksimum
-**COUNTER** Killjoy alarmbot'u Neon'un slide hattına kurar — slide hatları round 1'de öğrenilir, round 2'de alarmbot yerleşir.
-**WHY** Alarmbot sessiz info kaynağı. Slide hattında alarmbot varsa Killjoy trade hazırlığında, yoksa Neon bedava peek kazanır.
+**IF** Neon slide ile agresif baktı, alarmbot slide hattında değil
+**MEANING** Killjoy haber almadı, slide sürpriz değeri tam — peek bedava
+**COUNTER** Killjoy olarak ilk roundda Neon'un slide hattını gözlemle, sonraki roundda alarmbotu o hatta kur.
+**WHY** Alarmbot sessiz çalışır. Slide hattında alarmbot varsa Killjoy seni önceden görür, yoksa sen bedava kazanırsın.
 
 ---
 
-**IF** Killjoy nanoswarm Neon'un sprint hattında ateşlendi
-**MEANING** Nanoswarm damage sprint koridorunda Neon'un HP'sini keser, yüksek hareket hızı nanoswarm'dan kaçamaz (damage area geniş)
-**COUNTER** Neon nanoswarm lineup'ını round 1'de öğren, sprint hattını nanoswarm dışı koridora yönlendir.
-**WHY** Nanoswarm area denial silahı. Sprint hattı dar koridorsa nanoswarm koridoru kaplar — Neon'un hız avantajı alan kapanınca değerini kaybeder.
+**IF** Killjoy nanoswarm Neon'un sprint hattında patladı
+**MEANING** Nanoswarm alanı geniş — hızın seni kurtarmaz, koridoru kaplar ve can keser
+**COUNTER** İlk roundda nanoswarm konumunu öğren, sprint hattını nanoswarm dışı koridora çek.
+**WHY** Nanoswarm alan reddi yapar. Dar koridor + nanoswarm = hızın değeri sıfır.
 
 ---
 
-**IF** Neon ulu (Overdrive) ile site'a girdi, Killjoy turret + nanoswarm aktif
-**MEANING** Overdrive beam damage turret'i anında yıkar, nanoswarm Neon'un damage reduction'ı yok — HP kaybı yüksek
-**COUNTER** Killjoy turret'i Overdrive sırasında Neon'un görüş hattı dışına yerleştirsin. Turret beam damage sırasında kesin kayıp.
-**WHY** Overdrive beam continuous damage, turret HP bar 125 — beam 2-3 shot'ta turret'i patlatır. Killjoy ult döneminde utility kaybı maksimum.
+**IF** Neon Overdrive ile siteye girdi, Killjoy turret + nanoswarm aktif
+**MEANING** Overdrive beam turret'i anında yıkar ama nanoswarm seni de yakar — can düşer
+**COUNTER** Killjoy olarak turret'i Overdrive'ın görüş hattı dışına koy. Görüş hattındaysa turret anında gider.
+**WHY** Overdrive beam sürekli hasar verir, turret 125 HP — birkaç vuruşta biter. Ult sırasında Killjoy'un ekipmanı hızla erir.
 
 ---
 
-**IF** Killjoy Lockdown ultunu Neon'un post-plant pozisyonuna attı
-**MEANING** Lockdown radius içinde Neon detain olur, sprint komutu çalışmaz, shooting yapamaz
-**COUNTER** Neon Lockdown sesini duyduğu an sprint yönü radius dışına. Sprint hızı Lockdown tetikleme süresinden önce radius dışına çıkar.
-**WHY** Lockdown aktivasyon süresi geniş, Neon'un sprint hızı yatay mesafeyi hızlı kapatır. Yön doğruysa Lockdown detain Neon'u yakalayamaz.
+**IF** Killjoy Lockdown'ı Neon'un post-plant yerine attı
+**MEANING** Lockdown içinde kalırsan sprint çalışmaz, ateş edemezsin
+**COUNTER** Lockdown sesini duyduğun an sprint ile alandan çık. Lockdown tetiklenmeden seni dışarı taşır.
+**WHY** Neon sprint yatay mesafeyi hızlı kapatır — yön doğruysa Lockdown seni yakalayamaz.
 
 ---
 
-**IF** Neon flank için Sewers/Mid rotate yapıyor, Killjoy alarmbot flank hattında
-**MEANING** Alarmbot Neon'un flank girişini ses vererek Killjoy'a rapor eder, flank surprise value kaybı
-**COUNTER** Neon flank öncesi takım info ile alarmbot lokasyonunu bul. Alarmbot'u takım utility ile temizle (Sova dart, Fade prowler).
-**WHY** Flank'ın gücü surprise. Alarmbot sessiz info kaynağı — flank hattında alarmbot varsa Neon'un hız avantajı predictable olur.
+**IF** Neon flank için Mid rotate etti, alarmbot flank hattında
+**MEANING** Alarmbot seni Killjoy'a haber verir, flankin sürpriz değeri gider
+**COUNTER** Flanka girmeden önce takım bilgisiyle alarmbot yerini öğren. Takım ekipmanıyla (Sova dart, Fade prowler) temizle.
+**WHY** Flankin gücü sürpriz. Alarmbot varsa hızın öngörülebilir olur — Killjoy seni bekler.
 
 ---
 
-**IF** Killjoy turret + alarmbot kombosu Neon'un entry hattında
-**MEANING** Turret tag + alarmbot debuff zinciri Neon'u düşük HP'ye getirir, ikinci angle'da Killjoy rifle ile bitirir
-**COUNTER** Neon entry hattında turret'i önce rifle ile sessiz temizle, alarmbot'u nade ile patlat. Kombo kırıldığı an Neon'un hızı Killjoy'u yakalar.
-**WHY** Killjoy'un gücü utility zincirinde, tek utility değil. Zincirin ilk halkası kırılırsa diğer halkalar tek tek kaybolur.
+**IF** Killjoy turret + alarmbot Neon'un giriş hattında birlikte kurulu
+**MEANING** Turret canını keser, alarmbot debuff yapar — ikinci açıda Killjoy rifle ile bitirir
+**COUNTER** Önce turret'i rifle ile sessizce sil, sonra alarmbotu nade ile patlat. Zincir kırılınca Neon'un hızı Killjoy'u yakalar.
+**WHY** Killjoy'un gücü zincirde, tek ekipmanda değil. İlk halka kırılınca geri kalanı dağılır.
 
-## 4. Utility Takası
+## 4. Ekipman Takası
 
-Neon utility'si mobilite (sprint + slide) + damage (stun + fast lane), Killjoy ekonomisi turret + alarmbot + nanoswarm + ult. Sayısal olarak Killjoy daha çok utility slot, Neon'un utility'si hareket tabanlı. Neon'un gücü asimetrik — utility sayıları eşleşmez ama Neon'un sprint hızı Killjoy'un setup süresiyle yarışır. Round başı Neon erken push Killjoy setup'ını harcatırsa Neon serbest, Killjoy setup'ı tamamsa Neon sprint hattı tag'lenmiş koridorda ölür. Ult ekonomi: Overdrive 7 point, Lockdown 8 point — Overdrive active damage, Lockdown detain control, farklı amaçlar farklı zamanlarda.
+Neon'un ekipmanı hız ve hasar: sprint, slide, stun, fast lane. Killjoy'unki bilgi ve kontrol: turret, alarmbot, nanoswarm, ult. Killjoy sayıca fazla ama Neon'un hızı Killjoy'un kurulum süresini yarışır. Round başında Neon erken baskı yaparsa Killjoy kurulum yapamaz, Neon serbest kalır. Killjoy kurulumu tamamlarsa Neon hatalı koridorda ölür. Ult için: Overdrive 7 puan, Lockdown 8 puan — Overdrive sahaya giriş için, Lockdown alan kontrolü için.
 
-## 5. Map Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
-**Bind (Killjoy avantajlı):** Close range + trap meta Killjoy'un alanı. Neon sprint Bind'da kaçış rotası bulmakta zorlanır.
+**Bind (Killjoy avantajlı):** Dar koridor + yakın mesafe turret cenneti. Neon sprint kaçış koridoru bulamaz.
 
-**Split (Killjoy hafif avantajlı):** A Main + B Main dar koridor turret + nanoswarm meta. Neon A Main hızı Killjoy turret ile kesilir.
+**Split (Killjoy hafif avantajlı):** A Main + B Main dar — turret + nanoswarm Neon'u keser.
 
-**Sunset (Killjoy avantajlı):** Dar koridorlar + close range turret + alarmbot cenneti.
+**Sunset (Killjoy avantajlı):** Dar koridorlar turret + alarmbot için ideal.
 
-**Haven (Balanced):** Killjoy B anchor, Neon A Short/Sewers rotate. Site'a göre avantaj.
+**Haven (Orta):** Killjoy B anchor kurarsa denge. Neon A Short/Sewers rotate yaparsa Neon öne geçer.
 
-**Icebox (Neon avantajlı):** Uzun Mid koridor Neon sprint'i, Killjoy utility Mid'de yetersiz.
+**Icebox (Neon avantajlı):** Uzun Mid Neon sprinti için açık, Killjoy ekipmanı Mid'de yetersiz kalır.
 
-**Breeze (Neon avantajlı):** Uzun koridorlar Neon'un. Killjoy setup Breeze'in geniş alanında eskir.
+**Breeze (Neon avantajlı):** Geniş ve uzun koridorlar Neon'un. Killjoy kurulumu bu alanda etkisiz kalır.
 
-**Pearl (Neon avantajlı):** Mid uzun koridor Neon sprint hızına ideal, A Main + B Main orta seçenek.
+**Pearl (Neon avantajlı):** Mid uzun koridor sprint için ideal, A Main + B Main orta seçenek.
 
-## 6. Flip Moment'ler
+## 6. Dönüm Noktaları
 
-**Flip 1 — Turret sesi duyulması:** Neon turret tag'ini ilk duyduğu an round planı değişir. Turret yoksa Neon serbest, varsa temizlik gerekir.
+**Dönüm 1 — Turret sesi:** Turret sesini duyduğun an planı değiştir. Turret yoksa giriş serbest, varsa önce sil.
 
-**Flip 2 — Alarmbot flank trap:** Alarmbot Neon'un flank hattında aktive olduysa surprise kaybı, Killjoy takımı hazır.
+**Dönüm 2 — Alarmbot flank tuzağı:** Alarmbot flank hattında tetiklendiyse sürpriz gitti, Killjoy'un takımı hazır.
 
-**Flip 3 — Overdrive ult timing:** Neon ult'u post-plant değil entry için kullanırsa turret + utility anında yıkılır. Yanlış timing ult boşa.
+**Dönüm 3 — Overdrive zamanlaması:** Overdrive'ı post-plant değil giriş için kullanırsan turret + ekipman anında yıkılır. Post-plant'te kullanırsan ult boşa gider.
 
-**Flip 4 — Lockdown detain:** Neon sprint yönü Lockdown radius dışına yetişemediyse detain + trade kill.
+**Dönüm 4 — Lockdown detain:** Sprint yönü Lockdown alanından çıkamazsan detain + trade ölümü.
 
-## 7. Pro Coach Notları
+## 7. Koç Notu
 
-**VCT'de nasıl oynanıyor:** Neon pro meta'da Jett/Raze alternatifi, pick rate artan trendde. Killjoy klasik sentinel, map-bound değil neredeyse her map'te pick ediliyor. Matchup pro seviyede Neon'un sprint disiplinine bağlı — Neon ses disiplinsiz sprint yaparsa Killjoy alarmbot + turret trap'ine düşer. Pro Neon oyuncuları sprint hattını farklı round'larda farklı hatta kullanır.
+**Radiant'lar ne yapar:** Neon oynayanlar sprint hattını her roundda değiştirir — aynı koridora iki kez girme. Killjoy oynayanlar ilk roundda Neon'un giriş hattını okur, alarmbot + nanoswarm'ı o hatta yeniden kurar. Maçup koridor seçiminde başlar ve biter.
 
-**Meta tier durumu:** Neon A tier, Killjoy S tier. Head-to-head Killjoy hafif avantajlı, Neon'un avantajı map'e bağlı (uzun koridor map'lerinde Neon öne geçer).
+**Tier durumu:** Neon A tier, Killjoy S tier. Doğrudan karşılaşmada Killjoy hafif önde — ama uzun koridor haritalarda Neon bu farkı kapatır.
 
-**** Neon sprint sesi turret otomatik tag range'i ile eşleşiyor mu? Sprint hızının turret aim tracking'ini yenip yenmediği pratik testle doğrulanmalı.
+**Pratik kontrol:** Neon sprint hızı turret'in hedef takibini aşıyor mu test et — bunu öğrenmek için custom serverde turret önünden sprint at, hasarı gözlemle. Overdrive beam'in turret'i kaç vuruşta bitirdiğini de aynı yöntemle doğrula.
 
-**** Overdrive beam damage'ı turret HP havuzunu kaç shot'ta düşürdüğü patch notlarına göre değişebilir.
-
-**Coach test:** "Killjoy Neon'u turret hattına çekmek için utility'sini koridora kurar. Neon Killjoy'u turret hattından uzak tutmak için alternatif rotate kullanır. İki oyuncunun oyunu koridor seçiminde başlar. Koridor Neon'a aitse Neon kazanır, Killjoy'a aitse Killjoy."
+**Koç testi:** Killjoy seni turret hattına çekmeye çalışır. Sen o hattı kullanmayı bırakıp alternatif koridora geçersin. Maçup bu seçimde döner — koridor sende ise sen kazanırsın, Killjoy'da ise Killjoy.

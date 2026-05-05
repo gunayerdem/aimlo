@@ -1,84 +1,94 @@
 # AJAN: Deadlock
 
 ## 1. Rol Kimliği
-Deadlock, choke noktası hakimiyetinin sentinel'idir. Diğer sentinel'ler utility'lerini site geneline yayarken, Deadlock gücünü tek bir geçiş yolunu geçilmesi tamamen sefil hale getirmeye yoğunlaştırır. Barrier Mesh girişleri tamamen duvarla kaplar, GravNet yakalananları yere yapıştırır ve yavaşlatır, Sonic Sensor ses tabanlı hareketi cezalandırır ve Annihilation kurtulamayan düşmanları garantili ölüme çeker. Rush karşıtı uzmandır — site almak için hız ve momentuma güvenen takımlar onun avıdır. Zayıf noktası uyum yeteneğidir: utility'si kullanıldıktan sonra değişimlere tepki verme kapasitesi azdır.
+Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi geniş alana yayar — sen bir noktayı kilitlersin. Barrier Mesh girişi tamamen kapatır, GravNet içinden geçeni yere yapıştırır, Sonic Sensor sesi cezalandırır, Annihilation yakaladığını garantili götürür. Hızla site alan takımlar senin avındır. Zayıflığın şu: utility kullandıktan sonra farklı bir açıdan gelen baskıya çok az cevabın kalır.
 
 ## 2. Temel Sorumluluklar
-- **Choke noktası engelleme**: Barrier Mesh en yüksek öncelikli giriş yolunu kapatmalıdır. Sage duvarından farklı olarak sadece ateş ederek kırılmaz — düşmanlar orbları yok etmeli, bu da zaman ve odak harcar.
-- **GravNet execute bozucu olarak**: GravNet düşmanları ya push sırasında eğilerek geçmeye (momentum kaybı) ya da ağı yok etmeye (pozisyon ve zamanlama açığa çıkar) zorlar. Tespit edilen rush'lara reaktif olarak yerleştirilmelidir.
-- **Sonic Sensor erken uyarı olarak**: Sensor sese tepki verir — ayak sesleri, yetenekler, silah sesi. Bilgi ve kısa concuss verir. Düşmanların sessizce yaklaşamayacağı yollara yerleştirilmelidir.
-- **Annihilation round kapatıcı olarak**: Ultimate'i yakalanan düşmanı belirli bir yol boyunca kozaya çeker. İzole düşmanlarda veya post-plant sırasında defuse yapanı spike'tan uzaklaştırmak için en iyi şekilde kullanılır.
-- **Katmanlı engelleme**: Deadlock'un gücü utility'yi birleştirmektedir. Arkasında Sonic Sensor olan bir choke noktasına GravNet, hem yavaş hem hızlı yaklaşımları cezalandıran iki katmanlı savunma oluşturur.
+- **Girişi kapat**: Barrier Mesh'i düşmanın en çok bastığı tek noktaya koy. Sage duvarı gibi çabuk kırılmaz — düşman orbları yok etmek zorunda, bu süre ve konum satar.
+- **Rush'ı dağıt**: GravNet'i önceden atma. Düşman o koridora girdiğini duyduğunda at. Eğilmeye zorlarsan hızını, orbu yok etmeye zorlarsan pozisyonunu alırsın.
+- **Sesi cezalandır**: Sonic Sensor ayak sesine, yetenek sesine, silah sesine tepki verir — bilgi ve kısa sersemletme verir. Yalnızca takım arkadaşı geçmeyecek, düşmanın sessiz geçemeyeceği yollara koy.
+- **Round'u kapat**: Annihilation izole düşmanda veya spike kurulunca defuse yapmaya gelen üzerinde kullan. Koza yolu dar ve korunmalı olmalı — açıkta kozayı takım arkadaşları vurur, düşman kurtulur.
+- **Katmanla**: Barrier Mesh arkasına Sonic Sensor koy. Hem hızlı hem yavaş geleni aynı anda cezalandırırsın.
 
 ## 3. Sık Yapılan Hatalar
-- Barrier Mesh'i çok erken yerleştirmek, düşmanların hiçbir şey harcamadan diğer site'a rotate etmesine izin vermek.
-- GravNet'i el bombası gibi kullanmak — düşmanların yürümek zorunda olduğu belirli yollar yerine açık alana fırlatmak.
-- Sonic Sensor'u ortam gürültüsünün (takım arkadaşı utility'si, silah sesi) sürekli tetiklediği yerlere yerleştirmek, gürültü yorgunluğu yaratmak.
-- Annihilation'ı takım arkadaşlarının kozayı kolayca vurarak yakalanan oyuncuyu serbest bırakabileceği açık alanda kullanmak.
-- Tüm utility'yi tek choke noktasına harcamak ve takım rotate ettiğinde veya düşman farklı açıdan geldiğinde elinde hiçbir şey kalmamak.
-- Barrier Mesh orb yok etme mekaniğini anlamamak — orbları vurmayı bilen düşmanlar mesh'i hızla söker.
+- Mesh'i yanlış girişe koymak — düşman zaten o yolu kullanmıyorsa sıfır değer üretir.
+- GravNet'i açık alana atmak. Düşmanın mutlaka geçmek zorunda olduğu dar yola at.
+- Sonic Sensor'u takım arkadaşının utility'sinin veya kendi silah sesinin sürekli tetikleyeceği yere koymak. Sahte alarm yaratır, takım gerçek uyarıyı da yok sayar.
+- Annihilation'ı açık alanda kullanmak. Koza görünürdeyse düşman takım arkadaşları vurur, içindeki kurtulur.
+- Tüm utility'yi tek noktaya harcamak. Düşman rotate edince elde hiçbir şey kalmaz.
+- Mesh'in nasıl kırıldığını bilmemek. Orbları vurmayı bilen düşman mesh'i çabuk söker — bu sesi duy, önceden açı kur.
 
 ## 4. Kalıptan Anlama
 
-**IF** Barrier Mesh sürekli yerleştiriliyor ama düşmanlar farklı bir yoldan site'ı alıyorsa
-**MEANING** Mesh alternatif girişi kapatıyor ama birincil yol savunmasız. Deadlock düşmanın tercih ettiği saldırı rotasını okumuyor.
-**COUNTER** Düşmanın ilk birkaç round'da en çok hangi girişi kullandığını incele, sonra Mesh'i oraya yerleştir. Mesh yerleşimini round'dan round'a adapte et.
-**WHY** Yanlış girişi kapatan Mesh sıfır değer üretir; düşmanın tercih ettiği yolu okumak Mesh'in tek kullanımlık gücünü maksimize eder.
+**IF** Barrier Mesh koyuyorsun ama düşman farklı yoldan site'a giriyor
+**MEANING** Yanlış girişi kapatıyorsun. Düşmanın tercih ettiği rotayı okumamışsın.
+**COUNTER** İlk birkaç round'da düşmanın hangi girişi en çok kullandığına bak, mesh'i oraya taşı. Her round mesh pozisyonunu düşman rotasına göre ayarla.
+**WHY** Yanlış girişi kapatan mesh hiçbir değer üretmez. Doğru yolu oku — o zaman tek kullanımını maksimize edersin.
 
-**IF** GravNet atılıyor ama birden fazla round boyunca sıfır düşman yakalıyorsa
-**MEANING** GravNet zamanlaması bozuk — ya çok erken atılıyor (düşmanlar henüz orada değil) ya da yanlış yola nişanlanıyor.
-**COUNTER** GravNet'i reaktif olarak tut. Push'u duyduğunda veya gördüğünde at, round öncesi kurulum olarak değil.
-**WHY** Proaktif GravNet düşman henüz gelmeden süresi dolar; reaktif kullanım taahhüt edilmiş push'u yakalama garantisi verir.
+**IF** GravNet atıyorsun ama birden fazla round sıfır düşman yakalıyor
+**MEANING** Zamanlama bozuk. Ya çok erken attın, düşman henüz orada değildi — ya da yanlış yola nişanladın.
+**COUNTER** GravNet'i elinde tut. Düşmanın o koridora girdiğini duyduğunda at. Önceden kurulum olarak atma.
+**WHY** Erken atılan GravNet düşman girmeden boşa gider. Düşman tam geçişteyken atarsan kaçış yoktur.
 
-**IF** Sonic Sensor tetikleniyor ama aslında hiçbir düşman push yapmıyorsa
-**MEANING** Sensor, ortam oyun sesleri veya takım arkadaşı aktivitesinin tetiklediği yere yerleştirilmiş. Bu sahte alarmlar yaratır.
-**COUNTER** Sensor'ları yalnızca düşman ayak seslerinin tetikleyeceği yollara yerleştir — derin flank'lar veya boş koridorlar bu iş için ideal.
-**WHY** Sahte alarmlar bilgi güvenilirliğini yok eder; takım gerçek tetiklenmeleri de yok saymaya başlar.
+**IF** Sonic Sensor tetikleniyor ama hiçbir düşman gelmiyor
+**MEANING** Sensor, takım arkadaşı aktivitesinin veya ortam sesinin tetiklediği yere konmuş. Sahte alarm üretiyor.
+**COUNTER** Sensor'u sadece düşman ayak sesinin — crouch-walk dahil — tetikleyeceği sessiz köşelere, derin flank yollarına koy. Bind hookah'ta kapı arkası değil iç köşe gibi noktalar doğru seçimdir.
+**WHY** Sahte alarm bilgini öldürür. Takım gerçek tetiklenmeleri de yok saymaya başlar.
 
-**IF** Annihilation kullanılıyor ama yakalanan düşman her seferinde takım arkadaşları tarafından kurtarılıyorsa
-**MEANING** Ultimate, koza yolunun birden fazla düşman açısına maruz kaldığı pozisyonlarda kullanılıyor.
-**COUNTER** Annihilation'ı dar koridorlarda veya köşelerde kullan, koza yolunun düşman ateşinden korunduğu yerlerde. İzole defuse yapan üzerinde post-plant kullanımı idealdir.
-**WHY** Açık alandaki koza kolay hedefdir; dar alan düşmanın kurtarma ateşi için açı bulmasını engeller.
+**IF** Annihilation kullanıyorsun ama düşman her seferinde kurtarılıyor
+**MEANING** Koza yolu birden fazla düşman açısına maruz kalıyor. Takım arkadaşları kozayı kolayca vuruyor.
+**COUNTER** Annihilation'ı dar koridorda veya köşede kullan. En iyi kullanım: spike kurulunca tek başına defuse yapmaya gelen üzerinde. Koza yolunun nereye gittiğine dikkat et — düşman ateş açısı bulamasın.
+**WHY** Açık alandaki koza kolay hedef. Dar alan düşmanın kurtarma için açı bulmasını engeller.
 
-**IF** Deadlock erken ölüyor ve utility'si kullanılmamış kalıyorsa
-**MEANING** Sentinel için çok agresif konumlanıyor. Kit'i reaktif olarak deploy etmek için hayatta kalmasını gerektirir.
-**COUNTER** Daha geride oyna. Deadlock'un utility'si proaktif değil, düşman aksiyonuna tepki olarak deploy edildiğinde en güçlüdür.
-**WHY** Ölü Deadlock sıfır utility sağlar; hayatta kaldığında reaktif deploy ile push'ları parçalayabilir.
+**IF** Erken ölüyorsun ve utility'n kullanılmamış kalıyor
+**MEANING** Çok öne çıkıyorsun. Deadlock'un her yeteneği düşman hamlesi gelince değer kazanır — ölürsen hepsini çöpe atarsın.
+**COUNTER** Geri dur. Utility'ni düşman bir şey yaparken kullan, sen bir şey yaparken değil.
+**WHY** Ölü Deadlock sıfır utility'dir. Hayattayken düşman push'u gelince mesh + GravNet + sensor aynı anda çalışır.
+
+**IF** Mesh orbları düşman tarafından hızla temizleniyor ve mesh değer üretemiyor
+**MEANING** Düşman orb kırma mekanik bilgisine sahip ve bunu organize yapıyor. Mesh tek başına duruyor, tuzak değil engel gibi.
+**COUNTER** Orb kırma sesini aktif dinle — kıran düşman pozisyonunu açığa çıkarır. O ses gelince hazır açıda bekle. Arkasına Sonic Sensor koy, orb kırarken sensor tetiklensin.
+**WHY** Mesh yalnız durduğunda sadece geciktirir. Sonic Sensor ile birleşince orb kıran düşman hem sersemer hem pozisyon açığa çıkarır — mesh bir tuzak kapısına dönüşür.
 
 ## 5. Harita Etkileşimleri
-- **Lotus**: Güçlü. Döner kapılar ve dar koridorlar Barrier Mesh ve GravNet katmanlaması için mükemmel. B main veya A root'ta Annihilation yıkıcıdır.
-- **Bind**: B site'ta mükemmel. Hookah, Barrier Mesh için doğal choke noktasıdır ve B long'da GravNet herhangi bir rush'ı parçalar.
-- **Fracture**: Birçok dar saldırı yolu nedeniyle uygulanabilir. Yer altı tünellerindeki Sonic Sensor'lar erken uyarı sağlar.
-- **Haven**: Üç site nedeniyle zorlayıcı. En iyi C site'a odaklanılarak oynanır, garage doğal choke noktasıdır.
-- **Ascent**: B main güçlü Barrier Mesh pozisyonudur. Market'teki Sonic Sensor flank istihbaratı sağlar.
+- **Lotus**: Döner kapılar ve dar koridorlar Barrier Mesh + GravNet katmanlaması için biçilmiş kaftan. B main veya A root'ta Annihilation'ın kaçış yolu yok.
+- **Bind**: B site'ta güçlü. Hookah, Barrier Mesh için doğal geçiş noktası. B long'da rush gelen gruba GravNet dağıtır.
+- **Fracture**: Dar saldırı yolları işine yarar. Yer altı tünellerine Sonic Sensor koy — düşman rotasyonunu erken öğrenirsin.
+- **Haven**: Üç site zor. Garage'ı kilitleyerek C site'a odaklan — choke noktası nettir.
+- **Ascent**: B main Barrier Mesh için güçlü pozisyon. Market'e Sonic Sensor koy — flank'ı erken görürsün.
 
 ## 6. Eşleşme Notları
-- Patlayıcıları Barrier Mesh orblarını ve Sonic Sensor'ları menzilden yok eden **Raze**'e karşı zayıf.
-- Choke noktalarından rush'a güvenen **Neon** ve diğer hız tabanlı ajanlara karşı güçlü — tüm kit'i bunu cezalandırmak için tasarlanmış.
-- **Sova** Sonic Sensor'ları temizleyebilir ve Barrier Mesh pozisyonlarını güvenli mesafeden keşfedebilir.
-- Annihilation **izole oyunculara** karşı kullanıldığında en zor counter'lanır — kozayı vurabilen gruplu takımlara karşı en zayıfıdır.
+- **Raze**'e karşı zayıfsın. Patlayıcıları Barrier Mesh orblarını ve Sonic Sensor'ları uzaktan temizler. Mesh'i beklenmedik açıya koy.
+- **Neon** ve hız bazlı ajanlara karşı güçlüsün. Tüm kit'in bunları cezalandırmak için var.
+- **Sova** Sonic Sensor'ları temizleyebilir, Mesh pozisyonlarını güvenli mesafeden keşfeder. Sensor'ları standart yerden koy, tahmin edilemez ol.
+- Annihilation **izole düşmana** karşı counter'lanamaz. Grup halinde gelen takımlara karşı en zayıfısın — kozayı çabuk vururlar.
 
 ## 7. Oyuncuya Ne Söylenmeli
 
-### İyi performans gösterirken
-**Oyuncu Eylemi:** Barrier Mesh'i düşmanın tercih ettiği giriş yoluna (round 1-3'ten okunan) yerleştiriyorsun, mesh'in arkasına Sonic Sensor katmanlıyorsun ve GravNet'i taahhüt edilmiş push'lar için reaktif tutuyorsun.
-**Düşman Algısı:** Saldırganlar birincil rotalarını kapatan Barrier Mesh'i görür ve orbları hızla temizleyebileceklerine inanır. Mesh'in arkasındaki Sonic Sensor'u beklemezler — zamanlamalarını orb yok etmeye göre planlarlar, adım attıkları anda ateşlenen concuss'a göre değil.
-**Düşman Tepkisi:** Ya mesh orblarını yok etmek (round zamanı kaybı, ateş sesiyle pozisyon açığa çıkması ve girişte Sonic Sensor concuss tetiklenmesi) ya da alternatif yola yönelmek (takımının crossfire hazırladığı yer) zorunda kalırlar. Taahhüt edilmiş push'ta GravNet koşan saldırganları yere yapıştırır ve gruplarını izole hedeflere parçalar.
-**Faydalanma Penceresi:** Saldırganların Barrier Mesh'i temizlerken harcadığı zaman takımına tam rotation süresi verir. Sonic Sensor concuss'u temizlenmiş mesh'ten adım attıkları anda vurur — en kötü anda concuss olurlar (girişte, siper olmadan). Rush yapanlara GravNet koordineli 5 kişilik push'u 5 bireysel dövüşe dönüştürür.
-**Tekrar Stratejisi:** Round 1-3: düşmanın favori girişini tespit et. Round 4: o yola Barrier Mesh, arkasına Sonic Sensor. Round 5-6: adapte olurlarsa mesh'i alternatif yola kaydır. GravNet'i elde tut — yalnızca onaylanmış push sesi üzerine at. Annihilation dar koridorlarda veya takım arkadaşlarının kozayı serbest vuramayacağı izole defuse yapanlar üzerinde.
-**Düşman Adaptasyonu:** 4-5 round sonra saldırganlar mesh + sensor'u aynı anda temizlemek için AoE utility kullanacak, mesh yolundan kaçınmak için saldırılarını bölecek veya mesh'ini anlamsız kılmak için tamamen diğer site'ı execute edecek.
-**Karşı Adaptasyon:** AoE ile temizlediklerinde: mesh ve sensor'u birbirinden ayır, tek yetenek ikisini birden yok edemesin. Böldüklerinde: bölünen gruba GravNet kullan (2-3 oyuncuyu yere yapıştırmak takımına bir tarafta sayı avantajı verir). Site'ından kaçındıklarında: mesh'i sonraki round diğer site'a döndür veya retake oyna ve post-plant girişimini durdurmak için GravNet + Annihilation kullan.
+### İyi Gidiyorsa
+**Ne yapıyorsun:** İlk birkaç round düşmanın hangi girişi tercih ettiğini okudun, Mesh'i oraya koydun, arkasına Sonic Sensor katladın, GravNet'i düşman o koridora girerken attın.
 
-**Zorlanan**: "Barrier Mesh'in doğru girişi kapatmıyor veya GravNet zamanlaması bozuk. Düşmanın hangi yolu tercih ettiğini izle ve mesh'ini oraya yerleştir. Push'u duyana kadar GravNet'i tut."
+**Düşman ne görüyor:** Barrier Mesh görüyor, orbları hızla kırabileceğini düşünüyor. Arkasındaki Sonic Sensor'dan haberi yok — orb kırmak için adım atıyor, tam o anda sersemiyor.
 
-**Tahmin edilebilir**: "Düşman mesh pozisyonlarını öğrendi ve etrafından dolanıyor. Her round hangi choke noktasını kilitlediğini değiştir. Mesh'in kapatmadığı yolu kapsamak için GravNet kullan."
+**Düşman ne yapıyor:** Ya orbları yok ediyor — ateş sesiyle pozisyon açığa çıkar, üstüne sensor çarpar. Ya alternatif yola geçiyor — takımının crossfire kurduğu tarafa düşer. Rush yapanlar GravNet yediğinde koordineli grup 4-5 bireysel dövüşe parçalanır.
+
+**Düşman adapte olursa:**
+- AoE ile mesh + sensor'u aynı anda temizlemeye çalışırlarsa: ikisini birbirinden ayır, tek utility ikisini birden temizleyemesin.
+- Saldırıyı böler iki gruptan gelirlerse: küçük gruba GravNet at, takımın sayı üstünlüğü kazansın.
+- Senin site'ından kaçınıp diğer site'ı basarlarsa: mesh'i sonraki round oraya döndür veya retake'e odaklan, GravNet + Annihilation ile post-plant girişimini durdur.
+
+### Zorlanıyorsa
+"Mesh yanlış girişi kapatıyor. İlk birkaç round'a bak — düşman en çok nereden geliyor? Mesh'i oraya taşı. GravNet'i elinde tut, düşman o yola girene kadar atma."
+
+### Tahmin Edilebilir Olduysa
+"Düşman mesh pozisyonlarını ezberledi, etrafından dolanıyor. Round değiştir — hangi girişi kilitlediğini değiştir. Mesh'in kapamadığı yolu GravNet ile tut."
 
 ## 8. Rütbe Modülasyonu
 
-**Düşük (Iron-Silver)**: Oyuncular Barrier Mesh'i rastgele yerleştirir ve Sonic Sensor'ların var olduğunu unutur. GravNet flashbang gibi atılır. Temelleri öğret: mesh ana choke noktasına, sensor flank'a, GravNet rush'a.
+**Düşük (Iron-Silver):** Mesh'i rastgele koyuyorsun, Sonic Sensor'ları unutuyorsun, GravNet'i el bombası gibi atıyorsun. Mesh ana geçişe, sensor flank yoluna, GravNet tam koridora girince.
 
-**Orta (Gold-Platinum)**: Utility yerleşimi işlevsel ama statik. Annihilation düşmanların kurtulduğu açık alanlarda kullanılıyor. Reaktif GravNet zamanlaması ve korumalı Annihilation yollarına odaklan.
+**Orta (Gold-Platinum):** Utility işlevsel ama her round aynı yere koyuyorsun. Annihilation açık alanda patlıyor, düşman kurtarılıyor. Reaktif GravNet zamanlamasına ve koza yolunun korunmasına odaklan.
 
-**Yüksek (Diamond-Ascendant)**: Buradaki Deadlock main'ler katmanlamayı anlıyor ama tek site'a çok bağlı olabilir. Hangi round'da hangi girişe mesh yerleştirileceğine karar vermek için düşman kalıplarını okumaya odaklan.
+**Yüksek (Diamond-Ascendant):** Katmanlama tamam ama tek site'a bağlısın. Düşman hangi round hangi girişi tercih ediyor — bunu okuyup mesh'i round'dan round'a taşı.
 
-**Elit (Immortal-Radiant)**: Deadlock'un değeri belirli bir saldırı stratejisini bir round için tamamen kapatma yeteneğindedir. Bu seviyede mesh ve GravNet okumalara göre her round adapte olmalıdır. Annihilation garantili post-plant engelleme için saklanmalıdır.
+**Elit (Immortal-Radiant):** Deadlock'un gücü bir saldırı rotasını tek round'da tamamen kapatmaktır. Mesh ve GravNet her round okumalara göre değişmeli. Annihilation spike kurulunca post-plant için sakla — garantili defuse engeli olarak kullan. Orb kırma sesini aktif dinle ve o sese önceden açı kur: mesh geciktirici değil, tuzak olur.

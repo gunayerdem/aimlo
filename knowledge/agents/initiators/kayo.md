@@ -1,81 +1,81 @@
 # AJAN: KAY/O
 
 ## 1. Rol Kimliği
-KAY/O, düşman yeteneklerini kapatarak saf silah dövüşü senaryoları yaratan suppress-tabanlı initiator'dür. ZERO/POINT (bıçak) bir yarıçaptaki düşmanları suppress eder, FLASH/DRIVE üst ve alt atışla atılabilen geleneksel bir pop-flash'tir, FRAG/MENT alan engelleme için bir molly'dir ve NULL/CMD ult'i onu öldürülürse canlandırılabilen yürüyüşlü bir suppress alanı yapar. KAY/O, yetenekleri denklemden çıkartarak savaş alanını eşitleyen anti-utility initiator'dür -- saf nişan düelloları zorlar. Nişan-odaklı takımlarla en iyi eşlenir.
+KAY/O düşman yeteneklerini kapatır. Bıçak (ZERO/POINT) yakınındaki herkesi suppress eder, FLASH/DRIVE klasik bir pop-flash, FRAG/MENT alan kapatan bir molly, NULL/CMD ise ölünce canlanabileceğin yürüyen suppress alanı. Özü şu: yetenekleri denklemden çıkar, saf silah dövüşü zorla. Nişanı güçlü takımlarla en iyi çalışır.
 
 ## 2. Temel Sorumluluklar
-- Execute'lardan önce ZERO/POINT ile kilit düşmanları suppress ederek savunma utility'lerini kaldırmak
-- Hassas zamanlama için üst ve alt atış FLASH/DRIVE varyasyonlarıyla takım arkadaşları için pop-flash yapmak
-- FRAG/MENT molly'si ile zamana yayılı tutarlı hasar vererek alanları ve post-plant'i engellemek
-- Girişlerde yürüyüşlü suppress alanı olarak NULL/CMD'yi aktive ederek site genelinde nişan düelloları zorlamak
-- Hangi düşmanların yeteneklere en çok bağımlı olduğunu belirleyip onları suppress etmeyi önceliklendirmek
-- Herhangi bir takım kompozisyonuyla eşleşen geleneksel flash utility'si sağlamak
+- Site'a girmeden önce bıçakla kilit düşmanları suppress et, savunma yeteneklerini sil
+- Üst ve alt atış FLASH/DRIVE'ı karıştırarak takım arkadaşlarına pop-flash ver
+- FRAG/MENT'i post-plant için sakla — spike'ı defuse ettirme
+- NULL/CMD ile içeri gir, takım arkasında olsun ki düşersen seni kaldırsınlar
+- Kaç düşman suppress yediğini her bıçakta takıma söyle
+- Hangi düşman ajan yeteneklere en çok bağımlı — onu önce suppress et
 
 ## 3. Sık Yapılan Hatalar
-- ZERO/POINT atıldığında suppress geri bildirimine -- menzildeki düşman sayısını söyleyen -- aldırmamak
-- FLASH/DRIVE'da üst ve alt atış arasında varyasyon olmaması, flash zamanlamasını tahmin edilebilir kılmak
-- FRAG/MENT'i post-plant lineup'ları için sektirilmek yerine standart el bombası gibi atmak
-- NULL/CMD'yi dövüşten çok uzakta aktive etmek, suppress bölgesine ulaşmadan ölüme yürümek
-- Alakasız pozisyonları suppress etmek -- hiçbir düşmanın tutmadığı açılara bıçak atmak
-- Flash'ların duvarların arkasında veya peek açısından çok uzakta patlaması, düşmanlara iyileşme zamanı vermesi
+- Bıçak suppress sayısını takıma söylememek — bu bedava bilgi, kullan
+- Her flashı üst atışla atmak — düşmanlar sesi duyunca sırtını döner, tahmin ederler
+- FRAG/MENT'i el bombası gibi atıp hasar için kullanmak — molly, alanı kapatmak içindir
+- NULL/CMD sırasında takımdan ayrı ileri çıkmak — ölürsen kimse canlandıramaz
+- Boş açılara bıçak atmak — düşmanın tutmadığı yere bıçak giderse negatif değer taşır, push yaptığını söyler
+- Flashı çok uzakta veya duvarın arkasında patlatan — düşman zaten döner, flash boşa gider
 
 ## 4. Örüntü -> Anlam
 
-**IF** ZERO/POINT sürekli sıfır düşman suppress ediyor
-**MEANING** Bıçak yanlış pozisyonlara iniyor veya düşmanlar yerleşmeden çok erken atılıyor
-**COUNTER** Yaygın düşman tutma pozisyonlarını öğrenin ve bıçağı savunucuların sabitlendiği yere inecek şekilde atın. Atak'ta, savunucuların yerleştikten sonra turun ilk anlarında atın, hemen değil.
-**WHY** Savunucuların yerleştiği zamana denk gelen bir bıçak, yerleşik pozisyonlarında yakalanmalarını sağlar ve suppress hem bilgi (kaç kişi vuruldu) hem de utility iptal değeri üretir.
+**IF** ZERO/POINT her seferinde sıfır düşman suppress ediyor
+**MEANING** Bıçak yanlış yere iniyor ya da düşmanlar henüz pozisyon almadan atıyorsun
+**COUNTER** Düşmanların hangi açıları tuttuğunu öğren, bıçağı oraya at. Düşman kapıya girip durduğunda at — hareket halindeyken değil. Ascent'te A main'e girerken arka köşeyi tutan olur, bıçağı oraya indir.
+**WHY** Düşman yerine yerleşmişken suppress yerse hem yeteneği gider hem sen kaç kişi var bilirsin. Hareket halinde atarsan ıskalarsın.
 
-**IF** FLASH/DRIVE her zaman üst atış ile atılıyor
-**MEANING** Düşmanlar flash yayını duyup takip edebilir, sürekli sırtlarını dönüyor
-**COUNTER** Üst atış (sağ tık, uzun mesafe) ve alt atış (sol tık, hızlı pop) arasında değiştirin. Alt atış köşelerde hızlı patlar. Üst atış engellerin üzerinden geçer. Düşmanları tahmin ettirmemek için her ikisini de karıştırın.
-**WHY** Değişken flash tipleri, düşmanları zamanlama okuyamaz hale getirir; sabit tek tip atış, düşmanlara blind'dan her seferinde kaçınabilecek güvenilir bir kalıp verir.
+**IF** FLASH/DRIVE her zaman üst atışla atılıyor
+**MEANING** Düşmanlar flash sesini duyunca sırtını dönüyor — art arda aynı açıdan aynı atış, okunur hale gelir
+**COUNTER** Üst atış (sağ tık) ile alt atış (sol tık) arasında değiştir. Alt atış köşede hızlı patlar ama kendi başına atıp durma — önce dur, sonra at, sonra hareket et, yoksa kendi flashını yersin. Üst atış engelin üzerinden geçer, savunucu pozisyonlarını körleri için kullan.
+**WHY** İkisini karıştırırsan düşman zamanlamayı okuyamaz. Tek tip atarsan her seferinde kaçınır.
 
-**IF** FRAG/MENT yalnızca doğrudan dövüşlerde hasar için kullanılıyor
-**MEANING** Post-plant ve alan engelleme değeri boşa gidiyor
-**COUNTER** Atak'ta post-plant engellemesi için FRAG/MENT'i saklayın -- defuse'u engellemek için spike'a sektirin. Savunmada choke noktalarında push'ları yavaşlatmak için kullanın. Bu bir molly, el bombası değil.
-**WHY** FRAG/MENT'in en yüksek değeri alan engelleme ve post-plant'tedir; doğrudan hasar aracı olarak kullanmak, turları kazanma potansiyeline sahip stratejik kullanımları kaldırır.
+**IF** FRAG/MENT sadece düşmana hasar vermek için kullanılıyor
+**MEANING** Post-plant ve alan kapatma değeri çöpe gidiyor
+**COUNTER** Spike kurulduktan sonra FRAG/MENT'i spike'a sektir — defuse ettirme. Savunmada dar geçitten push geliyorsa choke'a at, yavaşlat. Bunu el bombası gibi kullanma.
+**WHY** Bu molly'nin asıl gücü alan kilitlemekte. Hasar için kullanırsan turları kazandıracak bir şeyi boşa harcarsın.
 
-**IF** oyuncu NULL/CMD sırasında canlandırılmadan ölüyor
-**MEANING** Ya takım canlandırmak için yakın değil ya da oyuncu ult sırasında çok ileri çıktı
-**COUNTER** NULL/CMD girişi takım arkada olacak şekilde yapılmalı. Birlikte push yapın, böylece KAY/O düşerse bir takım arkadaşı kısa bekleme penceresinde canlandırabilir. Canlanma, ult'in değerinin yarısı.
-**WHY** Canlanma, KAY/O'ya oylama gücünün çok ötesinde agresif giriş yapma izni verir; onsuz, ult'in tüm agresif potansiyeli tek bir ölümle sona erer.
+**IF** NULL/CMD sırasında canlandırılmadan ölüyorsun
+**MEANING** Ya takım çok uzakta ya da sen çok ileri çıktın
+**COUNTER** Ult atmadan önce takım arkanda olsun — aynı odaya girmeden önce bölgeyi temizleyin, sonra ult at. Takım arkadaşın senden 1-2 adım geride kalsın, aynı anda değil. Düşersen o kısa pencerede seni kaldırsın.
+**WHY** Canlanma bu ult'in yarısı. Canlanma olmadan sadece biraz daha gürültülü bir giriş yapmış olursun.
 
-**IF** suppress bilgisi (kaç düşman tespit edildi) takıma hiç iletilmiyor
-**MEANING** ZERO/POINT'ten gelen hayati bilgi boşa gidiyor
-**COUNTER** Her zaman suppress sayısını bildirin. "Bıçak ikiye vurdu" takıma o site'ta tam olarak kaç düşman olduğunu söyler. Bu, takımın karar vermesini değiştiren bedava bilgidir.
-**WHY** Suppress sayısı, takım execute edecek site'ı seçmesini sağlar veya mevcut execute'a güvenmesini sağlar; bu bilgi iletilmediğinde takım körüne dövüşür.
+**IF** Suppress sayısı (kaç düşman bıçağa girdi) takıma hiç söylenmiyorsa
+**MEANING** En önemli bilgi sessizce kayboluyor
+**COUNTER** Her bıçaktan sonra anında söyle: "bıçak ikiye vurdu", "bıçak boş". Sıfır gelirse de söyle — o site boş ya da düşmanlar erken çekildi, takım buna göre karar versin.
+**WHY** Bu sayı hangi site'a yığılacağını söyler. Söylemezsen takım kör dövüşür.
 
 ## 5. Harita Etkileşimleri
-- **Ascent**: Mid kapılarından ZERO/POINT, A veya B site tutanları suppress eder. A main ve B main'de pop-flash'lar ders kitabı gibi entry utility'sidir.
-- **Split**: Dar koridorlar FLASH/DRIVE'dan kaçınmayı imkansız kılar. A veya B heaven'a ZERO/POINT, sabit tutucuları suppress eder.
-- **Haven**: Üç site suppress keşfi -- bağlanmadan önce hangi site'ta savunucu olduğunu belirlemek için bıçak atın.
-- **Bind**: Cross-harita suppress için teleporter'lardan ZERO/POINT. Hookah ve showers'ta alt atış flash'lar yıkıcı.
-- **Fracture**: Çift girişli harita, takım diğer taraftan push yaparken bir tarafta NULL/CMD'den fayda görür. Her iki giriş noktasını suppress edin.
+- **Ascent**: Mid kapılarından bıçak at — A veya B'yi tutan suppress yer. A main ve B main'de pop-flash giriş için standart.
+- **Split**: Koridorlar dar, flashtan kaçmak zor. A heaven veya B heaven'a bıçak at, sabit tutucu suppress yer.
+- **Haven**: Üç site var — siteye bağlanmadan önce bıçakla hangi site'ta düşman var öğren, sonra yönel.
+- **Bind**: Teleporter'dan bıçak at, karşı tarafı suppress et. Hookah ve showers'ta alt atış flash yıkıcı — dar, kaçacak yer yok.
+- **Fracture**: İki girişli harita. Sen bir taraftan NULL/CMD ile girerken takım diğer taraftan push yapar. Her iki giriş noktasını suppress et.
 
 ## 6. Eşleşme Notları
-- Killjoy'a karşı: ZERO/POINT turret, alarmbot ve lockdown'u devre dışı bırakır. KAY/O, birincil Killjoy counter'ıdır.
-- Cypher'a karşı: Suppress tüm Cypher utility'sini geçici olarak devre dışı bırakır -- tripwire, kamera, cage. Suppress penceresi sırasında push yapın.
-- Viper'a karşı: Suppress, Viper'ın wall ve orb'unu deaktive eder. Bıçağı execute için zamanlayın ve Viper kurulumu yok olur.
-- Chamber'a karşı: Suppress, Tour De Force, Headhunter ve Rendezvous'u kaldırır. Yeteneksiz Chamber sadece bir rifler'dır.
+- **Killjoy'a karşı**: Bıçak turret, alarmbot ve lockdown'u kapatır. Suppress penceresi açılınca push yap — yetenekleri yok.
+- **Cypher'a karşı**: Suppress tuzak, kamera ve cage'i geçici siler. Bıçak inince hemen gir, Cypher o pencerede çıplak.
+- **Viper'a karşı**: Suppress wall ve orb'u kapatır. Site girişini Viper suppress'iyle zamanla — duvarlar yok olur.
+- **Chamber'a karşı**: Suppress teleport, tabanca ve ult'u kaldırır. Yeteneksiz Chamber sadece tüfek tutar, başka bir şey yoktur.
 
 ## 7. Oyuncuya Ne Söylenmeli
 
 ### İyi performans gösterirken
-**Oyuncu Eylemi:** Turun başında ZERO/POINT'i savunucu pozisyonlarına indiriyorsun, suppress sayısını anında takıma bildiriyorsun ve her tur üst atış/alt atış FLASH/DRIVE'ı değiştiriyorsun.
-**Düşman Algısı:** Suppress yiyen savunucular kit'lerinin yok olduğunu hisseder ve panikler -- kaçmak veya karşı peek yapmak için yetenek kullanamadıkları için tutma pozisyonlarına güvenlerini kaybederler. Suppress sayısı bildirimi takıma kesin site yığılmasını söyler ama düşmanlar bu bilgiye sahip olduğunuzu bilmez.
-**Düşman Tepkisi:** Suppress edilen savunucular ya açılarını yalnızca silah mekaniği ile tutmak (flash yok, smoke yok, kaçış aracı yok) ya da yetenek kaybının daha az fark yarattığı bir pozisyona çekilmek zorunda kalır. Suppress edilmeyen savunucular bıçağın inişini duyar ve onlara isabet etmediğini bilir -- bıçaksız site'taki tutuşlarını sıkılaştırırlar ve bu da takıma savunucuların geri kalanının nerede olduğunu söyler.
-**Faydalanma Penceresi:** Suppress penceresi, vurulan savunuculardan tüm yetenekleri soyar -- bu pencere sırasında takımınız, geciktirme veya kaçma utility'si olmayan yalnızca silah mekaniğiyle oynayan rakiplere karşı savaşır. Suppress edilmiş Jett dash yapamaz, suppress edilmiş Sage wall atamaz, suppress edilmiş Omen smoke atamaz. Zamanlama, savunucuları yerleştikten sonra ama herhangi bir savunma utility'si çalıştırmadan önce yakalar.
-**Tekrar Stratejisi:** Tur 1: birincil sabit pozisyona ZERO/POINT, takım site yığılmasını bilsin diye "bıçak ikiye vurdu" deyin. Tur 2: karşı kurulumu kontrol etmek için diğer site'a bıçak. Tur 3: FRAG/MENT atarak bıçak sesini taklit edin (benzer ses ipucu) ve irkilen site'a execute yapın. Üst ve alt atış FLASH/DRIVE'ı değiştirin -- art arda aynı tipi atmayın.
-**Düşman Adaptasyonu:** 4-5 tur sonra savunucular bıçak yarıçapının dışında oynar, suppress sayısını minimize etmek için site'lara dağılır veya bıçak zamanlamasından önce rush yapar.
-**Karşı-Adaptasyon:** Bıçak yarıçapından kaçınırlarsa: kaçınmanın kendisi nerede olduklarını söyler -- yeni pozisyonu bildirin. Site'lara dağılırlarsa: suppress sayısı dağılımı doğrular, takımınız zayıf site'a execute yapar. Erken rush yaparlarsa: choke'u tutmak için FRAG/MENT ve rush yapanları kör etmek için FLASH/DRIVE kullanın -- KAY/O'nun kit'i savunmada da güçlü.
+**Oyuncu Eylemi:** Bıçağı düşman pozisyonlarına indiriyorsun, suppress sayısını takıma söylüyorsun, üst/alt atış flash'ı değiştiriyorsun.
+**Düşman Algısı:** Suppress yiyen savunucu yeteneksiz kalır — flash yok, smoke yok, kaçış yok. O pencerede saf silah dövüşü zorunda. Suppress sıfır gelirse o site boş demektir, takım bunu bilir ama düşman bilmez.
+**Düşman Tepkisi:** Suppress edilen savunucu ya açıyı silahla tutar (başka seçeneği yok) ya da geri çekilir. Suppress olmayan savunucu bıçağın kendisine çarpmadığını bilir — o site'taki tutmayı sıkılaştırır, bu da geri kalanın nerede olduğunu söyler.
+**Faydalanma Penceresi:** Suppress süresi boyunca Jett dash yapamaz, Sage wall atamaz, Omen smoke kullanamaz. Gir.
+**Tekrar Stratejisi:** Birinci site'a bıçak at, sayıyı söyle, oraya yığıl. Bir sonraki turda diğer site'a bıçak — dağılımı gör. Bıçak sesini duyunca irkilen site'a execute yap, FRAG/MENT ile defuseyi kes. Flash tipini değiştir, art arda aynısını atma.
+**Düşman Adaptasyonu:** Birkaç turda bir savunucular bıçak yarıçapından dışarı oynar, site'lara dağılır ya da bıçak inmeden rush yapar.
+**Karşı-Adaptasyon:** Yarıçaptan kaçınırlarsa — kaçınmanın kendisi pozisyonlarını söyler, takıma bildir. Dağılırlarsa — zayıf site'a execute yap. Rush yaparlarsa — FRAG/MENT choke'a, FLASH/DRIVE onlara, KAY/O savunmada da güçlü.
 
-**Zorlanırken**: "Bıçağın isabet ettiremiyor. Düşmanların her site'ta nerede tuttuğunu öğrenin ve bıçağı o pozisyonlara atın. Sıfıra vuran bıçak sadece değersiz değildir -- push yaptığınızı söylediği için negatif değer taşır."
+**Zorlanırken:** "Bıçak isabet ettiremiyor. Düşmanların nerede durduğunu bilmiyorsun demek bu. Sıfır suppress eden bıçak sadece işe yaramaz değil — push yaptığını söyler, negatif değer taşır."
 
-**Tahmin edilebilir olunca**: "Her seferinde aynı flash açısı. Üst ve alt atışı değiştirin. Farklı pozisyonlardan atın. Her flash'ta sırtlarını dönüyorlarsa zamanlamanız okunabiliyor."
+**Tahmin edilebilir olunca:** "Her seferinde aynı flash. Üst atış, alt atış, değiştir. Farklı pozisyondan at. Sürekli sırtlarını dönüyorlarsa zamanlamanı okuyorlar."
 
 ## 8. Rank Modülasyonu
-- **Düşük (Iron-Silver)**: Bir flash tipine odaklanın (yakın peek'ler için alt atış). Push'tan önce site'a bıçak atın. Molly'yi post-plant için saklayın.
-- **Orta (Gold-Platinum)**: Her iki flash tipinde ustalaşın. Suppress sayılarını bildirin. Post-plant için FRAG/MENT lineup'ları.
-- **Yüksek (Diamond-Ascendant)**: Takım execute'u ile koordineli suppress zamanlaması. Canlanma için takım destekli NULL/CMD girişleri. Okumalara dayalı adaptif bıçak yerleştirmesi.
-- **Elit (Immortal-Radiant)**: Belirli düşman kurulumlarını counter'lamak için kullanılan suppress. Takım arkadaşı peek'lerinin kare içinde flash zamanlaması. Takımın birincil execute aracı olarak NULL/CMD girişleri.
+- **Düşük (Iron-Silver)**: Alt atış flashı öğren — yakın peek'ler için kullan. Site'a girmeden önce bıçak at. Molly'yi spike kurulduktan sonra sakla.
+- **Orta (Gold-Platinum)**: Her iki flash tipinde ustalaş. Suppress sayısını her seferinde söyle. Spike'a molly lineup'larını öğren.
+- **Yüksek (Diamond-Ascendant)**: Bıçağı takım hareketiyle zamanla. NULL/CMD girişini takım arkanda olunca yap. Bıçak sonucu ne olursa olsun takıma aktar, rotasyonu birlikte belirle.
+- **Elit (Immortal-Radiant)**: Belirli düşman ajanı suppress etmek için bıçak pozisyonunu seç. Flash'ı takım arkadaşı peek'iyle aynı kareye getir. NULL/CMD girişini site temizlenene kadar beklet — ult ile gir, takım seni kapsar.

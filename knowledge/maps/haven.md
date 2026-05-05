@@ -1,160 +1,181 @@
 # HAVEN — Detaylı Strateji ve Analiz
 
-> PATCH-SENSITIVE NOTE: Haven, oyundaki nadir 3-site haritalardan biri. 3 site olması savunma kaynak dağıtımını ve saldırı karar ağacını kökünden değiştirir. Meta her patch'te evrilir ama 3-site temelleri sabit kalır.
+> Haven'da 3 site var. Bu tek fark her şeyi değiştirir. Savunma 3'e bölünüyor, sen saldırırken rakip sürekli ince yayılıyor. Bunu anlayan taraf kazanır.
 
 ## 1. Temel Prensipler
-- Haven 3 site barındıran (A, B, C) nadir haritalardan biri — bu yapı savunmayı 5 kişiyle 3 noktayı tutmak zorunda bırakır ve her zaman en az bir site yapısal olarak zayıf kalır
-- Garage/Mid bölge haritanın merkezi — Garage kontrolü hem B Window hem C Connector'a erişim sağlar; mid'i kaybeden takım haritanın yarısını kaybeder
-- Saldırı temelleri: 3 site = 3 farklı execute seçeneği; bu avantajı kullanmak için bilgi toplama ve fake play'ler zorunlu. Tek bir site'a her round gitmek seni okunabilir yapar ve savunmanın işini kolaylaştırır
-- Savunma temelleri: 5 kişiyle 3 site tutmak matematiksel olarak her zaman bir açık bırakır. Savunmanın gücü bilgi akışında — hangi site'in tehdit altında olduğunu erken anlamak rotate kalitesini belirler
-- Tempo prensipleri: Saldırı tarafında yavaşça oyna, bilgi topla, sonra tek bir noktaya commit et. Savunmada over-rotate etme — bir site'a 3 kişi döndüğünde diğer iki site boş kalır ve rakip bunu cezalandırır. Haven'da en büyük hata over-rotation
+- Haven'da 3 site var: A, B, C. Savunma 5 kişiyle 3 noktayı tutmak zorunda — bu yüzden her zaman en az bir site zayıf kalır. Bunu bil, bunu kullan.
+- Garage ve Mid haritanın kalbi. Garage'ı kaybedersen hem B Window'a hem C Connector'a erişimini kaybedersin. Mid giderse haritanın yarısı gider.
+- Saldırıda her round aynı siteye gitme. Rakip seni okur, işini kolaylaştırırsın. Önce bilgi topla, fake yap, sonra bir siteye commit et.
+- Savunmada over-rotate etme. Bir siteye 3 kişi gönderirsen diğer ikisi boş kalır. Rakip bunu görür, cezalandırır. Haven'da en sık yapılan hata budur.
+- Savunmanın gücü bilgi akışında. Hangi sitenin baskı altında olduğunu erken anlayan takım rotate'i doğru yapar, oyunu kontrol eder.
 
 ## 2. Ölüm Bölgeleri
-- **A Long**: Haven'ın en uzun sightline'larından biri. Burada ölen oyuncular Op'a kuru peek atıyorlar ya da smoke olmadan ilerliyor. Koçluk bağlamında: A Long'da ölen oyuncu utility disiplini eksikliği gösteriyor — flash veya smoke olmadan A Long'a girmek intihardır.
-- **B Main Girişi**: B site'in tek ana girişi dar ve kısa bir koridordur. Buraya yığılmak savunucuya çoklu kill fırsatı verir. Burada ölen oyuncular girişin darlığını hafife alıyor — tek sırada giriyorlar ve savunucu hepsini sırayla vuruyor.
-- **Garage/Mid Window**: Garage bölgesinde ölümler iki yönlü çalışır. Saldırı tarafında Garage'a utility olmadan girmek savunucunun Window'dan seni vurması demek. Savunma tarafında gereksiz peek atmak saldırganın seni pick'lemesi demek. Her iki tarafta da buradaki ölümler bilgi almadan hareket etme alışkanlığına işaret eder.
-- **C Long Cross**: C Long'dan site'a girerken Plat'tan gelen crossfire oyuncuları yakalayan bir ölüm bölgesi. Burada tekrar eden ölümler smoke kullanmadan cross yapma hatasını gösterir — Plat'ı smoke'lamadan C site'a girmek savunucuya bedava bir kafa vuruşu hediye eder.
-- **B Window/Connector Geçişi**: Mid'den B'ye veya C'ye geçiş yaparken Window bölgesinde yaşanan ölümler. Bu bölgede ölen oyuncular geçişi kontrol etmeden yapıyorlar — Window'dan peek atan savunucu geçiş yapan herkesi tek tek indirir.
+- **A Long**: Haven'ın en uzun sightline'ı burası. Flash ya da smoke atmadan A Long'a giriyorsan Op seni bedavaya alır. Util atmadan bu koridora girme.
+- **B Main Girişi**: B'ye tek sırada dalıyorsun, savunucu sizi teker teker biçiyor. B Main'e girerken giriş açısını util'le kır, sonra içeri gir.
+- **Garage/Mid Window**: Saldırdaysan util'siz Garage'a girme — Window'dan direkt yersin. Savunmadaysan gereksiz peek atma — saldırgan seni pick'ler. Bu bölgede ölüyorsan bilgi almadan hareket ediyorsun.
+- **C Long Cross**: Plat'ı smoke'lamadan C site'a cross yapıyorsun, savunucu kafa vuruşunu bedavaya alıyor. C Long'dan geçmeden önce Plat'ı kapat.
+- **B Window/Connector Geçişi**: Mid'den B'ye ya da C'ye geçerken Window'u kontrol etmiyorsun. Window'dan peek atan savunucu geçiş yapan herkesi sırayla indirir. Geçmeden önce Window'u temizle ya da kapat.
 
 ## 3. Pattern -> Meaning Eşleşmesi
 
 **Pattern 1: A Long Kuru Peek Ölümleri**
-IF: Oyuncu A Long'da utility kullanmadan ilerliyor — smoke veya flash olmadan uzun sightline'a peek atıyor
-MEANING: Sightline disiplini yok. A Long, Haven'ın en uzun hatlarından biri; burada savunucu Op veya Vandal ile pre-aim yapıp bekliyor. Utility olmadan bu hatta girdiğinde savunucunun seni görmesi ve ateş etmesi için gereken süre senin tepki süresinden çok daha kısa. Modelin koridorun tamamında görünür oluyor ve savunucu için kolay bir hedef haline geliyorsun.
-COUNTER: A Long'a girmeden önce smoke at — sightline'ın orta noktasını kes. Ardından flash at ve flash'ın patlamasıyla eş zamanlı swing yap. Smoke savunucunun görüş hattını koparır, flash onu açıktan çıkarır. Op tutan savunucuya karşı ise Jett dash veya Neon slide ile hızlı geçiş yap — sabit hedef olma.
-WHY: Uzun sightline'lar savunucu avantajını maksimize eder çünkü savunucu seni görmeye başladığı an ile sen onu gördüğünde ateş edecek pozisyona gelmeni arasında geçen süre savunucunun lehinedir. Utility bu denklemi bozar: smoke görüş hattını keser ve savunucuyu ya pasif kalmaya ya da smoke'un içinden push etmeye zorlar; flash ise savunucunun aim'ini resetler ve sana güvenle peek atma penceresi açar.
+IF: A Long'a smoke veya flash atmadan giriyorsun — utility yok, düz sightline'a yürüyorsun.
+MEANING: Sightline disiplini yok. A Long Haven'ın en uzun hatlarından biri. Savunucu orada seni bekliyor, pre-aim yapıyor. Sen görünür olduğun anda o zaten tetikten çekiyor.
+COUNTER: A Long'a girmeden önce sightline'ın ortasını smoke'la. Sonra flash at, flash patlarken swing yap. Op tutan birine karşı Jett dash veya Neon slide kullan — sabit hedef olma.
+WHY: Savunucu seni görür görmez ateş edebilir. Sen hâlâ pozisyon alırken o zaten nişan almış durumda. Smoke bu denklemi kırar — savunucu ya bekler ya smoke'a girer. Flash ise aim'ini sıfırlar, sana swing için pencere açar.
 
 **Pattern 2: B Main Yığılma Ölümleri**
-IF: Takım B Main girişinde aynı anda 2-3 kişi kaybediyor — dar girişten sırayla giriyor ve savunucu hepsini tek spray'de vuruyor
-MEANING: Dar giriş disiplini yok. B Main Haven'ın en dar choke point'lerinden biri — savunucu tek bir açıdan tüm girişi kontrol edebilir. Takım olarak bu girişten sırayla girmek savunucuya çoklu kill fırsatı veriyor çünkü her oyuncu aynı sightline'a giriyor.
-COUNTER: B execute yaparken iki yönden gir: B Main'den 2 kişi utility ile girerken, Mid Window'dan 1-2 kişi destek ateşi açsın. B Main girişi öncesinde molly veya smoke ile savunucunun pozisyonunu kırdır. Flash + entry combo kullan — ilk oyuncu flash atar, ikinci oyuncu flash patlamasıyla girer. Aynı anda girmek yerine zamanlama farkı bırak.
-WHY: Dar girişler savunucuya çoklu kill potansiyeli verir çünkü her oyuncu aynı sightline'dan geçer. Split yaklaşım savunucuyu iki yön arasında seçim yapmaya zorlar — tek bir açıya odaklanamaz. Zamanlamayı kademeli yapmak ise tek bir spray'in birden fazla kişiyi vurması olasılığını düşürür. Window desteğiyle savunucunun odağını dağıtırsın ve B Main girişi çok daha güvenli hale gelir.
+IF: Takım B Main'den sırayla giriyor, 2-3 kişi arka arkaya aynı yerden vuruluyor.
+MEANING: Dar giriş disiplini yok. B Main Haven'ın en dar boğaz noktası. Savunucu tek açıdan tüm girişi kontrol ediyor — her giren aynı sightline'a çıkıyor.
+COUNTER:
+- B Main'den 2 kişi utility ile girerken Mid Window'dan 1-2 kişi baskı açsın.
+- Giriş öncesinde molly veya smoke ile savunucunun pozisyonunu kır.
+- İlk kişi flash atar, ikinci kişi flash patlarken girer.
+WHY: Dar girişten aynı anda geçmek savunucuya çoklu kill fırsatı veriyor. İki yönden baskı yapınca savunucu iki tarafa birden bakamaz. Zamanlama farkı bırakırsan tek spray birden fazla kişiyi vuramaz.
 
 **Pattern 3: Garage Kontrolü Kaybetme**
-IF: Takım Garage kontrolünü round başında kaybediyor — ne utility atıyor ne de bilgi alıyor, Garage'i tamamen ihmal ediyor
-MEANING: Harita kontrolü anlayışı eksik. Garage Haven'ın merkezi — B Window ve C Connector'a bağlantı sağlar. Garage'i boş bıraktığında rakip hem B'ye hem C'ye split yapma opsiyonunu bedavaya kazanır. Ayrıca flank yolu olarak Garage kontrolsuz kalırsa savunma tarafında arkadan gelecek tehditleri görmezden geliyorsun.
-COUNTER: Saldırı tarafında: round başında 1-2 kişi Garage'a utility gönder — smoke + flash combo ile Garage girişi yap veya en azından bilgi al. Sova recon bolt veya Fade haunt ile Garage'da kim var öğren. Savunma tarafında: Garage Window'dan bilgi al ama gereksiz peek atma. Sentinel utility (Cypher tripwire, Killjoy turret) Garage girişine koy — saldırı geldiğinde erken uyarı alırsın. Sage wall ile Garage girişini geciktir.
-WHY: Mid kontrol Haven'da diğer haritalardakinden daha fazla anlam taşır çünkü 3 site var ve Garage bu sitelerin ikisine doğrudan erişim sağlar. Garage'i kontrol eden takım rotasyon hızında ve split opsiyonlarında büyük avantaj kazanır. Garage'i ihmal etmek haritanın yarısını rakibe teslim etmek demek — ve 3-site haritada bu, savunmanın tamamen dağılması anlamına gelir.
+IF: Takım Garage'i round başında tamamen ihmal ediyor — ne utility atıyor ne bilgi alıyor.
+MEANING: Harita kontrolü anlayışı eksik. Garage Haven'ın merkezi. B Window'a ve C Connector'a bağlanıyor. Garage'i boş bırakırsan rakip hem B'ye hem C'ye split opsiyonunu bedavaya alıyor.
+COUNTER:
+- Saldırıda: 1-2 kişi Garage'a smoke + flash ile gir ya da en azından Sova recon / Fade haunt ile bilgi al.
+- Savunmada: Garage Window'dan bilgi al, gereksiz peek atma. Cypher tripwire veya Killjoy turret ile erken uyarı al.
+WHY: Haven'da 3 site var ve Garage ikisine direkt erişim sağlıyor. Garage'i kontrol eden takım rotasyonda ve split opsiyonlarında büyük avantaj kazanıyor. Garage'i bırakmak haritanın yarısını rakibe teslim etmek demek.
 
 **Pattern 4: Over-Rotation Hatası**
-IF: Savunma tarafında bir site'a 3+ kişi rotate ediyor — diğer site'lar tamamen boş kalıyor ve rakip fake'ten sonra boş site'a spike dikıyor
-MEANING: Bilgi doğrulama eksik. Haven'da over-rotation en büyük ve en yaygın hata çünkü 3 site varken rotate kararları çok karmaşık. Oyuncu ses veya tek bir utility ipucuyla panikleyip rotate ediyor ama bu bilgiyi doğrulamıyor. Rakip bir site'a utility atıp ses çıkararak fake yapıyor, sonra boş kalan site'a execute ediyor.
-COUNTER: Rotate etmeden önce bilgiyi doğrula. Tek bir ses veya tek bir utility görmek yeterli değil — en az 2 farklı bilgi kaynağı (görüş, ses, utility, minimap) rotate kararını desteklemeli. B anchor'ı özellikle yerinde tutmayı öğret — B'den rotate etmek B'yi tamamen boş bırakır ve rakip bunu cezalandırır. Rotate eden kişinin yerine bir başkasının kayma sistemi kur: A'dan rotate ediyorsan, mid'deki oyuncu A'ya kaysın.
-WHY: 3-site haritada rotate mesafeleri uzun ve her rotate kararı iki site'i etkiler. Over-rotate ettiğinde boş kalan site'a rakip 5 kişiyle girebilir ve retake çok zor olur. Bilgi doğrulama bu döngüyü kırar: fake'i gerçek execute'tan ayırabilirsen doğru sayıda kişiyi doğru yere gönderirsin. Haven'da "az rotate et, geç rotate et" prensibi "çok rotate et, erken rotate et"ten her zaman daha güvenlidir.
+IF: Savunmada bir site'a 3+ kişi gidiyor, diğer siteler boş kalıyor, rakip fake sonrası boş site'a spike dikıyor.
+MEANING: Bilgi doğrulama eksik. Tek bir ses veya tek bir utility görünce panikleyip rotate ediyorsun ama bu bilgiyi doğrulamıyorsun. Rakip bunu kullanıyor.
+COUNTER:
+- Rotate etmeden önce en az 2 farklı kaynaktan (görüş, ses, utility, minimap) bilgi al.
+- B anchor'ı yerinde tut — B'yi boşaltmak rakibe bedava site veriyor.
+- A'dan rotate ediyorsan mid'deki oyuncu A'ya kaysın, sistem böyle çalışsın.
+WHY: 3-site haritada her rotate kararı iki site'i etkiliyor. Over-rotate edince boş site'a rakip 5 kişiyle giriyor, retake neredeyse imkânsız. Fake'i gerçek execute'tan ayırabilirsen doğru sayıda kişiyi doğru yere gönderirsin.
 
 **Pattern 5: C Long Cross Ölümleri**
-IF: Oyuncu C Long'dan site'a geçerken Plat'tan veya CT'den vuruluyor — cross noktasını smoke'lamadan geçiyor
-MEANING: Cross disiplini yok. C Long'dan C site'a giriş yaparken Plat yüksek bir pozisyon ve savunucu oradan aşağı bakıyor. Smoke olmadan bu geçişi yapmak savunucuya tamamen açık bir hedef sunuyor — sen koşerken o sabit durup ateş ediyor.
-COUNTER: C Long cross öncesinde Plat'ı ve CT spawn çıkışını smoke'la. Ardından flash at ve takım olarak site'a gir. C Garage split kullan: 2 kişi C Long'dan girerken 2 kişi Garage üzerinden C Connector'dan girer — savunucu iki yöne birden bakmak zorunda kalır. Tek başına C Long'dan site'a girmeye çalışma, her zaman destek iste.
-WHY: Yükseklik avantajı savunucuya aim kolaylığı ve görüş genişliği verir. Plat'taki savunucu aşağı bakan bir açıya sahip — sen yatay hareket ederken o aşağı bakarak kolayca vurabilir. Smoke bu yükseklik avantajını nötralize eder çünkü savunucu seni göremez. Split yaklaşım ise savunucuyu iki açıya birden bakmak zorunda bırakır ve odağını dağıtır.
+IF: C Long'dan site'a geçerken Plat'tan veya CT'den vuruluyorsun — cross noktasını smoke'lamadan geçiyorsun.
+MEANING: Cross disiplini yok. Plat yüksekte, savunucu aşağı bakıyor. Sen koşarken o sabit durup vurabilir — kolay hedefsin.
+COUNTER: C Long cross öncesinde Plat'ı ve CT spawn çıkışını smoke'la, ardından flash at ve site'a gir. 2 kişi C Long'dan, 2 kişi Garage üzerinden C Connector'dan girin — savunucu iki yöne birden bakmak zorunda kalsın. Tek başına C Long'dan site'a girme.
+WHY: Yükseklik avantajı savunucuya hem görüş hem aim kolaylığı veriyor. Smoke bu avantajı sıfırlar. Split yaklaşım ise savunucunun odağını ikiye böler.
 
 **Pattern 6: B Anchor İzolasyonu**
-IF: B anchor oyuncusu yardım istemeden veya komünikasyon kurmadan tek başına ölüyor — takım B'ye rotate gelemeden anchor düşmüş oluyor
-MEANING: Komünikasyon ve geciktirme becerisi eksik. B site'i Haven'da solo tutmak en zor görev — tek giriş, dar alan ve savunucunun yedeği uzakta. B anchor eğer utility ile geciktirme yapmazsa ve takıma bilgi vermezse, 1v2 veya 1v3 durumuna düşer ve kaybeder.
-COUNTER: B anchor her zaman sentinel olmalı (Killjoy veya Cypher). Turret/tripwire ile erken uyarı al ve utility ile girişleri geciktir. İlk temas anında takıma "B'de adam var" bilgisini ver — rotate için zaman kazandır. Eğer push geliyorsa site'in önünde değil arkasında oyna (B Back pozisyonu) ve utility ile zaman kazan. Killjoy lockdown B site için özel tasarlanmış gibi çalışır — execute'u tamamen durdurabilir.
-WHY: B anchor'ın görevi kill almak değil, zaman kazanmak ve bilgi vermek. Takım 3 site tutarken B'ye en az kaynak ayırır — bu yüzden B anchor'ın hayatta kalıp bilgi akışı sağlaması rotate'un zamanında gelmesi için şart. Sentinel utility olmadan B tutmak neredeyse imkânsız çünkü execute geldiğinde yalnızsın ve yardım en az 5-8 adım uzakta.
+IF: B anchor yardım istemeden, takıma bilgi vermeden tek başına ölüyor — takım rotate edemeden anchor düşmüş oluyor.
+MEANING: Geciktirme ve iletişim becerisi eksik. B'yi solo tutmak Haven'da en zor görev. Utility kullanmazsan ve seslenmezsek 1v2'ye, 1v3'e düşersin.
+COUNTER:
+- B anchor sentinel oyna — Killjoy veya Cypher.
+- Turret / tripwire ile erken uyarı al, utility ile girişi geciktir.
+- İlk temas anında takıma söyle, rotate için zaman kazan.
+WHY: B anchor'ın işi kill almak değil, zaman kazanmak ve bilgi vermek. Sentinel utility olmadan execute geldiğinde yalnızsın ve yardım çok uzakta. Killjoy lockdown B execute'u tamamen durdurabilir — bunu kullan.
 
 **Pattern 7: Tek Site'a Tekrarlayan Execute**
-IF: Saldırı tarafında takım her round aynı site'a execute yapıyor — rakip bunu okuyor ve o site'i stack'liyor
-MEANING: Strateji çeşitliliği yok. Haven 3 site sunuyor ama takım sadece birini kullanıyor — bu 3-site avantajını tamamen çöpe atıyor. Rakip 2-3 round sonra nereye geleceğini biliyor ve o site'i 3-4 kişiyle stack'liyor.
-COUNTER: Her yarım içinde en az 2 farklı site'a execute yap. Arada fake play kullan — bir site'a utility at, ses çıkar, sonra başka bir site'a rotate et. Haven'da fake play'ler son derece güçlü çünkü rotate mesafeleri uzun ve savunma 3 site arasında bölünmek zorunda. Round planı: 1. round A execute, 2. round B execute, 3. round C fake + A rotate gibi bir döngü oluştur.
-WHY: 3-site haritada saldırının en büyük avantajı seçim zenginliği. Tek bir site'a bağlanmak bu avantajı yok eder ve savunmaya kaynaklarını odaklama imkânı verir. Çeşitlilik savunmayı tahmin edemez kılar — 3 site arasında dağılım yapmak zorunda kalan savunma her site'ta daha zayıf kalır. Fake play'ler bu etkiyi ikiye katlar çünkü savunma gerçek tehdidi ayırt edemez ve rotate kararları hata yapmaya müsait olur.
+IF: Takım her round aynı site'a gidiyor — rakip bunu okuyor ve o site'i stack'liyor.
+MEANING: Strateji çeşitliliği yok. Haven 3 site sunuyor ama takım birini kullanıyor. Birkaç round sonra rakip nereye geleceğini biliyor ve oraya 3-4 kişi yığıyor.
+COUNTER:
+- Yarı içinde en az 2 farklı site'a execute yap.
+- Fake play kullan: bir site'a utility at, ses çıkar, başka site'a rotate et.
+- Döngü kur: A execute, B execute, C fake + A rotate gibi.
+WHY: 3-site haritada saldırının en büyük gücü seçim zenginliği. Tek siteye bağlanırsan bu avantajı çöpe atıyorsun. Savunma kaynağını odaklayabilirse her site'ta daha güçlü olur. Çeşitlilik savunmanın tahmin etmesini engeller.
 
 **Pattern 8: Post-Plant Pozisyon Hatası**
-IF: Oyuncu post-plant'te spike'a çok yakın pozisyon alıyor — savunucunun molly veya nade'i ile spike'la birlikte ölüyor
-MEANING: Post-plant mesafe yönetimi yok. Spike dikildikten sonra spike'ın hemen yanında durmak savunucunun alan inkar utility'sini sana da uygulaması demek. Molly, nade veya Killjoy lockdown spike bölgesini temizlerken sen de o bölgede olduğun için ölüyorsun.
-COUNTER: Spike dikildikten sonra spike'tan uzaklaşarak crossfire pozisyonu al. Haven'da ideal post-plant pozisyonları: A site'ta A Long + A Short crossfire (spike'i iki yönden izle), B site'ta B Main + Mid Window crossfire, C site'ta C Long + Garage crossfire. Spike'i duyma mesafesinde ol ama doğrudan yanında durma — savunucunun defuse'u başladığını duyunca peek at.
-WHY: Post-plant'te amaç spike'i korumak, spike'ın yanında olmak değil. Mesafe sana iki avantaj verir: savunucunun alan inkar utility'si seni etkilemez ve crossfire pozisyonundan peek attığında savunucu iki yönü birden kontrol edemez. Spike'a yakın durmak savunucunun işini kolaylaştırır çünkü tek bir molly hem spike'i hem seni etkiler.
+IF: Spike dikildikten sonra spike'ın hemen yanında duruyorsun — savunucunun mollysı veya nadesi spike'la birlikte seni de öldürüyor.
+MEANING: Post-plant mesafe yönetimi yok. Spike'ın yanında durmak, savunucunun alan temizleme utility'sinin sana da gelmesi demek.
+COUNTER: Spike dikildikten sonra uzaklaş ve crossfire pozisyonu al.
+- A site: A Long + A Short crossfire
+- B site: B Main + Mid Window crossfire
+- C site: C Long + Garage crossfire
+
+Defuse sesini duyunca peek at — spike'ın tam yanında bekleme.
+WHY: Post-plant'te amaç spike'i korumak, yanında olmak değil. Mesafe aldığında savunucunun mollysı seni vuramaz. Crossfire pozisyonundan bakınca savunucu iki yönü birden kontrol edemez.
 
 **Pattern 9: A Heaven'da Değişmez Pozisyon**
-IF: Savunucu A Heaven'da her round aynı açıyı tutuyor — 3-4 round üst üste aynı pozisyonda olup ölmeye başlıyor
-MEANING: Pozisyon çeşitliliği yok. A Heaven güçlü bir yükseklik avantajı sunar ama rakip bu pozisyonu öğrendikten sonra pre-aim yapar, flash atar veya utility gönderir. Güçlü pozisyonlar tekrarlanınca zayıf pozisyonlara dönüşür.
-COUNTER: A Heaven ile A Hell (site altı), A Short ve A site zeminindeki pozisyonlar arasında döngü yap. Bir round Heaven'dan kill aldıysan sonraki round Hell'e veya site zeminine in — rakip Heaven'ı pre-aim edecek ve seni bulamayacak. Heaven'ı sürpriz pozisyonu olarak kullan, varsayılan pozisyon olarak değil. Off-angle'ları rotation içine sok: 2 round Heaven, 1 round Hell, 1 round agresif A Short peek.
-WHY: Off-angle'lar güçlerini beklenmedik olmalarına borçlu. Rakip bir pozisyonu öğrendiğinde o pozisyon one-trick haline gelir — pre-aim + flash combo ile kolayca temizlenir. Pozisyon rotasyonu rakibi her round birden fazla açı kontrol etmeye zorlar ve bu bilişsel yük onların entry hızını düşürür ve tereddüt yaratır.
+IF: Savunucu A Heaven'da her round aynı açıyı tutuyor — rakip bunu öğrenince pre-aim yapıp, flash atıp geçiyor.
+MEANING: Pozisyon çeşitliliği yok. A Heaven güçlü bir pozisyon ama rakip öğrendikten sonra pre-aim + flash combo ile temizliyor. Güçlü pozisyonlar tekrarlanınca zayıflar.
+COUNTER: A Heaven, A Hell (site altı), A Short ve site zemini arasında döngü yap. Heaven'dan kill aldıysan bir sonraki round Hell'e veya zemine in — rakip Heaven'ı pre-aim edecek ve seni bulamayacak. Off-angle'ı sürpriz olarak kullan, varsayılan pozisyon olarak değil.
+WHY: Rakip bir pozisyonu öğrendiğinde artık one-trick haline gelir — kolayca temizlenir. Pozisyon döngüsü rakibi her round birden fazla açı kontrol etmeye zorlar. Bu yük onların giriş hızını düşürür ve tereddüt yaratır.
 
 **Pattern 10: Eco Round Disiplin Kaybetme**
-IF: Takım eco round'da dağılıp farklı farklı yerlerde tek başına ölüp kaybediyor — koordinasyonsuz bireysel play'ler yapıyor
-MEANING: Ekonomi disiplini yok. Eco round'da amaç ya tam save yapmak ya da koordineli bir rush ile bir site'i ele geçirmek. Dağınık bireysel play'ler ne save yapar ne round kazanır — sadece kredi israf eder.
-COUNTER: Eco round'da iki opsiyondan birini seç: tam save (herkes geri çekil, elde ne varsa sakla) veya koordineli rush. Haven'da en iyi eco rush B site üzerindendir — B girişi dar ama en az utility gerektiren execute budur. Sheriff ile Garage üzerinden agresif play de güçlü çünkü dar koridor Sheriff'in tek vuruş potansiyelini artırır. Takım olarak tek bir karar al ve herkes aynı planı uygulasın.
-WHY: Eco round'da bireysel oynamak kaynakları boşa harcar çünkü herkes farklı yerde olup farklı planları dener. Koordineli hareket eco round'un kazanma şansını maksimize eder çünkü sayı avantajı tek bir noktada yoğunlaşır. Dağınık play'de rakip seni birer birer yok eder; koordineli rush'ta ise bir site'i alırsan round kazanma şansın var.
+IF: Takım eco round'da dağılıp farklı yerlerde tek tek ölüyor — koordinasyonsuz bireysel play'ler yapılıyor.
+MEANING: Ekonomi disiplini yok. Eco round'da amaç ya tam save ya da koordineli rush. Dağınık bireysel play ne round kazandırır ne save yapar — sadece kredi eritir.
+COUNTER: İki opsiyondan birini seç, hepiniz aynı kararı uygulayın:
+- Tam save: geri çekilin, elinizdekini saklayın.
+- Koordineli rush: Haven'da en iyi seçenek B site üzerinden. Sheriff ile Garage'dan agresif play de işe yarıyor — dar koridor tek vuruş potansiyelini artırıyor.
+WHY: Herkes farklı yerde farklı plan denerse rakip sizi birer birer yer. Koordineli rush'ta ise sayı avantajı tek noktada toplanıyor — bir site'i alırsan round kazanma şansın var.
 
 ## 4. Taraf Bazlı Hatalar
 
 ### Saldırı
-- Garage'i ihmal etmek — Garage kontrolü almadan execute yapmak saldırı opsiyonlarını tek boyutlu kılar; Garage Haven'ın anahtarı ve onu kullanmamak 3-site avantajını çöpe atar
-- Her round aynı site'a gitmek — rakip seni okuyor ve stack'liyor; 3 site var, kullan. Execute çeşitliliği olmadan Haven'da saldırı tarafında başarılı olmak neredeyse imkânsız
-- B Main'e yığılmak — dar girişten 3-4 kişi aynı anda girmek savunucuya çoklu kill fırsatı verir; B execute her zaman Window split ile yapılmalı
-- Fake play kullanmamak — Haven fake play için yaratılmış bir harita; bir site'a utility at, ses çıkar, sonra başka bir site'a dön. Bu stratejiyi kullanmayan takım Haven'ın yapısal avantajını çöpe atıyor
-- A Long'a kuru peek atmak — uzun sightline'a utility olmadan girmek savunucuya bedava kill vermek demek; her A Long push'undan önce smoke + flash zorunlu
-- Mid-round karar gecikmesi — 3 site bilgi toplama gerektirir ama toplanan bilgiyle hızlı karar vermek şart; bilgi topla ama commit'i geciktirme
+- **Garage'i atlamak** — Garage almadan execute açma. 3 site avantajın var, ama Garage'siz gidersen saldırı seçeneklerin tek yönlü kalır. Bu da savunucunun işini kolaylaştırır.
+- **Her round aynı siteya girmek** — Rakip seni okuyor ve o siteya yığılıyor. 3 site var, hepsini kullan. Çeşitlilik yoksa Haven'da saldırı tarafı tutmaz.
+- **B Main'e üst üste girmek** — Dar girişten 3-4 kişi aynı anda doluşma. Savunucu çoklu kill alır. B execute her zaman Window'dan split ile açılır.
+- **Fake yapmamak** — Haven fake için yapılmış bir harita. Bir siteya util at, ses çıkar, sonra başka siteya dön. Bunu yapmayan takım haritanın yapısal avantajını kullanmıyor demektir.
+- **A Long'a util olmadan peek atmak** — Uzun sightline'a kuru girme. Savunucuya bedava kill verirsin. Her A Long girişinde smoke + flash şart.
+- **Bilgi topladıktan sonra commit'i geciktirmek** — Bilgiyi topladın, karar ver. Beklersen rakip tekrar yeniden dizilir.
 
 ### Savunma
-- Over-rotation — Haven'ın en büyük savunma hatası. Bir site'a 3 kişi göndermek diğer iki site'i boş bırakır ve rakip fake'ten sonra boş site'a girer. Rotate etmeden önce bilgiyi doğrula
-- B anchor'ı desteksiz bırakmak — B anchor yalnız kalacak, bunu bilerek sentinel ve utility ataması yap. B'ye support gelmiyorsa B anchor stres altında erir ve bilgi akışı kesilir
-- Garage kontrolünü gereksiz peek'le kaybetmek — Garage Window'dan bilgi almak için peek atıyorsun ama fazla ileri çıkıp ölüyorsun. Window'dan görüş açını kullan ama bedenini açma
-- Retake koordinasyonsuzluğu — Haven'da retake özel bir zorluk taşır çünkü rotate mesafeleri uzun. Retake'e giren oyuncular farklı zamanlamalarda gelir ve rakip onları tek tek yok eder. Retake her zaman utility ile başlamalı ve takım olarak aynı anda girilmeli
-- Eco round'da agresif oynayıp ölmek — avantajlı round'da gereksiz risk almak ekonomiyi bozmak demek. Eco'ya karşı spread oyna, Sheriff tek vuruş riskine karşı mesafe koru
+- **Erken rotate etmek** — Bir siteya 3 kişi gönderirsen diğer iki site boş kalır. Rakip fake sonrası boş siteya girer. Rotate etmeden önce bilgiyi doğrula.
+- **B anchor'ı yalnız bırakmak** — B anchor destek görmeden uzun süre tutamaz. Sentinel ve util atamasını buna göre yap. Destek gelmiyorsa bilgi akışı kesilir.
+- **Garage Window'dan ileri çıkıp ölmek** — Window'dan görüş alırsın, ama bedenini açarsan ölürsün. Açıyı kullan, bedeni sokma.
+- **Retake'e dağınık girmek** — Rotate mesafeleri uzun, herkes farklı zamanda gelir. Rakip sizi tek tek yer. Retake her zaman util ile başlar ve takım aynı anda girer.
+- **Eco round'da gereksiz risk almak** — Avantajlı roundda kuru peek atma. Eco'ya karşı spread oyna, mesafe koru. Sheriff tek vuruş atar.
 
 ## 5. Kompozisyon / Harita Etkileşim Notları
-- **Omen**: Haven'da S-tier controller. Shrouded Step ile Garage'da bilgi toplama, B Heaven'a TP ile sürpriz pozisyon, Paranoia ile dar koridorları kontrol etme. 3 site arasında smoke'ları esnek dağıtıyor — tek smoke controller'ları Haven'da zorlanır ama Omen'in iki smoke'u ve recharge mekaniği bu sorunu çözer
-- **Killjoy**: B anchor için en iyi ajan. Turret + Alarmbot + Nanoswarm ile B site'i tek başına tutabilir. Lockdown B site için özel tasarlanmış gibi çalışır — dar alanı tamamen kontrol eder ve execute'u durdurur. Haven'da Killjoy olmadan B tutmak ciddi bir dezavantaj
-- **Sova**: Recon Bolt ile 3 site'in herhangi birinde round başı bilgi toplama. Haven'ın açık alanları Sova'nın oklarının ve drone'unun tam potansiyeliyle çalışması için ideal. A Long ve C Long recon bolt'ları savunmanın ilk bilgi katmanı olarak kullanılır
-- **Breach**: B Main'den flash + Aftershock combo ile B site'i açma. Haven'ın dar koridorları Breach'in stun ve flash'lerinin kaçınılmaz olması demek. Aftershock duvar arkasına atar, oyuncu pozisyonu terk etmek zorunda kalır
-- **Jett**: C Long agresif Op oyunu için ideal. Dash ile kill aldıktan sonra geri çekilme — Haven'ın uzun sightline'ları Op için cennet ve Jett'in kaçış mekaniği bu stili mümkün kılar. A Long'da da Op oynayabilir ama C Long pozisyonu daha güvenli çünkü geri çekilme hattı daha kısa
-- **Cypher**: B'de Killjoy alternatifi. Tripwire + Camera ile B girişi ve Garage bilgisi aynı anda sağlar. Killjoy'dan farkı: Cypher bilgi ağırlıklıyken Killjoy geciktirme ağırlıklıdır. Cypher ayrıca flank izleme konusunda üstün — Haven'ın çok girişli yapısında flank izleme çok değerli
-- **Harbor**: Haven'da A-tier. High Tide duvarı C Long'dan A'ya kadar çekilebilir ve birden fazla sightline'ı tek ability ile keser. Cascade Garage push için mükemmel — dar koridorda su duvarı kaçınılmaz. Cove ile spike dikme alanı koruma. Haven'ın büyük açık alanları Harbor'ın duvarlarının tam değerini göstermesi için ideal
-- **Astra**: Stars mekaniği ile 3 site'i tek ajan olarak kontrol edebilir. Garage deny, A Long kontrol ve C Long sightline kesme hepsini aynı round'da yapabilir. Macro oyuncular için ideal — Haven'da Astra'nın tavanı çok yüksek ama tabanı da çok düşük
+- **Omen**: Haven'da en iyi controller. Shrouded Step'le Garage'da bilgi al, B Heaven'a TP'le sürpriz yap, Paranoia'yı dar koridorlara at. 3 site'e smoke dağıtman gerekiyor — Omen'in iki smokeu ve recharge'ı bu yükü taşır, tek smokeli controller burada erir.
+- **Killjoy**: B'yi anchor etmek istiyorsan Killjoy al. Turret + Alarmbot + Nanoswarm üçlüsüyle B site'i tek başına tutarsın. Lockdown o dar alanı komple kapatır. Killjoy yoksa B tutmak seni her round bir eksik bırakır.
+- **Sova**: Round başı üç siteden herhangi birine Recon Bolt at, bilgi al. A Long ve C Long recon bolt'ları savunmanın ilk bilgi katmanıdır. Haven'ın açık alanları drone ve okların tam gücüyle çalışmasına izin verir.
+- **Breach**: B Main'den flash + Aftershock at, B site'i aç. Dar koridorlarda Breach'in flash ve stun'larından kaçış yok. Aftershock duvar arkasına vurur, adam pozisyonunu bırakmak zorunda kalır.
+- **Jett**: C Long'da Op oyna, kill aldıktan sonra dash'le çekil. C Long'u tercih et — geri çekilme hattı daha kısa, daha güvenli. A Long'da da Op açarsın ama C pozisyonu daha az risk taşır.
+- **Cypher**: B'de Killjoy oynamak istemiyorsan Cypher al. Tripwire + Camera ile aynı anda B girişini ve Garage'ı izlersin. Killjoy geciktirme yapar, Cypher bilgi verir — flank izlemede Cypher üstündür. Haven'ın çok girişli yapısında bu fark önemli.
+- **Harbor**: C Long'dan A'ya High Tide duvarı çek, birden fazla sightline'ı tek ability'yle kes. Cascade'i Garage push'unda kullan — dar koridorda su duvarından geçemezler. Cove'la spike dikme alanını kapat. Büyük açık alanlar Harbor'ın duvarlarını tam değerinde kullanmanı sağlar.
+- **Astra**: Stars'larını Garage'a, A Long'a ve C Long'a koy — üç siteyi tek ajanla kontrol edersin. Macro oyunu seviyorsan Astra al. Ama tavan yüksek, taban da düşük: iyi oynayan Astra'nın karşısına geçilmez, kötü oynayan Astra takımı yük gibi taşır.
 
 ## 6. Koçluk Satırları
-- "Haven 3 site sunar ama sen sadece birini kullanıyorsan, 2-site haritası oynuyorsun demektir — ve rakibin bunu öğrendiği andan itibaren kaybetmeye başlıyorsun."
-- "Garage Haven'ın kalbi. Garage'i kontrol eden haritayı kontrol eder, Garage'i ihmal eden haritanın yarısını rakibe teslim eder."
-- "B anchor'ın görevi kill almak değil, hayatta kalmak ve bilgi vermek. Ölürsen takım kör kalır."
-- "Over-rotation Haven'da en çok round kaybettiren hata. Bir site'a koşan herkes boş site'a dikilen spike'ı izlemek zorunda kalır."
-- "Fake play yapma becerisi Haven'da rank atlamanın en hızlı yolu. Bir site'a utility at, ses çıkar, sonra dön ve boş site'a gir."
-- "Post-plant'te spike'ın yanında durma. Mesafe seni molly'den korur, crossfire seni kazandırır."
-- "A Long'a kuru peek atmak, savunucuya hediye vermek demektir. Utility at, sonra peek at. Her zaman."
-- "Haven'da eco round disiplini diğer haritalardan daha fazla anlam taşır — 3 site'a dağılan eco takım hiçbir şey başaramaz."
-- "Rotate kararını vermeden önce iki farklı bilgi kaynağı bekle. Tek bir ses fake olabilir."
-- "C Long cross'u smoke'suz geçmek rulettir. Plat'taki savunucu seni bekliyor — smoke at, sonra geç."
+- "Haven 3 site sunuyor ama sen sadece birine giriyorsan, 2-site haritası oynuyorsun. Rakip bunu fark ettiği anda roundları hediye ediyorsun."
+- "Garage bu haritanın merkezi. Garage'i alırsan haritayı alırsın. Bırakırsan rakip ortayı ikiye böler, sen iki tarafa koşarken round biter."
+- "B anchor olarak görevin kill değil, hayatta kalmak ve bilgi vermek. Ölürsen takım kör kalır, kör takım rotate yapamaz."
+- "Over-rotation Haven'da en çok round öldüren hata. Herkes bir siteye koşarsa, spike boş siteye kurulur ve sen izlemeye devam edersin."
+- "Fake yapmayı öğrenirsen Haven'da rank atlarsın. Bir siteye util at, ses çıkar, dön, boş siteye gir. Basit."
+- "Post-plant'te spike'ın üstünde durma. Mesafe seni molly'den korur, crossfire roundu kazandırır."
+- "A Long'a utility atmadan kuru peek atma. Savunucu seni bekliyor, açıyı tutuyor. Önce flash veya smoke, sonra peek."
+- "Eco roundda 3 siteye dağılma. Haven'da dağılan eco takım hiçbir şey yapamaz — toplan, bir siteye yüklük yap."
+- "Rotate kararı vermeden önce iki ayrı kaynaktan bilgi al. Tek bir ses fake olabilir, tek ses üzerine hareket etme."
+- "C Long'u smoke'suz geçme. Karşıda birisi seni bekliyor. Smoke at, geç. Her seferinde."
 
 ## 7. Rank Modülasyonu
-- **Iron-Silver**: Oyuncular haritanın 3 site olduğunu bilir ama bunun ne anlama geldiğini kavramaz. Her round aynı site'a gider, Garage'i tamamen ihmal eder, rotate kavramı yoktur. Koçluk odağı: temel harita bilinci — Garage'ın nereye bağlandığını öğret, her yarımda en az 2 farklı site'a execute yapma alışkanlığı kazandır. B anchor'a sentinel ata ve "utility at, bilgi ver, hayatta kal" döngüsünü öğret. Bu seviyede tek bir alışkanlık değişikliği — Garage kontrolü almak — round kazanma oranını sert şekilde artırır.
-- **Gold-Platinum**: Oyuncular site'ları bilir ve temel execute kalıpları vardır ama over-rotation, fake play eksikliği ve post-plant pozisyon hataları yoğundur. Koçluk odağı: bilgi doğrulama — rotate etmeden önce iki farklı bilgi kaynağı bekleme alışkanlığı kazan. Fake play'leri repertuara ekle: "A'ya smoke at, C'ye git" gibi temel fake kalıplarını öğret. Post-plant'te spike'tan uzaklaşmayı ve crossfire pozisyonu almayı öğret. B anchor'ın komünikasyon kalitesini artır — "kaç kişi, hangi utility, ne kadar hızlı" bilgisini net ver.
-- **Diamond-Ascendant**: Oyuncular temel stratejileri bilir ama round-to-round adaptasyon eksiktir. Aynı default'u her round tekrarlar ve rakip okuyunca saç acar. Koçluk odağı: varyasyon ve adaptasyon — her 2-3 round'da default'u değiştir, agresif ve pasif Garage kontrolü arasında geç, A Long'da Op ile C Long'da Op arasında döngü yap. Anti-strat okuma: rakibin hangi site'i stack'lediğini anla ve diğer site'a git. Mid-round karar hızı: bilgiyi topla ve hızla commit et, bekleme. Timeout kullanmayı öğret — Haven'da momentum çok güçlü ve bir timeout ile kırabilirsin.
-- **Immortal-Radiant**: Haven bu seviyede satranç oyununa dönüşür. Her round bir önceki round'un bilgisine göre şekillenir. Koçluk odağı: anti-strat derinliği — rakibin default'unu oku ve onu boş site'a yönlendirecek fake dizayn et. Post-plant lineup mastery: Viper, Brimstone veya KAY/O lineup'ları ile spike'i uzaktan koru. Ekonomi optimizasyonu: hangi round'da hangi utility'yi save edip hangi round'da kullanacağını planla. Takım olarak rotate hızını ölç ve pratikte geliştir — Haven'da rotate zamanlama farkı round kaybetme ile kazanma arasındaki çizgiyi belirler. Execute çeşitliliğini data ile destekle: hangi site'ta kazanma oranın düşük, orayı pratikte geliştir.
+- **Iron-Silver**: Haven'ın 3 sitesi olduğunu biliyorsun ama ne yapacağını bilmiyorsun. Her round aynı siteye koşuyorsun, Garage'a ayak basmıyorsun, rotate diye bir şey yok. Yapman gereken tek şey şu: Garage'ın nereye bağlandığını öğren. Her yarıda en az 2 farklı siteye baskı yap. B'ye sentinel koy, o kişiye şunu söyle — util at, bilgi ver, hayatta kal. Garage kontrolünü almaya başladığın anda round kazanma oranın sert çıkar.
+- **Gold-Platinum**: Siteleri biliyorsun, execute kalıpların var — ama bir düşman düştüğünde hemen rotate ediyorsun, fake oynamıyorsun, post-plant'te spike başında duruyorsun. Rotate etmeden önce iki ayrı bilgi kaynağı bekle. Fake kalıplarını öğren: A'ya smoke at, C'ye geç. Post-plant'te spike'tan uzaklaş, crossfire pozisyonu al. B'deki oyuncuna şunu öğret: "kaç kişi, hangi util kullandılar, ne kadar hızlı geliyorlar" — bu üç bilgiyi net ver.
+- **Diamond-Ascendant**: Temel stratejileri biliyorsun ama her round aynı default'u tekrarlıyorsun. Rakip seni okuyunca hiçbir şey yapamazsın. Her 2-3 roundda default'u değiştir. Garage'a bazen agresif gir, bazen pasif tut. Rakip hangi siteyi stack'liyorsa diğerine git. Bilgiyi toplayınca beklemeden karar ver ve commit et. Haven'da momentum güçlüdür — bir hamleyle kırılır.
+- **Immortal-Radiant**: Her round bir öncekinin üzerine kurulur. Rakibin default'unu oku, onu boş siteye yönlendirecek fake dizayn et. Viper, Brimstone veya KAY/O lineup'larıyla spike'ı uzaktan koru — post-plant'te site başında durma. Hangi roundda hangi util'i saklayıp hangi roundda kullanacağını planla. Hangi sitede kazanma oranın düşük olduğunu bul, o siteye odaklan.
 
 ## 8. Ekonomi ve Satın Alma Stratejileri
-- 3 site olduğu için utility zorunluluğu yüksek — tam buy'da utility eksik bırakmak Haven'da diğer haritalarda olduğundan daha çok cezalandırılır çünkü her site'a utility gönderemen gerekiyor
-- B anchor'a sentinel atamak utility maliyetini düşürür — Killjoy veya Cypher'ın kendi utility'si B'yi tutmaya yeter, takım utility'sini A ve C'ye yönlendirebilirsin
-- Force buy stratejisi: B rush en az utility gerektiren execute — dar giriş sadece 1-2 flash ve 1 smoke ile açılabilir. Force buy round'larında B'yi hedefle
-- Eco round: Garage üzerinden agresif play en iyi eco stratejisi — dar koridor Sheriff'in tek vuruş potansiyelini artırır ve yakın mesafe savaşı silah dezavantajını azaltır. Takım olarak Garage'dan B Window'a push et
-- Bonus round (kazanılan eco sonrası): utility save et, silah avantajını kullan. Rakibin eco'da Sheriff veya Spectre ile geleceğini bil — spread oyna ve mesafe koru
-- Anti-eco: Spread oynamamak büyük hata — 3 site'a dağılın, Sheriff tek vuruş riskine karşı kalabalık olmayın. Anti-eco'da yığılmak bedava round'u kaybettiren en yaygın neden
+- Haven'da 3 site var — utility'yi eksik bırakırsan A veya C'ye hiç bir şey göndermeden girersin, bu başka haritalarda olduğundan çok daha ağır cezalandırılır.
+- B'ye Killjoy veya Cypher koy — kendi utility'leriyle B'yi tutar, takımın geri kalanı A ve C'ye util atabilir.
+- Force buy roundunda B rush yap: dar giriş 1-2 flash ve 1 smoke ile geçilir, başka utility istemez.
+- Eco roundunda takım olarak Garage'dan B Window'a push et — dar koridorda Sheriff tek vuruş yapar, silah farkı kapanır.
+- Bonus roundunda util save et. Rakip Sheriff veya Spectre'la gelir — spread oyna, mesafe koru, sıkışık durma.
+- Anti-eco'da 3 siteye yayıl. Yığılırsan Sheriff seni tek vuruşta temizler, bedava round gider.
 
 ## 9. Post-Plant Stratejileri
-- **A Site Post-Plant**: Spike'ı A Default'a (kutu arkası, Heaven'dan korunur) dik. Post-plant pozisyonları: A Long + A Short crossfire. Heaven'ı smoke'la — retake eden savunucu Heaven'dan bakamaz. Defuse sesini dinle, erken peek atma. Lineup biliyorsan A Long'dan molly at
-- **B Site Post-Plant**: Spike'ı B Default'a (ortada) dik. Post-plant pozisyonları: B Main + Mid Window crossfire. B Back'i izle — retake oradan gelir. B'de post-plant en zorlaştırıcı çünkü alan küçük ve retake mesafesi kısa. Lineup'lar çok değerli — Viper veya Brimstone molly ile spike'i uzaktan koru
-- **C Site Post-Plant**: Spike'ı C Default'a (kutularının arkası) dik. Post-plant pozisyonları: C Long + Garage crossfire. Plat'ı smoke'la — retake eden savunucu Plat'tan bakamaz. C'de post-plant güçlü çünkü crossfire açılarının arasındaki mesafe uzun ve savunucu ikisini birden kontrol edemez
-- Haven'da post-plant lineup'lar diğer haritalarda olduğundan daha değerli çünkü 3 site = rotate mesafesi uzun = savunucunun retake'e gelmesi uzun sürer = spike için daha fazla zaman kazanırsın. Lineup öğrenmeye yatırım yap
-- Spike'ı dinleme prensibi: defuse sesi duyunca peek at, öncesinde peek atma. Haven'da retake eden savunucu uzaktan gelir ve yorgun — acelessiz ol, pozisyonunu koru
+- **A Site Post-Plant**: Spike'ı A Default'a dik — kutu arkası, Heaven'dan korunursun. Post-plant için A Long + A Short crossfire kur. Heaven'ı smoke'la, savunucu oradan bakamaz. Defuse sesi duyduktan sonra peek at. A Long'dan molly lineup'ın varsa kullan.
+- **B Site Post-Plant**: Spike'ı B Default'a, ortaya dik. B Main + Mid Window crossfire kur. B Back'i izle — retake oradan gelir. Alan küçük, retake mesafesi kısa, bu yüzden lineup şart. Viper veya Brimstone molly'siyle spike'ı uzaktan koru.
+- **C Site Post-Plant**: Spike'ı C Default'a, kutuların arkasına dik. C Long + Garage crossfire kur. Plat'ı smoke'la, savunucu oradan bakamaz. İki açı arasındaki mesafe uzun — savunucu ikisini aynı anda tutamaz, bunu sömür.
+- Haven'da 3 site var. Savunucu yanlış rotasyon yaptıysa sana gelene kadar uzun yol kat ediyor. Bu süreyi lineup'larla daha da uzat. Lineup öğrenmek burada doğrudan round kazandırır.
+- Defuse sesini duy, ondan sonra peek at. Önce değil. Haven'da retake'e gelen savunucu zaten geç kalmış — pozisyonunu koru, yerinden oynama.
 
 ## 10. Anti-Strat Kalıpları
-- Rakip her round A Long push yapıyorsa: Op + Cypher tripwire A Long'a koy + agresif A Short flank oyna. Push'u Op ile durdur, tripwire ile erken uyarı al, A Short'tan flank ile arkalarından gel
-- Rakip Garage kontrolü alıyorsa: Sage wall Garage girişi + Window'dan erken agresyon. Wall ile Garage'i fiziksel olarak kapat, Window'dan peek atarak wall'un arkasındaki hareketi izle
-- Rakip B rush yapıyorsa: Killjoy lockdown + double stack B. Lockdown execute'u tamamen durdurur, double stack ile sayı avantajı kazan. İki round double stack yaptıktan sonra bir round normal dağıl — rakip adapte olmasın
-- Rakip C Long Op oynuyorsa: 5 flash execute — flash yağmuru ile Op'u etkisiz hale getir. Omen Paranoia + Breach flash + duelist flash combo ile C Long'u kapat. Op'a karşı kuru peek atma, her zaman flash ile conte et
-- Rakip lurk-heavy oynuyorsa: flank watch utility zorunlu. Cypher tripwire veya Killjoy alarmbot flank yollarına koy. Haven'da flank yolları çok — Garage, A Short, C Connector hepsi flank için kullanılır. Lurk okuyunca utility'yi flank yoluna taşı
-- Rakip her round default oynuyorsa: agresif bilgi toplama ile default'u kırdır. Round başında Sova drone veya Fade haunt ile rakibin dağılımını öğrenin — kalabalık olmayan site'a hızlı execute yap. Default'u kırmak için erken bilgi şart
-- Rakip retake-heavy oynuyorsa (site'ları erken teslim edip retake ile geri alıyor): post-plant pozisyonlarını güçlendir ve lineup'lar öğren. Retake oynayan rakibe karşı spike dikildikten sonraki pozisyon kalitesi round'u belirler. Crossfire kur ve defuse sesini bekle
+- Rakip her round A Long'dan push yapıyorsa: Op + Cypher tripwire A Long'a koy, bir adam da A Short'tan flank oynasın. Op push'u keser, tripwire erken haber verir, A Short'tan gelen adam arkalarını biçer.
+- Rakip Garage kontrolü alıyorsa: Sage wall'u Garage girişine çak, bir adam Window'dan peek atsın. Wall kapıyı fiziksel olarak kapatır, Window'daki adam wall arkasındaki hareketi kontrol eder.
+- Rakip B rush yapıyorsa: Killjoy lockdown at, iki adam B'de beklesin. Lockdown execute'u durdurur, sayı avantajı execute'u öldürür. İki round böyle yaptıktan sonra üçüncüde normal dağıl — rakip alışmasın.
+- Rakip C Long'da Op oynuyorsa: flash yağmuru ile gir. Omen Paranoia + Breach flash + duelist flash sırayla. Kuru peek atma — her girişte önce flash, sonra koş.
+- Rakip lurk-heavy oynuyorsa: Cypher tripwire veya Killjoy alarmbot'u flank yollarına koy. Haven'da Garage, A Short, C Connector hepsi flank yolu. Lurk sezince utility'yi o yola taşı.
+- Rakip her round default oynuyorsa: Sova drone veya Fade haunt ile round başında rakibin dağılımını öğren, kalabalık olmayan siteye hızlı execute yap. Bilgi yoksa execute yok.
+- Rakip siteleri bırakıp retake oynuyorsa: spike dikildikten sonra crossfire kur ve defuse sesini bekle. Post-plant lineup öğren. Retake oynayan rakibe karşı spike sonrası pozisyon her şeyi belirler.
 
 ## 11. Ajan Sinerjileri ve Takım Kompozisyonları
-- **Meta Comp (Omen + Killjoy + Sova + Breach + Jett)**: Haven'ın en dengeli comp'u. Omen smoke ile 3 site kontrolü, Killjoy B anchor, Sova bilgi toplama, Breach dar girişleri açma, Jett entry ve Op. Bu comp'un gücü her role'un Haven'ın yapısına özel olarak uyması
-- **Double Controller (Omen + Harbor)**: Harbor'ın High Tide duvarı + Omen smoke ile aynı anda birden fazla sightline kesilir. C Long'dan A'ya uzanan Harbor duvarı + Omen smoke Garage = haritanın büyük bölümü kontrol altında. Bu comp utility-heavy ve execute kalitesi çok yüksek ama duelist eksikliği entry'de bireysel performansa bağımlılık yaratır
-- **Agresif Comp (Jett + Breach + Omen + Sova + Cypher)**: C Long agresif Op (Jett) + Breach flash ile A/B push + Cypher flank izleme. Bu comp erken pick'ler ile oyun açmaya odaklı — pick alınamazsa default'a dön ve bilgi topla
-- **Sentinel-Heavy (Killjoy + Cypher + Omen + Sova + Jett)**: Savunma tarafında güçlü — Killjoy B anchor, Cypher A veya C flank izleme + Garage bilgisi. 3 site'i sentinel utility ile doldurmak savunmada büyük avantaj verir ama saldırı tarafında entry gücü düşük — Jett'in bireysel performansına bağımlı
+- **Meta Comp (Omen + Killjoy + Sova + Breach + Jett)**: Haven'ın en dengeli komp'u. Omen smoke ile 3 siteyi kontrol edersin, Killjoy B'yi tutar, Sova bilgi toplar, Breach dar girişleri zorlar, Jett entry girer ve Op taşır. Her ajan Haven'ın yapısına birebir oturur.
+- **Double Controller (Omen + Harbor)**: Harbor'ın High Tide duvarı + Omen smoke aynı anda birden fazla sightline'ı keser. C Long'dan A'ya Harbor duvarı çekip Garage'ı Omen smoke ile kapatırsan haritanın büyük bölümünü kontrol altına alırsın. Ama duelist yoksa entry tamamen bireysel performansa kalır — bunu göze al.
+- **Agresif Comp (Jett + Breach + Omen + Sova + Cypher)**: C Long'da Jett Op tutar, Breach flash ile A veya B'ye girersin, Cypher flank izler. Pick alamazsan bu kompla oyun açamazsın — o durumda siteye yürüme, geri çekil ve bilgi topla.
+- **Sentinel-Heavy (Killjoy + Cypher + Omen + Sova + Jett)**: Savunmada çok güçlü. Killjoy B'yi tutar, Cypher A veya C flank + Garage bilgisi verir. 3 siteyi sentinel utility'siyle doldurursun. Ama saldırıda entry gücü zayıf — Jett bireysel iş yapmazsa tıkanırsın.
 - **Ajan Bazı Sinerji Notları**:
-  - Sova Recon + Breach Flash: Recon ile pozisyon bul, Breach flash ile oyuncuyu çıkart. Bu combo Haven'ın her site'ında çalışır
-  - Killjoy Lockdown + Takım Execute: Lockdown'ı site'a at, savunucular geri çekilmek zorunda kalır, takım bedavaya girer. B site'ta özel olarak güçlü
-  - Omen TP + Jett Op: Omen B Heaven'a TP ile geçip bilgi alır, Jett C Long'da Op tutar. İki farklı site'ta aynı anda baskı yaratır
-  - Harbor High Tide + Execute: High Tide ile uzun bir duvar çek, arkasından takım olarak site'a gir. A Long veya C Long execute'larında smoke'tan daha geniş koruma sağlar
-  - Cypher Cam + Takım Rotate: Cypher kamerasını bir site'a bırakır ve takımla başka site'a gider — kamera bilgi vermeye devam eder ve rotate kararını destekler. Haven'da 3 site olduğu için uzaktan bilgi alma çok değerli
+  - Sova Recon + Breach Flash: Recon ile pozisyon bul, hemen ardından Breach flash at ve oyuncuyu çıkart. Bu combo Haven'ın her sitesinde çalışır.
+  - Killjoy Lockdown + Takım Execute: Lockdown'ı siteye at, savunucular geri çekilmek zorunda kalır, takım bedavaya girer. B sitede bunu daha sık kullan.
+  - Omen TP + Jett Op: Omen B Heaven'a TP ile geçer ve bilgi alır, Jett aynı anda C Long'da Op tutar. İki farklı sitede aynı anda baskı kurarsın.
+  - Harbor High Tide + Execute: Uzun bir duvar çek, arkasından takım olarak siteye gir. A Long veya C Long execute'larında tek smoke'tan çok daha geniş koruma sağlar.
+  - Cypher Cam + Takım Rotate: Kamerayı bir siteye bırak, takımla başka siteye git — kamera bilgi vermeye devam eder. Haven'da 3 site var, uzaktan bilgi almak çok değerli.

@@ -1,61 +1,61 @@
 # EŞLEŞME: Raze vs Harbor
 
-## Etkileşim Kimliği
-Raze, patlayıcı kiti ile yetenek araçlarını yok eden ve hasar ile hareketle alan açan S-tier duelist'tir. Harbor, su duvarları ve kalkanlarıyla görsel inkâr ve push yavaşlatan bir controller'dır. Bu eşleşmede Raze'in patlayıcılarının Harbor'ın su yetenek araçlarının arkasındaki oyuncuları cezalandırıp cezalandıramayacağı test edilir. Raze'in Paint Shell'leri ve Showstopper'ı su duvarlarından geçer — görsel inkâr umurlarında değildir çünkü ne olursa olsun hasar verirler. Blast Pack satchel'leri Raze'in High Tide'ın tamamen üstünden uçmasını sağlar. Harbor'ın yetenek araçları görüşü kapatır ama patlayıcıları değil, bu da Raze'i Harbor'ın su bazlı savunmasına karşı en iyi ajanlardan biri yapar.
+## Ne Oluyor Bu Eşleşmede
+Harbor'ın duvarları görüşü keser — ama Raze'in granatları duvardan geçer. Boom Bot suyla durmuyor, Blast Pack duvarın üstünden atlıyor, Paint Shell yayı duvarın arkasına düşüyor. Harbor'ın tek avantajı Cove ve Reckoning — onlar fiziksel. Geri kalan her şeyi Raze umursamıyor.
 
-## Yaygın Cezalandırma Kalıpları
+## Cezalandırma Kalıpları
 
-### Raze Harbor'ı Cezalandırırken
+### Raze, Harbor'ı Cezalandırırken
 
-**IF**: Paint Shell'ler High Tide üzerinden veya içinden atılarak su duvarının arkasındaki oyunculara hasar veriyor
-**MEANING**: Harbor'ın görsel inkârı patlayıcılara karşı işe yaramıyor
-**COUNTER**: Harbor su duvarlarını fiziksel kapayla birleştirerek hem mermilere hem patlayıcılara koruma sağlamalı
-**WHY**: Su duvarları görüşü engeller ama patlayıcıları değil
+**IF**: Paint Shell'i High Tide'ın üstünden veya içinden atıyorsun, duvarın arkasındaki düşmana hasar geliyor
+**MEANING**: Harbor'ın duvarı patlayıcıyı tutmuyor — sadece görüşü kesiyor
+**COUNTER**: Harbor duvarını fiziksel bir kapayla birleştirmeli, yoksa sadece görüş engeli çekiyor
+**WHY**: Patlayıcılar görsel engelden geçer, fiziksel engelden geçmez
 
-**IF**: Boom Bot Cascade ve High Tide içinden koşuyor — su onu durdurmuyor
-**MEANING**: Keşfetme aracı su inkârından etkilenmiyor
-**COUNTER**: Harbor Reckoning geyser bölgelerini Boom Bot yoluna koyarak bot'u durdurabilir
-**WHY**: Boom Bot fiziksel bir varlık olarak su engeli tanımaz
+**IF**: Boom Bot'u Cascade veya High Tide içine gönderiyorsun, bot durmadan koşuyor
+**MEANING**: Boom Bot suyu tanımıyor, keşfi durmuyor
+**COUNTER**: Harbor Reckoning geyser'ını Boom Bot yoluna koyarsa botu durdurabilir
+**WHY**: Bot fiziksel varlık — su onu etkilemiyor, geyser etkiliyor
 
-**IF**: Raze Blast Pack ile su duvarının üstünden uçarak savunmanın arkasına iniyor
-**MEANING**: Su duvarı tamamen bypass ediliyor
-**COUNTER**: Harbor Reckoning ile tahmin edilebilir satchel iniş noktalarını kontrol etmeli
-**WHY**: Satchel hava yolu su duvarını tamamen anlamsız kılar
+**IF**: Blast Pack ile High Tide'ın üstünden atlayıp savunmanın arkasına iniyorsun
+**MEANING**: Duvar tamamen atlandı, Harbor'ın konumu deşifre
+**COUNTER**: Harbor Reckoning'i senin iniş noktasına pre-aim atabiliyor — iniş açısını son anda değiştir, duvar çizgisi boyunca kaydır
+**WHY**: Blast Pack inişi tahmin edilebilir; Radiant Harbor'lar bunu okur ve Reckoning'i oraya koyar
 
-### Harbor Raze'i Cezalandırırken
+### Harbor, Raze'i Cezalandırırken
 
-**IF**: High Tide Raze'in satchel zamanlamasını yavaşlatıyor — daha geniş duvarın üstünden atlaması gerekiyor
-**MEANING**: Satchel zamanlama penceresi daralıyor
-**COUNTER**: Raze duvar genişliğini hesaba katarak satchel açısını ayarlamalı
-**WHY**: Geniş duvar daha uzun havada kalma süresi ve daha korumasız pozisyon demektir
+**IF**: High Tide'ı geniş koyuyorsun, Raze duvarın tamamen üstünden atlayamıyor, havada daha uzun kalıyor
+**MEANING**: Blast Pack penceresi daralıyor, Raze daha savunmasız
+**COUNTER**: Raze duvar genişliğini görünce açıyı değiştirmeli — düz üstünden değil, köşeden aşmayı dene
+**WHY**: Geniş duvar havada kalma süresini uzatıyor, bu sürede hedef oluyorsun
 
-**IF**: Cove Raze'in granatlarının plant noktasına ulaşmasını engelliyor
-**MEANING**: Patlayıcılar kalkan tarafından absorbe ediliyor
-**COUNTER**: Raze önce Cove'u kırarsa granatlar hedefine ulaşabilir
-**WHY**: Cove fiziksel bir kalkandır ve patlayıcıları durdurabilir
+**IF**: Cove'u plant noktasına koyuyorsun, Raze'in granatı absorbe ediliyor
+**MEANING**: Patlayıcılar Cove'dan geçmiyor — fiziksel kalkan
+**COUNTER**: Raze önce bir Paint Shell ile Cove'u kırmalı, sonra ikincisini plant'a atmalı — bu spike süresini yiyor; bunu biliyorsan Cove'u görmezden geçip flank bas
+**WHY**: Cove fiziksel engel — onu kırmak ekstra yetenek harcıyor ve zaman kaybettiriyor
 
 ## Tekrarlanan Başarısızlık Ne Anlama Gelir
-**Raze** sürekli Harbor'ın duvarları aracılığıyla hasar veremiyorsa, granatlarını duvarın üstüne değil içine atıyor. Paint Shell'lerin bir yay çizgisi var — duvarın arkasını temizlemek için kullan.
+**Raze olarak Harbor duvarlarından hasar veremiyorsun**: Granatı duvarın tam önüne bırakıyorsun. Paint Shell'in yayı var — duvarın biraz gerisini hedefle, grenade duvarı aşıp iç tarafa patlasın. Duvarın önü değil, arkası.
 
-**Harbor** su korumaya rağmen takım arkadaşlarını sürekli Raze'e kaybediyorsa, duvarları patlayıcılara karşı koruma sağlamıyor. Su duvarlarının yanında fiziksel kapayla birleştirmesi gerekir.
+**Harbor olarak takımın Raze'e gidiyor**: Sadece su duvarı koymak yetmiyor. Raze'in granatları geçiyor. Duvarın yanına fiziksel bir kapa da ekle — ikisi ayrı iş yapıyor.
 
 ## AIMLO Ne Demeli
 
-### Oyuncu cezalandırılan taraftayken
-**Raze Harbor duvarları tarafından engellenmiş se**: "Su duvarları görüşü kapatır, patlayıcıları değil. Granatlarını duvarın üzerinden at — yay çizgisi tepeyi aşar ve arkasına düşer. Giriş yapmak için gerekiyorsa duvarın tamamen üstünden satchel'le."
+### Oyuncu cezalandırılan taraftaysa
+**Raze, Harbor duvarlarıyla bloke oluyorsa**: "Su duvarı sadece görüşü keser, granatını durdurmaz. Granatı duvarın tam önüne değil, biraz gerisine bırak — yay duvarı aşıyor ve arkasına patlıyor. İçeri girmek istiyorsan Blast Pack'i duvar çizgisi boyunca at, düz üstünden değil."
 
-**Harbor takım arkadaşı Raze'e kaybediyorsa**: "Duvarların mermileri engeller ama Raze'in granatları doğrudan geçer. Karşı takımda Raze olduğunda takımını su duvarlarının yanı sıra fiziksel kapanın arkasına konumlandır."
+**Harbor, takım arkadaşını Raze'e kaybediyorsa**: "Duvarın patlayıcıyı tutmuyor. Karşıda Raze varsa takımını sadece su duvarının arkasına koyma — yanına fiziksel kapayla birleştir, yoksa granatlar geçiyor."
 
-### Oyuncu cezalandıran taraftayken
-**Raze Harbor üzerinden yıkıyor**: "Su duvarları patlayıcılarına karşı anlamsız. Granat arc'lamayı ve satchel ile geçmeyi sürdürün — takımını kitinden koruyamaz."
+### Oyuncu cezalandıran taraftaysa
+**Raze, Harbor'u geçiyorsa**: "Su duvarları sana işe yaramıyor, doğru yaptın. Blast Pack inişini tahmin edebilirler — iniş açısını son anda kaydır, aynı noktaya düşme."
 
-**Harbor Raze'i kontrol altına alıyorsa**: "Reckoning'in onun satchel inişlerini yakalıyor ve Cascade hareketini bozuyor. Hareketliliğine karşı aktif yetenek aracı kullanmaya devam et."
+**Harbor, Raze'i kontrol altına alıyorsa**: "Reckoning Blast Pack inişlerini yakalıyor, Cascade Boom Bot'u durduruyor. Hareketine karşı fiziksel yeteneklerini kullanmaya devam et — su duvarını değil, geyser ve kalkanı."
 
 ## Rank Modülasyonu
-**LOW**: Raze granat atışını duvarların üstüne yapmaz. Harbor duvarların her şeyden koruduğunu düşünür. Su duvarları üzerinden temel granat yay çizgisini öğret.
+**LOW**: Raze granatı duvarın önüne atıyor, yayı kullanmıyor. Harbor duvarın her şeyi durdurduğunu sanıyor. İkisine de şunu göster: su geçirgen, fiziksel engel değil.
 
-**MID**: Raze granat arc'lamaya başlar ama tutarsız. Harbor fiziksel ve su kapayı birleştirmez. Her ikisine etkileşim farkındalığını öğret.
+**MID**: Raze yayı bazen kullanıyor ama Cove'u görmezden gelip grenat israf ediyor. Harbor duvar koyuyor ama Reckoning'i Blast Pack inişine ayarlamıyor. Her ikisine de eşleşme içindeki farkı göster.
 
-**HIGH**: İkisi de patlayıcı vs. su dinamiğini anlar. Raze'e optimal granat zamanlama, Harbor'a kapa türlerini birleştirmeyi öğret.
+**HIGH**: İkisi de temel dinamiği biliyor. Raze'e Cove'u kırıp kırmayacağına karar vermeyi, Harbor'a Reckoning pre-aim zamanlamasını öğret.
 
-**ELITE**: Eşleşmede Raze'in patlayıcı zamanlaması ile Harbor'ın duvar aktivasyonu belirleyici. Okuma bazlı yetenek aracı kullanımını ve karşı-zamanlamayı öğret.
+**ELITE**: Belirleyici olan Raze'in Paint Shell zamanlaması ile Harbor'ın Cove/Reckoning aktivasyonu. Raze Cove'u görünce flank mı basar, Cove'u mu kırar — bu okuma savaşı. Harbor Blast Pack açısını önceden okuyabiliyorsa Reckoning'i öne çekiyor, okuyamıyorsa reaktif kalıyor.

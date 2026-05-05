@@ -1,6 +1,6 @@
 # Radiant Seviye Koçluk Bilgi Bankası
 
-Radiant oyuncularını diğerlerinden ayıran pattern'ler, okumalar ve mikro-kararlar. Her ipucu doğrudan koçluk sunumu için IF / MEANING / COUNTER / WHY formatını takip eder.
+Radiant'ı diğerlerinden ayıran şey refleks değil — pattern okuma ve mikro-kararlar. Buradaki her ipucu IF / MEANING / COUNTER / WHY formatıyla geliyor. Yüz yüze koçluk gibi oku.
 
 ---
 
@@ -8,120 +8,122 @@ Radiant oyuncularını diğerlerinden ayıran pattern'ler, okumalar ve mikro-kar
 
 ### Off-Angle Teorisi
 
-IF oyuncu default açı tutuyorsa (herkesin pre-aim yaptığı yaygın nokta)
-MEANING düşman peek yapmadan önce crosshair'ini tam o pozisyona koymuş durumda
-COUNTER default'tan hafifçe kaymış pozisyon tut -- aynı lane'i cover edecek kadar yakın ama peek yapandan mikro-ayarlama zorlayacak kadar uzak
-WHY o zorlanan mikro-ayarlama tutucunun önce ateş etmek için exploit edebildiği reaksiyon boşluğu oluşturur
+IF düşman peek yapmadan önce crosshair'ini default açıya koymuşsa
+MEANING sen o açıyı tutuyorsan, peek etmeden seni bulmuş demek
+COUNTER default'tan biraz kay — aynı lane'i kapayacak kadar yakın, ama seni bulmak için mikro-ayarlama yapmak zorunda kalsın
+WHY o zorlanan mikro-ayarlama senin önce ateş etmeni sağlayan reaksiyon boşluğunu açar
 
-IF oyuncu off-angle'dan kill aldıysa
-MEANING düşman takımı o noktayı işaretleyecek ve gelecek round pre-aim yapacak
-COUNTER her off-angle'ı tek çatışma için kullan, sonra yeni pozisyona rotate et
-WHY off-angle'lar düşman onları beklediği anda tüm değerini kaybeder -- cover'ı feda ettiği için default'lardan bile kötü olabilirler
+IF o off-angle'dan kill aldıysan
+MEANING düşman takımı o noktayı işaretledi, sıradaki round oraya pre-aim gelecekler
+COUNTER her off-angle'ı tek round için kullan, sonra farklı bir pozisyona geç
+WHY off-angle'ı bekliyorlarsa cover'ı da feda etmiş olursun — default'tan bile kötü bir pozisyona dönüşür
 
 ### Derinlik Pozisyonlama
 
-IF oyuncu köşe kenarına yakın tutuyorsa
-MEANING düşman duvarı geçtiği anda tutucuyu görüyor ve tutucunun sıkı açı avantajı var
-COUNTER yakın derinliği sadece bir düşmanın görünebileceği izole düellolarda ve dar koridorlarda kullan
-WHY yakın derinlik açı avantajını maksimize eder ama birden fazla tehdidi işlemeye zaman bırakmaz
+IF köşe kenarına yakın duruyorsan
+MEANING düşman köşeyi geçer geçmez seni görüyor, açı avantajın var ama birden fazla düşmana karşı kör kalırsın
+COUNTER yakın derinliği sadece izole düellolarda ve dar koridorlarda kullan — tek düşman gelecekse
+WHY yakın derinlik açı avantajını en üste çıkarır ama birden fazla tehdidi işlemeye vakit bırakmaz
 
-IF oyuncu köşeden uzak tutuyorsa
-MEANING tutucu peek yapanın periferik görüşünde görünür, crosshair placement noktasında değil
-COUNTER birden fazla düşman swing yapabilecekken uzak derinlik kullan -- daha fazla reaksiyon zamanı verir ve tutucunun commit etmeden önce tam resmi işlemesine izin verir
-WHY köşeden uzaklık peek yapanı hem yatay hem dikey ayarlama yapmaya zorlar, reaksiyon talebini yığma
+IF köşeden uzakta duruyorsan
+MEANING peek yapan seni crosshair placement noktasında değil, periferinde görür — düzeltmek için zaman kaybeder
+COUNTER birden fazla düşman swing yapabilecekse uzak derinliği seç — tam resmi görmeden commit etmezsin
+WHY köşeden uzaklık peek yapanı hem yatay hem dikey ayarlama yapmaya zorlar, reaksiyon yükünü ikiye katlar
 
 ### Peek Edilmemiş Pozisyon
 
-IF takım arkadaşları site'i temizledi ama derin köşeleri, kapı arkası açıları veya alt-yükseklik noktalarını atladı
-MEANING o pozisyonlar düşmanın "temizlenmiş alanlar" mental haritasında görünmez
-COUNTER lurk oyunları ve retake pusulası için peek edilmemiş pozisyonları exploit et -- takımının gerçekte ne kontrol ettiği vs nelerin önünden geçtiğini takip et
-WHY temizleme sonrası güven takımların köşe kontrol etmeyi bıraktırır ve peek edilmemiş noktadan tek kill retake'i çevirebilir
+IF takım arkadaşların site'i temizledi ama derin köşeleri, kapı arkalarını veya alt-yükseklik noktalarını geçtilerse
+MEANING o noktalar düşmanın zihninde "temizlendi" olarak işaretlendi
+COUNTER lurk ve retake için o noktaları kullan — takımının gerçekten kontrol ettiği ile sadece önünden geçtiği yerleri ayırt et
+WHY temizleme sonrası güven düşmanın köşe check etmeyi bırakmasını sağlar, peek edilmemiş noktadan tek kill retake'i çevirir
 
 ### Post-Plant Üçgeni
 
-IF spike yerde ve saldırganların tutması gerekiyorsa
-MEANING savunucular birden fazla yaklaşım hattından retake etmek zorunda
-COUNTER üçgen oluştur: bir oyuncu spike'a yakın defuse sesini çağırır, biri orta mesafede birincil yaklaşımı cover eder, biri derinde rotate edenleri izler
-WHY üçgen herhangi bir retake yapanı bölü açılarla başa çıkmaya zorlar -- bir tutucuyu push etmek diğerin açığa çıkarır
+IF spike yerde ve saldırgan olarak tutman gerekiyorsa
+MEANING savunucular birden fazla hattan retake etmek zorunda
+COUNTER üç nokta al:
+- Biri spike'a yakın, defuse sesini çağırır
+- Biri orta mesafede birincil yaklaşımı kapatır
+- Biri derinde rotate edenleri izler
 
----
+WHY bu üçgen herhangi bir retake yapanı bölü açılarla uğraşmak zorunda bırakır — birini push edince diğerini açığa çıkarır
 
 ## Hareket Mekanikleri
 
 ### Counter-Strafe
 
-IF oyuncu hala strafe hareketindeyken ateş ediyorsa
-MEANING ilk-atış hassasiyeti kaybolur ve mermi merkez-dışı iner
-COUNTER momentumu öldürmek için ters hareket tuşuna bas, sonra model sabit olunca ateş et -- atış durma sonrası gelmeli, tuş basışı sırasında değil
-WHY Valorant'ın hareket hassasiyetsizlik cezası şiddetli; küçük bir kalan hız bile atışı saptırıyor
+IF strafe hareketindeyken ateş ediyorsan
+MEANING ilk atışın merkezden sapıyor, düşmanı ıskalıyorsun
+COUNTER ters tarafa bas, model sabit kalınca ateş et — tuşa basarken değil, durduktan sonra
+WHY Valorant'ta en küçük hareket bile atışı batırıyor, bu ceza çok sert
 
-IF oyuncu aynı hareketten jiggle yapıp ateş etmek istiyorsa
-MEANING çift counter-strafe gerekli: bir yöne strafe et, durdurmak için karşıya bas, kısa sabit pencerede ateş et, sonra dışarı strafe et
-COUNTER dur-ve-ateş penceresi kas hafızası olana kadar A-D-A veya D-A-D sıralarını drill et
-WHY bu Radiant'taki temel hareket döngüsü -- bilgi toplama, atış sunumu ve kaçınmayı tek harekette birleştirir
+IF aynı hareketten jiggle atıp ateş etmek istiyorsan
+MEANING tek counter-strafe yetmez, çift gerekiyor
+COUNTER bir yana git, karşı tuşla dur, o kısa sabit anda ateş et, sonra çık — A-D-A veya D-A-D sırasını kas hafızası olana kadar drill et
+WHY bu hareket döngüsü bilgi toplamayı, atışı ve kaçmayı tek seferde yapıyor — Radiant'ta temel bu
 
 ### Jiggle Peek
 
-IF oyuncu commit etmeden bir açı hakkında bilgiye ihtiyaç duyuyorsa
-MEANING omzu zar zor açığa çıkaran hızlı strafe atışı bait edebilir, savunucuyu açığa çıkarabilir veya utility'yi tetikleyebilir
-COUNTER modelin sadece ince bir diliminin açıyı geçtiği sıkı A-D hareketi yap -- açığa çıkarma düşmanın atış yapamayacağı kadar minimal olmalı
-WHY jiggle bedava bilgi verir: düşman ateş ederse pozisyonu açığa çıkarır ve silahının toparlanma gecikmesi olur; kimse ateş etmezse açı temiz olabilir
+IF bir açı hakkında canını tehlikeye atmadan bilgi almak istiyorsan
+MEANING omzunun ucunu gösterip düşmanı ateş ettirmek ya da yerini ifşa ettirmek için hızlı A-D yapıyorsun
+COUNTER modelin sadece ince bir dilimi geçsin — düşmanın reaksiyon veremeyeceği kadar az aç kendin
+WHY bedava bilgi: ateş ederse yerini ve silahının recovery'sini kaybediyor, ateş etmezse açı temiz
 
 ### Ferrari Peek
 
-IF oyuncu utility, ses veya takım arkadaşlarının çağrılarından düşman pozisyonunu biliyorsa
-MEANING bilinen pozisyona pre-aim ile tam-commit geniş swing savunucuyu hızlı hareket eden hedefi takip etmeye zorlar
-COUNTER bilinen pozisyona pre-aim ederek tam strafe hızında geniş swing yap, sonra counter-strafe et ve ateş et
-WHY geniş swing modeli savunucunun crosshair'inin oturduğu köşe kenarından uzaklaştırarak zaman baskısı altında büyük ayarlama zorlar
+IF düşmanın nerede durduğunu kesin biliyorsan
+MEANING tam strafe hızında geniş swing yapıyorsun, karşı taraf seni takip etmek zorunda kalıyor
+COUNTER bilinen noktaya pre-aim et, tam hızda swing at, counter-strafe yap ve ateş et
+WHY geniş swing seni köşe kenarından hızla uzaklaştırıyor — düşman baskı altında büyük bir ayarlama yapmak zorunda
 
-IF düşman onaylanmış açıda Operator tutuyorsa
-MEANING ferrari peek değer kaybeder çünkü Operator'un tek-atış öldürmesi ayarlama talebini geçersiz kılar
-COUNTER Operator açılarını ferrari peek etme -- Operator'u yerleştirmek için utility kullan veya atışı bait etmek için önce jiggle yap
-WHY Operator takip gerektirmez; tek gövde atışı öldürür, dolayısıyla hareket avantajı ortadan kalkar
+IF o açıda Operator var olduğunu biliyorsan
+MEANING ferrari peek işe yaramıyor, tek atışla ölüyorsun
+COUNTER Operator açısına ferrari peek atma — önce util kullan ya da jiggle ile atışı bait et
+WHY Operator takip gerektirmiyor, gövdeye bir kurşun yeter, hareket avantajın sıfırlanıyor
 
 ### Crouch Disiplini
 
-IF oyuncu bir açıya crouch-peek yapıyorsa
-MEANING baş headshot seviyesi tutan herhangi bir düşman için gövde-atış yüksekliğine düşer -- oyuncu daha yavaş olur, daha hızlı değil
-COUNTER asla crouch yaparak fight başlama; ayakta başla, kısa burst ateş et, sonra hitbox'ı kaydırmak için mid-spray'de crouch yap
-WHY mid-spray'de crouch yapmak aynı anda başı düşmanın aim'ini commit ettiği yerin altına düşürürken geri tepme pattern'ini aşağı çeker
+IF bir açıya crouch yaparak giriyorsan
+MEANING başın headshot bekleyen düşmanın tam gövde hizasına iniyor, hem yavaşlıyorsun hem de daha büyük hedef oluyorsun
+COUNTER dövüşe ayakta gir, kısa burst at, spray ortasında hitbox'ı kaydırmak için crouch yap — başlangıçta değil, ortada
+WHY spray ortasında crouch yaparsan başın düşmanın nişan aldığı noktanın altına düşüyor, aynı anda recoil pattern'i de aşağı çekiyor
 
-IF oyuncu crouch yaparken Operator'a karşı karşılaşıyorsa
-MEANING yavaş, geniş hedef olurlar -- tek-atış silahına karşı mümkün olan en kötü profil
-COUNTER Operator oyuncularına karşı her zaman ayakta kal ve counter-strafe yap; lateral hız tek savunma
-WHY crouch hareket hızını drastik azaltır, Operator'un işini önemsiz kılar
+IF Operator tutan biriyle karşı karşıya geliyorsan
+MEANING crouch yaparsan yavaş ve geniş hedef oluyorsun — en kötü profil bu
+COUNTER Operator'a karşı her zaman ayakta kal ve counter-strafe yap
+WHY crouch hareket hızını mahvediyor, Operator'un işini kolaylaştırıyorsun
 
 ---
 
 ## Crosshair Placement
 
-### Baş Yüksekliği Çıkartma
+### Baş Yüksekliği
 
-IF oyuncunun crosshair'i baş yüksekliğinin altına düşüyor
-MEANING her çatışma ilk faydalı atıştan önce yukarı dikey flick ile başlıyor ve reaksiyon süresi ekliyor
-COUNTER crosshair'i her haritadaki baş-yüksekliği işaretleyicilerine (kutu üstleri, pencere çerçeveleri, ayakta baş seviyesiyle hizalanan duvar dokuları) çıkarla ve hareket halinde o çizgiyi koru
-WHY dikey ayarlamayı ortadan kaldırmak düşman göründüğünde oyuncunun sadece yatay düzeltmeye ihtiyaç duyması demek, tepki süresini kabaca yarılatıyor
+IF crosshair'in baş yüksekliğinin altında
+MEANING her dövüşe dikey flick ile başlıyorsun — reaksiyon süren daha bitmeden kaybediyorsun
+COUNTER haritadaki referans noktalara kilitlen: kutu üstleri, pencere çerçeveleri, duvar doku çizgileri. O seviyeyi hareket halinde de koru
+WHY dikey ayarı sıfırlarsan düşman çıktığında sadece yatay düzeltme yaparsın. Tepki süren neredeyse yarıya iner
 
 ### Pre-Aim Noktaları
 
-IF oyuncu açık alana merkezlenmiş crosshair ile bir açı tutuyorsa
-MEANING düşman köşe kenarında göründüğünde tepki verip ayarlama yapmak zorunda
-COUNTER crosshair'i düşman peek yaptığında başın ilk görüneceği tam noktaya yerleştir -- köşe kenarında baş yüksekliğinde
-WHY ilk-görünüm noktasını pre-aim etmek oyuncunun sadece tıklaması gerektiğini, tıkla ve hareket et değil, anlamına gelir
+IF crosshair'i köşeye yakın ama ortada tutuyorsan
+MEANING düşman peek yaptığında hem tepki verip hem ayar yapman gerekiyor — ikisi birden fazla
+COUNTER crosshair'i tam köşe kenarına, baş yüksekliğine koy. Düşmanın başının ilk göründüğü yere
+WHY oraya koyduysan sadece tıklarsın. Tıkla-sonra-ayarla değil, sadece tıkla
 
-### Rotasyon Crosshair Disiplini
+### Rotasyon Sırasında Crosshair
 
-IF oyuncu "güvenli" alanlarda rotate ederken veya koşarken crosshair'i yere düşürüyorsa
-MEANING lurker onları hazırlıksız yakalarsa garanti ölüm çünkü crosshair baş yüksekliğine tam mesafe kattetmeli
-COUNTER crosshair'i her zaman baş yüksekliğinde tut, rotasyon sırasında her açıdan süzdür
-WHY oyuncunun crosshair placement'ı gevşettiği tek sefer lurker'ın cezalandırdığı round'dur -- tutarlılık varyansı kaldırır
+IF rotate ederken veya koşarken crosshair'i yere bırakıyorsan
+MEANING lurker seni o anda yakalarsa crosshair baş yüksekliğine çıkana kadar zaten ölüsün
+COUNTER rotasyonda da crosshair'i baş yüksekliğinde tut. Her geçtiğin açıyı süzgeçten geçir
+WHY crosshair'i bir kez gevşettiğin round, lurker'ın seni cezalandırdığı round olur
 
-### Çoklu-Açı Bölme
+### İki Açı Aynı Anda
 
-IF aynı anda iki tehdit açısı mevcutsa (örn. Ascent A retake'inde Heaven ve Tree)
-MEANING crosshair'i bir açıya yerleştirmek diğerini korumasız bırakır
-COUNTER crosshair placement'ı iki açı arasında böl, mevcut bilgiye göre daha olası tehdide doğru yatkın
-WHY bölme her iki açıya da maksimum ayarlama mesafesini minimize eder, en kötü durum reaksiyon süresini düşük tutar
+IF aynı anda iki tehdit var — örneğin Ascent A retake'inde Heaven ve Tree
+MEANING birini pre-aim edersen diğeri tamamen açık kalır
+COUNTER crosshair'i ikisi arasına böl, ama daha olası tehdide hafif yatır
+WHY her iki açıya da maksimum flick mesafeni kısaltırsın. En kötü durumda bile reaksiyon farkın düşük kalır
 
 ---
 
@@ -129,50 +131,50 @@ WHY bölme her iki açıya da maksimum ayarlama mesafesini minimize eder, en kö
 
 ### Ses Önceliği
 
-IF oyuncu spike etkileşim sesi duyuyorsa (plant, defuse, bip artışı)
-MEANING bu oyundaki en yüksek değerli ses -- round sonucunu doğrudan belirler
-COUNTER spike sesini diğer tüm seslerin üzerine önceliklendir; hemen çağır ve buna göre karar ver
-WHY spike durumu push, tut veya rotate etmeyi belirler -- başka hiçbir ses o ağırlıkta değil
+IF spike sesi geliyorsa (plant, defuse, bip hızlanması)
+MEANING o round'daki en kritik ses bu — sonucu direkt belirler
+COUNTER hemen callout at, o sese göre karar ver — başka her şeyi bırak
+WHY spike durumu sana push mu, tut mu, rotate mu yapacağını söyler — hiçbir ses bunu geçemez
 
-IF oyuncu yakında reload duyuyorsa
-MEANING düşmanın şarjörü boş ve reload animasyonunda kilitli
-COUNTER reload penceresi sırasında hemen push yap -- düşman animasyon tamamlanana kadar karşılık ateşi yapamaz
-WHY reload sesi bedava kill'e doğrudan davet; tereddüt düşmanın reload'u tamamlayıp fight'ı resetlemesine izin verir
+IF yakında reload sesi duyuyorsan
+MEANING düşmanın silahı boş, animasyon bitene kadar sıkışmış durumda
+COUNTER o anda hemen üstüne git — reload bitmeden seni vuramaz
+WHY tereddüt edersen düşman reload'u tamamlar, fight sıfırlanır — bu bedava bir kill daveti
 
 ### Ses İnkarı
 
-IF oyuncu bir açıya yaklaşırken veya lurk yaparken koşuyorsa
-MEANING düşman yaklaşmayı duyar ve giriş noktasını pre-aim eder
-COUNTER pozisyon bilgisinin değerli olduğu her yerde yürü (shift) -- açılara yaklaşırken, flanklarken, lurk yaparken veya ses algılayan düşman utility'sine yakın hareket ederken
-WHY ses yoluyla pozisyon vermek herhangi bir pozisyonlama avantajını siler; düşman sesi pre-aim'e çevirir
+IF bir açıya koşarak yaklaşıyorsan
+MEANING düşman seni duydu, geldiğin noktayı pre-aim'liyor
+COUNTER açılara, flanklara ve lurk'e girerken shift ile yürü
+WHY konumunu ses ile verirsen pozisyon avantajın sıfırlanır — düşman sesi pre-aim'e çevirir
 
-IF oyuncu yanlış okumalar yaratmak istiyorsa
-MEANING bir pozisyona doğru koşup sonra diğerine shift-walk yapmak düşmanın mental haritasına yanlış bilgi yerleştirir
-COUNTER tuzak pozisyonuna doğru kısa koşarak yanlış ayak sesi yönü yarat, sonra hemen gerçek saldırı yönünde sessizce yürü
-WHY ses bilgisi zamansal -- düşmana oyuncunun NEREDE OLDUĞUNU değil nerede OLDUĞUNU söyler; bu gecikmeyi exploit etmek açıklar oluşturur
+IF düşmanı yanıltmak istiyorsan
+MEANING bir yöne doğru koşup sonra sessizce başka yöne geçmek düşmanın kafasına yanlış bilgi yerleştirir
+COUNTER sahte yöne kısa koş, ayak sesi bırakt, sonra gerçek hedefe shift ile yürü
+WHY ses anlık bilgi verir — düşmana nerede olduğunu değil, nerede OLDUĞUNU söyler; bu gecikmeyi kullan, açıklar oluştur
 
 ---
 
 ## Minimap Farkındalığı
 
-### Alışkanlık Olarak Minimap Kontrolleri
+### Minimap'e Bakma Alışkanlığı
 
-IF oyuncu minimap'i düzenli kontrol etmiyorsa
-MEANING takım arkadaşı pozisyonlarını, ölüm işaretlerini, spike hareketini ve utility ping'lerini kaçırıyor
-COUNTER minimap'e sık sık göz at -- bu bilinçlice pratik ile inşa edilen bilinçdışı bir alışkanlık olmalı
-WHY minimap tüm oyun durumunu tek görüntüde sıkıştırıyor; onu görmezden gelmek eksik bilgiyle karar vermek demek
+IF minimap'e bakmıyorsan
+MEANING takım arkadaşlarının nerede olduğunu, kimin öldüğünü, spike'ın nereye gittiğini ve atılan utility'leri görmüyorsun
+COUNTER her ölü an minimap'e bak — peek'ler arasında, reload sırasında, util cooldown'unda. Bunu zorlayarak yap.
+WHY minimap oyunun tüm fotoğrafını tek karede gösteriyor; bakmazsan kör kararlar alıyorsun
 
-### Minimap'i Okuma
+### Minimap'i Okumak
 
-IF dört takım arkadaşı haritanın bir tarafında kümelenmişse
-MEANING karşı taraf lurk'lara ve hızlı execute'lara açık
-COUNTER ya boşluğu kapatmak için rotate et ya da bir takım arkadaşının açık tarafı tutmasını çağır
-WHY dengesiz kapsama takımların arkadan vurulma veya site'ları bedavaya kaybetmesinin birincil yolu
+IF dört takım arkadaşın haritanın aynı tarafında yığılmışsa
+MEANING karşı taraf lurk'a ve hızlı execute'a tamamen açık
+COUNTER ya o tarafa geç ya da bir takım arkadaşından boş tarafı tutmasını iste
+WHY dengesiz dağılım arkadan vurulmanın ve bedava site kaybetmenin birinci sebebi
 
-IF spike uzun süredir hareket etmediyse
-MEANING düşman ya bilgi için default yapıyor ya yavaş fake ile bait yapıyor
-COUNTER spike kesin şekilde bir site'a hareket edene kadar rotasyona aşırı commit etmekten kaçın
-WHY eski spike pozisyonuna dayanan erken rotasyon takımların karşı site'a geç execute ile hazırlıksız yakalanma şekli
+IF spike hareket etmiyorsa
+MEANING düşman ya bilgi topluyor ya da seni çekmeye çalışıyor — utility geliyor ama spike sabit duruyorsa kararı geciktir
+COUNTER spike net bir şekilde bir site'a doğru hareket edene kadar rotate etme
+WHY spike'ın eski pozisyonuna göre erkenden rotate edersen karşı site'a geç kalırsın ve hazırlıksız yakalanırsın
 
 ---
 
@@ -180,43 +182,43 @@ WHY eski spike pozisyonuna dayanan erken rotasyon takımların karşı site'a ge
 
 ### Saldırı Zamanlama Pencereleri
 
-IF round yeni başladı ve takımın hızlı execute planı var
-MEANING savunucular hala pozisyona geçiyor veya utility kuruyor olabilir
-COUNTER erken agresyon savunucuları kurulum ortasında yakalar, utility'leri ve crosshair placement'ları hazır olmadan
-WHY açılış fazı savunucuların gerçekten hazırlıksız olduğu tek zamandır -- kurduktan sonra her avantaj onlarda
+IF takımın hızlı execute planı varsa ve round yeni açıldıysa
+MEANING savunucular hâlâ pozisyona geçiyor, util'lerini henüz dizmemişler
+COUNTER hemen bas — açılışta yakalarsan hazır değiller, crosshair'leri senin üzerinde değil
+WHY round açılışı savunucunun gerçekten hazırsız olduğu tek an; bir kez yerleştiler mi her avantaj onlarda
 
-IF round'un çoğu site vuruşu olmadan geçmişse
-MEANING savunucular muhtemelen proaktif olarak bazı utility kullanmış ve sabırsızlanıyor olabilir
-COUNTER geç execute'lar tüketilmiş savunucu utility'sinden faydalanır ama hız ve temiz koordinasyon gerektirir çünkü zaman baskısı artık saldırganlarda
-WHY geç execute'un takası daha az düşman utility'si vs saatte daha az hata payı
-
-### Zaman Baskısı Psikolojisi
-
-IF saldırgan takım yavaş oynuyorsa
-MEANING savunucular uzun süre tüm pozisyonlarda disiplin koruymalı, bu mental olarak yorucu
-COUNTER saldırgan olarak tempoyu kasıtlı olarak değiştir -- yavaş round'ları takip eden hızlı rush'lar belirsizlik oluşturur ve savunma ritmini kırar
-WHY tahmin edilemez zamanlama en güçlü makro silah çünkü savunucular okuyamadıkları zamanlamaya kaynaklarını önceden commit edemez
-
-IF spike plant edilmiş ve savunucuların retake yapması gerekiyorsa
-MEANING saat şimdi savunucuları baskılıyor -- spike'a ulaşmalı, tutucular temizlemeli ve patlama öncesi defuse'u tamamlamalılar
-COUNTER post-plant saldırganları olarak her gecikme anı doğrudan savunucu opsiyonlarını azaltır; kalan zamanlarını tüketmek için utility ve reposition kullan
-WHY defuse animasyonu güvenli pencere gerektiren sabit süreli commit -- o mevcut pencereyi defuse süresinin altına düşürmek round'u garanti eder
+IF round büyük bir site vurmaya commit olduysa ve spike henüz kurulmadıysa
+MEANING savunucular util'lerini boşalttı, pozisyonlarında gerginlik var
+COUNTER geç execute at — dolu util'li bir savunmaya değil, boşalmış birine giriyorsun
+WHY az util = daha temiz giriş; ama koordinasyon eksiksiz olsun — flash, smoke, giriş aynı saniyede
 
 ---
 
+### Zaman Baskısı Psikolojisi
+
+IF saldırgan olarak kasıtlı yavaş oynuyorsan
+MEANING rakibin her round dar açıda dikkat tutamaz — bir noktada gözü kayar
+COUNTER tempoyu kır — yavaş round'tan sonra ani bir rush at; ritmi kaybeden savunucu yanlış tepki verir
+WHY okuyamadıkları bir tempoyu önden karşılamak için adam ya da util commit edemezler
+
+IF spike kurulmuşsa ve savunucular retake'e geliyorsa
+MEANING artık baskı onların üzerinde — spike'a ulaş, temizle, defuse'u bitir, hepsi üst üste
+COUNTER util at ve reposition yap — her saniye kaybettikleri senin kazandığın
+WHY defuse sabit süreli bir animasyon; o pencereyi defuse süresinin altına çekersen round bitti
+
 ## Spawn Bazlı Okumalar
 
-### Spawn RNG Exploit'lemesi
+### Spawn RNG'sini Kullan
 
-IF oyuncu spawn bölgesinin önüne doğru spawn olursa
-MEANING anahtar harita pozisyonlarına arkada spawn olan takım arkadaşlarından daha erken ulaşır
-COUNTER en hızlı spawn'lu oyuncu agresif erken pozisyonu veya peek'i alır; arka-spawn oyuncular destek rollerine varsayılanır
-WHY hızlı ve yavaş spawn'lar arasındaki zamanlama farkı çatışan pozisyona kimin önce ulaştığını belirler -- spawn'a göre rol atamak sikke-atış fight'larını ortadan kaldırır
+IF öne doğru spawn aldıysan
+MEANING kilit noktaya takım arkadaşlarından önce ulaşırsın
+COUNTER hemen agresif pozisyonu al; geç spawn alanlar seni desteklesin
+WHY kim önce gelirse açıyı o belirler — spawn'a göre rol paylaşmazsan aynı noktaya iki kişi koşar, ikisi de ölür
 
-IF takımın taraflar arasında kabaca eşit olan erken zamanlama yarışması gerekiyorsa
-MEANING kuru peek avantajsız saf sikke-atış
-COUNTER ham aim düellosu almak yerine açıyı kontrol etmek için utility kullan
-WHY avantajı garanti etmek için utility harcamak her zaman spawn RNG'sine ve ham reaksiyon süresine kumar oynamaktan iyidir
+IF karşı takımla aynı anda aynı noktaya ulaşıyorsan
+MEANING bu saf düello, sana avantaj yok
+COUNTER ham düelloya girme — flash, smoke veya molly at, açıyı util'le zorla
+WHY util harcamak her zaman spawn şansına kumar oynamaktan iyidir
 
 ---
 
@@ -224,24 +226,24 @@ WHY avantajı garanti etmek için utility harcamak her zaman spawn RNG'sine ve h
 
 ### Counter-Recon
 
-IF düşman drone, Trailblazer, Sova dart veya Fade haunt deploy ediyorsa
-MEANING recon hayatta kaldığı her an bedava düşman bilgisi
-COUNTER recon utility'sini hemen yok et -- dart'lar ve haunt'lar tek atışta kırılır; drone ve Trailblazer'lar odaklı ateş gerektirir ama önceliklendirilmeli
-WHY recon'u yaşatmanın maliyeti (tam takım pozisyonu açığa çıkar) birkaç mermi ve atıştan kısa pozisyon açığa çıkarma maliyetini çok aşar
+IF düşman Sova dart'ı, Fade haunt'u, KAY/O bıçağı veya Skye drone'u aktifse
+MEANING o recon yaşadığı sürece senin pozisyonun düşmana bedava gidiyor
+COUNTER hemen vur ve kır — dart'lar ve haunt'lar tek atışta düşer; drone ve Trailblazer için birkaç atış gerekir ama yine de önce onları al
+WHY birkaç mermiyi esirgeyip recon'u yaşatırsan takımının nerede durduğunu rakibe verirsin — bu değişim sana hiç kazandırmaz
 
 ### Smoke Pozisyonlama
 
-IF oyuncu doğrudan smoke'un arkasında duruyorsa
-MEANING smoke'tan geçen herhangi bir düşman çıkışta oyuncuyu hemen görür
-COUNTER smoke duvarlarının arkasında değil yanında dur, push-through'lar baş-başa fight yerine off-angle ile karşılaşsın
-WHY smoke push-through'lar savunucuları smoke'un hemen arkasında beklenen pozisyonda yakalamaya güveniyorlar -- yana kaymak bu varsayımı kırar
+IF smoke'un tam arkasında duruyorsan
+MEANING smoke'tan geçen düşman çıkışta seni anında görür, sen onu göremezsin
+COUNTER smoke'un hemen arkasında durma — yana çekil, off-angle kur; smoke'u geçen düşman seni beklediği yerde bulamasın
+WHY smoke push yapanlar arkasında biri olduğunu biliyor ve oraya bakıyor — yana kayarsan bu okumayı kırarsın
 
 ### Bilgi Ekonomisi
 
-IF düşman takımından fazla bilgiye sahipse
-MEANING onların execute'ları ve rotasyonları bilgiye dayanırken senin karşılıkların tahmin
-COUNTER utility-tabanlı recon ile ses inkarını birleştirerek bilgi savaşını kazan -- her şeyi topla, hiçbir şey verme
-WHY bilgi asimetrisi üst seviyede round sonuçlarının temel belirleyicisi; daha fazla veriye sahip takım daha az hata yapar
+IF düşman takımı senden fazla bilgiye sahipse
+MEANING onlar her hamlelerini veriye dayandırıyor, sen tahminle oynuyorsun
+COUNTER recon utility'nle bilgi topla, ses ve pozisyonla da bilgi verme — ikisini aynı anda yürüt
+WHY bilgi farkı üst seviyede round'ı belirleyen şeydir; elinde daha fazla veri olan takım daha az yanlış yapar
 
 ---
 
@@ -249,50 +251,50 @@ WHY bilgi asimetrisi üst seviyede round sonuçlarının temel belirleyicisi; da
 
 ### Temel Bait ve Switch
 
-IF takım bir site'ta gürültü ve utility mevcudiyeti yaratıyorsa
-MEANING savunucular o site'ta tehdit kaydediyor ve rotasyon veya stack'lemeye başlıyor
-COUNTER bait savunma tepkisini çektikten sonra gerçek vuruş sessiz rota ile karşı site'a gider
-WHY ses ve utility bilgisi doğası gereği gecikmeli -- savunucular tehdidin OLDUĞU yere tepki verir, OLDUĞU yere değil
+IF bir siteye baskı yapıp gürültü ve utility harcıyorsanız
+MEANING savunucular o siteye kilitlenip rotasyon yapmaya başlar
+COUNTER savunucular o siteye kaydıktan sonra diğer siteye sessizce gir
+WHY ses ve utility bilgisi her zaman gecikmeli — savunucular tehdidin geldiği yere koşar, zaten geçtiğin yere değil
 
-### Bait Zamanlama
+### Bait Zamanlaması
 
 IF bait çok kısaysa
-MEANING savunucular rotasyona commit etmez ve switch hazırlanmış savunmaya çarpışır
-COUNTER bait gerçek savunma tepkisi zorlayacak kadar uzun sürmeli -- sürekli utility veya birden fazla ses ipucu kullan
-WHY üst seviyede savunucular rotate etmeden önce onay bekler; tek flash veya ayak sesi onları hareket ettirmez
+MEANING savunucular yerinden kımıldamaz ve switch tam hazır savunmaya çarpar
+COUNTER baitini uzat — birden fazla ses çıkar, sürekli utility kullan, savunucuyu gerçekten hareket ettir
+WHY üst seviyelerde savunucu rotate etmeden önce ikinci bir onay bekler; tek flash veya tek ayak sesi onu yerinden etmez
 
 IF switch bait'ten çok sonra geliyorsa
-MEANING savunucuların durumu yeniden okumaya, fake'i anlamaya ve pozisyonları sıfırlamaya zamanı olur
-COUNTER savunucuların bait'e tepki vermeye başladığını onayladıktan sonra switch'i hemen uygula
-WHY "savunucular bait'e commit etti" ile "fake olduğunu fark etti" arasındaki pencere dar ve hızla exploit edilmeli
+MEANING savunucuların fake'i okuması ve eski pozisyonlarına dönmesi için zaman kalır
+COUNTER savunucunun bait'e commit ettiğini gördüğün an switch'i hemen yap
+WHY "commit etti" ile "fake olduğunu anladı" arasındaki pencere çok kısa — o pencereyi kaçırırsan bait boşa gider
 
 ---
 
 ## Clutch Metodolojisi
 
-### Save vs. Clutch Kararı
+### Save mi Clutch mı?
 
-IF spike plant edilmemiş, birden fazla düşman hayatta ve oyuncunun değerli silahı var
-MEANING round'u kazanma olasılığı son derece düşük ve silah gelecek round'da daha değerli
-COUNTER silahı koru -- gelecek round için ekonomiyi korumak daha yüksek değerli oynama
-WHY korunan tüfek gelecek round'un sonucunu değiştirebilir, kaybedilen clutch girişimi hem round'u hem ekonomiyi harcar
+IF spike plant edilmemişse, iki veya daha fazla düşman ayaktaysa ve elinde değerli silah varsa
+MEANING round'u kazanma ihtimalin yok denecek kadar düşük
+COUNTER silahı kurtar — bir sonraki round için ekonomini sağlam tut
+WHY o silah bir sonraki round'u döndürebilir; boşa gittin mi hem round'u hem ekonomiyi yakarsın
 
-IF spike plant edilmiş ve oyuncunun post-plant utility'si var
-MEANING saat oyuncuyu kayırıyor ve utility defuse'u inkar edebilir
-COUNTER clutch'ı oyna -- defuse'u geciktirmek ve izole fight'lar zorlamak için utility kullan
-WHY post-plant durumlar zaman baskısını savunuculara çevirerek gecikme yoluyla 1v2 veya 1v3'ü bile kazanılabilir kılıyor
+IF spike plant edilmişse ve elinde post-plant için util varsa
+MEANING zaman artık seni kayırıyor, util defuseı engeller
+COUNTER clutch'ı oyna — defuseı geciktirmek için utilini kullan, düşmanları teker teker fight'a zorla
+WHY spike patlama baskısı altında savunucu panikler; 1v2 veya 1v3 bile kazanılabilir hale gelir
 
-### İzolasyon Protokolü
+### İzolasyon
 
-IF oyuncu clutch'ta birden fazla düşmana karşı karşılaşıyorsa
-MEANING eş zamanlı çoklu-açı fight almak neredeyse her zaman kayıptır
-COUNTER harita geometrisi, utility ve reposition kullanarak düşmanları sıralı düellolara izole et
-WHY insanın aim sistemi aynı anda sadece bir hedefi işleyebilir; 1v2'yi iki 1v1'e çevirmek kazanma olasılığını dramatik artırır
+IF clutch'ta aynı anda birden fazla düşmanla karşılaşıyorsan
+MEANING iki açıdan aynı anda baskı yersen kaybedersin, nokta
+COUNTER harita geometrisini ve utilini kullan, düşmanları sıraya sok — birer birer fight al
+WHY bir anda sadece bir hedefe aim edebilirsin; 1v2'yi iki ayrı 1v1'e çevir
 
-IF oyuncu clutch sırasında kill alırsa
-MEANING hayatta kalan düşmanlar fight'ı duydu ve oyuncunun pozisyonunu biliyor
-COUNTER her kill sonrası hemen reposition et -- aynı açıdan asla re-peek etme
-WHY düşman son bilinen pozisyonu pre-aim eder; orada kalmak kazanılmış fight'ı kaybedilene çevirir
+IF clutch'ta bir düşman düşürdüysen
+MEANING hayatta kalan düşmanlar sesin geldiği yeri biliyor
+COUNTER her kill'den sonra pozisyon değiştir — aynı açıdan bir daha bakma
+WHY düşman son gördüğü noktayı pre-aim eder; orada beklersen kazandığın fight'ı geri verirsin
 
 ---
 
@@ -300,57 +302,57 @@ WHY düşman son bilinen pozisyonu pre-aim eder; orada kalmak kazanılmış figh
 
 ### Tilt Tanıma
 
-IF oyuncu arka arkaya birden fazla round aynı başarısız oyunu tekrarlıyorsa
-MEANING otopilotta veya tilt'te, adaptasyon yerine alışkanlığa varsayılan
-COUNTER round başına bir bilinçlice değişiklik zorla -- farklı pozisyon, farklı zamanlama, farklı yaklaşım
-WHY üst seviye düşmanlar round'lar arasında adapte olur; aynı pattern'i tekrarlamak azalan getirileri garanti eder
+IF aynı başarısız hamleti arka arkaya birden fazla round tekrarlıyorsan
+MEANING otopilottasın veya tilt'tesin — adapte olmak yerine alışkanlığa kaçıyorsun
+COUNTER her round'a bir bilinçli değişiklikle gir: farklı pozisyon, farklı yaklaşım, farklı utility sırası
+WHY üst seviye rakipler round'lar arasında seni okur; aynı şeyi tekrarlıyorsan bedava bilgi veriyorsun
 
-IF takım arkadaşı belirgin şekilde tilt'teyse (geniş peek'ler, sessiz iletişim, agresif aşırı uzanma)
-MEANING karar kaliteleri düşmüş ve düşmanın momentum'unu besliyorlar
-COUNTER mevcutsa timeout çağır; değilse tilt'li oyuncunun rolunu basitleştirerek karar yükünü azalt
-WHY tilt'li oyuncudan karmaşık kararları kaldırmak zararı sınırlarken takım taktik ağırlığı taşıyor
+IF takım arkadaşın tilt'teyse — geniş açtıkça açıyor, sessizleşti, mantıksız uzanıyor
+MEANING karar kalitesi düştü ve rakibin momentumunu besliyorlar
+COUNTER timeout hakkın varsa çağır; yoksa o oyuncunun görevini basitleştir, karar yükünü kaldır
+WHY tilt'li birine karmaşık görev verme — sen taktik ağırlığı taşı, onun zararını sınırla
 
 ### Güven Kalibrasyonu
 
-IF oyuncu az önce çoklu-kill round geçirdi ve durdurulamaz hissediyorsa
-MEANING aşırı güven ego peek'lere, solo oyunlara ve takım utility'sini görmezden gelmeye yol açar
-COUNTER her round öncesi "takım ne gerektiriyor?" sor, "ne yapmak istiyorum?" değil -- rol-bazlı oyun duygusal karar vermeyi kaldırır
-WHY bireysel parlama round'ları istatistiksel olarak tutarsız; onlara güvenmek zirve-veya-çukur performans oluşturur
+IF az önce çok kill'li bir round geçirdin ve durdurulamaz hissediyorsan
+MEANING ego peek'lere ve solo hamlelere kayıyorsun, takım utility'sini görmezden geliyorsun
+COUNTER round başlamadan önce şunu sor: "Takım şu an ne istiyor?" — "Ben ne yapmak istiyorum?" değil
+WHY tek round'da parlak olmak tutarsız; buna güvenirsen ya zirvedesin ya çukurda, arası yok
 
 ### Otopilot Tuzağı
 
-IF oyuncu bilinçlice düşünmeden her round aynı setup, aynı pozisyonlar ve aynı rotasyonları çalıştırıyorsa
-MEANING düşman pattern'i okuyacak ve hard-counter yapacak
-COUNTER her round en az bir kasıtlı değişiklik zorla -- pozisyon, zamanlama veya utility sırasını değiştir
-WHY Radiant seviyede tahmin edilebilirlik düşmana bedava bilgi vermekle eşdeğer; çeşitlilik bilgi inkarının bir formu
+IF her round aynı setup, aynı pozisyon, aynı rotasyonla oynuyorsan
+MEANING rakip seni okudu ve hard-counter hazırlıyor
+COUNTER her round en az bir şeyi kasıtlı değiştir: pozisyon, zamanlama veya utility sırası
+WHY Radiant seviyede tahmin edilebilirsen rakibe bedava bilgi veriyorsun; çeşitlilik bunu keser
 
 ---
 
-## İletişim Protokolleri
+## Mic'te Konuşma Düzeni
 
 ### Temel Çağrılar
 
-IF oyuncu temas kuruyorsa
-MEANING takım hemen pozisyon, sayı ve hasar bilgisine ihtiyaç duyuyor
-COUNTER özlü çağır: sayı, biliniyorsa sağlık, konum -- "Bir lit 80 A Main" şablon
-WHY geç veya belirsiz çağrılar takım arkadaşlarını eksik bilgiyle karar vermeye zorlar, kayıp round'lara birikir
+IF temas kurduysan
+MEANING takımın hemen 3 şeyi bilmesi lazım: nerede, kaç kişi, ne kadar hasar aldılar
+COUNTER kısa çağır — "Bir lit 80 A Main" şablonunu kullan
+WHY geç veya bulanık çağrı yaparsan takım arkadaşın yarı bilgiyle karar alır, round kaybolur
 
-IF oyuncu ölürse
-MEANING kameraları hala bilgi sağlayabilir ve ölüm konumları hikaye anlatır
-COUNTER düşman pozisyonuyla ölüm çağrısı sun: "Öldü, bir A Main" -- sonra sorulmadıkça sus
-WHY ölüm bilgisi takım arkadaşlarının rotate mi yoksa tutma mı kararını belirler; sinir nedeniyle bilgiyi tutmak round'daki en değerli çağrıyı harcar
+IF öldüysen
+MEANING kamera açık, ölüm noktanı söyleyebilirsin — bu bilgi hâlâ değerli
+COUNTER öldüğünde düşman pozisyonunu ver: "Öldü, bir A Main" — sonra kimse sormadıkça sus
+WHY o çağrı takım arkadaşına "rotate et mi, tut mu" kararını verir; sinirle susarsan round'un en değerli bilgisini çöpe atmış olursun
 
 ### İletişim Disiplini
 
-IF takım arkadaşı clutch yapıyorsa
-MEANING ham bilginin ötesinde her sesli trafik baskıncı ve gürültü ekler
-COUNTER sadece olgusal bilgi çağır (düşman pozisyonları, spike durumu, utility statüsü) -- öneri yok, arka koltuk çağrısı yok
-WHY clutch oyuncuları ses ipuçlarını duymak için sessizliğe ihtiyaç duyar; ekstra sesli trafik round'u belirleyen ayak seslerini ve yetenek seslerini maskeler
+IF takım arkadaşın clutch yapıyorsa
+MEANING o anda mikrofonda her ses ona yük bindirir
+COUNTER sadece somut bilgi ver — düşman yeri, spike durumu, util kaldı mı; yorum yapma, "şunu yap" deme
+WHY clutch oyuncusu ayak sesini ve util sesini duymak zorunda; sen konuşunca o sesleri kaybediyor
 
-IF IGL bir oyun çağırırsa
-MEANING takımın tartışmak değil execute etmesi gerekiyor
-COUNTER "tamam" veya sessizlikle onayla, sonra execute et -- mid-round'da gerçekten kafası karışmadıkça çağrıyı geri tekrarlama veya açıklayıcı sorular sorma
-WHY çağrıyı tartışmaya harcanan round zamanı execute etmeye harcanmayan round zamanı; temiz iletişim karar-eylem gecikmesini sıkıştırıyor
+IF IGL bir çağrı yaptıysa
+MEANING tartışma vakti değil, execute vakti
+COUNTER "tamam" de ya da sus, hareket et — kafan gerçekten takıldıysa round bittikten sonra sor
+WHY çağrıyı mid-round'da tartışmaya harcadığın her saniye, execute'a harcayamadığın bir saniyedir
 
 ---
 
@@ -358,69 +360,74 @@ WHY çağrıyı tartışmaya harcanan round zamanı execute etmeye harcanmayan r
 
 ### Saldırı Tarafı
 
-IF erken bilgi bir site'ta zayıf savunma gösteriyorsa
-MEANING düşman eksik commit etmiş ve hızlı vuruş zayıf tarafı cezalandırır
-COUNTER eksik kadrolu site'ta full utility ile hemen execute et
-WHY rotasyonlar gelmeden vurmak sayı avantajını site take'ine çevirir
+IF erken bilgi bir sitede az savunucu görüyorsan
+MEANING düşman o siteye tam adamını koymamış
+COUNTER o siteye tüm utility'ni dökerek hemen gir
+WHY rotasyon gelmeden vurursan sayı üstünlüğü işe yarar
 
-IF bilgi toplama fazından sonra net okuma yoksa
-MEANING düşman ya tahmin edilemez stack'liyor ya saldırı hareketini yansıtıyor
-COUNTER her iki site'ta baskıncı yay, sonra daha zayıf karşılık gosterene commit et
-WHY bölü baskıncı savunmayı tahsisini açığa çıkmaya zorlar, bilinmeyeni bilinene çevirir
+IF bilgi topladın ama hangi siteye gideceğini hâlâ bilmiyorsan
+MEANING düşman ya öngörülmez şekilde yığmış ya da seni takip ediyor
+COUNTER iki sitede de baskı uygula, hangisi daha az direnç gösterirse oraya commit et
+WHY çift baskı düşmanı seçim yapmaya zorlar, belirsizliği ortadan kaldırır
 
-IF site commit'i olmadan zaman azalıyorsa
-MEANING saldırganlara tempo savaşını kaybetmiş ve savunucular avantaj tutuyor
-COUNTER kalan utility ne olursa olsun en yakın uygulanabilir site'a hemen commit et -- bu noktada tereddüt kaybı garanti eder
-WHY geç-round kararsızlık optimal-altı execute'dan bile kötü; en azından commit edilmiş push fight fırsatları oluşturur
+IF round bitiyor ama hâlâ siteye girmedin
+MEANING tempo savaşını kaybettin, savunma kazanıyor
+COUNTER elinde ne utility varsa kullan, en yakın siteye şimdi gir — duraksarsan round bitti
+WHY geç roundda kararsız kalmak kötü bir execute'dan bile berbat; en azından bir push savaş fırsatı doğurur
 
 ### Savunma Tarafı
 
-IF uzun süre düşman teması görünmüyorsa
-MEANING saldırganlara ya bilgi için yavaş-default yapıyor ya koordineli geç vuruş kuruyor
-COUNTER bilgi için tek agresif peek düşün ama aşırı commit etme -- bir oyuncu dışarı çıkar, okuma yapar ve geri çekilir
-WHY yavaş saldırılara karşı pasif savunma saldırganlara bedavaya tam harita kontrolu verir; hesaplanmış bilgi peek'i savunma kurulumundan fedakarlık etmeden ritmlerini bozar
+IF uzun süre hiç düşman teması olmadıysa
+MEANING saldırganlar ya yavaş default çekiyor ya da geç vuruş kuruyorlar
+COUNTER bir oyuncu çıkıp peek at, okuma yap, geri çekil — fazla içeri girme
+WHY pasif kalırsan düşmana harita kontrolünü bedavaya verirsin; tek bir peek onların ritmini bozar
 
-IF saldırganlara tam execute başlıyorsa
-MEANING site tutucular geciktirmeli, kahramanlık oynamamalı
-COUNTER site'ta teksen push'u yavaşlatmak için utility kullan ve rotasyon çağırarak retake pozisyonuna düş; iki savunucu varsa bölü açılardan contest et
-WHY rotasyonlar için zaman kazanmadan site'ta ölmek en kötü sonuç -- birkaç anlık gecikme bile koordineli retake için tam takımın ulaşmasına izin verebilir
+IF düşman tam execute başlattıysa
+MEANING sitedeki savunucu tek başına durduramaz
+COUNTER
+- Sen teksen: utility kullan, push'u yavaşlat, retake pozisyonuna düş
+- İkinizseniz: farklı açılardan contest et, rotasyon çağır
+WHY rotasyon gelmeden orada ölmek en kötü senaryo; birkaç saniyelik gecikme bile takımın toplanmasına yeter
 
 ### Ekonomi
 
-IF takım pistol round'u yeni kaybettiyse
-MEANING düşman gelecek round için belirgin silah ve utility avantajına sahip
-COUNTER bonus round'u contest etmek için kısmi utility ile hafif silahlar force-buy yap veya sonraki round temiz buy için tam-save yap -- bu birleşik takım kararı olmalı
-WHY bölü-buy (bazıları force, bazıları save) uyumsuz ateş gücü oluşturur ve tutarlı round planı üretmeden kredi harcar
+IF takım pistol round'u kaybettiyse
+MEANING düşmanın bir sonraki roundda silah ve utility üstünlüğü var
+COUNTER ya hepiniz hafif silah + kısmi utility ile force-buy yapın, ya da hepiniz tam save edin — karar ortak olsun
+WHY yarısı force yarısı save yaparsa ateş gücünüz tutarsız olur ve kredi çöpe gider
 
-IF takım full-buy yapabiliyorsa ama bonus-round silahlarıyla yeni kazandıysa
-MEANING mevcut donanım fonksiyonel ve krediler biriktirilebilir
-COUNTER bonus-round silahlarını koru ve tüfeklere yükseltmek yerine full utility'ye yatır
-WHY utility ham silah yükseltmelerinden daha fazla round kazandırır; fonksiyonel donanımı korurken kredi biriktirmek uzun vadeli ekonomik avantaj oluşturur
+IF full-buy yapabiliyorsunuz ama elinizdeki bonus-round silahlar hâlâ işe yarıyorsa
+MEANING silahlar fonksiyonel, kredi biriktirme şansın var
+COUNTER silahları koru, tüfeğe yükseltme — parayı utility'ye yatır
+WHY utility round kazandırır, ham silah yükseltmesi değil; iyi donanımı korurken kredi biriktirirsen 2-3 round sonra full buy bozulmadan döner
 
 ---
 
 ## VOD Review
 
-### Kendi-Review Protokolü
+### Kendi VOD'unu İzleme
 
-IF oyuncu kendi VOD'unu izliyorsa
-MEANING rastgele gözlemler değil, aksiyon alınabilir pattern'ler çıkaracak yapılı çerçeve gerekli
-COUNTER ilk geçiş: duraklatmadan izle, yanlış hissettiren round'ları işaretle; ikinci geçiş: her ölümde durakla ve sebebi kategorize et (pozisyonlama, zamanlama, aim, bilgi, iletişim); üçüncü geçiş: beceriyi şanstan ayırmak için kazanma round'larını review et
-WHY yapılandırılmamış VOD review spesifik düzeltmeler yerine belirsiz hisler üretir; üç-geçiş yöntemi filmi somut pratik planına çevirir
+IF kendi VOD'unu izliyorsan
+MEANING rastgele "vay be kötü oynadım" hissi değil, somut hata listesi çıkacak
+COUNTER üç tur izle:
+- Birinci tur: duraklatma, sadece yanlış hissettiren roundları işaretle
+- İkinci tur: her ölümde dur — sebebi yaz: pozisyon mu, açı bilgisi mi, util mi, iletişim mi?
+- Üçüncü tur: kazandığın roundları izle — kazandın diye iyi oynamadın, şans mı beceri mi ayır
+WHY yapısız izlersen sadece "kötü oynadım" diye çıkarsın odadan. Bu üç tur seni "şunu düzeltmem lazım" noktasına taşır
 
-### Pattern Çıkarma
+### Pattern Bul
 
-IF aynı hata kategorisi birden fazla haritada görünüyorsa
-MEANING oyuncunun tek seferlik hata değil, sistematik zayıflığı var
-COUNTER en çok tekrarlanan ilk iki veya üç pattern'i izole et ve daha fazla görüntü review etmeden önce o spesifik alanlara odaklı pratik adamak
-WHY bir tekrarlayan pattern'i düzeltmek o pattern'in görüneceği her gelecek round'u iyileştirir; rastgele tek seferlik hataları düzeltmenin minimal birikimli değeri var
+IF aynı hata birden fazla haritada tekrar ediyorsa
+MEANING o an kötü oynamadın — sistematik bir açığın var
+COUNTER en çok tekrar eden 2-3 hatayı yaz. Daha fazla VOD izleme — o hatalara odaklı antreman yap önce
+WHY tek bir tekrarlayan hatayı kapatırsan o haritada o pattern'i bir daha kaybetmezsin — rastgele tek seferlik hataları kovalamanın sana faydası yok
 
-### Pro VOD Review
+### Üst Seviye Maç İzleme
 
-IF oyuncu profesyonel oyundan öğrenmek istiyorsa
-MEANING kullanılabilir dersler çıkarmak için dar odak gerekli
-COUNTER bir pro oyuncu, bir ajan, bir harita seç -- round round pozisyonlamayı, sonra utility kullanımını, sonra ekonomi kararlarını izle; daha fazla review etmeden önce sonraki beş ranked oyuna bir çıkarım uygula
-WHY geniş pro VOD review hayranlık üretir, gelişim değil; anında uygulama ile dar odak gözlemi beceriye çevirir
+IF üst seviyeden işine yarayacak şeyi izleyerek öğrenmek istiyorsan
+MEANING "vay be ne iyi oynadı" izleniminden öte bir şey lazım
+COUNTER bir oyuncu, bir ajan, bir harita seç. Önce pozisyonlamaya bak round round. Sonra util kullanımına. Sonra ekonomi kararlarına. Bir şey öğrendiysen sonraki 5 ranked maçında o şeyi dene — sonra tekrar izle
+WHY geniş geniş pro izlersen hayranlık duyarsın, gelişmezsin. Dar odak + hemen uygulama — bu ikisi olmadan pro VOD'u boşuna izlemiş olursun
 
 ---
 
@@ -428,17 +435,17 @@ WHY geniş pro VOD review hayranlık üretir, gelişim değil; anında uygulama 
 
 ### Ranked Öncesi Isınma
 
-IF oyuncu ranked'e girecekse
-MEANING soğuk mekanikler kaçırılan açılış düelloları üretir
-COUNTER fare aktivasyonu için aim antremanı, counter-strafe drill için hard bot'lar, crosshair placement odaklı bir deathmatch (kill-kovalama değil)
-WHY ısınma mevcut kas hafızasını aktive eder; amaç hazırlık, gelişim değil
+IF ranked'e gireceksen
+MEANING ellerin soğuksa ilk düelloları kaybediyorsun
+COUNTER önce aim antremanı aç, hard bot'larda counter-strafe yap, sonra bir deathmatch gir — kill peşinde koşma, crosshair'ini nereye koyduğuna bak
+WHY ısınma yeni bir şey öğretmiyor, kas hafızanı uyandırıyor
 
 ### Uzun Isınma
 
-IF seans yüksek-risk'li (turnuva, scrim)
-MEANING oyuncunun mekanik keskinlik ve harita-spesifik hazırlığa ihtiyacı var
-COUNTER tracking ve flick aim senaryoları, Range'de hız challange, iki deathmatch (biri tapping, biri spray) ve beklenen haritanın custom-oyun yürüyüşü ekle
-WHY turnuva oyunu hem aim aktivasyonu hem taktiksel hazırlama gerektirir; birini atlamak exploit edilebilir boşluk oluşturur
+IF turnuva veya scrim gireceksen
+MEANING hem aim'in hem game sense'in hazır olmalı — biri eksikse rakip dar açıdan vurur veya rotate'i okuyamazsın
+COUNTER tracking ve flick senaryoları yap, Range'de hız challengelarını geç, iki deathmatch oyna — birinde tapping biri spray — sonra o günkü haritada custom aç ve rotaları yürü
+WHY turnuvada açık kalan her mekanik veya pozisyon hatası direk ceza yiyor
 
 ---
 
@@ -446,14 +453,14 @@ WHY turnuva oyunu hem aim aktivasyonu hem taktiksel hazırlama gerektirir; birin
 
 ### Immortal+ İçin
 
-IF Radiant seviye oyununu rafine etmek istiyorsan
-MEANING bu dokümandaki her pattern doğrudan uygulanabilir
-COUNTER mikro-kararlarını bilinçlice pratik et: off-angle rotasyonu, ses inkarı, spawn-bazlı rol ataması
-WHY Immortal+'da fark yapan şey macro karar kalitesi ve mikro-mekanik tutarlılık; bu dokümanın özeti
+IF Radiant seviye oyununu geliştirmek istiyorsan
+MEANING bu dokümandaki her şeyi direkt uygula
+COUNTER şunları DM'de tek tek çalış: off-angle rotasyonu, ses inkarı, spawn'a göre rol seçimi
+WHY Immortal+'da fark yaratan şey her round aynı doğru kararı verip aynı crosshair placement'ı tekrarlamak
 
 ### Diamond-Ascendant İçin
 
-IF Radiant pattern'lerini uyarlamak istiyorsan
-MEANING temel prensipler aynı ama uygulama seviyesi farklı
-COUNTER crosshair placement, ses ipucu okumaları ve post-plant üçgeni ile başla -- bu üç prensip en yüksek getiriyi sağlar
-WHY ileri pattern'lerin temeli bu üç beceride oturur; bunlar sağlamsa geri kalan donuk yerine oturur
+IF üst seviye prensiplerini kendi rank'ına uyarlamak istiyorsan
+MEANING prensipler aynı, ama nasıl uyguladığın farklı
+COUNTER şu üçüyle başla: crosshair placement, ses ipucu okuma, post-plant üçgeni — en hızlı gelişimi bunlar sağlar
+WHY ileri seviye her şey bu üç becerinin üstüne oturuyor; bunlar sağlamsa geri kalan zaten yerine gelir

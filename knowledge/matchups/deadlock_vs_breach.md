@@ -11,111 +11,110 @@ tags: [matchup, deadlock, breach, sentinel, initiator]
 
 ## 1. Matchup Özü
 
-Deadlock gravnet + sonic sensor + barrier mesh + Annihilation ultunda entry hattını kesen anchor sentinel, Breach ise fault line + flash + aftershock wall-pierce ile Deadlock setup'ını cover arkasında bile iptal eden area CC initiator. Matchup Deadlock'un katmanlı CC'siyle Breach'in wall-pierce stun zincirini karşılaştırır.
+Deadlock gravnet + sonic sensor + barrier mesh + Annihilation ile site girişini kapatır. Breach ise fault line + flash + aftershock ile duvarın arkasından vurur — senin becerilerini, senin pozisyonunu, kapandığını sandığın açıyı. Bu matchup'ta iki şey belirler: Breach'in duvar-geçen CC'si seni kapattı mı, yoksa sen Breach'in atış pozisyonunu sensor + gravnet ile yakaladın mı.
 
 ## 2. Kim Avantajlı?
 
-**Deadlock lehine durumlar:**
-- Close range site anchor — sonic sensor + gravnet dar choke Breach entry'sini iptal
-- Breach utility harcanmış — stun + flash yok, Deadlock setup serbest
-- Deadlock Annihilation ult hazır — ult push penceresine kaçınılmaz kill kokon
-- Deadlock barrier mesh dar choke'ta — Breach entry hattı fiziksel engelle
+**Deadlock lehine:**
+- Dar choke'ta anchor: sensor + gravnet birlikte Breach girişini bitirir
+- Breach becerileri bitti — stun ve flash yok, Deadlock kurulumu serbestçe çalışır
+- Annihilation hazır — Breach push ettiğinde ult'u kullan, çıkış yok
+- Barrier mesh choke içinde — Breach girer girmez sensor + gravnet anı doğar
 
-**Breach lehine durumlar:**
-- Fault line Deadlock anchor pozisyonunu wall-pierce stun'ladığında — cover'da bile stun geçer, setup aktive olamaz
-- Aftershock Deadlock utility hattında — wall-pierce damage sonic sensor + gravnet HP'sini düşürür
-- Rolling Thunder ult Deadlock site'ına — area stun wall-pierce, Deadlock defend iptal
-- Breach flash Deadlock peek hattında — aim duel bozulur
+**Breach lehine:**
+- Fault line duvardan geçer — sen siperin arkasındasın sandığında stun sana gelir, Deadlock kurulumu çalışmaz
+- Aftershock sensor + gravnet üzerine düşer — beceriler erir, harita ortada kalır
+- Rolling Thunder site içine gelirse — siper arkası korumaz, savunma çöker
+- Flash peek hattında — düello bozulur, Breach öne geçer
 
-**Balanced:** Haven, Ascent, Lotus gibi orta mesafeli map'lerde matchup Breach stun lineup disiplini ile Deadlock setup katmanına bağlı.
+**Dengeli:** Haven, Ascent, Lotus'ta kim daha iyi pozisyon kurarsa o baskın çıkar. Her üç haritada da sabit bir taraf yok — kurulum kalitesi belirler.
 
 ## 3. Key Düellolar
 
-**IF** Breach fault line Deadlock anchor pozisyonunu wall-pierce stun'ladı
-**MEANING** Deadlock cover'da bile stun geçer, gravnet/sensor aktivasyonu iptal
-**COUNTER** Deadlock anchor pozisyonunu fault line lineup hattı dışı. Ses indicator reaksiyon cancel sinyali.
-**WHY** Fault line wall-pierce area stun. Sabit anchor için bedava hedef. Varyasyon fault line'ı boşa çıkarır.
+**IF** Breach fault line'ı senin anchor pozisyonuna duvardan geçirerek attı 
+**MEANING** Siperin arkasında olman fark etmez — stun gelir, gravnet veya sensor aktive edemezsin 
+**COUNTER** Breach'in fault line attığı konumların karşısında sabit durma. Fault line sesi duyar duymaz lateral hareket et — duvar boyunca değil, duvardan uzaklaşarak. 
+**WHY** Fault line doğrusal ve duvar geçer. Sabit durursan bedava hedefsin. Pozisyon değiştirirsen fault line boşa gider.
 
 ---
 
-**IF** Breach aftershock Deadlock sonic sensor + gravnet hattında
-**MEANING** Aftershock wall-pierce damage utility HP'sini siler
-**COUNTER** Deadlock utility yerleşimini aftershock lineup dışı noktalara.
-**WHY** Aftershock area + wall-pierce damage. Utility cover'da saklanmak korumaz — lineup bilgisi cevap.
+**IF** Breach aftershock'u senin sensor + gravnet hattına attı 
+**MEANING** Aftershock duvardan geçen hasar yapar — beceriler siperin arkasında bile erir, harita boşalır 
+**COUNTER** Sensor ve gravnet'i aftershock'un tipik attığı noktaların tam karşısına koyma. Köşeyi sararak, doğrudan değil açılı yerleştir. 
+**WHY** Aftershock'un etkisi doğrusal. Açılı yerleşim aftershock çizgisini kırar — beceriler hayatta kalır.
 
 ---
 
-**IF** Deadlock sonic sensor Breach'in fault line atış pozisyonunu tag'ledi
-**MEANING** Sensor concuss Breach'i lineup anında yakalar, stun atılamaz
-**COUNTER** Breach fault line atış pozisyonunu sonic sensor range dışı noktalara.
-**WHY** Sonic sensor ses tetikli concuss. Breach lineup pozisyonu statik — sensor için bedava tag.
+**IF** Senin sonic sensor'ın Breach'in fault line attığı pozisyonu etiketledi 
+**MEANING** Breach fault line başlatmadan önce ayak sesi çıkarır. Sensor o sesi duyar, concuss atar — fault line animasyonu iptal olur 
+**COUNTER** Breach sensor'dan kaçmak için pozisyon değiştirmek zorunda kalır — ya erişim dışına çıkar ya da farklı açıdan atar. Her iki durumda lineup bozulur. 
+**WHY** Sensor ses tetiklidir. Breach'in fault line pozisyonu choke başına sabittir — oraya sensor koy, fault line'ı bitir.
 
 ---
 
-**IF** Deadlock gravnet Breach push hattına atıldı
-**MEANING** Gravnet area CC Breach'i ground'a çeker, stun lineup iptal
-**COUNTER** Breach gravnet sesine cover'dan stun reaktif at. Gravnet radius dışı pozisyon al.
-**WHY** Gravnet area CC + ground pull. Breach'in cevabı gravnet dışı pozisyon + cover stun.
+**IF** Deadlock gravnet'i Breach'in push ettiği hatta attı 
+**MEANING** Gravnet Breach'i yere çeker, stun atamaz, yavaşlar 
+**COUNTER** Breach olarak gravnet sesini duyar duymaz siperin arkasından stun at. Gravnet alanı dışına geç, sonra tekrar push et. 
+**WHY** Gravnet alan etkilidir ama etki alanı bellidir. O alan dışından stun atmak Breach'e pencere açar.
 
 ---
 
-**IF** Deadlock Annihilation ultunu Breach push penceresine attı
-**MEANING** Ult kokon Breach'i iptal edilemez kill line içine çeker
-**COUNTER** Breach ult sesine reaksiyon radius dışına hızlı reposition. Ult trajektör yavaş — dodge penceresi var.
-**WHY** Annihilation directional kokon ult. Yavaş trajektör dodge edilebilir, timing bilgisi Breach cevabı.
+**IF** Deadlock Annihilation'ı Breach push ederken attı 
+**MEANING** Kokon Breach'i içine çeker, çıkış yoktur 
+**COUNTER** Ult sesini duyar duymaz yana kaç — kokon sana ulaşmadan etki alanı dışına çık. Ult yavaş hareket eder, ses duyulur duyulmaz hareket et, bekleme. 
+**WHY** Annihilation doğrusal ve yavaştır. Ses çıkar çıkmaz yana git, duraksarsan içindesin.
 
 ---
 
-**IF** Breach Rolling Thunder ultunu Deadlock site'ına attı
-**MEANING** Area stun wall-pierce Deadlock'u cover arkasında bile yakalar, ult süresince defend iptal
-**COUNTER** Deadlock Rolling Thunder ses indicator radius dışına dik açıda reposition.
-**WHY** Rolling Thunder directional. Dik açı reposition ult hat'ı dışına çıkış.
+**IF** Breach Rolling Thunder'ı site içine attı 
+**MEANING** Ult doğrusal ilerler, duvardan geçer — siper arkası korumaz, stun seni bulur 
+**COUNTER** Ult sesini duyar duymaz site girişinin yan duvarına yaslan — ult çizgisine 90 derece açıyla dur. Ult çizgisi seni atlar. Geç kalırsan içindesin. 
+**WHY** Rolling Thunder doğrusal. Çizgi dışında kalırsan stun sana gelmez — ama bunu erken yap.
 
 ---
 
-**IF** Deadlock barrier mesh Breach entry choke'unda
-**MEANING** Mesh fiziksel engel Breach entry'sini geciktirir, entry tempo bozulur
-**COUNTER** Breach aftershock ile mesh'i sil, veya alternatif hatta entry.
-**WHY** Mesh HP sınırlı, aftershock damage ile silinir. Mesh'in gücü zaman kazanmak — savunma kurma penceresi.
+**IF** Deadlock barrier mesh'i choke girişine koydu 
+**MEANING** Breach girer girmez mesh'e çarpar, o an sensor + gravnet anı doğar 
+**COUNTER** Breach olarak aftershock ile mesh'i sil, ya da alternatif girişten geç. 
+**WHY** Mesh can puanı sınırlıdır. Aftershock onu siler ama Breach o sırada beceri harcamış olur — Deadlock bunu bekler. Mesh'i choke girişine değil 1-2 metre içine koy: dışarıya koyarsan Breach aftershock'u mesh'i görmeden atar, içeriye koyarsan Breach girdikten sonra çarpar ve sensor anı doğar.
 
-## 4. Utility Takası
+## 4. Beceri Dengesi
 
-Deadlock ekonomisi gravnet + sonic sensor x2 + barrier mesh + ult (area CC + physical block), Breach ekonomisi fault line + flash + aftershock + ult (stun + blind + damage + area stun). İki utility-heavy agent. Deadlock area CC + engel, Breach wall-pierce CC. Matchup Breach cover'ı aşar, Deadlock area engelle push'u iptal eder. Ult ekonomi: Annihilation 8 point, Rolling Thunder 9 point — Deadlock ult hafif ucuz.
+Deadlock: gravnet + sensor x2 + mesh + Annihilation (8 puan). 
+Breach: fault line + flash + aftershock + Rolling Thunder (9 puan). 
 
-## 5. Map Bazlı Değişim
+Deadlock engeller ve yakalar, Breach duvardan geçer ve bozar. Breach becerileri bitince Deadlock kurulumu çalışır. Deadlock becerileri bitince Breach duvardan geçerek her pozisyonu bozar. Ult ekonomisinde Deadlock 1 puan ucuz — Annihilation daha hızlı gelir.
 
-**Split (Breach avantajlı):** Dar koridor fault line meta.
+## 5. Haritaya Göre Değişim
 
-**Bind (Deadlock avantajlı):** Close range setup meta.
+**Split (Breach avantajlı):** Dar koridorlar fault line için biçilmiş — Breach her choke'tan stun atar.
 
-**Sunset (Breach hafif avantajlı):** Dar choke Breach stun.
+**Bind (Deadlock avantajlı):** Yakın mesafe kurulum meta — sensor + gravnet birlikte çalışır.
 
-**Ascent (Balanced):** Deadlock A/B anchor, Breach A Main entry.
+**Sunset (Breach avantajlı):** Dar choke Breach stun'ını verimli kullandırır — Deadlock sensörü Breach'in atış noktasını kapatamaz.
 
-**Haven (Balanced):** Deadlock B anchor, Breach B Main stun.
+**Ascent (Dengeli):** Deadlock A/B anchor kurar, Breach A Main'den stun atar.
 
-**Icebox (Deadlock avantajlı):** Uzun sightline Breach range dışı.
+**Haven (Dengeli):** Deadlock B anchor, Breach B Main'den fault line.
 
-**Lotus (Balanced):** 3 site nötr.
+**Icebox (Deadlock avantajlı):** Uzun sightline'lar Breach'in fault line erişimini zorlar.
 
-## 6. Flip Moment'ler
+**Lotus (Dengeli):** 3 site, iki ajan da nötr.
 
-**Flip 1 — Fault line anchor stun:** Deadlock cover'da stun altı.
+## 6. Maç Döndüren Anlar
 
-**Flip 2 — Sonic sensor Breach'i yakaladı:** Lineup iptal.
+**Döndüren an 1 — Fault line anchor stun:** Deadlock siperde beklerken stun geldi — kurulum çalışmadı, Breach girdi.
 
-**Flip 3 — Annihilation push bitirdi:** Breach push penceresinde ult kill.
+**Döndüren an 2 — Sensor Breach'i yakaladı:** Breach fault line atmaya hazırlanırken sensor concuss etti — lineup iptal, Deadlock kurulumu devreye girdi.
 
-**Flip 4 — Rolling Thunder cover aşımı:** Deadlock setup cover'da stun.
+**Döndüren an 3 — Annihilation push bitirdi:** Breach push ederken ult içine girdi — round bitti.
 
-## 7. Pro Coach Notları
+**Döndüren an 4 — Rolling Thunder'dan yan kaçış:** Deadlock ult sesini duyar duymaz yana yaslandı — stun geçti, savunma devam etti.
 
-**VCT'de nasıl oynanıyor:** Deadlock A tier, Breach A tier (map-bound). Matchup close range map'lerde sık. Pro Breach oyuncuları fault line lineup'larını Deadlock setup lokasyonlarına göre hazırlar. Pro Deadlock oyuncuları sonic sensor yerleşimini Breach lineup pozisyonlarına göre kurar.
+## 7. Koç Notları
 
-**Meta tier durumu:** Deadlock A tier, Breach A tier. Head-to-head map'e göre denge.
+**Nasıl oynanır:** Breach, Deadlock'un sensor koyduğu yerleri okur ve fault line'ı o sensörün etki alanı dışından atar. Deadlock, sensor'ı Breach'in choke başındaki atış noktalarına göre yerleştirir — Breach nereye basacaksa oraya koy, sabit pozisyona değil.
 
-**** Annihilation ult trajektör hızı Breach'in reaksiyon penceresini aşıyor mu?
+**Dikkat:** Annihilation yavaştır ama ses duyulur duyulmaz kaçmazsan içindesin. Sonic sensor Breach fault line animasyonunu gerçekten iptal eder — Breach atış başlatmadan önce ayak sesi çıkarır, sensor o sesi yakalarsa stun atar ve fault line biter.
 
-**** Sonic sensor concuss Breach fault line atış animasyonunu iptal ediyor mu?
-
-**Coach test:** "Breach cover'ı wall-pierce ile aşar, Deadlock Breach lineup pozisyonunu sensor + gravnet ile yakalar. İki CC user savaşı. Lineup bilgisi matchup'ı belirler."
+**Temel test:** Breach duvardan geçer, Deadlock Breach'in pozisyonunu sensor + gravnet ile yakalar. Breach'in atış noktasını kim önce kaplarsa matchup'ı o alır.

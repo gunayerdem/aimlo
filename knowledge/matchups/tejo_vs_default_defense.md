@@ -1,63 +1,65 @@
 # EŞLEŞME: Tejo vs Varsayılan Savunma
 
-> **YAMA DUYARLILIĞI NOTU**: Tejo yeni bir ajandır. Yetenek değerleri, bekleme aralıkları ve etkileşimler yamalar arasında belirgin şekilde değişebilir. Koçluk tavsiyesi uygulamadan önce güncel yama notlarını doğrulayın.
+> **YAMA NOTU**: Tejo yeni bir ajan. Yetenek değerleri yamadan yamaya değişebilir. Kullanmadan önce güncel yama notuna bak.
 
-## Etkileşim Kimliği
-Tejo, yapılandırılmış savunmaları kırmak için tasarlanmış bir initiator'dur. Kiti, varsayılan savunma kurulumlarını — savunucuların her raund güvendiği standart pozisyonlar, crossfire'lar ve yetenek araç yerleştirmeleri — açmak için araçlar sağlar. Varsayılan savunma tahmin edilebilir konumlanma demektir: bir oyuncu A, bir oyuncu B, bir orta, iki flex. Tejo'nun yetenekleri bu tahmin edilebilirliği execute başlamadan savunucuları standart yerlerinden zorla çıkararak cezalandırır. Bu eşleşmede soru şu: Tejo istismar edilebilir bir boşluk yaratacak kadar varsayılanı bozabilir mi, yoksa savunma pozisyonlarını adapte ederek onun bozulmasını atlatabilir mi?
+## Bu Eşleşme Ne
+Tejo, savunucuların her raund aynı pozisyonda durduğu savunmalara karşı çok güçlü. Biri A'da, biri B'de, biri orta — hep aynı yerlerde. Tejo tam bunu cezalandırmak için var. Savunma pozisyon değiştirirse Tejo boşa çalışır. Pozisyon değiştirmezse Tejo kırar.
 
 ## Yaygın Cezalandırma Kalıpları
 
-### Tejo Varsayılan Savunmayı Cezalandırırken
+### Tejo Savunmayı Kırıyorken
 
-**IF**: Uzun menzil bozma yetenekleri güvenli mesafeden standart savunma pozisyonlarına ulaşıyor
-**MEANING**: Savunucular push başlamadan pozisyonlarından zorla çıkarılıyor
-**COUNTER**: Tejo'nun yeteneklerinin ulaşamadığı varsayılan-dışı konumlanma
-**WHY**: Standart pozisyonlar bozma yeteneklerinin birincil hedefleridir
+**IF**: Tejo'nun uzak menzilli bozma yeteneği savunucuların durduğu standart pozisyona ulaşıyor
+**MEANING**: Savunucu düşman takım ilerlemeden önce açısından atılıyor — elinde bir şey yok
+**COUNTER**: Tejo'nun yeteneğinin ulaşamayacağı yerlerde dur. Standart köşeden bir adım içeri veya dışarı — tam orta değil
+**WHY**: Standart pozisyonlar zaten biliniyor. Tejo oraya atar, sen oradaysan kırılırsın
 
-**IF**: Sıralanmış bozma — önce bir savunucuyu çıkarıp sonra diğerini çıkararak tüm yapıyı kıran kademeli etki
-**MEANING**: Tek bozma tüm savunma yapısını domino etkisiyle yıkıyor
-**COUNTER**: Bağımsız pozisyonlanma — bir savunucunun çıkarılması diğerini etkilememeli
-**WHY**: Birbirine bağlı pozisyonlar tek noktadan kırılabilir
+**IF**: Tejo önce bir savunucuyu açısından atıyor, sonra yanındakini — biri düşünce diğeri de açılıyor
+**MEANING**: Savunucular birbirine bağlı pozisyonda duruyorsa biri atılınca diğeri de açıkta kalıyor
+**COUNTER**: Yanındaki savunucudan bağımsız dur. Biri bozulsa bile sen hâlâ örtülüsün
+**WHY**: Bağlı pozisyonlar tek kırılmayla çöküyor
 
-**IF**: Bilgi toplama araçları varsayılan savunmanın standart pozisyonlarda tutup tutmadığını doğruluyor
-**MEANING**: Bozma yetenekleri bilgiyle destekleniyor — boş yerlere atılmıyor
-**COUNTER**: Raunddan raunda pozisyon değiştirerek Tejo'nun önceden planlanmış bozmasının boş yerlere düşmesini sağlamalı
-**WHY**: Doğrulanmamış bozma boş pozisyonlara isabet edebilir
+**IF**: Tejo bilgi yeteneklerini önce kullanıyor, nerede olduğunu görüyor, sonra bozuyor
+**MEANING**: Bozma körün körüne gitmiyor — seni gördükten sonra atabiliyor
+**COUNTER**: Tejo bilgi aldıktan sonra pozisyon değiştir. Bilgi aldığını gözlemden anlarsın — takımın sinyali kaçırmayın
+**WHY**: Bilgi aldıktan sonra aynı yerde durursan bozma sana düşer
 
-### Varsayılan Savunma Tejo'yu Cezalandırırken
+### Savunma Tejo'yu Cezalandırıyorken
 
-**IF**: Savunucular Tejo'nun yetenek kullanım animasyonu sırasında erken agresyon yapıyorsa
-**MEANING**: Tejo yetenek kullanırken savunmasız — cezalandırılıyor
-**COUNTER**: Tejo yetenek kullanımı için takım kapağı sağlanmalı
-**WHY**: Yetenek kullanım animasyonu korunmasız pencere oluşturur
+**IF**: Tejo yeteneği aktifleştirirken sen agresif çıkıyorsun
+**MEANING**: Tejo yetenek kullanırken hareketi kısıtlı — o anda en savunmasız
+**COUNTER**: Tejo yeteneği başlatır başlatmaz çık. Bekleme — tam o an
+**WHY**: Yetenek animasyonu sırasında Tejo sana tam tepki veremez
 
-**IF**: Tejo'nun bozma yetenekleri boş pozisyonlara düşüyorsa çünkü savunma adapte olmuş
-**MEANING**: Kit boşa harcanıyor — bozma etkisi sıfır
-**COUNTER**: Tejo önce bilgi araçlarıyla savunucuların gerçek yerlerini doğrulamalı, sonra bozma yapmalı
-**WHY**: Önceden planlanmış bozma adapte olmuş savunmaya karşı işe yaramaz
+**IF**: Tejo'nun bozması boş bir köşeye düşüyor çünkü sen oradan ayrıldın
+**MEANING**: Tejo yeteneğini boşa harcadı — hem mana hem zaman kaybı
+**COUNTER**: Pozisyon değiştirmeye devam et. Tejo bilgi almadan bozuyorsa sen orada olmayacaksın
+**WHY**: Körün körüne atılan bozma işe yaramaz
 
 ## Tekrarlanan Başarısızlık Ne Anlama Gelir
-**Varsayılan savunma** sürekli Tejo tarafından bozuluyorsa, savunucular tam olarak yeteneklerinin hedeflediği pozisyonlarda tutuyor. Ders kitabı savunmasını ders kitabını cezalandırmak için tasarlanmış bir ajana karşı oynuyorlar. Pozisyonlarını raunddan raunda çeşitlendirmeleri gerekir.
 
-**Tejo** sürekli bozma yapamıyorsa, savunma varsayılan pozisyonlardan ayrılmış ve yetenekleri boş pozisyonlara düşüyor. Savunucuların gerçekte nerede olduğunu hedeflemek için daha iyi raund öncesi okumalar veya anlık bilgi gerekiyor.
+**Savunma sürekli kırılıyorsa**: Her raund aynı yerde duruyorsun. Tejo bunu biliyor, seni oradan atıyor. Raund başında ekibinle konuş — kim nerede duruyor, bu raund değişecek mi? Savunma değişmezse Tejo değişmeden kırar.
+
+**Tejo sürekli bozamıyorsa**: Savunma pozisyon değiştirmiş, bozman boş yerlere düşüyor. Önce bilgi al — savunucunun nerede olduğunu gör — sonra boz. Görmeden atma.
 
 ## AIMLO Ne Demeli
 
-### Oyuncu cezalandırılan taraftayken
-**Varsayılan savunma Tejo tarafından bozuluyorsa**: "Standart pozisyonların tam olarak yeteneklerinin düştüğü yerlerde. Savunmanı karıştır — off-angle'larda tut, yığını döndür, alışılmadık noktalar oyna. Varsayılanın her raund aynıysa, Tejo her raund kırar."
+### Oyuncu cezalandırılan taraftaysa
+**Savunma Tejo tarafından kırılıyorsa**: "Her raund aynı yerde duruyorsun — Tejo tam oraya atıyor. Pozisyonunu değiştir. Standart köşeden bir adım farklı dur, raund raund aynı noktada olma. Tejo'nun bozmasını boş bir yere düşür."
 
-**Tejo bozma yapamıyorsa**: "Yeteneklerin boş noktalara düşüyor çünkü savunma varsayılandan ayrılmış. Önce bilgi araçlarını kullanıp pozisyonları doğrula, sonra boz. Dolu olduğunu umduğun noktalara bozmayı israf etme."
+**Tejo bozamıyorsa**: "Bozman boş yerlere düşüyor çünkü savunma adapte olmuş. Önce bilgi yeteneklerini kullan, savunucunun yerini gör, sonra boz. Görmeden atarsan yeteneğini boşa harcarsın."
 
-### Oyuncu cezalandıran taraftayken
-**Tejo savunmayı kırıyorsa**: "Bozman onları push'tan önce açılarından atıyor. Yeteneklerini sıralayarak tek tek pozisyon kır ve takımınla boşluktan push et."
+### Oyuncu cezalandıran taraftaysa
+**Tejo savunmayı kırıyorsa**: "Savunucuları açılarından atıyorsun — şimdi takımın o boşluktan ilerlesin. Önce birini at, hemen ardından diğerini, sonra takımın içeri girsin. Sırayı kaçırma."
 
-**Varsayılan savunma adapte oluyorsa**: "Onun bozma kalıbını okuyup etrafında konumlanıyorsun. Noktalarını çeşitlendirmeye devam et ve tüm kitini boş açılara harcasın."
+**Savunma adapte oluyorsa**: "Savunma pozisyon değiştiriyor — bilgi almadan bozma. Önce tara, nerede olduklarını gör, sonra at. Boş köşeye yetenek harcama."
 
 ## Rank Modülasyonu
-**LOW**: Savunmalar rastgele, varsayılan değil. Tejo'nun yapılandırılmış hedefleri yok. Tejo'ya standart savunma pozisyonlarını tanımlamayı ve hedeflemeyi öğret.
 
-**MID**: Varsayılanlar tutarlı ve Tejo'nun bozması başarılı ama takım push'uyla koordineli değil. Takım zamanlamasını öğret — boz, sonra savunucular yer değiştirmişken hemen push et.
+**LOW**: Savunmalar zaten rastgele — kimse aynı yerde durmuyor. Tejo'ya önce standart savunma pozisyonlarının ne olduğunu öğret: A'da kim durur, B'de kim durur, hangi köşeler beklenen pozisyon. Hedefini bilmeden bozma yapamazsın.
 
-**HIGH**: Savunmalar Tejo'ya karşı varsayılandan sapmalara başlar. Bilgi-öncelikli bozma öğret: tara, doğrula, sonra yer değiştirt.
+**MID**: Savunma tutarlı ve Tejo bozabiliyor ama takım zamanında ilerlemiyor. Öğret: bozma biter bitmez takım hareket etsin — savunucu yer değiştirmeden önce o boşluğu al.
 
-**ELITE**: Eşleşmede raunddan raunda adaptasyon oyunu belirleyici. Tejo savunmanın adaptasyon kalıbını okuyup yeni pozisyonlarını önceden bozar. Savunma Tejo'nun bozma kalıbını okuyup dışında konumlanır. Meta-seviye okumaları öğret.
+**HIGH**: Savunma Tejo'yu fark etmiş, pozisyon değiştiriyor. Önce bilgi al, sonra boz — bu sırayı asla ters çevirme. Bilgi aldıktan sonra savunucu hareket ederse tekrar tara.
+
+**ELITE**: Her iki taraf da birbirinin kalıbını okuyor. Tejo savunmanın nereye kaydığını bir önceki raunddan tahmin edip oraya bozuyor. Savunma Tejo'nun hangi sıraya göre bozduğunu anlayıp öncesinde pozisyon değiştiriyor. Bu seviyede her raund başında karşı tarafın bir önceki raundda ne yaptığını analiz et — kalıbı görürsen bir adım önde olursun.

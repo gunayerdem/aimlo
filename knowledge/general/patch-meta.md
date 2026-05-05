@@ -1,204 +1,211 @@
-# Patch Meta Analizi -- Radiant Seviye Bilgi Bankası
+# Patch Meta — Radiant Seviye Bilgi Bankası
 
-## Güncel Meta Genel Bakış (Episode 9-10 Dönemi)
+## Güncel Meta Özeti (Episode 9-10)
 
-Valorant meta'si Episode 9 ve 10 boyunca büyük değişimler geçirdi. Çoklu ajan yeniden tasarımları, silah denge geçirleri ve harita havuzu değişiklikleri esnekliği one-trick'ten daha çok ödüllendiren dinamik bir meta oluşturdu.
+Ep9-10 boyunca ajan yeniden tasarımları ve silah değişiklikleri tek-ajan uzmanını cezalandırdı. Esnek havuz tut — 1 main + 2 yedek.
 
 ---
 
-## Ajan Değişiklikleri ve Etkileri
+## Ajan Değişiklikleri
 
 ### Jett
 
-IF Jett main'iysen ve dash nerf'lerinden sonra uyum sağlayamadıysan
-MEANING Tailwind artık anlık reaktif dash değil, zamanlama pencereli aktivasyon -- fight öncesi dash kararı vermeni gerektiriyor
-COUNTER dash'i fight ÖNCESINDE aktive et, agresyona commit edeceksen; reaktif kaçış olarak bekleme
-WHY Jett hala en güçlü Operator ajanı dash kaçışı sayesinde, ama artık zorunlu pick değil
+IF Jett main'sin ve dash nerf'inden sonra kayıplar arttıysa
+MEANING Tailwind artık anlık değil — kavgaya girmeden önce aktive etmen gerekiyor; reaktif kaçış olarak kullanamıyorsun
+COUNTER Operatör alıyorsan peekten önce aktive et; aktive etmeden girme
+WHY Jett Operatör için dash + peek açısı veriyor; Raze ve Chamber ise bu mekaniği taşımıyor — Ascent ve Breeze gibi uzun açı haritalarında Jett, Haven ve Bind'da Raze daha güçlü
 
-- **Pick oranı etkisi**: Pro oyunda yaklaşık %100'den ~%60-70'e düştü.
-- **Güncel durum**: Chamber ve Raze belirli haritalarda rolünün bir kısmını emdi. Takımlar harita bazında Jett veya Raze'i değerlendiriyor.
+- Chamber ve Raze belirli haritalarda Jett'in yerini alıyor. Harita başına hangisini seçeceğini bilmek yeterli.
 
 ### Chamber
 
-IF Chamber oynuyorsan ve eski agresif TP-Op stilini uyguluyorsan
-MEANING TP menzil nerf'i artık site'in öteki ucundan agresif açı tutup TP ile kaçmanın mümkün olmadığını gösteriyor
-COUNTER anchor'larına yakın oyna, dar açıların TP menzilini aşmadığı haritalarda seç (Breeze, Ascent)
-WHY azaltılmış TP menzili Chamber'ı yakın anchor oyununa zorluyor; uzun rotasyon gerektiren haritalarda zayıf
+IF eski agresif TP-Operatör stilini oynuyorsan
+MEANING TP menzili kısaldı — sitenin karşı ucundan açı tutup kaçamıyorsun artık
+COUNTER anchor'larına yakın kal; Breeze ve Ascent gibi TP menzilinin yettiği haritalarda seç
+WHY uzun rotasyon gerektiren haritalarda Chamber zayıf — orada Killjoy daha güvenli
 
-- **Çoklu nerf'ler**: Trademark menzili, Headhunter maliyeti, Tour De Force slow süresi, Rendezvous menzili azaltıldı.
-- **Güncel uygulanabilirlik**: Dar açıların TP menzilini aşmadığı haritalarda güçlü. Uzun rotasyon gerektiren haritalarda zayıf.
+- Trademark menzili, Headhunter maliyeti, Rendezvous menzili hepsi kısaldı. Dar açı haritalarında güçlü, geniş rotasyonlularda değil.
 
 ### Killjoy
 
-IF sentinel seçeceksen ve harita spesifik bir neden yoksa
-MEANING Killjoy turret + alarmbot + nanoswarm ile site'i tek başına tutma kapasitesi rakipsiz
-COUNTER Killjoy'u varsayılan sentinel pick olarak kullan; sadece Cypher spesifik harita avantajı olduğunda (dar chokepoint'ler) alternatif
-WHY Lockdown retake potansiyeli onu neredeyse her haritada zorunlu yapıyor
+IF sentinel seçeceksen ve haritaya özel bir neden yoksa
+MEANING Killjoy turret + alarmbot + nanoswarm kombinasyonu siteyi tek başına tutabilir
+COUNTER varsayılan sentinel olarak KJ al; dar chokepoint haritasında (Ascent A-Main gibi) Cypher'a geç
+WHY Lockdown retake gücü onu neredeyse her haritada birinci seçenek yapıyor
 
 ### Cypher
 
-- **Yeniden tasarım**: Trapwire yerleştirme iyileştirmeleri, Neural Theft (ult) tek snapshot yerine gerçek zamanlı düşman konumları sağlayacak şekilde yeniden tasarlandı.
-- **Güncel durum**: Dar chokepoint'lerin tripwire'lardan kaçınmayı zorlaştırdığı haritalarda güçlü (Ascent A-Main, Bind B-Long). Neural Theft yeniden tasarımı onu geç-round bilgi aracı olarak uygun kıldı.
+IF Killjoy varken Cypher seçip seçmeyeceğini bilmiyorsan
+MEANING Neural Theft yeniden tasarımı artık gerçek zamanlı düşman konumu veriyor — geç round bilgi aracı olarak çok güçlü
+COUNTER Ascent A-Main veya Bind B-Long gibi dar girişlerde Cypher al; açık haritalarda KJ daha iyi
+WHY tripwire'dan kaçınmak zorlu dar koridorlarda Cypher, KJ'den daha fazla basınç yaratıyor
 
 ### Deadlock
 
-- **Çıkış sonrası buff'lar**: Zayıf çıktı, GravNet ve Barrier Mesh'e çoklu buff aldı.
-- **Güncel durum**: Dar koridorlu haritalarda durumsal pick. Killjoy veya Cypher'ın çoğu kompozisyondaki yerini almaz, ama hazırlıksız rakipleri şaşırtabilir.
+IF kompozisyona sentinel lazımsa ve Killjoy/Cypher yoksa
+MEANING GravNet ve Barrier Mesh bufflarıyla dar koridorlu haritalarda işe yarıyor
+COUNTER Killjoy veya Cypher varsa onları al; Deadlock'u Bind veya Fracture'da dene
+WHY KJ/Cypher'ın baktığı haritaların çoğunda Deadlock geride kalır — rakip Deadlock'a alışkın değilse ilk iki roundda sürpriz etkisi yapar, üçüncüde okur ve konumlanır
 
 ### Iso
 
-IF çift-duelist kompozisyonu düşünüyorsan
-MEANING Iso'nun kalkanı düellolarda avantaj sağlar, duvarı benzersiz site-entry utility'si sunar
-COUNTER Iso'yu çift-duelist kompozisyonlarının güçlü olduğu haritalarda seç (Pearl, Lotus)
-WHY birincil duelist yerine geçmez ama güçlü flex pick'tir
+IF çift duelist düşünüyorsan
+MEANING Iso'nun kalkanı düellolarda tek atışa karşı koruma sağlar, duvarı site girişinde farklı açı yaratır
+COUNTER Pearl ve Lotus'ta çift duelist işe yarıyor — orada dene
+WHY birincil duelist'in yerini almaz; ikinci duelist olarak o haritalarda güçlü flex seçenek
 
 ### Clove
 
-- **Meta etkisi**: Controller rolüne özel diriliş mekaniği getirdi. Ölümden sonra smoke'ları devam eder.
-- **Güncel durum**: Agresif controller oyununun uygun olduğu haritalarda Omen'e rekabetçi alternatif. Self-rez güçlü ama durumsal.
+IF Omen oynuyorsan ve agresif controller rolü istiyorsan
+MEANING Clove öldükten sonra smokeları devam ediyor — takımın smoke'suz kalmıyor
+COUNTER Omen yerine Clove'u agresif peek'e dayalı haritalarda dene
+WHY Omen pasif smoke rotasyonu olan haritalarda daha güçlü; Bind ve Lotus gibi baskı haritalarında Clove üstün
 
 ### Vyse
 
-- **En yeni sentinel**: Çelik tabanlı yeteneklerle benzersiz mekanikler. Shear (duvar) ve Arc Rose (tuzak) farklı site-hold pattern'leri sağlar.
-- **Güncel durum**: Profesyonel oyunda deneme aşamasında. Bölge inkarının kompozisyonu Killjoy'un bilgi tabanlı savunmasından daha iyi tamamladığı harita-spesifik pick olarak oturabilir.
+IF Killjoy veya Cypher'dan farklı bir sentinel denemek istiyorsan
+MEANING Shear duvarı ve Arc Rose, alan reddi üzerine kurulu — bilgi değil bölge kapama sentineli
+COUNTER Killjoy'un bilgi oyununun yetersiz kaldığı dar retake haritalarında dene; önce Killjoy'la o haritadaki setup'ları tüket, sonra Vyse'a geç
+WHY Killjoy kurulumlarını bilmeden Vyse oynarsan hem yeni ajanı bilmiyor hem savunma kurmayı bilmiyor olursun
 
-### Initiator Meta'si
+### Initiator Seçimi
 
-- **Sova**: Büyük, açık haritalarda hala güçlü (Ascent, Breeze). Dar haritalarda zayıf.
-- **Fade**: Çoğu haritada varsayılan initiator. Prowler bilgi, Seize alan inkar, Nightfall retake. Son derece çok yönlü.
-- **Skye**: Flash-yoğun kompozisyonlarda güçlü. Trailblazer bilgi ve sersemletme sağlar.
-- **Breach**: Agresyon initiator'u. Dar haritalarda en güçlü (Fracture, Lotus) -- flash ve stun duvarlardan geçer.
-- **KAY/O**: Counter-utility initiator. Knife (ZERO/POINT) bir alandaki yetenekleri bastırır. Her haritada güçlü ama hiçbirinde en iyi değil.
-- **Gekko**: Spike plant/defuse yapabilen flash (Wingman), alan inkar için Mosh Pit. Yaratıcı stratejiler mümkün kılar.
+IF harita başına initiator seçiyorsan şu eşleşmelere bak:
 
----
-
-## Silah Denge Değişiklikleri
-
-### Tüfek Meta'si
-
-IF Vandal mı Phantom mı seçmekte kararsızsan
-MEANING Vandal her mesafede 156 headshot (tek vuruş potansiyeli), Phantom daha yüksek atış hızı, kolay spray ve izleyici yok (smoke spray)
-COUNTER hassas aim'e güveniyorsan Vandal; spray transfer ve smoke spray yapıyorsan Phantom
-WHY pro oyunda yaklaşık %55 Phantom / %45 Vandal -- Phantom'ın tutarlılığı Vandal'ın tek vuruş potansiyelini en üst seviyede geride bırakıyor
-
-### SMG Dengesi
-
-- **Spectre**: Baskın eco/force buy silahı. Yakın mesafede run-and-gun accuracy'si öldürücü.
-- **Stinger**: Daha ucuz ama daha az hassas. Oyuncu başına birkaç yüz kredi tasarruf gerektiğinde seçilebilir.
-
-### Operator Ekonomisi
-
-Operator 4,700 kredi ile büyük ekonomik yatırım. Takımlar çoğunlukla round başına maksimum bir Operator alır, Jett veya Chamber oyuncusuna verilir. Her mesafede tek atış gövde kill'i onu oyundaki en güçlü silah yapar, ama kaybetmenin ekonomik riski alımları muhafazakar tutar.
+- **Fade**: Çoğu haritada varsayılan. Prowler bilgi, Seize alan reddi, Nightfall retake — üç iş birden.
+- **Sova**: Ascent ve Breeze gibi açık haritalarda güçlü; dar haritalarda dart atılacak yer yok.
+- **Breach**: Fracture ve Lotus'ta duvarlardan geçen flash ve stun — dar haritada en iyi.
+- **KAY/O**: ZERO/POINT bıçağı bir alandaki yetenekleri kapıyor — her haritada işe yarar, ama hiçbirinde birinci değil.
+- **Skye**: Flash ağırlıklı kompozisyonlarda al; Trailblazer hem bilgi hem sersemletme veriyor.
+- **Gekko**: Wingman spike plant/defuse yapıyor — yaratıcı giriş stratejileri için.
 
 ---
 
-## Harita Havuzu ve Meta Etkisi
+## Silah Seçimi
 
-### Harita Özellikleri
+### Vandal mı, Phantom mı?
 
-- **Saldırgan taraflı haritalar** (Lotus, Pearl, Fracture): Saldırganlara çoklu yol sağlar, savunucu rotasyonlarını zorlaştırır.
-- **Savunucu taraflı haritalar** (Ascent, Split, Bind): Dar choke point'ler savunucuyu kayırır. Saldırganlara güçlü utility gerekir.
-- **Dengeli haritalar** (Haven, Icebox, Sunset): Büyük örneklemde yaklaşık 50/50. Adaptasyonu ödüllendirir.
+IF iki silah arasında kararsızsan
+MEANING Vandal her mesafede tek kafa vurursa bitirir; Phantom daha hızlı ateşler, smoke içinde izleyici yok
+COUNTER kafa vuruşuna güveniyorsan Vandal al; smoke içi çatışma ve spray transferi yapıyorsan Phantom
+WHY geniş açı haritasında Vandal, smoke yoğun haritada Phantom — haritaya göre değiştir
 
-IF yeni harita havuza girerse
-MEANING meta 2-3 hafta boyunca kararsız olur, takımlar kompozisyon ve strateji dener
-COUNTER yeni haritada güçlü kompozisyonları erken bulan takımlar belirgin avantaj kazanır
-WHY erken adapte olan meta'yı şekillendirir; bekleyen takip eder
+### Spectre / Stinger
 
----
+- **Spectre**: Ekonomi veya zorla alım roundlarında yakın mesafede öldürücü. Hareket ederken doğruluk kaybı az.
+- **Stinger**: Spectre'dan ucuz; para çok kısıtlıysa al, ama uzak açıda yetersiz.
 
-## Harita Bazlı En Güçlü Kompozisyonlar
+### Operatör Ekonomisi
 
-### Ascent
-- Jett, Sova, KAY/O, Omen, Killjoy
-- **Sebep**: Mid kontrol anahtar. Sova recon mid ve site'ları kapsar. KAY/O knife savunucu utility'sini bastırır.
-
-### Bind
-- Raze, Skye, Brimstone, Fade, Cypher
-- **Sebep**: Mid yok, rotasyonlar teleporter'lardan geçiyor. Raze satchel'ları agresif site take mümkün kılar. Cypher trip'leri teleporter flank'larını izler.
-
-### Haven
-- Jett, Breach, Omen, Killjoy, Sova/Fade
-- **Sebep**: Üç site savunucuları ince yayar. Breach duvarlardan agresif peek'ler mümkün kılar.
-
-### Lotus
-- Raze, Fade, Omen, Killjoy, Breach/KAY/O
-- **Sebep**: Döner kapılar ve yıkılabilir duvarlar benzersiz dinamikler oluşturur. Raze patlayıcıları duvarları açar.
+IF Operatör alacaksan
+MEANING 4.700 kredi — takım başına bir tane alınıyor, duelist veya sentinel'e veriliyor
+COUNTER Operatörü önceki roundda kaybettiysen veya ekonomin 3.000 kreditin altındaysa alma — alıyorsan çıkış açını önceden belirle
+WHY tek atış gövde hasarı oyunun en güçlü silahı ama kaybın maliyeti çok yüksek
 
 ---
 
-## Yükselen ve Düşen Ajan Pick'leri
+## Harita Havuzu
+
+### Harita Karakterleri
+
+- **Saldırgan ağırlıklı** (Lotus, Pearl, Fracture): Çoklu yol var, savunucu rotasyonu zor. Saldırgan tarafta daha agresif oyna.
+- **Savunucu ağırlıklı** (Ascent, Split, Bind): Dar girişler savunucuyu kayırıyor. Saldırırken güçlü utility gerekiyor.
+- **Dengeli** (Haven, Icebox, Sunset): İki taraf da işe yarar — karşı tarafın hamlelerini oku ve buna göre değiştir.
+
+IF havuza yeni harita girdiyse
+MEANING ilk haftalarda ne sen ne rakibin doğru kompozisyonu bilmiyor
+COUNTER ilk 5 maçta o haritada agresif duelist + varsayılan sentinel (Killjoy) dene; sonra zayıf noktayı belirle ve initiator veya controller'ı değiştir
+WHY sen erken başlarsan kendi zayıf açılarını test edip düzeltme fırsatı yakalarsın; sen geride kalırsan bunu kaçırırsın
+
+### Harita Başına Güçlü Kompozisyonlar
+
+**Ascent**
+Jett, Sova, KAY/O, Omen, Killjoy
+Mid kontrol her şey. Sova dart'ı mid ve siteleri tarar. KAY/O bıçağı savunucu setini kapatıyor.
+
+**Bind**
+Raze, Skye, Brimstone, Fade, Cypher
+Mid yok — rotasyonlar teleporterdan geçiyor. Cypher trip'leri teleporter flank'ı yakalarken Raze satchel girişi hızlandırıyor.
+
+**Haven**
+Jett, Breach, Omen, Killjoy, Sova veya Fade
+Üç site savunucuları ince yayıyor. Breach duvarlardan agresif peek açıyor — dar girişte bunu kullan.
+
+**Lotus**
+Raze, Fade, Omen, Killjoy, Breach veya KAY/O
+Döner kapılar ve yıkılabilir duvarlar ekstra yol açıyor. Raze patlayıcıları duvar kırıyor, Breach flash duvardan geçiyor.
+
+---
+
+## Yükselen ve Düşen Ajanlar
 
 ### Yükselen
 
-- **Cypher**: Neural Theft yeniden tasarımı gerçek zamanlı düşman konum verisi sağlıyor. Trapwire iyileştirmeleri tutarlılığı artırdı.
-- **Gekko**: Wingman'ın spike plant/defuse yeteneğine sahip olması benzersiz stratejiler açıyor.
-- **Clove**: Controller'da self-resurrect benzersiz. Ölümden sonra smoke'lar takımı asla controller utility'siz bırakmaz.
-- **Harbor**: Cove (kalkan kubbe) güvenli plant ve defuse mümkün kılar. Duvarı oyundaki en uzun süreli yönlü smoke.
+- **Cypher**: Neural Theft artık gerçek zamanlı konum veriyor — geç round 1v1 veya retake kararında rakip nerede biliyorsun.
+- **Gekko**: Wingman spike plant/defuse yapıyor. Clutch roundlarda Wingman'ı göndermek site'ı ikinci kez temizleme yükünü azaltıyor.
+- **Clove**: Öldükten sonra smoke devam ediyor — takım hiç smoke'suz kalmıyor. Bind ve Lotus gibi agresif haritalarda Omen'den değerli.
+- **Harbor**: Cove güvenli plant/defuse kapsamı sağlıyor. Duvarı oyunun en uzun süreli yönlü smokesi.
 
 ### Düşen
 
-IF Reyna veya Phoenix oynuyorsan pro oyunda
-MEANING Reyna'nın kit'i tamamen bencil (heal, dismiss, ult) -- sıfır takım utility'si sağlar. Phoenix'in kit'i daha yeni ajanlar tarafından güç kaymasına uğradı.
-COUNTER takım utility'si sağlayan bir alternatife geç -- bireysel snowball potansiyeli pro seviyede yeterli değil
-WHY utility round sonuçlarını belirlediği pro seviyede, Reyna/Phoenix seçmek çok fazla takım değerinden fedakarlık eder
+IF Reyna veya Phoenix oynuyorsan ve çıkmak istiyorsan
+MEANING Reyna'nın sıfır takım faydası var — heal ve dismiss tamamen kendine dönük. Phoenix'in kiti yeni ajanlar çıkınca güç kaybetti
+COUNTER takım faydası olan bir ajana geç — Skye, Fade veya Killjoy'a bak
+WHY utility roundu belirliyor; sen utility vermiyorsan takımını 4v5 oynatıyorsun
 
-- **Astra**: Yıldızlardaki geri çağırma zamanlayıcısı hızlı tempolu oyunlara karşı onu daha az duyarlı kılar.
-- **Yoru**: Kit'i güçlü ama son derece takım-bağımlı ve mekanik olarak zorlaştırıcı. Pick oranı özel Yoru oyuncusu olan takımlara göre dalgalanır.
+- **Astra**: Yıldız geri çağırma gecikmesi hızlı tempoya ayak uyduramıyor.
+- **Yoru**: TP, klon ve flash ancak takım fake'i okuyup hemen siteye girerse işe yarar. Takımın Yoru setup'larını bildiği maçlarda al; bilmiyorsa Yoru'nun fake'leri boşa gider ve 4v5 oynuyorsun.
 
 ---
 
-## Main'in Nerf Yediğinde Adaptasyon
+## Mainin Nerf Yediğinde Ne Yaparsın
 
-### Adım 1: Şiddeti Değerlendir
+### Şiddeti Ölç
 
-IF hafif nerf geldiyse (sayı ayarı)
-MEANING ajanın hala uygulanabilir -- oyun stilini yeni sayılara uyarla ama değiştirme
-COUNTER aynı ajana devam et, yeni mekanik değerleri öğren
-WHY hafif nerf ajan değiştirmeyi gerektirmez
+IF sayı değişikliği geldiyse (hasar, süre, menzil)
+MEANING ajan çalışıyor ama farklı sayılarla — aynı kararlarda yeni değerleri hesaba kat
+COUNTER aynı ajana devam et, yeni sayıları ilk maçlarda hisset
+WHY sayı değişikliği ajan değiştirmeyi gerektirmiyor
 
-IF orta nerf geldiyse (yetenek yeniden tasarımı)
-MEANING ajanın farklı çalışıyor -- yetenek zamanlamaları ve kullanımını yeniden öğrenmek gerek
-COUNTER custom oyunlarda zaman geçir, yeni yetenek zamanlamalarını pratik et
-WHY yeniden tasarım eski kas hafızasını geçersiz kılar
+IF yetenek yeniden tasarımı geldiyse
+MEANING eski kas hafızan geçersiz — zamanlamalar değişti, yerleştirme değişti
+COUNTER custom oyunda yeni zamanlamaları çalış; sonra ranked'e dön
+WHY eski alışkanlıkla yeni tasarım oynamak seni iki kez cezalandırıyor
 
-IF ağır nerf geldiyse (temel değişiklik)
-MEANING ajanın önceki rolünde artık uygulanabilir olmayabilir
-COUNTER geçiş planla: aktarılabilir becerileri belirle, yeni ajanda 10-15 unrated oyun oyna, harita başına 3-5 temel lineup/setup öğren
-WHY ajan ustalığı zaman alır ama beceriler aktarılır
+IF temel mekanik değişikliği geldiyse
+MEANING ajan eski rolünde artık işe yaramıyor
+COUNTER taşıyabileceğin becerileri bul, yeni ajanda 10-15 maç oyna, o ajan için 3-5 temel setup öğren
+WHY açı okuma, util zamanlaması, site alım kararı — bunlar ajanla değişmiyor; mekaniği taşı
 
 ### Beceri Aktarımı
 
-| Eski Ajan | Aktarım Hedefleri | Neden |
+| Eski Ajan | Geç Buraya | Neden |
 |---|---|---|
-| Jett | Raze, Neon, Chamber | Benzer entry/Op odaklı roller |
-| Killjoy | Cypher, Deadlock, Sage | Benzer sentinel/bilgi kit'i |
-| Chamber | Jett (Op odaklı), Killjoy (sentinel) | Op veya sentinel mekanikleri aktarılır |
+| Jett | Raze, Neon, Chamber | Aynı giriş / Operatör odaklı rol |
+| Killjoy | Cypher, Deadlock, Sage | Benzer sentinel / bilgi kiti |
+| Chamber | Jett (Operatör), Killjoy (sentinel) | Operatör veya sentinel mekaniği geçiyor |
 
 ---
 
-## Ranked İçin Meta Okuma
+## Rank Başına Meta Okuma
 
-### Rank Modülasyonu
+### Immortal ve Üzeri
 
-#### Immortal+ İçin
+IF rank'ında işe yarayan kompozisyonları bulduysan
+MEANING bu elo'da takım arkadaşların execution biliyor — koordineli setup'lar çalışıyor
+COUNTER kompozisyonu direkt uyarla, çünkü takımın aynı setup'ı çalışıyor
+WHY takım arkadaşların execution bildiği için karmaşık setup'ların çalışma koşulu bu elo'da karşılanıyor
 
-IF pro meta'yı takip ediyorsan
-MEANING pro meta ranked'e 2-3 hafta içinde yansır
-COUNTER pro kompozisyonları doğrudan uyarla, ajan pick oranlarını takip et
-WHY bu seviyede koordineli execution mümkün, pro setup'ları çalışır
+### Diamond / Ascendant
 
-#### Diamond-Ascendant İçin
+IF rank'ında işe yaramayan kompozisyonları kopyalıyorsan
+MEANING o setup koordinasyon gerektiriyor — solo queue'da takım o setup'ı bilmiyor
+COUNTER prensibi al, karmaşıklığı bırak: Killjoy veya Sage gibi self-sufficient ajanlarla aynı kararları uygula — Reyna veya Jett'le taşıma yapma
+WHY bu elo'da karar kalitesi rankı belirliyor, setup bilgisi değil
 
-IF pro kompozisyonları birebir kopyalamaya çalışıyorsan
-MEANING pro kompozisyonlar koordineli execution gerektirir, solo queue'da karmaşık pro setup'ları çalıştıramayabilirsin
-COUNTER basitleştir: self-sufficient ajanlarla (Reyna, Sage, Killjoy) pro prensiplerini uygula
-WHY konforsuz meta pick yerine iyi oynanan konfor pick her zaman üstündür
+### Gold / Platinum
 
-#### Gold-Platinum İçin
-
-IF meta'yı takip etmeye çalışıyorsan
-MEANING bu elo'da mekanik gelişim meta bilgisinden daha fazla fark yaratır
-COUNTER 2-3 ajan havuzu oluştur, bunları derinlemesine öğren, meta yerine temel becerilere odaklan
-WHY 500 saat Phoenix deneyimi 10 saat Fade deneyiminden her zaman üstündür, meta ne derse desin
+IF metayı takip edip meta ajana geçmeyi düşünüyorsan
+MEANING bu elo'da ajanı tanımak karar doğruluğunu artırıyor; az oynadığın ajanda doğru kararı verme hızın düşüyor
+COUNTER 2-3 ajanlık havuz kur, onları derinlemesine öğren
+WHY az oynadığın Fade'le doğru kararı geç veriyorsun; çok oynadığın Phoenix'le erken veriyorsun — ajanı tanımak farkı buradan geliyor

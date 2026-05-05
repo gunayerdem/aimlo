@@ -11,113 +11,113 @@ tags: [matchup, jett, deadlock, duelist, sentinel]
 
 ## 1. Matchup Özü
 
-Jett dash'iyle Deadlock'un sonic sensor + barrier mesh + gravnet üçlüsünü delmeye çalışan mobilite, Deadlock ise Jett'in ses tabanlı entry'sini sensor ile önceden yakalamaya çalışan bilgi sentineli. Matchup Jett'in sessiz approach disiplinini ve Deadlock'un sensor yerleşim varyasyonunu test eder.
+Deadlock seni durdurmaya çalışmıyor — seni yavaşlatmaya çalışıyor. Sensor ses hattını okursa entry anını biliyor. Gravnet attıysa dash'in çalışmıyor. Barrier koyduğu yoldan giremiyorsun. Sensor hattını öğren, shift walk ile geç, gravnet hattından saparak gir.
 
 ## 2. Kim Avantajlı?
 
-**Jett lehine durumlar:**
-- Long sightline site'larda (Icebox Mid, Breeze A, Haven C Long) — Deadlock utility close range odaklı, uzun açılarda sensor + barrier etkisizleşir
-- Deadlock ulu cooldown'dayken — Annihilation olmadan Deadlock retake gücünü kaybeder, Jett post-plant off-angle hold ile round çevirir
-- Vertical entry map'lerde (Split A Main, Icebox Rafters) — updraft sonic sensor'u ses hassasiyeti olan hatlarda bypass eder, Deadlock trap'leri zemin seviyesinde etkin
-- Jett sessiz yürüyüş yapıyor (shift walk) — Sensor ses eşiği ile aktive olur, shift walk sensor'u tetiklemez
+**Jett avantajlı:**
+- Uzun açılarda (Icebox Mid, Breeze A, Haven C Long) — sensor ve barrier kısa mesafede işe yarıyor, uzakta değil
+- Deadlock ultsuz dönemde — Annihilation yoksa retake gücü yok, sen post-plant off-angle tut
+- Updraft ile üst hata girişlerde (Split A Main, Icebox Rafters) — sensor zeminde güçlü, yukarıda zayıf
+- Shift walk yapıyorsan — sensor ses ile tetikleniyor, shift walk onu geçiyor
 
-**Deadlock lehine durumlar:**
-- Close-range site'larda (Bind Hookah, Sunset A, Fracture B) — barrier mesh dar koridoru kapar, gravnet Jett'in dash'ini iptal eder (gravnet içinde dash komutu çalışmaz)
-- Jett dash cooldown'dayken — Deadlock barrier ile Jett'in kaçış rotasını keser, Jett dashsiz dar alanda ölür
-- Post-plant Annihilation ult durumunda — ult Jett'in pozisyonunu site'tan alır, dash Annihilation cocoon'dan kurtulamaz
-- Jett ses çıkararak approach ediyor — sensor stun + debuff Jett'in dash yeteneğini ses menzilinde kırar
+**Deadlock avantajlı:**
+- Dar koridorlarda (Bind Hookah, Sunset A, Fracture B) — barrier yolu kapatıyor, gravnet dash'i iptal ediyor
+- Dash cooldown'dayken — dash yoksa dar alanda çıkış yok, Deadlock barrier ile yolu kesiyor
+- Annihilation aktifken post-plant'ta — cocoon'a girersen dash seni kurtarmıyor
+- Sesli yaklaşıyorsan — sensor stun + debuff atar, entry öncesi pozisyonun açığa çıkar
 
-**Balanced:** Ascent, Haven, Lotus gibi orta mesafeli map'lerde matchup yerleşim okumasına bağlı. Deadlock'un sensor hattı okunduysa Jett bypass eder, Jett'in dash hattı okunduysa Deadlock barrier + gravnet kombosuyla keser.
+**Haritaya göre değişiyor:** Ascent, Haven, Lotus gibi orta mesafe haritalarda hangisinin sensor hattını daha erken okuduğu belirliyor. Sen sensor yerini ilk turda öğren, ikinci turdan bypass et. Deadlock da dash hattını okursa barrier + gravnet kombosunu oraya kuruyor.
 
 ## 3. Key Düellolar
 
-**IF** Jett round açılışında default ses çıkararak dash attı, Deadlock sensor hattında
-**MEANING** Sensor aktive oldu, Jett stun + concussed debuff, dash cooldown'da başlamadı ama aim etkilenir
-**COUNTER** Jett round açılışında shift walk ile sensor hattını geç, dash'i sensor eşiğinden sonra aç. Sensor konumu round 1'de öğrenilir, round 2'den sonra bypass edilir.
-**WHY** Deadlock sensor'u Jett'in tek savunmasız anını bulur — dash ses yapar, ses sensor'u tetikler, debuff sonrası düşman takım Jett'i bilir ve cover alır.
+**IF** Sesle giriş yaptın, Deadlock sensor hattındaydı
+**MEANING** Sensor aktive oldu — stun + debuff aldın, takım senin yerini biliyor
+**COUNTER** Sensor hattını shift walk ile geç. İlk turda sensor nerede olduğunu işaretle — ikinci turdan o hattan geçme ya da shift walk ile gir
+**WHY** Dash ses çıkarıyor, ses sensoru tetikliyor, debuff sonrası arkadaki düşman cover alıyor. Tek savunmasız anın bu.
 
 ---
 
-**IF** Jett dash ile site'a girdi, Deadlock gravnet attı
-**MEANING** Gravnet içindeki Jett yavaşlar, dash komutu gravnet süresi boyunca iptal, trade partner olmadan Jett hedefte
-**COUNTER** Jett dash hattını gravnet lineup hattından uzakta seç. Gravnet attılınca Jett dash yerine geri çekilme utility'si bekler — flash ya da smoke.
-**WHY** Gravnet Jett'in core mobility'sini etkisizleştiren tek sentinel utility'si. Gravnet'e yakalanan Jett sıradan statik hedef, dash değerini bir an için kaybeder.
+**IF** Dash attın, Deadlock gravnet attı
+**MEANING** Gravnet içinde dash komutu çalışmıyor — yavaşlıyorsun, trade partnerin yoksa hedefsin
+**COUNTER** Dash hattını gravnet gelecek yerden uzak seç. Gravnet atıldıysa dash bekleme — önce flash ya da smoke bekle, sonra çık
+**WHY** Gravnet Deadlock'un tek dash-iptal utility'si. İçine girersen dash komutu yanıt vermiyor, yerinde kalıyorsun.
 
 ---
 
-**IF** Jett updraft attı, Deadlock sonic sensor'u üst katta
-**MEANING** Sensor üst iniş noktasında aktif, updraft ses + iniş sesi sensor'u tetikler
-**COUNTER** Sensor lokasyonunu round 1'de işaretle, updraft noktasını sensor hattından uzakta seç. Sensor silmek için Sova dart ya da teammate rifle shot kullan.
-**WHY** Deadlock sensor'u Jett'in vertical kaçışını da kapsar — ground odaklı değildir. Updraft surprise value ancak sensor yoksa vardır.
+**IF** Updraft attın, Deadlock sensor'u üst noktada
+**MEANING** Updraft sesi + iniş sesi sensoru tetikliyor — üstten giriş değeri kayboluyor
+**COUNTER** İlk turda sensor yukarıda mı işaretle. Updraft noktasını sensor hattından uzak seç. Sensoru temizlemek için Sova dart ya da takım kuru ateşi kullan
+**WHY** Deadlock sensoru sadece zemini değil yukarıyı da kapsıyor. Updraft'ın değeri sensor yoksa var.
 
 ---
 
-**IF** Deadlock Annihilation ultunu post-plant retake için kullandı, Jett dash hazır
-**MEANING** Annihilation cocoon'a yakalanan oyuncu dash ile çıkamaz (cocoon yakalanan anda hareket iptal eder)
-**COUNTER** Jett Annihilation beam görüş hattı dışında pozisyonda kalsın. Beam duyulduğu an Jett updraft ile vertical kaçış (Annihilation beam dikey alanı kapsayabilir ama yatay izlemesi yavaştır).
-**WHY** Annihilation cocoon kesin ölüm, dash bile çıkış değildir. Jett'in tek çaresi beam'in görüş hattına girmemek — pozisyonlama ult öncesi karardır, sonrası değil.
+**IF** Deadlock Annihilation'ı post-plant retake için attı, dash hazır
+**MEANING** Cocoon'a girersen dash seni çıkarmıyor — yakalandığın an hareket iptal
+**COUNTER** Beam görüş hattının dışında dur. Beam sesini duyduğunda updraft ile dikey kaç — beam yatayda yavaş izliyor
+**WHY** Cocoon kesin ölüm. Dash çıkış değil. Karar beam gelmeden önce — pozisyonun beam öncesi doğru olmalı.
 
 ---
 
-**IF** Deadlock barrier mesh'i A Main choke'a kurdu, Jett entry duelist
-**MEANING** Barrier Jett'in dash yönünü keser, dash mesh'i aşmaz, Jett ikinci yol aramak zorunda
-**COUNTER** Jett barrier'ı utility ile sök (Sova shock dart, Raze nade, Breach fault line). Barrier sökülene kadar Jett alternatif giriş (vertical ya da ikinci koridor).
-**WHY** Barrier mesh Jett'in tek yönlü space maker kimliğini teste sokar — Jett iki yön açık olmadığında değer kaybeder. Barrier'ı kırmak takım işi, Jett tek başına kıramaz.
+**IF** Deadlock barrier'ı A Main girişine kurdu, sen entry duelisti
+**MEANING** Dash barrier'ı aşmıyor — tek yönlü giriş kapandı, ikinci yol lazım
+**COUNTER** Barrier'ı önce kır: Sova shock dart, Raze nade, ya da Breach fault line. Barrier sökülene kadar alternatif girişten gir
+**WHY** Barrier tek yönlü girişte Jett'in değerini sıfırlıyor. Kırmak takım işi — tek başına kıramazsın.
 
 ---
 
-**IF** Jett C Long'da Op hold ediyor, Deadlock sensor'u C Cubby'e kurdu
-**MEANING** Sensor Jett'in rotate hattını yakalar, Deadlock tarafı Jett'in Op pozisyonunu bilir, rotate etmeye çalışan Jett debuff yer
-**COUNTER** Jett rotate hattını sensor dışı yoldan seç. Rotate öncesi sensor lokasyonunu takım utility ile temizle ya da sessiz yürüyüşle geç.
-**WHY** Op holder Jett'in değeri rotate hareketinde. Sensor Jett'in rotate bilgisini Deadlock takımına verir — Op pozisyonu öngörülür, reposition gücü gider.
+**IF** C Long'da Op tutuyorsun, Deadlock sensor'u C Cubby'e kurdu
+**MEANING** Sensor rotate hattını kapsıyor — rotate etmeye kalkarsan debuff alıyorsun, Deadlock tarafı pozisyonunu biliyor
+**COUNTER** Rotate için sensor dışı yol seç. Rotate öncesi sensor'u takım utility'siyle temizle ya da shift walk ile geç
+**WHY** Op holder olarak değerin rotasyonda. Sensor rotasyonunu Deadlock'a söylüyor — Op pozisyonun tahmin ediliyor, yeniden konumlanma gücün gidiyor.
 
 ---
 
-**IF** Jett ve Deadlock aynı anda ult attı (Blade Storm vs Annihilation)
-**MEANING** İki ult aynı site'ta patlarsa Annihilation beam Jett'i yakalayabilir, Blade Storm right-click burst ancak close range lethal
-**COUNTER** Jett Blade Storm'u Annihilation beam'inin kapsamadığı corridor'da kullanmalı. Annihilation radyal beam olduğu için corner'da Jett beam'den saklanabilir.
-**WHY** Annihilation tracking ult, Blade Storm aim ult. Tracking ult corner'da etkisiz, burst ult tracking'i yenmek zorunda değil — saklanma yeterli.
+**IF** Blade Storm ve Annihilation aynı anda açıldı
+**MEANING** Annihilation beam seni yakalayabilir, Blade Storm sağ tık ancak yakında öldürücü
+**COUNTER** Blade Storm'u Annihilation beam'in kapsamadığı köşede kullan. Beam'in köşe takibi yavaş — köşeye çekil, beam geçtikten sonra çık
+**WHY** Annihilation takip ultı, Blade Storm nişan ultı. Takip ultı köşede etkisiz — saklanman yeterli, beam'i yenmen gerekmiyor.
 
 ## 4. Utility Takası
 
-Jett utility ekonomisi dash + updraft + 3 smoke, Deadlock utility ekonomisi sonic sensor + barrier mesh + gravnet + ult. Sayısal olarak Deadlock dengeli, ama Deadlock'un utility'si defensive yönelimli — aktif space kazanmaz, space reddeder. Jett utility'si aktif space yaratır. Bu yüzden attack round'unda Jett avantajlı (Deadlock defensive utility attack'ta sınırlı), defense round'unda Deadlock avantajlı (Jett attack utility'si Deadlock'un lockdown'una girerken eskir). Matchup asimetrik — taraf değişikliği dengeyi çevirir. Jett'in dash'i Deadlock'un barrier'ıyla değiş tokuş edilemez, farklı amaca hizmet eder.
+Deadlock'un utility'si seni öldürmek için değil, yavaşlatmak için. Sensor durdurur, barrier yönlendirir, gravnet sabitler. Attack'ta Deadlock utility'si savunmaya kuruluyor — seni o kanallardan geçirmemek için zaman kazanmaya çalışıyor. Defense'te kurulum tamamlandığında o kanallardan geçmek için takım yardımı istiyorsun.
 
-## 5. Map Bazlı Değişim
+Attack'ta sensor yerini öğrenmeden site girişi yapma. Defense'te Deadlock sensor yerleşmeden rotate et — sensor oturduğunda bypass etmek daha pahalıya geliyor.
 
-**Icebox (Jett avantajlı):** Uzun sightline ve vertical mobility Jett'in alanı. Deadlock sensor'u Rafters'ta etkisiz, barrier B Main dışında dar choke bulamaz.
+## 5. Harita Bazlı Değişim
 
-**Split (Balanced):** Split dar koridorları Deadlock'a yarar ama vertical giriş (vent) Jett'e yarar. Matchup yerleşime bağlı.
+**Icebox (Jett avantajlı):** Uzun hatlar ve Rafters girişi senin. Deadlock sensor'u Rafters'ta zayıf, barrier B Main dışında dar choke bulamıyor.
 
-**Bind (Deadlock avantajlı):** Hookah + Showers Deadlock'un setup map'i. Barrier teleporter önünde çift yönlü lock kurar.
+**Split (Dengeli):** Dar koridorlar Deadlock'a yarıyor ama vent girişi sana yarıyor. Sensor hattını oku, vent'ten gir.
 
-**Sunset (Deadlock hafif avantajlı):** Sunset dar choke'lar ve close range, Deadlock gravnet + barrier kombosu Jett'i A Main'de kilitler.
+**Bind (Deadlock avantajlı):** Hookah ve Showers Deadlock'un alanı. Barrier teleporter önünü kapatıyor. Teleporter geçişini utility'siz deneme.
 
-**Haven (Jett avantajlı):** C Long Op hold Jett'in gücü, Deadlock Haven'da B anchor olarak kullanılır ama Garage üzerinden Jett rotate ile bypass edilir.
+**Sunset (Deadlock hafif avantajlı):** Dar girişler ve yakın çatışma. Gravnet + barrier A Main'i kilitliyor. Alternatif giriş ara.
 
-**Breeze (Jett avantajlı):** Breeze'in geniş alanları Deadlock'un close range utility'sini eskiterek bitirir.
+**Haven (Jett avantajlı):** C Long Op tutmak senin gücün. Deadlock B'de anchor oluyor — Garage üzerinden rotate yap, sensor kapsamı dışında kalırsın.
 
-**Fracture (Deadlock avantajlı):** Multi-entry yapısı Jett'in tek yönlü space maker kimliğini zorlar, Deadlock'un barrier hattı Fracture koridorlarına oturur.
+**Breeze (Jett avantajlı):** Geniş alan Deadlock'un yakın utility'sini işlevsiz kılıyor. Uzakta tut, sensor menzili dışında oyna.
 
-## 6. Flip Moment'ler
+**Fracture (Deadlock avantajlı):** Çok yönlü giriş seni zorluyor. Deadlock barrier koridorlara oturuyor. Tek yönlü entry yapmadan önce barrier'ı temizle.
 
-**Flip 1 — Sensor ses eşiği:** Jett shift walk yapmazsa sensor Jett'in entry hattını önceden yakalar. Shift walk disiplinsizliği matchup'ı anında Deadlock'a çevirir.
+## 6. Flip Anlar
 
-**Flip 2 — Gravnet yakalaması:** Jett gravnet'e yakalanırsa dash değersiz — trade penceresi Deadlock'un lehine. Bu flip'ten çıkış yok, dash cooldown sonrası reposition dahi zordur.
+**Flip 1 — Sensor ses eşiği:** Shift walk yapmayı bıraktığın an sensor entry hattını öğreniyor. Shift walk disiplinini tek bir turda bıraksan bile o turda açığa çıkıyorsun.
 
-**Flip 3 — Barrier mesh sökülmesi:** Takım utility'si barrier'ı kırdığı an Deadlock'un map lock'u çözülür. Jett bu pencerede aggressive entry alabilir.
+**Flip 2 — Gravnet yakalanması:** Gravnet yediysen dash yanıt vermiyor. Bu flipten anlık çıkış yok — dash cooldown sonrası bile dar alanda kurtulmak zor.
 
-**Flip 4 — Annihilation pozisyon okuması:** Jett Annihilation beam'in geleceğini okuyup corner'a saklandıysa ult boşa gider. Yanlış pozisyonda kaldıysa cocoon kesin ölüm.
+**Flip 3 — Barrier sökülmesi:** Takım barrier'ı kırdığı an Deadlock'un harita kilidi açılıyor. O pencerede aggressive gir — bekleme.
 
-**Flip 5 — Ultra-late round Deadlock solo:** Round sonunda Deadlock utility'si tükendiyse Jett dash + rifle ile Deadlock'u bedava yakalar. Deadlock'un değeri utility bağlı, utility eskimişse sıradan agent.
+**Flip 4 — Annihilation pozisyon okuması:** Beam gelmeden köşedeysen ult boşa gitti. Yanlış yerdeysen cocoon kesin ölüm — karar beam öncesi.
 
-## 7. Pro Coach Notları
+**Flip 5 — Deadlock utility tükendi:** Utility bitmişse Deadlock sıradan agent. Dash + rifle ile yakla — bedava düello.
 
-**VCT'de nasıl oynanıyor:** Deadlock VCT'de Killjoy/Cypher'a alternatif sentinel, pick rate orta seviye. Deadlock vs Jett matchup'ı Deadlock'un ulu ekonomisine bağlı — Annihilation ult ekonomisi Deadlock'u A tier'a çıkarır, ult olmazsa B tier. Jett tarafı Deadlock'un sensor yerleşimini ilk iki round'da öğrenir, üçüncü round bypass eder — bu yüzden Deadlock oyuncusu round'lara göre utility yerini değiştirmek zorunda.
+## 7. Koç Notları
 
-**Meta tier durumu:** Jett S tier, Deadlock A- tier. Head-to-head Jett hafif avantajlı, çünkü Deadlock'un defensive yönelimi Jett'in aktif mobilitesini yenemez. Map'e göre denge değişir.
+**Deadlock'u okumak:** Sensor yerini ilk iki turda öğren, üçüncü turdan bypass et. Deadlock oyuncusu bunu bildiği için her tur sensor yerini değiştirmek zorunda — sen de her tur tekrar oku.
 
-**** Annihilation ulu cooldown'u ve cocoon'dan dash ile çıkışın mümkün olup olmadığı pratik testle doğrulanmalı — mekanikte küçük değişiklik matchup'ı çevirebilir.
+**Deadlock'un zayıf anı:** Annihilation cooldown'dayken retake gücü düşüyor. O pencerede post-plant off-angle tut, spike'ı zamana bırak.
 
-**** Sensor ses eşiği shift walk dışındaki hareketlerde de aktive oluyor mu? Patch notları gözden geçirilmeli.
+**Temel kural:** Sensor hattını öğren, shift walk'u bırakma, gravnet hattından saparak gir. Bu üçünü tutarsan matchup sana açılıyor.
 
-**Coach test:** "Deadlock'un utility'si Jett'i yavaşlatmak için, öldürmek için değil. Yavaşlayan Jett ölen Jett'tir. Jett'in hareketini bozarsan matchup'ı aldın. Jett tarafında: hareketi sürdür, utility hattını öğren, shift walk disiplinini bırakma."
+**Doğrulanması gereken:** Annihilation cocoon'dan dash ile çıkışın mümkün olup olmadığını pratik modda test et — mekanikte değişiklik olmuşsa bu matchup'ı etkiler. Sensor'un shift walk dışı yavaş yürüyüşlerde tetiklenip tetiklenmediğini de kontrol et.

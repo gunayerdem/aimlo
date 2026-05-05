@@ -11,111 +11,110 @@ tags: [matchup, phoenix, cypher, duelist, sentinel]
 
 ## 1. Matchup Özü
 
-Phoenix flash + molly + wall ile Cypher'ın trip + cage + camera ekonomisini aşmaya çalışan self-sufficient duelist, Cypher ise gizli trap ve kamera info ile Phoenix'in aggressive peek'ini info aracına çeviren sentinel. Matchup Phoenix'in flash ekonomisi ile Cypher'ın trap varyasyonunu test eder.
+Sen Phoenix oynuyorsan Cypher'ın triplerini utility ile çözmek zorundasın — flash + molly + wall olmadan Cypher seni okur, tuzaklar ve bilgiyi takımına satar. Sen Cypher oynuyorsan Phoenix'in peek açısını önceden bil, tripler sabit durmasın — Phoenix ult ile haritalar, bir sonraki roundda bilgin eskir.
 
 ## 2. Kim Avantajlı?
 
-**Phoenix lehine durumlar:**
-- Close-range choke'larda (Bind Hookah, Split A Main) — flash + molly kombosu Cypher trap'ini harcatır ve close range'de Phoenix heal ekonomisi Cypher rifle'ını yener
-- Cypher kamera modunda solo tutuyorsa — kamera modu Cypher'ı savunmasız yapar, Phoenix flash peek ile kill garanti
-- Cypher ult cooldown'dayken — Neural Theft olmadan Cypher'ın info ekonomisi sınırlı, Phoenix round-to-round baskı
-- Phoenix ult hazır (Run It Back) — ult marker ile Phoenix risk almadan Cypher trap hattını test edebilir, ölürse marker'a geri döner
+**Phoenix avantajlı:**
+- Dar boğazlarda (Bind Hookah, Split A Main) — flash + molly zinciri tripi yıkar, close range dövüşte Phoenix'in kendi kendini iyileştirmesi fark yaratır
+- Cypher kamera modundayken — kamera açıkken Cypher savunmasızdır, flash peek ile yakalarsın
+- Cypher ulti hazır değilken — Neural Theft olmadan Cypher'ın takım bilgisi kısıtlı, baskı yap
+- Run It Back hazırken — ult marker ile Cypher'ın trip hattını test et, ölürsen geri dönersin, bilgiyi tutarsın
 
-**Cypher lehine durumlar:**
-- Uzun sightline site'larda (Breeze A, Icebox Mid) — Phoenix flash range'i sınırlı, Cypher uzun angle'da Op/rifle dominance
-- Phoenix utility cooldown'dayken — flash yok, molly yok, Phoenix sıradan rifler, Cypher trap + rifle crossfire
-- Cypher trip + cage + kamera zinciri kurulduysa — info + görüş engeli + trap katmanlı savunma, Phoenix tek utility ile kıramaz
-- Post-plant Cypher site içi pozisyonlu, Phoenix retake ediyor — trip hattı retake yolu, cage görüş engeli
+**Cypher avantajlı:**
+- Uzun sightline haritalarda (Breeze A, Icebox Mid) — Phoenix flash bu mesafede işe yaramaz, Cypher rifle dominance
+- Phoenix utility yokken — flash yok, molly yok, sen sıradan bir riflersin, Cypher trip + crossfire seni okur
+- Trip + cage + kamera zinciri kurulduysa — katmanlı savunma var, tek utility ile kıramazsın
+- Phoenix retake ediyorken Cypher site içindeyse — trip retake yolunu keser, cage görüşü kapatır
 
-**Balanced:** Haven, Ascent, Lotus gibi orta mesafeli map'lerde matchup Phoenix utility rotasyonuna ve Cypher trap varyasyonuna bağlı.
+**Dengeli:** Haven, Ascent, Fracture gibi haritalarda matchup senin utility kullanımına göre değişir — her round ayrı değerlendir.
 
 ## 3. Key Düellolar
 
 **IF** Phoenix flash ile Cypher'ı kör etti, Phoenix peek alıyor
-**MEANING** Cypher flash yediği an trap reflex'i çalışmaz, Phoenix flash süresi boyunca kill hattında
-**COUNTER** Cypher flash sesini duyduğu an duvara dön, gözü kapa. Flash bitene kadar trade partner Phoenix'i yakalar.
-**WHY** Phoenix flash curve flash — flash'ı duvardan döndürür, Cypher flash sesine reaksiyon ile crosshair'i kapatmalı. Reflex disiplinsizliği bedava ölüm.
+**MEANING** Flash yediği an Cypher'ın trip refleksi çalışmaz, Phoenix flash süresi boyunca kill hattında
+**COUNTER** Flash sesini duyduğun an duvara dön, gözünü kapat. Flash bitmeden pozisyon değiştirme — trade partnerın Phoenix'i yakalar.
+**WHY** Phoenix flash duvardan dönerek gelir. Sese reaksiyon vermezsen açık hedefsin. Crosshair'ini kapat, flash geçsin, sonra trade yap.
 
 ---
 
 **IF** Phoenix molly'yi Cypher trip hattına attı
-**MEANING** Molly damage trip'i siler, Cypher'ın info ekonomisi bir trip kaybeder
-**COUNTER** Cypher trip'i molly lineup hattından uzak köşeye kur. İki trip çift noktada — birinin yıkılması ikinci trip'i aktif bırakır.
-**WHY** Phoenix molly damage + area denial, trip tek HP bar. Molly lineup trip'i temizler eğer yerleşim molly hattı bilinciyle yapılmadıysa.
+**MEANING** Molly tripi siler, Cypher bir trip kaybeder
+**COUNTER** Tripi molly hattından uzak köşeye kur. İki tripi farklı noktalara dağıt — biri yıkılırsa ikincisi hâlâ çalışır.
+**WHY** Phoenix molly tek HP'lik tripi temizler. Trip sabit ve öngörülür yerleşimdeyse Phoenix zaten lineup'ını biliyor demektir.
 
 ---
 
-**IF** Phoenix wall ile close range cover aldı, Cypher kamera ile Phoenix'i izledi
-**MEANING** Wall görüş engeli ama Cypher kamera wall'un bir tarafından Phoenix'i görebilir — info verir
-**COUNTER** Phoenix wall'u iki yönü kapsayacak şekilde at (T şekli, L şekli), tek yönlü wall kamera angle'ına zayıf.
-**WHY** Phoenix wall küçük çaplı, Cypher kamera multi-angle. Wall angle eşleşmezse kamera info akışı sürer — wall cover değil, info boşluk.
+**IF** Phoenix wall ile close range cover aldı, Cypher kamera ile izledi
+**MEANING** Wall görüşü keser ama Cypher kamera wall'un bir tarafından Phoenix'i görür — bilgiyi takıma iletir
+**COUNTER** Wall'u iki yönü kapatacak şekilde at — tek yönlü wall kamera açısına zayıf. L ya da T şeklinde düşün.
+**WHY** Phoenix wall'u küçük alan kaplar. Kamera multi-açı görür. Wall açısı yanlışsa kamera bilgi akmaya devam eder.
 
 ---
 
-**IF** Phoenix Run It Back ile Cypher trap hattını test etti
-**MEANING** Phoenix ult marker'da ölürse geri döner, test sonrası trap lokasyonları bilgi kazancı
-**COUNTER** Cypher trap hattını her round farklı noktaya kur — Phoenix test sonrası bilgi round 2'de eskir.
-**WHY** Phoenix ult Cypher trap'inin gücünü ölçme aracı. Ult süresi boyunca Phoenix bilgi + aggressive test yapar. Cypher sabit yerleşim ult karşısında boş.
+**IF** Phoenix Run It Back ile Cypher trip hattını test etti
+**MEANING** Phoenix ölürse marker'a döner, test sonrası trip konumlarını bilir
+**COUNTER** Her round trip'i farklı noktaya kur. Phoenix bir roundda haritaladıysa bir sonraki round o bilgi işe yaramaz.
+**WHY** Phoenix ult Cypher traplerini ölmeden ölçmek için var. Tripler sabit kalırsa ult bedava bilgi toplar.
 
 ---
 
-**IF** Cypher Neural Theft ile Phoenix kill sonrası takım info aldı
-**MEANING** Phoenix takım pozisyonu açığa çıkar, Cypher takım rotate kararı alır
-**COUNTER** Phoenix takımı Neural Theft sonrası round ortasında hareketi hızlandırır. Sabit pozisyon info değerini maksimum eder.
-**WHY** Neural Theft info asimetrisi yaratır. Karşı cevap pozisyon değişimi — info'yu eskitmek bilgiyi değersiz kılar.
+**IF** Cypher Neural Theft ile Phoenix'i öldürdükten sonra takım konumlarını gördü
+**MEANING** Tüm Phoenix takımının yeri açığa çıktı, Cypher takımı buna göre rotate eder
+**COUNTER** Neural Theft attıktan sonra Phoenix takımı hemen hareket etsin. Aynı pozisyonda kalmak bilginin değerini artırır.
+**WHY** Bilgi eskirse işe yaramaz. Pozisyon değiştirirsen Neural Theft'in etkisi sıfıra iner.
 
 ---
 
-**IF** Phoenix heal ekonomisi ile Cypher trap damage'ını karşıladı
-**MEANING** Phoenix kendi wall ya da molly üzerinde durarak heal alır — Cypher trap damage'ını round ortasında HP'ye çevirir
-**COUNTER** Cypher Phoenix'in heal hattını görüşte tutsun, kamera hattı heal pozisyonunu takip eder.
-**WHY** Phoenix heal Cypher'ın damage ekonomisine karşı zayıflık giderici. Heal sırasında Phoenix statik — Cypher info bu penceredeki kill fırsatı.
+**IF** Phoenix heal hattında iyileşti, Cypher kamera ile izledi
+**MEANING** Phoenix wall veya molly üzerinde dururken HP toplar — ama bu sırada sabittir
+**COUNTER** Kameranı Phoenix'in heal pozisyonunu görecek açıya kur. Heal sırasında hareketsiz — o an kill fırsatı.
+**WHY** Phoenix heal alırken yerinden kıpırdayamaz. Kamera bu anı yakalıyorsa bilgi + fırsat aynı anda senin elinde.
 
 ---
 
-**IF** Phoenix flash + molly + peek zinciri Cypher anchor pozisyonuna
-**MEANING** Utility zinciri Cypher'ı pozisyondan çıkarır, trap hattını harcatır, Phoenix close range duel kazanır
-**COUNTER** Cypher utility zincirine tek utility ile cevap veremez — takım utility şart. Trade partner close range duelde Phoenix'i yakalar.
-**WHY** Phoenix self-sufficient duelist — tek başına entry alabilir. Cypher tek başına solo anchor değilse matchup eşitlenir.
+**IF** Phoenix flash + molly + peek zinciri Cypher'ın tuttuğu açıya geldi
+**MEANING** Utility zinciri Cypher'ı yerinden eder, trip hattını harcatır, Phoenix close range dövüşe girer
+**COUNTER** Cypher buna tek utility ile cevap veremez — trade partner şart. Close range dövüşte Phoenix'i trade partnerın yakalar.
+**WHY** Phoenix tek başına entry alabilir. Cypher'ın bu zincirine tek başına cevabı yoksa sen pozisyon değiştir, takımı bekle.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
-Phoenix utility'si self-sufficient (flash x2 + molly + wall + heal + ult), Cypher utility'si info + lockdown (trip x2 + cage + kamera + ult). Phoenix utility'si aktif baskı + heal, Cypher utility'si pasif info + trap. Matchup'ın özü: Phoenix Cypher'ın trap hattını utility ile temizleyebilir, Cypher Phoenix'in peek hattını info ile önceden öğrenir. Takas simetrik — iki agent da kaynağını diğerine karşı kullanabilir. Ult ekonomi: Run It Back 6 point, Neural Theft 7 point — Phoenix ult daha ucuz, Cypher ult daha stratejik.
+Phoenix: flash x2, molly, wall, kendi kendini iyileştirme, Run It Back. Hepsi aktif baskı içindir.
+Cypher: trip x2, cage, kamera, Neural Theft. Hepsi bilgi + kilitleme içindir.
 
-## 5. Map Bazlı Değişim
+Phoenix Cypher'ın trip hattını utility ile temizleyebilir. Cypher Phoenix'in peek açısını önceden öğrenebilir. Ult maliyeti: Run It Back 6 puan, Neural Theft 7 puan — Phoenix ulti daha çabuk gelir, Cypher ulti daha yüksek ult puanı ister.
 
-**Bind (Phoenix avantajlı):** Close range + Hookah Phoenix'in flash + molly meta'sı.
+## 5. Haritaya Göre Değişim
 
-**Split (Balanced):** A Main Phoenix utility zinciri, B Main Cypher trap hattı.
+**Bind (Phoenix avantajlı):** Hookah ve dar boğazlar Phoenix'in flash + molly ikilisinin haritası.
 
-**Sunset (Phoenix avantajlı):** Dar choke'lar + close range Phoenix'in. Cypher orta seçenek.
+**Split (Dengeli):** A Main Phoenix utility zinciri için uygun, B Main Cypher trip hattı için.
 
-**Haven (Cypher avantajlı):** Cypher B anchor + Garage camera meta. Phoenix Haven'da niche pick.
+**Sunset (Phoenix avantajlı):** Dar geçitler Phoenix'in. Cypher Sunset'te flash + molly zincirine cevap verecek açı bulamaz.
 
-**Ascent (Cypher avantajlı):** Cypher A Main anchor meta, Phoenix Ascent'ta düşük pick rate.
+**Haven (Cypher avantajlı):** B anchor + Garage kamerası Cypher'ın meta oyunu. Phoenix Haven'da flash menzili dışında kalır.
 
-**Icebox (Cypher avantajlı):** Uzun sightline Cypher'ın. Phoenix Icebox'ta sınırlı.
+**Ascent (Cypher avantajlı):** A Main anchor Cypher'a uygun. Phoenix Ascent'ta flash + molly ile kapatamadığı uzun açılar Cypher rifle'ına açık kalır.
 
-**Fracture (Balanced):** Multi-entry Phoenix self-sufficient entry'ye yarar, Cypher trip hattı iki yönü tutar.
+**Icebox (Cypher avantajlı):** Uzun sightline'lar Cypher'ın. Phoenix flash bu mesafede etkisiz.
 
-## 6. Flip Moment'ler
+**Fracture (Dengeli):** İki yönden giriş Phoenix'in self-sufficient entry'sine yarar, ama Cypher trip hattı iki yönü de tutabilir.
 
-**Flip 1 — Flash Cypher'ı yakaladı:** Cypher flash reflex'i sağlam değilse bedava kill, matchup Phoenix'e döner.
+## 6. Maçı Döndüren Anlar
 
-**Flip 2 — Trip molly ile silindi:** Phoenix molly trip'i yıkarsa Cypher info ekonomisi düşer. Bu flip tek trip için, ikinci trip hala aktif.
+**An 1 — Cypher flash yedi:** Flash refleksi yoksa bedava kill. Matchup Phoenix'e döner.
 
-**Flip 3 — Run It Back Cypher trap'ini haritaladı:** Ult süresi boyunca Phoenix trap hattını test eder. Bilgi kazancı Phoenix takımına gider.
+**An 2 — Molly tripi sildi:** Cypher bir trip kaybetti. İkinci trip hâlâ çalışıyor — ikinci tripe de molly atmadan peek atma.
 
-**Flip 4 — Cypher kamera mode'da yakalandı:** Phoenix aggressive peek anında Cypher kamera'daysa kesin ölüm.
+**An 3 — Run It Back trip hattını haritaladı:** Phoenix ult ile tüm trap pozisyonlarını öğrendi. Bu bilgi takımının.
 
-## 7. Pro Coach Notları
+**An 4 — Cypher kamera modunda yakalandı:** Phoenix agresif peek attığında Cypher kameradaysa kesin ölüm.
 
-**VCT'de nasıl oynanıyor:** Phoenix pro meta'da niche duelist, pick rate düşük — Jett/Raze/Neon daha baskın. Phoenix tercih edilen map'ler Bind, Split, Sunset. Cypher vs Phoenix matchup'ı pro seviyede nadir ama Phoenix'in heal ekonomisi Cypher'a karşı subtle avantaj. Phoenix pro'da self-sufficient duelist rolünde, Cypher karşısında solo entry kapasitesi değer kazanır.
+## 7. Koç Notları
 
-**Meta tier durumu:** Phoenix B tier, Cypher S tier. Head-to-head Cypher avantajlı pro seviyede, ranked'te Phoenix'in heal ekonomisi matchup'ı dengeler.
+Phoenix oynuyorsan Cypher'a karşı şu zinciri kur: flash + molly'yi Cypher'ın trip hattına yolla, cage'i harcat, sonra peek al. Sadece peek atmaya kalkma — utility önce, peek sonra.
 
-**** Phoenix molly damage'ı Cypher trip HP'sini tek atışta düşürüyor mu? Patch notlarına göre damage ayarlanmış olabilir.
+Cypher oynuyorsan ve Phoenix Run It Back ile saldırıyorsa tripler sabit kalmasın. Her round trip'leri farklı noktaya taşı — Phoenix'in bir önceki round topladığı bilgi işe yaramasın.
 
-**** Run It Back süresi ve Cypher trap yenileme süresi karşılaştırması — ult süresi trap setup'ını harcatabilir mi?
-
-**Coach test:** "Phoenix Cypher karşısında self-sufficient entry avantajını kullanır. Cypher Phoenix karşısında trip hattını Phoenix'in molly lineup'ından uzak tutar. İki disiplin karşılaşırsa round Phoenix'in aim'ine kalır."
+Phoenix heal alırken hareketsiz kalır. Kameranı heal hattına kur. O pencerede Phoenix'i öldürürsen karşı taraf utility harcamış, HP'siz kalmış, trade yok — round senin.

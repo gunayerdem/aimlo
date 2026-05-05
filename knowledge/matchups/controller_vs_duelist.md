@@ -1,46 +1,67 @@
 # MATCHUP: Controller vs Duelist
 
-## Etkileşim Kimliği
-Controller'lar sightline'ları kapatarak ve güvenli bölgeler oluşturarak savaş alanını şekillendirir; duelist'ler mekanik beceri ve hareket yetenekleriyle kaosu keser. Bu matchup controller'ın oyunu kendi şartlarına çekip çekemeyeceği veya duelist'in kendi temposunu zorlayıp zorlayamayacağı ile ilgilidir. İyi yerleştirilmiş bir smoke duelist'in dash'ini kör bir sıçramaya çevirir. Smoke'u doğru okuyan bir duelist controller'ın güvenlik ağını tabuta çevirir — smoke'un arkasında gizlendiğini düşünen oyuncuyu öldürmek için smoke'un içinden push eder.
+## Bu Matchup Ne Hakkında
 
-## Yaygın Cezalandırma Kalıpları
+Controller smoke koyar, duelist içinden geçer ya da açıkta köşe tutar. Mesele şu: controller oyunu kendi alanına çekebilir mi, yoksa duelist kendi temposunu dayatır mı?
 
-**IF**: Controller smoke'larla duelist'in tercih ettiği sightline'ları engelliyor ve smoke arkasında molly/alan engelleme ile cezalandırıyorsa
-**MEANING**: Duelist yakın mesafe dövüşüne veya kör push'a zorlanır. Omen paranoia veya Viper decay dövüşten önce duelist'in sağlık avantajını azaltır. Duelist'in dash yollarını smoke'layan controller kaçış seçeneklerini nötralize eder.
-**COUNTER**: Smoke'lardan agresif push controller'ları hazırlıksız yakalar — çoğu controller Jett dash veya Raze satchel beklemez. Flash'lı duelist'ler kendi smoke'larının ardındaki controller'ı kör edebilir. Hareket yetenekleri duelist'in controller'ın yeniden smoke atmasından daha hızlı repoziyon almasını sağlar.
-**WHY**: Smoke'lar duvar değil perdedir — agresif duelist'ler içinden geçebilir.
+Smoke perde. Duvar değil. İçinden geçilir. Bunu ikisi de bilmeli.
 
-**IF**: Duelist controller yeteneklerine sürekli takılıp smoke'lar içinden bilgisiz push ediyorsa
-**MEANING**: Duelist takım desteği olmadan smoke'lardan geçiyor ve controller'ın oyununu oynuyor.
-**COUNTER**: Smoke'un arkasında ne olduğunu bilmek için takımın bilgisini kullan. Flash ile smoke'u geçmeden önce arkasını temizle. Controller'ın kendi temposunu dayatmasına izin verme.
-**WHY**: Kör smoke push kumardır — bilgi ile desteklenmiş push hesaplanmış bir risk olur.
+---
 
-**IF**: Controller smoke'larını raund geç yenilemiyor ve duelist bu boşlukta açık sightline'lardan agresif peek alıyorsa
-**MEANING**: Smoke zamanlaması tükeniyor ve duelist boşluktan faydalanıyor. Charge-tabanlı smoke kullanıcıları (Harbor, Clove) yenileme süresi boyunca kör kalır. Bu pencerede duelist peek alıp öldürdükten sonra dash veya satchel ile güvene çekilir.
-**COUNTER**: Smoke yenileme zamanlamasını takımına bildir — bu süre zarfında takım agresif açı tutmalı. Smoke yokken angle değiştir ki duelist sabit bir hedefe peek atamassın. Smoke'suz kaldığında cover pozisyona çekil; açık durmak duelist'e hediye açı verir.
-**WHY**: Smoke zamanlaması bilgisi duelist'in en iyi peek penceresini açar — bu pencereyi tahmin ederek pozisyon al.
+## Cezalandırma Kalıpları
 
-## Tekrarlayan Başarısızlık Ne Anlama Gelir
-**Controller** iyi smoke'lamasına rağmen duelist'lere sürekli ölüyorsa, kendi smoke'larına çok yakın duruyor ve agresif push'culara yakalanıyor. Smoke'ları duvar gibi ele alıyor ama onlar perde.
+**IF**: Controller smoke'larla duelist'in tercih ettiği açıları kapatıyor ve arkasına molly ya da alan engeli koyuyorsa
+**MEANING**: Duelist yakın kavgaya ya da kör push'a zorlanır. Omen paranoya veya Viper decay, dövüş başlamadan duelist'in canını tırtıklar. Dash veya satchel rotası smoke'un içine giriyorsa duelist kaçış seçeneğini kaybeder.
+**COUNTER**: Smoke'un içinden agresif çık — controller Jett dash ya da Raze satchel'ı o anda beklemez. Kendi flash'ınla smoke içindeki controller'ı körle. Hareket yeteneğin onun yeniden smoke atmasından hızlı; bunu kullan.
+**WHY**: Smoke beklenmedik yerden çıkışı öldürür, beklenmedik çıkışı değil.
 
-**Duelist** controller yeteneklerine sürekli takılıyorsa, bilgi olmadan ve takım desteği olmadan smoke'lardan geçiyor. Controller'ın oyununu oynuyor, kendi temposunu dayatmak yerine.
+---
+
+**IF**: Duelist takım bilgisi olmadan smoke'lardan tek başına geçmeye devam ediyorsa
+**MEANING**: Controller'ın oyununu oynuyorsun. Her kör geçişte controller hazır bekliyor.
+**COUNTER**: Smoke'a girmeden önce adım sesini, yetenek sesini dinle — içeride biri varsa genellikle bir şey bozar. Takımın bakıyor mu? Bilgi yoksa geçme. Flash at, arkasını temizle, sonra gir.
+**WHY**: Kör geçiş kumardır. Ses ya da takım bilgisiyle desteklenen geçiş hesaplanmış risktir.
+
+---
+
+**IF**: Controller smoke'larını yenileyemiyor ve bu boşlukta açık sightline'lar oluşuyorsa
+**MEANING**: Duelist o pencerede peek alır, öldürür, dash ya da satchel'la güvene çekilir. Harbor ya da Clove gibi yenileme süresi olan controller'lar o an tamamen açık kalır.
+**COUNTER**: Controller olarak — smoke biter bitmez takımına söyle, pozisyon değiştir, sabit durma. Duelist sabit hedefe peek atar. Smoke yokken cover arkasına çekil.
+**COUNTER**: Duelist olarak — smoke'un ne zaman biteceğini takım sesinden ya da görsel işaretten takip et. O pencere açılınca peek al, bitince çekil.
+**WHY**: Smoke yenileme boşluğu duelist'in en iyi peek anıdır. Controller bu anı tahmin edip pozisyon alırsa boşluk kapanır.
+
+---
+
+## Tekrarlayan Ölüm Ne Anlama Gelir
+
+**Controller sürekli ölüyorsa**: Kendi smoke'una çok yakın duruyorsun. Duelist içinden çıkınca sen tam önündesin. Smoke kenarından off-angle çök — içinden çıkan ters tarafa baksın, sen zaten orada ol.
+
+**Duelist sürekli takılıyorsa**: Bilgi olmadan smoke'lara dalıyorsun. Controller seni bekliyor. Ses dinle, takım bilgisi al, sonra gir.
+
+---
 
 ## AIMLO Ne Demeli
-### Oyuncu cezalandırılan taraftayken
-**Controller duelist agresyonuna ölüyorken**: "Kendi smoke'unun arkasında güvenlik bekleyerek durma. Duelist'ler içinden push edecek. Smoke'undan off-angle oyna ki içinden geçen yanlış tarafa baksın."
 
-**Duelist controller yeteneklerine takılıyorken**: "Tek başına smoke'lardan push etmeyi bırak. Her dash ile kör geçtiğinde kumar oynuyorsun. Commit etmeden önce smoke'un arkasında ne olduğunu bilmek için takımının bilgisini kullan."
+### Oyuncu cezalandırılıyorsa
 
-### Oyuncu cezalandıran taraftayken
-**Controller duelist'i nötralize ediyorken**: "Smoke'ların dövüşün temposunu belirliyor. Düşman duelist sınırlı ve zorlanmış hamle yapıyor. Favori açılarını engelleyen smoke'lar koymaya devam et."
+**Controller duelist agresyonuna ölüyorsa**: "Kendi smoke'unun dibinde bekleme. Duelist içinden çıkacak ve sen tam önünde olacaksın. Smoke kenarından off-angle oyna — içinden çıkan yanlış tarafa baksın."
 
-**Duelist controller'ı eziyorken**: "Smoke zamanlamasını okuyup cezalandırıyorsun. Smoke'lar içinden agresyonu sürdür ama disiplinli kal — amaçsızca push etmeye başlarsan molly yersin."
+**Duelist controller yeteneklerine takılıyorsa**: "Tek başına smoke'lardan geçmeyi bırak. Adım sesi var mı? Takımın bir şey görüyor mu? Bilgi yoksa girme."
+
+### Oyuncu cezalandırıyorsa
+
+**Controller duelist'i sıkıştırıyorsa**: "Duelist'in tercih ettiği açılar kapalı, zorlanmış hamle yapıyor. O açıları smoke'lamaya devam et — açık bıraktığında peek atar."
+
+**Duelist controller'ı eziyorsa**: "Smoke yenileme boşluğunu okuyorsun, iyi. Ama molly'siz yere push etme — controller geri döndüğünde alan engeliyle karşılayabilir."
+
+---
 
 ## Rank Modülasyonu
-**LOW**: Controller'lar rastgele smoke koyar. Duelist'ler smoke'ları ya tamamen yok sayar ya da onlardan korkar. Etkileşim neredeyse yok.
 
-**MID**: Controller'lar doğru smoke koyar ama arkalarında durur. Duelist'ler smoke push yapmaya başlar ama disiplinsiz. Controller'lara smoke'tan off-angle pozisyonlama, duelist'lere smoke push öncesi bilgi toplama öğret.
+**LOW**: Controller rastgele smoke koyar, duelist ya yok sayar ya da çok korkar. İkisi de smoke'un içinden geçileceğini bilmiyor. Önce bunu öğret: smoke perde, duvar değil.
 
-**HIGH**: Her iki taraf da dinamiği anlar. Controller off-angle oynar, duelist flash ile smoke push koordine eder. Zamanlama oyununu öğret — ne zaman yeniden smoke, ne zaman peek.
+**MID**: Controller doğru smoke koyuyor ama dibinde bekliyor. Duelist smoke push deniyor ama ses dinlemiyor, kör giriyor. Controller'a off-angle pozisyonu, duelist'e ses ve takım bilgisiyle giriş öğret.
 
-**ELITE**: Smoke yerleştirme ve smoke push ikisi de çok hassas. Avantaj karşı tarafın zamanlamasını ve pozisyon alışkanlıklarını daha iyi okuyana gider.
+**HIGH**: İkisi de dinamiği biliyor. Controller off-angle oynuyor, duelist flash'la koordineli giriyor. Öğretilecek şey şu: smoke yenileme zamanını takip et ve pozisyonu ona göre ayarla.
+
+**ELITE**: Smoke yerleştirme ve smoke geçişi ikisi de hassas. Radiant controller'lar smoke'u sightline kapatmak için değil, duelist'in çıkış pozisyonunu yanlış tahmin ettirmek için koyar — smoke kenarına off-angle yerleşir, içinden çıkan ters tarafa bakar. Avantaj, karşı tarafın pozisyon alışkanlığını daha iyi okuyana geçer.

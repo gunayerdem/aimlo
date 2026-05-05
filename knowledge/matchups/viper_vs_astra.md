@@ -9,101 +9,136 @@ tags: [matchup, viper, astra, controller_vs_controller]
 
 ## 1. Matchup Özü
 
-Viper ve Astra karşılaştırması alan kontrolü ile proaktif kontrolün savaşıdır. Viper alan kapatır — wall haritayı ikiye böler, cloud noktayı kapatır, Snake Bite damage ile alan reddeder. Astra alan yaratır — star yerleştir, star'ı smoke'a çevir, star'ı gravity'ye çevir, star'ı concussive'a çevir. İkisi de round başı commit üzerine kurulu, ikisi de mid-round adaptasyon zor. Temel fark: Viper round boyunca tek alan planına sadık kalır (wall yerinde duruyor), Astra round içinde star'ları farklı işlevlere çevirir (esneklik). Viper predictable ama damage taşır, Astra esnek ama damage yok. Pro okuma: Viper fuel ekonomisini saat gibi yönetir, Astra star dağılımını şah gibi yönetir. Hangisi round'un alan felsefesini daha kapsamlı kuruyorsa o kazanır.
+Viper alan kapatır. Wall haritayı ikiye böler, cloud noktayı kapatır, Snake Bite damage ile düşmanı yerinden oynatır. Astra alan yaratır — star'ı smoke'a, gravity'ye, stun'a çevirir. İkisi de başta büyük karar alır, değiştirmek zordur.
+
+Temel fark şu: Viper wall bir kere atılır, orada durur. Astra star'ları round içi farklı işleve çevrilir — esnektir ama damage taşımaz. Viper tahmin edilebilir ama her utility'si hasar verir. Astra esnek ama silahsız.
+
+Viper fuel'ini ikiye böl — wall için ayrı, cloud için ayrı kullan. Astra star'larını tek siteye yığ. Kim bunu yaparsa o site kapanır, diğeri açık kalır.
 
 ## 2. Kim Avantajlı?
 
-Pro meta'da Viper Astra'dan net üstte. Viper VCT her seride ilk beş pick içinde, Astra özel comp'larda tercih edilir. Astra'nın avantajı tek bir boyutta açığa çıkar: map-wide coverage gerektiren haritalarda (Haven, Lotus). Viper bu haritalarda double controller olarak oynanır, Astra single controller olarak yeterli. Ama diğer yedi haritada Viper fuel + damage ekonomisi Astra'nın star esnekliğini ezer. Dağılım: dokuz map'in altısında Viper favored, ikisinde Astra favored, birinde nötr. Ult karşılaştırması: Viper's Pit kalıcı alan + damage, Cosmic Divide kalıcı görüş/ses duvarı + damage yok. Pit retake kilitler, Cosmic Divide execute açar — iki ult farklı fazlarda değer yaratır.
+Fuel + damage ekonomisi Astra'nın star esnekliğini geçer. Wall + Snake Bite + cloud kombinasyonu her round damage üretir; Astra utility'nin hiçbirinde direkt hasar yoktur.
+
+Astra'nın üstün olduğu yer dar: üç siteli haritalarda (Haven, Lotus) tek controller olarak yeterli. Bu haritalarda Viper double controller'ın destekçisidir, tek başına yetersiz kalır.
+
+Diğer haritalarda Viper favored. Breeze, Icebox, Fracture, Split, Sunset — Viper'ın damage'ı ve fuel süresi Astra'yı geçer.
+
+Ult karşılaştırması:
+- Viper's Pit: kalıcı alan + sürekli damage — retake kilitler
+- Cosmic Divide: kalıcı görüş/ses duvarı, damage yok — execute açar
+
+İki ult farklı fazda değer üretir. Saldırı fazında Divide, savunma fazında Pit daha ağır basar.
 
 ## 3. Key Düellolar
 
-**IF** Astra round başı beş star'ı yerleştirdi, Viper wall henüz atılmadı
-**MEANING** Astra hazır, Viper henüz yerleşmedi — ama Astra star yerleşmesi sabit, Viper wall yönü esnek
-**COUNTER** Viper wall'u Astra'nın en yoğun star dağılımına karşı at, Astra star'ları wall tarafına toplamaya çalışırsa fuel avantajı Viper'da
-**WHY** Astra star yerleştikten sonra taşınabilir ama pull ile aktive edilmez. Taşıma cooldown'u var. Viper wall Astra yerleşimini okuduktan sonra atılırsa Viper alan kontrolünü Astra'nın hazırlığına göre şekillendirir.
+**IF** Astra beş star'ı haritaya dağıttı, Viper wall henüz atılmadı
+**MEANING** Astra hazır ama star yerleri sabit. Viper wall yönü hâlâ serbest — Astra'nın yerleşimini görerek karar verebilirsin
+**COUNTER** Star'ların yoğunlaştığı tarafa wall at. Astra star'ları o tarafa toplamaya çalışırsa taşıma sırasında aktive edemez — fırsatı Viper'da
+**WHY** Star taşınırken aktive edilemez. Wall Astra'nın yerleşimini gördükten sonra atılırsa Viper kontrolü karşı tarafın hazırlığına göre şekillendirir.
 
 ---
 
-**IF** Astra Gravity Well'i Viper fuel alanı içine atıldı
-**MEANING** Gravity Well Viper cloud içindeki savunmacıyı açığa çıkarır — cloud'un içindeki oyuncu gravity'ye çekilince smoke dışına iner
-**COUNTER** Viper cloud dışına pozisyon al, fuel alanını Gravity Well dışına kaydır. Astra pull'u Viper'ın smoke pozisyonunu sabitlemeye çalışır
-**WHY** Astra Gravity Well cloud içini yeniden şekillendirir — Viper smoke'unu bypass eder. Viper pozisyonunu gravity'ye göre değiştirmek zorunda.
+**IF** Astra Gravity Well'i Viper cloud alanının içine attı
+**MEANING** Gravity Well cloud içindeki savunmacıyı dışarı çeker — smoke bypass olur
+**COUNTER** Cloud dışına çık, fuel alanını gravity'nin dışına kaydır. Astra pull seni sabitlemeye çalışıyor
+**WHY** Viper smoke'un içinde duruyorsan gravity seni dışarı fırlatır ve açılırsın. Pozisyonunu gravity'ye göre değiştir.
 
 ---
 
-**IF** Viper Snake Bite + wall kombosu Astra Nova Pulse + Nebula kombosu ile karşılaştı
-**MEANING** İki controller çift utility pop yaptı — alan kontrolü iki taraftan zorlandı, round'un kaderi kim önce çalıştı
-**COUNTER** Viper tarafı timing önceliği için Snake Bite'ı önce atar (lineup kesin hedef), Astra reaksiyon veremez. Astra Nova Pulse reaksiyon gerektirir, Snake Bite proaktif
-**WHY** Viper lineup kesinlik, Astra okuma esneklik. Lineup timing'i okumadan hızlı — Viper proaktif utility önce çalışır, Astra reaksiyon kalır.
+**IF** Viper Snake Bite + wall, Astra Nova Pulse + Nebula ile aynı anda patladı
+**MEANING** İki controller double utility attı — kim önce çalıştıysa o round'u okur
+**COUNTER** Snake Bite'ı önce at. Lineup var, hedef kesin — Astra'nın okuma yapmasına gerek yok, gecikir. Nova Pulse reaksiyon gerektirir, Snake Bite gerekmez
+**WHY** Lineup timing okumasız hızlıdır. Viper önce çalışır, Astra reaksiyon kalır.
 
 ---
 
-**IF** Astra Cosmic Divide haritayı böldü, Viper wall Cosmic Divide'ın aynı hattında
-**MEANING** İki duvar üst üste — Viper wall görüş engeli + damage, Cosmic Divide görüş/ses engeli damage yok. Damage değeri Viper lehine
-**COUNTER** Viper wall'u Cosmic Divide dışında ikinci hat için kullanır — iki hat iki duvar = haritanın iki ekseni birden kapalı
-**WHY** Cosmic Divide ve Viper wall sinerjidir, karşıtlık değil. İki duvarı farklı hatlara yayan taraf alan kontrolünü çift katlar.
+**IF** Astra Cosmic Divide haritayı böldü, Viper wall aynı hatta duruyor
+**MEANING** İki duvar üst üste — Cosmic Divide görüş/ses engeli, Viper wall görüş + damage. Damage değeri Viper lehine
+**COUNTER** Wall'u Cosmic Divide dışında ikinci hatta at — iki farklı hat, iki duvar, haritanın iki ekseni kapanır
+**WHY** Bu sinerji, karşıtlık değil. İki duvarı farklı hatlara yayanın alan kontrolü çift katlanır.
 
 ---
 
 **IF** Viper's Pit aktive, Astra star'ları Pit dışında
-**MEANING** Astra Pit dışı alanı tutuyor ama Pit içi Viper'ın egemenliğinde — iki controller iki ayrı alan kontrol ediyor, round iki fazda
-**COUNTER** Astra Pit sınırına Gravity Well atar, Viper Pit çıkmaya korkar (gravity çekimi Pit'ten dışarı), Pit içi kilitli — Astra dış alanı rahat tutar
-**WHY** Viper Pit içinde mutlak hakim ama Pit dışında savunmasız. Astra Pit sınırını star ile yönetirse Viper'ı Pit içinde hapseder — savunma dışarıda serbest.
+**MEANING** Astra Pit dışı alanı tutuyor, Pit içi Viper'ın. Round iki farklı alana bölündü
+**COUNTER** Astra Gravity Well'i Pit çıkışına bas. Viper dışarı çıkmaya çalışırsa gravity çeker — Pit içinde hapsolur, dışarısı Astra'nın
+**WHY** Viper Pit içinde güçlü ama Pit dışında savunmasız. Sınırı star ile kilitlersen Viper çıkamaz.
 
 ---
 
-**IF** Astra star'ları hepsi aktive edildi, round ortası utility yok
-**MEANING** Astra tüm star'larını harcadı, round ortası Astra rifler. Viper utility ekonomisi round ortasında hala fuel ile çalışıyor
-**COUNTER** Viper round ortası Snake Bite + wall reposition ile alan kontrolünü yeniden yapılandırır, Astra cevap veremez
-**WHY** Astra utility round-başı ekonomi. Round ortası toparlanma yok. Viper fuel dağılımı round-boyu — Viper'ın mid-round fuel'i Astra'nın star boşluğunu cezalandırır.
+**IF** Astra tüm star'larını harcadı, utility bitti
+**MEANING** Astra artık rifler. Viper fuel hâlâ akıyor — alan kontrolü tek tarafta
+**COUNTER** Snake Bite + wall reposition yap. Astra cevap veremez
+**WHY** Astra utility round başında harcanır, toparlanmaz. Viper fuel round boyudur. Astra boşaldığında baskı kur.
 
 ---
 
-**IF** Viper wall yanlış yöne atıldı, Astra star'ı pull ile doğru yöne smoke yerleştirdi
-**MEANING** Astra esnekliği Viper'ın planlama hatasını cezalandırır — Astra real-time star aktivasyonu Viper wall'un yanlışlığını ödünler
-**COUNTER** Viper wall yönü round başı karar — yanlışsa round bitmiş demek. Astra pull okuması Viper'a "wall yönü sabit değil" dersi verir
-**WHY** Viper wall round başı kesinlikle yerleşir. Astra pull round içi esnekliğe sahip. Yanlış wall = tüm round yanlış alan, Astra düzeltir, Viper düzeltemez.
+**IF** Viper wall yanlış yöne atıldı, Astra star'ı pull ile doğru yere taşındı
+**MEANING** Astra'nın esnekliği Viper'ın planlama hatasını kapattı
+**COUNTER** Wall yönü başta kesin karar — yanlışsa round boyunca yanlış alan kontrolü yaparsın. Astra düzeltir, Viper düzeltemez
+**WHY** Wall bir kere atılır. Astra pull round içi esnekliğe sahip. Yanlış wall = round baştan kaybedilmiş alan.
 
 ## 4. Utility Takası
 
-Fuel vs star ekonomisi. Viper fuel'i iki kaynağa böler (wall + cloud), round içi tap/yeniden kullanım ile esneklik yaratır. Astra beş star'ı beş farklı işleve çevirir (smoke, gravity, concussive, stun, pull) — işlev çeşitliliği Viper'dan fazla. Ama Astra star sayısı sabit beş, Viper fuel sürekli akış. Round uzadıkça Viper fuel toparlanır, Astra star toparlanmaz. Takas sonucu: kısa round'larda Astra işlev çeşitliliği avantajlı, uzun round'larda Viper fuel süresi avantajlı. Damage ekonomisi Viper lehine tek yönlü — Astra'nın hiçbir utility'si direkt damage yapmaz (Nova Pulse concussive, stun değil damage), Viper'ın hem Snake Bite hem Pit hem cloud damage taşır. Damage farkı post-plant ve retake fazlarında Viper'ı ayırıcı pozisyona koyar.
+Fuel vs star ekonomisi:
+
+- Viper fuel iki kaynağa bölünür (wall + cloud). Tap/yeniden kullan ile round boyunca esneklik var
+- Astra beş star'ı beş farklı işleve çevirir — çeşitlilik Viper'dan fazla
+
+Ama star sayısı sabittir. Fuel sürekli akar. İlk plant gerçekleştiğinde Astra star'ları tükenmişse Viper fuel'la baskı kurar, Astra cevap veremez.
+
+Kısa round: Astra işlev çeşitliliği öne çıkar. İkinci plant sonrası: Viper fuel avantajı ezer.
+
+Damage farkı tek yönlü — Astra'nın hiçbir utility'si direkt damage vermez. Viper'ın Snake Bite, cloud ve Pit'in hepsi hasar verir. Bu fark post-plant ve retake fazında Viper'ı ayırır.
 
 ## 5. Map Bazlı Değişim
 
-**Breeze:** Viper favored. Breeze Viper'ın comp kurucu haritası. Astra Breeze'de pick dışı.
+**Breeze:** Viper favored. A Long ve B Long arası wall Breeze'de tek controller'ın yapabileceği en büyük bölme. Astra star'ları bu mesafeyi kapatmaz.
 
-**Icebox:** Viper favored. Mid Kitchen wall Viper comp zorunlu. Astra Icebox'ta oynanmaz.
+**Icebox:** Viper favored. Mid Kitchen wall burada geçişi keser; Astra star'ları Kitchen'ı kapatmak için yeterli yoğunluk oluşturamaz.
 
-**Fracture:** Viper favored. İki taraflı attack Viper Pit için ideal. Astra Fracture'da star yönetimi zorlanır.
+**Fracture:** Viper favored. İki taraflı attack Viper Pit için ideal. Astra star'larını iki farklı saldırı koluna bölerse yoğunluk sıfırlanır.
 
-**Haven:** Astra favored tek controller rolünde. Üç site için beş star Astra mimarisine uyar. Viper Haven'da double controller olarak oynanır.
+**Haven:** Astra favored tek controller rolünde. Üç site için beş star Astra'nın yapısına uyar. Viper Haven'da double controller'ın destekçisidir.
 
-**Lotus:** Astra favored. Üç site + C Long için Astra pull ekonomisi Viper'dan esnek. Viper Lotus'ta double controller comp'un destekçisi.
+**Lotus:** Astra favored. Üç site + C Long için Astra esnekliği Viper'dan önde. Viper Lotus'ta double controller comp'un ikincisidir.
 
-**Ascent:** Nötr-Astra eğilimli. Astra solo controller Ascent'ta çalışır, Viper Ascent'ta pick dışı.
+**Ascent:** Nötr-Astra eğilimli. Astra solo controller burada çalışır; Viper wall için A Main veya B Main'den birini seçmek zorunda kalır, diğeri açık kalır.
 
-**Split:** Viper favored hafifçe. B Main wall Viper comp'ta kullanılır. Astra Split'te zorlanır.
+**Split:** Viper hafif favored. B Main wall Viper comp'ta değer üretir.
 
-**Sunset:** Viper favored hafifçe. Dar koridor Viper cloud'a uygun.
+**Sunset:** Viper hafif favored. Dar koridorlar Viper cloud'u bloke çıkışa dönüştürür.
 
-**Bind:** Nötr. Viper Mid hollow için, Astra teleporter yakını için. Comp bağımlı.
+**Bind:** Nötr. Viper mid hollow için, Astra teleporter yakını için. Comp'a bağlı.
 
-**Pearl:** Nötr. Viper C Long için tercih edilebilir, Astra Pearl'de double controller ikincisi.
+**Pearl:** Nötr. Viper C Long için, Astra double controller'ın ikincisi olarak.
 
 ## 6. Flip Moment'ler
 
-1. **Astra round ortası boş utility.** Astra tüm star'ları ilk pop'ta kullanırsa round ortası Astra rifler. Viper bu pencerede alan kontrolünü yeniden yapılandırır. Tek round flip.
+1. **Astra utility bitti.** Tüm star'ları tek seferde harcarsa round ortasında Astra rifler. Viper bu pencerede alan kontrolünü yeniden kur.
 
-2. **Gravity Well Pit sınırı.** Astra Gravity Well'i Viper Pit çıkışına basarsa Viper Pit içinde hapsolur. Pit'in savunma değeri ters döner — Viper Pit içinde dışarı çıkamaz, savunma kilidi Astra'da.
+2. **Gravity Well Pit sınırına geldi.** Astra Gravity Well'i Viper Pit çıkışına basarsa Viper içeride hapsolur. Pit'in savunma değeri ters döner — dışarısı Astra'nın.
 
-3. **Wall yön kararı.** Viper wall yönü round başı kesin karar. Yanlışsa Astra'nın star esnekliği round'u toparlar. Doğruysa Viper yapısal avantajlı.
+3. **Wall yönü hatalıysa.** Wall başta atılır, değişmez. Yanlışsa Astra star esnekliği round'u toplar, Viper toplayamaz.
 
-4. **Cosmic Divide vs Viper Pit.** İki ult'un farklı işlevi: Divide execute açıcı, Pit retake kilitleyici. Saldırı-defans sıralaması kimde olursa o taraf kendi ult'unu daha değerli kullanır.
+4. **Cosmic Divide vs Viper's Pit.** Divide execute açar, Pit retake kilitler. Saldırı fazındaki takım Divide'ı, savunma fazındaki takım Pit'i daha değerli kullanır.
 
-5. **Double controller comp karşılaşması.** Rakip Viper + başka controller ise Astra tek başına yetersiz. Comp seçimi flip belirler.
+5. **Double controller karşı komp.** Rakip Viper + başka controller getirirse Astra tek başına yetersiz kalır. Komp seçimi bu eşleşmeyi baştan belirler.
 
-## 7. Pro Coach Notları
+## 7. Koç Notları
 
-Pro sahnede Viper vs Astra maçları harita seçimiyle büyük ölçüde çözülür. Viper Breeze/Icebox/Fracture ise Viper galip, Astra Haven/Lotus tek controller ise Astra galip. Koçlar bu eşitsizliği maç öncesi veto fazında okur — Astra comp'lar Breeze'i banner, Viper comp'lar Haven'ı banner. Round içi koç ipucu: Viper oyuncusu Astra star yerleşim sesini ezberlemeli — star yerleşim sesi haritanın neresinde çıktıysa Astra o bölgeye yoğunlaşmış demek. Astra oyuncusu Viper fuel barını ekran UI'ından takip etmeli, fuel %40 altında Astra commit eder.
+Harita seçimi bu eşleşmeyi büyük ölçüde belirler. Breeze/Icebox/Fracture'da Viper oynanıyor, Haven/Lotus'ta Astra tek controller yeterli. Veto aşamasında Astra'nın güçlü olduğu haritalara git — Haven ve Lotus'u aç, Breeze ve Icebox'ı kapat.
 
-Yaygın pro hata: Viper oyuncusu wall'u round başı atar ve round sonu fuel sıfır olur. Doğru: fuel parçalı kullan, round sonu için reserve tut. İkinci hata: Astra oyuncusu star'ı haritaya dağıtır, yoğunluk sıfır. Doğru: iki star aynı siteye, yoğunluk savunma aksını oluşturur. Üçüncü hata: İki controller karşı takımdaysa smoke'lar üst üste binmez, farklı hatlara dağılır ama aynı takımda Viper + Astra kombosu ideal sinerji.
+**Viper oynuyorsan:**
+- Wall'u parçalı kullan. Açar-kapar, fuel'i biriktir. Fuel sıfırlanırsa round ortasında utility'siz kalırsın
+- Astra star yerleştirme sesini duy — ses geldiği bölgeye Astra yoğunlaşmış. Wall'u o yönde olmayan hatta at, açık aks oluştur
+
+**Astra oynuyorsan:**
+- İki star aynı siteye. Dağıtırsan yoğunluk sıfırlanır, hiçbir site iyi kapanmaz
+- Viper fuel bar'ı düşerse baskı kur. Fuel bitmişse wall veya cloud yoktur — o an Viper'ın alan kontrolü yarıya düşer
+- Gravity Well'i Pit çıkışına bas. Viper Pit içine kapanır, dışarıyı sen kontrol edersin
+
+**Yaygın hatalar:**
+- Viper wall'u başta atıp fuel'i bitirmek. Parçalı kullan, reserve bırak
+- Astra star'larını haritaya dağıtmak. İki star bir siteye — yoğunluk savunma aksı oluşturur
+- Viper + Astra aynı takımdaysa smoke'ları farklı hatlara dağıt, üst üste bindirme

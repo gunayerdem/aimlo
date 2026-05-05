@@ -1,79 +1,81 @@
 # Orta Elo Koçluk Profili — Gold, Platinum, Diamond
 
-## Koçluk Tonu
-Doğrudan ve taktiksel. Bu oyuncuların temelleri var — nişan alabiliyorlar, haritaları biliyorlar, çoğu zaman doğru alışveriş yapıyorlar. Darboğazları karar verme, mekanik değil. Kısa ve öz ol. Temelleri atla. Daha iyisini bilmesi gereken bir oyuncuyla konuşur gibi konuş, çünkü biliyorlar. Geri bildirimi beceriler değil, seçimler etrafında çerçevele.
+## Bu Seviyede Neye Bakıyoruz
+
+Aimın var. Haritayı biliyorsun. Çoğu dövüşte ne yapman gerektiğini de biliyorsun. Seni geride tutan şey mekanik değil — **ne zaman ve nerede** kararları. Bu dosyadaki her şey o kararlar üzerine.
 
 ## Öncelikli Koçluk Alanları
 
 ### Utility Zamanlaması
-Orta elo oyuncuların utility'si var ama yanlış zamanda kullanıyorlar. Smoke'lar çok erken (execute'dan önce biter), flash'lar kimse swing yapmaya hazır değilken, molly'ler proaktif yerine reaktif kullanılıyor.
 
-- **IF** oyuncu smoke'u execute'dan çok önce atıyorsa
-- **MEANING** smoke süresi dolduğunda takım henüz harekete geçmemiş oluyor, giriş açığa çıkıyor
-- **COUNTER** smoke'u takım harekete geçmeye hazır olana kadar tut, "main'de ayak sesi duyunca smoke at" gibi tetikleyiciler kullan
-- **WHY** doğru zamanlanmış utility, düşmana tepki verme penceresi bırakmaz
+Smoke'u çok erken atıyorsun — takım henüz harekete geçmeden smoke bitiyor, giriş açılıyor. Flash'ı kimse swing yapmaya hazır değilken kullanıyorsun. Molly reaktif gidiyor, proaktif değil.
 
-### Trade Kurulumları
-Solo peek yapmak Gold-Diamond arasında düzeltilmesi en kolay alışkanlık. Oyuncular trade'in ne olduğunu bilir ama kurulumunu yapamaz.
+- **IF** takım henüz hareket etmemişken smoke attıysan
+- **MEANING** smoke bittiğinde giriş açık kalıyor, düşman tepki verebiliyor
+- **COUNTER** ayak sesi duyduğunda ya da takımdan "hazır" sinyali aldığında at — smoke'u tetikleyiciye bağla, sezgine değil
+- **WHY** doğru zamanlanan smoke düşmana pencere bırakmaz
 
-- **IF** oyuncu sürekli tek başına peek yapıp destek almadan ölüyorsa
-- **MEANING** ölümü trade edilemiyor, takım sayı dezavantajına düşüyor
-- **COUNTER** açık buddy sistemi kur: "İkiniz birlikte peek yapın. İlk oyuncu wide peek yapar, ikinci oyuncu refrag için off-angle tutar"
-- **WHY** trade kurulumu her ölümü bir değişime çevirir, sayı avantajını korur
+### Trade Kurulumu
+
+Solo peek yapıp ölüyorsun ve kimse seni trade edemiyor. Trade'in ne olduğunu biliyorsun — ama kurulumunu yapmıyorsun.
+
+- **IF** sürekli tek başına peek yapıp desteksiz ölüyorsan
+- **MEANING** ölümün boşa gidiyor, takım sayı kaybediyor
+- **COUNTER** peek'ten önce yanındakiyle konuş: biri wide peek atar, diğeri off-angle'da refrag için bekler — aynı anda, koordineli
+- **WHY** her ölüm trade edilirse sayı avantajı korunur
 
 ### Site Anchoring
-Orta eloda defansçılar çok erken rotate yapar ya da site'ı çok çabuk terk eder. "Retake oynamak" ile "site'ı bedavaya vermek" arasındaki farkı öğret.
 
-- **IF** anchor oyuncu ilk temas anında site'ı terk ediyorsa
-- **MEANING** düşmanlar serbest site alır, retake zorlaşır
-- **COUNTER** anchor'ın görevi geciktirmek, bilgi almak ve utility ile push'u yavaşlatmak — kill alıp ölmek değil. Bir utility + geri çekilme pozisyonu anchor formülü
-- **WHY** geciktirme, takıma rotate zamanı verir ve düşmanı utility harcamaya zorlar
+İlk sesde site'ı bırakıyorsun. Bu retake'i imkânsız hale getiriyor.
 
-### Crossfire Kurulumları
-İki oyuncunun aynı açıyı tutması ateş gücü israfı. Crossfire geometrisini öğret: A oyuncusu sol tarafı tutarsa, B oyuncusu sağ tarafı tutar, böylece saldırgan ikisini aynı anda temizleyemez.
+- **IF** ilk temas anında site'tan çekiliyorsan
+- **MEANING** düşman serbest site alıyor, takımın retake yapmak zorunda kalıyor
+- **COUNTER** anchor'ın işi öldürmek değil — bir utility at, push'u yavaşlat, geri çekil. Utility + geri çekilme pozisyonu, bu kadar
+- **WHY** push yavaşladığında takım rotate için pozisyona girer, düşman utility harcamak zorunda kalır
 
-- **IF** iki defansçı aynı açıyı yan yana tutuyorsa
-- **MEANING** saldırgan tek bir peek ile ikisini de görebilir, crossfire avantajı sıfır
-- **COUNTER** oyuncuları karşılıklı açılara yerleştir, saldırganın tek hareketle ikisini de temizleyemeyeceği şekilde
-- **WHY** crossfire düşmanı iki yönden aynı anda ateş altına alır, peek yapma şansını yarıya düşürür
+### Crossfire Kurulumu
+
+İki kişi aynı açıyı tutuyorsunuz — bu ateş gücü israfı. Saldırgan tek peek ile ikinizi birden görebiliyor.
+
+- **IF** takım arkadaşınla aynı köşeyi yan yana tutuyorsanız
+- **MEANING** saldırgan tek hareketle ikinizi de temizleyebiliyor, crossfire avantajı sıfır
+- **COUNTER** biri klasik köşeyi tutsun, diğeri karşı taraftan ya da beklenmedik bir açıdan — biri standart pozisyon, diğeri yüksek ya da alçak açıdan; vücut pozisyonları örtüşmez
+- **WHY** saldırgan ikinizi aynı anda göremezse peek yapmak çok daha riskli
 
 ### Anti-Read Oyunu
-Tahmin edilebilirlik bu rankta en büyük ölüm sebebi. Oyuncular alışkanlıklar geliştirir — aynı peek, aynı zamanlama, her round aynı pozisyon. 5. round'a kadar düşman takım okumayı yapar.
 
-- **IF** oyuncu her round aynı açıdan, aynı zamanlamayla peek yapıyorsa
-- **MEANING** düşman takım pozisyonu önceden nişan alır, avantaj tamamen düşmanın
-- **COUNTER** bilinçli çeşitlilik uygula: her round farklı açı, erken ve geç peek arasında değişim, saldırgan ve pasif oyun arasında geçiş
-- **WHY** tahmin edilemezlik, düşmanın hazırlık yapmasını engeller
+Aynı açıdan, aynı şekilde peek yapıyorsun. Düşman bunu fark eder ve seni beklemeye başlar.
+
+- **IF** art arda aynı açıdan aynı şekilde peek yapıyorsan
+- **MEANING** düşman önceden nişan alıyor, sen zaten kaybetmiş olarak peek yapıyorsun
+- **COUNTER** bir sonraki roundda açıyı değiştir — farklı köşe, farklı timing, ya da hiç peek yapma ve onların gelmesini bekle
+- **WHY** açını değiştirirsen düşman önceden nişan alamaz
 
 ## Bu Seviyede Yaygın Hatalar
 
-- **Tahmin edilebilir peek'ler**: Her round aynı açı, aynı zamanlama. Düşman takım oyuncudan daha hızlı adapte olur. Round-round çeşitliliği bilinçli pratik olarak öğret.
+- **Aynı açıdan tekrar tekrar peek**: Düşman seni okur ve önceden nişan alır. Her roundda açını değiştir — önceki roundda hangi köşeyi kullandığını takip et, bir sonraki roundda farklı bir köşeye geç.
 
-- **Kötü post-plant pozisyonlanması**: Oyuncular spike'ı diker ve yanında durur ya da agresif peek yapar. Varsayılan post-plant kurulumlarını öğret: belirli bir pozisyon için dik, sonra o pozisyonu utility ile tut.
+- **Kötü post-plant pozisyonu**: Spike'ı dikiyorsun ve yanında duruyorsun ya da agresif peek yapıyorsun. Spike'ı her zaman retake'i zorlaştıracak yere dik — site içi duvarın arkası, köşe gibi. Sonra çapraz pozisyona çekil: düşman spike'a giderken seni göremez, sen onu görürsün.
 
-- **Ego peek**: Almak zorunda olmadıkları dövüşlere girme. Sayı avantajına sahip defansçının peek yapıp ölmesi 4v3'ü 3v3'e çevirir. "Avantajını koru, onların sana gelmesini sağla" öğret.
+- **Ego peek**: Almak zorunda olmadığın dövüşe giriyorsun. 4v3'te peek yapıp ölürsen 3v3 olur. Avantajın varsa dur — onların gelmesini bekle.
 
-- **Rotate zamanlamasında hata**: Çok erken rotate etme (site'ı açık bırakma) ya da çok geç (site alındıktan sonra varma). Bilgiye dayalı rotate öğret: onaylanmış bilgiyle rotate et, tek başına ses ipuçlarıyla değil.
+- **Erken rotate**: Tek bir ses ipucuyla rotate ediyorsun, site'ı açık bırakıyorsun. Rotate et, ama onaylanmış bilgiyle: takım arkadaşın gördü, düşman kesin geçti. Tahminle rotate etme.
 
-- **Erken round'da utility israfı**: Tüm smoke'lar ve flash'lar mid-round'dan önce biter. Sonra retake ya da geç round oyununda sıfır utility kalır. Utility bütçelemesi öğret: post-plant ya da retake için en az bir yetenek sakla.
-
-## Neyi Vurgulamalı
-
-Orta elo için temel koçluk mesajı: **"Mekaniği biliyorsun — şimdi ne zaman ve nerede konusunda daha akıllı ol."** Her geri bildirim, oyuncunun nişan ve yetenek kullanımının yeterli olduğunu ama zamanlama, pozisyonlanma ve düşmanı okuma konusundaki kararlarının onu geride tuttuğunu pekiştirmeli. Bu, gelişimi pratik sorunu değil, düşünme sorunu olarak yeniden çerçeveler.
+- **Round ortasında utility bitmesi**: Tüm smoke ve flash'ları erken harcıyorsun. Post-plant veya retake için en az bir utility sakla — o ana kadar eli boş kalırsın.
 
 ## Ölüm Patternlerini Yorumlama
 
-- **IF** orta elo oyuncu aynı pozisyonda sürekli ölüyorsa
-- **MEANING** neden neredeyse her zaman **tahmin edilebilirlik**, kötü pozisyonlanma değil. İyi bir nokta seçtiler ama çok fazla kullandılar
-- **COUNTER** çeşitlilik öner: "4. round'da 1-3. round'larla aynı açıyı tuttun. Düşman artık önceden nişan alıyor. Off-angle'a geç ya da peek'ini birkaç vuruşluk geciktir"
-- **WHY** pozisyon değişimi, düşmanın okuma yapmasını engeller
+- **IF** aynı pozisyonda tekrar tekrar ölüyorsan
+- **MEANING** sorun pozisyon değil — tahmin edilebilirlik. İyi bir köşe seçtin ama çok fazla kullandın
+- **COUNTER** o açıyı bırak, off-angle'a geç ya da peek'ini birkaç beat geciktir
+- **WHY** düşman önceden nişan alamazsa dövüş eşit başlar
 
-- **IF** post-plant durumlarında ölümler yaşanıyorsa
-- **MEANING** sorun aim değil kurulum. Nereye diktiklerini ve nerede konumlandıklarını kontrol et — dikilme noktası tutma pozisyonlarını desteklemiyor
-- **COUNTER** plant noktasını tutma pozisyonuna göre seç, sonra o pozisyona çekil
-- **WHY** plant ve pozisyon uyumu, post-plant başarısının temelidir
+- **IF** post-plant durumlarında ölüyorsan
+- **MEANING** sorun aim değil kurulum — spike'ı nereye diktiğin, tutma pozisyonunu desteklemiyor
+- **COUNTER** önce tutma pozisyonuna karar ver, sonra o pozisyondan spike'ı göremeyecekleri yere dik
+- **WHY** plant ve pozisyon uyumu olmadan post-plant her zaman şansa kalır
 
-- **IF** 1vX durumlarında ölümler yoğunlaşıyorsa (X küçükken: 1v1, 1v2)
-- **MEANING** oyuncu kötü rotate zamanlaması ya da çok uzun lurk yüzünden dövüşlere geç kalıyor
-- **COUNTER** düzeltme daha hızlı bilgi işleme, daha hızlı nişan değil
-- **WHY** zamanında bilgi, doğru pozisyonda olmayı sağlar
+- **IF** 1v1 veya 1v2 durumlarında ölümler yoğunlaşıyorsa
+- **MEANING** geç kalıyorsun — kötü rotate ya da çok uzun lurk nedeniyle dövüşe yanlış pozisyonda giriyorsun
+- **COUNTER** daha hızlı nişan al değil — daha erken bilgi al ve pozisyona gir
+- **WHY** doğru pozisyon, dövüşe girmeden önce açıyı kapatır

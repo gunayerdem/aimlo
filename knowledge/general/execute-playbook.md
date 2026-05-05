@@ -8,209 +8,179 @@ tags: [execute, site-take, entry, trade, utility-dump, fast-slow-tempo]
 
 # EXECUTE PLAYBOOK — Site Alma Kitabı
 
-Execute, saldırının site'a commit etme anıdır. Kötü execute utility israfı + bedava ölüm, iyi execute sistematik bir site alma işlemidir. Bu dosya execute'un tiplerini, timing'ini ve rol dağılımını anlatır.
+Execute, siteye tam giriş anıdır. Kötü execute = utility çöpe + bedava ölüm. İyi execute = roller net, sıralama doğru, site alınmış.
 
-## EXECUTE'UN TEMEL BİLEŞENLERİ
+## EXECUTE'UN BEŞ ROLÜ
 
-Her execute aynı bileşenlere sahiptir:
+Bu beş rol olmadan execute çöker. 5 oyuncu = 5 rol.
 
-1. **Utility dump:** Smoke, flash, molly sırayla patlar.
-2. **Entry:** Duelist veya entry rolü oyuncusu ilk girer.
-3. **Trade:** Entry'nin hemen arkasından trade'ci.
-4. **Support:** Utility desteği, re-flash, cover.
-5. **Anchor/Lurker:** Rotate cut, flank watch, post-plant hazırlık.
+**1. Utility dump** — Smoke, flash, molly sırayla. Sıra bozulursa entry kör girmeden ölür.
 
-Bu bileşenlerden biri eksik olursa execute çöker. 5 oyuncu = 5 rol.
+**2. Entry** — Duelist (Jett, Raze, Neon, Phoenix, Reyna). Utility arkasından ilk sen girersin. İlk duelloyu kabul edersin — ölürsen sorun yok, trade alındığı sürece değerlisin.
+- Ne yaparsın: Flash pop'la eş zamanlı peek, dash/ability ile açı atla, ilk açıyı kır.
+- Ne yapmazsın: Utility olmadan gir, trade arkanda yokken commit et.
+
+**3. Trade** — Entry'nin hemen arkasından girersin. Entry düştüğünde rakip nişan almışken sen peek edersin — o an avantajlısın.
+- Ne yaparsın: Entry'nin açtığı açıdan ateş et, rakibi rotate ettir.
+- Ne yapmazsın: Entry düştükten sonra bekle — rakip açıyı kapatır, seni bekler. Entry düşer düşmez peeк et.
+
+**4. Support** — Initiator veya controller (Sova, Breach, Skye, Fade, KAY/O, Gekko). Entry + trade'i utility ile beslersin.
+- Ne yaparsın: Flash entry'yle eş zamanlı, molly rakibi pozisyondan söker.
+- Ne yapmazsın: Flash erken patlar, entry henüz hazır değil — rakip flash bitmeden kapanır.
+
+**5. Anchor/Lurker** — Takım siteye girerken sen diğer taraftasın. Rotate hattını tutarsın, plant sonrası fazla kill çıkarırsın.
+- Ne yaparsın: Rakip rotate hattında bekle, spike plant sesini duyunca baskı yap.
+- Ne yapmazsın: Takımdan çok uzak kal, solo duello kabul et.
 
 ## EXECUTE TİPLERİ
 
-### 1. FAST EXECUTE — Tempo Odaklı
+### 1. FAST EXECUTE — Hız Odaklı
 
-Fast execute saldırının hız + sürpriz avantajına dayanır. Minimum utility, maksimum hız. Site'a saldırı savunmanın utility hazırlamasına zaman vermez.
+Elinde az utility var — hızla kapanırsın. Savunma hazırlanmadan site alırsın.
 
-**Ne zaman:**
-- Eco veya force round (utility yok, hız var)
-- Savunma setup'ı okunmuş (fake'siz direkt bas)
-- Bonus round (silah var, utility yok)
-- Close range map (Sunset, Bind, Split B, Corrode)
+**Ne zaman kullanırsın:**
+- Elinde 1 smoke, 1 flash, 1 molly kaldıysa
+- Savunmanın setup'ını okuduysan — fake'e gerek yok, direkt bas
+- Bind, Split B, Sunset, Corrode gibi dar koridor haritalarda
 
-**Nasıl:**
-- Utility minimum: 1 smoke, 1 flash, belki 1 molly
-- Tüm takım aynı koridordan, spread yok
-- Entry + trade + support aynı anda
-- Site'ta temizleme yerine direkt plant
+**Nasıl yaparsın:**
+- 1 smoke, 1 flash, 1 molly — hepsi bu kadar
+- Tüm takım aynı koridordan girer, yayılma yok
+- Site içinde temizleme yerine direkt plant
 
-**Yasak:**
-- Yavaşlama, default yapma
-- Utility fazla harcama
-- Spread etme
+**Yapmazsın:**
+- Default açmak, beklemek
+- Utility fazla harcamak
+- Takımı farklı koridorlara yaymak
 
-**Win condition:** Savunmanın retake'i düzgün organize edemeden site alınır.
+**Neden çalışır:** Savunma retake pozisyonu almadan site alınır.
 
-### 2. SLOW EXECUTE — Kontrollü Site Alma
+### 2. SLOW EXECUTE — Kontrollü Giriş
 
-Slow execute utility dominance + disiplin odaklı. Önce bilgi topla, sonra utility dump, sonra commit. Site'ı tam temizleyerek girer.
+Full buy roundda utility stacking varsa önce bilgi toplarsın, sonra utility dump, sonra commit edersin.
 
-**Ne zaman:**
-- Full buy round, utility stack var
-- Rakip savunma bilinmiyor, default gerekli
-- Open/uzun map (Breeze, Icebox, Haven)
-- Çoklu site olan map (Haven, Lotus — fake gerekli)
+**Ne zaman kullanırsın:**
+- Full buy, utility doluysa
+- Savunmanın pozisyonu bilinmiyorsa
+- Breeze, Icebox, Haven gibi açık veya geniş haritalarda
 
-**Nasıl:**
-- Default açılış penceresinde bilgi toplama
-- Mid-round karar ile commit
-- Full utility dump (3+ smoke, 2+ flash, 2+ molly)
-- Entry + trade + support + lurker disiplini
+**Nasıl yaparsın:**
+- Önce default açılışla bilgi topla
+- Savunmanın zayıf noktasını görünce commit et
+- 3+ smoke, 2+ flash, 2+ molly dökmek var — ama hepsini execute'a harcama, post-plant için sakla
 
-**Win condition:** Site tam temizlenir, post-plant crossfire hazır, utility'nin bir kısmı post-plant için saklı.
+**Neden çalışır:** Site tam temizlenir, post-plant crossfire hazır, rakip retake pozisyonu alamaz.
 
-### 3. SPLIT EXECUTE — İki Yönlü Bas
+### 3. SPLIT EXECUTE — İki Yönden Bas
 
-Split execute saldırının iki koridordan aynı anda bas yaparak savunma crossfire'ını bozmasıdır. En güçlü execute tipi ama koordinasyon gerektirir.
+Mid kontrolü aldıysan iki koridordan aynı anda girersin. Savunma iki açıya aynı anda bakamaz.
 
-**Ne zaman:**
-- Mid kontrolü alındı (Ascent, Sunset, Split, Haven)
-- Savunma predictable hold pozisyonunda
-- Full buy, utility tam
+**Ne zaman kullanırsın:**
+- Mid kontrolün var (Ascent, Sunset, Split, Haven)
+- Savunma tahmin edilebilir hold pozisyonundaysa
+- Full buy, utility doluysa
 
-**Nasıl:**
-- İki takım parçası: 2-3 kişi bir koridor, 2-3 kişi diğer
-- Her iki parça aynı anda commit (timing şart)
-- İki parça da utility hazırlıklı olmalı
-- Entry her iki taraftan, trade her iki taraftan
+**Nasıl yaparsın:**
+- 2-3 kişi bir koridor, 2-3 kişi diğer
+- Her iki grup aynı anda commit eder — timing bozulursa çalışmaz
+- Her iki gruptan entry + trade
 
-**Yasak:**
-- Timing bozulması (bir taraf erken commit = diğer taraf savunmasız)
-- Communication kopukluğu
-- Tek taraf tek başına commit
+**Yapmazsın:**
+- Bir grup erken girer, diğer grup geride kalır — erken giren grup ezilir
+- İletişim kesilir
 
-**Win condition:** Savunma iki angle'a aynı anda bakamaz, biri trade'lenir, crossfire bozulur.
+**Neden çalışır:** Savunma ikiye bölünür, biri trade'lenir, crossfire çöker.
 
-### 4. FAKE EXECUTE — Misdirection
+### 4. FAKE EXECUTE — Yanlış Yöne Çek
 
-Fake execute savunmanın rotate'ini yanlış yöne çekmek için bir site'a ses/utility yapmak ve asıl commit'i diğer siteye yapmaktır.
+Savunmanın rotate pattern'ini bir önceki roundda gördüysen bir siteye ses + utility yaparsın, savunma rotate edince asıl siteye tam takım commit edersin.
 
-**Ne zaman:**
-- Savunmanın rotate pattern'i okunduysa
-- Full buy round, utility'ye harcama var
-- Çoklu site map (Haven, Lotus)
+**Ne zaman kullanırsın:**
+- Savunmanın hangi siteye rotate ettiğini gördüysen
+- Haven, Lotus gibi çoklu site haritalarda
+- Full buy, utility var
 
-**Nasıl:**
-- 1-2 kişi fake site'a ses + utility (ama commit etmez)
-- Fake oyuncuları gerçek bir execute gibi davranır (ayak sesi, flash, smoke)
-- Savunma rotate eder — boşalan asıl siteye tam takım commit
-- Fake oyuncuları fake commit sonrası rotate edip asıl site'a katılır veya flank pozisyonda kalır
+**Nasıl yaparsın:**
+- 1-2 kişi fake siteye ses + utility — gerçek execute gibi davranır (ayak sesi, flash, smoke)
+- Savunma rotate edince asıl siteye tam takım commit
+- Fake oyuncuları ya rotate eder ya flank pozisyonunda kalır
 
-**Yasak:**
-- Fake'e fazla utility harcama (utility hole yaratır)
-- Fake'i yarı yarıya yapma (rakip fake'i anlar)
-- Commit timing'i gecikmesi (fake işe yaramadan rakip doğrulama yapar)
+**Yapmazsın:**
+- Fake siteye çok utility harca — post-plant için delik açarsın
+- Fake'i yarım bırak — savunma hemen anlar, rotate etmez
 
-**Win condition:** Savunma rotate eder, asıl site zayıflar, execute garanti.
+**Neden çalışır:** Savunma boşalan asıl siteye geç döner, execute garanti.
 
-### 5. DEFAULT INTO EXECUTE — Info Ağırlıklı
+### 5. DEFAULT → EXECUTE — Önce Oku, Sonra Bas
 
-Default round'un açılış penceresini bilgi toplamaya ayırır. Saldırı savunmanın setup'ını okur, sonra mid-round kararla execute'a geçer.
+Savunmanın nerede durduğunu bilmiyorsan önce bilgi toplarsın, zayıf noktayı görünce execute'a geçersin.
 
-**Ne zaman:**
-- Savunma bilinmiyor
+**Ne zaman kullanırsın:**
+- Savunmanın setup'ı bilinmiyorsa
 - Full buy
-- Rakip stack'ları okunabilir
+- Rakip stack okunabilir pozisyondaysa
 
-**Nasıl:**
-- Round açılışında default spread — mid, A Main, B Main tarafında info
-- IGL mid-round karar verir: hangi site zayıf, hangi utility gerekli
-- Execute karar sonrası hızlı commit
+**Nasıl yaparsın:**
+- Açılışta takımı yay — mid, A Main, B Main tarafında bilgi topla
+- Zayıf site görününce commit et, hızlı
 
-**Win condition:** Savunmanın zayıf noktası bulunur, o noktaya commit edilir.
+**Neden çalışır:** Savunmanın zayıf noktasına girersin, tahmin değil veri bazlı.
 
-## EXECUTE ROL DAĞILIMI
+## UTILITY SIRASI
 
-### Entry Rolü
-Siteye ilk giren oyuncu. Duelist rolü (Jett, Raze, Neon, Phoenix, Reyna). İşi ilk duelloyu kabul etmek ve rakip angle'ları yerinden kaldırmak. Entry sık sık ölür — bu normaldir, trade'i alındığı sürece değerli.
+Sıralama yanlışsa execute başlamadan biter.
 
-**İyi entry:** Flash pop timing'inde peek, dash/movement ability ile angle atla, ilk angle kırıl.
-**Kötü entry:** Utility olmadan agresif peek, trade olmadan ilerleme, solo commit.
+- **Smoke:** Entry girmeden hemen önce atılır. Entry smoke arkasından çıkar.
+- **Flash:** Entry peek'iyle eş zamanlı patlar. Flash patladıktan sonra swing yaparsın — rakip kör, sen değilsin.
+- **Molly:** Site içindeki rakibi pozisyondan sökmek için veya post-plant'te defuse engellemek için sakla.
+- **Stun/hasar (Breach):** Entry girmeden hemen önce, stun bitmeden entry içeri girer.
 
-### Trade Rolü
-Entry'nin hemen arkasından giren oyuncu. Entry öldüğünde rakibi trade eder. Initiator veya ikinci duelist rolü.
+## EXECUTE'A GEÇİŞ: OLAY-BAZLI KARAR
 
-**İyi trade:** Entry'nin hemen ardından peek, entry'nin açtığı angle'dan ateş et, rakibi rotate ettikten sonra takım için zaman kazan.
-**Kötü trade:** Entry'den çok geç peek (rakip angle'ı kapatır), farklı angle'dan peek (entry'nin açtığı angle'ı kullanmama).
+Saate bakma — durumu oku.
 
-### Support Rolü
-Utility ile entry + trade'i destekleyen oyuncu. Initiator (Sova, Breach, Skye, Fade, KAY/O, Gekko) veya controller.
+- **Savunma rotate ettiyse:** Site boşalmış — o siteye commit et.
+- **1 düşman düştüyse:** Savunma eksik — fast execute başlat.
+- **Bilgi toplanmışsa (drone, dart, recon):** Pozisyonu gördün — utility dump yap, commit et.
+- **Bilgi yoksa:** Default açılış yap, olay bekle.
+- **Takımın 1 kişi kaybettiyse:** Split yerine tek koridor — 4 kişiyle split execute yapma.
 
-**İyi support:** Doğru utility sıralaması, flash zamanında pop, molly rakibi pozisyondan kaldırır.
-**Kötü support:** Flash entry'den çok önce, molly yanlış pozisyon, utility eksik.
+## EXECUTE SONRASI — POST-PLANT
 
-### Controller Rolü
-Smoke'lar, map vision'ı kontrol eder. Execute'un görsel çerçevesi.
+Plant bitti, execute bitmedi.
 
-**İyi controller:** Smoke'lar doğru angle'ı kapatır, post-plant için smoke saklı.
-**Kötü controller:** Smoke'lar geç atılır, tüm smoke'lar execute'a harcanır.
+- Plant'ten hemen sonra spike'tan uzaklaş, farklı açılara yayıl.
+- Crossfire kur — iki farklı açıdan defuse'u kapla.
+- Post-plant için utility kaldı mı kontrol et.
+- Defuse sesi duymadan peek açma.
+- Trade chain hazır tut — biri düşerse diğeri kaplar.
 
-### Anchor/Lurker Rolü
-Takım execute'a girerken bir oyuncu diğer tarafta. Flank keser, rotate'i bozar, post-plant'te trade desteği verir.
+**Post-plant detayı:** `general/post-plant-playbook.md`
 
-**İyi lurker:** Rakip rotate hattını tutar, plant'ten sonra fazla kill çıkarır, takıma zaman kazandırır.
-**Kötü lurker:** Takımdan çok uzak, solo duello kabul eder, trade alınmaz.
+## YAYGIN HATALAR
 
-## EXECUTE TIMING
+**1. Tüm utility execute'a gitti**
+Plant alırsın ama post-plant'te savunma retake eder — elinde hiçbir şey yok. En az 1 utility'yi post-plant için sakla.
 
-Execute'un zamanlaması rolleri kadar belirleyicidir.
+**2. Timing koptu**
+Entry erken girdi, trade geç kaldı. İki ölüm, execute çöktü.
 
-### Round Timing
-- **Açılış fazı:** Default/info. Info belirleyici değilse utility de kullanma.
-- **Orta faz:** Execute commit window. Bu aralıkta plant olmalı.
-- **Geç faz:** Late execute riskli, rakip rotate + stack yapmıştır.
-- **Son faz:** Panic execute zone, plan çökmüş.
+**3. Utility sırası yanlış**
+Flash molly'den önce patlıyor, smoke en sonra atılıyor. Rakip flash bitmeden pozisyon değiştirdi, smoke gelene kadar hazır.
 
-### Utility Timing
-- **Smoke:** Entry'den hemen önce atılır, entry smoke'un arkasından çıkar.
-- **Flash:** Entry'nin peek'iyle aynı anda pop etmeli. Pop'tan sonra swing = bedava kör rakip.
-- **Molly:** Rakip pozisyondan çıkartmak için — site içindeki anchor'a veya post-plant için.
-- **Stun/damage (Breach):** Entry'den hemen önce, stun bitmeden entry girer.
+**4. İki kişi entry almak istedi**
+Trade'ci yok. İkisi de site girişinde öldü.
 
-### Trade Timing
-- Entry'nin hemen arkasından. Bu pencere doğru — rakip entry'yi öldürdükten sonra nişan alıyorken sen peek edersin.
-- Daha erken = trade peek kaybı (entry'yi de yanlış angle'a çekiyorsun).
-- Daha geç = rakip angle'ı kapatmış, seni bekliyor.
+**5. Execute yarım kaldı**
+Ya tam commit et ya default'a geri dön. Yarım execute'da takım birer birer elenir.
 
-## EXECUTE SONRASI — POST-PLANT GEÇİŞ
+## RANK BAZLI HATALAR
 
-Execute plant ile bitmez. Plant sonrası post-plant pozisyonu execute'un son bölümüdür:
+**Gold-Plat:**
+Execute'larınız plansız — "go" diyen kişi farklı, entry farklı, trade yok. Round başında roller netleşmeden execute başlamaz: "Smoke sen at, flash ben, entry sen, trade sen."
 
-1. Plant'ten hemen sonra spread et (spike'tan uzaklaş).
-2. Crossfire kur (farklı angle'lar).
-3. Utility'yi kontrol et — post-plant için ne kaldı?
-4. Defuse sesine kadar peek yok.
-5. Trade chain hazır tut.
+**Diamond-Ascendant:**
+Execute'ları biliyorsunuz ama herkes entry almak istiyor, trade'ci sahaya çıkmıyor. Rol dağılımını round başında netleştir — execute anında tartışma yok.
 
-**Post-plant playbook'a referans:** `general/post-plant-playbook.md`
-
-## EXECUTE YAYGIN HATALARI
-
-### Hata 1: Utility'nin Tamamını Execute'a Harcama
-Execute plant'e ulaşır ama post-plant'te savunma retake eder çünkü saldırının hiç utility'si kalmamıştır. Her oyuncu en az 1 utility'yi post-plant için saklamalı.
-
-### Hata 2: Timing Kopması
-Entry erken girer, trade gecikir. İki ölüm, execute çöker.
-
-### Hata 3: Utility Sıralama Yanlış
-Flash molly'den önce, smoke en sonra. Rakip flash'lanmadan position'unu değiştirir, smoke gelene kadar hazırdır.
-
-### Hata 4: Role Kopması
-İki oyuncu entry almak ister, trade'ci yok. Ya da entry hiç yok, tüm takım bekler.
-
-### Hata 5: Commit Olmayan Execute
-Execute başlar ama yarım kalır. Ya tam commit edilir ya da execute yerine default geçilir. Yarı execute = takım dağılır.
-
-## RANK NOTU
-
-**Gold-Plat:** Execute'larınız plansız — "go" diyen kişi farklı, entry farklı, trade gecikmiş. IGL yoksa en tecrübeli oyuncu execute planını verir: "Smoke 1, flash 2, entry 3, trade 4."
-
-**Diamond-Ascendant:** Execute'larınızı biliyorsunuz ama rol disiplini zayıf. Herkes entry alıyor, kimse trade yapmıyor. Rol dağılımı round başında netleşmeli.
-
-**Immortal-Radiant:** Execute varyasyonu yetersiz. Her round aynı execute okunur. 3-4 farklı execute hazırlığı + map-specific varyasyon. Ayrıca split execute'larda timing disiplini pro seviyenin ayırt edici özelliği.
+**Immortal-Radiant:**
+Her round aynı execute yapıyorsunuz, savunma okudu. 3-4 farklı execute hazırla, map'e özgü varyasyon ekle. Split execute'larda iki grubun timing'i aynı anda olmazsa execute çalışmaz — bir grup gecikirse diğer grup ezilir.

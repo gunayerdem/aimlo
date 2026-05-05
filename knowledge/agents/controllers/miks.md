@@ -1,173 +1,175 @@
 # AJAN: Miks
 
-> **PATCH-SENSITIVE**: Miks yeni bir ajan. Yetenek değerleri, cooldown'lar ve mekanikler yamalar arasında değişebilir. Koçluk öncesi güncel yamayı doğrula.
+> **PATCH-SENSITIVE**: Miks yeni bir ajan. Yetenek değerleri ve mekanikler yamalar arasında değişiyor. Koçluk öncesi güncel yamayı kontrol et.
 
 ## 1. Rol Kimliği
 
-Miks, controller sınıfına alternatif bir geometri anlayışı getiren alan inkar uzmanıdır. Yerleşik controller'lardan (Omen, Brimstone, Astra) farklı olarak Miks, duman ve alan inkar mekaniklerini alışılmadık şekiller ve açılardan sunarak savunucuların ezberledikleri dodge pozisyonlarını geçersiz kılar. Miks'in kit değeri, rakiplerin yıllardır içselleştirdikleri "duman düştüğünde nereye gidilir" reflekslerini bozmasından gelir. Bu ajan, controller temellerini (duman zamanlama, choke denial, execute desteği, retake bütçelemesi) zaten bilen oyuncunun elinde parlar; temeller olmadan Miks'in benzersiz geometrisi boşa harcanır.
+Miks bir controller — ama dumanları farklı bir şekil çiziyor. Omen, Brimstone, Astra oyuncuları yıllardır aynı dodge noktalarını ezberleyerek oynadı. Miks o noktaları kapatıyor. Savunucu standart yerine kaçıyor, karşısında inkar görüyor.
+
+Ama bu fark ancak controller temellerini biliyorsan işe yarar: duman zamanlaması, choke kapatma, execute desteği, retake için yetenek saklamak. Temeller sağlam değilse Miks'in farklı şekilleri sana hiçbir şey katmaz.
 
 ## 2. Yetenek Seti
 
 ### Q — Geometrik Duman
-Miks'in birincil görüş inkar aracı. Standart küresel dumanlardan farklı bir şekil profili sunar. Yerleştirme açısı ve pozisyonu, kapatılan alanın geometrisini doğrudan belirler. Oyuncu bu dumanın hangi sightline'ları kapattığını ve hangi dodge noktalarını açık bıraktığını harita başına ezberlemeli. Cooldown yönetimi: retake için en az bir kullanım hakkı sakla.
+Miks'in ana görüş kapatma aracı. Küresel dumanlardan farklı bir şekil — kapattığı alan ve açık bıraktığı nokta haritaya göre değişiyor. Hangi sightline'ı kapattığını, hangisini açık bıraktığını harita başına öğren. Retake için en az bir kullanım sakla.
 
-### E — Alan İnkar Alanı
-Belirli bir bölgeyi geçilmez veya cezalı hale getiren alan inkar aracı. Choke point'lere, entry yollarına ve spike çevresine yerleştirilir. Atakta savunucuları pozisyonlarından çıkarır, defansta push denemelerini yavaşlatır ve hasar verir. Retake sırasında spike etrafına deploy edilerek defuse zamanı satın alır.
+### E — Alan İnkar
+Bir bölgeyi geçişi cezalandırır hale getiriyor. Choke'lara, giriş yollarına, spike çevresine koy. Atakta savunucuyu yerinden eder. Defansta push'u yavaşlatır ve hasar verir. Spike kurulduktan sonra etrafına koyarsan defuse zamanı kazanırsın.
 
 ### C — Yardımcı Araç
-Bilgi toplama veya kısa süreli alan kontrolü sağlayan destek yeteneği. Takımın execute veya retake planını destekler. Diğer yeteneklerle kombinasyon halinde kullanıldığında değeri artar. Tek başına kullanımda sınırlı etki yaratır; zamanlaması diğer utility'lerle koordine edilmeli.
+Bilgi alma veya kısa alan kontrolü. Tek başına zayıf — diğer yeteneklerle birlikte güçlü. Zamanlamasını takımın hareketine göre ayarla.
 
 ### X — Ultimate
-Miks'in geniş çaplı alan kontrolü sağlayan nihai yeteneği. Büyük bir bölgeyi inkar eder veya takımın atak/retake planını destekleyen güçlü bir görüş/alan manipülasyonu yaratır. Ultimate orb toplama ve tur ekonomisi ile bütçelenmeli. Yanlış zamanlama veya pozisyonda kullanılan ultimate, takımın tur planını bozar.
+Geniş alan kontrolü. Büyük bir bölgeyi kapatır veya takımın execute/retake planını güçlendirir. Tek başına tur kazandırmaz — takımın koordineli planının parçası olarak kullan. Ekonomi düşükse veya takım dağınıksa harcama.
 
 ## 3. Temel Sorumluluklar
 
-- **Execute desteği:** Takım atak çağrısında dumanları doğru zamanda ve doğru pozisyona yerleştir. Duman, entry oyuncusu site'a girmeden hemen önce düşmeli — erken duman dissipate olur, geç duman takımı açıkta bırakır.
-- **Choke denial:** Savunma tarafında dar geçişleri duman ve alan inkar ile kilitle. Düşmanın push zamanlamasını boz, rotasyon zamanı kazan.
-- **Retake bütçelemesi:** Her tur başında utility planı oluştur. Tüm yetenekleri ilk temastan harcama; retake için en az bir duman ve bir alan inkar aracı ayır.
-- **İletişim:** Miks yeni bir ajan. Takım arkadaşları yetenek görsellerini ve zamanlamalarını tanımayabilir. Her yetenek kullanımından önce sesli çağrı yap: "Duman A short'a düşüyor", "Alan inkar B main'de". Sessiz utility takım arkadaşını yanlış pozisyonda yakalar.
-- **Tur planlama:** A atak, B atak, savunma ve retake için sabit utility sıralaması belirle. Plansız tur, utility'yi rastgele harcar.
-- **Adaptasyon:** Rakiplerin Miks'e karşı geliştirdiği konumlanmayı tur bazında oku ve yerleştirmeleri buna göre değiştir.
+- **Execute desteği:** Takım girmeden hemen önce dumanı koy. Çok erken koyarsan duman bitmeden giriş olmaz. Çok geç koyarsan takım açıkta kalır.
+- **Choke kapatma:** Defansta dar geçişleri duman ve alan inkarla kapat. Düşmanın push zamanlamasını boz, rotasyon için süre kazan.
+- **Yetenek saklama:** Her yetenekten önce harca. Retake için en az bir duman ve bir alan inkar aklında olsun.
+- **Çağrı yap:** Miks yeni bir ajan — takım arkadaşın yetenek görselini tanımıyor olabilir. Her kullanımdan önce söyle: "Duman A short'a düşüyor", "Alan inkar B main'de". Çağrısız yetenek takım arkadaşını yanlış yerde yakalar.
+- **Tur planı:** A atak, B atak, defans ve retake için hangi yeteneği nereye koyacağını önceden düşün. Plansız oturumda yeteneği rastgele harcarsın.
+- **Okuma:** Rakipler Miks'e karşı konumlanma öğreniyor. Aynı yerleri her tur tekrarlama — yerleştirmeyi değiştir.
 
 ## 4. Sık Yapılan Hatalar
 
-1. **Miks'i başka bir controller gibi oynamak** — Omen veya Brimstone tarzı duman noktaları kullanmak, Miks'in benzersiz geometri avantajını sıfırlar. Miks'in dumanları farklı alanları kapatır; bunu keşfetmeden standart smoke noktaları yerleştirmek onu daha kötü bir Brimstone yapar.
-2. **Controller temellerini ihmal etmek** — Benzersiz mekaniklerle deney yaparken duman zamanlaması ve choke denial unutulur. Temeller sağlam olmadan Miks'e özgü teknikler inşa edilemez.
-3. **İletişim eksikliği** — Takım arkadaşları Miks'in yeteneklerinin görselini ve zamanlamasını bilmeyebilir. Çağrısız utility, takım arkadaşını yanlış pozisyonda yakalar veya düşman dumanına girmesine neden olur.
-4. **Retake'te utility'siz kalmak** — Tüm yetenekleri tur başında harcamak, retake senaryosunda takımı çıplak bırakır.
-5. **Highlight peşinde koşmak** — Miks'in benzersiz şekilleriyle gösterişli oyunlar kovalamak yerine tutarlı tur-tur değer üretmeye odaklan.
-6. **Yama değişikliklerine adapte olmamak** — Miks yeni olduğu için değerler ve mekanikler sık değişebilir. Her yamada kit'i yeniden değerlendir.
-7. **Rakip adaptasyonunu okumamak** — Aynı duman şekillerini ve alan inkar pozisyonlarını her turda tekrarlamak, rakiplerin konumlanma öğrenmesini hızlandırır.
-8. **Ultimate'i panik anında harcamak** — Ultimate, planlı bir execute veya retake'in parçası olmalı. Panik anında kullanılan ultimate çoğunlukla yanlış bölgeyi kaplar ve takıma değer üretmez.
+1. **Omen gibi oynamak** — Miks'in dumanları farklı alanları kapatıyor. Standart controller noktalarını kullanırsan onu daha kötü bir Brimstone'a dönüştürürsün. Önce Miks'in neyi farklı kapattığını öğren.
+2. **Temelleri unutmak** — Benzersiz mekaniklerle deney yaparken duman zamanlaması ve choke kapatmayı atlıyorsun. Temel yoksa Miks'e özgü hiçbir teknik işe yaramaz.
+3. **Çağrı yapmamak** — Takım Miks'in yeteneklerinin görselini ve zamanlamasını henüz bilmiyor. Çağrı yoksa takım arkadaşın düşman dumanına ya da kendi alanına giriyor.
+4. **Retake'e yeteneksiz girmek** — Tüm yetenekleri tur başında harcıyorsun. Spike kurulduğunda elinde hiçbir şey kalmıyor.
+5. **Gösterişli oyun kovalamak** — Miks'in şekilleriyle süslü oyunlar değil, her turda aynı değeri ver.
+6. **Yamayı takip etmemek** — Miks yeni ve sık değişiyor. Her yamada yeteneğin nasıl çalıştığını tekrar kontrol et.
+7. **Aynı sırayı tekrarlamak** — Her turda aynı yetenek sırasını kullanıyorsan rakip seni üç turda okur. Yerleştirmeyi değiştir.
+8. **Ultimate'i panikle harcamak** — Ultimate planlı execute veya retake'in parçası olmalı. Panik anında kullanılan ultimate yanlış bölgeyi kapatır, takıma bir şey katmaz.
 
 ## 5. Kalıp -> Anlam
 
-**IF** Oyuncu execute sırasında duman zamanlamalarını sürekli kaçırıyor
-**MEANING** Miks'e özgü mekaniklere odaklanırken controller görevlerini unutuyor
-**COUNTER** Önce temelleri oturt. Custom oyunda her harita için 3-4 standart duman noktası ezberle. Dumanlar doğru zamanda, doğru yere düştükten sonra kit'e özgü teknikler eklenebilir.
-**WHY** Zamansız duman takımı açık görüş hattına maruz bırakır ve execute'un tüm temposunu bozar — hiçbir benzersiz mekanik bunu telafi edemez.
+**IF** Execute sırasında duman zamanlamalarını sürekli kaçırıyorsun
+**MEANING** Miks'e özgü mekaniğe odaklanırken controller görevini unutuyorsun
+**COUNTER** Önce temelleri otur. Custom'da her harita için 3-4 standart duman noktası ezberle. Dumanlar doğru zamanda doğru yere düştükten sonra Miks'e özgü teknikleri ekle.
+**WHY** Zamansız duman takımı açık görüş hattına sokuyor ve execute'un tüm temposunu bozuyor — hiçbir benzersiz mekanik bunu telafi edemez.
 
-**IF** Takım arkadaşları Miks'in yeteneklerine denk geliyor veya yanlış konumlanıyor
-**MEANING** İletişim açığı — takım Miks'in yetenek zamanlama ve yerleştirmesini anlamıyor
-**COUNTER** Her yeteneği kullanmadan önce sesli çağrı yap. "Duman çıkıyor A short" gibi net çağrılar. Takım Miks'e alışana kadar aşırı iletişim kur.
-**WHY** Miks yeni bir ajan olduğu için takım arkadaşları onun yeteneklerinin görsel ve zamanlamasını içselleştirmemiştir; çağrı olmadan kendi utility'leriyle çakışırlar.
+**IF** Takım arkadaşların Miks'in yeteneklerine denk geliyor veya yanlış konumlanıyor
+**MEANING** Takım Miks'in yetenek zamanlamasını ve yerleştirmesini bilmiyor
+**COUNTER** Her yeteneği kullanmadan önce söyle. "Duman çıkıyor A short" gibi net çağrılar. Takım alışana kadar fazla iletişim kur.
+**WHY** Miks yeni olduğu için takım arkadaşın yetenek görselini içselleştirmemiş. Çağrı olmadan kendi yetenekleriyle çakışıyorlar.
 
-**IF** Oyuncunun oyun tarzı yamalar arasında çok fazla değişiyor
-**MEANING** Meta değişikliklerini kovalayarak tutarlı alışkanlıklar oluşturmuyor
-**COUNTER** Controller temellerine dayalı çekirdek oyun tarzı oluştur. Detayları yamalarla ayarla, tüm yaklaşımı değil.
-**WHY** Temel controller becerileri (duman zamanlaması, choke denial, retake desteği) yamadan bağımsızdır; yalnızca Miks'e özgü katmanı ayarlamak yeterli olur.
+**IF** Oyun tarzın yamalar arasında çok fazla değişiyor
+**MEANING** Meta değişikliklerini kovalıyorsun, tutarlı alışkanlık kuramıyorsun
+**COUNTER** Controller temellerine dayalı bir çekirdek tarz oluştur. Detayları yamayla ayarla, tüm yaklaşımı değil.
+**WHY** Duman zamanlaması, choke kapatma, retake desteği yamadan bağımsız. Sadece Miks'e özgü katmanı ayarlamak yeterli.
 
-**IF** Oyuncu bazı turlarda parlak oynuyor ama diğerlerinde tamamen görünmez
-**MEANING** Tutarsızlık, adapte edilebilir oyun yerine belirli kurulumlara bağımlılık gösteriyor
-**COUNTER** Her tur durumu için varsayılan utility planı geliştir. A atak: hangi dumanlar, hangi sıralama. B atak: aynı soru. Savunma: hangi choke kapatılacak. Retake: hangi açılar inkar edilecek.
-**WHY** Plansız turlar Miks'in utility'sini rastgele harcar; yapılandırılmış plan her turda minimum değer garantisi verir.
+**IF** Bazı turlarda parlıyorsun ama diğerlerinde görünmez kalıyorsun
+**MEANING** Belirli kurulumlara bağımlısın, duruma göre oynayamıyorsun
+**COUNTER** Her tur durumu için varsayılan yetenek planı yap. A atak: hangi dumanlar, hangi sıra. B atak: aynı soru. Defans: hangi choke kapatılacak. Retake: hangi açılar inkar edilecek.
+**WHY** Plansız turlar yeteneği rastgele harcatıyor. Yapılandırılmış plan her turda minimum değer garantisi veriyor.
 
-**IF** Yetenek kullanımı başka bir controller'ın tarzını taklit ediyor
-**MEANING** Oyuncu Miks'in benzersiz kit avantajlarını keşfetmemiş
-**COUNTER** Custom oyunlarda Miks'in başka controller'ların yapamadıklarını keşfet. Harita başına 2-3 benzersiz oyun bul. Miks'in dumanları farklı geometriyi kapatıyorsa, savunucuların standart dodge noktalarını da inkar edecek şekilde yerleştirilsin.
-**WHY** Miks'i Omen gibi oynamak deneyim farkını rakibin lehine çevirir; Miks'in değeri ancak benzersiz şekil ve zamanlama avantajları kullanıldığında ortaya çıkar.
+**IF** Yetenek kullanımın başka bir controller'ı taklit ediyor
+**MEANING** Miks'in benzersiz avantajlarını henüz keşfetmedin
+**COUNTER** Custom'da Miks'in başka controller'ların yapamadıklarını bul. Harita başına 2-3 benzersiz açı keşfet. Savunucuların standart dodge noktasını da kapatacak şekilde yerleştir.
+**WHY** Miks'i Omen gibi oynarsan deneyim farkı rakibin lehine — Miks'in değeri ancak kendi şekil ve zamanlama avantajlarını kullandığında çıkıyor.
 
-**IF** Oyuncu retake sırasında utility kullanmıyor
-**MEANING** Retake senaryolarında controller değerini üretmeyi bilmiyor
-**COUNTER** Retake için ayrılmış utility planı oluştur: en az bir duman retake sırasında kullanılmak üzere saklanmalı. Duman spike görüşünü kapatmak ve takım girişini desteklemek için kullanılır.
-**WHY** Retake'te controller utility'si olmadan takım, düşmanın avantajlı açılarına kör girmek zorunda kalır — retake başarı oranı çok düşer.
+**IF** Retake sırasında elinizde yetenek kalmıyor
+**MEANING** Retake senaryosunda controller değerini nasıl üreteceğini bilmiyorsun
+**COUNTER** Retake için ayrı yetenek planı yap. En az bir duman retake için saklanmalı — spike görüşünü kapatmak ve takım girişini açmak için kullan.
+**WHY** Yeteneğsiz retake'te takım düşmanın avantajlı açılarına kör giriyor. Başarı oranı çok düşüyor.
 
-**IF** Alan inkar araçları yalnızca atak tarafında kullanılıyor
-**MEANING** Alan inkar'ın defans ve retake değerini kaçırıyor
-**COUNTER** Defansta alan inkar araçlarını push cezalandırma için kullan: düşmanın choke point'ten geçiş yaptığı anda deploy et. Retake'de spike etrafına yerleştirmek defuse zamanı satın alır.
-**WHY** Alan inkar savunma tarafında push'ları geciktirir ve düşmanı hasar almadan geçmeye zorlar; sentinel trap'leri olmadan site savunmasının en güçlü aracıdır.
+**IF** Alan inkar araçlarını sadece atakta kullanıyorsun
+**MEANING** Alan inkar'ın defans ve retake değerini kaçırıyorsun
+**COUNTER** Defansta düşman choke'tan geçerken alan inkarı koy. Spike kurulduktan sonra etrafına yerleştirirsen defuse zamanı kazanırsın.
+**WHY** Alan inkar defansta push'u geciktiriyor ve düşmanı hasarla geçmeye zorluyor. Sentinel tuzağı olmayan site savunmasında en güçlü araç bu.
 
-**IF** Oyuncu her turda aynı duman ve alan inkar sırasını kullanıyor
-**MEANING** Öngörülebilir hale gelmiş, rakipler utility zamanlamasını ve pozisyonlarını biliyor
-**COUNTER** Duman ve alan inkar yerleştirmesini tur bazında değiştir. Kimi turlarda dumanı erken koy, kimilerinde geciktir. Alan inkar pozisyonunu standart dodge noktası ile alternatif pozisyon arasında değiştir.
-**WHY** Öngörülebilir utility kullanımı düşmanın Miks'in şekillerini öğrenip güvenli pozisyon bulmasına olanak tanır — benzersiz geometri avantajı tamamen sıfırlanır.
+**IF** Her tur aynı duman ve alan inkar sırasını kullanıyorsun
+**MEANING** Öngörülebilir hale geldin, rakipler yetenek zamanlamanı ve pozisyonlarını biliyor
+**COUNTER** Yerleştirmeyi tur bazında değiştir. Bir turda dumanı erken koy, bir sonrakinde geciktir. Alan inkar pozisyonunu standart dodge noktası ile alternatif arasında döndür.
+**WHY** Öngörülebilir yetenek kullanımı düşmanın Miks'in şekillerini öğrenmesini hızlandırıyor — benzersiz geometri avantajı sıfırlanıyor.
 
-**IF** Oyuncu ultimate'i her aldığında hemen kullanıyor, tur bağlamını değerlendirmeden
-**MEANING** Ultimate'in stratejik değerini kavrayamamış; onu "büyük buton" olarak görüyor
-**COUNTER** Ultimate kullanımını tur durumuna bağla: eco turda ultimate harcama, takım full-buy'da ve koordineli execute planı varken kullan. Ultimate tek başına tur kazandırmaz, takımın planını güçlendirir.
-**WHY** Yanlış turda kullanılan ultimate hem orb yatırımını boşa harcar hem de takımın asıl ihtiyaç duyduğu turda ultimate'siz kalmasına yol açar.
+**IF** Ultimate'i her aldığında hemen kullanıyorsun
+**MEANING** Ultimate'i "büyük buton" olarak görüyorsun, stratejik değerini kavrayamamışsın
+**COUNTER** Takım ekonomisi düşükse veya koordineli bir plan yoksa harcama. Takım tam kadro, execute planı belli olduğunda kullan. Ultimate tek başına tur kazandırmaz.
+**WHY** Yanlış turda kullanılan ultimate hem orb yatırımını boşa harcıyor hem de asıl ihtiyaç duyduğun turda ultimatesiz kalıyorsun.
 
-**IF** Oyuncu her zaman aynı site'ı savunuyor ve karşı tarafta oynamayı reddediyor
-**MEANING** Konfor alanına sığınıyor; Miks'in kit'ini tek bir bağlamda kullanmayı öğrenmiş ama esneklik geliştirmemiş
-**COUNTER** Her haritada her iki site'ı da savunma pratiği yap. Custom oyunda A ve B savunma kurulumlarını ayrı ayrı çalış. Ranked'da takımın ihtiyacına göre site değiştirmeye hazır ol.
-**WHY** Tek site'a kilitlenmek takım kompozisyonunu kısıtlar ve rakibin Miks'in her zaman aynı yerde olduğunu bilmesine yol açar — bu da execute planlarını kolaylaştırır.
+**IF** Her zaman aynı site'ı savunuyor, diğer tarafa geçmiyorsun
+**MEANING** Konfor alanına sığınıyorsun, esneklik geliştirmemişsin
+**COUNTER** Her haritada her iki site'ı da savunma pratiği yap. Custom'da A ve B savunma kurulumlarını ayrı çalış. Takımın ihtiyacına göre site değiştirmeye hazır ol.
+**WHY** Tek site'a kilitlenmek rakibin her zaman nerede olduğunu bilmesini sağlıyor — execute planları kolaylaşıyor.
 
 ## 6. Harita Etkileşimleri
 
 ### Split — S Tier
-Orta kontrol ve dar koridorlar Miks için ideal ortam yaratır. A Ramp ve B Main'de duman zamanlama ve choke deny temelleri güçlü şekilde uygulanır. Miks'in duman geometrisi orta bölgedeki peek açılarını kapatmak için büyük avantaj sağlar. Dar koridorlar alan inkar araçlarının kaçınılmasını zorlaştırır. Mid kontrolünde Miks'in dumanı, Mail ve Vent geçişlerini aynı anda kısıtlayabilir.
+Orta kontrol ve dar koridorlar Miks için ideal. A Ramp ve B Main'de duman zamanlaması ve choke kapatma güçlü çalışıyor. Orta bölgedeki peek açılarını kapatmak için Miks'in duman şekli büyük avantaj sağlıyor. Dar koridorlar alan inkarı atlatmayı zorlaştırıyor. Mail ve Vent geçişlerini aynı anda kısıtlayabilirsin.
 
 ### Bind — S Tier
-Dar harita yapısı controller temellerini ödüllendirir. A Short ve B Long için Miks'e özgü duman şekilleri standart controller'lardan farklı açılar kapatabilir. Teleporter çıkışlarında alan inkar yerleştirmesi güçlüdür — teleport eden düşman alan inkarın içine çıkar. Hookah'da Miks'in benzersiz geometrisi savunucuların alışık olduğu dodge noktalarını inkar eder. Çift controller komp'ta Miks + Viper kombinasyonu bu haritada çok güçlüdür.
+Dar harita yapısı controller temellerini ödüllendiriyor. A Short ve B Long için Miks'e özgü duman şekilleri standart controller'lardan farklı açılar kapatıyor. Teleport çıkışlarında alan inkar çok güçlü — çıkan düşman direkt alan inkarın içine giriyor. Hookah'da Miks'in farklı geometrisi savunucuların alışık olduğu dodge noktalarını kapatıyor. Miks + Viper bu haritada çok iyi çalışıyor.
 
 ### Haven — A Tier
-Üç site'lı haritada utility yönetimi disiplin gerektirir. Miks'in yetenek sayısını üç site kapsamı için dengele. C Long'da alan inkar yetenekleri push'ları cezalandırmak için güçlü kullanılır. Garage kontrolünde duman geometrisi mid oyununu destekler. Retake için utility saklamak bu haritada hayati — üç site arasında rotasyon sık olduğu için her zaman yedek utility gerekir.
+Üç site var, yetenek yönetimi disiplin istiyor. Yeteneğini üç siteye dağıtmak zorunda kalıyorsun. C Long'da alan inkar push'ları cezalandırıyor. Garage'da duman şekli mid oyununu destekliyor. Rotasyon sık olduğu için retake için mutlaka yetenek sakla.
 
 ### Lotus — A Tier
-Dönen kapılar ve dar B Main koridoru alan inkar için ideal. Miks'in dumanları farklı geometriyi kapatarak savunucuları alışık olmadıkları dodge noktalarına iter. A Main'de choke denial güçlüdür. C site'ta alan inkar araçları retake'i destekler. Kapıların açılıp kapanma mekaniği Miks'in utility zamanlamasını daha da değerli kılar — kapı açıkken deploy edilen alan inkar, kapı kapandığında düşmanı sıkıştırır.
+Dönen kapılar ve dar B Main koridoru alan inkar için ideal. Miks'in dumanları savunucuları alışık olmadıkları dodge noktalarına itiyor. A Main'de choke kapatma güçlü. C site'ta alan inkar retake'i destekliyor. Kapı açıkken koyduğun alan inkar kapı kapandığında düşmanı sıkıştırıyor — zamanlamayı buna göre ayarla.
 
 ### Ascent — B Tier
-A Main ve B Main geniş choke noktaları Miks'in duman geometrisinden yararlanır ama mid'in açık yapısı alan inkar araçlarının kaçınılmasını kolaylaştırır. Catwalk kontrolünde duman yerleştirmesi değerli. Mid'in genişliği Miks'in alan inkar aracının kapsama alanını aşabilir; bu haritada utility'yi mid yerine site girişlerine yoğunlaştır.
+A Main ve B Main geniş choke noktaları Miks'in duman şeklinden yararlanıyor ama mid'in açık yapısı alan inkarı atlatmayı kolaylaştırıyor. Catwalk kontrolünde duman değerli. Mid yerine site girişlerine yoğunlaş.
 
 ### Icebox — B Tier
-A site'ın çok katlı yapısı Miks'in duman geometrisini test eder — yükseklik farkı olan alanlarda duman yerleştirmesi farklı çalışır. B site tünel girişi alan inkar için uygun ama geniş B site'ta savunucuların kaçış alanı çok fazla. Mid kontrolü Miks'in kit'i ile mümkün ama Viper bu haritada üstün tercih.
+A site'ın çok katlı yapısı Miks'in duman şeklini zorluyor — yükseklik farkı olan alanlarda yerleştirme farklı çalışıyor. B site tünel girişi alan inkar için uygun ama geniş B site'ta savunucunun kaçma alanı çok fazla. Bu haritada Viper daha güçlü bir tercih.
 
 ## 7. Eşleşme Notları
 
 ### Omen'e karşı — Deneyim dezavantajı
-Omen oyuncuları kit'lerini yıllardır biliyor; Miks aynı oyunu oynarsa deneyim farkı rakibin lehine. Miks, kit'inin sağladığı farklı avantajları bulmalı. Omen'in paranoia'sına ve teleport'una karşılık Miks'in alan inkar araçları farklı bir baskı türü oluşturur. Aynı sightline'ları kapatma yarışına girme — Miks'in farklı kapatabildiği açıları kullan.
+Omen oyuncuları kit'lerini yıllardır biliyor. Miks aynı sightline'ları kapatmaya çalışırsa deneyim farkı rakibin lehine. Aynı yarışa girme — Miks'in farklı kapattığı açıları kullan. Omen'in paranoia'sına ve teleport'una karşılık alan inkar farklı bir baskı yaratıyor.
 
-### Viper ile eşleşme — Tamamlayıcı güç
-Çift controller kompozisyonunda Viper ile Miks birbirini tamamlar. Viper'ın duvarı uzun sightline'ları keserken Miks'in dumanları kısa açıları kapatır. Karşı takımda Viper varsa, Miks'in alan inkar araçları toxic screen arkasına yerleştirilerek çift katmanlı inkar yaratır. Utility zamanlamasını Viper oyuncusuyla koordine et — çakışan utility israf demektir.
+### Viper ile — Tamamlayıcı güç
+Viper duvarı uzun sightline'ları keserken Miks dumanları kısa açıları kapatıyor. Karşı takımda Viper varsa alan inkar araçlarını toxic screen arkasına koy — çift katmanlı inkar oluşturuyor. Yetenek zamanlamasını Viper oyuncusuyla koordine et — çakışan yetenek israf.
 
 ### Sova/Fade'e karşı — Bilgi savaşı
-Miks'in dumanları Recon Dart ve Haunt'u engelleyecek şekilde zamanlanırsa düşmanın bilgi toplama çalışmalarını boşaltır. Duman zamanlamasını düşman keşif aracı deploy anına denk getir. Fade'in Prowler'ı duman içinden geçer — buna karşı alan inkar aracını duman önüne yerleştirerek Prowler'ı hasar alanına çek.
+Düşman keşif aracını attığı anda oraya duman koy — Recon Dart ve Haunt'u boşaltırsın. Fade'in Prowler'ı duman içinden geçiyor — buna karşılık alan inkarı duman önüne yerleştir, Prowler hasar alanına çekiliyor.
 
-### Agresif duelist'lere karşı — Alan inkar cezası
-Jett, Raze veya Neon gibi agresif entry yapan duelist'lere karşı alan inkar araçlarını choke point'lere yerleştir. Push yapan duelist hasar alır veya yavaşlar, takımın tepki zamanı kazanır. Jett'in dash'i alan inkarı geçebilir ama Raze ve Neon'un entry'si yavaşlar.
+### Jett, Raze, Neon'a karşı — Alan inkar cezası
+Agresif giren duelist'lere karşı alan inkarı choke noktalarına koy. Hasar alıyorlar veya yavaşlıyorlar, takımın tepki zamanı kazanıyor. Jett dash'le atlayabilir ama Raze ve Neon yavaşlıyor.
 
 ### KAY/O'ya karşı — Suppress tehdidi
-KAY/O'nun suppress'i Miks'in tüm kit'ini devre dışı bırakır. Suppress alanının dışında konumlan ve duman deploy mesafesini koru. NULL/CMD sırasında Miks araçsız kalır — bu pencerede takım arkadaşlarının utility'sine güven. KAY/O'nun knife'ını gördüğünde utility'yi hemen deploy et, suppress düşmeden önce.
+KAY/O'nun suppress'i tüm kit'ini devre dışı bırakıyor. Suppress alanının dışında kal ve yetenek koyma mesafeni koru. KAY/O bıçağını gördüğünde yetenekleri hemen koy, suppress düşmeden önce. NULL/CMD sırasında takım arkadaşlarının yeteneklerine güven.
 
 ### Cypher/Killjoy'a karşı — Bilgi asimetrisi
-Sentinel'ler Miks'in utility zamanlamasını öğrendikçe trap'lerini buna göre ayarlar. Miks'in utility sırasını değiştirmesi sentinel'lerin trap zamanlamasını bozar. Killjoy'un turret'ı duman arkasından ateş edebilir — dumanın turret sightline'ını kapatıp kapatmadığını kontrol et.
+Sentinel'ler Miks'in yetenek sırasını öğrendikçe tuzaklarını buna göre ayarlıyor. Yetenek sıranı değiştirirsen tuzak zamanlamasını bozuyorsun. Killjoy'un turret'ı duman arkasından ateş edebilir — dumanın turret'ı gerçekten kapatıp kapatmadığını kontrol et.
 
 ## 8. Oyuncuya Ne Söylenmeli
 
 ### İyi performans gösterdiğinde
-**Oyuncu Aksiyonu:** Execute çağrılarında dumanları zamanında koyuyorsun, alan inkar araçlarıyla savunucuların standart dodge noktalarını kapatıyorsun ve her yetenek yerleştirmesini takıma iletiyorsun.
+**Oyuncu Aksiyonu:** Execute çağrılarında dumanları zamanında koyuyorsun, alan inkarla savunucuların standart dodge noktalarını kapatıyorsun ve her yetenek yerleştirmesini takıma söylüyorsun.
 
-**Düşman Algısı:** Savunucular Omen/Brimstone/Viper duman şekillerine karşı nasıl oynayacaklarını ezberledi ama Miks'in inkar alanı alıştıkları geometriyi kapatıyor. Standart dodge noktasına gidiyorlar ve oranın da inkar edildiğini keşfediyorlar.
+**Düşman Algısı:** Savunucular Omen/Brimstone/Viper duman şekillerine karşı nasıl oynayacaklarını ezberledi. Miks'in inkar alanı alıştıkları geometriyi kapatıyor — standart dodge noktasına gidiyorlar, oranın da kapalı olduğunu görüyorlar.
 
-**Düşman Tepkisi:** Normalden daha geriye çekilmek zorunda kalıyorlar (alıştıkları dodge noktası inkar edildi), tur ortasında tamamen yeni pozisyon bulmak veya inkardan geçerek hasar almak zorundalar.
+**Düşman Tepkisi:** Daha geriye çekilmek zorunda kalıyorlar ya da inkardan geçerek hasar alıyorlar. Her iki durumda da takımın karşısız giriyor.
 
-**Fırsat Penceresi:** Savunucuların varsayılan dodge pozisyonunun inkar edildiğini keşfedip daha geriye yer değiştirdiği an, takımın karşılanmadan girdiği boşluk. Bu pencere savunucular Miks'e özgü konumlanmayı öğrenmeden önceki ilk turlarda en geniş.
+**Fırsat Penceresi:** Savunucular Miks'e özgü konumlanmayı öğrenmeden önceki ilk turlar en geniş fırsat. Bu turları iyi kullan.
 
-**Tekrar Stratejisi:** Tur 1: standart duman + en yaygın dodge noktasında alan inkarı. Tur 2: inkarı, savunucuların 1. turdan sonra taşındığı yere kaydır. Tur 3: inkarı orijinal noktada tekrar kullan — geri ayarlayan savunucular yakalanır. Her yerleştirmeyi takım arkadaşlarına söyle.
+**Tekrar Stratejisi:** İlk turda standart duman ve en yaygın dodge noktasında alan inkar. Sonraki turda inkarı, savunucuların ilk turdan sonra taşındığı yere kaydır. Bir sonraki turda orijinal noktada tekrar uygula — geri ayarlayanlar yakalanıyor. Her yerleştirmeyi takıma söyle.
 
-**Düşman Adaptasyonu:** 5+ turdan sonra savunucular Miks'e özgü konumlanma öğrenecek, yetenek yerleştirilmesinden önce saldırganlaşacak veya inkarı tamamen atlayan retake ağırlıklı kurulumlar yapacak.
+**Düşman Adaptasyonu:** 5+ turdan sonra savunucular Miks'e özgü konumlanmayı öğrenecek — yetenek atılmadan önce saldırganlık gösterecekler veya retake ağırlıklı kurulum yapacaklar.
 
-**Karşı Adaptasyon:** Miks'e özgü pozisyon öğrendiklerinde: inkarın onları tahmin edilebilir geri çekilme noktalarına sürmesi avantaj — bu pozisyonları takıma çağır. Yeteneklerden önce saldırdıklarında: dumanları reaktif kullan, proaktif değil. Retake oynuyorlarsa: site'ı serbestçe al, inkarı giriş yolları yerine retake yollarına yerleştir.
+**Karşı Adaptasyon:** Miks'e özgü pozisyon öğrendiklerinde: alan inkar onları tahmin edilebilir geri çekilme noktalarına sürüyor — bu noktaları takıma söyle. Yetenekten önce saldırıyorlarsa: dumanı reaktif kullan, proaktif değil. Retake oynuyorlarsa: siteyi serbestçe al, alan inkarı giriş yolları yerine retake yollarına koy.
 
 ### Zorlandığında
-"Temellere dön. Miks'e özgü teknikleri şimdilik bırak. Doğru yerleri dumanla, doğru choke'ları inkar et ve hayatta kal. Duman zamanlaması ve choke denial her turda değer üretir. Benzersiz oyunlar temeller sağlamlaştıktan sonra eklenebilir. Bir tur boyunca yalnızca iki şeye odaklan: dumanı doğru zamanda koy ve bir alan inkar aracını retake için sakla."
+"Temellere dön. Miks'e özgü teknikleri şimdilik bırak. Doğru yerleri dumanla, doğru choke'ları kapat ve hayatta kal. Duman zamanlaması ve choke kapatma her turda değer üretir. Benzersiz oyunlar temeller oturduğunda eklenir. Bir tur boyunca sadece iki şeye bak: dumanı doğru zamanda koy, bir alan inkarı retake için sakla."
 
 ### Öngörülebilir olduğunda
-"Her turda aynı utility sırasını kullanıyorsun. Miks yeterince yeni ki rakipler kalıplarını çabuk çözüyor. Utility sıralamanı ve zamanlamanı karıştır. Duman geometrisini veya alan inkar pozisyonunu her 2-3 turda değiştir. Bir turda dumanı erken koy, sonraki turda geciktir. Rakibin seni okumasını engelle."
+"Her turda aynı yetenek sırasını kullanıyorsun. Miks yeni ama rakipler kalıbı çabuk çözüyor. Duman geometrisini veya alan inkar pozisyonunu her 2-3 turda değiştir. Bir turda erken koy, bir sonrakinde geciktir. Rakip seni okumadan önce sen onu oku."
 
 ### Takım koordinasyonu zayıfken
-"Miks'in değeri takımla birlikte çalıştığında ortaya çıkar. Tek başına duman koymak yetmez — takımın dumanla ne yapacağını bilmesi gerek. Execute öncesi planı söyle: 'Dumanı A short'a koyacağım, arkasından girin.' Takım arkadaşlarının Miks'in utility'sini tanıması zaman alır, bu süreci hızlandırmak senin görevin."
+"Miks'in değeri takımla birlikte çıkıyor. Duman koymak yetmez — takımın dumanla ne yapacağını bilmesi lazım. Execute öncesi planı söyle: 'Duman A short'a koyacağım, arkasından girin.' Takımın Miks'e alışması zaman alıyor, bu süreci hızlandırmak senin işin."
 
 ## 9. Rank Modülasyonu
 
 ### Iron-Silver
-Miks'i basit bir dumancı olarak oyna. Dumanları takımın için doğru zamanda yerleştirmeye odaklan. İleri kit mekaniklerini controller temelleri rahat olana kadar geç bırak. Her turda "duman nereye?" sorusunu sor. Choke point'leri kapatmayı öğren, benzersiz geometriyi sonraya sakla. Bu seviyede en büyük değer: takım push yaparken doğru yeri dumanlamak ve retake için bir yetenek saklamak. Alan inkar aracını en dar geçişlere koy — düşmanın kaçınma şansı az olsun. Karmaşık kombinasyonlar deneme; tek doğru duman, üç yanlış benzersiz oyundan fazla değer üretir.
+Miks'i basit bir dumancı olarak oyna. Dumanları takımın için doğru zamanda koy. Her turda "duman nereye?" sorusunu sor. Choke noktalarını kapatmayı öğren, benzersiz geometriyi sonraya bırak. Alan inkarı en dar geçişlere koy — düşmanın atlatma şansı az olsun. Retake için bir yetenek sakla. Tek doğru duman, üç yanlış süslü oyundan çok daha fazla değer üretir.
 
 ### Gold-Platinum
-Dumanlar ötesinde Miks'in benzersiz yeteneklerini keşfetmeye başla. Harita başına 1-2 özgün kurulum öğren. Temeller öncelik olmaya devam etsin. Takım arkadaşlarıyla yetenek zamanlamasını koordineli çalışmayı ekle. Retake için utility bütçeleme alışkanlığı oluştur. Alan inkar araçlarını defans tarafında push cezalandırma için kullanmaya başla. Bu seviyede rakipler duman arkasından peek atmayı biliyor — duman + alan inkar kombinasyonuyla peek'i cezalandır. Tur planı oluşturmayı alışkanlık haline getir: atak, defans ve retake için ayrı utility bütçesi belirle.
+Dumanların ötesinde Miks'in benzersiz yeteneklerini keşfetmeye başla. Harita başına 1-2 özgün kurulum öğren. Temeller öncelik olmaya devam ediyor. Alan inkarı defansta push cezalandırma için kullan. Rakipler duman arkasından peek atmayı biliyor — duman ve alan inkar kombinasyonuyla peek'i cezalandır. A atak, B atak ve retake için ayrı yetenek planı oluştur, bunu alışkanlık hâline getir.
 
 ### Diamond-Ascendant
-Miks'e özgü oyun kitabı geliştir, benzersiz utility kombinasyonları oluştur. Yama notlarını takip et ve topluluk metasına adapte ol. Her haritada 3-4 farklı kurulum arasında geçiş yap. Düşman adaptasyonunu tur bazında oku ve utility yerleştirmesini buna göre ayarla. Duman geometrisi ile alan inkar pozisyonunu koordineli kullanarak savunucuları çift katmanlı inkarla karşılaştır. VOD incelemesinde Miks'in utility'sinin düşmana ne yaptırdığını analiz et — dodge noktalarını mı değiştirdiler, retake mi oynadılar, yoksa inkardan geçerek hasar mı aldılar? Her senaryo farklı karşı hamle gerektirir.
+Miks'e özgü bir oyun kitabı geliştir. Harita başına 3-4 farklı kurulum arasında geçiş yap. Rakiplerin Miks'e karşı nasıl konumlandığını tur bazında oku ve yerleştirmeni buna göre değiştir. Duman şekli ile alan inkar pozisyonunu birlikte kullanarak savunucuları çift katmanlı inkarla karşılaştır. Kendi kayıtlarına bak: düşman dodge noktasını mı değiştirdi, retake mı oynadı, inkardan geçerek hasar mı aldı? Her senaryo farklı bir hamle gerektiriyor.
 
 ### Immortal-Radiant
-Yeni Miks stratejileri öncüle. Bu seviyede yeni bir ajanda en uygun oyunları erken keşfetmek büyük avantaj sağlar. Yenilik ile tutarlılık arasında denge kur. Rakiplerin Miks'e özgü konumlanmasını oku ve her turda farklılaştır. Miks'in diğer controller'lara göre ne zaman daha fazla değer kattığını harita ve kompozisyon bazında analiz et. Takım koordinasyonunda Miks'in benzersiz geometrisini execute çağrılarına entegre et — utility yerleştirme planını takım flash'leri ve entry zamanlamasıyla senkronize et. Rakip takımın Miks'e karşı geliştirdiği macro stratejileri (retake ağırlıklı, erken aggression, çift duelist ile hız atak) tespit et ve yarı zamanda karşı plan oluştur. Scrim ortamında Miks'in yeni kombinasyonlarını test et, ranked'da yalnızca kanıtlanmış kurulumları kullan.
+Miks yeni bir ajan — Radiant seviyesinde yeni bir ajanda iyi oyunları erken keşfetmek büyük avantaj sağlıyor. Rakiplerin Miks'e karşı geliştirdiği macro stratejileri tespit et: retake ağırlıklı mı oynuyorlar, yetenekten önce mi saldırıyorlar, çift duelist hızıyla mı geçmeye çalışıyorlar? Yarı zamanında bu sorulara cevap ver ve planı değiştir. Scrimmage'da yeni kombinasyonları test et, ranked'da sadece kanıtlanmış kurulumları kullan. Takımın flash'leri ve entry zamanlamasıyla yetenek yerleştirmeni hizala — yetenek tek başına değil, takımın hareketiyle birlikte çalışıyor.

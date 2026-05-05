@@ -11,109 +11,108 @@ tags: [matchup, raze, harbor, duelist, controller]
 
 ## 1. Matchup Özü
 
-Raze burst damage + vertical mobility ile Harbor'ın wall + cove + cascade + Reckoning slow stack'ini aşmaya çalışan explosive duelist vs zone controller match-up'ı. Fight, Raze satchel landing hattının Harbor slow zone içine mi dışına mı düştüğüne bağlı — slow içinde momentum sönümlenir, aim duel Harbor pre-aim lehine döner. Harbor wall'u default landing'e lineup'lamışsa Raze entry eriyor; Raze bypass ile zone dışına inerse Harbor utility bir round değerini kaybeder.
+Raze, satchel ile havaya çıkar ve ani hasar verir. Harbor, duvarı + cove'u + cascade'i ile o girişi yavaşlatır. Tek soru şu: satchel'ın düştüğün nokta Harbor'ın slow alanının içinde mi, dışında mı? İçindeyse duel Harbor'a döner — hareketsiz kalırsın, o pre-aim'ini çoktan kurmuştur. Dışındaysa Harbor bir roundluk utility'yi boşa yaktı, sen sahaya giriyorsun.
 
 ## 2. Kim Avantajlı?
 
 **Raze lehine:**
-- Harbor wall + cove aynı round yakıldı, cascade cooldown'da — Raze landing serbest.
-- Showstopper dolu, Harbor cove sabit landmark'ta (Pearl B Long, Icebox Generator) — rocket lineup var.
-- Close quarter geometri (Bind Hookah, Split B Main) — rifle duel slow zone dışında.
-- Harbor wall'u round başı erken yaktı — ikinci push'ta wall cooldown'da, Harbor çıplak.
+- Harbor wall + cove aynı roundda bitti, cascade'i cooldown'da — satchel hattın serbest.
+- Showstopper doluysa ve Harbor cove'u sabit bir noktaya koyuyorsa (Pearl B Long, Icebox Generator) — rocket lineup'ın var.
+- Dar geometride (Bind Hookah, Split B Main) — rifle duelini slow alanı dışında açabilirsin.
+- Harbor wall'u round başı erkenden yaktıysa — ikinci girişinde wall yok, Harbor çıplak.
 
 **Harbor lehine:**
-- Wall Raze default landing hattının üzerinde — Raze slow frame'de, Harbor pre-aim hazır.
-- Cove Raze ana rifle cover'ını kaplıyor (Pearl A Art, Lotus C Main) — trade kopuk.
-- Cascade Raze push koridoruna dikey akıyor — Raze slow yemek ya sıkışık rotayı seçmek zorunda.
-- Reckoning dolu ve Raze push öncesi telli — area stun site hattını kilitler.
+- Wall satchel landing hattının tam üzerindeyse — landing'de donarsın, Harbor'ın pre-aim'i seni yakalar.
+- Cove senin rifle cover'ını kapatıyorsa (Pearl A Art, Lotus C Main) — trade kopuyor, arkandaki destek sana ulaşamıyor.
+- Cascade girdiğin koridora dik akıyorsa — ya slow yiyorsun ya da dar rotayı seçmek zorunda kalıyorsun.
+- Reckoning doluysa ve sen push hattına giriyorsan — stun tüm sahayı kilitler, trade dağılır.
 
-**Balanced:**
-- Haven, Bind, Lotus üç site Harbor zone'unu dağıtıyor ama Raze tempo çok yönlü, karar round-by-round.
-- Raze ult dolu ama Harbor cove + cascade aynı fazda — Showstopper değer üretir, cove indicator'ında reposition var.
-- İki takım ult fazında aynı anda — fight pure mekanik + lineup bilgisi.
+**Dengeli:**
+- Haven, Bind, Lotus üç site var, Harbor zone'unu üçe dağıtmak zorunda — sen her sahnede farklı hat deneyebilirsin.
+- İki tarafın ulti aynı fazda doluysa — Showstopper sabit cove'a lineup'lanır, Reckoning push hattına düşer; hangisi önce target bulursa o roundu alır.
 
 ## 3. Key Düellolar
 
-**IF** Harbor wall Raze satchel landing hattının üzerinde aktif
-**MEANING** Landing frame slow içinde, aim duel Harbor pre-aim lehine
-**COUNTER** Landing'i wall ince ucuna kaydır, ikinci satchel ile çift-hop
-**WHY** Raze'in değeri landing-frame mobility, slow onu statik yapar
+**IF** Harbor wall satchel landing hattının üzerinde aktif
+**MEANING** Landing'de slow içinde kalırsın, Harbor pre-aim'ini çoktan kurmuştur
+**COUNTER** Landing'i wall'un ince ucuna kaydır, ikinci satchel ile çift-hop yap
+**WHY** Raze'in değeri landing frame'indeki hareket — durur duruncaya kadar vurulursun
 
 ---
 
-**IF** Harbor cove Raze rifle cover'ını kaplıyor (Pearl A Art, Lotus C Main)
-**MEANING** Rifle angle cove HP arkasında, Raze cover'sız
-**COUNTER** Paintshell + nade ile cove HP'sini erit, eritemezsen sınırdan yan peek
-**WHY** Cove sınırlı HP, damage paketi cove silmeye tasarlı
+**IF** Harbor cove rifle cover'ını kapatıyorsa (Pearl A Art, Lotus C Main)
+**MEANING** Cover'sız kalırsın, arkandan trade gelemiyor
+**COUNTER** Paintshell + nade ile cove'u erit; erimiyorsa sınırından yan peek
+**WHY** Cove'un HP'si sınırlı — paintshell + nade kombinasyonu onu tek fazda siler. Ama cove'u fark ettiğinde değil, peek açmadan önce at
 
 ---
 
-**IF** Raze Showstopper cove + wall stack'ine lineup'lı atıldı
-**MEANING** Area damage cove içi Harbor ve wall arkasını aynı anda yakalar
-**COUNTER** Cove spot'unu rocket lineup dışı landmark'a kur, ult sesinde çık
-**WHY** Cove + wall arkası statik, ult için bedava hedef
+**IF** Showstopper dolu ve Harbor cove'u sabit bir noktaya koyuyorsa
+**MEANING** Rocket aynı anda cove içini ve wall arkasını vurur
+**COUNTER** Cove'un sabit kaldığı landmark'ı bul, rocket'i oraya lineup'la
+**WHY** Cove + wall arkası hareketsiz hedef — rocket için bedava
 
 ---
 
-**IF** Harbor cascade Raze entry koridoruna dik akıyor (Breeze B Tube, Ascent B Main)
-**MEANING** Slow landing ve push'u kırar, momentum kesilir
-**COUNTER** Cascade indicator'ında hattı trajektör dışına çevir, aktivken fake
-**WHY** Satchel cascade'den önce bitirilirse Raze zone dışı
+**IF** Harbor cascade girdiğin koridora dik akıyorsa (Breeze B Tube, Ascent B Main)
+**MEANING** Landing'in ve girişin kesiliyor, hamlen duruyor
+**COUNTER** Cascade aktifken o hattan çık, fake yap; cascade bitmeden gerçek girişi açma
+**WHY** Satchel cascade başlamadan biterse zaten zone dışındasın
 
 ---
 
-**IF** Harbor Reckoning Raze site push'una atıldı
-**MEANING** Multi-pulse stun push hattını kilitler, trade parçalanır
-**COUNTER** Indicator'ında satchel ile radius dışı çık
-**WHY** Pure savunma penceresi, radius dışı çıkılmadıkça retake batıyor
+**IF** Harbor Reckoning push hattına düştü
+**MEANING** Çoklu stun push hattını kilitler, trade dağılır
+**COUNTER** Ult indicator'ı görür görmez satchel ile radius dışına çık
+**WHY** Radius dışına çıkamazsan retake biter — bu pencere sadece savunmaya yarar
 
 ---
 
-**IF** Harbor wall aktif ama cascade + cove cooldown'da, Raze double satchel dolu
-**MEANING** Tek katman slow, Raze ikinci satchel wall kenarını bypass
-**COUNTER** Wall'u dar köşe + ikinci girişe çek, alternatif rotayı kapat
-**WHY** Harbor'ın gücü katman sayısı, tek katman kalınca iki satchel yeter
+**IF** Harbor wall aktif ama cascade + cove cooldown'da, sende double satchel var
+**MEANING** Tek katman slow kaldı, iki satchel wall kenarını atlıyor
+**COUNTER** (Harbor için) Wall'u dar köşeye + ikinci girişe çek, alternatif rotayı kapat
+**WHY** Harbor'ın gücü katman sayısı — tek katman kalınca double satchel yeter
 
 ## 4. Utility Takası
 
-Raze ekonomisi burst damage + vertical mobility eksenli, round başı peşi sıra yakılır: nade entry açar, paintshell cover siler, satchel landing + reposition, ult site kilitler. Harbor ekonomisi slow + area denial eksenli, zaman içine yayılır: wall entry bloklar, cove mid-round cover, cascade push kırar, ult retake lock.
+Sen Raze olarak round başı her şeyi harcarsın: nade girişi açar, paintshell cover'ı siler, bir satchel'la landing yaparsın, ult sahayı kilitler. Round sonunda genelde boşsun. Harbor tam tersi — wall round başı zorunda, ama cove ve cascade'i round ortasına ve sonuna saklar. Harbor'ın bütçesi round boyunca dağılmış, seninki round başında yüklü sonda boş.
 
-**Burn-order:** Harbor round başı wall yakmak zorunda, Raze round başı nade + paintshell + bir satchel yakar. Wall aktifken Raze ikinci satchel'ı saklar çünkü işi bypass reposition. Harbor cove'u Raze ilk peek'inden sonra, cascade'i push tempo'su anlaşılınca yakar — Harbor'a round boyunca yayılan zone bütçesi, Raze round başı yüklü sonu boş. Post-plant'te Raze ult varsa kayma Raze lehine, Harbor Reckoning boşsa retake tek taraflı Raze.
+**Burn sırası:** Harbor wall'u erkenden yaktıysa ikinci push'unda sadece cascade ve cove var. Cascade + cove da gittiyse Harbor çıplak — o anda sen double satchel ile zone kenarından girersin. Ama sen de nade + paintshell'i birinci girişte harcadıysan ikinci push'ta utility'siz açı arıyorsun. Post-plant'te Showstopper varsa avantaj sende, Harbor Reckoning'i harcadıysa retake tek taraflı sana kalır.
 
-**Re-info kapasitesi:** İki agent da info silahı taşımaz — paintshell damage, Harbor utility'sinin hiçbiri info üretmez. Match-up info kör, iki takım init desteğine (Sova, KAY/O, Fade) muhtaç. Info-kör fight wall + satchel lineup'larını pure pattern reading'e çevirir, pro seviye variation hayati.
+**Bilgi durumu:** İki ajan da bilgi üretmiyor — paintshell hasar verir ama görmez, Harbor utility'si de görmez. Takımında Sova, KAY/O veya Fade yoksa duvar ve satchel hattlarını her round farklı köşeden test ederek pattern oluştur. Her roundda satchel landing noktasını wall'un farklı ucuna kaydır — Harbor oyuncusu hangi hattın gerçek olduğunu okuyamaz. Harbor oyuncusu da cove'u sabit noktaya koymak yerine senin peek'ini gördükten sonra koyar, önceden değil — bu yüzden sen de peek başlamadan nade ile cove alanını temizle.
 
-**Ekonomik takas:** Nade wall lineup spot'unda yakalarsa Raze tek nade ile Harbor utility'sinin yarısını çöpe atar. Satchel cove sınırından peek + paintshell takası Raze damage'ini üstün kılar. Ult takası: Showstopper cove stack'ine lineup'lıysa Raze, Reckoning Raze push'una düşerse Harbor kazanır.
+**Utility ekonomisi:** Eğer nade'i Harbor'ın wall lineup noktasına atarsan, tek nade ile Harbor'ın iki utility'sini çöpe atabilirsin. Satchel ile cove sınırından peek + paintshell takası hasar olarak seni üstün kılar. Ult takasında: Showstopper Harbor'ın sabit cove'una lineup'lıysa sen alırsın, Reckoning senin push hattına düştüyse Harbor alır.
 
 ## 5. Map Bazlı Değişim
 
-**Pearl (Harbor avantajlı):** Harbor'ın ana map'i. A Art + A Main uzun koridor cascade + wall slow stack'i için ideal, Raze landing hattı A Art'ta kalırsa cove o hatta yaslanır. Cevap A Link fake + B Long real çünkü B Long geniş alan satchel için zone dışı.
+**Pearl (Harbor avantajlı):** A Art + A Main uzun koridorlar cascade + wall için biçilmiş kaftan. A Art'ta landing hattın cove'a giriyorsa sıkışırsın. Çözüm: A Link'ten fake, B Long'dan gerçek giriş — B Long geniş, satchel orada zone dışına çıkıyor.
 
-**Bind (Harbor hafif avantajlı):** A Showers + B Hookah close range wall geometrisi Harbor'a geri dönüş veriyor, Hookah cove Raze landing'ini boğuyor. Cevap teleport bypass + cascade indicator'ına göre real/fake karar.
+**Bind (Harbor hafif avantajlı):** A Showers ve B Hookah'ta dar geometri Harbor'a geri dönüş veriyor. Hookah'ta cove landing'ini boğuyor. Çözüm: teleport bypass + cascade indicator'ına göre gerçek/sahte karar.
 
-**Icebox (Harbor hafif avantajlı):** Mid vertical + A Generator wall disiplini Harbor lehine, wall Mid'i kapatıp Raze rotasyonunu tek hatta itiyor. Raze ult Generator'da değerli ama cove Generator arkasındaysa rocket lineup'ı ters döner, Raze ult'u boşa yanar.
+**Icebox (Harbor hafif avantajlı):** Mid dikey ve A Generator wall harbor lehine — wall Mid'i kapatıp seni tek hatta itiyor. Generator'da Showstopper değerli ama cove Generator arkasındaysa rocket tersine döner, boşa yanar.
 
-**Breeze (Raze avantajlı):** B Tube'da Harbor cascade Raze landing hattını dar koridorda emerse Raze B Main uzun açısından rotate etmek zorunda — fakat Breeze'in asıl geometrisi geniş alan, Raze nade + paintshell ekonomisi Harbor wall'unun örtemeyeceği kadar çok hat doğuruyor. A Cave + Metal Harbor slow stack'inin zayıf olduğu yer.
+**Breeze (Raze avantajlı):** B Tube'da cascade dar koridorda landing'ini emerse B Main uzun açısından rotate etmek zorunda kalırsın. Ama Breeze'in genişliği Harbor wall'unun kapatamayacağı kadar çok hat doğuruyor. A Cave + Metal bölgesi Harbor'ın en zayıf olduğu yer.
 
-**Ascent (Raze avantajlı):** A Main + B Main geniş alan Raze nade + satchel için ideal. Harbor wall Ascent choke'larını tek başına kapatamıyor, cove A Site içinde nade ekonomisine bedava hedef.
+**Ascent (Raze avantajlı):** A Main + B Main geniş, nade + satchel için ideal. Harbor wall Ascent choke'larını tek başına kapatamıyor. A Site'ta cove nade ekonomisine bedava hedef.
 
-## 6. Flip Moment'ler
+## 6. Flip Anlar
 
-**Flip 1 — Harbor cascade Raze landing hattına tam oturuyor.** Round 4'te Harbor oyuncusu Raze'in ilk üç round'daki default satchel hattını okumuş, cascade'i landing frame'ine akıtıyor. Raze landing pozisyonunda slow içinde kalıyor, pre-aim tutmuş Harbor savunması statik Raze'i yakıyor. Raze o round rifle duel'ine mecbur, kit ekonomisi yarıya iniyor. Flip kalıcı çünkü Raze sonraki round variation yapmak zorunda ve entry tempo'su bir tur daha yavaşlıyor.
+**Flip 1 — Harbor cascade satchel landing hattına tam oturuyor.** Harbor senin ilk birkaç rounddaki satchel hattını okumuş, cascade'i tam landing frame'ine akıtıyor. Landing'de slow içinde donarsın, pre-aim kurmuş savunma seni yakıyor. O roundda rifle duelüne zorlanan Raze kit değerini yarıya indiriyor. Bir sonraki roundda hattı değiştirmek zorunda kalıyorsun — Harbor o roundda da pre-aim kurabilirse iki round üst üste tempo kaybediyorsun.
 
-**Flip 2 — Raze default'u kırıp satchel hattını wall'un kör tarafına kaydırıyor.** Round 6'da Raze pattern'i okuyor, landing'i wall ince ucu dışına ayarlıyor. Harbor utility bedava yanıyor çünkü wall + cascade yakalamıyor, Raze zone dışı aim duel açıyor. Flip yarı-kalıcı — Harbor variation yapmazsa Raze aynı hattı tekrarlar.
+**Flip 2 — Satchel hattını wall'un kör tarafına kaydırıyorsun.** Birkaç round sonra pattern'i okuyorsun, landing'i wall'un ince ucu dışına ayarlıyorsun. Harbor utility boşa yanıyor çünkü wall + cascade seni yakalamıyor, sen zone dışında aim duel açıyorsun. Flip yarı-kalıcı — Harbor variation yapmazsa aynı hattı tekrarlarsın.
 
-**Flip 3 — Showstopper cove + wall stack'ine lineup'lı rocket.** Raze round 9'da Harbor'ın sabit cove lineup'ını tespit ediyor (Pearl B Alley'de cove aynı landmark'tan akıyor), round 10'da rocket'i cove + wall arkasına atıyor. Area damage cove içindeki Harbor ile wall arkası savunmacıyı aynı anda yakalar, round 4v3 tempo'suna geçer. Flip kısa ömürlü ama round-defining, skor farkı açılır.
+**Flip 3 — Showstopper Harbor'ın sabit cove lineup'ına girdi.** Harbor aynı noktadan tekrar tekrar cove koyuyorsa, Showstopper'ı cove + wall arkasına lineup'la. Alan hasarı cove içindeki Harbor'la wall arkası savunmacıyı aynı anda vurur, round 4v3'e döner. Flip kısa ömürlü ama round'u belirler, skor farkı açılır. Bunu bir kez yapman yeter — Harbor bir daha aynı noktaya koymaz.
 
-**Flip 4 — Harbor Reckoning Raze push'unu stun'layıp retake kilitliyor.** Round 13'te Raze 4-man A push deniyor, Harbor ult ile push hattı üzerine Reckoning bırakıyor. Raze satchel radius dışı çıksa bile takım geri kalanı pulse'lara yakalanıyor, trade parçalanıyor. Raze tek başına site içinde, ult'suz retake'e mahkum. Flip round fazı boyunca kalıcı çünkü Harbor ult bittikten sonra bile Raze takımı re-grouping'te kayıp.
+**Flip 4 — Harbor Reckoning push'unu stun'ladı.** 4-man push deniyorsun, Harbor ult push hattına düşüyor. Satchel ile radius dışına çıksan bile takımın geri kalanı pulse'lara yakalanıyor, trade dağılıyor. Site'ta yalnız kalıyorsun, ultsuz retake'e mahkum oluyorsun. Harbor ulti bittikten sonra bile takımın re-gruplamada kayıp — flip o fazın geri kalanına yayılıyor.
 
-**Flip 5 — Harbor wall round başı erken yakıldı, Raze ikinci push bypass ediyor.** Round 17'de Harbor ilk fake'e tepki verip wall'u yakıyor, Raze ikinci real push'u cascade + cove üzerine kuruyor ama wall cooldown'da. Tek katman slow kaldığı için Raze double satchel zone kenarından bypass açıyor, Harbor çıplak, Raze site giriyor. Flip round sonuna kadar kalıcı çünkü utility bütçesi erken tükendi.
+**Flip 5 — Harbor wall'u erkenden yaktı, sen ikinci push'ta bypass yapıyorsun.** Harbor ilk sahteye tepki verip wall'u erken yakıyor. İkinci gerçek girişinde wall cooldown'da, sadece cascade + cove var. Tek katman slow kaldığı için double satchel ile zone kenarından geçiyorsun, Harbor çıplak kalıyor. Flip round sonuna kadar kalıcı çünkü Harbor utility bütçesi erken tükendi.
 
-## 7. Pro Coach Notları
+## 7. Koç Notları
 
-Raze vs Harbor VCT'de dar havuzda düşer (Pearl, Bind, Icebox, Lotus). Düştüğünde burst duelist vs zone controller pure tempo + lineup savaşı. Pro Raze oyuncuları (PRX f0rsakeN, LOUD cauanzin, KRU keznit) satchel hattını round-by-round variation ile kurar. Pro Harbor oyuncuları (ZETA Dep, Fnatic Boaster repertuarı) cove lineup'larını round başı info'sundan dinamik kurar. BBL Esports Pearl'de uzun koridor wall lineup'ları hazırlıyor.
+**Iron-Gold:** Raze olarak wall lineup'larına bakmadan dalıyorsun, her roundda aynı hattan giriyorsun. Harbor wall'u bir kez okuduktan sonra seni her girişte yakıyor. Çözüm: her round landing noktasını wall'un farklı ucuna taşı — sol uç, sağ uç, ince köşe.
 
-**Meta tier:** Raze A+ tier, Harbor B tier niche. Head-to-head Raze lehine, Pearl'de Harbor'a döner. Sentinels Zekken Pearl'de A Main ikinci-push tempo'sunu savunuyor.
+**Plat-Diamond:** Variation var ama utility burn sırasını okumuyorsun. Harbor cove'u ne zaman yaktığını takip et — cove gittikten sonra peek açmak çok daha ucuz.
 
-**Rank:** Gold-Plat Raze variation yapmıyor, wall lineup'larına bedava giriyor. Diamond-Ascendant variation var ama burn-order okuma yok. Immortal+ pure lineup + ult timing.
+**Immortal+:** Fight tamamen lineup + pattern okumaya dönüşüyor. Harbor oyuncuları cove'u sabit noktaya koymaz, Raze'in peek'ini gördükten sonra koyar — bu yüzden sen de cove'u peek öncesi değil, peek hazırlığında nade ile eritmeye başla. Satchel hattını her round değiştir ve değişikliğin sırası tahmin edilemez olsun — sol uç, sağ uç, duvar üstü sırası rastgele.
 
-**Coach Test:** "Raze burst ile zone aşar, Harbor zone ile burst'ü yavaşlatır. Satchel hattı wall'un içindeyse Harbor kazanır, dışındaysa Raze. Match-up'ı kim kazanır sorusunun cevabı round başında satchel hattını kimin lineup'ladığıdır — Raze variation ile, Harbor pattern reading ile. Karşı tarafın round-başı kararını önce okuyan match-up'ı alır."
+**Koç Testi:** Satchel hattın wall içindeyse Harbor kazanıyor. Dışındaysa sen kazanıyorsun. Round başında sen hattı değiştirirsin, Harbor pattern'i okur — hangisi önce karşı tarafın kararını doğru okursa o roundu alır.

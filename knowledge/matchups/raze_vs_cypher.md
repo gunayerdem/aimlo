@@ -11,111 +11,113 @@ tags: [matchup, raze, cypher, duelist, sentinel]
 
 ## 1. Matchup Özü
 
-Raze satchel + nade ile Cypher'ın tripwire + cage + camera üçlüsünü patlatarak dar site'lara giren explosive entry duelisti, Cypher ise gizli trip + camera info ile Raze'in satchel ekonomisini harcatıp bilgiyi takıma rotate eden sentinel. Matchup Raze'in utility bitişine karşı Cypher'ın info ekonomisini test eder.
+Raze nade + satchel ile Cypher'ın trip'ini patlatır, dar siteye dalar. Cypher ise gizli trip + kamera ile Raze'in ne zaman geleceğini takıma söyler ve Raze'in utility'sini boşa harcatır. Kavga şu: Raze Cypher'ın trip'ini silmeden girerse Cypher takıma bilgi verir ve Raze mahsur kalır. Raze trip'i patlatarak girerse Cypher kör olur.
 
 ## 2. Kim Avantajlı?
 
-**Raze lehine durumlar:**
-- Close-range site'larda (Bind Hookah, Sunset A Main, Split B Main) — nade + satchel kombosu dar alanda Cypher trip'lerini patlatır ve Raze trip hattını bedava bypass eder
-- Cypher kamera pozisyonunu izlerken — Cypher kamera modunda aim hattı yok, Raze aggressive peek ile bedava kill
-- Cypher utility'si harcanmışken — trip kırıldıysa Cypher'ın anchor gücü gider, Raze ikinci push'ta serbest
-- Raze ult hazır durumunda (Showstopper) — Showstopper Cypher'ın herhangi bir anchor pozisyonunu patlatır, Cypher'ın hiçbir utility'si ulu roketini durdurmaz
+**Raze lehine:**
+- Dar sitelerde (Bind Hookah, Split B Main, Sunset A Main) — nade + satchel Cypher trip'ini çarpar, Raze trip hattını bedavaya temizler
+- Cypher kamera modunda Raze'e bakıyorsa — kamera modunda Cypher'ın eli kolu bağlı, Raze peek alırsa bedava kill
+- Cypher trip'leri patladıktan sonra — trip yoksa Cypher'ın site tutuşu gider, Raze ikinci girişte serbest
+- Raze ult hazırsa — Showstopper Cypher'ın durduğu yeri patlatır, hiçbir Cypher utility'si roketi durduramaz
 
-**Cypher lehine durumlar:**
-- Uzun sightline site'larda (Breeze A, Icebox Mid) — Raze'in nade + satchel close range silah, uzun açıda Cypher rifle dominance
-- Raze satchel cooldown'dayken — mobility aracı yok, Cypher trip + rifle crossfire Raze'i statik hedefe çevirir
-- Cypher setup'ını gizli kurduysa — Raze trip'i göremediğinde nade ile rastgele patlatamaz, trip aktive olunca Cypher takıma bilgi verir
-- Neural Theft ult durumu — teammate kill sonrası ult Raze'in takım pozisyonunu açar, Raze'in entry planı çökertilir
+**Cypher lehine:**
+- Uzun açılı haritalarda (Breeze A, Icebox) — Raze nade + satchel yakın mesafe işi, uzun açıda Cypher rifle basarsa Raze açamaz
+- Raze satchel bekliyorsa — satchel yokken Raze yavaş, Cypher trip + rifle çaprazı Raze'i sabit hedefe çevirir
+- Cypher trip'leri görünmez yerdeyse — Raze trip'i göremeden nade'i kor gibi atamazsa trip çalışır, takım bilgi alır
+- Cypher ult sonrasında — Raze öldükten sonra Cypher ult atarsa Raze'in takımının yeri açılır, Cypher takımı buna göre oynar
 
-**Balanced:** Haven, Ascent, Lotus gibi orta mesafeli map'lerde matchup Raze'in nade lineup ekonomisine ve Cypher'ın trip varyasyonuna bağlı.
+**Fark yok:** Haven, Ascent, Lotus — orta mesafeli haritalarda kim daha iyi trip/nade yerleşimi biliyorsa o kazanır.
 
 ## 3. Key Düellolar
 
-**IF** Raze nade ile A Main'e blind throw yaptı, Cypher trip'i o noktada
-**MEANING** Trip nade explosion ile aktive olur ama nade damage trip'i siler, Raze trip hattını harcatmadan temizledi
-**COUNTER** Cypher trip'ini nade lineup hattından uzak noktaya kur. Çift trip kurulumu (ikincisi saklı) nade sonrası aktif kalır.
-**WHY** Cypher trip tek kullanımlı, nade geri doluyor — Raze'in nade ekonomisi Cypher trip ekonomisini yeniyor. Trip yerleşimi nade lineup bilinciyle yapılmalı.
+**IF** Raze nade'i A Main'e körlemesine attı, Cypher trip o noktada
+**MEANING** Nade patlaması trip'i siler — Raze trip hattını Cypher'a harcatmadan geçti
+**COUNTER** Trip'i nade'in düşeceği yerden uzağa koy. İkinci bir trip'i saklı kur — nade birincisini patlatsa ikincisi aktif kalır
+**WHY** Nade şarjı dolunca geri geliyor, Cypher trip tek sefer kullanılıyor. Raze'in nade'i Cypher trip'ini eritiyor — trip yeri nade'in nereye düşeceğine göre seçilmeli
 
 ---
 
-**IF** Cypher kamera modunda Raze'i izliyor, Raze aggressive peek alıyor
-**MEANING** Kamera modunda Cypher aim hattı yok, vücudu statik, Raze peek alsa kill garanti
-**COUNTER** Cypher kamera'yı takım arkadaşı güvendeyken kullanır, solo anchor değilken. Kamera kullanımı sırasında corner cover al.
-**WHY** Cypher kamera modunda savunmasız. Kamera info aracı, kill aracı değil — yanlış zamanda kullanan Cypher ölü.
+**IF** Cypher kamera modunda Raze'i izliyor, Raze peek alıyor
+**MEANING** Kamera modunda Cypher hareket edemez, nişan alamaz — Raze peek alırsa karşılık yok, kill garanti
+**COUNTER** Kamerayı sadece yanında takım varken kullan. Yalnız anchor'dayken kamera açarsan Raze peek alır, ölürsün
+**WHY** Kamera bilgi aracı, dövüş aracı değil. Yanlış anda açan Cypher bedava ölür
 
 ---
 
-**IF** Raze satchel ile Cypher'ın anchor pozisyonuna boost yaptı, trip hattını bypass etti
-**MEANING** Satchel boost Raze'i trip hattının üstünden geçirir, Cypher trap hattı etkisiz, Raze Cypher'ın pozisyonuna düşer
-**COUNTER** Cypher trip'ini ground level + yüksek hatta çift kurulumla koy. Satchel boost hattını öğren, trip'i hattın içine yerleştir.
-**WHY** Raze satchel mobility Cypher'ın ground trip ekonomisini atlayabilir. Cypher tek yüksekte trap ekonomisi kurmak zorunda, yoksa Raze ground bypass.
+**IF** Raze satchel ile Cypher'ın anchor pozisyonuna boost yaptı, trip'in üstünden geçti
+**MEANING** Satchel Raze'i trip hattının üstüne taşır — ground level trip çalışmaz, Raze Cypher'ın üstüne düşer
+**COUNTER** Trip'i hem yere hem yükseğe çift kat kur. Raze'in hangi açıdan boost yaptığını gör, trip'i tam o hatta yerleştir
+**WHY** Tek yere kurulan trip satchel boost'u durduramaz. Çift kur ki biri hava hattını kapsasın
 
 ---
 
-**IF** Raze Showstopper ultunu Cypher'ın site lockdown'ına attı
-**MEANING** Ult roketi Cypher utility hattını tek atışta patlatır, Cypher site içinde varsa direkt öldürür
-**COUNTER** Cypher ult sesini duyduğu an pozisyondan çık — Showstopper sabit yön rocket, sağa ya da sola reposition ult'u boşaltır.
-**WHY** Showstopper tek yön lethal. Cypher sabit anchor'da ise ult çekim merkezi, mobility gösteren Cypher ult'tan kaçar.
+**IF** Raze Showstopper'ı Cypher'ın tuttuğu yere attı
+**MEANING** Roket Cypher'ın utility'sini patlatır, Cypher orada duruyor idiyse direkt öldürür
+**COUNTER** Ult sesini duyduğun an sağa ya da sola koş. Roket tek yönde gidiyor — yer değiştirirsen ult boşa gider
+**WHY** Roket gittiği yönde öldürür, yan kaçarsan seni bulamaz. Sabit duran Cypher ult'un tam hedefidir
 
 ---
 
-**IF** Cypher Neural Theft ultunu Raze kill'i sonrası kullandı
-**MEANING** Raze takım pozisyonu açığa çıkar, Cypher takımı rotate bilgisiyle Raze takımını bitirir
-**COUNTER** Raze takımı round ortasında pozisyon değişimini hızlandırmalı — Neural Theft timing sonrası 5-10 paket hareket (yavaşlık yerine) Cypher'ın info penceresini dondurur.
-**WHY** Neural Theft sabit noktada çekim yapar, sabit noktadaki bilgi sonraki saniyede değişebilir. Bilgiyi etkisizleştirmek için hareket gerek.
+**IF** Cypher, Raze öldükten sonra Neural Theft attı
+**MEANING** Raze'in takımının yerleri açıldı, Cypher takımı bu bilgiye göre hareket eder
+**COUNTER** Raze düştükten sonra takım hemen yer değiştirsin. Neural Theft o anki pozisyonu gösterir — hareket edersen bilgi eskir
+**WHY** Ult sabit anlık konum gösterir. Hareket eden takım ult'u değersiz kılar
 
 ---
 
-**IF** Raze B Main'e satchel ile hızlı giriş aldı, Cypher trip sesini duydu
-**MEANING** Trip aktive oldu, Cypher takıma bilgi verdi ama Raze zaten site içinde — info geç
-**COUNTER** Cypher trip'i choke'a değil site içine kur. Site içinde aktive olan trip Raze'in reposition hızını keser, info zamanlı.
-**WHY** Trip yerleşimi info için zamanlı olmalı. Choke trip'i aktive olduğunda Raze zaten içerde, bilgi değersiz. Site trip'i aktive olduğunda Raze hala içerde, bilgi takım rotate'i için yararlı.
+**IF** Raze B Main'e satchel ile daldı, Cypher trip choke'ta aktif oldu
+**MEANING** Trip çalıştı, Cypher takıma bilgi verdi — ama Raze zaten site içinde, bilgi geç kaldı
+**COUNTER** Trip'i choke'a değil site içine kur. Site içinde çalan trip Raze'in içerdeki hareketini keser, bilgi zamanında gelir
+**WHY** Choke trip'i Raze girince çalıyor, iş işten geçiyor. Site trip'i Raze içerdeyken çalıyor, takım hala rotate edebilir
 
 ---
 
-**IF** Raze post-plant ayakları kırıp nade lineup atıyor, Cypher retake ediyor
-**MEANING** Raze nade defuse engeller, Cypher trip yoksa retake utility'si eksik
-**COUNTER** Cypher retake'e trip + smoke utility ile gelsin. Trip retake yolunu Raze'in reposition hattına kurar, Cypher nade'i beklemeden site'a girer.
-**WHY** Post-plant Raze nade maliyetli, Cypher trip maliyetsiz. Trip sessiz yerleşir, nade ses yapar — info asimetrisi Cypher lehine.
+**IF** Raze post-plant'te nade atarak defuse'u kesiyor, Cypher retake'e geliyor
+**MEANING** Raze nade defuse'u zorlaştırıyor, Cypher trip yoksa retake'e yarı boş geliyor
+**COUNTER** Retake'e trip + kamera ile gel. Trip'i Raze'in kaçacağı hatta kur, kamera site içini gör — sonra gir
+**WHY** Raze nade ses çıkarır ve konumunu belli eder, Cypher trip sessiz oturur. Bilgi sende, ne zaman gireceğini sen seç
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
-Raze utility ekonomisi nade (1) + satchel (2) + paintshell (1) + ult, Cypher ekonomisi trip (2) + cage (1) + kamera (1) + ult. Raze utility'si damage + mobility odaklı, Cypher utility'si info + lockdown odaklı. Matchup'ın özü Raze'in nade'inin Cypher trip'ini patlatabiliyor olması — Raze utility'si Cypher utility'sinin bir kısmını silebilir, tersi değil. Cypher'ın cevabı trip'i nade lineup hattından uzak kurmak. Ult ekonomisi: Showstopper (7 point) vs Neural Theft (7 point), eşit cost ama Showstopper kill ult, Neural Theft info ult — Raze'in ult'u round kazanır, Cypher'ın ult'u round hazırlar.
+Raze: nade (1) + satchel (2) + paintshell (1) + ult. Cypher: trip (2) + cage (1) + kamera (1) + ult.
 
-## 5. Map Bazlı Değişim
+Raze utility'si zarar + hareket için. Cypher utility'si bilgi + site kilitleme için.
 
-**Bind (Raze avantajlı):** Hookah + Showers Raze'in close range cenneti. Nade + satchel dar alanda Cypher trip hattını patlatır.
+Kritik nokta: Raze nade'i Cypher trip'ini patlatabilir, tersi mümkün değil. Cypher'ın cevabı trip'i nade'in düşmeyeceği yere koymak.
 
-**Split (Raze avantajlı):** A Main + B Main dar choke'lar Raze'in nade lineup'larına yarar. Cypher trip'leri Raze nade ekonomisiyle eskir.
+Ult maliyeti eşit (her ikisi 7 puan). Showstopper round'u bitirir. Neural Theft round için zemin hazırlar — ama o zemini takım değerlendirirse işe yarar.
 
-**Sunset (Raze avantajlı):** A Main + B Market dar, Raze paintshell + nade lineup meta. Cypher Sunset'te orta seçenek, matchup Raze'in.
+## 5. Haritaya Göre Durum
 
-**Haven (Balanced):** Cypher B anchor + Garage camera meta, Raze A Short entry. Farklı site'larda çatışma.
+**Bind (Raze avantajlı):** Hookah + Showers dar, Raze nade + satchel burada iş görür. Cypher trip'i Raze nade'i tarafından eriyip gider.
 
-**Fracture (Raze avantajlı):** Multi-entry yapısı Raze satchel ekonomisine yarar. Cypher tek yönlü trip hattı kurmakta zorlanır.
+**Split (Raze avantajlı):** A Main + B Main choke'ları Raze nade'ine göre biçilmiş. Cypher trip'leri Raze'in nade'leri ile tükenir.
 
-**Icebox (Cypher hafif avantajlı):** Uzun sightline + Rafters vertical Cypher'ın camera info oyunu. Raze satchel close range gücü Icebox'ta sınırlı.
+**Sunset (Raze avantajlı):** A Main + B Market dar, Raze paintshell + nade işe yarar. Cypher Sunset'te zayıf seçim, matchup Raze'in.
 
-**Breeze (Cypher avantajlı):** Uzun açılar Raze nade ekonomisini eskiterek yok eder. Cypher A Site anchor meta.
+**Haven (Dengeli):** Cypher B + Garage kamera tutar, Raze A Short'tan girer. Farklı sitelarda farklı kavga.
 
-## 6. Flip Moment'ler
+**Fracture (Raze avantajlı):** Çok taraflı giriş yapısı Raze satchel'ını güçlendirir. Cypher tek hatlı trip kurmakta zorlanır.
 
-**Flip 1 — Nade ile trip patlaması:** Raze'in nade'i Cypher trip hattını patlattığı an Cypher'ın info ekonomisi kırılır. Raze bu pencerede ikinci push'a commit eder.
+**Icebox (Cypher hafif avantajlı):** Uzun açılar + Rafters Cypher kamera oyununu güçlendirir. Raze satchel burada kısıtlı.
 
-**Flip 2 — Satchel boost:** Raze satchel ile trip hattını atlarsa Cypher bilgisiz kalır. Cypher trip'inin yüksekliği satchel boost hattına göre ayarlanmalı.
+**Breeze (Cypher avantajlı):** Uzun açılar Raze nade'ini değersizleştirir. Cypher A Site tutma meta.
 
-**Flip 3 — Showstopper anchor atışı:** Raze ult Cypher anchor pozisyonuna düşerse Cypher kesin ölüm. Pozisyon varyasyonu yoksa ult değerini maksimum alır.
+## 6. Dönüm Noktaları
 
-**Flip 4 — Neural Theft takım info'su:** Neural Theft doğru kill sonrası atılırsa Raze takımının planı çökertilir. Yanlış kill sonrası ult info değersiz.
+**Dönüm 1 — Nade trip'i patlattı:** Raze'in nadesi Cypher trip hattını yok ettiği an Cypher kör kalır. Raze ikinci girişe hemen geçer.
 
-## 7. Pro Coach Notları
+**Dönüm 2 — Satchel boost trip'i atladı:** Raze trip hattının üstünden geçerse Cypher bilgisiz kalır. Cypher trip yüksekliğini Raze'in boost açısına göre ayarlamalı.
 
-**VCT'de nasıl oynanıyor:** Raze vs Cypher matchup'ı VCT'de sık karşılaşılıyor — iki agent da pick rate yüksek. Pro seviyede matchup Raze'in nade lineup disiplinine bağlı — Raze nade'ini Cypher trip hattına atarsa trip boşa, Raze nade'ini choke temizliğe atarsa trip info olarak çalışır. Cypher tarafında gizli trip ekonomisi şart — aynı trip yerleşimi iki maç üst üste Raze tarafından bypass edilir.
+**Dönüm 3 — Showstopper anchor'a düştü:** Raze ult Cypher'ın durduğu yere gelirse Cypher ölür. Sabit duran Cypher rokete tam hedef olur — ult sesi duyulunca yer değiştir.
 
-**Meta tier durumu:** Raze A+ tier, Cypher S tier (sentinel). Matchup head-to-head Cypher hafif avantajlı (info gücü Raze'in explosive entry'sinden daha stable). Map'e göre denge değişir.
+**Dönüm 4 — Neural Theft takım yerini açtı:** Ult doğru öldürme sonrası atılırsa Raze takımının planı bozulur. Yanlış öldürme sonrası atılan ult bilgisiz.
 
-**** Raze nade damage'ı Cypher trip'ini silmek için yeterli mi? Patch notlarına göre hasar eşiği değişmiş olabilir.
+## 7. Koç Notu
 
-**** Neural Theft ult cost patch 9.x'te güncellendi mi? Cost matchup ult ekonomisinin tarafını belirliyor.
+Raze olarak nade'ini trip için at, choke temizliği için değil. Trip'i patlat, sonra gir — sıra bu.
 
-**Coach test:** "Raze Cypher karşısında nade'ini trip için değil, choke için at. Cypher Raze karşısında trip'ini site için değil, choke'a uzak için kur. İki oyuncunun da yapacağı iş klasik disiplini tersine çevirmek. Reflex yerleşim kaybeder."
+Cypher olarak trip'ini site içine kur, choke'a değil. Choke trip'i Raze içeri girdikten sonra çalıyor, iş işten geçiyor.
+
+Raze nade Cypher trip'ini siliyor — bu matchup'ın tek sabit kuralı bu. Cypher buna karşılık verecekse trip yerini Raze'in nade hattından uzak tutmak zorunda. Bir round trip yerini Raze öğrenirse sonraki round nade oraya gider. Yeri değiştir, Raze'i sıfırla.

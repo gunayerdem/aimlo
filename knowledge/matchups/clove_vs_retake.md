@@ -1,46 +1,56 @@
 # MATCHUP: Clove vs Retake
 
-## Etkileşim Kimliği
-Clove öldükten sonra bile katkı sağlamaya devam eden controller'dır. Ölüm sonrası smoke ve kendi kendini diriltme mekaniği retake oyununun temel varsayımını bozar: saldıranları öldürmenin post-plant yetenek kapasitesini azalttığı varsayımı. Clove'a karşı başarılı bir retake entry kill'i bile hemen ölmüş Clove'dan gelen bir smoke ile takip edilebilir — kalan saldıranları korur — ve ardından Clove'un kendisi savaşa geri döner. Bu matchup retake takımının Clove'u öldürüp, ölüm sonrası smoke ile başa çıkıp, retake'i bitirmek için hâlâ yeterli yeteneğinin olup olmadığını test eder.
+## Ne Oluyor Burada
+
+Clove öldükten sonra bitmez. Ölünce smoke atabilir, sonra dirilir. Bu durum retake'in temel varsayımını kırar: "Controller'ı öldür, üstünlük kazan." Clove'u vursun — ölüm smokeu iner, kalan takım arkadaşlarını örter, sonra Clove geri döner. Retake takımı hem ölüm smokeuyla hem de dönen Clove'la aynı anda uğraşır.
 
 ## Yaygın Cezalandırma Kalıpları
 
-**IF**: Clove ölüyor ama ölüm sonrası smoke'lar retake sightline'larını öteden engelliyor ve Not Dead Yet (diriliş) retake ortasında Clove'u geri getiriyorsa
-**MEANING**: Retake takımı Clove'u erken öldürür, controller'ın gittiğini düşünür ve beklemedikleri taze bir smoke'a push eder. Diriliş kafa karışıklığı ve sayı değişimi oluşturur. Hayattayken kullanılan yetenek (smoke, decay) retake kaynaklarını site'a ulaşmadan tüketir, ölüm yeteneği kapsamı uzatır.
-**COUNTER**: Clove'u erken öldür ve ölüm sonrası smoke inmeden hemen push et — kısa bir pencere var. Clove'un ölüm pozisyonunu takip ederek smoke yerleşimini tahmin et. Smoke'un sabit yönden geldiğini bilerek smoke etrafında oyna, içinden değil. Clove'un ölüm sonrası yeteneği bitene kadar push'u ertele.
-**WHY**: Clove'un ölümü normal bir kill değildir — ikinci bir yetenek fazının başlangıcıdır.
+**IF**: Clove ölüyor, ölüm smokeu site girişini kesiyor ve hemen arkasından dirilip savaşa geri dönüyorsa
+**MEANING**: Sen Clove'u öldürdün, controller gitti sandın — ama taze bir smoke kapandı önünde. İçine girdin, Clove da döndü. Hem smoke hem can kaybı.
+**COUNTER**: Clove düştüğü anda smoke inmeden push et — bu pencere var. Clove'un düştüğü yeri gör, smoke oradan gelir, etrafından dolaş. Smoke içine girme — kenarından sık.
+**WHY**: Clove'un ölümü bitmek değil, ikinci bir yetenek dalgasının başlangıcı.
 
-**IF**: Clove post-plant'i koruyamıyorsa ve ölüm sonrası yetenek etkisiz kalıyorsa
-**MEANING**: Ölümleri çok erken gerçekleşiyor (smoke'lar retake gelmeden iniyor) veya çok geç (ölüm sonrası yetenekleri aktive etmeye zaman yok). Clove'un post-plant'taki ölüm zamanlaması stratejik bir karardır.
-**COUNTER**: Clove post-plant sırasında mümkün olduğunca hayatta kalmalı, sonra retake'in push yaptığı o ana denk gelen ölüm sonrası yetenek kullanmalı.
-**WHY**: Erken ölüm = retake gelmeden biten smoke'lar. Geç ölüm = aktive edilemeyen yetenek.
+---
 
-**IF**: Retake takımı Clove'u öldürmeden site'e girmeyi bilerek erteliyorsa ve ölüm sonrası smoke'ların bitmesini bekliyorsa
-**MEANING**: Retake takımı Clove'un mekaniğini okumuş ve ölüm sonrası pencereyi yönetiyor. Bu durumda Clove'un takımı post-plant'te sayı üstünlüğü ve pozisyon avantajıyla zaman oyununu kaybeder — defuse saati retake lehine çalışır.
-**COUNTER**: Clove post-plant sürecinde daha erken Not Dead Yet aktive edebilmek için takım arkadaşlarının altında revive tüketimine izin vermemeli. Saldıranların geri kalan üyeleri Clove hayatını uzatırken spike'ı koruma altına alan crossfire kurmalı. Retake takımının bekleme süresini kullanarak yakın mesafe crossfire'ını yeniden konuşlandır.
-**WHY**: Retake takımı bekleyerek avantaj kazanıyorsa Clove'un varlığı aktif bir tehdit olmaktan çıkar — Clove'un bu pasifliği bozacak şekilde ölüm zamanlamasını takımla koordine etmesi şarttır.
+**IF**: Clove spike kurulduktan sonra çok erken ya da çok geç düşüyorsa ve ölüm smokeu işe yaramıyorsa
+**MEANING**: Çok erken düşersen smoke'lar retake takımı gelmeden biter. Çok geç düşersen dirilmeye zaman bulamazsın.
+**COUNTER**: Spike kurulduktan sonra ayakta kal. Retake takımı site girişine bastığında düş — ölüm smokenu tam o push anına denk getir.
+**WHY**: Düşme anı yanlışsa ölüm smokeu boşa gider.
+
+---
+
+**IF**: Retake takımı içeri girmek yerine bekliyor, ölüm smokeu dağılsın diye duruyorsa
+**MEANING**: Düşman senin mekaniğini okudu. Bekledikçe spike saati onlar lehine işler — sen de daha zor pozisyona düşersin.
+**COUNTER**: Takım arkadaşların spike'ın iki tarafını tutacak pozisyon kursun. Retake takımı B Main'e yığılmışsa sen A köşesinden düş — ölüm smokeu onların bekleme planını boz. Bekleme devam ederken kalan saldıranlar çapraz açı kurabilir — bunu fırsata çevir.
+**WHY**: Düşman beklemeyi seçtiyse Clove pasif kaldığı sürece bu seçim işe yarar. Düşme zamanını takımınla konuş, bekleme planını kır.
 
 ## Tekrarlayan Başarısızlık Ne Anlama Gelir
-**Retake** Clove'a karşı sürekli başarısız oluyorsa, takım ölüm sonrası yeteneği hesaba katmıyor. Clove'un ölümünü normal bir kill gibi ele alıyor ama aslında bu bir sonraki yetenek fazının başlangıcı. Retake planı ölüm sonrası smoke'u hesaba katmalı.
 
-**Clove** post-plant'ı korumakta sürekli başarısız oluyorsa, ölümleri çok erken (smoke'lar retake gelmeden iniyor) veya çok geç (ölüm sonrası yetenekleri aktive etmeye zaman yok) gerçekleşiyor. Clove'un post-plant'taki ölüm zamanlaması stratejik bir karardır.
+**Retake yapıyorsun ve sürekli kaybediyorsun**: Clove'un ölümünü sıradan bir öldürme gibi ele alıyorsun. Ama o düştüğünde iş bitmedi — smoke geliyor, sonra kendisi geliyor. Planını buna göre yap.
+
+**Clove oynuyorsun ve spike'ı koruyamıyorsun**: Düşme zamanın yanlış. Çok erken düşersen smoke boşa gider. Çok geç düşersen dirilmeye yetin olmaz. Retake takımı site girişine girdiğinde düş.
 
 ## AIMLO Ne Demeli
-### Oyuncu cezalandırılan taraftayken
-**Retake Clove'a karşı başarısız oluyorken**: "Clove'u öldürmek controller'ı kaldırmakla aynı şey değil. Ölüm sonrası smoke'lar geliyor — bunları planla. Ya inmeden push et ya da dağıldıktan sonra bekle. Koyan kişi öldü diye taze bir smoke'un içine yürüme."
 
-**Clove post-plant başarısız oluyorken**: "Ölüm zamanlamın fark yaratır. Çok erken ölürsen ölüm sonrası smoke'ların retake gelmeden biter. Post-plant sırasında mümkün olduğunca hayatta kal, sonra ölüm sonrası yeteneği tam push anını kapsamak için kullan."
+### Oyuncu cezalandırılan taraftayken
+
+**Retake Clove'a karşı kaybediyorken**: "Clove'u öldürmek controller'ı kaldırmakla aynı şey değil. Ölüm smokeu geliyor — bunu hesapla. Ya smoke inmeden push et ya smoke dağıldıktan sonra gir. Koyan kişi öldü diye taze bir smoke'un içine yürüme."
+
+**Clove spike'ı koruyamıyorken**: "Ne zaman düştüğün fark yaratıyor. Çok erken düşersen smoke retake gelmeden biter. Retake takımı site girişine bastığında düş — ölüm smokenu tam o ana denk getir."
 
 ### Oyuncu cezalandıran taraftayken
-**Clove'un ölüm sonrası yeteneği çalışıyorken**: "Ölüm sonrası smoke'ların takımının post-plant kontrolünü retake takımının beklediğinin ötesine uzatıyor. Ölüm yeteneği zamanlamasını tam push anına denk getirmeye devam et."
 
-**Retake takımı Clove ile başa çıkıyorken**: "Ölüm sonrası smoke'ları hesaba katıp push zamanlamasını onların etrafında ayarlıyorsun. Smoke'un nereye ineceğini tahmin etmek için Clove'un ölüm pozisyonunu takip etmeye devam et."
+**Clove ölüm smokeu çalışıyorken**: "Ölüm smokeu tam push anına denk geliyor, devam et. Takım arkadaşların smoke dağılmadan önce pozisyon alabiliyorsa çapraz açıyı koru."
+
+**Retake takımı Clove'u okuyorken**: "Ölüm smokeu nereye ineceğini Clove'un düştüğü yerden tahmin et. Smoke içine değil, kenarından bask. Bekleme doğru karar — ama beklerken çapraz açı kur, boş durma."
 
 ## Rank Modülasyonu
-**LOW**: Hiçbir taraf Clove'un ölüm sonrası mekaniğini anlamaz. Retake standarttır. Clove'un ölümünün yetenek kapasitesinin sonu olmadığına dair farkındalık öğret.
 
-**MID**: Retake oyuncuları ölüm sonrası smoke'ları tanımaya başlar ama etrafında plan yapmaz. Clove oyuncuları ölüm sonrası yetenek kullanır ama zamanlama rastgeledir. Her iki tarafa da zamanlama öğret.
+**LOW**: İki taraf da ölüm sonrası mekaniği fark etmez. Retake standarttır. Clove öldü diye bitmedi — bunu söyle.
 
-**HIGH**: Retake takımları Clove'un ölüm yeteneklerini push zamanlamalarına dahil eder. Clove oyuncuları ölümlerini stratejik zamanlar. Kasıtlı ölüm zamanlaması etrafındaki zeka oyununu öğret.
+**MID**: Retake takımı ölüm smokeu görür ama etrafında plan yapmaz. Clove ölüm smokeu kullanır ama düşme anı rastgeledir. Her iki tarafa da düşme zamanını somut event'e bağla: retake takımı site girişine bastığında düş.
 
-**ELITE**: Clove'un ölüm zamanlaması bilinçli bir takım kararıdır. Retake takımı Clove'un hayatta mı yoksa yetenek değeri için ölmeyi mi seçtiğini okumak zorundadır. Aldatma ve okuma katmanlarını öğret.
+**HIGH**: Retake takımları ölüm smokeu push planına katar. Clove oyuncuları ne zaman düşeceğini seçer. Clove'un hayatta mı kalmak istediğini yoksa ölüm değeri için mi pozisyon kurduğunu retake takımı okur — bunu öğret.
+
+**ELITE**: Clove ne zaman düşeceğine bilinçli karar verir — takımıyla konuşur. Retake takımı Clove'un hayatta mı kalmak istediğini yoksa ölüm değeri için mi düştüğünü okumalı. Her iki taraf da birbirinin kararını okur ve karşı hamle yapar.

@@ -11,111 +11,115 @@ tags: [matchup, iso, clove, duelist, controller]
 
 ## 1. Matchup Özü
 
-Iso shield + kontingency wall + double tap + Kill Contract ile 1v1 duelloları kazanmaya çalışan aim-focused duelist, Clove ise smoke + meddle + pick-me-up + Not Dead Yet ile self-revive + zone control yapan immortal controller. Matchup Iso'nun 1v1 shield ekonomisi ile Clove'un death-cycle disiplinini test eder.
+Iso, shield + duvar + Double Tap + Kill Contract ile 1v1 duelolarını kendi koşullarında oynamak ister. Clove, duman + meddle + Pick Me Up + Not Dead Yet ile öldükten sonra bile sahadayım der. Bu matchup şu soruyu sorar: Iso Clove'u takımından koparabilir mi, yoksa Clove ölüp geri gelerek Iso'yu bitirir mi?
 
 ## 2. Kim Avantajlı?
 
-**Iso lehine durumlar:**
-- 1v1 izole duello alanlarında — Iso shield Clove'un tek shot ihtimalini absorbs
-- Clove utility harcanmış — smoke + meddle yok, Iso aim duel'de avantajlı
-- Iso Kill Contract ult hazır — ult Clove'u izole dimensiyona çeker, Clove takım desteğinden mahrum
-- Clove Not Dead Yet henüz kullanılmamış — Clove self-revive hazır değilse ikinci şans yok
+**Iso lehine:**
+- Clove duman + meddle harcamışsa — eli boş Clove, Iso aim dueloda baskın
+- Kill Contract attıysan — Clove izolasyona girer, takım desteği kesilir, revive de çalışmaz
+- Clove Not Dead Yet henüz kullanılmamışsa — öldürdüğünde ikinci şans yok
 
-**Clove lehine durumlar:**
-- Clove smoke Iso angle hattında — vision block Iso aim angle'ını kapatır
-- Meddle decay Iso shield'e eşzamanlı — decay shield'i harcar, damage HP'ye geçer
-- Clove Not Dead Yet ile ölümden geri gelir — Iso kill confirmed sandığı anda Clove geri
-- Pick-me-up buff Clove kill sonrası — damage bonus + hız, Iso'nun bir sonraki duelinde Clove avantajlı
+**Clove lehine:**
+- Clove duman Iso'nun açısını kapatıyorsa — dumanın içinde aim avantajın sıfır
+- Meddle attıysa ve sen zone içinde kaldıysan — shield'in bitmeden HP'ye geçer, duelo kaybedersin
+- Clove öldü ama Not Dead Yet açıksa — sen kill aldım derken Clove geri, sen hazırlıksız
+- Clove az önce öldürdü ve Pick Me Up aktifse — hız + hasar bonusu var, üstüne gitme
 
-**Balanced:** Haven, Bind, Lotus gibi orta mesafeli map'lerde matchup Iso shield timing'i ile Clove smoke + revive disiplinine bağlı.
+**Haritaya göre değişen:** Haven ve Lotus'ta Clove duman kapasitesi Iso'yu boğar — Iso önce Kill Contract ile Clove'u izole etmeden site girişi açamaz.
 
-## 3. Key Düellolar
+## 3. Temel Düellolar
 
-**IF** Clove smoke Iso angle hattında
-**MEANING** Vision block Iso aim hattını kapatır, smoke arkası duelde Iso aim avantajı yok
-**COUNTER** Iso kontingency wall ile smoke hattı dışı angle yarat. Wall projectile absorbs + yeni angle.
-**WHY** Clove smoke kısa süreli. Iso wall projectile defense + yeni aim angle açar.
-
----
-
-**IF** Clove meddle decay Iso shield'e
-**MEANING** Meddle zone decay Iso shield'ini harcar, shield sonrası HP direkt damage alır
-**COUNTER** Iso meddle radius dışına reposition. Shield yenilenene kadar zone dışı kal.
-**WHY** Meddle decay Iso'nun shield ekonomisini boşa çıkarır. Shield'in değeri full absorption — decay altında shield harcanır.
+**IF** Clove duman Iso'nun açı hattına girdi
+**MEANING** Duman Iso'nun aim avantajını kapatır — duman arkasından duelo, Iso için kör dövüş
+**COUNTER** Iso duvarını (Contingency) duman dışına at, dumanın yanında yeni açı yarat
+**WHY** Clove dumanı kısa sürer. Duvarın hem mermi durdurması var hem yeni açı açar — duman bitmeden sert açı dışına geç
 
 ---
 
-**IF** Iso shield aktif, Clove rifle shot
-**MEANING** Shield ilk shot'u absorbs, Iso karşı shot'u serbest — aim duel Iso lehine
-**COUNTER** Clove shield'ı harcatmak için meddle decay + takım trade. Tek shot karşı shield boşa.
-**WHY** Iso shield tek kullanım/cooldown. Shield'ı harcatmak utility + takım gücü gerektirir.
+**IF** Clove meddle attı ve Iso zone içinde
+**MEANING** Meddle decay shield'ini bitirir — shield harcanır ve hasar direkt HP'ye gelir
+**COUNTER** Meddle sesini duyar duymaz 1 adım geri çık, zone dışına geç, shield yenilenene kadar orada kal
+**WHY** Zone içinde shield seni korumaz. Shield tam doluyken gir — decay altında girme
 
 ---
 
-**IF** Iso Kill Contract ultunu Clove'a attı
-**MEANING** Ult 1v1 dimensiyonda Clove'u izole, Clove takım utility'si olmadan Iso aim duelunda
-**COUNTER** Clove Kill Contract hat dışı pozisyon. Not Dead Yet ult dimensiyonunda çalışmaz — tek kayıp.
-**WHY** Kill Contract 1v1 izolasyon. Clove'un self-revive'ı bile ult dimensiyonunda işe yaramazsa.
+**IF** Iso shield aktifken Clove ateş etti
+**MEANING** İlk atış shield'e gelir, Iso karşı atış için serbest — aim duelo Iso lehine
+**COUNTER** Clove için: tek başına shield'i harcatmaya çalışma, meddle + takım trade ile harcatmalısın
+**WHY** Shield tek kullanımlık ve bekleme süresi var — onu tek başına boşa çıkaramazsın
 
 ---
 
-**IF** Clove Not Dead Yet ile ölümden geri geldi
-**MEANING** Iso kill confirmed sandığı anda Clove geri, Iso bir sonraki duele hazırlıksız
-**COUNTER** Iso Clove kill sonrası ölüm lokasyonunu cover et, revive penceresinde Clove'u ikinci kez bitir.
-**WHY** Not Dead Yet revive penceresi savunmasız. Iso aim confirm revive anını bitirmeli.
+**IF** Iso Kill Contract'ı Clove'a attı
+**MEANING** Clove izolasyona çekilir, takım dumansız kalır ve Clove revive boyutun içinde çalışmaz
+**COUNTER** Clove için: ult geliyorsa açı kapat, Kill Contract hattından çık — içine çekilirsen revive dahi seni kurtarmaz
+**WHY** Kill Contract boyutunda Not Dead Yet açılmıyor — bu Iso'nun Clove'a karşı en güçlü kartı
 
 ---
 
-**IF** Clove pick-me-up buff ile Iso'ya geldi
-**MEANING** Kill sonrası hız + damage bonus, Clove aim duel'de buff avantajlı
-**COUNTER** Iso shield + kontingency wall hazır, buff süresi bitene kadar cover'da kal.
-**WHY** Pick-me-up süreli buff. Iso'nun cevabı buff süresini cover'da geçir, sonra aim duel.
+**IF** Clove Not Dead Yet ile geri geldi
+**MEANING** Kill aldım dediğin anda Clove sahadaki, sen bir sonraki dueloya hazırlıksızsın
+**COUNTER** Clove'u öldürdükten sonra düştüğü yeri izle — geri gelirse ikinci atış için orada ol
+**WHY** Revive anında Clove savunmasız. O pencerede bitirmezsen Clove tam canla kalkar
 
 ---
 
-**IF** Iso kontingency wall Clove smoke hattında
-**MEANING** Wall projectile absorbs, Clove rifle shot wall'dan geçmez
-**COUNTER** Clove wall'ı flank ile bypass et, wall tek yönlü.
-**WHY** Iso wall tek yönlü projectile block. Clove'un cevabı wall'u flank ile aşmak.
+**IF** Clove az önce birini öldürdü ve Pick Me Up aktif
+**MEANING** Clove'un hızı ve hasarı geçici olarak artmış — normal duel değil, dezavantajlısın
+**COUNTER** Clove'un öldürme sesini duyduktan sonra köşeye çekil, Pick Me Up ikonu ekrandan kaybolunca çık
+**WHY** Pick Me Up yalnızca Clove kendi öldürdüğünde açılır. Buff aktifken üstüne gidersen dezavantajlı dueloya girersin
 
-## 4. Utility Takası
+---
 
-Iso ekonomisi shield + wall + double tap + ult (solo aim + 1v1 izolasyon), Clove ekonomisi smoke x2 + meddle + pick-me-up + ult (zone + decay + revive). Asimetrik matchup — Iso 1v1 aim user, Clove self-sustain controller. Clove'un gücü ölüm sonrası geri gelme, Iso'nun gücü 1v1 izolasyon. Ult ekonomi: Kill Contract 7 point, Not Dead Yet (Clove base ability, ult değil — Clove ult "Not Dead Yet" 7 point ekonomiyle devreye girer).
+**IF** Iso Contingency duvarını Clove duman hattına koydu
+**MEANING** Mermi duvardan geçmez — Clove'un duman arkasından vurması engellenir
+**COUNTER** Clove için: duvarı flankla aş, duvar tek yönlü ve yana savunmasız
+**WHY** Duvar yalnızca önden gelen mermiyi durdurur. Clove yandan gelirse duvarın değeri yok
 
-## 5. Map Bazlı Değişim
+## 4. Yetenek Takası
 
-**Bind (Balanced):** Close range 1v1 Iso, smoke Clove.
+Iso: shield + duvar + Double Tap + Kill Contract → solo aim, 1v1 izolasyon
+Clove: duman x2 + meddle + Pick Me Up + Not Dead Yet → alan kontrolü, ölüp geri dönme
 
-**Haven (Clove avantajlı):** 3 site smoke ekonomisi.
+Iso her şeyini 1v1'e kurar. Clove her şeyini hayatta kalmaya ve ikinci şansa kurar. Kill Contract 7 ult puanı, Not Dead Yet de 7 ult puanı — ult masrafı eşit ama Kill Contract Clove'un tek ikinci şansını da kapatır.
 
-**Lotus (Clove hafif avantajlı):** 3 site yapısı smoke'a yarar.
+Önemli: Not Dead Yet Kill Contract boyutunda çalışmıyor. Ult attıysan Clove içerde ölürse revive açılmaz — bunu bil.
 
-**Ascent (Clove avantajlı):** Clove A Main smoke meta.
+## 5. Haritaya Göre Değişim
 
-**Split (Balanced):** Dar choke nötr.
+**Bind (Dengeli):** Dar geçitler 1v1 Iso'ya yarar ama Clove duman da A Short ve B kısa geçişini kapatır.
 
-**Icebox (Iso avantajlı):** 1v1 izole Mid Tube Iso.
+**Haven (Clove lehine):** 3 site var, Clove 3 yeri de dumanla kontrol eder.
 
-**Sunset (Balanced):** Dar choke nötr.
+**Lotus (Clove hafif lehine):** 3 site yapısı duman ekonomisini güçlendirir.
 
-## 6. Flip Moment'ler
+**Ascent (Clove lehine):** A Main dumansız geçilmez, Clove orada belirleyici.
 
-**Flip 1 — Meddle shield harcandı:** Iso shield boşa, HP damage alır.
+**Split (Dengeli):** Dar boğazlar her iki tarafa da çalışır.
 
-**Flip 2 — Kill Contract Clove izolasyonu:** Takım desteği yok.
+**Icebox (Iso lehine):** Mid Tube dar ve izole — 1v1 Iso koşulları.
 
-**Flip 3 — Not Dead Yet Iso kill iptal:** Clove revive ile geri.
+**Sunset (Dengeli):** Dar geçitler her iki ajan için de eşit — kim önce util harcarsa açıkta kalır.
 
-**Flip 4 — Pick-me-up buff aim:** Clove kill sonrası üstün.
+## 6. Maç Döndüren Anlar
 
-## 7. Pro Coach Notları
+**Döngü 1 — Meddle shield'i bitirdi:** Iso zone içinde kaldı, shield gitti, HP açıkta.
 
-**VCT'de nasıl oynanıyor:** Iso B+ tier (trend yükselişte), Clove A+ tier. Matchup pro meta'da yeni — Clove 2024 release sonrası meta'da solo controller olarak sık. Pro Clove oyuncuları Not Dead Yet revive'ı Iso 1v1 senaryolarında cycle eder. Pro Iso oyuncuları shield timing'ini Clove meddle ekonomisine göre ayarlar.
+**Döngü 2 — Kill Contract Clove'u izole etti:** Takım dumansız, Clove revive'sız — Iso ideal koşulda.
 
-**Meta tier durumu:** Iso B+ tier, Clove A+ tier. Head-to-head Clove hafif avantajlı revive ekonomisiyle.
+**Döngü 3 — Not Dead Yet Iso kill'i iptal etti:** Iso hazırlıksız yakalandı, Clove üstünlük aldı.
 
-**** Clove meddle decay Iso shield'i kaç vuruşta düşürüyor?
+**Döngü 4 — Pick Me Up buff'lı Clove Iso üstüne geldi:** Pick Me Up ikonu aktifken Iso köşeye çekilmedi, kaybetti.
 
-**** Not Dead Yet Kill Contract dimensiyonunda aktif oluyor mu?
+## 7. Koç Notları
 
-**Coach test:** "Iso 1v1'e çekerse kazanır. Clove ölüm-geri dönüş cycle'ıyla kazanır. İzolasyon savaşı — Iso Clove'u takımından ayırmalı, Clove revive cycle ile ikinci şans yaratmalı."
+Bu matchup'ta Iso oynuyorsan: Clove'u 1v1'e çek, Kill Contract at, içerde bitir — revive de çalışmaz. Clove'u takımından koparmazsan, ölüp geri gelecek.
+
+Clove oynuyorsan: meddle önce Iso shield'e at, duman açı kapatır, öldükten sonra geri dön — Iso ikinci dueloya hazırsız yakalanır.
+
+**Matchup özeti:** Iso Clove'u izole ederse kazanır. Clove revive döngüsünü açarsa kazanır.
+
+**Sık sorulan:**
+- Meddle Iso shield'ini tek başına bitirmez — ama zone içinde kalırsan shield bitmeden HP'ye geçer.
+- Not Dead Yet Kill Contract boyutunda çalışmaz — Clove içerde ölürse revive açılmıyor.

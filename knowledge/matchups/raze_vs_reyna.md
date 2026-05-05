@@ -9,107 +9,123 @@ tags: [matchup, raze, reyna, duelist_vs_duelist]
 
 ## 1. Matchup Özü
 
-Raze ve Reyna duelist rolünün iki ayrı okuludur. Raze utility-entry duelist — Boombot + Blast Pack + Paint Shells + Showstopper ile damage ve mobility ekonomisini taşır, takıma katkı yüksek. Reyna solo frag duelist — Devour (heal), Dismiss (invisibility), Leer (flash), Empress (ult rage mode). Reyna ekonomisi tamamen kill üzerine kurulu, kill almazsa Reyna ekonomi sıfır. Raze ekonomisi utility cooldown üzerine kurulu, kill almazsa da utility destek verir. İki duelist karşılaştığında iki zıt takım felsefesi çatışır: Raze takım odaklı, Reyna tek odaklı. Pro okuma: Raze takım carry duelist, Reyna pub carry duelist. Round içinde Raze tutarlı destek sağlar, Reyna kill yaparsa snowball.
+Raze ile Reyna aynı rol ama zıt iş yapıyor. Raze oynuyorsan takımına bilgi ve hasar veriyorsun — Boombot köşeleri tarar, Paint Shells alana hasar atar, Blast Pack seni yukarı çıkarır. Kill alamasan bile bir şey üretiyorsun. Reyna oynuyorsan tek gelirin kill — kill alırsan Devour ile can alırsın, Dismiss ile kaçarsın. Kill alamazsan elinde bir Leer var, o kadar. Bu yüzden Reyna karşısında hedefin basit: ilk kill'ini verme.
 
 ## 2. Kim Avantajlı?
 
-Pro meta'da Raze Reyna'dan net üstte. Reyna VCT seviyesinde nadiren pick'lenir — Reyna solo carry ekonomisi koordineli takım oyununa uymaz. Raze meta pick. Pick rate dağılımı: pro sahnede Raze %40+, Reyna %2-5. Harita dağılımı: hemen hemen her haritada Raze favored. Reyna'nın tek avantajlı olduğu alan düşük koordinasyonlu pub seviyesi, VCT seviyesinde değil. Comp rolü: Raze entry + utility damage, Reyna entry + frag hunter. İki duelist aynı takımda nadir çünkü entry rolü çakışır. Karşı takımda karşılaştıklarında Raze takım sinerjisi ile round kurar, Reyna bireysel kill ile round kurar. Takım ekonomi farkı pro meta'da Raze lehine belirgin.
+Raze. Her haritada. Reyna sadece takım dağınık oynayınca tehlikeli — herkes ayrı köşede bekliyorsa Reyna tek başına round çalabilir. Takımın birlikte hareket ediyorsa Reyna'nın kill zinciri kırılır ve elinde sadece Leer kalır. Raze'ın elindekiler ise takım oynasın oynamasın çalışır.
 
 ## 3. Key Düellolar
 
-**IF** Reyna Leer flash ile kör ekiple birlikte, Raze Boombot info ile pozisyonu biliyor
-**MEANING** Reyna flash entry için, Raze Boombot savunma info için — iki entry hazırlığı farklı formda
-**COUNTER** Raze takımı Reyna flash sesini duyar duymaz cover arkasına gizlenir. Reyna Leer tek yönlü flash (Reyna pop'lar)
-**WHY** Reyna flash duvar üstü at. Raze Boombot yer seviye tarama. İki utility farklı level'da çalışır. Flash cover ile etkisiz, Boombot cover'ı bulur.
+**IF** Reyna Leer flash atıp içeriye giriyor, sen Boombot sürdün
+**MEANING** Reyna flash ile körleştirmeye çalışıyor ama Boombot zaten Reyna'nın geleceği köşeyi tarıyor
+**COUNTER** Leer sesini duyar duymaz kapak arkasına gir. Boombot Reyna'yı sesle buluyor — Boombot'u duvara değil doğrudan kapıya sürmüşsen, Reyna flash atarken bile Boombot'u yiyecek
+**WHY** Leer sadece göz hizasında çalışır. Boombot yerde gidiyor, flash almıyor. İki yetenek farklı seviyede — Boombot flash'ı geçer.
 
 ---
 
-**IF** Reyna kill aldı, Dismiss (invisibility) veya Devour (heal) aktif
-**MEANING** Reyna kill sonrası soul orb yakaladı, Dismiss ile görünmez veya Devour ile full heal. Reyna single kill sonrası kuvvetleniyor
-**COUNTER** Raze Boombot alan tarama Dismiss invisibility içindeki Reyna'yı hala bulabilir (ses var). Devour heal sırasında Reyna hareketsiz, Paint Shells damage zone reyna'yı yakalar
-**WHY** Reyna ekonomisi soul orb bağımlı. Kill olmadan Reyna sıradan duelist. Raze utility ekonomisi Reyna'nın soul orb döngüsünü kırabilir — Devour sırasında damage, Dismiss içinde ses ile yakalama.
+**IF** Reyna kill aldı ve Devour veya Dismiss seçecek
+**MEANING** Düşmanı öldürünce orb çıkıyor. Dismiss'i seçerse görünmez olup kaçıyor, Devour'u seçerse yerinde durup can dolduruyor
+**COUNTER** Devour seçtiyse Paint Shells at — can dolarken Reyna hareketsiz ve alanda hasar alıyor. Dismiss seçtiyse Dismiss sesine dikkat et, yönü belli oluyor. Boombot sür, ses takip ediyor
+**WHY** Reyna her kill'den sonra bir karar veriyor ve o karar penceresi Dismiss veya Devour animasyonu boyunca açık. O pencerede baskı uygulamak Reyna'yı yanlış seçime zorluyor.
 
 ---
 
-**IF** Raze Paint Shells damage zone, Reyna Devour heal aynı alanda
-**MEANING** Paint Shells damage heal rate'ten yüksek — Reyna Devour altında bile Paint Shells damage alır
-**COUNTER** Reyna Devour'u Paint Shells alanından uzakta kullanmalı. Heal ve area damage eş zamanlı çalışmaz
-**WHY** Damage vs heal karşılaştırmasında damage oran Devour'un heal oran'inden yüksek. Reyna heal döngüsü kırık.
+**IF** Reyna Paint Shells alanına girdi ve Devour kullanıyor
+**MEANING** Paint Shells hasarı Devour'un iyileştirme hızından daha yüksek — alan içinde Reyna can dolduramıyor
+**COUNTER** Paint Shells'i Reyna'nın ayağına değil Devour kullandığı zemine at. Reyna ya alanı terk ediyor ya da hasar altında ölüyor
+**WHY** Devour Reyna'yı yerinde sabit tutuyor. Paint Shells o yeri yakıyor. İkisi üst üste gelince Reyna seçim yapamıyor.
 
 ---
 
-**IF** Reyna Empress ult aktif (rage mode, fast fire rate, regen)
-**MEANING** Reyna ult süresi boyunca fire rate ve reload hızı yüksek, kill sonrası Devour otomatik
-**COUNTER** Raze takımı Reyna ult sesini duyar duymaz cover + utility dump. Reyna ult tek oyuncu — Raze takımı Reyna'yı sıralı ateş altına alır. Ult süresi sınırlı
-**WHY** Reyna Empress ekonomisi kill üzerinden snowball. Kill engellenirse ult zamanla söner. Takım cover + focus fire Reyna ult'unu sıfırlayabilir.
+**IF** Reyna Empress ult açtı
+**MEANING** Empress aktifken Reyna ateş hızı artar, kill alırsa otomatik can doldurur. Kill gelmezse ult söner
+**COUNTER** Empress sesini duyar duymaz takımınla birlikte kapak arkasına çekilin. Reyna'ya teker teker girme — art arda giren ölür, kill zinciri Empress'i canlı tutar. Takım olarak odakla, Reyna kill alamadan ult söner
+**WHY** Empress kill zinciriyle çalışır. Kill vermezsen ult solar. Reyna tek başına kalırsa ult işlevsiz kalır.
 
 ---
 
-**IF** Raze Blast Pack ile vertical push, Reyna ground level hold
-**MEANING** Raze vertical avantaj, Reyna yer seviye — vertical düello Raze lehine
-**COUNTER** Reyna vertical cover bulmalı, yer seviyede Reyna Blast Pack rocket iniş alanına yakalanır
-**WHY** Raze Blast Pack vertical mobility Reyna'nın eşdeğeri yok. Reyna mobility sadece Dismiss (invisibility, yer seviye). Vertical kategorisi Raze lehine tek yönlü.
+**IF** Blast Pack ile tepeden iniyorsun, Reyna yerde duruyor
+**MEANING** Yukarıdan geliyorsun, Reyna açın yok — Reyna'nın yere bakacak açısı yok
+**COUNTER** Blast Pack'i geniş alanlarda değil dar koridorlarda kullan. Dar giriş Reyna'nın seni görmesini geciktiriyor
+**WHY** Reyna'nın Dismiss'i görünmez yapıyor ama hep yerde kalıyor. Yukarıdan gelen Blast Pack'e karşı Dismiss işe yaramıyor — kaçacak yer yok.
 
 ---
 
-**IF** Reyna Leer pop'ladı, Raze Paint Shells aynı anda
-**MEANING** Reyna flash + Raze damage utility üst üste — Paint Shells damage flash'lı hedef üzerinde işler
-**COUNTER** Aynı takımda combo ideal, karşı takımda Paint Shells Leer'ın flash range'inden uzak durmalı
-**WHY** Paint Shells area damage, Leer area flash. İki area utility üst üste etki çarpanı yaratır. Karşı takımda iki utility karşılıklı nötralize olmaz — damage flash'lı hedef üzerinde işler.
+**IF** Reyna kill aldı, Dismiss ile görünmez oldu
+**MEANING** Reyna kaçmak için Dismiss kullandı, ama ses duyuluyor ve hareketi devam ediyor
+**COUNTER** Boombot sür, Dismiss görünmez yapar ama Boombot ses ile takip ediyor. Paint Shells geniş alana at, Reyna alanı kesmek zorunda
+**WHY** Dismiss görünmezlik veriyor ama dokunulmazlık değil. Hasar alıyor, ses çıkıyor. Boombot bu durumda kontr.
 
 ---
 
-**IF** Reyna kill aldı, soul orb seçimi Dismiss mi Devour mu
-**MEANING** Reyna karar noktası — Dismiss reposition için, Devour heal için. Yanlış seçim Reyna için round kaybı
-**COUNTER** Raze bu karar penceresinde Reyna'nın soul orb seçimini okumalı, Dismiss sesi Devour sesinden farklı — pozisyon tahmini
-**WHY** Reyna ekonomisi karar tabanlı. Yanlış karar Reyna'yı pozisyonsuz bırakır. Raze Reyna'nın karar penceresini bilerek aksiyon planlar.
+**IF** Reyna ilk kill'i aldı, sen de o anda aynı köşedesin
+**MEANING** Reyna ilk kill'le orb aldı — şimdi ya Dismiss ile kaçacak ya Devour ile can dolduracak, o karar penceresinde zayıf
+**COUNTER** Takımınla o noktaya bak, Reyna karar verirken çapraz ateş ver. Tek başına girme — çapraz pozisyon Reyna'yı bir açıya zorlur
+**WHY** Reyna karar anında düz duruyor. Çapraz açıdan bakan biri o pencerede Reyna'yı yakalayabiliyor.
 
-## 4. Utility Takası
+## 4. Yetenek Karşılaştırması
 
-Raze utility: Boombot (info robot), Blast Pack (x2 satchel), Paint Shells (x2 nade), Showstopper (ult, rocket). Reyna utility: Leer (flash eye), Devour (heal from orb), Dismiss (invisibility from orb), Empress (ult, rage mode). Karşılaştırma: Info — Raze Boombot, Reyna yok. Info kategorisi Raze lehine tek yönlü. Damage — Raze Paint Shells + Showstopper, Reyna yok (Empress ult fire rate buff, utility damage değil). Damage kategorisi Raze lehine tek yönlü. Heal — Raze yok, Reyna Devour. Heal kategorisi Reyna lehine tek yönlü (ama kill-bağımlı). Mobility — Raze Blast Pack (horizontal + vertical), Reyna Dismiss (invisibility, yer seviye). Mobility çeşitliliği Raze lehine. Flash — Raze yok, Reyna Leer. Flash kategorisi Reyna lehine tek yönlü.
+Raze'ın elinde dört şey var: Boombot köşe tarar, Blast Pack iki kez atlar, Paint Shells alana hasar atar, Showstopper roketi öldürür. Kill almasan bile her şey çalışıyor — yetenekler yenilendikçe tekrar kullanırsın.
 
-Ekonomi farkı: Raze utility cooldown tabanlı, her round aynı. Reyna utility kill tabanlı, kill yoksa yarım utility. Kill almayan Reyna round'da yarı duelist. Raze kill almasa bile utility tam. Utility ekonomi farkı Raze lehine belirleyici.
+Reyna'nın elinde şunlar var: Leer flash atar, Devour kill orbuyla can doldurur, Dismiss kill orbuyla görünmez olur, Empress ult açar. Kill almadan Devour ve Dismiss yok. Kill almadan Reyna elinde sadece Leer ile oyunda.
 
-Ult karşılaştırması: Showstopper rocket damage, Empress rage mode. Showstopper utility ult, Empress buff ult. İki ult farklı işlev.
+Bu fark senin için şu anlama geliyor: Reyna karşısında Boombot'unu ve Paint Shells'ini harca — Reyna bunlara karşılık verecek yeteneği yok. Reyna'nın tek silahı Leer, sen de Leer'e kapak arkasıyla cevap veriyorsun.
 
-## 5. Map Bazlı Değişim
+Ult karşılaştırması: Showstopper geniş alan roketi, direk hasar. Empress ateş hızı ve can dolumu verir — buff ult. Showstopper bir pozisyonu temizler, Empress kill zinciri olmadan söner. Roketi Reyna'nın tahmin ettiğin pozisyonuna at — Dismiss ile görünmez olsa bile ses + alan hasarı vuruyor.
 
-**Bind:** Raze favored. Hookah ve A Short Raze Paint Shells için ideal.
+## 5. Harita Bazlı Değişim
 
-**Split:** Raze favored. B Main dar koridor Raze için.
+**Bind:** Hookah girişi ve A Short dar — Paint Shells bu girişlerde kaçış yeri bırakmıyor. Reyna Hookah'ta Devour kullanamaz, Paint Shells alanı çok küçük.
 
-**Fracture:** Raze favored. İki taraflı attack Raze Blast Pack vertical için.
+**Split:** B Main koridoru Raze için ideal. Dar koridor Paint Shells'ten kaçış yok. Reyna Dismiss ile kaçmaya çalışsa da dar tünel Boombot'u buluyor.
 
-**Sunset:** Raze favored. Dar yapı Raze damage utility için.
+**Fracture:** İki taraflı saldırı Blast Pack ile iniş için açık. Reyna bu haritada iki yönden gelen baskıya karşılık verecek yeteneği yok.
 
-**Icebox:** Raze favored. Mid Kitchen ve B Site için.
+**Sunset:** Dar yapı Paint Shells hasarını artırıyor. Reyna dışarı çıkamıyor, Devour alan içinde çalışmıyor.
 
-**Haven:** Raze favored. Üç site ve Garage Raze için.
+**Icebox:** B Orange ve Kitchen küçük alanlar — Boombot bu köşeleri temizliyor, Reyna Dismiss ile çıkacak yer bulamıyor.
 
-**Ascent:** Nötr-Raze eğilimli. Raze Ascent'ta sık pick, Reyna Ascent'ta nadir.
+**Haven:** Üç site kapı girişleri Boombot için. Reyna kill almadan Garage veya C Long'da yeteneği yok.
 
-**Breeze:** Raze zayıf (geniş alan Raze için ideal değil), Reyna de zayıf. Jett meta.
+**Ascent:** Orta kontrol önemli. Raze B Main veya A rafters'tan Blast Pack ile giriyor. Reyna Mid Window'da açığa kalıyor.
 
-**Lotus:** Raze favored.
+**Breeze:** Geniş alan hem Raze'ı hem Reyna'yı kısıtlıyor. Raze Blast Pack ile kapanmıyor, Reyna kill alamıyor. İkisi de bu haritada sınırlı.
 
-**Pearl:** Raze hafif favored.
+**Lotus:** Dar geçişler ve C kapısı Paint Shells için. Reyna C'ye Dismiss ile giremez, alan hasarı kapıyı yakıyor.
 
-**Abyss:** Raze favored (vertical).
+**Pearl:** A Main ve B kanalı Boombot için uygun. Reyna B kanalında Devour kullanırsa Paint Shells hazır.
 
-## 6. Flip Moment'ler
+**Abyss:** Yukarı-aşağı geçişler Blast Pack'e açık. Reyna dikey hareketi yok — Dismiss yerde tutuyor.
 
-1. **Reyna kill almadığı round.** Reyna kill olmadan Devour/Dismiss aktive edilemez. Utility yarım. Round'un tamamında Reyna sıradan rifler.
+## 6. Maçı Döndüren Anlar
 
-2. **Empress ult snowball.** Reyna ult + ilk kill = snowball. Kill zinciri takımın tamamını yutabilir. Bu flip pub meta'da sık, pro meta'da nadir (takım koordinasyonu snowball'u keser).
+1. **Reyna kill alamadı.** O round Reyna'nın elinde sadece Leer var. Leer'e kapak arkası ver, Reyna sıradan bir silahla oynuyor.
 
-3. **Paint Shells heal kırıcı.** Raze damage area Reyna'nın heal ekonomisini kırar. Reyna Devour'u Paint Shells alanında kullanamaz.
+2. **Empress açıldı ama takım birlikte girdi.** Kill zinciri art arda kill ile büyüyor — teker teker girme. Takımın Reyna'ya odaklanırsa ult söner.
 
-4. **Showstopper Reyna pozisyonuna.** Raze ult rocket geniş alan damage. Reyna Dismiss ile invisibility kullanır ama ses + area damage yine öldürücü.
+3. **Paint Shells Devour'u kırdı.** Reyna can doldurmak için durdu, sen alanı yaktın. Reyna öldü ya da kaçtı — Reyna pozisyon verdi.
 
-5. **Comp seçimi.** Pro meta'da Reyna pick zaten nadir — pick fazında Raze tercih edilirse matchup başlamadan Raze favored.
+4. **Showstopper Reyna'nın pozisyonuna.** Reyna Dismiss ile görünmez oldu ama roket geniş alan. Sesi duyuyorsan o yönde bırak — Dismiss hasar engellemez.
 
-## 7. Pro Coach Notları
+5. **Reyna'nın Dismiss'i yanlış anda geldi.** Dismiss'i kaçmak yerine duel içinde kullandıysa pozisyon verdi. Boombot sür, ses takip eder.
 
-Pro sahnede Reyna nadir pick, Raze meta'nın üstünde. VCT koçları Reyna'yı comp'a sokmaz çünkü Reyna solo frag ekonomisi takım oyununa uymaz. Reyna ancak özel durumlarda (anti-meta, eğlenmek için) pick edilir. Raze her comp için değerli. Koçluk ipucu: Raze oyuncusu Reyna ile karşılaştığında Reyna'nın ilk kill'ini engellemek için odaklanmalı — ilk kill Reyna ekonomisini başlatan. Reyna oyuncusu Raze ile karşılaştığında duel'leri seçici kabul etmeli, Raze utility bolluğu Reyna'nın solo fragmasına engel.
+## 7. Koç Notları
 
-Yaygın pro hata: Reyna oyuncusu duel'e girer girmez Dismiss kullanır. Doğru: Dismiss reposition için, her duel için değil. Dismiss sesi pozisyonu verir. İkinci hata: Raze oyuncusu Reyna'nın Devour'unu Paint Shells ile kırmak için Paint Shells'i atamaz. Doğru: Paint Shells heal zone'una hemen. Üçüncü hata: Reyna Empress ult'u full buy round'da kullanır. Doğru: Empress ult anti-eco round'da daha değerli (fire rate buff Spectre/Stinger ile senkron).
+**Raze oynuyorsan:**
+
+Reyna kill almasın — bu karşılaşmadaki hedefin bu. Reyna kill alana kadar elinde hiçbir şey yok. Köşe tut, Boombot gönder, Reyna'nın giriş noktasını önceden yak. Reyna Leer ile girmeye çalışınca Paint Shells'i girişe bırak — flash'lı veya değil, alana hasar işliyor.
+
+Reyna Devour kullanıyorsa Paint Shells at — can dolumu durur, Reyna ya ölür ya kaçar.
+
+Reyna Empress açtıysa tek başına girme. Takımınla odakla, kill vermezsen ult söner.
+
+**Reyna oynuyorsan:**
+
+Duel seç — hepsine girme. Boombot'u gördüğünde dur, Boombot'u öldür veya Leer at kaç. Boombot seni buluyor ve Paint Shells seni yakıyor.
+
+Dismiss'i her duel için harcama. Dismiss rekonumlanmak için — duel içinde değil, kill aldıktan sonra güvenli noktaya geçmek için kullan. Dismiss sesi pozisyonunu veriyor, gereksiz kullanma.
+
+Empress'i düşük bütçeli roundlarda aç. Karşı takım tam alımla oynarken Empress hızlı söner. Spectre veya Stinger ile Empress açarsan ateş hızı farkı belirginleşir — o roundda Raze'ı yormadan kill alırsın.
+
+Raze Paint Shells'ten uzak dur. Paint Shells'in attığı yerde Devour kullanma — can dolduramadan ölürsün.

@@ -1,46 +1,46 @@
 # MATCHUP: Jett vs Killjoy
 
-## Etkileşim Kimliği
-Jett dash ve updraft ile eşsiz hareketlilik sunan bir duelist'tir. Killjoy turret, alarmbot ve nanoswarm'dan oluşan yer seviyesi kurulumuyla saldıranlar için alan engelleme bulmacaları oluşturan S-tier bir sentinel'dir. Bu matchup Jett'in hareketliliğinin Killjoy'un statik savunmasını bypass edip edemeyeceğini test eder. Jett'in updraft'ı nanoswarm bölgelerinin ve alarmbot tetiklemelerinin üstünden uçmasına izin verir. Dash'i Killjoy'un turret'ının takip edebildiğinden hızlı mesafe kaplar. Ancak Killjoy'un Lockdown'ı hareketi tamamen yok sayar — Jett içinde yakalanırsa detained yarıçapından yeterince hızlı dash'layamaz. Matchup entry fazında Jett'i, post-plant ve retake fazlarında Killjoy'u kayırır.
+## Etkileşim Özeti
+Jett havaya çıkar, Killjoy yere koyar. Jett'in kiti Killjoy'un kurulumunu doğrudan atlatmak için var. Ama Lockdown tek istisna — Jett içindeyken kaçamaz. Entry'de Jett üstün, spike kurulduktan sonra Killjoy üstün.
 
 ## Yaygın Cezalandırma Kalıpları
 
-**IF**: Jett nanoswarm yerleşim alanlarının üstünden updraft ile geçiyor, turret'in anlamlı hasar veremeyeceği hızda dash yapıp Cloudburst smoke ile turret'i kör ediyorsa
-**MEANING**: Jett Killjoy'un yer seviyesi kurulumunu hareketle devre dışı bırakıyor. Off-angle'dan agresif Op peek'i yeteneklerini kontrol eden Killjoy'u yakalıyor. Blade Storm bıçakları turret'i silah mermisi harcamadan mesafeden yok edebilir.
-**COUNTER**: Lockdown Jett'i hareketliliğine bakmadan site'dan zorlar — Lockdown yarıçapından yeterince hızlı dash'layamaz. Turret Jett'in updraft iniş pozisyonunu takip ederek takıma nereye ineceği bilgisini verir. Jett'in iniş noktasına patlatılan nanoswarm toparlanma animasyonunda yakalar. Jett'e alarmbot vulnerability'si sonraki atışın ölümcül olmasını sağlar — vulnerability dash içinde de devam eder.
-**WHY**: Killjoy'un yeteneği yerdedir — Jett'in kiti yeri terk etmek için tasarlanmıştır. Ama Lockdown dikey oyunu yok sayar.
+**IF**: Jett nanoswarm'ların üstünden updraft yapıp turret'i smoke'layarak giriyor, blade storm'la turret'i mesafeden yok ediyor
+**MEANING**: Killjoy'un tüm yer kurulumu işlevsiz kalıyor. Turret açıyı kapayamıyor, nanoswarm hasar veremiyor, alarmbot zaten geç uyarıyor.
+**COUNTER**: Lockdown'ı Jett site'a girdiği anda aç — içeriden dash'le çıkamaz. Turret'i iniş noktasına bak — Jett updraft'tan inerken turret sinyali takıma nereye ineceğini söyler. Nanoswarm'ı iniş noktasına göm — toparlanma sırasında yakalar.
+**WHY**: Killjoy'un kurulumu yerde, Jett'in kiti yeri terk etmek için. Lockdown ise dikey oyunu umursamıyor.
 
-**IF**: Killjoy yeteneği konumlandırmasına rağmen site'ını Jett'e sürekli kaybediyorsa
-**MEANING**: Yeteneği Jett'in hareketliliğinin alakasız kıldığı yerlere konumlandırılmış. Düşük turret pozisyonları ve yer seviyesi nanoswarm'lar updraft eden bir Jett'i yakalamaz.
-**COUNTER**: Turret'i iniş noktalarını takip edeceği yükseltilmiş pozisyonlara koy. Lockdown'ı Jett site'a commit ettiğinde kullan — dışarı dash'layamaz. Mobil ajanlara karşı yukarı bakan kuruluma geç.
-**WHY**: Yer seviyesi kurulumu yukarı hareket eden bir duelist'e karşı işlev kaybeder — yükseltme gerekir.
+**IF**: Killjoy kurulum yerleştirdi ama Jett site'ı yine alıyor
+**MEANING**: Turret ve nanoswarm'lar yanlış yükseklikte. Jett updraft yaptığında yer seviyesi kurulum onu göremez bile.
+**COUNTER**: Turret'i Jett'in ineceği noktayı görecek yükseltilmiş bir yere koy. Lockdown'ı Jett site'a tam girdiğinde kullan — o anda dışarı çıkamaz. Yer seviyesi kurulumu hareketli agente karşı işe yaramaz, yükselt.
+**WHY**: Kurulum Jett'in hareket ettiği katmanda değil — o yüzden boşa gidiyor.
 
-**IF**: Jett post-plant fazında Killjoy'un Lockdown'ı yarıçapa girip defuse'u kesintiye uğratıyorsa ve Jett dash ile yarıçaptan kaçmaya çalışıyorsa
-**MEANING**: Lockdown post-plant dinamiğini tersine çevirir. Jett'in en güçlü olduğu faz olan site alımı bitti; şimdi Killjoy kendi avantajlı fazında. Defuse yapmak için Lockdown yarıçapına girmek zorunda kalan Jett, dash'le kaçma mesafesi bulamaz.
-**COUNTER**: Jett Lockdown başlamadan önce defuse'u tamamlamalı ya da Killjoy'u spike üzerinde öldürüp Lockdown'ı iptal etmeli. Smoke ile Killjoy'un sightline'ını kesmek Lockdown'ı engellemiyor ama Killjoy'u defuse noktasına yaklaşmaya zorlar. Takım Lockdown başlamadan Killjoy pozisyonunu temizlemelidir.
-**WHY**: Lockdown Jett'in tüm hareketlilik kitini saydam kılar — post-plant fazında Killjoy'un kurulumu hareket avantajını değil sabit hasar ve tutma kapasitesini kullanır.
+**IF**: Post-plant'ta Jett defuse yapmaya çalışıyor, Killjoy Lockdown açtı
+**MEANING**: Jett'in en güçlü fazı bitti. Spike kuruldu, şimdi Killjoy kendi avantajlı anında. Defuse için Lockdown alanına girmek zorunda kalan Jett dash'le çıkacak mesafe bulamıyor.
+**COUNTER**: Jett Lockdown başlamadan defuse'u bitirmeli ya da Killjoy'u spike üzerinde öldürüp Lockdown'ı iptal etmeli. Takım Killjoy'un pozisyonunu Lockdown gelmeden temizlemeli. Smoke Lockdown'ı durdurmaz ama Killjoy'u yakına çeker — o anda frag alınabilir.
+**WHY**: Lockdown Jett'in tüm hareketliliğini geçersiz kılıyor. Post-plant'ta Killjoy'un avantajı hareket değil, sabit baskı ve tutma.
 
 ## Tekrarlayan Başarısızlık Ne Anlama Gelir
-**Jett** Killjoy'un kurulumuna sürekli yakalanıyorsa, yer seviyesi yeteneği bypass etmek için dikeylik kullanmıyor. Nanoswarm'ların üstünden updraft yerine içinden dash yapıyor.
+**Jett** Killjoy kurulumuna sürekli yakalanıyorsa: Yerde yürüyorsun. Nanoswarm'ın içinden geçiyorsun, üstünden değil. Updraft'ı kurulumu atlamak için kullan, sonrasında turret'i smoke'la.
 
-**Killjoy** kuruluma rağmen site'ını Jett'e sürekli kaybediyorsa, yeteneği Jett'in hareketliliğinin alakasız kıldığı yerlere yerleştirilmiş. Yükseltilmiş turret pozisyonları ve Jett site'a commit ettiğinde Lockdown zamanlaması gerekir.
+**Killjoy** site'ını Jett'e sürekli kaybediyorsa: Kurulumun Jett'in gittiği yükseklikte değil. Turret'i iniş noktasını görecek yere al. Lockdown'ı Jett site'a girene kadar sakla.
 
 ## AIMLO Ne Demeli
 ### Oyuncu cezalandırılan taraftayken
-**Jett Killjoy kurulumuna ölüyorken**: "Yetenek yerde — senin orada olman gerekmiyor. Nanoswarm bölgelerinin üstünden updraft yap. Push etmeden önce turret'i smoke'la. Hareketliliğin tam olarak bu tür savunmayı bypass etmek için var."
+**Jett Killjoy kurulumuna ölüyorken**: "Yetenek yerde, sen de yürüyorsun. Nanoswarm'ın üstünden updraft yap. Girmeden önce turret'i smoke'la. Dikey git."
 
-**Killjoy site'ını Jett'e kaybediyorken**: "Yer seviyesi kurulumun updraft kullanan Jett'i yakalamaz. Turret'ini inişlerini takip edeceği yükseltilmiş pozisyonlara koy. Lockdown'ı site'a commit ettiğinde sakla — dışarı dash'layamaz."
+**Killjoy site'ını Jett'e kaybediyorken**: "Turret yerde, Jett havada — göremiyorlar birbirini. Turret'i iniş noktasını takip edecek yere koy. Lockdown'ı Jett içeri girince aç."
 
 ### Oyuncu cezalandıran taraftayken
-**Jett Killjoy'u bypass ediyorken**: "Dikeylikle yer yeteneklerini değersiz kılıyorsun. Kurulumundan tamamen kaçınmak için updraft ve dash kullanmaya devam et."
+**Jett Killjoy'u geçiyorken**: "Yerde kurulum var, sen yukarıdasın — bu yüzden işe yarıyor. Aynı şeyi yap: önce smoke, sonra updraft, sonra gir."
 
-**Killjoy Jett'i yakalıyorken**: "Lockdown zamanlaması onu site'dan zorluyor ve turret'in inişlerini takip ediyor. Yükseltilmiş turret ve zamanlanmış Lockdown kombosunu sürdür."
+**Killjoy Jett'i yakalıyorken**: "Turret iniş noktasında, Lockdown zamanlaması doğru. Jett site'a girdiği anda Lockdown — kaçamıyor."
 
 ## Rank Modülasyonu
-**LOW**: Jett Killjoy yeteneklerinin üstünden yerde yürür. Killjoy her şeyi ayak seviyesine koyar. Jett'e updraft, Killjoy'a turret yükseltme öğret.
+**LOW**: Jett düz yürüyor, Killjoy her şeyi ayak seviyesine koyuyor. Jett'e updraft'ı kurulum atlamak için kullanmayı göster. Killjoy'a turret'i yukarı almayı göster.
 
-**MID**: Jett bazı yeteneklerin üstünden updraft etmeye başlar. Killjoy uyum sağlamaz. Killjoy'a mobil ajanlara karşı yükseltilmiş turret yerleştirme öğret.
+**MID**: Jett updraft yapıyor ama turret'i smoke'lamıyor — turret onu iniş anında vuruyor. Killjoy turret yerini değiştirmiyor — Jett farklı açıdan girince göremez. İkisine de tek eksiklerini söyle: Jett smoke + updraft kombosu, Killjoy iniş noktasına bakan turret pozisyonu.
 
-**HIGH**: Her ikisi de uyum sağlar. Jett entry yollarını çeşitlendirir, Killjoy mobil vs. mobil olmayan kompozisyonlar için kurulum değiştirir. Kompozisyona özgü uyumu öğret.
+**HIGH**: İkisi de uyum sağlıyor. Jett giriş yolunu değiştiriyor, Killjoy turret'i ona göre hareket ettiriyor. Jett köşeye girip dash kullandığı anda Killjoy Lockdown'ı açmalı — o noktadan sonra Jett alanda kalıyor.
 
-**ELITE**: Killjoy'un Lockdown zamanlaması ve Jett'in commit okumaları matchup'i tanımlar. Tahmine dayalı yetenek zamanlamasını öğret.
+**ELITE**: Killjoy Jett'in hangi açıdan gireceğini okuyup Lockdown'ı o girişi kesecek noktaya koyuyor. Jett Lockdown'ın konumunu bilmeden site'a commit etmiyor — önce takımdan bilgi alıyor, sonra giriyor. İlk commit eden taraf Lockdown'ı açığa çıkarıyor ve kaybediyor.

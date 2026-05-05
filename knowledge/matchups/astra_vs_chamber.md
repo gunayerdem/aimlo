@@ -11,113 +11,130 @@ tags: [matchup, astra, chamber, controller, sentinel]
 
 ## 1. Matchup Özü
 
-Astra star ekonomisiyle haritanın her köşesinden smoke + stun + gravity well kurabilen global controller, Chamber ise Trademark + Rendezvous + Headhunter ile uzun açıyı sabit tutan tek-shot sentinel. Matchup, Astra'nın global bilgi ve smoke reaksiyonunun Chamber'ın uzun açı hesabı karşısında kim önce tetik çeker sorusuyla çözülür.
+Astra haritanın her noktasına smoke + stun + gravity well atar — yıldız sayısı kadar silahı var. Chamber ise tek açıyı sabit tutar: Trademark bilgi verir, Rendezvous kaçış sağlar, Headhunter / Tour de Force tek atışla öldürür. Bu matchup şuna gelir: Astra yıldızını Chamber'ın açısına gömmüşse o açıyı kapatır. Chamber açısını yıldızsız bölgeye taşımışsa Astra cevap veremez. İki oyuncu da birbirinin hazırlığını okumaya çalışır.
 
 ## 2. Kim Avantajlı?
 
 **Astra lehine durumlar:**
-- Chamber Op/Headhunter Op tutuyor, Astra star'ı angle'a pre-yerleştirmiş — Astra smoke peek anında Op hattını kapatır, Chamber tek-shot penceresi kapanır
-- Chamber ulü (Tour de Force) dolu değilken — normal silah düellosu Chamber'ı rifle seviyesine indirger, Astra gravity well ile site execute eder
-- Multi-site baskı round'larında — Astra global utility ekonomisi iki site'ı aynı round'da etkiler, Chamber tek pozisyonda sabit kalmak zorunda
-- Chamber Rendezvous cooldown'dayken — Rendezvous'suz Chamber rotate edemez, Astra fake A + execute B kombosu Chamber'ı pozisyon dışında yakalar
+- Chamber Op ile uzun açı tutuyor ve sen yıldızını oraya önceden gömdüysen — smoke düşer, açı kapanır, Chamber atış yapamaz
+- Chamber'ın Tour de Force'u dolmamışsa — rifle düellosu başlar, gravity well ile execute açarsın
+- İki site'a aynı anda baskı yapıyorsan — Astra utility her iki tarafa yetişir, Chamber tek pozisyonda kalır
+- Chamber Rendezvous'yu kullandıysa — rotate edemez, A'ya sahte baskı yap, B'den gir
 
 **Chamber lehine durumlar:**
-- Astra star'ı henüz yerleştirilmemiş round başı — Chamber Op peek açıları serbest, Astra smoke cevabı yok
-- Uzun sightline map'lerinde (Breeze Mid, Icebox Mid Tube, Haven A Long) — Chamber Tour de Force ve Headhunter tek-shot mesafede dominant
-- Astra gravity well + nova pulse kullandı, utility boş — Chamber serbest angle tutar, Astra cevap veremez
-- Retake round'larında — Astra ofansif utility reaktif kullanılır, Chamber Trademark + Rendezvous retake hattını tutar
+- Sen yıldızını henüz yerleştirmedin — Chamber açısı serbest, Op hattı açık
+- Uzun sightline varsa (Breeze orta, Icebox orta tüp, Haven A uzun) — Chamber tek atışla herkesi keser
+- Gravity well + nova pulse harcadın, elinde yıldız kalmadı — Chamber istediği açıyı tutar
+- Retake'tesin — Astra utility saldırı için tasarlanmış, Chamber Trademark + Rendezvous retake hattını kapatır
 
-**Balanced:** Ascent, Sunset orta mesafeli angle'larda matchup star sayısına bakar. Astra dört star hazır ise utility hattı Chamber'ın her peek açısını örter. Star iki veya altı ise Astra fake execute ile stars harcamak zorunda kalır, Chamber tek-shot penceresi açılır.
+**Dengeli:** Ascent ve Sunset'te orta mesafeli açılarda yıldız sayısı belirler. Dört yıldız hazırsa Chamber'ın her açısına smoke düşürürsün. İki yıldız kaldıysa sahte execute için harcamak zorunda kalırsın — Chamber o anda atış yapar.
 
 ## 3. Key Düellolar
 
-**IF** Chamber round başı Op tutuyor, Astra star'ı angle'a pre-yerleştirmiş
-**MEANING** Astra smoke reaktif tek tıklamayla düşer, Chamber Op peek penceresi Astra smoke ile kapanır, Chamber shot alamadan reposition
-**COUNTER** Chamber Op açısını round ortasında değiştir, aynı angle iki round tekrar etme. Astra star'ının yerleştirilmediği angle'a geç — Astra star manuel cast gerektirir, bilmediği angle'a smoke yetişmez.
-**WHY** Chamber Op'un gücü aniden açılan angle. Astra smoke manuel cast değil, önceden hazır star silahı. İki silah da reaksiyon hızına bağlı — hangi oyuncu önce tetiği çekerse round onun.
+**IF** Chamber Op ile uzun açı tutuyor, sen yıldızını o açıya önceden gömdün
+**MEANING** Smoke tek tıkla düşer, Chamber atış penceresi kapanır, reposition yapmak zorunda kalır
+**COUNTER** Her round aynı açıyı kullanma. Yıldızın olmadığı tarafa geç — Astra oraya smoke yetiştiremez, yıldız yoksa o açı serbest kalır
+**WHY** Op'un gücü ani açılmak. Astra smoke önceden yerleştirilmiş yıldıza basar — reaksiyon hızı fark yaratmaz. Ama yıldız o açıda değilse Astra kördür.
 
 ---
 
-**IF** Astra gravity well Chamber Trademark hattına yerleştirildi
-**MEANING** Gravity well Chamber'ı merkeze çeker, Trademark slow zonu aynı alanda çakışır, Chamber Rendezvous yapmak zorunda
-**COUNTER** Chamber Rendezvous anchor'ı Trademark hattının dışında konumlandır. Gravity well sesi duyulduğunda Rendezvous tetikle, iki utility'nin çakışma alanı dışına çık.
-**WHY** Gravity well pozisyon kilidi, Chamber'ın silahı hareket değil sabitlik. İki utility çakışırsa Astra zincir utility ile Chamber'ı vuracak pencereyi açar, Rendezvous kaçış penceresini geri verir.
+**IF** Astra gravity well'i Trademark hattına gömdü
+**MEANING** Gravity well seni merkeze çeker, Trademark slow zonu aynı alanda — iki utility çakışır, sıkışırsın
+**COUNTER** Rendezvous anchor'ını Trademark hattının dışına koy. Gravity well sesini duyduğun an Rendezvous'yu tetikle, çakışma alanından çık
+**WHY** Gravity well seni sabitler, senin silahın hareket değil pozisyon. İki utility üst üste gelirse Astra takımı serbest push yapar — Rendezvous o pencereyi kapatır.
 
 ---
 
-**IF** Astra nova pulse Chamber'ın kurduğu off-angle pozisyonuna atıldı
-**MEANING** Concussive etki Chamber aim'ini bozar, tek-shot hesabı yanlış çıkar, Astra takımı push anında entry yapar
-**COUNTER** Chamber off-angle pozisyonunu round-bazlı değiştir. Nova pulse sesini duyduğu an pozisyonu terk et, Rendezvous ile ikinci anchor'a geç.
-**WHY** Nova pulse Astra'nın ofansif silahı, bir star tek kullanımda concussive hasar ve aim penalty verir. Chamber'ın tek-shot hesabı mikro seviyede crosshair yerleşimine dayanır — concussive bu hesabı bozar, shot kayar.
+**IF** Astra nova pulse'u off-angle pozisyonuna attı
+**MEANING** Concussive etkisi nişanını bozar, tek atış hesabı kayar, Astra takımı o anda push yapar
+**COUNTER** Her round aynı off-angle'da oturma. Nova pulse sesini duyduğun an pozisyonu terk et, Rendezvous ile ikinci anchor'a geç
+**WHY** Nova pulse bir yıldız, tek kullanım — ama concussive crosshair yerleşimini bozar. Chamber'ın her şeyi mikro seviyede nişana bağlı. Concussive olursan o atış gider.
 
 ---
 
-**IF** Chamber Tour de Force ulü aktif, Astra smoke star'ı Chamber'ın sight hattına atıldı
-**MEANING** Chamber ult Op karakteri, Astra smoke ult hattını keser, Chamber tek-shot angle'ı kapanır
-**COUNTER** Chamber ult sesinde angle değiştir, smoke atıldığı an ikinci angle'ı kullan. Astra smoke cooldown'unu hesaba kat — star harcanan angle ikinci kez smoke alamaz.
-**WHY** Chamber ult süresi uzun ama smoke ile kör edilince shot üretemez. Astra smoke ekonomisi round başına 3-4 smoke, Chamber ult ise tek round silahı. Smoke sayısı Chamber ult hattını eskiterek round'u kilitler.
+**IF** Chamber Tour de Force aktif, Astra smoke'u Chamber'ın sight hattına attı
+**MEANING** Smoke ult hattını keser, Chamber atış yapamaz
+**COUNTER** Smoke düştüğü an açıyı değiştir. Harcanan yıldız o açıya ikinci kez smoke düşüremez — başka açıyı kullan
+**WHY** Tour de Force uzun sürer ama kör olunca değersizleşir. Astra'nın round başına 4 yıldızı var — açı değiştirirsen smoke sayısını eritirsin.
 
 ---
 
-**IF** Astra Astral Form içinde round ortasında, Chamber Headhunter ile Astra'nın fiziksel body'sine peek
-**MEANING** Astra astral'da tank durumunda, body savunmasız, Headhunter tek-shot Astra'yı body'den öldürür, astral iptal
-**COUNTER** Astra astral girişini cover arkasından yap. Body hattı Chamber sight line'ına girmemeli. Trade partner Astra body'sini korurken astral plan kurulmalı.
-**WHY** Astra astral form silahı bilgi + utility yerleşimi, ama body korumasız. Chamber'ın silahı tek-shot ekonomi — Astra body'sini Headhunter ile yakalarsa round'u tek shot ile çevirir. Astra astral konumu gizli tutulmalı.
+**IF** Astra astral formdayken Chamber Headhunter ile Astra'nın gövdesine bakıyor
+**MEANING** Astral formdayken gövde savunmasız — Headhunter tek atışla öldürür, astral iptal olur
+**COUNTER** Astral'a cover arkasından gir. Gövdeni Chamber'ın sight hattına sokma. Yanında biri Astra'nın gövdesini korumalı
+**WHY** Astral bilgi + yıldız yerleştirme silahı, ama gövde açıkta kalır. Chamber Headhunter ile gövdeyi yakalarsa Astra utility planı tek atışla biter.
 
 ---
 
-**IF** Chamber B site anchor, Astra A execute smoke hattı yerleştirdi
-**MEANING** Astra A hattı hazır, Chamber B'den rotate etmek zorunda, Rendezvous anchor A tarafında değil
-**COUNTER** Chamber Rendezvous anchor'ını mid veya rotate hattına yerleştir, iki site arası transfer için. Astra execute smoke'u bitmeden Rendezvous tetikle.
-**WHY** Chamber rotate silahı Rendezvous, tek yönlü tek kullanım. Rendezvous anchor yanlış yerde ise Chamber rotate süresi rifle seviyesine iner. Astra global utility bu pencerede site clear eder.
+**IF** Chamber B'de anchor, Astra A execute için smoke hattı kurdu
+**MEANING** A hattı hazır, Chamber B'den rotate etmek zorunda — ama Rendezvous anchor'ı A tarafında değil
+**COUNTER** Rendezvous anchor'ını orta veya rotate hattına koy. Astra execute smoke'u bitmeden Rendezvous'yu tetikle
+**WHY** Rendezvous tek yönlü, tek kullanım. Anchor yanlış yerdeyse rotate süresi uzar — Astra o pencerede site'ı temizler.
 
 ---
 
-**IF** Astra takım execute etti, Chamber Trademark alarm verdi
-**MEANING** Trademark execute hattını info'ladı, slow zonu aktif, Chamber + trade partner execute hattına pre-aim
-**COUNTER** Astra star'ı Trademark lokasyonunu ön-smoke ile kapat. Execute öncesi star'ı Trademark sight hattına yerleştir, smoke patladığında Trademark bilgi ver ama görüş vermez.
-**WHY** Trademark'ın silahı info + slow. Astra smoke bilgiyi kesmez ama slow'un üstüne görüş örer — Chamber Trademark alarmını duyar ama ne göreceği Astra smoke'una bağlı. Smoke Trademark değerini yarı yarıya düşürür.
+**IF** Astra takımı execute etti, Chamber Trademark alarm verdi
+**MEANING** Trademark execute hattını ifşa etti, slow zonu aktif, Chamber pre-aim açtı
+**COUNTER** Execute öncesi yıldızını Trademark'ın sight hattına yerleştir, smoke düştüğünde Trademark bilgi verir ama görüş vermez
+**WHY** Trademark'ın silahı bilgi + yavaşlatma. Smoke bilgiyi kesmez ama görüşü örter — Chamber alarmı duyar, ne göreceğini bilemez. Trademark değeri yarı yarıya düşer.
 
 ## 4. Utility Takası
 
-Astra ekonomisi yıldız sayısına bağlı — round başına 4 yıldız, her biri smoke/gravity well/nova pulse/concussive olarak şekil alır. Chamber ekonomisi Trademark (1) + Rendezvous (1) + Headhunter (shop içi) + ult (Tour de Force). Astra utility global, Chamber utility yerel. Matchup'ta Astra avantajı map'in her köşesinde utility var olmak, Chamber avantajı tek angle'da tam güç taşımak. Round içi utility sırası: Astra star yerleştirme (pre-round) → Chamber Trademark yerleştirme (round başı) → Astra smoke proaktif (round ortası) → Chamber Rendezvous reaktif (engagement anı) → Astra gravity/nova (execute) → Chamber Headhunter (duel). Ult ekonomisi: Tour de Force round-tempo silahı, Astra ult Cosmic Divide map'i ikiye böler — Cosmic Divide Chamber ult'u fonksiyonsuz bırakır, Chamber ult patlak ise Cosmic Divide tarafını okuyarak angle değiştirir. Astra star'larını Chamber angle'ına yerleştirmezse utility global avantajı erimeye başlar.
+**Astra elinde ne var:**
+- Round başına 4 yıldız — smoke / gravity well / nova pulse / concussive
+- Her yıldız haritanın herhangi yerine gider — global kapsam
+- Cosmic Divide ult: haritayı ikiye böler, Chamber Tour de Force'u o hatta işe yaramaz
+
+**Chamber elinde ne var:**
+- Trademark: 1 adet, bilgi + yavaşlatma
+- Rendezvous: 1 adet, tek yönlü kaçış — kullanınca cooldown girer
+- Headhunter: para harcayarak satın alırsın, round boyunca kullanılabilir
+- Tour de Force ult: uzun menzil, tek atış — ama Cosmic Divide ile kör edilirse değersizleşir
+
+**Round içi sıra nasıl akar:**
+1. Sen yıldızı Chamber'ın açısına göm (round öncesi)
+2. Chamber Trademark'ı koy (round başı)
+3. Smoke proaktif düşür (execute öncesi)
+4. Chamber Rendezvous tetikler (duel anında)
+5. Gravity well + nova pulse execute'ta
+6. Chamber Headhunter düelloda
+
+**Ult çarpışması:** İkisi aynı roundda patladıysa — Cosmic Divide Chamber'ın sight hattını böldüyse Tour de Force ölü silah — round Astra'ya. Tour de Force önce patladıysa Cosmic Divide hangi taraftan geldiğini oku ve açıyı değiştir.
 
 ## 5. Map Bazlı Değişim
 
-**Haven (Astra avantajlı):** 3 site Astra global utility için ideal. Chamber B anchor tek pozisyonda, Astra A-C rotate baskısı Chamber'ı yorar.
+**Haven (Astra avantajlı):** 3 site Astra için ideal. Chamber B'de sabit kalırken Astra A-C baskısı Chamber'ı koşturur.
 
-**Bind (Astra avantajlı):** Teleporter ekonomisi + dual choke Astra smoke ekonomisine uygun. Chamber Bind rotate'i Rendezvous ile zorlanır ama Bind long angle'ı Chamber için sınırlı.
+**Bind (Astra avantajlı):** Teleporter + iki dar boğaz Astra smoke ekonomisine uyar. Chamber uzun açı bulamaz.
 
-**Icebox (Chamber avantajlı):** Mid Tube, Snowman, Rafters uzun açı. Chamber Op + Headhunter tek-shot mesafesi Icebox meta'sı. Astra utility Icebox vertical alanında eksik kalır.
+**Icebox (Chamber avantajlı):** Orta tüp, Snowman, Rafters — uzun açılar Chamber'a aittir. Astra utility dikey alanlarda yetersiz kalır.
 
-**Breeze (Chamber avantajlı):** Uzun sightline + açık alan. Chamber'ın uzun range tek-shot silahı burada dominant, Astra smoke geniş alanı örtmekte zorlanır.
+**Breeze (Chamber avantajlı):** Geniş açık alan + uzun hatlar. Chamber Op burada baskın, Astra smoke geniş alanı örtmekte zorlanır.
 
-**Ascent (Balanced):** A Main Chamber angle, Mid Astra smoke meta. İki agent farklı bölgelerde baskın.
+**Ascent (Dengeli):** A Main Chamber açısı, orta Astra smoke meta. İki agent farklı bölgelerde baskın.
 
-**Sunset (Balanced):** Multi-angle site'lar. Astra smoke A Main'de güçlü, Chamber Market choke'unda güçlü.
+**Sunset (Dengeli):** Çok açılı site'lar. Astra A Main'de, Chamber Market boğazında güçlü.
 
-**Lotus (Astra hafif avantajlı):** 3 site + döner kapı. Astra global rotate utility meta, Chamber solo anchor rolünde zorlanır.
+**Lotus (Astra hafif avantajlı):** 3 site + döner kapı. Astra global utility döner kapı geçişlerine uyar, Chamber solo anchor rolünde zorlanır.
 
-## 6. Flip Moment'ler
+## 6. Flip Momentler
 
-**Flip 1 — Star yerleşimi:** Astra round öncesi star'ı Chamber angle'ına yerleştirdiyse round Astra'ya eğilir. Yerleşim yanlış lokasyonda ise Chamber angle'ı serbest, round Chamber'a.
+**Flip 1 — Yıldız yerleşimi:** Yıldızını Chamber'ın açısına gömdüysen round Astra'ya eğilir. Yanlış yere gömdüysen Chamber açısı serbest — round Chamber'a.
 
-**Flip 2 — Rendezvous cooldown:** Chamber Rendezvous tüketti, Astra rotate baskı yapıyor. Chamber Rendezvous hazır ise pozisyon değiştirir, yok ise rifle seviyesi — round Astra'ya.
+**Flip 2 — Rendezvous bitti:** Chamber Rendezvous'yu harcadı, sen rotate baskısı yapıyorsun. Rendezvous hazırsa pozisyon değiştirir. Hazır değilse rifle seviyesinde kalır — round Astra'ya.
 
-**Flip 3 — Cosmic Divide vs Tour de Force:** İki ult aynı round patladı. Cosmic Divide Chamber sight hattını böldüyse Chamber ult'u ölü silah, round Astra'ya. Cosmic Divide yanlış açıda ise Chamber ult Astra takımını keser, round Chamber'a.
+**Flip 3 — Cosmic Divide vs Tour de Force:** İkisi aynı anda patladı. Cosmic Divide Chamber'ın sight hattını böldüyse Tour de Force ölü silah — round Astra'ya. Cosmic Divide yanlış açıdaysa Chamber ult Astra takımını keser — round Chamber'a.
 
-**Flip 4 — Astra body peek:** Astra astral form'dayken body yakalandı. Chamber Headhunter body'yi buldu ise Astra silinir, round Chamber'a. Body cover'da kaldı ise Astra utility serbest, round Astra'ya.
+**Flip 4 — Astral'da gövde açık:** Astral formdayken Chamber Headhunter gövdeni buldu — Astra silinir, round Chamber'a. Gövden cover'daysa utility serbest — round Astra'ya.
 
-## 7. Pro Coach Notları
+## 7. Koç Notları
 
-**VCT'de nasıl oynanıyor:** Pro seviye Astra vs Chamber matchup'ı utility yerleşim oyunu. Astra tarafı round öncesi star lokasyonlarını Chamber'ın angle'larına kilitliyor. Chamber tarafı Rendezvous anchor'ını Astra smoke hattı dışına yerleştiriyor, ult'u Astra Cosmic Divide kullanımından önce harcamıyor. Pro oyuncular Astra body'sini cover arkasında saklıyor çünkü Chamber Headhunter Astra'yı astral modunda body'den ölür.
+**Bu matchup'ta ne yaparsın:**
+Astra oynuyorsan yıldızı Chamber'ın Op açılarına round başlamadan göm — reactive değil, önceden hazır. Gravity well'i Trademark hattına kilitle. Cosmic Divide'ı Tour de Force cevabı için sakla. Astral'a her zaman cover arkasından gir, gövdeni Chamber'ın sight hattına sokma.
 
-Astra tarafı meta yönelim: pre-round star yerleşimini Chamber'ın Op angle'larına göre kurmak, gravity well'i Chamber Trademark hattına kilitlemek, Cosmic Divide'ı Chamber ult cevabı için saklamak. Chamber tarafı meta yönelim: Op angle'larını round-bazlı değiştirmek, Rendezvous anchor'ını rotate hattına yerleştirmek, Tour de Force ult'unu Astra utility eskimeden kullanmak.
+Chamber oynuyorsan Op açını her round değiştir. Rendezvous anchor'ını Astra smoke hattı dışına, rotate hattına koy. Tour de Force'u Astra Cosmic Divide gelmeden patlat.
 
-**Meta tier durumu:** Astra pro sahnede Haven, Bind, Lotus için A tier controller. Chamber Icebox ve Breeze için B+ tier sentinel — nerflar sonrası rolü daraldı. Matchup map'e bağlı, pro sahnede düzenli görülür.
+> ⚠ Patch 9.x kontrol et: Chamber Rendezvous cooldown süresi ve Headhunter hasar değerlerini doğrula.
+> ⚠ Patch 9.x kontrol et: Astra round başı yıldız sayısı 4 mü 5 mi doğrula.
 
-**** Chamber Rendezvous cooldown süresi ve Headhunter damage değerleri patch 9.x'te değişti mi, patch notu kontrolü şart.
-
-**** Astra star sayısı round başına 4 mü 5 mi, patch not kontrolü.
-
-**Coach test (Sentinels tarzı):** "Astra Chamber'ı yenmek için star'ını Chamber'ın angle'ına kilitlemeli, Chamber Astra'yı yenmek için angle'ını star'ın yerleştirildiği hattın dışına taşımalı. Astra global, Chamber yerel — global'in silahı haritayı kapsamak, yerel'in silahı kapsamdan sıyrılmak. Round'u kim kendi silahının menzilinde duel'e zorlarsa onun."
+**Özet:** Astra global, Chamber yerel. Global'in silahı haritayı kapsamak — ama yıldız yanlış yerdeyse kapsam boş. Yerel'in silahı kapsamdan sıyrılmak — ama her round aynı açıda oturuyorsan Astra seni okur. Round'u kim kendi silahının menzilinde duel'e zorlarsa o alır.

@@ -1,46 +1,51 @@
 # MATCHUP: Retake'e Karşı Kurulum
 
-## Etkileşim Kimliği
-Bazı savunma kompozisyonları ilk site alımını durdurmaya çalışmaz — teslim eder ve koordineli yetenek ile retake yapar. Anti-retake oyunu saldırı takımının bu stratejiyi tanıması ve post-plant'ini retake girişimini cezalandıracak şekilde kurması demektir. Bu matchup saldıranların bomba site'ini retake edilemez hale getirip getiremeyeceği veya savunmacıların koordineli retake yeteneklerinin post-plant tutuşunu aşıp aşamayacağı ile ilgilidir. Ham mekanik beceriden çok sabır ve pozisyonlama ödüllendirir.
+## Ne Oluyor
+Savunma takımı site'i savunmuyor — bilerek bırakıyor, spike kurulduktan sonra hep birlikte geri alıyor. Senin işin: spike kurulunca post-plant'ini öyle kur ki retake yapılamaz hale gelsin. Bu matchup mekanik değil — kim daha iyi pozisyon kurar, kim daha iyi yayılır.
 
 ## Yaygın Cezalandırma Kalıpları
 
-**IF**: Retake takımı koordineli flash ve smoke ile post-plant tutucularını izole ediyor ve birden fazla initiator taraması her saldırganın pozisyonunu aynı anda açığa çıkarıyor
-**MEANING**: Molly ve alan engelleme saldıranları avantajlı post-plant açılarından zorluyor. Breach stun duvarlar arkasından yerleşik pozisyonları temizliyor. Retake takımı koordineli grup halinde push ederek kill'leri verimli trade ediyor.
-**COUNTER**: Killjoy nanoswarm'ları defuse noktasında imha engellemesi oluşturur. Crossfire pozisyonlama — post-plant tutucular birbirlerinin açılarını izler. Viper pit veya controller smoke spike üzerinde retake yapanları dezavantajlı bölgede savaşmaya zorlar. Sentinel trap'leri post-plant sırasında yerleştirilip retake eden savunmacıları arkadan yakalar.
-**WHY**: Post-plant avantajı yayılma ve engelleme üzerine kuruludur — retake takımı aynı anda birden fazla problemi çözmek zorundadır.
+**IF**: Retake takımı flash + smoke + tarama aynı anda geliyor ve tüm post-plant oyuncularının pozisyonu açılıyor
+**MEANING**: Saldıranlar bir arada oturuyor. Tek yetenek kombinasyonu hepsini temizliyor. Trade yok, crossfire yok.
+**COUNTER**: Spike üzerine Killjoy nanoswarm veya Viper pit koy. Post-plant oyuncularını farklı açılara yay — biri kovanın sağında, biri uzak köşede. Sentinel trap'lerini retake yollarına plant sırasında döşe.
+**WHY**: Yayılma retake takımını tek sorun yerine üç ayrı sorunla boğuşturmak zorunda bırakır — yetenek biter.
 
-**IF**: Post-plant sürekli dağılıyorsa ve saldırganlar retake yeteneği tarafından kolayca temizleniyorsa
-**MEANING**: Saldıranlar tahmin edilebilir pozisyonlarda oynuyor ve birden fazla açıya yayılmıyor veya spike üzerinde engelleme yeteneği kullanmıyor.
-**COUNTER**: Yayıl, spike'a engelleme yeteneği koy ve crossfire tut. Üç post-plant oyuncusu aynı alandaysa tek bir flash hepsini temizler.
-**WHY**: Yoğunlaşmış post-plant, tek bir yetenek kullanımıyla çözülür — yayılma bunu engeller.
+**IF**: Post-plant dağılıyor, retake takımı yetenek harcamadan temizliyor
+**MEANING**: Hep aynı köşedesiniz. Tek flash, hepinizi giriyor.
+**COUNTER**: Yay. Spike'a nanoswarm veya molly koy. İki oyuncu birbirinin açısını kapatsın — biri vurursa öbürü trade eder.
+**WHY**: Yoğun post-plant tek yetenek kullanımıyla çözülür. Yayılma bunu imkânsız kılar.
 
-**IF**: Retake takımı yetenek harcamadan tüm post-plant savunucularını net pozisyonlardan tek tek temizliyorsa
-**MEANING**: Saldıranlar crossfire kurmamış ve spike etrafında yayılmamış — retake takımı her oyuncuyla ayrı ayrı duel yapabiliyor. Post-plant tutucular birbirinin açısını görmüyor, bu yüzden trade gerçekleşmiyor.
-**COUNTER**: Post-plant iki tutucunun birbirinin açısını kapattığı crossfire noktasında konuşlanmalı. Spike üzerinde veya çok yakınında oturmak yerine birden fazla retake yolunu kapsayan dağıtılmış pozisyonlar al. Sentinel yeteneği retake yollarını kapatmalı, böylece savunmacılar tek girişe kanalize olur.
-**WHY**: Crossfire ve yayılma retake takımını tek hedef yerine çok problemi eş zamanlı çözmek zorunda bırakır — yetenek tükenmesi kaçınılmaz olur.
+**IF**: Retake takımı her post-plant oyuncusunu ayrı ayrı duel yaparak temizliyor, yetenek bile harcamıyor
+**MEANING**: Crossfire yok. Birbirini görmeyen iki tutucu var — retake takımı önce birini, sonra öbürünü alıyor.
+**COUNTER**: İki tutucu birbirinin köşesini kapatsın. Spike yakınında değil — retake yollarını örten noktalarda dur. Sentinel yeteneği retake girişini tek kanala sıkıştırsın.
+**WHY**: Crossfire + yayılma retake takımını aynı anda iki problemi çözmeye zorlar. Önce birini çözerse öbürü trade eder — yetenek tükenir, raund biter.
 
 ## Tekrarlayan Başarısızlık Ne Anlama Gelir
-**Retake** sürekli başarısız oluyorsa, takım yeterli yetenek olmadan veya grup yerine tek tek retake yapıyor. Retake herkesin yetenek ile eş zamanlı push etmesini gerektirir — kademeli damlama değil.
 
-**Post-plant** sürekli dağılıyorsa, saldıranlar retake yeteneği tarafından kolayca temizlenen tahmin edilebilir pozisyonlarda oynuyor. Birden fazla açıya yayılmıyorlar veya spike üzerinde engelleme yeteneği kullanmıyorlar.
+**Retake** sürekli başarısız oluyorsa: takım tek tek push ediyor. Retake'te smoke, flash ve tarama aynı anda gelmeli — önce biri giriyor, sonra öbürü değil. Hep birlikte.
+
+**Post-plant** sürekli dağılıyorsa: aynı köşede oturuyorsun. Yay, spike'a yetenek koy, crossfire tut.
 
 ## AIMLO Ne Demeli
-### Oyuncu cezalandırılan taraftayken
-**Retake takımı başarısız oluyorken**: "Plan olmadan retake yapıyorsun. Her retake'te smoke, flash ve tarama birlikte kullanılmalı. Birlikte push et — kurulmuş crossfire'lara karşı tek tek retake intihardir."
 
-**Post-plant takımı retake yiyorken**: "Plant sonrası çok tahmin edilebilirsin. Yayıl, spike'a engelleme yeteneği koy ve crossfire tut. Her üç post-plant oyuncusu aynı alandaysa tek bir flash hepinizi temizler."
+### Oyuncu cezalandırılan taraftayken
+
+**Retake takımı başarısız oluyorken**: "Plan olmadan giriyorsun. Smoke, flash ve tarama aynı anda gelmeli. Birlikte push et — kurulu crossfire'a tek tek girilmez."
+
+**Post-plant takımı retake yiyorken**: "Aynı köşedesiniz. Yay, spike'a molly veya nanoswarm koy, crossfire tut. Üçünüz aynı noktadaysa tek flash hepinizi giriyor."
 
 ### Oyuncu cezalandıran taraftayken
-**Post-plant güçlü tutuyorken**: "Post-plant kurulumun tek başına raund kazandırıyor. Spike'a engelleme koymaya ve açılarını yaymaya devam et ki retake yeteneği hepinizi aynı anda temizleyemesin."
 
-**Retake takımı başarılı oluyorken**: "Koordineli retake'lerin çalışıyor çünkü yetenek ile birlikte push ediyorsun. Commit etmeden önce taramaya devam et ve düşen takım arkadaşını trade et."
+**Post-plant güçlü tutuyorken**: "Kurulum doğru. Spike'a yetenek koymaya ve açıları yaymaya devam et — retake takımı tek yeteneğiyle hepinizi temizleyemesin."
+
+**Retake takımı başarılı oluyorken**: "Birlikte giriyorsunuz, bu yüzden çalışıyor. Taramayı site girişinden önce at, düşen takım arkadaşını trade et."
 
 ## Rank Modülasyonu
-**LOW**: Retake'ler koordinesiz — oyuncular bireysel push eder. Post-plant oyuncuları spike üzerinde oturur. Hiçbir taraf dinamiği anlamaz. Temel post-plant yayılması ve grup retake zamanlama öğret.
 
-**MID**: Retake'ler biraz yetenek kullanmaya başlar ama koordinasyon eksiktir. Post-plant iyidir ama engelleme yeteneği tutarsızdır. Senkronize retake ve tutarlı engelleme yerleştirme öğret.
+**LOW**: Retake'ler plansız — herkes ayrı giriyor. Post-plant oyuncusu spike başında bekliyor. Post-plant'te yay, retake'te hep birlikte gir.
 
-**HIGH**: Her iki taraf da yapıyı anlar. Matchup yetenek ekonomisi ile ilgilidir — post-plant fazı için kimin daha fazla aracı var. Raund boyunca kaynak yönetimi öğret.
+**MID**: Retake'te yetenek var ama flash ve smoke aynı anda gelmiyor. Post-plant'te spike üzerine yetenek koymayı atlıyorlar. Retake'te aynı anda gir, post-plant'te her raund spike'a nanoswarm veya molly koy.
 
-**ELITE**: Post-plant ve retake ikisi de optimize edilmiştir. Üstünlük düşman pozisyonlama ve yetenek zamanlaması üzerine üstün okumalara gider. Mikro-zamanlama ve fake defuse disiplini öğret.
+**HIGH**: Her iki taraf yapıyı biliyor. Fark şurada: post-plant fazı için elinde kaç yetenek kaldı. Iki raund öncesinden nanoswarm veya pit'ini post-plant için sakla, retake'te flashını o ana kadar kullanma.
+
+**ELITE**: Post-plant ve retake ikisi de kurulu. Fark okumada — düşman defuse'a eğildiği anda nanoswarm'u patlat, retake yolu tek kanala düşsün. Sahte defuse sesine göre pozisyon değiştir, yetenek harcatmadan birini al.

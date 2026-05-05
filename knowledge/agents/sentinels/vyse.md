@@ -1,105 +1,105 @@
 # AJAN: Vyse
 
 ## 1. Rol Kimliği
-Vyse, metalik yapılar ve reaktif tuzaklarla alan kontrol eden sentinel. Shear (Q) ile köşelerdeki düşmanları hasar vererek ele verir, Arc Rose (E) ile düşman yaklaştığında otomatik aktive olan görüş inkarı sağlar, Razorvine (C) ile geçen düşmanlara hasar veren asma duvarı yerleştirir ve Steel Garden (X) ile geniş alanda düşman yeteneklerini baskılayıp görüşlerini bozar. Killjoy can azaltırken ve Cypher istihbarat toplarken, Vyse doğrudan düşmanın savaşma kabiliyetine saldırır — silah bozma, görüş inkarı ve yetenek baskılama birleşimi. Tuzakları kapılarda, köşelerde ve dar koridorlarda en güçlü. Kit'in benzersiz avantajı: Arc Rose otomatik aktive olduğu için Vyse manuel tetiklemeye ihtiyaç duymaz — bu onu diğer sentinel'lerden daha az mikro-yönetim gerektiren ajan yapar.
+Vyse tuzaklarla alan kontrol eden bir sentinel. Killjoy hasar verip geciktirir, Cypher bilgi toplar — Vyse bunların ikisini birden yapar ama farklı şekilde: düşmanın görmesini engeller, geçerse hasar verir, yeteneğini kullanmasını keser. Tuzakları kapılarda, dar koridorlarda ve köşelerde en güçlü çünkü düşmanın etrafından dolaşma şansı yok. Arc Rose'un en büyük farkı şu: sen bir şey yapmana gerek yok, düşman yaklaşınca kendisi açılıyor.
 
 ## 2. Yetenek Seti
-- **Shear (Q)** — 250 kredi, 1 şarj. Metalik alan yaratan hedefli yetenek. Kısa gecikme sonrası alan aktive olarak içindeki düşmanlara hasar verir ve pozisyonlarını ele verir. Köşe temizleme, bilgi toplama ve retake sırasında düşman pozisyonlarını ortaya çıkarma aracı.
-- **Arc Rose (E)** — Bedava, toplanabilir. Yerleştirilebilir metalik çiçek. Düşmanlar yaklaştığında otomatik aktive olarak görüş engelleyen alan yaratır. Reaktif duman — düşman yakınlığında tetiklenir, Vyse'ın manuel müdahalesine gerek kalmaz. Kullanım sonrası toplanarak yeniden yerleştirilebilir.
-- **Razorvine (C)** — 200 kredi, 2 şarj. Yerleştirilebilir asma duvarı. Geçen düşmanlara hasar verir ve ses ipucu üretir. Alan inkarı, push yavaşlatma ve bilgi toplama (ses ipucu) tek yetenekte birleşir. İki şarj sayesinde iki farklı giriş yolunu kaplar.
-- **Steel Garden (X)** — 8 ult puanı. Geniş metalik flora alanı yaratır. İçindeki düşmanlar yetenek kullanamaz ve görüşleri azalır. Yetenek baskılaması + görüş bozma kombinasyonu. KAY/O'nun NULL/CMD'sine benzer ama sabit bölge olarak çalışır.
+- **Shear (Q)** — 250 kredi, 1 şarj. Metalik alan yarat, kısa gecikme sonrası içindeki düşmanlara hasar ver ve pozisyonlarını ele ver. Retake'te düşmanı bulmak için at, köşe temizlemek için at.
+- **Arc Rose (E)** — Bedava, toplanabilir. Dar koridor veya kapı girişine göm. Düşman yaklaştığında kendiliğinden duman açar — sen bakmak zorunda değilsin. Kullandıktan sonra geri topla, başka yere göm.
+- **Razorvine (C)** — 200 kredi, 2 şarj. Geçen düşmana hasar veren asma duvarı. Ses çıkarır — nereden geldiğini anlarsın. İki şarj var, iki farklı giriş yolunu kapat.
+- **Steel Garden (X)** — 8 ult puanı. Geniş alana metalik flora yayar. İçindeki düşmanlar yetenek kullanamaz, görüşleri bozulur. KAY/O'nun knife'ı gibi yetenek keser ama seninki sabit bir bölge — adam oradan çıkmazsa yetenek kullanamaz.
 
 ## 3. Temel Sorumluluklar
-- **Razorvine ile giriş yollarını engelle**: İki şarjı iki farklı giriş yoluna yerleştir. Geçen düşmanlar hasar alır, ses ipucu seni uyarır ve push yavaşlar.
-- **Arc Rose ile reaktif duman kur**: Koridorlara ve giriş noktalarına yerleştir. Düşman yaklaştığında otomatik aktive olarak görüşlerini engeller — bu hem bilgi sağlar (aktive oldu = düşman orada) hem de push'u yavaşlatır.
-- **Shear ile köşe temizle ve bilgi topla**: Yaygın tutma pozisyonlarına kullanarak düşmanları ele ver ve yıpratma hasarı ver. Retake sırasında düşman pozisyonlarını ortaya çıkarmak için hayati araç.
-- **Steel Garden ile retake ve post-plant domine et**: Baskılama alanı düşman yeteneklerini kapatır — retake sırasında düşman smoke, molly, flash kullanamaz. Post-plant'ta defuse bölgesine yerleştirerek düşman inkar utility'sini etkisiz kıl.
-- **Arc Rose'u topla**: Her kullanım sonrası toplanabilir — bedava ekstra utility döngüsü. Toplamayı ihmal etme.
-- **Tuzak tetiklemelerini çağır**: "Arc Rose aktive oldu A main" veya "Razorvine'dan ses var B long" çağrıları takıma bilgi verir.
+- **İki Razorvine'ı iki ayrı giriş yoluna göm**: İkisini aynı yere koyma. Düşman geçince hasar alır, ses çıkar, anında anlarsın nereden geldiğini.
+- **Arc Rose'u düşmanın geçmek zorunda olduğu yere koy**: Hookah girişi, ramp, dar koridor — açık alana koyma, düşman etrafından döner ve hiç açılmaz.
+- **Shear'ı retake'te kullan**: Spike'a geri girerken önce Shear at. Düşman nerede duruyorsa ele verir, kör girme.
+- **Steel Garden'ı düşman geri almaya başlamadan önce aç**: Spike dikildikten hemen sonra, geri alış başlamadan. Açarsan düşman yetenek kullanamadan geri almak zorunda kalır.
+- **Arc Rose'u kullandıktan sonra geri topla**: Bedava ekstra tuzak — yerde bırakma.
+- **Tuzak açıldığında takıma söyle**: "Arc Rose A main'de açıldı", "Razorvine B long'dan ses verdi" — bu bilgi takımın hamlesi.
 
 ## 4. Sık Yapılan Hatalar
-- Tüm tuzakları aynı giriş noktasına yığmak — tek Sova dart veya Fade haunt tüm kurulumu ortaya çıkarır ve etkisiz kılar
-- Arc Rose'u açık alana koymak — düşman etrafından dolaşır, reaktif duman tetiklenmez
-- Razorvine'ı düşmanın göremeyeceği veya geçmek zorunda olmadığı alanlara yerleştirmek
-- Steel Garden'ı çok geç kullanmak — düşman zaten pozisyon almışken baskılama gecikmiş gelir
-- Arc Rose'u kullanım sonrası toplamamak — bedava ekstra utility döngüsünü kaçırmak
-- Shear'ı retake sırasında kullanmayı unutmak — retake'te düşman pozisyonlarını ele veren hayati bilgi aracı
-- Kendi tuzaklarına çok yakın oynamak — onları temizleyen aynı utility'ye ölmek
+- İki Razorvine'ı aynı yere yığmak — tek bir Sova ok veya Fade haunt ikisini birden ortaya çıkarır
+- Arc Rose'u açık alana koymak — düşman etrafından döner, hiç açılmaz
+- Razorvine'ı düşmanın geçmek zorunda olmadığı yere gömmek — hasar vermez, ses vermez, sıfır değer
+- Steel Garden'ı düşman pozisyon aldıktan sonra açmak — yetenek zaten harcanmış, geç kalmışsın
+- Arc Rose'u yerde bırakmak — bedava ekstra tuzak kaçıyor
+- Retake'te Shear atmamak — kör giriyorsun
+- Kendi tuzaklarına yakın durmak — tuzağı temizleyen utility seni de öldürür
 
 ## 5. Kalıp -> Anlam
 
-**IF** Vyse'ın tuzakları sürekli düşmana tetiklenmeden temizleniyor
-**MEANING** Yerleştirme çok belirgin veya tuzaklar düşmanların duyup önceden temizlediği ses ipuçları üretiyor
-**COUNTER** Tuzakları sesin harita ortam gürültüsü tarafından maskelendiği veya temizlemenin düşmanı savunmasız pozisyona zorlayacağı yerlere yerleştir. Haven C long'da ortam sesi tuzak sesini maskeler. Bind A short'ta temizleme sesi pozisyonu ele verir.
-**WHY** Belirgin tuzak = bedava temizleme = sıfır değer; gizli tuzak = düşman ya tetikler (bilgi + hasar) ya da temizlemeye utility harcar
+**IF** Tuzakların sürekli açılmadan temizleniyor
+**MEANING** Koyduğun yerler çok belirgin — düşman gözüyle görüyor veya tahmin ediyor
+**COUNTER** Sesin ortam gürültüsüyle karıştığı yerlere göm. Haven C long'da ortam sesi tuzak sesini yutar. Bind A short'ta ise temizleme sesi kendisi bilgi verir — temizlemeye çalışan saldırgan pozisyonunu ele verir. Tuzağı temizlemek için düşman savunmasız pozisyona girmek zorunda kalacak yeri seç.
+**WHY** Gizli tuzak: düşman ya tetikler (hasar + bilgi) ya temizlemeye zaman harcar. Belirgin tuzak: bedava temizlenir, sıfır değer.
 
-**IF** Arc Rose açık alanlara yerleştirilip düşmanlar etrafından dolaşıyor
-**MEANING** Reaktif duman yalnızca düşmanın içinden geçmek zorunda olduğu koridorlarda işe yarar
-**COUNTER** Arc Rose'u düşmanın geçmek zorunda olduğu dar koridorlara ve kapı girişlerine yerleştir. Açık alanda alternatifleri var — dar alanda yok. Bind Hookah girişi, Split A ramp, Lotus B main ideal pozisyonlar.
-**WHY** Dar koridor Arc Rose = kaçınılmaz tetikleme = garantili duman + bilgi; açık alan = düşman dolaşır = boşa giden utility
+**IF** Arc Rose açık alanlara konulup düşmanlar etrafından dönüyor
+**MEANING** Reaktif duman sadece düşmanın geçmek zorunda olduğu yerde işe yarar
+**COUNTER** Bind Hookah girişi, Split A ramp, Lotus B main — bunlar dar geçiş, alternatif yok. Açık alanda düşmanın seçeneği var, dar yolda yok.
+**WHY** Dar koridor: açılması garantili, hem duman hem bilgi. Açık alan: düşman dolaşır, boşa gider.
 
-**IF** Razorvine hasar veriyor ama Vyse veya takım bu hasardan capitalize edemiyor
-**MEANING** Asma duvarı düşmanın görüş avantajı olmayan pozisyona yerleştirilmiş — hasar veriyor ama takip ateşi yok
-**COUNTER** Razorvine'ı SENİN güvenli açıdan düşmanları görebildiğin yere yerleştir. Düşman asma duvarından geçerken hasar alır + sen güvenli açıdan peek yaparsın. Hasar + peek = ölümcül kombo.
-**WHY** Görüş avantajı olmadan asma = hasar verir ama capitalize edemezsin; görüş avantajıyla = hasar + peek = büyük avantaj
+**IF** Razorvine hasar veriyor ama sen ya da takımın bu hasardan yararlanamıyor
+**MEANING** Asma duvarı senin açından göremediğin yere konulmuş — hasar verdi ama kimse peek yapamadı
+**COUNTER** Razorvine'ı kendi güvenli açından düşmanları görebileceğin yere göm. Düşman asma duvardan geçerken hasar alır, sen o anda açıdan çıkarsın. Hasar almış düşmana peek = avantajlı dövüş.
+**WHY** Açın yoksa asma duvar sadece can yakar ama düşman ölmez. Açın varsa: hasar + peek = düşman gitti.
 
-**IF** Steel Garden çok geç yerleştirilip düşman zaten pozisyon almışken aktive oluyor
-**MEANING** Ultimate proaktif değil reaktif kullanılmış — kurulum süresi geç kullanımı riskli yapar
-**COUNTER** Steel Garden'ı düşman retake başlamadan ÖNCE yerleştir. Spike dikildikten hemen sonra veya retake sinyali aldığında deploy et. Baskılama alanı düşman yeteneklerini önceden kaldırmalı.
-**WHY** Proaktif Steel Garden = düşman yeteneksiz retake yapmak zorunda; reaktif = düşman zaten utility'sini harcamış
+**IF** Steel Garden düşman zaten yerleşmiş pozisyonuna açılıyor
+**MEANING** Ult reaktif kullanıldı — düşman zaten utility'sini attı, pozisyon aldı
+**COUNTER** Spike dikildikten hemen sonra aç. Düşman geri almaya başlamadan önce bölge yetenek boşluğuna düşmeli. Takımdan "geri alıyoruz" sinyali gelince değil — spike dikimi sinyalin kendisi.
+**WHY** Erken açılırsa düşman yeteneğini kullanamadan geri almak zorunda. Geç açılırsa ult boşa gider.
 
 **IF** Post-plant turları Vyse hayattayken kaybediliyor
-**MEANING** Tuzaklar spike yanına yerleştirilmedi — Vyse'ın post-plant gücü spike dikilmeden önce ön-yerleştirme gerektirir
-**COUNTER** Saldırıda en az bir Razorvine'ı post-plant için sakla. Dikimden önce spike'ın üzerine veya yanına yerleştir. Razorvine defuse'yu kendi başına geciktirir — düşman asma duvarını ya yok etmek (zaman harcama) ya da içinden geçmek (hasar alma) zorunda.
-**WHY** Post-plant Razorvine = defuse gecikmesi + hasar tuzağı; post-plant utility'siz Vyse = spike savunmasız
+**MEANING** Spike yanına tuzak konulmadı — Vyse'ın post-plant gücü dikimden önce ön yerleştirme ister
+**COUNTER** Saldırıda en az bir Razorvine'ı post-plant için sakla. Spike dikilmeden önce spike'ın üstüne veya yanına göm. Düşman asma duvarı ya yok etmek zorunda (zaman harcar) ya da içinden geçmek zorunda (hasar alır).
+**WHY** Post-plant Razorvine: defuse gecikir + düşman hasar alır. Tuzaksız post-plant: spike savunmasız.
 
-**IF** Tuzak kurulumu her turda aynı
-**MEANING** Düşman Vyse'ın kurulumunu ezberlemiş ve önceden temizliyor
-**COUNTER** Her turda en az bir tuzak pozisyonunu değiştir. Aynı açılar, farklı noktalar. Tur 1'de A main solda, tur 2'de A main sağda, tur 3'te A main derininde. Tahmin edilemezlik tuzak değerini artırır.
-**WHY** Aynı kurulum = düşman önceden temizler = utility değeri sıfır; değişen kurulum = her turda yeni bulmaca
+**IF** Tuzak kurulumun her turda aynı
+**MEANING** Düşman senin kurulumunu ezberledi, tur başında geliyor direkt temizliyor
+**COUNTER** Her turda en az bir tuzağın yerini değiştir. A main'e her tur soldan değil, bazen sağdan, bazen derininden. Düşman aynı yeri kontrol etmeye alışınca farklı yere koy.
+**WHY** Aynı kurulum: düşman tur başında temizler, tuzak sıfır değer. Değişen kurulum: her turda yeni bulmaca.
 
-**IF** Vyse sürekli kullanılmamış utility ile ölüyor
-**MEANING** Oyuncu yetenek deploy etme yerine silah dövüşlerine öncelik veriyor — tuzaksız Vyse standart ajan
-**COUNTER** Dövüşlerden önce tuzakları deploy et. Herhangi bir açıya peek etmeden önce envanterde sıfır utility olmalı. Satın alma aşamasında setup planla: "Arc Rose nereye, Razorvine nereye, Shear ne zaman."
-**WHY** Kullanılmamış utility = sıfır alan kontrolü = Vyse'ın varlık sebebini kaçırma
+**IF** Vyse sürekli kullanılmamış tuzaklarla ölüyor
+**MEANING** Dövüşlere tuzak atmadan giriyorsun — tuzaksız Vyse sıradan bir ajan
+**COUNTER** Herhangi bir açıya çıkmadan önce elindeki her şeyi at. Alım aşamasında planla: Arc Rose nereye, Razorvine nereye, Shear ne için saklanıyor.
+**WHY** Atılmamış tuzak = alan yok = Vyse oynamanın anlamı yok.
 
 **IF** Shear retake sırasında kullanılmıyor
-**MEANING** Retake'te düşman pozisyonlarını ele veren hayati bilgi aracı ihmal ediliyor
-**COUNTER** Her retake girişinden önce Shear at. Düşman pozisyonları ele verilir, retake push'u bilgilendirilmiş olur. Steel Garden + Shear retake kombosu = baskılama + bilgi.
-**WHY** Retake'te bilgisiz push = kör giriş = ölüm riski; Shear ile retake = düşman pozisyonları biliniyor
+**MEANING** Spike'a girerken düşmanın nerede durduğunu bilmiyorsun — kör giriyorsun
+**COUNTER** Her retake girişinden önce Shear at. Düşman pozisyonları ortaya çıkar, ona göre girersin. Steel Garden + Shear: yetenek kesilmiş + pozisyon belli = retake çok daha kolay.
+**WHY** Kör retake girişi: düşman seni biliyor, sen bilmiyorsun. Shear atıldıktan sonra: dengeli bilgi, avantajlı giriş.
 
 ## 6. Harita Etkileşimleri
-- **Lotus**: Mükemmel. Dönen kapılar ve dar B main koridoru Razorvine ve Arc Rose için idealdir. A main'deki dar geçiş tuzak tetiklemesini garanti eder. C site'ın çoklu girişleri dağıtılmış tuzak ağını ödüllendirir. Steel Garden C site'ta retake inkarı için geniş alan kaplar.
-- **Bind**: Her iki site'ta güçlü. Teleporter'lar ek tuzak fırsatları yaratır — teleporter çıkışından çıkan düşmanlar doğrudan tuzaklara yürür. A short ve B long'da Razorvine giriş noktalarını kontrol eder. Hookah'da Arc Rose kaçınılmaz reaktif duman sağlar.
-- **Ascent**: A site'ta uygulanabilir. A main ve A tree'deki tuzaklar her iki giriş yolunu kaplar. B main doğal Razorvine koridoru. Mid catwalk'ta Arc Rose rotasyon uyarısı verir. Steel Garden A site retake'lerinde düşman utility'sini baskılar.
-- **Split**: Dar yollar düşmanı yapıların içinden geçmeye zorlar. B heaven'dan B main'e geçişte Razorvine yerleştirmesi düşmanı savunmasız yakalar. A ramp'ta Arc Rose push yavaşlatır. Mid'de Shear catwalk kontrolü sağlar. Steel Garden B site'ta retake dominasyonu.
-- **Sunset**: Mid koridor doğal Razorvine ve Arc Rose alanı. A main ve B market'taki tuzaklar her iki yaklaşımı kontrol eder. Mid geçiş noktasında Shear bilgi toplar. Steel Garden mid koridorunda yetenek baskılaması.
+- **Lotus**: Dönen kapılar ve dar B main Razorvine ve Arc Rose için biçilmiş kaftan. A main'deki dar geçiş tuzak açılmasını garantiler. C site'ın çoklu girişleri tuzakları dağıtmayı ödüllendirir — Steel Garden C site'ta geniş retake baskısı uygular.
+- **Bind**: Teleporter çıkışından çıkan düşman tuzağa düz girer — teleporter çıkışlarına tuzak koy. A short ve B long girişlerine Razorvine, Hookah'a Arc Rose — Hookah'ta etrafından dönme şansı yok, garantili açılır.
+- **Ascent**: A main ve A tree'ye birer tuzak, iki giriş kapanır. B main doğal Razorvine koridoru. Mid catwalk'ta Arc Rose rotate eden düşmanı bildirir. Steel Garden A site retake'te düşmanın elinden yeteneği alır.
+- **Split**: Dar yollar düşmanı yapıların içinden geçmeye zorlar. B heaven'dan B main'e geçişte Razorvine düşmanı savunmasız yakalar. A ramp'ta Arc Rose push yavaşlatır. Mid'de Shear catwalk kontrolü verir.
+- **Sunset**: Mid koridor Razorvine ve Arc Rose için ana nokta. A main ve B market'a birer tuzak. Mid geçişte Shear bilgi toplar.
 
 ## 7. Eşleştirme Notları
-- **Sova ve Fade karşı zayıf**: Recon Bolt ve Haunt güvenli mesafeden tuzakları ortaya çıkarır ve temizleme bilgisi verir. Bu eşleşmelerde tuzakları düşmanın görüş hattından gizli yerlere koy — duvarlarin arkası, köşe dönemeleri.
-- **Rush kompozisyonlarına karşı güçlü**: Tuzakları temizleyecek zamanı olmayan takımlar Razorvine ve Arc Rose'a doğrudan denk gelir. Hızlı execute = tuzak tetikleme = hasar + bilgi + görüş inkarı aynı anda.
-- **Breach karşı**: Breach yapılar boyunca stun atabilir, Vyse kurulumunu daha az güvenilir kılar. Breach eşleşmesinde tuzakları stun hattının dışında yerleştir ve dağıtılmış kurulum kullan.
-- **Operator oyuncularına karşı güçlü**: Razorvine'ın hasar bölgesi Op tutanları pozisyonlarından çıkmaya zorlar. Arc Rose'un reaktif dumanı Op'un görüş hattını keser. Steel Garden baskılaması Op oyuncusunun yetenek desteğini kaldırır.
-- **KAY/O karşı**: Suppress tüm tuzakları devre dışı bırakır. KAY/O knife atımında Vyse'ın kurulumu çöker. Bu eşleşmede tuzak yerleştirmesini knife menzili dışında tut ve suppress penceresi sonrası hızlı yeniden kurulum yap.
-- **Killjoy karşı (aynı takımda)**: İkisi birlikte seçildiğinde site'ı çift sentinel ile kilitler. Killjoy hasar + gecikme, Vyse görüş inkarı + yetenek baskılama. Farklı giriş yollarına dağıtarak çift katman savunma kur.
+- **Sova ve Fade'e karşı zayıf**: Recon Bolt ve Haunt güvenli mesafeden tuzakları bulur. Bu maçlarda tuzakları görüş hattından gizle — duvarın arkası, köşe dönüşleri.
+- **Hızlı baskı kompozisyonlarına karşı güçlü**: Tuzakları temizleyecek zamanı olmayan takımlar Razorvine ve Arc Rose'a direkt girer. Hızlı baskı = tuzak tetikleme = hasar + bilgi + duman aynı anda.
+- **Breach'e karşı**: Breach yapılar boyunca sersem atabilir, tuzakların güvenilirliği düşer. Tuzakları sersem hattının dışında yerleştir, dağıtık kur.
+- **Operator oyuncularına karşı güçlü**: Razorvine'ın hasar bölgesi Op tutan düşmanı pozisyondan çıkmaya zorlar. Arc Rose Op'un görüş hattını keser. Steel Garden Op'un yetenek desteğini keser.
+- **KAY/O'ya karşı**: Knife tüm tuzakları devre dışı bırakır, knife atımında kurulum çöker. Tuzakları knife menzili dışında kur, knife bittikten sonra hızlıca yeniden göm.
+- **Killjoy ile aynı takımda**: Site çift katman kilitlenir. Killjoy hasar + gecikme, Vyse görüş kesme + yetenek baskısı. İkisini aynı girişe yığma — farklı giriş yollarına dağıt.
 
 ## 8. Oyuncuya Ne Söylenmeli
 
-### İyi performans gösterdiğinde
-**Oyuncu Eylemi:** Tuzakları 2-3 giriş açısına yayıyorsun (tek noktada istiflemek yerine), Arc Rose'u düşmanın push etmesi gereken koridorlara yerleştiriyorsun, Razorvine ile giriş yollarını hasar bariyeriyle kapatıyorsun ve post-plant yerleştirmesi için en az bir tuzak saklıyorsun.
-**Düşman Algısı:** Saldırganlar tek yola yoğunlaşmış sentinel kurulumu bekliyor. Bir açıyı temizleyip ikinci ve üçüncüde de tuzaklar keşfettiklerinde, tek keşif yeteneğinin tüm savunmayı etkisiz kılamayacağını anlıyorlar.
-**Tekrar Stratejisi:** Tur 1: A, B girişlerinde Razorvine; ana choke'ta Arc Rose. Tur 2: her tuzağı orijinal pozisyondan kısa mesafe kaydır (aynı açılar, farklı noktalar). Tur 3: iki tuzağı tek açıda yoğunlaştır ve bir açıyı açık bırak — "güvenli" yoldan geçen saldırganları cezalandır.
+### İyi oynayınca
+Tuzakları 2-3 farklı girişe yayıyorsun, Arc Rose'u düşmanın geçmek zorunda olduğu yerlere koyuyorsun, post-plant için en az bir Razorvine saklıyorsun. Devam et. Düşman bir açıyı temizleyip ikincisinde de tuzakla karşılaşınca psikolojik baskı başlar — aynı mantığı koru ama her turda en az bir pozisyonu değiştir.
 
-**Zorlandığında**: "Tuzakların ya çok kolay temizleniyor ya da düşük trafik alanlarında. Düşmanların hangi yolları kullandığını izle ve utility'ni oraya yoğunlaştır. Dövüşlere girmeden önce her şeyi deploy et."
+### Zorlanınca
+Tuzakların ya çok kolay görünüyor ya da kimsenin geçmediği yerlerde. Düşmanların hangi yolları kullandığına bak, tuzakları oraya kaydır. Herhangi bir açıya çıkmadan önce elindeki her şeyi at.
 
-**Tahmin edilebilir olduğunda**: "Düşmanlar her turda kurulumunu önceden temizliyor. Tuzak pozisyonlarını değiştir ve Arc Rose'u farklı açılarda kullan. Saldırıda post-plant Razorvine yerleştirmen öncelik olmalı — kit'inin en parlak noktası."
+### Tahmin edilebilir olunca
+Düşman her turda kurulumunu önceden temizliyor. Pozisyonları değiştir. Aynı açı, farklı nokta yeter. Saldırıda post-plant Razorvine'ı öncelikle göm — kit'inin en sert noktası orası.
 
 ## 9. Rank Modülasyonu
 
-**Düşük (Iron-Silver)**: Oyuncular tuzakların varlığını unutuyor veya rastgele yerlere koyuyor. Temelleri öğret: her giriş yoluna bir Razorvine, ana choke point'te Arc Rose, peek etmeden önce her şeyi deploy et. "Satın alma sırasında 3 tuzağını planla" kadar basit. Arc Rose toplamayı öğret — bedava ekstra utility.
+**Düşük (Iron-Silver)**: Tuzakların nereye gideceğini bilmiyor ya da unutuyor. Şunu öğret: her giriş yoluna bir Razorvine, ana dar geçişe Arc Rose, açıya çıkmadan önce her şeyi at. Alım aşamasında "3 tuzağımı nereye koyuyorum" diye sor kendine. Arc Rose'u kullandıktan sonra geri toplamayı alışkanlık yap.
 
-**Orta (Gold-Platinum)**: Tuzak yerleştirme fonksiyonel ama her turda aynı. Shear az kullanılıyor, Steel Garden zamanlaması geç. Kurulum çeşitliliği ve düşman execute'leri sırasında proaktif Steel Garden kullanmaya odaklan. Her turda en az bir tuzak pozisyonunu değiştir. Shear'ı retake aracı olarak kullanmaya başla.
+**Orta (Gold-Platinum)**: Tuzak koyuyor ama her turda aynı yere. Shear az kullanıyor, Steel Garden geç açıyor. Her turda en az bir tuzak yerini değiştir. Shear'ı retake aracı olarak kullan. Steel Garden'ı spike dikiminden hemen sonra aç, bekletme.
 
-**Yüksek (Diamond-Ascendant)**: Vyse oyuncuları tuzak ağlarını anlıyor ama düşman karşı-stratejilere adapte olmayabilir. Düşmanın hangi yollardan kaçındığını okumaya ve tuzakları buna göre kaydırmaya odaklan. Steel Garden zamanlamasını düşman retake sinyaliyle eşleştir. Arc Rose toplamayı tur ortasında yaparak yeniden yerleştir.
+**Yüksek (Diamond-Ascendant)**: Tuzak ağını anlıyor ama düşman karşı oynamaya başlayınca adapte olamıyor. Düşmanın hangi yollardan kaçındığını oku, tuzakları oraya kaydır. Steel Garden zamanlamasını düşman geri alışa başlamadan hemen öncesine denk getir. Arc Rose'u tur ortasında geri toplayıp yeniden göm.
 
-**Elit (Immortal-Radiant)**: Vyse'ın değeri post-plant kilitleme ve adaptif tuzak yerleştirmede. Bu seviyede her tur farklı tuzak konfigürasyonuna sahip olmalı. Steel Garden zamanlaması kusursuz olmalı — düşman retake'inin tam başlangıç anına denk gelmeli. Shear retake sırasında takımın birincil bilgi aracı olarak kullanılmalı. Arc Rose'un toplanabilir döngüsü tur içinde çift kullanım sağlamalı.
+**Elit (Immortal-Radiant)**: Her tur farklı tuzak yerleşimi olmalı — aynı kurulum iki tur üst üste çıkmasın. Steel Garden zamanlaması keskin olmalı: düşman geri alışa başladığı an, tek saniye bile geç değil. Shear retake'in birincil bilgi aracı — Steel Garden + Shear birlikte at. Arc Rose'u tur içinde iki kez kullan: göm, açılsın, topla, başka yere göm.

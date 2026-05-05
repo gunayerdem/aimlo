@@ -9,113 +9,121 @@ tags: [matchup, composition, double-initiator, double-sentinel, meta]
 
 ## 1. Matchup Özü
 
-Double initiator kadrosu (Sova + KAY/O, Breach + Skye, Fade + Gekko) hedef site'a utility baskısı kurup savunmayı bilgi boşluğuna düşüren saldırı merkezli bir yapı; double sentinel kadrosu (Killjoy + Cypress, Chamber + Killjoy, Deadlock + Cypress) ise savunma hattına iki kat setup kurup saldırının entry ekonomisini trap + trade partner zinciriyle çökerten yapı. Matchup bilgi üretimi ile bilgi reddi arasında bir savaş — initiator bilgi ister, sentinel bilgi vermez.
+Double initiator (Sova + KAY/O, Breach + Skye, Fade + Gekko) bilgi üretir — flash, dart, recon ile site'ı görmeden girer. Double sentinel (Killjoy + Cypher, Chamber + Killjoy, Deadlock + Cypher) bilgi kapatır — trap, alarmbot, tripwire ile seni görmeden durdurur.
+
+Bu matchup şuna gelir: bilgi toplarsan ve o bilgiyi girişe çevirirsen kazanırsın. Karşı taraf o bilgiyi engellerse ve trap'ini tetikletirse kazanır. İkisi de yarım iş yaparsa maç uzar.
 
 ## 2. Hangi Taraf Avantajlı
 
 **Double initiator lehine:**
-- Saldırı tarafında ve map açık angle'lar içeriyorsa (Breeze, Icebox) — flash/dart zinciri site'ı clear eder
-- Sentinel setup'ı round başı kurulmadan push başlarsa trap hattı aktif değil
-- Initiator utility'si henüz harcanmamış ve ult ekonomisi hazır ise (Sova Hunter's Fury + Breach Rolling Thunder zinciri site'ı boşaltır)
-- Sentinel ekibinin sentinelleri solo pozisyonlarda, trade partner flex'te ise
-- Post-plant utility'si initiator tarafında kalıyorsa — retake savunmanın zayıf noktası
+- Harita açık ve geniş angle'lıysa (Breeze, Icebox) — flash + dart zinciri site'ı tarar, trap hattı kaplayamaz
+- Sentinel ikilisi setup kurmadan saldırı başlarsa — trap hattı aktif değil, giriş temiz
+- Ult ekonomisi initiator tarafında doluysa — Hunter's Fury + Rolling Thunder zinciri site'ı boşaltır, sentinel ults boşsa retake çıplak kalır
+- Sentinel ikilisi ayrı site'lara bölündüyse — trade partner zinciri koptu, tek tek alınır
+- Post-plant utility initiator'da kaldıysa — retake savunmanın en zayıf noktası
 
 **Double sentinel lehine:**
-- Savunma tarafında ve map dar koridor ağırlıklı (Bind, Split, Fracture) — trap hattı koridoru kaplar
-- Initiator utility'si round içinde erken harcanmış ve ikinci baskı için boş ise
-- Sentinel kombosu çift trap hattı kuruyor (Killjoy turret + Cypress tripwire, iki farklı angle)
-- Savunma ekonomisi full-buy ve setup her round farklı yerde ise
-- Initiator ekibinde duelist yok ve entry sadece utility ile zorlanıyorsa — trap hattı entry'yi tag'ler
+- Harita dar koridor ağırlıklıysa (Bind, Split, Fracture) — trap hattı koridoru kapatır, flash'ın yeri yok
+- Initiator utility erken patladıysa — ikinci baskı için boş, sentinel rahat bekler
+- Sentinel ikilisi iki farklı angle'da setup kurduysa — trap + alarmbot + molly üst üste, giriş çok pahalı
+- Savunma full-buy, setup her round farklı yerdeyse — initiator bir önceki bilgiyi kullanamaz
+- Kadroda duelist yoksa — entry sadece utility'ye düştü, trap hattı her girişi tag'ler
 
 ## 3. Key Düellolar
 
-**IF** Double initiator Sova dart + Breach flash zincirini round başı attı
-**MEANING** Sentinel trap hattı bilgi verdi ama flash anında savunma görüşü kapandı, initiator entry penceresi açık
-**COUNTER** Sentinel flash sesinde duvara dön, dart tag'ini göz ardı etmek yerine rotate sinyali olarak kullan. Trap hattı flash sonrası reposition pozisyonuna çevrilir
-**WHY** Initiator utility'si zincirleme çalışır — dart bilgi, flash körleşme, entry baskı. Tek bir halka atlanırsa zincir kırılır, sentinel savunma penceresini geri kazanır.
+**IF** Double initiator Sova dart + Breach flash zincirini arka arkaya attı
+**MEANING** Trap hattı bilgi verdi ama flash anında savunma körleşti — giriş penceresi şu an açık
+**COUNTER** Flash sesini duyduğunda duvara dön. Dart tag'ini rotate sinyali olarak oku, görmezden gelme. Flash geçtikten sonra trap'ini yeni pozisyona çek
+**WHY** Bu zincir sıralı çalışır: dart bilgi, flash körleşme, entry baskı. Bir halka atlanırsa zincir kırılır, savunma penceresini geri alırsın.
 
 ---
 
-**IF** Double sentinel setup'ı iki farklı site'a bölündü (Killjoy A, Cypress B)
-**MEANING** Rotate hızı azalır, savunma sentinel anchor'ları tek site'ta çift koruma sağlayamaz
-**COUNTER** Initiator tarafı tek site commit push yapmalı, bölünmüş sentinelin tek site'ı boş kalır. Trade partner mid hattında rotate'i keser
-**WHY** Double sentinel'in avantajı iki setup'ın birbirine yakın durması. Bölünmüş setup tek setup'tan zayıftır çünkü trade partner zinciri kopmuştur.
+**IF** Double sentinel ikilisi ayrı site'lara bölündü (Killjoy A, Cypher B)
+**MEANING** Rotate yavaşladı, trade partner zinciri koptu — her sentinel kendi başına
+**COUNTER** Tek site'a tam commit yap. Bölünmüş sentinel'in boş kalan site'ı var, oraya git. Trade partner mid hattındaysa rotate'ini kes
+**WHY** Double sentinel'in gücü iki setup'ın birbirine yakın olması. Bölündüğünde iki yarım sentinel olursun, double sentinel comp değil.
 
 ---
 
-**IF** Initiator ult ekonomisi hazır, sentinel ult ekonomisi boş
-**MEANING** Round açılışında Sova Hunter's Fury + Breach Rolling Thunder kombosu site boşaltır, sentinel Lockdown/Trapwire ulu yoksa retake çıplak
-**COUNTER** Sentinel tarafı ult boşalt yerine setup derinleştirsin — iki turret + iki tripwire + double molly zinciri ult rolünü üstlenir
-**WHY** Ult ekonomisi dengesizse matchup ult hazır tarafa döner. Initiator ult'u round başı kullanır, sentinel ult'u post-plant için saklar. İkisi aynı round'da patlarsa sentinel retake kazanır.
+**IF** Initiator ult ekonomisi dolu, sentinel ult ekonomisi boş
+**MEANING** Hunter's Fury + Rolling Thunder site'ı boşaltır — sentinel ult yoksa retake çıplak kalır
+**COUNTER** Sentinel ult beklemek yerine setup'ı derinleştir — iki turret + iki tripwire + double molly zinciri ult rolünü üstlenir
+**WHY** Ult dengesi bozuksa matchup ult dolduran tarafa döner. Initiator ult'u girişte kullanır, sentinel ult'u post-plant için saklar — ikisi aynı roundda patlarsa sentinel retake'i alır.
 
 ---
 
-**IF** Double sentinel round başı saldırı tarafına force-buy yaptı
-**MEANING** Sentinel setup agent'ları saldırı rolünde zayıf — Killjoy + Cypress saldırı tarafında utility taşıyıcısı değil, entry açısından duelist yerine geçmez
-**COUNTER** Initiator tarafı savunmada double sentinel'in saldırı zayıflığını sömürür — close angle hold ile dash/utility'siz sentinel'leri trap'ler
-**WHY** Double sentinel comp saldırı tarafında dengesiz. Savunmada tam güç, saldırıda yarım. Bu dengesizlik round ekonomisinde saldırı tarafında 6-7 round savunma tarafında 10+ round sonucunu üretir.
+**IF** Double sentinel saldırı tarafında force-buy yaptı
+**MEANING** Killjoy + Cypher saldırı tarafında entry açmaz — utility var ama giriş yok, duelist gibi oynayamazlar
+**COUNTER** Savunmada close angle hold kur, saldırı zayıflıklarını sömür — utility'siz gelen sentinel'ları trap'le
+**WHY** Double sentinel savunmada tam güç, saldırıda yarım. Bu dengesizlik skorboarda görünür: savunma yarısında 10+ round, saldırı yarısında 5-7 round.
 
 ---
 
-**IF** Initiator flash recon zinciri trap'lerin tam üzerine düştü (Cypher tripwire Sova dart ile temizlendi)
-**MEANING** Trap hattı önceden söküldü, sentinel savunma ekonomisi sıfırlandı
-**COUNTER** Sentinel tripwire'ı gizli hatta koymalı, initiator dart angle'ından uzak. Alarmbot + tripwire kombosu flash koruması sağlar
-**WHY** Trap hattının görünür olması ölümcül. Görünmez trap > görünür trap, çünkü initiator sökemediği trap'i tetikler, tetiklenen trap bilgi verir.
+**IF** Sova dart, Cypher tripwire'ın tam üzerine düştü ve tripwire açığa çıktı
+**MEANING** Trap hattı söküldü, o round sentinel savunma ekonomisi sıfırlandı
+**COUNTER** Tripwire'ı initiator dart angle'ından uzak gizli hatta koy. Alarmbot + tripwire kombosu flash koruması sağlar — flash'tan önce tripwire tetiklenirse konumun belli olmaz
+**WHY** Görünür trap ölümcül. Görünmez trap initiator'ın söküp sökmediğini bilemez — bilemediği trap'i tetikler, tetiklenen trap sana bilgi verir.
 
 ---
 
 **IF** Double initiator retake sırasında site dışında kaldı, sentinel post-plant molly attı
-**MEANING** Initiator utility'si retake sırasında değil entry'de harcandı, post-plant ekonomisi boş
-**COUNTER** Initiator utility bölünmeli — yarı entry, yarı post-plant. KAY/O molly + Breach aftershock post-plant için saklanır
-**WHY** Initiator'un rolü sadece entry değil. Post-plant utility'si de initiator işidir. Tüm utility entry'de patlarsa retake çıplak kalır.
+**MEANING** Tüm utility entry'de patladı, post-plant için boşsun — molly'e cevap yok
+**COUNTER** Utility'yi böl: yarısı entry, yarısı post-plant. KAY/O molly + Breach aftershock post-plant için sakla
+**WHY** Initiator'un işi sadece girmek değil. Post-plant da senin görevin. Tüm utility entry'de biterse retake çıplak kalır.
 
 ---
 
 **IF** Sentinel ikilisi aynı angle'ı hold ediyor (Killjoy + Chamber aynı A Long)
-**MEANING** Savunma üst üste bindi, diğer site trade partner olmadan solo anchor'da
-**COUNTER** Initiator diğer site'a commit push — double sentinel avantajı aynı angle'da çalışmaz, tek angle'ın savunması iki kat yerine bir kat
-**WHY** Double sentinel değer üretir çünkü iki farklı angle'da trap hattı kurar. İki sentinel aynı angle'da ise comp double sentinel değil, redundant sentinel'dir.
+**MEANING** Savunma üst üste yığıldı, diğer site trade partner olmadan solo — rotate gelmez
+**COUNTER** Diğer site'a commit yap. İki sentinel aynı angle'daysa comp double sentinel değil, gereksiz sentinel — diğer site boş
+**WHY** Double sentinel değer üretir çünkü iki farklı angle'da baskı kurar. Aynı angle'da yığılırsa avantaj sıfırlanır.
 
-## 4. Utility/Kaynak Takası
+## 4. Utility ve Kaynak Dengesi
 
-Initiator utility'si bilgi + flash + soft cc ile toplam 8-10 slot, sentinel utility'si trap + alarmbot + molly ile 6-8 slot. Sayısal olarak initiator önde ama utility tipi farklı — initiator utility'si tüketilir, sentinel utility'si kurulur. Initiator her round utility'yi yeniden açar, sentinel utility'yi round başı kurup round boyunca bekler. Ekonomik denklem: initiator her round ekonomiyi sıfırdan harcar, sentinel kurduğu setup'ı üç-dört round koruyabilir. Pro sahnede bu fark sentinel lehine değerlendirilir çünkü round başına harcanan utility maliyeti sentinel tarafında düşük. Ult ekonomisi tersine döner: initiator ult'ları her round yaklaşık 1-2 ult puanı kazanır (Sova dart kill, Breach stun ult orb), sentinel ult'ları savunma rolünde daha yavaş dolar. Uzun maçlarda sentinel ult sayısı initiator ult sayısının altında kalır.
+Initiator utility'si tükenir — her round sıfırdan açarsın. Sentinel utility'si kurulur — round başı setup kurarsın, round boyunca bekler. Bu fark şu anlama gelir: initiator her round kaynağını harcar, sentinel kurduğu setup'ı birkaç round koruyabilir.
+
+Ult ekonomisinde tablo tersine döner. Initiator ult'ları savunmada daha hızlı dolar (dart kill, stun ult orb). Sentinel ult'ları uzun maçlarda geride kalır. Maç uzadıkça ult baskısı initiator tarafına geçer.
+
+Sonuç: Round sayısı 15'in altındaysa sentinel setup baskısı yüksek — her giriş trap hattına çarpar. Round sayısı 20'yi geçtiyse initiator ult stoku dolmuştur — o rounddan itibaren giriş baskısı artar, sentinel ult yoksa site'ı boşalt.
 
 ## 5. Map Bazlı Değişim
 
-**Bind (double sentinel avantajlı):** TP ekonomisi + Hookah + Showers yakın mesafe sentinel trap hattının evi. Initiator flash sentinel trap'ini bulamaz, TP rotate sentinel rotate zincirini kurtarır.
+**Bind (double sentinel avantajlı):** TP rotate + Hookah + Showers dar geçitleri trap hattının evi. Flash sentinel trap'ini bulamaz, TP rotate zinciri kapanır.
 
-**Breeze (double initiator avantajlı):** Geniş site alanları sentinel setup'ını dağıtır, trap hattı kaplayamaz. Initiator recon zinciri site'ı temizler.
+**Breeze (double initiator avantajlı):** Geniş site alanları trap hattını dağıtır, kaplayamaz. Recon zinciri site'ı tarar, giriş temiz.
 
-**Icebox (double initiator avantajlı):** Vertical play + uzun sightline initiator dart/flash için ideal. Sentinel trap hattı vertical ekonomide kaplayamaz.
+**Icebox (double initiator avantajlı):** Dikey oyun + uzun sightline dart ve flash için ideal. Sentinel trap hattı dikey ekonomide yetersiz kalır.
 
-**Ascent (dengeli):** Mid Courier initiator için, A Site + B Site sentinel için. Matchup map kontrolü ile çözülür.
+**Ascent (dengeli):** Mid Courier initiator için, A ve B site sentinel için. Kim mid kontrolü alırsa matchup ona açılır.
 
-**Lotus (double sentinel avantajlı):** Üç site + döner kapı sentinel trap hattına katmanlı setup izni verir. Initiator bilgi toplar ama trap hattı yenilenir.
+**Lotus (double sentinel avantajlı):** Üç site + döner kapı sentinel'e katmanlı setup izni verir. Initiator bilgi toplar ama trap hattı her round yenilenir.
 
-**Haven (dengeli):** Üç site initiator utility'sini dağıtır, sentinel trap'i tek site'ta yoğunlaşır. Comp round bazlı site seçimine bağlı.
+**Haven (dengeli):** Üç site initiator utility'sini dağıtır, sentinel tek site'ta yoğunlaşır. Her round site seçimi matchup'ı belirler.
 
-**Split (double sentinel avantajlı):** Dar koridor + vertical play sentinel trap hattının evi. Double sentinel Split'te savunma tarafında 10+ round alır.
+**Split (double sentinel avantajlı):** Dar koridor + dikey oyun trap hattının evi. Savunma tarafında double sentinel Split'te 10+ round alır.
 
-**Sunset (double initiator avantajlı):** A Main açık angle + Mid initiator utility hattı. Sentinel trap hattı Sunset'te tek site'a sıkışır.
+**Sunset (double initiator avantajlı):** A Main açık angle + Mid initiator utility hattı. Sentinel trap hattı tek site'a sıkışır.
 
 ## 6. Flip Moment'ler
 
-**Flip 1 — Utility harcama sırası:** Initiator utility'yi round içinde erken harcarsa double sentinel retake kazanır. Initiator utility'yi yarıya böldüyse matchup dengeli.
+**Flip 1 — Utility harcama sırası:** Initiator utility erken patladıysa double sentinel retake'i alır. Utility'yi entry'e yarısı, post-plant'e yarısı ayırdıysan her iki fazda da baskı kurar, sentinel retake çıplak kalır.
 
-**Flip 2 — Sentinel setup görünürlüğü:** Trap hattı round 1'de açığa çıktıysa initiator round 2'de o hattı siler, double sentinel çökmüştür. Setup gizli kalıyorsa sentinel matchup'ı kilitler.
+**Flip 2 — Trap görünürlüğü:** Trap hattı ilk roundda açığa çıktıysa initiator ikinci roundda o hattı siler, double sentinel çökmüştür. Gizli kalıyorsa sentinel matchup'ı kilitler.
 
-**Flip 3 — Ult ekonomisi dengesi:** Initiator ult hazır + sentinel ult boş ise o round initiator'a. Tersi ise sentinel retake üstün.
+**Flip 3 — Ult dengesi:** Initiator ult dolu + sentinel ult boşsa o round initiator'a. Tersi ise sentinel retake üstün.
 
-**Flip 4 — Saldırı tarafı yarısı:** Double sentinel saldırı yarısında zayıf (round sayısı 5-7 civarı), double initiator saldırı yarısında güçlü (round sayısı 8-10 civarı). Yarı sonundaki round farkı matchup'ı belirler.
+**Flip 4 — Saldırı yarısı:** Double sentinel saldırıda zayıf, initiator saldırıda güçlü. Yarı sonundaki round farkı matchup'ı belirler.
 
-**Flip 5 — Trade partner zinciri:** Sentinel trade partner kopmuşsa initiator entry rahat. Trade zincirlemesi sağlam ise entry tag'lenir.
+**Flip 5 — Trade zinciri:** Sentinel trade partner kopmuşsa entry rahat. Trade zinciri sağlamsa her giriş tag'lenir.
 
-## 7. Pro Coach Notları + Sentinels Coach Test
+## 7. Koç Notları
 
-Pro sahnede double initiator + duelist comp (KAY/O + Sova + Jett) meta'nın merkezinde, double sentinel ise map spesifik (Bind, Split, Lotus) tercih ediliyor. Türk pro sahnesinde BBL maç başlangıcında map pick'e göre comp değiştirir — Bind'de Killjoy + Cypher, Breeze'de Sova + KAY/O. Pro koçluk açısından double sentinel comp'ın zorluğu saldırı tarafında ekonomi yönetiminde: sentinel agent'ları duelist rolünde olmadığı için saldırı entry'si rifler ekonomisine bağlıdır, bu da yarıyı savunmada geçiren takımların bunu map kontrolü ile dengelemesini gerektirir.
+Double initiator + duelist kadrosu (KAY/O + Sova + Jett) Breeze ve Icebox'ta birinci tercih. Double sentinel ise harita spesifik — Bind, Split, Lotus'ta çalışır, Breeze ve Icebox'ta dağılır. Dar haritada sentinel al, açık haritada initiator al.
 
-Double initiator comp'ın zorluğu utility senkronizasyonunda: iki initiator aynı utility türünü atmamalı, roller belirlenmeli. Sova recon rolünde + KAY/O flash rolünde. İki initiator birbirinin işini üstlenirse comp'ın değeri yarıya düşer.
+Double initiator comp'ta en sık yaptığın hata: iki initiator aynı utility türünü atmak. Sova recon rolünde, KAY/O flash rolünde olmalı. İkisi aynı işi yaparsa comp'ın değeri yarıya düşer.
 
-**Meta tier durumu:** Patch 9.x double initiator Tier 1, double sentinel map spesifik Tier 2. Rank seviyesinde Diamond altı oyuncular double sentinel'i pasif savunma olarak oynuyor, bu yanlış — sentinel aktif bilgi üreticidir, pasif değil.
+Double sentinel comp'ta en sık yaptığın hata: saldırı tarafında sentinel agent'larını duelist gibi oynatmak. Saldırıda işin entry açmak değil — rif taşıyan oyuncuyu desteklemek, post-plant molly saklamak.
 
-**Sentinels Coach Test:** "Double initiator bilgi üretir, double sentinel bilgi reddeder. Hangi taraf bilgi yarışını kazanıyorsa matchup o tarafa açık. Initiator bilgi topladığı halde utility'yi entry'ye çeviremiyorsa bilgi ham bilgidir. Sentinel bilgi reddettiği halde rotate'i yönlendiremiyorsa reddediş sessizliktir. İkisi de yarım iştir — tam iş bilgi + harekete dönüşümdür."
+Sentinel aktif bilgi üreticisidir: tripwire tetiklendiğinde konum bilgisi alırsın, alarmbot tag'lediğinde düşman pozisyonu belli olur. Bu bilgiyi rotate'e çevir — çevirmezsen sentinel boşa gitmiş demektir.
+
+**Koç testi:** Double initiator bilgi toplar, double sentinel bilgi kapatır. Bilgiyi girişe çevirmiyorsan utility'yi ikiye böl ve post-plant fazında tut. Bilgiyi kapatıp rotate'i yönetmiyorsan Killjoy'u A'dan B'ye çek, Cypher'ı Mid'e koy. İkisi de aynı anda eksikse Bind veya Split'te sentinel, Breeze veya Icebox'ta initiator comp seç.

@@ -9,107 +9,143 @@ tags: [matchup, breach, kayo, initiator_vs_initiator]
 
 ## 1. Matchup Özü
 
-Breach ve KAY/O disrupt initiator rolünün iki farklı felsefesi. Breach stun-heavy — Fault Line, Flashpoint, Aftershock, Rolling Thunder ile rakibi hareketsizleştirip flash + damage ile ezici engage yaratır. KAY/O suppress-heavy — Zero/Point ile düşman utility'sini iptal eder, Flash/Drive ile takım entry'sine ışık verir, NULL/CMD ile area-wide suppress. Breach rakibi harekete geçirememek üzerine kurulu, KAY/O rakibi utility kullanamaz hale getirmek üzerine. İki initiator karşılaştığında iki farklı disrupt mekaniği çatışır: Breach fiziksel kısıtlama, KAY/O utility kısıtlama. Pro okuma: Breach hardcore utility combo initiator, KAY/O takım destek initiator. Round'un karakteri hangi initiator'ın ekonomisini daha geniş kullanıyorsa o initiator rolü öne çıkıyor.
+Breach düşmanı kilitler. KAY/O düşmanın elini kolunu bağlar.
+
+Breach — Fault Line, Flashpoint, Aftershock, Rolling Thunder. Hepsi duvardan geçer. Düşman hareket edemez, flash'tan kaçamaz, hasardan kurtulamaz.
+
+KAY/O — Zero/Point ile düşmanın tüm yeteneğini kapatır. Flash/Drive ile girişe ışık tutar. NULL/CMD ile bölgedeki herkesin yeteneğini kapatır.
+
+Breach seni yerinde çakılar. KAY/O seni silahsız bırakır.
+
+Düşmanda Killjoy veya Cypher gibi sentinel varsa KAY/O'yu seç — Zero/Point o kurulumları kapatır. Düşman A Main ya da B Long gibi dar koridorda köşeye yapışık oynuyorsa Breach'i seç — Fault Line onları oradan söker.
 
 ## 2. Kim Avantajlı?
 
-Meta tarihinde değişken. Patch 9.x'te KAY/O ve Breach yakın tier'da. KAY/O'nun avantajı sentinel karşıtı meta — suppress sentinel utility'sini iptal eder, Killjoy/Cypher/Vyse comp'ları KAY/O karşısında yarım savunma yapar. Breach'in avantajı sabit defansif setup'lar karşıtı meta — Breach stun ekonomisi savunma anchor'larını pozisyondan çıkarır. Map dağılımı: dokuz map'in dördünde Breach, dördünde KAY/O, birinde nötr. Breach haritaları: Split, Bind, Sunset, Lotus (dar koridor haritalar, Fault Line ve Flashpoint için). KAY/O haritaları: Haven, Ascent, Breeze, Icebox (geniş site haritalar, suppress ve flash area için). Comp rolü: Breach duvar delici flash + stun, KAY/O duvar delici suppress + flash.
+**KAY/O ne zaman daha değerli:**
+Düşmanda Killjoy, Cypher, Vyse gibi sentinel varsa — Zero/Point o sentinelin tüm kurulumunu kapatır. Sentinel maça hakim oluyorsa KAY/O'yu al.
+
+**Breach ne zaman daha değerli:**
+Düşman sabit savunma pozisyonu kuruyorsa — corner'a yapışık oynuyorlarsa, Breach Fault Line onları oradan söker. Dar koridorlu haritalarda Breach etkisi artar.
+
+**Harita dağılımı:**
+- Breach favored: Split, Bind, Sunset, Lotus, Pearl — dar koridorlar, Fault Line ve Flashpoint için.
+- KAY/O favored: Haven, Ascent, Breeze, Icebox — geniş siteler, suppress ve flash için.
+- Nötr: Fracture, Abyss.
 
 ## 3. Key Düellolar
 
-**IF** Breach Fault Line stun duvar arkasından geldi, KAY/O Null/CMD ult aktif
-**MEANING** KAY/O ult alanı içindeki Breach stun utility'si suppress'lenebilir — ult alanı içinde Breach ekonomisi kırık
-**COUNTER** Breach Null/CMD alanı dışında utility pop yapmalı — stun ult dışına çıkarılırsa suppress uygulanmaz
-**WHY** KAY/O Null/CMD alan içindeki tüm düşman utility'sini iptal eder. Breach utility heavy initiator, ult alanı Breach için ölüm bölgesi. Breach oyuncusu ult alanını tanımalı.
+**IF** Breach Fault Line ya da Flashpoint atmak üzereyken KAY/O NULL/CMD ulti aktif
+**MEANING** Ult alanı içindeysen Breach'in hiçbir yeteneği çalışmaz. Fault Line atsan da stun gelmez. Breach o alanda sıradan bir tüfekçi.
+**COUNTER** NULL/CMD'nin alanını gör ve çık. Alan dışında çakılmak yok — yeteneklerini o noktadan at. Ult alanı küçüktür, çevresinden oynanır.
+**WHY** NULL/CMD alandaki herkesi silahsız bırakır. Breach yeteneğe bağlı oynar — yetenek kapandı mı Breach'in o rounddaki etkisi sıfıra düşer.
 
 ---
 
-**IF** KAY/O Zero/Point suppress nakle aktive, Breach stun animasyonu ortasında
-**MEANING** Zero/Point Breach stun utility'sini aktive anında iptal edebilir — Breach stun pop olmadan suppress
-**COUNTER** Breach Zero/Point knife uçuş sesini duyar duymaz utility pop'unu geciktir, knife patlamadan sonra pop yap. Zero/Point range dar
-**WHY** Zero/Point single area suppress. Range sınırlı. Breach bu alandan çıkarsa utility işlevli kalır. Aynı alanda ikisi varsa KAY/O öne geçer.
+**IF** KAY/O Zero/Point knife havada, Breach yeteneklerinden birini kullanmak üzereyken
+**MEANING** Knife patlarsa o yeteneği kullanamayabilirsin. Suppress başlamadan knife sesini yakala.
+**COUNTER** Knife'ın uçuş sesini duyar duymaz dur. Knife patladıktan sonra yeteneğini at. Zero/Point'in menzili küçüktür — o alandan çık, sorun biter.
+**WHY** Zero/Point tek noktayı kapatır, tüm haritayı değil. Breach o noktadan çıkarsa yetenekleri çalışmaya devam eder. Aynı noktada kalırsan KAY/O kazanır bu düelloyu.
 
 ---
 
-**IF** Breach Aftershock damage aftershock kombosu KAY/O Flash/Drive flash ile kombine
-**MEANING** İki initiator aynı takımda ise stun + flash = ezici entry. Karşı takımda ise iki flash birbirini iptal edebilir
-**COUNTER** Aynı takımda combo sırası: Flash/Drive önce, sonra Fault Line, sonra Flashpoint. Karşı takımda flash zamanlamaları çakıştırılmalı
-**WHY** Flash ekonomisi zamanlama üzerinden çalışır. İki flash üst üste etki yaratmaz, sıralı atılırsa ezici. İki karakter aynı takımda sinerji, karşı takımda flash eşitliği.
+**IF** KAY/O tüm Flash/Drive'larını harcadı, Breach'in Flashpoint'i hâlâ cepte
+**MEANING** KAY/O flash'sız taraftayken Breach'in takımı flash'lı taraf.
+**COUNTER** KAY/O'nun son Flash/Drive patladığını görür görmez Flashpoint'i at ve gir. KAY/O tarafı kör girmeden bekler — sen beklemiyorsun.
+**WHY** Flash olmayan taraf girişi başlatamaz. Bu an Breach lehine — kullan.
 
 ---
 
-**IF** KAY/O Flash/Drive round başı tüm flash'ları harcandı, Breach Flashpoint hala cepte
-**MEANING** KAY/O flash cooldown'da, Breach flash ekonomisi hala aktif — round ortası Breach takımı flash avantajlı
-**COUNTER** KAY/O takımı Breach flash'a karşı timing avantajını kaybetti, yakın flash-duel Breach lehine
-**WHY** Flash ekonomisi round içi tempo belirler. Flash-siz takım entry yapamaz, Breach flash'ı bu pencerede tek kaynak.
+**IF** Breach Rolling Thunder atıyor, KAY/O NULL/CMD ulti de hazır
+**MEANING** İkisi aynı alana çakışırsa Rolling Thunder öncelikli — stun düşer, sonra suppress. Farklı alanlara kurulursa ikisi tamamlayıcı olur.
+**COUNTER** Aynı takımdaysanız Rolling Thunder önce, NULL/CMD farklı alana — iki ult iki ayrı cephede çalışır. Rakip takımda ikisi çakışıyorsa KAY/O oyuncusu NULL/CMD'yi Rolling Thunder'ın alanı dışına kur.
+**WHY** Rolling Thunder stun alanı büyük ve knockup var. NULL/CMD alanı daha küçük. Aynı yere koyarsan biri diğerinin etkisini yer. Ayrı alanlarda ikisi birden çalışır.
 
 ---
 
-**IF** Breach Rolling Thunder ult aktif, KAY/O NULL/CMD ult hazır
-**MEANING** İki ult aynı fazda — Rolling Thunder concussive + stun area, NULL/CMD suppress area. İki ult aynı alanda kullanıldıysa öncelik RT
-**COUNTER** KAY/O NULL/CMD ult'u Rolling Thunder range'inden kaçırır — NULL/CMD range'i daha küçük, farklı alana yerleştirilirse iki ult farklı fazlarda değer yaratır
-**WHY** RT alan ult'u, NULL/CMD alan ult'u. Aynı alan çakışma. Farklı alanlar tamamlayıcı. İki ult aynı round kullanılıyorsa koordinasyon kesin.
+**IF** Breach, Rolling Thunder'ı spike patlamadan önce harcadı
+**MEANING** Spike kurulduğunda ya da geri alma anında elinde ult yok. Takımın o kritik anda Breach'ten bekliyor — ama Rolling Thunder gitti.
+**COUNTER** Rolling Thunder'ı spike kurulana kadar sakla. Spike yerleştikten sonra savunma geri almaya geldiğinde at — o anda stun alanı en yüksek etkiyi yapar.
+**WHY** Rolling Thunder'ın en yüksek etkisi savunma geri almaya geldiği anda gelir. Spike kurulmadan atarsan Breach o roundda sıradan bir ajan olarak kalır.
 
 ---
 
-**IF** KAY/O Zero/Point ile Breach'i suppress'lediğinde
-**MEANING** Suppress altında Breach utility kullanamaz — Breach rifler gibi oynar, stun ekonomisi ölü
-**COUNTER** Breach suppress sesini duyar duymaz pozisyon değiştirir, suppress alanından çıkar. Suppress süresi sınırlı, süre dolduktan sonra tekrar aktif
-**WHY** Suppress Breach gibi utility-heavy initiator için ölüm. Breach'in tek savunması pozisyondan çıkmak. KAY/O Zero/Point Breach'e karşı özel silah.
+**IF** KAY/O Zero/Point Breach'e çarptı, suppress aktif
+**MEANING** Suppress kesilene kadar Breach hiçbir yetenek kullanamaz. Sıradan bir tüfekçiyle oynamak zorundasın.
+**COUNTER** Suppress sesini duyar duymaz pozisyonu değiştir ve köşeye gir. Suppress kesilmeden açık alanda durma.
+**WHY** Breach suppress'ten en çok etkilenen ajandır. Zero/Point Breach'e özel bir silahtır KAY/O'nun elinde. Açıkta kalırsan suppress + hasar kombinasyonu seni bitirir.
 
 ---
 
-**IF** Breach Fault Line duvar arkasından stun uygulanırken KAY/O Flash/Drive aynı anda
-**MEANING** Stun + flash üst üste — etki uzatılır, rakip hem stun hem flash'lı. Kombinasyon aynı takımda ezici
-**COUNTER** Aynı takımda bu combo ideal, karşı takımda iki initiator sırayla stun + flash kullanırsa savunma round'u kilitlenir
-**WHY** Disrupt + flash kombinasyonu savunma reaksiyonu imkansız hale getirir. Stun etkisi sırasında flash yemek savunmanın oyuncusunu %100 kör ve hareketsiz bırakır.
+**IF** Aynı takımda Breach + KAY/O var, ikisi aynı anda flash atmak üzere
+**MEANING** İki flash üst üste patlarsa rakip yalnızca bir flash etkisi yer — ikincisi boşa gider.
+**COUNTER** Sıralı at. KAY/O Flash/Drive önce. Rakip gözlerini açar açmaz Breach Flashpoint. Stun + flash sıralı gelirse savunma kilitlenir.
+**WHY** Flash zamanlama üzerinden çalışır. Üst üste iki flash = bir flash. Sıralı iki flash = iki kat etki ve iki ayrı tepki süresi.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
-Breach utility: Fault Line (duvar delici stun), Flashpoint (duvar delici flash), Aftershock (duvar delici damage), Rolling Thunder (ult, area stun). KAY/O utility: Frag/Ment (molly/damage), Flash/Drive (flash), Zero/Point (suppress knife), NULL/CMD (ult, area suppress + combat stim). Karşılaştırma: Flash — Breach Flashpoint, KAY/O Flash/Drive. İki flash farklı mekanik, Flashpoint duvar delici, Flash/Drive thrown. Damage — Breach Aftershock, KAY/O Frag/Ment. İki damage utility eşdeğer, area denial. Stun/Suppress — Breach Fault Line (stun), KAY/O Zero/Point (suppress). İki farklı disrupt. Stun hareket kısıtlar, suppress utility kısıtlar. Disrupt kategorisi farklı işlev.
+**Flash:** Breach — Flashpoint (duvardan geçer, kaçış yok). KAY/O — Flash/Drive (fırlatılır, köşeden bakılabilir). Flashpoint'ten kaçış daha zor çünkü köşenin önemi yok.
 
-Ult karşılaştırması: Rolling Thunder area stun (hareket kısıtlama), NULL/CMD area suppress + combat stim (utility kısıtlama + team buff). RT rakibi hareketsiz, NULL/CMD rakibi utility-siz. RT execute açıcı, NULL/CMD execute destekleyici (team buff). Pro meta'da iki ult ezici — RT round çevirici, NULL/CMD round destekleyici.
+**Hasar:** Breach — Aftershock (duvardan geçer). KAY/O — Frag/Ment (molotov tarzı, yerde patlar). İkisi de alan kilitleme için iyi. Aftershock tek noktaya, Frag/Ment alana yayılır.
 
-Ekonomi: Breach utility tam cooldown tabanlı. KAY/O utility cooldown + Zero/Point reset (ult'ta bir kez tekrar aktive). KAY/O utility ekonomi esnekliği ult'tan gelir, Breach sabit round başı kaynakla çalışır.
+**Kilit yetenek — Stun vs Suppress:**
+- Breach Fault Line: Rakibi kilitler, hareket edemez, nişan alamaz.
+- KAY/O Zero/Point: Rakibin yeteneklerini kapatır, ama hareketi kısıtlamaz.
+Farklı düşmanlara karşı farklı etki. Sentinel varsa Zero/Point; köşeye yapışık oynayan varsa Fault Line.
 
-## 5. Map Bazlı Değişim
+**Ulti karşılaştırması:**
+- Rolling Thunder: Geniş alan, stun + knockup. Girişi açar, savunmayı dağıtır.
+- NULL/CMD: Geniş alan suppress + takım savaş direnci. Düşman yeteneksiz, takımın daha sağlam durur.
+RT o roundu döndürür. NULL/CMD takımı güçlendirerek kazandırır. İkisi farklı an için.
 
-**Split:** Breach favored. B Main ve A Ramps dar koridor Breach Fault Line için ideal. Breach Split meta pick.
+**Not:** Breach yetenekleri her round yenilenir — sabit gelir. KAY/O'nun Zero/Point'i NULL/CMD ulti alanında bir kez sıfırlanır. KAY/O ultisini doğru konumlandırırsa o round fazladan bir suppress daha kazanır.
 
-**Bind:** Breach favored. Hookah ve A Short Breach için. Bind dar yapı Breach stun ekonomisine uygun.
+## 5. Haritaya Göre Değişim
 
-**Sunset:** Breach favored. Mid ve A Main için Breach combo. Sunset Breach meta.
+**Split:** Breach. B Main ve A Ramps dar — Fault Line duvardan geçer, kaçış yok.
 
-**Lotus:** Breach favored. Döner kapılar Breach Fault Line için.
+**Bind:** Breach. Hookah ve A Short Breach stun için biçilmiş kaftan.
 
-**Haven:** KAY/O favored. Üç site KAY/O suppress ekonomisine uygun, suppress Haven'ın sentinel-heavy comp'larına karşı etkin.
+**Sunset:** Breach. Mid ve A Main dar geçişler, Breach combo burada çalışır.
 
-**Ascent:** KAY/O favored. Mid ve A Site için KAY/O Flash/Drive + Zero/Point kombosu. KAY/O Ascent meta.
+**Lotus:** Breach. Döner kapılar Fault Line için ideal — kapı açılır açılmaz stun gelir.
 
-**Breeze:** KAY/O favored. Geniş site KAY/O ult area için ideal.
+**Pearl:** Breach. Mid Link Fault Line için dar — Breach bu haritada etkilidir.
 
-**Icebox:** KAY/O favored. B Site geniş alan KAY/O ult için.
+**Haven:** KAY/O. Üç site var, sentinel oynayan takımlar çok görülür — Zero/Point o sentinelleri kapatır.
 
-**Fracture:** Nötr. İki initiator da Fracture'da oynanabilir.
+**Ascent:** KAY/O. Mid ve A Site geniş — Flash/Drive ve Zero/Point burada yer bulur.
+
+**Breeze:** KAY/O. Geniş siteler NULL/CMD'nin alanını tam doldurur.
+
+**Icebox:** KAY/O. B Site geniş, NULL/CMD alan için iyi.
+
+**Fracture:** Nötr. İkisi de oynanabilir.
 
 **Abyss:** Nötr.
 
-**Pearl:** Breach hafif avantajlı. Mid Link Breach Fault Line için.
+## 6. Round'u Çeviren Anlar
 
-## 6. Flip Moment'ler
+1. **Breach NULL/CMD alanında yakalandı.** Yetenekleri kapandı, sıradan tüfekçi gibi oynar. KAY/O tarafı o roundu kazanır.
 
-1. **NULL/CMD ult area içinde Breach yakalandı.** KAY/O ult aktive alanı Breach utility'sini iptal eder. Breach bu alan içinde yarım initiator. Round KAY/O lehine.
+2. **Zero/Point Breach'e çarptı.** Breach suppress kesilene kadar etkisiz. KAY/O takımı hemen baskı kurmalı — suppress kesilmeden içeri gir.
 
-2. **Zero/Point suppress Breach'de.** KAY/O knife Breach'i tek oyuncu hedefli suppress'lerse Breach bir round utility-siz oynar.
+3. **Rolling Thunder spike kurulduktan sonra atıldı.** Savunma hareketsiz ve dağınık. Takım o anda tam girer — bu an kaçırılmaz.
 
-3. **Rolling Thunder execute.** Breach ult ile execute — KAY/O takımı cevap veremezse RT area stun ile savunma hareketsiz, Breach takımı ezici push.
+4. **Flash sırası yarışı.** İki flash takımı karşı karşıya — kim sıralı atarsa o kazanır. Üst üste atan boşa harcar.
 
-4. **Flash timing savaşı.** İki flash initiator flash timing'i çakıştırırsa rakip kör. Sıralı flash iki kat etki. İki karakter aynı takımda ideal kombo, karşı takımda timing yarışı.
+5. **Sentinel oynayan düşmana karşı.** Killjoy, Cypher, Vyse olan bir takıma karşı KAY/O seç. Zero/Point o kurulumları kapatır — Breach'in buna cevabı yok.
 
-5. **Sentinel-heavy comp avantajı.** KAY/O sentinel-heavy comp'lara karşı avantajlı (suppress turret, trapwire, camera iptal eder). Breach'in bu avantajı yok. Comp karşılaşmasında KAY/O sentinel-heavy rakibe karşı değerli.
+## 7. Koç Notları
 
-## 7. Pro Coach Notları
+**Breach oynuyorsan:**
+- Zero/Point'in menzilini ezberle. O menzil dışında dur — suppress yemezsin.
+- Rolling Thunder'ı spike kurulduktan sonra ya da savunma geri almaya geldiğinde at.
+- NULL/CMD alanını gör ve çık. Alanda kalmak Breach'i işe yaramaz hale getirir.
 
-Pro sahnede iki initiator da meta pick. Seçim comp'a ve map'e göre yapılır. KAY/O double initiator comp'ta Breach ile kombinasyon ideal — aynı takımda iki disrupt ekonomisi ezici. Karşı takımda iki initiator birbirini tanıyan karakterlere sahip. Koçluk ipucu: Breach oyuncusu KAY/O'nun Zero/Point knife range'ini ezberlemeli — knife range dışında pozisyon alırsa suppress yemeyecek. KAY/O oyuncusu Breach'in utility timing'ini okumalı — Breach Fault Line pop'undan önce Zero/Point atarsa stun iptal.
+**KAY/O oynuyorsan:**
+- NULL/CMD'yi yalnız başına kullanma. Takım ult alanında olmalı — yoksa suppress ve ekstra dayanıklılık boşa gider.
+- Zero/Point'i Breach Fault Line'a basmadan önce at. Breach stun attıktan sonra knife atmak işe yaramaz — stun geldi mi suppress fark yaratmaz.
+- Flash/Drive'ları harcadıysan Breach Flashpoint penceresini açar. Bunu bilip köşeye gir.
 
-Yaygın pro hata: Breach oyuncusu Rolling Thunder'ı early round harcar. Doğru: RT post-plant veya retake için. İkinci hata: KAY/O oyuncusu NULL/CMD ult'u solo aktive eder, takım alanı dışında. Doğru: NULL/CMD team push ile birlikte, ult alanında takım olmalı. Üçüncü hata: Flash spam. İki initiator flash'ları zamanlama olmadan pop'larsa rakip sadece bir flash etkisi yer. Doğru: sıralı flash, ikinci flash ilk flash etkisi bittikten sonra.
+**İkisi aynı takımdaysa:**
+Flash sırası: KAY/O Flash/Drive önce, Breach Flashpoint arkasından. Sonrasında Fault Line. Bu sıra savunmayı hem kör hem hareketsiz bırakır. Sıra bozulursa etki yarıya düşer.

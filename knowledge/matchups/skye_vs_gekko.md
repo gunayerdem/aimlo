@@ -9,107 +9,146 @@ tags: [matchup, skye, gekko, initiator_vs_initiator]
 
 ## 1. Matchup Özü
 
-Skye ve Gekko initiator rolünün "creature based" iki karakteri. Skye utility'leri yaratık formunda — Trailblazer (tasmanian, concussive), Guiding Light (kuş flash, manuel), Regrowth (heal). Gekko utility'leri de yaratık formunda — Wingman (küçük robot, flash/plant), Dizzy (uçan flash yaratığı), Mosh Pit (damage zone), Thrash (ult, saldırı yaratığı). Ortak özellik: yaratıklar harcanabilir ama bazıları geri toplanır (Gekko yaratıklarını round içi tekrar kullanabilir, Skye yaratıkları tek kullanım). Farklılık: Gekko recovery ekonomisi, Skye tek atım ekonomisi. Pro okuma: Gekko utility recycling, Skye utility variety (çeşitlilik). Round içinde hangi initiator daha fazla yaratık aktive ederse o rolü dolduruyor.
+İkisi de yaratık bazlı initiator. Ama çalışma şekilleri farklı.
+
+Skye'ın yaratıkları tek kullanım — attın, bitti. Gekko'nunkileri round içinde geri toplayıp tekrar atabilirsin. Bu tek fark matchup'ın tamamını şekillendirir.
+
+Skye'ın elinde şunlar var:
+- Trailblazer: köpek formda, koşar ve kafaya yapışırsa sersemletir
+- Guiding Light: kuş flash, sen yönlendirirsin, ne zaman patlatacağına sen karar verirsin
+- Regrowth: takımı iyileştirir
+- Seekers (ult): map genelinde 3 seeker gönderir, bulduğunu nearsight yapar
+
+Gekko'nun elinde şunlar var:
+- Wingman: robot, flash atar veya spike'ı kendin yerine koyar
+- Dizzy: uçan yaratık, otomatik tarama flash — sen yönlendiremezsin
+- Mosh Pit: alan hasar bölgesi
+- Thrash (ult): kontrol ettiğin saldırı yaratığı, yakaladığını öldürür
+
+Kısa özet: Gekko round içinde daha fazla yaratık atar. Skye daha hassas flash + tek iyileştirme verir.
 
 ## 2. Kim Avantajlı?
 
-Gekko 2023 çıkışından sonra yavaşça meta'ya oturdu, Skye klasik meta pick. İki karakter yakın tier'da. Gekko'nun avantajı recycling — Mosh Pit ve Wingman ve Dizzy round içinde toplanıp yeniden atılabilir. Skye'ın avantajı flash kesinliği — Guiding Light manuel flash, yönlendirilebilir. Guiding Light takımı için ideal entry flash. Gekko Dizzy flash ise otomatik tarama flash, manuel değil. Harita dağılımı: dokuz map'in dördünde Gekko, dördünde Skye, birinde nötr. Gekko haritaları: Haven, Sunset, Lotus, Split. Skye haritaları: Bind, Fracture, Breeze, Ascent. Meta seçim comp'a bağlı — double initiator comp'ta birbirini tamamlarlar.
+İkisi birbirine yakın. Haritaya göre değişir.
+
+Gekko lehine haritalar: Haven, Sunset, Lotus, Split
+Skye lehine haritalar: Bind, Fracture, Breeze, Ascent
+Nötr: Icebox, Abyss
+Skye hafif önde: Pearl
+
+Neden? Gekko'nun Mosh Pit'i dar ve kapalı sitelerde çok daha iyi çalışır. Skye'ın manuel flash'ı geniş ve uzun açılı sitelerde değer kazanır.
+
+İkisini aynı takımda da oynayabilirsin — farklı işler yapıyorlar, çakışmıyorlar.
 
 ## 3. Key Düellolar
 
-**IF** Gekko Wingman plant etti, Skye Guiding Light flash sadece takım için
-**MEANING** Wingman plant savunma geciktiriyor, Guiding Light entry için flash veriyor — iki utility farklı fazda farklı iş
-**COUNTER** Wingman plant sesi duyulduğunda retake takımı Wingman'ı öldürmeli, plant engellemek için. Wingman HP düşük
-**WHY** Wingman tek savunmasız utility — plant yapabilir ama kırılgan. Retake takımı Wingman'ı tek shot ile öldürebilir.
+**IF** Gekko Wingman ile spike'ı koyuyor
+**MEANING** Sen ölmüş olsan bile spike kurulabilir — Wingman bunu halleder. Savunma takımına baskı gecikmeli gelir
+**COUNTER** Wingman'ı spike mesafesinin dışından vur. Yakına gidersen sesin konum verir — Gekko takımı seni duyar. Wingman az HP'li, tek atımda düşer
+**WHY** Wingman kırılgan ama savunma için büyük sorun. Zamanında kesilmezse spike kurulur, retake zorlaşır
 
 ---
 
-**IF** Skye Trailblazer concussive yaratığı site içinde tarama yaptı
-**MEANING** Trailblazer Skye oyuncusunun kontrolünde, dog formda koşar ve tetiklendiğinde concussive uygular
-**COUNTER** Gekko takımı Trailblazer ses sinyalini duyar duymaz pozisyon değiştirmeli. Trailblazer'ı öldürmek için ateş etmek Skye takımına ses bilgisi verir
-**WHY** Trailblazer manuel kontrol + concussive. İki fonksiyon (info + disrupt) aynı utility'de. Gekko'nun eşdeğer utility'si Mosh Pit (damage zone) ama manuel kontrol yok.
+**IF** Skye Trailblazer'ı site içine sürdü
+**MEANING** Trailblazer'ı sen kontrol ediyorsun — kafaya yapışırsa rakip sersemler, hem bilgi hem baskı aynı anda
+**COUNTER** Trailblazer sesini duyar duymaz pozisyon değiştir. Ateş edersen Skye takımına konum bilgisi gider — ses verme, hareket et
+**WHY** Trailblazer tek yaratıkta iki iş yapıyor: bilgi + sersemletme. Gekko'nun benzer şeyi yok
 
 ---
 
-**IF** Gekko Mosh Pit damage zone plant alanına atıldı
-**MEANING** Mosh Pit alan denial + damage, defuse engelleyici. Skye Regrowth heal bu alanda işlemez (alan damage'ı heal'dan yüksek)
-**COUNTER** Skye Regrowth'u Mosh Pit dışında kullanmalı. Defuse Mosh Pit dışından denenmeli (mümkünse plant spot değiştirilmeli)
-**WHY** Mosh Pit post-plant silahı. Gekko'nun area denial kapasitesi Skye'dan üstte. Skye'ın heal'ı Mosh Pit damage'ına karşı yetersiz.
+**IF** Gekko Mosh Pit'i spike alanına attı
+**MEANING** O bölgede duran zarar görür, defuse yapamaz. Skye iyileştirmesi Mosh Pit hasarını karşılayamaz
+**COUNTER** Skye iyileştirmesini Mosh Pit bölgesinin dışında kullan. Mümkünse spike'ı farklı noktaya koy — Mosh Pit önceden tahmin edilen yere atılır
+**WHY** Mosh Pit spike sonrası silahı. Gekko bunu spike kurulduktan sonra saklar — execute sırasında değil, savunma gelince atar
 
 ---
 
-**IF** Skye Seekers ult aktif, 3 seeker takıma ayrı ayrı gidiyor
-**MEANING** Seekers ult map-wide takip — takıma otomatik nearsight uygular, map-wide disrupt
-**COUNTER** Gekko takımı Seekers sesini duyar duymaz cover'a gir, Seeker'ları öldürmek için ateş et. Seeker HP var, öldürülebilir
-**WHY** Skye ult map-wide flash eşdeğeri. Takım koordinasyonlu olmayan karakterler için cezalandırıcı. Gekko Thrash ult kill silahı, Seekers disrupt silahı.
+**IF** Skye Seekers ult attı, 3 seeker takıma dağıldı
+**MEANING** Seeker bulunan herkese nearsight uygular — map genelinde baskı, takım bir anda kör olabilir
+**COUNTER** Seeker sesini duyar duymaz kapağa gir ve seeker'ı vur. HP'si var, öldürülebilir. Açıkta bırakırsan nearsight kaçınılmaz
+**WHY** Skye ult baskı silahı. Gekko Thrash ise tek kişiyi hedef alır, kill odaklıdır. Seekers koordinasyonu bozar, Thrash round'u kapatır
 
 ---
 
-**IF** Gekko Thrash ult yaratığı kontrol ediyor, Skye Guiding Light flash ile ekip destekliyor
-**MEANING** Thrash kill ult, Skye flash takım entry için — iki ult farklı işlevde aynı round. Karşı takımda ise Thrash Skye'ı hedef alabilir
-**COUNTER** Skye Thrash sesini duyar duymaz cover'a, Thrash patlatırken bulunduğu alan belirli — detonation etki alanı sınırlı
-**WHY** Thrash kontrollü kill ult. Skye ult kontrolsüz disrupt ult. Kontrol avantajı Gekko'da ama kontrol skill tavanı yüksek.
+**IF** Gekko Thrash ult ile saldırıyor, Skye Guiding Light flash ile takımı destekliyor
+**MEANING** Thrash yakaladığını öldürür ama alan sınırlı. Skye flash aynı anda takımın girişini kolaylaştırır
+**COUNTER** Thrash sesini duyar duymaz kapağa çekil. Thrash patladığında etki alanı bellidir — dışına çık
+**WHY** Thrash kontrol ister, Seekers istemez. Gekko Thrash'ı iyi kullanmak için pratik gerekir. Skye ult düşük pratikle bile etkili
 
 ---
 
-**IF** Skye Guiding Light flash atıldı, Gekko Dizzy flash aynı round
-**MEANING** İki flash üst üste — flash overlap etki yaratmaz, sıralı atılırsa etki uzar
-**COUNTER** İki flash initiator flash timing'i çakıştırmamalı. Guiding Light manuel (Skye kontrol), Dizzy otomatik tarama
-**WHY** Flash ekonomisi timing tabanlı. Üst üste flash israf, sıralı flash etki uzatır. Manuel flash zamanlama avantajlı, otomatik flash dağılım avantajlı.
+**IF** Skye Guiding Light ile Gekko Dizzy aynı round atıldı
+**MEANING** İkisi aynı anda patlarsa etki uzamaz — sadece birinin süresi çalışır. Sırayla atılırsa toplam kör süre uzar
+**COUNTER** Flash zamanlamasını çakıştırma. Guiding Light'ı sen zamanlıyorsun — Dizzy otomatik tarar, sen bekle, Dizzy bittikten sonra Guiding Light'ı patlat
+**WHY** Guiding Light'ın manuel olması avantaj — ne zaman patlayacağına sen karar verirsin. Dizzy nereye gideceğine karar veremezsin, Guiding Light verebilirsin
 
 ---
 
-**IF** Gekko yaratıkları round içi geri topladı (Wingman, Mosh Pit, Dizzy)
-**MEANING** Gekko recycling — utility yeniden kullanılabilir, round içi ikinci pop mümkün
-**COUNTER** Skye tarafı Gekko recycling'i bildiğinde Gekko utility'sini sayı değil zamanlama tabanlı okur. İkinci pop süresini tahmin et
-**WHY** Gekko recycling ekonomisi tek yönlü avantaj Skye'da yok. Skye tek kullanım utility. Gekko round içi utility sayısı Skye'dan yüksek.
+**IF** Gekko round içinde yaratıklarını geri topladı
+**MEANING** Wingman, Mosh Pit, Dizzy — hepsi geri toplanabilir. Round uzarsa Gekko'nun elinde yeniden yaratık olur
+**COUNTER** Gekko'nun kaç kez yaratık attığını say. Geri topladıysa ikinci dalga geliyor — ilk dalga geçti diye rahatla
+**WHY** Skye'ın yaratıkları geri gelmez. Uzun roundda Gekko elinde daha fazla seçenek taşır
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
-Skye utility: Trailblazer (dog concussive), Guiding Light (kuş flash, manuel), Regrowth (heal), Seekers (ult, seeker'lar). Gekko utility: Wingman (robot flash/plant), Dizzy (uçan flash), Mosh Pit (damage zone), Thrash (ult, saldırı yaratığı). Karşılaştırma: Flash — Skye Guiding Light, Gekko Wingman + Dizzy. Gekko iki flash kaynağı var, Skye bir. Flash sayısı Gekko lehine. Damage/area denial — Skye yok (Trailblazer damage value düşük), Gekko Mosh Pit. Area denial Gekko lehine. Heal — Skye Regrowth, Gekko yok. Heal kategorisi Skye lehine tek yönlü. Info — Skye Trailblazer manuel, Gekko utility info yok.
+**Flash:** Skye 1 flash (Guiding Light, manuel). Gekko 2 flash (Wingman + Dizzy). Flash sayısı Gekko lehine. Ama Skye'ın flash'ını sen yönlendirirsin — Dizzy nereye gideceğine kendi karar verir.
 
-Ult karşılaştırması: Seekers map-wide disrupt, Thrash kontrollü kill. İki ult farklı işlev. Seekers çok oyunculu disrupt, Thrash tek oyuncu kill odak. Pro meta'da Seekers round çevirici, Thrash round asist. Skye ult round çevirme kapasitesi Gekko ult'tan yüksek.
+**Alan hasarı:** Sadece Gekko'da var — Mosh Pit. Skye'da yok.
 
-Ekonomi: Skye tek kullanım, Gekko recycling. Round içi utility sayısı Gekko lehine. Skye'ın avantajı heal — heal round-round sürekli destek sağlar, Gekko'da bu yok. Takas sonucu: Gekko utility bolluğu, Skye utility çeşitliliği + heal.
+**İyileştirme:** Sadece Skye'da var — Regrowth. Gekko'da yok. Takım hasar aldıkça bu fark büyür.
 
-## 5. Map Bazlı Değişim
+**Bilgi:** Skye Trailblazer ile aktif bilgi toplar, sen kontrol edersin. Gekko'nun yaratıkları bilgi değil baskı için çalışır.
 
-**Bind:** Skye favored. Teleporter ve dar site Skye Trailblazer için uygun.
+**Ult karşılaştırması:** Seekers tüm takımı etkiler, Thrash tek kişiyi öldürür. Seekers round'un akışını bozar, Thrash round'u kapatır.
 
-**Fracture:** Skye favored. İki taraflı attack Skye flash + heal kombosu için ideal.
+Kısa özet: Gekko daha fazla yaratık atar. Skye iyileştirme verir ve flash'ı daha hassas kullanır.
 
-**Breeze:** Skye favored. Geniş site + uzun rotate Skye heal için.
+## 5. Haritaya Göre Değişim
 
-**Ascent:** Skye favored. Mid ve A Site Skye Guiding Light manuel flash için.
+**Bind:** Skye önde. Teleporter geçişleri ve dar siteler Trailblazer için biçilmiş kaftan.
 
-**Haven:** Gekko favored. Üç site Gekko utility bolluğu için.
+**Fracture:** Skye önde. İki yönden gelen baskıda flash + iyileştirme kombinasyonu çok işe yarar.
 
-**Sunset:** Gekko favored. Dar yapı Gekko Mosh Pit için.
+**Breeze:** Skye önde. Geniş siteler Guiding Light'ın manuel kontrolünü değerli kılar — Dizzy burada kaybolur.
 
-**Lotus:** Gekko favored. Döner kapılar + post-plant lineup'lar Gekko Wingman plant için.
+**Ascent:** Skye önde. Mid kontrolü ve A Site açıları Guiding Light için ideal.
 
-**Split:** Gekko favored. B Main ve A Site Gekko Mosh Pit için.
+**Haven:** Gekko önde. Üç site Gekko'nun yaratık bolluğunu değerlendirmek için en iyi yer.
 
-**Icebox:** Nötr. İki initiator da Icebox'ta oynanır.
+**Sunset:** Gekko önde. Dar yapılar Mosh Pit'i post-plant'ta çok güçlü kılar.
+
+**Lotus:** Gekko önde. Döner kapılar + Wingman plant kombinasyonu savunmayı sürekli zorlar.
+
+**Split:** Gekko önde. B Main ve A Site dar yapısı Mosh Pit'e alan açar.
+
+**Icebox:** Nötr. İkisi de burada oynanır, harita belirleyici değil.
 
 **Abyss:** Nötr.
 
-**Pearl:** Skye hafif avantajlı.
+**Pearl:** Skye hafif önde.
 
-## 6. Flip Moment'ler
+## 6. Round Çevirebilecek Anlar
 
-1. **Wingman plant round çevirme.** Gekko Wingman ile plant yapar — oyuncu ölmüş bile olsa plant. 1vX clutch Gekko lehine flip.
+1. **Wingman plant.** Gekko ölmüş olsa bile Wingman spike'ı koyar. 1vX durumunda Gekko tarafı hâlâ kazanabilir.
 
-2. **Skye heal round uzatma.** Skye Regrowth ile takımı heal eder, full HP'ye geri getirir. Round ekonomisi Skye takımı lehine, Gekko eşdeğer heal yok.
+2. **Skye iyileştirmesi.** Takım hasar aldı, Skye geri getirdi — Gekko bu işi yapamaz. Uzun roundda bu fark kapanmaz.
 
-3. **Seekers ult map-wide.** Skye ult tüm rakip takımı nearsight uygular. Gekko takımı cover alamazsa round'un sonu.
+3. **Seekers ult.** Tüm rakip takım aynı anda kör olursa round dönebilir. Rakip kapağa girmeyi başaramazsa Seekers tek başına yeter.
 
-4. **Gekko recycling avantajı.** Gekko utility round içi yeniden kullanılır. Skye tek kullanım. Uzun round'da Gekko utility sayısı yüksek.
+4. **Gekko ikinci dalga.** Round uzadı, Gekko yaratıklarını topladı ve yeniden attı — Skye'ın elinde artık yaratık yok. Sayı farkı kapanır.
 
-5. **Mosh Pit retake engelleyici.** Gekko Mosh Pit post-plant retake engelleyici. Skye takımı heal ile damage'ı tampon yapmaya çalışır ama Mosh Pit damage heal'dan yüksek.
+5. **Mosh Pit retake keser.** Skye takımı geri almak için geliyor ama Mosh Pit spike alanını tutuyor. İyileştirme Mosh Pit hasarını karşılamaz — bölge dışından defuse denemesi şart.
 
-## 7. Pro Coach Notları
+## 7. Koç Notları
 
-Pro sahnede iki initiator da meta pick. Gekko double initiator comp'larda sıkça tercih edilir (recycling utility nedeniyle). Skye heal comp'larda tercih edilir (Sage + Skye çift heal belirli maçlarda görülür). Koçluk ipucu: Skye oyuncusu Gekko Wingman plant tehditine hazırlıklı olmalı — Wingman HP düşük, hızlı öldürülmeli. Gekko oyuncusu Skye Trailblazer'ı öldürmek için ses sinyali dinlemeli.
+**Skye oynuyorsan:**
+- Guiding Light'ı köşe geçerken patlat — açık alanda patlatan takımı da kör eder
+- Flash yönünü round başında kafanda planla, girişte karar verme
+- Wingman'ı erken kes, spike kurulmasın — ama yakına gitme, sesin konum verir
+- Ult'u spike kurulduktan sonra sakla, round başında harcama
 
-Yaygın pro hata: Skye oyuncusu Guiding Light'ı yanlış yönde manuel kontrol eder, flash takımın arka tarafına döner. Doğru: flash yönü round öncesi planlı. İkinci hata: Gekko oyuncusu Mosh Pit'i yanlış yere atar. Doğru: Mosh Pit post-plant için saklanmalı, execute utility değil post-plant utility. Üçüncü hata: Her iki initiator da ult'u round başı pop'lar. Doğru: ult post-plant/retake için.
+**Gekko oynuyorsan:**
+- Mosh Pit'i spike kurulduktan sonra at — execute'ta kullanma, post-plant için sakla
+- Dizzy ve Guiding Light aynı anda havadaysa seninkini beklet, Skye'ınki bitince at — üst üste boşa gider
+- Wingman ile plant yapıyorsan Wingman'ın konumunu düşman görmeden ayarla — Wingman görünür, seni ele verir
+- Yaratıklarını geri topla: round uzadıkça bu avantaj artar, unutursan boşa gider

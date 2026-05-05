@@ -11,113 +11,128 @@ tags: [matchup, neon, breach, duelist, initiator]
 
 ## 1. Matchup Özü
 
-Neon sprint + slide + stun ile Breach'in fault line stun + flash + aftershock zincirini karşılayan fast duelist, Breach ise wall-pierce stun ile Neon'un sprint hattını iptal eden area CC initiator. Matchup Breach stun timing'i ile Neon sprint disiplinini test eder.
+Bu matchup tek soruya indirgenir: Neon sprint hattına girmeden önce mi ulaşır, Breach sarsma hattı kurulmadan önce mi yakalar?
+
+Breach, duvardan geçen sarsma + flash + artçı dalga ile Neon'un sprint koridorunu kapatır. Neon, sprint + slide + sarsma ile Breach'in bu kurulum süresini yakalar. Kim daha hızlı hareket ederse avantaj onda.
 
 ## 2. Kim Avantajlı?
 
-**Neon lehine durumlar:**
-- Uzun koridorlarda (Breeze, Icebox, Pearl Mid) — sprint hızı Breach stun range'inden önce koridoru kapatır
-- Breach solo utility durumunda — stun tek başına kill vermez, trade hazır değilse sprint avantajlı
-- Neon ult hazır (Overdrive) — ult sırasında sprint + beam kombosu Breach pozisyonunu yakalar
-- Breach utility harcanmışken — Neon flank serbest, sprint hattı utility'siz
+**Neon lehine:**
+- Uzun koridorlarda (Breeze, Icebox, Pearl Mid) — Neon sprint hızı Breach sarsma menzilinden önce koridoru geçer
+- Breach becerileri kullanılmışsa — sarsma yok, flash yok, Neon flank serbestçe açar
+- Neon ulti hazırsa — sprint + beam Breach'in kurulum süresini sıfırlar
 
-**Breach lehine durumlar:**
-- Close-range choke'larda (Split, Bind, Sunset) — fault line dar koridor Neon sprint'ini iptal
-- Neon sprint cooldown'dayken — mobility yok, Breach stun + flash kombosu lethal
-- Breach flash Neon sprint penceresinde — flash aim'i kör eder, sprint hattı predictable
-- Post-plant Rolling Thunder — area stun Neon'un off-angle oyununu iptal
+**Breach lehine:**
+- Dar boğazlarda (Split, Bind, Sunset) — sarsma koridorun tamamını kapar, sprint kaçacak yer bulamaz
+- Neon sprint bekleme süresindeyken — o anda Neon sıradan bir düelist, Breach sarsma + flash öldürür
+- Breach flash sprint penceresiyle çakışırsa — Neon kör + sarsılmış, açı kapanır
+- Breach ulti post-plant'ta — duvardan geçer, Neon kapı arkasında da yakalanır
 
-**Balanced:** Haven, Ascent, Lotus gibi orta mesafeli map'lerde matchup stun lineup ekonomisine ve sprint hattı varyasyonuna bağlı.
+**Dengeli:** Haven, Ascent, Lotus — kim beceri ekonomisini daha iyi yönetirse öne geçer.
 
 ## 3. Key Düellolar
 
-**IF** Breach fault line Neon'un sprint hattında aktive oldu
-**MEANING** Sprint stun içinde iptal, Neon stagger + dashsız, hareket hızı sıfırlandı
-**COUNTER** Neon sprint hattını fault line lineup dışında seç. Fault line ses indicator sprint cancel sinyali.
-**WHY** Fault line wall-pierce area stun. Neon sprint sabit koridor kullandığında stun koridoru tamamen kapsar.
+**IF** Breach fault line Neon'un sprint hattında aktif oldu
+**MEANING** Sprint durur. Neon yavaşlar, slide yok, açıkta kalır.
+**COUNTER** Sprint hattını değiştir — her round aynı koridoru kullanma. Breach 2 round sonra o hattı ezberler, 3. roundda zaten orada bekler. Fault line sesini duyar duymaz sprint'i kes, köşeye çekil.
+**WHY** Fault line duvardan geçer, koridorun tamamını kapar. Aynı hattı tekrarlarsan Breach seni görmeden yakalar.
+
+---
+
+**IF** Breach flash + fault line zinciri geldi — flash önce, ardından fault line
+**MEANING** Neon flash gelince refleksle sprint atar, tam o anda fault line içine girer. İkisi çakışır, Neon kör + sarsılmış, açık hedef.
+**COUNTER** Flash sesini duyar duymaz sprint'i kes, köşeye çekil. Flash geçene kadar bekliyorsun — sonra sprint'e geçersin. Sprint içinde flash'a girme.
+**WHY** Breach bu sırayı bilerek kurar: flash önce gelir, Neon sprint refleksi tetiklenir, fault line içine çeker. Sırayı tanırsan refleksini kırarsın.
 
 ---
 
 **IF** Breach flash Neon'un slide peek hattında
-**MEANING** Flash Neon'u kör, slide aim kaybı, close range duelde Neon savunmasız
-**COUNTER** Neon slide peek'i flash sesi timing'inden önce at. Ses indicator slide timing'ini değiştirir.
-**WHY** Slide'ın gücü surprise + aim. Flash iki özelliği de iptal eder — slide görsel engeli altında bedava hedef.
+**MEANING** Flash Neon'u kör eder, slide nişanı gider, yakın mesafede savunmasız.
+**COUNTER** Flash sesini duyduysan slide'ı atma — bekle. Ses geldi mi pozisyonu değiştir, sonra slide.
+**WHY** Slide'ın gücü sürpriz + nişan. Flash ikisini de sıfırlar, kör slide bedava hedef olur.
 
 ---
 
-**IF** Neon sprint ile Breach'in entry pozisyonuna close range'e ulaştı
-**MEANING** Close range'de Neon stun + rifle Breach'in fault line lineup penceresini iptal eder
-**COUNTER** Breach Neon sprint sesini duyduğu an fault line corner'dan at. Close range Breach lineup zor, açıda fault line çıkış.
-**WHY** Breach'in gücü lineup setup'ta. Close range lineup süresi yok, Neon'un hızı lineup'ı yetişemez yapar.
+**IF** Neon sprint ile Breach'in yakın mesafesine ulaştı
+**MEANING** Bu mesafede Breach'in sarsma kurulum süresi yok. Neon sarsma + tüfek Breach'i dağıtır.
+**COUNTER** Eğer Breach'sen: Neon sprint sesini duyar duymaz köşeden sarsma at. Yakın mesafede kurulum zamanın olmaz, ama köşe açısından atabilirsin.
+**WHY** Breach'in gücü kurulum süresinde. Neon hız avantajıyla o süreyi yok eder.
 
 ---
 
-**IF** Breach Rolling Thunder ultunu Neon'un post-plant pozisyonuna attı
-**MEANING** Area stun wall-pierce Neon'u cover arkasında bile yakalar, sprint iptal
-**COUNTER** Neon ult sesini duyduğu an dik açıda sprint. Rolling Thunder directional, dik açıdan çıkış.
-**WHY** Rolling Thunder sabit yön. Neon sprint hızı ult hat dışına ulaşabilir.
+**IF** Breach ulti Neon'un post-plant pozisyonuna geldi
+**MEANING** Kapı arkasında bile yakalar. Sprint durur, Neon açıkta.
+**COUNTER** Breach ulti sesini duyar duymaz ulti yönüne dik sprint at. Ulti sabit yönde ilerler, dik açıdan çıkarsan menzil dışına çıkarsın.
+**WHY** Ulti yön değiştirmez. Neon sprint hızı o hattan çıkmak için yeterli — durma.
 
 ---
 
-**IF** Neon Overdrive ile Breach pozisyonunu basıyor
-**MEANING** Beam damage + sprint hızı, Breach stun lineup'ı kurmak için süre bulamaz
-**COUNTER** Breach Overdrive sesine reaksiyon stun'u hızlı kurması gerek. Reaktif stun Neon'un ult süresinde.
-**WHY** Ult süresi kısa ama damage yüksek. Breach reflex stun hızlı değilse ult süresince yakalanır.
+**IF** Neon Overdrive ile Breach'e baskı kuruyor
+**MEANING** Beam + sprint birlikte Breach'in sarsma kurulum süresini sıfırlar.
+**COUNTER** Eğer Breach'sen: Overdrive sesini duyar duymaz refleksle sarsma at. Geç kalırsan ulti boyunca yakalanırsın.
+**WHY** Ulti süresi kısa ama hasar yüksek. Breach bu pencerede hızlı tepki vermezse temizlenir.
 
 ---
 
-**IF** Breach aftershock Neon'un sprint koridoruna attı
-**MEANING** Aftershock wall-pierce damage sprint koridorunu tarar, Neon HP kaybı
-**COUNTER** Neon sprint koridorunu aftershock lineup dışı seç. Aftershock sabit lineup, bypass öğrenilir.
-**WHY** Aftershock damage + area. Koridor sabit ise damage kaçınılmaz, alternatif koridor damage dışı.
+**IF** Breach aftershock Neon'un sprint koridoruna girdi
+**MEANING** Duvardan geçen hasar koridoru tarar, Neon can kaybeder.
+**COUNTER** O koridoru kullanma. Aftershock kurulum yeri sabittir, 1 kez gördüysen artık biliyorsun, alternatif hattan geç.
+**WHY** Koridor sabitse hasar kaçınılmaz. Başka hat kullanırsan aftershock boşa gider.
 
 ---
 
-**IF** Neon stun ile Breach'i yakaladı
-**MEANING** Neon stun Breach'in flash throw animasyonunu iptal eder, Breach utility'siz
-**COUNTER** Breach utility throw'u corner cover arkasında. Neon stun range sınırlı, corner throw güvenli.
-**WHY** Neon'un tek CC'si stun. Breach stun'dan throw animasyonunu koruyabilir eğer cover disiplini varsa.
+**IF** Neon sarsma Breach'i yakaladı
+**MEANING** Breach'in flash atış animasyonu kesilir, becerilerini kullanamaz.
+**COUNTER** Eğer Breach'sen: becerileri köşe arkasından at. Neon sarsma menzili sınırlı, köşenin gerisinden at, sarsma ulaşamaz.
+**WHY** Neon'un tek durdurucu becerisi bu sarsmadır. Engel arkasında atarsan animasyon kesilmez.
 
-## 4. Utility Takası
+## 4. Beceri Karşılaştırması
 
-Neon mobility + CC (sprint + slide + stun + fast lane + ult), Breach stun + flash + damage (fault line + flash + aftershock + ult). İki agent da CC user. Neon'un stun'u single target short range, Breach'in stun'u area wall-pierce. Breach stun Neon'un sprint kimliğini iptal eder, Neon'un stun'u Breach'in lineup animasyonunu iptal eder. Matchup asimetrik: Breach cover'ı aşar, Neon hızı ile lineup öncesine ulaşır. Ult ekonomisi: Overdrive 7 point, Rolling Thunder 9 point — Breach ult pahalı.
+Neon: sprint + slide + sarsma + fast lane + ulti — hız ve tek hedef durdurma.
+Breach: fault line + flash + aftershock + ulti — alan durdurma, duvardan geçer.
 
-## 5. Map Bazlı Değişim
+Breach'in sarsmasi alanı kaplıyor, Neon'unki tek kişi. Ama Neon hız avantajıyla Breach'in kurulum süresine ulaşıyor. Breach engeli aşar, Neon hızla kurulumu engeller.
 
-**Split (Breach avantajlı):** Dar koridorlar Breach fault line meta. Neon sprint stun koridorunda iptal.
+Ulti maliyeti: Neon Overdrive 7 puan, Breach ulti 9 puan. Breach daha pahalı — bunu hesaba kat.
 
-**Bind (Breach avantajlı):** Close range stun Neon'un sprint'ini iptal.
+## 5. Haritaya Göre Değişim
 
-**Sunset (Breach avantajlı):** Dar choke'lar Breach'in.
+**Split (Breach avantajlı):** Dar koridorlar. Sarsma her yeri kapar, sprint kaçacak yer bulamaz.
 
-**Ascent (Balanced):** Breach A Main entry meta, Neon Mid sprint.
+**Bind (Breach avantajlı):** Yakın mesafe. Sarsma sprint'i durdurur, flash kapatır.
 
-**Haven (Balanced):** Breach B Main fault line, Neon A Short sprint.
+**Sunset (Breach avantajlı):** Dar geçitler Breach'in lehine.
 
-**Icebox (Neon avantajlı):** Uzun Mid sprint hattı Breach range dışı.
+**Ascent (Dengeli):** Breach A Main'de güçlü, Neon Mid sprint kullanır — kim becerileri iyi yönetirse öne geçer.
 
-**Breeze (Neon avantajlı):** Geniş alan sprint meta.
+**Haven (Dengeli):** Breach B Main'de sarsma, Neon A Short sprint — harita ikisine de yer veriyor.
 
-**Pearl (Neon avantajlı):** Mid uzun koridor sprint için.
+**Icebox (Neon avantajlı):** Mid uzun koridor — Breach sarsma menzili bu hattı kapatamaz.
 
-## 6. Flip Moment'ler
+**Breeze (Neon avantajlı):** Geniş alan sprint engel tanımaz.
 
-**Flip 1 — Fault line Neon sprint'ini iptal:** Sprint stun içinde, mobility kaybı.
+**Pearl (Neon avantajlı):** Mid uzun hat, sprint Breach'i geçer.
 
-**Flip 2 — Neon close range'e ulaştı:** Breach lineup süresi olmadığında Neon aim duelde.
+## 6. Maçı Döndüren Anlar
 
-**Flip 3 — Overdrive Breach pozisyonu yakaladı:** Ult beam damage lineup öncesi Breach'i bitirir.
+**Döngü 1 — Fault line sprint'i durdurdu:** Neon aynı hattı tekrarladı, Breach bekliyordu. Hareketlilik gitti.
 
-**Flip 4 — Rolling Thunder cover aşımı:** Neon cover'da stun altında.
+**Döngü 2 — Neon yakın mesafeye ulaştı:** Breach kurulum yapamadı, Neon nişan düellosu kazandı.
 
-## 7. Pro Coach Notları
+**Döngü 3 — Overdrive Breach'i yakaladı:** Breach refleks sarsma atmadı, ulti boyunca temizlendi.
 
-**VCT'de nasıl oynanıyor:** Breach ve Neon pro meta'da yüksek pick rate. Matchup close range map'lerde sık. Pro Breach stun lineup'ını Neon sprint hattına göre hazırlar. Pro Neon sprint hattını round'lara göre değiştirir.
+**Döngü 4 — Ulti post-plant yakaladı:** Neon kapı arkasında durdu, sarsma altında kaldı.
 
-**Meta tier durumu:** Neon A tier, Breach A tier. Head-to-head close range'de Breach, uzun map'lerde Neon.
+## 7. Koç Notları
 
-**** Fault line stun süresi sprint cooldown'u ile karşılaştırmalı.
+**Neon oynuyorsan:**
+Sprint hattını üst üste 2 round kullanma. Breach 2 roundda o hattı ezberler, 3. roundda sarsma zaten orada hazır. Her round en az 1 farklı koridor seç.
 
-**** Rolling Thunder wall-pierce kapsamı — Neon sprint ult hat'ı dışına çıkacak kadar hızlı mı?
+Flash sesini duyduğunda sprint içindeysen dur. Kör sprint fault line'a çeker — bu zinciri bilerek kuruyorlar.
 
-**Coach test:** "Breach Neon'un sprint'ini stun'la iptal eder. Neon stun'dan kaçabilmek için sprint hattını her round farklı seçer. Varyasyon disiplinliyse Neon bypass, sabitse Breach yakalar."
+**Breach oynuyorsan:**
+Neon sprint sesini duyar duymaz fault line at — bekleme. Yakın mesafede kurulum süren olmaz, ama ses geldiği anda atarsan yetişirsin.
+
+Flash'ı fault line'dan önce at. Neon flash görünce refleksle sprint atar, tam o anda fault line içine çekersin.
+
+**Özet:** Neon aynı sprint hattını tekrarlarsa Breach yakalar. Neon hattı değiştirirse Breach boşa kurar. Bu matchup tamamen Neon'un hat varyasyonuna bağlı.

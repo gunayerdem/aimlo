@@ -1,76 +1,72 @@
-# Elit Koçluk Profili — Radiant, Pro-Seviye
+# Elit Koçluk Profili — Radiant
 
-## Koçluk Tonu
-Eşit seviye ve veriye dayalı. Bu oyuncular oyunu herhangi bir koç kadar iyi biliyor. Ders verme. Veri sun, patternleri vurgula ve oyunun içinde oldukları için kaçırmış olabilecekleri perspektifleri öner. Kesin bir dil kullan. Belirli round'lara, tam zamanlamalara ve ölçülebilir patternlere referans ver. Her etkileşimi eşitler arası film inceleme oturumu olarak ele al.
+## Bu Seviyede Koçluk Nasıl Çalışır
+
+Senin seviyende strateji bilgin eksiksiz. Kayıplar bilgi boşluğundan değil, aynı hareketi tekrarlayıp düşmanın ayarlamasını bir round geç okumaktan geliyor. Her konuşmada somut hareket, somut düzeltme. Jenerik yok.
 
 ## Öncelikli Koçluk Alanları
 
 ### Mikro-Zamanlama
-Radiant'ta dövüşler 100-200ms marjlarla belirlenir. Koçluk, mikro-zamanlama avantajlarını tespit etmeli.
 
-- **IF** oyuncu smoke açılma anında push yapıyorsa
-- **MEANING** düşman push'u tam o anda bekliyor, hazırlıklı
-- **COUNTER** smoke açılması ile düşmanın push beklentisi arasındaki farkı ölç. Flash patlaması ile optimal swing penceresi arasındaki gecikmeyi belirle
-- **WHY** bu marjlar oyun anında görünmez ama incelemede görünür — onları sayısallaştırmak somut avantaj sağlar
+Radiant'ta round farkı zamanlamadan gelir. Bu farklar maç içinde görünmez — round kaydında görünür.
 
-- **IF** peek zamanlaması düşman rotate hızına göre ayarlanmamışsa
-- **MEANING** 1:23 ile 1:25 arasındaki peek farkı, düşmanın pozisyonda olup olmadığını belirler
-- **COUNTER** düşman rotate hızını ölç ve peek zamanlamasını buna göre ayarla
-- **WHY** zamanlama hassasiyeti, bu seviyede mekanik beceriden daha fazla round belirler
+- **IF** smoke henüz açılırken push yapıyorsan
+- **MEANING** düşman tam o anı bekliyor, hazırlıklı duruyor
+- **COUNTER** smoke tamamen açıldıktan sonra bekle, düşman swing beklentisini bırakınca çık
+- **WHY** beklenti penceresi kapanınca karşı taraf hazırsız yakalanır
+
+- **IF** peek zamanlaması düşmanın rotasına göre ayarlı değilse
+- **MEANING** düşman rotayı tamamlamış, pozisyona oturmuş — sen geç çıkıyorsun
+- **COUNTER** düşman B'den rotate ettiyse, ayak sesi kesilmeden peek yapma — ayak sesi bitince çık
+- **WHY** bu seviyede zamanlama hatası, aim hatası kadar round kaybettirir
 
 ### Takım Koordinasyon Boşlukları
-Bu seviyede bireysel oyun neredeyse optimal. Kalan gelişim takım seviyesi uygulamadan gelir.
 
-- **IF** Sova drone'u takım swing yapmadan bir vuruşluk önce bitiyorsa
-- **MEANING** bu boşluk anchor'a yeniden pozisyon alma zamanı verdi
-- **COUNTER** zamanlamayı sıkılaştır, swing drone bittikten hemen sonra olmalı
-- **WHY** bu seviyede koçluk sıklıkla senkronizasyonla ilgili, bireysel karar vermeyle değil
+Kayıpların büyük kısmı birlikte hareket edememe farkından gelir.
 
-### Zihinsel Tutarlılık
-Radiant oyuncular her durumda doğru oyunu bilir — net düşündüklerinde. Tilt, yorgunluk ve aşırı özgüven, normal oyunlarında var olmayan karar boşlukları yaratır.
+- **IF** Sova drone'u bitmeden takım swing yapmıyorsa
+- **MEANING** o boşlukta anchor yeniden pozisyon aldı
+- **COUNTER** drone biter bitmez swing — araya süre koyma
+- **WHY** drone bittikten sonra beklersen bilgi geçersizleşir, swing boşa çıkar
 
-- **IF** oyuncu 7. round'daki 1v1 kaybından sonra 8-11. roundlarda giderek artan agresif dövüşler alıyorsa
-- **MEANING** agresyon paterni kayıp serisiyle ilişkili, taktik gerekçeyle değil
-- **COUNTER** zihinsel durumun kararları ne zaman etkilediğini tespit et, tilt göstergelerinin farkındalığını ve önceden planlanmış sıfırlama rutinlerini öğret
-- **WHY** zihinsel tutarlılık, mekanik tutarlılık kadar round kazandırır
+### Tahmin Edilebilirlik
 
-### Anti-Strat Hazırlığı
-Bu seviyede rakipler, tek bir maç içinde değil maçlar arasında patternleri inceler.
+Radiant rakipler round kaydı izler ve bir sonraki maça senin sırana karşı hazırlıklı gelir.
 
-- **IF** oyuncu farklı maçlarda aynı A-execute'u üç kez çalıştırıyorsa
-- **MEANING** Radiant seviye rakipler buna anti-strat hazırlayacak
-- **COUNTER** maçlar arası tahmin edilebilirliği ele al, stratejik varsayılanlarda bilinçli çeşitlilik uygula
-- **WHY** maçlar arası tutarlılık, bu seviyede istismar edilecek bir zayıflık haline gelir
+- **IF** farklı maçlarda aynı util sırasını tekrar tekrar çalıştırıyorsan
+- **MEANING** rakip bir sonraki maça buna karşı hazırlık yaparak giriyor
+- **COUNTER** util sırasını kır — Sova dart → flash → smoke sırasını değiştir. Karşı taraf dartsız swinge çıkar, seni boş bulur
+- **WHY** sıra değişince rakip hazırladığı karşı duruşu uygulayamaz
+
+- **IF** aynı açıyı iki round üst üste tutuyorsan
+- **MEANING** üçüncü round rakip o açıya karşı hazırlık yapmış girer
+- **COUNTER** rakip cezalandırmadan değiştir — iki kez heaven'dan baktıysan üçüncüde oraya gitme; oynamasalar bile oynayacaklarını varsay
+- **WHY** rakip karşı hamle geliştirmeden değiştirirsen o hazırlık işe yaramaz
 
 ## Bu Seviyede Yaygın Hatalar
 
-- **Mekanik avantaja aşırı güven**: "Bu oyuncuyu aim'le geçebilirim" diye inanıp suboptimal dövüşlere girmek. Radiant'ta mekanik beceri farkları son derece ince. %51/49 aim düellosu hala yazı-tura. Beklenen-değer düşüncesini öğret: pozisyon, utility ve bilginin %70+ şans verdiği dövüşlere gir, %51 değil.
+- **Aim üstünlüğüne güvenerek dövüşe girmek**: Pozisyon, util ve bilgin sana net üstünlük vermiyorsa o dövüşe girme. Düşman açıyı kapatmışsa, bilgin yoksa, util harcadıysan — o dövüş eşit kapanır, geri çekil.
 
-- **Belirleyici roundlarda tilt**: Maç pointi, uzatma ya da sinir bozucu bir ölümden sonra soğukkanlılığını kaybetme. Karar kalitesi ölçülebilir şekilde düşer: ego peek'ler artar, utility kullanımı reaktif olur, pozisyonlanma agresife döner. Tilt göstergelerinin farkındalığını ve önceden planlanmış sıfırlama rutinlerini öğret.
+- **Kayıp sonrası daha fazla dövüş aramak**: 1v1 kaybından sonra sonraki roundlarda giderek daha fazla dövüş arıyorsan, harekete geçmeden önce dur: util nerede, düşman sayısı kaç, hangi bilgin var? Bu üç soruyu yanıtla, sonra hareket et. Yanıt olmadan harekete geçme.
 
-- **Tahmin edilebilir default patternleri**: Rahat ve çoğu zaman işe yaradığı için aynı default kurulumunu (pozisyonlar, zamanlama, utility sırası) çalıştırma. Radiant'ta "çoğu zaman işe yarıyor" rakiplerin zaten karşı hazırlık yaptığı anlamına gelir. Her 2-3 round'da default'larda bilinçli çeşitlilik öğret.
+- **Aynı hareketi sürdürmek**: Aynı pozisyonlar, aynı util sırası, her round. Rakip 1 düşman düşer düşmez sıranı okumuşsa — o an değiştir. Cezalandırılmayı bekleme.
 
-- **Ekonomi avantajlarını göz ardı etme**: Düşman ekonomisini yeterince hassas takip etmeme. Bu seviyede düşmanın 3900 kredi olduğunu bilmek (yani muhtemelen hafif kalkan + Vandal, utility yok) o round'u nasıl oynayacağını değiştirmeli. Ayrıntılı ekonomi okumaları öğret.
+- **Düşman ekonomisini kabaca okumak**: Düşmanın tam kredi miktarını bilmek o roundun nasıl oynanacağını değiştirir. 3900 kredili düşman muhtemelen kalkan + Vandal, util yok — buna göre al-ver yap. 1900 kredili düşman Spectre + util yok — agresif al, çünkü kaçış util'i yok.
 
-- **Round planlarını gereksiz karmaşıklaştırma**: Daha basit yaklaşımla kazanılabilecek bir round'a gereksiz karmaşıklık ekleme. 4v3 split execute gerektirmez — metodik alan temizliği gerektirir. Avantajlı durumlarda basitliği öğret.
+- **Avantajlı durumu karmaşıklaştırmak**: 4v3'te split arama — köşe temizle, kur, bekle. Avantaj varken ekstra hamle eklersen hata üretirsin.
 
-## Neyi Vurgulamalı
+## Ölüm Alışkanlıklarını Yorumlama
 
-Temel mesaj: **marjlar küçük, tutarlılık ve adaptasyon kazandırır.** Radiant oyuncunun yeni beceriler öğrenmesine gerek yok — mevcut becerileri daha yüksek tutarlılık oranında uygulaması ve rakiplerinden daha hızlı adapte olması gerekiyor. Radiant 200 RR ile 600 RR arasındaki fark mekanik değil — baskı altında ne sıklıkla optimal kararı verdiği ve düşmanın ayarlamalarına ne kadar hızlı okuyup uyum sağladığı.
+- **IF** aynı rakibe karşı sürekli ölüyorsan
+- **MEANING** rakibin seni okuyan bir bilgisi var — pozisyon değil, ses ipucu, util sırası veya adım alışkanlığı bilgi sızdırıyor
+- **COUNTER** pozisyon değiştirme — bilgi sızıntısını kapat. Footstep alışkanlığını değiştir, util'i farklı sırayla at, köşeye yaklaşma mesafeni değiştir
+- **WHY** bilgi sızıntısını kapatınca rakip seni yeniden okumak zorunda kalır — pozisyon değiştirmek bu sorunu çözmez
 
-## Ölüm Patternlerini Yorumlama
+- **IF** yakın maçların son roundlarında daha agresif açı alıyor, util kullanmıyor, hızla içeri giriyorsan
+- **MEANING** baskı altında karar kalitesi düşmüş
+- **COUNTER** harekete geçmeden önce dur: util nerede, düşman sayısı kaç, hangi bilgin var? Bu üç soruyu yanıtla, sonra hareket et
+- **WHY** bu soruları atlayan her round rakibe bedava bilgi verir
 
-- **IF** oyuncu aynı açıyı üst üste iki round tutuyorsa
-- **MEANING** Radiant'ta küçük patternler bile cezalandırılır. Rakip üçüncü round için karşı hazırlık yapmış olabilir
-- **COUNTER** her tekrarlanan davranışı potansiyel zafiyet olarak ele al: "İki kez heaven tuttun. Henüz karşı oynamamış olsalar bile oynayacaklarını varsay. Proaktif olarak çeşitle"
-- **WHY** proaktif çeşitleme, düşmanın karşı oyun geliştirmesini engeller
+## Neyi Vurgula
 
-- **IF** oyuncu aynı rakibe karşı sürekli ölüyorsa
-- **MEANING** bu, oyuncu hatası kadar **rakip kalitesini** de ortaya koyar. Rakibin belirli bir okuması olabilir ya da oyuncu bilgi sızdırıyor olabilir (ses ipuçları, utility patternleri, zamanlama işaretleri)
-- **COUNTER** düzeltme sıklıkla pozisyon değiştirmek değil, ölüme yol açan bilgi sızıntısını değiştirmek
-- **WHY** bilgi sızıntısını kapatmak, pozisyon değişiminden daha kalıcı bir çözüm sağlar
-
-- **IF** yakın maçlarda (13-11, uzatma) son roundlardaki ölüm patternleri farklı özellikler gösteriyorsa (daha agresif, daha az utility, daha hızlı commit)
-- **MEANING** sorun taktik değil zihinsel. Baskı altında karar kalitesi düşmüş
-- **COUNTER** baskı altında soğukkanlılık ve süreçlerine bağlılık öğret
-- **WHY** baskı altında sürecine sadık kalmak, bu seviyede birincil ayrıştırıcıdır
+Mevcut becerileri daha tutarlı uygula. Düşmanın ayarlamasını bir round önce oku. Rakip seni iki kez aynı yerden okuduysa — bir sonraki roundda pozisyonu, util sırasını veya giriş yönünü değiştir.

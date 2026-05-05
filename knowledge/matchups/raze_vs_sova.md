@@ -11,111 +11,115 @@ tags: [matchup, raze, sova, duelist, initiator]
 
 ## 1. Matchup Özü
 
-Raze nade + satchel ile Sova'nın dart info ağından hızla geçmeye çalışan explosive entry duelist, Sova ise dart reveal + shock dart lineup'larıyla Raze'in entry hattını info'ya çeviren info initiator. Matchup Raze'in close range damage ekonomisine karşı Sova'nın area info gücünü test eder.
+Sova dart atınca senin pozisyonun takımına gider — trade gelir, sen ölürsün. Raze nade atınca Sova'nın drone'u düşer, shock dart lineup'ı boşa çıkar. Bu matchup şuna kısalır: Sova dart atmadan sen girdin mi, yoksa Sova dart'ı seni yakaladı mı.
+
+Raze olarak: Close range'de Sova'nın utility'si seni durduramaz. Sova olarak: Uzun hatlarda Raze'in her girişini dart'la işaretle, takımın trade yapar.
 
 ## 2. Kim Avantajlı?
 
-**Raze lehine durumlar:**
-- Close-range choke'larda (Bind Hookah, Split B Main, Sunset A) — Raze nade close range'de Sova'nın info avantajını aim kazancına çevirir
-- Sova utility harcanmış (dart + shock dart kullanılmış) — Sova info yok, Raze nade ekonomisi baskın
-- Raze ult hazır (Showstopper) — Showstopper Sova'nın info anchor pozisyonunu patlatır, Sova statik hedef
-- Sova drone sonrası pozisyonu expose — Raze satchel boost ile drone pozisyonuna ulaşır
+**Raze lehine:**
+- Close choke'larda (Bind Hookah, Split B Main, Sunset A) — Raze nade Sova'nın info avantajını geçersiz kılar, close range düelloyu Raze kazanır
+- Sova dart + shock dart harcandıysa — Sova bilgi üretemez, Raze nade baskısı açılır
+- Showstopper hazırsa — Sova anchor pozisyon tutar, ult düz vurur
 
-**Sova lehine durumlar:**
-- Uzun sightline map'lerinde (Breeze, Icebox) — Sova dart info + shock dart lineup Raze'in entry hattını basar
-- Raze satchel cooldown'dayken — mobility yok, Sova shock dart lineup Raze'i statik hedefte yakalar
-- Sova dart Raze'in aggressive entry angle'ını işaretlediğinde — reveal info Sova takımına trade partner sinyali
-- Post-plant Hunter's Fury ult durumunda — area damage ult Raze'in post-plant pozisyonunu basır
+**Sova lehine:**
+- Uzun hatlarda (Breeze, Icebox) — dart info + shock dart Raze'in girişini keser
+- Raze satchel cooldown'dayken — Sova shock dart Raze'i sabit hedef olarak yakalar
+- Sova dart Raze'in giriş açısını işaretledi — takım trade'e hazırlanır, Raze girer girmez düşer
+- Hunter's Fury hazırsa post-plant — wall-pierce Raze'i pozisyondan çıkarır
 
-**Balanced:** Haven, Ascent, Lotus gibi orta mesafeli map'lerde matchup Raze'in nade lineup'ına ve Sova'nın dart varyasyonuna bağlı.
+**Dengeli:** Haven, Ascent, Lotus — orta mesafe. Sova'nın dart'ı harcandı mı, A'dan gir. Dart henüz atılmadıysa, B'den gir ve Sova'yı dart harcamaya zorla, sonra diğer hattan gir.
 
 ## 3. Key Düellolar
 
-**IF** Sova dart Raze'in entry hattını işaretledi
-**MEANING** Raze pozisyonu Sova takımına rapor, trade hazır, Raze entry sırasında trade kill'e
-**COUNTER** Raze dart sesini duyduğu an reposition. Satchel boost ile vertical reposition dart ground scan'ini atlar. Dart lokasyonu round 1'de öğrenilir, round 2 bypass.
-**WHY** Dart scan sabit süre. Raze mobility dart'tan hızlı, hareket disiplini dart info'sunu eskir.
+**IF** Sova dart Raze'in giriş hattını işaretledi 
+**MEANING** Pozisyonun takıma iletildi. Trade partner hazır, sen girince ölürsün. 
+**COUNTER** Dart sesini duyduğun an satchel ile dikey reposition yap. Yukarı çık — dart ground scan'i yukarıyı okumaz. O dartı round 1'de öğren, round 2'de aynı hattan girme. 
+**WHY** Dart sabit süre tarar. Sen o süre içinde hattan çıkarsan info eskir, trade gelmez.
 
 ---
 
-**IF** Sova shock dart lineup'ı Raze'in satchel landing noktasına
-**MEANING** Satchel boost sonrası Raze havada + landing'de, shock dart damage landing ile overlap — high damage window
-**COUNTER** Raze satchel hattını shock dart lineup hattları dışında seç. Lineup'lar sabit hatlar, satchel landing varyasyonu gerekli.
-**WHY** Sova lineup disiplini sabit hedefe çalışır. Raze'in satchel hattı öğrenildiyse shock dart bedava damage.
+**IF** Sova shock dart Raze'in satchel landing noktasına atılmış 
+**MEANING** Satchel ile havaya çıktın, landing noktasında dart seni bekliyor — yüksek hasar alırsın. 
+**COUNTER** Satchel landing noktanı değiştir. Aynı hattan her round inme. Sova'nın shock dart'ları sabit noktalara çalışır, sen pozisyonunu sabitleme. 
+**WHY** Sova shock dart lineup'ları ezberlenmiş noktalara atılır. Aynı yere inersen dart bedava hasar alır.
 
 ---
 
-**IF** Raze nade ile Sova owl drone'u patlattı
-**MEANING** Drone HP düşük, nade damage drone'u tek atışta düşürür, Sova info kaybeder
-**COUNTER** Sova drone'u Raze nade lineup hattı dışında uçursun. Drone yüksek + gizli lineup daha güvenli.
-**WHY** Drone aktif info aracı ama HP düşük. Raze nade drone'u kaldırır ve Sova'nın info kaynağını siler.
+**IF** Raze nade Sova drone'unu patlattı 
+**MEANING** Drone düştü, Sova round o bilgiyi kaybetti. 
+**COUNTER** Sova olarak drone'u Raze'in nade attığı hattın dışında uçur — yüksek ve gizli. Raze olarak: nade atmak zorunda değilsin, drone sesini duyunca satchel ile görüş açısından çık, drone boşa çıkar, nade harcamazsın. 
+**WHY** Drone HP düşük, nade tek atışta siler. Ama Raze görüş hattından çıkarsa drone zaten bilgi üretemez.
 
 ---
 
-**IF** Raze Showstopper ultunu Sova'nın info anchor pozisyonuna attı
-**MEANING** Ult rocket Sova'yı tek atışta öldürür, Sova dart + info cycle devam edemez
-**COUNTER** Sova ult sesini duyduğu an anchor pozisyonundan çıkar, dart lineup alternatif angle'dan.
-**WHY** Showstopper single target area damage. Sova statik anchor'da ise ult maksimum değer.
+**IF** Raze Showstopper'ı Sova'nın anchor pozisyonuna attı 
+**MEANING** Sova sabit duruyorsa ult tek vurur, Sova'nın dart döngüsü biter. 
+**COUNTER** Sova olarak ult sesini duyunca anchor'dan çık, lineup'ı farklı açıdan at. 
+**WHY** Showstopper alan hasarı verir. Sova sabit anchor'da beklerse ult maksimum değer alır.
 
 ---
 
-**IF** Sova Hunter's Fury ultunu Raze'in post-plant pozisyonuna attı
-**MEANING** Ult arrow wall-pierce area damage, Raze off-angle pozisyonunda HP kaybı
-**COUNTER** Raze post-plant pozisyonunu Hunter's Fury lineup dışına. Ult sesini duyduğu an satchel ile radius dışı.
-**WHY** Hunter's Fury sabit trajektör wall-pierce. Pozisyon bilinci ult hattını önceden öngörür.
+**IF** Sova Hunter's Fury Raze'in post-plant pozisyonuna girdi 
+**MEANING** Duvar geçen hasar, Raze pozisyon değiştiremezse HP kaybeder. 
+**COUNTER** Raze olarak ult sesini duyunca satchel ile hattan çık. Post-plant pozisyonunu her round aynı tutma. 
+**WHY** Hunter's Fury sabit yönde gider. Pozisyonunu önceden tahmin edebilirsen ult hattına zaten girme.
 
 ---
 
-**IF** Raze round başı B Main rush, Sova dart round başı lineup
-**MEANING** Dart rush hattını info verir, Sova takımı B defender sayısını artırır, rush boşa
-**COUNTER** Raze rush yönünü her round farklılaştır. Round 1 B, round 2 A, round 3 Mid — dart lineup sabit hedefi yakalayamaz.
-**WHY** Sova dart lineup'ları site'lara göre hazırlanır. Raze'in rush yönü varyasyon ile dart lineup ekonomisini eskir.
+**IF** Raze her round aynı hattan giriyor, Sova dart o hatta atılmış 
+**MEANING** Dart Raze'in giriş zamanlamasını ve pozisyonunu takıma verir, rush boşa çıkar. 
+**COUNTER** Giriş hattını değiştir. Bir round A, bir round B, bir round Mid — Sova'nın dart lineup'ları site'a göre hazırlanır, sen her round farklı hatla dart'ı geçersiz kıl. 
+**WHY** Sova dart lineup'ları sabit hedeflere çalışır. Sen sabitlenirsen dart her round değer üretir.
 
 ---
 
-**IF** Raze nade Sova shock dart'ını patlattı (lineup hattında)
-**MEANING** Raze nade trajektör shock dart'la kesişirse dart patlar ama bu nadir — iki lineup hattı aynı noktada nadir
-**COUNTER** Sova shock dart'ını Raze nade lineup noktalarından uzak atar. Paralel lineup hatları güvenli.
-**WHY** İki lineup user aynı noktayı hedeflerse birinin hedefi diğerinin silahı. Paralel hatlar matchup için güvenli.
+**IF** Raze nade Sova shock dart'ıyla aynı noktayı hedefledi 
+**MEANING** İki lineup aynı noktayı hedeflerse biri diğerini patlatır — Raze nade çapı büyük, shock dart'ı önce patlatır. 
+**COUNTER** Sova olarak shock dart'ı Raze nade hattından uzak at. Paralel hatlar güvenli. 
+**WHY** Aynı noktayı iki utility hedeflerse biri diğerini engeller. Paralel çalış.
 
 ## 4. Utility Takası
 
-Raze damage + mobility (nade + paintshell + satchel x2 + ult), Sova info + damage (dart x2 + shock dart x2 + drone + ult). İki agent da lineup kullanır ama farklı amaçlarla — Raze damage, Sova info + damage. Utility ekonomisi dengeli ama Sova info avantajı Raze'in mobility avantajına karşı asimetrik değer. Raze close range'de Sova'nın info'sunu aim ile yener, Sova uzak mesafede Raze'in mobility'sini info ile durdurur. Ult ekonomisi: Showstopper 8 point, Hunter's Fury 7 point — Hunter's Fury daha ucuz, Sova ult ekonomisi hafif avantajlı.
+Raze elinde ne var: nade, paintshell, iki satchel, ult. Bunların hepsi hasar ve hareket. 
+Sova elinde ne var: iki dart, iki shock dart, drone, ult. Bunlar bilgi ve hasar. 
+
+Raze close range choke'ta Sova'nın dart bilgisini nade ile geçersiz kılar — dart atıldı, Raze nade attı, bilgi anlamsız. Sova uzak hatta dart harcandıktan önce Raze girişini durdurur. 
+Ult maliyeti: Showstopper 8 puan, Hunter's Fury 7 puan — Sova ult biraz daha ucuz.
+
+Buradaki asıl fark şu: Sova utility round başında kullanılır ve biter. Raze utility esnektir, duruma göre kullanılır. Dart atıldıktan sonra bilgi eskir — sen o andan sonra satchel yönünü değiştirirsen Sova round için harcadığı utility boşa çıkar.
 
 ## 5. Map Bazlı Değişim
 
-**Breeze (Sova avantajlı):** Uzun sightline + geniş alan Sova'nın dart meta'sı. Raze nade Breeze'de range yetmez.
+**Breeze (Sova avantajlı):** Uzun hatlar Sova'nın işi. Raze nade bu mesafede yetmez. Raze olarak Mid push yap veya Sova utility bitmeden girme.
 
-**Icebox (Sova avantajlı):** Icebox Sova'nın en güçlü map'lerinden. Raze satchel Mid Tube vertical'da bypass imkanı.
+**Icebox (Sova avantajlı):** Sova'nın en güçlü haritalarından. Raze olarak Mid Tube dikey satchel bypass dene — Sova dart Mid Tube yukarısına nadiren atılır.
 
-**Haven (Balanced):** Sova 3 site info, Raze B Main entry.
+**Haven (Dengeli):** Sova 3 site bilgisi üretir. Raze B Main entry. Dart sesini bekle — dart harcandıktan sonra o site'tan gir.
 
-**Ascent (Balanced):** Sova A Main info meta, Raze B Main nade lineup meta.
+**Ascent (Dengeli):** Sova A Main dart meta. Raze B nade lineup güçlü. Dart sesini duyunca A'dan gir, dart harcandı mı B'den bask yap.
 
-**Bind (Raze avantajlı):** Close range Raze'in. Sova Bind'da niche pick.
+**Bind (Raze avantajlı):** Close range Raze'in. Sova Bind'da Raze'i durduracak uzun hat bulamaz.
 
-**Split (Raze avantajlı):** Dar koridorlar Raze nade ekonomisi için ideal.
+**Split (Raze avantajlı):** Dar koridorlar Raze nade için ideal. Sova dart dar hatlarda seni reposition yapmana izin vermez — satchel ile yukarı çık, dart ground seviyesini tarar.
 
-**Sunset (Raze avantajlı):** Close range + dar choke Raze meta.
+**Sunset (Raze avantajlı):** Dar choke ve close range Raze meta. Sova Sunset'te zayıf pick.
 
 ## 6. Flip Moment'ler
 
-**Flip 1 — Dart reveal:** Raze dart görüşünde kaldıysa info Sova takımına, trade hazırlıklı.
+**Flip 1 — Dart reveal:** Dart görüşünde kaldın, takım trade'e hazırlandı. Giriş anında ikinci düşman gelir, sen düşersin.
 
-**Flip 2 — Shock dart Raze landing'ini yakaladı:** Landing'de shock dart damage + stagger Raze'i düşük HP'ye getirir.
+**Flip 2 — Shock dart landing'i yakaladı:** Satchel ile indin, dart orada bekliyordu. Düşük HP ile round devam eder, bir sonraki düelloda 1 düşman düşünce sen de düşersin.
 
-**Flip 3 — Showstopper Sova anchor yakalaması:** Ult Sova'yı sabit pozisyonda yakalarsa kesin ölüm.
+**Flip 3 — Showstopper anchor yakalaması:** Sova sabit durduysa ult tek vurur, Sova'nın utility döngüsü biter.
 
-**Flip 4 — Hunter's Fury post-plant:** Raze pozisyonu ult hattındaysa HP kaybı, dash yok Raze'de kaçış aracı sınırlı.
+**Flip 4 — Hunter's Fury post-plant:** Raze'in post-plant pozisyonu ult hattındaydı. Satchel yoksa kaçış yok, HP gider.
 
-## 7. Pro Coach Notları
+## 7. Koç Notu
 
-**VCT'de nasıl oynanıyor:** Sova pro meta'da standard initiator, Raze ile sık aynı comp'ta oynanır (aynı takım). Raze vs Sova matchup'ı sık değil çünkü pro comp'ta iki agent çoğu maçta aynı tarafta. Counter-pick durumlarında matchup Sova'nın dart lineup disiplinine bağlı.
+Bu matchup'ta iki oyuncu da lineup kullanır ama amaç farklı — Raze hasar, Sova bilgi. 
 
-**Meta tier durumu:** Raze A+ tier, Sova S tier. Head-to-head Sova hafif avantajlı info oyunuyla. Map'e göre denge değişir.
+Radiant Raze şunu yapar: Sova dart sesini duyar duymaz satchel yönünü değiştirir. Dart zaten yere düştü, bilgi eskidi — şimdi girmek güvenli. 
+Radiant Sova şunu yapar: Raze'in satchel landing noktalarını ezberler, shock dart'ı o noktaya önceden atar. Raze havaya kalktığında dart zaten bekler.
 
-**** Sova shock dart damage'ı Raze'i tek lineup'ta kaçış HP'si kalmayan hatta düşürüyor mu? Damage değerleri patch'e göre.
-
-**** Raze nade damage'ı Sova drone'u tek atışta siliyor mu? Drone HP ve nade damage karşılaştırması.
-
-**Coach test:** "Sova Raze'in entry hattını info verir. Raze Sova'nın info hattını nade ile kırar. İki oyuncu aynı silahı (lineup) farklı amaçla kullanır. Kim lineup'ında daha disiplinli ise round o oyuncunun."
+Kimin utility'si daha esnek kullanılıyorsa round o tarafa döner. Raze sabit hattan giriyorsa Sova kazanır. Sova dart'ı erken harcıyorsa Raze kazanır.

@@ -1,173 +1,175 @@
 # ICEBOX — Detaylı Strateji ve Analiz
 
-> PATCH-SENSITIVE NOTE: Icebox dikey oyun ve zip line mekanikleriyle tanınan bir harita. Ajan meta'si ve site yapılarındaki dengeler yama notlarına göre değişebilir.
+> Icebox dikey oyun ve zip line'larla dolu bir harita. Bu ikisini kullanmayı bilmiyorsan site almak da savunmak da zorlaşır.
 
 ## 1. Temel Prensipler
-- Icebox 2 site'li bir harita: A site açık ve uzun sightline'lara sahip, B site kapalı ve nested (iç içe geçmiş) bir yapıda
-- Zip line mekaniği site'lar arasında hızlı rotasyon ve dikey pozisyon avantajı sağlar
-- Saldırı temelleri: A site'ta smoke ve flash olmadan execute etmek intihar — uzun sightline'lar savunuculara bedava ilk atışı verir. B site'ta ise nested yapıyı (Orange, Yellow, Green) tek tek temizlemeden ilerlemek üst üste ölüm demek
-- Savunma temelleri: A Rafters ve A Nest gibi yüksek pozisyonlar savunuculara muazzam açı avantajı verir. B site'ta Yellow ve Snowman off-angle'ları saldırganın işini zorlaştırır. Her iki site'ta da crossfire kurulumu savunmanın belkemiği
-- Tempo prensipleri: Icebox mid kontrolüne bağlı bir harita. Mid'i kontrol eden takım hem A'ya Tube üzerinden hem B'ye Kitchen üzerinden split yapabilir. Saldırı tarafında mid kontrolü olmadan yapılan execute'lar tek boyutlu kalır ve savunucunun retake'ini kolaylaştırır. Savunma tarafında mid'i kaybetmek her iki site'in de tehlikeye girmesi anlamına gelir
+- Icebox 2 siteli bir harita: A site açık ve uzun sightline'lı, B site dar ve iç içe geçmiş bir yapıda
+- Zip line sana iki şey verir: hızlı rotasyon ve dikey avantaj. Kullanmayı öğren
+- Saldırı: A site'a smoke ve flash atmadan girme — savunucu bedavaya ilk kurşunu atar. B site'ta Orange, Yellow, Green'i sırayla temizle; atlarsan üst üste ölürsün
+- Savunma: A Rafters ve A Nest'ten oyna, açı avantajı senin olsun. B site'ta Yellow ve Snowman off-angle'ları saldırganı durdurur. Her iki sitede de crossfire kur — tek başına durma
+- Mid kontrolü her şey. Mid'i tutarsan Tube üzerinden A'ya, Kitchen üzerinden B'ye split atarsın. Mid yoksa execute'un tek yönlü kalır, savunucu rahat retake atar. Savunmada mid'i kaybedersen her iki site tehlikeye girer
 
 ## 2. Ölüm Bölgeleri
-- **A Belt / A Main**: A site'a giden ana koridor. Oyuncular burada ölüyor çünkü utility olmadan uzun sightline'a dry peek yapıyorlar. A Rafters'taki veya A Screens'teki savunucu pre-aim pozisyonundan bedava kill alıyor. Koçluk bağlamında: eğer bir oyuncu A Belt'te sürekli ölüyorsa, entry öncesi utility kullanımı sıfır demektir.
-- **Mid Sightline**: Mid bölgesi Icebox'in en uzun sightline'larından birine sahip. Op tutan bir savunucuya karşı mid'e çıkmak, smoke veya flash olmadan, neredeyse garanti ölümdür. Bu bölgedeki tekrarlayan ölümler oyuncunun bilgiyi (info) kullanmadan agresif peek yaptığını gösterir.
-- **B Orange Girişi**: B site'in ana giriş noktası olan Orange, saldırganlar için bir tuzak noktası. Yellow'dan ve Green'den gelen crossfire Orange'a giren ilk oyuncuyu anında yakalayabiliyor. Burada ölümlerin çoğu koordinasyonsuz giriş yapmasından kaynaklanıyor.
-- **Tube / Container**: A site'a alternatif giriş yolu olan Tube bölgesi, hem saldırı hem savunma için ölüm bölgesi. Savunucular Tube'dan gelen split'i beklerken Tube çıkışında tuzak kuruyor. Saldırganlar ise Tube'u temizlemeden ilerleyip arka açıdan vuruluyorlar.
-- **B Kitchen / CT**: B site retake için kullanılan Kitchen bölgesi dar geçiş yapısına sahip. Retake yapan savunucular burada lurker'lara veya post-plant pozisyonundaki saldırganlara yakalanıyor. Dar alan, ilk açıya sahip olan tarafa avantaj veriyor.
+- **A Belt / A Main**: A site'a giden ana koridor. Burada ölüyorsan sebebi basit: util atmadan düz yürüyüp peek açıyorsun. A Rafters'taki veya A Screens'teki savunucu seni zaten pre-aim etti, bedava ölüyorsun. A Belt'te sürekli ölüyorsan, girişten önce attığın util sayısı sıfırdır.
+- **Mid Sightline**: Icebox'in en uzun sightline'ı mid'de. Smoke veya flash yoksa mid'e adım atma — op tutan savunucu seni görmeden sen onu göremezsin. Burada tekrar tekrar ölüyorsan, bilgisiz peek açıyorsun.
+- **B Orange Girişi**: Orange bir tuzak. Yellow'dan ve Green'den gelen crossfire, ilk içeri giren adamı anında yiyor. Koordinasyon yoksa, ilk adam ölür. Her zaman.
+- **Tube / Container**: Savunucu Tube çıkışında seni bekliyor. Tube'u temizlemeden geçersen arkandan vurulursun. Savunma yapıyorsan da Tube split'ini erken okuyamazsan orada kalırsın.
+- **B Kitchen / CT**: Retake için Kitchen'a giriyorsan, ilk açıyı kim kontrol ediyorsa o kazanır. Lurker veya post-plant'taki adam seni dar geçişte yakalıyor. Kapıya körü körüne dalmadan köşeyi kontrol et.
 
 ## 3. Pattern -> Meaning Eşleşmesi
 
 **Pattern 1: A Belt Dry Peek Ölümleri**
-IF: Oyuncu A Belt'te utility kullanmadan ilerliyor — uzun sightline'a korumasız çıkıyor
-MEANING: Koridor disiplini yok. A Belt uzun ve açık bir alan; smoke veya flash olmadan, A Rafters'taki ya da Screens'teki savunucu seni görünür olduğu andan itibaren avlıyor. Bu sightline'da savunucunun reaction time avantajı çok büyük çünkü senin modelin yaklaşım boyunca tamamen açıkta.
-COUNTER: A Belt'e girmeden önce sightline'i smoke'la (Rafters veya Screens yönüne), ardından flash at ve swing yap. Smoke savunucunun görüş hattını keser, flash onu açıdan çıkarır. A Belt'i utility olmadan kullanmayı aklına bile getirme — her girişinde en az bir smoke veya flash harca.
-WHY: Uzun sightline'lar savunucu avantajını katlayarak artırır çünkü saldırganın hareketi tahmin edilebilir ve açıkta kalma süresi uzun. Utility bu dinamiği tersine çevirir: smoke görüş hattını keser ve savunucuyu ya smoke'un içinden push etmeye (sana yakın dövüş avantajı verir) ya da pozisyonunu terk etmeye zorlar.
+IF: A Belt'e smoke veya flash atmadan giriyorsun — o uzun sightline'a korumasız çıkıyorsun
+MEANING: A Belt açık bir koridor. Rafters'taki veya Screens'teki savunucu seni görür görmez vurur. Senin modellin yaklaşım boyunca tamamen açıkta, savunucunun sadece tıklaması yeterli.
+COUNTER: A Belt'e girmeden önce Rafters veya Screens yönüne smoke at, sonra flash'ı izlet, sonra swing yap. Smoke görüş hattını keser, flash savunucuyu açıdan çıkarır. Smoke veya flash olmadan A Belt'e girme — her seferinde en az birini harca.
+WHY: Uzun sightline savunucuyu güçlendiriyor çünkü hareketini okuyabiliyor ve seni uzaktan vurabiliyror. Smoke attığında savunucu ya smoke içinden sana doğru gelir — bu sefer yakın dövüş senin avantajın — ya da pozisyonu terk eder.
 
 **Pattern 2: Mid'de Op'a Karşı Ego Peek**
-IF: Oyuncu mid'de Op tutan savunucuya karşı utility olmadan peek yapıyor — tekrar tekrar aynı sightline'dan vurularak ölüyor
-MEANING: Oyuncu bilgiyi kullanmıyor. Mid'de Op olduğunu biliyor (ses, önceki round bilgisi) ama yine de kuru peek atıyor. Bu ego peek — "bu sefer vururum" düşüncesiyle hareket ediyor ama Op'in one-shot avantajı her seferinde galip geliyor.
-COUNTER: Mid'e çıkmadan önce üç seçenek var: (1) Smoke atıp sightline'i kes, (2) Flash atıp Op'çuyu açıdan çıkar, (3) Dual swing yap — iki kişi aynı anda farklı açılardan çıksın. Tek başına Op'a karşı peek atmak Icebox'ta yapılabilecek en kötü karar.
-WHY: Op tek atışta öldürür ve mid sightline'i Op'çununun pre-aim yapabileceği tek bir hat. Sen o hatta çıktığında Op'çununun sadece tıklaması yeterli. Utility bu denklemi bozar: smoke sightline'i ortadan kaldırır, flash Op'çuyu açıdan çıkarır, dual swing ise Op'çununun sadece birini vurabileceği bir durum yaratır — diğer oyuncu trade alır.
+IF: Mid'de Op tutan birine karşı utility olmadan peek atıyorsun — aynı sightline'dan tekrar tekrar vuruluyorsun
+MEANING: Op sesini duydun, önceki rounddan biliyorsun, ama yine de kuru çıkıyorsun. Op tek atışta öldürür. "Bu sefer vururum" diyerek çıkmak seni her seferinde aynı yere götürür.
+COUNTER: Mid'e çıkmadan önce şu üçten birini yap:
+- Smoke at, sightline'ı kes
+- Flash at, Op'çuyu açıdan çıkar
+- Dual swing yap — iki kişi aynı anda farklı açılardan çık, biri trade alır
+
+Tek başına Op'a karşı kuru peek atmak Icebox'ta en kötü karardır.
+WHY: Mid sightline Op'çunun pre-aim yapabileceği tek bir hat. Sen o hatta çıktığında Op'çunun sadece tıklaması yeterli. Dual swing bunu bozar çünkü Op birini vururken diğeri trade alır.
 
 **Pattern 3: B Orange Stack Ölümleri**
-IF: Birden fazla oyuncu aynı round'da B Orange girişinde ölüyor — hepsi aynı dar geçişten sırayla girmeye çalışıyor
-MEANING: Takım choke point'e yığılıyor. B Orange dar bir giriş noktası ve Yellow'dan gelen crossfire bu girişi ölüm tuzağına çeviriyor. Aynı geçişten sırayla girmek savunucuya multi-kill fırsatı veriyor çünkü her oyuncu aynı sightline'da beliriyor.
-COUNTER: Girişi böl: bir grup B Main'den Orange'a girerken diğer grup mid'den Kitchen üzerinden B site'a split yapsın. Bu savunucuyu iki açı arasında seçim yapmaya zorlar. Eğer split mümkün değilse, girişleri zamanla: ilk oyuncu flash ile girsin, ikinci oyuncu ilk dövüşün sonucunu beklesin, sonra commit etsin.
-COUNTER (ek): Orange'a girmeden önce Yellow'a ve Green'e utility at — molly, shock dart veya stun. Savunucuyu pozisyonundan çıkarırsan Orange'dan giriş çok daha güvenli hale gelir.
-WHY: Dar giriş noktalarında yığılmak savunucuya seri kill imkânı tanır çünkü her oyuncu aynı sightline'da sırayla görünür. Girişi bölmek savunucuyu iki açıya birden bakmak zorunda bırakır ve zamanlama farkı aynı spray'le birden fazla oyuncuyu vurma ihtimalini ortadan kaldırır.
+IF: Birden fazla oyuncu aynı roundda B Orange girişinde ölüyor — hepsi aynı dar geçişten sırayla girmeye çalışıyor
+MEANING: Takım choke point'e yığılıyor. Yellow'dan gelen crossfire bu girişi ölüm tuzağına çeviriyor. Her oyuncu aynı sightline'da sırayla beliriyor, savunucu multi-kill yapıyor.
+COUNTER: Girişi böl — bir grup B Main'den Orange'a girerken diğer grup mid'den Kitchen üzerinden B site'a split yapsın. Split mümkün değilse girişleri zamanla: ilk oyuncu flash'la girsin, ikinci oyuncu ilk dövüşün sonucunu beklesin, sonra commit etsin.
+COUNTER (ek): Orange'a girmeden önce Yellow'a ve Green'e molly, shock dart veya stun at. Savunucuyu pozisyonundan çıkarırsan giriş çok daha temiz olur.
+WHY: Dar girişte yığılmak savunucuya seri kill verir çünkü her oyuncu sırayla aynı noktada belirir. Girişi bölersen savunucu iki açıya birden bakmak zorunda kalır ve aynı spray'le birden fazla kişiyi vuramaz.
 
 **Pattern 4: A Rafters Tekrarcılık**
-IF: Savunucu A Rafters'ta üst üste üç veya daha fazla round aynı pozisyonda duruyor — varyasyon yok
-MEANING: Yüksek pozisyon güçlü ama tekrar edilince okunanca değer kaybediyor. Rakip Rafters'i pre-aim etmeye başladığında orası avantajlı pozisyon olmaktan çıkıp ölüm tuzağına dönüşüyor. Oyuncu pozisyonun gücüne güvenip değiştirmeyi ihmal ediyor.
-COUNTER: Rafters'i her round kullanma. Bir round Rafters, sonraki round A Nest, sonraki round Screens arkası. Rafters'tan kill aldıktan sonra bir sonraki round mutlaka farklı bir pozisyona geç — rakip Rafters'i pre-aim edecek ve seni bulamayacak. Rafters'i sürpriz pozisyonu olarak kullan, varsayılan pozisyon olarak değil.
-WHY: Off-angle'lar güçlerini bilinmezlikten alır. Rakip senin nerede olduğunu bildiğinde, off-angle sadece bilinen bir açı haline gelir ve avantaj sıfırlanır. Pozisyon döngüsü yaparak rakibi her round birden fazla açıyı kontrol etmek zorunda bırakırsın — bu onların giriş hızını düşürür ve tereddüt yaratır.
+IF: Savunucu A Rafters'ta üst üste üç veya daha fazla roundda aynı pozisyonda duruyor
+MEANING: Rafters güçlü bir pozisyon ama rakip fark edince pre-aim etmeye başlar. O noktadan sonra avantajlı pozisyon ölüm tuzağına dönüşür.
+COUNTER: Rafters'ı her round kullanma. Bir round Rafters, sonraki round A Nest, sonraki round Screens arkası. Rafters'tan kill aldıktan sonraki roundda mutlaka farklı yere geç. Rafters'ı sürpriz pozisyonu olarak kullan, varsayılan pozisyon olarak değil.
+WHY: Off-angle'ın gücü bilinmezlikten gelir. Rakip nerede olduğunu bildiğinde orası artık off-angle değil, bilinen bir açı. Pozisyon döndürürsen rakip her roundda birden fazla noktayı kontrol etmek zorunda kalır ve giriş hızı düşer.
 
 **Pattern 5: Zip Line Zamanlama Hataları**
-IF: Oyuncu zip line kullanırken veya inişte vurularak ölüyor — zip line'i rakibin duyduğu veya beklediği anda kullanıyor
-MEANING: Zip line Icebox'a özgü güçlü bir mekanik ama ses üretir ve iniş noktası tahmin edilebilir. Oyuncu zip line'i bilgi vermeden kullanabildiği sanısıyla hareket ediyor ama rakip sesi duyuyor ve iniş noktasını pre-aim ediyor. İniş anında kısa bir vulnerability penceresi var ve bu pencerede vurulmak neredeyse kaçınılmaz.
-COUNTER: Zip line'i iki şekilde kullan: (1) Takım utility'si eşliğinde — teammate'in flash veya smoke atarken zip'i kullan, böylece rakip iniş noktasını pre-aim edemez. (2) Fake olarak — zip'e bas, ses çıkar, hemen in. Rakip zip çıkışını beklemeye başlar ama sen orada değilsin. Zip line'i round'un sessiz anlarında kullanma — ses seni ele verir.
-WHY: Zip line hız ve pozisyon avantajı sağlar ama tahmin edilebilirlik maliyeti vardır. Ses bilgi verir, iniş noktası sabittir ve iniş anında silah kullanımın kısıtlıdır. Bu üç faktör zip line'i korumasız kullanmayı çok riskli kılar. Utility desteği veya fake kullanımı bu riskleri minimize eder çünkü rakibin beklentisini bozar.
+IF: Zip line kullanırken veya inişte vurularak ölüyorsun — rakibin duyduğu veya beklediği anda kullanıyorsun
+MEANING: Zip line ses çıkarır, iniş noktası sabittir ve iniş anında silahını tam kullanamıyorsun. Rakip sesi duyuyor, iniş noktasını pre-aim ediyor, sen geldiğinde hazır bekliyor.
+COUNTER: Zip line'ı iki şekilde kullan:
+- Takım utility'siyle — teammate flash veya smoke atarken zip'e bin
+- Fake olarak — zip'e bas, ses çıkar, hemen in. Rakip seni beklemeye başlar ama sen orada değilsin
+
+Roundun sessiz anlarında zip kullanma — ses seni satar.
+WHY: Zip hız ve pozisyon avantajı verir ama ses bilgi sızdırır, iniş noktası tahmin edilebilir, inişte hareket kısıtlısın. Bu üç şey üst üste gelince korumasız zip çok riskli olur. Utility veya fake bu riski kırar çünkü rakibin beklentisini bozar.
 
 **Pattern 6: Tube Kontrolsuz Bırakma**
-IF: Saldırı tarafında Tube kontrol edilmeden A execute yapılıyor — Tube'dan gelen flank'a karşı önlem yok
-MEANING: Tube, mid'den A site'a açılan alternatif giriş yolu. Eğer saldırı tarafı Tube'u kontrol etmezse, savunucu Tube'dan flank atarak A execute'u arkadan vurabilir. Ayrıca savunma tarafında Tube kontrolunu kaybetmek A site'in güvenliğini doğrudan tehdit eder çünkü saldırganlar Tube üzerinden split yapabilir.
-COUNTER: A execute planlanıyorsa, Tube'a en az bir oyuncu gönder veya Tube girişine sentinel utility'si (tripwire, turret, alarmbot) yerleştir. Tube'u tamamen ignore etmek A site savunmasını veya saldırısını tek boyutlu kılar. Saldırı tarafında Tube kontrolü = A site'a iki yönlü baskı imkânı.
-WHY: Tube, A site'in yan kapısıdır. Yan kapıyı açık bırakmak, rakibe bedava rotasyon ve flank imkânı verir. Tube kontrolü olmadan A execute tek yönlü olur — savunucu nereye bakacağını bilir ve tüm utility'sini tek bir girişi durdurmak için harcar. Tube kontrolü savunucuyu iki açıya birden bakmaya zorlar.
+IF: A execute yapıyorsun ama Tube kontrol edilmemiş — Tube'dan gelen flank'a karşı hiçbir şey yok
+MEANING: Tube, mid'den A site'a açılan yan giriş. Kontrol etmezsen savunucu Tube'dan flank atıp execute'u arkadan vurur. Savunma tarafında Tube'u bırakmak da A site'i tehlikeye atar çünkü saldırganlar Tube'dan split yapar.
+COUNTER: A execute planlanıyorsa Tube'a bir oyuncu gönder veya girişe sentinel utility'si koy — tripwire, turret veya alarmbot. Tube'u ignore etmek A site'i tek boyutlu kılar. Saldırı tarafında Tube kontrolü = A site'e iki yönlü baskı.
+WHY: Tube A site'in yan kapısıdır. Yan kapıyı açık bırakırsan rakibe bedava flank verirsin. Tube kontrolü olmadan savunucu nereye bakacağını bilir ve tüm utility'sini tek girişe harcar. Tube'u tutarsan iki açıya birden bakmak zorunda kalır.
 
 **Pattern 7: B Site Retake Gecikmesi**
-IF: Savunucu B site retake'ini çok geç başlatıyor — spike plant'tan sonra pozisyon almak yerine beklemeye devam ediyor
-MEANING: B site'in nested yapısı (Orange, Yellow, Green) retake'i zorlaştırıyor çünkü temizlenmesi gereken çok fazla köşe var. Ama gecikme sorunu farklı: oyuncu retake'e kaç kişiyle ve hangi utility'yle gireceğini planlamadan beklemeye devam ediyor ve spike timer'i aleyhine işliyor.
-COUNTER: B retake'i plan gerektirir ama hızlı plan gerektirir. Spike plant olur olmaz rotasyonu başlat — Kitchen üzerinden gir, utility'ni koordine et (flash + molly Yellow veya Orange'a), ve commit et. Beklemenin bir sınırı var: eğer tam takım retake yapamıyorsan, spike'i kaybetmek yerine kalan utility'yle en iyi hamleyi yap.
-WHY: Nested site yapısı her geçen anda saldırganların post-plant pozisyonlarını güçlendirmesine izin verir. Saldırganlar Orange ve Green'de crossfire kurar, Yellow'da açı tutar. Ne kadar geç girilirse bu pozisyonlar o kadar sağlam hale gelir. Erken ve koordineli retake saldırganların yerleşmesini engeller.
+IF: Spike plant olduktan sonra retake başlatmayı geciktiriyorsun — kaç kişiyle ve hangi utility'yle gireceğini planlamadan beklemeye devam ediyorsun
+MEANING: B site nested yapıda — Orange, Yellow, Green. Her köşe temizlenmeli. Beklediğin her an saldırganlar post-plant pozisyonlarını güçlendiriyor.
+COUNTER: Spike plant olur olmaz rotasyonu başlat. Kitchen üzerinden gir, utility'ni koordine et — flash ve molly'yi Yellow veya Orange'a at — ve commit et. Tam takım retake yapamıyorsan kalan utility'nle en iyi hamleyi yap, beklemeye devam etme.
+WHY: Ne kadar geç girersen Orange ve Green'deki crossfire o kadar sağlamlaşır, Yellow'daki açı o kadar oturur. Erken ve koordineli retake saldırganların yerleşmesini engeller.
 
 **Pattern 8: B Snowman Tek Pozisyon Bağımlılığı**
-IF: Savunucu B Snowman'de her round aynı off-angle'i kullanıyor — rakip bunu okumuş ve pre-aim ediyor
-MEANING: Snowman headshot seviyesinde güçlü bir off-angle ama tekrarlanınca okunabilir hale geliyor. Oyuncu pozisyonun gücüne aşırı güvenip varyasyon yapmayı bırakıyor.
-COUNTER: Snowman'i her round kullanma. Yellow, Green giriş kontrolü ve Orange içindeki farklı açıları döndür. Snowman'dan kill aldıktan sonraki round mutlaka farklı pozisyona geç. Snowman'i ikinci veya üçüncü round'da sürpriz olarak geri getir.
-WHY: Off-angle'ların değeri sürpriz faktöründen gelir. Rakip Snowman'i bildiğinde orası artık off-angle değil, bilinen bir açı. Pozisyon rotasyonu rakibi her round birden fazla noktayı temizlemek zorunda bırakır ve tarama yükünün artması giriş hızını düşürür.
+IF: B Snowman'da her round aynı off-angle'ı kullanıyorsun — rakip okumuş, pre-aim ediyor
+MEANING: Snowman güçlü bir off-angle ama tekrarlanınca bilinen bir açıya dönüşür. Pozisyonun gücüne aşırı güvenip varyasyon yapmayı bırakıyorsun.
+COUNTER: Snowman'ı her round kullanma. Yellow, Green giriş kontrolü ve Orange içindeki farklı açıları döndür. Snowman'dan kill aldıktan sonraki round mutlaka başka yere geç. Snowman'ı ikinci veya üçüncü roundda sürpriz olarak geri getir.
+WHY: Off-angle'ın değeri sürpriz faktöründen gelir. Rakip Snowman'ı bildiğinde orası artık off-angle değil. Pozisyon döndürürsen rakip her roundda birden fazla noktayı temizlemek zorunda kalır ve giriş hızı düşer.
 
 ## 4. Taraf Bazlı Hatalar
 
 ### Saldırı
-- A Belt'e utility olmadan yürümek — Icebox'in en uzun sightline'larından biri, smoke/flash olmadan giriş yapmak savunucuya bedava kill vermek demek
-- Mid kontrolunu tamamen ihmal etmek — mid Tube ve Boiler üzerinden her iki site'a split imkânı sunar; mid'siz saldırı tek boyutlu kalır
-- B site'in nested yapısını temizlemeden spike plant etmek — Orange, Yellow, Green'deki savunucuları temizlemeden plant yapmak retake'i kolaylaştırır ve post-plant pozisyonlarını zayıflatır
-- Zip line'i round başında bilgi vermeden kullanmak — ses üretir ve rakibi uyarır; zip line stratejik zamanlama gerektirir
-- Tube'u kontrol etmeden A execute'a başlamak — Tube'dan gelecek flank tüm execute'u çökertiyor
-- Her round aynı entry noktasından girmek — Icebox'ta A Belt, Tube ve Mid üzerinden farklı giriş opsiyonları var; tek boyutlu oynamak okunmayı kolaylaştırır
+- A Belt'e smoke veya flash atmadan girme — o sightline'da savunucu seni bedavaya öldürür.
+- Mid'i tamamen bırakma — Tube ve Boiler üzerinden her iki siteye split açılır; mid yoksa saldırın tek yönlü kalır ve okunur.
+- B site'te Orange, Yellow, Green temizlenmeden spike basma — plant yaparsın ama retake çok kolay olur; önce o köşeleri temizle.
 
 ### Savunma
-- A Rafters'ta çok uzun süre kalmak — utility ile flush edilebilir (molly, stun, shock dart) ve uzun süre aynı yerde kalmak pozisyonu okunabilir kılar
-- Mid'i tamamen terk etmek — mid'i kaybetmek hem A'ya hem B'ye split yeme riski demek; mid'de en az bir oyuncu veya utility olmalı
-- B site'ta pasif oynamak — B'nin nested yapısı agresif bilgi alma (Orange'da peek, Green'de utility) gerektirir; tamamen pasif oturmak saldırganın rahatça yaklaşmasına izin verir
-- Retake sırasında koordinasyonsuz push yapmak — özellikle B Kitchen'dan retake yaparken utility olmadan girişmek dar geçişte ölüm demek
-- Op economy'sini yanlış yönetmek — Icebox Op'in en güçlü olduğu haritalardan biri; Op'i save edebilecekken gereksiz risk almak ekonomik kayıp yaratır
+- A Rafters'ta uzun süre aynı noktada durma — molly, stun veya shock dart ile kolayca oradan atılırsın.
+- Mid'i tamamen terk etme — mid giderse hem A'ya hem B'ye split yersin; o bölgede en az bir kişi ya da utility olmalı.
+- B Kitchen'dan retake yaparken utility atmadan içeri girme — o dar geçitte utility yoksa ölürsün, trade da olmaz.
 
 ## 5. Kompozisyon / Harita Etkileşim Notları
-- **Viper S-tier**: Viper wall'u A site'i veya B site'i tek başınıza bölme kapasitesine sahip. A site'ta wall Rafters'i site'tan ayırarak savunucu avantajını kırabilir. B site'ta wall Yellow'i izole ederek nested yapının karmaşıklığını azaltır. Toxic screen + snake bite post-plant kombinasyonu Icebox'ta muazzam güçlü.
-- **Sage S-tier**: Sage wall B Green'de geciktirme sağlar — saldırı push'unu yavaşlatır ve savunucuya rotasyon zamanı kazandırır. A Belt'te wall sightline'i tamamen kapatabilir. Slow orb dar geçişlerde (Tube, Orange) çok yüksek değer üretir.
-- **Jett S-tier**: Zip line entry, A Pipes'ta agresif Op oynamak ve dash ile geri çekilmek Jett'in Icebox'taki ana değerleri. Updraft ile Rafters'a çıkış veya beklenmeyen açılara ulaşım Jett'e diğer duelist'lerin sunamayacağı dikey mobilite verir.
-- **Sova / Fade**: Recon bilgisi Icebox'ta çok değerli çünkü her iki site'ta da temizlenmesi gereken çok fazla köşe ve seviye var. Sova recon dart A veya B başında bilgi sağlar; Fade prowler nested B site'ta köşeleri temizler.
-- **Killjoy**: B site anchor olarak turret + alarmbot nested yapıyı kontrol eder. Lockdown B retake'i zorlayan saldırganlarını site'tan çıkarabilir. Icebox'ta Killjoy'un değerinin büyük kısmı B site'a özgü.
-- **Chamber**: Op + TP kombinasyonu Icebox için tasarlanmış gibi. A Pipes'ta agresif Op tut, kill al veya durumu kaybet, TP ile güvenli pozisyona geri çekil. Mid sightline'da da aynı mantık geçerli.
-- **Omen**: TP ile A Rafters'a veya B Yellow'a beklenmedik pozisyonlarda belirilebilir. Shrouded step Tube içinde sessiz hareket sağlar. Paranoia dar geçişlerde (B Orange, Tube) çok yüksek değer üretir.
+- **Viper S-tier**: Wall'u A veya B site'i ikiye böler. A'da Rafters'ı site'tan kesersin — savunucunun avantajı gider. B'de Yellow'u izole edersin — o karmaşık nested yapı sadeleşir. Toxic screen + snake bite post-plant kombinasyonu bu haritada korkunç güçlü.
+- **Sage S-tier**: B Green'e wall at, push yavaşlar, takımına rotasyon zamanı kazanırsın. A Belt'te wall sightline'ı tamamen kapatır. Slow orb'u Tube veya Orange'a at — dar geçişlerde değeri çok yüksek.
+- **Jett S-tier**: Zip line ile hızlı giriş, A Pipes'ta agresif Op oyna, işin bitince dash ile çekil. Updraft ile Rafters'a çık — başka hiçbir duelist o dikey hareketi yapamaz.
+- **Sova / Fade**: Bu haritada bilgi almak kritik çünkü her iki site'ta da temizlemen gereken köşe ve seviye çok. Sova dart'ı A veya B başında at, erken bilgi al. Fade prowler ile nested B site'taki köşeleri temizle.
+- **Killjoy**: B site'ta turret + alarmbot nested yapıyı senin için tutar. Lockdown ile B'ye basan saldırganları site'tan söküp atarsın. Killjoy'un değerinin büyük kısmı B site'a özel — bunu bil.
+- **Chamber**: Op + TP kombinasyonu bu harita için biçilmiş kaftan. A Pipes'ta agresif dur, kill al ya da kötü giderse TP ile güvenli noktaya çekil. Mid sightline'da da aynı şekilde oyna.
+- **Omen**: TP ile A Rafters'a veya B Yellow'a beklenmedik pozisyonlarda çık. Tube içinde Shrouded Step ile sessiz hareket et. Paranoia'yı B Orange veya Tube'a at — dar geçişlerde değeri çok yüksek.
 
 ## 6. Koçluk Satırları
-- "Icebox dikey oyunun kralı — eğer sadece yer seviyesinde oynuyorsan haritanın yarısını kullanmıyorsun demektir."
-- "Mid'i kontrol etmeyen takım Icebox'ta round kazanamaz. Mid = her iki site'a split imkânı. Mid'siz oynamak tek kapılı bir eve saldırmak gibi."
-- "Zip line güçlü bir araç ama sessiz bir araç değil. Her kullandığında rakibe bilgi veriyorsun — bunu hesaba kat."
-- "B site'in Orange, Yellow, Green yapısı seni bunaltıyor mu? Her birini ayrı bir oda olarak düşün ve her odayı girerken utility ile temizle."
-- "A Rafters'tan kill aldın, güzel. Şimdi oradan in. Aynı pozisyonu iki round üst üste kullanmak rakibe hediye vermek demek."
-- "Op Icebox'ta silah değil, strateji. Op economy'sini doğru yönetmek = haritayı yönetmek."
-- "Tube'u ignore eden takım A site'i kontrol edemez. Tube yan kapıdır — yan kapıyı açık bırakma."
-- "Post-plant'te aynı seviyede durma. Icebox'ta farklı yüksekliklerde crossfire kurmak retake'i neredeyse imkânsız kılar."
+- "Icebox dikey oyunun haritası. Sadece yer seviyesinde geziyorsan haritanın yarısından vazgeçiyorsun."
+- "Mid'i almayan takım bu haritada round alamaz. Mid sana her iki site'a giriş verir. Mid yoksa tek kapıdan giriyorsun — rakip bilir, bekler."
+- "Zip line kullandığında rakibe ses veriyorsun. Her kullanımın bir bilgi sızıntısı. Bunu bilerek kullan."
+- "B site'te Orange, Yellow, Green bunaltıyorsa her birini ayrı oda say. Her odaya girerken util at, sonra gir."
+- "A Rafters'tan kill aldın, hemen in. Aynı noktayı iki round üst üste kullanırsan rakip seni orada bekler."
+- "Op burada sadece silah değil. Op economy'ni doğru kur — haritayı o zaman yönetirsin."
+- "Tube'u geçmezsen A site'e tam kontrol kuramazsın. Tube yan kapıdır. Yan kapıyı açık bırakma."
+- "Post-plant'te rakiple aynı yükseklikte durma. Farklı katlarda crossfire kur — retake yapmak isteyen için kabusa döner."
 
 ## 7. Rank Modülasyonu
-- **Iron-Silver**: Oyuncular haritanın callout'larını bilmiyor ve B site'in nested yapısını (Orange, Yellow, Green) karıştırıyor. Zip line'i rastgele kullanıyor, mid'i tamamen ignore ediyor. Koçluk odağı: temel callout'ları öğret, her site execute öncesi en az bir utility kullanma alışkanlığı kazandır, zip line'in ses ürettiğini ve zamanlama gerektirdiğini anlat. A Belt'e girerken "dur, bir ability kullan, sonra ilerle" rutinini oturt. Bu tek alışkanlık ölüm oranını ciddi şekilde düşürür.
-- **Gold-Platinum**: Oyuncular utility kullanıyor ama koordinasyonsuz. Flash atılıyor ama entry yapan oyuncu flash'in patlamasını beklemiyor. B site'ta Orange'a girerken takım yığılıyor — stagger (zamanlama farkı) yok. Mid'in varlığını biliyor ama kontrol etmiyor; mid "başkasının işi" olarak görülüyor. Koçluk odağı: utility zamanlaması (flash patlarken swing, smoke düşerken ilerle), B site girişinde stagger (ilk oyuncu flash ile girsin, ikinci beklesin), mid kontrolüne bir oyuncu atama alışkanlığı. Icebox'ta koordinasyon her zaman bireysel beceriden daha fazla round kazandırır.
-- **Diamond-Ascendant**: Oyuncular temel mekanikleri biliyor ama tahmin edilebilir hale geliyor. Her round aynı pozisyonu kullanıyor (Rafters, Snowman), aynı entry noktasından giriyor, aynı default'u oynuyor. Koçluk odağı: varyasyon ve mid-round karar verme. Rakip A Belt'i stack ediyorsa mid'e kayıp Tube'dan split yap. Rafters'tan kill aldıysan sonraki round Nest'e geç. B'de Orange'dan girmek yerine Kitchen split dene. Harita okuma ve rakibin alışkanlıklarına göre round içi adaptasyon bu seviyenin farklılaştırıcı faktörüdür.
-- **Immortal-Radiant**: Oyuncular haritayı ve mekanikleri biliyor — farkı yaratan şey anti-strat ve round-round adaptasyon. Rakibin default'unu oku: her round A Belt push yapıyorlarsa smoke Belt + Pipes flank kur. Tube'dan split geliyorsa Tube'a utility yerleştir. Op economy takibi yap — rakibin Op'i nerede, kim kullanıyor, save edebilir mi? Eco round'larda Icebox'in yakın dövüş potansiyelini kullan (B rush Green üzerinden, Spectre ile Orange içi dövüşler). Bu seviyede Icebox bir satranç oyununa dönüşür — kim rakibin haritadaki alışkanlıklarını daha hızlı okursa yarıyı kazanır.
+- **Iron-Silver**: B site'teki Orange, Yellow, Green callout'larını karıştırıyorsun. Zip line'e atlamadan önce düşünmüyorsun, mid'e hiç bakmıyorsun. Şunu yap: A Belt'e girmeden önce bir ability kullan, sonra ilerle. Bu tek hareket seni öldürten açı sayısını ikiye böler. Zip line ses çıkarır — rakip duyar. Bunu bil.
+- **Gold-Platinum**: Flash atıyorsun ama arkasından swing atmıyorsun — utility boşa gidiyor. B site'te Orange girişinde tüm takım aynı anda yığılıyor, hiç aralık yok. Şunu yap: ilk oyuncu flash ile girer, ikincisi flash patladıktan sonra girer. Mid'i "başkasının işi" sanıyorsun — değil. Birini oraya ata.
+- **Diamond-Ascendant**: Rafters, Snowman, aynı entry, aynı default — rakip seni ezberledi. Rakip A Belt'i yığıyorsa mid'e geç, Tube'dan split yap. Rafters'tan kill aldıysan bir sonraki roundda Nest'e taşın. Orange yerine Kitchen split dene. Rakibin alışkanlığını oku ve değiştir.
+- **Immortal-Radiant**: Mekanikleri biliyorsun, fark yaratan şey anti-strat. Rakip her round A Belt push yapıyorsa smoke Belt + Pipes üzerinden flank kur. Tube split geliyorsa Tube'a utility göm. Rakibin Op'inin kimde olduğunu, nerede durduğunu, save edip edemeyeceğini takip et. Eco roundlarda Icebox'un yakın dövüş alanlarını kullan: B rush Green üzerinden, Orange içi Spectre. Kim rakibin harita alışkanlığını önce okursa, o yarıyı kazanır.
 
 ## 8. Post-Plant Stratejileri
 
 ### A Site Post-Plant
-- Spike'i A Default'a (site ortası, Pipes tarafı) plant et — bu pozisyon Belt ve Nest'ten korunabilir
-- Post-plant pozisyonları: A Belt + A Nest crossfire kur. İki farklı yükseklikte pozisyon almak retake yapan savunucuyu iki açıya birden bakmak zorunda bırakır
-- Rafters'i smoke'la — retake yapan savunucu Rafters'tan açı tutamasın
-- Sova shock dart lineup'ları A Default plant için çok güçlü — güvenli pozisyondan spike'a hasar ver
-- Viper snake bite post-plant = garanti hasar, savunucuyu defuse'dan çıkarır
+- Spike'i A Default'a (site ortası, Pipes tarafı) plant et — Belt ve Nest'ten korunur
+- A Belt + A Nest crossfire kur. Biri aşağıda biri yukarıda dursun — retake gelen savunucu iki açıyı aynı anda çözemez
+- Rafters'ı smoke'la — oradan açı tutmasın
+- Sova shock dart lineup öğren, A Default plant'e güvenli yerden hasar ver
+- Viper snake bite at — savunucu defuse'a yaklaşamaz
 
 ### B Site Post-Plant
-- B Orange + B Green crossfire kur — iki farklı açıdan retake yolunu kontrol et
-- Kitchen'i izle — savunucu retake için Kitchen'dan gelecek
-- Nested yapı post-plant'te saldırganın avantajına dönüşür: Orange, Yellow, Green'deki köşeler saklanma ve açı tutma için mükemmel
-- Sova shock dart B Default plant için lineup kullan
-- Viper snake bite + Killjoy nano swarm kombinasyonu B site'ta defuse'u neredeyse imkânsız kılar
+- B Orange + B Green crossfire kur — retake yolunu iki açıdan kes
+- Kitchen'ı gözle — retake Kitchen'dan gelir, başka yol yok
+- Viper snake bite + Killjoy nano swarm B Default'a yığ — defuse etmesi çok zorlaşır
 
 ### Genel Post-Plant
-- Icebox'ta dikey crossfire çok güçlü — farklı seviyelerde pozisyon al (biri site seviyesinde, biri yüksekte)
-- Post-plant'te site içinde kalma — geri çekil ve açı tut. Site içinde kalmak retake utility'sine (molly, stun, nade) açık hedef olmak demek
-- Spike'i duyabildiğin ve korunabildiğin en uzak pozisyondan izle
+- Dikey crossfire kur — biri site seviyesinde, biri yüksekte dursun. Icebox'ta bu kombinasyon retake'i mahveder
+- Plant sonrası site içinde kalma. Utility patlar, ölürsün — geri çekil, açı tut
+- Spike'i duyabileceğin ve cover alabileceğin en uzak noktadan izle
 
 ## 9. Ekonomi Stratejileri
-- **Op önceliği**: Op Icebox'ta diğer haritalara kıyasla çok daha fazla değer üretiyor çünkü uzun sightline'lar (A Belt, Mid, A Pipes) Op'in avantajını maksimize ediyor. Op economy'sini doğru yönetmek — save round'larda Op'i korumak, Op'çuyu ölümden kurtarmak — Icebox'ta stratejik öncelik
-- **Force buy**: B rush Green üzerinden minimal utility ile yapılabilir. B'nin yakın mesafe yapısı force buy silahları (Spectre, Stinger) için uygun
-- **Eco round**: A Pipes'ta agresif Sheriff oynamak eco'da yüksek ödüllü bir hamle — Pipes'ta tek headshot ile silah çalma potansiyeli var. B Orange içinde Judge eco play de güçlü bir opsiyon
-- **Spectre**: B site'in kapalı ve yakın mesafe yapısı Spectre'yi tam round silahı gibi kullanmanı sağlar. Orange, Yellow, Green içindeki dövüşler Spectre menzilinde
-- **Bonus round**: Op save Icebox'ta diğer haritalara göre çok daha değerli. Bir round kaybetsen bile Op'i kurtardıysan sonraki round'da haritanın en güçlü silahıyla başlarsın
+- **Op önceliği**: Icebox'ta Op, başka hiçbir haritada bu kadar iş yapmaz. A Belt, Mid, A Pipes — hepsi Op'in eline geçiyor. Save round'da Op'i ölüme götürme, arkandaki adamla trade al önce.
+- **Force buy**: B rush'ı Green üzerinden Spectre veya Stinger'la atabilirsin. B'nin yapısı zaten yakın — pahalı silaha gerek yok.
+- **Eco round**: A Pipes'ta Sheriff oyna. Tek headshot ile düşmanın silahını çalarsın. B'deysen Orange içinde Judge tut, çıkışları kes.
+- **Spectre**: B'deki Orange, Yellow, Green — hepsi Spectre menzilinde. Bu üç noktada Spectre, tam alım gibi çalışır.
+- **Bonus round**: Round kaybettiysen bile Op'i kurtardıysan bir sonraki el için haritanın en güçlü silahındasın. Op'i boşa harcama.
 
 ## 10. Anti-Strat İpuçları
 
 **Rakip her round A Belt push yapıyorsa:**
 IF: Saldırı tarafı her round A Belt'ten agresif push yapıyor
-MEANING: Tek boyutlu saldırı — Belt'i durdurursan round'u durdurursun
-COUNTER: Belt'e smoke at + Pipes'tan flank kur. Smoke Belt push'unu durdurur, Pipes flank'i saldırı tarafını arkadan vurur. Ayrıca Belt girişine Sage wall veya sentinel utility yerleştirmek push'u tamamen bloke edebilir.
-WHY: Tek giriş noktasından yapılan push'lar o girişi kapattığında çöker. Flank eklenmesi saldırı tarafını iki yönlü baskı altına alır.
+MEANING: Tek bir girişten geliyor — o girişi kapat, round bitti
+COUNTER: Belt'e smoke at, Pipes'tan flank kur. Smoke Belt'i tıkar, Pipes flanki saldırıyı arkadan vurur. Sentinel utility'n varsa Belt girişine göm — push başlamadan biter.
+WHY: Tek giriş noktası kapandığında o strateji çöker. Flank eklersen saldırı tarafı iki yönden baskı yer, karar veremez.
 
 **Rakip Tube'dan split yapıyorsa:**
-IF: Saldırı tarafı sürekli mid kontrolü alıp Tube'dan A site'a split yapıyor
-MEANING: Mid kontrolün zayıf ve Tube korumasız
-COUNTER: Tube girişine sentinel utility koy (tripwire, turret, alarmbot). Mid'de erken bilgi al (Sova dart, Fade haunt). Tube'a utility yerleştirmek split'i engellemese bile erken uyarı verir ve savunucuya hazırlanma zamanı kazandırır.
-WHY: Split'in gücü sürpriz faktöründen gelir. Erken bilgi sürprizi ortadan kaldırır ve savunucuya pozisyon alma zamanı verir.
+IF: Saldırı tarafı mid kontrolü alıp Tube'dan A site'a split yapıyor
+MEANING: Mid'in zayıf, Tube korumasız
+COUNTER: Tube girişine sentinel utility göm — tripwire, turret, alarmbot. Sova dart veya Fade haunt ile mid'den erken bilgi al. Bilgi gelince pozisyon al, sürpriz kalmaz.
+WHY: Split'i güçlü yapan sürpriz faktörü. Erken bilgi o sürprizi yok eder, pozisyon alırsın.
 
 **Rakip B rush yapıyorsa:**
-IF: Saldırı tarafı B Main'den hızlı push yapıyor — full utility dump ile Orange'a yığılıyor
-MEANING: B'nin dar girişi rush'i durdurmak için idealdir ama utility olmadan bu avantaj kullanılamaz
-COUNTER: B Green'de Sage wall + Killjoy lockdown kombinasyonu rush'u tamamen durdurabilir. Sage wall Orange girişini kapatır, lockdown ise site'a girenleri geri çekilmeye zorlar. Bu iki utility olmasa bile molly + slow orb kombinasyonu push'u yavaşlatır.
-WHY: Rush'lar hız avantajına dayanır. Hızı kesen her utility (wall, slow, molly) rush'in temel avantajını ortadan kaldırır ve savunucuya rotasyon zamanı kazandırır.
+IF: Saldırı tarafı B Main'den full utility dump ile Orange'a yığılıyor
+MEANING: B'nin dar girişi rush durdurmak için biçilmiş kaftan — ama elinde utility yoksa bu avantaj boşa gider
+COUNTER: Sage wall + Killjoy lockdown varsa Orange girişini kapat, site'a girenleri geri çevir. Bu ikisi yoksa molly + slow orb at — rush'ı yavaşlatır, rotasyon zamanı kazanırsın.
+WHY: Rush hız avantajına dayanır. Wall, slow, molly — hangisi hızı keserse rush'ın temeli çöker.
 
 **Rakip zip line'i agresif kullanıyorsa:**
-IF: Saldırı tarafı zip line ile Rafters'a çıkarak A site'a giriş yapıyor
-MEANING: Zip line'in iniş noktası sabit ve tahmin edilebilir
-COUNTER: Zip çıkışını bekle — iniş anında oyuncu vulnerability penceresindedir ve kolay hedef haline gelir. Rafters'a pre-aim yap ve iniş animasyonu sırasında vur. Alternatif olarak Rafters'a molly veya stun at — zip'ten inen oyuncu utility'nin içine düşer.
-WHY: Zip line kullanıcısının iniş noktası sabittir ve iniş sırasında savunma kapasitesi düşüktür. Bu pencereyi bilmek ve beklemek savunucuya garanti avantaj verir.
+IF: Saldırı tarafı zip line ile Rafters'a çıkıp A site'a giriş yapıyor
+MEANING: Zip'in iniş noktası sabittir, her seferinde aynı yere iner
+COUNTER: Rafters'a pre-aim yap, iniş animasyonu bitmeden vur — o anda savunma kapasitesi sıfır. Alternatif: Rafters'a molly veya stun at, zip'ten inen utility'nin içine düşer.
+WHY: İniş noktası sabittir ve iniş sırasında karşı hamle yapamaz. Bu pencereyi biliyorsan garanti avantajın var.
 
 **Rakip mid'de Op oynuyorsa:**
-IF: Savunma tarafı mid'de Op ile sightline kontrol ediyor — saldırı tarafı mid'e çıkamıyor
-MEANING: Mid kontrolü engelleniyor ve saldırı tek boyutlu kalıyor
-COUNTER: Mid'e smoke at + flash ile birlikte dual swing yap. Smoke Op sightline'ını keser, flash Op'çuyu açıdan çıkarır, dual swing ise Op'çununun sadece bir oyuncuyu vurabileceği durumu yaratır. Alternatif olarak mid'i tamamen bypass edip A Belt veya B Main'den doğrudan execute yap — ama bu mid kontrolünden vazgeçmek demek.
-WHY: Op tek sightline'da dominant ama o sightline kapatıldığında veya birden fazla hedefe bölündüğünde avantajını kaybeder. Smoke + flash + dual swing bu üç faktörü birden uygular.
+IF: Savunma tarafı mid'de Op ile sightline kontrol ediyor, sen mid'e çıkamıyorsun
+MEANING: Mid bloke, saldırın tek boyutlu kalıyor
+COUNTER: Mid'e smoke at, flash sok, dual swing yap. Smoke sightline'ı keser, flash Op'çuyu açıdan çıkarır, dual swing ise Op'çunun ikisini birden vuramayacağı durumu yaratır. Mid'i bypass etmek istersen A Belt veya B Main'den direkt execute yap — ama mid kontrolünden tamamen vazgeçmiş olursun.
+WHY: Op tek sightline'da güçlüdür. O sightline kapanır ya da iki hedefe bölünürse avantajı gider. Smoke + flash + dual swing üçünü aynı anda uygular.
 
 ## 11. Temel Pozisyonlar ve Callout'lar
 - **A Tarafı**: A Belt / A Main / A Pipes / A Rafters / A Nest / A Screens / A Site / A Zip / A Default (plant)
@@ -176,33 +178,33 @@ WHY: Op tek sightline'da dominant ama o sightline kapatıldığında veya birden
 - **Genel**: CT Spawn / T Spawn
 
 ### Callout Açıklamaları
-- **A Rafters**: A site'in üstündeki yüksek platform — savunucular için en güçlü açı
-- **A Nest**: A site'ta Rafters'in yanındaki kapalı pozisyon — off-angle için ideal
-- **A Pipes**: A site'a giden yan koridor — agresif bilgi alma ve Op pozisyonu
-- **A Screens**: A site CT tarafındaki perde/duvar yapısı — retake pozisyonu
-- **B Orange**: B site'in ana giriş koridoru — turuncu ışıklı bölgeden isim alır
-- **B Yellow**: B site içindeki yüksek pozisyon — anchor noktası
-- **B Green**: B site'in yan girişi — yeşil ışıklı bölge
-- **B Snowman**: B site'taki kardan adam figürü yanındaki off-angle pozisyonu
-- **B Kitchen**: B site CT tarafındaki mutfak bölgesi — retake rotasyonu için kullanılır
-- **Tube**: Mid'den A site'a açılan boru geçişi — split için hayati
-- **Boiler**: Mid'den B Kitchen'a açılan bölge — B split için kullanılır
-- **Blue**: Mid'deki mavi ışıklı alan — bilgi alma pozisyonu
-- **Container**: A site'taki konteyner yapısı — cover ve off-angle sağlar
+- **A Rafters**: A site'in üstündeki yüksek platform. Savunucu orada duruyorsa önce onu temizle, sonra site'e gir.
+- **A Nest**: A site'ta Rafters'ın yanındaki kapalı köşe. Rakip beklediğin açıyı kontrol ederken sen buradan vurursun.
+- **A Pipes**: A site'a giden yan koridor. Op sesi duyduysan bu koridorda acele etme, flash at önce.
+- **A Screens**: A site CT tarafındaki perde yapısı. Retake'te ilk temizlemen gereken yer burası.
+- **B Orange**: B site'e ana giriş. Turuncu ışıklı bu koridorda sıkışırsan çıkamazsın, util kullan.
+- **B Yellow**: B site içindeki yüksek köşe. Anchor burada duruyorsa spike kurarken sırtın dönük olmasın.
+- **B Green**: B site'in yan girişi. Yeşil ışıklı bu bölgeden gelen split rakibi çabuk fark etmezsin, ilet.
+- **B Snowman**: B site'taki kardan adam yanındaki köşe. Retake'te buraya bakan off-angle'ı unutursan öylece ölürsün.
+- **B Kitchen**: B site CT tarafındaki mutfak bölgesi. B'ye rotasyon yapıyorsan buradan geçersin, başka yol yok.
+- **Tube**: Mid'den A site'a açılan boru geçişi. Split yaparken bu geçiş kapalıysa A split çalışmaz.
+- **Boiler**: Mid'den B Kitchen'a bağlanan bölge. B'ye split atarken Boiler kontrolü olmadan girme.
+- **Blue**: Mid'deki mavi ışıklı alan. Buradan bilgi almadan ne A'ya ne B'ye rahat geçiş yaparsın.
+- **Container**: A site'taki konteyner yapısı. Hem kapak olarak kullan hem off-angle aç, ikisi de işe yarar.
 
 ## 12. Agent Tier Listesi
 
 ### S-Tier
-- **Sova**: Icebox Sova'nin en güçlü haritası. Recon Bolt A site ve B site'i geniş açılardan tarar. Shock Dart lineup'ları her iki site için mükemmel çalışır. Owl Drone Tube ve Mid'de bilgi toplar. Hunter's Fury haritanın dikey yapısında bile güçlü — A Rafters'taki oyuncuyu yerden vurabilir.
-- **Viper**: Toxic Screen A site'i veya B site'i tamamen böler. Snake Bite post-plant lineup'ları Icebox'in dar plant bölgelerinde defuse'u engelliyor. Viper Pit A site'in açık yapısında güçlü alan kontrolü sağlar.
+- **Sova**: Sova için en iyi harita burası. Recon Bolt ile A site ve B site'i geniş açıdan tararsın. Shock Dart lineupları her iki site için çalışır. Owl Drone'u Tube ve Mid'e sok, bilgi al. Hunter's Fury dikey yapıda da güçlü — A Rafters'taki oyuncuyu yerden vurursun.
+- **Viper**: Toxic Screen ile A site ya da B site'i ikiye bölersin. Snake Bite post-plant lineupları dar plant bölgelerinde defuse'u durdurur. Viper Pit A site'in açık yapısında tam alan kontrolü verir.
 
 ### A-Tier
-- **Jett**: Op + Jett Icebox'ta çok güçlü — A Belt, Mid ve A Pipes uzun sightline'lar sunuyor. Updraft Rafters ve diğer yüksek pozisyonlara erişim sağlar. Dash ile agresif peek sonrası geri çekilme Mid'de ve Belt'te hayat kurtarır.
-- **Sage**: Wall Icebox'ta oyun değiştirici. A Belt wall saldırıyı tamamen durdurabilir. B Orange wall rush'u keser. Slow Orb dar koridorlarda push'u yavaşlatır. Resurrect Icebox'in uzun round'larında büyük değer üretir.
-- **Killjoy**: Turret + Alarmbot ile bir site'i solo tutabilir. Nanoswarm B Orange ve A Belt girişlerinde rush'ları durdurur. Lockdown retake'te savunucuya büyük avantaj verir. Icebox'in dar giriş yapısı Killjoy'un utility'sini maximize eder.
+- **Jett**: Op alıyorsan Jett seç. A Belt, Mid ve A Pipes uzun sightline sunuyor. Updraft ile Rafters'a ve yüksek noktalara çıkarsın. Agresif peek sonrası Dash ile çekilirsin — Mid ve Belt'te bu seni kurtarır.
+- **Sage**: Wall burada maç dönüştürür. A Belt wall saldırıyı keser, B Orange wall rush'u durdurur. Slow Orb'u dar koridora at, push yavaşlar. Resurrect uzun roundlarda büyük değer üretir.
+- **Killjoy**: Turret + Alarmbot ile bir siteyi tek başına tutarsın. Nanoswarm'ı B Orange ve A Belt girişine göm, rush durur. Lockdown retake'te sana büyük avantaj verir. Dar girişler Killjoy'un utility'sini doğrudan güçlendirir.
 
 ### B-Tier
-- **Chamber**: Op + TP Mid ve A Belt'te güçlü. Trademark flank izleme için değerli — Tube veya Boiler'a koy. Ama Icebox'in dikey yapısı Chamber'in utility menzilini sınırlar.
-- **KAY/O**: Suppress Icebox'ta değerli — Viper wall'unu veya Sage wall'unu düşürür. Flash'lar dar koridorlarda işe yarar. Molly post-plant için kullanılır. Ama Sova'nin bilgi toplama üstünlüğü KAY/O'yu ikinci plana atar.
-- **Fade**: Haunt ile site tarama yapar. Prowler Tube ve dar koridorlarda temizleme için güçlü. Seize post-plant alan engelleme sağlar. Sova kadar geniş alan tarama yapamaz ama yakın mesafe bilgisi daha iyi.
-- **Omen**: Smoke ile sightline kontrolü sağlar. Teleport ile beklenmedik pozisyonlar alır — Rafters'a TP güçlü. Paranoia dar koridorlarda çalışır. Ama Viper'in Icebox'a özgü dominansı Omen'i tamamlayıcı role iter.
+- **Chamber**: Op + TP ile Mid ve A Belt'te güçlü. Trademark'ı Tube ya da Boiler'a koy, flank izlersin. Ama haritanın dikey yapısı utility menzilini kısıtlar.
+- **KAY/O**: Suppress burada değerli — Viper wall'unu veya Sage wall'unu düşürürsün. Flashler dar koridorlarda işe yarar, Molly post-plant için kullanırsın. Ama Sova bilgi toplamada seni geride bırakır.
+- **Fade**: Haunt ile site tararsın. Prowler'ı Tube ve dar koridorlarda kullan, temizlersin. Seize post-plant'te alanı kapatır. Sova kadar geniş tarayamazsın ama yakın mesafe bilgisinde Sova'dan iyisin.
+- **Omen**: Smoke ile sightline'ı kapatırsın. Rafters'a TP güçlü, beklenmedik pozisyon alırsın. Paranoia dar koridorlarda çalışır. Ama Viper bu haritaya özel bu kadar baskın ki Omen tamamlayıcı role düşer.

@@ -11,111 +11,108 @@ tags: [matchup, killjoy, fade, sentinel, initiator]
 
 ## 1. Matchup Özü
 
-Killjoy turret + alarmbot + nanoswarm setup'ıyla Fade'in haunt + prowler info ağına karşı site anchor'layan sentinel, Fade ise haunt reveal + prowler chase ile Killjoy'un utility yerleşimini haritalayan tracking initiator. Matchup Killjoy'un setup gizliliği ile Fade'in info disiplinini test eder.
+Killjoy gizli kurulumla siteyi tutar. Fade haunt + prowler ile o kurulumu bulur, ifşa eder. Bu matchup basit: Killjoy yerini saklarsa kazanır, Fade yerini öğrenirse kazanır. İki taraf da bilgi savaşı yapar — ama yöntem tam tersi.
 
 ## 2. Kim Avantajlı?
 
 **Killjoy lehine durumlar:**
-- Fade utility harcanmış durumda — haunt + prowler yok, Killjoy setup serbest çalışır
-- Close-range site anchor rolünde (Bind Hookah, Sunset B) — turret dar choke'ta Fade entry'sini tag'ler
-- Killjoy Lockdown ult hazır — ult retake penceresinde Fade'i detain, prowler chase iptal
-- Killjoy turret Fade prowler'ı yakaladığında — turret auto-tag prowler HP'sini siler, chase iptal
+- Fade haunt + prowler harcandı — Killjoy kurulumu serbestçe çalışır
+- Dar geçit olan sitede oynuyorsun (Bind Hookah, Sunset B) — turret girişi zorlaştırır
+- Killjoy ulti hazır — Fade retake yaparken ulti at, prowler chase biter
+- Turret prowler'ı görür — iki-üç vuruda prowler biter, Fade chase kaybeder
 
 **Fade lehine durumlar:**
-- Fade haunt Killjoy turret + alarmbot lokasyonunu reveal ettiğinde — setup pozisyonu takıma info, rifle ile utility silme
-- Fade prowler Killjoy anchor pozisyonunu yakaladığında — nearsight Killjoy aim'ini bozar, takım follow-up
-- Fade seize ult Killjoy setup hattına atıldığında — seize area CC, turret aktivasyonu iptal
-- Post-plant Nightfall ult — area fear + nearsight Killjoy'un retake hattını iptal eder
+- Haunt Killjoy'un turret + alarmbot yerini takıma gösterdi — takım tüfekle o utility'yi siler
+- Prowler Killjoy'un durduğu yere girdi — nearsight atar, aim bozulur, takım arkasından girer
+- Seize Killjoy'un kurulum hattına düştü — alan CC, turret tepki veremez
+- Nightfall ulti post-plant hattına geldi — nearsight + fear, Killjoy retake yapamaz
 
-**Balanced:** Haven, Ascent, Lotus gibi orta mesafeli map'lerde matchup Killjoy utility katmanı ile Fade haunt lineup ekonomisine bağlı.
+**Dengeli haritalar:** Haven, Ascent, Lotus — hangi taraf kurulum/haunt döngüsünü öne alırsa o round'u alır.
 
 ## 3. Key Düellolar
 
-**IF** Fade haunt Killjoy turret + alarmbot lokasyonunu reveal etti
-**MEANING** Setup pozisyonu Fade takımına info, rifle shot veya utility ile utility hattı silinebilir
-**COUNTER** Killjoy turret'ı haunt trajektör dışında köşe noktalara, alarmbot'u haunt reveal radius'u dışında. Round-to-round varyasyon haunt lineup'larına karşı.
-**WHY** Haunt reveal geniş area. Sabit setup lokasyonu haunt reveal'da bedava info. Varyasyon haunt'un bilgi değerini azaltır.
+**IF** Fade haunt Killjoy turret + alarmbot yerini gösterdi
+**MEANING** Takım o noktayı biliyor — tüfek ya da utility ile kurulumu siler
+**COUNTER** Turret'i haunt yolunun göremeyeceği köşelere koy. Her round farklı yer seç — haunt aynı yerde bir daha işe yaramaz
+**WHY** Haunt geniş alan tarar. Sabit kurulum = bedava bilgi. Yer değiştirirsen haunt değersizleşir
 
 ---
 
-**IF** Fade prowler Killjoy anchor pozisyonuna çıktı
-**MEANING** Prowler nearsight Killjoy'un aim duelunu bozar, takım prowler sonrası follow-up entry
-**COUNTER** Killjoy prowler sesine reaksiyon cover arkasına çekil, turret prowler'ı auto-tag eder. Prowler HP düşük, turret tag'i prowler'ı siler.
-**WHY** Prowler lock-on chase. Killjoy turret'in otomatik hedefleme Fade prowler'ına cevap — Fade prowler lineup'ı turret hattından uzak olmalı.
+**IF** Fade prowler Killjoy'un durduğu yere girdi
+**MEANING** Nearsight aim'ini bozar, takım hemen arkasından gelir
+**COUNTER** Prowler sesini duyar duymaz kapağa çekil — turret prowler'ı otomatik vurur ve bitirir
+**WHY** Prowler HP düşük, turret iki-üç vuruda siler. Turret görüş hattındaysa Fade prowler'ı körü körüne atamaz — önce turret yerini öğrenmesi gerekir
 
 ---
 
-**IF** Killjoy Lockdown ultunu Fade retake penceresine attı
-**MEANING** Lockdown area detain Fade'i radius içinde dondurur, Fade utility kullanamaz
-**COUNTER** Fade Lockdown sesini duyduğu an radius dışına, ult süresini cover arkasında geçir.
-**WHY** Lockdown retake iptal silahı. Fade'in utility'si retake için — ult süresi boyunca Fade setup dışı.
+**IF** Killjoy Lockdown ultunu Fade retake hattına attı
+**MEANING** Alan içindeki Fade donar, utility kullanamaz
+**COUNTER** Lockdown sesini duyunca hemen alandan çık, süre bitene kadar kapağın arkasında bekle
+**WHY** Lockdown retake'i iptal eder. Fade'in tüm gücü retake'te — ulti süresi boyunca Fade etkisiz
 
 ---
 
-**IF** Fade Nightfall ultunu Killjoy post-plant pozisyonuna attı
-**MEANING** Area fear + nearsight, Killjoy anchor pozisyonu cover'da bile debuff, defend hattı zayıf
-**COUNTER** Killjoy Nightfall ses indicator'a reaksiyon radius dışına, cover'ı ult yönünden korur.
-**WHY** Nightfall area debuff wall-pierce değil. Cover doğru yönden alınırsa debuff absorbs edilmez.
+**IF** Fade Nightfall ultunu Killjoy'un post-plant pozisyonuna attı
+**MEANING** Nearsight + fear, kapağın arkasında bile debuff alırsın, savunma hattın çöker
+**COUNTER** Nightfall sesini duyunca alandan çık, ulti yönünden kapak al
+**WHY** Nightfall duvardan geçmez. Doğru yönden kapak alırsan debuff sana ulaşmaz
 
 ---
 
-**IF** Fade seize ult Killjoy'un setup lineup hattına atıldı
-**MEANING** Seize area CC, Killjoy setup'ını aktive edemez, turret reaktif çalışmaz
-**COUNTER** Killjoy setup lokasyonunu seize lineup hattı dışında. Seize ses indicator reposition sinyali.
-**WHY** Seize ground-based CC. Killjoy'un utility'si lokasyon-bağlı — seize lokasyon üzerinde yakalanırsa setup boşa.
+**IF** Fade seize Killjoy'un kurulum hattına düştü
+**MEANING** Alan CC, Killjoy utility'sini aktif edemez, turret tepki vermez
+**COUNTER** Kurulumunu seize'ın inemeyeceği noktalara yap. Seize sesi duyunca reposition yap
+**WHY** Seize zemine bağlı CC. Killjoy utility'si yerle bağlı — seize üstüne gelirse kurulum boşa gider
 
 ---
 
-**IF** Killjoy nanoswarm Fade'in haunt lineup pozisyonuna
-**MEANING** Haunt atıldığında Fade pozisyonu bilinir, nanoswarm area damage Fade'i lineup anında bitirir
-**COUNTER** Fade haunt lineup'ını nanoswarm lineup dışı noktalara. Round 1 nanoswarm harcatmak için alternatif haunt hattı.
-**WHY** Nanoswarm area damage. Fade haunt lineup pozisyonu statik — statik hedef nanoswarm için bedava.
+**IF** Killjoy nanoswarm Fade'in haunt attığı noktaya denk geldi
+**MEANING** Haunt atarken Fade'in durduğu yer belli — nanoswarm o an basar, Fade biter
+**COUNTER** Fade haunt hattını nanoswarm'un erişemeyeceği yerden seç. İlk roundda alternatif hat dene — nanoswarm harcatırsın
+**WHY** Haunt atarken Fade sabit durur. Sabit hedef = nanoswarm için bedava
 
 ---
 
-**IF** Killjoy turret Fade prowler'ını round başında yakaladı
-**MEANING** Turret auto-tag prowler'ı siler, Fade chase aracı kaybı, info kaybı
-**COUNTER** Fade prowler hattını turret sight dışı yönden. Turret yerleşimini reveal etmek için ilk haunt.
-**WHY** Prowler HP sınırlı, turret tag prowler'ı iki shot ile bitirir. Matchup'ın teknik cevabı turret yerleşim bilgisi.
+**IF** Turret round başında Fade prowler'ını yakaladı
+**MEANING** Prowler biter, Fade chase aracını kaybeder, bilgi kaybı
+**COUNTER** Fade önce haunt at, turret yerini öğren — turret görüş hattı dışından prowler at
+**WHY** Prowler HP düşük, turret iki-üç vuruda siler. Turret'i haunt yolunu değil prowler giriş hattını keser şekilde kurarsın — haunt reveal olsa bile prowler yine biter
 
 ## 4. Utility Takası
 
-Killjoy ekonomisi turret + alarmbot + nanoswarm x2 + ult (setup + area + detain), Fade ekonomisi haunt + prowler + seize + ult (reveal + chase + CC). Iki agent da info-based — Killjoy gizli setup, Fade aktif tracking. Matchup Killjoy'un setup'ını Fade'in reveal'ıyla bulma + chase etme üzerine kuruludur. Ult ekonomi: Lockdown 8 point (detain area), Nightfall 7 point (area debuff) — Fade ult hafif ucuz.
+Killjoy: turret + alarmbot + nanoswarm x2 + Lockdown ulti (kurulum + alan + dondurma)
+Fade: haunt + prowler + seize + Nightfall ulti (ifşa + chase + CC)
 
-## 5. Map Bazlı Değişim
+İkisi de bilgi oyunu oynar ama tersi yönde. Killjoy yerini gizler, Fade o yeri bulur. Lockdown 8 puan, Nightfall 7 puan — Fade ulti bir puan daha ucuz.
 
-**Bind (Killjoy avantajlı):** Close range setup meta, Fade niche pick Bind'da.
+## 5. Harita Bazlı Değişim
 
-**Haven (Fade avantajlı):** 3 site Fade haunt ekonomisi, Killjoy B anchor.
+**Bind (Killjoy avantajlı):** Dar geçitler turret için ideal; Hookah ve A Short girişi turret'i zorlar, Fade prowler'ı bu darlıkta turret görüş hattına girer.
 
-**Lotus (Fade hafif avantajlı):** 3 site yapısı Fade utility'sine yarar.
+**Haven (Fade avantajlı):** 3 site Fade haunt'unu çok daha verimli kullandırır, Killjoy B'yi tutar.
 
-**Ascent (Balanced):** Killjoy A/B anchor, Fade A Main haunt.
+**Lotus (Fade hafif avantajlı):** 3 site yapısı Fade'in lehine.
 
-**Icebox (Balanced):** Killjoy B Site anchor, Fade Mid haunt.
+**Ascent (Dengeli):** Killjoy A/B tutar, Fade A Main'den haunt atar.
 
-**Sunset (Killjoy hafif avantajlı):** Dar choke'lar Killjoy setup meta.
+**Icebox (Dengeli):** Killjoy B Site'ı tutar, Fade Mid'den haunt atar.
 
-**Fracture (Balanced):** Multi-entry iki agent için nötr.
+**Sunset (Killjoy hafif avantajlı):** Dar geçitler Killjoy kurulumu için biçilmiş kaftan.
 
-## 6. Flip Moment'ler
+**Fracture (Dengeli):** Çok yönlü giriş iki agent için de nötr.
 
-**Flip 1 — Haunt setup reveal:** Killjoy utility hattı haunt'ta açığa çıktı, rifle/utility ile silme fırsatı.
+## 6. Flip Anlar
 
-**Flip 2 — Turret prowler'ı sildi:** Fade chase aracı kayıp, info kaybı Killjoy lehine.
+**Flip 1 — Haunt kurulumu ifşa etti:** Killjoy utility hattı açık, takım tüfek veya utility ile siler.
 
-**Flip 3 — Lockdown Fade retake iptal:** Ult süresi Fade utility'siz.
+**Flip 2 — Turret prowler'ı bitirdi:** Fade chase aracını kaybetti, avantaj Killjoy'a geçti.
 
-**Flip 4 — Nightfall anchor debuff:** Killjoy defend hattı nearsight + fear altında.
+**Flip 3 — Lockdown Fade retake'i kesti:** Ulti süresi Fade utility'siz geçti.
 
-## 7. Pro Coach Notları
+**Flip 4 — Nightfall savunma hattını çökertti:** Killjoy nearsight + fear altında, retake yok.
 
-**VCT'de nasıl oynanıyor:** Killjoy ve Fade iki S/A+ tier agent. Matchup pro meta'da sık. Pro Fade oyuncuları haunt lineup'larını Killjoy setup lokasyonlarına göre hazırlar — round başı reveal Fade için standard taktik. Pro Killjoy oyuncuları utility yerleşimini Fade haunt hatlarına göre round-to-round varyasyonla kurar.
+## 7. Koç Notu
 
-**Meta tier durumu:** Killjoy S tier, Fade A+ tier. Head-to-head map'e göre denge değişir.
+Bu matchup'ta her round turret'i farklı yere koy. Fade bir kez haunt ile yeri öğrenirse sonraki roundda prowler'ı doğrudan o noktaya atar. Yer değiştirirsen Fade her round sıfırdan başlar — haunt harcaması boşa gider.
 
-**** Fade prowler HP patch 9.x'te güncellendi mi? Turret tag prowler'ı iki shot ile siliyor mu?
-
-**** Seize ult area Killjoy setup aktivasyon hattını kapsıyor mu? Pratik testle doğrulanmalı.
-
-**Coach test:** "Killjoy setup gizler, Fade setup'ı reveal eder. İki oyuncu info savaşı. Killjoy varyasyon disiplini, Fade haunt lineup bilgisi. Disiplinli olan round'u alır."
+Fade tarafında ise kural şu: Turret yerini bilmeden prowler atma. Prowler HP düşük, turret görürse hemen bitirir. Önce haunt, sonra prowler — sırayı karıştırırsan prowler'ı bedavaya verirsin.

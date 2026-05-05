@@ -9,107 +9,124 @@ tags: [matchup, jett, raze, duelist_vs_duelist]
 
 ## 1. Matchup Özü
 
-Jett ve Raze duelist rolünün iki farklı fiziksel mekaniğini temsil eder. Jett mobility-based — Tailwind dash ile entry açar, Updraft ile vertical pozisyon alır, Cloudburst kısa smoke. Dash Jett'in tek para birimi, tek kullanım, cooldown var. Raze explosive-based — Boombot ile info, Blast Pack ile mobilite + damage, Paint Shells ile area damage, Showstopper ult roket. Jett Op-carry duelist, Raze utility-entry duelist. Jett aim üstünlüğü üzerine kurulu, Raze utility bolluğu üzerine kurulu. Pro okuma: Jett sightline controller'ı, Raze alan temizleyici. İki karakter aynı takımda olabilir (nadir) ama karşı takımda karşılaştıklarında haritanın fiziksel yapısı kim lehine çalışıyorsa o karakter ekonomisini kuruyor.
+Jett dash'e dayanır. Raze util'e. Jett'in tek kaçış kartı Tailwind — bir kez kullanırsın, cooldown girer. Raze'in Boombot, Blast Pack, Paint Shells var; her round tekrar kullanır. Jett uzun mesafede Op ile taşır. Raze dar koridorda util ile taşır. Raze yaklaşırsa Op bırak, dash at, Vandal'a geç.
 
 ## 2. Kim Avantajlı?
 
-Patch 9.x'te iki karakter yakın meta'da. Jett uzun süreli S tier, Raze 2022-2024 döneminde çıkışa geçti ve S tier oldu. Pick rate'de ikisi de meta. Farklar: Jett aim-carry rolü (Op ekonomisi), Raze utility-entry rolü (damage + mobilite). Harita dağılımı: Jett'in S haritaları Breeze, Icebox, Haven, Ascent. Raze'in S haritaları Bind, Split, Fracture, Icebox. Icebox iki karakter için de S. Comp seçim: Jett comp Op-heavy, Raze comp entry-heavy. Aynı takımda nadir çünkü entry ekonomisi çakışır. Karşı takımda karşılaştıklarında Jett sightline hold eder, Raze dar koridor temizler. Meta pick order: harita bağımlı, karakter bazlı net üstünlük yok.
+Harita belirler — karakter olarak net üstünlük yok.
+
+- **Uzun sightline'lı haritalar** (Breeze, Haven, Ascent): Jett Op ekonomisi açık, Raze pick dışı.
+- **Dar koridor haritaları** (Bind, Split, Sunset): Raze Paint Shells + Blast Pack dominant, Jett dash bir yönde sıkışır.
+- **Icebox**: Karakter avantajı sıfır — Boombot sesini duyunca cover al, Dash cooldown'dayken öne çıkma.
 
 ## 3. Key Düellolar
 
-**IF** Jett dash cooldown'da, Raze Boombot rotate hattına
-**MEANING** Jett dashsiz, mobility yok — Raze Boombot Jett'in sabit pozisyonunu basabilir
-**COUNTER** Jett dash cooldown'da aggressive pozisyondan çekil, pasif hold. Boombot sesini duyunca cover'a gir
-**WHY** Jett'in mobility avantajı dash'e bağlı. Dashsiz Jett sıradan rifler. Raze Boombot Jett'in pozisyonunu bulur, info verir.
+**IF** Jett dash cooldown'da, Raze Boombot aktif
+**MEANING** Dashsiz Jett sabit durur — Boombot konumunu bulur, Blast Pack ile üzerine çıkılır
+**COUNTER** Dash cooldown'a girdiğinde aggressive açıdan çekil, pasif bir köşe tut. Boombot sesini duyunca cover'a gir, Boombot patlamadan önce pozisyon değiştir
+**WHY** Dash olmadan Jett sıradan bir rifler. Raze'in bu pencereyi kullanması bedava bilgi + push.
 
 ---
 
-**IF** Raze Blast Pack ile vertical push yaptı, Jett Updraft üstte
-**MEANING** İki vertical mobilite çarpışıyor — Raze Blast Pack geçici yükseklik, Jett Updraft kalıcı yükseklik (tek zıplama)
-**COUNTER** Jett Updraft ile daha yüksek pozisyon alır, Raze Blast Pack yükseklik avantajını kaybeder. Jett top-down shot avantajlı
-**WHY** Vertical düelloda Jett Updraft'ı Blast Pack'ten üst pozisyona çıkarır. Raze'nin Blast Pack'i damage yapar ama pozisyon avantajı Jett'te.
+**IF** Raze Blast Pack ile havaya çıktı, Jett Updraft aktif
+**MEANING** Raze'in Blast Pack yüksekliği geçici — Jett Updraft ile daha uzun süre üstte kalır
+**COUNTER** Jett olarak Updraft ile Raze'in Blast Pack yüksekliğinin üzerine çık, top-down açıdan vur
+**WHY** Dikey düelloda üstteki kazanır. Raze Blast Pack sırasında düşerken Jett yukarıdan ateş eder.
 
 ---
 
-**IF** Jett Blade Storm ult aktive, close range, Raze Paint Shells aynı alanda
-**MEANING** İki close range ult — Blade Storm right-click point-blank damage, Paint Shells area damage. İki ult aynı alanda çakışır
-**COUNTER** Raze Paint Shells damage area uygular, Jett Blade Storm tek hedef. Aynı alanda Paint Shells Jett'in throwing knife kullanımını engeller (Jett damage alıp geri çekilir)
-**WHY** Area damage > tek hedef damage close range'de. Raze Paint Shells Jett'in Blade Storm ekonomisini kırabilir.
+**IF** Raze Showstopper kullandı, roket geldi
+**MEANING** Showstopper geniş alan vurur — sabit dursan ölürsün
+**COUNTER** Dash cooldown'da değilsen roket iniş noktasından hemen dash at. Cooldown'daysan önceden cover al, roketin seni açıkta yakalamasına izin verme
+**WHY** Showstopper'ın tek zayıflığı mobility. Dash varsa neredeyse sıfır hasar alırsın.
 
 ---
 
-**IF** Raze Showstopper ult aktive, rocket launch
-**MEANING** Showstopper area damage ult — rocket bir alana atılır, iniş noktası geniş alan
-**COUNTER** Jett dash ile rocket iniş alanından çıkar, dash cooldown'da değilse mobility avantajı Jett'te
-**WHY** Showstopper sabit alan damage. Jett'in dash'i Showstopper'dan kaçış kaynağı. Dash cooldown'da değilse Jett Showstopper'ı neredeyse sıfır damage ile atlatır.
+**IF** Jett Blade Storm aktif, Raze Paint Shells aynı alanda
+**MEANING** Blade Storm tek hedefe odaklanır, Paint Shells alana vurur — açık alanda kalırsan Paint Shells seni keser
+**COUNTER** Raze olarak Paint Shells'i Jett'in kaçış hattına at, onu kapalı alana sık. Jett olarak Blade Storm'da dar alandan uzak dur
+**WHY** Alan hasarı yakın mesafede tek hedef hasarını geçer. Paint Shells Blade Storm ekonomisini bozar.
 
 ---
 
-**IF** Jett Op ile uzak sightline tutuyor, Raze Boombot + Blast Pack ile close push
-**MEANING** Jett uzak mesafe avantajlı, Raze yakın mesafe avantajlı — Raze sightline kırmaya çalışıyor
-**COUNTER** Raze Boombot Jett angle'ına gönder, Blast Pack ile yakın mesafeye çıkış. Jett dash ile geri çekilir, round uzak/yakın oscillation
-**WHY** Jett ve Raze mesafe tercihleri zıt. Jett uzak mesafe, Raze yakın mesafe. Round dinamiği hangi karakter mesafeyi kendi lehine kurabilecek oyuncu kararı.
+**IF** Jett Op ile uzun açı tutuyor, Raze Boombot + Blast Pack ile yakın geliyor
+**MEANING** Raze açıyı kırmak istiyor — Op yakın mesafede işe yaramaz
+**COUNTER** Raze olarak Boombot'u önce gönder, Jett pozisyonunu ortaya çıkar, sonra Blast Pack ile yakın mesafeye gir. Jett olarak Raze yaklaşıyorsa Op'u bırak, dash ile geri çekil, Vandal/Phantom'a geç
+**WHY** Jett uzak mesafede güçlü, Raze yakın mesafede güçlü. Boombot Jett'i pozisyondan çıkarır, Blast Pack mesafeyi kapatır.
 
 ---
 
-**IF** Raze Paint Shells ile dar koridoru temizledi
-**MEANING** Paint Shells damage + concussive area, dar koridorda cover almak zor
-**COUNTER** Jett dar koridora girmemeli, Paint Shells alanından dışarı pozisyon. Jett dar koridor mastery Raze kadar güçlü değil
-**WHY** Raze dar koridor kralı. Jett dar koridorda dash'i bir yönde, Raze Paint Shells + Blast Pack hem disrupt hem mobilite. Yakın mesafe Raze lehine.
+**IF** Raze Paint Shells dar koridora geldi
+**MEANING** Dar koridorda cover az — Paint Shells ikinci patlama da yapar, kaçacak yer yok
+**COUNTER** Jett olarak dar koridora girme. Paint Shells alanından dışarıdan bekle, Raze çıkınca vur
+**WHY** Raze dar koridor için yapılmış. Jett dash orada tek yönde çalışır, Raze hem hasar hem mobilite verir — yakın mesafe Raze'in.
 
 ---
 
-**IF** Jett dash ile aggressive peek aldı, Raze Satchel (Blast Pack) ile trade hazır
-**MEANING** Jett'in peek'ine Raze Satchel ile hemen trade edebilir — Raze mobility dash kadar hızlı
-**COUNTER** Jett dash sonrası trade pozisyonunu hesaplamalı, Raze satchel ile yakın cover hattında ise trade Raze tarafında hızlı
-**WHY** Jett mobility tek yönlü (dash ileri), Raze mobility iki yönlü (satchel ileri + yukarı). Trade mesafesi Raze için kısa.
+**IF** Jett dash ile peek attı, Raze Blast Pack hazır
+**MEANING** Raze Blast Pack ile anında trade mesafesine girebilir — Jett'in peek'i Raze'in önünde açıktır
+**COUNTER** Jett olarak dash sonrası hemen cover'a dön, Raze'e trade penceresi verme. Raze Blast Pack hızını aklında tut — dash'ten sonra sabit durma
+**WHY** Jett dash tek yönde (ileri). Raze Blast Pack hem ileri hem yukarı gider. Trade mesafesi Raze için çok kısa.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
-Jett utility: Tailwind (dash), Updraft (vertical jump), Cloudburst (smoke x3), Blade Storm (ult, throwing knives). Raze utility: Boombot (yer info robotu), Blast Pack (x2 satchel), Paint Shells (x2 damage nade), Showstopper (ult, rocket). Karşılaştırma: Mobility — Jett Tailwind horizontal, Raze Blast Pack horizontal + vertical. Mobility çeşitliliği Raze lehine. Damage — Jett Blade Storm ult bağımlı damage, Raze Paint Shells + Boombot + Blast Pack utility damage. Utility damage kategorisi Raze lehine tek yönlü. Info — Jett yok, Raze Boombot. Info kategorisi Raze lehine tek yönlü. Smoke — Jett Cloudburst x3 kısa süreli, Raze yok. Smoke kategorisi Jett lehine tek yönlü.
+**Jett'in elinde:**
+- Tailwind (dash) — tek kaçış + entry
+- Updraft — dikey pozisyon
+- Cloudburst x3 — kısa süreli smoke
+- Blade Storm — ücretsiz silah, eco round'da taşır
 
-Ult karşılaştırması: Blade Storm silah ult'u (bedava primary), Showstopper damage ult'u (area rocket). Blade Storm ekonomik silah (eco round), Showstopper area denial (post-plant + execute). Farklı ult değer kategorileri. Blade Storm kullanımı round-bazlı, Showstopper kullanımı execute-bazlı. Ekonomi: Jett utility cooldown tabanlı, Raze utility cooldown tabanlı. İki karakter de round başı full utility.
+**Raze'in elinde:**
+- Boombot — düşman konumunu bulur
+- Blast Pack x2 — mobilite + hasar
+- Paint Shells x2 — alan temizler
+- Showstopper — execute round'da alan kapatır
 
-Takas sonucu: Raze utility damage ve çeşitlilik açısından üstte, Jett smoke ve aim ekonomisi açısından üstte. İki karakter tamamlayıcı değil alternatif.
+**Fark şu:** Raze her round hasar util'iyle oynar. Jett smoke üretir ama hasar util'i yok. Boombot sayesinde Raze bilgiye Jett'ten önce ulaşır. Jett olarak her düelloda pozisyonunu Boombot gelmeden önce seç — Boombot seni bulursa zaten geç.
 
-## 5. Map Bazlı Değişim
+**Ult farkı:** Blade Storm eco round'da kullan — ücretsiz birincil silah gibi çalışır. Showstopper execute round'da veya post-plant'te kullan — geniş alanı kapatır. Blade Storm'u execute'ta, Showstopper'ı eco'da kullanma.
 
-**Breeze:** Jett favored. Uzun sightline Jett Op ekonomisine uygun. Raze Breeze'de pick dışı.
+## 5. Harita Bazlı Değişim
 
-**Ascent:** Jett favored. Mid ve A Short Jett dash için ideal.
+**Breeze:** Jett oyna. Uzun sightline Op ekonomisine açık, Raze buraya uymuyor.
 
-**Haven:** Jett favored. Üç site Jett mobility ile birden fazla angle hold.
+**Ascent:** Jett oyna. Mid ve A Short dash için ideal açılar.
 
-**Icebox:** Nötr. İki karakter de Icebox'ta S tier, iki farklı rolü doldururlar.
+**Haven:** Jett oyna. Üç site mobility ile birden fazla açı tutabilirsin.
 
-**Bind:** Raze favored. Hookah ve A Short dar koridor Raze Paint Shells için ideal.
+**Icebox:** Karakter avantajı sıfır. Boombot sesini duyunca cover'a gir, Dash cooldown'dayken açıdan çıkma.
 
-**Split:** Raze favored. B Main ve A Ramps dar koridor Raze için.
+**Bind:** Raze oyna. Hookah ve A Short Paint Shells için biçilmiş kaftan.
 
-**Fracture:** Raze favored. İki taraflı attack Raze Blast Pack vertical mobility için.
+**Split:** Raze oyna. B Main ve A Ramps dar koridor Raze'in.
 
-**Sunset:** Raze favored. Dar yapı Raze damage utility için.
+**Fracture:** Raze oyna. İki taraflı baskı Blast Pack mobility ile çok güçlü.
 
-**Lotus:** Nötr. İki karakter de Lotus'ta oynanır.
+**Sunset:** Raze oyna. Dar yapı Paint Shells hasarını katlıyor.
 
-**Pearl:** Nötr.
+**Lotus:** Karakter avantajı yok. Raze Blast Pack ile B rotasyonunu hızlandırır, Jett ise C uzun açısını Op ile tutar — takımın baskı yaptığı site seçimi belirler.
 
-**Abyss:** Jett hafif avantajlı. Vertical yapı Jett Updraft için.
+**Pearl:** Karakter avantajı yok. Mid dar koridor Raze'e, A Long Jett Op'una açık — takımın tercih ettiği site belirler.
 
-## 6. Flip Moment'ler
+**Abyss:** Jett hafif avantajlı. Dikey yapı Updraft ile iyi açılar verir.
 
-1. **Dash cooldown Jett için.** Jett dash cooldown'da ise Raze Boombot + Blast Pack kombosu Jett'in pozisyonunu bulur ve basar. Dash olmadan Jett yarım duelist.
+## 6. Flip Anlar
 
-2. **Showstopper area damage.** Raze ult geniş alan damage. Jett dash ile kaçamazsa Showstopper ezici kill silahı.
+1. **Dash cooldown.** Dash girdiyse aggressive açıdan çekil — Raze Boombot + Blast Pack kombosuyla seni bulur ve basar.
+2. **Showstopper.** Dash yoksa cover'da ol. Açıkta yakalanırsan kaçış yok.
+3. **Blade Storm yakın mesafe.** Raze yakın mesafede Jett'in knife burst'üne karşı zayıf — Raze olarak bu ult aktifken yakın kapanma.
+4. **Mesafe kontrolü.** Jett uzakta, Raze yakında güçlü. Raze yaklaşıyorsa Jett dash at ve silah değiştir; Raze olarak Boombot ile Jett'i açıdan çıkar, sonra kapat.
+5. **Icebox mirror.** Karakter avantajı sıfır — Boombot sesine tepki ver, Dash cooldown'dayken açıdan çıkma.
 
-3. **Blade Storm close range.** Jett ult close range ezici — Raze yakın mesafede Jett throwing knife burst damage'a karşı zayıf.
+## 7. Koç Notları
 
-4. **Op hold vs close push.** Jett uzak mesafe Op hold, Raze yakın mesafe push. Mesafe kararını kim kontrol ediyorsa round'un faz yönü o taraftan.
+**Jett oynuyorsan:**
+Raze Boombot sesini tanı — o ses çıkınca aggressive açıdan çekil, Boombot seni bulmasın. Dash cooldown'un ne zaman bittiğini hisset; cooldown'dayken öne çıkma. Op tutuyorsan Raze yaklaşmadan önce dash ile geri çekil, Vandal'a geç — Op yakın mesafede seni öldürür.
 
-5. **Icebox mirror.** Aynı map Icebox'ta iki karakter de S tier — matchup bu map'te aim ve utility kullanımına bağlı, karakter avantajı yok.
+**Raze oynuyorsan:**
+Jett dash attıktan hemen sonra push aç — dash cooldown girdi, şu an savunmasız. Paint Shells'i uzak mesafeye atma, yakın koridorda patlat. Showstopper'ı execute round'da kullan, eco round'da harcama — Blade Storm eco'da Jett'i taşır, Showstopper taşımaz.
 
-## 7. Pro Coach Notları
-
-Pro sahnede iki karakter de meta'nın üstünde. VCT comp'larında seçim harita bazında yapılır. Jett sightline hold haritaları için, Raze dar koridor haritaları için. İki karakter aynı takımda nadiren görülür (entry rolü çakışır). Koçluk ipucu: Jett oyuncusu Raze Boombot sesini ezberlemeli — Boombot round başı aktive olduğunda Jett pasif hold'a geçmeli. Raze oyuncusu Jett dash cooldown'unu ezberlemeli — dash cooldown'da Jett savunmasız, push pencere açık.
-
-Yaygın pro hata: Jett oyuncusu Raze ile karşılaştığında Op angle'ında bekler, Raze dar mesafeye yaklaşırsa Op kullanılmaz. Doğru: Jett Op angle'ından dash ile çekilir, Vandal/Phantom ile yakın mesafe. İkinci hata: Raze oyuncusu Paint Shells'i uzak mesafe pop'lar. Doğru: Paint Shells yakın mesafe damage için, dar koridor. Üçüncü hata: İki karakter ult'u yanlış round'da kullanır — Blade Storm full buy'da, Showstopper eco round'da. Doğru: Blade Storm eco round, Showstopper execute round.
+**Her iki karakter için sık hata:**
+- Jett: Op açıda bekler, Raze yaklaşır, Op işe yaramaz. Çözüm: Raze yakınlaşmadan dash at, silah değiştir.
+- Raze: Paint Shells'i uzak mesafede patlatır, hasar sıfır. Çözüm: Paint Shells sadece dar koridor + yakın mesafe.
+- İkisi: Blade Storm eco'da kullan, Showstopper execute'ta kullan — tersini yapma.

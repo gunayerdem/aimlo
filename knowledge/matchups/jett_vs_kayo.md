@@ -11,111 +11,110 @@ tags: [matchup, jett, kayo, duelist, initiator]
 
 ## 1. Matchup Özü
 
-Jett dash ile KAY/O'nun suppress knife + flash + molly zincirine girmeye çalışan mobility duelist, KAY/O ise suppress ile Jett'in utility'sini iptal edip dash'siz duruma düşüren disable initiator. Matchup suppress mekaniğinin Jett'in kimliğini sıfırlama gücünü test eder.
+KAY/O'nun bıçağı Jett'in dash'ini, updraft'ını ve smoke'unu aynı anda kapatır. Bıçak Jett'e değdiği an Jett sıradan bir rifler olur. Bu matchup'ta tek soru şu: bıçak sana çarpar mı, çarpmaz mı?
 
 ## 2. Kim Avantajlı?
 
-**Jett lehine durumlar:**
-- KAY/O solo utility durumunda — suppress tek Jett'i kapsar, takım hazır değilse suppress süresinde Jett yine dash açabilir (suppress bitince)
-- Jett ult hazır (Blade Storm) — suppress silahı iptal edemez (right-click knife ult ekipmana değil silaha dayanır)
-- Long sightline map'lerinde — KAY/O flash + knife close-mid range, Jett uzak angle'da Op dominance
-- KAY/O ult cooldown'dayken — Null Cmd olmadan KAY/O'nun area suppress yok, Jett takım utility'si aktif
+**Jett lehine:**
+- KAY/O bıçağını yanlış yere attıysa — bıçak sana değmedi, dash açık, KAY/O silahsız
+- Jett ult'u varsa (Blade Storm) — KAY/O bıçağı silahı iptal etmez, ult knife'ları çalışır
+- Harita açık ve uzunsa — KAY/O bıçağının menzili yetmez, Op'la köşe tut
 
-**KAY/O lehine durumlar:**
-- Jett suppress radius'una girdiğinde — suppress Jett'in dash + updraft + smoke tamamını iptal eder, Jett sıradan rifler
-- KAY/O flash zinciri hazırken — çift flash (knife + hand flash) Jett'in aim disiplinini yıkar
-- Post-plant KAY/O Null Cmd ult durumu — area suppress Jett'in utility'sini iptal, Jett off-angle pozisyonunda dashsiz
-- KAY/O knife Jett'in entry hattına fırlatıldığında — knife wall pierce, Jett cover arkasında bile suppress
+**KAY/O lehine:**
+- Bıçak sana değdiyse — dash yok, updraft yok, smoke yok, duel kaybedersin
+- KAY/O çift flash attıysa — el flashı + bıçak flashı arka arkaya, peek açamazsın
+- KAY/O ult'u aktifse — ult yarıçapındaysan tüm utility'n kapanır, statik kalırsın
+- Hookah, A Main gibi dar koridorlarda — bıçak duvardan geçer, saklandığın yerde seni bulur
 
-**Balanced:** Haven, Ascent, Lotus gibi orta mesafeli map'lerde matchup KAY/O'nun knife lineup'ına ve Jett'in dash kullanım timing'ine bağlı.
+**Dengeli:** Split A Main ve Lotus C Main gibi hem yakın hem açık geçişlerin karıştığı yerlerde matchup bıçak hatlarını kimin bildiğine göre döner.
 
 ## 3. Key Düellolar
 
-**IF** KAY/O suppress knife Jett'i suppressed yaptı
-**MEANING** Jett dash + updraft + smoke tamamen iptal, suppress süresi boyunca Jett sıradan rifler, aim duel'de KAY/O takımı avantajlı
-**COUNTER** Jett suppress knife lineup hatlarını round 1'de öğren, pozisyonunu knife hattı dışına taşı. Knife ses indicator anında reposition sinyali.
-**WHY** KAY/O'nun gücü suppress. Suppress Jett'in tüm kimliğini siler. Jett varsa knife hattından uzak, yok ise matchup KAY/O'ya bağlanır.
+**IF** KAY/O bıçağı sana değdi
+**MEANING** Dash yok, updraft yok, smoke yok. KAY/O takımı hemen saldırıya geçer — sen sıradan riflersin
+**COUNTER** Önceki roundda bıçağın hangi açıdan geldiğini not et. Sonraki roundda o açının dışında dur. Bıçak sesi duyduğun an o hattın karşı tarafına geç
+**WHY** KAY/O'nun tek silahı bu. Bıçak seni bulmadığı sürece KAY/O elinden geleni yapamaz
 
 ---
 
-**IF** KAY/O flash attı, Jett flash süresinde dash açtı
-**MEANING** Flash süresi kısa ama Jett dash sesli, flash bitince KAY/O takımı Jett dash sonrası pozisyonu duyar
-**COUNTER** Jett flash sonrası dash değil, cover arkasında bekle. Flash yerine kullan, dash'i flash + peek sonrası sakla.
-**WHY** KAY/O flash Jett'in aggressive açısını bozar, dash panik reaksiyon değil — flash süresinde pozisyon cover al, flash sonrası dash ile reposition.
+**IF** KAY/O flash attı, sen panikle dash açtın
+**MEANING** Flash bitti ama KAY/O takımı dash sesini duydu — yeni pozisyonun belli
+**COUNTER** Flash gelirken kapağa çekil. Flash geçince dash'le reposition yap, tam tersi değil
+**WHY** Dash panik butonu değil. Flash sırasında pozisyon al, flash sonrası dash'le köşe değiştir
 
 ---
 
-**IF** Jett dash ile KAY/O suppress radius'una girdi
-**MEANING** Dash bitiminde Jett suppress içinde, dash dönüş yok, Jett suppress süresi boyunca statik duelist
-**COUNTER** Jett dash yönü suppress radius'una değil, radius dışına. KAY/O suppress range bilgisi dash hattı planlamasında.
-**WHY** Suppress çıkış noktası yok, Jett radius içinde kaldığı sürece utility'siz. Dash yönü disiplini matchup'ın merkezi.
+**IF** Dash atarken KAY/O bıçak alanına girdin
+**MEANING** Dash bitti, utility kapandı, geri dönüş yok — bıçak alanı içinde statik kalırsın
+**COUNTER** Dash atmadan önce bıçağın nereye düşeceğini belirle. Dash yönün her zaman bıçak alanının dışına
+**WHY** Bıçak alanından çıkış yok. Bir kez içine girdin mi, utility'siz kalırsın
 
 ---
 
-**IF** KAY/O Null Cmd ultunu Jett'in post-plant pozisyonuna attı
-**MEANING** Ult area suppress + combat stim takım arkadaşları için, Jett dash iptal + off-angle pozisyonunda savunmasız
-**COUNTER** Jett ult sesini duyduğu an ult radius'undan çık. Null Cmd radius sabit, hareket yönü radius dışı.
-**WHY** Null Cmd stratejik area ult. Jett'in dash'i ult yayılımı öncesi radius dışına çıkmak için kullanılmalı. Ult başladıktan sonra dash suppress altında iptal.
+**IF** KAY/O ult attı, sen ult alanının içindesin
+**MEANING** Tüm utility'n kapanır, yakındaki KAY/O takımı güçlenir — hem silahsız hem dezavantajlısın
+**COUNTER** KAY/O ult sesi duyar duymaz dash'i o an kullan ve alanın sınırının dışına çık. Alanın yarıçapı sabit — içine girdikten sonra dash da kapanır
+**WHY** Ses geldiği an dash atarsan alanı terk edersin. İçine girdikten sonra geç kalırsın
 
 ---
 
-**IF** Jett utility harcamış, KAY/O suppress knife hazır
-**MEANING** Jett dash + smoke bittiyse, suppress zaten utility'siz Jett için tek silah rifle. KAY/O hand utility ile Jett'i close range basır.
-**COUNTER** Jett utility harcama sırası planlanmalı — suppress threat varsa dash'i en sona sakla. Dash + suppress aynı anda iptal edilebilir kombinasyon.
-**WHY** KAY/O'nun gücü utility iptal timing'inde. Jett dash olduğunda suppress sadece suppress; Jett dashsız olduğunda suppress + trade hızlı ölüm.
+**IF** Jett utility'ni harcadı, KAY/O bıçağı henüz atmadı
+**MEANING** Bıçak şimdi gelirse sadece Jett'in utility'sini değil, zaten bitmiş utility'yi iptal eder — fark yok. Ama sende dash yoksa ölüm hızlanır
+**COUNTER** Bıçak tehdidi varken dash'i en sona sakla. Smoke ve updraft'ı önceden bitirme
+**WHY** KAY/O bıçağının asıl gücü dash'i almak. Dash yokken bıçak sadece psikolojik — ama seni yine öldürür
 
 ---
 
-**IF** Jett updraft ile vertical cover aldı, KAY/O knife üst kattaki pozisyonda
-**MEANING** Knife wall-pierce, updraft havada slow target, knife Jett'i suppressed yapar
-**COUNTER** Updraft lokasyonu knife lineup hattından uzak. KAY/O knife sesine reaksiyon anında updraft yön değişimi.
-**WHY** KAY/O knife wall-pierce, updraft'ın havada duruşunu yakalar. Knife lineup'larını öğrenmek updraft'ın ne zaman güvenli olduğunu belirler.
+**IF** Updraft'la yükseğe çıktın, KAY/O bıçağı o pozisyona geldi
+**MEANING** Bıçak duvardan geçer, havadayken yavaşsın — bıçak seni orada bulur
+**COUNTER** Updraft atacağın yeri bıçak hattından uzak seç. Bıçak sesi gelirse updraft yönünü o hattın tersine çevir
+**WHY** KAY/O bıçağı köşeyi, duvarı, yükseği tanımaz. Havadayken daha kolay hedefsin
 
 ---
 
-**IF** Jett Blade Storm ult ile KAY/O suppress hattını yakaladı
-**MEANING** Ult knife silahı, suppress silah iptal etmiyor — Jett ult boyunca throwing knife ekonomisi aktif
-**COUNTER** KAY/O Jett Blade Storm sesini duyduğu an kaçış hattı arar. Corner cover + flash knife ult radius'undan çıkış.
-**WHY** Jett ult silah, suppress ability iptal eder. Bu asimetri Jett'e ult süresinde avantaj — doğruluğu test edilmeli.
+**IF** Jett Blade Storm ult'u açık, KAY/O bıçak attı
+**MEANING** Bıçak silahı değil utility'yi iptal eder — ult knife'ların çalışmaya devam eder
+**COUNTER** KAY/O Blade Storm sesini duyduğu an köşeye çekilir ve flash atar. Baskıyı kesmeden sürdür
+**WHY** Ult açıkken bıçak seni durduramaz. Bu asimetriyi her Blade Storm roundunda kullan
 
 ## 4. Utility Takası
 
-Jett mobility (dash + updraft + smoke + ult), KAY/O disable + flash (suppress knife + flash x2 + molly + ult). KAY/O utility'sinin asıl silahı suppress — Jett'in kimliğini iptal eden tek mekanik. Diğer tüm karşılaşmalarda Jett mobility avantajlı, suppress radius'unda Jett tamamen çöker. Matchup'ın özü KAY/O'nun Jett'i suppress radius'una çekmeye çalışması, Jett'in radius dışı kalmaya çalışması. Ult ekonomisi: Blade Storm 7 point, Null Cmd 7 point — cost eşit, ult etkisi farklı (Jett single target burst, KAY/O area suppress).
+Jett'in elinde dash, updraft, smoke ve ult var. KAY/O'nun elinde bıçak, iki flash, molly ve ult.
 
-## 5. Map Bazlı Değişim
+KAY/O'nun gerçek silahı bıçak — geri kalanı flash+molly kombinasyonu. Bıçak Jett'i yakalarsa matchup KAY/O'ya döner. Bıçak ıskalayınca KAY/O elinde iki flash ve molly kalan bir initiator, Jett'in mobilite avantajı açık.
 
-**Haven (KAY/O avantajlı):** Haven 3 site yapısı KAY/O suppress ekonomisine yarar. Knife lineup'ları 3 site için hazır.
+Ult maliyeti ikisi için de eşit. Ama Jett ult'u tek hedefe odaklanır, KAY/O ult'u etrafındaki tüm takım arkadaşlarını güçlendirir ve geniş bir yarıçapta tüm düşman utility'sini kapatır. KAY/O ult attıysa alandan çık — Jett ult'u açıksa ve KAY/O ult yoksa baskıya geç.
 
-**Ascent (KAY/O hafif avantajlı):** A Main knife lineup meta. Jett A Short entry suppress hattında.
+## 5. Harita Bazlı Değişim
 
-**Bind (KAY/O avantajlı):** Close range suppress knife'ı Hookah'da Jett'in tüm kimliğini iptal eder.
+**Haven (KAY/O avantajlı):** Üç site, üç bıçak hattı. KAY/O her siteye bıçak atar, Jett üç hattı aynı anda tutamaz.
 
-**Icebox (Jett avantajlı):** Uzun sightline + vertical Jett'in alanı. KAY/O knife Mid'de range yetmez.
+**Ascent (KAY/O hafif avantajlı):** A Main bıçak hattı Jett'in A Short girişini kapatır.
 
-**Breeze (Jett avantajlı):** Geniş alan Jett Op gücü. KAY/O knife range sınırlı.
+**Bind (KAY/O avantajlı):** Hookah gibi dar koridorlarda bıçak kaçış yeri bırakmaz.
 
-**Split (Balanced):** A Main Jett vertical, B Main KAY/O knife lineup.
+**Icebox (Jett avantajlı):** Uzun hatlar ve yükseklik Jett'in alanı. KAY/O bıçağının menzili burada kısa kalır.
 
-**Lotus (Balanced):** KAY/O 3 site info, Jett close range C Main.
+**Breeze (Jett avantajlı):** Geniş alan Op'la oyna. KAY/O bıçağı bu menzile yetişemez.
 
-## 6. Flip Moment'ler
+**Split (Dengeli):** A Main Jett'in yükseği, B Main KAY/O'nun bıçak hattı.
 
-**Flip 1 — Suppress Jett'i yakaladı:** Jett suppress radius'unda ise matchup anında KAY/O'ya döner. Suppress süresi KAY/O'nun tek silahı.
+**Lotus (Dengeli):** KAY/O üç sitede bilgi toplar, Jett C Main yakın mesafede güçlü.
 
-**Flip 2 — Suppress dışı Jett:** Jett knife lineup'larını bypass ediyorsa matchup Jett'e döner. KAY/O'nun silahı boşa.
+## 6. Dönüm Noktaları
 
-**Flip 3 — Flash + suppress kombosu:** İki utility Jett'i aynı anda yakalarsa kesin ölüm. Yalnız flash Jett'in dash kaçışına yenilir.
+**Dönüm 1 — Bıçak seni buldu:** Matchup anında KAY/O'ya döner. Artık sıradan dueldasın.
 
-**Flip 4 — Jett ult silah ekonomisi:** Blade Storm suppress sırasında aktif mi? Doğrulama round'u belirleyici.
+**Dönüm 2 — Bıçak ıskaladı:** KAY/O elinden geleni yaptı. Sen hâlâ tam utility'desin — baskıya geç.
 
-## 7. Pro Coach Notları
+**Dönüm 3 — Flash + bıçak aynı anda:** İkisi seni birlikte yakaladıysa dash bile kurtarmaz. Bu komoyu gördüğünde geri çekil.
 
-**VCT'de nasıl oynanıyor:** KAY/O pro meta'da standard initiator, Sova/Fade alternatifi. Suppress knife pro seviyede Jett'e karşı kasıtlı kullanılır — Jett'in dash'ini iptal etmek round kazanan taktik. Pro Jett oyuncuları knife lineup'larını öğrenir ve dash hattını knife hattı dışında tutar. Matchup pro seviyede dengede ama knife disiplinli KAY/O hafif avantajlı.
+**Dönüm 4 — Jett ult + KAY/O bıçağı:** Ult açıkken bıçak seni durduramaz. Bu anı gördüğünde roundu kazan.
 
-**Meta tier durumu:** Jett S tier, KAY/O A+ tier. Head-to-head KAY/O hafif avantajlı (suppress mekaniği Jett'in counterı), pro seviyede.
+## 7. Koç Notu
 
-**** Blade Storm ult suppress sırasında aktif mi? Ult silah kategorisinde ise suppress iptal etmez — mekanik test gerekli.
+KAY/O'nun tek silahı bıçak. Bıçak sana değmezse KAY/O elinde iki flash ve molly kalan bir initiator — Jett'i durduran başka bir şey yok.
 
-**** Suppress süresi ve knife throw range patch 9.x'te güncellendi mi?
+Bıçak hattını öğren. Round içinde bıçak sesini duy, hattın dışına geç. Dash'i bıçak tehdidi varken sakla. Ult'u açtıysan bıçak seni durduramaz — o anı kaçırma.
 
-**Coach test:** "KAY/O'nun tek silahı suppress. Suppress Jett için dash kaybı. KAY/O bu silahı Jett'e döndürdüğünde matchup'ı aldı. Jett tarafında: suppress knife lineup'larını öğren, radius dışında kal, knife sesine reaksiyon reposition. Suppress içinde hiçbir şey Jett'i kurtarmaz."
+Jett tarafındaki tek çalışma: bıçak hatları. Bunu çözersen KAY/O'nun sana yapacağı bir şey kalmaz.

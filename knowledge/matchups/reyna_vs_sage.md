@@ -11,111 +11,116 @@ tags: [matchup, reyna, sage, duelist, sentinel]
 
 ## 1. Matchup Özü
 
-Reyna kill-dependent dismiss + devour ile Sage'in wall + slow orb + heal kombosunu aşmaya çalışan frag-focused duelist, Sage ise wall + slow orb ile Reyna'nın kill snowball'ını durdurmaya çalışan defensive anchor. Matchup Reyna'nın ilk kill ekonomisi ile Sage'in wall timing'ini test eder.
+Reyna'nın tek silahı: kill al, sonra dismiss/devour zinciri başlat. Sage'in tek işi: Reyna'yı o ilk kill'den uzak tut.
+
+Sage wall + yavaşlatma atarsa Reyna sıradan bir duelist. Reyna ilk kill alırsa Sage'in utility'si tükeniyor, matchup Reyna'ya dönüyor. Bu kadar basit — ama bu basitliği yönetmek zor.
 
 ## 2. Kim Avantajlı?
 
-**Reyna lehine durumlar:**
-- Close-range duello alanlarında (Bind Hookah, Split A Ramp) — Reyna'nın 1v1 mekaniği Sage'in utility'sinden daha güçlü
-- Sage utility harcanmışken — wall + slow orb kullanılmışsa Sage sıradan anchor, Reyna aim avantajı
-- Reyna ult hazır (Empress) — Empress sırasında rate of fire + dismiss + devour zinciri Sage'i yakalar
-- Reyna kill aldıktan sonra — kill sonrası soul dismiss kaçış + devour heal, Sage trade alamaz
+**Reyna lehine:**
+- Yakın mesafe dövüş alanlarında (Bind Hookah, Split Vent) — Sage utility'si dar koridorda işe yaramaz, Reyna 1v1 kazanır
+- Sage wall + yavaşlatma atmış, el boş kalmış — Sage artık sıradan anchor, Reyna aim avantajı
+- Reyna ult açıksa — ateş hızı + dismiss zinciri Sage'i yakalar
+- Reyna kill aldıktan sonra — soul dismiss kaçış + devour şifa, Sage trade alamaz
 
-**Sage lehine durumlar:**
-- Close-range choke'larda (Bind Hookah, Split A Main) — Sage wall choke'u keser, Reyna ilk kill alamazsa utility'si işlemez
-- Reyna henüz kill almamışsa — Reyna soul yok, devour/dismiss yok, Reyna utility'siz duelist
-- Sage slow orb Reyna'nın entry hattına — slow Reyna'nın peek hızını keser, aim duel Sage lehine
-- Sage Resurrection ult ile Reyna'nın ilk kill'ini geri aldığında — Reyna'nın kill ekonomisi sıfırlanır
+**Sage lehine:**
+- Dar girişlerde (Bind Hookah girişi, Split A Main) — Sage duvarı girişi keser, Reyna ilk kill alamazsa utility'siz kalır
+- Reyna kill almamışsa — devour yok, dismiss yok, Reyna boş duelist
+- Yavaşlatma Reyna'nın hamlesi üzerine düşerse — peek hızı kırılır, aim duel Sage lehine
+- Sage ultiyle Reyna'nın kill'ini geri alırsa — Reyna'nın snowball'ı durur
 
-**Balanced:** Haven, Ascent, Lotus gibi orta mesafeli map'lerde matchup Reyna'nın ilk kill kapasitesine bağlı.
+**Dengeli:** Ascent, Haven, Lotus gibi orta mesafeli haritalarda Sage duvarı uzun açıları kapatır, Reyna yakın mesafeye ulaşmak için duvarı aşmak zorunda kalır. Reyna ilk kill alırsa harita Reyna'ya döner, alamazsa Sage alan kontrolünü tutar.
 
 ## 3. Key Düellolar
 
-**IF** Reyna peek aldı, Sage wall Reyna'nın crosshair hattına kurulmadı
-**MEANING** Sage wall timing'i geç, Reyna bedava peek, aim duel Reyna lehine
-**COUNTER** Sage wall'u peek öncesi kurar — reaktif wall yetişmez. Round başı wall lineup hazır, Reyna peek sesine reaksiyon wall değil.
-**WHY** Reyna'nın gücü aim speed. Wall wall görsel engeli olmak zorunda, peek anında kurulan wall reaction time'dan sonra gelir, Reyna shot'u önce atar.
+**IF** Reyna hamle yaptı, Sage duvarı Reyna'nın bakış hattına gelmedi
+**MEANING** Duvar geç kuruldu, Reyna bedava hamle yaptı, aim duel Reyna'nın
+**COUNTER** Sage duvarı hamle sesine göre değil, hamleden önce kurar. Reyna hamle yapmadan pozisyon okur, duvarı öne koyar.
+**WHY** Reyna'nın gücü hamle hızı. Duvar hamle anında kurulursa Reyna çoktan ateş etmiştir.
 
 ---
 
-**IF** Reyna kill aldı, devour ile heal yapıyor, Sage aggressive push
-**MEANING** Devour Reyna'yı kısa süreliğine statik yapar ama HP kazancı hızlı, Sage push devour penceresine denk düşerse Reyna savunmasız
-**COUNTER** Reyna devour'u cover arkasında kullanır, açıkta değil. Dismiss devour alternatifi — heal yerine kaçış.
-**WHY** Devour Reyna'nın heal aracı, ama kullanım süresi boyunca hareket sınırlı. Sage'in yakalama penceresi bu süre.
+**IF** Reyna kill aldı, devourla şifa yapıyor, Sage agresif baskı yapıyor
+**MEANING** Devour Reyna'yı durdurur ama şifa hızlıdır. Sage bu pencereye denk gelirse Reyna açıkta kalır.
+**COUNTER** Reyna devour'u kapak arkasında kullanır, açıkta değil. Kapak yoksa dismiss — şifa değil kaçış.
+**WHY** Devour sırasında Reyna hareket edemez. Sage'in yakalama penceresi tam bu süre.
 
 ---
 
-**IF** Sage slow orb Reyna'nın dismiss kaçış hattına
-**MEANING** Dismiss hareket hızı slow radius'unda düşer, Reyna kaçış hattı yavaş, Sage takip edip bitirir
-**COUNTER** Reyna dismiss yönü slow orb lineup dışına. Sage slow orb Reyna'nın rotate hatlarını okuyarak yerleştirir.
-**WHY** Slow orb Reyna'nın dismiss gücünü kırar. Dismiss Reyna'nın kaçış güvencesi — slow hattında dismiss reset aracı değil.
+**IF** Sage yavaşlatmayı Reyna'nın dismiss kaçış hattına attı
+**MEANING** Dismiss yavaşlatma alanında hızı düşer, Reyna kaçamaz, Sage takip eder.
+**COUNTER** Reyna dismiss yönünü yavaşlatma alanının dışına atar. Sage yavaşlatmayı Reyna'nın olası kaçış hattını okuyarak koyar.
+**WHY** Yavaşlatma dismiss'i kırar. Dismiss Reyna'nın can sigortası — yavaşlatma hattında o sigorta çalışmaz.
 
 ---
 
-**IF** Reyna Empress ultunu Sage'in wall arkasına attı
-**MEANING** Empress süresi boyunca Reyna fire rate + dismiss kazancı. Wall arkasındaki Sage Empress süresinde yakalanır
-**COUNTER** Sage Empress sesini duyduğu an pozisyon değiştir, wall arkasında kalmak ölüm.
-**WHY** Empress Reyna'nın snowball ult'u. Wall görsel engeli ama damage engeli değil — Reyna nade/rifle ile wall arkasını basabilir.
+**IF** Reyna ulti açtı, Sage duvarın arkasında bekledi
+**MEANING** Ult süresince Reyna ateş hızı + dismiss kazancı var. Duvar arkasındaki Sage ult süresinde yakalanır.
+**COUNTER** Reyna ulti sesini duyduğun an pozisyon değiştir. Duvar arkasında kalmak ölüm.
+**WHY** Duvar görüş engeli, hasar engeli değil. Reyna el bombası + tüfekle duvar arkasını basar.
 
 ---
 
-**IF** Sage Resurrection ile Reyna'nın ilk kill'ini geri aldı
-**MEANING** Reyna'nın soul ekonomisi sıfırlanır (devoured soul kaybolmaz ama kill trade sıfır), Sage'in takım ekonomisi geri yüklenir
-**COUNTER** Reyna kill aldıktan sonra resurrection range'i dışına çıkmalı, canlanma sesi duyulduğunda trade kill arar.
-**WHY** Resurrection Reyna'nın kill snowball'unu bozan tek Sage silahı. Sage res kararını Reyna'nın kill'inden sonra verir, Reyna reset penceresini okumalı.
+**IF** Sage ultiyle Reyna'nın kill'ini geri aldı
+**MEANING** Reyna'nın soul ekonomisi durur, Sage takımı geri yüklendi.
+**COUNTER** Reyna kill aldıktan sonra canlandırma menzili dışına çık. Canlanma sesini duyunca trade kill ara.
+**WHY** Sage ulti Reyna'nın snowball'ını bozan tek şey. Reyna o reset penceresini okursa Sage'in ulti boşa gider.
 
 ---
 
-**IF** Reyna ilk kill alamadı, Sage wall hazır durumda
-**MEANING** Reyna soul yok, devour/dismiss kullanılamaz, Reyna sıradan duelist, Sage utility avantajı
-**COUNTER** Reyna ilk kill almak için flash desteği ister (teammate KAY/O/Breach). Solo Reyna kill ekonomisi duruyor, takım utility ile açılır.
-**WHY** Reyna'nın tüm kimliği kill'e bağlı. Kill yoksa Reyna hiçbir şey. Sage wall Reyna'yı kill fırsatından mahrum bırakırsa matchup Sage'in.
+**IF** Reyna ilk kill alamadı, Sage duvarı hazır
+**MEANING** Devour yok, dismiss yok, Reyna boş duelist. Sage utility avantajı.
+**COUNTER** Reyna ilk kill için takımdan flash desteği ister (KAY/O, Breach). Solo Reyna kill ekonomisi duruyorsa takım açar.
+**WHY** Reyna'nın her şeyi kill'e bağlı. Kill yoksa Reyna hiçbir şey. Sage duvarı Reyna'yı kill fırsatından mahrum bırakırsa matchup Sage'de biter.
 
 ---
 
-**IF** Reyna Sage heal hattını gördü, heal sırasında peek aldı
-**MEANING** Sage heal sırasında statik, Reyna aim avantajı maksimum, kill + soul kazancı
-**COUNTER** Sage heal'i cover arkasında, görüş hattı dışında kullanır. Açıkta heal = kesin ölüm Reyna karşısında.
-**WHY** Sage heal aktif uygulama statik pozisyon gerektirir. Reyna'nın aim'i statik hedefe karşı maksimum, heal penceresi Reyna için bedava kill.
+**IF** Reyna Sage'in şifa yaptığını gördü, hamle yaptı
+**MEANING** Sage şifa sırasında durağan, Reyna aim avantajı maksimum, kill + soul kazancı kesin.
+**COUNTER** Sage şifayı kapak arkasında, görüş hattı dışında kullanır. Açıkta şifa = Reyna'ya bedava kill.
+**WHY** Şifa sırasında Sage hareket edemez. Reyna durağan hedefe karşı en güçlü — o pencere Reyna için bedava.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
-Reyna utility'si kill-dependent (dismiss + devour + blind x2 + ult), Sage utility'si team + space (wall + slow orb + heal + ult). Reyna'nın utility'si kill'e bağlı, Sage'in utility'si takım ekonomisine bağlı. Matchup'ın özü: Reyna ilk kill alırsa snowball, alamazsa sıradan duelist. Sage'in işi Reyna'yı ilk kill fırsatından uzak tutmak — wall timing ve slow orb yerleşimiyle Reyna'nın peek hattını kesmek. Ult ekonomi: Empress 6 point, Resurrection 8 point — Reyna ult daha ucuz ama consistency Sage ult'ta daha yüksek.
+Reyna'nın her şeyi kill'e bağlı: kill al → soul → dismiss veya devour. Kill yoksa elinde sadece 2 flash var.
 
-## 5. Map Bazlı Değişim
+Sage'in utility'si kill olmadan da çalışır: duvar + yavaşlatma + şifa + ulti takımı için. Reyna kill alamazsa utility'si işlevsiz, Sage kill olmadan da alan kontrol eder.
 
-**Bind (Reyna avantajlı):** Close range + 1v1 alanlar Reyna'nın. Sage wall Bind'da choke'lar için ama Hookah dar kill alanı.
+Ulti maliyeti: Reyna ulti 6 puan, Sage ulti 8 puan. Reyna ulti daha sık açılır ama Sage ulti tutarlı — doğru canlandırma roundu çevirir.
 
-**Split (Balanced):** A Main Sage wall meta, Vent Reyna close range duel.
+## 5. Haritaya Göre Değişim
 
-**Ascent (Sage hafif avantajlı):** Sage A Main klasik anchor, Reyna aim duello arar ama Ascent Mid uzun angle.
+**Bind (Reyna avantajlı):** Hookah + Short dar ve yakın. Sage duvarı bu alanlarda Reyna'yı durduramaz, 1v1 Reyna'nın.
 
-**Haven (Balanced):** Sage B anchor, Reyna A Short entry aim duel.
+**Split (Dengeli):** A Main'de Sage duvarı girişi keser, Reyna push yapamaz. Vent'te Reyna close-range duel arar, Sage duvarı dar koridorda işe yaramaz.
 
-**Icebox (Reyna hafif avantajlı):** Close range Mid Tube + Rafters Reyna aim duel alanı.
+**Ascent (Sage hafif avantajlı):** A Main + Mid uzun açılar Sage'in. Reyna yakın mesafeye ulaşmak için Sage duvarını aşmak zorunda.
 
-**Breeze (Sage avantajlı):** Uzun angle Sage wall görüş engeli, Reyna close range'e ulaşamaz.
+**Haven (Dengeli):** Sage B'de anchor, Reyna A Short aim duel arar. Reyna ilk kill alırsa harita Reyna'ya döner.
 
-**Fracture (Reyna avantajlı):** Multi-entry close range Reyna'nın 1v1 kapasitesi için ideal.
+**Icebox (Reyna hafif avantajlı):** Mid Tube + Rafters dar ve yakın, Reyna aim duel için ideal alan.
 
-## 6. Flip Moment'ler
+**Breeze (Sage avantajlı):** Uzun açılar Sage duvarı için ideal. Reyna yakın mesafeye ulaşamadan düşer.
 
-**Flip 1 — Reyna ilk kill:** İlk kill alındığı an Reyna snowball başlar, matchup Reyna'ya döner. İlk kill yoksa matchup Sage'de kalır.
+**Fracture (Reyna avantajlı):** Çok girişli yapı + dar koridorlar Reyna'nın 1v1 gücüne ideal.
 
-**Flip 2 — Wall timing kayması:** Sage wall reaktif kurulursa Reyna peek'i wall'dan önce, reaktif wall Reyna'yı durduramaz.
+## 6. Dönüm Noktaları
 
-**Flip 3 — Slow orb dismiss'i yakalar:** Dismiss hattı slow radius'undaysa Reyna kaçamaz, trade kill Sage takımına.
+**Dönüm 1 — Reyna ilk kill:** Kill anda snowball başlar, matchup Reyna'ya döner. Kill yoksa Sage'de kalır.
 
-**Flip 4 — Resurrection reset:** Sage doğru oyuncuyu canlandırırsa Reyna'nın kill kazancı sıfırlanır.
+**Dönüm 2 — Duvar geç kuruldu:** Sage duvarı hamle sesine göre kurduysa Reyna çoktan geçti. Reaktif duvar Reyna'yı durduramaz.
 
-## 7. Pro Coach Notları
+**Dönüm 3 — Yavaşlatma dismiss'i yakaladı:** Dismiss yavaşlatma alanındaysa Reyna kaçamaz, trade kill Sage takımına.
 
-**VCT'de nasıl oynanıyor:** Reyna pro meta'da nadir — pro takımlar Reyna'nın self-sufficient kimliğini takım utility'sine tercih etmiyor. Ranked'te Reyna pick rate yüksek, Sage karşısında aim-focused duellolar. Pro seviyede matchup'ta Sage wall disiplini öğretici — reaktif wall Reyna'yı durduramaz, proaktif wall Reyna'yı pozisyondan çıkarır.
+**Dönüm 4 — Ulti reset:** Sage doğru oyuncuyu canlandırdıysa Reyna'nın kill kazancı sıfırlanır, round yeniden açılır.
 
-**Meta tier durumu:** Reyna C (pro), A tier (ranked); Sage B tier (pro), A- tier (ranked). Head-to-head pro seviyede Sage avantajlı (takım oyunu Reyna solo oyununa üstün), ranked'te Reyna aim avantajıyla öne çıkar.
+## 7. Koç Notları
 
-**** Reyna devour heal hızı ve dismiss süresi patch 9.x'te güncellendi mi? Balance değişimi Reyna'nın snowball ekonomisini etkiler.
+**Ranked'te nasıl oynanır:**
+Sage oynuyorsan: duvarı hamle sesine göre değil, hamleden önce koy. Yavaşlatmayı girişe değil Reyna'nın kaçış hattına at — Reyna dismiss atınca yavaşlatma alanına girer ve kaçamaz. Duvar proaktif, yavaşlatma kaçış hattına: bu iki alışkanlık Sage oynamanın temelidir.
 
-**** Sage wall HP ve süresi Reyna'nın wall basma kapasitesine karşı test edilmeli.
+Reyna oynuyorsan: flash desteği olmadan Sage duvarına karşı tek başına hamle yapma. Takımda KAY/O veya Breach varsa onların flash/suppress'ini bekle, sonra gir. İlk kill alma fırsatı açılırsa hemen al — devour veya dismiss kararını kill'den sonra ver, kill'den önce değil.
 
-**Coach test:** "Reyna ilk kill ile başlar, ilk kill yoksa hiçbir şey. Sage Reyna'yı ilk kill'den uzak tut. Sage'in wall'u reaktif değil, proaktif olmalı. Reyna'nın kill ekonomisini round başında kır, round biter."
+**Patch 9.x notu:** Reyna devour şifa hızı veya dismiss süresi patch 9.x'te değişmedi. Yukarıdaki devour penceresi senaryoları güncel.
+
+**Koç özeti:** "Reyna ilk kill ile başlar, ilk kill yoksa hiçbir şey. Sage: Reyna'yı o ilk kill'den uzak tut. Duvarını reaktif koyma, proaktif koy. Reyna'nın kill ekonomisini round başında kır, round biter."

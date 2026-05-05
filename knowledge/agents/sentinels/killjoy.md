@@ -1,91 +1,89 @@
 # AJAN: Killjoy
 
 ## 1. Rol Kimliği
-Killjoy, Valorant'ın kesin site anchor'udur. Diğer sentinel'ler bilgi ve kontrol arasında takas yaparken, Killjoy turret-alarmbot-nanoswarm ekosistemiyle ikisini aynı anda sağlar. Gücü, saldırganların site'ına yaklaşmak için bile utility harcamak zorunda kaldığı alan engelleme kapasitesidir. Savunma pozisyonlarını kaynak tüketme bulmacalarına dönüştürür: düşmanın kurulumunu temizlemek için yetenek harcadığı her round, asıl execute için o yeteneklerden yoksun kaldığı round'dur.
+Killjoy en iyi solo site tutan ajandır. Turret bilgi verir, alarmbot + nanoswarm hasar verir, lockdown site'ı temizler. Düşman siteye girmek için bile utility harcamak zorunda kalır — sen bunu kullanırsın. Görevi frag değil: düşmanın zamanını ve yeteneğini tüket, takımına alan aç.
 
 ## 2. Temel Sorumluluklar
-- **Solo site tutma**: Killjoy savunmada tek başına site tutmak için en iyi ajandır. Kit'i temas noktasında fiziksel varlığını gerektirmeden geciktirmek, hasar vermek ve uyarmak için tasarlanmıştır.
-- **Turret erken uyarı olarak**: Turret'in birincil işi bilgidir, hasar değil. Agresyonu erken tespit ettiği ve düşmanı varlığını açığa çıkarmaya zorladığı yerlere yerleştirilmelidir.
-- **Alarmbot + Nanoswarm komboları**: İmza hamle — alarmbot vulnerability tetikler, nanoswarm patlayarak büyük hasar verir. Bu kombo düşmanların yürümek zorunda olduğu yerlere yerleştirilmeli, kolayca kaçınabilecekleri yerlere değil.
-- **Lockdown round belirleyici olarak**: Ultimate'i düşmanları ya pozisyonlarını terk etmeye ya da yok etmeye taahhüt etmeye zorlar. Zamanlama her şeydir — çok erken ve düşmanlar rotate eder; çok geç ve dövüş zaten bitmiştir.
-- **Post-plant engelleme**: Post-plant için saklanan Nanoswarm'lar defuse'u her biri ciddi bir süre engelleyebilir, bu da onu oyundaki en iyi post-plant ajanlarından biri yapar.
+- **Solo site tut**: Fiziksel orada olmadan geciktir, uyar, hasar ver.
+- **Turret = bilgi**: Birincil işi hasar değil — agresyonu erken açığa çıkar.
+- **Alarmbot + Nanoswarm kombosu**: Alarmbot vulnerability verir, nanoswarm üstüne patlar. Düşmanın yürümek zorunda olduğu yere koy — kolay geçilebilecek yere değil.
+- **Nanoswarm post-plant için sakla**: Defuse girişimini her biri ciddi süre engeller.
+- **Lockdown'ı duvar arkasına yerleştir**: Açıkta konulan lockdown anında yok edilir.
 
 ## 3. Sık Yapılan Hatalar
-- Turret'i, hiçbir yararlı bilgi sağlamadan tek bir peek yapan düşmanla anında ölen pozisyonlara yerleştirmek.
-- Tüm utility'yi tek site choke noktasına yığmak, böylece tek bir Sova dart veya Fade prowler her şeyi aynı anda temizler.
-- Alarmbot tetiklendikten sonra nanoswarm'ları reaktif olarak patlatmak yerine otomatik kombo için alarmbot konumuna önceden yerleştirmek.
-- Lockdown'ı cihazın duvar arkasından veya menzilden kolayca yok edilebildiği pozisyondan kullanmak.
-- Utility'sine çok yakın oynamak. Killjoy, utility'sinin yarattığı bilgi ve gecikmeden faydalanacağı mesafede olmalıdır — turret'inin yanında durmamalıdır.
-- Utility'sindeki menzil sınırını unutmak ve çok uzağa rotate ederek devre dışı bırakmak.
+- Turret'i tek peek'te ölen açık yere koyuyorsun — bilgi gelmeden ölüyor.
+- Tüm utility'yi tek choke'a yığıyorsun — bir Sova dart her şeyi siliyor.
+- Alarmbot tetiklendikten sonra nanoswarm patlatıyorsun — önceden üst üste koy, otomatik tetiklensin.
+- Lockdown'ı açıkta kullanıyorsun — duvar arkası veya düşmanın içeri girmeden yok edemeyeceği yer şart.
+- Turret'inin yanında duruyorsun — utility'nin yarattığı gecikmeden yararlanmak için mesafeni koru.
+- Çok uzağa rotasyon yapıp utility'ni devre dışı bırakıyorsun — leash mesafesini bil.
 
 ## 4. Kalıptan Anlama
 
-**IF** Killjoy'un turret'i çoğu round'da round'un ilk anlarında yok ediliyorsa
-**MEANING** Turret yerleşimi çok açık veya çok tahmin edilebilir. Düşman takım daha peek yapmadan nereyi vuracağını biliyor.
-**COUNTER** Turret'i düşmanın yok etmek için site'a tamamen taahhüt etmesini gerektiren off-angle'lara yerleştir. Turret pozisyonlarını her 2-3 round'da döndür.
-**WHY** Tahmin edilebilir turret bilgi vermeden ölür; off-angle yerleşim düşmanı yok etme için tehlikeli alan taahhüdüne zorlar.
+**IF** Turret'in çoğu roundda ilk kontak anında yok ediliyorsa
+**MEANING** Turret yerin çok açık veya çok tahmin edilebilir. Düşman siteye girmeden nereyi vuracağını biliyor.
+**COUNTER** Turret'i düşmanın yok etmek için siteye girmek zorunda kaldığı off-angle'lara koy. Birkaç roundda bir pozisyonu değiştir.
+**WHY** Tahmin edilebilir turret bilgi vermeden ölür. Off-angle yerleşim düşmanı tehlikeli alana sokmadan yok edemez hale getirir.
 
-**IF** Nanoswarm bombaları site alındığı round'larda kullanılmadan kalıyorsa
-**MEANING** Oyuncu ya baskı altında yeteneği unutuyor ya da swarm'ları düşmanın atlattığı pozisyonlara yerleştiriyor.
-**COUNTER** Nanoswarm'ları default plant noktalarına ve alarmbot yollarına önceden yerleştir. Patlatma zamanlamasını özel oyunlarda pratik yap.
-**WHY** Kullanılmayan nanoswarm sıfır alan engelleme sağlar; önceden yerleştirme baskı altındaki unutkanlığı ortadan kaldırır.
+**IF** Nanoswarm'ların site alındığı roundlarda hep boşa gidiyorsa
+**MEANING** Ya baskı altında unutuyorsun ya da swarm'ları düşmanın geçmediği yere koyuyorsun.
+**COUNTER** Nanoswarm'ları default plant noktasına ve alarmbot'un üstüne önceden yerleştir. Alarmbot tetiklendiği anda nanoswarm'ı patlat — beklemeden.
+**WHY** Kullanılmayan nanoswarm sıfır değer üretir. Önceden yerleştirince baskı altında unutmak sorun olmaz.
 
-**IF** Lockdown kullanılıyor ama düşmanlar aktivasyondan önce sürekli yok ediyorsa
-**MEANING** Ultimate tahmin edilebilir veya açık pozisyonlara yerleştiriliyor. Uzun hazırlanma süresi korunaklı yerleşim gerektirir.
-**COUNTER** Lockdown'ı duvar arkasına veya düşmanların yok etmek için fiziksel olarak girmesi gereken kapalı alanlara yerleştir. Cihazı korumak için takım arkadaşlarıyla koordine ol.
-**WHY** Açık Lockdown kolayca yok edilir; duvar arkası yerleşim düşmanı tehlikeli bir giriş yapmaya veya alanı terk etmeye zorlar.
+**IF** Lockdown koyuyorsun ama düşmanlar aktive olmadan sürekli yok ediyorsa
+**MEANING** Cihazı görülebilir veya kolay ulaşılır yere koyuyorsun. Uzun hazırlanma süresi korunaklı yer ister.
+**COUNTER** Lockdown'ı duvar arkasına veya düşmanın fiziksel olarak içeri girmeden ulaşamayacağı kapalı alana koy. Cihazı takımınla birlikte koru.
+**WHY** Açık lockdown anında yok edilir. Duvar arkası düşmanı tehlikeli girişe ya da alanı terk etmeye zorlar.
 
-**IF** Killjoy round başına sürekli 1-2 kill alıyor ama takım hala site'ı kaybediyorsa
-**MEANING** Gecikme yerine frag için oynuyor. İşi saldırgan zamanını ve utility'sini harcamaktır, düello kazanmak değil.
-**COUNTER** Başarı metriğini yeniden çerçevele: kurulum saldırganları ciddi zaman ve birden fazla yetenek harcamaya zorladı mı? Kill olmadan bile bu kazanılmış bir savunmadır.
-**WHY** Sentinel'in değeri gecikme ve kaynak tüketimindedir; kill odaklı oynama site'ı korumak yerine dövüşe girmek demektir.
+**IF** Her round 1-2 kill alıyorsun ama site hâlâ düşüyorsa
+**MEANING** Geciktirmek yerine frag için oynuyorsun. Görevin düşmanın zamanını ve utility'sini tüketmek — düello kazanmak değil.
+**COUNTER** Düşman siteye 2+ yetenek harcayarak girdiyse kurulumun işini yaptı. Kill sayısına değil, düşmanın kaç yetenek harcadığına bak.
+**WHY** Sentinel değeri gecikme ve kaynak tüketimindedir. Kill peşine düşersen site'ı korumak yerine dövüşe giriyorsun.
 
-**IF** Utility menzil sınırlamaları nedeniyle sık sık devre dışı kalıyorsa
-**MEANING** Oyuncu çok agresif rotate ediyor veya turret ve alarmbot'taki leash yarıçapını anlamıyor.
-**COUNTER** Her harita için tam leash mesafelerini öğren. Rotate ederken önce utility'yi topla veya devre dışı kalacağını kabul et.
-**WHY** Devre dışı utility sıfır değer üretir; leash farkındalığı rotate kararlarını doğrudan etkiler.
+**IF** Utility'n sık sık leash nedeniyle devre dışı kalıyorsa
+**MEANING** Çok agresif rotasyon yapıyorsun veya leash yarıçapını bilmiyorsun.
+**COUNTER** Her harita için leash mesafesini öğren. Rotasyon yapmadan önce utility'ni topla ya da devre dışı kalacağını hesaba kat.
+**WHY** Devre dışı utility sıfır değer üretir. Leash sınırını aşan her rotasyon kurulumunu sıfırlar.
 
 **IF** Alarmbot tetikleniyor ama nanoswarm takip etmiyorsa
-**MEANING** Swarm'lar alarmbot'tan çok uzağa yerleştirilmiş veya oyuncu tetiklenmeyi izlemiyor.
-**COUNTER** Nanoswarm alarmbot pozisyonuyla örtüşmelidir. Vulnerability debuff'ı yakın mesafeye yerleştirilmişse reaktif patlatma için yeterli süre dayanır.
-**WHY** Vulnerability penceresindeki nanoswarm hasarı çarpanla artar; ayrık yerleşim kombo sinerjisini yok eder.
+**MEANING** Swarm'ları alarmbot'tan çok uzağa koyuyorsun ya da tetiklenmeyi takip etmiyorsun.
+**COUNTER** Nanoswarm alarmbot'la aynı noktayı örtmeli. Alarmbot çaldığında nanoswarm'ı hemen patlat — vulnerability kısa sürer, swarm yakındaysa yetişir.
+**WHY** Vulnerability aktifken nanoswarm hasarı artar. Ayrı yerleştirince alarmbot + nanoswarm kombosu çalışmaz.
 
 ## 5. Harita Etkileşimleri
-- **Bind**: B site'ta baskın. B long ve hookah'daki dar girişler nanoswarm yerleşimini son derece kolay yapar. Lockdown neredeyse tüm site'ı kapsar.
-- **Ascent**: Turret market'i izlerken ve alarmbot/swarm komboları lane'de B site'ta güçlü. A site de A main'i kapsayan utility ile uygulanabilir.
-- **Haven**: B site anchor bu haritadaki en güçlü pozisyonudur. Turret B main ve garage'ı izler, alarmbot + nanoswarm B girişini kontrol eder. Lockdown neredeyse tüm B site'ı kapsar.
-- **Lotus**: Döner kapıların utility'si için doğal huniler oluşturduğu B site'ta verimli. Kapalı B site alanında Lockdown yok etmesi zordur.
-- **Sunset**: B site'ta güçlü. Dar site geometrisi nanoswarm kapsamını çok verimli kılar. Mid'i izleyen turret erken bilgi sağlar. Lockdown kapalı B site alanını temizler.
-- **Icebox**: B site'ta güçlü. Container üzerindeki turret yellow ve orange'ı aynı anda izler. Default plant'te nanoswarm'lar neredeyse zorunludur.
-- **Corrode**: Dar koridorlar ve sınırlı giriş noktaları Killjoy utility'sinin değerini katlıyor. Nanoswarm dar alanlarda kaçınılmaz hasar verir. Turret koridor kesişimlerinde birden fazla açıya bilgi sağlar. Lockdown kompakt site'larda tüm alanı kaplar.
+- **Bind**: B site'ta baskınsın. B long ve hookah'daki dar girişler nanoswarm için biçilmiş kaftan. Lockdown B site girişlerini kapatır.
+- **Ascent**: B site'ta market'i izleyen turret ve lane'deki alarmbot + nanoswarm güçlü. A site'ta A main'i kapsayan utility de işe yarar.
+- **Haven**: B site anchor bu haritanın en güçlü pozisyonu. Turret B main ve garage'ı izler, alarmbot + nanoswarm B girişini kapatır. Lockdown B site girişlerini bloke eder.
+- **Lotus**: Döner kapılar utility için doğal huni oluşturur — B site verimli. Kapalı B site alanında lockdown yok etmek zor.
+- **Sunset**: B site'ta güçlü. Dar site geometrisi nanoswarm kapsamını maksimuma çıkarır. Mid'i izleyen turret erken bilgi verir.
+- **Icebox**: B site'ta güçlü. Container üstündeki turret yellow ve orange'ı aynı anda izler. Default plant noktasına nanoswarm zorunlu.
+- **Corrode**: Dar koridorlar ve sınırlı girişler utility değerini ikiye katlar. Nanoswarm dar alanda kaçınılmaz hasar verir. Turret koridor kesişimlerinde birden fazla açıya bilgi sağlar.
 
 ## 6. Eşleşme Notları
-- **Raze** en kötü eşleşmesidir — Boom Bot alarmbot'u temizler, bombalar turret ve nanoswarm'ları güvenli mesafeden yok eder.
-- **Sova** recon dart ve owl drone kurulumunu menzilden sistematik olarak söker.
-- Utility'yi temizlemeye vakit bulamadan taahhüt eden **rush kompozisyonlarına** karşı güçlü.
-- Lockdown, geç execute'lara güvenen **default/yavaş oyun stillerini** sert counter'lar.
+- **Raze** ile karşılaştığında dikkatli ol — Boom Bot alarmbot'u temizler, bombaları turret ve nanoswarm'ı güvenli mesafeden yok eder. Utility'ni daha iç pozisyonlara al.
+- **Sova** ile karşılaştığında kurulumunu iki ayrı açıya yay — tek dart her şeyi silemesin.
+- Rush kompozisyonlarına karşı güçlüsün — utility'ni temizlemeye vakit bulamadan taahhüt ederler.
+- Lockdown, Astra veya Viper gibi yavaş siteye oturan takımları sert vurur — alanı terk etmeden geçiş yapamıyorlar.
 
-## 7. Oyuncuya Ne Söylenmeli
+## 7. Feedback Rehberi
 
-### İyi performans gösterirken
-**Oyuncu Eylemi:** Alarmbot ve Nanoswarm'ı vulnerability'nin patlatmayla örtüştüğü kadar yakına yerleştiriyorsun ve Turret pozisyonunu her 2-3 round'da farklı bir off-angle'a döndürüyorsun.
-**Düşman Algısı:** Saldırganlar round 1-2'den Turret pozisyonunu öğrenir ve girişte önceden nişanlamayı planlar. Round 3'te Turret yeni bir off-angle'da olduğunda eski noktayı kontrol ederek zaman harcarlar ve yenisini ararlar. Alarmbot vulnerability çarpanı hayatta kalınabilir swarm'ı neredeyse öldürücüye çevirene kadar Nanoswarm hasarını da hafife alırlar.
-**Düşman Tepkisi:** Ya önce Turret'i temizlemek (tam bir yetenek veya yeni pozisyonu arama zamanı harcamak) ya da yok saymak (etiketlenip push yönünü açığa çıkaran yıpratma hasarı almak) zorunda kalırlar. Alarmbot-Nanoswarm kombosuna ikisini de temizlemeden girmek vulnerability ile güçlendirilmiş swarm'dan 100+ HP'ye mal olur.
-**Faydalanma Penceresi:** Saldırganların döndürülmüş Turret'i bulmak için harcadığı zaman execute'larını geciktirir ve takımına rotation zamanı verir. Alarmbot-Nanoswarm kombosu anlık bir patlayışta neredeyse öldürücü hasar verir — tetikleyen saldırganlar site'a 10-30 HP ile girer, sonraki her silah dövüşünü takımın için tek atışlık kill'e çevirir.
-**Tekrar Stratejisi:** Round 1-2: off-angle A'da Turret, ana choke'ta Alarmbot + Nanoswarm. Round 3-4: off-angle B'de Turret, Alarmbot orijinal pozisyondan kısa mesafe kaydırılmış. Round 5+: off-angle C'de Turret, Nanoswarm'ı diğer choke'a taşı. Diğer Nanoswarm'u post-plant veya flank kapama için tut. Lockdown yalnızca duvar arkasından.
-**Düşman Adaptasyonu:** 4-5 round sonra saldırganlar kurulumunu bulmak için keşif (drone, dart) gönderecek, AoE yeteneklerle Alarmbot + swarm'ları menzilden yok edecek veya Nanoswarm patlatamadan rush yapacak.
-**Karşı Adaptasyon:** Kurulumunu keşfettiklerinde: Alarmbot'u drone'ların kolay ulaşamayacağı noktalara (kutuların arkası, dar açılı köşeler) yerleştir. AoE ile temizlediklerinde: kurulumunu daha geniş yay, tek yetenek ikisini birden yok edemesin — bir yerine iki yetenek harcamaya zorla. Rush yaptıklarında: Alarmbot tetiklendiğinde Nanoswarm'ı anında patlat (bekleme) — yerleşim sıkıysa anlık patlatma gecikmesi koşan düşmanları yakalamaya yeter.
+### Kurulum çalışırken
+**Oyuncu ne yapıyor:** Alarmbot ve nanoswarm'ı üst üste koyuyor, turret'i birkaç roundda bir off-angle'a taşıyor.
+**Düşman ne yapıyor:** İlk roundlarda turret pozisyonunu öğrenip önceden nişanlamaya geliyor. Turret yeni açıya taşındığında eski noktayı kontrol edip zaman harcıyorlar. Alarmbot vulnerability'yi hafife alıp nanoswarm'a düz giriyorlar.
+**Düşman ne öder:** Turret'i temizlemek için yetenek veya zaman harcıyor. Alarmbot + nanoswarm kombosuna girenler 100+ HP kaybedip siteye giriyor — sonraki her silah dövüşünde tek atış.
+**Düşman adapte olduğunda:** Drone veya dart ile kurulumu keşfetmeye başlar, AoE ile menzilden temizler ya da nanoswarm patlatamadan rush yapar.
+**Sen nasıl karşı adapte edersin:** Drone ulaşamayacağı köşelere alarmbot koy. AoE temizliyorlarsa kurulumu yay — tek yetenek ikisini birden silemesin. Rush yapıyorlarsa alarmbot tetiklendiği anda nanoswarm'ı patlat.
 
-**Zorlanan**: "Utility'n çok kolay temizleniyor. Her şeyi tek koridora yığmak yerine kurulumunu birden fazla açıya yay. Unutma — turret bilgi için, hasar ikincil."
-
-**Tahmin edilebilir**: "Düşmanlar turret'ini önceden nişanlıyor ve her round swarm'larından kaçınıyor. Tüm kurulum düzenini değiştir. Alışılmadık turret noktaları kullan ve nanoswarm patlatma zamanlamanı düşmanları gafil avlamak için geciktir."
+### Sorun bildirimi
+**Utility kolayca temizleniyorsa:** "Her şeyi tek koridora yığmışsın. Kurulumunu birden fazla açıya yay. Turret bilgi için — hasar ikincil."
+**Kurulum tahmin edilebilirse:** "Düşmanlar turret'ini önceden nişanlıyor, swarm'larından kaçınıyor. Tüm düzeni değiştir. Farklı açı, farklı nanoswarm konumu."
 
 ## 8. Rütbe Modülasyonu
 
-**Düşük (Iron-Silver)**: Oyuncular turret'i açık alana yerleştirir ve nanoswarm'ları unutur. Alarmbot kullanılmaz veya rastgele yerleştirilir. Temel komboyu öğret: aynı noktaya alarmbot + nanoswarm, farklı açıyı izleyen turret.
+**Düşük (Iron-Silver):** Turret'i açık alana koyuyorsun, nanoswarm'ı unutuyorsun. Alarmbot + nanoswarm'ı aynı noktaya yerleştir, turret farklı açıyı izlesin — bu ikisini önce oturtursun.
 
-**Orta (Gold-Platinum)**: Kombolar işlevsel ama kurulumlar her round aynı. Lockdown zamanlaması ya çok erken ya da panikle kullanılıyor. Kurulum çeşitliliği ve Lockdown'ın siper arkasına yerleştirilmesine odaklan.
+**Orta (Gold-Platinum):** Komboları kuruyorsun ama kurulum her round aynı. Lockdown'ı ya çok erken ya panikle kullanıyorsun. Kurulum çeşitliliğine ve lockdown'ı duvar arkasına yerleştirmeye odaklan.
 
-**Yüksek (Diamond-Ascendant)**: Kurulumlar sağlam ama düşman takımlar counter-strat öğrenmiş. Buradaki Killjoy main'ler site başına 3-4 farklı kurulum geliştirmeli ve düşman eğilimlerine göre hangisini ne zaman kullanacağını okumalı.
+**Yüksek (Diamond-Ascendant):** Kurulumların sağlam ama düşman takım counter-strat öğrendi. Site başına en az 3-4 farklı kurulum geliştir — düşmanın hangi yeteneği taşıdığına göre hangisini kullanacağını oku.
 
-**Elit (Immortal-Radiant)**: Killjoy'un değeri adaptif post-plant oyunu ve Lockdown zamanlamasındadır. Bu seviyede post-plant için nanoswarm lineup'ları beklenir ve Lockdown maksimum baskı için takım utility'siyle koordine edilmelidir.
+**Elit (Immortal-Radiant):** Değerin adaptif post-plant oyununda ve lockdown kullanımında. Post-plant için nanoswarm lineup'ları beklenir. Spike kurulunca, düşman rotate edip siteye dönerken lockdown'ı koy — rotasyonu tamamlayamadan alanı terk etmeye zorla. Lockdown'ı tek başına patlatma — Astra veya Omen gibi kapatan bir ajanın wall veya smoke'uyla birlikte kur, düşman hem çıkışı hem cihazı birden yönetemesin.

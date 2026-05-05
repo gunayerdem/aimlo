@@ -1,81 +1,80 @@
 # AJAN: Breach
 
 ## 1. Rol Kimliği
-Breach, tüm kit'i duvarlardan geçen kaba kuvvet initiator'dür. Her yeteneği -- Flashpoint, Fault Line, Aftershock ve Rolling Thunder -- katı yüzeyleri deler ve Breach'i nihai anti-pozisyon ajanı yapar. Hiçbir düşmana görüş hattına ihtiyaç duymaz; nerede olduklarını bilmesine ihtiyaç duyar. Breach, kapağın arkasına saklanan oyuncuları cezalandıran ve güçlü iletişim kuran takımları ödüllendiren initiator'dür. Oyundaki en takım-bağımlı initiator'dür ve takım utility'si etrafında oynadığında en yıkıcı olanıdır.
+Breach, duvarların içinden vuran initiator. Flash'ı, sarsmasi, hasarı — hepsi duvarlara geçiyor. Düşmanı görmek zorunda değilsin. Nerede olduğunu bilmen yeterli. Takımın seni takip etmiyorsa hiçbir şey işe yaramaz. Takımın seni takip ediyorsa oyunu kırarsın.
 
 ## 2. Temel Sorumluluklar
-- Flashpoint ile takım arkadaşları için duvarlardan flash atarak, yüzey-içinden mekaniği ile kaçınılmaz blind'lar yaratmak
-- Takım push'larından önce düşmanları sersemleterek ve yavaşlatmak için Fault Line ile concuss vermek
-- Aftershock ile pozisyonları temizlemek, düşmanları yaygın tutma noktalarından harekete zorlamak veya sabit hedeflere ölümcül hasar vermek
-- Tüm site'ı concuss etmek için Rolling Thunder kullanarak tam takım execute'ları veya retake'leri mümkün kılmak
-- Takım arkadaşlarıyla sürekli koordinasyon -- Breach'in kit'i takımın belirli zamanlama pencerelerinde takip etmesini gerektirir
-- Kapağın arkasında açı tutan savunucuları hareket etmeye veya ölmeye zorlayarak cezalandırmak
+- Flashpoint: duvarın içinden at, düşman görmeden kör olsun, takımın girsin
+- Fault Line: sars, takımın hemen arkandan girsin — sarsma sırasında kimse beklemiyor
+- Aftershock: dar köşe, plant noktası, sıkışık yer — düşman ya ölür ya kaçar
+- Rolling Thunder: tüm takım hazırsa at, site'ı sars, takımın girsin
+- Her hamlenden önce sesli söyle — Breach sessiz oynanmaz
 
 ## 3. Sık Yapılan Hatalar
-- Flashpoint zamanlaması takım arkadaşlarını düşmanlardan daha çok kör eden -- Breach flash'ı duvarların her iki yönünde de geçer
-- Aftershock'un düşmanların küçük hasar bölgesinden kolayca yana kayabildiği pozisyonlarda kullanılması
-- Fault Line'ın takım takibi olmadan ateşlenmesi, concuss'lanmış düşmanlara iyileşme zamanı vermesi
-- Rolling Thunder'ın takım push'a hemen hazır olmadan kullanılması
-- Duvarlardan çok uzakta oynama, Breach'in tüm kimliği olan duvar-içinden utility'yi azaltma
-- Yetenekler öncesinde iletişim kurmama, takım arkadaşlarının peek ve push zamanlamalarını kaçırmasına yol açma
+- Flash atıyorsun ama takım arkadaşın da kör oluyor — duvarın hangi yönünden geçtiğini bilmiyor
+- Aftershock'u düşmanın kolayca çıkabileceği geniş yere atıyorsun — hasar sıfır
+- Fault Line attın, takım girmedi — sarsma geçti, düşman toparlandı
+- Rolling Thunder'ı 1v2'de çaresizlikten atıyorsun — ult böyle harcanmaz
+- Duvarsız yerde oturuyorsun — Breach'in tüm kiti kullanılamaz hale gelir
 
 ## 4. Örüntü -> Anlam
 
-**IF** Flashpoint sürekli takım arkadaşlarını kör ediyor
-**MEANING** Flash zamanlaması ve yönü takım konumlandırmasıyla koordine değil
-**COUNTER** Her Flashpoint'ten önce "[duvar adı] üzerinden flash atıyorum" deyin. Takım, flash'ın duvarın hangi tarafından geldiğini bilmeli. Flash pop'ları, takım arkadaşları flash'ten bakışlarını çevirip peek'e hazır olduklarında zamanlanmalı.
-**WHY** Koordineli flash, takım arkadaşlarının önceden bakışlarını çevirmesini sağlar; koordinesiz flash, takımın görüşünü bozarak düşmanlara karşılık vermede avantaj verir.
+**IF** Flashpoint sürekli takım arkadaşını da kör ediyor
+**MEANING** Takım duvarın hangi tarafından flash geldiğini bilmiyor
+**COUNTER** Flash atmadan önce söyle: "[duvar adı] üzerinden flash geliyor." Takım arkadaşın dönsün, sonra at. Flash patlar patlamaz takımın girişe geçsin.
+**WHY** Önceden bilirse döner, açı bekler. Bilmezse kör olur, düşman açık durur.
 
-**IF** Aftershock birden fazla turda sıfır hasar veriyor
-**MEANING** Aftershock, düşmanların tutmadığı veya kolayca kaçabildiği pozisyonlara yerleştiriliyor
-**COUNTER** Aftershock'u dar köşelere, varsayılan plant noktasına ve yaygın kamp pozisyonlarına atın. En iyi, düşmanların sınırlı kaçış yolu olduğu yerlerde çalışır -- kutular, girinti noktaları ve köşe tutuşları. Kaçışlarını yavaşlatmak için Fault Line ile eşleştirin.
-**WHY** Dar alanlarda düşmanlar hasar bölgesinden yana kayamaz; Fault Line eşleşmesi kaçışı daha da zorlaştırır ve ya hasar ya da pozisyon kaybı garanti eder.
+**IF** Aftershock art arda hiç hasar vermiyor
+**MEANING** Düşmanın kolayca kaçabildiği geniş yere atıyorsun
+**COUNTER** Dar köşe, varsayılan plant noktası, girinti — düşmanın çıkış yolu olmayan yer. Düşman sarsmışsa Fault Line ile önce yavaşlat, sonra Aftershock at.
+**WHY** Dar alanda düşman yana kayamaz. Fault Line eklersen kaçış yolu tamamen kapanır — ya hasar yer ya pozisyonu bırakır.
 
-**IF** Fault Line ateşleniyor ama stun penceresi boyunca hiçbir takım arkadaşı peek yapmıyor
-**MEANING** Fault Line zamanlaması takım agresyonuyla senkronize değil
-**COUNTER** "Fault Line geliyor 3, 2, 1" deyin ve takım 1'de peek yapsın. Stun penceresi kısa -- takım arkadaşları concuss sırasında peek'e hazır değilse utility boşa gider.
-**WHY** Concuss penceresi, düşmanların counter-strafe yapamadığı ve nişan ayarlayamadığı garantili bir avantaj anıdır; senkronize olmayan peek bu pencereyi tamamen israf eder.
+**IF** Fault Line attın ama hiç kimse girmedi
+**MEANING** Takım sarsmanın ne zaman geleceğini bilmiyordu
+**COUNTER** "Fault Line geliyor, hazır olun" de, takım girişi onaylasın, sonra at. Sarsma kısa — takım hazır değilse boşa gider.
+**WHY** Sarsma sırasında düşman düzgün hareket edemez, nişan alamaz. Takım o anda girerse garantili avantaj. Kimse girmezse avantaj sıfır.
 
-**IF** Rolling Thunder clutch durumlarda çaresizlik oyunu olarak kullanılıyor
-**MEANING** Ult, kararlı push'lar için kullanılmak yerine çok uzun saklanıyor
-**COUNTER** Rolling Thunder bir takım execute aracıdır. 3+ takım arkadaşı hayattayken ve birlikte push yapmaya hazırken kullanın. 5v5 Rolling Thunder execute'u, 1v2 çaresizlik ult'undan çok daha değerlidir.
-**WHY** Rolling Thunder'ın değeri, concuss'lanmış savunuculara birden fazla takım arkadaşının giriş yapabilmesinden gelir; solo kullanım, site çapındaki concuss'un tüm potansiyelini boşa harcar.
+**IF** Rolling Thunder'ı 1v2 veya 2v3 durumunda çaresizlikten atıyorsun
+**MEANING** Ult'u çok geç sakladın, tur kaybetmemek için harcıyorsun
+**COUNTER** 3 veya daha fazla kişi hayattayken ve hepsi girmeye hazırken at. 5 kişiyle Rolling Thunder girişi, 1 kişiyle çaresizlik Rolling Thunder'ından çok daha yüksek değer üretir.
+**WHY** Ult'un değeri sarsan düşmana birden fazla kişi girince ortaya çıkıyor. Tek başına kullanırsan tüm site'ı sarsıyorsun ama kimse girmeden geçiyor.
 
-**IF** oyuncu çoğu turda duvarlardan uzakta konumlanıyor
-**MEANING** Breach'in duvar-içinden utility'sinden faydalanmıyor
-**COUNTER** Breach her zaman flash, concuss veya aftershock atabileceği bir duvarın yanında olmalı. Konumlanması, standart açı tutma değil, yakın yüzeyler tarafından belirlenmeli.
-**WHY** Breach'in tüm kit'i yüzeylerden geçmek üzere tasarlanmıştır; duvarlardan uzak oynamak onu flash'sız ve concuss'suz bir ajana dönüştürür.
+**IF** Çoğu turda duvarsız yerde oturuyorsun
+**MEANING** Breach'in tek silahını kullanmıyorsun
+**COUNTER** Her zaman yanında flash, sarsma veya Aftershock atabileceğin bir duvar olsun. Pozisyonunu açı kapamak için değil, yakın yüzey için seç.
+**WHY** Tüm kit duvarlardan geçmek için tasarlandı. Duvarsız Breach, kitsiz Breach demek.
 
 ## 5. Harita Etkileşimleri
-- **Fracture**: En iyi Breach haritası. Her pozisyonun flash/concuss atabileceği duvarları var. Birden fazla yüzeyden Aftershock. Her iki site üzerine Rolling Thunder yıkıcı.
-- **Split**: Her yerde dar koridorlar ve duvarlar. A ramp duvarları, B heaven duvarlarından Flashpoint. Mid'de Fault Line.
-- **Ascent**: A main ve B main'in her ikisinin de yüzey-içinden utility için duvarları var. Varsayılan plant noktalarında Aftershock.
-- **Bind**: Hookah ve showers, duvar-içinden flash'lar için ideal. Teleporter duvarlarından Aftershock.
-- **Pearl**: B site duvarları cross-site Flashpoint'i mümkün kılar. Mid kapılarından Fault Line rotate'ları kontrol eder.
+- **Fracture**: Her köşenin duvarı var. Flash, sarsma, Aftershock — hepsini farklı yüzeylerden at. Rolling Thunder her iki site'ı da vuruyor.
+- **Split**: Dar koridorlar, yüksek duvarlar. A ramp'tan, B heaven'dan duvarın içinden flash. Mid'de Fault Line düşmanı yerinden ediyor.
+- **Ascent**: A main ve B main duvarlarından flash. Varsayılan plant noktalarında Aftershock.
+- **Bind**: Hookah ve showers duvarının içinden flash kaçınılmaz. Teleporter duvarından Aftershock düşmanı koşturuyor.
+- **Pearl**: B site duvarları aynı anda iki açıdan flash atmanı sağlıyor. Mid kapılarından Fault Line, rotate'ı kesiyor.
 
 ## 6. Eşleşme Notları
-- Killjoy'a karşı: Aftershock, duvarın arkasından Killjoy utility'sini yok eder. Lockdown, doğru konumlanılırsa Rolling Thunder ile iptal edilebilir.
-- Sage'e karşı: Aftershock, Sage duvarı içinden yok eder. Fault Line, duvarın arkasındaki düşmanları concuss eder.
-- Omen'e karşı: Breach, Omen'in teleport pozisyonundan bağımsız olarak duvarın arkasından flash ve concuss verebilir.
-- Duelist ile eşleşme: Breach flash ve concuss verir, duelist girer. Koordineli olduğunda oyundaki en güçlü initiator-duelist kombinasyonu budur.
+- **Killjoy'a karşı**: Aftershock duvarın arkasından Killjoy cihazlarını temizler. Lockdown doğru açıdan Rolling Thunder ile iptal edilebilir.
+- **Sage'e karşı**: Aftershock, Sage duvarını içinden yok eder. Fault Line duvarın arkasındaki düşmanı bile sarsar.
+- **Omen'e karşı**: Omen nereye ışınlandı bilmiyorsun ama duvarın arkasını biliyorsun — flash ve sarsma oradan geçer.
+- **Duelist ile**: Sen flash at, sars — o girsin. Zamanlamanız tutuyorsa düşman hem kör hem sarsılmış olarak karşılanır.
 
 ## 7. Oyuncuya Ne Söylenmeli
 
-### İyi performans gösterirken
-**Oyuncu Eylemi:** Flashpoint'i duvarlardan savunucu tarafında pop edecek şekilde atıyorsun (kaçınılmaz), sonra hemen aynı duvardan Fault Line ile takım peek'i için "3, 2, 1" geri sayımı yapıyorsun.
-**Düşman Algısı:** Savunucular Flashpoint hazırlık sesini duvarın arkasından duyar ama yaklaşmasını göremez veya sırtını dönemez -- duvar görsel göstergeyi engeller. Breach'in yeteneklerini, görüş hattı karşılığı olmadan katı yüzeylerden gelen olarak deneyimlerler ve bu, herhangi bir duvara bitişik pozisyonu tutma güvenlerini aşındırır.
-**Düşman Tepkisi:** Ya duvar-içinden flash'ı yemek (kısa tam körlük) ya da duvara bitişik her pozisyonu terk etmek zorunda kalırlar. Fault Line takibi kalan herkesi concuss eder -- counter-strafe yapamaz veya ateş edemezler. Her ikisine de yakalanan savunucular, pozisyonlarından sıfır karşılık olanağıyla toplam debuff yaşarlar.
-**Faydalanma Penceresi:** Fault Line concuss penceresi, takım geri sayımla senkronize olduğunda garantili bir kill penceresidir. Concuss'lanmış savunucular counter-strafe yapamaz (hareketleri bozuk), nişan ayarlayamaz (hassasiyetleri düşürülmüş) ve yetenek kullanamaz. Takım arkadaşlarınız, kısa ama yıkıcı bir süre için fiilen sabit olan hedeflere doğru swing yapar.
-**Tekrar Stratejisi:** Tur 1: A duvarından Flashpoint, A duvarından Fault Line, takım "1"de swing yapar. Tur 2: B duvarına Flashpoint (farklı açı), aynı Fault Line takibi. Tur 3: Flash sesinde geri çekilmeyi öğrenen savunucuları yakalamak için önce Fault Line (flash olmadan). Savunucuların yana kayamadığı yerlere -- dar kapı ağızları ve varsayılan plant pozisyonlarına -- Aftershock kullanın.
-**Düşman Adaptasyonu:** 3-5 tur sonra savunucular, duvara bitişik tüm pozisyonları terk eder ve duvar-içinden yeteneklerin ulaşamayacağı açık alanlarda oynar veya Breach duvarın yanında kurulumdan önce push yapar.
-**Karşı-Adaptasyon:** Açık pozisyon oynarlarsa: en güçlü savunma açılarını bırakmışlardır -- takımınız bu zayıf noktaları Breach utility'sine ihtiyaç duymadan kuru peek edebilir. Erken push yaparlarsa: push yaptıkları choke'a Fault Line (concuss koşuyu durdurur) ve takibe Flashpoint. Breach, her yeteneği duvarın içinden geçtiği için en iyi anti-rush ajanlarından biridir -- koşucular concuss bölgesine girerler.
+### İyi iş çıkarırken
+**Oyuncu Eylemi:** Flashpoint'i duvarın düşman tarafında patlayacak şekilde atıyorsun, hemen arkasından Fault Line ile takıma sesli hazırlık veriyorsun ve takım sarsma başlar başlamaz giriyor.
+**Düşman Algısı:** Hazırlık sesini duyuyorlar ama duvardan ne zaman geleceğini göremiyorlar. Flash patlıyor, sırtlarını dönemeden kör oluyorlar. Fault Line takip edince ne hareket edebildiler ne nişan alabiliyorlar.
+**Düşman Tepkisi:** Ya flash'ı yüzünden yiyorlar ya duvara bitişik her pozisyonu bırakıyorlar. Fault Line sarsıyorsa kalan herkes sabit hedef. O anda takımın girerse iş bitiyor.
+**Faydalanma Penceresi:** Sarsma sırasında düşman hareket edemez, nişan alamaz, yetenek kullanamaz. Takımın o pencerede girsin — sesli hazırlık bu yüzden flash atmadan önce verilir, sonra değil.
+**Düşman Adaptasyonu:** Birkaç tur sonra duvar dibini bırakırlar, açık alanda oynarlar ya da sen kurulum yapmadan önce erken çıkarlar.
+**Karşı-Adaptasyon:** Açık alanda oynuyorlarsa en güçlü açıları bırakmışlar demektir — takımın Breach'e gerek kalmadan kuru girebilir. Erken çıkıyorlarsa Fault Line ile koşuyu durdur, Flashpoint ile takip et. Breach duvardan içeriden vurduğu için koşarak giren düşmana da aynı şeyi yapıyorsun.
 
-**Zorlanırken**: "Takımın ne zaman yeteneklerinin geldiğini bilmediği için takip yapmıyor. Her şeyi söyle. İletişimsiz Breach oyundaki en kötü initiator'dür. İletişimli Breach en iyilerinden biri."
+### Zorlanırken
+"Takımın seni takip etmiyor çünkü ne zaman ne atacağını söylemiyorsun. Her util atmadan önce sesli söyle: hangi duvar, hangi yetenek. Söylemezsen takım hazırlanamaz, hazırlanamayan takım girmez."
 
-**Tahmin edilebilir olunca**: "Aynı duvar, aynı flash, her tur. Düşmanlar sen flash atmadan dönüyor. Farklı duvarlara geç, flash açısını değiştir veya zamanlamayı geciktir. Kalıbını ezberlediler."
+### Tahmin edilebilir olunca
+"Aynı duvar, aynı flash, her tur. Düşmanlar flash sesi çıkmadan dönüyor. Farklı duvara geç. Açıyı değiştir. Önce sarsma at, arkasından flash. Seni ezberlediler."
 
 ## 8. Rank Modülasyonu
-- **Düşük (Iron-Silver)**: Site başına bir Flashpoint pozisyonuna odaklanın. Flash'tan önce söyleyin. Düşmanları gördüğünüzde Fault Line kullanın. Aftershock'u yaygın kamp noktaları için saklayın.
-- **Orta (Gold-Platinum)**: Flash zamanlamasını takım arkadaşı peek'leriyle koordine edin. Varsayılan plant'lara Aftershock. Takım push'larından önce Fault Line. Execute'lar için Rolling Thunder kullanmaya başlayın.
-- **Yüksek (Diamond-Ascendant)**: Birden fazla duvar pozisyonundan duvar-içinden utility. Düşmanları tuzağa düşüren Aftershock-Fault Line kombinasyonları. Koordineli beş kişilik push'larda Rolling Thunder.
-- **Elit (Immortal-Radiant)**: Bilinen düşman pozisyonlarına okuma-bazlı Aftershock. Takım arkadaşı peek'lerinin kare içinde Flash zamanlaması. Push başlamadan önce düşman yeniden konumlanmasını zorlamak için proaktif olarak kullanılan Rolling Thunder.
+- **Düşük (Iron-Silver)**: Her site için tek bir flash duvarı belirle. Flash atmadan önce söyle. Düşmanı gördüğünde sars. Aftershock'u dar köşe ve plant noktası için sakla.
+- **Orta (Gold-Platinum)**: Flash zamanını takım arkadaşı girişiyle eşleştir. Fault Line attıktan sonra takım hemen girsin. Varsayılan plant'lara Aftershock at. Rolling Thunder'ı site girişi için kullanmaya başla.
+- **Yüksek (Diamond-Ascendant)**: Birden fazla duvardan flash ve sarsma kombinasyonu. Fault Line ile düşmanı sıkıştır, Aftershock ile bitir. Rolling Thunder'ı tüm takım hazırken at.
+- **Elit (Immortal-Radiant)**: Aftershock'u gördüğün düşmana değil, düşmanın gideceği yere at. Takım arkadaşın tam döndüğü anda flash patlasın — bir tick erken veya geç atarsan takım arkadaşın kör olur. Rolling Thunder'ı düşman rotasyona çıkar çıkmaz at: savunucu konumlanmayı zorla, sonra takımı gönder.

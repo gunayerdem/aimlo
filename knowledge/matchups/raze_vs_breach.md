@@ -11,111 +11,109 @@ tags: [matchup, raze, breach, duelist, initiator]
 
 ## 1. Matchup Özü
 
-Raze nade + satchel ile Breach'in fault line + flash + aftershock stun zincirini karşılayan explosive duelist, Breach ise stun wall-pierce kapsamıyla Raze'in satchel ekonomisini iptal eden area CC initiator. Matchup Breach'in stun timing'i ile Raze'in damage lineup ekonomisini test eder.
+Breach seni dondurur, sen Breach'i patlatırsın. Breach'in fault line'ı satchel'ini havada keser — satchel animasyonu başladıktan sonra stun gelirse iptal olur, yere düşemezsin. Sen de Breach'in lineup yaptığı köşeyi nade ile vurursan o da utility atamaz. Matchup bu: kim önce hareket eder, kim önce iptal eder.
 
 ## 2. Kim Avantajlı?
 
-**Raze lehine durumlar:**
-- Breach stun radius'u dışında — satchel boost hattı stun hattından uzaksa Raze bypass eder
-- Breach solo utility — stun tek başına kill vermez, trade partner yoksa Raze nade ekonomisi avantajlı
-- Uzun sightline map'lerinde — Breach utility range sınırlı, Raze Op/rifle angle'da
-- Raze ult hazır — Showstopper Breach'in entry pozisyonunu patlatır, Breach stun lineup öncesi kaybı
+**Raze lehine:**
+- Breach yanında trade yok — fault line tek başına öldürmez, sadece seni durdurur. Partner yoksa sen daha az hasar riski alırsın
+- Uzun sightline'lı haritalarda — Breach utility menzili kısadır, sen uzaktan nade + rifle ile baskı kurarsın
+- Showstopper hazırsa — Breach entry pozisyonuna girerken ultle karşılanır, stun bile atamadan ölür
 
-**Breach lehine durumlar:**
-- Close-range site'larda (Split, Bind, Sunset) — fault line dar koridoru kapsar, Raze satchel stun içinde iptal
-- Raze satchel cooldown'dayken — mobility yok, Breach stun + flash kombosu Raze'i yakalar
-- Breach flash Raze'in nade lineup penceresinde — flash Raze aim'ini kör eder, nade throw bozulur
-- Post-plant Rolling Thunder ult durumunda — area stun wall-pierce Raze'in off-angle pozisyonunu iptal
+**Breach lehine:**
+- Dar koridorlu haritalarda (Split, Bind, Sunset) — fault line koridoru tamamen kapatır, satchel ile kaçacak açı bulamazsın
+- Satchel cooldown'dayken — o anda mobilitin sıfır, Breach stun + flash ile seni sarar
+- Breach ultu hazırsa — Rolling Thunder duvar arkasında da seni yakalar, satchel ile çıkmaya çalışırsan ult hattına girme riskini alırsın
 
-**Balanced:** Haven, Ascent, Lotus gibi orta mesafeli map'lerde matchup iki lineup user'ın disiplinine bağlı.
+**Dengeli:** Haven, Ascent, Lotus'ta iki taraf da orta mesafede kalır. Kim daha önce yanlış pozisyona giderse kaybeder.
 
 ## 3. Key Düellolar
 
-**IF** Breach fault line Raze'in satchel boost landing noktasına aktive oldu
-**MEANING** Satchel landing + stun overlap, Raze stun içinde, dash/satchel komutu iptal
-**COUNTER** Raze satchel landing'ini fault line lineup hattı dışına. Breach fault line ses indicator satchel cancel sinyali.
-**WHY** Fault line wall-pierce area stun. Satchel landing sabit noktaya çıkarsa stun bedava iptal.
+**IF** Breach'in fault line satchel'inin ineceği noktayı kapattı
+**MEANING** Satchel yere inmeden stun yedi — havada iptal olursun, olduğun yerde kalırsın
+**COUNTER** Fault line sesini duyduğun anda satchel'i farklı noktaya yönlendir. Breach'in fault line'ının geçemeyeceği köşeyi bul — duvarın öbür yüzü veya saldırı hattından 90 derece açı.
+**WHY** Fault line duvar deler, cover yetmez. Ama hat yönünden dik açıdaysan stun seni bulamaz.
 
 ---
 
-**IF** Raze nade Breach'in flash lineup noktasına attı
-**MEANING** Nade damage Breach'i pozisyondan çıkarır, flash lineup bozulur
-**COUNTER** Breach flash lineup'ını nade lineup dışında noktada yapar. Lineup choice matchup bilinciyle seçilir.
-**WHY** İki lineup user aynı noktayı hedeflemişse biri diğerini iptal eder. Paralel lineup noktaları iki tarafı da korur.
+**IF** Raze nade'i Breach'in flash attığı köşeye gönderdi
+**MEANING** Breach flash lineup'ını bozar, pozisyondan çıkmak zorunda kalır ve flash atamaz
+**COUNTER** Flash sesini duyduğun anda o köşeye nade at. Breach aynı köşeden flash atar — bir kez öğrenirsen her roundda kullanırsın.
+**WHY** Breach flash'ı sabit bir noktadan atar. O nokta nade'e açıksa sen utility savaşını kazanırsın.
 
 ---
 
-**IF** Raze Showstopper ultunu Breach'in entry pozisyonuna attı
-**MEANING** Ult rocket Breach'i entry pozisyonunda yakalar, stun lineup atılmadan Breach ölür
-**COUNTER** Breach entry pozisyonunu Showstopper lineup hattından uzak, fault line'ı corner'dan atar.
-**WHY** Showstopper single target area damage. Breach sabit entry pozisyonunda ise ult maksimum değer.
+**IF** Showstopper'ı Breach'in entry girişine attın
+**MEANING** Breach stun atmadan, flash açmadan ult'la karşılanır — entry biter
+**COUNTER** Breach entry'ye girdiğini gördüğün anda roket at. Giriş dar ise ult maksimum değer verir.
+**WHY** Showstopper tek noktaya büyük hasar verir. Breach entry pozisyonu sabitse ult bedava kill.
 
 ---
 
-**IF** Breach flash Raze'in nade throw penceresinde
-**MEANING** Flash Raze'in aim'ini kör eder, nade hedef bulunmaz, lineup bozulur
-**COUNTER** Raze nade throw'u flash timing'inden önce at. Ses indicator flash çıkışını önceden duyurur, nade atışı flash'tan önce commit.
-**WHY** Breach flash Raze'in aim ekonomisini iptal eder. Timing savaşı — nade throw hızlı, flash çıkış süresi var, nade önce atılabilir.
+**IF** Breach flash'ı nade atacağın anda geldi
+**MEANING** Kör olursun, nade hedef bulmaz, yarar sıfır
+**COUNTER** Flash sesini duyar duymaz nade'i hemen at — flash animasyonu çıkana kadar kısa süre var, nade daha hızlı. Flash'tan önce commit et.
+**WHY** Nade throw flash'tan hızlıdır. Ses geldiği anda atarsan flash seni köreltemez.
 
 ---
 
-**IF** Breach Rolling Thunder ultunu Raze'in post-plant pozisyonuna attı
-**MEANING** Area stun wall-pierce Raze'i cover arkasında bile yakalar, Raze stun içinde statik
-**COUNTER** Raze post-plant pozisyonunu Rolling Thunder hat yönünden dik açıda. Ult sesini duyduğu an satchel ile dik açı reposition.
-**WHY** Rolling Thunder directional area ult. Dik açı reposition ult hat'ı dışına çıkış.
+**IF** Rolling Thunder post-plant pozisyonuna geldi
+**MEANING** Ult duvar deler, cover arkasında da seni yakalar, satchel atmaya çalışırsan stun içinde iptal
+**COUNTER** Ult sesini duyduğun anda satchel ile ult hattına dik açı al. Ult doğrusal — yönüne paralel değil, dik duruyorsan hat dışındasın.
+**WHY** Rolling Thunder yalnızca kendi hattı boyunca uzanır. Dik açıya geçersen stun sana ulaşamaz.
 
 ---
 
-**IF** Raze satchel ile Breach entry hattına boost aldı, aftershock hattında
-**MEANING** Aftershock wall-pierce damage, Raze satchel landing'de aftershock radius'unda HP kaybı
-**COUNTER** Raze satchel hattını aftershock lineup noktalarından uzak. Aftershock trajektör sabit, bypass öğrenilir.
-**WHY** Aftershock area + wall-pierce. Cover'da saklanmak korumaz — pozisyon seçimi aftershock lineup'ı bilgisiyle yapılmalı.
+**IF** Breach'in aftershock'u satchel ineceğin noktaya atılmış
+**MEANING** Satchel ile indiğinde aftershock hasarı alırsın, HP eriyerek fight'a girersin
+**COUNTER** Aftershock'un hangi köşelerden atıldığını öğren — sabit trajektörleri var. O köşelerden uzak bir noktaya in.
+**WHY** Aftershock da duvar deler. Cover seni korumaz — iniş noktası seçimi tek çözüm.
 
 ---
 
-**IF** Raze round başı entry, Breach stun round başı lineup hazır
-**MEANING** Stun Raze'in entry hattında, satchel boost + nade throw aynı anda stun'dan iptal
-**COUNTER** Raze entry timing'ini stun lineup'ından sonra. Breach stun'u round başında hazırsa Raze entry'yi 2-3 paket geciktir, stun boşa.
-**WHY** Stun tek kullanım/round. Stun boşa atılırsa Breach utility kaybı, Raze bedava entry.
+**IF** Sen entry'ye girerken Breach fault line'ı o hat için hazır tutuyor
+**MEANING** Entry hattına girdiğin anda stun yiyorsun, nade + satchel aynı anda iptal
+**COUNTER** Breach fault line attıktan sonra gir. Ult veya nade ile önce Breach'i pozisyondan çıkar, sonra entry yap. Fault line tek kullanım — boşa attırdıktan sonra bedava giriş.
+**WHY** Stun round'da bir kez atılır. Boşa atmasını sağlarsan Breach elinde silahtan başka bir şey kalmaz.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
-Raze damage + mobility (nade + paintshell + satchel x2 + ult), Breach disable + damage (fault line + flash + aftershock + ult). İki agent da close range damage user. Raze'in gücü satchel mobility + nade damage, Breach'in gücü wall-pierce stun + flash. Matchup asimetrik — Breach Raze'in cover kullanımını aşabilir, Raze Breach'i uzak mesafede range avantajıyla yenebilir. Ult ekonomisi: Showstopper 8 point, Rolling Thunder 9 point — Breach ult daha pahalı.
+Sende hasar + hareket var: nade, paintshell, iki satchel, ult. Breach'te durdurma + hasar var: fault line, flash, aftershock, ult.
 
-## 5. Map Bazlı Değişim
+Raze lehine: sen duvarın arkasına geçersin, Breach stun'u seni bulamaz. Breach lehine: dar koridorda sen geçemezsin, Breach her açıdan kapatır.
 
-**Split (Breach avantajlı):** Dar choke'lar fault line meta. Raze satchel Split'te sınırlı.
+Ult maliyeti: senin ultu 8 puan, Breach ultu 9 puan. Breach ultunu daha az atar — ama attığında alanı tamamen kapatır.
 
-**Bind (Breach avantajlı):** Close range Breach stun'una ideal.
+## 5. Harita Bazlı Durum
 
-**Ascent (Balanced):** Breach A Main entry, Raze B Main.
+**Split (Breach avantajlı):** Dar girişler fault line ile kapanır. Satchel ile geniş yer bulamazsın.
 
-**Haven (Balanced):** Breach B Main entry, Raze A Short.
+**Bind (Breach avantajlı):** Kısa mesafe Breach utility'sine uygun. Teleport koridorları fault line hattı için ideal.
 
-**Icebox (Raze avantajlı):** Uzun Mid + vertical Raze'in. Breach utility range sınırlı.
+**Ascent (Dengeli):** Breach A Main'i kapatır, sen B Main'i alırsın. Orta kontrol kimin elinde olduğuna göre değişir.
 
-**Breeze (Raze avantajlı):** Geniş alan Raze nade ekonomisi.
+**Haven (Dengeli):** Üç site Breach'e geniş seçenek verir ama uzun açılar sana yarar.
 
-**Sunset (Breach avantajlı):** Dar choke'lar Breach meta.
+**Icebox (Raze avantajlı):** Uzun mid + dikey hareket senin alanın. Breach utility menzili kısa kalır.
 
-## 6. Flip Moment'ler
+**Breeze (Raze avantajlı):** Geniş alan nade ve rifle için ideal. Breach close range fırsatı az bulur.
 
-**Flip 1 — Stun satchel'i iptal etti:** Raze mobility kaybı, stun içinde statik.
+**Sunset (Breach avantajlı):** Dar girişler Breach'e hizmet eder, satchel kaçış yolu azalır.
 
-**Flip 2 — Nade Breach pozisyonunu yakaladı:** Breach lineup pozisyonunda nade alanı sabit hedef.
+## 6. Maç Döndüren Anlar
 
-**Flip 3 — Showstopper Breach entry'sini bitirdi:** Ult Breach'i lineup öncesi öldürür.
+**Dönüş 1 — Stun satchel'i kesti:** Mobilitin bitti, olduğun yerde kalırsın. Breach partner ile saldırırsa çıkış yok.
 
-**Flip 4 — Rolling Thunder cover'ı aştı:** Raze cover'da stun altında, satchel iptal.
+**Dönüş 2 — Nade Breach'i pozisyondan çıkardı:** Breach utility atamadan geri çekilmek zorunda kalır, sen entry alırsın.
 
-## 7. Pro Coach Notları
+**Dönüş 3 — Showstopper entry'yi bitirdi:** Breach stun kurmadan ölür, Breach tarafı sayı kaybeder.
 
-**VCT'de nasıl oynanıyor:** Breach pro meta'da map-bound initiator, Raze standard duelist. Matchup close range map'lerde sık. Pro Breach oyuncuları stun timing'ini Raze'in satchel cooldown'una göre ayarlar.
+**Dönüş 4 — Rolling Thunder cover'ı aştı:** Sen saklandığın yerde stun yiyorsun, satchel de iptal, maçı Breach çevirir.
 
-**Meta tier durumu:** Raze A+ tier, Breach A tier. Head-to-head close range map'lerde Breach avantajlı, uzun map'lerde Raze.
+## 7. Radiant Seviyesi Notlar
 
-**** Fault line stun süresi Raze satchel animasyonunu iptal ediyor mu? Pratik testle doğrulanmalı.
+Satchel iniş noktasını her roundda değiştir — aynı noktaya iki kez inme. Breach fault line sabit hatlara atılır; o hatları tanı, farklı noktadan in, Breach utility'si boşa gider.
 
-**** Rolling Thunder area stun cover'da saklanabilir boş nokta var mı?
+Breeze ve Icebox'ta Breach'i outrange edersin — rifle mesafesinde Breach'in hiçbir utility'si sana ulaşamaz. Split ve Bind'da Breach flash menzilinin dışında açı tut; flash açısına girmeden fight başlat.
 
-**Coach test:** "Breach Raze'in satchel'ini stun'la iptal eder. Raze Breach'in lineup pozisyonunu nade ile yakalar. İki oyuncu aynı silah sınıfını farklı amaçla kullanır. Timing + pozisyon disiplini matchup'ı belirler."
+Post-plant Rolling Thunder'dan kaçış: ult sesini duyduğun anda satchel hemen. Harita kenarı veya ult hattına dik açı — ikisinden biri seni kurtarır. Beklersen stun seni yakalar ve satchel iptal olur.

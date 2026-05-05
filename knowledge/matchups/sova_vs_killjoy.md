@@ -1,61 +1,69 @@
 # EŞLEŞME: Sova vs Killjoy
 
-## Etkileşim Kimliği
-Sova, Killjoy'un tüm savunma ekosisteminin cerrahi kaldırım aracıdır. Recon Bolt yerleşmiş her yetenek aracını ortaya çıkarır. Owl Drone tam pozisyonları keşfeder ve alarmbot'ları tetiklemek için feda edilebilir. Shock Dart'lar yetenek araçlarını duvarlardan tamamen güvenli şekilde yok eder. Bu yakın mesafe kavgası değildir — mesafeden sistematik parçalamadır. Sova, Killjoy'un site'ına peek etmeden raundunu mahvetmek için haritanın diğer ucundan yapar.
+## Ne Oluyor Bu Eşleşmede
+Sova, Killjoy'un turret'ini, alarmbot'unu ve nanoswarm'ını site'a girmeden yok eder. Recon Bolt nerede olduklarını gösterir. Shock Dart duvarın arkasından temizler. Owl Drone ucuz feda ile kalanları tetikler. Killjoy site'a adım atmadan biter — bu Sova'nın bu eşleşmedeki işi.
 
-## Yaygın Cezalandırma Kalıpları
+## Sova Killjoy'u Nasıl Bitirir
 
-### Sova Killjoy'u Cezalandırırken
+### Recon Bolt kit'i ifşa eder
 
-**IF**: Recon Bolt raund başında turret, alarmbot ve nanoswarm pozisyonlarını tüm takım için ortaya çıkarıyor
-**MEANING**: Killjoy'un tüm kurulumu görülür hale geliyor — sürpriz değeri sıfır
-**COUNTER**: Killjoy yetenek araçlarını Recon Bolt yarıçapının dışına koymalı — beklenen noktaya dart atılırsa araçlar alışılmadık noktada güvende
-**WHY**: Scan tüm savunma yapısını ifşa eder
+**IF**: Raund başında attığın Recon Bolt Killjoy'un turret, alarmbot ve nanoswarm pozisyonlarını tüm takıma gösteriyor
+**MEANING**: Killjoy'un sürpriz değeri sıfır — kit nerede olduğunu herkes biliyor
+**COUNTER**: Killjoy, kit'ini Recon Bolt'un sabit vurduğu noktadan uzağa koyar — standart dart açısına girmiyor
+**WHY**: Scan görünce tüm savunma yapısı okunur, hazırlık biter
 
-**IF**: Shock Dart lineup'ları turret ve alarmbot'u güvenli mesafeden yok ediyor
-**MEANING**: Killjoy hiçbir risk almadan yetenek araç kaybediyor
-**COUNTER**: Turret'i Owl Drone'u anında etiketleyecek pozisyona koyarak drone'u tarama tamamlanmadan yok etmeli
-**WHY**: Lineup'lar sıfır risk ile yetenek araç yıkımı sağlar
+### Shock Dart lineup'ları kit'i güvenden temizler
 
-**IF**: Owl Drone site'tan uçarak alarmbot'ları tetikliyor ve nanoswarm pozisyonlarını takımın kaçınması için belirliyor
-**MEANING**: Drone ucuz bir fedakârlık aracı olarak tüm tuzak yapısını ifşa ediyor
-**COUNTER**: Nanoswarm'ları Recon Bolt'un taramadığı pozisyonlarda saklamalı
-**WHY**: Drone hem tetikleme hem bilgi toplama yapar
+**IF**: Duvarın arkasından Shock Dart lineup'ıyla turret ve alarmbot'u temizliyorsun
+**MEANING**: Killjoy sana görünmeden kit'ini kaybediyor, trade yok, açı yok
+**COUNTER**: Killjoy turret'i Owl Drone'u anında görüp vuracağı açıya koyar — drone girmeden etiketlenir, tarama tamamlanamaz
+**WHY**: Lineup sıfır riskle kit yıkar; Killjoy'un tek savunması drone'u durdurabilmek
 
-### Killjoy Sova'yı Cezalandırırken
+### Owl Drone ucuz bilgi ve tetik
 
-**IF**: Yetenek araçları standart lineup'ların kapsamadığı alışılmadık pozisyonlarda
-**MEANING**: Sova'nın hazırlanmış lineup'ları boş yerlere düşüyor
-**COUNTER**: Sova emprovize tarama yaparak alışılmadık noktaları kapsamalı
-**WHY**: Ders kitabı yerleştirmelerine karşı tasarlanmış lineup'lar alışılmadık kurulumları kaçırır
+**IF**: Drone'u site'a sokup alarmbot'ları tetikliyor ve nanoswarm'ların nerede olduğunu görüyorsun
+**MEANING**: Drone battı ama tüm tuzak haritası çıktı — takım nereye basmayacağını biliyor
+**COUNTER**: Killjoy nanoswarm'ları Recon Bolt'un taramadığı köşelere saklar, drone görse bile yerlerini öğrenemez
+**WHY**: Drone hem tetikler hem keşfeder — kit gidince giriş açılır
 
-**IF**: Killjoy yetenek araçlarından uzakta oynayarak kurulum ifşa edilse bile kendisi ortaya çıkmıyorsa
-**MEANING**: Sova yetenek aracını buluyor ama Killjoy'un kişisel pozisyonunu bilemiyor
-**COUNTER**: Sova recon'u iki amaçlı kullanmalı — hem yetenek araç hem oyuncu pozisyonu
-**WHY**: Kurulum bilgisi ile oyuncu pozisyonu ayrı bilgi parçalarıdır
+## Killjoy Sova'yı Nasıl Karşılar
 
-## Tekrarlanan Başarısızlık Ne Anlama Gelir
-**Killjoy** sürekli tüm kurulumu ifşa edilip Sova tarafından yok ediliyorsa, yetenek araçları onun standart lineup'larının kapladığı noktalarda. Ders kitabı kurulumları, ders kitabını counter'lamak için tasarlanmış ajana karşı kullanıyor. Sova'nın hazırlanmış lineup'larının kaçıracağı alışılmadık yerleştirme gerekir.
+### Alışılmadık yerleştirme
 
-**Sova** Killjoy kurulumunu parçalayamıyorsa, lineup'ları güncel değil veya recon'u yetenek araç yerine oyunculara kullanıyor. Killjoy'a karşı Sova'nın birincil hedefi oyuncu pozisyonu değil, onun kitidir.
+**IF**: Kit'ini Sova'nın standart lineup'larının düşmediği noktalara koyuyorsun
+**MEANING**: Sova hazırladığı dart'ları boşa atıyor, standart açıların dışından atmak zorunda kalıyor
+**COUNTER**: Sova standart açıların dışına çıkarak alışılmadık noktaları da tararsa bu avantaj kapanır
+**WHY**: Standart lineup'lar standart yerleşime karşı yazılmış — sen standart koymazsan o ıskalamak zorunda
+
+### Kit bilgisi ≠ Killjoy'un yeri
+
+**IF**: Kit'inden uzakta duruyorsun, Sova kit'ini buluyor ama seni bulamıyor
+**MEANING**: Sova kit pozisyonunu biliyor ama sen neredesin bilmiyor — o bilgi ayrı
+**COUNTER**: Sova Recon Bolt'u kit ve oyuncu pozisyonunu aynı anda kapayacak şekilde atar — ikisini tek scanda görmeye çalışır
+**WHY**: Kit ifşa olsa bile sen pozisyonunu saklıyorsan Sova körleşir
+
+## Sürekli Kaybediyorsan
+
+**Killjoy** olarak her raund tüm kit'in Sova tarafından scan edilip yok ediliyorsa: Kit'ini standart yerlere koyuyorsun. Sova'nın lineup'ları tam orası için yazılmış. Turret ve alarmbot'u beklenmedik köşelere taşı — Sova scan atmadan önce bulmak için zorlanır.
+
+**Sova** olarak Killjoy'un kit'ini temizleyemiyorsan: Recon Bolt'u oyunculara atıyorsun, kit'e değil. Killjoy'a karşı önce turret ve alarmbot nerede — onu bul. Scan gördükten sonra Shock Dart'la takip et. Kit gidince site açılır.
 
 ## AIMLO Ne Demeli
 
-### Oyuncu cezalandırılan taraftayken
-**Killjoy Sova tarafından parçalanıyorsa**: "Kurulumun Sova'nın lineup'larının vurmak için tasarlandığı tüm noktalarda. Turret ve alarmbot'u onun standart dart'larının kapsamadığı pozisyonlara taşı. Lineup'larını emprovize etmek zorunda kalırsa, temizlik daha uzun sürer ve daha az güvenilir olur."
+**Killjoy Sova tarafından sürekli temizleniyorsa**: "Kit'in tam Sova'nın beklediği yerde. Turret ve alarmbot'u standart açılardan uzağa al. O lineup'larını standart dışı atıyorsa isabet düşer, temizlik tamamlanamaz."
 
-**Sova Killjoy'u temizleyemiyorsa**: "Oyunculara değil yetenek aracına odaklan. Recon Bolt'un önce turret ve alarmbot'u ortaya çıkarmalı. Shock Dart'larla takip et ve yok et. Kurulumu gidince site alma bedava."
+**Sova Killjoy'u temizleyemiyorsa**: "Oyunculara değil kit'e odaklan. Recon Bolt önce turret ve alarmbot'u göstermeli. Gördükten sonra Shock Dart'la bitir. Kit gidince site açılır."
 
-### Oyuncu cezalandıran taraftayken
-**Sova Killjoy'u parçalıyorsa**: "Onun tüm savunmasını haritanın diğer ucundan kaldırıyorsun. Lineup'larını güncel tut ve her raund önce yetenek araç pozisyonlarını hedefle."
+**Sova Killjoy'u parçalıyorsa**: "Kit'ini haritanın diğer ucundan bitiriyorsun. Lineup'larını güncel tut, her raund önce kit pozisyonlarını hedefle."
 
-**Killjoy Sova'nın taramalarından kurtuluyorsa**: "Yaratıcı yerleştirmelerin onun lineup'larını kaçırtıyor. Alışılmadık noktalar arasında dolaşmaya devam et ve güvenilir temizleme kalıpları kuramasın."
+**Killjoy Sova'nın scan'larından kurtuluyorsa**: "Alışılmadık yerleştirme işe yarıyor. Aynı köşeleri tekrarlama — Sova yeni açılar bulmak zorunda kalsın."
 
 ## Rank Modülasyonu
-**LOW**: Sova'nın Killjoy'a özel lineup'ları yok. Killjoy yetenek aracını varsayılan noktalara koyar. Counter neredeyse mevcut değil. Sova'ya her site için Killjoy'un yaygın pozisyonlarını ortaya çıkaran bir recon lineup'ı öğretmeyi öğret.
 
-**MID**: Sova'nın temel lineup'ları var ama Shock Dart ile takip etmiyor. Killjoy taranmaya adapte olmuyor. Tam sekans öğret: tara, shock, push.
+**LOW**: Sova'nın Killjoy'a özel lineup'ı yok. Killjoy kit'i varsayılan yerlere koyuyor. Sova'ya o harita için Killjoy'un yaygın turret ve alarmbot noktalarını gösteren tek bir Recon Bolt lineup'ı öğret — bunu tekrarla.
 
-**HIGH**: Sova sistematik temizler ve Killjoy yaratıcı saklama yapar. Killjoy'a alışılmadık yerleştirmeler, Sova'ya emprovize tarama öğret.
+**MID**: Sova temel lineup'ı biliyor ama scan attıktan sonra Shock Dart ile takip etmiyor. Killjoy scan geldikçe pozisyon değiştirmiyor. Sırayı netleştir: tara, Shock Dart at, sonra gir.
 
-**ELITE**: İki taraf da lineup meta-oyununu oynuyor. Killjoy'un kurulumu özellikle Sova'nın bilinen lineup'larından kaçınmak için tasarlanmış. Sova her maç yeni açılar icat etmeli. Sürekli yenilik öğret.
+**HIGH**: Sova sistematik temizliyor, Killjoy yaratıcı saklıyor. Killjoy'a alışılmadık yerleştirme kombinasyonları göster. Sova'ya kit standart yerde değilse nasıl farklı açıdan scan atacağını göster.
+
+**ELITE**: Killjoy'un kit yerleşimi Sova'nın bilinen lineup'larından kaçmak için özel kurulmuş. Sova her maçta yeni açılar üretmeli. Killjoy scan geldikçe pozisyon değiştirmeli — sabit kalırsa Sova bir sonraki raunda çözümü hazır getirir.

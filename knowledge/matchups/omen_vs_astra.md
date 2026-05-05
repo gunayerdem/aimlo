@@ -9,101 +9,119 @@ tags: [matchup, omen, astra, controller_vs_controller]
 
 ## 1. Matchup Özü
 
-Omen ve Astra aynı role, iki farklı zaman anlayışına sahip. Omen "şimdi" controller'ı — smoke'u attı, smoke çalışıyor, 15 sonra yeni karar. Astra "önce" controller'ı — stars round başında yerleştirilir, mid-round aktif edilir, kararın yarısı round başlamadan verilmiştir. İki controller karşılaştığında iki ekonomi çarpışır: Omen reaksiyon ekonomisi (rakibin hamlesini gör, smoke ile kes), Astra proaktif ekonomi (star'ı rakibin muhtemel komut noktasına bas). Omen doğru okuduğunda reaksiyon smoke'u planı bozar; Astra doğru okuduğunda star rakibin planını başlamadan çöker. Doğru pro okuma: Omen Astra'nın star dağılımına bakar (nerede yerleşti = savunmanın zayıf tarafı), Astra Omen'ın cooldown'una bakar (hangi smoke yandı = pencere nerede).
+Omen şu an için smoke atar — düşman hamle yaparken, sen o hamleyi kesersin. Astra round başlamadan smoke'u yerleştirir — düşman nereye gelecek, sen onu tahmin edersin. Biri görünce hareket eder, öteki görmeden hareket eder.
+
+Omen olarak Astra'ya bak: star'ı nereye koydu? Orası savunmanın yoğun tarafı. Boş taraf açık. Astra olarak Omen'a bak: hangi smoke yandı? Orası şu an kapısız. İkisi de birbirinin boşluğunu okuyarak round kazanır.
 
 ## 2. Kim Avantajlı?
 
-Pro meta'da Omen yapısal avantajlı — Astra'nın öğrenme eğrisi dik, star yerleştirme hatası round sıfırlar. Omen hata toleransı yüksek (smoke yanlış yere atıldıysa bir sonraki smoke ile düzeltilir, cooldown kısa). Ama Astra tavan yüksekliği daha yüksek — ustası tarafından oynanan Astra map-wide oyun kurar, Omen bölgesel kalır. Map bağımlı: Haven, Lotus, Icebox gibi üç site veya geniş harita Astra'yı ödüllendirir (star havuzu yeterli). Ascent, Split, Sunset gibi iki site dar harita Omen'ı ödüllendirir (smoke sayısı yeterli, star yerleştirme zaman kaybı). Genel okuma: ortalama oyuncuda Omen favored, elit oyuncuda Astra eşit veya hafif avantajlı.
+Omen hata affeder. Smoke yanlış yere gitti mi, bir sonraki smoke düzeltir. Astra hata affetmez — star yanlış yere gitti mi, round biter, bir sonraki round da sakatlı başlar.
 
-## 3. Key Düellolar
+Map'e göre şöyle oku:
+- **Haven, Lotus, Fracture** → Astra. Üç site var, Omen'ın smokes sayısı yetmez.
+- **Ascent, Split, Sunset, Bind** → Omen. İki dar site, üç smoke yeterli.
+- **Breeze, Icebox** → Astra hafif öne çıkar. Uzun sightline + geniş alan star değerini artırır.
+- **Pearl** → Omen'a eğilimli. Orta kontrol smoke'la tutulur.
 
-**IF** Astra round başında dört star'ı tek site tarafına yerleştirdi
-**MEANING** Astra okuması: saldırı o sitede yoğun — ama aynı anda diğer site star'sız, mid-round cevap yok
-**COUNTER** Omen tarafı star dağılımını görür (star yerleşme sesinden), star yoğunluğu zayıf siteyi basar. Dark Cover zayıf site için hazır, execute hızlı
-**WHY** Astra'nın değeri star dağılımında. Tek yoğunluk commit Astra'yı tek yönlü controller yapar — Omen'ın tempo smoke ekonomisi zayıf yönde eşit güce gelir.
+Genel kural: aynı beceri seviyesinde Omen öne çıkar. Ama Astra'yı gerçekten bilen biri seni haritanın her köşesinden kontrol eder — Omen bölgesel kalır.
 
----
+## 3. Düellolar
 
-**IF** Omen iki smoke'u da Dark Cover cooldown'a yatırdı, üçüncü smoke yok
-**MEANING** Omen 30 turluk cevap penceresinde, Astra bu pencereyi görmüşse star pull ile rotate keser
-**COUNTER** Astra Gravity Well veya Nova Pulse'u Omen'ın cooldown penceresinde kullanır, Omen cevap veremez — star aktive, komut zorlanır
-**WHY** Omen cooldown yanıyorken controller değil. Astra'nın star ekonomisi Omen'ın cooldown ekonomisinden daha esnek, pencereyi okuyan Astra round'un kaderini alır.
-
----
-
-**IF** Astra ult'u (Cosmic Divide) haritayı ortadan böldü
-**MEANING** Cosmic Divide hem sightline hem ses engeli — Omen bu duvarın arka tarafı için körleşir, info yok
-**COUNTER** Omen Shrouded Step'i duvarın arkasına at, tek teleport + tek info + geri çık. Paranoia duvarın arkasından kör edemez, duvar ses geçirmez
-**WHY** Cosmic Divide Omen'ın smoke ekonomisine yanıt değil, bilgi ekonomisine yanıt. Omen bilgi kanalı kapanırsa smoke kör atılır, kör smoke değer üretmez.
+**IF** Astra round başında dört star'ı tek siteye yığdı
+**MEANING** O site için hazırlıklı — ama diğer site star'sız. Saldırı diğer siteden gelirse Astra cevap veremez.
+**COUNTER** Star sesini duy, yoğun tarafın tersini bas. Dark Cover'ı o site için hazır tut, hızlı execute yap.
+**WHY** Astra tek yönde commit etti. Ters tarafa geçince elinde hiçbir şey kalmıyor — senin smoke'un orada Astra'dan güçlü.
 
 ---
 
-**IF** Omen From the Shadows (ult) ile map-wide teleport yaptı, Astra Gravity Well hazır
-**MEANING** Omen teleport iniş noktası savunmasız — Gravity Well Omen'ı teleport sonrası sabitler
-**COUNTER** Astra Gravity Well'i muhtemel teleport iniş noktasına bas, Omen iniş + yakalanma, round anti-kurtarıcı
-**WHY** From the Shadows'un zayıflığı iniş animasyonu. Astra reaktif star pull ile iniş penceresini kapatabilir — Omen ulu değersiz bir info aracına iner.
+**IF** Omen iki smoke'u da yaktı, yenisi henüz dolmadı
+**MEANING** O pencerede Omen controller değil. Astra bunu görürse star'ı çeker, komut açar.
+**COUNTER** Astra olarak: Gravity Well veya Nova Pulse'u tam bu pencereye bas. Omen cevap veremez.
+**WHY** Smoke dolmadan Omen duvarı yok. Bu pencere kısa ama Astra için ücretsiz round.
 
 ---
 
-**IF** Astra star'larını round başında dört noktaya yaydı, hiçbir yer iki star almıyor
-**MEANING** Astra tüm haritayı kaplamak için yoğunluk feda etti — her yerde tek star var, hiçbiri çift etki yaratmıyor
-**COUNTER** Omen tarafı star yoğunluğu çift olmayan tarafı basar. Tek star tek etki = Astra tek cevap, Omen Dark Cover + Paranoia kombosu çift yanıtı ezer
-**WHY** Astra yoğunlukla çalışır, yayılımla değil. Dört yönlü tek star = dört yönlü yarım savunma. Omen çift utility basar, Astra yarı cevap verir.
+**IF** Astra Cosmic Divide açtı, harita ikiye bölündü
+**MEANING** Duvarın arkası sana kapalı — ses de geçmiyor, sightline da yok.
+**COUNTER** Shrouded Step ile duvarın arkasına geç, bak, geri çık. Paranoia duvardan geçmez — kullanma.
+**WHY** Cosmic Divide bilgi kesiyor, smoke kesmiyıor. Kör smoke atarsan değer üretmez — önce bilgi al.
 
 ---
 
-**IF** Omen Paranoia Astra star yerleşme noktasına doğru atıldı
-**MEANING** Paranoia sadece kör değil, Astra star pull animasyonunu da keser (Astra pull sırasında stationary)
-**COUNTER** Omen Paranoia'yı Astra'nın muhtemel pull pozisyonuna atar (default spawn veya spike alanı), Astra pull yapamaz, star ekonomisi donar
-**WHY** Astra pull animasyonu savunmasız — Astra astral form sırasında görünmez ama fiziksel bedeni yerinde. Paranoia astral formu bozmaz ama dönüş sonrası Astra komut verememiş olur.
+**IF** From the Shadows ile bir noktaya iniş yaptın, Astra'nın star'ı orada
+**MEANING** İniş animasyonunda savunmasızsın. Gravity Well tam o noktaya patlarsa çıkamazsın.
+**COUNTER** Astra olarak: iniş noktasını tahmin et, star'ı önceden bas. Omen iniş + yakalanma = round bitti.
+**WHY** Ult'un zayıflığı iniş anı. Astra bunu biliyorsa ultun seni götürmez, tuzağa çeker.
 
 ---
 
-**IF** Astra star'ı bir sonraki round için saklamak istedi ama star cooldown yanıyor
-**MEANING** Star ekonomisi kırık — Astra bir sonraki round yarı utility ile başlar
-**COUNTER** Omen bir sonraki round agresif execute planlar, utility ekonomisi eşit değil. Astra yarı utility = round handikaplı başlar
-**WHY** Astra'nın round-to-round ekonomisi star recharge'a bağlı. Round içinde hepsi harcanırsa bir sonraki round Astra yarım controller. Omen cooldown'u her round sıfırlar (smoke recharge).
+**IF** Astra beş star'ı beş farklı noktaya yaydı, hiçbiri çift değil
+**MEANING** Her yerde tek star var. Tek star tek etki — iki utility'ye karşı savunmasız.
+**COUNTER** Omen olarak: Dark Cover + Paranoia'yı aynı noktaya bas. Astra'nın tek star'ı çift cevaba yetmez.
+**WHY** Astra yayılımla değil yoğunlukla çalışır. Beş noktaya dağıtırsan her yerde yarım savunma olursun.
 
-## 4. Utility Takası
+---
 
-Omen smoke ekonomisi: iki Dark Cover (cooldown ile yenilenir) + Shrouded Step (round içi tekrar) + Paranoia (round içi tekrar). Astra utility ekonomisi: beş star (round başı yerleştirilir, round içi harcanır, recharge yavaş). Karşılaştırma: Omen round içinde 4-5 utility pop yapar, Astra 4-5 star harcar. Aritmetik eşit, ekonomi farklı — Omen cooldown'u round içi tempo tabanlı, Astra round-başına-round. Omen ekonomisi bir round'da çökerse bir sonraki round toparlanır; Astra ekonomisi çökerse seri boyunca toparlanamaz (star cooldown pahası yüksek). Takasın ayırıcı farkı: Omen hatayı tek round'da öder, Astra seri ortasında öder. Bu yüzden Astra oyuncusu "star'ı nereye koydum" sorusunu her round'un öncesinde yeniden düşünür, Omen oyuncusu "smoke'u ne zaman atayım" sorusunu round içinde düşünür.
+**IF** Paranoia'yı Astra'nın star pull yaptığı noktaya attın
+**MEANING** Astra pull sırasında yerinde durur. Paranoia o anda çarparsa pull tamamlanamaz, star ekonomisi o tur donar.
+**COUNTER** Astra'nın varsayılan pull pozisyonuna — spawn veya spike alanı — Paranoia at. Astra pull yapamaz.
+**WHY** Pull animasyonu savunmasız nokta. Astra astral formdayken bedeni sabit — Paranoia bedeni kör eder, geri dönünce komut verememiş olur.
 
-## 5. Map Bazlı Değişim
+---
 
-**Haven:** Astra favored. Üç site için beş star yeterli, Omen üç smoke'u aynı anda atamaz. Astra Haven comp kurucu pick'lerden.
+**IF** Astra star'larını bir tur çok harcadı, bir sonraki tur yarıyla başlıyor
+**MEANING** Astra o turda tam controller değil. Recharge yavaş — hata bir tur değil, birkaç tur öder.
+**COUNTER** Omen olarak: Astra'nın star'sız tura agresif execute planla. Her turunu tam utility'yle başlarsın, Astra başlayamaz.
+**WHY** Omen her tur sıfırdan başlar. Astra yavaş recharge'la sakatlı tur geçirir — bu asimetri birikince sen öne çıkarsın.
 
-**Lotus:** Astra favored. Üç site + döner kapı + geniş orta → Astra map-wide pull ekonomisi. Omen burada ikinci controller rolünde.
+## 4. Utility Karşılaştırması
 
-**Icebox:** Astra hafif avantajlı. Geniş haritada star yoğunluğu kurucu. Omen Icebox'ta tercih edilmez.
+Omen'ın elinde: iki Dark Cover (cooldown'la yenilenir) + Shrouded Step + Paranoia. Her turu tam utility'yle başlarsın.
 
-**Ascent:** Omen favored. Dar iki site haritası, üç smoke comp için yeterli. Astra Ascent'ta öğrenme eğrisinin zor ödüllendiği tek haritalardan.
+Astra'nın elinde: beş star, tur başı yerleştirilir, tur içi harcanır, yavaş dolar. Hepsini bir turda harcarsan bir sonraki tur sakatlı.
 
-**Split:** Omen favored. Dar koridor + mid kontrol Omen'ın tempo ekonomisine uygun. Astra yerleşme zamanını Split'te zor bulur.
+Fark şu: hata yaparsan Omen bir tur öder, Astra birkaç tur öder. Astra'yı fazla harcamaya zorlayan her baskı seni ileriki turlarda daha güçlü bırakır.
 
-**Sunset:** Omen favored. Kısa rotate + mid ağırlıklı Omen için comfort.
+## 5. Haritaya Göre
 
-**Bind:** Omen favored. Teleporter + iki site yapısı Omen'ın rotate smoke'una uygun. Astra Bind'de pick dışı.
+**Haven:** Astra. Üç site, Omen'ın smoke'u üçe yetmez.
 
-**Breeze:** Astra hafif avantajlı (Viper'dan sonra ikinci tercih). Uzun sightline'da star yerleşme esnekliği değer kazanır.
+**Lotus:** Astra. Üç site + orta geçit + döner kapı — star havuzu her yeri tutar.
 
-**Fracture:** Astra favored. İki taraflı attack map'i Astra'nın star havuzunu ödüllendirir. Omen Fracture'da utility eksikliği çeker.
+**Icebox:** Astra hafif. Geniş map, star yoğunluğu işe yarar.
 
-**Pearl:** Nötr-Omen eğilimli. Pearl orta kontrol Omen ekonomisine uygun.
+**Ascent:** Omen. İki dar site, smoke yeterli.
 
-## 6. Flip Moment'ler
+**Split:** Omen. Dar koridor, mid smoke'la tutulur.
 
-1. **Astra yanlış okuma, dört star tek tarafta + saldırı diğer tarafta.** Astra round'u utility-siz geçirir, Omen tempo ile basit execute'u kilitler. Astra bu round'u recovery edemez.
+**Sunset:** Omen. Kısa rotate, mid ağırlıklı — smoke ekonomine uygun.
 
-2. **Omen cooldown boşluğu + Astra Gravity Well hazır.** Omen iki smoke cooldown'da iken Astra star'ı Omen'ın muhtemel reaksiyon noktasına pull eder. Omen reaksiyon smoke'u yok, Astra savunmayı açar.
+**Bind:** Omen. Teleporter + iki site, rotate smoke'u çalışır.
 
-3. **Cosmic Divide ult.** Astra ult'u açtığında harita ikiye bölünür. Omen'ın bilgi ekonomisi kırılır — From the Shadows teleportu ult altında kör iniş. Bu round Astra'nın.
+**Breeze:** Astra hafif. Uzun sightline, star esnekliği değer kazanır.
 
-4. **Paranoia + yakın mesafe Astra pull blokajı.** Omen Paranoia'yı Astra'nın default pull spot'una atarsa Astra bir turluk komut kaybeder. Savunma açılır, commit ödüllendirilir.
+**Fracture:** Astra. İki taraflı saldırı map'i, star havuzu ödüllenir.
 
-5. **Round ekonomi kırılması.** Astra star recharge için iki round'a ihtiyaç duyuyor, Omen her round tam utility. Seri içinde bu asimetri Astra tarafını yavaş ezer.
+**Pearl:** Omen eğilimli. Orta kontrol smoke'la yeterli.
 
-## 7. Pro Coach Notları
+## 6. Turu Döndüren Anlar
 
-Pro sahnede Omen vs Astra karşılaşması karakter düellosundan çok comp felsefesi düellosudur. Omen comp'ları tempo ve mid-round adaptasyon üzerine kurulur (Omen + hızlı entry duelist + info initiator). Astra comp'ları default setup + proaktif star placement üzerine kurulur (Astra + anchor sentinel + double initiator). İki comp karşılaştığında round öncesi default'un kim tarafından daha iyi okunduğu kazananı belirler. Koç ipucu: Omen oyuncusu Astra'nın round 1 star dağılımını ezberlemeli — Astra oyuncuları star yerleşimini nadiren değiştirir, dağılım okunursa Astra'nın round öncesi karar hattı kırılır. Astra oyuncusu Omen'ın smoke cooldown UI'ını takip etmeli — iki smoke cooldown yanıyorsa Astra'nın star pull penceresi maksimum.
+1. **Astra dört star'ı tek siteye koydu, saldırı diğer siteden geldi.** Astra o turu utility'siz geçirir. Smoke'unla execute'u kilitle.
 
-Yaygın pro hata: Omen oyuncusu mid-round Astra star'ına karşı kendi cooldown'unu harcar. Doğrusu: Omen star'ı görmezden gelir, kendi planına göre smoke atar. Astra star'ı sadece bir tuzaktır, Omen'ı reaksiyona zorlamak. Reaksiyon vermeyen Omen Astra'nın zaman ekonomisini çalar. İkinci pro hata: Astra oyuncusu star'ı haritaya yayar, hiçbir yerde iki star yok. Doğrusu: iki star aynı sitede (biri smoke biri gravity), üç diğer lokasyonlarda. Yoğunluk Astra'nın silahı, yayılım değil.
+2. **Omen'ın smoke'u dolmadı, Astra Gravity Well hazır.** Smoke yokken Astra star çeker, komut açar. Bu pencerede pozisyon ver.
+
+3. **Cosmic Divide açıldı.** Duvarın arkası kör. Shrouded Step ile önce bak, sonra karar ver.
+
+4. **Paranoia Astra'nın pull noktasına gitti.** Astra o tur komut veremez. Commit et.
+
+5. **Astra star'larını birkaç turda harcadı.** Bir sonraki tur Astra yarım controller. O turu agresif bas.
+
+## 7. Koç Notu
+
+Omen olarak ilk turu izle: Astra star'ı nereye koydu? Astra oyuncularının büyük çoğunluğu her tur aynı star dağılımını tekrarlar. Dağılımı bir kez oku, boş tarafı bul, her tur oradan bas.
+
+Astra olarak: Omen'ın smoke UI'ına bak. İki smoke de dolmamışsa o pencere senin penceren — star'ı o an çek.
+
+Bir şeyi yapma: Astra olarak star'ı her siteye teker teker dağıtma. İki star aynı sitede — biri smoke, biri Gravity Well. Geri kalanı diğer noktalara. Yoğunluk olmadan Astra sadece yavaş Omen'dır.
+
+Omen olarak da şunu yapma: Astra star'ı görünce ona reaksiyon verme. Star seni kendi planından saptırmak için orada. Planına göre smoke at, Astra'nın zamanını çal.

@@ -11,111 +11,115 @@ tags: [matchup, raze, deadlock, duelist, sentinel]
 
 ## 1. Matchup Özü
 
-Raze explosive nade + satchel ile Deadlock'un barrier mesh + gravnet + sonic sensor kombosunu aşmaya çalışan close-range duelist, Deadlock ise barrier ve gravnet ile Raze'in mobility hızını keserek sıradan rifler'a çeviren defensive sentinel. Matchup Raze'in utility ekonomisi ile Deadlock'un utility yerleşim disiplinini test eder.
+Deadlock seni durdurmak için tek bir şeye güveniyor: satchelini havada kesmek. Gravnet satchel sırasında seni yakalarsa, Raze'in hareket gücü kesilir — sen artık sıradan bir düellist olursun. Sana düşen: barrier'ı nade ile yık, gravnet düşüş hattını oku, sensor'u patlat. Sıra bu, iş bu.
 
 ## 2. Kim Avantajlı?
 
-**Raze lehine durumlar:**
-- Close-range choke'larda (Bind Hookah, Sunset A, Split B Main) — nade + paintshell Deadlock'un barrier hattını yıkabilir (barrier HP'si sınırlı)
-- Deadlock ult cooldown'dayken — Annihilation olmadan Deadlock'un retake gücü sıfır, Raze post-plant'te aggressive hold
-- Raze ult hazır (Showstopper) — Showstopper Deadlock'un utility hattını tek atışta patlatır, barrier ult rocket karşısında dayanmaz
-- Deadlock setup süresi dolmamış — Raze round başı aggressive rush ile Deadlock'un utility kurulumunu harcatmadan yakalar
+**Raze avantajlı:**
+- Dar geçit noktalarında (Bind Hookah, Sunset A Main, Split B Main) — nade + paintshell birlikte barrier'ı çöker
+- Deadlock ultu kullandıktan sonra — Annihilation gitti, geri alma gücü sıfır, post-plant'te agresif dur
+- Showstopper hazırsa — ult roketi barrier'ı ve arkasındaki Deadlock'u aynı anda yıkar
+- Deadlock araçlarını henüz kurmadıysa — boş rotasyon aç, site'a gir
 
-**Deadlock lehine durumlar:**
-- Dar choke map'lerinde (Fracture, Sunset) — barrier choke'u keser, gravnet Raze'in satchel boost'unu iptal eder
-- Raze satchel cooldown'dayken — mobility yok, Deadlock gravnet + rifle crossfire Raze'i statik hedefe çevirir
-- Sonic sensor Raze'in entry hattında — ses debuff Raze'in satchel animasyonunu bozar, concussed state satchel komutunu geciktirir
-- Post-plant Annihilation ult durumunda — Annihilation cocoon Raze'in off-angle pozisyonunu site'tan zorla alır
+**Deadlock avantajlı:**
+- Dar koridorlu haritalar (Split, Sunset, Fracture) — barrier geçişi keser, gravnet satchel'ı keser
+- Satchel bekleme süresindeyken — o an durursan gravnet + rifle seni durdurur
+- Sonic sensor giriş hattında aktifse — satchel patlama sesini duyar, tetiklenir; sersemlemişken nade atman yavaşlar
+- Spike kurulduktan sonra Annihilation kullanırsa — alternatif açıda değilsen cocoon kesin ölüm
 
-**Balanced:** Haven, Ascent, Lotus gibi orta mesafeli map'lerde matchup utility yerleşimine bağlı.
+**Dengeli:** Haven, Ascent, Lotus'ta — açık site tasarımı her ikisine de alan verir, araç yerleşimi belirler.
 
 ## 3. Key Düellolar
 
-**IF** Raze nade'i Deadlock barrier mesh'ine attı
-**MEANING** Barrier HP'si nade damage ile düşer, çift nade (nade + paintshell) ile barrier yıkılabilir
-**COUNTER** Deadlock barrier'ı choke'un tam ortasına değil, köşeye kur — barrier yan tarafları korunaklı, nade lineup'ı doğrudan barrier merkezine değmez.
-**WHY** Barrier görüş + hareket engeli ama HP bar var. Raze utility damage ekonomisi barrier'ı eskir. Tek barrier + tek nade karşılaştırması — round tekrarında barrier dayanmaz.
+**IF** Deadlock barrier'ı geçişin önüne koydu
+**MEANING** Barrier HP sınırlı — nade + paintshell birlikte atar, ikisi yeterli
+**COUNTER** Barrier tam geçit ortasına yerleştirilmişse iki patlamayla yıkılır. Sen Deadlock oynuyorsan barrier'ı köşeye, duvara bitişik kur — doğrudan atış hattı oluşturmak zorlaşır
+**WHY** Barrier görüş + hareket engeli ama HP barı var. Raze'in iki hasarı bunu eritir. Tek barrier tek round için dayanmaz.
 
 ---
 
-**IF** Raze satchel boost aldı, Deadlock gravnet attı
-**MEANING** Gravnet Raze'i havada yakalar, satchel momentum boşa, Raze yavaşlar ve slow target
-**COUNTER** Raze gravnet lineup'ını round 1'de öğren, satchel hattını gravnet radius'unun dışına. Gravnet tek use/round — harcatma sonrası serbest.
-**WHY** Gravnet Raze'in satchel kimliğini tam iptal eden tek sentinel utility'si. Gravnet hattı okunduysa Raze ikinci satchel ile bypass eder.
+**IF** Satchel ile atladın, Deadlock gravnet attı
+**MEANING** Gravnet havada seni yakalar — satchel ivmesi kesilir, yavaşlarsın, kolay hedef olursun
+**COUNTER** Raze oynuyorsan: gravnet düşen hattı izle, satchel yönünü o noktadan uzağa al. Gravnet tek kullanım — harcattıktan sonra ikinci atlamada hareket serbestsin
+**WHY** Gravnet, satchel hareketini tamamen kesen tek araç. Hattı okursan geçersin.
 
 ---
 
-**IF** Deadlock sonic sensor Raze'in entry hattında aktive oldu
-**MEANING** Concussed debuff Raze'in aim + animasyon hızını bozar, nade throw yavaşlar
-**COUNTER** Raze entry hattında shift walk bypass değil (Raze'in mobility stili satchel, sessiz yürüyüş değil), sensor'u nade ile patlat.
-**WHY** Sensor ses tabanlı — Raze'in satchel explosion sesi sensor'u tetikler. Sensor'u nade ile patlatmak iki explosion ile tek trap harcaması.
+**IF** Deadlock sonic sensor giriş hattında aktive oldu
+**MEANING** Sersemledin — nişan ve animasyon yavaşlar, nade atman gecikir
+**COUNTER** Shift yürüyüşüyle geçmeye çalışma — Raze zaten sessiz gezmiyor. Sensor'u nade ile patlat, geçmeden önce temizle
+**WHY** Sensor ses tabanlı — satchel patlama sesini duyar, tetiklenir. Nade ile patlatmak: iki patlama, tek tuzak harcanması.
 
 ---
 
-**IF** Raze Showstopper ultunu Deadlock barrier hattına attı
-**MEANING** Ult rocket barrier + arkasındaki defender'ı tek atışta yıkar
-**COUNTER** Deadlock ult sesini duyduğu an barrier arkasından çık, alternatif pozisyon. Barrier arkası ult karşısında tuzak.
-**WHY** Showstopper area weapon, barrier lokasyonu ult hedefi için sabit nokta. Deadlock pozisyon değiştirmezse ult lethal.
+**IF** Showstopper'ı Deadlock barrier hattına attın
+**MEANING** Ult roketi barrier'ı ve arkasındaki Deadlock'u birlikte yıkar
+**COUNTER** Deadlock oynuyorsan: ult sesini duyduğun an barrier arkasından çık, farklı açıya geç — barrier arkası ulta karşı kapan
+**WHY** Showstopper alan silahı. Barrier sabit nokta, ult için sabit hedef. Pozisyon değiştirmezsen ult öldürür.
 
 ---
 
-**IF** Deadlock Annihilation ultunu Raze post-plant pozisyonuna attı
-**MEANING** Annihilation beam Raze'i cocoon'a yakalarsa ölüm, Raze satchel cocoon'dan çıkaramaz
-**COUNTER** Raze beam görüş hattı dışında off-angle'da tut. Beam sesini duyduğu an corner cover + reposition.
-**WHY** Annihilation tracking ult, cocoon kesin ölüm. Raze'in kaçış aracı yok — pozisyonlama ult öncesinde karar.
+**IF** Deadlock Annihilation'ı post-plant pozisyonuna attı
+**MEANING** Beam seni yakalarsa cocoon — cocoon kesin ölüm, satchel çıkartmaz
+**COUNTER** Spike kurulur kurulmaz alternatif açıya geç, beam görüş hattı dışında dur. Beam sesini duyduğun an köşeye gir, pozisyon değiştir
+**WHY** Annihilation takip eden ult. Pozisyon kararını ult başlamadan vermişsen hayatta kalırsın — başladıktan sonra geç.
 
 ---
 
-**IF** Raze nade + paintshell kombosu Deadlock utility hattına toplu atıldı
-**MEANING** Çift damage ile barrier, trip, sensor tek anda silinir — Deadlock utility ekonomisi round başında sıfırlanır
-**COUNTER** Deadlock utility'sini tek noktada toplamasın, site içinde dağıt. Çift damage lineup tek noktayı yakalar, dağılmış utility çift lineup gerektirir.
-**WHY** Raze'in çift damage ekonomisi tek nokta için yeterli, birden fazla nokta için yetersiz. Dağılım savunması Deadlock'un utility gücünü maksimum eder.
+**IF** Nade + paintshell kombosu Deadlock araç yığınına aynı anda atıldı
+**MEANING** Çift hasar barrier, sensor, trip'i tek seferde siler — Deadlock o roundda araçsız kalır
+**COUNTER** Deadlock oynuyorsan araçlarını tek noktada toplama. Site içine dağıt — iki farklı noktayı silmek için Raze'in iki ayrı atış hattına ihtiyacı var
+**WHY** Raze'in çift hasarı tek nokta için yeterli, iki nokta için yetersiz. Dağılım Deadlock'un araç ömrünü uzatır.
 
 ---
 
-**IF** Raze round başı B Main rush, Deadlock setup tamamlanmamış
-**MEANING** Barrier + gravnet kurulum öncesi Raze dar koridordan entry, Deadlock utility'siz aim battle'da
-**COUNTER** Deadlock setup'ı round başı ilk 10 paket içinde tamamla. Round başı utility sırası: barrier → gravnet → sensor.
-**WHY** Deadlock'un gücü utility kurulumunda. Kurulum harcatılırsa Deadlock sıradan sentinel. Raze'in mobility'si kurulum timer'ını yeniyor.
+**IF** Deadlock araçlarını kurmadan önce dar koridora girdin
+**MEANING** Barrier ve gravnet kurulmamış — Deadlock nişan düellosunda sıradan
+**COUNTER** Deadlock oynuyorsan: saldırı ekibini görünce veya koşma sesini duyunca araçları önce kur. Barrier önce, gravnet sonra, sensor en son
+**WHY** Deadlock'un gücü kurulumunda. Kurulum yapılmadıysa Deadlock sıradan bir sentinel.
 
-## 4. Utility Takası
+## 4. Araç Takası
 
-Raze damage + mobility (nade + paintshell + satchel x2 + ult), Deadlock defensive lock (barrier + gravnet + sensor + ult). Raze'in utility'si aktif baskı, Deadlock'un utility'si pasif engel. Matchup'ın özü Raze'in çift damage kaynağının Deadlock'un tek barrier'ını eskir. Deadlock'un cevabı gravnet ile Raze mobility'sini iptal etmek. Tek aşamalı değişim: Raze nade → barrier down → Deadlock gravnet → Raze statik → Deadlock kill. Ult ekonomisi: Showstopper 8 point, Annihilation 8 point — eşit cost, iki ult da round kazanma silahı, pozisyon okumasıyla karar verilir.
+Raze aktif baskıyla gelir: nade + paintshell + çift satchel + ult. Deadlock pasif engelle bekler: barrier + gravnet + sensor + ult.
 
-## 5. Map Bazlı Değişim
+Öz takas şu: Raze nade → barrier düşer → Deadlock gravnet → Raze durur → Deadlock öldürür.
 
-**Bind (Deadlock hafif avantajlı):** Hookah dar koridor barrier için ideal. Raze nade barrier'ı eskir ama Deadlock'un choke lock'u round başı maksimum.
+Bu zinciri kim kırıyor?
+- Raze gravnet hattını okursa → zincir kırılır
+- Deadlock araçlarını dağıtırsa → Raze iki ayrı atış hattı harcamak zorunda
 
-**Split (Deadlock avantajlı):** A Main + B Main dar koridorlar barrier + gravnet meta. Raze'in satchel mobility'si gravnet ile iptal edilir.
+Kimin ultu daha iyi konumda patlarsa o round'u alır.
 
-**Sunset (Deadlock avantajlı):** A Main + Market choke'ları Deadlock setup çekirdeği.
+## 5. Harita Bazlı Değişim
 
-**Haven (Balanced):** Deadlock B anchor, Raze A Short entry. Site'a göre avantaj.
+**Bind (Deadlock hafif avantajlı):** Hookah dar — barrier için ideal. Raze nade basarsa açılır ama Deadlock geçidi sıfırdan kilitler.
 
-**Icebox (Raze avantajlı):** Uzun sightline Deadlock'un close utility'sini eskir. Raze Mid satchel boost ile vertical space alır.
+**Split (Deadlock avantajlı):** A Main + B Main koridorları barrier + gravnet için yapılmış. Satchel hareketin burada gravnet ile kesilir.
 
-**Breeze (Raze avantajlı):** Geniş alanlar Deadlock utility'sini dağıtır. Raze nade ekonomisi Breeze'de lethal.
+**Sunset (Deadlock avantajlı):** A Main ve Market geçişleri Deadlock kurulumunu besler. Raze girmek için barrier'ı temizlemek zorunda.
 
-**Fracture (Deadlock avantajlı):** Multi-entry yapısı Deadlock'un barrier hattına yarar, Raze tek yönlü push yapamaz.
+**Haven (Dengeli):** Deadlock B'yi tutar, Raze A Short'tan girer. Site'a göre avantaj kayar.
 
-## 6. Flip Moment'ler
+**Icebox (Raze avantajlı):** Uzun görüş hatları Deadlock'un yakın mesafe araçlarını etkisiz bırakır. Mid satchel yükselişiyle dikey alan açırsın.
 
-**Flip 1 — Barrier yıkılması:** Raze nade + paintshell ile barrier düştüğü an Deadlock'un map lock'u çözülür. Raze bu pencerede site content free.
+**Breeze (Raze avantajlı):** Geniş alanlar Deadlock araçlarını dağıtır, tek noktada toplayamaz. Nade hasarın burada öldürür.
 
-**Flip 2 — Gravnet harcanması:** Deadlock gravnet atıldığı an Raze ikinci push için serbest. Gravnet tek kullanım/round.
+**Fracture (Deadlock avantajlı):** Çok yönlü giriş yapısı Deadlock'a barrier hattı kurmak için seçenek verir, Raze tek yönlü baskı yapamaz.
 
-**Flip 3 — Annihilation pozisyon okuması:** Raze ult radius'unda kaldıysa kesin ölüm, off-angle'da ise ult boş.
+## 6. Dönüm Noktaları
 
-**Flip 4 — Showstopper barrier yıkımı:** Ult rocket barrier + Deadlock'u aynı anda yıkar. Pozisyon varyasyonu olmazsa ult maksimum değer.
+**Dönüm 1 — Barrier düştü:** Nade + paintshell birlikte barrier'ı çökertir. O an Deadlock'un harita kilidi açılır — site'a girmek için an bu.
 
-## 7. Pro Coach Notları
+**Dönüm 2 — Gravnet harcandı:** Deadlock gravnet attı ve ıskaladı veya harcattın. İkinci satchelinle hareket serbestsin — o anda gir.
 
-**VCT'de nasıl oynanıyor:** Deadlock pro meta'da niche sentinel, belirli map'lerde (Split, Sunset, Fracture) tercih ediliyor. Raze vs Deadlock matchup'ı Raze'in damage ekonomisinin Deadlock'un barrier/gravnet ekonomisine karşı olan takası. Pro seviyede Deadlock oyuncuları utility'yi round'a göre değiştirir — Raze nade lineup'ı round 1'de tespit edilirse round 2'de barrier alternatif hatta.
+**Dönüm 3 — Annihilation konumu okuması:** Beam alanındasın → ölürsün. Alternatif açıdaysan → ult boşa gider.
 
-**Meta tier durumu:** Raze A+ tier, Deadlock A- tier. Head-to-head Raze hafif avantajlı close range odaklı map'lerde, Deadlock uzun çoke map'lerinde avantajlı.
+**Dönüm 4 — Showstopper barrier üstüne patladı:** Deadlock pozisyon değiştirmediyse barrier + Deadlock aynı anda gider. Pozisyon değiştirdiyse ult değer kaybeder.
 
-**** Barrier mesh HP değeri ve nade + paintshell toplamının barrier'ı yıkmak için yeterli olup olmadığı — patch notlarına göre güncellenmeli.
+## 7. Radiant Seviye Notlar
 
-**** Gravnet süresi ve satchel animasyonunu iptal edip etmediği pratik testle doğrulanmalı.
+**Deadlock oynayanın kitabı:** Araçlarını her roundda aynı noktaya koyma. Raze nade atış hattını bir roundda gördüler mi, bir sonraki roundda barrier'ı başka hatta kur. Araçları site içinde dağıt — Raze'in çift hasarı bir noktayı siler, iki noktayı silemez.
 
-**Coach test:** "Deadlock'un utility'si Raze'i yavaşlatmak için. Yavaşlayan Raze ölü Raze. Raze oyuncusunun kitabı: nade ile barrier'ı yık, paintshell ile sensor temizle, satchel ile gravnet hattından uzaklaş. Deadlock oyuncusunun kitabı: utility'yi tek noktada toplama."
+**Raze oynayanın kitabı:** Nade ile barrier'ı yık. Paintshell ile sensor'u temizle. Satcheli gravnet hattından uzağa al. Bu üç adımı uygularsan Deadlock geçişini kesemez.
+
+**Doğrulama gereken:** Barrier HP değeri ile nade + paintshell toplamının yeterliliği — patch notlarını kontrol et. Gravnet'in satchel hareketini tam kesip kesmediği — özel lobide dene.

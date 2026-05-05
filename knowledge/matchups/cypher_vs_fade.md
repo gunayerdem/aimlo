@@ -1,46 +1,46 @@
 # MATCHUP: Cypher vs Fade
 
-## Etkileşim Kimliği
-Cypher tripwire ve kamera kurulumuyla pasif bir bilgi ağı oluşturan S-tier bir sentinel'dir. Fade, Haunt ve Prowler'ı ile agresif şekilde bilgi avlayan S-tier bir initiator'dur. Bu matchup bir bilgi felsefesi savaşıdır — pasif vs. aktif. Cypher düşmanların tuzaklara yürüyerek kendilerini açığa çıkarmalarını bekler; Fade yeteneklerini göndererek açığa çıkarmayı zorlar. Fade'in Prowler'ı Cypher'ın tripwire'larından geçip tetikleyebilir ve Haunt'u kamera pozisyonlarını açığa çıkarır. Ancak Cypher'ın bilgisi yerleşimden sonra kalıcı ve bedavadır; Fade ise her raund yetenek harcamak zorundadır.
+## Ne Oluyor Bu Matchup'ta
+Cypher tripwire ve kamerayla bilgi toplar — yetenek harcamadan, pasif. Fade Haunt ve Prowler'la bilgi avlar — her raund yetenek harcar. Fade her şeyini açığa çıkarmak için gönderir; Cypher bekler, düşman gelir ve tuzağa düşer. Fade kurulumu temizlerse Cypher kör kalır. Cypher Fade'in yeteneklerini yakalarsa Fade her raund para kaybeder. Kim daha az harcayarak daha fazla bilgi alıyorsa o kazanıyor.
 
 ## Yaygın Cezalandırma Kalıpları
 
-**IF**: Fade Haunt ile Cypher'ın kamera ve tripwire pozisyonlarını takıma açığa çıkarıyorsa ve Prowler tripwire'ları bir oyuncu vurmadan tetikliyorsa
-**MEANING**: Fade Cypher'ın kurulumunu sistematik olarak söküyor. Seize Cypher'ı kurulumu temizlendikten sonra repozisyon almaya çalışırken yerine kilitliyor. Nightfall tüm site'tan geçirerek Cypher'ı açığa çıkarıp sağırlaştırır — pasif oyun tarzı imkânsız hale gelir.
-**COUNTER**: Tripwire'lar Prowler'ı yakalar ve Fade'in push yönünü açığa çıkarır. Spycam Fade'in Haunt attığı anı tespit eder ve takıma pozisyonunu verir. Neural Theft ölmüş Fade üzerinde takımın bilgi sonrası pozisyonlamasını açığa çıkarır. Cage yerleştirmesi Haunt'un görüş hattını keser ve taramanın tam kurulumu açığa çıkarmasını engeller.
-**WHY**: Cypher'ın bilgisi yerleşimden sonra bedavadır — Fade her raund yetenek harcamak zorundadır, bu da kaynak üstünlüğü oluşturur.
+**IF**: Fade Haunt'u atıyor, Cypher'ın tripwire ve kamera pozisyonlarını takıma gösteriyor. Prowler da tripwire'lara çarpıyor ama oyuncuya değil — sadece tel tüketiyor.
+**MEANING**: Fade kurulumunu her raund temizliyor. Seize temizleme sonrası yeniden konumlanan Cypher'ı kilitliyor. Nightfall site boyunca geçtiğinde Cypher tamamen açıkta kalır — pasif oynamanın yolu kapanır.
+**COUNTER**: Tripwire'ları çapraz çift-aks kur: biri Prowler'ı tetikler, diğeri push yönünü verir — Fade ikisini de temizlemek zorunda. Kamerayı zemin seviyesine veya duvar köşesine yerleştir — Haunt düz yukarıdan bakar, göremez. Cage'i Haunt'un tipik atış açısının tam önüne koy — Haunt kurulumu tam göremez.
+**WHY**: Haunt her raund atar — yetenek harcar. Kurulumun görünmez kalırsa her raund bedava bilgi sen alırsın, o harcamış olur.
 
-**IF**: Fade Prowler'larını tripwire'lara sürekli kaybedip yararlı bilgi alamıyorsa
-**MEANING**: Prowler'ı tahmin edilebilir şekilde tuzaklı koridorlardan gönderiyor. Önce Haunt ile tuzakları açığa çıkarmalı, sonra Prowler'ı onların etrafında yönlendirmeli.
-**COUNTER**: Önce Haunt at ve tuzak düzeni açığa çıkar, sonra Prowler'ı kaçınan bir yolda gönder. Prowler'ı Cypher site'ına kör gönderme.
-**WHY**: Prowler bilgi aracı olarak işe yarar — tuzaklara harcamak onu boşa kullanır.
+**IF**: Fade Prowler'larını sürekli tripwire'lara kaybediyor, yararlı bilgi alamıyor.
+**MEANING**: Prowler'ı tuzaklı koridordan kör gönderiyor. Haunt önce atmadan Prowler'ı nereye süreceğini bilmiyor.
+**COUNTER**: Önce Haunt at — hangi koridor temiz görünüyor? Sonra Prowler'ı o tarafa gönder. Tuzaklı koridoru atla. Prowler'ı Cypher site'ına harita okumadan kör gönderme.
+**WHY**: Prowler bilgi aracı — tuzağa atmak onu boşa harcar.
 
-**IF**: Cypher Neural Theft ile Fade'in ölümünden takımın tam pozisyonunu alıyorsa ve Cage'leri Haunt'un görüş hatlarını keserek kurulumunu gizliyorsa
-**MEANING**: Cypher bilgi akışını tersine çevirdi — Fade avlamaya gelirken Cypher Fade'in takımının pozisyonunu daha az yetenek harcayarak elde ediyor. Cage'ler Haunt taramasının tripwire ve kamera açıklarını bulmasını engeller, kurulum ömrünü uzatır.
-**COUNTER**: Cypher Cage'lerini Haunt'un tahmin edilebilir atış açılarının önüne yerleştirmeli ve kameraları alışılmadık yükseklik veya köşelere konuşlandırmalı. Neural Theft zamanlaması Fade öldüğü an kullanılmalı ki bilgi çabuk eskimeden takıma iletilsin. Tripwire'ları Prowler'ın geçeceği yolları kapatan ama aynı zamanda push yönünü açığa çıkaran çapraz konumlara yerleştir.
-**WHY**: Cypher'ın pasif kurulum gücü yeniden yerleşim gerektirmez — bu bedava bilgi avantajını korumak için Haunt açılarını Cage ile kapatmak her raund yetenek tasarrufu sağlar.
+**IF**: Cypher Neural Theft ile Fade'in ölümünden takımın tam pozisyonunu alıyor. Cage'leri Haunt'un görüş hatlarını kesiyor, kurulum gizli kalıyor.
+**MEANING**: Bilgi dengesi Cypher'a döndü — Fade avlamaya geldi ama Cypher daha az harcayarak Fade'in takımının yerini biliyor. Cage Haunt'un tripwire ve kamerayı bulmasını engelliyor, kurulum daha uzun yaşıyor.
+**COUNTER**: Cage'i Haunt'un tipik atış açısının tam önüne koy. Kameraları zemin seviyesine veya yan duvara yerleştir — Haunt düz yukarıdan düşüş açısıyla bakıyorsa göremez. Tripwire'ları çapraz kur: hem Prowler'ın geçeceği yolu kapar hem push yönünü verir. Neural Theft'i Fade düşer düşmez kullan — bilgi eskiyor, bekletme.
+**WHY**: Kurulum yerinde durdukça Cypher yetenek harcamıyor. Haunt açısını Cage kaparsa her raund Fade ek yetenek atar — sen kazanırsın.
 
 ## Tekrarlayan Başarısızlık Ne Anlama Gelir
-**Cypher** tüm kurulumu Fade tarafından sürekli temizleniyorsa, tripwire ve kamera standart pozisyonlarda — Haunt her raund tipik atış açısından açığa çıkarır. Haunt'un tipik atış açılarından tarayamayacağı alışılmadık yerleşimler gerekir.
+**Cypher** kurulumu her raund Fade tarafından temizleniyorsa: tripwire ve kamera standart pozisyonda — Haunt her zamanki açıdan bakıyor ve her şeyi görüyor. Kamerayı zemin seviyesine veya yan duvara taşı; Haunt düz yukarıdan göremez.
 
-**Fade** yararlı bilgi almadan Prowler'larını sürekli tripwire'lara kaybediyorsa, Prowler'ı tuzaklı koridorlardan tahmin edilebilir şekilde gönderiyor. Önce tuzakları açığa çıkarmak için Haunt atıp sonra Prowler'ı etrafında yönlendirmeli.
+**Fade** Prowler'larını sürekli tripwire'lara kaybediyorsa: tuzaklı koridordan kör gönderiyor. Önce Haunt at, hangi yol temiz olduğunu gör, Prowler'ı oraya gönder.
 
 ## AIMLO Ne Demeli
 ### Oyuncu cezalandırılan taraftayken
-**Cypher kurulumu Fade tarafından temizleniyorken**: "Fade'in Haunt'u standart kurulumunu her raund açığa çıkarıyor. Kameranı ve tripwire'larını Haunt'unun her zamanki atış yönünden kapsamadığı pozisyonlara yerleştir. Seni bulmak için Haunt açısını değiştirmek zorunda kalırsa zaman ve yetenek harcar."
+**Cypher kurulumu Fade tarafından temizleniyorsa**: "Haunt her raund kamera ve tripwire'ını buluyor. Kamerayı zemin seviyesine veya yan duvara sakla — Haunt düz yukarıdan düşüş açısıyla göremez. Tripwire'ları da çapraz çift-aks yap — biri Prowler'ı yakalar, diğeri push yönünü verir. Haunt açısını değiştirmek zorunda kalırsa zaman ve yetenek harcar."
 
-**Fade Prowler'larını tuzaklara kaybediyorken**: "Prowler'ın tripwire'larına koşuyor. Önce tuzak düzeni açığa çıkarmak için Haunt at, sonra onların kaçındığı bir yolda Prowler gönder. Prowler'ı Cypher site'ına kör gönderme."
+**Fade Prowler'larını tuzaklara kaybediyorsa**: "Prowler'ı kör gönderiyorsun. Önce Haunt at, koridor haritasını gör, sonra Prowler'ı temiz yola gönder. Tuzaklı koridoru atla."
 
 ### Oyuncu cezalandıran taraftayken
-**Fade Cypher'ı söküyor**: "Haunt'un tüm kurulumu ifşa ediyor. Her raund site'ini taramaya devam et — bilgi avantajı ortadan kalkar."
+**Fade Cypher'ı söküyorsa**: "Haunt her raund kurulumu buluyor. Her raund Haunt atış açısını değiştir — Cypher Cage'i aynı noktaya koyar, o açıdan geç."
 
-**Cypher Fade'in yeteneklerini yakalıyorken**: "Tuzakların Prowler'larını yakalıyor ve kameran yetenek atışlarını tespit ediyor. Alışılmadık yerleşimlerle devam et — verimli temizlik yapamaz."
+**Cypher Fade'in yeteneklerini yakalıyorsa**: "Tripwire Prowler'ları tutuyor, kamera Haunt anını yakalıyor. Kamerayı aynı zemin veya köşe konumunda tut — Fade düz açıdan temizleyemez, her raund yetenek harcar."
 
 ## Rank Modülasyonu
-**LOW**: Fade Cypher kurulumunu temizlemeyi önceliklendirmez. Cypher Haunt taramalarına uyum sağlamaz. Temel etkileşimi öğret.
+**LOW**: Fade Cypher kurulumunu temizlemeye çalışmaz. Cypher Haunt'a göre yer değiştirmez. Temel etkileşimi anla: Haunt kurulumunu gösterirse kamerayı zemin seviyesine taşı. Prowler tuzağa gidiyorsa önce Haunt at.
 
-**MID**: Fade bazı tuzakları temizlemeye başlar ama Cypher kurulumu değiştirmez. Cypher'a Fade'e karşı yerleşim değişikliği öğret.
+**MID**: Fade bazı tuzakları temizlemeye başladı ama Cypher aynı yerde kaldı. Cypher oynuyorsan: Haunt attıktan sonra kamerayı farklı köşeye taşı. Fade oynuyorsan: önce Haunt at, hangi koridor temiz göründüğünü gör, Prowler'ı oraya gönder.
 
-**HIGH**: Her ikisi de bilgi vs. bilgi oyununu oynar. Uyum öğret — Cypher'a Haunt'a karşı kamera açıları, Fade'e çeşitlendirilmiş Haunt atışları.
+**HIGH**: İkisi de bilgi karşılığı bilgi oynuyor. Cypher oynuyorsan: Haunt'un düşüş açısına göre her raund kamera konumunu değiştir. Fade oynuyorsan: Haunt atış açısını her raund değiştir — Cypher Cage'i sabit noktaya koyar, o açıdan geç.
 
-**ELITE**: Matchup bilgi ekonomisi ile ilgilidir — kim daha az harcayarak daha fazla açığa çıkarıyor. Kaynak verimliliği ve okumaya dayalı yetenek kullanımı öğret.
+**ELITE**: Kim daha az harcayarak daha fazla bilgi alıyor — bu soruyu sor. Cypher çapraz tripwire ve saklı kamerayla Fade'i her raund yetenek harcatıyor mu? Fade Haunt açısını değiştirerek Cypher Cage'ini geçiyor mu? Kaynak verimliliğini ve okuma hızını konuş.

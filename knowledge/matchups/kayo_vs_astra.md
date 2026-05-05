@@ -11,113 +11,136 @@ tags: [matchup, kayo, astra, initiator, controller]
 
 ## 1. Matchup Özü
 
-KAY/O zero point knife + frag grenade + flash/drive + null/cmd (ult) ile utility suppress silahı taşıyan initiator, Astra 4 star + Cosmic Divide ile global smoke + gravity well + nova pulse yerleştiren controller. Matchup doğrudan karşıt: KAY/O suppress utility cast'ini siler, Astra utility cast üstüne kurulmuş agent. KAY/O Astra'nın silahını iptal ederek kazanır, Astra KAY/O'nun silahını bilmeden cast ederek kaybeder.
+KAY/O utility siler. Astra utility üstüne kurulur. Bu matchup'ın tamamı buradan çıkıyor.
+
+KAY/O knife + ult ile Astra'nın star'larını ve astral formunu suppress eder — Astra utility kullanamaz, gravity/smoke/nova gelmez, round boyu etkisiz kalır. Astra ise KAY/O knife atılmadan önce star'larını yerleştirmiş, nova pulse ile knife castını bozmuş, Cosmic Divide ile ult alanını kesmişse round'u kendi tarafına çeker.
+
+Kim önce hazırlanırsa kazanır. KAY/O silme baskısı, Astra kurulum baskısı — ikisi aynı anda çalışamaz.
 
 ## 2. Kim Avantajlı?
 
-**KAY/O lehine durumlar:**
-- Null/cmd ultu aktif — Astra astral form + utility cast silahları ult süresi boyunca iptal, Astra global silahı çalışmaz
-- Zero point knife Astra star lokasyonuna atıldı — knife radius star'ı suppress eder, Astra star'ı nova pulse/gravity/smoke'a çeviremez
-- Astra body astral form'dayken — knife Astra body'sini suppress edip astral form iptal, Astra round boyu utility'siz
-- Entry round'larında — KAY/O flash + knife + frag kombosu Astra'nın reaksiyon smoke'unu cast öncesi susturur
+**KAY/O avantajlı:**
+- Null/cmd ult aktifken Astra site girişi hattındaysa — utility cast tamamen kapanır
+- Knife Astra bodyine isabet ederse — astral form iptal, round boyu utilitysiz
+- Site girişinde flash + knife + frag kombon tamamsa — Astra reaksiyon dumanını kullanamaz
 
-**Astra lehine durumlar:**
-- Cosmic Divide ulu aktif — map bölünür, KAY/O knife + flash hattı Cosmic Divide'ın arkasına geçemez
-- KAY/O knife cooldown'dayken — knife olmadan KAY/O suppress silahı yok, Astra utility serbest
-- Gravity well KAY/O knife cast süresine denk geldi — knife cast süresi gravity well içinde iptal
-- Multi-site baskı round'larında — Astra global utility iki site'a yayılır, KAY/O yerel utility tek site'ta yoğun
+**Astra avantajlı:**
+- Knife bekleme süresindeyken Astra star'larını serbestçe kullanır — seni durduracak bir şey yok
+- Cosmic Divide attıysa — knife, flash, grenade Divide'ın arkasına geçmez
+- Nova pulse knife cast süresini yakaladıysa — knife iptal, suppress gelmez
 
-**Balanced:** Ascent, Sunset orta mesafeli map'lerde matchup KAY/O knife isabet oranı ve Astra star yerleşimine bağlı.
+**Dengeli:** Ascent ve Sunset'te matchup knife isabet oranı ve star yerleşimine göre her round farklı sonuçlanır.
 
 ## 3. Key Düellolar
 
-**IF** KAY/O zero point knife Astra site hattına atıldı, Astra star yerleştirilmiş
-**MEANING** Knife radius star lokasyonuna denk geldi, Astra star suppress aldı, utility silahı iptal
-**COUNTER** Astra star'larını knife range'i dışına yerleştir. Knife area silahı ama range sınırlı. Star'ın yerleşim lokasyonu KAY/O knife trajectorilerinden uzak açıya ayarlanmalı.
-**WHY** Knife silahı area suppress, star Astra silahının temeli. İki silah doğrudan karşıt — knife star'ı siler, Astra'nın silahı round boyu iptal. Star yerleşimi knife hattına göre ayarlanmalı, aynı star iki round tekrar etmemeli.
+**IF** KAY/O knife Astra star lokasyonuna atıldı, star yerleştirilmiş
+**MEANING** Knife menzili star'ı yakalarsa Astra o star'ı smoke/gravity/nova'ya çeviremez — tek star iptal
+**COUNTER** Star'ını knife menzili dışına koy. Knife alanı suppress eder ama menzili sınırlı. Her round star yerleşimini değiştir — KAY/O bir önceki round'un düzenine göre atar, aynı yerde bırakırsan çarpar.
+**WHY** Knife star'ı siler, star Astra'nın temelidir. Sabit yerleşim KAY/O'ya bedava suppress verir — düzeni kırdığında knife boşa gider.
 
 ---
 
-**IF** KAY/O null/cmd ultu aktif, Astra execute hattı
-**MEANING** Ult süresi boyunca Astra utility cast silahı iptal, gravity well + nova pulse + smoke cast edilemez, execute utility'siz
-**COUNTER** Astra execute'ini ult süresi dışında yap. Ult sesini duyduğu an execute iptal, ult sonrası hattı kur. Alternatif: Cosmic Divide ult ile KAY/O ult hattını fiziksel olarak kes.
-**WHY** Null/cmd area suppress silahı, Astra ekonomisi utility cast silahlarına bağlı. Iki ult aynı round patlarsa Cosmic Divide map'i böler, KAY/O ult alanı bölünür, Astra Divide'ın öbür yüzünde utility cast edebilir.
+**IF** KAY/O null/cmd ult aktif, Astra site girişi hattında
+**MEANING** Ult alanı içinde Astra gravity, nova, duman kullanamaz — site girişi utilitysiz geçer
+**COUNTER** Ult sesini duyduğun an site girişini durdur. Ult bitince hattı kur. Ya da Cosmic Divide'ı anında at — Divide KAY/O ult alanını böler, Divide'ın öbür yüzünde utility kullanabilirsin.
+**WHY** Null/cmd Astra ekonomisini tamamen dondurur. Cosmic Divide tek çıkışın — iki ult çakışırsa Divide ult alanını fiziksel olarak keser.
 
 ---
 
-**IF** KAY/O frag grenade Astra gravity well alanına
-**MEANING** Grenade area damage, gravity well'e çekilen KAY/O takım üyeleri grenade damage'ı ekstra, ama grenade Astra takımına da gelirse karşılıklı damage
-**COUNTER** Astra gravity well'i KAY/O grenade trajectorisinden uzak açıya at. Gravity well + grenade çakışırsa iki takım için risk paylaşılır, Astra'nın avantajı azalır.
-**WHY** Gravity well pozisyon kilidi, grenade area damage. İki silah aynı alanda çalışırsa damage karşılıklı. Astra'nın silahı sadece pozisyon kilidi değil, pozisyon kilidinin sonrası rifle duel'ini kazanmak.
+**IF** KAY/O frag grenade Astra gravity well alanına geldi
+**MEANING** Gravity well'e çekilen takım üyeleri grenade hasarını da alır — iki hasar üst üste biner
+**COUNTER** Gravity well'i grenade yolundan farklı eksene at. Aynı alanda çakışırsa her iki takım da hasar alır, avantajın sıfırlanır.
+**WHY** Gravity well konum kilitler, grenade alan hasarı verir. Çakışırsa kendi kurulumun sana zarar verir. Gravity well sonrası tüfek düellosunu kazanmak istiyorsan grenade hattını ayrı tut.
 
 ---
 
 **IF** Astra nova pulse KAY/O knife cast süresine denk atıldı
-**MEANING** Nova pulse concussive KAY/O aim silahını bozar, knife cast iptal, Astra silahı KAY/O silahını cast öncesi siler
-**COUNTER** KAY/O knife cast'ini cover arkasından yap, nova pulse hattı dışında. Knife ses'i vardır, Astra star yerleşimi knife hattı üstüne olmadan cast tamamlanmalı.
-**WHY** Nova pulse Astra'nın KAY/O cast'ını bozma silahı, tek star kullanımı. KAY/O knife ult silahı, cast süresi açık. Nova pulse bu cast süresini yakalarsa KAY/O'nun silahı round için iptal.
+**MEANING** Nova pulse KAY/O nişanını bozar, knife cast iptal — suppress gelmez
+**COUNTER** Knife'ı kapak arkasından at. Nova pulse hattı dışında cast tamamlanır. Knife'ın sesi var — Astra duyarsa star'ı hattan çıkarabilir, ama kapaktaysan nova pulse seni yakalayamaz.
+**WHY** Nova pulse tek star kullanımı ama doğrudan knife castını öldürür. Kapak dışında atarsan Astra'ya bedava iptal verirsin.
 
 ---
 
-**IF** Astra astral form içinde round ortası, KAY/O knife Astra body'sine yöneldi
-**MEANING** Astra body astral'da savunmasız, knife radius body'yi suppress eder, astral form iptal, Astra round boyu utility'siz + oyuncu suppressed
-**COUNTER** Astra astral girişi cover arkasından. Body KAY/O sight hattına girmemeli. Trade partner Astra body'sini koruma hattı olarak pozisyonlanmalı.
-**WHY** Astral form Astra'nın silahı ama body savunmasız. KAY/O'nun silahı tam bu pencereyi yakalamak — Astra body'si bulunursa Astra silahını kaybeder, round KAY/O'ya.
+**IF** Astra astral formdayken KAY/O knife Astra bodyine yöneldi
+**MEANING** Body astral'da savunmasız — knife menzili bodyyi yakalarsa astral form iptal, Astra round boyu utilitysiz + suppressed
+**COUNTER** Astral forma kapak arkasından gir. Body KAY/O görüş hattına girmesin. Yanına bir eş koy — body KAY/O'ya görünürse eş anında kapatsın.
+**WHY** Knife'ı star'a değil Astra bodyine at — body suppress edilince star fark etmez, round boyu utility kapanır. Body korumak star yerleşiminden önce gelir.
 
 ---
 
-**IF** KAY/O flash Astra smoke hattı içinden atıldı
-**MEANING** Flash smoke içinde pop, Astra takım smoke arkasında kör, KAY/O takım pre-aim
-**COUNTER** Astra smoke'u KAY/O flash trajectorisi dışına yerleştir. Smoke ve flash farklı ekseniyi paylaşmamalı.
-**WHY** Flash smoke cover'ı delmez ama smoke içinden pop ederse smoke arkasındaki takım görüşü kör olur. Astra smoke yerleşimi KAY/O flash hattına göre ayarlanmalı.
+**IF** KAY/O flash Astra duman hattı içinden atıldı
+**MEANING** Flash duman içinde patlayınca duman arkasındaki takım kör olur — KAY/O takımı önceden nişan alır
+**COUNTER** Dumanını KAY/O flash yolundan farklı eksene koy. Duman ve flash aynı hatta çakışırsa duman arkası korumasız kalır.
+**WHY** Flash dumanı delmez ama duman içinden patlayınca duman arkasını da köreltir. Duman yerleşimi flash hattına göre ayarlanmazsa kendi dumanın seni köreltir.
 
 ---
 
-**IF** Astra Cosmic Divide ulu aktif, KAY/O takım push hattında
-**MEANING** Cosmic Divide map'i fiziksel olarak böler, KAY/O shot hattı Divide arkasına geçmez, flash + knife + grenade Divide'ın arkasını etkilemez
-**COUNTER** KAY/O ult sesinde reposition, Cosmic Divide hattının aynı yüzüne geç. Divide süresi içinde utility hattı Divide öbür yüzünde çalışmaz.
-**WHY** Cosmic Divide Astra'nın silahı, map'i iki parçaya ayıran alan silahı. KAY/O'nun silahı yerel utility, Divide yerel silahın hattını keser. KAY/O ult için Divide dışında kalmak şart.
+**IF** Astra Cosmic Divide aktif, KAY/O takım atılım hattında
+**MEANING** Divide haritayı fiziksel böler — knife, flash, grenade Divide'ın arkasına geçmez
+**COUNTER** Ult sesini duyduğun an Divide hattının aynı yüzüne geç. Divide süresi içinde öbür yüzde utility çalışmaz — yeri değiştirmezsen tüm utilityn boşa gider.
+**WHY** Cosmic Divide KAY/O'nun yerel utility hattını keser. Divide'ın yüzüne göre yeri değiştirmek şart.
 
 ## 4. Utility Takası
 
-KAY/O ekonomisi Frag (1) + Flash/Drive (2) + Zero Point (1) + Null/Cmd (ult). Astra ekonomisi 4 star (her biri smoke/gravity/nova/concussive) + Cosmic Divide (ult). KAY/O yerel suppress + flash silahı, Astra global utility + area control silahı. Iki agent doğrudan karşıt — KAY/O suppress Astra ekonomisini keser, Astra gravity + nova KAY/O cast süresini bozar. Round içi utility sırası: Astra star yerleşimi (pre-round) → KAY/O flash + frag (entry) → Astra gravity well + nova pulse (savunma) → KAY/O knife (ult round) → Astra Cosmic Divide (cevap ult). Ult ekonomisi: Null/cmd area suppress, Cosmic Divide area bölücü. Iki ult farklı eksende — Cosmic Divide KAY/O ult alanını böler, Astra Divide'ın öbür yüzünde utility cast edebilir. KAY/O ult Astra utility cast iptal silahı, Divide bu iptal alanını fiziksel olarak siler. Round'u kim ult'ı önce kullanır ona bağlı.
+**KAY/O eli:**
+- Frag grenade — alan hasarı
+- Flash/Drive — iki flash
+- Zero point knife — suppress
+- Null/cmd — ult, alan suppress
+
+**Astra eli:**
+- 4 star — duman / gravity well / nova pulse / sarsma
+- Cosmic Divide — ult, harita böler
+
+**Çarpışma sırası:**
+1. Astra star'larını round öncesi yerleştirir
+2. Sen flash + frag ile site girişini açarsın
+3. Astra gravity + nova ile cevap atar
+4. Sen knife ile Astra utilitysini susturursun
+5. Astra Cosmic Divide ile KAY/O ult alanını keser
+
+Kim ultu önce kullanırsa o round'u şekillendirir. Ama iki ult çakışırsa Divide ult alanını böler — Astra Divide'ın öbür yüzünde utility kullanabilir. KAY/O ultu için Divide dışında kalman şart.
 
 ## 5. Map Bazlı Değişim
 
-**Haven (Astra avantajlı):** 3 site Astra global silahı için ideal. KAY/O yerel utility 3 site rotate'inde dağılır.
+**Haven (Astra avantajlı):** 3 site Astra global utility için ideal. Knife 3 siteye dağılınca etkisi azalır.
 
-**Bind (Astra avantajlı):** Teleporter rotate Astra global silahı için ideal. KAY/O knife Bind dar choke'larında işe yarar ama Astra rotate avantajı var.
+**Bind (Astra avantajlı):** Teleporter dönüşü Astra global silahına uyar. Knife dar geçitlerde işe yarar ama dönüş avantajı Astra'da.
 
-**Lotus (Astra avantajlı):** 3 site döner kapı, Astra global utility meta.
+**Lotus (Astra avantajlı):** 3 site döner kapı, Astra global utility burada baskın.
 
-**Split (KAY/O avantajlı):** Vertical + dar choke KAY/O knife + flash için ideal. Astra star yerleşimi Split vertical alanında sınırlı.
+**Split (KAY/O avantajlı):** Dar geçit + dikey hat, knife + flash için ideal. Astra star yerleşimi Split'in dikey alanında sınırlı kalır.
 
-**Ascent (KAY/O avantajlı):** A Main Tree, B Switch KAY/O flash hatları. KAY/O Ascent meta'sında dominant.
+**Ascent (KAY/O avantajlı):** A Main, B Switch flash hatları KAY/O'ya uyar. Knife isabet şansı bu haritada yüksek.
 
-**Icebox (KAY/O avantajlı):** Uzun sightline + vertical, KAY/O knife + flash silahı için uygun.
+**Icebox (KAY/O avantajlı):** Uzun görüş hattı ve dikey yapı, knife + flash bu haritada güçlü.
 
-**Sunset (Balanced):** Multi-angle site'lar, iki agent farklı bölgelerde baskın.
+**Sunset (Dengeli):** Çok açılı siteler — iki ajan farklı bölgelerde baskın çıkar, her round sonuç değişir.
 
-## 6. Flip Moment'ler
+## 6. Flip Momentler
 
-**Flip 1 — Knife isabet:** KAY/O knife Astra star lokasyonuna denk geldi ise Astra utility iptal, round KAY/O'ya. Knife yanlış açıda ise round Astra'ya.
+**Flip 1 — Knife isabet:** Knife Astra star lokasyonuna çarptıysa utility iptal, round KAY/O'ya. Knife boşa gittiyse Astra serbest, round Astra'ya.
 
-**Flip 2 — Null/cmd vs Cosmic Divide:** İki ult aynı round patladı. Cosmic Divide KAY/O ult alanını böldü ise Astra Divide öbür yüzünde utility cast, round Astra'ya. KAY/O ult Astra'yı Divide öncesi yakaladıysa round KAY/O'ya.
+**Flip 2 — Null/cmd vs Cosmic Divide:** İki ult aynı round aktif. Divide KAY/O ult alanını böldüyse Astra öbür yüzde utility kullanır, round Astra'ya. KAY/O ultu Astra'yı Divide öncesi yakaladıysa round KAY/O'ya.
 
-**Flip 3 — Astra body yakalandı:** Astra astral form'dayken body KAY/O knife ile suppress aldı, round KAY/O'ya. Body cover'daysa utility yerleşim serbest, round Astra'ya.
+**Flip 3 — Astra body yakalandı:** Astral formdayken body knife ile suppress aldıysa — round boyu utility yok, round KAY/O'ya. Body kapaktaysa Astra utility serbest, round Astra'ya.
 
-**Flip 4 — Nova pulse knife cast'ı bozdu:** Astra nova KAY/O knife cast süresini yakaladı, knife iptal, round Astra'ya. KAY/O cast cover arkasındaysa tamamlandı, round KAY/O'ya.
+**Flip 4 — Nova pulse knife castı kesti:** Nova KAY/O knife cast süresini yakaladıysa knife iptal, round Astra'ya. KAY/O cast kapak arkasındaysa tamamlandı, round KAY/O'ya.
 
-## 7. Pro Coach Notları
+## 7. Koç Notları
 
-**VCT'de nasıl oynanıyor:** Pro seviye KAY/O vs Astra matchup'ı suppress vs global utility çekişmesi. KAY/O tarafı knife ult'u Astra star lokasyonlarına kilitliyor, null/cmd ult'u Astra execute round'larına zamanlıyor. Astra tarafı star'larını knife range dışına yerleştiriyor, Cosmic Divide ult'u KAY/O ult cevabı için saklıyor. Pro takımlar Split + Ascent + Icebox'ta KAY/O, Haven + Bind + Lotus'ta Astra tercih ediyor.
+**Bu matchup'ta işe yarayan düzenler:**
 
-KAY/O tarafı meta yönelim: knife ult'u Astra utility round'ları için saklamak, flash'ı Astra smoke hattının üstüne atmak, frag grenade'i Astra gravity well alanına kilitlemek. Astra tarafı meta yönelim: star yerleşimini knife range dışında yapmak, nova pulse'u KAY/O knife cast cevabı olarak kullanmak, Cosmic Divide ult'u KAY/O ult round'larına zamanlamak.
+KAY/O oynuyorsan knife'ı Astra star'ına değil Astra bodyine kilitle. Star suppress edilse bile Astra başka star koyabilir. Body suppress edilirse Astra o round utilitysiz — öncelik sırası body, sonra star.
 
-**Meta tier durumu:** KAY/O A tier initiator Split + Ascent + Icebox + Bind için. Astra A tier controller Haven + Bind + Lotus için. Matchup pro sahnede düzenli görülür, iki agent farklı map pool'larda tercih edilir.
+Astra oynuyorsan her round star yerleşimini değiştir. KAY/O knife bir önceki round'un düzenine göre atar — aynı yerde bırakırsan bedava suppress alırsın. Düzen kırmak Astra'nın bu matchup'taki en güçlü alışkanlığı.
 
-**** KAY/O knife suppress range ve Astra star suppress etkisi patch 9.x'te kontrol edilmeli.
+KAY/O tarafında: null/cmd ultu Astra'nın site girişi round'larına sakla. Flash'ı Astra duman hattının üstüne at. Frag grenadei gravity well alanından ayrı tut.
 
-**** Cosmic Divide ultunun null/cmd ult alanını bölme davranışı pratik testle doğrulanmalı.
+Astra tarafında: star'ı knife menzili dışına koy. Nova pulseı KAY/O knife cast cevabı için tut. Cosmic Divide'ı KAY/O ult geldiği anda at — ult sesini duyduğunda beklemeden kullan.
 
-**Coach test (Sentinels tarzı):** "KAY/O Astra'yı yenmek için knife'ı star lokasyonlarına kilitlemeli, Astra KAY/O'yu yenmek için star'larını knife range dışına yerleştirmeli. KAY/O utility cast'i siler, Astra utility cast üstüne kurulur — silme kurulumdan önce gelirse round KAY/O'ya, kurulum silmeden önce tamamsa round Astra'ya. İki agent aynı silah ekonomisinin iki yüzünde çalışıyor."
+**Temel kontrol:**
+- Knife suppress menzili ve star suppress etkisi patch 9.x'te güncellenmiş — mevcut patch notlarını oku, sonra custom sunucuda doğrula
+- Cosmic Divide'ın null/cmd ult alanını bölme davranışını custom sunucuda iki oyuncuyla test et
+
+**Özet:** KAY/O utility'yi siler, Astra utility üstüne kurulur. Silme kurulumdan önce gelirse round KAY/O'ya — kurulum silmeden önce tamamsa round Astra'ya. Her şey bu.

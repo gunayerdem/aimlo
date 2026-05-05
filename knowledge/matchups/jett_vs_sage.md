@@ -11,111 +11,109 @@ tags: [matchup, jett, sage, duelist, sentinel]
 
 ## 1. Matchup Özü
 
-Jett dash'iyle Sage'in wall + slow orb + heal kombosunu delmeye çalışan aggressive duelist, Sage ise wall timing'i ve slow orb yerleştirmesiyle Jett'in entry hızını kesen defensive anchor. Matchup Sage'in wall yerleşim disiplinini ve Jett'in slow orb bypass ekonomisini test eder.
+Jett dash'le giriyor, Sage wall + slow orb + heal ile o girişi durdurmaya çalışıyor. Asıl savaş kaynak sayımında: her ikisinin de round başına bir tane wall'u, bir tane dash'i var. Sage wall harcarsa çıplak sentinel'e düşer. Jett slow orb'a yakalanırsa yavaş bir rifle oyuncusuna döner.
 
 ## 2. Kim Avantajlı?
 
-**Jett lehine durumlar:**
-- Uzun sightline map'lerinde (Breeze, Icebox Mid) — Sage wall kısa ömürlü + close range odaklı, uzun açıda Jett Op dominance
-- Sage ult cooldown'dayken — Resurrection olmadan Sage'in takım trade değeri düşer, Jett aggressive round kazanır
-- Jett dash hazırken, Sage slow orb henüz atılmamış — Jett dash slow radius'una girmeden angle alır
-- Sage solo anchor'daysa — Sage tek yönlü wall ile çift yönlü Jett entry'yi tutamaz
+**Jett lehine:**
+- Uzun sightline'larda (Breeze, Icebox Mid) — Sage wall kısa mesafe odaklı, uzun açıda Jett Op işini yapar
+- Sage wall harcandıktan sonra — ikinci giriş serbest, Sage yalnızca slow orb ve aim'e kalır
+- Sage tek başına site tutuyorsa — tek yönlü wall çift taraflı girişi tutamaz
 
-**Sage lehine durumlar:**
-- Close-range choke'larda (Bind Hookah, Split A Main) — Sage wall choke'u keser, Jett dash wall arkasına geçemez
-- Jett dash cooldown'dayken — Slow orb + rifle crossfire Jett'i dashsiz yakalar
-- Sage ult hazır durumunda — Resurrect ile takım arkadaşı geri getirilirse 5v4 avantajı 5v5'e döner, Jett'in entry trade'i değersizleşir
-- Post-plant Sage wall ile defuse koridorunu kapattığında — Jett dash wall'u bypass edemez
+**Sage lehine:**
+- Dar boğazlarda (Bind Hookah, Split A Main) — wall boğazı keser, dash wall'u aşamaz
+- Jett dash yenilenmemişse — slow orb + çapraz ateş Jett'i yerde yakalar
+- Resurrection hazırsa — Jett'in trade kill avantajı geri alınır, Sage'in takımı 5v5'e döner
 
-**Balanced:** Haven, Ascent, Lotus gibi orta mesafeli map'lerde matchup Sage wall yerleşimine ve Jett'in dash timing'ine bağlı.
+**Dengeli:** Haven, Ascent, Lotus'ta Jett açık sightline bulursa Jett kazanır; Sage wall boğazı erken kapatırsa Sage kazanır.
 
 ## 3. Key Düellolar
 
-**IF** Jett A Main dash entry aldı, Sage wall choke'a anında kuruldu
-**MEANING** Wall Jett'in dash sonrası reposition alanını keser, Jett wall arkasında trade partner olmadan izole
-**COUNTER** Jett entry öncesi Sage wall timing'ini bil. Round başı early dash yerine wall kurulumunu harcatmak için teammate entry, sonraki round Jett entry.
-**WHY** Sage wall tek kullanım per round — wall harcatılırsa Sage o round'da slow orb + aim battle'a düşer. Wall harcamak stratejik hedef.
+**IF** Jett A Main'den dash'le girdi, Sage wall boğaza anında kuruldu
+**MEANING** Wall dash sonrası yeniden konumlanma alanını keser — Jett wall arkasında yalnız kalır, trade yok
+**COUNTER** Önce takım arkadaşını gönder, wall'u harcattır. Wall gidince Jett girer.
+**WHY** Sage wall round başına bir kez — bir kez harcatırsan o round wall yok, Sage sadece slow orb'la savunur.
 
 ---
 
-**IF** Jett dash attı, Sage slow orb Jett'in landing noktasına düştü
-**MEANING** Slow debuff Jett'in dash sonrası aim + hareket hızını kırar, dash'in surprise value'su yok
-**COUNTER** Jett dash yönünü slow orb lineup hattından uzak seç. Slow orb lineup'larını round 1'de öğren, round 2 bypass.
-**WHY** Slow orb Jett'in mobilite kimliğini etkisizleştirir. Slow içinde Jett sıradan rifler, dash dönüş penceresi açılır.
+**IF** Jett dash attı, Sage slow orb tam iniş noktasına düştü
+**MEANING** Slow debuff dash'in bütün avantajını yiyor — Jett slow içinde yavaş bir rifle oyuncusuna döner
+**COUNTER** Slow orb'un nereye düştüğünü ilk round'da not et, sonraki round'da o hattan gitme.
+**WHY** Slow içindeki Jett'in dash dönüş penceresi açık — aynı hattan gidersen Sage bunu bekler.
 
 ---
 
-**IF** Sage Resurrection ulu ile takım arkadaşını canlandırdı, Jett aggressive peek avantajını kaybetti
-**MEANING** Jett'in trade kill avantajı geri alındı, 4v5 avantajı 4v4 eşitliğe düştü
-**COUNTER** Jett Resurrection sesini duyduğu an canlanan oyuncunun full HP değil orijinal pozisyon durumunu öngör. Sage'in yanında canlanan oyuncu → Sage çift hedef, Jett dash ile Sage'i yakala.
-**WHY** Resurrection iki oyuncuyu aynı pozisyonda toplar — dash ile ikisini birden yakalamak ult karşı hamlesi.
+**IF** Sage Resurrection ile takım arkadaşını canlandırdı, Jett aggressive giriş avantajını kaybetti
+**MEANING** Jett'in trade kill'i sıfırlandı — 4v5 avantajı 4v4'e döndü
+**COUNTER** Resurrection sesini duyduğun an Sage'in son durduğu noktaya bak — canlanan oyuncu Sage'in ayağında belirir. Dash ile o noktaya gir, ikisini birden yakala.
+**WHY** Resurrection iki oyuncuyu aynı noktada toplar — dash ile o noktaya girebilirsen Sage ult'unun değeri sıfırlanır.
 
 ---
 
-**IF** Jett updraft ile vertical entry aldı, Sage wall yukarı kurulmuş
-**MEANING** Sage wall dikey versiyonuyla Jett'in üst iniş noktasını keser, updraft havada slow target
-**COUNTER** Updraft öncesi Sage wall kurulum süresine bak. Wall kurulmaksa vertical giriş kapalı, ground entry ya da alternatif yol.
-**WHY** Sage wall'ın dikey kurulumu updraft'ın anti-dote'u. Updraft hattı okunduysa Sage wall'u pre-place eder.
+**IF** Jett updraft'la yukarıdan girdi, Sage wall iniş noktasını kapatmış
+**MEANING** Sage wall dikey girişi keser — Jett havada yavaş hedef
+**COUNTER** Updraft öncesi wall kurulup kurulmadığına bak. Wall kuruluyorsa yukarıdan gitme, yer seviyesinde farklı açı bul.
+**WHY** Sage wall updraft hattını okursa onu önceden kurar — hava girişi kapanır, yer girişi açık kalır.
 
 ---
 
-**IF** Jett Op hold ediyor, Sage slow orb Jett'in reposition hattına
-**MEANING** Op shot sonrası Jett dash ile kaçacak, slow orb reposition hattında dash'i slow'luyor
-**COUNTER** Jett Op shot sonrası dash yönünü slow orb öngörüsüne göre değiştir. Round-to-round reposition hattı varyasyonu şart.
-**WHY** Sage slow orb Jett'in Op ekonomisini yener — Op'un değeri mobil holder'da, Sage slow'u holder'ı statik hedefe çevirir.
+**IF** Jett Op tuttu, Sage slow orb Jett'in kaçış hattına düştü
+**MEANING** Op atışı sonrası dash'le kaçacaksın, slow orb o hatta — dash'in faydası yok
+**COUNTER** Her round kaçış yönünü değiştir. Aynı hattan kaçarsan Sage slow orb'u oraya önceden atar.
+**WHY** Sage slow orb Op'ı etkisizleştirir — Op'ın değeri hareketli konumdayken gelir, slow seni sabit hedefe çevirir.
 
 ---
 
 **IF** Sage post-plant wall ile defuse koridorunu kapattı, Jett retake tarafında
-**MEANING** Wall defender'a görüş engeli, retaker'ın duelde görüşünü kapar, dash wall'u aşmaz
-**COUNTER** Jett updraft ile wall üstü off-angle al. Wall'un yanından değil üstünden clear et, post-plant wall sabit yön verir.
-**WHY** Sage wall yatay engel, Jett updraft dikey cevap. Wall'u aşmanın tek yolu üstten.
+**MEANING** Wall retaker'ın görüşünü keser — düelloda karşı tarafı göremezsin, dash wall'u geçemez
+**COUNTER** Updraft ile wall'un üstünden beklenmedik açı al. Yanından değil üstünden temizle.
+**WHY** Sage wall yatay engel — Jett updraft dikey cevap. Üstten geçmenin tek yolu bu.
 
 ---
 
-**IF** Jett round başı aggressive dash, Sage slow orb hazır
-**MEANING** Sage slow orb round başı lineup'la Jett entry angle'ına hazır, dry peek ölümü
-**COUNTER** Round başı entry öncesi teammate utility ile slow orb lineup'ını boz (Sova dart, Breach flash). Slow orb atılmamışsa Jett bedava entry.
-**WHY** Sage'in tek aktif defans silahı slow orb — lineup hazır ise Jett dash'i bedava harcar. Takım utility'si Sage'in tek silahını kırar.
+**IF** Jett round başı dash'le girdi, Sage slow orb girişe hazır
+**MEANING** Dash slow orb'a giriyor — giriş bedava harcanır
+**COUNTER** Sage'in slow orb atmasını önce takım yeteneğiyle kır (Sova dart, Breach flash). Slow orb atılmamışsa Jett girer.
+**WHY** Sage'in aktif silahı slow orb — takım yeteneğiyle kırarsan Sage çıplak kalır.
 
 ## 4. Utility Takası
 
-Jett utility'si aktif mobilite, Sage utility'si reaktif space reddetme + takım ekonomisi (heal + resurrect). Sayısal utility karşılaştırması Sage'in lehinde ama Sage'in utility'si aktif space kazanmaz — sadece reddeder. Jett attack round'unda Sage'in passive utility'sine karşı aktif baskı uygulayabilir. Defense round'unda Sage'in wall + slow orb'u Jett entry'sini boğar. Matchup ult ekonomisinde kırılır: Jett Blade Storm eco round silahı, Sage Resurrection round kazanma silahı — Sage'in ult'u daha yüksek değerli ama daha yavaş birikir.
+Jett yetenekleri seni öne taşır: dash giriş, updraft açı. Sage yetenekleri girişi durdurur ama Sage kendisi öne gidemez — wall ve slow orb reaktif, Sage topa değil sana cevap verir. Jett attack tarafında Sage'in bekleme savunmasına baskı yapabilir. Defense tarafında Sage wall + slow orb Jett'in girişini boğar.
+
+Ult farkı: Jett Blade Storm ekonomik round silahı — ucuz ama yalnızca kendine yarar. Sage Resurrection round kazanma silahı — pahalı ama takım değeri yüksek. Sage ult'u değersiz oyuncuya harcarsa round Jett'te kalır.
 
 ## 5. Map Bazlı Değişim
 
-**Bind (Sage avantajlı):** Teleporter önü Sage wall cenneti. Hookah + Showers'ta slow orb Jett'in dash'ini yener.
+**Bind (Sage):** Teleporter önü ve Hookah'ta Sage wall boğazı keser. Slow orb Jett'in dash'ini yener.
 
-**Ascent (Balanced):** A Short Jett entry, Sage B anchor klasik rol. Matchup taraflarda kararlaşır.
+**Ascent (Dengeli):** A Short Jett girişi, Sage B anchor klasik. Taraflarda ayrışır.
 
-**Icebox (Jett avantajlı):** Uzun sightline + vertical Jett avantajı. Sage wall Icebox'ta A Site içinde değerli ama Mid Jett'in.
+**Icebox (Jett):** Uzun sightline + dikey alan Jett'e yarar. Mid tamamen Jett'in, A Site içi Sage wall'u değerli.
 
-**Split (Sage avantajlı):** A Main ve B Main choke Sage wall için mükemmel. Jett dash dar koridorlarda wall'la kesilir.
+**Split (Sage):** A Main ve B Main boğazları Sage wall için ideal. Dar koridorda dash wall'a gömülür.
 
-**Haven (Balanced):** Sage A veya B anchor, Jett C Long Op. Farklı site'larda rotate'te çatışma.
+**Haven (Dengeli):** Sage A veya B anchor, Jett C Long Op. Farklı sitelarda çatışır.
 
-**Breeze (Jett avantajlı):** Sage wall Breeze'in geniş alanında sınırlı etki, Jett Op oyunu dominance.
+**Breeze (Jett):** Geniş alan Sage wall'u sınırlar. Jett Op oyunu açık.
 
-**Fracture (Sage hafif avantajlı):** Multi-entry yapısı Sage'in wall + heal + resurrect kombosuna yarar.
+**Fracture (Sage hafif):** Çok taraflı giriş Sage wall + heal + resurrect kombosuna yarar.
 
-## 6. Flip Moment'ler
+## 6. Flip Noktaları
 
-**Flip 1 — Wall harcanması:** Sage wall atıldığı an round'da ikinci entry serbest. Jett bu pencereyi kollar — ilk entry wall'ı harcatmak için feda, ikinci entry gerçek.
+**Flip 1 — Wall harcanması:** Sage wall atıldığı an o round ikinci giriş serbest. İlk giriş wall'ı harcatmak için feda et, ikinci giriş gerçek giriş.
 
-**Flip 2 — Slow orb bypass:** Jett slow orb lokasyonunu round 1'de öğrenip round 2'de bypass ederse matchup Jett'e döner. Sage tek slow orb/round kaynağına bağlı.
+**Flip 2 — Slow orb bypass:** Slow orb lokasyonunu ilk round'da öğren, ikinci round'da o hattan gitme. Sage round başına bir slow orb'a bağlı.
 
-**Flip 3 — Resurrection timing:** Sage ult yanlış oyuncuyu canlandırdıysa (düşük değerli oyuncu) ult boşa. Doğru oyuncuyu canlandırdıysa round Jett'ten alınır.
+**Flip 3 — Resurrection zamanlaması:** Sage ult'u değersiz oyuncuya harcarsa round Jett'te. Doğru oyuncuyu canlandırırsa Jett'in giriş trade'i sıfırlanır.
 
-**Flip 4 — Sage solo anchor:** Sage tek başına site tutuyorsa wall harcandıktan sonra savunmasız. Jett ikinci dalga ile bitirir.
+**Flip 4 — Sage solo anchor:** Sage tek başına tutuyorsa wall harcandıktan sonra savunmasız. İkinci dalgada gir, Sage çıplak.
 
-## 7. Pro Coach Notları
+## 7. Koç Notları
 
-**VCT'de nasıl oynanıyor:** Sage pro meta'da niche sentinel, belirli map'lerde (Bind, Split, Fracture) pick ediliyor. Jett vs Sage matchup'ı wall ekonomisinde kararlaşır — Sage'in wall'ı tek/round, Jett dash'i tek/round, matchup tek kaynak karşılaştırması. Pro seviyede Sage oyuncuları wall'ı Jett'in entry hattına değil, Jett'in rotate hattına kurar — rotate hattını kesmek aggressive wall'dan değerli.
+Sage wall'ı Jett'in giriş hattına değil rotate hattına kurar — rotate'i kesmek boğaz kesmekten daha değerli. Sage bunu yapıyorsa rotate hattını oku: wall nereye kurulacak, o hattı erken temizle ya da farklı rota seç.
 
-**Meta tier durumu:** Jett S tier, Sage B tier (pro), A- tier (ranked). Head-to-head pro seviye Jett avantajlı, ranked'te Sage'in heal + res ekonomisi matchup'ı dengeler.
+Matchup iki kurala iner:
+- **Jett oynuyorsan:** Wall'u harcattır, wall'a yakalanma.
+- **Sage oynuyorsan:** Wall'u Jett'in ikinci girişine sakla, ilk girişi slow orb'la kes.
 
-**** Sage slow orb radius ve süre patch'e göre değişiyor. Matchup hesabı patch stabilize olunca netleşir.
-
-**** Resurrection ult cost patch 9.x'te arttı mı? Maliyet matchup'ın ult ekonomi tarafını belirliyor.
-
-**Coach test:** "Sage'in wall'ı harcandıysa Sage sıradan sentinel. Wall'u harcatma, wall'a yakalanma. İki kural Jett oyuncusunun matchup kitabı. Sage oyuncusunun kitabı: wall'u Jett'in ikinci entry'sine sakla, ilk entry'yi slow orb'la kes."
+Jett wall'ı harcatırsa ikinci girişte Sage çıplak. Sage wall'ı saklarsa Jett ilk giriş sonrası reposition yapamaz.

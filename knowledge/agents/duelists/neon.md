@@ -1,80 +1,80 @@
 # AJAN: Neon
 
 ## 1. Rol Kimliği
-- Neon, sprint ve slide mekanikleri ile diğer ajanların kapatamayacağı mesafeleri kapatarak savunucuları bunaltan hız tabanlı duelist'tir.
-- Takım savunuculara crossfire kurmaları için minimal zaman tanıyan hızlı site alma'lar yapmak istediğinde Neon seçilmelidir. Ham yer hızı dikey oyundan daha fazla önem taşıdığında ve takım kompozisyonunda zaten bir Op oyuncusu olduğunda Jett yerine Neon tercih edilmelidir.
-- Neon'un temel kimliği, site alma'ları ayak yarışına çevirerek savunucuları utility yerine hıza tepki vermeye zorlayan hız duelist'idir.
+- Sen hız duelist'isin. Sprint ve slide ile başka hiçbir ajan gibi kapanırsın — savunucuların crossfire kurmasına zaman bırakmadan site'a dalarsın.
+- Takım hızlı site almak istiyorsa ve sahada zaten bir Op oyuncusu varsa Jett değil sen seçilirsin. Dikey oyun değil, zemin hızı kazandırıyor.
+- Senin işin site almayı ayak yarışına çevirmek. Savunucular crossfire kurmadan önce sen içeridesin.
 
 ## 2. Temel Sorumluluklar
-- **Atak tarafı görevleri:** Anında kaos yaratmak için site'a sprint yapmak. Savunucu crossfire'larını bölmek ve takım için güvenli koridorlar oluşturmak için Fast Lane (duvarlar) kullanmak. Agresif ilk temas için tartışmalı pozisyonlara slide-peek yapmak. Hızlı execute'lar sırasında çoklu kill round'ları kazanmak için Overdrive kullanmak.
-- **Defans tarafı görevleri:** Site'lar arası hızlı rotation için sprint kullanmak. Slide-peek kapasitesiyle agresif ileri pozisyonlar tutmak. Push'ları izole etmek ve saldırganları öldürme bölgelerine yönlendirmek için duvarlar kullanmak. Site kaybedildiğinde retake'ler için Overdrive kullanmak.
-- **Takımın beklentisi:** Neon site'a ilk varan gövde olmalıdır. Takım onun sprint yapıp ilgiyi çekmesini ve ya açılış kill'ini almasını ya da takım arkadaşlarının hemen trade yapabileceği kadar kaos yaratmasını bekler.
+- **Atakta:** Duvarları kur, sprint at, site'a ilk giren sen ol. Fast Lane ile crossfire'ları böl, takım için koridor aç. Slide ile dar köşe açılarına gir — choke point çıkışı, box köşesi, kapı kenarı. 2+ düşman görününce Overdrive'ı aç.
+- **Defansta:** Site'lar arası geçişte sprint kullan — yürüme. Slide-peek ile ileri açı tut. Duvarları push'u yönlendirmek için kullan. Site gidince retake'e sprint at.
+- **Takımın senden beklentisi:** Site'a ilk varan sensin. Ya açılış kill'ini alırsın ya da takım hemen trade yapabilecek kadar kaos yaratırsın. İkisi de kabul.
 
 ## 3. Sık Yapılan Hatalar
-1. **Duvarsız site'a sprint yapmak** — Neon'un sprinti ses çıkarır ve ilgi çeker. Sightline'ları engelleyen Fast Lane duvarları olmadan açık crossfire'lara koşar ve slide animasyonu tamamlanmadan ölür.
-2. **Yanlış mesafeden slide kullanmak** — Çok uzaktan slide yapmak savunuculara takip zamanı verir. Çok yakından slide yapmak hız avantajını boşa harcar. İdeal slide mesafesi hedef açıdan orta uzaklıktadır.
-3. **Takım arkadaşlarını engelleyen duvarlar kurmak** — Takım arkadaşlarının sightline'larını kesen veya takip trade'lerini engelleyen Fast Lane duvarları hiç duvar olmamasından daha kötüdür. Duvar yerleşimi takım için bir koridor yaratmalıdır, bir bariyer değil.
-4. **Overdrive'ı çok erken aktifleştirmek** — Dövüş bölgesine ulaşmadan ult'u patlatmak süresini yolculuk zamanına harcar. Neon pozisyona sprint yapmalı, sonra düşmanlar menzildeyken Overdrive'ı aktifleştirmelidir.
-5. **Aynı açıdan tekrar tekrar slide-peek yapmak** — Slide hızlı ama aynı köşede her round kullanılırsa öngörülebilir. Düşmanlar bir kez gördükten sonra slide yüksekliğini önceden nişanlayacaktır.
-6. **Defansta rotation için sprinti görmezden gelmek** — Neon'un rotation hızı en büyük defansif avantajlarından biridir. Site'lar arası yürüyen oyuncular bu eşsiz gücü israf eder.
-7. **Overdrive'ı panik butonu olarak kullanmak** — Overdrive, Neon pozisyonel avantaja sahipken proaktif olarak aktifleştirilmeli, bir dövüşü kaybederken reaktif olarak değil. Spin-up zamanı reaktif kullanımı güvenilmez kılar.
+1. **Duvarsız sprint** — Sprint ses çıkarır. Duvar yoksa açık crossfire'lara koşarsın ve slide bitmeden ölürsün.
+2. **Yanlış mesafeden slide** — Çok uzaktan slide yaparsan düşman takip eder. Çok yakından yaparsan hız avantajın biter. Orta mesafe: düşmanı cezalandıracak kadar yakın, tepki veremeyecek kadar hızlı.
+3. **Takımı kesen duvar** — Takım arkadaşının sightline'ını kesen duvar hiç duvar olmamasından kötü. Duvarın koridor açması lazım, bariyer değil.
+4. **Overdrive'ı çok erken açmak** — Dövüş alanına girmeden açarsan süreyi yolda harcarsın. Önce pozisyona gel, düşman menzilde olunca aç.
+5. **Aynı açıdan tekrar slide** — Bir kez gördüler mi, slide yüksekliğini önceden nişanlarlar. Her round aynı köşe olmaz.
+6. **Defansta sprint'i unutmak** — Neon'un en büyük defansif silahı hız. Yürüyorsan bu gücü çöpe atıyorsun.
+7. **Overdrive'ı panik butonu yapmak** — Kaybederken açarsan spin-up süresi seni öldürür. Overdrive avantajdayken açılır, umutsuzlukta değil.
 
 ## 4. Kalıp -> Anlam
-IF: Oyuncu site'a ulaşmadan sprint sırasında ölüyor
-MEANING: Duvar koruması olmadan açık sightline'lardan sprint yapıyor veya execute zamanlaması takım utility'si ile koordine değil
-COUNTER: Sprint yapmadan önce her zaman Fast Lane duvarlarını kurmasını öner. Sprint zamanlamasını bir takım arkadaşının flash'i veya smoke'u ile koordine et.
-WHY: Duvarsız sprint Neon'u kapaksız açık sightline'larda hız avantajı olmadan hareket eden bir hedefe çevirir.
+IF: Site'a ulaşmadan sprint sırasında ölüyorsun
+MEANING: Duvar koruması olmadan açık sightline'lardan koşuyorsun ya da bir takım arkadaşının flash/smoke'u ile girmiyorsun
+COUNTER: Her zaman önce Fast Lane'i aç, sonra sprint at. Flash veya smoke çıkan anda koş — tek başına değil.
+WHY: Duvarsız sprint seni hızlı hedefe çevirir. Açık alanda hız artık avantaj değil.
 
-IF: Oyuncu açılış kill'leri alıyor ama takım takip edemiyor
-MEANING: Duvar yerleşimi muhtemelen takım arkadaşlarının açılarını kesiyor veya oyuncu grubun çok önünde sprint yapıyor
-COUNTER: Duvar açılarını gözden geçir — takımın içinden push yapabileceği koridorlar yaratmalı, etrafından dolanması gereken duvarlar değil. Sprint başlangıcını takımı trade menzilinde tutmak için anlık bir an yavaşlat.
-WHY: Takımdan kopuk entry kill değerini kaybeder çünkü takım arkadaşları avantajı değerlendiremez.
+IF: Açılış kill'leri alıyorsun ama takım takip edemiyor
+MEANING: Duvarın takım arkadaşlarının açısını kesiyor ya da grubun çok önünde sprint atıyorsun
+COUNTER: Duvar açılarına bak — takım içinden geçebilmeli, etrafından dolanmamalı. Sprint'e başlarken bir adım geri dur, takım trade menzilinde olsun.
+WHY: Takımdan kopuk kill değersiz. Arkadaş avantajı kullanamıyorsa trade yok.
 
-IF: Oyuncu Overdrive'ı nadiren kullanıyor veya kaybedilmiş round'larda kullanıyor
-MEANING: Overdrive'ın round kazandıran bir araç olarak rolünü anlamıyor, umutsuzluk önlemi olarak değil
-COUNTER: Proaktif Overdrive kullanımı koçla: iki veya daha fazla düşman hayattayken site'a girerken patlat, 1v3 clutch yaparken değil.
-WHY: Overdrive'ın değeri çoklu düşmanlara karşı hasar çıktısındadır; geç round umutsuzluk kullanımı nadiren dönüştürür.
+IF: Overdrive'ı nadiren açıyorsun ya da hep kaybedilmiş round'da açıyorsun
+MEANING: Overdrive'ın ne işe yaradığını yanlış anlıyorsun — bu bir kurtarma aracı değil, round kazanma aracı
+COUNTER: 2+ düşman hayattayken site'a girerken aç. 1v3 kurtarmaya değil, 3'e birden dalışa kullan.
+WHY: Overdrive'ın gücü çoklu düşmana karşı hasar çıkarmakta. Geç açarsan dönüşmez.
 
-IF: Oyuncunun round'un açılış anlarında yüksek ölüm oranı var
-MEANING: Önce bilgi kontrol etmeden hıza aşırı taahhüt ediyor
-COUNTER: Hızlı ve pervasız arasındaki farkı öğret. Koordine edilmiş hızlı execute, Neon sprint ile kalan alandan geçmeden önce bir açıyı temizlemek için takım utility'si kullanır.
-WHY: Bilgi olmadan hız, düşman pozisyonlarına kör giriş demektir ve Neon'un hız avantajını dezavantaja çevirir.
+IF: Round'un açılışında çok erken ölüyorsun
+MEANING: Bilgi almadan hıza yükleniyorsun
+COUNTER: Takım utility'si bir açıyı temizlesin, o açı kapanınca sprint at. Temizlenmemiş açıya girme.
+WHY: Düşmanın nerede olduğunu bilmeden sprint atmak kör giriş demek. Hız avantajın dezavantaja döner.
 
-IF: Oyuncu kullanılmamış duvarlarla sık ölüyor
-MEANING: Neon'un tam kit'i yerine ham hıza güveniyor
-COUNTER: Duvar-sprint-slide sırasını kas hafızası olarak çalıştır. Önce duvarlar, sonra sprint, slide ile varış.
-WHY: Duvarsız sprint Neon'un kit'inin yarısını görmezden gelir ve onu korumasız bırakır.
+IF: Duvarları açmadan sık ölüyorsun
+MEANING: Kit'in yarısını görmezden geliyorsun, sadece ayaklarına güveniyorsun
+COUNTER: Duvar-sprint-slide sırasını ezberle. Önce duvar, sonra sprint, slide ile varış. Bu üç adım birbirinden ayrılmaz.
+WHY: Duvarsız sprint seni korumasız bırakır. Fast Lane olmadan Neon oynamıyorsun, sadece hızlı ölüyorsun.
 
 ## 5. Harita Etkileşimleri
-- **Güçlü haritalar:** Fracture (çoklu giriş noktaları hızlı rotation ve sprint tabanlı alma'ları ödüllendirir), Pearl (B Main gibi uzun koridorlar duvar-sprint entry'lerini ödüllendirir), Lotus (A Main ve C Mound hızlı alma'lar için güçlü duvar yerleşimlerine sahiptir), Split (A Main sprint-slide doğru duvarlarla yıkıcıdır).
-- **Zayıf haritalar:** Breeze (sprint tabanlı oyun için çok açık, uzun sightline'lar Neon varmadan cezalandırır), Ascent (mid sprint için çok açık, site'lar daha fazla dikey oyun gerektirir).
-- **Pozisyona özel:** Pearl'de B Main boyunca duvar kurup sprint yapmak oyundaki en hızlı site alma'lardan birini yaratır. Lotus'ta C Mound duvarları Waterfall savunucusunu izole edebilir ve Neon'un rakipsiz site'a slide yapmasını sağlar.
+- **Güçlü haritalar:** Fracture (çoklu giriş noktaları sprint almalarını ödüllendirir), Pearl (B Main gibi uzun koridorlar duvar-sprint girişe biçilmiş kaftan), Lotus (A Main ve C Mound güçlü duvar açıları verir), Split (A Main'de doğru duvarla slide yıkıcı).
+- **Zayıf haritalar:** Breeze (uzun sightline'lar sana varmadan ceza keser), Ascent (mid çok açık, site'lar dikey oyun ister).
+- **Pozisyona özel:** Pearl'de B Main boyunca duvar aç, sprint at — sahadaki en hızlı site girişlerinden biri. Lotus'ta C Mound duvarı Waterfall savunucusunu izole eder, sen rakipsiz site'a dalarsın. Fast Lane'i tek düz çizgi değil, iki kapağı aynı anda örten çapraz açıyla at — duvar hem sol hem sağ entry'yi aynı anda kapatır.
 
 ## 6. Eşleşme Notları
-- **Zorlandığı ajanlar:** Killjoy (turret sprint boyunca takip eder, Lockdown Neon'u hız avantajından çekilmeye zorlar), Sage (duvar sprint yollarını engeller, yavaşlatma küresi Neon'un hız kimliğini öldürür), Cypher (tripwire'lar sprint şeritlerini yakalar).
-- **Baskıladığı ajanlar:** Utility kurmak için zamana ihtiyaç duyan yavaş kurulumlu controller'lar — Brimstone ve Harbor gibi. Neon onların kurulumları tamamlanmadan varır. Duvarının aktifleşme zamanı gerektiren Viper'a karşı da verimlidir.
-- **Adaptasyon:** Sage'e karşı execute öncesinde bir takım arkadaşından duvarı kırmasını iste. Killjoy'a karşı turret yerleşimini tahmin oyununa çevirmek için sprint zamanlamasını değiştir. Chamber'a karşı Trademark açılarını engellemek için duvarları kullan.
+- **Zorlandığın ajanlar:** Killjoy (turret sprint sırasında takip eder, Lockdown seni geri çekilmek zorunda bırakır), Sage (duvarı yolu keser, yavaşlatma topuzu hızını öldürür), Cypher (tripwire'lar sprint şeritlerini yakalar).
+- **Baskıladığın ajanlar:** Brimstone ve Harbor gibi utility kurmak için zaman isteyen ajanlar — kurulum bitmeden sen varmış olursun. Viper'a karşı da işe yararsın — duvarının etkinleşme süresi var, sen beklemiyorsun.
+- **Adaptasyon:** Sage'e karşı execute'tan önce bir takım arkadaşından duvarı kırmasını iste. Killjoy'a karşı turret görüş açısının dışından sprint at — önce turret konumunu tespit et, sonra o açıyı kes. Chamber'a karşı Trademark açılarını kapatmak için duvarı kullan.
 
 ## 7. Oyuncuya Ne Söylenmeli
 ### İyi oynarken
-**Oyuncu Aksiyonu:** Sprint yapmadan önce site'ı bölmek için Fast Lane duvarları kuruyorsun ve slide-peek'in orta mesafe çatışma aralığına iniyor — cezalandırmaya yetecek kadar yakın ama tepki vermeye yetecek kadar uzak.
-**Düşman Algısı:** Savunucular Fast Lane duvarlarını görür ve anlık süre içinde sprint entry'si geleceğini bilir. Her seferinde aynı taraftan duvar koridorunun ucundan slide yapmanı beklerler.
-**Düşman Tepkisi:** Seçim yapmaya zorlanırlar: duvar çıkışını tutup duvarın diğer tarafındaki takım arkadaşlarından izole olma riskini almak veya yeniden gruplanmak için site'tan tamamen geri çekilmek. Duvarın arkasındaki savunucular görüş hattı olmadığı için trade yapamaz.
-**Fırsat Penceresi:** Fast Lane'in iki savunucuyu izole edilmiş 1v1'lere ayırdığı pencere senin kill pencerendir. Slide yaptığın savunucunun sıfır crossfire desteği vardır — takım arkadaşı duvar tarafından engellenir ve tam duvar süresi boyunca refrag yapamaz.
-**Tekrar Stratejisi:** 1. round: ortadan Fast Lane, sprint ve sola slide. 2. round: aynı duvar açısı, bunun yerine sağa slide. 3. round: Fast Lane'i tamamen atla ve duvar zamanlamasına bağlanan savunucuları cezalandırmak için off-angle'dan ham sprint yap. Overdrive'ı 2+ düşmanın retake yapması gereken post-plant'e sakla.
-**Düşman Adaptasyonu:** 3-4 round sonra savunucular duvarın arkasında oynayacak (düşmesini bekleyerek), slide bitiş noktasını önceden nişanlayacak veya duvarının kapamadığı site tarafına yığılacaktır.
-**Karşı Adaptasyon:** Duvarın arkasında oynadıklarında: sprint sırasında onları stun'lamak için duvar üzerinden Relay Bolt fırlat. Slide bitiş noktasını önceden nişanladıklarında: sprinti erken durdur ve slide yapmak yerine geniş peek yap. Kapatılmamış tarafa yığıldıklarında: yığılmayı bölmek için Fast Lane'i farklı açıla veya duvarları atla ve tamamen farklı bir entry yolundan sprint yap.
+**Oyuncu Aksiyonu:** Site'ı bölmek için önce Fast Lane'i açıyorsun, sonra sprint atıyorsun. Slide-peek orta mesafeye iniyor — cezalandırmaya yetecek kadar yakın, tepki veremeyecek kadar hızlı.
+**Düşman Algısı:** Savunucular Fast Lane'i görür ve sprint girişinin geleceğini bilir. Her seferinde aynı taraftan, duvar koridorunun ucundan çıkmanı beklerler.
+**Düşman Tepkisi:** İki seçenekleri var: duvar çıkışını tutup diğer taraftaki takım arkadaşlarından kopuk kalırlar ya da tamamen geri çekilirler. Duvarın arkasındaki kişi sightline'ı olmadığı için trade yapamaz.
+**Fırsat Penceresi:** Fast Lane iki savunucuyu izole ettiği an senin kill penceren. Slide yaptığın kişinin crossfire desteği sıfır — arkadaşı duvar tarafından kilitli ve tam süre boyunca trade gelemez.
+**Tekrar Stratejisi:** İlk execute'ta: ortadan Fast Lane, sprint, sola slide. 1 düşman düşünce: aynı duvar açısı, sağa slide. Savunucular duvar çıkışını beklemeye başlayınca: Fast Lane'i at, duvara kilitlenen savunucuları cezalandırmak için off-angle'dan ham sprint. Savunucular retake'e koştuğunda Overdrive'ı Fast Lane içinde aç: crossfire azalır, hasar penceren açılır.
+**Düşman Adaptasyonu:** Savunucular duvarın arkasında beklemeye başlarsa, slide bitiş noktasını önceden nişanlarlarsa ya da duvarın kapamadığı tarafa yığılırlarsa.
+**Karşı Adaptasyon:** Duvarın arkasında bekliyorlarsa — sprint sırasında duvar üzerinden Relay Bolt at, beklemeyi cezalandır. Slide bitiş noktasını önceden nişanlıyorlarsa — sprint'i erken kes, slide yerine geniş peek yap. Kapatılmamış tarafa yığıldılarsa — Fast Lane açısını değiştir ya da tamamen farklı yoldan gir.
 ### Zorlanırken
-"Biraz yavaşla. Sprint yapmadan önce duvarlarını kullan. Kurulum olmadan hız sadece besleme."
+"Önce duvarını aç. Duvar yoksa sprint atma — o kadar."
 ### Öngörülebilir olduğunda
-"Slide açını önceden nişanlıyorlar. Açının yanından sprint yapıp diğer taraftan slide yapmaya geç."
+"Slide açını önceden nişanlıyorlar. Açının yanından sprint at, diğer taraftan çık."
 
 ## 8. Rank Modülasyonu
 ### Düşük Elo (Iron-Silver)
-Sprint yapmadan önce duvar yerleşimi öğrenmeye odaklan. Her site alma'da duvar-sprint-slide sırasını çalış. Dövüşlerin ne zaman olacağını anlayana kadar Overdrive aktifleştirme. Harita başına bir hızlı execute'a odaklan.
+Her site girişinde duvar-sprint-slide sırasını uygula. Duvarı açmadan sprint atma. 2 düşman menzile girene kadar Overdrive'ı açma. Her maçta bir temiz execute seç, onu iyi yap.
 ### Orta Elo (Gold-Diamond)
-Slide-peek disiplini geliştir: optimal mesafeyi çalış ve slide'dan counterstrafe yapmayı öğren. Defansif rotation'lar için sprint kullanmaya başla. Sprint entry'lerini en az bir takım arkadaşının utility'si ile koordine et.
+Slide mesafesini kur: ne çok uzak ne çok yakın. Slide biter bitmez dur — momentum devam ediyorken nişanın tutmuyor. Defansta sprint'i geçiş için kullan, yürüme. En az bir takım arkadaşının utility'si ile gir.
 ### Yüksek Elo (Ascendant-Immortal)
-Yalnızca kişisel entry değil takım takibini mümkün kılan duvar yerleşimlerinde ustalaş. Çoklu kill potansiyeli için Overdrive zamanlamasını optimize et. Sprint fake'leri geliştir — taahhüt etmeden ses çıkarmak için sprint yapıp sonra rotation yapmak.
+Sadece kendin için değil, takımın takip edebileceği duvar aç. Overdrive'ı çoklu kill için zamanla. Sprint fake'lerini geliştir — taahhüt etmeden ses çıkar, düşman rotate edince boşalan açıyı tut.
 ### Elit (Radiant)
-Hızlı ve gecikmeli execute arasında karar vermek için savunma kurulumlarını okumaya odaklan. Sprint ses ipuçlarını fake'ler için yem olarak kullan. Overdrive maksimum round dönüşümü için takım utility'si ile zamanlanmalıdır. Duvar açıları düşmanın defansif ayarlamalarına göre round bazlı adapte olmalıdır.
+Savunma kurulumunu okuyarak hızlı mı yoksa gecikmeli mi gireceğine karar ver. Sprint sesini yem olarak kullan — defansta sprint at, düşman rotate edince boşalan açıyı sabitle. Overdrive'ı Fast Lane içinde aç: crossfire azalır, hasar penceren genişler. Duvar açılarını her round düşmanın önceki ayarlamasına göre değiştir — aynı açı iki kez olmaz.

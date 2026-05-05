@@ -1,80 +1,116 @@
 # AJAN: Phoenix
 
 ## 1. Rol Kimliği
-- Phoenix, flash'ler, ateş duvarı ve kendini iyileştiren molly ile kendi fırsatlarını yaratan, kadrodaki en bağımsız entry fragger olan kendine yeten duelist'tir.
-- Takımın takım utility'sine fazla bağımlı olmadan entry yapabilen bir duelist'e ihtiyacı olduğunda Phoenix seçilmelidir. Takımda flash eksikken veya kendi kendine iyileşme yeniden konumlanma yeteneğinden daha fazla önem taşıdığında Jett yerine Phoenix tercih edilmelidir.
-- Phoenix'in temel kimliği, flash disiplini ile kendi alanını yaratan, kendi utility'sinden iyileşen ve Run It Back ile kalıcı sonuçlar olmadan agresif riskler alan, kendi kendine yeten entry fragger'dır.
+Phoenix kadrodaki tek başına entry yapabilen ajan. Flash'in, ateş duvarının ve molly'nin hepsi sende — takım sana flash atmak zorunda değil, sen kendi yolunu açarsın.
+
+Takımda flash yoksa ya da sen hayatta kalarak uzun süre dövüşmek istiyorsan Phoenix al. Jett'ten farkı şu: kaçış yok, ama kendin iyileşiyorsun.
+
+Kimliğin bu üç şey: flash disiplini, kendi becerilerinden HP kazanmak, Run It Back ile risk almak.
 
 ## 2. Temel Sorumluluklar
-- **Atak tarafı görevleri:** Tartışmalı açılara flash atıp flash'in arkasından swing yapmak. Savunucu sightline'larını kesmek ve güvenli geçiş rotaları oluşturmak için Blaze (ateş duvarı) kullanmak. Bilgi toplamak ve risksiz kill'ler almak için Run It Back aktifken site'a girmek. Köşeleri temizlemek veya dövüşler arasında iyileşmek için Hot Hands (molly) kullanmak.
-- **Defans tarafı görevleri:** Flash'ler kullanarak peek'leri kazanmak için agresif off-angle'lar tutmak. Push'ları geciktirmek ve rotation için zaman kazanmak adına ateş duvarı kullanmak. Agresif retake oyunları için Run It Back kullanmak. Uzun tutuşlarda molly ile kendi kendine iyileşmek.
-- **Takımın beklentisi:** Phoenix kendi flash'leri aracılığıyla ilk temas oluşturmalıdır. Takım onun bağımsız entry yapmasını, daha uzun süre dövüşte kalmak için kendi kendine iyileşmesini ve bilgi veya yüksek riskli peek'ler için ult'u agresif kullanmasını bekler.
+**Atak tarafında:**
+- Flash at, flash bitmeden swing yap
+- Ateş duvarıyla savunucu görüş hatlarını kes, geçişi zorla
+- Run It Back aktifken site'a gir — bilgi topla, açıları temizle
+
+**Defansta:**
+- Agresif açıdan flash atıp peek kazan
+- Push başladığında ateş duvarını kapıya koy, zaman kazan
+- Uzun bekleme varsa molly'yi kendin üstüne koy ve HP doldur
+
+**Takım senden ne bekler:**
+İlk teması sen kurarsın. Kendi flash'inle girersin. Daha uzun yaşar, HP avantajıyla dövüşürsün. Ult'u bilgi veya agresif giriş için kullanırsın — saklamazsın.
 
 ## 3. Sık Yapılan Hatalar
-1. **Düşmanlar yerine takım arkadaşlarını flash'lemek** — Phoenix'in Curveball'u geniş flash yarıçapına sahiptir ve köşeleri döner. Yön çağırmadan veya takım arkadaşlarının nerede olduğunu anlamadan fırlatmak müttefikleri kör eder ve kaybedilen dövüşlere yol açar.
-2. **Run It Back'i pasif kullanmak** — Oyuncular ult'u aktifleştirir sonra temkinli oynar, tüm amacı israf eder. Ult mümkün olan en agresif oyunu mümkün kılmalıdır — geniş swing'ler, derin push'lar ve bilgi toplama.
-3. **Güvensiz pozisyonlarda iyileşmek** — Açılara maruz kalırken Hot Hands'in içinde durmak düşmanlar için kolay kill yaratır. Oyuncular kapak arkasında veya Blaze duvarı güvenliğinde iyileşmelidir.
-4. **Blaze duvarını takım utility'si yerine kendi iyileşmesi için kullanmak** — Ateş duvarı bir sightline engelleyici olarak en değerlidir. Yalnızca içinde durarak iyileşmek için kullanmak, birincil işlevini alan yaratma aracı olarak israf eder.
-5. **Flash atıp swing yapmamak** — Flash, Phoenix hemen arkasından peek yapmadığında israftır. Curveball'un kısa körlük süresi vardır, bu yüzden swing anında olmalıdır.
-6. **Öngörülebilir flash zamanlaması** — Curveball'u her round tam aynı açı ve zamanlamayla kullanmak düşmanların sadece arkasını dönmesine izin verir. Flash tarafını (sol/sağ eğri) ve zamanlamayı değiştirin.
-7. **Ult'u tehlikeli pozisyonlara yerleştirmek** — Run It Back Phoenix'i aktivasyon noktasına döndürür. Düşmanlar push yapıp o pozisyonu tutarsa, dönüşte anında ölür. Ult'u güvenli, temizlenmiş konumlara yerleştirin.
+1. **Takım arkadaşını flash'lemek** — Curveball köşeyi döner, geniş bir alan körleştirir. Flash atmadan önce takımının nerede olduğunu bil. Yönü sesle söyle: "sağ flash."
+2. **Run It Back'i pasif kullanmak** — Ult açıkken temkinli oynuyorsan ult'un amacını boşa harcıyorsun. Ult aktifken en geniş swing'i, en derin girişi yaparsın.
+3. **Açıkta molly içinde iyileşmek** — Kapağın arkasına geç, sonra koy. Açıkta dururken molly içindeysen düşmana hediye olursun.
+4. **Ateş duvarını sadece iyileşmek için kullanmak** — Duvarın asıl işi görüş hattını kesmek. İçinde oturup HP doldurmak için harcıyorsan büyük değer kaybediyorsun.
+5. **Flash atıp swing yapmamak** — Curveball'un körlük süresi kısa. Flash patlıyor, sen hâlâ bekliyorsan — boşa gitti. Flash atar atmaz çık.
+6. **Her round aynı flash açısı** — Düşman hangi tarafa döneceğini öğreniyor. Sol eğri, sağ eğri, farklı köşe — karıştır.
+7. **Ult'u tehlikeli yere koymak** — Run It Back seni koyduğun noktaya döndürür. O nokta düşman bastırdıysa, döndüğünde ölürsün. Ult'u temizlenmiş, kapak olan yere koy.
 
 ## 4. Kalıp -> Anlam
-IF: Oyuncunun sık flash kullanmasına rağmen ilk kill oranı düşük
-MEANING: Muhtemelen kendi flash'inin arkasından swing yapmıyor veya öngörülebilir açılar nedeniyle flash bağlanmıyor
-COUNTER: Flash-swing kombinasyonunu çalıştır. Swing flash patlamadan önce başlamalıdır, sonra değil. Flash açılarını çeşitlilik için gözden geçir.
-WHY: Flash arkasından gecikmiş swing düşmana körlüğü atlama zamanı verir ve flash'in tüm amacını boşa çıkarır.
+IF: Flash kullanıyorsun ama ilk kill oranın düşük
+MEANING: Flash'in arkasından swing yapmıyorsun ya da hep aynı açıdan atıyorsun, düşman alışmış
+COUNTER: Flash patlıyor — hemen çık. Swing flash patlamadan başlamalı, sonra değil. Her round flash açını değiştir: önce sağ eğri, sonra sol, sonra farklı köşe.
+WHY: Gecikmiş swing, körlük bitmiş düşmana atış yapıyor. Flash'in hiçbir değeri kalmıyor.
 
-IF: Oyuncu Run It Back bittikten hemen sonra sık ölüyor
-MEANING: Ult doğuş noktası düşmanların push yaptığı veya tuttuğu güvensiz bir konumda
-COUNTER: Daha güvenli ult yerleşimi koçla. Ult noktası kapak arkasında, korumak için yakınında bir takım arkadaşı olmalı veya zaten temizlenmiş bir alanda olmalıdır.
-WHY: Ult dönüş noktası korunmazsa Phoenix ult'un tüm bilgi ve giriş değerini kaybeder.
+IF: Run It Back bitince hemen ölüyorsun
+MEANING: Ult koyduğun yer düşmanın bastırdığı veya tuttuğu bir nokta
+COUNTER: Ult'u kapak olan, temizlenmiş bir yere koy. Yanında takım arkadaşın varsa daha iyi. Yoksa en azından düşmanın kolay ulaşamayacağı bir yer seç.
+WHY: Dönüş noktası güvensizse ult'tan topladığın tüm bilgi ve kill değeri sıfırlanır.
 
-IF: Oyuncunun hasar çıktısı yüksek ama iyileşme kullanımı düşük
-MEANING: Dövüşler arasında dayanıklılık için Hot Hands'i kullanmıyor, round'lardaki ömrünü kısaltıyor
-COUNTER: Oyuncuya Phoenix'in iyileşmesinin bedava değer olduğunu hatırlat. Her dövüşten sonra kapak arkasına Hot Hands bırak. 30 HP iyileşme bile sonraki düelloyu kazandırabilir.
-WHY: Hot Hands iyileşmesi sonraki her dövüşü HP avantajı ile birleştirir; kullanmamak kümülatif değer kaybıdır.
+IF: Hasar çıktın yüksek ama HP'siz dövüşüyorsun
+MEANING: Dövüşler arası molly kullanmıyorsun, her dövüşe yarı HP ile giriyorsun
+COUNTER: Her dövüşten sonra kapağın arkasına molly koy ve HP doldur. 30 HP bile sonraki düelloyu kazandırır.
+WHY: Molly'nin iyileştirmesini kullanmamak birikimli bir kayıp — her round biraz daha zayıf giriyorsun.
 
-IF: Oyuncunun takım arkadaşları sık flash'lenmekten şikayet ediyor
-MEANING: Flash disiplini zayıf, ya flash yönü çağırmıyor ya da takım arkadaşlarının pozisyonlarını kontrol etmiyor
-COUNTER: Yönlü flash çağrılarını ("sol/sağ flash atıyorum") ve zamanlama koordinasyonunu öğret. Phoenix Curveball fırlatmadan önce her zaman takımının nerede olduğunu bilmelidir.
-WHY: Takım arkadaşı flash'lemek sayısal avantajı dezavantaja çevirir ve takım güvenini aşındırır.
+IF: Takım arkadaşların flash'lenmekten şikayetçi
+MEANING: Flash yönünü söylemiyorsun ya da takımın nerede olduğuna bakmıyorsun
+COUNTER: Flash atmadan önce sesle söyle: "sağ flash" veya "sol flash." Curveball'u fırlatmadan önce mini haritaya bir bak.
+WHY: Takım arkadaşını körletmek sayısal üstünlüğü tersine çevirir.
 
-IF: Oyuncu ult sırasında çoklu kill alıyor ama takım round'u kaybediyor
-MEANING: Ult stratejik entry'ler yerine ego oyunları için kullanılıyor. Site kontrolüne dönüşmeyen ult kill'leri israftır.
-COUNTER: Ult kullanımını frag avlama aracı değil site entry aracı olarak koçla. Run It Back'in amacı iki-üç açıyı temizlemek ve takımın değerlendirebileceği alan yaratmaktır.
-WHY: Ult kill'leri yalnızca site kontrolü veya düşman utility'si boşaltma ile sonuçlanırsa round kazanmaya katkı sağlar.
+IF: Ult'ta çoklu kill alıyorsun ama round'u kaybediyorsunuz
+MEANING: Ult'u frag için kullanıyorsun, site almak için değil. Kill aldın, ama takım içeri giremedi.
+COUNTER: Ult'la site'a gir, iki-üç açıyı temizle, takım arkasından gelsin. Ult'un amacı alan açmak, frag değil.
+WHY: Kill ancak site kontrolüne veya düşman becerilerini tüketmeye yol açarsa round kazandırır.
 
 ## 5. Harita Etkileşimleri
-- **Güçlü haritalar:** Ascent (B Main flash entry'leri güçlüdür, duvar ve flash kombosuyla mid kontrolü), Bind (dar koridorlar flash agresyonunu ödüllendirir, Hookah flash entry'leri), Split (A Main ve B Heaven flash-peek'leri, uzun site dövüşlerinde kendi kendine iyileşme önem kazanır).
-- **Zayıf haritalar:** Breeze (uzun sightline'lar flash değerini düşürür, geniş açık alanlar ateş duvarını daha az etkisiz kılar), Icebox (dikey dövüş yer seviyesi flash verimliliğini azaltır, geniş site'lar duvar değerini seyreltir).
-- **Pozisyona özel:** Ascent'te B Main'den flash atıp hemen Market boyunca ateş duvarı ile swing yapmak güçlü bir entry kalıbıdır. Bind'da Hookah flash-peek'ten Short'a girmek tutarlı ilk temas fırsatları yaratır.
+**Phoenix'in güçlü olduğu haritalar:**
+- **Ascent:** B Main'den flash atıp Market boyunca ateş duvarıyla swing yapmak güçlü bir giriş. Mid kontrolü için duvar + flash kombinasyonu çalışır.
+- **Bind:** Dar koridorlar flash'i daha etkili kılar. Hookah'ta flash atıp Short'a geçmek tutarlı ilk temas açar.
+- **Split:** A Main ve B Heaven'da flash-peek güçlü. Uzun site dövüşlerinde molly iyileşmesi fark yaratır.
+
+**Phoenix'in zayıf olduğu haritalar:**
+- **Breeze:** Uzun görüş hatları flash değerini düşürür. Geniş alanlar ateş duvarını işlevsiz kılar.
+- **Icebox:** Dikey dövüşler yer seviyesi flash etkisini düşürür. Geniş site'lar duvarı seyreltir.
 
 ## 6. Eşleşme Notları
-- **Zorlandığı ajanlar:** Skye (flash'i Phoenix'i swing ortasında yeniden flash'leyebilir, iyileşmesi onun dayanıklılık avantajıyla rekabet eder), KAY/O (bastırma Phoenix'in tüm kendi kendine yeten kit'ini devre dışı bırakır), Chamber (hızlı tepkilerle Phoenix'in öngörülebilir flash-swing zamanlamasını cezalandırır).
-- **Baskıladığı ajanlar:** Statik pozisyonlar tutan ajanlara karşı. Phoenix'in flash'i onları açılardan çıkmaya zorlar. Cypher'a karşı verimli (tripwire'ları flash ile geç) ve Sage'e karşı (ateş duvarı Barrier Orb'u eritebilir).
-- **Adaptasyon:** KAY/O'ya karşı bastırma yarıçapından uzak oyna ve bıçağı sona erdikten sonra entry zamanlayın. Skye'a karşı swing'e taahhüt etmeden önce flash'ini çek. Chamber'a karşı headhunter'ın swing açısını önceden nişanlamaması için flash zamanlamasını değiştir.
+**Zorlandığın ajanlar:**
+- **Skye:** Flash'i senin swing'in ortasında seni körlür. Skye flash'ini gördüğünde swing'e devam etme, çekil.
+- **KAY/O:** Bastırma tüm becerilerini keser — molly yok, flash yok, iyileşme yok. Bastırma yarıçapının dışında oyna, bıçak bitmeden entry zamanlama.
+- **Chamber:** Öngörülebilir flash-swing döngünü cezalandırır. Flash zamanlamasını değiştir, o açıdan swing beklediğini anlamasın.
+
+**Baskıladığın ajanlar:**
+- **Cypher:** Tripwire'larını flash ile geç, tuzaklar seni durduramaz.
+- **Sage:** Ateş duvarı Barrier Orb'u eritir, duvarı kapıya koyarsa kırar.
+- Sabit pozisyon tutan her ajan — flash onları açıdan çıkmaya zorlar.
 
 ## 7. Oyuncuya Ne Söylenmeli
 ### İyi oynarken
-**Oyuncu Aksiyonu:** Her Curveball patlamasının hemen ardından swing yapıyorsun, round'lar arasında sol-eğri ve sağ-eğri değiştiriyorsun ve her düello arasında tam HP'ye iyileşmek için Hot Hands kullanıyorsun.
-**Düşman Algısı:** Savunucular önceki round'dan Curveball yönünü takip eder ve o tarafa dönmeye hazırlanır. Eğri yönünü değiştirdiğinde dönüşleri ters tarafa gider ve tam körlük süresini yerler.
-**Düşman Tepkisi:** Flash patlamadan önce hangi tarafa döneceklerini tahmin etmeye zorlanırlar. Yanlış tahminler tam körlük süresi demektir. Doğru tahminler bile anlık tepki zamanına mal olur — ve sen o pencerede zaten swing yapıyorsun.
-**Fırsat Penceresi:** Curveball patlaması ile düşman görüşünün iyileşmesi arasındaki pencere garantili ilk atış fırsatındır. Değişen eğri yönleriyle, doğru tahmin eden oyuncular bile anlık bir an kaybeder — açılış atışını yapman için yeterli.
-**Tekrar Stratejisi:** 1. round: sağ eğri flash, hemen swing. 2. round: aynı açıda sol eğri. 3. round: farklı pozisyondan sağ eğri. Her kill arasında kapak arkasına Hot Hands bırak ve sonraki dövüşten önce tam iyileş. Savunucular 100 veya altındayken her sonraki düelloya 150 HP ile gir.
-**Düşman Adaptasyonu:** 4-5 round sonra savunucular her iki yönden de önceden arkalarını dönecek (sırt dönük oynayarak), flash menzilinin dışında daha derin pozisyonlar tutacak veya flash atamadan önce agresif push yapacaktır.
-**Karşı Adaptasyon:** Önceden arkasını döndüklerinde: peek'i anlık bir an geciktir ki flash'in tutmadığını düşünüp geri dönsünler, sonra dönüş ortasında yakala. Derine tuttuklarında: Blaze duvarını kullanarak derin pozisyonlarını kes ve flash menzinine zorla. Push yaptıklarında: kapıya alan kontrolü olarak Hot Hands bırak ve ateşin arkasından dövüş.
+**Oyuncu aksiyonu:** Her Curveball'dan hemen sonra swing yapıyorsun, her round sol-sağ eğriyi değiştiriyorsun, dövüş aralarında molly ile HP dolduruyorsun.
+
+**Düşman algısı:** Savunucular önceki round'dan hangi tarafa döneceğini tahmin etmeye çalışıyor. Eğri değişince yanlış tarafa dönüyorlar — tam körlük yiyorlar.
+
+**Düşman tepkisi:** Her round hangi tarafa döneceğini bilmek zorunda kalıyorlar. Yanlış tahmin tam körlük. Doğru tahmin bile anlık gecikmeye mal oluyor — sen o sırada zaten swing'i yapıyorsun.
+
+**Fırsat penceresi:** Flash patlamasıyla düşman görüşünün açılması arasındaki an garantili ilk atış penceresi. Eğri değiştirince doğru tahmin edenler bile o anı kaçırıyor.
+
+**Tekrar düzeni:** 1. round sağ eğri, hemen swing. 2. round aynı köşede sol eğri. 3. round farklı köşeden sağ eğri. Her kill arasında kapak arkasına molly, bir sonraki dövüşe tam HP gir. Düşman 100 HP altındayken sen 150 HP ile giriyorsun.
+
+**Düşman adaptasyonu:** 4-5 round sonra önceden arkalarını dönmeye başlarlar, flash menzili dışına çekilirler ya da flash atmadan push yaparlar.
+
+**Karşı adaptasyon:**
+- Önceden arkasını dönüyorlarsa: swing'i bir an geciktir, flash tutmadı sanıp geri dönsünler, dönüş ortasında yakala.
+- Derine çekilirlerse: ateş duvarıyla görüş hattını kes, flash menziline zorla.
+- Push yaparlarsa: kapıya molly koy, ateşin arkasından dövüş.
+
 ### Zorlanırken
-"Kendi flash'inin arkasından swing yapmıyorsun. Curveball fırlat ve hemen geniş peek yap. Flash atıp beklersen körlük sen varmadan biter."
+"Kendi flash'inin arkasından çıkmıyorsun. Flash at, hemen geniş çık. Beklersen körlük bitmeden önce sen hiç görünmüyorsun."
+
 ### Öngörülebilir olduğunda
-"Her seferinde flash'inden arkalarını dönüyorlar. Sol ve sağ eğrileri karıştır veya dönüş ortasında yakalamak için flash'i anlık bir an geciktir."
+"Her flash'inde arkalarını dönüyorlar çünkü alıştılar. Sol ve sağ eğriyi değiştir. Ya da flash'i bir anlık geciktir — dönüş ortasında yakala."
 
 ## 8. Rank Modülasyonu
 ### Düşük Elo (Iron-Silver)
-Takım arkadaşlarını flash'lememaya odaklan. Curveball'un hangi yöne kıvrıldığını öğren ve çağırma pratiği yap. Dövüşlerden sonra iyileşmek için her zaman Hot Hands kullan. Run It Back'i her müsait olduğu round kullan — saklamayın.
+Önce tek şeyi öğren: flash at, hemen çık. Curveball'un hangi tarafa döndüğünü bil ve flash atmadan önce sesle söyle. Dövüşten çıkınca molly koy, HP doldur. Run It Back'i her açıldığında kullan — saklama.
+
 ### Orta Elo (Gold-Diamond)
-Flash-swing kombinasyonunu anında refleks olarak geliştir. İki-üç haritada kilit sightline'ları engelleyen ateş duvarı yerleşimleri öğren. Ult'u takım arkadaşı desteğiyle güvenli pozisyonlara yerleştirmeye başla. Hot Hands için iyileşme ile utility kullanımı arasında yönetim geliştir.
+Flash-swing'i refleks hale getir — düşünmeden yapıyor olmalısın. İki-üç haritada kilit görüş hattı kesen duvar noktaları öğren. Ult'u takım arkadaşı yakınında, kapak olan yere koy. Molly'yi ne zaman iyileşme ne zaman alan kontrolü için kullanacağını ayırt et.
+
 ### Yüksek Elo (Ascendant-Immortal)
-Düşmanların arkasını dönmesini önlemek için çeşitli flash zamanlamasında ustalaş. Maksimum etki için ult kullanımını takım execute'ları ile koordine et. Ateş duvarını yaratıcı kullan — yalnızca sightline engellemek için değil, düşmanı yeniden konumlanmaya zorlamak için de.
+Düşman arkasını dönmesin diye flash zamanlamasını her round değiştir. Ult girişini takım hareketiyle birleştir — sen gir, takım arkandan gelsin. Ateş duvarını sadece görüş kesmek için değil, düşmanı pozisyon değiştirmeye zorlamak için kullan.
+
 ### Elit (Radiant)
-Düşmanların nasıl tepki verdiğine göre round bazlı flash adaptasyonuna odaklan. Güvenliği korurken maksimum bilgi için ult yerleşimini optimize et. Canla hayatta kalıp iyileşmek round'lar boyunca ekonomik avantaj sağlar — 50 HP ile hayatta kalıp iyileşmek, ölüp yeniden satın almaktan daha değerlidir.
+Her round düşmanın flash'ine nasıl tepki verdiğini oku ve bir sonraki round'da farklı yap. Ult yerleşimini maksimum bilgi + güvenli dönüş için seç. 50 HP ile hayatta kalıp molly ile iyileşmek, ölüp tekrar satın almaktan daha değerli — her HP'yi koru.

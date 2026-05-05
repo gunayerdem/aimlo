@@ -1,66 +1,70 @@
 # EŞLEŞME: Viper vs Hızlı Execute
 
-## Etkileşim Kimliği
-Viper, uzun süreli site kontrolünün kraliçesidir — Toxic Screen ve Poison Cloud'u, uzun dövüşleri saldırganlar için acımasız kılan güvenlik açığı ve görsel inkâr bölgeleri yaratır. Hızlı execute'lar Viper'ın toksininin fark etme zamanı bulamadan site alarak bunu tamamen bypass etmeye çalışır. Bu eşleşmede execute hızı ile Viper'ın yetenek aracını aktive edip konumlandırma becerisi arasında yarış vardır. Execute Viper'ın screen'i kalkmadan vurursa, o sadece elinde silah olan bir oyuncudur. Screen push ettiklerinde aktifse, her saldırgan site'a decay'li ve kör girer.
+## Ne Oluyor Burada
+Viper'ın tek işi şu: Toxic Screen ve Poison Cloud açıkken site'a giren herkesi decay'li ve kör sokmak. Hızlı execute tam bunu geçmeye çalışır — screen devrede değilken, Viper hazırlanmamışken site'a girmek. Screen ayaktaysa execute çöker. Screen yoksa Viper elinde silahıyla yalnız kalır.
 
-## Yaygın Cezalandırma Kalıpları
+## Cezalandırma Kalıpları
 
-### Hızlı Execute Viper'ı Cezalandırırken
+### Hızlı Execute Viper'ı Yeniyorsa
 
-**IF**: Toxic Screen aktive olmadan veya bekleme aralığı penceresinde içinden rush ediliyorsa
-**MEANING**: Viper'ın birincil kontrol aracı devrede değil — savunma zayıf
-**COUNTER**: Viper screen'i raund başında entry yoluna ön-aktive etmeli
-**WHY**: Aktive olmamış screen sıfır değer sağlar
+**IF**: Takım screen kapalıyken içinden geçiyor
+**MEANING**: Screen devrede değil — Viper'ın elinde sadece silahı var
+**COUNTER**: Screen'i entry yoluna aç — takım harekete geçmeden önce
+**WHY**: Kapalı screen sıfır değer verir
 
-**IF**: Viper'ın yakıtı uzun süreli erken raund kullanımının ardından tükendiğinde push ediliyorsa
-**MEANING**: Yakıt tükendiğinde tüm toksin kontrolü kapanır
-**COUNTER**: Viper yakıtını execute penceresi için saklamalı — erken raund kontrol için fazla harcamamalı
-**WHY**: Yakıt yönetimi Viper'ın tüm değerini belirler
+**IF**: Yakıt erken raundda tükenmiş, takım o pencerede basıyor
+**MEANING**: Yakıt bitince tüm toksin kontrolü kapanır
+**COUNTER**: Erken raund util atmaktan kaçın — yakıtı execute için sakla
+**WHY**: Yakıtın bitti mi, Viper normal bir ajana döner
 
-**IF**: Toxic Screen'in kapsamadığı açıdan execute ediliyorsa — screen bir çizgidir, kubbe değil
-**MEANING**: Savunma yapısında kapsanmamış açı boşluğu var
-**COUNTER**: Viper screen açısını en olası entry yolunu kaplayacak şekilde ayarlamalı
-**WHY**: Tek çizgi savunma çoklu açı saldırısına karşı kırılgandır
+**IF**: Takım screen'in kapsamadığı açıdan giriyor
+**MEANING**: Screen bir çizgi — her açıyı kapatmıyor
+**COUNTER**: Screen açısını en olası entry yoluna göre ayarla
+**WHY**: Bir çizgiyle çoklu açıdan gelen push'u tutamazsın
 
-### Viper Hızlı Execute'u Cezalandırırken
+### Viper Hızlı Execute'u Durduruyorsa
 
-**IF**: Ön-aktive Toxic Screen entry yolunu ikiye bölüyor, execute'u ayırıp içinden geçen herkesi decay'lıyor
-**MEANING**: Push birliği kırılıyor — saldırganlar bölünmüş ve zayıflamış
-**COUNTER**: Execute takımı screen'in kapsamadığı açıdan push etmeli veya yakıt bitmesini beklemeli
-**WHY**: Screen push'u fiziksel olarak bölüp decay hasarı verir
+**IF**: Screen raundun başında entry yolunu ikiye bölüyor, içinden geçen herkes decay alıyor
+**MEANING**: Takım bölünüyor — yarısı screen'in bu tarafında, yarısı öte tarafında
+**COUNTER**: Screen'in kapsamadığı açıdan gir ya da yakıt tükendiğinde bas
+**WHY**: Screen hem fiziksel duvar hem sürekli hasar — ikisi birden seni ezer
 
-**IF**: Snake Bite entry noktasında push sırasında hasar veriyorsa
-**MEANING**: Rush eden oyuncular silah dövüşünden önce 25+ hasar alıyor
-**COUNTER**: Entry noktasını değiştirmek veya Snake Bite'ı tetikleyip geri çekilmek
-**WHY**: Entry noktası hasarı silah dövüşü öncesi dezavantaj yaratır
+**IF**: Snake Bite entry noktasında patlıyor, takım üstünden koşuyor
+**MEANING**: Silah dövüşüne 25+ hasar eksiğiyle giriyorsunuz
+**COUNTER**: Entry noktasını değiştir ya da Snake Bite patladıktan sonra gir
+**WHY**: 25 hasar eksiğiyle girdiğin dövüşü, karşı taraf tam canla karşılar — sayısal eşitlik yok
 
-**IF**: Viper's Pit site'ta tüm post-plant'ı kabusa çeviriyor
-**MEANING**: Her retake eden 1hp decay ile giriyor
-**COUNTER**: Pit'i long-range yetenek araçlarıyla (lineup'lar, drone'lar) zorlayıp Viper'ı içinden çıkmaya zorlamalı
-**WHY**: Pit içindeki Viper neredeyse yenilmez — içinden çıkmaya zorlamak gerekir
+**IF**: Viper's Pit kurulmuş, takım retake için giriyor
+**MEANING**: Pit'e giren herkes 1hp decay ile içeri girer
+**COUNTER**: Pit'i lineup, drone veya uzak mesafe utility ile zorla — Viper'ı dışarı çek
+**WHY**: Pit içindeki Viper'ı içeriden öldüremezsin — dışarı çıkarmak zorundasın
 
-## Tekrarlanan Başarısızlık Ne Anlama Gelir
-**Viper** sürekli hızlı execute'larla eziliyorsa, screen'i ya entry yolunda değil ya da zamanında aktive edilmiyor. Ayrıca erken raund smoke için yakıt kullanıp gerçek execute için yeterli yakıtı kalmamış olabilir.
+## Sürekli Kaybediyorsan Ne Anlama Gelir
 
-**Hızlı execute** sürekli Viper'a karşı başarısızsa, takım toksininden geçiyor yerine etrafında dolanmalı. Screen'in kapsamadığı açıdan execute etmeliler veya yakıtının bitmesini beklemeliler.
+**Viper sürekli eziliyorsa**: Screen ya entry yolunda değil ya da harekete geçildiğinde kapalı. Ya da erken raund util attın, execute geldiğinde yakıt kalmadı.
 
-## AIMLO Ne Demeli
+**Hızlı execute sürekli duruyorsa**: Toksinin içinden koşuyorsunuz, 25+ hasar eksiğiyle dövüşüyorsunuz. Screen'in kapsamadığı açıyı bul. Açı yoksa yakıt tükendiğinde gir.
 
-### Oyuncu cezalandırılan taraftayken
-**Viper hız karşısında eziliyorsa**: "Screen'in push ettiklerinde hazır değil. Ya raund başında entry yoluna ön-aktive et, ya da yakıtını execute penceresi için sakla. Erken raund kontrol için yakıt kullanırsan rush geldiğinde elinde kalmaz."
+## Oyuncu Sana Geldiğinde Ne Söylersin
 
-**Hızlı execute Viper'a karşı başarısızsa**: "Onun toksini içinden koşuyorsunuz ve decay'li dövüşüyorsunuz. Ya screen'inin kapsamadığı açıdan push edin ya da yakıtının bitmesini bekleyin. 100hp'lik beş oyuncu, hepsi decay'liyken üç oyuncuya kaybeder."
+### Viper olarak eziliyorsa
+"Screen push geldiğinde kapalı. Entry yoluna aç — takım harekete geçmeden önce. Yoksa yakıtını erken util'e harcama — execute için sakla."
 
-### Oyuncu cezalandıran taraftayken
-**Viper execute'u durduruyorsa**: "Screen'in push'larını mükemmel bölüyor. Yakıtını execute penceresi için yönetimli tut ve site'ini temiz alamazlar."
+### Hızlı execute Viper'a karşı duruyorsa
+"Toksinin içinden koşuyorsunuz, 25 hasar eksiğiyle dövüşüyorsunuz. Screen'in kapsamadığı açıyı bul. Bulamazsan yakıt tükendiğinde bas."
 
-**Hızlı execute Viper'ı yeniyorsa**: "Toksini fark etmeden vuruyorsunuz. Execute hızını yüksek tutun ve push açınızı çeşitlendirin ki screen'i ön-pozisyonlayamasın."
+### Viper execute'u durduruyorsa
+"Screen push'ları entry yolunu ikiye bölüyor. Yakıtını execute penceresine sakla — site'i temiz alamazlar."
 
-## Rank Modülasyonu
-**LOW**: Viper screen aktivasyonunu push'larla zamanlamaz. Hızlı execute'lar rastgele olur. Viper'a varsayılan entry'ye screen ön-aktive etmeyi öğret.
+### Hızlı execute Viper'ı geçiyorsa
+"Screen kapalıyken giriyorsunuz, bu yüzden işe yarıyor. Her raund farklı açıdan bas — screen'i o noktaya önceden pozisyonlayamasın."
 
-**MID**: Viper'ın screen'i aktif ama kötü konumlanmış. Hızlı execute'lar etrafında dolanmak yerine toksinden geçer. Her ikisine screen açı farkındalığı ve alternatif entry yolları öğret.
+## Rank'a Göre Odak
 
-**HIGH**: Viper'ın yakıt yönetimi test ediliyor. Hızlı execute'lar erken yakıt kullanımını bait etmeye çalışıyor. Yakıt ekonomisi ve zamanlama disiplini öğret.
+**LOW**: Screen'i entry yoluna aç — takım harekete geçmeden önce, hareket başladıktan sonra değil.
 
-**ELITE**: Eşleşmede yakıt yönetimi ve execute zamanlaması en üst seviyede belirleyici. Viper execute'un ne zaman geleceğini okumalı ve execute takımı onun yakıt durumunu okumalı. Okuma bazlı zamanlama öğret.
+**MID**: Screen açık ama yanlış açıda. Screen'in bittiği uç noktayı bul — toksinin içinden geçmek yerine o noktadan gir.
+
+**HIGH**: Karşı takım seni erken util atmaya zorluyor. Erken utility atmaktan vazgeç — yakıtı execute penceresine sakla.
+
+**ELITE**: Viper olarak karşı takımın util sırasını takip et — birden fazla utility aynı raundda kullanıldıysa execute geliyordur, yakıtı o ana sakla. Execute oynuyorsan Viper'ın yakıt göstergesini izle — yakıt tükendiği anda bas.

@@ -1,264 +1,270 @@
-# Pro Sah Analizi -- Radiant Koçluk Bilgi Bankası
+# Pro Analizi — Radiant Koçluk Bilgi Bankası
 
-VCT meta evrimi, üst düzey takım stratejileri, oyuncu analizi ve pro-seviye pattern'leri. Dünyanın en iyi oyuncularının ne yaptığını ve neden yaptığını anlamak için bu bilgiyi kullan, kendi oyununa uygula.
-
----
-
-## VCT 2024-2025 Meta Evrimi
-
-### Chamber Düşüşü (2024 Başı)
-
-IF takımın Chamber'ın TP-Op stiline bağımlı kaldıysa
-MEANING nerf'ler sonrası Rendezvous menzili kısaldı, Headhunter maliyeti arttı, Tour De Force atış hızı düştü
-COUNTER savunma kimliğini yeniden kur -- Jett birincil Op duelist rolunu geri aldı, Killjoy/Cypher pasif setup oyununa geç
-WHY Chamber artık "her haritada zorunlu" değil; TP menzil kısıtlaması agresif açı tutma stilini çöküyor
-
-### Çift Initiator Meta'si (2024 Ortası)
-
-IF tek initiator + çift duelist kompozisyonu kullanıyorsan
-MEANING bilgi toplama ve entry destek kapasiten sınırlı kalıyor
-COUNTER çift initiator dene (Sova + Skye, Fade + KAY/O, Fade + Gekko) -- flash initiator duelist entry'sini desteklerken bilgi initiator'u güvenli mesafeden tarama yapar
-WHY çift initiator hem bilgi hem entry desteği sağlayarak tek initiator'dan çok daha fazla round kontrolü veriyor
-
-### Controller Rönesansı (2024 Sonu)
-
-- Viper Breeze ve Icebox'ta zorunlu kaldı. Harbor co-controller olarak yükseldi.
-- Clove hybrid controller-duelist olarak meta'ya girdi -- agresif controller oyununun değerli olduğu haritalarda (Sunset, Bind).
-- Omen smoke süresi ve recharge buff'ları aldı, çoğu haritada varsayılan solo controller oldu.
-- Astra Cosmic Divide round belirleyebildiği spesifik kompozisyonlarda pocket pick olarak kaldı.
-
-### Ajan Kompozisyonu Yakınsaması (2025)
-
-- Meta "standart" kompozisyonlara oturdu: 1 duelist, 1 controller, 1-2 initiator, 1-2 sentinel.
-- Flex oyuncular en değerli rol haline geldi -- harita ve rakibe göre Fade, Skye, KAY/O ve Gekko arasında geçiş yapabilen oyuncular.
-- Tek-duelist meta'si duelist oyuncusunun elit mekanik oyuncu olması gerektiği anlamına geliyor.
+Bu bilgiyi kendi maçlarında karşılaştığın durumlara bağla — her bölüm sahada ne yapacağını söylüyor.
 
 ---
 
-## Üst Düzey Takım Stratejileri
+## Meta Evrimi
 
-### Fnatic (EMEA)
+### Chamber Düşüşü
 
-IF rakibin hızlı execute yapıyorsa Fnatic'e karşı
-MEANING default stili hazırlıksız yakalanabilir
-COUNTER bilgi toplama fazını bitmeden baskılayarak Fnatic'in okuma yapmasını engelle
-WHY Fnatic'in gücü bilgi toplama ve mid-round adaptasyonda; hız bunu bozar
+IF takımın Chamber'a bağımlıysa 
+MEANING TP menzili kısa, Headhunter pahalı, Op atış hızı yavaş — agresif açı tutma artık işe yaramıyor 
+COUNTER savunma kimliğini yeniden kur: Jett birincil Op duelist'e döndü, Killjoy/Cypher pasif kuruluma geç 
+WHY TP kısıtlaması Chamber'ın temel oyununu kırıyor — "her haritada zorunlu" devri bitti
 
-- **Kimlik**: Yapılandırılmış, utility-yoğun oyun, mid-round adaptasyonlarla. Dünyanın en disiplinli takımı.
-- **Default protokolu**: Fnatic diğer tüm takımlardan fazla default çalıştırıyor. Commit etmeden önce uzun default fazıyla bilgi toplar.
-- **Mid kontrolü**: Her haritada mid kontrolünü önceliklendirir -- mid kontrolü her iki site'i vurma opsiyonu verir.
-- **Retake ustalığı**: Dünyanın en iyi retake'lerini yapar. Koordineli utility kullanımıyla kaybettikleri site'ları bile geri alır.
+### Çift Initiator Meta'si
 
-### Sentinels (Americas)
+IF tek initiator + çift duelist oynuyorsan 
+MEANING bilgi toplama ve entry desteğin yetersiz kalıyor 
+COUNTER çift initiator dene: Sova + Skye, Fade + KAY/O, Fade + Gekko — flash initiator entry açarken bilgi initiator'u geride tararsa round kontrolün katlanıyor 
+WHY tek initiator hem bilgi hem destek veremez; birini seçmek zorundasın, çift olunca ikisini de alırsın
 
-IF yıldız oyuncular kötü bir gün geçiriyorsa
-MEANING takım yapısı bunu telafi edemiyor, adaptasyon kapasitesi Fnatic veya DRX'in gerisinde
-COUNTER yıldız oyuncu merkezli takımlara karşı, yıldızı susturmaya odaklan -- double peek, utility ile engelle
-WHY TenZ ve zekken vuruyorken Sentinels durdurulamaz; susturulunca yapı yetersiz kalır
+### Controller Haritası
 
-- **Kimlik**: TenZ merkezli yıldız oyuncu stratejisi. Strateji TenZ'e alan yaratma etrafında döner.
-- **Execute stili**: Ağır flash desteğiyle hızlı execute'ler. Utility'yi hızla harcayarak site'ları bunaltır.
-- **Özel hamle**: zekken'in Yoru flank'ları + TenZ'in karşı taraftan entry'si kıskaç oluşturur.
+- Viper: Breeze ve Icebox'ta zorunlu. Çıkar, harita kapanır.
+- Harbor: İkinci controller olarak Viper'ın yanına giriyor — belli haritalarda çift smoke için.
+- Clove: Saldırgan controller oynamak istiyorsan Sunset ve Bind'da değerlendir. Agresif pozisyon alıp geri smoke atıyor.
+- Omen: Çoğu haritada varsayılan solo controller. Smoke süresi ve şarj hızı buff aldı.
+- Astra: Ult round'larında etkili ama tek başına seçilmez — kompozisyon ona göre kurulmadıkça zorla.
 
-### DRX (Pacific)
+### Kompo Yakınsaması (2025)
 
-IF DRX bir seride aynı stratejiyi iki kez kullanırsa
-MEANING bu nadirdir ama olursa, okuma fırsatı doğmuştur
-COUNTER DRX'in pattern'ini kır -- her haritada farklı yaklaşım bekle, hazırlıksız yakalanma
-WHY DRX rakiplerini derinlemesine çalışır ve anti-strat geliştirir; ama aşırı karmaşıklık baskıları altında geri tepebilir
-
-- **Kimlik**: Stratejik olarak dünyanın en çeşitli takımı. Her harita ve rakip için benzersiz stratejileri var.
-- **Adaptasyon gücü**: Seri içinde aynı stratejiyi nadiren tekrarlar. Map 1'de başarısız olan tamamen değiştirilir.
-
-### Paper Rex / PRX (Pacific)
-
-IF PRX'e karşı oynuyorsan
-MEANING kaos ve hız -- bilgi beklemeden düşmana koşar, en hızlı execute zamanlamasına sahip
-COUNTER site stack yap, crossfire kur, erken utility kullan -- PRX'in hızı hazırlıklıysan avantajına dönüşür
-WHY PRX'in gücü tahmin edilemezlik; ama buna hazır bir takım için kaos sikke atışı haline gelir
-
-- **Tempo**: PRX'in ortalama execute zamanı pro oyundaki en düşük. Site'ları erken fazda hızla alır.
-- **Mekanik omurga**: f0rsakeN (Neon) ve Jinggg (Raze) -- hareket ve aim kapasiteleri hiper-agresif stratejilerin çalışması için gerekli bireysel beceriyi sağlar.
-
-### LOUD (Americas)
-
-IF Aspas'ı susturabilirsen (double peek, utility ile engelleme)
-MEANING LOUD'un yedek planları Fnatic veya DRX kadar rafine değil
-COUNTER Aspas'ı izole düellolara sokmamak LOUD'u zayıflatır; çift peek ve utility baskısı uygula
-WHY Aspas dünyanın en iyi oyuncusu olarak gösteriliyor -- 1v1 clutch kazanma oranı VCT tarihinin en yükseğinden
-
-- **Kimlik**: Dengeli saldırganlık. Yapılı oyunu patlayıcı bireysel yetenekle birleştir.
-- **Less desteği**: Less'in bilgi ve utility'si Aspas'ın saldırganlığını mümkün kılar. En iyi duelist-initiator eşleşmelerinden biri.
-
-### EDward Gaming / EDG (Çin)
-
-- **Kimlik**: Disiplinli, utility-optimize oyun. ZmjjKK ateş gücü motoru.
-- **ZmjjKK**: Dünyanın mekanik olarak en yetenekli oyuncularından biri. Jett ve Chamber oyunu insani sınırın zirvesinde.
-- **Utility verimliliği**: EDG round başına diğer takımlardan daha az utility israf eder. Her smoke, flash ve scan'ın amacı var.
-- **Zayıflık**: Hazırlanmış stratejileri okunduğunda, seri içinde Batılı takımlardan yavaş adapte olabilir.
-
-### Leviatan (Americas)
-
-- **Kimlik**: Agresif, düello odaklı oyun.
-- **Güç**: Ekonomi yönetimi en iyilerden. Eco ve force-buy round'larını ortalamadan fazla kazanır.
-- **Zayıflık**: Uzun, taktiksel maçlarda daha stratejik takımlara karşı zorluk çekebilir.
-
-### Gen.G (Pacific)
-
-- **Kimlik**: Kore disiplini + ateş gücü. Minimum utility israfıyla sıkma, yöntemli execute'ler çalıştırır.
-- **Post-plant disiplini**: Gen.G'nin post-plant setup'ları en iyi prova edilmişlerden. Her plant pozisyonu için lineup ve crossfire mevcut.
-- **Zayıflık**: Tek harita içinde adaptasyonda yavaş. Katılıkları round round yaklaşımını değiştiren takımlar tarafından exploit edilebilir.
-
-### T1 (Pacific)
-
-- **Kimlik**: Esnek kompozisyonlar, güçlü bireysel oyuncular.
-- **Güç**: Harita havuzu derinliği. Her haritayı yetkin şekilde oynayabilir.
-- **Zayıflık**: Tek bir baskın stratejinin olmaması, zirve maçlarda "her şeyde iyi, hiçbir şeyde harika değil" anlamına gelebilir.
+- Meta oturdu: 1 duelist, 1 controller, 1-2 initiator, 1-2 sentinel.
+- En değerli oyuncu tipi: Fade, Skye, KAY/O ve Gekko arasında geçiş yapabilen flex oyuncu.
+- Tek duelist meta'sinde duelist oyuncusu bireysel olarak güçlü olmak zorunda — kompo bunu zorunlu kılıyor.
 
 ---
 
-## Oyuncu Stilleri ve Alışkanlıklar
+## Radiant Takım Stratejileri
 
-### TenZ (Sentinels) -- Duelist
+### Utility-Yoğun, Yapılandırılmış Takımlar
 
-IF TenZ'e karşı oynuyorsan
-MEANING geniş swing + pre-aim kullanır, jiggle yapmaz, ham reaksiyon süresine güvenir
-COUNTER onun agresyon baitleyerek, ego peek'lerini cezalandırabilirsin
-WHY TenZ zaman zaman takım için oynaması gereken yerde ego peek atar; bu açığı kullan
+IF bu tarza karşı oynuyorsan 
+MEANING ilk tarama + ses ipucu gelmeden commit etmezler, bilgi tamamlanınca execute ederler 
+COUNTER ilk tarama atılmadan önce push yap — bilgi fazı başlar başlamaz site'a veya mid'e agresyon uygula, düşman hazır değilken yakala 
+WHY bu takımların gücü bilgi + mid-round adaptasyon; bilgi fazına girmelerine izin vermezsen o gücü sıfırlarsın
 
-- **Peek stili**: Geniş swing + pre-aim. Peek'e commit eder, fight'ı ham reaksiyon süresiyle kazanmayı hedefler.
-- **Crosshair placement**: Her zaman baş seviyesinde. Fight sırasında dikey ayarlama yapmaz çünkü pre-aim'i hassas.
-- **Ajanlar**: Jett (birincil), Raze, Iso.
+**Bu tarzın özellikleri:**
+- İlk tarama veya ses ipucu gelmeden commit etmez
+- Mid kontrolü her haritada öncelik — mid kontrol eden iki tarafı da vurabilir
+- Retake sert: koordineli utility ile kaybedilen site'ı bile geri alır
 
-### Aspas (LOUD) -- Duelist
+### Yıldız-Merkezli Takımlar
 
-IF Aspas'a karşı 1v1 clutch'taysan
-MEANING VCT tarihinin en yüksek 1v1 clutch kazanma oranlarından birine sahip
-COUNTER izole fight verme, utility ile pozisyonunu gör, pre-aim ile avantaj kur
-WHY Aspas 1vX durumlarında zamanı oynar ve izole fight'lar arar; aynı şeyi ona karşı yapamazsın
+IF bu tarza karşı oynuyorsan 
+MEANING yıldız oyuncu kötü günündeyse takım yapısı bunu telafi edemiyor 
+COUNTER yıldızı susturmaya odaklan — double peek, utility ile giriş engelle, izole düelloya sokma 
+WHY yıldız vururken durdurulamazlar; yıldız yoksa yapı yetersiz kalıyor
 
-- **Hareket**: Counter-strafe ve geniş swing'leri hassas zamanlamayla kullanır. A-D strafe'i pro oyundaki en hızlı.
-- **Ajanlar**: Jett (birincil), Raze, Reyna (pocket pick).
-- **Özel alışkanlık**: Flank'ları obsesif kontrol eder. Minimap'i çoğu duelist'ten daha sık kontrol eder.
+**Bu tarzın özellikleri:**
+- Strateji tek oyuncuya alan yaratmak üzerine kurulu
+- Yoğun flash desteğiyle hızlı execute — utility hızla harcanıyor, site bunalıyor
+- Flank + karşı taraftan entry kombinasyonu kıskaç yaratıyor
 
-### Demon1 -- Duelist
+### Çeşitli / Anti-Strat Takımlar
 
-- **Stil**: Aspas'a kıyasla yöntemli ve sabırlı. Dövüş zorlamak yerine doğru anı bekler.
-- **Op oyunu**: Dünyanın en iyi Op oyuncularından. Peek zamanlama hassas -- atış için gereken süre kadar peek yapar, sonra yeniden pozisyonlanır.
-- **Özel alışkanlık**: Off-angle'ları tercih eder. Nadiren "belli" açıyı tutar.
+IF bu tarza karşı oynuyorsan 
+MEANING her harita ve rakip için farklı plan hazırlarlar, bir şeyi iki kez yapmaktan kaçınırlar 
+COUNTER bir şey ilk kez işe yararsa ikincisinde farklı gelecek — aynı açıyı iki kez tutma, aynı stack'i tekrarlama 
+WHY bu tarzın gücü karmaşıklık; baskı altında o karmaşıklık kendi takımlarını yavaşlatır
 
-### Chronicle (Fnatic) -- Flex/Sentinel
+### Hiper-Agresif Takımlar
 
-- **Stil**: Hata yapmayan IGL. Karar verme kalitesi Fnatic'in başarısının temeli.
-- **Utility verimliliği**: Dünyanın en iyisi. Her Recon Bolt, Tripwire ve flash'ın Fnatic stratejisinde belirli bir amacı var.
-- **Özel alışkanlık**: Round timer'ı oynar. Her hamlenin ne kadar sürdüğünü bilir ve utility'sini takıma maksimum execute penceresi verecek şekilde zamanlar.
+IF bu tarza karşı oynuyorsan 
+MEANING bilgi beklemeden execute ederler — en hızlı site alma zamanlamasına sahip 
+COUNTER site'a stack yap, crossfire kur, erken utility kullan — 1. düşman girer girmez utility patla 
+WHY stack sayı avantajını ve sürprizi yok eder
 
-### ZmjjKK (EDG) -- Duelist
+**Bu tarzın özellikleri:**
+- Erken fazda site'ı hızla alır, default oynamaz
+- Bireysel hareket ve aim bu tarzı taşıyan şey — mekanik zayıflarsa strateji de çöker
 
-- **Stil**: Saf mekanik beceri. Aim'i dünyanın en iyisi olarak gösterilir.
-- **Özel alışkanlık**: Nadiren aşırı düşünür. Gördüğü ilk düelloyu alır ve mekaniğe güvenir. Bu sadelik onun gücü -- analiz felcine yakalanmaz.
+### Dengeli Saldırgan Takımlar
 
-### yay (Emekli) -- Sentinel/Duelist
+IF bu tarza karşı oynuyorsan 
+MEANING yapılı oyunu patlayıcı bireysel yetenekle birleştirirler 
+COUNTER ana yıldızı izole düelloya sokma — double peek ve utility baskısıyla kapat 
+WHY ana yıldız 1v1 clutch kazanma oranı çok yüksek; onu izole tutarsan takım denklemi bozuluyor
 
-IF tutarlılık odaklı bir stil öğrenmek istiyorsan
-MEANING yay "El Diablo" Chamber meta'sını tanımladı, minimum gereksiz risk aldı
-COUNTER yay'ın stilini örne -- tutarlılık gösterişli oyunlardan daha çok kazandırır
-WHY her round doğru şeyi yapmak, ara sıra highlight-reel şeyi yapmaktan üstündür
+**Bu tarzın özellikleri:**
+- Yıldız duelist için alan açan initiator eşleşmesi kritik — birinin bilgisi diğerinin saldırganlığını besliyor
+
+### Utility-Verimli, Disiplinli Takımlar
+
+- Her smoke, flash ve taramanın amacı var — gereksiz harcama yok
+- Post-plant kurulumları önceden çalışılmış: her plant pozisyonu için lineup ve crossfire hazır
+- Zayıflık: hazırlanmış strateji okunduğunda seri içinde yavaş adapte oluyorlar — adaptasyon seni avantajlı kılar
+
+### Ekonomi-Güçlü Takımlar
+
+- Eco ve force-buy round'larını rakiplerinden daha yüksek oranda kazanır
+- Zayıflık: uzun, taktiksel maçlarda daha yapılandırılmış takımlara karşı zorlanıyor
+
+### Esnek Kompo Takımları
+
+- Her haritayı yetkin oynayabilir, harita havuzu geniş
+- Zayıflık: tek baskın strateji yok — her şeyde iyi ama hiçbir şeyde zirve değil
 
 ---
 
-## Pro Round Pattern'leri ve Anti-Strat'lar
+## Oyuncu Stilleri
 
-### Standart Default Pattern
+### Agresif Swing Duelist
 
-1. **Erken faz**: Takım haritaya yayılır. Controller mid smoke'u atar, sentinel site kurar, initiator ilk bilgi dart/drone atar.
-2. **Bilgi toplama**: Initiator dart'ları savunucu pozisyonlarını açığa çıkarır. Takım ses ipuçları için bekler.
-3. **Commit veya fake**: Bilgi zayıf savunma gösteriyorsa hızlı execute. Stack varsa fake ve rotate.
-4. **Execute**: Smoke'lar iner, flash'lar atılır, duelist entry yapar. Execute başladığında hemen plant.
-5. **Post-plant**: Açıları tut, utility ile defuse deny et, zamanı oyna.
+IF bu stile karşı oynuyorsan 
+MEANING geniş swing + pre-aim kullanıyor, jiggle yapmıyor, ham reaksiyon hızına güveniyor 
+COUNTER agresyonu bait et — düşman peek attığında trade pozisyonuna geç, ego peek'leri cezalandır 
+WHY bu tip oyuncu takım pozisyonunu göz ardı edip tek başına peek atıyor; o açığa utility at ve trade'e gir
+
+**Özellikler:**
+- Peek'e commit eder, fight'ı reaksiyon hızıyla kazanmayı hedefler
+- Crosshair her zaman baş seviyesinde — dikey ayarlama yapmaz
+- Ajan: Jett birincil
+
+### Clutch-Odaklı Duelist
+
+IF bu stile karşı 1v1'deysen 
+MEANING 1v1 clutch kazanma oranı çok yüksek — izole fight için pozisyon oynuyor 
+COUNTER izole fight verme, utility ile pozisyonunu gör, pre-aim ile avantaj kur 
+WHY izole fight aradığında aynı şeyi ona karşı yapamazsın — sen toplu baskı uygula
+
+**Özellikler:**
+- Counter-strafe ve geniş swing'i hassas zamanlıyor
+- Flank kontrolü titiz — minimap'i çoğu duelist'ten sık kontrol ediyor
+- Ajan: Jett birincil, Raze
+
+### Metodolojik Op Duelist
+
+IF bu stile karşı oynuyorsan 
+MEANING off-angle tutuyor, dry peek edersen açıyı bulmak zorunda kalıyorsun 
+COUNTER Op açısına drone veya tarama at, sonra flash'la — bilgi olmadan swing atma 
+WHY off-angle tutar ve atış için gereken süre kadar peek yapar; drone/tarama açısı sıfırlar
+
+**Özellikler:**
+- Dövüş zorlamıyor — doğru an gelince giriyor
+- Op peek zamanlaması minimal: atış için gereken süre kadar peek yapıp yeniden pozisyonlanıyor
+- Off-angle tercih ediyor — beklediğin yerde değil
+
+### Hata Yakmayan IGL / Flex Sentinel
+
+- Utility'yi bir düşman görüldüğünde veya ses ipucu geldiğinde kullanıyor — ne erken ne geç
+- Her round aynı kararı tekrar alıyor: bilgi gelince utility yak, bilgi yoksa tut
+
+### Saf Mekanik Duelist
+
+IF bu stile karşı oynuyorsan 
+MEANING gördüğü ilk düelloyu alıyor, utility beklemeden swing atıyor 
+COUNTER utility ile giriş açısını kapat, tek taraflı peek'e çıkmasını engelle 
+WHY mekaniğe güveniyor ama utility baskısı altında tercih yapamazsa o güç devre dışı kalır
+
+**Özellikler:**
+- Gördüğü ilk düelloyu alıyor
+- Tek başına fight arayışında — takım pozisyonunu ikinci plana bırakır
+
+### Tutarlılık Odaklı Sentinel/Duelist
+
+IF bu stile karşı oynuyorsan 
+MEANING gösterişli oyun değil, her round doğru şeyi yapıyor — hata oranı düşük 
+COUNTER gereksiz risk alma — sen de her round doğru pozisyonu tut, trade buddy'siz peek atma 
+WHY her round doğruyu yapmak hata oranını düşürür; bu tipe karşı kendi hatanı sıfırla
+
+---
+
+## Pro Round Pattern'leri
+
+### Standart Default
+
+1. **Yayılma**: Controller mid smoke atar, sentinel site kurar, initiator ilk bilgi atışını yapar.
+2. **Bilgi toplama**: Tarama sonuçları ve ses ipuçları gelince pozisyona göre karar ver.
+3. **Commit veya fake**: Zayıf savunma görüyorsan execute. Stack varsa fake + rotate.
+4. **Execute**: Smoke iner, flash atılır, duelist girer. Execute başlar başlamaz plant yap.
+5. **Post-plant**: Açıları tut, utility ile defuse engelle, zamanı oyna.
 
 ### Anti-Strat Pattern'leri
 
-IF hızlı takım'a karşı oynuyorsan (PRX, Sentinels)
-MEANING beklenen push site'ına 3 oyuncu stack'le, entry kill'i trade edecek sayıda ol
-COUNTER utility stack (KAY/O suppress + Killjoy setup + Sage wall) hızlı push'ları bunaltır
-WHY hızlı takımlar sayı üstünlüğüne ve sürprize güveniyorlar; stack bunu yok eder
+IF hızlı agresif takıma karşı oynuyorsan 
+MEANING sayı üstünlüğüne ve sürprize güveniyorlar 
+COUNTER beklenen push site'ına 3 oyuncu stack: 1. düşman girer girmez trade edecek sayıda ol, utility yığınla (suppress + kurulum + wall) 
+WHY stack sayı avantajını ve sürprizi yok eder
 
-IF yavaş takım'a karşı oynuyorsan (Fnatic, DRX)
-MEANING uzun default fazında bilgi toplarlar
-COUNTER erken agresif peek at -- bilgi toplama fazlarında beklemedikleri baskılar onları hazırlıksız yakalar
-WHY pasif savunmaya karşı erken push düşman ritmini bozar
+IF yavaş default takıma karşı oynuyorsan 
+MEANING ilk tarama veya bilgi atışı gelmeden commit etmiyorlar 
+COUNTER ilk tarama atılmadan önce agresif peek at — bilgi fazına girmeden baskı onları hazırsız yakalar 
+WHY ilk bilgi atışı gelmeden push yaparsan düşman ritmi kırılıyor
 
-IF Op takımına karşı oynuyorsan
-MEANING Op açısını dry peek etmek pro oyunda intiharıdır
-COUNTER Op açısına peek etmeden önce 5 utility parçası kullan: flash, smoke, drone, suppress, sonra swing
-WHY Op'a karşı utility yığınlaması hayatta kalma şansını dramatik şekilde artırır
-
----
-
-## Ekonomi Meta'si (Pro Seviye)
-
-### Full Buy Round'ları
-
-- Standart full buy: Phantom/Vandal + full utility + heavy armor (3,900-4,500 kredi).
-- Op buy: 4,700 (Op) + light armor (400) + temel utility. Sadece Op oyuncular (Jett, Chamber) düzenli Op alır.
-- Takım buy'ları koordine eder. Bir oyuncu full buy yapamazsa, takım ya birlikte force yapar ya birlikte save yapar.
-
-### Force Buy Round'ları
-
-- Pistol kaybettikten sonra: Takımlar 2. round'da Spectre (1,600) + armor (400-1,000) + kısmi utility ile force buy yapar.
-- Kayıp sonrası "anti-eco force" yaygınlaşıyor. 3. round full buy için save yapmak yerine 2. round'da Spectre ile force. Round 2 force buy kazanma oranı takımlar force-buy execute'lerini optimize ettikçe artmıştır.
-
-### Eco Round Stratejileri
-
-IF full eco'daysan (0-1,900 kredi)
-MEANING Classic/Shorty + armor yok -- fight'ları zorlamak anlamsız
-COUNTER bilgi topla, çıkış kill'leri ara, bonus kredi için spike plant et (oyuncu başına 300)
-WHY eco round'u kazanma hedefi değil, ekonomi hazırlama ve bilgi toplama fazıdır
-
-IF light buy'daysan (1,900-3,000 kredi)
-MEANING Marshal (950) veya Spectre (1,600) + light armor -- pick potansiyelin var
-COUNTER pick ve trade odaklı oyna; bir pick snowball edebilir
-WHY tek bir pick round'u çevirebilir ve düşman silahını çalarsın
+IF Op'lu takıma karşı oynuyorsan 
+MEANING Op açısını dry peek etmek intihar 
+COUNTER Op açısına bakmadan önce en az 3-4 utility kullan: flash, smoke, drone/tarama, sonra swing 
+WHY her utility Op oyuncusunu bir sonraki adıma zorlar — atış, yer değiştirme veya geri çekilme; swing'e geçtiğinde açı zaten kirlenmiş
 
 ---
 
-## Harita Bazlı Ajan Kompozisyonları
+## Ekonomi
+
+### Full Buy
+
+- Phantom/Vandal + full utility + ağır zırh: 3,900–4,500 kredi.
+- Op buy: sadece Op oyuncusu (Jett) her full buy round'unda alır — Op + hafif zırh + temel utility.
+- Takım birlikte buy yapar: biri full buy yapamazsa ya hepsi force eder ya hepsi save eder.
+
+### Force Buy
+
+IF takım pistol kaybettikten sonra bir sonraki round'daysa 
+MEANING full save krediyi biriktiriyor ama o round kaybedince ekonomi daha kötü oluyor 
+COUNTER Spectre + hafif zırh + kısmi utility ile force et — execute'ü önceden belirle 
+WHY force buy round'unda bir pick snowball ederse hem round hem silah kazanıyorsun
+
+### Eco
+
+IF full eco'daysan (0–1,900 kredi) 
+MEANING Classic + zırh yok — fight zorlamak anlamsız 
+COUNTER bilgi topla, çıkış kill'i ara, spike plant et (oyuncu başına 300 kredi) 
+WHY eco round'u kazanma hedefi değil — ekonomiyi hazırla, bilgi topla, çık
+
+IF hafif buy'daysan (1,900–3,000 kredi) 
+MEANING Marshal veya Spectre + hafif zırh — pick potansiyelin var 
+COUNTER pick + trade odaklı oyna; bir kill snowball edebilir ve düşman silahını çalarsın 
+WHY tek bir pick round'u çevirebilir
+
+---
+
+## Harita Bazlı Kompo
 
 ### Ascent
 - **Standart**: Jett, Sova, KAY/O, Omen, Killjoy/Cypher
-- **Varyant**: Iso mid-take için Contingency wall ile Jett'in yerini alır.
+- **Varyant**: Iso, Contingency wall ile mid take için Jett'in yerini alıyor.
 
 ### Bind
 - **Standart**: Raze, Skye/Fade, Brimstone/Omen, Breach/KAY/O, Cypher/Killjoy
-- **Varyant**: Clove agresif hybrid oyun için geleneksel controller'ın yerini alır.
+- **Varyant**: Clove agresif hibrit oyun için geleneksel controller'ın yerine geçiyor.
 
 ### Haven
 - **Standart**: Jett/Raze, Omen/Astra, Sova/Fade, Breach/Skye, Killjoy/Cypher
-- **Varyant**: Üç site savunucu yayılıyor; Killjoy Lockdown herhangi bir site retake'i için yıkıcı.
+- **Varyant**: Üç site yayılımı için Killjoy Lockdown herhangi bir site retake'inde belirleyici.
 
 ### Icebox
 - **Standart**: Jett, Viper + Omen/Harbor, Sova, Killjoy/Sage
-- **Varyant**: Sage wall A-site boost + Killjoy B-site anchor.
+- **Varyant**: Sage wall A-site boost + Killjoy B-site anchor kombinasyonu.
 
 ### Lotus
 - **Standart**: Raze, Fade, Omen/Harbor, Gekko/Skye, Killjoy/Deadlock
-- **Varyant**: Çift controller (Omen + Harbor) ikinci initiator'u düşürür.
+- **Varyant**: Çift controller (Omen + Harbor) ikinci initiator'u düşürüyor.
 
 ---
 
 ## Rank Modülasyonu
 
-### Immortal+ İçin
+### Immortal+
 
-IF pro analiz bilgisini oyununa uygulamak istiyorsan
-MEANING bu seviyede takım koordinasyonu ve anti-strat bilgisi fark yaratır
-COUNTER pro pattern'lerini doğrudan uygula: default protokolleri, trade buddy sistemi, ekonomi koordinasyonu
-WHY Immortal+ seviyede bireysel mekanik yeterli değil; taktiksel derinlik rank atlatır
+IF bu bilgiyi oyununa uygulamak istiyorsan 
+MEANING bu seviyede bireysel mekanik yeterli değil — takım koordinasyonu ve pattern okuma fark yaratıyor 
+COUNTER default pattern'leri doğrudan uygula: 2-1-2 yayılım, trade buddy, ekonomi koordinasyonu 
+WHY taktiksel derinlik bu seviyede mekanik derinlikten daha fazla round kazandırıyor
 
-### Diamond-Ascendant İçin
+### Diamond–Ascendant
 
-IF pro stratejileri ranked'e uyarlamak istiyorsan
-MEANING solo queue'da tam pro kompozisyonu execute etmek güç
-COUNTER basitleştir: temel default kavramını kullan (2-1-2 yerleşim), trade buddy bul, ekonomi iletişimi yap
-WHY pro stratejilerin sadeleştirilmiş versiyonları bile ranked'de büyük fark yaratır; karmaşık planları birebir kopyalama
+IF pro stratejileri solo queue'ya uyarlamak istiyorsan 
+MEANING tam pro kompo solo queue'da execute edilemiyor 
+COUNTER basitleştir: temel default kavramını kullan, trade buddy bul, ekonomiyi iletişime aç 
+WHY pro stratejinin temel adımları (trade, default yayılım, ekonomi koordinasyonu) solo queue'da da round kazandırır — tüm kompoyu birebir kopyalamak gerekmez

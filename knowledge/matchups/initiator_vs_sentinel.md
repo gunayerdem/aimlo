@@ -1,46 +1,51 @@
 # MATCHUP: Initiator vs Sentinel
 
-## Etkileşim Kimliği
-Bu Valorant'ın yetenek satranç maçıdır. Initiator'lar bilgi toplamak ve açıklık oluşturmak için vardır; sentinel'ler bilgiyi kontrol etmek ve açıklıkları engellemek için vardır. Bir initiator recon ile sentinel'in kurulumunu açığa çıkardığında, tüm savunma yapısı çöker — trap'ler kolayca temizlenebilir hale gelir ve sentinel ifşa edilir. Sentinel'in kurulumu initiator'un taramasını atlatığında, atak durur çünkü takım kör uçar. Bu matchup her raundun bilgi ekonomisini belirler.
+## Bu Çatışma Nedir
+Initiator düşmanın tuzaklarını bulur ve açar. Sentinel tuzakları saklar, bilgiyi keser. Biri diğerini yenerse tüm raund o yöne döner. Bu matchup her raundu şekillendirir.
 
 ## Yaygın Cezalandırma Kalıpları
 
-**IF**: Sova recon dart tripwire ve turret pozisyonlarını açığa çıkarıyorsa, Fade prowler trap'leri zararsızca tetikliyorsa ve KAY/O knife sentinel'i tamamen bastırarak tüm yerleşik yeteneği devre dışı bırakıyorsa
-**MEANING**: Initiator sentinel'in raund öncesi kurulumunu değersiz kılıyor. Skye köpeği öne çıkıp alarmbot'ları emiyor. Breach aftershock duvarlardan yeteneği yok ediyor. Initiator'un görevi sentinel'in raund öncesi kurulumunu değersiz kılmaktır.
-**COUNTER**: Tripwire'lar drone ve prowler yollarını yakalar ve takımı recon yapıldığına dair uyarır. Kamera initiator'u yetenek kullanım animasyonu sırasında tespit eder — çoğu initiator recon kullanırken hareketsiz ve savunmasızdır. İyi gizlenmiş yetenek initiator taramasını atlatır ve saldırı planı eksik bilgiye dayanır.
-**WHY**: Sentinel kurulumu yalnızca açığa çıkmadığında çalışır — gizleme ve çeşitlendirme hayatta kalmanın anahtarıdır.
+**IF**: Sova dart tuzak ve kamera pozisyonlarını açığa çıkarıyorsa, Fade prowler tuzakları zararsız yiyor, KAY/O bıçağı sentinel yeteneklerini tamamen kapatıyorsa
+**MEANING**: Sentinel'in o raund koyduğu her şey çöpe gitti. Skye köpeği öne atılıp alarmbot'u yiyor. Breach aftershock duvarın arkasındaki tuzağı patlıyor. Sen hiçbir şeye patlamamış şekilde giriyorsun.
+**COUNTER**: Tuzaklarını drone ve prowler güzergahlarına koy — taranmadan önce uyarı alırsın. Kamera initiator'ı yetenek kullanırken yakalar; çoğu initiator tarama sırasında duruyor ve korumasız. Tuzaklarını beklenmedik köşelere göm — standart tarama güzergahı dışına çık.
+**WHY**: Tuzak yalnızca görünmediğinde çalışır. Gizle ve değiştir.
 
-**IF**: Sentinel yetenek yerleştirmesine rağmen initiator tarafından sürekli sökülüyorsa
-**MEANING**: Yetenek yerleştirmesi ya çok yoğun (bir drone taraması her şeyi açığa çıkarır) ya da çok tahmin edilebilir. Yeteneği birden fazla pozisyona yaymak ve yerleşimi raund-raund değiştirmek en iyi initiator taramalarını bile yener.
-**COUNTER**: Trap'leri birden fazla açıya yay ki birini temizlemek gerisini ifşa etmesin. Her raund yerleşimi değiştir.
-**WHY**: Yoğun kurulum tek bir tarama ile çöker — dağılmış kurulum birden fazla yetenek harcanmasını gerektirir.
+**IF**: Sentinel yetenek koymasına rağmen her raund initiator tarafından temizleniyorsa
+**MEANING**: Ya her şeyi aynı köşeye yığıyorsun — tek drone her şeyi açıyor — ya da her raund aynı yere koyuyorsun. Düşman seni ezberledi.
+**COUNTER**: Tuzakları birden fazla açıya yay. Birini temizlemek gerisini göstermesin. Her raund yerini değiştir.
+**WHY**: Yığılı kurulum tek taramayla çöker. Dağılmış kurulum birden fazla yetenek harcatır.
 
-**IF**: Initiator recon yeteneklerini saldırı execute'undan çok erken kullanıyorsa, sentinel kalan kurulum süresinde yetenek konumlarını değiştirip yeniden koyabiliyorsa
-**MEANING**: Erken zamanlama recon bilgisini geçersiz kılar. Sentinel yetenek yenileme hızı, initiator'un açığa çıkardığı bilginin kullanım ömrünü aşar. Bilgi doğru ama zamanında değil.
-**COUNTER**: Initiator recon zamanlamasını takımın push anına olabildiğince yakın tutmalı. Yetenek kullanımı ile site execute'u arasındaki boşluk ne kadar kısa olursa sentinel yeniden konumlanma fırsatı o kadar az bulur. Sova dart'ı takım hareket halindeyken kullanmak zamanlama sıkıştırır.
-**WHY**: Doğru bilgi yanlış zamanda atıl bilgidir — recon ile execute arasındaki boşluğu kapatmak sentinel'e adaptasyon penceresi vermez.
+**IF**: Initiator tuzakları çok erken tarıyor — sentinel hâlâ yetenek koyma süresinde — sonra push geliyor ama bilgi eskimiş
+**MEANING**: Erken tarama işe yaramaz. Sentinel taradıktan sonra tuzağı başka yere koydu. Takım eski bilgiyle giriyor, taze tuzağa basıyor.
+**COUNTER**: Taramayı takım hareket ederken at. Takım kapıya dayandığında dart gitsin — o anda sentinel yeniden koyamaz. Push ile tarama arasındaki boşluğu sıfıra yaklaştır.
+**WHY**: Doğru bilgi yanlış anda işe yaramaz. Boşluğu kapattığında sentinel'e adaptasyon zamanı vermezsin.
 
 ## Tekrarlayan Başarısızlık Ne Anlama Gelir
-**Initiator** sentinel kurulumlarını temizlemekte sürekli başarısız oluyorsa, recon yeteneklerini tahmin edilebilir veya yanlış zamanda kullanıyor. Çok erken drone kullanıyor (sentinel yeteneği yeniden koyar) veya yanlış alanları tarıyor (gerçek kurulumu kaçırıyor) olabilir.
 
-**Sentinel** tüm kurulumu initiator tarafından sürekli sökülüyorsa, yetenek yerleştirmesi çok yoğun veya çok tahmin edilebilir. Yeteneği birden fazla pozisyona yaymak ve yerleşimi raund-raund değiştirmek en iyi initiator taramalarını bile yener.
+**Initiator** sürekli temizleyemiyorsa: Ya yanlış yeri tarıyorsun ya da çok erken tarıyorsun. Kill feed'e bak — sentinel hangi açıdan öldürüyor? Oradan başla.
+
+**Sentinel** sürekli sökülüyorsa: Her şeyi aynı yere koyuyorsun. Düşman seni okudu. Bir tuzağı standart dışı köşeye taşı — drone oraya uğramıyor.
 
 ## AIMLO Ne Demeli
-### Oyuncu cezalandırılan taraftayken
-**Initiator temizlemekte başarısız oluyorken**: "Recon'un doğru noktaları kapsamıyor. Sentinel'in nerede oynadığını anlamak için kill feed'i ve raund başı kalıplarını izle, sonra yeteneklerini oraya yönelt. Beklenmedik açılardan site'a drone at."
 
-**Sentinel temizleniyorken**: "Yeteneğin çok yoğun — tek bir drone taraması her şeyi açığa çıkarıyor. Trap'lerini birden fazla açıya yay ki birini temizlemek gerisini ifşa etmesin. Her raund yerleşimi değiştir."
+### Oyuncu cezalandırılan taraftayken
+
+**Initiator temizleyemiyorsa**: "Dart'ın yanlış yere gidiyor. Kill feed'e bak, sentinel hangi açıdan öldürüyor — bir sonraki raund oraya at. Push tam kapıya dayandığında dart kullan, daha erken değil."
+
+**Sentinel sökülüyorsa**: "Her şeyi aynı köşeye yığıyorsun, tek drone yeterli. Bir tuzağı drone güzergahı dışına koy. Bir sonraki raund yerini tamamen değiştir."
 
 ### Oyuncu cezalandıran taraftayken
-**Initiator kurulumları söküyor**: "Yetenek savaşını kazanıyorsun. Sentinel'ler her raund trap'leri yeniden almak için kredi harcıyor. Tarama zamanlamanı değiştirmeye devam et ki recon'unu önceden yok edemesinler."
 
-**Sentinel taramaları atlatıyor**: "Gizli yerleştirmelerın recon'larını atlıyor. Düşman takım kötü bilgiyle push ediyor. Kurulumlarını tahmin edilemez tut."
+**Initiator kurulumları sökүyorsa**: "Yetenek savaşını kazanıyorsun. Sentinel her raund yeniden almak zorunda kalıyor. Tarama zamanlamanı değiştir — kimi raund erken at, kimi raund takım kapıya dayandığında at — ki dart'ını önceden yok edemesin."
+
+**Sentinel taramaları atlatıyorsa**: "Tuzakların görünmüyor. Düşman kötü bilgiyle giriyor. Yerini korumaya devam et ama her raund bir tuzağı başka köşeye taşı — sentinel okunamaz hale gelir."
 
 ## Rank Modülasyonu
-**LOW**: Initiator'lar nadiren trap bulmak için recon kullanır — oyuncu bulmak için kullanırlar. Sentinel'ler varsayılan pozisyonlara yetenek koyar ve meydan okunmaz. Etkileşim neredeyse yok.
 
-**MID**: Initiator'lar özellikle yeteneği hedeflemeye başlar. Sentinel'ler trap'leri daha iyi gizlemeye başlar. Her iki tarafta da bilgi savaşı açıkça öğret.
+**LOW**: Initiator drone'u tuzak için değil oyuncu bulmak için kullanır. Sentinel varsayılan köşelere koyar, kimse sorgulamaz. Bu matchup neredeyse hiç aktif değil. Tuzak nerede olur, drone oraya nasıl gider — her ikisini ayrı ayrı göster: önce tuzak açısını, sonra drone güzergahını.
 
-**HIGH**: Kedi-fare oyunu aktif. Her iki taraf da raund-raund uyum sağlar. Zamanlama manipülasyonu öğret — ne zaman geç tarama, ne zaman beklenen tarama sonrası yetenek koyma.
+**MID**: Initiator tuzakları özellikle hedeflemeye başlıyor. Sentinel gizlemeye çalışıyor ama tahmin edilebilir. İki tarafa da bilgi savaşını göster — tarama zamanlaması ve tuzak dağılımı.
 
-**ELITE**: Bu matchup bir zeka oyunudur. Initiator ve sentinel birbirlerinin kalıplarını tüm yarı boyunca okurlar. Kalıp kırma ve tahmin edilemezliği temel beceri olarak öğret.
+**HIGH**: Her iki taraf raund-raund uyum sağlıyor. Burada zamanlamayı öğret: push tam kapıya dayandığında tara, daha erken değil. Sentinel için: bir tuzağı her raund farklı yere koy.
+
+**ELITE**: Her iki taraf birbirinin kalıbını okuyor. Initiator sentinel'in hangi raunda nereye koyacağını tahmin ediyor. Sentinel dart güzergahını öngörüp tuzağı oradan uzağa koyuyor. Kalıp kır: aynı kurulumu arka arkaya tekrarlama — düşman 1. kez görünce 2. kez bekler.

@@ -11,111 +11,115 @@ tags: [matchup, jett, sova, duelist, initiator]
 
 ## 1. Matchup Özü
 
-Jett dash ile Sova'nın recon dart + shock dart + owl drone info ağından kaçmaya çalışan mobility duelist, Sova ise dart ile Jett'in entry hattını önceden bilgilendirip shock dart lineup'larıyla aggressive pozisyonlarını basan info initiator. Matchup Sova'nın dart ekonomisine karşı Jett'in dash varyasyonunu test eder.
+Sova seni görmek ister. Jett kaçmak ister. Hepsi bu.
+
+Sova dart atar, pozisyonun belli olur, takım üstüne gelir. Jett olarak: dart seni bulmadan önce hareket et, dart seni bulduktan sonra yerinde durma. Sova olarak: dart bilgisini takıma iletmeden Jett kaybolmasın.
+
+Matchup bilgi savaşı. Sova'nın dart'ı eski bilgi üretir — Jett hareket değiştirirse o bilgi işe yaramaz.
 
 ## 2. Kim Avantajlı?
 
-**Jett lehine durumlar:**
-- Sova takım utility'siz solo kaldığında — dart tek başına kill vermez, trade partner yoksa Jett info sonrası aggressive peek ile kill alır
-- Jett vertical entry map'lerinde (Split A Main, Icebox Rafters) — updraft dart info'sundan sonra Sova'nın lineup'larını bypass eder
-- Sova ult cooldown'dayken — Hunter's Fury olmadan Sova'nın area damage yok, Jett post-plant aggressive hold
-- Dart lineup bilinen hatlardan atılıyorsa — Jett round-to-round dart pozisyonunu öğrenir, round 3'te dart lineup'ının kör noktasında durur
+**Jett lehine:**
+- Sova yanında trade partneri yoksa — dart tek başına seni öldürmez, Sova solo kalırsa Jett bilgi sonrası peek atar ve kill alır
+- Dikey harekete açık haritalarda (Split A Main, Icebox Rafters) — updraft ile dart tarama alanının dışına çıkarsın
+- Sova ultsüz dönemdeyken — Hunter's Fury olmadan Sova'nın alan hasarı yok, post-plant agresif dur
+- Dart'ın nereden atıldığını öğrendikten sonra — bir sonraki roundda o açının kör noktasına dur
 
-**Sova lehine durumlar:**
-- Uzun sightline map'lerinde (Breeze A Site, Icebox A) — dart uzun alanda info + shock dart lineup lethal, Jett aggressive peek shock dart'ta ölür
-- Jett dash cooldown'dayken — dart info Sova takımına Jett'in dashsiz pozisyonunu rapor eder, ikinci düşman gelir
-- Sova Hunter's Fury ult durumunda — ult arrow area damage Jett'in off-angle pozisyonlarını basar
-- Jett predictable entry hatlarında — dart round 1'de Jett'in dash hattını info verir, round 2'de shock dart lethal
+**Sova lehine:**
+- Uzun açılı haritalarda (Breeze A, Icebox A) — dart + shock dart bu alanlarda kesin hasar verir, Jett peek atarsa shock dart'a girer
+- Dash bittiğinde — dart takıma Jett'in dashsiz pozisyonunu gösterir, ikinci düşman anında gelir
+- Hunter's Fury aktifken — ult duvarı delerken geçer, off-angle dursan bile yakalar
+- Jett hep aynı hattan giriyorsa — ikinci roundda shock dart o hatta hazır olur
 
-**Balanced:** Haven, Ascent, Lotus gibi orta mesafeli map'lerde matchup Sova'nın dart lineup ekonomisine ve Jett'in varyasyonuna bağlı.
+**Dengeli:** Haven, Ascent, Lotus'ta matchup Sova'nın dart disiplinine ve Jett'in hareket çeşitliliğine göre kayar.
 
-## 3. Key Düellolar
+## 3. Düellolar
 
-**IF** Sova recon dart Jett'in aggressive pozisyonunu işaretledi
-**MEANING** Jett pozisyonu Sova takımına rapor, trade partner pozisyonda hazır, Jett aggressive peek trade'lenir
-**COUNTER** Jett dart sesini duyduğu an reposition — dart 2-3 scan cycle yapar, reposition süresi dart scan'inden hızlı olmalı. Updraft ile vertical reposition dart'ın ground scan'ini atlar.
-**WHY** Dart scan round ekonomisinde sabit süre, Jett mobility dart süresinden hızlı. Static Jett dart'a bedava bilgi, hareketli Jett dart'ı boşaltır.
-
----
-
-**IF** Sova shock dart Jett'in dash landing noktasına attı
-**MEANING** Dash sonrası landing Jett'in dashsiz olduğu an, shock dart damage yüksek, Jett düşük HP'ye düşer
-**COUNTER** Jett dash hattını shock dart lineup hatlarından uzak seç. Dash landing noktaları round-to-round farklı.
-**WHY** Sova lineup'ları sabit hedef hatlarına çalışır. Jett hareketli hedef olduğunda lineup boşa gider. Sabit landing = bedava shock dart damage.
+**IF** Sova recon dart senin pozisyonunu işaretledi
+**MEANING** Takım pozisyonunu biliyor, trade partner hazır, peek atarsan karşıdan biri daha gelir
+**COUNTER** Dart sesini duyduğun an yer değiştir — tarama bitmeden farklı noktada ol. Updraft kullanırsan dart'ın zemin taraması seni bulamaz.
+**WHY** Dart sabit bir alanı tarar, Jett o alanı terk ederse Sova takımına yanlış konum bilgisi gider.
 
 ---
 
-**IF** Sova owl drone ile site içi info alıyor, Jett drone görüş hattında
-**MEANING** Drone Jett'in pozisyonunu live görür, drone'un attığı dart Jett'i işaretler, stun + info kombosu
-**COUNTER** Jett drone sesini duyduğu an drone'u rifle ile vur. Drone HP bar düşük, iki shot ile düşer.
-**WHY** Drone aktif info ama HP'si düşük. Jett drone tehdidini aim ile silebilir — drone'a ateş etmek info asimetrisini tersine çevirir.
+**IF** Shock dart tam dash sonrası ineceğin noktaya atılmış
+**MEANING** Dash biter bitmez hasar yersin, HP düşer, dashsiz kalırsın
+**COUNTER** Her roundda farklı bir noktaya in. Shock dart sabit hedeflere çalışır — hep aynı noktaya inersen ikinci round orada hazır olur.
+**WHY** Shock dart lineup'ları ezberlenmiş hatlara kurulur. Noktayı değiştirirsen lineup boşa gider.
 
 ---
 
-**IF** Jett updraft ile vertical reposition, Sova dart üst katta
-**MEANING** Updraft dart görüş hattına girerse Jett havada işaretlenir, slow target + info
-**COUNTER** Updraft lokasyonunu dart scan hattından uzakta seç. Dart lineup'ları ground level scan yapar, üst kat lineup'ları farklı açıya ihtiyaç duyar.
-**WHY** Dart scan radius'u sabit, updraft lokasyonu değişken. Jett'in updraft'ını dart'sız alana yönlendirmek bypass'ın tek yolu.
+**IF** Sova owl drone site içinde seni görüyor
+**MEANING** Drone pozisyonunu canlı aktarıyor, dart atarsa işaretlenirsin, takım üstüne gelir
+**COUNTER** Drone sesini duyduğun an rifle ile vur — iki atışta düşer. Drone'u indirmek bilgi dengesini tersine çevirir.
+**WHY** Drone HP'si düşük. Vurursan Sova hem drone'unu hem bilgisini kaybeder.
 
 ---
 
-**IF** Sova Hunter's Fury ultunu Jett'in post-plant pozisyonuna attı
-**MEANING** Ult arrow area damage Jett'i off-angle pozisyonunda yakalar, Jett dash ile radius'tan çıkmalı
-**COUNTER** Jett post-plant pozisyonunu Hunter's Fury lineup hatlarından uzak seç. Ult sesini duyduğu an dash ile reposition.
-**WHY** Hunter's Fury area weapon, sabit wall-piercing hattı. Jett pozisyon bilgisi varsa ult'un hattını önceden okur.
+**IF** Updraft ile üst kata çıkıyorsun, Sova dart o alanda
+**MEANING** Havadayken işaretlenirsen yavaş hedefsin, takım pozisyonunu bilir
+**COUNTER** Updraft'ı dart'ın taramadığı üst kat noktasına yöelt — dart zemin seviyesini tarar, üst kat farklı açı gerektirir.
+**WHY** Dart tarama alanı sabit, updraft noktası senin elinde. Üst kata çıkarsan dart seni bulamaz.
 
 ---
 
-**IF** Jett Op hold ediyor, Sova dart Jett'in Op pozisyonunu işaretledi
-**MEANING** Dart Jett'i Sova takımına verdi, Sova shock dart ya da teammate Op ile Jett'i yakalar
-**COUNTER** Jett Op pozisyonunu dart tarama süresinden önce değiştir. Op shot sonrası dash ile reposition, sabit Op hattı yok.
-**WHY** Dart + Op kombinasyonu Sova'nın info avantajı + team follow-up. Jett Op holder sabit kalırsa dart bilgisini info'ya çevirir ve Jett'i yakalar.
+**IF** Sova Hunter's Fury ultunu post-plant pozisyonuna attı
+**MEANING** Ult duvarı delerken geçer, off-angle durursan bile hasar alırsın, dash yoksa çıkamazsın
+**COUNTER** Post-plant pozisyonunu ult'un bilinen hatlarından uzak seç. Ult sesini duyduğun an dash ile çık.
+**WHY** Hunter's Fury sabit hat üzerinden geçer. Dart seni vermediyse ult seni bulamaz.
 
 ---
 
-**IF** Jett round başı aggressive dash, Sova dart round başı lineup'la atılmış
-**MEANING** Dart Jett'in dash hattını scan, Jett dart görüşünde reveal, takım rotate başlar
-**COUNTER** Jett round başı sessiz yürüyüşle dart hattını geç, dash'i dart scan bittikten sonra aç. Dart sound indicator round başında dinlenir.
-**WHY** Dart scan süresi sabit, Jett dash sesli hareket. Ses + scan kombinasyonu Jett'i ilk paketde info'ya çevirir.
+**IF** Op hold ediyorsun, dart pozisyonunu işaretledi
+**MEANING** Takım seni biliyor, shock dart ya da karşı Op geliyor
+**COUNTER** Op attıktan sonra sabit kalma — dash ile yer değiştir. Aynı köşeden iki kez Op atma.
+**WHY** Dart + takım tepkisi = sabit duran Op holder ölür. Hareket edersen Sova'nın bilgisi eskir.
 
-## 4. Utility Takası
+---
 
-Jett mobility utility (dash + updraft + 3 smoke + ult), Sova info + damage (recon dart x2 + shock dart x2 + owl drone + ult). Sayısal olarak Sova daha çok utility, Jett'in utility'si mobility'de konsantre. Matchup'ın özü Sova'nın info ekonomisinin Jett'in hareket varyasyonuna karşı yarışı. Jett varyasyon disiplinliyse dart info eskir, Sova lineup disiplinliyse Jett'in dash hatları işaretlenir. Ult ekonomisi: Blade Storm 7 point (eco ult), Hunter's Fury 7 point (area damage), eşit cost, farklı zaman kullanımı.
+**IF** Round başında agresif dash atıyorsun, Sova dart o hatta hazır
+**MEANING** Dash sesli harekettir, dart taramasıyla aynı anda girersen görünürsün, takım rotate başlar
+**COUNTER** Dart sesini duyarsan dash'i beklet. Dart bittikten sonra geç. Sessiz yürüyüşle geçersen dart seni yakalayamaz.
+**WHY** Dart ses + tarama ikisini birden kullanır. Ses çıkarmazsan tarama seni bulamaz.
 
-## 5. Map Bazlı Değişim
+## 4. Utility Dengesi
 
-**Breeze (Sova avantajlı):** Uzun angle + geniş alan Sova dart ekonomisi. Jett Op holder rolünde Sova dart hedefinde.
+Sova'nın 6 utility'si var — dart, dart, shock, shock, drone, ult. Hepsi bilgi ve hasar. Jett'in 5 utility'si var — dash, updraft, updraft, 3 duman, ult. Hepsi hareket.
 
-**Icebox (Sova avantajlı):** Icebox Sova'nın en güçlü map'lerinden, dart lineup'ları map-wide kapsam. Jett Rafters vertical dart'tan kaçabilir.
+Sova daha fazla utility atar ama hiçbiri sabit duran düşman olmadan kesin öldürme yapmaz. Sova utility'si seni bulduğunda hareket et — o rounddaki bilgi değeri sıfırlanır.
 
-**Haven (Balanced):** Sova 3 site info oyuncusu, Jett C Long Op. Çatışma rotate hattında.
+Ult maliyeti ikisi de 7 — Blade Storm ve Hunter's Fury aynı puanda. Blade Storm eco roundda çalışır, Hunter's Fury alan hasarı için. Sova ult aktifse Jett post-plant pozisyonunu değiştir. Jett ult aktifse Sova drone'unu kullanmaktan çekinir.
 
-**Ascent (Balanced):** Sova A Site info meta, Jett A Short entry.
+## 5. Haritaya Göre Değişim
 
-**Lotus (Sova hafif avantajlı):** 3 site yapısı dart için ideal.
+**Breeze (Sova avantajlı):** Uzun açılar dart + shock için ideal. Jett Op tutuyorsa dart hedefinde — Op attıktan hemen yer değiştir.
 
-**Bind (Jett avantajlı):** Sova Bind'da niche pick, Jett'in close range çatışması dart'tan uzak.
+**Icebox (Sova avantajlı):** Sova'nın en güçlü haritalarından. Dart kapsama alanı büyük. Rafters'ta updraft ile dart taramasının dışına çıkabilirsin.
 
-**Split (Balanced):** Sova B Main dart meta, Jett A Main vent vertical.
+**Haven (Dengeli):** Sova 3 site bilgi oyuncusu, Jett C Long'da Op. Çatışma C Long, B Mid ve A Short rotate noktalarında olur.
 
-## 6. Flip Moment'ler
+**Ascent (Dengeli):** Sova A Site bilgi meta, Jett A Short girişi. Dart seni A Short'ta bulursa B'den rotate et.
 
-**Flip 1 — Dart bilinen hattan atıldı:** Jett dart lokasyonunu öğrendiği round sonrası dart lineup'ını bypass eder.
+**Lotus (Sova hafif avantajlı):** 3 site yapısı dart için iyi — Sova her sitede bilgi alır. Jett aynı hattan iki round üst üste girerse dart üçüncü roundda o hatta hazır olur.
 
-**Flip 2 — Updraft dart görüşü dışı:** Jett vertical reposition dart scan dışına çıkarsa info kaybı, Jett serbest.
+**Bind (Jett avantajlı):** Sova Bind'da zayıf pick. Yakın mesafe çatışmalar dart'tan önce olur, Jett avantajlı.
 
-**Flip 3 — Shock dart landing'e denk düştü:** Jett dash landing shock dart lineup'ındaysa kesin damage, matchup Sova'ya kayar.
+**Split (Dengeli):** Sova B Main dart kullanır, Jett A Main vent dikey girişi yapar. Haritanın iki tarafı farklı oynuyor.
 
-**Flip 4 — Hunter's Fury pozisyon okuması:** Ult Jett'in aggressive hattına denk düşerse Jett düşük HP, dash ile bile tam kaçış yok.
+## 6. Denge Kırılma Anları
 
-## 7. Pro Coach Notları
+**Kırılma 1 — Dart hattı deşifre:** Dart'ın nereden atıldığını bir roundda öğrendin. Bir sonraki roundda o açının kör noktasına dur — Sova ya açı değiştirir ya da dart boşa gider.
 
-**VCT'de nasıl oynanıyor:** Sova pro meta'da standard initiator, Fade ile alternatif. Jett vs Sova matchup'ı pro seviyede Sova lineup disiplinine bağlı — pro Sova oyuncuları 20+ lineup bilir, aynı lineup iki round üst üste kullanılmaz. Jett tarafı round-to-round dart lokasyonunu öğrenir ve bypass eder. Pro seviyede matchup dengelidir ama map'e göre ağırlık değişir.
+**Kırılma 2 — Updraft dart dışına çıktı:** Updraft ile dart tarama alanının dışına çıkarsan Sova kör kalır, serbest hareket edersin.
 
-**Meta tier durumu:** Jett S tier, Sova S tier. Head-to-head pro seviyede dengede, Sova dart-heavy map'lerde hafif avantajlı, Jett close range map'lerde avantajlı.
+**Kırılma 3 — Shock dart tam iniş noktasına denk geldi:** Hep aynı noktaya indiysen shock dart kesin hasar verir. HP düşer, matchup Sova'ya kayar.
 
-**** Sova shock dart damage'ı Jett'i tek atışta kaçış HP'si kalmayan hatta düşürüyor mu? Patch notlarına göre damage ayarlanmış olabilir.
+**Kırılma 4 — Hunter's Fury pozisyonu okudu:** Ult agresif hattını biliyorsa dash ile bile tam çıkış zor. Post-plant pozisyonunu önceden değiştir.
 
-**** Hunter's Fury shot sayısı ve cooldown patch 9.x'te güncellendi mi?
+## 7. Koç Notu
 
-**Coach test:** "Sova Jett'in dash hattını öğrenir. Jett Sova'nın dart lineup'larını öğrenir. Matchup round-to-round öğrenmeye bağlı. Kim daha hızlı adapt ederse round onun."
+Sova seni bir kez bulduğunda takımına söyler. Takım gelir. Sen ölürsün. Bu matchup'ta ölümlerin büyük çoğunluğu dart bilgisinden gelir, dart hasarından değil.
+
+Jett olarak: her roundda farklı bir yerden gir, farklı bir yere in, farklı bir noktada dur. Sova'nın lineup'ları sana değil, senin alışkanlıklarına karşı çalışır.
+
+Sova olarak: dart attıktan sonra bilgiyi hemen takıma ver ve kendin de hareket et. 1 düşman düşmeden önce Jett konum değiştirir — dart attın mı hemen bask.

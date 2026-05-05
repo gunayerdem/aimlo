@@ -9,105 +9,117 @@ tags: [matchup, viper, killjoy, controller_vs_sentinel]
 
 ## 1. Matchup Özü
 
-Viper ve Killjoy cross-role ama aynı amaç için iki farklı araçla çalışır: alan reddetme. Viper wall ve Snake Bite ile alanı zehirler + görüşü keser, Killjoy turret ve nanoswarm ile alanı damage + info ile kilitler. Viper saldırı-tarafında proaktif alan kontrolü kurar, Killjoy savunma-tarafında pasif alan kontrolü kurar. İki karakter aynı takımda sinerji — Viper A site execute, Killjoy B site savunma. Karşı takımda ise Viper saldırı ekonomisini Killjoy savunma ekonomisi ile okur. Pro okuma: Viper fuel ekonomisi, Killjoy cihaz ekonomisi. İki karakter round içinde farklı rollere oturur ama farklı fazlarda kesişirler — saldırı execute'unda Viper kurar, savunma retake'inde Killjoy kilitler.
+İkisi de alanı kapatır — ama farklı şekilde. Viper duvarı ve bulutu ile görüşü keser, zehir ile zararı verir. Killjoy ise kuleyi ve alarmı ile seni duyar, nanoswarm ile yakar. Viper saldırıda önce hareket eder, Killjoy savunmada seni bekler. Aynı takımdaysanız biri bir bölgeyi kapar, öteki diğerini kilitler. Karşı takımdaysanız hangi fazda olduğuna bak: saldırı fazı Viper'ın, savunma fazı Killjoy'un.
 
 ## 2. Kim Avantajlı?
 
-Bu bir cross-role matchup olduğu için "avantaj" karaktere göre değil map ve round fazına göre ölçülür. Saldırı fazında Viper avantajlı (execute utility damage + görüş kesme). Savunma fazında Killjoy avantajlı (lockdown ekonomisi retake çevirici). İki karakter aynı takımda karşılaştıklarında sinerji: Viper + Killjoy double controller/sentinel comp'u Icebox ve Breeze meta'sının omurgası. Karşı takımda karşılaştıklarında Viper'ın saldırısı Killjoy'un savunmasını zorlar, Killjoy'un savunması Viper'ın post-plantını zorlar. Harita dağılımı: Breeze/Icebox Viper attack + Killjoy defense klasik meta. Haven/Lotus Killjoy defense için, Fracture Viper için. Comp seçimi iki karakteri tamamlayıcı görür, alternatif değil.
+Haritaya ve fazına göre değişir.
+
+- **Saldırıda** Viper avantajlı: duvar görüşü keser, zehir kuruluştan sonra defusu durdurur.
+- **Savunmada** Killjoy avantajlı: kule bilgi verir, nanoswarm geçişi yakar, ult tek başına retake kazandırır.
+- **Aynı takımdaysan:** ikisini farklı bölgelere yay. Viper A'yı kapar, Killjoy B'yi kilitler — bu kombinasyon Breeze ve Icebox'ta standarttır.
+- **Karşı takımdaysan:** Viper saldırıda ne yaptı, Killjoy savunmada ne yaptı — ikisini ayrı ayrı ölç, aynı fazda kıyaslama.
 
 ## 3. Key Düellolar
 
-**IF** Viper A site için wall + cloud + Snake Bite execute, Killjoy A site anchor
-**MEANING** Viper execute Killjoy anchor pozisyonunu kaplayabilir, Killjoy site içinde kapalı
-**COUNTER** Killjoy utility'sini Viper wall dışına — turret Viper wall'un arkasında olmalı. Killjoy anchor pozisyonu wall dışında rotate için
-**WHY** Viper wall Killjoy'un görüşünü keser, turret alanı kısıtlar. Killjoy Viper wall içinde duruyorsa savunması Viper ekonomisine bağlanır. Dışarıda kalırsa rotate + lockdown ekonomisi korunur.
+**IF** Viper A'ya duvar + bulut + zehir ile giriyor, Killjoy A'da bekliyor
+**MEANING** Viper'ın duvarı Killjoy'un kulesinin görüşünü kapatır — kule kör, bilgi gelmiyor
+**COUNTER** Killjoy olarak kuleyi Viper duvarının arkasına koyma. Duvarın dışında bir açıya yerleştir — duvar düştüğünde kule devreye girer, sen de zaten rotate için dışarıdasın
+**WHY** Duvarın içinde kalan kule Viper'ın işine yarar, senin değil. Dışarıdaki kule duvar düşünce saldırıyı yakalar.
 
 ---
 
-**IF** Killjoy turret Viper Snake Bite alanında
-**MEANING** Turret cihaz HP'si Snake Bite damage'ına karşı uzun süre ayakta kalamaz, cihaz yanar
-**COUNTER** Killjoy turret'ı Snake Bite lineup alanlarının dışına yerleştirmeli. Viper Snake Bite lineup'ları bilinir, turret bu alanların dışında
-**WHY** Snake Bite area damage cihaz HP'si için destek. Turret Viper utility'sine bağımlı değil, Viper utility turret'e bağımlı (wall içinde turret kör).
+**IF** Killjoy kulesini Viper'ın zehir attığı alana koydu
+**MEANING** Zehir cihaz canını hızla eritir — kule zehir bölgesine girince yanar
+**COUNTER** Zehir hangi köşelere düşüyor bil. Kuleyi o alanların dışına koy. Zehir bölgelerini ezberle, kuleyi hiç o tarafa sürme
+**WHY** Kule zehire karşı dayanmaz. Yanlış yere koyarsan hem kuleyi hem bilgiyi kaybedersin.
 
 ---
 
-**IF** Viper Snake Bite post-plant, Killjoy Lockdown ult hazır
-**MEANING** Viper saldırı tarafında defuse engel, Killjoy retake tarafında detain uygular. İki ult aynı fazda (post-plant/retake) etkin
-**COUNTER** Savunma retake Lockdown'ı aktive eder, Snake Bite alanı içinde detain'li olursa Snake Bite'tan kaçamaz — ult çakışması Viper lehine
-**WHY** İki ult/utility sinerjisi kombinasyon — Snake Bite hareket kısıtlı hedefe daha ezici. Viper post-plant Snake Bite Killjoy ult alanıyla kesişirse detained oyuncular Snake Bite damage altında ölür.
+**IF** Viper spike kurulduktan sonra zehir ile defusu engelliyor, Killjoy ult'u hazır
+**MEANING** İkisi aynı anda devreye girerse — ult ile etkisiz kalan oyuncu zehirin içinde sıkışır, çıkamaz, ölür
+**COUNTER** Viper zehir alanı ile Killjoy ult alanını üst üste getir. Etkisiz kalan düşman zehirden kaçamaz — her ikisi de aynı anda basar
+**WHY** Ult hareketi kısıtlar, zehir zarar verir. İkisi ayrı ayrı atlatılabilir, üst üste gelince çıkış yok.
 
 ---
 
-**IF** Killjoy alarmbot flank hattında, Viper fuel yoksa
-**MEANING** Viper fuel sıfır → Viper wall kuramaz → rotate hattı cover yok → alarmbot flank hattını alır
-**COUNTER** Viper fuel'ini round boyu parçalı yönet. Killjoy alarmbot karşı flank hattında ise Viper wall alarmbot önüne çekilmeli, ses gizlemek için
-**WHY** Viper fuel ekonomisi round-boyu planlama. Killjoy utility'si round içi sabit. Viper fuel yanarken Killjoy utility ayakta.
+**IF** Killjoy'un alarmı flank hattında, Viper duvarını sürekli açık tutuyor ve yakıt bitiyor
+**MEANING** Yakıt sıfıra gelince duvar düşer — flank hattında kapak kalmaz, alarm da sesi zaten yakalar
+**COUNTER** Yakıtı parçalı kullan: duvarı sürekli açık bırakma, ihtiyaç anında aç. Killjoy'un alarmı flank tarafındaysa duvarı alarm önüne çek — geçen düşman alarmı tetikler, sen de duyarsın
+**WHY** Killjoy'un alarmı round boyunca orada durur. Senin yakıtın biter. Yakıt bitti mi alarm tek başına çalışmaya devam eder, sen boşta kalırsın.
 
 ---
 
-**IF** Viper ult (Viper's Pit) aktive, Killjoy turret Pit dışında
-**MEANING** Viper Pit içinde hakim, Killjoy turret Pit dışında beklemekte — iki alan farklı kontroller altında
-**COUNTER** Killjoy turret Pit sınırını izler. Pit içinden çıkan Viper takımı oyuncusunu turret shot. Pit dışında Killjoy hakim
-**WHY** Viper Pit içi avantaj, dışı dezavantaj. Turret Pit sınırı için ideal yakalayıcı. İki karakter aynı takımda sinerji çok güçlü.
+**IF** Viper ult'u (Viper's Pit) aktif, Killjoy kulesi pit'in dışında
+**MEANING** Pit içi Viper'ın kontrolünde, pit dışı Killjoy'un kulesinin kontrolünde — iki ayrı ölüm bölgesi
+**COUNTER** Aynı takımdaysan kuleyi pit sınırına koy — pit'ten çıkan düşmanı kule yakalar. Karşı takımdaysan pit'in içine girme, kule seni dışarıda bekler
+**WHY** Pit'ten çıkış tek yol. Kule orada durursa çıkan ölür.
 
 ---
 
-**IF** Killjoy nanoswarm Viper wall çizgisine yerleşti
-**MEANING** Wall + nanoswarm kombosu — saldırı wall içinden geçerken nanoswarm damage alır
-**COUNTER** Saldırı wall alanı içinde nanoswarm lineup'larını bilmelidir. Wall çizgisi Killjoy lineup'ı için kullanılır
-**WHY** Killjoy nanoswarm lineup'ı Viper wall ile birleşir. İki utility aynı takımda çarpan etki. Karşı takımda Viper tarafı wall yerleşimini Killjoy lineup'larından korumalı.
+**IF** Killjoy nanoswarm'ını Viper duvarı boyunca yerleştirdi
+**MEANING** Duvardan geçen düşman hem görüşsüz hem zehirli bölgeye giriyor — nanoswarm aktive olursa geçiş öldürücü
+**COUNTER** Aynı takımdaysan nanoswarm'ı duvar çizgisine göm — saldırı geçişte yanar. Karşı takımdaysan duvardan geçmeden önce nanoswarm sesini dinle, aktifse dur
+**WHY** Duvar görüşü keser, nanoswarm geçişi cezalandırır. İkisi aynı anda gelince saldırı durur.
 
 ---
 
-**IF** Viper Cloud rotate hattında, Killjoy alarmbot aynı hatta
-**MEANING** Cloud görüş engeli, alarmbot ses tetikli — saldırı cloud içinde alarmbot tetikler, info + concussive
-**COUNTER** İki utility aynı takımda sinerji ideal — görüş engeli ve info çift katman. Karşı takımda Viper cloud alarmbot'u örtebilir ama alarmbot ses tetikli çalışmaya devam eder
-**WHY** Alarmbot görüş bağımsız, ses tetikli. Cloud sadece görüş keser. Cloud alarmbot'un sesini engellemez — alarmbot tetiklenmeye devam eder.
+**IF** Viper bulutu ve Killjoy alarmı aynı geçiş hattında
+**MEANING** Bulut görüşü keser ama alarm ses ile çalışır — bulutun içinden geçsen de alarm seni yakalar
+**COUNTER** Aynı takımdaysan bu ikili kesintisiz çalışır: düşman ne görür ne duyar, ama alarm onu yakalar. Karşı takımdaysan buluta girme, alarm hâlâ aktif
+**WHY** Alarm görüşe bağlı değil. Bulut sadece gözü kapatır, alarmı susturmaz.
 
-## 4. Utility Takası
+## 4. Beceri Takası
 
-Viper utility: Snake Bite (molly), Poison Cloud (cloud), Toxic Screen (wall), Viper's Pit (ult). Killjoy utility: Turret, Alarmbot, Nanoswarm (x2), Lockdown (ult). Karşılaştırma cross-role, doğrudan aynı işlev kıyaslanamaz. Bu yüzden fonksiyon bazlı bakılır: Görüş engeli — Viper (wall + cloud), Killjoy yok. Bu kategori Viper lehine. Info — Viper yok, Killjoy (turret + alarmbot). Info kategorisi Killjoy lehine. Damage — iki karakter de var. Viper Snake Bite, Killjoy nanoswarm. İki damage zone benzer işlev. Area denial — iki karakter de var. Viper Pit ult, Killjoy Lockdown ult. İki ult farklı fonksiyon.
+| İşlev | Viper | Killjoy |
+|---|---|---|
+| Görüş kesme | Duvar + Bulut | Yok |
+| Bilgi | Yok | Kule + Alarm |
+| Alan yakma | Zehir | Nanoswarm |
+| Ult | Pit (alan kontrolü) | Lockdown (etkisiz bırakma) |
 
-Ekonomi: Viper fuel tabanlı round-boyu, Killjoy cihaz tabanlı kalıcı. İki ekonomi farklı. Viper fuel tüketilir, Killjoy cihaz kırılabilir ama round-to-round yenilenir. Takas sonucu: iki karakter aynı takımda ezici sinerji. Karşı takımda iki karakter farklı round fazlarında hakim — Viper attack, Killjoy defense.
+Viper'ın yakıtı biter — round boyunca dikkatli kullanmazsan duvar düşer. Killjoy'un cihazları kırılır ama her round başında yeniden kurarsın. Aynı takımdaysan: Viper görüşü keser, Killjoy bilgi alır — bu iki işlev birbirini tamamlar, çakışmaz. Çakışma şu olur: duvar Killjoy'un kulesinin görüşünü kapatır, nanoswarm bulut içinde değersizleşir. Bunu önlemek için ikisini ayrı bölgelere yay.
 
-## 5. Map Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
-**Breeze:** İki karakter de meta. Viper + Killjoy comp Breeze'de klasik ikili. Aynı takımda sinerji.
+**Breeze:** İkisini birlikte oyna. Breeze'de bu ikili birbirini tamamlar.
 
-**Icebox:** İki karakter de meta. Icebox'ın comp omurgası Viper + Killjoy.
+**Icebox:** Aynı şekilde. Icebox'ın bel kemiği bu ikili.
 
-**Fracture:** Viper meta. Killjoy Fracture'da ikinci tercih (Cypher öncelikli olabilir).
+**Fracture:** Viper oyna. Killjoy Fracture'da ikinci tercih — Cypher kapıları daha iyi tutar.
 
-**Haven:** Killjoy meta. Viper Haven'da double controller için ikincil.
+**Haven:** Killjoy oyna. Viper Haven'da ikinci kontrolcü olarak girer, tek başına yeterli değil.
 
-**Lotus:** Killjoy meta. Viper Lotus'ta double controller.
+**Lotus:** Killjoy oyna. Viper Lotus'ta ikinci kontrolcü rolünde.
 
-**Split:** Killjoy meta. Viper Split'te nadir.
+**Split:** Killjoy oyna. Viper Split'te işe yaramaz.
 
-**Sunset:** Killjoy meta. Viper Sunset'te nadir.
+**Sunset:** Killjoy oyna. Viper Sunset'te işe yaramaz.
 
-**Bind:** Nötr. İki karakter de Bind'de oynanır.
+**Bind:** İkisi de oynanır.
 
-**Ascent:** Killjoy meta. Viper Ascent'ta pick dışı.
+**Ascent:** Killjoy oyna. Viper Ascent'te işe yaramaz.
 
-**Pearl:** Nötr. İki karakter de Pearl'de oynanır.
+**Pearl:** İkisi de oynanır.
 
-**Abyss:** Nötr.
+**Abyss:** İkisi de oynanır.
 
-## 6. Flip Moment'ler
+## 6. Kritik Dönüm Noktaları
 
-1. **Viper execute Killjoy anchor'ı aştığında.** A site execute Viper wall ile Killjoy'un turret info'sunu keser. Killjoy turret görüş alanı dışında, saldırı site içine girer.
+1. **Viper duvarı Killjoy kulesini kör bıraktığında.** Saldırı içeri girdi, kule görmüyor — Killjoy bilgisiz, site düştü. Bunu önlemek için kuleyi duvarın dışına koy.
 
-2. **Killjoy Lockdown retake Viper post-plant ile.** Post-plant Snake Bite alanı + Lockdown detain = defuse imkansız. Bu sinerji aynı takımda flip, karşı takımda iki round fazı çakışması.
+2. **Ult + zehir aynı anda basıldığında.** Etkisiz kalan düşman zehirden kaçamaz. Spike kurulduktan sonra ikisini aynı alana bas — defuse imkansız.
 
-3. **Viper fuel sıfır savunma round'u.** Viper savunma'da fuel kırıksa wall ekonomisi yok, Killjoy lockdown tek başına savunma. Bu asimetri round'un dengeyi kırar.
+3. **Viper'ın yakıtı savunma ortasında bittiğinde.** Duvar düştü, flank açıldı, Killjoy tek başına savunuyor. Yakıtı parçalı kullan — bu an gelmesin.
 
-4. **Comp seçim kararı.** Aynı takımda sinerji ideal, karşı takımda iki round fazı analizi gerekir. Comp seçim pre-round flip.
+4. **Takım seçimi kararında.** Aynı takımda ikisini al ama farklı bölgelere yay. Aynı siteye yığma — beceriler çakışır, ikisi de değersizleşir.
 
-5. **Pit ult + turret sinerjisi.** Viper Pit içinde, Killjoy turret Pit dışında — iki alan farklı kontroller. Karşı takımda Pit ve turret iki ayrı ölüm bölgesi.
+5. **Pit + kule sınırında.** Pit içi Viper'ın, dışı kulenin. Pit'ten çıkan düşman kuleye yakalanır — kuleyi pit kapısına koy.
 
-## 7. Pro Coach Notları
+## 7. Koç Notları
 
-Pro sahnede Viper + Killjoy comp'u Breeze ve Icebox meta'nın temel kurucusu. Aynı takımda sinerji ideal. Karşı takımda nadir karşılaştırma çünkü her iki karakter de meta comp'larda birlikte bulunur. Koçluk ipucu: Viper oyuncusu Killjoy turret yerleşimini round başı okumalı, Viper wall turret alanını kaplamamalı (aynı takımda). Killjoy oyuncusu Viper Snake Bite lineup'larını bilmeli, turret lineup alanlarından uzakta (aynı takımda).
+Viper oynuyorsan: Killjoy'un kulesini round başında bul. Duvarını kule görüş alanını kapatacak şekilde çekme — aynı takımdaysan bu senin hatan. Zehir attığın köşeleri belirle, kule oralarda değil.
 
-Yaygın pro hata: Viper + Killjoy aynı takımda olduğunda utility çakışması — wall turret görüşünü keser, nanoswarm cloud içinde değersiz. Doğru: iki karakter utility'leri farklı sitelere ve alanlara yayılır. İkinci hata: Karşı takımda iki karakteri aynı fazda karşılaştırmak. Doğru: Viper saldırı fazında ölç, Killjoy savunma fazında ölç.
+Killjoy oynuyorsan: Viper'ın zehir attığı yerleri ezberle. Kuleyi o alanlara koyma — yanar, bilgi gelmiyor, iki şeyi birden kaybedersin. Viper duvar çektiğinde kule duvarın dışında kalsın — duvar düşünce kule devreye girsin.
+
+Aynı takımda ikisini oynarken becerilerini farklı bölgelere yay, asla üst üste bindirme. Viper A'yı kurar, Killjoy B'yi kilitler — her bölge ayrı bir tehdit. Karşı takımda ise Viper saldırıda ne yaptı onu ölç, Killjoy savunmada ne yaptı onu ölç. İkisini aynı fazda kıyaslama, yanılırsın.

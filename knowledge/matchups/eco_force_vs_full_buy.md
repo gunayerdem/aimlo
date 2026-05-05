@@ -9,115 +9,119 @@ tags: [matchup, economy, eco, force-buy, full-buy]
 
 ## 1. Matchup Özü
 
-Eco round (pistol + light shield veya Sheriff + half shield, 0-2400 kredi ekonomisi) savunma amaçlı tasarruf round'u; force-buy (Spectre/Bulldog + full shield, 2500-3500 kredi) ekonomiyi riske atan round; full buy (Vandal/Phantom + full shield + full utility, 3900+ kredi) standard silah round'u. Matchup ekonomik dezavantajlı tarafın full buy karşısında kill ekonomisiyle ne tür değer üretebileceğine bağlı — eco takımı silah drop hedefler, full buy takımı eco takımından angle disiplini ister.
+Eco roundda (tabanca + hafif zırh, 0–2400 kredi) amacın tek bir şey: karşı tarafın silahını almak ya da bir sonraki round için para saklamak. Force-buy (Spectre/Bulldog + tam zırh, 2500–3500 kredi) parayı riske atıyorsun — kazanmazsan ekonomi üç round çöker. Full buy (Vandal/Phantom + tam zırh + util, 3900+ kredi) standart round. Eco taraftaysan açıyı satma, silahı kap. Full buy taraftaysan açı hatası yapma, eco'yu hafife alma.
 
 ## 2. Hangi Taraf Avantajlı
 
 **Eco/Force lehine:**
-- Eco takımı stack angle'da bekliyorsa (Sheriff crossfire) — full buy oyuncusu açılır açmaz double shot yakalar
-- Map yakın mesafe ağırlıklı (Bind, Split) — pistol ve Spectre yakın mesafede Vandal ile takas alır
-- Full buy takımı eco'yu hafife alıp dry peek atıyorsa — eco crossfire bedava kill hediyesi alır
-- Savunma tarafında ve eco takımı 5 oyuncu bir angle stack ediyorsa — full buy push tek site'ta 5 silah ile yüzleşir
-- Force round sonrası silah drop ekonomisi kazanıldıysa — eco tarafı Vandal ile round sonu karlı
+- Sheriff crossfire'da bekliyorsun, düşman kör açılırsa iki mermi yeter
+- Harita dar ve yakın mesafe (Bind, Split) — Spectre orada Vandal'a takas alır
+- Full buy kuru açılırsa eco crossfire bedava kill alır
+- Tüm takım tek açıda yığıldıysa full buy push o açıda 5 silahla yüzleşir
+- Eco round kazandıysan ve silah aldıysan — bir sonraki roundda yarı dolu ekonomiyle çıkıyorsun
 
 **Full buy lehine:**
-- Map açık angle'lı ve uzun mesafe ağırlıklı (Breeze, Icebox) — Vandal/Phantom Sheriff ve Spectre'a karşı mesafe avantajlı
-- Full buy utility ekonomisi tam ve eco takımı utility'siz — utility baskısı eco angle'ını kırar
-- Full buy tarafı post-plant ekonomisi güçlü (molly + smoke) — eco defuse angle'ı için silah yetersiz
-- Eco tarafı aggressive peek atıyorsa — full buy pre-aim ile tek shot alır
-- Ult ekonomisi farkı full buy lehine — eco round'da ult harcanırsa yaş heba
+- Harita açık ve uzun mesafe (Breeze, Icebox) — Vandal/Phantom Sheriff ve Spectre'yi menzil dışında bırakır
+- Eco tarafının util'i yok, senin util'in tam — smoke + molly ile açıyı patlatırsın
+- Post-plant'te molly + smoke varsa eco defuse için gerekli açıya giremez
+- Eco tarafı kör açılırsa full buy pre-aim ile tek vurur
+- Ult farkın varsa — eco tarafı ult harcayamaz, harcasa kaybeder
 
 ## 3. Key Düellolar
 
-**IF** Eco takımı 5 oyuncu tek angle stack etti, full buy push başlattı
-**MEANING** Full buy 5 silahın stack fire'ına giriyor, ilk entry oyuncusu üç Sheriff/Spectre mermisi yer
-**COUNTER** Full buy utility baskısı ile stack'i bozar — molly + smoke angle'a attırılır, stack dağılır. Flash pop sonrası entry tek tek angle'a girer
-**WHY** Eco tarafının tek kaynağı silah yığılması. Utility ile stack kırılırsa eco avantajı silinir, 5 ayrı oyuncu tek tek Vandal kaşısında zayıf.
+**IF** Eco takım 5 kişi tek açıda yığıldı, full buy push başladı
+**MEANING** Full buy'ın ilk gireni 5 silahın ateşine giriyor, çıkmaz
+**COUNTER** Molly + smoke o açıya at, yığılmayı dağıt, flash'tan sonra tek tek gir
+**WHY** Eco tarafının tek silahı yığılma. Util ile dağıtırsan her biri tek başına Vandal karşısında zayıf.
 
 ---
 
-**IF** Full buy dry peek attı, eco Sheriff angle'dan tag aldı
-**MEANING** Full buy angle disiplini hatası, Sheriff 2-tap Vandal/Phantom'dan önce kill alıyor
-**COUNTER** Full buy dry peek yerine utility peek — flash pop + angle commit. Sheriff 2-tap flash'lı oyuncuya ulaşamaz
-**WHY** Sheriff headshot damage'ı Vandal'dan az değil, fark menzilde. Yakın-orta mesafede Sheriff Vandal'a denk. Full buy angle'ı Sheriff mesafesine sokarsa ekonomik avantajını kaybeder.
+**IF** Full buy kuru açıldı, eco Sheriff açıdan tag attı
+**MEANING** Sheriff yakın-orta mesafede Vandal kadar öldürür, fark menzilde
+**COUNTER** Kuru açılma — flash at, arkasından gir. Sheriff flash'lı hedefe iki vuranda yetemez
+**WHY** Full buy açıyı Sheriff menzilinin içine sokarsa ekonomik avantajını çöpe atar.
 
 ---
 
-**IF** Eco force-buy round'u Spectre + light shield ile
-**MEANING** Spectre yakın mesafe high fire rate, full buy Phantom ile orta mesafe. Yakın mesafede Spectre avantajlı
-**COUNTER** Full buy Spectre angle'ından uzak tutulmalı, mesafe korunur. Phantom orta mesafede headshot ekonomisi ile Spectre'yi geçer
-**WHY** Spectre'nin değeri yakın mesafe fire rate'inde. Full buy Spectre ile aynı mesafeye girerse kaybeder, mesafe farkını korursa kazanır.
+**IF** Force-buy round'da Spectre + tam zırh var
+**MEANING** Spectre yakın mesafede Phantom'a takas alır — ateş hızı üstün
+**COUNTER** Spectre'yi uzak tut, mesafeyi koru. Phantom orta mesafede kafa darbesiyle Spectre'yi geçer
+**WHY** Spectre'nin değeri yakın mesafede. Full buy aynı mesafeye girerse kaybeder.
 
 ---
 
-**IF** Full buy post-plant'te molly + smoke ekonomisi var, eco defuse angle'ına gidiyor
-**MEANING** Eco defuse için angle'a girmeli, molly angle'ı kapatır, smoke sightline'ı keser
-**COUNTER** Eco defuse yerine fake defuse + reposition. Full buy molly ekonomisi boşa gider
-**WHY** Post-plant full buy'ın güç bölgesi. Eco'nun defuse için silah değil, utility gerek — utility yoksa defuse riskli. Eco tarafı defuse yerine round'u kill ile çözmeye çalışmalı.
+**IF** Full buy post-plant'te molly + smoke var, eco defuse açısına gidiyor
+**MEANING** Eco defuse için o açıya girmeli — molly açıyı kapatır, smoke görüş hattını keser
+**COUNTER** Fake defuse yap, pozisyon değiştir. Onların util boşa gider
+**WHY** Post-plant full buy'ın evi. Eco util'siz defuse atmak intihardır — o roundu kill ile çözmeye bak.
 
 ---
 
-**IF** Eco takımı silah drop ekonomisi ile round 4'te yarı-force
-**MEANING** Round 3'te eco kazandıysa round 4'te silah ekonomisi yarı-full, full buy takımı hala farkında değil
-**COUNTER** Full buy takımı round 4 başı eco takımının ekonomi durumunu hesaplamalı, silah ekonomisi tahmin edilir. Full buy angle disiplini korunur
-**WHY** Eco round kazancı ekonomik olarak katlanır — kazanılan eco round sonraki round'un full buy'ı demektir. Full buy tarafı eco'yu "kaybedilmiş round" olarak görmemeli.
+**IF** Eco round kazandın, silah aldın, bir sonraki round başlıyor
+**MEANING** Bir sonraki roundda elin yarı-full buy gibi — karşı takım ekonomini eksik okur
+**COUNTER** Full buy taraftaysan bir sonraki round rakibin ekonomisini say. Silah aldılarsa kuru açılma
+**WHY** Kazanılan eco round bir sonraki roundun yarı-full buy'ı demek. "Eco kaybettik, tamam" diyorsan bir adım geride düşünüyorsun.
 
 ---
 
-**IF** Full buy ult ekonomisi hazır, eco ult ekonomisi sınırlı
-**MEANING** Full buy round çevirici ult ile eco'yu ezer, eco ult harcayamaz (heba olur)
-**COUNTER** Eco tarafı ult'u saklamalı, full buy ult'undan kaçınır (smoke, reposition). Ult ekonomisi sonraki round için
-**WHY** Ult ekonomisi round üstü hesaplanır. Eco round'da ult harcamak ekonomiyi iki kat batırır — hem round kayıp hem ult cooldown. Full buy round'u eco round'a yatırılmaz.
+**IF** Full buy ult'u hazır, eco ult'u yok ya da çok az
+**MEANING** Full buy round çevirici ult ile eco'yu eker
+**COUNTER** Eco taraftaysan ult'u saklıyorsun — smoke + pozisyon değişimle ult'tan uzak dur. Ult'u bir sonraki ronde taşı
+**WHY** Eco roundda ult harcamak çift kayıp — hem round hem ult gider. Bir sonraki round için sakla.
 
 ---
 
-**IF** Eco takımı saldırı tarafında, full buy savunma
-**MEANING** Eco entry silahı olmadığı için toplu rush ile site zorlanır, savunma angle disiplini ile 5-0 kazanabilir
-**COUNTER** Eco tarafı saldırıda "eco rush" yerine "info eco" — round bilgi toplamak için, silah drop için. Ekonomi sonraki round'a yatırılır
-**WHY** Eco saldırı ekonomisi savunma ekonomisinden zayıf. Saldırı push'u utility + silah üstünlüğü ister. Eco saldırıda ancak silah drop kazandıysa değer üretir, silah drop için toplu rush değil, disiplinli push.
+**IF** Eco saldırı tarafında, full buy savunma
+**MEANING** Eco saldırıda silah yok, toplu rush site kapanmadan önce dağıtılır
+**COUNTER** O roundu bilgi toplamak için oyna — hangi açı dolu, rotasyon nereden geliyor. Silahı düşürttürmeden bir sonraki ronda taşı
+**WHY** Eco saldırı push'u için util + silah üstünlüğü gerek — ikisi de yoksa zorla girme, bilgi al.
 
-## 4. Utility/Kaynak Takası
+## 4. Silah ve Para Dengesi
 
-Eco round utility'si sıfır ya da yarı-utility (bir smoke + bir flash), full buy round utility'si tam (iki smoke + iki flash + molly + ult). Ekonomik denklem: eco round kredi başına kill ekonomisi hesaplanır — 2400 kredi Sheriff eco'su bir full buy oyuncusu öldürürse 3900+ kredi drop alır, kredi ekonomisi 1,6x. Force-buy round kredi başına ekonomisi 1x, full buy round 0,8x (utility harcaması hesaplı). Bu ekonomik hesap eco round'ların neden "kredi amplifikatörü" olduğunu açıklar — kazanılan eco round ekonomik snowball başlatır. Utility dengesi full buy lehine mutlak: eco tarafı utility'siz round oynar, flash-smoke-molly yok. Bu yüzden eco round'ların kazancı angle disiplini + aim üzerinde kurulu, utility üzerinde değil. Full buy tarafı utility ile eco'yu avlamayı hedefler, eco tarafı utility'siz rifle ekonomisi ile full buy'ı avlamayı hedefler.
+Eco roundda util'in ya sıfır ya yarım (bir smoke, bir flash). Full buy util'i tam. Bunu bilince koru: eco roundda silah değil açı satıyor. Bir Sheriff ile full buy oyuncusunu öldürürsen onun silahını alıyorsun — para olarak bakma, silah olarak bak. O silah bir sonraki roundun full buy'ı.
 
-## 5. Map Bazlı Değişim
+Force-buy karar: force-buy kaybedersen üç round ekonomin çöker. Emin değilsen full eco yap, bir sonraki round için sakla. Sadece şu durumda force-buy yap: takımın çoğunluğu force-buy yapıyor ve harita sana yakın mesafe veriyor.
 
-**Bind (eco lehine):** Yakın mesafe Sheriff ve Spectre için uygun. Eco stack angle Bind Hookah + Showers'da Vandal ekonomisiyle takas alır.
+Eco taraftaysan util'in olmadığını kabul et. Açı disi + aim ile kazanıyorsun, başka yol yok.
 
-**Split (eco lehine):** Dar koridor + yakın mesafe eco silahları için ev sahası. Full buy utility'si Split'te dar koridorda sıkışır.
+## 5. Haritaya Göre Değişim
 
-**Breeze (full buy lehine):** Uzun sightline Sheriff/Spectre'yi menzil dışında bırakır. Eco round Breeze'de savunma tarafında bile zorlanır.
+**Bind (eco lehine):** Hookah ve Showers'da Sheriff ve Spectre işe yarar. Yakın mesafe eco için doğal ev.
 
-**Icebox (full buy lehine):** Uzun sightline + vertical full buy için ideal. Eco round Icebox'ta ancak close angle savunması ile değer üretir.
+**Split (eco lehine):** Dar koridor — Spectre burada Vandal'ı yer. Full buy util dar koridorda sıkışır.
 
-**Ascent (dengeli):** Mid Courier mesafe ağırlıklı, A Short yakın. Eco round site seçimine bağlı.
+**Breeze (full buy lehine):** Uzun sightline Sheriff ve Spectre'yi menzil dışı bırakır. Eco Breeze'de savunmada bile zorlanır.
 
-**Haven (dengeli):** Üç site eco için angle çeşitliliği verir, full buy için utility dağılımı karmaşıktır.
+**Icebox (full buy lehine):** Uzun hat + dikey açılar full buy için ideal. Eco ancak close açı savunmasıyla değer üretir.
 
-**Lotus (eco hafif lehine):** Döner kapı + yakın mesafe eco için uygun angle'lar. A Main close range Sheriff ekonomisi.
+**Ascent (dengeli):** Mid Courier mesafe ağırlıklı, A Short yakın. Eco hangi siteye bastığına göre değişir.
 
-**Sunset (dengeli):** A Main uzun, B Market + Mid yakın. Eco round site seçimi ile değer üretir.
+**Haven (dengeli):** Üç site eco için açı çeşitliliği verir. Full buy util üç siteye dağılmak zorunda.
 
-## 6. Flip Moment'ler
+**Lotus (eco hafif lehine):** Döner kapı + dar girişler — Sheriff ve Spectre için uygun açılar. A Main yakın mesafe.
 
-**Flip 1 — Silah drop ekonomisi:** Eco round kazanıldı ve full buy silah drop edildi → ekonomik snowball başlar. Eco round kaybedildi → ekonomi iki round boyunca battı.
+**Sunset (dengeli):** A Main uzun, B Market ve Mid yakın. Eco hangi siteye yattığına göre değer üretir.
 
-**Flip 2 — Stack disiplini:** Eco tarafı stack'i dağıttıysa eco round kaybedildi. Stack disiplini korundu ise full buy utility ile zorlanır.
+## 6. Dönüm Noktaları
 
-**Flip 3 — Ult harcaması:** Eco tarafı ult harcadıysa iki round ekonomisi battı. Ult saklandıysa sonraki full buy round'unda ult avantajı kazanıldı.
+**Dönüm 1 — Silah aldın mı:** Eco round kazandın ve silah düştü → bir sonraki round ekonomin canlandı. Kazanamadın → para bir daha birikiyor, bir sonraki round full eco devam.
 
-**Flip 4 — Full buy dry peek hatası:** Full buy dry peek attıysa eco round flip olur, Sheriff 2-tap Vandal'a denk. Utility peek yapıldıysa full buy ekonomik avantajı korur.
+**Dönüm 2 — Yığılmayı korudun mu:** Yığılmayı dağıttıysan eco round gitti. Koruduysan full buy util ile zorlanır, trade alırsın.
 
-**Flip 5 — Force-buy karar:** Eco tarafı force-buy yerine full eco seçerse sonraki round için ekonomi saklanır. Force-buy kaybedilirse üç round ekonomi battı.
+**Dönüm 3 — Ult'u harcadın mı:** Eco roundda ult harcadıysan iki round ekonomisi çöktü. Sakladıysan bir sonraki full buy roundunda ult avantajlısın.
 
-## 7. Pro Coach Notları + Sentinels Coach Test
+**Dönüm 4 — Full buy kuru açıldı mı:** Full buy kuru açıldıysa eco flip olur, Sheriff 2-tap ile Vandal düşer. Util peek yapıldıysa full buy avantajını korur.
 
-Pro sahnede eco round yönetimi takım başarısının çekirdeği. Sentinels ve Fnatic gibi takımlar eco round'ları "silah toplama round'u" olarak değil "bilgi toplama round'u" olarak oynuyor — eco round'da bilgi toplanır, sonraki round bilgi kullanılır. Türk pro sahnesinde BBL eco round'larda aggressive Sheriff stack'i kullanıyor, full buy tarafından hafife alınmayı hedefliyor. Pro koçluk açısı: eco round kaybedildiğinde takım moralini bozmak yerine "sonraki round'un silahını hazırladık" yaklaşımı. Eco round kazanıldığında ise "bonus round" yaklaşımı — ekonomik snowball başlatıldı.
+**Dönüm 5 — Force-buy kararı:** Force-buy yerine full eco seçtiysen para birikti. Force-buy kaybettiysen üç round ekonomi çöktü.
 
-Full buy koçluğu: "Full buy round eco karşısında zafer değil, görev. Full buy kaybetmek ekonomik facia, full buy kazanmak beklenen sonuç. Angle disiplini + utility baskısı eco'yu kıran iki araç."
+## 7. Koç Notu
 
-Eco koçluğu: "Eco round silah eksikliği değil, ekonomi yönetimidir. Eco round'da kredi sıfır değil, gelecek round'un yatırımı. Eco round'da ölmek eco round'da yaşamaktan ekonomik olarak eşit, çünkü silah yok — ama bilgi verilmiş olur."
+Eco round kaybettinde "round battı" deme — "bir sonraki roundun silahını değerlendiremedik" de. Eco roundda ölmek ile yaşamak arasındaki fark bilgi vermemek. Ölüyorsun, para yok, ama rakibin nerede durduğunu öğreniyorsun — bir sonraki round o bilgiyle açı kırıyorsun.
 
-**Meta tier durumu:** Eco round ekonomisi patch 9.x'te önceki patch'lere göre daha değerli, çünkü Spectre yakın mesafe TTK Vandal ile eşit. Force-buy round ekonomisi Bulldog nerf'i sonrası düştü. Rank seviyesinde Platinum altı oyuncular her round full buy hedefi koyuyor, bu ekonomi yönetimi değil, credit israfı.
+Eco roundu "silah toplama" değil "bilgi toplama" olarak oyna. Silah gelirse bonus, gelmese bile o roundda rakibin rotasyonunu, açısını, util sırasını gördün — bir sonraki round o açıya göre gir.
 
-**Sentinels Coach Test:** "Eco round round değil, yatırımdır. Full buy round round değil, harcamadır. Matchup'ta hangi taraf ekonomisini doğru zamanda kullanırsa kazanır — eco round kazanıldıysa sonraki full buy'ı haketti, full buy round kaybedildiyse bir sonraki eco round'u pahalıya mal oldu. Ekonomi round ölçeğinde değil, yarı ölçeğinde hesaplanır."
+Full buy taraftaysan: eco round kazanmak beklenen sonuç, kaybetmek ekonomik felaket. Açı disi + util baskısı — bu ikisi olmadan full buy eco'ya takılır.
+
+Eco taraftaysan: o roundun amacını netleştir — silah mı alıyorsun, yoksa para mı saklıyorsun? İkisi aynı anda olmaz. Kararını round başında ver.
+
+**Patch 9.x notu:** Spectre yakın mesafede Vandal ile aynı vurma sayısında öldürür. Force-buy Bulldog ile daha az değer üretiyorsun — Bulldog yerine Spectre düşün. Her round kasaya bakmadan full buy yapıyorsan ekonomini kendin batırıyorsun.

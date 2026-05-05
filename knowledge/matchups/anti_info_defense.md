@@ -1,46 +1,55 @@
 # MATCHUP: Bilgi Engelleme Savunması
 
-## Etkileşim Kimliği
-Modern Valorant atakları bilgiye bağımlıdır: savunmacılar nerede, site'ta kaç kişi var, rotate geliyor mu? Bilgi engelleme savunması tüm bunları ortadan kaldırır. Bu belirli bir ajan matchup'ı değildir — takımın aktif olarak gizlendiği, yanılttığı ve saldırganın toplamaya çalıştığı her bilgiyi engellediği bir savunma felsefesidir. Çalıştığında saldıranlar site'a bir savunmaciyla mı dört savunmaciyla mı karşılaşacaklarını bilmeden execute eder. Başarısız olduğunda savunma ince yayılır ve kolayca parçalanır.
+## Ne Bu?
+Savunma bilgi keser. Saldıranlar siteye girdiğinde kaç kişiyle karşılaşacaklarını bilmez — 1 mi, 4 mü? Başka siteye geçiş var mı yok mu? Bu bir ajan matchup'ı değil, bir savunma tarzı. Savunmacılar gizlenir, yanıltır, her bilgi kanalını tıkar. Sen saldırandaysan buna çözüm üreteceksin. Savunmadaysan bunu koruyacaksın.
 
 ## Yaygın Cezalandırma Kalıpları
 
-**IF**: Savunmacılar drone ve dart'ın kapsamadığı off-angle'larda oynuyor ve rotate sesleri maskeleniyor veya rotate recon gelmeden yapılıyor
-**MEANING**: Savunma bilgi toplamaya karşı aktif olarak gizleniyor. Sahte yetenek kullanımı (bir site'ta yetenek kullanırken diğer site'i yığma) yanlış okumalar oluşturuyor. Oyuncular standart tarama menzilinin dışında tutarak initiator taramasını atlatıyor.
-**COUNTER**: Alışılmadık açıları kapsayan uzun süreli drone zamanı. Aynı anda birden fazla recon kaynağı (dart + drone + haunt) — hepsinden kaçınmak imkânsız. Eleme mantığı okumaları — burada değilse orada olmalı. Savunmacıları gizlenme zamanı vermek yerine silah kavgası yoluyla pozisyon açmaya zorlayan hızlı harita kontrolü.
-**WHY**: Tek bir bilgi kaynağı anti-bilgi savunmasına karşı yetersizdir — birden fazla kaynak aracılığı ile doğrulama gerekir.
+**IF**: Savunmacılar drone ve dart'ın göremediği alternatif açılarda duruyor, geçiş seslerini maskeliyor ve bilgi gelmeden site değiştiriyor
+**MEANING**: Savunma aktif olarak görünmez oynuyor. Bir sitede yetenek kullanılırken diğer site zaten yığılmış — saldıran yanlış okuma yapıyor. Initiator taraması standart açıları kapsıyor ama bu oyuncular o açılarda değil.
+**COUNTER**:
+- Aynı anda birden fazla bilgi aracı kullan — dart + drone aynı anda. İkisinden birden kaçınmak imkânsız.
+- Tarama sonucunu elemeyle birleştir: burada değilse orada. Tarama temiz çıkınca körce girme, alternatif açıyı düşün.
+- Yetenek beklemeden harita kontrolünü hızlı al — savunmacı yerinden çıkmak zorunda kalır, o anda pozisyonu görürsün.
+**WHY**: Tek bilgi aracı bu savunmaya yetmez. İki farklı kaynaktan doğrulama olmadan girme.
 
-**IF**: Saldıranlar yığılmış site'lara sürekli execute ediyor ve recon'larına güveniyor
-**MEANING**: Tek bir bilgi kaynağına fazla güveniyorlar. Bir dart bir alanın güvenli olduğunu teyit eder — site'in tamamı değil.
-**COUNTER**: Birden fazla bilgi kaynağı birleştirilmeli veya doğrulamak için harita kontrolüne push edilmeli. Tek bir taramaya güvenmek yerine derin harita kontrolü ile teyit et.
-**WHY**: Savunmacılar dart'ın kapsamadığı açılarda gizleniyor — başka açıları da taraman gerekir.
+**IF**: Bir dart veya tarama geldi, site temiz göründü, saldıranlar girdi ve yığınla karşılaştı
+**MEANING**: Tek kaynağa güvendin. Dart bir köşeyi gösterir — sitenin tamamını değil. Savunmacı dart'ın kapsamadığı açıdaydı.
+**COUNTER**:
+- Derin harita kontrolü al, girmeden önce ikinci bir bilgi kaynağı kullan.
+- Tarama temiz çıksa da alternatif açıları elle kapat.
+- Dart'ı dar açıya değil, giriş önüne at — kapsamı geniş tut.
+**WHY**: Savunmacılar dart'ın görmediği açıları ezberler. Sen de o açıları bileceksin.
 
-**IF**: Savunmacılar her raund aynı off-angle'larda gizleniyor ve saldıranlar bu pozisyonları raundlar içinde öğreniyor
-**MEANING**: Anti-bilgi savunması tahmin edilebilir hale geldi. İlk raundlarda çalışan off-angle pozisyonlar artık saldıranların pre-aim listesine girdi. Savunmacı gizlendiğini düşünürken saldıran onu beklemeye başladı.
-**COUNTER**: Off-angle rotasyonu takımla koordine et — her oyuncu raunddan raunda pozisyon değiştirmeli. Aynı oyuncu her raund aynı off-angle'ı tutmamalı. Saldıranların pre-aim örüntüsünü fark edince o pozisyonu bir iki raund boş bırak, sonra geri dön.
-**WHY**: Gizlenme tek seferlik bir araç değildir — tahmin edilebilir hale gelen bir off-angle gizlenme olmaktan çıkar, tuzağa dönüşür.
+**IF**: Savunmacılar her raund aynı alternatif açılarda gizleniyor, saldıranlar birkaç raund sonra o pozisyonları önceden nişan alarak bekliyor
+**MEANING**: Gizlenme deşifre oldu. Saldıranlar artık o açıyı biliyor, seni bekliyor. Gizlenen taraf olduğunu sanıyorsun ama tuzağa giriyorsun.
+**COUNTER**:
+- Her raund pozisyon değiştir — aynı açıyı iki raund üst üste tutma.
+- Takımla koordine et: sahte yetenek kullanımı tek başına işe yaramaz, takım uyumu ister.
+- Saldıranlar o açıyı önceden beklemeye başladıysa bir-iki raund boş bırak, sonra geri dön.
+**WHY**: Alternatif açı tahmin edilebilir oldu mu, gizlenme biter. O pozisyon artık seni öldürür.
 
 ## Tekrarlayan Başarısızlık Ne Anlama Gelir
-**Anti-bilgi savunması** sürekli doğru okunuyorsa, savunmacılar ya her raund aynı off-angle'larda gizleniyor (tahmin edilebilir hale geliyor) ya da aldatmalarını koordine etmekte başarısız oluyor. Fake'ler çalışabilmek için takım uyumu gerektirir.
+**Savunma sürekli okunuyorsa**: ya hep aynı açılarda duruyorsunuz ya da sahte yetenek koordinasyonu yok. Sahtekârlık çalışması için bir oyuncu yanlış sitede yetenek kullanırken diğerleri doğru sitede olmalı — bu rastlantıyla olmaz, iletişim ister.
 
-**Saldıranlar** sürekli yığılmış site'lara execute ediyorsa, tek bir bilgi kaynağına çok fazla güveniyorlar. Push öncesi derin harita kontrolü veya doğrulama için birden fazla bilgi kaynağı birleştirmeli.
+**Saldıranlar sürekli yığınla karşılaşıyorsa**: tek bilgi kaynağına güveniyorlar. Girmeden önce ikinci kaynakla doğrula ya da derin harita kontrolüyle pozisyonu elle aç.
 
 ## AIMLO Ne Demeli
 ### Oyuncu cezalandırılan taraftayken
-**Saldıranlar yığılmış site'lara çarpıyorken**: "Recon'una fazla güveniyorsun. Tek bir tarama site'in temiz olduğu anlamına gelmez — savunmacılar dart'ının kapsamadığı açılarda gizleniyor. Birden fazla bilgi kaynağı kullan veya commit etmeden önce derin harita kontrolüne push et."
+**Saldıranlar yığınla karşılaşıyorken**: "Tek taramaya bakıp giriyorsun. Dart bir köşeyi temizler — siteyi temizlemez. Dart attıktan sonra el kapat, ya da ikinci bilgi aracını aynı anda kullan. Yoksa dart'ın görmediği açıdan ölürsün."
 
-**Anti-bilgi savunması ifşa ediliyorken**: "Gizlenme noktaların tahmin edilebilir hale geliyor. Düşman off-angle'larını özellikle tarıyor. Pozisyonlarını birkaç raundda bir değiştir ve takımınla fake koordine et — bir oyuncunun yanlış site'taki yeteneği aldatmayı satar."
+**Anti-bilgi savunması ifşa ediliyorken**: "Açıların belli oldu. Düşman o açıları özellikle tarıyor. Pozisyonu değiştir ve takımla sahte yetenek koordine et — bir oyuncu boş sitede yetenek kullanırken siz dolu sitede bekleyin."
 
 ### Oyuncu cezalandıran taraftayken
-**Anti-bilgi savunması çalışıyorken**: "Düşman kafası karışık ve okumalarını abartıp commit ediyor. Pozisyonlarını ve yığılma zamanlamalarını değiştirmeye devam et. Bilgi araçları güvenilmez olduğu için tilt oluyorlar."
+**Anti-bilgi savunması çalışıyorken**: "Düşman ne okuyacağını bilemiyor ve körce giriyor. Pozisyon ve sahte yetenek kullanımını raunddan raunda değiştir — tahmin edilebilir olma."
 
-**Saldıranlar aldatmayı aşıyorken**: "Çok katmanlı bilgi toplaman çalışıyor. Farklı açılardan taramaya ve eleme mantığı kullanmaya devam et. Gizlenmelerine izin verme — açığa çıkmaya zorla."
+**Saldıranlar aldatmayı aşıyorken**: "Birden fazla bilgi aracı aynı anda kullanıyorlar, ikisinden birden kaçınamazsın. Pozisyon değiştir, aynı açıda kalma."
 
 ## Rank Modülasyonu
-**LOW**: Hiçbir taraf bilgi savaşını anlamaz. Saldıranlar taramadan push eder, savunmacılar varsayılan pozisyonlarda durur. Bu matchup bu seviyede mevcut değildir.
+**LOW**: Saldıranlar taramadan girer, savunmacılar varsayılan pozisyonlarda durur. Bilgi savaşı yok — alternatif açı tutmak bile bu seviyede fark yaratır. Standart pozisyondan bir adım çık, kapıya değil kapının yanına dur.
 
-**MID**: Saldıranlar tarar ama tek bir bilgi kaynağına güvenirler. Savunmacılar ara sıra off-angle oynar. Saldıranlara birden fazla kaynakla doğrulama, savunmacılara koordineli gizlenme öğret.
+**MID**: Saldıranlar tarar ama tek kaynağa güvenir. Savunmacılar alternatif açı oynar ama takım olarak koordine etmez. İki bilgi aracını aynı anda kullan. Sahte yetenek kullanımını mikrofonda sesli söyle — sormadan yapma.
 
-**HIGH**: Her iki taraf da bilgi oyununu aktif olarak oynar. Meta-oyunu öğret — bilgiyi nasıl fake'lersin, fake'leri nasıl tespit edersin, zamanlama ipuçlarını nasıl kullanırsın.
+**HIGH**: Her iki taraf da bilgi oyununu anlıyor. Hangi yetenek kullanımı seni ele verir, hangi ses site değişimini ifşa eder, hangi sessizlik tuzaktır — bunları bilinçli kur. Her sesi ve hareketi ya bilgi ver ya da yalan söyle diye planla; ikisi arasında rastgele kalma.
 
-**ELITE**: Bilgi savaşı raundun kendisidir. Her pozisyon, her yetenek kullanımı, her ses kasıtlı bir sinyal veya yanıltmacadır. İncelik ve birden fazla raund üzerinden kalıp okumayı öğret.
+**ELITE**: Her yetenek kullanımı, her ses, her pozisyon kasıtlı bir mesaj ya da yalan. Raundlar boyunca düşmanın tekrar ettiği kalıbı belirle — hangi raundda o kalıbı kırar, ne zaman standart açıya döner? Raund başlamadan şunu planla: yetenek envanterini gösterip göstermeyeceğine, hangi sesten kaçınacağına, hangi açıyı sahte tutacağına önceden karar ver.

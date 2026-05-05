@@ -1,61 +1,65 @@
 # EŞLEŞME: Neon vs Trap Oyunu
 
 ## Etkileşim Kimliği
-Neon, Valorant'taki en hızlı ajandır — sprint ve slide mekanikleri diğer tüm karakterlerden hızlı alan kapatmasını sağlar. Trap oyuncuları (Killjoy, Cypher, Deadlock, Vyse) düşmanların normal hızda kuruluma yürümesine güvenirler. Bu eşleşmede Neon'un hızı tuzakları görev yapamadan geçip geçemeyeceğini test eder. Neon, tuzak bazlı savunmayı bir yarışa dönüştürür — ve tuzaklar hıza göre tasarlanmadığı sürece bu yarışı kazanır.
+Neon, sprint ve slide ile sahayı herkesten hızlı geçer. Trap kuran ajanlar (Killjoy, Cypher, Deadlock, Vyse) buna göre tasarlanmamış — düşmanın normal hızda yürüyeceğini varsayarlar. Neon bu varsayımı kırar. Tek katman trap koyarsan, Neon üstünden geçer. Neon duvarı ve stunü kullanmadan sprint ederse, katmanlı kuruluma girer ve ölür.
 
 ## Yaygın Cezalandırma Kalıpları
 
 ### Neon Trap Oyununu Cezalandırırken
 
-**IF**: Neon sprint hızı tripwire'lardan sentinel tepki veremeden geçiyor
-**MEANING**: Trap tetiklenmesi ile sentinel'in hareketi arasındaki pencere çok kısa
-**COUNTER**: Birden fazla trap sırayla dizilmeli — Neon birinden geçebilir ama üçünden geçemez
-**WHY**: Tek katman trap hız karşısında yetersiz kalır
+**IF**: Neon sprint hızıyla tripwire'dan geçiyor, sentinel onu durduramıyor
+**MEANING**: Tek trap tetikleniyor ama Neon içinden çıkmadan dövüşe giriyor — ek katman yok
+**COUNTER**: Trap'leri art arda diz — birini geçer, arkasında hemen ikincisi olsun
+**WHY**: Tek katman hıza yenilir, ard arda dizilince Neon duraksıyor ve ikinci trap'e basıyor
 
-**IF**: Neon nanoswarm bölgelerinden slide ile geçiyor ve minimal hasar alıyor
-**MEANING**: Bölgede geçirilen süre çok kısa olduğu için hasar az
-**COUNTER**: Anlık yüksek hasarlı yetenek araçları (mükemmel zamanlamalı nanoswarm patlaması) kullanılmalı
-**WHY**: Slide ile çıkış süresi normal yürüyüşten çok daha kısa
+**IF**: Neon nanoswarm bölgesinden slide ile geçiyor, hasar almıyor
+**MEANING**: Slide süresince bölgede kalmıyor — hasar birikmesi için yeterli temas yok
+**COUNTER**: Neon slide ile çıkarken nanoswarm'u patlat, girerken değil
+**WHY**: Slide çıkışında Neon yavaşlar — nanoswarm tam o anda patlarsa kaçacak yer kalmaz
 
-**IF**: Neon Relay Bolt ile sentinel'i kendi kurulumunun arkasında stun'luyor
-**MEANING**: Trap tutucu avantajı dezavantaja dönüşüyor
-**COUNTER**: Sentinel, trap'lerden ayrı pozisyonda olmalı ki stun'dan kaçınabilsin
-**WHY**: Stun yiyen sentinel hem ateş edemez hem yetenek aracı kullanamaz
+**IF**: Neon Relay Bolt ile sentinel'i kendi trap'inin arkasında stunluyor
+**MEANING**: Stun yiyen sentinel hem ateş edemez hem util kullanamaz — trap korumasız kalıyor
+**COUNTER**: Sentinel, trap kurulumunun gerisinde değil yanında ya da ayrı bir açıda dur
+**WHY**: Ayrı açıda duran sentinel Relay Bolt'un etkisinden çıkar, trap korunur
 
 ### Trap Oyunu Neon'u Cezalandırırken
 
-**IF**: Birden fazla trap sırayla dizilmiş — Neon üç katman yetenek aracını geçemiyor
-**MEANING**: Hız yoğunluğa karşı yetersiz
-**COUNTER**: Neon ilk katmanı yetenek aracıyla (duvar, stun) temizlemeli, kalanını sprint ile geçmeli
-**WHY**: Katmanlı tuzaklar hızı yoğunlukla yener
+**IF**: Üç katman trap art arda dizilmiş — Neon hepsini geçemiyor
+**MEANING**: Sprint hızı katmanları tek tek aşıyor ama üçüncüsüne ulaşamadan duraksıyor
+**COUNTER**: İlk katmanı duvarla ya da stun ile temizle, kalanını sprint ile geç
+**WHY**: Katmanlı kurulumda sprint tek başına işe yaramaz — önce önünü açmazsan içinde kalırsın
 
-**IF**: Deadlock GravNet Neon'un hızını yere bağlıyor
-**MEANING**: Sprint avantajı tamamen ortadan kalkıyor
-**COUNTER**: Neon GravNet konumlarını öğrenip o açıdan girmekten kaçınmalı
-**WHY**: GravNet özellikle hız bazlı ajanlara karşı tasarlanmıştır
+**IF**: Deadlock GravNet Neon'u yere bağlıyor, sprint durdu
+**MEANING**: Hız avantajı tamamen gitti — Neon normal düşman hızına döndü
+**COUNTER**: GravNet'in atıldığı açıyı öğren — o açıdan girme, yan koridoru dene
+**WHY**: GravNet o açıya girildiğinde tetikleniyor — açıyı değiştirirsen tetiklenme olmaz
 
 ## Tekrarlanan Başarısızlık Ne Anlama Gelir
-**Trap oyuncuları** sürekli Neon tarafından eziliyorsa, trap'leri tek katmanlı ve birbirinden ayrık. Neon'un geçmek için tek bir boşluğa ihtiyacı var. Trap'leri katlamalı ki birini geçmek onu hemen diğerine götürsün.
 
-**Neon** hızına rağmen sürekli trap'lere ölüyorsa, katmanlı kurulumlara sprint ediyor — tek başına hız yetmiyor. İlk katmanı yetenek aracıyla (duvar, stun) temizleyip geri kalanını sprint ile geçmeli.
+**Trap oyuncusu Neon'a sürekli eziliyorsa**: Trap'lerin dağınık ve tek katmanlı. Neon tek bir boşluk bulur geçer. Tripwire, alarmbot, nanoswarm'u üst üste diz — birini geçince hemen diğerine düşsün.
+
+**Neon trap'lere sürekli ölüyorsa**: Hiçbir şey temizlemeden hazır kuruluma sprint ediyorsun. Önce duvarla sightline'ı kapat, stun ile sentinel'i uzaklaştır, sonra sprint et. Util olmadan hız sadece hızlı ölümdür.
 
 ## AIMLO Ne Demeli
 
 ### Oyuncu cezalandırılan taraftayken
-**Trap oyuncusu Neon tarafından eziliyorsa**: "Trap'lerin çok dağılmış — aralarındaki boşluktan sprint ediyor. Yetenek araçlarını katmanla: tripwire, alarmbot, nanoswarm sırayla. Bir trap'ı geçebilir, üçünü geçemez."
 
-**Neon trap'lere ölüyorsa**: "Hiçbir şey temizlemeden hazırlanmış savunmalara sprint ediyorsun. Duvarını kullanarak sightline'ları kapat ve sprint etmeden önce stun ile sentinel'i devre dışı bırak. Yetenek aracı olmadan hız sadece hızlı bir ölümdür."
+**Trap oyuncusu Neon'a eziliyorsa**: "Trap'lerin çok dağınık — aralarındaki boşluktan sprint ediyor. Üst üste diz: tripwire, alarmbot, nanoswarm. Birini geçebilir, üçünü geçemez."
+
+**Neon trap'lere ölüyorsa**: "Önünü açmadan hazır kuruluma giriyorsun. Duvarı koy, stun at, sentinel uzaklaşsın — sonra sprint et. Util'siz hız, hızlı ölümdür."
 
 ### Oyuncu cezalandıran taraftayken
-**Neon trap'leri geçiyorsa**: "Hızın kurulumları anlamsız kılıyor. Tek katman savunmalara sprint etmeye devam et ve tepki veremeden dövüşlere gir."
 
-**Trap oyuncusu Neon'u durduruyorsa**: "Katmanlı savunman onu tam hızda bile yakalıyor. Yetenek araçlarını sırayla yığmaya devam et, yavaşlayacak ya da ölecek."
+**Neon trap'leri geçiyorsa**: "Hızın tek katman kurulumu kesiyor. Sprint etmeye devam et, sentinel tepki veremeden dövüşe gir."
+
+**Trap oyuncusu Neon'u durduruyorsa**: "Katmanlı kurulum tam hızda bile onu durduruyor. Util'leri sırayla yığmaya devam et — ya duraksır ya ölür."
 
 ## Rank Modülasyonu
-**LOW**: Neon trap'lere sprint eder ve ölür. Trap oyuncuları tek trap koyar. Hiçbiri adapte olmaz. Neon'a önce temizlemesini, trap oyuncularına katmanlama öğret.
 
-**MID**: Neon sprint etmeden önce biraz yetenek kullanmaya başlar. Trap oyuncularının işlevsel kurulumları vardır. Neon'a entry öncesi duvar+stun, trap oyuncularına katmanlama öğret.
+**LOW**: Neon her seferinde direkt sprint eder, trap oyuncusu tek trap koyar. İkisi de adapte olmaz. Neon'a şunu söyle: önce temizle sonra gir. Trap oyuncusuna şunu söyle: ard arda diz.
 
-**HIGH**: İki taraf da hız vs. yoğunluk oyununu anlar. Zamanlama öğret — Neon'a ne zaman sprint vs. yürüyüş, trap oyuncularına hızlı hedeflere karşı patlama zamanlaması.
+**MID**: Neon ara sıra util kullanmaya başlar. Trap oyuncusunun kurulumu var ama tek katmanlı. Neon'a söyle: entry öncesi duvar at, stun at, sonra sprint et. Trap oyuncusuna söyle: tripwire, alarmbot, nanoswarm'u üst üste diz.
 
-**ELITE**: Neon'un hızı varsayılır ve trap kurulumları buna göre tasarlanır. Eşleşmede Neon'un trap düzenini anlık okuyup optimal yolu seçmesi belirleyici. Sprint hızında anlık karar vermeyi öğret.
+**HIGH**: Her iki taraf da hız vs. yoğunluk oyununu bilir. Neon'a söyle: 1 düşman düştüğünde sprint et, rotasyon henüz gelmemişse yürü ve önce açı temizle. Trap oyuncusuna söyle: Neon slide ile çıkarken nanoswarm patla, girişte değil.
+
+**ELITE**: Trap kurulumları Neon hızı varsayılarak yapılır. İlk katmanı atlayıp atlamayacağına karar ver — util'siz girersen bu seviyede ölürsün. Trap oyuncusuna söyle: Neon'un slide çıkış noktasına nanoswarm göm, tripwire'ı yan koridora değil direkt sprint hattına koy.

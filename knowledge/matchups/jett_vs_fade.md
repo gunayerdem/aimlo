@@ -11,111 +11,108 @@ tags: [matchup, jett, fade, duelist, initiator]
 
 ## 1. Matchup Özü
 
-Jett dash ile Fade'in prowler + haunt + seize kombosundan kaçmaya çalışan mobility duelist, Fade ise nightmare info ile Jett'in peek hatlarını reveal edip prowler chase ile dash sonrası izoleyi yakalayan fear initiator. Matchup Fade'in chase ekonomisine karşı Jett'in dash yönüne bağlı bir hareket yarışı.
+Fade seni bulmaya çalışır. Sen bulunmamaya çalışırsın. Fade haunt + prowler + seize zinciriyle dash hattını kapıyor. Sen zinciri kırdığında Fade'in utility'si boşa gider, özgürsün. Zincir tam kurulursa — dash cooldown + seize + prowler üstüste — ölürsün. Bu matchup bir info savaşı.
 
 ## 2. Kim Avantajlı?
 
-**Jett lehine durumlar:**
-- Uzun sightline map'lerinde (Breeze, Icebox) — Fade prowler close-mid range chase, Jett Op uzak angle'da Fade'in chase'ini yakalamasından önce bitirir
-- Fade ult cooldown'dayken — Nightfall olmadan Fade'in area fear yok, Jett aggressive round kazanır
-- Jett vertical map'lerde (Split A Main, Icebox Rafters) — updraft prowler'ın ground chase hattını atlar
-- Fade utility harcanmışken — Jett dash'le info gelmeden angle'da
+**Jett lehine:**
+- Uzun sightline'da (Breeze, Icebox) — Fade prowler yakın-orta mesafe chase eder, Op'la önce bitirirsin
+- Fade utility harcanmışken — haunt + seize + prowler yoksa aggressive round kazan
+- Vertical çıkışın varsa (Split A Main, Icebox Rafters) — updraft prowler'ın ground hattını atlar
 
-**Fade lehine durumlar:**
-- Close-range site'larda (Bind, Sunset, Fracture) — prowler close range chase Jett'in dash dönüşünü yakalar
-- Jett dash cooldown'dayken — Fade haunt ile Jett'i reveal, seize ile immobilize, dashsiz Jett kaçamaz
-- Fade haunt Jett'in aggressive pozisyonunu işaretledi — reveal debuff Jett'in HP hattını Fade takımına verir
-- Post-plant Nightfall ult durumunda — area fear + nearsight Jett'in off-angle oyununu bozar
+**Fade lehine:**
+- Dar koridorlarda (Bind, Sunset, Fracture) — prowler chase'den kaçacak yer yok
+- Dash cooldown'dayken — haunt reveal + seize immobilize + prowler chase, kaçamazsın
+- Fade haunt seni işaretlediyse — takımı saldırı hattını biliyor, trade ortağı hazır
 
-**Balanced:** Haven, Ascent, Lotus gibi orta mesafeli map'lerde matchup Jett'in dash varyasyonuna ve Fade'in prowler yönüne bağlı.
+**Dengeli:** Haven, Ascent, Lotus'ta Jett dash'ini long açıdan kullanırsa Jett lehine, Fade prowler'ı close angle'a atarsa Fade lehine.
 
 ## 3. Key Düellolar
 
-**IF** Fade haunt Jett'in aggressive pozisyonunu reveal etti
-**MEANING** Reveal debuff Jett'in HP hattını Fade takımına işaretler, trade partner hazır, Jett peek trade'lenir
-**COUNTER** Jett haunt lokasyonunu round 1'de öğren, round 2 pozisyonunu haunt görüş hattı dışına taşı. Updraft ile vertical reposition haunt ground scan'ini atlar.
-**WHY** Haunt reveal source sabit nokta. Jett hareketli, haunt statik — Jett'in hareketi haunt info'sunu eskir eğer varyasyon disiplini varsa.
+**IF** Fade haunt seni reveal etti
+**MEANING** Haunt pozisyonunu Fade takımına işaretler. Trade ortağı gelir, peek'in trade'lenir.
+**COUNTER** Round 1'de haunt'un nereye oturduğunu öğren. Round 2'de pozisyonunu haunt görüş hattı dışına taşı. Updraft'la vertical reposition yap — haunt ground scan'ini atlar.
+**WHY** Haunt sabit noktadan scan eder. Sen hareketlisin. Pozisyonunu değiştirirsen haunt'un bilgisi bayatlar.
 
 ---
 
-**IF** Fade prowler ile Jett'in dash sonrası landing noktasını yakaladı
-**MEANING** Prowler chase debuff nearsight, Jett dashsiz + nearsight, aim zayıflatılmış
-**COUNTER** Jett dash yönü prowler hattından uzak seç. Prowler ses indicator round başında dinlenir, prowler yönü dash yönüne ters seçilir.
-**WHY** Prowler tracking dash sonrası Jett'i yakalar. Dash kaçış değil, dash sonrası pozisyon Fade'in trap hedefi. Varyasyon prowler'ın hattını boşaltır.
+**IF** Prowler dash sonrası landing noktana girdi
+**MEANING** Prowler nearsight verir, dashsiz + nearsight kalırsın, aim bozulur.
+**COUNTER** Dash yönünü prowler hattından uzak seç. Prowler sesini duyduğunda dash yönünü tersine al.
+**WHY** Prowler dash sonrası seni takip eder. Dash kaçış değil — dash sonrası durduğun yer Fade'in hedefi. Farklı yöne çıkarsan prowler boşa gider.
 
 ---
 
-**IF** Fade seize ile Jett'in rotate hattını yakaladı
-**MEANING** Seize radius'unda Jett slow + decay, dash komutu seize süresi boyunca bozulur (seize içinde dash mümkün ama momentum kaybı)
-**COUNTER** Jett seize lineup'ını round 1'de öğren, rotate hattını seize radius dışına. Seize tek use/round — harcatma sonrası serbest.
-**WHY** Seize Jett'in dash ekonomisini etkisizleştiren area CC. Jett'in hızı seize içinde düşer, seize dışı hat kaçış yolu.
+**IF** Seize rotate hattını kesti
+**MEANING** Seize içinde slow + decay alırsın. Dash hâlâ çalışır ama momentum kaybedersin.
+**COUNTER** Seize lineup'larını round 1'de ezberle. Rotate hattını seize radius dışından geç. Seize tek use — harcatırsan o round serbest geçersin.
+**WHY** Seize dash değerini düşürür. Seize dışı hat tek çıkış yolun.
 
 ---
 
-**IF** Jett updraft ile vertical entry, Fade haunt üst katta
-**MEANING** Updraft haunt görüşüne girerse reveal, Jett havada işaretlenir
-**COUNTER** Updraft lokasyonunu haunt scan hattı dışına. Haunt ground + upper scan yaparsa updraft hattı farklı köşe seçilir.
-**WHY** Haunt scan wall-pierce değil. Updraft'ın yüksek arc'ı haunt scan radius'unun kör noktasında olabilir eğer lokasyon doğru seçildiyse.
+**IF** Updraft ile vertical entry yaptın, Fade haunt üst katta
+**MEANING** Updraft haunt görüşüne girerse havada işaretlenirsin.
+**COUNTER** Updraft lokasyonunu haunt scan hattı dışına al. Haunt hem ground hem upper scan yaparsa farklı köşeden çık.
+**WHY** Haunt duvar geçmez. Updraft'ı haunt'un patladığı noktanın 1 saat yönüne at — kör nokta orada.
 
 ---
 
-**IF** Fade Nightfall ultunu Jett'in post-plant pozisyonuna attı
-**MEANING** Ult area fear + nearsight + decay, Jett dashsiz ulu radius'unda savunmasız
-**COUNTER** Jett Nightfall sesini duyduğu an dash ile radius dışına. Nightfall area damage değil, debuff ult — debuff dışına çıkan Jett serbest.
-**WHY** Nightfall etki radius'u sabit. Jett'in hızı radius'tan çıkma imkanı verir eğer dash hazırsa. Dash cooldown'da Jett Nightfall'da tuzakta.
+**IF** Fade Nightfall'u post-plant pozisyonuna attı
+**MEANING** Area fear + nearsight + decay. Dashsiz kalırsan Nightfall içinde savunmasızsın.
+**COUNTER** Nightfall sesini duyduğun an dash'le radius dışına çık. Nightfall damage değil debuff — dışarı çıkarsan etkisi kesilir.
+**WHY** Nightfall radius sabittir. Dash hazırsa çıkarsın. Dash cooldown'daysa tuzaktasın — bunu bilip önceden pozisyon al.
 
 ---
 
-**IF** Jett Op hold ediyor, Fade prowler Jett'in Op pozisyonuna yönelmiş
-**MEANING** Prowler Jett'in pozisyonuna doğru ilerliyor, Op shot alırken prowler saniyelerle gelir, Jett dash ile kaçmalı
-**COUNTER** Jett Op shot + dash reposition timing'i. Prowler ses indicator ile yön belli — dash yönü prowler'a ters.
-**WHY** Op Jett'i statik yapar, prowler hareketli hedefi tercih eder ama statik hedef Fade takımına info aracı. Jett dash ile prowler'ı boşa attırmalı.
+**IF** Op tutuyorsun, prowler pozisyonuna doğru geliyor
+**MEANING** Prowler statik Op Jett'e yaklaşıyor. Shot + kaçış timing'ini ayarlaman lazım.
+**COUNTER** Shot at, hemen dash'le. Prowler sesini duyduğunda dash yönünü prowler'a ters seç.
+**WHY** Op seni statik yapar. Prowler statik hedefi yakalar. Dash'le oradan çekilmezsen ya nearsight alırsın ya da prowler seni Fade takımına işaret eder.
 
 ---
 
-**IF** Fade utility zinciri Jett'e: haunt → seize → prowler
-**MEANING** Reveal → immobilize → chase zinciri, Jett dash harcadıysa dash cooldown + seize + prowler kombo ölüm
-**COUNTER** Jett utility zincirini round 1'de tanı. İlk utility (haunt) sonrası dash'i hemen aç — seize hattına girmeden dash ile radius dışı.
-**WHY** Fade zincir utility kullanıcı. Zincir kırılmazsa her halkada Jett HP + pozisyon kaybeder. İlk halka okunursa zincir çöker.
+**IF** Fade tam zinciri kurdu: haunt → seize → prowler
+**MEANING** Reveal → immobilize → chase. Dash harcadıysan veya cooldown'daysan — ölürsün.
+**COUNTER** Zincirin ilk halkasını (haunt) gördüğünde dash'i hemen aç. Seize hattına girmeden radius dışına çık.
+**WHY** Fade zincir oyuncusu. İlk halkayı okursan zincir çöker. Okurmazsan her halka sana bir şey kaybettirir.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
-Jett mobility (dash + updraft + 3 smoke + ult), Fade info + chase (prowler + haunt + seize + ult). Fade utility'si tracking ekonomisi, Jett utility'si hareket. Matchup asimetrik — Fade Jett'i bulmaya çalışır, Jett Fade'in bulma kapasitesinden hızlı olmaya çalışır. Varyasyon disiplinli Jett Fade'in info'sunu eskir, lineup disiplinli Fade Jett'in dash hattını yakalar. Ult ekonomisi: Blade Storm 7 point, Nightfall 7 point — eşit cost, Fade ult area control, Jett ult single target burst.
+Jett'in utility'si hareket: dash + updraft + 3 smoke + Blade Storm (7 ult point).
+Fade'in utility'si bilgi + kovalama: prowler + haunt + seize + Nightfall (7 ult point).
+
+Fade seni bulmaya çalışır. Sen bulunmamaya çalışırsın. Pozisyonunu değiştirirsen Fade'in bilgisi bayatlar. Dash hattını aynı tutarsan Fade prowler lineup'larını öğrenir ve seni yakalar.
 
 ## 5. Map Bazlı Değişim
 
-**Haven (Fade avantajlı):** Fade 3 site info oyuncusu, Haven'da haunt dart alternatifi. Jett C Long Op rolünde Fade haunt'a karşı zayıf.
+**Haven (Fade avantajlı):** 3 site = Fade haunt her site'ı coverlar. Jett C Long Op tutarken haunt'a açık kalır.
 
-**Lotus (Fade avantajlı):** 3 site yapısı Fade utility'sine yarar. Jett Lotus'ta niche pick.
+**Lotus (Fade avantajlı):** 3 site yapısı Fade'e yarar. Jett Lotus'ta zayıf pick.
 
-**Bind (Jett avantajlı):** Close range + Hookah Jett'in yakın çatışma alanı. Fade prowler Bind'da dar koridor chase'i sınırlı.
+**Bind (Jett avantajlı):** Hookah yakın çatışma Jett'e uyar. Hookah'ın 4-5 metrelik genişliğinde prowler dönmek için yer bulamaz.
 
-**Icebox (Balanced):** Fade haunt Mid uzun angle, Jett Rafters vertical updraft.
+**Icebox (Dengeli):** Fade haunt Mid uzun açı tutar, Jett Rafters updraft ile üste çıkar.
 
-**Breeze (Jett avantajlı):** Uzun sightline Jett Op gücü. Fade prowler Breeze geniş alanda range yetmez.
+**Breeze (Jett avantajlı):** Uzun sightline Op gücü. Fade prowler Breeze'in geniş alanında range yetmez.
 
-**Ascent (Balanced):** Fade B Site haunt meta, Jett A Short entry.
+**Ascent (Dengeli):** Fade B Site haunt meta, Jett A Short entry işler.
 
-**Split (Balanced):** Jett A Main vertical, Fade B Main prowler chase.
+**Split (Dengeli):** Jett A Main vertical giriş, Fade B Main prowler chase.
 
-## 6. Flip Moment'ler
+## 6. Flip Anlar
 
-**Flip 1 — Haunt reveal:** Jett haunt görüşünde kaldıysa info Fade'e gider, aggressive pozisyonu bilinir.
+**Flip 1 — Haunt reveal:** Haunt'un görüşünde kaldıysan aggressive pozisyonun Fade takımına gider.
 
-**Flip 2 — Prowler landing yakalama:** Dash landing'de prowler varsa nearsight + trade kill.
+**Flip 2 — Prowler landing'i yakalar:** Dash sonrası aynı noktaya inersen nearsight + trade kill.
 
-**Flip 3 — Seize rotate hattında:** Seize Jett'in rotate hızını keser, dash değeri düşer.
+**Flip 3 — Seize rotate hattında:** Seize rotate'ini keser, dash değerin düşer.
 
-**Flip 4 — Nightfall dash kaçışı:** Dash hazırsa radius dışı kaçış, cooldown'daysa kesin debuff.
+**Flip 4 — Nightfall karşı dash:** Dash hazırsa radius dışı çıkarsın. Cooldown'daysa debuff içinde kalırsın.
 
-## 7. Pro Coach Notları
+## 7. Koç Notu
 
-**VCT'de nasıl oynanıyor:** Fade pro meta'da Sova alternatifi initiator, map-bound (Haven, Lotus, Bind, Sunset). Jett vs Fade matchup'ı Fade'in utility zincirine bağlı — zincir tam kurulduysa Jett dashsiz pozisyonda yakalanır, zincir kırıldıysa Jett serbest. Pro seviyede iki agent da S/A tier, matchup map'e göre dengeye oturur.
+Fade'e karşı Jett oynuyorsan tek soru şu: zincirin hangi halkasını kıracaksın?
 
-**Meta tier durumu:** Jett S tier, Fade S tier (Bind/Haven/Sunset), A tier (diğer map'ler). Head-to-head dengede, Fade close range map'lerde hafif avantajlı.
+Jett oynuyorsan her roundun başında Fade'in utility'sini takip et — haunt nerede oturdu, prowler hangi yönde geldi, seize nereye atıldı. Bu üçünü bilirsen zinciri kurmadan önce bozarsın. Bilmezsen her round Fade seni bir adım önce bulur.
 
-**** Seize içinde dash komutunun çalışıp çalışmadığı pratik testle doğrulanmalı.
-
-**** Haunt reveal süresi ve prowler HP'si patch 9.x'te güncellendi mi?
-
-**Coach test:** "Fade Jett'i bulmaya çalışır. Jett bulunmamaya çalışır. İki oyuncu info savaşı. Fade utility zincirini tam kurarsa Jett ölü. Jett zinciri kırarsa Fade'in utility'si boş. Zincir önceliği round'u belirler."
+Dash'i haunt'tan kaçmak için harcama. Seize + prowler geldiğinde dash'in hazır olsun — asıl kaçış orada.

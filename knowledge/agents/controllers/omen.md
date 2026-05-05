@@ -1,84 +1,84 @@
 # AJAN: Omen
 
 ## 1. Rol Kimliği
-Omen, gölge controller'dır -- aldatma ve yeniden konumlanma üzerine gelişen hibrit smoker/lurker'dır. Takımını anchor'layan diğer controller'ların aksine, Omen bağımsız çalışır ve beklenmedik açılardan baskı yaratmak için teleportları kullanır. Kit'i yaratıcı, tahmin edilemez oyunu ödüllendirir ve öngörülebilir temizleme kalıplarına güvenen rakipleri cezalandırır. Smoke görevlerini yerine getirirken tutarlı şekilde frag atabilen tek controller'dır.
+Omen tek başına çalışan bir smoke ajanısın. Görevin sadece duman atmak değil — dumanı atıp pozisyon değiştirerek düşmanı iki şeyi aynı anda izlemeye zorlamak. Diğer smoke ajanları takıma yapışık oynar. Sen oynamazsın. Teleport, kör ve duman bu üçü birlikte çalıştığında düşman neye önce tepki vereceğini bilemez. Yeteneklerin yaratıcılığı ödüllendiriyor — ama önce smoke, sonra her şey.
 
 ## 2. Temel Sorumluluklar
-- Lurk baskısını korurken takım execute'ları ve retake'ler için tutarlı smoke'lar sağlamak
-- Rakiplerin önceden nişan almadığı off-angle'lara yeniden konumlanmak için Shrouded Step kullanmak
-- Execute öncesinde kilit savunucuları kör etmek için Paranoia'yı duvarların içinden göndermek
-- Flank'lar, rotasyonlar veya post-plant yeniden konumlanma için From The Shadows'u kullanmak
-- Yükseltilmiş çıkıntılarda ve kapı üstlerinde one-way smoke'lar yaratarak görüş avantajı elde etmek
-- Smoke bekleme süresi farkındalığını korumak -- Omen yenilenen smoke'lara sahiptir, bu yüzden yeniden kullanım zamanlaması hayatidir
+- Takım için smoke'ları önce çıkar — her zaman önce smoke, sonra teleport.
+- Düşman gözlerini kapatmak için Paranoia'yı takım girişiyle aynı anda at.
+- Shrouded Step ile düşmanın beklemediği açılara geç — kapı üstü, box üstü, yüksek zemin.
+- Spike kurulduktan sonra veya takım B'ye girdi, sen A'dan basınç yap için From The Shadows kullan.
+- Smoke'ları yüksek koy: box üstüne, kapı üstüne — düşman smoke'u salmak için dışarı çıkmak zorunda kalır, sen bakıyorsun.
+- Smoke'ların dolup dolmadığını izle — Omen'in smoke'ları yenilenir, hangi smoke'un ne zaman bittiğini bil.
 
 ## 3. Sık Yapılan Hatalar
-- Aynı noktaya tekrar tekrar teleport olup tahmin edilebilir hale gelmek ve önceden nişan alınmak
-- Paranoia'yı round'da çok erken, takip olmadan kullanmak
-- Lurk kill'leri kovalamak için smoke görevlerini ihmal etmek -- smoke'lar her zaman önce gelir
-- From The Shadows'u düşmanların kolayca duyup cezalandırabileceği pozisyonlarda kullanmak
-- Çok alçak yerleştirilen one-way smoke'lar ki avantajı düşmana verir
-- Dövüş sırasında Shrouded Step kullanmak, dövüşten önce değil -- ses ipucu dövüş ortasında ölüm fermanıdır
+- Aynı teleport noktasına üst üste gitmek — üç round sonra düşman oraya kör nişan alır.
+- Paranoia'yı takım hazır değilken atmak — kimse peek yapmıyorsa kör boşa gider.
+- Smoke'ları aksatıp kill kovalamak — smoke olmadan takım içeri giremez.
+- From The Shadows'u düşmanın rahatça duyduğu açık alanda kullanmak — ses seni öldürür.
+- One-way smoke'u çok alçak koymak — bu durumda avantaj sende değil düşmanda olur.
+- Çatışma başladıktan sonra Shrouded Step kullanmak — teleport sesi tam çatışmada seni verir.
 
 ## 4. Kalıp -> Anlam
 
-**IF** oyuncu aynı harita yarısında aynı off-angle'a ikiden fazla kez teleport oluyor
-**MEANING** Okunabilir hale geliyorlar; rakipler o pozisyona önceden nişan almaya başlayacak
-**COUNTER** Yarı başına 3+ teleport noktası arasında rotasyon yapın ve zamanlamayı round başı ile round ortası arasında değiştirin.
-**WHY** Tekrarlanan pozisyonlar düşmanın bilgi yükünü sıfırlar; çeşitlilik her konumu yeniden tehlikeli kılar.
+**IF** aynı yarıda aynı teleport noktasına ikiden fazla kez gidiyorsun
+**MEANING** Düşman seni okudu. O noktaya önceden nişan almaya başladılar.
+**COUNTER** Her yarı için 3 farklı teleport noktası belirle. Her round birini değiştir. Bir round hiç teleport kullanma — düşman seni ararken takım girişi karşısız kalır.
+**WHY** Aynı noktaya gittiğinde düşmanın tahmin etmesi gerekmez. Çeşitlilik her noktayı tekrar tehlikeli yapar.
 
-**IF** Paranoia sürekli takım takibi olmadan atılıyor
-**MEANING** Oyuncu Paranoia'yı takım yeteneği yerine kişisel yetenek olarak kullanıyor
-**COUNTER** Paranoia zamanlamasını entry fragger'larla koordine edin; takım peek yapmaya hazırken, hazır olmadan önce değil, kısa bir ara ile atın.
-**WHY** Paranoia'nın kör etkisi yalnızca bir takım arkadaşı anında peek yaparak cezalandırırsa kill'e dönüşür.
+**IF** Paranoia'yı sürekli yanında kimse yokken atıyorsun
+**MEANING** Paranoia'yı takım yeteneği gibi değil kişisel yetenek gibi kullanıyorsun.
+**COUNTER** Takım arkadaşın tam köşeyi almadan önce at. Körleşme o anla örtüşsün — önce değil, tam o anda.
+**WHY** Paranoia körleştirdiğinde ancak biri hemen peek yaparsa kill'e döner. Yoksa düşman bekler, görüşü geri gelir.
 
-**IF** smoke yerleşimi standart choke noktalarını kapatıyor ama asla one-way yaratmıyor
-**MEANING** Oyuncu Omen'in benzersiz smoke çok yönlülüğünü kullanmıyor
-**COUNTER** Harita başına 2-3 one-way smoke noktası öğrenin; smoke'ları kutulara, kapı üstlerine ve çıkıntılara yükseltin.
-**WHY** One-way smoke'lar Omen'in diğer controller'lardan ayrıldığı yerdir; standart smoke'lar onu daha kötü bir Brimstone yapar.
+**IF** smoke'larını her zaman aynı standart kapı ağzına koyuyorsun, hiç one-way yapmıyorsun
+**MEANING** Omen'in en güçlü özelliğini kullanmıyorsun.
+**COUNTER** Her harita için 2-3 yüksek one-way noktası öğren. Smoke'u box üstüne, kapı üstüne koy — düşman smoke'u salmak için çıkmak zorunda kalır, sen hazır durursun.
+**WHY** Yüksek koyulan smoke'lar düşmana seçim dayatır: geç ya da aç. Her ikisi de sana avantaj verir. Standart smoke bunu yapmaz.
 
-**IF** From The Shadows yalnızca flank'lar için kullanılıyor
-**MEANING** Oyuncu ult'un rotasyonel ve post-plant değerini küçümsüyor
-**COUNTER** Ult'u savunmada hızlı rotasyonlar, post-plant'te spike'a yeniden konumlanma veya karşı site'ta sahte varlık yaratmak için kullanın.
-**WHY** From The Shadows'un harita çapında menzili onu Valorant'taki en hızlı rotasyon aracı yapar; bunu yalnızca flank'a harcamak makro potansiyelini boşa harcar.
+**IF** From The Shadows'u sadece arkadan basmak için kullanıyorsun
+**MEANING** Ult'un en büyük gücünü görmüyorsun — harita çapında anlık konum değişimi.
+**COUNTER** Spike kurulduktan sonra karşı bölgeye geç ve orada varlık yarat. Savunmada bir bölgeden diğerine hızlıca dön. Karşı bölgede sahte ses bırak.
+**WHY** From The Shadows seni haritanın herhangi bir yerine atar. Bunu sadece sürpriz baskı için harcamak en büyük gücünü çöpe atmak demek.
 
-**IF** oyuncu Shrouded Step sırasında veya hemen sonrasında sık sık ölüyor
-**MEANING** Reaktif olarak teleport oluyorlar, proaktif değil
-**COUNTER** Çatışmalar başlamadan önce teleport olun, sırasında değil; ses ipucunu kapatmak için smoke'lar veya Paranoia kullanın.
-**WHY** Shrouded Step'in sesi düşmanlara kesin konum verir; önceden konumlanma onları tahmin oyununa zorlar.
+**IF** Shrouded Step sırasında veya hemen sonrasında sık sık ölüyorsun
+**MEANING** Reaktif teleport yapıyorsun — çatışma başladıktan sonra kaçmaya ya da pozisyon değiştirmeye çalışıyorsun.
+**COUNTER** Çatışma başlamadan önce teleport yap. Teleport sesini kapatmak için önce smoke veya Paranoia kullan. Gelişmiş bir kullanım: teleport sesini verip animasyonu iptal et — düşman sese tepki verirken sen aslında yerindeydin, gerçek baskı başka noktadan gelir.
+**WHY** Teleport sesi düşmana kesin konum verir. Çatışma ortasında bu ses seni öldürür. Önceden konumlandığında düşman tahmin oyunu oynamak zorunda kalır.
 
 ## 5. Harita Etkileşimleri
-- **Ascent**: Güçlü seçim. Shrouded Step ile catwalk veya market'e mid kontrolü sürekli rotasyon tehdidi yaratır. B main ve A main kapı girişlerinde one-way smoke'lar yüksek değerlidir.
-- **Bind**: Mükemmel lurk haritası. Teleporter'lar From The Shadows ile çoklu açı baskısı için sinerji yaratır. Hookah'dan Paranoia yıkıcıdır.
-- **Icebox**: Tube, nest ve rafters'a teleportlar tahmin edilemez açılar yaratır. A site'ta pipe'larda smoke'ların güçlü one-way potansiyeli vardır.
-- **Haven**: Üç site From The Shadows'a maksimum rotasyon değeri verir. Mid'den pencereye Shrouded Step rotasyoncuları yakalar.
-- **Sunset**: Mid kapılarından Paranoia güçlüdür. Teleport noktaları daha sınırlıdır ama B market lurk açıları sunar.
-- **Pearl**: A Main ve B Long'a derin smoke'lar yüksek değerlidir. B Hall kutularına Shrouded Step ile beklenmedik off-angle'lar alınabilir. Paranoia dar koridorlarda güçlüdür.
-- **Lotus**: Kapıların arkasına smoke atmak savunucuları kör bırakır. Shrouded Step ile rotating door'u ses yapmadan bypass edebilir -- savunucu kapı sesini beklerken Omen zaten karşı tarafta. From The Shadows ile 3 site arasında rotasyon çok güçlüdür.
-- **Corrode**: Paranoia dar koridorlarda tüm geçişi körleştiriyor -- Corrode'un yapısı Paranoia'nın hitbox'unu maksimize ediyor. Shrouded Step ile koridor arkasındaki off-angle'lara reposition yapmak savunucuyu sürpriz pozisyonlardan yakalatır. Smoke'lar dar sightline'ları tamamen kapatır.
+- **Ascent**: Güçlü seçim. Shrouded Step ile catwalk veya market'e geç — mid kontrolünü tehdit altında tutarsın. B main ve A main kapı girişlerinde yüksek one-way'ler işe yarar.
+- **Bind**: Lurk için iyi harita. Teleporter'larla birlikte From The Shadows çoklu baskı açar. Hookah'dan atılan Paranoia geçişi kapatır.
+- **Icebox**: Tube, nest ve rafters'a teleport beklenmedik açılar verir. A site'ta pipe'lardaki smoke'lar one-way açısı verir.
+- **Haven**: Üç bölge From The Shadows'un değerini katlar — bir bölgeden diğerine hızlı geçiş savunucu dengeyi bozar. Mid pencereye Shrouded Step rotate eden savunucuları yakalar.
+- **Sunset**: Mid kapılarından Paranoia geçişi kapatır. Teleport noktaları daha az ama B market'te baskı açıları var.
+- **Pearl**: A Main ve B Long'a derin smoke'lar işe yarar. B Hall kutularına Shrouded Step beklenmedik açı verir. Dar koridorlarda Paranoia tüm geçişi kapatır.
+- **Lotus**: Kapı arkalarına smoke at — savunucu geçerken kör olur. Shrouded Step ile dönen kapıyı ses çıkarmadan atla: savunucu kapı sesini beklerken sen zaten karşı taraftasın. From The Shadows ile 3 bölge arasında geçiş güçlü.
+- **Corrode**: Dar koridorlar Paranoia'nın etkisini maksimuma çıkarıyor — tek atışta tüm geçiş kapanır. Koridor arkasındaki açılara Shrouded Step ile geç — savunucu nereden geldiğini anlamaz. Smoke'lar dar bakış açılarını tamamen kapatır.
 
 ## 6. Eşleşme Notları
-- Çift initiator comp'lara karşı: Omen, ortaya çıkarıldıktan sonra yeniden konumlanarak bilgi yeteneğini absorbe edebilir
-- Agresif duelist'lere karşı: Paranoia kuru peek'leri cezalandırır; savunmada reaktif olarak kullanın
-- Bir sentinel ile eşleşme: Sentinel site'ı anchor'larken Omen özgürce lurk yapabilir
-- Özellikle Fade'e karşı: Haunt, Omen'in teleport pozisyonunu ortaya çıkarır -- teleport ortasında yakalanmamak için zamanlamayı değiştirin
+- Çift initiator var karşıda: Bilgin açıklandıktan hemen sonra teleport yap — bilgi onlar için değersizleşir.
+- Agresif duelist karşında: Paranoia kuru peek'i cezalandırır. Savunmada düşman köşeyi açmaya çalışırken at — körleşme açığa çıkardığı anda gelsin.
+- Takımda sentinel varsa: Sentinel bölgeyi tutsun, sen serbestçe lurk yap.
+- Fade karşısında: Haunt teleport noktanı verir — Fade'in Haunt'ı aktifken teleport edersen pozisyonun açılır. Shrouded Step'i Haunt yokken kullan.
 
 ## 7. Oyuncuya Ne Söylenmeli
 
-### İyi performans gösterdiğinde
-**Oyuncu Eylemi:** Execute çağrısından hemen sonra savunucuları kör etmek için Paranoia'yı gönderiyorsunuz ve yarı boyunca Shrouded Step hedefinizi 3+ farklı off-angle arasında rotate ediyorsunuz.
-**Düşman Algısı:** Savunucular önceki round'dan teleport pozisyonunuzu takip eder ve o noktaya önceden nişan alır. Farklı bir off-angle'a teleport olduğunuzda, siz arkalarında rakipsiz bir sightline tutarken onlar boş alana nişan alıyordur.
-**Düşman Tepkisi:** Hem önceki teleport noktanızı temizlemek (zaman ve ilgi harcayarak) HEM de yeni bir açıyı izlemek zorunda kalırlar. Bazı savunucular son bilinen TP noktasını izlemek için bir oyuncu atar -- o oyuncu artık round'un geri kalanı için işe yaramaz bir pozisyona sabitlenmiştir.
-**Fırsat Penceresi:** Savunucuların önceki Shrouded Step konumunuzu kontrol etmek için harcadığı zaman, takımınızın girişinin karşılanmadığı ölü zamandır. Bununla birlikte Paranoia'nın diğer savunucuları kör etmesi, site'ta ana girişi kimsenin izlemediği bir pencere yaratır.
-**Tekrar Stratejisi:** Round 1: execute'ta smoke + Paranoia, Shrouded Step ile yüksek zemin off-angle'a. Round 2: aynı smoke'lar, bunun yerine zemin seviyesi flank'a teleport. Round 3: teleportu tamamen atlayın ve default oynayın -- sizi aramak için aşırı rotate eden savunucuları cezalandırın. Her TP'den önce smoke'ları yerleştirin, sonra değil.
-**Düşman Adaptasyonu:** 4-5 round sonra savunucular yaygın TP noktalarını yetenek ile önceden temizler (molly, el bombası), TP sesini izlemek için özel bir oyuncu atar veya siz teleport olmadan smoke'larınızın içinden push yapar.
-**Karşı Adaptasyon:** TP noktalarını yetenek ile temizlediklerinde: düşmanların animasyonu net göremediği veya duyamadığı Paranoia kör'ü sırasında Shrouded Step kullanın. Smoke'lardan push yaptıklarında: kendi smoke'unuzun arkasında açı tutun ve push ortasında yakalayın. TP izlemeye oyuncu ayırdıklarında: bu site'ta bir eksik savunucu demektir, takımınızın giriş noktasında sayısal avantajı vardır.
+### İyi oynadığında
+**Oyuncu Eylemi:** Takım giriş yapmadan hemen önce Paranoia atıyorsun ve her round farklı bir teleport noktası kullanıyorsun.
+**Düşman Algısı:** Geçen roundki teleport noktana önceden nişan aldılar. Farklı açıdan çıkınca oraya bakıyorlar, sen arkalarında duruyorsun.
+**Düşman Tepkisi:** Hem eski noktayı izlemek hem yeni açıyı kapatmak için iki ayrı oyuncu ayırmak zorundalar. O iki oyuncu round boyunca başka işe yaramaz.
+**Fırsat Penceresi:** Düşman eski teleport noktana bakıyorken takımın girişi karşısız kalır. Üstüne Paranoia körleştiriyorsa bölgede kimse düzgün göremez.
+**Tekrar Şablonu:** Giriş 1: smoke + Paranoia, yüksek zemin açısına teleport. Giriş 2: aynı smoke'lar, bu sefer zemin seviyesi farklı açı. Giriş 3: hiç teleport yok — eski noktalarını aramaya giden savunucuları cezalandır. Her teleporttan önce smoke'u koy, sonra değil.
+**Düşman Uyumu:** 4-5 round sonra yaygın teleport noktalarını el bombası veya molly ile temizlemeye başlarlar ya da teleport sesini dinlemek için özel oyuncu ayırırlar.
+**Karşı Uyum:** Noktanı temizlemeye çalışıyorlarsa: Paranoia kör ederken teleport yap — animasyonu göremez ve duyamazlar. Smoke'undan basıyorlarsa: kendi smoke'unun arkasında bekle, push ortasında yakala. Teleport noktana oyuncu ayırdılarsa: o bölgede bir eksik savunucu var, takımın girişte sayı üstünlüğü sağlar.
 
-**Zorlandığında**: "Önce smoke görevlerine odaklanın. Takımınız için smoke'ları çıkarın, sonra teleport oyununu düşünün. Takımınız temellere ihtiyaç duyarken öne çıkma oyunları yapmaya çalışıyorsunuz."
+**Zorlandığında:** "Önce smoke'ları çıkar. Takım içeri giremiyorsa teleport oyununun önemi yok. Önce smoke, sonra her şey."
 
-**Tahmin edilebilir olduğunda**: "Rakipler teleport noktalarınıza önceden nişan alıyor. Aynı Shrouded Step pozisyonunu art arda üç round kullandınız. Değiştirin -- beklenmedik olduğunda basit bir pozisyon bile güçlü olur."
+**Tahmin edilebilir olduğunda:** "Rakipler teleport noktana kör nişan alıyor. Üst üste üç round aynı yere gittin. Değiştir — en az kullandığın açı, düşmanın en az hazırlandığı açıdır."
 
 ## 8. Rütbe Ayarı
-- **Düşük (Iron-Silver)**: Takım için tutarlı smoke yerleşimine odaklanın. Karmaşık teleport oyunlarından kaçının. Paranoia'yı takım oyunları kurmak için değil, kendinizin peek yapmasına yardımcı olmak için kullanın.
-- **Orta (Gold-Platinum)**: One-way smoke'ları ve harita başına 2-3 güvenilir Shrouded Step pozisyonunu tanıtın. Paranoia'yı takım push'larıyla koordine etmeye başlayın.
-- **Yüksek (Diamond-Ascendant)**: Execute temposuna göre smoke zamanlamasını ustalaştırın. Shrouded Step kullanan lurk rotaları geliştirin. From The Shadows'u yalnızca flank'lar için değil, rotasyonlar için kullanın.
-- **Elit (Immortal-Radiant)**: Tam kit entegrasyonu -- koordineli dizilerde smoke, teleport, paranoia. Boşluklara karşı teleport için rakip kalıplarını okuyun. From The Shadows makro harita kontrolü ve post-plant yeniden konumlanma için kullanılır.
+- **Düşük (Iron-Silver):** Önce smoke'ları öğren. Teleport oyununu sonraya bırak. Paranoia'yı kendin peek yapacaksan kullan — takım koordinasyonunu sonra ekle.
+- **Orta (Gold-Platinum):** One-way smoke noktaları öğren — harita başına 2-3 tane yeter. Shrouded Step için 2-3 güvenilir nokta belirle. Paranoia'yı takım girişiyle aynı anda atmaya başla.
+- **Yüksek (Diamond-Ascendant):** Smoke zamanlamalarını takımın girişine göre ayarla. Shrouded Step rotalarını round öncesinde planla. From The Shadows'u hızlı bölge geçişi için kullan, sadece arkadan baskı için değil.
+- **Elit (Immortal-Radiant):** Smoke, teleport, Paranoia aynı anda çalışır. Shrouded Step ses bluff'unu kullan: sesi verip iptal et, düşman tepki verirken gerçek baskı başka noktadan gelir. Düşmanın hareket kalıplarını okuyarak teleport noktalarını belirle. From The Shadows ile spike kurulduktan sonra karşı bölgede varlık yarat.

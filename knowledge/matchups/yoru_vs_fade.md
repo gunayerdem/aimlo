@@ -11,111 +11,111 @@ tags: [matchup, yoru, fade, duelist, initiator]
 
 ## 1. Matchup Özü
 
-Yoru clone + teleport + flash ile Fade'in haunt reveal + prowler chase ağından kaçmaya çalışan deception duelist, Fade ise haunt + prowler ile Yoru'nun gerçek pozisyonunu clone'dan ayırmaya çalışan tracking initiator. Matchup Yoru'nun deception ekonomisi ile Fade'in info disiplinini test eder.
+Yoru yalan söyler — clone, teleport, flash ile Fade'i yanıltmaya çalışır. Fade gerçeği arar — haunt, prowler, seize ile Yoru'nun gerçek yerini bulur. Bu matchup şuna gelir: Yoru'nun yalanı ne kadar sürüyor? Fade onu ne kadar hızlı çözüyor?
 
 ## 2. Kim Avantajlı?
 
-**Yoru lehine durumlar:**
-- Fade utility harcanmış — haunt + prowler yoksa Yoru clone deception maksimum değer
-- Teleport hattı round-to-round değişiyorsa — Fade teleport çıkışını tahmin edemez, flank surprise
-- Yoru ult hazır (Dimensional Drift) — ult sırasında Yoru invisibility + immunity, Fade utility'si Yoru'yu bulamaz
-- Yoru lurker rolünde — Fade'in takım info'su solo Yoru'ya karşı yetersiz
+**Yoru lehine:**
+- Fade'in haunt ve prowler'ı harcandı — clone tam değer, Fade kör
+- Teleport çıkışını her round değiştir — Fade prowler'ı nereye süreceğini bilemez
+- Ult açık — Yoru ultta görünmez, Fade'in hiçbir şeyi çalışmaz
 
-**Fade lehine durumlar:**
-- Fade haunt Yoru ve clone'u aynı anda reveal ettiğinde — haunt reveal Yoru'nun gerçek pozisyonunu (HP + hareket) açar, clone reveal statik
-- Fade prowler Yoru'nun teleport landing'ini yakalarsa — prowler nearsight Yoru'nun aim'ini bozar
-- Yoru teleport cooldown'da — kaçış aracı yok, Fade tracking lethal
-- Post-plant Nightfall ult durumu — area fear Yoru'nun clone deception'ını aşar (clone fear'dan etkilenmez, Yoru gerçek ses verir)
+**Fade lehine:**
+- Haunt hem Yoru'yu hem clone'u aynı anda yakaladı — HP barına bak, clone HP 1, Yoru tam HP, gerçek Yoru belli
+- Prowler teleport iner inmez oraya ulaştı — Yoru inişte savunmasız, prowler bu anı yakalar
+- Yoru'nun teleport'u bekliyorsa — kaçış yok, Fade takımı sıkıştırır
 
-**Balanced:** Haven, Ascent, Lotus gibi orta mesafeli map'lerde matchup Yoru'nun teleport varyasyonuna ve Fade'in haunt lineup'ına bağlı.
+**Haritaya göre değişir:** Yoru iki farklı hat açarsa ve Fade'in haunt'u bu hatların sadece birini kaplarsa Fade kör kalır. Fade haunt'u clone + Yoru'nun aynı anda göründüğü açıdan atarsa yalanın değeri sıfıra düşer.
 
 ## 3. Key Düellolar
 
-**IF** Fade haunt Yoru ve clone pozisyonunu aynı anda reveal etti
-**MEANING** Clone statik reveal, Yoru hareketli reveal — Fade takımı ikisini ayırt edebilir, Yoru'nun deception'ı boş
-**COUNTER** Yoru clone'u aggressive yönde gönder, kendisi pasif cover'da kal. Fade reveal'ı ikisini gösterse bile "aktif olan" Yoru zannedilir.
-**WHY** Fade reveal hareket + HP info verir. Clone HP 1, Yoru 100 — HP bar info doğru Yoru'yu gösterir. Yoru'nun cevabı clone'u hareketli, kendini statik yapmak.
+**IF** Fade haunt hem Yoru'yu hem clone'u aynı anda ortaya çıkardı
+**MEANING** Clone HP 1, Yoru tam HP — Fade takımı HP barına bakarak gerçek Yoru'yu anında ayırır, yalanın değeri sıfır
+**COUNTER** Clone'u öne süre, kendini hareketsiz tut. Haunt sırasında hareket eden clone, HP barından önce dikkat çeker — beyin hareketi önce işler, HP'ye sonra bakar. Bu anı kullan.
+**WHY** Haunt HP + hareket bilgisi verir. Ama beyin hareketi önce işler. Clone hareketliyse HP'ye bakma şansı olmadan tepki verir. Yoru durur, clone koşar.
 
 ---
 
-**IF** Fade prowler Yoru'nun teleport landing'ini yakaladı
-**MEANING** Prowler nearsight Yoru'nun aim'ini bozar, teleport sonrası Yoru savunmasız
-**COUNTER** Yoru teleport landing'ini prowler lineup hattı dışına. Teleport marker gizli yerleşim Fade'in prowler yönünü belirsiz bırakır.
-**WHY** Teleport sonrası Yoru statik anlık, prowler tracking bu anı yakalar. Varyasyon prowler'ın hattını boşaltır.
+**IF** Prowler teleport inişini yakaladı
+**MEANING** Teleport sonrası Yoru bir anlık yerinde durur — prowler bu anı yakalar, nişan alamazsın
+**COUNTER** Teleport marker'ını prowler'ın geleceği hattın dışına koy. Marker yeri sabit kalırsa Fade prowler'ı oraya yönlendirir — her round farklı yer seç.
+**WHY** Prowler marker konumunu takip eder. Marker hep aynı yerdeyse Fade önceden prowler'ı oraya yollar. Değişken yer = prowler boşa gider.
 
 ---
 
-**IF** Yoru flash ile Fade'i kör etti, clone ile ikili peek
-**MEANING** Fade flash'la kör + clone + Yoru iki hedef, Fade karar penceresi bozulur
-**COUNTER** Fade flash sesine reaksiyon reflexli, clone + Yoru sıralamasını ses + hareket üzerinden oku. Clone ses yapmaz, Yoru yapar.
-**WHY** Fade'in cevabı ses disiplinidir. Clone sessiz, Yoru ses ekonomisi — doğru hedef sese göre.
+**IF** Yoru flash attı, clone + Yoru ikisi birden çıktı
+**MEANING** Fade iki hedef görür, karar penceresi daralır
+**COUNTER** Clone ses çıkarmaz. Yoru adım sesi çıkarır. Fade ses duyduğu tarafa ateş eder — clone'a değil Yoru'ya. Ses çıkarmadan oyna.
+**WHY** Fade'in tek güvenilir oku sestir. Clone sessizdir. Yoru sessiz kalırsa Fade hangisinin gerçek olduğunu bilemez.
 
 ---
 
-**IF** Yoru Dimensional Drift ultunda, Fade utility kullanamıyor
-**MEANING** Ult Yoru'yu invisible + immune yapar, Fade haunt + prowler Yoru'yu bulamaz
-**COUNTER** Fade Yoru ult sesine reaksiyon takım pozisyonunu kapatır. Ult süresi sonrası Yoru çıkış pozisyonu önceden hazır yakalama.
-**WHY** Dimensional Drift Fade'in info ekonomisini iptal eder. Cevap ult süresi bitene kadar defans — çıkış anı yakalama penceresi.
+**IF** Yoru ultta
+**MEANING** Yoru görünmez ve hiçbir şeyden etkilenmez — Fade'in elinde geçerli bir şey kalmaz
+**COUNTER** Fade ult sesini duyar duymaz takımı pozisyon kapar. Ult biter bitmez Yoru bir yere çıkmak zorunda — o çıkış noktasını önceden kes.
+**WHY** Yoru ult biter bitmez çıkış yapmak zorunda. Çıkış noktasını bilen Fade bekler.
 
 ---
 
-**IF** Fade Nightfall ultunu Yoru'nun pozisyonuna attı
-**MEANING** Area fear + nearsight, Yoru clone'una tutunamaz, kendi ses çıkardığı an gerçek pozisyon
-**COUNTER** Yoru Nightfall radius dışına teleport ile çıkar, teleport cooldown'da ise clone ile ses kaynağını şaşırt.
-**WHY** Nightfall area debuff. Yoru'nun tek kaçışı teleport, cooldown'da değilse.
+**IF** Fade Nightfall ultunu Yoru'nun üstüne attı
+**MEANING** Alan içinde görüş kısılır, ses çıkarırsın — gerçek yerin belli olur, clone bu sesi çıkarmaz
+**COUNTER** Teleport varsa anında alan dışına çık. Teleport yoksa clone'u alan içinde bırak, kendini dışarı çek — clone ses çıkarmaz, sen de sus.
+**WHY** Nightfall'da sesin var. Clone'un yok. Sessiz kalabilirsen Fade seni bulamaz.
 
 ---
 
-**IF** Yoru teleport marker'ı flank hattında, Fade seize hattında
-**MEANING** Seize teleport animasyonunu iptal eder, Yoru seize içinde dashsız ve teleport yok
-**COUNTER** Yoru teleport marker'ını seize lineup hattı dışında. Seize ses indicator marker güncelleme sinyali.
-**WHY** Seize area CC. Teleport tek use/marker — marker seize'da harcanırsa kaçış yok.
+**IF** Fade seize'ı teleport marker'ının üstüne attı
+**MEANING** Seize animasyonu keser — marker içindeyken teleport yapamazsın, mahsur kalırsın
+**COUNTER** Marker'ını seize'ın gelebileceği açık hattan uzak tut. Seize geldiğini ses işaretiyle anlarsın — marker güncelle.
+**WHY** Seize alan bazlı bir tutma. Marker oraya düşerse kaçış kapanır.
 
 ---
 
-**IF** Yoru clone çift yönde (A Main + A Short), Fade haunt A Main'de
-**MEANING** Haunt tek yönü reveal eder, A Short yönündeki Yoru veya clone belirsiz
-**COUNTER** Fade ikinci haunt'u veya takım info'su ile A Short yönünü de kontrol et. Tek haunt yetersiz.
-**WHY** Yoru iki yön deception, Fade tek yön reveal. Yoru asimetri avantajı yaratırsa Fade'in info'su boş.
+**IF** Yoru clone'u A Main'e, kendisi A Short'a sürdü — Fade haunt sadece A Main'e baktı
+**MEANING** Haunt tek yönü açar. A Short tarafı karanlık kalır — Yoru veya clone orada belirsiz
+**COUNTER** İkinci haunt yok veya takım A Short'u geçemiyorsa Fade bu açıyı kapatamaz. Yoru asimetriyi yaratırsa Fade bilgisiz kalır.
+**WHY** Bir haunt bir yön açar. Yoru iki yön oynarsa Fade her zaman bir tarafı göremez.
 
 ## 4. Utility Takası
 
-Yoru deception (clone + teleport + flash + ult), Fade tracking + chase (haunt + prowler + seize + ult). Iki agent da info-based — Yoru yanlış info verir, Fade doğru info alır. Matchup simetrik bir info savaşı. Yoru'nun kazancı Fade'i şaşırtmak, Fade'in kazancı Yoru'nun gerçek pozisyonunu ayırmak. Ult ekonomi: Dimensional Drift 7 point (Yoru immunity), Nightfall 7 point (area debuff) — cost eşit.
+Yoru yanlış bilgi üretir — clone, teleport, flash, ult. Fade doğru bilgiyi alır — haunt, prowler, seize, ult. İkisi de bilgi üzerine oynar ama zıt tarafta. Yoru kazanmak için Fade'i şaşırtması lazım. Fade kazanmak için Yoru'nun gerçek yerini ayırması lazım. Ult maliyeti eşit — ikisi de 7 puan.
 
-## 5. Map Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
-**Bind (Yoru avantajlı):** Teleporter + Hookah Yoru'nun deception meta. Fade close range tracking sınırlı.
+**Bind (Yoru avantajlı):** Teleporter ve Hookah Yoru'nun clone + teleport kombinasyonuna çok açık. Fade yakın mesafede prowler kullanmakta zorlanır.
 
-**Ascent (Yoru avantajlı):** Mid Courier + A Main Yoru teleport. Fade A Site haunt meta.
+**Ascent (Yoru avantajlı):** Mid ve A Main Yoru teleport için çok yer açar. Fade A Site haunt'u tek tarafa bakar.
 
-**Haven (Fade avantajlı):** 3 site Fade'in haunt ekonomisi. Yoru niche pick Haven'da.
+**Haven (Fade avantajlı):** 3 site Fade haunt'una çok uygun — Yoru 3 siteyi tek başına karıştıramaz.
 
-**Lotus (Fade avantajlı):** 3 site haunt meta.
+**Lotus (Fade avantajlı):** 3 site yine Fade lehine. Yoru lurk alanı daralır, Fade her siteye haunt atabilir.
 
-**Icebox (Yoru avantajlı):** Uzun sightline + close range combo Yoru'nun.
+**Icebox (Yoru avantajlı):** Uzun hatlar + dar geçitler Yoru teleport varyasyonuna yarar.
 
-**Split (Balanced):** Yoru A Main deception, Fade B Main tracking.
+**Split (Dengeli):** Yoru A Main clone oyunu, Fade B Main takip oyunu — ikisi de kendi hattında değer üretir.
 
-**Sunset (Fade avantajlı):** Dar choke'lar Fade prowler meta.
+**Sunset (Fade avantajlı):** Dar geçitler prowler'a çok uygun — Yoru teleport alanı kısıtlı.
 
-## 6. Flip Moment'ler
+## 6. Dönüm Noktaları
 
-**Flip 1 — Haunt reveal Yoru'yu yakaladı:** Gerçek Yoru HP info ile ayırt edildi, deception çökertildi.
+**Dönüm 1 — Haunt Yoru'yu yakaladı:** HP bar okundu, clone ayırt edildi, yalan çöktü. Fade takımı gerçek Yoru'ya yürür.
 
-**Flip 2 — Clone Fade'i şaşırttı:** Fade yanlış hedefi takip ederse Yoru aggressive peek ile kill.
+**Dönüm 2 — Clone Fade'i şaşırttı:** Fade clone'u takip etti, Yoru arkadan çıktı. Kill Yoru'ya.
 
-**Flip 3 — Teleport seize'da iptal:** Seize marker teleport animasyonunu bozar, Yoru savunmasız.
+**Dönüm 3 — Seize marker'ı kesti:** Teleport iptal, Yoru açıkta. Fade takımı kapar.
 
-**Flip 4 — Dimensional Drift Fade'i iptal:** Yoru ultunda Fade utility'siz, tracking çalışmaz.
+**Dönüm 4 — Ult Fade'i kapattı:** Yoru ultta, Fade hiçbir şey yapamaz. Yoru çıkışta avantaj.
 
-## 7. Pro Coach Notları
+## 7. Koç Notları
 
-**VCT'de nasıl oynanıyor:** Yoru pro meta'da niche duelist, lurker rolü için pick. Fade standard initiator, Bind/Haven/Lotus'ta baskın. Matchup pro seviyede Yoru'nun teleport varyasyonuna bağlı — teleport hattı okunduysa Fade prowler yakalar.
+**Yoru oynuyorsan:** Teleport marker'ını her round farklı yere koy — Fade prowler'ın nereye gideceğini ezberleyemez. Fade haunt atarken clone'u hareket ettir, kendini durdur.
 
-**Meta tier durumu:** Yoru B+ tier, Fade S tier (map-bound). Head-to-head Fade hafif avantajlı info oyunuyla.
+**Fade oynuyorsan:** Haunt'u clone + Yoru'nun aynı anda göründüğü açıdan at — HP barı oku, gerçek Yoru'ya yürü. Prowler'ı Yoru'nun teleport marker'ına önceden yönlendir.
 
-**** Yoru clone Fade haunt reveal'da HP bar gösterimi — clone HP info veriyor mu?
+**Harita seçiminde:** Haven ve Lotus'ta Fade'i seç — 3 site Yoru'nun tek başına karıştıramayacağı kadar geniş. Bind ve Icebox'ta Yoru tercih edilebilir — teleport çeşitliliği Fade haunt'unu geçersiz kılar.
 
-**** Fade seize teleport animasyonunu iptal ediyor mu? Pratik testle doğrulanmalı.
+**Test edilmesi gereken:**
+- Clone haunt sırasında HP bar gösteriyor mu? Fade takımı bunu pratik maçta okuyabiliyor mu?
+- Seize gerçekten teleport animasyonunu kesiyor mu? Pratik modda dene.
 
-**Coach test:** "Yoru yalan söyler, Fade gerçek arar. İki oyuncu info savaşı. Yoru clone disiplini, Fade ses + hareket disiplini. Disiplini daha yüksek olan round'u alır."
+**Özet:** Yoru yalan söyler, Fade gerçek arar. Clone disiplinini kur, Fade ses + HP okumasını kır. Her round marker yerini değiştir, her round clone hareketini değiştir — Fade pattern bulamazsa bilgisiz kalır.

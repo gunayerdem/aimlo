@@ -11,113 +11,117 @@ tags: [matchup, fade, viper, initiator, controller]
 
 ## 1. Matchup Özü
 
-Fade prowler + haunt + seize + Nightfall ile korku + info hattı kuran initiator, Viper wall + orb + snake bite + Viper's Pit ile fuel ekonomisi üstünden hermetik cover kuran controller. Matchup Fade'in takip silahının Viper'ın kimyasal cover silahına karşı çekişmesi. Fade düşmanı çizer, Viper çiziyi siler.
+Fade düşmanı çizer — haunt iz açar, prowler kovalayan gider, seize kilitler. Viper çizgiyi siler — duvarı, orb'u ve snake bite'ı ile her girişi zehirler. Savaş şu: Fade bilgi toplamadan önce Viper smokeyla onu kör ederse round Viper'ın. Fade iz açıp Viper duvarının arkasını teşhir ederse round Fade'in.
 
 ## 2. Kim Avantajlı?
 
 **Fade lehine durumlar:**
-- Haunt eye Viper wall hattının üstünden trail açabiliyor — haunt smoke içini trail'ler, Viper takım cover'ı yarım değerde
-- Viper fuel tükenmiş round — wall + orb aynı anda tutulamaz, Fade prowler serbest açı
-- Nightfall ult aktif — deafen + trail alan silahı, Viper takım Pit içinde bile ses kaybı + trail
-- Entry round'larında — Fade prowler + haunt kombosu Viper wall arkasını info, entry serbest
+- Viper duvarı ile orb'u aynı anda aktifse yakıtı tükeniyor — prowler açık açıdan gir
+- Haunt Viper duvarının üstünden geçip iz açtıysa takım arkasını görüyor, smoke değersiz
+- Nightfall aktifken Viper Pit içinde bile sağır kalıyor + iz açılıyor, Fade takımı pre-aim kuruyor
 
 **Viper lehine durumlar:**
-- Viper's Pit ult aktif — Pit içi near-sight Viper'a avantaj, Fade haunt + prowler Pit içi near-sight'ta değer kaybeder
-- Fade utility cooldown'dayken — prowler + haunt + seize harcandıysa Fade aim silahına düşer
-- Post-plant round'larında — Viper snake bite + wall + orb defuse hattı kapar, Fade seize alanı wall arkası info vermez
-- Lineup-heavy map'lerde (Icebox, Breeze) — Viper post-plant lineup silahı Fade reaktif utility'ye karşı baskın
+- Viper's Pit aktif — Pit içi görüş daralması haunt + prowler'ı etkisiz kılıyor
+- Fade prowler + haunt + seize hepsi harcanmışsa Fade saf aim'e düşüyor
+- Spike kurulduktan sonra — Viper snake bite + duvar + orb defuse hattını kapatıyor, seize alan bilgisi vermiyor
+- Icebox ve Breeze gibi uzun hatlı haritalarda Viper post-plant dizilimi Fade'in tepkisel araçlarını geçiyor
 
-**Balanced:** Ascent, Sunset orta mesafeli map'lerde matchup Fade haunt trajectorisi ve Viper wall hattı timing'ine bağlı.
+**Dengeli:** Ascent ve Sunset'te haunt atış açısı ile Viper duvarının konumuna göre değişiyor.
 
-## 3. Key Düellolar
+## 3. Kritik Düellolar
 
-**IF** Fade haunt eye Viper smoke hattının üstüne atıldı
-**MEANING** Haunt smoke içini trail'ler, Viper takım smoke arkasında gizli değil, Fade takım pre-aim
-**COUNTER** Viper wall hattını haunt trajectorisinden uzak açıya yerleştir. Haunt ses'ini duyduğu an wall'u kaydır. Alternatif: snake bite ile haunt lokasyonunun üstüne molly at, haunt silinir.
-**WHY** Haunt silahı görsel info + trail, smoke görsel cover. İki utility karşılaşırsa haunt kazanır çünkü trail cover'ı deler. Viper'ın silahı haunt'u cast öncesi silmek ya da wall'u haunt hattı dışına taşımak.
-
----
-
-**IF** Viper Pit ult aktif, Fade prowler Pit içine sokuldu
-**MEANING** Prowler Pit içi görüş, Viper takım near-sight olsa bile prowler bilgi verir
-**COUNTER** Viper takım prowler sesini duyduğu an rifle ile vurmalı. Prowler HP pool'u düşük, Pit near-sight Viper takım için prowler'ı vurmakta avantajlı.
-**WHY** Prowler mobile silah ama HP pool'u düşük. Pit içi near-sight Viper'a tepki üstünlüğü verir, Fade prowler uzaktan kontrol eder. Prowler silinirse Fade info silahı iptal.
+**IF** Haunt'u Viper duvarının üstünden geçirecek açıya attın
+**MEANING** Haunt smoke içini tarar, iz açar — Viper takımı duvar arkasında artık gizli değil, senin takımın pre-aim kuruyor
+**COUNTER** Duvarını haunt atış açısının dışına taşı. Haunt sesini duyduğun an duvarı kaydır. Ya da snake bite'ı haunt'un üstüne at — haunt düşer.
+**WHY** Haunt görsel bilgi + iz, smoke sadece görsel engel. Karşılaşırsa haunt kazanır çünkü iz smokeı deler. Viper'ın tek seçeneği haunt atılmadan önce duvarı farklı hatta kurmak.
 
 ---
 
-**IF** Fade seize molly Viper wall arkasına atıldı
-**MEANING** Seize area decay + immobilize, Viper takım wall arkasında savunmasız, reposition iptal
-**COUNTER** Viper takım wall arkası pozisyonunu round-bazlı değiştir. Seize sesini duyduğu an wall'dan çık. Alternatif: snake bite ile seize alanının üstüne at, mol ly karşı mol ly.
-**WHY** Seize area silahı ama wall arkasını bilmeden atılmaz. Fade haunt bilgisi olmadan seize yanlış açıya gider. Viper wall arkası pozisyonunun ses patterni round bazlı değişmeli.
+**IF** Prowler'ı Viper's Pit içine soktun
+**MEANING** Prowler Pit içini tarar, görüş daralmış olsa bile bilgi verir
+**COUNTER** Prowler sesini duyar duymaz tüfekle vur. Pit içi görüş daralması Viper'a tepki üstünlüğü veriyor, prowler'ın canı düşük — kolayca düşürürsün.
+**WHY** Prowler hareket eder ama canı azdır. Prowler düşerse Fade o hattaki tüm bilgiyi kaybeder.
 
 ---
 
-**IF** Fade Nightfall ultu Viper site hattına atıldı
-**MEANING** Ult alan deafen + trail, Viper takım Pit içinde bile ses kaybı, Fade takım pre-aim
-**COUNTER** Viper ult sesinde cover arkasına geç. Pit ult ile Nightfall hattının üstünden cover kur — Pit near-sight Fade prowler silahına karşı kısmi koruma.
-**WHY** Nightfall area silahı, Viper Pit area silahı, iki ult karşılıklı. Nightfall trail deafen, Pit near-sight + decay. İki alan çakışırsa Viper Pit hermetik kapalı alan avantajı, Nightfall trail Viper takım cover hattı için info verir.
+**IF** Seize'i Viper duvarının arkasına attın
+**MEANING** Seize alanda hasar + kilitliyor, Viper takımı duvar arkasında savunmasız, yer değiştiremez
+**COUNTER** Duvar arkası konumunu her round değiştir. Seize sesini duyduğun an duvardan çık. Ya da snake bite'ı seize alanının üstüne at.
+**WHY** Seize körlemesine atılmaz, haunt olmadan nereye attığını bilemezsin. Duvar arkası pozisyon ses düzenin tahmin edilemez olmalı.
 
 ---
 
-**IF** Viper fake execute, Fade haunt B site'a atıldı
-**MEANING** Fade haunt yanlış site'ta, Viper A tarafında serbest, execute cevapsız
-**COUNTER** Fade haunt'u rotate için sakla. Round başı haunt tek site değil, rotate hattına denk atılmalı. Alternatif: drone alternatifi olmadığı için prowler ile rotate tarama.
-**WHY** Fade utility yerel silah, iki site aynı anda taranamaz. Viper global execute silahı, Fade haunt yanlış site'a atılırsa execute Fade bilgi silahı dışında gelir.
+**IF** Nightfall Viper'ın site hattına girdi
+**MEANING** Alanda sağırlık + iz açılıyor, Viper Pit içinde bile sesi kaybediyor, Fade takımı pre-aim kuruyor
+**COUNTER** Nightfall sesini duyduğun an engel arkasına geç. Pit aktifse Nightfall hattının üstünden kapak kur — Pit görüş daralması prowler'a karşı kısmi koruma sağlıyor.
+**WHY** Nightfall iz + sağırlık, Pit görüş daralması + hasar. İkisi aynı anda patladıysa Pit kapalı alan avantajı devam ediyor ama Nightfall Pit dışındaki herketi teşhir ediyor.
 
 ---
 
-**IF** Viper snake bite molly defuse alanına, Fade seize üstüne molly
-**MEANING** İki molly defuse alanında, Fade seize damage Viper snake bite damage'a ekleniyor, Viper takım retake alanında ölür
-**COUNTER** Viper snake bite'ı seize alanı dışına kaydır. İki molly üst üste değil, iki farklı defuse hattına atılmalı.
-**WHY** Molly ekonomisi alan kontrolü silahı, iki molly aynı alanda damage'ı iki katına çıkarmaz ama alan iki katı olur. Viper molly seçimi Fade molly hattından bağımsız yapılmalı.
+**IF** Viper sahte hamle yaptı, sen haunt'u yanlış siteye attın
+**MEANING** Haunt boşa gitti, Viper gerçek siteye açılıyor, cevap veremiyorsun
+**COUNTER** Haunt'u round başı tek siteye atma. Rotate hattını tarayacak açıya sakla. Prowler ile rotate hattını tara.
+**WHY** Haunt tek bölgeyi tarar, Viper global hamle yapabiliyor. Haunt yanlış yerdeyse Viper bilgi araçlarının dışından geliyor.
 
 ---
 
-**IF** Fade prowler A Main Viper takım hattına, Viper orb smoke Fade prowler görüşünü kesti
-**MEANING** Orb smoke prowler görüşünü siler, Fade prowler info silahı kör, takım entry info'su yok
-**COUNTER** Fade prowler'ı orb hattından uzak açıya at. Orb cooldown'unu hesapla, Viper orb atıldıktan sonra prowler hattını değiştir.
-**WHY** Orb smoke görsel silah, prowler görsel bilgi silahı. İki silah karşılaşırsa orb kazanır çünkü prowler smoke içinde göz kapalı. Prowler rotasının orb ekonomisine göre ayarlanması Fade'in silahı.
+**IF** Fade seize ve Viper snake bite aynı alana atıldı
+**MEANING** İki hasar kaynağı üst üste — Viper takımı o alanda ölüyor
+**COUNTER** Snake bite'ı seize dışına at. İki farklı defuse hattına ayrı ayrı koy.
+**WHY** Aynı alana iki hasar kaynağı koymak alanı genişletmiyor, biri boşa gidiyor. Ayrı hatlar daha geniş kapsama alıyor.
 
-## 4. Utility Takası
+---
 
-Fade ekonomisi Prowler (2) + Haunt (1) + Seize (1) + Nightfall (ult). Viper ekonomisi wall + orb (fuel paylaşımı) + snake bite (2) + Viper's Pit (ult). Fade bilgi + takip silahı, Viper kimyasal cover + alan silahı. Round içi utility sırası: Fade haunt (round başı bilgi) → Viper wall + orb (cover kurulumu) → Fade prowler + seize (entry) → Viper snake bite (post-plant) → Nightfall vs Viper's Pit (ult round). Fade'in silahı Viper cover'ını info'lamak, Viper'ın silahı Fade info'sunu smoke ile silmek. Fuel ekonomisi Viper için belkemiği — fuel yanlış harcanırsa Fade prowler wall hattı dışında serbest. Ult ekonomisi: Nightfall area silahı, Viper's Pit area silahı, iki ult aynı round patlarsa alan çakışması olur. Pit hermetik kapalı, Nightfall trail silahı — iki alan üst üste gelirse Viper Pit near-sight avantajı devam eder.
+**IF** Prowler A Main'e girdi, Viper orb smokeı prowler görüşünü kesti
+**MEANING** Prowler smoke içinde kör — bilgi yok, takım girmek için alan okuyamıyor
+**COUNTER** Prowler'ı orb hattından uzak açıya at. Orb attıktan sonra prowler rotasını değiştir.
+**WHY** Orb smoke görsel engel, prowler smoke içinde göremez. Prowler rotası orb konumuna göre şekillenmeli.
 
-## 5. Map Bazlı Değişim
+## 4. Araç Takası
 
-**Icebox (Viper avantajlı):** Viper Icebox meta'sı, wall + lineup silahı. Fade haunt Icebox vertical alanında trail verir ama Viper fuel ekonomisi Icebox'ın dar choke'larında maksimum.
+Fade: prowler (2) + haunt (1) + seize (1) + Nightfall (ult). Viper: duvar + orb (yakıt paylaşımı) + snake bite (2) + Viper's Pit (ult).
 
-**Breeze (Viper avantajlı):** Uzun sightline Viper wall meta. Fade prowler Breeze'in geniş alanında range sınırlı.
+Round akışı:
+- Round başı: haunt bilgi açıyor → Viper duvar + orb kapama kuruyor
+- Giriş anı: prowler + seize sürüyor → snake bite defuse hattını kesiyor
+- Ult round: Nightfall alanda iz + sağırlık vs Pit görüş daralması + hasar
 
-**Split (Fade avantajlı):** Vertical + dar choke Fade prowler için ideal. Haunt vertical alanda trail verir, Viper fuel wall hattı Split dar choke'larında yeterli ama Fade bilgi silahı baskın.
+Viper'ın zayıf noktası yakıt. Duvar ve orb aynı anda tam güçte tutulamaz. Yakıt bittiyse prowler açık hatta giriyor. Bunu fark et ve yakıt düştüğü anda itin.
 
-**Ascent (Fade avantajlı):** Mid door, A Main Tree haunt hatları. Fade Ascent meta'sında S tier, Viper burada B tier.
+## 5. Harita Farkları
 
-**Bind (Balanced):** Teleporter rotate Fade utility'sini eskitir ama Viper fuel ekonomisi Bind dar choke'larında maksimum.
+**Icebox (Viper avantajlı):** Dar geçitler Viper duvarına uygun. Prowler Icebox'ın dikey alanında menzil sınırına çabuk takılıyor.
 
-**Lotus (Balanced):** 3 site döner kapı, iki agent farklı bölgelerde baskın.
+**Breeze (Viper avantajlı):** Uzun hatlar Viper duvarına oyuyor. Prowler geniş alanda hedef bulamadan bitiyor.
 
-**Sunset (Balanced):** Multi-angle site'lar, Fade haunt Market'ta, Viper wall A Main'de.
+**Split (Fade avantajlı):** Dikey hatlar + dar geçitler prowler için ideal. Haunt dikey alanda iz açıyor, Viper duvarı yeterli ama bilgi baskısı altında.
 
-## 6. Flip Moment'ler
+**Ascent (Fade avantajlı):** Mid kapısı, A Main ağaç gibi haunt hatları Fade'e açık. Viper bu haritada duvar hattı kurmakta zorlanıyor.
 
-**Flip 1 — Haunt vs wall:** Fade haunt wall hattı üzerinden trail açtı ise round Fade'e. Wall haunt trajectory dışında ise round Viper'a.
+**Bind (Dengeli):** Işınlanma rotası Fade araçlarını yoruyor ama Viper de dar geçitlerde maksimum.
 
-**Flip 2 — Prowler Pit içinde:** Prowler Pit içine girdi ve sağ çıktı ise Fade bilgi feed'inde, round Fade'e. Prowler Viper rifle ile düştü ise round Viper'a.
+**Lotus (Dengeli):** 3 site döner kapı, her agent farklı bölgede baskın.
 
-**Flip 3 — Nightfall vs Viper's Pit:** İki ult aynı round patladı. Pit hermetik alan Viper takım için cover, Nightfall Viper cover hattını delemez — round Viper'a. Nightfall Viper Pit dışındaki takımı yakaladıysa round Fade'e.
+**Sunset (Dengeli):** Çok açılı siteler — haunt Market'ta, Viper duvarı A Main'de.
 
-**Flip 4 — Seize + snake bite alan çakışması:** Fade seize ve Viper snake bite farklı alanlara atıldı ise iki molly iki ayrı hat, round dengeli. Aynı alana atıldı ise molly değeri yarı yarıya, fuel + seize boşa.
+## 6. Round'u Döndüren Anlar
 
-## 7. Pro Coach Notları
+**An 1 — Haunt vs duvar:** Haunt Viper duvarının üstünden geçti mi? Geçtiyse round Fade'e. Geçemediyse Viper duvar arkasında güvende, round Viper'a.
 
-**VCT'de nasıl oynanıyor:** Pro seviye Fade vs Viper matchup'ı info vs cover çekişmesi. Fade tarafı haunt trajectorisini Viper wall hattının üstüne atıyor, Nightfall ult'u Viper Pit öncesi kullanıyor. Viper tarafı fuel ekonomisini round boyu düz tüketiyor, Pit ult'u retake round'ları için saklıyor. Pro takımlar Icebox + Breeze'de Viper, Ascent + Split'te Fade pick ediyor.
+**An 2 — Prowler Pit içinde:** Prowler Pit'ten sağ çıktı mı? Çıktıysa Fade takımı içeriyi görüyor. Viper vurduysa round Viper'a döndü.
 
-Fade tarafı meta yönelim: haunt'u wall trajectorisinin üstüne kilitlemek, prowler'ı Viper Pit dışından atmak, Nightfall ult'u Viper ult'una karşı cevap olarak kullanmak. Viper tarafı meta yönelim: fuel'i round boyu paylaştırmak, snake bite'ı Fade seize dışına kaydırmak, Pit ult'u retake için saklamak.
+**An 3 — Nightfall vs Viper's Pit:** İkisi aynı anda aktif. Pit dışındaki Viper takım üyelerini Nightfall yakaladıysa round Fade'e. Herkes Pit içindeyse Pit görüş daralması Nightfall'u kısmen karşılıyor.
 
-**Meta tier durumu:** Fade S tier initiator Ascent + Icebox + Split için. Viper S tier controller Icebox + Breeze için, A tier Fracture + Lotus için. Matchup pro sahnede düzenli görülür, Icebox iki agent'ın ortak map'i.
+**An 4 — Snake bite + seize çakışması:** İkisi farklı alanlara atıldıysa iki ayrı hat, dengeli. Aynı alana atıldıysa biri boşa gitti.
 
-**** Fade haunt trail süresi ve wall-piercing davranışı patch 9.x'te kontrol edilmeli.
+## 7. Koç Notu
 
-**** Viper Pit near-sight range'i ve Fade prowler Pit içi etkileşimi pratik testle doğrulanmalı.
+Fade oynuyorsan haunt trajektorisini Viper duvarının tam yüksekliğine göre ayarla — ne düşük, ne yüksek, duvarın çatısından geçecek şekilde at. Haunt'u smoke içine gömersen bilgi sıfır.
 
-**Coach test (Sentinels tarzı):** "Fade Viper'ı yenmek için haunt trajectorisini wall yüksekliğinin üstüne taşımalı, Viper Fade'i yenmek için fuel ekonomisini haunt hattı dışına kaydırmalı. Fade bilgi ile çizer, Viper kimyasal ile siler — çizginin kurulumu silmeden önce tamamsa round Fade'e, silme çizimden önce gelirse round Viper'a. İki agent aynı alanı farklı mürekkeple işliyor."
+Viper oynuyorsan Fade'in haunt attığı anda yakıtın nerede olduğunu takip et. Yakıt yüksekse duvarı kaydır. Yakıt düşükse duvarı kapat, orb'u kapat — prowler açık geçer, o anda ateş hattında ol.
+
+Nightfall vs Viper's Pit karşılaşmasında: Pit dışında kalan Viper takım üyesi varsa Nightfall o kişiyi yakalar. Nightfall sesini duyduğun an Pit içine gir.
+
+> **Patch 9.x notu:** Haunt iz süresi ve duvar geçişi davranışı patch'te güncellendi — pratik testlerde kontrol et.
+
+> **Pratik test:** Viper Pit içinde prowler'ın tepki süresi değişkenlik gösteriyor — deathmatch'te test et.

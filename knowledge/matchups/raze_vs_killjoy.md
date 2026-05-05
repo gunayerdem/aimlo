@@ -1,61 +1,61 @@
 # EŞLEŞME: Raze vs Killjoy
 
-## Etkileşim Kimliği
-Raze, Killjoy'un en büyük kabusu. Killjoy'un kitinin her parçası yerde, hareketsiz, görevini yapmak için bekliyor. Raze'in kitinin her parçası patlayıcı ve hareketli. Boom Bot keşfeder ve alarmbot'ları temizler. Paint Shell'ler (granatlar) turret, nanoswarm ve alarmbot'ları güvenli mesafeden yok eder. Blast Pack'ler Raze'in yer seviyesindeki trap'lerin üstünden uçmasını sağlar. Bu, sentinel kategorisindeki en sert counter'dır — Raze sadece Killjoy'la dövüşmez, Killjoy'un raunda katkısını siler.
+## Bu Eşleşme Neden Önemli
+Killjoy'un kiti yerde, hareketsiz. Raze'in Boom Bot'u alarmbot'ları bulup üstüne yürür. Granatar turret, nanoswarm ve alarmbot'ları güvenli mesafeden yok eder. Satchel yer seviyesindeki tuzakların üstünden atlatır. Raze, Killjoy'un kiti hayattayken siteye girerse — o raundda Killjoy'un katkısı sıfır.
 
-## Yaygın Cezalandırma Kalıpları
+## Cezalandırma Kalıpları
 
-### Raze Killjoy'u Cezalandırırken
+### Raze, Killjoy'u Cezalandırıyorsa
 
-**IF**: Boom Bot site'a gönderilerek alarmbot'ları tetikliyor ve nanoswarm hasarını oyuncu yerine alıyor
-**MEANING**: Killjoy'un bilgi ve hasar araçları bir bot üzerine harcanıyor
-**COUNTER**: Killjoy yetenek araçlarını Boom Bot'un yol almadığı konumlara saklamalı
-**WHY**: Boom Bot ucuz bir fedakarlık aracı olarak tüm tuzakları tüketir
+**IF**: Boom Bot siteye gönderilip alarmbot'ları tetikliyor, nanoswarm hasarını oyuncu yerine bot alıyor
+**MEANING**: Killjoy'un bilgi ve hasar araçları ucuz bir bota harcanıyor
+**COUNTER**: Alarmbot ve nanoswarm'ı Boom Bot'un gitmeyeceği köşelere koy — bot sola gidiyorsa sağa sakla
+**WHY**: Boom Bot bir kere geçince tüm tuzak düzeni çöker
 
-**IF**: Granatlar turret pozisyonlarına güvenli mesafeden atılıp yok ediliyor
-**MEANING**: Killjoy karşılık ateş edemez — turret tek taraflı yok ediliyor
-**COUNTER**: Turret'ı granatların hassas nişanlanmasını gerektiren yükseltilmiş pozisyonlara yerleştirmeli
-**WHY**: Yer seviyesindeki turret granat için kolay hedef
+**IF**: Granatlar turret'a güvenli mesafeden atılıp yok ediliyor
+**MEANING**: Turret karşılık veremez, tek taraflı siliniyor
+**COUNTER**: Turret'ı raf, kasa, yüksek zemin gibi granata direk açı vermeyen yerlere al
+**WHY**: Yer seviyesindeki turret granat için serbest hedef
 
-**IF**: Blast Pack ile nanoswarm yerleştirme alanları tamamen bypass ediliyor
-**MEANING**: Hasar bölgesi hava yolu ile anlamsız
-**COUNTER**: Nanoswarm'ları beklenen Boom Bot yolunun dışına koymak — bot sola giderse swarm'lar sağda olmalı
-**WHY**: Satchel ile uçuş yer seviyesi hasar bölgelerini tamamen atlar
+**IF**: Satchel ile nanoswarm'ın olduğu alan atlayarak geçiliyor
+**MEANING**: Hasar bölgesi işe yaramıyor, Raze zarar görmeden içeri giriyor
+**COUNTER**: Nanoswarm'ı giriş köşesine değil, içeri girdikten sonraki ikinci adıma göm — Raze satchel ile ilk noktayı geçer ama ikinciye düşer
+**WHY**: Satchel yalnızca ilk tuzak katmanını atlatır, derinlikteki tuzağı atlatamaz
 
-### Killjoy Raze'i Cezalandırırken
+### Killjoy, Raze'i Cezalandırıyorsa
 
-**IF**: Yetenek araçları Raze'in Boom Bot'unun yol almadığı pozisyonlarda saklı
-**MEANING**: Boom Bot temizleme süreci boş geçiyor — yetenek araçları sağlam
-**COUNTER**: Raze yetenek aracı yıkımını girişten önce öncelik sırasına almalı, Boom Bot'u oyuncu avına değil
-**WHY**: Saklı yetenek araçları standart temizleme kalıbını bozar
+**IF**: Alarmbot ve nanoswarm Boom Bot'un gitmediği köşelere saklanmış
+**MEANING**: Boom Bot boş geziyor, kit sağlam kalıyor
+**COUNTER**: Raze girmeden önce Boom Bot'u oyuncu avı için değil kit temizliği için gönder
+**WHY**: Kit sağlamsa giriş tehlikeli — önce temizle, sonra gir
 
-**IF**: Lockdown Raze'i diğer yetenek araçları temizlenmiş olsa bile alandan atıyorsa
-**MEANING**: Ultimate tüm yetenek aracı yıkımını geçersiz kılar
-**COUNTER**: Raze Lockdown cihazını yok etmeyi önceliklendirmeli veya zamanlama ile kaçmalı
-**WHY**: Lockdown tüm bölge kontrolünü tek başına sağlar
+**IF**: Lockdown, kit temizlenmiş olsa bile Raze'i bölgeden atıyor
+**MEANING**: Ultimate tüm temizleme işini sıfırlıyor
+**COUNTER**: Lockdown cihazını görürsen önce onu yok et — kit sonra gelir
+**WHY**: Lockdown tek başına tüm bölge kontrolünü alır, kit olmadan da çalışır
 
-## Tekrarlanan Başarısızlık Ne Anlama Gelir
-**Killjoy** sürekli tüm kurulumunu Raze'e kaybediyorsa, yetenek araçlarını tek bir granat veya Boom Bot koşusunun her şeyi temizlediği tahmin edilebilir yer seviyesi kümelerine yerleştiriyor. Yetenek araçlarını dikey ve alışılmadık pozisyonlara yaymalı.
+## Sürekli Aynı Şekilde Kaybediyorsan
+**Killjoy olarak** her kurulumunu Raze'e kaybediyorsan: turret, alarmbot, nanoswarm'ın hepsini aynı anda tek bir Boom Bot koşusu veya iki granatla temizlenecek şekilde yığıyorsun. Kiti birbirinden ayır, bir kısmını yüksek zemine al, bir kısmını alışılmadık köşeye göm.
 
-**Raze** araçlara sahip olmasına rağmen Killjoy kurulumunu temizleyemiyorsa, Boom Bot'u yetenek aracı temizleme yerine oyuncu avına kullanıyor veya granatları boş noktalara atıyor. Giriş öncesi yetenek aracı yıkımını önceliklendirmeli.
+**Raze olarak** araçların varken kiti temizleyemiyorsan: Boom Bot'u oyuncu peşinde harcıyorsun, granatları kör atıyorsun. Girmeden önce Boom Bot önce, sonra granat — sırayı boz.
 
 ## AIMLO Ne Demeli
 
-### Oyuncu cezalandırılan taraftayken
-**Killjoy kurulumunu Raze'e kaybediyorsa**: "Raze'in kiti, yetenek araçların beklenen yerlerde yerdeyken seninkini tamamen counter'lıyor. Turret'ı yukarı al, alarmbot'u ana Boom Bot yolundan sakla ve nanoswarm'ları diğer yetenek araçlarından ayır."
+### Cezalandırılan taraftaysan
+**Killjoy kurulumunu Raze'e kaybediyorsan**: "Turret'ı aşağıda bırakırsan granat onu anında götürür. Yukarı al. Alarmbot'u Boom Bot'un yolundan çek. Nanoswarm'ları birbirinden ayır — hepsini aynı noktaya yığma."
 
-**Raze Killjoy'u temizleyemiyorsa**: "Onun kurulumunu yok etmek için oyundaki en iyi araçlara sahipsin. Önce Boom Bot gönderip alarmbot'ları tetikle, sonra turret'ı granatla. Killjoy'un yetenek aracı gerçek tehditken patlayıcıları oyuncu öldürmek için harcama."
+**Raze olarak Killjoy kitini temizleyemiyorsan**: "Boom Bot'u oyuncu öldürmek için harcıyorsun. Önce kite gönder, alarmbot tetiklensin. Sonra turret'ı granatla. Killjoy kiti hayattayken patlayıcını boşa harcama."
 
-### Oyuncu cezalandıran taraftayken
-**Raze Killjoy'u parçalıyorsa**: "Onun site savunmasını sadece yetenek aracıyla siliyorsun. Takım push etmeden önce kurulumunu temizlemeye devam et ve o etkisiz bir faktör olsun."
+### Cezalandıran taraftaysan
+**Raze olarak Killjoy kitini siliyorsan**: "Killjoy site'ta etkisiz. Takım girmeden önce kiti temizlemeye devam et — o raundda sadece silah var, kit yok."
 
-**Killjoy Raze'e karşı ayakta kalıyorsa**: "Saklı yerleştirmelerin Raze'i tahmin yapmaya zorluyor. Yetenek aracı pozisyonlarını çeşitlendirmeye devam et ki onun temizleme kalıbı kurulumunla uyuşmasın."
+**Killjoy olarak Raze'e karşı duruyorsan**: "Boom Bot boş geziyor çünkü kiti beklediği yerde bulamıyor. Her raund yerleştirmeyi biraz kaydır — bir önceki raundda nereye baktığını gördü, aynı yere koyma."
 
 ## Rank Modülasyonu
-**LOW**: Raze Boom Bot'u yetenek aracı temizleme için kullanmaz. Killjoy her şeyi varsayılan noktalara koyar. Counter-eşleşmesi zar zor işler. Raze'e bilinçli yetenek aracı temizlemeyi öğret.
+**LOW**: Raze Boom Bot'u kit temizliği için kullanmaz, oyuncu peşinde harcar. Killjoy her şeyi varsayılan yere koyar. Raze'e önce Boom Bot, sonra granat sırasını öğret.
 
-**MID**: Raze biraz yetenek aracı temizlemeye başlar ama tutarsız. Killjoy yerleştirmeyi adapte etmez. Killjoy'a özellikle Raze'e karşı yetenek aracını yaymasını ve yukarı almasını öğret.
+**MID**: Raze kit temizler ama sırayı değiştirir — bir raund Boom Bot, bir raund kör granat. Killjoy yerleştirmeyi değiştirmez. Killjoy'a turret'ı yukarı almayı ve alarmbot'u Boom Bot yolundan çekmeyi öğret.
 
-**HIGH**: İki taraf da dinamiği anlar. Killjoy yaratıcı saklama yapar; Raze sistematik temizler. Adaptasyon oyununu öğret.
+**HIGH**: İki taraf dinamiği biliyor. Killjoy tuzak parçalarını farklı yüksekliklere dağıtıyor, Raze hepsini tek koşuda taramaya çalışıyor. Killjoy'a kit parçalarını dikey ve yatay olarak birbirinden ayırmasını söyle; Raze'e alışılmadık köşeleri de Boom Bot'la taramasını söyle.
 
-**ELITE**: Killjoy'un kurulumu Raze kompozisyonlarına karşı tamamen yeniden tasarlanmalı. Raze'in temizliği sistematik olmalı ve alışılmadık noktaları kapsamalı. Her ikisine raundlar arası birbirinin kalıplarını incelemeyi öğret.
+**ELITE**: Killjoy olarak Raze olan kadrolara karşı varsayılan yerleştirme kullanma — her raund farklı köşe, farklı yükseklik. Raze olarak temizleme sırını her raund değiştir — önce granat, sonra Boom Bot veya tam tersi. İkisi de bir önceki raundda kiti nerede, nasıl temizlediğine baksın ve bir sonraki raunda göre pozisyon değiştirsin.
