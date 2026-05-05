@@ -19,12 +19,19 @@ const nextConfig: NextConfig = {
     //   - https://*.supabase.co       → realtime auth/db requests
     //   - 'unsafe-inline' for styles  → Tailwind + style props (cannot avoid in Next 16 today)
     //
-    // Dev mode (Turbopack HMR) injects inline scripts + uses eval() for hot reload.
-    // We relax script-src in dev only — production stays strict.
+    // Next.js 16 production HTML embeds inline <script> tags carrying the
+    // React Server Components payload (self.__next_f.push(...)). Without
+    // 'unsafe-inline', browsers block those tags and React never hydrates —
+    // the page is stuck on its static loading skeleton.
+    //
+    // The proper fix is nonce-per-request via middleware
+    // (https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy);
+    // until that lands, both dev and prod allow 'unsafe-inline'. Dev additionally
+    // allows 'unsafe-eval' for Turbopack HMR.
     const isDev = process.env.NODE_ENV !== "production";
     const scriptSrc = isDev
       ? "script-src 'self' 'unsafe-eval' 'unsafe-inline'"
-      : "script-src 'self'";
+      : "script-src 'self' 'unsafe-inline'";
 
     const csp = [
       "default-src 'self'",
