@@ -480,9 +480,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Get API key
-    // Vision route migrated to OpenAI GPT-5 mini (May 2026). Uses OPENAI_API_KEY.
-    // AIMLO_AI_KEY/ANTHROPIC_API_KEY remain set for /api/ai/{feedback,insight,report}
-    // routes which still call Anthropic.
+    // All AI routes use OpenAI GPT-5 mini as of May 2026. Single key.
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
       console.error("[Aimlo AI] Vision: no API key configured");

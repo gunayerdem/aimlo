@@ -14,8 +14,8 @@ import type { RoundData as EngineRoundData } from "@/types";
  * POST /api/ai/report
  * Generates end-of-match coaching report.
  *
- * - ANTHROPIC_API_KEY set → AI text fields + deterministic stats
- * - ANTHROPIC_API_KEY missing → deterministic only
+ * - Migrated to OpenAI GPT-5 mini (May 2026) — uses OPENAI_API_KEY
+ * - OPENAI_API_KEY missing → deterministic stats only (no AI text)
  * - All paths guaranteed to return valid ReportResponse shape
  */
 
@@ -402,7 +402,7 @@ function generateDeterministicReport(body: ReportRequest): ReportResponse {
    AI REPORT — with timeout, validation, safe prompt
    ══════════════════════════════════════════════════════════ */
 async function generateAIReport(body: ReportRequest, userId?: string): Promise<ReportResponse> {
-  const apiKey = process.env.AIMLO_AI_KEY || process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.OPENAI_API_KEY;
   const stats = generateDeterministicReport(body);
 
   if (!apiKey) return stats;
@@ -618,20 +618,23 @@ ${scoringContext}`;
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), AI_TIMEOUT_MS);
 
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-        "anthropic-beta": "extended-cache-ttl-2025-04-11",
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: "claude-haiku-4-5-20251001",
-        max_tokens: 700,
-        // 1h cache for system prompt — same KB+policy across many users.
-        system: [{ type: "text", text: systemPrompt, cache_control: { type: "ephemeral", ttl: "1h" } }],
-        messages: [{ role: "user", content: userPrompt }],
+        model: "gpt-5-mini",
+        max_completion_tokens: 700,
+        reasoning_effort: "minimal",
+        // OpenAI auto-cache: stable systemPrompt prefix is cached automatically.
+        // Report schema is rich (multiple optional sections); use json_object mode.
+        response_format: { type: "json_object" },
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt },
+        ],
       }),
       signal: controller.signal,
     });
@@ -642,14 +645,14 @@ ${scoringContext}`;
       return stats;
     }
 
-    // Parse body with timeout still active
     const data = await response.json();
     clearTimeout(timeoutId);
-    const text: string = data?.content?.[0]?.text || "";
-    const stopReason = data?.stop_reason ?? "unknown";
-    const usage = data?.usage as { input_tokens?: number; output_tokens?: number; cache_creation_input_tokens?: number; cache_read_input_tokens?: number } | undefined;
+    const text: string = data?.choices?.[0]?.message?.content || "";
+    const stopReason = data?.choices?.[0]?.finish_reason ?? "unknown";
+    const usage = data?.usage as { prompt_tokens?: number; completion_tokens?: number; prompt_tokens_details?: { cached_tokens?: number } } | undefined;
     if (usage) {
-      console.log(`[Aimlo AI tokens] report in=${usage.input_tokens ?? 0} out=${usage.output_tokens ?? 0} cache_create=${usage.cache_creation_input_tokens ?? 0} cache_read=${usage.cache_read_input_tokens ?? 0} stop=${stopReason}`);
+      const cached = usage.prompt_tokens_details?.cached_tokens ?? 0;
+      console.log(`[Aimlo AI tokens] report in=${usage.prompt_tokens ?? 0} cached=${cached} out=${usage.completion_tokens ?? 0} finish=${stopReason}`);
     }
 
     // Robust JSON extraction: strips markdown fences, balances braces
@@ -782,7 +785,7 @@ export async function POST(request: NextRequest) {
     console.log(`[Aimlo AI] Report quality: ${qc.score}/100${fs.weakest ? ` (weakest: ${fs.weakest})` : ""}`);
 
     // Field-level refinement if quality is low
-    const apiKey = process.env.AIMLO_AI_KEY || process.env.ANTHROPIC_API_KEY;
+    const apiKey = process.env.OPENAI_API_KEY;
     if (qc.score < 65 && fs.weakest && apiKey && typeof (report as Record<string, unknown>)[fs.weakest] === "string") {
       const weakText = (report as Record<string, unknown>)[fs.weakest] as string;
       const fieldMap: Record<string, string> = { summary: "maç özeti", mistake: "ana hata analizi", adjustment: "düzeltme önerisi" };
@@ -797,16 +800,24 @@ Sadece düzeltilmiş metni döndür.`;
       try {
         const rc = new AbortController();
         const rt = setTimeout(() => rc.abort(), 10000);
-        const rr = await fetch("https://api.anthropic.com/v1/messages", {
+        const rr = await fetch("https://api.openai.com/v1/chat/completions", {
           method: "POST",
-          headers: { "Content-Type": "application/json", "x-api-key": apiKey, "anthropic-version": "2023-06-01" },
-          body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: 300, system: "Radiant Valorant koçu. Her cümlede pozisyon + düşman + aksiyon ZORUNLU.", messages: [{ role: "user", content: refinePrompt }] }),
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
+          body: JSON.stringify({
+            model: "gpt-5-mini",
+            max_completion_tokens: 300,
+            reasoning_effort: "minimal",
+            messages: [
+              { role: "system", content: "Radiant Valorant koçu. Her cümlede pozisyon + düşman + aksiyon ZORUNLU." },
+              { role: "user", content: refinePrompt },
+            ],
+          }),
           signal: rc.signal,
         });
         clearTimeout(rt);
         if (rr.ok) {
           const rd = await rr.json();
-          const refined = rd?.content?.[0]?.text?.trim();
+          const refined = rd?.choices?.[0]?.message?.content?.trim();
           if (refined && refined.length > 30) {
             (report as Record<string, unknown>)[fs.weakest] = refined.slice(0, 600);
             console.log(`[Aimlo AI] Report field refined: ${fs.weakest}`);

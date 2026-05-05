@@ -17,7 +17,7 @@ import { sanitizeJsonStrings } from "@/lib/prompt-safety";
 
 const AI_TIMEOUT_MS = 20_000;
 const MAX_PAYLOAD_BYTES = 100_000; // 100KB max
-const ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages";
+const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
 
 const BASE_SYSTEM_PROMPT = `Sen AIMLO — Radiant seviye gerçek bir Valorant koçusun. Veriye dayalı, direkt konuş.
 
@@ -151,7 +151,7 @@ export async function POST(request: NextRequest) {
     const safeContext = sanitizeContext(body.context as Record<string, unknown>);
 
     // Get API key
-    const apiKey = process.env.AIMLO_AI_KEY || process.env.ANTHROPIC_API_KEY;
+    const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
       console.error("[Aimlo AI] Insight: no API key configured");
       return NextResponse.json(
@@ -201,29 +201,33 @@ export async function POST(request: NextRequest) {
       const ctrl = new AbortController();
       const tid = setTimeout(() => ctrl.abort(), AI_TIMEOUT_MS);
       try {
-        const res = await fetch(ANTHROPIC_API_URL, {
+        const res = await fetch(OPENAI_API_URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "x-api-key": apiKey,
-            "anthropic-version": "2023-06-01",
-            "anthropic-beta": "extended-cache-ttl-2025-04-11",
+            Authorization: `Bearer ${apiKey}`,
           },
           body: JSON.stringify({
-            model: "claude-haiku-4-5-20251001",
-            max_tokens: 1500,
-            // 1h cache for system prompt (KB + policy block) — these are
-            // identical for any user with same rank/agent/lang/tone, so the
-            // cache amortizes well across many concurrent users.
-            system: [{ type: "text", text: systemPrompt, cache_control: { type: "ephemeral", ttl: "1h" } }],
-            messages: [{ role: "user", content: userPrompt }],
+            model: "gpt-5-mini",
+            max_completion_tokens: 1500,
+            reasoning_effort: "minimal",
+            // OpenAI auto-cache: prefix-based, 90% discount on cached tokens.
+            // systemPrompt (KB + policy) is the stable prefix; userPrompt is per-call.
+            // No explicit cache_control needed — auto-handled.
+            messages: [
+              { role: "system", content: systemPrompt },
+              { role: "user", content: userPrompt },
+            ],
+            // Insight schema is complex (nested objects, optional fields), so we
+            // rely on the prompt's explicit JSON shape spec rather than json_schema
+            // strict mode which requires `additionalProperties: false` and all
+            // properties in `required` (incompatible with our optional fields).
+            response_format: { type: "json_object" },
           }),
           signal: ctrl.signal,
         });
         if (!res.ok) {
-          // Upstream rate-limit: surface to client.
           if (res.status === 429) return { ok: false, kind: "rate", httpStatus: 429 };
-          // Upstream 5xx: try ONE retry with jittered backoff (200-700ms).
           if (res.status >= 500 && res.status < 600 && attempt === 1) {
             await new Promise(r => setTimeout(r, 200 + Math.random() * 500));
             return callAI(userPrompt, 2);
@@ -231,12 +235,13 @@ export async function POST(request: NextRequest) {
           return { ok: false, kind: "5xx", httpStatus: res.status };
         }
         const d = await res.json();
-        // Token-usage observability.
-        const usage = d?.usage as { input_tokens?: number; output_tokens?: number; cache_creation_input_tokens?: number; cache_read_input_tokens?: number } | undefined;
+        // OpenAI usage object.
+        const usage = d?.usage as { prompt_tokens?: number; completion_tokens?: number; prompt_tokens_details?: { cached_tokens?: number } } | undefined;
         if (usage) {
-          console.log(`[Aimlo AI tokens] insight in=${usage.input_tokens ?? 0} out=${usage.output_tokens ?? 0} cache_create=${usage.cache_creation_input_tokens ?? 0} cache_read=${usage.cache_read_input_tokens ?? 0}`);
+          const cached = usage.prompt_tokens_details?.cached_tokens ?? 0;
+          console.log(`[Aimlo AI tokens] insight in=${usage.prompt_tokens ?? 0} cached=${cached} out=${usage.completion_tokens ?? 0}`);
         }
-        const t: string = d?.content?.[0]?.text || "";
+        const t: string = d?.choices?.[0]?.message?.content || "";
         try { return { ok: true, value: JSON.parse(t) }; } catch {
           const m = t.match(/\{[\s\S]*\}/);
           if (m) {

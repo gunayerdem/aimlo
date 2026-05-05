@@ -13,7 +13,7 @@ import { sanitizePromptInput } from "@/lib/prompt-safety";
  * POST /api/ai/feedback
  * Generates round-by-round coaching feedback.
  *
- * - When ANTHROPIC_API_KEY is set → real AI with deterministic fallback
+ * - Migrated to OpenAI GPT-5 mini (May 2026) — uses OPENAI_API_KEY
  * - When not set → deterministic only
  * - All paths guaranteed to return valid FeedbackResponse shape
  */
@@ -191,7 +191,7 @@ class FeedbackAIError extends Error {
 async function generateAIFeedback(
   body: FeedbackRequest,
 ): Promise<FeedbackResponse> {
-  const apiKey = process.env.AIMLO_AI_KEY || process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
     console.error("[Aimlo AI] No API key configured");
     throw new FeedbackAIError("ai_not_configured", "AI service not configured", 503);
@@ -377,24 +377,39 @@ ${patternContext}`;
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), AI_TIMEOUT_MS);
 
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-        "anthropic-beta": "extended-cache-ttl-2025-04-11",
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: "claude-haiku-4-5-20251001",
-        max_tokens: 500,
-        // System split into static (1h cached) prefix + per-call suffix.
-        // Static prefix = SYSTEM_PROMPT + KB knowledge (rare-changing).
-        // Per-call suffix = none here (all dynamic data is in `userPrompt`).
-        system: [
-          { type: "text", text: systemPrompt, cache_control: { type: "ephemeral", ttl: "1h" } },
+        model: "gpt-5-mini",
+        max_completion_tokens: 500,
+        reasoning_effort: "minimal",
+        // OpenAI auto-caches the prefix; the systemPrompt (KB + base instructions)
+        // is the stable prefix, userPrompt has per-call dynamic data.
+        response_format: {
+          type: "json_schema",
+          json_schema: {
+            name: "round_feedback",
+            strict: true,
+            schema: {
+              type: "object",
+              additionalProperties: false,
+              required: ["deathAnalysis", "enemyPatterns", "nextRoundPlan"],
+              properties: {
+                deathAnalysis: { type: "string" },
+                enemyPatterns: { type: "array", items: { type: "string" }, minItems: 2, maxItems: 4 },
+                nextRoundPlan: { type: "string" },
+              },
+            },
+          },
+        },
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt },
         ],
-        messages: [{ role: "user", content: userPrompt }],
       }),
       signal: controller.signal,
     });
@@ -402,28 +417,25 @@ ${patternContext}`;
     if (!response.ok) {
       clearTimeout(timeoutId);
       console.error(`[Aimlo AI] API ${response.status}`);
-      // Surface upstream rate-limits and server errors distinctly so the
-      // overlay can decide retry-with-backoff vs hard-fail.
       const upstreamStatus = response.status;
       const isRateLimit = upstreamStatus === 429;
       const is5xx = upstreamStatus >= 500 && upstreamStatus < 600;
       throw new FeedbackAIError(
         isRateLimit ? "ai_rate_limit" : is5xx ? "ai_upstream_5xx" : "ai_upstream_error",
-        `Anthropic API returned ${upstreamStatus}`,
+        `OpenAI API returned ${upstreamStatus}`,
         isRateLimit ? 429 : 502,
       );
     }
 
-    // Parse body with timeout still active
     const data = await response.json();
     clearTimeout(timeoutId);
-    // Token-usage observability: logs cache hits + token counts per call so
-    // cache effectiveness can be measured. Vercel logs are persistent.
-    const usage = data?.usage as { input_tokens?: number; output_tokens?: number; cache_creation_input_tokens?: number; cache_read_input_tokens?: number } | undefined;
+    // OpenAI usage object: prompt_tokens / completion_tokens / prompt_tokens_details.cached_tokens
+    const usage = data?.usage as { prompt_tokens?: number; completion_tokens?: number; prompt_tokens_details?: { cached_tokens?: number } } | undefined;
     if (usage) {
-      console.log(`[Aimlo AI tokens] feedback in=${usage.input_tokens ?? 0} out=${usage.output_tokens ?? 0} cache_create=${usage.cache_creation_input_tokens ?? 0} cache_read=${usage.cache_read_input_tokens ?? 0}`);
+      const cached = usage.prompt_tokens_details?.cached_tokens ?? 0;
+      console.log(`[Aimlo AI tokens] feedback in=${usage.prompt_tokens ?? 0} cached=${cached} out=${usage.completion_tokens ?? 0}`);
     }
-    const text: string = data?.content?.[0]?.text || "";
+    const text: string = data?.choices?.[0]?.message?.content || "";
 
     // Try direct JSON parse first, then regex fallback
     let parsed: unknown;
@@ -479,16 +491,24 @@ Sadece düzeltilmiş metni döndür.`;
         try {
           const rc = new AbortController();
           const rt = setTimeout(() => rc.abort(), 8000);
-          const rr = await fetch("https://api.anthropic.com/v1/messages", {
+          const rr = await fetch("https://api.openai.com/v1/chat/completions", {
             method: "POST",
-            headers: { "Content-Type": "application/json", "x-api-key": apiKey, "anthropic-version": "2023-06-01" },
-            body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: 200, system: "Sen Radiant Valorant koçusun. Her cümlede pozisyon + düşman davranışı + aksiyon ZORUNLU. Generic = FAIL.", messages: [{ role: "user", content: repairPrompt }] }),
+            headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
+            body: JSON.stringify({
+              model: "gpt-5-mini",
+              max_completion_tokens: 200,
+              reasoning_effort: "minimal",
+              messages: [
+                { role: "system", content: "Sen Radiant Valorant koçusun. Her cümlede pozisyon + düşman davranışı + aksiyon ZORUNLU. Generic = FAIL." },
+                { role: "user", content: repairPrompt },
+              ],
+            }),
             signal: rc.signal,
           });
           clearTimeout(rt);
           if (rr.ok) {
             const rd = await rr.json();
-            const repaired = rd?.content?.[0]?.text?.trim();
+            const repaired = rd?.choices?.[0]?.message?.content?.trim();
             // Validate repair is actually better — must have position/enemy keywords
             const rLower = (repaired || "").toLowerCase();
             const posWords = ["a short", "a long", "a main", "b short", "b long", "b main", "mid", "heaven", "hell", "market", "garage", "hookah", "catwalk", "cubby", "elbow", "lobby"];
