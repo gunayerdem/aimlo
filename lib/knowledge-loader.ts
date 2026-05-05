@@ -128,6 +128,13 @@ function resolveAgentRole(agentName: string): string | null {
 /**
  * Load up to `limit` matchup files relevant to the player agent vs enemy agents.
  * Tries specific agent matchups first, then falls back to role-vs-role.
+ *
+ * IMPORTANT: enemyAgents is sorted before iteration to keep matchup-file
+ * selection DETERMINISTIC across requests. Anthropic prompt cache is
+ * content-keyed; if two requests share the same map+agent+enemy comp but
+ * the comp arrives in different orders (different scoreboard sort), the
+ * selected matchup file would differ → cache miss. With sort, identical
+ * compositions always pick the same file → cross-user cache hits at scale.
  */
 function loadMatchupFiles(
   playerAgent: string,
@@ -138,7 +145,10 @@ function loadMatchupFiles(
   const playerRole = resolveAgentRole(playerAgent);
   const playerSlug = playerAgent.toLowerCase().replace(/[^a-z0-9]/g, "");
 
-  for (const enemy of enemyAgents) {
+  // Sort enemy roster alphabetically for cache-key stability (see comment above).
+  const sortedEnemies = [...enemyAgents].sort();
+
+  for (const enemy of sortedEnemies) {
     if (results.length >= limit) break;
 
     const enemySlug = enemy.toLowerCase().replace(/[^a-z0-9]/g, "");

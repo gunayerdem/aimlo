@@ -299,6 +299,47 @@ type RoundFeedback = {
 };
 
 /* ══════════════════════════════════════════════════════════
+   MESSAGE CONTENT BUILDER — image-skip optimization
+   ══════════════════════════════════════════════════════════ */
+
+type ImageSource = { type: "base64"; media_type: string; data: string };
+type UserContentBlock =
+  | { type: "image"; source: ImageSource }
+  | { type: "text"; text: string };
+
+/**
+ * Build the Anthropic message `content` array. For SURVIVED rounds (died=false)
+ * the image is skipped — the AI doesn't need a death-cam screenshot to talk
+ * about a round you didn't die in, and OCR data + KB carry the full context.
+ *
+ * Skipping image saves ~1,229 tokens × $3/M = $0.0037 per uncached call.
+ * At 50% survival rate × 1,890 cache-hit calls/month = ~$3.50/user/month
+ * on Sonnet 4.6 (3 matches/day baseline).
+ *
+ * Stateless per-call: each round independently decides based on `died`.
+ * Next death automatically re-attaches the image — no "respawn detection"
+ * needed since each vision call is a fresh decision.
+ */
+function buildUserContent(
+  died: boolean | undefined,
+  image: string,
+  mediaType: string,
+  textPrompt: string,
+): UserContentBlock[] {
+  const content: UserContentBlock[] = [];
+  // Send image ONLY when player died (or died status is unknown — fail safe).
+  // For survived rounds, OCR data + KB are the source of truth.
+  if (died !== false) {
+    content.push({
+      type: "image",
+      source: { type: "base64", media_type: mediaType, data: image },
+    });
+  }
+  content.push({ type: "text", text: textPrompt });
+  return content;
+}
+
+/* ══════════════════════════════════════════════════════════
    VALIDATION
    ══════════════════════════════════════════════════════════ */
 
@@ -696,20 +737,7 @@ export async function POST(request: NextRequest) {
         messages: [
           {
             role: "user",
-            content: [
-              {
-                type: "image",
-                source: {
-                  type: "base64",
-                  media_type: resolvedMediaType,
-                  data: body.image,
-                },
-              },
-              {
-                type: "text",
-                text: userPromptWithHistory,
-              },
-            ],
+            content: buildUserContent(reqBody.died, body.image, resolvedMediaType, userPromptWithHistory),
           },
         ],
       }),
