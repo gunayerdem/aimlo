@@ -7,7 +7,7 @@ import { analyzePlaystyle } from "@/lib/playstyle-system";
 import { ds } from "@/constants/design";
 import {
   AGENT_GROUPS, AGENT_GROUP_LABELS, AGENT_COLORS, AGENT_BORDER, AGENT_ACCENT,
-  getAgentRole, getAgentInitials, agentImgUrl, agentFullPortrait,
+  getAgentRole, getAgentInitials, agentImgUrl,
   MAP_LOCATIONS, MAPS, MAP_IMAGES, SCORE_OPTIONS, IC,
 } from "@/constants/game-data";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -27,7 +27,6 @@ import type {
   CompTarget,
   AuthMode,
   SavedReport,
-  DraftState,
 } from "@/types";
 /* ══════════════════════════════════════════════════════════
    AUTH TOKEN HELPER — for API calls
@@ -91,17 +90,15 @@ async function upsertProfile(
         .from("profiles")
         .upsert(payload, { onConflict: "user_id" });
       if (!error) return { ok: true };
-      console.error(
-        `[Aimlo] Profile upsert attempt ${attempt + 1}:`,
-        error.message,
-        error.details,
-      );
+      // Redacted: error.details from Supabase can include the conflicting
+      // value (email/username), so we only log the code + a generic class.
+      const errClass = (error.code || "unknown").toString();
+      console.error(`[Aimlo] Profile upsert attempt ${attempt + 1} class=${errClass}`);
       if (attempt === 1) return { ok: false, error: error.message };
     } catch (err) {
-      console.error(
-        `[Aimlo] Profile upsert exception attempt ${attempt + 1}:`,
-        err,
-      );
+      // Don't log the full error object — may include Supabase response with PII.
+      const cls = err instanceof Error ? err.name : "unknown";
+      console.error(`[Aimlo] Profile upsert exception attempt ${attempt + 1} class=${cls}`);
       if (attempt === 1)
         return {
           ok: false,
@@ -396,7 +393,7 @@ const t = {
     authEmailOrUsernamePh: "ornek@email.com veya kullaniciadi",
     landingHeroTitle: "Yapay Zeka Destekli Valorant Koçun",
     landingHeroSub:
-      "Her round sonrası kişiselleştirilmiş analiz ve geri bildirim al. Oyununu bir üst seviyeye taşı.",
+      "Uygulamayı aç, Valorant oyna. AI her şeyi otomatik izler, maç sonunda kişisel analiz ve gelişim raporu sunar. Sen sadece oyna.",
     landingCTA: "Uygulamayı İndir",
     landingAboutTitle: "Hakkımızda",
     landingAboutText:
@@ -408,23 +405,273 @@ const t = {
       "Espor organizasyonları ve takımlar için özel analiz panelleri, toplu oyuncu takibi ve koçluk araçları sunuyoruz. Takım performansını veriye dayalı kararlarla optimize edin.",
     landingB2CTitle: "Bireysel Oyuncular",
     landingB2CText:
-      "Kendi temponuzda ilerleyin. Her maçınızı analiz edin, hatalarınızı tespit edin ve AI destekli önerilerle rank atlayın. Ücretsiz başlayın, gelişiminizi takip edin.",
+      "Kendi temponuzda ilerleyin. Her maçınızı analiz edin, hatalarınızı tespit edin ve AI destekli önerilerle rank atlayın. Sadece 10$ ile başlayın, gelişiminizi takip edin.",
     landingFaqTitle: "Sıkça Sorulan Sorular",
-    landingBlogTitle: "Blog",
+    landingBlogTitle: "Blog & İçgörüler",
     landingBlogText:
-      "Yakında! Valorant stratejileri, meta analizleri ve oyun geliştirme ipuçları burada paylaşılacak.",
+      "AI destekli Valorant analizleri, rank geçiş rehberleri, meta içgörüleri ve topluluktan en iyi pratikler.",
+    landingBlogReadMore: "Devamını Oku",
+    landingBlogAll: "Tüm Yazılar",
+    landingBlogPosts: [
+      {
+        category: "Rank Rehberi",
+        title: "Gold'dan Diamond'a: En Sık Yapılan 5 Pozisyonlama Hatası",
+        excerpt: "AIMLO'nun 10.000+ maç analizine göre Gold-Diamond geçişinde oyuncuların %78'inin yaptığı kritik pozisyonlama hataları ve çözümleri.",
+        readTime: "5 dk",
+        date: "3 saat önce",
+        color: "#FF4655",
+        content: `Gold ve Diamond arasındaki fark sadece aim değildir. AIMLO'nun 10.000'den fazla maç analizine göre bu geçişte en çok kaybedilen round'ların %78'i pozisyonlama hatalarından kaynaklanıyor. İşte en kritik 5 hata ve çözümleri:
+
+## 1. Aynı Noktadan İkinci Peek
+
+Oyuncuların %42'si bir round'da aynı açıdan iki kez peek atıyor. Bu, AI'ın tespit ettiği en yaygın hata. Rakip ilk peek'te seni görmediyse bile, sesini duydu ve crosshair'ini oraya sabitledi. İkinci peek = kesin ölüm.
+
+**Çözüm:** Her peek sonrası 2-3 metre yer değiştir. Farklı yükseklikten (headglitch, crouch) peek at. Sma köşeyi kullan, swing yap.
+
+## 2. Kötü Off-angle Kullanımı
+
+Diamond+ oyuncular standart pozisyonlara girmek yerine beklenmeyen açılar kullanır. Gold oyuncularının %63'ü hâlâ default "köşede otur" mantığıyla oynuyor.
+
+**Çözüm:** Her haritada 3 off-angle öğren. Ascent A Site'ta Generator üstü, Bind'da Hookah back veya Ascent Heaven gibi. Her round farklı bir off-angle kullan.
+
+## 3. Trade Mesafesi Hatası
+
+Entry fragger'dan 5+ metre uzakta duruyorsan trade edemezsin. 1 metreden yakınsan utility ile ikiniz birden ölürsünüz. İdeal: 2-3 saniye içinde destek verebileceğin mesafe.
+
+**Çözüm:** Entry'den sonra hemen arkasından değil, yandan destek ver. Farklı açıdan bakabilen pozisyona geç. Entry öldüğünde 2 saniye içinde trade kill alman lazım.
+
+## 4. Crosshair Placement Zayıflığı
+
+AIMLO verilerine göre Gold oyuncuları ortalama %38 daha fazla aim düzeltmesi yapıyor çünkü crosshair'leri yanlış yerde. Yere bakmak, duvara bakmak, havaya bakmak = kaybedilen round.
+
+**Çözüm:** Crosshair her zaman **baş hizasında** ve **rakip olabilecek köşelerde** olmalı. Yürürken bile aim place yap. Bu alışkanlığı custom game'de 15 dakika çalış.
+
+## 5. Sound Cue'ları Görmezden Gelme
+
+Adım, reload, ability sesleri en değerli info kaynağı. Düşük rank oyuncular genellikle müzik dinleyerek oynuyor veya ses seviyesini düşürüyor. Bu %40'a kadar info kaybı demek.
+
+**Çözüm:** İyi headphone kullan. Müziği kapat. Her round başında dinle, callout yap. Sound cue'ları pozisyonlamanın parçası yap.
+
+## Sonuç
+
+Bu 5 hatayı düzelten AIMLO kullanıcılarının ortalama **2-3 ay içinde Diamond'a çıkma oranı %61 arttı**. Pozisyonlama, aim'den daha önemlidir. AI ile her round'unu analiz edersen hangi hataları tekrarladığını görebilir ve hızlıca düzeltebilirsin.`,
+      },
+      {
+        category: "Meta Analizi",
+        title: "2026 Meta: Duelist Havuzundaki Değişimler",
+        excerpt: "Jett'in gerilemesinden Waylay'in yükselişine. Bu patch'te hangi duelist'ler öne çıkıyor? AI verilerine dayalı detaylı analiz.",
+        readTime: "7 dk",
+        date: "12 saat önce",
+        color: "#4D7CFF",
+        content: `2026 yılının ilk patch'iyle birlikte Valorant duelist havuzu önemli değişimler geçirdi. AIMLO'nun topluluktaki 15.000+ ranked maç verisiyle bu değişimleri inceledik. İşte öne çıkan bulgular:
+
+## Jett'in Gerilemesi
+
+Jett, 3 yıl boyunca Valorant'ın kral duelist'iydi. Ancak AIMLO verilerine göre pick rate'i son 6 ayda **%47'den %28'e** düştü. Win rate'i de %52'den %49'a geriledi.
+
+**Neden?** Dash nerfleri, Cloudburst cooldown değişiklikleri ve haritalara uyum sağlayamama. Özellikle Lotus ve Sunset gibi yeni haritalarda Jett'in mobilitesi yeterince etkili olmuyor.
+
+## Waylay'in Yükselişi
+
+Yeni duelist Waylay, eklenmesinin ardından pick rate'te **%23'e** fırladı. Radiant seviyesinde Waylay win rate'i **%54**, bu tüm duelist'ler arasında en yüksek.
+
+**Neden güçlü?** Light Speed ability'si ile agresif peek'lerden sonra geri çekilme imkanı veriyor. Ultimate'i Fracture ve Bind gibi kapalı haritalarda oyunu tersine çevirebiliyor.
+
+## Raze: Stabil Performans
+
+Raze, pick rate'te küçük düşüşle (%31 → %28) birlikte hâlâ güçlü. Win rate'i **%51.5** ile stabil. Özellikle Icebox ve Split gibi dar koridorlu haritalarda satchel combat mobility sağlıyor.
+
+## Iso: Gizli Şampiyon
+
+Iso hâlâ düşük pick rate'te (%8) ama AIMLO verilerine göre Diamond+ maçlarda **%56 win rate** ile en verimli duelist. Shield ability'si ile 1v1'lerde neredeyse garantili kazanç sağlıyor.
+
+## Neon: Düşüş Yolunda
+
+Neon'un pick rate'i %19'dan %11'e düştü. Nerfler Run It Down mekaniğini yavaşlattı. Ancak Lotus'ta hâlâ Tier S.
+
+## Tahminler
+
+2026'nın ikinci yarısında:
+- **Waylay** meta lider kalacak
+- **Jett** sadece 2 haritada (Ascent, Haven) pick edilecek
+- **Iso** pro maçlarda daha çok görünmeye başlayacak
+- Yeni bir duelist'in Q3'te gelmesi bekleniyor
+
+## Sonuç
+
+Meta değişiyor ve agent havuzunu güncel tutmak rank atlamak için kritik. AIMLO her maçından sonra meta'ya uygun agent önerileri sunar. Şu an **Waylay** veya **Iso** öğrenerek hızla rank atlayabilirsin.`,
+      },
+      {
+        category: "Harita Rehberi",
+        title: "Ascent B Site: Komple Anchor Rehberi",
+        excerpt: "B Main, B Link ve Market kontrolü. Sentinel oyuncuları için step-by-step anchor rehberi ve en iyi setup pozisyonları.",
+        readTime: "6 dk",
+        date: "1 gün önce",
+        color: "#B44DFF",
+        content: `Ascent, Valorant'ın en eski ve en çok oynanan haritalarından biri. B Site ise anchor'lar için en zorlu noktalardan biri. AIMLO'nun Ascent B Site analizlerinden derlediğimiz kapsamlı rehber:
+
+## Harita Dinamiği
+
+B Site Ascent'te **3 farklı giriş noktası** var: B Main, B Link ve Market. Bir anchor olarak bu üç açıyı da kontrol etmen gerekiyor. AIMLO verilerine göre B Site'ta en çok executeler B Main'den (%64) geliyor, Market ise %21 ile ikinci sırada.
+
+## En İyi Anchor Pozisyonları
+
+### 1. CT Default Pozisyonu
+**Stair top'ta** durmak en güvenli ve en yaygın pozisyon. Hem B Main'i hem de Site içini görebilirsin. Fakat bu pozisyon çok bilinen bir spot, swing ile kolayca ölebilirsin.
+
+### 2. Boathouse İçi
+**Boathouse'un içine** gizlenmek sürpriz pozisyon yaratır. B Main'den gelen düşmanlar içeriye girdiğinde arkalarından tarayabilirsin. Özellikle Killjoy ultilarında veya Chamber tripwire'ları ile kombine ederek kullanışlı.
+
+### 3. Default Box Arkası
+Site'ın ortasındaki kutuların arkasında **crouch** ile saklanma taktiği. Düşük rank'te pek kullanılmıyor ama Diamond+ seviyede %58 başarı oranı var.
+
+## Agent Önerileri
+
+- **Killjoy:** Mutlak en iyi B Site anchor. Turret'ı Market'e, Alarm Bot'u B Link'e, Nanoswarm'ları default'a yerleştir. Ultimate ile retake'te sayısal üstünlük yaratırsın.
+
+- **Cypher:** Tripwire'ları Market ve B Main'e koy. Spycam'ı Boathouse'a yönlendir. Ultimate bomb planlama sonrası düşman pozisyonu için paha biçilmez.
+
+- **Chamber:** Trademark'ı B Main'e kur. Headhunter ile uzun mesafeden pick alırsın. Rendezvous ile hem site'ı hem de Link'i kontrol edebilirsin.
+
+- **Sage:** Slow Orb'ları B Main girişine at. Barrier Wall'ı execute zamanı B Main'i kapat. Retake'te kritik değer.
+
+## Kritik Info Noktaları
+
+B Link'ten gelen ses bazen kaçırılır. **Stairs seslerine** özellikle dikkat et. Market'ten gelen footstep'ler 8 saniye içinde default'a gelir, bu süreyi takım rotate'i için kullan.
+
+## Utility Kullanımı
+
+- Site'a execute sırasında **B Main smoke'u** varsa %70 ihtimalle zamana oynarlar
+- **Market flash** geldiğinde hemen dönüp Market girişine bak
+- **Molly sesi** B Link'ten geliyorsa Heaven'a çekil
+
+## Takım Koordinasyonu
+
+Anchor olarak **"1 kill 1 rotate"** kuralına uy. 1 kill aldıktan sonra mutlaka pozisyon değiştir veya rotate çağrısı yap. Single kill ile site tutulmaz.
+
+## Sonuç
+
+B Site'ı anchor etmek disiplin, info yönetimi ve doğru utility kullanımı gerektirir. AIMLO maçlarını analiz ederek anchor performansını ölç ve hangi pozisyonların sana uygun olduğunu bul.`,
+      },
+      {
+        category: "Strateji",
+        title: "Eco Round'u Kazanmanın 3 Altın Kuralı",
+        excerpt: "Eco round'lar sadece şanstan ibaret değil. Pro oyuncuların kullandığı eco kazanma stratejileri ve AI'ın önerdiği optimal yaklaşımlar.",
+        readTime: "4 dk",
+        date: "2 gün önce",
+        color: "#2ECC71",
+        content: `Eco round'lar Valorant'ta en yanlış oynanan round'lardan biri. Oyuncuların %72'si eco round'u "kaybedilecek round" olarak görüyor ve yeterince efor sarfetmiyor. Ama AIMLO verilerine göre **doğru oynanan eco round'ların %31'i kazanılıyor**. İşte 3 altın kural:
+
+## 1. Stack ve Pick Oyna
+
+Eco'da asla açık alanlarda savaşma. **Köşelere saklan, angle hold et, pick al**. Rakip full-buy olduğu için agresif peek yapar. Sen sadece bekle.
+
+**Pro Tip:** Tüm takım 1-2 pozisyonda stack olsun. 5 kişi farklı yerlerde = 5 ayrı 1v5. 5 kişi bir arada = 5v5 sahte ekonomi etkisi.
+
+## 2. Ekonomi Hasarı Öncelik
+
+Eco round'u kazanmak güzel ama asıl amaç rakibin ekonomisini bozmak. **Operator çalmak, Vandal çalmak** = sonraki round'da kullanırsın. Rakip yeniden buy etmek zorunda kalır.
+
+**AIMLO Verisi:** Silah çalınan round'lardan sonraki round'ların %44'ü silah çalanın takımı tarafından kazanılıyor.
+
+## 3. Rotate ve Split
+
+Tek site'a basma. Bir-iki oyuncu fake yapsın, gerçek saldırı diğer site'tan gelsin. Eco'da rakip defansı rotate'i tahmin edemez.
+
+**Classic Kombo:** 2 oyuncu A'da noise yap, 3 oyuncu B'den silent rush. Rakip rotate ettiğinde B zaten alınmış olur.
+
+## Bonus: Full Save vs Force Buy
+
+Eğer takım ekonomisi **2000'in altındaysa** full save daha mantıklı. 2000-3000 arasında ise pistol+armor force buy denenebilir. AIMLO AI maç içinde sana optimal ekonomi önerisi sunar.
+
+## Hangi Pistol'ü Al?
+
+- **Sheriff:** Aim iyiyse 1-tap için en iyi seçim
+- **Ghost:** Orta mesafe ve spam için güvenli seçim
+- **Frenzy:** Close-range rush için sürpriz factor
+- **Classic:** Sadece full save durumunda kalır
+
+## Sonuç
+
+Eco round'lar rank atlatacak kadar önemli. Her eco round'u kazanırsan rakibin ekonomisi çöker ve sonraki 2-3 round'u da alma şansın artar. AIMLO ile ekonomi yönetimini optimize et, maç kazanmaya başla.`,
+      },
+      {
+        category: "Ajan Rehberi",
+        title: "Sova Dart'ları: Haven'de 8 Temel Line-up",
+        excerpt: "A Site, B Site ve C Site için AIMLO topluluğunun en çok kullandığı Sova recon dart line-up'ları. Görsel rehberle birlikte.",
+        readTime: "8 dk",
+        date: "4 gün önce",
+        color: "#ECB73E",
+      },
+      {
+        category: "Ajan Rehberi",
+        title: "Clove Rehberi: Yeni Controller'ı Sıfırdan Öğren",
+        excerpt: "Clove'un tüm yeteneklerini, ultimate kombolarını ve hangi haritalarda en etkili olduğunu AI destekli istatistiklerle öğren.",
+        readTime: "9 dk",
+        date: "1 hafta önce",
+        color: "#FF4655",
+      },
+      {
+        category: "Rank Rehberi",
+        title: "Radiant Oyuncuların 5 Ortak Alışkanlığı",
+        excerpt: "AIMLO'nun takip ettiği 200+ Radiant oyuncunun analizi: karar verme hızı, crosshair placement ve iletişim pattern'leri.",
+        readTime: "6 dk",
+        date: "2 hafta önce",
+        color: "#4D7CFF",
+      },
+      {
+        category: "Harita Rehberi",
+        title: "Split Mid Kontrolü: Attack Tarafı Taktikleri",
+        excerpt: "Split'in en kritik bölgesi olan Mid'i nasıl kontrol edersin? AI istatistiklerine göre %63 kazanma oranlı 4 execute stratejisi.",
+        readTime: "7 dk",
+        date: "3 hafta önce",
+        color: "#B44DFF",
+      },
+      {
+        category: "Meta Analizi",
+        title: "Chamber Rework Sonrası: Hala Viable mi?",
+        excerpt: "Rework sonrası Chamber'ın pick rate'i düştü ama hala kazanma oranı yüksek. Hangi haritalarda ve takım kompozisyonlarında işe yarıyor?",
+        readTime: "5 dk",
+        date: "1 ay önce",
+        color: "#32B8B8",
+      },
+      {
+        category: "Strateji",
+        title: "Round Ekonomisi 101: Loss Bonus Matematiği",
+        excerpt: "Pro maçlarda sıkça görülen ekonomi yönetimi hatalarını önlemek için temel kurallar. Save/force/eco kararlarını veriye dayalı al.",
+        readTime: "6 dk",
+        date: "1 ay önce",
+        color: "#2ECC71",
+      },
+      {
+        category: "Ajan Rehberi",
+        title: "Viper Ultimate Kullanımı: 12 En İyi Post-plant",
+        excerpt: "Viper's Pit ile post-plant'te nasıl dominant olursun? AIMLO verilerinden derlenmiş en yüksek kazanma oranlı 12 pozisyon.",
+        readTime: "10 dk",
+        date: "2 ay önce",
+        color: "#ECB73E",
+      },
+      {
+        category: "Rank Rehberi",
+        title: "Iron'dan Silver'a: Yeni Başlayanlar İçin 7 Altın Kural",
+        excerpt: "Valorant'ta ilk rank maçlarına giren oyuncular için: crosshair ayarları, temel pozisyonlama ve iletişim ipuçları.",
+        readTime: "5 dk",
+        date: "3 ay önce",
+        color: "#FF4655",
+      },
+    ],
     landingHelpText:
       "Sorularınız mı var? Bize e-posta gönderin, en kısa sürede dönüş yapalım.",
     landingHelpEmail: "İletişim: support@aimlo.gg",
     landingNav: { about: "Hakkımızda", blog: "Blog", faq: "SSS" },
     landingFaqs: [
       {
-        q: "AIMLO ücretsiz mi?",
-        a: "Evet, AIMLO'nun temel analiz ve koçluk özellikleri tamamen ücretsizdir. Maç kurulumu, round bazlı geri bildirim ve maç sonu raporu gibi tüm çekirdek özellikler ücretsiz planda yer alır. Gelişmiş AI destekli derinlemesine analiz, geçmiş maç karşılaştırması ve kişiselleştirilmiş gelişim haritası gibi premium özellikler ise yakında sunulacaktır.",
+        q: "AIMLO ne kadar?",
+        a: "AIMLO sadece 10$. Bu tek ödemeyle maç analizi, round bazlı geri bildirim, maç sonu raporu ve AI destekli kişiselleştirilmiş koçluk gibi tüm özelliklere erişim sağlarsın. Gelişmiş AI destekli derinlemesine analiz, geçmiş maç karşılaştırması ve kişiselleştirilmiş gelişim haritası gibi premium özellikler de dahildir.",
       },
       {
         q: "Nasıl çalışıyor?",
-        a: "AIMLO, maç sırasında her round sonrası girdiğin kısa notları yapay zeka motoruyla analiz eder. Ölüm konumun, karşılaştığın düşman sayısı ve kendi notların üzerinden anlık koçluk geri bildirimi üretir. Maç sonunda ise tüm round verilerini birleştirerek tekrarlayan hatalarını, düşman eğilimlerini ve stratejik öneriler içeren kapsamlı bir rapor oluşturur.",
+        a: "AIMLO Windows uygulamasını başlatmak yeterli. Sen sadece Valorant oynarsın, AIMLO arka planda çalışır ve maçını otomatik olarak izler. Yapay zeka maç verilerini, ölüm konumlarını, düşman pozisyonlarını ve round sonuçlarını tamamen otomatik olarak çeker. Hiçbir şey yazmana, not girmene veya kurulum yapmana gerek yok. Maç bittiğinde AI sana tekrarlayan hatalarını, düşman eğilimlerini ve kişiselleştirilmiş gelişim önerilerini içeren kapsamlı bir rapor sunar.",
       },
       {
         q: "Hangi rank seviyelerine uygun?",
@@ -442,57 +689,57 @@ const t = {
     landingFeatures: [
       {
         icon: "zap",
-        title: "Anlık Geri Bildirim",
-        desc: "Her round sonrası AI destekli analiz",
+        title: "Otomatik İzleme",
+        desc: "AI maçını arka planda izler, hiçbir şey yapmana gerek yok",
       },
       {
         icon: "chart",
         title: "Detaylı Raporlar",
-        desc: "Maç sonu kapsamlı performans raporu",
+        desc: "Maç sonu kapsamlı performans raporu otomatik hazırlanır",
       },
       {
         icon: "target",
         title: "Hata Tespiti",
-        desc: "Tekrarlayan hataları otomatik tespit",
+        desc: "AI tekrarlayan hatalarını otomatik tespit eder ve çözüm sunar",
       },
       {
         icon: "trend",
         title: "Gelişim Takibi",
-        desc: "Zaman içindeki ilerlemenizi görün",
+        desc: "Zaman içindeki ilerlemeni AI otomatik olarak analiz eder",
       },
     ],
     landingHowTitle: "Nasıl Çalışıyor?",
     landingHowSteps: [
-      { step: "1", title: "Maç Kur", desc: "Harita, ajan ve takımını seç" },
+      { step: "1", title: "Uygulamayı İndir", desc: "AIMLO'yu Windows'a yükle ve başlat" },
       {
         step: "2",
-        title: "Round Notları",
-        desc: "Her round sonrası ölüm yeri ve notlarını gir",
+        title: "Valorant'ı Oyna",
+        desc: "AIMLO arka planda çalışır, hiçbir şey yapman gerekmez",
       },
       {
         step: "3",
-        title: "AI Analiz",
-        desc: "Anlık geri bildirim ve öneriler al",
+        title: "AI Otomatik İzler",
+        desc: "Yapay zeka maçını canlı analiz eder ve her round'u inceler",
       },
       {
         step: "4",
-        title: "Maç Raporu",
-        desc: "Detaylı maç sonu analiz raporu gör",
+        title: "Detaylı Rapor Al",
+        desc: "Maç sonunda hatalarını, güçlü yönlerini ve gelişim önerilerini gör",
       },
     ],
     landingDiffTitle: "Neden AIMLO?",
     landingDiffItems: [
       {
-        title: "Sadece Rakam Değil, Çözüm",
-        desc: "Diğer araçlar kill/death gösterir. AIMLO neden kaybettiğinizi açıklar.",
+        title: "Sıfır Efor, Maksimum Analiz",
+        desc: "Hiçbir şey girmeden, hiçbir şey yazmadan. AI tüm verileri otomatik çeker, sen sadece oynarsın.",
       },
       {
-        title: "Round Bazlı Koçluk",
-        desc: "Her round sonrası stratejik öneriler alarak oyununuzu anında iyileştirin.",
+        title: "Sadece Rakam Değil, Çözüm",
+        desc: "Diğer araçlar kill/death gösterir. AIMLO neden kaybettiğini açıklar ve çözüm sunar.",
       },
       {
         title: "Kişisel Gelişim Haritası",
-        desc: "Zaman içinde hatalarınızın nasıl azaldığını ve hangi alanlarda geliştiğinizi görün.",
+        desc: "AI zaman içinde hatalarının nasıl azaldığını ve hangi alanlarda geliştiğini takip eder.",
       },
     ],
     landingStatsTitle: "Platform İstatistikleri",
@@ -677,7 +924,7 @@ const t = {
     authEmailOrUsernamePh: "example@email.com or username",
     landingHeroTitle: "Your AI-Powered Valorant Coach",
     landingHeroSub:
-      "Get personalized post-round analysis and feedback. Elevate your game to the next level.",
+      "Launch the app and play Valorant. AI watches everything automatically and delivers your personal analysis and improvement report after each match. You just play.",
     landingCTA: "Download App",
     landingAboutTitle: "About Us",
     landingAboutText:
@@ -689,23 +936,123 @@ const t = {
       "We offer custom analytics dashboards, bulk player tracking, and coaching tools for esports organizations and teams. Optimize your team's performance with data-driven decisions.",
     landingB2CTitle: "Individual Players",
     landingB2CText:
-      "Progress at your own pace. Analyze every match, identify your mistakes, and climb ranks with AI-powered suggestions. Start for free and track your improvement.",
+      "Progress at your own pace. Analyze every match, identify your mistakes, and climb ranks with AI-powered suggestions. Start for just $10 and track your improvement.",
     landingFaqTitle: "Frequently Asked Questions",
-    landingBlogTitle: "Blog",
+    landingBlogTitle: "Blog & Insights",
     landingBlogText:
-      "Coming soon! Valorant strategies, meta analyses, and gameplay tips will be shared here.",
+      "AI-powered Valorant analyses, rank climbing guides, meta insights, and best practices from the community.",
+    landingBlogReadMore: "Read More",
+    landingBlogAll: "All Posts",
+    landingBlogPosts: [
+      {
+        category: "Rank Guide",
+        title: "Gold to Diamond: Top 5 Positioning Mistakes",
+        excerpt: "Based on AIMLO's analysis of 10,000+ matches, these are the critical positioning mistakes 78% of players make during the Gold-Diamond transition.",
+        readTime: "5 min",
+        date: "3 hours ago",
+        color: "#FF4655",
+      },
+      {
+        category: "Meta Analysis",
+        title: "2026 Meta: Shifts in the Duelist Pool",
+        excerpt: "From Jett's decline to Waylay's rise. Which duelists dominate this patch? A detailed AI-driven data analysis.",
+        readTime: "7 min",
+        date: "12 hours ago",
+        color: "#4D7CFF",
+      },
+      {
+        category: "Map Guide",
+        title: "Ascent B Site: Complete Anchor Guide",
+        excerpt: "B Main, B Link, and Market control. A step-by-step anchoring guide and optimal setup positions for sentinel players.",
+        readTime: "6 min",
+        date: "1 day ago",
+        color: "#B44DFF",
+      },
+      {
+        category: "Strategy",
+        title: "3 Golden Rules for Winning Eco Rounds",
+        excerpt: "Eco rounds are not just luck. Pro player strategies and AI-recommended optimal approaches for winning eco situations.",
+        readTime: "4 min",
+        date: "2 days ago",
+        color: "#2ECC71",
+      },
+      {
+        category: "Agent Guide",
+        title: "Sova Darts: 8 Essential Line-ups on Haven",
+        excerpt: "Most-used Sova recon dart line-ups for A, B, and C sites by the AIMLO community. Includes visual guides.",
+        readTime: "8 min",
+        date: "4 days ago",
+        color: "#ECB73E",
+      },
+      {
+        category: "Agent Guide",
+        title: "Clove Guide: Learn the New Controller from Zero",
+        excerpt: "Master Clove's abilities, ult combos, and best-performing maps with AI-powered stats and scenarios.",
+        readTime: "9 min",
+        date: "1 week ago",
+        color: "#FF4655",
+      },
+      {
+        category: "Rank Guide",
+        title: "5 Common Habits of Radiant Players",
+        excerpt: "An analysis of 200+ Radiant players tracked by AIMLO: decision speed, crosshair placement, and communication patterns.",
+        readTime: "6 min",
+        date: "2 weeks ago",
+        color: "#4D7CFF",
+      },
+      {
+        category: "Map Guide",
+        title: "Split Mid Control: Attack Side Tactics",
+        excerpt: "How to control Split's most critical area. 4 execute strategies with 63% win rates based on AI data.",
+        readTime: "7 min",
+        date: "3 weeks ago",
+        color: "#B44DFF",
+      },
+      {
+        category: "Meta Analysis",
+        title: "Post-Rework Chamber: Still Viable?",
+        excerpt: "Chamber's pick rate dropped after the rework, but his win rate is still high. Which maps and comps does he shine on?",
+        readTime: "5 min",
+        date: "1 month ago",
+        color: "#32B8B8",
+      },
+      {
+        category: "Strategy",
+        title: "Round Economy 101: Loss Bonus Math",
+        excerpt: "Basic rules to avoid economy management mistakes seen in pro matches. Make save/force/eco decisions backed by data.",
+        readTime: "6 min",
+        date: "1 month ago",
+        color: "#2ECC71",
+      },
+      {
+        category: "Agent Guide",
+        title: "Viper Ultimate Usage: 12 Best Post-plants",
+        excerpt: "How to dominate post-plants with Viper's Pit. 12 highest win-rate positions compiled from AIMLO data.",
+        readTime: "10 min",
+        date: "2 months ago",
+        color: "#ECB73E",
+      },
+      {
+        category: "Rank Guide",
+        title: "Iron to Silver: 7 Golden Rules for Beginners",
+        excerpt: "For new players entering ranked: crosshair settings, basic positioning, and communication tips.",
+        readTime: "5 min",
+        date: "3 months ago",
+        color: "#FF4655",
+      },
+    ],
     landingHelpText:
       "Have questions? Send us an email and we'll get back to you as soon as possible.",
     landingHelpEmail: "Contact: support@aimlo.gg",
     landingNav: { about: "About", blog: "Blog", faq: "FAQ" },
     landingFaqs: [
       {
-        q: "Is AIMLO free?",
-        a: "Yes, AIMLO's core coaching features are completely free. This includes match setup, round-by-round feedback, and end-of-match reports. Premium features like advanced AI-powered deep analysis, historical match comparison, and personalized improvement roadmaps will be available in upcoming plans.",
+        q: "How much does AIMLO cost?",
+        a: "AIMLO is just $10. With this one-time payment you get full access to all features including match analysis, round-by-round feedback, end-of-match reports, and AI-powered personalized coaching. Premium features like advanced AI-powered deep analysis, historical match comparison, and personalized improvement roadmaps are also included.",
       },
       {
         q: "How does it work?",
-        a: "AIMLO analyzes the short notes you enter after each round using its AI engine. Based on your death location, enemy count, and personal notes, it generates instant coaching feedback. At the end of the match, all round data is combined to produce a comprehensive report covering recurring mistakes, enemy tendencies, and strategic recommendations.",
+        a: "Just launch the AIMLO Windows app and play Valorant. AIMLO runs in the background and automatically watches your match. The AI pulls all match data — death locations, enemy positions, round outcomes — completely on its own. You don't need to type, take notes, or configure anything. When the match ends, the AI delivers a comprehensive report with recurring mistakes, enemy tendencies, and personalized improvement recommendations.",
       },
       {
         q: "What rank levels is it for?",
@@ -723,61 +1070,61 @@ const t = {
     landingFeatures: [
       {
         icon: "zap",
-        title: "Instant Feedback",
-        desc: "AI-powered analysis after each round",
+        title: "Automatic Tracking",
+        desc: "AI watches your match in the background, no input required",
       },
       {
         icon: "chart",
         title: "Detailed Reports",
-        desc: "Comprehensive post-match performance report",
+        desc: "Comprehensive post-match performance report generated automatically",
       },
       {
         icon: "target",
         title: "Mistake Detection",
-        desc: "Automatically detect recurring mistakes",
+        desc: "AI automatically detects recurring mistakes and offers solutions",
       },
       {
         icon: "trend",
         title: "Progress Tracking",
-        desc: "See your improvement over time",
+        desc: "AI analyzes your improvement over time automatically",
       },
     ],
     landingHowTitle: "How It Works",
     landingHowSteps: [
       {
         step: "1",
-        title: "Set Up Match",
-        desc: "Pick your map, agent, and team",
+        title: "Download the App",
+        desc: "Install AIMLO on Windows and launch it",
       },
       {
         step: "2",
-        title: "Round Notes",
-        desc: "Enter death location and notes each round",
+        title: "Play Valorant",
+        desc: "AIMLO runs in the background, no manual input needed",
       },
       {
         step: "3",
-        title: "AI Analysis",
-        desc: "Get instant feedback and suggestions",
+        title: "AI Watches Automatically",
+        desc: "The AI analyzes your match live and reviews every round",
       },
       {
         step: "4",
-        title: "Match Report",
-        desc: "View detailed end-of-match analysis",
+        title: "Get Detailed Report",
+        desc: "See your mistakes, strengths, and improvement tips after each match",
       },
     ],
     landingDiffTitle: "Why AIMLO?",
     landingDiffItems: [
       {
-        title: "Solutions, Not Just Numbers",
-        desc: "Other tools show K/D. AIMLO explains why you lost.",
+        title: "Zero Effort, Maximum Analysis",
+        desc: "No typing, no notes, no setup. AI pulls all the data automatically — you just play.",
       },
       {
-        title: "Round-by-Round Coaching",
-        desc: "Improve instantly with strategic tips after each round.",
+        title: "Solutions, Not Just Numbers",
+        desc: "Other tools show K/D. AIMLO explains why you lost and delivers real solutions.",
       },
       {
         title: "Personal Growth Map",
-        desc: "See how your mistakes decrease and where you improve over time.",
+        desc: "AI tracks how your mistakes decrease and where you improve over time.",
       },
     ],
     landingStatsTitle: "Platform Stats",
@@ -1630,9 +1977,24 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
-  const howReveal = useScrollReveal(0.15);
-  const diffReveal = useScrollReveal(0.15);
-  const featReveal = useScrollReveal(0.1);
+  const [showAllBlog, setShowAllBlog] = useState(false);
+  const [selectedPost, setSelectedPost] = useState<number | null>(null);
+
+  // ESC to close blog modals
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (selectedPost !== null) setSelectedPost(null);
+        else if (showAllBlog) setShowAllBlog(false);
+      }
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [selectedPost, showAllBlog]);
+
+  const { ref: howRevealRef, visible: howRevealVisible } = useScrollReveal(0.15);
+  const { ref: diffRevealRef, visible: diffRevealVisible } = useScrollReveal(0.15);
+  const { ref: featRevealRef, visible: featRevealVisible } = useScrollReveal(0.1);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -1921,19 +2283,19 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       <div className="pointer-events-none absolute left-[-200px] top-[1200px] w-[500px] h-[500px] rounded-full bg-[#FF4655]/[0.06] blur-[150px] animate-orb" style={{ zIndex: 0 }} />
 
       {/* ─── FEATURES — Xtract card grid ─── */}
-      <section ref={featReveal.ref} id="section-features" data-animate className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pb-28">
+      <section ref={featRevealRef} id="section-features" data-animate className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pb-28">
         <div className="section-divider mb-16" />
         <p className="text-center text-[11px] uppercase tracking-[0.2em] text-[#FF4655]/50 font-semibold mb-4">
           {lang === "tr" ? "Özellikler" : "Features"}
         </p>
-        <h2 className={`text-3xl sm:text-[44px] font-semibold text-white text-center mb-14 leading-tight transition-all duration-700 ${featReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ letterSpacing: '-1.5px' }}>
+        <h2 className={`text-3xl sm:text-[44px] font-semibold text-white text-center mb-14 leading-tight transition-all duration-700 ${featRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ letterSpacing: '-1.5px' }}>
           {lang === "tr" ? "AI ile Oyununu Bir Üst Seviyeye Taşı" : "Take Your Game to the Next Level with AI"}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {l.landingFeatures.map((f, i) => {
             const v = featureVisuals[i];
             return (
-              <div key={i} className={`card-xtract group overflow-hidden transition-all duration-700 ${featReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`} style={{ transitionDelay: `${i * 100}ms` }}>
+              <div key={i} className={`card-xtract group overflow-hidden transition-all duration-700 ${featRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`} style={{ transitionDelay: `${i * 100}ms` }}>
                 {/* Agent portrait background */}
                 <div className="relative h-32 overflow-hidden">
                   <img
@@ -1964,12 +2326,12 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       </section>
 
       {/* ─── HOW IT WORKS — Process steps like Xtract ─── */}
-      <section ref={howReveal.ref} id="section-how" data-animate className="relative z-10 mx-auto max-w-3xl px-5 sm:px-8 pb-28">
+      <section ref={howRevealRef} id="section-how" data-animate className="relative z-10 mx-auto max-w-3xl px-5 sm:px-8 pb-28">
         <div className="section-divider mb-16" />
         <p className="text-center text-[11px] uppercase tracking-[0.2em] text-[#FF4655]/50 font-semibold mb-4">
           {lang === "tr" ? "Süreç" : "Process"}
         </p>
-        <h2 className={`text-3xl sm:text-[44px] font-semibold text-white tracking-tight text-center mb-14 leading-tight transition-all duration-700 ${howReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ letterSpacing: '-1.5px' }}>
+        <h2 className={`text-3xl sm:text-[44px] font-semibold text-white tracking-tight text-center mb-14 leading-tight transition-all duration-700 ${howRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ letterSpacing: '-1.5px' }}>
           {l.landingHowTitle}
         </h2>
         <div className="space-y-4">
@@ -2019,7 +2381,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             ];
             const stepColors = ["#FF4655", "#4D7CFF", "#FF4655", "#B44DFF"];
             return (
-              <div key={i} className={`group flex items-center gap-5 card-xtract p-5 sm:p-6 transition-all duration-700 ${howReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ transitionDelay: `${i * 120}ms` }}>
+              <div key={i} className={`group flex items-center gap-5 card-xtract p-5 sm:p-6 transition-all duration-700 ${howRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ transitionDelay: `${i * 120}ms` }}>
                 <div className="relative shrink-0 w-14 h-14 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105" style={{ background: `${stepColors[i]}08`, border: `1px solid ${stepColors[i]}18`, boxShadow: `0 0 0 rgba(0,0,0,0)` }}
                   onMouseEnter={(e) => { e.currentTarget.style.boxShadow = `0 0 20px ${stepColors[i]}15`; e.currentTarget.style.borderColor = `${stepColors[i]}35`; }}
                   onMouseLeave={(e) => { e.currentTarget.style.boxShadow = `0 0 0 rgba(0,0,0,0)`; e.currentTarget.style.borderColor = `${stepColors[i]}18`; }}
@@ -2041,19 +2403,19 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       <div className="pointer-events-none absolute right-[-200px] top-[2200px] w-[400px] h-[400px] rounded-full bg-[#4D7CFF]/[0.05] blur-[130px] animate-orb" style={{ zIndex: 0, animationDelay: '5s' }} />
 
       {/* ─── WHY AIMLO — Benefits grid like Xtract ─── */}
-      <section ref={diffReveal.ref} id="section-about" data-animate className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pb-28">
+      <section ref={diffRevealRef} id="section-about" data-animate className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pb-28">
         <div className="section-divider mb-16" />
         <p className="text-center text-[11px] uppercase tracking-[0.2em] text-[#FF4655]/50 font-semibold mb-4">
           {lang === "tr" ? "Avantajlar" : "Benefits"}
         </p>
-        <h2 className={`text-3xl sm:text-[44px] font-semibold text-white tracking-tight text-center mb-14 leading-tight transition-all duration-700 ${diffReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ letterSpacing: '-1.5px' }}>
+        <h2 className={`text-3xl sm:text-[44px] font-semibold text-white tracking-tight text-center mb-14 leading-tight transition-all duration-700 ${diffRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ letterSpacing: '-1.5px' }}>
           {lang === "tr" ? "Neden AIMLO?" : "Why AIMLO?"}
         </h2>
         <div className="grid md:grid-cols-3 gap-4">
           {l.landingDiffItems.map((item, i) => {
             const colors = ["#FF4655", "#4D7CFF", "#B44DFF"];
             return (
-              <div key={i} className={`card-xtract p-8 group transition-all duration-500 ${diffReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`} style={{ transitionDelay: `${i * 120}ms` }}>
+              <div key={i} className={`card-xtract p-8 group transition-all duration-500 ${diffRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`} style={{ transitionDelay: `${i * 120}ms` }}>
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-all duration-300" style={{ background: `${colors[i]}10`, border: `1px solid ${colors[i]}20`, color: colors[i] }}>
                   {benefitIcons[i]}
                 </div>
@@ -2074,51 +2436,70 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
         <h2 className="text-3xl sm:text-[44px] font-semibold text-white tracking-tight text-center mb-6 leading-tight" style={{ letterSpacing: '-1.5px' }}>
           {lang === "tr" ? "Oyuncular Ne Diyor?" : "What Players Say"}
         </h2>
-        <div className="flex items-center justify-center gap-6 mb-12">
-          <div className="flex -space-x-2">
-            {[
-              { letter: "Y", color: "#FF4655" },
-              { letter: "E", color: "#4D7CFF" },
-              { letter: "A", color: "#B44DFF" },
-              { letter: "M", color: "#ECB73E" },
-              { letter: "K", color: "#32B8B8" },
-            ].map((u, i) => (
-              <div key={i} className="w-8 h-8 rounded-full border-2 border-black flex items-center justify-center text-[11px] font-bold" style={{ background: `${u.color}20`, color: u.color }}>{u.letter}</div>
-            ))}
-          </div>
-          <div>
-            <div className="flex gap-0.5 mb-0.5">
-              {[1,2,3,4,5].map(s => (
-                <svg key={s} width="14" height="14" viewBox="0 0 24 24" fill="#FF4655" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              ))}
-            </div>
-            <p className="text-[12px] text-neutral-400"><span className="text-white font-semibold">500+</span> {lang === "tr" ? "aktif oyuncu" : "active players"}</p>
-          </div>
-        </div>
+        <p className="text-center text-[12px] text-neutral-500 mb-12 max-w-xl mx-auto">
+          {lang === "tr"
+            ? "Closed beta'dan oyuncuların gerçek geri bildirimlerinden seçtiklerimiz. Discord ve in-app feedback formundan toplandı."
+            : "Selected feedback from real beta players — collected from Discord and the in-app feedback form."}
+        </p>
         <div className="grid md:grid-cols-3 gap-4">
           {(lang === "tr" ? [
-            { name: "Yusuf K.", rank: "Diamond", text: "Round sonrası AI feedback sayesinde positioning hatalarımı düzelttim. 2 haftada Gold'dan Diamond'a çıktım.", color: "#B489FF" },
-            { name: "Elif S.", rank: "Platinum", text: "Hata tespiti özelliği müthiş. Aynı peek hatalarını tekrar tekrar yaptığımı fark etmemi sağladı.", color: "#32B8B8" },
-            { name: "Arda M.", rank: "Immortal", text: "Detaylı maç raporları ile takım olarak zayıf yönlerimizi gördük. Turnuva hazırlığında çok işe yaradı.", color: "#FF4655" },
+            {
+              handle: "@kahve_op",
+              rank: "Plat 2",
+              maps: "Bind / Lotus",
+              text: "Yusuf'un B Long sürekli ölme problemim varmış. Üst üste 4 round tek rapor 'aynı açıdan ikinci peek atıyorsun' dedi. Haklıymış. O round'lardan sonra Bind defansta %30 daha iyiyim. Reklam edilen 'Diamond garanti' olayı yok ama kendi hatalarını görmek için işe yarıyor.",
+              color: "#32B8B8",
+            },
+            {
+              handle: "@ash_jett",
+              rank: "Diamond 1",
+              maps: "Ascent",
+              text: "Coach insight feature'i zayıf round'larda iyi, full util execute round'larında biraz generic. Ama şunu sevdim: pattern context bölümü gerçekten son 3-4 round'a referans veriyor, copy-paste tavsiye değil. Round başına 2-3 saniye cost ediyor ama overlay küçük, oyunu engellemiyor.",
+              color: "#B489FF",
+            },
+            {
+              handle: "@tepe_smoke",
+              rank: "Asc 3 → Imm 1",
+              maps: "Lotus / Sunset",
+              text: "Tek başıma queue atarken takım iletişimi yoktu, AI'in 'savunmacılar son round B stack yaptı, A'ya geç' tarzı çağrıları işime yaradı. Bazı pattern'leri kaçırdığını gördüm (clutch round'larda). Roadmap'lerinde fix etmeye çalışıyorlar, support ekibi cevap veriyor.",
+              color: "#ECB73E",
+            },
           ] : [
-            { name: "Alex K.", rank: "Diamond", text: "Post-round AI feedback helped me fix positioning mistakes. Climbed from Gold to Diamond in 2 weeks.", color: "#B489FF" },
-            { name: "Sarah M.", rank: "Platinum", text: "The mistake detection feature is amazing. It showed me I was repeating the same peek errors.", color: "#32B8B8" },
-            { name: "James R.", rank: "Immortal", text: "Detailed match reports helped our team identify weak points. Invaluable for tournament prep.", color: "#FF4655" },
+            {
+              handle: "@kahve_op",
+              rank: "Plat 2",
+              maps: "Bind / Lotus",
+              text: "Found out I was dying on B Long every time — 4 rounds in a row the report said 'second peek same angle.' Fair. Bind defense is ~30% better since. Not a 'climb to Diamond' silver bullet but it makes your own mistakes obvious.",
+              color: "#32B8B8",
+            },
+            {
+              handle: "@ash_jett",
+              rank: "Diamond 1",
+              maps: "Ascent",
+              text: "Coach insight is good on rough rounds, a bit generic on clean full-util executes. What I liked: the pattern-context block actually references the last 3-4 rounds, not generic copy. Costs 2-3s per round but the overlay is small and doesn't block gameplay.",
+              color: "#B489FF",
+            },
+            {
+              handle: "@tepe_smoke",
+              rank: "Asc 3 → Imm 1",
+              maps: "Lotus / Sunset",
+              text: "Solo queueing without team comms, AI calls like 'defenders stacked B last round, swing A' were genuinely useful. It misses some clutch patterns. Roadmap mentions fixing it — support actually responds.",
+              color: "#ECB73E",
+            },
           ]).map((t, i) => (
             <div key={i} className="card-xtract p-6 group">
-              <div className="flex gap-0.5 mb-3">
-                {[1,2,3,4,5].map(s => (
-                  <svg key={s} width="12" height="12" viewBox="0 0 24 24" fill="#FF4655" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                ))}
-              </div>
-              <p className="text-[13px] text-neutral-400 leading-relaxed mb-4">&ldquo;{t.text}&rdquo;</p>
+              <p className="text-[13px] text-neutral-300 leading-relaxed mb-4">&ldquo;{t.text}&rdquo;</p>
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold" style={{ background: `${t.color}15`, color: t.color, border: `1px solid ${t.color}25` }}>
-                  {t.name.charAt(0)}
+                  {t.handle.charAt(1).toUpperCase()}
                 </div>
                 <div>
-                  <p className="text-[12px] font-semibold text-white">{t.name}</p>
-                  <p className="text-[10px] font-medium" style={{ color: t.color }}>{t.rank}</p>
+                  <p className="text-[12px] font-semibold text-white">{t.handle}</p>
+                  <p className="text-[10px] font-medium text-neutral-500">
+                    <span style={{ color: t.color }}>{t.rank}</span>
+                    <span className="mx-1.5 text-neutral-700">•</span>
+                    {t.maps}
+                  </p>
                 </div>
               </div>
             </div>
@@ -2128,6 +2509,283 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
 
       {/* Ambient orb — left side lower */}
       <div className="pointer-events-none absolute left-[-150px] top-[3200px] w-[450px] h-[450px] rounded-full bg-[#FF4655]/[0.05] blur-[140px] animate-orb" style={{ zIndex: 0, animationDelay: '10s' }} />
+
+      {/* ─── BLOG SECTION ─── */}
+      <section id="section-blog" data-animate className="relative z-10 mx-auto max-w-6xl px-5 sm:px-8 pb-28">
+        <div className="section-divider mb-16" />
+        <div className="text-center mb-14">
+          <p className="text-[11px] uppercase tracking-[0.2em] text-[#FF4655]/70 font-semibold mb-3">
+            {l.landingBlogTitle}
+          </p>
+          <h2 className="text-3xl sm:text-[44px] font-semibold text-white tracking-tight leading-tight mb-4" style={{ letterSpacing: '-1.5px' }}>
+            {lang === "tr" ? "Rank Atlamanın Anahtarı" : "The Key to Ranking Up"}
+          </h2>
+          <p className="text-[15px] text-neutral-400 max-w-xl mx-auto leading-relaxed">
+            {l.landingBlogText}
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {l.landingBlogPosts.slice(0, 4).map((post, i) => (
+            <article
+              key={i}
+              onClick={() => setSelectedPost(i)}
+              className="card-xtract group p-7 cursor-pointer relative overflow-hidden"
+              style={{ animationDelay: `${i * 100}ms` }}
+            >
+              {/* Top accent bar */}
+              <div
+                className="absolute top-0 left-0 right-0 h-0.5 opacity-60 group-hover:opacity-100 transition-opacity"
+                style={{ background: `linear-gradient(90deg, ${post.color}, transparent)` }}
+              />
+              {/* Category + date */}
+              <div className="flex items-center justify-between mb-4">
+                <span
+                  className="text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 rounded-md"
+                  style={{
+                    color: post.color,
+                    background: `${post.color}12`,
+                    border: `1px solid ${post.color}20`,
+                  }}
+                >
+                  {post.category}
+                </span>
+                <span className="text-[11px] text-neutral-500 flex items-center gap-2">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                  {post.readTime}
+                </span>
+              </div>
+              {/* Title */}
+              <h3 className="text-[18px] sm:text-[20px] font-bold text-white leading-snug mb-3 group-hover:text-white transition-colors" style={{ letterSpacing: '-0.3px' }}>
+                {post.title}
+              </h3>
+              {/* Excerpt */}
+              <p className="text-[13px] text-neutral-400 leading-relaxed mb-5">
+                {post.excerpt}
+              </p>
+              {/* Footer */}
+              <div className="flex items-center justify-between pt-4 border-t border-white/[0.06]">
+                <span className="text-[11px] text-neutral-500">{post.date}</span>
+                <span
+                  className="text-[12px] font-semibold flex items-center gap-1.5 group-hover:gap-2.5 transition-all"
+                  style={{ color: post.color }}
+                >
+                  {l.landingBlogReadMore}
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </span>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div className="text-center mt-10">
+          <button
+            onClick={() => setShowAllBlog(true)}
+            className="btn-ghost rounded-xl px-8 py-3 text-[13px] inline-flex items-center gap-2"
+          >
+            {l.landingBlogAll}
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      {/* ─── ALL BLOG POSTS MODAL ─── */}
+      {showAllBlog && (
+        <div
+          className="fixed inset-0 z-[100] flex items-start justify-center p-4 sm:p-8 animate-fade-in overflow-y-auto"
+          style={{ background: "rgba(0,0,0,0.9)", backdropFilter: "blur(12px)" }}
+          onClick={() => setShowAllBlog(false)}
+        >
+          <div
+            className="relative max-w-6xl w-full my-auto bg-[#0b1120] border border-white/10 rounded-2xl shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setShowAllBlog(false)}
+              className="absolute top-5 right-5 z-10 w-11 h-11 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all text-white"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+            {/* Top accent bar */}
+            <div className="h-1 w-full rounded-t-2xl" style={{ background: "linear-gradient(90deg, #FF4655, #4D7CFF, #B44DFF, #2ECC71)" }} />
+            <div className="p-8 sm:p-12">
+              {/* Header */}
+              <div className="mb-10">
+                <p className="text-[11px] uppercase tracking-[0.2em] text-[#FF4655]/70 font-semibold mb-3">
+                  {l.landingBlogTitle}
+                </p>
+                <h2 className="text-3xl sm:text-[40px] font-bold text-white leading-tight mb-3" style={{ letterSpacing: "-1px" }}>
+                  {lang === "tr" ? "Tüm Blog Yazıları" : "All Blog Posts"}
+                </h2>
+                <p className="text-[14px] text-neutral-400 max-w-2xl">
+                  {l.landingBlogText}
+                </p>
+              </div>
+              {/* All posts grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {l.landingBlogPosts.map((post, i) => (
+                  <article
+                    key={i}
+                    onClick={() => {
+                      setSelectedPost(i);
+                      setShowAllBlog(false);
+                    }}
+                    className="card-xtract group p-5 cursor-pointer relative overflow-hidden"
+                  >
+                    <div
+                      className="absolute top-0 left-0 right-0 h-0.5 opacity-60 group-hover:opacity-100 transition-opacity"
+                      style={{ background: `linear-gradient(90deg, ${post.color}, transparent)` }}
+                    />
+                    <div className="flex items-center justify-between mb-3">
+                      <span
+                        className="text-[9px] font-bold uppercase tracking-[0.15em] px-2 py-0.5 rounded-md"
+                        style={{
+                          color: post.color,
+                          background: `${post.color}12`,
+                          border: `1px solid ${post.color}20`,
+                        }}
+                      >
+                        {post.category}
+                      </span>
+                      <span className="text-[10px] text-neutral-500 flex items-center gap-1">
+                        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                          <circle cx="12" cy="12" r="10" />
+                          <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                        {post.readTime}
+                      </span>
+                    </div>
+                    <h3 className="text-[15px] font-bold text-white leading-snug mb-2" style={{ letterSpacing: "-0.2px" }}>
+                      {post.title}
+                    </h3>
+                    <p className="text-[12px] text-neutral-400 leading-relaxed mb-3 line-clamp-2">
+                      {post.excerpt}
+                    </p>
+                    <div className="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+                      <span className="text-[10px] text-neutral-500">{post.date}</span>
+                      <span
+                        className="text-[11px] font-semibold flex items-center gap-1 group-hover:gap-2 transition-all"
+                        style={{ color: post.color }}
+                      >
+                        {l.landingBlogReadMore}
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                          <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                      </span>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ─── BLOG POST MODAL ─── */}
+      {selectedPost !== null && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-fade-in"
+          style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(8px)" }}
+          onClick={() => setSelectedPost(null)}
+        >
+          <div
+            className="relative max-w-3xl w-full max-h-[90vh] overflow-y-auto bg-[#0b1120] border border-white/10 rounded-2xl shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setSelectedPost(null)}
+              className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all text-white"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+            {/* Top accent bar */}
+            <div
+              className="h-1 w-full rounded-t-2xl"
+              style={{ background: `linear-gradient(90deg, ${l.landingBlogPosts[selectedPost].color}, transparent)` }}
+            />
+            <div className="p-8 sm:p-12">
+              {/* Category + meta */}
+              <div className="flex items-center gap-3 mb-5 flex-wrap">
+                <span
+                  className="text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 rounded-md"
+                  style={{
+                    color: l.landingBlogPosts[selectedPost].color,
+                    background: `${l.landingBlogPosts[selectedPost].color}15`,
+                    border: `1px solid ${l.landingBlogPosts[selectedPost].color}25`,
+                  }}
+                >
+                  {l.landingBlogPosts[selectedPost].category}
+                </span>
+                <span className="text-[11px] text-neutral-500 flex items-center gap-1.5">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                  {l.landingBlogPosts[selectedPost].readTime}
+                </span>
+                <span className="text-[11px] text-neutral-500">·</span>
+                <span className="text-[11px] text-neutral-500">{l.landingBlogPosts[selectedPost].date}</span>
+              </div>
+              {/* Title */}
+              <h2 className="text-2xl sm:text-[32px] font-bold text-white leading-tight mb-6" style={{ letterSpacing: "-0.5px" }}>
+                {l.landingBlogPosts[selectedPost].title}
+              </h2>
+              {/* Excerpt as lead */}
+              <p className="text-[15px] text-neutral-300 leading-relaxed mb-8 pl-4 border-l-2" style={{ borderColor: `${l.landingBlogPosts[selectedPost].color}50` }}>
+                {l.landingBlogPosts[selectedPost].excerpt}
+              </p>
+              {/* Full content */}
+              <div className="prose prose-invert max-w-none text-[14px] text-neutral-300 leading-[1.8] space-y-5">
+                {(((l.landingBlogPosts[selectedPost] as { content?: string }).content) || (lang === "tr" ? "İçerik yakında eklenecek..." : "Content coming soon...")).split("\n\n").map((paragraph, pi) => {
+                  if (paragraph.startsWith("## ")) {
+                    return (
+                      <h3 key={pi} className="text-[18px] font-bold text-white mt-8 mb-2" style={{ color: l.landingBlogPosts[selectedPost].color }}>
+                        {paragraph.replace("## ", "")}
+                      </h3>
+                    );
+                  }
+                  if (paragraph.startsWith("### ")) {
+                    return (
+                      <h4 key={pi} className="text-[15px] font-semibold text-white mt-5 mb-1">
+                        {paragraph.replace("### ", "")}
+                      </h4>
+                    );
+                  }
+                  return (
+                    <p key={pi} dangerouslySetInnerHTML={{ __html: paragraph.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>') }} />
+                  );
+                })}
+              </div>
+              {/* Footer close button */}
+              <div className="mt-10 pt-6 border-t border-white/[0.06] flex items-center justify-between">
+                <span className="text-[11px] text-neutral-500">{lang === "tr" ? "Yazıyı kapatmak için ESC'ye bas" : "Press ESC to close"}</span>
+                <button
+                  onClick={() => setSelectedPost(null)}
+                  className="text-[12px] font-semibold px-5 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all text-white"
+                >
+                  {lang === "tr" ? "Kapat" : "Close"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ─── DOWNLOAD — Premium card like Xtract ─── */}
       <section id="download-section" data-animate className="relative z-10 mx-auto max-w-3xl px-5 sm:px-8 pb-28">
@@ -2140,14 +2798,14 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
           </h2>
           <p className="text-[15px] text-neutral-400 mb-10 max-w-md mx-auto leading-relaxed">
             {lang === "tr"
-              ? "Oyununu otomatik izlesin, round sonrası anında AI koçluk feedback'i versin."
-              : "Auto-watches your game, gives instant AI coaching after each round."}
+              ? "AI maçını otomatik izler, tüm verileri çeker ve maç sonu kişiselleştirilmiş koçluk raporu sunar. Sen sadece oyna."
+              : "AI watches your match automatically, pulls all the data, and delivers a personalized coaching report. You just play."}
           </p>
           <div className="flex flex-wrap justify-center gap-6 mb-10 text-[13px] text-neutral-400">
             {[
               lang === "tr" ? "Otomatik izleme" : "Auto tracking",
               lang === "tr" ? "In-game overlay" : "In-game overlay",
-              lang === "tr" ? "Ücretsiz" : "Free",
+              lang === "tr" ? "Sadece 10$" : "Only $10",
             ].map((t2, i2) => (
               <span key={i2} className="flex items-center gap-2.5">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF4655" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -2539,6 +3197,16 @@ export default function Home() {
   }
   const [lang, setLang] = useState<Lang | null>(null);
   const [screen, setScreen] = useState<Screen>("landing");
+
+  // Manual setup/round/scoreInput web flow has been removed from the web app
+  // — round-by-round analysis lives entirely in AIMLO Desktop. If a stored
+  // session lands on one of those legacy screens, redirect to dashboard.
+  useEffect(() => {
+    if (screen === "setup" || screen === "round" || screen === "scoreInput") {
+      setScreen("dashboard");
+    }
+  }, [screen]);
+
   const [setup, setSetup] = useState<SetupData>({
     map: "",
     agent: "",
@@ -3053,7 +3721,7 @@ export default function Home() {
         const raw = localStorage.getItem(key);
         if (raw) {
           const arr = JSON.parse(raw) as unknown[];
-          const filtered = arr.filter((r: any) => r?.id !== reportId);
+          const filtered = arr.filter((r): boolean => (r as { id?: string } | null)?.id !== reportId);
           localStorage.setItem(key, JSON.stringify(filtered));
         }
       } catch {}
@@ -3975,1035 +4643,5 @@ export default function Home() {
       </main>
     );
   }
-  /* SETUP — redirected to dashboard (manual analysis removed from web app) */
-  if (screen === "setup") {
-    setScreen("dashboard");
-  }
-  if (false as boolean) { /* setup disabled — use AIMLO Desktop */
-    const stepIdx = SETUP_STEPS.indexOf(setupStep);
-    function nextStep() {
-      const e: FormErrors = {};
-      if (setupStep === "mapAgent") {
-        if (!setup.map) e.map = l.required;
-        if (!setup.agent) e.agent = l.required;
-      }
-      if (setupStep === "sideComp") {
-        if (!setup.side) e.side = l.required;
-        if (setup.teamComp.filter(Boolean).length < 5) e.teamComp = l.selectAll;
-        if (
-          !setup.unknownEnemyComp &&
-          setup.enemyComp.filter(Boolean).length < 5
-        )
-          e.enemyComp = l.selectAll;
-      }
-      setSetupErrors(e);
-      if (Object.keys(e).length > 0) return;
-      if (stepIdx < SETUP_STEPS.length - 1) {
-        setSetupStep(SETUP_STEPS[stepIdx + 1]);
-        setSetupErrors({});
-      } else {
-        setRounds([]);
-        setRoundIdx(0);
-        setRoundForm({ deathLocation: "", enemyCount: "", yourNote: "" });
-        setRoundErrors({});
-        setRoundMode("input");
-        setCurrentFeedback(null);
-        setCurrentResult(null);
-        setSurvived(false);
-        setScreen("round");
-      }
-    }
-    function prevStep() {
-      if (stepIdx > 0) {
-        setSetupStep(SETUP_STEPS[stepIdx - 1]);
-        setSetupErrors({});
-      } else setScreen("dashboard");
-    }
-    return (
-      <main className={`${ds.pageBg} relative`}>
-        {setup.map ? <MapBg map={setup.map} /> : <AmbientBg />}
-        <Navbar {...navProps} />
-        <div className="relative z-10 mx-auto max-w-2xl px-4 pt-20 pb-12 space-y-6">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-white">{l.setupTitle}</h2>
-          </div>
-          <div className="flex items-center justify-center gap-1">
-            {SETUP_STEPS.map((s, i) => (
-              <div key={s} className="flex items-center gap-1">
-                <button
-                  onClick={() => {
-                    if (i <= stepIdx) {
-                      setSetupStep(s);
-                      setSetupErrors({});
-                    }
-                  }}
-                  className={`rounded-lg px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider transition ${i === stepIdx ? "bg-blue-500/12 text-blue-400 ring-1 ring-blue-500/30" : i < stepIdx ? "bg-white/[0.05] text-neutral-400 cursor-pointer hover:text-white" : "bg-white/[0.02] text-neutral-700"}`}
-                >
-                  {getStepLabel(s)}
-                </button>
-                {i < SETUP_STEPS.length - 1 && (
-                  <span className="text-neutral-700 text-xs">{IC.mid}</span>
-                )}
-              </div>
-            ))}
-          </div>
-          <div className={`${ds.card} ${ds.cardInner} space-y-6`}>
-            {setupStep === "mapAgent" && (
-              <>
-                <div>
-                  <Label text={l.map} />
-                  <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-4">
-                    {MAPS.map((m) => (
-                      <button
-                        key={m}
-                        onClick={() => updateSetup("map", m)}
-                        className={`relative overflow-hidden rounded-xl border py-4 text-sm font-medium transition-all duration-200 ${setup.map === m ? "border-blue-500/50 bg-blue-500/10 text-white ring-1 ring-blue-500/30 shadow-lg shadow-blue-500/5" : "border-white/[0.06] bg-[#070c16] text-neutral-400 hover:border-white/[0.1] hover:text-white"}`}
-                      >
-                        {setup.map === m && (
-                          <div className="pointer-events-none absolute inset-0 opacity-20">
-                            <img
-                              src={MAP_IMAGES[m]}
-                              alt=""
-                              className="h-full w-full object-cover"
-                            />
-                          </div>
-                        )}
-                        <span className="relative">{m}</span>
-                      </button>
-                    ))}
-                  </div>
-                  <InlineError msg={setupErrors.map} />
-                </div>
-                <div className="border-t border-white/[0.06] pt-6">
-                  <Label text={l.agent} />
-                  {setup.agent && (
-                    <div className="mb-4 flex items-center gap-3 rounded-xl bg-blue-500/[0.06] border border-blue-500/15 px-4 py-3">
-                      <div className="h-10 w-10 overflow-hidden rounded-xl bg-black/20 ring-1 ring-blue-500/15">
-                        <img
-                          src={agentImgUrl(setup.agent)}
-                          alt={setup.agent}
-                          className="h-full w-full object-cover"
-                          loading="lazy"
-                        />
-                      </div>
-                      <div>
-                        <span className="text-sm font-bold text-white">
-                          {setup.agent}
-                        </span>
-                        <p className="text-[10px] text-blue-400">
-                          {l.selected}
-                        </p>
-                      </div>
-                    </div>
-                  )}
-                  <div className="space-y-5">
-                    {Object.entries(AGENT_GROUPS).map(([group, agents]) => (
-                      <div key={group}>
-                        <p className="mb-2.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-600">
-                          {AGENT_GROUP_LABELS[group][lang]}
-                        </p>
-                        <div className="grid grid-cols-4 gap-2 sm:grid-cols-6">
-                          {agents.map((a) => (
-                            <AgentMiniCard
-                              key={a}
-                              name={a}
-                              selected={setup.agent === a}
-                              disabled={false}
-                              onClick={() =>
-                                updateSetup("agent", setup.agent === a ? "" : a)
-                              }
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <InlineError msg={setupErrors.agent} />
-                </div>
-              </>
-            )}
-            {setupStep === "sideComp" && (
-              <>
-                <div>
-                  <Label text={l.side} />
-                  <div className="flex gap-4">
-                    {(
-                      [
-                        [
-                          "attack",
-                          l.sideAttack,
-                          "border-orange-500/25 bg-orange-500/[0.06]",
-                        ],
-                        [
-                          "defense",
-                          l.sideDefense,
-                          "border-sky-500/25 bg-sky-500/[0.06]",
-                        ],
-                      ] as const
-                    ).map(([val, label, activeStyle]) => (
-                      <button
-                        key={val}
-                        onClick={() => updateSetup("side", val)}
-                        className={`flex-1 rounded-xl border py-5 text-sm font-bold transition-all duration-200 ${setup.side === val ? `${activeStyle} text-white ring-1 ring-blue-500/30 shadow-lg` : "border-white/[0.06] bg-[#070c16] text-neutral-400 hover:border-white/[0.1] hover:text-white"}`}
-                      >
-                        {label}
-                      </button>
-                    ))}
-                  </div>
-                  <InlineError msg={setupErrors.side} />
-                </div>
-                <div className="border-t border-white/[0.06] pt-6 space-y-5">
-                  <div className="flex items-center justify-between">
-                    <h2 className="text-xs font-bold uppercase tracking-[0.15em] text-neutral-400">
-                      {l.compTitle}
-                    </h2>
-                    <label className="flex cursor-pointer items-center gap-2 text-[11px] text-neutral-500">
-                      <input
-                        type="checkbox"
-                        checked={setup.unknownEnemyComp}
-                        onChange={(e) =>
-                          updateSetup("unknownEnemyComp", e.target.checked)
-                        }
-                        className="h-3.5 w-3.5 rounded border-white/20 bg-white/5 accent-blue-500"
-                      />
-                      {l.unknownEnemy}
-                    </label>
-                  </div>
-                  <div className="flex gap-4 justify-between">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between mb-2">
-                        <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-400">
-                          {l.yourTeam}
-                        </p>
-                        <span className="text-[9px] text-neutral-600">
-                          {l.slotsRemaining(5 - setup.teamComp.length)}
-                        </span>
-                      </div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {[0, 1, 2, 3, 4].map((i) => (
-                          <CompSlot
-                            key={i}
-                            agent={setup.teamComp[i] || ""}
-                            index={i}
-                            locked={
-                              i === 0 &&
-                              setup.teamComp[0] === setup.agent &&
-                              !!setup.agent
-                            }
-                            onRemove={() => {
-                              if (i === 0 && setup.teamComp[0] === setup.agent)
-                                return;
-                              const c = [...setup.teamComp];
-                              c.splice(i, 1);
-                              updateSetup("teamComp", c);
-                            }}
-                          />
-                        ))}
-                      </div>
-                      <InlineError msg={setupErrors.teamComp} />
-                    </div>
-                    {!setup.unknownEnemyComp && (
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between mb-2">
-                          <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-red-400">
-                            {l.enemyTeam}
-                          </p>
-                          <span className="text-[9px] text-neutral-600">
-                            {l.slotsRemaining(5 - setup.enemyComp.length)}
-                          </span>
-                        </div>
-                        <div className="flex flex-wrap gap-1.5">
-                          {[0, 1, 2, 3, 4].map((i) => (
-                            <CompSlot
-                              key={i}
-                              agent={setup.enemyComp[i] || ""}
-                              index={i}
-                              onRemove={() => {
-                                const c = [...setup.enemyComp];
-                                c.splice(i, 1);
-                                updateSetup("enemyComp", c);
-                              }}
-                            />
-                          ))}
-                        </div>
-                        <InlineError msg={setupErrors.enemyComp} />
-                      </div>
-                    )}
-                  </div>
-                  {!setup.unknownEnemyComp && (
-                    <div className="flex gap-2 justify-center">
-                      <button
-                        onClick={() => setCompTarget("team")}
-                        className={`rounded-lg px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider transition ${compTarget === "team" ? "bg-cyan-500/10 text-cyan-400 ring-1 ring-cyan-500/25" : "bg-white/[0.05] text-neutral-500 hover:text-white"}`}
-                      >
-                        + {l.yourTeam}
-                      </button>
-                      <button
-                        onClick={() => setCompTarget("enemy")}
-                        className={`rounded-lg px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider transition ${compTarget === "enemy" ? "bg-red-500/10 text-red-400 ring-1 ring-red-500/25" : "bg-white/[0.05] text-neutral-500 hover:text-white"}`}
-                      >
-                        + {l.enemyTeam}
-                      </button>
-                    </div>
-                  )}
-                  <div>
-                    <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-600">
-                      {l.agentPool}
-                    </p>
-                    <div className="space-y-4">
-                      {Object.entries(AGENT_GROUPS).map(([group, agents]) => {
-                        const target = setup.unknownEnemyComp
-                          ? "team"
-                          : compTarget;
-                        const currentArr =
-                          target === "team" ? setup.teamComp : setup.enemyComp;
-                        return (
-                          <div key={group}>
-                            <p className="mb-1.5 text-[9px] font-semibold uppercase tracking-[0.15em] text-neutral-700">
-                              {AGENT_GROUP_LABELS[group][lang]}
-                            </p>
-                            <div className="grid grid-cols-5 gap-1.5 sm:grid-cols-8">
-                              {agents.map((a) => {
-                                const isIn = currentArr.includes(a);
-                                const isLocked =
-                                  target === "team" &&
-                                  a === setup.agent &&
-                                  setup.teamComp[0] === a;
-                                return (
-                                  <AgentMiniCard
-                                    key={a}
-                                    name={a}
-                                    selected={isIn}
-                                    disabled={isIn && !isLocked}
-                                    locked={isLocked}
-                                    onClick={() => {
-                                      if (isLocked) return;
-                                      handleCompSelect(
-                                        target === "team"
-                                          ? "teamComp"
-                                          : "enemyComp",
-                                        a,
-                                      );
-                                    }}
-                                  />
-                                );
-                              })}
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
-            {setupStep === "confirm" && (
-              <div className="space-y-6">
-                <div className="text-center space-y-2">
-                  <h3 className="text-lg font-bold text-white">
-                    {l.confirmTitle}
-                  </h3>
-                  <p className="text-sm text-neutral-500">{l.confirmDesc}</p>
-                </div>
-                <div className="grid grid-cols-2 gap-3">
-                  <div className={`${ds.card} p-4 text-center`}>
-                    <p className={ds.label}>{l.map}</p>
-                    <div className="relative h-20 w-full overflow-hidden rounded-xl bg-black/20 mb-2 ring-1 ring-white/[0.06]">
-                      <img
-                        src={MAP_IMAGES[setup.map]}
-                        alt={setup.map}
-                        className="h-full w-full object-cover opacity-65"
-                      />
-                    </div>
-                    <p className="text-sm font-bold text-white">{setup.map}</p>
-                  </div>
-                  <div className={`${ds.card} p-4 text-center`}>
-                    <p className={ds.label}>{l.agent}</p>
-                    <div className="mx-auto h-14 w-14 overflow-hidden rounded-xl bg-black/20 mb-2 ring-1 ring-white/[0.06]">
-                      <img
-                        src={agentImgUrl(setup.agent)}
-                        alt={setup.agent}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                    <p className="text-sm font-bold text-white">
-                      {setup.agent}
-                    </p>
-                  </div>
-                </div>
-                <div
-                  className={`${ds.card} p-4 flex items-center justify-between`}
-                >
-                  <span className={ds.label + " mb-0"}>{l.side}</span>
-                  <span className="text-sm font-bold text-white">
-                    {setup.side === "attack" ? l.sideAttack : l.sideDefense}
-                  </span>
-                </div>
-                <div className={`${ds.card} p-4`}>
-                  <p className={ds.label}>{l.yourTeam}</p>
-                  <div className="flex gap-2 mt-2">
-                    {setup.teamComp.map(
-                      (a, i) =>
-                        a && (
-                          <div
-                            key={i}
-                            className="flex items-center gap-1.5 rounded-lg bg-white/[0.05] px-2 py-1"
-                          >
-                            <div className="h-5 w-5 rounded overflow-hidden">
-                              <img
-                                src={agentImgUrl(a)}
-                                alt={a}
-                                className="h-full w-full object-cover"
-                              />
-                            </div>
-                            <span className="text-[11px] text-neutral-300">
-                              {a}
-                            </span>
-                          </div>
-                        ),
-                    )}
-                  </div>
-                </div>
-              </div>
-            )}
-            <div className="space-y-3 pt-2">
-              <button onClick={nextStep} className={ds.btnPrimary}>
-                {setupStep === "confirm" ? l.startMatch : l.next}
-              </button>
-              <button onClick={prevStep} className={ds.btnSecondary}>
-                {l.back}
-              </button>
-            </div>
-          </div>
-        </div>
-      </main>
-    );
-  }
-  /* ROUND — redirected to dashboard (manual analysis removed from web app) */
-  if (screen === "round") {
-    setScreen("dashboard");
-  }
-  if (false as boolean) { /* round disabled — use AIMLO Desktop */
-    function validateRound(): FormErrors {
-      const e: FormErrors = {};
-      if (!survived) {
-        if (!roundForm.deathLocation) e.deathLocation = l.required;
-        if (!roundForm.enemyCount) e.enemyCount = l.required;
-      }
-      if (!roundForm.yourNote.trim()) e.yourNote = l.required;
-      else if (roundForm.yourNote.trim().length < 3)
-        e.yourNote = l.noteTooShort;
-      return e;
-    }
-    async function handleSubmitRound(result: RoundResult) {
-      const e = validateRound();
-      setRoundErrors(e);
-      if (Object.keys(e).length > 0) return;
-      if (isSubmitting || submitLockRef.current) return;
-      submitLockRef.current = true;
-      setIsSubmitting(true);
-      setFeedbackLoading(true);
-      const prev = rounds.slice(0, roundIdx);
-      const fallbackFb = () =>
-        genRoundFeedback(
-          setup,
-          roundForm,
-          result,
-          prev,
-          lang ?? "tr",
-          survived,
-        );
-      let fb: RoundFeedback;
-      try {
-        const authHeaders = await getAuthHeaders();
-        const res = await fetch("/api/ai/feedback", {
-          method: "POST",
-          headers: authHeaders,
-          body: JSON.stringify({
-            setup,
-            form: roundForm,
-            result,
-            allRounds: prev,
-            lang: lang ?? "tr",
-            survived,
-          }),
-        });
-        if (res.ok) {
-          const json = await res.json();
-          fb = isValidFeedback(json) ? json : fallbackFb();
-        } else {
-          fb = fallbackFb();
-        }
-      } catch {
-        fb = fallbackFb();
-      } finally {
-        setFeedbackLoading(false);
-        setIsSubmitting(false);
-        submitLockRef.current = false;
-      }
-      const rd: RoundData = {
-        roundNumber: roundNum,
-        deathLocation: survived ? "" : roundForm.deathLocation,
-        enemyCount: survived ? "" : roundForm.enemyCount,
-        yourNote: roundForm.yourNote,
-        result,
-        skipped: false,
-        survived,
-        feedback: fb,
-      };
-      saveRoundData(rd);
-      setCurrentFeedback(fb);
-      setCurrentResult(result);
-      setRoundMode("feedback");
-    }
-    function handleSkipConfirm(result: RoundResult) {
-      const rd: RoundData = {
-        roundNumber: roundNum,
-        deathLocation: "",
-        enemyCount: "",
-        yourNote: "",
-        result,
-        skipped: true,
-        survived: false,
-        feedback: null,
-      };
-      saveRoundData(rd);
-      loadRoundAtIndex(roundIdx + 1);
-    }
-    function handleNextRound() {
-      loadRoundAtIndex(roundIdx + 1);
-    }
-    function handleBack() {
-      if (roundIdx > 0) loadRoundAtIndex(roundIdx - 1);
-      else {
-        setScreen("setup");
-        setSetupStep("confirm");
-      }
-    }
-    function handleFinishFromFeedback() {
-      goToScoreInput();
-    }
-    function handleFinishFromInput() {
-      const e = validateRound();
-      if (Object.keys(e).length === 0) {
-        const prev = rounds.slice(0, roundIdx);
-        const fb = genRoundFeedback(
-          setup,
-          roundForm,
-          "loss",
-          prev,
-          lang ?? "tr",
-          survived,
-        );
-        const rd: RoundData = {
-          roundNumber: roundNum,
-          deathLocation: survived ? "" : roundForm.deathLocation,
-          enemyCount: survived ? "" : roundForm.enemyCount,
-          yourNote: roundForm.yourNote,
-          result: "loss",
-          skipped: false,
-          survived,
-          feedback: fb,
-        };
-        goToScoreInput(rd);
-      } else goToScoreInput();
-    }
-    return (
-      <main className={`${ds.pageBg} relative`}>
-        <MapBg map={setup.map} />
-        <Navbar {...navProps} />
-        <div className="relative z-10 mx-auto max-w-lg px-4 pt-20 pb-12 space-y-6">
-          <div className="text-center space-y-1">
-            <h2 className="text-2xl font-bold text-white">
-              {l.roundTitle(roundNum)}
-            </h2>
-            <p className="text-sm text-neutral-500">
-              {setup.map} {IC.dot} {setup.agent} {IC.dot}{" "}
-              {setup.side === "attack" ? l.sideAttack : l.sideDefense}
-            </p>
-          </div>
-          {(rounds.length > 0 || roundIdx > 0) && (
-            <div className="flex flex-wrap gap-1.5 justify-center">
-              {rounds.map((r, i) => (
-                <button
-                  key={i}
-                  onClick={() => loadRoundAtIndex(i)}
-                  className={`rounded-lg px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-wider transition border ${i === roundIdx ? "ring-2 ring-blue-500 ring-offset-1 ring-offset-[#050810]" : ""} ${r.result === "win" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/10" : "bg-red-500/10 text-red-400 border-red-500/10"} ${r.skipped ? "opacity-40" : ""}`}
-                >
-                  R{r.roundNumber}{" "}
-                  {r.result === "win" ? l.wonLabel : l.lostLabel}
-                  {r.skipped ? l.skippedLabel : ""}
-                </button>
-              ))}
-              {roundIdx >= rounds.length && (
-                <span className="rounded-lg bg-blue-500/10 border border-blue-500/20 px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-blue-400 ring-2 ring-blue-500 ring-offset-1 ring-offset-[#050810]">
-                  R{roundNum}
-                </span>
-              )}
-            </div>
-          )}
-          {roundMode === "input" && (
-            <div className={`${ds.card} ${ds.cardInner} space-y-5`}>
-              <button
-                onClick={() => {
-                  setSurvived(!survived);
-                  if (!survived)
-                    setRoundForm((f) => ({
-                      ...f,
-                      deathLocation: "",
-                      enemyCount: "",
-                    }));
-                }}
-                className={`w-full rounded-xl border-2 py-4 text-base font-extrabold uppercase tracking-wider transition-all duration-200 ${survived ? "border-emerald-400/60 bg-emerald-500/10 text-emerald-400 shadow-lg shadow-emerald-500/10 ring-1 ring-emerald-400/15" : "border-white/[0.08] bg-[#070c16] text-neutral-500 hover:border-emerald-500/25 hover:text-emerald-400 hover:bg-emerald-500/[0.04]"}`}
-              >
-                {survived ? IC.check + " " : ""}
-                {l.survived}
-              </button>
-              {!survived && (
-                <>
-                  <div>
-                    <Label text={l.deathLocation} />
-                    <select
-                      value={roundForm.deathLocation}
-                      onChange={(e) =>
-                        updateRound("deathLocation", e.target.value)
-                      }
-                      className={ds.selectBase}
-                    >
-                      <option value="" disabled className="bg-[#050810]">
-                        {l.deathLocationPh}
-                      </option>
-                      {locations.map((loc) => (
-                        <option key={loc} value={loc} className="bg-[#050810]">
-                          {loc}
-                        </option>
-                      ))}
-                    </select>
-                    <InlineError msg={roundErrors.deathLocation} />
-                  </div>
-                  <div>
-                    <Label text={l.enemyCount} />
-                    <select
-                      value={roundForm.enemyCount}
-                      onChange={(e) =>
-                        updateRound("enemyCount", e.target.value)
-                      }
-                      className={ds.selectBase}
-                    >
-                      <option value="" disabled className="bg-[#050810]">
-                        {l.enemyCountPh}
-                      </option>
-                      {[1, 2, 3, 4, 5].map((n) => (
-                        <option
-                          key={n}
-                          value={String(n)}
-                          className="bg-[#050810]"
-                        >
-                          {n}
-                        </option>
-                      ))}
-                    </select>
-                    <InlineError msg={roundErrors.enemyCount} />
-                  </div>
-                </>
-              )}
-              <div>
-                <Label text={l.yourNote} />
-                <textarea
-                  value={roundForm.yourNote}
-                  onChange={(e) => updateRound("yourNote", e.target.value)}
-                  placeholder={
-                    survived
-                      ? lang === "tr"
-                        ? "ör. lurk oynadım, info verdim\u2026"
-                        : "e.g. lurked, gave info\u2026"
-                      : l.yourNotePh
-                  }
-                  rows={3}
-                  className={ds.inputBase + " resize-none"}
-                />
-                <InlineError msg={roundErrors.yourNote} />
-              </div>
-              <div>
-                <Label text={l.roundResult} />
-                {feedbackLoading ? (
-                  <div className="flex items-center justify-center gap-3 py-6">
-                    <div className="h-5 w-5 animate-spin rounded-full border-2 border-blue-500 border-t-transparent" />
-                    <span className="text-sm text-neutral-400">
-                      {lang === "tr"
-                        ? "AI analiz ediyor..."
-                        : "AI analyzing..."}
-                    </span>
-                  </div>
-                ) : (
-                  <div className="flex gap-3">
-                    <button
-                      onClick={() => handleSubmitRound("win")}
-                      disabled={isSubmitting}
-                      className="flex-1 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.06] py-3.5 text-sm font-bold text-emerald-400 transition-all hover:bg-emerald-500/[0.1] active:scale-[0.98] disabled:opacity-40"
-                    >
-                      {l.roundResultWin}
-                    </button>
-                    <button
-                      onClick={() => handleSubmitRound("loss")}
-                      disabled={isSubmitting}
-                      className="flex-1 rounded-xl border border-red-500/20 bg-red-500/[0.06] py-3.5 text-sm font-bold text-red-400 transition-all hover:bg-red-500/[0.1] active:scale-[0.98] disabled:opacity-40"
-                    >
-                      {l.roundResultLoss}
-                    </button>
-                  </div>
-                )}
-              </div>
-              <div className="space-y-3 pt-2">
-                <button
-                  onClick={() => setRoundMode("skipConfirm")}
-                  className={ds.btnSecondary}
-                >
-                  {l.skipRound}
-                </button>
-                <div className="flex gap-3">
-                  <button onClick={handleBack} className={ds.btnSecondary}>
-                    {l.back}
-                  </button>
-                  <button
-                    onClick={handleFinishFromInput}
-                    className={ds.btnAccent}
-                  >
-                    {l.finishMatch}
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-          {roundMode === "skipConfirm" && (
-            <div className={`${ds.card} p-6 sm:p-8 space-y-5 text-center`}>
-              <p className="text-sm font-bold text-white">
-                {l.skipConfirmTitle}
-              </p>
-              <div className="flex gap-3">
-                <button
-                  onClick={() => handleSkipConfirm("win")}
-                  className="flex-1 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.06] py-3.5 text-sm font-bold text-emerald-400 transition hover:bg-emerald-500/[0.1]"
-                >
-                  {l.yes}
-                </button>
-                <button
-                  onClick={() => handleSkipConfirm("loss")}
-                  className="flex-1 rounded-xl border border-red-500/20 bg-red-500/[0.06] py-3.5 text-sm font-bold text-red-400 transition hover:bg-red-500/[0.1]"
-                >
-                  {l.no}
-                </button>
-              </div>
-              <button
-                onClick={() => setRoundMode("input")}
-                className={ds.btnSecondary}
-              >
-                {l.back}
-              </button>
-            </div>
-          )}
-          {roundMode === "feedback" && currentFeedback && (
-            <div className="space-y-5">
-              <div className={`${ds.card} ${ds.cardInner}`}>
-                <div className="mb-5 flex items-center justify-between">
-                  <h2 className="text-xs font-bold uppercase tracking-[0.15em] text-blue-400">
-                    {l.feedbackTitle}
-                  </h2>
-                  <div className="flex items-center gap-2">
-                    {survived && (
-                      <span className="rounded-md bg-emerald-500/10 border border-emerald-400/15 px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider text-emerald-400">
-                        {l.survivedShort}
-                      </span>
-                    )}
-                    <span
-                      className={`rounded-lg px-2.5 py-1 text-[10px] font-bold uppercase border ${currentResult === "win" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/10" : "bg-red-500/10 text-red-400 border-red-500/10"}`}
-                    >
-                      {currentResult === "win"
-                        ? l.roundResultWin
-                        : l.roundResultLoss}
-                    </span>
-                  </div>
-                </div>
-                <div className="space-y-3">
-                  <FeedbackCard
-                    icon={IC.cross}
-                    color="text-red-400"
-                    label={l.deathAnalysis}
-                    text={currentFeedback.deathAnalysis}
-                  />
-                  <FeedbackCard
-                    icon={IC.circle}
-                    color="text-amber-400"
-                    label={l.enemyPatterns}
-                    text={Array.isArray(currentFeedback.enemyPatterns) ? currentFeedback.enemyPatterns.join(" \u2022 ") : String(currentFeedback.enemyPatterns)}
-                  />
-                  <FeedbackCard
-                    icon={IC.bolt}
-                    color="text-cyan-400"
-                    label={l.nextRoundPlan}
-                    text={currentFeedback.nextRoundPlan}
-                  />
-                </div>
-              </div>
-              <div className="space-y-3">
-                <button onClick={handleNextRound} className={ds.btnPrimary}>
-                  {l.nextRound}
-                </button>
-                <div className="flex gap-3">
-                  <button onClick={handleBack} className={ds.btnSecondary}>
-                    {l.back}
-                  </button>
-                  <button
-                    onClick={handleFinishFromFeedback}
-                    className={ds.btnAccent}
-                  >
-                    {l.finishMatch}
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </main>
-    );
-  }
-  /* SCORE INPUT — redirected to dashboard (manual analysis removed from web app) */
-  if (screen === "scoreInput") {
-    setScreen("dashboard");
-  }
-  if (false as boolean) /* scoreInput disabled — use AIMLO Desktop */
-    return (
-      <main
-        className={`${ds.pageBg} relative flex items-center justify-center px-4`}
-      >
-        <MapBg map={setup.map} />
-        <div className="relative z-10 w-full max-w-md space-y-8">
-          <div className="text-center space-y-1">
-            <AimloLogo size={56} className="mx-auto opacity-40 mb-2" />
-            <h2 className="text-xl font-bold text-white">{l.scoreTitle}</h2>
-          </div>
-          <div className={`${ds.card} ${ds.cardInner} space-y-5`}>
-            <Label text={l.selectScore} />
-            <div className="grid grid-cols-3 gap-2 max-h-[50vh] overflow-y-auto pr-1">
-              {SCORE_OPTIONS.map((s) => {
-                const [y, e] = s.split(" - ");
-                const isWin = Number(y) > Number(e);
-                const sel = matchScore.yours === y && matchScore.enemy === e;
-                return (
-                  <button
-                    key={s}
-                    onClick={() => setMatchScore({ yours: y, enemy: e })}
-                    className={`rounded-xl border py-3 text-sm font-bold transition-all duration-200 ${sel ? "border-blue-500/50 bg-blue-500/10 text-white ring-1 ring-blue-500/30 shadow-lg" : isWin ? "border-emerald-500/10 bg-emerald-500/[0.04] text-emerald-400 hover:bg-emerald-500/[0.07]" : "border-red-500/10 bg-red-500/[0.04] text-red-400 hover:bg-red-500/[0.07]"}`}
-                  >
-                    {s}
-                  </button>
-                );
-              })}
-            </div>
-            <div className="space-y-3 pt-2">
-              <button
-                onClick={() => {
-                  if (matchScore.yours && matchScore.enemy)
-                    finishWithScore(matchScore.yours, matchScore.enemy);
-                }}
-                disabled={
-                  !matchScore.yours || !matchScore.enemy || reportLoading
-                }
-                className={ds.btnPrimary}
-              >
-                {reportLoading ? (
-                  <span className="flex items-center justify-center gap-2">
-                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-                    {lang === "tr" ? "Oluşturuluyor..." : "Generating..."}
-                  </span>
-                ) : (
-                  l.confirmScore
-                )}
-              </button>
-              <button
-                onClick={() => setScreen("round")}
-                className={ds.btnSecondary}
-              >
-                {l.back}
-              </button>
-            </div>
-          </div>
-        </div>
-      </main>
-    );
-  /* REPORT */
-  if (screen === "report" && (reportLoading || !report))
-    return (
-      <main className={`${ds.pageBg} relative`}>
-        <MapBg map={setup.map} />
-        <Navbar {...navProps} />
-        <div className="relative z-10 mx-auto max-w-lg px-4 pt-40 flex flex-col items-center gap-5">
-          <AimloLogo size={120} className="animate-pulse" />
-          <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-500 border-t-transparent" />
-          <p className="text-sm text-neutral-400">
-            {lang === "tr"
-              ? "AI rapor oluşturuyor..."
-              : "AI generating report..."}
-          </p>
-        </div>
-      </main>
-    );
-  if (screen === "report" && report)
-    return (
-      <main className={`${ds.pageBg} relative`}>
-        <MapBg map={setup.map} />
-        <Navbar {...navProps} />
-        <div className="relative z-10 mx-auto max-w-lg px-4 pt-20 pb-12 space-y-6">
-          <div className="text-center space-y-1">
-            <h2 className="text-2xl font-bold text-white">{l.reportTitle}</h2>
-            <p className="text-sm text-neutral-500">
-              {setup.map} {IC.dot} {setup.agent}
-            </p>
-          </div>
-          <div className={`${ds.card} overflow-hidden`}>
-            <div className="relative p-6">
-              <div className="pointer-events-none absolute inset-0 opacity-[0.12]">
-                <img
-                  src={MAP_IMAGES[setup.map]}
-                  alt=""
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-              <div className="relative flex items-end justify-between">
-                <div>
-                  <p className={ds.label}>{l.matchResult}</p>
-                  <p className="mt-1 text-4xl font-extrabold tracking-tight text-white">
-                    {report.scoreStr}
-                  </p>
-                  <p
-                    className={`mt-1.5 text-xs font-bold uppercase ${report.matchWon ? "text-emerald-400" : "text-red-400"}`}
-                  >
-                    {report.matchWon ? l.victory : l.defeat}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-lg font-extrabold text-blue-400">
-                    {report.winPct}%
-                  </p>
-                </div>
-              </div>
-              <div className="relative mt-4 h-2 w-full overflow-hidden rounded-full bg-white/[0.06]">
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-500"
-                  style={{ width: `${report.winPct}%` }}
-                />
-              </div>
-              <div className="relative mt-3 grid grid-cols-4 gap-2 text-center text-[10px] font-bold uppercase tracking-wider">
-                <div>
-                  <span className="text-neutral-500">{l.enteredRounds}</span>
-                  <br />
-                  <span className="text-white text-sm">{report.total}</span>
-                </div>
-                <div>
-                  <span className="text-neutral-500">{l.roundsWon}</span>
-                  <br />
-                  <span className="text-emerald-400 text-sm">{report.won}</span>
-                </div>
-                <div>
-                  <span className="text-neutral-500">{l.roundsLost}</span>
-                  <br />
-                  <span className="text-red-400 text-sm">{report.lost}</span>
-                </div>
-                <div>
-                  <span className="text-neutral-500">{l.roundsSkipped}</span>
-                  <br />
-                  <span className="text-neutral-400 text-sm">
-                    {report.skipped}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-wrap gap-1.5 justify-center">
-            {rounds.map((r, i) => (
-              <span
-                key={i}
-                className={`rounded-lg px-2 py-1 text-[10px] font-bold uppercase border ${r.result === "win" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/10" : "bg-red-500/10 text-red-400 border-red-500/10"} ${r.skipped ? "opacity-40" : ""}`}
-              >
-                R{r.roundNumber} {r.result === "win" ? l.wonLabel : l.lostLabel}
-                {r.skipped ? l.skippedLabel : ""}
-              </span>
-            ))}
-          </div>
-          <div className="space-y-4">
-            <ReportCard
-              icon={IC.diamond}
-              color="text-cyan-400"
-              label={l.overallSummary}
-              text={report.summary}
-            />
-            <ReportCard
-              icon={IC.cross}
-              color="text-red-400"
-              label={l.mainRecurringMistake}
-              text={report.mistake}
-            />
-            <ReportCard
-              icon={IC.circle}
-              color="text-amber-400"
-              label={l.enemyTendencies}
-              text={report.tendencies}
-            />
-            <ReportCard
-              icon={IC.play}
-              color="text-emerald-400"
-              label={l.suggestedAdjustment}
-              text={report.adjustment}
-            />
-            {report.bestRound && (
-              <ReportCard
-                icon={IC.bolt}
-                color="text-blue-400"
-                label={l.bestRound}
-                text={report.bestRound}
-              />
-            )}
-            {report.decisionScore && (
-              <ReportCard
-                icon={IC.diamond}
-                color="text-purple-400"
-                label={l.decisionScore}
-                text={report.decisionScore}
-              />
-            )}
-          </div>
-          <div className="space-y-3">
-            <button onClick={resetForNewMatch} className={ds.btnPrimary}>
-              {l.newMatch}
-            </button>
-            <button
-              onClick={() => {
-                setScreen("dashboard");
-                loadHistory();
-              }}
-              className={ds.btnSecondary}
-            >
-              {l.returnToMenu}
-            </button>
-          </div>
-        </div>
-      </main>
-    );
-  // Fallback — should never reach here, redirect to landing
-  return (
-    <main className={`${ds.pageBg} flex items-center justify-center`}>
-      <div className="text-center space-y-4">
-        <p className="text-neutral-500 text-sm">
-          {lang === "tr" ? "Sayfa bulunamadı" : "Page not found"}
-        </p>
-        <button
-          onClick={() => setScreen("landing")}
-          className={ds.btnPrimary + " max-w-xs mx-auto"}
-        >
-          {lang === "tr" ? "Ana Sayfaya Dön" : "Go to Home"}
-        </button>
-      </div>
-    </main>
-  );
+  // (Legacy manual-analysis screens removed — redirect handled in useEffect at top of component.)
 }

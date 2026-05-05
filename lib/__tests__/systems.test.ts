@@ -170,10 +170,18 @@ const emptyInsights = computeMatchInsights([], testSetup);
 assert(emptyInsights.decisionScore >= 1 && emptyInsights.decisionScore <= 10, "Empty insights: valid decision score");
 assert(emptyInsights.bestRound === 1, "Empty insights: bestRound defaults to 1");
 
-// Undefined fields (runtime casting from API)
+// Undefined fields (runtime casting from API). The `as unknown as string` casts
+// here are deliberate — we're testing that the engine survives when API actually
+// sends undefined where the type says string (defensive runtime assertion test).
 const undefinedRounds = [{
-  roundNumber: 1, deathLocation: undefined as any, enemyCount: undefined as any,
-  yourNote: undefined as any, result: "loss" as const, skipped: false, survived: false, feedback: null
+  roundNumber: 1,
+  deathLocation: undefined as unknown as string,
+  enemyCount: undefined as unknown as string,
+  yourNote: undefined as unknown as string,
+  result: "loss" as const,
+  skipped: false,
+  survived: false,
+  feedback: null,
 }];
 try {
   const undefinedPatterns = analyzeRoundPatterns(undefinedRounds, testSetup);

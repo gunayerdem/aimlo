@@ -3,6 +3,7 @@ import { verifyAuthAndRateLimit } from "@/lib/api-auth";
 import { loadKnowledge } from "@/lib/knowledge-loader";
 import { checkOutputQuality } from "@/evals/generic-detector";
 import { buildPolicyBlock } from "@/lib/ai-policy";
+import { sanitizeJsonStrings } from "@/lib/prompt-safety";
 
 /**
  * POST /api/ai/insight
@@ -18,18 +19,25 @@ const AI_TIMEOUT_MS = 20_000;
 const MAX_PAYLOAD_BYTES = 100_000; // 100KB max
 const ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages";
 
-const BASE_SYSTEM_PROMPT = `Sen AIMLO — Radiant seviye Valorant koçusun. VCT analisti gibi düşün, veriye dayalı konuş.
+const BASE_SYSTEM_PROMPT = `Sen AIMLO — Radiant seviye gerçek bir Valorant koçusun. Veriye dayalı, direkt konuş.
+
+DİL — ZORUNLU:
+- Türkçe istek → Türkçe çıktı (sokak Türkçesi, sade dil, "deployment"/"optimal" gibi corp dili YASAK).
+- İngilizce istek → İngilizce çıktı (clear coach English, no Turkish words mixed in, no corporate jargon).
+- AYNI Radiant koç kalitesi her iki dilde — direkt, somut, eylem odaklı.
+- Evrensel oyun terimleri her dilde aynı: peek, trade, retake, lurk, anchor, rotate, default, execute, fake, stack, smoke, flash, util, op, dash, spike, eco.
+- ⚠ ZAMAN-BAĞIMLI TAVSİYE YASAK. Saniye/timer ("16'da", "45s", "30 saniye", "at 16s") KULLANMA. Olay-bazlı konuş ("1 düşman düştü", "Op sesi duyuldu", "spike kuruldu", "after first kill").
 
 ÇIKTI YAPISI:
 1) SORUN — ne oluyor (spesifik pozisyon, round, sayı)
 2) NEDEN — mekanik veya karar hatası
 3) DÜŞMAN — SADECE kanıt varsa (bkz. düşman analizi koşulu)
-4) FIX — somut aksiyon (pozisyon/timing/ability referanslı)
+4) FIX — somut aksiyon (pozisyon, ability, olay tetikleyicisi referanslı; timer YOK)
 
-İYİ OYNAMA: "Devam et" YASAK. Ne çalışıyor + neden + nasıl tekrarlanır.
+İYİ OYNAMA: "Devam et" / "Keep going" YASAK. Ne çalışıyor + neden + nasıl tekrarlanır.
 SIDE SPLIT: Attack/defense fark varsa yorumla.
 
-Türkçe yanıt ver. JSON formatında döndür.
+JSON formatında döndür.
 
 ÇIKTI FORMATI:
 {
@@ -126,8 +134,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Auth + rate limit
-    const auth = await verifyAuthAndRateLimit(request, "feedback");
+    // Auth + rate limit (uses dedicated insight tier — 10/min, 60/day)
+    const auth = await verifyAuthAndRateLimit(request, "insight");
     if (!auth.ok) return auth.response;
 
     // Parse body
@@ -168,28 +176,80 @@ export async function POST(request: NextRequest) {
     const lang = typeof safeContext.lang === "string" ? safeContext.lang : "tr";
     const systemPrompt = buildSystemPrompt(confidenceLevel, knowledgeContext, tone, lang);
 
-    // Call Anthropic with quality gate (single retry if weak)
-    const contextJson = JSON.stringify(safeContext, null, 2);
+    // Call Anthropic with quality gate (single retry if weak).
+    // Recursively sanitize all string values in the context before stringifying
+    // — prevents prompt-injection through nested fields like recentMatches[i].note
+    // or mapStats.<map>.note that the simple field allow-list above doesn't catch.
+    const sanitizedContext = sanitizeJsonStrings(safeContext, { max: 500 });
+    const contextJson = JSON.stringify(sanitizedContext, null, 2);
     const baseUserPrompt = `Aşağıdaki oyuncu verisini analiz et ve coaching insight üret:\n\n${contextJson}`;
     const agentCtx = typeof safeContext.mostPlayedAgent === "string" ? safeContext.mostPlayedAgent as string : undefined;
 
-    const callAI = async (userPrompt: string): Promise<unknown | null> => {
+    /**
+     * Discriminated result so the caller can distinguish:
+     *  - { ok: true, value }       → real model output
+     *  - { ok: false, kind: "rate" }    → upstream 429 (surface to client)
+     *  - { ok: false, kind: "5xx" }     → upstream 5xx (single retry attempted internally)
+     *  - { ok: false, kind: "shape" }   → output didn't parse / wrong shape
+     *  - { ok: false, kind: "timeout" } → AbortController fired
+     */
+    type AICallResult =
+      | { ok: true; value: unknown }
+      | { ok: false; kind: "rate" | "5xx" | "shape" | "timeout" | "network"; httpStatus?: number };
+
+    const callAI = async (userPrompt: string, attempt = 1): Promise<AICallResult> => {
       const ctrl = new AbortController();
       const tid = setTimeout(() => ctrl.abort(), AI_TIMEOUT_MS);
-      const res = await fetch(ANTHROPIC_API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "x-api-key": apiKey, "anthropic-version": "2023-06-01" },
-        body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: 1500, system: systemPrompt, messages: [{ role: "user", content: userPrompt }] }),
-        signal: ctrl.signal,
-      });
-      if (!res.ok) { clearTimeout(tid); return null; }
-      const d = await res.json(); clearTimeout(tid);
-      const t: string = d?.content?.[0]?.text || "";
-      try { return JSON.parse(t); } catch {
-        const m = t.match(/\{[\s\S]*\}/);
-        if (m) try { return JSON.parse(m[0]); } catch { /* */ }
+      try {
+        const res = await fetch(ANTHROPIC_API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key": apiKey,
+            "anthropic-version": "2023-06-01",
+            "anthropic-beta": "extended-cache-ttl-2025-04-11",
+          },
+          body: JSON.stringify({
+            model: "claude-haiku-4-5-20251001",
+            max_tokens: 1500,
+            // 1h cache for system prompt (KB + policy block) — these are
+            // identical for any user with same rank/agent/lang/tone, so the
+            // cache amortizes well across many concurrent users.
+            system: [{ type: "text", text: systemPrompt, cache_control: { type: "ephemeral", ttl: "1h" } }],
+            messages: [{ role: "user", content: userPrompt }],
+          }),
+          signal: ctrl.signal,
+        });
+        if (!res.ok) {
+          // Upstream rate-limit: surface to client.
+          if (res.status === 429) return { ok: false, kind: "rate", httpStatus: 429 };
+          // Upstream 5xx: try ONE retry with jittered backoff (200-700ms).
+          if (res.status >= 500 && res.status < 600 && attempt === 1) {
+            await new Promise(r => setTimeout(r, 200 + Math.random() * 500));
+            return callAI(userPrompt, 2);
+          }
+          return { ok: false, kind: "5xx", httpStatus: res.status };
+        }
+        const d = await res.json();
+        // Token-usage observability.
+        const usage = d?.usage as { input_tokens?: number; output_tokens?: number; cache_creation_input_tokens?: number; cache_read_input_tokens?: number } | undefined;
+        if (usage) {
+          console.log(`[Aimlo AI tokens] insight in=${usage.input_tokens ?? 0} out=${usage.output_tokens ?? 0} cache_create=${usage.cache_creation_input_tokens ?? 0} cache_read=${usage.cache_read_input_tokens ?? 0}`);
+        }
+        const t: string = d?.content?.[0]?.text || "";
+        try { return { ok: true, value: JSON.parse(t) }; } catch {
+          const m = t.match(/\{[\s\S]*\}/);
+          if (m) {
+            try { return { ok: true, value: JSON.parse(m[0]) }; } catch { /* fall through */ }
+          }
+        }
+        return { ok: false, kind: "shape" };
+      } catch (e) {
+        if (e instanceof DOMException && e.name === "AbortError") return { ok: false, kind: "timeout" };
+        return { ok: false, kind: "network" };
+      } finally {
+        clearTimeout(tid);
       }
-      return null;
     };
 
     const scoreOutput = (obj: unknown): number => {
@@ -203,24 +263,46 @@ export async function POST(request: NextRequest) {
     };
 
     // First attempt
-    let output = await callAI(baseUserPrompt);
-    if (!output || !isValidInsightShape(output)) {
-      console.error("[Aimlo AI] Insight: invalid response");
-      return NextResponse.json({ error: "AI analysis failed" }, { status: 502 });
+    const first = await callAI(baseUserPrompt);
+    if (!first.ok) {
+      // Surface upstream errors with proper status — overlay can decide retry policy.
+      const status = first.kind === "rate" ? 429
+        : first.kind === "timeout" ? 504
+        : first.kind === "5xx" ? 502
+        : first.kind === "network" ? 502
+        : 502;
+      const msg = first.kind === "rate" ? "Upstream rate limit"
+        : first.kind === "timeout" ? "AI analysis timed out"
+        : first.kind === "5xx" ? `AI upstream error (${first.httpStatus})`
+        : first.kind === "network" ? "AI network error"
+        : "AI returned malformed output";
+      console.error(`[Aimlo AI] Insight failed: ${first.kind}${first.httpStatus ? ` (HTTP ${first.httpStatus})` : ""}`);
+      return NextResponse.json(
+        { error: `ai_${first.kind}`, message: msg },
+        {
+          status,
+          headers: first.kind === "rate" ? { "Retry-After": "60" } : {},
+        },
+      );
+    }
+    if (!isValidInsightShape(first.value)) {
+      console.error("[Aimlo AI] Insight: shape invalid");
+      return NextResponse.json({ error: "ai_shape", message: "Model output missing required fields" }, { status: 502 });
     }
 
+    let output = first.value;
     const score1 = scoreOutput(output);
     console.log(`[Aimlo AI] Insight quality: ${score1}/100`);
 
-    // Quality gate: retry once if below threshold
+    // Quality gate: retry once if below threshold (best-effort, non-fatal).
     if (score1 < 70) {
       const regenPrompt = baseUserPrompt + "\n\n--- QUALITY ENFORCEMENT ---\nPrevious output was too generic. You MUST:\n- Include specific position names (A Short, B Main, etc.)\n- Reference round numbers or percentages\n- Model enemy behavior explicitly\n- Give a clear actionable fix\nDo NOT return vague coaching.";
 
       const retry = await callAI(regenPrompt);
-      if (retry && isValidInsightShape(retry)) {
-        const score2 = scoreOutput(retry);
+      if (retry.ok && isValidInsightShape(retry.value)) {
+        const score2 = scoreOutput(retry.value);
         console.log(`[Aimlo AI] Insight regen quality: ${score2}/100 (was ${score1})`);
-        if (score2 > score1) { output = retry; }
+        if (score2 > score1) { output = retry.value; }
       }
     }
 

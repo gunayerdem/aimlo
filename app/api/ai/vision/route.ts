@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { verifyAuthAndRateLimit } from "@/lib/api-auth";
 import { realityCheck } from "@/lib/reality-checker";
 import { loadVisionKnowledge } from "@/lib/knowledge-loader";
+import { sanitizePromptInput } from "@/lib/prompt-safety";
 
 /**
  * POST /api/ai/vision
@@ -22,7 +23,15 @@ const AI_TIMEOUT_MS = 60_000; // Sonnet 4.6 + vision + KB prompt — 60s covers 
 const MAX_PAYLOAD_BYTES = 5_000_000; // 5MB max (base64 images are large)
 const ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages";
 
-const SYSTEM_PROMPT = `Sen AIMLO'sun: Valorant'ta Diamond+ seviyede oynayan, brutal-honest, Türkçe konuşan bir koçsun. Görevin oyuncuya GERÇEK pattern-aware feedback vermek — generic "iyi nişan al" laflarını YASAKLIYORUM.
+const SYSTEM_PROMPT = `Sen AIMLO'sun: Radiant seviye gerçek bir Valorant koçusun. Görevin oyuncuya GERÇEK pattern-aware feedback vermek — generic "iyi nişan al" / "aim well" laflarını YASAKLIYORUM.
+
+═══════════════════════════════════════════════
+DİL — ZORUNLU
+═══════════════════════════════════════════════
+- Kullanıcı dili Türkçe ise → çıktı Türkçe (sokak Türkçesi, herkesin anlayacağı sade dil).
+- Kullanıcı dili İngilizce ise → çıktı İngilizce (clear coach English, no jargon dump).
+- Hangi dilde yazıyorsan, AYNI Radiant koç kalitesi: direkt, somut, eylem-odaklı.
+- DİLLERİ KARIŞTIRMA. Türkçe çıktıda "deployment", "optimal" gibi corp dili YASAK; İngilizce çıktıda Türkçe kelime karıştırma. Sadece evrensel oyun terimleri tüm dillerde aynı kalır (peek, trade, retake, lurk, anchor, rotate, default, execute, fake, stack, smoke, flash, util, op, dash, spike, eco).
 
 ═══════════════════════════════════════════════
 VERİ HİYERARŞİSİ (DİKKATLE OKU)
@@ -37,14 +46,15 @@ OCR/CLIENT verisi PIXEL TRUTH'tur. Screenshot'tan çıkardığın herhangi bir g
 KURALLAR (HEPSİ ZORUNLU — HER KURAL BİR RED BAYRAĞI)
 ═══════════════════════════════════════════════
 1. OCR death context'i varsa ASLA yok sayma. killerInfo varsa AI response'unda killer agent ismi geçmeli. deathLocation varsa callout geçmeli.
-2. GENERİK TAVSİYE YASAK. Şu cümleleri YAZAMAZSIN: "iyi nişan al", "aim'ini geliştir", "pozisyonunu kontrol et", "daha dikkatli ol", "konsantre ol", "soğukkanlı ol", "sabırlı ol", "dikkat et". Her cümle SPESİFİK olmak zorunda — callout, ajan ismi, silah, timing ve/veya utility içermeli.
+2. GENERİK TAVSİYE YASAK. Şu cümleleri YAZAMAZSIN: "iyi nişan al", "aim'ini geliştir", "pozisyonunu kontrol et", "daha dikkatli ol", "konsantre ol", "soğukkanlı ol", "sabırlı ol", "dikkat et". Her cümle SPESİFİK olmak zorunda — callout, ajan ismi, silah ve/veya utility içermeli.
 3. patternContext varsa ONA referans ver. "2 round üst üste cypher seni B short'tan operator'la aldı — bu sefer flash atmadan girme" gibi. Pattern yoksa generic feedback verme, bu round'a odaklan.
-4. enemyComp'u kullan. Cypher varsa trip/cam/cage'ini düşün. Killjoy varsa lockdown timing'i. Jett varsa dash timing'i. Chamber varsa Headhunter angle'ları.
+4. enemyComp'u kullan. Cypher varsa trip/cam/cage'ini düşün. Killjoy varsa lockdown'ı. Jett varsa dash okuması. Chamber varsa Headhunter açıları.
 5. Map-spesifik callout kullan. Ascent'te "B Short, Market Window, Mid Courtyard, Heaven, Hell". Bind'da "Hookah, U Hall, Showers, Baths, Lamps". Yanlış map callout = sıfır güven.
-6. Sayı kullan. "30 saniye sonra push" değil "timer 16'da mid fake, 11'de B execute" gibi spesifik.
-7. Türkçe. Kısa. Direkt. Brutal. Antrenör tonu — empati yok. "sen" hitabı.
-8. Gelen field boşsa/0/false ise o konudan BAHSETME. Uydurma yasak.
-9. Her rank'a aynı derinlikte coaching ver — seviyeni düşürme.
+6. ⚠ ZAMAN-BAĞIMLI TAVSİYE YASAK. "Timer 16'da", "45s'de", "30 saniye sonra" gibi saniye/timer referansı KULLANMA. Oyuncu saate bakmıyor — durumu okur. Yerine OLAY-BAZLI konuş: "1 düşman düştü", "Op sesi duyuldu", "spike kuruldu", "düşman B'den rotate ettiyse", "takımın 2 kişisi A'ya yaklaştı", "ekonomi düşükse".
+7. ⚠ BASİT TÜRKÇE. Karışık dil yasak — "deployment", "protocol", "optimal" gibi corp/İngilizce yığını kullanma. Oyun terimleri (peek, trade, retake, lurk, anchor, rotate, default, execute, fake, stack, smoke, flash, util, op, dash) tutarlı kullan ama cümle Türkçe akıcı olsun. Sokak dili Türkçe, gerçek koç gibi.
+8. Türkçe. Kısa. Direkt. Brutal. Gerçek koç tonu — empati yok ama insanca. "sen" hitabı.
+9. Gelen field boşsa/0/false ise o konudan BAHSETME. Uydurma yasak.
+10. Her rank'a aynı derinlikte coaching ver — seviyeni düşürme. Iron oyuncusuna da Radiant'a da somut konuş, sade dil.
 
 ═══════════════════════════════════════════════
 ANALİZ ÖNCELİK SIRASI
@@ -73,7 +83,7 @@ coachInsight KURALI (her zaman doldur)
 ═══════════════════════════════════════════════
 coachInsight DESKTOP OVERLAY'İNDE ZORUNLU FIELD — boş dönmemeli:
 - patternContext VARSA: multi-round brutal insight yaz (örn: "3 round üst üste B'de cypher operator. B'yi aç ya da A'ya yığ — cypher rotate edemiyor").
-- patternContext YOKSA: bu round'un key takeaway'ini yaz (örn: "Full HP ile B main'de open angle. Sonraki round cover arkasında hold yap, info topla." veya "45s'de solo peek = trade edilemez. Takımınla yığ, execute zamanı bekle.").
+- patternContext YOKSA: bu round'un key takeaway'ini yaz (örn: "Full HP ile B main'de open angle. Sonraki round cover arkasında hold yap, info topla." veya "Takım yanında yokken solo peek attın — trade edilemez. Önce takımı topla, sonra giriş.").
 - Kural: coachInsight HER ZAMAN en az 1 cümle — yani asla "" boş dönme, pattern yoksa round-level micro-lesson yaz.
 
 ═══════════════════════════════════════════════
@@ -88,8 +98,8 @@ SADECE bu 4 user-facing field'ı yaz. Başka field EKLEME — desktop killerInfo
     "<bu round'da gözlenmiş düşman pattern veya setup'ı>",
     "<bu composition'a karşı en etkili utility/timing>"
   ],
-  "nextRoundSuggestion": "<sıradaki round için TEK net plan: hangi site, hangi timing (timer bazlı), hangi util, hangi rotation. Spesifik callout ve saniye içermeli.>",
-  "coachInsight": "<ZORUNLU, asla boş bırakma. patternContext varsa: multi-round brutal insight. Örn: '3 round üst üste B site'ta cypher operator. B'yi aç ya da A default'a geç — cypher rotate edemiyor.' patternContext YOKSA: bu round'un spesifik micro-lesson'u. Örn: 'Full HP'yle B Main'de swing yaptın — cover arkasından info topla, 45s'den önce solo peek yok.'>"
+  "nextRoundSuggestion": "<sıradaki round için TEK net plan: hangi site, hangi setup, hangi util, hangi rotation. Spesifik callout + ajan + olay tetikleyicisi (örn 'düşman A'dan rotate ettiyse', '1 düşman düşünce') içermeli. ASLA saniye/timer kullanma.>",
+  "coachInsight": "<ZORUNLU, asla boş bırakma. patternContext varsa: multi-round brutal insight. Örn: '3 round üst üste B site'ta cypher operator. B'yi aç ya da A default'a geç — cypher rotate edemiyor.' patternContext YOKSA: bu round'un spesifik micro-lesson'u. Örn: 'Full HP'yle B Main'de swing yaptın — cover arkasından info topla, takım yanında yokken solo peek yok.'>"
 }
 
 KRİTİK: coachInsight field'ı desktop overlay'inde mor "KOÇ İÇGÖRÜSÜ" bloğunda gösteriliyor. patternContext varsa BU FIELD DOLU OLMAK ZORUNDA — pattern'e spesifik referans + brutal fix öner.`;
@@ -245,18 +255,33 @@ function isValidVisionRequest(obj: unknown): obj is VisionRequest {
   const img = o.image as string;
   // Minimum length for a real image
   if (img.length < 1000) return false;
-  // Max size check (base64 is ~33% larger than decoded)
+  // Max base64 length (decoded ≈ length × 0.75)
   if (img.length > MAX_IMAGE_BYTES * 1.4) return false;
-  // Validate base64 character set (check first 1000 chars for performance)
-  if (!BASE64_REGEX.test(img.slice(0, 1000))) return false;
-  // Check PNG header in decoded bytes (first 4 bytes: 0x89 0x50 0x4E 0x47)
+  // FULL base64 character-set validation (not just first 1000 chars — that
+  // allowed a polyglot/garbage payload past the cheap prefix check).
+  if (!BASE64_REGEX.test(img)) return false;
+  // Decode the full image and verify magic bytes match the declared format.
+  // atob() throws on invalid base64, catch and reject.
+  let bin: string;
   try {
-    const header = atob(img.slice(0, 12));
-    const isPng = header.charCodeAt(0) === 0x89 && header.charCodeAt(1) === 0x50;
-    const isJpeg = header.charCodeAt(0) === 0xFF && header.charCodeAt(1) === 0xD8;
-    if (!isPng && !isJpeg) return false;
+    bin = atob(img);
   } catch {
-    return false; // Invalid base64
+    return false;
+  }
+  if (bin.length > MAX_IMAGE_BYTES) return false;
+  if (bin.length < 100) return false;
+  // Magic bytes
+  const b0 = bin.charCodeAt(0), b1 = bin.charCodeAt(1), b2 = bin.charCodeAt(2), b3 = bin.charCodeAt(3);
+  const isPng = b0 === 0x89 && b1 === 0x50 && b2 === 0x4E && b3 === 0x47;
+  const isJpeg = b0 === 0xFF && b1 === 0xD8 && b2 === 0xFF;
+  const isWebp = bin.length >= 12 && bin.slice(0, 4) === "RIFF" && bin.slice(8, 12) === "WEBP";
+  if (!isPng && !isJpeg && !isWebp) return false;
+  // If client supplied an imageFormat, ensure it matches the actual bytes.
+  if (typeof o.imageFormat === "string") {
+    const fmt = (o.imageFormat as string).toLowerCase();
+    if (isPng && !fmt.includes("png")) return false;
+    if (isJpeg && !fmt.includes("jpeg") && !fmt.includes("jpg")) return false;
+    if (isWebp && !fmt.includes("webp")) return false;
   }
   return true;
 }
@@ -305,8 +330,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Auth + rate limit (uses "feedback" tier — 15/min)
-    const auth = await verifyAuthAndRateLimit(request, "feedback");
+    // Auth + rate limit (uses dedicated "vision" tier — 4/min, 30/day —
+    // vision is $0.015+/call so kept tighter than feedback)
+    const auth = await verifyAuthAndRateLimit(request, "vision");
     if (!auth.ok) return auth.response;
 
     // Parse body
@@ -390,11 +416,16 @@ export async function POST(request: NextRequest) {
     }
 
     if (reqPatternContext) {
-      // patternContext changes every round — DO NOT cache (cache write overhead > benefit)
-      systemBlocks.push({
-        type: "text",
-        text: `[PATTERN CONTEXT — Rust Client]\n${reqPatternContext.slice(0, 2000)}`,
-      });
+      // patternContext changes every round — DO NOT cache (cache write overhead > benefit).
+      // Sanitize before injecting: this is user-influenced data (Rust client's pattern
+      // string can be tampered with by a malicious local proxy, so treat as untrusted).
+      const cleanPattern = sanitizePromptInput(reqPatternContext, { max: 2000 });
+      if (cleanPattern) {
+        systemBlocks.push({
+          type: "text",
+          text: `[PATTERN CONTEXT — Rust Client]\n${cleanPattern}`,
+        });
+      }
     }
 
     // Build round context from client-provided data — structured OCR/pixel-truth blocks.
@@ -420,13 +451,16 @@ export async function POST(request: NextRequest) {
     if (reqBody.died === true) {
       deathBlockLines.push(`- Öldürüldün: EVET${typeof reqBody.deathTiming === "string" ? ` (${reqBody.deathTiming} round)` : ""}`);
       if (typeof reqBody.killerInfo === "string" && reqBody.killerInfo.length > 0) {
-        deathBlockLines.push(`- ${reqBody.killerInfo.slice(0, 120)}`);
+        const safe = sanitizePromptInput(reqBody.killerInfo, { max: 120, collapseWhitespace: true });
+        if (safe) deathBlockLines.push(`- ${safe}`);
       }
       if (typeof reqBody.deathLocation === "string" && reqBody.deathLocation.length > 0) {
-        deathBlockLines.push(`- Ölüm konumu (OCR): ${reqBody.deathLocation.slice(0, 50)}`);
+        const safe = sanitizePromptInput(reqBody.deathLocation, { max: 50, collapseWhitespace: true });
+        if (safe) deathBlockLines.push(`- Ölüm konumu (OCR): ${safe}`);
       }
       if (typeof reqBody.deathAngle === "string" && reqBody.deathAngle.length > 0) {
-        deathBlockLines.push(`- Hasar yönü: ${reqBody.deathAngle.slice(0, 30)} (düşman bu açıdan geldi)`);
+        const safe = sanitizePromptInput(reqBody.deathAngle, { max: 30, collapseWhitespace: true });
+        if (safe) deathBlockLines.push(`- Hasar yönü: ${safe} (düşman bu açıdan geldi)`);
       }
       if (typeof reqBody.healthAtDeath === "number" && reqBody.healthAtDeath > 0) {
         deathBlockLines.push(`- Ölürken HP: ${Math.min(Math.max(reqBody.healthAtDeath, 0), 150)}`);
@@ -458,7 +492,8 @@ export async function POST(request: NextRequest) {
       econBlockLines.push(`- Krediler: ${reqBody.credits}`);
     }
     if (typeof reqBody.loadout === "string" && reqBody.loadout.length > 0) {
-      econBlockLines.push(`- Silah: ${reqBody.loadout.slice(0, 30)}`);
+      const safe = sanitizePromptInput(reqBody.loadout, { max: 30, collapseWhitespace: true });
+      if (safe) econBlockLines.push(`- Silah: ${safe}`);
     }
 
     // Block 4: Pattern context (multi-round history)
@@ -576,7 +611,8 @@ export async function POST(request: NextRequest) {
         "anthropic-beta": "extended-cache-ttl-2025-04-11",
       },
       body: JSON.stringify({
-        model: "claude-sonnet-4-6",
+        // Pinned to dated alias to prevent silent model drift (matches haiku route style).
+        model: "claude-sonnet-4-6-20251015",
         max_tokens: resolvedMaxTokens,
         system: systemBlocks,
         messages: [
@@ -675,7 +711,7 @@ export async function POST(request: NextRequest) {
       console.error(`[Aimlo AI] JSON parse failed (${parseResult.reason}). Raw text:`, text.slice(0, 500));
       return errorResponse("ai_invalid_json", `Model output was not valid JSON: ${parseResult.reason}`, 502, { rawPreview: text.slice(0, 300), stopReason });
     }
-    let parsed: unknown = parseResult.obj;
+    const parsed: unknown = parseResult.obj;
 
     // ── Coerce shape: enemyAnalysis can come as string, normalize to array ──
     if (parsed && typeof parsed === "object") {

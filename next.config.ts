@@ -11,10 +11,35 @@ const nextConfig: NextConfig = {
     "/api/ai/insight": ["./knowledge/**/*.md"],
   },
   async headers() {
+    // Content Security Policy — restricts where scripts/styles/fonts/images
+    // can load from, which neutralises most XSS impact even if a content-injection
+    // vector slips through. Allowlist below covers what AIMLO actually uses:
+    //   - 'self'                      → first-party assets
+    //   - https://media.valorant-api.com → agent + map splash images
+    //   - https://*.supabase.co       → realtime auth/db requests
+    //   - https://api.anthropic.com   → AI proxy (never called from browser, but allowed for safety)
+    //   - 'unsafe-inline' for styles  → Tailwind + style props (cannot avoid in Next 16 today)
+    // Note: 'unsafe-eval' / 'unsafe-inline' for script-src is intentionally NOT included.
+    // If Next.js needs nonce-based inline scripts, swap 'self' for 'self' 'nonce-...'.
+    const csp = [
+      "default-src 'self'",
+      "script-src 'self'",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: blob: https://media.valorant-api.com https://*.supabase.co",
+      "font-src 'self' data:",
+      "connect-src 'self' https://*.supabase.co https://api.anthropic.com",
+      "frame-ancestors 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "object-src 'none'",
+      "upgrade-insecure-requests",
+    ].join("; ");
+
     return [
       {
         source: "/(.*)",
         headers: [
+          { key: "Content-Security-Policy", value: csp },
           { key: "X-Frame-Options", value: "DENY" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           {
@@ -23,10 +48,12 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=()",
+            value: "camera=(), microphone=(), geolocation=(), payment=()",
           },
           { key: "X-DNS-Prefetch-Control", value: "on" },
-          { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains" },
+          { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+          { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+          { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
         ],
       },
     ];

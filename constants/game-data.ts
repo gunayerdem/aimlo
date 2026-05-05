@@ -4,11 +4,12 @@
 import type { Lang } from "@/types";
 
 // ── Agent Groups ──
+// NOTE: Veto = sentinel, Miks = controller (authoritative — matches lib/ai-knowledge.ts and KB layout).
 export const AGENT_GROUPS: Record<string, string[]> = {
-  Controllers: ["Brimstone", "Viper", "Omen", "Astra", "Harbor", "Clove"],
-  Duelists: ["Jett", "Raze", "Reyna", "Phoenix", "Yoru", "Neon", "Iso", "Waylay", "Veto"],
-  Initiators: ["Sova", "Breach", "Skye", "KAY/O", "Fade", "Gekko", "Tejo", "Miks"],
-  Sentinels: ["Sage", "Cypher", "Killjoy", "Chamber", "Deadlock", "Vyse"],
+  Controllers: ["Brimstone", "Viper", "Omen", "Astra", "Harbor", "Clove", "Miks"],
+  Duelists: ["Jett", "Raze", "Reyna", "Phoenix", "Yoru", "Neon", "Iso", "Waylay"],
+  Initiators: ["Sova", "Breach", "Skye", "KAY/O", "Fade", "Gekko", "Tejo"],
+  Sentinels: ["Sage", "Cypher", "Killjoy", "Chamber", "Deadlock", "Vyse", "Veto"],
 };
 
 export const AGENT_GROUP_LABELS: Record<string, Record<Lang, string>> = {
@@ -103,11 +104,13 @@ export const MAP_LOCATIONS: Record<string, string[]> = {
   Split: ["A Main", "A Ramp", "A Rafters", "A Site", "A Heaven", "B Main", "B Heaven", "B Site", "B Back", "Mid Vent", "Mid Mail", "Mid Top", "CT Spawn"],
   Lotus: ["A Main", "A Root", "A Site", "A Rubble", "A Tree", "B Main", "B Upper", "B Site", "B Pillar", "C Main", "C Mound", "C Site", "C Hall", "CT Spawn"],
   Sunset: ["A Main", "A Elbow", "A Site", "A Alley", "B Main", "B Market", "B Site", "B Boba", "Mid Top", "Mid Bottom", "Mid Courtyard", "CT Spawn"],
+  Corrode: ["A Main", "A Site", "A Heaven", "A Hall", "B Main", "B Site", "B Yard", "B Stairs", "Mid Top", "Mid Bottom", "Mid Pit", "CT Spawn"],
+  Pearl: ["A Main", "A Art", "A Site", "A Dugout", "B Main", "B Long", "B Site", "B Hall", "B Link", "Mid Plaza", "Mid Top", "CT Spawn"],
+  Abyss: ["A Main", "A Short", "A Site", "A Ramp", "B Main", "B Site", "B Tower", "B Ramp", "Mid Link", "Mid Bridge", "CT Spawn"],
+  // Out-of-rotation (kept for archival match references; not in active map pool):
   Icebox: ["A Main", "A Belt", "A Site", "A Nest", "A Pipes", "B Main", "B Orange", "B Site", "B Green", "B Yellow", "Mid Boiler", "Mid Blue", "CT Spawn"],
   Breeze: ["A Main", "A Hall", "A Site", "A Cave", "A Bridge", "B Main", "B Elbow", "B Site", "B Back", "Mid Pillar", "Mid Nest", "CT Spawn"],
   Fracture: ["A Main", "A Dish", "A Site", "A Drop", "A Rope", "B Main", "B Arcade", "B Site", "B Tree", "B Tower", "Mid Hall", "CT Spawn"],
-  Pearl: ["A Main", "A Art", "A Site", "A Dugout", "B Main", "B Long", "B Site", "B Hall", "B Link", "Mid Plaza", "Mid Top", "CT Spawn"],
-  Abyss: ["A Main", "A Short", "A Site", "A Ramp", "B Main", "B Site", "B Tower", "B Ramp", "Mid Link", "Mid Bridge", "CT Spawn"],
 };
 
 export const MAPS = Object.keys(MAP_LOCATIONS);
@@ -119,12 +122,17 @@ export const MAP_IMAGES: Record<string, string> = {
   Split: "https://media.valorant-api.com/maps/d960549e-485c-e861-8d71-aa9d1aed12a2/splash.png",
   Lotus: "https://media.valorant-api.com/maps/2fe4ed3a-450a-948b-6d6b-e89a78e680a9/splash.png",
   Sunset: "https://media.valorant-api.com/maps/92584fbe-486a-b1b2-9faa-39b0f486b498/splash.png",
+  // TODO: replace with real Corrode UUID once available; using Split splash as placeholder.
+  Corrode: "https://media.valorant-api.com/maps/d960549e-485c-e861-8d71-aa9d1aed12a2/splash.png",
+  Pearl: "https://media.valorant-api.com/maps/fd267378-4d1d-484f-ff52-77821ed10dc2/splash.png",
+  Abyss: "https://media.valorant-api.com/maps/224b0a95-48b9-f703-1bd8-67aca101a61f/splash.png",
   Icebox: "https://media.valorant-api.com/maps/e2ad5c54-4114-a870-9641-8ea21279579a/splash.png",
   Breeze: "https://media.valorant-api.com/maps/2fb9a4fd-47b8-4e7d-a969-74b4046ebd53/splash.png",
   Fracture: "https://media.valorant-api.com/maps/b529448b-4d60-346e-e89e-00a4c527a405/splash.png",
-  Pearl: "https://media.valorant-api.com/maps/fd267378-4d1d-484f-ff52-77821ed10dc2/splash.png",
-  Abyss: "https://media.valorant-api.com/maps/224b0a95-48b9-f703-1bd8-67aca101a61f/splash.png",
 };
+
+// Active competitive rotation (current season). Used to filter UI map picker / archive matchups.
+export const ACTIVE_MAPS = ["Ascent", "Bind", "Haven", "Split", "Lotus", "Sunset", "Corrode", "Pearl", "Abyss"];
 
 // ── Score Options ──
 export const SCORE_OPTIONS = [
