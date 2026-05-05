@@ -11,10 +11,10 @@
 
 ## 2. Ölüm Bölgeleri
 - **A Dish Girişi**: A Rope'u temizlemeden Dish'ten site'a adım atıyorsun — Rope'taki savunucu seni kafanda bekliyor. Flash veya smoke yoksa girme.
-- **A Hall Drop**: Drop sesi pozisyonunu ele veriyor. Savunucu o sesi duyar, pre-aim kurar. Atlamadan önce util at.
+- **A Hall Drop**: Drop sesi pozisyonunu ele veriyor. Savunucu o sesi duyar, açı tutar. Atlamadan önce util at.
 - **B Tower Açılması**: Tower'dan girerken B Tree'yi kontrol etmezsen crossfire'a yatıyorsun. Önce Tree'yi temizle, sonra gir.
 - **B Arcade Geçişi**: Arcade'i tek başına push etme. Canteen tarafından destek yoksa commit etme — dar geçiş seni çuvala sokar.
-- **Zip Line Çıkışları**: Zip line sesi düşmana bilgi veriyor. Çıkış noktasında pre-aim seni bekliyor. Çıkmadan önce çıkış açısını util'le kapat.
+- **Zip Line Çıkışları**: Zip line sesi düşmana bilgi veriyor. Çıkış noktasında açı tutma seni bekliyor. Çıkmadan önce çıkış açısını util'le kapat.
 
 ## 3. Pattern -> Meaning Eşleşmesi
 
@@ -26,7 +26,7 @@ WHY: Fracture'in saldırı gücü tamamen çifte girişten geliyor. Bunu kullanm
 
 **Pattern 2: Zip Line Kullanım Hatası**
 IF: Zip line ile rotate ederken karşıdan vurularak ölüyorsun — aynı ölüm tekrar tekrar geliyor
-MEANING: Zip line sesi tüm haritaya yayılır, çıkış noktası tahmin edilebilir. Zip line'ı güvenli ulaşım gibi kullanıyorsun ama aslında bu bir bilgi sinyali. Karşı taraf sesi duyar, çıkışı pre-aim yapar.
+MEANING: Zip line sesi tüm haritaya yayılır, çıkış noktası tahmin edilebilir. Zip line'ı güvenli ulaşım gibi kullanıyorsun ama aslında bu bir bilgi sinyali. Karşı taraf sesi duyar, çıkışı açı tutar.
 COUNTER: Zip'e binmeden önce çıkış noktasını smoke veya flash ile kapat. Ya da zip'i fake için kullan — sesi çıkar ama binme, rakibin rotasyonunu tetikle. Takım arkadaşın zip kullanacaksa sen çıkışı izleyerek cover ver.
 WHY: Zip line Fracture'in en güçlü rotasyon aracı ama ses yüzünden risk taşıyor. Util desteği olmadan tek başına kullanmak rakibe bedava kill vermek. Util ile kullanırsan haritanın iki yarısını birleştiren bir silaha dönüşüyor.
 
@@ -75,7 +75,7 @@ WHY: Fracture'in ortası savunmanın omurgası. Omurga kırılırsa iki site'i b
 - Utility'ni raundun başında harcama — saldırganlar timing değiştirir, util'ini gerektiği anda kullan
 - CT Spawn ve mid kontrolunu kaybedersen iki site birbirinden kopuk kalır, rotasyon yapamaz hale gelirsin
 - Retake'te dar geçitten tek tek girme — crossfire'a tek tek yem olursun, birlikte gir
-- Aynı pozisyonda defalarca durma — saldırganlar pre-aim açar, pozisyonunu değiştir
+- Aynı pozisyonda defalarca durma — saldırganlar açı tutma açar, pozisyonunu değiştir
 
 ## 5. Kompozisyon / Harita Etkileşim Notları
 - **Breach**: Fracture'de en iyi initiator bu. Fault Line duvarların arkasından geçer — dar geçişlerde savunucuyu pozisyondan söküp atar. Aftershock ile site içindeki köşeleri temizlersin. A Hall'dan fault line + flash koy, giriş garantilenir.
@@ -114,8 +114,8 @@ WHY: Fracture'in ortası savunmanın omurgası. Omurga kırılırsa iki site'i b
 - Spike plant: A Default (site ortası) en güvenli seçenek. Plant sonrası Dish ve Hall'dan crossfire kur.
 
 ### A Site Savunma
-- A Rope en güçlü pozisyon — yükseklik ve geniş açı var. Ama her raund burada durma, 2-3 raund sonra pre-aim yersen seni okurlar; site seviyesine in.
-- A Drop'tan gelen saldırgan drop sesiyle kendini ele verir — o sesi duyar duymaz pre-aim yap. Ama drop'a molly veya smoke atmak daha sağlam, girişi yavaşlatır.
+- A Rope en güçlü pozisyon — yükseklik ve geniş açı var. Ama her raund burada durma, 2-3 raund sonra açı tutma yersen seni okurlar; site seviyesine in.
+- A Drop'tan gelen saldırgan drop sesiyle kendini ele verir — o sesi duyar duymaz açı tut. Ama drop'a molly veya smoke atmak daha sağlam, girişi yavaşlatır.
 - A Sandy off-angle saldırganın aklında yoktur. İlk raund burada oyna, kill al, pozisyonu değiştir.
 - İki yönden aynı anda geliyorlarsa: Tripwire veya alarm util'ini Dish ya da Hall'dan birine koy, sen diğerini izle. Util tetiklenince reaksiyon zamanın olur.
 
@@ -142,7 +142,7 @@ WHY: Fracture'in ortası savunmanın omurgası. Omurga kırılırsa iki site'i b
 
 ## 10. Anti-Strat Rehberi
 - Rakip her raunt A split yapıyorsa: A'ya 3 kişi koy, B'den 1 kişiyi rotasyona hazır beklet. 3 kişi her iki kolu da karşılar.
-- Rakip zip line'ı çok kullanıyorsa: Zip çıkışını pre-aim et. Zip'ten çıkan adam hareketsiz hedef — çıkışa molly ya da tuzak bırak.
+- Rakip zip line'ı çok kullanıyorsa: Zip çıkışını açıyı tut. Zip'ten çıkan adam hareketsiz hedef — çıkışa molly ya da tuzak bırak.
 - Rakip B Tower'dan her raunt agresif peek yapıyorsa: Tower'a erken utility at (molly, stun), Arcade'den flank gönder. Utility geri iter, flank pozisyonunu tamamen bozar.
 - Rakip gerçek split yapıyorsa (eş zamanlı push): Bir tarafa 3 kişi ya da ağır utility koy, diğer tarafta retake oyna. İki tarafı eşit tutarsan rakibin sayısına teslim olursun.
 - Rakip lurk yapıp flanktan kill alıyorsa: Cypher veya Killjoy utility'sini her girişe koy. Lurker'ın yolunu kesersin — ya geri çekilir ya kendini açar.

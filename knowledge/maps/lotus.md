@@ -20,7 +20,7 @@
 
 **Pattern 1: A Main Kuru Push Ölümleri**
 IF: A Main'e flash veya smoke olmadan giriyorsun — Tree ve Stairs açılarına yürüyerek dalıyorsun.
-MEANING: Tree'den ve Stairs'ten iki farklı açı seni aynı anda görüyor. Defender pre-aim'li bekliyor, sen yürüyerek giriyorsun — ilk atış zaten onun.
+MEANING: Tree'den ve Stairs'ten iki farklı açı seni aynı anda görüyor. Defender açı tutma'li bekliyor, sen yürüyerek giriyorsun — ilk atış zaten onun.
 COUNTER: Girmeden önce Tree'yi smoke'la. Stairs yönüne flash at. Flash patlar patlamaz swing yap — arada boşluk bırakma. Girdikten sonra Root'u al, yoksa flank yersin.
 WHY: A Main dar, defender iki yükseklikten seni izliyor. Smoke sightline'ı keser. Flash defender'ı açıdan söker. Root kontrolsuz her A execute flank riskiyle gelir.
 

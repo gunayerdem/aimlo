@@ -14,7 +14,7 @@ COUNTER default'tan biraz kay — aynı lane'i kapayacak kadar yakın, ama seni 
 WHY o zorlanan mikro-ayarlama senin önce ateş etmeni sağlayan reaksiyon boşluğunu açar
 
 IF o off-angle'dan kill aldıysan
-MEANING düşman takımı o noktayı işaretledi, sıradaki round oraya pre-aim gelecekler
+MEANING düşman takımı o noktayı işaretledi, sıradaki round oraya açı tutma gelecekler
 COUNTER her off-angle'ı tek round için kullan, sonra farklı bir pozisyona geç
 WHY off-angle'ı bekliyorlarsa cover'ı da feda etmiş olursun — default'tan bile kötü bir pozisyona dönüşür
 
@@ -73,7 +73,7 @@ WHY bedava bilgi: ateş ederse yerini ve silahının recovery'sini kaybediyor, a
 
 IF düşmanın nerede durduğunu kesin biliyorsan
 MEANING tam strafe hızında geniş swing yapıyorsun, karşı taraf seni takip etmek zorunda kalıyor
-COUNTER bilinen noktaya pre-aim et, tam hızda swing at, counter-strafe yap ve ateş et
+COUNTER bilinen noktaya açıyı tut, tam hızda swing at, counter-strafe yap ve ateş et
 WHY geniş swing seni köşe kenarından hızla uzaklaştırıyor — düşman baskı altında büyük bir ayarlama yapmak zorunda
 
 IF o açıda Operator var olduğunu biliyorsan
@@ -121,7 +121,7 @@ WHY crosshair'i bir kez gevşettiğin round, lurker'ın seni cezalandırdığı 
 ### İki Açı Aynı Anda
 
 IF aynı anda iki tehdit var — örneğin Ascent A retake'inde Heaven ve Tree
-MEANING birini pre-aim edersen diğeri tamamen açık kalır
+MEANING birini açı tutma edersen diğeri tamamen açık kalır
 COUNTER crosshair'i ikisi arasına böl, ama daha olası tehdide hafif yatır
 WHY her iki açıya da maksimum flick mesafeni kısaltırsın. En kötü durumda bile reaksiyon farkın düşük kalır
 
@@ -144,9 +144,9 @@ WHY tereddüt edersen düşman reload'u tamamlar, fight sıfırlanır — bu bed
 ### Ses İnkarı
 
 IF bir açıya koşarak yaklaşıyorsan
-MEANING düşman seni duydu, geldiğin noktayı pre-aim'liyor
+MEANING düşman seni duydu, geldiğin noktayı açı tutma'liyor
 COUNTER açılara, flanklara ve lurk'e girerken shift ile yürü
-WHY konumunu ses ile verirsen pozisyon avantajın sıfırlanır — düşman sesi pre-aim'e çevirir
+WHY konumunu ses ile verirsen pozisyon avantajın sıfırlanır — düşman sesi açı tutma'e çevirir
 
 IF düşmanı yanıltmak istiyorsan
 MEANING bir yöne doğru koşup sonra sessizce başka yöne geçmek düşmanın kafasına yanlış bilgi yerleştirir
@@ -294,7 +294,7 @@ WHY bir anda sadece bir hedefe aim edebilirsin; 1v2'yi iki ayrı 1v1'e çevir
 IF clutch'ta bir düşman düşürdüysen
 MEANING hayatta kalan düşmanlar sesin geldiği yeri biliyor
 COUNTER her kill'den sonra pozisyon değiştir — aynı açıdan bir daha bakma
-WHY düşman son gördüğü noktayı pre-aim eder; orada beklersen kazandığın fight'ı geri verirsin
+WHY düşman son gördüğü noktayı açı tutar; orada beklersen kazandığın fight'ı geri verirsin
 
 ---
 

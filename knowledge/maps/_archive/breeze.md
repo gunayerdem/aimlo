@@ -21,7 +21,7 @@
 
 **Pattern 1: A Hall Kuru Push Ölümleri**
 IF: A Hall'a flash atmadan, smoke atmadan giriyorsun ve her seferinde ölüyorsun.
-MEANING: Savunucu Hall çıkışını zaten pre-aim yapıyor. Hall dar ve uzun — flashsız giren herkesi bedavaya vuruyor. Kendi kendini öldürüyorsun.
+MEANING: Savunucu Hall çıkışını zaten açıyı tutuyor. Hall dar ve uzun — flashsız giren herkesi bedavaya vuruyor. Kendi kendini öldürüyorsun.
 COUNTER:
 - Flash atmadan Hall'a girme. Flash patlayınca swing yap.
 - Op sesini duyduysan smoke at, smoke içinden kapat mesafeyi.
@@ -88,12 +88,12 @@ WHY: Cover arkasından crossfire kurduğunda retake yapan takım iki farklı aç
 
 **Pattern 7: Aynı Pozisyonda Tekrar Tekrar Oynama**
 IF: A Pyramid'de veya B Pillar'da her round aynı noktadasın ve 3-4 round sonra sürekli ölüyorsun.
-MEANING: Rakip seni okudu. Artık o açıyı pre-aim yapıyor. Güçlü pozisyon bile tekrarlanınca işe yaramaz hale gelir.
+MEANING: Rakip seni okudu. Artık o açıyı açıyı tutuyor. Güçlü pozisyon bile tekrarlanınca işe yaramaz hale gelir.
 COUNTER:
 - Her 2-3 round'da pozisyon değiştir.
 - Pyramid'de kill aldıysan bir sonraki round aşağı in veya Switch'e geç.
 - Aynı yerde üst üste 3 round oynama — bu kural.
-WHY: Off-angle'lar sürpriz faktöründen güç alır. Rakip seni biliyorsa pre-aim atar ve avantaj sıfırlanır. Pozisyon rotasyonu rakibi her girişte birden fazla açı kontrol etmeye zorlar — giriş yavaşlar, tereddüt yaratır.
+WHY: Off-angle'lar sürpriz faktöründen güç alır. Rakip seni biliyorsa açı tutma atar ve avantaj sıfırlanır. Pozisyon rotasyonu rakibi her girişte birden fazla açı kontrol etmeye zorlar — giriş yavaşlar, tereddüt yaratır.
 
 ---
 

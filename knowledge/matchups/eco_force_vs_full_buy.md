@@ -24,7 +24,7 @@ Eco roundda (tabanca + hafif zırh, 0–2400 kredi) amacın tek bir şey: karş�
 - Harita açık ve uzun mesafe (Breeze, Icebox) — Vandal/Phantom Sheriff ve Spectre'yi menzil dışında bırakır
 - Eco tarafının util'i yok, senin util'in tam — smoke + molly ile açıyı patlatırsın
 - Post-plant'te molly + smoke varsa eco defuse için gerekli açıya giremez
-- Eco tarafı kör açılırsa full buy pre-aim ile tek vurur
+- Eco tarafı kör açılırsa full buy önceden nişanla tek vurur
 - Ult farkın varsa — eco tarafı ult harcayamaz, harcasa kaybeder
 
 ## 3. Key Düellolar

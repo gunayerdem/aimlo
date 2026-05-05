@@ -19,7 +19,7 @@ Harbor'ın duvarları görüşü keser — ama Raze'in granatları duvardan geç
 
 **IF**: Blast Pack ile High Tide'ın üstünden atlayıp savunmanın arkasına iniyorsun
 **MEANING**: Duvar tamamen atlandı, Harbor'ın konumu deşifre
-**COUNTER**: Harbor Reckoning'i senin iniş noktasına pre-aim atabiliyor — iniş açısını son anda değiştir, duvar çizgisi boyunca kaydır
+**COUNTER**: Harbor Reckoning'i senin iniş noktasına açı tutma atabiliyor — iniş açısını son anda değiştir, duvar çizgisi boyunca kaydır
 **WHY**: Blast Pack inişi tahmin edilebilir; Radiant Harbor'lar bunu okur ve Reckoning'i oraya koyar
 
 ### Harbor, Raze'i Cezalandırırken
@@ -56,6 +56,6 @@ Harbor'ın duvarları görüşü keser — ama Raze'in granatları duvardan geç
 
 **MID**: Raze yayı bazen kullanıyor ama Cove'u görmezden gelip grenat israf ediyor. Harbor duvar koyuyor ama Reckoning'i Blast Pack inişine ayarlamıyor. Her ikisine de eşleşme içindeki farkı göster.
 
-**HIGH**: İkisi de temel dinamiği biliyor. Raze'e Cove'u kırıp kırmayacağına karar vermeyi, Harbor'a Reckoning pre-aim zamanlamasını öğret.
+**HIGH**: İkisi de temel dinamiği biliyor. Raze'e Cove'u kırıp kırmayacağına karar vermeyi, Harbor'a Reckoning açı tutma zamanlamasını öğret.
 
 **ELITE**: Belirleyici olan Raze'in Paint Shell zamanlaması ile Harbor'ın Cove/Reckoning aktivasyonu. Raze Cove'u görünce flank mı basar, Cove'u mu kırar — bu okuma savaşı. Harbor Blast Pack açısını önceden okuyabiliyorsa Reckoning'i öne çekiyor, okuyamıyorsa reaktif kalıyor.

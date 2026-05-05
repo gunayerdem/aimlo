@@ -10,7 +10,7 @@
 - Mid kontrolü her şey. Mid'i tutarsan Tube üzerinden A'ya, Kitchen üzerinden B'ye split atarsın. Mid yoksa execute'un tek yönlü kalır, savunucu rahat retake atar. Savunmada mid'i kaybedersen her iki site tehlikeye girer
 
 ## 2. Ölüm Bölgeleri
-- **A Belt / A Main**: A site'a giden ana koridor. Burada ölüyorsan sebebi basit: util atmadan düz yürüyüp peek açıyorsun. A Rafters'taki veya A Screens'teki savunucu seni zaten pre-aim etti, bedava ölüyorsun. A Belt'te sürekli ölüyorsan, girişten önce attığın util sayısı sıfırdır.
+- **A Belt / A Main**: A site'a giden ana koridor. Burada ölüyorsan sebebi basit: util atmadan düz yürüyüp peek açıyorsun. A Rafters'taki veya A Screens'teki savunucu seni zaten açı tutma etti, bedava ölüyorsun. A Belt'te sürekli ölüyorsan, girişten önce attığın util sayısı sıfırdır.
 - **Mid Sightline**: Icebox'in en uzun sightline'ı mid'de. Smoke veya flash yoksa mid'e adım atma — op tutan savunucu seni görmeden sen onu göremezsin. Burada tekrar tekrar ölüyorsan, bilgisiz peek açıyorsun.
 - **B Orange Girişi**: Orange bir tuzak. Yellow'dan ve Green'den gelen crossfire, ilk içeri giren adamı anında yiyor. Koordinasyon yoksa, ilk adam ölür. Her zaman.
 - **Tube / Container**: Savunucu Tube çıkışında seni bekliyor. Tube'u temizlemeden geçersen arkandan vurulursun. Savunma yapıyorsan da Tube split'ini erken okuyamazsan orada kalırsın.
@@ -33,7 +33,7 @@ COUNTER: Mid'e çıkmadan önce şu üçten birini yap:
 - Dual swing yap — iki kişi aynı anda farklı açılardan çık, biri trade alır
 
 Tek başına Op'a karşı kuru peek atmak Icebox'ta en kötü karardır.
-WHY: Mid sightline Op'çunun pre-aim yapabileceği tek bir hat. Sen o hatta çıktığında Op'çunun sadece tıklaması yeterli. Dual swing bunu bozar çünkü Op birini vururken diğeri trade alır.
+WHY: Mid sightline Op'çunun açı tutma yapabileceği tek bir hat. Sen o hatta çıktığında Op'çunun sadece tıklaması yeterli. Dual swing bunu bozar çünkü Op birini vururken diğeri trade alır.
 
 **Pattern 3: B Orange Stack Ölümleri**
 IF: Birden fazla oyuncu aynı roundda B Orange girişinde ölüyor — hepsi aynı dar geçişten sırayla girmeye çalışıyor
@@ -44,13 +44,13 @@ WHY: Dar girişte yığılmak savunucuya seri kill verir çünkü her oyuncu sı
 
 **Pattern 4: A Rafters Tekrarcılık**
 IF: Savunucu A Rafters'ta üst üste üç veya daha fazla roundda aynı pozisyonda duruyor
-MEANING: Rafters güçlü bir pozisyon ama rakip fark edince pre-aim etmeye başlar. O noktadan sonra avantajlı pozisyon ölüm tuzağına dönüşür.
+MEANING: Rafters güçlü bir pozisyon ama rakip fark edince açı tutma etmeye başlar. O noktadan sonra avantajlı pozisyon ölüm tuzağına dönüşür.
 COUNTER: Rafters'ı her round kullanma. Bir round Rafters, sonraki round A Nest, sonraki round Screens arkası. Rafters'tan kill aldıktan sonraki roundda mutlaka farklı yere geç. Rafters'ı sürpriz pozisyonu olarak kullan, varsayılan pozisyon olarak değil.
 WHY: Off-angle'ın gücü bilinmezlikten gelir. Rakip nerede olduğunu bildiğinde orası artık off-angle değil, bilinen bir açı. Pozisyon döndürürsen rakip her roundda birden fazla noktayı kontrol etmek zorunda kalır ve giriş hızı düşer.
 
 **Pattern 5: Zip Line Zamanlama Hataları**
 IF: Zip line kullanırken veya inişte vurularak ölüyorsun — rakibin duyduğu veya beklediği anda kullanıyorsun
-MEANING: Zip line ses çıkarır, iniş noktası sabittir ve iniş anında silahını tam kullanamıyorsun. Rakip sesi duyuyor, iniş noktasını pre-aim ediyor, sen geldiğinde hazır bekliyor.
+MEANING: Zip line ses çıkarır, iniş noktası sabittir ve iniş anında silahını tam kullanamıyorsun. Rakip sesi duyuyor, iniş noktasını açıyı tutuyor, sen geldiğinde hazır bekliyor.
 COUNTER: Zip line'ı iki şekilde kullan:
 - Takım utility'siyle — teammate flash veya smoke atarken zip'e bin
 - Fake olarak — zip'e bas, ses çıkar, hemen in. Rakip seni beklemeye başlar ama sen orada değilsin
@@ -71,7 +71,7 @@ COUNTER: Spike plant olur olmaz rotasyonu başlat. Kitchen üzerinden gir, utili
 WHY: Ne kadar geç girersen Orange ve Green'deki crossfire o kadar sağlamlaşır, Yellow'daki açı o kadar oturur. Erken ve koordineli retake saldırganların yerleşmesini engeller.
 
 **Pattern 8: B Snowman Tek Pozisyon Bağımlılığı**
-IF: B Snowman'da her round aynı off-angle'ı kullanıyorsun — rakip okumuş, pre-aim ediyor
+IF: B Snowman'da her round aynı off-angle'ı kullanıyorsun — rakip okumuş, açıyı tutuyor
 MEANING: Snowman güçlü bir off-angle ama tekrarlanınca bilinen bir açıya dönüşür. Pozisyonun gücüne aşırı güvenip varyasyon yapmayı bırakıyorsun.
 COUNTER: Snowman'ı her round kullanma. Yellow, Green giriş kontrolü ve Orange içindeki farklı açıları döndür. Snowman'dan kill aldıktan sonraki round mutlaka başka yere geç. Snowman'ı ikinci veya üçüncü roundda sürpriz olarak geri getir.
 WHY: Off-angle'ın değeri sürpriz faktöründen gelir. Rakip Snowman'ı bildiğinde orası artık off-angle değil. Pozisyon döndürürsen rakip her roundda birden fazla noktayı temizlemek zorunda kalır ve giriş hızı düşer.
@@ -162,7 +162,7 @@ WHY: Rush hız avantajına dayanır. Wall, slow, molly — hangisi hızı kesers
 **Rakip zip line'i agresif kullanıyorsa:**
 IF: Saldırı tarafı zip line ile Rafters'a çıkıp A site'a giriş yapıyor
 MEANING: Zip'in iniş noktası sabittir, her seferinde aynı yere iner
-COUNTER: Rafters'a pre-aim yap, iniş animasyonu bitmeden vur — o anda savunma kapasitesi sıfır. Alternatif: Rafters'a molly veya stun at, zip'ten inen utility'nin içine düşer.
+COUNTER: Rafters'a açı tut, iniş animasyonu bitmeden vur — o anda savunma kapasitesi sıfır. Alternatif: Rafters'a molly veya stun at, zip'ten inen utility'nin içine düşer.
 WHY: İniş noktası sabittir ve iniş sırasında karşı hamle yapamaz. Bu pencereyi biliyorsan garanti avantajın var.
 
 **Rakip mid'de Op oynuyorsa:**

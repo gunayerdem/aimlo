@@ -74,7 +74,7 @@ IF: A Site'i 2-3 kişiyle tutuyorsan — Heaven'da Op/anchor, Lamps arkasında o
 MEANING: Heaven'daki oyuncu siteye giren herkesi yukarıdan görür ve ilk ateşi o açar. Lamps arkasındaki adam entry'nin beklemediği açıdan vurur. A Short'taki oyuncu düşmanın A'ya gelip gelmediğini anlar, rotate kararını takıma bildirir.
 COUNTER:
 - Heaven'da Op tutuyorsan düşmanın flash veya smoke'una karşı kaçış rotanı önceden belirle. Heaven'da ölürsen site tamamen açılır.
-- Lamps off-angle'ını iki round üst üste kullanma. Düşman ikinci roundda o açıyı pre-aim eder.
+- Lamps off-angle'ını iki round üst üste kullanma. Düşman ikinci roundda o açıyı açı tutar.
 - A Short'taki oyuncu kuru peek atmaz. Ses ve utility ile bilgi toplar, peek atıp ölürse takım hem bilgiyi hem kişiyi kaybeder.
 WHY: Heaven, Lamps ve A Short üç farklı yönden ateş açar, saldırıyı crossfire'a alır. Ama bu sadece üçü de hayatta olduğunda çalışır. Biri erken ölürse crossfire kırılır, saldırı tarafı siteı kolayca alır. A savunmasında erken ölme.
 
@@ -146,7 +146,7 @@ Bind bu seviyede tamamen karşı okuma haritası. Düşmanın default'unu gör, 
 - "Bind'de sadece mekanikle round kazanmıyorsun. Utility zamanlaması ve takım hareketi bu haritanın asıl dili."
 - "Retake'e tek başına koşmak kahramanlık değil. Roundu hediye ediyorsun. Toplan, birlikte gir."
 - "Teleporter'ı sadece geçiş için kullanıyorsan potansiyelinin yarısını yakıyorsun. O bir bilgi silahı."
-- "Her round aynı pozisyonu tutuyorsan, düşman seni bir sonraki roundda pre-aim eder. Pozisyon değiştir, tahmin edilemez ol."
+- "Her round aynı pozisyonu tutuyorsan, düşman seni bir sonraki roundda açı tutar. Pozisyon değiştir, tahmin edilemez ol."
 
 ## 8. Callout'lar & Pozisyon Rehberi
 
@@ -171,7 +171,7 @@ Bind bu seviyede tamamen karşı okuma haritası. Düşmanın default'unu gör, 
 - **B Long one-way**: B Elbow'dan B Long'a at — push yapanı izlersin, sen gizli kalırsın.
 
 ### Off-Angle Pozisyonları
-- **A Lamps deep corner**: Lamps'ın en dip köşesi. Saldırı orası clear etmeyi atlar. İki round işe yarar — sonra pre-aim edilirsin, yerini değiştir.
+- **A Lamps deep corner**: Lamps'ın en dip köşesi. Saldırı orası clear etmeyi atlar. İki round işe yarar — sonra açın tutulur, yerini değiştir.
 - **B Garden wall**: Duvarın kenarında bekle — retake yapan savunmacı seni bu açıda aramaz.
 - **Hookah ceiling peek**: Hookah'nın üst kenarından tut — aşağıdan peek atan saldırıcı kafana bakar ama seni göremez.
 

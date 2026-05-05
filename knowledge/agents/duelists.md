@@ -53,7 +53,7 @@ Duellist'ler takımın alan acan oyuncuları. Kit'leri ilk dövüşü almak, ala
 
 5. **IF** Jett ile pasif oynuyorsan
    **MEANING** Alan yaratma görevini yerine getirmiyorsun
-   **COUNTER** Pasif oynamak istiyorsan sentinel oyna. Jett'in değeri agresyon ve pick'lerde
+   **COUNTER** Pasif oynamak istiyorsan sentinel oyna. Jett'in değeri agresyon ve kill alde
    **WHY** Pasif Jett = takımda duellist yok demek. Rolün gerektirdiği alanı yaratmıyorsun
 
 6. **IF** Op-and-dash tek planınsa
@@ -339,12 +339,12 @@ Duellist'ler takımın alan acan oyuncuları. Kit'leri ilk dövüşü almak, ala
 1. **IF** Amaçsız slide yapıyorsan
    **MEANING** Slide peek fazla kullanılırsa tahmin edilebilir hale gelir
    **COUNTER** Slide'ları normal peek ve jiggle peek ile karıştır
-   **WHY** Her round aynı slide = düşman pre-aim yapar ve seni havada yakalar
+   **WHY** Her round aynı slide = düşman açı tutar ve seni havada yakalar
 
 2. **IF** Her yerde sprint yapıyorsan
    **MEANING** High Gear gürültülü -- düşmanlar seni haritanın öteki ucundan duyar
    **COUNTER** Gizlilik lazım olduğunda yürü. Sprint sadece execute ve açık rotasyonlar için
-   **WHY** Duyulan sprint = düşman pre-aim + ambush hazırlığı
+   **WHY** Duyulan sprint = düşman açı tutma + ambush hazırlığı
 
 3. **IF** Fast Lane duvarlarını takım takibi olmadan atıyorsan
    **MEANING** Duvarların arkasından kimse push yapmıyorsa işe yaramazlar
@@ -453,7 +453,7 @@ Duellist'ler takımın alan acan oyuncuları. Kit'leri ilk dövüşü almak, ala
    **WHY** Rastgele klon = utility israfı + düşmana "bu sahte" öğretme
 
 2. **IF** Her zaman aynı sürede swap yapıyorsan
-   **MEANING** Düşmanlar zamanlamayı öğrenir ve swap anında pre-aim yapar
+   **MEANING** Düşmanlar zamanlamayı öğrenir ve swap anında açı tutar
    **COUNTER** Swap zamanlamanı değiştir -- erken, geç, arada hic yapma
    **WHY** Tahmin edilebilir swap = düşman tam swap anında seni vurur
 

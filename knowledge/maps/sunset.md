@@ -94,8 +94,8 @@ WHY: Market her iki site'a açılıyor. Market'i kaybettiğinde iki ayrı adada 
 
 **Pattern 2: Heaven'da Tekrarlayan Aynı Açı**
 IF: A veya B Heaven'da üç veya daha fazla round aynı pozisyonda durarak ölüyorsun.
-MEANING: Heaven güçlü bir pozisyon — ama tahmin edilebilir hale gelince ölüm tuzağına dönüyor. Rakip pre-aim etmeye başladığında yükseklik avantajın sıfırlanıyor. Pozisyonun gücünü kendi varlığınla karıştırıyorsun.
-COUNTER: Heaven ile site seviyesi arasında geç. Heaven'dan kill aldıysan bir sonraki round site'ta oyna — rakip Heaven'i pre-aim edecek, seni bulamayacak. Heaven'i varsayılan pozisyon olarak değil, sürpriz olarak kullan.
+MEANING: Heaven güçlü bir pozisyon — ama tahmin edilebilir hale gelince ölüm tuzağına dönüyor. Rakip açı tutma etmeye başladığında yükseklik avantajın sıfırlanıyor. Pozisyonun gücünü kendi varlığınla karıştırıyorsun.
+COUNTER: Heaven ile site seviyesi arasında geç. Heaven'dan kill aldıysan bir sonraki round site'ta oyna — rakip Heaven'i açı tutacak, seni bulamayacak. Heaven'i varsayılan pozisyon olarak değil, sürpriz olarak kullan.
 WHY: Off-angle'lar tahmin edilemezlikten güç alır. Rakip bir yeri okuduğunda, orası avantaj değil dezavantaj olur. Her round pozisyon değiştirirsen rakip her seferinde birden fazla açı kontrol etmek zorunda kalır.
 
 **Pattern 3: Over-Rotate Tuzağı**
@@ -106,7 +106,7 @@ WHY: Rakip fake yapıp geri döndüğünde, over-rotate etmiş takım açık poz
 
 **Pattern 4: A Elbow Agresif Tutma Riski**
 IF: A Elbow'da agresif pozisyon alıyorsun, kill alıyorsun ama sonraki roundlarda aynı yerde ölüyorsun.
-MEANING: Elbow'da agresif oynamak ilk seferinde işe yarar çünkü rakip beklemez. Tekrar edince rakip pre-aim + util ile geliyor. İlk başarının tekrar edeceğini varsayıyorsun ama rakip adapte oldu.
+MEANING: Elbow'da agresif oynamak ilk seferinde işe yarar çünkü rakip beklemez. Tekrar edince rakip açı tutma + util ile geliyor. İlk başarının tekrar edeceğini varsayıyorsun ama rakip adapte oldu.
 COUNTER: Elbow'dan kill aldıktan sonra bir sonraki round geri çekil, site'tan veya Heaven'dan oyna. Rakip Elbow'a util atacak — o util boşa gitsin. İki round sonra tekrar Elbow'a dön. Elbow'u pattern olarak değil, varyasyon olarak kullan.
 WHY: Agresif pozisyonlar bir kez okunurunca seni tuzağa çeker. Rakip flash + smoke attıktan sonra oradan çıkmak intihar. Ama sen orada değilsen, onların util'i boşa gider ve execute planları çöker.
 

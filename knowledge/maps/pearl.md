@@ -135,7 +135,7 @@ Utility kullanıyorsun ama sıra yanlış. Smoke atıyorsun, flash atmıyorsun �
 - Spike kurulduktan sonra açıkta durma, crossfire'a geç.
 
 **Diamond-Ascendant**
-Default doğru yapıyorsun ama Mid'den bilgi gelince harekete geçemiyorsun. Rakip o sürede rotate ediyor. A Heaven'da da her round aynı noktada oturuyorsun — savunucu seni okur ve pre-aim yer.
+Default doğru yapıyorsun ama Mid'den bilgi gelince harekete geçemiyorsun. Rakip o sürede rotate ediyor. A Heaven'da da her round aynı noktada oturuyorsun — savunucu seni okur ve açı tutma yer.
 
 - Mid bilgisi gelince anında karar ver, bekleme.
 - Heaven, Flowers ve site-level arasında pozisyon döndür.
@@ -158,7 +158,7 @@ Her round aynı default oynarsan rakip okur, counter-utility ile cezalandırır.
 - "Post-plant'te açıkta durma. Pearl'de her site'in iki girişi var. Crossfire kur, savunucuyu iki açı arasına sıkıştır."
 - "Her round aynı execute'ı atıyorsan, rakip seni okumuştur. İkinci yarıda farklı bir şey dene — aynı planı iki kez oynamak Pearl'de ceza yiyor."
 - "Retake'e aceleyle girme. Site'a util atmadan dalarsan, savunucu için bile intihar olan girişlere kendin giriyorsun."
-- "Savunmada her round pozisyonunu değiştir. Heaven'da üst üste duruyorsan, rakip bir sonraki round seni pre-aim edecek."
+- "Savunmada her round pozisyonunu değiştir. Heaven'da üst üste duruyorsan, rakip bir sonraki round seni açı tutacak."
 - "Eco round'da A Art'ta agresif Sheriff oyna. Art'ın dar yapısı one-tap'i kolaylaştırır — bu avantajı kullan."
 
 ## 8. Callout'lar

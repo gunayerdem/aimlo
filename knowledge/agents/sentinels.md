@@ -65,7 +65,7 @@ Sentinel'ler her takımın savunma omurgası. Site anchor'lar, push'ları gecikt
    **WHY** Açık rez = iki ölüm. Korumalı rez = adam avantajı
 
 5. **IF** Her round duvar boost yapıyorsan
-   **MEANING** Tahmin edilebilir boost'lar pre-aim edilir
+   **MEANING** Tahmin edilebilir boost'lar açı tutulur
    **COUNTER** Boost noktalarını aralıklı kullan ve hangi roundda boost yaptığını değiştir
    **WHY** Tahmin edilebilir boost = düşman hazır bekler = bedava ölüm
 
@@ -243,7 +243,7 @@ Sentinel'ler her takımın savunma omurgası. Site anchor'lar, push'ları gecikt
 - Retake sırasında yeniden konumlandırılan taret düşman pozisyonları hakkında bilgi sağlar.
 
 ### Pro Oyuncu Stilleri
-- Killjoy VCT'de en tutarlı sentinel pick'lerinden biri. Setup'ı pro seviyede standardize edilmiş ama en iyi oyuncular (DRX ve Fnatic gibi) düşman adaptasyonunu önlemek için Nanoswarm pozisyonlarını her round değiştirir.
+- Killjoy VCT'de en tutarlı sentinel kill alinden biri. Setup'ı pro seviyede standardize edilmiş ama en iyi oyuncular (DRX ve Fnatic gibi) düşman adaptasyonunu önlemek için Nanoswarm pozisyonlarını her round değiştirir.
 - **Less (LOUD)** belirli haritalarda Killjoy'a flex yapmasıyla tanınır, LOUD'un hızlı rotasyon oyun stilini besleyen agresif taret yerleşimleri kullanır.
 
 ---
@@ -317,12 +317,12 @@ Sentinel'ler her takımın savunma omurgası. Site anchor'lar, push'ları gecikt
    **WHY** Slow alanını kullanmamak = Tour De Force'un kilit utility'sini cöpe atmak
 
 ### Retake Değeri
-- Chamber'ın retake değeri Tour De Force (slow alanları post-plant pozisyonları inkar eder) ve Headhunter (retake sırasında isabetli pick'ler) sağlar.
+- Chamber'ın retake değeri Tour De Force (slow alanları post-plant pozisyonları inkar eder) ve Headhunter (retake sırasında isabetli kill alır) sağlar.
 - Retake sırasında agresif peek'ler için Rendezvous -- peek yap, bilgi veya kill al, TP ile dön.
 - Defuse inkarı için düşmanların spike'a yaklaşmasını uyaracak şekilde spike üstüne Trademark.
 
 ### Pro Oyuncu Stilleri
-- **yay (eski OpTic/C9)**: Chamber'ı tanımlayan oyuncu. Op hassasiyetiyle "El Diablo" lakabı. Rendezvous kullanımı referans seviye -- agresif off-angle Op pick'leri ve anında TP. Pro oyundan emekli ama stili Chamber meta'sını tanımladı.
+- **yay (eski OpTic/C9)**: Chamber'ı tanımlayan oyuncu. Op hassasiyetiyle "El Diablo" lakabı. Rendezvous kullanımı referans seviye -- agresif off-angle Op kill ali ve anında TP. Pro oyundan emekli ama stili Chamber meta'sını tanımladı.
 - Coklu nerf sonrası (Rendezvous menzil azaltma, Headhunter fiyat artışı, Tour De Force hız azaltma) Chamber S-tier'dan düştü ama Op dostu haritalarda hala geçerli.
 
 ---

@@ -75,7 +75,7 @@ WHY süreç hedefleri her zaman kontrolünde; sonuç hedefleri değil
 | Faz 2: Tracking aim | Aimlabs/Kovaaks tracking senaryoları veya Range hareketli bot'lar |
 | Faz 3: Flick aim | Aimlabs gridshot veya Range flick pratiği |
 | Faz 4: Counter-strafe pratiği | Range bot'larıyla strafe ve counter-strafe, ilk atış hassasiyetine odaklan |
-| Faz 5: Deathmatch | Bir deathmatch oyunu. Crosshair placement ve köşe pre-aim'e odaklan, skor tablosu tepesine değil |
+| Faz 5: Deathmatch | Bir deathmatch oyunu. Crosshair placement ve köşe açı tutma'e odaklan, skor tablosu tepesine değil |
 
 ### Oyunlar Arası Mola
 

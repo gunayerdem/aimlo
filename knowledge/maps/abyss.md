@@ -80,7 +80,7 @@ WHY: Kenar rakibin kontrol etmediği bir açı yaratır, ilk atış avantajı ve
 
 **Pattern 1: A Site Savunma**
 
-IF: Her round aynı pozisyonda, A Heaven'da duruyorsun — rakip seni pre-aim'le ilk atışta indiriyor.
+IF: Her round aynı pozisyonda, A Heaven'da duruyorsun — rakip seni açı tut ilk atışta indiriyor.
 MEANING: A Heaven güçlü bir pozisyon. Ama aynı yerde durursan rakip seni ezberlemiş olur. Sana ulaşmadan önce kafasını oraya çevirip geliyor.
 COUNTER:
 - A Heaven'dan kill aldığın roundun arkasından site seviyesine in. Rakip yukarı bakarken sen aşağıdan vurursun.
@@ -94,7 +94,7 @@ WHY: Off-angle rakip onu beklediğinde işe yaramaz. Pozisyon değiştirirsen ra
 **Pattern 2: B Site Savunma**
 
 IF: B Lane'de agresif peek atıyorsun, erken ölüyorsun — site boş kalıyor.
-MEANING: B Lane'de agresif oynamak pick fırsatı verir ama ölürsen B site tamamen açık kalır. Agresif peek atarken anchor rolünden vazgeçiyorsun.
+MEANING: B Lane'de agresif oynamak kill fırsatı verir ama ölürsen B site tamamen açık kalır. Agresif peek atarken anchor rolünden vazgeçiyorsun.
 COUNTER:
 - B Heaven'dan site kontrolünü bırakma. Önce anchor, sonra pick.
 - B Lane'de erken aggression yerine sentinel utility'si koy — tripwire veya turret bilgiyi sana getirir.

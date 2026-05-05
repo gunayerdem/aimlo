@@ -133,7 +133,7 @@ WHY flash patladığı an içeri girmen lazım — beklersen savunucu toparlanı
 
 IF savunmada entry rolü oynuyorsan
 MEANING mobiliten ve mekanik gücün erken round etkisi yaratmaya yeter
-COUNTER saldırganlar senin agresif peek noktalarını pre-aim eder; tahmin edilebilirsen bedavaya trade ederler seni
+COUNTER saldırganlar senin agresif peek noktalarını açı tutar; tahmin edilebilirsen bedavaya trade ederler seni
 WHY erken peek takımına bilgi ve sayı üstünlüğü verir — ama trade olmadan önce çekilmen şart
 
 1. **Erken agresif çık, sonra çekil.** Bilgi topla, pozisyona dön. Orada bekleme.
@@ -438,7 +438,7 @@ WHY full util'le giden hazırlıklı bir execute, kurulmuş savunmayı bile ezer
 IF round açılır açılmaz siteye giriyorsan
 MEANING savunucular yerine oturmadan yakalıyorsun
 COUNTER erken-round agresif pozisyon alan savunucular seni bekliyor olacak
-WHY pasif retake oynayan takımlara karşı işe yarar — ama pozisyon bilgisi olan takımlara karşı her açıdan pre-aim yersin ve choke'ta ölürsün
+WHY pasif retake oynayan takımlara karşı işe yarar — ama pozisyon bilgisi olan takımlara karşı her açıdan açı tutma yersin ve choke'ta ölürsün
 
 ### Orta-Tempo Execute (Harita Kontrolü Sonrası)
 

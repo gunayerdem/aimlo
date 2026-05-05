@@ -9,7 +9,7 @@ Bu bilgiyi kendi maçlarında karşılaştığın durumlara bağla — her böl�
 ### Chamber Düşüşü
 
 IF takımın Chamber'a bağımlıysa 
-MEANING TP menzili kısa, Headhunter pahalı, Op atış hızı yavaş — agresif açı tutma artık işe yaramıyor 
+MEANING TP menzili kısa, Headhunter pahalı, Op atış hızı yavaş — agresif açı tutma stratejisi artık işe yaramıyor 
 COUNTER savunma kimliğini yeniden kur: Jett birincil Op duelist'e döndü, Killjoy/Cypher pasif kuruluma geç 
 WHY TP kısıtlaması Chamber'ın temel oyununu kırıyor — "her haritada zorunlu" devri bitti
 
@@ -113,7 +113,7 @@ WHY ana yıldız 1v1 clutch kazanma oranı çok yüksek; onu izole tutarsan tak�
 ### Agresif Swing Duelist
 
 IF bu stile karşı oynuyorsan 
-MEANING geniş swing + pre-aim kullanıyor, jiggle yapmıyor, ham reaksiyon hızına güveniyor 
+MEANING geniş swing + önceden nişan kullanıyor, jiggle yapmıyor, ham reaksiyon hızına güveniyor 
 COUNTER agresyonu bait et — düşman peek attığında trade pozisyonuna geç, ego peek'leri cezalandır 
 WHY bu tip oyuncu takım pozisyonunu göz ardı edip tek başına peek atıyor; o açığa utility at ve trade'e gir
 
@@ -126,7 +126,7 @@ WHY bu tip oyuncu takım pozisyonunu göz ardı edip tek başına peek atıyor; 
 
 IF bu stile karşı 1v1'deysen 
 MEANING 1v1 clutch kazanma oranı çok yüksek — izole fight için pozisyon oynuyor 
-COUNTER izole fight verme, utility ile pozisyonunu gör, pre-aim ile avantaj kur 
+COUNTER izole fight verme, utility ile pozisyonunu gör, önceden nişanla avantaj kur 
 WHY izole fight aradığında aynı şeyi ona karşı yapamazsın — sen toplu baskı uygula
 
 **Özellikler:**

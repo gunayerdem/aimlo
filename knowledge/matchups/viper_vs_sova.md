@@ -32,7 +32,7 @@ Viper hat kurar, körleştirir. Sova bilgi açar, pozisyonları ifşa eder. Bu m
 ## 3. Key Düellolar
 
 **IF** Sova recon dart Viper wall hattının arkasına atıldı
-**MEANING** Dart wall arkasını tarar, takımın ifşa olur, Sova takımı pre-aim'e geçer
+**MEANING** Dart wall arkasını tarar, takımın ifşa olur, Sova takımı açı tutma'e geçer
 **COUNTER** Wall'u dart'ın giriş açısına dik yerleştir. Dart wall'u dikey hatta çarparsa içeri giremez. Orb'u dart lokasyonuna at, ikinci smoke bilgi görüşünü kapar.
 **WHY** Dart wall yüksekliğinin altından giremez, üstünden girerse yüksekliği artır. Dart ses verir ama bilgi vermez — Sova takımı sadece "wall arkasında biri var" bilgisi alır, yer bilmez.
 
@@ -46,7 +46,7 @@ Viper hat kurar, körleştirir. Sova bilgi açar, pozisyonları ifşa eder. Bu m
 ---
 
 **IF** Viper Pit aktif, Sova drone Pit içine girdi
-**MEANING** Drone Pit içini tarar, Sova takımı seni pre-aim'leyebilir
+**MEANING** Drone Pit içini tarar, Sova takımı seni açı tutma'leyebilir
 **COUNTER** Drone sesini duyduğun an rifle'ınla vur. Pit içi sis sana görüş verir, drone'u kontrol eden Sova dışarıdan reaksiyon verir — sen daha hızlısın. Drone'u vururken Pit içinde microhareket yap — feed'deki pozisyonun artık eski olur.
 **WHY** Drone metal HP'li, iki rifle shot'u yeterli. Drone düştüğünde Sova Pit içi bilgisi biter, Pit kontrolü senin. Drone sesinde hem vur hem kay — feed'deki pozisyon gerçeği yansıtmaz.
 

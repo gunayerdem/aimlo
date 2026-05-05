@@ -44,7 +44,7 @@ Hangi tarafın rakip alışkanlığını önce tespit ettiği o roundu belirler.
 **IF** Cypher Neural Theft kullandı ve Omen o roundda teleport yapıyor
 **MEANING** Neural Theft kullanıldığı anda Cypher takımı senin konumunu görür. Teleport sırasında yerini değiştiriyorsan yeni konumun da açığa çıkabilir.
 **COUNTER** Omen olarak Neural Theft'in kullanıldığını duyduysan teleport iptal et veya hedef değiştir. Cypher takımı zaten nerede olduğunu biliyor — aynı yerde beklemek daha da kötü.
-**WHY** Neural Theft ölen takım arkadaşının konumlarını verir. Teleport yaptıysan yeni konumun görünür. Cypher takımı seni pre-aim eder.
+**WHY** Neural Theft ölen takım arkadaşının konumlarını verir. Teleport yaptıysan yeni konumun görünür. Cypher takımı seni açı tutar.
 
 ---
 

@@ -106,7 +106,7 @@ En yaygın hata: smoke atıp flash beklemeden girmek. Savunucu smoke kenarında 
 
 **MEANING:** A site savunmasının temeli Heaven. Tüm site'i görüyorsun, saldırganların ilk smoke'laması gereken yer burası. Generator, Heaven'a alternatif bir off-angle — saldırgan Heaven'ı smoke'layıp Generator'u kontrol etmezse arkadan yer. Wine (Tree altı) clutch ve retake için gizlenme noktası.
 
-**COUNTER:** A site savunmasında en büyük hata şu: her round aynı yerde duruyorsun. 3-4 round sonra saldırgan seni pre-aim ediyor, öldün gitti. Her round pozisyon değiştir — bir round Heaven, sonraki Generator, sonraki Wine. Saldırgan hangi açıya bakacağını bilemez.
+**COUNTER:** A site savunmasında en büyük hata şu: her round aynı yerde duruyorsun. 3-4 round sonra saldırgan açını tutuyor, öldün gitti. Her round pozisyon değiştir — bir round Heaven, sonraki Generator, sonraki Wine. Saldırgan hangi açıya bakacağını bilemez.
 
 **WHY:** Aynı yerde duruyorsan bilgi veriyorsun. Bilgi Valorant'ta en değerli şey. Pozisyon değiştirince saldırgan her round birden fazla açıyı kontrol etmek zorunda kalıyor, giriş hızı düşüyor.
 
@@ -230,7 +230,7 @@ Timeout'u doğru kullan — momentum kırmak için, skor farkı kapanmadan önce
 
 3. B Main'de birbirinizin üstüne yığılmayın. Aranda mesafe bırak. Yoksa savunucu tek spray'de ikisini birden biçer.
 
-4. Heaven'da her round aynı noktada durma. Birkaç round sonra düşman oraya pre-aim basar, sen daha açı almadan düşersin. Yeri değiştir.
+4. Heaven'da her round aynı noktada durma. Birkaç round sonra düşman oraya açı tutar, sen daha açı almadan düşersin. Yeri değiştir.
 
 5. Retake'e tek tek girme. Önce bilgiyi topla, takımla aynı anda gir. Tek tek girersen post-plant bekleyen oyuncuya sırayla duel vermiş olursun.
 

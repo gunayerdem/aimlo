@@ -12,7 +12,7 @@
 ## 2. Ölüm Bölgeleri
 - **A Long**: Haven'ın en uzun sightline'ı burası. Flash ya da smoke atmadan A Long'a giriyorsan Op seni bedavaya alır. Util atmadan bu koridora girme.
 - **B Main Girişi**: B'ye tek sırada dalıyorsun, savunucu sizi teker teker biçiyor. B Main'e girerken giriş açısını util'le kır, sonra içeri gir.
-- **Garage/Mid Window**: Saldırdaysan util'siz Garage'a girme — Window'dan direkt yersin. Savunmadaysan gereksiz peek atma — saldırgan seni pick'ler. Bu bölgede ölüyorsan bilgi almadan hareket ediyorsun.
+- **Garage/Mid Window**: Saldırdaysan util'siz Garage'a girme — Window'dan direkt yersin. Savunmadaysan gereksiz peek atma — saldırgan seni kill alır. Bu bölgede ölüyorsan bilgi almadan hareket ediyorsun.
 - **C Long Cross**: Plat'ı smoke'lamadan C site'a cross yapıyorsun, savunucu kafa vuruşunu bedavaya alıyor. C Long'dan geçmeden önce Plat'ı kapat.
 - **B Window/Connector Geçişi**: Mid'den B'ye ya da C'ye geçerken Window'u kontrol etmiyorsun. Window'dan peek atan savunucu geçiş yapan herkesi sırayla indirir. Geçmeden önce Window'u temizle ya da kapat.
 
@@ -20,7 +20,7 @@
 
 **Pattern 1: A Long Kuru Peek Ölümleri**
 IF: A Long'a smoke veya flash atmadan giriyorsun — utility yok, düz sightline'a yürüyorsun.
-MEANING: Sightline disiplini yok. A Long Haven'ın en uzun hatlarından biri. Savunucu orada seni bekliyor, pre-aim yapıyor. Sen görünür olduğun anda o zaten tetikten çekiyor.
+MEANING: Sightline disiplini yok. A Long Haven'ın en uzun hatlarından biri. Savunucu orada seni bekliyor, açıyı tutuyor. Sen görünür olduğun anda o zaten tetikten çekiyor.
 COUNTER: A Long'a girmeden önce sightline'ın ortasını smoke'la. Sonra flash at, flash patlarken swing yap. Op tutan birine karşı Jett dash veya Neon slide kullan — sabit hedef olma.
 WHY: Savunucu seni görür görmez ateş edebilir. Sen hâlâ pozisyon alırken o zaten nişan almış durumda. Smoke bu denklemi kırar — savunucu ya bekler ya smoke'a girer. Flash ise aim'ini sıfırlar, sana swing için pencere açar.
 
@@ -86,9 +86,9 @@ Defuse sesini duyunca peek at — spike'ın tam yanında bekleme.
 WHY: Post-plant'te amaç spike'i korumak, yanında olmak değil. Mesafe aldığında savunucunun mollysı seni vuramaz. Crossfire pozisyonundan bakınca savunucu iki yönü birden kontrol edemez.
 
 **Pattern 9: A Heaven'da Değişmez Pozisyon**
-IF: Savunucu A Heaven'da her round aynı açıyı tutuyor — rakip bunu öğrenince pre-aim yapıp, flash atıp geçiyor.
-MEANING: Pozisyon çeşitliliği yok. A Heaven güçlü bir pozisyon ama rakip öğrendikten sonra pre-aim + flash combo ile temizliyor. Güçlü pozisyonlar tekrarlanınca zayıflar.
-COUNTER: A Heaven, A Hell (site altı), A Short ve site zemini arasında döngü yap. Heaven'dan kill aldıysan bir sonraki round Hell'e veya zemine in — rakip Heaven'ı pre-aim edecek ve seni bulamayacak. Off-angle'ı sürpriz olarak kullan, varsayılan pozisyon olarak değil.
+IF: Savunucu A Heaven'da her round aynı açıyı tutuyor — rakip bunu öğrenince açı tutma yapıp, flash atıp geçiyor.
+MEANING: Pozisyon çeşitliliği yok. A Heaven güçlü bir pozisyon ama rakip öğrendikten sonra açı tutma + flash combo ile temizliyor. Güçlü pozisyonlar tekrarlanınca zayıflar.
+COUNTER: A Heaven, A Hell (site altı), A Short ve site zemini arasında döngü yap. Heaven'dan kill aldıysan bir sonraki round Hell'e veya zemine in — rakip Heaven'ı açı tutacak ve seni bulamayacak. Off-angle'ı sürpriz olarak kullan, varsayılan pozisyon olarak değil.
 WHY: Rakip bir pozisyonu öğrendiğinde artık one-trick haline gelir — kolayca temizlenir. Pozisyon döngüsü rakibi her round birden fazla açı kontrol etmeye zorlar. Bu yük onların giriş hızını düşürür ve tereddüt yaratır.
 
 **Pattern 10: Eco Round Disiplin Kaybetme**

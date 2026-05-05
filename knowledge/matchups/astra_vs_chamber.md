@@ -74,7 +74,7 @@ Astra haritanın her noktasına smoke + stun + gravity well atar — yıldız sa
 ---
 
 **IF** Astra takımı execute etti, Chamber Trademark alarm verdi
-**MEANING** Trademark execute hattını ifşa etti, slow zonu aktif, Chamber pre-aim açtı
+**MEANING** Trademark execute hattını ifşa etti, slow zonu aktif, Chamber açı tuttu
 **COUNTER** Execute öncesi yıldızını Trademark'ın sight hattına yerleştir, smoke düştüğünde Trademark bilgi verir ama görüş vermez
 **WHY** Trademark'ın silahı bilgi + yavaşlatma. Smoke bilgiyi kesmez ama görüşü örter — Chamber alarmı duyar, ne göreceğini bilemez. Trademark değeri yarı yarıya düşer.
 

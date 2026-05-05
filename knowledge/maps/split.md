@@ -71,16 +71,16 @@ WHY: Dar ve yükseklik farkli bölgelerde utility kullanan taraf kazanir. Flash 
 
 **Pattern 1: A Site Savunma**
 IF: Her round A Heaven'da aynı açıdan, Screens'den oynuyorsun.
-MEANING: Rakip seni orada beklemeye başlar. İkinci round pre-aim eder, ölürsün. Pozisyon tekrarlanınca avantajını kaybedersin.
+MEANING: Rakip seni orada beklemeye başlar. İkinci round açı tutar, ölürsün. Pozisyon tekrarlanınca avantajını kaybedersin.
 COUNTER:
-- A Heaven'da kill aldığın round'un sonunda site seviyesine in — rakip yukarıyı pre-aim edecek, seni bulamayacak.
+- A Heaven'da kill aldığın round'un sonunda site seviyesine in — rakip yukarıyı açı tutacak, seni bulamayacak.
 - A Ramp'ta agresif peek yap, kill al, geri çekil.
 - A Elbow ve site içi düşük pozisyonu karıştır.
 WHY: Off-angle ilk kullanımda güçlü, tekrarlandığında işe yaramaz. Pozisyonu değiştirirsen rakip her round birden fazla açıyı kontrol etmek zorunda kalır — bu onların girişini yavaşlatır.
 
 **Pattern 2: B Site Savunma**
 IF: B Heaven'dan erken peek yapıyorsun — pozisyonunu veriyorsun.
-MEANING: B Heaven'ın güçü görülmeden hakim olmaktan gelir. Peek yaptığın anda rakip seni pre-aim eder ya da trade alır. O avantajı kendin sıfırlıyorsun.
+MEANING: B Heaven'ın güçü görülmeden hakim olmaktan gelir. Peek yaptığın anda rakip seni açı tutar ya da trade alır. O avantajı kendin sıfırlıyorsun.
 COUNTER:
 - B Heaven'da pasif kal, B Main'den push gelene kadar yerini verme.
 - B Garage'da Pillar arkasında bir kişi anchor oynasın.
@@ -152,7 +152,7 @@ Burada her round rakibin son round'da nereden girdiğine göre kurulum yap. Spli
 
 - "Dar girişler acele eden tarafı cezalandırır, utility kullanan tarafı ödüllendirir."
 
-- "Aynı pozisyonda iki round üst üste kill aldıysan üçüncüde pozisyon değiştir. Rakip pre-aim edecek — bos açıya ateş etsin."
+- "Aynı pozisyonda iki round üst üste kill aldıysan üçüncüde pozisyon değiştir. Rakip açı tutacak — bos açıya ateş etsin."
 
 - "Mid wall Split'teki en güçlü tek utility. Sage'in varsa mid wall'ı takım stratejisine sok. Sage'in yoksa mid'i başka utility ile tut — smoke, flash, ne varsa."
 

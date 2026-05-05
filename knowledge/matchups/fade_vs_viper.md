@@ -18,7 +18,7 @@ Fade düşmanı çizer — haunt iz açar, prowler kovalayan gider, seize kilitl
 **Fade lehine durumlar:**
 - Viper duvarı ile orb'u aynı anda aktifse yakıtı tükeniyor — prowler açık açıdan gir
 - Haunt Viper duvarının üstünden geçip iz açtıysa takım arkasını görüyor, smoke değersiz
-- Nightfall aktifken Viper Pit içinde bile sağır kalıyor + iz açılıyor, Fade takımı pre-aim kuruyor
+- Nightfall aktifken Viper Pit içinde bile sağır kalıyor + iz açılıyor, Fade takımı açı tutuyor
 
 **Viper lehine durumlar:**
 - Viper's Pit aktif — Pit içi görüş daralması haunt + prowler'ı etkisiz kılıyor
@@ -31,7 +31,7 @@ Fade düşmanı çizer — haunt iz açar, prowler kovalayan gider, seize kilitl
 ## 3. Kritik Düellolar
 
 **IF** Haunt'u Viper duvarının üstünden geçirecek açıya attın
-**MEANING** Haunt smoke içini tarar, iz açar — Viper takımı duvar arkasında artık gizli değil, senin takımın pre-aim kuruyor
+**MEANING** Haunt smoke içini tarar, iz açar — Viper takımı duvar arkasında artık gizli değil, senin takımın açı tutuyor
 **COUNTER** Duvarını haunt atış açısının dışına taşı. Haunt sesini duyduğun an duvarı kaydır. Ya da snake bite'ı haunt'un üstüne at — haunt düşer.
 **WHY** Haunt görsel bilgi + iz, smoke sadece görsel engel. Karşılaşırsa haunt kazanır çünkü iz smokeı deler. Viper'ın tek seçeneği haunt atılmadan önce duvarı farklı hatta kurmak.
 
@@ -52,7 +52,7 @@ Fade düşmanı çizer — haunt iz açar, prowler kovalayan gider, seize kilitl
 ---
 
 **IF** Nightfall Viper'ın site hattına girdi
-**MEANING** Alanda sağırlık + iz açılıyor, Viper Pit içinde bile sesi kaybediyor, Fade takımı pre-aim kuruyor
+**MEANING** Alanda sağırlık + iz açılıyor, Viper Pit içinde bile sesi kaybediyor, Fade takımı açı tutuyor
 **COUNTER** Nightfall sesini duyduğun an engel arkasına geç. Pit aktifse Nightfall hattının üstünden kapak kur — Pit görüş daralması prowler'a karşı kısmi koruma sağlıyor.
 **WHY** Nightfall iz + sağırlık, Pit görüş daralması + hasar. İkisi aynı anda patladıysa Pit kapalı alan avantajı devam ediyor ama Nightfall Pit dışındaki herketi teşhir ediyor.
 

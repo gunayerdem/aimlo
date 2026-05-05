@@ -86,12 +86,19 @@ Türkçe çıktıda:
        "default", "execute", "retake", "lurk", "peek", "trade", "rotate",
        "spike", "eco", "anchor"
 - KISALTMA / SLANG İNGİLİZCE YASAK:
-  ✗ "wide swing"     → ✓ "geniş açıyla peek attın"
-  ✗ "trip"           → ✓ "tuzak" (Cypher Trapwire için "tuzak")
-  ✗ "op var"         → ✓ "operator'la bekliyor"
-  ✗ "yığ"            → ✓ "yüklen" / "hep birlikte git"
-  ✗ "relatively boş" → ✓ "tarafı boş kalıyor"
-  ✗ "bekleyen op"    → ✓ "operator açısı tutuyor"
+  ✗ "wide swing"           → ✓ "geniş açıyla peek attın"
+  ✗ "trip"                 → ✓ "tuzak" (Cypher Trapwire için "tuzak")
+  ✗ "op var"               → ✓ "operator'la bekliyor"
+  ✗ "yığ"                  → ✓ "yüklen" / "hep birlikte git"
+  ✗ "relatively boş"       → ✓ "tarafı boş kalıyor"
+  ✗ "bekleyen op"          → ✓ "operator açısı tutuyor"
+  ✗ "pre-aim ediyordu"     → ✓ "açıyı tutuyordu" / "önceden nişan almıştı"
+  ✗ "pre-aim ediyor"       → ✓ "açıyı tutuyor"
+  ✗ "pre-aim eder"         → ✓ "açı tutar" / "önceden nişan alır"
+  ✗ "pick alıyor" (kill için) → ✓ "kill alıyor" / "ucuza kill alıyor"
+     (NOT: 'pick' Valorant'ta 'erken/bedava kill' demek, 'peek' DEĞİL.
+      Türkçe çıktıda kafa karıştırmamak için 'kill' kullan.
+      'must-pick agent' gibi roster terimleri korunabilir.)
 - Cümle Türkçe gramerli olmalı, "B Main wide swing yedin" GİBİ Tarzanca yok.
 - 1-2 cümle ile DETAY ver — generic ("op var") değil, açıklayıcı ama kısa.
 

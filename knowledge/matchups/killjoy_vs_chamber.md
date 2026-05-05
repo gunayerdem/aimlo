@@ -38,7 +38,7 @@ Seçim haritaya göre yap. Chamber seçiyorsan Op ekonomisini taşımak zorundas
 ---
 
 **IF** Chamber Rendezvous anchor'ını her round aynı yerde bırakıyor
-**MEANING** Anchor okundu — takım o noktayı pre-aim eder, Chamber teleport eder etmez ölür
+**MEANING** Anchor okundu — takım o noktayı açı tutar, Chamber teleport eder etmez ölür
 **COUNTER** Killjoy turret'ı Rendezvous anchor noktasına veya tam çıkışına dik. Chamber teleport yapar yapmaz turret vurur
 **WHY** Rendezvous sabit bir nokta. Killjoy'un cihazları sabit hedef için biçilmiş kaftan. Chamber anchor değiştirmezse her TP ölüm riskidir
 
@@ -124,7 +124,7 @@ Killjoy turret hem bilgi hem hasar — aynı cihaz iki iş yapar. Chamber Tradem
 
 1. **Chamber Op alamazsa.** Op olmayan Chamber sıradan bir silah tutuyor. Bu round'da Killjoy'un utility'sine karşı duracak gücü kalmaz.
 
-2. **Rendezvous anchor okundu.** Chamber her round aynı noktaya anchor koyuyorsa takım oraya pre-aim atar. Killjoy turret da aynı noktada bekliyorsa Chamber her TP'de ölüm riskine girer.
+2. **Rendezvous anchor okundu.** Chamber her round aynı noktaya anchor koyuyorsa takım oraya açı tutma atar. Killjoy turret da aynı noktada bekliyorsa Chamber her TP'de ölüm riskine girer.
 
 3. **Lockdown retake.** Killjoy ult + takımın retake'e girmesi = round çevrilir. Chamber tarafı cihazı kırmak için Op shot harcamak zorunda.
 

@@ -25,7 +25,7 @@ Karşı takımda Neon varsa dar haritada Neon'un elinde; geniş haritada senin e
 
 **IF** Neon sprint ile Fast Lane duvarları arasından koşarak geliyor
 **MEANING** Duvar içinde Neon'u göremezsin, bakış açın duvar çıkışını yakalayamaz
-**COUNTER** Fast Lane duvar sonuna bak — Neon çıkış noktası sabittir. Çıkış sesini duyduğunda pre-aim'in hazır olsun
+**COUNTER** Fast Lane duvar sonuna bak — Neon çıkış noktası sabittir. Çıkış sesini duyduğunda açı tutma'in hazır olsun
 **WHY** Neon duvar içinde hızlıdır ama duvardan çıkınca hızı kesilir. Çıkış noktasını bilirsen çıkışta vurursun.
 
 ---
@@ -53,7 +53,7 @@ Karşı takımda Neon varsa dar haritada Neon'un elinde; geniş haritada senin e
 
 **IF** Neon Fast Lane ile iki kişilik koridor kurdu, site girişi yapıyorlar
 **MEANING** İki duvar arasındaki koridoru göremezsin — giriş hattı smoke içinde
-**COUNTER** Fast Lane çıkışını Cloudburst ile kapat ya da Updraft ile duman üstüne çık — çıkış noktası sabittir, pre-aim çalışır
+**COUNTER** Fast Lane çıkışını Cloudburst ile kapat ya da Updraft ile duman üstüne çık — çıkış noktası sabittir, açı tutma çalışır
 **WHY** Fast Lane yerde görüşü keser ama üstten açık. Updraft ile üste çıkarsın, duvar biter bitmez çıkışta hazırsın.
 
 ---
@@ -67,7 +67,7 @@ Karşı takımda Neon varsa dar haritada Neon'un elinde; geniş haritada senin e
 
 **IF** Neon Fast Lane içinden iki kişi site'e giriyor
 **MEANING** Giriş hattı tek koridor — çıkış noktası bilinir
-**COUNTER** Çıkış noktasına Cloudburst at, üstüne pre-aim yap. Fast Lane biter bitmez çıkışı gör
+**COUNTER** Çıkış noktasına Cloudburst at, üstüne açı tut. Fast Lane biter bitmez çıkışı gör
 **WHY** Fast Lane sabit çizgide gider. Neon çıkışta yavaşlar — o an senin anın.
 
 ## 4. Utility Farkı
@@ -109,7 +109,7 @@ Neon utility çeşitliliği Jett'ten fazla. Jett dash ve sniper çıkışı Neon
 
 ## 6. Dönüm Noktaları
 
-1. **Fast Lane kuruldu.** Neon iki oyuncuyla Fast Lane koridor açarsa Jett'in açısı kapanır. Updraft ile üstüne çık ya da çıkışa pre-aim yap.
+1. **Fast Lane kuruldu.** Neon iki oyuncuyla Fast Lane koridor açarsa Jett'in açısı kapanır. Updraft ile üstüne çık ya da çıkışa açı tut.
 
 2. **Dash bitti.** Dash bitmişken Neon sprint ile geliyorsa trade hattı kısa — Jett savunmasız. Açıkta durma.
 

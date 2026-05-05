@@ -40,7 +40,7 @@ Back Alley retake ölüm bölgesi. Rotate yaparken dar koridoru utility'siz geç
 
 **IF:** A Main'de flash veya smoke atmadan düz yürüyüp ölüyorsun.
 
-**MEANING:** Koridor sana sıfır cover veriyor. Savunucu seni girişten itibaren görüyor, sen ona yaklaşana kadar pre-aim hazır. Utility atmadan girersen bedava ölüm.
+**MEANING:** Koridor sana sıfır cover veriyor. Savunucu seni girişten itibaren görüyor, sen ona yaklaşana kadar açı tutma hazır. Utility atmadan girersen bedava ölüm.
 
 **COUNTER:** Önce flash at, orta noktayı smoke'la, sonra gir. Flash açıyı bozar, smoke görüş hattını keser. Utility olmadan A Main'e girme — girmek istiyorsan util önünde olsun.
 
@@ -76,9 +76,9 @@ Back Alley retake ölüm bölgesi. Rotate yaparken dar koridoru utility'siz geç
 
 **IF:** Savunucu olarak A Catwalk'ta aynı yükseltilmiş açıyı art arda üç veya daha fazla round tutuyorsun.
 
-**MEANING:** Açı güçlü ama düşman artık pre-aim ediyor. Açının gücüne güveniyorsun, ama sürpriz değeri çoktan bitti.
+**MEANING:** Açı güçlü ama düşman artık açıyı tutuyor. Açının gücüne güveniyorsun, ama sürpriz değeri çoktan bitti.
 
-**COUNTER:** 2-3 round'da bir catwalk ile site seviyesi arasında geç. Catwalk'tan kill aldıktan sonra bir sonraki round aşağı in — düşman yukarıyı pre-aim eder, seni ıskalar. Catwalk sürpriz pozisyonu olsun, sabit durak değil.
+**COUNTER:** 2-3 round'da bir catwalk ile site seviyesi arasında geç. Catwalk'tan kill aldıktan sonra bir sonraki round aşağı in — düşman yukarıyı açı tutar, seni ıskalar. Catwalk sürpriz pozisyonu olsun, sabit durak değil.
 
 **WHY:** Aynı açıyı tutmaya devam edersen düşman sadece oraya bakarak geçer. Pozisyon değiştirince her round iki açıyı kontrol etmek zorunda kalır — bu tereddüt yaratır, girişini yavaşlatır.
 
@@ -191,11 +191,11 @@ B anchor B Cubby'de veya site içinde duruyor. B'nin darlığı sayesinde tek an
 
 #### B Site Savunma Pattern'leri
 
-**IF:** B site anchor her round B Cubby'de duruyor ve saldırganlar pre-aim edip onu çıkarıyor.
+**IF:** B site anchor her round B Cubby'de duruyor ve saldırganlar açı tutma edip onu çıkarıyor.
 
 **MEANING:** Pozisyon tahmin edilebilir oldu. Cubby güçlü bir açı ama her round aynı yerde duruyorsan saldırgana bedava bilgi veriyorsun.
 
-**COUNTER:** Cubby ile B CT arasında round round değiştir. Cubby'den kill aldıktan sonra ertesi round B CT'den tut — saldırgan Cubby'yi pre-aim edecek, seni bulamayacak.
+**COUNTER:** Cubby ile B CT arasında round round değiştir. Cubby'den kill aldıktan sonra ertesi round B CT'den tut — saldırgan Cubby'yi açı tutacak, seni bulamayacak.
 
 **WHY:** Off-angle gücü sürpriz değerine bağlı. Aynı yeri tekrar tekrar kullanırsan sürpriz biter, avantaj dezavantaja döner.
 
@@ -255,7 +255,7 @@ Sadece A CT'den retake yaparsan saldırgan tüm post-plant pozisyonlarını o y�
 
 **COUNTER:** Spike'ta yeterince süre varsa retake'e başlamadan önce en az bir bilgi utility'si ve bir flash kullan. Drone ya da Haunt'la pozisyon öğren, flash'le gir. Süre azsa hızlı flash + swing yap ama yine de kuru girme.
 
-**WHY:** Bilgi utility'si düşmanın nerede durduğunu gösterir, doğru açıyı pre-aim edersin. Flash düşmanın reaksiyon avantajını yok eder. İkisi birden retake'in başarı oranını katlıyor.
+**WHY:** Bilgi utility'si düşmanın nerede durduğunu gösterir, doğru açıyı açı tutma edersin. Flash düşmanın reaksiyon avantajını yok eder. İkisi birden retake'in başarı oranını katlıyor.
 
 ### B Site Retake
 

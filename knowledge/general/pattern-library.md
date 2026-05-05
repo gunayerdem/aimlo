@@ -111,7 +111,7 @@ Rakibin ne yaptığını değil, **niye** yaptığını oku. Niye'yi bilirsen bi
 
 ### Pattern: Aynı Op Oyuncusu Aynı Spot
 **IF:** Rakip Op oyuncusu 2 round aynı açıyı tutuyor
-**MEANING:** Konfor spotu, o açıya pre-aim ediyor
+**MEANING:** Konfor spotu, o açıya açıyı tutuyor
 **COUNTER:** O açıya flash + utility at. Pre-aim eden oyuncu flash'ı kafaya alınca değer kaybeder. Bir sonraki round açıyı tamamen smoke ile öldür.
 **WHY:** Op'un değeri doğruluk + pozisyon. Pozisyon okunduğunda Op sadece pahalı bir silahtır.
 

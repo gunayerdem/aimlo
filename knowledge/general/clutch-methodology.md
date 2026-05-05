@@ -80,7 +80,7 @@ WHY böylece 1v2'yi iki ayrı 1v1'e bölersin, bu çok daha kazanılır
 ### Yapma Bunları
 
 - **İkisine birden peek atma.** Birine bakıyorsun, diğeri cross açıdan seni görüyor. Anında ölürsün.
-- **İlk kill sonrası yerinde durma.** Diğer düşman o pozisyonu pre-aim eder, refrag'ı alır.
+- **İlk kill sonrası yerinde durma.** Diğer düşman o pozisyonu açı tutar, refrag'ı alır.
 - **Tüm utility'yi ilk fight'ta bitirme.** İkinci fight için de bir şeyler lazım — bütçele.
 
 ## 1v3+ Metodolojisi
