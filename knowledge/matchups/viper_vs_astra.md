@@ -13,7 +13,7 @@ Viper alan kapatır. Wall haritayı ikiye böler, cloud noktayı kapatır, Snake
 
 Temel fark şu: Viper wall bir kere atılır, orada durur. Astra star'ları round içi farklı işleve çevrilir — esnektir ama damage taşımaz. Viper tahmin edilebilir ama her utility'si hasar verir. Astra esnek ama silahsız.
 
-Viper fuel'ini ikiye böl — wall için ayrı, cloud için ayrı kullan. Astra star'larını tek siteye yığ. Kim bunu yaparsa o site kapanır, diğeri açık kalır.
+Viper fuel'ini ikiye böl — wall için ayrı, cloud için ayrı kullan. Astra star'larını tek siteye yüklen. Kim bunu yaparsa o site kapanır, diğeri açık kalır.
 
 ## 2. Kim Avantajlı?
 

@@ -25,7 +25,7 @@ COUNTER: Plaza'ya çıkmadan flash veya smoke at. Fade veya Sova varsa — Haunt
 WHY: Op'un açısını kırdığın anda rifler olarak yakın mesafe avantajın oluşur. Op oyuncusu scope'tayken yavaş hareket eder — flash sonrası swing'de scope'tan çıkış süresi seni korur.
 
 **B Long Açık Alan**
-IF: B Long'da kontrolsuz wide swing yapıyorsun, aynı açıdan tekrar tekrar ölüyorsun.
+IF: B Long'da kontrolsuz geniş açıyla swing yapıyorsun, aynı açıdan tekrar tekrar ölüyorsun.
 MEANING: B Long Pearl'ün en uzun sightline'larından biri. Wide swing yaptığında vücudunun tamamını savunucunun önceden nişan aldığı noktaya sunuyorsun.
 COUNTER: Smoke ile sightline'ı kes. Jiggle peek ile bilgi al — tam commit etme. Takım arkadaşın B Hall veya B Link'ten baskı kurarken sen trade pozisyonu al. B Long'u solo contest etme.
 WHY: Uzun sightline'da mesafe arttıkça senin hareketin görsel olarak yavaşlar, hedef küçülürsün. Smoke bu avantajı ortadan kaldırır. Crossfire ise savunucuyu iki açı arasında böler — ikisine aynı anda nişan alamaz.
@@ -125,7 +125,7 @@ Mid Plaza'yı yok sayıp her round A'ya 5 kişi doluyorsun — bir molly ya da g
 
 - Mid'e bir adam gönder, bilgi al, sonra gir.
 - A Art'ı almadan A push yapma.
-- B Long'da kontrolsüz wide swing atma; jiggle peek ile bak, takımla beraber gir.
+- B Long'da kontrolsüz geniş açıyla swing atma; jiggle peek ile bak, takımla beraber gir.
 
 **Gold-Platinum**
 Utility kullanıyorsun ama sıra yanlış. Smoke atıyorsun, flash atmıyorsun — savunucu smoke'tan çıkınca seni hazırsız yakalıyor. Mid'e yalnız giriyorsun ve bedava ölüyorsun.

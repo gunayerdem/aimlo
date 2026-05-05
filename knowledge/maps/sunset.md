@@ -24,7 +24,7 @@ Sunset oynamayı öğrenmek istiyorsan önce Market oynamayı öğren. Orası ç
 
 Market'te bir karar ver ve geç. Bekleyerek burada bir şey kazanmıyorsun.
 
-**Mid Courtyard**: Courtyard açık alan — wide swing yaparsan karşıda seni tutan rakibe kolay hedef olursun. Courtyard'a çıkmadan önce Mid Top'tan ya da Market'ten bilgi topla. Bilgi yoksa swing yok.
+**Mid Courtyard**: Courtyard açık alan — geniş açıyla swing yaparsan karşıda seni tutan rakibe kolay hedef olursun. Courtyard'a çıkmadan önce Mid Top'tan ya da Market'ten bilgi topla. Bilgi yoksa swing yok.
 
 **B Main Giriş**: B Main dar ve düz — savunucu sonu tutuyor, senin hareket alanın yok. Takım olarak aynı hatta yığılıyorsunuz ve ilk oyuncu düştüğünde aynı açıdan peek yapıyorsunuz. İlk düşman düştüğünde ikinci oyuncu aynı açıdan girmesin — Market tarafından split yap.
 
@@ -89,7 +89,7 @@ WHY: Kısa mesafede pahalı silahın avantajı küçülür. Sunset'te Phantom il
 **Pattern 1: Market Kaybı ve Çöküş**
 IF: Market erken kaybediliyor ve ardından her iki site basılıyor.
 MEANING: Market, savunmanın omurgası. Market gidince A ile B arasındaki bağ kopuyor, rotasyon uzuyor, rakip istediği split'i çekiyor. Market kaybı = harita kaybı.
-COUNTER: Market'e en az bir oyuncu ve util ver. Cypher trip + kamera ya da Killjoy turret + alarmbot ile orayı bilgi zonuna çevir. Market'te biri düşerse hemen rotate yap — ama Market'i tamamen bırakma. Util'i bırak, bilgi gelmeye devam etsin.
+COUNTER: Market'e en az bir oyuncu ve util ver. Cypher tuzak + kamera ya da Killjoy turret + alarmbot ile orayı bilgi zonuna çevir. Market'te biri düşerse hemen rotate yap — ama Market'i tamamen bırakma. Util'i bırak, bilgi gelmeye devam etsin.
 WHY: Market her iki site'a açılıyor. Market'i kaybettiğinde iki ayrı adada savunma yapıyorsun — birbirine destek veremezsin.
 
 **Pattern 2: Heaven'da Tekrarlayan Aynı Açı**
@@ -239,7 +239,7 @@ Judge (1850 kredi) ve Bucky (850 kredi) bu haritada gerçek tehdit. Market köş
 ## 11. Anti-Strat
 
 **Rakip her round Market push yapıyorsa:**
-Market'te double stack kur. Cypher trip + Killjoy alarmbot ile erken bilgi al, iki oyuncu crossfire'da beklesin. Rakip Market'e girdiğinde utility + crossfire ile multi-kill al. İki round Market'i savunduktan sonra rakip oradan vazgeçer — o noktada sen agresif Market oyununa geç.
+Market'te double stack kur. Cypher tuzak + Killjoy alarmbot ile erken bilgi al, iki oyuncu crossfire'da beklesin. Rakip Market'e girdiğinde utility + crossfire ile multi-kill al. İki round Market'i savunduktan sonra rakip oradan vazgeçer — o noktada sen agresif Market oyununa geç.
 
 **Rakip A Elbow agresif oynuyorsa:**
 Elbow'a smoke at, B'ye rotate et. Rakibin utility'si boşa gider. Ya da Elbow'u smoke'la, A site'ta retake pozisyonu al — smoke'tan geçen oyuncu dezavantajlı düelloya girer. Elbow agresifliğine en iyi cevap şu: Elbow'u ignore et, diğer tarafta oyna.

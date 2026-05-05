@@ -67,7 +67,7 @@ Deadlock seni durdurmak için tek bir şeye güveniyor: satchelini havada kesmek
 ---
 
 **IF** Nade + paintshell kombosu Deadlock araç yığınına aynı anda atıldı
-**MEANING** Çift hasar barrier, sensor, trip'i tek seferde siler — Deadlock o roundda araçsız kalır
+**MEANING** Çift hasar barrier, sensor, tuzağı tek seferde siler — Deadlock o roundda araçsız kalır
 **COUNTER** Deadlock oynuyorsan araçlarını tek noktada toplama. Site içine dağıt — iki farklı noktayı silmek için Raze'in iki ayrı atış hattına ihtiyacı var
 **WHY** Raze'in çift hasarı tek nokta için yeterli, iki nokta için yetersiz. Dağılım Deadlock'un araç ömrünü uzatır.
 

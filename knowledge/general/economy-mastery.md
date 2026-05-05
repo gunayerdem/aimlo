@@ -241,7 +241,7 @@ NEDEN: save = sonraki round için maksimum kredi, bu round zaten kayıp sayılı
 
 DURUM: Op'çusun ve almak istiyorsun.
 NE ANLAMA GELİR: 4,700 kredi — Vandal'dan 1,800 fazla, ölüp düşersen takıma 1,800 açık.
-NE YAPARSIN: takım ortalaması 5,000+ ise VE arkanı toplayan birisi varsa al (Chamber TP, Jett dash, Cypher trip).
+NE YAPARSIN: takım ortalaması 5,000+ ise VE arkanı toplayan birisi varsa al (Chamber TP, Jett dash, Cypher tuzak).
 NEDEN: Op'çu öldü, silah toplandı = bir sonraki round 1,800 açıkla giriyorsun. Yarı boyu birikir, ekonomiyi çökertir.
 
 ---

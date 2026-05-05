@@ -53,7 +53,7 @@ WHY: Erken ya da yanlış açılı duvar düşmana izolasyondan çıkma fırsat�
 
 ## 6. Eşleşme Notları
 - **Zorlandığın ajanlar:** Raze (patlayıcı utility kalkanı yok sayar — ama kalkan HER hasar kaynağını emer, patlayıcı dahil, yani tam menzilden değil orta mesafede dur), Breach (stun ve flash düello kurulumunu bozar, duvar zamanlamasını karıştırır), KAY/O (bastırma Double Tap'i kapatır — bastırma sona erince gir).
-- **Baskıladığın ajanlar:** Statik açı tutan savunucular — kaçamayacakları 1v1'e zorla. Killjoy (Kill Contract onu turret kurulumundan çıkarır), Cypher (duvar trip'leri atlar), Chamber (Trademark olmadan doğrudan nişan düellosuna zorla).
+- **Baskıladığın ajanlar:** Statik açı tutan savunucular — kaçamayacakları 1v1'e zorla. Killjoy (Kill Contract onu turret kurulumundan çıkarır), Cypher (duvar tuzakları atlar), Chamber (Trademark olmadan doğrudan nişan düellosuna zorla).
 - **Adaptasyon:** Raze'e karşı orta mesafede dur, patlayıcının tam menzilinden çık. KAY/O bastırması sona erince gir. Breach'e karşı sıkışık koridorlardan uzak dur — kit orada çalışmaz.
 
 ## 7. Oyuncuya Ne Söylenmeli

@@ -116,16 +116,16 @@ Sentinel'ler her takımın savunma omurgası. Site anchor'lar, push'ları gecikt
 - **Bind**: S-tier. Hookah Trapwire'ları, Short Trapwire'ları, B Long Spycam. Her koridor tuzak fırsatı. Küçük haritada Neural Theft maksimum etki sağlar.
 - **Ascent**: S-tier. A main Trapwire'ları, B main Trapwire'ları, Mid Spycam. Haritanın yapısı Cypher'ın kit'i icin ideal.
 - **Split**: A-tier. A Ramps Trapwire'ları, B main Trapwire'ları. Cage + Wire komboları icin dar koridorlar.
-- **Haven**: A-tier. Üc site inkar edilecek daha fazla alan demek ama Cypher iki site'ı trip + üçüncüde cam ile kaplayabilir.
+- **Haven**: A-tier. Üc site inkar edilecek daha fazla alan demek ama Cypher iki site'ı tuzak + üçüncüde cam ile kaplayabilir.
 - **Sunset**: A-tier. Mid koridor Trapwire'ları, B main Spycam. Dar geometri.
-- **Pearl**: B-tier. Uzun koridorlar düşmanların trip'leri uzaktan vurmasını sağlar.
+- **Pearl**: B-tier. Uzun koridorlar düşmanların tuzakları uzaktan vurmasını sağlar.
 - **Breeze**: C-tier. Cok acık. Trapwire'lar uzaktan görünür, Spycam snipe edilir.
-- **Icebox**: B-tier. A site Trapwire'lar calışır, B Kitchen Spycam. Dikey oyun trip yerleşimini sınırlar.
+- **Icebox**: B-tier. A site Trapwire'lar calışır, B Kitchen Spycam. Dikey oyun tuzak yerleşimini sınırlar.
 
 ### Sık Yapılan Hatalar (IF/MEANING/COUNTER/WHY)
 
 1. **IF** Her round aynı setup'ı kullanıyorsan
-   **MEANING** Düşmanlar trip'lerini drone eder ve nerede olduğunu bilir. Rotate yap
+   **MEANING** Düşmanlar tuzaklarını drone eder ve nerede olduğunu bilir. Rotate yap
    **COUNTER** Site başına 3-4 farklı setup arasında döndür
    **WHY** Aynı setup = düşman bedava temizler = sıfır bilgi ve sıfır gecikme
 
@@ -135,9 +135,9 @@ Sentinel'ler her takımın savunma omurgası. Site anchor'lar, push'ları gecikt
    **WHY** Bariz kamera = anında yok edilme = bedava utility kaybı
 
 3. **IF** Trip'leri geri almıyorsan
-   **MEANING** Trapwire'lar geri alınıp mid-round yeniden konumlandırılabilir. Rotate edersen trip'lerini yanında götür
-   **COUNTER** Rotate ederken trip'leri geri al ve yeni site'a yeniden yerleştir
-   **WHY** Bırakılan trip = eski site'ta işe yaramayan utility = yeni site'ta setup yok
+   **MEANING** Trapwire'lar geri alınıp mid-round yeniden konumlandırılabilir. Rotate edersen tuzaklarını yanında götür
+   **COUNTER** Rotate ederken tuzakları geri al ve yeni site'a yeniden yerleştir
+   **WHY** Bırakılan tuzak = eski site'ta işe yaramayan utility = yeni site'ta setup yok
 
 4. **IF** Neural Theft'i ulaşamayacağın bedenlerde kullanmaya calışıyorsan
    **MEANING** Ult beden yakınlığı gerektirir. Düşman topraklarındaki bedene ulaşmaya calışırken ölme
@@ -526,7 +526,7 @@ Sentinel'ler her takımın savunma omurgası. Site anchor'lar, push'ları gecikt
 ### Iron-Silver
 - **Öncelik**: Her round utility yerleştir. Sentinel olarak setup'ın senin değerin -- utility yerleştirmeden round başlatma.
 - **Basit kural**: "Savunduğun site'a tuzaklarını koy ve ses ipuçlarını dinle." Bu kadar.
-- **Utility kullanımı**: Basit tut. Killjoy'da taret + alarmbot + nanoswarm aynı boğaza. Cypher'da trip + cage aynı koridora. Karmaşık rotasyon setup'ları bekleme.
+- **Utility kullanımı**: Basit tut. Killjoy'da taret + alarmbot + nanoswarm aynı boğaza. Cypher'da tuzak + cage aynı koridora. Karmaşık rotasyon setup'ları bekleme.
 - **En büyük hata**: Utility yerleştirmeden site tutmaya calışmak. Sentinel utility'siz sentinel = hiçbir şey.
 
 ### Gold-Platinum
@@ -572,7 +572,7 @@ Sentinel'ler her takımın savunma omurgası. Site anchor'lar, push'ları gecikt
 - Düşman tuzaklarını başarıyla temizledikten sonra setup'ı değiştir. Calıştıysa tekrarlayacaklar.
 
 ### Atakta Sentinel
-- Atakta sentinel'ler birincil olarak flank inkarı sağlar. Flank'leri engellemek icin takımının arkasına trip veya turret yerleştir.
+- Atakta sentinel'ler birincil olarak flank inkarı sağlar. Flank'leri engellemek icin takımının arkasına tuzak veya turret yerleştir.
 - Post-plant sentinel'lerin atakta parladığı yer. Spike üstüne Nanoswarm, Slow Orb, Trapwire -- defuse inkar et.
 - Güvenli dikim icin Sage duvarı, post-plant bilgisi icin Cypher kamerası, retake inkarı icin Killjoy Lockdown.
 - Sentinel olarak entry yapma. Post-plant değeri icin hayatta kal. Atakta ölü sentinel = minimum utility.

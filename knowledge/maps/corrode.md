@@ -587,7 +587,7 @@ Anti-eco round'unu hafife alma. Corrode'un dar yapısı eco yapan takıma Classi
 
 **MEANING:** Ya alışkanlık ya da değiştirecekler. Her iki durumda da sende bilgi var, onda yok.
 
-**COUNTER:** Devam edeceklerini düşünüyorsan, molly + tripwire + turret yığ, A Main'i geçilemez yap. Değiştireceklerini düşünüyorsan, normal dağıl ama diğer koridora ekstra util hazırla. Takıma söyle: "Son 3 round A Main'den geldi, bu round şu yapıyı kuralım."
+**COUNTER:** Devam edeceklerini düşünüyorsan, molly + tripwire + turret yüklen, A Main'i geçilemez yap. Değiştireceklerini düşünüyorsan, normal dağıl ama diğer koridora ekstra util hazırla. Takıma söyle: "Son 3 round A Main'den geldi, bu round şu yapıyı kuralım."
 
 **WHY:** Corrode'da koridor sayısı az, düşmanın seçeneği kısıtlı. Pattern'ler burada başka haritalara göre çok daha hızlı ortaya çıkıyor — bunu oku.
 

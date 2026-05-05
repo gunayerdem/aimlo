@@ -68,7 +68,7 @@ Duellist'ler takımın alan acan oyuncuları. Kit'leri ilk dövüşü almak, ala
 
 ### Eşleşme İpuçları
 - **vs. Chamber**: Chamber Op oyununu eşleyebilir ve Rendezvous kaçışı var. Onu düelloda değil, pozisyonda yenmelisin. Ulaşamayacağı Updraft açıları kullan.
-- **vs. Cypher**: Trapwire'ları flank'lerini ele verir. Kamerasını Cloudburst ile engelle ve gerekirse trip'lerden dash ile geç.
+- **vs. Cypher**: Trapwire'ları flank'lerini ele verir. Kamerasını Cloudburst ile engelle ve gerekirse tuzaklardan dash ile geç.
 - **vs. Sova**: Recon dart seni off-angle'larda bulur. Dart'ı vurmaya veya tarama sonrası hemen dash yapmaya hazır ol.
 - **vs. Raze**: Yakın dövüşte Raze'in Blast Pack mobilitesi dash'ini eşleyebilir. Dar alanlarda ego yapma.
 

@@ -20,7 +20,7 @@ Lurker saldırı takımından kopuk, savunma arkasını tehdit eden solo oyuncu.
 - Savunma tarafında kimse flank watch rolünü üstlenmediyse — lurker hattını kimse tutmuyor
 
 **Flank watch lehine:**
-- Savunma sentinel tuzak kurdu flank hattına (Cypher trip, Killjoy alarmbot) — lurker sesi + tuzak çifti
+- Savunma sentinel tuzak kurdu flank hattına (Cypher tuzak, Killjoy alarmbot) — lurker sesi + tuzak çifti
 - Lurker yakın mesafe duelist oynuyorsa (Raze, Neon) — ayak sesi yüksek, gizlenemez
 - Split veya Bind gibi dar haritadasın — lurker ses gizleyemiyor
 - Flank watch rolü round başında kime ait belli — beklenmedik değil

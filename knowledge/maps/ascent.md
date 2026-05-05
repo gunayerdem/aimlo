@@ -327,7 +327,7 @@ Anti-eco'yu hafife alma. Sheriff her zırhı deler, Classic sağ tık yakında s
 **MEANING:** Ya aynı şeyi tekrar yapacaklar ya da bu round değiştirecekler. Her iki durumda da sen biliyorsun, onlar bilmiyor — bu avantaj.
 
 **COUNTER:**
-- Devam edeceklerini düşünüyorsan o siteya 3 kişi yığ, crossfire kur.
+- Devam edeceklerini düşünüyorsan o siteya 3 kişi yüklen, crossfire kur.
 - Değiştireceklerini düşünüyorsan normal dağıl ama önceki roundlarda boş bıraktıkları siteye ekstra util hazırla.
 - Her iki durumda da takıma "son 3 round A geldi, bu round X yapalım" de.
 

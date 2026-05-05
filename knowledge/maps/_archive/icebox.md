@@ -125,7 +125,7 @@ WHY: Off-angle'ın değeri sürpriz faktöründen gelir. Rakip Snowman'ı bildi�
 ### B Site Post-Plant
 - B Orange + B Green crossfire kur — retake yolunu iki açıdan kes
 - Kitchen'ı gözle — retake Kitchen'dan gelir, başka yol yok
-- Viper snake bite + Killjoy nano swarm B Default'a yığ — defuse etmesi çok zorlaşır
+- Viper snake bite + Killjoy nano swarm B Default'a yüklen — defuse etmesi çok zorlaşır
 
 ### Genel Post-Plant
 - Dikey crossfire kur — biri site seviyesinde, biri yüksekte dursun. Icebox'ta bu kombinasyon retake'i mahveder

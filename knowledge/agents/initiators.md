@@ -309,7 +309,7 @@ Initiator'lar bilgi toplar ve düşmanları yerinden ederek site baskınlarını
 - **ZERO/POINT + takım execute**: Site'ı baskıla, tüm savunma utility'sini kaldır (Killjoy turret, Cypher trap'ler, Sage duvarı), sonra push yap.
 - **NULL/CMD entry**: Ult ac ve site'a koş. Baskılama aurası tüm düşman yeteneklerini devre dışı bırakır. Düşmanlar utility'siz kalırken takımın takip eder.
 - **KAY/O + Raze**: KAY/O flash, Raze satchel ile girsin. KAY/O ZERO/POINT düşman kacış yeteneklerini kaldırır (Jett dash, Chamber TP).
-- **FRAG/MENT + Breach Aftershock**: Bir köşeye hasar yığ. Biri üstten vurur, diğeri duvardan.
+- **FRAG/MENT + Breach Aftershock**: Bir köşeye hasar yüklen. Biri üstten vurur, diğeri duvardan.
 
 ### Pro Oyuncu Stilleri
 - KAY/O VCT 2024-2025'te temel pick haline geldi. Baskılaması utility-ağır meta'ları counter'lar.

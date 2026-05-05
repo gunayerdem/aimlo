@@ -125,7 +125,7 @@ Mid kontrol her şey. Sova dart'ı mid ve siteleri tarar. KAY/O bıçağı savun
 
 **Bind**
 Raze, Skye, Brimstone, Fade, Cypher
-Mid yok — rotasyonlar teleporterdan geçiyor. Cypher trip'leri teleporter flank'ı yakalarken Raze satchel girişi hızlandırıyor.
+Mid yok — rotasyonlar teleporterdan geçiyor. Cypher tuzakları teleporter flank'ı yakalarken Raze satchel girişi hızlandırıyor.
 
 **Haven**
 Jett, Breach, Omen, Killjoy, Sova veya Fade
