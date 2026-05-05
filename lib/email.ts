@@ -1,39 +1,36 @@
-import nodemailer, { type Transporter } from "nodemailer";
+import { Resend } from "resend";
 
 /**
- * AIMLO transactional email — branded OTP delivery via Gmail Workspace SMTP.
- * Set these in env (Vercel + .env.local):
- *   SMTP_HOST=smtp.gmail.com
- *   SMTP_PORT=465
- *   SMTP_USER=support@aimlo.gg
- *   SMTP_PASS=<gmail app password — NOT your Google account password>
- *   SMTP_FROM="AIMLO <support@aimlo.gg>"
+ * Transactional email via Resend (HTTP API).
  *
- * Get the App Password at https://myaccount.google.com/apppasswords
- * (2FA must be enabled on the Workspace account first).
+ * Why not Gmail SMTP?
+ *   Vercel serverless functions can hang on Gmail's port-465 TLS handshake;
+ *   the function times out before the redirect runs and the browser sees
+ *   a half-rendered response. Resend uses plain HTTPS, so it's always
+ *   <500ms and never blocks on TCP.
+ *
+ * Setup:
+ *   1) Sign up at https://resend.com (free tier: 100/day, 3000/month).
+ *   2) Verify aimlo.gg domain — Resend gives 3 CNAME records (SPF +
+ *      DKIM) to add to Porkbun DNS. SPF coexists with Gmail Workspace.
+ *   3) Create an API key (Production scope) → set RESEND_API_KEY env.
+ *   4) Until the domain is verified, use `onboarding@resend.dev` as the
+ *      sender — Resend will only let you send to your own account email.
  */
 
-const SMTP_HOST = process.env.SMTP_HOST || "smtp.gmail.com";
-const SMTP_PORT = Number(process.env.SMTP_PORT || 465);
-const SMTP_USER = process.env.SMTP_USER;
-const SMTP_PASS = process.env.SMTP_PASS;
-const SMTP_FROM = process.env.SMTP_FROM || "AIMLO <support@aimlo.gg>";
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const EMAIL_FROM = process.env.EMAIL_FROM || "AIMLO <support@aimlo.gg>";
 
-let cachedTransport: Transporter | null = null;
+let cachedClient: Resend | null = null;
 
-function getTransport(): Transporter {
-  if (!SMTP_USER || !SMTP_PASS) {
-    throw new Error("SMTP_USER / SMTP_PASS missing — cannot send mail");
+function getClient(): Resend {
+  if (!RESEND_API_KEY) {
+    throw new Error("RESEND_API_KEY missing — cannot send mail");
   }
-  if (!cachedTransport) {
-    cachedTransport = nodemailer.createTransport({
-      host: SMTP_HOST,
-      port: SMTP_PORT,
-      secure: SMTP_PORT === 465, // 465 = TLS, 587 = STARTTLS
-      auth: { user: SMTP_USER, pass: SMTP_PASS },
-    });
+  if (!cachedClient) {
+    cachedClient = new Resend(RESEND_API_KEY);
   }
-  return cachedTransport;
+  return cachedClient;
 }
 
 export type EmailLang = "tr" | "en";
@@ -43,7 +40,6 @@ export interface OtpEmailParams {
   /** 6-char raw code (no dash). */
   code: string;
   lang?: EmailLang;
-  /** "register" | "login" — slight wording difference. */
   purpose?: "register" | "login";
 }
 
@@ -53,7 +49,7 @@ export async function sendOtpEmail({
   lang = "tr",
   purpose = "register",
 }: OtpEmailParams): Promise<void> {
-  const transport = getTransport();
+  const client = getClient();
   const formatted = `${code.slice(0, 3)}-${code.slice(3)}`;
 
   const subject =
@@ -61,16 +57,28 @@ export async function sendOtpEmail({
       ? `AIMLO doğrulama kodun: ${formatted}`
       : `Your AIMLO verification code: ${formatted}`;
 
-  await transport.sendMail({
-    from: SMTP_FROM,
-    to,
+  const { error } = await client.emails.send({
+    from: EMAIL_FROM,
+    to: [to],
     subject,
     text: textBody(formatted, lang, purpose),
     html: htmlBody(formatted, lang, purpose),
   });
+
+  if (error) {
+    // Resend's SDK returns errors instead of throwing on most cases — surface
+    // them so the caller's catch can show a useful message to the user.
+    throw new Error(
+      `Resend API error: ${error.message ?? JSON.stringify(error)}`,
+    );
+  }
 }
 
-function textBody(formatted: string, lang: EmailLang, purpose: "register" | "login"): string {
+function textBody(
+  formatted: string,
+  lang: EmailLang,
+  purpose: "register" | "login",
+): string {
   if (lang === "tr") {
     const verb = purpose === "register" ? "kayıt" : "giriş";
     return [
@@ -93,7 +101,11 @@ function textBody(formatted: string, lang: EmailLang, purpose: "register" | "log
   ].join("\n");
 }
 
-function htmlBody(formatted: string, lang: EmailLang, purpose: "register" | "login"): string {
+function htmlBody(
+  formatted: string,
+  lang: EmailLang,
+  purpose: "register" | "login",
+): string {
   const t =
     lang === "tr"
       ? {
@@ -104,7 +116,8 @@ function htmlBody(formatted: string, lang: EmailLang, purpose: "register" | "log
               ? "Kayıt işlemini tamamlamak için bu kodu siteye gir."
               : "Giriş yapmak için bu kodu siteye gir.",
           expires: "Kod 10 dakika içinde geçerli.",
-          ignore: "Sen istemediysen bu maili yok say. Hesabında hiçbir şey değişmez.",
+          ignore:
+            "Sen istemediysen bu maili yok say. Hesabında hiçbir şey değişmez.",
           footer: "AIMLO — AI destekli Valorant koçun",
         }
       : {
@@ -115,7 +128,8 @@ function htmlBody(formatted: string, lang: EmailLang, purpose: "register" | "log
               ? "Enter this code on the site to finish registration."
               : "Enter this code on the site to sign in.",
           expires: "Code expires in 10 minutes.",
-          ignore: "Didn't request this? Ignore this email — nothing changes on your account.",
+          ignore:
+            "Didn't request this? Ignore this email — nothing changes on your account.",
           footer: "AIMLO — your AI Valorant coach",
         };
 
