@@ -17,20 +17,27 @@ const nextConfig: NextConfig = {
     //   - 'self'                      → first-party assets
     //   - https://media.valorant-api.com → agent + map splash images
     //   - https://*.supabase.co       → realtime auth/db requests
-    //   - https://api.anthropic.com   → AI proxy (never called from browser, but allowed for safety)
     //   - 'unsafe-inline' for styles  → Tailwind + style props (cannot avoid in Next 16 today)
-    // Note: 'unsafe-eval' / 'unsafe-inline' for script-src is intentionally NOT included.
-    // If Next.js needs nonce-based inline scripts, swap 'self' for 'self' 'nonce-...'.
+    //
+    // Dev mode (Turbopack HMR) injects inline scripts + uses eval() for hot reload.
+    // We relax script-src in dev only — production stays strict.
+    const isDev = process.env.NODE_ENV !== "production";
+    const scriptSrc = isDev
+      ? "script-src 'self' 'unsafe-eval' 'unsafe-inline'"
+      : "script-src 'self'";
+
     const csp = [
       "default-src 'self'",
-      "script-src 'self'",
+      scriptSrc,
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://media.valorant-api.com https://*.supabase.co",
       "font-src 'self' data:",
       // Server-side AI calls don't need browser connect-src; we list only what
       // the browser actually fetches: Supabase (auth/realtime). OpenAI/Anthropic
-      // never called from client. (Was https://api.anthropic.com — stale post-migration.)
-      "connect-src 'self' https://*.supabase.co",
+      // never called from client. In dev, allow ws:// for Turbopack HMR socket.
+      isDev
+        ? "connect-src 'self' ws: wss: https://*.supabase.co"
+        : "connect-src 'self' https://*.supabase.co",
       "frame-ancestors 'none'",
       "base-uri 'self'",
       "form-action 'self'",

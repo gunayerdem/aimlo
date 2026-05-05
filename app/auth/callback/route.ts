@@ -10,10 +10,14 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://aimlo.gg";
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
+  // ?next= lets us hop to /reset-password (password recovery), /verify, etc.
+  // Whitelist to relative paths only — no `//host.tld/foo` open redirects.
+  const rawNext = requestUrl.searchParams.get("next") ?? "";
+  const next = rawNext.startsWith("/") && !rawNext.startsWith("//") ? rawNext : "";
   const origin = SITE_URL;
 
   if (!code) {
-    return NextResponse.redirect(`${origin}?verified=error`);
+    return NextResponse.redirect(`${origin}${next || "/"}?verified=error`);
   }
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -43,8 +47,14 @@ export async function GET(request: NextRequest) {
 
   if (error) {
     console.error("[Aimlo] Auth callback error:", error.message);
-    return NextResponse.redirect(`${origin}?verified=error`);
+    return NextResponse.redirect(`${origin}${next || "/"}?verified=error`);
   }
 
+  // Recovery flow → land on /reset-password without ?verified=true so we
+  // don't show the "verified" toast before the user has actually picked
+  // a new password.
+  if (next) {
+    return NextResponse.redirect(`${origin}${next}`);
+  }
   return NextResponse.redirect(`${origin}?verified=true`);
 }
