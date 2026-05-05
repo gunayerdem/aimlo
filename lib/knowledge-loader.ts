@@ -74,6 +74,8 @@ interface LoadOptions {
   enemyAgents?: string[];
   spikePlanted?: boolean;
   economyType?: string;
+  /** "attack" | "defense" — when set, side-irrelevant sections are dropped. */
+  side?: string;
 }
 
 // ── File loading helpers ──────────────────────────────────
@@ -279,8 +281,56 @@ function stripKbWhitespace(content: string): string {
     .trim();
 }
 
+/**
+ * Side-aware section filter — drops H2 sections that are exclusively about the
+ * OPPOSITE side of the round.
+ *
+ * Strategy (zero info-loss): only filters sections whose H2 header contains
+ * an explicit Turkish side keyword. Sections without a clear keyword (general
+ * principles, callouts, post-plant, agent tier, etc.) are KEPT regardless of
+ * side. This ensures we never drop content that could be relevant.
+ *
+ *   side="attack"  → drop sections with "Savunma" or "Defansif" in the H2 header
+ *   side="defense" → drop sections with "Saldırı" or "Saldırgan" or "Atak" in the H2 header
+ *   side undefined or unknown → no filter (full content)
+ *
+ * Map files vary in structure: some have explicit "## 3. Saldırı Stratejileri"
+ * splits, others use "## Pattern → Meaning" without side split. The filter
+ * is conservative — it only acts on explicit keyword matches, so files without
+ * clean splits get loaded fully (no risk of dropping useful content).
+ */
+function filterSectionsBySide(content: string, side?: string): string {
+  if (!side || (side !== "attack" && side !== "defense")) return content;
+
+  // No \b boundary — \b doesn't handle Turkish 'ı' well in JS regex.
+  // Substring match is safe: these keywords don't appear inside common words.
+  const dropKeywords = side === "attack"
+    ? /(savunma|defansif|defensif|\bdefense\b)/i
+    : /(saldırı|saldırgan|\batak\b|\battack\b|offens)/i;
+
+  // Split on H2 boundaries while preserving the headers.
+  // Pattern: capture from "## " at line start to next "## " or end-of-string.
+  const sections = content.split(/(?=^## )/gm);
+  const kept: string[] = [];
+  for (const section of sections) {
+    const headerMatch = section.match(/^## (.+)$/m);
+    if (!headerMatch) {
+      // No H2 — pre-content (intro), always keep.
+      kept.push(section);
+      continue;
+    }
+    const header = headerMatch[1];
+    if (dropKeywords.test(header)) {
+      // Drop this section.
+      continue;
+    }
+    kept.push(section);
+  }
+  return kept.join("");
+}
+
 export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeResult {
-  const { map, agent, rank, enemyAgents, spikePlanted, economyType } = options;
+  const { map, agent, rank, enemyAgents, spikePlanted, economyType, side } = options;
   const files: string[] = [];
 
   // ── Block 1: Agent KB (most stable across matches — main agent rarely changes) ──
@@ -290,7 +340,9 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
     if (agentFile) {
       const content = loadFile(agentFile);
       if (content) {
-        agentBlock = `[AGENT BİLGİSİ — ${agent}]\n${stripKbWhitespace(content)}`;
+        // Side-filter agent file too: agents have "Saldırı" / "Savunma" usage sections.
+        const filtered = filterSectionsBySide(content, side);
+        agentBlock = `[AGENT BİLGİSİ — ${agent}]\n${stripKbWhitespace(filtered)}`;
         files.push(agentFile);
       }
     }
@@ -303,7 +355,8 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
     const mapPath = `maps/${mapSlug}.md`;
     const content = loadFile(mapPath);
     if (content) {
-      mapBlock = `[HARİTA BİLGİSİ — ${map}]\n${stripKbWhitespace(content)}`;
+      const filtered = filterSectionsBySide(content, side);
+      mapBlock = `[HARİTA BİLGİSİ — ${map}]\n${stripKbWhitespace(filtered)}`;
       files.push(mapPath);
     }
   }

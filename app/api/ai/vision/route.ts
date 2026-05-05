@@ -118,8 +118,14 @@ type RoundEvidenceEntry = {
 const VALID_IMAGE_FORMATS = ["image/png", "image/jpeg", "image/webp", "image/gif"] as const;
 type ImageFormat = typeof VALID_IMAGE_FORMATS[number];
 
-const DEFAULT_MAX_TOKENS = 1200;
-const MAX_TOKENS_CAP = 1500; // Desktop sends 1200 — Sonnet 4.6 needs headroom to finish JSON without max_tokens truncation
+// Real avg output for the 4-field schema (deathAnalysis 2-3 sentences,
+// enemyAnalysis 3 short items, nextRoundSuggestion 1-2 sentences,
+// coachInsight 1-2 sentences) is ~400 tokens. Cap at 700 gives 75% headroom
+// for outliers (long deaths, heavy patternContext) without enabling runaway
+// token bills. Setting a tight cap is pure cost protection — model already
+// stops at JSON close, max_tokens is just the safety ceiling.
+const DEFAULT_MAX_TOKENS = 700;
+const MAX_TOKENS_CAP = 900;
 
 type VisionRequest = {
   image: string; // base64-encoded image
@@ -373,6 +379,7 @@ export async function POST(request: NextRequest) {
 
     const reqSpikePlanted = typeof (body as VisionRequest).spikePlanted === "boolean" ? (body as VisionRequest).spikePlanted : undefined;
     const reqEconomyType = typeof (body as VisionRequest).economyType === "string" ? (body as VisionRequest).economyType : undefined;
+    const reqSide = typeof (body as VisionRequest).side === "string" ? (body as VisionRequest).side : undefined;
 
     const kb = loadVisionKnowledge({
       map: reqMap,
@@ -381,6 +388,9 @@ export async function POST(request: NextRequest) {
       enemyAgents: reqEnemyComp,
       spikePlanted: reqSpikePlanted,
       economyType: reqEconomyType,
+      // Side-aware filter: drops only explicit opposite-side strategy sections.
+      // Conservative — keeps all general/callout/agent-tier/anti-strat sections.
+      side: reqSide,
     });
 
     if (kb.files.length > 0) {
@@ -453,97 +463,81 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Build round context from client-provided data — structured OCR/pixel-truth blocks.
-    // Each block only renders if at least one field is non-empty (no noise lines).
+    // Build round context as compact JSON. Replaces previous verbose Turkish text
+    // blocks with `═══` borders. Two wins:
+    //   1. ~250 token saving per call (uncached, so direct $/call savings)
+    //   2. Future-compatible with GPT-5 mini (text and structured both parse JSON cleanly)
+    // All field names + values preserved. Only fields that are present (non-empty/non-null)
+    // are included — no noise. Keys in Turkish so the model's existing instructions still
+    // line up ("killerInfo", "deathLocation", etc. are referenced by name in SYSTEM_PROMPT).
     const reqBody = body as VisionRequest;
+    const ctx: Record<string, unknown> = {};
 
-    // Block 1: Round durumu
-    const roundBlockLines: string[] = [];
-    if (typeof reqBody.round === "number") roundBlockLines.push(`- Round: ${reqBody.round}`);
-    if (typeof reqBody.score === "string") roundBlockLines.push(`- Skor: ${reqBody.score}`);
-    if (typeof reqBody.result === "string") roundBlockLines.push(`- Sonuç: ${reqBody.result.toUpperCase()}`);
-    if (typeof reqMap === "string") roundBlockLines.push(`- Map: ${reqMap}`);
-    if (typeof reqAgent === "string") roundBlockLines.push(`- Agent: ${reqAgent}`);
-    if (typeof reqBody.side === "string") roundBlockLines.push(`- Side: ${reqBody.side}`);
-    if (typeof reqBody.mode === "string") roundBlockLines.push(`- Mode: ${reqBody.mode}`);
+    // Round durumu
+    if (typeof reqBody.round === "number") ctx.round = reqBody.round;
+    if (typeof reqBody.score === "string") ctx.score = reqBody.score;
+    if (typeof reqBody.result === "string") ctx.result = reqBody.result.toUpperCase();
+    if (typeof reqMap === "string") ctx.map = reqMap;
+    if (typeof reqAgent === "string") ctx.agent = reqAgent;
+    if (typeof reqBody.side === "string") ctx.side = reqBody.side;
+    if (typeof reqBody.mode === "string") ctx.mode = reqBody.mode;
     if (Array.isArray(reqEnemyComp) && reqEnemyComp.length > 0) {
-      const comp = reqEnemyComp.filter(a => typeof a === "string" && a.length > 0).slice(0, 5).join(", ");
-      if (comp) roundBlockLines.push(`- Düşman roster: ${comp}`);
+      const comp = reqEnemyComp.filter(a => typeof a === "string" && a.length > 0).slice(0, 5);
+      if (comp.length > 0) ctx.enemyRoster = comp;
     }
 
-    // Block 2: Ölüm bağlamı (OCR pixel truth)
-    const deathBlockLines: string[] = [];
+    // Ölüm bağlamı (OCR pixel truth — daha güvenilir, model SYSTEM_PROMPT'ta belirtildiği üzere
+    // bu alanlara öncelik vermeli)
     if (reqBody.died === true) {
-      deathBlockLines.push(`- Öldürüldün: EVET${typeof reqBody.deathTiming === "string" ? ` (${reqBody.deathTiming} round)` : ""}`);
+      ctx.died = true;
+      if (typeof reqBody.deathTiming === "string") ctx.deathTiming = reqBody.deathTiming;
       if (typeof reqBody.killerInfo === "string" && reqBody.killerInfo.length > 0) {
         const safe = sanitizePromptInput(reqBody.killerInfo, { max: 120, collapseWhitespace: true });
-        if (safe) deathBlockLines.push(`- ${safe}`);
+        if (safe) ctx.killerInfo = safe;
       }
       if (typeof reqBody.deathLocation === "string" && reqBody.deathLocation.length > 0) {
         const safe = sanitizePromptInput(reqBody.deathLocation, { max: 50, collapseWhitespace: true });
-        if (safe) deathBlockLines.push(`- Ölüm konumu (OCR): ${safe}`);
+        if (safe) ctx.deathLocation = safe;
       }
       if (typeof reqBody.deathAngle === "string" && reqBody.deathAngle.length > 0) {
         const safe = sanitizePromptInput(reqBody.deathAngle, { max: 30, collapseWhitespace: true });
-        if (safe) deathBlockLines.push(`- Hasar yönü: ${safe} (düşman bu açıdan geldi)`);
+        if (safe) ctx.deathAngle = safe;
       }
       if (typeof reqBody.healthAtDeath === "number" && reqBody.healthAtDeath > 0) {
-        deathBlockLines.push(`- Ölürken HP: ${Math.min(Math.max(reqBody.healthAtDeath, 0), 150)}`);
+        ctx.healthAtDeath = Math.min(Math.max(reqBody.healthAtDeath, 0), 150);
       }
-      if (typeof reqBody.alliesAlive === "number" || typeof reqBody.enemiesAlive === "number") {
-        const a = typeof reqBody.alliesAlive === "number" ? reqBody.alliesAlive : "?";
-        const e = typeof reqBody.enemiesAlive === "number" ? reqBody.enemiesAlive : "?";
-        deathBlockLines.push(`- Müttefik/Düşman canlı: ${a}/${e}`);
-      }
+      if (typeof reqBody.alliesAlive === "number") ctx.alliesAlive = reqBody.alliesAlive;
+      if (typeof reqBody.enemiesAlive === "number") ctx.enemiesAlive = reqBody.enemiesAlive;
       if (typeof reqBody.roundTimerAtDeath === "number" && reqBody.roundTimerAtDeath > 0) {
-        deathBlockLines.push(`- Round timer: ${Math.min(Math.max(reqBody.roundTimerAtDeath, 0), 140)}s kalmıştı`);
+        ctx.roundTimerAtDeath = Math.min(Math.max(reqBody.roundTimerAtDeath, 0), 140);
       }
-      if (reqBody.ultReady === true) {
-        deathBlockLines.push(`- Ultin hazırdı: EVET (kullanmadın)`);
-      }
-      if (reqBody.spikePlanted === true) {
-        deathBlockLines.push(`- Spike: dikilmişti`);
-      }
+      if (reqBody.ultReady === true) ctx.ultReady = true;
+      if (reqBody.spikePlanted === true) ctx.spikePlanted = true;
     } else if (reqBody.died === false) {
-      deathBlockLines.push(`- Öldürülmedin (hayatta kaldın)`);
+      ctx.died = false;
     }
 
-    // Block 3: Ekonomi
-    const econBlockLines: string[] = [];
+    // Ekonomi
     if (typeof reqBody.economyType === "string" && reqBody.economyType.length > 0) {
-      econBlockLines.push(`- Buy tipi: ${reqBody.economyType.slice(0, 20)}`);
+      ctx.economyType = reqBody.economyType.slice(0, 20);
     }
-    if (typeof reqBody.credits === "number") {
-      econBlockLines.push(`- Krediler: ${reqBody.credits}`);
-    }
+    if (typeof reqBody.credits === "number") ctx.credits = reqBody.credits;
     if (typeof reqBody.loadout === "string" && reqBody.loadout.length > 0) {
       const safe = sanitizePromptInput(reqBody.loadout, { max: 30, collapseWhitespace: true });
-      if (safe) econBlockLines.push(`- Silah: ${safe}`);
+      if (safe) ctx.loadout = safe;
     }
 
-    // Block 4: Pattern context (multi-round history)
+    // Pattern context (multi-round history) — kept as raw text since it's already
+    // a free-form analysis string from Rust client (not structured fields).
     const patternBlock = (typeof reqBody.patternContext === "string" && reqBody.patternContext.length > 0)
-      ? reqBody.patternContext.slice(0, 2000)
+      ? sanitizePromptInput(reqBody.patternContext, { max: 2000 })
       : "";
 
-    // Assemble conditional context
-    const contextBlocks: string[] = [];
-    if (roundBlockLines.length > 0) {
-      contextBlocks.push(`═══════════════════════════════════════════════\nROUND DURUMU\n═══════════════════════════════════════════════\n${roundBlockLines.join("\n")}`);
-    }
-    if (deathBlockLines.length > 0) {
-      contextBlocks.push(`═══════════════════════════════════════════════\nÖLÜM BAĞLAMI (OCR PIXEL TRUTH — screenshot'tan daha güvenilir)\n═══════════════════════════════════════════════\n${deathBlockLines.join("\n")}`);
-    }
-    if (econBlockLines.length > 0) {
-      contextBlocks.push(`═══════════════════════════════════════════════\nEKONOMİ\n═══════════════════════════════════════════════\n${econBlockLines.join("\n")}`);
-    }
-    if (patternBlock) {
-      contextBlocks.push(`═══════════════════════════════════════════════\nÇOK-ROUNDLU PATTERN GEÇMİŞİ (KRİTİK — coachInsight bu pattern'e referans VERMELİ)\n═══════════════════════════════════════════════\n${patternBlock}`);
-    }
-
-    const clientContext = contextBlocks.length > 0
-      ? `\n\n${contextBlocks.join("\n\n")}`
-      : "";
+    // Assemble JSON-formatted context — single block, no decorative borders, no header chrome.
+    const ctxJson = Object.keys(ctx).length > 0 ? JSON.stringify(ctx, null, 2) : "";
+    const clientContext =
+      (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, screenshot'tan güvenilir]\n${ctxJson}` : "") +
+      (patternBlock ? `\n\n[PATTERN — multi-round history, coachInsight bu pattern'e referans VERMELİ]\n${patternBlock}` : "");
 
     // Build round history context for the user prompt
     let userPromptWithHistory = USER_PROMPT + clientContext;
