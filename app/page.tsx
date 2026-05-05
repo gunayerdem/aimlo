@@ -2179,7 +2179,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               <div className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
             </div>
             <div className="flex-1 mx-8">
-              <div className="mx-auto max-w-xs rounded-md bg-white/[0.04] border border-white/[0.06] px-3 py-1 text-[10px] text-neutral-600 text-center">aimlo.xyz/dashboard</div>
+              <div className="mx-auto max-w-xs rounded-md bg-white/[0.04] border border-white/[0.06] px-3 py-1 text-[10px] text-neutral-600 text-center">aimlo.gg/dashboard</div>
             </div>
           </div>
           {/* Fake dashboard content */}

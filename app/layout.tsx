@@ -13,9 +13,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AIMLO - AI-Powered Valorant Coach",
+  metadataBase: new URL("https://aimlo.gg"),
+  title: "AIMLO — AI-Powered Valorant Coach",
   description:
     "Get personalized post-round analysis and AI coaching feedback for Valorant. Improve your gameplay with round-by-round insights.",
+  openGraph: {
+    title: "AIMLO — AI-Powered Valorant Coach",
+    description:
+      "Personalized post-round analysis and AI coaching feedback for Valorant.",
+    url: "https://aimlo.gg",
+    siteName: "AIMLO",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AIMLO — AI-Powered Valorant Coach",
+    description:
+      "Personalized post-round analysis and AI coaching feedback for Valorant.",
+  },
 };
 
 export default function RootLayout({
