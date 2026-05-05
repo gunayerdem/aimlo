@@ -7,9 +7,11 @@ the Anthropic API and serve as the backend for the desktop overlay
 ## Architecture
 
 - **`app/`** — Next.js App Router pages (landing, dashboard, auth, reports).
-  - **`app/api/ai/{feedback,insight,report,vision}/`** — server-side proxies
-    to Anthropic. Auth-guarded (Supabase JWT), rate-limited, prompt-cached,
-    knowledge-base aware.
+  - **`app/api/ai/{feedback,insight,report}/`** — Anthropic Haiku 4.5 proxies.
+    Auth-guarded (Supabase JWT), rate-limited, prompt-cached, KB-aware.
+  - **`app/api/ai/vision/`** — OpenAI GPT-5 mini (migrated May 2026 for cost).
+    Same security model, JSON-schema strict output, image-skip on survived
+    rounds. Uses `OPENAI_API_KEY`.
 - **`lib/`** — shared utilities. Notable files:
   - `api-auth.ts` — Bearer-token verification + Upstash-backed rate limits.
   - `prompt-safety.ts` — sanitizers for user input that lands in LLM prompts.

@@ -6,13 +6,16 @@ import { sanitizePromptInput } from "@/lib/prompt-safety";
 
 /**
  * POST /api/ai/vision
- * Analyzes a Valorant game screenshot for real-time coaching feedback.
- * Used by the desktop overlay as a backend proxy for Anthropic Vision API.
+ * Analyzes a Valorant round-end screenshot for real-time coaching feedback.
+ * Backend proxy for OpenAI GPT-5 mini (migrated May 2026 from Anthropic Sonnet
+ * 4.6 — ~91% cost reduction with comparable vision quality for AIMLO's
+ * structured-text + KB-driven coach output workflow).
  *
  * - Requires authenticated user (Supabase JWT)
- * - Rate limited
- * - Anthropic API key is server-side only
- * - Accepts base64-encoded PNG screenshot
+ * - Rate limited (verifyAuthAndRateLimit, "vision" tier)
+ * - OPENAI_API_KEY is server-side only
+ * - Accepts base64-encoded PNG/JPEG/WebP screenshot
+ * - Returns strict JSON via OpenAI response_format json_schema
  */
 
 // Vercel function-level timeout (Pro plan: max 300s). We pick 90 to give AI 60s + 30s buffer
@@ -21,7 +24,39 @@ export const maxDuration = 90;
 
 const AI_TIMEOUT_MS = 60_000; // Sonnet 4.6 + vision + KB prompt — 60s covers cold-start edge cases
 const MAX_PAYLOAD_BYTES = 5_000_000; // 5MB max (base64 images are large)
-const ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages";
+// Migrated to OpenAI GPT-5 mini (May 2026) for ~91% cost reduction vs Sonnet.
+// See docs/audit/feedback-samples-100.md for the coach-voice baseline this
+// migration must preserve.
+const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
+
+// Strict JSON schema — OpenAI enforces structure server-side. Length caps
+// applied post-response (OpenAI strict mode doesn't support maxLength).
+const ROUND_FEEDBACK_SCHEMA = {
+  name: "round_feedback",
+  strict: true,
+  schema: {
+    type: "object",
+    additionalProperties: false,
+    required: ["deathAnalysis", "enemyAnalysis", "nextRoundSuggestion"],
+    properties: {
+      deathAnalysis: {
+        type: "string",
+        description: "1-2 sentence Turkish/English: hata + sebep + kısa düzeltme. callout + ajan + silah.",
+      },
+      enemyAnalysis: {
+        type: "array",
+        description: "Exactly 2 items, 1 sentence each.",
+        items: { type: "string" },
+        minItems: 2,
+        maxItems: 2,
+      },
+      nextRoundSuggestion: {
+        type: "string",
+        description: "1-2 sentence simple working tactic.",
+      },
+    },
+  },
+} as const;
 
 const SYSTEM_PROMPT = `Sen AIMLO'sun: Radiant seviye gerçek bir Valorant koçusun. Görevin oyuncuya GERÇEK pattern-aware feedback vermek — generic "iyi nişan al" / "aim well" laflarını YASAKLIYORUM.
 
@@ -302,23 +337,23 @@ type RoundFeedback = {
    MESSAGE CONTENT BUILDER — image-skip optimization
    ══════════════════════════════════════════════════════════ */
 
-type ImageSource = { type: "base64"; media_type: string; data: string };
-type UserContentBlock =
-  | { type: "image"; source: ImageSource }
-  | { type: "text"; text: string };
+// OpenAI Chat Completions content block format.
+type OpenAITextBlock = { type: "text"; text: string };
+type OpenAIImageBlock = { type: "image_url"; image_url: { url: string; detail?: "auto" | "low" | "high" } };
+type UserContentBlock = OpenAITextBlock | OpenAIImageBlock;
 
 /**
- * Build the Anthropic message `content` array. For SURVIVED rounds (died=false)
- * the image is skipped — the AI doesn't need a death-cam screenshot to talk
- * about a round you didn't die in, and OCR data + KB carry the full context.
- *
- * Skipping image saves ~1,229 tokens × $3/M = $0.0037 per uncached call.
- * At 50% survival rate × 1,890 cache-hit calls/month = ~$3.50/user/month
- * on Sonnet 4.6 (3 matches/day baseline).
+ * Build the OpenAI message `content` array. For SURVIVED rounds (died=false)
+ * the image is skipped — AI doesn't need a death-cam screenshot to coach a
+ * round the player didn't die in. OCR data + KB carry full context.
  *
  * Stateless per-call: each round independently decides based on `died`.
- * Next death automatically re-attaches the image — no "respawn detection"
- * needed since each vision call is a fresh decision.
+ * Next death automatically re-attaches the image.
+ *
+ * Image format: `data:<media_type>;base64,<data>` — OpenAI's data-URL format.
+ * `detail: "auto"` lets OpenAI pick — for our 1280×720 screenshots, it
+ * typically picks "low" tier which costs ~85 tokens (vs ~765 high). Saves
+ * even more vs Anthropic's flat per-pixel pricing.
  */
 function buildUserContent(
   died: boolean | undefined,
@@ -327,12 +362,13 @@ function buildUserContent(
   textPrompt: string,
 ): UserContentBlock[] {
   const content: UserContentBlock[] = [];
-  // Send image ONLY when player died (or died status is unknown — fail safe).
-  // For survived rounds, OCR data + KB are the source of truth.
   if (died !== false) {
     content.push({
-      type: "image",
-      source: { type: "base64", media_type: mediaType, data: image },
+      type: "image_url",
+      image_url: {
+        url: `data:${mediaType};base64,${image}`,
+        detail: "auto",
+      },
     });
   }
   content.push({ type: "text", text: textPrompt });
@@ -444,7 +480,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Get API key
-    const apiKey = process.env.AIMLO_AI_KEY || process.env.ANTHROPIC_API_KEY;
+    // Vision route migrated to OpenAI GPT-5 mini (May 2026). Uses OPENAI_API_KEY.
+    // AIMLO_AI_KEY/ANTHROPIC_API_KEY remain set for /api/ai/{feedback,insight,report}
+    // routes which still call Anthropic.
+    const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
       console.error("[Aimlo AI] Vision: no API key configured");
       return errorResponse("ai_unavailable", "AI service not configured (missing API key)", 503);
@@ -497,71 +536,39 @@ export async function POST(request: NextRequest) {
       console.log(`[KB] selected: ${kb.files.join(", ")}`);
     }
 
-    // Build system prompt array with 4-block cache topology.
+    // Build system message — flattened for OpenAI Chat Completions API.
     //
-    // Anthropic supports up to 4 cache_control breakpoints per request. We exploit that:
-    //   Block 1: SYSTEM_PROMPT  (most stable — coach voice, never changes)
-    //   Block 2: Agent KB       (stable across matches — main agent rarely changes)
-    //   Block 3: Map KB         (per-match — high cache-miss rate across matches)
-    //   Block 4: Contextual KB  (rank + matchup + post-plant + economy — situational)
+    // OpenAI uses automatic prefix-based caching (no explicit cache_control needed).
+    // Order blocks by stability so the most-stable prefix matches across calls:
+    //   1. SYSTEM_PROMPT  (most stable — coach voice, never changes)
+    //   2. Agent KB       (stable across matches — main agent rarely changes)
+    //   3. Map KB         (per-match — changes when player switches map)
+    //   4. Contextual KB  (rank + matchup + post-plant + economy — situational)
+    //   5. patternContext (every round — DO NOT include in stable prefix)
     //
-    // Why this matters: when a user plays Match 2 with the SAME agent on a DIFFERENT map,
-    // Blocks 1+2 stay cached (read-rate $0.30/M) while only Block 3 is rewritten. Without
-    // this split, the entire KB block was a single cache breakpoint — switching maps cost
-    // a full rewrite ($6/M for 1h TTL) on all KB content.
-    //
-    // 1h TTL covers a full Valorant match (typically 20-40 min) plus inter-match downtime,
-    // so per-match cache reuse is near-100% within the match.
-    type CacheControl = { type: "ephemeral"; ttl?: "5m" | "1h" };
-    type SystemBlock = { type: "text"; text: string; cache_control?: CacheControl };
-    const systemBlocks: SystemBlock[] = [
-      // Block 1 — system prompt (cache anchor, most stable)
-      {
-        type: "text",
-        text: SYSTEM_PROMPT,
-        cache_control: { type: "ephemeral", ttl: "1h" },
-      },
-    ];
+    // OpenAI auto-cache hits the longest-matching prefix. For Match 2 with the
+    // same agent but different map, blocks 1+2 still cache-hit (cached at 90%
+    // discount = $0.025/M instead of $0.25/M). Blocks 3+4 rewrite as fresh input.
+    // Cache lifetime ~5 minutes for first-tier, ~1h for high-volume keys.
+    const systemSections: string[] = [SYSTEM_PROMPT];
+    if (kb.blocks.agent)      systemSections.push(kb.blocks.agent);
+    if (kb.blocks.map)        systemSections.push(kb.blocks.map);
+    if (kb.blocks.contextual) systemSections.push(kb.blocks.contextual);
 
-    // Block 2 — Agent KB (stable across matches with same main)
-    if (kb.blocks.agent) {
-      systemBlocks.push({
-        type: "text",
-        text: kb.blocks.agent,
-        cache_control: { type: "ephemeral", ttl: "1h" },
-      });
-    }
-
-    // Block 3 — Map KB (changes per match)
-    if (kb.blocks.map) {
-      systemBlocks.push({
-        type: "text",
-        text: kb.blocks.map,
-        cache_control: { type: "ephemeral", ttl: "1h" },
-      });
-    }
-
-    // Block 4 — Contextual KB (rank, matchup, situational — most variable)
-    if (kb.blocks.contextual) {
-      systemBlocks.push({
-        type: "text",
-        text: kb.blocks.contextual,
-        cache_control: { type: "ephemeral", ttl: "1h" },
-      });
-    }
-
+    let patternContextBlock: string | null = null;
     if (reqPatternContext) {
-      // patternContext changes every round — DO NOT cache (cache write overhead > benefit).
-      // Sanitize before injecting: this is user-influenced data (Rust client's pattern
-      // string can be tampered with by a malicious local proxy, so treat as untrusted).
+      // Sanitize: user-influenced data (Rust client pattern string can be
+      // tampered with by a malicious local proxy, so treat as untrusted).
       const cleanPattern = sanitizePromptInput(reqPatternContext, { max: 2000 });
       if (cleanPattern) {
-        systemBlocks.push({
-          type: "text",
-          text: `[PATTERN CONTEXT — Rust Client]\n${cleanPattern}`,
-        });
+        patternContextBlock = `[PATTERN CONTEXT — Rust Client]\n${cleanPattern}`;
       }
     }
+    // Pattern context goes at the END of system message — keeps the cacheable
+    // prefix above stable. Per-round changes don't bust the prefix cache.
+    if (patternContextBlock) systemSections.push(patternContextBlock);
+
+    const systemMessage = systemSections.join("\n\n---\n\n");
 
     // Build round context as compact JSON. Replaces previous verbose Turkish text
     // blocks with `═══` borders. Two wins:
@@ -716,25 +723,29 @@ export async function POST(request: NextRequest) {
       userPromptWithHistory += `\n\nSon round geçmişi (gözlemlenmiş):\n${historyLines.join("\n")}\n${patternNote}${posNote}${deathZoneNote}`;
     }
 
-    // Call Anthropic Vision
+    // Call OpenAI GPT-5 mini (Chat Completions API)
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), AI_TIMEOUT_MS);
 
-    const response = await fetch(ANTHROPIC_API_URL, {
+    const response = await fetch(OPENAI_API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-        // extended-cache-ttl enables 1h ttl option (prompt-caching itself is now GA)
-        "anthropic-beta": "extended-cache-ttl-2025-04-11",
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        // Pinned to dated alias to prevent silent model drift (matches haiku route style).
-        model: "claude-sonnet-4-6-20251015",
-        max_tokens: resolvedMaxTokens,
-        system: systemBlocks,
+        // GPT-5 mini — cheap, vision-capable, JSON-schema strict mode.
+        model: "gpt-5-mini",
+        // GPT-5 family uses max_completion_tokens (max_tokens deprecated for these).
+        max_completion_tokens: resolvedMaxTokens,
+        // Strict JSON enforcement — server rejects malformed schema. Eliminates
+        // the markdown-fence/preamble extraction logic we needed with Anthropic.
+        response_format: { type: "json_schema", json_schema: ROUND_FEEDBACK_SCHEMA },
+        // Minimal reasoning effort — coach output is template-fill, not chain-of-thought.
+        // Saves output tokens + latency. Bump to "low" or "medium" if quality drops.
+        reasoning_effort: "minimal",
         messages: [
+          { role: "system", content: systemMessage },
           {
             role: "user",
             content: buildUserContent(reqBody.died, body.image, resolvedMediaType, userPromptWithHistory),
@@ -750,7 +761,7 @@ export async function POST(request: NextRequest) {
       console.error(`[Aimlo AI] Vision API ${response.status}: ${errorBody.slice(0, 500)}`);
       return errorResponse(
         "ai_upstream_error",
-        `Anthropic API returned ${response.status}`,
+        `OpenAI API returned ${response.status}`,
         502,
         { upstreamStatus: response.status, upstreamBody: errorBody.slice(0, 500) },
       );
@@ -759,22 +770,23 @@ export async function POST(request: NextRequest) {
     const data = await response.json();
     clearTimeout(timeoutId);
 
-    // Log prompt cache metrics — R1 should show creation>0, R2+ should show read>0 (cache hit)
-    const cacheCreation = data?.usage?.cache_creation_input_tokens ?? 0;
-    const cacheRead = data?.usage?.cache_read_input_tokens ?? 0;
-    const inputTokens = data?.usage?.input_tokens ?? 0;
-    const outputTokens = data?.usage?.output_tokens ?? 0;
-    const stopReason = data?.stop_reason ?? "unknown";
-    const cacheHit = cacheRead > 0 ? "HIT" : cacheCreation > 0 ? "WRITE" : "MISS";
-    const totalInput = cacheCreation + cacheRead + inputTokens;
-    const cacheRatio = totalInput > 0 ? ((cacheRead / totalInput) * 100).toFixed(1) : "0.0";
-    console.log(`[CACHE ${cacheHit}] creation=${cacheCreation} read=${cacheRead} fresh=${inputTokens} total_in=${totalInput} hit_ratio=${cacheRatio}% output=${outputTokens} stop=${stopReason}`);
+    // OpenAI usage object: prompt_tokens, completion_tokens, prompt_tokens_details.cached_tokens
+    const promptTokens = data?.usage?.prompt_tokens ?? 0;
+    const completionTokens = data?.usage?.completion_tokens ?? 0;
+    const cachedTokens = data?.usage?.prompt_tokens_details?.cached_tokens ?? 0;
+    const freshTokens = promptTokens - cachedTokens;
+    const finishReason = data?.choices?.[0]?.finish_reason ?? "unknown";
+    const cacheStatus = cachedTokens > 0 ? "HIT" : "MISS";
+    const cacheRatio = promptTokens > 0 ? ((cachedTokens / promptTokens) * 100).toFixed(1) : "0.0";
+    console.log(`[CACHE ${cacheStatus}] cached=${cachedTokens} fresh=${freshTokens} total_in=${promptTokens} hit_ratio=${cacheRatio}% output=${completionTokens} finish=${finishReason}`);
 
-    const text: string = data?.content?.[0]?.text || "";
+    const text: string = data?.choices?.[0]?.message?.content || "";
     if (!text) {
       console.error("[Aimlo AI] Empty response from API. Full data:", JSON.stringify(data).slice(0, 500));
-      return errorResponse("ai_empty_response", "Anthropic returned empty content", 502, { stopReason });
+      return errorResponse("ai_empty_response", "OpenAI returned empty content", 502, { finishReason });
     }
+    // OpenAI strict JSON mode guarantees valid JSON — but keep extractor as defense.
+    const stopReason = finishReason; // alias for downstream code that still reads `stopReason`
 
     // ── Robust JSON parser: handles markdown fences, trailing junk, BOMs ──
     function extractJSON(raw: string): { ok: true; obj: unknown } | { ok: false; reason: string } {
