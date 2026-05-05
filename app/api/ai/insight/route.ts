@@ -15,7 +15,10 @@ import { sanitizeJsonStrings } from "@/lib/prompt-safety";
  * - Anthropic API key is server-side only
  */
 
-const AI_TIMEOUT_MS = 20_000;
+// Vercel function deadline (Pro plan max 300s; we use 60 for AI + cushion).
+// Without this export, Vercel kills the function at 15s on Pro silently.
+export const maxDuration = 60;
+const AI_TIMEOUT_MS = 30_000;
 const MAX_PAYLOAD_BYTES = 100_000; // 100KB max
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
 

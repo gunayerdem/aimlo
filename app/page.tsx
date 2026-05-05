@@ -2454,7 +2454,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               handle: "@ash_jett",
               rank: "Diamond 1",
               maps: "Ascent",
-              text: "Coach insight feature'i zayıf round'larda iyi, full util execute round'larında biraz generic. Ama şunu sevdim: pattern context bölümü gerçekten son 3-4 round'a referans veriyor, copy-paste tavsiye değil. Round başına 2-3 saniye cost ediyor ama overlay küçük, oyunu engellemiyor.",
+              text: "Pattern context bölümü gerçekten son 3-4 round'a referans veriyor — generic copy-paste tavsiye değil. Zayıf round'larda feedback iyi, full util execute round'larında bazen yüzeysel kalıyor. Round başına 2-3 saniye cost ama overlay küçük, oyunu engellemiyor.",
               color: "#B489FF",
             },
             {
@@ -2476,7 +2476,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               handle: "@ash_jett",
               rank: "Diamond 1",
               maps: "Ascent",
-              text: "Coach insight is good on rough rounds, a bit generic on clean full-util executes. What I liked: the pattern-context block actually references the last 3-4 rounds, not generic copy. Costs 2-3s per round but the overlay is small and doesn't block gameplay.",
+              text: "The pattern-context block actually references the last 3-4 rounds — not generic copy. Feedback is solid on rough rounds, a bit shallow on clean full-util executes. Costs 2-3s per round but the overlay is small and doesn't block gameplay.",
               color: "#B489FF",
             },
             {
@@ -2885,7 +2885,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             </div>
           </div>
           <div className="mt-8 pt-6 border-t border-white/[0.04] text-center">
-            <p className="text-[11px] text-neutral-800">{IC.copy} 2025 AIMLO. All rights reserved.</p>
+            <p className="text-[11px] text-neutral-800">{IC.copy} {new Date().getFullYear()} AIMLO. All rights reserved.</p>
           </div>
         </div>
       </footer>

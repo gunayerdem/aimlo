@@ -62,7 +62,14 @@ type FeedbackResponse = {
    ══════════════════════════════════════════════════════════ */
 const MAX_NOTE_LENGTH = 500;
 const MAX_ROUNDS = 50;
-const AI_TIMEOUT_MS = 15_000;
+// Vercel function deadline (Pro plan: max 300s; we use 60 for AI + 30s cushion).
+// Without this export, Vercel kills the function at 10s (hobby) or 15s (Pro)
+// regardless of AbortController — silent 504 to client.
+export const maxDuration = 60;
+// AI call timeout — must be < maxDuration. 45s gives GPT-5 mini + KB cold-start
+// + JSON schema validation enough headroom. Was 15s pre-OpenAI-migration which
+// caused premature abort on slow rounds.
+const AI_TIMEOUT_MS = 45_000;
 const VALID_RESULTS = new Set(["win", "loss"]);
 const VALID_LANGS = new Set(["tr", "en"]);
 const VALID_SIDES = new Set(["attack", "defense"]);

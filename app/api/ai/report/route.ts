@@ -78,7 +78,10 @@ type ReportResponse = {
    ══════════════════════════════════════════════════════════ */
 const MAX_ROUNDS = 50;
 const MAX_NOTE_LENGTH = 500;
-const AI_TIMEOUT_MS = 20_000;
+// Vercel function deadline (Pro plan max 300s; we use 60 for AI + cushion).
+// Without this export, Vercel kills the function at 15s on Pro silently.
+export const maxDuration = 60;
+const AI_TIMEOUT_MS = 30_000;
 const MAX_PROMPT_ROUNDS = 30; // limit rounds sent to AI prompt
 const VALID_RESULTS = new Set(["win", "loss"]);
 const VALID_LANGS = new Set(["tr", "en"]);

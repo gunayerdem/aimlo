@@ -40,7 +40,10 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      // Default to TR (primary audience). Per-page lang switching via JS would
+      // require a Suspense-friendly client component; for now this is a SEO
+      // hint, not a strict lock — `<html lang>` doesn't gate content.
+      lang="tr"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>

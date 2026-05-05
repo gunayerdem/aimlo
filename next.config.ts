@@ -27,7 +27,10 @@ const nextConfig: NextConfig = {
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://media.valorant-api.com https://*.supabase.co",
       "font-src 'self' data:",
-      "connect-src 'self' https://*.supabase.co https://api.anthropic.com",
+      // Server-side AI calls don't need browser connect-src; we list only what
+      // the browser actually fetches: Supabase (auth/realtime). OpenAI/Anthropic
+      // never called from client. (Was https://api.anthropic.com — stale post-migration.)
+      "connect-src 'self' https://*.supabase.co",
       "frame-ancestors 'none'",
       "base-uri 'self'",
       "form-action 'self'",

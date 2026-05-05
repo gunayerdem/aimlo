@@ -271,9 +271,14 @@ export async function verifyAuthAndRateLimit(
     };
   }
 
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-             request.headers.get("x-real-ip") ||
-             undefined;
+  // IP for rate limiting. On Vercel, x-real-ip is the actual client IP set by
+  // the platform proxy and CANNOT be spoofed by client headers — prefer it.
+  // x-forwarded-for is client-controllable on Vercel (clients can set any
+  // value via headers, Vercel only APPENDS the real IP at the END of the
+  // chain). So if we must fall back to XFF, take the LAST element, not first.
+  const xff = request.headers.get("x-forwarded-for");
+  const xffLast = xff ? xff.split(",").pop()?.trim() : undefined;
+  const ip = request.headers.get("x-real-ip") || xffLast || undefined;
 
   const rateResult = await checkRateLimit(user.id, route, ip);
   if (!rateResult.allowed) {

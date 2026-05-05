@@ -893,7 +893,7 @@ export async function POST(request: NextRequest) {
   } catch (err) {
     if (err instanceof DOMException && err.name === "AbortError") {
       console.error("[Aimlo AI] Vision request timed out");
-      return errorResponse("ai_timeout", `Anthropic request exceeded ${AI_TIMEOUT_MS}ms`, 504);
+      return errorResponse("ai_timeout", `OpenAI request exceeded ${AI_TIMEOUT_MS}ms`, 504);
     }
     const msg = err instanceof Error ? err.message : "unknown";
     console.error("[Aimlo AI] Vision route error:", msg);
