@@ -243,78 +243,123 @@ export function loadKnowledge(task: TaskType, options: LoadOptions = {}): string
    ══════════════════════════════════════════════════════════ */
 
 interface VisionKnowledgeResult {
+  /** Joined content (legacy field, still useful for logging or single-block fallback). */
   content: string;
   files: string[];
+  /**
+   * Separated blocks for 4-block prompt-cache strategy.
+   * Order of stability (most stable → most variable):
+   *   - agent: rarely changes (player's main agent)
+   *   - map: per-match
+   *   - contextual: rank + matchup + post-plant + economy (situational)
+   * Splitting these into separate cache_control breakpoints lets cross-match
+   * cache reuse work — if user keeps the same agent across matches, the agent
+   * block stays cached even when the map block is rewritten.
+   */
+  blocks: {
+    agent?: string;
+    map?: string;
+    contextual?: string;
+  };
+}
+
+/**
+ * Whitespace-strip raw KB markdown:
+ *   - decorative `═══` borders → removed (pure visual, model ignores)
+ *   - 3+ consecutive newlines → 2 (preserves paragraph structure)
+ *   - trailing whitespace per line → stripped
+ * Preserves: headers, bullet lists, code blocks, tables, all content tokens.
+ * Saves ~10% on KB tokens with zero impact on model comprehension.
+ */
+function stripKbWhitespace(content: string): string {
+  return content
+    .replace(/^═{5,}\s*$/gm, "")        // decorative border lines
+    .replace(/\n{3,}/g, "\n\n")          // collapse 3+ newlines to 2
+    .replace(/[ \t]+\n/g, "\n")          // trailing whitespace
+    .trim();
 }
 
 export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeResult {
   const { map, agent, rank, enemyAgents, spikePlanted, economyType } = options;
-  const sections: string[] = [];
   const files: string[] = [];
-  const MAX_FILES = 6;
 
-  // 1. Map knowledge (highest priority for vision — positional coaching)
-  if (map && files.length < MAX_FILES) {
-    const mapSlug = map.toLowerCase().replace(/[^a-z]/g, "");
-    const mapPath = `maps/${mapSlug}.md`;
-    const content = loadFile(mapPath);
-    if (content) {
-      sections.push(`[HARİTA BİLGİSİ — ${map}]\n${content}`);
-      files.push(mapPath);
-    }
-  }
-
-  // 2. Agent knowledge
-  if (agent && files.length < MAX_FILES) {
+  // ── Block 1: Agent KB (most stable across matches — main agent rarely changes) ──
+  let agentBlock: string | undefined;
+  if (agent) {
     const agentFile = getAgentFile(agent);
     if (agentFile) {
       const content = loadFile(agentFile);
       if (content) {
-        sections.push(`[AGENT BİLGİSİ — ${agent}]\n${content}`);
+        agentBlock = `[AGENT BİLGİSİ — ${agent}]\n${stripKbWhitespace(content)}`;
         files.push(agentFile);
       }
     }
   }
 
-  // 3. Rank knowledge
-  if (files.length < MAX_FILES) {
-    const rankFile = getRankFile(rank);
-    const content = loadFile(`ranks/${rankFile}`);
+  // ── Block 2: Map KB (per-match — high cache miss rate across matches) ──
+  let mapBlock: string | undefined;
+  if (map) {
+    const mapSlug = map.toLowerCase().replace(/[^a-z]/g, "");
+    const mapPath = `maps/${mapSlug}.md`;
+    const content = loadFile(mapPath);
     if (content) {
-      sections.push(`[RANK BİLGİSİ — ${rank || "default"}]\n${content}`);
-      files.push(`ranks/${rankFile}`);
+      mapBlock = `[HARİTA BİLGİSİ — ${map}]\n${stripKbWhitespace(content)}`;
+      files.push(mapPath);
     }
   }
 
-  // 4. Post-plant playbook (when spike is planted — critical context)
-  if (spikePlanted && files.length < MAX_FILES) {
+  // ── Block 3: Contextual KB (rank + matchup + situational — most variable) ──
+  const contextualParts: string[] = [];
+
+  // Rank
+  const rankFile = getRankFile(rank);
+  const rankContent = loadFile(`ranks/${rankFile}`);
+  if (rankContent) {
+    contextualParts.push(`[RANK BİLGİSİ — ${rank || "default"}]\n${stripKbWhitespace(rankContent)}`);
+    files.push(`ranks/${rankFile}`);
+  }
+
+  // Post-plant (only if spike planted)
+  if (spikePlanted) {
     const content = loadFile("general/post-plant-playbook.md");
     if (content) {
-      sections.push(`[POST-PLANT TAKTİK]\n${content}`);
+      contextualParts.push(`[POST-PLANT TAKTİK]\n${stripKbWhitespace(content)}`);
       files.push("general/post-plant-playbook.md");
     }
   }
 
-  // 5. Economy mastery (when eco/force buy context is relevant)
-  if (economyType && (economyType === "eco" || economyType === "force_buy" || economyType === "pistol") && files.length < MAX_FILES) {
+  // Economy (only if eco/force/pistol)
+  if (economyType && (economyType === "eco" || economyType === "force_buy" || economyType === "pistol")) {
     const content = loadFile("general/economy-mastery.md");
     if (content) {
-      sections.push(`[EKONOMİ REHBERİ]\n${content}`);
+      contextualParts.push(`[EKONOMİ REHBERİ]\n${stripKbWhitespace(content)}`);
       files.push("general/economy-mastery.md");
     }
   }
 
-  // 6. Matchup knowledge (1 file max — best match)
-  if (agent && enemyAgents?.length && files.length < MAX_FILES) {
+  // Matchup (1 best match)
+  if (agent && enemyAgents?.length) {
     const matchups = loadMatchupFiles(agent, enemyAgents, 1);
     if (matchups.length > 0) {
-      sections.push(`[EŞLEŞME BİLGİSİ]\n${matchups[0]}`);
+      contextualParts.push(`[EŞLEŞME BİLGİSİ]\n${stripKbWhitespace(matchups[0])}`);
       files.push("matchups/(best-match)");
     }
   }
 
+  const contextualBlock = contextualParts.length > 0
+    ? contextualParts.join("\n\n---\n\n")
+    : undefined;
+
+  // Joined content (backward-compat).
+  const allParts = [agentBlock, mapBlock, contextualBlock].filter(Boolean) as string[];
+
   return {
-    content: sections.join("\n\n---\n\n"),
+    content: allParts.join("\n\n---\n\n"),
     files,
+    blocks: {
+      agent: agentBlock,
+      map: mapBlock,
+      contextual: contextualBlock,
+    },
   };
 }

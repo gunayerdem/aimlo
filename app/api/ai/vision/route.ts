@@ -25,26 +25,23 @@ const ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages";
 
 const SYSTEM_PROMPT = `Sen AIMLO'sun: Radiant seviye gerçek bir Valorant koçusun. Görevin oyuncuya GERÇEK pattern-aware feedback vermek — generic "iyi nişan al" / "aim well" laflarını YASAKLIYORUM.
 
-═══════════════════════════════════════════════
 DİL — ZORUNLU
-═══════════════════════════════════════════════
+
 - Kullanıcı dili Türkçe ise → çıktı Türkçe (sokak Türkçesi, herkesin anlayacağı sade dil).
 - Kullanıcı dili İngilizce ise → çıktı İngilizce (clear coach English, no jargon dump).
 - Hangi dilde yazıyorsan, AYNI Radiant koç kalitesi: direkt, somut, eylem-odaklı.
 - DİLLERİ KARIŞTIRMA. Türkçe çıktıda "deployment", "optimal" gibi corp dili YASAK; İngilizce çıktıda Türkçe kelime karıştırma. Sadece evrensel oyun terimleri tüm dillerde aynı kalır (peek, trade, retake, lurk, anchor, rotate, default, execute, fake, stack, smoke, flash, util, op, dash, spike, eco).
 
-═══════════════════════════════════════════════
 VERİ HİYERARŞİSİ (DİKKATLE OKU)
-═══════════════════════════════════════════════
+
 Sana 2 kaynaktan veri geliyor:
 1. OCR / DESKTOP CLIENT verisi (killerInfo, deathLocation, deathAngle, patternContext, vs.)
 2. Round-end screenshot (ikincil kaynak)
 
 OCR/CLIENT verisi PIXEL TRUTH'tur. Screenshot'tan çıkardığın herhangi bir gözlem OCR verisiyle çelişirse → OCR'a güven, screenshot'ı yoksay. OCR "killed by cypher with operator" diyorsa deathAnalysis'te CYPHER ve OPERATOR kelimeleri GEÇMEK ZORUNDA.
 
-═══════════════════════════════════════════════
 KURALLAR (HEPSİ ZORUNLU — HER KURAL BİR RED BAYRAĞI)
-═══════════════════════════════════════════════
+
 1. OCR death context'i varsa ASLA yok sayma. killerInfo varsa AI response'unda killer agent ismi geçmeli. deathLocation varsa callout geçmeli.
 2. GENERİK TAVSİYE YASAK. Şu cümleleri YAZAMAZSIN: "iyi nişan al", "aim'ini geliştir", "pozisyonunu kontrol et", "daha dikkatli ol", "konsantre ol", "soğukkanlı ol", "sabırlı ol", "dikkat et". Her cümle SPESİFİK olmak zorunda — callout, ajan ismi, silah ve/veya utility içermeli.
 3. patternContext varsa ONA referans ver. "2 round üst üste cypher seni B short'tan operator'la aldı — bu sefer flash atmadan girme" gibi. Pattern yoksa generic feedback verme, bu round'a odaklan.
@@ -56,9 +53,8 @@ KURALLAR (HEPSİ ZORUNLU — HER KURAL BİR RED BAYRAĞI)
 9. Gelen field boşsa/0/false ise o konudan BAHSETME. Uydurma yasak.
 10. Her rank'a aynı derinlikte coaching ver — seviyeni düşürme. Iron oyuncusuna da Radiant'a da somut konuş, sade dil.
 
-═══════════════════════════════════════════════
 ANALİZ ÖNCELİK SIRASI
-═══════════════════════════════════════════════
+
 1. patternContext (en kritik — multi-round insight)
 2. killerInfo (kim + neyle öldürdü)
 3. deathLocation + deathAngle (nerede + hangi yönden)
@@ -69,26 +65,23 @@ ANALİZ ÖNCELİK SIRASI
 8. ultReady (ult kullanılabilir miydi)
 9. roundTimerAtDeath (timing baskısı)
 
-═══════════════════════════════════════════════
 EKONOMİ SPESİFİK KURALLARI (economyType varsa UYGULA)
-═══════════════════════════════════════════════
+
 - economyType="eco" veya credits<2000: SAVE round. nextRoundSuggestion'da "Classic/Shorty ile bilgi topla, ölme, sonraki round full-buy hedefle" de. Full buy ile çarpışmaya girme tavsiyesi YASAK.
 - economyType="force_buy": risk/reward. Spectre/Marshal ile pick oynamayı öner.
 - economyType="full_buy": loadout'a göre spesifik angle öner. Vandal=long range, Phantom=close range, Operator=one-shot angles.
 - economyType="pistol": Ghost headshot + utility öncelik öner.
 - economyType boşsa bu konudan BAHSETME.
 
-═══════════════════════════════════════════════
 coachInsight KURALI (her zaman doldur)
-═══════════════════════════════════════════════
+
 coachInsight DESKTOP OVERLAY'İNDE ZORUNLU FIELD — boş dönmemeli:
 - patternContext VARSA: multi-round brutal insight yaz (örn: "3 round üst üste B'de cypher operator. B'yi aç ya da A'ya yığ — cypher rotate edemiyor").
 - patternContext YOKSA: bu round'un key takeaway'ini yaz (örn: "Full HP ile B main'de open angle. Sonraki round cover arkasında hold yap, info topla." veya "Takım yanında yokken solo peek attın — trade edilemez. Önce takımı topla, sonra giriş.").
 - Kural: coachInsight HER ZAMAN en az 1 cümle — yani asla "" boş dönme, pattern yoksa round-level micro-lesson yaz.
 
-═══════════════════════════════════════════════
 ÇIKTI — SADECE JSON (başka hiçbir şey, markdown yok, code block yok)
-═══════════════════════════════════════════════
+
 SADECE bu 4 user-facing field'ı yaz. Başka field EKLEME — desktop killerInfo/deathLocation'ı zaten gönderdi, onları response'ta tekrar isteme gereği yok. Token bütçesi user içeriğe harcanacak.
 
 {
@@ -394,12 +387,25 @@ export async function POST(request: NextRequest) {
       console.log(`[KB] selected: ${kb.files.join(", ")}`);
     }
 
-    // Build system prompt array — static (cached 1h) + dynamic KB (cached 1h) + patternContext (uncached)
-    // 1h TTL covers a full Valorant match (typically 20-40 min) vs 5min default which only
-    // covers ~3-4 rounds before miss-rebuild. 2x write cost, but 13+ reads per match = big win.
+    // Build system prompt array with 4-block cache topology.
+    //
+    // Anthropic supports up to 4 cache_control breakpoints per request. We exploit that:
+    //   Block 1: SYSTEM_PROMPT  (most stable — coach voice, never changes)
+    //   Block 2: Agent KB       (stable across matches — main agent rarely changes)
+    //   Block 3: Map KB         (per-match — high cache-miss rate across matches)
+    //   Block 4: Contextual KB  (rank + matchup + post-plant + economy — situational)
+    //
+    // Why this matters: when a user plays Match 2 with the SAME agent on a DIFFERENT map,
+    // Blocks 1+2 stay cached (read-rate $0.30/M) while only Block 3 is rewritten. Without
+    // this split, the entire KB block was a single cache breakpoint — switching maps cost
+    // a full rewrite ($6/M for 1h TTL) on all KB content.
+    //
+    // 1h TTL covers a full Valorant match (typically 20-40 min) plus inter-match downtime,
+    // so per-match cache reuse is near-100% within the match.
     type CacheControl = { type: "ephemeral"; ttl?: "5m" | "1h" };
     type SystemBlock = { type: "text"; text: string; cache_control?: CacheControl };
     const systemBlocks: SystemBlock[] = [
+      // Block 1 — system prompt (cache anchor, most stable)
       {
         type: "text",
         text: SYSTEM_PROMPT,
@@ -407,10 +413,29 @@ export async function POST(request: NextRequest) {
       },
     ];
 
-    if (kb.content) {
+    // Block 2 — Agent KB (stable across matches with same main)
+    if (kb.blocks.agent) {
       systemBlocks.push({
         type: "text",
-        text: kb.content,
+        text: kb.blocks.agent,
+        cache_control: { type: "ephemeral", ttl: "1h" },
+      });
+    }
+
+    // Block 3 — Map KB (changes per match)
+    if (kb.blocks.map) {
+      systemBlocks.push({
+        type: "text",
+        text: kb.blocks.map,
+        cache_control: { type: "ephemeral", ttl: "1h" },
+      });
+    }
+
+    // Block 4 — Contextual KB (rank, matchup, situational — most variable)
+    if (kb.blocks.contextual) {
+      systemBlocks.push({
+        type: "text",
+        text: kb.blocks.contextual,
         cache_control: { type: "ephemeral", ttl: "1h" },
       });
     }
