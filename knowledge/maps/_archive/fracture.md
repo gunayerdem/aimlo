@@ -21,7 +21,7 @@
 **Pattern 1: A Dish + A Hall Split Zamanlama Uyumsuzluğu**
 IF: A Dish ve A Hall'dan eş zamanlı girmen gerekiyor ama bir taraf sürekli diğerinden önce giriyor — karşı taraf henüz pozisyonda değilken commit ediliyor
 MEANING: A site'a tek yönden giriyorsun, savunucu tüm gücünü o tek noktaya yığıyor. Dish'ten erken giren oyuncu Hall'dan baskı gelmediği için 1v2'ye, 1v3'e düşüyor. Bu aim sorunu değil, koordinasyon sorunu.
-COUNTER: Push komutu vermeden önce her iki taraftan "hazır" onayı al. Flash atıldığında diğer taraf da aynı anda harekete geçsin — flash sesi senkronizasyon sinyalin. Bir taraf geç kalacaksa diğer taraf commit etmesin, bilgi topla.
+COUNTER: Push komutu vermeden önce her iki taraftan "hazır" onayı al. Flash atıldığında diğer taraf da aynı anda harekete geçsin — flash sesi iki tarafa "şimdi" sinyali. Bir taraf geç kalacaksa diğer taraf commit etmesin, bilgi topla.
 WHY: Fracture'in saldırı gücü tamamen çifte girişten geliyor. Bunu kullanmazsan haritayı tek girişli gibi oynuyorsun — savunma avantajını rakibe hediye ediyorsun. Eş zamanlı push savunucuyu iki yöne birden bakmaya zorlar, crossfire kuramaz.
 
 **Pattern 2: Zip Line Kullanım Hatası**
@@ -34,7 +34,7 @@ WHY: Zip line Fracture'in en güçlü rotasyon aracı ama ses yüzünden risk ta
 IF: Defender olarak hep aynı girişi izliyorsun ve diğer girişten arkadan vurularak ölüyorsun — 2+ raund bu şekilde geçiyor
 MEANING: Fracture'da her site'in en az iki girişi var. Tek birini izleyerek diğerini tamamen hediye ediyorsun. Saldırganlar her zaman iki yönden gelebilir — bu haritanın temeli bu.
 COUNTER: Crossfire aç: her iki girişi gören bir açı seç ya da takım arkadaşınla iki girişi paylaş. Sentinel util ile ikincil girişi kapat — tripwire veya alarm bot sana rakibin nerede olduğunu söyler. Yalnızsan util ikincil girişte dursun, sen birincil girişi tut.
-WHY: Tek girişi izlemek Fracture'i normal harita gibi oynamaya çalışmak. Bu harita normal değil. Crossfire ve util kombinasyonu çifte girişi yönetilebilir hale getiriyor.
+WHY: Tek girişi izlemek Fracture'i normal harita gibi oynamaya çalışmak. Bu harita normal değil. Crossfire ve util ikilisi çifte girişi yönetilebilir hale getiriyor.
 
 **Pattern 4: Post-Plant Pozisyon Hatası**
 IF: Spike plant edildikten sonra tüm takım aynı tarafa yığılıyor — retake yapan savunucu tek açıyı temizleyerek herkesi vuruyor
@@ -134,7 +134,7 @@ WHY: Fracture'in ortası savunmanın omurgası. Omurga kırılırsa iki site'i b
 
 ## 9. Ekonomi Stratejileri
 - Fracture saldırı taraflı bir harita. Force buy raundlarında bile A Dish + Hall split çalışır — haritanın yapısı zaten sana avantaj veriyor, az utility ile bile baskı kurabilirsin.
-- Eco raundlarda Zip line'dan flank at. Spectre + sürpriz kombinasyonu raund çalar. Zip line ses veriyor ama eco'da bu riski alman gerekiyor.
+- Eco raundlarda Zip line'dan flank at. Spectre + sürpriz ikilisi raund çalar. Zip line ses veriyor ama eco'da bu riski alman gerekiyor.
 - Full buy raundlarda her girişe utility yükle. Çift giriş var, çift utility lazım. Her raund en az 3-4 ability harca.
 - Savunmada utility biriktirme. Saldırganlar her yönden geliyor — bir girişi boş bıraktığında oradan ezilirsin. Hangi girişi açık bırakacağına önceden karar ver.
 - Eco veya force raundlarda A Dish'te Marshal al. Uzun sightline'da çok güçlü. Hall'dan Spectre push ile birleştir.
@@ -142,7 +142,7 @@ WHY: Fracture'in ortası savunmanın omurgası. Omurga kırılırsa iki site'i b
 
 ## 10. Anti-Strat Rehberi
 - Rakip her raunt A split yapıyorsa: A'ya 3 kişi koy, B'den 1 kişiyi rotasyona hazır beklet. 3 kişi her iki kolu da karşılar.
-- Rakip zip line'ı çok kullanıyorsa: Zip çıkışını pre-aim et. Zip'ten çıkan adam hareketsiz hedef — çıkışa molly ya da trap bırak.
+- Rakip zip line'ı çok kullanıyorsa: Zip çıkışını pre-aim et. Zip'ten çıkan adam hareketsiz hedef — çıkışa molly ya da tuzak bırak.
 - Rakip B Tower'dan her raunt agresif peek yapıyorsa: Tower'a erken utility at (molly, stun), Arcade'den flank gönder. Utility geri iter, flank pozisyonunu tamamen bozar.
 - Rakip gerçek split yapıyorsa (eş zamanlı push): Bir tarafa 3 kişi ya da ağır utility koy, diğer tarafta retake oyna. İki tarafı eşit tutarsan rakibin sayısına teslim olursun.
 - Rakip lurk yapıp flanktan kill alıyorsa: Cypher veya Killjoy utility'sini her girişe koy. Lurker'ın yolunu kesersin — ya geri çekilir ya kendini açar.

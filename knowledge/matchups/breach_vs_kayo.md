@@ -72,7 +72,7 @@ Düşman sabit savunma pozisyonu kuruyorsa — corner'a yapışık oynuyorlarsa,
 **IF** KAY/O Zero/Point Breach'e çarptı, suppress aktif
 **MEANING** Suppress kesilene kadar Breach hiçbir yetenek kullanamaz. Sıradan bir tüfekçiyle oynamak zorundasın.
 **COUNTER** Suppress sesini duyar duymaz pozisyonu değiştir ve köşeye gir. Suppress kesilmeden açık alanda durma.
-**WHY** Breach suppress'ten en çok etkilenen ajandır. Zero/Point Breach'e özel bir silahtır KAY/O'nun elinde. Açıkta kalırsan suppress + hasar kombinasyonu seni bitirir.
+**WHY** Breach suppress'ten en çok etkilenen ajandır. Zero/Point Breach'e özel bir silahtır KAY/O'nun elinde. Açıkta kalırsan suppress + hasar ikilisi seni bitirir.
 
 ---
 

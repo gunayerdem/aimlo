@@ -29,7 +29,7 @@ WHY uzun rotasyon gerektiren haritalarda Chamber zayıf — orada Killjoy daha g
 ### Killjoy
 
 IF sentinel seçeceksen ve haritaya özel bir neden yoksa
-MEANING Killjoy turret + alarmbot + nanoswarm kombinasyonu siteyi tek başına tutabilir
+MEANING Killjoy turret + alarmbot + nanoswarm ikilisi siteyi tek başına tutabilir
 COUNTER varsayılan sentinel olarak KJ al; dar chokepoint haritasında (Ascent A-Main gibi) Cypher'a geç
 WHY Lockdown retake gücü onu neredeyse her haritada birinci seçenek yapıyor
 

@@ -134,7 +134,7 @@ Catwalk'taki adam ilk kontağı alıyor, saldırganın gözü yukarı gidiyor. C
 #### Utility Kullanımı
 
 - **Smoke:** A Main koridorunun ortasına at. Saldırgan smoke'un içinden çıkmak zorunda kalıyor, sen de ilk ateşi alıyorsun.
-- **Trap:** A Main girişine tripwire veya alarm bot koy. Kırılsa bile bilgi verdi — saldırgan o koridora girmeye karar verdi demek.
+- **Tuzak:** A Main girişine tripwire veya alarm bot koy. Kırılsa bile bilgi verdi — saldırgan o koridora girmeye karar verdi demek.
 - **Molly:** A Main choke point'ine Nanoswarm, Snake Bite veya Hot Hands at. Dar koridorda molly'den kaçacak yer yok — push yavaşlıyor.
 
 #### Anchor vs Rotate Rolleri
@@ -182,7 +182,7 @@ B site'ta B Cubby ve B CT crossfire yapıyor. Cubby'deki B Tunnel çıkışını
 #### Utility Kullanımı
 
 - **Smoke:** B Tunnel çıkışına at. Saldırgan smoke'tan geçmek zorunda kalıyor, sen de hazır bekliyorsun.
-- **Trap:** B Tunnel girişine tripwire, B Cubby yanına alarm bot. Erken bilgi geliyor, pozisyon değişikliğini yakalıyorsun.
+- **Tuzak:** B Tunnel girişine tripwire, B Cubby yanına alarm bot. Erken bilgi geliyor, pozisyon değişikliğini yakalıyorsun.
 - **Molly:** B Tunnel Junction'a at. Dar kesişim noktasında molly'den kaçacak yer yok — yığılma cezalandırılıyor.
 
 #### Anchor vs Rotate Rolleri
@@ -481,7 +481,7 @@ Senin işin şu: düşmanın koridor alışkanlıklarını oku ve bir önceki ro
 
 **Omen:** İki smoke execute ve savunma için yeterli. Paranoia'yı koridorun içine at, tüm koridoru köreltir. Shrouded Step ile flank pozisyonu al, dar haritada kimse nerede çıkacağını bilemez.
 
-**Killjoy:** Turret + alarm bot kombinasyonunu dar girişe koy, giriş noktası kapanır. Nanoswarm'ı choke point'e göm, dart yok kaçmak için. Lockdown'ı site'ta patlat, kompakt alan olduğu için neredeyse tamamını kaplar.
+**Killjoy:** Turret + alarm bot ikilisini dar girişe koy, giriş noktası kapanır. Nanoswarm'ı choke point'e göm, dart yok kaçmak için. Lockdown'ı site'ta patlat, kompakt alan olduğu için neredeyse tamamını kaplar.
 
 **Cypher:** Her koridoru tek tripwire ile kapat, genişlik tam o kadar. Camera'yı mid'e veya koridor köşesine çak, sürekli bilgi akar. Neural Theft ile retake öncesi düşman yerini öğren — dar haritada bu bilgi maçı bitirir.
 

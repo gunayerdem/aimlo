@@ -126,7 +126,7 @@ WHY: Rakip wall'un nerede açılacağını bilirse ne zaman push edeceğini, ner
 
 ## 5. Kompozisyon / Harita Etkileşim Notları
 - **Viper zorunlu pick.** Breeze'de Viper wall en güçlü utility. A site'i ikiye böler, Mid'i keser, B'yi izole eder. Viper olmadan baştan dezavantajdasın. Post-plant snake bite lineup'ları da defuse'u durdurmak için tek güvenilir yol.
-- **Chamber S-tier.** Op kill aldıktan sonra TP ile pozisyon değiştir — düşman trade yapamaz. Uzun çizgilerde bu kombinasyon Breeze'e özel çalışır. Trademark flankleri kapatır.
+- **Chamber S-tier.** Op kill aldıktan sonra TP ile pozisyon değiştir — düşman trade yapamaz. Uzun çizgilerde bu ikili Breeze'e özel çalışır. Trademark flankleri kapatır.
 - **Sova S-tier.** Recon bolt A site ya da B site'ı tamamen tarar. Shock dart post-plant lineup'ları da geniş, açık siteler yüzünden çok işe yarar.
 - **KAY/O A-tier.** A Hall ve B Main girişinde flash'ları doğrudan verir. Suppression blade ile girişte düşmanın utility'sini kapat — temiz entry alırsın. Uzun çizgide flash pop yapar, savunucunun avantajı sıfırlanır.
 - **Cypher A-tier.** Tripwire A Hall girişine ve B Chute'a koy. Kamerayla uzaktan bilgi al. Breeze'de giriş noktası az, Cypher utility'si burada tam verim verir.
@@ -238,7 +238,7 @@ WHY: Viper wall güçlü ama okununca değer kaybediyor. Her round aynı yere ge
 IF: Rakip sık sık B Main'den hızlı push yaparak site'i alıyorsa.
 MEANING: B site savunması yetersiz ya da B Main'i utility'le yavaşlatmıyorsun.
 COUNTER: B Pillar'da Op tut ve utility dök. KAY/O molly veya Viper snake bite B Main girişine at. Killjoy turret'i B Main'e baktır. B Main'de erken bilgi al, push geldiğini erkenden haber ver.
-WHY: B rush dar B Main koridorunu kullanır ve bu koridor utility'le rahat kontrol edilir. Molly + slow + Op kombinasyonu rush'i durdurur — koridor dar, kaçacak yer yok.
+WHY: B rush dar B Main koridorunu kullanır ve bu koridor utility'le rahat kontrol edilir. Molly + slow + Op ikilisi rush'i durdurur — koridor dar, kaçacak yer yok.
 
 **Rakip Mid kontrolü alıyorsa:**
 IF: Rakip her round Mid'i kontrol ediyor, Arch veya Bridge üzerinden split yapıyorsa.

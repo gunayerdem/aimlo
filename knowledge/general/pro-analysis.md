@@ -60,7 +60,7 @@ WHY yıldız vururken durdurulamazlar; yıldız yoksa yapı yetersiz kalıyor
 **Bu tarzın özellikleri:**
 - Strateji tek oyuncuya alan yaratmak üzerine kurulu
 - Yoğun flash desteğiyle hızlı execute — utility hızla harcanıyor, site bunalıyor
-- Flank + karşı taraftan entry kombinasyonu kıskaç yaratıyor
+- Flank + karşı taraftan entry ikilisi kıskaç yaratıyor
 
 ### Çeşitli / Anti-Strat Takımlar
 
@@ -245,7 +245,7 @@ WHY tek bir pick round'u çevirebilir
 
 ### Icebox
 - **Standart**: Jett, Viper + Omen/Harbor, Sova, Killjoy/Sage
-- **Varyant**: Sage wall A-site boost + Killjoy B-site anchor kombinasyonu.
+- **Varyant**: Sage wall A-site boost + Killjoy B-site anchor ikilisi.
 
 ### Lotus
 - **Standart**: Raze, Fade, Omen/Harbor, Gekko/Skye, Killjoy/Deadlock

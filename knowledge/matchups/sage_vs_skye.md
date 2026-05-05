@@ -113,7 +113,7 @@ Skye'da var: flash bird, dog, heal, seeker ult. Amacı bilgi toplamak ve takım�
 
 ## 7. Koç Notları
 
-**Genel meta:** Skye initiator slotunu dar ve açık haritalarda doldurur — info + flash kombinasyonu çoğu siteye uyar. Sage daha niche, dar haritalarda slot alır. Head-to-head Skye info ult ve seekers ile her round Sage'in pozisyonunu açar — Sage savunmadayken bu fark net.
+**Genel meta:** Skye initiator slotunu dar ve açık haritalarda doldurur — info + flash ikilisi çoğu siteye uyar. Sage daha niche, dar haritalarda slot alır. Head-to-head Skye info ult ve seekers ile her round Sage'in pozisyonunu açar — Sage savunmadayken bu fark net.
 
 **Bu matchup'ta şunu yap:**
 - Sage oynuyorsan wall'ı önceden koy — Skye'ın giriş hattını öğren, o hatta wall. Skye dog göndermeden önce wall çıkmazsa giriş yapamaz.

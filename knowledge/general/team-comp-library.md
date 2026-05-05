@@ -75,7 +75,7 @@ Her ajan her haritada işe yaramaz. Viper Bind'da dar koridorlarda duvar değeri
 - Zayıf tarafı: KJ B'de yalnız kalırsa site tutulamaz
 
 **Double Initiator: Sova / Breach / Jett / Omen / Chamber**
-- Nasıl kazanır: Her sitede bilgi + stun kombinasyonu
+- Nasıl kazanır: Her sitede bilgi + stun ikilisi
 - Zayıf tarafı: Sentinel kapasitesi yok, flank durdurmak için util az
 
 **Double Controller: Omen / Astra / Breach / Jett / Killjoy**

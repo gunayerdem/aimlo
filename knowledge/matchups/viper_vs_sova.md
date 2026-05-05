@@ -25,7 +25,7 @@ Viper hat kurar, körleştirir. Sova bilgi açar, pozisyonları ifşa eder. Bu m
 - Sova recon dart Viper wall arkasına girdiğinde — takımın wall arkasında gizli duramaz
 - Viper fuel bittiğinde — wall ve orb aynı anda tutulamazsa Sova dart boşluğu bulur
 - Hunter's Fury aktifken — üç shot wall'u geçer, Pit içinde bile seni yakalar
-- Drone + dart kombinasyonu çalıştığında — Sova takımına canlı bilgi akar, sen pozisyon değiştirmek zorunda kalırsın
+- Drone + dart ikilisi çalıştığında — Sova takımına canlı bilgi akar, sen pozisyon değiştirmek zorunda kalırsın
 
 **Dengeli:** Ascent, Haven, Sunset'te matchup wall timing'i ile dart timing'ine bağlı. Viper wall'u Sova dart'tan önce kurarsa bilgi yarım kalır. Sova dart wall'dan önce atılırsa wall arkası çoktan bilgili.
 

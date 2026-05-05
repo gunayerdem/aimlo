@@ -69,7 +69,7 @@ Raze, nade + satchel ile Sage'in wall + slow orb savunmasını kırmaya çalış
 **IF** Sage heal ile Raze'in nade hasarını kapattı
 **MEANING** Heal Sage'i geri yükler, nade baskısı boşa gider
 **COUNTER** Raze olarak: nade at, hemen gir. Heal uygulanırken Sage hareket edemez — o pencere kill fırsatı.
-**WHY** Sage heal aktif hâldeyken Sage sabit durur. Nade + hemen giriş kombinasyonu o pencereyi kullanır.
+**WHY** Sage heal aktif hâldeyken Sage sabit durur. Nade + hemen giriş ikilisi o pencereyi kullanır.
 
 ---
 

@@ -118,15 +118,15 @@ Takım arkadaşını iyileştirir veya canlandırır.
 
 ---
 
-## MAP × AJAN KRİTİK UTILITY KOMBİNASYONLARI
+## MAP × AJAN KRİTİK UTILITY İKİLİLERİ
 
 ### ASCENT
 
 - **Omen — A Short + Mid smoke combo:** A split girişinin bel kemiği.
-- **Killjoy — B Back turret + alarmbot Market:** B anchor'un lockdown kombinasyonu.
+- **Killjoy — B Back turret + alarmbot Market:** B anchor'un lockdown ikilisi.
 - **Sova — Catwalk recon dart:** Mid info için siteye girmeden önce at.
 - **Brimstone — Heaven molly post-plant:** A plant için temiz lineup.
-- **Breach — A Short fault line + flash:** Entry stun kombinasyonu.
+- **Breach — A Short fault line + flash:** Entry stun ikilisi.
 
 ### BIND
 
@@ -172,7 +172,7 @@ Takım arkadaşını iyileştirir veya canlandırır.
 
 - **Viper — A wall + B wall:** Icebox meta'sını Viper yazdı.
 - **Sage — B wall:** B girişini açar.
-- **Sova — Dart mid + site recon:** Info + hasar kombinasyonu.
+- **Sova — Dart mid + site recon:** Info + hasar ikilisi.
 - **Killjoy — A anchor lockdown:** A site tek başına tutar.
 - **Harbor — Mid + site wave:** Double wall komp için ideal.
 
@@ -206,7 +206,7 @@ Takım arkadaşını iyileştirir veya canlandırır.
 - **Sage — Bridge wall:** Map kontrolü.
 - **Raze — Bridge boombot:** Bedava info.
 - **Omen — Edge TP:** Beklenmedik açı.
-- **Killjoy — A turret + alarmbot Bridge:** Abyss anchor kombinasyonu.
+- **Killjoy — A turret + alarmbot Bridge:** Abyss anchor ikilisi.
 
 ### CORRODE
 
@@ -233,7 +233,7 @@ Lineup = sabit noktadan sabit plant spot'una utility atmak. Her plant spot için
 
 **Brimstone:** Post-plant molly lineup'ın kralı. Spike kurulunca at, defuse ettiremezsin.
 
-**Viper:** Snake bite + orb kombinasyonu. Snake bite hasar + yavaşlatma verir. Orb post-plant smoke olarak veya ult ile.
+**Viper:** Snake bite + orb ikilisi. Snake bite hasar + yavaşlatma verir. Orb post-plant smoke olarak veya ult ile.
 
 **Sova:** Shock bolt + recon bolt. Shock hasar verir, recon nerede olduklarını gösterir. Hem saldırı hem savunma lineup'ı var.
 

@@ -16,7 +16,7 @@ Sova'nın Recon Bolt'u Op açını ifşa eder — açıdan çıkmadan önce. Owl
 **WHY**: TP sonrası Chamber'in gittiği açı sınırlı — Sova o açıları ezberleyince TP artık kaçış değil, tuzak olur.
 
 **IF**: Sova Hunter's Fury'yi bilinen TP anchor'ından geçirip Trademark'leri Shock Dart ile temizliyorsa
-**MEANING**: Hem TP anchor'ın hem trap ağın aynı anda söküldü. Bir sonraki raunda anchor'sız ve Trademark'siz başlarsın — kurulumun sıfırlandı.
+**MEANING**: Hem TP anchor'ın hem tuzak ağın aynı anda söküldü. Bir sonraki raunda anchor'sız ve Trademark'siz başlarsın — kurulumun sıfırlandı.
 **COUNTER**: Trademark'i standart Shock Dart açılarından görünmeyen noktalara koy — dar köşeler, duvarın arkası. Her raund anchor'ı değiştir. Sova ulti şarj olduğunda anchor'ı o ulti gelmeden taşı.
 **WHY**: Anchor ve Trademark'i aynı yerde bırakırsan Sova seni harita bilgisiyle bedavaya atar. Değişkenlik getir.
 

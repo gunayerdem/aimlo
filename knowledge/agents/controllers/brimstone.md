@@ -54,14 +54,14 @@ Brimstone en güvenilir smoker. Smoke atılır — beklemek yok, geri çekilmek 
 - **Ascent**: Oynanabilir ama güvenli pozisyondan derin açılara smoke ulaşmaz. Atak'ta öne çıkman gerekiyor.
 - **Breeze**: Harita çok büyük — smoke menzili yetmiyor. C-tier, Viper'ı tercih et.
 - **Haven**: Üç site üç smoke şarjını zorluyor. Tüm siteleri kapatmak güç ama geri alım smoke'ları değer üretir. B-tier.
-- **Icebox**: Oynanabilir ama Viper'ın duvar + orb kombinasyonu burada kesinlikle daha iyi. B-tier.
+- **Icebox**: Oynanabilir ama Viper'ın duvar + orb ikilisi burada kesinlikle daha iyi. B-tier.
 - **Lotus**: Çoğu duman noktasına ulaşabilirsin ama dönen kapılar nokta çalışmasını zorlaştırıyor. B-tier.
 
 ## 6. Eşleşme Notları
 - **Viper'a karşı**: Brimstone smoke'ları anlık atılır, Viper'ın ise kalıcı duvarı var. Takım aynı anda push yaparsa Brimstone smoke'u site girişini hızlı açar; rakip rotasyon beklerken Viper duvarı keser.
 - **Agresif duelist'lere karşı**: Takım push yapmadan önce giriş noktasına Stim Beacon koy. Push başladıktan sonra koymak geç kalır.
 - **Geri alımda**: Görüş hattın olmasa bile herhangi bir mesafeden smoke atabilirsin — geri alımda smoke'u anlık en doğru konuma koyarsın.
-- **Viper ile birlikte**: Breeze ve Icebox'ta Viper ilk kapamayı halleder, sen smoke'ları geri alım için saklarsın. Kombinasyon güçlü.
+- **Viper ile birlikte**: Breeze ve Icebox'ta Viper ilk kapamayı halleder, sen smoke'ları geri alım için saklarsın. Bu ikili güçlü.
 
 ## 7. Oyuncuya Ne Söylenmeli
 

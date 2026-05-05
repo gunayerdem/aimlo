@@ -71,7 +71,7 @@ Hangi tarafın rakip alışkanlığını önce tespit ettiği o roundu belirler.
 
 **IF** Omen agresif açı alıyor ve Cypher kamerası o açıyı izliyor
 **MEANING** Cypher takımı senin açını biliyor. Oradan peek aldığında karşı taraf hazır.
-**COUNTER** Omen olarak kameranın göremeyeceği açılardan peak al. Kameranın yerini görüyorsan Paranoia ile kör et — kamera o round bilgi veremez.
+**COUNTER** Omen olarak kameranın göremeyeceği açılardan peek at. Kameranın yerini görüyorsan Paranoia ile kör et — kamera o round bilgi veremez.
 **WHY** Paranoia kamerayı kör eder. Kamerayı kör etmeden peek aldığında Cypher takımı seni pre-fire eder.
 
 ## 4. Yetenek Karşılaştırması

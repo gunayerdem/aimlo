@@ -17,7 +17,7 @@ Haritaya ve fazına göre değişir.
 
 - **Saldırıda** Viper avantajlı: duvar görüşü keser, zehir kuruluştan sonra defusu durdurur.
 - **Savunmada** Killjoy avantajlı: kule bilgi verir, nanoswarm geçişi yakar, ult tek başına retake kazandırır.
-- **Aynı takımdaysan:** ikisini farklı bölgelere yay. Viper A'yı kapar, Killjoy B'yi kilitler — bu kombinasyon Breeze ve Icebox'ta standarttır.
+- **Aynı takımdaysan:** ikisini farklı bölgelere yay. Viper A'yı kapar, Killjoy B'yi kilitler — bu ikili Breeze ve Icebox'ta standarttır.
 - **Karşı takımdaysan:** Viper saldırıda ne yaptı, Killjoy savunmada ne yaptı — ikisini ayrı ayrı ölç, aynı fazda kıyaslama.
 
 ## 3. Key Düellolar

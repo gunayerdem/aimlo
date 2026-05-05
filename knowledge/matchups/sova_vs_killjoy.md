@@ -64,6 +64,6 @@ Sova, Killjoy'un turret'ini, alarmbot'unu ve nanoswarm'ını site'a girmeden yok
 
 **MID**: Sova temel lineup'ı biliyor ama scan attıktan sonra Shock Dart ile takip etmiyor. Killjoy scan geldikçe pozisyon değiştirmiyor. Sırayı netleştir: tara, Shock Dart at, sonra gir.
 
-**HIGH**: Sova sistematik temizliyor, Killjoy yaratıcı saklıyor. Killjoy'a alışılmadık yerleştirme kombinasyonları göster. Sova'ya kit standart yerde değilse nasıl farklı açıdan scan atacağını göster.
+**HIGH**: Sova sistematik temizliyor, Killjoy yaratıcı saklıyor. Killjoy'a alışılmadık yerleştirme ikilileri göster. Sova'ya kit standart yerde değilse nasıl farklı açıdan scan atacağını göster.
 
 **ELITE**: Killjoy'un kit yerleşimi Sova'nın bilinen lineup'larından kaçmak için özel kurulmuş. Sova her maçta yeni açılar üretmeli. Killjoy scan geldikçe pozisyon değiştirmeli — sabit kalırsa Sova bir sonraki raunda çözümü hazır getirir.

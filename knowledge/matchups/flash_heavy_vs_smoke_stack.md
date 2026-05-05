@@ -9,7 +9,7 @@ tags: [matchup, utility, flash-heavy, smoke-stack, composition]
 
 ## 1. Matchup Özü
 
-Flash heavy comp (KAY/O + Skye + Breach + Yoru kombinasyonları) 6-10 flash atar — savunmanın göz refleksini yorar, ardından entry açar. Smoke stack comp (Omen + Viper, Omen + Harbor, Astra + Brimstone çift controller) sightline'ları katmanlı smoke ile kapatır — savunma görmez, saldırı da görmez. İki comp da savunmanın göz ekonomisine saldırır ama farklı yoldan: biri gözü yorar, diğeri gözü tamamen siler.
+Flash heavy comp (KAY/O + Skye + Breach + Yoru ikilileri) 6-10 flash atar — savunmanın göz refleksini yorar, ardından entry açar. Smoke stack comp (Omen + Viper, Omen + Harbor, Astra + Brimstone çift controller) sightline'ları katmanlı smoke ile kapatır — savunma görmez, saldırı da görmez. İki comp da savunmanın göz ekonomisine saldırır ama farklı yoldan: biri gözü yorar, diğeri gözü tamamen siler.
 
 ## 2. Hangi Taraf Avantajlı
 

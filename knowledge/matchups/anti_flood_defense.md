@@ -7,7 +7,7 @@ Flood = beş kişi aynı anda tek site'a koşar. Seninle başa çıkmak için de
 
 **IF**: Beş kişi flash ve util ile tek choke'tan giriyor, anchor yalnız başına ölüyor
 **MEANING**: Rotate gelemedi. Flood hız ve sayıyla çalışır — nişan bile gerekmez, trade üretilir. Arkadan gelen takım arkadaşı 1v4'e düşer.
-**COUNTER**: Girişe molly veya slow koy — choke'ta yığılsınlar. Tek açıdan savunma yapma; yan odada bir takım arkadaşı varsa iki açıdan basın. Killjoy veya Cypher oynuyorsan trap'i choke'a değil, choke geçtikten 2-3 adım sonrasına koy — içeri girince patlasın, geri çekilmesinler.
+**COUNTER**: Girişe molly veya slow koy — choke'ta yığılsınlar. Tek açıdan savunma yapma; yan odada bir takım arkadaşı varsa iki açıdan basın. Killjoy veya Cypher oynuyorsan tuzağı choke'a değil, choke geçtikten 2-3 adım sonrasına koy — içeri girince patlasın, geri çekilmesinler.
 **WHY**: Flood hız üzerine kuruludur. Girişte duraksatırsan sayısal üstünlük işe yaramaz.
 
 **IF**: Rush girişte önceden koyduğun mollya veya slow'a çarpıyor ve choke'ta yığılıyor
@@ -44,6 +44,6 @@ Flood = beş kişi aynı anda tek site'a koşar. Seninle başa çıkmak için de
 
 **MID**: Util kullanmaya başladılar ama hep aynı yere, hep raund başında. Flood bunu öğrendi, temizleyip giriyor. Öğret: util'i farklı yerlere yay, ikinci dalga için bir tane sakla.
 
-**HIGH**: Anti-flood util standarttır. Ama choke temizlendikten sonra savunma açığa çıkıyor. Öğret: saldırgana util temizleme sıralaması, savunmacıya util katmanlama — molly durduruyor, slow yavaşlatıyor, trap içeri girince patlıyor.
+**HIGH**: Anti-flood util standarttır. Ama choke temizlendikten sonra savunma açığa çıkıyor. Öğret: saldırgana util temizleme sıralaması, savunmacıya util katmanlama — molly durduruyor, slow yavaşlatıyor, tuzak içeri girince patlıyor.
 
 **ELITE**: Saf flood nadirdir çünkü savunma hazırdır. Bunun yerine flood-fake gelir: koşu sesi, util, giriş hamlesi — ama geri çekilme. Savunmacı rotate etmesin diye. Gerçek flood ile fake'i ayırt etmek için: gerçek flood'da spike taşıyan oyuncu choke'a girer, fake'te girmez. Spike sesini ve taşıyan oyuncunun pozisyonunu dinle.

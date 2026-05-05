@@ -252,7 +252,7 @@ WHY: B site'in kapalı yapısı A'dan farklı çalışır. Molly ve slow orb bur
 IF: Post-plant'te uçurum kenarında off-angle pozisyon alıyorsun.
 MEANING: Kenar pozisyonu savunucunun kontrol etmediği bir açı açar. Ama ölürsen trade alınamaz — silah uçuruma gider.
 COUNTER: Kenar pozisyonu yalnızca şu durumda kullan: takımdan en az bir oyuncu güvenli bir noktada crossfire kuruyor olsun. Tek başına kenar post-plant oynama — ölünce round biter. Bir kill aldıktan sonra hemen güvenli pozisyona çekil.
-WHY: Post-plant'in tek amacı zamanı yemek ve defuse'u engellemek. Kenarda ölürsen silah da gider, trade da olmaz, takımın elinde hiçbir şey kalmaz. Crossfire + lineup kombinasyonu, kenar riskinden her zaman daha tutarlı sonuç verir.
+WHY: Post-plant'in tek amacı zamanı yemek ve defuse'u engellemek. Kenarda ölürsen silah da gider, trade da olmaz, takımın elinde hiçbir şey kalmaz. Crossfire + lineup ikilisi, kenar riskinden her zaman daha tutarlı sonuç verir.
 
 ## 10. Ekonomi Stratejileri
 

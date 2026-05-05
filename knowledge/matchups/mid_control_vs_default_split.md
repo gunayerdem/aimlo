@@ -21,7 +21,7 @@ Saldırı mid'i alır — her iki site'a rotate baskısı kurar. Savunma mid'i b
 
 **Default split (savunma) avantajlıysa:**
 - Mid koridor dar ve crossfire'lıysa — Split Mid gibi — savunma iki kişiyle mid'i kilitler
-- Savunma mid'e sentinel setup kurdu — Killjoy turret + alarmbot, Cypher tripwire + camera — trap hattı mid duellosunu keser
+- Savunma mid'e sentinel setup kurdu — Killjoy turret + alarmbot, Cypher tripwire + camera — tuzak hattı mid duellosunu keser
 - Savunma çift OP'la mid'i kapatıyorsa saldırı her peek'te iki OP'a açılır
 - Saldırı mid'i aldı ama site'a push yapmıyorsa savunma rotate'i tamamlar, mid avantajı sıfırlanır
 - Saldırı mid için utility döktü ama trade partner dağıldıysa mid duellosu saldırı için trade'siz
@@ -36,9 +36,9 @@ Saldırı mid'i alır — her iki site'a rotate baskısı kurar. Savunma mid'i b
 ---
 
 **IF** Savunma mid'e sentinel setup kurdu — Cypher tripwire + camera
-**MEANING** Mid girişindeki trap hattı saldırı mid kontrolünü bilgi kaynağına dönüştürür — tripwire sesi çalınca savunma haberdar
-**COUNTER** Initiator utility'siyle trap'leri sök: Sova shock dart tripwire'a, KAY/O knife Cypher'ı reveal eder. Trap hattı kırıldıktan sonra mid duellosu açılır
-**WHY** Trap setup savunma için düşük maliyet, yüksek değer. Sen trap'i sökmek için utility harcarsan retake'te o utility'yi bulamazsın — ekonomik baskı sana yüklenir
+**MEANING** Mid girişindeki tuzak hattı saldırı mid kontrolünü bilgi kaynağına dönüştürür — tripwire sesi çalınca savunma haberdar
+**COUNTER** Initiator utility'siyle tuzakları sök: Sova shock dart tripwire'a, KAY/O knife Cypher'ı reveal eder. Tuzak hattı kırıldıktan sonra mid duellosu açılır
+**WHY** Tuzak kurulumu savunma için düşük maliyet, yüksek değer. Sen tuzağı sökmek için utility harcarsan retake'te o utility'yi bulamazsın — ekonomik baskı sana yüklenir
 
 ---
 
@@ -107,7 +107,7 @@ Saldırı mid'i alır — her iki site'a rotate baskısı kurar. Savunma mid'i b
 
 **Flip 2 — Mid oyuncu sayısı:** Savunma mid'e 2 oyuncu koydu mu? Evet ise saldırı mid'i pahalıya alır. 1 oyuncu varsa saldırı sayısal üstünde.
 
-**Flip 3 — Trap hattı:** Sentinel setup var mı? Varsa mid duellosu trap avantajlı. Yoksa düz silah + utility.
+**Flip 3 — Tuzak hattı:** Sentinel setup var mı? Varsa mid duellosu tuzak avantajlı. Yoksa düz silah + utility.
 
 **Flip 4 — Commit hızı:** Saldırı mid kontrolünden hemen commit etti mi? Ettiyse round yolu açık. Gecikmişse savunma rotate tamamlandı, avantaj silindi.
 

@@ -38,7 +38,7 @@ Retake'de Market'i clear etmeden geçersen, arkandan vurulursun. Orada lurker va
 
 **MEANING:** Default'ın amacı tek bir şey: savunmanın nerede durduğunu anlamak. Mid'deki oyuncu en kritik kişi. Catwalk'ta hareket var mı? Market'ten ses geliyor mu? Bunu anlayıp takıma iletirsen, execute kör değil — veriye dayalı olur.
 
-**COUNTER:** Mid oyuncun erken ölürse, kör kalırsın. Savunma bunu bildiği için ya mid'e agresif peak yapar ya da mid'i smoke'layıp her iki taraftan da gözünü kör eder. Mid oyuncusu agresif peak yapmasın — görevi bilgi toplamak, kill almak değil.
+**COUNTER:** Mid oyuncun erken ölürse, kör kalırsın. Savunma bunu bildiği için ya mid'e agresif peek yapar ya da mid'i smoke'layıp her iki taraftan da gözünü kör eder. Mid oyuncusu agresif peek yapmasın — görevi bilgi toplamak, kill almak değil.
 
 **WHY:** Savunmayı üç noktaya yaymak zorunda bırakıyorsun. 3 kişiyi tek site'a yığarlarsa, diğer taraf boş kalır ve oraya execute edersin. Eşit dağılırlarsa, utility ile herhangi bir site'i açarsın.
 
@@ -82,7 +82,7 @@ En yaygın hata: smoke atıp flash beklemeden girmek. Savunucu smoke kenarında 
 
 **MEANING:** Mid'i alan takım A Short üzerinden A site'a veya Market üzerinden B site'a split yapabilir. Bu esneklik savunmayı sürekli tahmin yapmaya zorlar. Mid kontrolu olmadan execute yaparsan, savunma nereden geleceğini biliyor — tek boyutlu saldırı.
 
-**COUNTER:** Top Mid'de Op varsa, oraya kuru peak yapamazsın. Flash + swing kombinasyonu kullan ya da smoke ile Op sightline'ını kapat. Mid'i aldıktan sonra takımla iletişim kur — sen Market'tesin ama takım hala A Main'deyse, yalnız kalırsın.
+**COUNTER:** Top Mid'de Op varsa, oraya kuru peek yapamazsın. Flash + swing ikilisi kullan ya da smoke ile Op sightline'ını kapat. Mid'i aldıktan sonra takımla iletişim kur — sen Market'tesin ama takım hala A Main'deyse, yalnız kalırsın.
 
 **WHY:** Mid'i kontrol eden taraf haritanın tamamına erişir. Mid'siz saldırı tek kapılı oda — savunma nereden geleceğini biliyor. Mid kontroluyla saldırı üç kapılı oda — savunma hangisine bakacağını bilemez.
 

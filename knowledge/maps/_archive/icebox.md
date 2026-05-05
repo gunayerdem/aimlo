@@ -89,12 +89,12 @@ WHY: Off-angle'ın değeri sürpriz faktöründen gelir. Rakip Snowman'ı bildi�
 - B Kitchen'dan retake yaparken utility atmadan içeri girme — o dar geçitte utility yoksa ölürsün, trade da olmaz.
 
 ## 5. Kompozisyon / Harita Etkileşim Notları
-- **Viper S-tier**: Wall'u A veya B site'i ikiye böler. A'da Rafters'ı site'tan kesersin — savunucunun avantajı gider. B'de Yellow'u izole edersin — o karmaşık nested yapı sadeleşir. Toxic screen + snake bite post-plant kombinasyonu bu haritada korkunç güçlü.
+- **Viper S-tier**: Wall'u A veya B site'i ikiye böler. A'da Rafters'ı site'tan kesersin — savunucunun avantajı gider. B'de Yellow'u izole edersin — o karmaşık nested yapı sadeleşir. Toxic screen + snake bite post-plant ikilisi bu haritada korkunç güçlü.
 - **Sage S-tier**: B Green'e wall at, push yavaşlar, takımına rotasyon zamanı kazanırsın. A Belt'te wall sightline'ı tamamen kapatır. Slow orb'u Tube veya Orange'a at — dar geçişlerde değeri çok yüksek.
 - **Jett S-tier**: Zip line ile hızlı giriş, A Pipes'ta agresif Op oyna, işin bitince dash ile çekil. Updraft ile Rafters'a çık — başka hiçbir duelist o dikey hareketi yapamaz.
 - **Sova / Fade**: Bu haritada bilgi almak kritik çünkü her iki site'ta da temizlemen gereken köşe ve seviye çok. Sova dart'ı A veya B başında at, erken bilgi al. Fade prowler ile nested B site'taki köşeleri temizle.
 - **Killjoy**: B site'ta turret + alarmbot nested yapıyı senin için tutar. Lockdown ile B'ye basan saldırganları site'tan söküp atarsın. Killjoy'un değerinin büyük kısmı B site'a özel — bunu bil.
-- **Chamber**: Op + TP kombinasyonu bu harita için biçilmiş kaftan. A Pipes'ta agresif dur, kill al ya da kötü giderse TP ile güvenli noktaya çekil. Mid sightline'da da aynı şekilde oyna.
+- **Chamber**: Op + TP ikilisi bu harita için biçilmiş kaftan. A Pipes'ta agresif dur, kill al ya da kötü giderse TP ile güvenli noktaya çekil. Mid sightline'da da aynı şekilde oyna.
 - **Omen**: TP ile A Rafters'a veya B Yellow'a beklenmedik pozisyonlarda çık. Tube içinde Shrouded Step ile sessiz hareket et. Paranoia'yı B Orange veya Tube'a at — dar geçişlerde değeri çok yüksek.
 
 ## 6. Koçluk Satırları
@@ -128,7 +128,7 @@ WHY: Off-angle'ın değeri sürpriz faktöründen gelir. Rakip Snowman'ı bildi�
 - Viper snake bite + Killjoy nano swarm B Default'a yüklen — defuse etmesi çok zorlaşır
 
 ### Genel Post-Plant
-- Dikey crossfire kur — biri site seviyesinde, biri yüksekte dursun. Icebox'ta bu kombinasyon retake'i mahveder
+- Dikey crossfire kur — biri site seviyesinde, biri yüksekte dursun. Icebox'ta bu ikili retake'i mahveder
 - Plant sonrası site içinde kalma. Utility patlar, ölürsün — geri çekil, açı tut
 - Spike'i duyabileceğin ve cover alabileceğin en uzak noktadan izle
 

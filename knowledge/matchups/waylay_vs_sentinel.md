@@ -35,11 +35,11 @@ Waylay beklenmediğin açıdan gelir. Sentinel bilinen yolları kapatır. Asıl 
 **IF**: O koridor sessiz, öbür yol aktifse — Waylay o sessiz yolda değil demektir
 **MEANING**: Waylay'in nerede olmadığı da bilgi; o koridorda gözükmüyorsa başka yerdedir
 **COUNTER**: Takımın ana yola baskı yaparken sen Waylay'in son bilinen rotasının yanındaki açıyı kapat — sentinel ikisine birden bakamaz
-**WHY**: Nerede olmadığını bilmek, nerede olduğunu bulmana yardım eder; bir önceki roundda nereden geldi, bu roundda o noktanın komşu açısına trap koy
+**WHY**: Nerede olmadığını bilmek, nerede olduğunu bulmana yardım eder; bir önceki roundda nereden geldi, bu roundda o noktanın komşu açısına tuzak koy
 
 ## Sürekli Aynı Şey Oluyorsa
 
-**Sentinel sürekli pusuya düşüyorsa**: Trap'lerin beklenen yolları kapatıyor ama Waylay beklenen yolları kullanmıyor. Kendi kurulumunu geçmek istesen nereye giderdin — o noktaya koy.
+**Sentinel sürekli pusuya düşüyorsa**: Tuzakların beklenen yolları kapatıyor ama Waylay beklenen yolları kullanmıyor. Kendi kurulumunu geçmek istesen nereye giderdin — o noktaya koy.
 
 **Waylay sürekli yakalanıyorsa**: Sentinel off-angle'ları da kapamaya başladı ya da takımı Waylay'in nerede olmadığını okuyarak seni buluyor. Aynı rotayı iki kez kullanma. Flanklarını takımının ana yola baskı yaptığı anda aç.
 
@@ -47,7 +47,7 @@ Waylay beklenmediğin açıdan gelir. Sentinel bilinen yolları kapatır. Asıl 
 
 ### Cezalandırılan taraftaysan
 
-**Sentinel pusuya düşüyorsa**: "Trap'lerin beklenen yolları kapsıyor ama Waylay beklenen yolları kullanmıyor. En az bir tripwire veya sensoru normalde açık bırakacağın off-angle yaklaşıma koy. Kendi kurulumunu geçmek istesen nereye giderdin — oraya koy."
+**Sentinel pusuya düşüyorsa**: "Tuzakların beklenen yolları kapsıyor ama Waylay beklenen yolları kullanmıyor. En az bir tripwire veya sensoru normalde açık bırakacağın off-angle yaklaşıma koy. Kendi kurulumunu geçmek istesen nereye giderdin — oraya koy."
 
 **Waylay yakalanıyorsa**: "Sentinel off-angle'ları da kapamış. Aynı rotayı kullanma. Takımın ana yola girdiği anda flanklarını aç — sentinel ikisine birden bakamaz."
 
@@ -55,11 +55,11 @@ Waylay beklenmediğin açıdan gelir. Sentinel bilinen yolları kapatır. Asıl 
 
 **Waylay sentinel'ı geçiyorsa**: "Kurulumunu işe yaramaz hale getiriyorsun. Rotanı ve açını değiştirmeye devam et — tahmin edemezlerse kapatamazlar."
 
-**Sentinel Waylay'ı yakalıyorsa**: "Off-angle trap'lerin çalışıyor. Waylay'in nerede olmadığını takımına söyle — gözükmemesi de bir bilgidir."
+**Sentinel Waylay'ı yakalıyorsa**: "Off-angle tuzakların çalışıyor. Waylay'in nerede olmadığını takımına söyle — gözükmemesi de bir bilgidir."
 
 ## Rank Modülasyonu
 
-**LOW**: Waylay standart yoldan yürür, off-angle denemez. Sentinel standart trap koyar. Waylay'e şunu söyle: standart koridoru bırak, yan duvardan veya beklenmedik köşeden gir.
+**LOW**: Waylay standart yoldan yürür, off-angle denemez. Sentinel standart tuzak koyar. Waylay'e şunu söyle: standart koridoru bırak, yan duvardan veya beklenmedik köşeden gir.
 
 **MID**: Waylay flank yapar ama aynı rotayı tekrarlar. Sentinel kapsamını değiştirmez. Waylay'e: "Aynı rotayı iki kez kullanma." Sentinel'a: "Waylay geçen roundda nereden geldi, oraya değil, yanındaki açıya koy."
 

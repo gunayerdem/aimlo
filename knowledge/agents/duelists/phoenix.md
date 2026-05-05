@@ -58,7 +58,7 @@ WHY: Kill ancak site kontrolüne veya düşman becerilerini tüketmeye yol açar
 
 ## 5. Harita Etkileşimleri
 **Phoenix'in güçlü olduğu haritalar:**
-- **Ascent:** B Main'den flash atıp Market boyunca ateş duvarıyla swing yapmak güçlü bir giriş. Mid kontrolü için duvar + flash kombinasyonu çalışır.
+- **Ascent:** B Main'den flash atıp Market boyunca ateş duvarıyla swing yapmak güçlü bir giriş. Mid kontrolü için duvar + flash ikilisi çalışır.
 - **Bind:** Dar koridorlar flash'i daha etkili kılar. Hookah'ta flash atıp Short'a geçmek tutarlı ilk temas açar.
 - **Split:** A Main ve B Heaven'da flash-peek güçlü. Uzun site dövüşlerinde molly iyileşmesi fark yaratır.
 

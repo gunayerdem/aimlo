@@ -116,4 +116,4 @@ Phoenix flash x2 + molly + wall — hepsi kendi canını koru ve gir üzerine ku
 
 **Radiant pattern:** Brimstone oynayanlar smoke'u Phoenix'in wall koyacağı noktalara göre ayarlar — wall çıkmadan smoke atmaz, wall lokasyonunu okur, molly'yi wall üstüne atar. Phoenix oynayanlar wall'u Brimstone molly hattının tam dışına, smoke kenarına dik açıyla kurar: hem smoke'u böler hem molly alanı dışında kalır.
 
-**Özet:** Brimstone zone kurar, Phoenix o zone içinde hayatta kalmaya çalışır. Phoenix wall + flash ikilisi doğru kullanılırsa Brimstone zone'u bozulur. Yanlış kullanılırsa molly + smoke kombinasyonu Phoenix'i sıfırlar.
+**Özet:** Brimstone zone kurar, Phoenix o zone içinde hayatta kalmaya çalışır. Phoenix wall + flash ikilisi doğru kullanılırsa Brimstone zone'u bozulur. Yanlış kullanılırsa molly + smoke ikilisi Phoenix'i sıfırlar.

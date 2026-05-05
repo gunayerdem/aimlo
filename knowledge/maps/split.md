@@ -47,13 +47,13 @@ WHY: Ramp alindiginda savunmacinin geri çekilme yolu kesilir ve site'a iki yön
 **Pattern 3: B Execute**
 IF: Takim B execute yapiyor ama B Heaven'i smoke'lamadan site'a giriyor — Heaven'dan bedava kill'ler veriliyor.
 MEANING: B Heaven, B site'in hakim noktasi. Smoke atmadan girersin, savunmaci seni görür, sen onu görmezsin. Bu duel'i kazanamazsin.
-COUNTER: B Heaven ve B CT (Back Site) icin smoke at. B Main'den flash ile gir. Garage ve Pillar'i temizle. Mid kontrolun varsa Mail üzerinden B Heaven'a split gönder — savunmaci Heaven'dan rahat oynayamaz. Spike'i B Default'a plant et.
-WHY: B Site dar oldugu icin savunmaci az utility ile çok is yapar. Heaven smoke'u bu dengeyi bozuyor — savunmacinin en güçlü pozisyonunu kapatiyorsun. Split olmadan girersin, savunmaci tek noktadan her seyi kontrol eder; split ile iki yöne bakma zorunda kalir.
+COUNTER: B Heaven ve B CT (Back Site) için smoke at. B Main'den flash ile gir. Garage ve Pillar'i temizle. Mid kontrolun varsa Mail üzerinden B Heaven'a split gönder — savunmaci Heaven'dan rahat oynayamaz. Spike'i B Default'a plant et.
+WHY: B Site dar oldugu için savunmaci az utility ile çok is yapar. Heaven smoke'u bu dengeyi bozuyor — savunmacinin en güçlü pozisyonunu kapatiyorsun. Split olmadan girersin, savunmaci tek noktadan her seyi kontrol eder; split ile iki yöne bakma zorunda kalir.
 
 **Pattern 4: Mid Control**
 IF: Takim mid'i tamamen ignore ediyor — kimse bilgi almaya bile gitmiyor.
 MEANING: Mid'i ignore etmek, haritanin kalbini rakibe teslim etmektir. Rakip Vents'ten A Heaven'a, Mail'den B Link'e geçer. Her execute'un tek boyutlu kalir ve rakip mid'den flank atar, seni arkadan vurur.
-COUNTER: Mid icin en az bir kisi ayir. Mid Top'tan bilgi al, Vents veya Mail'e dogru ilerle. Mid'de Op varsa smoke + flash + swing. Mid'i alininca seceneklerin katlanir:
+COUNTER: Mid için en az bir kisi ayir. Mid Top'tan bilgi al, Vents veya Mail'e dogru ilerle. Mid'de Op varsa smoke + flash + swing. Mid'i alininca seceneklerin katlanir:
 - A Heaven split
 - B Heaven split
 - Dogrudan mid push
@@ -80,7 +80,7 @@ WHY: Off-angle ilk kullanımda güçlü, tekrarlandığında işe yaramaz. Pozis
 
 **Pattern 2: B Site Savunma**
 IF: B Heaven'dan erken peek yapıyorsun — pozisyonunu veriyorsun.
-MEANING: B Heaven'ın gücü görülmeden hakim olmaktan gelir. Peek yaptığın anda rakip seni pre-aim eder ya da trade alır. O avantajı kendin sıfırlıyorsun.
+MEANING: B Heaven'ın güçü görülmeden hakim olmaktan gelir. Peek yaptığın anda rakip seni pre-aim eder ya da trade alır. O avantajı kendin sıfırlıyorsun.
 COUNTER:
 - B Heaven'da pasif kal, B Main'den push gelene kadar yerini verme.
 - B Garage'da Pillar arkasında bir kişi anchor oynasın.

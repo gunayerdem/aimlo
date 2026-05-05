@@ -17,7 +17,7 @@ Viper fuel'ini ikiye böl — wall için ayrı, cloud için ayrı kullan. Astra 
 
 ## 2. Kim Avantajlı?
 
-Fuel + damage ekonomisi Astra'nın star esnekliğini geçer. Wall + Snake Bite + cloud kombinasyonu her round damage üretir; Astra utility'nin hiçbirinde direkt hasar yoktur.
+Fuel + damage ekonomisi Astra'nın star esnekliğini geçer. Wall + Snake Bite + cloud ikilisi her round damage üretir; Astra utility'nin hiçbirinde direkt hasar yoktur.
 
 Astra'nın üstün olduğu yer dar: üç siteli haritalarda (Haven, Lotus) tek controller olarak yeterli. Bu haritalarda Viper double controller'ın destekçisidir, tek başına yetersiz kalır.
 

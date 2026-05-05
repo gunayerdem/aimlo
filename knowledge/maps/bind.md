@@ -211,7 +211,7 @@ COUNTER (Saldırı):
 COUNTER (Savunma retake):
 - Hookah'yı geri almak birinci iş — oradan bakan biri tüm retake hareketini görüyor.
 - Hookah'ya flash at, peeple, temizle.
-- Ardından B Long'a smoke, B Garden'a molly at. Bu utility kombinasyonu post-plant oyuncularını yerinden oynatır, defuse penceresi açılır.
+- Ardından B Long'a smoke, B Garden'a molly at. Bu utility ikilisi post-plant oyuncularını yerinden oynatır, defuse penceresi açılır.
 
 WHY: B'de CT'den gelen yol doğrudan B Garden crossfire'ına çarpıyor, B Long ise yan tarafı görüyor. Her ikisini birden kapatmak için molly (Garden) + smoke (Long) + flash (giriş) lazım. O utility'i karşılayamıyorsan retake'e girme, save yap.
 

@@ -6,8 +6,8 @@ Savunma takımı site'i savunmuyor — bilerek bırakıyor, spike kurulduktan so
 ## Yaygın Cezalandırma Kalıpları
 
 **IF**: Retake takımı flash + smoke + tarama aynı anda geliyor ve tüm post-plant oyuncularının pozisyonu açılıyor
-**MEANING**: Saldıranlar bir arada oturuyor. Tek yetenek kombinasyonu hepsini temizliyor. Trade yok, crossfire yok.
-**COUNTER**: Spike üzerine Killjoy nanoswarm veya Viper pit koy. Post-plant oyuncularını farklı açılara yay — biri kovanın sağında, biri uzak köşede. Sentinel trap'lerini retake yollarına plant sırasında döşe.
+**MEANING**: Saldıranlar bir arada oturuyor. Tek yetenek ikilisi hepsini temizliyor. Trade yok, crossfire yok.
+**COUNTER**: Spike üzerine Killjoy nanoswarm veya Viper pit koy. Post-plant oyuncularını farklı açılara yay — biri kovanın sağında, biri uzak köşede. Sentinel tuzaklarıni retake yollarına plant sırasında döşe.
 **WHY**: Yayılma retake takımını tek sorun yerine üç ayrı sorunla boğuşturmak zorunda bırakır — yetenek biter.
 
 **IF**: Post-plant dağılıyor, retake takımı yetenek harcamadan temizliyor

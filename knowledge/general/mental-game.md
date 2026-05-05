@@ -24,7 +24,7 @@ WHY duraklama dürtüsel tepkileri engeller ve ölümleri bilgiye çevirir
 
 IF "bu oyun adaletsiz" diye düşünüyorsan
 MEANING tilt konuşuyor, taktiksel analiz yapamıyorsun
-COUNTER her ölümü yeniden çerçevele: "oradan tutuyorlarmış, off-angle" taktiksel ders verir; "adaletsiz" hiçbir şey öğretmez
+COUNTER her ölümü yeniden yorumla: "oradan tutuyorlarmış, off-angle" taktiksel ders verir; "adaletsiz" hiçbir şey öğretmez
 WHY her ölümden bir ders çıkarmak tilt'i bilgiye dönüştürür
 
 IF fiziksel gerilim hissediyorsan (sıkılı çene, gergin omuzlar, sıkışmış fare eli)
@@ -311,7 +311,7 @@ WHY yapılandırılmamış VOD review belirsiz hisler üretir; yapılı review s
 
 IF mental oyunun mekanik seviyene yetişemiyorsa
 MEANING tilt, kayıp serisi yönetimi ve performans kaygısı seni geri tutuyor
-COUNTER bu dokümandaki tilt yönetimi ve round arası reset protokollerini bilinçlice uygula
+COUNTER bu dokümandaki tilt yönetimi ve round arası reset adımlarını bilinçli uygula
 WHY Immortal+'da mekanik fark küçük; mental fark büyük -- mental üstünlük = tutarlı performans
 
 ### Diamond-Ascendant İçin

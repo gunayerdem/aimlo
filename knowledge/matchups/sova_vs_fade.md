@@ -58,7 +58,7 @@ Takımın retake oynuyorsa Sova al. Takımın site basıyorsa Fade al.
 **IF** Hunter's Fury ult aktif, Fade Haunt öncesinde rakibi vurmuştu
 **MEANING** İz hâlâ aktifse Sova ult'u duvarın arkasından izli hedefe basabilir
 **COUNTER** Sova ult sesini duyar duymaz kapak değiştir ve hareket et — ult sabit hedef ister
-**WHY** Haunt izi + Hunter's Fury kombinasyonu aynı takımda 2-3 kill getirir. Karşı takımda izliysen hareketsiz durma.
+**WHY** Haunt izi + Hunter's Fury ikilisi aynı takımda 2-3 kill getirir. Karşı takımda izliysen hareketsiz durma.
 
 ---
 

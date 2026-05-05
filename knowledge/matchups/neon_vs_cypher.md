@@ -47,8 +47,8 @@ Bu maçup bilgi savaşı. Cypher tuzak koyar, sen oradan geçersen o seni okur. 
 
 **IF** Slide ile girdin ama gizli tuzağı fark etmedin
 **MEANING** Trip yavaşlatır + debuff verir, sprint momentumu kırılır, Cypher takımı rotate eder.
-**COUNTER** Girmeden önce Sova dart veya Fade prowler at — trap hattını açar. Neon tek başına info almak zorunda değil.
-**WHY** Neon'un gücü hız. Cypher'ın gücü gizlilik. Hız körce kullanılırsa gizli trap'e girer — ondan önce trap'i bul.
+**COUNTER** Girmeden önce Sova dart veya Fade prowler at — tuzak hattını açar. Neon tek başına info almak zorunda değil.
+**WHY** Neon'un gücü hız. Cypher'ın gücü gizlilik. Hız körce kullanılırsa gizli tuzağa girer — ondan önce tuzağı bul.
 
 ---
 

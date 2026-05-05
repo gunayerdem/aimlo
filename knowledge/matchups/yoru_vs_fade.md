@@ -82,7 +82,7 @@ Yoru yanlış bilgi üretir — clone, teleport, flash, ult. Fade doğru bilgiyi
 
 ## 5. Haritaya Göre Değişim
 
-**Bind (Yoru avantajlı):** Teleporter ve Hookah Yoru'nun clone + teleport kombinasyonuna çok açık. Fade yakın mesafede prowler kullanmakta zorlanır.
+**Bind (Yoru avantajlı):** Teleporter ve Hookah Yoru'nun clone + teleport ikilisine çok açık. Fade yakın mesafede prowler kullanmakta zorlanır.
 
 **Ascent (Yoru avantajlı):** Mid ve A Main Yoru teleport için çok yer açar. Fade A Site haunt'u tek tarafa bakar.
 

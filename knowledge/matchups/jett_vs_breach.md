@@ -114,7 +114,7 @@ Ult maliyeti: Jett ultu daha ucuz. Breach ultu daha pahalı ama bir alan tamamen
 
 ## 7. Koç Notları
 
-**Bu matchupı kazanan taraf nasıl oynar:** Breach stun hattını Jett'in dashboard'a biteceği noktaya önceden kurar — Jett gelince açar, Jett gelince kurmaya başlamaz. Jett ise stun sesini duyduğu an hattan çıkar, dash basmaz; bir sonraki girişte farklı hat ve farklı iniş noktası kullanır.
+**Bu matchup'ı kazanırken nasıl oynuyorsun:** Breach oynuyorsan stun hattını Jett'in dash biteceği noktaya önceden kurarsın — Jett gelince açar, Jett gelince kurmaya başlamaz. Jett ise stun sesini duyduğu an hattan çıkar, dash basmaz; bir sonraki girişte farklı hat ve farklı iniş noktası kullanır.
 
 **Dar harita (Split, Bind, Sunset):** Breach öne geçer — Jett stun hattından kaçacak yer bulamıyor. **Geniş harita (Breeze, Icebox):** Jett öne geçer — Breach stun menzil dışında kalıyor.
 

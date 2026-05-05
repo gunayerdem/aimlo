@@ -76,5 +76,5 @@ Breach, duvarların içinden vuran initiator. Flash'ı, sarsmasi, hasarı — he
 ## 8. Rank Modülasyonu
 - **Düşük (Iron-Silver)**: Her site için tek bir flash duvarı belirle. Flash atmadan önce söyle. Düşmanı gördüğünde sars. Aftershock'u dar köşe ve plant noktası için sakla.
 - **Orta (Gold-Platinum)**: Flash zamanını takım arkadaşı girişiyle eşleştir. Fault Line attıktan sonra takım hemen girsin. Varsayılan plant'lara Aftershock at. Rolling Thunder'ı site girişi için kullanmaya başla.
-- **Yüksek (Diamond-Ascendant)**: Birden fazla duvardan flash ve sarsma kombinasyonu. Fault Line ile düşmanı sıkıştır, Aftershock ile bitir. Rolling Thunder'ı tüm takım hazırken at.
+- **Yüksek (Diamond-Ascendant)**: Birden fazla duvardan flash ve sarsma ikilisi. Fault Line ile düşmanı sıkıştır, Aftershock ile bitir. Rolling Thunder'ı tüm takım hazırken at.
 - **Elit (Immortal-Radiant)**: Aftershock'u gördüğün düşmana değil, düşmanın gideceği yere at. Takım arkadaşın tam döndüğü anda flash patlasın — bir tick erken veya geç atarsan takım arkadaşın kör olur. Rolling Thunder'ı düşman rotasyona çıkar çıkmaz at: savunucu konumlanmayı zorla, sonra takımı gönder.

@@ -51,7 +51,7 @@ Rakip Classic + minimal yeteneğiyle geliyor. Sen tam paradasın. Kazanmak %80 g
 
 Force karar round'udur. Kendine şunu sor: **"Bu round'u kaybedersem bir sonraki round eco'yu kaldırabilir miyim?"** Evet ise force. Hayır ise save et, parayı koru.
 
-### Force Kombinasyonları
+### Force İkilileri
 
 **Spectre + hafif zırh + 1 yetenek** — Standart force. SMG yakında tüfekle eşit, zırh parayı koruyor.
 **Bulldog + hafif zırh + 2 yetenek** — Tek isabetle öldürme potansiyeli var.

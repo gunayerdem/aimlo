@@ -63,4 +63,4 @@ Yoru'nun tek amacı: bilgi araçlarını boşa harcatmak. Sova + Cypher, Fade + 
 
 **HIGH**: Her iki taraf adapte olur. Yoru tuzak zamanlamasını değiştirir, bilgi oyuncuları ses ipuçlarını öğrenir. Burada öğretilecek şey: ritim değişikliği. Yoru aynı komboyu tekrarlarsa okunur.
 
-**ELITE**: Fakeout + ses + teleport kombinasyonunu bir turda yapıp bir sonraki turda sırayı değiştir. Bilgi oyuncusu hangi seste hangi hareketi beklediğini çözemez hale gelir. Bu seviyede Yoru'nun değeri sadece kaçmak değil — her tuzak tetiklemesini şüpheli kılmak. Bilgi oyuncusu emin olamıyorsa rotate edemez.
+**ELITE**: Fakeout + ses + teleport ikilisini bir turda yapıp bir sonraki turda sırayı değiştir. Bilgi oyuncusu hangi seste hangi hareketi beklediğini çözemez hale gelir. Bu seviyede Yoru'nun değeri sadece kaçmak değil — her tuzak tetiklemesini şüpheli kılmak. Bilgi oyuncusu emin olamıyorsa rotate edemez.

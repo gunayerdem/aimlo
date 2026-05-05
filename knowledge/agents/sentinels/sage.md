@@ -60,7 +60,7 @@ Sage tek iyileştirici, tek dirilticisin. Değerin bilgiden ya da tuzaktan gelmi
 ## 7. Oyuncuya Ne Söylenmeli
 
 **İyi oynuyorsa:**
-Entry her dövüşe tam HP giriyor çünkü sen sıradaki dövüşçüyü iyileştiriyorsun. Düşman bunu hasardan kaçınıyor sanıyor — ama sen her düellodan önce HP avantajı yaratıyorsun. Çapraz duvarlar sightline'ı tamamen kesiyor, üstünden atlanamıyor, kırmak utility istiyor. Duvar arkasında yapılan Resurrect düşmanın müdahale edemeyeceği an yaratıyor.
+Entry her dövüşe tam HP giriyor çünkü sen sıradaki dövüşçüyü iyileştiriyorsun. Düşman bunu hasardan kaçınıyor sanıyor — ama sen her düellodan önce HP avantajı yaratıyorsun. Çapraz duvarlar sightline'ı tamamen kesiyor, üstünden atlanamıyor, kırmak utility istiyor. Duvar arkasında yapılan Resurrect düşmanın engelleyemeyeceği bir an yaratıyor.
 
 Yap: Her round sıradaki dövüşçüyü belirle, dövüş öncesi iyileştir. Duvar açısını her round biraz değiştir. Diriltme için önce duvar, sonra dirilt — sırayı ters çevirme. Slow orb'u push gelince at, erken atma.
 

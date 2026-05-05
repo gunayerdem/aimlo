@@ -52,7 +52,7 @@ Cypher'ı doğru oynarsan takımın kör olmaz. Site'ı ateş gücüyle değil b
 
 ## 5. Harita Etkileşimleri
 - **Bind**: Çok güçlüsün. İki site dar, flank yolu fazla. B site'ı tek başına kilitleyebilirsin, mid'den kamerayla A bilgisi verebilirsin.
-- **Haven**: Üç site utility'ni zorlar. C site'ı her iki telle tut, kafes + tel kombinasyonunu kullan. Mid ve garage'ı kamerayla izle.
+- **Haven**: Üç site utility'ni zorlar. C site'ı her iki telle tut, kafes + tel ikilisini kullan. Mid ve garage'ı kamerayla izle.
 - **Ascent**: B site'ta güçlüsün. Market ve lane'de iki tel iki yaklaşımı kapatır. Mid'deki kamera harita geneli bilgi üretir.
 - **Split**: Mid'de çok işe yararsın. Vent ve mid mail'deki teller en yaygın iki agresyon yolunu kapatır.
 - **Sunset**: Mid koridoruna kamera açıları yüksek değerli. B main ve A elbow'daki teller standart ama işe yarıyor.
@@ -86,6 +86,6 @@ Cypher'ı doğru oynarsan takımın kör olmaz. Site'ı ateş gücüyle değil b
 
 **Orta (Gold-Platinum):** Teller işlevsel ama düşman aynı yerden geçmeyi bırakmış. Kamera açıların iyi ama her round aynı noktaya gidiyor. Kurulum rotasyonuna ve Neural Theft zamanlamasına odaklan.
 
-**Yüksek (Diamond-Ascendant):** Bilgi akışın iyi ama iletişimin dövüş başladıktan sonra geliyor. Round ortasında adapte ol — okumalara göre telleri toplayıp yeniden yerleştir. Kafes + tel kombinasyonunu aktif kullan.
+**Yüksek (Diamond-Ascendant):** Bilgi akışın iyi ama iletişimin dövüş başladıktan sonra geliyor. Round ortasında adapte ol — okumalara göre telleri toplayıp yeniden yerleştir. Kafes + tel ikilisini aktif kullan.
 
 **Elit (Immortal-Radiant):** Değerin tamamen öngörülemezlik ve iletişim hızında. Her kurulum benzersiz ya da reaktif olmalı. Neural Theft zamanlaması solo karar değil, takımla koordine edilmiş bir karar. Kamerayı ölümünden önce toplamak ve spike sonrası retake koridoruna tel atmak bu seviyede standart beklenti.

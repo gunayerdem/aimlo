@@ -107,7 +107,7 @@ Kısa özet: Gekko daha fazla yaratık atar. Skye iyileştirme verir ve flash'ı
 
 **Bind:** Skye önde. Teleporter geçişleri ve dar siteler Trailblazer için biçilmiş kaftan.
 
-**Fracture:** Skye önde. İki yönden gelen baskıda flash + iyileştirme kombinasyonu çok işe yarar.
+**Fracture:** Skye önde. İki yönden gelen baskıda flash + iyileştirme ikilisi çok işe yarar.
 
 **Breeze:** Skye önde. Geniş siteler Guiding Light'ın manuel kontrolünü değerli kılar — Dizzy burada kaybolur.
 
@@ -117,7 +117,7 @@ Kısa özet: Gekko daha fazla yaratık atar. Skye iyileştirme verir ve flash'ı
 
 **Sunset:** Gekko önde. Dar yapılar Mosh Pit'i post-plant'ta çok güçlü kılar.
 
-**Lotus:** Gekko önde. Döner kapılar + Wingman plant kombinasyonu savunmayı sürekli zorlar.
+**Lotus:** Gekko önde. Döner kapılar + Wingman plant ikilisi savunmayı sürekli zorlar.
 
 **Split:** Gekko önde. B Main ve A Site dar yapısı Mosh Pit'e alan açar.
 

@@ -92,7 +92,7 @@ Kesişim noktası: İkisi de smoke kullanır ama farklı amaçla. Jett smokeı s
 
 **Haven (Dengeli):** 3 site Omen smoke ekonomisini zorlar. Jett birden fazla hatta açı tutabilir.
 
-**Lotus (Omen hafif avantajlı):** 3 site geçişleri dar. Omen smoke + teleport kombinasyonu Jett'in açı seçimini kısıtlar.
+**Lotus (Omen hafif avantajlı):** 3 site geçişleri dar. Omen smoke + teleport ikilisi Jett'in açı seçimini kısıtlar.
 
 **Split (Omen avantajlı):** Dar geçitler Omen smoke ile tamamen kapanır. Jett Op için uzun hat yok.
 

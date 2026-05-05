@@ -107,7 +107,7 @@ Phoenix Cypher'ın tuzak hattını utility ile temizleyebilir. Cypher Phoenix'in
 
 **An 2 — Molly tuzağı sildi:** Cypher bir tuzak kaybetti. İkinci tuzak hâlâ çalışıyor — ikinci tuzağa de molly atmadan peek atma.
 
-**An 3 — Run It Back tuzak hattını haritaladı:** Phoenix ult ile tüm trap pozisyonlarını öğrendi. Bu bilgi takımının.
+**An 3 — Run It Back tuzak hattını haritaladı:** Phoenix ult ile tüm tuzak pozisyonlarını öğrendi. Bu bilgi takımının.
 
 **An 4 — Cypher kamera modunda yakalandı:** Phoenix agresif peek attığında Cypher kameradaysa kesin ölüm.
 

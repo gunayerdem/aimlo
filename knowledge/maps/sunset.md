@@ -123,7 +123,7 @@ WHY: Post-plant tutan rakip açısını biliyor ve bekliyor. Tek tek giriş her 
 
 **S Tier:**
 - **Omen**: Market'e TP at, Courtyard'da Shrouded Step kullan, dar koridorlarda smoke kes — Omen bu harita için var. Paranoia dar geçitte isabet edince düşman kör kalıyor, kaçış yok. Her iki site için de smoke + TP ile tek başına destek veriyorsun.
-- **Cypher**: Market'e tripwire + kamera koy, B Alley ve A Elbow'da erken bilgi al. Dar geçitlerde bypass yolu az olduğundan trap'lerini kimse atlayamıyor. Saldırı nereden geliyor, sen zaten biliyorsun.
+- **Cypher**: Market'e tripwire + kamera koy, B Alley ve A Elbow'da erken bilgi al. Dar geçitlerde bypass yolu az olduğundan tuzaklarıni kimse atlayamıyor. Saldırı nereden geliyor, sen zaten biliyorsun.
 - **Breach**: A Elbow'dan Fault Line at, ardından flash'i ekle — site açılıyor. B Main'de Aftershock yakın mesafede duvarın arkasındakini da bitiriyor. Bu haritanın dar yapısı Breach'in her yeteneğini ücretsiz buff'lıyor.
 
 **A Tier:**
@@ -251,7 +251,7 @@ Breachfault line'ı B Main girişine, Killjoy lockdown'ı B site'a koy. Lockdown
 Sage wall'u Courtyard girişine koy, agresif peek at. Wall kırılana kadar rotasyon tamamlanır. Alternatif: Omen smoke + paranoia ile Courtyard'a gir, mid'i geri al. Mid'i bırakma — mid Sunset'in kalbi.
 
 **Rakip lurk-heavy oynuyorsa:**
-Flank utility zorunlu. Cypher tripwire ve Killjoy alarmbot ile Market ve Alley geçişlerini kapat. Lurk oyuncusu trap'e takılınca bilgi gelir, takım adapte olur. Utility yoksa her round arkandan vurulursun.
+Flank utility zorunlu. Cypher tripwire ve Killjoy alarmbot ile Market ve Alley geçişlerini kapat. Lurk oyuncusu tuzağa takılınca bilgi gelir, takım adapte olur. Utility yoksa her round arkandan vurulursun.
 
 **Rakip aynı site'a ard arda execute yapıyorsa:**
 Stack yapma, retake oyna. Execute yapılan site'ta üç kişi tut ama over-stack etme:

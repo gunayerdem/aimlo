@@ -81,7 +81,7 @@ KAY/O'nun bıçağı Jett'in dash'ini, updraft'ını ve smoke'unu aynı anda kap
 
 Jett'in elinde dash, updraft, smoke ve ult var. KAY/O'nun elinde bıçak, iki flash, molly ve ult.
 
-KAY/O'nun gerçek silahı bıçak — geri kalanı flash+molly kombinasyonu. Bıçak Jett'i yakalarsa matchup KAY/O'ya döner. Bıçak ıskalayınca KAY/O elinde iki flash ve molly kalan bir initiator, Jett'in mobilite avantajı açık.
+KAY/O'nun gerçek silahı bıçak — geri kalanı flash+molly ikilisi. Bıçak Jett'i yakalarsa matchup KAY/O'ya döner. Bıçak ıskalayınca KAY/O elinde iki flash ve molly kalan bir initiator, Jett'in mobilite avantajı açık.
 
 Ult maliyeti ikisi için de eşit. Ama Jett ult'u tek hedefe odaklanır, KAY/O ult'u etrafındaki tüm takım arkadaşlarını güçlendirir ve geniş bir yarıçapta tüm düşman utility'sini kapatır. KAY/O ult attıysa alandan çık — Jett ult'u açıksa ve KAY/O ult yoksa baskıya geç.
 
