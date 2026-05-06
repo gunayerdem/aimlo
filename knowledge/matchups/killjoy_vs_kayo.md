@@ -40,7 +40,7 @@ KAY/O'nun suppress knife'ı Killjoy'un tüm cihazlarını kapatır — turret, a
 
 **IF** KAY/O flash Killjoy peek hattına atıldı
 **MEANING** Aim bozulur, Killjoy kör anda açıkta kalır — turret çalışır ama Killjoy kendisi savunmasızdır
-**COUNTER** Flash sesini duyar duymaz köşe al, peek yapma. Turret flash'tan bağımsız çalışır — arkanda tag'lemeye devam eder.
+**COUNTER** Flash sesini duyar duymaz köşe al, peek atma. Turret flash'tan bağımsız çalışır — arkanda tag'lemeye devam eder.
 **WHY** Flash Killjoy'un aim'ini etkiler, turret'i etkilemez. Köşede beklersen turret iş yapar, sen hasar almadan çıkarsın.
 
 ---

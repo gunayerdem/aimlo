@@ -426,7 +426,7 @@ const t = {
 
 Oyuncuların %42'si bir round'da aynı açıdan iki kez peek atıyor. Bu, AI'ın tespit ettiği en yaygın hata. Rakip ilk peek'te seni görmediyse bile, sesini duydu ve crosshair'ini oraya sabitledi. İkinci peek = kesin ölüm.
 
-**Çözüm:** Her peek sonrası 2-3 metre yer değiştir. Farklı yükseklikten (headglitch, crouch) peek at. Sma köşeyi kullan, swing yap.
+**Çözüm:** Her peek sonrası 2-3 metre yer değiştir. Farklı yükseklikten (headglitch, crouch) peek at. Sma köşeyi kullan, swing at.
 
 ## 2. Kötü Off-angle Kullanımı
 
@@ -531,7 +531,7 @@ Site'ın ortasındaki kutuların arkasında **crouch** ile saklanma taktiği. D�
 
 - **Cypher:** Tripwire'ları Market ve B Main'e koy. Spycam'ı Boathouse'a yönlendir. Ultimate bomb planlama sonrası düşman pozisyonu için paha biçilmez.
 
-- **Chamber:** Trademark'ı B Main'e kur. Headhunter ile uzun mesafeden pick alırsın. Rendezvous ile hem site'ı hem de Link'i kontrol edebilirsin.
+- **Chamber:** Trademark'ı B Main'e kur. Headhunter ile uzun mesafeden kill alırsın. Rendezvous ile hem site'ı hem de Link'i kontrol edebilirsin.
 
 - **Sage:** Slow Orb'ları B Main girişine at. Barrier Wall'ı execute zamanı B Main'i kapat. Retake'te kritik değer.
 
@@ -564,7 +564,7 @@ B Site'ı anchor etmek disiplin, info yönetimi ve doğru utility kullanımı ge
 
 ## 1. Stack ve Pick Oyna
 
-Eco'da asla açık alanlarda savaşma. **Köşelere saklan, angle hold et, pick al**. Rakip full-buy olduğu için agresif peek yapar. Sen sadece bekle.
+Eco'da asla açık alanlarda savaşma. **Köşelere saklan, angle hold et, kill al**. Rakip full-buy olduğu için agresif peek atar. Sen sadece bekle.
 
 **Pro Tip:** Tüm takım 1-2 pozisyonda stack olsun. 5 kişi farklı yerlerde = 5 ayrı 1v5. 5 kişi bir arada = 5v5 sahte ekonomi etkisi.
 
@@ -1332,7 +1332,7 @@ function genRoundFeedback(
   let nextRoundPlan: string;
   if (survived && result === "win") {
     nextRoundPlan = isTr
-      ? `Aynı ${loc} setup'ını koru ama açını hafifçe kaydır. ${agent} utility'sini round başında kullan, agresif peek yapma.`
+      ? `Aynı ${loc} setup'ını koru ama açını hafifçe kaydır. ${agent} utility'sini round başında kullan, agresif peek atma.`
       : `Keep the same ${loc} setup but shift your angle slightly. Use ${agent} utility early in the round, avoid aggressive peeks.`;
   } else if (survived && result === "loss") {
     nextRoundPlan = isTr

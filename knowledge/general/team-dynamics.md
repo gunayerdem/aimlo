@@ -215,7 +215,7 @@ COUNTER entry düştüğünde sen pozisyon dışındaysan, düşman seni cezalan
 WHY smoke ve flash zamanlaması doğruysa ve doğru mesafedeysen, site take olur; yanlışsa ikisi de boşa gider
 
 1. **Smoke zamanlaması.** Entry içeri girmeden smoke'u koy. Entry girdikten sonra koyarsan, zaten açıkta kalmış olur.
-2. **Flash zamanlaması.** Flash, entry peek yapmak üzereyken patlamalı. Erken patlasa düşman toparlanır, geç patlasa entry çoktan girmiş olur — ikisi de işe yaramaz.
+2. **Flash zamanlaması.** Flash, entry peek atmak üzereyken patlamalı. Erken patlasa düşman toparlanır, geç patlasa entry çoktan girmiş olur — ikisi de işe yaramaz.
 3. **Trade pozisyonu.** Entry'nin hemen arkasında dur — trade alacak kadar yakın, aynı hasar alanına girmeyecek kadar uzak.
 4. **Spike kurulduktan sonra.** Molly ve smoke'larını spike'ın üstüne kullan. Defuse ettirmezsin.
 
@@ -279,13 +279,13 @@ WHY default fazı IGL'e doğru execute'yu çağırmak için veri sağlar — bun
 
 ```
 Default Fazı (erken round):
-  --> Harita kontrolu al, bilgi topla, varsa pick al.
+  --> Harita kontrolu al, bilgi topla, varsa kill al.
   --> IGL takım çağrılarını dinler: "A tek kişi," "B iki kişi."
 
 Karar Noktası (mid-round):
   --> IGL çağırır: "Execute A" veya "Execute B" veya "Default'a devam."
   --> Bir site'ı stack'lemişlerse --> diğerini vur.
-  --> Eşit yayılmışlarsa --> pick aldığın site'ı vur.
+  --> Eşit yayılmışlarsa --> kill aldığın site'ı vur.
   --> Bilgi almadıysan --> IGL'in önceden planladığı stratejiyi execute et.
 
 Execute Fazı (geç round):
@@ -329,7 +329,7 @@ WHY pistol round'u kazanırsan sonraki iki round'u da cebine koyuyorsun — ekon
 ### Savunma Pistol
 
 - **Anchor**: Light Shield + Shorty (150) + yetenekler. Shorty dar köşede tek atışta öldürür — site içinde mükemmel.
-- **Agresif peek yapan**: Ghost (500) al. Erken fight'ı Ghost'un güçlü olduğu mesafede ver, yakına düşürme.
+- **Agresif peek atan**: Ghost (500) al. Erken fight'ı Ghost'un güçlü olduğu mesafede ver, yakına düşürme.
 - **Stack mı, yayılma mı**: 3-2 yığılması pistol'da işe yarar. Fazladan oyuncu, düşük fire-rate dezavantajını kapatıyor.
 
 ---
@@ -380,9 +380,9 @@ WHY haritayı yay, lurker'ı ayrı gönder — execute'ta 4'e 4 bile olsa iyi ut
 ### 2'ye 3 (Sende 2 Var)
 
 IF takımında 2 kişi kaldıysa
-MEANING eşitlemek zorundasın — 1 pick al, 2'ye 2 yap
+MEANING eşitlemek zorundasın — 1 kill al, 2'ye 2 yap
 COUNTER seni trade'e zorlarlar ya da köşe başında beklerler
-WHY smoke, flash, molly ile düelloyu izole et — trade verme, pick al
+WHY smoke, flash, molly ile düelloyu izole et — trade verme, kill al
 
 ### 2'ye 4 (Sende 2 Var)
 

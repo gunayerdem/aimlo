@@ -22,7 +22,7 @@ B Main, B site'a giden tek ana yol ve son derece dar. Savunmacılar Garage'dan, 
 Her adımının önünde bir util olmalı. Yoksa girme.
 
 **Mid Top — Op Noktası**
-Mid Top, savunmacının Op tuttuğu klasik nokta. Kuru peek atıyorsan karşıda seni bekleyen Op var. Çözümü basit: smoke at, flash at, ondan sonra swing yap. Sırayı atlama.
+Mid Top, savunmacının Op tuttuğu klasik nokta. Kuru peek atıyorsan karşıda seni bekleyen Op var. Çözümü basit: smoke at, flash at, ondan sonra swing at. Sırayı atlama.
 
 **A Heaven (Screens) — Dikey Ölüm**
 A Heaven savunmanın en güçlü noktalarından biri. Site'a girerken Screens'e bakmıyorsan, Screens'teki adam seni görüyor ama sen onu göremiyorsun. A Heaven'dan ölüyorsan sorun dikey farkındalık. Site'a girmeden önce Heaven'ı smoke'la ya da flash'la. Bu adımı atlarsan ölürsün.
@@ -35,7 +35,7 @@ B Heaven, B site'ın tamamını kontrol eden yükseklik. Buradan savunmacı B Ma
 **Pattern 1: Default (2-1-2)**
 IF: Takim round basinda bilgi toplamadan execute yapiyor — 5 kisi tek noktaya yükleniyor ya da dagilim yok.
 MEANING: Default oynamayi reddetmek, Split'te kör oynamak demektir. Rakibin nerede güçlü oldugunu bilmeden execute yaparsan, savunmanin en yogun oldugu yere dalarsin. 2 A Main/Ramp, 1 Mid, 2 B Main dagilimiyla her bölgeden bilgi toplayip orta roundda karar verirsin.
-COUNTER: Her bölgeden bilgi al. A Ramp'tan biri peek yapsin, mid'den biri bilgi alsin, B Main'den biri Garage'i kontrol etsin. Bilgi geldikten sonra zayif tarafa rotate et. Mid alindiysa split execute seç; mid kapandiysa dogrudan site'a gir.
+COUNTER: Her bölgeden bilgi al. A Ramp'tan biri peek atsın, mid'den biri bilgi alsin, B Main'den biri Garage'i kontrol etsin. Bilgi geldikten sonra zayif tarafa rotate et. Mid alindiysa split execute seç; mid kapandiysa dogrudan site'a gir.
 WHY: Split'te savunma güçlü — dar girisler var. Savunmanin hangi tarafta güçlü oldugunu anlarsan zayif tarafi hedef alirsin. Bunu yapmayan takim her round kumar oynuyor.
 
 **Pattern 2: A Execute**
@@ -74,12 +74,12 @@ IF: Her round A Heaven'da aynı açıdan, Screens'den oynuyorsun.
 MEANING: Rakip seni orada beklemeye başlar. İkinci round açı tutar, ölürsün. Pozisyon tekrarlanınca avantajını kaybedersin.
 COUNTER:
 - A Heaven'da kill aldığın round'un sonunda site seviyesine in — rakip yukarıyı açı tutacak, seni bulamayacak.
-- A Ramp'ta agresif peek yap, kill al, geri çekil.
+- A Ramp'ta agresif peek at, kill al, geri çekil.
 - A Elbow ve site içi düşük pozisyonu karıştır.
 WHY: Off-angle ilk kullanımda güçlü, tekrarlandığında işe yaramaz. Pozisyonu değiştirirsen rakip her round birden fazla açıyı kontrol etmek zorunda kalır — bu onların girişini yavaşlatır.
 
 **Pattern 2: B Site Savunma**
-IF: B Heaven'dan erken peek yapıyorsun — pozisyonunu veriyorsun.
+IF: B Heaven'dan erken peek atıyorsun — pozisyonunu veriyorsun.
 MEANING: B Heaven'ın güçü görülmeden hakim olmaktan gelir. Peek yaptığın anda rakip seni açı tutar ya da trade alır. O avantajı kendin sıfırlıyorsun.
 COUNTER:
 - B Heaven'da pasif kal, B Main'den push gelene kadar yerini verme.
@@ -92,8 +92,8 @@ IF: Utility kullanmadan mid'i tutmaya çalışıyorsun — kuru peek ya da pasif
 MEANING: Vents ve Mail iki ayrı yön. Tek başına utility olmadan ikisini aynı anda tutamazsın. Kuru oynarsan mid'i saldırı takımına bırakmış olursun.
 COUNTER:
 - Sage varsa mid'e duvar at — Split'teki en güçlü duvar pozisyonu.
-- Sage yoksa tripwire, camera veya turret ile bilgi al, kuru peek yapma.
-- Mid Top'tan agresif peek yap ama her round değil; Sage wall'ı görürsen çekil, utility ile kontrol et.
+- Sage yoksa tripwire, camera veya turret ile bilgi al, kuru peek atma.
+- Mid Top'tan agresif peek at ama her round değil; Sage wall'ı görürsen çekil, utility ile kontrol et.
 WHY: Mid düşünce her iki Heaven tehlike altına girer. O an callout ver, takımı uyar. Mid, tek bir oyuncunun kuru savunmasıyla tutulmaz — utility açığı kapatır, duvar yolu keser.
 
 **Pattern 4: Heaven Savunma (Genel)**
@@ -236,13 +236,13 @@ Savunma tarafında ekonomin daha rahat. Saldırı gelmediği tarafa utility harc
 **Rakip her round A Ramp push yapıyorsa:**
 IF: Rakip her round A Ramp'a utility ile push yapıyor.
 MEANING: Ramp'ı aldıktan sonra A execute gelecek. Bu kesin.
-COUNTER: Ramp'ı smoke'la, kendini Heaven'a al. Ramp tepesinde off-angle tut. Bir round agresif Ramp peek yap, bir sonraki round geri çekil ve smoke + molly at.
+COUNTER: Ramp'ı smoke'la, kendini Heaven'a al. Ramp tepesinde off-angle tut. Bir round agresif Ramp peek at, bir sonraki round geri çekil ve smoke + molly at.
 WHY: Aynı noktaya her round aynı şekilde geliyorlarsa, sen her round farklı bir şey yap — planları çöker.
 
 **Rakip mid kontrolü alıyorsa:**
 IF: Rakip erken baskınla mid kontrolü alıyor.
 MEANING: Mid giderse her iki Heaven tehlike altına girer, harita açılır.
-COUNTER: Sage varsa erken wall at, mid fiziksel olarak kapanır. Sage yoksa erken agresif mid peek yap. Killjoy tripwire veya Cypher camera koy, bilgi al.
+COUNTER: Sage varsa erken wall at, mid fiziksel olarak kapanır. Sage yoksa erken agresif mid peek at. Killjoy tripwire veya Cypher camera koy, bilgi al.
 WHY: Mid Split'in kalbidir. Mid giderse her yer gider.
 
 **Rakip B rush yapıyorsa:**

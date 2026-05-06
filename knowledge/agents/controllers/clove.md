@@ -5,7 +5,7 @@ Clove, klasik pasif smoke atan controller değil. Öldükten sonra bile smoke at
 
 ## 2. Temel Sorumluluklar
 - Hem hayattayken hem de öldükten sonra takım için smoke çıkar
-- Takım peek yapmadan hemen önce Meddle at — düşman zayıflamış dövüşsün
+- Takım peek atmadan hemen önce Meddle at — düşman zayıflamış dövüşsün
 - Kill aldıktan hemen sonra Pick-Me-Up aç — fazla canla bir sonraki dövüşe gir
 - Not Dead Yet'i yalnızca güvenli çıkış yapabildiğinde kullan — ölüm noktasında değil
 - Önce smoke, sonra dövüş — Clove saldırgan oynar ama controller görevi her zaman önce gelir
@@ -23,7 +23,7 @@ Clove, klasik pasif smoke atan controller değil. Öldükten sonra bile smoke at
 
 **IF** Not Dead Yet kullanıyorsun ama her diriliş sonrası anında ölüyorsun
 **MEANING** Takım arkadaşın yakında değil ya da ölüm noktanı terk etmiyorsun
-**COUNTER** Sadece takım arkadaşın trade mesafesindeyken ya da güvenli bir çıkış varken diril. Dirilir dirilmez ölüm noktasından uzaklaş — eski açıdan peek yapma.
+**COUNTER** Sadece takım arkadaşın trade mesafesindeyken ya da güvenli bir çıkış varken diril. Dirilir dirilmez ölüm noktasından uzaklaş — eski açıdan peek atma.
 **WHY** Ölüm noktasında dirilen oyuncuya düşman zaten nişan almış bekliyor — konum değiştirmezsen ücretsiz kill veriyorsun.
 
 **IF** Smoke'larını sadece hayattayken atıyorsun, öldükten sonra hiç atmıyorsun
@@ -31,9 +31,9 @@ Clove, klasik pasif smoke atan controller değil. Öldükten sonra bile smoke at
 **COUNTER** Öldüğünde hemen sor: takımın şu an smoke'a ihtiyacı var mı? Varsa at. Bu pencere başka hiçbir controller'da yok.
 **WHY** Post-death smoke Clove'u seçmenin tek gerekçesidir. Kullanmazsan Clove'u standart bir controller gibi oynuyorsun.
 
-**IF** Meddle'ı takım peek yapmadan çok önce, temas olmadan atıyorsun
+**IF** Meddle'ı takım peek atmadan çok önce, temas olmadan atıyorsun
 **MEANING** Decay boşa gidiyor — dövüş başlamadan bitmis oluyor
-**COUNTER** Takım peek yapacağı anda Meddle at. Decay, düşman ateş açtığı sırada üstünde olsun.
+**COUNTER** Takım peek atacağı anda Meddle at. Decay, düşman ateş açtığı sırada üstünde olsun.
 **WHY** Decay kısa sürer; dövüş yokken atarsan düşman temas kurduğunda zaten dolmuş olur.
 
 **IF** Fazla can açtıktan sonra giderek daha riskli açılara giriyorsun
@@ -62,13 +62,13 @@ Clove, klasik pasif smoke atan controller değil. Öldükten sonra bile smoke at
 ## 7. Oyuncuya Ne Söylenmeli
 
 ### İyi performans gösterdiğinde
-**Ne yapıyorsun:** Dövüşe girmeden önce smoke'ları atıyorsun. Takım peek yapmadan hemen önce Meddle'ı zamanlıyorsun. Kill alır almaz Pick-Me-Up açıyorsun.
+**Ne yapıyorsun:** Dövüşe girmeden önce smoke'ları atıyorsun. Takım peek atmadan hemen önce Meddle'ı zamanlıyorsun. Kill alır almaz Pick-Me-Up açıyorsun.
 **Düşman ne görüyor:** Frag atan bir smoke botu görüyor. Asıl tehlikeyi — Meddle zamanlamasını — fark etmiyor. Zayıflamış HP ile dövüşmeye giriyorlar.
 **Düşman zorlaması:** Ya zayıflamış HP ile dövüşüyorlar (kazanmaları gereken düelloları kaybediyorlar) ya da decay geçsin diye açıdan çekiliyorlar (tutma pozisyonunu geçici bırakıyorlar). Pick-Me-Up fazla canın trade'ini zorlaştırıyor — seni indirmek için fazladan mermi gerekiyor.
 **Kazanç:** Meddle açık olduğunda takımın her düelloda HP avantajıyla giriyor. Kill sonrası Pick-Me-Up ile bir sonraki dövüşe de avantajlı başlıyorsun. Ardışık iki düellodaki HP farkı takımın lehine ciddi birikir.
-**Döngü:** Önce smoke'lar → takım peek yapmadan önce Meddle → entry → Pick-Me-Up → fazla canla sonraki dövüş. Ölürsen: takımın hâlâ açık olan yerini smoke'la — zaten güvenli olan tarafa değil.
-**Düşman adapte olduğunda:** 3-5 round sonra smoke atarken seni yakalamak için erkenden push yapabilirler, Pick-Me-Up açılmadan seni öldürmek için açına önceden nişan alabilirler ya da fazla canını aşmak için çift peek yapabilirler.
-**Buna karşı:** Erken push geliyorsa smoke'ları daha geride at, entry'yi takım arkadaşına bırak. Açına önceden nişan alıyorlarsa önce o açıya Meddle at, takım arkadaşın swing yapsın. Çift peek geliyorsa ikinci oyuncuya Meddle at — senin fazla canına karşı zayıflamış girsinler.
+**Döngü:** Önce smoke'lar → takım peek atmadan önce Meddle → entry → Pick-Me-Up → fazla canla sonraki dövüş. Ölürsen: takımın hâlâ açık olan yerini smoke'la — zaten güvenli olan tarafa değil.
+**Düşman adapte olduğunda:** 3-5 round sonra smoke atarken seni yakalamak için erkenden push yapabilirler, Pick-Me-Up açılmadan seni öldürmek için açına önceden nişan alabilirler ya da fazla canını aşmak için çift peek atabilirler.
+**Buna karşı:** Erken push geliyorsa smoke'ları daha geride at, entry'yi takım arkadaşına bırak. Açına önceden nişan alıyorlarsa önce o açıya Meddle at, takım arkadaşın swing atsın. Çift peek geliyorsa ikinci oyuncuya Meddle at — senin fazla canına karşı zayıflamış girsinler.
 
 ### Zorlandığında
 "Smoke atmadan ölüyorsun. Önce smoke'lar, sonra dövüş. Clove saldırgan oynar ama hâlâ controller — takımın senin fragından önce smoke'una ihtiyacı var."

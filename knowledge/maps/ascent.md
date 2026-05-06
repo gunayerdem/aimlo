@@ -12,7 +12,7 @@ Haritanın temposu mid kontrolüyle döner. Mid'i tutuyorsan bilgi senin elinde,
 
 ### A Main
 
-A Main'de kuru peek yaparsan, Heaven veya Generator'dan tutan biri seni kafandan vurur. Sebep basit: uzun koridorda vücudun tamamen açıkta. Mekanik sorunu yok — giriş sırasını bozuyorsun. Önce flash at, sonra smoke koy, sonra çık. Bu sırayı atlayarak girersen canınla ödersin.
+A Main'de kuru peek atarsan, Heaven veya Generator'dan tutan biri seni kafandan vurur. Sebep basit: uzun koridorda vücudun tamamen açıkta. Mekanik sorunu yok — giriş sırasını bozuyorsun. Önce flash at, sonra smoke koy, sonra çık. Bu sırayı atlayarak girersen canınla ödersin.
 
 ### B Main
 
@@ -20,7 +20,7 @@ B Main'de dar alanda yığılma seni öldürür. Üçünüz aynı anda girmeye k
 
 ### Mid Top / Mid Courtyard
 
-Karşıda Op olduğunu biliyorsun ve yine de kuru peek yapıyorsun. Bu taktik hatası değil, karar hatası. Mid Top'a bilgisiz girme. Smoke at, flash koy — ya da tamamen farklı rotadan yürü.
+Karşıda Op olduğunu biliyorsun ve yine de kuru peek atıyorsun. Bu taktik hatası değil, karar hatası. Mid Top'a bilgisiz girme. Smoke at, flash koy — ya da tamamen farklı rotadan yürü.
 
 ### Catwalk
 
@@ -38,7 +38,7 @@ Retake'de Market'i clear etmeden geçersen, arkandan vurulursun. Orada lurker va
 
 **MEANING:** Default'ın amacı tek bir şey: savunmanın nerede durduğunu anlamak. Mid'deki oyuncu en kritik kişi. Catwalk'ta hareket var mı? Market'ten ses geliyor mu? Bunu anlayıp takıma iletirsen, execute kör değil — veriye dayalı olur.
 
-**COUNTER:** Mid oyuncun erken ölürse, kör kalırsın. Savunma bunu bildiği için ya mid'e agresif peek yapar ya da mid'i smoke'layıp her iki taraftan da gözünü kör eder. Mid oyuncusu agresif peek yapmasın — görevi bilgi toplamak, kill almak değil.
+**COUNTER:** Mid oyuncun erken ölürse, kör kalırsın. Savunma bunu bildiği için ya mid'e agresif peek atar ya da mid'i smoke'layıp her iki taraftan da gözünü kör eder. Mid oyuncusu agresif peek atmasın — görevi bilgi toplamak, kill almak değil.
 
 **WHY:** Savunmayı üç noktaya yaymak zorunda bırakıyorsun. 3 kişiyi tek site'a yığarlarsa, diğer taraf boş kalır ve oraya execute edersin. Eşit dağılırlarsa, utility ile herhangi bir site'i açarsın.
 
@@ -82,7 +82,7 @@ En yaygın hata: smoke atıp flash beklemeden girmek. Savunucu smoke kenarında 
 
 **MEANING:** Mid'i alan takım A Short üzerinden A site'a veya Market üzerinden B site'a split yapabilir. Bu esneklik savunmayı sürekli tahmin yapmaya zorlar. Mid kontrolu olmadan execute yaparsan, savunma nereden geleceğini biliyor — tek boyutlu saldırı.
 
-**COUNTER:** Top Mid'de Op varsa, oraya kuru peek yapamazsın. Flash + swing ikilisi kullan ya da smoke ile Op sightline'ını kapat. Mid'i aldıktan sonra takımla iletişim kur — sen Market'tesin ama takım hala A Main'deyse, yalnız kalırsın.
+**COUNTER:** Top Mid'de Op varsa, oraya kuru peek atamazsın. Flash + swing ikilisi kullan ya da smoke ile Op sightline'ını kapat. Mid'i aldıktan sonra takımla iletişim kur — sen Market'tesin ama takım hala A Main'deyse, yalnız kalırsın.
 
 **WHY:** Mid'i kontrol eden taraf haritanın tamamına erişir. Mid'siz saldırı tek kapılı oda — savunma nereden geleceğini biliyor. Mid kontroluyla saldırı üç kapılı oda — savunma hangisine bakacağını bilemez.
 
@@ -184,7 +184,7 @@ Retake öncesi bilgi topla: drone, recon bolt, Fade haunt. Sonra takım olarak a
 
 ### Iron-Silver
 
-Util kullanmadan site'a giriyorsun — bu en büyük hatan. A Main'den kuru peek yapıyorsun, B Main'de yığılıyorsunuz, mid'e hiç bakmıyorsunuz. Bunu bırak.
+Util kullanmadan site'a giriyorsun — bu en büyük hatan. A Main'den kuru peek atıyorsun, B Main'de yığılıyorsunuz, mid'e hiç bakmıyorsunuz. Bunu bırak.
 
 Site'a girmeden önce en az bir ability kullan:
 - Flash at, flash patladığı an gir.
@@ -196,7 +196,7 @@ Bu iki alışkanlık yerleşince ölüm oranın yarı yarıya düşer. Mid'i şu
 
 Util atıyorsun ama zamanlaması yanlış. Flash atıyorsun, flash patlıyor sönüyor, sen sonra giriyorsun — savunucu çoktan pozisyon almış. Bu flash'in hiç faydası yok.
 
-Kural basit: flash patladığı an swing yap, smoke düştüğü an gir. Takımca pratik edin:
+Kural basit: flash patladığı an swing at, smoke düştüğü an gir. Takımca pratik edin:
 - Birisi "flash atıyorum" der.
 - Herkes aynı anda girer.
 
@@ -357,7 +357,7 @@ Anti-eco'yu hafife alma. Sheriff her zırhı deler, Classic sağ tık yakında s
 
 **COUNTER:** Üç seçeneğin var:
 - Görüş hattını smoke'la — Op işlevsiz kalır.
-- Flash at, swing yap — reaction time avantajını elinden al.
+- Flash at, swing at — reaction time avantajını elinden al.
 - Farklı rotadan git — Op A Main'deyse B'ye geç veya mid'den split yap.
 
 **WHY:** Op görüş hattına bağımlı. O hattı kapatırsan 4700 kredilik silah duvara bakıyor. Silahı değil, görüş hattını devre dışı bırakıyorsun.

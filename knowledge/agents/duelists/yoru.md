@@ -13,9 +13,9 @@
 ## 3. Sık Yapılan Hatalar
 1. **TP'yi açık yere gömmek** — Gatecrash ses verir. Herkesin bildiği noktalara koyarsan düşman seni bekler. Kutunun arkası, köşe, duman içi — kimsenin bakmadığı yer.
 2. **TP'ye plansız girmek** — Işınlandın, ne yapacaksın? Bilmiyorsan ölürsün. Her TP girişinin arkasında bir eylem olsun: flash ve swing, ult, ya da temizlenecek belirli bir açı.
-3. **Klonu yalnız bırakmak** — Klon tepki çektiğinde sen swing yapmaya hazır değilsen, düşman klonu görür ve geçer. Klon gönder, düşman tepki verdiğinde hemen swing yap.
+3. **Klonu yalnız bırakmak** — Klon tepki çektiğinde sen swing atmaya hazır değilsen, düşman klonu görür ve geçer. Klon gönder, düşman tepki verdiğinde hemen swing at.
 4. **Ult'u sadece gezmek için kullanmak** — Etrafı gezdin, sonra ne? Ult, flash-çıkış ile kill ile bitmeli. Pasif ult round kazandırmaz.
-5. **Yoru'yu Jett gibi oynamak** — Yoru'nun ham peek gücü yok. Klon, flash, TP olmadan kuru peek yapıyorsan yanlış ajan oynuyorsun.
+5. **Yoru'yu Jett gibi oynamak** — Yoru'nun ham peek gücü yok. Klon, flash, TP olmadan kuru peek atıyorsan yanlış ajan oynuyorsun.
 6. **Her round aynı lurk zamanlaması** — Düşman kalıbı okur, flank açını tutar, gittiğin anda hazır bekler. Bir round erken lurk yap, bir round geç lurk yap, bir round hiç lurk yapma — çeşitlendir.
 7. **Flash-TP kombosu bozuk** — Flash TP varmadan patlarsa düşman toplar. TP varır, düşman tepki verdikten sonra patlarsa geç. Flash TP girişiyle aynı anda patlamalı.
 
@@ -31,13 +31,13 @@ COUNTER: Lurk zamanlamasını değiştir. Bir round takımla oyna, lurk yapma. D
 WHY: Tekrar eden zamanlama düşmana pozisyonunu bedavaya verir. Yoru'nun tek silahı olan sürpriz kalkar.
 
 IF: Oyuncu Dimensional Drift sırasında veya sonrasında kill almıyor
-MEANING: Ult'u sadece keşif için kullanıyor, çıkışta flash atıp swing yapmıyor
-COUNTER: Ult'tan çık, anında Blindside at, düşman flash'lanırken swing yap. Ult her seferinde en az bir kill veya zorlanmış ölümle bitmeli.
+MEANING: Ult'u sadece keşif için kullanıyor, çıkışta flash atıp swing atmıyor
+COUNTER: Ult'tan çık, anında Blindside at, düşman flash'lanırken swing at. Ult her seferinde en az bir kill veya zorlanmış ölümle bitmeli.
 WHY: Yalnız keşif bilgiyi verir ama round kazandırmaz. Çıkışta flash-swing yoksa ult sadece haritada yürüyüştür.
 
 IF: Klon gönderiyor ama hemen takip etmiyor
 MEANING: Klon ile kendi pozisyonun senkronsuz — düşman klona bakıp sana dönüyor
-COUNTER: Düşman klonu vururken veya klona tepki verirken swing yap. Klon ve sen farklı açılardan aynı anda gelmelisiniz.
+COUNTER: Düşman klonu vururken veya klona tepki verirken swing at. Klon ve sen farklı açılardan aynı anda gelmelisiniz.
 WHY: Geç gelen swing düşmana toparlanma süresi verir. Koordinesiz klon sadece yerini ele verir.
 
 IF: TP aktivasyondan önce sık yok ediliyor
@@ -73,7 +73,7 @@ WHY: Yok edilen TP flank ve yeniden konumlanma seçeneklerini sıfırlar.
 ### Düşük Elo (Iron-Silver)
 TP-flash kombosu önce. Her açıya girerken önce klon gönder. Her round lurk yapma — yarısında takımla oyna. Ult'u karmaşık oyunlar için değil güvenli site keşfi için kullan.
 ### Orta Elo (Gold-Diamond)
-Lurk zamanlamasını çeşitlendir — erken, geç, hiç. Ult'tan çıkarken Blindside at, swing yap — her ult en az bir kill ile bitmeli. Her haritada yaygın TP yok etme noktalarından kaçınan iki-üç rota öğren. Klon zamanlamasını takım saldırısı ile senkronize et.
+Lurk zamanlamasını çeşitlendir — erken, geç, hiç. Ult'tan çıkarken Blindside at, swing at — her ult en az bir kill ile bitmeli. Her haritada yaygın TP yok etme noktalarından kaçınan iki-üç rota öğren. Klon zamanlamasını takım saldırısı ile senkronize et.
 ### Yüksek Elo (Ascendant-Immortal)
 Gerçekte TP'ye girmeden sadece TP sesi ile rotasyon çek. Round bazlı zamanlama çeşitliliğini bilinçli yönet. Belirli bomba becerilerini zorla çıkarmak için klonu kullan, yeniden dolum biter bitmez saldır.
 ### Elit (Radiant)

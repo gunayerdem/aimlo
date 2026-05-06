@@ -23,7 +23,7 @@
 IF: A Hall'a flash atmadan, smoke atmadan giriyorsun ve her seferinde ölüyorsun.
 MEANING: Savunucu Hall çıkışını zaten açıyı tutuyor. Hall dar ve uzun — flashsız giren herkesi bedavaya vuruyor. Kendi kendini öldürüyorsun.
 COUNTER:
-- Flash atmadan Hall'a girme. Flash patlayınca swing yap.
+- Flash atmadan Hall'a girme. Flash patlayınca swing at.
 - Op sesini duyduysan smoke at, smoke içinden kapat mesafeyi.
 - Utility atmadan Hall'a adım atma — utility atana kadar orası ölüm tuzağı.
 WHY: Dar koridorda hareket yönün bellidir, savunucu seni bekler. Flash savunucunun reaksiyon avantajını yok eder. Smoke onu ya yakın dövüşe ya da pozisyonu bırakmaya zorlar.
@@ -196,7 +196,7 @@ Breeze bu seviyede satranç. Her hamlenin bir sonraki hamleyi kurması lazım.
 - **Force round'da B'ye git.** B Main dar, Op sightline'ları A Long kadar uzun değil. Force round'da en iyi şansın B üzerinden Elbow rush.
 - **Eco'da A Hall'a gir.** Hall dar ve mesafe kısa — Sheriff headshot burada çalışır. Açık alana çıkma, dar açılara sok kendini.
 - **Spectre alma.** Sightline'lar çok uzun, Spectre her düelloda seni kaybettirir. Paran yetmiyorsa Marshal veya Sheriff al.
-- **Op'u taşı, peek yapma.** Breeze'de Op diğer haritalara göre çok daha fazla değer üretir. Op tutan oyuncu kill al, pozisyon değiştir, ölme.
+- **Op'u taşı, peek atma.** Breeze'de Op diğer haritalara göre çok daha fazla değer üretir. Op tutan oyuncu kill al, pozisyon değiştir, ölme.
 
 ## 9. Temel Pozisyonlar ve Callout'lar
 - **A Tarafı:** A Lobby / A Hall (Cave) / A Bridge / A Pyramid / A Site / A Back / A Switch / A Metal Door

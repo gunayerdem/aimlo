@@ -21,7 +21,7 @@
 **Pattern 1: A Long Kuru Peek Ölümleri**
 IF: A Long'a smoke veya flash atmadan giriyorsun — utility yok, düz sightline'a yürüyorsun.
 MEANING: Sightline disiplini yok. A Long Haven'ın en uzun hatlarından biri. Savunucu orada seni bekliyor, açıyı tutuyor. Sen görünür olduğun anda o zaten tetikten çekiyor.
-COUNTER: A Long'a girmeden önce sightline'ın ortasını smoke'la. Sonra flash at, flash patlarken swing yap. Op tutan birine karşı Jett dash veya Neon slide kullan — sabit hedef olma.
+COUNTER: A Long'a girmeden önce sightline'ın ortasını smoke'la. Sonra flash at, flash patlarken swing at. Op tutan birine karşı Jett dash veya Neon slide kullan — sabit hedef olma.
 WHY: Savunucu seni görür görmez ateş edebilir. Sen hâlâ pozisyon alırken o zaten nişan almış durumda. Smoke bu denklemi kırar — savunucu ya bekler ya smoke'a girer. Flash ise aim'ini sıfırlar, sana swing için pencere açar.
 
 **Pattern 2: B Main Yığılma Ölümleri**

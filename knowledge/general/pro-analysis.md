@@ -139,11 +139,11 @@ WHY izole fight aradığında aynı şeyi ona karşı yapamazsın — sen toplu 
 IF bu stile karşı oynuyorsan 
 MEANING off-angle tutuyor, dry peek edersen açıyı bulmak zorunda kalıyorsun 
 COUNTER Op açısına drone veya tarama at, sonra flash'la — bilgi olmadan swing atma 
-WHY off-angle tutar ve atış için gereken süre kadar peek yapar; drone/tarama açısı sıfırlar
+WHY off-angle tutar ve atış için gereken süre kadar peek atar; drone/tarama açısı sıfırlar
 
 **Özellikler:**
 - Dövüş zorlamıyor — doğru an gelince giriyor
-- Op peek zamanlaması minimal: atış için gereken süre kadar peek yapıp yeniden pozisyonlanıyor
+- Op peek zamanlaması minimal: atış için gereken süre kadar peek atıp yeniden pozisyonlanıyor
 - Off-angle tercih ediyor — beklediğin yerde değil
 
 ### Hata Yakmayan IGL / Flex Sentinel

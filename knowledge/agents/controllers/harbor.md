@@ -17,7 +17,7 @@ Bu kit hareketsiz duranı cezalandırır. Cascade'den kimse geçmezse o yetenek 
 - High Tide'ı düz çizgi atmak. Her haritada kıvrımı ödüllendiren geometri var. Düz High Tide, toksini olmayan Viper duvarı — kesinlikle daha kötü.
 - Cove'u birden fazla açının ateş edebildiği yere koymak. HP sınırlı, iki düşman aynı anda spray yaparsa plant bitmeden ölür. Tek açının tehdit ettiği yere koy.
 - Reckoning'i dar odalarda kullanmak (Bind hookah, Split sewers). Gayzer havuzları alana ihtiyaç duyar; dar yerde düşman bir adım yana kayıyor.
-- Savunmada pasif köşe oturmak. Harbor'ın savunma araçları Omen veya Viper'dan zayıf. Köşede bekliyorsan ajanı yanlış oynuyorsun. Cascade'le agresif peek yap, geri çekil. High Tide'ı retake rotasyon kesmek için kullan.
+- Savunmada pasif köşe oturmak. Harbor'ın savunma araçları Omen veya Viper'dan zayıf. Köşede bekliyorsan ajanı yanlış oynuyorsun. Cascade'le agresif peek at, geri çekil. High Tide'ı retake rotasyon kesmek için kullan.
 - High Tide'ı takım arkadaşlarının yüzüne bükmek. Duelist A short'a bakıyorsa ve duvarın onun üzerinden kıvrılıyorsa, round bitti. Atmadan önce minimap'te takım pozisyonlarını kontrol et.
 
 ## 4. Kalıp -> Anlam
@@ -44,7 +44,7 @@ Bu kit hareketsiz duranı cezalandırır. Cascade'den kimse geçmezse o yetenek 
 
 **IF** Harbor savunma round'larında en düşük ACS'ye sahip
 **MEANING** Harbor pasif oturup temas bekliyor. Saldırı odaklı kit boşa gidiyor.
-**COUNTER** Round başında Cascade'le agresif peek yap — geniş swing, bilgi al, Cascade'le geri dön. High Tide'ı önceden koymak yerine retake'de rotasyoncuları kesmek için kullan.
+**COUNTER** Round başında Cascade'le agresif peek at — geniş swing, bilgi al, Cascade'le geri dön. High Tide'ı önceden koymak yerine retake'de rotasyoncuları kesmek için kullan.
 **WHY** Harbor'ın savunma kiti agresyon üzerine kurulu. Pasif oynarsan hareketli siper avantajını tamamen terk etmiş olursun.
 
 **IF** Harbor tüm yeteneği kullanmasına rağmen takım site take'lerde sürekli başarısız oluyor
@@ -57,9 +57,9 @@ Bu kit hareketsiz duranı cezalandırır. Cascade'den kimse geçmezse o yetenek 
 **COUNTER** Bir takım arkadaşı Cascade üzerinde dar açı tutsun. İçinden push yapan doğrudan crosshair'a yürür. "Cascade'den push yapıyorlar" diye çağrı yap.
 **WHY** Cascade'den geçen kısa süre açıkta kalır. Hazır açı bu geçiş anını bedava kill'e çevirir.
 
-**IF** High Tide sürekli takım arkadaşlarının peek yaptığı yerlere bükülüyor
+**IF** High Tide sürekli takım arkadaşlarının peek attığı yerlere bükülüyor
 **MEANING** Oyuncu bükme yönünü seçerken takım pozisyonlarını hesaba katmıyor.
-**COUNTER** Atmadan önce minimap'e bak. Bükülme her zaman takımının peek yaptığı yerden uzağa, düşmanın tuttuğu yere doğru kıvrılmalı.
+**COUNTER** Atmadan önce minimap'e bak. Bükülme her zaman takımının peek attığı yerden uzağa, düşmanın tuttuğu yere doğru kıvrılmalı.
 **WHY** Kendi takımının görüşünü engelleyen duvar düşmana avantaj verir — senin takımın kör dövüşürken düşman pozisyon koruyor.
 
 **IF** Takımda zaten Viper veya Astra varken Harbor seçiliyor
@@ -101,7 +101,7 @@ Bu kit hareketsiz duranı cezalandırır. Cascade'den kimse geçmezse o yetenek 
 - **KAY/O'ya karşı**: Suppress atış ortasında seni etkisiz kılar, takımı push ortasında açıkta bırakır. Yetenek başlatırken suppress bıçağı yarıçapının dışında kal. Push sırasında suppress yenersen takım sen yeniden atana kadar durmalı.
 - **Sova'ya karşı**: Recon Bolt Cascade ve High Tide'ın içinden tarar — Harbor smoke controller gibi bilgiyi engellemez. Takımın başka ajandan ek smoke'a ihtiyacı var veya dart'ı push öncesinde yok etmeli.
 - **Cypher'a karşı**: Cascade yolundaki Trapwire'lar içinden geçen takım arkadaşlarını tetikler. Cascade arkasında push yapmadan önce Cypher yeteneğini temizle. High Tide kamera görüşünü engeller — savunmada nadir bilgi avantajı.
-- **Jett/Raze ile**: Harbor'ın en yüksek sinerji eşleşmesi. Entry duelist'in önünde Cascade, doğru anda dash veya satchel ile içinden geçtikleri hareketli kalkan yaratır. Duelist peek yapar, savunucu sönen kalkan ile giriş arasında sıkışır.
+- **Jett/Raze ile**: Harbor'ın en yüksek sinerji eşleşmesi. Entry duelist'in önünde Cascade, doğru anda dash veya satchel ile içinden geçtikleri hareketli kalkan yaratır. Duelist peek atar, savunucu sönen kalkan ile giriş arasında sıkışır.
 - **Gekko ile**: Cascade içinden Wingman ve Dizzy atarken takım arkasında push yaptığında örtüşen baskı yaratır. Gekko'nun geri toplama mekaniği yeteneğinin push'tan sağ çıkmasını ve retake'de yeniden kullanılmasını sağlar.
 
 ## 7. Oyuncuya Ne Söylenmeli

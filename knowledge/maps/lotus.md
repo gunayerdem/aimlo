@@ -21,7 +21,7 @@
 **Pattern 1: A Main Kuru Push Ölümleri**
 IF: A Main'e flash veya smoke olmadan giriyorsun — Tree ve Stairs açılarına yürüyerek dalıyorsun.
 MEANING: Tree'den ve Stairs'ten iki farklı açı seni aynı anda görüyor. Defender açı tutma'li bekliyor, sen yürüyerek giriyorsun — ilk atış zaten onun.
-COUNTER: Girmeden önce Tree'yi smoke'la. Stairs yönüne flash at. Flash patlar patlamaz swing yap — arada boşluk bırakma. Girdikten sonra Root'u al, yoksa flank yersin.
+COUNTER: Girmeden önce Tree'yi smoke'la. Stairs yönüne flash at. Flash patlar patlamaz swing at — arada boşluk bırakma. Girdikten sonra Root'u al, yoksa flank yersin.
 WHY: A Main dar, defender iki yükseklikten seni izliyor. Smoke sightline'ı keser. Flash defender'ı açıdan söker. Root kontrolsuz her A execute flank riskiyle gelir.
 
 **Pattern 2: B Duvar Timing Hataları**
@@ -35,7 +35,7 @@ IF: Takım rotating door'ları hiç kullanmıyor — A ile C arasında hep dış
 MEANING: Haritanın en güçlü mekaniğini çöpe atıyorsun. Saldırıda split seçeneğin yok, savunmada rotasyonun yavaş.
 COUNTER:
 - Saldırıda: A Main'de pressure yarat, kapıdan 2 kişiyi C'ye gönder — defender A'ya dönerken C boş kalır.
-- Savunmada: Kapı sesini duy, karşı taraftan peek yap.
+- Savunmada: Kapı sesini duy, karşı taraftan peek at.
 - Eco'da: Kapıyla hızlı site switch yap, defender'ın setup'ını boz.
 WHY: Kapı A ile C arasında 2-3 adımlık geçiş sağlar. Dış kenardan aynı rotasyon 5-6 kat uzun sürer. Bu fark round ortasında site değiştirmeyi mümkün kılar.
 
@@ -50,8 +50,8 @@ WHY: Silent Drop ses çıkarmadan site girişi sağlar. Diğer tüm girişlerde 
 **Pattern 5: C Mound Açıkta Kalma**
 IF: C Mound'da cover kullanmadan açıkta duruyorsun.
 MEANING: C Main'den uzun sightline var. Açıkta duruyorsan Op veya Vandal seni kolayca vurur. Mound'un gücü pozisyon almakta, açıkta durmakta değil.
-COUNTER: Cover arkasında oyna. Kısa peek yap — bilgi al veya kill al, hemen geri çekil. Mound kenarındaki kutu ve duvarları kullan. Attacker C Main'e smoke atarsa Mound'dan çekil, site içinden oyna.
-WHY: Yükseklik avantajı sadece cover ile çalışır. Açıkta duran yüksek pozisyon dezavantajdır — tüm vücut görünür, kaçış yolu sınırlı. Cover arkasından peek yaparsan sen onu görene kadar o seni görmemiş olur.
+COUNTER: Cover arkasında oyna. Kısa peek at — bilgi al veya kill al, hemen geri çekil. Mound kenarındaki kutu ve duvarları kullan. Attacker C Main'e smoke atarsa Mound'dan çekil, site içinden oyna.
+WHY: Yükseklik avantajı sadece cover ile çalışır. Açıkta duran yüksek pozisyon dezavantajdır — tüm vücut görünür, kaçış yolu sınırlı. Cover arkasından peek atarsan sen onu görene kadar o seni görmemiş olur.
 
 **Pattern 6: Over-Rotate (3 Site Tuzağı)**
 IF: Savunmada 3 veya daha fazla kişi tek site'a rotate ediyor, diğerleri boş kalıyor.
@@ -135,11 +135,11 @@ Her şeyi biliyorsun. Farkı yaratan şey round bazında okuma. Rakip hangi giri
 - Eco round'da rotating door'u kullan. Sheriff veya Spectre ile kapıdan rotate yap. Defender bunu okuyamazsa kill gelir.
 - Breakable wall kırılırken ability harcanır. Raze Blast Pack kullanılırsa bir satchel gider, Breach Aftershock kullanılırsa bir ability yuvası gider. Tam buy planlarken bunu hesaba kat.
 - Tam buy round'unda ability eksik bırakma. Lotus'ta execute ability olmadan yapılmaz — 3 site var, her giriş noktası savunuluyor.
-- Defender tarafında gereksiz peek yapma. Silahını kaybedersen bir sonraki round 3 siteyi utility'siz savunursun.
+- Defender tarafında gereksiz peek atma. Silahını kaybedersen bir sonraki round 3 siteyi utility'siz savunursun.
 
 ## 9. Ajan Bazlı İpuçları
 - **Raze**: Blast Pack ile breakable wall'u kır — B Main ve C Main'e Satchel ile gir, bu iki noktada çok işe yarar. Paint Shells dar koridorlarda alanı tutmana yardımcı olur. Showstopper'ı B site ve C site'ta kullan, compact alan olduğu için her şeyi vurur. Boombot'u rotating door arkasını ve Silent Drop'u kontrol etmek için at.
-- **Breach**: Fault Line'ı B Main'de at, birden fazla düşmanı yakalar. Flash combo'yu A Main girişinde uygula — önce flash at, sonra teammate swing yapsın. Aftershock ile breakable wall arkasında bekleyen defender'ı cezalandır; spike kurulduktan sonra aynı şeyi defuse deny için kullan. Rolling Thunder'ı B site gibi dar alanlarda kullan, tüm takımı etkiler.
+- **Breach**: Fault Line'ı B Main'de at, birden fazla düşmanı yakalar. Flash combo'yu A Main girişinde uygula — önce flash at, sonra teammate swing atsın. Aftershock ile breakable wall arkasında bekleyen defender'ı cezalandır; spike kurulduktan sonra aynı şeyi defuse deny için kullan. Rolling Thunder'ı B site gibi dar alanlarda kullan, tüm takımı etkiler.
 - **Killjoy**: B anchor için en iyi seçim. Turret'i B Main'i izleyecek şekilde koy, Alarm Bot'u kapı tarafına veya kırık duvara yerleştir. Nano Swarm'ı duvar kırılma anında veya spike kurulduktan sonra defuse deny için bırak. Lockdown ile B site'a gelecek execute'u durdurabilirsin. A site'ta turret'i Silent Drop'a bak.
 - **Fade**: Haunt ile 3 site'a bilgi topla — Lotus'ta bu bilgi her şeyden değerli. Prowler'ı rotating door arkasına ve dar koridorlara sok. Nightfall'ı A Main veya B Main'de at, tüm saldırı grubunu yakalar. Seize'i spike kurulduktan sonra defuse deny için kullan.
 - **Omen**: Shrouded Step ile rotating door'u ses çıkarmadan geç — defender kapı sesini beklerken sen zaten karşı taraftasın. Dark Cover ile 3 site arasına smoke at. Paranoia'yı A Main ve B Main gibi dar girişlerde kullan, tüm koridoru körleştirir. From the Shadows ile haritanın herhangi yerine TP at, defender'ın düzenini boz.

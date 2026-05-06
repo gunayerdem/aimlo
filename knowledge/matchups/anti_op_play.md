@@ -21,13 +21,13 @@ OP 4700 kredi — her mesafede tek vuruş öldürür ama yakın açıda çaresiz
 **WHY**: OP sadece uzun açıda ve temiz sightline'da güçlü — bu ikisini al, silah etkisizleşir.
 
 ## Tekrarlayan Başarısızlık Ne Anlama Gelir
-Takım sürekli aynı OP'ye ölüyorsa mesele aim değil. Uzun açıyı tek başına peek ediyorlar, smoke basmıyorlar, trade koordine etmiyorlar. Bunları düzelt, OP'nin etkisi düşer.
+Takım sürekli aynı OP'ye ölüyorsa mesele aim değil. Uzun açıyı tek başına peek atıyorlar, smoke basmıyorlar, trade koordine etmiyorlar. Bunları düzelt, OP'nin etkisi düşer.
 
 OP oyuncusu iyi pozisyona rağmen ölüyorsa düşman doğru şeyleri yapıyor demektir — koordineli yetenek ve double-peek. Çözüm: her atıştan sonra yer değiştir, aynı yerde bekleme.
 
 ## AIMLO Ne Demeli
 ### Oyuncu cezalandırılan taraftayken
-"OP'ye mesafede izole duel vererek besliyorsun. Açıyı smoke'la, pozisyonu flash'la ya da double-peek yap ki takım arkadaşın trade etsin. Tek başına wide-peek attığın her an o dövüşü bırakıyorsun."
+"OP'ye mesafede izole duel vererek besliyorsun. Açıyı smoke'la, pozisyonu flash'la ya da double-peek at ki takım arkadaşın trade etsin. Tek başına wide-peek attığın her an o dövüşü bırakıyorsun."
 
 ### Oyuncu cezalandıran taraftayken
 "OP raundi kontrol ediyor. Her atıştan sonra yer değiştir, aynı noktada bekleme. Düşman açına yetenek basmaya başladıysa girmeden önce çık oradan — iki kez smoke yediğin yerde durma."

@@ -7,8 +7,8 @@ Fade, Sova gibi lineup ezberlemez. Haunt'ı atar, düşmanı ortaya çıkarır, 
 ## 2. Temel Sorumluluklar
 
 - **Haunt bir ikilem aracı, tarama değil**: Haunt'ın işi bilgi vermek değil — savunucuya imkânsız bir seçim sunmak. Gözü vursun: o an entry yolundan bakışını çeviriyor. Görmezden gelsin: iz kalır, Prowler doğrudan pozisyonuna gider. Haunt'ı, yok etmenin savunucuyu entry açısından koparacağı yere koy. Duvara sektirilmiş Haunt, savunucuya hem zor bir açı hem de zorlu bir karar verir.
-- **Prowler üç modda çalışır**: (1) Kovalama: Haunt'ın izlediği düşmana gönder, takım swing yapmadan önce nearsight ver. En yüksek değer bu. (2) Temizleme: köşe, girinti veya off-angle'a gönder, birinin orada olup olmadığını kontrol et. Kuru peek yapamıyorsan kullan. (3) Bilgi: koridora gönder, kilitlenme sesini dinle. Kilitlenirse biri var, dolanırsa temiz. Bilgi modu en düşük değer — kovalama veya temizleme uygunsa o modu seç.
-- **Seize hareket tuzağı**: Seize öldürmez. Düşmanı yerinde tutar, takım onu swing yapar. En iyi yerler: dar açı tutan savunucu (jiggle yapamaz, çekilemez), spike üzeri post-plant (defuse'u durdurur), choke'tan rotate etmeye çalışan oyuncu (açıkta takılır).
+- **Prowler üç modda çalışır**: (1) Kovalama: Haunt'ın izlediği düşmana gönder, takım swing atmadan önce nearsight ver. En yüksek değer bu. (2) Temizleme: köşe, girinti veya off-angle'a gönder, birinin orada olup olmadığını kontrol et. Kuru peek atamıyorsan kullan. (3) Bilgi: koridora gönder, kilitlenme sesini dinle. Kilitlenirse biri var, dolanırsa temiz. Bilgi modu en düşük değer — kovalama veya temizleme uygunsa o modu seç.
+- **Seize hareket tuzağı**: Seize öldürmez. Düşmanı yerinde tutar, takım onu swing atar. En iyi yerler: dar açı tutan savunucu (jiggle yapamaz, çekilemez), spike üzeri post-plant (defuse'u durdurur), choke'tan rotate etmeye çalışan oyuncu (açıkta takılır).
 - **Nightfall ekonomisi**: Nightfall 7 küre. Takımın birlikte gireceği silahlı turlarda at. Eko turda kullanma — takım düşük silahla iz ve sağırlıktan faydalanmaz. Force-buy'da bir istisna var: decay 75 HP sıyırır, Spectre ve Marshal için düşmanı tek vuruşa getirir. Save turunda sakla. Ult, müsait olduğu silahlı turda kullanılmalı — biriktirme.
 - **Zincir hızı**: Haunt ortaya çıkarır, Prowler bir sonraki hamlede izi kovalar, Seize kaçış yolunu keser, takım o kaos içinde girer. Yetenekler arasında uzun boşluk bırakırsan düşman toparlanır, zincir kırılır ve her yetenek tek başına zayıf kalır.
 
@@ -58,9 +58,9 @@ Fade, Sova gibi lineup ezberlemez. Haunt'ı atar, düşmanı ortaya çıkarır, 
 **COUNTER** Haunt atmadan önce takımın push'a hazır olduğunu doğrula. Haunt takım hâlâ toparlanırken atılan bir keşif değil, 'başlama' sinyali olmalı.
 **WHY** Fade'in döngüsü takım agresyonuna bağlı olarak çalışır. Takip yoksa reveal sadece düşmanı yeniden konumlandırır.
 
-**IF** Prowler nearsight veriyorsa ama hiç takım arkadaşı o anda swing yapmıyorsa
-**MEANING** Takım Prowler'ın getirdiği avantajı kullanmıyor. Nearsight birkaç beat sürer — o pencerede kimse peek yapmazsa yetenek hiçbir şey başaramaz.
-**COUNTER** Prowler bağlandığında 'Prowler vurdu, swing yapın' de. Daha iyisi: Prowler'ı, bir takım arkadaşı zaten on-swing yapacak şekilde zamanla.
+**IF** Prowler nearsight veriyorsa ama hiç takım arkadaşı o anda swing atmıyorsa
+**MEANING** Takım Prowler'ın getirdiği avantajı kullanmıyor. Nearsight birkaç beat sürer — o pencerede kimse peek atmazsa yetenek hiçbir şey başaramaz.
+**COUNTER** Prowler bağlandığında 'Prowler vurdu, swing atın' de. Daha iyisi: Prowler'ı, bir takım arkadaşı zaten on-swing atacak şekilde zamanla.
 **WHY** Nearsight penceresi garantili bir avantaj anıdır. O anda kimse girmezse fırsat tamamen boşa gider.
 
 **IF** Fade açılış kill'i alıyor ama takip frag gelmiyor
@@ -102,7 +102,7 @@ Fade, Sova gibi lineup ezberlemez. Haunt'ı atar, düşmanı ortaya çıkarır, 
 ## 6. Eşleşme Notları
 
 - **Omen'e karşı**: Haunt, Shrouded Step sonrasında bile Omen'i ortaya çıkarır ve korku izi yeni pozisyonunu takip eder. Prowler, smoke içinden Omen'i kovalar. Fade, Omen'in yer değiştirme hilesini iz ile geçersiz kıldığı için güçlü bir karşılık.
-- **Chamber'a karşı**: Seize, Chamber'ın Rendezvous ile kaçmasını engeller. Agresif açı tutan Chamber'a Seize inerse kaçamaz — takım onu bedavaya swing yapar. Fade'in en yüksek değerli eşleşmelerinden biri.
+- **Chamber'a karşı**: Seize, Chamber'ın Rendezvous ile kaçmasını engeller. Agresif açı tutan Chamber'a Seize inerse kaçamaz — takım onu bedavaya swing atar. Fade'in en yüksek değerli eşleşmelerinden biri.
 - **Killjoy'a karşı**: Prowler, alarmbot ve turret'i tetikler, takım girmeden önce Killjoy araçlarını temizler. Haunt, turret yerleşimini ortaya çıkarır. Fade, Prowler ile Killjoy ekosistemini gövde yerine direkt counter eder.
 - **Cypher'a karşı**: Prowler tripwire'ları tetikler, risksiz temizler. Haunt kamera pozisyonlarını ortaya çıkarır. Fade'in temizleme döngüsü Cypher'ın tuzak ağını sistematik olarak söker.
 - **Jett'e karşı**: Jett, tether kilitlenmeden önce dash yaparsa Seize'den kaçar. Jett'e karşı Seize'i mevcut pozisyonuna değil, dash varışlarına tahminsel olarak at.
@@ -115,7 +115,7 @@ Fade, Sova gibi lineup ezberlemez. Haunt'ı atar, düşmanı ortaya çıkarır, 
 **Oyuncu Eylemi:** Haunt'ı Prowler'a, Prowler'ı Seize'e üç ila beş beat içinde zincirliyor, Haunt'ı savunucunun entry yolundan bakışını koparacağı yere yerleştiriyorsun. Nightfall'ı silahlı turlarda kullanıyor, eko'larda saklıyorsun.
 **Düşman Algısı:** Haunt sesini duyuyorlar ve imkânsız bir seçimle karşılaşıyorlar: gözü vur ve entry açısını bırak, ya da bırak ve ize giren Prowler'ı ye. Fade'in kit'ini sıkılaşan bir tuzak gibi hissediyorlar — her yetenek bir öncekinin cezasını üstüne koyuyor.
 **Düşman Tepkisi:** Haunt'ı vurmak entry açısında kayıp demek. Haunt'ı bırakmak Prowler'ı iz üzerinden doğrudan pozisyona çeker. Prowler'dan kaçmak Seize'e yönlendirir. Tam zincir birkaç beat içinde görüşü, hareketi ve konumlanmayı devre dışı bırakır.
-**Faydalanma Penceresi:** Prowler bağlandığında swing zamanı — o an garantili avantaj. Seize de inmişse, o savunucu sabit hedef. Prowler bağlandığında 'swing yapın' de.
+**Faydalanma Penceresi:** Prowler bağlandığında swing zamanı — o an garantili avantaj. Seize de inmişse, o savunucu sabit hedef. Prowler bağlandığında 'swing atın' de.
 **Tekrar Stratejisi:** 1-2. tur: A açısından duvara sekme Haunt, ize Prowler, kaçış yoluna Seize. 3. tur: karşı taraftan Haunt, yeniden konumlananları yakala. 4. tur: Haunt'ı atla, Prowler'ı ham gönder — Haunt sesini bekleyen savunucu uyarısız Prowler'a yakalanır. 5. tur ve sonrası: duvar arkasından Nightfall, sonra standart zincir.
 **Düşman Adaptasyonu:** Birkaç tur sonra savunucular Haunt iniş noktalarını önceden nişan alır, Seize menzilinden kaçınmak için daha derine oynar ya da zincir kurmadan önce push yaparak yakın mesafede dövüşür.
 **Karşı-Adaptasyon:** Önceden nişan alıyorlarsa: duvara sektirilere gözün son ana kadar gizlendiği farklı açılar kullan veya her tur farklı noktadan at. Derin oynuyorlarsa: önce Seize'i derin pozisyona at, sabitlenen düşmanın üzerine Haunt. Erken push yaparlarsa: Prowler'ı nearsight için gönder, kör koşuculara collapse yap.
@@ -130,6 +130,6 @@ Fade, Sova gibi lineup ezberlemez. Haunt'ı atar, düşmanı ortaya çıkarır, 
 
 **Orta (Gold-Platinum):** Haunt'tan Prowler'a zinciri başlat. Haunt at, bir beat bekle, ize Prowler gönder. En çok oynadığın haritalarda site başına iki duvar sekmesi Haunt noktası öğren. Seize'i tahminlere değil, Haunt'ın izlediği doğrulanmış pozisyonlara at. Nightfall'ı yalnızca silahlı turlar için saklamaya başla.
 
-**Yüksek (Diamond-Ascendant):** Her execute'ta tam zincir, üç ila beş beat. Düşmanların önceden nişan alamayacağı çeşitli duvar sekmesi Haunt açıları. Post-plant'te spike üzerine ve retake'te belirli açılara Seize. Nightfall takım push başlayınca ateşlenir, öncesinde değil. Kuru peek yapılamayan off-angle'lar için temizleme modunda Prowler.
+**Yüksek (Diamond-Ascendant):** Her execute'ta tam zincir, üç ila beş beat. Düşmanların önceden nişan alamayacağı çeşitli duvar sekmesi Haunt açıları. Post-plant'te spike üzerine ve retake'te belirli açılara Seize. Nightfall takım push başlayınca ateşlenir, öncesinde değil. Kuru peek atılamayan off-angle'lar için temizleme modunda Prowler.
 
 **Elit (Immortal-Radiant):** Her tur Haunt açısını savunucunun bir önceki turda nerede oynadığına göre uyarla. Seize'i belirli oyuncu alışkanlıklarını hedef al — her zaman agresif tutan Chamber, aynı noktaya dash yapan Jett. Savunucunun dayandığı ses kalıbını kırmak için belirli turlarda Prowler'ı ham gönder. Nightfall ekonomisi katı: yalnızca silahlı turlar ve decay HP matematığini takımın lehine çevirdiği force-buy'lar. Bu rankta Fade'in değeri zincir hızı ve öngörülemezlikte — zincirin kendisi beklenir ama açı ve zamanlama hiçbir zaman iki kez aynı olmasın. Seize'i spike modelinin üzerine değil, düşmanın defuse için duracağı spesifik noktaya at — küçük sapma bile tether dışında defuse ettirir.

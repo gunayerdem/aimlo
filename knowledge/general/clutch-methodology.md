@@ -217,7 +217,7 @@ Chamber'ın Rendezvous'su (teleport) sana clutch'ta rakibin olmadığı bir kaç
 
 1. **Snake Bite lineup'ları**: İki şarjın var, her biri spike'ı uzun süre inkar eder. Güvenli pozisyondan at.
 2. **Pit + Snake Bite**: Viper's Pit spike üzerindeyken Snake Bite'ı üstüne at. Utility olmayan düşman defuse edemez.
-3. **Wall/orb toggle**: Duvarı veya orb'u açıp kapat — düşmanı tahmin edilebilir zamanlarda peek yapmaya zorla.
+3. **Wall/orb toggle**: Duvarı veya orb'u açıp kapat — düşmanı tahmin edilebilir zamanlarda peek atmaya zorla.
 
 ---
 
@@ -254,7 +254,7 @@ Jett oynuyorsan şunu yap: dash ile içeri gir, ilk kill'i al, hemen dash veya s
 
 ### Chamber TP Clutch Pattern'i
 
-Chamber oynuyorsan Op ile bir açı tut, pick al, TP ile çık. Yeni pozisyondan tekrar açı kur. Bu şekilde 1v3'ü üç ayrı 1v1'e bölersin. TP'nin asıl değeri şu: trade riski sıfırlanıyor, her kill sonrası güvende oluyorsun.
+Chamber oynuyorsan Op ile bir açı tut, kill al, TP ile çık. Yeni pozisyondan tekrar açı kur. Bu şekilde 1v3'ü üç ayrı 1v1'e bölersin. TP'nin asıl değeri şu: trade riski sıfırlanıyor, her kill sonrası güvende oluyorsun.
 
 ### 1v2'de Agresif Push Pattern'i
 

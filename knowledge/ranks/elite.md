@@ -17,14 +17,14 @@ Radiant'ta round farkı zamanlamadan gelir. Bu farklar maç içinde görünmez �
 
 - **IF** peek zamanlaması düşmanın rotasına göre ayarlı değilse
 - **MEANING** düşman rotayı tamamlamış, pozisyona oturmuş — sen geç çıkıyorsun
-- **COUNTER** düşman B'den rotate ettiyse, ayak sesi kesilmeden peek yapma — ayak sesi bitince çık
+- **COUNTER** düşman B'den rotate ettiyse, ayak sesi kesilmeden peek atma — ayak sesi bitince çık
 - **WHY** bu seviyede zamanlama hatası, aim hatası kadar round kaybettirir
 
 ### Takım Koordinasyon Boşlukları
 
 Kayıpların büyük kısmı birlikte hareket edememe farkından gelir.
 
-- **IF** Sova drone'u bitmeden takım swing yapmıyorsa
+- **IF** Sova drone'u bitmeden takım swing atmıyorsa
 - **MEANING** o boşlukta anchor yeniden pozisyon aldı
 - **COUNTER** drone biter bitmez swing — araya süre koyma
 - **WHY** drone bittikten sonra beklersen bilgi geçersizleşir, swing boşa çıkar

@@ -81,9 +81,9 @@ Düşman Operator tutuyor mu?
 
 Düşman off-angle mı tutuyor?
 +-- EVET -> Yakın peek işe yaramaz; off-angle'ı yakalamak için geniş swing
-+-- HAYIR -> Açığa çıkmayı azalt, yakın peek yap
++-- HAYIR -> Açığa çıkmayı azalt, yakın peek at
 
-Takım arkadaşınla peek yapıyor musun (çift peek)?
+Takım arkadaşınla peek atıyor musun (çift peek)?
 +-- EVET -> Biri yakın peek, biri geniş swing. Zamanlama farklı olsun.
 +-- HAYIR -> Util yoksa yakın peek varsayılan.
 ```
@@ -93,7 +93,7 @@ Takım arkadaşınla peek yapıyor musun (çift peek)?
 - Bıçakla koşmak oyundaki en hızlı hareket.
 - Tüfekle koşmak bıçaktan yaklaşık %20 yavaş.
 - Operatorla koşmak bıçak hızının yaklaşık %73'ü — en yavaş kategori bu.
-- Tüfekle geniş swing atarken bu fark hissedilir. Bilgi toplamak için önce bıçakla swing yap, sonra silahına geç ve peek'e devam et.
+- Tüfekle geniş swing atarken bu fark hissedilir. Bilgi toplamak için önce bıçakla swing at, sonra silahına geç ve peek'e devam et.
 
 ---
 
@@ -107,7 +107,7 @@ COUNTER tam 4-5. mermide crouch yap — ilk mermide asla
 WHY bu hareketi sıkıştırır, sonraki mermiler hedefe oturur
 
 IF düşman açıyı kafan hizasında bekliyorsa
-MEANING peek yaptığında başın tam crosshair'inin üstüne geliyor
+MEANING peek attığında başın tam crosshair'inin üstüne geliyor
 COUNTER peek'e girerken anında crouch yap, crosshair'inin altına in
 WHY bu sadece dövüşün ilk anında çalışır — iyi oyuncular hemen aşağı ayarlar
 
@@ -279,7 +279,7 @@ WHY iyi savunucular spike'a kısaca dokunup sesi tetikler, post-plant oyuncusunu
 
 IF defuse ederken saldırgan hayattaysa
 MEANING saldırgan defuse sesini dinleyip seni ezmeye ya da util atmaya hazırlanıyor
-COUNTER kısaca dokun, hemen dur, açını tut — peek yaparsa öldür, sonra gerçek defuse'a commit et
+COUNTER kısaca dokun, hemen dur, açını tut — peek atarsa öldür, sonra gerçek defuse'a commit et
 WHY fake defuse tuzak kurar — saldırgan ya üzerine util harcar ya da crosshair'ine girer
 
 ### Spike Patlama Hasarı

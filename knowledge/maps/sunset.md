@@ -24,9 +24,9 @@ Sunset oynamayı öğrenmek istiyorsan önce Market oynamayı öğren. Orası ç
 
 Market'te bir karar ver ve geç. Bekleyerek burada bir şey kazanmıyorsun.
 
-**Mid Courtyard**: Courtyard açık alan — geniş açıyla swing yaparsan karşıda seni tutan rakibe kolay hedef olursun. Courtyard'a çıkmadan önce Mid Top'tan ya da Market'ten bilgi topla. Bilgi yoksa swing yok.
+**Mid Courtyard**: Courtyard açık alan — geniş açıyla yüklenirsen karşıda seni tutan rakibe kolay hedef olursun. Courtyard'a çıkmadan önce Mid Top'tan ya da Market'ten bilgi topla. Bilgi yoksa swing yok.
 
-**B Main Giriş**: B Main dar ve düz — savunucu sonu tutuyor, senin hareket alanın yok. Takım olarak aynı hatta yığılıyorsunuz ve ilk oyuncu düştüğünde aynı açıdan peek yapıyorsunuz. İlk düşman düştüğünde ikinci oyuncu aynı açıdan girmesin — Market tarafından split yap.
+**B Main Giriş**: B Main dar ve düz — savunucu sonu tutuyor, senin hareket alanın yok. Takım olarak aynı hatta yığılıyorsunuz ve ilk oyuncu düştüğünde aynı açıdan peek atıyorsunuz. İlk düşman düştüğünde ikinci oyuncu aynı açıdan girmesin — Market tarafından split yap.
 
 **A/B Heaven**: Heaven smoke'lamadan site'a girme. Yukarı bakarak dövüşmek seni dezavantaja sokar. Execute başlamadan önce Heaven smoke'u at — bu ilk adım, sonrası değil.
 
@@ -115,7 +115,7 @@ IF: Retake'te savunucular tek tek site'a giriyor ve sırayla ölüyor.
 MEANING: Sunset'in dar girişleri tek tek girişi çok cezalandırıyor. Hepiniz aynı sightline'dan girince, post-plant tutan rakip sizi tek tek vuruyor. Takım olarak hareket etmiyorsunuz.
 COUNTER: Retake'e girmeden önce toplanın ve plan yapın.
 - Biri smoke/molly ile plant bölgesini temizlerken diğeri farklı açıdan giriyor.
-- Flash ile girin, birlikte swing yapın.
+- Flash ile girin, birlikte swing atın.
 - Retake = takım hareketi, solo hareket değil.
 WHY: Post-plant tutan rakip açısını biliyor ve bekliyor. Tek tek giriş her seferinde aynı düelloyu tekrar ettirir, rakibin avantajını katlar. Koordineli giriş, rakibin açı seçimini zorlaştırır ve trade imkânı yaratır.
 

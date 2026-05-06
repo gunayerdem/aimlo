@@ -19,7 +19,7 @@ Duellist'ler takımın alan acan oyuncuları. Kit'leri ilk dövüşü almak, ala
 - Güçlü mekanik aim'in var ve izole düello almak istiyorsun
 
 ### Harita Gücleri
-- **Breeze**: S-tier. Uzun görüş hatları Op için ideal. Updraft ile A site sütunlarına cık. Mid Doors'dan pick al, dash ile geri cekil.
+- **Breeze**: S-tier. Uzun görüş hatları Op için ideal. Updraft ile A site sütunlarına cık. Mid Doors'dan kill al, dash ile geri cekil.
 - **Icebox**: S-tier. A site tüpler, B site konteyner yığınlarında dikey oyun. Mid'den Op, dash ile güvenliğe.
 - **Lotus**: A-tier. Kapılardan hızlı rotasyonlar, C main boğazından dash.
 - **Haven**: A-tier. Üç site hızlı rotasyonu değerli kılar. C long, A long'dan Op.
@@ -38,7 +38,7 @@ Duellist'ler takımın alan acan oyuncuları. Kit'leri ilk dövüşü almak, ala
 
 2. **IF** Dash'i peek öncesi aktive etmeyi unutuyorsan
    **MEANING** Nerf sonrası aktivasyon penceresi gerektiren sistemi anlamamışsın
-   **COUNTER** Her peek öncesi Tailwind'i aktive et, sonra peek yap
+   **COUNTER** Her peek öncesi Tailwind'i aktive et, sonra peek at
    **WHY** Aktive edilmemiş dash ile ölmek, Jett'in en büyük avantajını çöpe atmak demek
 
 3. **IF** Cloudburst'leri rastgele atıyorsan
@@ -110,9 +110,9 @@ Duellist'ler takımın alan acan oyuncuları. Kit'leri ilk dövüşü almak, ala
    **COUNTER** Double satchel ya da satchel yapma. Hız ve öngörülemezlik şart
    **WHY** Tek satchel seni havada yavaş hedef yapar, double satchel hızlı ve okunması zor
 
-3. **IF** Boom Bot gönderdikten sonra peek yapmıyorsan
+3. **IF** Boom Bot gönderdikten sonra peek atmıyorsan
    **MEANING** Bot ses cikarıp ilgi toplar -- peek olmadan 200 kredi ve pozisyon bilgisi harcadın
-   **COUNTER** Bot'un arkasından her zaman peek yap veya takım arkadaşın swinglesin
+   **COUNTER** Bot'un arkasından her zaman peek at veya takım arkadaşın swinglesin
    **WHY** Takipsiz bot = bedava bilgi verip karşılığında hiçbir şey almamak
 
 4. **IF** Showstopper'ı yerden atıyorsan
@@ -173,7 +173,7 @@ Duellist'ler takımın alan acan oyuncuları. Kit'leri ilk dövüşü almak, ala
 
 3. **IF** Leer'ı peek'inden çok uzağa atıyorsan
    **MEANING** Leer düşmanları ya kör ediyor ya da bakışlarını çeviriyor olmalı
-   **COUNTER** Leer'ı peek yaptığın açıya yakın yere yerleştir -- kör olsunlar veya sana sırtlarını dönsünler
+   **COUNTER** Leer'ı peek attığın açıya yakın yere yerleştir -- kör olsunlar veya sana sırtlarını dönsünler
    **WHY** Uzak Leer = ne kör etkisi ne de açı avantajı sağlar
 
 4. **IF** Empress'i "mükemmel an" için saklıyorsan
@@ -187,7 +187,7 @@ Duellist'ler takımın alan acan oyuncuları. Kit'leri ilk dövüşü almak, ala
    **WHY** Öngörülebilir iyileşme kalıbı = düşmana push penceresi vermek
 
 ### Pro Oyuncu Stilleri
-- Reyna Tier 1 VCT'de minimal oynanır. Mekanik olarak yetenekli oyuncuların pocket pick'i olarak ara sıra görünür. Takım utility eksikliği onu solo queue uzmanı yapar.
+- Reyna Tier 1 VCT'de minimal oynanır. Mekanik olarak yetenekli oyuncuların pocket kill'i olarak ara sıra görünür. Takım utility eksikliği onu solo queue uzmanı yapar.
 
 ### Eşleşme İpuçları
 - **vs. flash agentlar**: Reyna'nın Leer'ı pseudo-flash. Flash takasında Reyna kaybeder çünkü Leer yok edilebilir, gerçek flashlar edilemez.
@@ -248,7 +248,7 @@ Duellist'ler takımın alan acan oyuncuları. Kit'leri ilk dövüşü almak, ala
 - Phoenix VCT 2024-2025 meta'sında belirli haritalarda yeniden yükseldi. Split ve Ascent'te self-entry kapasiteli ikincil duellist olarak kullanılıyor.
 
 ### Eşleşme İpuçları
-- **vs. Jett**: Phoenix'in flash'ları Jett'in Op oyununu counter'lar. Köşeden Curveball at, kör iken peek yap.
+- **vs. Jett**: Phoenix'in flash'ları Jett'in Op oyununu counter'lar. Köşeden Curveball at, kör iken peek at.
 - **vs. Killjoy**: Hot Hands Killjoy turret ve utility'sini yok eder. Lockdown icinden Run It Back yap.
 - **vs. Sage**: Blaze duvarı üst üste yerleştirildiğinde Sage'in Barrier Orb'unu zamanla eritir.
 
@@ -495,7 +495,7 @@ Duellist'ler takımın alan acan oyuncuları. Kit'leri ilk dövüşü almak, ala
 ## Genel Duellist Felsefesi
 
 ### Entry Fragging Protokolü
-1. **Initiator utility'si bekle** - Asla kuru peek yapma. Flash, dart, drone veya scan bekle.
+1. **Initiator utility'si bekle** - Asla kuru peek atma. Flash, dart, drone veya scan bekle.
 2. **Girişini bildir** - "Giriyorum" takımına trade hazırlığı için alan açar.
 3. **Trade et veya öl** - İşin ya kill almak ya da takımına bilgi ve trade fırsatı vermek.
 4. **Bait yapma** - Duellist'sen ve execute'ta son hayattaysan, rolünü yapamadın.

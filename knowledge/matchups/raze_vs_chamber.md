@@ -25,7 +25,7 @@ Raze, nade + satchel ile Chamber'ın trademark + rendezvous + headhunter üçlü
 - Uzun sightline'lı sitelerde (Breeze A, Icebox Mid): Op + rendezvous Raze'in kısa menzilini geçersiz kılar
 - Raze'in her iki satchel'i de kullanılmışsa: hareket yok, Chamber teleport ile açı değiştirir, Raze yakalayamaz
 - Trademark + rendezvous kombosu tam hazırsa: trademark bilgi verir, rendezvous kaçışı sağlar — Raze nade trademark'ı patlasa bile Chamber açı değiştirir
-- Post-plant'te Chamber aggressive peek yaparsa: headhunter tek atış Raze'i anchor noktasında düşürür
+- Post-plant'te Chamber aggressive peek atarsa: headhunter tek atış Raze'i anchor noktasında düşürür
 
 **Dengeli:** Ascent, Haven ve Lotus'ta avantaj Chamber'ın rendezvous noktasına ve Raze'in nade atış açısına göre kayar. Her roundda anchor'ın nerede kurulduğuna ve nade hattının o anchor'a ulaşıp ulaşmadığına bak — ikisi eşleşince Raze öne geçer, eşleşmeyince Chamber tutar.
 

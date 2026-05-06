@@ -8,7 +8,7 @@
 ## 2. Temel Sorumluluklar
 - **Atak:** Dash veya updraft'la ilk peek'i sen at. İlk düelloyu kazan. Tehlikeli sightline'ı takım için smoke'la. Tam alımda uzun açıda Op tut.
 - **Defans:** Op veya tüfekle off-angle tut, kill aldıysan dash'le kaç. Updraft'la beklenmedik yükseklik tut. Erken bilgi al, geri çekil.
-- **Takım senden ne bekliyor:** Atakta açılış kill'i. Defansta agresif Op pick'i. Lurk değil, entry.
+- **Takım senden ne bekliyor:** Atakta açılış kill'i. Defansta agresif Op kill'i. Lurk değil, entry.
 
 ## 3. Sık Yapılan Hatalar
 1. **Dash'i kaçış için yakma** — Dash'i entry'ye sakla. Kaçmak için harcadıysan, site execute'unda dash'sizsin.

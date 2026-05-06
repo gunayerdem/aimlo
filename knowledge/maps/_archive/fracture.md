@@ -143,7 +143,7 @@ WHY: Fracture'in ortası savunmanın omurgası. Omurga kırılırsa iki site'i b
 ## 10. Anti-Strat Rehberi
 - Rakip her raunt A split yapıyorsa: A'ya 3 kişi koy, B'den 1 kişiyi rotasyona hazır beklet. 3 kişi her iki kolu da karşılar.
 - Rakip zip line'ı çok kullanıyorsa: Zip çıkışını açıyı tut. Zip'ten çıkan adam hareketsiz hedef — çıkışa molly ya da tuzak bırak.
-- Rakip B Tower'dan her raunt agresif peek yapıyorsa: Tower'a erken utility at (molly, stun), Arcade'den flank gönder. Utility geri iter, flank pozisyonunu tamamen bozar.
+- Rakip B Tower'dan her raunt agresif peek atıyorsa: Tower'a erken utility at (molly, stun), Arcade'den flank gönder. Utility geri iter, flank pozisyonunu tamamen bozar.
 - Rakip gerçek split yapıyorsa (eş zamanlı push): Bir tarafa 3 kişi ya da ağır utility koy, diğer tarafta retake oyna. İki tarafı eşit tutarsan rakibin sayısına teslim olursun.
 - Rakip lurk yapıp flanktan kill alıyorsa: Cypher veya Killjoy utility'sini her girişe koy. Lurker'ın yolunu kesersin — ya geri çekilir ya kendini açar.
 - Rakip 2-1-2 savunma oynuyorsa: Mid'e bas, rotasyon omurgasını kır. Mid'i alırsan savunucular geç rotate eder, split execute'un işe yarar.

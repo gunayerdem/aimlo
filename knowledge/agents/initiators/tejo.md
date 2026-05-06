@@ -83,7 +83,7 @@ Tejo iki şeyi aynı anda yapabilen tek initiator: bilgi topla, sonra o bilgiyle
 - **KAY/O karşı**: KAY/O suppress'i tüm boru hattını devre dışı bırakır. KAY/O knife attığında yeteneksiz kalırsın. Bu eşleşmede KAY/O'nun suppress zamanlamasını oku, utility'ni suppress penceresi dışında kullan.
 - **Sentinel'lara karşı**: Stealth Drone ile Killjoy turret ve Cypher tripwire pozisyonlarını ortaya çıkar. Special Delivery concuss'u sentinel'ları kurulumlarından çıkmaya zorlar. Guided Salvo ile sentinel utility'sini iki noktadan temizle.
 - **Chamber karşı**: Chamber Op tutarken Stealth Drone ile pozisyonunu ortaya çıkar, Special Delivery ile concuss vur — concuss altında Op tutmak imkansız. Guided Salvo Chamber'ın teleport noktasını ve mevcut pozisyonunu aynı anda hedefler.
-- **Agresif duelist'lere karşı**: Stealth Drone erken push'ları tespit eder. Special Delivery agresif peek yapan duelist'i concuss ile durdurur. Drone'u erken uyarı sistemi olarak kullan.
+- **Agresif duelist'lere karşı**: Stealth Drone erken push'ları tespit eder. Special Delivery agresif peek atan duelist'i concuss ile durdurur. Drone'u erken uyarı sistemi olarak kullan.
 
 ## 8. Oyuncuya Ne Söylenmeli
 

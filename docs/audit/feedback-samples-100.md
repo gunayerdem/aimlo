@@ -427,9 +427,9 @@
   "deathAnalysis": "B Site'ta turret'in arkasında dururken Jett operator'la Hookah'dan dash'leyip vurdu — Jett'in dash mesafesini hesaba katıp daha geride durmalıydın.",
   "enemyAnalysis": [
     "Jett operator + dash combo'sunu Hookah'dan kullanıyor, anchor'a tek kurşun yetiyor",
-    "Düşman B'ye yüklenmek yerine Jett'le pick alıyor, sonrası rahat execute"
+    "Düşman B'ye yüklenmek yerine Jett'le kill alıyor, sonrası rahat execute"
   ],
-  "nextRoundSuggestion": "B'de Jett pick'ine karşı turret'i Hookah'ya bak, anchor'lığını CT'ye çek — Jett dash'leyip pick alamaz, op açısı kapanır."
+  "nextRoundSuggestion": "B'de Jett kill'ine karşı turret'i Hookah'ya bak, anchor'lığını CT'ye çek — Jett dash'leyip kill alamaz, op açısı kapanır."
 }
 ```
 
@@ -486,7 +486,7 @@
     "Cypher tuzakları C Long girişinde, dronesiz giren herkesi açığa çıkarıyor",
     "Düşman C'yi sadece Cypher utility ile kapatıyor, A'da 3 kişi var"
   ],
-  "nextRoundSuggestion": "C Long'a Sova drone veya KAY/O knife'la önce gir, tuzakları temizle — sonra dash'le hızlı pick alırsın, takım arkadan execute basar."
+  "nextRoundSuggestion": "C Long'a Sova drone veya KAY/O knife'la önce gir, tuzakları temizle — sonra dash'le hızlı kill alırsın, takım arkadan execute basar."
 }
 ```
 
@@ -597,7 +597,7 @@
 {
   "deathAnalysis": "B Site'ta default'ta dururken Yoru köşeden flash atıp Vandal'la vurdu — flash sesini duyunca dön veya köşeye gir.",
   "enemyAnalysis": [
-    "Yoru B Site içine TP atıp flank'tan flash + peek yapıyor",
+    "Yoru B Site içine TP atıp flank'tan flash + peek atıyor",
     "Düşman B'yi 3 kişi tutuyor, A ve C zayıf bırakılıyor"
   ],
   "nextRoundSuggestion": "B'de Wingman'i B Window'a bak, Yoru flank'ını yakala — TP sesi gelirse dönüp molly'ni at, flash atamaz."
@@ -614,9 +614,9 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "A Long'a geniş açıyla peek attın, Chamber sheriff'le aynı açıdan kafadan vuruyordu — Chamber'a karşı dar açıyla shoulder peek yap.",
+  "deathAnalysis": "A Long'a geniş açıyla peek attın, Chamber sheriff'le aynı açıdan kafadan vuruyordu — Chamber'a karşı dar açıyla shoulder peek at.",
   "enemyAnalysis": [
-    "Chamber A Long'u sheriff açısı tutuyor, ekonomik şekilde pick alıyor",
+    "Chamber A Long'u sheriff açısı tutuyor, ekonomik şekilde kill alıyor",
     "Düşman A'da Chamber + 1 anchor, C tarafı zayıf"
   ],
   "nextRoundSuggestion": "A Long'da Chamber'a slow orb at, peek mesafesini bozarsın — sonrası takımca yüklenince Chamber kaçamaz."
@@ -750,7 +750,7 @@
   "deathAnalysis": "A Rope'ta Heaven'a bakarken Yoru ult'la arkandan geldi — Rope'ta tutarken arkanı tuzakla kapatmamışsın, Yoru ult'una hazırlıksızdın.",
   "enemyAnalysis": [
     "Yoru ult'la mid'den A'ya flank atıyor, ses gizleyici sayesinde yakına kadar geliyor",
-    "Düşman A'ya direkt baskı yok, Yoru flank'ıyla pick alıp sonra execute basıyorlar"
+    "Düşman A'ya direkt baskı yok, Yoru flank'ıyla kill alıp sonra execute basıyorlar"
   ],
   "nextRoundSuggestion": "Rope arkasına trapwire koy, Yoru flank'ını yakala — ult kullansa bile tuzak ses verir, dönüp vurursun."
 }
@@ -956,9 +956,9 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "A Site'ta default'ta dururken Jett A Main'den operator'la dash'leyip vurdu, 2 round'dur aynı pick'i alıyor — daha geride veya off-angle dur.",
+  "deathAnalysis": "A Site'ta default'ta dururken Jett A Main'den operator'la dash'leyip vurdu, 2 round'dur aynı kill'i alıyor — daha geride veya off-angle dur.",
   "enemyAnalysis": [
-    "Jett A Main'den dash + op combo'suyla anchor pick'i alıyor",
+    "Jett A Main'den dash + op combo'suyla anchor kill'i alıyor",
     "Düşman A pick sonrası rahat execute basıyor, sayı dezavantajı oluşturuyorlar"
   ],
   "nextRoundSuggestion": "A'da default'tan çık, Tree off-angle'a geç ve trapwire'ı Main'e kur — Jett dash'lese bile tuzak ses verir, op açısı kapanır."
@@ -1168,7 +1168,7 @@
   "deathAnalysis": "A Site'ta Main'e bakarken Yoru ult'la arkandan geldi — site içine tuzak kurmadığın için flank'ı duyamadın.",
   "enemyAnalysis": [
     "Yoru ult'la mid'den A'ya flank atıyor, ses gizleyici sayesinde yakına kadar geliyor",
-    "Düşman A'ya direkt baskı yok, Yoru flank'ıyla pick alıp sonra basıyor"
+    "Düşman A'ya direkt baskı yok, Yoru flank'ıyla kill alıp sonra basıyor"
   ],
   "nextRoundSuggestion": "A site arkasına trapwire koy, Yoru flank'ını yakala — ult kullansa da tuzak ses verir, dönüp vurursun."
 }
@@ -1377,7 +1377,7 @@
   "deathAnalysis": "B Site'ta Long'a bakıyordun, Yoru ult'la arkandan geldi — site arkasına tuzak kurmadığın için flank'ı duymadın.",
   "enemyAnalysis": [
     "Yoru ult'la mid'den B'ye flank atıyor, ses gizleyici sayesinde yakına kadar geliyor",
-    "Düşman B'ye direkt baskı yok, Yoru flank'ıyla pick alıp sonra basıyor"
+    "Düşman B'ye direkt baskı yok, Yoru flank'ıyla kill alıp sonra basıyor"
   ],
   "nextRoundSuggestion": "B site arkasına trapwire koy, Yoru flank'ını yakala — ult kullansa da tuzak ses verir, dönüp vurursun."
 }
@@ -1490,7 +1490,7 @@
 {
   "deathAnalysis": "Pistol round'da A Main'e dry peek attın, Chamber Art tarafından sheriff'le açıyı tutuyordu — pistol'de uzun açıyı sheriff'e karşı yoklama.",
   "enemyAnalysis": [
-    "Chamber A Main'i sheriff açısı tutuyor, ekonomik bedava pick alıyor",
+    "Chamber A Main'i sheriff açısı tutuyor, ekonomik bedava kill alıyor",
     "Düşman pistol'de A'ya 3 kişi yığıyor, B Hall zayıf"
   ],
   "nextRoundSuggestion": "Pistol round'da B'ye yüklenin, Chamber A'da kalır — Hall'dan execute basıp post-plant kazanırsınız."
@@ -1586,7 +1586,7 @@
   "deathAnalysis": "A Site'ta Main'e bakıyordun, Yoru ult'la mid'den arkandan geldi — site arkasına tuzak kurmadığın için flank'ı duyamadın.",
   "enemyAnalysis": [
     "Yoru ult'la mid'den A'ya flank atıyor, ses gizleyici sayesinde yakına kadar geliyor",
-    "Düşman A'ya direkt baskı yok, Yoru flank'ıyla pick alıp sonra basıyor"
+    "Düşman A'ya direkt baskı yok, Yoru flank'ıyla kill alıp sonra basıyor"
   ],
   "nextRoundSuggestion": "A site arkasına trapwire koy, Yoru flank'ını yakala — ult kullansa da tuzak ses verir, dönüp vurursun."
 }
@@ -1795,7 +1795,7 @@
   "deathAnalysis": "B Site'ta Main'e bakıyordun, Yoru ult'la arkandan geldi — site arkasına tuzak kurmadığın için flank'ı duyamadın.",
   "enemyAnalysis": [
     "Yoru ult'la mid'den B'ye flank atıyor, ses gizleyici sayesinde yakına kadar geliyor",
-    "Düşman B'ye direkt baskı yok, Yoru flank'ıyla pick alıp sonra basıyor"
+    "Düşman B'ye direkt baskı yok, Yoru flank'ıyla kill alıp sonra basıyor"
   ],
   "nextRoundSuggestion": "B site arkasına trapwire koy, Yoru flank'ını yakala — ult kullansa da tuzak ses verir, dönüp vurursun."
 }

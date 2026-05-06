@@ -28,7 +28,7 @@ Op uzun hatta tek vuruşla öldürür. Hattı o tutar, sen onun açısına yür�
 
 ### Counter Taktikleri
 
-- **Flash + jiggle.** Flash at, küçük peek yap, geri çekil. Op shot atarsa boşluk oluştu — o an wide peek.
+- **Flash + jiggle.** Flash at, küçük peek at, geri çekil. Op shot atarsa boşluk oluştu — o an wide peek.
 - **İki açıdan aynı anda peek.** Op tek hattı tutar. İki kişi iki farklı köşeden aynı anda çıkarsa birini vururken diğeri onu alır.
 - **Sola sürükleme.** Takımın diğer taraftan baskı yaparsa Op oyuncusu oraya döner, sen girersin.
 
@@ -36,7 +36,7 @@ Op uzun hatta tek vuruşla öldürür. Hattı o tutar, sen onun açısına yür�
 
 **Gold-Plat:** Op gördün, hemen giriyorsun. Flash + smoke olmadan o açıya çıkma. Flashsız peek = ücretsiz kill.
 
-**Elmas-Yükselen:** Flash zamanlaması kaçıyor — flash patlamadan peek ediyorsun. Flash patlar, o an peek et.
+**Elmas-Yükselen:** Flash zamanlaması kaçıyor — flash patlamadan peek atıyorsun. Flash patlar, o an peek et.
 
 **Ölümsüz-Radiant:** Op oyuncusunun round'dan round'a hangi köşeyi tuttuğunu takip et. 2-3 round sonra pattern bellidir, o zaman anti-oyun kur. Ayrıca Op shot sesini duyduktan sonra aynı yerden asla peek etme — iyi Op oyuncusu zaten kaymıştır.
 
@@ -82,7 +82,7 @@ Yakın mesafede tek vuruşla öldürür. Dar koridor, köşe çıkışı, aniden
 
 **Köşeye yakın durma.** Pompalı oyuncusu köşeden yakın çıkış için bekler. Köşeye yapışık durursan bedava kill verirsin.
 
-**Uzaktan peek yap.** Köşeyi kontrol edeceksen uzaktan bak. Pompalı oyuncusu köşeyi dar tutar, sen uzakta kal.
+**Uzaktan peek at.** Köşeyi kontrol edeceksen uzaktan bak. Pompalı oyuncusu köşeyi dar tutar, sen uzakta kal.
 
 ### Counter Taktikleri
 
@@ -109,7 +109,7 @@ Ekonomik round'un keskin nişancısı. Tek kafa shot öldürür. Düşük maliye
 
 **Marshal Op değil.** Kafana isabet etmesi lazım. Peek açını değiştir — yüksekten aşağıya hareket Marshal'ın takibini bozar.
 
-**Marshal yavaş nişan alır.** Jiggle peek yap, nişan almak zorunda kalsın. O an flash at, wide peek yap.
+**Marshal yavaş nişan alır.** Jiggle peek at, nişan almak zorunda kalsın. O an flash at, wide peek at.
 
 **Marshal gördüysen rakip ekonomik round'da.** Round kontrolü sende — uzak açı tut, rifle'ınla baskı kur.
 
@@ -135,8 +135,8 @@ Ekonomik round'un en tehlikeli tabancası. Hafif zırhla bile tek kafa shot öld
 
 ### Counter Taktikleri
 
-- **Flash + swing.** Flash atınca nişanı bozulur, o an swing yap.
-- **Hareketle peek.** Strafe + peek yap — hareket eden hedefe Sheriff'te isabet düşer.
+- **Flash + swing.** Flash atınca nişanı bozulur, o an swing at.
+- **Hareketle peek.** Strafe + peek at — hareket eden hedefe Sheriff'te isabet düşer.
 - **İkinci dalga.** Sheriff oyuncusu ateş ettikten sonra yeniden nişan almak zorunda. Takımdan biri çıktı, diğeri hemen arkasından girer.
 
 ### Rank Notu
@@ -157,7 +157,7 @@ Ekonomik round'un yakın mesafe silahı. Yakında Vandal'ı ezer, orta mesafede 
 
 **Spectre uzakta zayıflar.** Mesafe arttıkça mermiler dağılır, hasar düşer. Uzak açı tut.
 
-**Spectre yakında rifle'ı yener.** O mesafede peek yapma — uzağa çek, sonra rifle'ınla vur.
+**Spectre yakında rifle'ı yener.** O mesafede peek atma — uzağa çek, sonra rifle'ınla vur.
 
 ### Counter Taktikleri
 

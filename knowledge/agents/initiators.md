@@ -175,7 +175,7 @@ Initiator'lar bilgi toplar ve düşmanları yerinden ederek site baskınlarını
 - **Eğri flash'lar**: Guiding Light şahin ucarken mouse hareketiyle köşelerden eğrilebilir. Bu düşmanların tepki veremeyeceği popflash'lar yaratır.
 - **Kısa flash**: Şahini bırakıp hemen yeniden aktive et -- yakın mesafe flash. Yakın çarptışma peek'leri için.
 - **Uzun flash**: Şahinin daha uzağa ucmasına izin ver, sonra patlat -- derin pozisyonları flash'la. Arka site açılarını temizlemek için.
-- **Çift flash**: Her iki Guiding Light'ı art arda hızla kör giriş için. İlk flash'ın doğrulaması ikinci için hangi açıya swing yapacağını söyler.
+- **Çift flash**: Her iki Guiding Light'ı art arda hızla kör giriş için. İlk flash'ın doğrulaması ikinci için hangi açıya swing atacağını söyler.
 - **Savunma flash'ı**: Şahini geriye (saldırganlara doğru) ucur ve patlat. Sezgi dışı ama retake'lerde son derece verimli.
 
 ### Ne Zaman Seçilir

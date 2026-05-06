@@ -58,7 +58,7 @@ Rakibin ne yaptığını değil, **niye** yaptığını oku. Niye'yi bilirsen bi
 ### Pattern: Default Execute
 **IF:** Saldırı round açılışını bilgi toplamaya ayırıyor, yavaş yaklaşıyor
 **MEANING:** Mid-round karar verecekler — nereye gideceklerini bilgiye göre seçiyorlar
-**COUNTER:** Erken peek yapma. Bilgiyi sadece zorunda kaldığında ver. Bilgi alamayan saldırı default'u execute'a çeviremez.
+**COUNTER:** Erken peek atma. Bilgiyi sadece zorunda kaldığında ver. Bilgi alamayan saldırı default'u execute'a çeviremez.
 **WHY:** Default'un yakıtı bilgi. Bilgi kesilirse round sonunda panikte execute yapar, o execute okunur.
 
 ---

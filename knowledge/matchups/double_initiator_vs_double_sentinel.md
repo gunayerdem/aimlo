@@ -73,7 +73,7 @@ Bu matchup şuna gelir: bilgi toplarsan ve o bilgiyi girişe çevirirsen kazanı
 
 ---
 
-**IF** Sentinel ikilisi aynı angle'ı hold ediyor (Killjoy + Chamber aynı A Long)
+**IF** Sentinel ikilisi aynı açıyı tutuyor (Killjoy + Chamber aynı A Long)
 **MEANING** Savunma üst üste yığıldı, diğer site trade partner olmadan solo — rotate gelmez
 **COUNTER** Diğer site'a commit yap. İki sentinel aynı angle'daysa comp double sentinel değil, gereksiz sentinel — diğer site boş
 **WHY** Double sentinel değer üretir çünkü iki farklı angle'da baskı kurar. Aynı angle'da yığılırsa avantaj sıfırlanır.

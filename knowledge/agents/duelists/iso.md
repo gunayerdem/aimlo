@@ -13,7 +13,7 @@
 ## 3. Sık Yapılan Hatalar
 1. **Double Tap açmadan dövüşe girmek** — Peek'ten önce Double Tap açık olmalı. Açık değilse kalkan yok, Iso avantajı yok.
 2. **Duvarı izolasyon yerine görüş kesmek için kullanmak** — Bu Viper duvarı değil. Amaç: düşman grubunu böl, biriyle dövüş. Görüş kesmek için kullanırsan izolasyon gider.
-3. **Kalkanla birden fazla açıya swing yapmak** — Kalkan tek hasar örneğini emer. İki düşmana karşı geniş swing yaparsan kalkan ilk mermide biter, ikincisine çıplak girersin. Kalkan 1v1 içindir.
+3. **Kalkanla birden fazla açıya swing atmak** — Kalkan tek hasar örneğini emer. İki düşmana karşı geniş açıyla yüklenirsen kalkan ilk mermide biter, ikincisine çıplak girersin. Kalkan 1v1 içindir.
 4. **Kill Contract'ı zayıf hedefe atmak** — Hasarlı ya da zaten kaçan birine ult atma. Site'ı tutan sentinel'e at, anchor'a at — çıkarması round'u açacak hedefe.
 5. **Kill sonrası küreyi kaçırmak** — Küre kısa süre durur. Vurmayı kaçırırsan kalkan yok, Iso'nun tüm döngüsü kırılır.
 6. **Dövüşe girmemek** — Iso dövüşmediğinde kalkan birikmez, duvar değer üretmez. 1 düşman açıkta görününce Double Tap aç ve gir.
@@ -62,7 +62,7 @@ WHY: Erken ya da yanlış açılı duvar düşmana izolasyondan çıkma fırsat�
 **Düşman Algısı:** Savunucular öldürmesi gereken atışlarda hayatta kaldığını görüyor. Double Tap kalkanı ilk mermiyi emdi ve sana karşı atış için ekstra pencere verdi.
 **Düşman Tepkisi:** Kalkanı kırmak için fazladan atış yapmak zorunda kalıyorlar — kill zamanları uzuyor. Duvarın arkasındaki savunucu takım arkadaşına trade yapamıyor, sadece bekleyebilir — sen o sürede kalkanını yeniliyorsun.
 **Fırsat Penceresi:** Kalkan düşmanın ek atış harcamasını zorunlu kılar, her düelloda bu senin pencerendir. Duvar her dövüşü kalkan avantajlı 1v1 yapar — crossfire bunu geçersiz kılamaz.
-**Döngü:** Yaklaşırken Double Tap aç. Duvarla savunucuyu izole et, açıktakine peek yap. Kill sonrası küreyi hemen vur. Taze kalkanla sıradakine peek yap. Kill Contract'ı site'ı tutan anchor veya Op oyuncuya kullan.
+**Döngü:** Yaklaşırken Double Tap aç. Duvarla savunucuyu izole et, açıktakine peek at. Kill sonrası küreyi hemen vur. Taze kalkanla sıradakine peek at. Kill Contract'ı site'ı tutan anchor veya Op oyuncuya kullan.
 **Düşman Adaptasyonu:** 4-5 round sonra vücut atışıyla kalkanı eritmeye, duvar açılarından kaçınmaya ya da retake'e çekilmeye başlarlar.
 **Karşı Adaptasyon:** Vücut spamı yapıyorlarsa — counterstrafe yap ve baş hizasını aç; kalkan onlar vücuda commit ederken sen headshot indir. Duvar açından kaçıyorlarsa — duvarı farklı eksene taşı ya da rotation yolunu kes. Retake'e çekiliyorlarsa — site'ı bedavaya al, plant yap, Kill Contract ile en iyi oyuncularını kalkanlı 1v1 arena'ya çek.
 ### Zorlanırken

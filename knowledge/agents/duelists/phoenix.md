@@ -9,7 +9,7 @@ Kimliğin bu üç şey: flash disiplini, kendi becerilerinden HP kazanmak, Run I
 
 ## 2. Temel Sorumluluklar
 **Atak tarafında:**
-- Flash at, flash bitmeden swing yap
+- Flash at, flash bitmeden swing at
 - Ateş duvarıyla savunucu görüş hatlarını kes, geçişi zorla
 - Run It Back aktifken site'a gir — bilgi topla, açıları temizle
 
@@ -26,13 +26,13 @@ Kimliğin bu üç şey: flash disiplini, kendi becerilerinden HP kazanmak, Run I
 2. **Run It Back'i pasif kullanmak** — Ult açıkken temkinli oynuyorsan ult'un amacını boşa harcıyorsun. Ult aktifken en geniş swing'i, en derin girişi yaparsın.
 3. **Açıkta molly içinde iyileşmek** — Kapağın arkasına geç, sonra koy. Açıkta dururken molly içindeysen düşmana hediye olursun.
 4. **Ateş duvarını sadece iyileşmek için kullanmak** — Duvarın asıl işi görüş hattını kesmek. İçinde oturup HP doldurmak için harcıyorsan büyük değer kaybediyorsun.
-5. **Flash atıp swing yapmamak** — Curveball'un körlük süresi kısa. Flash patlıyor, sen hâlâ bekliyorsan — boşa gitti. Flash atar atmaz çık.
+5. **Flash atıp swing atmamak** — Curveball'un körlük süresi kısa. Flash patlıyor, sen hâlâ bekliyorsan — boşa gitti. Flash atar atmaz çık.
 6. **Her round aynı flash açısı** — Düşman hangi tarafa döneceğini öğreniyor. Sol eğri, sağ eğri, farklı köşe — karıştır.
 7. **Ult'u tehlikeli yere koymak** — Run It Back seni koyduğun noktaya döndürür. O nokta düşman bastırdıysa, döndüğünde ölürsün. Ult'u temizlenmiş, kapak olan yere koy.
 
 ## 4. Kalıp -> Anlam
 IF: Flash kullanıyorsun ama ilk kill oranın düşük
-MEANING: Flash'in arkasından swing yapmıyorsun ya da hep aynı açıdan atıyorsun, düşman alışmış
+MEANING: Flash'in arkasından swing atmıyorsun ya da hep aynı açıdan atıyorsun, düşman alışmış
 COUNTER: Flash patlıyor — hemen çık. Swing flash patlamadan başlamalı, sonra değil. Her round flash açını değiştir: önce sağ eğri, sonra sol, sonra farklı köşe.
 WHY: Gecikmiş swing, körlük bitmiş düşmana atış yapıyor. Flash'in hiçbir değeri kalmıyor.
 
@@ -58,7 +58,7 @@ WHY: Kill ancak site kontrolüne veya düşman becerilerini tüketmeye yol açar
 
 ## 5. Harita Etkileşimleri
 **Phoenix'in güçlü olduğu haritalar:**
-- **Ascent:** B Main'den flash atıp Market boyunca ateş duvarıyla swing yapmak güçlü bir giriş. Mid kontrolü için duvar + flash ikilisi çalışır.
+- **Ascent:** B Main'den flash atıp Market boyunca ateş duvarıyla swing atmak güçlü bir giriş. Mid kontrolü için duvar + flash ikilisi çalışır.
 - **Bind:** Dar koridorlar flash'i daha etkili kılar. Hookah'ta flash atıp Short'a geçmek tutarlı ilk temas açar.
 - **Split:** A Main ve B Heaven'da flash-peek güçlü. Uzun site dövüşlerinde molly iyileşmesi fark yaratır.
 
@@ -79,7 +79,7 @@ WHY: Kill ancak site kontrolüne veya düşman becerilerini tüketmeye yol açar
 
 ## 7. Oyuncuya Ne Söylenmeli
 ### İyi oynarken
-**Oyuncu aksiyonu:** Her Curveball'dan hemen sonra swing yapıyorsun, her round sol-sağ eğriyi değiştiriyorsun, dövüş aralarında molly ile HP dolduruyorsun.
+**Oyuncu aksiyonu:** Her Curveball'dan hemen sonra swing atıyorsun, her round sol-sağ eğriyi değiştiriyorsun, dövüş aralarında molly ile HP dolduruyorsun.
 
 **Düşman algısı:** Savunucular önceki round'dan hangi tarafa döneceğini tahmin etmeye çalışıyor. Eğri değişince yanlış tarafa dönüyorlar — tam körlük yiyorlar.
 

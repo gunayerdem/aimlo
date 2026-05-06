@@ -25,7 +25,7 @@ MEANING köşeye yakın durmak açı avantajı verir
 COUNTER köşeye yanaş, tek düşman geldiğinde avantajın maksimum
 WHY yakın derinlik tek düşmana karşı en güçlü; birden fazla swing gelirse işlemez
 
-IF birden fazla düşman aynı açıdan swing yapabilecek konumdaysa
+IF birden fazla düşman aynı açıdan swing atabilecek konumdaysa
 MEANING yakında kalırsan hepsini aynı anda göremezsin — ilkini vursan ikincisi seni alır
 COUNTER köşeden uzak dur, geniş görüş kur, hepsini görüp karar ver
 WHY uzakta durman düşmana hem yatay hem dikey düzeltme yaptırıyor, tepki yükü artar

@@ -30,7 +30,7 @@ Seçim haritaya göre yap. Chamber seçiyorsan Op ekonomisini taşımak zorundas
 
 ## 3. Temel Durumlar
 
-**IF** Chamber Op ile uzak sightline'dan aggressive hold yapıyor, Killjoy site içinde kurulmuş
+**IF** Chamber Op ile uzak sightline'dan agresif açı tutuyor, Killjoy site içinde kurulmuş
 **MEANING** İki sentinel farklı fazda — Chamber siteye girmeden önce öldürüyor, Killjoy site içinde bekliyor
 **COUNTER** Smoke + flash ikilisiyle Chamber'ın Op açısını kapat. Açı kapanınca Chamber ya Trademark bırakır ya Rendezvous ile çekilir. Her iki durumda Op shot harcanmamış ama pozisyon kaybedilmiş
 **WHY** Chamber Op shot boşa giderse Chamber ekonomisi o round zayıflar. Killjoy cihazları aynı kayıpla karşılaşmaz — turret yeniden konumlandır, bedava

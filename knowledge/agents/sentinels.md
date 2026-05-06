@@ -76,7 +76,7 @@ Sentinel'ler her takımın savunma omurgası. Site anchor'lar, push'ları gecikt
 
 ### Retake Değeri
 - Sage'in retake değeri Resurrection (4v5'i 4v4 veya 5v4'e cevirme), duvar bölmeleri (düşmanları izole etme) ve Slow Orb (dikim veya defuse peek inkarı) sağlar.
-- **Post-plant Slow Orb**: Spike üstüne Slow Orb at. Yavaşlamış düşmanlar duyulabilir (gıcırdama sesi) ve yavaş (swing yapmak kolay) defuse yapamaz.
+- **Post-plant Slow Orb**: Spike üstüne Slow Orb at. Yavaşlamış düşmanlar duyulabilir (gıcırdama sesi) ve yavaş (swing atmak kolay) defuse yapamaz.
 - **Retake'te rez**: Duellist'in entry'de ölürse koruma arkasında canlandır -- ikinci entry denemesi. Adam avantajı çoğu zaman retake'i kazandırır.
 
 ### Pro Oyuncu Stilleri
@@ -100,7 +100,7 @@ Sentinel'ler her takımın savunma omurgası. Site anchor'lar, push'ları gecikt
   - **Kaçın**: Saldırganların uzaktan vurabileceği açıktaki teller, her round drone/scan yapılan bariz noktalardaki teller.
 
 ### Setup Stratejileri
-- **Cage + Wire kombosu**: Yere Cyber Cage yerleştir, hemen arkasına Trapwire koy. Düşmanlar tele takılınca kafesi aktive et. Bağlı, yavaşlamış ve görüşü engellenmiş durumdalar. Kafes icinden peek yap (sen nerede olduklarını biliyorsun; onlar seni bilmiyor).
+- **Cage + Wire kombosu**: Yere Cyber Cage yerleştir, hemen arkasına Trapwire koy. Düşmanlar tele takılınca kafesi aktive et. Bağlı, yavaşlamış ve görüşü engellenmiş durumdalar. Kafes icinden peek at (sen nerede olduklarını biliyorsun; onlar seni bilmiyor).
 - **Harita arası bilgi**: Spycam'i bir site'ı izlerken yerleştir, diğer site'ı Trapwire'larla anchor et. İki site'tan aynı anda bilgi alırsın.
 - **Flank inkarı**: Atakta takımının arkasına bir Trapwire koymak paha biçilmez. İlk site alımından sonra arkadaki koridora yerleştir.
 - **Tek yönlü Cyber Cage**: Cyber Cage'i yüksek yüzeye (kutu kenarı, pencere eşiği) yerleştir. Aktive edildiğinde kafes kenardan sarkar, sen ayakları görürsün ama düşmanlar hicbir şey görmez.
@@ -263,7 +263,7 @@ Sentinel'ler her takımın savunma omurgası. Site anchor'lar, push'ları gecikt
 - **Çift site varlığı**: Rendezvous ankoru bir site'a koy, diğer site'ta agresif push yap. Kötü giderse TP ile dön. Bu pseudo çift site varlığı Chamber'a özgü.
 
 ### Setup Stratejileri
-- **Op + Rendezvous**: BU Chamber oyunu. Op al, uzun açı tut, pick al, TP ile kaç. 2022-2023'te baskın meta stratejisi (çoklu nerf öncesi).
+- **Op + Rendezvous**: BU Chamber oyunu. Op al, uzun açı tut, kill al, TP ile kaç. 2022-2023'te baskın meta stratejisi (çoklu nerf öncesi).
 - **Headhunter eco roundlar**: Mermi başına 150 ile tam Headhunter (1200 kredi) eco round'da yıkıcı. Her mesafede tek headshot öldürür -- Chamber'a "mini-Op" kapasitesi verir.
 - **Tour De Force eco**: Chamber'ın ult'u eco round'da takıma bedava Op düzeyi silah verir. Slow alanları da push'ları inkar eder.
 - **Trademark + acı tutma**: Trademark'ı off-angle flank'ini izleyecek şekilde yerleştir, sonra karşı açıya push yap. Tuzak tetiklenince flank'i karşılamak için rotate et.
@@ -318,7 +318,7 @@ Sentinel'ler her takımın savunma omurgası. Site anchor'lar, push'ları gecikt
 
 ### Retake Değeri
 - Chamber'ın retake değeri Tour De Force (slow alanları post-plant pozisyonları inkar eder) ve Headhunter (retake sırasında isabetli kill alır) sağlar.
-- Retake sırasında agresif peek'ler için Rendezvous -- peek yap, bilgi veya kill al, TP ile dön.
+- Retake sırasında agresif peek'ler için Rendezvous -- peek at, bilgi veya kill al, TP ile dön.
 - Defuse inkarı için düşmanların spike'a yaklaşmasını uyaracak şekilde spike üstüne Trademark.
 
 ### Pro Oyuncu Stilleri
@@ -377,8 +377,8 @@ Sentinel'ler her takımın savunma omurgası. Site anchor'lar, push'ları gecikt
    **WHY** Uzak mesafe ult = kolay kaçınma = 8 puan cöp
 
 4. **IF** GravNet sonrası takip etmiyorsan
-   **MEANING** Eğilmeye zorlama kısa sürer ama düşmanlar ateş ederek cıkabilir. Sıkışıkken peek yap
-   **COUNTER** GravNet sıkıştığında hemen peek yap veya takıma bildir
+   **MEANING** Eğilmeye zorlama kısa sürer ama düşmanlar ateş ederek cıkabilir. Sıkışıkken peek at
+   **COUNTER** GravNet sıkıştığında hemen peek at veya takıma bildir
    **WHY** Takipsiz GravNet = gecici yavaşlama ve hicbir şey kazanmama
 
 5. **IF** Retake'lerde Barrier Mesh kullanmıyorsan

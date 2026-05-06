@@ -10,7 +10,7 @@ Duelist site açar. Sentinel o açılışı kapatır. Duelist sentinel kurulumun
 **COUNTER**: Flash atıp sentinel'ı açısından çıkar. Jett dash veya Neon slide tuzaktan geçer ama sentinel'ı çoktan alert ettin — öne geçince hesap sormak için orada olmalı. Kurulumun üzerinden geçmek değil, önce kurulumu sökmek.
 **WHY**: Sentinel sana bilgi ve gecikme satıyor. Bunu kırmanın tek yolu yeteneği fiziksel olarak silmek ya da sentinel'ı pozisyonundan çıkarmak.
 
-**IF**: Duelist yetenek atmadan hazır köşelere tekrar tekrar kuru peek yapıyor ve sentinel kurulumuna ölüyor
+**IF**: Duelist yetenek atmadan hazır köşelere tekrar tekrar kuru peek atıyor ve sentinel kurulumuna ölüyor
 **MEANING**: Site alımını tüfek dövüşü gibi çözmeye çalışıyor. Bu bir yetenek bulmacası — önce bulmacayı çöz, sonra silah çek.
 **COUNTER**: Takım arkadaşının flash'ı önce gitsin, sen arkasından gir. KAY/O knife veya Sova dart tuzak konumunu açığa çıkarırsa o bölgeye körü körüne girme — tuzak hâlâ orada. Önce sök, sonra push.
 **WHY**: Entry önce yetenek işidir. Aim sonra gelir.

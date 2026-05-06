@@ -17,7 +17,7 @@ Bu maçup bilgi savaşı. Cypher tuzak koyar, sen oradan geçersen o seni okur. 
 
 **Neon lehine durumlar:**
 - Uzun koridorlarda (Breeze, Icebox Mid, Pearl) — sprint mesafeyi hızlı kapatır, Cypher tuzak kurmaya vakit bulamaz
-- Cypher kamera moduna girip solo hold yapıyorsa — kameradayken aim hattı yok, direkt peek at, bedava kill
+- Cypher kamera moduna girip tek başına açı tutuyorsa — kameradayken aim hattı yok, direkt peek at, bedava kill
 - Cypher tuzaklar bitince veya cage yoksa — o an info körleşir, agresif gir
 - Neon stun Cypher'ı pozisyonda yakaladıysa — stun vurunca Cypher reaksiyon veremez, hemen üstüne düş
 

@@ -131,7 +131,7 @@ Savunmanın nerede durduğunu bilmiyorsan önce bilgi toplarsın, zayıf noktay�
 Sıralama yanlışsa execute başlamadan biter.
 
 - **Smoke:** Entry girmeden hemen önce atılır. Entry smoke arkasından çıkar.
-- **Flash:** Entry peek'iyle eş zamanlı patlar. Flash patladıktan sonra swing yaparsın — rakip kör, sen değilsin.
+- **Flash:** Entry peek'iyle eş zamanlı patlar. Flash patladıktan sonra swing atarsın — rakip kör, sen değilsin.
 - **Molly:** Site içindeki rakibi pozisyondan sökmek için veya post-plant'te defuse engellemek için sakla.
 - **Stun/hasar (Breach):** Entry girmeden hemen önce, stun bitmeden entry içeri girer.
 

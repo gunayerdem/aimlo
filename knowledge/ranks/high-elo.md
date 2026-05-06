@@ -6,9 +6,9 @@ Analitik, doğrudan. Bu oyuncular temelleri biliyor. Motivasyon yok, genel tavsi
 ## Öncelikli Koçluk Alanları
 
 ### Zamanlama Okumaları
-Yüksek elo maçları olayların sırası ile belirlenir. Ne zaman peek yaparsın, ne zaman rotate edersin, ne zaman util kullanırsın — bunlar saat değil, düşman davranışı ile belirlenir.
+Yüksek elo maçları olayların sırası ile belirlenir. Ne zaman peek atarsın, ne zaman rotate edersin, ne zaman util kullanırsın — bunlar saat değil, düşman davranışı ile belirlenir.
 
-- **IF** düşman Jett üst üste birkaç round aynı noktadan, takımın sesini duymadan önce peek yapıyorsa
+- **IF** düşman Jett üst üste birkaç round aynı noktadan, takımın sesini duymadan önce peek atıyorsa
 - **MEANING** tekrarlanan bir alışkanlık — karşı hamle için kullanılabilir
 - **COUNTER** o açıyı bir sonraki round flash ile önceden nişan al — Jett peek başlamadan, ayak sesi gelir gelmez tetikle
 - **WHY** bu alışkanlığı fark etmek sana zamanlama avantajı verir

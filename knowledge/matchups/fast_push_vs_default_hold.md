@@ -18,7 +18,7 @@ Bu matchup'ın tek kilit anı var: **ilk temas**. Saldırı bilgi vermeden ilerl
 **Fast push avantajlı:**
 - Savunma dağılımı statik ve round başında tuzağı kurulmamışsa
 - Giriş koridoru tek ağızsa — savunma iki ağızlı bir hattı tek taraftan tutmaya çalışıyorsa (Split A, Bind B)
-- Takımında çift flash agenti varsa — ikisi zincir yaparsa savunma peek yapamaz
+- Takımında çift flash agenti varsa — ikisi zincir yaparsa savunma peek atamaz
 - Savunma anchor'ı yalnız, trade partneri başka hatta kaymışsa
 - Savunma silaha para yatırmak zorunda kaldıysa, util az
 

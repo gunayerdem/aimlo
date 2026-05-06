@@ -162,7 +162,7 @@ Kenar peek'leri öğrenmene gerek yok şu an. Önce hayatta kal.
 
 **Gold-Plat**: Haritayı tanıyorsun ama Bridge kontrolünü atlıyorsun. Bu hata seni öldürüyor — Bridge'i kaybedersen rotate'i kaybediyorsun, rotate'i kaybedersen round'u kaybediyorsun. Şu üç şeyi düzelt:
 - Bridge kontrolü her round zorunlu, opsiyonel değil.
-- Flash patladığı anda swing yap, smoke girmeden önce atılmış olsun.
+- Flash patladığı anda swing at, smoke girmeden önce atılmış olsun.
 - Execute'da herkes aynı anda hareket etsin — biri beklerken diğerleri girmesin.
 
 Kenar peek'i her round değil, sürpriz pozisyon olarak kullan.
@@ -260,8 +260,8 @@ WHY: Post-plant'in tek amacı zamanı yemek ve defuse'u engellemek. Kenarda öl�
 
 **Force Buy Kararları**: Force buy'da B'ye rush et. B site kapalı — Spectre ve shotgun orada güçlü. A site'ta force buy silahıyla girme, mesafe seni ezer.
 
-**Eco Round Stratejileri**: Eco'da Bridge'de Sheriff oyna. Kenar pozisyondan tek atışla pick alırsın. Judge veya Bucky alıyorsan uçurum kenarına yaklaşma — silahı kullanamadan düşersin. Eco'nun amacı:
-- 1-2 pick al
+**Eco Round Stratejileri**: Eco'da Bridge'de Sheriff oyna. Kenar pozisyondan tek atışla kill alırsın. Judge veya Bucky alıyorsan uçurum kenarına yaklaşma — silahı kullanamadan düşersin. Eco'nun amacı:
+- 1-2 kill al
 - Silah topla
 - Tamamen yok olma
 
@@ -283,6 +283,6 @@ WHY: Post-plant'in tek amacı zamanı yemek ve defuse'u engellemek. Kenarda öl�
 
 **Rakip Sage wall Bridge kullanıyorsa**: Wall'u erken kıracak utility hazırla: Raze grenade veya Breach aftershock. Wall kırılınca push yap — rakip wall'a güvenip arkasında agresif durmuş olabilir. İstersen wall'u ignore et, diğer taraftan split yap. Wall bir tarafı kapatırken diğer taraf açılır.
 
-**Rakip Op Bridge'de dominant oynuyorsa**: Bridge'e smoke at, Op'un sightline'ını kes. Flash'la salla, flash sonrası peek yap. Jett dash veya Raze satchel ile hızlı geç, Op'un scope açmasına fırsat verme. Op oyuncusu aynı açıyı tutuyorsa off-angle'dan peek yap.
+**Rakip Op Bridge'de dominant oynuyorsa**: Bridge'e smoke at, Op'un sightline'ını kes. Flash'la salla, flash sonrası peek at. Jett dash veya Raze satchel ile hızlı geç, Op'un scope açmasına fırsat verme. Op oyuncusu aynı açıyı tutuyorsa off-angle'dan peek at.
 
 **Round-to-Round Uyum Prensibi**: Abyss'te anti-strat statik değil. Kenar oyununu kapadın, rakip kenarı bırakır. Bir sonraki round kenar tekrar açılır çünkü rakip artık deny beklemez. Aynı karşı hamleyi üst üste kullanma — rakip seni de okur, her round anti-strat'ı güncelle.

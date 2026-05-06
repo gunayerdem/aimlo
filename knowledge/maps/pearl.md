@@ -25,8 +25,8 @@ COUNTER: Plaza'ya çıkmadan flash veya smoke at. Fade veya Sova varsa — Haunt
 WHY: Op'un açısını kırdığın anda rifler olarak yakın mesafe avantajın oluşur. Op oyuncusu scope'tayken yavaş hareket eder — flash sonrası swing'de scope'tan çıkış süresi seni korur.
 
 **B Long Açık Alan**
-IF: B Long'da kontrolsuz geniş açıyla swing yapıyorsun, aynı açıdan tekrar tekrar ölüyorsun.
-MEANING: B Long Pearl'ün en uzun sightline'larından biri. Wide swing yaptığında vücudunun tamamını savunucunun önceden nişan aldığı noktaya sunuyorsun.
+IF: B Long'da kontrolsuz geniş açıyla yükleniyorsun, aynı açıdan tekrar tekrar ölüyorsun.
+MEANING: B Long Pearl'ün en uzun sightline'larından biri. Wide swing attığında vücudunun tamamını savunucunun önceden nişan aldığı noktaya sunuyorsun.
 COUNTER: Smoke ile sightline'ı kes. Jiggle peek ile bilgi al — tam commit etme. Takım arkadaşın B Hall veya B Link'ten baskı kurarken sen trade pozisyonu al. B Long'u solo contest etme.
 WHY: Uzun sightline'da mesafe arttıkça senin hareketin görsel olarak yavaşlar, hedef küçülürsün. Smoke bu avantajı ortadan kaldırır. Crossfire ise savunucuyu iki açı arasında böler — ikisine aynı anda nişan alamaz.
 
@@ -216,7 +216,7 @@ WHY: Mid kimin elindeyse savunucu o takımın rotasyon yolunu kullanır. Mid'i k
 ## 10. Ekonomi
 
 **Op Ekonomisi**
-Pearl'de Op'un en güçlü olduğu yer Mid Plaza ve B Long. Savunmada Op'u önce al — Mid Plaza veya B Long'da dur, haritanın en uzun sightline'larını sen kontrol et. Chamber oynuyorsan TP'yi koy, peek yap, kill al, geri çekil. Op'u kaybetme riski sıfırlanır. Saldırıda Op Mid Top'tan Plaza'ya baskı yapabilirsin ama karşı tarafta da Op varsa trade olur, bunu göze al.
+Pearl'de Op'un en güçlü olduğu yer Mid Plaza ve B Long. Savunmada Op'u önce al — Mid Plaza veya B Long'da dur, haritanın en uzun sightline'larını sen kontrol et. Chamber oynuyorsan TP'yi koy, peek at, kill al, geri çekil. Op'u kaybetme riski sıfırlanır. Saldırıda Op Mid Top'tan Plaza'ya baskı yapabilirsin ama karşı tarafta da Op varsa trade olur, bunu göze al.
 
 **Force Buy**
 Force buy'da en sağlam seçenek 5 kişiyle A Main rush. A Main dar — Spectre burada Vandal kadar öldürür. Flash, smoke, molly dök, hızlı gir. Dar koridor spray'ini güçlendirir, savunucunun uzun mesafe avantajı ortadan kalkar.

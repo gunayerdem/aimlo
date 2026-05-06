@@ -63,7 +63,7 @@ WHY: Duvarsız sprint seni korumasız bırakır. Fast Lane olmadan Neon oynamıy
 **Fırsat Penceresi:** Fast Lane iki savunucuyu izole ettiği an senin kill penceren. Slide yaptığın kişinin crossfire desteği sıfır — arkadaşı duvar tarafından kilitli ve tam süre boyunca trade gelemez.
 **Tekrar Stratejisi:** İlk execute'ta: ortadan Fast Lane, sprint, sola slide. 1 düşman düşünce: aynı duvar açısı, sağa slide. Savunucular duvar çıkışını beklemeye başlayınca: Fast Lane'i at, duvara kilitlenen savunucuları cezalandırmak için off-angle'dan ham sprint. Savunucular retake'e koştuğunda Overdrive'ı Fast Lane içinde aç: crossfire azalır, hasar penceren açılır.
 **Düşman Adaptasyonu:** Savunucular duvarın arkasında beklemeye başlarsa, slide bitiş noktasını önceden nişanlarlarsa ya da duvarın kapamadığı tarafa yığılırlarsa.
-**Karşı Adaptasyon:** Duvarın arkasında bekliyorlarsa — sprint sırasında duvar üzerinden Relay Bolt at, beklemeyi cezalandır. Slide bitiş noktasını önceden nişanlıyorlarsa — sprint'i erken kes, slide yerine geniş peek yap. Kapatılmamış tarafa yığıldılarsa — Fast Lane açısını değiştir ya da tamamen farklı yoldan gir.
+**Karşı Adaptasyon:** Duvarın arkasında bekliyorlarsa — sprint sırasında duvar üzerinden Relay Bolt at, beklemeyi cezalandır. Slide bitiş noktasını önceden nişanlıyorlarsa — sprint'i erken kes, slide yerine geniş peek at. Kapatılmamış tarafa yığıldılarsa — Fast Lane açısını değiştir ya da tamamen farklı yoldan gir.
 ### Zorlanırken
 "Önce duvarını aç. Duvar yoksa sprint atma — o kadar."
 ### Öngörülebilir olduğunda

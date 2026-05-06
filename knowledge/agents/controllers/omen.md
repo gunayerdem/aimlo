@@ -13,7 +13,7 @@ Omen tek başına çalışan bir smoke ajanısın. Görevin sadece duman atmak d
 
 ## 3. Sık Yapılan Hatalar
 - Aynı teleport noktasına üst üste gitmek — üç round sonra düşman oraya kör nişan alır.
-- Paranoia'yı takım hazır değilken atmak — kimse peek yapmıyorsa kör boşa gider.
+- Paranoia'yı takım hazır değilken atmak — kimse peek atmıyorsa kör boşa gider.
 - Smoke'ları aksatıp kill kovalamak — smoke olmadan takım içeri giremez.
 - From The Shadows'u düşmanın rahatça duyduğu açık alanda kullanmak — ses seni öldürür.
 - One-way smoke'u çok alçak koymak — bu durumda avantaj sende değil düşmanda olur.
@@ -29,7 +29,7 @@ Omen tek başına çalışan bir smoke ajanısın. Görevin sadece duman atmak d
 **IF** Paranoia'yı sürekli yanında kimse yokken atıyorsun
 **MEANING** Paranoia'yı takım yeteneği gibi değil kişisel yetenek gibi kullanıyorsun.
 **COUNTER** Takım arkadaşın tam köşeyi almadan önce at. Körleşme o anla örtüşsün — önce değil, tam o anda.
-**WHY** Paranoia körleştirdiğinde ancak biri hemen peek yaparsa kill'e döner. Yoksa düşman bekler, görüşü geri gelir.
+**WHY** Paranoia körleştirdiğinde ancak biri hemen peek atarsa kill'e döner. Yoksa düşman bekler, görüşü geri gelir.
 
 **IF** smoke'larını her zaman aynı standart kapı ağzına koyuyorsun, hiç one-way yapmıyorsun
 **MEANING** Omen'in en güçlü özelliğini kullanmıyorsun.
@@ -78,7 +78,7 @@ Omen tek başına çalışan bir smoke ajanısın. Görevin sadece duman atmak d
 **Tahmin edilebilir olduğunda:** "Rakipler teleport noktana kör nişan alıyor. Üst üste üç round aynı yere gittin. Değiştir — en az kullandığın açı, düşmanın en az hazırlandığı açıdır."
 
 ## 8. Rütbe Ayarı
-- **Düşük (Iron-Silver):** Önce smoke'ları öğren. Teleport oyununu sonraya bırak. Paranoia'yı kendin peek yapacaksan kullan — takım koordinasyonunu sonra ekle.
+- **Düşük (Iron-Silver):** Önce smoke'ları öğren. Teleport oyununu sonraya bırak. Paranoia'yı kendin peek atacaksan kullan — takım koordinasyonunu sonra ekle.
 - **Orta (Gold-Platinum):** One-way smoke noktaları öğren — harita başına 2-3 tane yeter. Shrouded Step için 2-3 güvenilir nokta belirle. Paranoia'yı takım girişiyle aynı anda atmaya başla.
 - **Yüksek (Diamond-Ascendant):** Smoke zamanlamalarını takımın girişine göre ayarla. Shrouded Step rotalarını round öncesinde planla. From The Shadows'u hızlı bölge geçişi için kullan, sadece arkadan baskı için değil.
 - **Elit (Immortal-Radiant):** Smoke, teleport, Paranoia aynı anda çalışır. Shrouded Step ses bluff'unu kullan: sesi verip iptal et, düşman tepki verirken gerçek baskı başka noktadan gelir. Düşmanın hareket kalıplarını okuyarak teleport noktalarını belirle. From The Shadows ile spike kurulduktan sonra karşı bölgede varlık yarat.

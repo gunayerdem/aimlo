@@ -24,7 +24,7 @@ Bind'de site'a girmek görece kolay, ama içeri girince düşman her yerden gele
 A Bath tek giriş tek çıkış — içeri girdin mi geri yok. Seni öldüren şey mekanik değil, util kullanmadan girmek. A Bath'a girerken en az bir flash ve bir smoke harca. Smokesız flashsız girersen A Short crossfire'ı ve Heaven açısı seni bitirir. Buraya tekrar tekrar girip ölüyorsan sorun nişanın değil, util disiplinin yok.
 
 **Ölüm Bölgesi 2: B Long Choke Point**
-B Long'u tek başına peek yaparak geçemezsin. Elbow'dan ve B Site'tan crossfire geliyor — sırayla girerseniz tek tek dökülürsünüz. Çözüm basit: takım olarak util dökün, aynı anda girin. Biri öne geçerken diğerleri arkada bekliyorsa B Long sizi yer.
+B Long'u tek başına peek atarak geçemezsin. Elbow'dan ve B Site'tan crossfire geliyor — sırayla girerseniz tek tek dökülürsünüz. Çözüm basit: takım olarak util dökün, aynı anda girin. Biri öne geçerken diğerleri arkada bekliyorsa B Long sizi yer.
 
 **Ölüm Bölgesi 3: Hookah (B Window)**
 Hookah'yı kim alırsa B Site'i o kontrol eder. Saldırıdaysan Hookah almadan B Site'a girme — yukarı açı seni sürekli vurur. Savunmadaysan Hookah'yı verme, B biter. Tek başına kuru peek ile Hookah almaya çalışma. Ya tripwire ya alarm bot koy, ya da takımınla birlikte clear et.
@@ -82,7 +82,7 @@ WHY: Heaven, Lamps ve A Short üç farklı yönden ateş açar, saldırıyı cro
 IF: B Site'i 2-3 kişiyle tutuyorsan — B Elbow'da anchor, Hookah'da kontrol oyuncusu, B Long'da erken bilgi.
 MEANING: B savunmasının kalbi Hookah kontrolüdür. Hookah'yı tutan takım B'yi tutar. B Elbow dar açıdan B Long'a bakar, tek başına push'u yavaşlatır. B Long oyuncusu erken bilgi alır, gerektiğinde geri çekilir.
 COUNTER:
-- B Elbow'da flash geldiğinde açıdan düş, geri çekil, flash bitince tekrar peek yap.
+- B Elbow'da flash geldiğinde açıdan düş, geri çekil, flash bitince tekrar peek at.
 - Hookah kontrolcüsü tripwire veya alarm bot kullan. Yaklaşan düşmanı sana bildirsin, kuru peek zorunda kalma.
 - B Long oyuncusu ilk kontaktan sonra geri çekilir. Orada kalıp ölüm ararsan siteı savunmasız bırakırsın.
 WHY: B Long ve Hookah dar girişlerdir. Savunmacı bu dar noktalara ateş açarak saldırıyı durdurur. Ama bu avantaj sadece hayatta olduğunda geçerli. B'de erken ölüm choke point avantajını siler, saldırı tarafı bedavaya girer.
@@ -129,7 +129,7 @@ WHY: Bind'in geniş siteleri yüzünden tek yönden retake tüm açılara maruz 
 Bind'de en büyük hatan teleporter'ı unutmak. Teleporter sesi geldi mi — takımına söyle. Bu kadar. Her roundda bunu yap, o kadar. A Bath veya Hookah'a utility atmadan giriyorsan, ölürsün. Önce utility at, sonra gir. Bu iki alışkanlık seni bir üst ranka taşır.
 
 ### Gold-Platinum
-Utility atıyorsun ama arkadan kimse gelmiyor. Flash patladı, sen swing yapmadın — flash boşa gitti. Smoke kalktı, push yok — düşman geri çekildi. Utility ile hareketi aynı anda yapman lazım. Ayrıca burada fake çok işe yarar: bir smoke, bir flash at — karşı takım hep rotate eder. Teleporter'a gir sesini ver ama geçme. Düşman döner, B boş kalır.
+Utility atıyorsun ama arkadan kimse gelmiyor. Flash patladı, sen swing atmadın — flash boşa gitti. Smoke kalktı, push yok — düşman geri çekildi. Utility ile hareketi aynı anda yapman lazım. Ayrıca burada fake çok işe yarar: bir smoke, bir flash at — karşı takım hep rotate eder. Teleporter'a gir sesini ver ama geçme. Düşman döner, B boş kalır.
 
 ### Diamond-Ascendant
 Mekanik var, utility var — ama düşmanı okumuyorsun. Düşman üst üste A'ya geldi mi? Bir sonraki roundda A'ya fazladan adam koyma. Düşman bunu görür, B'ye döner. Onun yerine A'daki adamları geri çek, retake hazırlığı yap. Teleporter split'i burada önemli bir silah — ama execute başlarken zamanlamayı doğru kur, erken veya geç girme.
@@ -185,7 +185,7 @@ MEANING: Savunmacı defuse için spike'a yaklaşmak zorunda — iki farklı aç�
 
 COUNTER (Saldırı):
 - Spike konduktan hemen sonra pozisyonunu al. Sonradan hareket edersen ses çıkar, seni bulurlar.
-- Lamps'taysan dar açıyı tut, gereksiz peek yapma. A Short'taysan teleporter çıkışını da gözünde bulundur — savunma oradan flanklayabilir.
+- Lamps'taysan dar açıyı tut, gereksiz peek atma. A Short'taysan teleporter çıkışını da gözünde bulundur — savunma oradan flanklayabilir.
 - Defuse sesi gelince molly veya grenade'i spike üstüne at, defuse'u kes.
 
 COUNTER (Savunma retake):
@@ -204,8 +204,8 @@ IF: Spike B Default'a konulmuş, sen de B Garden + B Long crossfire'ı kuruyorsa
 MEANING: CT'den gelen savunmacı B Garden'daki seni görmeden ilerleyemez. B Long'daki oyuncu ise yan açıyı tutar. Hookah'da da biri varsa üç açılı crossfire olur — retake neredeyse imkânsız.
 
 COUNTER (Saldırı):
-- B Garden'da duvarın arkasına gir, defuse sesi gelince peek yap — daha önce çıkma.
-- B Long'daysan geri çekil, dar açıyı tut. Agresif peek yaparak pozisyonunu ele verme.
+- B Garden'da duvarın arkasına gir, defuse sesi gelince peek at — daha önce çıkma.
+- B Long'daysan geri çekil, dar açıyı tut. Agresif peek atarak pozisyonunu ele verme.
 - Spike üstüne Brimstone veya Viper molly'si at, defuse başlayınca kesintisiz bask uygula.
 
 COUNTER (Savunma retake):

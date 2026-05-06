@@ -8,7 +8,7 @@ Radiant'ı diğerlerinden ayıran şey refleks değil — pattern okuma ve mikro
 
 ### Off-Angle Teorisi
 
-IF düşman peek yapmadan önce crosshair'ini default açıya koymuşsa
+IF düşman peek atmadan önce crosshair'ini default açıya koymuşsa
 MEANING sen o açıyı tutuyorsan, peek etmeden seni bulmuş demek
 COUNTER default'tan biraz kay — aynı lane'i kapayacak kadar yakın, ama seni bulmak için mikro-ayarlama yapmak zorunda kalsın
 WHY o zorlanan mikro-ayarlama senin önce ateş etmeni sağlayan reaksiyon boşluğunu açar
@@ -26,9 +26,9 @@ COUNTER yakın derinliği sadece izole düellolarda ve dar koridorlarda kullan �
 WHY yakın derinlik açı avantajını en üste çıkarır ama birden fazla tehdidi işlemeye vakit bırakmaz
 
 IF köşeden uzakta duruyorsan
-MEANING peek yapan seni crosshair placement noktasında değil, periferinde görür — düzeltmek için zaman kaybeder
-COUNTER birden fazla düşman swing yapabilecekse uzak derinliği seç — tam resmi görmeden commit etmezsin
-WHY köşeden uzaklık peek yapanı hem yatay hem dikey ayarlama yapmaya zorlar, reaksiyon yükünü ikiye katlar
+MEANING peek atan seni crosshair placement noktasında değil, periferinde görür — düzeltmek için zaman kaybeder
+COUNTER birden fazla düşman swing atabilecekse uzak derinliği seç — tam resmi görmeden commit etmezsin
+WHY köşeden uzaklık peek atanı hem yatay hem dikey ayarlama yapmaya zorlar, reaksiyon yükünü ikiye katlar
 
 ### Peek Edilmemiş Pozisyon
 
@@ -72,7 +72,7 @@ WHY bedava bilgi: ateş ederse yerini ve silahının recovery'sini kaybediyor, a
 ### Ferrari Peek
 
 IF düşmanın nerede durduğunu kesin biliyorsan
-MEANING tam strafe hızında geniş swing yapıyorsun, karşı taraf seni takip etmek zorunda kalıyor
+MEANING tam strafe hızında geniş açıyla yükleniyorsun, karşı taraf seni takip etmek zorunda kalıyor
 COUNTER bilinen noktaya açıyı tut, tam hızda swing at, counter-strafe yap ve ateş et
 WHY geniş swing seni köşe kenarından hızla uzaklaştırıyor — düşman baskı altında büyük bir ayarlama yapmak zorunda
 
@@ -107,7 +107,7 @@ WHY dikey ayarı sıfırlarsan düşman çıktığında sadece yatay düzeltme y
 ### Pre-Aim Noktaları
 
 IF crosshair'i köşeye yakın ama ortada tutuyorsan
-MEANING düşman peek yaptığında hem tepki verip hem ayar yapman gerekiyor — ikisi birden fazla
+MEANING düşman peek attığında hem tepki verip hem ayar yapman gerekiyor — ikisi birden fazla
 COUNTER crosshair'i tam köşe kenarına, baş yüksekliğine koy. Düşmanın başının ilk göründüğü yere
 WHY oraya koyduysan sadece tıklarsın. Tıkla-sonra-ayarla değil, sadece tıkla
 

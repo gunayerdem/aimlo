@@ -16,7 +16,7 @@ Corrode dar koridorları olan, dikey çatışmaların ve yakın mesafe kavgasın
 
 ### A Main Koridor
 
-A Main dar ve uzun — seni tek bir hatta sokuyor. Utility atmadan wide-swing yaparsan, sana ilk kanı içiren sen oluyorsun. Burada sürekli ölüyorsan sorun nişanın değil: flash at, koridor ortasını smoke'la, sonra gir.
+A Main dar ve uzun — seni tek bir hatta sokuyor. Utility atmadan geniş açıyla yüklenirsen, sana ilk kanı içiren sen oluyorsun. Burada sürekli ölüyorsan sorun nişanın değil: flash at, koridor ortasını smoke'la, sonra gir.
 
 ### B Tunnel Junction
 
@@ -243,7 +243,7 @@ Sadece A CT'den retake yaparsan saldırgan tüm post-plant pozisyonlarını o y�
 
 **MEANING:** Tek yönden sıralı giriş saldırganın post-plant crossfire'ını besliyor. İlk giren düşer, ikinci giren aynı açıya yakalanır.
 
-**COUNTER:** Retake'i ikiye böl: 2 kişi A CT, 1 kişi A Connector. Connector'daki oyuncu flash atar, CT'dekiler flash patladığı anda swing yapar. Aynı anda iki açıdan baskı — saldırgan tek yöne odaklanamaz.
+**COUNTER:** Retake'i ikiye böl: 2 kişi A CT, 1 kişi A Connector. Connector'daki oyuncu flash atar, CT'dekiler flash patladığı anda swing atar. Aynı anda iki açıdan baskı — saldırgan tek yöne odaklanamaz.
 
 **WHY:** Çok yönlü retake saldırganın post-plant avantajını kırar. Bir yöne dönerse diğer yön açılır, pozisyon tutamaz.
 
@@ -253,7 +253,7 @@ Sadece A CT'den retake yaparsan saldırgan tüm post-plant pozisyonlarını o y�
 
 **MEANING:** Spike baskısıyla utility'yi atlıyorsun. Post-plant'taki saldırganlar hazır bekliyor, seni teker teker düşürüyor.
 
-**COUNTER:** Spike'ta yeterince süre varsa retake'e başlamadan önce en az bir bilgi utility'si ve bir flash kullan. Drone ya da Haunt'la pozisyon öğren, flash'le gir. Süre azsa hızlı flash + swing yap ama yine de kuru girme.
+**COUNTER:** Spike'ta yeterince süre varsa retake'e başlamadan önce en az bir bilgi utility'si ve bir flash kullan. Drone ya da Haunt'la pozisyon öğren, flash'le gir. Süre azsa hızlı flash + swing at ama yine de kuru girme.
 
 **WHY:** Bilgi utility'si düşmanın nerede durduğunu gösterir, doğru açıyı açı tutma edersin. Flash düşmanın reaksiyon avantajını yok eder. İkisi birden retake'in başarı oranını katlıyor.
 
@@ -310,7 +310,7 @@ Mid'i savunmak agresif peek demek değil. Smoke ile Mid Pipes sightline'ını ka
 **MEANING:** Mid almak için yeterli kaynak koymuyorsunuz. Tek oyuncu Op'a veya çapraz ateşe karşı duramaz.
 
 **COUNTER:**
-- Mid'e iki oyuncu gönder: biri flash atar, diğeri swing yapar.
+- Mid'e iki oyuncu gönder: biri flash atar, diğeri swing atar.
 - Alternatif: mid'i smoke'la, contest etme — smoke arkasından Connector'a geç.
 - Tek oyuncuyu mid'e kurban verme.
 
@@ -337,7 +337,7 @@ Mid'i savunmak agresif peek demek değil. Smoke ile Mid Pipes sightline'ını ka
 
 **COUNTER:**
 - Mid'de erken ölüm tekrar ediyorsa mid'i smoke'la, içine girme.
-- Smoke arkasından utility ile bilgi al, peek yapma.
+- Smoke arkasından utility ile bilgi al, peek atma.
 - Mid'i almak yerine nötralize et — kimse geçemesin.
 
 **WHY:** Mid kavgası erken sayı kaybettiriyorsa, o round mid'in değeri düşer. Smoke ile mid'i kapatmak her iki tarafı da site odaklı oynamaya zorlar. Mid her round uğruna ölünecek bir yer değil — round planına göre karar ver.
@@ -457,9 +457,9 @@ Dur. Bir ability at. Sonra gir. Bu kadar. Bu tek alışkanlık koridordaki ölü
 
 ### Gold-Platinum
 
-Utility atıyorsun ama entry arkadaşın flash patlamadan swing yapıyor — flash boşa gidiyor.
+Utility atıyorsun ama entry arkadaşın flash patlamadan swing atıyor — flash boşa gidiyor.
 
-Flash önce patlasın, entry o anda swing yapsın. Corrode'da koridor zamanlaması her şeydir. Sıra önemli.
+Flash önce patlasın, entry o anda swing atsın. Corrode'da koridor zamanlaması her şeydir. Sıra önemli.
 
 ### Diamond-Ascendant
 
@@ -637,7 +637,7 @@ Anti-eco round'unu hafife alma. Corrode'un dar yapısı eco yapan takıma Classi
 
 **COUNTER:** Üç seçenek:
 - Koridoru smoke'la — Op görüş hattını kaybeder.
-- Flash + swing yap — Op'un reaksiyon avantajını yok et.
+- Flash + swing at — Op'un reaksiyon avantajını yok et.
 - Başka koridora geç — Op A Main'deyse B Tunnel veya mid'den git.
 
 Op'a kuru peek atma. Bu dueli kaybedersin.

@@ -70,7 +70,7 @@ Matchup bilgi savaşı. Sova'nın dart'ı eski bilgi üretir — Jett hareket de
 
 ---
 
-**IF** Op hold ediyorsun, dart pozisyonunu işaretledi
+**IF** Op'la açı tutuyorsun, dart pozisyonunu işaretledi
 **MEANING** Takım seni biliyor, shock dart ya da karşı Op geliyor
 **COUNTER** Op attıktan sonra sabit kalma — dash ile yer değiştir. Aynı köşeden iki kez Op atma.
 **WHY** Dart + takım tepkisi = sabit duran Op holder ölür. Hareket edersen Sova'nın bilgisi eskir.

@@ -39,7 +39,7 @@ Vyse tuzaklarla alan kontrol eden bir sentinel. Killjoy hasar verip geciktirir, 
 **WHY** Dar koridor: açılması garantili, hem duman hem bilgi. Açık alan: düşman dolaşır, boşa gider.
 
 **IF** Razorvine hasar veriyor ama sen ya da takımın bu hasardan yararlanamıyor
-**MEANING** Asma duvarı senin açından göremediğin yere konulmuş — hasar verdi ama kimse peek yapamadı
+**MEANING** Asma duvarı senin açından göremediğin yere konulmuş — hasar verdi ama kimse peek atamadı
 **COUNTER** Razorvine'ı kendi güvenli açından düşmanları görebileceğin yere göm. Düşman asma duvardan geçerken hasar alır, sen o anda açıdan çıkarsın. Hasar almış düşmana peek = avantajlı dövüş.
 **WHY** Açın yoksa asma duvar sadece can yakar ama düşman ölmez. Açın varsa: hasar + peek = düşman gitti.
 

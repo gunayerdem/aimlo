@@ -62,11 +62,11 @@ Astra'yı doğru oynuyorsan harita sana çalışır, sen haritaya değil. Yıld�
 ## 7. Oyuncuya Ne Söylenmeli
 
 ### İyi oynuyorken
-**Ne yapıyorsun:** Satın alma aşamasında 5 yıldızı yerleştiriyorsun. Gravity Well'i düşmanın kaçamayacağı dar girişte açıyorsun, hemen arkasından Nova Pulse ile sersemletiyorsun. Takımın swing yapmadan önce düşman zaten felç.
+**Ne yapıyorsun:** Satın alma aşamasında 5 yıldızı yerleştiriyorsun. Gravity Well'i düşmanın kaçamayacağı dar girişte açıyorsun, hemen arkasından Nova Pulse ile sersemletiyorsun. Takımın swing atmadan önce düşman zaten felç.
 
 **Düşman ne görüyor:** Yıldız var, ama smoke mi, çekme mi, sersemletme mi bilemiyor. Pozisyonunda kal ve yanlış tahmin et, ya da çekil ve açıyı bedavaya ver — ikisi de sana yarar.
 
-**Fırsat penceresi:** Gravity Well + Nova Pulse kombosu sırasında düşman strafe yapamaz, nişan alamaz, yeniden konumlanamaz. Takımından herhangi biri o anda swing yaparsa garantili kill.
+**Fırsat penceresi:** Gravity Well + Nova Pulse kombosu sırasında düşman strafe yapamaz, nişan alamaz, yeniden konumlanamaz. Takımından herhangi biri o anda swing atarsa garantili kill.
 
 **Döngüyü kır:** Bir roundda choke'ta Gravity Well + Nova Pulse. Sonraki roundda aynı yıldızı smoke'a çevir — düşman boşuna çekilir. Üçüncü roundda farklı choke'a Gravity Well. Düşman hangi yıldızın ne yapacağını bilemez.
 

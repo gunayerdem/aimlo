@@ -8,7 +8,7 @@ Skye hem flash hem keşif hem iyileştirme yapan tek ajandır. Kuşla yön bilgi
 - Push'tan önce köpeği gönder, düşmanı sersem bırak
 - Dövüşler arasında yaralı takım arkadaşlarını iyileştir
 - Düşman sayısı belirsizse ya da geri alım yapıyorsan Seekers kullan
-- Flash yediğinde sesini duyarsın — hemen takıma söyle, o anda swing yapmaları lazım
+- Flash yediğinde sesini duyarsın — hemen takıma söyle, o anda swing atmaları lazım
 
 ## 3. Sık Yapılan Hatalar
 - Kuşu yanlış yönde veya yanlış anda patlatmak — takım arkadaşını kör ediyorsun, düşmanı değil
@@ -62,10 +62,10 @@ Skye hem flash hem keşif hem iyileştirme yapan tek ajandır. Kuşla yön bilgi
 
 ### İyi performans gösterirken
 **Oyuncu Eylemi:** Kuşu takım arkadaşın peek'inden hemen önce patlatıyorsun, flash sesini anında takıma bildiriyorsun, her dövüş arasında yaralı takımı iyileştiriyorsun.
-**Düşman Algısı:** Düşmanlar peek'le senkron gelen flash'lar görüyor. Takımının ne zaman swing yapacağını tahmin edemedikleri için pozisyon tutamıyorlar — bu senin verdiğin anlık bilginin sonucu.
+**Düşman Algısı:** Düşmanlar peek'le senkron gelen flash'lar görüyor. Takımının ne zaman swing atacağını tahmin edemedikleri için pozisyon tutamıyorlar — bu senin verdiğin anlık bilginin sonucu.
 **Düşman Tepkisi:** Ya her kuş sesinde sırtını döner — peek'e hazırlanmak için bir adım kaybettirir — ya da kör olarak karşılar. Sırt dönüyorlarsa kuşu patlatmadan havada tut; takım arkadaşın onları yanlış bakışta yakalar.
 **Faydalanma Penceresi:** Flash sesi ile takım arkadaşının peek'i arasındaki o kısa an garantili ilk atış fırsatıdır. Her dövüş arası iyileştirme tur boyunca HP farkı biriktirir — düşman düştükçe bu fark her düelloyu lehine çevirir.
-**Tekrar Stratejisi:** Giriş: Yukarıdan kuş, flash sesini bildir, takım arkadaşı swing yapar. Dövüş arası: 100 HP altındaki herkesi kapak arkasında iyileştir. Sonraki giriş: Farklı açıdan kuş, asla aynı yolu iki kez kullanma. Gerekirse önce köpeği gönder, sonra flash'la gir. Flash sesini dinle — ses yoksa düşman yok, yönünü değiştir.
+**Tekrar Stratejisi:** Giriş: Yukarıdan kuş, flash sesini bildir, takım arkadaşı swing atar. Dövüş arası: 100 HP altındaki herkesi kapak arkasında iyileştir. Sonraki giriş: Farklı açıdan kuş, asla aynı yolu iki kez kullanma. Gerekirse önce köpeği gönder, sonra flash'la gir. Flash sesini dinle — ses yoksa düşman yok, yönünü değiştir.
 **Düşman Adaptasyonu:** Birkaç tur sonra her kuş sesinde sırtını dönmeye, köpek yolunun dışında durmaya ya da flash-peek kurulmadan rush atmaya başlarlar.
 **Karşı-Adaptasyon:** Sırt dönüyorlarsa — kuşu gönder, patlatma. Takım arkadaşın o açıkta yakalar. Derine çekiliyorlarsa — köpeği pozisyonlarına gönder, ya vururlar (yer belli olur) ya sersem yerler. Rush yapıyorlarsa — takımı tam iyileştir ve açıyı tut. Full HP'ye rush yapan kalabalık trade matematiğini kaybeder.
 

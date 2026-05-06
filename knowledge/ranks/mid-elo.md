@@ -8,7 +8,7 @@ Aimın var. Haritayı biliyorsun. Çoğu dövüşte ne yapman gerektiğini de bi
 
 ### Utility Zamanlaması
 
-Smoke'u çok erken atıyorsun — takım henüz harekete geçmeden smoke bitiyor, giriş açılıyor. Flash'ı kimse swing yapmaya hazır değilken kullanıyorsun. Molly reaktif gidiyor, proaktif değil.
+Smoke'u çok erken atıyorsun — takım henüz harekete geçmeden smoke bitiyor, giriş açılıyor. Flash'ı kimse swing atmaya hazır değilken kullanıyorsun. Molly reaktif gidiyor, proaktif değil.
 
 - **IF** takım henüz hareket etmemişken smoke attıysan
 - **MEANING** smoke bittiğinde giriş açık kalıyor, düşman tepki verebiliyor
@@ -17,9 +17,9 @@ Smoke'u çok erken atıyorsun — takım henüz harekete geçmeden smoke bitiyor
 
 ### Trade Kurulumu
 
-Solo peek yapıp ölüyorsun ve kimse seni trade edemiyor. Trade'in ne olduğunu biliyorsun — ama kurulumunu yapmıyorsun.
+Solo peek atıp ölüyorsun ve kimse seni trade edemiyor. Trade'in ne olduğunu biliyorsun — ama kurulumunu yapmıyorsun.
 
-- **IF** sürekli tek başına peek yapıp desteksiz ölüyorsan
+- **IF** sürekli tek başına peek atıp desteksiz ölüyorsan
 - **MEANING** ölümün boşa gidiyor, takım sayı kaybediyor
 - **COUNTER** peek'ten önce yanındakiyle konuş: biri wide peek atar, diğeri off-angle'da refrag için bekler — aynı anda, koordineli
 - **WHY** her ölüm trade edilirse sayı avantajı korunur
@@ -40,24 +40,24 @@ Solo peek yapıp ölüyorsun ve kimse seni trade edemiyor. Trade'in ne olduğunu
 - **IF** takım arkadaşınla aynı köşeyi yan yana tutuyorsanız
 - **MEANING** saldırgan tek hareketle ikinizi de temizleyebiliyor, crossfire avantajı sıfır
 - **COUNTER** biri klasik köşeyi tutsun, diğeri karşı taraftan ya da beklenmedik bir açıdan — biri standart pozisyon, diğeri yüksek ya da alçak açıdan; vücut pozisyonları örtüşmez
-- **WHY** saldırgan ikinizi aynı anda göremezse peek yapmak çok daha riskli
+- **WHY** saldırgan ikinizi aynı anda göremezse peek atmak çok daha riskli
 
 ### Anti-Read Oyunu
 
-Aynı açıdan, aynı şekilde peek yapıyorsun. Düşman bunu fark eder ve seni beklemeye başlar.
+Aynı açıdan, aynı şekilde peek atıyorsun. Düşman bunu fark eder ve seni beklemeye başlar.
 
-- **IF** art arda aynı açıdan aynı şekilde peek yapıyorsan
-- **MEANING** düşman önceden nişan alıyor, sen zaten kaybetmiş olarak peek yapıyorsun
-- **COUNTER** bir sonraki roundda açıyı değiştir — farklı köşe, farklı timing, ya da hiç peek yapma ve onların gelmesini bekle
+- **IF** art arda aynı açıdan aynı şekilde peek atıyorsan
+- **MEANING** düşman önceden nişan alıyor, sen zaten kaybetmiş olarak peek atıyorsun
+- **COUNTER** bir sonraki roundda açıyı değiştir — farklı köşe, farklı timing, ya da hiç peek atma ve onların gelmesini bekle
 - **WHY** açını değiştirirsen düşman önceden nişan alamaz
 
 ## Bu Seviyede Yaygın Hatalar
 
 - **Aynı açıdan tekrar tekrar peek**: Düşman seni okur ve önceden nişan alır. Her roundda açını değiştir — önceki roundda hangi köşeyi kullandığını takip et, bir sonraki roundda farklı bir köşeye geç.
 
-- **Kötü post-plant pozisyonu**: Spike'ı dikiyorsun ve yanında duruyorsun ya da agresif peek yapıyorsun. Spike'ı her zaman retake'i zorlaştıracak yere dik — site içi duvarın arkası, köşe gibi. Sonra çapraz pozisyona çekil: düşman spike'a giderken seni göremez, sen onu görürsün.
+- **Kötü post-plant pozisyonu**: Spike'ı dikiyorsun ve yanında duruyorsun ya da agresif peek atıyorsun. Spike'ı her zaman retake'i zorlaştıracak yere dik — site içi duvarın arkası, köşe gibi. Sonra çapraz pozisyona çekil: düşman spike'a giderken seni göremez, sen onu görürsün.
 
-- **Ego peek**: Almak zorunda olmadığın dövüşe giriyorsun. 4v3'te peek yapıp ölürsen 3v3 olur. Avantajın varsa dur — onların gelmesini bekle.
+- **Ego peek**: Almak zorunda olmadığın dövüşe giriyorsun. 4v3'te peek atıp ölürsen 3v3 olur. Avantajın varsa dur — onların gelmesini bekle.
 
 - **Erken rotate**: Tek bir ses ipucuyla rotate ediyorsun, site'ı açık bırakıyorsun. Rotate et, ama onaylanmış bilgiyle: takım arkadaşın gördü, düşman kesin geçti. Tahminle rotate etme.
 

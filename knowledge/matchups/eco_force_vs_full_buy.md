@@ -110,7 +110,7 @@ Eco taraftaysan util'in olmadığını kabul et. Açı disi + aim ile kazanıyor
 
 **Dönüm 3 — Ult'u harcadın mı:** Eco roundda ult harcadıysan iki round ekonomisi çöktü. Sakladıysan bir sonraki full buy roundunda ult avantajlısın.
 
-**Dönüm 4 — Full buy kuru açıldı mı:** Full buy kuru açıldıysa eco flip olur, Sheriff 2-tap ile Vandal düşer. Util peek yapıldıysa full buy avantajını korur.
+**Dönüm 4 — Full buy kuru açıldı mı:** Full buy kuru açıldıysa eco flip olur, Sheriff 2-tap ile Vandal düşer. Util peek atıldıysa full buy avantajını korur.
 
 **Dönüm 5 — Force-buy kararı:** Force-buy yerine full eco seçtiysen para birikti. Force-buy kaybettiysen üç round ekonomi çöktü.
 

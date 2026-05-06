@@ -21,7 +21,7 @@
 **Pattern 1: A Belt Dry Peek Ölümleri**
 IF: A Belt'e smoke veya flash atmadan giriyorsun — o uzun sightline'a korumasız çıkıyorsun
 MEANING: A Belt açık bir koridor. Rafters'taki veya Screens'teki savunucu seni görür görmez vurur. Senin modellin yaklaşım boyunca tamamen açıkta, savunucunun sadece tıklaması yeterli.
-COUNTER: A Belt'e girmeden önce Rafters veya Screens yönüne smoke at, sonra flash'ı izlet, sonra swing yap. Smoke görüş hattını keser, flash savunucuyu açıdan çıkarır. Smoke veya flash olmadan A Belt'e girme — her seferinde en az birini harca.
+COUNTER: A Belt'e girmeden önce Rafters veya Screens yönüne smoke at, sonra flash'ı izlet, sonra swing at. Smoke görüş hattını keser, flash savunucuyu açıdan çıkarır. Smoke veya flash olmadan A Belt'e girme — her seferinde en az birini harca.
 WHY: Uzun sightline savunucuyu güçlendiriyor çünkü hareketini okuyabiliyor ve seni uzaktan vurabiliyror. Smoke attığında savunucu ya smoke içinden sana doğru gelir — bu sefer yakın dövüş senin avantajın — ya da pozisyonu terk eder.
 
 **Pattern 2: Mid'de Op'a Karşı Ego Peek**
@@ -30,7 +30,7 @@ MEANING: Op sesini duydun, önceki rounddan biliyorsun, ama yine de kuru çıkı
 COUNTER: Mid'e çıkmadan önce şu üçten birini yap:
 - Smoke at, sightline'ı kes
 - Flash at, Op'çuyu açıdan çıkar
-- Dual swing yap — iki kişi aynı anda farklı açılardan çık, biri trade alır
+- Dual swing at — iki kişi aynı anda farklı açılardan çık, biri trade alır
 
 Tek başına Op'a karşı kuru peek atmak Icebox'ta en kötü karardır.
 WHY: Mid sightline Op'çunun açı tutma yapabileceği tek bir hat. Sen o hatta çıktığında Op'çunun sadece tıklaması yeterli. Dual swing bunu bozar çünkü Op birini vururken diğeri trade alır.
@@ -168,7 +168,7 @@ WHY: İniş noktası sabittir ve iniş sırasında karşı hamle yapamaz. Bu pen
 **Rakip mid'de Op oynuyorsa:**
 IF: Savunma tarafı mid'de Op ile sightline kontrol ediyor, sen mid'e çıkamıyorsun
 MEANING: Mid bloke, saldırın tek boyutlu kalıyor
-COUNTER: Mid'e smoke at, flash sok, dual swing yap. Smoke sightline'ı keser, flash Op'çuyu açıdan çıkarır, dual swing ise Op'çunun ikisini birden vuramayacağı durumu yaratır. Mid'i bypass etmek istersen A Belt veya B Main'den direkt execute yap — ama mid kontrolünden tamamen vazgeçmiş olursun.
+COUNTER: Mid'e smoke at, flash sok, iki yönden swing at. Smoke sightline'ı keser, flash Op'çuyu açıdan çıkarır, dual swing ise Op'çunun ikisini birden vuramayacağı durumu yaratır. Mid'i bypass etmek istersen A Belt veya B Main'den direkt execute yap — ama mid kontrolünden tamamen vazgeçmiş olursun.
 WHY: Op tek sightline'da güçlüdür. O sightline kapanır ya da iki hedefe bölünürse avantajı gider. Smoke + flash + dual swing üçünü aynı anda uygular.
 
 ## 11. Temel Pozisyonlar ve Callout'lar
