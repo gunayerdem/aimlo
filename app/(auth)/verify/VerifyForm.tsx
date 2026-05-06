@@ -19,11 +19,10 @@ import {
 const initialVerify: VerifyState = { ok: false };
 const initialResend: ResendState = { ok: false };
 
-const VALID_CHAR_RE = /[A-Z2-9]/;
+const VALID_CHAR_RE = /[0-9]/;
 
 function cleanString(input: string, max: number): string {
   return input
-    .toUpperCase()
     .split("")
     .filter((c) => VALID_CHAR_RE.test(c))
     .join("")
@@ -260,9 +259,9 @@ const CharBox = forwardRef<HTMLInputElement, CharBoxProps>(function CharBox(
     <input
       ref={ref}
       type="text"
-      inputMode="text"
+      inputMode="numeric"
+      pattern="[0-9]*"
       autoComplete="one-time-code"
-      autoCapitalize="characters"
       autoCorrect="off"
       spellCheck={false}
       autoFocus={autoFocus}
@@ -272,7 +271,7 @@ const CharBox = forwardRef<HTMLInputElement, CharBoxProps>(function CharBox(
       onChange={(e) => onChange(e.target.value)}
       onKeyDown={onKeyDown}
       onFocus={(e) => e.target.select()}
-      className={`w-12 sm:w-14 h-14 sm:h-16 text-center text-2xl sm:text-3xl font-black uppercase rounded-xl transition-all duration-200 outline-none ${
+      className={`w-12 sm:w-14 h-14 sm:h-16 text-center text-2xl sm:text-3xl font-black rounded-xl transition-all duration-200 outline-none ${
         hasError
           ? "bg-[#FF3D71]/[0.06] border-2 border-[#FF3D71]/40 focus:border-[#FF3D71] text-[#FF3D71]"
           : value

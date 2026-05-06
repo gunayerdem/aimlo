@@ -4,11 +4,19 @@ import { LoginForm } from "./LoginForm";
 
 export const metadata: Metadata = {
   title: "Giriş Yap — AIMLO",
-  description: "AIMLO'ya giriş yap — 6 karakterlik kod ile.",
+  description: "AIMLO'ya giriş yap — 6 haneli kod ile.",
   robots: { index: false, follow: false },
 };
 
-export default function LoginPage() {
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ confirmed?: string; reset?: string }>;
+}) {
+  const sp = await searchParams;
+  const justConfirmed = sp.confirmed === "1";
+  const justReset = sp.reset === "success";
+
   return (
     <div className="relative z-10 w-full max-w-[440px] space-y-8 animate-slide-up-big">
       <div className="text-center space-y-5">
@@ -35,6 +43,16 @@ export default function LoginPage() {
           </p>
         </div>
       </div>
+
+      {(justConfirmed || justReset) && (
+        <div className="rounded-xl border border-emerald-500/25 bg-emerald-500/[0.06] px-4 py-3 text-center animate-scale-in">
+          <p className="text-xs text-emerald-300 font-semibold">
+            {justConfirmed
+              ? "✓ E-posta doğrulandı! Şifrenle giriş yapabilirsin."
+              : "✓ Şifren güncellendi! Yeni şifrenle giriş yap."}
+          </p>
+        </div>
+      )}
 
       <LoginForm />
 

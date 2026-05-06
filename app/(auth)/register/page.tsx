@@ -4,7 +4,7 @@ import { RegisterForm } from "./RegisterForm";
 
 export const metadata: Metadata = {
   title: "Kayıt Ol — AIMLO",
-  description: "AIMLO'ya kayıt ol — 6 karakterlik kod ile.",
+  description: "AIMLO'ya kayıt ol — 6 haneli kod ile.",
   robots: { index: false, follow: false },
 };
 

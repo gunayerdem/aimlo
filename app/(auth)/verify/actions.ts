@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { createServerSupabase, createServiceSupabase } from "@/lib/supabase/server";
+import { createServiceSupabase } from "@/lib/supabase/server";
 import { hashOtp, normalizeOtp } from "@/lib/otp";
 import { generateOtp } from "@/lib/otp";
 import { sendOtpEmail } from "@/lib/email";
@@ -65,7 +65,7 @@ export async function verifyAction(
   const { email } = parsed.data;
   const codeNorm = normalizeOtp(parsed.data.code);
   if (codeNorm.length !== 6) {
-    return { ok: false, error: "6 karakterlik kod gir" };
+    return { ok: false, error: "6 haneli kod gir" };
   }
 
   let admin;
@@ -130,35 +130,12 @@ export async function verifyAction(
     return { ok: false, error: "Doğrulama tamamlanamadı. Lütfen tekrar dene." };
   }
 
-  // Generate a magic link to obtain a hashed_token, then verify it
-  // server-side with the cookie-bound SSR client. This sets the session
-  // cookies directly — no redirect-through-Supabase dance, no implicit-flow
-  // hash fragment that the server can't see.
-  const { data: linkData, error: linkErr } = await admin.auth.admin.generateLink({
-    type: "magiclink",
-    email,
-  });
-
-  if (linkErr || !linkData?.properties?.hashed_token) {
-    console.error("[Aimlo verify] generateLink failed:", linkErr?.message);
-    return { ok: false, error: "Oturum açılamadı. Lütfen 'login' sayfasından dene." };
-  }
-
-  // Cookie-bound client — verifyOtp will write Set-Cookie headers via our
-  // cookies adapter in createServerSupabase().
-  const ssr = await createServerSupabase();
-  const { error: verifyErr } = await ssr.auth.verifyOtp({
-    token_hash: linkData.properties.hashed_token,
-    type: "magiclink",
-  });
-
-  if (verifyErr) {
-    console.error("[Aimlo verify] verifyOtp(token_hash) failed:", verifyErr.message);
-    return { ok: false, error: "Oturum açılamadı. Lütfen tekrar dene." };
-  }
-
-  // Session cookie set. Send to home.
-  redirect("/?verified=true");
+  // Email is now confirmed. We don't auto-login here because the magic-link
+  // verifyOtp dance is brittle on serverless (cookies sometimes don't flush
+  // before the redirect). Send the user to /login with a success banner —
+  // they enter the password they just chose during register, signin succeeds
+  // immediately because the email is now confirmed.
+  redirect("/login?confirmed=1");
 }
 
 export interface ResendState {

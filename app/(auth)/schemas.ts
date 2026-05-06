@@ -50,7 +50,7 @@ export const registerSchema = z
 
 export const verifySchema = z.object({
   email: emailSchema,
-  code: z.string().min(6, "6 karakter gir").max(8, "Çok uzun"),
+  code: z.string().min(6, "6 hane gir").max(8, "Çok uzun"),
 });
 
 export const loginSchema = z.object({

@@ -8,13 +8,56 @@ const initial: RegisterState = { ok: false };
 const inputCls =
   "w-full rounded-xl border border-white/[0.06] bg-[#0a0f1e]/90 px-4 py-4 text-sm text-white outline-none transition-all duration-300 focus:border-[#FF4655]/25 focus:ring-2 focus:ring-[#FF4655]/10 focus:shadow-[0_0_20px_rgba(255,70,85,0.05)] placeholder-neutral-600";
 
+// Labels written already in Latin uppercase (no Turkish İ) — text-transform
+// honors document lang="tr" and would re-add the dot otherwise.
 const labelCls =
-  "mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35";
+  "mb-2 block text-[9px] font-black tracking-[0.2em] text-[#FF4655]/35";
+
+// Eye / EyeOff SVG — replaces 👁️ / 🙈 emojis
+function EyeIcon({ open }: { open: boolean }) {
+  if (open) {
+    return (
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+    );
+  }
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
+      <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
+      <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
+      <line x1="2" y1="2" x2="22" y2="22" />
+    </svg>
+  );
+}
 
 export function RegisterForm() {
   const [state, action, pending] = useActionState(registerAction, initial);
   const [showPw, setShowPw] = useState(false);
   const [showPw2, setShowPw2] = useState(false);
+  const [kvkkChecked, setKvkkChecked] = useState(false);
 
   return (
     <div className="card-glow rounded-2xl p-7 sm:p-9 relative">
@@ -23,21 +66,26 @@ export function RegisterForm() {
         className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#FF4655]/20 to-transparent"
       />
 
-      {/* autoComplete="off" + 1Password/Chrome adres-defteri bypass:
-          - given-name/family-name/username/email otomatik doldurmayı tetikler
-          - non-standard değerler ("nope-*") + autoCorrect/autoCapitalize off
-          - sadece password manager için new-password aktif kalıyor */}
+      {/* Anti-autofill: form-level off + per-field nope-* + 1Password/LP ignore */}
       <form action={action} noValidate autoComplete="off" className="space-y-5">
+        {/* Hidden honeypot fields trick Chrome into autofilling these instead
+            of the real ones. They're absolute-positioned off-screen. */}
+        <div aria-hidden style={{ position: "absolute", left: "-9999px", height: 0, overflow: "hidden" }}>
+          <input type="text" name="fakeusernameremembered" tabIndex={-1} autoComplete="username" />
+          <input type="password" name="fakepasswordremembered" tabIndex={-1} autoComplete="current-password" />
+        </div>
+
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="reg-first" className={labelCls}>İsim</label>
+            <label htmlFor="reg-first" className={labelCls}>ISIM</label>
             <input
               id="reg-first"
               name="firstName"
               type="text"
-              autoComplete="nope-first"
+              autoComplete="off"
               data-1p-ignore="true"
               data-lpignore="true"
+              data-form-type="other"
               required
               maxLength={40}
               defaultValue={state.values?.firstName}
@@ -49,14 +97,15 @@ export function RegisterForm() {
             )}
           </div>
           <div>
-            <label htmlFor="reg-last" className={labelCls}>Soyisim</label>
+            <label htmlFor="reg-last" className={labelCls}>SOYISIM</label>
             <input
               id="reg-last"
               name="lastName"
               type="text"
-              autoComplete="nope-last"
+              autoComplete="off"
               data-1p-ignore="true"
               data-lpignore="true"
+              data-form-type="other"
               required
               maxLength={40}
               defaultValue={state.values?.lastName}
@@ -70,14 +119,15 @@ export function RegisterForm() {
         </div>
 
         <div>
-          <label htmlFor="reg-username" className={labelCls}>Kullanıcı Adı</label>
+          <label htmlFor="reg-username" className={labelCls}>KULLANICI ADI</label>
           <input
             id="reg-username"
             name="username"
             type="text"
-            autoComplete="nope-username"
+            autoComplete="off"
             data-1p-ignore="true"
             data-lpignore="true"
+            data-form-type="other"
             autoCorrect="off"
             autoCapitalize="none"
             spellCheck={false}
@@ -95,14 +145,15 @@ export function RegisterForm() {
         </div>
 
         <div>
-          <label htmlFor="reg-email" className={labelCls}>E-posta</label>
+          <label htmlFor="reg-email" className={labelCls}>E-POSTA</label>
           <input
             id="reg-email"
             name="email"
             type="email"
-            autoComplete="nope-email"
+            autoComplete="off"
             data-1p-ignore="true"
             data-lpignore="true"
+            data-form-type="other"
             autoCorrect="off"
             autoCapitalize="none"
             spellCheck={false}
@@ -117,7 +168,7 @@ export function RegisterForm() {
         </div>
 
         <div>
-          <label htmlFor="reg-pw" className={labelCls}>Şifre</label>
+          <label htmlFor="reg-pw" className={labelCls}>ŞIFRE</label>
           <div className="relative">
             <input
               id="reg-pw"
@@ -136,9 +187,9 @@ export function RegisterForm() {
               onClick={() => setShowPw(!showPw)}
               tabIndex={-1}
               aria-label={showPw ? "Şifreyi gizle" : "Şifreyi göster"}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-600 hover:text-[#FF6B77] transition"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-[#FF4655] transition-colors p-1 -m-1"
             >
-              {showPw ? "🙈" : "👁️"}
+              <EyeIcon open={showPw} />
             </button>
           </div>
           {state.fieldErrors?.password && (
@@ -147,7 +198,7 @@ export function RegisterForm() {
         </div>
 
         <div>
-          <label htmlFor="reg-pw2" className={labelCls}>Şifre Tekrar</label>
+          <label htmlFor="reg-pw2" className={labelCls}>ŞIFRE TEKRAR</label>
           <div className="relative">
             <input
               id="reg-pw2"
@@ -166,9 +217,9 @@ export function RegisterForm() {
               onClick={() => setShowPw2(!showPw2)}
               tabIndex={-1}
               aria-label={showPw2 ? "Şifreyi gizle" : "Şifreyi göster"}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-600 hover:text-[#FF6B77] transition"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-[#FF4655] transition-colors p-1 -m-1"
             >
-              {showPw2 ? "🙈" : "👁️"}
+              <EyeIcon open={showPw2} />
             </button>
           </div>
           {state.fieldErrors?.passwordConfirm && (
@@ -176,6 +227,7 @@ export function RegisterForm() {
           )}
         </div>
 
+        {/* Custom KVKK checkbox — site theme (red accent, dark base, glow). */}
         <label
           htmlFor="reg-kvkk"
           className="flex items-start gap-3 cursor-pointer select-none pt-1"
@@ -185,8 +237,33 @@ export function RegisterForm() {
             name="kvkk"
             type="checkbox"
             required
-            className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-[#FF4655] rounded border border-white/15 bg-[#0a0f1e]"
+            checked={kvkkChecked}
+            onChange={(e) => setKvkkChecked(e.target.checked)}
+            className="sr-only"
           />
+          <span
+            aria-hidden
+            className={`mt-0.5 inline-flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-md transition-all duration-200 ${
+              kvkkChecked
+                ? "border-2 border-[#FF4655] bg-[#FF4655] shadow-[0_0_12px_rgba(255,70,85,0.45)]"
+                : "border border-white/15 bg-[#0a0f1e] hover:border-[#FF4655]/40"
+            }`}
+          >
+            {kvkkChecked && (
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#030711"
+                strokeWidth="3.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            )}
+          </span>
           <span className="text-[12px] text-neutral-400 leading-relaxed">
             <a
               href="/legal/kvkk"

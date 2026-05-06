@@ -9,7 +9,7 @@ const inputCls =
   "w-full rounded-xl border border-white/[0.06] bg-[#0a0f1e]/90 px-4 py-4 text-sm text-white outline-none transition-all duration-300 focus:border-[#FF4655]/25 focus:ring-2 focus:ring-[#FF4655]/10 focus:shadow-[0_0_20px_rgba(255,70,85,0.05)] placeholder-neutral-600";
 
 const labelCls =
-  "mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35";
+  "mb-2 block text-[9px] font-black tracking-[0.2em] text-[#FF4655]/35";
 
 export function ForgotForm() {
   const [state, action, pending] = useActionState(forgotAction, initial);
@@ -46,7 +46,7 @@ export function ForgotForm() {
       <form action={action} noValidate className="space-y-5">
         <div>
           <label htmlFor="forgot-email" className={labelCls}>
-            E-posta
+            E-POSTA
           </label>
           <input
             id="forgot-email"

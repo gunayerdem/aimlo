@@ -1,8 +1,9 @@
 import { createHmac, randomInt, timingSafeEqual } from "node:crypto";
 
 /**
- * 6-character OTP (e.g. "ABC4XY"), displayed as "ABC-4XY".
- * Alphabet excludes O/0/I/1/L to avoid visual ambiguity.
+ * 6-digit numeric OTP (e.g. "847291"), displayed as "847-291".
+ * Numeric-only because users find it faster to type on mobile than mixed
+ * case alphanumerics (auto-karar pattern).
  *
  * Storage model: we DO NOT store the raw code anywhere — only an
  * HMAC-SHA256(secret, "<email>:<code>") in user_metadata.otp.hash.
@@ -10,7 +11,7 @@ import { createHmac, randomInt, timingSafeEqual } from "node:crypto";
  * account cannot be replayed against a different account.
  */
 
-const ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"; // 31 chars
+const ALPHABET = "0123456789"; // 10 chars (digits)
 const OTP_LEN = 6;
 
 export function generateOtp(): string {
@@ -26,9 +27,9 @@ export function formatOtp(code: string): string {
   return code.length === OTP_LEN ? `${code.slice(0, 3)}-${code.slice(3)}` : code;
 }
 
-/** Strip whitespace + dashes, uppercase, truncate to 6. */
+/** Strip everything but digits, truncate to 6. */
 export function normalizeOtp(input: string): string {
-  return input.replace(/[^a-zA-Z0-9]/g, "").toUpperCase().slice(0, OTP_LEN);
+  return input.replace(/[^0-9]/g, "").slice(0, OTP_LEN);
 }
 
 export function hashOtp(code: string, email: string): string {
