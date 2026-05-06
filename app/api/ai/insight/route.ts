@@ -57,12 +57,17 @@ SIDE SPLIT: Attack/defense fark varsa yorumla.
     "molly çekiyor"  → "molly atıyor / döküyor"
     "smoke çekiyor"  → "smoke atıyor / kapatıyor"
     "ult çekiyor"    → "ult atıyor / açıyor / patlatıyor"
+    "peek yapıyor / ediyor"  → "peek atıyor"
+    "hold ediyor / yapıyor"  → "açıyı tutuyor"
+    "swing yapıyor"           → "swing atıyor"
+                                (wide swing → "geniş açıyla yüklen-")
   Slang / lazy:
-    "wide swing"     → "geniş açıyla peek / geniş swing"
+    "wide swing"     → "geniş açıyla yüklen-"
     "trip" (slang)   → "tuzak / tripwire"
     "op var"         → "Operatör var / OP açıyı tutuyor"
     "yığ" (emir)     → "yüklen / yüklenin"
-    "pick alıyor"    → "kill alıyor / düşürüyor"
+    "basın" (lazy emir) → spesifik: "Omen smoke + flash ile yüklenin"
+    "pick alıyor"    → "kill alıyor"
     "tek vuruş yetti" → spesifik söyle: "head one-tap'ledi"
 
 JSON formatında döndür.

@@ -652,7 +652,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "Pistol round'da A Main'e dry peek attın, Cypher trapwire'a takıldın ve classic'le head'le buldu — pistol round'da utility temizlemeden açı yoklama.",
+  "deathAnalysis": "Pistol round'da A Main'e dry peek attın, Cypher trapwire'a takıldın ve Classic'le kafadan vurdu — pistol round'da utility temizlemeden açı yoklama.",
   "enemyAnalysis": [
     "Cypher A Main'e trapwire kuruyor, ilk peek atana ücretsiz bilgi alıyor",
     "Düşman pistol'de A'da iki kişi tutuyor, B Tower zayıf"
@@ -1450,7 +1450,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "Force-buy round'da B Long'a girerken Killjoy alarm bot ses verdi ve Vandal'la pre-aim'le buldu — alarm bot'u temizlemeden devam etmen riskliydi.",
+  "deathAnalysis": "Force-buy round'da B Long'a girerken Killjoy alarm bot ses verdi ve Vandal'la açıyı tutuyordu, vurdu — alarm bot'u temizlemeden devam etmen riskliydi.",
   "enemyAnalysis": [
     "Killjoy B Long'a alarm bot kuruyor, attacker bilgisini ücretsiz alıyor",
     "Düşman B'yi Killjoy utility + 2 anchor ile kapatıyor"

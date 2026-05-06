@@ -543,6 +543,10 @@ Tarzan-Türkçesi (utility için "çek-" yan-fiili YANLIŞ):
   "molly çekiyor" → "molly atıyor / döküyor"
   "smoke çekiyor" → "smoke atıyor / kapatıyor"
   "ult çekiyor"   → "ult atıyor / açıyor / patlatıyor"
+  "peek yapıyor / ediyor"  → "peek atıyor"
+  "hold ediyor / yapıyor"  → "açıyı tutuyor"
+  "swing yapıyor"           → "swing atıyor"
+                              (wide swing → "geniş açıyla yüklen-")
 
 Slang / lazy:
   "wide swing" → "geniş açıyla peek / geniş swing"

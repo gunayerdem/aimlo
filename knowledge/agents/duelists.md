@@ -344,7 +344,7 @@ Duellist'ler takımın alan acan oyuncuları. Kit'leri ilk dövüşü almak, ala
 2. **IF** Her yerde sprint yapıyorsan
    **MEANING** High Gear gürültülü -- düşmanlar seni haritanın öteki ucundan duyar
    **COUNTER** Gizlilik lazım olduğunda yürü. Sprint sadece execute ve açık rotasyonlar için
-   **WHY** Duyulan sprint = düşman açı tutma + ambush hazırlığı
+   **WHY** Duyulan sprint = düşman açıyı tutarak + ambush hazırlığı
 
 3. **IF** Fast Lane duvarlarını takım takibi olmadan atıyorsan
    **MEANING** Duvarların arkasından kimse push yapmıyorsa işe yaramazlar

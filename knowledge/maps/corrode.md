@@ -40,7 +40,7 @@ Back Alley retake ölüm bölgesi. Rotate yaparken dar koridoru utility'siz geç
 
 **IF:** A Main'de flash veya smoke atmadan düz yürüyüp ölüyorsun.
 
-**MEANING:** Koridor sana sıfır cover veriyor. Savunucu seni girişten itibaren görüyor, sen ona yaklaşana kadar açı tutma hazır. Utility atmadan girersen bedava ölüm.
+**MEANING:** Koridor sana sıfır cover veriyor. Savunucu seni girişten itibaren görüyor, sen ona yaklaşana kadar açıyı tutmaya hazır. Utility atmadan girersen bedava ölüm.
 
 **COUNTER:** Önce flash at, orta noktayı smoke'la, sonra gir. Flash açıyı bozar, smoke görüş hattını keser. Utility olmadan A Main'e girme — girmek istiyorsan util önünde olsun.
 
@@ -191,7 +191,7 @@ B anchor B Cubby'de veya site içinde duruyor. B'nin darlığı sayesinde tek an
 
 #### B Site Savunma Pattern'leri
 
-**IF:** B site anchor her round B Cubby'de duruyor ve saldırganlar açı tutma edip onu çıkarıyor.
+**IF:** B site anchor her round B Cubby'de duruyor ve saldırganlar açıyı tutup onu çıkarıyor.
 
 **MEANING:** Pozisyon tahmin edilebilir oldu. Cubby güçlü bir açı ama her round aynı yerde duruyorsan saldırgana bedava bilgi veriyorsun.
 
@@ -255,7 +255,7 @@ Sadece A CT'den retake yaparsan saldırgan tüm post-plant pozisyonlarını o y�
 
 **COUNTER:** Spike'ta yeterince süre varsa retake'e başlamadan önce en az bir bilgi utility'si ve bir flash kullan. Drone ya da Haunt'la pozisyon öğren, flash'le gir. Süre azsa hızlı flash + swing at ama yine de kuru girme.
 
-**WHY:** Bilgi utility'si düşmanın nerede durduğunu gösterir, doğru açıyı açı tutma edersin. Flash düşmanın reaksiyon avantajını yok eder. İkisi birden retake'in başarı oranını katlıyor.
+**WHY:** Bilgi utility'si düşmanın nerede durduğunu gösterir, doğru açıyı açıyı tutarsın. Flash düşmanın reaksiyon avantajını yok eder. İkisi birden retake'in başarı oranını katlıyor.
 
 ### B Site Retake
 

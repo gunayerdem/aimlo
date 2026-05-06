@@ -124,7 +124,7 @@ Killjoy turret hem bilgi hem hasar — aynı cihaz iki iş yapar. Chamber Tradem
 
 1. **Chamber Op alamazsa.** Op olmayan Chamber sıradan bir silah tutuyor. Bu round'da Killjoy'un utility'sine karşı duracak gücü kalmaz.
 
-2. **Rendezvous anchor okundu.** Chamber her round aynı noktaya anchor koyuyorsa takım oraya açı tutma atar. Killjoy turret da aynı noktada bekliyorsa Chamber her TP'de ölüm riskine girer.
+2. **Rendezvous anchor okundu.** Chamber her round aynı noktaya anchor koyuyorsa takım oraya açıyı önceden tutar. Killjoy turret da aynı noktada bekliyorsa Chamber her TP'de ölüm riskine girer.
 
 3. **Lockdown retake.** Killjoy ult + takımın retake'e girmesi = round çevrilir. Chamber tarafı cihazı kırmak için Op shot harcamak zorunda.
 

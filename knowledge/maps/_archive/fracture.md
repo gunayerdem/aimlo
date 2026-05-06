@@ -14,7 +14,7 @@
 - **A Hall Drop**: Drop sesi pozisyonunu ele veriyor. Savunucu o sesi duyar, açı tutar. Atlamadan önce util at.
 - **B Tower Açılması**: Tower'dan girerken B Tree'yi kontrol etmezsen crossfire'a yatıyorsun. Önce Tree'yi temizle, sonra gir.
 - **B Arcade Geçişi**: Arcade'i tek başına push etme. Canteen tarafından destek yoksa commit etme — dar geçiş seni çuvala sokar.
-- **Zip Line Çıkışları**: Zip line sesi düşmana bilgi veriyor. Çıkış noktasında açı tutma seni bekliyor. Çıkmadan önce çıkış açısını util'le kapat.
+- **Zip Line Çıkışları**: Zip line sesi düşmana bilgi veriyor. Çıkış noktasında açıyı tutarak seni bekliyor. Çıkmadan önce çıkış açısını util'le kapat.
 
 ## 3. Pattern -> Meaning Eşleşmesi
 
@@ -75,7 +75,7 @@ WHY: Fracture'in ortası savunmanın omurgası. Omurga kırılırsa iki site'i b
 - Utility'ni raundun başında harcama — saldırganlar timing değiştirir, util'ini gerektiği anda kullan
 - CT Spawn ve mid kontrolunu kaybedersen iki site birbirinden kopuk kalır, rotasyon yapamaz hale gelirsin
 - Retake'te dar geçitten tek tek girme — crossfire'a tek tek yem olursun, birlikte gir
-- Aynı pozisyonda defalarca durma — saldırganlar açı tutma açar, pozisyonunu değiştir
+- Aynı pozisyonda defalarca durma — saldırganlar açıyı önceden tutar, pozisyonunu değiştir
 
 ## 5. Kompozisyon / Harita Etkileşim Notları
 - **Breach**: Fracture'de en iyi initiator bu. Fault Line duvarların arkasından geçer — dar geçişlerde savunucuyu pozisyondan söküp atar. Aftershock ile site içindeki köşeleri temizlersin. A Hall'dan fault line + flash koy, giriş garantilenir.
@@ -114,7 +114,7 @@ WHY: Fracture'in ortası savunmanın omurgası. Omurga kırılırsa iki site'i b
 - Spike plant: A Default (site ortası) en güvenli seçenek. Plant sonrası Dish ve Hall'dan crossfire kur.
 
 ### A Site Savunma
-- A Rope en güçlü pozisyon — yükseklik ve geniş açı var. Ama her raund burada durma, 2-3 raund sonra açı tutma yersen seni okurlar; site seviyesine in.
+- A Rope en güçlü pozisyon — yükseklik ve geniş açı var. Ama her raund burada durma, 2-3 raund sonra açıyı önceden tutarlar, hedef olursun seni okurlar; site seviyesine in.
 - A Drop'tan gelen saldırgan drop sesiyle kendini ele verir — o sesi duyar duymaz açı tut. Ama drop'a molly veya smoke atmak daha sağlam, girişi yavaşlatır.
 - A Sandy off-angle saldırganın aklında yoktur. İlk raund burada oyna, kill al, pozisyonu değiştir.
 - İki yönden aynı anda geliyorlarsa: Tripwire veya alarm util'ini Dish ya da Hall'dan birine koy, sen diğerini izle. Util tetiklenince reaksiyon zamanın olur.

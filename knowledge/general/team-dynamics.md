@@ -438,7 +438,7 @@ WHY full util'le giden hazırlıklı bir execute, kurulmuş savunmayı bile ezer
 IF round açılır açılmaz siteye giriyorsan
 MEANING savunucular yerine oturmadan yakalıyorsun
 COUNTER erken-round agresif pozisyon alan savunucular seni bekliyor olacak
-WHY pasif retake oynayan takımlara karşı işe yarar — ama pozisyon bilgisi olan takımlara karşı her açıdan açı tutma yersin ve choke'ta ölürsün
+WHY pasif retake oynayan takımlara karşı işe yarar — ama pozisyon bilgisi olan takımlara karşı her açıdan açıyı önceden tutarsin ve choke'ta ölürsün
 
 ### Orta-Tempo Execute (Harita Kontrolü Sonrası)
 

@@ -135,7 +135,7 @@ Utility kullanıyorsun ama sıra yanlış. Smoke atıyorsun, flash atmıyorsun �
 - Spike kurulduktan sonra açıkta durma, crossfire'a geç.
 
 **Diamond-Ascendant**
-Default doğru yapıyorsun ama Mid'den bilgi gelince harekete geçemiyorsun. Rakip o sürede rotate ediyor. A Heaven'da da her round aynı noktada oturuyorsun — savunucu seni okur ve açı tutma yer.
+Default doğru yapıyorsun ama Mid'den bilgi gelince harekete geçemiyorsun. Rakip o sürede rotate ediyor. A Heaven'da da her round aynı noktada oturuyorsun — savunucu seni okur ve açıyı önceden tutar.
 
 - Mid bilgisi gelince anında karar ver, bekleme.
 - Heaven, Flowers ve site-level arasında pozisyon döndür.

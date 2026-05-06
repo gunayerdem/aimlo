@@ -256,6 +256,11 @@ ${isTr ? `
     "flash çekiyor"                  → "flash atıyor"
     "molly çekiyor"                  → "molly atıyor / molly döküyor"
     "smoke çekiyor"                  → "smoke atıyor / smoke kapatıyor"
+    "ult çekiyor"                    → "ult atıyor / ult açıyor / ult patlatıyor"
+    "peek yapıyor / ediyor / yapar"  → "peek atıyor / peek atar"
+    "hold ediyor / yapıyor"          → "açıyı tutuyor / açıyı tut-"
+    "swing yapıyor / yapar"          → "swing atıyor / swing atar"
+                                       (wide swing → "geniş açıyla yüklen-")
     "wide swing"                     → "geniş açıyla peek / geniş swing"
     "trip" (slang)                   → "tuzak / tripwire"
     "op var"                         → "Operatör var / OP açıyı tutuyor"

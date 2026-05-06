@@ -25,7 +25,7 @@ Karşı takımda Neon varsa dar haritada Neon'un elinde; geniş haritada senin e
 
 **IF** Neon sprint ile Fast Lane duvarları arasından koşarak geliyor
 **MEANING** Duvar içinde Neon'u göremezsin, bakış açın duvar çıkışını yakalayamaz
-**COUNTER** Fast Lane duvar sonuna bak — Neon çıkış noktası sabittir. Çıkış sesini duyduğunda açı tutma'in hazır olsun
+**COUNTER** Fast Lane duvar sonuna bak — Neon çıkış noktası sabittir. Çıkış sesini duyduğunda açıyı tutmaya hazır ol
 **WHY** Neon duvar içinde hızlıdır ama duvardan çıkınca hızı kesilir. Çıkış noktasını bilirsen çıkışta vurursun.
 
 ---
@@ -53,7 +53,7 @@ Karşı takımda Neon varsa dar haritada Neon'un elinde; geniş haritada senin e
 
 **IF** Neon Fast Lane ile iki kişilik koridor kurdu, site girişi yapıyorlar
 **MEANING** İki duvar arasındaki koridoru göremezsin — giriş hattı smoke içinde
-**COUNTER** Fast Lane çıkışını Cloudburst ile kapat ya da Updraft ile duman üstüne çık — çıkış noktası sabittir, açı tutma çalışır
+**COUNTER** Fast Lane çıkışını Cloudburst ile kapat ya da Updraft ile duman üstüne çık — çıkış noktası sabittir, açıyı tutarak çalışır
 **WHY** Fast Lane yerde görüşü keser ama üstten açık. Updraft ile üste çıkarsın, duvar biter bitmez çıkışta hazırsın.
 
 ---
@@ -127,4 +127,4 @@ Neon oynuyorsan: Sprint savaş için değil, pozisyon için. Sprint ile yerine g
 
 Relay Bolt kullanımı: Stun önce git — hedef yavaşlar. Flash sonra git — kör kalır. Ters sıra işe yaramaz.
 
-Jett Neon karşısında pasif açı tutma — Neon Fast Lane ile açını doğrudan kapatır. Açını değiştir ya da Updraft ile üste geç.
+Jett Neon karşısında pasif açıyı tutarak — Neon Fast Lane ile açını doğrudan kapatır. Açını değiştir ya da Updraft ile üste geç.

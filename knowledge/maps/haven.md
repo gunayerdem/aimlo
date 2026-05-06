@@ -86,8 +86,8 @@ Defuse sesini duyunca peek at — spike'ın tam yanında bekleme.
 WHY: Post-plant'te amaç spike'i korumak, yanında olmak değil. Mesafe aldığında savunucunun mollysı seni vuramaz. Crossfire pozisyonundan bakınca savunucu iki yönü birden kontrol edemez.
 
 **Pattern 9: A Heaven'da Değişmez Pozisyon**
-IF: Savunucu A Heaven'da her round aynı açıyı tutuyor — rakip bunu öğrenince açı tutma yapıp, flash atıp geçiyor.
-MEANING: Pozisyon çeşitliliği yok. A Heaven güçlü bir pozisyon ama rakip öğrendikten sonra açı tutma + flash combo ile temizliyor. Güçlü pozisyonlar tekrarlanınca zayıflar.
+IF: Savunucu A Heaven'da her round aynı açıyı tutuyor — rakip bunu öğrenince açıyı tutup, flash atıp geçiyor.
+MEANING: Pozisyon çeşitliliği yok. A Heaven güçlü bir pozisyon ama rakip öğrendikten sonra açıyı tutma + flash combo ile temizliyor. Güçlü pozisyonlar tekrarlanınca zayıflar.
 COUNTER: A Heaven, A Hell (site altı), A Short ve site zemini arasında döngü yap. Heaven'dan kill aldıysan bir sonraki round Hell'e veya zemine in — rakip Heaven'ı açı tutacak ve seni bulamayacak. Off-angle'ı sürpriz olarak kullan, varsayılan pozisyon olarak değil.
 WHY: Rakip bir pozisyonu öğrendiğinde artık one-trick haline gelir — kolayca temizlenir. Pozisyon döngüsü rakibi her round birden fazla açı kontrol etmeye zorlar. Bu yük onların giriş hızını düşürür ve tereddüt yaratır.
 

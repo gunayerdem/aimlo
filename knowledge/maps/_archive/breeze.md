@@ -88,12 +88,12 @@ WHY: Cover arkasından crossfire kurduğunda retake yapan takım iki farklı aç
 
 **Pattern 7: Aynı Pozisyonda Tekrar Tekrar Oynama**
 IF: A Pyramid'de veya B Pillar'da her round aynı noktadasın ve 3-4 round sonra sürekli ölüyorsun.
-MEANING: Rakip seni okudu. Artık o açıyı açıyı tutuyor. Güçlü pozisyon bile tekrarlanınca işe yaramaz hale gelir.
+MEANING: Rakip seni okudu. Artık o açıyı tutuyor. Güçlü pozisyon bile tekrarlanınca işe yaramaz hale gelir.
 COUNTER:
 - Her 2-3 round'da pozisyon değiştir.
 - Pyramid'de kill aldıysan bir sonraki round aşağı in veya Switch'e geç.
 - Aynı yerde üst üste 3 round oynama — bu kural.
-WHY: Off-angle'lar sürpriz faktöründen güç alır. Rakip seni biliyorsa açı tutma atar ve avantaj sıfırlanır. Pozisyon rotasyonu rakibi her girişte birden fazla açı kontrol etmeye zorlar — giriş yavaşlar, tereddüt yaratır.
+WHY: Off-angle'lar sürpriz faktöründen güç alır. Rakip seni biliyorsa açıyı önceden tutar ve avantaj sıfırlanır. Pozisyon rotasyonu rakibi her girişte birden fazla açı kontrol etmeye zorlar — giriş yavaşlar, tereddüt yaratır.
 
 ---
 
