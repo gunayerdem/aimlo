@@ -3815,16 +3815,14 @@ export default function Home() {
         lang={lang}
         user={user}
         onStartAnalysis={() => {
-          setAuthMode("register");
-          setScreen("lang");
+          // CTA → new OTP register flow (was: legacy in-page modal)
+          window.location.href = "/register";
         }}
         onLogin={() => {
-          setAuthMode("login");
-          setScreen("lang");
+          window.location.href = "/login";
         }}
         onRegister={() => {
-          setAuthMode("register");
-          setScreen("lang");
+          window.location.href = "/register";
         }}
         onLangToggle={() => {
           const nl = lang === "tr" ? "en" : "tr";
@@ -3836,18 +3834,18 @@ export default function Home() {
       />
       </>
     );
-  if (!user)
+  if (!user) {
+    // Legacy AuthScreen retired — bounce unauthenticated visitors to the
+    // /login route. /login itself handles "no account yet → /register".
+    if (typeof window !== "undefined") {
+      window.location.href = authMode === "register" ? "/register" : "/login";
+    }
     return (
-      <AuthScreen
-        lang={lang}
-        onAuth={(u) => {
-          setUser(u);
-          setScreen("dashboard");
-        }}
-        initialMode={authMode}
-        onBackToLanding={() => setScreen("landing")}
-      />
+      <main className={`${ds.pageBg} flex items-center justify-center`}>
+        <div className="h-6 w-6 animate-spin rounded-full border-2 border-[#FF4655] border-t-transparent" />
+      </main>
     );
+  }
   // useEffect redirects "lang" screen — show loading spinner briefly
   if (screen === "lang")
     return (
