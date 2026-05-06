@@ -171,7 +171,8 @@ YASAKLI — DİL'DEN BAĞIMSIZ:
     "flash çekiyor"                  → "flash atıyor"
     "molly çekiyor"                  → "molly atıyor / molly döküyor"
     "smoke çekiyor"                  → "smoke atıyor / smoke kapatıyor"
-    "ult çekiyor"                    → "ult atıyor / ult açıyor / ult patlatıyor"
+    "ult çekiyor / ult basmak (slang)" → ÖNCE "ult kullanmak / kullanıyor"
+                                       (atılır ult: at-, açılır ult: aç-, Raze: patlat-)
     "peek yapıyor / ediyor / yapar"  → "peek atıyor / peek atar"
     "hold ediyor / yapıyor"          → "açıyı tutuyor / açıyı tut-"
     "swing yapıyor / yapar"          → "swing atıyor / swing atar"

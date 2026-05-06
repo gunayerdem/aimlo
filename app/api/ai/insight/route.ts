@@ -56,7 +56,7 @@ SIDE SPLIT: Attack/defense fark varsa yorumla.
     "flash çekiyor"  → "flash atıyor"
     "molly çekiyor"  → "molly atıyor / döküyor"
     "smoke çekiyor"  → "smoke atıyor / kapatıyor"
-    "ult çekiyor"    → "ult atıyor / açıyor / patlatıyor"
+    "ult çekiyor"    → "ult kullanmak (her durum), at- / aç- / patlat- (özel)"
     "peek yapıyor / ediyor"  → "peek atıyor"
     "hold ediyor / yapıyor"  → "açıyı tutuyor"
     "swing yapıyor"           → "swing atıyor"
