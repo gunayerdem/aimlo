@@ -234,6 +234,38 @@ KESİN KURALLAR:
 5. Oyun terimlerini kullan: overpeek, dry peek, trade, swing, jiggle peek, shoulder peek, lurk, anchor, retake, default, execute, fake, stack, contact play, info play, utility dump, flash+trade, post-plant, anti-eco.
 6. "${isTr ? "sen" : "you"}" diye hitap et, "${isTr ? "siz" : ""}" kullanma.
 7. ⚠ ZAMAN-BAĞIMLI TAVSİYE YASAK. "Timer 16'da", "45s'de", "30 saniye sonra", "at 16s" gibi saniye/timer referansı KULLANMA. Oyuncu saate bakmıyor — durumu okur. Yerine OLAY-BAZLI konuş: "1 düşman düştü", "Op sesi duyuldu", "spike kuruldu", "düşman B'den rotate ettiyse", "if enemy rotated from B", "after first kill".
+${isTr ? `
+🚫 YASAK TÜRKÇE İFADELER (post-audit baseline — ASLA üretme, varyantları dahil):
+
+  Pre-aim varyantları (HEPSİ yasak):
+    "pre-aim ediyordu", "pre-aim ediyor", "pre-aim çekiyor", "pre-aim çekti",
+    "pre-aim yapıyor", "pre-aim'le vurdu", "head pre-aim'le", "head pre-aim çekiyor"
+    → KULLAN: "açıyı tutuyor", "açıyı tutuyordu", "head açısını tutuyor",
+      "aynı açıdan vuruyor", "aynı yere bakıyor"
+
+  Yanlış Türkçe / "AI-robot" Tarzan-Türkçesi:
+    "stun çekiyor", "stun çekti"     → "stun atıyor / stun açıyor / stun yedirdi"
+    "flash çekiyor"                  → "flash atıyor"
+    "molly çekiyor"                  → "molly atıyor / molly döküyor"
+    "smoke çekiyor"                  → "smoke atıyor / smoke kapatıyor"
+    "wide swing"                     → "geniş açıyla peek / geniş swing"
+    "trip" (slang)                   → "tuzak / tripwire"
+    "op var"                         → "Operatör var / OP açıyı tutuyor"
+    "yığ" (emir kipi)                → "yüklen, basın yerine 'yüklenin'"
+    "pick alıyor"                    → "kill alıyor / düşürüyor"
+    "tek vuruş yetti"                → spesifik açıkla: "head one-tap'ledi"
+    "basın" (emir, lazy)             → spesifik söyle: "Omen smoke + flash ile yüklenin"
+    "deployment / optimal / protocol" → düz Türkçe
+` : `
+🚫 BANNED PHRASES (post-audit baseline — never produce, including variants):
+    "wide swing"          → "wide-angle peek / swing wide"
+    "trip" (slang)        → "trapwire / Cypher trap"
+    "op var"              → "Operator / OP holding the angle"
+    "pick alıyor / picks" → "killing / dropping the entry"
+    "tek vuruş yetti"     → describe: "head-tapped on the peek"
+    "basın" (lazy verb)   → specific: "execute through Main with smoke + flash"
+    "deployment / optimal / protocol" → plain coach English
+`}
 
 DEATH ANALYSIS FORMAT:
 - İlk cümle: NE OLDU — pozisyon + düşman + silah
@@ -285,7 +317,7 @@ FORMAT KURALI:
 - Tek fix YASAK — düşman tek fix'e adapte olur
 
 DÜŞMAN MODELİ (ZORUNLU):
-- deathAnalysis'te düşmanın seni NASIL okuduğunu açıkla (pre-aim, timing, util)
+- deathAnalysis'te düşmanın seni NASIL okuduğunu açıkla (açı tutma, timing, util kullanımı)
 - nextRoundPlan'da düşmanın beklentisinin DIŞINDA hamle öner
 - COUNTER-ADAPTATION: "Bu fix'i de öğrenirse..." ile sonraki adımı belirt`;
 
@@ -520,7 +552,7 @@ Sadece düzeltilmiş metni döndür.`;
             const rLower = (repaired || "").toLowerCase();
             const posWords = ["a short", "a long", "a main", "b short", "b long", "b main", "mid", "heaven", "hell", "market", "garage", "hookah", "catwalk", "cubby", "elbow", "lobby"];
             const hasPosition = posWords.some(p => rLower.includes(p));
-            const hasEnemy = ["düşman", "enemy", "rakip", "pre-aim", "exploit", "okuy", "bekliy"].some(k => rLower.includes(k));
+            const hasEnemy = ["düşman", "enemy", "rakip", "açı tut", "pre-aim", "exploit", "okuy", "bekliy"].some(k => rLower.includes(k));
             if (repaired && repaired.length > 30 && (hasPosition || hasEnemy)) {
               if (fs.weakest === "deathAnalysis") result.deathAnalysis = repaired.slice(0, 500);
               else if (fs.weakest === "nextRoundPlan") result.nextRoundPlan = repaired.slice(0, 500);

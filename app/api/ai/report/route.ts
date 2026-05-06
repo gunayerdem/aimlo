@@ -330,7 +330,7 @@ function generateDeterministicReport(body: ReportRequest): ReportResponse {
       : `OBSERVATION: ${topDeathCount} deaths at ${topDeathLoc} (${deathRoundStr}). INFERENCE: Enemy reads this angle, holds crosshair. RECOMMENDATION: As ${setup.agent}, shift to off-angle or clear with utility before peeking.`;
   } else if (hasRotateIssue) {
     mistake = isTr
-      ? `GÖZLEM: Birden fazla round'da rotasyon sırasında ölüm. ÇIKARIM: Timing hatası — crosshair placement hazır değildi, düşman rotasyonu okuyor. ÖNERİ: ${setup.agent} olarak rotasyonda her köşeyi pre-aim yap, ability ile info topla.`
+      ? `GÖZLEM: Birden fazla round'da rotasyon sırasında ölüm. ÇIKARIM: Timing hatası — crosshair placement hazır değildi, düşman rotasyonu okuyor. ÖNERİ: ${setup.agent} olarak rotasyonda her köşenin açısını önceden tut, ability ile info topla.`
       : `OBSERVATION: Deaths during rotation in multiple rounds. INFERENCE: Timing error — crosshair placement wasn't ready, enemy reads rotations. RECOMMENDATION: As ${setup.agent}, pre-aim every corner during rotation, use ability for info.`;
   } else if (hasSoloIssue) {
     mistake = isTr
@@ -524,9 +524,33 @@ KURALLAR (HER BİRİ RED BAYRAĞI)
 8. Her round feedback'inde deathAnalysis/coachInsight varsa BUNLARA referans ver. Mesela 3 round'da "Cypher operator B Short" pattern'i tekrarlıyorsa mistake alanında bunu vurgula.
 
 ═══════════════════════════════════════════════
+🚫 YASAK TÜRKÇE İFADELER (varyantları dahil — Türkçe çıktıda ASLA üretme)
+═══════════════════════════════════════════════
+PRE-AIM tüm formları YASAK:
+  "pre-aim ediyordu / ediyor / çekiyor / çekti / yapıyor / yaptı"
+  "head pre-aim / head pre-aim'le / pre-aim'le vurdu"
+  → "açıyı tutuyor / açıyı tutuyordu / head açısını tutuyor / aynı yere bakıyor"
+
+Tarzan-Türkçesi (utility için "çek-" yan-fiili YANLIŞ):
+  "stun çekiyor"  → "stun atıyor / açıyor / yedirdi"
+  "flash çekiyor" → "flash atıyor"
+  "molly çekiyor" → "molly atıyor / döküyor"
+  "smoke çekiyor" → "smoke atıyor / kapatıyor"
+  "ult çekiyor"   → "ult atıyor / açıyor / patlatıyor"
+
+Slang / lazy:
+  "wide swing" → "geniş açıyla peek / geniş swing"
+  "trip" (slang) → "tuzak / Cypher tuzağı / tripwire"
+  "op var" → "Operatör var / OP açıyı tutuyor"
+  "yığ" (emir kipi) → "yüklen / yüklenin"
+  "pick alıyor" → "kill alıyor / düşürüyor"
+  "tek vuruş yetti" → spesifik: "head one-tap'ledi"
+  "basın" (lazy emir) → spesifik: "Omen smoke + flash ile yüklenin"
+
+═══════════════════════════════════════════════
 DÜŞMAN MODELİ (ZORUNLU)
 ═══════════════════════════════════════════════
-- mistake: düşman hangi pattern'ini exploit etti + NASIL (pre-aim, timing, util). Top killers varsa bunu referans al.
+- mistake: düşman hangi pattern'ini exploit etti + NASIL (açı tutma, timing, util kullanımı). Top killers varsa bunu referans al.
 - tendencies: düşman ne yapacak, nasıl adapte olacak. Top death locations ile cross-reference yap.
 - adjustment: düşmanın beklentisinin DIŞINDA hamle öner + COUNTER-ADAPTATION. MİNİMUM 2 varyasyon ("A yap VEYA B yap") — tek fix YASAK.
 - bestRound: neden işe yaradı = düşman ne yapamadı.

@@ -40,6 +40,25 @@ DİL — ZORUNLU:
 İYİ OYNAMA: "Devam et" / "Keep going" YASAK. Ne çalışıyor + neden + nasıl tekrarlanır.
 SIDE SPLIT: Attack/defense fark varsa yorumla.
 
+🚫 YASAK TÜRKÇE İFADELER (varyantları dahil):
+  PRE-AIM tüm formları:
+    "pre-aim ediyordu / ediyor / çekiyor / çekti / yapıyor / yaptı",
+    "head pre-aim / head pre-aim'le / pre-aim'le vurdu"
+    → "açıyı tutuyor / açıyı tutuyordu / head açısını tutuyor / aynı yere bakıyor"
+  Tarzan-Türkçesi ("çek-" yan-fiili utility için yanlış):
+    "stun çekiyor"   → "stun atıyor / açıyor / yedirdi"
+    "flash çekiyor"  → "flash atıyor"
+    "molly çekiyor"  → "molly atıyor / döküyor"
+    "smoke çekiyor"  → "smoke atıyor / kapatıyor"
+    "ult çekiyor"    → "ult atıyor / açıyor / patlatıyor"
+  Slang / lazy:
+    "wide swing"     → "geniş açıyla peek / geniş swing"
+    "trip" (slang)   → "tuzak / tripwire"
+    "op var"         → "Operatör var / OP açıyı tutuyor"
+    "yığ" (emir)     → "yüklen / yüklenin"
+    "pick alıyor"    → "kill alıyor / düşürüyor"
+    "tek vuruş yetti" → spesifik söyle: "head one-tap'ledi"
+
 JSON formatında döndür.
 
 ÇIKTI FORMATI:

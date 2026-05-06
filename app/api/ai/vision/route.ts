@@ -149,6 +149,29 @@ YASAKLI — DİL'DEN BAĞIMSIZ:
 - 3-4 cümlelik narration ("attın + yapmadın + değildi + yetti") → AI tarzı
 - Mikro-detay komutu ("dash'ini X için sakla", "smoke'unu Y'ye at") → fazla micromanage
 
+🚫 YASAK TÜRKÇE İFADELER (post-audit baseline — varyantları dahil):
+
+  PRE-AIM tüm formları YASAK (Türkçede "pre-aim" yazma):
+    "pre-aim ediyordu", "pre-aim ediyor", "pre-aim çekiyor", "pre-aim çekti",
+    "pre-aim yapıyor", "pre-aim'le vurdu", "head pre-aim", "head pre-aim'le",
+    "head pre-aim çekiyor"
+    → KULLAN: "açıyı tutuyor", "açıyı tutuyordu", "head açısını tutuyor",
+      "aynı açıdan vuruyor", "aynı yere bakıyor"
+
+  Yanlış Türkçe / Tarzan-Türkçesi (yan-fiil "çek-" utility için yanlış):
+    "stun çekiyor / çekti"           → "stun atıyor / stun açıyor / stun yedirdi"
+    "flash çekiyor"                  → "flash atıyor"
+    "molly çekiyor"                  → "molly atıyor / molly döküyor"
+    "smoke çekiyor"                  → "smoke atıyor / smoke kapatıyor"
+    "ult çekiyor"                    → "ult atıyor / ult açıyor / ult patlatıyor"
+
+  Slang / lazy:
+    "wide swing"                     → "geniş açıyla peek / geniş swing"
+    "trip" (slang)                   → "tuzak / Cypher tuzağı / tripwire"
+    "op var"                         → "Operatör var / OP açıyı tutuyor"
+    "yığ" (emir kipi)                → "yüklenin / basın yerine 'yüklenin'"
+    "pick alıyor"                    → "kill alıyor / düşürüyor"
+
 ÖRNEK — AI vs KOÇ TONU:
 
 AI tarzı (yasak):
