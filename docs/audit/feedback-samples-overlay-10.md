@@ -14,9 +14,9 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "B Long'da default açıyı 2 round'dur tutuyorsun, Raze head açısını tutarak aynı yerden vurdu — sabit kalmamalı, off-angle B Screen'e geçmeliydin.",
+  "deathAnalysis": "B Long'da default açıyı 2 round'dur tutuyorsun, Raze aynı yerden kafadan vurdu — sabit kalmamalı, off-angle B Screen'e geçmeliydin.",
   "enemyAnalysis": [
-    "Raze B Long'da head açısını tutuyor, peek timing'ini ezberledi ve aynı yerden head buluyor",
+    "Raze B Long peek timing'ini ezberledi, aynı açıdan her round kafadan vuruyor",
     "Düşman B'ye 4 kişi yığıyor, A Main tarafında kimse yok"
   ],
   "nextRoundSuggestion": "B Screen off-angle'a geç, turret'i B Long'a bak — Raze aynı açıyı tutarsa trade'i Screen'den alırsın."
@@ -38,7 +38,7 @@
     "Breach Bridge stun'unu force-buy round'larında erken açıyor, kenardakileri sabitliyor",
     "Düşman Bridge'i Breach + Op'la kilitliyor, mid kontrolü olmadan split kapalı"
   ],
-  "nextRoundSuggestion": "Bridge'e satchel'ı önce at, kenar yerine merkez hattına gir — Breach stun çekerse satchel'la geri kaçarsın, uçuruma düşmezsin."
+  "nextRoundSuggestion": "Bridge'e satchel'ı önce at, kenar yerine merkez hattına gir — Breach stun atarsa satchel'la geri kaçarsın, uçuruma düşmezsin."
 }
 ```
 
@@ -52,7 +52,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "Pistol round'da A Main'e drone atmadan girdin, alarm bot bilgini ücretsiz verdi ve Killjoy A Tree'den sheriff'le head buldu — pistol round'da utility temizlemeden açı yoklanmaz.",
+  "deathAnalysis": "Pistol round'da A Main'e drone atmadan girdin, alarm bot bilgini ücretsiz verdi ve Killjoy A Tree'den sheriff'le kafadan vurdu — pistol round'da utility temizlemeden açı yoklanmaz.",
   "enemyAnalysis": [
     "Killjoy pistol round'da alarm bot'u A Main koridoruna kuruyor, ilk peek atana bedava bilgi alıyor",
     "Düşman A'ya 3 kişi koyuyor, C Mound zayıf bırakılıyor"
@@ -71,7 +71,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "B Site'ta Hookah'ya bakarken Yoru ult'la arkandan TP'leyip sheriff'le head buldu — shield'in açık değildi, ses gizleyici sayesinde duyamadın.",
+  "deathAnalysis": "B Site'ta Hookah'ya bakarken Yoru ult'la arkandan TP'leyip sheriff'le kafadan vurdu — shield'in açık değildi, ses gizleyici sayesinde duyamadın.",
   "enemyAnalysis": [
     "Yoru ult'la A Showers üzerinden B'ye flank atıyor, ses gizleyici sayesinde site içine kadar geliyor",
     "Düşman B'ye direkt baskı kurmadan Yoru flank'ıyla kill alıyor, sonrası rahat execute"
@@ -90,7 +90,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "C Long'a 3 round'dur flash'siz peek atıyorsun, Sage Guardian'la aynı açıyı tutuyor ve head buluyor — bu kez de aynı hatayı yaptın.",
+  "deathAnalysis": "C Long'a 3 round'dur flash'siz peek atıyorsun, Sage Guardian'la aynı açıyı tutuyor ve kafadan vuruyor — bu kez de aynı hatayı yaptın.",
   "enemyAnalysis": [
     "Sage C Long'u Guardian'la kilitliyor, mesafe avantajını one-tap için kullanıyor",
     "Düşman C'yi Sage + 1 anchor cross ile tutuyor, A Long tarafı zayıf"

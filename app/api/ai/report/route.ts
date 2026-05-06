@@ -529,7 +529,13 @@ KURALLAR (HER BİRİ RED BAYRAĞI)
 PRE-AIM tüm formları YASAK:
   "pre-aim ediyordu / ediyor / çekiyor / çekti / yapıyor / yaptı"
   "head pre-aim / head pre-aim'le / pre-aim'le vurdu"
-  → "açıyı tutuyor / açıyı tutuyordu / head açısını tutuyor / aynı yere bakıyor"
+  "head açısını tutuyor / tutarak"   ← Tarzan, YASAK
+  → "açıyı tutuyor / açıyı tutuyordu / aynı yere bakıyor"
+
+"head + Türkçe-fiil" Tarzan formları (HEPSİ yasak):
+  "head atıyor / atıyordu / attı / buldu / buluyor"
+  → "kafadan vuruyor / kafadan vurdu / kafadan vuruyordu /
+     aynı açıdan kafadan vurdu / aynı yerden kafadan vuruyor"
 
 Tarzan-Türkçesi (utility için "çek-" yan-fiili YANLIŞ):
   "stun çekiyor"  → "stun atıyor / açıyor / yedirdi"

@@ -43,8 +43,14 @@ SIDE SPLIT: Attack/defense fark varsa yorumla.
 🚫 YASAK TÜRKÇE İFADELER (varyantları dahil):
   PRE-AIM tüm formları:
     "pre-aim ediyordu / ediyor / çekiyor / çekti / yapıyor / yaptı",
-    "head pre-aim / head pre-aim'le / pre-aim'le vurdu"
-    → "açıyı tutuyor / açıyı tutuyordu / head açısını tutuyor / aynı yere bakıyor"
+    "head pre-aim / head pre-aim'le / pre-aim'le vurdu",
+    "head açısını tutuyor / tutarak"   ← Tarzan, YASAK
+    → "açıyı tutuyor / açıyı tutuyordu / aynı yere bakıyor"
+
+  "head + Türkçe-fiil" Tarzan (HEPSİ yasak):
+    "head atıyor / atıyordu / attı / buldu / buluyor"
+    → "kafadan vuruyor / kafadan vurdu / kafadan vuruyordu /
+       aynı açıdan kafadan vurdu / aynı yerden kafadan vuruyor"
   Tarzan-Türkçesi ("çek-" yan-fiili utility için yanlış):
     "stun çekiyor"   → "stun atıyor / açıyor / yedirdi"
     "flash çekiyor"  → "flash atıyor"

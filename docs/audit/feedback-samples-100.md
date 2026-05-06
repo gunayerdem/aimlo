@@ -44,7 +44,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "A Main'e dry peek attın, Chamber A Lobby tarafından sheriff'le pre-aim ediyordu — pistol round'da bilgi yokken o açıyı tek başına yoklama.",
+  "deathAnalysis": "A Main'e dry peek attın, Chamber A Lobby tarafından sheriff'le açıyı tutuyordu — pistol round'da bilgi yokken o açıyı tek başına yoklama.",
   "enemyAnalysis": [
     "Chamber pistol round'da sheriff açısı tutuyor, ekonomileri rahat olduğu için cesur peek atıyor",
     "Düşman A'da iki kişi duruyor gibi, B tarafından cross gelmiyor"
@@ -82,7 +82,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "Mid Courier'i tek başına yokladın, Omen Mid Cubby'den Vandal'la pre-aim ediyordu — solo mid kontrolü flash'siz risksiz değil.",
+  "deathAnalysis": "Mid Courier'i tek başına yokladın, Omen Mid Cubby'den Vandal'la açıyı tutuyordu — solo mid kontrolü flash'siz risksiz değil.",
   "enemyAnalysis": [
     "Omen mid'de agresif duruyor, takımı bilgi için onu öne sürüyor",
     "Düşman mid alırsa rotate hızı artıyor, mid kontrolünü kaybetmemen lazım"
@@ -196,7 +196,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "Catwalk'a girerken Sage Tree'den Guardian'la pre-aim ediyordu, 2 round'dur aynı açıyı tutuyor — bu round flash'siz yine peek attın.",
+  "deathAnalysis": "Catwalk'a girerken Sage Tree'den Guardian'la açıyı tutuyordu, 2 round'dur aynı açıyı tutuyor — bu round flash'siz yine peek attın.",
   "enemyAnalysis": [
     "Sage Catwalk'ta Guardian'la one-tap kovalıyor, mesafe avantajını kullanıyor",
     "Düşman A'yı Tree + Heaven cross ile kilitliyor, tek peek'le açılmaz"
@@ -253,7 +253,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "Pistol round'da A Short'a dry peek attın, Viper Showers'tan ghost'la pre-aim ediyordu — pistol round'da bilgi olmadan açı yoklamak ekonomi katlediyor.",
+  "deathAnalysis": "Pistol round'da A Short'a dry peek attın, Viper Showers'tan ghost'la açıyı tutuyordu — pistol round'da bilgi olmadan açı yoklamak ekonomi katlediyor.",
   "enemyAnalysis": [
     "Viper Showers'tan ghost açısı tutuyor, A defansını tek başına kapatıyor",
     "Düşman pistol'de A'da iki kişi tutuyor, B Long zayıf"
@@ -443,7 +443,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "Eco round'da A Long'u dry peek attın, Chamber ult'la pre-aim ediyordu — eco round'da uzun açı op'a karşı yoklanmaz.",
+  "deathAnalysis": "Eco round'da A Long'u dry peek attın, Chamber ult'la açıyı tutuyordu — eco round'da uzun açı op'a karşı yoklanmaz.",
   "enemyAnalysis": [
     "Chamber A Long'u ult'la kilitliyor, eco round'larda agresif tutuyor",
     "Düşman A'ya 2 kişi koyuyor, C Long zayıf duruyor"
@@ -557,7 +557,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "Mid Doors'a smoke atmadan peek attın, Viper Mid Window'dan Vandal'la pre-aim ediyordu — mid kontrolü smoke'suz olmaz.",
+  "deathAnalysis": "Mid Doors'a smoke atmadan peek attın, Viper Mid Window'dan Vandal'la açıyı tutuyordu — mid kontrolü smoke'suz olmaz.",
   "enemyAnalysis": [
     "Viper Mid Window'dan agresif tutuyor, mid'i tek başına kapatıyor",
     "Düşman mid'i kaybederse rotate çok zor, mid kontrol kritik"
@@ -614,7 +614,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "A Long'a geniş açıyla peek attın, Chamber sheriff'le head pre-aim ediyordu — Chamber'a karşı dar açıyla shoulder peek yap.",
+  "deathAnalysis": "A Long'a geniş açıyla peek attın, Chamber sheriff'le aynı açıdan kafadan vuruyordu — Chamber'a karşı dar açıyla shoulder peek yap.",
   "enemyAnalysis": [
     "Chamber A Long'u sheriff açısı tutuyor, ekonomik şekilde pick alıyor",
     "Düşman A'da Chamber + 1 anchor, C tarafı zayıf"
@@ -766,7 +766,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "A Ramps'ta 3 round'dur Sage Guardian'la pre-aim ediyor ve sen yine flash'siz peek attın — Sage'in açısına flash atmadan girilmez.",
+  "deathAnalysis": "A Ramps'ta 3 round'dur Sage Guardian'la açıyı tutuyor ve sen yine flash'siz peek attın — Sage'in açısına flash atmadan girilmez.",
   "enemyAnalysis": [
     "Sage Ramps'ı Guardian'la one-tap kovalıyor, mesafe avantajını agresif kullanıyor",
     "Düşman A'da Sage + Heaven anchor cross kuruyor"
@@ -804,7 +804,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "A Main'den dry peek attın, Chamber ult'la one-shot pre-aim ediyordu — ult'a karşı smoke atmadan açı yoklama.",
+  "deathAnalysis": "A Main'den dry peek attın, Chamber ult'la one-shot açısını tutuyordu — ult'a karşı smoke atmadan açı yoklama.",
   "enemyAnalysis": [
     "Chamber A Main'i ult'la kilitliyor, eko avantajı için kullanıyor",
     "Düşman A'ya Chamber + 1 anchor koyuyor, B'de utility yok"
@@ -1013,7 +1013,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "Force-buy round'da A Tree'ye dry peek attın, Chamber ult'la pre-aim ediyordu — force-buy'da uzun açıyı op'a karşı yoklamak çok riskli.",
+  "deathAnalysis": "Force-buy round'da A Tree'ye dry peek attın, Chamber ult'la açıyı tutuyordu — force-buy'da uzun açıyı op'a karşı yoklamak çok riskli.",
   "enemyAnalysis": [
     "Chamber A Tree'yi ult'la kilitliyor, ekonomik dengesizliği maksimize ediyor",
     "Düşman A'da Chamber + 1 anchor, C tarafı zayıf bırakılıyor"
@@ -1070,7 +1070,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "Pistol round'da A Main'e dry peek attın, Killjoy turret bilgini aldı ve sheriff'le head buldu — pistol round'da utility temizlemeden açı yoklama.",
+  "deathAnalysis": "Pistol round'da A Main'e dry peek attın, Killjoy turret bilgini aldı ve sheriff'le kafadan vurdu — pistol round'da utility temizlemeden açı yoklama.",
   "enemyAnalysis": [
     "Killjoy A Main'e turret kuruyor, attacker peek'lerini ücretsiz buluyor",
     "Düşman pistol'de A'ya 3 kişi yığıyor, B Market zayıf"
@@ -1184,7 +1184,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "A Main'e geniş açıyla peek attın, Sage 2 round'dur Guardian'la pre-aim ediyor — flash'siz aynı açıyı tekrar yokladın.",
+  "deathAnalysis": "A Main'e geniş açıyla peek attın, Sage 2 round'dur Guardian'la açıyı tutuyor — flash'siz aynı açıyı tekrar yokladın.",
   "enemyAnalysis": [
     "Sage A Main'i Guardian'la one-tap'le kovalıyor, mesafe avantajını kullanıyor",
     "Düşman A'da Sage + Heaven cross kuruyor, tek peek'le açılmaz"
@@ -1241,7 +1241,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "A Main'den dry peek attın, Chamber ult'la one-shot pre-aim ediyordu — ult'a karşı flash veya smoke şart.",
+  "deathAnalysis": "A Main'den dry peek attın, Chamber ult'la one-shot açısını tutuyordu — ult'a karşı flash veya smoke şart.",
   "enemyAnalysis": [
     "Chamber A Main'i ult'la kilitliyor, eko avantajı için kullanıyor",
     "Düşman A'ya Chamber + 1 anchor koyuyor, B'de bilgi alıcı yok"
@@ -1279,7 +1279,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "Pistol round'da A Main'e dry peek attın, Cypher Spycam bilgini aldı ve sheriff'le head buldu — pistol round'da Spycam temizlenmeden peek atılmaz.",
+  "deathAnalysis": "Pistol round'da A Main'e dry peek attın, Cypher Spycam bilgini aldı ve sheriff'le kafadan vurdu — pistol round'da Spycam temizlenmeden peek atılmaz.",
   "enemyAnalysis": [
     "Cypher Spycam'i A Main'e dikiyor, attacker peek'lerini ücretsiz buluyor",
     "Düşman pistol'de A'ya 3 kişi yığıyor, B tarafı zayıf"
@@ -1317,7 +1317,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "Mid'e smoke atmadan peek attın, Viper Mid Window'dan Vandal'la pre-aim ediyordu — mid kontrolü smoke'suz olmaz.",
+  "deathAnalysis": "Mid'e smoke atmadan peek attın, Viper Mid Window'dan Vandal'la açıyı tutuyordu — mid kontrolü smoke'suz olmaz.",
   "enemyAnalysis": [
     "Viper Mid'i wall + Vandal cross ile kapatıyor, mid'i tek başına kilitliyor",
     "Düşman mid kontrolüyle iki site'a baskı kuruyor"
@@ -1355,7 +1355,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "B Long'a 3 round'dur smoke'suz peek atıyorsun, Chamber ult'la one-shot pre-aim ediyor — bu kez yine smoke yoktu.",
+  "deathAnalysis": "B Long'a 3 round'dur smoke'suz peek atıyorsun, Chamber ult'la one-shot açısını tutuyor — bu kez yine smoke yoktu.",
   "enemyAnalysis": [
     "Chamber B Long'u ult'la kilitliyor, hızlı rotate'i one-shot'la cezalandırıyor",
     "Düşman B'ye Chamber + 1 anchor, A'da 3 kişi var"
@@ -1393,7 +1393,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "A Main'e 2 round'dur Sage Guardian'la pre-aim ediyor ve sen flash'siz peek attın — Sage'in açısına flash atmadan girilmez.",
+  "deathAnalysis": "A Main'e 2 round'dur Sage Guardian'la açıyı tutuyor ve sen flash'siz peek attın — Sage'in açısına flash atmadan girilmez.",
   "enemyAnalysis": [
     "Sage A Main'i Guardian'la one-tap'le kovalıyor, mesafe avantajını kullanıyor",
     "Düşman A'da Sage + 1 anchor cross kuruyor"
@@ -1488,7 +1488,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "Pistol round'da A Main'e dry peek attın, Chamber Art tarafından sheriff'le pre-aim ediyordu — pistol'de uzun açıyı sheriff'e karşı yoklama.",
+  "deathAnalysis": "Pistol round'da A Main'e dry peek attın, Chamber Art tarafından sheriff'le açıyı tutuyordu — pistol'de uzun açıyı sheriff'e karşı yoklama.",
   "enemyAnalysis": [
     "Chamber A Main'i sheriff açısı tutuyor, ekonomik bedava pick alıyor",
     "Düşman pistol'de A'ya 3 kişi yığıyor, B Hall zayıf"
@@ -1602,7 +1602,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "B Hall'a 2 round'dur Sage Guardian'la pre-aim ediyor ve sen flash'siz peek attın — Sage'in açısına flash atmadan girilmez.",
+  "deathAnalysis": "B Hall'a 2 round'dur Sage Guardian'la açıyı tutuyor ve sen flash'siz peek attın — Sage'in açısına flash atmadan girilmez.",
   "enemyAnalysis": [
     "Sage B Hall'u Guardian'la one-tap'le kovalıyor, mesafe avantajını kullanıyor",
     "Düşman B'de Sage + 1 anchor cross kuruyor"
@@ -1735,7 +1735,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "B Main'e wall temizlemeden peek attın, Viper smoke arkasından Vandal'la pre-aim ediyordu — Viper'a karşı flash veya smoke şart.",
+  "deathAnalysis": "B Main'e wall temizlemeden peek attın, Viper smoke arkasından Vandal'la açıyı tutuyordu — Viper'a karşı flash veya smoke şart.",
   "enemyAnalysis": [
     "Viper B Main'i wall + Vandal cross ile kapatıyor",
     "Düşman B'yi Viper utility ile kilitliyor, A'da fark açılıyor"
@@ -1773,7 +1773,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "A Main'e 3 round'dur smoke'suz peek atıyorsun, Chamber ult'la one-shot pre-aim ediyor — bu kez yine smoke yoktu.",
+  "deathAnalysis": "A Main'e 3 round'dur smoke'suz peek atıyorsun, Chamber ult'la one-shot açısını tutuyor — bu kez yine smoke yoktu.",
   "enemyAnalysis": [
     "Chamber A Main'i ult'la kilitliyor, hızlı rotate'i one-shot'la cezalandırıyor",
     "Düşman A'ya Chamber + 1 anchor, B zayıf"
@@ -1811,7 +1811,7 @@
 **Output:**
 ```json
 {
-  "deathAnalysis": "B Main'e 2 round'dur Sage Guardian'la pre-aim ediyor ve sen flash'siz peek attın — Sage'in açısına flash atmadan girilmez.",
+  "deathAnalysis": "B Main'e 2 round'dur Sage Guardian'la açıyı tutuyor ve sen flash'siz peek attın — Sage'in açısına flash atmadan girilmez.",
   "enemyAnalysis": [
     "Sage B Main'i Guardian'la one-tap'le kovalıyor, mesafe avantajını kullanıyor",
     "Düşman B'de Sage + 1 anchor cross kuruyor"

@@ -155,8 +155,16 @@ YASAKLI — DİL'DEN BAĞIMSIZ:
     "pre-aim ediyordu", "pre-aim ediyor", "pre-aim çekiyor", "pre-aim çekti",
     "pre-aim yapıyor", "pre-aim'le vurdu", "head pre-aim", "head pre-aim'le",
     "head pre-aim çekiyor"
-    → KULLAN: "açıyı tutuyor", "açıyı tutuyordu", "head açısını tutuyor",
-      "aynı açıdan vuruyor", "aynı yere bakıyor"
+    + "head açısını tutuyor", "head açısını tutarak"   ← Tarzan formu, YASAK
+
+  "head + Türkçe-fiil" Tarzan formları (HEPSİ yasak):
+    "head atıyor", "head atıyordu", "head attı",
+    "head buldu", "head buluyor"
+    → KULLAN doğal Türkçe: "kafadan vuruyor", "kafadan vurdu",
+      "kafadan vuruyordu", "aynı açıdan kafadan vurdu",
+      "aynı yerden kafadan vuruyor"
+  Genel "açı tutuyor" formu da TR koç dilinde doğal:
+    "açıyı tutuyor", "aynı açıyı tutuyor", "aynı yere bakıyor"
 
   Yanlış Türkçe / Tarzan-Türkçesi (yan-fiil "çek-" utility için yanlış):
     "stun çekiyor / çekti"           → "stun atıyor / stun açıyor / stun yedirdi"
