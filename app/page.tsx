@@ -25,7 +25,6 @@ import type {
   RoundScreenMode,
   MatchScore,
   CompTarget,
-  AuthMode,
   SavedReport,
 } from "@/types";
 /* ══════════════════════════════════════════════════════════
@@ -2917,7 +2916,6 @@ function UnauthRedirect() {
 export default function Home() {
   const [user, setUser] = useState<User | null>(null);
   const [authLoading, setAuthLoading] = useState(true);
-  const [authMode, setAuthMode] = useState<AuthMode>("login");
   useEffect(() => {
     supabase.auth
       .getSession()

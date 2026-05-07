@@ -57,21 +57,33 @@ export function VerifyForm({
   const code = chars.join("");
 
   // Resend countdown timer (60s after each successful resend).
-  // Tracked off the action's nonce-equivalent (we trip a counter every time
-  // resendState identity changes AND it carries `resent: true`). Without the
-  // ref-counter, a second resend in the same session wouldn't reset the
-  // cooldown because resendState.resent stayed true and the dep didn't flip.
+  // Tracked off the action's identity (we trip every time resendState
+  // changes AND it carries `resent: true`); ref-gated so a second resend
+  // in the same session resets the timer instead of getting swallowed
+  // because resendState.resent stays true.
+  //
+  // The setState-inside-useEffect pattern is the canonical way to react
+  // to useActionState transitions in React 19. The `react-hooks/set-state-
+  // in-effect` rule treats the pattern as suspicious to catch render
+  // loops; here the dep + ref-gate guarantees it fires at most once per
+  // action result. Disable for this single line with the rationale
+  // captured here.
   const [resendCooldown, setResendCooldown] = useState(0);
   const lastResendStateRef = useRef<ResendState | null>(null);
   useEffect(() => {
     if (resendState.resent && resendState !== lastResendStateRef.current) {
       lastResendStateRef.current = resendState;
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setResendCooldown(60);
     }
   }, [resendState]);
   useEffect(() => {
     if (resendCooldown <= 0) return;
-    const t = setTimeout(() => setResendCooldown((c) => c - 1), 1000);
+    const t = setTimeout(
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      () => setResendCooldown((c) => c - 1),
+      1000,
+    );
     return () => clearTimeout(t);
   }, [resendCooldown]);
 
