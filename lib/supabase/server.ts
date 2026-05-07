@@ -1,3 +1,9 @@
+// HARD GUARD: this module exports the service-role-key client which bypasses
+// RLS. Importing it from a Client Component would leak the key into the
+// browser bundle. The "server-only" sentinel makes the build crash with a
+// clear error if that ever happens.
+import "server-only";
+
 import { createServerClient } from "@supabase/ssr";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { cookies } from "next/headers";

@@ -1,6 +1,7 @@
 "use server";
 
 import { createServerSupabase } from "@/lib/supabase/server";
+import { authRateLimit } from "@/lib/auth-rate-limit";
 import { forgotSchema } from "../schemas";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://aimlo.gg";
@@ -28,6 +29,18 @@ export async function forgotAction(
   }
 
   const { email } = parsed.data;
+
+  // Rate-limit per (email, IP). 3 / 10min — discourages mass reset-email
+  // floods to a victim's inbox + email-bombing as a DoS.
+  const rl = await authRateLimit("forgot", email);
+  if (rl.blocked) {
+    // Still respond with the "sent" UI to avoid registered-user enumeration
+    // (we always show the green check below regardless). Just log and exit
+    // without actually sending.
+    console.warn("[Aimlo forgot] rate-limited:", email);
+    return { ok: true, sent: true, values: raw };
+  }
+
   const supabase = await createServerSupabase();
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {

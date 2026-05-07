@@ -33,17 +33,30 @@ interface ValidationResult {
 // ── Claim Extraction ──
 
 const COUNT_PATTERNS = [
+  // Turkish
   /(\d+)\s*kez/i,
-  /(\d+)\s*round/i,
   /(\d+)\s*defa/i,
   /(\d+)'[iu]nde/i,
   /(\d+)'[iu]nda/i,
+  // Multilingual
+  /(\d+)\s*round/i,
+  // English
+  /(\d+)\s*times?/i,
+  /(\d+)\s*deaths?/i,
+  /(\d+)\s*rounds?\s*(in\s*a\s*row|straight|consecutive)/i,
+  /(\d+)\s*matches?\s*in\s*a\s*row/i,
 ];
 
 const WINDOW_PATTERNS = [
+  // Turkish
   /son\s+(\d+)\s*round/i,
   /son\s+(\d+)\s*maç/i,
   /son\s+(\d+)/i,
+  // English
+  /last\s+(\d+)\s*rounds?/i,
+  /last\s+(\d+)\s*matches?/i,
+  /past\s+(\d+)\s*rounds?/i,
+  /over\s+the\s+last\s+(\d+)/i,
 ];
 
 const POSITION_NAMES = [
@@ -59,9 +72,14 @@ const POSITION_NAMES = [
 ];
 
 const REPETITION_KEYWORDS = [
+  // Turkish
   "tekrar eden", "tekrar", "art arda", "sürekli",
   "hep aynı", "aynı bölge", "aynı pozisyon",
   "pattern", "kalıcı",
+  // English
+  "in a row", "straight", "consecutive", "consistently",
+  "every round", "same spot", "same position",
+  "repeating", "recurring", "persistent", "every time",
 ];
 
 export function extractClaims(text: string): ExtractedClaims {
@@ -171,17 +189,36 @@ export function rewriteUnsafeClaims(
   if (validation.rewriteLevel === 2) {
     // Position valid but count/repetition overclaimed
     if (claims.claimedCount !== null && !validation.countValid) {
-      const countRegex = new RegExp(`${claims.claimedCount}\\s*kez`, "gi");
-      if (validation.actualCount >= 2) {
-        result = result.replace(countRegex, `${validation.actualCount} kez`);
-      } else {
-        result = result.replace(countRegex, "");
+      // Cover Turkish AND English count phrasings — sed only handled "kez".
+      const ct = claims.claimedCount;
+      const countPatterns = [
+        new RegExp(`${ct}\\s*kez`, "gi"),
+        new RegExp(`${ct}\\s*defa`, "gi"),
+        new RegExp(`${ct}\\s*round(s)?\\s*(in\\s*a\\s*row|straight|consecutive)?`, "gi"),
+        new RegExp(`${ct}\\s*time(s)?`, "gi"),
+        new RegExp(`${ct}\\s*death(s)?`, "gi"),
+        new RegExp(`${ct}\\s*match(es)?\\s*in\\s*a\\s*row`, "gi"),
+      ];
+      const replacement = validation.actualCount >= 2
+        ? `${validation.actualCount} kez`
+        : "";
+      for (const re of countPatterns) {
+        result = result.replace(re, replacement);
       }
     }
 
     if (claims.claimedWindow !== null) {
-      const windowRegex = new RegExp(`son\\s+${claims.claimedWindow}\\s*round`, "gi");
-      result = result.replace(windowRegex, "son roundlarda");
+      const w = claims.claimedWindow;
+      const windowPatterns = [
+        new RegExp(`son\\s+${w}\\s*round`, "gi"),
+        new RegExp(`son\\s+${w}\\s*maç`, "gi"),
+        new RegExp(`last\\s+${w}\\s*round(s)?`, "gi"),
+        new RegExp(`last\\s+${w}\\s*match(es)?`, "gi"),
+        new RegExp(`past\\s+${w}\\s*round(s)?`, "gi"),
+      ];
+      for (const re of windowPatterns) {
+        result = result.replace(re, "recently");
+      }
     }
 
     // FIX #3+#4: If repetition invalid, strip ALL repetition language at level 2 too

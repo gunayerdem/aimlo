@@ -87,6 +87,32 @@ select option { background: #080c14; color: #ededed; }
 .animate-glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
 .animate-orb { animation: orb-float 15s ease-in-out infinite; }
 
+/* New auth-route classes (W3 audit fix — these were referenced across all
+   five (auth) form pages but never defined → silent visual regression). */
+@keyframes slide-up-big {
+  from { opacity: 0; transform: translateY(60px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-slide-up-big { animation: slide-up-big 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-scale-in { animation: scale-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-rotate-slow { animation: rotate-slow 60s linear infinite; }
+.hover-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.25s ease-out;
+}
+.hover-underline:hover { background-size: 100% 1px; }
+
 .stagger-1 { animation-delay: 0.1s; opacity: 0; }
 .stagger-2 { animation-delay: 0.2s; opacity: 0; }
 .stagger-3 { animation-delay: 0.35s; opacity: 0; }

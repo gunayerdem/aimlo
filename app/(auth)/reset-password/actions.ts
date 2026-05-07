@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { createServerSupabase } from "@/lib/supabase/server";
+import { authRateLimit } from "@/lib/auth-rate-limit";
 
 export interface ResetState {
   ok: boolean;
@@ -34,6 +35,13 @@ export async function resetAction(
       ok: false,
       error: "Sıfırlama oturumu geçersiz veya süresi dolmuş. Yeniden link iste.",
     };
+  }
+
+  // Rate-limit by user.id (the recovery session is bound to a user already).
+  // 5 / minute — handles typo-retry without enabling brute against current pw.
+  const rl = await authRateLimit("reset", user.id);
+  if (rl.blocked) {
+    return { ok: false, error: rl.error };
   }
 
   const { error } = await supabase.auth.updateUser({ password });

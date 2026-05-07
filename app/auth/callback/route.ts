@@ -11,9 +11,31 @@ export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
   // ?next= lets us hop to /reset-password (password recovery), /verify, etc.
-  // Whitelist to relative paths only — no `//host.tld/foo` open redirects.
+  // SAFE-RELATIVE only: must start with "/", must not start with "//", and
+  // must not contain backslashes (browsers normalize `\` to `/`, so
+  // "/\evil.com/x" resolves to "//evil.com/x" → cross-origin redirect).
+  // Also reject percent-encoded variants. Final defense: parse against the
+  // canonical SITE_URL and require the same origin to come back out.
   const rawNext = requestUrl.searchParams.get("next") ?? "";
-  const next = rawNext.startsWith("/") && !rawNext.startsWith("//") ? rawNext : "";
+  let next = "";
+  if (
+    rawNext.length > 0 &&
+    rawNext.length < 200 &&
+    rawNext.startsWith("/") &&
+    !rawNext.startsWith("//") &&
+    !rawNext.includes("\\") &&
+    !/%5c/i.test(rawNext) && // percent-encoded backslash
+    !/%2f%2f/i.test(rawNext) // percent-encoded double-slash
+  ) {
+    try {
+      const candidate = new URL(rawNext, SITE_URL);
+      if (candidate.origin === new URL(SITE_URL).origin) {
+        next = candidate.pathname + candidate.search + candidate.hash;
+      }
+    } catch {
+      next = "";
+    }
+  }
   const origin = SITE_URL;
 
   if (!code) {

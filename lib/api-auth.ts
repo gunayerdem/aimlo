@@ -78,39 +78,52 @@ async function upstashIncr(key: string, ttlSec: number): Promise<number> {
   const url = process.env.UPSTASH_REDIS_REST_URL!;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN!;
 
-  const ctrl = new AbortController();
-  const tid = setTimeout(() => ctrl.abort(), 5000);
-
+  // Separate AbortControllers — a slow EXPIRE must not abort an in-flight
+  // INCR (and vice versa). Earlier shared-controller version had a lockout
+  // race: INCR succeeded, EXPIRE aborted on the shared signal, the key lived
+  // forever, every subsequent INCR went past the limit, and the user was
+  // permanently blocked from every rate-limited route.
+  const incrCtrl = new AbortController();
+  const incrTid = setTimeout(() => incrCtrl.abort(), 4000);
+  let count: number;
   try {
     const incrRes = await fetch(`${url}/incr/${encodeURIComponent(key)}`, {
       headers: { Authorization: `Bearer ${token}` },
-      signal: ctrl.signal,
+      signal: incrCtrl.signal,
     });
     if (!incrRes.ok) {
       throw new Error(`Upstash INCR HTTP ${incrRes.status}`);
     }
     const incrData = await incrRes.json();
-    const count = incrData.result as number;
+    count = incrData.result as number;
     if (typeof count !== "number") {
       throw new Error(`Upstash INCR returned non-number: ${JSON.stringify(incrData)}`);
     }
-
-    // Set TTL only on first request (count === 1)
-    if (count === 1) {
-      const expRes = await fetch(`${url}/expire/${encodeURIComponent(key)}/${ttlSec}`, {
-        headers: { Authorization: `Bearer ${token}` },
-        signal: ctrl.signal,
-      });
-      if (!expRes.ok) {
-        // Non-fatal: key will live forever but count is correct.
-        // Log but don't throw — Upstash usage cap will not be exceeded since INCR worked.
-        console.warn(`[Aimlo] Upstash EXPIRE failed for ${key}: HTTP ${expRes.status}`);
-      }
-    }
-    return count;
   } finally {
-    clearTimeout(tid);
+    clearTimeout(incrTid);
   }
+
+  // Always re-apply TTL — not just on count===1. If a previous EXPIRE failed
+  // and left a TTL-less key, this self-heals the rate-limit on the next call
+  // instead of staying poisoned. One extra REST call per request is cheap
+  // for a guaranteed bound on lockout.
+  const expCtrl = new AbortController();
+  const expTid = setTimeout(() => expCtrl.abort(), 3000);
+  try {
+    const expRes = await fetch(`${url}/expire/${encodeURIComponent(key)}/${ttlSec}`, {
+      headers: { Authorization: `Bearer ${token}` },
+      signal: expCtrl.signal,
+    });
+    if (!expRes.ok) {
+      console.warn(`[Aimlo] Upstash EXPIRE failed for ${key}: HTTP ${expRes.status}`);
+    }
+  } catch (e) {
+    console.warn(`[Aimlo] Upstash EXPIRE error for ${key}:`, (e as Error).message);
+  } finally {
+    clearTimeout(expTid);
+  }
+
+  return count;
 }
 
 async function upstashRateCheck(key: string, limit: number, windowSec: number): Promise<RateResult> {

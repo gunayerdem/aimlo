@@ -1,4 +1,22 @@
-import { supabase } from "@/lib/supabase";
+import "server-only";
+
+import { createServiceSupabase } from "@/lib/supabase/server";
+
+/**
+ * Cross-match player profile — accumulated death locations, map/agent
+ * stats, and detected behavioral tendencies. Used by AI routes
+ * (vision/feedback/report/insight) to inject "you've died at A Short
+ * 23 times across the last 30 matches" context into prompts.
+ *
+ * Server-only because:
+ *   - Writes need to bypass RLS (system writes the user's memory after
+ *     a match completes; the user is not directly in the writer call
+ *     stack at AI-route invocation time).
+ *   - Reads use the same client for symmetry.
+ *   - Earlier version imported the browser supabase client which had
+ *     RLS-rejected writes silently (audit-D-P0-5) — every UPSERT was
+ *     denied and the entire memory feature was dead in the web app.
+ */
 
 export interface PlayerMemory {
   userId: string;
@@ -26,18 +44,24 @@ export interface PlayerMemory {
   lastUpdated: string;
 }
 
-// Load player memory from Supabase
+// Load player memory from Supabase using the service-role client
+// (RLS-bypass).
 export async function loadPlayerMemory(
-  userId: string
+  userId: string,
 ): Promise<PlayerMemory | null> {
   try {
-    const { data, error } = await supabase
+    const admin = createServiceSupabase();
+    const { data, error } = await admin
       .from("player_memory")
       .select("*")
       .eq("user_id", userId)
-      .single();
+      .maybeSingle();
 
-    if (error || !data) return null;
+    if (error) {
+      console.error("[Aimlo memory] load failed:", error.message);
+      return null;
+    }
+    if (!data) return null;
 
     const rawMem = data.memory_data;
     const mem = (rawMem && typeof rawMem === "object" && !Array.isArray(rawMem))
@@ -63,12 +87,20 @@ export async function loadPlayerMemory(
       overallWinRate: (mem?.overallWinRate as number) || 0,
       lastUpdated: (data.updated_at as string) || new Date().toISOString(),
     };
-  } catch {
+  } catch (e) {
+    console.error("[Aimlo memory] load exception:", (e as Error).message);
     return null;
   }
 }
 
-// Update player memory after a match
+// Update player memory after a match. Uses service-role client (RLS-bypass).
+//
+// CONCURRENCY NOTE: read-modify-write pattern — two simultaneous match-end
+// requests for the same user will race and one update can be lost. Real-
+// world impact: extremely rare (a user finishes two matches at the exact
+// same instant on two devices?). Tracked as a follow-up; for a true atomic
+// merge we'd push the merge into a SQL function operating on the jsonb
+// in-place. Not worth the complexity at current scale.
 export async function updatePlayerMemory(
   userId: string,
   matchData: {
@@ -81,9 +113,11 @@ export async function updatePlayerMemory(
       skipped?: boolean;
       result?: string;
     }>;
-  }
+  },
 ): Promise<void> {
   try {
+    const admin = createServiceSupabase();
+
     // Load existing memory
     let memory = await loadPlayerMemory(userId);
 
@@ -127,7 +161,7 @@ export async function updatePlayerMemory(
 
     // Detect tendencies
     const deathLocs = Object.entries(memory.weakLocations).sort(
-      (a, b) => b[1] - a[1]
+      (a, b) => b[1] - a[1],
     );
     const topDeath = deathLocs[0];
     if (topDeath && topDeath[1] >= 5) {
@@ -165,8 +199,8 @@ export async function updatePlayerMemory(
 
     memory.lastUpdated = new Date().toISOString();
 
-    // Save to Supabase
-    const { error } = await supabase.from("player_memory").upsert(
+    // Save to Supabase via service-role client (bypasses RLS)
+    const { error } = await admin.from("player_memory").upsert(
       {
         user_id: userId,
         memory_data: {
@@ -182,21 +216,21 @@ export async function updatePlayerMemory(
         },
         updated_at: memory.lastUpdated,
       },
-      { onConflict: "user_id" }
+      { onConflict: "user_id" },
     );
 
     if (error) {
-      console.error("[Aimlo] Player memory save failed");
+      console.error("[Aimlo memory] save failed:", error.message);
     }
   } catch (err) {
-    console.error("[Aimlo] Player memory update failed:", err);
+    console.error("[Aimlo memory] update failed:", (err as Error).message);
   }
 }
 
 // Build a text context from memory for AI prompts
 export function buildMemoryContext(
   memory: PlayerMemory | null,
-  lang: string
+  lang: string,
 ): string {
   if (!memory || memory.totalMatches < 2) return "";
 
@@ -234,7 +268,7 @@ export function buildMemoryContext(
 
   if (worstMap) {
     const wr = Math.round(
-      (worstMap[1].wins / (worstMap[1].wins + worstMap[1].losses)) * 100
+      (worstMap[1].wins / (worstMap[1].wins + worstMap[1].losses)) * 100,
     );
     context += isTr
       ? `- En zayıf harita: ${worstMap[0]} (%${wr} WR)\n`
@@ -243,7 +277,7 @@ export function buildMemoryContext(
 
   if (bestAgent) {
     const wr = Math.round(
-      (bestAgent[1].wins / (bestAgent[1].wins + bestAgent[1].losses)) * 100
+      (bestAgent[1].wins / (bestAgent[1].wins + bestAgent[1].losses)) * 100,
     );
     context += isTr
       ? `- En güçlü ajan: ${bestAgent[0]} (%${wr} WR)\n`

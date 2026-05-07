@@ -5,6 +5,7 @@ import { createServiceSupabase } from "@/lib/supabase/server";
 import { hashOtp, normalizeOtp } from "@/lib/otp";
 import { generateOtp } from "@/lib/otp";
 import { sendOtpEmail } from "@/lib/email";
+import { authRateLimit } from "@/lib/auth-rate-limit";
 import { verifySchema } from "../schemas";
 import { timingSafeEqual } from "node:crypto";
 
@@ -36,17 +37,22 @@ async function findUserByEmail(
   admin: ReturnType<typeof createServiceSupabase>,
   email: string,
 ): Promise<FoundUser | null> {
-  const { data, error } = await admin.auth.admin.listUsers({ page: 1, perPage: 200 });
+  // O(1) via SQL RPC. Replaces listUsers({ perPage: 200 }) which silently
+  // broke at user 201.
+  const { data, error } = await admin.rpc("find_user_by_email", {
+    p_email: email.toLowerCase().trim(),
+  });
   if (error) {
-    console.error("[Aimlo verify] listUsers failed:", error.message);
+    console.error("[Aimlo verify] find_user_by_email RPC failed:", error.message);
     return null;
   }
-  const u = data?.users.find((x) => x.email?.toLowerCase() === email.toLowerCase());
+  if (!data || (Array.isArray(data) && data.length === 0)) return null;
+  const u = Array.isArray(data) ? data[0] : data;
   if (!u || !u.email) return null;
   return {
-    id: u.id,
-    email: u.email,
-    metadata: (u.user_metadata ?? {}) as Record<string, unknown>,
+    id: u.id as string,
+    email: u.email as string,
+    metadata: (u.raw_user_meta_data ?? {}) as Record<string, unknown>,
     emailConfirmed: !!u.email_confirmed_at,
   };
 }
@@ -66,6 +72,14 @@ export async function verifyAction(
   const codeNorm = normalizeOtp(parsed.data.code);
   if (codeNorm.length !== 6) {
     return { ok: false, error: "6 haneli kod gir" };
+  }
+
+  // Rate-limit per (email, IP). 8 / minute — combined with the 5-attempt
+  // OTP-meta cap, this kills the parallel-burn brute-force bug where N
+  // simultaneous verifyAction calls all see attempts=0 and burn N guesses.
+  const rl = await authRateLimit("verify", email);
+  if (rl.blocked) {
+    return { ok: false, error: rl.error };
   }
 
   let admin;
@@ -155,6 +169,13 @@ export async function resendAction(
 
   if (!email || !email.includes("@")) {
     return { ok: false, error: "Geçersiz e-posta" };
+  }
+
+  // Rate-limit per (email, IP). 3 / 5min — kills inbox-flood + the
+  // bruteforce-by-resend loop that previously bypassed the 5-attempt cap.
+  const rl = await authRateLimit("resend", email);
+  if (rl.blocked) {
+    return { ok: false, error: rl.error };
   }
 
   let admin;

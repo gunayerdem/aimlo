@@ -7,6 +7,7 @@ import {
 } from "@/lib/supabase/server";
 import { generateOtp, hashOtp } from "@/lib/otp";
 import { sendOtpEmail } from "@/lib/email";
+import { authRateLimit } from "@/lib/auth-rate-limit";
 import { loginSchema } from "../schemas";
 
 const OTP_TTL_MS = 10 * 60 * 1000;
@@ -18,6 +19,34 @@ export interface LoginState {
   /** Set when the user's email is unconfirmed — UI shows "verify your email"
    *  with a link to /verify?email=…&purpose=register. */
   needsVerification?: { email: string };
+}
+
+interface AuthUserSummary {
+  id: string;
+  email: string | null;
+  email_confirmed_at: string | null;
+  user_metadata: Record<string, unknown>;
+}
+
+async function findUserByEmail(
+  admin: ReturnType<typeof createServiceSupabase>,
+  email: string,
+): Promise<AuthUserSummary | null> {
+  const { data, error } = await admin.rpc("find_user_by_email", {
+    p_email: email.toLowerCase().trim(),
+  });
+  if (error) {
+    console.error("[Aimlo login] find_user_by_email RPC failed:", error.message);
+    return null;
+  }
+  if (!data || (Array.isArray(data) && data.length === 0)) return null;
+  const u = Array.isArray(data) ? data[0] : data;
+  return {
+    id: u.id,
+    email: u.email,
+    email_confirmed_at: u.email_confirmed_at,
+    user_metadata: (u.raw_user_meta_data ?? {}) as Record<string, unknown>,
+  };
 }
 
 export async function loginAction(
@@ -35,7 +64,14 @@ export async function loginAction(
     return { ok: false, error: "E-posta/kullanıcı adı ve şifre gerekli", values: echo };
   }
 
+  // Rate-limit per (identifier, IP). 8 / minute — kills bots without
+  // blocking real users who mistype once.
   const id = parsed.data.identifier.trim().toLowerCase();
+  const rl = await authRateLimit("login", id);
+  if (rl.blocked) {
+    return { ok: false, error: rl.error, values: echo };
+  }
+
   const password = parsed.data.password;
   const isEmail = id.includes("@");
 
@@ -64,6 +100,7 @@ export async function loginAction(
       return { ok: false, error: "Bir şey ters gitti. Lütfen tekrar dene.", values: echo };
     }
     if (!data) {
+      // Same generic error as bad-password to avoid registered-user enumeration.
       return { ok: false, error: "Geçersiz e-posta veya şifre", values: echo };
     }
     email = (data as string).toLowerCase();
@@ -76,23 +113,16 @@ export async function loginAction(
 
   if (signinErr) {
     const msg = signinErr.message.toLowerCase();
-    // Email not confirmed — redirect user through OTP verify flow.
+    // Email not confirmed — re-issue OTP and bounce to /verify.
     if (msg.includes("email not confirmed") || msg.includes("not confirmed")) {
-      // Re-issue an OTP so they can verify and proceed.
       try {
         const code = generateOtp();
         const hash = hashOtp(code, email);
-
-        // Find user to update OTP metadata.
-        const { data: list } = await admin.auth.admin.listUsers({
-          page: 1,
-          perPage: 200,
-        });
-        const user = list?.users.find((u) => u.email?.toLowerCase() === email);
-        if (user) {
-          await admin.auth.admin.updateUserById(user.id, {
+        const u = await findUserByEmail(admin, email);
+        if (u) {
+          await admin.auth.admin.updateUserById(u.id, {
             user_metadata: {
-              ...user.user_metadata,
+              ...u.user_metadata,
               otp: {
                 hash,
                 expiresAt: Date.now() + OTP_TTL_MS,
@@ -142,8 +172,7 @@ export async function loginAction(
     try {
       const code = generateOtp();
       const hash = hashOtp(code, email);
-      const { data: list } = await admin.auth.admin.listUsers({ page: 1, perPage: 200 });
-      const u = list?.users.find((x) => x.email?.toLowerCase() === email);
+      const u = await findUserByEmail(admin, email);
       if (u) {
         await admin.auth.admin.updateUserById(u.id, {
           user_metadata: {

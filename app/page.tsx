@@ -2893,273 +2893,22 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
   );
 }
 /* ══════════════════════════════════════════════════════════
-   AUTH SCREEN — profiles upsert + username login (ilike)
+   UnauthRedirect — sends unauthenticated visitors to /login or /register
+   in a useEffect (NOT during render — that races with cookie hydration
+   and re-fires on every render).
    ══════════════════════════════════════════════════════════ */
-function AuthScreen({
-  lang,
-  onAuth,
-  initialMode,
-  onBackToLanding,
-}: {
-  lang: Lang;
-  onAuth: (user: User) => void;
-  initialMode: AuthMode;
-  onBackToLanding: () => void;
-}) {
-  const [mode, setMode] = useState<AuthMode>(initialMode);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [username, setUsername] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [checkEmail, setCheckEmail] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
-  const al = t[lang];
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError("");
-    // Client-side email format check — prevents unnecessary Supabase calls & rate limits
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (mode === "register" && !emailRegex.test(email.trim())) {
-      setError(
-        lang === "tr"
-          ? "Geçerli bir e-posta adresi girin"
-          : "Please enter a valid email address",
-      );
-      return;
-    }
-    if (mode === "register" && username.trim().length < 3) {
-      setError(
-        lang === "tr"
-          ? "Kullanıcı adı en az 3 karakter olmalı"
-          : "Username must be at least 3 characters",
-      );
-      return;
-    }
-    if (mode === "register" && password.length < 6) {
-      setError(
-        lang === "tr"
-          ? "Şifre en az 6 karakter olmalı"
-          : "Password must be at least 6 characters",
-      );
-      return;
-    }
-    setLoading(true);
-    try {
-      if (mode === "register") {
-        if (password !== passwordConfirm) {
-          setError(al.authPasswordMismatch);
-          setLoading(false);
-          return;
-        }
-        // Check username availability before signup
-        const usernameAvailable = await checkUsernameAvailable(username);
-        if (!usernameAvailable) {
-          setError(
-            lang === "tr"
-              ? "Bu kullanıcı adı zaten alınmış"
-              : "This username is already taken",
-          );
-          setLoading(false);
-          return;
-        }
-        const { data, error: err } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            data: {
-              first_name: firstName,
-              last_name: lastName,
-              username,
-              display_name: `${firstName} ${lastName}`,
-            },
-          },
-        });
-        if (err) {
-          setError(localizeAuthError(err.message, lang));
-          setLoading(false);
-          return;
-        }
-        // Create profile — notify user if it fails
-        if (data.user) {
-          const profileResult = await upsertProfile(data.user.id, {
-            username,
-            email,
-            first_name: firstName,
-            last_name: lastName,
-          });
-          if (!profileResult.ok) {
-            console.warn(
-              "[Aimlo] Profile creation failed:",
-              profileResult.error,
-            );
-            // Non-blocking warning — user can still use email login
-            setError(
-              lang === "tr"
-                ? "Hesap oluşturuldu ancak profil kaydedilemedi. Kullanıcı adı ile giriş çalışmayabilir."
-                : "Account created but profile could not be saved. Username login may not work.",
-            );
-            // Don't block — continue with auth flow after brief display
-          }
-        }
-        if (data.user && !data.session) {
-          setCheckEmail(true);
-          setLoading(false);
-          return;
-        }
-        if (data.user && data.session) onAuth(data.user);
-      } else {
-        let loginEmail = email.trim();
-        // Username login: secure RPC lookup (SECURITY DEFINER function)
-        if (!loginEmail.includes("@")) {
-          const { data: foundEmail, error: rpcError } = await supabase
-            .rpc("lookup_email_by_username", {
-              lookup_username: loginEmail.toLowerCase(),
-            });
-          if (rpcError || !foundEmail) {
-            setError(localizeAuthError("Username not found", lang));
-            setLoading(false);
-            return;
-          }
-          loginEmail = foundEmail as string;
-        }
-        const { data, error: err } = await supabase.auth.signInWithPassword({
-          email: loginEmail,
-          password,
-        });
-        if (err) {
-          setError(localizeAuthError(err.message, lang));
-          setLoading(false);
-          return;
-        }
-        if (data.user) onAuth(data.user);
-      }
-    } catch {
-      setError(al.authError);
-    }
-    setLoading(false);
-  }
-  if (checkEmail)
-    return (
-      <main className="min-h-screen bg-[#030711] flex items-center justify-center px-4">
-        <AmbientBg />
-        <div className="relative z-10 w-full max-w-sm space-y-8 text-center animate-slide-up-big">
-          <img src="/aimlo-logo.png?v=3" alt="AIMLO" style={{ height: 34, width: 'auto' }} draggable={false} className="mx-auto opacity-30" />
-          <div className="card-glow rounded-2xl p-10 space-y-6">
-            <div className="relative mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#FF4655]/[0.06] border border-[#FF4655]/15">
-              <span className="text-3xl">✉️</span>
-              <span className="absolute inset-0 rounded-2xl animate-ping bg-[#FF4655]/[0.05]" style={{ animationDuration: '2s' }} />
-            </div>
-            <p className="text-sm text-neutral-300 leading-relaxed">{al.authCheckEmail}</p>
-            <button onClick={() => { setCheckEmail(false); setMode("login"); }} className="btn-ghost w-full rounded-xl py-3.5 text-sm">
-              {al.authLogin}
-            </button>
-          </div>
-        </div>
-      </main>
-    );
-
-  const inputCls = "w-full rounded-xl border border-white/[0.06] bg-[#0a0f1e]/90 px-4 py-4 text-sm text-white outline-none transition-all duration-300 focus:border-[#FF4655]/25 focus:ring-2 focus:ring-[#FF4655]/10 focus:shadow-[0_0_20px_rgba(255,70,85,0.05)] placeholder-neutral-600";
-
+function UnauthRedirect({ mode }: { mode: AuthMode }) {
+  useEffect(() => {
+    const target = mode === "register" ? "/register" : "/login";
+    window.location.replace(target);
+  }, [mode]);
   return (
-    <main className="min-h-screen bg-[#030711] relative flex items-center justify-center px-4 py-12 overflow-hidden">
-      <AmbientBg />
-      {/* Decorative orbiting rings */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none opacity-30">
-        <div className="absolute inset-0 rounded-full border border-[#FF4655]/[0.04] animate-rotate-slow" />
-        <div className="absolute inset-16 rounded-full border border-[#4D7CFF]/[0.03] animate-rotate-slow" style={{ animationDirection: 'reverse', animationDuration: '30s' }} />
-      </div>
-
-      <div className="relative z-10 w-full max-w-[440px] space-y-8 animate-slide-up-big">
-        <div className="text-center space-y-5">
-          <button onClick={onBackToLanding} className="mx-auto flex items-center gap-2 text-[12px] text-neutral-600 transition hover:text-[#FF6B77] hover-underline">
-            ← {al.back}
-          </button>
-          <img src="/aimlo-logo.png?v=3" alt="AIMLO" style={{ height: 34, width: 'auto' }} draggable={false} className="mx-auto opacity-30" />
-          <div>
-            <h2 className="text-3xl font-black text-white tracking-tight">
-              {mode === "login" ? al.authLogin : al.authRegister}
-            </h2>
-            <p className="mt-2 text-sm text-neutral-500">{al.tagline}</p>
-          </div>
-        </div>
-
-        <div className="card-glow rounded-2xl p-7 sm:p-9">
-          {/* Top accent line */}
-          <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#FF4655]/20 to-transparent" />
-          <form onSubmit={handleSubmit} className="space-y-5">
-            {mode === "register" && (
-              <>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35">{al.authFirstName}</label>
-                    <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="" required className={inputCls} />
-                  </div>
-                  <div>
-                    <label className="mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35">{al.authLastName}</label>
-                    <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="" required className={inputCls} />
-                  </div>
-                </div>
-                <div>
-                  <label className="mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35">{al.authUsername}</label>
-                  <input type="text" value={username} onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ""))} placeholder="" required className={inputCls} />
-                </div>
-              </>
-            )}
-            <div>
-              <label className="mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35">{mode === "login" ? al.authEmailOrUsername : al.authEmail}</label>
-              <input type={mode === "register" ? "email" : "text"} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="" required className={inputCls} />
-            </div>
-            <div>
-              <label className="mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35">{al.authPassword}</label>
-              <div className="relative">
-                <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="" required minLength={6} className={inputCls} style={{ paddingRight: 44 }} />
-                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-600 hover:text-[#FF6B77] transition" tabIndex={-1}>
-                  {showPassword ? "🙈" : "👁️"}
-                </button>
-              </div>
-            </div>
-            {mode === "register" && (
-              <div>
-                <label className="mb-2 block text-[9px] font-black uppercase tracking-[0.2em] text-[#FF4655]/35">{al.authPasswordConfirm}</label>
-                <div className="relative">
-                  <input type={showPasswordConfirm ? "text" : "password"} value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} placeholder="" required minLength={6} className={inputCls} style={{ paddingRight: 44 }} />
-                  <button type="button" onClick={() => setShowPasswordConfirm(!showPasswordConfirm)} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-600 hover:text-[#FF6B77] transition" tabIndex={-1}>
-                    {showPasswordConfirm ? "🙈" : "👁️"}
-                  </button>
-                </div>
-              </div>
-            )}
-            {error && (
-              <div className="rounded-xl bg-[#FF3D71]/[0.06] border border-[#FF3D71]/15 px-4 py-3 animate-scale-in">
-                <p className="text-xs text-[#FF3D71] font-semibold">{error}</p>
-              </div>
-            )}
-            <button type="submit" disabled={loading} className="btn-neon w-full rounded-xl py-4.5 text-sm mt-3">
-              {loading ? (
-                <span className="flex items-center justify-center gap-2">
-                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#030711]/30 border-t-[#030711]" />
-                  {al.authLoading}
-                </span>
-              ) : mode === "login" ? al.authLogin : al.authRegister}
-            </button>
-          </form>
-        </div>
-
-        <p className="text-center text-[13px] text-neutral-500">
-          {mode === "login" ? al.authNoAccount : al.authHasAccount}{" "}
-          <button type="button" onClick={() => { setMode(mode === "login" ? "register" : "login"); setError(""); }} className="text-[#FF4655] hover:text-[#FF6B77]/70 transition font-black hover-underline">
-            {mode === "login" ? al.authRegister : al.authLogin}
-          </button>
-        </p>
-      </div>
+    <main className={`${ds.pageBg} flex items-center justify-center`}>
+      <div className="h-6 w-6 animate-spin rounded-full border-2 border-[#FF4655] border-t-transparent" />
     </main>
   );
 }
+
 /* ══════════════════════════════════════════════════════════
    MAIN APP — render-time setScreen FIXED
    ══════════════════════════════════════════════════════════ */
@@ -3836,15 +3585,10 @@ export default function Home() {
     );
   if (!user) {
     // Legacy AuthScreen retired — bounce unauthenticated visitors to the
-    // /login route. /login itself handles "no account yet → /register".
-    if (typeof window !== "undefined") {
-      window.location.href = authMode === "register" ? "/register" : "/login";
-    }
-    return (
-      <main className={`${ds.pageBg} flex items-center justify-center`}>
-        <div className="h-6 w-6 animate-spin rounded-full border-2 border-[#FF4655] border-t-transparent" />
-      </main>
-    );
+    // /login route via Next router (the redirect runs in an effect to
+    // avoid render-time side effects, race with cookie hydration, and
+    // re-fire on every render).
+    return <UnauthRedirect mode={authMode} />;
   }
   // useEffect redirects "lang" screen — show loading spinner briefly
   if (screen === "lang")
