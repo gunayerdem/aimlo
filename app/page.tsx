@@ -2893,15 +2893,17 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
   );
 }
 /* ══════════════════════════════════════════════════════════
-   UnauthRedirect — sends unauthenticated visitors to /login or /register
-   in a useEffect (NOT during render — that races with cookie hydration
-   and re-fires on every render).
+   UnauthRedirect — sends unauthenticated visitors to /login.
+   useEffect (NOT render-time — that races with cookie hydration and
+   re-fires every render). Always /login because the landing-page CTAs
+   direct-link to /register and /login already; this fallback only fires
+   when the user is on `/` with no session, and /login already has a
+   "Hesabın yok mu? Kayıt Ol" link to bridge to registration.
    ══════════════════════════════════════════════════════════ */
-function UnauthRedirect({ mode }: { mode: AuthMode }) {
+function UnauthRedirect() {
   useEffect(() => {
-    const target = mode === "register" ? "/register" : "/login";
-    window.location.replace(target);
-  }, [mode]);
+    window.location.replace("/login");
+  }, []);
   return (
     <main className={`${ds.pageBg} flex items-center justify-center`}>
       <div className="h-6 w-6 animate-spin rounded-full border-2 border-[#FF4655] border-t-transparent" />
@@ -3588,7 +3590,7 @@ export default function Home() {
     // /login route via Next router (the redirect runs in an effect to
     // avoid render-time side effects, race with cookie hydration, and
     // re-fire on every render).
-    return <UnauthRedirect mode={authMode} />;
+    return <UnauthRedirect />;
   }
   // useEffect redirects "lang" screen — show loading spinner briefly
   if (screen === "lang")

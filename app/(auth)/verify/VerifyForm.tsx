@@ -56,11 +56,19 @@ export function VerifyForm({
   ]);
   const code = chars.join("");
 
-  // Resend countdown timer (60s after each resend)
+  // Resend countdown timer (60s after each successful resend).
+  // Tracked off the action's nonce-equivalent (we trip a counter every time
+  // resendState identity changes AND it carries `resent: true`). Without the
+  // ref-counter, a second resend in the same session wouldn't reset the
+  // cooldown because resendState.resent stayed true and the dep didn't flip.
   const [resendCooldown, setResendCooldown] = useState(0);
+  const lastResendStateRef = useRef<ResendState | null>(null);
   useEffect(() => {
-    if (resendState.resent) setResendCooldown(60);
-  }, [resendState.resent]);
+    if (resendState.resent && resendState !== lastResendStateRef.current) {
+      lastResendStateRef.current = resendState;
+      setResendCooldown(60);
+    }
+  }, [resendState]);
   useEffect(() => {
     if (resendCooldown <= 0) return;
     const t = setTimeout(() => setResendCooldown((c) => c - 1), 1000);

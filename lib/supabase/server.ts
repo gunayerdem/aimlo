@@ -40,7 +40,19 @@ export async function createServerSupabase(): Promise<SupabaseClient> {
       setAll(cookiesToSet) {
         try {
           for (const { name, value, options } of cookiesToSet) {
-            cookieStore.set(name, value, options);
+            // HARDEN auth cookies: @supabase/ssr defaults to
+            // { httpOnly: false, sameSite: "lax" } which makes the
+            // session token JS-readable. Combined with our prod CSP
+            // permitting `script-src 'unsafe-inline'` for RSC hydration,
+            // any XSS would exfiltrate the session in one line. Override
+            // before write — applies to BOTH session cookies (sb-*) and
+            // any incidental Supabase cookies we set.
+            cookieStore.set(name, value, {
+              ...options,
+              httpOnly: true,
+              secure: process.env.NODE_ENV === "production",
+              sameSite: "lax",
+            });
           }
         } catch {
           // Server Components cannot mutate cookies. Route handlers /

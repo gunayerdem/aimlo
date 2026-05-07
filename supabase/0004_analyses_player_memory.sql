@@ -103,7 +103,8 @@ create policy "player_memory_owner_delete"
   on public.player_memory for delete
   using (auth.uid() = user_id);
 
--- updated_at auto-bump
+-- updated_at auto-bump (idempotent — DROP TRIGGER IF EXISTS for re-runs).
+drop trigger if exists player_memory_set_updated_at on public.player_memory;
 create trigger player_memory_set_updated_at
   before update on public.player_memory
   for each row execute function public.tg_set_updated_at();

@@ -30,7 +30,7 @@ export function ForgotForm() {
         </div>
         <p className="text-sm text-neutral-300 leading-relaxed text-center">
           Eğer bu e-posta sistemde kayıtlıysa, sıfırlama linkini gönderdik.
-          Gelen kutunu kontrol et — birkaç dakika içinde gelmezse spam'e bak.
+          Gelen kutunu kontrol et — birkaç dakika içinde gelmezse spam&apos;e bak.
         </p>
       </div>
     );

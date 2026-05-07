@@ -90,20 +90,27 @@ export async function verifyAction(
     return { ok: false, error: "Sunucu yapılandırma hatası. Lütfen biraz sonra dene." };
   }
 
+  // Uniform error message for "user missing", "no active OTP", "OTP
+  // expired", "attempts maxed" — all the cases where we don't have a
+  // valid code to compare against. Distinct messages would leak whether
+  // the email is registered, even after rate-limit (text content is the
+  // oracle). User flow: any of these → user clicks "Yeni kod gönder".
+  const GENERIC_INVALID = "Kod geçersiz veya süresi dolmuş. Yeni kod iste.";
+
   const user = await findUserByEmail(admin, email);
   if (!user) {
-    return { ok: false, error: "Bu e-posta için aktif bir kayıt yok. Önce kayıt ol." };
+    return { ok: false, error: GENERIC_INVALID };
   }
 
   const otpMeta = (user.metadata.otp ?? null) as OtpMeta | null;
   if (!otpMeta || typeof otpMeta.hash !== "string") {
-    return { ok: false, error: "Aktif kod yok. Yeni kod iste." };
+    return { ok: false, error: GENERIC_INVALID };
   }
   if (Date.now() > otpMeta.expiresAt) {
-    return { ok: false, error: "Kodun süresi doldu. Yeni kod iste." };
+    return { ok: false, error: GENERIC_INVALID };
   }
   if (otpMeta.attempts >= MAX_ATTEMPTS) {
-    return { ok: false, error: "Çok fazla yanlış deneme. Yeni kod iste." };
+    return { ok: false, error: GENERIC_INVALID };
   }
 
   let candidateHash: string;
@@ -185,9 +192,13 @@ export async function resendAction(
     return { ok: false, error: "Sunucu yapılandırma hatası" };
   }
 
+  // Uniform success — never leak "this email isn't registered". If the user
+  // doesn't exist, we silently no-op and pretend we sent (same response
+  // the caller would see for a registered email). Combined with the
+  // resend rate-limit, this prevents email enumeration via the form.
   const user = await findUserByEmail(admin, email);
   if (!user) {
-    return { ok: false, error: "Bu e-posta için kayıt bulunamadı" };
+    return { ok: true, resent: true };
   }
 
   const code = generateOtp();

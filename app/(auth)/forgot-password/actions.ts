@@ -30,27 +30,39 @@ export async function forgotAction(
 
   const { email } = parsed.data;
 
+  // Pad total response time to ~600ms regardless of code path. Prevents
+  // timing-based registered-vs-not enumeration: rate-limited path used to
+  // return instantly while the actual reset-email path took ~300-500ms,
+  // creating a side channel even though both responses looked identical.
+  const t0 = Date.now();
+  const TARGET_MS = 600;
+
   // Rate-limit per (email, IP). 3 / 10min — discourages mass reset-email
-  // floods to a victim's inbox + email-bombing as a DoS.
+  // floods to a victim's inbox + email-bombing as a DoS. We do NOT short-
+  // circuit on rate-limit: still wait the full window before responding.
   const rl = await authRateLimit("forgot", email);
-  if (rl.blocked) {
-    // Still respond with the "sent" UI to avoid registered-user enumeration
-    // (we always show the green check below regardless). Just log and exit
-    // without actually sending.
+
+  if (!rl.blocked) {
+    try {
+      const supabase = await createServerSupabase();
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${SITE_URL}/auth/callback?next=/reset-password`,
+      });
+      if (error) {
+        console.error("[Aimlo forgot] resetPasswordForEmail failed:", error.message);
+      }
+    } catch (e) {
+      console.error("[Aimlo forgot] exception:", (e as Error).message);
+    }
+  } else {
     console.warn("[Aimlo forgot] rate-limited:", email);
-    return { ok: true, sent: true, values: raw };
   }
 
-  const supabase = await createServerSupabase();
-
-  const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${SITE_URL}/auth/callback?next=/reset-password`,
-  });
-
-  // Always show success message — don't reveal whether email exists.
-  if (error) {
-    console.error("[Aimlo forgot] resetPasswordForEmail failed:", error.message);
+  const elapsed = Date.now() - t0;
+  if (elapsed < TARGET_MS) {
+    await new Promise((r) => setTimeout(r, TARGET_MS - elapsed));
   }
 
+  // Always show success — never reveal whether the email is registered.
   return { ok: true, sent: true, values: raw };
 }

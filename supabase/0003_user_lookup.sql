@@ -21,6 +21,7 @@ returns table (
   raw_user_meta_data jsonb
 )
 language plpgsql
+stable
 security definer
 set search_path = public, auth
 as $$

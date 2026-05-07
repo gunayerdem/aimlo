@@ -59,7 +59,13 @@ export async function GET(request: NextRequest) {
       },
       setAll(cookiesToSet) {
         for (const { name, value, options } of cookiesToSet) {
-          cookieStore.set(name, value, options);
+          // Harden — see lib/supabase/server.ts for rationale.
+          cookieStore.set(name, value, {
+            ...options,
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+          });
         }
       },
     },

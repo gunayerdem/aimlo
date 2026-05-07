@@ -291,7 +291,7 @@ export function RegisterForm() {
             >
               Gizlilik Politikası
             </a>
-            'nı okudum, onaylıyorum.
+            &apos;nı okudum, onaylıyorum.
           </span>
         </label>
         {state.fieldErrors?.kvkk && (
