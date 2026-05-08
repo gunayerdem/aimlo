@@ -37,8 +37,9 @@ begin
       -- safety net for a true concurrent insert).
       raise warning '[Aimlo trigger] profile insert skipped (unique violation): user=%, username=%',
         new.id, new.raw_user_meta_data->>'username';
-    when others then
-      raise warning '[Aimlo trigger] profile insert failed (%): user=%', sqlerrm, new.id;
+    -- Intentionally NO `when others` — NOT NULL / CHECK / FK violations must
+    -- bubble up so the auth.users INSERT rolls back. Otherwise an inconsistent
+    -- DB state (auth user with no profile row) would silently ship.
   end;
   return new;
 end;
