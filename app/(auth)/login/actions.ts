@@ -16,9 +16,6 @@ export interface LoginState {
   ok: boolean;
   error?: string;
   values?: { identifier?: string };
-  /** Set when the user's email is unconfirmed — UI shows "verify your email"
-   *  with a link to /verify?email=…&purpose=register. */
-  needsVerification?: { email: string };
 }
 
 interface AuthUserSummary {
@@ -136,12 +133,18 @@ export async function loginAction(
       } catch (e) {
         console.error("[Aimlo login] re-issue OTP on unverified login failed:", (e as Error).message);
       }
+      // SOFTENED ENUMERATION: don't return `needsVerification: { email }`
+      // — that flag was a clean enumeration oracle ("yes, you typed the
+      // right password for an existing-but-unverified account"). We still
+      // re-issue the OTP silently so a real user has a fresh code in
+      // their inbox; the response message is generic enough that an
+      // attacker who guessed the password can't distinguish "wrong
+      // password" from "right password but unverified email" without
+      // checking the user's inbox (which they can't).
       return {
         ok: false,
-        error:
-          "E-posta henüz doğrulanmamış. E-postana yeni bir kod gönderdik — kayıt akışını tamamla.",
+        error: "Geçersiz e-posta veya şifre",
         values: echo,
-        needsVerification: { email },
       };
     }
     if (msg.includes("invalid") || msg.includes("credentials")) {
@@ -190,12 +193,13 @@ export async function loginAction(
     } catch (e) {
       console.error("[Aimlo login] gate OTP issue:", (e as Error).message);
     }
+    // Same softened response as above — no needsVerification flag, no
+    // distinguishable success path. Generic error keeps the response
+    // shape symmetric with "wrong password".
     return {
       ok: false,
-      error:
-        "E-postan henüz doğrulanmamış. Yeni bir kod gönderdik — kayıt akışını tamamla.",
+      error: "Geçersiz e-posta veya şifre",
       values: echo,
-      needsVerification: { email },
     };
   }
 

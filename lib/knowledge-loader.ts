@@ -79,12 +79,30 @@ interface LoadOptions {
 }
 
 // ── File loading helpers ──────────────────────────────────
+//
+// In-process cache. KB markdown files are immutable for the lifetime of a
+// serverless instance — they're shipped via outputFileTracingIncludes and
+// never change between requests. Without this cache every AI request
+// re-reads 25-140 KB through fs.readFileSync, which adds ~5-20 ms per
+// request and gets multiplied by every agent/map/contextual file the
+// vision/feedback/report routes touch.
+//
+// Cache key = relativePath (already canonical). Negative results (file
+// missing) are also cached as empty string to avoid repeated existsSync
+// checks on the hot path. Cache lives for the process lifetime — Vercel
+// recycles serverless instances within minutes anyway, so no manual TTL.
+const FILE_CACHE = new Map<string, string>();
 
 function loadFile(relativePath: string): string {
+  const cached = FILE_CACHE.get(relativePath);
+  if (cached !== undefined) return cached;
   try {
     const fullPath = path.join(KNOWLEDGE_DIR, relativePath);
-    return fs.readFileSync(fullPath, "utf-8");
+    const content = fs.readFileSync(fullPath, "utf-8");
+    FILE_CACHE.set(relativePath, content);
+    return content;
   } catch {
+    FILE_CACHE.set(relativePath, "");
     return "";
   }
 }

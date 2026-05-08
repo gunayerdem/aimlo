@@ -232,23 +232,42 @@ export function rewriteUnsafeClaims(
   }
 
   if (validation.rewriteLevel === 3) {
-    // No memory support — strip ALL historical and repetition claims
+    // No memory support — strip ALL historical and repetition claims.
+    // Detect language from the (already-mostly-cleaned) result so we
+    // pick a same-language replacement instead of leaving an English
+    // sentence with "bu round'da" Turkish stuffed in.
+    const isTr = /[şçğıöü]|round'da|maç|tur|round'lar/i.test(result);
+    const stripWith = isTr ? "bu round'da" : "this round";
+
     for (const keyword of REPETITION_KEYWORDS) {
       if (result.toLowerCase().includes(keyword)) {
-        result = result.replace(new RegExp(keyword, "gi"), "bu round'da");
+        result = result.replace(new RegExp(keyword, "gi"), stripWith);
       }
     }
 
-    // Remove count claims entirely
+    // Remove count claims entirely (TR + EN forms).
     if (claims.claimedCount !== null) {
-      const countRegex = new RegExp(`${claims.claimedCount}\\s*kez`, "gi");
-      result = result.replace(countRegex, "");
+      const ct = claims.claimedCount;
+      const countPatterns = [
+        new RegExp(`${ct}\\s*kez`, "gi"),
+        new RegExp(`${ct}\\s*defa`, "gi"),
+        new RegExp(`${ct}\\s*round(s)?\\s*(in\\s*a\\s*row|straight|consecutive)?`, "gi"),
+        new RegExp(`${ct}\\s*time(s)?`, "gi"),
+        new RegExp(`${ct}\\s*death(s)?`, "gi"),
+        new RegExp(`${ct}\\s*match(es)?\\s*in\\s*a\\s*row`, "gi"),
+      ];
+      for (const re of countPatterns) result = result.replace(re, "");
     }
 
-    // Remove window claims
+    // Remove window claims (TR + EN).
     if (claims.claimedWindow !== null) {
-      const windowRegex = new RegExp(`son\\s+${claims.claimedWindow}\\s*(round|maç)`, "gi");
-      result = result.replace(windowRegex, "");
+      const w = claims.claimedWindow;
+      const windowPatterns = [
+        new RegExp(`son\\s+${w}\\s*(round|maç)`, "gi"),
+        new RegExp(`last\\s+${w}\\s*(round|match)(es|s)?`, "gi"),
+        new RegExp(`past\\s+${w}\\s*(round|match)(es|s)?`, "gi"),
+      ];
+      for (const re of windowPatterns) result = result.replace(re, "");
     }
 
     // Remove "pattern" word if no pattern proven

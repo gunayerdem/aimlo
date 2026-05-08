@@ -102,16 +102,12 @@ export function LoginForm() {
         </div>
 
         {state.error && (
-          <div className="rounded-xl bg-[#FF3D71]/[0.06] border border-[#FF3D71]/15 px-4 py-3 animate-scale-in">
+          <div
+            role="alert"
+            aria-live="polite"
+            className="rounded-xl bg-[#FF3D71]/[0.06] border border-[#FF3D71]/15 px-4 py-3 animate-scale-in"
+          >
             <p className="text-xs text-[#FF3D71] font-semibold">{state.error}</p>
-            {state.needsVerification && (
-              <Link
-                href={`/verify?email=${encodeURIComponent(state.needsVerification.email)}&purpose=register`}
-                className="mt-2 inline-block text-[12px] text-[#FF4655] font-black hover:text-[#FF6B77]/70 hover-underline"
-              >
-                E-postanı doğrula →
-              </Link>
-            )}
           </div>
         )}
 
