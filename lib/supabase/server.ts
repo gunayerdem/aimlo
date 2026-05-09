@@ -40,16 +40,18 @@ export async function createServerSupabase(): Promise<SupabaseClient> {
       setAll(cookiesToSet) {
         try {
           for (const { name, value, options } of cookiesToSet) {
-            // HARDEN auth cookies: @supabase/ssr defaults to
-            // { httpOnly: false, sameSite: "lax" } which makes the
-            // session token JS-readable. Combined with our prod CSP
-            // permitting `script-src 'unsafe-inline'` for RSC hydration,
-            // any XSS would exfiltrate the session in one line. Override
-            // before write — applies to BOTH session cookies (sb-*) and
-            // any incidental Supabase cookies we set.
+            // NOTE: We intentionally DO NOT set httpOnly: true here.
+            // @supabase/ssr's createBrowserClient reads the auth token
+            // from document.cookie on the client to hydrate the session
+            // — making the cookie httpOnly silently breaks login (server
+            // sets it, client can't see it, app renders as logged-out).
+            // Supabase's threat model assumes JS-readable cookies and
+            // mitigates with: short JWT TTL (1h), rotating refresh
+            // tokens, and PKCE on OAuth/magic-link. We layer secure +
+            // sameSite=lax on top for transport + CSRF protection, plus
+            // CSP and React 19's default escape to harden against XSS.
             cookieStore.set(name, value, {
               ...options,
-              httpOnly: true,
               secure: process.env.NODE_ENV === "production",
               sameSite: "lax",
             });

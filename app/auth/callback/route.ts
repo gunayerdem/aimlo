@@ -59,10 +59,11 @@ export async function GET(request: NextRequest) {
       },
       setAll(cookiesToSet) {
         for (const { name, value, options } of cookiesToSet) {
-          // Harden — see lib/supabase/server.ts for rationale.
+          // See lib/supabase/server.ts — auth cookie cannot be httpOnly
+          // because the browser client reads it via document.cookie to
+          // hydrate the session.
           cookieStore.set(name, value, {
             ...options,
-            httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "lax",
           });
