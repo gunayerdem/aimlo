@@ -21,22 +21,24 @@ const STRICT_RATE_LIMIT = process.env.STRICT_RATE_LIMIT === "true";
 
 // ── Rate limiting configuration ──
 
-type RouteKey = "feedback" | "report" | "vision" | "insight" | "default";
+type RouteKey = "feedback" | "report" | "vision" | "insight" | "telemetry" | "default";
 
 const RATE_LIMITS: Record<RouteKey, { window: number; max: number }> = {
-  feedback: { window: 60, max: 15 }, // 15/min
-  report:   { window: 60, max: 5 },  // 5/min (more expensive)
-  vision:   { window: 60, max: 4 },  // 4/min (vision is $0.015+/call — keep tight)
-  insight:  { window: 60, max: 10 }, // 10/min
-  default:  { window: 60, max: 20 },
+  feedback:  { window: 60, max: 15 }, // 15/min
+  report:    { window: 60, max: 5 },  // 5/min (more expensive)
+  vision:    { window: 60, max: 4 },  // 4/min (vision is $0.015+/call — keep tight)
+  insight:   { window: 60, max: 10 }, // 10/min
+  telemetry: { window: 60, max: 60 }, // 60/min — generous, telemetry must not eat user's AI quota
+  default:   { window: 60, max: 20 },
 };
 
 // Daily quotas. Routes not listed have no daily cap (only per-minute).
 const DAILY_QUOTA: Partial<Record<RouteKey, number>> = {
-  feedback: 200,
-  report:   30,
-  vision:   30,  // vision is most expensive — tight daily cap
-  insight:  60,
+  feedback:  200,
+  report:    30,
+  vision:    30,  // vision is most expensive — tight daily cap
+  insight:   60,
+  telemetry: 1000, // generous — desktop batches every 24h, but instrumentation can fire often during a long session
 };
 
 // In-memory fallback (dev only — see prod-strictness logic in checkRateLimit).
