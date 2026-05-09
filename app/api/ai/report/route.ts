@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
 import { verifyAuthAndRateLimit } from "@/lib/api-auth";
 import { sanitizePromptInput } from "@/lib/prompt-safety";
 import { checkOutputQuality, scoreFields } from "@/evals/generic-detector";
@@ -8,6 +9,7 @@ import { generateImprovementPlan } from "@/lib/improvement-plan";
 import { loadPlayerMemory, updatePlayerMemory, buildMemoryContext } from "@/lib/player-memory";
 import { loadKnowledge } from "@/lib/knowledge-loader";
 import { buildPolicyBlock } from "@/lib/ai-policy";
+import { isUuidV4 } from "@/lib/uuid";
 import type { RoundData as EngineRoundData } from "@/types";
 
 /**
@@ -54,6 +56,21 @@ type ReportRequest = {
   rounds: RoundData[];
   lang: "tr" | "en";
   score: { yours: string; enemy: string };
+  /**
+   * Optional client-supplied UUID v4. The desktop SQLite write-behind
+   * queue uses it to make match POSTs idempotent — a duplicate matchId
+   * means "already saved" and the row is removed from the queue. Web
+   * client-side INSERT (saveReportToDb) doesn't send this; it lets the
+   * DB default kick in. Server-side INSERT only fires when
+   * `persistOnServer === true` so the two write paths don't collide.
+   */
+  matchId?: string;
+  /**
+   * When true, the route writes the report into `analyses` itself
+   * (RLS-bound to the authenticated user via the Bearer token). The web
+   * UI does its own client-side INSERT and leaves this `false`/undef.
+   */
+  persistOnServer?: boolean;
 };
 
 type ReportResponse = {
@@ -71,6 +88,8 @@ type ReportResponse = {
   winPct: number;
   scoreStr: string;
   matchWon: boolean;
+  /** Set when `persistOnServer` was true and the row was inserted (or already present). */
+  savedAnalysisId?: string;
 };
 
 /* ══════════════════════════════════════════════════════════
@@ -203,6 +222,21 @@ function validateRequest(
       deathAngle: typeof r.deathAngle === "string" ? sanitize(r.deathAngle, 30) : undefined,
     }));
 
+  // Optional matchId — if present must be a valid UUID v4. Reject hard
+  // (don't silently drop) so client bugs surface early.
+  let matchId: string | undefined;
+  if (b.matchId !== undefined) {
+    if (!isUuidV4(b.matchId)) {
+      return { valid: false, error: "invalid_match_id" };
+    }
+    matchId = (b.matchId as string).toLowerCase();
+  }
+
+  // Server-side persistence is opt-in. Web UI leaves this off and does its
+  // own client-side INSERT; desktop sets it true so its SQLite write-behind
+  // queue can rely on a single source of truth.
+  const persistOnServer = b.persistOnServer === true;
+
   return {
     valid: true,
     data: {
@@ -225,8 +259,109 @@ function validateRequest(
       rounds,
       lang,
       score: { yours, enemy },
+      matchId,
+      persistOnServer,
     },
   };
+}
+
+/* ══════════════════════════════════════════════════════════
+   SERVER-SIDE PERSISTENCE — opt-in via persistOnServer
+   ══════════════════════════════════════════════════════════ */
+
+/**
+ * Build a Supabase client that inherits the caller's Bearer token so
+ * RLS owner-check applies (analyses_owner_insert policy: auth.uid() =
+ * user_id). We don't use the service-role client here — defense in
+ * depth: even if the route accidentally writes a wrong user_id into
+ * the payload, RLS rejects it.
+ */
+function userScopedSupabase(request: NextRequest) {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+  const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+  const auth = request.headers.get("authorization") ?? "";
+  return createClient(url, anon, {
+    global: { headers: { Authorization: auth } },
+    auth: { autoRefreshToken: false, persistSession: false, detectSessionInUrl: false },
+  });
+}
+
+interface PersistResult {
+  /** "ok" — fresh insert; "conflict" — same matchId already existed (idempotency hit); "error" — anything else. */
+  kind: "ok" | "conflict" | "error";
+  id?: string;
+  message?: string;
+}
+
+async function persistAnalysis(
+  request: NextRequest,
+  userId: string,
+  body: ReportRequest,
+  report: ReportResponse,
+): Promise<PersistResult> {
+  const sb = userScopedSupabase(request);
+
+  // Cheap pre-flight when matchId is supplied: a SELECT short-circuits
+  // duplicate writes without burning a round trip on the AI route's
+  // upstream cost (we already paid for it on this call, but a future
+  // optimisation can move this check in front of the AI call).
+  if (body.matchId) {
+    const { data: existing, error: selErr } = await sb
+      .from("analyses")
+      .select("id")
+      .eq("id", body.matchId)
+      .maybeSingle();
+    if (!selErr && existing?.id) {
+      return { kind: "conflict", id: existing.id };
+    }
+  }
+
+  // Match the legacy column shape used by web's saveReportToDb so the
+  // history loader (rowToReport) keeps working without a migration.
+  const insertPayload: Record<string, unknown> = {
+    user_id: userId,
+    riot_id: body.setup.map,    // legacy: stores map name
+    region: body.setup.agent,    // legacy: stores agent name
+    summary: report.summary,
+    weakness: report.mistake,
+    strength: report.tendencies,
+    focus: report.adjustment,
+    raw_result_json: {
+      map: body.setup.map,
+      agent: body.setup.agent,
+      side: body.setup.side,
+      score: report.scoreStr,
+      won: report.matchWon,
+      winPct: report.winPct,
+      roundsWon: report.won,
+      roundsLost: report.lost,
+      roundsSkipped: report.skipped,
+      survivedCount: report.survivedCount,
+      totalRounds: report.total,
+      rounds: body.rounds,
+      setup: body.setup,
+    },
+  };
+  if (body.matchId) {
+    insertPayload.id = body.matchId;
+  }
+
+  const { data, error } = await sb
+    .from("analyses")
+    .insert(insertPayload)
+    .select("id")
+    .single();
+
+  if (error) {
+    // Postgres UNIQUE violation. Desktop reads this as "already saved,
+    // drop from queue" and we keep the contract by returning the same
+    // matchId the client sent.
+    if (error.code === "23505" && body.matchId) {
+      return { kind: "conflict", id: body.matchId };
+    }
+    return { kind: "error", message: error.message };
+  }
+  return { kind: "ok", id: data?.id };
 }
 
 function isValidAITextFields(
@@ -786,6 +921,35 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: validation.error }, { status: 400 });
     }
 
+    // Cost-aware pre-flight: when the client sets persistOnServer + matchId,
+    // a second POST with the same matchId is already-saved by definition.
+    // Skip the AI call entirely so duplicate desktop retries don't burn
+    // OpenAI credits. Spec: 409 with the existing analysis id; desktop
+    // reads this as "drop from SQLite write-behind queue".
+    if (validation.data.persistOnServer && validation.data.matchId) {
+      try {
+        const sb = userScopedSupabase(request);
+        const { data: existing } = await sb
+          .from("analyses")
+          .select("id")
+          .eq("id", validation.data.matchId)
+          .maybeSingle();
+        if (existing?.id) {
+          return NextResponse.json(
+            { error: "match_already_saved", savedAnalysisId: existing.id },
+            { status: 409 },
+          );
+        }
+      } catch (e) {
+        // Pre-flight lookup is best-effort — fall through to AI + INSERT,
+        // the post-INSERT UNIQUE check is the real source of truth.
+        console.warn(
+          "[AIMLO] Pre-flight match lookup failed:",
+          e instanceof Error ? e.message : "unknown",
+        );
+      }
+    }
+
     const report = await generateAIReport(validation.data, userId);
 
     // Update player memory with match data
@@ -861,6 +1025,28 @@ Sadece düzeltilmiş metni döndür.`;
           }
         }
       } catch { /* refinement failed — keep original */ }
+    }
+
+    // Server-side persistence — opt-in via persistOnServer. The web UI
+    // does its own client-side INSERT (saveReportToDb in app/page.tsx)
+    // and leaves this off, so the two write paths don't double-write.
+    if (validation.data.persistOnServer) {
+      const persist = await persistAnalysis(
+        request,
+        userId,
+        validation.data,
+        report,
+      );
+      if (persist.kind === "ok" || persist.kind === "conflict") {
+        report.savedAnalysisId = persist.id;
+      } else {
+        // Don't fail the response — AI report is still useful and the
+        // client can retry persistence on its own schedule.
+        console.warn(
+          "[AIMLO] Server-side analyses INSERT failed:",
+          persist.message ?? "unknown",
+        );
+      }
     }
 
     return NextResponse.json(report);

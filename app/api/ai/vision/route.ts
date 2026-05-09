@@ -3,6 +3,7 @@ import { verifyAuthAndRateLimit } from "@/lib/api-auth";
 import { realityCheck } from "@/lib/reality-checker";
 import { loadVisionKnowledge } from "@/lib/knowledge-loader";
 import { sanitizePromptInput } from "@/lib/prompt-safety";
+import { isUuidV4 } from "@/lib/uuid";
 
 /**
  * POST /api/ai/vision
@@ -291,6 +292,11 @@ type VisionRequest = {
   healthAtDeath?: number; // HP + shield at death (0-150)
   ultReady?: boolean; // was ultimate ready when player died
   roundTimerAtDeath?: number; // seconds remaining on round timer (0-140)
+  // Match correlation — desktop generates UUID v4 in its SQLite queue so
+  // per-round vision calls + the eventual match-report INSERT all share
+  // the same matchId. Optional; vision itself does NOT persist anything,
+  // it's just validated + logged for debugging round↔match correlation.
+  matchId?: string;
 };
 
 type PatternData = {
@@ -453,6 +459,12 @@ function isValidVisionRequest(obj: unknown): obj is VisionRequest {
     if (isPng && !fmt.includes("png")) return false;
     if (isJpeg && !fmt.includes("jpeg") && !fmt.includes("jpg")) return false;
     if (isWebp && !fmt.includes("webp")) return false;
+  }
+  // matchId optional but if present must be a valid UUID v4. Reject
+  // garbage early so the field can't smuggle prompt-injection text past
+  // the rest of the validation just because it isn't sanitized.
+  if (o.matchId !== undefined && !isUuidV4(o.matchId)) {
+    return false;
   }
   return true;
 }
