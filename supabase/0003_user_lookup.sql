@@ -26,10 +26,19 @@ security definer
 set search_path = public, auth
 as $$
 begin
+  -- auth.users.email is varchar(255) on older Supabase projects; cast to
+  -- text so it matches the function's declared return type. Without this,
+  -- Postgres errors with "structure of query does not match function
+  -- result type" at runtime (caught during 2026-05-09 prod migration).
   return query
-  select u.id, u.email, u.email_confirmed_at, u.last_sign_in_at, u.raw_user_meta_data
+  select
+    u.id,
+    u.email::text,
+    u.email_confirmed_at,
+    u.last_sign_in_at,
+    u.raw_user_meta_data
     from auth.users u
-   where u.email = lower(trim(p_email))
+   where u.email::text = lower(trim(p_email))
    limit 1;
 end;
 $$;
