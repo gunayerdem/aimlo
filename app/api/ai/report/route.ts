@@ -175,7 +175,13 @@ function validateRequest(
   // lang — default to "tr" if missing (desktop may omit)
   const lang = VALID_LANGS.has(b.lang as string) ? (b.lang as "tr" | "en") : "tr";
 
-  // score — support both { score: { yours, enemy } } and { score: "13-7" } string format
+  // score — support all 3 shapes:
+  //   1. { score: { yours: "13", enemy: "7" } }    — web nested shape
+  //   2. { score: "13-7" }                          — web string convenience
+  //   3. (no top-level score, but rounds[] present) — desktop A2 flat shape
+  //      ships per-round score in the round entries but omits a match-level
+  //      score field; we pull "yours-enemy" from the last round entry that
+  //      has a parseable "X-Y" score string.
   let yours = "0";
   let enemy = "0";
   if (b.score && typeof b.score === "object") {
@@ -187,6 +193,23 @@ function validateRequest(
     if (parts.length === 2) {
       yours = sanitize(parts[0], 3);
       enemy = sanitize(parts[1], 3);
+    }
+  } else if (Array.isArray(b.rounds)) {
+    // Walk rounds from the end — last round with a "X-Y" score wins.
+    const rs = b.rounds as unknown[];
+    for (let i = rs.length - 1; i >= 0; i--) {
+      const r = rs[i];
+      if (r && typeof r === "object") {
+        const rScore = (r as Record<string, unknown>).score;
+        if (typeof rScore === "string") {
+          const parts = rScore.split("-").map((s) => s.trim());
+          if (parts.length === 2) {
+            yours = sanitize(parts[0], 3);
+            enemy = sanitize(parts[1], 3);
+            break;
+          }
+        }
+      }
     }
   }
   if (!VALID_SCORES.has(yours) || !VALID_SCORES.has(enemy)) {

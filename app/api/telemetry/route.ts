@@ -92,21 +92,37 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     accepted.push(events[i] as TelemetryEvent);
   }
 
-  // Forward accepted events to whatever logging sink we choose. For now,
-  // structured stdout — Vercel captures it. Each line is one event so a
-  // future log shipper can parse line-by-line without buffering full batches.
-  for (const e of accepted) {
+  // Forward accepted events to the logging sink. Format: one batch-level
+  // structured line per request. The field names (`userIdHash`, `count`,
+  // `rejected`, `bucket`, `ts`) are the contract the post-launch dashboard
+  // will grep against — keep them stable.
+  //
+  // Per-event detail follows on a second line so individual values are
+  // still recoverable from logs without bloating the primary index line.
+  console.log(
+    "[TELEMETRY]",
+    JSON.stringify({
+      userIdHash,
+      count: accepted.length,
+      rejected: rejected.length,
+      bucket: accepted[0]?.type ?? "mixed",
+      ts: serverNowMs,
+    }),
+  );
+  if (accepted.length > 0) {
     console.log(
-      "[TELEMETRY]",
+      "[TELEMETRY_EVENTS]",
       JSON.stringify({
-        user: userIdHash,
-        type: e.type,
-        ts: e.ts,
-        value: e.value,
-        count: e.count,
-        code: e.code,
-        route: e.route,
-        round: e.round,
+        userIdHash,
+        events: accepted.map((e) => ({
+          type: e.type,
+          ts: e.ts,
+          value: e.value,
+          count: e.count,
+          code: e.code,
+          route: e.route,
+          round: e.round,
+        })),
       }),
     );
   }
