@@ -41,6 +41,30 @@ const DAILY_QUOTA: Partial<Record<RouteKey, number>> = {
   telemetry: 1000, // generous — desktop batches every 24h, but instrumentation can fire often during a long session
 };
 
+// ── Dev allowlist (intensive test sessions bypass quota gates) ──
+//
+// Env: DEV_USER_ALLOWLIST = comma-separated Supabase user_ids (JWT sub).
+// Members bypass per-minute + daily + per-IP rate checks entirely. Use
+// ONLY for the team's own test accounts during real-match iteration
+// (Spike Rush sessions burn ~30 vision calls in 30 min; the standard
+// daily cap blocks debugging the rest of the day).
+//
+// Production user_ids must NEVER land in this list. Rollback: unset the
+// env var in Vercel + redeploy — single flip, no code change required.
+//
+// Parsed once at module load. To rotate, redeploy (Vercel does this on
+// env-var change automatically).
+const DEV_USER_ALLOWLIST: ReadonlySet<string> = new Set(
+  (process.env.DEV_USER_ALLOWLIST ?? "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter((s) => s.length > 0),
+);
+
+function isDevUser(userId: string): boolean {
+  return DEV_USER_ALLOWLIST.has(userId);
+}
+
 // In-memory fallback (dev only — see prod-strictness logic in checkRateLimit).
 const memoryStore = new Map<string, { count: number; resetAt: number }>();
 const dailyStore  = new Map<string, { count: number; resetAt: number }>();
@@ -200,6 +224,15 @@ export async function checkRateLimit(
   ip?: string
 ): Promise<{ allowed: boolean; remaining: number; retryAfter?: number; reason?: string }> {
   cleanupStores();
+
+  // Dev allowlist short-circuit: bypass ALL quota gates (per-minute,
+  // daily, per-IP) so intensive testing sessions aren't blocked by the
+  // standard 30/day vision cap. Production user_ids must never appear
+  // in DEV_USER_ALLOWLIST. See env-var doc at top of file for rollback.
+  if (isDevUser(userId)) {
+    console.log(`[Aimlo rate-limit] dev allowlist bypass: user=${userId.slice(0, 8)}… route=${route}`);
+    return { allowed: true, remaining: Number.MAX_SAFE_INTEGER };
+  }
 
   const limits = RATE_LIMITS[route] || RATE_LIMITS.default;
   const dailyLimit = DAILY_QUOTA[route];
