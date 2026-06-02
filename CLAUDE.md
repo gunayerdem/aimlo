@@ -73,6 +73,15 @@ blocks, ordered for prompt-cache) → system prompt = `ai-policy` + KB + context
 patternContext → user msg (image if died + round JSON) → gpt-5-mini json_schema strict → JSON
 extract → shape validate → `reality-checker` → truncate. **Failure → structured error, never fake.**
 
+## Engineering discipline (every agent + the main session — harvested from systematic-debugging)
+- **No fix without root cause** — prove it (`file:line`); don't guess. After 3+ failed attempts,
+  question the premise, not the implementation.
+- **Verify before "done"** — not done until `npm run build` passes (Next 16) and the desktop contract
+  + any tests hold. State what you verified.
+- **Defense-in-depth** — after the root fix, add a guard at the boundary (validation / auth / sanitize).
+- **No fake AI output** — structured error on failure, never canned coach text.
+- **Plan multi-step work**; keep the task list current.
+
 ## Specialist agents (`.claude/agents/`)
 - **security-auditor** (opus, read-only) — auth/rate-limit/RLS/prompt-safety/secrets; prod-grade.
 - **backend-reviewer** (sonnet) — Next 16 correctness, API-contract stability, code quality.
