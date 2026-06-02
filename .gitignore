@@ -44,5 +44,6 @@ node_modules/
 
 # Claude worktrees and local files
 .claude/worktrees/
+.claude/settings.local.json
 .DS_Store
 
