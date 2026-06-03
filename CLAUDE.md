@@ -82,6 +82,14 @@ extract → shape validate → `reality-checker` → truncate. **Failure → str
 - **No fake AI output** — structured error on failure, never canned coach text.
 - **Plan multi-step work**; keep the task list current.
 
+## Fix protocol (softi's STANDING rule — 2026-06-03)
+When softi says **"fixle" / "düzelt" / "çöz"** or reports a bug: DEFAULT to the **council approach**
+— fan out the relevant specialists (security-auditor + backend-reviewer + ai-prompt-expert) to
+root-cause, adversarially cross-verify, THEN fix with discipline (verify-before-done: `npm run build`
++ desktop-contract/tests hold). **Scale to difficulty:** trivial/obvious → do it directly and say so;
+non-obvious or previously-unsolved → full multi-agent council. Goal: prove + fix the root cause,
+never a symptom. softi has pre-authorized multi-agent / Workflow orchestration for fixes.
+
 ## Specialist agents (`.claude/agents/`)
 - **security-auditor** (opus, read-only) — auth/rate-limit/RLS/prompt-safety/secrets; prod-grade.
 - **backend-reviewer** (sonnet) — Next 16 correctness, API-contract stability, code quality.
