@@ -95,6 +95,10 @@ never a symptom. softi has pre-authorized multi-agent / Workflow orchestration f
 - **backend-reviewer** (sonnet) — Next 16 correctness, API-contract stability, code quality.
 - **ai-prompt-expert** (opus) — the AI routes, prompt-safety, reality-checker, coach-voice, KB.
 
-## Persistent memory
+## Persistent memory & agent authority
 This file + `.claude/agents/` are committed → shared with the Mac "Friday" auditor. Secrets never
 here. Cross-session user/style facts live in Claude's memory dir.
+**Agent precedence — no conflict with Friday's Mac-wide globals:** in this repo ALWAYS use the repo's
+`.claude/agents/`. Claude Code precedence is **project > user (~/.claude/agents/) > built-in**, and a
+project agent SHADOWS a same-named global one. Friday's Mac-wide global agents apply only OUTSIDE the
+AIMLO repos; in-repo these tuned agents always win. They don't mix.
