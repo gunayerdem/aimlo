@@ -2269,11 +2269,20 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               </span>
             ))}
           </div>
-          <button className="btn-neon rounded-xl px-10 py-4 text-[14px] flex items-center gap-2 mx-auto">
+          <a
+            href="https://bzwnchzetebwrdedkjkq.supabase.co/storage/v1/object/public/downloads/Aimlo-Setup.msi"
+            download
+            className="btn-neon rounded-xl px-10 py-4 text-[14px] inline-flex items-center gap-2 mx-auto"
+          >
             {lang === "tr" ? "Windows için İndir" : "Download for Windows"}
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-          </button>
-          <p className="mt-5 text-[11px] text-neutral-700">Windows 10+ · ~100MB</p>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="12" y1="3" x2="12" y2="15"/><polyline points="7 10 12 15 17 10"/><line x1="5" y1="21" x2="19" y2="21"/></svg>
+          </a>
+          <p className="mt-5 text-[11px] text-neutral-700">Windows 10+ · ~9MB · .msi</p>
+          <p className="mt-2 text-[11px] text-neutral-600 max-w-sm mx-auto leading-relaxed">
+            {lang === "tr"
+              ? 'Kurulumda Windows "bilinmeyen yayıncı" uyarısı çıkarsa "Daha fazla bilgi" → "Yine de çalıştır" deyin.'
+              : 'If Windows shows an "unknown publisher" prompt, click "More info" → "Run anyway".'}
+          </p>
         </div>
       </section>
 
