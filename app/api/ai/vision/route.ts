@@ -578,8 +578,26 @@ export async function POST(request: NextRequest) {
       side: reqSide,
     });
 
-    if (kb.files.length > 0) {
-      console.log(`[KB] selected: ${kb.files.join(", ")}`);
+    // KB observability (council 2026-06-08): prove per-request whether the KB is
+    // actually injected (softi: "feedback benim KB'den gelmiyor"). The KB IS loaded
+    // + concatenated below; this logs the injected byte sizes + selectors so it's
+    // visible in Vercel logs. Also surfaces the REAL defect the council found: rank
+    // is structurally always empty (desktop never sends it) → backend always serves
+    // mid-elo.md → every user gets mid-elo coaching regardless of true rank.
+    const agentLen = kb.blocks.agent?.length ?? 0;
+    const mapLen = kb.blocks.map?.length ?? 0;
+    const ctxLen = kb.blocks.contextual?.length ?? 0;
+    const kbTotal = agentLen + mapLen + ctxLen;
+    console.log(
+      `[KB] injected agent=${agentLen}b map=${mapLen}b ctx=${ctxLen}b total=${kbTotal}b ` +
+      `files=[${kb.files.join(", ")}] selectors map=${reqMap ?? "-"} agent=${reqAgent ?? "-"} ` +
+      `rank=${reqRank ?? "-"} enemies=${reqEnemyComp?.length ?? 0}`,
+    );
+    if (!reqRank) {
+      console.warn(`[KB] rank MISSING → defaulted to mid-elo.md (desktop never sent rank). Coaching tier may be wrong.`);
+    }
+    if (kbTotal === 0) {
+      console.warn(`[KB] EMPTY — tracing regression? knowledge/*.md missing from serverless bundle.`);
     }
 
     // Build system message — flattened for OpenAI Chat Completions API.
@@ -615,6 +633,12 @@ export async function POST(request: NextRequest) {
     if (patternContextBlock) systemSections.push(patternContextBlock);
 
     const systemMessage = systemSections.join("\n\n---\n\n");
+    // Council 2026-06-08: prove KB is a real share of the final system prompt.
+    console.log(
+      `[PROMPT] system=${systemMessage.length}b KB=${kbTotal}b ` +
+      `pattern=${patternContextBlock?.length ?? 0}b ` +
+      `KB-share=${systemMessage.length > 0 ? ((kbTotal / systemMessage.length) * 100).toFixed(0) : 0}%`,
+    );
 
     // Build round context as compact JSON. Replaces previous verbose Turkish text
     // blocks with `═══` borders. Two wins:
@@ -804,12 +828,15 @@ export async function POST(request: NextRequest) {
     if (!response.ok) {
       clearTimeout(timeoutId);
       const errorBody = await response.text().catch(() => "unreadable");
+      // Security audit 2026-06-11 (M-2): keep the upstream body in the SERVER
+      // log only — do NOT reflect it to the client (info-disclosure habit;
+      // the desktop branches on upstreamStatus alone).
       console.error(`[Aimlo AI] Vision API ${response.status}: ${errorBody.slice(0, 500)}`);
       return errorResponse(
         "ai_upstream_error",
         `OpenAI API returned ${response.status}`,
         502,
-        { upstreamStatus: response.status, upstreamBody: errorBody.slice(0, 500) },
+        { upstreamStatus: response.status },
       );
     }
 

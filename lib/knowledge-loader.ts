@@ -375,6 +375,11 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
       }
     }
   }
+  // Council 2026-06-08: surface a realistic agent-selector miss (OCR slug/role
+  // mismatch) so wrong/empty agent KB is diagnosable instead of silently generic.
+  if (agent && !agentBlock) {
+    console.warn(`[KB] agent selector '${agent}' matched no agents file (role/slug miss)`);
+  }
 
   // ── Block 2: Map KB (per-match — high cache miss rate across matches) ──
   let mapBlock: string | undefined;
@@ -387,6 +392,9 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
       mapBlock = `[HARİTA BİLGİSİ — ${map}]\n${stripKbWhitespace(filtered)}`;
       files.push(mapPath);
     }
+  }
+  if (map && !mapBlock) {
+    console.warn(`[KB] map selector '${map}' matched no maps file (slug '${map.toLowerCase().replace(/[^a-z]/g, "")}')`);
   }
 
   // ── Block 3: Contextual KB (rank + matchup + situational — most variable) ──

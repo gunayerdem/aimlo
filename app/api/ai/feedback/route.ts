@@ -339,6 +339,13 @@ DÜŞMAN MODELİ (ZORUNLU):
   // closing-tag injections, control chars, bidi/zero-width unicode, role
   // prefixes, and caps to 300 chars.
   const safeNote = sanitizePromptInput(form.yourNote, { max: 300, collapseWhitespace: true });
+  // Security audit 2026-06-11 (H-1): deathLocation/enemyCount are desktop
+  // OCR-derived free text and were only slice/trim'd, not run through
+  // prompt-safety — a tampered client could smuggle a role-prefix / closing-tag
+  // injection straight into the prompt. The vision route already sanitizes
+  // these; bring feedback to parity.
+  const safeDeath = sanitizePromptInput(form.deathLocation, { max: 100, collapseWhitespace: true });
+  const safeEnemyCount = sanitizePromptInput(form.enemyCount, { max: 5, collapseWhitespace: true });
   const roundCount = Array.isArray(allRounds) ? allRounds.length : 0;
   const roundsWon = Array.isArray(allRounds)
     ? allRounds.filter((r) => r.result === "win").length
@@ -358,7 +365,9 @@ DÜŞMAN MODELİ (ZORUNLU):
     : [];
   const recentRounds = safeRounds.slice(-3).map((r) => {
     const rNote = sanitizePromptInput(r.yourNote || "", { max: 100, collapseWhitespace: true });
-    return `R${r.roundNumber}: ${r.result}${r.survived ? ", hayatta" : `, öldü@${r.deathLocation || "?"}, ${r.enemyCount || "?"} düşman`}${rNote ? ` <user_note>${rNote}</user_note>` : ""}`;
+    const rDeath = sanitizePromptInput(r.deathLocation || "", { max: 100, collapseWhitespace: true }) || "?";
+    const rEnemy = sanitizePromptInput(r.enemyCount || "", { max: 5, collapseWhitespace: true }) || "?";
+    return `R${r.roundNumber}: ${r.result}${r.survived ? ", hayatta" : `, öldü@${rDeath}, ${rEnemy} düşman`}${rNote ? ` <user_note>${rNote}</user_note>` : ""}`;
   }).join("\n");
 
   const enemyCompStr = setup.unknownEnemyComp
@@ -419,7 +428,7 @@ Son round'lar:
 ${recentRounds || "İlk round"}
 
 ŞU ANKİ ROUND:
-R${roundCount + 1}: ${result}${survived ? ", hayatta kaldı" : `, öldü@${form.deathLocation}, ${form.enemyCount} düşman`}${safeNote ? `\n<user_note>\n${safeNote}\n</user_note>` : ""}
+R${roundCount + 1}: ${result}${survived ? ", hayatta kaldı" : `, öldü@${safeDeath}, ${safeEnemyCount} düşman`}${safeNote ? `\n<user_note>\n${safeNote}\n</user_note>` : ""}
 
 Oyuncu ajanı: ${setup.agent}
 Düşman ajanları: ${enemyCompStr}
