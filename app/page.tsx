@@ -11,6 +11,7 @@ import {
   MAP_LOCATIONS, MAP_IMAGES, IC,
 } from "@/constants/game-data";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { FEEDBACK_BANK_TR, FEEDBACK_BANK_EN } from "./feedbackBank.generated";
 import type { User } from "@supabase/supabase-js";
 import type {
   Lang,
@@ -1908,9 +1909,9 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               <span className="ml-auto text-[8px] font-bold text-[#22D3EE] bg-[#22D3EE]/10 border border-[#22D3EE]/25 px-2 py-1 rounded tracking-[0.1em] whitespace-nowrap">{lang === "tr" ? "GERÇEK ÇIKTI" : "REAL OUTPUT"}</span>
             </div>
 
-            {/* AI ANALİZ — GERÇEK KB feedback (gpt-5-mini, ai-policy uyumlu, tarzanca yok) */}
+            {/* AI ANALİZ — maç özeti (kısa) */}
             <div className="relative rounded-xl border border-[#A855F7]/[0.18] p-4" style={{ background: "linear-gradient(180deg, rgba(168,85,247,0.07), rgba(34,211,238,0.02))" }}>
-              <div className="flex items-center gap-2 mb-2.5">
+              <div className="flex items-center gap-2 mb-2">
                 <img src="/aimlo-logo.png?v=3" alt="" className="w-4 h-auto" />
                 <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: "#C9B6FF" }}>AI {lang === "tr" ? "Analiz" : "Analysis"}</span>
                 <span className="text-[9px] text-neutral-600 ml-auto">{lang === "tr" ? "Maç sonu" : "Post-match"}</span>
@@ -1918,44 +1919,32 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               <p className="text-[12px] text-neutral-300 leading-relaxed">{lang === "tr"
                 ? "Ascent'te Jett ile 13-9 kazandın. Çoğu round hayatta kaldın; A Main'de iki kez öldün."
                 : "Won 13-9 on Ascent as Jett. Survived most rounds; died twice at A Main."}</p>
-              <div className="mt-2.5 pl-3 border-l-2 border-[#FF4655]/45">
-                <p className="text-[9px] font-bold text-[#FF6B77] uppercase tracking-wider mb-0.5">{lang === "tr" ? "Kritik Hata" : "Critical Mistake"}</p>
-                <p className="text-[11px] text-neutral-400 leading-relaxed">{lang === "tr"
-                  ? "R2 ve R7'de A Main'den tek başına çıkıp trade gelmeden düştün. Omen smoke sonrası yoldaşınla birlikte gir."
-                  : "R2 & R7: pushed A Main solo and fell before any trade. Enter together after Omen smoke."}</p>
-              </div>
             </div>
 
-            {/* Round-by-round koçluk — GERÇEK KB feedback'i (bizi öne çıkaran şey) */}
-            <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {([
-                { r: "R2", loc: "A Main",
-                  err: lang === "tr" ? "A Main'i tek başına açtın, trade gelmeden düştün." : "Pushed A Main solo and fell before any trade.",
-                  plan: lang === "tr" ? "Omen smoke sonrası yoldaşınla birlikte gir." : "Enter together right after Omen smoke." },
-                { r: "R5", loc: "Mid Courtyard",
-                  err: lang === "tr" ? "Mid'de bilgi almadan erken swing attın." : "Swung Mid early without any info.",
-                  plan: lang === "tr" ? "Sova recon görmeden çıkma, updraft ile farklı açı al." : "Wait for Sova recon, take a different angle with updraft." },
-              ]).map((rd, i) => (
-                <div key={i} className="rounded-xl bg-white/[0.025] border border-white/[0.06] overflow-hidden">
-                  <div className="h-[2px]" style={{ background: "#ef4444" }} />
-                  <div className="px-3 py-2 border-b border-white/[0.05] flex items-center gap-1.5">
-                    <span className="text-[11px] font-bold text-white">{rd.r}</span>
-                    <span className="text-[10px] text-[#FF6B77]">· {lang === "tr" ? "YENİLGİ" : "LOSS"}</span>
-                    <span className="text-[10px] text-neutral-600 ml-auto">{rd.loc}</span>
+            {/* GERÇEK koç-feedback'i — feedbackBank.generated.ts (gpt-5-mini + KB), dile göre TR/EN */}
+            {(() => {
+              const fb = (lang === "tr" ? FEEDBACK_BANK_TR : FEEDBACK_BANK_EN)[0];
+              return (
+                <div className="relative rounded-xl bg-white/[0.025] border border-white/[0.07] overflow-hidden">
+                  <div className="h-[2px]" style={{ background: "linear-gradient(90deg,#FF5E8A,#A855F7,#22D3EE)" }} />
+                  <div className="px-4 py-2.5 border-b border-white/[0.06] flex items-center gap-2 flex-wrap">
+                    <span className="text-[12px] font-bold text-white">{fb.title}</span>
+                    <span className="text-[10px] text-neutral-500">{fb.agent} · {fb.map} · {fb.location}</span>
+                    <span className="ml-auto text-[8px] font-bold uppercase tracking-[0.1em] px-2 py-0.5 rounded whitespace-nowrap" style={{ color: "#C9B6FF", background: "rgba(168,85,247,0.12)", border: "1px solid rgba(168,85,247,0.25)" }}>gpt-5-mini</span>
                   </div>
-                  <div className="p-3 space-y-2">
+                  <div className="p-4 space-y-3">
                     <div>
-                      <p className="text-[8px] font-bold text-[#FF6B77] uppercase tracking-wider mb-0.5">{lang === "tr" ? "Hata Analizi" : "Error Analysis"}</p>
-                      <p className="text-[10.5px] text-neutral-300 leading-relaxed">{rd.err}</p>
+                      <p className="text-[9px] font-bold text-[#FF6B77] uppercase tracking-wider mb-1">{lang === "tr" ? "Hata Analizi" : "Error Analysis"}</p>
+                      <p className="text-[12px] text-neutral-200 leading-relaxed">{fb.deathAnalysis}</p>
                     </div>
                     <div>
-                      <p className="text-[8px] font-bold text-[#22D3EE] uppercase tracking-wider mb-0.5">{lang === "tr" ? "Sonraki Round" : "Next Round"}</p>
-                      <p className="text-[10.5px] text-neutral-400 leading-relaxed">{rd.plan}</p>
+                      <p className="text-[9px] font-bold text-[#22D3EE] uppercase tracking-wider mb-1">{lang === "tr" ? "Sonraki Round" : "Next Round"}</p>
+                      <p className="text-[12px] text-neutral-300 leading-relaxed">{fb.nextRoundPlan}</p>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
+              );
+            })()}
           </div>
           {/* Glow effect behind mockup */}
           <div className="pointer-events-none absolute -inset-4 rounded-3xl bg-gradient-to-b from-[#FF4655]/[0.04] to-[#4D7CFF]/[0.02] blur-2xl -z-10" />
