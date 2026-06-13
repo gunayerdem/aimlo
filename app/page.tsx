@@ -568,22 +568,22 @@ Eco round'lar rank atlatacak kadar önemli. Her eco round'u kazanırsan rakibin 
       {
         icon: "zap",
         title: "Otomatik Izleme",
-        desc: "AI maçını arka planda izler, hiçbir şey yapmana gerek yok",
+        desc: "AIMLO ekranını gerçek zamanlı OCR ile okur — skor, ajanlar, ekonomi, öldüğün konum ve hangi açıdan düştüğün. Ayar yok, veri girmek yok. Bir kez başlat, her maçın her round'unu arka planda sessizce izlesin.",
       },
       {
         icon: "chart",
         title: "Detaylı Raporlar",
-        desc: "Maç sonu kapsamlı performans raporu otomatik hazırlanır",
+        desc: "Maç biter bitmez tam bir performans dökümü alırsın — round round kararların, en iyi ve en kötü round'un, ekonomi hataların ve bir karar puanı. Genel ortalamalardan değil, ekranında gerçekten olanlardan üretilir.",
       },
       {
         icon: "target",
         title: "Hata Tespiti",
-        desc: "AI tekrarlayan hatalarını otomatik tespit eder ve çözüm sunar",
+        desc: "AIMLO son round'larını hatırlar ve kendi göremediğin örüntüleri çıkarır — sürekli aynı açıdan peek atışın, tekrarlayan ölüm noktan, ısrarla zorladığın eco. Sonra muğlak tavsiye değil, somut çözümü söyler.",
       },
       {
         icon: "trend",
         title: "Gelişim Takibi",
-        desc: "Zaman içindeki ilerlemeni AI otomatik olarak analiz eder",
+        desc: "Her maç uzun vadeli bir profili besler: hangi harita ve taraflarda puan kaybettiğin, hangi hataların azaldığı, nerede gerçekten geliştiğin. Gelişimin maçtan maça ölçülür — otomatik olarak.",
       },
     ],
     landingHowTitle: "Nasıl Çalışıyor?",
@@ -949,22 +949,22 @@ Eco round'lar rank atlatacak kadar önemli. Her eco round'u kazanırsan rakibin 
       {
         icon: "zap",
         title: "Automatic Tracking",
-        desc: "AI watches your match in the background, no input required",
+        desc: "AIMLO reads your screen in real time with OCR — score, agents, economy, your death location and the angle you fell to. Nothing to configure, no stats to type. Launch it once and it watches every round of every match, silently in the background.",
       },
       {
         icon: "chart",
         title: "Detailed Reports",
-        desc: "Comprehensive post-match performance report generated automatically",
+        desc: "The moment a match ends you get a full performance breakdown — round-by-round decisions, your best and worst rounds, economy mistakes and a decision score. Built from what actually happened on your screen, not generic averages.",
       },
       {
         icon: "target",
         title: "Mistake Detection",
-        desc: "AI automatically detects recurring mistakes and offers solutions",
+        desc: "AIMLO remembers your last rounds and surfaces the patterns you can't see yourself — the same off-angle you keep peeking, the recurring death spot, the eco you keep forcing. Then it tells you the concrete fix, not vague advice.",
       },
       {
         icon: "trend",
         title: "Progress Tracking",
-        desc: "AI analyzes your improvement over time automatically",
+        desc: "Every match feeds a long-term profile: which maps and sides you bleed rating on, which mistakes are fading, where you're genuinely improving. Your growth, measured match over match — automatically.",
       },
     ],
     landingHowTitle: "How It Works",
@@ -1817,15 +1817,15 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
 
           {/* RIGHT — the agent stage: JETT and REYNA as separate set-pieces,
                each on its own parallax depth (mouse-reactive via GSAP).
-               Depth order: ring (0) → Reyna (1) → Jett (2) → THE EYE (5). */}
+               Depth order: ring (0) → Neon (1) → Jett (2) → THE EYE (5). */}
           <div data-stage className="relative h-[540px] xl:h-[620px] hidden lg:block animate-fade-in stagger-3">
             <div className="hero-stage-ring" />
             <div className="hero-stage-glow" />
             <div className="hero-stage-floor" />
             <img
-              src="https://media.valorant-api.com/agents/a3bfb853-43b2-7238-a4f1-ad90e9e46bcc/fullportrait.png"
-              alt="Reyna"
-              data-depth="0.085"
+              src="https://media.valorant-api.com/agents/bb2a4828-46eb-8cd1-e765-15848195d751/fullportrait.png"
+              alt="Neon"
+              data-depth="0.09"
               draggable={false}
               className="hero-agent hero-agent-back"
             />
@@ -2016,34 +2016,48 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             })}
           </div>
 
-          {/* RIGHT — the live agent stage for the active feature */}
-          <div className="relative h-[360px] sm:h-[460px] lg:h-[520px] rounded-3xl overflow-hidden border border-white/[0.07] order-1 lg:order-2 feature-stage">
+          {/* RIGHT — the live agent stage for the active feature. The agent is
+               fully visible (contained, not cropped), on a clean lit pedestal. */}
+          <div className="relative h-[420px] sm:h-[500px] lg:h-[560px] rounded-3xl overflow-hidden border border-white/[0.07] order-1 lg:order-2 feature-stage">
             {l.landingFeatures.map((f, i) => {
               const v = featureVisuals[i];
               const on = activeFeature === i;
               return (
                 <div key={i} className="absolute inset-0 transition-opacity duration-700" style={{ opacity: on ? 1 : 0 }} aria-hidden={!on}>
+                  {/* soft agent-tinted wash — the busy graffiti background is
+                       dropped to a whisper so the figure reads cleanly */}
                   <img
                     src={`https://media.valorant-api.com/agents/${v.agentId}/background.png`}
                     alt=""
-                    className="absolute inset-0 w-full h-full object-cover opacity-[0.16]"
+                    className="absolute inset-0 w-full h-full object-cover opacity-[0.05]"
+                    style={{ filter: "blur(2px) saturate(0.6)", maskImage: "radial-gradient(120% 90% at 60% 35%, #000 30%, transparent 80%)", WebkitMaskImage: "radial-gradient(120% 90% at 60% 35%, #000 30%, transparent 80%)" }}
                     loading="lazy"
                     draggable={false}
                   />
-                  <div className="absolute inset-0" style={{ background: `radial-gradient(460px 340px at 60% 64%, ${v.color}26, transparent 72%)` }} />
+                  <div className="absolute inset-0" style={{ background: `radial-gradient(520px 380px at 56% 46%, ${v.color}22, transparent 70%)` }} />
+                  {/* pedestal glow under the figure */}
+                  <div className="absolute left-1/2 bottom-[6%] -translate-x-1/2 w-[62%] h-[46px] rounded-[50%]" style={{ background: `radial-gradient(ellipse at center, ${v.color}40, transparent 70%)`, filter: "blur(10px)" }} />
                   <img
                     src={`https://media.valorant-api.com/agents/${v.agentId}/fullportrait.png`}
                     alt={f.title}
-                    className="absolute left-1/2 bottom-0 -translate-x-1/2 h-[108%] object-contain transition-transform duration-700"
-                    style={{ filter: `drop-shadow(0 26px 46px rgba(0,0,0,0.65)) drop-shadow(0 0 40px ${v.color}45)`, transform: on ? "translateX(-50%) scale(1)" : "translateX(-50%) scale(0.94)" }}
+                    className="absolute left-1/2 bottom-[5%] -translate-x-1/2 h-[86%] sm:h-[88%] w-auto max-w-[88%] object-contain object-bottom transition-transform duration-700"
+                    style={{ filter: `drop-shadow(0 30px 50px rgba(0,0,0,0.7)) drop-shadow(0 0 44px ${v.color}50)`, transform: on ? "translateX(-50%) scale(1)" : "translateX(-50%) scale(0.95)" }}
                     loading="lazy"
                     draggable={false}
                   />
                   {/* big index watermark */}
-                  <div className="absolute top-5 right-6 story-num" lang="en" style={{ opacity: 0.5 }}>0{i + 1}</div>
+                  <div className="absolute top-6 right-7 story-num" lang="en" style={{ opacity: 0.42 }}>0{i + 1}</div>
                 </div>
               );
             })}
+            {/* progress dots — which feature is showing */}
+            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
+              {l.landingFeatures.map((_, i) => (
+                <button key={i} onClick={() => setActiveFeature(i)} aria-label={`Feature ${i + 1}`}
+                  className="h-1.5 rounded-full transition-all duration-300"
+                  style={{ width: activeFeature === i ? 22 : 6, background: activeFeature === i ? featureVisuals[i].color : "rgba(255,255,255,0.22)" }} />
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -2061,13 +2075,20 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
           {lang === "tr" ? "Neden AIMLO?" : "Why AIMLO?"}
         </h2>
         <div data-cascade className="bento-grid">
-          {/* Big statement cell — benefit #1, anchored by the living eye */}
+          {/* Big statement cell — benefit #1, anchored by Sova (the recon
+               agent) as a clean cinematic backdrop. */}
           <div className="bento-cell bento-span2 bento-tall relative flex flex-col justify-between min-h-[380px] overflow-hidden">
-            {/* the eye watermark fills the empty space */}
-            <div className="pointer-events-none absolute -right-12 -top-10 opacity-[0.5]">
-              <HeroEye size={260} />
-            </div>
-            <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(420px 280px at 78% 8%, rgba(168,85,247,0.10), transparent 70%)" }} />
+            {/* Sova render — right-anchored, masked into the cell */}
+            <img
+              src="https://media.valorant-api.com/agents/320b2a48-4d9b-a075-30f1-1f93a9b638fa/fullportrait.png"
+              alt=""
+              aria-hidden="true"
+              draggable={false}
+              className="pointer-events-none absolute -right-10 bottom-0 h-[112%] w-auto object-contain object-bottom opacity-[0.9]"
+              style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.6)) drop-shadow(0 0 40px rgba(255,70,85,0.18))", maskImage: "linear-gradient(180deg, #000 55%, transparent 96%)", WebkitMaskImage: "linear-gradient(180deg, #000 55%, transparent 96%)" }}
+              loading="lazy"
+            />
+            <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(100deg, rgba(10,12,24,0.92) 30%, rgba(10,12,24,0.4) 58%, transparent 80%), radial-gradient(420px 280px at 82% 12%, rgba(255,70,85,0.12), transparent 70%)" }} />
             <div className="relative flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: "#FF465510", border: "1px solid #FF465520", color: "#FF4655" }}>
                 {benefitIcons[0]}
