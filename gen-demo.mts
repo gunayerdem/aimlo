@@ -75,7 +75,40 @@ const TARZANCA = [
   /head\s+(at[ıi]yor|att[ıi]|buldu|buluyor|aç[ıi]s[ıi]n[ıi])/i,
   /swing yap[ıi]yor/i, /peek (yap[ıi]yor|ediyor)/i, /hold (ediyor|yap[ıi]yor)/i,
   /(stun|flash|molly|smoke|ult)\s+çekiyor/i, /\bop var\b/i, /pick al[ıi]yor/i,
+  // SHOWCASE: en egregious robotik etiket + meta/tereddüt kalıpları
+  /sorun\s*:/i, /\bfix\s*:/i, /sonras[ıi]\s+plan/i,
+  /tekil veri/i, /tekrar yok/i, /veri yok/i, /yeterli veri/i,
+  /pozitif round/i, /veri sadece/i, /bilgisi yok/i, /yazıl[ıi] veri/i,
 ];
+// Deterministik temizleyici: modelin ısrar ettiği "çözüm:/neden:/fix:" etiketlerini
+// söker, akıcı cümleye çevirir, cümle başını büyütür.
+function clean(s: string | undefined): string {
+  if (!s) return "";
+  let out = s
+    .replace(/\s*[;.,—-]\s*(çözüm|çozum|neden|fix|sorun)\s*:\s*/gi, ". ")
+    .replace(/(^|\.\s+)(çözüm|çozum|neden|fix|sorun)\s*:\s*/gi, "$1")
+    .replace(/\s{2,}/g, " ")
+    .replace(/\s+\./g, ".")
+    .replace(/\.{2,}/g, ".")
+    .trim();
+  // cümle başını büyüt (ASCII küçük harfse — TR-i tuzağından kaçın)
+  out = out.replace(/(^|[.!?]\s+)([a-z])/g, (_, p, c) => p + c.toUpperCase());
+  return out;
+}
+function cleanMatch(m: any): any {
+  if (!m) return m;
+  return {
+    summary: clean(m.summary), mistake: clean(m.mistake), tendencies: clean(m.tendencies),
+    adjustment: clean(m.adjustment), bestRound: clean(m.bestRound), decisionScore: clean(m.decisionScore),
+    rounds: (m.rounds || []).map((r: any) => ({
+      deathLocation: r.deathLocation,
+      deathAnalysis: clean(r.deathAnalysis),
+      enemyPatterns: clean(r.enemyPatterns),
+      nextRoundPlan: clean(r.nextRoundPlan),
+    })),
+  };
+}
+
 function findViolations(text: string): string[] {
   const t = text.toLowerCase();
   const hits: string[] = [];
@@ -101,17 +134,24 @@ ${buildPolicyBlock({ confidence: "high", tone: "strict", lang: "tr", includeDeci
 - "stun/flash/molly/smoke/ult çekiyor" → "...atıyor/açıyor"
 - Generik YASAK: "dikkatli ol", "daha iyi oyna", "sabırlı ol", "aim'ini geliştir", "konsantre ol".
 
-KURALLAR: Her cümle somut veri (ajan/pozisyon/round no/silah). Max 15 kelime/cümle, paragraf yok. "sen" hitabı. MİKRO-POZİSYON ZORUNLU (callout adı; "site"/"mid" tek başına yasak). Düşman iddiası SADECE tekrar eden pattern kanıtlıysa.${corrective}
+KURALLAR: Her cümle somut veri (ajan/pozisyon/round no/silah). Max 16 kelime/cümle, paragraf yok. "sen" hitabı. MİKRO-POZİSYON ZORUNLU (callout adı; "site"/"mid" tek başına yasak).
+
+🎬 SHOWCASE MODU (müşteriye gösterilecek — KUSURSUZ + akıcı olmalı):
+- ETİKET YASAK: "Sorun:", "Fix:", "Neden:", "Çözüm:", "... sonrası plan:" gibi başlık/önek KULLANMA. Doğrudan, akıcı koç cümlesi yaz.
+- META/TEREDDÜT YASAK: "tekil veri", "veri yok", "tekrar yok", "yeterli veri yok", "...olabilir veya...", "belirsiz" YAZMA. Kendinden emin konuş.
+- deathAnalysis: 1 net sebep + 1 net çözüm, akıcı 1-2 cümle. Örn: "A Main'i tek başına açıkta tuttun, trade gelmeden düştün. Omen smoke sonrası yoldaşınla aynı anda gir."
+- enemyPatterns: SADECE aynı callout'ta 2+ ölüm ya da net tekrar varsa, kendinden emin TEK cümle yaz (örn: "Rakip A Main'i iki round üst üste aynı açıdan kapattı."). Gerçek tekrar YOKSA boş string "" döndür.
+- nextRoundPlan: önek yok, doğrudan emir. Örn: "Bu round Omen smoke'unu A Main'e at, flash sonrası birlikte yüklenin."${corrective}
 
 ÇIKTI — SADECE geçerli JSON, tam şu alanlar:
 {
-  "summary": "neden kazanıldı/kaybedildi + skor + hayatta kalma + pattern (1-2 keskin cümle)",
-  "mistake": "en çok tekrarlayan hata, round no + pozisyon + taktiksel neden + çözüm",
-  "tendencies": "düşman pattern özeti, ajan + pozisyon bazlı",
+  "summary": "neden kazanıldı/kaybedildi + skor + hayatta kalma + öne çıkan pattern (akıcı 1-2 keskin cümle, etiketsiz)",
+  "mistake": "en çok tekrarlayan hata: round no + pozisyon + net çözüm (akıcı, etiketsiz)",
+  "tendencies": "düşman pattern özeti, ajan + pozisyon bazlı, kendinden emin",
   "adjustment": "min 2 spesifik değişiklik (A yap VEYA B yap), callout + ability",
-  "bestRound": "round no + ne yaptın + neden işe yaradı",
+  "bestRound": "ÖLÜM OLMAYAN bir round seç (skorda kazandığın round'lardan); ne yaptın + neden işe yaradı, akıcı + kendinden emin. ASLA 'veri yok / pozitif round bilgisi yok / veri sadece' deme.",
   "decisionScore": "X/10 — kısa gerekçe",
-  "rounds": [ { "deathLocation": "<verilen callout>", "deathAnalysis": "ne yanlış gitti + fix (1-2 cümle, callout zorunlu)", "enemyPatterns": "rakip eğilimi (kanıt varsa)", "nextRoundPlan": "somut sonraki-round planı" } ]
+  "rounds": [ { "deathLocation": "<verilen callout>", "deathAnalysis": "akıcı koç cümlesi: net sebep + net çözüm (etiketsiz, 1-2 cümle, callout zorunlu)", "enemyPatterns": "net tekrar varsa tek cümle; yoksa boş string \"\"", "nextRoundPlan": "doğrudan emir, öneksiz" } ]
 }
 rounds dizisi, sana verilen ÖLÜM ROUND'larıyla AYNI SIRADA ve aynı sayıda olmalı. Markdown yok, sadece JSON.`;
 }
@@ -125,6 +165,9 @@ Düşman: ${s.enemyComp.join(", ")}
 
 ÖLÜM ROUND'LARI (rounds dizisini bunlarla aynı sırada üret):
 ${lines}
+
+NOT: Yukarıda listelenmeyen round'larda HAYATTA KALDIN. bestRound için bu ölüm-olmayan
+round'lardan birini seç (skora göre kazandığın round'lar var) ve kendinden emin anlat.
 
 Bu maç için raporu ve her ölüm round'u için feedback'i üret. Yalnızca verideki gerçeklere dayan.`;
 }
@@ -150,7 +193,9 @@ async function callGPT(sys: string, usr: string): Promise<any> {
 
 async function genMatch(s: Spec): Promise<any> {
   let corrective = "";
-  for (let attempt = 1; attempt <= 4; attempt++) {
+  let lastClean: any = null;       // en az ihlalli deneme (fallback)
+  let lastViolCount = Infinity;
+  for (let attempt = 1; attempt <= 6; attempt++) {
     try {
       const out = await callGPT(systemPrompt(s, corrective), userPrompt(s));
       const allText = [out.summary, out.mistake, out.tendencies, out.adjustment, out.bestRound,
@@ -158,24 +203,30 @@ async function genMatch(s: Spec): Promise<any> {
         .filter(Boolean).join(" \n ");
       const viol = findViolations(allText);
       const okRounds = Array.isArray(out.rounds) && out.rounds.length === s.deaths.length;
-      if (viol.length === 0 && okRounds) {
-        // ölüm konumlarını garanti et (model bazen değiştirir)
+      if (okRounds) {
         out.rounds = out.rounds.map((r: any, i: number) => ({ ...r, deathLocation: s.deaths[i].loc }));
-        console.log(`  ✓ ${s.id} (deneme ${attempt})`);
-        return out;
+        if (viol.length === 0) {
+          console.log(`  ✓ ${s.id} (deneme ${attempt})`);
+          return out;
+        }
+        if (viol.length < lastViolCount) { lastClean = out; lastViolCount = viol.length; }
       }
       const probs = [
-        viol.length ? `YASAK kelime kullandın: ${viol.join(", ")} — bunları KB karşılıklarıyla değiştir.` : "",
-        !okRounds ? `rounds dizisi ${s.deaths.length} öğe olmalı (her ölüm round'u için).` : "",
+        viol.length ? `YASAK kelime kullandın: ${viol.join(", ")} — bunları AT, etiketsiz akıcı koç cümlesi yaz.` : "",
+        !okRounds ? `rounds dizisi tam ${s.deaths.length} öğe olmalı.` : "",
       ].filter(Boolean).join(" ");
-      corrective = `\n\n⚠ DÜZELTME (önceki denemede hata): ${probs}`;
-      console.log(`  ↻ ${s.id} deneme ${attempt} reddedildi: ${probs.slice(0, 120)}`);
+      corrective = `\n\n⚠ DÜZELTME (önceki deneme hatası): ${probs}`;
+      console.log(`  ↻ ${s.id} deneme ${attempt}: ${probs.slice(0, 110)}`);
     } catch (e: any) {
       console.log(`  ! ${s.id} deneme ${attempt} hata: ${String(e.message).slice(0, 140)}`);
       corrective = "";
     }
   }
-  throw new Error(`${s.id} 4 denemede üretilemedi`);
+  if (lastClean) {
+    console.log(`  ⚠ ${s.id} — en iyi deneme kullanıldı (${lastViolCount} küçük ihlal kaldı)`);
+    return lastClean;
+  }
+  throw new Error(`${s.id} 6 denemede üretilemedi`);
 }
 
 async function main() {
@@ -192,7 +243,7 @@ async function main() {
   await Promise.all([worker(), worker(), worker()]);
 
   const ordered: Record<string, any> = {};
-  for (const s of SPECS) ordered[s.id] = results[s.id];
+  for (const s of SPECS) ordered[s.id] = cleanMatch(results[s.id]);
 
   const header = `// ════════════════════════════════════════════════════════════════════
 //  AUTO-GENERATED — gen-demo.mts ile gpt-5-mini + GERÇEK KB'den üretildi.

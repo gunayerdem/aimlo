@@ -1923,13 +1923,13 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
                 <span className="text-[9px] text-neutral-600 ml-auto">{lang === "tr" ? "Maç sonu" : "Post-match"}</span>
               </div>
               <p className="text-[12px] text-neutral-300 leading-relaxed">{lang === "tr"
-                ? "Ascent'te 13-9 kazandın. Jett ile 4 ölüm; ikisi A Main — açıyı erken verdin."
-                : "Won 13-9 on Ascent. 4 deaths as Jett; two at A Main — you gave the angle early."}</p>
+                ? "Ascent'te Jett ile 13-9 kazandın. Çoğu round hayatta kaldın; A Main'de iki kez öldün."
+                : "Won 13-9 on Ascent as Jett. Survived most rounds; died twice at A Main."}</p>
               <div className="mt-2.5 pl-3 border-l-2 border-[#FF4655]/45">
                 <p className="text-[9px] font-bold text-[#FF6B77] uppercase tracking-wider mb-0.5">{lang === "tr" ? "Kritik Hata" : "Critical Mistake"}</p>
                 <p className="text-[11px] text-neutral-400 leading-relaxed">{lang === "tr"
-                  ? "R2 & R7 A Main: aynı açıyı tuttun, okunabilir oldun. Off-angle değiştir ya da Omen smoke + flash ile gir."
-                  : "R2 & R7 A Main: held the same angle, got readable. Change off-angle or enter with Omen smoke + flash."}</p>
+                  ? "R2 ve R7'de A Main'den tek başına çıkıp trade gelmeden düştün. Omen smoke sonrası yoldaşınla birlikte gir."
+                  : "R2 & R7: pushed A Main solo and fell before any trade. Enter together after Omen smoke."}</p>
               </div>
             </div>
 
