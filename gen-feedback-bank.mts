@@ -85,6 +85,8 @@ function clean(s: string): string {
     // sızan whitelist-dışı İngilizce → TR (micro-position eki dahil)
     .replace(/micro-?position(['’][a-zçğıöşü]+)?/gi, "açı")
     .replace(/high flash/gi, "flash'ı yukarı").replace(/low flash/gi, "alçak flash").replace(/first shot/gi, "ilk mermi")
+    // callout/ability slash → virgül (A Main/Heaven, flash/smoke → A Main, Heaven)
+    .replace(/(\w)\s*\/\s*(\w)/g, "$1, $2").replace(/(\w)\s*\/\s*(\w)/g, "$1, $2")
     .replace(/\s*[;.,—-]\s*(çözüm|çozum|neden|fix|sorun|solution|problem)\s*:\s*/gi, ". ")
     .replace(/(^|\.\s+)(çözüm|çozum|neden|fix|sorun|solution|problem)\s*:\s*/gi, "$1")
     .replace(/\s{2,}/g, " ").replace(/\s+\./g, ".").replace(/\.{2,}/g, ".").trim();
@@ -105,11 +107,10 @@ DİL: sokak Türkçesi, sade. Oyun terimleri İngilizce (peek, trade, dash, entr
 ${policy}
 🚫 TARZANCA YASAK: "pre-aim"→"açıyı tutuyor"; "head atıyor"→"kafadan vuruyor"; "peek yapıyor"→"peek atıyor"; "swing yapıyor"→"swing atıyor"; "wide swing"→"geniş açıyla peek"; "X çekiyor"→"X atıyor". Etiket (Sorun:/Fix:/Çözüm:) YASAK — akıcı yaz.
 
-🎙 KOÇ AĞZI (ZORUNLU): Gerçek radiant koçun oyuncuya SÖYLEDİĞİ gibi konuş — yazılı rapor değil, ağızdan tavsiye.
-- Her alan MAX 2 KISA cümle. ";" ile uzayan, "çünkü … çünkü" dolambaçlı cümle YASAK.
-- TEREDDÜT YASAK: "olabilir", "gösteriyor olabilir", "belki", "sanırım" KULLANMA — net ve kesin konuş.
-- Slash YASAK ("A Main/Heaven" gibi) — tek callout söyle.
-- Önce ne oldu (1 kısa cümle), sonra ne yap (1 kısa cümle). Sert, net, sade.${corrective}
+🎙 KOÇ AĞZI (ZORUNLU): Seni CANLI İZLEYEN keskin bir radiant koç gibi DOĞRUDAN konuş — "şunu yaptın, bak şöyle yapmalısın". Yazılı rapor değil.
+- DOLU ol, telegraf gibi kısa olma: deathAnalysis 2-3 net cümle (ne yaptın + neden öldün + ne yapmalıydın). enemyPatterns 1-2 cümle. nextRoundPlan 1-2 cümle. İşe yarar, somut.
+- DİLBİLGİSİ KUSURSUZ: bozuk, devrik, yarım cümle ve YAZIM HATASI YASAK. Akıcı, doğal Türkçe; cümleler tam ve düzgün kurulsun.
+- TEREDDÜT YASAK ("olabilir/belki"); SLASH YASAK ("A Main/Heaven" → tek callout); etiket YASAK. Net, kesin.${corrective}
 ÖNEMLİ: Değerlerin İÇİNE "ÖLÜM NEDENİ:", "DÜŞMAN ANALİZİ:", "SONRAKİ ROUND:" gibi BAŞLIK/ÖNEK YAZMA — sadece düz cümle. Başlıklar UI'da var.
 ÇIKTI — SADECE JSON: { "title": "kısa başlık (3-5 kelime, callout içersin)", "deathAnalysis": "ne oldu + ne yap, MAX 2 kısa cümle, callout zorunlu, öneksiz", "enemyPatterns": "öldüğün yerden ÇIKARIM: seni kim, nereden kafadan vurdu / o açıyı nasıl tutuyor — kesin TEK kısa cümle. 'yeterli veri yok' / 'veri yok' YAZMA, öneksiz", "nextRoundPlan": "doğrudan emir, tek kısa cümle, öneksiz" }`;
   }
@@ -118,11 +119,10 @@ LANGUAGE: clear coach English, no corporate jargon. Standard game terms (peek, t
 ${policy}
 🚫 BANNED: generic advice ("play carefully", "be better", "use utility", "improve positioning"). No labels (Problem:/Fix:/Solution:).
 
-🎙 COACH TALK (REQUIRED): Sound like a real Radiant coach SPEAKING to the player — spoken advice, not a written report.
-- Each field MAX 2 SHORT sentences. No run-ons, no "because … because".
-- NO hedging: never "might", "could be", "maybe", "seems". Be confident.
-- No slashes ("A Main/Heaven"). One callout.
-- What happened (1 short sentence), what to do (1 short sentence). Blunt and clear.${corrective}
+🎙 COACH TALK (REQUIRED): Sound like a sharp Radiant coach WATCHING you live — direct: "you did X, here's what to do". Not a written report.
+- Be substantive, not telegraphic: deathAnalysis 2-3 full sentences (what you did + why you died + what to do). enemyPatterns 1-2 sentences. nextRoundPlan 1-2 sentences. Useful and concrete.
+- PERFECT grammar: no broken/fragment sentences, no typos. Natural, fluent English; complete sentences.
+- NO hedging ("might/could be/maybe"); NO slashes ("A Main/Heaven" → one callout); no labels. Confident and clear.${corrective}
 IMPORTANT: Do NOT write any heading/prefix like "DEATH CAUSE:", "ENEMY READ:", "NEXT ROUND:" inside the values — plain sentences only. The headings live in the UI.
 OUTPUT — JSON ONLY: { "title": "short title (3-5 words, include callout)", "deathAnalysis": "what happened + what to do, MAX 2 short sentences, callout required, no prefix", "enemyPatterns": "INFER from the death: who killed you and from where / how they hold that angle — confident single short sentence. Never 'not enough data', no prefix", "nextRoundPlan": "direct imperative, one short sentence, no prefix" }`;
 }
@@ -133,43 +133,82 @@ function usr(s: Scn, lang: "tr" | "en"): string {
   return `SCENARIO: ${s.agent} · ${s.map} · ${s.side} · died at ${s.loc}. Situation: ${s.note}. Produce one example coaching feedback for this death.`;
 }
 
-async function callGPT(system: string, user: string): Promise<any> {
-  const res = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", Authorization: `Bearer ${API_KEY}` },
-    body: JSON.stringify({
-      model: "gpt-5-mini", max_completion_tokens: 1400, reasoning_effort: "low",
-      response_format: { type: "json_object" },
-      messages: [{ role: "system", content: system }, { role: "user", content: user }],
-    }),
-  });
-  if (!res.ok) throw new Error(`OpenAI ${res.status}`);
-  const j = await res.json();
-  const c = j.choices?.[0]?.message?.content;
-  if (!c) throw new Error("boş");
-  return JSON.parse(c);
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+async function callGPT(system: string, user: string, maxTok = 1400): Promise<any> {
+  for (let i = 0; i < 5; i++) {
+    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${API_KEY}` },
+      body: JSON.stringify({
+        model: "gpt-5-mini", max_completion_tokens: maxTok, reasoning_effort: "low",
+        response_format: { type: "json_object" },
+        messages: [{ role: "system", content: system }, { role: "user", content: user }],
+      }),
+    });
+    if (res.status === 429 || res.status >= 500) { await sleep(2500 * (i + 1)); continue; }
+    if (!res.ok) throw new Error(`OpenAI ${res.status}`);
+    const j = await res.json();
+    const c = j.choices?.[0]?.message?.content;
+    if (!c) { await sleep(1200); continue; }
+    return JSON.parse(c);
+  }
+  throw new Error("API backoff bitti");
+}
+
+// Acımasız koç-yargıç: feedback gerçekten canlı izleyen keskin bir koç gibi mi,
+// dilbilgisi kusursuz mu, dolu mu, işe yarar mı? (brutal-audit-fix-loop'un kalbi)
+async function judge(item: any, lang: "tr" | "en"): Promise<{ pass: boolean; critique: string }> {
+  const sysJ = lang === "tr"
+    ? `Sen acımasız bir baş-antrenörsün. Aşağıdaki Valorant koç-feedback'ini değerlendir. GEÇMESİ için HEPSİ şart:
+1) Seni CANLI İZLEYEN keskin bir koç gibi DOĞRUDAN konuşuyor (yazılı rapor / genel laf değil).
+2) Dilbilgisi KUSURSUZ — bozuk, devrik, yarım cümle ve yazım hatası YOK.
+3) İŞE YARAR + somut — callout + net, uygulanabilir aksiyon.
+4) DOLU: deathAnalysis 2-3 gerçek cümle (telegraf/tek parça DEĞİL); diğer alanlar tam cümle.
+5) Tereddüt ("olabilir"), etiket (Sorun:/Fix:), yarı-İngilizce (first shot/high flash), slash YOK.
+Sadece JSON: {"pass": true|false, "critique": "kalırsa neden — TEK net cümle"}`
+    : `You are a ruthless head coach. Judge this Valorant coaching feedback. To PASS, ALL must hold:
+1) Talks like a sharp coach WATCHING you live (not a written report / generic).
+2) PERFECT grammar — no broken/fragment sentences, no typos.
+3) Useful + concrete — callout + clear actionable advice.
+4) Substantive: deathAnalysis 2-3 real sentences (not telegraphic); other fields full sentences.
+5) No hedging ("might"), no labels, no broken English, no slashes.
+JSON only: {"pass": true|false, "critique": "if fail, why — ONE clear sentence"}`;
+  const usrJ = `${lang === "tr" ? "Ölüm Nedeni" : "Death Cause"}: ${item.deathAnalysis}\n${lang === "tr" ? "Düşman Analizi" : "Enemy Read"}: ${item.enemyPatterns}\n${lang === "tr" ? "Sonraki Round" : "Next Round"}: ${item.nextRoundPlan}`;
+  try { const r = await callGPT(sysJ, usrJ, 250); return { pass: r.pass === true, critique: String(r.critique || "") }; }
+  catch { return { pass: true, critique: "" }; }
 }
 
 async function gen(s: Scn, lang: "tr" | "en"): Promise<any> {
   let corrective = "", best: any = null, bestV = Infinity;
-  for (let a = 1; a <= 6; a++) {
+  for (let a = 1; a <= 7; a++) {
     try {
       const out = await callGPT(sys(s, lang, corrective), usr(s, lang));
-      const txt = [out.title, out.deathAnalysis, out.enemyPatterns, out.nextRoundPlan].filter(Boolean).join(" \n ");
+      const cl = {
+        agent: s.agent, map: s.map, side: s.side, location: s.loc, lang,
+        title: clean(out.title || ""), deathAnalysis: clean(out.deathAnalysis || ""),
+        enemyPatterns: clean(out.enemyPatterns || ""), nextRoundPlan: clean(out.nextRoundPlan || ""),
+      };
+      const txt = [cl.title, cl.deathAnalysis, cl.enemyPatterns, cl.nextRoundPlan].filter(Boolean).join(" \n ");
       const v = violations(txt, lang);
-      const longs = [out.deathAnalysis, out.enemyPatterns, out.nextRoundPlan].filter((x: string) => String(x || "").length > 230).length;
-      const okFields = out.title && out.deathAnalysis && out.enemyPatterns && out.nextRoundPlan;
-      const issues = v.length + longs;
-      if (okFields && issues === 0) {
-        console.log(`  ✓ ${s.agent}/${s.loc} [${lang}]`);
-        return { agent: s.agent, map: s.map, side: s.side, location: s.loc, lang, title: clean(out.title), deathAnalysis: clean(out.deathAnalysis), enemyPatterns: clean(out.enemyPatterns), nextRoundPlan: clean(out.nextRoundPlan) };
+      const longs = [cl.deathAnalysis, cl.enemyPatterns, cl.nextRoundPlan].filter((x) => x.length > 420).length;
+      const tooShort = cl.deathAnalysis.length < 90 ? 1 : 0;
+      const missing = (cl.title && cl.deathAnalysis && cl.enemyPatterns && cl.nextRoundPlan) ? 0 : 1;
+      const issues = v.length + longs + tooShort + missing;
+      if (issues === 0) {
+        const verdict = await judge(cl, lang);
+        if (verdict.pass) { console.log(`  ✓ ${s.agent}/${s.loc} [${lang}] (deneme ${a})`); return cl; }
+        if (best === null) { best = cl; bestV = 1; }
+        corrective = `\n\n⚠ KOÇ DENETİMİ kaldı: ${verdict.critique}. Daha DOLU (2-3 cümle), dilbilgisi KUSURSUZ, doğrudan seni izleyen-koç ağzıyla ve İŞE YARAR yaz.`;
+        console.log(`  ↻ ${s.agent}/${s.loc} [${lang}] yargıç: ${verdict.critique.slice(0, 70)}`);
+        continue;
       }
-      if (okFields && issues < bestV) { best = out; bestV = issues; }
-      const probs = [v.length ? `yasak: ${v.join(", ")}` : "", longs ? "ÇOK UZUN: her alan MAX 2 KISA cümle, kısalt" : ""].filter(Boolean).join("; ");
-      corrective = `\n\n⚠ DÜZELTME: ${probs}. Kısa, sert, kesin koç ağzı — tereddüt/slash yok.`;
-    } catch (e: any) { console.log(`  ! ${s.agent}/${s.loc} [${lang}] ${String(e.message).slice(0, 60)}`); corrective = ""; }
+      if (issues < bestV) { best = cl; bestV = issues; }
+      const probs = [v.length ? `yasak: ${v.join(", ")}` : "", longs ? "çok uzun, kısalt" : "", tooShort ? "çok KISA: deathAnalysis 2-3 dolu cümle" : "", missing ? "alan eksik" : ""].filter(Boolean).join("; ");
+      corrective = `\n\n⚠ DÜZELTME: ${probs}. DOLU, kusursuz, doğrudan koç ağzı — tereddüt/slash/etiket/yarı-İngilizce yok.`;
+    } catch (e: any) { console.log(`  ! ${s.agent}/${s.loc} [${lang}] ${String(e.message).slice(0, 60)}`); corrective = ""; await sleep(1500); }
   }
-  if (best) { console.log(`  ⚠ ${s.agent}/${s.loc} [${lang}] en iyi (${bestV})`); return { agent: s.agent, map: s.map, side: s.side, location: s.loc, lang, title: clean(best.title), deathAnalysis: clean(best.deathAnalysis), enemyPatterns: clean(best.enemyPatterns), nextRoundPlan: clean(best.nextRoundPlan) }; }
+  if (best) { console.log(`  ⚠ ${s.agent}/${s.loc} [${lang}] en iyi (${bestV})`); return best; }
   throw new Error(`${s.agent}/${s.loc} [${lang}] üretilemedi`);
 }
 
@@ -195,7 +234,7 @@ async function main() {
   const out: any[] = new Array(jobs.length);
   const queue = jobs.map((j, i) => ({ ...j, i }));
   async function worker() { while (queue.length) { const job = queue.shift()!; try { out[job.i] = await gen(job.s, job.lang); } catch { out[job.i] = fallback(job.s, job.lang); console.log(`  ⛑ ${job.s.agent}/${job.s.loc} [${job.lang}] fallback`); } } }
-  await Promise.all([worker(), worker(), worker(), worker()]);
+  await Promise.all([worker(), worker(), worker()]);
 
   const tr = out.filter((o) => o.lang === "tr");
   const en = out.filter((o) => o.lang === "en");

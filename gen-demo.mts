@@ -91,6 +91,7 @@ function clean(s: string | undefined): string {
   if (!s) return "";
   let out = s
     .replace(/micro-?position(['’][a-zçğıöşü]+)?/gi, "açı")
+    .replace(/(\w)\s*\/\s*(\w)/g, "$1, $2").replace(/(\w)\s*\/\s*(\w)/g, "$1, $2")
     .replace(/\s*[;.,—-]\s*(çözüm|çozum|neden|fix|sorun|sebep)\s*:\s*/gi, ". ")
     .replace(/(^|\.\s+)(çözüm|çozum|neden|fix|sorun|sebep)\s*:\s*/gi, "$1")
     .replace(/\s{2,}/g, " ")
