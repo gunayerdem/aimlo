@@ -1435,6 +1435,16 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
   const [showAllBlog, setShowAllBlog] = useState(false);
   const [selectedPost, setSelectedPost] = useState<number | null>(null);
+  const [activeFeature, setActiveFeature] = useState(0);
+  const [featurePaused, setFeaturePaused] = useState(false);
+
+  // Feature showcase auto-advance (pauses on hover/interaction)
+  useEffect(() => {
+    if (featurePaused) return;
+    const n = t[lang].landingFeatures.length;
+    const id = setInterval(() => setActiveFeature((p) => (p + 1) % n), 4200);
+    return () => clearInterval(id);
+  }, [featurePaused, lang]);
 
   // ESC to close blog modals
   useEffect(() => {
@@ -1566,44 +1576,8 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
 
       // (Custom cursor removed 2026-06-12 — owner preferred the native cursor.)
 
-      // 6) PINNED FEATURE STORY — the features play as full-screen scenes
-      // driven by scroll (pin + scrub). This kills the "stacked card
-      // sections" flow: scroll becomes the timeline.
-      const story = document.querySelector<HTMLElement>("[data-story]");
-      if (story) {
-        const scenes = Array.from(story.querySelectorAll<HTMLElement>("[data-scene]"));
-        if (scenes.length > 1) {
-          gsap.set(scenes, { autoAlpha: 0, y: 60 });
-          gsap.set(scenes[0], { autoAlpha: 1, y: 0 });
-          // PIN the stage (GSAP transform-pin works even though <main> has
-          // overflow-x-hidden, which would break CSS position:sticky).
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: story,
-              start: "top top",
-              end: "+=" + scenes.length * 85 + "%",
-              scrub: 0.6,
-              pin: true,
-              anticipatePin: 1,
-            },
-          });
-          scenes.forEach((scene, i) => {
-            if (i === 0) return;
-            // Clean hand-off: previous scene fully exits BEFORE the next enters
-            // (no overlapping double-text), with a hold between transitions.
-            tl.to(scenes[i - 1], { autoAlpha: 0, y: -50, duration: 0.4, ease: "power2.in" }, i)
-              .fromTo(scene, { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: "power2.out" }, i + 0.48);
-          });
-          // progress ticks
-          const ticks = Array.from(story.querySelectorAll<HTMLElement>("[data-story-tick]"));
-          if (ticks.length) {
-            scenes.forEach((_, i) => {
-              tl.add(() => ticks.forEach((t2, ti) => t2.classList.toggle("story-tick--on", ti <= i)), i === 0 ? 0.01 : i + 0.6);
-            });
-          }
-          killers.push(() => { tl.scrollTrigger?.kill(); tl.kill(); });
-        }
-      }
+      // (Feature showcase is now an interactive React tab component — no scroll
+      // hijack. Scenes swap on click / auto-advance; far less scroll.)
 
       cleanup = () => killers.forEach((k) => k());
     })();
@@ -1690,7 +1664,9 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
   ];
 
   return (
-    <main className="min-h-screen bg-[#080c14] relative overflow-x-hidden">
+    // lang="en" so CSS text-transform:uppercase uses Latin casing (i→I) instead
+    // of Turkish dotted-İ on the display labels (ranks, stats, kickers, mockup).
+    <main lang="en" className="min-h-screen bg-[#080c14] relative overflow-x-hidden">
       <AmbientBg />
       {/* Code-generated starfield — depth field behind everything (no assets) */}
       <canvas ref={starRef} className="fixed inset-0 z-0 pointer-events-none" aria-hidden="true" />
@@ -1845,6 +1821,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
           <div data-stage className="relative h-[540px] xl:h-[620px] hidden lg:block animate-fade-in stagger-3">
             <div className="hero-stage-ring" />
             <div className="hero-stage-glow" />
+            <div className="hero-stage-floor" />
             <img
               src="https://media.valorant-api.com/agents/a3bfb853-43b2-7238-a4f1-ad90e9e46bcc/fullportrait.png"
               alt="Reyna"
@@ -1859,9 +1836,9 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               draggable={false}
               className="hero-agent hero-agent-main"
             />
-            {/* The eye CROWNS the stage — above the agents' heads, dead center */}
-            <div data-stage-eye data-depth="0.028" className="absolute -top-10 left-1/2 -translate-x-1/2 z-[5] animate-float-slow">
-              <HeroEye size={132} />
+            {/* The eye CROWNS the stage — lifted above the ring, dead center */}
+            <div data-stage-eye data-depth="0.03" className="absolute -top-20 left-1/2 -translate-x-1/2 z-[5] animate-float-slow">
+              <HeroEye size={156} />
             </div>
           </div>
         </div>
@@ -1884,8 +1861,8 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       </div>
 
       {/* ─── APP MOCKUP — floating dashboard preview ─── */}
-      <section className="relative z-10 mx-auto max-w-4xl px-5 sm:px-8 pb-16 animate-slide-up stagger-5">
-        <div className="relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-1 shadow-2xl shadow-black/50" style={{ background: "linear-gradient(135deg, rgba(255,70,85,0.03), rgba(77,124,255,0.03))" }}>
+      <section className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pt-20 pb-32 animate-slide-up stagger-5">
+        <div className="relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-1.5 shadow-2xl shadow-black/50" style={{ background: "linear-gradient(135deg, rgba(255,70,85,0.03), rgba(77,124,255,0.03))" }}>
           {/* Browser chrome bar */}
           <div className="flex items-center gap-2 px-4 py-2.5 border-b border-white/[0.06]">
             <div className="flex gap-1.5">
@@ -1898,7 +1875,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             </div>
           </div>
           {/* Fake dashboard content */}
-          <div className="p-5 sm:p-8 space-y-4">
+          <div className="p-6 sm:p-9 space-y-5">
             {/* Top stats row */}
             <div className="grid grid-cols-3 gap-3">
               {[
@@ -1997,47 +1974,76 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       {/* Ambient orb — left side */}
       <div className="pointer-events-none absolute left-[-200px] top-[1200px] w-[500px] h-[500px] rounded-full bg-[#FF4655]/[0.06] blur-[150px] animate-orb" style={{ zIndex: 0 }} />
 
-      {/* ─── ACT I: THE STORY — features as pinned, scroll-scrubbed scenes.
-            Scroll IS the timeline: each feature takes the full stage in turn
-            (the anti-"stacked card sections" structure). ─── */}
-      <section ref={featRevealRef} id="section-features" data-animate data-story className="relative z-10">
-        <div className="h-screen overflow-hidden flex items-center">
-          <div className="relative mx-auto max-w-6xl px-5 sm:px-8 w-full h-[70vh]">
+      {/* ─── ACT I: THE SHOWCASE — interactive, selectable feature stage.
+            Click a feature (or let it auto-advance) and the agent set-piece +
+            copy swap. One screen, no long scroll — selectable like the reel. ─── */}
+      <section ref={featRevealRef} id="section-features" data-animate
+        className="relative z-10 mx-auto max-w-6xl px-5 sm:px-8 pb-32 pt-10"
+        onMouseEnter={() => setFeaturePaused(true)}
+        onMouseLeave={() => setFeaturePaused(false)}
+      >
+        <p className="section-kicker mb-6">
+          <span className="sk-num">01</span>{lang === "tr" ? "ÖZELLIKLER" : "FEATURES"}
+        </p>
+        <h2 className="section-display mb-12 max-w-3xl">
+          {lang === "tr" ? "AI ile Oyununu Bir Üst Seviyeye Taşı" : "Take Your Game to the Next Level with AI"}
+        </h2>
+
+        <div className="grid lg:grid-cols-[0.92fr_1.08fr] gap-8 lg:gap-14 items-center">
+          {/* LEFT — selectable feature list */}
+          <div className="flex flex-col gap-2 order-2 lg:order-1">
             {l.landingFeatures.map((f, i) => {
               const v = featureVisuals[i];
+              const on = activeFeature === i;
               return (
-                <div key={i} data-scene className="story-scene">
-                  <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 items-center w-full">
-                    <div>
-                      <div className="story-num mb-4">0{i + 1}</div>
-                      <h3 className="story-title">{f.title}</h3>
-                      <p className="story-desc">{f.desc}</p>
-                    </div>
-                    <div className="relative hidden lg:block h-[440px] rounded-3xl overflow-hidden border border-white/[0.07]">
-                      <img
-                        src={`https://media.valorant-api.com/agents/${v.agentId}/background.png`}
-                        alt=""
-                        className="absolute inset-0 w-full h-full object-cover opacity-[0.14]"
-                        loading="lazy"
-                        draggable={false}
-                      />
-                      <div className="absolute inset-0" style={{ background: `radial-gradient(420px 300px at 50% 60%, ${v.color}1f, transparent 70%)` }} />
-                      <img
-                        src={`https://media.valorant-api.com/agents/${v.agentId}/fullportrait.png`}
-                        alt=""
-                        className="absolute left-1/2 bottom-0 -translate-x-1/2 h-[105%] object-contain"
-                        style={{ filter: `drop-shadow(0 24px 40px rgba(0,0,0,0.6)) drop-shadow(0 0 34px ${v.color}40)` }}
-                        loading="lazy"
-                        draggable={false}
-                      />
+                <button
+                  key={i}
+                  onClick={() => setActiveFeature(i)}
+                  className="feature-tab text-left"
+                  data-on={on ? "1" : "0"}
+                  style={on ? ({ ["--ft" as string]: v.color }) : undefined}
+                >
+                  <div className="flex items-center gap-4">
+                    <span className="feature-tab-num" lang="en">0{i + 1}</span>
+                    <div className="min-w-0">
+                      <h3 className="feature-tab-title">{f.title}</h3>
+                      <p className={`feature-tab-desc ${on ? "block" : "hidden lg:block"}`}>{f.desc}</p>
                     </div>
                   </div>
+                  <div className="feature-tab-bar"><span style={{ background: v.color }} /></div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* RIGHT — the live agent stage for the active feature */}
+          <div className="relative h-[360px] sm:h-[460px] lg:h-[520px] rounded-3xl overflow-hidden border border-white/[0.07] order-1 lg:order-2 feature-stage">
+            {l.landingFeatures.map((f, i) => {
+              const v = featureVisuals[i];
+              const on = activeFeature === i;
+              return (
+                <div key={i} className="absolute inset-0 transition-opacity duration-700" style={{ opacity: on ? 1 : 0 }} aria-hidden={!on}>
+                  <img
+                    src={`https://media.valorant-api.com/agents/${v.agentId}/background.png`}
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover opacity-[0.16]"
+                    loading="lazy"
+                    draggable={false}
+                  />
+                  <div className="absolute inset-0" style={{ background: `radial-gradient(460px 340px at 60% 64%, ${v.color}26, transparent 72%)` }} />
+                  <img
+                    src={`https://media.valorant-api.com/agents/${v.agentId}/fullportrait.png`}
+                    alt={f.title}
+                    className="absolute left-1/2 bottom-0 -translate-x-1/2 h-[108%] object-contain transition-transform duration-700"
+                    style={{ filter: `drop-shadow(0 26px 46px rgba(0,0,0,0.65)) drop-shadow(0 0 40px ${v.color}45)`, transform: on ? "translateX(-50%) scale(1)" : "translateX(-50%) scale(0.94)" }}
+                    loading="lazy"
+                    draggable={false}
+                  />
+                  {/* big index watermark */}
+                  <div className="absolute top-5 right-6 story-num" lang="en" style={{ opacity: 0.5 }}>0{i + 1}</div>
                 </div>
               );
             })}
-            <div className="story-rail hidden lg:flex">
-              {l.landingFeatures.map((_, i) => <span key={i} data-story-tick className="story-tick" />)}
-            </div>
           </div>
         </div>
       </section>
@@ -2055,31 +2061,56 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
           {lang === "tr" ? "Neden AIMLO?" : "Why AIMLO?"}
         </h2>
         <div data-cascade className="bento-grid">
-          {/* Big statement cell — benefit #1 */}
-          <div className="bento-cell bento-span2 bento-tall flex flex-col justify-between min-h-[320px]">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: "#FF465510", border: "1px solid #FF465520", color: "#FF4655" }}>
-              {benefitIcons[0]}
+          {/* Big statement cell — benefit #1, anchored by the living eye */}
+          <div className="bento-cell bento-span2 bento-tall relative flex flex-col justify-between min-h-[380px] overflow-hidden">
+            {/* the eye watermark fills the empty space */}
+            <div className="pointer-events-none absolute -right-12 -top-10 opacity-[0.5]">
+              <HeroEye size={260} />
             </div>
-            <div>
-              <h3 className="text-[26px] font-bold mb-3 tracking-tight text-white">{l.landingDiffItems[0].title}</h3>
-              <p className="text-[15px] text-neutral-400 leading-relaxed max-w-md">{l.landingDiffItems[0].desc}</p>
+            <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(420px 280px at 78% 8%, rgba(168,85,247,0.10), transparent 70%)" }} />
+            <div className="relative flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: "#FF465510", border: "1px solid #FF465520", color: "#FF4655" }}>
+                {benefitIcons[0]}
+              </div>
+              <span className="hero-kicker" style={{ fontSize: 10 }}>{lang === "tr" ? "ÇEKİRDEK" : "THE CORE"}</span>
+            </div>
+            <div className="relative">
+              <h3 className="text-[28px] sm:text-[32px] font-bold mb-3 tracking-tight text-white leading-tight">{l.landingDiffItems[0].title}</h3>
+              <p className="text-[15px] text-neutral-300 leading-relaxed max-w-md mb-5">{l.landingDiffItems[0].desc}</p>
+              {/* supporting proof chips — concrete, honest */}
+              <div className="flex flex-wrap gap-2">
+                {(lang === "tr"
+                  ? ["Ekran okuma (OCR)", "Vanguard-güvenli", "Sıfır manuel giriş", "Her round otomatik"]
+                  : ["Screen reading (OCR)", "Vanguard-safe", "Zero manual input", "Every round, auto"]
+                ).map((chip, ci) => (
+                  <span key={ci} className="text-[11px] font-medium px-3 py-1.5 rounded-full border border-white/[0.1] bg-white/[0.03] text-neutral-300">
+                    {chip}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
           {/* Benefit #2 */}
-          <div className="bento-cell">
+          <div className="bento-cell flex flex-col">
             <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style={{ background: "#4D7CFF10", border: "1px solid #4D7CFF20", color: "#4D7CFF" }}>
               {benefitIcons[1]}
             </div>
             <h3 className="text-[15px] font-semibold mb-2 tracking-tight text-white">{l.landingDiffItems[1].title}</h3>
-            <p className="text-[13px] text-neutral-500 leading-relaxed">{l.landingDiffItems[1].desc}</p>
+            <p className="text-[13px] text-neutral-500 leading-relaxed flex-1">{l.landingDiffItems[1].desc}</p>
+            <div className="mt-4 pt-3 border-t border-white/[0.06] text-[11px] font-mono" style={{ color: "#4D7CFF" }}>
+              {lang === "tr" ? "NEDEN öldün → NASIL düzeltilir" : "WHY you died → HOW to fix it"}
+            </div>
           </div>
           {/* Benefit #3 */}
-          <div className="bento-cell">
+          <div className="bento-cell flex flex-col">
             <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style={{ background: "#B44DFF10", border: "1px solid #B44DFF20", color: "#B44DFF" }}>
               {benefitIcons[2]}
             </div>
             <h3 className="text-[15px] font-semibold mb-2 tracking-tight text-white">{l.landingDiffItems[2].title}</h3>
-            <p className="text-[13px] text-neutral-500 leading-relaxed">{l.landingDiffItems[2].desc}</p>
+            <p className="text-[13px] text-neutral-500 leading-relaxed flex-1">{l.landingDiffItems[2].desc}</p>
+            <div className="mt-4 pt-3 border-t border-white/[0.06] text-[11px] font-mono" style={{ color: "#B44DFF" }}>
+              {lang === "tr" ? "MAÇTAN maça gelişim takibi" : "Tracked MATCH over match"}
+            </div>
           </div>
           {/* The pipeline — process folded in as a compact numbered list */}
           <div className="bento-cell">
