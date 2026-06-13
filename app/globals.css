@@ -740,3 +740,68 @@ select option { background: #060814; color: #eef0f8; }
   margin-right: 6px;
   letter-spacing: 0;
 }
+
+/* ═══════════════════════════════════════════
+   MOTION-SITE LAYER (motionsites.ai patterns)
+   — film grain + cinematic marquee (additive)
+   ═══════════════════════════════════════════ */
+
+/* Film grain: the cinema finish over everything. Pure overlay, no input. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-band {
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.014);
+  padding: 14px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-band:hover .marquee-track { animation-play-state: paused; }
+
+.marquee-seg {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 12px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(238, 240, 248, 0.45);
+  white-space: nowrap;
+}
+
+.marquee-dot {
+  color: var(--neon);
+  font-size: 8px;
+  margin: 0 26px;
+  letter-spacing: 0;
+  text-shadow: 0 0 10px rgba(255, 70, 85, 0.6);
+}

@@ -1669,6 +1669,22 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
         </div>
       </section>
 
+      {/* ─── MOTION MARQUEE — cinematic ticker (presentational only) ─── */}
+      <div className="relative z-10 marquee-band" aria-hidden="true">
+        <div className="marquee-track">
+          {[0, 1].map((seg) => (
+            <div key={seg} className="marquee-seg">
+              {(lang === "tr"
+                ? ["OCR YAKALAMA", "AI ANALİZ", "ROUND GERİ BİLDİRİMİ", "MAÇ RAPORU", "PATERN TESPİTİ", "RANK ATLA"]
+                : ["OCR CAPTURE", "AI ANALYSIS", "ROUND FEEDBACK", "MATCH REPORT", "PATTERN DETECTION", "RANK UP"]
+              ).map((item, mi) => (
+                <span key={mi} className="marquee-item">{item}<span className="marquee-dot">◆</span></span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* ─── APP MOCKUP — floating dashboard preview ─── */}
       <section className="relative z-10 mx-auto max-w-4xl px-5 sm:px-8 pb-16 animate-slide-up stagger-5">
         <div className="relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-1 shadow-2xl shadow-black/50" style={{ background: "linear-gradient(135deg, rgba(255,70,85,0.03), rgba(77,124,255,0.03))" }}>
