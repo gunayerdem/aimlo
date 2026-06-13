@@ -54,16 +54,16 @@ const TARZANCA_TR = [
   /sorun\s*:/i, /\bfix\s*:/i, /sonras[ıi]\s+plan/i, /tekil veri/i, /veri yok/i, /belirsiz/i,
   // koç-sesi denetimi (2026-06-13): patron-şikayeti kalıplar (teammate/cover/sightline
   // doğal gamer-Türkçesi sayıldı, hard-yasak değil — soft çeviri prompt'ta kalır)
-  /first shot/i, /first contact/i, /high flash/i, /low flash/i, /micro-?position/i,
+  /first shot/i, /first contact/i, /high flash/i, /low flash/i, /\bmicro-/i, /\bkiller\b/i,
   /cezaland[ıi]r/i, /konumland[ıi]r/i, /pozisyonland[ıi]r/i,
-  /kuru (entry|giriş|peek|swing|koş|gir)/i, TIME_RE,
+  /kuru (entry|giriş|peek|swing|koş|gir)/i, /\bolabilir\b/i, /gösteriyor olabilir/i, TIME_RE,
 ];
 const BANNED_EN = [
   "play carefully", "gather information", "improve positioning", "play with team",
   "use utility", "be better", "try different", "keep improving", "play smarter",
   "deployment", "protocol", "optimal", "utilize", "facilitate", "leverage",
 ];
-const LABELS = [/problem\s*:/i, /\bfix\s*:/i, /solution\s*:/i, /next round plan\s*:/i, /no data/i, /not enough data/i, /micro-?position/i, /first[- ]shot advantage/i, TIME_RE];
+const LABELS = [/problem\s*:/i, /\bfix\s*:/i, /solution\s*:/i, /next round plan\s*:/i, /no data/i, /not enough data/i, /micro-?position/i, /first[- ]shot advantage/i, /\bmight\b/i, /could be/i, /\bmaybe\b/i, /\bseems\b/i, TIME_RE];
 
 function violations(text: string, lang: "tr" | "en"): string[] {
   const t = text.toLowerCase();
@@ -84,6 +84,7 @@ function clean(s: string): string {
     .replace(/^\s*(ölüm neden[iı]|hata analiz[iı]|ölüm analiz[iı]|düşman analiz[iı]|düşman pattern[iı]|sonraki round|death cause|death analysis|enemy read|enemy pattern|next round)\s*:\s*/i, "")
     // sızan whitelist-dışı İngilizce → TR (micro-position eki dahil)
     .replace(/micro-?position(['’][a-zçğıöşü]+)?/gi, "açı")
+    .replace(/high flash/gi, "flash'ı yukarı").replace(/low flash/gi, "alçak flash").replace(/first shot/gi, "ilk mermi")
     .replace(/\s*[;.,—-]\s*(çözüm|çozum|neden|fix|sorun|solution|problem)\s*:\s*/gi, ". ")
     .replace(/(^|\.\s+)(çözüm|çozum|neden|fix|sorun|solution|problem)\s*:\s*/gi, "$1")
     .replace(/\s{2,}/g, " ").replace(/\s+\./g, ".").replace(/\.{2,}/g, ".").trim();
@@ -95,21 +96,35 @@ function sys(s: Scn, lang: "tr" | "en", corrective: string): string {
   let kb = "";
   try { kb = loadKnowledge("feedback", { map: s.map, agent: s.agent, rank: "ascendant" }); } catch {}
   const kbPart = kb ? `\nKOÇLUK BİLGİ KAYNAĞI:\n${kb}\n` : "";
-  const policy = buildPolicyBlock({ confidence: "high", tone: "strict", lang });
+  // includeEnemyGate:false — showcase senaryosunda ölüm yerinde HEP bir savunan var,
+  // o yüzden "yeterli veri yok" dedirten gate kapalı; kesin düşman okuması istiyoruz.
+  const policy = buildPolicyBlock({ confidence: "high", tone: "strict", lang, includeEnemyGate: false });
   if (lang === "tr") {
     return `${kbPart}Sen AIMLO'sun: Radiant seviye Valorant koçu. Keskin, spesifik, kendinden emin.
 DİL: sokak Türkçesi, sade. Oyun terimleri İngilizce (peek, trade, dash, entry, smoke, flash, op, lurk, anchor, retake).
 ${policy}
-🚫 TARZANCA YASAK: "pre-aim"→"açıyı tutuyor"; "head atıyor"→"kafadan vuruyor"; "peek yapıyor"→"peek atıyor"; "swing yapıyor"→"swing atıyor"; "wide swing"→"geniş açıyla peek"; "X çekiyor"→"X atıyor". Etiket (Sorun:/Fix:/Çözüm:) YASAK — akıcı yaz.${corrective}
+🚫 TARZANCA YASAK: "pre-aim"→"açıyı tutuyor"; "head atıyor"→"kafadan vuruyor"; "peek yapıyor"→"peek atıyor"; "swing yapıyor"→"swing atıyor"; "wide swing"→"geniş açıyla peek"; "X çekiyor"→"X atıyor". Etiket (Sorun:/Fix:/Çözüm:) YASAK — akıcı yaz.
+
+🎙 KOÇ AĞZI (ZORUNLU): Gerçek radiant koçun oyuncuya SÖYLEDİĞİ gibi konuş — yazılı rapor değil, ağızdan tavsiye.
+- Her alan MAX 2 KISA cümle. ";" ile uzayan, "çünkü … çünkü" dolambaçlı cümle YASAK.
+- TEREDDÜT YASAK: "olabilir", "gösteriyor olabilir", "belki", "sanırım" KULLANMA — net ve kesin konuş.
+- Slash YASAK ("A Main/Heaven" gibi) — tek callout söyle.
+- Önce ne oldu (1 kısa cümle), sonra ne yap (1 kısa cümle). Sert, net, sade.${corrective}
 ÖNEMLİ: Değerlerin İÇİNE "ÖLÜM NEDENİ:", "DÜŞMAN ANALİZİ:", "SONRAKİ ROUND:" gibi BAŞLIK/ÖNEK YAZMA — sadece düz cümle. Başlıklar UI'da var.
-ÇIKTI — SADECE JSON: { "title": "kısa başlık (3-5 kelime, callout içersin)", "deathAnalysis": "neden öldün + net çözüm, akıcı 1-2 cümle, callout zorunlu, öneksiz", "enemyPatterns": "rakip bu callout'u nasıl tutuyor/cezalandırıyor, kendinden emin tek cümle, öneksiz", "nextRoundPlan": "doğrudan emir, öneksiz" }`;
+ÇIKTI — SADECE JSON: { "title": "kısa başlık (3-5 kelime, callout içersin)", "deathAnalysis": "ne oldu + ne yap, MAX 2 kısa cümle, callout zorunlu, öneksiz", "enemyPatterns": "öldüğün yerden ÇIKARIM: seni kim, nereden kafadan vurdu / o açıyı nasıl tutuyor — kesin TEK kısa cümle. 'yeterli veri yok' / 'veri yok' YAZMA, öneksiz", "nextRoundPlan": "doğrudan emir, tek kısa cümle, öneksiz" }`;
   }
   return `${kbPart}You are AIMLO: a Radiant-level Valorant coach. Sharp, specific, confident.
 LANGUAGE: clear coach English, no corporate jargon. Standard game terms (peek, trade, dash, entry, smoke, flash, op, lurk, anchor, retake, pre-aim, wide swing are FINE in English).
 ${policy}
-🚫 BANNED: generic advice ("play carefully", "be better", "use utility", "improve positioning"). No labels (Problem:/Fix:/Solution:). Write fluent, confident sentences.${corrective}
+🚫 BANNED: generic advice ("play carefully", "be better", "use utility", "improve positioning"). No labels (Problem:/Fix:/Solution:).
+
+🎙 COACH TALK (REQUIRED): Sound like a real Radiant coach SPEAKING to the player — spoken advice, not a written report.
+- Each field MAX 2 SHORT sentences. No run-ons, no "because … because".
+- NO hedging: never "might", "could be", "maybe", "seems". Be confident.
+- No slashes ("A Main/Heaven"). One callout.
+- What happened (1 short sentence), what to do (1 short sentence). Blunt and clear.${corrective}
 IMPORTANT: Do NOT write any heading/prefix like "DEATH CAUSE:", "ENEMY READ:", "NEXT ROUND:" inside the values — plain sentences only. The headings live in the UI.
-OUTPUT — JSON ONLY: { "title": "short title (3-5 words, include callout)", "deathAnalysis": "why you died + clear fix, fluent 1-2 sentences, callout required, no prefix", "enemyPatterns": "how the defender holds/punishes this spot, confident single sentence, no prefix", "nextRoundPlan": "direct imperative, no prefix" }`;
+OUTPUT — JSON ONLY: { "title": "short title (3-5 words, include callout)", "deathAnalysis": "what happened + what to do, MAX 2 short sentences, callout required, no prefix", "enemyPatterns": "INFER from the death: who killed you and from where / how they hold that angle — confident single short sentence. Never 'not enough data', no prefix", "nextRoundPlan": "direct imperative, one short sentence, no prefix" }`;
 }
 function usr(s: Scn, lang: "tr" | "en"): string {
   if (lang === "tr") {
@@ -123,7 +138,7 @@ async function callGPT(system: string, user: string): Promise<any> {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${API_KEY}` },
     body: JSON.stringify({
-      model: "gpt-5-mini", max_completion_tokens: 1200, reasoning_effort: "minimal",
+      model: "gpt-5-mini", max_completion_tokens: 1400, reasoning_effort: "low",
       response_format: { type: "json_object" },
       messages: [{ role: "system", content: system }, { role: "user", content: user }],
     }),
@@ -137,18 +152,21 @@ async function callGPT(system: string, user: string): Promise<any> {
 
 async function gen(s: Scn, lang: "tr" | "en"): Promise<any> {
   let corrective = "", best: any = null, bestV = Infinity;
-  for (let a = 1; a <= 5; a++) {
+  for (let a = 1; a <= 6; a++) {
     try {
       const out = await callGPT(sys(s, lang, corrective), usr(s, lang));
       const txt = [out.title, out.deathAnalysis, out.enemyPatterns, out.nextRoundPlan].filter(Boolean).join(" \n ");
       const v = violations(txt, lang);
-      const ok = out.title && out.deathAnalysis && out.enemyPatterns && out.nextRoundPlan;
-      if (ok && v.length === 0) {
+      const longs = [out.deathAnalysis, out.enemyPatterns, out.nextRoundPlan].filter((x: string) => String(x || "").length > 230).length;
+      const okFields = out.title && out.deathAnalysis && out.enemyPatterns && out.nextRoundPlan;
+      const issues = v.length + longs;
+      if (okFields && issues === 0) {
         console.log(`  ✓ ${s.agent}/${s.loc} [${lang}]`);
         return { agent: s.agent, map: s.map, side: s.side, location: s.loc, lang, title: clean(out.title), deathAnalysis: clean(out.deathAnalysis), enemyPatterns: clean(out.enemyPatterns), nextRoundPlan: clean(out.nextRoundPlan) };
       }
-      if (ok && v.length < bestV) { best = out; bestV = v.length; }
-      corrective = `\n\n⚠ DÜZELTME: yasak kullandın: ${v.join(", ")} — at, akıcı yaz.`;
+      if (okFields && issues < bestV) { best = out; bestV = issues; }
+      const probs = [v.length ? `yasak: ${v.join(", ")}` : "", longs ? "ÇOK UZUN: her alan MAX 2 KISA cümle, kısalt" : ""].filter(Boolean).join("; ");
+      corrective = `\n\n⚠ DÜZELTME: ${probs}. Kısa, sert, kesin koç ağzı — tereddüt/slash yok.`;
     } catch (e: any) { console.log(`  ! ${s.agent}/${s.loc} [${lang}] ${String(e.message).slice(0, 60)}`); corrective = ""; }
   }
   if (best) { console.log(`  ⚠ ${s.agent}/${s.loc} [${lang}] en iyi (${bestV})`); return { agent: s.agent, map: s.map, side: s.side, location: s.loc, lang, title: clean(best.title), deathAnalysis: clean(best.deathAnalysis), enemyPatterns: clean(best.enemyPatterns), nextRoundPlan: clean(best.nextRoundPlan) }; }
