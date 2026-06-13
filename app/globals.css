@@ -1220,7 +1220,8 @@ body::after {
   font-weight: 800;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(190, 160, 255, 0.55);
+  /* WCAG AA: 0.55 → 0.85 alfa, koyu kart üstünde ~6:1 kontrast (önce 3.40:1) */
+  color: rgba(196, 172, 255, 0.85);
 }
 
 /* Girdi */
@@ -1259,9 +1260,10 @@ body::after {
 }
 .auth-link:hover { color: var(--iris-pink); filter: drop-shadow(0 0 8px rgba(225, 77, 218, 0.4)); }
 
-/* OTP kutusu */
+/* OTP kutusu — mobilde (≤375px) flex ile küçülebilsin diye min-width:0 + clamp */
 .auth-otp {
-  width: 3rem;
+  width: clamp(2.15rem, 11vw, 3rem);
+  min-width: 0;
   height: 3.5rem;
   text-align: center;
   font-size: 1.75rem;

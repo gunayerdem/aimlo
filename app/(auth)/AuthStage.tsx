@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 /**
  * 3D tilt sahnesi — auth kartı imlece doğru hafifçe eğilir (perspektif).
@@ -10,6 +10,9 @@ import { useRef, type ReactNode } from "react";
 export default function AuthStage({ children }: { children: ReactNode }) {
   const tiltRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number | null>(null);
+
+  // Unmount'ta bekleyen rAF'ı temizle (sayfa geçişlerinde hijyen).
+  useEffect(() => () => { if (rafRef.current !== null) cancelAnimationFrame(rafRef.current); }, []);
 
   function handleMove(e: React.MouseEvent<HTMLDivElement>) {
     const el = tiltRef.current;

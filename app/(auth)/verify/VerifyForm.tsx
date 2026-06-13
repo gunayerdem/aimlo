@@ -163,7 +163,7 @@ export function VerifyForm({
         <input type="hidden" name="email" value={email} />
         <input type="hidden" name="code" value={code} />
 
-        <div className="flex items-center justify-center gap-1.5 sm:gap-2">
+        <div className="flex items-center justify-center gap-1 sm:gap-2">
           {[0, 1, 2].map((i) => (
             <CharBox
               key={i}
@@ -228,7 +228,7 @@ export function VerifyForm({
           <input type="hidden" name="email" value={email} />
           <input type="hidden" name="purpose" value={purpose} />
           {resendCooldown > 0 ? (
-            <p className="text-[12px] text-neutral-600">
+            <p className="text-[12px] text-neutral-400">
               Yeni kod talep etmek için{" "}
               <span className="text-neutral-400 font-mono">
                 {resendCooldown}s

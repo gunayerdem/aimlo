@@ -46,7 +46,7 @@ export default async function VerifyPage({
           <p className="mt-2 text-sm text-neutral-500">
             <span className="text-neutral-300">{email}</span>
           </p>
-          <p className="mt-1 text-[12px] text-neutral-600">
+          <p className="mt-1 text-[12px] text-neutral-400">
             Adresine 6 haneli bir kod gönderdik
           </p>
         </div>
