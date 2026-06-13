@@ -2024,29 +2024,26 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               const on = activeFeature === i;
               return (
                 <div key={i} className="absolute inset-0 transition-opacity duration-700" style={{ opacity: on ? 1 : 0 }} aria-hidden={!on}>
-                  {/* soft agent-tinted wash — the busy graffiti background is
-                       dropped to a whisper so the figure reads cleanly */}
-                  <img
-                    src={`https://media.valorant-api.com/agents/${v.agentId}/background.png`}
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover opacity-[0.05]"
-                    style={{ filter: "blur(2px) saturate(0.6)", maskImage: "radial-gradient(120% 90% at 60% 35%, #000 30%, transparent 80%)", WebkitMaskImage: "radial-gradient(120% 90% at 60% 35%, #000 30%, transparent 80%)" }}
-                    loading="lazy"
-                    draggable={false}
-                  />
-                  <div className="absolute inset-0" style={{ background: `radial-gradient(520px 380px at 56% 46%, ${v.color}22, transparent 70%)` }} />
-                  {/* pedestal glow under the figure */}
-                  <div className="absolute left-1/2 bottom-[6%] -translate-x-1/2 w-[62%] h-[46px] rounded-[50%]" style={{ background: `radial-gradient(ellipse at center, ${v.color}40, transparent 70%)`, filter: "blur(10px)" }} />
+                  {/* clean stage — NO graffiti. Just an agent-tinted aura + ring
+                       + floor, exactly like the hero stage. */}
+                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] max-w-[92%] rounded-full border border-white/[0.06] animate-rotate-slow" />
+                  <div className="absolute inset-0" style={{ background: `radial-gradient(520px 420px at 50% 44%, ${v.color}26, transparent 68%)` }} />
+                  {/* floor pedestal */}
+                  <div className="absolute left-1/2 bottom-[7%] -translate-x-1/2 w-[58%] h-[44px] rounded-[50%]" style={{ background: `radial-gradient(ellipse at center, ${v.color}55, transparent 72%)`, filter: "blur(11px)" }} />
+                  <div className="absolute left-1/2 bottom-[7%] -translate-x-1/2 w-[72%] h-[30px] rounded-[50%]" style={{ background: "radial-gradient(ellipse at center, rgba(0,0,0,0.6), transparent 72%)", filter: "blur(6px)" }} />
                   <img
                     src={`https://media.valorant-api.com/agents/${v.agentId}/fullportrait.png`}
                     alt={f.title}
-                    className="absolute left-1/2 bottom-[5%] -translate-x-1/2 h-[86%] sm:h-[88%] w-auto max-w-[88%] object-contain object-bottom transition-transform duration-700"
-                    style={{ filter: `drop-shadow(0 30px 50px rgba(0,0,0,0.7)) drop-shadow(0 0 44px ${v.color}50)`, transform: on ? "translateX(-50%) scale(1)" : "translateX(-50%) scale(0.95)" }}
+                    className="absolute left-1/2 bottom-[6%] -translate-x-1/2 h-[90%] w-auto object-contain object-bottom transition-transform duration-700"
+                    style={{
+                      filter: `drop-shadow(0 32px 52px rgba(0,0,0,0.72)) drop-shadow(-12px 0 30px ${v.color}26) drop-shadow(12px 8px 36px ${v.color}55)`,
+                      transform: on ? "translateX(-50%) scale(1)" : "translateX(-50%) scale(0.95)",
+                    }}
                     loading="lazy"
                     draggable={false}
                   />
                   {/* big index watermark */}
-                  <div className="absolute top-6 right-7 story-num" lang="en" style={{ opacity: 0.42 }}>0{i + 1}</div>
+                  <div className="absolute top-6 right-7 story-num" lang="en" style={{ opacity: 0.4 }}>0{i + 1}</div>
                 </div>
               );
             })}
