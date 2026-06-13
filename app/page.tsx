@@ -2031,13 +2031,17 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
                   {/* floor pedestal */}
                   <div className="absolute left-1/2 bottom-[7%] -translate-x-1/2 w-[58%] h-[44px] rounded-[50%]" style={{ background: `radial-gradient(ellipse at center, ${v.color}55, transparent 72%)`, filter: "blur(11px)" }} />
                   <div className="absolute left-1/2 bottom-[7%] -translate-x-1/2 w-[72%] h-[30px] rounded-[50%]" style={{ background: "radial-gradient(ellipse at center, rgba(0,0,0,0.6), transparent 72%)", filter: "blur(6px)" }} />
+                  {/* Measured: the character sits centered in the PNG (cx≈0.50)
+                       and fills the height — so object-contain + center keeps the
+                       whole agent visible AND dead-centered on the stage. */}
                   <img
                     src={`https://media.valorant-api.com/agents/${v.agentId}/fullportrait.png`}
                     alt={f.title}
-                    className="absolute left-1/2 bottom-[6%] -translate-x-1/2 h-[90%] w-auto object-contain object-bottom transition-transform duration-700"
+                    className="absolute inset-0 w-full h-full object-contain object-bottom transition-transform duration-700"
                     style={{
+                      padding: "5% 4% 5%",
                       filter: `drop-shadow(0 32px 52px rgba(0,0,0,0.72)) drop-shadow(-12px 0 30px ${v.color}26) drop-shadow(12px 8px 36px ${v.color}55)`,
-                      transform: on ? "translateX(-50%) scale(1)" : "translateX(-50%) scale(0.95)",
+                      transform: on ? "scale(1)" : "scale(0.95)",
                     }}
                     loading="lazy"
                     draggable={false}
