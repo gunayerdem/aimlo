@@ -72,6 +72,8 @@ function violations(text: string, lang: "tr" | "en"): string[] {
 function clean(s: string): string {
   if (!s) return "";
   let out = s
+    // baştaki bölüm-başlığı öneklerini sök (UI'da zaten başlık var)
+    .replace(/^\s*(ölüm neden[iı]|hata analiz[iı]|ölüm analiz[iı]|düşman analiz[iı]|düşman pattern[iı]|sonraki round|death cause|death analysis|enemy read|enemy pattern|next round)\s*:\s*/i, "")
     .replace(/\s*[;.,—-]\s*(çözüm|çozum|neden|fix|sorun|solution|problem)\s*:\s*/gi, ". ")
     .replace(/(^|\.\s+)(çözüm|çozum|neden|fix|sorun|solution|problem)\s*:\s*/gi, "$1")
     .replace(/\s{2,}/g, " ").replace(/\s+\./g, ".").replace(/\.{2,}/g, ".").trim();
@@ -89,13 +91,15 @@ function sys(s: Scn, lang: "tr" | "en", corrective: string): string {
 DİL: sokak Türkçesi, sade. Oyun terimleri İngilizce (peek, trade, dash, entry, smoke, flash, op, lurk, anchor, retake).
 ${policy}
 🚫 TARZANCA YASAK: "pre-aim"→"açıyı tutuyor"; "head atıyor"→"kafadan vuruyor"; "peek yapıyor"→"peek atıyor"; "swing yapıyor"→"swing atıyor"; "wide swing"→"geniş açıyla peek"; "X çekiyor"→"X atıyor". Etiket (Sorun:/Fix:/Çözüm:) YASAK — akıcı yaz.${corrective}
-ÇIKTI — SADECE JSON: { "title": "kısa başlık (3-5 kelime, callout içersin)", "deathAnalysis": "ÖLÜM NEDENİ: neden öldün + net çözüm, akıcı 1-2 cümle, callout zorunlu", "enemyPatterns": "DÜŞMAN ANALİZİ: rakip bu callout'u nasıl tutuyor/cezalandırıyor, kendinden emin tek cümle", "nextRoundPlan": "SONRAKİ ROUND: doğrudan emir, öneksiz" }`;
+ÖNEMLİ: Değerlerin İÇİNE "ÖLÜM NEDENİ:", "DÜŞMAN ANALİZİ:", "SONRAKİ ROUND:" gibi BAŞLIK/ÖNEK YAZMA — sadece düz cümle. Başlıklar UI'da var.
+ÇIKTI — SADECE JSON: { "title": "kısa başlık (3-5 kelime, callout içersin)", "deathAnalysis": "neden öldün + net çözüm, akıcı 1-2 cümle, callout zorunlu, öneksiz", "enemyPatterns": "rakip bu callout'u nasıl tutuyor/cezalandırıyor, kendinden emin tek cümle, öneksiz", "nextRoundPlan": "doğrudan emir, öneksiz" }`;
   }
   return `${kbPart}You are AIMLO: a Radiant-level Valorant coach. Sharp, specific, confident.
 LANGUAGE: clear coach English, no corporate jargon. Standard game terms (peek, trade, dash, entry, smoke, flash, op, lurk, anchor, retake, pre-aim, wide swing are FINE in English).
 ${policy}
 🚫 BANNED: generic advice ("play carefully", "be better", "use utility", "improve positioning"). No labels (Problem:/Fix:/Solution:). Write fluent, confident sentences.${corrective}
-OUTPUT — JSON ONLY: { "title": "short title (3-5 words, include callout)", "deathAnalysis": "DEATH CAUSE: why you died + clear fix, fluent 1-2 sentences, callout required", "enemyPatterns": "ENEMY READ: how the defender holds/punishes this spot, confident single sentence", "nextRoundPlan": "NEXT ROUND: direct imperative, no prefix" }`;
+IMPORTANT: Do NOT write any heading/prefix like "DEATH CAUSE:", "ENEMY READ:", "NEXT ROUND:" inside the values — plain sentences only. The headings live in the UI.
+OUTPUT — JSON ONLY: { "title": "short title (3-5 words, include callout)", "deathAnalysis": "why you died + clear fix, fluent 1-2 sentences, callout required, no prefix", "enemyPatterns": "how the defender holds/punishes this spot, confident single sentence, no prefix", "nextRoundPlan": "direct imperative, no prefix" }`;
 }
 function usr(s: Scn, lang: "tr" | "en"): string {
   if (lang === "tr") {
