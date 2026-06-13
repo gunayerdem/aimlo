@@ -1901,18 +1901,11 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               <span className="text-[8px] font-bold text-[#22D3EE] bg-[#22D3EE]/10 border border-[#22D3EE]/25 px-2 py-1 rounded tracking-[0.12em] whitespace-nowrap">AI {lang === "tr" ? "RAPOR" : "REPORT"}</span>
             </div>
 
-            {/* KPI satırı — iris gradient */}
-            <div className="relative grid grid-cols-3 gap-3">
-              {[
-                { label: lang === "tr" ? "Round Kazanma" : "Round Win %", value: "67%" },
-                { label: lang === "tr" ? "K/D Oranı" : "K/D Ratio", value: "1.42" },
-                { label: lang === "tr" ? "Karar Skoru" : "Decision Score", value: "7/10" },
-              ].map((s, i) => (
-                <div key={i} className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-3.5 text-center">
-                  <p className="text-2xl sm:text-3xl font-black" style={{ backgroundImage: "linear-gradient(135deg,#FF5E8A,#A855F7,#22D3EE)", WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent" }}>{s.value}</p>
-                  <p className="text-[9px] text-neutral-600 mt-1 uppercase tracking-wider">{s.label}</p>
-                </div>
-              ))}
+            {/* Koçluk vurgusu — bizi öne çıkaran K/D değil, AI koçluğu */}
+            <div className="relative flex items-center gap-2 flex-wrap">
+              <span className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: "#C9B6FF" }}>{lang === "tr" ? "AI Koçluk" : "AI Coaching"}</span>
+              <span className="text-[10px] text-neutral-500">{lang === "tr" ? "— neden kaybettiğini açıklar, çözümü verir" : "— explains why you lost, gives the fix"}</span>
+              <span className="ml-auto text-[8px] font-bold text-[#22D3EE] bg-[#22D3EE]/10 border border-[#22D3EE]/25 px-2 py-1 rounded tracking-[0.1em] whitespace-nowrap">{lang === "tr" ? "GERÇEK ÇIKTI" : "REAL OUTPUT"}</span>
             </div>
 
             {/* AI ANALİZ — GERÇEK KB feedback (gpt-5-mini, ai-policy uyumlu, tarzanca yok) */}
@@ -1933,32 +1926,35 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               </div>
             </div>
 
-            {/* Beceri profili + round akışı */}
-            <div className="relative grid grid-cols-2 gap-3">
-              <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4">
-                <p className="text-[10px] text-neutral-500 mb-2.5 uppercase tracking-wider">{lang === "tr" ? "Beceri Profili" : "Skill Profile"}</p>
-                {([[lang === "tr" ? "Hayatta Kalma" : "Survival", 59], [lang === "tr" ? "Pozisyon" : "Positioning", 83], [lang === "tr" ? "Karar" : "Decision", 60], [lang === "tr" ? "Etki" : "Impact", 74]] as [string, number][]).map((row, j) => (
-                  <div key={j} className="flex items-center gap-2 mb-1.5">
-                    <span className="text-[9px] text-neutral-500 w-20">{row[0]}</span>
-                    <div className="flex-1 h-1.5 rounded-full bg-white/[0.05] overflow-hidden">
-                      <div className="h-full rounded-full" style={{ width: `${row[1]}%`, background: "linear-gradient(90deg,#FF5E8A,#A855F7,#22D3EE)" }} />
+            {/* Round-by-round koçluk — GERÇEK KB feedback'i (bizi öne çıkaran şey) */}
+            <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {([
+                { r: "R2", loc: "A Main",
+                  err: lang === "tr" ? "A Main'i tek başına açtın, trade gelmeden düştün." : "Pushed A Main solo and fell before any trade.",
+                  plan: lang === "tr" ? "Omen smoke sonrası yoldaşınla birlikte gir." : "Enter together right after Omen smoke." },
+                { r: "R5", loc: "Mid Courtyard",
+                  err: lang === "tr" ? "Mid'de bilgi almadan erken swing attın." : "Swung Mid early without any info.",
+                  plan: lang === "tr" ? "Sova recon görmeden çıkma, updraft ile farklı açı al." : "Wait for Sova recon, take a different angle with updraft." },
+              ]).map((rd, i) => (
+                <div key={i} className="rounded-xl bg-white/[0.025] border border-white/[0.06] overflow-hidden">
+                  <div className="h-[2px]" style={{ background: "#ef4444" }} />
+                  <div className="px-3 py-2 border-b border-white/[0.05] flex items-center gap-1.5">
+                    <span className="text-[11px] font-bold text-white">{rd.r}</span>
+                    <span className="text-[10px] text-[#FF6B77]">· {lang === "tr" ? "YENİLGİ" : "LOSS"}</span>
+                    <span className="text-[10px] text-neutral-600 ml-auto">{rd.loc}</span>
+                  </div>
+                  <div className="p-3 space-y-2">
+                    <div>
+                      <p className="text-[8px] font-bold text-[#FF6B77] uppercase tracking-wider mb-0.5">{lang === "tr" ? "Hata Analizi" : "Error Analysis"}</p>
+                      <p className="text-[10.5px] text-neutral-300 leading-relaxed">{rd.err}</p>
+                    </div>
+                    <div>
+                      <p className="text-[8px] font-bold text-[#22D3EE] uppercase tracking-wider mb-0.5">{lang === "tr" ? "Sonraki Round" : "Next Round"}</p>
+                      <p className="text-[10.5px] text-neutral-400 leading-relaxed">{rd.plan}</p>
                     </div>
                   </div>
-                ))}
-              </div>
-              <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4">
-                <p className="text-[10px] text-neutral-500 mb-2.5 uppercase tracking-wider">{lang === "tr" ? "Round Akışı" : "Round Flow"}</p>
-                <div className="flex items-end justify-center gap-1 h-16">
-                  {[55, 70, 45, 85, 60, 75, 95, 50, 80, 90, 40, 88, 72].map((h, j) => {
-                    const lost = [false, false, true, false, true, false, false, true, false, false, true, false, false][j];
-                    return <div key={j} className="w-2 rounded-sm" style={{ height: `${h}%`, background: lost ? "rgba(255,70,85,0.55)" : "linear-gradient(180deg,#A855F7,#22D3EE)" }} />;
-                  })}
                 </div>
-                <div className="flex justify-between mt-2">
-                  <span className="text-[9px] text-[#22D3EE]">{lang === "tr" ? "Kazanılan 13" : "Won 13"}</span>
-                  <span className="text-[9px] text-[#FF6B77]">{lang === "tr" ? "Kaybedilen 9" : "Lost 9"}</span>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
           {/* Glow effect behind mockup */}
