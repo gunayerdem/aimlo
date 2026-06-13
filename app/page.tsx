@@ -1512,9 +1512,9 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             </span>
           </div>
           <div className="hidden md:flex items-center gap-8">
-            {Object.entries(l.landingNav).map(([key, label]) => (
+            {Object.entries(l.landingNav).map(([key, label], navIdx) => (
               <button key={key} onClick={() => scrollTo(`section-${key}`)} className="text-[13px] text-neutral-400 transition-colors duration-200 hover:text-white font-medium">
-                {label}
+                <span className="nav-num">0{navIdx + 1}</span>{label}
               </button>
             ))}
           </div>
@@ -1568,60 +1568,105 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
         )}
       </nav>
 
-      {/* ─── HERO — Xtract style with orb ─── */}
-      <section className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pt-32 sm:pt-44 pb-16 sm:pb-24 text-center">
+      {/* ─── HERO — VANGUARD-class stage: stacked display type + agent set-pieces
+            (Fable 5 reel reference). Same handlers/links as before, new face. ─── */}
+      <section className="relative z-10 mx-auto max-w-6xl px-5 sm:px-8 pt-28 sm:pt-36 pb-12 sm:pb-20">
         {/* Background orbs */}
-        <div className="hero-orb" style={{ top: '10%', right: '-10%' }} />
-        <div className="hero-orb-inner" style={{ top: '20%', right: '5%' }} />
+        <div className="hero-orb" style={{ top: '4%', right: '-14%' }} />
+        <div className="hero-orb-inner" style={{ top: '16%', right: '2%' }} />
 
-        {/* Pill badge — Xtract style */}
-        <div className="mb-8 animate-slide-up flex justify-center">
-          <div className="pill-badge">
-            <span className="pill-tag">{lang === "tr" ? "Yeni" : "New"}</span>
-            <span>{lang === "tr" ? "AI Destekli Valorant Koçluk" : "AI-Powered Valorant Coaching"}</span>
+        <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 items-center">
+          {/* LEFT — the statement */}
+          <div className="text-center lg:text-left">
+            {/* Mono kicker — TypeUI style */}
+            <div className="mb-7 animate-slide-up flex items-center justify-center lg:justify-start gap-3">
+              <span className="hero-kicker" style={{ color: '#FF4655' }}>●</span>
+              <span className="hero-kicker">
+                {lang === "tr" ? "AI Valorant Koçu — OCR + GPT, tam otomatik" : "AI Valorant Coach — OCR + GPT, fully automatic"}
+              </span>
+            </div>
+
+            {/* Stacked display headline */}
+            <h1 className="hero-display animate-slide-up stagger-1">
+              <span className="block">{lang === "tr" ? "İZLE." : "WATCH."}</span>
+              <span className="block">{lang === "tr" ? "ANALİZ ET." : "ANALYZE."}</span>
+              <span className="block hero-display-accent">{lang === "tr" ? "RANK ATLA." : "RANK UP."}</span>
+            </h1>
+
+            {/* Sub text */}
+            <p className="mx-auto lg:mx-0 max-w-md text-base sm:text-[17px] text-neutral-400 leading-relaxed mt-7 mb-9 animate-slide-up stagger-2">
+              {l.landingHeroSub}
+            </p>
+
+            {/* CTA buttons — handlers identical to previous hero */}
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 animate-slide-up stagger-3">
+              {user ? (
+                <>
+                  <button onClick={onDashboard} className="btn-neon rounded-xl px-8 py-3.5 text-[14px] flex items-center gap-2">
+                    {l.goToDashboard}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                  </button>
+                  <button onClick={() => document.getElementById("download-section")?.scrollIntoView({ behavior: "smooth" })} className="btn-ghost rounded-xl px-8 py-3.5 text-[14px]">
+                    {l.landingCTA}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button onClick={() => document.getElementById("download-section")?.scrollIntoView({ behavior: "smooth" })} className="btn-neon rounded-xl px-8 py-3.5 text-[14px] flex items-center gap-2">
+                    {l.landingCTA}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                  </button>
+                  <button onClick={onLogin} className="btn-ghost rounded-xl px-8 py-3.5 text-[14px]">
+                    {l.authLogin}
+                  </button>
+                </>
+              )}
+            </div>
+
+            {/* Stats strip — VANGUARD style, honest product claims */}
+            <div className="mt-12 pt-8 border-t border-white/[0.08] grid grid-cols-3 gap-6 animate-slide-up stagger-4 max-w-md mx-auto lg:mx-0">
+              <div className="text-center lg:text-left">
+                <p className="hero-stat-num">7/24</p>
+                <p className="hero-stat-label mt-1.5">{lang === "tr" ? "Otomatik İzleme" : "Auto Tracking"}</p>
+              </div>
+              <div className="text-center lg:text-left">
+                <p className="hero-stat-num">0</p>
+                <p className="hero-stat-label mt-1.5">{lang === "tr" ? "Manuel Veri" : "Manual Input"}</p>
+              </div>
+              <div className="text-center lg:text-left">
+                <p className="hero-stat-num">~60sn</p>
+                <p className="hero-stat-label mt-1.5">{lang === "tr" ? "Round Analizi" : "Round Analysis"}</p>
+              </div>
+            </div>
+
+            {/* Hero Eye on mobile (stage hidden there) */}
+            <div className="mt-10 lg:hidden animate-slide-up stagger-5 flex items-center justify-center">
+              <HeroEye size={120} />
+            </div>
+          </div>
+
+          {/* RIGHT — the agent stage (official Riot renders as set-pieces) */}
+          <div className="relative h-[480px] xl:h-[560px] hidden lg:block animate-fade-in stagger-3">
+            <div className="hero-stage-glow" />
+            <img
+              src="https://media.valorant-api.com/agents/a3bfb853-43b2-7238-a4f1-ad90e9e46bcc/fullportrait.png"
+              alt=""
+              aria-hidden="true"
+              draggable={false}
+              className="hero-agent hero-agent-back"
+            />
+            <img
+              src="https://media.valorant-api.com/agents/add6443a-41bd-e414-f6ad-e58d267f4e95/fullportrait.png"
+              alt="Jett"
+              draggable={false}
+              className="hero-agent hero-agent-main"
+            />
+            {/* The eye supervises the stage */}
+            <div className="absolute top-0 left-2 z-[3]">
+              <HeroEye size={104} />
+            </div>
           </div>
         </div>
-
-        {/* Heading — large, tight letter-spacing like Xtract */}
-        <h1 className="text-5xl sm:text-6xl lg:text-[72px] font-semibold text-white leading-[1.08] mb-6 animate-slide-up stagger-1" style={{ letterSpacing: '-2.5px' }}>
-          {l.landingHeroTitle}
-        </h1>
-
-        {/* Sub text */}
-        <p className="mx-auto max-w-lg text-base sm:text-[17px] text-neutral-400 leading-relaxed mb-10 animate-slide-up stagger-2">
-          {l.landingHeroSub}
-        </p>
-
-        {/* CTA buttons — Xtract dual button style */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 animate-slide-up stagger-3">
-          {user ? (
-            <>
-              <button onClick={onDashboard} className="btn-neon rounded-xl px-8 py-3.5 text-[14px] flex items-center gap-2">
-                {l.goToDashboard}
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-              </button>
-              <button onClick={() => document.getElementById("download-section")?.scrollIntoView({ behavior: "smooth" })} className="btn-ghost rounded-xl px-8 py-3.5 text-[14px]">
-                {l.landingCTA}
-              </button>
-            </>
-          ) : (
-            <>
-              <button onClick={() => document.getElementById("download-section")?.scrollIntoView({ behavior: "smooth" })} className="btn-neon rounded-xl px-8 py-3.5 text-[14px] flex items-center gap-2">
-                {l.landingCTA}
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-              </button>
-              <button onClick={onLogin} className="btn-ghost rounded-xl px-8 py-3.5 text-[14px]">
-                {l.authLogin}
-              </button>
-            </>
-          )}
-        </div>
-
-        {/* Hero Eye — interactive with 3D tilt + glow */}
-        <div className="mt-6 -mb-8 animate-slide-up stagger-4 flex items-center justify-center">
-          <HeroEye size={160} />
-        </div>
-
       </section>
 
       {/* ─── APP MOCKUP — floating dashboard preview ─── */}

@@ -627,3 +627,116 @@ select option { background: #060814; color: #eef0f8; }
     rgba(34, 211, 238, 0.5) 80%,
     transparent);
 }
+
+/* ═══════════════════════════════════════════
+   HERO DISPLAY — VANGUARD-class stacked type
+   (Fable 5 reel reference; additive classes)
+   ═══════════════════════════════════════════ */
+
+.hero-display {
+  font-size: clamp(56px, 9vw, 118px);
+  line-height: 0.94;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.hero-display-accent {
+  background: linear-gradient(110deg, #FF4655 0%, #FF5E8A 35%, #E14DDA 70%, #FF4655 100%);
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shine 5s linear infinite;
+}
+
+.hero-kicker {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(238, 240, 248, 0.55);
+}
+
+.hero-stat-num {
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-stat-label {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(238, 240, 248, 0.42);
+}
+
+/* The agent stage: official renders presented like set-pieces — layered,
+   lit from below, breathing slowly. The closest a flat PNG gets to 3D. */
+@keyframes hero-agent-main-float {
+  0%, 100% { transform: translateY(0) rotate(0.4deg); }
+  50% { transform: translateY(-14px) rotate(-0.4deg); }
+}
+@keyframes hero-agent-back-float {
+  0%, 100% { transform: translateY(0) rotate(-1deg) scale(0.96); }
+  50% { transform: translateY(-9px) rotate(0.2deg) scale(0.96); }
+}
+
+.hero-agent {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-agent-main {
+  right: -8%;
+  bottom: 0;
+  height: 108%;
+  z-index: 2;
+  filter:
+    drop-shadow(0 30px 50px rgba(0, 0, 0, 0.65))
+    drop-shadow(0 0 44px rgba(255, 70, 85, 0.16));
+  animation: hero-agent-main-float 7s ease-in-out infinite;
+}
+
+.hero-agent-back {
+  left: -6%;
+  bottom: 4%;
+  height: 88%;
+  z-index: 1;
+  opacity: 0.5;
+  filter:
+    drop-shadow(0 24px 40px rgba(0, 0, 0, 0.6))
+    drop-shadow(0 0 34px rgba(168, 85, 247, 0.18))
+    saturate(0.8) brightness(0.8);
+  animation: hero-agent-back-float 8.5s ease-in-out infinite;
+}
+
+.hero-stage-glow {
+  position: absolute;
+  left: 50%;
+  bottom: -6%;
+  width: 130%;
+  height: 46%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center,
+    rgba(255, 70, 85, 0.18) 0%,
+    rgba(225, 77, 218, 0.1) 38%,
+    rgba(77, 124, 255, 0.05) 60%,
+    transparent 75%);
+  filter: blur(28px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.nav-num {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10px;
+  color: rgba(255, 70, 85, 0.75);
+  margin-right: 6px;
+  letter-spacing: 0;
+}
