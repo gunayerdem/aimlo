@@ -1863,68 +1863,100 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       {/* ─── APP MOCKUP — floating dashboard preview ─── */}
       <section className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pt-20 pb-32 animate-slide-up stagger-5">
         <div className="relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-1.5 shadow-2xl shadow-black/50" style={{ background: "linear-gradient(135deg, rgba(255,70,85,0.03), rgba(77,124,255,0.03))" }}>
-          {/* Browser chrome bar */}
+          {/* App title bar */}
           <div className="flex items-center gap-2 px-4 py-2.5 border-b border-white/[0.06]">
             <div className="flex gap-1.5">
               <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
               <div className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
               <div className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
             </div>
-            <div className="flex-1 mx-8">
-              <div className="mx-auto max-w-xs rounded-md bg-white/[0.04] border border-white/[0.06] px-3 py-1 text-[10px] text-neutral-600 text-center">aimlo.gg/dashboard</div>
+            <div className="flex-1 flex items-center justify-center gap-2">
+              <img src="/aimlo-logo.png?v=3" alt="" className="h-3.5 w-auto opacity-80" />
+              <span className="text-[10px] text-neutral-500 tracking-wide">{lang === "tr" ? "Maç Raporu" : "Match Report"}</span>
             </div>
           </div>
-          {/* Fake dashboard content */}
-          <div className="p-6 sm:p-9 space-y-5">
-            {/* Top stats row */}
-            <div className="grid grid-cols-3 gap-3">
+          {/* App match-report content — gerçek KB feedback'i ile (uygulamanın aynısı) */}
+          <div className="relative p-6 sm:p-8 space-y-4 overflow-hidden">
+            {/* Köşede ajan render (uygulamanın hero ajanı gibi) */}
+            <img
+              src="https://media.valorant-api.com/agents/add6443a-41bd-e414-f6ad-e58d267f4e95/fullportrait.png"
+              alt=""
+              aria-hidden
+              className="pointer-events-none absolute -right-12 -bottom-20 h-[360px] w-auto opacity-[0.18]"
+              style={{ maskImage: "linear-gradient(to left, #000 28%, transparent 100%)", WebkitMaskImage: "linear-gradient(to left, #000 28%, transparent 100%)" }}
+            />
+
+            {/* Maç başlığı */}
+            <div className="relative flex items-center gap-3">
+              <img src="https://media.valorant-api.com/maps/7eaecc1b-4337-bbf6-6ab9-04b8f06b3319/listviewicon.png" alt="" className="w-14 h-10 rounded-lg object-cover border border-white/[0.08]" />
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <img src="https://media.valorant-api.com/agents/add6443a-41bd-e414-f6ad-e58d267f4e95/displayicon.png" alt="" className="w-5 h-5 rounded" />
+                  <span className="text-[13px] font-bold text-white">Ascent</span>
+                  <span className="text-[11px] text-neutral-500">· Jett · {lang === "tr" ? "Saldırı" : "Attack"}</span>
+                </div>
+                <span className="text-[10px] text-neutral-600">{lang === "tr" ? "Dereceli" : "Competitive"}</span>
+              </div>
+              <span className="text-2xl font-black text-[#22D3EE]" style={{ fontFamily: "var(--font-mono, monospace)" }}>13-9</span>
+              <span className="text-[8px] font-bold text-[#22D3EE] bg-[#22D3EE]/10 border border-[#22D3EE]/25 px-2 py-1 rounded tracking-[0.12em] whitespace-nowrap">AI {lang === "tr" ? "RAPOR" : "REPORT"}</span>
+            </div>
+
+            {/* KPI satırı — iris gradient */}
+            <div className="relative grid grid-cols-3 gap-3">
               {[
-                { label: lang === "tr" ? "Round Kazanma" : "Round Win %", value: "67%", color: "#FF4655" },
-                { label: lang === "tr" ? "K/D Oranı" : "K/D Ratio", value: "1.42", color: "#4D7CFF" },
-                { label: lang === "tr" ? "AI Skoru" : "AI Score", value: "8.4", color: "#B44DFF" },
+                { label: lang === "tr" ? "Round Kazanma" : "Round Win %", value: "67%" },
+                { label: lang === "tr" ? "K/D Oranı" : "K/D Ratio", value: "1.42" },
+                { label: lang === "tr" ? "Karar Skoru" : "Decision Score", value: "7/10" },
               ].map((s, i) => (
-                <div key={i} className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4 text-center">
-                  <p className="text-2xl sm:text-3xl font-bold" style={{ color: s.color }}>{s.value}</p>
-                  <p className="text-[10px] text-neutral-600 mt-1 uppercase tracking-wider">{s.label}</p>
+                <div key={i} className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-3.5 text-center">
+                  <p className="text-2xl sm:text-3xl font-black" style={{ backgroundImage: "linear-gradient(135deg,#FF5E8A,#A855F7,#22D3EE)", WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent" }}>{s.value}</p>
+                  <p className="text-[9px] text-neutral-600 mt-1 uppercase tracking-wider">{s.label}</p>
                 </div>
               ))}
             </div>
-            {/* Fake AI feedback card */}
-            <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4">
-              <div className="flex items-center gap-2 mb-3">
-                <img src="/aimlo-logo.png?v=3" alt="" className="w-5 h-auto" />
-                <span className="text-[11px] font-bold text-[#FF4655] uppercase tracking-wider">AI {lang === "tr" ? "Analiz" : "Analysis"}</span>
-                <span className="text-[9px] text-neutral-600 ml-auto">Round 8</span>
+
+            {/* AI ANALİZ — GERÇEK KB feedback (gpt-5-mini, ai-policy uyumlu, tarzanca yok) */}
+            <div className="relative rounded-xl border border-[#A855F7]/[0.18] p-4" style={{ background: "linear-gradient(180deg, rgba(168,85,247,0.07), rgba(34,211,238,0.02))" }}>
+              <div className="flex items-center gap-2 mb-2.5">
+                <img src="/aimlo-logo.png?v=3" alt="" className="w-4 h-auto" />
+                <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: "#C9B6FF" }}>AI {lang === "tr" ? "Analiz" : "Analysis"}</span>
+                <span className="text-[9px] text-neutral-600 ml-auto">{lang === "tr" ? "Maç sonu" : "Post-match"}</span>
               </div>
-              <div className="space-y-2">
-                <div className="h-2.5 rounded-full bg-white/[0.04] w-full" />
-                <div className="h-2.5 rounded-full bg-white/[0.04] w-4/5" />
-                <div className="h-2.5 rounded-full bg-white/[0.04] w-3/5" />
+              <p className="text-[12px] text-neutral-300 leading-relaxed">{lang === "tr"
+                ? "Ascent'te 13-9 kazandın. Jett ile 4 ölüm; ikisi A Main — açıyı erken verdin."
+                : "Won 13-9 on Ascent. 4 deaths as Jett; two at A Main — you gave the angle early."}</p>
+              <div className="mt-2.5 pl-3 border-l-2 border-[#FF4655]/45">
+                <p className="text-[9px] font-bold text-[#FF6B77] uppercase tracking-wider mb-0.5">{lang === "tr" ? "Kritik Hata" : "Critical Mistake"}</p>
+                <p className="text-[11px] text-neutral-400 leading-relaxed">{lang === "tr"
+                  ? "R2 & R7 A Main: aynı açıyı tuttun, okunabilir oldun. Off-angle değiştir ya da Omen smoke + flash ile gir."
+                  : "R2 & R7 A Main: held the same angle, got readable. Change off-angle or enter with Omen smoke + flash."}</p>
               </div>
             </div>
-            {/* Performance bars */}
-            <div className="grid grid-cols-2 gap-3">
+
+            {/* Beceri profili + round akışı */}
+            <div className="relative grid grid-cols-2 gap-3">
               <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4">
-                <p className="text-[10px] text-neutral-500 mb-2 uppercase tracking-wider">{lang === "tr" ? "Beceri Profili" : "Skill Profile"}</p>
-                {["Aim", "Utility", "Positioning", "Game Sense"].map((skill, j) => (
+                <p className="text-[10px] text-neutral-500 mb-2.5 uppercase tracking-wider">{lang === "tr" ? "Beceri Profili" : "Skill Profile"}</p>
+                {([[lang === "tr" ? "Hayatta Kalma" : "Survival", 59], [lang === "tr" ? "Pozisyon" : "Positioning", 83], [lang === "tr" ? "Karar" : "Decision", 60], [lang === "tr" ? "Etki" : "Impact", 74]] as [string, number][]).map((row, j) => (
                   <div key={j} className="flex items-center gap-2 mb-1.5">
-                    <span className="text-[9px] text-neutral-600 w-16">{skill}</span>
-                    <div className="flex-1 h-1.5 rounded-full bg-white/[0.04] overflow-hidden">
-                      <div className="h-full rounded-full" style={{ width: `${[72, 85, 60, 78][j]}%`, background: `linear-gradient(90deg, #FF4655, #4D7CFF)` }} />
+                    <span className="text-[9px] text-neutral-500 w-20">{row[0]}</span>
+                    <div className="flex-1 h-1.5 rounded-full bg-white/[0.05] overflow-hidden">
+                      <div className="h-full rounded-full" style={{ width: `${row[1]}%`, background: "linear-gradient(90deg,#FF5E8A,#A855F7,#22D3EE)" }} />
                     </div>
                   </div>
                 ))}
               </div>
               <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4">
-                <p className="text-[10px] text-neutral-500 mb-2 uppercase tracking-wider">{lang === "tr" ? "Maç Özeti" : "Match Summary"}</p>
+                <p className="text-[10px] text-neutral-500 mb-2.5 uppercase tracking-wider">{lang === "tr" ? "Round Akışı" : "Round Flow"}</p>
                 <div className="flex items-end justify-center gap-1 h-16">
-                  {[40, 65, 55, 80, 45, 70, 90, 60, 75, 85, 50, 95, 70].map((h, j) => (
-                    <div key={j} className="w-2 rounded-sm transition-all" style={{ height: `${h}%`, background: j < 7 ? "rgba(255,70,85,0.5)" : "rgba(77,124,255,0.5)" }} />
-                  ))}
+                  {[55, 70, 45, 85, 60, 75, 95, 50, 80, 90, 40, 88, 72].map((h, j) => {
+                    const lost = [false, false, true, false, true, false, false, true, false, false, true, false, false][j];
+                    return <div key={j} className="w-2 rounded-sm" style={{ height: `${h}%`, background: lost ? "rgba(255,70,85,0.55)" : "linear-gradient(180deg,#A855F7,#22D3EE)" }} />;
+                  })}
                 </div>
                 <div className="flex justify-between mt-2">
-                  <span className="text-[9px] text-[#FF4655]">T: 7</span>
-                  <span className="text-[9px] text-[#4D7CFF]">CT: 6</span>
+                  <span className="text-[9px] text-[#22D3EE]">{lang === "tr" ? "Kazanılan 13" : "Won 13"}</span>
+                  <span className="text-[9px] text-[#FF6B77]">{lang === "tr" ? "Kaybedilen 9" : "Lost 9"}</span>
                 </div>
               </div>
             </div>
