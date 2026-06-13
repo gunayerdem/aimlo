@@ -1930,12 +1930,15 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
                   <div className="px-4 py-2.5 border-b border-white/[0.06] flex items-center gap-2 flex-wrap">
                     <span className="text-[12px] font-bold text-white">{fb.title}</span>
                     <span className="text-[10px] text-neutral-500">{fb.agent} · {fb.map} · {fb.location}</span>
-                    <span className="ml-auto text-[8px] font-bold uppercase tracking-[0.1em] px-2 py-0.5 rounded whitespace-nowrap" style={{ color: "#C9B6FF", background: "rgba(168,85,247,0.12)", border: "1px solid rgba(168,85,247,0.25)" }}>gpt-5-mini</span>
                   </div>
                   <div className="p-4 space-y-3">
                     <div>
-                      <p className="text-[9px] font-bold text-[#FF6B77] uppercase tracking-wider mb-1">{lang === "tr" ? "Hata Analizi" : "Error Analysis"}</p>
+                      <p className="text-[9px] font-bold text-[#FF6B77] uppercase tracking-wider mb-1">{lang === "tr" ? "Ölüm Nedeni" : "Death Cause"}</p>
                       <p className="text-[12px] text-neutral-200 leading-relaxed">{fb.deathAnalysis}</p>
+                    </div>
+                    <div>
+                      <p className="text-[9px] font-bold text-[#f59e0b] uppercase tracking-wider mb-1">{lang === "tr" ? "Düşman Analizi" : "Enemy Read"}</p>
+                      <p className="text-[12px] text-neutral-300 leading-relaxed">{fb.enemyPatterns}</p>
                     </div>
                     <div>
                       <p className="text-[9px] font-bold text-[#22D3EE] uppercase tracking-wider mb-1">{lang === "tr" ? "Sonraki Round" : "Next Round"}</p>

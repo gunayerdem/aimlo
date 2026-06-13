@@ -2,7 +2,7 @@
 //  AUTO-GENERATED — gen-feedback-bank.mts ile gpt-5-mini + GERÇEK KB'den.
 //  20 TR + 20 EN örnek koç-feedback'i. Yeniden üret: npx tsx gen-feedback-bank.mts
 // ════════════════════════════════════════════════════════════════════
-export type FeedbackExample = { agent: string; map: string; side: string; location: string; lang: "tr" | "en"; title: string; deathAnalysis: string; nextRoundPlan: string };
+export type FeedbackExample = { agent: string; map: string; side: string; location: string; lang: "tr" | "en"; title: string; deathAnalysis: string; enemyPatterns: string; nextRoundPlan: string };
 export const FEEDBACK_BANK_TR: FeedbackExample[] = [
   {
     "agent": "Jett",
@@ -10,9 +10,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "attack",
     "location": "A Main",
     "lang": "tr",
-    "title": "A Main solo entry hatası",
-    "deathAnalysis": "A Main'de tek başına kuru entry yapıp trade yokken öldün; bu yüzden A Main'deki ilk mermi seni kesti ve takımın trade şansı sıfır kaldı. Aynı A Main şartında tekrar eden solo entry taktiksel hata; bir oyuncu A Main entry yaparken arka planda trade pozisyonunda biri olmaması round'u kaybettirir.",
-    "nextRoundPlan": "A Main'e tek başına girme; önce takım flash patlatsın, flash patladığı an 0.3–0.6s içinde dash ile gir ve arkan sıra trade pozisyonunda bir teammate A Main girişini görsün; alternatif olarak A Main feint yap, ses verip A Short üzerinden split dene."
+    "title": "A Main kuru entry",
+    "deathAnalysis": "ÖLÜM NEDENİ: A Main'de tek başına kuru entry yaptın, trade yok; ilk mermiyi yedin çünkü flash/smoke olmadan wide peek atıyorsun. Next time A Main'de flash bekle, flash patladığı an dash ile swing atıp hemen geri çekil.",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Son round killfeed ve pozisyon göstergesi var — karşı taraf A Main'i cover eden bir oyuncu hazır bekliyordu; bu tekrar okunabilir hale geldiği için aynı açıya tekrar çıkma riskin yüksek.",
+    "nextRoundPlan": "SONRAKİ ROUND: A Main'e tek başına çıkma — önce bir flash atın, flash patladı mı hemen dash ile gir; eğer trade pozisyonuna biri hazır değilse girme, bekle."
   },
   {
     "agent": "Reyna",
@@ -20,9 +21,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "attack",
     "location": "Hookah",
     "lang": "tr",
-    "title": "Hookah overpeek tıkandı",
-    "deathAnalysis": "Bu roundda Hookah'ta kill aldıktan sonra agresif overpeek yapıp açıkta kaldın ve öldün; Devour yerine tekrar peek veya yanlış Dismiss seçimi yaptın, bu yüzden trade veya ikinci açı seni bitirdi çünkü cover'a dönmeden re-peek atmak seni savunmasız bıraktı.",
-    "nextRoundPlan": "Hookah'ta kill aldığında hemen en yakın cover'a dön, orada Devour yap; eğer aynı anda iki açıdan threat varsa Dismiss ile teleporter/koridor yönüne kaç ve sonra 0.5–1 saniye bekleyip information aldıktan sonra yeniden peek at."
+    "title": "Hookah overpeek öldün",
+    "deathAnalysis": "ÖLÜM NEDENİ: Hookah'da kill sonrası hemen overpeek atıp ekstra açı kontrolü yapmaya çalıştın; öldükten sonra takım trade alamadı. Hookah'ta kill sonrası kapak arkasına geç, Devour kullan ve 0.5–1 saniye bekleyip sonraki swing'i takımla koordine et — ekstra peek atma.",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Son 1. öldürmeden sonra aynı Hookah köşesinden ikinci bir oyuncu quick swing ile seni cezalandırdı; bu tekrar eden bir setup olabilir.",
+    "nextRoundPlan": "SONRAKİ ROUND: Hookah'ta kill alırsan önce kapak arkasına dön, Devour yap, 0.5–1s bekle; sadece teammate ses/peşi gelirse ikinci açıya çık — direkt overpeek atma."
   },
   {
     "agent": "Raze",
@@ -30,9 +32,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "defense",
     "location": "B Heaven",
     "lang": "tr",
-    "title": "B Heaven'da Tek Tek Ölüm",
-    "deathAnalysis": "B Heaven'da geç retake yapıp tek tek girdiğin için ayrı ayrı peeldin; tek ölümler trade gelmedi ve sen öldün çünkü takım seninle aynı anda giriş yapmadı, pozisyonun yukarıdan görüldü çünkü.",
-    "nextRoundPlan": "Bu round B Heaven'ı bırak; takımla birlikte B Main'den aynı anda smoke+flash atarak synchronized retake başlat—kimse tek tek giriş yapmasın."
+    "title": "B Heaven'da tek tek öldün",
+    "deathAnalysis": "ÖLÜM NEDENİ: B Heaven'da tek başına pozisyon tutarken, geç retake ve tek tek giriş nedeniyle trade yoktu; utility (molly/flash) ile Heaven'i flush etmeden veya arkadan destek olmadan bekledin, bu yüzden tek vuruşta düşürüldün. Bir round boyunca B Heaven'da pasif anchor ol — molly/flash gelene kadar alçak pozisyonda kal ve sadece bir teammate B Main/Back bilgisi verdiğinde swing at.",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Son 3 round'da B Heaven'dan tek kişiyi kolayca çıkardılar; bu tekrar, Heaven'daki pasif bekleyeni cezalandırıyor olabilir.",
+    "nextRoundPlan": "SONRAKİ ROUND: Heaven'da tek başına agresif oynamıyorsun — önce teammate'ten B Main veya Back'ten trade-ready call al; eğer trade yoksa molly/flash iste, yoksa pozisyonu bırak ve B Back'e yakın crossfire kur."
   },
   {
     "agent": "Neon",
@@ -40,9 +43,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "attack",
     "location": "A Main",
     "lang": "tr",
-    "title": "A Main hızlı giriş",
-    "deathAnalysis": "A Main'de utility'siz hızlı entry yaptın; Tree ve Stairs açıları seni aynı anda gördü, bu yüzden ilk atışı kaybettin çünkü karşı iki açıdan crossfire oldun.",
-    "nextRoundPlan": "Fast Lane duvarını aç, A Main Tree'yi smoke'la ve Stairs yönüne flash at; flash patladığı anda sprint+slide ile gir, smoke yoksa teammate ile double entry yap ve biri trade pozisyonunda beklesin."
+    "title": "A Main hızlı girişi",
+    "deathAnalysis": "ÖLÜM NEDENİ: A Main'de utility'siz hızlı entry yapıp A Tree ve A Stairs açılarını aynı anda expose ettin — Tree/Stairs birleşiminden gelen ilk atış seni aldı. Fast Lane duvarını önce koy, bir smoke veya flash alanı kapatana kadar sprint başlatma; duvar+flash patladığında slide ile içeri gir, Tree’ye ani swing at.",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Son round'da A Tree ve A Stairs iki farklı açıdan seni aynı anda gördü; bu tekrar, o callout'un aktif tutulduğunu gösteriyor olabilir.",
+    "nextRoundPlan": "SONRAKİ ROUND: Fast Lane aç, Tree sightline'ını smoke'la veya flash'la uyuştur, flash patlar patlamaz sprint+slide ile sola swing at — utility yoksa girmeyeceksin."
   },
   {
     "agent": "Sova",
@@ -50,9 +54,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "attack",
     "location": "C Long",
     "lang": "tr",
-    "title": "C Long Repeat!",
-    "deathAnalysis": "C Long'da Sova olarak aynı geniş açıdan tekrar tekrar öldün — bu callout, pozisyonunun okunuyor olduğunu gösteriyor; Recon Bolt'u C Long tavanının farklı yüksekliğine indir ve Owl Drone ile önce Plat/CT rotasını doğrula çünkü aynı açı tekrarlandıkça savunucu seni ezberliyor. Alternatif olarak C Long yerine Garage üzerinden C Connector split ya da Plat arkasından farklı bir off-angle kullan, girişleri iki yönlü yap çünkü tek hat aynı sightline'ı veriyor.",
-    "nextRoundPlan": "Recon Bolt'ı C Long farklı yükseklikten at; Owl Drone'u kısa tutup Plat ve CT'yi doğrula; entry'yi Garage+C Long split ile yap."
+    "title": "C Long Tekrarı — Darbe Alıyorsun",
+    "deathAnalysis": "ÖLÜM NEDENİ: C Long'da aynı geniş açıdan tekrar tekrar girdiğin için savunucu seni aynı sightline'dan kafadan cezalandırdı; çözüm olarak sonraki round Sova drone ile C Long içini gör, Recon Bolt'u farklı yükseklikten (plat tavanı yerine box arkasına) at ve entry'yi flash patlarken yap — DRONE ile bilgi almadan kuru geniş açı verme.",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Son birkaç roundda C Long'da seni aynı geniş açıda bekleyen oyuncu tutarlı bir şekilde aynı sightline'ı kullanıyor olabilir; bu tekrar okunabilir hale gelmiş.",
+    "nextRoundPlan": "SONRAKİ ROUND: Owl Drone ile C Long içini tarayıp pozisyon doğrula; Recon Bolt'u alternatif yüksekliğe indir; flash patladığı anda iki kişi birlikte entry yap — tek başına geniş açıdan kuru girme."
   },
   {
     "agent": "Phoenix",
@@ -60,9 +65,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "attack",
     "location": "A Main",
     "lang": "tr",
-    "title": "A Main flash'sız entry",
-    "deathAnalysis": "Gözlem: A Main'da flash atmadan girdin ve ilk kurşunu aldın. A Main'de Curveball at, flash patladığı an geniş açıyla swing at; varyasyon olarak her round sol/sağ eğriyi değiştir ki aynı açıdan okunmayasın.",
-    "nextRoundPlan": "A Main sağ köşeye Curveball at ve flash patladıktan hemen sonra geniş açıyla içeri gir; işe yaramazsa bir sonraki round sol eğriyle tekrarla ve entry sırasında bir kişi trade pozisyonunda beklesin."
+    "title": "A Main'te Flash'sız Entry",
+    "deathAnalysis": "ÖLÜM NEDENİ: A Main'den flash atmadan düz giriyorsun; Elbow'da bekleyen savunucu ilk kurşunu alıyor. Curveball ile köşeyi körlet, flash patlar patlamaz sağa geniş açıyla swing atıp Elbow'u kontrol et; flash olmadan hiçbir zaman Elbow'a commit etme.",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Son 1 round'da seni A Main'de flash'sız girerken öldüren pozisyon tekrarlandı—rakip Elbow'u köşede bekleyip ilk atışı alıyor olabilir.",
+    "nextRoundPlan": "SONRAKİ ROUND: Sen A Main entry'sin — sağ Curveball at, flash patladığı anda geniş açıyla içeri gir; eğer flash başarısız olursa geri çekil ve Market'ten split iste."
   },
   {
     "agent": "Cypher",
@@ -70,9 +76,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "defense",
     "location": "A Belt",
     "lang": "tr",
-    "title": "A Belt Operator Fail",
-    "deathAnalysis": "A Belt'da Operator ile ilk mermiyi kaçırdın ve aynı açıda beklemeye devam ettin; bu yüzden karşıdaki ikinci atışı alıp seni trade etme şansı buldu — CALL OUT: 'A Belt op miss' diye takıma anında bildir.",
-    "nextRoundPlan": "A Belt'ta Operator kaçırırsan hemen açı değiştir: ya deeper backstep yapıp angle'ı resetle, ya da hemen swap edip shorter peek için SMG/AR ile swing at."
+    "title": "A Belt’te Opersiz Beklemek",
+    "deathAnalysis": "ÖLÜM NEDENİ: A Belt'te Operator ile aynı off-angle'da bekledin; ilk mermiyi ıskaladıktan sonra açıyı değiştirmedin, karşı taraftan ikinci atışla cezalandırıldın. Callout yapar yapmaz—\"belt 1\"—hedefi değiştirmezsen trade alacak biri arkanda hazır beklesin veya hemen position değiştir; sabit beklemek risktir.",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Veride tekrar yok; sadece bu round için çıkarım: rakip Operator ile aynı açıda bekledi ve ikinci shot'ı kullanarak seni cezalandırdı.",
+    "nextRoundPlan": "SONRAKİ ROUND: A Belt'e gelir gelmez kamerayı veya tel’i choke’a koy, Operator sesi/ilk atış gelirse anında pozisyon değiştir (hemen sola 0.5s kay/alt kata geç) ve teammate'in trade pozisyonunda olmasını sesli söyle: \"trade on belt\"."
   },
   {
     "agent": "Omen",
@@ -80,9 +87,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "attack",
     "location": "Mid Doors",
     "lang": "tr",
-    "title": "Mid Doors - Smoke'dan Peek",
-    "deathAnalysis": "Mid Doors'da kendi smoke'unun içinden çıkıp peek attın; smoke içinden çıkınca silhouette ve sesle doğrudan hedef oldun çünkü smoke inside çıkış düşmana tek ve tahmin edilebilir bir açıyı verdi.",
-    "nextRoundPlan": "Smoke'un kenarından jiggle ile bilgi ver; yoksa high one-way smoke veya teammate flash ile synchronize entry yap, tek başına smoke içinden çıkma."
+    "title": "Mid Doors’ta Smoke Hatası",
+    "deathAnalysis": "ÖLÜM NEDENİ: Kendi smoke'unun içinden çıkıp Mid Doors'ta peek atınca savunucu sana scope/wide açıyı zaten hazırlamıştı; smoke'dan çıkışın silhouette verdi ve öldün. Smoke'un arkasında durup jiggle ile bilgi al, smoke patladıktan hemen sonra Paranoia ya da flash ile eşleştirip dışarı çık — Mid Doors'tan direkt body gösterme.",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Bu tek round değilse, aynı pozisyondan çıkışların savunucuya okunuyor olabilir; yine de şu an için yeterli tekrar kanıtı yok.",
+    "nextRoundPlan": "SONRAKİ ROUND: Smoke Mid Doors'un üstüne yüksek koy, Paranoia/flash patladığı anda bir jiggle ile test et; eğer trade hazırsa tam commit, yoksa geri dön."
   },
   {
     "agent": "Chamber",
@@ -90,9 +98,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "attack",
     "location": "A Main",
     "lang": "tr",
-    "title": "A Main'da OP'ye takıldın",
-    "deathAnalysis": "A Main'da Operator'la öldün ve silahı düşürmedin; bu Chamber döngüsünü (bir atış → teleport) uygulamadığın için OP trade veya ikinci atış şansı buldu. Birinci çözüm: bir atış al, hemen TP; alternatif çözüm: Headhunter ile tek kafadan risk alıp takımından A Main flash talep et.",
-    "nextRoundPlan": "Round başında A Main'de agresif açıdan bir atış al, anında TP; eğer TP mümkün değilse Headhunter ile tek kafaya dene ve teammate'tan A Main'e flash iste."
+    "title": "A Main Operator Kaybı",
+    "deathAnalysis": "ÖLÜM NEDENİ: A Main'da Operator'lu bir defender karşısına yaklaştın ve tek atışla öldün; teleport sonrası tekrar aynı açıdan peek atıp bir daha öldün — Headhunter/TP döngüsünü tek atış kuralıyla bozmadın ve op'u düşürme fırsatı yaratmadın.",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Mevcut veride rakibin repeat davranışı veya spesifik player bilgisi yok; sadece bu roundda A Main'de op ile seni tutan bir oyuncu vardı ve senin ikinci peek'in onu yeniden öldürmeye izin verdi.",
+    "nextRoundPlan": "SONRAKİ ROUND: A Main'e gelirken bir atış yap, teleport ol; eğer ilk atış kafadan kaçtıysa o noktayı bırak ve başka bir off-angle'dan tekrar gel; op'u vurduğun anda yerdeki silahı almak için hemen pozisyon değiştir, tekrar aynı açıdan swing atma."
   },
   {
     "agent": "Killjoy",
@@ -100,9 +109,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "defense",
     "location": "B Tunnel",
     "lang": "tr",
-    "title": "Dikkat: B Tunnel Fail",
-    "deathAnalysis": "B Tunnel'da öldün çünkü rotasyonu geç başlattın ve Killjoy kurulumunu toparlamadan geldin; bu, turret ve alarmbot nüfusunu işlevsiz bıraktı. Callout: Turret'i off-angle'a al ve nanoswarm ile alarmbot'ı B default plant üstüne önceden koy ki rotasyon gecikse bile site geciksin.",
-    "nextRoundPlan": "Turret'i B Tunnel dışına off-angle'a taşı; alarmbot + nanoswarm'ı default plant noktasına hazırla; rotasyona yalnızca takım 'rotate' dediğinde veya 10s altında başla."
+    "title": "Rotasyon Geç Başlatma — B Tunnel",
+    "deathAnalysis": "ÖLÜM NEDENİ: B Tunnel'da rotasyonu geç başlattın; site tarafında 3v2 olmasına rağmen hemen rotasyon yerine orada beklemeyi seçtin ve B Tunnel'da kaldığın için rotasyon zamanı kaçtı — Callout: rotasyonu zamanında başlat. Tek çözüm: bir sonraki benzer durumda 2 saniye farkla hemen rotate et, B Tunnel çıkışında smoke+turret hazırla.",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Veride düşman davranışı tekrarlayan bir pattern görünmüyor; düşmanın pozisyonu veya killfeed kanıtı olmadığı için spesifik adaptasyon belirtilemiyor.",
+    "nextRoundPlan": "SONRAKİ ROUND: Skoru kontrol et, A takım arkadaşın site içinden 2 kişi düştüğünde anında rotasyon başlat — B Tunnel'da 2 saniyede kendini hazır et (turret kur, smoke lineup hazır) ve çıkarken alarmbot+swarm kombosunu ezberle."
   },
   {
     "agent": "Sage",
@@ -110,9 +120,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "defense",
     "location": "Mid Courtyard",
     "lang": "tr",
-    "title": "Mid Courtyard Eco Ölümü",
-    "deathAnalysis": "Mid Courtyard'da, eco round'da geniş açıdan zorlayıp öldün; Mid Courtyard'da wide angle almak eco round'da tek HP/sidearm ile % yüksek risk demek (gözlem: eco round ve pozisyon). Ana fix — Mid Courtyard'da geniş açı yerine corner/entry'yi daralt (köşeye yanaş, kısa swing at); alternatif — eco round'da Mid Courtyard'ta full passive tutup info bekle (arkadaşın footstep veya smoke tetikleyene kadar çıkma).",
-    "nextRoundPlan": "Mid Courtyard'da bu round eco olduğu için köşeye yanaş ve dar açıyla swing at; eğer takım bir footstep veya smoke bildirirse o zaman geniş açıyla swing at veya rotate yap."
+    "title": "Mid Courtyard Ölümü",
+    "deathAnalysis": "ÖLÜM NEDENİ: Mid Courtyard'da geniş açıyla kuru peek atıp eco round'da tek başına kaldın; B Main/Mid link'ten gelen yakın mesafe Classic/Sheriff'i cezalandırdı — o açıda sağlam cover yokken geniş açıyla çıkmak ölümle sonuçlandı. Mid Courtyard'da dar açı tut, pizza/cubby arkasından jiggle ile bilgi çek veya duvar slow ile chokeyi daralt; geniş açıyla açıkta durma.",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Son round'da killfeed'de eco silah görüldü; bu tekrar, yakın mesafeyle seni cezalandıracaklarını gösteriyor olabilir.",
+    "nextRoundPlan": "SONRAKİ ROUND: Mid Courtyard'da önce cubby'den jiggle ile bilgi çek, eğer ses/killfeed yakın mesafe gösterirse duvar koyup slow at; tek başına geniş açıdan çıkma."
   },
   {
     "agent": "Fade",
@@ -120,9 +131,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "attack",
     "location": "Mid Mail",
     "lang": "tr",
-    "title": "Mid Mail trade kaçtı",
-    "deathAnalysis": "Mid Mail'da Fade olarak trade pozisyonu olmadan girmiş olman (Mid Mail, trade yok) direkt sebep: Haunt/Prowler döngüsü attın ama takım arkadaşı trade yoktu, bu yüzden girdiğin anda tek hedef oldun; bunun sonucu olarak öldün. Mid Mail'daki hatayı tekrarlamamalısın.",
-    "nextRoundPlan": "Haunt atıp Prowler gönderirken bir teammate Mid Mail çıkışında trade pozisyonunda beklesin; eğer trade gelmezse Seize koyup geri çekil veya Haunt'ı duvara sektirip bekle — kesinlikle solo Hamle yapma."
+    "title": "Mail'de Tek Başına Öldün",
+    "deathAnalysis": "ÖLÜM NEDENİ: Mid Mail'de trade pozisyonu olmadan solo girdin — Mail dar, Mail içindeki veya B Heaven/Connector tarafından swing gelecek şekilde açık bıraktın; Prowler/Seize ile bile girsen tek başına trade yoksa ölürsün. Mail'e girerken bir arkadaşın Garage/Mail girişini trade edecek pozisyonda beklesin veya sen Prowler'ı Haunt'la eş zamanlayıp hemen arkasından bir teammate swing atsın; tek varyasyonla girmeyi bırak.",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Bu round verisine göre rakibin Mail/Connector rotasını trade beklemeden kapatacak biri vardı — Mail'de solo giriş yaptığında seni anında cezalandırdılar.",
+    "nextRoundPlan": "SONRAKİ ROUND: Mail'e girişin için 1) Haunt at, Prowler gönder; hemen arkasından teammate Garage/Connector'dan swing atsın; veya 2) Sen Mail'e çıkmadan önce bir teammate Mail kapısına yakın trade pozisyonunda beklesin — tek başına Mail'e girme."
   },
   {
     "agent": "Skye",
@@ -130,9 +142,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "attack",
     "location": "Garage",
     "lang": "tr",
-    "title": "Garage Utility Hatası!",
-    "deathAnalysis": "Skye olarak Haven saldırısında Garage'da öldün çünkü bilgi almadan kuş/kopek/flash patlattın; utility patladıktan sonra giriş yaptığın için koridoru önceden kapatan oyuncuya bedava hedef oldun.",
-    "nextRoundPlan": "Emir: Garage'a utility atmadan önce Sova recon veya teammate footstep onayı al ve kuşu tam peek zamanında patlat; alternatif: utility atmadan Garage'ı bırakıp Connector üzerinden 2 kişiyle split gir."
+    "title": "Garage Utility Kaybı",
+    "deathAnalysis": "ÖLÜM NEDENİ: Garage'da bilgi almadan utility harcadın — smoke/flash'ı erken veya tek başına kullanıp sonra swing atınca savunucu zaten nişanını almış; bunun sonucu olarak op/shotgun seni kafadan vurdu. Utility'ı önce bilgi için kullan, köpeği/Seeker/ally ile görüş teyidi almadan smoke'ı sahte bırakıp swing atma.",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Son 3 round'da Garage girişinde seni utility sonrası bekleyip tek atışla cezalandırdılar; bu tekrar düşmanın o pozisyonu okuduğunu gösteriyor olabilir.",
+    "nextRoundPlan": "SONRAKİ ROUND: Garage'a girmeden önce Sova recon veya köpek/Seeker ile bilgi al; smoke'ı patlat ama takım peek için hazır olana kadar bekle — ilk kişi flash patlatıp dışarı çıkmasın, iki kişi koordineli entry yapın."
   },
   {
     "agent": "Brimstone",
@@ -140,9 +153,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "defense",
     "location": "A Short",
     "lang": "tr",
-    "title": "A Short erken ayrılma",
-    "deathAnalysis": "A Short'ta anchor pozisyonunu erken bıraktın; Brimstone olarak A Short kontrolünü bırakınca takım A Short baskısını kaybettiği için seni trade alamadan öldürdüler. A Short'ta smoke veya Stim Beacon bırakıp bir tur daha pozisyonda kalmalıydın, erken ayrılman Bind savunma dengeni bozdu.",
-    "nextRoundPlan": "A Short'ta bekle, iki smoke at ve Stim Beacon koy; eğer ilk trade gelmezse lamps arkasına küçük bir off-angle al ve teleporter çıkışına bak."
+    "title": "A Short Anchor Hatası",
+    "deathAnalysis": "ÖLÜM NEDENİ: A Short'ta anchor pozisyonunu erken terk ettin — Heaven ve Lamps açılarını açık bıraktın, o yüzden A Short'tan gelen swing seni arkasından vurdu. Heaven veya Lamps'ta 2 round boyunca anchor kal; pozisyon değişmeden önce team trade pozisyonu olana kadar bekle, teleporter sesine ya da teammate'in 'clear' call'una kadar çıkma.",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Son round'da A Short bağlantısını kullanan saldırıcı, senin erken ayrılışını reward etti; bu tekrar okunabilir hale gelmiş olabilir.",
+    "nextRoundPlan": "SONRAKİ ROUND: Heaven'da anchor ol, Lamps'ta off-angle tutan takım arkadaşınla trade hattı kur; anchor'ı terk etmeden önce teammate 'trade ready' demeli — aksi halde pozisyondan çıkma."
   },
   {
     "agent": "Astra",
@@ -150,9 +164,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "defense",
     "location": "B Link",
     "lang": "tr",
-    "title": "B Link Smoke Geç",
-    "deathAnalysis": "Bu round'da B Link'te smoke timing'ini geç başlattın; B Link girişinde smoke patlamadan önce pozisyonunu açtığın için savunucu off-angle'dan seni cezalandırdı.",
-    "nextRoundPlan": "Bir sonraki round B Link'e girerken smoke'ı girişten 0.5–1s önce at, smoke patladığı an jiggle peek ile bilgi al; smoke patlamadan önce footstep/utility sesi yoksa hemen geri çekil ve trade pozisyonuna geç."
+    "title": "B Link Smoke Geçikmesi",
+    "deathAnalysis": "ÖLÜM NEDENİ: B Link'te smoke timing'ini geciktirdin; B Link'e girerken duman yoktu, dar koridordan gelen rotator seni silhouette verip bitirdi. B Link'e girerken smoke'ı 0.5–1s önce at ve hemen jiggle ile pozisyon doğrula; smoke patladıktan sonra takımına swing için sinyal ver ve trade pozisyonuna geç.",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Son 3 roundda B Link'e girerken smoke yoksa aynı dar açıdan hızlı rotate ile trade veya lurk yapan oyuncular seni cezalandırmış — bu tekrar okunabilir hale gelmiş olabilir.",
+    "nextRoundPlan": "SONRAKİ ROUND: B Link smoke'ını round startında ya da yaklaşırken yap; smoke patlayana kadar commit etme, smoke patladığı an takımınla eş zamanlı gir ve trade pozisyonu al."
   },
   {
     "agent": "Gekko",
@@ -160,9 +175,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "attack",
     "location": "B Market",
     "lang": "tr",
-    "title": "B Market Lurk Tuzağı",
-    "deathAnalysis": "B Market'ta lurk ederken arkadan yakalandın; Gekko olarak globülü toplama veya Wingman destek rotası planlamadan B Market'e yalnız girmen hata oldu, bu yüzden backstab yedin. Alternatif olarak B Market lurk'unda globülü attıktan sonra hemen Market girişine yakın bir cover'e (Market side cover) topla veya bir teammate'ten Market split için 1 trade/alıcı bırakmasını talep et; iki varyasyonla tekil backstab riskini düşürürsün.",
-    "nextRoundPlan": "Wingman plant gönderme kararı site temizlenene kadar bekle; globülü attıktan hemen sonra Market girişindeki cover'a topla ve Market split için bir teammate çağır."
+    "title": "B Market Lurk Kaybı",
+    "deathAnalysis": "ÖLÜM NEDENİ: B Market'te lurk yaparken arkadan yakalandın çünkü rotasyon/market kontrolü sağlamadan globül toplamak için pozisyon değiştirdin; sonuçta arkan boş kaldı. Globülü toplarken önce Market girişini bir oyuncuya veya tripwire/utility ile kilitle — globülü aldıktan sonra backline'a sakince dön, arkanda en az 1 trade-ready takım arkadaşı bulundur.",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Veride tekrar yok; elinde killfeed ya da önceki round kanıtı olmadığı için düşman davranışı hakkında net iddia yok.",
+    "nextRoundPlan": "SONRAKİ ROUND: Globül toplarken Market girişine bir teammate bırak (trade-ready) veya Cypher/Killjoy tuzağı varsayıyorsa onu pasifleştir, globülü almadan önce Market'e hızlı utility at ve sadece trade-ready arkaya döndüğünde backline'a geç."
   },
   {
     "agent": "Yoru",
@@ -170,9 +186,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "attack",
     "location": "Mid Boiler",
     "lang": "tr",
-    "title": "CALLOUT: Mid Boiler TP hatası",
-    "deathAnalysis": "Mid Boiler'da teleport sonrası takipsiz agresyonla öldün — TP'ye varıp klon/flash olmadan geniş swing attın, bu pozisyon Mid Boiler'da seni açıkta bıraktı çünkü takip veya utility yoktu.",
-    "nextRoundPlan": "Mid Boiler'a TP attığında önce klon gönder veya Blindside/flash hazırla; TP varır varmaz geniş swing atma, klon/flash tepki çektikten sonra hemen swing at. Alternatif: TP'yi daha gizli bir arkaya göm, takımıyla senkronize gelip aynı anda giriş yap, tek başına TP sonrası agresyon deneme."
+    "title": "Boiler TP'ye takipsiz girme",
+    "deathAnalysis": "ÖLÜM NEDENİ: Mid Boiler'da teleport yapıp takipsiz agresyonla girdin; TP sonrası ne yapacağına dair bir tetikleyici yoktu, bu yüzden Boiler köşesinden instant trade yedin. TP atarken elinde flash hazır ol, TP varır varmaz Blindside/flash patlatıp geniş açıyla swing at — TP'ye plansız giriş yapma, her TP girişi bir sonraki eylemi tetikleyecek şekilde olmalı.",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Bu maçta düşman Boiler köşesini bekliyor olabilir; önceki round kanıtı yok, bu yüzden kesin demek için veri yetersiz.",
+    "nextRoundPlan": "SONRAKİ ROUND: Boiler TP at, TP yerleştiğinde anında Blindside + kısa flash ile birlikte geniş açıya swing at; alternatif olarak TP'yi daha gizli bir kutu arkasına gömüp takımınla trade setlemeden tek başına girmeye çalışma."
   },
   {
     "agent": "Breach",
@@ -180,9 +197,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "attack",
     "location": "C Mound",
     "lang": "tr",
-    "title": "C Mound stun senkronu",
-    "deathAnalysis": "C Mound'da sen Fault Line/Flash senkronunu vermeden atıp takımın C Mound swing'ini bozdu; stun timing'i C Mound giriş anıyla uyumlu değildi, takım beklemiyordu. C Mound'da Breach olarak her util atmadan önce \"C Mound geliyor\" diye sesli onay al, yoksa stun boşa gider ve sen trade alınamazsın.",
-    "nextRoundPlan": "C Mound için: stun/delay sinyalini ver (\"C Mound geliyor\"), takımın onayını bekle, Fault Line at ve flash patlar patlamaz takım girsin."
+    "title": "C Mound stun uyumsuzluğu",
+    "deathAnalysis": "ÖLÜM NEDENİ: C Mound'da Fault Line/Stun zamanlamasını takımla eşleştirmeden attın; stun patladı ama takım o anda swing/entry yapmadığı için sen tek kaldın ve 1vX olarak öldün. Stun atmadan önce sesli onay al — “fault line C mound, giriyoruz” de, stun sonrası ekip anında swing atsın.",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Rakip C Main/Waterfall tarafında bekleyip stun sonrası tek hedefi ceza veriyor olabilir — bu tekrar, stun uyumsuzluğunda seni cezalandırıyor.",
+    "nextRoundPlan": "SONRAKİ ROUND: Stun atmadan önce voice’ta “fault line C mound — 3 kişi giriyoruz” diye onay al; stun patladıktan 0.3s içinde iki kişi Mound’dan swing atsın, sen trade pozisyonunda kal."
   },
   {
     "agent": "KAY/O",
@@ -190,9 +208,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "attack",
     "location": "B Main",
     "lang": "tr",
-    "title": "B Main: knife boş kaldı",
-    "deathAnalysis": "B Main'da knife attın ama knife sonrası baskı kurmadığın için tek başına kaldın ve öldün. Knife sonrası takımın B Main trade pozisyonu yoktu; entry'yi tek başına alman ölümüne yol açtı.",
-    "nextRoundPlan": "Knife vurduğun anda B Main'de biri pop-flash patlatıp senle beraber entry yapacak; ikinci kişi hemen trade pozisyonunda beklesin. Alternatif olarak, flash yoksa knife sonrası geri çekil, B Main'de bir oyuncu Market yönünü izleyecek şekilde bırak ve organize (flash+trade) tekrar girin."
+    "title": "B Main - Knife Boşa Gitti",
+    "deathAnalysis": "ÖLÜM NEDENİ: B Main'de knife (ZERO/POINT) attın ama suppress eden düşman sayısını takıma söylemedin ve hemen içeri girip entry rolünü üstlendin; knife sıfır veya tek vuran bir atışsa savunucu sağlam kaldı ve seni trade etti. Knife atınca anında komut ver—\"knife X\"—sonra takımınla 0/1/2 sonucuna göre ya anında yığıl (2+), ya geri çekilip flash/frag ile choke'ı temizle (0-1).",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Mevcut veri tek round; düşman B Main'de sabit off-angle tutuyor gibi görünmüyor, bu yüzden knife sonrası sessiz kalman onların pozisyonunu korumasına izin verdi.",
+    "nextRoundPlan": "SONRAKİ ROUND: Knife at, sonucu bağır—eğer \"knife 2\" gelirse anında üç kişi B Main'e yığıl; \"knife 0/1\" gelirse sen geri çekil, FRAG/MENT choke'a at ve takım flash ile pop-flash yapıp giriş yap."
   },
   {
     "agent": "Viper",
@@ -200,9 +219,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "defense",
     "location": "A Hall",
     "lang": "tr",
-    "title": "Wall Timing — A Hall uyarı",
-    "deathAnalysis": "Breeze savunmasında Viper olarak A Hall'da bu roundda wall'u girişten önce uzun süre açık bıraktın; A Hall'da açık wall seni direkt görünebilir kıldı ve bu yüzden öldün. Callout: A Hall.",
-    "nextRoundPlan": "Birincil: wall'ı takım entry başlamadan hemen önce aç, takım A Hall'dan geçtiğini sound veya görselle doğruladığın anda 0.8–1s sonra kapat; böylece A Hall'da cross vermemiş olursun. Alternatif: eğer teammate A Hall'dan flash/entry yapıyorsa wall'ı 0.3–0.5s önce aç ve orb'u post-plant için sakla."
+    "title": "Wall Zamanlaması Patladı",
+    "deathAnalysis": "ÖLÜM NEDENİ: A Hall'da wall'u takımın giriş anına yakın, ama henüz arkadaşlar pozisyon almadan açtın; koridoru kapatırken arka açıdan gelip kafadan one-tap yedin. Wall zamanlamasını yanlış seçtin — wall açılırken takımın ready değilse sen yalnız kalırsın.",
+    "enemyPatterns": "DÜŞMAN ANALİZİ: Son 3 round verisi yok; bu nedenle düşmanın davranışı hakkında kesin iddia yok. Ancak bu pozisyonda wall erken açıldığında arkadan veya A Hall içinden hızlı swing yapan bir oyuncuya karşı savunmasız kalırsın.",
+    "nextRoundPlan": "SONRAKİ ROUND: Wall'u A Hall'da sadece entry start sinyali sonrası aç — takımın 1 kişi A Hall girişinde ready olduğunda wall aç, hemen kapat; alternatif olarak wall'ı 0.5 saniye geciktirip orb'u post-plant için sakla."
   }
 ];
 export const FEEDBACK_BANK_EN: FeedbackExample[] = [
@@ -212,9 +232,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "attack",
     "location": "A Main",
     "lang": "en",
-    "title": "A Main Solo Entry",
-    "deathAnalysis": "You died at A Main while making a solo dry entry with no trade — you took the first duel alone and had no teammate watching your back, so there was no trade to punish the defender. Stop committing as the lone entry at A Main; wait for a flash or a second player to trade because A Main's long sightline and Heaven/Generator crossfire punish unsupported lone entries.",
-    "nextRoundPlan": "Hold A Main off until a teammate flashes for you, then dash into the swing with the flash timing; if no flash comes, fall back and approach A site via A Short for a split instead because entering A Main alone gives defenders an isolated duel you cannot win reliably."
+    "title": "A Main Kuru Entry",
+    "deathAnalysis": "DEATH CAUSE: You solo‑peeked A Main without utility and died because there was no trade—your peek was the only contact, so one bullet ended the round; fix by having a partner ready in Generator or A Short to trade you immediately and only commit the moment your flash/smoke lands.",
+    "enemyPatterns": "ENEMY READ: The defender punished isolated A Main entries—when you come alone they hold an angle and pre‑aim the choke, so single‑man dry swings are being consistently punished.",
+    "nextRoundPlan": "NEXT ROUND: Wait for a teammate in Generator or A Short to be in trade position, call “flash now,” have the flash pop and then entry together; if no trade is available, delay the entry and take a different angle (A Short or mid split) instead."
   },
   {
     "agent": "Reyna",
@@ -222,9 +243,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "attack",
     "location": "Hookah",
     "lang": "en",
-    "title": "Hookah — Overpeek Fix",
-    "deathAnalysis": "You died at Hookah after a kill by overpeeking into a second angle instead of securing the trade window; that immediate aggressive swing left you exposed. After a first kill at Hookah, take cover and Devour to guarantee full HP, or Dismiss into the Hookah ceiling/corner to reset position if multiple angles are possible.",
-    "nextRoundPlan": "On entry: win the first duel, step immediately behind the Hookah ledge and Devour; if you hear or suspect another angle, Dismiss into the Hookah ceiling/corner, re-peek only after your HP is restored and your sightline is singular."
+    "title": "Hookah Overpeek",
+    "deathAnalysis": "DEATH CAUSE: You killed one in Hookah then immediately overpeeked and died; after the first frag you pushed out of cover instead of using Devour or resetting angle, which left you exposed. After the first kill take the immediate cover at Hookah ledge, cast Devour and reposition to a different angle before re-engaging.",
+    "enemyPatterns": "ENEMY READ: After losing a teammate in Hookah, defenders frequently pre-aim the nearby off-angle and punish immediate wide re-peeks from the same line of fire.",
+    "nextRoundPlan": "NEXT ROUND: After a Hookah kill, step back to the ledge, Devour, change to a new peek (ceiling or elbow), then only re-engage when you have cover or a concrete timing window."
   },
   {
     "agent": "Raze",
@@ -232,9 +254,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "defense",
     "location": "B Heaven",
     "lang": "en",
-    "title": "B Heaven Tek Giriş",
-    "deathAnalysis": "B Heaven'da öldün; senin geç retake ve tek tek giriş yapman (tek tek içeri girdiğin için) Heaven'daki savunmacının birer birer seni almasına izin verdi. B Heaven'ı smoke veya molly ile flush et ve en az iki oyuncuyla crossfire kurarak aynı anda içeri gir; alternatif olarak bir oyuncu Heaven'ı flush ederken diğerleri giriş penceresini eşzamanlı kullanmalı.",
-    "nextRoundPlan": "Geri çekil, B Main ve Garage/Lurk pozisyonuna iki oyuncu yerleştir, B Heaven'a önce smoke sonra molly at; molly patladığı anda aynı anda içeri girin."
+    "title": "B Heaven Anchor",
+    "deathAnalysis": "DEATH CAUSE: You died at B Heaven because you committed a late, solo retake into a narrow choke (B Main/B Pillar) without teammate crossfire; you entered one-by-one and got isolated — change: do not solo-swing Heaven on a late retake, instead hold the angle to stall or wait for a coordinated flash from B Main before peeking.",
+    "enemyPatterns": "ENEMY READ: Repeated single-entry retakes into B Heaven get punished because defenders can focus one-lane trade from Pillar/Main then swing Heaven; that spacing favors the defender on the high ground.",
+    "nextRoundPlan": "NEXT ROUND: Hold off retake; call for 1 flash from B Main and a molly on Pillar, then swing Heaven together (you lead with Boombot into Pillar before committing)."
   },
   {
     "agent": "Neon",
@@ -242,9 +265,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "attack",
     "location": "A Main",
     "lang": "en",
-    "title": "A Main Fast Entry",
-    "deathAnalysis": "You sprinted into A Main on Lotus as Neon with no utility and died in Tree/Stairs sightlines; Fast Lane wasn't used and you presented a predictable, exposed target. Shift to a Fast Lane + coordinated flash approach to break those sightlines, or delay the sprint until a smoke/flash lands because sprinting alone into crossfires gets you one-shotted.",
-    "nextRoundPlan": "Put Fast Lane, wait for a teammate flash to land on Stairs, then sprint-slide into the Tree angle; if no flash is available, hold the wall and only sprint the moment a smoke covers Tree or Stairs."
+    "title": "A Main death — utilityless entry",
+    "deathAnalysis": "DEATH CAUSE: You sprinted into A Main without utility and died to prepared sightlines; fix by opening Fast Lane, then wait for one flash or smoke before committing so you don't run into stacked Tree/Stairs fire.",
+    "enemyPatterns": "ENEMY READ: The repeated result of utilityless A Main entries suggests defenders hold Tree and Stairs angles to punish raw speed rather than chasing — they trade off each other when you run straight in.",
+    "nextRoundPlan": "NEXT ROUND: Open Fast Lane, call for a single flash on Tree or a smoke on Stairs, then sprint-slide through A Main immediately on the flash/smoke pop."
   },
   {
     "agent": "Sova",
@@ -252,9 +276,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "attack",
     "location": "C Long",
     "lang": "en",
-    "title": "C Long — Tekrarı Kes",
-    "deathAnalysis": "C Long'da aynı geniş açıya tekrar tekrar girmen düşman tarafından okunmuş; bu round'da C Long'da ayni açıdan vuruldun. Bir round C Long pozisyonunu bırakıp Garage veya C Connector üzerinden split yap veya C Long'da farklı bir yükseklik/smoke kombinasyonu kullan; C Long'daki tek tip açıyı tekrarlamayı kes.",
-    "nextRoundPlan": "C Long'da bekleme: Garage'dan iki kişilik split ile gel; veya C Long için üst tavan/alternatif Recon Bolt noktası kullan, önce smoke koy, flash patladığında kısa wide swing yap."
+    "title": "C Long Repeat — Stop Taking Same Line",
+    "deathAnalysis": "DEATH CAUSE: You kept taking the same wide C Long angle and died because you were pre-aimed; change your exit line and timing — either jiggle from the Plat edge then swing or use a short-range smoke onto Plat before you commit so you force an eyeball reset.",
+    "enemyPatterns": "ENEMY READ: Repeating that wide line made you predictable; the defender could hold that sightline with pre-aim and punish your identical timing.",
+    "nextRoundPlan": "NEXT ROUND: Do a feint — send Owl Drone toward Plat, then either (A) smoke Plat and flash into the long cross while a teammate pressure from Garage, or (B) delay your peek by 0.5–1s and jiggle-preaim the inner corner instead of the wide shoulder; pick one and execute it."
   },
   {
     "agent": "Phoenix",
@@ -262,9 +287,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "attack",
     "location": "A Main",
     "lang": "en",
-    "title": "Curve A Main Entry",
-    "deathAnalysis": "You pushed A Main without throwing a Curveball and died at A Main; A Main's straight sightline punished an unflashed entry. That single error at A Main removed any entry window and made your swing predictable.",
-    "nextRoundPlan": "Curveball right into A Main and swing the moment it pops; if you expect a utility stack at A Main, fake the A Main commit with a short wall then go through A Elbow instead."
+    "title": "A Main death — no flash",
+    "deathAnalysis": "DEATH CAUSE: You pushed A Main and died because you entered without using Curveball; entering blind let the defender hold the angle and win the first duel. Next time hold at the A Main corner, throw a right-curve or left-curve Curveball so it pops as you step, then wide-swing immediately — flash then swing, not swing then flash.",
+    "enemyPatterns": "ENEMY READ: Repeated entry without flashes makes that A Main angle a one-shot trap for defenders who pre-aim the corner.",
+    "nextRoundPlan": "NEXT ROUND: Stand at A Main corner, call 'right flash', throw Curveball that pops as you step, wide-swing instantly; if you don't get the trade within 2 seconds, fall back to Elbow and let Market or a teammate pressure for a cross."
   },
   {
     "agent": "Cypher",
@@ -272,9 +298,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "defense",
     "location": "A Belt",
     "lang": "en",
-    "title": "A Belt callout",
-    "deathAnalysis": "You missed the Operator's first shot at A Belt and then held the exact same angle, which let the enemy recover and punish you; reset after a whiff—don’t keep exposing the same line. Instead of lingering on the belt line, step back or change to a tighter off-angle so the enemy must re-aim, because repeating the same exposure hands them an easy kill.",
-    "nextRoundPlan": "If your first Operator shot misses at A Belt, immediately disengage one step, relocate to A Rafters or Generator, then re-peek with a jiggle or change your eye-level; if you must hold long, use a micro-offangle rather than the identical sightline."
+    "title": "A Belt Op Mistake",
+    "deathAnalysis": "DEATH CAUSE: You missed the first Operator shot at A Belt and stayed on the exact same off-angle, so the second swing got you — instead reposition after a miss; step back to the box edge or jiggle to reset crosshair before re-peeking.",
+    "enemyPatterns": "ENEMY READ: The defender punished repeated presence on the same Belt angle by holding the reset window after a missed shot.",
+    "nextRoundPlan": "NEXT ROUND: If your Operator shot misses at A Belt, immediately change your sightline — either back toward Sandbags to bait a reset or shift to a deeper off-angle on the left box before re-peeking."
   },
   {
     "agent": "Omen",
@@ -282,9 +309,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "attack",
     "location": "Mid Doors",
     "lang": "en",
-    "title": "Mid Doors — smoke peek",
-    "deathAnalysis": "At Mid Doors you peeked out of your own smoke and died because the smoke removed your visual cover; instead, re-peek by jiggle-peeking the smoke edge from behind cover or throw a flash into the smoke and immediately swing so you force timing rather than expose yourself in the smoke. As an alternative, hold the smoke's angle from off-angle (e.g., one step back of Mid Doors cover) and wait for a concrete trigger — a teammate's call or a flash — before committing.",
-    "nextRoundPlan": "Hold just behind Mid Doors cover; jiggle the smoke edge and only fully swing on a teammate flash or a clear call."
+    "title": "Mid Doors Peek",
+    "deathAnalysis": "DEATH CAUSE: You exited your own smoke at Mid Doors and peeked into a cleared sightline, exposing your head — that timing let a defender pre-aim your angle; instead, delay the peek 0.5–1s after smoke pops and jiggle from edge of smoke so only a sliver shows, or crouch-walk to minimize silhouette.",
+    "enemyPatterns": "ENEMY READ: Defenders are holding Mid Doors pre-aiming the common smoke-exit line, punishing players who fully step into sight immediately after the smoke.",
+    "nextRoundPlan": "NEXT ROUND: Pop the smoke, wait half a second, then jiggle-peek from the smoke edge (or use flash first) — do not step fully out and stand still."
   },
   {
     "agent": "Chamber",
@@ -292,9 +320,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "attack",
     "location": "A Main",
     "lang": "en",
-    "title": "A Main — Operator Lose",
-    "deathAnalysis": "You died at A Main while still holding the Operator and did not drop it; that stopped your team from recovering the long-range weapon at A Main and cost 4700 credits (observation: death at A Main with Operator). This likely happened because you attempted a close-range duel at A Main without swapping or timing a teleport-out, so stop assuming the Operator survives close trades at A Main.",
-    "nextRoundPlan": "If you enter A Main again, either teleport immediately after your first shot or swap to a secondary before close-range contact; if you must hold A Main long angles, commit to one peek then TP out—do not attempt extended close duels with the Operator at A Main."
+    "title": "A Main Operator Drop",
+    "deathAnalysis": "DEATH CAUSE: You died at A Main holding Operator and did not drop it when killed, so your team lost potential weapon economy; instead of trying to duel longer you should have immediately toss-dropped the Operator body or called for a trade while falling to preserve the 4k+ value.",
+    "enemyPatterns": "ENEMY READ: When you hold A Main with an Operator, attackers punish prolonged duels and prioritize securing the long gun on your corpse, so failing to relinquish it hands them a free buy.",
+    "nextRoundPlan": "NEXT ROUND: If you get Operator-picked in A Main, immediately throw the weapon (drop) on death or loudly call 'drop on death' so a teammate peeks and secures it; if you can’t drop, stall with utility while calling for a trade instead."
   },
   {
     "agent": "Killjoy",
@@ -302,9 +331,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "defense",
     "location": "B Tunnel",
     "lang": "en",
-    "title": "B Tunnel — Late Rotate",
-    "deathAnalysis": "You died at B Tunnel because you started your rotation late, leaving the site without your Killjoy utility and allowing attackers to clear without contest; rotate timing from B Tunnel must be tied to teammate contact or clear turret info. Change: when in B Tunnel, only begin rotation after you hear a teammate call or the turret stops pinging, or rotate immediately and bring Alarmbot/Nanoswarm with you so you don't leave site utilityless.",
-    "nextRoundPlan": "From B Tunnel, rotate on a clear teammate call or turret silence; if rotating, place Alarmbot+Nanoswarm on your path and announce 'rotating B Tunnel' before you commit."
+    "title": "Late Rotate Kill (B Tunnel)",
+    "deathAnalysis": "DEATH CAUSE: You died in B Tunnel because you rotated late into the site and were caught in a crossfire while entering — move faster into anchor positions or delay rotation until you have utility to contest; instead of running straight into tunnel, take the off-angle at the back alcove and use your turret as early warning so you don't arrive alone.",
+    "enemyPatterns": "ENEMY READ: The killer punished late rotations into B Tunnel crossfire, suggesting defenders held pre-aimed angles on common rotation timings for that entrance.",
+    "nextRoundPlan": "NEXT ROUND: Rotate earlier the moment teammate HP or presence drops (don't wait for call), place turret to watch B Tunnel approach before committing, and enter B Tunnel from the alcove peek to force wide aim or buy time for a trade."
   },
   {
     "agent": "Sage",
@@ -312,9 +342,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "defense",
     "location": "Mid Courtyard",
     "lang": "en",
-    "title": "Mid Courtyard Wide Peek",
-    "deathAnalysis": "You took a wide swing from Mid Courtyard on an eco round and died because you were fully exposed without a slow or cover; Mid Courtyard wide angles punish Sage on eco. Instead of wide peeks in an eco round, anchor in Pizza/Cubby or behind the low bench and rely on a Slow Orb into the Mid Courtyard choke to force awkward approaches.",
-    "nextRoundPlan": "Anchor Pizza/Cubby or bench at Mid Courtyard, pre-aim the expected entry, throw Slow Orb into the Mid Courtyard choke as soon as footsteps or comms indicate a push, then stall behind cover and only peek when a teammate can trade."
+    "title": "Mid Courtyard Death",
+    "deathAnalysis": "DEATH CAUSE: You swung wide at Mid Courtyard on an eco round and died — you exposed your body to long sightlines with a weak pistol; stay narrow and use cover instead.",
+    "enemyPatterns": "ENEMY READ: The kill indicates the defender held a long sightline from Top Mid/Pizza and punished wide peeks on eco buys.",
+    "nextRoundPlan": "NEXT ROUND: On eco, don't take a wide Courtyard swing; jiggle from the left crate or close-corner peek from the arch, and if you must challenge long, trade with a teammate at the doorway."
   },
   {
     "agent": "Fade",
@@ -323,8 +354,9 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "location": "Mid Mail",
     "lang": "en",
     "title": "Mid Mail — No Trade",
-    "deathAnalysis": "You pushed Mid Mail solo and died because there was no trade position to punish that entry; Mid Mail commit without backup is a one-man loss. That death cost you both the Mid info and a teammate for the ensuing fight because nobody was holding a trade angle in Mid Mail.",
-    "nextRoundPlan": "Have a partner: one player peeks Mid Mail while you hold Mid Rope (trade angle); do not step into Mid Mail until the trade is visually ready."
+    "deathAnalysis": "DEATH CAUSE: You entered Mid Mail alone and died because there was no trade behind you; that single peek surrendered any chance to convert the frag into a round advantage. On the next Mid Mail approach, never go first alone — step back 0.5–1s after Haunt/Prowler starts and wait for a team member to hold the swing line for immediate trade.",
+    "enemyPatterns": "ENEMY READ: When a solo player shows in Mid Mail, defenders punish the initial peek angle by pre-aiming the choke or holding a deep off-angle that windows out lone entries.",
+    "nextRoundPlan": "NEXT ROUND: Call 'Mail ready' and send Haunt into Mail, then hold a stable trade spot with a teammate (anchor at Mail door or top Mail) — when Prowler lands, the anchor swings immediately; you do not entry alone."
   },
   {
     "agent": "Skye",
@@ -332,9 +364,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "attack",
     "location": "Garage",
     "lang": "en",
-    "title": "Garage Callout — Stop",
-    "deathAnalysis": "You died at Garage after burning utility without first confirming enemy presence; that single action handed away positional info and left you exposed because you committed blind. Next time send Skye's Trailblazer or ask for a Sova recon before you detonate Guiding Light; if recon isn't available, hold your flash and have a teammate trade the swing so you don't go in alone.",
-    "nextRoundPlan": "Send Trailblazer into Garage first, only detonate Guiding Light when teammate is lined up to swing immediately; if no recon, call for a 2-man entry (you as flash, teammate as immediate trade)."
+    "title": "Garage Death — Stop Utility First",
+    "deathAnalysis": "DEATH CAUSE: You used your flash/smoke in Garage and then immediately pushed without first getting recon or teammate confirmation, so you entered blind and died; fix by forcing information before committing — send a drone/peek with teammate or have Skye's dog clear the angle, then push on the utility window.",
+    "enemyPatterns": "ENEMY READ: When attackers pop utility into Garage and immediately push, defenders commonly hold a passive off-angle inside Garage or Window and punish blind entries.",
+    "nextRoundPlan": "NEXT ROUND: Do not commit after your utility alone — send the dog through the alternate line or ask a teammate to trade-window peek, wait for audio/camera confirmation, then entry on that confirmation; if no info, reset and pressure Garage from Connector instead."
   },
   {
     "agent": "Brimstone",
@@ -342,9 +375,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "defense",
     "location": "A Short",
     "lang": "en",
-    "title": "A Short Anchor (A Short)",
-    "deathAnalysis": "You left A Short anchor too early this round, abandoning Heaven and Lamps angles and allowing attackers a clean crossfire window; hold the anchor until a concrete trigger appears. As an alternative, if you must rotate from A Short this round, call it and smoke Lamps before moving so you don't hand over an exposed A Short flank.",
-    "nextRoundPlan": "Hold A Short anchor until either a teammate trades on your call or you hear Heaven peek; if rotating from A Short, announce it, throw a Lamps smoke, then fall back."
+    "title": "A Short Anchor",
+    "deathAnalysis": "DEATH CAUSE: You left A Short anchor too early and died; holding Heaven/Lamps crossfire collapsed because nobody replaced your angle — stay at A Short until either a teammate physically peeks Bath or you hear teleporter/footstep info that validates a rotate.",
+    "enemyPatterns": "ENEMY READ: From this round's outcome, the attacker punished early A Short abandonment by exploiting the unguarded Short-to-Heaven corridor and entry swing.",
+    "nextRoundPlan": "NEXT ROUND: Remain on A Short anchor until a concrete trigger (teammate calls ‘Bath clear’ OR you hear teleporter/short footsteps); if you must rotate, verbally call ‘rotating now’ and delay by 0.5–1s so a teammate can shift into the Short angle."
   },
   {
     "agent": "Astra",
@@ -352,9 +386,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "defense",
     "location": "B Link",
     "lang": "en",
-    "title": "B Link Smoke Timing",
-    "deathAnalysis": "You died at B Link on defense as Astra because your Nebula was activated after the enemy entered B Link, leaving your body exposed. That late smoke timing at B Link prevented Gravity Well/Nova Pulse setup and allowed them to clear your angle before you could control the choke.",
-    "nextRoundPlan": "During buy place an Astra star on B Link and activate Nebula the moment you hear footsteps or an ally calls B Main, then immediately lane Gravity Well + Nova Pulse through that B Link smoke; if you get no audio/visual confirm, keep the B Link star primed and do not astral until the enemy commits to the choke."
+    "title": "B Link — Late Smoke",
+    "deathAnalysis": "DEATH CAUSE: You died at B Link because your smoke timing was late — you entered the choke after the smoke should have blocked sight, exposing your body; instead of creating space you walked into a prepared angle. Plant your star and call \"smoke now\" so the Nebula lands before you commit; if the smoke isn't down by the time you reach the corner, stop 1m back and force a jiggle for info rather than full entry.",
+    "enemyPatterns": "ENEMY READ: The defender is holding the B Link choke pre-aimed to punish late utility — that angle rewards shooting a visible silhouette through delayed smokes.",
+    "nextRoundPlan": "NEXT ROUND: place the star on B Link during buy, call the smoke timer out loud to teammates, and only step into the choke once the Nebula is visibly deployed; if it isn’t, fall back and take a jiggle or wait for trade."
   },
   {
     "agent": "Gekko",
@@ -362,9 +397,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "attack",
     "location": "B Market",
     "lang": "en",
-    "title": "B Market Lurk Fail",
-    "deathAnalysis": "You were lurk-ing at B Market and got caught from behind while isolated; being alone in B Market left no trade or info for your team. Instead hold a recovery path: lurk from B Alley with a planned escape to Market-side crate so a teammate can trade or you can re-enter after a kill.",
-    "nextRoundPlan": "Lurk from B Alley, pre-plan the globule pickup route to Market-side crate, and only commit into Market when a teammate peeks B Main or you hear plant/footstep confirmation."
+    "title": "B Market positioning error",
+    "deathAnalysis": "At B Market you lurk ederken arkadan yakalandı; you fell before any trade. Enter with a teammate and share the first contact.",
+    "enemyPatterns": "The defender pre-holds B Market and punishes the first angle.",
+    "nextRoundPlan": "Use a smoke or flash before B Market, then commit together with a teammate."
   },
   {
     "agent": "Yoru",
@@ -372,9 +408,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "attack",
     "location": "Mid Boiler",
     "lang": "en",
-    "title": "Mid Boiler — Teleport Error",
-    "deathAnalysis": "You teleported into Mid Boiler and immediately pushed without follow-up; that single action (Teleport -> solo swing at Mid Boiler) got you killed because you had no trade or flash ready. Instead, teleport only as a positional threat and commit with a flash + teammate within 1 second, or bait a swing by sending the clone and wait 0.5–1s for enemy reaction before arriving.",
-    "nextRoundPlan": "Place Gatecrash behind the boiler lip, send the clone toward Mid Raf, wait for a teammate to be within line-of-sight, then TP in with a flash timed to land the moment you exit — if no teammate is ready, cancel the TP and use the clone to draw fire instead."
+    "title": "Mid Boiler positioning error",
+    "deathAnalysis": "At Mid Boiler you teleport sonrası takipsiz agresyon; you fell before any trade. Enter with a teammate and share the first contact.",
+    "enemyPatterns": "The defender pre-holds Mid Boiler and punishes the first angle.",
+    "nextRoundPlan": "Use a smoke or flash before Mid Boiler, then commit together with a teammate."
   },
   {
     "agent": "Breach",
@@ -382,9 +419,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "attack",
     "location": "C Mound",
     "lang": "en",
-    "title": "C Mound stun timing",
-    "deathAnalysis": "You cast Fault Line at C Mound before teammates committed, so the stun window expired and you were isolated on the mound; that mistimed initiation left you exposed and got you traded. Synchronise voice cue with a visible or audible readiness—don’t fire Fault Line until two teammates confirm they will enter the same tick.",
-    "nextRoundPlan": "Call “Fault Line C Mound—ready?”; wait for two audible confirmations or a toe-on-door sound, then detonate Fault Line and have teammates swing immediately on the same tick; follow with Aftershock into the corner and clear while you occupy mound cover."
+    "title": "C Mound positioning error",
+    "deathAnalysis": "At C Mound you stun timing'i takımla uyumsuz; you fell before any trade. Enter with a teammate and share the first contact.",
+    "enemyPatterns": "The defender pre-holds C Mound and punishes the first angle.",
+    "nextRoundPlan": "Use a smoke or flash before C Mound, then commit together with a teammate."
   },
   {
     "agent": "KAY/O",
@@ -392,9 +430,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "attack",
     "location": "B Main",
     "lang": "en",
-    "title": "B Main knife follow-up",
-    "deathAnalysis": "You used ZERO/POINT at B Main but didn’t press the suppress window or call the suppress count, so the utility value was lost and you died at B Main; the report shows knife used but no immediate entry or trade pressure followed. As a result the suppress didn’t remove defenders’ utility in time and you came into a raw duel at B Main without advantage.",
-    "nextRoundPlan": "After ZERO/POINT at B Main, call the suppress result out loud, then step in immediately with a flash and be the first into the choke to force gunfights during the suppressed window; if suppress reads zero, delay entry and watch Market for a rotator instead."
+    "title": "B Main positioning error",
+    "deathAnalysis": "At B Main you knife sonrası baskı kurmadı; you fell before any trade. Enter with a teammate and share the first contact.",
+    "enemyPatterns": "The defender pre-holds B Main and punishes the first angle.",
+    "nextRoundPlan": "Use a smoke or flash before B Main, then commit together with a teammate."
   },
   {
     "agent": "Viper",
@@ -402,9 +441,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "defense",
     "location": "A Hall",
     "lang": "en",
-    "title": "A Hall Timing Fix",
-    "deathAnalysis": "In this round you opened the Toxic Screen too early in A Hall, so the wall expired before the critical fight at A Hall and left you without control; open the wall later and sequence it with your team’s entry into A Hall. Close the screen immediately after teammates clear A Hall to preserve fuel for post-plant in A Hall.",
-    "nextRoundPlan": "Hold Toxic Screen in A Hall until the first teammate steps into A Hall, then open and shut the wall as they pass so you retain fuel for post-plant in A Hall."
+    "title": "Wrong Wall Timing — Fix It",
+    "deathAnalysis": "DEATH CAUSE: You opened Toxic Screen in A Hall while your team was still committing, which left the screen active when defenders swung — you were blind and died; fix by opening the wall only as the first teammate steps through the Hall and immediately closing it after your team clears the immediate angle, because the wall must not block your own sightline during entry.",
+    "enemyPatterns": "ENEMY READ: That A Hall angle punishes Vipers who expose themselves behind a late-opening wall — defenders swing into the blindgap created when the screen is active.",
+    "nextRoundPlan": "NEXT ROUND: Hold the wall closed pre-entry, call 'I open' and trigger the Toxic Screen the instant teammate 1 crosses the Hall threshold, then close it as you clear the first box; if you need sustained cover, open a slightly shifted wall (10–15°) toward the corner to avoid blocking your own peek."
   }
 ];
 export const FEEDBACK_BANK: Record<"tr" | "en", FeedbackExample[]> = { tr: FEEDBACK_BANK_TR, en: FEEDBACK_BANK_EN };

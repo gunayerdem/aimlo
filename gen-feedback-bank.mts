@@ -89,13 +89,13 @@ function sys(s: Scn, lang: "tr" | "en", corrective: string): string {
 DİL: sokak Türkçesi, sade. Oyun terimleri İngilizce (peek, trade, dash, entry, smoke, flash, op, lurk, anchor, retake).
 ${policy}
 🚫 TARZANCA YASAK: "pre-aim"→"açıyı tutuyor"; "head atıyor"→"kafadan vuruyor"; "peek yapıyor"→"peek atıyor"; "swing yapıyor"→"swing atıyor"; "wide swing"→"geniş açıyla peek"; "X çekiyor"→"X atıyor". Etiket (Sorun:/Fix:/Çözüm:) YASAK — akıcı yaz.${corrective}
-ÇIKTI — SADECE JSON: { "title": "kısa başlık (3-5 kelime, callout içersin)", "deathAnalysis": "ne yanlış gitti + net çözüm, akıcı 1-2 cümle, callout zorunlu", "nextRoundPlan": "doğrudan emir, öneksiz" }`;
+ÇIKTI — SADECE JSON: { "title": "kısa başlık (3-5 kelime, callout içersin)", "deathAnalysis": "ÖLÜM NEDENİ: neden öldün + net çözüm, akıcı 1-2 cümle, callout zorunlu", "enemyPatterns": "DÜŞMAN ANALİZİ: rakip bu callout'u nasıl tutuyor/cezalandırıyor, kendinden emin tek cümle", "nextRoundPlan": "SONRAKİ ROUND: doğrudan emir, öneksiz" }`;
   }
   return `${kbPart}You are AIMLO: a Radiant-level Valorant coach. Sharp, specific, confident.
 LANGUAGE: clear coach English, no corporate jargon. Standard game terms (peek, trade, dash, entry, smoke, flash, op, lurk, anchor, retake, pre-aim, wide swing are FINE in English).
 ${policy}
 🚫 BANNED: generic advice ("play carefully", "be better", "use utility", "improve positioning"). No labels (Problem:/Fix:/Solution:). Write fluent, confident sentences.${corrective}
-OUTPUT — JSON ONLY: { "title": "short title (3-5 words, include callout)", "deathAnalysis": "what went wrong + clear fix, fluent 1-2 sentences, callout required", "nextRoundPlan": "direct imperative, no prefix" }`;
+OUTPUT — JSON ONLY: { "title": "short title (3-5 words, include callout)", "deathAnalysis": "DEATH CAUSE: why you died + clear fix, fluent 1-2 sentences, callout required", "enemyPatterns": "ENEMY READ: how the defender holds/punishes this spot, confident single sentence", "nextRoundPlan": "NEXT ROUND: direct imperative, no prefix" }`;
 }
 function usr(s: Scn, lang: "tr" | "en"): string {
   if (lang === "tr") {
@@ -109,7 +109,7 @@ async function callGPT(system: string, user: string): Promise<any> {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${API_KEY}` },
     body: JSON.stringify({
-      model: "gpt-5-mini", max_completion_tokens: 700, reasoning_effort: "low",
+      model: "gpt-5-mini", max_completion_tokens: 1200, reasoning_effort: "minimal",
       response_format: { type: "json_object" },
       messages: [{ role: "system", content: system }, { role: "user", content: user }],
     }),
@@ -126,19 +126,33 @@ async function gen(s: Scn, lang: "tr" | "en"): Promise<any> {
   for (let a = 1; a <= 5; a++) {
     try {
       const out = await callGPT(sys(s, lang, corrective), usr(s, lang));
-      const txt = [out.title, out.deathAnalysis, out.nextRoundPlan].filter(Boolean).join(" \n ");
+      const txt = [out.title, out.deathAnalysis, out.enemyPatterns, out.nextRoundPlan].filter(Boolean).join(" \n ");
       const v = violations(txt, lang);
-      const ok = out.title && out.deathAnalysis && out.nextRoundPlan;
+      const ok = out.title && out.deathAnalysis && out.enemyPatterns && out.nextRoundPlan;
       if (ok && v.length === 0) {
         console.log(`  ✓ ${s.agent}/${s.loc} [${lang}]`);
-        return { agent: s.agent, map: s.map, side: s.side, location: s.loc, lang, title: clean(out.title), deathAnalysis: clean(out.deathAnalysis), nextRoundPlan: clean(out.nextRoundPlan) };
+        return { agent: s.agent, map: s.map, side: s.side, location: s.loc, lang, title: clean(out.title), deathAnalysis: clean(out.deathAnalysis), enemyPatterns: clean(out.enemyPatterns), nextRoundPlan: clean(out.nextRoundPlan) };
       }
       if (ok && v.length < bestV) { best = out; bestV = v.length; }
       corrective = `\n\n⚠ DÜZELTME: yasak kullandın: ${v.join(", ")} — at, akıcı yaz.`;
     } catch (e: any) { console.log(`  ! ${s.agent}/${s.loc} [${lang}] ${String(e.message).slice(0, 60)}`); corrective = ""; }
   }
-  if (best) { console.log(`  ⚠ ${s.agent}/${s.loc} [${lang}] en iyi (${bestV})`); return { agent: s.agent, map: s.map, side: s.side, location: s.loc, lang, title: clean(best.title), deathAnalysis: clean(best.deathAnalysis), nextRoundPlan: clean(best.nextRoundPlan) }; }
+  if (best) { console.log(`  ⚠ ${s.agent}/${s.loc} [${lang}] en iyi (${bestV})`); return { agent: s.agent, map: s.map, side: s.side, location: s.loc, lang, title: clean(best.title), deathAnalysis: clean(best.deathAnalysis), enemyPatterns: clean(best.enemyPatterns), nextRoundPlan: clean(best.nextRoundPlan) }; }
   throw new Error(`${s.agent}/${s.loc} [${lang}] üretilemedi`);
+}
+
+function fallback(s: Scn, lang: "tr" | "en"): any {
+  const base = { agent: s.agent, map: s.map, side: s.side, location: s.loc, lang };
+  if (lang === "tr") return { ...base,
+    title: `${s.loc} pozisyon hatası`,
+    deathAnalysis: `${s.loc}'da ${s.note}; trade gelmeden düştün. Yoldaşınla aynı anda gir, ilk kontağı paylaş.`,
+    enemyPatterns: `Rakip ${s.loc}'u önceden tutup ilk açıyı cezalandırıyor.`,
+    nextRoundPlan: `${s.loc}'a girmeden smoke veya flash kullan, sonra yoldaşınla birlikte yüklen.` };
+  return { ...base,
+    title: `${s.loc} positioning error`,
+    deathAnalysis: `At ${s.loc} you ${s.note}; you fell before any trade. Enter with a teammate and share the first contact.`,
+    enemyPatterns: `The defender pre-holds ${s.loc} and punishes the first angle.`,
+    nextRoundPlan: `Use a smoke or flash before ${s.loc}, then commit together with a teammate.` };
 }
 
 async function main() {
@@ -148,7 +162,7 @@ async function main() {
   console.log(`Feedback bankası — ${jobs.length} örnek (20 TR + 20 EN), gpt-5-mini…`);
   const out: any[] = new Array(jobs.length);
   const queue = jobs.map((j, i) => ({ ...j, i }));
-  async function worker() { while (queue.length) { const job = queue.shift()!; out[job.i] = await gen(job.s, job.lang); } }
+  async function worker() { while (queue.length) { const job = queue.shift()!; try { out[job.i] = await gen(job.s, job.lang); } catch { out[job.i] = fallback(job.s, job.lang); console.log(`  ⛑ ${job.s.agent}/${job.s.loc} [${job.lang}] fallback`); } } }
   await Promise.all([worker(), worker(), worker(), worker()]);
 
   const tr = out.filter((o) => o.lang === "tr");
@@ -157,7 +171,7 @@ async function main() {
 //  AUTO-GENERATED — gen-feedback-bank.mts ile gpt-5-mini + GERÇEK KB'den.
 //  20 TR + 20 EN örnek koç-feedback'i. Yeniden üret: npx tsx gen-feedback-bank.mts
 // ════════════════════════════════════════════════════════════════════
-export type FeedbackExample = { agent: string; map: string; side: string; location: string; lang: "tr" | "en"; title: string; deathAnalysis: string; nextRoundPlan: string };
+export type FeedbackExample = { agent: string; map: string; side: string; location: string; lang: "tr" | "en"; title: string; deathAnalysis: string; enemyPatterns: string; nextRoundPlan: string };
 export const FEEDBACK_BANK_TR: FeedbackExample[] = ${JSON.stringify(tr, null, 2)};
 export const FEEDBACK_BANK_EN: FeedbackExample[] = ${JSON.stringify(en, null, 2)};
 export const FEEDBACK_BANK: Record<"tr" | "en", FeedbackExample[]> = { tr: FEEDBACK_BANK_TR, en: FEEDBACK_BANK_EN };
