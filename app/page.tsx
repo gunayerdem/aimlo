@@ -567,7 +567,7 @@ Eco round'lar rank atlatacak kadar önemli. Her eco round'u kazanırsan rakibin 
     landingFeatures: [
       {
         icon: "zap",
-        title: "Otomatik İzleme",
+        title: "Otomatik Izleme",
         desc: "AI maçını arka planda izler, hiçbir şey yapmana gerek yok",
       },
       {
@@ -588,7 +588,7 @@ Eco round'lar rank atlatacak kadar önemli. Her eco round'u kazanırsan rakibin 
     ],
     landingHowTitle: "Nasıl Çalışıyor?",
     landingHowSteps: [
-      { step: "1", title: "Uygulamayı İndir", desc: "AIMLO'yu Windows'a yükle ve başlat" },
+      { step: "1", title: "Uygulamayı Indir", desc: "AIMLO'yu Windows'a yükle ve başlat" },
       {
         step: "2",
         title: "Valorant'ı Oyna",
@@ -596,7 +596,7 @@ Eco round'lar rank atlatacak kadar önemli. Her eco round'u kazanırsan rakibin 
       },
       {
         step: "3",
-        title: "AI Otomatik İzler",
+        title: "AI Otomatik Izler",
         desc: "Yapay zeka maçını canlı analiz eder ve her round'u inceler",
       },
       {
@@ -1564,30 +1564,45 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
         });
       }
 
-      // 6) Custom cursor — dot + lagging ring (desktop only).
-      if (fine) {
-        const dot = document.createElement("div");
-        const ring = document.createElement("div");
-        dot.className = "aw-cursor-dot";
-        ring.className = "aw-cursor-ring";
-        document.body.append(dot, ring);
-        const dx = gsap.quickTo(dot, "x", { duration: 0.08, ease: "power2.out" });
-        const dy = gsap.quickTo(dot, "y", { duration: 0.08, ease: "power2.out" });
-        const rx = gsap.quickTo(ring, "x", { duration: 0.38, ease: "power3.out" });
-        const ry = gsap.quickTo(ring, "y", { duration: 0.38, ease: "power3.out" });
-        const onMove = (e: MouseEvent) => { dx(e.clientX); dy(e.clientY); rx(e.clientX); ry(e.clientY); };
-        const onOver = (e: MouseEvent) => {
-          const t2 = e.target as HTMLElement;
-          const interactive = !!t2.closest("button, a, [role='button'], input, select");
-          ring.classList.toggle("aw-cursor-ring--active", interactive);
-        };
-        window.addEventListener("mousemove", onMove, { passive: true });
-        window.addEventListener("mouseover", onOver, { passive: true });
-        killers.push(() => {
-          window.removeEventListener("mousemove", onMove);
-          window.removeEventListener("mouseover", onOver);
-          dot.remove(); ring.remove();
-        });
+      // (Custom cursor removed 2026-06-12 — owner preferred the native cursor.)
+
+      // 6) PINNED FEATURE STORY — the features play as full-screen scenes
+      // driven by scroll (pin + scrub). This kills the "stacked card
+      // sections" flow: scroll becomes the timeline.
+      const story = document.querySelector<HTMLElement>("[data-story]");
+      if (story) {
+        const scenes = Array.from(story.querySelectorAll<HTMLElement>("[data-scene]"));
+        if (scenes.length > 1) {
+          gsap.set(scenes, { autoAlpha: 0, y: 60 });
+          gsap.set(scenes[0], { autoAlpha: 1, y: 0 });
+          // PIN the stage (GSAP transform-pin works even though <main> has
+          // overflow-x-hidden, which would break CSS position:sticky).
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: story,
+              start: "top top",
+              end: "+=" + scenes.length * 85 + "%",
+              scrub: 0.6,
+              pin: true,
+              anticipatePin: 1,
+            },
+          });
+          scenes.forEach((scene, i) => {
+            if (i === 0) return;
+            // Clean hand-off: previous scene fully exits BEFORE the next enters
+            // (no overlapping double-text), with a hold between transitions.
+            tl.to(scenes[i - 1], { autoAlpha: 0, y: -50, duration: 0.4, ease: "power2.in" }, i)
+              .fromTo(scene, { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: "power2.out" }, i + 0.48);
+          });
+          // progress ticks
+          const ticks = Array.from(story.querySelectorAll<HTMLElement>("[data-story-tick]"));
+          if (ticks.length) {
+            scenes.forEach((_, i) => {
+              tl.add(() => ticks.forEach((t2, ti) => t2.classList.toggle("story-tick--on", ti <= i)), i === 0 ? 0.01 : i + 0.6);
+            });
+          }
+          killers.push(() => { tl.scrollTrigger?.kill(); tl.kill(); });
+        }
       }
 
       cleanup = () => killers.forEach((k) => k());
@@ -1982,162 +1997,138 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       {/* Ambient orb — left side */}
       <div className="pointer-events-none absolute left-[-200px] top-[1200px] w-[500px] h-[500px] rounded-full bg-[#FF4655]/[0.06] blur-[150px] animate-orb" style={{ zIndex: 0 }} />
 
-      {/* ─── FEATURES — Xtract card grid ─── */}
-      <section ref={featRevealRef} id="section-features" data-animate className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pb-36 pt-10">
-        <p className="section-kicker mb-6">
-          <span className="sk-num">01</span>{lang === "tr" ? "ÖZELLIKLER" : "FEATURES"}
-        </p>
-        <h2 className={`section-display mb-16 max-w-3xl transition-all duration-700 ${featRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-          {lang === "tr" ? "AI ile Oyununu Bir Üst Seviyeye Taşı" : "Take Your Game to the Next Level with AI"}
-        </h2>
-        <div data-cascade className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {l.landingFeatures.map((f, i) => {
-            const v = featureVisuals[i];
-            return (
-              <div key={i} className={`card-xtract group overflow-hidden transition-all duration-700 ${featRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`} style={{ transitionDelay: `${i * 100}ms` }}>
-                {/* Agent portrait background */}
-                <div className="relative h-32 overflow-hidden">
-                  <img
-                    src={`https://media.valorant-api.com/agents/${v.agentId}/background.png`}
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-500"
-                    loading="lazy"
-                  />
-                  <img
-                    src={`https://media.valorant-api.com/agents/${v.agentId}/displayicon.png`}
-                    alt=""
-                    className="absolute right-4 top-1/2 -translate-y-1/2 h-24 w-24 object-contain opacity-30 group-hover:opacity-50 group-hover:scale-110 transition-all duration-500"
-                    style={{ filter: `drop-shadow(0 0 20px ${v.color}30)` }}
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
-                  <div className="relative p-7 flex items-center h-full">
+      {/* ─── ACT I: THE STORY — features as pinned, scroll-scrubbed scenes.
+            Scroll IS the timeline: each feature takes the full stage in turn
+            (the anti-"stacked card sections" structure). ─── */}
+      <section ref={featRevealRef} id="section-features" data-animate data-story className="relative z-10">
+        <div className="h-screen overflow-hidden flex items-center">
+          <div className="relative mx-auto max-w-6xl px-5 sm:px-8 w-full h-[70vh]">
+            {l.landingFeatures.map((f, i) => {
+              const v = featureVisuals[i];
+              return (
+                <div key={i} data-scene className="story-scene">
+                  <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 items-center w-full">
                     <div>
-                      <h3 className="text-[17px] font-bold text-white mb-1 tracking-tight">{f.title}</h3>
-                      <p className="text-[13px] text-neutral-400 leading-relaxed max-w-[280px]">{f.desc}</p>
+                      <div className="story-num mb-4">0{i + 1}</div>
+                      <h3 className="story-title">{f.title}</h3>
+                      <p className="story-desc">{f.desc}</p>
+                    </div>
+                    <div className="relative hidden lg:block h-[440px] rounded-3xl overflow-hidden border border-white/[0.07]">
+                      <img
+                        src={`https://media.valorant-api.com/agents/${v.agentId}/background.png`}
+                        alt=""
+                        className="absolute inset-0 w-full h-full object-cover opacity-[0.14]"
+                        loading="lazy"
+                        draggable={false}
+                      />
+                      <div className="absolute inset-0" style={{ background: `radial-gradient(420px 300px at 50% 60%, ${v.color}1f, transparent 70%)` }} />
+                      <img
+                        src={`https://media.valorant-api.com/agents/${v.agentId}/fullportrait.png`}
+                        alt=""
+                        className="absolute left-1/2 bottom-0 -translate-x-1/2 h-[105%] object-contain"
+                        style={{ filter: `drop-shadow(0 24px 40px rgba(0,0,0,0.6)) drop-shadow(0 0 34px ${v.color}40)` }}
+                        loading="lazy"
+                        draggable={false}
+                      />
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ─── HOW IT WORKS — Process steps like Xtract ─── */}
-      <section ref={howRevealRef} id="section-how" data-animate className="relative z-10 mx-auto max-w-3xl px-5 sm:px-8 pb-36 pt-10">
-        <p className="section-kicker mb-6">
-          <span className="sk-num">02</span>{lang === "tr" ? "SÜREÇ" : "PROCESS"}
-        </p>
-        <h2 className={`section-display mb-16 transition-all duration-700 ${howRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-          {l.landingHowTitle}
-        </h2>
-        <div className="space-y-4">
-          {l.landingHowSteps.map((s, i) => {
-            const stepIcons = [
-              // 1 — Set Up Match: map pin / compass
-              <svg key="h0" width="28" height="28" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z" stroke="#FF4655" strokeWidth="1.5" fill="rgba(255,70,85,0.1)"/>
-                <circle cx="12" cy="10" r="3" stroke="#FF4655" strokeWidth="1.5" fill="rgba(255,70,85,0.15)"/>
-              </svg>,
-              // 2 — Round Notes: crosshair / target scope
-              <svg key="h1" width="28" height="28" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="9" stroke="#4D7CFF" strokeWidth="1.5" fill="rgba(77,124,255,0.06)"/>
-                <circle cx="12" cy="12" r="4" stroke="#4D7CFF" strokeWidth="1.5" fill="rgba(77,124,255,0.12)"/>
-                <circle cx="12" cy="12" r="1" fill="#4D7CFF"/>
-                <line x1="12" y1="1" x2="12" y2="5" stroke="#4D7CFF" strokeWidth="1.5"/>
-                <line x1="12" y1="19" x2="12" y2="23" stroke="#4D7CFF" strokeWidth="1.5"/>
-                <line x1="1" y1="12" x2="5" y2="12" stroke="#4D7CFF" strokeWidth="1.5"/>
-                <line x1="19" y1="12" x2="23" y2="12" stroke="#4D7CFF" strokeWidth="1.5"/>
-              </svg>,
-              // 3 — AI Analysis: neural brain network
-              <svg key="h2" width="28" height="28" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="4" r="1.5" fill="#FF4655"/>
-                <circle cx="5" cy="8" r="1.5" fill="#FF4655" opacity="0.7"/>
-                <circle cx="19" cy="8" r="1.5" fill="#FF4655" opacity="0.7"/>
-                <circle cx="12" cy="12" r="2" fill="#FF4655"/>
-                <circle cx="5" cy="16" r="1.5" fill="#4D7CFF" opacity="0.7"/>
-                <circle cx="19" cy="16" r="1.5" fill="#4D7CFF" opacity="0.7"/>
-                <circle cx="12" cy="20" r="1.5" fill="#4D7CFF"/>
-                <line x1="12" y1="4" x2="12" y2="12" stroke="#FF4655" strokeWidth="0.8" opacity="0.5"/>
-                <line x1="5" y1="8" x2="12" y2="12" stroke="#FF4655" strokeWidth="0.8" opacity="0.4"/>
-                <line x1="19" y1="8" x2="12" y2="12" stroke="#FF4655" strokeWidth="0.8" opacity="0.4"/>
-                <line x1="12" y1="12" x2="5" y2="16" stroke="#4D7CFF" strokeWidth="0.8" opacity="0.4"/>
-                <line x1="12" y1="12" x2="19" y2="16" stroke="#4D7CFF" strokeWidth="0.8" opacity="0.4"/>
-                <line x1="12" y1="12" x2="12" y2="20" stroke="#4D7CFF" strokeWidth="0.8" opacity="0.5"/>
-                <line x1="5" y1="8" x2="5" y2="16" stroke="#B44DFF" strokeWidth="0.5" opacity="0.3"/>
-                <line x1="19" y1="8" x2="19" y2="16" stroke="#B44DFF" strokeWidth="0.5" opacity="0.3"/>
-              </svg>,
-              // 4 — Match Report: stats chart
-              <svg key="h3" width="28" height="28" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="3" width="20" height="18" rx="2" stroke="#B44DFF" strokeWidth="1.5" fill="rgba(180,77,255,0.06)"/>
-                <rect x="6" y="13" width="3" height="5" rx="0.5" fill="#B44DFF" opacity="0.5"/>
-                <rect x="10.5" y="9" width="3" height="9" rx="0.5" fill="#B44DFF" opacity="0.7"/>
-                <rect x="15" y="6" width="3" height="12" rx="0.5" fill="#B44DFF" opacity="0.9"/>
-                <line x1="5" y1="7" x2="19" y2="7" stroke="#B44DFF" strokeWidth="0.5" opacity="0.2"/>
-              </svg>,
-            ];
-            const stepColors = ["#FF4655", "#4D7CFF", "#FF4655", "#B44DFF"];
-            return (
-              <div key={i} className={`group flex items-center gap-5 card-xtract p-5 sm:p-6 transition-all duration-700 ${howRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ transitionDelay: `${i * 120}ms` }}>
-                <div className="relative shrink-0 w-14 h-14 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105" style={{ background: `${stepColors[i]}08`, border: `1px solid ${stepColors[i]}18`, boxShadow: `0 0 0 rgba(0,0,0,0)` }}
-                  onMouseEnter={(e) => { e.currentTarget.style.boxShadow = `0 0 20px ${stepColors[i]}15`; e.currentTarget.style.borderColor = `${stepColors[i]}35`; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.boxShadow = `0 0 0 rgba(0,0,0,0)`; e.currentTarget.style.borderColor = `${stepColors[i]}18`; }}
-                >
-                  {stepIcons[i]}
-                  <span className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full text-[9px] font-bold text-white" style={{ background: stepColors[i] }}>{s.step}</span>
-                </div>
-                <div>
-                  <h3 className="text-[15px] font-semibold text-white mb-1 tracking-tight">{s.title}</h3>
-                  <p className="text-[13px] text-neutral-500 leading-relaxed">{s.desc}</p>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+            <div className="story-rail hidden lg:flex">
+              {l.landingFeatures.map((_, i) => <span key={i} data-story-tick className="story-tick" />)}
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Ambient orb — right side */}
       <div className="pointer-events-none absolute right-[-200px] top-[2200px] w-[400px] h-[400px] rounded-full bg-[#4D7CFF]/[0.05] blur-[130px] animate-orb" style={{ zIndex: 0, animationDelay: '5s' }} />
 
-      {/* ─── WHY AIMLO — Benefits grid like Xtract ─── */}
-      <section ref={diffRevealRef} id="section-about" data-animate className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pb-36 pt-10">
+      {/* ─── ACT II: THE BENTO — one asymmetric board: benefits + the
+            pipeline + live numbers. No more uniform card grids. ─── */}
+      <section ref={diffRevealRef} id="section-about" data-animate className="relative z-10 mx-auto max-w-6xl px-5 sm:px-8 pb-36 pt-10">
         <p className="section-kicker mb-6">
-          <span className="sk-num">03</span>{lang === "tr" ? "AVANTAJLAR" : "BENEFITS"}
+          <span className="sk-num">02</span>{lang === "tr" ? "NEDEN AIMLO" : "WHY AIMLO"}
         </p>
-        <h2 className={`section-display mb-16 transition-all duration-700 ${diffRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+        <h2 className={`section-display mb-14 transition-all duration-700 ${diffRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           {lang === "tr" ? "Neden AIMLO?" : "Why AIMLO?"}
         </h2>
-        <div data-cascade className="grid md:grid-cols-3 gap-6">
-          {l.landingDiffItems.map((item, i) => {
-            const colors = ["#FF4655", "#4D7CFF", "#B44DFF"];
-            return (
-              <div key={i} className={`card-xtract p-8 group transition-all duration-500 ${diffRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`} style={{ transitionDelay: `${i * 120}ms` }}>
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-all duration-300" style={{ background: `${colors[i]}10`, border: `1px solid ${colors[i]}20`, color: colors[i] }}>
-                  {benefitIcons[i]}
+        <div data-cascade className="bento-grid">
+          {/* Big statement cell — benefit #1 */}
+          <div className="bento-cell bento-span2 bento-tall flex flex-col justify-between min-h-[320px]">
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: "#FF465510", border: "1px solid #FF465520", color: "#FF4655" }}>
+              {benefitIcons[0]}
+            </div>
+            <div>
+              <h3 className="text-[26px] font-bold mb-3 tracking-tight text-white">{l.landingDiffItems[0].title}</h3>
+              <p className="text-[15px] text-neutral-400 leading-relaxed max-w-md">{l.landingDiffItems[0].desc}</p>
+            </div>
+          </div>
+          {/* Benefit #2 */}
+          <div className="bento-cell">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style={{ background: "#4D7CFF10", border: "1px solid #4D7CFF20", color: "#4D7CFF" }}>
+              {benefitIcons[1]}
+            </div>
+            <h3 className="text-[15px] font-semibold mb-2 tracking-tight text-white">{l.landingDiffItems[1].title}</h3>
+            <p className="text-[13px] text-neutral-500 leading-relaxed">{l.landingDiffItems[1].desc}</p>
+          </div>
+          {/* Benefit #3 */}
+          <div className="bento-cell">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style={{ background: "#B44DFF10", border: "1px solid #B44DFF20", color: "#B44DFF" }}>
+              {benefitIcons[2]}
+            </div>
+            <h3 className="text-[15px] font-semibold mb-2 tracking-tight text-white">{l.landingDiffItems[2].title}</h3>
+            <p className="text-[13px] text-neutral-500 leading-relaxed">{l.landingDiffItems[2].desc}</p>
+          </div>
+          {/* The pipeline — process folded in as a compact numbered list */}
+          <div className="bento-cell">
+            <p className="hero-kicker mb-5" style={{ fontSize: 10 }}>{lang === "tr" ? "SÜREÇ" : "PROCESS"}</p>
+            <div className="space-y-4">
+              {l.landingHowSteps.map((s, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <span className="font-mono text-[11px] mt-0.5" style={{ color: "#FF4655" }}>0{i + 1}</span>
+                  <p className="text-[13px] font-medium text-neutral-300 leading-snug">{s.title}</p>
                 </div>
-                <h3 className="text-[16px] font-semibold mb-2 tracking-tight" style={{ color: colors[i] }}>{item.title}</h3>
-                <p className="text-[14px] text-neutral-500 leading-relaxed">{item.desc}</p>
+              ))}
+            </div>
+          </div>
+          {/* Live numbers */}
+          <div className="bento-cell flex flex-col justify-center gap-5">
+            {[
+              { n: "7/24", t: lang === "tr" ? "OTOMATIK IZLEME" : "AUTO TRACKING" },
+              { n: "0", t: lang === "tr" ? "MANUEL VERI" : "MANUAL INPUT" },
+              { n: "~60sn", t: lang === "tr" ? "ROUND ANALIZI" : "ROUND ANALYSIS" },
+            ].map((s, i) => (
+              <div key={i} className="flex items-baseline gap-3">
+                <span className="text-[26px] font-extrabold text-white tracking-tight">{s.n}</span>
+                <span className="hero-stat-label">{s.t}</span>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ─── SOCIAL PROOF — Testimonials ─── */}
-      <section className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pb-36 pt-10">
-        <p className="section-kicker mb-6">
-          <span className="sk-num">04</span>{lang === "tr" ? "TOPLULUK" : "COMMUNITY"}
-        </p>
-        <h2 className="section-display mb-6">
-          {lang === "tr" ? "Oyuncular Ne Diyor?" : "What Players Say"}
-        </h2>
-        <p className="text-center text-[12px] text-neutral-500 mb-12 max-w-xl mx-auto">
-          {lang === "tr"
-            ? "Closed beta'dan oyuncuların gerçek geri bildirimlerinden seçtiklerimiz. Discord ve in-app feedback formundan toplandı."
-            : "Selected feedback from real beta players — collected from Discord and the in-app feedback form."}
-        </p>
-        <div className="grid md:grid-cols-3 gap-4">
+      {/* ─── ACT III: THE RIVER — community flows past, it doesn't sit in a
+            grid. Duplicated track loops seamlessly; pauses on hover. ─── */}
+      <section className="relative z-10 pb-36 pt-10">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <p className="section-kicker mb-6">
+            <span className="sk-num">03</span>{lang === "tr" ? "TOPLULUK" : "COMMUNITY"}
+          </p>
+          <h2 className="section-display mb-4">
+            {lang === "tr" ? "Oyuncular Ne Diyor?" : "What Players Say"}
+          </h2>
+          <p className="text-[14px] text-neutral-500 mb-12 max-w-xl">
+            {lang === "tr"
+              ? "Closed beta'dan oyuncuların gerçek geri bildirimleri. Discord ve in-app feedback formundan toplandı."
+              : "Real feedback from beta players — collected from Discord and the in-app feedback form."}
+          </p>
+        </div>
+        <div className="testi-band">
+          <div className="testi-track">
+          {[0, 1].map((seg) => (
+          <div key={seg} className="flex" aria-hidden={seg === 1}>
           {(lang === "tr" ? [
             {
               handle: "@kahve_op",
@@ -2183,7 +2174,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               color: "#ECB73E",
             },
           ]).map((t, i) => (
-            <div key={i} className="card-xtract p-6 group">
+            <div key={i} className="testi-card card-xtract p-6">
               <p className="text-[13px] text-neutral-300 leading-relaxed mb-4">&ldquo;{t.text}&rdquo;</p>
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold" style={{ background: `${t.color}15`, color: t.color, border: `1px solid ${t.color}25` }}>
@@ -2200,6 +2191,9 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               </div>
             </div>
           ))}
+          </div>
+          ))}
+          </div>
         </div>
       </section>
 
@@ -2487,10 +2481,10 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       <section id="download-section" data-animate className="relative z-10 mx-auto max-w-4xl px-5 sm:px-8 pb-36 pt-10">
         <div className={`download-card p-12 sm:p-20 text-center transition-all duration-700 ${isVisible("download-section") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <p className="section-kicker justify-center mb-6">
-            <span className="sk-num">05</span>{lang === "tr" ? "INDIR" : "DOWNLOAD"}
+            <span className="sk-num">04</span>{lang === "tr" ? "INDIR" : "DOWNLOAD"}
           </p>
           <h2 className="section-display mb-6">
-            {lang === "tr" ? "Hemen İndirin, Oynamaya Başlayın" : "Download Now, Start Playing"}
+            {lang === "tr" ? "Hemen Indirin, Oynamaya Başlayın" : "Download Now, Start Playing"}
           </h2>
           <p className="text-[15px] text-neutral-400 mb-10 max-w-md mx-auto leading-relaxed">
             {lang === "tr"
@@ -2529,7 +2523,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       {/* ─── FAQ — Xtract accordion ─── */}
       <section id="section-faq" data-animate className="relative z-10 mx-auto max-w-2xl px-5 sm:px-8 pb-36 pt-10">
         <p className="section-kicker mb-6">
-          <span className="sk-num">06</span>{lang === "tr" ? "SSS" : "FAQ"}
+          <span className="sk-num">05</span>{lang === "tr" ? "SSS" : "FAQ"}
         </p>
         <h2 className="section-display mb-16">
           {l.landingFaqTitle}
