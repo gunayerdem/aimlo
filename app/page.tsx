@@ -1586,10 +1586,10 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               </span>
             </div>
 
-            {/* Stacked display headline */}
+            {/* Stacked display headline (TR display style: I, not İ) */}
             <h1 className="hero-display animate-slide-up stagger-1">
-              <span className="block">{lang === "tr" ? "İZLE." : "WATCH."}</span>
-              <span className="block">{lang === "tr" ? "ANALİZ ET." : "ANALYZE."}</span>
+              <span className="block">{lang === "tr" ? "IZLE." : "WATCH."}</span>
+              <span className="block">{lang === "tr" ? "ANALIZ ET." : "ANALYZE."}</span>
               <span className="block hero-display-accent">{lang === "tr" ? "RANK ATLA." : "RANK UP."}</span>
             </h1>
 
@@ -1627,7 +1627,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             <div className="mt-12 pt-8 border-t border-white/[0.08] grid grid-cols-3 gap-6 animate-slide-up stagger-4 max-w-md mx-auto lg:mx-0">
               <div className="text-center lg:text-left">
                 <p className="hero-stat-num">7/24</p>
-                <p className="hero-stat-label mt-1.5">{lang === "tr" ? "Otomatik İzleme" : "Auto Tracking"}</p>
+                <p className="hero-stat-label mt-1.5">{lang === "tr" ? "Otomatik Izleme" : "Auto Tracking"}</p>
               </div>
               <div className="text-center lg:text-left">
                 <p className="hero-stat-num">0</p>
@@ -1645,8 +1645,10 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             </div>
           </div>
 
-          {/* RIGHT — the agent stage (official Riot renders as set-pieces) */}
-          <div className="relative h-[480px] xl:h-[560px] hidden lg:block animate-fade-in stagger-3">
+          {/* RIGHT — the agent stage (official Riot renders as set-pieces).
+               Depth order: ring (0) → back agent (1) → main agent (2) → THE EYE (5). */}
+          <div className="relative h-[540px] xl:h-[620px] hidden lg:block animate-fade-in stagger-3">
+            <div className="hero-stage-ring" />
             <div className="hero-stage-glow" />
             <img
               src="https://media.valorant-api.com/agents/a3bfb853-43b2-7238-a4f1-ad90e9e46bcc/fullportrait.png"
@@ -1661,9 +1663,9 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               draggable={false}
               className="hero-agent hero-agent-main"
             />
-            {/* The eye supervises the stage */}
-            <div className="absolute top-0 left-2 z-[3]">
-              <HeroEye size={104} />
+            {/* The eye CROWNS the stage — above the agents' heads, dead center */}
+            <div className="absolute -top-10 left-1/2 -translate-x-1/2 z-[5] animate-float-slow">
+              <HeroEye size={132} />
             </div>
           </div>
         </div>
@@ -1675,7 +1677,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
           {[0, 1].map((seg) => (
             <div key={seg} className="marquee-seg">
               {(lang === "tr"
-                ? ["OCR YAKALAMA", "AI ANALİZ", "ROUND GERİ BİLDİRİMİ", "MAÇ RAPORU", "PATERN TESPİTİ", "RANK ATLA"]
+                ? ["OCR YAKALAMA", "AI ANALIZ", "ROUND GERI BILDIRIMI", "MAÇ RAPORU", "PATERN TESPITI", "RANK ATLA"]
                 : ["OCR CAPTURE", "AI ANALYSIS", "ROUND FEEDBACK", "MATCH REPORT", "PATTERN DETECTION", "RANK UP"]
               ).map((item, mi) => (
                 <span key={mi} className="marquee-item">{item}<span className="marquee-dot">◆</span></span>
@@ -1800,15 +1802,14 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       <div className="pointer-events-none absolute left-[-200px] top-[1200px] w-[500px] h-[500px] rounded-full bg-[#FF4655]/[0.06] blur-[150px] animate-orb" style={{ zIndex: 0 }} />
 
       {/* ─── FEATURES — Xtract card grid ─── */}
-      <section ref={featRevealRef} id="section-features" data-animate className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pb-28">
-        <div className="section-divider mb-16" />
-        <p className="text-center text-[11px] uppercase tracking-[0.2em] text-[#FF4655]/50 font-semibold mb-4">
-          {lang === "tr" ? "Özellikler" : "Features"}
+      <section ref={featRevealRef} id="section-features" data-animate className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pb-36 pt-10">
+        <p className="section-kicker mb-6">
+          <span className="sk-num">01</span>{lang === "tr" ? "ÖZELLIKLER" : "FEATURES"}
         </p>
-        <h2 className={`text-3xl sm:text-[44px] font-semibold text-white text-center mb-14 leading-tight transition-all duration-700 ${featRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ letterSpacing: '-1.5px' }}>
+        <h2 className={`section-display mb-16 max-w-3xl transition-all duration-700 ${featRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           {lang === "tr" ? "AI ile Oyununu Bir Üst Seviyeye Taşı" : "Take Your Game to the Next Level with AI"}
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {l.landingFeatures.map((f, i) => {
             const v = featureVisuals[i];
             return (
@@ -1843,12 +1844,11 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       </section>
 
       {/* ─── HOW IT WORKS — Process steps like Xtract ─── */}
-      <section ref={howRevealRef} id="section-how" data-animate className="relative z-10 mx-auto max-w-3xl px-5 sm:px-8 pb-28">
-        <div className="section-divider mb-16" />
-        <p className="text-center text-[11px] uppercase tracking-[0.2em] text-[#FF4655]/50 font-semibold mb-4">
-          {lang === "tr" ? "Süreç" : "Process"}
+      <section ref={howRevealRef} id="section-how" data-animate className="relative z-10 mx-auto max-w-3xl px-5 sm:px-8 pb-36 pt-10">
+        <p className="section-kicker mb-6">
+          <span className="sk-num">02</span>{lang === "tr" ? "SÜREÇ" : "PROCESS"}
         </p>
-        <h2 className={`text-3xl sm:text-[44px] font-semibold text-white tracking-tight text-center mb-14 leading-tight transition-all duration-700 ${howRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ letterSpacing: '-1.5px' }}>
+        <h2 className={`section-display mb-16 transition-all duration-700 ${howRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           {l.landingHowTitle}
         </h2>
         <div className="space-y-4">
@@ -1920,15 +1920,14 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       <div className="pointer-events-none absolute right-[-200px] top-[2200px] w-[400px] h-[400px] rounded-full bg-[#4D7CFF]/[0.05] blur-[130px] animate-orb" style={{ zIndex: 0, animationDelay: '5s' }} />
 
       {/* ─── WHY AIMLO — Benefits grid like Xtract ─── */}
-      <section ref={diffRevealRef} id="section-about" data-animate className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pb-28">
-        <div className="section-divider mb-16" />
-        <p className="text-center text-[11px] uppercase tracking-[0.2em] text-[#FF4655]/50 font-semibold mb-4">
-          {lang === "tr" ? "Avantajlar" : "Benefits"}
+      <section ref={diffRevealRef} id="section-about" data-animate className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pb-36 pt-10">
+        <p className="section-kicker mb-6">
+          <span className="sk-num">03</span>{lang === "tr" ? "AVANTAJLAR" : "BENEFITS"}
         </p>
-        <h2 className={`text-3xl sm:text-[44px] font-semibold text-white tracking-tight text-center mb-14 leading-tight transition-all duration-700 ${diffRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ letterSpacing: '-1.5px' }}>
+        <h2 className={`section-display mb-16 transition-all duration-700 ${diffRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           {lang === "tr" ? "Neden AIMLO?" : "Why AIMLO?"}
         </h2>
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-3 gap-6">
           {l.landingDiffItems.map((item, i) => {
             const colors = ["#FF4655", "#4D7CFF", "#B44DFF"];
             return (
@@ -1945,12 +1944,11 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       </section>
 
       {/* ─── SOCIAL PROOF — Testimonials ─── */}
-      <section className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pb-28">
-        <div className="section-divider mb-16" />
-        <p className="text-center text-[11px] uppercase tracking-[0.2em] text-[#FF4655]/50 font-semibold mb-4">
-          {lang === "tr" ? "Topluluk" : "Community"}
+      <section className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pb-36 pt-10">
+        <p className="section-kicker mb-6">
+          <span className="sk-num">04</span>{lang === "tr" ? "TOPLULUK" : "COMMUNITY"}
         </p>
-        <h2 className="text-3xl sm:text-[44px] font-semibold text-white tracking-tight text-center mb-6 leading-tight" style={{ letterSpacing: '-1.5px' }}>
+        <h2 className="section-display mb-6">
           {lang === "tr" ? "Oyuncular Ne Diyor?" : "What Players Say"}
         </h2>
         <p className="text-center text-[12px] text-neutral-500 mb-12 max-w-xl mx-auto">
@@ -2305,12 +2303,12 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       )}
 
       {/* ─── DOWNLOAD — Premium card like Xtract ─── */}
-      <section id="download-section" data-animate className="relative z-10 mx-auto max-w-3xl px-5 sm:px-8 pb-28">
-        <div className={`download-card p-10 sm:p-16 text-center transition-all duration-700 ${isVisible("download-section") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-          <p className="text-[11px] uppercase tracking-[0.2em] text-[#FF4655]/50 font-semibold mb-4">
-            {lang === "tr" ? "Desktop Uygulaması" : "Desktop App"}
+      <section id="download-section" data-animate className="relative z-10 mx-auto max-w-4xl px-5 sm:px-8 pb-36 pt-10">
+        <div className={`download-card p-12 sm:p-20 text-center transition-all duration-700 ${isVisible("download-section") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+          <p className="section-kicker justify-center mb-6">
+            <span className="sk-num">05</span>{lang === "tr" ? "INDIR" : "DOWNLOAD"}
           </p>
-          <h2 className="text-3xl sm:text-[44px] font-semibold text-white mb-5 leading-tight" style={{ letterSpacing: '-1.5px' }}>
+          <h2 className="section-display mb-6">
             {lang === "tr" ? "Hemen İndirin, Oynamaya Başlayın" : "Download Now, Start Playing"}
           </h2>
           <p className="text-[15px] text-neutral-400 mb-10 max-w-md mx-auto leading-relaxed">
@@ -2348,10 +2346,11 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       </section>
 
       {/* ─── FAQ — Xtract accordion ─── */}
-      <section id="section-faq" data-animate className="relative z-10 mx-auto max-w-2xl px-5 sm:px-8 pb-28">
-        <div className="section-divider mb-16" />
-        <p className="text-center text-[11px] uppercase tracking-[0.2em] text-[#FF4655]/50 font-semibold mb-4">FAQ</p>
-        <h2 className="text-3xl sm:text-[44px] font-semibold text-white tracking-tight text-center mb-14 leading-tight" style={{ letterSpacing: '-1.5px' }}>
+      <section id="section-faq" data-animate className="relative z-10 mx-auto max-w-2xl px-5 sm:px-8 pb-36 pt-10">
+        <p className="section-kicker mb-6">
+          <span className="sk-num">06</span>{lang === "tr" ? "SSS" : "FAQ"}
+        </p>
+        <h2 className="section-display mb-16">
           {l.landingFaqTitle}
         </h2>
         <div className="space-y-3">

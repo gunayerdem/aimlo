@@ -693,9 +693,9 @@ select option { background: #060814; color: #eef0f8; }
 }
 
 .hero-agent-main {
-  right: -8%;
+  right: -4%;
   bottom: 0;
-  height: 108%;
+  height: 92%;
   z-index: 2;
   filter:
     drop-shadow(0 30px 50px rgba(0, 0, 0, 0.65))
@@ -704,9 +704,9 @@ select option { background: #060814; color: #eef0f8; }
 }
 
 .hero-agent-back {
-  left: -6%;
+  left: 0%;
   bottom: 4%;
-  height: 88%;
+  height: 76%;
   z-index: 1;
   opacity: 0.5;
   filter:
@@ -804,4 +804,76 @@ body::after {
   margin: 0 26px;
   letter-spacing: 0;
   text-shadow: 0 0 10px rgba(255, 70, 85, 0.6);
+}
+
+/* ═══════════════════════════════════════════
+   NEXT-GEN SECTION LANGUAGE — numbered mono
+   kickers + display-scale titles, left-set
+   (TypeUI/VANGUARD flow; additive classes)
+   ═══════════════════════════════════════════ */
+
+.section-kicker {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 14px;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(238, 240, 248, 0.5);
+}
+
+.section-kicker .sk-num {
+  color: var(--neon);
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 12px rgba(255, 70, 85, 0.5);
+}
+
+.section-kicker::after {
+  content: '';
+  width: 56px;
+  height: 1px;
+  align-self: center;
+  background: linear-gradient(90deg, rgba(255, 70, 85, 0.6), transparent);
+}
+
+.section-display {
+  font-size: clamp(34px, 5.2vw, 60px);
+  line-height: 1.04;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+/* The stage ring: a slow conic halo behind the agents — depth, not noise. */
+.hero-stage-ring {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 480px;
+  height: 480px;
+  margin: -240px 0 0 -240px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  animation: rotate-slow 60s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-stage-ring::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  width: 52px;
+  height: 3px;
+  margin-left: -26px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--iris-magenta), transparent);
+}
+.hero-stage-ring::after {
+  content: '';
+  position: absolute;
+  inset: 36px;
+  border-radius: 50%;
+  border: 1px dashed rgba(168, 85, 247, 0.14);
 }
