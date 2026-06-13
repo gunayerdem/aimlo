@@ -11,9 +11,9 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "location": "A Main",
     "lang": "tr",
     "title": "A Main dry entry",
-    "deathAnalysis": "A Main'den tek başına utility'siz girdin ve trade yoktu, bu yüzden Heaven ve Generator açılarından kafadan vuruldun. Dash ile cloudburst arkasından veya takım arkadaşının flash'ıyla giriş yapsaydın yaşayabilirdin.",
+    "deathAnalysis": "A Main'den tek başına utility'siz girdin ve trade yoktu, bu yüzden Heaven ve Generator açılarından kafadan vuruldun. Dash ile smoke arkasından veya takım arkadaşının flash'ıyla giriş yapsaydın yaşayabilirdin.",
     "enemyPatterns": "Rakip Heaven ve Generator açılarını tutup A Main girişini açıyı takip ederek bekliyor.",
-    "nextRoundPlan": "A Main'e dash sonra cloudburst ile veya teammate'in flash'ı patladığında gir."
+    "nextRoundPlan": "A Main'e dash sonra smoke ile veya teammate'in flash'ı patladığında gir."
   },
   {
     "agent": "Reyna",
@@ -66,9 +66,9 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "location": "A Main",
     "lang": "tr",
     "title": "A Main flashless giriş",
-    "deathAnalysis": "A Main'den flash atmadan girdin ve ilk kontakta kafadan öldün. Curveball kullanıp Blaze ile siper verip swing atmalıydın.",
+    "deathAnalysis": "A Main'den flash atmadan girdin ve ilk kontakta kafadan öldün. flash kullanıp Blaze ile siper verip swing atmalıydın.",
     "enemyPatterns": "Rakip A Main açı tutuyor ve utility'siz girişleri aynı açıdan bekleyip seni kafadan kesiyor.",
-    "nextRoundPlan": "Curveball at, Blaze duvarını A Main köşesine koy ve flash patlayınca geniş swing at."
+    "nextRoundPlan": "flash at, Blaze duvarını A Main köşesine koy ve flash patlayınca geniş swing at."
   },
   {
     "agent": "Cypher",
@@ -99,9 +99,9 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "location": "A Main",
     "lang": "tr",
     "title": "A Main — tek atış",
-    "deathAnalysis": "A Main'da Operator seni kafadan aldı; bir atış yapıp hemen Rendezvous ile pozisyon değişip çıkmalıydın. Alternatif olarak Trademark'ı A Main girişine koyup takımından smoke iste, aynı açıya tekrar kalıcı bekleme.",
+    "deathAnalysis": "A Main'da Operator seni kafadan aldı; bir atış yapıp hemen teleport ile pozisyon değişip çıkmalıydın. Alternatif olarak Trademark'ı A Main girişine koyup takımından smoke iste, aynı açıya tekrar kalıcı bekleme.",
     "enemyPatterns": "Bu tekrar, A Main uzun hattını op ile sabit nişanlayan bir bekleyiş olduğunu gösterebilir.",
-    "nextRoundPlan": "Rendezvous anchor'ını A Main yakınına set et ve bir atış sonra teleport çık."
+    "nextRoundPlan": "teleport anchor'ını A Main yakınına set et ve bir atış sonra teleport çık."
   },
   {
     "agent": "Killjoy",
@@ -164,10 +164,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "defense",
     "location": "B Link",
     "lang": "tr",
-    "title": "B Link Nebula gecikmesi",
-    "deathAnalysis": "B Link'te Nebula'yı geç açtın, smoke patlayana kadar takımın trade alamadı ve arkadan gelen entry seni kafadan vurdu. Yıldız B Link'e pre-place edip Nebula'yı push başlamadan aktive etmeliydin.",
-    "enemyPatterns": "Düşman B Link'e push başladığında Nebula gecikince direkt swing atıyor ve açık pozisyonu kafadan kesiyor.",
-    "nextRoundPlan": "B Link'e yıldızı round başında koy, push işareti gelince Nebula'yı aç ve gerekirse Gravity Well ile choke'u kilitle."
+    "title": "B Link smoke gecikmesi",
+    "deathAnalysis": "B Link'te smoke'yı geç açtın, smoke patlayana kadar takımın trade alamadı ve arkadan gelen entry seni kafadan vurdu. Yıldız B Link'e pre-place edip smoke'yı push başlamadan aktive etmeliydin.",
+    "enemyPatterns": "Düşman B Link'e push başladığında smoke gecikince direkt swing atıyor ve açık pozisyonu kafadan kesiyor.",
+    "nextRoundPlan": "B Link'e yıldızı round başında koy, push işareti gelince smoke'yı aç ve gerekirse Gravity Well ile choke'u kilitle."
   },
   {
     "agent": "Gekko",
@@ -198,9 +198,9 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "location": "C Mound",
     "lang": "tr",
     "title": "C Mound stun uyumsuzluğu",
-    "deathAnalysis": "Fault Line attın ama takım girme onayı vermedi, C Mound'da açıkta kaldın ve C Main'den gelen oyuncu seni kafadan aldı.",
-    "enemyPatterns": "C Main tarafı off-angle tutup Fault Line sonrası hızlı swing ile seni kafadan kesiyor.",
-    "nextRoundPlan": "Fault Line atmadan önce takıma 'Fault geliyor' diye seslen, takım flash ile desteklesin ve Fault Line patlayınca beraber swing at."
+    "deathAnalysis": "stun attın ama takım girme onayı vermedi, C Mound'da açıkta kaldın ve C Main'den gelen oyuncu seni kafadan aldı.",
+    "enemyPatterns": "C Main tarafı off-angle tutup stun sonrası hızlı swing ile seni kafadan kesiyor.",
+    "nextRoundPlan": "stun atmadan önce takıma 'Fault geliyor' diye seslen, takım flash ile desteklesin ve stun patlayınca beraber swing at."
   },
   {
     "agent": "KAY/O",
@@ -219,10 +219,10 @@ export const FEEDBACK_BANK_TR: FeedbackExample[] = [
     "side": "defense",
     "location": "A Hall",
     "lang": "tr",
-    "title": "A Hall Toxic Screen Hatası",
-    "deathAnalysis": "A Hall'da Toxic Screen'i erken açtın, entry sırasında kör kaldın ve kafadan vuruldun. Duvarı takımın geçişini tetikleyecek şekilde açıp, geçince kapatman gerekiyordu.",
-    "enemyPatterns": "Rakipler A Hall girişini Toxic Screen açılışına göre bekleyip kafadan kesmeyi alışkanlık haline getirmiş görünüyor.",
-    "nextRoundPlan": "Toxic Screen'i takım entry başlatınca aç, takım geçince kapat."
+    "title": "A Hall duvar Hatası",
+    "deathAnalysis": "A Hall'da duvar'i erken açtın, entry sırasında kör kaldın ve kafadan vuruldun. Duvarı takımın geçişini tetikleyecek şekilde açıp, geçince kapatman gerekiyordu.",
+    "enemyPatterns": "Rakipler A Hall girişini duvar açılışına göre bekleyip kafadan kesmeyi alışkanlık haline getirmiş görünüyor.",
+    "nextRoundPlan": "duvar'i takım entry başlatınca aç, takım geçince kapat."
   }
 ];
 export const FEEDBACK_BANK_EN: FeedbackExample[] = [
@@ -233,9 +233,9 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "location": "A Main",
     "lang": "en",
     "title": "A Main solo entry",
-    "deathAnalysis": "You pushed A Main alone with a dry peek and no trade, so the defender holding the choke pre-aimed and killed you. Keep Tailwind for an exit after you win the duel rather than burning it before contact.",
+    "deathAnalysis": "You pushed A Main alone with a dry peek and no trade, so the defender holding the choke pre-aimed and killed you. Keep dash for an exit after you win the duel rather than burning it before contact.",
     "enemyPatterns": "A defender is pre-aiming the A Main choke and punishing solo entries from that angle.",
-    "nextRoundPlan": "Ask a teammate for a flash, throw Cloudburst on A Main, then Tailwind in behind the flash while a second player sits ready to trade."
+    "nextRoundPlan": "Ask a teammate for a flash, throw smoke on A Main, then dash in behind the flash while a second player sits ready to trade."
   },
   {
     "agent": "Reyna",
@@ -288,9 +288,9 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "location": "A Main",
     "lang": "en",
     "title": "A Main flashless death",
-    "deathAnalysis": "You entryed A Main without a Curveball and died to a pre-aimed defender because you never forced their crosshair off the choke. Next round either Curveball then swing A Main immediately or ask a teammate for a smoke and use Blaze to cut sight before you step into A Main.",
+    "deathAnalysis": "You entryed A Main without a flash and died to a pre-aimed defender because you never forced their crosshair off the choke. Next round either flash then swing A Main immediately or ask a teammate for a smoke and use Blaze to cut sight before you step into A Main.",
     "enemyPatterns": "They are holding A Main choke hard and punishing raw commits at that angle.",
-    "nextRoundPlan": "Throw Curveball into A Main and swing out the moment the flash pops."
+    "nextRoundPlan": "Throw flash into A Main and swing out the moment the flash pops."
   },
   {
     "agent": "Cypher",
@@ -321,9 +321,9 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "location": "A Main",
     "lang": "en",
     "title": "A Main Operator",
-    "deathAnalysis": "At A Main you died while holding the Operator and the gun stayed on the ground, which cost your team a recoverable weapon. Take a single committed shot and use Rendezvous to reset instead of lingering on the same angle.",
+    "deathAnalysis": "At A Main you died while holding the Operator and the gun stayed on the ground, which cost your team a recoverable weapon. Take a single committed shot and use teleport to reset instead of lingering on the same angle.",
     "enemyPatterns": "The defender was holding a deep A Main angle and punished your long peek cleanly, leaving the Operator in a dangerous pickup location.",
-    "nextRoundPlan": "Place Trademark behind A Main, ask a teammate for a flash, step once for the shot and Rendezvous back immediately."
+    "nextRoundPlan": "Place Trademark behind A Main, ask a teammate for a flash, step once for the shot and teleport back immediately."
   },
   {
     "agent": "Killjoy",
@@ -386,10 +386,10 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "side": "defense",
     "location": "B Link",
     "lang": "en",
-    "title": "Late Nebula — B Link",
-    "deathAnalysis": "You died at B Link because your Nebula popped after you committed, so the defender was already pre-aiming the choke and traded you. Put the star on B Link in buy and cast Nebula before you step into the lane to deny that pre-aim.",
+    "title": "Late smoke — B Link",
+    "deathAnalysis": "You died at B Link because your smoke popped after you committed, so the defender was already pre-aiming the choke and traded you. Put the star on B Link in buy and cast smoke before you step into the lane to deny that pre-aim.",
     "enemyPatterns": "They held B Main and B Screen pre-aiming the B Link chokepoint and punished any delayed smoke with a headshot angle.",
-    "nextRoundPlan": "Place a star on B Link in buy, cast Nebula before you jiggle, and ask a teammate for a flash to finish clearing the angle."
+    "nextRoundPlan": "Place a star on B Link in buy, cast smoke before you jiggle, and ask a teammate for a flash to finish clearing the angle."
   },
   {
     "agent": "Gekko",
@@ -420,9 +420,9 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "location": "C Mound",
     "lang": "en",
     "title": "C Mound stun sync",
-    "deathAnalysis": "At C Mound you used Fault Line then Flashpoint without a clear voice cue, so you swung alone and died behind Mound cover. On Lotus C Mound that timing failed because teammates did not commit during the stun window, leaving you exposed.",
+    "deathAnalysis": "At C Mound you used stun then Flashpoint without a clear voice cue, so you swung alone and died behind Mound cover. On Lotus C Mound that timing failed because teammates did not commit during the stun window, leaving you exposed.",
     "enemyPatterns": "A defender from C Main on Lotus consistently pre-aimed Mound sightlines and punished isolated swings at C Mound.",
-    "nextRoundPlan": "Announce 'Fault Line now' for C Mound, cast Fault Line then immediately throw Flashpoint and tell teammates to swing C Mound together."
+    "nextRoundPlan": "Announce 'stun now' for C Mound, cast stun then immediately throw Flashpoint and tell teammates to swing C Mound together."
   },
   {
     "agent": "KAY/O",
@@ -442,9 +442,9 @@ export const FEEDBACK_BANK_EN: FeedbackExample[] = [
     "location": "A Hall",
     "lang": "en",
     "title": "A Hall wall timing",
-    "deathAnalysis": "You opened Toxic Screen in A Hall on Breeze too early and burned your fuel, leaving you exposed to the angle and causing the death. Keep Toxic Screen closed until your team commits to A Hall on Breeze so you don't run out of active utility.",
-    "enemyPatterns": "The enemy was holding the A Hall sightline on Breeze and punished the early Toxic Screen exposure.",
-    "nextRoundPlan": "Do not open Toxic Screen in A Hall until teammates commit and reserve fuel for a post-plant Poison Cloud on Breeze."
+    "deathAnalysis": "You opened wall in A Hall on Breeze too early and burned your fuel, leaving you exposed to the angle and causing the death. Keep wall closed until your team commits to A Hall on Breeze so you don't run out of active utility.",
+    "enemyPatterns": "The enemy was holding the A Hall sightline on Breeze and punished the early wall exposure.",
+    "nextRoundPlan": "Do not open wall in A Hall until teammates commit and reserve fuel for a post-plant smoke on Breeze."
   }
 ];
 export const FEEDBACK_BANK: Record<"tr" | "en", FeedbackExample[]> = { tr: FEEDBACK_BANK_TR, en: FEEDBACK_BANK_EN };
