@@ -77,20 +77,25 @@ function violations(text: string, lang: "tr" | "en"): string[] {
   }
   return [...new Set(hits)];
 }
-function clean(s: string): string {
+function clean(s: string, lang: "tr" | "en" = "tr"): string {
   if (!s) return "";
+  const andW = lang === "tr" ? " ve " : " and ";
   let out = s
+    // dotted-i / combining-dot bozulmasını temizle (OCR-TR locale izi)
+    .replace(/̇/g, "")
     // baştaki bölüm-başlığı öneklerini sök (UI'da zaten başlık var)
     .replace(/^\s*(ölüm neden[iı]|hata analiz[iı]|ölüm analiz[iı]|düşman analiz[iı]|düşman pattern[iı]|sonraki round|death cause|death analysis|enemy read|enemy pattern|next round)\s*:\s*/i, "")
     // sızan whitelist-dışı İngilizce → TR (micro-position eki dahil)
     .replace(/micro-?position(['’][a-zçğıöşü]+)?/gi, "açı")
     .replace(/high flash/gi, "flash'ı yukarı").replace(/low flash/gi, "alçak flash").replace(/first shot/gi, "ilk mermi")
-    // callout/ability slash → virgül (A Main/Heaven, flash/smoke → A Main, Heaven)
-    .replace(/(\w)\s*\/\s*(\w)/g, "$1, $2").replace(/(\w)\s*\/\s*(\w)/g, "$1, $2")
+    // callout/ability slash → "ve"/"and" (A Main/Heaven → A Main ve Heaven; cümle bozulmaz)
+    .replace(/(\w)\s*\/\s*(\w)/g, `$1${andW}$2`).replace(/(\w)\s*\/\s*(\w)/g, `$1${andW}$2`)
     .replace(/\s*[;.,—-]\s*(çözüm|çozum|neden|fix|sorun|solution|problem)\s*:\s*/gi, ". ")
     .replace(/(^|\.\s+)(çözüm|çozum|neden|fix|sorun|solution|problem)\s*:\s*/gi, "$1")
     .replace(/\s{2,}/g, " ").replace(/\s+\./g, ".").replace(/\.{2,}/g, ".").trim();
   out = out.replace(/(^|[.!?]\s+)([a-z])/g, (_, p, c) => p + c.toUpperCase());
+  // TR çıktıda ai-policy çeviri tablosundaki sızıntıları kapat (EN'de bu kelimeler meşru)
+  if (lang === "tr") out = out.replace(/\bcover\b/gi, "siper").replace(/\bsightline\b/gi, "görüş hattı").replace(/\bwall\b/gi, "duvar");
   return out;
 }
 
@@ -128,9 +133,11 @@ OUTPUT — JSON ONLY: { "title": "short title (3-5 words, include callout)", "de
 }
 function usr(s: Scn, lang: "tr" | "en"): string {
   if (lang === "tr") {
-    return `SENARYO: ${s.agent} · ${s.map} · ${s.side === "attack" ? "Saldırı" : "Savunma"} · ${s.loc}'da öldün. Durum: ${s.note}. Bu ölüm için tek bir örnek koç-feedback'i üret.`;
+    return `SENARYO: ${s.agent} · ${s.map} · ${s.side === "attack" ? "Saldırı" : "Savunma"} · ${s.loc}'da öldün. Durum: ${s.note}. Bu ölüm için tek bir örnek koç-feedback'i üret.
+ÖNEMLİ: Yetenek önerirken SADECE ${s.agent}'in GERÇEK yeteneklerini ad ver. ${s.agent}'te OLMAYAN yeteneği uydurma (ör. ${s.agent} ≠ Sova ise "Sova recon" deme, wall sadece Sage/Viper/Harbor'da). Başka ajan yeteneği gerekiyorsa adını verme; "takım arkadaşından flash/smoke iste" gibi genel söyle. İki callout söyleyeceksen "ve" ile bağla, virgülle liste yapma; cümleyi düzgün kur.`;
   }
-  return `SCENARIO: ${s.agent} · ${s.map} · ${s.side} · died at ${s.loc}. Situation: ${s.note}. Produce one example coaching feedback for this death.`;
+  return `SCENARIO: ${s.agent} · ${s.map} · ${s.side} · died at ${s.loc}. Situation: ${s.note}. Produce one example coaching feedback for this death.
+IMPORTANT: When suggesting abilities, name ONLY ${s.agent}'s REAL abilities. Do not invent abilities ${s.agent} lacks (e.g. if ${s.agent} ≠ Sova, never say "Sova recon"; walls only exist on Sage/Viper/Harbor). If team utility is needed, don't name another agent — say "ask a teammate for a flash/smoke". If you mention two callouts, join with "and" and keep the sentence grammatical; no comma-stitched lists.`;
 }
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -165,7 +172,9 @@ async function judge(item: any, lang: "tr" | "en"): Promise<{ pass: boolean; cri
 2) Dilbilgisi KUSURSUZ — bozuk, devrik, yarım cümle ve yazım hatası YOK.
 3) İŞE YARAR + somut — callout + net, uygulanabilir aksiyon.
 4) DOLU: deathAnalysis 2-3 gerçek cümle (telegraf/tek parça DEĞİL); diğer alanlar tam cümle.
-5) Tereddüt ("olabilir"), etiket (Sorun:/Fix:), yarı-İngilizce (first shot/high flash), slash YOK.
+5) Tereddüt ("olabilir"), etiket (Sorun:/Fix:), yarı-İngilizce (first shot/high flash/cover/sightline/teammate), slash YOK.
+6) Yetenek önerisi SADECE ${item.agent}'e ait. ${item.agent}'te OLMAYAN yetenek (başka ajanın Sova recon/Omen smoke/Killjoy turret/wall'ı) ad verilmişse FAIL.
+7) Virgülle birbirine yapışmış callout listesi ("A Main, Heaven açısını") cümleyi BOZMAMIŞ; cümleler tam ve düzgün.
 Sadece JSON: {"pass": true|false, "critique": "kalırsa neden — TEK net cümle"}`
     : `You are a ruthless head coach. Judge this Valorant coaching feedback. To PASS, ALL must hold:
 1) Talks like a sharp coach WATCHING you live (not a written report / generic).
@@ -173,6 +182,8 @@ Sadece JSON: {"pass": true|false, "critique": "kalırsa neden — TEK net cümle
 3) Useful + concrete — callout + clear actionable advice.
 4) Substantive: deathAnalysis 2-3 real sentences (not telegraphic); other fields full sentences.
 5) No hedging ("might"), no labels, no broken English, no slashes.
+6) Abilities suggested belong ONLY to ${item.agent}. If it names an ability ${item.agent} lacks (another agent's Sova recon/Omen smoke/Killjoy turret/wall), FAIL.
+7) No comma-stitched callout lists that break the sentence; sentences are complete and clean.
 JSON only: {"pass": true|false, "critique": "if fail, why — ONE clear sentence"}`;
   const usrJ = `${lang === "tr" ? "Ölüm Nedeni" : "Death Cause"}: ${item.deathAnalysis}\n${lang === "tr" ? "Düşman Analizi" : "Enemy Read"}: ${item.enemyPatterns}\n${lang === "tr" ? "Sonraki Round" : "Next Round"}: ${item.nextRoundPlan}`;
   try { const r = await callGPT(sysJ, usrJ, 250); return { pass: r.pass === true, critique: String(r.critique || "") }; }
@@ -186,8 +197,8 @@ async function gen(s: Scn, lang: "tr" | "en"): Promise<any> {
       const out = await callGPT(sys(s, lang, corrective), usr(s, lang));
       const cl = {
         agent: s.agent, map: s.map, side: s.side, location: s.loc, lang,
-        title: clean(out.title || ""), deathAnalysis: clean(out.deathAnalysis || ""),
-        enemyPatterns: clean(out.enemyPatterns || ""), nextRoundPlan: clean(out.nextRoundPlan || ""),
+        title: clean(out.title || "", lang), deathAnalysis: clean(out.deathAnalysis || "", lang),
+        enemyPatterns: clean(out.enemyPatterns || "", lang), nextRoundPlan: clean(out.nextRoundPlan || "", lang),
       };
       const txt = [cl.title, cl.deathAnalysis, cl.enemyPatterns, cl.nextRoundPlan].filter(Boolean).join(" \n ");
       const v = violations(txt, lang);
