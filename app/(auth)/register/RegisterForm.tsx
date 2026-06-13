@@ -5,13 +5,11 @@ import { registerAction, type RegisterState } from "./actions";
 
 const initial: RegisterState = { ok: false };
 
-const inputCls =
-  "w-full rounded-xl border border-white/[0.06] bg-[#0a0f1e]/90 px-4 py-4 text-sm text-white outline-none transition-all duration-300 focus:border-[#FF4655]/25 focus:ring-2 focus:ring-[#FF4655]/10 focus:shadow-[0_0_20px_rgba(255,70,85,0.05)] placeholder-neutral-600";
+const inputCls = "auth-input";
 
 // Labels written already in Latin uppercase (no Turkish İ) — text-transform
 // honors document lang="tr" and would re-add the dot otherwise.
-const labelCls =
-  "mb-2 block text-[9px] font-black tracking-[0.2em] text-[#FF4655]/35";
+const labelCls = "auth-label";
 
 // Eye / EyeOff SVG — replaces 👁️ / 🙈 emojis
 function EyeIcon({ open }: { open: boolean }) {
@@ -60,11 +58,8 @@ export function RegisterForm() {
   const [kvkkChecked, setKvkkChecked] = useState(false);
 
   return (
-    <div className="card-glow rounded-2xl p-7 sm:p-9 relative">
-      <div
-        aria-hidden
-        className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#FF4655]/20 to-transparent"
-      />
+    <div className="auth-card rounded-2xl p-7 sm:p-9 relative">
+      <div aria-hidden className="auth-hairline" />
 
       {/* Anti-autofill: form-level off + per-field nope-* + 1Password/LP ignore */}
       <form action={action} noValidate autoComplete="off" className="space-y-5">
@@ -187,7 +182,7 @@ export function RegisterForm() {
               onClick={() => setShowPw(!showPw)}
               tabIndex={-1}
               aria-label={showPw ? "Şifreyi gizle" : "Şifreyi göster"}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-[#FF4655] transition-colors p-1 -m-1"
+              className="auth-eye absolute right-3.5 top-1/2 -translate-y-1/2 p-1 -m-1"
             >
               <EyeIcon open={showPw} />
             </button>
@@ -217,7 +212,7 @@ export function RegisterForm() {
               onClick={() => setShowPw2(!showPw2)}
               tabIndex={-1}
               aria-label={showPw2 ? "Şifreyi gizle" : "Şifreyi göster"}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-[#FF4655] transition-colors p-1 -m-1"
+              className="auth-eye absolute right-3.5 top-1/2 -translate-y-1/2 p-1 -m-1"
             >
               <EyeIcon open={showPw2} />
             </button>
@@ -243,11 +238,8 @@ export function RegisterForm() {
           />
           <span
             aria-hidden
-            className={`mt-0.5 inline-flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-md transition-all duration-200 ${
-              kvkkChecked
-                ? "border-2 border-[#FF4655] bg-[#FF4655] shadow-[0_0_12px_rgba(255,70,85,0.45)]"
-                : "border border-white/15 bg-[#0a0f1e] hover:border-[#FF4655]/40"
-            }`}
+            className="auth-check"
+            data-checked={kvkkChecked ? "true" : undefined}
           >
             {kvkkChecked && (
               <svg
@@ -269,7 +261,7 @@ export function RegisterForm() {
               href="/legal/kvkk"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#FF4655] hover:text-[#FF6B77]/70 hover-underline"
+              className="auth-link hover-underline"
             >
               KVKK Aydınlatma Metni
             </a>
@@ -278,7 +270,7 @@ export function RegisterForm() {
               href="/legal/terms"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#FF4655] hover:text-[#FF6B77]/70 hover-underline"
+              className="auth-link hover-underline"
             >
               Kullanım Koşulları
             </a>
@@ -287,7 +279,7 @@ export function RegisterForm() {
               href="/legal/privacy"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#FF4655] hover:text-[#FF6B77]/70 hover-underline"
+              className="auth-link hover-underline"
             >
               Gizlilik Politikası
             </a>

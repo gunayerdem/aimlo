@@ -27,7 +27,7 @@ export default async function VerifyPage({
       <div className="text-center space-y-5">
         <Link
           href={purpose === "login" ? "/login" : "/register"}
-          className="mx-auto inline-flex items-center gap-2 text-[12px] text-neutral-600 transition hover:text-[#FF6B77] hover-underline"
+          className="mx-auto inline-flex items-center gap-2 text-[12px] text-neutral-500 transition hover:text-[#22D3EE] hover-underline"
         >
           ← Geri
         </Link>
@@ -35,9 +35,9 @@ export default async function VerifyPage({
         <img
           src="/aimlo-logo.png?v=3"
           alt="AIMLO"
-          style={{ height: 34, width: "auto" }}
+          style={{ height: 42, width: "auto" }}
           draggable={false}
-          className="mx-auto opacity-30"
+          className="auth-logo mx-auto"
         />
         <div>
           <h2 className="text-3xl font-black text-white tracking-tight">

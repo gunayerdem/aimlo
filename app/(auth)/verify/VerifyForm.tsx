@@ -152,11 +152,8 @@ export function VerifyForm({
   }
 
   return (
-    <div className="card-glow rounded-2xl p-7 sm:p-9 relative">
-      <div
-        aria-hidden
-        className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#FF4655]/20 to-transparent"
-      />
+    <div className="auth-card rounded-2xl p-7 sm:p-9 relative">
+      <div aria-hidden className="auth-hairline" />
 
       <form
         action={verifyDoAction}
@@ -183,7 +180,7 @@ export function VerifyForm({
           ))}
           <span
             aria-hidden
-            className="mx-1 text-[#FF4655]/40 text-3xl font-black select-none leading-none"
+            className="mx-1 text-[#A855F7]/45 text-3xl font-black select-none leading-none"
           >
             –
           </span>
@@ -242,7 +239,7 @@ export function VerifyForm({
             <button
               type="submit"
               disabled={resendPending}
-              className="text-[12px] text-neutral-400 hover:text-[#FF4655] disabled:opacity-50 transition-colors hover-underline"
+              className="text-[12px] text-neutral-400 hover:text-[#22D3EE] disabled:opacity-50 transition-colors hover-underline"
             >
               {resendPending
                 ? "Yeni kod gönderiliyor..."
@@ -291,13 +288,9 @@ const CharBox = forwardRef<HTMLInputElement, CharBoxProps>(function CharBox(
       onChange={(e) => onChange(e.target.value)}
       onKeyDown={onKeyDown}
       onFocus={(e) => e.target.select()}
-      className={`w-12 sm:w-14 h-14 sm:h-16 text-center text-2xl sm:text-3xl font-black rounded-xl transition-all duration-200 outline-none ${
-        hasError
-          ? "bg-[#FF3D71]/[0.06] border-2 border-[#FF3D71]/40 focus:border-[#FF3D71] text-[#FF3D71]"
-          : value
-            ? "bg-[#FF4655]/[0.08] border-2 border-[#FF4655]/40 focus:border-[#FF4655] focus:shadow-[0_0_20px_rgba(255,70,85,0.15)] text-white"
-            : "bg-[#0a0f1e]/90 border-2 border-white/[0.06] hover:border-white/15 focus:border-[#FF4655]/40 text-white"
-      }`}
+      className="auth-otp"
+      data-filled={value ? "true" : undefined}
+      data-error={hasError ? "true" : undefined}
     />
   );
 });

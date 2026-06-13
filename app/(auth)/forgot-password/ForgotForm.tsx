@@ -5,26 +5,21 @@ import { forgotAction, type ForgotState } from "./actions";
 
 const initial: ForgotState = { ok: false };
 
-const inputCls =
-  "w-full rounded-xl border border-white/[0.06] bg-[#0a0f1e]/90 px-4 py-4 text-sm text-white outline-none transition-all duration-300 focus:border-[#FF4655]/25 focus:ring-2 focus:ring-[#FF4655]/10 focus:shadow-[0_0_20px_rgba(255,70,85,0.05)] placeholder-neutral-600";
+const inputCls = "auth-input";
 
-const labelCls =
-  "mb-2 block text-[9px] font-black tracking-[0.2em] text-[#FF4655]/35";
+const labelCls = "auth-label";
 
 export function ForgotForm() {
   const [state, action, pending] = useActionState(forgotAction, initial);
 
   if (state.sent) {
     return (
-      <div className="card-glow rounded-2xl p-10 space-y-6 relative">
-        <div
-          aria-hidden
-          className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#FF4655]/20 to-transparent"
-        />
-        <div className="relative mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#FF4655]/[0.06] border border-[#FF4655]/15">
+      <div className="auth-card rounded-2xl p-10 space-y-6 relative">
+        <div aria-hidden className="auth-hairline" />
+        <div className="relative mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#A855F7]/[0.08] border border-[#A855F7]/20">
           <span className="text-3xl">✉️</span>
           <span
-            className="absolute inset-0 rounded-2xl animate-ping bg-[#FF4655]/[0.05]"
+            className="absolute inset-0 rounded-2xl animate-ping bg-[#A855F7]/[0.06]"
             style={{ animationDuration: "2s" }}
           />
         </div>
@@ -37,11 +32,8 @@ export function ForgotForm() {
   }
 
   return (
-    <div className="card-glow rounded-2xl p-7 sm:p-9 relative">
-      <div
-        aria-hidden
-        className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#FF4655]/20 to-transparent"
-      />
+    <div className="auth-card rounded-2xl p-7 sm:p-9 relative">
+      <div aria-hidden className="auth-hairline" />
 
       <form action={action} noValidate className="space-y-5">
         <div>
