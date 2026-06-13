@@ -1470,6 +1470,182 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
   }
   const isVisible = (id: string) => visibleSections.has(id);
 
+  // ── AWWWARDS LAYER (Fable 5, 2026-06-12): GSAP scroll choreography,
+  // mouse-parallax agent stage, magnetic CTAs, custom cursor.
+  // Pure presentation: no state, no handlers touched; everything is cleaned
+  // up on unmount. Skipped on touch devices and prefers-reduced-motion.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let cleanup: (() => void) | undefined;
+    let alive = true;
+
+    (async () => {
+      const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+        import("gsap"),
+        import("gsap/ScrollTrigger"),
+      ]);
+      if (!alive) return;
+      gsap.registerPlugin(ScrollTrigger);
+      const fine = window.matchMedia("(pointer: fine)").matches;
+      const killers: Array<() => void> = [];
+
+      // 1) Hero stage mouse-parallax — Jett/Reyna/eye drift at separate depths.
+      const stage = document.querySelector<HTMLElement>("[data-stage]");
+      if (stage && fine) {
+        const layers = Array.from(stage.querySelectorAll<HTMLElement>("[data-depth]"));
+        const movers = layers.map((el) => ({
+          x: gsap.quickTo(el, "x", { duration: 0.9, ease: "power3.out" }),
+          y: gsap.quickTo(el, "y", { duration: 0.9, ease: "power3.out" }),
+          d: parseFloat(el.dataset.depth || "0.04"),
+        }));
+        const onMove = (e: MouseEvent) => {
+          const r = stage.getBoundingClientRect();
+          const dx = e.clientX - (r.left + r.width / 2);
+          const dy = e.clientY - (r.top + r.height / 2);
+          movers.forEach((m) => { m.x(dx * m.d); m.y(dy * m.d * 0.7); });
+        };
+        const onLeave = () => movers.forEach((m) => { m.x(0); m.y(0); });
+        window.addEventListener("mousemove", onMove, { passive: true });
+        stage.addEventListener("mouseleave", onLeave);
+        killers.push(() => { window.removeEventListener("mousemove", onMove); stage.removeEventListener("mouseleave", onLeave); });
+      }
+
+      // 2) Scroll choreography — hero exits with depth, agents split apart.
+      const heroSection = document.querySelector<HTMLElement>("[data-hero]");
+      if (heroSection) {
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom 20%", scrub: 0.8 },
+        });
+        tl.to("[data-hero-copy]", { yPercent: -14, opacity: 0.25, ease: "none" }, 0)
+          .to(".hero-agent-main", { yPercent: 10, xPercent: 8, ease: "none" }, 0)
+          .to(".hero-agent-back", { yPercent: 14, xPercent: -10, ease: "none" }, 0)
+          .to("[data-stage-eye]", { yPercent: -30, ease: "none" }, 0);
+        killers.push(() => { tl.scrollTrigger?.kill(); tl.kill(); });
+      }
+
+      // 3) Section card cascades — children rise with stagger as sections enter.
+      document.querySelectorAll<HTMLElement>("[data-cascade]").forEach((wrap) => {
+        const kids = Array.from(wrap.children) as HTMLElement[];
+        if (!kids.length) return;
+        const tween = gsap.fromTo(kids,
+          { y: 36, opacity: 0 },
+          {
+            y: 0, opacity: 1, stagger: 0.09, duration: 0.8, ease: "power3.out",
+            scrollTrigger: { trigger: wrap, start: "top 82%" },
+          });
+        killers.push(() => { tween.scrollTrigger?.kill(); tween.kill(); });
+      });
+
+      // 4) Mega wordmark scrub — the brand grows in as you reach the end.
+      const mega = document.querySelector<HTMLElement>(".mega-wordmark");
+      if (mega) {
+        const tween = gsap.fromTo(mega,
+          { scale: 0.86, opacity: 0.4 },
+          { scale: 1, opacity: 1, ease: "none",
+            scrollTrigger: { trigger: mega, start: "top 95%", end: "top 45%", scrub: 0.6 } });
+        killers.push(() => { tween.scrollTrigger?.kill(); tween.kill(); });
+      }
+
+      // 5) Magnetic CTAs — buttons lean toward the cursor, spring back.
+      if (fine) {
+        document.querySelectorAll<HTMLElement>("[data-magnetic]").forEach((btn) => {
+          const qx = gsap.quickTo(btn, "x", { duration: 0.4, ease: "power3.out" });
+          const qy = gsap.quickTo(btn, "y", { duration: 0.4, ease: "power3.out" });
+          const onMove = (e: MouseEvent) => {
+            const r = btn.getBoundingClientRect();
+            qx((e.clientX - (r.left + r.width / 2)) * 0.28);
+            qy((e.clientY - (r.top + r.height / 2)) * 0.28);
+          };
+          const onLeave = () => { qx(0); qy(0); };
+          btn.addEventListener("mousemove", onMove);
+          btn.addEventListener("mouseleave", onLeave);
+          killers.push(() => { btn.removeEventListener("mousemove", onMove); btn.removeEventListener("mouseleave", onLeave); });
+        });
+      }
+
+      // 6) Custom cursor — dot + lagging ring (desktop only).
+      if (fine) {
+        const dot = document.createElement("div");
+        const ring = document.createElement("div");
+        dot.className = "aw-cursor-dot";
+        ring.className = "aw-cursor-ring";
+        document.body.append(dot, ring);
+        const dx = gsap.quickTo(dot, "x", { duration: 0.08, ease: "power2.out" });
+        const dy = gsap.quickTo(dot, "y", { duration: 0.08, ease: "power2.out" });
+        const rx = gsap.quickTo(ring, "x", { duration: 0.38, ease: "power3.out" });
+        const ry = gsap.quickTo(ring, "y", { duration: 0.38, ease: "power3.out" });
+        const onMove = (e: MouseEvent) => { dx(e.clientX); dy(e.clientY); rx(e.clientX); ry(e.clientY); };
+        const onOver = (e: MouseEvent) => {
+          const t2 = e.target as HTMLElement;
+          const interactive = !!t2.closest("button, a, [role='button'], input, select");
+          ring.classList.toggle("aw-cursor-ring--active", interactive);
+        };
+        window.addEventListener("mousemove", onMove, { passive: true });
+        window.addEventListener("mouseover", onOver, { passive: true });
+        killers.push(() => {
+          window.removeEventListener("mousemove", onMove);
+          window.removeEventListener("mouseover", onOver);
+          dot.remove(); ring.remove();
+        });
+      }
+
+      cleanup = () => killers.forEach((k) => k());
+    })();
+
+    return () => { alive = false; cleanup?.(); };
+  }, []);
+
+  // Starfield canvas — code-generated particle depth field (no assets).
+  const starRef = useRef<HTMLCanvasElement | null>(null);
+  useEffect(() => {
+    const canvas = starRef.current;
+    if (!canvas) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    let raf = 0;
+    let w = 0, h = 0;
+    const mouse = { x: 0.5, y: 0.5 };
+    const stars = Array.from({ length: 130 }, () => ({
+      x: Math.random(), y: Math.random(), z: 0.25 + Math.random() * 0.75,
+      tw: Math.random() * Math.PI * 2,
+    }));
+    const resize = () => {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    };
+    resize();
+    const onResize = () => resize();
+    const onMouse = (e: MouseEvent) => { mouse.x = e.clientX / w; mouse.y = e.clientY / h; };
+    window.addEventListener("resize", onResize);
+    window.addEventListener("mousemove", onMouse, { passive: true });
+    const tints = ["238, 240, 248", "255, 94, 138", "168, 85, 247", "77, 124, 255", "34, 211, 238"];
+    let t0 = 0;
+    const frame = (t: number) => {
+      const dt = (t - t0) / 1000; t0 = t;
+      ctx.clearRect(0, 0, w, h);
+      stars.forEach((s, i) => {
+        s.tw += dt * (0.6 + s.z);
+        const px = (s.x + (mouse.x - 0.5) * 0.035 * s.z) * w;
+        const py = (s.y + (mouse.y - 0.5) * 0.035 * s.z) * h;
+        const a = (0.18 + 0.5 * s.z) * (0.65 + 0.35 * Math.sin(s.tw));
+        const r = s.z * 1.6;
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(${tints[i % tints.length]}, ${a.toFixed(3)})`;
+        ctx.arc(px, py, r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      raf = requestAnimationFrame(frame);
+    };
+    raf = requestAnimationFrame(frame);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("mousemove", onMouse);
+    };
+  }, []);
+
   // Valorant competitive ranks — all ranks Iron → Radiant
   const RANK_UUID = "03621f52-342b-cf4e-4f86-9350a49c6d04";
   const rankShowcase = [
@@ -1501,6 +1677,8 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
   return (
     <main className="min-h-screen bg-[#080c14] relative overflow-x-hidden">
       <AmbientBg />
+      {/* Code-generated starfield — depth field behind everything (no assets) */}
+      <canvas ref={starRef} className="fixed inset-0 z-0 pointer-events-none" aria-hidden="true" />
 
       {/* ─── NAVBAR — Xtract style ─── */}
       <nav className="fixed top-0 left-0 right-0 z-50 nav-xtract">
@@ -1570,14 +1748,14 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
 
       {/* ─── HERO — VANGUARD-class stage: stacked display type + agent set-pieces
             (Fable 5 reel reference). Same handlers/links as before, new face. ─── */}
-      <section className="relative z-10 mx-auto max-w-6xl px-5 sm:px-8 pt-28 sm:pt-36 pb-12 sm:pb-20">
+      <section data-hero className="relative z-10 mx-auto max-w-6xl px-5 sm:px-8 pt-28 sm:pt-36 pb-12 sm:pb-20">
         {/* Background orbs */}
         <div className="hero-orb" style={{ top: '4%', right: '-14%' }} />
         <div className="hero-orb-inner" style={{ top: '16%', right: '2%' }} />
 
         <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 items-center">
           {/* LEFT — the statement */}
-          <div className="text-center lg:text-left">
+          <div data-hero-copy className="text-center lg:text-left">
             {/* Mono kicker — TypeUI style */}
             <div className="mb-7 animate-slide-up flex items-center justify-center lg:justify-start gap-3">
               <span className="hero-kicker" style={{ color: '#FF4655' }}>●</span>
@@ -1586,11 +1764,12 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               </span>
             </div>
 
-            {/* Stacked display headline (TR display style: I, not İ) */}
-            <h1 className="hero-display animate-slide-up stagger-1">
-              <span className="block">{lang === "tr" ? "IZLE." : "WATCH."}</span>
-              <span className="block">{lang === "tr" ? "ANALIZ ET." : "ANALYZE."}</span>
-              <span className="block hero-display-accent">{lang === "tr" ? "RANK ATLA." : "RANK UP."}</span>
+            {/* Stacked display headline — split-line clip reveal (P2),
+                outlined middle line (P1 weight mix). TR display: I, not İ. */}
+            <h1 className="hero-display">
+              <span className="hero-line hero-line-1"><span>{lang === "tr" ? "IZLE." : "WATCH."}</span></span>
+              <span className="hero-line hero-line-2"><span className="hero-outline">{lang === "tr" ? "ANALIZ ET." : "ANALYZE."}</span></span>
+              <span className="hero-line hero-line-3"><span className="hero-display-accent">{lang === "tr" ? "RANK ATLA." : "RANK UP."}</span></span>
             </h1>
 
             {/* Sub text */}
@@ -1602,21 +1781,21 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 animate-slide-up stagger-3">
               {user ? (
                 <>
-                  <button onClick={onDashboard} className="btn-neon rounded-xl px-8 py-3.5 text-[14px] flex items-center gap-2">
+                  <button data-magnetic onClick={onDashboard} className="btn-neon rounded-xl px-8 py-3.5 text-[14px] flex items-center gap-2">
                     {l.goToDashboard}
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
                   </button>
-                  <button onClick={() => document.getElementById("download-section")?.scrollIntoView({ behavior: "smooth" })} className="btn-ghost rounded-xl px-8 py-3.5 text-[14px]">
+                  <button data-magnetic onClick={() => document.getElementById("download-section")?.scrollIntoView({ behavior: "smooth" })} className="btn-ghost rounded-xl px-8 py-3.5 text-[14px]">
                     {l.landingCTA}
                   </button>
                 </>
               ) : (
                 <>
-                  <button onClick={() => document.getElementById("download-section")?.scrollIntoView({ behavior: "smooth" })} className="btn-neon rounded-xl px-8 py-3.5 text-[14px] flex items-center gap-2">
+                  <button data-magnetic onClick={() => document.getElementById("download-section")?.scrollIntoView({ behavior: "smooth" })} className="btn-neon rounded-xl px-8 py-3.5 text-[14px] flex items-center gap-2">
                     {l.landingCTA}
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
                   </button>
-                  <button onClick={onLogin} className="btn-ghost rounded-xl px-8 py-3.5 text-[14px]">
+                  <button data-magnetic onClick={onLogin} className="btn-ghost rounded-xl px-8 py-3.5 text-[14px]">
                     {l.authLogin}
                   </button>
                 </>
@@ -1645,26 +1824,28 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             </div>
           </div>
 
-          {/* RIGHT — the agent stage (official Riot renders as set-pieces).
-               Depth order: ring (0) → back agent (1) → main agent (2) → THE EYE (5). */}
-          <div className="relative h-[540px] xl:h-[620px] hidden lg:block animate-fade-in stagger-3">
+          {/* RIGHT — the agent stage: JETT and REYNA as separate set-pieces,
+               each on its own parallax depth (mouse-reactive via GSAP).
+               Depth order: ring (0) → Reyna (1) → Jett (2) → THE EYE (5). */}
+          <div data-stage className="relative h-[540px] xl:h-[620px] hidden lg:block animate-fade-in stagger-3">
             <div className="hero-stage-ring" />
             <div className="hero-stage-glow" />
             <img
               src="https://media.valorant-api.com/agents/a3bfb853-43b2-7238-a4f1-ad90e9e46bcc/fullportrait.png"
-              alt=""
-              aria-hidden="true"
+              alt="Reyna"
+              data-depth="0.085"
               draggable={false}
               className="hero-agent hero-agent-back"
             />
             <img
               src="https://media.valorant-api.com/agents/add6443a-41bd-e414-f6ad-e58d267f4e95/fullportrait.png"
               alt="Jett"
+              data-depth="0.05"
               draggable={false}
               className="hero-agent hero-agent-main"
             />
             {/* The eye CROWNS the stage — above the agents' heads, dead center */}
-            <div className="absolute -top-10 left-1/2 -translate-x-1/2 z-[5] animate-float-slow">
+            <div data-stage-eye data-depth="0.028" className="absolute -top-10 left-1/2 -translate-x-1/2 z-[5] animate-float-slow">
               <HeroEye size={132} />
             </div>
           </div>
@@ -1809,7 +1990,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
         <h2 className={`section-display mb-16 max-w-3xl transition-all duration-700 ${featRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           {lang === "tr" ? "AI ile Oyununu Bir Üst Seviyeye Taşı" : "Take Your Game to the Next Level with AI"}
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div data-cascade className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {l.landingFeatures.map((f, i) => {
             const v = featureVisuals[i];
             return (
@@ -1927,7 +2108,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
         <h2 className={`section-display mb-16 transition-all duration-700 ${diffRevealVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           {lang === "tr" ? "Neden AIMLO?" : "Why AIMLO?"}
         </h2>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div data-cascade className="grid md:grid-cols-3 gap-6">
           {l.landingDiffItems.map((item, i) => {
             const colors = ["#FF4655", "#4D7CFF", "#B44DFF"];
             return (
@@ -2377,6 +2558,11 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
           </a>
         </div>
       </section>
+
+      {/* ─── MEGA WORDMARK — the brand at viewport scale (P13 closer) ─── */}
+      <div className="relative z-10 overflow-hidden px-5 pt-6 pb-2" aria-hidden="true">
+        <div className="mega-wordmark">AIMLO</div>
+      </div>
 
       {/* ─── FINAL CTA — like Xtract's footer CTA ─── */}
       <section className="relative z-10 mx-auto max-w-3xl px-5 sm:px-8 pb-28 text-center">

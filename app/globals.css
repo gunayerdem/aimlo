@@ -693,7 +693,7 @@ select option { background: #060814; color: #eef0f8; }
 }
 
 .hero-agent-main {
-  right: -4%;
+  right: -12%;
   bottom: 0;
   height: 92%;
   z-index: 2;
@@ -704,15 +704,14 @@ select option { background: #060814; color: #eef0f8; }
 }
 
 .hero-agent-back {
-  left: 0%;
-  bottom: 4%;
-  height: 76%;
+  left: -14%;
+  bottom: 2%;
+  height: 80%;
   z-index: 1;
-  opacity: 0.5;
+  opacity: 1;
   filter:
-    drop-shadow(0 24px 40px rgba(0, 0, 0, 0.6))
-    drop-shadow(0 0 34px rgba(168, 85, 247, 0.18))
-    saturate(0.8) brightness(0.8);
+    drop-shadow(0 26px 44px rgba(0, 0, 0, 0.62))
+    drop-shadow(0 0 40px rgba(168, 85, 247, 0.3));
   animation: hero-agent-back-float 8.5s ease-in-out infinite;
 }
 
@@ -876,4 +875,94 @@ body::after {
   inset: 36px;
   border-radius: 50%;
   border: 1px dashed rgba(168, 85, 247, 0.14);
+}
+
+/* ═══════════════════════════════════════════
+   VIRAL-PLAYBOOK FINISHERS (research synth)
+   — split-line reveal, outline mix, mega CTA
+   ═══════════════════════════════════════════ */
+
+/* P2: clip-masked line reveal — each headline line rises from its own mask. */
+@keyframes line-rise {
+  from { transform: translateY(112%); }
+  to { transform: translateY(0); }
+}
+
+.hero-line {
+  display: block;
+  overflow: hidden;
+}
+
+.hero-line > span {
+  display: block;
+  transform: translateY(112%);
+  animation: line-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-line-1 > span { animation-delay: 0.1s; }
+.hero-line-2 > span { animation-delay: 0.24s; }
+.hero-line-3 > span { animation-delay: 0.4s; }
+
+/* P1 mix: the middle line is outlined — editorial weight contrast. */
+.hero-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(244, 242, 238, 0.9);
+}
+
+/* P13: the giant closing wordmark — the brand at viewport scale. */
+.mega-wordmark {
+  font-size: clamp(80px, 16vw, 230px);
+  line-height: 0.85;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  text-align: center;
+  user-select: none;
+  background: linear-gradient(180deg, rgba(238, 240, 248, 0.16) 0%, rgba(238, 240, 248, 0.03) 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════
+   AWWWARDS CURSOR — dot + lagging ring
+   (mounted by the GSAP layer, desktop only)
+   ═══════════════════════════════════════════ */
+
+body:has(.aw-cursor-dot), body:has(.aw-cursor-dot) * { cursor: none !important; }
+
+.aw-cursor-dot {
+  position: fixed;
+  top: -3px;
+  left: -3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  z-index: 10000;
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+
+.aw-cursor-ring {
+  position: fixed;
+  top: -17px;
+  left: -17px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 70, 85, 0.65);
+  z-index: 10000;
+  pointer-events: none;
+  transition: width 0.25s ease, height 0.25s ease, top 0.25s ease, left 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.aw-cursor-ring--active {
+  top: -26px;
+  left: -26px;
+  width: 52px;
+  height: 52px;
+  border-color: rgba(168, 85, 247, 0.8);
+  background: rgba(168, 85, 247, 0.08);
 }
