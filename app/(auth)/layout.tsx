@@ -1,5 +1,6 @@
 import AuthBg from "./AuthBg";
 import AuthStage from "./AuthStage";
+import AuthAgents from "./AuthAgents";
 
 /**
  * Auth route group layout — Fable 5 / IRIS köklü yenileme (2026-06-13).
@@ -11,6 +12,9 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
   return (
     <main className="min-h-screen bg-[#060814] relative flex items-center justify-center px-4 py-12 overflow-hidden">
       <AuthBg />
+
+      {/* 3D ajanlar — Jett + Neon (landing hero diliyle) */}
+      <AuthAgents />
 
       {/* Canlı iris aurora orbları */}
       <div
