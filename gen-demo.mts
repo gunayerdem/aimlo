@@ -79,14 +79,20 @@ const TARZANCA = [
   /sorun\s*:/i, /\bfix\s*:/i, /sonras[ıi]\s+plan/i,
   /tekil veri/i, /tekrar yok/i, /veri yok/i, /yeterli veri/i,
   /pozitif round/i, /veri sadece/i, /bilgisi yok/i, /yazıl[ıi] veri/i,
+  // koç-sesi (2026-06-13): patron-şikayeti kalıplar (teammate/cover/sightline doğal sayıldı)
+  /first shot/i, /first contact/i, /high flash/i, /low flash/i, /micro-?position/i,
+  /cezaland[ıi]r/i, /konumland[ıi]r/i, /pozisyonland[ıi]r/i,
+  /kuru (entry|giriş|peek|swing|koş|gir)/i,
+  /\b\d+([.,]\d+)?\s*(saniye|sn|ms|milisaniye)\b/i, /\b\d([.,]\d+)?\s*s\b/, /\b\d+\s*[-–]\s*\d+([.,]\d+)?\s*s\b/,
 ];
 // Deterministik temizleyici: modelin ısrar ettiği "çözüm:/neden:/fix:" etiketlerini
 // söker, akıcı cümleye çevirir, cümle başını büyütür.
 function clean(s: string | undefined): string {
   if (!s) return "";
   let out = s
-    .replace(/\s*[;.,—-]\s*(çözüm|çozum|neden|fix|sorun)\s*:\s*/gi, ". ")
-    .replace(/(^|\.\s+)(çözüm|çozum|neden|fix|sorun)\s*:\s*/gi, "$1")
+    .replace(/micro-?position(['’][a-zçğıöşü]+)?/gi, "açı")
+    .replace(/\s*[;.,—-]\s*(çözüm|çozum|neden|fix|sorun|sebep)\s*:\s*/gi, ". ")
+    .replace(/(^|\.\s+)(çözüm|çozum|neden|fix|sorun|sebep)\s*:\s*/gi, "$1")
     .replace(/\s{2,}/g, " ")
     .replace(/\s+\./g, ".")
     .replace(/\.{2,}/g, ".")

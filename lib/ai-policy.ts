@@ -36,6 +36,17 @@ export const BANNED_PHRASES = [
   "be better",
   "try different",
   "keep improving",
+  // Coach-voice denetimi (2026-06-13): kitabi/çeviri + whitelist-dışı İngilizce
+  "cezalandırıyor",
+  "cezalandırdı",
+  "konumlandırma",
+  "kuru entry",
+  "kuru giriş",
+  "first shot",
+  "high flash",
+  "micro-position",
+  "deployment",
+  "protocol",
 ] as const;
 
 // ═══════════════════════════════════════════════════════════
@@ -74,6 +85,32 @@ KORUNA: peek, trade, dash, entry, utility, angle, timing, setup, execute, rotate
 YANLIŞ: "yetenek kullan", "tuzak kur" DOĞRU: "utility kullanmadan entry atıyorsun"`;
 
 // ═══════════════════════════════════════════════════════════
+// TIME BAN — saniye/timer tabanlı tavsiye yasağı (her dil)
+// ═══════════════════════════════════════════════════════════
+
+export const TIME_BAN_RULE = `\nZAMAN YASAĞI: Saniye/timer tabanlı tavsiye YASAK ("0.5 saniyede", "0.3-0.6s", "2 saniye bekle", "0.8-1.2s", "after 3s"). Olay-bazlı konuş: "flash patlayınca", "ilk kill düşünce", "spike kurulunca", "op sesi gelince" / "after the first contact", "once the flash pops". Sayısal süre/mesafe verme.`;
+
+// ═══════════════════════════════════════════════════════════
+// KATI İNGİLİZCE WHITELIST — TR çıktıda whitelist-dışı İngilizce yasak
+// ═══════════════════════════════════════════════════════════
+
+export const ENGLISH_WHITELIST_RULE = `\nİNGİLİZCE (KATI): Cümleler Türkçe. SADECE şu oyun terimleri İngilizce kalır:
+peek, trade, dash, entry, swing, jiggle, lurk, anchor, retake, default, execute, fake, stack, rotate, smoke, flash, molly, util, utility, op, eco, force buy, save, anti-eco, clutch, ace, spike, plant, defuse, site, mid, post-plant, lineup, crosshair, one-tap, spray, off-angle, crossfire, setup, bait, trade pozisyonu.
+BU LİSTE DIŞINDA İNGİLİZCE KELİME KULLANMA. Zorunlu çeviri: first shot→ilk mermi, first contact→ilk kontak, high flash→flash'ı yukarı at, low flash→alçak flash, cover→siper, sightline→görüş hattı, teammate→takım arkadaşı, micro-position→açı, reposition→çekil/yer değiştir, positioning→pozisyon, dry→utility'siz.`;
+
+// ═══════════════════════════════════════════════════════════
+// DOĞAL KOÇ DİLİ — anti-kitabi/anti-çeviri (TR ve EN ayrı)
+// ═══════════════════════════════════════════════════════════
+
+export const NATURAL_COACH_RULE = `\nDOĞAL KOÇ DİLİ: Gerçek bir Radiant koç gibi DOĞRUDAN, sokak ağzıyla konuş. Kitabi/çeviri kelime YASAK:
+"cezalandırıyor/cezalandırdı/cezalandıracak" → "ucuza kill alıyor / aynı açıdan kafadan vuruyor / seni oradan kesiyor"
+"konumlandırma/pozisyonlandırma/konuşlanma" → "pozisyon / açı"
+"kuru entry/kuru giriş/kuru peek" → "utility'siz giriş / dry peek"
+Yapay/akademik değil; net, kısa, sert ama spesifik (callout + ne yap).`;
+
+export const NATURAL_COACH_RULE_EN = `\nNATURAL COACH VOICE (EN): Talk like a real Radiant coach — direct, blunt, specific. No corporate/academic words ("optimal", "deployment", "protocol", "leverage", "utilize"→"use", "facilitate"). No time/second-based advice. Plain, punchy English; callout + action every line.`;
+
+// ═══════════════════════════════════════════════════════════
 // EVIDENCE POLICY — strictest version (from vision route)
 // ═══════════════════════════════════════════════════════════
 
@@ -90,7 +127,7 @@ KURAL: Kanıt yoksa iddia yapma. Korelasyon ≠ nedensellik.`;
 export const ENEMY_ANALYSIS_GATE = `\nDÜŞMAN ANALİZİ KOŞULU:
 Düşman davranışı hakkında yorum SADECE şu durumlarda yapılabilir:
 1. Round geçmişinde tekrar eden ölüm pattern'i kanıtlanmışsa → "düşman bu pozisyonu okuyor olabilir"
-2. Killer bilgisi varsa (killfeed) → "Jett seni cezalandırıyor"
+2. Killer bilgisi varsa (killfeed) → "Jett aynı açıdan kafadan vuruyor"
 3. Görsel kanıtta düşman pozisyonu görünüyorsa → "düşman dar angle'dan bekliyordu"
 Kanıt YOKSA → düşman davranışı hakkında İDDİA YAPMA. "Düşman analizi için yeterli veri yok" de.
 "Düşman seni okuyor", "düşman adapte oldu" → SADECE tekrar eden pattern kanıtlanmışsa söylenebilir.`;
@@ -109,7 +146,7 @@ export const ZERO_FAKE_AI = `\nSIFIR SAHTE AI:
 - Veride OLMAYAN bilgiyi UYDURMA
 - Her cümlede veri referansı ZORUNLU: pozisyon adı, yüzde, maç/round sayısı
 - İstatistik tekrarı YASAK — yorumla, sadece sayı verme
-- YASAK KALIPLAR: ${BANNED_PHRASES.slice(0, 15).join(", ")}`;
+- YASAK KALIPLAR: ${BANNED_PHRASES.join(", ")}`;
 
 // ═══════════════════════════════════════════════════════════
 // OUTPUT FOCUS — 1 problem, 1 fix
@@ -154,7 +191,14 @@ export function buildPolicyBlock(options: {
   parts.push(TONE_PROMPTS[options.tone || "strict"] || TONE_PROMPTS.strict);
   parts.push(CONFIDENCE_PROMPTS[options.confidence || "medium"] || CONFIDENCE_PROMPTS.medium);
   parts.push(PERSONALIZATION_RULE);
-  parts.push(options.lang === "en" ? "" : HYBRID_LANGUAGE_RULE);
+  parts.push(TIME_BAN_RULE);
+  if (options.lang === "en") {
+    parts.push(NATURAL_COACH_RULE_EN);
+  } else {
+    parts.push(HYBRID_LANGUAGE_RULE);
+    parts.push(ENGLISH_WHITELIST_RULE);
+    parts.push(NATURAL_COACH_RULE);
+  }
   if (options.includeDecisionRubric) parts.push(DECISION_SCORE_RUBRIC);
 
   return parts.filter(Boolean).join("\n");

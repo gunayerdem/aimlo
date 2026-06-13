@@ -45,17 +45,25 @@ const SCENARIOS: Scn[] = [
   { agent: "Viper", map: "Breeze", side: "defense", loc: "A Hall", note: "wall'u yanlış zamanda açtı" },
 ];
 
+// Zaman-bağımlı tavsiye (her dil): "0.5 saniye", "0.3-0.6s", "2 sn", "5 s içinde"
+const TIME_RE = /\b\d+([.,]\d+)?\s*(saniye|sn|ms|milisaniye)\b|\b\d([.,]\d+)?\s*s\b|\b\d+\s*[-–]\s*\d+([.,]\d+)?\s*s\b/i;
 const TARZANCA_TR = [
   /pre-?aim/i, /wide swing/i, /head\s+(at[ıi]yor|att[ıi]|buldu|aç[ıi]s[ıi]n[ıi])/i,
   /swing yap[ıi]yor/i, /peek (yap[ıi]yor|ediyor)/i, /hold (ediyor|yap[ıi]yor)/i,
   /(stun|flash|molly|smoke|ult)\s+çekiyor/i, /\bop var\b/i, /pick al[ıi]yor/i,
   /sorun\s*:/i, /\bfix\s*:/i, /sonras[ıi]\s+plan/i, /tekil veri/i, /veri yok/i, /belirsiz/i,
+  // koç-sesi denetimi (2026-06-13): patron-şikayeti kalıplar (teammate/cover/sightline
+  // doğal gamer-Türkçesi sayıldı, hard-yasak değil — soft çeviri prompt'ta kalır)
+  /first shot/i, /first contact/i, /high flash/i, /low flash/i, /micro-?position/i,
+  /cezaland[ıi]r/i, /konumland[ıi]r/i, /pozisyonland[ıi]r/i,
+  /kuru (entry|giriş|peek|swing|koş|gir)/i, TIME_RE,
 ];
 const BANNED_EN = [
   "play carefully", "gather information", "improve positioning", "play with team",
   "use utility", "be better", "try different", "keep improving", "play smarter",
+  "deployment", "protocol", "optimal", "utilize", "facilitate", "leverage",
 ];
-const LABELS = [/problem\s*:/i, /\bfix\s*:/i, /solution\s*:/i, /next round plan\s*:/i, /no data/i, /not enough data/i];
+const LABELS = [/problem\s*:/i, /\bfix\s*:/i, /solution\s*:/i, /next round plan\s*:/i, /no data/i, /not enough data/i, /micro-?position/i, /first[- ]shot advantage/i, TIME_RE];
 
 function violations(text: string, lang: "tr" | "en"): string[] {
   const t = text.toLowerCase();
@@ -74,6 +82,8 @@ function clean(s: string): string {
   let out = s
     // baştaki bölüm-başlığı öneklerini sök (UI'da zaten başlık var)
     .replace(/^\s*(ölüm neden[iı]|hata analiz[iı]|ölüm analiz[iı]|düşman analiz[iı]|düşman pattern[iı]|sonraki round|death cause|death analysis|enemy read|enemy pattern|next round)\s*:\s*/i, "")
+    // sızan whitelist-dışı İngilizce → TR (micro-position eki dahil)
+    .replace(/micro-?position(['’][a-zçğıöşü]+)?/gi, "açı")
     .replace(/\s*[;.,—-]\s*(çözüm|çozum|neden|fix|sorun|solution|problem)\s*:\s*/gi, ". ")
     .replace(/(^|\.\s+)(çözüm|çozum|neden|fix|sorun|solution|problem)\s*:\s*/gi, "$1")
     .replace(/\s{2,}/g, " ").replace(/\s+\./g, ".").replace(/\.{2,}/g, ".").trim();
