@@ -140,7 +140,7 @@ export function plainifyAbilities(text: string, lang: "tr" | "en"): string {
 // ─── Türkçe düz-terim apostrof düzeltici ──────────────────────────────────
 // Model bazen düz Türkçe terimi yanlış apostroflar ("duvar'i", "tuzak'ı", "tel'i").
 // Türkçe ortak isimler apostrof almaz — doğru eki (ünlü uyumu + ünsüz yumuşaması) getir.
-const TR_TERMS = ["yavaşlatma", "sersemletme", "sabitleme", "diriltme", "çekme", "zıplama", "kalkan", "kamera", "tuzak", "bıçak", "kaçış", "duvar", "diken", "tel"];
+const TR_TERMS = ["yavaşlatma", "sersemletme", "sabitleme", "diriltme", "çekme", "zıplama", "kalkan", "kamera", "tuzak", "bıçak", "kaçış", "duvar", "diken", "siper", "açı", "tel"];
 const VOWELS = "aeıioöuü";
 const lastVowel = (w: string) => { for (let i = w.length - 1; i >= 0; i--) if (VOWELS.includes(w[i])) return w[i]; return "a"; };
 const highV = (lv: string) => (({ a: "ı", "ı": "ı", o: "u", u: "u", e: "i", i: "i", "ö": "ü", "ü": "ü" } as Record<string, string>)[lv] ?? "ı");

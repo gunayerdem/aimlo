@@ -85,18 +85,19 @@ function clean(s: string, lang: "tr" | "en" = "tr"): string {
   let out = plainifyAbilities(s.replace(/̇/g, ""), lang)
     // baştaki bölüm-başlığı öneklerini sök (UI'da zaten başlık var)
     .replace(/^\s*(ölüm neden[iı]|hata analiz[iı]|ölüm analiz[iı]|düşman analiz[iı]|düşman pattern[iı]|sonraki round|death cause|death analysis|enemy read|enemy pattern|next round)\s*:\s*/i, "")
-    // sızan whitelist-dışı İngilizce → TR (micro-position eki dahil)
-    .replace(/micro-?position(['’][a-zçğıöşü]+)?/gi, "açı")
-    .replace(/high flash/gi, "flash'ı yukarı").replace(/low flash/gi, "alçak flash").replace(/first shot/gi, "ilk mermi")
     // callout/ability slash → "ve"/"and" (A Main/Heaven → A Main ve Heaven; cümle bozulmaz)
     .replace(/(\w)\s*\/\s*(\w)/g, `$1${andW}$2`).replace(/(\w)\s*\/\s*(\w)/g, `$1${andW}$2`)
     .replace(/\s*[;.,—-]\s*(çözüm|çozum|neden|fix|sorun|solution|problem)\s*:\s*/gi, ". ")
     .replace(/(^|\.\s+)(çözüm|çozum|neden|fix|sorun|solution|problem)\s*:\s*/gi, "$1")
     .replace(/\s{2,}/g, " ").replace(/\s+\./g, ".").replace(/\.{2,}/g, ".").trim();
   out = out.replace(/(^|[.!?]\s+)([a-z])/g, (_, p, c) => p + c.toUpperCase());
-  // TR çıktıda ai-policy çeviri tablosundaki sızıntıları kapat (EN'de bu kelimeler meşru)
-  if (lang === "tr") out = out.replace(/\bcover\b/gi, "siper").replace(/\bsightline\b/gi, "görüş hattı").replace(/\bwall\b/gi, "duvar");
-  // düz Türkçe terim yanlış apostroflanmışsa düzelt (duvar'i → duvarı)
+  // TR çıktıda whitelist-dışı İngilizce → düz Türkçe (EN'de bu terimler meşru, DOKUNMA)
+  if (lang === "tr") out = out
+    .replace(/micro-?position(['’][a-zçğıöşü]+)?/gi, "açı")
+    .replace(/high flash/gi, "flash'ı yukarı at").replace(/low flash/gi, "alçak flash").replace(/first shot/gi, "ilk atış")
+    .replace(/\bblind ?zone\b/gi, "kör nokta")
+    .replace(/\bcover\b/gi, "siper").replace(/\bsightline\b/gi, "açı").replace(/\bwall\b/gi, "duvar");
+  // düz Türkçe terim yanlış apostroflanmışsa düzelt (duvar'i → duvarı, açı'yı → açıyı)
   if (lang === "tr") out = fixTurkishApostrophe(out);
   return out;
 }
@@ -114,7 +115,7 @@ DİL: sokak Türkçesi, sade. Oyun terimleri İngilizce (peek, trade, dash, entr
 ${policy}
 🚫 TARZANCA YASAK: "pre-aim"→"açıyı tutuyor"; "head atıyor"→"kafadan vuruyor"; "peek yapıyor"→"peek atıyor"; "swing yapıyor"→"swing atıyor"; "wide swing"→"geniş açıyla peek"; "X çekiyor"→"X atıyor". Etiket (Sorun:/Fix:/Çözüm:) YASAK — akıcı yaz.
 
-🎙 KOÇ AĞZI (ZORUNLU): Seni CANLI İZLEYEN keskin bir radiant koç gibi DOĞRUDAN konuş — "şunu yaptın, bak şöyle yapmalısın". Yazılı rapor değil.
+🎙 KOÇ AĞZI (ZORUNLU): Cümleleri yukarıdaki KB koçluk bloklarının DİLİNDEN uyarla (kendi Türkçeni sıfırdan uydurma) — seni CANLI İZLEYEN keskin bir radiant koç gibi DOĞRUDAN konuş: "şunu yaptın, bak şöyle yapmalısın". Yazılı rapor değil.
 - DOLU ol, telegraf gibi kısa olma: deathAnalysis 2-3 net cümle (ne yaptın + neden öldün + ne yapmalıydın). enemyPatterns 1-2 cümle. nextRoundPlan 1-2 cümle. İşe yarar, somut.
 - DİLBİLGİSİ KUSURSUZ: bozuk, devrik, yarım cümle ve YAZIM HATASI YASAK. Akıcı, doğal Türkçe; cümleler tam ve düzgün kurulsun.
 - TEREDDÜT YASAK ("olabilir/belki"); SLASH YASAK ("A Main/Heaven" → tek callout); etiket YASAK. Net, kesin.${corrective}

@@ -61,6 +61,13 @@ const ROUND_FEEDBACK_SCHEMA = {
 
 const SYSTEM_PROMPT = `Sen AIMLO'sun: Radiant seviye gerçek bir Valorant koçusun. Görevin oyuncuya GERÇEK pattern-aware feedback vermek — generic "iyi nişan al" / "aim well" laflarını YASAKLIYORUM.
 
+🎯 KAYNAK = KB (aşağıdaki knowledge blokları) — EN ÖNEMLİ KURAL / TOP RULE:
+Koçluğu SIFIRDAN UYDURMA. OCR gerçeğini (ajan + harita + ölüm yeri + düşman + skor) knowledge bloklarıyla EŞLE; feedback'i o blokların DİLİYLE ver.
+- Bu ölümü KB'deki "Kalıp → Anlam → Counter/WHY" ve "Oyuncuya Ne Söylenmeli" bloklarıyla eşle, en uygununu seç.
+- O bloğun ifadesini AL, sadece spesifik callout/ajan/silah/duruma uyarla. KB'nin dili senin yazımından İYİ — onun cümlesini kullan, kendi cümleni sıfırdan kurma.
+- KB'de karşılığı olmayan tavsiye verme. Sonuç: oyuncu o round'u CANLI izlemişsin gibi hissetmeli (KB bilgisini SPESİFİK ölüme bağladığın için).
+- EN: Do NOT invent coaching — MATCH the OCR truth to the knowledge blocks and deliver feedback in THEIR wording, adapted only to the specific callout/agent. The player must feel you watched that exact round.
+
 DİL — ZORUNLU
 
 - Kullanıcı dili Türkçe ise → çıktı Türkçe (sokak Türkçesi, herkesin anlayacağı sade dil).

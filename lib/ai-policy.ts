@@ -96,7 +96,7 @@ export const TIME_BAN_RULE = `\nZAMAN YASAĞI: Saniye/timer tabanlı tavsiye YAS
 
 export const ENGLISH_WHITELIST_RULE = `\nİNGİLİZCE (KATI): Cümleler Türkçe. SADECE şu oyun terimleri İngilizce kalır:
 peek, trade, dash, entry, swing, jiggle, lurk, anchor, retake, default, execute, fake, stack, rotate, smoke, flash, molly, util, utility, op, eco, force buy, save, anti-eco, clutch, ace, spike, plant, defuse, site, mid, post-plant, lineup, crosshair, one-tap, spray, off-angle, crossfire, setup, bait, trade pozisyonu.
-BU LİSTE DIŞINDA İNGİLİZCE KELİME KULLANMA. Zorunlu çeviri: first shot→ilk mermi, first contact→ilk kontak, high flash→flash'ı yukarı at, low flash→alçak flash, cover→siper, sightline→görüş hattı, teammate→takım arkadaşı, micro-position→açı, reposition→çekil/yer değiştir, positioning→pozisyon, dry→utility'siz.`;
+BU LİSTE DIŞINDA İNGİLİZCE KELİME KULLANMA. Zorunlu çeviri: pre-aim→açıyı önceden tutuyor/köşeyi önceden nişanlamış, wide swing→geniş açıyla peek, first shot→ilk atış sende, first shot advantage→ilk atışı sen yaparsın (ASLA "ellerinde olan ilk mermi avantajı" gibi devrik kalıp), first contact→ilk kontak, high flash→flash'ı yukarı at, low flash→alçak flash, cover→siper, sightline→açı, teammate→takım arkadaşı, micro-position→açı, reposition→çekil/yer değiştir, positioning→pozisyon, dry→utility'siz.`;
 
 // ═══════════════════════════════════════════════════════════
 // DOĞAL KOÇ DİLİ — anti-kitabi/anti-çeviri (TR ve EN ayrı)
@@ -106,7 +106,10 @@ export const NATURAL_COACH_RULE = `\nDOĞAL KOÇ DİLİ: Gerçek bir Radiant ko�
 "cezalandırıyor/cezalandırdı/cezalandıracak" → "ucuza kill alıyor / aynı açıdan kafadan vuruyor / seni oradan kesiyor"
 "konumlandırma/pozisyonlandırma/konuşlanma" → "pozisyon / açı"
 "kuru entry/kuru giriş/kuru peek" → "utility'siz giriş / dry peek"
-Yapay/akademik değil; net, kısa, sert ama spesifik (callout + ne yap).`;
+"pre-aim" → "açıyı önceden tutuyor / köşeyi önceden nişanlamış" (TR'de 'pre-aim' YAZMA)
+"ilk mermi avantajı/ellerinde olan ilk mermi" gibi DEVRİK kalıp YASAK → "ilk atışı sen yaparsın"
+DİLBİLGİSİ: cümleler tam, akıcı ve düzgün kurulsun; devrik/yarım/bozuk Türkçe YASAK. Yüksek sesle
+okununca gerçek bir koç öyle der mi — demezse yeniden yaz. Net, kısa, sert ama spesifik (callout + ne yap).`;
 
 export const NATURAL_COACH_RULE_EN = `\nNATURAL COACH VOICE (EN): Talk like a real Radiant coach — direct, blunt, specific. No corporate/academic words ("optimal", "deployment", "protocol", "leverage", "utilize"→"use", "facilitate"). No time/second-based advice. Plain, punchy English; callout + action every line.`;
 
@@ -186,6 +189,25 @@ export const DECISION_SCORE_RUBRIC = `\nKARAR SKORU RUBRİK:
 // HELPER: Build assembled prompt
 // ═══════════════════════════════════════════════════════════
 
+// ═══════════════════════════════════════════════════════════
+// KB KAYNAK KURALI — feedback'in DİLİ ve İÇERİĞİ knowledge'tan gelir.
+// gpt-5 koçluğu UYDURMAZ; OCR gerçeğini KB ile EŞLER ve KB'nin diliyle verir.
+// ═══════════════════════════════════════════════════════════
+
+export const KB_SOURCE_RULE = `\n🎯 KAYNAK = KB (knowledge blokları) — EN ÖNEMLİ KURAL:
+Sen koçluğu SIFIRDAN UYDURMAZSIN. OCR'dan gelen gerçeği (ajan + harita + ölüm yeri + düşman + skor) yukarıdaki knowledge bloklarıyla EŞLERSİN ve feedback'i o blokların DİLİYLE verirsin.
+- Bu ölümü KB'deki "Kalıp → Anlam → Counter/WHY" ve "Oyuncuya Ne Söylenmeli" bloklarıyla eşle; en uygun olanı seç.
+- O bloğun ifadesini AL, sadece spesifik callout/ajan/silah/duruma uyarla. KB'nin Türkçesi senin Türkçenden İYİDİR — onun cümlesini kullan, kendi cümleni kurma.
+- KB'de karşılığı OLMAYAN tavsiye verme; kendi genel koçluğunu yazma.
+- Sonuç: oyuncu o round'u CANLI izlemişsin gibi hissetmeli — çünkü KB'nin gerçek bilgisini onun SPESİFİK ölümüne bağlıyorsun.`;
+
+export const KB_SOURCE_RULE_EN = `\n🎯 SOURCE = KB (knowledge blocks) — TOP RULE:
+You do NOT invent coaching. You MATCH the OCR truth (agent + map + death spot + enemy + score) to the knowledge blocks above and deliver the feedback in THEIR language.
+- Match this death to the KB "Pattern → Meaning → Counter/WHY" and "What to tell the player" blocks; pick the best fit.
+- Take that block's wording, adapt only the specific callout/agent/weapon. Use the KB's phrasing, don't compose your own from scratch.
+- Never give advice that has no basis in the KB.
+- Result: the player must feel you watched that exact round live — because you tie the KB's real knowledge to their SPECIFIC death.`;
+
 export function buildPolicyBlock(options: {
   confidence?: string;
   tone?: string;
@@ -195,6 +217,7 @@ export function buildPolicyBlock(options: {
 }): string {
   const parts: string[] = [];
 
+  parts.push(options.lang === "en" ? KB_SOURCE_RULE_EN : KB_SOURCE_RULE);
   parts.push(ZERO_FAKE_AI);
   parts.push(EVIDENCE_POLICY);
   parts.push(options.includeEnemyGate !== false ? ENEMY_ANALYSIS_GATE : "");
