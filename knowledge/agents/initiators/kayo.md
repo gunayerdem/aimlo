@@ -100,7 +100,7 @@ KAY/O düşmanın yeteneklerini kapatan ajandır. Bıçağı yakınındaki herke
 **Düşman ajanını okumayınca:** "Bıçağı boşluğa attın. Kim duvar dikiyor, kim smoke koyuyorsa onu kilitle. Doğru ajanı kapatınca düşmanın bütün tur planı çöker, rastgele yarıçapla bu olmaz."
 
 ## 8. Rank Modülasyonu
-- **Düşük (Iron-Silver)**: Alt atış flash'ı öğren — yakın peek'lerde kullan. Site'a girmeden önce bıçağı at. Molly'yi spike kurulduktan sonra için sakla.
+- **Düşük (Iron-Silver)**: Alt atış flash'ı öğren — yakın peek'lerde kullan. Site'a girmeden önce bıçağı at. Molly'yi spike kurulduktan sonrası için sakla.
 - **Orta (Gold-Platinum)**: Her iki flash tipinde ustalaş. Kaç kişi kilitlediğini her seferinde söyle. Spike'a molly lineup'larını öğren.
 - **Yüksek (Diamond-Ascendant)**: Bıçağı takımın hareketiyle aynı ana denk getir. Ult girişini takım arkana geçince yap. Bıçak ne sonuç verirse versin takıma aktar, rotasyonu birlikte belirleyin.
 - **Elit (Immortal-Radiant)**: Belirli bir düşman ajanı kilitlemek için bıçak açısını seç. Flash'ı takım arkadaşının peek'iyle aynı kareye getir. Ult girişini site temizlenene kadar beklet — ult ile gir, takım seni kapsasın.

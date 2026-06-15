@@ -11,13 +11,13 @@ tags: [matchup, raze, breach, duelist, initiator]
 
 ## 1. Matchup Özü
 
-Breach seni sersemletir, sen Breach'i patlatırsın. Breach'in stunu sıçrama havada keser — sıçrama animasyonu başladıktan sonra stun gelirse sıçrama iptal olur, yere düşemezsin. Sen de Breach'in lineup yaptığı köşeyi nade ile vurursan o da util atamaz. Matchup'ın özü bu: kim önce hareket eder, kim önce karşıyı durdurur.
+Breach seni sersemletir, sen Breach'i patlatırsın. Breach'in stunu sıçrama havada keser — Sıçrama animasyonu başladıktan sonra stun gelirse sıçrama iptal olur, yere düşemezsin. Sen de Breach'in lineup yaptığı köşeyi nade ile vurursan o da util atamaz. Matchup'ın özü bu: kim önce hareket eder, kim önce karşıyı durdurur.
 
 ## 2. Kim Avantajlı?
 
 **Raze lehine:**
 - Breach'in yanında trade yoksa stun tek başına öldürmez, sadece seni durdurur. Partner yoksa daha az hasar riski alırsın.
-- Uzun görüş hattı'lı haritalarda Breach'in util menzili kısa kalır; sen uzaktan nade + rifle ile baskı kurarsın.
+- Uzun görüş hattını haritalarda Breach'in util menzili kısa kalır; sen uzaktan nade + rifle ile baskı kurarsın.
 - Ult hazırsa Breach entry pozisyonuna girerken ulttan ölür, stun bile atamaz.
 
 **Breach lehine:**
@@ -30,7 +30,7 @@ Breach seni sersemletir, sen Breach'i patlatırsın. Breach'in stunu sıçrama h
 ## 3. Önemli Düellolar
 
 **IF** Breach sıçrama ineceği noktaya stun bıraktı
-**MEANING** sıçrama yere inmeden stun yersin — havada iptal olur, olduğun yerde kalırsın
+**MEANING** Sıçrama yere inmeden stun yersin — havada iptal olur, olduğun yerde kalırsın
 **COUNTER** Stun sesini duyduğun anda sıçrama farklı noktaya yönlendir. Breach'in stununun geçemeyeceği köşeyi bul — duvarın öbür yüzü veya saldırı hattından 90 derece açı.
 **WHY** Stun duvar deler, basit cover yetmez. Ama hat yönünden dik açıdaysan stun seni bulamaz.
 
@@ -65,7 +65,7 @@ Breach seni sersemletir, sen Breach'i patlatırsın. Breach'in stunu sıçrama h
 ---
 
 **IF** Breach molly'si sıçrama ile ineceğin noktaya atılmış
-**MEANING** sıçrama ile indiğinde molly hasarı alırsın, HP'n eriyerek fight'a girersin
+**MEANING** Sıçrama ile indiğinde molly hasarı alırsın, HP'n eriyerek fight'a girersin
 **COUNTER** Molly'nin hangi köşelerden atıldığını öğren — sabit trajektörleri var. O köşelerden uzak bir noktaya in.
 **WHY** Molly de duvar deler. Cover seni korumaz — tek çözüm iniş noktasını doğru seçmek.
 

@@ -116,7 +116,7 @@ Deadlock'un yetenek seti Op alımından bağımsız çalışır. Chamber'ın kit
 
 **Abyss:** Chamber önde. Çok katlı yapı teleporta uyar.
 
-**Ascent:** Chamber önde. B Main'in uzun görüş hattı'ı Op için ideal.
+**Ascent:** Chamber önde. B Main'in uzun görüş hattını Op için ideal.
 
 **Breeze:** Chamber önde. Uzun açılar Op ekonomisini destekler.
 

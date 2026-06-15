@@ -24,7 +24,7 @@ Deadlock seni durdurmak için tek bir şeye oynar: sıçramaini havada yakalamak
 **Deadlock avantajlı:**
 - Dar koridorlu haritalar (Split, Sunset, Fracture) — duvar geçişi keser, ağ sıçrama keser
 - Sıçrama bekleme süresindeyken — o an durursan ağ ile rifle seni durdurur
-- Tuzak giriş hattında aktifse — sıçrama patlama sesini duyar, tetiklenir; sersemlemişken nade atışın yavaşlar
+- Tuzak giriş hattında aktifse — Sıçrama patlama sesini duyar, tetiklenir; sersemlemişken nade atışın yavaşlar
 - Spike kurulduktan sonra ultunu atarsa — alternatif açıda değilsen kozaya alınmak kesin ölüm
 
 **Dengeli:** Haven, Ascent, Lotus — açık site tasarımı her ikisine de alan verir, araç yerleşimi belirler.
@@ -38,8 +38,8 @@ Deadlock seni durdurmak için tek bir şeye oynar: sıçramaini havada yakalamak
 
 ---
 
-**IF** sıçrama ile atladın, Deadlock ağ attı
-**MEANING** Ağ seni havada yakalar — sıçrama ivmen kesilir, yavaşlarsın, kolay hedef olursun
+**IF** Sıçrama ile atladın, Deadlock ağ attı
+**MEANING** Ağ seni havada yakalar — Sıçrama ivmen kesilir, yavaşlarsın, kolay hedef olursun
 **COUNTER** Raze oynuyorsan ağın düştüğü hattı izle, sıçrama yönünü o noktadan uzağa al. Ağ tek kullanım — harcattıktan sonra ikinci atlamada hareketin serbest
 **WHY** Ağ, sıçrama hareketini tam kesen tek araç. Hattını okursan geçersin.
 
@@ -48,7 +48,7 @@ Deadlock seni durdurmak için tek bir şeye oynar: sıçramaini havada yakalamak
 **IF** Deadlock tuzağı giriş hattında aktive oldu
 **MEANING** Sersemledin — nişanın ve animasyonun yavaşlar, nade atışın gecikir
 **COUNTER** Shift yürüyüşüyle geçmeye kalkma — Raze zaten sessiz gezmez. Tuzağı nade ile patlat, geçmeden önce hattı temizle
-**WHY** Tuzak ses tabanlı — sıçrama patlama sesini duyar, tetiklenir. Nade ile patlatmak tek atışta iki işi birden bitirir: hem patlama hem tuzağı harcatma.
+**WHY** Tuzak ses tabanlı — Sıçrama patlama sesini duyar, tetiklenir. Nade ile patlatmak tek atışta iki işi birden bitirir: hem patlama hem tuzağı harcatma.
 
 ---
 

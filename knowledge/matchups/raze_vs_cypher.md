@@ -46,7 +46,7 @@ Raze nade ve sıçrama ile Cypher'ın telini patlatır, dar siteye dalar. Cypher
 ---
 
 **IF** Raze sıçrama ile Cypher'ın anchor noktasına boost yaptı, telin üstünden geçti
-**MEANING** sıçrama Raze'i tel hattının üstüne taşır — yere kurulu tel çalışmaz, Raze Cypher'ın üstüne düşer
+**MEANING** Sıçrama Raze'i tel hattının üstüne taşır — yere kurulu tel çalışmaz, Raze Cypher'ın üstüne düşer
 **COUNTER** Teli hem yere hem yükseğe çift kat kur. Raze'in hangi açıdan boost yaptığını gör, tel'i tam o hatta yerleştir
 **WHY** Tek noktaya kurulan tel sıçrama boost'unu durduramaz. Çift kur ki biri hava hattını kapsasın
 
@@ -108,7 +108,7 @@ Ult maliyeti eşit (her ikisi de 7 puan). Raze ult'ı round'u bitirir. Cypher ul
 
 **Dönüm 1 — Nade tel'i patlattı:** Raze nade'i Cypher tel hattını yok ettiği an Cypher kör kalır. Raze ikinci girişe hemen geçer.
 
-**Dönüm 2 — sıçrama boost tel'i atladı:** Raze tel hattının üstünden geçerse Cypher bilgisiz kalır. Cypher tel yüksekliğini Raze'in boost açısına göre ayarlamalı.
+**Dönüm 2 — Sıçrama boost tel'i atladı:** Raze tel hattının üstünden geçerse Cypher bilgisiz kalır. Cypher tel yüksekliğini Raze'in boost açısına göre ayarlamalı.
 
 **Dönüm 3 — Ult anchor'a düştü:** Raze ult'ı Cypher'ın durduğu yere gelirse Cypher ölür. Sabit duran Cypher rokete tam hedef olur — ult sesi duyulunca yer değiştir.
 

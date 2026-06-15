@@ -82,7 +82,7 @@ En yaygın hata: smoke atıp flash beklemeden girmek. Savunucu smoke kenarında 
 
 **MEANING:** Mid'i alan takım A Short üzerinden A site'a veya Market üzerinden B site'a split yapabilir. Bu esneklik savunmayı sürekli tahmin yapmaya zorlar. Mid kontrolü olmadan execute yaparsan savunma nereden geleceğini biliyor — tek boyutlu saldırı olur.
 
-**COUNTER:** Top Mid'de op varsa oraya kuru peek atamazsın. Flash + swing ikilisi kullan ya da smoke ile op'un görüş hattı'ını kapat. Mid'i aldıktan sonra takımla iletişim kur — sen Market'tesin ama takım hâlâ A Main'deyse yalnız kalırsın.
+**COUNTER:** Top Mid'de op varsa oraya kuru peek atamazsın. Flash + swing ikilisi kullan ya da smoke ile op'un görüş hattını kapat. Mid'i aldıktan sonra takımla iletişim kur — sen Market'tesin ama takım hâlâ A Main'deyse yalnız kalırsın.
 
 **WHY:** Mid'i kontrol eden taraf haritanın tamamına erişir. Mid'siz saldırı tek kapılı oda — savunma nereden geleceğini biliyor. Mid kontrolüyle saldırı üç kapılı oda — savunma hangisine bakacağını bilemez.
 
@@ -168,7 +168,7 @@ Retake öncesi bilgi topla: bot, recon, Fade recon'u. Sonra takım olarak aynı 
 
 **Sova:** Recon'u mid'e veya site'a at, entry öncesi bot ile tarama yap. Ascent'in açık alanları Sova için iyi ama KAY/O onun util'ini devre dışı bırakabildiğinde Sova bir kademe geride kalır.
 
-**Fade:** Recon ve bot ile yakın mesafe bilgi toplama ve entry desteğinde Sova'dan güçlüsün. Ama Ascent'in uzun görüş hattı'larında recon daha fazla alan görür — bu yüzden Sova'nın biraz gerisinde durursun.
+**Fade:** Recon ve bot ile yakın mesafe bilgi toplama ve entry desteğinde Sova'dan güçlüsün. Ama Ascent'in uzun görüş hattını recon daha fazla alan görür — bu yüzden Sova'nın biraz gerisinde durursun.
 
 **Breach:** Molly ve stun ile savunucuları pozisyonlarından sök. Duvar yapısı bazı noktalarda util'ini güçlendirir ama harita genişledikçe Breach'in menzili kısa kalır.
 
@@ -262,7 +262,7 @@ Timeout'u doğru kullan — momentum kırmak için, skor farkı kapanmadan önce
 - **Boathouse:** B site yakınındaki alan. Callout olarak bilmen yeterli.
 
 ### Mid
-- **Mid Top / Top Mid:** Mid'in savunma tarafı. Op görüş hattı'ı — kapalı kapı yoksa kafanı çıkarma.
+- **Mid Top / Top Mid:** Mid'in savunma tarafı. Op görüş hattını — kapalı kapı yoksa kafanı çıkarma.
 - **Mid Bottom / Mid Courtyard:** Mid'in saldırı tarafı. Kapıyı aç, bilgi topla.
 - **Pizza / Cubby:** Mid içindeki küçük saklanma köşesi. Bilgi almak için durulur, savaş için değil.
 - **Arches:** Mid'den A Short'a geçiş noktası. Buradan split baskı kurarsın.

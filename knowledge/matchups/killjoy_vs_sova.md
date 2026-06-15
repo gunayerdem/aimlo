@@ -22,7 +22,7 @@ Sova seni round başında siler. Turret'ini, botunu, mollyni hasar oku patlatır
 - Sova aynı hattan recon atıyorsa — botunu o hattan çek, Sova boşa atsın.
 
 **Sova lehine durumlar:**
-- Uzun görüş hattı'lı haritalarda (Breeze, Icebox) — recon her köşeyi tarar, saklanacak yer kalmaz.
+- Uzun görüş hattını haritalarda (Breeze, Icebox) — recon her köşeyi tarar, saklanacak yer kalmaz.
 - Hasar oku setupunu round başında vurursa — turret ve bot gider, Sova takımı boş siteye dalar.
 - Ulti pozisyonuna gelirse — duvar arkası korumaz, HP'n erir.
 - Botu siteye girerse — mollyn, botun, turret'in hepsi haritaya çıkar.
@@ -34,7 +34,7 @@ Sova seni round başında siler. Turret'ini, botunu, mollyni hasar oku patlatır
 **IF** Sova hasar oku turret'ini patlattı
 **MEANING** Turret gitti, o round setupun yarım — Sova takımı sana karşı bilgi avantajıyla giriyor.
 **COUNTER** Turret'i hasar oku geldiği hattan uzağa, köşe arkasına koy. Her round aynı nokta olmasın — en az iki ayrı yerleşim belirle ve sırayla kullan.
-**WHY** hasar oku lineupu sabit hedefe göre ayarlanır. Turret her round aynı yerdeyse Sova bir kere öğrenir, sonra her round basar.
+**WHY** Hasar oku lineupu sabit hedefe göre ayarlanır. Turret her round aynı yerdeyse Sova bir kere öğrenir, sonra her round basar.
 
 ---
 
@@ -105,7 +105,7 @@ Kural şu: Sova donanımını harcamadan setupun tam güçte çalışmaz. Sova d
 
 ## 6. Dönüm Noktaları
 
-**Dönüm 1 — hasar oku setupu sildi:** Donanımın gitti, o round savunma çıplak.
+**Dönüm 1 — Hasar oku setupu sildi:** Donanımın gitti, o round savunma çıplak.
 
 **Dönüm 2 — Turret botu bitirdi:** Bot düştü, Sova o round kör — site bilgisini sakladın.
 

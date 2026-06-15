@@ -8,7 +8,7 @@
 - B tarafında B Long uzun bir hat sunar. Op varsa burada kralı oynar. B Hall ve B Screen ise site içinde off-angle tutar.
 - Harita savunma taraflı. Savunucu Mid üzerinden iki siteye birden hızlı döner. Mid'i almadan split atamazsın.
 - Mid'de ne olduğunu bilmiyorsan round'u kör oynuyorsun. Mid bilgisi = round bilgisi.
-- görüş hattı'lar orta-uzun mesafe. Vandal ve Phantom ikisi de iş görür ama Mid Plaza ve B Long'da Op ağır basar.
+- görüş hattını orta-uzun mesafe. Vandal ve Phantom ikisi de iş görür ama Mid Plaza ve B Long'da Op ağır basar.
 
 ## 2. Ölüm Bölgeleri
 
@@ -26,9 +26,9 @@ WHY: Op'un açısını kırdığın an rifle ile yakın mesafede avantaj sana ge
 
 **B Long Açık Alan**
 IF: B Long'da kontrolsüz geniş açıyla yükleniyorsun, aynı açıdan üst üste ölüyorsun.
-MEANING: B Long Pearl'ün en uzun görüş hattı'larından biri. Wide swing attığında bütün vücudunu savunucunun çoktan nişan aldığı noktaya servis ediyorsun.
-COUNTER: Smoke ile görüş hattı'ı kes. Jiggle peek ile bilgi al — tam commit etme. Takım arkadaşın B Hall ya da B Link'ten baskı kurarken sen trade pozisyonu al. B Long'u tek başına contest etme.
-WHY: Uzun görüş hattı'da mesafe arttıkça hareketin görsel olarak yavaşlar, hedef küçülürsün. Smoke bu avantajı silip atar. Crossfire ise savunucuyu iki açı arasında böler — ikisine birden nişan alamaz.
+MEANING: B Long Pearl'ün en uzun görüş hattını biri. Wide swing attığında bütün vücudunu savunucunun çoktan nişan aldığı noktaya servis ediyorsun.
+COUNTER: Smoke ile görüş hattını kes. Jiggle peek ile bilgi al — tam commit etme. Takım arkadaşın B Hall ya da B Link'ten baskı kurarken sen trade pozisyonu al. B Long'u tek başına contest etme.
+WHY: Uzun görüş hattını mesafe arttıkça hareketin görsel olarak yavaşlar, hedef küçülürsün. Smoke bu avantajı silip atar. Crossfire ise savunucuyu iki açı arasında böler — ikisine birden nişan alamaz.
 
 **A Art Flank**
 IF: A Art'ı tutmadan A site'a push atıyorsun ve Art'tan flank yiyorsun.
@@ -216,7 +216,7 @@ WHY: Mid kimin elindeyse savunucu o takımın rotasyon yolunu kullanır. Mid'i k
 ## 10. Ekonomi
 
 **Op Ekonomisi**
-Pearl'de Op'un en sert olduğu yer Mid Plaza ve B Long. Savunmada Op'u önce al — Mid Plaza ya da B Long'da dur, haritanın en uzun görüş hattı'larını sen tut. Chamber oynuyorsan TP'yi koy, peek at, kill al, geri çekil. Op'u kaybetme riskin sıfırlanır. Saldırıda Mid Top'tan Plaza'ya Op ile baskı yapabilirsin ama karşı tarafta da Op varsa trade olur, bunu göze al.
+Pearl'de Op'un en sert olduğu yer Mid Plaza ve B Long. Savunmada Op'u önce al — Mid Plaza ya da B Long'da dur, haritanın en uzun görüş hattını sen tut. Chamber oynuyorsan TP'yi koy, peek at, kill al, geri çekil. Op'u kaybetme riskin sıfırlanır. Saldırıda Mid Top'tan Plaza'ya Op ile baskı yapabilirsin ama karşı tarafta da Op varsa trade olur, bunu göze al.
 
 **Force Buy**
 Force buy'da en sağlam seçenek 5 kişiyle A Main rush. A Main dar — Spectre burada Vandal kadar öldürür. Flash, smoke, molly dök, hızlı gir. Dar koridor spray'ini güçlendirir, savunucunun uzun mesafe avantajını siler.

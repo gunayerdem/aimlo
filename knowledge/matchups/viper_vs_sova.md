@@ -39,7 +39,7 @@ Viper duvar kurar, görüşü keser. Sova bilgi açar, pozisyonları ifşa eder.
 ---
 
 **IF** Sova hasar oku Viper molly alanına önce atıldı
-**MEANING** hasar oku post-plant molly'ni siler, Sova takımına defuse için alan açar
+**MEANING** Hasar oku post-plant molly'ni siler, Sova takımına defuse için alan açar
 **COUNTER** İki molly at, ard arda. Hasar oku birini siler, ikincisi aktif kalır.
 **WHY** Sova'nın hasar oku tek molly'yi siler. İki molly Sova'nın hasar oku ekonomisini aşar — ikinci molly için cooldown yetmez. Spike basıldıktan sonra çift molly Viper'ın en sağlam silahı.
 

@@ -16,7 +16,7 @@ Jett dash'le giriyor, Sage duvar, yavaşlatma ve heal ile o girişi durdurmaya �
 ## 2. Kim Avantajlı?
 
 **Jett lehine:**
-- Uzun görüş hattı'larda (Breeze, Icebox Mid) — Sage duvarı kısa mesafe için, uzun açıda Op'u Jett kuşanır ve işini yapar
+- Uzun görüş hattını (Breeze, Icebox Mid) — Sage duvarı kısa mesafe için, uzun açıda Op'u Jett kuşanır ve işini yapar
 - Sage duvarı harcandıktan sonra — ikinci giriş serbest, Sage'in elinde yalnızca yavaşlatma ve nişanı kalır
 - Sage site'ı tek başına tutuyorsa — tek yönlü duvar çift taraflı girişi tutamaz
 

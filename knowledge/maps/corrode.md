@@ -24,7 +24,7 @@ B Tunnel ile site connector'unun kesiştiği nokta bir crossfire tuzağı. Off-a
 
 ### Mid Pipes
 
-Endüstriyel borular bilinen bir op açısı. O görüş hattı'a düz peek atarsan vurulursun. Op sesini duyduysan ya smoke at, ya flash koy, ya da başka rotadan git.
+Endüstriyel borular bilinen bir op açısı. O görüş hattını düz peek atarsan vurulursun. Op sesini duyduysan ya smoke at, ya flash koy, ya da başka rotadan git.
 
 ### A Site Catwalk
 
@@ -92,7 +92,7 @@ Back Alley bir retake ölüm bölgesi. Rotate yaparken dar koridoru util'siz ge�
 
 **COUNTER:** Girişi kademele — ilk oyuncu flash'la girer, ikinci oyuncu önündeki duel bitmeden içeri girmez. Ya da yaklaşımı böl: bir grup B Tunnel'dan, diğer grup connector'dan gelsin. Savunucuya crossfire kur, onun crossfire'ına yürüme.
 
-**WHY:** boğaz'e sırayla girerseniz hepiniz aynı görüş hattı'a tek tek çıkarsınız. Yaklaşımı bölünce savunucu hangi açıyı tutacağına karar vermek zorunda kalır — ikisini birden tutamaz.
+**WHY:** boğaz'e sırayla girerseniz hepiniz aynı görüş hattını tek tek çıkarsınız. Yaklaşımı bölünce savunucu hangi açıyı tutacağına karar vermek zorunda kalır — ikisini birden tutamaz.
 
 ## 4. Savunma Stratejileri
 
@@ -301,7 +301,7 @@ Mid almak istiyorsan en az iki oyuncu commit et: biri Mid Entrance'tan girer, di
 
 ### Savunma Tarafında Mid
 
-Mid'i savunmak agresif peek demek değil. Smoke ile Mid Pipes görüş hattı'ını kapat, tel veya tuzak ile bilgi al. Mid'deki oyuncu ölürse her iki site'ın flank güvenliği biter.
+Mid'i savunmak agresif peek demek değil. Smoke ile Mid Pipes görüş hattını kapat, tel veya tuzak ile bilgi al. Mid'deki oyuncu ölürse her iki site'ın flank güvenliği biter.
 
 ### Mid Kontrol Durumları
 
@@ -427,7 +427,7 @@ Viper burada güçlü çünkü duvarı tek seferde iki koridoru keser.
 
 ## 10. Comp / Harita Etkileşim Notları
 
-- Corrode'da controller almak zorundasın — dar koridorlarda smoke olmadan açı kapatamazsın. Viper ve Omen uzun görüş hattı'ları tek başına kapatır, başkası kapatamaz.
+- Corrode'da controller almak zorundasın — dar koridorlarda smoke olmadan açı kapatamazsın. Viper ve Omen uzun görüş hattını tek başına kapatır, başkası kapatamaz.
 - Killjoy veya Cypher al. Tel ve tuzak, sınırlı giriş noktalarını sana bedavaya kapatır — başka haritada bu kadar verimli çalışmaz.
 - Flash'lı duelist seç: Phoenix, Yoru. Dash-tabanlı duelist alırsan dar alan onun hareket becerisini sıfırlar — o yüzden Jett veya Neon burada zayıf kalır.
 - Breach veya Fade al. Stun ve flash duvarların arasından geçer, rakip stack'ini dağıtır. Geniş alan initiator'ı alırsan util'i boşa gider.
@@ -521,7 +521,7 @@ Senin işin şu: düşmanın koridor alışkanlıklarını oku ve bir önceki ro
 - **B CT:** Savunmanın B'ye geldiği yol.
 
 ### Mid
-- **Mid Pipes:** Boru bölgesi — op görüş hattı'ı ve bilgi pozisyonu. Util atmadan geçme.
+- **Mid Pipes:** Boru bölgesi — op görüş hattını ve bilgi pozisyonu. Util atmadan geçme.
 - **Mid Connector:** Her iki site'a bağlanır. Flank ve rotate yolu olarak kullan.
 - **Mid Entrance:** Saldırı tarafına yakın giriş. Erken kontrol için çekişilen alan — bırakırsan düşman mid'i bedava alır.
 
@@ -577,7 +577,7 @@ Full buy'da Op al diye bir kural yok Corrode'da. Dar koridorlar Op'un mesafe ava
 
 ### Bonus / Anti-Eco
 
-Anti-eco round'unu hafife alma. Corrode'un dar yapısı eco yapan takıma Classic sağ-tık ve Shorty ile sürpriz kill verir. Anti-eco'da dar koridora girme — düşmanı sana gelmeye zorla. A Main gibi uzun görüş hattı'lardan oyna, B Tunnel gibi dar alanlarda eco takımına yakın mesafe dövüşü verme.
+Anti-eco round'unu hafife alma. Corrode'un dar yapısı eco yapan takıma Classic sağ-tık ve Shorty ile sürpriz kill verir. Anti-eco'da dar koridora girme — düşmanı sana gelmeye zorla. A Main gibi uzun görüş hattını oyna, B Tunnel gibi dar alanlarda eco takımına yakın mesafe dövüşü verme.
 
 ## 17. Anti-Strat
 
@@ -642,4 +642,4 @@ Anti-eco round'unu hafife alma. Corrode'un dar yapısı eco yapan takıma Classi
 
 Op'a kuru peek atma. Bu duel'i kaybedersin.
 
-**WHY:** Op görüş hattına bağımlı. Corrode'da tek smoke tüm görüş hattı'ı keser — dar koridor bu işi kolaylaştırır. 4700 kredilik silahı duvara baktırmak bu kadar basit.
+**WHY:** Op görüş hattına bağımlı. Corrode'da tek smoke tüm görüş hattını keser — dar koridor bu işi kolaylaştırır. 4700 kredilik silahı duvara baktırmak bu kadar basit.

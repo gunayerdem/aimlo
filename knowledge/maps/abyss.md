@@ -53,14 +53,14 @@ WHY: Abyss'te uçurum kenarları rakibe off-angle veriyor. Bilgi olmadan girdiğ
 IF: A Main'de entry oyuncusu site'a adım bile atmadan ölüyor.
 MEANING: Smoke ve flash yok. A Heaven'daki savunan + site içindeki anchor seni açık koridorda görüyor. A Ramp da temizlenmemiş.
 COUNTER: Smoke: A Heaven + A CT çıkışı. Flash: A Main'den site'a doğru at — flash patladığı an entry oyuncusu swing atar. Ramp temiz değilse girme, crossfire yersin. Mid'den A Link üzerinden split ikinci fazı kurar. Spike: A Default, uçurumdan uzak.
-WHY: A site geniş. Util olmadan savunan her açıdan ateş açar. Smoke görüş hattı'ı keser, savunanı tek karar noktasına sıkıştırır. Flash tepki avantajını sıfırlar.
+WHY: A site geniş. Util olmadan savunan her açıdan ateş açar. Smoke görüş hattını keser, savunanı tek karar noktasına sıkıştırır. Flash tepki avantajını sıfırlar.
 
 **Pattern 3: B Execute**
 
 IF: B Lane'de birden fazla oyuncu aynı anda ölüyor — dar geçişte yığılma var.
 MEANING: B Lane Abyss'in en dar yeri. Aynı anda girince savunan tek spray'le hepinizi biçer.
 COUNTER: Stagger gir — ilk oyuncu flash'la girer, ikincisi ilk duel bitmeden girmez. Smoke: B Site CT + B Heaven. B Link'ten split ekle, savunan iki açıyı aynı anda tutamaz. Spike: B Default. Post-plant: B Main + B Link crossfire.
-WHY: Dar geçişte savunan nişanını değiştirmek zorunda kalmıyor çünkü herkes aynı görüş hattı'a giriyor. Stagger ve split onu iki açıyla uğraşmaya zorlar.
+WHY: Dar geçişte savunan nişanını değiştirmek zorunda kalmıyor çünkü herkes aynı görüş hattını giriyor. Stagger ve split onu iki açıyla uğraşmaya zorlar.
 
 **Pattern 4: Mid Bridge Control**
 
@@ -256,7 +256,7 @@ WHY: Post-plant'in tek amacı zamanı yemek ve defuse'u engellemek. Kenarda öl�
 
 ## 10. Ekonomi Stratejileri
 
-**Operator Ekonomisi**: Op Abyss'te çok güçlü — uzun görüş hattı'lar her yerde. Op alan oyuncu Bridge'e gider, takım onun etrafında round planlar. Op'u uçurumdan düşürürsen para gider, round gider. Bunu yapma.
+**Operator Ekonomisi**: Op Abyss'te çok güçlü — uzun görüş hattını her yerde. Op alan oyuncu Bridge'e gider, takım onun etrafında round planlar. Op'u uçurumdan düşürürsen para gider, round gider. Bunu yapma.
 
 **Force Buy Kararları**: Force buy'da B'ye rush at. B site kapalı — Spectre ve shotgun orada güçlü. A site'a force buy silahıyla girme, mesafe seni ezer.
 
@@ -283,6 +283,6 @@ WHY: Post-plant'in tek amacı zamanı yemek ve defuse'u engellemek. Kenarda öl�
 
 **Rakip Bridge'e duvar çekiyorsa**: Duvarı erken kıracak util hazırla: Raze grenade ya da Breach molly'si. Duvar kırılınca push at — rakip duvara güvenip arkasında agresif durmuş olabilir. İstersen duvarı dikkate alma, diğer taraftan split yap. Duvar bir tarafı kapatırken diğer taraf açılır.
 
-**Rakip Op Bridge'de dominant oynuyorsa**: Bridge'e smoke at, Op'un görüş hattı'ını kes. Flash'la salla, flash sonrası peek at. Jett dash ya da Raze atlamasıyla hızlı geç, Op'un scope açmasına fırsat verme. Op oyuncusu aynı açıyı tutuyorsa off-angle'dan peek at.
+**Rakip Op Bridge'de dominant oynuyorsa**: Bridge'e smoke at, Op'un görüş hattını kes. Flash'la salla, flash sonrası peek at. Jett dash ya da Raze atlamasıyla hızlı geç, Op'un scope açmasına fırsat verme. Op oyuncusu aynı açıyı tutuyorsa off-angle'dan peek at.
 
 **Round-to-Round Uyum Prensibi**: Abyss'te anti-strat statik değil. Kenar oyununu kapattın, rakip kenarı bırakır. Bir sonraki round kenar tekrar açılır çünkü rakip artık deny beklemez. Aynı karşı hamleyi üst üste kullanma — rakip seni de okur, her round anti-strat'ı güncelle.

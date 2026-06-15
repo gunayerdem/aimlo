@@ -22,7 +22,7 @@
 IF: A Main'e flash ya da smoke olmadan giriyorsun — Tree ve Stairs açılarına yürüyerek dalıyorsun.
 MEANING: Tree'den ve Stairs'ten iki ayrı açı seni aynı anda görüyor. Defender açıyı tutarak bekliyor, sen yürüyerek giriyorsun — ilk atış zaten onun.
 COUNTER: Girmeden önce Tree'yi smoke'la. Stairs yönüne flash at. Flash patlar patlamaz swing at — arada boşluk bırakma. Girdikten sonra Root'u al, yoksa flank yersin.
-WHY: A Main dar, defender iki yükseklikten seni izliyor. Smoke görüş hattı'ı keser. Flash defender'ı açıdan söker. Root'u kontrol etmeden yapılan her A execute flank riski taşır.
+WHY: A Main dar, defender iki yükseklikten seni izliyor. Smoke görüş hattını keser. Flash defender'ı açıdan söker. Root'u kontrol etmeden yapılan her A execute flank riski taşır.
 
 **Pattern 2: B Duvar Timing Hataları**
 IF: Kırılabilir duvarı round başlar başlamaz kırıyorsun — her seferinde, hemen.

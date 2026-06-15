@@ -9,7 +9,7 @@ tags: [matchup, utility, flash-heavy, smoke-stack, composition]
 
 ## 1. Matchup Özü
 
-Flash heavy comp (KAY/O + Skye + Breach + Yoru ikilileri) bir round'da 6-10 flash atar — savunmanın göz refleksini yorar, sonra entry açar. Smoke stack comp (Omen + Viper, Omen + Harbor, Astra + Brimstone çift controller) görüş hattı'ları katmanlı smoke ile kapatır — ne savunma görür ne de saldıran. İki comp da savunmanın göz ekonomisini hedef alır, ama farklı yoldan: biri gözü yorar, diğeri gözü tamamen siler.
+Flash heavy comp (KAY/O + Skye + Breach + Yoru ikilileri) bir round'da 6-10 flash atar — savunmanın göz refleksini yorar, sonra entry açar. Smoke stack comp (Omen + Viper, Omen + Harbor, Astra + Brimstone çift controller) görüş hattını katmanlı smoke ile kapatır — ne savunma görür ne de saldıran. İki comp da savunmanın göz ekonomisini hedef alır, ama farklı yoldan: biri gözü yorar, diğeri gözü tamamen siler.
 
 ## 2. Kim Avantajlı
 
@@ -21,7 +21,7 @@ Flash heavy comp (KAY/O + Skye + Breach + Yoru ikilileri) bir round'da 6-10 flas
 - 3 flash üst üste patladıysa: ilki savunmayı yoklar, ikincisi yakalar, üçüncüsü entry açar.
 
 **Smoke stack lehine:**
-- Harita uzun görüş hattı'lı (Breeze, Icebox) — smoke tüm hattı kapatır, flash o hatta ulaşamaz.
+- Harita uzun görüş hattını (Breeze, Icebox) — smoke tüm hattı kapatır, flash o hatta ulaşamaz.
 - Smoke içinden atılan flash boşa gider — flash heavy'nin entry util'i smoke duvarında ölür.
 - Çift ult aynı anda hazır (iki controller ult'u birden) — entry penceresi tamamen kapanır.
 - Spike kurulduktan sonra smoke defuse açısını kapatır — flash heavy içeri giremez.
@@ -53,7 +53,7 @@ Flash heavy comp (KAY/O + Skye + Breach + Yoru ikilileri) bir round'da 6-10 flas
 **IF** Smoke stack site'ı tek smoke ile kapatmaya çalıştı
 **MEANING** Çift controller avantajı boşa gitti. Tek smoke normal controller işidir, stack işi değil.
 **COUNTER** Her push'ta iki smoke'u aynı rotasyona yatır — iki controller'ın smoke'unu üst üste bindir. Katmanlı smoke stack'in asıl silahıdır.
-**WHY** Smoke stack tek smoke ile çalışmaz. Katmanlı smoke görüş hattı'ı tamamen siler. Tek smoke bir açıyı kapatır, stack her açıyı kapatır.
+**WHY** Smoke stack tek smoke ile çalışmaz. Katmanlı smoke görüş hattını tamamen siler. Tek smoke bir açıyı kapatır, stack her açıyı kapatır.
 
 ---
 
@@ -108,7 +108,7 @@ Ult tarafında iki controller ult'u site'ı kilitler. Flash heavy'nin round çev
 
 **Dönüm 2 — Smoke stack çift ult durumu:** İki controller ult'u aynı anda hazırsa smoke stack round'u kazanır. Ult'lar boşsa matchup dengeli.
 
-**Dönüm 3 — Harita tipi:** Uzun görüş hattı'lı haritada smoke stack baskın, kısa mesafeli haritada flash heavy baskın. Harita seçimi matchup'ın yarısıdır.
+**Dönüm 3 — Harita tipi:** Uzun görüş hattını haritada smoke stack baskın, kısa mesafeli haritada flash heavy baskın. Harita seçimi matchup'ın yarısıdır.
 
 **Dönüm 4 — Flash counter varlığı:** Smoke stack takımında KAY/O varsa flash heavy'nin ult'u da iptal olur. KAY/O yoksa flash heavy ult'ta avantajlı.
 
@@ -120,6 +120,6 @@ Flash heavy comp'ta iki flash üst üste aynı anda patlarsa üçüncü flash'a 
 
 Smoke stack comp'ta smoke'ları push'lara dağıt, hepsini tek seferde harcama. Bir sonraki push'ta smoke'un boşsa avantaj gider. Push gelmeden smoke'u at — karşı taraf push ederken değil, etmeden önce görüş hattı kapanmış olmalı.
 
-Smoke stack oynuyorsan: smoke savunmayı değil, görüş hattı'ı kapatır. görüş hattı kapandığında karşı taraf seni göremez, sen smoke arkasından açıyı tutarsın. Smoke'u doğru görüş hattı'a, karşı taraf push etmeden önce at.
+Smoke stack oynuyorsan: smoke savunmayı değil, görüş hattını kapatır. görüş hattı kapandığında karşı taraf seni göremez, sen smoke arkasından açıyı tutarsın. Smoke'u doğru görüş hattını, karşı taraf push etmeden önce at.
 
 **Özet:** Flash heavy gözü yorar, smoke stack gözü siler. Flash'ını veya smoke'unu her push'a bölen taraf kazanır.

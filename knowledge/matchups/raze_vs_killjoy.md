@@ -23,10 +23,10 @@ Killjoy'un kiti yerde sabit durur, kıpırdamaz. Raze'in botu siteye dalıp Kill
 **COUNTER**: Turret'i rafa, kasaya ya da yüksek zemine al — granata düz açı verme
 **WHY**: Yer seviyesindeki turret, granat için bedava hedef
 
-**IF**: sıçrama ile molly'nin olduğu alandan atlanarak geçiliyor
+**IF**: Sıçrama ile molly'nin olduğu alandan atlanarak geçiliyor
 **MEANING**: Hasar bölgen boşa gidiyor, Raze hiç hasar yemeden içeri giriyor
 **COUNTER**: Molly'ni giriş köşesine değil, içeri girdikten sonraki ikinci adıma göm — Raze sıçrama ile ilk noktayı geçer ama ikinciye basar
-**WHY**: sıçrama sadece ilk tuzak katmanını atlatır, derinlikteki tuzağı atlatamaz
+**WHY**: Sıçrama sadece ilk tuzak katmanını atlatır, derinlikteki tuzağı atlatamaz
 
 ### Killjoy, Raze'i Cezalandırıyorsa
 

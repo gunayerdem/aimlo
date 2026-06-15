@@ -171,9 +171,9 @@ Takım arkadaşını iyileştirir veya ayağa kaldırır.
 
 ### BREEZE
 
-- **Viper — A Tunnel duvar + B Main duvar:** Uzun görüş hattı'ları keser.
+- **Viper — A Tunnel duvar + B Main duvar:** Uzun görüş hattını keser.
 - **Sova — Double recon mid:** Breeze info ağırlıklı, recon atışını çalış.
-- **Jett — Ass pozisyonunda Op:** Breeze'in uzun görüş hattı'ları Op'a göre, Jett burada serbest.
+- **Jett — Ass pozisyonunda Op:** Breeze'in uzun görüş hattını Op'a göre, Jett burada serbest.
 - **Harbor — Mid duvar + B duvar:** Double controller için ideal harita.
 - **Cypher — Long görüş hattı tel:** A Cave veya B Pyramid flank'ini tut.
 

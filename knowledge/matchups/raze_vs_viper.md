@@ -28,7 +28,7 @@ Viper oynuyorsan: duvarı sürekli açık tutma, yakıtın biter. Raze seni oyal
 **COUNTER**: Viper bot'un yoluna molly koyar
 **WHY**: Bot duvardan etkilenmez, içinden dümdüz geçer
 
-**IF**: sıçrama duvarın üstünden atlayıp Viper'ın arkasına iniyorsun
+**IF**: Sıçrama duvarın üstünden atlayıp Viper'ın arkasına iniyorsun
 **MEANING**: Hasar bölgesini tamamen atlıyorsun, Viper seni göremeden içeri giriyorsun
 **COUNTER**: Viper tahmin edilebilir iniş noktalarına önceden molly hazırlar
 **WHY**: Duvarın üstünden sıçrama tek yön — geri dönemezsin, Viper bunu bilir

@@ -16,7 +16,7 @@ Fade seni bulmaya çalışır, sen de bulunmamaya. Recon, bot ve stun zinciriyle
 ## 2. Kim Avantajlı?
 
 **Jett lehine:**
-- Uzun görüş hattı'da (Breeze, Icebox) Fade botu yakın-orta mesafede kovalar; sen op'la önce bitirirsin.
+- Uzun görüş hattını (Breeze, Icebox) Fade botu yakın-orta mesafede kovalar; sen op'la önce bitirirsin.
 - Fade util'ini harcamışken — recon, stun ve bot yoksa o round'u aggressive bas, kazan.
 - Vertical çıkışın varsa (Split A Main, Icebox Rafters) yukarı zıplama yukarı çık, botun yer hattını atla.
 

@@ -45,7 +45,7 @@ Raze, her haritada. Reyna sadece takım dağınık oynayınca tehlikelidir — h
 
 ---
 
-**IF** sıçrama ile tepeden iniyorsun, Reyna yerde duruyor
+**IF** Sıçrama ile tepeden iniyorsun, Reyna yerde duruyor
 **MEANING** Yukarıdan geliyorsun, Reyna'nın yere bakacak açısı yok
 **COUNTER** sıçramai geniş alanlarda değil dar koridorlarda kullan. Dar giriş Reyna'nın seni görmesini geciktirir
 **WHY** Reyna'nın kaçışı onu görünmez yapar ama hep yerde tutar. Yukarıdan gelen sıçramae karşı kaçış işe yaramaz — kaçacak yer yok.

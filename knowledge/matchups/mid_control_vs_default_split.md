@@ -29,7 +29,7 @@ Saldırı mid'i alır, iki site'a da rotate baskısı kurar. Savunma mid'i biler
 ## 3. Önemli Düellolar
 
 **IF** Saldırı round başı mid'e smoke + flash yatırdı
-**MEANING** Savunmanın mid oyuncusu kör ve görüş hattı'sız — saldırı mid'e girer
+**MEANING** Savunmanın mid oyuncusu kör ve görüş hattını — saldırı mid'e girer
 **COUNTER** Flash'ı yemeden back pozisyona çekil. Agresif hold yapma. Mid'i ver ama pozisyonunu değiştir — mid gider, sen rotate'ini zamanında yaparsın
 **WHY** Tek oyuncu 2-3 saldırgana karşı duramaz. Mid'i bedava vermekle bilgi alıp çekilmek farklı şeyler — ikincisinde rotate'ini daha erken başlatırsın
 
@@ -37,7 +37,7 @@ Saldırı mid'i alır, iki site'a da rotate baskısı kurar. Savunma mid'i biler
 
 **IF** Savunma mid'e sentinel kurdu — tel + kamera
 **MEANING** Mid girişindeki tel hattı, saldırının mid kontrolünü savunma için bilgiye çevirir — tel patlayınca savunma haberdar olur
-**COUNTER** Initiator util'iyle teli sök: hasar oku teli patlatır, KAY/O bıçağı kamerayı reveal eder. Hat kırılınca mid duellosu açılır
+**COUNTER** Initiator util'iyle teli sök: Hasar oku teli patlatır, KAY/O bıçağı kamerayı reveal eder. Hat kırılınca mid duellosu açılır
 **WHY** Tel kurmak savunma için ucuz, değeri yüksek. Sen teli sökmek için util harcarsan retake'te o util'i bulamazsın — ekonomik baskı sana biner
 
 ---

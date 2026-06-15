@@ -40,7 +40,7 @@ Raze oynuyorsan: close range'de Sova'nın util'i seni durduramaz, üstüne git. 
 ---
 
 **IF** Sova hasar oku Raze'in sıçrama iniş noktasına atılmış
-**MEANING** sıçrama ile havaya çıktın, indiğin noktada dart seni bekliyor — yüksek hasar yersin.
+**MEANING** Sıçrama ile havaya çıktın, indiğin noktada dart seni bekliyor — yüksek hasar yersin.
 **COUNTER** İniş noktanı değiştir. Aynı hattan her round inme. Sova'nın hasar oku sabit noktalara çalışır, sen pozisyonunu sabitleme.
 **WHY** Sova hasar oku lineup'ları ezberlenmiş noktalara atılır. Aynı yere inersen dart bedava hasar yer.
 
@@ -101,7 +101,7 @@ Asıl fark şu: Sova util'i round başında çıkar ve biter. Raze util'i esnek,
 
 **Bind (Raze avantajlı):** Close range Raze'in oyunu. Sova Bind'da Raze'i durduracak uzun hat bulamaz.
 
-**Split (Raze avantajlı):** Dar koridorlar Raze molly için biçilmiş kaftan. Sova recon dar hatlarda yer değiştirme almana izin vermez — sıçrama ile yukarı çık, recon ground seviyesini tarar.
+**Split (Raze avantajlı):** Dar koridorlar Raze molly için biçilmiş kaftan. Sova recon dar hatlarda yer değiştirme almana izin vermez — Sıçrama ile yukarı çık, recon ground seviyesini tarar.
 
 **Sunset (Raze avantajlı):** Dar choke ve close range Raze meta. Sova Sunset'te zayıf pick.
 
@@ -109,7 +109,7 @@ Asıl fark şu: Sova util'i round başında çıkar ve biter. Raze util'i esnek,
 
 **Flip 1 — Recon reveal:** Recon görüşünde kaldın, takım trade'e hazırlandı. Giriş anında ikinci düşman gelir, sen düşersin.
 
-**Flip 2 — hasar oku inişi yakaladı:** sıçrama ile indin, dart orada bekliyordu. Düşük HP ile round devam eder, sıradaki düelloda bir düşman düşünce sen de düşersin.
+**Flip 2 — Hasar oku inişi yakaladı:** Sıçrama ile indin, dart orada bekliyordu. Düşük HP ile round devam eder, sıradaki düelloda bir düşman düşünce sen de düşersin.
 
 **Flip 3 — Ult anchor'ı yakaladı:** Sova sabit durduysa Raze ult'u tek vurur, Sova'nın util döngüsü biter.
 

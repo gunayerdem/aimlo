@@ -93,7 +93,7 @@ Round, çevirici ult kimin elindeyse o tarafa döner: hangi tarafta hazır bir u
 
 **Split (savunma avantajlı):** Dar site, dikey play, sentinel kurulumu — savunma molly'sini ve flash'ını katman katman patlatır. Saldırı, pozisyon avantajını korumak için daha çok oyuncu harcar.
 
-**Breeze (saldırı avantajlı):** Geniş site, çapraz ateş için alan bol. Savunma uzun görüş hattı'dan girmek zorunda — girişi açıkta kalır.
+**Breeze (saldırı avantajlı):** Geniş site, çapraz ateş için alan bol. Savunma uzun görüş hattını girmek zorunda — girişi açıkta kalır.
 
 **Icebox (savunma avantajlı):** Plant açıları kısıtlı, dikey savunma mümkün. Savunma A ile B'nin üstünden çoklu açı kurar.
 

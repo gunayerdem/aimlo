@@ -6,7 +6,7 @@
 - Jett'in tek işi round'u açmak. Sen round kapatan duelist değilsin, round başlatan duelistsin.
 
 ## 2. Temel Sorumluluklar
-- **Atak:** İlk peek'i dash veya zıplamayla sen at. İlk düelloyu kazan. Takımın için tehlikeli görüş hattı'ı smoke'la kapat. Tam alımda uzun açıyı Op'la tut.
+- **Atak:** İlk peek'i dash veya zıplamayla sen at. İlk düelloyu kazan. Takımın için tehlikeli görüş hattını smoke'la kapat. Tam alımda uzun açıyı Op'la tut.
 - **Defans:** Op veya tüfekle off-angle tut, kill aldıysan dash'le çekil. Zıplamayla rakibin beklemediği yükseklikten gel. Erken bilgi al, sonra geri çekil.
 - **Takım senden ne bekliyor:** Atakta açılış kill'ini. Defansta agresif Op kill'ini. Lurk'ü değil, entry'yi.
 
@@ -71,7 +71,7 @@ WHY: Smoke'un kısa süreli; erken attıysan tam geçişte zaten dağılmış ol
 - **Güçlü haritalar:** Ascent (A Short dash, Mid Op), Breeze (uzun açı = Op-Jett), Haven (C Long, A Short), Lotus (A Main, C Main dash açıları).
 - **Zayıf haritalar:** Fracture (çok açı var, dash dağılıyor, yakın dövüş bol), Pearl (dar koridor, dikey alan yok).
 - **Spesifik:** Ascent A Short dash'ini iki round sonra okurlar — üçüncüde zıplayarak çık ya da bekle. Breeze'de A sütunundan Mid'i Op'la sen kapat.
-- **Açık, uzun hatlar Jett'in evi:** Breeze ve Icebox gibi geniş, uzun görüş hattı'lı haritalarda Op-Jett en güçlü; dash'le açıyı kapatır, kaçarsan dash'le geri çekilirsin. Dar, çok köşeli haritalarda (Pearl, Fracture, Split) dash daha az iş görür çünkü her köşede yakın dövüş seni bekler — buralarda Op'tan çok tüfekle entry'ye yaslan.
+- **Açık, uzun hatlar Jett'in evi:** Breeze ve Icebox gibi geniş, uzun görüş hattını haritalarda Op-Jett en güçlü; dash'le açıyı kapatır, kaçarsan dash'le geri çekilirsin. Dar, çok köşeli haritalarda (Pearl, Fracture, Split) dash daha az iş görür çünkü her köşede yakın dövüş seni bekler — buralarda Op'tan çok tüfekle entry'ye yaslan.
 - **Dikey alanı kullan:** Jett zıplamasıyla rakibin yere bakan crosshair'ini boşa düşürür. Yükseklik avantajı olan noktalarda (kutular, platformlar, üst geçişler) zıplama-entry'si en değerli; düşman seni göz hizasında beklerken sen üstten gelirsin.
 - **Smoke'unu giriş hattına göre planla:** Site execute'unda smoke'unu en tehlikeli tek açıyı (genelde uzun hat ya da arkadan bakan flank açısı) kapatmak için kullan, kendi geçişine değil. Kısa süreli olduğu için tam giriş saniyesine denk getir.
 

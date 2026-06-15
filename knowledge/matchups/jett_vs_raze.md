@@ -15,7 +15,7 @@ Jett dash'e dayanır, Raze util'e. Jett'in tek kaçış kartı dash — bir kez 
 
 Harita belirler — karakter olarak net üstünlük kimsede yok.
 
-- **Uzun görüş hattı'lı haritalar** (Breeze, Haven, Ascent): Jett'in Op ekonomisi açık, Raze burada pick alamaz.
+- **Uzun görüş hattını haritalar** (Breeze, Haven, Ascent): Jett'in Op ekonomisi açık, Raze burada pick alamaz.
 - **Dar koridor haritaları** (Bind, Split, Sunset): Raze molly + sıçrama ile baskın, Jett'in dash'i tek yönde sıkışır.
 - **Icebox**: Karakter avantajı sıfır — bot sesini duyunca cover al, dash cooldown'dayken öne çıkma.
 

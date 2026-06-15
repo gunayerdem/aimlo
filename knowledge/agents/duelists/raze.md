@@ -19,7 +19,7 @@
 6. **Bombayı retake'e saklamak** — Bombanın en değerli anı execute. Post-plant için saklarsan temizleme gücünü boşa harcarsın.
 7. **Botun kimseyi kilitleyemediği anı görmezden gelmek** — Bot kimseyi kovalamasa bile o açının boş olduğunu söylüyor. Bu bilgiyi oku, körlemesine girme.
 8. **Kendi util'inle kendine hasar vermek** — Raze'in bombası ve granatı sana da hasar verir. Çok yakına atarsan ya da patlama menzilinde durursan, kavgaya yarım canla girersin. Util'i at, sonra menzilden çık.
-9. **Sıçrama iner inmez ateş edememek** — sıçrama havadayken ya da iniş anında nişanın oturmaz; düşürmüşsen ya da hareket halindeyken ateş edersen seri kaçar. İnişi düşmana değil, hemen yanındaki bir kapağa/duvara denk getir, yere basınca crosshair'i yerleştir, öyle aç.
+9. **Sıçrama iner inmez ateş edememek** — Sıçrama havadayken ya da iniş anında nişanın oturmaz; düşürmüşsen ya da hareket halindeyken ateş edersen seri kaçar. İnişi düşmana değil, hemen yanındaki bir kapağa/duvara denk getir, yere basınca crosshair'i yerleştir, öyle aç.
 
 ## 4. Kalıp -> Anlam
 IF: Site'a sıçrama iniyorsun ve anında ölüyorsun
@@ -52,15 +52,15 @@ MEANING: Bombayı/granatı kendine fazla yakın atıyorsun ya da patlama menzili
 COUNTER: Util'i at, geri çekil, patlamayı menzil dışından izle. Hasar düşmana ait, sana değil.
 WHY: Raze'in patlayıcıları sana da hasar verir. 100 canla başlaması gereken duelloya 40 canla girersen, alacağın açılışı düşmana hediye edersin.
 
-IF: sıçrama içeri dalıp orta meydana, açık alana iniyorsun
-MEANING: sıçrama bir kapağın/açının ardına değil, herkesin gördüğü boşluğa atıyorsun
+IF: Sıçrama içeri dalıp orta meydana, açık alana iniyorsun
+MEANING: Sıçrama bir kapağın/açının ardına değil, herkesin gördüğü boşluğa atıyorsun
 COUNTER: İnişi bir kutunun, kapağın ya da köşenin hemen ardına denk getir. Havadan girişin amacı sürpriz açı, sahne ortası değil.
-WHY: sıçrama havadayken ne nişan alabilir ne kaçabilirsin — bir uçan hedefsin. Açık alana inersen savunmanın tek yapması gereken yukarı bakmak.
+WHY: Sıçrama havadayken ne nişan alabilir ne kaçabilirsin — bir uçan hedefsin. Açık alana inersen savunmanın tek yapması gereken yukarı bakmak.
 
 IF: İki sıçrama kaçmak için kullandın ama düşman yine de seni vurdu
 MEANING: İniş noktasında silahın hazır değildi — havada ya da iniş anında ateş açtın
 COUNTER: Kaçış sıçrama güvenli, taranmış bir noktaya at. İner inmez crosshair'i bekleyebileceğin yöne yerleştir, gerekiyorsa o ana kadar şarjörünü tamamla.
-WHY: sıçrama seni mesafeden kurtarır ama kör bir köşeye atarsan tava tutulursun. Kaçış ancak iniş noktası senin lehine açıysa kaçıştır.
+WHY: Sıçrama seni mesafeden kurtarır ama kör bir köşeye atarsan tava tutulursun. Kaçış ancak iniş noktası senin lehine açıysa kaçıştır.
 
 ## 5. Harita Etkileşimleri
 - **Güçlü olduğun haritalar:** Bind (teleporter'dan bot atarsın, bedava bilgi gelir; dar site'larda bomba çok değer eder), Split (dar koridorlar sıçrama entry'yi ve bombayı zirveye taşır), Fracture (farklı girişlerden beklenmedik açılarla içeri dalarsın), Lotus (A ve C'deki dar girişler bomba temizliğini ödüllendirir).

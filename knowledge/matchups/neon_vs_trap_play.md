@@ -44,7 +44,7 @@ Neon, sprint ve slide ile sahayı herkesten hızlı geçer. Tuzak kuran ajanlar 
 
 **Tuzak oyuncusu Neon'a sürekli eziliyorsa**: Tuzakların dağınık ve tek katmanlı. Neon tek bir boşluk bulup geçer. Teli, botu, mollyyi üst üste diz — birini geçince hemen diğerine düşsün.
 
-**Neon tuzaklara sürekli ölüyorsa**: Hiçbir şeyi temizlemeden hazır kuruluma sprint ediyorsun. Önce duvarla görüş hattı'ı kapat, stunle tuzakçıyı uzaklaştır, sonra sprint et. Util olmadan hız, sadece hızlı ölümdür.
+**Neon tuzaklara sürekli ölüyorsa**: Hiçbir şeyi temizlemeden hazır kuruluma sprint ediyorsun. Önce duvarla görüş hattını kapat, stunle tuzakçıyı uzaklaştır, sonra sprint et. Util olmadan hız, sadece hızlı ölümdür.
 
 ## AIMLO Ne Demeli
 

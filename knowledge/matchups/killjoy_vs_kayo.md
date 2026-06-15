@@ -101,7 +101,7 @@ Ult farkı: Killjoy'un ult'ı 8 puan, KAY/O'nun ult'ı 7 puan. KAY/O ult'ı bir 
 
 **Split (KAY/O hafif avantajlı):** Yakın mesafe knife Killjoy savunmasını kapatır.
 
-**Icebox (Killjoy avantajlı):** Uzun görüş hattı'lar KAY/O'nun knife menzilini zorlar — cihazlar daha kolay güvende kalır.
+**Icebox (Killjoy avantajlı):** Uzun görüş hattını KAY/O'nun knife menzilini zorlar — cihazlar daha kolay güvende kalır.
 
 ## 6. Dönüm Noktalarıı
 

@@ -30,7 +30,7 @@ Smoke perdedir, duvar değil. İçinden geçilir. Bunu ikisi de bilmeli.
 
 ---
 
-**IF**: Controller smoke'larını yenileyemiyor ve bu boşlukta açık görüş hattı'lar oluşuyorsa
+**IF**: Controller smoke'larını yenileyemiyor ve bu boşlukta açık görüş hattını oluşuyorsa
 **MEANING**: Duelist o pencerede peek alır, öldürür, dash'le güvene çekilir. Smoke'u yenilemesi geç dolan controller'lar o an tamamen açık kalır.
 **COUNTER**: Controller olarak — smoke biter bitmez takımına söyle, pozisyon değiştir, sabit durma. Duelist sabit hedefe peek atar. Smoke yokken cover arkasına çekil.
 **COUNTER**: Duelist olarak — smoke'un ne zaman biteceğini takım sesinden ya da görsel işaretten takip et. O pencere açılınca peek al, kapanınca çekil.

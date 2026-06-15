@@ -7,7 +7,7 @@ Bu kit yerinde duranı cezalandırır. Hareketli duvardan kimse geçmezse o yete
 
 ## 2. Temel Sorumluluklar
 - **Hareketli duvar**: Bu smoke değil, ilerleyen bir barikat. En az iki takım arkadaşı choke'ta hazır beklerken at. Hazır değillerse tut. Savunmada agresif peek attıktan sonra güvenle geri çekilmek için kullan.
-- **Eğri su duvarı**: Düz çekersen yeteneği yakarsın. Her atış en az iki ayrı görüş hattı'ı kesecek şekilde kıvrılmalı. Ascent B'de lane'den market kapısına doğru bük — koridoru ve market peek'ini aynı anda kapatırsın.
+- **Eğri su duvarı**: Düz çekersen yeteneği yakarsın. Her atış en az iki ayrı görüş hattını kesecek şekilde kıvrılmalı. Ascent B'de lane'den market kapısına doğru bük — koridoru ve market peek'ini aynı anda kapatırsın.
 - **Spike kubbesi**: Plant'çi spike'a dokunduğu an at, bir saniye önce değil. Erken atarsan plant bitmeden kırılır. İkinci iş: retake'de tek tehlikeli açıyı kapatmak.
 - **Ult**: Site alırken anchor'ı köşeden söküp çıkarmak için. Retake'de post-plant tutanları yerinden oynatmak için. Dar koridorda atma — düşman tek adımla havuzların arasından kaçar.
 - **Çağrı yap**: "Duvar çıkıyor", "duvar sola bükülüyor" de. Takım ne zaman takip edeceğini bilmezse yeteneğin hiçbir değeri kalmaz.
@@ -31,7 +31,7 @@ Bu kit yerinde duranı cezalandırır. Hareketli duvardan kimse geçmezse o yete
 
 **IF** Su duvarı her round düz bir hat olarak atılıyor
 **MEANING** Oyuncu bükme mekaniğini hiç çalışmamış. Harbor'ı ucuz bir Viper gibi oynuyor.
-**COUNTER** Custom'a gir. Her site için aynı anda iki görüş hattı'ı kesen bir bükülme bul. Ascent B: lane'den market'e. Pearl B: B main'den B hall'a. Bu noktaları ezberle.
+**COUNTER** Custom'a gir. Her site için aynı anda iki görüş hattını kesen bir bükülme bul. Ascent B: lane'den market'e. Pearl B: B main'den B hall'a. Bu noktaları ezberle.
 **WHY** Harbor'ın bütün gücü bükülmede. Düz duvar kit avantajını sıfırlar, seni Viper'ın daha kötü bir versiyonuna çevirir.
 
 **IF** Kubbe plant tamamlanmadan kırılıyor
@@ -107,7 +107,7 @@ Bu kit yerinde duranı cezalandırır. Hareketli duvardan kimse geçmezse o yete
 
 - **Haven (A-tier)**: Üç site sana esneklik verir. C site: su duvarını C long'dan platformun üzerinden bükerek garaj ve arka site açılarını kes. Ult C'de yıkıcıdır — geniş açık alan düşmana gayzerden kaçacak yer bırakmaz. A site: su duvarını A long'dan A short'a bük — heaven ve site açılarını kesersin. A long boyunca çekilen hareketli duvar takıma açık yaklaşımı geçecek zemini verir. B site Haven'da Harbor'ın en zayıf noktası — dar pencere choke'u duvarın değerini sınırlar, ult de yayılacak yer bulamaz.
 
-- **Breeze (A-tier)**: Geniş açık site'lar ult'un hüküm sürdüğü yer. A site: ult tüm piramit alanını ve mağarayı kaplar. Su duvarını A hall'dan mid kapılarına bükerek iki uzun görüş hattı'ı aynı anda kes. B site: B main boyunca çekilen hareketli duvar, tube'dan site'a güvenli geçiş sağlar. Standart B plant'te kubbe sütun açısını kapatır. B tunnel'dan çekilen su duvarı arka site boyunca bükülerek derin CT tutma noktasını keser. Ama Breeze, Harbor'ın savunma zayıflığını acımasızca cezalandırır — uzun görüş hattı'lar pasif savunmayı ölümcül yapar.
+- **Breeze (A-tier)**: Geniş açık site'lar ult'un hüküm sürdüğü yer. A site: ult tüm piramit alanını ve mağarayı kaplar. Su duvarını A hall'dan mid kapılarına bükerek iki uzun görüş hattını aynı anda kes. B site: B main boyunca çekilen hareketli duvar, tube'dan site'a güvenli geçiş sağlar. Standart B plant'te kubbe sütun açısını kapatır. B tunnel'dan çekilen su duvarı arka site boyunca bükülerek derin CT tutma noktasını keser. Ama Breeze, Harbor'ın savunma zayıflığını acımasızca cezalandırır — uzun görüş hattını pasif savunmayı ölümcül yapar.
 
 - **Split (B-tier)**: Dar koridorlar su duvarı bükme seçeneklerini kısar ama belirli noktalarda hareketli duvar çok güçlü. A main: rampaya çekilen hareketli duvar, takıma dar choke'tan push için kalkan verir. Mid: mid alttan üste çekilen hareketli duvar, Split'teki en güçlü mid alma araçlarından biri. B site: dar alan ult'u daha az verimli kılar ama spike üstünde kubbe değerli, çünkü oraya sadece bir veya iki açı ateş edebiliyor. Su duvarı B main'den köşenin etrafından site'a bükülür ama kıvrılma yarıçapı kısadır. Harbor burada niş bir seçim — takım her round A main veya mid kontrolünü zorlamayı planlıyorsa al.
 

@@ -42,10 +42,10 @@ Bu matchup bir bilgi savaşı. Sova'nın recon'u eski bilgi üretir — Jett yer
 
 ---
 
-**IF** hasar oku tam dash sonrası ineceğin noktaya atıldı
+**IF** Hasar oku tam dash sonrası ineceğin noktaya atıldı
 **MEANING** Dash biter bitmez hasar yersin, HP düşer, dashsiz kalırsın
 **COUNTER** Her round farklı bir noktaya in. Hasar oku sabit hedefleri vurur — hep aynı yere inersen ikinci round orada hazır bekler.
-**WHY** hasar oku lineup'ları ezberlenmiş hatlara kurulur. İniş noktanı değiştirirsen lineup boşa gider.
+**WHY** Hasar oku lineup'ları ezberlenmiş hatlara kurulur. İniş noktanı değiştirirsen lineup boşa gider.
 
 ---
 
@@ -112,7 +112,7 @@ Ult maliyeti ikisinde de aynı: 7 puan. Jett'in ult'u eco roundda parlar, Sova'n
 
 **Kırılma 2 — Recon'un dışına çıktın:** Yukarı sıçrayıp tarama alanının dışına çıkarsan Sova kör kalır, serbest hareket edersin.
 
-**Kırılma 3 — hasar oku tam iniş noktana denk geldi:** Hep aynı yere indiysen hasar oku kesin hasar verir. HP düşer, matchup Sova'ya kayar.
+**Kırılma 3 — Hasar oku tam iniş noktana denk geldi:** Hep aynı yere indiysen hasar oku kesin hasar verir. HP düşer, matchup Sova'ya kayar.
 
 **Kırılma 4 — Ult agresif hattını okudu:** Ult senin hattını biliyorsa dash ile bile tam çıkış zorlaşır. Post-plant pozisyonunu önceden değiştir.
 

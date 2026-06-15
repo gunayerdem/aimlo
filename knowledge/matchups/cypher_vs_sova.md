@@ -36,7 +36,7 @@ Cypher kendi bölgesini kilitler. Sova o kilidi kırmaya gelir.
 **IF** Sova hasar oku Cypher telinin üstüne patlattı
 **MEANING** Tel gitti, o geçitten artık bilgi gelmiyor, Sova oradan rahatça girer
 **COUNTER** Teli her el aynı yere koyma. Sova hasar oku sabit bir noktaya ezberlemiştir — yeri değiştir, dart boşa gitsin
-**WHY** hasar oku ezbere atılan bir hamledir. Teli döndürürsen ezberi tutmaz.
+**WHY** Hasar oku ezbere atılan bir hamledir. Teli döndürürsen ezberi tutmaz.
 
 ---
 

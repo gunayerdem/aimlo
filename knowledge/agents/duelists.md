@@ -132,7 +132,7 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
 ### Eşleşme İpuçları
 - **vs. Killjoy**: molly ve bot onun util'ini (tuzak, molly, bot) yok edebilir. Girmeden önce kurulumunu temizlemeye öncelik ver.
 - **vs. Sage**: Duvarının üstünden sıçrama at ya da molly ile duvar noktasından söküp at. Util'in onun oyalamalarını doğrudan kırar.
-- **vs. Viper**: sıçrama ile duvarının içinden geçip gafil avla. bot duvardan geçer.
+- **vs. Viper**: Sıçrama ile duvarının içinden geçip gafil avla. bot duvardan geçer.
 
 ---
 

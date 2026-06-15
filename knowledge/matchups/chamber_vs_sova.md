@@ -29,7 +29,7 @@ Sova'nın recon'u sen açıdan çıkmadan op pozisyonunu ele veriyor. Drone seni
 ## Tekrarlayan Başarısızlık Ne Anlama Gelir
 **Chamber** tarandıktan sonra hâlâ aynı açıda duruyorsa: recon sesini duyduğun an TP'ye bas ve farklı açıya geç. Tarandıktan sonra orada oturmak, Sova'ya haritayı hediye etmek demektir.
 
-**Sova** drone'u açarken Chamber'a ölüyorsa: drone'u Chamber'in görebildiği açıdan kullanıyorsun. Drone'u duvarın arkasından, Chamber'in görüş hattı'ı dışından aç. Drone'u sürerken bedenin yerinde donar.
+**Sova** drone'u açarken Chamber'a ölüyorsa: drone'u Chamber'in görebildiği açıdan kullanıyorsun. Drone'u duvarın arkasından, Chamber'in görüş hattını dışından aç. Drone'u sürerken bedenin yerinde donar.
 
 ## AIMLO Ne Demeli
 ### Oyuncu cezalandırılan taraftayken

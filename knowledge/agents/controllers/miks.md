@@ -11,7 +11,7 @@ Ama bu çift rol ancak controller temellerini bildiğinde işe yarar: duman zama
 ## 2. Yetenek Seti
 
 ### E — Smoke (signature)
-Senin ana görüş kapatma aracın. Harita üzerinde hedefleyici açılıp birden çok nokta işaretliyorsun, smoke o noktalara anında düşüyor — gecikme yok. Her turun başında bir bedava şarjın var. Asıl işin bu: doğru görüş hattı'ı doğru zamanda kapat. Retake için en az bir smoke sakla.
+Senin ana görüş kapatma aracın. Harita üzerinde hedefleyici açılıp birden çok nokta işaretliyorsun, smoke o noktalara anında düşüyor — gecikme yok. Her turun başında bir bedava şarjın var. Asıl işin bu: doğru görüş hattını doğru zamanda kapat. Retake için en az bir smoke sakla.
 
 ### C — Heal / Sersemletme
 İki modlu bir cihaz atıyorsun. Bir modu düştüğü yerdeki takım arkadaşını iyileştirir — takım arkadaşını iyileştirebilen birkaç ajandan birisin (Sage ve Skye'ın yaptığı gibi). Diğer modu düşmanı sersemletir: nişanı titretir, hareketini bozar. Heal modunu hasarlı takım arkadaşına, sersemletme modunu sıkışmış düşman açısına at. 2 şarjın var — birini destek, birini düşman bozmak için ayır.
@@ -138,7 +138,7 @@ A site'ın çok katlı yapısı smoke yerleştirmeni zorlar — yükseklik fark�
 Omen oyuncuları kitlerini yıllardır biliyor. Sadece smoke yarışına girersen deneyim farkı rakibin lehine. Aynı yarışa girme — Miks'in farkı destek: takımını iyileştir, entry'ye stim ver, Omen'in tek başına yapamadığını yap. Omen'in flash'inden sonra peek edecek düşmanı sersemletme ile boz.
 
 ### Viper ile — Tamamlayıcı güç
-Viper duvarı uzun görüş hattı'ları keserken sen smoke ile kısa açıları kapatırsın — çift katmanlı görüş kontrolü olur. Viper hasar verirken sen takımı heal ile ayakta tutarsın; ikiniz tam bir kontrol-destek ikilisisiniz. Yetenek zamanlamanı Viper oyuncusuyla koordine et — üst üste smoke israftır.
+Viper duvarı uzun görüş hattını keserken sen smoke ile kısa açıları kapatırsın — çift katmanlı görüş kontrolü olur. Viper hasar verirken sen takımı heal ile ayakta tutarsın; ikiniz tam bir kontrol-destek ikilisisiniz. Yetenek zamanlamanı Viper oyuncusuyla koordine et — üst üste smoke israftır.
 
 ### Sova/Fade'e karşı — Bilgi savaşı
 Düşman recon aracını attığı anda oraya smoke koy — recon'u boşa çıkarırsın. Recon sonrası peek atacak düşmana sersemletme at, nişanını boz. Recon hasarı yediğin turlarda kendini ve arkadaşını heal ile toparla — bilgi savaşında ayakta kalan takım kazanır.

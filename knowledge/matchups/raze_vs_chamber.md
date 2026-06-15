@@ -41,7 +41,7 @@ Raze, nade ve sıçrama ile Chamber'ın tuzağını, teleportunu ve tabancasın�
 **IF** Chamber teleport noktasını kurdu, Raze sıçrama ile o noktaya zıpladı
 **MEANING** Raze teleport çıkışında Chamber'ı karşılar — teleportla gelen Chamber direkt Raze'in silahına girer
 **COUNTER** Teleport noktasını Raze'in sıçrama ulaşamayacağı yere kur. Raze'in entry hattını önce oku, noktayı ona göre yerleştir.
-**WHY** sıçrama Raze'e dikey hareket verir — Chamber'ın teleport noktasına yukarıdan ya da arkadan ulaşır. Teleport noktası her round değişmeli.
+**WHY** Sıçrama Raze'e dikey hareket verir — Chamber'ın teleport noktasına yukarıdan ya da arkadan ulaşır. Teleport noktası her round değişmeli.
 
 ---
 
@@ -84,7 +84,7 @@ Raze'de: nade, iki sıçrama, paint nade ve ult. Chamber'da: tabanca, tuzak, tel
 
 Raze hasar ve hareket getirir, Chamber bilgi ve teleport. Atakta Raze nade lineup'ı ile Chamber'ın tuzağını ve teleport noktasını sırayla siler. Savunmada Chamber teleport menzilini doğru kurarsa Raze'in entry hattını kırar.
 
-Nade ile tuzak takası Raze lehine — nade daha uzun hattan atılır. Op ile rifle takası Chamber lehine — açık görüş hattı'da Raze yakın mesafe bulamadığında Chamber her atışta öne geçer.
+Nade ile tuzak takası Raze lehine — nade daha uzun hattan atılır. Op ile rifle takası Chamber lehine — açık görüş hattını Raze yakın mesafe bulamadığında Chamber her atışta öne geçer.
 
 Ult karşılaştırması: Raze ultu 7 puan, Chamber ultu 8. Chamber'ınki daha pahalı ama tutarlı — doğru shot kesin kill. Raze ultunu Chamber'ın beklediği hatta atarsan teleportla geçersiz kılınır; beklenmedik hattan at.
 

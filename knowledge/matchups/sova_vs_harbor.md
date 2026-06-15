@@ -18,10 +18,10 @@ Sova'nın recon'u ve drone'u, Harbor'ın su duvarlarını her durumda kapatamaz.
 **COUNTER**: Drone sesini duyar duymaz duvarı drone'un geldiği yöne it — drone'u bıraktır, Sova pozisyon açar
 **WHY**: Drone su duvarından bağımsız hareket eder, ama duvar onu iter ve bıraktırır
 
-**IF**: hasar oku duvardan geçerek arkadaki oyunculara çarpıyor
+**IF**: Hasar oku duvardan geçerek arkadaki oyunculara çarpıyor
 **MEANING**: Duvar hasar engeli değil — sadece görüşü keser
 **COUNTER**: Korunma duvarını hasar oku geldiği açıya göre koy, takımını arkasında topla
-**WHY**: hasar oku fiziksel bir mermidir, su onu durdurmaz
+**WHY**: Hasar oku fiziksel bir mermidir, su onu durdurmaz
 
 **IF**: Recon dart'ı duvarın üst köşesinden zıplatıp arkaya düşürüyorsun
 **MEANING**: Dart duvarın tepesinden geçiyor ve tüm push açığa çıkıyor
