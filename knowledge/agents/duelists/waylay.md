@@ -3,79 +3,40 @@
 > PATCH-SENSITIVE: Waylay yeni bir ajan. Meta değiştikçe bu notlar güncellenir.
 
 ## 1. Rol Kimliği
-- Waylay bir duelist ama kör dalmaz. Önce bak, sonra gir. Her turda hem düşmanın yerini öğrenirsin hem de o düşmanla dövüşürsün.
-- Jett ya da Reyna gibi "gir-öldür" değil. Farkın şu: girdiğinde karşındakinin nerede durduğunu zaten biliyorsun.
-- Takım ayrı bir initiator alamıyorsa o boşluğu sen kapatırsın — ama frag sorumluluğunu da bırakmadan.
-- Özet: önce tara, sonra gir. Bu sırayı bozarsan Waylay'in hiçbir anlamı kalmaz.
+- Waylay bir mobilite duelist'i. Hızla içeri girer, ilk öldürmeyi alır, kaybederse ölmeden geri kayar. İşi bilgi toplamak değil — alan açmak ve frag almak.
+- Jett'e en yakın akraba: ikisi de dash'le boşluk kapatır, ikisi de güvenli kaçış için bir geri-kayma kozu taşır. Fark, Waylay'in geri-kaymasının onu kısa süre dokunulmaz yapması ve elinde bir de yavaşlatma olması.
+- Reyna gibi "öldür-iyileş" değil, Raze gibi "patlat-aç" da değil. Waylay'in özü hız: yavaşlatıp dal, ilk düelloyu kazan, gerekirse anında geri çekil.
+- Takımın giriş duelist'i sensin. İlk açıyı sen alırsın, ilk kanı sen dökersin, takım arkandan girer.
+- Özet: yavaşlat → dal → ilk öldürmeyi al → (gerekirse) geri kay. Bu zinciri bozarsan Waylay'in hiçbir anlamı kalmaz.
 
 ## 2. Temel Sorumluluklar
-- **Atak:** Site'a girmeden önce recon at, düşman pozisyonunu gör, takıma söyle, sonra o pozisyona gir. Bu sıra şart.
-- **Defans:** Push sesini duyduğunda ya da erken temas olduğunda recon at. Düşmanın nereye baktığını bilerek açını al. Rotate çağrısını recon'dan sonra yap.
-- **Takım beklentisi:** Takım senden iki şey bekler — ilk öldürme ve dövüşten önce bilgi. Sadece öldürürsen bilgi üretimini sıfırlarsın. Sadece bilgi verirsen ilk girişi boşa atarsın. İkisini birlikte teslim et.
+- **Atak:** Giriş senin işin. Şüphelendiğin köşeye slow at, düşman yavaşlasın, dash ile dal, ilk öldürmeyi al. Geri-kayma noktanı dalmadan ÖNCE güvenli bir yere koy ki düelloyu kaybedersen ölmeden geri kayasın.
+- **Defans:** Geri-kayma noktanı geri çekilme pozisyonuna bırak, choke'a agresif kısa peek at, ilk öldürmeyi kap, trade gelmeden anında geri kay. Slow'u dar geçide atıp push yapan düşmanı yavaşlat.
+- **Takım beklentisi:** Takım senden iki şey bekler — ilk girişi açmak ve ilk öldürmeyi almak. Geri durup beklersen giriş boşluğu açık kalır. Kör dalıp ölürsen takım sayıca geri düşer. Hızlı gir, ilk kanı al, yaşa.
 
 ## 3. Sık Yapılan Hatalar
-1. **Recon'u hiç kullanmamak** — Sadece saldırarak oynuyorsan Waylay'in yarısını çöpe atıyorsun. Her girişten önce bir kez tara.
-2. **Tarayıp girişten kaçmak** — Bilgiyi topluyorsun ama dövüşe girmekten korkuyorsun. Waylay hâlâ bir duelist. Tara, sonra gir.
-3. **Önce girip sonra taramak** — Sırayı ters çeviriyorsun. Önce dash atarsan kör girersin. Recon her zaman öne geçer.
-4. **Yakın mesafede taramaya vakit harcamak** — Yakında tarama değil, saldırganlık. Uzaktan tara, yakında dövüş.
-5. **Gördüğünü söylememek** — "B'de bir kişi" demek bir saniye sürer. Söylemezsen o bilgi sadece sana yarar. Söylersen takımın rotate kararı değişir.
-6. **Tur başında her şeyi harcamak** — Site'a girmeden tüm yeteneklerini boşaltırsan içeride savunmasız kalırsın. Yeteneği tut, site'ta kullan.
-7. **Temel düeli ihmal etmek** — Tara-gir rutinine kaptırıp crosshair'ini düşürdün mü? İlk temas hâlâ senden geçiyor. Bilgi toplamak dövüşü kazandırmaz, kazanmana zemin hazırlar — tetiği yine sen çekeceksin.
-8. **Kaçışı önceden kurmadan agresif peek atmak** — Waylay'in en büyük gücü, dövüşü kaybetsen bile ölmeden geri kayman. Ama bunun için geri-kayma noktanı (beacon) peek'ten ÖNCE yere koymuş olman gerekir. Önce koymazsan, kaybettiğin düelloda kaçacak bir yerin olmaz — sıradan bir duelist gibi orada ölürsün.
-9. **Slow'u boşa atıp hemen dalmak** — Köşeye slow atıp aynı anda üstüne dash'lersen, slow'un avantajını kendine değil kimseye vermemiş olursun. Slow yere otursun, düşman yavaşlasın, ondan SONRA dash ile gir — yavaşlamış düşmana karşı nişan alman daha kolay olur.
-10. **Flash'ı varmış gibi oynamak** — Waylay'in flash'ı yok. Kör açıya tek başına dash'lersen, açıyı tutan düşman seni temiz görür. Flash'lı bir takım arkadaşıyla (recon/flash atan) oyna; körlemeyi ondan al, girişi sen yap.
+1. **Slow'u boşa atıp hemen dalmak** — Köşeye slow atıp aynı anda üstüne dash'lersen yavaşlatmanın avantajını kullanmamış olursun. Slow yere otursun, düşman yavaşlasın, ondan SONRA dash ile gir — yavaşlamış düşmana nişan alman daha kolay.
+2. **Geri-kayma noktasını önceden koymadan agresif peek atmak** — Waylay'in en büyük gücü, düelloyu kaybetsen bile ölmeden geri kayman. Ama bunun için geri-kayma noktanı peek'ten ÖNCE yere koymuş olman gerekir. Koymazsan, kaybettiğin düelloda kaçacak yerin olmaz — sıradan bir duelist gibi orada ölürsün.
+3. **İlk öldürmeden sonra açıkta donup kalmak** — Frag'i aldın ama kalayım mı kayayım mı diye düşünürken ikinci düşman seni basar. İlk öldürmeden sonra yarım saniyede karar ver: temizse kal, ses varsa geri kay.
+4. **Dash'i hep düz ileri kullanmak** — İlk dash'in seni yukarı da çıkarabilir. Hep göz hizasında girersen kutuların/yüksek noktaların üstünden gelen sürpriz açıyı boşa harcarsın.
+5. **Tüm dash'i tek seferde harcamak** — İki dash'in var. İkisini de aynı anda boşaltıp içeride sıkışma. Bir dash'le gir, diğerini kaçış ya da reposition için sakla.
+6. **Flash'ı varmış gibi oynamak** — Waylay'in flash'ı yok. Kör açıya tek başına dash'lersen, açıyı tutan düşman seni temiz görür. Flash'lı bir takım arkadaşıyla oyna; körlemeyi ondan al, girişi sen yap.
+7. **Temel düeli ihmal etmek** — Yavaşlat-dal rutinine kaptırıp crosshair'ini düşürme. İlk temas hâlâ senden geçiyor; tetiği yine sen çekeceksin. Yetenek dövüşü kazandırmaz, kazanmana zemin hazırlar.
+8. **Geri-kaymayı sadece kaçış sanmak** — Geri-kayma seni kısa süre dokunulmaz yapar. Sadece kaçmak için değil, alev/molly içinden geçmek ya da kötü pozisyondan temize sıyrılmak için de kullanabilirsin.
+9. **Slow'u kendi takımının geçeceği yola atmak** — Yavaşlatmayı düşmanın geleceği yere at, takımın gireceği yola değil. Yanlış yere atarsan kendi girişini yavaşlatırsın.
+10. **Geri-kayma noktasını her tur aynı yere koymak** — Düşman noktanı ezberlerse geri kaydığın anı önceden nişanlar. Noktayı tur tur değiştir.
 
 ## 4. Kalıp -> Anlam
 
-**IF** Oyuncu bilgi topluyor ama üstüne gitmiyor
-**MEANING** Waylay'i sadece bir bilgi aracı gibi oynuyor — dövüşü başkasına bırakıyor
-**COUNTER** Recon'dan sonra anında o pozisyona gir. Gördüğün düşman yer değiştirmeden oraya ulaşmalısın. Tara, çağır, hemen gir — düşman kayar.
-**WHY** Bekledikçe düşman pozisyonunu değiştirir. Recon'un gösterdiği bilgi geçersiz olur.
-
-**IF** Oyuncu recon atmadan giriyor
-**MEANING** Sıradan bir duelist gibi oynuyor, Waylay seçmenin anlamı kalmıyor
-**COUNTER** Her girişten önce recon zorunlu. Her site girişinde "önce tara, sonra gir" sırasını uygula. Bunu her tur tekrarla.
-**WHY** Kör girersen Waylay'den daha kötü bir Jett olursun — yeteneklerinin avantajından mahrum, aynı riski alıyorsun.
-
-**IF** Oyuncu bilgiye rağmen ilk öldürme oranı düşük
-**MEANING** Gördüğü bilgiyi crosshair'e çevirmekte geç kalıyor — düşman taranmış pozisyondan ayrılıyor
-**COUNTER** Recon düşmanı tarar taramaz gir. Düşman ya henüz tarandığını bilmiyor (önceden nişanlanmış düel), ya da kaçmaya çalışıyor (hareketli hedef). İki durumda da bekleme.
-**WHY** Bekledikçe düşman ya yer değiştirir ya da crosshair'ini sana çevirir. Avantaj sıfırlanır.
-
-**IF** Oyuncu yeteneklerini kullanmadan ölüyor
-**MEANING** Yeteneği ne zaman kullanacağını henüz oturtamamış
-**COUNTER** Her turu iki adıma indir: önce tara, sonra gir. Başka bir şey düşünme. Bu iki adımı oturtmadan üstüne karmaşıklık ekleme.
-**WHY** Kullanılmayan yetenek çöpe atılan paradır — hem takım ekonomisine hem tur şansına zarar verir.
-
-**IF** Waylay oynuyorsun ama takım hâlâ bilgisiz hareket ediyor
-**MEANING** Oyuncu ya taramıyor ya da gördüğünü söylemiyor
-**COUNTER** Her recon'dan sonra sesli çağrı zorunlu. Kendi girişini planlasan bile "A'da iki kişi" de. Söylemezsen o bilgi tek bir dövüşü etkiler. Söylersen tüm takımın rotasyonunu değiştirir.
-**WHY** Paylaşılan bilgi tüm takımın kararını besler. Paylaşılmayan bilgi çöpe gider.
-
-**IF** Oyuncu bilgiyi takıma veriyor ama kendisi girmiyor
-**MEANING** Initiator rolüne kaymış, duelist sorumluluğunu bırakmış
-**COUNTER** Recon önce senin girişine hizmet eder, takıma vermek bonustur. Tara, söyle, sen gir. Başkasının girmesini bekleme.
-**WHY** Kendin girmezsen takımda hâlâ bir giriş boşluğu kalır. Waylay seçmenin amacı o boşluğu senin kapatmandı.
-
-**IF** Oyuncu her turda aynı açıdan, aynı sırayla giriyor
-**MEANING** Okunabilir hale gelmiş — düşman, recon geldiği anda seni bekliyor
-**COUNTER** Recon zamanlamanı ve girdiğin açıyı tur tur değiştir. Aynı noktadan üst üste aynı şeyi yaparsan düşman tarama anında seni basar. Bir tur gecikmeli tara, sonraki tur farklı açıdan gir.
-**WHY** Waylay'in avantajı sürprizde. Düşman tarama zamanını öğrenirse recon'unu basar ve seni hazırlıksız yakalar.
-
-**IF** Retake'te recon atmıyor
-**MEANING** Recon'u sadece atak tarafı aracı sanıyor
-**COUNTER** Retake'e girmeden önce site'ı tara. Düşman nerede duruyor, kaç kişi var — bunları bilmeden girme. Retake öncesi en az bir recon.
-**WHY** Kör retake, düşmanın hazır beklediği açılara yürümek demektir. Recon o avantajı senin eline alır.
-
-**IF** Oyuncu agresif peek atıyor ama geri-kayma noktasını (beacon) önceden yere koymamış
-**MEANING** Waylay'in en büyük üstünlüğünü — "kazan kal, kaybet kaç" güvencesini — kullanmıyor
-**COUNTER** Peek atmadan ÖNCE geri-kayma noktanı güvenli bir yere bırak. Sonra açıyı al: ilk öldürmeyi kaparsan kal, kaybedersen ya da ikinci düşman çıkarsa anında geri kay. Beacon olmadan agresif peek atma.
-**WHY** Beacon önceden kurulmamışsa, kaybettiğin düelloda kaçacak yerin yok. O zaman Waylay'in tüm güvencesi boşa gider — sıradan bir duelist gibi öne çıkıp orada ölürsün.
-
 **IF** Oyuncu slow'u atıyor ama beklemeden aynı anda üstüne dalıyor
-**MEANING** Slow ile dash'i ayrı iki silah gibi değil, tek hamle gibi kullanıyor — ikisinin de değerini düşürüyor
+**MEANING** Yavaşlatma ile dash'i ayrı iki araç gibi değil, tek hamle gibi kullanıyor — ikisinin de değerini düşürüyor
 **COUNTER** Slow'u şüphelendiğin köşeye/açıya at, yere otursun, düşmanın yavaşladığını gör, ondan SONRA dash ile gir. Yavaşlamış düşman daha geç nişan alır, daha geç kaçar — düelloyu sen önde başlatırsın.
-**WHY** Slow düşmanı yavaşlattığı an senin lehine açılır pencere. O pencereyi beklemeden dalarsan, hâlâ tam tepki verebilen bir düşmana karşı düz dövüş yapmış olursun — yeteneğin avantajı boşa gider.
+**WHY** Slow düşmanı yavaşlattığı an senin lehine açılan penceredir. O pencereyi beklemeden dalarsan, hâlâ tam tepki verebilen bir düşmana karşı düz dövüş yapmış olursun — yeteneğin avantajı boşa gider.
+
+**IF** Oyuncu agresif peek atıyor ama geri-kayma noktasını önceden yere koymamış
+**MEANING** Waylay'in en büyük üstünlüğünü — "kazan kal, kaybet kaç" güvencesini — kullanmıyor
+**COUNTER** Peek atmadan ÖNCE geri-kayma noktanı güvenli bir yere bırak. Sonra açıyı al: ilk öldürmeyi kaparsan kal, kaybedersen ya da ikinci düşman çıkarsa anında geri kay. Nokta yerde olmadan agresif peek atma.
+**WHY** Nokta önceden kurulmamışsa, kaybettiğin düelloda kaçacak yerin yok. O zaman Waylay'in tüm güvencesi boşa gider — sıradan bir duelist gibi öne çıkıp orada ölürsün.
 
 **IF** Oyuncu ilk öldürmeyi alıyor ama hemen ardından ikinci düşmana yakalanıp ölüyor
 **MEANING** İlk fragdan sonra ne kalacağına ne kayacağına karar veremiyor — açıkta donup kalıyor
@@ -83,62 +44,93 @@
 **WHY** İlk fragdan sonraki yarım saniye en ölümcül an: ekranında bir düşman düşmüş, dikkatin dağılmış. Geri-kayma güvencen yoksa ikinci düşman seni tam orada yakalar. O güvenceyi önceden kur ki bu anı atlatabilesin.
 
 **IF** Oyuncu dash'i sadece düz ileri atılım için kullanıyor, asla yukarı çıkmak için kullanmıyor
-**MEANING** Dash'in ilk atılımının yükselebildiğini bilmiyor — beklenmedik açıları boşa harcıyor
-**COUNTER** Dash'in ilk parçasıyla yükselip kutuların/yüksek noktaların üstünden beklenmedik bir açı al. Düşman göz hizasını tutarken sen üstten girersen, crosshair'ini sana çevirmesi gecikir.
+**MEANING** İlk dash'in yükselebildiğini bilmiyor — beklenmedik açıları boşa harcıyor
+**COUNTER** İlk dash'le yükselip kutuların/yüksek noktaların üstünden beklenmedik bir açı al. Düşman göz hizasını tutarken sen üstten girersen, crosshair'ini sana çevirmesi gecikir.
 **WHY** Düşmanlar açıları göz hizasında tutar. Yüksekten gelen beklenmedik bir giriş, hazırlanmış crosshair'i bozar — o yarım saniye senin lehine düelloyu açar.
 
+**IF** Oyuncu iki dash'i de tek seferde harcayıp içeride sıkışıyor
+**MEANING** Mobilitesini yönetemiyor — kaçacak/yeniden konumlanacak hamlesi kalmıyor
+**COUNTER** Bir dash'le gir, diğerini sakla. İlk düelloyu kaybedersen ya da ikinci düşman çıkarsa kalan dash + geri-kayma noktası seni çıkarır. İki dash'i birden ancak çıkışını geri-kaymaya bağladıysan kullan.
+**WHY** İki dash'i de bitirirsen mobiliten sıfırlanır. Açıkta, yavaş, kaçışsız kalırsın — Waylay'in tüm avantajı mobilitedeydi.
+
+**IF** Oyuncu körlemesi olmadığı hâlde kör açıya tek başına dash'liyor
+**MEANING** Flash'lı bir duelist gibi oynuyor — ama Waylay'in flash'ı yok
+**COUNTER** Kör açıyı tek başına dash'leme. Flash/körleme atan bir takım arkadaşının arkasından gir: körlemeyi ondan al, dash ile boşluğu sen kapat, ilk öldürmeyi sen al. Tek başınaysan önce slow'la pencere aç, sonra dal.
+**WHY** Açıyı tutan düşman, körlenmeden seni temiz görür. Dash hızlı ama görünür — körleme olmadan dalmak, hazır crosshair'in önüne yürümektir.
+
+**IF** Oyuncu geri-kayma noktasını her turda aynı yere koyuyor
+**MEANING** Okunabilir hale gelmiş — düşman geri kaydığın anı ve yeri önceden biliyor
+**COUNTER** Noktanı tur tur farklı yere koy. Bir tur agresif pozisyona, sonraki tur farklı bir geri çekilme açısına. Satın alma aşamasında geri alıp yeniden koyabilirsin — bunu kullan.
+**WHY** Düşman geri-kayma noktanı ezberlerse, kaydığın hattı nişanlar ve sen tam o noktaya dönerken seni basar. Güvencen senin için risk olur.
+
+**IF** Oyuncu yavaşlatmayı düşmanın geleceği yere değil, takımın gireceği yola atıyor
+**MEANING** Yavaşlatmayı kime yaradığını düşünmeden basıyor
+**COUNTER** Slow'u düşmanın bekleyeceği/geleceği köşeye at. Takımının girdiği hattı değil, düşmanın tuttuğu açıyı yavaşlat. Atmadan önce "bu kimi yavaşlatıyor?" diye sor.
+**WHY** Yanlış yere atılan slow kendi girişini yavaşlatır, düşmana hiçbir şey yapmaz. Doğru yere atılan slow düşmanın nişanını ve kaçışını geciktirir — giriş pencereni o açar.
+
+**IF** Oyuncu yeteneklerini kullanmadan ölüyor
+**MEANING** Yeteneği ne zaman kullanacağını henüz oturtamamış
+**COUNTER** Her turu en sade zincire indir: önce geri-kayma noktanı koy, slow at, yavaşlasın, dash ile gir. Başka bir şey düşünme. Bu sırayı oturtmadan üstüne karmaşıklık ekleme.
+**WHY** Kullanılmayan yetenek çöpe atılan paradır — hem tur şansına hem takım ekonomisine zarar verir.
+
+**IF** Oyuncu her turda aynı açıdan, aynı zamanlamayla giriyor
+**MEANING** Okunabilir hale gelmiş — düşman, sen dalmadan seni bekliyor
+**COUNTER** Giriş açını ve zamanlamanı tur tur değiştir. Bir tur erken slow + hızlı dash, sonraki tur gecikmeli giriş, öbür tur farklı açı. Aynı noktadan üst üste aynı şeyi yapma.
+**WHY** Waylay'in avantajı sürprizde ve hızda. Düşman giriş kalıbını öğrenirse açını önceden tutar, dash'in hızı işe yaramaz.
+
 ## 5. Harita Etkileşimleri
-- **Haven — S Tier:** Üç site var, recon değeri en yüksek burada. Hangi site'a gideceğine karar vermeden tara. C Long'da tara-gir döngüsü, statik bekleyen herkesi cezalandırır. A Long ve Garage'da tek bir tarama takımın rotate kararını değiştirir.
-- **Ascent — S Tier:** Orta kontrolü, recon destekli saldırganlıkla çok güçlü. Catwalk ve mid'i mutlaka tara. A Main'in dar girişi tara-gir için ideal. B Main'de tek bir tarama, en yaygın savunucu pozisyonunu siler.
-- **Lotus — A Tier:** Çok açılı, karmaşık harita; bilgisiz giriş pahalıya patlar. Dönen kapılarda recon açık alanı gösterir. A Main ve C Main'de tara-gir güçlü. B site'ın dar yapısı recon'u erken fark ettirebilir — buna dikkat et.
-- **Split — A Tier:** A Ramp ve B Main'deki dar koridorlar tara-gir için biçilmiş kaftan. Orta bilgisi her iki site kararını da besler. Dar yapı, düşmanın recon'dan kaçmasını zorlaştırır.
-- **Breeze — B Tier:** Uzun görüş hatları recon'u açığa çıkarır. Açık alanda bilgi avantajın azalır. Sadece Hall ve A Cave gibi kapalı alanlarda tara-gir döngüsü güçlü kalır.
-- **Fracture — B Tier:** Çoklu eş zamanlı giriş noktaları, sıralı tara-gir yaklaşımına tam oturmaz. Arcade ve Dish gibi dar geçişlerde recon hâlâ değerli.
+- **Bind — S Tier:** Dar koridorlar ve teleport çıkışları yavaşlat-dal için ideal. A Short ve Hookah'ta köşeye slow at, yavaşlasın, dash ile dal. Teleport'la beklenmedik anda baskı kur; geri-kayma noktanı çıkışına koy.
+- **Haven — S Tier:** Üç site, çok giriş; mobilite burada altın. C Long'da slow + dash giriş açar, A Long'da hızlı boşluk kapatma çok güçlü. Geri-kayma noktanı her site için ayrı planla.
+- **Ascent — S Tier:** A Main'in dar girişi yavaşlat-dal için biçilmiş kaftan. Mid kontrolünü dash hızıyla zorla. B Main'de slow'u savunucunun tuttuğu açıya at, dash ile gir.
+- **Split — A Tier:** A Ramp ve B Main'deki dar koridorlar slow'un kaçış alanını kapatır — yavaşlat, dal, ilk öldürmeyi al. Dikey dash'le heaven/üst açılara çık. Dar yapı geri-kaymanı da kolaylaştırır.
+- **Lotus — A Tier:** Dönen kapılar ve dar geçişler dash'e oturur. A Main ve C Main'de slow + dash güçlü. B'nin dar yapısında geri-kayma noktanı yakına koy ki sıkışmadan çıkasın.
+- **Breeze — B Tier:** Uzun görüş hatları açık alanda seni görünür yapar. Hall ve A Cave gibi kapalı yerlerde yavaşlat-dal güçlü; açık alanda tek başına dash'leme, slow'la pencere aç.
+- **Fracture — B Tier:** Çoklu giriş noktaları mobiliteni ödüllendirir ama dağıtır. Arcade ve Dish gibi dar geçişlerde slow + dash değerli; geniş alanda dikkatli ol.
 
 ## 6. Eşleşme Notları
-- **Fade'e karşı — Zor:** Fade'in recon'u Waylay'in yerini geri izler. Geldiğini görünce önce iz bırakanı kır, sonra gir. Kırmadan girersen karşında senin nerede olduğunu bilen bir düşman olur.
-- **KAY/O'ya karşı — Zor:** Bıçağı isabet ederse recon'un kapanır. Ult'u açıldığında saf mekanik düelloya zorlanırsın — yetenek avantajın sıfırlanır. O turda temkinli oyna, yeteneğine güvenip açı alma.
-- **Cypher'a karşı — Güçlü:** Recon'un Cypher'ın tel ve kamera pozisyonlarını ifşa eder. Statik savunuculara karşı recon'un en verimli hali budur — nereden baktığını bildiğin bir düşmana giriyorsun.
-- **Chamber'a karşı — Güçlü:** Tuzak pozisyonlarını ve op tutma açılarını recon ortaya çıkarır. Nerede beklediğini öğrenince, o kaçışını tetiklemeden pozisyon avantajını alırsın.
-- **Skye'a karşı — Dengeli:** Skye da benzer bir tara-gir döngüsü oynar. Fark, kim daha hızlı ve daha doğru recon-giriş geçişi yapıyor. Zamanlaman onunkinden üstünse kazanırsın.
-- **Killjoy'a karşı — Güçlü:** Bot ve tuzak pozisyonlarını recon'la görürsün. Waylay, Killjoy'un savunma kurulumunu tara-gir döngüsüyle sistematik söker.
+- **Jett'e karşı — Dengeli:** İki mobilite duelist'i. Fark hızlı ve doğru girişte. Jett dash'le kaçabilir, ama sen önce slow'la onu yavaşlatırsan kaçış penceresini kaparsın. Senin slow'un, onun mobilitesini iptal eder.
+- **Chamber'a karşı — Güçlü:** Op tutan, sabit açı bekleyen Chamber'a slow + dash zor düşman. Onun ışınlanmasını tetiklemeden hızlı kapatırsan, hazır op açısını bozarsın.
+- **Cypher'a karşı — Güçlü:** Tel ve kameraya rağmen dash hızı seni dar pencereden geçirir. Tetiklenen tuzağa yakalanmamak için slow'u önden at, sonra hızla geç.
+- **KAY/O'ya karşı — Zor:** Bıçağı isabet ederse yeteneğin kapanır. Suppress yiyince dash ve geri-kayma çalışmaz — saf mekanik düelloya zorlanırsın. Bıçak alanından çık, o turda temkinli oyna.
+- **Fade/Sova'ya karşı — Dengeli:** Recon'ları seni bulur. Tarandığın an dash'in hızı seni yer değiştirtir; geri-kayma ile recon'un işaretlediği yerden anında temize sıyrıl.
+- **Killjoy'a karşı — Dengeli:** Bot ve tuzak kurulumunu hızla zorlarsın, ama tuzağa körlemesiz dash'leme. Önce slow'la pencere aç, sonra dal; bot ateşine yavaş girme.
 
 ## 7. Oyuncuya Ne Söylenmeli
 
 ### İyi performans gösterdiğinde
-**Oyuncu Aksiyonu:** Her girişten önce tarıyorsun, gördüğünü söylüyorsun, anında giriyorsun. Hem bilgi hem öldürme aynı turda geliyor.
-**Düşman Algısı:** Karşındakiler crosshair'inin çok iyi olduğunu sanıyor. Aslında her dövüşe önceden nişanlanmış giriyorsun — recon az önce nerede durduklarını sana söyledi.
-**Düşman Tepkisi:** Ya taranan yerden çekiliyorlar (hazır pozisyonu terk edip değerli süre harcayarak) ya da yerinde kalıp seni bilen birine karşı savunmak zorunda kalıyorlar.
-**Fırsat Penceresi:** Tarama biter bitmez gir. Düşman ya hâlâ orada (önceden nişanlanmış düel) ya da kaçmaya çalışıyor (hareketli hedef). İki durumda da giriş anı şimdi.
-**Tur Rotasyonu:** Bir tur birincil açıyı tara, anında gir, söyle. Sonraki tur oradan kayanlar için ikincil açıyı tara. Öbür tur hiç tarama, direkt gir — taramanı bekleyenleri hız farkıyla cezalandır. Düşman recon'unu inkâr etmeye çalışırsa açını değiştir; tarama anında basıyorsa off-angle bekle.
-**Düşman Adaptasyonu:** Düşman birkaç temastan sonra sen taramadan önce yer değiştirir, taranması zor noktalara geçer ya da recon'un açılırken seni basmaya çalışır.
-**Karşı Adaptasyon:** Önceden kayıyorlarsa — yeni pozisyonu bulmak için yine tara, bilgi hâlâ değerli. Zor noktalara geçtilerse — o noktaları saldırganlıkla temizle, recon'u sonraya sakla. Tarama anında basıyorlarsa — off-angle bekle, sana doğru yürürken crosshair'ine girsinler.
+**Oyuncu Aksiyonu:** Slow'u doğru köşeye atıyorsun, düşman yavaşlayınca dash ile dalıyorsun, ilk öldürmeyi alıyorsun ve geri-kayma noktan zaten yerde — kaybetsen bile çıkıyorsun.
+**Düşman Algısı:** Karşındakiler dash'inin çok hızlı olduğunu sanıyor. Aslında her düelloyu önden açıyorsun — slow düşmanı yavaşlattı, sen tam tepki veren bir hedefe değil, geri kalmış bir hedefe nişan alıyorsun.
+**Düşman Tepkisi:** Ya yavaşladıkları açıyı terk ediyorlar (değerli süre harcayarak) ya da yerinde kalıp yavaşlamış hâlde seninle dövüşmek zorunda kalıyorlar.
+**Fırsat Penceresi:** Slow yere oturduğu an gir. Düşman yavaşladı; nişanı geç, kaçışı geç. Giriş anı tam şimdi.
+**Tur Rotasyonu:** Bir tur erken slow + hızlı dash ile birincil açıyı bas. Sonraki tur gecikmeli gir, taramanı bekleyenleri hız farkıyla cezalandır. Öbür tur farklı açıdan veya yukarıdan dikey dash'le gel. Geri-kayma noktanı her tur farklı yere koy ki kaydığın anı önceden nişanlamasınlar.
+**Düşman Adaptasyonu:** Birkaç temastan sonra düşman giriş açını önceden tutar, slow'dan kaçacak yere geçer ya da geri kaydığın noktayı nişanlar.
+**Karşı Adaptasyon:** Açını tutuyorlarsa — farklı açıdan ya da yukarıdan gir. Slow'dan kaçıyorlarsa — slow'u kaçacakları yere at, dash'i asıl açıya. Geri-kaymanı nişanlıyorlarsa — noktanı farklı yere koy ya da o turda hiç geri kayma, kal ve tut.
 
-### Signature oyun: slow → dash → öldür → (gerekirse) geri kay
-Waylay'in turu kazandıran zinciri budur. Şüphelendiğin köşeye/açıya slow at, yere otursun. Düşman yavaşladığı an dash ile gir — artık geç nişan alan, geç kaçan bir hedefe karşı düello açıyorsun. İlk öldürmeyi kap: ortalık temizse kal, başka ses varsa önceden kurduğun noktaya geri kay. Bu zinciri her giriş için tekrarla; tek tek yetenek atmaktan çok daha fazla değer üretir.
+### Signature oyun: geri-kayma noktası → slow → dash → ilk öldürme → (gerekirse) geri kay
+Waylay'in turu kazandıran zinciri budur. Önce geri-kayma noktanı güvenli bir yere bırak. Şüphelendiğin köşeye/açıya slow at, yere otursun. Düşman yavaşladığı an dash ile gir — geç nişan alan, geç kaçan bir hedefe karşı düello açıyorsun. İlk öldürmeyi kap: ortalık temizse kal, başka ses varsa önceden kurduğun noktaya geri kay. Bu zinciri her giriş için tekrarla; tek tek yetenek atmaktan çok daha fazla değer üretir.
 
 ### Geri-kayma güvencesini doğru kur
-Waylay'i diğer duelist'lerden ayıran şey: dövüşü kaybetsen bile ölmeden geri kayabilmen. Ama bu ancak geri-kayma noktanı agresif peek'ten ÖNCE güvenli bir yere koyduysan işe yarar. Defansta noktanı geri çekilme pozisyonuna bırak, choke'a agresif peek at, ilk öldürmeyi al, trade gelmeden geri kay. Atakta noktanı girişten önce kur ki kaybettiğin düelloda kaçacak yerin olsun. Noktayı önceden kurmayı alışkanlık haline getir — Waylay'in tüm güvenliği buna bağlı.
+Waylay'i diğer duelist'lerden ayıran şey: dövüşü kaybetsen bile ölmeden geri kayabilmen — üstelik geri kayarken kısa süre dokunulmaz olursun. Ama bu ancak noktanı agresif peek'ten ÖNCE güvenli bir yere koyduysan işe yarar. Defansta noktanı geri çekilme pozisyonuna bırak, choke'a agresif peek at, ilk öldürmeyi al, trade gelmeden geri kay. Atakta noktanı girişten önce kur ki kaybettiğin düelloda kaçacak yerin olsun. Noktayı önceden kurmayı alışkanlık haline getir — Waylay'in tüm güvenliği buna bağlı.
 
 ### Flash eksiğini takımla kapat
-Waylay'in flash'ı yok; bu onun en net zaafı. Tek başına kör açıya dash'lersen açıyı tutan düşman seni temiz görür. Flash ya da körleme atan bir takım arkadaşının arkasından gir: körlemeyi ondan al, dash ile boşluğu sen kapat, ilk öldürmeyi sen yap. Kendi slow'unu da körleme yerine "yavaşlatıp avantaj açma" aracı olarak gör — flash değil, ama doğru kullanılırsa giriş penceresi yaratır.
+Waylay'in flash'ı yok; bu onun en net zaafı. Tek başına kör açıya dash'lersen açıyı tutan düşman seni temiz görür. Flash ya da körleme atan bir takım arkadaşının arkasından gir: körlemeyi ondan al, dash ile boşluğu sen kapat, ilk öldürmeyi sen yap. Kendi slow'unu körleme yerine "yavaşlatıp avantaj açma" aracı olarak gör — flash değil, ama doğru kullanılırsa giriş penceresi yaratır.
 
 ### Zorlandığında
-Her tur için tek karar ver: ya önce tara, sonra kendin gir, ya da bilgiyi ver, takım arkadaşın girsin. İkisini birden yapmamak en kötü seçenek. Tara-gir sırasına dön, her turu bununla aç. Kafan karışıyorsa en sade zincire dön: slow at, yavaşlasın, dash ile gir, ilk öldürmeyi al. Geri-kayma noktanı peek'ten önce kurmayı unutma — kaybedince ölmemen ona bağlı.
+En sade zincire dön: geri-kayma noktanı koy, slow at, yavaşlasın, dash ile gir, ilk öldürmeyi al. Başka bir şey düşünme. İki dash'i birden harcama — birini kaçış için sakla. Geri-kayma noktanı peek'ten önce kurmayı unutma — kaybedince ölmemen ona bağlı.
 
 ### Okunabilir hale geldiğinde
-Recon zamanlamanı okuyorlar. Yeteneği geciktir ya da farklı açıdan kullan. Aynı noktadan, aynı zamanlamayla üst üste aynı şeyi yapma.
+Giriş açını ve zamanlamanı okuyorlar. Slow'u farklı köşeye at, farklı açıdan dal, geri-kayma noktanı değiştir. Aynı noktadan, aynı zamanlamayla üst üste aynı şeyi yapma.
 
 ## 8. Rank Modülasyonu
 
 ### Düşük Elo (Iron-Silver)
-İki adım: önce recon, sonra gir. Başka bir şey düşünme. Gördüğünü takıma söyle. Her tur: tara, söyle, gir. Bu sıra oturursa geri kalanı kendiliğinden gelir.
+Tek zincir öğren: geri-kayma noktanı koy, slow at, yavaşlasın, dash ile gir, ilk öldürmeyi al. Başka bir şey düşünme. İki dash'i birden harcama, birini kaçış için sakla. Bu sıra oturursa geri kalanı kendiliğinden gelir.
 
 ### Orta Elo (Gold-Platinum)
-Recon ile giriş arasındaki süreyi kıs. Kendi girişinin yanı sıra takıma da bilgi ver — düşman site'a yığıldığında bilgiyi paylaş, düşman tekse kendin kullan. Hangi site'ların en çok recon değeri verdiğini haritaya göre biliyorsun. Yeteneklerini tur başında topyekûn harcama, içeride de kullan. Retake'lerde de taramayı unutma.
+Slow ile dash arasındaki zamanlamayı oturt — slow yere otursun, sonra dal. Dikey dash'i öğren, beklenmedik açılardan gir. Geri-kayma noktanı her tur farklı yere koy. Flash'lı takım arkadaşıyla giriş koordine et. Yeteneklerini tur başında topyekûn harcama, içeride de kullan.
 
 ### Yüksek Elo (Diamond-Ascendant)
-Recon-giriş geçişin anlık olsun. Kimi turda bilgiyi takıma vererek koordine et, kimi turda kendin kullan — artık hangisinin daha çok değer yarattığını okuyorsun. Düşman recon'unu inkâr etmeye çalışırsa o açıyı boş bırak ve farklı açıdan gir; seni yem olarak kullanmaya çalışırsa recon atmadan direkt gir.
+Slow-dash geçişin anlık olsun. Giriş açını ve zamanlamanı tur tur değiştir — düşman okuduğunda kalıbı kır. Geri-kaymayı sadece kaçış değil, kötü pozisyondan/molly'den temize sıyrılma aracı olarak da kullan. İki dash'i ne zaman birden, ne zaman tek harcayacağını duruma göre seç.
 
 ### Elit (Immortal-Radiant)
-Her turda düşmanın nasıl önlem aldığını oku, recon zamanlamanı ve açını ona göre değiştir. Bu turda saf duelist mi yoksa saf initiator mu daha çok değer katacak — onu oku ve Waylay'i o tarafa çek. Bir düşman düşüp takımın sayı üstünlüğü yakaladığında bilgiyi kendin için kullan; eşit ya da sayıca azken bilgiyi paylaş. Rakip takımın Waylay'e özel karşı planını oku ve her tur yaklaşımını ona göre değiştir.
+Her turda düşmanın sana karşı nasıl önlem aldığını oku: açını mı tutuyor, slow'dan mı kaçıyor, geri-kaymanı mı nişanlıyor — ona göre yaklaşımını değiştir. Dash'in dikey ve yatay seçeneklerini, geri-kaymanın dokunulmazlık penceresini ve slow'un pencere açma anını tek bir akıcı zincirde birleştir. Bir düşman düşüp takım sayı üstünlüğü yakaladığında agresif girişi sen sürdür; eşit ya da azken geri-kaymaya yaslanıp risksiz değer üret.
