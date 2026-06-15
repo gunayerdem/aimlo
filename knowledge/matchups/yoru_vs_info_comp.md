@@ -1,3 +1,9 @@
+---
+id: matchup_yoru_vs_info_comp
+type: matchup
+tags: [matchup, yoru, info, comp]
+---
+
 # EŞLEŞME: Yoru vs Bilgi Kompozisyonu
 
 ## Bu Eşleşme Ne Demek

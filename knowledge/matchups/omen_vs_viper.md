@@ -19,7 +19,7 @@ Haritaya göre ciddi şekilde değişir.
 - **Omen avantajlı:** Haven, Ascent, Sunset, Pearl. Çok koridor, kısa rotate. Üç smoke + dash Omen'ın doğal alanı.
 - **Nötr:** Split, Lotus. Avantaj kadronun geri kalanına ve oyunculara bağlı.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Viper round başında duvarı tam açtı ve fuel barı yarının altına düştü
 **MEANING** Round ortasında Viper ikinci tam duvarı kuramaz — smoke cross gelirse alan kapanmaz
@@ -68,7 +68,7 @@ Haritaya göre ciddi şekilde değişir.
 **COUNTER** Omen kaçışını bir sonraki round için sakla. Ult harcandıysa o round ultsuz Viper round'una döner, Omen asimetri yaratır
 **WHY** Ult yanlış anda harcanırsa tek round'luk araca döner. Doğru anda — saldırı site'a girmeden önce veya plant sonrası — harcanırsa savunma tamamen çöker.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
 Viper'ın smoke'u ve duvarı aynı fuel havuzundan çalışır. Omen'ın her ability'sinin ayrı cooldown'u var. Bu fark şunu yaratır: Omen round içinde daha hızlı toparlanır, Viper round içinde daha uzun etki yaratır.
 
@@ -80,7 +80,7 @@ Flash tek kör anı açar, molly süreli hasar bölgesi kurar. Flash atağı ba�
 
 **Viper duvar 'tap' tekniği:** Duvarı tam açık tutmak yerine kısa aralıklarla aç-kapat. Fuel barı round boyunca dengede kalır, tek seferlik tam açılım yerine Mid cross ve geçiş noktalarını birden fazla kez kapatabilirsin. Breeze ve Icebox'ta duvarın değeri en yüksek olduğundan bu haritalar için tercih edilen yöntem budur.
 
-## 5. Map Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Breeze:** Viper kurucu, Omen destek rolünde. Duvar haritayı ikiye böler, Mid Pillar kör kalır. Omen burada dash ile duvar arkasına bilgi almak zorunda, yoksa geride kalır. Viper favored.
 
@@ -100,7 +100,7 @@ Flash tek kör anı açar, molly süreli hasar bölgesi kurar. Flash atağı ba�
 
 **Pearl:** Omen favored. Mid kontrolü smoke ile akıcı çalışır. Viper duvarı Mid'de değer taşır ama Omen'ın hız avantajı baskın.
 
-## 6. Flip Momentler
+## 6. Dönüm Noktaları
 
 1. **Viper fuel %30 altına düştü.** Round içinde kapatabildiği alan yarıdan aşağı. Bu anı görürsen atağı başlat — fuel tamamen bitmeden gir.
 

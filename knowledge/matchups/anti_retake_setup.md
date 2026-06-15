@@ -1,3 +1,9 @@
+---
+id: matchup_anti_retake_setup
+type: matchup
+tags: [matchup, anti, retake, setup]
+---
+
 # MATCHUP: Retake'e Karşı Kurulum
 
 ## Ne Oluyor

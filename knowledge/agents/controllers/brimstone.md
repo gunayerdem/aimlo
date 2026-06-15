@@ -99,7 +99,7 @@ Brimstone'un smoke'u en güvenilirisi. Sen smoke'u attığın an giriş açılı
 ### Tahmin edilebilir olduğunda
 "Rakip molly zamanını çözmüş — her round aynı anda atıyorsun. Bir round spike basılır basılmaz at, sonraki round defuse sesini duyunca at. Zamanlamayı her round değiştir, seni okuyamasınlar. Smoke noktanı da kaydır — aynı dumandan her round aynı açıyı bekliyorlar."
 
-## 8. Rütbe Ayarı
+## 8. Rank Modülasyonu
 - **Iron-Silver**: Önce üç smoke'u doğru yere oturtmayı öğren. Nokta çalışması şimdilik şart değil — odak doğru yerleri dumanlamakta.
 - **Gold-Platinum**: Site başına 2 molly noktası öğren. Girişlerde stim koymaya başla. Savunmada geri alım için bir smoke sakla.
 - **Diamond-Ascendant**: Tam molly nokta kütüphaneni kur. Spike konumuna göre ult zamanlaması yap. Round boyunca smoke stoğunu bilinçli yönet.

@@ -29,7 +29,7 @@ Omen kaybolur — smoke, TP ve flash ile pozisyonunu siler. Fade ise seni açar 
 
 **Dengeli — Ascent, Bind, Sunset:** Omen TP ile Fade'in botundan ve recon'undan sıyrılır; Fade ise botla Omen'in smoke arkasını tarar. Recon sesini duyduğun an smoke'u kaydırırsan Omen öne geçer; smoke sabit kalırsa Fade öne geçer.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Fade recon'u smoke hattının üstüne düştü
 **MEANING** Recon smoke içini okur, takımın smoke arkasında gizli değil, Fade takımı önceden açıyı tutuyor
@@ -87,7 +87,7 @@ Round içi akış — Fade recon attığında:
 
 Ult karşılaşması: Omen ultunu Fade ultunun alanı dışında kullanırsa Fade onu yakalayamaz. Omen ultunun savunmasız anı Fade stun'ı için yem — varış noktasını buna göre seç.
 
-## 5. Map Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Haven (Omen avantajlı):** 3 site, Omen'in global TP rotate'i için ideal. Fade tek başına anchor rolünde zorlanır. Omen'in A-B-C arası TP rotate'i bu haritada en güçlü hali.
 

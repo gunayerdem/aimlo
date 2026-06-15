@@ -20,7 +20,7 @@ Chamber kağıt üstünde sentinel ama duelist gibi oyna. Tabancası güçlendir
 - Teleport'u tehlike yokken erken kullanmak — gerçek push geldiğinde bekleme süresinde kaçışsız yakalanırsın.
 - Retake'te uzun açı yokken hâlâ tabancayla site basmak — yakın mesafede tabanca, takım arkadaşının tüfeğinin yanında yük olur.
 
-## 4. Kalıptan Anlama
+## 4. Kalıp -> Anlam
 
 **IF** Anchor kurulu ama agresif açılarda sürekli ölüyorsun
 **MEANING** Ya anchor çok uzakta (teleport gecikiyor) ya da ilk atıştan sonra teleport olmak yerine aynı açıdan tekrar peek atıyorsun.
@@ -96,7 +96,7 @@ Chamber kağıt üstünde sentinel ama duelist gibi oyna. Tabancası güçlendir
 
 **Retake'te kayıp:** "Retake'te tabancayla dalıyorsun, yakın mesafede yük oluyorsun. Sen savunma ajanısın, dalan değil. Ult'unu çek, uzaktan site'a açılan hattı kapat, takımın tüfekleri girsin."
 
-## 8. Rütbe Modülasyonu
+## 8. Rank Modülasyonu
 
 **Düşük (Iron-Silver):** Anchor koymadan duelist gibi oynuyorsun, tabanca spam'e gidiyor. Önce döngüyü oturt: anchor koy, açıyı tut, tek atış, teleport.
 

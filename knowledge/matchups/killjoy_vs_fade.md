@@ -29,7 +29,7 @@ Killjoy siteyi gizli kurulumla tutar. Fade recon ve bot ile o kurulumu bulup if�
 
 **Dengeli haritalar:** Haven, Ascent, Lotus — hangi taraf kurulum/recon döngüsünü öne alırsa o round'u alır.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Fade recon turret ve botunun yerini gösterdi
 **MEANING** Takım o noktayı biliyor — tüfekle ya da util'le kurulumu siler
@@ -78,14 +78,14 @@ Killjoy siteyi gizli kurulumla tutar. Fade recon ve bot ile o kurulumu bulup if�
 **COUNTER** Fade önce recon atıp turret'in yerini öğrensin — sonra turret görüş hattının dışından bot göndersin
 **WHY** Botun canı az, turret iki-üç vuruda söker. Turret'i recon hattını değil bot giriş hattını kesecek şekilde kur — recon yeri açsa bile bot yine ölür
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
 Killjoy: turret + bot + molly x2 + ult (kurulum + alan + dondurma).
 Fade: recon + bot + stun + ult (ifşa + chase + CC).
 
 İkisi de bilgi oyunu oynar, ama ters yönde: Killjoy yerini gizler, Fade o yeri bulur. Killjoy ult'u 8 puan, Fade ult'u 7 puan — Fade'in ult'u bir puan daha ucuz.
 
-## 5. Harita Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Bind (Killjoy avantajlı):** Dar geçişler turret için ideal. Hookah ve A Short girişi turret'i zorlar, Fade'in botu bu darlıkta turret görüş hattına girer.
 
@@ -101,7 +101,7 @@ Fade: recon + bot + stun + ult (ifşa + chase + CC).
 
 **Fracture (Dengeli):** Çok yönlü giriş iki agent için de nötr.
 
-## 6. Flip Anlar
+## 6. Dönüm Noktaları
 
 **Flip 1 — Recon kurulumu ifşa etti:** Killjoy'un util hattı açığa çıktı, takım tüfekle veya util'le siler.
 
@@ -111,7 +111,7 @@ Fade: recon + bot + stun + ult (ifşa + chase + CC).
 
 **Flip 4 — Fade ult'u savunma hattını çökertti:** Killjoy körlük ve korku altında, retake yok.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 Bu matchup'ta turret'i her round başka yere koy. Fade recon ile yeri bir kez öğrenirse, sonraki round'da botu doğrudan o noktaya gönderir. Yer değiştirirsen Fade her round sıfırdan başlar, recon'u boşa gider.
 

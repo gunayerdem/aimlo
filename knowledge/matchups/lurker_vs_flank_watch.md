@@ -11,7 +11,7 @@ tags: [matchup, lurker, flank-watch, role, tactical]
 
 Lurker, saldırı takımından kopup savunmanın arkasını tehdit eden solo oyuncudur. Flank watch ise savunmadan birinin lurker hattını rotate etmeden tutmasıdır. Bu matchup tamamen sesle dönüyor: lurker ayak sesini, silah sesini ve util patlamasını gizlemeye çalışır; flank watch tam da bu üç sesi avlar.
 
-## 2. Hangi Taraf Avantajlı
+## 2. Kim Avantajlı
 
 **Lurker lehine:**
 - Dört takım arkadaşın siteye baskı kurdu, savunma rotate çekildi, lurker hattı boşaldı
@@ -25,7 +25,7 @@ Lurker, saldırı takımından kopup savunmanın arkasını tehdit eden solo oyu
 - Split veya Bind gibi dar haritadasın, lurker sesini saklayacak alan bulamaz
 - Flank watch rolü round başında kime ait belliyse lurker sürpriz yakalayamaz
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Lurker, saldırı push sırasında haritanın zıt tarafında pozisyon aldı
 **MEANING** Push, savunma utilini bir tarafa çekti — lurker hem bilgi hem silah değerinde
@@ -118,7 +118,7 @@ Lurker ult'u daha esnek, flank watch ult'u daha dar ama vurucu. O round kimin ul
 
 **Dönüm 5 — Harita:** Dar harita flank watch'a yarar; açık ve dikey harita lurker'a yarar.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 Lurker oynarken takımın siteye baskı kurmadan kıpırdama — baskı yoksa savunma rotate etmez, o zaman lurker hattı zaten boş değildir. Lurker'ı bilinçli bir taktik seçim olarak oyna: push başladığı an zıt hatta geç, bilgi topla, fırsat çıkınca girişe gir.
 

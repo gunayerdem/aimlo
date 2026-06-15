@@ -20,7 +20,7 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 - Tuzağı ve ağ tuzağını görünür yere koymak. İkisi de gözle bulunabilir — düşman görürse tuzağı uzaktan vurur, ağ tuzağının üstünden eğilip geçmeden önce yavaşlar ama yine de planını bozar. Köşeye, alçak zemine, görüş hattının dışına koy.
 - Ult'u boşa, ilk teması açmak için atmak. Ult senin en güçlü kapanış aracın — onu round'u garanti almak için sakla, dövüş başlatmak için değil. Sadece sersemletmek istiyorsan zaten tuzağın var.
 
-## 4. Kalıptan Anlama
+## 4. Kalıp -> Anlam
 
 **IF** Duvar koyuyorsun ama düşman başka yoldan site'a giriyor
 **MEANING** Yanlış girişi kapatıyorsun. Düşmanın tercih ettiği rotayı okumamışsın.
@@ -76,7 +76,7 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 
 ## 6. Eşleşme Notları
 - **Raze**'e karşı zayıfsın. Patlayıcıları duvarın orblarını ve tuzaklarını uzaktan temizler. Duvarı beklenmedik bir açıya koy.
-- **Neon** ve hız bazlı ajanlara karşı güçlüsün. Tüm kit'in tam da bunları durdurmak için var — duvar hızını keser, ağ tuzağı dash'ini yere yapıştırır.
+- **Neon** ve hız bazlı ajanlara karşı güçlüsün. Tüm yetenek setin tam da bunları durdurmak için var — duvar hızını keser, ağ tuzağı dash'ini yere yapıştırır.
 - **Sova** tuzaklarını temizleyebilir, duvar pozisyonlarını güvenli mesafeden keşfeder. Tuzakları standart yerden çıkar, tahmin edilemez ol.
 - Ult'un **izole düşmana** karşı counter'lanamaz. En zayıf olduğun an grup halinde gelen takımlar — kozayı çabuk vururlar.
 - **Jett** ve **Chamber** gibi yüksek hareket kabiliyetli ajanlar ağ tuzağını ekonomik kullanmanı zorlar. Jett dash'le, Chamber TP'siyle net'in etkisini kısaltabilir — net'i onların hareket yeteneğini zaten kullandığı, geri çekilemeyeceği ana sakla.
@@ -111,7 +111,7 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 ### Post-Plant'i Tutamıyorsa
 "Spike kurulduktan sonra senin en güçlü anın ama o ana eli boş giriyorsun. Ağ tuzağını ve ult'unu post-plant için sakla — net'i spike'a koşana at, ult'u defuse'a geleni garanti götürmek için kullan."
 
-## 8. Rütbe Modülasyonu
+## 8. Rank Modülasyonu
 
 **Düşük (Iron-Silver):** Duvarı rastgele koyuyorsun, tuzakları unutuyorsun, ağ tuzağını el bombası gibi atıyorsun. Duvarı ana geçişe koy, tuzağı flank yoluna koy, ağ tuzağını da düşman tam koridora girince at.
 

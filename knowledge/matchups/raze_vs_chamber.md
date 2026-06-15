@@ -29,7 +29,7 @@ Raze, nade ve sıçrama ile Chamber'ın tuzağını, teleportunu ve tabancasın�
 
 **Dengeli:** Ascent, Haven ve Lotus'ta avantaj Chamber'ın teleport noktasına ve Raze'in nade açısına göre kayar. Her round teleport noktasının nereye kurulduğuna ve nade hattının oraya ulaşıp ulaşmadığına bak — ikisi çakışınca Raze öne geçer, çakışmayınca Chamber tutar.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Raze nade'i Chamber'ın tuzağına attı, tuzak silindi
 **MEANING** Chamber o round kör — ikinci entry'de Raze'i durduracak bilgisi kalmadı
@@ -78,7 +78,7 @@ Raze, nade ve sıçrama ile Chamber'ın tuzağını, teleportunu ve tabancasın�
 **COUNTER** Teleport noktasını korunaklı bir yerin arkasına, nade'in göremeyeceği noktaya kur. Aynı noktayı tekrar kullanırsan Raze'in lineup'ı zaten hazırdır — her round değiştir.
 **WHY** Chamber'ın gücü teleport noktasından gelir. Nokta gidince Chamber sıradan dueliste döner.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
 Raze'de: nade, iki sıçrama, paint nade ve ult. Chamber'da: tabanca, tuzak, teleport ve ult.
 
@@ -88,7 +88,7 @@ Nade ile tuzak takası Raze lehine — nade daha uzun hattan atılır. Op ile ri
 
 Ult karşılaştırması: Raze ultu 7 puan, Chamber ultu 8. Chamber'ınki daha pahalı ama tutarlı — doğru shot kesin kill. Raze ultunu Chamber'ın beklediği hatta atarsan teleportla geçersiz kılınır; beklenmedik hattan at.
 
-## 5. Map Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Bind (Raze avantajlı):** Dar koridorlar Raze'in. Hookah ve Short'ta Chamber teleportu kısıtlanır, nade her şeyi kapatır.
 
@@ -106,7 +106,7 @@ Ult karşılaştırması: Raze ultu 7 puan, Chamber ultu 8. Chamber'ınki daha p
 
 **Breeze (Chamber avantajlı):** Harita geniş, nade değeri düşer. Chamber op hattı her yerde — Raze sıkışır.
 
-## 6. Flip Moment'ler
+## 6. Dönüm Noktaları
 
 **Flip 1 — Tuzak silinmesi:** Nade tuzağı patlatınca Chamber kör kalır. O an ikinci entry açıktır — hemen gir.
 

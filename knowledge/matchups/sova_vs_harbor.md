@@ -1,6 +1,12 @@
+---
+id: matchup_sova_vs_harbor
+type: matchup
+tags: [matchup, sova, harbor]
+---
+
 # EŞLEŞME: Sova vs Harbor
 
-## Ne Oluyor Bu Eşleşmede
+## Matchup Özü
 Sova'nın recon'u ve drone'u, Harbor'ın su duvarlarını her durumda kapatamaz. Recon dart ile hedef arasına duvar girerse tarama iptal olur — ama drone duvarın üstünden geçer, hasar oku ise duvardan geçip hasar verir. Harbor duvar koydu diye Sova kör kaldı sayma. Duvar gördüğünde drone'a geç ya da dart'ı üst köşeden zıprat — düz dart atma.
 
 ## Yaygın Cezalandırma Kalıpları
@@ -34,7 +40,7 @@ Sova'nın recon'u ve drone'u, Harbor'ın su duvarlarını her durumda kapatamaz.
 **COUNTER**: Ult sesini duyar duymaz dart atma — ult biter, sonra dart at ve bilgiyi aç
 **WHY**: Yavaşlayan takım taramadan faydalanamaz, sadece açık hedef olur
 
-## Tekrarlanan Başarısızlık Ne Anlama Gelir
+## Tekrarlayan Başarısızlık Ne Anlama Gelir
 **Sova** olarak bilgin sürekli kesiliyor mu? Sadece recon atıyorsun, drone kullanmıyorsun. Bir sonraki round'da drone'u duvarın üstünden uçur — arkası açılır. Dart atacaksan duvarın üst köşesini hedef al, düz atma.
 
 **Harbor** olarak takımın sürekli taranıyor mu? Duvarı dart düştükten sonra çekiyorsun, geç kalıyorsun. Dart sesini duyar duymaz duvarı dart ile takımın arasına çek — tarama başlamadan kes.

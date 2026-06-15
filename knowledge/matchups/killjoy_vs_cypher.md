@@ -21,7 +21,7 @@ Killjoy önde. Killjoy ult'u site retake'inde ikinci bir şans verir, Cypher ult
 
 Harita seçerken şuna bak: site dar ve tek girişliyse Killjoy, flank hattı çoksa Cypher.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Killjoy bir site'a turret, bot ve molly kurdu, Cypher rotate hattına tel koydu\
 **MEANING** İki sentinel farklı görevde — Killjoy site öldürür, Cypher rotate bilgisi toplar\
@@ -77,7 +77,7 @@ Harita seçerken şuna bak: site dar ve tek girişliyse Killjoy, flank hattı ç
 
 Fark şu: Killjoy utility'si hasar basar, Cypher utility'si basmaz. Bu yüzden Killjoy site retake'inde birinci tercih, Cypher bilgi toplamada birinci tercih. Ult karşılaştırması: Killjoy ult'u o round'u kazandırır, Cypher ult'u bir sonraki round'u planlatır.
 
-## 5. Map Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Icebox:** Killjoy. B site kilitlemek için turret + molly kurulumu bu haritada çok güçlü.
 

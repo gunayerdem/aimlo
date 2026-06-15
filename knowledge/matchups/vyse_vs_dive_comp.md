@@ -1,3 +1,9 @@
+---
+id: matchup_vyse_vs_dive_comp
+type: matchup
+tags: [matchup, vyse, dive, comp]
+---
+
 # EŞLEŞME: Vyse vs Dive Kompozisyonu
 
 > **YAMA NOTU**: Vyse yeni bir sentinel. Yetenek değerleri yamadan yamaya değişir — buradaki kalıpları her yamadan sonra test et, yama notlarıyla karşılaştır.

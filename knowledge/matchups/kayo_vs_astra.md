@@ -31,7 +31,7 @@ Kim önce hazırlanırsa kazanır. KAY/O'nun silme baskısı ve Astra'nın kurul
 
 **Dengeli:** Ascent ve Sunset'te round'lar bıçağın isabet oranına ve yıldız yerleşimine göre her seferinde farklı sonuçlanır.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** KAY/O bıçağı, yıldız yerleştirilmiş bir noktaya atıldı
 **MEANING** Bıçak menzili yıldızı yakalarsa Astra o yıldızı smoke, çekme veya sersemletmeye çeviremez — tek yıldız iptal
@@ -80,7 +80,7 @@ Kim önce hazırlanırsa kazanır. KAY/O'nun silme baskısı ve Astra'nın kurul
 **COUNTER** Ult sesini duyduğun an duvarın aynı yüzüne geç. Ult süresi içinde öbür yüzde yeteneğin çalışmaz; yerini değiştirmezsen tüm yeteneğin boşa gider.
 **WHY** Astra ultu KAY/O'nun yerel yetenek hattını keser. Duvarın yüzüne göre yer değiştirmek şart.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
 **KAY/O eli:**
 - Molly — alan hasarı
@@ -101,7 +101,7 @@ Kim önce hazırlanırsa kazanır. KAY/O'nun silme baskısı ve Astra'nın kurul
 
 Kim ultu önce kullanırsa o round'u şekillendirir. Ama iki ult çakışırsa Astra ultu, KAY/O ult alanını böler ve Astra o duvarın öbür yüzünde yeteneğini kullanabilir. KAY/O için ultunu Astra duvarının dışında tutman şart.
 
-## 5. Map Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Haven (Astra avantajlı):** 3 site Astra'nın harita geneline uzanan yeteneği için ideal. Bıçak 3 siteye dağılınca etkisi azalır.
 
@@ -117,7 +117,7 @@ Kim ultu önce kullanırsa o round'u şekillendirir. Ama iki ult çakışırsa A
 
 **Sunset (Dengeli):** Çok açılı siteler — iki ajan farklı bölgelerde baskın çıkar, her round sonuç değişir.
 
-## 6. Flip Momentler
+## 6. Dönüm Noktaları
 
 **Flip 1 — Bıçak isabeti:** Bıçak yıldıza çarptıysa yetenek iptal, round KAY/O'ya gider. Bıçak boşa gittiyse Astra serbest, round Astra'ya.
 

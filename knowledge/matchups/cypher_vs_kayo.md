@@ -34,7 +34,7 @@ Cypher bütün bilgisini util'den üretir: tel, kamera, smoke ve ult. KAY/O bı�
 - Bıçak duvar arkasına, yanlış bölgeye saplandı — baskı sıfır, kurulum çalışmaya devam eder.
 - Haven ve Ascent 3 sitelidir; bir siteye atılan bıçak diğer siteye dokunamaz.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Bıçak, tel ve kamera hattının tam ortasına saplandı
 **MEANING** Tel tetiklenmez, kamera stun atamaz, smoke gider — bilgi tamamen kesilir
@@ -95,7 +95,7 @@ Baskı altında bilgi: Cypher bıçak baskısı altında util'den bilgi üreteme
 
 Ult karşılaştırması: İkisi de 7 puan. Ama KAY/O ult'u Cypher'ın kimliğini ult boyunca tamamen siler ve roundu o sürede bitirir. Cypher ult'u ancak KAY/O düştükten sonra bilgi verir — o roundu değil sonraki roundu etkiler. Cypher ult'u retake için, KAY/O ult'u execute veya post-plant için.
 
-## 5. Harita Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Bind (Cypher avantajlı):** Hookah'tan A Short bıçak açısı öğrenilebilir ama TP flank teli bıçak alanının dışında. TP ile baskıdan kaçar, tel TP çıkışında ve kamera Hookah'ta — tek bıçak iki hattı birden kapatamaz. B Hall teli Bind'ın en güçlü post-plant hattı.
 

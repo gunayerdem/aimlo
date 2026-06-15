@@ -1,3 +1,9 @@
+---
+id: matchup_clove_vs_retake
+type: matchup
+tags: [matchup, clove, retake]
+---
+
 # MATCHUP: Clove vs Retake
 
 ## Ne Oluyor Burada

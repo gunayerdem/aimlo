@@ -1,3 +1,9 @@
+---
+id: matchup_raze_vs_viper
+type: matchup
+tags: [matchup, raze, viper]
+---
+
 # EŞLEŞME: Raze vs Viper
 
 ## Bu Eşleşmede Ne Oluyor

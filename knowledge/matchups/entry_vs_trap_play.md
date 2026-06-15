@@ -1,3 +1,9 @@
+---
+id: matchup_entry_vs_trap_play
+type: matchup
+tags: [matchup, entry, trap, play]
+---
+
 # MATCHUP: Entry vs Tuzak Oyunu
 
 ## Bu Çarpışma Ne

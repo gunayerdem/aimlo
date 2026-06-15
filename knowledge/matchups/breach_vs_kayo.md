@@ -32,7 +32,7 @@ Düşman sabit bir savunma pozisyonu kuruyorsa — köşeye yapışık oynuyorsa
 - KAY/O favored: Haven, Ascent, Breeze, Icebox — geniş site'ler, suppress ve flash için.
 - Nötr: Fracture, Abyss.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Breach stun ya da flash atmak üzereyken KAY/O'nun ult'u aktif
 **MEANING** Ult alanının içindeysen Breach'in hiçbir yeteneği çalışmaz. Stun atsan da gelmez. Breach o alanda sıradan bir tüfekçidir.

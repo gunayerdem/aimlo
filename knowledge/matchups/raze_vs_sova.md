@@ -30,7 +30,7 @@ Raze oynuyorsan: close range'de Sova'nın util'i seni durduramaz, üstüne git. 
 
 **Dengeli:** Haven, Ascent, Lotus — orta mesafe. Sova recon'u harcadı mı, A'dan gir. Recon henüz atılmadıysa B'den gir, Sova'yı recon harcamaya zorla, sonra diğer hattan bas.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Sova recon Raze'in giriş hattını işaretledi
 **MEANING** Pozisyonun takıma gitti. Trade partner hazır, sen girince ölürsün.
@@ -79,7 +79,7 @@ Raze oynuyorsan: close range'de Sova'nın util'i seni durduramaz, üstüne git. 
 **COUNTER** Sova oynuyorsan hasar oku Raze molly hattından uzak at. Paralel hatlar güvenli.
 **WHY** Aynı noktayı iki util hedeflerse biri diğerini engeller. Paralel çalış.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
 Raze'in elinde ne var: molly, paintshell, iki sıçrama, ult. Hepsi hasar ve hareket.
 Sova'nın elinde ne var: iki recon, iki hasar oku, recon bot, ult. Bunlar bilgi ve hasar.
@@ -89,7 +89,7 @@ Ult maliyeti: Raze ult'u 8 puan, Sova ult'u 7 puan — Sova'nın ult'u biraz dah
 
 Asıl fark şu: Sova util'i round başında çıkar ve biter. Raze util'i esnek, duruma göre kullanılır. Recon atıldıktan sonra bilgi eskir — sen o andan sonra sıçrama yönünü değiştirirsen Sova o round'a harcadığı util'i boşa harcamış olur.
 
-## 5. Map Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Breeze (Sova avantajlı):** Uzun hatlar Sova'nın işi. Raze molly bu mesafede yetmez. Raze oynuyorsan Mid push at veya Sova util'i bitmeden girme.
 
@@ -105,7 +105,7 @@ Asıl fark şu: Sova util'i round başında çıkar ve biter. Raze util'i esnek,
 
 **Sunset (Raze avantajlı):** Dar choke ve close range Raze meta. Sova Sunset'te zayıf pick.
 
-## 6. Flip Moment'ler
+## 6. Dönüm Noktaları
 
 **Flip 1 — Recon reveal:** Recon görüşünde kaldın, takım trade'e hazırlandı. Giriş anında ikinci düşman gelir, sen düşersin.
 
@@ -115,7 +115,7 @@ Asıl fark şu: Sova util'i round başında çıkar ve biter. Raze util'i esnek,
 
 **Flip 4 — Post-plant ult:** Raze'in post-plant pozisyonu Sova ult hattındaydı. Sıçrama yoksa kaçış yok, HP gider.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 Bu matchup'ta iki oyuncu da lineup kullanır ama amaç farklı — Raze hasar atar, Sova bilgi toplar.
 

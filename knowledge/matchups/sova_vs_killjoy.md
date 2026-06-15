@@ -1,21 +1,27 @@
+---
+id: matchup_sova_vs_killjoy
+type: matchup
+tags: [matchup, sova, killjoy]
+---
+
 # EŞLEŞME: Sova vs Killjoy
 
-## Ne Oluyor Bu Eşleşmede
+## Matchup Özü
 Sova, Killjoy'un turret'ini, bot'unu ve molly'sini daha site'a girmeden söküp atar. Recon onların nerede olduğunu açar. Hasar oku duvarın arkasından temizler. Drone ucuz feda olur, geriye kalanı tetikler. Killjoy site'a tek adım atamadan biter — Sova'nın bu eşleşmedeki işi tam olarak budur.
 
 ## Sova Killjoy'u Nasıl Bitirir
 
-### Recon kit'i açar
+### Recon yetenek seti açar
 
 **IF**: Raund başında attığın recon, Killjoy'un turret, bot ve molly pozisyonlarını tüm takıma gösteriyor
-**MEANING**: Killjoy'un sürpriz değeri sıfır — kit'in nerede olduğunu artık herkes biliyor
-**COUNTER**: Killjoy kit'ini recon'un sabit vurduğu noktadan uzağa kurar, standart dart açısının dışında kalır
+**MEANING**: Killjoy'un sürpriz değeri sıfır — yetenek setin nerede olduğunu artık herkes biliyor
+**COUNTER**: Killjoy yetenek setini recon'un sabit vurduğu noktadan uzağa kurar, standart dart açısının dışında kalır
 **WHY**: Scan değdiği an tüm savunma yapısı okunur, hazırlığın hükmü kalmaz
 
-### hasar oku lineup'ları kit'i güvenle temizler
+### hasar oku lineup'ları yetenek seti güvenle temizler
 
 **IF**: Duvarın arkasından hasar oku lineup'ıyla turret ve bot'u temizliyorsun
-**MEANING**: Killjoy sana hiç görünmeden kit'ini kaybediyor — ne trade var ne açı
+**MEANING**: Killjoy sana hiç görünmeden yetenek setini kaybediyor — ne trade var ne açı
 **COUNTER**: Killjoy turret'i drone'u anında görüp vurabileceği açıya koyar; drone içeri girmeden etiketlenir, tarama tamamlanmaz
 **WHY**: Lineup sıfır riskle kit söker; Killjoy'un tek savunması drone'u durdurabilmektir
 
@@ -37,16 +43,16 @@ Sova, Killjoy'un turret'ini, bot'unu ve molly'sini daha site'a girmeden söküp 
 
 ### Kit bilgisi ≠ Killjoy'un yeri
 
-**IF**: Kit'inden uzakta duruyorsun; Sova kit'ini buluyor ama seni bulamıyor
+**IF**: Kit'inden uzakta duruyorsun; Sova yetenek setini buluyor ama seni bulamıyor
 **MEANING**: Sova kit pozisyonunu biliyor ama senin nerede olduğunu bilmiyor — o iki bilgi ayrı
 **COUNTER**: Sova recon'u kit ile oyuncu pozisyonunu aynı anda kapatacak şekilde atar, ikisini tek scanda yakalamaya çalışır
 **WHY**: Kit açılsa bile sen pozisyonunu saklarsan Sova körleşir
 
 ## Sürekli Kaybediyorsan
 
-**Killjoy** olarak her raund tüm kit'in Sova tarafından scan edilip yok ediliyorsa: kit'ini standart yerlere koyuyorsun, Sova'nın lineup'ları tam orası için çalışılmış. Turret ve bot'u beklenmedik köşelere taşı — Sova scan atmadan önce seni bulmakta zorlansın.
+**Killjoy** olarak her raund tüm yetenek setin Sova tarafından scan edilip yok ediliyorsa: yetenek setini standart yerlere koyuyorsun, Sova'nın lineup'ları tam orası için çalışılmış. Turret ve bot'u beklenmedik köşelere taşı — Sova scan atmadan önce seni bulmakta zorlansın.
 
-**Sova** olarak Killjoy'un kit'ini temizleyemiyorsan: recon'u oyunculara atıyorsun, kit'e değil. Killjoy'a karşı önce turret ve bot nerede, onu bul. Scan'i gördükten sonra hasar oku takip et. Kit gidince site açılır.
+**Sova** olarak Killjoy'un yetenek setini temizleyemiyorsan: recon'u oyunculara atıyorsun, kit'e değil. Killjoy'a karşı önce turret ve bot nerede, onu bul. Scan'i gördükten sonra hasar oku takip et. Kit gidince site açılır.
 
 ## AIMLO Ne Demeli
 
@@ -60,7 +66,7 @@ Sova, Killjoy'un turret'ini, bot'unu ve molly'sini daha site'a girmeden söküp 
 
 ## Rank Modülasyonu
 
-**LOW**: Sova'nın Killjoy'a özel lineup'ı yok. Killjoy kit'i varsayılan yerlere koyuyor. Sova'ya o harita için Killjoy'un sık kullandığı turret ve bot noktalarını açan tek bir recon lineup'ı öğret — onu tekrar et.
+**LOW**: Sova'nın Killjoy'a özel lineup'ı yok. Killjoy yetenek seti varsayılan yerlere koyuyor. Sova'ya o harita için Killjoy'un sık kullandığı turret ve bot noktalarını açan tek bir recon lineup'ı öğret — onu tekrar et.
 
 **MID**: Sova temel lineup'ı biliyor ama scan attıktan sonra hasar oku takip etmiyor. Killjoy scan geldikçe pozisyon değiştirmiyor. Sırayı netleştir: tara, hasar oku at, sonra gir.
 

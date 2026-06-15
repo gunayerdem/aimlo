@@ -1,3 +1,9 @@
+---
+id: general_team-dynamics
+type: general
+tags: [general, team, dynamics]
+---
+
 # Takım Dinamikleri -- Radiant Seviye Bilgi Bankası
 
 ---

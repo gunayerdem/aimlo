@@ -1,3 +1,9 @@
+---
+id: matchup_anti_info_defense
+type: matchup
+tags: [matchup, anti, info, defense]
+---
+
 # MATCHUP: Bilgi Engelleme Savunması
 
 ## Ne Bu?

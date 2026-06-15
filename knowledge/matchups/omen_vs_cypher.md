@@ -74,7 +74,7 @@ Rakibin alışkanlığını önce kim okursa round'u o çevirir.
 **COUNTER** Omen oynuyorsan kameranın göremediği açılardan peek at. Kameranın yerini gördüysen flash ile kör et — kamera o round bilgi veremez.
 **WHY** Flash kamerayı kör eder. Kamerayı kör etmeden peek aldığında Cypher takımı seni pre-fire eder.
 
-## 4. Yetenek Karşılaştırması
+## 4. Utility Karşılaştırması
 
 İki karakter farklı işler yapar — karşılaştırma şöyle çalışır:
 
@@ -87,7 +87,7 @@ Aynı takımda bu fark avantaj: Omen görüşü kapatır, Cypher bilgiyi toplar.
 
 Karşı takımda bu fark savaş alanı: Omen smoke'u Cypher'ın gözünü kapatır, Cypher teli Omen'in ayağına tuzak kurar. Rakibin tercihini önce kim okursa o taraf çevirir.
 
-## 5. Harita Bazlı Durum
+## 5. Haritaya Göre Değişim
 
 **Haven:** İkisi de burada güçlü. Aynı takımda Omen + Cypher iyi çalışır — üç site Omen smoke'unu zorlar, Cypher flank'ı tutar.
 

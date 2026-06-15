@@ -30,7 +30,7 @@ Breach duvardan geçen stun + flash + arka dalgayla Neon'un sprint koridorunu ka
 
 **Dengeli:** Haven, Ascent, Lotus — beceri ekonomisini kim daha iyi yönetirse öne geçer.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Breach'in stun'u Neon'un sprint hattında patladı
 **MEANING** Sprint kesilir. Neon yavaşlar, slide yapamaz, açıkta kalır.
@@ -113,7 +113,7 @@ Ult maliyeti: Neon ult'u 7 puan, Breach ult'u 9 puan. Breach daha pahalı — bu
 
 **Pearl (Neon avantajlı):** Mid uzun hat, sprint Breach'i geçer.
 
-## 6. Maçı Döndüren Anlar
+## 6. Dönüm Noktaları
 
 **Döngü 1 — Stun sprint'i durdurdu:** Neon aynı hattı tekrarladı, Breach bekliyordu. Hareketlilik gitti.
 

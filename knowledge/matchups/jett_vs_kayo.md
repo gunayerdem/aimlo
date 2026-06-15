@@ -28,7 +28,7 @@ KAY/O'nun bıçağı Jett'in dash'ini, yukarı zıplama ve smoke'unu aynı anda 
 
 **Dengeli:** Split A Main ve Lotus C Main gibi hem yakın hem açık geçişlerin karıştığı yerlerde matchup, bıçak hatlarını kimin daha iyi bildiğine göre döner.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** KAY/O bıçağı sana değdi
 **MEANING** Dash yok, yukarı zıplama yok, smoke yok. KAY/O takımı hemen baskıya geçer — sen artık sıradan bir riflersin
@@ -77,7 +77,7 @@ KAY/O'nun bıçağı Jett'in dash'ini, yukarı zıplama ve smoke'unu aynı anda 
 **COUNTER** KAY/O ult sesini duyar duymaz köşeye çekilip flash atar. Sen baskıyı kesme, sürdür
 **WHY** Ult açıkken bıçak seni durduramaz. Bu üstünlüğü her ult round'unda kullan
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
 Jett'in elinde dash, yukarı zıplama, smoke ve ult var. KAY/O'nun elinde bıçak, iki flash, molly ve ult.
 
@@ -85,7 +85,7 @@ KAY/O'nun gerçek silahı bıçak — gerisi flash + molly ikilisi. Bıçak Jett
 
 Ult maliyeti ikisi için de eşit ama işleyiş farklı: Jett ult'u tek hedefe odaklanır, KAY/O ult'u etrafındaki bütün takımı güçlendirir ve geniş bir yarıçapta tüm düşman util'ini kapatır. KAY/O ult attıysa alandan çık. Jett ult'un açık ve KAY/O ult'u yoksa baskıya geç.
 
-## 5. Harita Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Haven (KAY/O avantajlı):** Üç site, üç bıçak hattı. KAY/O her siteye bıçak atar, Jett üç hattı aynı anda tutamaz.
 
@@ -111,7 +111,7 @@ Ult maliyeti ikisi için de eşit ama işleyiş farklı: Jett ult'u tek hedefe o
 
 **Dönüm 4 — Jett ult + KAY/O bıçağı:** Ult açıkken bıçak seni durduramaz. Bu anı gördüğünde round'u kazanmaya oyna.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 KAY/O'nun tek kozu bıçak. Bıçak sana değmezse KAY/O, elinde iki flash ve molly kalan bir initiator — Jett'i durduracak başka bir şeyi yok.
 

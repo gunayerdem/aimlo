@@ -1,3 +1,9 @@
+---
+id: matchup_omen_vs_op_setup
+type: matchup
+tags: [matchup, omen, op, setup]
+---
+
 # EŞLEŞME: Omen vs OP Kurulumu
 
 ## Ne Oluyor

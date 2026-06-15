@@ -40,7 +40,7 @@ Neden? Gekko'nun molly'si dar ve kapalı sitelerde çok daha sert çalışır. S
 
 İkisini aynı takımda da rahat oynarsın — farklı işler yapıyorlar, çakışmıyorlar.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Gekko bot ile spike'ı plant ediyor
 **MEANING** Sen öldürsen bile spike kurulur — botu o işi hallediyor. Savunma takımına baskı gecikmeli geliyor

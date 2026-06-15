@@ -21,7 +21,7 @@ Gekko'yu diğer initiator'lardan ayıran tek şey şu: yaratıklarını geri al�
 - Botu sadece plant aracı sanmak — botu açı taramak için önden gönderebilirsin, temas ettiği düşmanı kısa süre sersemletir; sonra globülü topla ve tekrar kullan.
 - Ult'u kill almak için saklamak — ult öldürmez, yakaladığını sersemletir; takım o pencerede vurmazsa düşman kurtulur. Ult bir giriş/retake aracıdır, son vuruş değil.
 
-## 4. Örüntü -> Anlam
+## 4. Kalıp -> Anlam
 
 **IF** globüller yerde kalıyor ve süresi dolup yok oluyor
 **MEANING** Geri almayı önceliklendirmiyorsun, Gekko'nun tek avantajını çöpe atıyorsun.

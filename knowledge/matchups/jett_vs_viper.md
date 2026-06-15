@@ -29,7 +29,7 @@ Jett hızla girer, Viper girişini zorlaştırır. Viper'ın wall ve smoke'u aç
 
 **Dengeli haritalar:** Haven, Bind, Lotus — ne Viper wall'u tam kapsamlı çalışır ne Jett uzun açıyı rahat kullanır. Bu haritalarda duel, kim önce util açarsa ona gider.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Viper wall senin dash hattını tam kapattı
 **MEANING** Wall içinden geçersen HP 50'ye iner, karşıya çıktığında duel kayıpsın
@@ -85,7 +85,7 @@ Viper: wall + smoke + molly x2 + ult (8 ult puanı)
 
 Jett'in ultu ucuz — daha sık hazır olur. Ama Viper zone kurduğunda Jett bütün util'ini sadece zone dışında kalmak için harcar. Viper molly'sini Jett'in indiği noktaya göre kurarsa her dash'ı düşünerek atmak zorunda kalırsın. Jett smoke'u kısa — wall boyunca vision kesmez, Viper wall'u ise uzun kalır. Viper zone kurmak için hazırlık ister, Jett anlık girer — Viper fuel'siz yakalanırsa Jett tam util'le daha güçlü.
 
-## 5. Harita Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Icebox (Viper avantajlı):** Viper Mid + A Site'ı tam kapatır. Uzun açılar var ama wall senin Op hattını da keser.
 
@@ -111,7 +111,7 @@ Jett'in ultu ucuz — daha sık hazır olur. Ama Viper zone kurduğunda Jett bü
 
 **An 4 — Viper ultu içinde kaldın:** Post-plant'te HP'n eridi, spike'ı tutamadın. Zone bitmeden defuseye girme.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 Viper seni zone içine çekmeye çalışıyor, sen onu zone dışında dueloya çekiyorsun. Viper fuel'siz yakalandığında, molly ya da wall kapandığında — o pencerede gir ve dueli al. Viper aktifken bekle. Beklemek fuel tüketmek demek — Viper'ın zone'u kapanır, sen girersin.
 

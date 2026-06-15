@@ -19,7 +19,7 @@ Takımın tek iyileştiricisi, tek dirilticisi sensin. Değerin bilgiden ya da t
 - Duvarı tam göğüs hizasına değil, ayak hizasına basıp düşmana yarım duvar bırakmak — alt kısmından bacak görünür, peek atılır.
 - İyileştirme animasyonu sırasında açıkta durmak. İyileştirirken silahını çekemezsin; köşe arkasında, görüş dışında iyileştir.
 
-## 4. Kalıptan Anlama
+## 4. Kalıp -> Anlam
 
 **IF** Her round aynı kişiyi iyileştiriyorsan
 **MEANING** Alışkanlıkla oynuyorsun, durumu okumuyorsun.
@@ -39,7 +39,7 @@ Takımın tek iyileştiricisi, tek dirilticisi sensin. Değerin bilgiden ya da t
 **IF** İyileştirme çıktın yüksek ama round kazanmıyorsan
 **MEANING** Sadece iyileştirme tuşuna basıyorsun, haritayı okumuyorsun.
 **COUNTER** Duvar koyarak alan aç. Slow ile push'u kes. İyileştirme tek yeteneğin değil.
-**WHY** Duvar ve slow round sonucunu doğrudan etkiler — sadece iyileştirme tuşuna basan Sage kit'inin yarısını çöpe atar.
+**WHY** Duvar ve slow round sonucunu doğrudan etkiler — sadece iyileştirme tuşuna basan Sage yetenek setinin yarısını çöpe atar.
 
 **IF** Slow'u ya hiç kullanmıyorsan ya da her round başında aynı noktaya atıyorsan
 **MEANING** Slow'u taktiksel araç olarak değil, alışkanlık olarak kullanıyorsun.
@@ -93,7 +93,7 @@ Düşman adapte olunca: Duvar kırmak için util getirmeye başlarlarsa — duva
 **Tahmin edilebilirse:**
 Duvarın her round aynı yerde, düşman biliyor. Açıyı değiştir. Slow'u push'a reaktif at, boş alana erken atma. Duvarı bazı round'lar saldırıda alan açmak için kullan — sadece savunma aracın değil.
 
-## 8. Rütbe Modülasyonu
+## 8. Rank Modülasyonu
 
 **Düşük (Iron-Silver):** Kendini iyileştiriyorsun, her round aynı noktaya duvar koyuyorsun, açık alanda diriltiyorsun. Üç şeyi düzelt: takım arkadaşını iyileştir, diriltmeden önce duvar koy, push'a slow at.
 

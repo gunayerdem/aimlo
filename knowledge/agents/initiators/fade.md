@@ -23,7 +23,7 @@ Fade, Sova gibi lineup ezberlemez. Recon'unu atar, düşmanı ortaya çıkarır,
 - Bot bağlandıktan sonra swing atmadan bekleme: görüş daralması birkaç saniyelik bir penceredir. Bot vurduğu an gir — zayıflatma sönerse düşman tam görüşle dönmüş olur, üstüne girersen kör sandığın adam seni temiz vurur.
 - Stun zonuna kendin girme: stun bir alan yaratır, içinde duran düşmanı sabitler ama içinden geçen takım arkadaşını da yavaşlatır. Stun'u takımın giriş çizgisinin dışına, düşmanın bastığı noktaya at — kendi swing yolunu kapatma.
 
-## 4. Örüntü -> Anlam
+## 4. Kalıp -> Anlam
 
 **IF** Recon her seferinde taramasını bitirmeden vuruluyorsa
 **MEANING** Recon'un nereye ineceği belli olmuş. Düşmanlar iniş noktasını önceden nişan alıyor.
@@ -95,7 +95,7 @@ Fade, Sova gibi lineup ezberlemez. Recon'unu atar, düşmanı ortaya çıkarır,
 **COUNTER** Botu, savunucunun dikkati başka yöne kilitliyken at: takım arkadaşın o açıdan peek atıyorken, ya da recon zaten gözünü çekmişken. Bot 'bana bak' diyen tek araç olmamalı — savunucu botu mu yoksa giren oyuncuyu mu vuracağına karar veremesin.
 **WHY** Bot, savunucuyu ikilemde bırakınca değer üretir: ya botu vur (o an oyuncuyu kaçır) ya oyuncuyu vur (görüş daralmasını ye). İkilem yoksa savunucu rahatça botu patlatır, yetenek boşa gider.
 
-**IF** Retake'te Fade kit'ini tek seferde, plant alanına girer girmez boşaltıyorsa
+**IF** Retake'te Fade yetenek setini tek seferde, plant alanına girer girmez boşaltıyorsa
 **MEANING** Retake'te bilgi avantajını sabırsızlıkla harcıyorsun. Hepsini birden atınca post-plant tutan üç savunucudan sadece birini ortaya çıkarır, gerisi yeni pozisyondan seni vurur.
 **COUNTER** Retake'i kademeli oyna: önce recon at, kaç kişi nerede tutuyor gör, sonra en tehditli açıya stun, en son botu görüş için sakla ya da takımın temizleyeceği son açıya gönder. Spike menzilini de hesaba kat — stun her zaman defuse pozisyonuna öncelikli.
 **WHY** Retake bir tarama-temizleme dizisidir, tek patlama değil. Yetenekleri sıraya yayarsan her açıyı tek tek kırarsın; hepsini birden atarsan düşman yeniden konumlanır, bilgi eskir.

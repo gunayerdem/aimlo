@@ -1,3 +1,9 @@
+---
+id: matchup_anti_default_punish
+type: matchup
+tags: [matchup, anti, default, punish]
+---
+
 # MATCHUP: Default'a Karşı Cezalandırma
 
 ## Bu Matchup Ne Demek

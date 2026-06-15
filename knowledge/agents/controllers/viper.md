@@ -74,7 +74,7 @@ Viper haritayı ikiye böler. Duvarı ve orb'u tek bir paylaşımlı yakıt havu
 - **Pearl**: B site veya mid boyunca duvar güçlü bölmeler verir. A main'de orb yüksek değer taşır.
 - **Fracture**: Her site'ta çift giriş var. Bir girişi duvarla kes — savunucu ikisini birden tutamaz. Post-plant molly her iki site'ta da güçlüdür.
 - **Haven**: Üç site Viper duvarını her yerde değerli kılar. Üç site demek üç ayrı rotasyon hattı demek — duvarla bir hattı kesersen savunucu o site'a geç gelir. Daha çok aktif nokta olduğu için yakıt takibini sıkı tut; iki yere birden yakıt yetmez, round başında nereye yatıracağını seç.
-- **Corrode**: Dar koridorlar duvarla tamamen kapanır — tek bir duvar tüm görüş hattı'ı keser. Smoke dar geçişte push'u durdurur. Molly lineup'ları kompakt site'larda güçlü iş çıkarır. Dar yapı, Viper kit'inin en çok değer ürettiği ortamdır.
+- **Corrode**: Dar koridorlar duvarla tamamen kapanır — tek bir duvar tüm görüş hattı'ı keser. Smoke dar geçişte push'u durdurur. Molly lineup'ları kompakt site'larda güçlü iş çıkarır. Dar yapı, Viper yetenek setinin en çok değer ürettiği ortamdır.
 
 ## 6. Eşleşme Notları
 - **Brimstone varsa**: Brimstone hızlı execute ister, sen yavaş default'ları kazanırsın. Brimstone'un smoke'u sönerken senin duvarın (yakıtın varsa) hâlâ ayaktadır.
@@ -99,7 +99,7 @@ Viper haritayı ikiye böler. Duvarı ve orb'u tek bir paylaşımlı yakıt havu
 ### Tahmin edilebilir olduğunda
 "Her round aynı duvar, savunucu seni okuyor. 10 derece kaydır — site dinamiği değişir, savunucu baştan düşünmek zorunda kalır. Molly'yi de hep aynı saniyede atma; savunucu kaçış zamanını ezberler."
 
-## 8. Rütbe Ayarı
+## 8. Rank Modülasyonu
 - **Düşük (Iron-Silver)**: Her site için bir duvar noktası, bir orb noktası ezberle. Molly'yi post-plant'te tutmayı hedefle — dövüşte harcama.
 - **Orta (Gold-Platinum)**: Yakıt sıralamasını oturt: önce duvar, sonra orb. Her site için 2 molly lineup'ı ezberle. Duvarı değiştirmeye başla.
 - **Yüksek (Diamond-Ascendant)**: Tam bir lineup kütüphanen olsun. Duvarı erken kapat, yakıtı post-plant orb için sakla. Ult'u kaçış olarak değil, strateji olarak koy.

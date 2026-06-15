@@ -29,7 +29,7 @@ Deadlock seni durdurmak için tek bir şeye oynar: sıçramaini havada yakalamak
 
 **Dengeli:** Haven, Ascent, Lotus — açık site tasarımı her ikisine de alan verir, araç yerleşimi belirler.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Deadlock duvarı geçişin önüne koydu
 **MEANING** Duvarın HP'si sınırlı — nade ile sıçrama birlikte atar, ikisi yeter
@@ -90,7 +90,7 @@ Bu zinciri kim kırıyor?
 
 Ultunu daha iyi konumda patlatan round'u alır.
 
-## 5. Harita Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Bind (Deadlock hafif avantajlı):** Hookah dar — duvar için ideal. Raze nade basarsa açar ama Deadlock geçidi sıfırdan kilitler.
 

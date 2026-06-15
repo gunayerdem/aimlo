@@ -25,7 +25,7 @@ Haritaya göre değişir.
 
 Takımın retake oynuyorsa Sova al. Takımın site basıyorsa Fade al.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Sova recon ile bilgi aldı, Fade takımı bulunduğu yerden oynamaya devam etti
 **MEANING** Recon bilgisi taze — Sova takımı hemen aksiyon alır, konumun belli
@@ -74,7 +74,7 @@ Takımın retake oynuyorsa Sova al. Takımın site basıyorsa Fade al.
 **COUNTER** Drone'u uzak site veya flank için kullan, botu yakın koridor için bırak
 **WHY** Drone görsel verir ama ses çıkarır, vurulup düşürülür. Bot iz bırakır, hızlı gider. İkisini farklı hatlara salarsan iki kat bilgi toplarsın.
 
-## 4. Yetenek Karşılaştırması
+## 4. Utility Karşılaştırması
 
 **Sova araçları:**
 - recon — sabit konum bilgisi, görsel konum işareti
@@ -92,7 +92,7 @@ Takımın retake oynuyorsa Sova al. Takımın site basıyorsa Fade al.
 Sova'nın bilgisi tek noktada kesin gelir. Fade'in bilgisi yayılır ve rakibin peşinden koşar — iz uzun sürer.
 Site basacaksan Fade ult'u Sova ult'undan daha geniş alan vurur. Retake'de kill arıyorsan Sova ult'u tek hedefe daha keskin basar.
 
-## 5. Harita Bazlı Seçim
+## 5. Haritaya Göre Değişim
 
 **Haven:** Sova al. Üç site var, her site için kesin recon noktaları çalışır.
 

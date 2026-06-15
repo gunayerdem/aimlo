@@ -114,10 +114,10 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
 
 ### Harita Güçleri
 - **Bind**: S-tier. Hookah'a tel, Short'a tel, B Long'a kamera. Her koridor bir tuzak fırsatı. Küçük haritada ult maksimum etki yapar.
-- **Ascent**: S-tier. A Main'e tel, B Main'e tel, Mid'e kamera. Haritanın yapısı Cypher'ın kit'ine birebir uyar.
+- **Ascent**: S-tier. A Main'e tel, B Main'e tel, Mid'e kamera. Haritanın yapısı Cypher'ın yetenek setine birebir uyar.
 - **Split**: A-tier. A Ramps'a tel, B Main'e tel. Smoke + tel komboları için dar koridorlar var.
 - **Haven**: A-tier. Üç site, kapatılacak daha çok alan demek; ama Cypher iki site'ı tellerle, üçüncüsünü kamerayla kapsayabilir.
-- **Sunset**: A-tier. Mid koridoruna tel, B Main'e kamera. Dar geometri kit'e uyar.
+- **Sunset**: A-tier. Mid koridoruna tel, B Main'e kamera. Dar geometri yetenek setine uyar.
 - **Pearl**: B-tier. Uzun koridorlar düşmanın telleri uzaktan vurmasına izin verir.
 - **Breeze**: C-tier. Fazla açık. Teller uzaktan görünür, kamera snipe'lanır.
 - **Icebox**: B-tier. A site'ta teller çalışır, B Kitchen'a kamera. Dikey oyun tel yerleşimini sınırlar.
@@ -202,7 +202,7 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
 - **Sunset**: A-tier. Dar site'lar molly kapsamına uygun. Bilgi için Mid'e taret.
 - **Split**: A-tier. Bilgi için A/B Heaven'a taret. Spike noktalarına molly.
 - **Lotus**: B-tier. Site'lar daha açık, bu da molly kapsamını düşürür. Kapılara taret koy.
-- **Icebox**: B-tier. A site kurulumu çalışır ama kit'i B site için karmaşıktır.
+- **Icebox**: B-tier. A site kurulumu çalışır ama yetenek seti B site için karmaşıktır.
 - **Breeze**: C-tier. Geniş site'lar ve uzun görüş hatları, kurulumunun uzaktan temizlenmesini kolaylaştırır.
 
 ### Sık Yapılan Hatalar (IF/MEANING/COUNTER/WHY)
@@ -309,7 +309,7 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
 5. **IF** Chamber'ı sentinel gibi oynuyorsan
    **MEANING** Chamber sadece adında sentinel. Güvenlik ağı olan bir duellist gibi oynar
    **COUNTER** Pasif oynama. Agresif açılar al, çatışmaya gir, ışınlanıp çık
-   **WHY** Pasif Chamber = agresif kit'in tüm avantajını çöpe atmak
+   **WHY** Pasif Chamber = agresif yetenek setin tüm avantajını çöpe atmak
 
 6. **IF** Ult'la gövdeden vurduktan sonra üstüne gitmiyorsan
    **MEANING** Asıl değer kill'in açtığı yavaşlatma alanıdır. Vurup saklanma; vur, yavaşlatma alanını yarat ve yavaşlamış düşmanlara push at
@@ -421,9 +421,9 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
 ### Harita Güçleri
 - **Ascent**: A-tier. Tel için koridorlar, A Main ya da B Main'de smoke. Retake için ult.
 - **Bind**: A-tier. Tüm yetenekler için dar alanlar. Hookah ve Short tel için ideal.
-- **Split**: A-tier. Ramps ve koridorlar tepkili kit'ine uyar.
+- **Split**: A-tier. Ramps ve koridorlar tepkili yetenek setine uyar.
 - **Sunset**: A-tier. Mid ve site koridorları tel ve smoke için biçilmiş kaftan.
-- **Lotus**: B-tier. Kapı mekanikleri kit'iyle ilgi çekici etkileşimler yaratır.
+- **Lotus**: B-tier. Kapı mekanikleri yetenek setiyle ilgi çekici etkileşimler yaratır.
 
 ### Sık Yapılan Hatalar (IF/MEANING/COUNTER/WHY)
 
@@ -462,7 +462,7 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
 ## Veto
 
 ### Yetenek Analizi
-- **Veto** bilgi kapatan bir sentinel ve anti-initiator'dır. Tüm kit'i düşman takımı kör ve şaşkın bırakmak üstüne kuruludur. Sadece site savunmaz; düşmanın topladığı bilgiyi güvenilmez kılar.
+- **Veto** bilgi kapatan bir sentinel ve anti-initiator'dır. Tüm yetenek seti düşman takımı kör ve şaşkın bırakmak üstüne kuruludur. Sadece site savunmaz; düşmanın topladığı bilgiyi güvenilmez kılar.
 - Yetenekleri düşmanın keşfini bozar, takımının hareketlerini gizler ve saldırganı, ne beklediğini bilmeden site'a push atmak zorunda bıraktığı koşullar yaratır.
 - İmza yeteneği düşmanın keşif araçlarını bozar. Düşman Sova recon oku atınca ya da Fade prowler salınca, Veto'nun engellemesi bu çabaları boşa çıkarır.
 - Ult'u geniş bir alanda düşmanın bilgi toplamasını kapatan bir bastırma alanı açar; düşmanı ya kör commit etmeye ya da temel istihbarat için devasa bir util yatırımına zorlar.
@@ -517,7 +517,7 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
 - **vs. Sova**: Hard counter. Sova'nın tüm değeri bilgi toplamaktır. Veto, Sova'nın recon, drone ve pozisyon bilgisine dayanan molly (shock ok) lineup'larını doğrudan geçersiz kılar.
 - **vs. Fade**: Güçlü counter. Fade'in bot'u ve recon'u yüksek değerli keşif araçlarıdır; Veto bunları bozarak Fade'in asıl katkısını boşa çıkarabilir.
 - **vs. KAY/O**: KAY/O'nun yetenek kapatması Veto'nun engellemesini devre dışı bırakabilir, böylece bir karşı-karşı dinamiği doğar. Yetenek-kapatma bıçağının zamanlamasına dikkat et.
-- **vs. Raze**: Zayıf eşleşme. Raze kit'ini kullanmak için bilgiye bağımlı değildir. Engelleme yerine silah oyununa ve pozisyonlamaya odaklan.
+- **vs. Raze**: Zayıf eşleşme. Raze yetenek setini kullanmak için bilgiye bağımlı değildir. Engelleme yerine silah oyununa ve pozisyonlamaya odaklan.
 
 ---
 
@@ -562,7 +562,7 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
 - İstisna: Düşman site'ına tam execute yapıyorsa ve tutamıyorsan erken rotate et, retake kur.
 
 ### Sentinel Ekonomisi
-- Her zaman tam util al. Util'siz sentinel, yeteneksiz herhangi bir rolden daha kötüdür; çünkü kit'in olmadan hiçbir şey üretmezsin.
+- Her zaman tam util al. Util'siz sentinel, yeteneksiz herhangi bir rolden daha kötüdür; çünkü yetenek setin olmadan hiçbir şey üretmezsin.
 - Eco roundlarda Classic ile util al. Tel/taret/molly, Spectre'den daha değerlidir.
 - Ult'unu silah roundları için sakla. Eco save'lerde harcama.
 

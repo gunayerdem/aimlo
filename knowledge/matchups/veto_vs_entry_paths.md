@@ -1,3 +1,9 @@
+---
+id: matchup_veto_vs_entry_paths
+type: matchup
+tags: [matchup, veto, entry, paths]
+---
+
 # EŞLEŞME: Veto vs Entry Yolları
 
 > **YAMA NOTU**: Veto yeni bir sentinel. Yetenek etkileri yamadan yamaya değişebilir — buradaki patternleri güncel yamaya göre kontrol et.

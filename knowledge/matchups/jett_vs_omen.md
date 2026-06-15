@@ -27,7 +27,7 @@ Jett açıyı tutar, Omen o açıyı smoke ile kapatır. Omen arkadan gelir, Jet
 
 **Haritaya göre değişir:** Dar koridorlu haritalarda Omen smoke'u daha baskın. Uzun hatlı haritalarda Jett Op'u öne çıkar. Hangi haritada kimin avantajlı olduğunu aşağıdaki harita bölümünden oku.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Omen smoke'u Jett'in Op tuttuğu hattı kapadı
 **MEANING** Op'un artık görecek hedefi yok. O hattan atış alamazsın.
@@ -100,7 +100,7 @@ Kesişim noktası: İkisi de smoke kullanır ama amaçları farklı. Jett smoke'
 
 **Sunset (Dengeli):** Orta mesafeli hatlar iki tarafa da eşit şans verir.
 
-## 6. Maçı Döndüren Anlar
+## 6. Dönüm Noktaları
 
 **Dönüm 1 — Smoke hattı kapandı:** Jett Op'unu kaybeder, Omen baskıyı eline alır.
 
@@ -110,7 +110,7 @@ Kesişim noktası: İkisi de smoke kullanır ama amaçları farklı. Jett smoke'
 
 **Dönüm 4 — Flank tuttu:** Omen arkadan Jett'i yakalar, post-plant biter.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 Bu matchup'ta Jett olarak en büyük hatan şu: Omen smoke ile hattı kapattıktan sonra aynı hatta tutunmak. Smoke düştü, o hat bitti — hemen başka açıya geç.
 

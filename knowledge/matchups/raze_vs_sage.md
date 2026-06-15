@@ -29,7 +29,7 @@ Raze, nade ve sıçrama ile Sage'in duvar ve slow savunmasını kırmaya gelir. 
 
 **Eşit avantaj — bu üç haritada (Haven, Ascent, Lotus):** Sage duvarı giriş noktasına değil B Short veya Link gibi kaçış yoluna kurarsa, lineup öğrenmemiş Raze ilk engele takılmaz; ama site içinde duvar yine de Raze'i zorlar.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Raze nade'ini lineup ile Sage duvarının arkasına attı
 **MEANING** Nade duvarı aşıp arka alana hasar verir, duvar arkasındaki oyuncular HP kaybeder.
@@ -78,7 +78,7 @@ Raze, nade ve sıçrama ile Sage'in duvar ve slow savunmasını kırmaya gelir. 
 **COUNTER** Raze olarak duvarın muhtemel yerlerini öğren ve alternatif lineup noktaları hazırla — duvarın üstünden, duvarın yanından. Tek lineup'a bağlı kalma.
 **WHY** Duvarın gücü görüşü kesmekte. Birden fazla lineup bilirsen duvar seni durduramaz.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
 Raze'in elinde: nade + molly + 2x sıçrama + ult (roket). Hepsi hasar ya da hareket.
 Sage'in elinde: duvar + slow + heal + ult (canlandırma). Hepsi alan kontrolü ya da takım kurtarma.
@@ -88,7 +88,7 @@ Bu maçın özeti:
 - Raze lineup bilmiyorsa duvarın arkasındaki oyuncu güvende kalır.
 - Ult kıyasında: Sage ult'u ölen oyuncuyu geri getirir, Raze ult'u turu temizler. Sage ult'u bir oyuncuyu kurtarır, Raze ult'u bir alanı temizler — skor başa başsa (10-10) Sage clutch potansiyeli için kritik, öndeysen Raze hızlı round'u kapatır.
 
-## 5. Harita Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Bind (Raze avantajlı):** Hookah yakın mesafe, Showers dar koridor. Raze nade'i duvarı aşar.
 
@@ -104,7 +104,7 @@ Bu maçın özeti:
 
 **Fracture (Raze avantajlı):** İki yönlü giriş Raze sıçrama yarar. Sage tek duvarla iki yönü birden tutamaz.
 
-## 6. Flip Anları
+## 6. Dönüm Noktalarıı
 
 **Flip 1 — Duvar harcanması:** Sage duvarı attığı an, tur içinde ikinci giriş serbest kalır. Raze nade'i hazırsa o pencereyi kullan.
 

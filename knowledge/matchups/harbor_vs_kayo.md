@@ -29,7 +29,7 @@ Harbor duvarı + smoke'u + ikinci duvarı + ult'uyla sahayı örter, takımını
 
 **Dengeli haritalar:** Ascent ve Sunset'te kim bıçağını ve flash'ını yere patlattıktan sonra cast ederse o kazanır. Bıçak yere indi, flash patladı — ikisi de yerde, hemen cast et.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** KAY/O bıçağı site'a attı, sen tam o an smoke atıyordun
 **MEANING** Bıçağın alanı smoke atışını yakaladı — smoke suppress yedi, kapandı, hat açıldı
@@ -118,7 +118,7 @@ Ult karşılaşması: KAY/O ult'u Harbor util'ini siler, Harbor ult'u KAY/O atı
 
 **4 — KAY/O ult'a girdi:** KAY/O sersemletme yedi, util'i bozuldu → round Harbor'a. KAY/O engelin arkasına geçip bölgeden çıktıysa → round KAY/O'ya.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 **Haritaya göre agent seç:** Lotus ve Pearl'de Harbor oyna. Bind ve Split'te KAY/O'ya geç.
 

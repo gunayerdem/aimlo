@@ -1,6 +1,12 @@
+---
+id: matchup_neon_vs_trap_play
+type: matchup
+tags: [matchup, neon, trap, play]
+---
+
 # EŞLEŞME: Neon vs Tuzak Oyunu
 
-## Etkileşim Kimliği
+## Matchup Özü
 Neon, sprint ve slide ile sahayı herkesten hızlı geçer. Tuzak kuran ajanlar (Killjoy, Cypher, Deadlock, Vyse) bu hıza göre tasarlanmadı — düşmanın normal tempoda yürüyeceğini varsayarlar. Neon o varsayımı yıkar. Tek katman tuzak koyarsan Neon üstünden geçer gider. Ama Neon duvarı ve stunü kullanmadan körü körüne sprint ederse, katmanlı bir kuruluma dalar ve orada ölür.
 
 ## Yaygın Cezalandırma Kalıpları
@@ -34,7 +40,7 @@ Neon, sprint ve slide ile sahayı herkesten hızlı geçer. Tuzak kuran ajanlar 
 **COUNTER**: Stunün atıldığı açıyı öğren — o açıdan girme, yan koridoru dene
 **WHY**: Stun o açıya girilince tetikleniyor — açıyı değiştirirsen tetiklenmez
 
-## Tekrarlanan Başarısızlık Ne Anlama Gelir
+## Tekrarlayan Başarısızlık Ne Anlama Gelir
 
 **Tuzak oyuncusu Neon'a sürekli eziliyorsa**: Tuzakların dağınık ve tek katmanlı. Neon tek bir boşluk bulup geçer. Teli, botu, mollyyi üst üste diz — birini geçince hemen diğerine düşsün.
 

@@ -1,3 +1,9 @@
+---
+id: general_mental-game
+type: general
+tags: [general, mental, game]
+---
+
 # Mental Oyun -- Radiant Seviye Bilgi Bankası
 
 ---

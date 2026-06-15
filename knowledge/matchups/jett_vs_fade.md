@@ -27,7 +27,7 @@ Fade seni bulmaya çalışır, sen de bulunmamaya. Recon, bot ve stun zinciriyle
 
 **Dengeli:** Haven, Ascent ve Lotus'ta dash'ini uzun açıdan kullanırsan sen öndesin; Fade botu close angle'a atarsa Fade öne geçer.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Fade recon'u seni gösterdi
 **MEANING** Recon pozisyonunu Fade takımına işaretler. Trade ortağı gelir, peek'ini trade'lerler.
@@ -83,7 +83,7 @@ Fade'in util'i bilgi ve kovalama üzerine: bot, recon, stun ve ult (7 puan).
 
 Fade seni bulmaya çalışır, sen bulunmamaya. Yerini değiştirdiğin an Fade'in bilgisi bayatlar. Dash hattını hep aynı tutarsan Fade bot lineup'larını öğrenir ve seni yakalar.
 
-## 5. Map Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Haven (Fade avantajlı):** 3 site var, recon her site'ı tarar. C Long'da op tutarken recon'a açık kalırsın.
 
@@ -99,7 +99,7 @@ Fade seni bulmaya çalışır, sen bulunmamaya. Yerini değiştirdiğin an Fade'
 
 **Split (Dengeli):** Sen A Main'den vertical girersin, Fade B Main'de botla kovalar.
 
-## 6. Flip Anlar
+## 6. Dönüm Noktaları
 
 **Flip 1 — Recon gösterir:** Recon görüşünde kaldıysan aggressive pozisyonun Fade takımına gider.
 
@@ -109,7 +109,7 @@ Fade seni bulmaya çalışır, sen bulunmamaya. Yerini değiştirdiğin an Fade'
 
 **Flip 4 — Ult'a karşı dash:** Dash hazırsa menzil dışına çıkarsın; cooldown'daysan zayıflatma'un içinde kalırsın.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 Fade'e karşı Jett oynuyorsan tek soru şu: zincirin hangi halkasını kıracaksın?
 

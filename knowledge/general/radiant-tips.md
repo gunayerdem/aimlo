@@ -1,3 +1,9 @@
+---
+id: general_radiant-tips
+type: general
+tags: [general, radiant, tips]
+---
+
 # Radiant Seviye Koçluk Bilgi Bankası
 
 Radiant'ı diğerlerinden ayıran şey refleks değil — pattern okuma ve mikro-kararlar. Buradaki her ipucu IF / MEANING / COUNTER / WHY formatıyla geliyor. Yüz yüze koçluk gibi oku.

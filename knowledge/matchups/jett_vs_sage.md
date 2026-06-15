@@ -27,7 +27,7 @@ Jett dash'le giriyor, Sage duvar, yavaşlatma ve heal ile o girişi durdurmaya �
 
 **Dengeli:** Haven, Ascent ve Lotus'ta Jett açık görüş hattı bulursa kazanan Jett olur; Sage duvarı boğazı erken kapatırsa kazanan Sage olur.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Jett A Main'den dash'le girdi, Sage duvarı boğaza anında kuruldu
 **MEANING** Duvar dash sonrası yeniden konumlanma alanını keser — Jett duvarın arkasında yalnız kalır, trade gelmez
@@ -76,13 +76,13 @@ Jett dash'le giriyor, Sage duvar, yavaşlatma ve heal ile o girişi durdurmaya �
 **COUNTER** Sage'in yavaşlatma atmasını önce takım yeteneğiyle kır (Sova recon, Breach flash). Yavaşlatma atılmamışsa Jett girer.
 **WHY** Sage'in aktif silahı yavaşlatmadır — takım yeteneğiyle kırarsan Sage'in eli boş kalır.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
 Jett yetenekleri seni öne taşır: dash'le giriş, yukarı sıçrayıp açı. Sage yetenekleri girişi durdurur ama Sage'in kendisi öne gidemez — duvar ve yavaşlatma reaktiftir, Sage topa değil sana cevap verir. Jett attack tarafında Sage'in bekleyen savunmasına baskı yapar. Defense tarafında Sage'in duvarı ve yavaşlatması Jett'in girişini boğar.
 
 Ult farkı: Jett ult'u ekonomik round silahıdır — ucuz ama yalnızca kendine yarar. Sage ult'u round kazanma silahıdır — pahalı ama takım değeri yüksek. Sage ult'unu işe yaramayan bir oyuncuya harcarsa round Jett'te kalır.
 
-## 5. Map Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Bind (Sage):** Teleporter önü ve Hookah'ta Sage duvarı boğazı keser. Yavaşlatma Jett'in dash'ini yener.
 
@@ -98,7 +98,7 @@ Ult farkı: Jett ult'u ekonomik round silahıdır — ucuz ama yalnızca kendine
 
 **Fracture (Sage hafif):** Çok taraflı giriş Sage'in duvar, heal ve canlandırma kombosuna yarar.
 
-## 6. Flip Noktaları
+## 6. Dönüm Noktaları
 
 **Flip 1 — Duvarın harcanması:** Sage duvarı atıldığı an o round ikinci giriş serbesttir. İlk girişi duvarı harcatmak için feda et, ikinci giriş asıl giriştir.
 

@@ -27,7 +27,7 @@ Yoru yalan satar — clone, teleport ve flash'la Fade'i yanıltır. Fade gerçe�
 
 **Haritaya göre değişir:** Yoru iki ayrı hat açar ve recon bu hatlardan sadece birini kaplarsa Fade kör kalır. Recon'u clone ile Yoru'nun aynı anda göründüğü açıdan atarsan Fade hangisinin tag aldığını tek bakışta görür — yalanın değeri sıfıra iner.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Fade recon attı, sahada hem Yoru hem clone var
 **MEANING** Recon clone'a değmez — sadece gerçek Yoru'ya tarama işareti basar. İşaretli olan gerçek, işaretsiz olan clone. Fade doğru hedefi bir bakışta seçer.
@@ -76,7 +76,7 @@ Yoru yalan satar — clone, teleport ve flash'la Fade'i yanıltır. Fade gerçe�
 **COUNTER** İkinci recon yoksa veya takım A Short'u geçemiyorsa Fade bu açıyı kapatamaz. Asimetriyi sen kurarsan Fade bilgisiz kalır.
 **WHY** Bir recon bir yön açar. Yoru iki yön birden oynarsa Fade her zaman bir tarafı göremez.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
 Yoru yanlış bilgi üretir — clone, teleport, flash, ult. Fade doğru bilgiyi toplar — recon, bot, tutma, ult. İkisi de bilgi üzerine oynar ama zıt taraftan. Yoru kazanmak için Fade'i şaşırtacak, Fade kazanmak için Yoru'nun gerçek yerini ayıracak. Ult maliyeti eşit — ikisi de 7 puan.
 

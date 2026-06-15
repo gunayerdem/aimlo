@@ -1,3 +1,9 @@
+---
+id: matchup_raze_vs_killjoy
+type: matchup
+tags: [matchup, raze, killjoy]
+---
+
 # EŞLEŞME: Raze vs Killjoy
 
 ## Bu Eşleşme Neden Önemli

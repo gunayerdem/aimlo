@@ -1,3 +1,9 @@
+---
+id: general_advanced-mechanics
+type: general
+tags: [general, advanced, mechanics]
+---
+
 # İleri Mekanikler -- Radiant Seviye Bilgi Bankası
 
 ---

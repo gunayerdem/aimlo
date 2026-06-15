@@ -1,3 +1,9 @@
+---
+id: matchup_initiator_vs_sentinel
+type: matchup
+tags: [matchup, initiator, sentinel]
+---
+
 # MATCHUP: Initiator vs Sentinel
 
 ## Bu Çatışma Nedir

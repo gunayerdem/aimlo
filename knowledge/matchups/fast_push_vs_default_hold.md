@@ -13,7 +13,7 @@ Fast push şu demek: tüm takım tek siteye yığılır, savunma rotate edemeden
 
 Bu matchup'ta tek bir kilit an var: **ilk temas**. Saldırı bilgi vermeden ilerliyorsa push çalışıyor. Savunma ilk tag'i aldıysa hold çalışıyor. Bu anın dışındaki her şey sadece util yakmak.
 
-## 2. Hangi Taraf Avantajlı
+## 2. Kim Avantajlı
 
 **Fast push avantajlı:**
 - Savunma dağılımı sabit ve round başında tuzağını kurmamışsa
@@ -29,7 +29,7 @@ Bu matchup'ta tek bir kilit an var: **ilk temas**. Saldırı bilgi vermeden iler
 - Saldırının entry agenti dash'ini harcadıktan sonra yanında kimse kalmadıysa
 - Savunmada aynı koridoru çaprazdan kapatan iki op varsa
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Saldırı smoke atmadan fast push başlattı
 **MEANING** Savunma iki açıdan rahat vurur, ilk giren iki taraftan birden yenir

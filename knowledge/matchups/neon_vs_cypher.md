@@ -29,7 +29,7 @@ Bu eşleşme bilgi savaşı. Cypher tuzak kurar; sen oradan geçersen yerini ö�
 
 **Dengeli:** Haven, Ascent ve Lotus'ta eşleşme Cypher'ın tuzak yerleşimine ve senin rotate seçimlerine göre değişir.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Sprintle A Main'e girdin, tuzak choke'ta
 **MEANING** Sprint tuzağı atlatmaz — tetik alanı geniş, hızın önce tuzağa değer. Yavaşlarsın ve yerini Cypher'a verirsin.
@@ -87,7 +87,7 @@ Neon hız verir, Cypher bilgi. Eşleşmenin kilidi şu: Neon tuzağa değmeden k
 
 Ult maliyeti ikisinde de eşit. Neon ult'u direkt kill yapar. Cypher ult'u tek başına kill yapmaz ama doğru anda çekilirse tüm round planını çökertir.
 
-## 5. Harita Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Bind (Cypher avantajlı):** Teleporter ve Hookah dar. Neon sprinti her iki koridorda da tuzağa girer. Cypher burada rahat.
 
@@ -103,7 +103,7 @@ Ult maliyeti ikisinde de eşit. Neon ult'u direkt kill yapar. Cypher ult'u tek b
 
 **Fracture (Cypher avantajlı):** İki yönden giriş var. Cypher tuzağı iki hatta da koyar. Neon tek yön sprintle iki hattı birden kapatamaz.
 
-## 6. Flip Anlar
+## 6. Dönüm Noktaları
 
 **Flip 1 — Tuzak tetiklenmesi:** Tuzağa değdiysen o round Cypher'a döndü. Teli önceden biliyorsan atlat — uzaktan patlat veya alternatif hattan git.
 

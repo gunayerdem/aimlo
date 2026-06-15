@@ -139,7 +139,7 @@ Bu kit yerinde duranı cezalandırır. Hareketli duvardan kimse geçmezse o yete
 
 **Yeteneği boşa giderken**: "Duvarı tam menzile salıyorsun, kritik geçiş anında sönüyor. Sadece takımın geçmesi gereken mesafeyi ört, fazlasını değil — duvarın ömrü sabit."
 
-## 8. Rütbe Ayarı
+## 8. Rank Modülasyonu
 
 **Düşük (Iron-Silver)**: Hareketli duvarı atak'ta basit bir ileri siper olarak kullan — choke'a at, arkasından site'a yürü. Su duvarını şimdilik kapı girişlerine düz çekebilirsin. Tek kuralın: su sahadayken push yap, su yokken dur. Plant yaptığın her seferde kubbeyi spike'ın üstüne koy.
 

@@ -27,7 +27,7 @@ Breach seni sersemletir, sen Breach'i patlatırsın. Breach'in stunu sıçrama h
 
 **Dengeli:** Haven, Ascent, Lotus'ta iki taraf da orta mesafede kalır. Önce yanlış pozisyona giren kaybeder.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Breach sıçrama ineceği noktaya stun bıraktı
 **MEANING** sıçrama yere inmeden stun yersin — havada iptal olur, olduğun yerde kalırsın
@@ -84,7 +84,7 @@ Raze lehine: sen duvarın arkasına geçersin, Breach'in stunu seni bulamaz. Bre
 
 Ult maliyeti: senin ultun 8 puan, Breach'in ultu 9 puan. Breach ultunu daha seyrek atar — ama attığında alanı tamamen kapatır.
 
-## 5. Harita Bazlı Durum
+## 5. Haritaya Göre Değişim
 
 **Split (Breach avantajlı):** Dar girişler stun ile kapanır. Sıçrama ile geniş yer bulamazsın.
 

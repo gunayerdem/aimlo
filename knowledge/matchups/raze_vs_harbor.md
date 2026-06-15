@@ -1,6 +1,12 @@
+---
+id: matchup_raze_vs_harbor
+type: matchup
+tags: [matchup, raze, harbor]
+---
+
 # EŞLEŞME: Raze vs Harbor
 
-## Ne Oluyor Bu Eşleşmede
+## Matchup Özü
 Harbor'ın duvarları görüşü keser ama Raze'in patlayıcıları duvardan geçer. Bot suyu takmıyor, itiş duvarın üstünden aşırır, granat duvarın arkasına düşer. Harbor'ın elindeki tek gerçek koz kalkanı ve ult'u — onlar fiziksel, durdurur. Geri kalan her şeyi Raze umursamaz.
 
 ## Cezalandırma Kalıpları
@@ -34,7 +40,7 @@ Harbor'ın duvarları görüşü keser ama Raze'in patlayıcıları duvardan ge�
 **COUNTER**: Raze önce bir granatla kalkanı kırmalı, sonra ikincisini plant'a atmalı — bu spike süresini yer; bunu biliyorsan kalkanı boş ver, flank bas
 **WHY**: Kalkan fiziksel engel — kırmak ekstra util harcatır ve zaman kaybettirir
 
-## Tekrarlanan Başarısızlık Ne Anlama Gelir
+## Tekrarlayan Başarısızlık Ne Anlama Gelir
 **Raze olarak Harbor duvarlarından hasar veremiyorsun**: Granatı duvarın tam önüne bırakıyorsun. Granatın yayı var — duvarın biraz gerisini hedefle, granat duvarı aşıp iç tarafa patlasın. Önüne değil, arkasına.
 
 **Harbor olarak takımın Raze'e gidiyor**: Sadece duvar koymak yetmiyor, Raze'in granatları geçiyor. Duvarın yanına fiziksel bir kapama da ekle — ikisi ayrı iş yapar.

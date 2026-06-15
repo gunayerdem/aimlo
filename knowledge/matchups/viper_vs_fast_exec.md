@@ -1,3 +1,9 @@
+---
+id: matchup_viper_vs_fast_exec
+type: matchup
+tags: [matchup, viper, fast, exec]
+---
+
 # EŞLEŞME: Viper vs Hızlı Execute
 
 ## Ne Oluyor Burada

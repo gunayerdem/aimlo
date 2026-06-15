@@ -78,7 +78,7 @@ Vyse tuzaklarla alan kapatan bir sentinel. Killjoy hasar verip geciktirir, Cyphe
 **IF** Tuzaklarını her zaman açıkta, görünür yerlere gömüyorsun (Sova/Fade varken)
 **MEANING** Recon util'i güvenli mesafeden tuzaklarını işaretliyor — gizli kalma avantajını kaybediyorsun
 **COUNTER** Görüş hattının dışına, köşe arkasına, duvar gölgesine göm. Recon tarayan ajanın oku/kuşu görüş hattı ister; tuzağı o hattın kör noktasına koy.
-**WHY** Gizli tuzak Vyse'ın tüm gücü — recon onu açığa çıkarırsa kit'in çöker. Kör noktada: düşman yine tetikler.
+**WHY** Gizli tuzak Vyse'ın tüm gücü — recon onu açığa çıkarırsa yetenek setin çöker. Kör noktada: düşman yine tetikler.
 
 ## 6. Harita Etkileşimleri
 - **Lotus**: Dönen kapılar ve dar B main, duvar tuzağı ve diken için biçilmiş kaftan — B main'de geçen düşman dikenden yavaşlar, arkasına duvar dikersin, geri dönemez. A main'deki dar geçit flash tuzağının garantili tetiklenmesini sağlar; tam peek hattına göm, kör girene çık. C site'ın çoklu girişleri tuzakları dağıtmayı ödüllendirir — ult'u C retake'te tüfekle giren düşmana aç, silahını kilitle.
@@ -106,7 +106,7 @@ Tuzakları 2-3 ayrı girişe yayıyorsun, flash tuzağını peek hattına koyup 
 Tuzakların ya fazla göze batıyor ya da kimsenin geçmediği yerlerde. Düşmanın hangi yolları kullandığına bak, tuzakları oraya kaydır. Flash'ı kendi peek hattına koy ve tam çıkacağın an tetikle — kör ile peek aynı anda olmalı. Herhangi bir açıya çıkmadan önce elindeki her şeyi at.
 
 ### Tahmin edilebilir olunca
-Düşman her tur kurulumunu önceden temizliyor. Pozisyonları değiştir. Aynı açı, farklı nokta bile yeter. Saldırıda önce post-plant dikenini ve duvarını göm — kit'inin post-plant'te en sert noktası orası. Sova/Fade varsa tuzakları görüş hattının dışına, kör noktaya gizle.
+Düşman her tur kurulumunu önceden temizliyor. Pozisyonları değiştir. Aynı açı, farklı nokta bile yeter. Saldırıda önce post-plant dikenini ve duvarını göm — yetenek setinin post-plant'te en sert noktası orası. Sova/Fade varsa tuzakları görüş hattının dışına, kör noktaya gizle.
 
 ## 9. Rank Modülasyonu
 

@@ -115,7 +115,7 @@ Eşleşmenin özü şu: Sova aktif olarak Cypher'ın kurduğunu bulup silmeye ç
 
 **Dönüm 4 — Cypher ult'u bilgiyi çaldı:** Düşürülen Sova, Cypher takımına konum verdi.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 **Radiant'lar bu eşleşmede ne yapar:**
 Cypher tel yerini her el döndürür — Sova'nın hasar oku ezberi o yerde değilse dart boşa gider. Radiant Sova'lar ise drone'u girişten önce yollar: önce kamerayı ve teli tespit eder, sonra girer. Sırayı bozmak istiyorsan drone'u erken vur.

@@ -29,7 +29,7 @@ Neon, Astra'nın smoke'unu hızla geçmeye çalışır. Astra ise smoke ve stun 
 
 **Dengeli:** Haven, Ascent ve Lotus'ta sonuç Astra'nın smoke konumuna ve senin sprint hattı seçimine göre değişir.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Astra senin sprint hattına smoke attı
 **MEANING** Kör ilerlersin — smoke'un arkası belirsiz, tüfek düellosunu kaybedersin
@@ -100,7 +100,7 @@ Neon hızla Astra'nın hazırlığını atlatır. Astra util'ini önceden doğru
 
 **Pearl (Neon avantajlı):** Mid'in uzun koridorunu sprint'le Astra tepki veremeden kapatırsın.
 
-## 6. Maçı Döndüren Anlar
+## 6. Dönüm Noktaları
 
 **Dönüm 1 — Smoke sprint hattını kapattı:** Körsün, ya dur ya farklı hatta geç.
 

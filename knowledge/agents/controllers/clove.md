@@ -101,7 +101,7 @@ Clove sıradan, pasif smoke atan bir controller değil. Öldükten sonra bile sm
 
 "Dirilişi her round bomba kurulduktan sonra tek başına retake'e dönmek için kullanıyorsun. Arkanı kollayacak takım yoksa ult'u sakla — boş round'a yalnız dönmek seni bedava kill yapar."
 
-## 8. Rütbe Ayarı
+## 8. Rank Modülasyonu
 - **Düşük (Iron-Silver)**: Önce smoke at. Dirilişi tutumlu kullan. İyileşme için dövüş kovalama — smoke at, takıma destek ver.
 - **Orta (Gold-Platinum)**: İyileştikten sonra saldırgan peek'leri dene. Öldükten sonra smoke atmayı tutarlı hale getir. Takım push'larında can eritme at.
 - **Yüksek (Diamond-Ascendant)**: Entry ile smoke zamanlamasını dengele. Dirilişi sadece güvenli çıkışın varken kullan. Can eritmeyi takım peek'iyle tam zamanla.

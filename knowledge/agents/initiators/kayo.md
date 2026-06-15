@@ -21,7 +21,7 @@ KAY/O düşmanın yeteneklerini kapatan ajandır. Bıçağı yakınındaki herke
 - Bıçağı atıp kilit penceresini kullanmadan beklemek — kilit kısa sürer; attıysan o saniyelerde gir, yoksa bedava bilgiyi de fırsatı da harcarsın
 - Kendi flash'ına bakıp körleşmek — flash'ı atınca açıdan kafanı çevir, sonra geri dön; kör KAY/O peek yapamaz, takıma da yük olur
 
-## 4. Örüntü -> Anlam
+## 4. Kalıp -> Anlam
 
 **IF** Bıçak her seferinde sıfır düşman kilitliyor
 **MEANING** Bıçağı yanlış yere atıyorsun ya da düşman henüz yerleşmeden erken atıyorsun

@@ -29,7 +29,7 @@ Harbor koridoru duvarla kapatır ve push açar. Sage choke'u duvarıyla kilitler
 
 **Dengeli:** Haven, Sunset, Ascent orta hatlarında iş eşit. Harbor duvarını Sage duvarı kurulmadan açarsa Sage'in hattı bozulur. Sage duvarını önce kurarsa Harbor duvarını hattın dışından geçirmek zorunda kalır.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Harbor duvarı Sage duvarının önünden geçti
 **MEANING** Sage hattın arkasını göremez, push yönü tamamen Harbor'un elinde
@@ -94,7 +94,7 @@ Harbor her util'ini önden koyar, Sage cevap verir. Sage duvarını önce kurars
 
 Ult karşılaşması: Harbor ult'u alanı açar, Sage ult'u trade'i geri alır. Aynı round ikisi birden patlarsa Harbor ult'u önce gelsin, anında push at, diriliş animasyonu bitmeden savunmacıyı trade et.
 
-## 5. Map Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Lotus (Harbor avantajlı):** A Main ve C Mound geniş — Harbor duvarı choke'un tamamını kapatır. Sage duvarı yalnızca iki slot örter.
 
@@ -110,7 +110,7 @@ Ult karşılaşması: Harbor ult'u alanı açar, Sage ult'u trade'i geri alır. 
 
 **Haven (Harbor hafif avantajlı):** 3 site, Sage'in rotate yolu uzun. Harbor'un A Long ve C Long için duvar değeri yüksek.
 
-## 6. Flip Anlar
+## 6. Dönüm Noktaları
 
 **Flip 1 — Duvar zamanlaması:** Sage duvarını Harbor duvarından önce kurarsa round Sage'e döner. Sonra kurarsa duvarı etkisiz kalır, round Harbor'a gider.
 

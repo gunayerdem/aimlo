@@ -31,7 +31,7 @@ Sage duvarı kurar ve yavaşlatmayı atarsa Reyna sıradan bir duelist olur. Rey
 
 **Dengeli:** Ascent, Haven, Lotus gibi orta mesafeli haritalarda Sage duvarı uzun açıları kapatır; Reyna yakın mesafeye ulaşmak için duvarı aşmak zorunda kalır. Reyna ilk kill'i alırsa harita Reyna'ya döner, alamazsa Sage alan kontrolünü tutar.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Reyna hamle yaptı, Sage duvarı Reyna'nın bakış hattına gelmedi
 **MEANING** Duvar geç kuruldu, Reyna bedava hamle yaptı, aim duel'i Reyna'nın.

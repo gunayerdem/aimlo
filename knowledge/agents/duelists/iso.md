@@ -61,7 +61,7 @@ WHY: Iso'nun farkı tek dövüşte bir fazladan mermiye dayanmak. Kalkanlıyken 
 IF: Takım seninle entry bekliyor ama sen kalkanı doldurmaya odaklanıyorsun
 MEANING: Kill avına çıkıp küre topluyorsun ama takım girişin için orada değilsin — site boş kalıyor
 COUNTER: Round'un kritik anında izolasyon dövüşünü takım girişiyle eşle. Önce sen aç, kalkanla ilk açıyı temizle, takım arkandan gelsin. Küre toplamak boş zamanın işi.
-WHY: Iso bir entry duelist'i — duvar ve kalkan takımı içeri sokmak için. Tek başına kill biriktirip site'ı geç alırsan kit'in takıma değer üretmez.
+WHY: Iso bir entry duelist'i — duvar ve kalkan takımı içeri sokmak için. Tek başına kill biriktirip site'ı geç alırsan yetenek setin takıma değer üretmez.
 
 ## 5. Harita Etkileşimleri
 - **Güçlü haritalar:** Ascent (mid 1v1'e açık, duvarla Market'i A site'tan kes), Haven (bol choke var — duvarla savunucuyu ayır, biriyle dövüş), Pearl (uzun koridorlar duvara ve sıralı temizliğe çok uygun), Split (dar site'lar kalkan biriktirmek için ideal).

@@ -1,3 +1,9 @@
+---
+id: matchup_waylay_vs_sentinel
+type: matchup
+tags: [matchup, waylay, sentinel]
+---
+
 # EŞLEŞME: Waylay vs Sentinel
 
 > **YAMA NOTU**: Waylay yeni bir ajan. Yetenekleri yamadan yamaya değişebilir — aşağıdaki tavsiyeleri uygulamadan önce güncel yama notuna bak.

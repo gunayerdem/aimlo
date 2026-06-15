@@ -29,7 +29,7 @@ Raze nade ve sıçrama ile Cypher'ın telini patlatır, dar siteye dalar. Cypher
 
 **Fark yok:** Haven, Ascent, Lotus — orta mesafeli haritalarda tel ve nade yerleşimini daha iyi bilen kazanır.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Raze nade'i A Main'e körlemesine attı, Cypher teli o noktada
 **MEANING** Nade patlaması teli siler — Raze tel hattını harcatmadan geçti
@@ -114,7 +114,7 @@ Ult maliyeti eşit (her ikisi de 7 puan). Raze ult'ı round'u bitirir. Cypher ul
 
 **Dönüm 4 — Cypher ult'ı takım yerini açtı:** Doğru kill sonrası atılan ult Raze takımının planını bozar. Yanlış kill sonrası atılan ult bilgisiz kalır.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 Raze olarak nade'ini tel için at, choke temizliği için değil. Tel'i patlat, sonra gir — sıra bu.
 

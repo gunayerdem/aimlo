@@ -13,7 +13,7 @@ Karşı takımda hem Chamber hem Deadlock varsa şunu bil: ikisi aynı işi yapm
 
 Chamber Op ile erken kill alır, teleportla güvenli açıya kaçar — rolü tamamen silahına bağlı. Deadlock ise ağ, ses tuzağı, duvar ve ult ile push'u yavaşlatır, site girişini fiziksel olarak kapatır. Deadlock duel kazanmaz, duel'i imkânsız hale getirir.
 
-Chamber oynuyorsan Op'un yoksa sen de yoksun. Deadlock oynuyorsan silahın ucuz olsa bile kit'in iş görür.
+Chamber oynuyorsan Op'un yoksa sen de yoksun. Deadlock oynuyorsan silahın ucuz olsa bile yetenek setin iş görür.
 
 ## 2. Kim Avantajlı?
 
@@ -25,7 +25,7 @@ Bu üç harita dışında Deadlock oyna: duvar ve ses tuzağı info verir, Chamb
 
 Chamber oynuyorsan ve karşıda Deadlock varsa duvar açısını round başında oku. Yanlış yere koymuşsa o yönden bas.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Deadlock ses tuzağını koydu, sen de tuzağını aynı bölgeye koydun
 **MEANING** İki info kit aynı alanı kapıyor — ses tuzağı sesi yakalar, senin tuzağın görüş hattını tutar. İkisi çakışınca biri boşa gider
@@ -63,7 +63,7 @@ Chamber oynuyorsan ve karşıda Deadlock varsa duvar açısını round başında
 ---
 
 **IF** Op'un yok, Deadlock full kit ile karşında
-**MEANING** Tuzağın ve teleportun var ama Op yok — bu round yarım sentinelsin. Deadlock ise her kit'ini kullanabilir
+**MEANING** Tuzağın ve teleportun var ama Op yok — bu round yarım sentinelsin. Deadlock ise her yetenek setini kullanabilir
 **COUNTER** Bu round save yap. Deadlock anchor'lık etsin, sen takıma yük olma
 **WHY** Chamber'ın sentinel rolü silaha bağlı. Op yoksa sahaya girme — bu round Deadlock senden iyi
 
@@ -90,15 +90,15 @@ Chamber oynuyorsan ve karşıda Deadlock varsa duvar açısını round başında
 
 Info karşılaştırması: ses tuzağı Chamber'ın tuzağından güçlü — daha geniş alanı, sesle tarar.
 
-Alan kapatma: Deadlock açık ara önde, Chamber'ın bu kategoride kit'i yok.
+Alan kapatma: Deadlock açık ara önde, Chamber'ın bu kategoride yetenek seti yok.
 
 Hasar: Chamber'ın tabancası hasar yapar, Deadlock yapmaz — ama tabanca kredi ister.
 
 Ult karşılaştırması: Op ult'unda hedef kaçabilir. Deadlock ult'undan kaçmak zor — menzile girmeden teleporta basman gerek.
 
-Deadlock'un kit'i Op alımından bağımsız çalışır. Chamber'ın kit'iyse Op'a bağlı — para yoksa kit de zayıflar.
+Deadlock'un yetenek seti Op alımından bağımsız çalışır. Chamber'ın kit'iyse Op'a bağlı — para yoksa kit de zayıflar.
 
-## 5. Harita Bazlı Tercih
+## 5. Haritaya Göre Değişim
 
 **Icebox:** Deadlock. Geniş site ve uzun rotate, duvara birebir uyar.
 

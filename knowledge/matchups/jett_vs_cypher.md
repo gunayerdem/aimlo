@@ -1,6 +1,12 @@
+---
+id: matchup_jett_vs_cypher
+type: matchup
+tags: [matchup, jett, cypher]
+---
+
 # MATCHUP: Jett vs Cypher
 
-## Etkileşim Kimliği
+## Matchup Özü
 Jett yerden oynamak zorunda değil — Cypher'ın tüm kiti yerde duruyor. Yukarı zıplama ve dash varken Cypher'ın tellerinin üstünden atla, kameranın açısına girmeden geç. Ama Cypher rotanı okursa hızın avantaj olmaktan çıkar — ona bedava bilgi verirsin.
 
 ## Yaygın Cezalandırma Kalıpları

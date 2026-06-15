@@ -11,7 +11,7 @@ tags: [matchup, economy, eco, force-buy, full-buy]
 
 Eco roundda (tabanca + hafif zırh, 0–2400 kredi) tek bir işin var: düşmanın silahını kap ya da bir sonraki round için parayı sakla. Force-buy (Spectre/Bulldog + tam zırh, 2500–3500 kredi) parayı riske atar — kazanamazsan ekonomin üç round çöker. Full buy (Vandal/Phantom + tam zırh + util, 3900+ kredi) standart roundun. Eco taraftaysan açıyı verme, silahı kap. Full buy taraftaysan açı hatası yapma, eco'yu hafife alma.
 
-## 2. Hangi Taraf Avantajlı
+## 2. Kim Avantajlı
 
 **Eco/Force lehine:**
 - Sheriff'le crossfire'da bekle, düşman kuru açılırsa iki mermi yeter
@@ -27,7 +27,7 @@ Eco roundda (tabanca + hafif zırh, 0–2400 kredi) tek bir işin var: düşman�
 - Eco tarafı kuru açılırsa full buy önceden nişanla tek vurur
 - Ult farkın varsa eco tarafı ult harcayamaz; harcarsa kaybeder
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Eco takım beş kişi tek açıda yığıldı, full buy push başladı
 **MEANING** Full buy'ın ilk gireni beş silahın ateşine giriyor, çıkamaz
@@ -114,7 +114,7 @@ Eco taraftaysan util'inin olmadığını kabul et. Açı disiplini + aim ile kaz
 
 **Dönüm 5 — Force-buy kararı:** Force-buy yerine full eco seçtiysen para birikti. Force-buy kaybettiysen ekonomi üç round çöktü.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 Eco round kaybettiğinde "round battı" deme — "bir sonraki roundun silahını değerlendiremedik" de. Eco roundda ölmekle yaşamak arasındaki fark, bilgi vermek. Ölüyorsun, para yok, ama rakibin nerede durduğunu öğreniyorsun — bir sonraki round o bilgiyle açı kır.
 

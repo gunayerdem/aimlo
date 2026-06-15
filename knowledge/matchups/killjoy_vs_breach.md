@@ -29,7 +29,7 @@ Breach, duvardan geçen stun ve hasarıyla Killjoy'un kurduğu her şeyi kapak a
 
 **Dengeli:** Haven, Ascent, Lotus'ta matchup ortaya düşer — Breach stun hattını veya Killjoy molly noktasını kim önce değiştirirse o bükülür.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Breach stun'u Killjoy'un durduğu yeri duvardan geçerek vurdu
 **MEANING** Kapak korumaz, stun solid geometry'yi deler. Tuzağı aktive edemezsin, reaksiyon penceren yok.

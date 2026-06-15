@@ -1,3 +1,9 @@
+---
+id: matchup_chamber_vs_sova
+type: matchup
+tags: [matchup, chamber, sova]
+---
+
 # MATCHUP: Chamber vs Sova
 
 ## Etkileşim Özeti

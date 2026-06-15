@@ -1,6 +1,12 @@
+---
+id: matchup_jett_vs_chamber
+type: matchup
+tags: [matchup, jett, chamber]
+---
+
 # MATCHUP: Jett vs Chamber
 
-## Etkileşim Kimliği
+## Matchup Özü
 İkisi de peek at, sonra kaç. Jett dash'le anında yön değiştirir. Chamber ışınlanma noktasına atlar ama o nokta sabittir — önceden koyduğun yere gidersin, başka yere değil. Jett yakın mesafede duel kazanır, Chamber uzak mesafede kazanır. Jett'i uzakta tutarsan Chamber alır; Chamber'ı yakına çekersen Jett alır. Tek soru şu: mesafeyi kim kendi lehine ayarlayacak.
 
 ## Yaygın Cezalandırma Kalıpları

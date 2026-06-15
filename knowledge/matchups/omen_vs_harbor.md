@@ -25,7 +25,7 @@ Harbor'u tek controller olarak alma — bekleme süreleri uzun, round içinde ce
 - Haven, Ascent, Split, Sunset, Bind, Fracture, Icebox, Corrode'da: Omen önde
 - Tek controller karşılaşmasında: her zaman Omen önde
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Harbor duvarı kurdu, harita ikiye bölündü
 **MEANING** Omen teleportu olmadan bir tarafa hapsolursun — duvarı geçemezsin, smoke'la da aşamazsın
@@ -74,7 +74,7 @@ Harbor'u tek controller olarak alma — bekleme süreleri uzun, round içinde ce
 **COUNTER** Flash'ını duvar kurulmadan önce ya da duvarın dışındaki oyunculara at. Duvar varsa flash zamanlamanı ona göre ayarla
 **WHY** Flash düz hat çalışır. Duvar o hattı keser — içeri atarsan boşa gider.
 
-## 4. Yetenek Karşılaştırması
+## 4. Utility Karşılaştırması
 
 Omen round içinde 4-5 kez yetenek kullanabilir. Harbor 2-3 kez.
 

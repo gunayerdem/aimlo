@@ -1,3 +1,9 @@
+---
+id: general_pro-analysis
+type: general
+tags: [general, pro, analysis]
+---
+
 # Pro Analizi — Radiant Koçluk Bilgi Bankası
 
 Bu bilgiyi kendi maçlarında karşılaştığın durumlara bağla — her bölüm sahada ne yapacağını söylüyor.

@@ -15,7 +15,7 @@ Raze ile Reyna aynı rolde ama zıt iş yapar. Raze oynuyorsan takımına bilgi 
 
 Raze, her haritada. Reyna sadece takım dağınık oynayınca tehlikelidir — herkes ayrı köşede beklerse Reyna tek başına round çalar. Takımın birlikte hareket ederse Reyna'nın kill zinciri kırılır, elinde sadece flash kalır. Raze'ın util'i ise takım oynasın oynamasın çalışır.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Reyna flash atıp içeri giriyor, sen botu sürdün
 **MEANING** Reyna flash ile seni körleştirmeye çalışıyor ama bot zaten Reyna'nın geleceği köşeyi tarıyor
@@ -64,7 +64,7 @@ Raze, her haritada. Reyna sadece takım dağınık oynayınca tehlikelidir — h
 **COUNTER** Takımınla o noktaya bak, Reyna karar verirken çapraz ateş aç. Tek başına girme — çapraz pozisyon Reyna'yı tek açıya hapseder
 **WHY** Reyna karar anında düz durur. Çapraz açıdan bakan biri o pencerede Reyna'yı yakalar.
 
-## 4. Yetenek Karşılaştırması
+## 4. Utility Karşılaştırması
 
 Raze'ın elinde dört şey var: bot köşe tarar, sıçrama iki kez atlatır, molly alana hasar basar, ult roketi öldürür. Kill almasan bile hepsi çalışır — util yenilendikçe tekrar kullanırsın.
 
@@ -74,7 +74,7 @@ Bu fark senin için şu anlama gelir: Reyna karşısında botunu ve mollyni harc
 
 Ult karşılaştırması: senin ultun geniş alan roketi, direkt hasar. Reyna'nın ultu ateş hızı ve can dolumu verir — bu bir buff ult. Senin ultun bir pozisyonu temizler, Reyna'nın ultu kill zinciri olmadan söner. Roketi Reyna'nın tahmin ettiğin pozisyonuna at — kaçışla görünmez olsa bile ses ve alan hasarı onu vurur.
 
-## 5. Harita Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Bind:** Hookah girişi ve A Short dar — molly bu girişlerde kaçış yeri bırakmaz. Reyna Hookah'ta heal kullanamaz, alan çok küçük.
 
@@ -98,7 +98,7 @@ Ult karşılaştırması: senin ultun geniş alan roketi, direkt hasar. Reyna'n�
 
 **Abyss:** Yukarı-aşağı geçişler sıçramae açık. Reyna'nın dikey hareketi yok — kaçış onu yerde tutar.
 
-## 6. Maçı Döndüren Anlar
+## 6. Dönüm Noktaları
 
 1. **Reyna kill alamadı.** O round Reyna'nın elinde sadece flash var. Flash'a kapak arkasıyla cevap ver, Reyna sıradan bir silahla oynar.
 

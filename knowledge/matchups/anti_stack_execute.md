@@ -13,7 +13,7 @@ Savunma bir siteye 3+ oyuncu yığarsa o yığını silah gücüne çevirir. Ant
 
 Saldırıdaysan savunmanın nerede yığıldığını execute başlamadan gör. Savunmadaysan saldırının bilgi yatırıp yatırmadığına bak — bilgi yatırdıysa stack yerini değiştir.
 
-## 2. Hangi Taraf Avantajlı
+## 2. Kim Avantajlı
 
 **Anti-stack execute lehine:**
 - Savunma 3 round üst üste aynı siteyi savunduysa — pattern'i okudun, execute'ı o siteye at
@@ -29,7 +29,7 @@ Saldırıdaysan savunmanın nerede yığıldığını execute başlamadan gör. 
 - Stack içi trade zinciri sağlamsa — ilk kill'den sonra ikincisi anında gelir
 - Saldırı execute yerine split push yapıyorsa — stack onu parça parça yer
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Smoke + flash zincirini stack açısına attın
 **MEANING** Stack kör oldu, flash refleksini kırdı, 3-4 oyuncuya giriş penceresi açıldı

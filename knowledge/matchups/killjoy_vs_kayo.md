@@ -29,7 +29,7 @@ KAY/O'nun suppress knife'ı Killjoy'un bütün cihazlarını susturur — turret
 
 **Dengeli:** Haven, Ascent, Lotus'ta iş knife zamanlamasına ve cihaz yerleşimine kalır.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** KAY/O suppress knife'ı Killjoy'un cihaz hattına saplandı
 **MEANING** Turret, bot, molly kapanır — Killjoy'un cihazlarından gelen bütün bilgi ve hasar sıfırlanır.
@@ -87,7 +87,7 @@ Bu matchup asimetrik değil, ters yönlü: KAY/O'nun işi Killjoy gibi cihaz ağ
 
 Ult farkı: Killjoy'un ult'ı 8 puan, KAY/O'nun ult'ı 7 puan. KAY/O ult'ı bir puan ucuz ve Killjoy için en büyük tehdit. KAY/O ult'ını açtıysa kendi ult'ını sakla — onun ult'ı bitince at.
 
-## 5. Map Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Bind (Killjoy avantajlı):** Hookah ve dar geçitler turret için ideal — KAY/O'nun knife atma mesafesi burada pek işe yaramaz.
 
@@ -103,7 +103,7 @@ Ult farkı: Killjoy'un ult'ı 8 puan, KAY/O'nun ult'ı 7 puan. KAY/O ult'ı bir 
 
 **Icebox (Killjoy avantajlı):** Uzun görüş hattı'lar KAY/O'nun knife menzilini zorlar — cihazlar daha kolay güvende kalır.
 
-## 6. Flip Anları
+## 6. Dönüm Noktalarıı
 
 **Flip 1 — Knife cihaz hattına saplandı:** Killjoy util'siz kaldı, site açık — bu anı kazanırsan round biter.
 
@@ -113,7 +113,7 @@ Ult farkı: Killjoy'un ult'ı 8 puan, KAY/O'nun ult'ı 7 puan. KAY/O ult'ı bir 
 
 **Flip 4 — KAY/O ult'ı açıkken Killjoy cover'da bekledi:** Ult bitti, Killjoy cihazlarını yeniden kurdu — KAY/O fırsatı kaçırdı.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 Bu matchup'ta Killjoy'un tek gerçek derdi knife. Knife menzili turret menzilinden geniş — turret'i her zaman duvarın arkasına ya da köşeye koy, knife doğrudan göremezse susturamaz. Knife sesini duyar duymaz köşe al ve knife'ı vur. Bunu yaparsan KAY/O elinde sadece flash + molly kalan bir ajan olur — o zaman matchup senin.
 

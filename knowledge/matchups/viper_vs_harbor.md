@@ -29,7 +29,7 @@ Neden Viper üstte? Çünkü yakıtı parça parça harca. Duvarı kapat, yakıt
 
 Ult karşılaştırması: Viper'ın ult'u uzun süreli alan kilidi, Harbor'ın ult'u kısa süreli sersemletme. Viper'ın ult'u retake çevirir, Harbor'ın ult'u retake açar. Farklı anlarda kullanılır.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Viper duvarını erken kapattı, yakıt topluyor
 **MEANING** Duvar kapanınca o hat kontrolsüz kalır. Rotate alanı açılır.
@@ -90,7 +90,7 @@ Harbor'un Viper'da olmayan silahı: dome'lu ult. Post-plant kubbe mimarisi — V
 
 Aynı takımdaysanız kombo şu: Viper molly'sini plant alanına atar, Harbor ult'u retake'i kilitler. Karşı takımda bu kombo yok — Harbor bu matchup'ta zehirsiz kalır.
 
-## 5. Harita Bazlı Fark
+## 5. Haritaya Göre Değişim
 
 **Breeze:** Viper. Uzun hatlar Viper duvarına uygun. Harbor burada oynamaz.
 

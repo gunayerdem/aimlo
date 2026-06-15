@@ -20,7 +20,7 @@ Haritaya ve faza göre değişir.
 - **Aynı takımdaysan:** ikisini farklı bölgelere yay. Viper A'yı kapar, Killjoy B'yi kilitler — bu ikili Breeze ve Icebox'ta standarttır.
 - **Karşı takımdaysan:** Viper saldırıda ne yaptı, Killjoy savunmada ne yaptı — ikisini ayrı ayrı ölç, aynı fazda kıyaslama.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Viper A'ya duvar + smoke + zehir ile giriyor, Killjoy A'da bekliyor
 **MEANING** Viper'ın duvarı Killjoy kulesinin görüşünü kapatır — kule kör kalır, bilgi gelmez

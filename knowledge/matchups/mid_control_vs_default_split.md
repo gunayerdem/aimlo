@@ -11,7 +11,7 @@ tags: [matchup, mid-control, default-split, map-control, tactical]
 
 Saldırı mid'i alır, iki site'a da rotate baskısı kurar. Savunma mid'i bilerek bırakır — iki site'ı az oyuncuyla kapatır, mid'i tampon olarak kullanır. Bu matchup tek soruya dayanır: mid'in değerini kim daha iyi okuyor? Saldırı mid'i alıp anında kullanırsa round'u yönlendirir. Savunma mid'i bırakıp util saklarsa retake'i kazanır.
 
-## 2. Hangi Taraf Avantajlı
+## 2. Kim Avantajlı
 
 **Mid control (saldırı) avantajlıysa:**
 - Mid iki site'a yakınsa — Ascent Mid Courier, Haven Garage gibi — saldırının rotate hızı savunmayı geçer
@@ -26,7 +26,7 @@ Saldırı mid'i alır, iki site'a da rotate baskısı kurar. Savunma mid'i biler
 - Saldırı mid'i aldı ama site'a push yapmıyorsa rotate'ini tamamla, mid avantajı sıfırlanır
 - Saldırı mid için util döktü ama trade partneri dağıldıysa mid duellosu onlar için trade'siz
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Saldırı round başı mid'e smoke + flash yatırdı
 **MEANING** Savunmanın mid oyuncusu kör ve görüş hattı'sız — saldırı mid'e girer
@@ -101,7 +101,7 @@ Saldırı mid'i alır, iki site'a da rotate baskısı kurar. Savunma mid'i biler
 
 **Sunset (dengeli):** Mid Top + Mid Courtyard saldırı için, Mid Market savunma için. Util sırasıyla belirlenir.
 
-## 6. Flip Momentler
+## 6. Dönüm Noktaları
 
 **Flip 1 — Util sırası:** Saldırı smoke → flash → entry sırasını kurdu mu? Kurduysa mid kazanıldı. Sıra bozulduysa mid savunmaya döner.
 

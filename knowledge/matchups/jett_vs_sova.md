@@ -116,7 +116,7 @@ Ult maliyeti ikisinde de aynı: 7 puan. Jett'in ult'u eco roundda parlar, Sova'n
 
 **Kırılma 4 — Ult agresif hattını okudu:** Ult senin hattını biliyorsa dash ile bile tam çıkış zorlaşır. Post-plant pozisyonunu önceden değiştir.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 Sova seni bir kez bulduğunda takımına söyler. Takım gelir. Sen ölürsün. Bu matchup'ta ölümlerin büyük çoğunluğu recon hasarından değil, recon bilgisinden gelir.
 

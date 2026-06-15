@@ -1,3 +1,9 @@
+---
+id: matchup_cypher_vs_fade
+type: matchup
+tags: [matchup, cypher, fade]
+---
+
 # MATCHUP: Cypher vs Fade
 
 ## Ne Oluyor Bu Matchup'ta

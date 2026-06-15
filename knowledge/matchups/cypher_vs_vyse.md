@@ -23,7 +23,7 @@ Vyse şu an Cypher'ın bir tık önünde — ama bu haritaya göre değişir.
 
 **Fark nerede?** Vyse'nin ult'u round çevirir — retake'te alanda silah çalışmaz, round biter. Cypher'ın ult'u bir sonraki round için bilgi verir. Ult karşılaştırması tartışmasız Vyse'nin lehine.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Cypher teli flank hattına koydu, Vyse molly aynı hatta
 **MEANING** İki engel üst üste — biri temizlenirken öteki tetiklenir, flank hattı çift kilitli
@@ -106,7 +106,7 @@ Vyse şu an Cypher'ın bir tık önünde — ama bu haritaya göre değişir.
 - **Ascent** — ikisi de iş görür, comp'un geri kalanına göre karar ver
 - **Breeze / Pearl** — burada Killjoy veya Deadlock önce gelir, sentinel seçimi ikincil
 
-## 6. Round'u Döndüren Anlar
+## 6. Dönüm Noktaları
 
 1. **Vyse ult'u retake alanında.** Vyse ult'unu aktive eder ve sen o alandaysan round bitti. Cypher'ın buna verecek eşdeğer bir cevabı yok. Ult sesini duyar duymaz o alandan çık.
 

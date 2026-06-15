@@ -29,7 +29,7 @@ Jett oynuyorsan pozisyonunu stun hattının dışına al. Breach oynuyorsan stun
 
 **Dengede:** Haven, Ascent, Lotus'ta iki taraf da işler — karar Breach'in stun hatlarını bilmesine ve Jett'in o hattan uzak durmasına bağlı.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Breach stun, Jett dash atmadan önce aktive oldu
 **MEANING** Jett donar, dash basılmaz, yerinde kalır

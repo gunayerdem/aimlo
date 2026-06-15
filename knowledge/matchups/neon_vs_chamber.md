@@ -1,3 +1,9 @@
+---
+id: matchup_neon_vs_chamber
+type: matchup
+tags: [matchup, neon, chamber]
+---
+
 # EŞLEŞME: Neon vs Chamber
 
 ## Bu Eşleşmede Ne Oluyor
@@ -35,7 +41,7 @@ Neon sprint ve slide'la açıları geçer — durmaz, tutmaz. Chamber Op'u tek a
 **COUNTER**: Neon, entry öncesi stun'ı TP bölgesine at — Chamber TP'yi kullanırsa stun yer
 **WHY**: TP noktası kontrol edilmezse Chamber her zaman ikinci açıyı açar
 
-## Tekrarlanan Başarısızlık Ne Anlama Gelir
+## Tekrarlayan Başarısızlık Ne Anlama Gelir
 
 **Neon** sürekli Op'a ölüyorsa: düz, temiz hatlarda sprint ediyor demektir. Önce duvarı at, görüş hattı'ı kapat, sonra geç. Ya da o açıyı geçerken slide yap — hitbox değişir, atış zorlaşır.
 

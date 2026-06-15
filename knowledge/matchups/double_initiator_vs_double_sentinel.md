@@ -13,7 +13,7 @@ Double initiator (Sova + KAY/O, Breach + Skye, Fade + Gekko) bilgi üretir — f
 
 Bu matchup tek şeye bakar: bilgiyi topla, o bilgiyi girişe çevir, kazan. Karşı taraf o bilgiyi keser ve telini tetikletirse o kazanır. İkisi de yarım iş yaparsa maç uzar.
 
-## 2. Hangi Taraf Avantajlı
+## 2. Kim Avantajlı
 
 **Double initiator lehine:**
 - Harita açık ve geniş angle'lıysa (Breeze, Icebox) — flash + recon zinciri site'ı tarar, tuzak hattı kaplayamaz
@@ -29,7 +29,7 @@ Bu matchup tek şeye bakar: bilgiyi topla, o bilgiyi girişe çevir, kazan. Kar�
 - Savunma full-buy ve setup her round farklı yerdeyse — initiator bir önceki bilgiyi kullanamaz
 - Kadroda duelist yoksa — entry sadece util'e kaldı, tuzak hattı her girişi tag'ler
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Double initiator recon + flash zincirini arka arkaya attı
 **MEANING** Tuzak hattı bilgi verdi ama flash anında savunma körleşti — giriş penceresi şu an açık
@@ -86,7 +86,7 @@ Ult ekonomisinde tablo tersine döner. Initiator ult'ları savunmada daha hızl�
 
 Sonuç: round sayısı 15'in altındayken sentinel setup baskısı yüksektir — her giriş tuzak hattına çarpar. Round sayısı 20'yi geçtiğinde initiator ult stoku dolmuştur — o rounddan itibaren giriş baskısı artar, sentinel ult'u yoksa site'ı boşalt.
 
-## 5. Map Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Bind (double sentinel avantajlı):** TP rotate + Hookah + Showers dar geçitleri tuzak hattının evidir. Flash sentinel telini bulamaz, TP rotate zinciri kapanır.
 
@@ -104,7 +104,7 @@ Sonuç: round sayısı 15'in altındayken sentinel setup baskısı yüksektir �
 
 **Sunset (double initiator avantajlı):** A Main açık angle + Mid initiator util hattı. Sentinel tuzak hattı tek site'a sıkışır.
 
-## 6. Flip Moment'ler
+## 6. Dönüm Noktaları
 
 **Flip 1 — Util harcama sırası:** Initiator util'i erken patladıysa double sentinel retake'i alır. Util'i yarısı entry'e yarısı post-plant'e ayırdıysan her iki fazda da baskı kurarsın, sentinel retake çıplak kalır.
 

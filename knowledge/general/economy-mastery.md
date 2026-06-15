@@ -1,3 +1,9 @@
+---
+id: general_economy-mastery
+type: general
+tags: [general, economy, mastery]
+---
+
 # Ekonomi Ustalığı
 
 ---

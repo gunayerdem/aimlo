@@ -54,7 +54,7 @@ Tejo iki işi aynı anda yapabilen tek initiator: önce bilgiyi toplar, sonra o 
 **IF** Her tur drone → stun → molly sırasını ezbere tekrarlıyorsun
 **MEANING** Diziliş tahmin edilebilir oldu, düşman her adımını önceden bekliyor
 **COUNTER** Sırayı boz: bir turda önce stun at, ertesi turda molly ile aç, üçüncüde drone'u atla ve hızlı execute yap. Tahmin edilemezlik senin silahın.
-**WHY** Sabit sıra = düşman her adıma hazırlanır = kit'in sürpriz değeri ölür
+**WHY** Sabit sıra = düşman her adıma hazırlanır = yetenek setin sürpriz değeri ölür
 
 **IF** Saldırıda bütün util'i site girişinde harcıyorsun, post-plant'a hiçbir şey kalmıyor
 **MEANING** Yetenek bütçesi eksik — ult ve molly post-plant'ta da büyük değer taşır
@@ -99,7 +99,7 @@ Tejo iki işi aynı anda yapabilen tek initiator: önce bilgiyi toplar, sonra o 
 ## 7. Eşleştirme Notları
 - **Sova karşı**: İkiniz de bilgi toplarsınız ama farklı yoldan. Sova uzak mesafe lineup ajanı, sen orta mesafe baskı ajanısın. Aynı takımda çift bilgi katmanı kurarsınız: Sova geniş tarar, sen hedefli suppress ve hasar verirsin.
 - **Fade karşı**: Fade zayıflatma ve bilgi verir, sen suppress ve hasar verirsin. Fade botuyla yakından takip eder, sen drone ile sessizce keşfe çıkarsın. Karşıda Fade varsa drone'un gizliliği senin avantajın — Fade'in botu ses çıkarır, drone çıkarmaz.
-- **KAY/O karşı**: KAY/O suppress'i bütün kit'ini devre dışı bırakır. Bıçağı yediğinde yeteneksiz kalırsın. Bu eşleşmede KAY/O'nun suppress zamanlamasını oku, util'ini suppress penceresinin dışında kullan.
+- **KAY/O karşı**: KAY/O suppress'i bütün yetenek setini devre dışı bırakır. Bıçağı yediğinde yeteneksiz kalırsın. Bu eşleşmede KAY/O'nun suppress zamanlamasını oku, util'ini suppress penceresinin dışında kullan.
 - **Sentinel'lara karşı**: Drone ile Killjoy turret'ını ve Cypher tellerini ortaya çıkar. Stun, sentinel'ı kurulumundan çıkmaya zorlar. Molly'lerle sentinel util'ini iki noktadan temizle.
 - **Chamber karşı**: Chamber op tutarken drone ile yerini aç, stun ile sersemlet — sersemlemiş haldeyken op tutmak imkansızdır. Molly'lerle Chamber'ın teleport noktasını ve mevcut pozisyonunu aynı anda hedefle.
 - **Agresif duelist'lere karşı**: Drone erken push'u yakalar. Stun, geniş açıyla peek atan duelist'i durdurur. Drone'u erken uyarı sistemin gibi kullan.

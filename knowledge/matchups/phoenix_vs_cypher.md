@@ -29,7 +29,7 @@ Phoenix oynuyorsan Cypher'ın tellerini util ile temizlemek zorundasın — flas
 
 **Dengeli:** Haven, Ascent, Fracture gibi haritalarda matchup senin util kullanımına göre değişir — her round'u ayrı oku.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Phoenix flash ile Cypher'ı kör etti, Phoenix peek alıyor
 **MEANING** Flash yediği an Cypher tele basamaz, Phoenix flash süresi boyunca kill hattında
@@ -101,7 +101,7 @@ Phoenix, Cypher'ın tel hattını util ile temizleyebilir. Cypher, Phoenix'in pe
 
 **Fracture (Dengeli):** İki yönden giriş Phoenix'in kendi kendine entry alabilmesine yarar, ama Cypher tel hattı iki yönü de tutabilir.
 
-## 6. Maçı Döndüren Anlar
+## 6. Dönüm Noktaları
 
 **An 1 — Cypher flash yedi:** Flash'e basamazsa bedava kill. Matchup Phoenix'e döner.
 

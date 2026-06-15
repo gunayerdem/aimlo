@@ -98,7 +98,7 @@ Sen tek başına iş çeviren bir smoke ajanısın. Görevin sadece duman atmak 
 
 **Smoke zamanlaması kaydığında:** "Dumanı takım hazır olmadan attın, giriş gelmeden söndü. Önce 'giriyoruz' çağrısı, sonra duman. Smoke takımın ayağına göre zamanlanır — saniyeler önce atılan duman, asıl ihtiyaç anında elini boş bırakır."
 
-## 8. Rütbe Ayarı
+## 8. Rank Modülasyonu
 - **Düşük (Iron-Silver):** Önce smoke'ları öğren. Teleport oyununu sonraya bırak. Flash'ı kendin peek atacaksan kullan, takım koordinasyonunu sonra ekle.
 - **Orta (Gold-Platinum):** One-way smoke noktaları öğren — harita başına 2-3 tane yeter. Kısa teleport için 2-3 güvenilir nokta belirle. Flash'ı takım girişiyle aynı anda atmaya başla.
 - **Yüksek (Diamond-Ascendant):** Smoke zamanlamasını takımın girişine göre ayarla. Teleport rotalarını round başlamadan planla. Ult'u sadece arkadan baskı için değil, hızlı bölge geçişi için de kullan.

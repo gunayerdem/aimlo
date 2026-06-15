@@ -1,3 +1,9 @@
+---
+id: general_clutch-methodology
+type: general
+tags: [general, clutch, methodology]
+---
+
 # Clutch Metodolojisi -- Radiant Seviye Bilgi Bankası
 
 ---

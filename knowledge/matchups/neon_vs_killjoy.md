@@ -29,7 +29,7 @@ Neon sprint ve slide ile Killjoy'un kurduğu tuzak hattını kırmaya gelir. Kil
 
 **Orta:** Haven, Ascent ve Lotus'ta avantaj koridor seçimine göre değişir. Neon A Short/Mid seçerse öne geçer, Killjoy B anchor kurarsa denge oturur.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Neon sprintle A Main'e giriş yaptı, Killjoy tareti A Main'e bakıyor
 **MEANING** Taret Neon'u sprint sırasında tarar ve can keser — sahaya girerken çoktan hasarlısın.
@@ -108,7 +108,7 @@ Neon'un ekipmanı hız ve hasar üzerine: sprint, slide, stun, fast lane. Killjo
 
 **Dönüm 4 — Killjoy ultu detain:** Sprint yönünü Killjoy ultunun alanından çıkaramazsan detain + trade ile ölürsün.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 **Radiant'lar ne yapar:** Neon oynayanlar sprint hattını her roundda değiştirir — aynı koridora iki kez girme. Killjoy oynayanlar ilk roundda Neon'un giriş hattını okur, bot + molly'yi tam o hatta yeniden kurar. Matchup koridor seçiminde başlar, koridor seçiminde biter.
 

@@ -1,8 +1,14 @@
+---
+id: matchup_miks_vs_anchor_setups
+type: matchup
+tags: [matchup, miks, anchor, setups]
+---
+
 # EŞLEŞME: Miks vs Anchor Kurulumları
 
 > **YAMA NOTU**: Miks yeni bir ajan. Yetenek değerleri yamadan yamaya değişiyor — buradaki menzil bilgilerini güncel yama notundaki rakamlarla karşılaştır, tutmuyorsa pozisyon ayarını ona göre yap.
 
-## Ne Oluyor Bu Eşleşmede
+## Matchup Özü
 
 Miks'in tek işi seni durduğun yerden söküp atmak. Killjoy, Cypher, Deadlock gibi bir sentinel oynuyorsan ve tek noktaya kuruluyorsan, Miks tam seni hedef alıyor. Yetenekleri seni yerinden oynattığı an botundan, kamerandan, mollyinden kopuyorsun. O yüzden Miks'e karşı anchor tutmak düşündüğünden zor.
 

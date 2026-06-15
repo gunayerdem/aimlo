@@ -29,7 +29,7 @@ Astra haritanın her noktasına smoke, stun ve çekim atar — yıldız sayısı
 
 **Dengeli:** Ascent ve Sunset'te orta mesafeli açılarda yıldız sayısı belirler. Dört yıldız hazırsa Chamber'ın her açısına smoke düşürürsün. İki yıldız kaldıysa sahte execute için harcamak zorunda kalırsın — Chamber tam o anda atışını yapar.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Chamber op ile uzun açı tutuyor, sen yıldızını o açıya önceden gömdün
 **MEANING** Smoke tek tıkla düşer, Chamber'ın atış penceresi kapanır, yer değiştirme yapmak zorunda kalır
@@ -78,7 +78,7 @@ Astra haritanın her noktasına smoke, stun ve çekim atar — yıldız sayısı
 **COUNTER** Execute öncesi yıldızını tuzağın sight hattına yerleştir; smoke düştüğünde tuzak bilgi verir ama görüş vermez
 **WHY** Tuzağın silahı bilgi ve yavaşlatma. Smoke bilgiyi kesmez ama görüşü örter — Chamber alarmı duyar, ne göreceğini bilemez. Tuzağın değeri yarı yarıya düşer.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
 **Astra elinde ne var:**
 - Round başına 4 yıldız — smoke / çekim / stun / molly etkisi yerine konumlama gücü.
@@ -101,7 +101,7 @@ Astra haritanın her noktasına smoke, stun ve çekim atar — yıldız sayısı
 
 **Ult çarpışması:** İkisi aynı roundda patladıysa — senin ult'un Chamber'ın sight hattını böldüyse Chamber ult'u ölü silahtır, round Astra'ya gider. Chamber ult'u önce patladıysa senin ult'unun hangi taraftan geldiğini oku ve açıyı değiştir.
 
-## 5. Map Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Haven (Astra avantajlı):** 3 site Astra için ideal. Chamber B'de sabit kalırken Astra'nın A-C baskısı Chamber'ı koşturur.
 
@@ -117,7 +117,7 @@ Astra haritanın her noktasına smoke, stun ve çekim atar — yıldız sayısı
 
 **Lotus (Astra hafif avantajlı):** 3 site ve döner kapı. Astra'nın global util'i döner kapı geçişlerine uyar, Chamber solo anchor rolünde zorlanır.
 
-## 6. Flip Momentler
+## 6. Dönüm Noktaları
 
 **Flip 1 — Yıldız yerleşimi:** Yıldızını Chamber'ın açısına gömdüysen round Astra'ya eğilir. Yanlış yere gömdüysen Chamber açısı serbest — round Chamber'a.
 

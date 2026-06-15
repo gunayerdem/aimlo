@@ -1,6 +1,12 @@
+---
+id: matchup_anti_op_play
+type: matchup
+tags: [matchup, anti, op, play]
+---
+
 # MATCHUP: OP'ye Karşı Oyun
 
-## Etkileşim Kimliği
+## Matchup Özü
 OP 4700 kredi — her mesafede tek vuruş öldürür ama yakın açıda çaresiz kalır. Takım bu açıları kapatabiliyorsa OP'yi 4700 kredilik bir yüke çevirirsin. Kapatamazsan her raund aynı yerde ölürsün.
 
 ## Yaygın Cezalandırma Kalıpları

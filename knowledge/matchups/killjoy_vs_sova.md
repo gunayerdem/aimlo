@@ -29,7 +29,7 @@ Sova seni round başında siler. Turret'ini, botunu, mollyni hasar oku patlatır
 
 **Dengeli haritalar:** Haven, Ascent, Lotus — turret ve bot yerleşimini round başında kaydırırsan Sova'nın önceki recon'u işe yaramaz; Sova her round recon veya bot harcamak zorunda kalır.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Sova hasar oku turret'ini patlattı
 **MEANING** Turret gitti, o round setupun yarım — Sova takımı sana karşı bilgi avantajıyla giriyor.
@@ -113,7 +113,7 @@ Kural şu: Sova donanımını harcamadan setupun tam güçte çalışmaz. Sova d
 
 **Dönüm 4 — Ultin Sova retake'ini kapattı:** Sova radius dışında bekledi, ult boşa gitti — ya da içeride dondu ve öldü.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 **Killjoy olarak:** Sova seni her round bulur — ama her round aynı yerden buldurtma. Turret'i, botu, mollyni iki ayrı yerleşim planıyla oyna. Birini bilirse diğerine geç.
 

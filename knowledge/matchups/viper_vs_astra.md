@@ -29,7 +29,7 @@ Ult karşılaştırması:
 
 İki ult farklı fazda değer üretir. Saldırıda Astra'nın ult'u, savunmada Viper'ın ult'u daha ağır basar.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Astra beş yıldızını haritaya dağıttı, Viper duvarını henüz atmadı
 **MEANING** Astra hazır ama yıldız yerleri sabit. Viper duvarının yönü hâlâ serbest — Astra'nın yerleşimini görüp ona göre karar verirsin
@@ -78,7 +78,7 @@ Ult karşılaştırması:
 **COUNTER** Duvarının yönüne round başında kesin karar ver — yanlışsa round boyu yanlış alanı kontrol edersin. Astra düzeltir, Viper düzeltemez
 **WHY** Duvar bir kere atılır. Astra'nın çekimi round içi esnek. Yanlış duvar = round'un başından kaybedilmiş alan.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
 Fuel vs yıldız ekonomisi:
 
@@ -91,7 +91,7 @@ Kısa round: Astra'nın işlev çeşitliliği öne çıkar. İkinci plant sonras
 
 Hasar farkı tek yönlü — Astra'nın hiçbir util'i direkt hasar vermez. Viper'ın molly'si, smoke'u ve ult'u hepsi hasar verir. Bu fark post-plant ve retake fazında Viper'ı öne çıkarır.
 
-## 5. Map Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Breeze:** Viper önde. A Long ile B Long arasına atılan duvar, Breeze'de tek bir controller'ın yapabileceği en büyük bölme. Astra yıldızları bu mesafeyi kapatamaz.
 
@@ -113,7 +113,7 @@ Hasar farkı tek yönlü — Astra'nın hiçbir util'i direkt hasar vermez. Vipe
 
 **Pearl:** Nötr. Viper C Long için, Astra double controller'ın ikincisi olarak.
 
-## 6. Flip Moment'ler
+## 6. Dönüm Noktaları
 
 1. **Astra'nın util'i bitti.** Tüm yıldızlarını tek seferde harcarsa round ortasında Astra sadece tüfekli kalır. Viper bu pencerede alan kontrolünü yeniden kurar.
 

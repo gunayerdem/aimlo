@@ -103,7 +103,7 @@ Round, çevirici ult kimin elindeyse o tarafa döner: hangi tarafta hazır bir u
 
 **Sunset (dengeli):** A Main + B Market post-plant için uygun, Mid retake için açık. Saldırı Mid'i tutarsa savunma siteye uzun yoldan girer; tutmazsa savunma ortadan keser.
 
-## 6. Round'u Döndüren Anlar
+## 6. Dönüm Noktaları
 
 **Dönüm 1 — Molly/Flash dengesi:** Saldırının elinde molly ve flash doluyken savunmanın eli boşsa, saldırı defuse açılarını kapatır. Tersi olursa savunma retake'i alır.
 

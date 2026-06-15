@@ -19,7 +19,7 @@ Breach duvarın ardına vuran initiator. Flash'ı da, stun'u da, molly'si de —
 - Flash'ı çok erken atıyorsun — sen takip etmeden patlayıp sönüyor, düşman gözünü açtığında karşısında kimse yok.
 - Util'inin hepsini turun başında "bilgi" için boşaltıyorsun — site'a girerken elinde flash yok, kuru dalıyorsun.
 
-## 4. Örüntü -> Anlam
+## 4. Kalıp -> Anlam
 
 **IF** Flash sürekli takım arkadaşını da kör ediyor
 **MEANING** Takım flash'ın duvarın hangi tarafından geldiğini bilmiyor

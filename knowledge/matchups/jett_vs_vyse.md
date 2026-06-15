@@ -29,7 +29,7 @@ Jett hızıyla ve dash ile Vyse'ın gizli tuzaklarını aşmaya çalışır. Vys
 
 **Dengeli:** Ascent, Haven, Lotus'ta sonuç Vyse'ın tuzak çeşitliliğine ve senin dash hattı seçimine göre değişir.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Jett dash ile site'a girdi, Vyse teli Jett'in giriş hattında tetikledi
 **MEANING** Tel seni yavaşlatır ve görüşünü bozar — dash sonrası yer değiştirme hızın kesilir, sabit hedef kalırsın
@@ -78,7 +78,7 @@ Jett hızıyla ve dash ile Vyse'ın gizli tuzaklarını aşmaya çalışır. Vys
 **COUNTER** Jett oynuyorsan Vyse'ın setup pozisyonunu hedefle, hızlı gir. Setup'ı kırdıysan matchup senin lehine döner.
 **WHY** Vyse tuzaklarına bağlı. Tuzak yoksa avantajı da yok.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
 Jett aktif alan açar: dash, yukarı zıplama, smoke. Vyse pasif alan kapatır: tel, duvar, flash, gizli tuzaklar. Kritik nokta şu: Vyse'ın tuzağı bir kez görününce işe yaramaz — o roundda o hattı geçmezsin. Görünmez kaldığı sürece Vyse'ın tuzağı değerli.
 
@@ -86,7 +86,7 @@ Jett oynuyorsan kazanç bilgide: neyin nerede olduğunu bilirsen bypass edersin.
 
 Vyse oynuyorsan aynı yerleşimi üst üste koyma — Jett okur ve o hattan bir daha girmez. Her round yeni açı üret, yoksa Jett bilgi biriktirir ve son roundda tuzaklarının hepsi boşa çıkar.
 
-## 5. Map Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Bind (Vyse avantajlı):** Hookah ve Showers dar ve yakın — teli teleporter çıkışına, duvarı B Long'a kurarak kilitler. Jett'in dash hattı burada tek yönlü kalır.
 
@@ -102,7 +102,7 @@ Vyse oynuyorsan aynı yerleşimi üst üste koyma — Jett okur ve o hattan bir 
 
 **Sunset (Vyse avantajlı):** Dar geçitler Vyse'ın setup çekirdeği. Jett dashleri Sunset'te tek yönlü kalır, Vyse her iki yöne de tuzak hattı kurabilir.
 
-## 6. Flip Anlar
+## 6. Dönüm Noktaları
 
 **Flip 1 — Tuzak görünürse:** Vyse'ın herhangi bir tuzağı ilk roundda görününce Jett o rounddan sonra o hattan geçmez. Vyse'ın en büyük açığı bu.
 

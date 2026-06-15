@@ -20,7 +20,7 @@ Skye'da hem flash, hem keşif, hem de can yenileme senin elinde — bunu tek ba�
 - Kendini iyileştirmeye çalışmak — can yenilemen sana çalışmaz, sadece takım arkadaşını iyileştirir. Kendi canını pozisyonla koru.
 - Köpeği gönderip kontrolü bırakmak — köpeği aktif sür, köşeleri tara; körlemesine ileri sürersen bilgi alamazsın, sadece sersem makinesine dönüşür.
 
-## 4. Örüntü -> Anlam
+## 4. Kalıp -> Anlam
 
 **IF** Takım arkadaşların sürekli senin kuşundan kör olduklarını söylüyor
 **MEANING** Kuşu yanlış yerde ya da yanlış anda patlatıyorsun — flash, takım arkadaşının baktığı yerde patlıyor

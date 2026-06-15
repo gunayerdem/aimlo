@@ -104,7 +104,7 @@ Viper'ın zayıf noktası yakıt. Duvarı ve smoke'u aynı anda tam güçte tuta
 
 **Sunset (Dengeli):** Çok açılı siteler — recon Market'ta, Viper duvarı A Main'de.
 
-## 6. Round'u Döndüren Anlar
+## 6. Dönüm Noktaları
 
 **An 1 — Recon vs duvar:** Recon Viper duvarının üstünden geçti mi? Geçtiyse round Fade'e. Geçemediyse Viper duvar arkasında güvende, round Viper'a.
 
@@ -114,7 +114,7 @@ Viper'ın zayıf noktası yakıt. Duvarı ve smoke'u aynı anda tam güçte tuta
 
 **An 4 — Molly + stun çakışması:** İkisi ayrı alanlara atıldıysa iki ayrı hat, dengeli. Aynı alana atıldıysa biri boşa gitti.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 Fade oynuyorsan recon'un yörüngesini Viper duvarının tam yüksekliğine ayarla — ne alçak, ne yüksek, duvarın üstünden sıyırıp geçecek şekilde at. Recon'u smoke'un içine gömersen sıfır bilgi alırsın.
 

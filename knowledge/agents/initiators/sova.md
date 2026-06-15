@@ -20,7 +20,7 @@ Sova'nın silahı bilgi. Recon, dart ve drone — üçü de her tur tekrar tekra
 - Bilgi aldıktan sonra takıma söylememek — recon'u tek başına izleyip değerini öldürmek
 - Recon'a o kadar güvenip silahla dövüşmeyi unutmak — Sova da bir tüfek taşır, körü körüne yetenek beklemekten ölme
 
-## 4. Örüntü -> Anlam
+## 4. Kalıp -> Anlam
 
 **IF** recon'ların indiği an düzenli olarak vuruluyor
 **MEANING** Herkesin bildiği yaygın noktalara atıyorsun — rakip ezbere kafadan vuruyor

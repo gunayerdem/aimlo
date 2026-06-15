@@ -29,7 +29,7 @@ Deadlock seni durdurmaya değil yavaşlatmaya çalışıyor. Tuzağı ses hattı
 
 **Haritaya göre değişiyor:** Ascent, Haven, Lotus gibi orta mesafe haritalarda tuzak hattını kim daha erken okursa o önde. Sen tuzağın yerini ilk turda öğren, ikinci turdan bypass et. Deadlock da dash hattını okursa duvar ile ağ kombosunu oraya kuruyor.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Ses çıkararak girdin, Deadlock tuzağı o hattaydı
 **MEANING** Tuzak patladı — stun ve zayıflatma yedin, takım yerini biliyor.
@@ -78,13 +78,13 @@ Deadlock seni durdurmaya değil yavaşlatmaya çalışıyor. Tuzağı ses hattı
 **COUNTER** Bıçakları Deadlock ışınının kapsamadığı köşede kullan. Işının köşe takibi yavaş — köşeye çekil, ışın geçtikten sonra çık.
 **WHY** Deadlock ult'u takip eder, senin ult'un nişan ister. Takip ultı köşede etkisiz — saklanman yeterli, ışını yenmen gerekmiyor.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
 Deadlock'un utility'si seni öldürmek için değil, yavaşlatmak için. Tuzak durdurur, duvar yönlendirir, ağ sabitler. Attack'ta Deadlock utility'sini savunmaya kuruyor — seni o kanallardan geçirmemek için zaman kazanmaya çalışıyor. Defense'te kurulum tamamlandığında o kanallardan geçmek için takım yardımı gerekiyor.
 
 Attack'ta tuzağın yerini öğrenmeden site girişi yapma. Defense'te Deadlock tuzağı yerleştirmeden rotate et — tuzak oturduğunda bypass etmek daha pahalıya geliyor.
 
-## 5. Harita Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Icebox (Jett avantajlı):** Uzun hatlar ve Rafters girişi senin. Deadlock tuzağı Rafters'ta zayıf, duvar B Main dışında dar choke bulamıyor.
 
@@ -100,7 +100,7 @@ Attack'ta tuzağın yerini öğrenmeden site girişi yapma. Defense'te Deadlock 
 
 **Fracture (Deadlock avantajlı):** Çok yönlü giriş seni zorluyor. Deadlock duvarı koridorlara oturuyor. Tek yönlü entry yapmadan önce duvarı temizle.
 
-## 6. Flip Anlar
+## 6. Dönüm Noktaları
 
 **Flip 1 — Tuzak ses eşiği:** Shift walk yapmayı bıraktığın an tuzak entry hattını öğreniyor. Shift walk disiplinini tek bir turda bıraksan bile o turda açığa çıkıyorsun.
 

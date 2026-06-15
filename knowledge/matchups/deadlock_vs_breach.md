@@ -29,7 +29,7 @@ Deadlock net + tuzak + duvar + ult ile site girişini kapatır. Breach ise stun 
 
 **Dengeli:** Haven, Ascent, Lotus'ta kim daha iyi pozisyon kurarsa baskın çıkar. Üç haritada da sabit taraf yok — kurulum kalitesi belirler.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Breach stun'ı senin anchor pozisyonuna duvardan geçirerek attı 
 **MEANING** Siperin arkasında olman fark etmez — stun gelir, net veya tuzak'ı aktive edemezsin 

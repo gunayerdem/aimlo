@@ -1,6 +1,12 @@
+---
+id: matchup_chamber_vs_fade
+type: matchup
+tags: [matchup, chamber, fade]
+---
+
 # MATCHUP: Chamber vs Fade
 
-## Etkileşim Kimliği
+## Matchup Özü
 Chamber op'la uzun açı tutar, tabancasıyla kısa mesafede de sert vurur. Fade tam onu sökmek için var — recon açını yakar, bot seni açıdan kovar, stun TP anchor'ını yerine çiviler. Soru basit: Fade taradıktan sonra takımı yeterince hızlı geliyor mu, yoksa sen TP'yi erken çekip bilgiyi çöpe mi atıyorsun?
 
 ## Yaygın Cezalandırma Kalıpları

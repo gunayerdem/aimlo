@@ -11,7 +11,7 @@ tags: [matchup, utility, flash-heavy, smoke-stack, composition]
 
 Flash heavy comp (KAY/O + Skye + Breach + Yoru ikilileri) bir round'da 6-10 flash atar — savunmanın göz refleksini yorar, sonra entry açar. Smoke stack comp (Omen + Viper, Omen + Harbor, Astra + Brimstone çift controller) görüş hattı'ları katmanlı smoke ile kapatır — ne savunma görür ne de saldıran. İki comp da savunmanın göz ekonomisini hedef alır, ama farklı yoldan: biri gözü yorar, diğeri gözü tamamen siler.
 
-## 2. Hangi Taraf Avantajlı
+## 2. Kim Avantajlı
 
 **Flash heavy lehine:**
 - Açılar kısa mesafede (Bind Hookah, Split B Main) — flash sonrası pencere kısa ama öldürme anı net.
@@ -27,7 +27,7 @@ Flash heavy comp (KAY/O + Skye + Breach + Yoru ikilileri) bir round'da 6-10 flas
 - Spike kurulduktan sonra smoke defuse açısını kapatır — flash heavy içeri giremez.
 - Smoke içine giren flash heavy oyuncusu kör kalır, savunma onu rahat görür.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Flash heavy 3 flash patlattı, entry açıldı
 **MEANING** Savunmanın göz refleksi yoklanıyor. Üçüncü flash adaptasyonu kırar.
@@ -84,7 +84,7 @@ Sayıca flash heavy üstün, ama smoke stack her charge'ı sahada uzun süre tut
 
 Ult tarafında iki controller ult'u site'ı kilitler. Flash heavy'nin round çeviren ult'u da var ama controller ult'unun etkisi site üstünde daha uzun durur. Smoke stack ult'ları site sayısı arttıkça daha az charge yakar — flash heavy her site push'u için yeni flash ister.
 
-## 5. Harita Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Breeze (smoke stack avantajlı):** Uzun görüş hattı smoke stack'in evidir. Flash heavy'nin entry util'i smoke hattını geçemez.
 
@@ -114,7 +114,7 @@ Ult tarafında iki controller ult'u site'ı kilitler. Flash heavy'nin round çev
 
 **Dönüm 5 — Round rolü:** Smoke stack retake'te üstün, flash heavy entry'de üstün. Saldırı oynuyorsan flash heavy'ye yaslan, savunma oynuyorsan smoke stack'e.
 
-## 7. Radiant Koç Notu
+## 7. Radiant Koç Notları
 
 Flash heavy comp'ta iki flash üst üste aynı anda patlarsa üçüncü flash'a pencere kalmaz. Flash'ları push'lara böl: biri entry için, biri savunmayı yoklamak için, biri retake veya ikinci push için. Her flash'ın hangi açıyı vurduğunu bil, sonra at.
 

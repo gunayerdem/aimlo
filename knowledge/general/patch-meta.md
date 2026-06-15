@@ -1,3 +1,9 @@
+---
+id: general_patch-meta
+type: general
+tags: [general, patch, meta]
+---
+
 # Patch Meta — Radiant Seviye Bilgi Bankası
 
 ## Güncel Meta Özeti (Episode 9-10)

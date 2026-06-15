@@ -20,7 +20,7 @@ Cypher'ı doğru oynarsan takımın asla kör kalmaz. Site'ı ateş gücüyle de
 - Atakta kamerayı kuruluma harcayıp post-plant'a hiç bırakmıyorsun. Spike kurulunca defuse açısını gören kamera yokken, retake'i kör karşılarsın.
 - Telini görünür yere atıp üstünü kapatmıyorsun; düşman tek mermiyle kırıp bedavaya geçiyor. Tel ya gizli olmalı ya da kırılması bile sana bilgi verecek bir yerde durmalı.
 
-## 4. Kalıptan Anlama
+## 4. Kalıp -> Anlam
 
 **IF** Tel bilgisinden sürekli kill alıyorsun ama takım round kaybediyor
 **MEANING** Bilgiyi kendine saklıyorsun, paylaşmıyorsun. Tel çalışıyor ama takım bundan fayda görmüyor.
@@ -108,7 +108,7 @@ Cypher'ı doğru oynarsan takımın asla kör kalmaz. Site'ı ateş gücüyle de
 
 **Post-plant'ta sürekli arkadan/retake'te ölüyorsun:** "Util'inin hepsini girişe harcama. Spike kurulmadan flank/retake yoluna bir tel sakla, kamerayı defuse açısına koy. Sentinel'in asıl işi spike kurulduktan sonra başlar — kurulu bomu tek başına kapatabilmelisin."
 
-## 8. Rütbe Modülasyonu
+## 8. Rank Modülasyonu
 
 **Düşük (Iron-Silver):** Telin yerini hiç değiştirmiyorsun, kamerayı ya hiç kullanmıyorsun ya da fazla uzun izliyorsun. Şimdilik şu yeter: tel koy, bilgiyi al, takıma ilet.
 

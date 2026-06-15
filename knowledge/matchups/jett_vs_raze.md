@@ -19,7 +19,7 @@ Harita belirler — karakter olarak net üstünlük kimsede yok.
 - **Dar koridor haritaları** (Bind, Split, Sunset): Raze molly + sıçrama ile baskın, Jett'in dash'i tek yönde sıkışır.
 - **Icebox**: Karakter avantajı sıfır — bot sesini duyunca cover al, dash cooldown'dayken öne çıkma.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Jett'in dash'i cooldown'da, Raze'in botu aktif
 **MEANING** Dash'siz Jett sabit kalır — bot konumunu bulur, sıçrama ile üstüne atlanır
@@ -86,7 +86,7 @@ Harita belirler — karakter olarak net üstünlük kimsede yok.
 
 **Ult farkı:** Jett'in bıçaklarını eco round'da kullan — bedava birincil silah gibi çalışır. Raze'in roketini execute round'da ya da post-plant'te kullan — geniş alanı kapatır. Bıçakları execute'a, roketi eco'ya saklama.
 
-## 5. Harita Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Breeze:** Jett oyna. Uzun görüş hattı Op ekonomisine açık, Raze buraya uymaz.
 
@@ -110,7 +110,7 @@ Harita belirler — karakter olarak net üstünlük kimsede yok.
 
 **Abyss:** Jett hafif avantajlı. Dikey yapı yukarı zıplama ile iyi açılar verir.
 
-## 6. Flip Anlar
+## 6. Dönüm Noktaları
 
 1. **Dash cooldown.** Dash'in girdiyse aggressive açıdan çekil — Raze bot + sıçrama kombosuyla seni bulur ve basar.
 2. **Roket (Raze ult).** Dash'in yoksa cover'da dur. Açıkta yakalanırsan kaçış yok.

@@ -1,3 +1,9 @@
+---
+id: matchup_controller_vs_duelist
+type: matchup
+tags: [matchup, controller, duelist]
+---
+
 # MATCHUP: Controller vs Duelist
 
 ## Bu Matchup Ne Hakkında

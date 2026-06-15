@@ -21,7 +21,7 @@ Haritaya göre değişir:
 
 Karşıda Neon varsa: dar haritada üstünlük onda, geniş haritada sende. Pozisyonunu buna göre kur.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Neon sprint ile smoke koridorunun iki duvarı arasından koşarak geliyor
 **MEANING** Duman içinde Neon'u göremezsin, açın çıkış noktasını yakalayamaz
@@ -83,7 +83,7 @@ Karşıda Neon varsa: dar haritada üstünlük onda, geniş haritada sende. Pozi
 
 Neon'un util çeşitliliği Jett'ten fazla. Jett'in dash'i ve op çıkışı ise Neon'dan keskin.
 
-## 5. Harita Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Breeze:** Jett — uzun açılar op için.
 

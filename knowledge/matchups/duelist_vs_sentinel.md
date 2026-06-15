@@ -1,3 +1,9 @@
+---
+id: matchup_duelist_vs_sentinel
+type: matchup
+tags: [matchup, duelist, sentinel]
+---
+
 # MATCHUP: Duelist vs Sentinel
 
 ## Ne Oluyor Burada

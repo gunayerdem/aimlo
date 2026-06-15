@@ -29,7 +29,7 @@ Sage duvar + slow + heal + diriltme ult ile bölgeyi kapatır. Skye flash + bot 
 
 **Nötr haritalar:** Haven, Ascent, Lotus gibi orta mesafe açık haritalarda matchup iki tarafın hamle kalitesine bağlı — Sage bölge kontrolü kurar, Skye bilgi toplar, kim rakibin ult'una göre pozisyonunu önce alırsa öne geçer.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Skye flash Sage'in peek hattına geldi
 **MEANING** Sage kör kalır, yakın mesafe duelde savunmasız — Skye veya takımı baskıyı bindirir.
@@ -101,7 +101,7 @@ Skye'da flash, bot, heal, recon ult var. Amacı bilgi toplamak ve takımı açma
 
 **Sunset (Nötr):** B dar ama A ve Mid açık. Sage B'yi duvarla kapatır, Skye A'yı bot + flash ile açar — denge haritası.
 
-## 6. Flip Anlar
+## 6. Dönüm Noktaları
 
 **Flip 1 — Flash Sage'i kör etti:** Sage duvar atamadı, konumu açığa çıktı — Skye'ın takımı girişi aldı.
 

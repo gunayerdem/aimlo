@@ -29,7 +29,7 @@ Iso'nun bütün gücü 1v1'de. Shield ilk kurşunu yutar, duvarı önündeki at�
 
 **Eşit:** Bind, Split, Sunset'te matchup ikiye bölünür — dar köşe düellosu sana yarar, Skye flash'ı köşe açısına yerleştirirse ona yarar.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Skye flash'ı aim hattına patlattı
 **MEANING** Kör kalırsın. Shield kurşunu tutar ama körlüğü tutmaz. Kör halde aim düellonu kaybedersin.
@@ -78,7 +78,7 @@ Iso'nun bütün gücü 1v1'de. Shield ilk kurşunu yutar, duvarı önündeki at�
 **COUNTER** Skye olarak: heal'i köşe arkasında, görünmeden yap. Açıkta heal yapmak bedava kurşun davet eder.
 **WHY** Sabit hedef, aim avantajı tavan. Skye heal'i yanlış zamanlarsa ölür gider.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
 Iso'nun her şeyi kendine yarar: shield, duvar, vuruş galerisi, ult — hepsi 1v1 için. Skye'ın her şeyi takıma yarar: flash, bot, heal, ult — hepsi bilgi ve destek için. Ult maliyeti: Iso ultu 7 puan, Skye ultu 8 puan. Iso ultu daha ucuza gelir ve 1v1'i kilitler. Skye ultu pahalı ama seni takımına teslim eder.
 
@@ -86,7 +86,7 @@ Bu matchup'ın tek sorusu şu: Skye'ı takımından koparabilir misin?
 - Koparabilirsen → sen kazanırsın
 - Koparamazsan → Skye kazanır
 
-## 5. Map Bazlı Değişim
+## 5. Haritaya Göre Değişim
 
 **Haven (Skye açık ara avantajlı):** 3 site bilgisi tam Skye'ın alanı. Iso burada zorlanır — izole düello bulmak çok zor.
 
@@ -102,7 +102,7 @@ Bu matchup'ın tek sorusu şu: Skye'ı takımından koparabilir misin?
 
 **Sunset (Eşit):** Dar köşeler Iso'ya, flash açıları Skye'a. Kimin util'i önce biterse o geriler.
 
-## 6. Flip Anlar
+## 6. Dönüm Noktaları
 
 **Flip 1 — Flash yüzüne patlarsa:** Shield işe yaramaz, kör halde aim düellonu kaybedersin.
 
@@ -112,7 +112,7 @@ Bu matchup'ın tek sorusu şu: Skye'ı takımından koparabilir misin?
 
 **Flip 4 — Ult isabet ederse:** Skye izole alana girer, takımsız kalır, 1v1 senin sahan.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 Iso oynuyorsan Skye'ı peek'e zorla — direkt yüzleşme. Bot veya flash harcatmak için sahte baskı kur, util boşaldığında 1v1'e gir. Skye util'siz kaldığında sıradan bir rifler — girişini o an yap.
 

@@ -23,7 +23,7 @@ OP comp uzaktan açı tutar, düşman daha yaklaşamadan öldürür. Rush comp i
 - Rush comp'ta duman + flash + molly zinciri hazır, OP comp tek OP ile bunu kaldıramaz.
 - Rush comp çift duelist ile entry alırsa tek OP oyuncusu ikisini birden durduramaz.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Rush comp duman + flash zincirini OP açısına attı, içeri girdi
 **MEANING** OP artık göremez, tüfekçi gibi yakın oynamak zorunda kalır, ekonomik değeri sıfırlanır

@@ -29,7 +29,7 @@ Viper duvar kurar, görüşü keser. Sova bilgi açar, pozisyonları ifşa eder.
 
 **Dengeli:** Ascent, Haven, Sunset'te matchup duvar timing'i ile recon timing'ine bağlı. Viper duvarı recon'dan önce kurarsa bilgi yarım kalır. Sova recon'u duvardan önce atarsa duvar arkası çoktan bilgili.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Sova recon Viper duvar hattının arkasına atıldı
 **MEANING** Recon duvar arkasını tarar, takımın ifşa olur, Sova takımı açı tutmaya geçer
@@ -78,7 +78,7 @@ Viper duvar kurar, görüşü keser. Sova bilgi açar, pozisyonları ifşa eder.
 **COUNTER** Recon'a bak, rifle ile vur — iki vuruş yeter. Recon silinirse Sova ondan bilgi alamaz.
 **WHY** Recon kırılabilir utility. Recon'u silme alışkanlığı Viper takımı için bedava bilgi engelidir — recon unutulursa Sova takımına bedava feed gider.
 
-## 4. Utility Takası
+## 4. Utility Karşılaştırması
 
 Viper'ın fuel bar'ı var: duvar ve smoke fuel paylaşır, molly ayrı. Fuel'i erken harcarsan post-plant'te görüş kesemezsin. Fuel'i geç kurarsan execute Sova recon'una açık kalırsın.
 
@@ -118,7 +118,7 @@ Round içi sıra şöyle döner: Sova recon açar → Viper duvar + smoke kurar 
 
 **Dönüm 4 — Sova ult isabeti:** Ult hattı Viper takımını duvar arkasında buldu → takım hasar aldı, round Sova'ya. Viper takımı ult hattının dışındaysa → ult boşa gitti, round Viper'a.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 Bu matchup'ın özü şu: **görüş bilgiden önce kesilirse Viper kazanır, bilgi görüşten önce gelirse Sova kazanır.**
 

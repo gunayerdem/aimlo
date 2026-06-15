@@ -26,7 +26,7 @@ Killjoy tek başına site tutan en güçlü ajandır. Botun bilgi getirir, ikinc
 - Yeteneklerini round başında erken kuruyorsun, düşman erken geldiğinde ya hepsi keşfedilmiş ya kullanılmış oluyor — kurulumunu girişten önce tut, bilgiye göre yerleştir.
 - Botunu hep aynı pozisyona koyuyorsun ama bekleme sesini hesaba katmıyorsun — düşman botun aktivasyon sesini duyup geri çekiliyor, sen sesi bilgi olarak takip etmiyorsun.
 
-## 5. Kalıptan Anlama
+## 5. Kalıp -> Anlam
 
 **IF** Botun çoğu roundda ilk temas anında öldürülüyorsa
 **MEANING** Bot yerin çok açık ya da çok tahmin edilebilir. Düşman site'a girmeden nereyi vuracağını biliyor.
@@ -95,7 +95,7 @@ Killjoy tek başına site tutan en güçlü ajandır. Botun bilgi getirir, ikinc
 - Recon yeteneği olan ajanlara (drone/dart/recon atışı) karşı botunu duvar/köşe arkasına gizle — taranamayacağı yere koy, taranırsa hemen yer değiştir; aynı yere ikinci kez kurma.
 - Flash'lı saldırgan ajanlara karşı kör kaldığında botunun ve molly'nin sesine güven — göremesen bile düşmanın nereden geldiğini ses söyler, körken o yöne molly bırak.
 
-## 8. Feedback Rehberi
+## 8. Oyuncuya Ne Söylenmeli
 
 ### Kurulum çalışırken
 **Oyuncu ne yapıyor:** İki yeteneği üst üste koyuyor, botunu birkaç roundda bir off-angle'a taşıyor.
@@ -111,7 +111,7 @@ Killjoy tek başına site tutan en güçlü ajandır. Botun bilgi getirir, ikinc
 **Botun bilgi getiriyor ama tepki vermiyorsan:** "Bot çaldığında crosshair'ini o açıya çevir. Bot sana düşmanın nereden geldiğini söylüyor — sen onu peek zamanlamasına çevir."
 **Post-plant'te molly kalmıyorsa:** "Molly'ni retake'te erken harcamışsın. En az bir molly'yi defuse cezası için sakla — bir molly tam defuse süresini katlar."
 
-## 9. Rütbe Modülasyonu
+## 9. Rank Modülasyonu
 
 **Düşük (Iron-Silver):** Botunu açık alana koyuyorsun, molly'ni atmayı unutuyorsun. İki yeteneği aynı noktaya yerleştir, botun farklı açıyı izlesin — önce bu ikisini oturt.
 

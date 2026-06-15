@@ -1,3 +1,9 @@
+---
+id: matchup_kayo_vs_sentinel
+type: matchup
+tags: [matchup, kayo, sentinel]
+---
+
 # EŞLEŞME: KAY/O vs Sentinel
 
 ## Ne Oluyor
@@ -34,7 +40,7 @@ KAY/O'nun bıçağı bir alandaki tüm yetenekleri kapatır. Sentinel için bu �
 **COUNTER**: KAY/O önce flash'la ya da takımıyla araçlarının gerçek yerini bulmalı, sonra bıçağı oraya atmalı. Konumu bilmeden atan KAY/O imzasını boşa harcar
 **WHY**: Yanlış noktaya giden bıçak tüm saldırıyı zayıflatır — sentinel kurulumun açık kalır
 
-## Tekrarlanan Başarısızlık Ne Anlama Gelir
+## Tekrarlayan Başarısızlık Ne Anlama Gelir
 **Sentinel** her round suppress yiyip site kaybediyorsa: araçlarına fazla yakın duruyorsun. Bıçak hem seni hem kurulumunu aynı anda kapatıyor. Araya mesafe koy — bıçak ya seni vursun ya araçlarını, ikisini birden değil.
 
 **KAY/O** bıçak atıp sentinel kurulumunu yıkamıyorsa: yanlış noktaya atıyorsun. Sentinel araçlarını beklediğin yere koymamış. Önce flash'la ya da takımla keşfet, sonra bıçağı gönder. Konumu bilmeden atılan bıçak sadece imzanı çöpe atar.

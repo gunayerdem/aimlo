@@ -1,3 +1,9 @@
+---
+id: matchup_tejo_vs_default_defense
+type: matchup
+tags: [matchup, tejo, default, defense]
+---
+
 # EŞLEŞME: Tejo vs Varsayılan Savunma
 
 > **YAMA NOTU**: Tejo yeni bir ajan. Yetenek değerleri yamadan yamaya değişebilir. Kullanmadan önce güncel yama notuna bak.
@@ -36,7 +42,7 @@ Tejo, savunucuların her raund aynı pozisyonda durduğu savunmalara karşı ço
 **COUNTER**: Pozisyon değiştirmeye devam et. Tejo bilgi almadan bozuyorsa sen orada olmayacaksın
 **WHY**: Körlemesine atılan bozma işe yaramaz
 
-## Tekrarlanan Başarısızlık Ne Anlama Gelir
+## Tekrarlayan Başarısızlık Ne Anlama Gelir
 
 **Savunma sürekli kırılıyorsa**: Her raund aynı yerde duruyorsun. Tejo bunu biliyor, seni oradan atıyor. Raund başında ekibinle konuş — kim nerede duruyor, bu raund değişecek mi? Savunma değişmezse Tejo değişmeden kırar.
 

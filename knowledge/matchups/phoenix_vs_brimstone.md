@@ -29,7 +29,7 @@ Brimstone smoke koyar, açını kapatır, molly ile hasar verir. Phoenix bu zinc
 
 **Dengeli:** Haven, Ascent, Lotus gibi orta mesafeli haritalarda duvar + flash ikilin Brimstone'un smoke'unu bozarsa sen dönersin; smoke + molly üst üste binerse Brimstone döner.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Brimstone smoke senin baktığın angle'ı kapattı
 **MEANING** O angle'dan duel yok. Smoke'un içine girersen kör savaşırsın.
@@ -84,7 +84,7 @@ Phoenix ult 6 puan, Brimstone ult 7 puan. Phoenix'in ult'u daha ucuz, daha sık 
 
 Phoenix flash x2 + molly + duvar — hepsi "kendi canını koru, üstüne gir" üzerine kurulu. Brimstone smoke x3 + molly + stim — hepsi "takımın geçeceği ya da geçemeyeceği alanı belirle" üzerine kurulu.
 
-## 5. Harita Bazlı Fark
+## 5. Haritaya Göre Değişim
 
 **Bind:** Dar koridorlar smoke + molly için değerli, ama Phoenix'in flash + duvarı da etkili. Dengeli.
 
@@ -110,7 +110,7 @@ Phoenix flash x2 + molly + duvar — hepsi "kendi canını koru, üstüne gir" �
 
 **Dönüm 4 — Brimstone ult'u post-plant:** Phoenix spike başından ayrılmak zorunda kalır, Brimstone zaman kazanır.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 **Tier durumu:** Phoenix B tier, Brimstone A+ tier.
 

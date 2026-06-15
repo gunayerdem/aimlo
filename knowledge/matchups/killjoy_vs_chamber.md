@@ -120,7 +120,7 @@ Killjoy tuzağı hem bilgi hem hasar verir — aynı cihaz iki iş yapar. Chambe
 
 **Pearl:** İkisi de oynanabilir. Net avantaj yok.
 
-## 6. Maçı Döndüren Anlar
+## 6. Dönüm Noktaları
 
 1. **Chamber Op alamazsa.** Op'suz Chamber sıradan bir silah tutuyor demektir. O round'da Killjoy'un util'ine karşı duracak gücü kalmaz.
 
@@ -132,7 +132,7 @@ Killjoy tuzağı hem bilgi hem hasar verir — aynı cihaz iki iş yapar. Chambe
 
 5. **Op ult'uyla çift kill.** Chamber ult ile tek round'da iki kill alırsa round'u tek başına çevirir. Ama bu ult'u erken kullan — Killjoy ult'u round sonu için bekler, Chamber ult'u erken round için.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 **Killjoy oynuyorsan:**
 

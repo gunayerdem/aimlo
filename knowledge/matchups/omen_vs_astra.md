@@ -117,7 +117,7 @@ Fark şu: hata yaparsan Omen bir tur öder, Astra birkaç tur öder. Astra'yı f
 
 5. **Astra star'larını birkaç turda harcadı.** Sonraki tur Astra yarım controller. O turu agresif bas.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 Omen olarak ilk turu izle: Astra star'ını nereye koydu? Astra oyuncularının çoğu her tur aynı star dağılımını tekrarlar. Dağılımı bir kez oku, boş tarafı bul, her tur oradan bas.
 

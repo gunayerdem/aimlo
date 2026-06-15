@@ -30,7 +30,7 @@ Astra smoke ile alanı kapatır, çekimi ve stun'ı ile Breach'i durdurmaya çal
 - Haven, Lotus: 3 site Astra'nın global smoke'unu değerli kılar, Astra baskın.
 - Pearl, Sunset: ikisi de alan bulur, fark yok.
 
-## 3. Key Düellolar
+## 3. Önemli Düellolar
 
 **IF** Breach stun'ı smoke arkasındaki takım hattına girdi
 **MEANING** Stun duvardan geçer, smoke onu durdurmaz, takımın felç oldu.
@@ -118,7 +118,7 @@ Astra oynarken round öncesi yıldızlarını yerleştirirken tek soruyu sor: Br
 
 **An 4 — Beden yakalandı:** Yıldız moddasın, beden stun'a girdi, round Breach'e. Beden kapı arkasındaysa yıldız özgür, round Astra'ya.
 
-## 7. Koç Notu
+## 7. Koç Notları
 
 **Matchup özeti:** Astra alan kurar, Breach alanı deler. Ama duvardan geçen her şey (stun, flash, molly) smoke arkasını da yakalar, bunu kafana kaz.
 
