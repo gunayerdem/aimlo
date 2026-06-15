@@ -17,6 +17,8 @@ Chamber kağıt üstünde sentinel ama duelist gibi oyna. Tabancası güçlendir
 - Ult'u yakın mesafe dövüşünde harcamak. O silah uzun açılar için var.
 - Anchor koymadan açı tutmak — ölürsün, site tamamen açılır.
 - Anchor var diye aynı açıdan tekrar peek atmak. Tek atışını yaptıysan oradan çık.
+- Teleport'u tehlike yokken erken kullanmak — gerçek push geldiğinde bekleme süresinde kaçışsız yakalanırsın.
+- Retake'te uzun açı yokken hâlâ tabancayla site basmak — yakın mesafede tabanca, takım arkadaşının tüfeğinin yanında yük olur.
 
 ## 4. Kalıptan Anlama
 
@@ -45,12 +47,28 @@ Chamber kağıt üstünde sentinel ama duelist gibi oyna. Tabancası güçlendir
 **COUNTER** Düşmanın site'a girişini geciktiren kill'lere yüklen. Kapıdan geçmeden öldürdüğün adam, geçtikten sonra öldürdüğünden çok daha değerli.
 **WHY** Sentinel kill'i zaman kazandırdığında takım yeniden konumlanabilir. Site düştükten sonraki kill savunma düzenine bir şey katmaz.
 
+**IF** Teleport'u kullandın, sonra asıl push geldiğinde teleport'un beklemedeydi ve kaçamadan öldün
+**MEANING** Teleport'u tehlike yokken ya da düşman seni kandırmak için erken bir gürültü çıkardığında harcadın. Asıl saldırı geldiğinde kaçış yolun kapalıydı.
+**COUNTER** Teleport'u beklemede tut. İlk gürültüye, ilk sahte peek'e kanıp basma. Onu gerçekten ölecekken kaçmak için sakla — kontrolü o tutar.
+**WHY** Chamber'ı öldürülmez yapan tek şey o kaçış. Beklemedeyken sıradan bir anchor sentinel'sin, üstelik en zayıfından — ne kamera ne tuzak ağın var. Kaçış kartını boşa atan Chamber ölü Chamber.
+
+**IF** Anchor noktan bitti veya teleport beklemede, sen hâlâ uzak agresif açı tutmaya çalışıyorsun
+**MEANING** Kaçış aracın yokken Chamber'ı sanki varmış gibi oynuyorsun. Tek-atış-kaç döngüsünü besleyen şey teleport — o yoksa o açı sadece bir tuzak.
+**COUNTER** Teleport beklemedeyken geri çekil, takımla yakın oyna, normal silahını sıkı tut. Açıyı ancak arkanda gerçek bir geri çekilme yolu varken aç.
+**WHY** Teleport'suz uzak peek, trade'i garantilenmiş bedava kill demek karşı tarafa. Aracın hazır değilse oyununu da ona göre küçült — Chamber'ın gücü mekanikte değil, o mekaniği ne zaman çekeceğini bilmekte.
+
+**IF** Retake'lerde sürekli ölüyorsun ya da hiç katkı veremiyorsun
+**MEANING** Chamber'ın oyunu açı tutup beklemek; retake ise tersine, kapalı bir alana sen giriyorsun. Tabancayla yakın site basmak senin işin değil.
+**COUNTER** Retake'te ult'unu çek ve uzaktan, bombanın olduğu site'a açılan uzun bir hattı kapat. Yakına dalma — takımın tüfekleri girsin, sen dışarıdan kapıyı tut.
+**WHY** Chamber savunmada en güçlü, retake'te en zayıf. Gücün düşmanı sana yürütmekte; sen yürürken o güç tersine döner. Uzun hat tut, kapatıcı ol — dalan değil.
+
 ## 5. Harita Etkileşimleri
-- **Breeze**: En iyi Chamber haritası. A hall ve B main'deki uzun hatlar ult ve tabanca için biçilmiş kaftan. Tube veya pillar arkasına anchor koy, güvenle re-peek at.
-- **Icebox**: A site'ta rafters'tan uzun açı tutarken anchor'la site arkasına çekil.
-- **Haven**: A long veya C long'da iş görür. Mid'deki kısa hatlar tabancayı tutarsız kılar, o koridorlardan uzak dur.
-- **Ascent**: Mid kontrolünü ult'la ezersin. Mid catwalk'tan market'e veya tiles'a teleport — işe yarayan kurulum bu.
-- **Lotus**: A main ve B main'de açılar kısa, üç site girişi var. Anchor koyduğun noktayı anında basarlar — ult'u C long gibi daha uzun hatlara sakla.
+- **Breeze**: En iyi Chamber haritası. A hall ve B main'deki uzun hatlar ult ve tabanca için biçilmiş kaftan. Tube veya pillar arkasına anchor koy, güvenle re-peek at. Bu haritada açıların o kadar uzun ki düşman tüfekle bile seninle eşit dövüşemez — saldırı geleceği hattı tut, ilk göreni vur, teleport. Hatların açıklığı seni avantajlı; o açıklığı yakın dövüşe çevirme.
+- **Icebox**: A site'ta rafters'tan uzun açı tutarken anchor'la site arkasına çekil. Düşman tüfekle yukarı bakmak zorunda, sen yukarıdan tek atış yapıp kaybolursun. Anchor'u rafters'a değil arkadaki güvenli zemine koy ki ilk atıştan sonra kimsenin göremeyeceği yere düş.
+- **Haven**: A long veya C long'da iş görür. Mid'deki kısa hatlar tabancayı tutarsız kılar, o koridorlardan uzak dur. Üç site var; flank yolu bol. Tuzağını her round o round'un en çok zorlanan flankine kaydır — Haven'da tek tuzakla iki yolu birden koruyamazsın, doğru olanı seç.
+- **Ascent**: Mid kontrolünü ult'la ezersin. Mid catwalk'tan market'e veya tiles'a teleport — işe yarayan kurulum bu. Ascent'te mid'i tutan takım round'u tutar; sen ult round'larında mid'i tek başına kilitleyip takıma site rotasyonu kazandırırsın. Mid düştüğünde de teleport sayesinde geri çekilip site'ı yeniden tutabilen tek sentinel'sin.
+- **Lotus**: A main ve B main'de açılar kısa, üç site girişi var. Anchor koyduğun noktayı anında basarlar — ult'u C long gibi daha uzun hatlara sakla. Lotus'un dar geçitleri tabancanı cezalandırır; kısa açıda tüfek tutan adam seni her zaman geçer. Bu haritada Chamber'ı oynamak istiyorsan oyununu C long'un uzun hattı etrafında kur, dar site'ları takıma bırak.
+- **Sunset**: Mid ve A main'deki orta-uzun hatlar tabanca için uygun. Mid'i ult'la tutup market kontrolü ver. Dar B'de zorlanırsın — tuzağını B flankine, ağırlığını mid ve A'ya koy.
 
 ## 6. Eşleşme Notları
 - **Jett** hatlardan dash'le kaçar, ult düellolarını 50/50'ye çevirir.
@@ -73,6 +91,10 @@ Chamber kağıt üstünde sentinel ama duelist gibi oyna. Tabancası güçlendir
 **Zorlanan:** "Peek'lerde çok sık ölüyorsun. Ya anchor çok uzakta ya da teleport olmak yerine aynı açıdan tekrar peek atıyorsun. Bir atış, bir teleport. Her seferinde."
 
 **Tahmin edilebilir:** "Düşman açılarını biliyor, önceden nişanlıyor ya da flash atıyor. Her round farklı bir agresif konum kullan. Farklı anchor noktaları dene, her round aynı anda peek atma."
+
+**Teleport'u boşa harcıyor:** "Teleport'u erken kullanıyorsun, asıl push geldiğinde beklemede kalıyor. O kaçışı sonuna kadar sakla — seni hayatta tutan tek şey o. İlk gürültüye basma, gerçekten kaçman gerekene kadar bekle."
+
+**Retake'te kayıp:** "Retake'te tabancayla dalıyorsun, yakın mesafede yük oluyorsun. Sen savunma ajanısın, dalan değil. Ult'unu çek, uzaktan site'a açılan hattı kapat, takımın tüfekleri girsin."
 
 ## 8. Rütbe Modülasyonu
 

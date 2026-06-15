@@ -18,6 +18,8 @@
 5. **İki satchel'i plansız zincirlemek** — İkisini birden harcayıp maksimum mesafeye uçarsan, taramadığın bir noktaya iniyorsun. Birini entry için kullan, birini kaçış için sakla.
 6. **Bombayı retake'e saklamak** — Bombanın en değerli anı execute. Post-plant için saklarsan temizleme gücünü boşa harcarsın.
 7. **Botun kimseyi kilitleyemediği anı görmezden gelmek** — Bot kimseyi kovalamasa bile o açının boş olduğunu söylüyor. Bu bilgiyi oku, körlemesine girme.
+8. **Kendi util'inle kendine hasar vermek** — Raze'in bombası ve granatı sana da hasar verir. Çok yakına atarsan ya da patlama menzilinde durursan, kavgaya yarım canla girersin. Util'i at, sonra menzilden çık.
+9. **Satchel'den iner inmez ateş edememek** — Satchel havadayken ya da iniş anında nişanın oturmaz; düşürmüşsen ya da hareket halindeyken ateş edersen seri kaçar. İnişi düşmana değil, hemen yanındaki bir kapağa/duvara denk getir, yere basınca crosshair'i yerleştir, öyle aç.
 
 ## 4. Kalıp -> Anlam
 IF: Site'a satchel'le iniyorsun ve anında ölüyorsun
@@ -45,10 +47,27 @@ MEANING: Kill'ler execute sırasında değil, temizlik fazında geliyor — zama
 COUNTER: Bombayı round'un başına çek. Kill toplamak için değil, alan açmak için at.
 WHY: Erken bomba savunmayı pozisyonundan söker ve execute'a boşluk açar. Geç bomba zaten kazandığın round'a hiçbir şey katmaz.
 
+IF: Round başında util'le kendi canını sıfırlıyor, kavgaya yarım canla giriyorsun
+MEANING: Bombayı/granatı kendine fazla yakın atıyorsun ya da patlama menzilinde duruyorsun
+COUNTER: Util'i at, geri çekil, patlamayı menzil dışından izle. Hasar düşmana ait, sana değil.
+WHY: Raze'in patlayıcıları sana da hasar verir. 100 canla başlaması gereken duelloya 40 canla girersen, alacağın açılışı düşmana hediye edersin.
+
+IF: Satchel'le içeri dalıp orta meydana, açık alana iniyorsun
+MEANING: Satchel'i bir kapağın/açının ardına değil, herkesin gördüğü boşluğa atıyorsun
+COUNTER: İnişi bir kutunun, kapağın ya da köşenin hemen ardına denk getir. Havadan girişin amacı sürpriz açı, sahne ortası değil.
+WHY: Satchel havadayken ne nişan alabilir ne kaçabilirsin — bir uçan hedefsin. Açık alana inersen savunmanın tek yapması gereken yukarı bakmak.
+
+IF: İki satchel'i kaçmak için kullandın ama düşman yine de seni vurdu
+MEANING: İniş noktasında silahın hazır değildi — havada ya da iniş anında ateş açtın
+COUNTER: Kaçış satchel'ini güvenli, taranmış bir noktaya at. İner inmez crosshair'i bekleyebileceğin yöne yerleştir, gerekiyorsa o ana kadar şarjörünü tamamla.
+WHY: Satchel seni mesafeden kurtarır ama kör bir köşeye atarsan tava tutulursun. Kaçış ancak iniş noktası senin lehine açıysa kaçıştır.
+
 ## 5. Harita Etkileşimleri
 - **Güçlü olduğun haritalar:** Bind (teleporter'dan bot atarsın, bedava bilgi gelir; dar site'larda bomba çok değer eder), Split (dar koridorlar satchel entry'yi ve bombayı zirveye taşır), Fracture (farklı girişlerden beklenmedik açılarla içeri dalarsın), Lotus (A ve C'deki dar girişler bomba temizliğini ödüllendirir).
 - **Zayıf olduğun haritalar:** Breeze (uzun hatlar bombanın ve satchel'in değerini eritir, bu mesafede op'çuyla yarışamazsın), Icebox (A site'taki dikey dövüşler satchel'in yer seviyesi gücünü kısar).
 - **Haritaya özgü notlar:** Bind'da teleporter üzerinden bot at — bedava bilgi. Split A Main'de tek başına bomba spam'i bile savunmayı Ramps'tan geri çekilmeye zorlar. Fracture'da Arcade'den A site'a satchel atarsan, dönen savunmayı hazırlıksız yakalarsın.
+- **Genel ilke — dar geçit haritalar senin haritan:** Raze'in patlayıcısı düşman ne kadar sıkışık tutarsa o kadar değer eder. Tek bir kapıdan/koridordan giriş varsa (Split Mid, Bind Hookah, Lotus A Main) bombayı o boğaza at — kaçacak yan yol yok, savunma ya hasar yer ya pozisyonunu terk eder. Açık plaza haritalarda (Breeze, Icebox açık alanlar) aynı bombayı atarsan düşman bir adım yana kayar, util boşa gider.
+- **Genel ilke — yükseklik satchel'in işidir:** Raze tek başına yüksek bir açıya çıkıp savunmaya tepeden inebilen nadir duelist. Bir mevziye ulaşmak için yavaş tırmanmak yerine satchel'le tek hamlede çık; ama o yüksek noktaya inmeden önce bombayı önden atıp orayı temizle, körlemesine tepeden inme.
 
 ## 6. Eşleşme Notları
 - **Seni zorlayanlar:** Killjoy (turret satchel yolunu açığa çıkarır, ult'u site'tan geri çekilmeni zorlar), Cypher (tel satchel güzergahını keser, kamera entry'ni izler), Chamber (tuzağı agresif flank satchel'lerini cezalandırır).
@@ -67,9 +86,12 @@ WHY: Erken bomba savunmayı pozisyonundan söker ve execute'a boşluk açar. Ge�
 
 ### Zorlanırken
 "Bilmediğin yere satchel atma. Önce botu gönder, ne gösterdiğine bak, sonra gir."
+"Util'i kendine atma — patlamadan önce menzilden çık. Kavgaya tam canla gir, yarım canla değil."
+"Satchel'le açık alana inme. İnişi bir kapağın ardına denk getir, yere basınca crosshair'i yerleştir, öyle aç."
 
 ### Öngörülebilir olduğunda
 "Botunu daha girişte tarayıp vuruyorlar. Bir tık geciktir ya da farklı açıdan sok."
+"Her round aynı boğaza bomba atıyorsun, artık o açıdan çekiliyorlar. Bir round bombayı atma — bombayı bekleyenleri girişle yakala."
 
 ## 8. Rank Modülasyonu
 ### Düşük Elo (Iron-Silver)

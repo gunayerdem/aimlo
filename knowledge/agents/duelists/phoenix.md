@@ -29,6 +29,8 @@ Kimliğin üç şeye dayanır: flash disiplini, kendi becerinden HP kazanmak, ul
 5. **Flash atıp swing atmamak** — Flash'in körlük süresi kısa. Flash patlıyor, sen hâlâ bekliyorsan boşa gitti. Flash atar atmaz çık.
 6. **Her round aynı flash açısı** — Düşman hangi tarafa döneceğini öğreniyor. Sol eğri, sağ eğri, farklı köşe — karıştır.
 7. **Ult'u tehlikeli yere koymak** — Ult seni koyduğun noktaya geri döndürür. O noktayı düşman bastırdıysa, döndüğünde anında ölürsün. Ult'u temizlenmiş, kapağı olan bir yere koy.
+8. **Kendi flash'ine doğru yürümek** — Flash'i attıktan sonra ona doğru ilerlersen patladığında sen de körlenirsin. Flash'i ileri at, sen yerinde kal ya da köşeyi flash'in arkasından dön; patlamayı arkandan ya da yandan al.
+9. **Ateş duvarını kendi giriş yoluna koymak** — Duvar iki tarafı da keser ve görüşü bloklar. Takımın geçeceği koridora atarsan kendi entry'nizi yavaşlatırsın. Duvarı düşmanın açısına koy, sizin geçiş hattınıza değil.
 
 ## 4. Kalıp -> Anlam
 IF: Flash kullanıyorsun ama ilk kill oranın düşük
@@ -56,6 +58,21 @@ MEANING: Ult'u frag için kullanıyorsun, site almak için değil. Kill aldın, 
 COUNTER: Ult'la site'a gir, iki-üç açıyı temizle, takım arkandan gelsin. Ult'un amacı alan açmak, frag değil.
 WHY: Kill ancak site kontrolüne ya da düşman becerilerini tüketmeye yol açarsa round kazandırır.
 
+IF: Kendi flash'ine bakıp körleniyorsun
+MEANING: Flash'i çok yakına atıyorsun ya da fırlattıktan sonra ona doğru ilerliyorsun — patladığında ekran senin de gözünde patlıyor
+COUNTER: Flash'i köşenin ötesine, kör etmek istediğin alanın üstüne at. Patlayana kadar arkanı dönük tut ya da köşeyi dönerken ekranını flash'in arkasında bırak. Patladıktan sonra çık.
+WHY: Kendi flash'in seni körleştirirse en kötü senaryodasın: hem sen körsün hem düşman körlükten çıkmış olabilir. Flash senin lehine değil, aleyhine çalışır.
+
+IF: Ateş duvarını atıyorsun ama takımın geçemiyor / takımını yakıyorsun
+MEANING: Duvarı yanlış yere koyuyorsun — ya kendi giriş yolunuzu kapatıyor ya da takımın geçmesi gereken hatta oturuyor
+COUNTER: Duvarı düşmanın görüş hattını kesecek şekilde koy, takımın geçeceği yola değil. "Duvar atıyorum, geçin" diye söyle ve duvar sönmeden bekleyen takımı geçir. Kendi peek hattını duvarla kapatma.
+WHY: Ateş duvarı iki tarafı da keser. Yanlış konumda kendi entry'ni baltalar; takım yanından geçemeyince giriş zamanlaması bozulur ve düşman toplanır.
+
+IF: Molly'yi düşmanın üstüne değil hep kendi ayağına atıyorsun
+MEANING: Hot Hands'i sadece iyileşme aracı görüyorsun; alan reddetme / köşeden söküp atma işini hiç yapmıyorsun
+COUNTER: Tuttuğun açıyı bastıran düşman varsa molly'yi onun durduğu daracık köşeye at — ya hasar yer ya pozisyon değiştirir. İyileşme ihtiyacın yoksa molly bir alan-reddetme aracıdır.
+WHY: Phoenix'in tek molly'si var; her round'u iyileşmeye harcarsan post-plant'te ya da dar geçişte düşmanı söküp atacak aracın kalmaz. Aracı duruma göre seç.
+
 ## 5. Harita Etkileşimleri
 **Phoenix'in güçlü olduğu haritalar:**
 - **Ascent:** B Main'den flash atıp Market boyunca ateş duvarıyla swing atmak güçlü bir giriş. Mid kontrolü için duvar + flash ikilisi iş görür.
@@ -65,6 +82,8 @@ WHY: Kill ancak site kontrolüne ya da düşman becerilerini tüketmeye yol aça
 **Phoenix'in zayıf olduğu haritalar:**
 - **Breeze:** Uzun görüş hatları flash değerini düşürür. Geniş alanlar ateş duvarını işlevsiz kılar.
 - **Icebox:** Dikey dövüşler yer seviyesi flash'inin etkisini düşürür. Geniş site'lar duvarı seyreltir.
+
+**Karar notu (radiant):** Phoenix dar koridorlarda ve tek-açı geçişlerde parlar; geniş açık alanda silikleşir. Bu yüzden haritayı seçemezsin ama nereden gireceğini seçebilirsin: aynı haritada bile dar bir giriş hattı (B Main, Hookah, daracık bir geçit) seç, geniş açık peek'ten kaçın. Flash'in körlüğü kısa — körleşen düşmanla aranda 1-2 metrelik dövüş mesafesi olmalı ki körlük penceresinde temas kurabilesin. Uzun mesafede flash patlar, sen yetişemeden düşman görüşünü toplar. Ateş duvarı bir bütçedir: turun başında "duvarı görüş kesmeye mi, post-plant alan reddetmeye mi saklıyorum" diye karar ver, ortada harcama.
 
 ## 6. Eşleşme Notları
 **Zorlandığın ajanlar:**
@@ -101,6 +120,12 @@ WHY: Kill ancak site kontrolüne ya da düşman becerilerini tüketmeye yol aça
 
 ### Öngörülebilir olduğunda
 "Her flash'inde arkalarını dönüyorlar çünkü alıştılar. Sol ve sağ eğriyi değiştir. Ya da flash'i bir an geciktir — dönüşün ortasında yakala."
+
+### Kendini körlettiğinde
+"O flash seni de kör etti. Flash'i ileri at, sen yerinde kal — patlayana kadar ona doğru yürüme. Köşeyi flash'in arkasından dön ki patlama senin ekranına değil düşmanın ekranına otursun."
+
+### Duvarı yanlış koyduğunda
+"Duvarı kendi giriş yolunuza koydun, takım geçemedi. Duvar iki tarafı da kesiyor — onu düşmanın açısına koy, sizin koridora değil. Atarken 'duvar atıyorum, geçin' de ki takım zamanlamayı kaçırmasın."
 
 ## 8. Rank Modülasyonu
 ### Düşük Elo (Iron-Silver)

@@ -26,6 +26,8 @@ Tejo iki işi aynı anda yapabilen tek initiator: önce bilgiyi toplar, sonra o 
 - Bütün util'i tur başında harcayıp post-plant için elinde hiçbir şey bırakmamak
 - Drone suppress'ini takıma çağırmamak — suppress penceresi kısa, takım fark etmezse avantaj buharlaşır
 - Tejo'yu Sova gibi oynamak: Sova uzak mesafe lineup ajanı, sen orta mesafe baskı ajanısın
+- Suppress'li düşmana hemen swing atmamak — suppress'teki düşman hiçbir kurtarma yeteneği kullanamaz; o anı düelloyla değerlendirmezsen suppress boşa gider
+- Stun atıp düşmanın tam üstüne yapışmak — yakın mesafede sersemlik nişan bozmaz; mesafeli peek at ki avantaj sende kalsın
 
 ## 5. Kalıp -> Anlam
 
@@ -69,6 +71,21 @@ Tejo iki işi aynı anda yapabilen tek initiator: önce bilgiyi toplar, sonra o 
 **COUNTER** Drone'u erken uyarı için kullan, stun ve molly'yi mid-round ya da retake'e sakla. Ult, retake'te site'ı temizlemek için biçilmiş kaftandır.
 **WHY** Erken harcanan util = turun geri kalanında sıradan ajan = savunmanın en zayıf halkası
 
+**IF** Drone suppress'i bindiriyorsun ama o düşmana hemen swing atmıyorsun
+**MEANING** Suppress'in en kıymetli yanını kaçırıyorsun — suppress'teki düşman flash, smoke, dash, hiçbir kurtarma yeteneğini kullanamaz
+**COUNTER** Suppress isabet ettiği an o açıya sen ya da duelist swing atsın. Suppress penceresinde düşman silahtan başka silahı yok — bire bir düelloyu garantiye alırsın.
+**WHY** Suppress'li düşmana geç swing = pencere kapanır = düşman tam yeteneğine döner = avantaj buharlaşır
+
+**IF** Stun'ı düşmanın tam üstüne atıyorsun ama yine de düelloyu kaybediyorsun
+**MEANING** Stun'lı düşmana çok yakın peek atıyorsun — sersemlemiş düşman bile yakın mesafede gövdene rastgele sıkar
+**COUNTER** Stun'dan sonra geniş açıyla, mesafeli peek at. Sersemlik nişanı bozar ama point-blank'te bozuk nişan bile isabet eder. Mesafe koy ki sersemliğin avantajını gerçekten kullanasın.
+**WHY** Yakın mesafe = sersemliğin nişan-bozma etkisi işe yaramaz; mesafeli swing = sen net nişan alırken o alamaz
+
+**IF** Drone'u attığın an düşman patlatıp yok ediyor, suppress hiç oturmuyor
+**MEANING** Drone'u görünür bir hatta, düz uçuşla yolluyorsun — düşman gelişini görüyor ve vuruyor
+**COUNTER** Drone'u köşeden, kör açıdan ya da düşmanın bakmadığı yükseklikten sok. Gizliliğini kullan: sessiz ve görünmez gelirse suppress oturur. Açık koridordan düz atış = anında ölü drone.
+**WHY** Görülen drone = vurulan drone = sıfır bilgi sıfır suppress; gizli rota = drone hedefe ulaşır ve suppress oturur
+
 ## 6. Harita Etkileşimleri
 - **Bind**: Dar alanlar stun'dan kaçmayı zorlaştırır. Teleporter çıkışlarında çift molly düşmanı her iki yönden sıkıştırır. A short'ta drone → stun → molly tam execute kalitesi verir. Hookah'ta ult bütün koridoru temizler.
 - **Split**: Orta alan kontrolünde drone biçilmiş kaftan — dar mid'de drone gizliliğini korur. A ramp ve B main'de stun'dan kaçmak çok zor. Molly'lerle A heaven ile A main'i aynı anda kapatabilirsin. Ult, B main koridoru boyunca savunucuları pozisyonundan söker.
@@ -76,6 +93,8 @@ Tejo iki işi aynı anda yapabilen tek initiator: önce bilgiyi toplar, sonra o 
 - **Ascent**: A main ve B main, drone ile bilgi toplamak için ideal koridorlar. Mid'de stun, catwalk'taki savunucuyu sersemletir. Molly'lerle A site'ta tree ile generator açılarını aynı anda kapat. Ult, B main boyunca execute'a destek verir.
 - **Sunset**: Mid koridoru drone için doğal güzergah. B market'ta stun dar alanda kaçınılmazdır. A main'de çift molly push kalitesini yükseltir.
 - **Lotus**: Dönen kapılar drone rotalarını çeşitlendirmek için fırsat açar. Dar B main stun ve molly için idealdir. C site'ın çoklu girişleri ult'un hat yönü seçimini ödüllendirir.
+
+**Genel ilke (her harita)**: Dar koridorlu, tek-girişli site'larda çift molly ve ult en çok değeri üretir — düşmanın kaçacak yeri yoktur. Açık, çok-girişli site'larda ise drone bilgisi öne çıkar: önce nereyi tutuyorlar gör, util'i o yöne yığ. Post-plant düşünürken molly'yi her zaman defuse'u iki yönden kapatacak şekilde sakla; retake'te ult'u düşmanın gireceği ana koridora kur, site'ın içine değil.
 
 ## 7. Eşleştirme Notları
 - **Sova karşı**: İkiniz de bilgi toplarsınız ama farklı yoldan. Sova uzak mesafe lineup ajanı, sen orta mesafe baskı ajanısın. Aynı takımda çift bilgi katmanı kurarsınız: Sova geniş tarar, sen hedefli suppress ve hasar verirsin.
@@ -93,6 +112,10 @@ Her execute öncesi drone'u gönderiyor, suppress'i bindiriyor, stun'la girişi 
 **Zorlandığında**: "Temele dön. Drone ile bilgi topla, stun ile girişi aç, molly ile iki açıyı kapat. Bu sırayı takıma çağırarak uygula. Sıra doğruysa kit kendini gösterir."
 
 **Tahmin edilebilir olduğunda**: "Düşman her adımını önceden bekliyor. Sırayı boz: stun ile aç, drone'u sonraya sakla, molly'yi post-plant'ta kullan. Aynı planı farklı sırayla çalıştır."
+
+**Suppress'i değerlendiremediğinde**: "Drone bir düşmanı suppress'ledi ama sen ya da takım o açıya swing atmadı. Suppress'teki düşmanın hiçbir kurtarma yeteneği yok — o pencere senin garantili düello anın. Suppress oturduğu an o açıya gir, beklersen pencere kapanır."
+
+**Util'i girişe yığdığında**: "Bütün kit site girişinde bitti, spike dikildikten sonra elinde hiçbir şey kalmadı. En az bir molly'yi sakla — defuse noktasını iki yönden kapatır. Tejo post-plant'ta defuse'u kilitleyen ajandır, bu değeri girişe harcama."
 
 ## 9. Rank Modülasyonu
 

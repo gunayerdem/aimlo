@@ -17,6 +17,8 @@ Viper haritayı ikiye böler. Duvarı ve orb'u tek bir paylaşımlı yakıt havu
 - Ult'u panikle bırakmak — içine gir ve içinde kal, dışarı çıkma.
 - Duvarı takım arkadaşının baktığı açıya çekmek — kendi takımını kör bırakırsın.
 - Orb'u koyup unutmak — aç-kapat yap, bilgi topla, tuzak kur.
+- Tek molly atıp bırakmak — defuse tek molly'den uzun sürer; ikinci molly'yi decay biter bitmez yığ.
+- Savunmada kendi dumanının içine girmemek — Viper kendi dumanından nettir; içine otur, push edeni flu görmeden yakala.
 
 ## 4. Kalıp -> Anlam
 
@@ -50,13 +52,28 @@ Viper haritayı ikiye böler. Duvarı ve orb'u tek bir paylaşımlı yakıt havu
 **COUNTER** Round başında duvarı nereye çekeceğini takıma söyle. Duvar site'ı bölmeli, kendi takımının girişini değil.
 **WHY** Kendi takımını kör bırakırsan savunucu hazır, sen kör dövüşürsün.
 
+**IF** duvar takım site'a girdikten sonra çekiliyor, giriş başlamadan değil
+**MEANING** Duvarı geç çekiyorsun — bölme işini yapamadan açık alanda dövüş başlıyor
+**COUNTER** Duvarı entry'den hemen ÖNCE çek. Önce site bölünsün, sonra takım gir. Geç çekersen savunucu zaten açıyı görmüştür, duvar artık bilgi gizlemez.
+**WHY** Duvarın asıl işi bir dövüşü iki ayrı dövüşe çevirmek. Bu ancak savunucu konumlanmadan önce çekilirse olur. Geç çekersen sadece duman olur, bölme olmaz.
+
+**IF** molly defuse noktasına atılıyor ama düşman duvarın içinden hâlâ söküyor
+**MEANING** Tek molly atıp bırakıyorsun — düşman canını feda edip molly bitince söküyor
+**COUNTER** Molly'yi tek atış sanma. İlk molly defuse'u durdurur, decay biter bitmez ikinci molly'yi yığ. Hızlı bir defuse tek molly'nin tikini yer; üst üste iki molly o pencereyi kapatır.
+**WHY** Spike defuse süresi tek molly'nin yanma süresinden uzun. Düşman birinci molly bitince anında sökmeye başlar. İkinci molly'yi zincirlemezsen post-plant avantajını yarıda bırakırsın.
+
+**IF** savunmada duvarı/smoke'u sadece düşmanı engellemek için kullanıyorsun, içine girip beklemiyorsun
+**MEANING** Viper'ın savunma gücünü tek yönlü kullanıyorsun — kendi dumanın içinden bakma avantajını atlıyorsun
+**COUNTER** Savunmada kendi duvarının/smoke'unun içine otur. Sen düşmanı flu görürsün ama düşman seni hiç göremez; içeri push edeni decay'le yavaşken yakalarsın.
+**WHY** Viper kendi dumanından nettir, düşman değildir. Bu tek yönlü görüş savunmada bedava açı kazandırır — duvarı sadece kapı gibi kullanırsan bu avantajı çöpe atarsın.
+
 ## 5. Harita Etkileşimleri
-- **Breeze**: Viper'ın en güçlü olduğu harita. Uzun açıları ve geniş site'ları duvarla rahatça kapatırsın. Post-plant molly lineup'ları burada yüksek değer üretir.
+- **Breeze**: Viper'ın en güçlü olduğu harita. Uzun açıları ve geniş site'ları duvarla rahatça kapatırsın. Açık alanlar başka controller'ın smoke'unu yetersiz bırakır, ama tek duvarın koca bir site'ı ikiye böler. Post-plant molly lineup'ları burada en yüksek değeri üretir — defuse noktasına güvenli açıdan iki molly zincirle.
 - **Icebox**: B'de ya da A boyunca duvar baskın bölmeler kurar. Tube'a veya A belt'e orb koy — kritik açılar kapanır.
 - **Lotus**: Üç site'ta da duvar esnek çalışır. B site kapı geçişine duvar çekmeyi temel stratejin yap.
 - **Pearl**: B site veya mid boyunca duvar güçlü bölmeler verir. A main'de orb yüksek değer taşır.
 - **Fracture**: Her site'ta çift giriş var. Bir girişi duvarla kes — savunucu ikisini birden tutamaz. Post-plant molly her iki site'ta da güçlüdür.
-- **Haven**: Üç site Viper duvarını her yerde değerli kılar. Daha çok aktif nokta olduğu için yakıt takibini sıkı tut.
+- **Haven**: Üç site Viper duvarını her yerde değerli kılar. Üç site demek üç ayrı rotasyon hattı demek — duvarla bir hattı kesersen savunucu o site'a geç gelir. Daha çok aktif nokta olduğu için yakıt takibini sıkı tut; iki yere birden yakıt yetmez, round başında nereye yatıracağını seç.
 - **Corrode**: Dar koridorlar duvarla tamamen kapanır — tek bir duvar tüm sightline'ı keser. Smoke dar geçişte push'u durdurur. Molly lineup'ları kompakt site'larda güçlü iş çıkarır. Dar yapı, Viper kit'inin en çok değer ürettiği ortamdır.
 
 ## 6. Eşleşme Notları
@@ -77,10 +94,10 @@ Viper haritayı ikiye böler. Duvarı ve orb'u tek bir paylaşımlı yakıt havu
 **Karşı Adaptasyon:** Erken push yaparlarsa duvarı biraz daha uzun aç, decay bölgesinde karşıla. Orb'unu temizlerlerse o site'ta farklı bir choke'a koy — örneğin Breeze'de B main yerine B shore'a. Retake'i bölerlerse molly'yi alternatif defuse noktasına kaydır, diğer açı için takıma çağrı yap.
 
 ### Zorlandığında
-"Yakıt çok hızlı bitiyor. Takım site'ta olunca duvarı kapat. Orb'u post-plant için sakla. İkisi tek havuzdan beslenir — aynı anda yakarsan ikisi de söner."
+"Yakıt çok hızlı bitiyor. Takım site'ta olunca duvarı kapat. Orb'u post-plant için sakla. İkisi tek havuzdan beslenir — aynı anda yakarsan ikisi de söner. Bir molly'yi defuse durdurmak için ayır, decay biter bitmez ikinciyi yığ."
 
 ### Tahmin edilebilir olduğunda
-"Her round aynı duvar, savunucu seni okuyor. 10 derece kaydır — site dinamiği değişir, savunucu baştan düşünmek zorunda kalır."
+"Her round aynı duvar, savunucu seni okuyor. 10 derece kaydır — site dinamiği değişir, savunucu baştan düşünmek zorunda kalır. Molly'yi de hep aynı saniyede atma; savunucu kaçış zamanını ezberler."
 
 ## 8. Rütbe Ayarı
 - **Düşük (Iron-Silver)**: Her site için bir duvar noktası, bir orb noktası ezberle. Molly'yi post-plant'te tutmayı hedefle — dövüşte harcama.

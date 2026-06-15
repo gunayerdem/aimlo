@@ -18,6 +18,8 @@
 5. **Aynı açıdan tekrar slide** — Bir kez gördüler mi, slide yüksekliğini önceden nişanlarlar. Her round aynı köşeyi kullanma.
 6. **Defansta sprint'i unutmak** — Senin en büyük savunma silahın hız. Yürüyorsan bu gücü çöpe atıyorsun.
 7. **Ult'u panik butonu yapmak** — Kaybederken açarsan spin-up süresi seni öldürür. Ult'u önde olduğun anlarda aç, umutsuzlukta değil.
+8. **Hareket halinde ateş etmek** — Slide ya da sprint sırasında tetiğe basarsan mermilerin saçılır. Hız seni açıya taşır; vuruşu daima duruşta yap.
+9. **Tüm kiti girişe yakmak** — Duvar, sprint ve stun'ı hep girişte boşaltırsan post-plant savunmasında elin boş kalır. Bir kaynağı plant sonrasına sakla.
 
 ## 4. Kalıp -> Anlam
 IF: Site'a varmadan, sprint sırasında ölüyorsun
@@ -45,10 +47,32 @@ MEANING: Kit'inin yarısını görmezden gelip sadece ayağına güveniyorsun
 COUNTER: Duvar-sprint-slide sırasını ezberle. Önce duvar, sonra sprint, slide ile varış. Bu üç adım birbirinden ayrılmaz.
 WHY: Duvarsız sprint seni korumasız bırakır. Duvar olmadan Neon oynamıyorsun, sadece hızlı ölüyorsun.
 
+IF: Slide attıktan hemen sonra, hareket dururken sırtından ya da yandan vuruluyorsun
+MEANING: Slide seni bir düşmanın yanından geçirip ikinci bir açının önüne savuruyor — slide bitiş noktanı kontrol etmiyorsun
+COUNTER: Slide'ı bir düşmanı geçmek için değil, bir açıya yerleşmek için kullan. Slide biter bitmez dur, tek açıya bak, hareket etmeden o açıyı temizle. Birden çok düşman varsa slide ile içlerine dalma — kenardan tek tek aç.
+WHY: Slide momentumu seni geçtiğin düşmana sırtını döndürür ve ikinci açıya kör girersin. Hız seni iki crossfire'ın ortasına bırakır.
+
+IF: Slide ya da sprint sırasında ateş ediyorsun ama mermilerin hedefi tutmuyor
+MEANING: Hareket halindeyken nişan dağılır — koşarken/slide ederken ateş etmek isabeti yok eder
+COUNTER: Slide'ı mesafe kapatmak için kullan, ateş etmek için değil. Slide bitsin, dur, sonra vur. Sprint'ten çıkışta da bir an dur — hareket dururken nişanın oturur, çapraşık değil.
+WHY: Valorant'ta koşarken/slide ederken ateşin yayılır. Hızın işi seni açıya taşımak; tetiği duruşta çekersin.
+
+IF: Plant'tan sonra duvarını çoktan harcamış oluyorsun, retake gelince elin boş
+MEANING: Tüm kitini giriş için yakıp post-plant'ı düşünmüyorsun
+COUNTER: Mümkünse duvarın bir şarjını ya da stun'ı plant sonrasına sakla. Retake'çi spike'a yaklaşırken duvarı bomb'ın önüne çek, sprint sesiyle birden çok açıdan baskı kur.
+WHY: Round çoğu zaman plant'tan sonra kazanılır/kaybedilir. Kit'in tamamı girişte biterse, retake'i çıplak savunursun.
+
+IF: Defansta slide-peek atıyorsun ama düşman seni her seferinde önceden vuruyor
+MEANING: Aynı yükseklik ve açıdan tahmin edilebilir slide atıyorsun, düşman bekliyor
+COUNTER: Slide-peek'i seyrek ve bilgi varken kullan. Aynı köşeden iki kez slide atma; bir tur slide, bir tur normal geniş peek. Slide'ı düşmanın beklemediği anda, util'le birlikte at.
+WHY: Slide yörüngesi sabittir; bir kez okunduğunda düşman tetik açısını oraya kilitler. Öngörülebilir hız, hız değil hedeftir.
+
 ## 5. Harita Etkileşimleri
 - **Güçlü haritalar:** Fracture (çoklu giriş noktası sprint almalarını ödüllendirir), Pearl (B Main gibi uzun koridorlar duvar-sprint girişine biçilmiş kaftan), Lotus (A Main ve C Mound güçlü duvar açıları verir), Split (A Main'de doğru duvarla slide yıkıcı).
 - **Zayıf haritalar:** Breeze (uzun açılar sen varmadan seni cezalandırır), Ascent (mid çok açık, site'lar dikey oyun ister).
 - **Pozisyona özel:** Pearl'de B Main boyunca duvarını aç, sprint at — sahanın en hızlı site girişlerinden biri. Lotus'ta C Mound duvarı Waterfall savunucusunu izole eder, sen rakipsiz site'a dalarsın. Duvarını tek düz çizgi değil, iki kapıyı aynı anda örten çapraz açıyla at — hem sol hem sağ entry'yi aynı anda kapat.
+- **Dar choke'ları sev, açık alanı bırak:** Duvarın ve hızın en çok dar geçitlerde kazandırır — Fracture'ın çoklu girişleri, Split'in A Main'i, Pearl B Main gibi tek hatlı koridorlar slide girişine biçilmiş. Geniş açık alanlarda (Breeze ortası, Ascent mid) düşman seni varmadan görür ve uzun mesafe tüfeği hızını yener; oralarda hızdan önce bilgi al.
+- **Yatay haritaları seç:** Senin gücün zemin hızı, dikey oyun değil. Çok katlı/yükseltili site'lar (Ascent'in dikey açıları, Icebox'ın yükseklikleri) hızını değil pozisyonu ödüllendirir; orada bir Jett/Raze daha çok iş görür. Düz, koşulabilir hatlar senin sahandır.
 
 ## 6. Eşleşme Notları
 - **Zorlandığın ajanlar:** Killjoy (botu sprint sırasında seni takip eder, ult'u seni geri çekilmeye zorlar), Sage (duvarı yolu keser, yavaşlatma topu hızını öldürür), Cypher (telleri sprint şeritlerini yakalar).
@@ -68,6 +92,12 @@ WHY: Duvarsız sprint seni korumasız bırakır. Duvar olmadan Neon oynamıyorsu
 "Önce duvarını aç. Duvar yoksa sprint atma — bu kadar basit."
 ### Öngörülebilir olduğunda
 "Slide açını önceden nişanlıyorlar. Açının yanından sprint at, diğer taraftan çık."
+### Hareket halinde ateş ediyorsa
+"Slide ederken vuruyorsun, mermilerin saçılıyor. Slide'ı dur, açıya bak, sonra tetiğe bas — hız seni taşır, vuruşu duruşta yap."
+### Slide ile düşmanı geçip ölüyorsa
+"Slide seni düşmanın yanından geçirip ikinci açıya savuruyor. Slide ile içlerine dalma; kenara yerleş, tek açıyı dur ve temizle."
+### Tüm kiti girişe yakıyorsa
+"Duvarı ve stun'ı girişte bitirme. Bir kaynağı plant sonrasına sakla — round çoğu zaman retake'te kazanılır."
 
 ## 8. Rank Modülasyonu
 ### Düşük Elo (Iron-Silver)

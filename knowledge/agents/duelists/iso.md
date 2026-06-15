@@ -18,6 +18,8 @@
 5. **Kill sonrası küreyi kaçırmak** — Küre kısa süre durur. Vurmayı kaçırırsan kalkan gelmez, Iso'nun tüm döngüsü kırılır.
 6. **Dövüşten kaçmak** — Iso dövüşmezse kalkan birikmez, duvar değer üretmez. Bir düşman açıkta göründüğü an kalkanı aç ve gir.
 7. **Kötü duvar açısı** — Duvarın açısı hangi düşmanı izole ettiğini belirler. Yanlış açı yanlış kişiyi keser ya da savunucuya yeniden konumlanma süresi tanır. Her site için duvar açını ezbere bil.
+8. **Kalkanlıyken çok ileri gidip util'e yakalanmak** — Kalkan mermiyi emer ama düşman util'i (molotof, stun, flash) seni hâlâ etkiler. Kalkana güvenip dar geçide dalarsan ateş düellosunu kazanmadan util'le ezilirsin. Kalkan nişan düellosu içindir, util tarama için değil.
+9. **Ult arena'sında kötü konum** — Ult'la rakibi 1v1 arena'ya çektiğinde iş bitmedi. Arena'ya çıplak swing atarsan kalkan avantajını boşa atarsın. Önce kalkanı aç, sonra arena açısını net tut — bu garanti kazanılacak bir dövüş, mahvetme.
 
 ## 4. Kalıp -> Anlam
 
@@ -46,10 +48,28 @@ MEANING: Duvarı yanlış açıda ya da çok erken kurdun — düşmana kaçacak
 COUNTER: Duvarı execute'un parçası olarak kur, öncesinde değil. Düşman tepki veremeden içeri gir. Her site için doğru açıyı bil.
 WHY: Erken ya da yanlış açılı duvar düşmana izolasyondan sıyrılma fırsatı verir. Iso'nun temel avantajı uçar.
 
+IF: Kalkanı çok erken açıyorsun, dövüşe gelmeden bitiyor
+MEANING: Kalkan kısa ömürlü — köşeyi dönmeden önce açtın, peek'e vardığında pencere kapanmış
+COUNTER: Kalkanı dövüşe girmeden hemen önce aç, köşeyi tam dönerken. Boş koridorda yürürken değil, açıyı açtığın an aktif olsun.
+WHY: Kalkan süresi kısıtlı. Erken açarsan tam isabetin geleceği saniyede koruma yok — çıplak peek atmış olursun.
+
+IF: Çok pasif oynuyorsun, kalkanlıyken bile geri çekiliyorsun
+MEANING: Kit'in sana verdiği avantajı kullanmıyorsun — kalkan doluyken trade'e karşı korumalısın ama yine de geri basıyorsun
+COUNTER: Kalkan aktifken alanı sen al. İlk mermi seni öldürmez, bu pencerede ileri pozisyon tut ve açıyı zorla. Geri çekilmek kalkanı boşa harcamaktır.
+WHY: Iso'nun farkı tek dövüşte bir fazladan mermiye dayanmak. Kalkanlıyken geri çekilirsen o avantajı hiç kullanmadan kaybedersin — sıradan duelist'e dönersin.
+
+IF: Takım seninle entry bekliyor ama sen kalkanı doldurmaya odaklanıyorsun
+MEANING: Kill avına çıkıp küre topluyorsun ama takım girişin için orada değilsin — site boş kalıyor
+COUNTER: Round'un kritik anında izolasyon dövüşünü takım girişiyle eşle. Önce sen aç, kalkanla ilk açıyı temizle, takım arkandan gelsin. Küre toplamak boş zamanın işi.
+WHY: Iso bir entry duelist'i — duvar ve kalkan takımı içeri sokmak için. Tek başına kill biriktirip site'ı geç alırsan kit'in takıma değer üretmez.
+
 ## 5. Harita Etkileşimleri
 - **Güçlü haritalar:** Ascent (mid 1v1'e açık, duvarla Market'i A site'tan kes), Haven (bol choke var — duvarla savunucuyu ayır, biriyle dövüş), Pearl (uzun koridorlar duvara ve sıralı temizliğe çok uygun), Split (dar site'lar kalkan biriktirmek için ideal).
 - **Zayıf haritalar:** Breeze (geniş açık alanlar izolasyonu zorlaştırır — duvar yeterince kapamaz), Icebox (dikey oyun duvarın verimini düşürür, B site Iso'nun yer seviyesi izolasyonu için fazla açık).
 - **Somut açılar:** Ascent A site'ta duvarı Heaven ile generator arasına kur — bir 1v2'yi, kazanabileceğin iki ayrı 1v1'e böl. Haven C site'ta duvarı Plat savunucusunu arka site oyuncusundan kesecek şekilde kur — Iso'nun en güçlü execute açılarından biri budur.
+- **Neden dar site'lar Iso'ya yarar:** Açık haritada düşman senden uzakta, util'le döver, kalkanın ilk mermiyi emse de ikinci-üçüncü mesafeli atışa yetişmez. Dar koridor ve kapalı site'ta dövüş tek-tek ve yakın olur — kalkan tam burada belirleyici. O yüzden Split, Pearl uzun, Haven choke'ları senin alanın; Breeze ortası değil.
+- **Açık haritalarda nasıl oynamalı:** Breeze/Icebox'ta geniş açıya saf swing atma. Duvarı görüş kesmek için değil, düşmanı tek bir yola sıkıştırıp o yolda 1v1'e zorlamak için kur. Mümkünse mesafeyi sen kapat — kalkan yakın dövüşte değer üretir, uzun menzilde mermi sayısı düşmana yarar.
+- **Dikeyle başa çıkma:** Icebox gibi yukarı-aşağı açılı yerlerde duvar yatay keser, üstten gelen açıyı kapatmaz. Önce yüksekliği temizle ya da izole et, sonra yer seviyesinde duvarla böl — yoksa duvarın arkasındaki "güvenli" alana yukarıdan atış yer.
 
 ## 6. Eşleşme Notları
 - **Zorlandığın ajanlar:** Raze (patlayıcı util kalkanı umursamaz — ama kalkan patlama dahil her hasarı emer, o yüzden tam menzilden değil orta mesafede dur), Breach (stun ve flash düello kurulumunu bozar, duvar zamanlamanı karıştırır), KAY/O (bastırma kalkanını kapatır — bastırma bitince gir).
@@ -67,8 +87,12 @@ WHY: Erken ya da yanlış açılı duvar düşmana izolasyondan sıyrılma fırs
 **Karşı Adaptasyon:** Vücuda spam atıyorlarsa — counterstrafe yap ve crosshair'i baş hizasına aç; onlar vücuda yüklenirken sen kafadan vur. Duvar açından kaçıyorlarsa — duvarı farklı eksene taşı ya da rotation yolunu kes. Retake'e çekiliyorlarsa — site'ı bedavaya al, spike'ı plant et, ult'la en iyi oyuncularını kalkanlı 1v1 arena'ya çek.
 ### Zorlanırken
 "Kalkansız dövüşe giriyorsun. Her peek'ten önce kalkanı aç. Küreyi kaçırdıysan dur, yeniden konumlan."
+"Kalkanı çok erken açıyorsun — köşeyi dönmeden bitiyor. Açıyı tam açacağın an aç, boş koridorda değil."
+"Birden fazla açıya tek kalkanla yükleniyorsun. Kalkan tek mermi emer; önce duvarla araya gir, sadece biriyle dövüş."
 ### Öngörülebilir olduğunda
 "Duvar açından kaçınıp izolasyonun etrafından dolaşıyorlar. Duvarı farklı eksene taşı, rotation yolunu kes."
+"Aynı yerden aynı zamanda giriyorsun — savunucu kalkanını bekleyip vücuda spam'liyor. Giriş zamanlamanı ve açını round bazlı değiştir."
+"Ult'unu hep aynı hedefe atıyorsun, ona göre konumlanıyorlar. Hedefi round'un ekonomisine ve kim site'ı tutuyorsa ona göre seç."
 
 ## 8. Rank Modülasyonu
 ### Düşük Elo (Iron-Silver)

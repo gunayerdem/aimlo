@@ -17,6 +17,8 @@ Skye'da hem flash, hem keşif, hem de can yenileme senin elinde — bunu tek ba�
 - Ult'u açıkta fırlatmak — düşmanı işaretleyemeden vurulup düşüyor.
 - Flash atmadan önce takıma söylememek — kimin, ne zaman peek atacağını net konuş.
 - İyileştirmeye dalıp flash ve köpeği unutmak — sen önce giriş açan ajansın, ön plandasın.
+- Kendini iyileştirmeye çalışmak — can yenilemen sana çalışmaz, sadece takım arkadaşını iyileştirir. Kendi canını pozisyonla koru.
+- Köpeği gönderip kontrolü bırakmak — köpeği aktif sür, köşeleri tara; körlemesine ileri sürersen bilgi alamazsın, sadece sersem makinesine dönüşür.
 
 ## 4. Örüntü -> Anlam
 
@@ -45,12 +47,27 @@ Skye'da hem flash, hem keşif, hem de can yenileme senin elinde — bunu tek ba�
 **COUNTER** Ult'u kapağın arkasından ya da smoke içinden aç. Düşmanlara ulaşması zaman alır, o sürede korunmalısın. Geri alımda ya da düşman konumu belirsizken aç.
 **WHY** Kapaktan açılan ult düşmanlara ulaşıp onları işaretler. Açıkta açarsan düşman, bir bilgi gelmeden onu hemen vurup düşürür.
 
+**IF** Kendi canın düştüğünde iyileştirme bekliyorsun ama hiçbir şey olmuyor
+**MEANING** Skye'ın can yenilemesi sadece takım arkadaşlarını iyileştirir, seni değil — kendini sayıyorsun
+**COUNTER** Can yenilemeyi takım arkadaşların için sakla, kendi canına güvenme. Sen yaralanmışsan duruşunu değiştir, kapağa çekil, dövüşü trade'e bırak. İyileştirmeyi takım arkadaşına ver, kendi HP'ni nişanla ve pozisyonla koru.
+**WHY** Skye'ın havuzu takım canıdır, senin değil. Kendini iyileştireceğini sanıp öne çıkarsan, geri dönüşü olmayan canla dövüşe girersin. Sen ön plandaki giriş ajanısın ama sıfır self-heal'in var — bunu pozisyonla telafi et.
+
+**IF** Köpeği gönderiyorsun ama düşman pozisyonu hakkında hiçbir şey öğrenemiyorsun
+**MEANING** Köpeği körlemesine ileri sürüyorsun, sersem bırakmaya odaklanıp kontrol etmeyi bırakıyorsun
+**COUNTER** Köpeği aktif sür — köşeleri tara, açıları yokla. Köpek bir düşmana sürtündüğünde ya da vurulduğunda o bilgi sana düşman konumunu verir. Sersem bırakmadan önce nerede olduklarını öğren, sonra o bilgiyi takıma callout yap.
+**WHY** Köpek tek başına sersem makinesi değil, bir keşif aracıdır. Sürerken aldığı her hasar, her temas sana bir düşman konumu söyler. Sersem bırakma bonus; asıl değer turun başında nerede olduklarını öğrenmen.
+
+**IF** Saldırıda hep flash'la giriyorsun ama savunmada yeteneklerin boşta kalıyor
+**MEANING** Skye'ı sadece giriş ajanı sanıyorsun, savunmadaki keşif gücünü kullanmıyorsun
+**COUNTER** Savunmada köpeği erken gönder — düşmanın hangi siteye yığıldığını turun başında öğren, rotasyon çağrısını sen yap. Flash'ı retake ve geç savunma için sakla. İyileştirmeyi savunmacı dövüşlerden sonra ver.
+**WHY** Skye savunmada en güçlü bilgi ajanlarından biri. Köpekle erken okuma yapıp doğru rotasyonu tetiklersen, takımın 5'e 5 yerine sayısal üstünlükle siteyi karşılar. Yeteneği savunmada boşa harcamak, turun yarısını atmak demek.
+
 ## 5. Harita Etkileşimleri
-- **Haven**: Üç site var — istediğin girişe flash at, istediğin siteye köpek gönder, rotasyonlar arasında iyileştir. A long'dan köpek keşfi standart açılıştır.
-- **Ascent**: A main ya da B main'den kuş flash çok güçlü. Mid bilgisi için köpeği gönder. Mid dövüşünden sonra iyileştir, takım site alımına sağlam girsin.
-- **Breeze**: Geniş açılar köpeğin işini zorlaştırır ama flash geniş alanı kapatır. Geri alımda ult bu haritada çok değerli — düşman her yere dağılabiliyor.
-- **Bind**: Hookah ve showers dar — köpek keşfi burada çok verimli. Flash girişleri bu sıkışık alanlarda güçlü.
-- **Lotus**: Üç site yine sana uygun. Dönen kapılardan köpek gönderirsen düşmanı hazırlıksız yakalarsın.
+- **Haven**: Üç site var — istediğin girişe flash at, istediğin siteye köpek gönder, rotasyonlar arasında iyileştir. A long'dan köpek keşfi standart açılıştır. Üç sitelik haritada bilgi kraldır: savunmada köpekle erken oku, takımın hangi tarafa toplanacağını sen söyle. Üç çıkışlı sitelerde flash'ı tek girişe değil, takımın gireceği koridora göre seç.
+- **Ascent**: A main ya da B main'den kuş flash çok güçlü. Mid bilgisi için köpeği gönder — bu haritada mid kontrolü tüm turu çevirir, köpek mid'i okur. Mid dövüşünden sonra iyileştir, takım site alımına sağlam girsin. B site dar ve kapalı, flash'ın orada düşmanı tam kör eder; A ise açık, flash'ı duvardan sektirmeye dikkat et.
+- **Breeze**: Geniş açılar köpeğin işini zorlaştırır ama flash geniş alanı kapatır. Geri alımda ult bu haritada çok değerli — düşman her yere dağılabiliyor. Uzun açılarda kuşu havada bekletip düşmanın ne zaman peek atacağını oku, sonra patlat; geniş haritada erken patlatılan flash boşa gider.
+- **Bind**: Hookah ve showers dar — köpek keşfi burada çok verimli. Flash girişleri bu sıkışık alanlarda güçlü. Teleportlar yüzünden düşman hızlı rotasyon yapar; köpekle bir siteyi okuyup boş bulursan rotasyonu erken çağır. Dar koridorda kör olan düşmanın kaçacak yeri yok, flash burada en ölümcül.
+- **Lotus**: Üç site yine sana uygun. Dönen kapılardan köpek gönderirsen düşmanı hazırlıksız yakalarsın. Kapı açılırken çıkan ses örtüsünde köpeğin geliş sesi kaybolur — düşman geç fark eder. Üç sitelik haritada savunmadaki erken köpek okuması rotasyon avantajını sana verir.
 
 ## 6. Eşleşme Notları
 - **Jett'e karşı**: Kuşunu Jett'e at — ya dash atar ya kör kalır. Dash attıysa kill almadan yeteneğini harcamış olur. İki sonuç da senin lehine.
@@ -73,6 +90,10 @@ Skye'da hem flash, hem keşif, hem de can yenileme senin elinde — bunu tek ba�
 "Takım flash'ını sen yapıyorsun. Bundan sonra her kuştan önce takıma söyle ve onlar peek'e hazır olana kadar bekle. Kuş onlar için var, senin için değil."
 
 "Her tur aynı köpek yolunu kullanıyorsun, düşman önceden nişan alıyor. Farklı pozisyondan ya da smoke içinden gönder. Köpek düşmana ulaşamadan düşerse sersem bırakma da olmaz."
+
+"Kendini iyileştirmeye çalışıp öne çıkıyorsun ama can yenilemen sana çalışmaz. Sen yaralandığında geri çekil, dövüşü trade'e bırak. İyileştirmeyi takım arkadaşına ver, kendi canını pozisyonla koru."
+
+"Köpeği gönderip hemen sersem bırakmaya çalışıyorsun. Önce köşeleri tara, düşmanın yerini öğren, takıma söyle. Sersem bırakma bonus; asıl iş köpekle nerede olduklarını okuman."
 
 ## 8. Rank Modülasyonu
 - **Düşük (Iron-Silver)**: Takım flash'ını sen yap. Her kuştan önce söyle. Push'tan önce köpeği gönder. Yaralı takım arkadaşını iyileştir. Şimdilik bu kadar yeter.

@@ -19,6 +19,8 @@ Bu kit yerinde duranı cezalandırır. Hareketli duvardan kimse geçmezse o yete
 - Ult'u dar odalarda atmak (Bind hookah, Split sewers). Gayzer havuzları alana ihtiyaç duyar; dar yerde düşman bir adım yana kayıp kurtulur.
 - Savunmada pasif köşe oturmak. Harbor'ın savunma araçları Omen ya da Viper'ınkinden zayıf. Köşede bekliyorsan ajanı yanlış oynuyorsun. Hareketli duvarla agresif peek at, sonra geri çekil. Su duvarını retake rotasyonunu kesmek için kullan.
 - Su duvarını takım arkadaşlarının yüzüne doğru bükmek. Duelist A short'a bakıyorsa ve duvarın onun üzerinden kıvrılıyorsa o round bitti demektir. Atmadan önce minimap'ten takım pozisyonlarını kontrol et.
+- Hareketli duvarı tam dolu menzile kadar göndermek. Duvarın ömrü sabit — gereğinden uzağa salarsan en kritik geçiş anında erkenden söner. Takımın geçmesi gereken mesafeyi ört, fazlasını değil.
+- Yetenekleri tek tek, dağınık harcamak. Harbor'ın gücü su duvarı + hareketli duvarın aynı tempoda peş peşe çıkmasında. Birini round başında, diğerini ortasında atarsan ne tam koruma ne de baskı üretirsin.
 
 ## 4. Kalıp -> Anlam
 
@@ -82,6 +84,21 @@ Bu kit yerinde duranı cezalandırır. Hareketli duvardan kimse geçmezse o yete
 **COUNTER** Yetenek önden gider, beden arkada kalır. Duvar önce çıkar, takım arkasından gelir, Harbor grubun içindedir. Harbor duelist değil.
 **WHY** Harbor'ın asıl değeri yaşayıp yeteneğini sürdürmesinde. Erken ölürsen takım round'un geri kalanını controller'sız geçirir.
 
+**IF** Su duvarının arkasından geçen takım arkadaşları içeride yavaşlıyor ve yön kaybediyor
+**MEANING** Oyuncu duvarın içinden yürünebildiğini unutuyor. Su duvarı görüşü keser ama yürürken oyuncuyu yavaşlatır — düşman duvarın çıkışında bekliyorsa takım yarı hızda, kör halde çıkar.
+**COUNTER** Duvarı takımın *içinden geçeceği* yere değil, düşmanın *durduğu* açıya bük. Takım duvarın kenarından temiz hızla dolanmalı, içinden değil. İçinden geçmek zorunluysa "duvardan çıkıyoruz, yavaşız" diye çağrı yap ki kimse tek başına yürümesin.
+**WHY** Duvarın içinde hem yavaş hem körsün. Düşman çıkış noktasını tutuyorsa o geçiş bedava kill'e döner — duvar takımı korumak yerine tuzağa çevirir.
+
+**IF** Hareketli duvar her execute'ta tam aynı choke'tan, aynı saniyede çıkıyor
+**MEANING** Push tamamen okunabilir hale gelmiş. Savunucular duvarın çıktığı saniyeyi ezberleyip ya önceden flash atıyor ya da otomatik rotate ediyor.
+**COUNTER** Bazı round'larda duvarı yem olarak çıkar — bir choke'tan sal, takımı diğer taraftan push et. Bazen duvar çıktıktan sonra bir-iki saniye bekle, savunucu duvarı yer açtıktan sonra gerçek girişi yap.
+**WHY** Harbor'ın gücü bilgi reddinde; ama her round aynı ritim, reddi tahmine çevirir. Çeşitlilik savunucunun ön-okumasını cezalandırır.
+
+**IF** Eco/force round'larında Harbor tüm yeteneğini full-buy gibi harcıyor
+**MEANING** Yetenek ekonomisi yok. Su duvarı ve hareketli duvarın ikisi de para ister; her round full döküm yaparsan zayıf round'larda elin boş kalır.
+**COUNTER** Eco round'da tek bir yeteneğe yatır — ya retake'i kesen su duvarı ya da güvenli giriş için hareketli duvar, ikisi değil. Tasarrufu bir sonraki gun-round'un execute'una sakla.
+**WHY** Harbor'ın etkisi yeteneklerin birlikte çıkmasından gelir. Parçalı harcama hem bu round'u hem sonrakini zayıflatır — controller olarak takımın smoke bütçesini yönetmek senin işin.
+
 ## 5. Harita Etkileşimleri
 
 - **Pearl (S-tier)**: Harbor'ın en iyi haritası. B site: su duvarını B main'den B hall'a doğru bük — hem derin site'ı hem connector rotasyonunu aynı anda kesersin. B main'den çekilen hareketli duvar, giriş ikilisini site öncesindeki uzun açık alanı geçerken kalkan altına alır. Standart B plant'te kubbe heaven açısını kapatır, kalanını duvar halleder. A site: su duvarını A main'den A art'a bük — derin connector peek'ini ve yakın sol köşeyi aynı anda kapatırsın. Açık düzen sayesinde ult neredeyse tüm A site'ı kaplar. Savunmada hareketli duvar güvenli çekilme imkanı verdiği için agresif B long peek'lerini mümkün kılar.
@@ -117,6 +134,10 @@ Bu kit yerinde duranı cezalandırır. Hareketli duvardan kimse geçmezse o yete
 **Zorlandığında**: "Duvar takım arkanda değilken çıkıyor. Takım arkadaşlarını choke'ta push'a hazır görene kadar atma. Atmadan önce 'Duvar çıkıyor' de. Kimse takip etmiyorsa tut."
 
 **Tahmin edilebilir olduğunda**: "Her round aynı yöne bükülüyorsun, savunucular sen atmadan kıvrımın arkasında oynuyor. Ters yöne çevir ya da düz git — aşırı kaymalarını cezalandır."
+
+**Zamanlama bozukken**: "Su duvarın ve hareketli duvarın peş peşe değil, ayrı tempolarda çıkıyor. İkisini tek nefeste çıkar, takım duvar düşmeden site'ta olsun. Geç giriş korumayı zamanın dışına atar."
+
+**Yeteneği boşa giderken**: "Duvarı tam menzile salıyorsun, kritik geçiş anında sönüyor. Sadece takımın geçmesi gereken mesafeyi ört, fazlasını değil — duvarın ömrü sabit."
 
 ## 8. Rütbe Ayarı
 

@@ -18,6 +18,8 @@ Astra'yı doğru oynarsan harita sana çalışır, sen haritaya değil. Yıldız
 - ult'u takım arkadaşlarının rotasyon yoluna koymak
 - Yıldızları düşman bölgesine çok erken koyup düşmanın yok etmesine izin vermek
 - Geri çekme animasyonu sırasında smoke'ta boşluk açmak
+- Round başında 5 yıldızı koymadan gökyüzünden inmek — round içinde yeni yıldız koymak için tekrar gökyüzüne çıkmak zorunda kalmak, yani gereksiz risk
+- Geri çekme bıraktığı sahte smoke'a güvenip onu gerçek kapatma sanmak — o gölge saniyeler içinde dağılır, düşmanı durdurmaz
 
 ## 4. Kalıp -> Anlam
 
@@ -46,12 +48,32 @@ Astra'yı doğru oynarsan harita sana çalışır, sen haritaya değil. Yıldız
 **COUNTER** Her round başında okumana göre yıldız koy: "Son 2 round B'ye pushladılar, yıldızlar B'de." Kesin bilgi gelmedikçe planından sapma.
 **WHY** Amaçsız taşıma yıldızını ve zamanını yer. Planına sadık kalan Astra her taşınan yıldızdan daha fazla değer üretir.
 
+**IF** saldırıda execute sırasında smoke'ları sen koruyup yıldız menzilinde ön safta ölüyorsun
+**MEANING** Controller'ı entry oynuyorsun — smoke kontrolünü kaybediyorsun, takım açık siteye giriyor
+**COUNTER** Yıldızları gerideki güvenli bir noktadan aktive et, smoke'lar açıkken arkadan destek ver. İlk giren sen değil entry'ler olsun.
+**WHY** Sen ölünce smoke'lar zamanından önce dağılır ve takım açıkta kalır. Astra'nın değeri ayakta kalıp smoke'u beslemekte, ilk peek atmakta değil.
+
+**IF** smoke'u tam choke'a değil, biraz geriye ya da ileriye koyuyorsun, düşman kenardan açı buluyor
+**MEANING** Yıldız yerleşimin yaklaşık, choke'u tam kapatmıyor
+**COUNTER** Yıldızı tam geçiş hattının üstüne koy — düşmanın bakması gereken açıyı tamamen kapat. Yarım kapalı smoke, kapalı değildir.
+**WHY** Bir smoke ya açıyı tamamen keser ya da işe yaramaz. Kenardan sızan görüş, smoke'un arkasındaki arkadaşını bedavaya öldürtür.
+
+**IF** stun'ı (Nova Pulse) yıldızı koyduğun an, kimse o açıda yokken patlatıyorsun
+**MEANING** Stun'ı çatışma anına denk getiremiyorsun, boşa gidiyor
+**COUNTER** Stun yıldızını choke'a önceden koy, düşman tam o açıya girdiği anda patlat — hemen arkasından takım swing atsın.
+**WHY** Stun ancak içinde düşman varken değer üretir. Boş açıya patlayan stun, takımına hiçbir avantaj vermez ve cooldown'a girer.
+
+**IF** ult duvarını koyduğun yöne (engelleyen yüzüne) dikkat etmiyorsun
+**MEANING** Duvar mermini ve sesini hangi yöne kestiğini bilmiyorsun, kendi takımını da köreltebiliyorsun
+**COUNTER** Duvarı yerleştirirken düşman tarafını ayır: mermi ve ses sadece o yönden kesilsin. Takımın duvarın güvenli tarafında kalsın.
+**WHY** ult iki taraftan da görüşü ve sesi keser. Yanlış yöne kurarsan takımının çatışmasını da köreltirsin, avantajı düşmana verirsin.
+
 ## 5. Harita Etkileşimleri
-- **Breeze**: ult mid'i keser, oyunu ikiye böler. A Hall ve B Hall'a yıldız koy, harita çapında kontrol kur.
-- **Haven**: 3 site yıldızlarını zorlar, dikkatli böl. ult burada tek bir siteyi rotasyonculardan izole etmenin en doğru yolu.
-- **Lotus**: Dönen kapı girişleri çekiş için doğru nokta. 3 site esnek yıldız yerleşimini zorunlu kılar.
-- **Pearl**: Uzun mid koridoru çekiş ve stun'dan beslenir. Mid'e ult at, tüm harita akışını kes.
-- **Ascent**: A main ve B main birincil çekiş noktaların. Mid'deki yıldız catwalk ve market push'ları hakkında sana erken bilgi verir.
+- **Breeze**: Geniş açık alanlar yüzünden smoke'lar her şeyden önemli. ult mid'i keser, oyunu ikiye böler. A Hall ve B Hall'a yıldız koy, harita çapında kontrol kur. Açık alanlarda çekiş zayıf — yıldızlarını smoke önceliğiyle dağıt, çekişi sadece dar geçitlere sakla.
+- **Haven**: 3 site, 5 yıldızını gerçekten zorlar — hepsini bir siteye koyamazsın. Savunmada yıldızları orta noktaya koy ki tek aktivasyonla iki farklı siteyi de besleyebilesin. ult burada tek bir siteyi rotasyonculardan izole etmenin en temiz yolu; özellikle Garage hattını kesip A ile C arası takviyeyi keser.
+- **Lotus**: Dönen kapı girişleri ve dar koridorlar çekiş + stun için biçilmiş kaftan — düşman dar alanda çekişten kaçamaz. 3 site esnek yıldız yerleşimini zorunlu kılar; yıldızları kapı eşiklerine yakın koy ki round içinde hızla yeniden hedeflenebilsinler.
+- **Pearl**: Uzun mid koridoru çekiş ve stun'dan beslenir — düşman uzun koridorda yan kaçamaz, çekiş tam isabet eder. Mid'e ult at, tüm harita akışını kes; mid kontrolü Pearl'de hem A hem B rotasyonunu yönetir.
+- **Ascent**: A main ve B main birincil çekiş noktaların — daracık girişler stun + çekiş kombosu için ideal. Mid'deki yıldız (özellikle Market/Catwalk hattında) sana erken push bilgisi verir; düşman mid'i zorladığında o yıldızı stun'a çevirip tempoyu kır. ult'u A'da Main ile site arasına kurarsan execute'i tek başına durdurabilirsin.
 
 ## 6. Eşleşme Notları
 - **Sova'ya karşı**: recon gökyüzündeyken bedenini açığa çıkarır. Sova recon attığında gökyüzüne çıkma.
@@ -70,11 +92,19 @@ Astra'yı doğru oynarsan harita sana çalışır, sen haritaya değil. Yıldız
 
 **Döngüyü kır:** Bir round choke'ta çekiş + stun aç. Sonraki round aynı yıldızı smoke'a çevir — düşman boşuna çekilir. Üçüncü round farklı choke'a çekiş koy. Düşman hangi yıldızın ne yapacağını asla bilemez.
 
-**Düşman adapte olduğunda:** Yıldız yarıçapından uzağa oynarlarsa yıldızı geri çek, daha derine taşı. Yıldızı yok etmeye çalışırlarsa gizli noktalara (kutu arkası, duvar içi) koy — yok etmek onlardan zaman ister. Pozisyonları kademeliyse izole olana çekiş, diğerine smoke at, takımın iki kez 5v1 dövüşür.
+**Düşman adapte olduğunda:** Yıldız yarıçapından uzağa oynarlarsa yıldızı geri çek, daha derine taşı. Yıldızı yok etmeye çalışırlarsa gizli noktalara (kutu arkası, duvar içi) koy — yok etmek onlardan zaman ister. Pozisyonları kademeliyse izole olana çekiş, diğerine smoke at, takımın iki kez 5v1 dövüşür. Yıldızı patlatmadan görüp yön değiştiriyorlarsa, smoke beklentisini kullan: smoke koymayıp boş bıraktığın açıdan takımın bekler, düşman güvenli sandığı yerden çıkar.
+
+**Önce ölme, smoke'u besle:** Astra'nın değeri ayakta kalmakta. Sen ölünce açık smoke'lar erkenden dağılır, takım açıkta kalır. Çatışmanın ucuna oynama; yıldızları gerideki güvenli bir noktadan aktive et, peek atmayı entry'lere bırak. Ayakta kalan bir Astra round boyunca beş yıldızını da besler.
+
+**Stun'ı çatışmaya denk getir:** Stun ancak içinde düşman varken altın değerinde. Yıldızı choke'a önceden koy, düşman tam o açıya girdiği an patlat ve aynı anda "şimdi" çağrısı yap — takım o pencerede swing atsın. Boş açıya patlayan stun cooldown'a girer, sana hiçbir şey kazandırmaz.
+
+**ult'u proaktif kur, clutch'a saklama:** Cosmic Divide 4v4-5v5'te haritayı ikiye bölerek takımın yarısını çatışma dışı bırakır. Bunu execute'in ilk anında ya da retake'e girerken at; duvarın engelleyen yüzünü düşman tarafına çevir ki kendi takımını köreltmeyesin. Az kişi kalınca atılan duvar bu makro etkisini tamamen kaybeder.
 
 **Zorlanıyorsan**: "Çatışmanın ortasında gökyüzüne çıkmayı bırak. Yıldızları satın alma aşamasında koy, okumana güven, yerden aktive et. Sen gökyüzündeyken bedenin ölüyor."
 
 **Tahmin edilebilirsen**: "Düşman yıldız noktalarından kaçınıyor çünkü her round aynı yere koyuyorsun. Önceki round gördüklerine göre her round 2-3 yıldızı farklı noktaya taşı."
+
+**Sadece smoke oynuyorsan**: "Beş yıldızı da smoke'a harcıyorsun. Bir tanesini dar girişe çekiş, bir tanesini push koridoruna stun yap. Çekiş ve stun seni gerçek bir Astra yapan şey — yoksa zayıf bir smoke ajanı oynuyorsun."
 
 ## 8. Rank Ayarı
 - **Iron-Silver**: 3-4 yıldızı yaygın smoke noktalarına koy, takım ihtiyaç duyduğunda smoke aç. Çekiş ve stun'ı yalnızca dar girişlerde dene.

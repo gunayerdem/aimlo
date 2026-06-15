@@ -17,6 +17,8 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 - Ult'u açık alanda kullanmak. Koza görünürdeyse düşmanın takım arkadaşları vurur, içindeki kurtulur.
 - Tüm utility'yi tek noktaya harcamak. Düşman rotate edince elinde hiçbir şey kalmaz.
 - Duvarın nasıl kırıldığını bilmemek. Orbları vurmayı bilen düşman duvarı çabuk söker — o sesi duy, önceden açını kur.
+- Tuzağı ve ağ tuzağını görünür yere koymak. İkisi de gözle bulunabilir — düşman görürse tuzağı uzaktan vurur, ağ tuzağının üstünden eğilip geçmeden önce yavaşlar ama yine de planını bozar. Köşeye, alçak zemine, görüş hattının dışına koy.
+- Ult'u boşa, ilk teması açmak için atmak. Ult senin en güçlü kapanış aracın — onu round'u garanti almak için sakla, dövüş başlatmak için değil. Sadece sersemletmek istiyorsan zaten tuzağın var.
 
 ## 4. Kalıptan Anlama
 
@@ -50,18 +52,35 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 **COUNTER** Orb kırma sesini aktif dinle — kıran düşman pozisyonunu açığa çıkarır. O ses gelince hazır açıda bekle. Duvarın arkasına tuzak koy, orbu kırarken tuzak tetiklensin.
 **WHY** Duvar yalnız durduğunda sadece geciktirir. Tuzakla birleşince orbu kıran düşman hem sersemler hem pozisyonunu açığa çıkarır — duvar bir tuzak kapısına döner.
 
+**IF** Düşman ağ tuzağına yakalanıyor ama sen ona ateş açamadan eğilip kurtuluyor
+**MEANING** Ağ tuzağını attın ama üstünü tutmuyorsun. Yere yapışan düşman birkaç saniyede eğilip ağdan çıkıyor — sen o pencerede ateş etmezsen bedava bir kaçış vermiş oluyorsun.
+**COUNTER** Ağ tuzağını her zaman ateş açabileceğin bir açıya at. Yakalanan düşmana anında ateş aç ya da takım arkadaşını çağır. Net düşmanı öldürmez, sadece kısa süre tutar — değeri ancak biri o pencereyi kullanırsa çıkar.
+**WHY** Ağ tuzağı bir tutuş aracı, bir öldürme aracı değil. Tutulan düşmana hiçbir baskı binmezse net'i hatırlatıcı bir uyarıdan ibaret kalır. Sen ya da takımın o pencerede tetiği çekmeli.
+
+**IF** Site'ı tek başına savunuyorsun ama düşman utility'ni boşalttıktan sonra üstüne basıyor
+**MEANING** Tüm yeteneğini düşmanın ilk fake'inde ya da yavaş yaklaşımında harcadın. Şimdi gerçek push geldiğinde elin boş.
+**COUNTER** İlk sese tüm utility'ni boşaltma. Önce duvar ya da tuzakla bilgi al, düşmanın gerçekten mi geldiğini yoksa fake mi attığını oku. Asıl push'u gördüğünde ağ tuzağını sakla. Tek utility'yi blöfe yakman, gerçek tehlikeye cevapsız bırakır.
+**WHY** Deadlock'un gücü utility yoğunluğunda, ama o utility bir kez gidince yenilenene kadar yoksun. Düşman seni boşalttırmak için fake atar — sabreden Deadlock asıl push'u tam donanımla karşılar.
+
+**IF** Defuse ediyorsun ya da retake'e geçiyorsun ama post-plant'te düşmanı tutamıyorsun
+**MEANING** Ult'unu ya da ağ tuzağını yanlış zamanda harcadın. Spike kurulduktan sonra senin en güçlü anın — elinde kapanış aracı kalmamış.
+**COUNTER** Saldırı durup spike kurulunca utility'ni post-plant için sakla. Ult'u defuse'a gelen düşmanı yakalamak için bekle, ağ tuzağını da spike'a yaklaşan ilk gövdeye at. Açık alandaki spike'ı düşman koruyamaz çünkü her yaklaşımı tutabilirsin.
+**WHY** Deadlock retake ajanı gibi düşünülmez ama post-plant'te muazzam: ağ tuzağı spike'a koşan düşmanı durdurur, ult ise tek defuser'ı garanti götürür. Bu araçları erken yakan oyuncu round'un en kritik 40 saniyesine eli boş girer.
+
 ## 5. Harita Etkileşimleri
-- **Lotus**: Döner kapılar ve dar koridorlar duvar + ağ tuzağı katmanlaması için biçilmiş kaftan. B main ya da A root'ta ult'un için kaçış yolu yok.
-- **Bind**: B site'ta çok güçlüsün. Hookah, duvar için doğal geçiş noktası. B long'dan rush gelen gruba ağ tuzağını dağıt.
-- **Fracture**: Dar saldırı yolları işine yarar. Yer altı tünellerine tuzak koy — düşmanın rotasyonunu erken öğrenirsin.
-- **Haven**: Üç site'ı tutmak zor. Garage'ı kilitleyip C site'a odaklan — choke noktası nettir.
-- **Ascent**: B main duvar için güçlü pozisyon. Market'e tuzak koy — flank'ı erken görürsün.
+- **Lotus**: Döner kapılar ve dar koridorlar duvar + ağ tuzağı katmanlaması için biçilmiş kaftan. A site iki dar girişle (A main ve A link) gelir — duvarı en çok basılana koy, diğerini tuzakla tut. C site'ın tek ana girişi kilitlenmeye çok uygun; duvarı oraya, tuzağı arkasına katla. Döner kapının sesini düşman kullanırsa zaten haber alırsın — tuzağı kapının ardına değil, geçişten sonraki köşeye koy.
+- **Bind**: B site'ta çok güçlüsün. Hookah, duvar için doğal geçiş noktası. B long'dan rush gelen gruba ağ tuzağını dağıt. Teleport sesleri sana bedava bilgi verir — düşman TP kullanınca rotasyonunu okur, utility'ni TP'nin çıktığı tarafa kaydırırsın. A short'a tuzak koyarsan kısa yoldan gelen flank'ı erken yakalarsın.
+- **Fracture**: Dar saldırı yolları işine yarar. Yer altı tünellerine tuzak koy — düşmanın rotasyonunu erken öğrenirsin. Harita iki taraftan da basıldığı için tek site'ı kilitleyip diğerinin sesini tuzakla dinlemek senin tarzına tam oturur. Duvarı düşmanın iki yandan birini önceliklendirdiği round'da o tarafa koy.
+- **Haven**: Üç site'ı tutmak zor. Garage'ı kilitleyip C site'a odaklan — choke noktası nettir. A long uzun ve dar; duvar oraya konunca düşmanı tamamen durdurur. Üç site olduğu için flank yolları çok — tuzağı en uzun, en sessiz rotasyona koy ki rotate eden düşmanı erken duyasın.
+- **Ascent**: B main duvar için güçlü pozisyon — dar ve tek geçiş. Market'e tuzak koy, flank'ı erken görürsün. A site'ta ana giriş ve catwalk iki ayrı yön; duvarı asıl push'a koy, ağ tuzağını ikincil yola sakla. Düşman B'ye duvarla tıkanınca A'ya rotate eder — o sesi market tuzağıyla yakalarsın.
 
 ## 6. Eşleşme Notları
 - **Raze**'e karşı zayıfsın. Patlayıcıları duvarın orblarını ve tuzaklarını uzaktan temizler. Duvarı beklenmedik bir açıya koy.
 - **Neon** ve hız bazlı ajanlara karşı güçlüsün. Tüm kit'in tam da bunları cezalandırmak için var.
 - **Sova** tuzaklarını temizleyebilir, duvar pozisyonlarını güvenli mesafeden keşfeder. Tuzakları standart yerden çıkar, tahmin edilemez ol.
 - Ult'un **izole düşmana** karşı counter'lanamaz. En zayıf olduğun an grup halinde gelen takımlar — kozayı çabuk vururlar.
+- **Jett** ve **Chamber** gibi yüksek hareket kabiliyetli ajanlar ağ tuzağını ekonomik kullanmanı zorlar. Jett dash'le, Chamber TP'siyle net'in etkisini kısaltabilir — net'i onların hareket yeteneğini zaten kullandığı, geri çekilemeyeceği ana sakla.
+- Recon temizleyen ajanlara (**Sova**, **Fade**, **Skye**) karşı tuzağını ve ağ tuzağını görüş hattının dışına, alçak zemine koy. Açıkta duran utility taranıp imha edilir; gizli duran utility değer üretir.
 
 ## 7. Oyuncuya Ne Söylenmeli
 
@@ -83,6 +102,15 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 ### Tahmin Edilebilir Olduysa
 "Düşman duvar yerlerini ezberledi, etrafından dolanıyor. Round değiştir — hangi girişi kilitlediğini değiştir. Duvarın kapamadığı yolu ağ tuzağıyla tut."
 
+### Ağ Tuzağını Boşa Harcıyorsa
+"Ağ tuzağı yakalıyor ama düşman eğilip çıkıyor çünkü üstünü tutmuyorsun. Net öldürmez, sadece tutar — yakaladığın an ateş aç ya da takımı çağır. Tutamayacağın açıya net atma."
+
+### Utility'yi Erken Boşaltıyorsa
+"Düşmanın ilk sesine bütün yeteneğini harcıyorsun, gerçek push gelince elin boş kalıyor. Önce duvar ya da tuzakla bilgi al — fake mi gerçek mi anla. Ağ tuzağını asıl baskı geldiğinde sakla."
+
+### Post-Plant'i Tutamıyorsa
+"Spike kurulduktan sonra senin en güçlü anın ama o ana eli boş giriyorsun. Ağ tuzağını ve ult'unu post-plant için sakla — net'i spike'a koşana at, ult'u defuse'a geleni garanti götürmek için kullan."
+
 ## 8. Rütbe Modülasyonu
 
 **Düşük (Iron-Silver):** Duvarı rastgele koyuyorsun, tuzakları unutuyorsun, ağ tuzağını el bombası gibi atıyorsun. Duvarı ana geçişe koy, tuzağı flank yoluna koy, ağ tuzağını da düşman tam koridora girince at.
@@ -91,4 +119,4 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 
 **Yüksek (Diamond-Ascendant):** Katmanlama tamam ama tek site'a bağlı kalıyorsun. Düşman hangi round hangi girişi tercih ediyor — bunu oku ve duvarı round'dan round'a taşı.
 
-**Elit (Immortal-Radiant):** Deadlock'un asıl gücü bir saldırı rotasını tek round'da tamamen kapatmaktır. Duvar ve ağ tuzağı her round okumalarına göre değişsin. Ult'u spike kurulduktan sonra post-plant için sakla — garantili defuse engeli olarak kullan. Orb kırma sesini aktif dinle ve o sese önceden açını kur: o zaman duvar geciktirici değil, gerçek bir tuzak olur.
+**Elit (Immortal-Radiant):** Deadlock'un asıl gücü bir saldırı rotasını tek round'da tamamen kapatmaktır. Duvar ve ağ tuzağı her round okumalarına göre değişsin. Ult'u spike kurulduktan sonra post-plant için sakla — garantili defuse engeli olarak kullan. Orb kırma sesini aktif dinle ve o sese önceden açını kur: o zaman duvar geciktirici değil, gerçek bir tuzak olur. Utility'ni düşmanın fake'ine yakma — önce bilgi al, asıl push'a tam donanımla cevap ver.

@@ -18,6 +18,8 @@
 5. **Ult açıkken açıkta kalmak** — Ult seni hızlandırır ve her öldürmede bedava kaçış verir; ama yığılmış düşmanın üstüne dalarsan kaçış dolmadan ölürsün. Ult açıkken bile kapağın arkasından çık.
 6. **Nişanın tutmadığı gün Reyna seçmek** — Nişanın tutmuyorsa Reyna oyundaki en işlevsiz ajandır. Fark ettiğin an ya takım arkadaşının arkasına geç ya da ajan değiştir.
 7. **Düşmana doğru kaçış basmak** — Kaçış seni dokunulmaz yapar ama görünür bırakır. Dokunulmazlık bitince oracıkta ölürsün. Kaçışı her zaman kapağa ya da köşeye doğru kullan.
+8. **Takım toplanmadan tek başına erken giriş yapmak** — Reyna'nın trade'i yoktur; öldüğünde takım onu kaybeder. Arkanda kimse yokken giriş yaparsan bir öldürsen bile boşluğu dolduran olmaz, kalan düşmanlar üstüne yığılır. Girişini takım yardımının geleceği ana denkle.
+9. **İlk öldürmeden sonra açıkta kalıp ikinciyi aramak** — İlk düellodan sonra Reyna en savunmasız anındadır: heal yok, can düşük, pozisyon teşhir. Hemen kapağa çekilip tam cana gelmeden ikinci açıyı zorlama; ikinci düşmanı aynı açıdan ölü canla aramak en sık ölüm sebebidir.
 
 ## 4. Kalıp -> Anlam
 IF: Öldürme sayın yüksek ama ilk öldürme oranın düşük
@@ -45,10 +47,26 @@ MEANING: Ult açıkken normalde girmeyeceğin pozisyonlara dalmaya başlıyorsun
 COUNTER: Ult açıkken bile kapağın arkasından çık. Bedava kaçış yanlış açıyı affetmez — kaçış dolmadan ikinci düşman seni görürse ölürsün.
 WHY: Ult her öldürmede bedava kaçış verir ama canını artırmaz. Kötü pozisyon hâlâ ölüm demektir.
 
+IF: İlk düelloyu kazanıyorsun ama hep ikinci düşman seni hemen indiriyor
+MEANING: Bir öldürüyorsun ama hemen kapağa geçmek yerine açıkta kalıp ikinci düşmanı arıyorsun. Reyna ilk düellodan sonra en savunmasız anındadır — heal yok, can düşük, pozisyon teşhir olmuş.
+COUNTER: İlk öldürmeden sonra hemen kapağa çekil. Açıktaysan kaçış, kapağın arkasındaysan heal. Tam cana gelmeden ikinci açıyı zorlamaya kalkma; ikinci düşmanı takım arkadaşına bırak ya da yeniden konumlanıp gir.
+WHY: İlk öldürmeyle teşhir olduğun yeri düşman zaten biliyor. Tam canla ve yeni bir açıdan tekrar girmek, ölü canla aynı açıdan ikinciyi aramaktan her zaman üstündür.
+
+IF: Çok erken, takım toplanmadan tek başına giriş yapıyorsun
+MEANING: Reyna'yı "her el ilk kanı al" diye oynuyorsun ama takım arkanda yok. Bir öldürsen bile arkadan trade gelmiyor, geri kalan düşmanlar üstüne yığılıyor.
+COUNTER: Girişini takım yardımının geleceği ana denkle. Sen kör küresiyle açıp ilk düelloyu kapacaksın, takım hemen arkandan boşluğu dolduracak. Tek başına erken giriş öldürme değil, sadece sayı üstünlüğünü düşmana hediye etmek demektir.
+WHY: Reyna trade'i olmayan bir öncüdür — öldüğünde takım onu kaybeder. Öldürmen ancak takım o öldürmeyi alana çevirirse değerli; yalnız giriş bir avantajı iki dezavantaja çevirir.
+
+IF: Sürekli aynı açıdan / aynı zamanlamada çıkıyorsun
+MEANING: Kör küresini hep aynı yere atıp hep aynı anda peek atıyorsun. Düşman birkaç el sonra tam o açıya önceden nişan alıp seni küre patlamadan yakalıyor.
+COUNTER: Açını ve zamanlamanı her el değiştir: bazen küre at hemen çık, bazen küreyi at bir an bekle, bazen tamamen farklı bir açıdan gel. Öngörülebilir Reyna ölü Reyna'dır.
+WHY: Reyna'nın tek öncü avantajı sürpriz + kör. Düşman çıkışını ezberlediğinde kör küresi bile seni kurtarmaz; çeşitlilik avantajını geri verir.
+
 ## 5. Harita Etkileşimleri
-- **Güçlü olduğun haritalar:** Ascent (uzun hatlar düello kazanıp heal ile can doldurmayı ödüllendirir; A Short ve Mid güçlü kör küresi açılarıdır), Bind (dar koridorlar kör küresini vurmayı zorlaştırır; yakın mesafe düelloları kartopunu hızlandırır), Split (dar alanlar kör küresinin değerini artırır; A Main boyunca heal ile dayanabilirsin).
-- **Zayıf olduğun haritalar:** Breeze (uzun hatlar düşmana kör küresini rahat vurma açısı verir; küre patlayınca kör avantajın düşer, kartopu daha başlamadan kırılır), Lotus (çok bölgeli yapı seni böler; bir anda sadece tek yerde olabilirsin).
+- **Güçlü olduğun haritalar:** Ascent (uzun hatlar düello kazanıp heal ile can doldurmayı ödüllendirir; A Short ve Mid güçlü kör küresi açılarıdır), Bind (dar koridorlar kör küresini vurmayı zorlaştırır; yakın mesafe düelloları kartopunu hızlandırır; teleport'lar yeniden konumlanıp kaçış israfı yapmadan açı değiştirmene izin verir), Split (dar alanlar kör küresinin değerini artırır; A Main boyunca heal ile dayanabilirsin; kısa hatlar tek tek düelloyu zorlar, tam Reyna işi), Fracture (çift taraftan giriş ve bol yakın-orta açı kör-çıkış kartopuna yarar).
+- **Zayıf olduğun haritalar:** Breeze (uzun hatlar düşmana kör küresini rahat vurma açısı verir; küre patlayınca kör avantajın düşer, kartopu daha başlamadan kırılır; uzak mesafede heal döngüsü de yavaşlar), Icebox (uzun hatlar + bol uzun menzil tutuşu küresiz çıkışı cezalandırır), Lotus (çok bölgeli yapı seni böler; bir anda sadece tek yerde olabilirsin).
 - **Özel açılar:** Ascent'te A Short'a duvarın içinden kör küresi at — savunucu vuramazken kör olur. Bind'da Hookah'ta kör küresini yakın mesafeden at — düşman patlatmaya zaman bulamaz, bu Reyna'nın en güçlü öncü girişlerinden biri.
+- **Genel kural:** Reyna kısa ve dar hatlarda parlar (kör küresi vurulmadan iş görür, düello hızlı biter, heal döngüsü çabuk döner); uzun ve açık hatlarda zayıflar (küre uzaktan vurulur, tutuşlar küresiz çıkışı cezalandırır). Haritaya değil, oynayacağın açıya bak: aynı haritada bile dar bölgeyi seçersen Reyna çalışır. Açık alanda zorlanan bir elde Reyna'yı bırakıp dar hattı tutmak, kötü açıdan düello kapmaya çalışmaktan üstündür.
 
 ## 6. Eşleşme Notları
 - **Zorlandığın ajanlar:** KAY/O (bastırma yeteneği heal ve kaçışını tamamen kapatır, yeteneksiz kalırsın), Fade (recon'uyla seni ve kaçış izini açığa çıkarır, bot'u sen kaçarken peşine takılır), Chamber (keskin tabancasıyla kör-çıkış zamanlamanı cezalandırır).
@@ -70,6 +88,12 @@ WHY: Ult her öldürmede bedava kaçış verir ama canını artırmaz. Kötü po
 
 ### Öngörülebilir olduğunda
 "Kör küresi açını okuyorlar. Farklı yerden at ya da çıkışı bir an geciktir."
+
+### Tek başına erken girdiğinde
+"Takımdan önce giriyorsun, arkanda kimse yok. Bir öldürsen bile boşluğu dolduran olmuyor. Girişini takımla denkle — sen kör küresiyle aç, hemen arkandan gelsinler."
+
+### İlk öldürmeden sonra açıkta kaldığında
+"İlk düelloyu kaptın ama hemen ikinciye gittin. O an en savunmasız hâlindesin — heal yok, can düşük. Bir öldür, hemen kapağa çekil, tam cana gel, sonra yeni açıdan gir."
 
 ## 8. Rank Modülasyonu
 ### Düşük Elo (Iron-Silver)

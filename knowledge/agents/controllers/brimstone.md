@@ -18,6 +18,8 @@ Brimstone'un smoke'u en güvenilirisi. Sen smoke'u attığın an giriş açılı
 - Molly'yi aktif çatışmada boşa yakmak, spike sonrası için saklamamak
 - Atak'ta çok geride durmak — smoke menzilin yetmez, öne çık
 - Molly noktası öğrenmemek — o zaman sadece smoke atıyorsun, Brimstone oynamıyorsun
+- Smoke'u takımın push'undan saniyeler önce atmak — duman çok uzun durmaz, sen daha içeri girmeden söner
+- Stim'i kendi üstüne atıp tek başına dövüşe girmek — stim takım aracı, yanında biri yokken değerinin yarısını kaybeder
 
 ## 4. Kalıp -> Anlam
 
@@ -46,15 +48,30 @@ Brimstone'un smoke'u en güvenilirisi. Sen smoke'u attığın an giriş açılı
 **COUNTER** Özel modda smoke noktalarını tek tek oturt. Küçük bir boşluk bile savunucuya tek yönlü açı verir ve girişi bozar.
 **WHY** Smoke'taki boşluk savunucuya bilgi verir; o boşluktan tam push anında takım arkadaşını kafadan vurur.
 
+**IF** Smoke'u erken atıyorsun, takım daha hazır değilken duman söndü ve giriş kapandı
+**MEANING** Smoke süresiyle takımının temposunu denkleştiremiyorsun
+**COUNTER** Smoke'u takım giriş noktasına dayandığı an at, saniyeler önce değil. Önce "girelim mi" çağrısını yap, smoke'u o çağrıyla aynı anda bas.
+**WHY** Senin dumanın kısa ömürlü — Viper duvarı gibi round boyu durmaz. Erken atarsan rakip dumanı bekler, sönünce taze açıyla seni karşılar. Smoke ile ayak birlikte gitmeli.
+
+**IF** Site içine girdin ama smoke'ları sadece girişi kapatmak için kullandın, içerideki açıları açık bıraktın
+**MEANING** Smoke'u sadece "kapı" gibi görüyorsun, içerideki tehlikeli açıları kapatmıyorsun
+**COUNTER** Bir smoke'u giriş hattına, bir smoke'u içeride seni vurabilecek default/derin açıya at. Plant yaparken arkanı dumanla kapat.
+**WHY** Girişi açtın ama içeride bekleyen savunucu tek açıdan tüm takımı tarar. İçerideki açıyı dumanlamak plant'i ve sonrasını güvene alır — giriş kadar plant alanı da kapatılmalı.
+
+**IF** Savunmada smoke'ları erken yakıp retake anında elinde hiçbir şey kalmıyor
+**MEANING** Savunmada smoke'un asıl değerinin retake'te olduğunu kaçırıyorsun
+**COUNTER** Savunmada ilk kontağı tek smoke veya pozisyonla yavaşlat, smoke stoğunun çoğunu retake için sakla. Spike basıldıktan sonra dumanla içeri sızıp açıları teker teker temizle.
+**WHY** Brimstone savunmada da retake controller'ı gibi oynar — smoke'la içeri kör girersin, savunucunun (artık atakçının) açısını kapatırsın. Erken yakarsan retake'i çıplak yaparsın.
+
 ## 5. Harita Etkileşimleri
-- **Bind**: En iyi haritalarından biri. Alan dar, smoke her şeyi örter. İki site için de molly noktaları güçlü ve oturmuş.
-- **Fracture**: Güçlü seçim. Çift yönlü atak, anında atılan üçlü smoke'tan tam fayda görür. Breach girişlerinde stim yüksek değer üretir.
-- **Split**: A ve B darboğazları tam smoke yarıçapına oturuyor. İki sitede de spike sonrası molly güvenilir.
-- **Sunset**: Mid kapılar ve B market anlık smoke'tan fayda görür. B site post-plant'te ult sert vurur.
-- **Ascent**: Oynanır ama güvenli pozisyondan derin açılara smoke ulaşmaz. Atak'ta öne çıkman şart.
-- **Breeze**: Harita çok büyük — smoke menzilin yetmiyor. C-tier, burada Viper tercih et.
-- **Haven**: Üç site, üç smoke şarjını zorlar. Hepsini birden kapatmak güç ama geri alım smoke'ları değer üretir. B-tier.
-- **Icebox**: Oynanır ama Viper'ın duvar + orb ikilisi burada açık ara daha iyi. B-tier.
+- **Bind**: En iyi haritalarından biri. Alan dar, smoke her şeyi örter. İki site için de molly noktaları güçlü ve oturmuş. Hookah ve showers gibi dar geçitler smoke yarıçapına tam oturur — tek smoke koca bir girişi kapatır. Teleport sesleri rotayı ele verir, smoke'u o bilgiye göre at.
+- **Fracture**: Güçlü seçim. Çift yönlü atak, anında atılan üçlü smoke'tan tam fayda görür. İki taraftan da aynı anda smoke atıp savunucuyu iki açı arasında sıkıştırırsın. Breach girişlerinde stim yüksek değer üretir.
+- **Split**: A ve B darboğazları tam smoke yarıçapına oturuyor. Dar mid ve site girişleri tek smoke'la kilitlenir. İki sitede de spike sonrası molly güvenilir — dar plant alanları molly'yle savunulması en kolay haritalardan.
+- **Sunset**: Mid kapılar ve B market anlık smoke'tan fayda görür. B site post-plant'te ult sert vurur — dar plant alanı ult yarıçapından kaçışı zorlaştırır.
+- **Ascent**: Oynanır ama güvenli pozisyondan derin açılara smoke ulaşmaz. Atak'ta öne çıkman şart. Açık mid yüzünden smoke menzilin sık sık yetmez — yakın mesafeden at.
+- **Breeze**: Harita çok büyük — smoke menzilin yetmiyor, açık alanlar yarıçapından geniş. C-tier, burada Viper tercih et.
+- **Haven**: Üç site, üç smoke şarjını zorlar. Hepsini birden kapatmak güç ama geri alım smoke'ları değer üretir. Üç site demek üç ayrı rotasyon demek — smoke'unu tek site girişine yığ, bölme. B-tier.
+- **Icebox**: Oynanır ama Viper'ın duvar + orb ikilisi burada açık ara daha iyi. Dikey açılar ve uzun hatlar senin kısa dumanını zorlar. B-tier.
 - **Lotus**: Çoğu smoke noktasına ulaşırsın ama dönen kapılar nokta çalışmasını zorlaştırır. B-tier.
 
 ## 6. Eşleşme Notları
@@ -62,6 +79,8 @@ Brimstone'un smoke'u en güvenilirisi. Sen smoke'u attığın an giriş açılı
 - **Agresif duelist'lere karşı**: Takım push'a kalkmadan önce giriş noktasına stim koy. Push başladıktan sonra koymaya kalkarsan geç kalırsın.
 - **Geri alımda**: Görüş hattın olmasa bile her mesafeden smoke atabilirsin — geri alımda smoke'u tam gereken noktaya anında oturtursun.
 - **Viper ile birlikte**: Breeze ve Icebox'ta ilk kapamayı Viper halleder, sen smoke'larını geri alım için saklarsın. Bu ikili çok güçlü.
+- **Recon yeteneklerine karşı (Sova/Fade/Skye)**: Rakip recon attığında smoke'unla bilgiyi kes — recon dronu/oku açtığında smoke duvarı görüşü keser, takımının nereye toplandığını gizlersin. Anlık smoke'un recon timing'ini bozar.
+- **Diğer smoke ajanlarına (Omen/Astra) karşı retake'te**: Onların duvarı kalıcı/uzaktan, seninki anlık ve yakın. Retake'te onlar dumanı önceden kuruyorsa sen son saniye smoke'la gerçek giriş anını gizle — okunamayan zamanlaman avantajın.
 
 ## 7. Oyuncuya Ne Söylenmeli
 
@@ -75,10 +94,10 @@ Brimstone'un smoke'u en güvenilirisi. Sen smoke'u attığın an giriş açılı
 **Karşı Adaptasyon:** Kapama zamanlamanı bozup at — her round farklı an, farklı nokta. Molly noktandan avlanıyorlarsa pozisyon ya da açı değiştir. Erken agresyon yapıyorlarsa stim koy ve dövüş — stim'li takım aceleci push'u her zaman yener.
 
 ### Zorlandığında
-"Smoke'ları çok erken yakıyorsun. Ara hamle için en az birini sakla. Molly'yi aktif çatışmada değil, spike sonrasında defuse noktasına at."
+"Smoke'ları çok erken yakıyorsun. Ara hamle için en az birini sakla. Molly'yi aktif çatışmada değil, spike sonrasında defuse noktasına at. Smoke'u takım giriş ağzına dayandığı an at — saniyeler önce atarsan duman söner, çıplak girersin."
 
 ### Tahmin edilebilir olduğunda
-"Rakip molly zamanını çözmüş — her round aynı anda atıyorsun. Bir round spike basılır basılmaz at, sonraki round defuse sesini duyunca at. Zamanlamayı her round değiştir, seni okuyamasınlar."
+"Rakip molly zamanını çözmüş — her round aynı anda atıyorsun. Bir round spike basılır basılmaz at, sonraki round defuse sesini duyunca at. Zamanlamayı her round değiştir, seni okuyamasınlar. Smoke noktanı da kaydır — aynı dumandan her round aynı açıyı bekliyorlar."
 
 ## 8. Rütbe Ayarı
 - **Iron-Silver**: Önce üç smoke'u doğru yere oturtmayı öğren. Nokta çalışması şimdilik şart değil — odak doğru yerleri dumanlamakta.

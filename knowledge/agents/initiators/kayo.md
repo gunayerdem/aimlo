@@ -18,6 +18,8 @@ KAY/O düşmanın yeteneklerini kapatan ajandır. Bıçağı yakınındaki herke
 - Ult sırasında takımdan kopup tek başına ileri çıkmak — ölürsen kimse kaldıramaz
 - Boş açıya bıçak atmak — düşmanın tutmadığı yere giden bıçak negatif değer taşır, push yaptığını ele verir
 - Flash'ı çok uzakta ya da duvar arkasında patlatmak — düşman zaten döner, flash boşa gider
+- Bıçağı atıp kilit penceresini kullanmadan beklemek — kilit kısa sürer; attıysan o saniyelerde gir, yoksa bedava bilgiyi de fırsatı da harcarsın
+- Kendi flash'ına bakıp körleşmek — flash'ı atınca açıdan kafanı çevir, sonra geri dön; kör KAY/O peek yapamaz, takıma da yük olur
 
 ## 4. Örüntü -> Anlam
 
@@ -46,18 +48,36 @@ KAY/O düşmanın yeteneklerini kapatan ajandır. Bıçağı yakınındaki herke
 **COUNTER** Her bıçaktan sonra anında bağır: "bıçak ikiye vurdu", "bıçak boş". Sıfır gelirse de söyle — o site boş ya da düşman erken çekilmiş demektir, takım ona göre karar versin.
 **WHY** Bu sayı takımın hangi site'a yığılacağını söyler. Söylemezsen takım kör dövüşür.
 
+**IF** Bıçağı attıktan saniyeler sonra giriyorsun, kilit kapanmış oluyor
+**MEANING** Bilgiyi alıyorsun ama kilit penceresini boşa harcıyorsun — yetenekler geri dönmüş düşmana yürüyorsun
+**COUNTER** Bıçağı takımla aynı anda at, atınca hemen gir. Kilit kısa bir penceredir; o pencere içinde site'a bas. Bilgi için tek başına erken bıçak atacaksan bile, asıl girişi kilit yenilenmeden takımla yap.
+**WHY** Bıçağın iki işi var: bilgi ve kilit. Geç girersen sadece bilgiyi alır, asıl gücünü — düşmanı çıplak yakalamayı — kaçırırsın. Kilitli düşmana zamanında basmak turu çevirir.
+
+**IF** Savunmada bıçağı agresif info için atıp sonra peek'te ölüyorsun
+**MEANING** KAY/O'yu sadece saldırı ajanı sanıyorsun — savunmada bıçağı ölmek için yem yapıyorsun
+**COUNTER** Savunmada bıçağı rush'ı durdurmak ve kilitlemek için sakla. Düşman dar geçide yığıldığında bıçağı oraya at, hepsini kilitle, sonra takımla retake değil direkt hold yap. Molly'yi choke'a koy. Bıçak attıktan sonra agresif peek'e çıkma — bıçak zaten bilgiyi verdi, açıyı silahla tut.
+**WHY** Kilitli, dar geçitte sıkışmış bir push grubu savunma için en kolay hedeftir. KAY/O savunmada da güçlü; bıçağı ölerek değil, düşmanı çıplak yakalayarak kullan.
+
+**IF** Bıçağı hep aynı standart açıdan atıyorsun, düşman artık o yarıçaptan kaçıyor
+**MEANING** Düşman bıçağının nereye düştüğünü ezberledi, kilit yarıçapı dışında oynamayı öğrendi
+**COUNTER** Bıçak açısını ve atış noktasını tura göre değiştir. Bazen mid'den, bazen main'den at; bazen erken bilgi için, bazen execute anında. Belirli bir düşman ajanını (smoke koyan ya da duvar diken) hedefleyecek açıyı seç.
+**WHY** Tahmin edilebilir bıçak, düşmanın güvenli dağılmasına izin verir. Açını değiştirince düşman tekrar kilit riskine girer, dağılması da yeni zayıf nokta açar.
+
 ## 5. Harita Etkileşimleri
-- **Ascent**: Mid kapılarından bıçak at — A ya da B'yi tutan kilit yer. A main ve B main'de pop-flash giriş için standart.
-- **Split**: Koridorlar dar, flash'tan kaçmak zor. A heaven ya da B heaven'a bıçak at, sabit tutucu kilit yer.
-- **Haven**: Üç site var — bağlanmadan önce bıçağı at, hangi site'ta düşman olduğunu öğren, sonra yönel.
-- **Bind**: Teleporter'dan bıçak at, karşı tarafı kilitle. Hookah ve showers'ta alt atış flash yıkıcı — dar alan, kaçacak yer yok.
-- **Fracture**: İki girişli harita. Sen bir taraftan ult ile girerken takım diğer taraftan push yapar. Her iki giriş noktasını da kilitle.
+- **Ascent**: Mid kontrolü her şeyi açar — mid'den bıçak at, A ya da B'ye dönen savunucuyu kilitle. A site'a girerken generator/CT köşesini tutan biri olur, bıçağı oraya indir. B'de duvar/smoke koyan ajanı (Sage, Viper) bıçakla kapat, duvar dikilemeden gir. Flash'ı takım arkadaşının peek'iyle aynı kareye getir.
+- **Split**: Dikey ve dar bir harita; flash'tan kaçacak yer yok. A'da heaven ve screens'i tutan savunucuyu, B'de heaven ve elbow'u kilitle. Mid'i bıçak+flash ile kırarsan Split açılır. Sage burada kritik — bıçak Sage'in duvarını silerse mid ve site geçişi bedavaya gelir, bıçağı Sage'e denk getir.
+- **Haven**: Üç site, savunma yayılır. Bağlanmadan önce bıçağı at, hangi site'ta yoğunluk olduğunu oku, zayıf site'a yönel. C long ve A long uzun açılar — alt atış değil üst atış flash uzağı kör eder. Bıçak boş gelen site genelde rotasyona açık, takıma bildir.
+- **Bind**: Smoke yok, teleporter var — bilgi ve flash oyunu sertleşir. TP'den bıçak at, karşı tarafı kilitle. Hookah ve showers dar; orada dur-at-çık ritmiyle alt atış flash yıkıcı, kaçacak yer yok. A short'tan girerken truck arkasını ve CT'yi kilitle. Bıçakla Viper'ın duvar/smoke düzenini bozmak Bind'de turu açar.
+- **Fracture**: İki taraftan kıskaç harita. Sen bir taraftan ult ile girerken takım diğer taraftan bası uygular; iki giriş noktasını da kilitle ki savunma ikisine birden yetişemesin. Düşman dispenser/tepe köşelerini tutar, bıçağı o yüksek açıya indir.
+- **Genel kural**: Bıçağı her zaman düşmanın yetenek koyduğu role (smoke/duvar/recon) göre yerleştir — kör bir yarıçapa değil. Site execute'unda bıçak + flash + molly aynı saniyede patlamalı; üçü dağılırsa düşman tek tek toparlanır.
 
 ## 6. Eşleşme Notları
 - **Killjoy'a karşı**: Bıçak tuzak, bot ve ult'unu kapatır. Kilit penceresi açılınca push yap — Killjoy yeteneksiz.
 - **Cypher'a karşı**: Bıçak tuzak, kamera ve duvarı geçici siler. Bıçak değer değmez gir, Cypher o pencerede çıplak.
-- **Viper'a karşı**: Bıçak duvarı ve smoke'u kapatır. Site girişini Viper'ın kilit penceresine denk getir — duvarlar yok olur.
-- **Chamber'a karşı**: Bıçak ışınlanmasını, tabancasını ve ult'unu kaldırır. Yeteneksiz Chamber sadece tüfek tutar, elinde başka koz kalmaz.
+- **Viper'a karşı**: Bıçak duvarı ve smoke'u kapatır. Site girişini Viper'ın kilit penceresine denk getir — kilitliyken Viper duvarı geri açamaz, ekran ortasında kör site açık kalır. Bind ve Fracture gibi Viper'ın çok kurulduğu yerlerde bıçak turu tek başına çevirebilir.
+- **Sage'e karşı**: Bıçak duvarı, slow ve heal'i kapatır. Sage duvarla mid'i ya da girişi kesiyorsa bıçağı Sage'e denk getir — duvar dikilemez, takım bedavaya geçer. Split'te bu kritik.
+- **Chamber'a karşı**: Bıçak ışınlanmasını, tabancasını ve ult'unu kaldırır. Yeteneksiz Chamber TP ile kaçamaz; tuttuğu açıya baskı yap, geri çekilme kozu yok.
+- **Genel**: Bıçağı tuzak/duvar/recon koyan yardımcı ajanlara öncelikle denk getir — flash/dash atan dueller ikinci sırada. Bir ajanın yeteneklerini kapatmak, o ajanın tüm tur planını çökertir; doğru hedef seçimi bıçağın değerini ikiye katlar.
 
 ## 7. Oyuncuya Ne Söylenmeli
 
@@ -69,10 +89,15 @@ KAY/O düşmanın yeteneklerini kapatan ajandır. Bıçağı yakınındaki herke
 **Tekrar Stratejisi:** İlk site'a bıçak at, sayıyı söyle, oraya yığıl. Sonraki turda diğer site'a bıçak at — dağılımı oku. Bıçak sesini duyunca irkilen site'a execute yap, molly ile defuse'u kes. Flash tipini değiştir, arka arkaya aynısını atma.
 **Düşman Adaptasyonu:** Birkaç tur sonra savunucular bıçak yarıçapının dışında oynamaya, site'lara dağılmaya ya da bıçak inmeden rush yapmaya başlar.
 **Karşı-Adaptasyon:** Yarıçaptan kaçarlarsa — kaçmanın kendisi pozisyonlarını ele verir, takıma bildir. Dağılırlarsa — zayıf site'a execute yap. Rush yaparlarsa — molly choke'a, flash onlara, KAY/O savunmada da güçlü.
+**Radiant Katmanı:** Bıçağı düşmanın anahtar ajanına (smoke koyan, duvar diken, recon atan) bilinçli denk getir — rastgele yarıçap değil. Site execute'unda bıçak + flash + molly aynı saniyede patlasın; üçünü zamanlarsan düşman tek bir yeteneğiyle bile toparlanamaz. Kilit penceresini takımın spike'ı bastığı ana kilitle, böylece düşman ne flash atabilir ne smoke koyabilir ne de defuse'a molly çekebilir.
 
 **Zorlanırken:** "Bıçak tutmuyor. Demek düşmanın nerede durduğunu bilmiyorsun. Sıfır kilitleyen bıçak sadece işe yaramaz değil — push yaptığını ele verir, sana zarar yazar."
 
 **Tahmin edilebilir olunca:** "Yine aynı flash. Üst atış, alt atış, değiştir. Farklı açıdan at. Sürekli sırtlarını dönüyorlarsa zamanlamanı okuyorlar."
+
+**Bıçak attıktan sonra girmiyorsan:** "Bıçak vurdu ama bekledin — kilit kapandı, yetenekleri geri geldi. Attığın an gir, o pencerede düşman çıplak. Kilidi kullanmazsan bıçak yarım iş."
+
+**Düşman ajanını okumayınca:** "Bıçağı boşluğa attın. Kim duvar dikiyor, kim smoke koyuyorsa onu kilitle. Doğru ajanı kapatınca düşmanın bütün tur planı çöker, rastgele yarıçapla bu olmaz."
 
 ## 8. Rank Modülasyonu
 - **Düşük (Iron-Silver)**: Alt atış flash'ı öğren — yakın peek'lerde kullan. Site'a girmeden önce bıçağı at. Molly'yi spike kurulduktan sonra için sakla.

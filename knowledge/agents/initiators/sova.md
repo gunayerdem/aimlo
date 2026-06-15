@@ -17,6 +17,8 @@ Sova'nın silahı bilgi. Recon, dart ve drone — üçü de her tur tekrar tekra
 - Ult'i bilgisiz, körüne atmak
 - Sadece atak noktası ezberleyip savunma noktası bilmemek
 - Savunmada recon'u rakip daha açılmadan, çok erken atmak
+- Bilgi aldıktan sonra takıma söylememek — recon'u tek başına izleyip değerini öldürmek
+- Recon'a o kadar güvenip silahla dövüşmeyi unutmak — Sova da bir tüfek taşır, körü körüne yetenek beklemekten ölme
 
 ## 4. Örüntü -> Anlam
 
@@ -45,12 +47,28 @@ Sova'nın silahı bilgi. Recon, dart ve drone — üçü de her tur tekrar tekra
 **COUNTER** Harita başına en az beş nokta bil: atak site başına iki, savunma site başına iki, bir de erken tur varsayılanı. Özel oyuna gir ve bu noktaları tek tek çalış.
 **WHY** Geniş nokta dağarcığı her tur, her durumda güvenilir bilgi verir. Az nokta seni belirli sitelerde ya da savunmada işlevsiz bırakır.
 
+**IF** recon attın, bilgi geldi ama sen yerinden kıpırdamıyorsun — takım da bilgiyi kullanmıyor
+**MEANING** Bilgiyi alıp rafa kaldırıyorsun; recon, peşinden gelen bir eylem olmadan boşa gidiyor
+**COUNTER** Dart ateşlenmeden önce planını kur: "ışınlandıysa B'ye basıyoruz", "boşsa A'ya giriyoruz". Bilgi gelir gelmez sesli söyle ve hemen yön ver. Recon bir başlangıç sinyali, bitiş değil.
+**WHY** Recon'un tek değeri, ortaya çıkardığı pozisyona göre takımın hareket etmesi. Bilgi gelir ama kimse oynamazsa rakip yer değiştirir, tarama bayatlar ve dart bedavaya gitmiş olur.
+
+**IF** hasar veren dart'ı (shock) köşe temizlemek ya da spike üstü yerine rastgele atıyorsun
+**MEANING** Garantili hasar/temizleme aracını tahmine harcıyorsun
+**COUNTER** Hasar dart'ını iki işe ayır: dar köşede saklanan rakibi açığa zorlamak ya da spike kurulduktan sonra defuse'a oturanı yerinden kaldırmak. Boş havaya değil, daralttığın açıya at.
+**WHY** Bu dart küçük bir alana yoğun hasar basar. Bilinen bir köşeye ya da spike üstüne atılınca rakibi ya kımıldatır ya yaralar — ikisi de senin lehine. Rastgele atılınca sadece sesten ibaret kalır.
+
+**IF** recon hep bir tur içinde aynı saniyede iniyor (özellikle savunmada erken)
+**MEANING** Zamanlamanı okutuyorsun — rakip dart'ı duyunca takvimini biliyor
+**COUNTER** Dart zamanlamasını turdan tura kaydır: bazı tur erken tara, bazı tur sakla ve push'u gördükten sonra reaktif at. Savunmada rakip henüz açılmadan atma — boş alan tararsın.
+**WHY** Sabit zamanlama, rakibe dart'tan önce hazırlanma ve taramanın dışında durma fırsatı verir. Değişken zamanlama her seferinde gerçek bilgi yakalar.
+
 ## 5. Harita Etkileşimleri
-- **Ascent**: Açık gökyüzü recon'un sekerek A Main'den B Short'a ulaşmasına izin verir. A ve B site kapı önüne dart at — rakip kapıdan çıkarken hasar yer. Ult'i uzun koridorda bekleyen rakibe doğrudan geçir.
-- **Breeze**: Geniş açık alanlar dart'ı geri sekmeden uzağa düşürür — yüksek tavan açılarını kullan. A Hall ve B Site tavan noktalarına dart at, spawn gözleyen açıları kapat.
-- **Haven**: Üç site, üç kat nokta demek — A, B ve C için ayrı ayrı hazırlan. Uzun koridorlardan drone sür, rakibin yerini erkenden öğren.
-- **Bind**: Dar tavanlar bazı recon açılarını kısar — duvardan sekme noktalarına yığıl. Teleporter çıkışına dart at, rakip geçerken hasar yer.
-- **Icebox**: A ve B site üst raflarına recon at — yukarıyı tutan savunmacı anında açığa çıkar. A site açık çatıdan gelen sekme noktaları aynı anda birden fazla rakibi tarar.
+- **Ascent**: Açık gökyüzü recon'un sekerek A Main'den B Short'a ulaşmasına izin verir. A ve B site kapı önüne dart at — rakip kapıdan çıkarken hasar yer. Ult'i uzun koridorda bekleyen rakibe doğrudan geçir. Orta saha kontrolü kritik; oradan atılan bir recon iki siteyi birden okur, bunu takıma sesli ver.
+- **Breeze**: Geniş açık alanlar dart'ı geri sekmeden uzağa düşürür — yüksek tavan açılarını kullan. A Hall ve B Site tavan noktalarına dart at, spawn gözleyen açıları kapat. Mesafeler uzun olduğu için drone'u kapağın arkasından sür, gövdeni açık alana çıkarma yoksa anında uzaktan vurulursun.
+- **Haven**: Üç site, üç kat nokta demek — A, B ve C için ayrı ayrı hazırlan. Uzun koridorlardan drone sür, rakibin yerini erkenden öğren. Üç bombasıtaytın hangisinin boş olduğunu erken recon ile bul; rotasyon mesafeleri uzun, bilgiyi erken verirsen takım boş siteye basar.
+- **Bind**: Dar tavanlar bazı recon açılarını kısar — duvardan sekme noktalarına yığıl. Teleporter çıkışına dart at, rakip geçerken hasar yer. Burada ses kapan smoke yok; recon'un teleport rotasyonunu açığa çıkarmada en güçlü silahın, "biri ışınlandı" çağrısını hemen yap.
+- **Icebox**: A ve B site üst raflarına recon at — yukarıyı tutan savunmacı anında açığa çıkar. A site açık çatıdan gelen sekme noktaları aynı anda birden fazla rakibi tarar. Çok katmanlı, dikey bir harita; recon'u sadece zemini değil üst kademeleri de tarayacak açıdan at yoksa yarısı kör kalır.
+- **Lotus / Sunset / Pearl**: Bu haritalarda da kuralı taşı — site başına en az iki yükseklikten nokta, savunmada reaktif zamanlama, atak dart'ını giriş açısından çevrilmeden vurulamayan yere indir. Hangi harita olursa olsun mantık aynı: zor açıdaki dart ikilem yaratır, kolay açıdaki bayatlar.
 
 ## 6. Eşleşme Notları
 - **Omen'e karşı**: Recon, Omen'in ışınlandığı yeri açığa çıkarır. Drone, smoke'un içinden takip eder ve yerini doğrular.
@@ -71,8 +89,14 @@ Sova'nın silahı bilgi. Recon, dart ve drone — üçü de her tur tekrar tekra
 ### Zorlanırken
 "Dart'ların düşük değerli yerlere iniyor. Özel oyuna gir, noktalarını temizle. Nokta olmadan Sova, boş el çantası taşımaktan farksız."
 
+"Recon'u atıyorsun ama peşinden gelen bir plan yok. Dart'ı ateşlemeden önce kararını ver: bilgi gelince ne yapacağını söyle, sonra at. Tek başına izlenen recon boşa gider."
+
+"Yeteneklere fazla yaslanıp dövüşmeyi bırakmışsın. Recon bittiğinde de tüfeğin elinde — açıyı tut, kafadan vurmaya hazır dur. Sova bilgi verir ama turu kapatan yine senin nişanın."
+
 ### Tahmin edilebilir olunca
 "Rakip dart noktalarını ezberden vuruyor. Aynı site için alternatif nokta lazım — en az iki seçeneğin olsun ki otopilotta seni geçemesinler."
+
+"Recon'u her tur aynı saniyede atıyorsun, rakip takvimini ezberledi. Bazı tur erken tara, bazı tur sakla ve push'u görünce reaktif at — zamanlamanı bozarsan taraman yine canlı bilgi yakalar."
 
 ## 8. Rank Modülasyonu
 - **Düşük (Iron-Silver)**: Ascent ve Haven için site başına bir recon noktası bil. Girmeden önce drone sür. Dart'ları spike sonrasına sakla.

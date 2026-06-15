@@ -41,6 +41,8 @@ Geniş alan kontrolü. Büyük bir bölgeyi kapatır ya da takımın execute/ret
 6. **Yamayı takip etmemek** — Miks yeni ve sık değişiyor. Her yamada yeteneğin nasıl çalıştığını yeniden kontrol et.
 7. **Aynı sırayı tekrarlamak** — Her turda aynı yetenek sırasını basıyorsan rakip seni üç turda okur. Yerleştirmeni değiştir.
 8. **Ult'u panikle harcamak** — Ult planlı bir execute ya da retake'in parçası olmalı. Panikle basarsan yanlış bölgeyi kapatır, takıma bir şey katmaz.
+9. **Kendi smoke'unun kenarında durmak** — Smoke'u koyup hemen kenarına yapışıyorsun. Dumanın içinden çıkan silüet sensin; düşman çizginin ilk gördüğü sen olursun. Smoke'u koy, bir adım geri çekil, açıyı dumanın bir karış gerisinden tut.
+10. **Smoke'u kendi takımının görüşünü kapatacak şekilde koymak** — Dumanı düşmanı değil, kendi entry'ni kör edecek yere atıyorsun. Smoke düşmanın gördüğü hattı keser, senin girdiğin hattı değil. Koymadan önce "bu duman kimin görüşünü kapatıyor?" diye sor.
 
 ## 5. Kalıp -> Anlam
 
@@ -94,6 +96,21 @@ Geniş alan kontrolü. Büyük bir bölgeyi kapatır ya da takımın execute/ret
 **COUNTER** Her haritada iki site'ı da savunmaya çalış. Custom'da A ve B savunma kurulumlarını ayrı çalış. Takımın ihtiyacına göre site değiştirmeye hazır ol.
 **WHY** Tek site'a kilitlenmek rakibe her tur nerede olduğunu söyler — execute planları kolaylaşır.
 
+**IF** Smoke'u koyduğun anda dumanın içine ya da hemen kenarına bakarak peek atıp ölüyorsun
+**MEANING** Dumanı görüş kapatma aracı değil, dövüş başlatma aracı gibi kullanıyorsun
+**COUNTER** Smoke koyduktan sonra ilk işin peek atmak olmasın. Dumanı düşmanın görüşünü kessin diye koy, sonra dumanın kapatmadığı güvenli açıdan bilgi al. Duman içinden çıkıp savaşman gerekiyorsa takım arkadaşınla birlikte gir.
+**WHY** Düşman senin dumandan çıkacağını bilir ve çizgiyi tutar. Dumanın içinden tek başına çıkan controller her zaman hazırda bekleyen tüfeğe gider — smoke'un işi seni öne sürmek değil, takımı korumaktır.
+
+**IF** Defansta erken bilgi almak için solo öne çıkıp düşman kalabalığına yakalanıyorsun
+**MEANING** Controller olduğun hâlde duelist gibi entry açmaya çalışıyorsun
+**COUNTER** Controller'ın bilgisi yetenekten gelir, vücudundan değil. Geniş açıdan kısa peek at, açıyı tut, ölme. Erken ölürsen takım o turda smokesız kalır — bu, bir kill'den çok daha pahalı.
+**WHY** Sen öldüğünde takım hem bir oyuncu hem de tüm yetenek altyapısını kaybeder. Yaşayan bir controller, ölü bir controller'dan kat kat değerlidir; site savunması ve retake senin hayatta kalmana bağlı.
+
+**IF** Spike kurulduktan sonra defuse'u kollamak yerine kill kovalayıp öldün, spike patladı
+**MEANING** Postplant'te işin düşmanı avlamak değil, zamanı ve görüşü yönetmek
+**COUNTER** Spike kurulunca smoke ve alan inkarı defuse açılarına ve spike çevresine sakla. Düşman defuse'a oturduğunda görüşünü kapatıp ya da hasar verip durdur. Açık alanda kill aramak yerine yeteneğinle açıyı kilitle.
+**WHY** Postplant'te zaman senin tarafında. Gereksiz duello arayıp ölürsen düşmana serbest defuse açarsın — yeteneklerin yerinde durduğunda düşman ne defuse edebilir ne de güvenle yaklaşabilir.
+
 ## 6. Harita Etkileşimleri
 
 ### Split — S Tier
@@ -103,13 +120,13 @@ Orta kontrol ve dar koridorlar Miks için ideal. A Ramp ve B Main'de duman zaman
 Dar harita yapısı controller temellerini ödüllendirir. A Short ve B Long'da Miks'e özgü smoke şekilleri standart controller'lardan farklı açılar kapatır. Teleport çıkışlarında alan inkar çok güçlü — çıkan düşman direkt alan inkarın içine girer. Hookah'da Miks'in farklı geometrisi savunanların alıştığı dodge noktalarını kapatır. Miks + Viper bu haritada çok iyi çalışır.
 
 ### Haven — A Tier
-Üç site var, yetenek yönetimi disiplin ister. Yeteneğini üç siteye dağıtmak zorundasın. C Long'da alan inkar push'ları cezalandırır. Garage'da smoke şekli mid oyununu destekler. Rotasyon sık olduğu için retake'e mutlaka yetenek sakla.
+Üç site var, yetenek yönetimi disiplin ister. Yeteneğini üç siteye dağıtmak zorundasın — tek bir bölgeye tüm yeteneği yığarsan diğer iki site çıplak kalır. C Long'da alan inkar push'ları cezalandırır; uzun koridorda düşman atlatacak yer bulamaz. Garage'da smoke şekli mid oyununu destekler ve rotasyonu keser. Rotasyon bu haritada sık ve hızlı olduğu için retake'e mutlaka yetenek sakla — üç site demek, hangi site düşerse düşsün retake'e koşmak demek. Defansta erken yetenek harcamak Haven'da en pahalı hata: yanlış site'a yüklenen smoke, doğru site'ı savunmasız bırakır.
 
 ### Lotus — A Tier
 Dönen kapılar ve dar B Main koridoru alan inkar için ideal. Miks'in smoke'u savunanları alışmadıkları dodge noktalarına iter. A Main'de choke kapatma güçlü. C site'ta alan inkar retake'i destekler. Kapı açıkken koyduğun alan inkar, kapı kapanınca düşmanı sıkıştırır — zamanlamayı buna göre ayarla.
 
 ### Ascent — B Tier
-A Main ve B Main'in geniş choke noktaları Miks'in smoke şeklinden yararlanır ama mid'in açık yapısı alan inkarı atlatmayı kolaylaştırır. Catwalk kontrolünde smoke değerli. Mid yerine site girişlerine yüklen.
+A Main ve B Main'in geniş choke noktaları Miks'in smoke şeklinden yararlanır ama mid'in açık yapısı alan inkarı atlatmayı kolaylaştırır — açık alanda düşman inkarı dolanarak geçer. Catwalk kontrolünde smoke değerli, çünkü mid'den A'ya akışı keser. Mid yerine site girişlerine yüklen: dar choke'ta yeteneğin değeri açık mid'dekinin çok üstünde. A'da kapı, B'de market gibi sabit yapılar yetenek planını kolaylaştırır — bu sabit noktaları her tur farklı zamanlamayla kullan ki rakip okuyamasın.
 
 ### Icebox — B Tier
 A site'ın çok katlı yapısı Miks'in smoke şeklini zorlar — yükseklik farkı olan alanlarda yerleştirme farklı çalışır. B site tünel girişi alan inkar için uygun ama geniş B site'ta savunanın kaçacak çok yeri var. Bu haritada Viper daha güçlü bir tercih.
@@ -159,6 +176,12 @@ Sentinel'ler senin yetenek sıranı öğrendikçe tuzaklarını ona göre kurar.
 
 ### Takım koordinasyonu zayıfken
 "Miks'in değeri takımla birlikte çıkar. Smoke koymak yetmez — takımın smoke'la ne yapacağını bilmesi lazım. Execute öncesi planı söyle: 'Smoke'u A short'a koyacağım, arkasından girin.' Takımın Miks'e alışması zaman alır, bu süreci hızlandırmak senin işin."
+
+### Erken ölüyorsa
+"Çok öne çıkıyorsun. Sen bir controller'sın — bilgiyi vücudunla değil yeteneğinle topla. Öldüğün anda takım o turda smokesız kalıyor, bu bir kill'den çok daha pahalı. Smoke'u koy, kenarına yapışma, bir adım geri çekil ve açıyı dumanın gerisinden tut. Geniş açıyla kısa peek at, açıyı tut, yaşa. Yaşayan bir controller turu kazandırır, ölü bir controller takımı çıplak bırakır."
+
+### Postplant'i kötü oynuyorsa
+"Spike kurulunca işin bitti sanma — asıl iş o an başlıyor. Kill kovalama, zamanı yönet. Smoke ve alan inkarı defuse açılarına sakla. Düşman defuse'a oturduğunda görüşünü kapat ya da hasar ver. Açık alanda duello arayıp ölürsen düşmana serbest defuse açarsın. Yeteneğin yerinde dursun, zaman senin tarafında."
 
 ## 9. Rank Modülasyonu
 

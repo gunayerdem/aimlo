@@ -18,6 +18,8 @@
 5. **Yoru'yu Jett gibi oynamak** — Yoru'nun ham peek gücü yok. Klon, flash, TP olmadan kuru peek atıyorsan yanlış ajanı oynuyorsun.
 6. **Her round aynı lurk zamanlaması** — Düşman kalıbını okur, flank açını tutar, gittiğin anda hazır bekler. Bir round erken lurk yap, bir round geç lurk yap, bir round hiç yapma — çeşitlendir.
 7. **Flash-TP kombosu bozuk** — Flash, TP varmadan patlarsa düşman toparlanır. TP varıp düşman tepki verdikten sonra patlarsa geç kalırsın. Flash, TP girişiyle aynı anda patlamalı.
+8. **Flash'ı kendine attırmak** — Yoru flash'ı sektirilen bir top. Yanlış açıdan atarsan kendini ya da takımı kör edersin. Flash'ı düşmanın bakacağı yöne sektir, sonra ters yönden swing at — kendi gözün her zaman flash'ın arkasında kalsın.
+9. **Klonu doğru yöne sürmemek** — Klonu düşmana doğru sürmezsen sadece ses verir, açı baktırmaz. Klonu düşmanın tutması gereken hattın üstünden geçir ki tek atış için bile olsa nişan alsınlar — o anda gerçek açından gir.
 
 ## 4. Kalıp -> Anlam
 IF: Oyuncu ışınlandıktan sonra sık ölüyor
@@ -45,10 +47,28 @@ MEANING: TP çok açık bırakılmış ya da düşman TP rotalarını ezberlemi�
 COUNTER: Daha az görünür noktalara göm — duman içi, nesnenin arkası. TP attığın roundlarla atmadığın roundları karıştır.
 WHY: Yok edilen TP flank ve yeniden konumlanma seçeneklerini sıfırlar.
 
+IF: Oyuncu round başında bütün becerilerini hemen harcıyor, son saniyelerde elinde hiçbir şey kalmıyor
+MEANING: Klon ve flash'ı erken atıp boşa harcıyor, asıl dövüş geldiğinde çıplak peek atmak zorunda kalıyor
+COUNTER: En az bir flash ya da TP'yi gerçek dövüş anına sakla. Klonu erken at ama giriş aletini (flash veya TP) son saniyeye bırak.
+WHY: Yoru ham peek gücü olmayan bir ajan. Becerilerin bitince Jett gibi savaşamazsın — utility'siz kaldığın an ölüm anın.
+
+IF: Oyuncu lurk yaparken takımdan tamamen kopuyor ve 1'e karşı çoğa kalıyor
+MEANING: Lurk derinliğini takım tempo'suyla eşleştirmiyor — takım girmeden o flank'ı tek başına dövüyor
+COUNTER: Lurk'i takımın site vuruşuyla zamanla. Sen flank'ı tutarken takım baskı yapmalı ki düşman iki yöne bölünsün. Yalnız flank dövüşüne girme, takım meşgul edene kadar bekle.
+WHY: Yoru'nun lurk değeri düşmanı böler — ama takım baskı yapmıyorsa düşman tüm dikkatini sana verir. Bölünmemiş düşmanın içine yalnız girersen sayıca yenilirsin.
+
+IF: TP ile girişten sonra hemen geri ışınlanamadan ölüyor (kaçış penceresi kaçırılıyor)
+MEANING: TP'yi tek yönlü giriş aleti gibi kullanıyor, geri dönüş şansını hesaba katmıyor
+COUNTER: TP girişinde bir kill al ya da bilgi topla, kötü gidiyorsa hemen geri ışınlan — TP iki yönlü çalışır, geri dönüşü trade'den kaçmak için kullan.
+WHY: Yoru'nun kaçış aleti TP'dir. Girişi kapatamadıysan oraya saplanıp kalma; geri dön, yeniden konumlan, ikinci girişi farklı açıdan yap. Tek pencerede her şeyi riske atma.
+
 ## 5. Harita Etkileşimleri
 - **Güçlü haritalar:** Bind (haritanın kendi teleportu Yoru TP'sini katlar — önce kendi TP'ni, ardından harita TP'sini art arda kullanırsın), Split (dikey mid güçlü flank rotaları verir), Haven (üç site var, Yoru her round farklı yerden çıkar — düşman okuyamaz), Icebox (B tüpler üzerinden hattın arkasına TP — düşman beklemiyor).
 - **Zayıf haritalar:** Breeze (çok açık, kapak yok, TP noktası bulmak zor), Lotus (döner kapılar flank beklentisini artırır, TP değeri düşer).
 - **Pozisyona özel:** Bind'da önce kendi TP'ni gönder, sonra harita teleportunu kullan — düşman nerede olduğunu kaybeder. Split'te B'ye sahte saldırı yaparken A Main'den A Heaven'a TP klasik geçiştir. Haven'da C Long TP'ni Garage arkasına göm — A saldırısı sırasında düşman seni arkadan göremez.
+- **Dar haritada öncelik:** Split ve Bind gibi sıkışık, çok daralan haritalarda klon-flash kombosu altın değerinde — düşmanın kaçacak yeri yok, kör olunca tutturduğun açıda kalır. Bu haritalarda Yoru kuru peek'e hiç ihtiyaç duymadan her açıyı utility ile temizler.
+- **Açık haritada sınır:** Breeze ve Icebox gibi uzun-açık hatlarda flash sektirecek duvar az, klon uzaktan vurulup yok edilir. Buralarda Yoru'yu yakın-orta menzilde tut; TP'yi uzun hatta değil, dövüşün gerçekten yaşandığı sıkışık geçişin arkasına göm.
+- **Yükseklik kullanımı:** Dikey katmanı olan haritalarda (Split mid, Icebox B) TP'yi düşmanın göz hizasının dışına — alt kata ya da üst platforma — göm. Düşman yatay tarar; farklı yükseklikten çıkan TP tepki süresini en çok zorlayan giriş açısıdır.
 
 ## 6. Eşleşme Notları
 - **Zorlandığın ajanlar:** Fade (recon ult'u seni içinde işaretler, TP noktalarını açığa çıkarır — recon yerde aktifken TP açma, bitip kaybolunca gir), Sova (recon lurk yolunu açar ve klonu fark eder — lurk'e girmeden önce reconu yok et), Killjoy (bot ile tuzaklar klonu ve TP'yi yakalar, ult'u seni sıkıştırır — bombasının becerileri temizlenmeden TP açma).
@@ -68,6 +88,12 @@ WHY: Yok edilen TP flank ve yeniden konumlanma seçeneklerini sıfırlar.
 "Yoru'yu Jett gibi oynuyorsun. Kuru peek'i bırak. Her dövüş klon, flash ya da TP ile başlamalı — ham peek ile asla."
 ### Öngörülebilir olduğunda
 "Lurk zamanlamanı okudular. İki round takımla oyna, beklemeyi bıraktıklarında tekrar lurk yap."
+### Becerilerini erken harcadığında
+"Round başında her şeyi attın, dövüş gelince elin boştu. En az bir flash ya da TP'yi asıl dövüş anına sakla — Yoru utility'siz savaşamaz."
+### Yalnız flank dövüşüne saplandığında
+"Lurk'e takımdan kopuk girdin, çoğa kaldın. Flank'ını takımın site vuruşuyla zamanla — düşman iki yöne bölünmeden tek başına içlerine dalma."
+### TP'yi tek yönlü kullandığında
+"TP iki yönlü çalışıyor. Giriş kötü gittiğinde oraya saplanma — hemen geri ışınlan, yeniden konumlan, ikinci girişi farklı açıdan yap."
 
 ## 8. Rank Modülasyonu
 ### Düşük Elo (Iron-Silver)

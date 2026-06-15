@@ -18,6 +18,8 @@ Clove sıradan, pasif smoke atan bir controller değil. Öldükten sonra bile sm
 - Fazla canı bahane edip daha tehlikeli açılara girmek — fazla can bir bonus, gerekçe değil.
 - Her ölümde otomatik olarak dirilmek — önce çıkışın güvenli mi diye bak.
 - Kazanamayacağın bir round'da öldükten sonra smoke yeteneğini boşa harcamak.
+- Round başında bütün smoke'larını birden harcayıp geç gelişen kavgaya smoke'suz girmek — en az birini saklamak gerekir.
+- Diriliş ult'unu, bomba çoktan kurulmuşken ve takım çekilmişken kullanmak — kimseyi tradeleyemeyeceğin boş bir round'a tek başına dönüyorsun.
 
 ## 4. Kalıp -> Anlam
 
@@ -46,12 +48,27 @@ Clove sıradan, pasif smoke atan bir controller değil. Öldükten sonra bile sm
 **COUNTER** Önce smoke'ları at, sonra dövüş. Ölsen bile smoke'ların çıkmış olmalı.
 **WHY** Smoke'suz entry takımı açıkta bırakır — controller rolü her zaman kendi fragından önce gelir.
 
+**IF** Round başında bütün smoke yüklerini birden atıp orta-geç fazda smoke'suz kalıyorsun
+**MEANING** Smoke ekonomini yönetmiyorsun — asıl ihtiyaç anında elin boş
+**COUNTER** Açılışa yetecek kadar smoke at, en az birini post-plant ya da retake için sakla. Smoke'lar zamanla dolar ama o dolma süresini bekleyecek lüksün her zaman olmaz.
+**WHY** Site alındıktan sonra bombayı korumak için bir smoke, yeniden alımda (retake) düşmanın görüşünü kesmek için bir smoke gerekir. Hepsini açılışta harcarsan round'un kritik yarısını çıplak geçirirsin.
+
+**IF** Öldükten sonra zaten kapalı/güvenli olan tarafa smoke atıyorsun
+**MEANING** Ölüm sonrası smoke penceresini yanlış yere harcıyorsun
+**COUNTER** Öldüğün an haritaya bak: takımın açıkta kalan, düşman ateşine maruz tarafı neresi? Smoke'u oraya at — zaten kontrol edilen tarafa değil.
+**WHY** Ölümden sonraki tek smoke'un en değerli kaynağındır; korunan tarafı bir daha kapatmak sıfır değer üretir, açık tarafı kapatmak takımın kalan oyuncularını hayatta tutar.
+
+**IF** Diriliş ult'unu bomba kurulduktan sonra, takım siteden çekilmişken kendi başına kullanıyorsun
+**MEANING** Geri dönüşünü destekleyecek kimse yok — boş round'a tek başına dönüyorsun
+**COUNTER** Dirilişi ya takım hâlâ savaşırken (seni tradeleyebilecekken) ya da retake'i birlikte yapacakken kullan. Tek başına 1vX retake'e dönmek için değil.
+**WHY** Diriliş seni tam canla geri getirir ama düşmanın sayı üstünlüğünü değiştirmez; arkanı kollayacak takım arkadaşı yoksa, ult'u bir sonraki round için saklamak çoğu zaman daha değerlidir.
+
 ## 5. Harita Etkileşimleri
-- **Sunset**: Mid kavgaları Clove'un saldırgan tarzına oturur. B market ya da mid kapı için öldükten sonra smoke at — takım korunmaya devam etsin.
-- **Ascent**: A main ve B main'de saldırgan çık, kendini iyileştirip fazla canını kullan. Mid kapıya atılan can eritme yüksek değer taşır.
-- **Bind**: Dar geçitler can eritmeyi verimli kılar. Hookah ya da shower'da dirilirsen rotasyona gelen düşmanı hazırlıksız yakalarsın.
-- **Haven**: Üç site sana bol peek ve diriliş sonrası yeniden konumlanma fırsatı verir.
-- **Split**: Fazla canla mid'i saldırgan al. Ramp'ta öldükten sonra smoke at — takım oyunda kalsın.
+- **Sunset**: Mid kavgaları Clove'un saldırgan tarzına oturur. B market ya da mid kapı için öldükten sonra smoke at — takım korunmaya devam etsin. Mid'i sen alırsan iki siteye de hızlı rotasyon açılır; mid kontrolünü kaybetsen bile en az bir smoke'u B'nin retake'i için sakla.
+- **Ascent**: A main ve B main'de saldırgan çık, kendini iyileştirip fazla canını kullan. Mid kapıya atılan can eritme yüksek değer taşır. Bu haritada bombalar açık alanda kurulur, post-plant smoke'u kritiktir — açılışta tek smoke'la idare et, gerisini kuruluş sonrasına sakla.
+- **Bind**: Dar geçitler can eritmeyi verimli kılar — düşmanın yana kaçacak yeri yok, etki tam üstünde kalır. Hookah ya da shower'da dirilirsen rotasyona gelen düşmanı hazırlıksız yakalarsın. Teleportlar yüzünden ölüm sonrası smoke'unu yanlış siteye atma riski yüksek; smoke'tan önce sesi dinle, düşman hangi siteden basıyor ona göre kapat.
+- **Haven**: Üç site sana bol peek ve diriliş sonrası yeniden konumlanma fırsatı verir. Üç site = smoke'lar her yere yetmez; bir siteyi açarken diğer ikisinden gelecek rotasyonu okuyup post-plant smoke'unu o eksene sakla.
+- **Split**: Fazla canla mid'i saldırgan al. Ramp'ta öldükten sonra smoke at — takım oyunda kalsın. Bu haritada mid kontrolü tüm round'u belirler; mid düellosunu kazanırsan kendini iyileştirip ikinci düelloya da avantajlı gir, kaybedersen smoke'u takımın geri çekildiği eksene at.
 
 ## 6. Eşleşme Notları
 - **Sage'e karşı**: Sage duvarı can eritmeyi engellemez. Duvarın arkasındaki oyunculara da etki geçer.
@@ -73,8 +90,16 @@ Clove sıradan, pasif smoke atan bir controller değil. Öldükten sonra bile sm
 ### Zorlandığında
 "Smoke atmadan ölüyorsun. Önce smoke'lar, sonra dövüş. Clove saldırgan oynar ama hâlâ bir controller — takımın senin fragından önce smoke'una ihtiyacı var."
 
+"Bütün smoke'ları açılışta harcayıp post-plant'te çıplak kalıyorsun. Açılışa bir smoke yeter; birini bombayı korumaya, birini retake'e sakla. Smoke ekonomini round boyunca böl."
+
+"Öldükten sonra smoke'u kullanmıyorsun — Clove'un tek farkı bu. Öldüğün an haritaya bak, takımın açık kalan tarafını kapat. Bu pencere başka hiçbir controller'da yok."
+
 ### Tahmin edilebilir olduğunda
 "Rakipler dirilme noktanı kamp ediyor. Ya dirilmeyi atla, takım senin trade'inden oynasın; ya da onlar çekilene kadar bekle."
+
+"Diriliyorsun ama hep aynı açıdan çıkıyorsun — düşman önceden nişan alıp bekliyor. Dirilir dirilmez konum değiştir; eski ölüm açından peek atma."
+
+"Dirilişi her round bomba kurulduktan sonra tek başına retake'e dönmek için kullanıyorsun. Arkanı kollayacak takım yoksa ult'u sakla — boş round'a yalnız dönmek seni bedava kill yapar."
 
 ## 8. Rütbe Ayarı
 - **Düşük (Iron-Silver)**: Önce smoke at. Dirilişi tutumlu kullan. İyileşme için dövüş kovalama — smoke at, takıma destek ver.

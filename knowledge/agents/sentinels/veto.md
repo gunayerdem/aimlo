@@ -30,6 +30,8 @@ Cypher bilgi toplar, Killjoy alan tutar — Veto ise düşmanın bilgi toplamas�
 - Tuzağa güvenip silah pozisyonunu boşa atmak — tuzak seni taşımaz, pozisyon taşır
 - Utility inkarını takıma söylememek — çağrısız inkar avantaja dönmez
 - Mollyi takımın geçeceği alana atmak — kendi geçişini kaparsın
+- Tuttuğun site'ı bırakıp erken rotasyona çıkmak — sentinel çapadır, takım çağrısı olmadan terk etme
+- Tuzağı çok ileri, görüş hattının dibine koymak — düşman vurup susturur, sen duymazsın bile
 
 ## 5. Kalıp -> Anlam
 
@@ -87,6 +89,27 @@ Cypher bilgi toplar, Killjoy alan tutar — Veto ise düşmanın bilgi toplamas�
 **COUNTER** En az birini sakla. Düşman retake'e smoke ve mollyle gelir — tuzak bunları yer. Molly defuse yapan düşmanı kilitler.
 **WHY** Spike kurulduktan sonra tuzak, düşmanın retake utility'sini götürür. Molly ise defuse girişimini durdurur.
 
+---
+
+**IF** Tuttuğun site'ı erken bırakıp diğer site'a rotasyona çıkıyorsun, sonra arkadan vuruluyorsun
+**MEANING** Çapayı terk ettin. Düşman senin bıraktığın site'a sessizce giriyor, sen sırtını dönmüşken seni yakalıyor.
+**COUNTER** Takımdan kesin çağrı ("hepsi B'de, A boş") gelmeden site'ını bırakma. Tuzağı arkana, geldiğin koridora koy — terk etmen gerekirse bile arkadan gelen flank'ı tuzak yakalar. Rotasyon kararını bilgiye dayandır, sese değil.
+**WHY** Sentinel çapadır: sen yerinde durursan düşman o site'a bedava giremez. Erken çıkarsan tuttuğun alanı düşmana hediye edersin.
+
+---
+
+**IF** Tuzağı görüş hattının dibine, çok ileri bir noktaya koyuyorsun
+**MEANING** Düşman tuzağı görür görmez vurup susturuyor. Sen aktive edemeden ya da uyarı sesini duymadan tuzak ölüyor.
+**COUNTER** Tuzağı köşe arkasına, kör noktaya koy — düşman görmeden geçsin, sen sesi duyup tepki ver. Görüş açık bir noktaya koyacaksan en az birini gizli bir destek noktasına yedekle. Amaç önce uyarı, sonra inkar.
+**WHY** Görünen tuzak bedava vurulur ve sana sıfır bilgi bırakır. Gizli tuzak hem düşmanı yakalar hem sana erken uyarı verir.
+
+---
+
+**IF** Düşman seni susturduktan (suppress) sonra tüm tuzağın ve mollyin devre dışı kalıyor
+**MEANING** Suppress aktifken yeteneklerin çalışmaz. KAY/O bıçağı ya da ulttayken tuzak ve molly ölü util.
+**COUNTER** Suppress geldiğini hissedince ya da KAY/O ultu duyunca ultunu aç — suppress sana geçmez, yetenekler açık kalır. Bıçak atıldıysa hızlıca yok et ya da kırılma alanından çık. Util'ini suppress beklentisiyle erken harcama, çünkü o pencerede yenisini koyamazsın.
+**WHY** Bağışıklık ultun tam olarak suppress'i sıfırlamak için var. Doğru anda açarsan düşmanın susturma yatırımı boşa gider; geç açarsan sentinel oyunun çöker.
+
 ## 6. Harita Etkileşimleri
 
 - **Ascent**: Mid bilgiyle döner. Tuzağı mid'e koy — düşman recon mid'den geçemez, ne yapacağını bilemez. A main ve B main'de molly push'u durdurur. Işınlanmayla mid-A veya mid-B arası hızlı geç.
@@ -94,6 +117,8 @@ Cypher bilgi toplar, Killjoy alan tutar — Veto ise düşmanın bilgi toplamas�
 - **Breeze**: Uzun görüş hatları bilgiyi hayati kılar. Tuzakla recon'u kes — düşman kör taahhüde girmek zorunda kalır. Açık alanda mollyden kaçış uzun sürer. Ultla utility spam'ini geçip push yap.
 - **Split**: Mid'de bilgi savaşı döner. Tuzak mid'de recon'u keser, orta kontrol saldıran için tahmine döner. A heaven ve B main'de molly savunma pozisyonunu kilitler. Işınlanma ramplar arası geçiş sağlar.
 - **Sunset**: Mid koridorda tuzak güçlü. İki takım da yaklaşımını belirlemek için bilgiye güvenir — tuzak bunu keser. B market'ta molly dar alanda kaçışa yer bırakmaz.
+
+Genel kural: Tuzağı her zaman düşmanın bilgiye en çok güvendiği daralma noktasına koy — geniş açık alana değil, mid'in, main'in ya da rotasyon koridorunun düşmanın görmeden geçeceği kör köşesine. Mollyi savunmada düşman hareket halindeyken at; saldırıda ise post-plant'te defuse açısını kapatmak için sakla. Işınlanma noktasını turn başında değil, çağrı sonrası gerçek rotasyon ihtiyacına göre koy.
 
 ## 7. Eşleştirme Notları
 
@@ -118,6 +143,14 @@ Aynen sürdür: 1. turda ses ipucuyla recon'u yok et ve çağır. 2. turda tuza�
 ### Tahmin edilebilir olduğunda
 
 "Düşman zamanlamanı okudu. Bir turda erken aktive et, sonraki turda geç, üçüncüde hiç. Recon atmayı bıraktılarsa mollye ve ışınlanmaya yaslanıp standart sentinel oyununa geç."
+
+### Çapayı erken bırakıyorsa
+
+"Tuttuğun site'ı sesle terk etme — kesin çağrı bekle. Tuzağı arkana, geldiğin koridora koy ki çıkmak zorunda kalırsan flank'ı yakalasın. Sentinel yerinde durduğu sürece o site düşmana kapalı; erken çıkınca bedava açıyorsun."
+
+### Tuzağı boşa harcıyorsa
+
+"Tuzağın görünür yere koyma — vurup susturuyorlar. Köşe arkasına, kör noktaya koy: düşman görmeden geçsin, sen sesi duyup tepki ver. Önce uyarı, sonra inkar. Suppress yiyorsan tuzaktan önce ultunu aç, yoksa util ölü kalır."
 
 ## 9. Rank Modülasyonu
 
