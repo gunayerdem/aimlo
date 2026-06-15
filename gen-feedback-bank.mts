@@ -10,6 +10,7 @@ import fs from "fs";
 import path from "path";
 import { loadKnowledge } from "./lib/knowledge-loader";
 import { buildPolicyBlock, BANNED_PHRASES } from "./lib/ai-policy";
+import { plainifyAbilities, fixTurkishApostrophe } from "./lib/ability-plain-map";
 
 function readKey(): string {
   const raw = fs.readFileSync(path.join(process.cwd(), ".env.local"), "utf-8");
@@ -80,18 +81,13 @@ function violations(text: string, lang: "tr" | "en"): string[] {
 function clean(s: string, lang: "tr" | "en" = "tr"): string {
   if (!s) return "";
   const andW = lang === "tr" ? " ve " : " and ";
-  let out = s
-    // dotted-i / combining-dot bozulmasını temizle (OCR-TR locale izi)
-    .replace(/̇/g, "")
+  // dotted-i önce temizle (isim eşleşmesi için), sonra resmi yetenek adı → düz Silver terimi (güvenlik ağı)
+  let out = plainifyAbilities(s.replace(/̇/g, ""), lang)
     // baştaki bölüm-başlığı öneklerini sök (UI'da zaten başlık var)
     .replace(/^\s*(ölüm neden[iı]|hata analiz[iı]|ölüm analiz[iı]|düşman analiz[iı]|düşman pattern[iı]|sonraki round|death cause|death analysis|enemy read|enemy pattern|next round)\s*:\s*/i, "")
     // sızan whitelist-dışı İngilizce → TR (micro-position eki dahil)
     .replace(/micro-?position(['’][a-zçğıöşü]+)?/gi, "açı")
     .replace(/high flash/gi, "flash'ı yukarı").replace(/low flash/gi, "alçak flash").replace(/first shot/gi, "ilk mermi")
-    // oyuncuların kullanmadığı resmi yetenek adları → ortak terim (Cloudburst→smoke vb.)
-    .replace(/\bcloudburst\b/gi, "smoke").replace(/\btailwind\b/gi, "dash").replace(/\bnebula\b/gi, "smoke")
-    .replace(/poison cloud/gi, "smoke").replace(/fault\s?line/gi, "stun").replace(/curveball/gi, "flash")
-    .replace(/run it back/gi, "ult").replace(/rendezvous/gi, "teleport").replace(/toxic screen/gi, lang === "tr" ? "duvar" : "wall")
     // callout/ability slash → "ve"/"and" (A Main/Heaven → A Main ve Heaven; cümle bozulmaz)
     .replace(/(\w)\s*\/\s*(\w)/g, `$1${andW}$2`).replace(/(\w)\s*\/\s*(\w)/g, `$1${andW}$2`)
     .replace(/\s*[;.,—-]\s*(çözüm|çozum|neden|fix|sorun|solution|problem)\s*:\s*/gi, ". ")
@@ -100,6 +96,8 @@ function clean(s: string, lang: "tr" | "en" = "tr"): string {
   out = out.replace(/(^|[.!?]\s+)([a-z])/g, (_, p, c) => p + c.toUpperCase());
   // TR çıktıda ai-policy çeviri tablosundaki sızıntıları kapat (EN'de bu kelimeler meşru)
   if (lang === "tr") out = out.replace(/\bcover\b/gi, "siper").replace(/\bsightline\b/gi, "görüş hattı").replace(/\bwall\b/gi, "duvar");
+  // düz Türkçe terim yanlış apostroflanmışsa düzelt (duvar'i → duvarı)
+  if (lang === "tr") out = fixTurkishApostrophe(out);
   return out;
 }
 

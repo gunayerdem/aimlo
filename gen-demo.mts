@@ -10,6 +10,7 @@ import fs from "fs";
 import path from "path";
 import { loadKnowledge } from "./lib/knowledge-loader";
 import { buildPolicyBlock, BANNED_PHRASES } from "./lib/ai-policy";
+import { plainifyAbilities, fixTurkishApostrophe } from "./lib/ability-plain-map";
 
 // ── OPENAI_API_KEY'i .env.local'den oku (değeri ASLA loglanmaz) ──
 function readKey(): string {
@@ -89,9 +90,10 @@ const TARZANCA = [
 // söker, akıcı cümleye çevirir, cümle başını büyütür.
 function clean(s: string | undefined): string {
   if (!s) return "";
-  let out = s
-    .replace(/̇/g, "")
+  // dotted-i önce, sonra resmi yetenek adı → düz Silver terimi (demo TR)
+  let out = plainifyAbilities(s.replace(/̇/g, ""), "tr")
     .replace(/micro-?position(['’][a-zçğıöşü]+)?/gi, "açı")
+    .replace(/high flash/gi, "flash'ı yukarı").replace(/low flash/gi, "alçak flash").replace(/first shot/gi, "ilk mermi")
     .replace(/(\w)\s*\/\s*(\w)/g, "$1 ve $2").replace(/(\w)\s*\/\s*(\w)/g, "$1 ve $2")
     .replace(/\s*[;.,—-]\s*(çözüm|çozum|neden|fix|sorun|sebep)\s*:\s*/gi, ". ")
     .replace(/(^|\.\s+)(çözüm|çozum|neden|fix|sorun|sebep)\s*:\s*/gi, "$1")
@@ -101,6 +103,9 @@ function clean(s: string | undefined): string {
     .trim();
   // cümle başını büyüt (ASCII küçük harfse — TR-i tuzağından kaçın)
   out = out.replace(/(^|[.!?]\s+)([a-z])/g, (_, p, c) => p + c.toUpperCase());
+  // TR çıktıda whitelist-dışı sızıntıları kapat + apostrof düzelt
+  out = out.replace(/\bcover\b/gi, "siper").replace(/\bsightline\b/gi, "görüş hattı").replace(/\bwall\b/gi, "duvar");
+  out = fixTurkishApostrophe(out);
   return out;
 }
 function cleanMatch(m: any): any {

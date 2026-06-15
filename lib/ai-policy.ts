@@ -111,6 +111,17 @@ Yapay/akademik değil; net, kısa, sert ama spesifik (callout + ne yap).`;
 export const NATURAL_COACH_RULE_EN = `\nNATURAL COACH VOICE (EN): Talk like a real Radiant coach — direct, blunt, specific. No corporate/academic words ("optimal", "deployment", "protocol", "leverage", "utilize"→"use", "facilitate"). No time/second-based advice. Plain, punchy English; callout + action every line.`;
 
 // ═══════════════════════════════════════════════════════════
+// HEDEF KİTLE: SILVER — resmi yetenek adı YASAK, düz terim ZORUNLU
+// ═══════════════════════════════════════════════════════════
+
+export const SILVER_AUDIENCE_RULE = `\nHEDEF KİTLE — SILVER OYUNCU: Bunu okuyan Silver/Gold seviyesinde. Oyun-içi RESMİ YETENEK ADI KULLANMA; herkesin bildiği düz terimi kullan:
+- smoke (Cloudburst/Nebula/Poison Cloud/Sky Smoke/Dark Cover/Cyber Cage/Ruse DEĞİL), flash (Curveball/Paranoia/Blindside/Flashpoint/Guiding Light DEĞİL; Leer→kör etme), molly (Snake Bite/Incendiary/Aftershock/Nanoswarm/Hot Hands/Paint Shells DEĞİL), dash (Tailwind/Lightspeed), heal (Devour/Healing Orb/Regrowth), recon/bilgi (Recon Bolt/Owl Drone/Haunt/Trailblazer), drone (Owl/Stealth Drone), stun (Fault Line/Relay Bolt/Nova Pulse/Special Delivery), duvar (Toxic Screen/Barrier Orb/Cascade/High Tide/Fast Lane), tuzak/tel (Trapwire→tel, Trademark, Sonic Sensor), kamera (Spycam), bot (Boom Bot/Alarmbot/Wingman/Prowler), ult (tüm ultimate'lar).
+- Reyna'nın E'si "Dismiss" DEĞİL "kaçış"; Sage duvarı "Barrier Orb" DEĞİL "duvar"; Cypher teli "Trapwire" DEĞİL "tel".
+- Bir Radiant koç bir Silver'a anlatırken ne derse onu yaz: "smoke at", "flash'la", "duvarı çapraz koy", "tel koy" — resmi kod-ad değil. Türkçe ekleri DOĞAL bağla (duvarı, kamerayı, teli — "duvar'u/kamera'ı" YASAK).`;
+
+export const SILVER_AUDIENCE_RULE_EN = `\nAUDIENCE — SILVER PLAYER: The reader is Silver/Gold. Never use in-game OFFICIAL ABILITY NAMES or complex jargon. Use the plain term every player knows: smoke (not Cloudburst/Nebula/Poison Cloud), flash (not Curveball/Paranoia/Blindside), molly (not Snake Bite/Incendiary/Nanoswarm), dash (not Tailwind), heal (not Devour/Healing Orb), recon/info (not Recon Bolt/Owl Drone), drone, stun (not Fault Line/Relay Bolt), wall (not Toxic Screen/Barrier Orb/Cascade), trap/tripwire (not Trapwire/Trademark), camera (not Spycam), bot (not Boom Bot/Alarmbot), ult (any ultimate). Talk like a Radiant coach explaining to a Silver — "smoke it off", "use a flash", "set your wall crossed" — not the codename.`;
+
+// ═══════════════════════════════════════════════════════════
 // EVIDENCE POLICY — strictest version (from vision route)
 // ═══════════════════════════════════════════════════════════
 
@@ -194,10 +205,12 @@ export function buildPolicyBlock(options: {
   parts.push(TIME_BAN_RULE);
   if (options.lang === "en") {
     parts.push(NATURAL_COACH_RULE_EN);
+    parts.push(SILVER_AUDIENCE_RULE_EN);
   } else {
     parts.push(HYBRID_LANGUAGE_RULE);
     parts.push(ENGLISH_WHITELIST_RULE);
     parts.push(NATURAL_COACH_RULE);
+    parts.push(SILVER_AUDIENCE_RULE);
   }
   if (options.includeDecisionRubric) parts.push(DECISION_SCORE_RUBRIC);
 
