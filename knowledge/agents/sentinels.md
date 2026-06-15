@@ -462,62 +462,92 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
 ## Veto
 
 ### Yetenek Analizi
-- **Veto** bilgi kapatan bir sentinel ve anti-initiator'dır. Tüm yetenek seti düşman takımı kör ve şaşkın bırakmak üstüne kuruludur. Sadece site savunmaz; düşmanın topladığı bilgiyi güvenilmez kılar.
-- Yetenekleri düşmanın keşfini bozar, takımının hareketlerini gizler ve saldırganı, ne beklediğini bilmeden site'a push atmak zorunda bıraktığı koşullar yaratır.
-- İmza yeteneği düşmanın keşif araçlarını bozar. Düşman Sova recon oku atınca ya da Fade prowler salınca, Veto'nun engellemesi bu çabaları boşa çıkarır.
-- Ult'u geniş bir alanda düşmanın bilgi toplamasını kapatan bir bastırma alanı açar; düşmanı ya kör commit etmeye ya da temel istihbarat için devasa bir util yatırımına zorlar.
+- **Molly (Q)** - Parça atarsın. Vurduğu düşman yerinde kalır, sesini kaybeder, canı erir. Push atan birini durdururken bu üçü birden çalışır. Düşman hareket halindeyken at — pozisyon almışsa değeri düşer.
+- **Işınlanma (C)** - Yere bir nokta bırakırsın. O noktaya bakarken tekrar basınca oraya ışınlanırsın. Satın alma aşamasında geri alıp yeniden koyabilirsin. Beklenmedik açı tutmak ve hızlı yer değiştirmek için.
+- **Tuzak (E)** - İmza yeteneğin. Bir noktaya koy, tekrar basınca aktive et. Aktifken o bölgeye giren ya da oradan geçen her recon aracını, drone'u ve fırlatılan utility'yi yok eder. Kendisi düşük canlı, vurulup kırılabilir (görünür yere koyarsan bedava söner).
+- **Ult (X)** - 7 ult puanı. Aktive edince hiçbir kötü etki sana işlemez: flash, yetenek kapatma (suppress), can eritme, kör etme, yavaşlatma, sersemletme — hiçbiri geçmez. 1v2-1v3'te düşman seni durdurmak için ne atarsa atsın, sen yürümeye devam edersin.
 
 ### Site Anchor
-- Veto hasar ya da alan kontrolü yerine bilgi kapatma ile tutar. Kurulumu, düşmanın site'ın hakkında güvenle istihbarat toplayamamasını sağlar.
-- **Keşfi engelleme**: Düşman keşif aracını kurana kadar engelleme yeteneklerini tut, sonra taramayı bozmak için aktive et. Bu, düşmanın util bütçesini boşa harcatır.
-- **Hareketi gizleme**: Takımının rotasyon seslerini ve görsel izlerini gizle; normalde cezalandırılacak savunma rotasyonlarına imkan ver.
-- **Savunma aldatması**: Savunucu sayısı ve pozisyonları hakkında belirsizlik yarat; saldırganı en temel bilgi için bile fazla util harcamaya zorla.
+- **Veto hasar ya da alan kapatma ile değil, bilgiyi keserek tutar.** Cypher bilgi toplar, Killjoy alan tutar — Veto düşmanın bilgi toplamasını keser. Düşman kör girince execute'lar tahmine döner; o körlüğü sen yaratırsın.
+- **Tuzağı kör noktaya koy**: Tuzağı düşmanın görmeden geçeceği bir kör köşeye koy — köşe arkasına, geometrinin gizlediği yere. Görünür yere koyarsan düşman vurup susturur, sen uyarı sesini bile duymazsın. Amaç önce uyarı, sonra inkar.
+- **Recon attığında aktive et**: Düşman recon oku, drone ya da fırlatılan utility attığında tuzağı aktive et — recon, drone, util hepsi gider. Düşman recon atmadan push atıyorsa o turda tuzak değersiz; mollye ve silah pozisyonuna geç.
+- **Mollyle push'u kilitle**: Ayak sesi duyduğunda ya da takımdan "geliyor" çağrısı geldiğinde mollyi at. Düşman hareket halindeyken at — içeri girip köşeye oturduktan sonra değil.
+- **Her inkarı çağır**: Recon yok ettin mi hemen söyle ("recon gitti, kör geliyorlar"). Takım bunu bilmezse kör düşmana karşı bile temkinli oynar, avantajı boşa harcarsın.
+
+### Setup Stratejileri
+- **Tuzak + uyarı katmanı**: Tuzağı her turda aynı yere koyma. Bir turda anında aktive et, sonraki turda bekle, üçüncüde hiç. İlk recon'u geçir, execute sırasındaki ikinciyi yok et — düşman hangi recon'un gideceğini bilemesin.
+- **Işınlanmayla açı değiştir**: Noktayı her turda aynı yere koyma. Bir tur agresif pozisyon tut, sonraki tur retake için farklı yerden flankla. Satın alma aşamasında geri al, yeniden koy. Tahmin edilen ışınlanma, ışınlandığın anda ölüm demektir.
+- **Spike sonrasına util sakla**: En az bir tuzağı/mollyi tur başında bitirme. Düşman retake'e smoke ve mollyle gelir — tuzak bunları yer, molly defuse yapanı kilitler.
+- **Suppress penceresine util koyma**: Düşman seni susturursa (KAY/O bıçağı, Tejo recon'u/ultu) tuzağın ve mollyin çalışmaz, o pencerede yenisini de koyamazsın. Geleceğini hissedince ultunu aç — bu etki sana geçmez, yeteneklerin açık kalır.
 
 ### Ne Zaman Seçilir
-- Düşman takım, execute'tan önce bilgi toplamaya dayanan metodik default'lar yapıyorsa
-- Initiator-ağırlıklı kompozisyonları doğrudan karşılayan bir sentinel istiyorsan (Sova, Fade, Skye)
-- Harita, bilgi kapatmanın saldırgan için en çok belirsizliği yarattığı pozisyonlara sahipse
-- Takımın rotasyonu gizleyebilen ve site yığılmaları hakkında aldatma yaratabilen bir sentinel'e ihtiyacı varsa
+- Düşman, execute'tan önce recon'a dayanan metodik default'lar oynuyorsa (önce drone/ok, sonra giriş)
+- Initiator-ağırlıklı kompozisyonu doğrudan cezalandıran bir sentinel istiyorsan (Sova, Fade, Tejo, Skye)
+- Harita, recon'un en çok geçtiği daralma noktalarına (mid, main, rotasyon koridoru) sahipse
+- Takımın kör düşmana baskı yapabilmek için bilgi kesen, çapa duran bir sentinel'e ihtiyacı varsa
 
 ### Harita Güçleri
-- **Ascent**: A-tier. Mid kontrolü bilgiye çok bağımlıdır; Veto mid okumalarını kapatarak düşmanı, savunma kurulumunu bilmeden commit etmeye zorlar.
-- **Haven**: A-tier. Saldırgan hangi site'ta daha az savunucu olduğunu anlamak için keşfe bağımlıdır; üç site'lık haritada bu engelleme çok değerlidir.
-- **Breeze**: A-tier. Uzun görüş hatları iki taraf için de bilgiyi hayati yapar. A ya da B'de keşfi kapatmak kör commit'leri zorlar.
-- **Split**: A-tier. Mid bir bilgi savaş alanıdır. Veto'nun engellemesi mid kontrolünü saldırgan için tahmin oyununa çevirir.
-- **Sunset**: A-tier. İki takımın da yaklaşımı okumak için bilgiye güvendiği mid koridorunda güçlüdür.
+- **Ascent**: A-tier. Mid bilgiyle döner. Tuzağı mid'e koy — recon mid'den geçemez, düşman ne yapacağını bilemez. A Main ve B Main'de molly push'u durdurur. Işınlanmayla mid-A / mid-B arası hızlı geç.
+- **Haven**: A-tier. Üç site var, saldıran hangi site'ın boş olduğunu recon'la bulmak zorunda. Tuzak bu bilgiyi keser. Garage'da molly rotasyon kesen bir engel. Işınlanmayla C'den A'ya hızlı geç.
+- **Breeze**: A-tier. Uzun görüş hatları bilgiyi hayati kılar. Tuzakla recon'u kes — düşman kör taahhüde girmek zorunda kalır. Açık alanda mollyden kaçış uzun sürer. Ultla utility spam'ini geçip push at.
+- **Split**: A-tier. Mid'de bilgi savaşı döner. Tuzak mid'de recon'u keser, orta kontrol saldıran için tahmine döner. A Heaven ve B Main'de molly savunma pozisyonunu kilitler. Işınlanma ramplar arası geçiş sağlar.
+- **Sunset**: A-tier. Mid koridorda tuzak güçlü — iki takım da yaklaşımını belirlemek için bilgiye güvenir. B Market'ta molly dar alanda kaçışa yer bırakmaz.
+- **Genel kural**: Tuzağı düşmanın bilgiye en çok güvendiği daralma noktasının kör köşesine koy. Mollyi savunmada düşman hareket halindeyken at; atakta post-plant'te defuse açısını kapatmak için sakla.
 
 ### Sık Yapılan Hatalar (IF/MEANING/COUNTER/WHY)
 
-1. **IF** Düşman keşif aracını kurmadan önce engelliyorsan
-   **MEANING** Düşmanın keşif yeteneğinin aktive olduğunu gör ya da duy, sonra kapat. Erken kapatmak etki pencereni boşa harcar
-   **COUNTER** Düşmanın keşfini gör/duy, SONRA engelle
-   **WHY** Erken engelleme = etki penceresi düşmanın keşfi yokken biter = boşa giden util
+1. **IF** Tuzağı düşman bir şey atmadan erken aktive ediyorsan
+   **MEANING** Pencere kapanır, recon gelmeden tuzak boşa biter
+   **COUNTER** Recon'un sesini duy ya da geldiğini gör, SONRA aktive et
+   **WHY** Erken aktivasyon = recon yok ederken tuzak boşta = sıfır inkar
 
-2. **IF** Silah oyununun temellerini unutuyorsan
-   **MEANING** Engelleme güvenlik değil, belirsizlik demek. Veto yine de pozisyon ve aim ile site tutmalı
-   **COUNTER** Standart sentinel pozisyonlamasını ve aim disiplinini koru
-   **WHY** Engelleme = düşman şaşkın. Ama Veto'nun yine de çatışmayı kazanması gerek
+2. **IF** Tuzağı görüş hattının dibine, görünür bir yere koyuyorsan
+   **MEANING** Düşman görür görmez vurup susturur. Sen aktive edemeden ya da uyarı sesini duymadan tuzak ölür
+   **COUNTER** Köşe arkasına, kör noktaya koy: düşman görmeden geçsin, sen sesi duyup tepki ver
+   **WHY** Görünen tuzak bedava vurulur ve sana sıfır bilgi bırakır; gizli tuzak hem yakalar hem erken uyarı verir
 
-3. **IF** Engellediğin yetenekleri takıma bildirmiyorsan
-   **MEANING** Kapatılan bilgiyi takımın değerlendirebilmesi için bunu bilmesi gerekir
-   **COUNTER** Her engellemeyi bildir: "Ok'ları bozdum"
-   **WHY** Bildirilmeyen engelleme = takım avantajdan habersiz = değerlendirememe
+3. **IF** Mollyi düşman içeri girip köşeye oturduktan sonra atıyorsan
+   **MEANING** Zamanlamayı kaçırdın. Molly hareket eden düşmana değer verir, durana değil
+   **COUNTER** Ayak sesinde ya da "geliyor" çağrısında at; pozisyon almış düşmana mollye değil silaha geç
+   **WHY** Hareket edene molly tuzaktır; durağan hedefe gereksiz harcamadır
 
-4. **IF** Hareket gizlemeyi düşmanın okumadığı rotasyonlarda harcıyorsan
-   **MEANING** Gizlemeyi düşmanın okuduğu rotasyonlar için sakla
-   **COUNTER** Gizlemeyi sadece düşmanın aktif okuma yaptığı rotasyonlarda kullan
-   **WHY** Gereksiz gizleme = lazım olduğunda elinde kalmaması
+4. **IF** Işınlanma noktan her turda aynı yerde
+   **MEANING** Düşman noktayı ezberledi, sen ışınlandığın anda seni önceden nişanlıyor
+   **COUNTER** Her 2-3 turda değiştir: bir tur agresif açı, sonraki tur retake flankı; buy aşamasında geri al, yeniden koy
+   **WHY** Tahmin edilen ışınlanma = ışınlandığın anda ölüm; değişen nokta düşmanın hazırlanmasını engeller
 
-5. **IF** Düşman kör diye fazla agresif oynuyorsan
-   **MEANING** Engelleme belirsizlik yaratır, dokunulmazlık değil. Standart sentinel pozisyon disiplinini koru
-   **COUNTER** Engelleme açıkken bile sentinel pozisyonunda kal
-   **WHY** Agresif sentinel = gereksiz ölüm = site korumasız
+5. **IF** Ultu takım dövüşünde erkenden açıyor, clutch'a saklamıyorsan
+   **MEANING** Ultun gücü düşman tüm utility'sini SANA attığında ortaya çıkar; takım dövüşünde o util takım arkadaşlarına dağılır
+   **COUNTER** 1v2 / 1v3'e girdiğinde aç; düşman seni durdurmak için her şeyi atar, hiçbiri tutmaz
+   **WHY** Clutch'ta ult düşmanın tüm util yatırımını sıfırlar; erken ult zaten util harcanmadan bağışıklık demek
+
+6. **IF** Suppress (yetenek kapatma) yediğinde tüm tuzağın ve mollyin devre dışı kalıyor
+   **MEANING** Susturulduğunda (KAY/O bıçağı, Tejo) hiçbir util çalışmaz, yenisini de koyamazsın
+   **COUNTER** Geleceğini hissedince ya da KAY/O ultu duyunca ultunu aç — bu etki sana geçmez, yeteneklerin açık kalır
+   **WHY** Bağışıklık ultu tam olarak yetenek kapatmayı sıfırlamak için var; geç açarsan sentinel oyunun çöker
+
+7. **IF** Tuttuğun site'ı kesin çağrı gelmeden erken bırakıp rotasyona çıkıyorsan
+   **MEANING** Çapayı terk ettin; düşman bıraktığın site'a sessizce giriyor, sırtını dönmüşken seni yakalıyor
+   **COUNTER** "Hepsi B'de, A boş" gibi kesin çağrı bekle; tuzağı arkana, geldiğin koridora koy ki flank'i yakalasın
+   **WHY** Sentinel çapadır: yerinde durursan site düşmana kapalı, erken çıkarsan o alanı hediye edersin
+
+8. **IF** Düşman recon atmayı bıraktı ama sen aynı oyunu oynuyorsun
+   **MEANING** Tuzak amacına ulaştı, düşman recon'dan vazgeçti — ama sen hâlâ recon bekliyorsun
+   **COUNTER** Recon atmayan düşman kör giriyor (avantajın bu); tuzağı spike sonrasına sakla, smoke/heal util'ini yok et, girişi mollyle ve silahla tut
+   **WHY** Düşmanın recon'dan vazgeçtiği an senin kazandığın andır; uyum sağlamazsan avantajı boşa harcarsın
+
+### Retake Değeri
+- Veto'nun retake değeri tuzaktan ve mollyden gelir: tuzak düşmanın retake'e getirdiği smoke ve mollyi yer, molly defuse yapan düşmanı yerinde kilitler.
+- Bu yüzden en az bir tuzağı/mollyi tur başında tüketme — spike kurulduktan sonra ikisi de büyük değer taşır.
+- Işınlanmayla retake'e beklenmedik açıdan flankla: bir noktadan bilgi al, kötü giderse ışınlanıp güvene dön.
+- Ultu retake'i kilitleyen düşman utility spam'inin (flash, sersemletme) içinden push atmak için aç.
 
 ### Eşleşme İpuçları
-- **vs. Sova**: Hard counter. Sova'nın tüm değeri bilgi toplamaktır. Veto, Sova'nın recon, drone ve pozisyon bilgisine dayanan molly (shock ok) lineup'larını doğrudan geçersiz kılar.
-- **vs. Fade**: Güçlü counter. Fade'in bot'u ve recon'u yüksek değerli keşif araçlarıdır; Veto bunları bozarak Fade'in asıl katkısını boşa çıkarabilir.
-- **vs. KAY/O**: KAY/O'nun yetenek kapatması Veto'nun engellemesini devre dışı bırakabilir, böylece bir karşı-karşı dinamiği doğar. Yetenek-kapatma bıçağının zamanlamasına dikkat et.
-- **vs. Raze**: Zayıf eşleşme. Raze yetenek setini kullanmak için bilgiye bağımlı değildir. Engelleme yerine silah oyununa ve pozisyonlamaya odaklan.
+- **vs. Sova**: Hard counter. Sova'nın her şeyi bilgiye dayanır. Recon oku, drone, recon lineup'ı — tuzak hepsini yer. Doğru tuzak pozisyonu o tur Sova'nın yarısını sahadan siler.
+- **vs. Fade**: Güçlü counter. Recon iti ve recon küresi yüksek değerli keşif araçları, tuzak ikisini de yok eder. Recon iti seni takip ederken mollyi at — düşman hem kilitlenir hem bilgisiz kalır.
+- **vs. Tejo**: Recon drone'u ve güdümlü mollyi tuzağa gider; Tejo'nun recon zincirini kırmak Veto'nun en güçlü eşleşmelerinden biri. Ama Tejo'nun drone'u seni susturursa tuzak da çalışmaz — önce zamanlamayı kazan, suppress penceresinde util koymaya çalışma.
+- **vs. KAY/O**: KAY/O yeteneğini kapatırsa (suppress) tuzak ve molly çalışmaz. Geldiğini hissedince ultu aç, bu etki sana geçmez. Bu eşleşmede ult zamanlaması her şeyi belirler.
+- **vs. Raze ve bilgisiz giren duelciler**: Zayıf eşleşme. Raze nerede olduğunu bilmeden bomba atar, Jett dash'le dalar — bilgiye bağımlı değiller. Tuzak az değer verir; mollye ve silah pozisyonuna yaslan.
 
 ---
 

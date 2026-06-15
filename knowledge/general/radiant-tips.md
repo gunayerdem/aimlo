@@ -32,7 +32,7 @@ COUNTER yakın derinliği sadece izole düellolarda ve dar koridorlarda kullan �
 WHY yakın derinlik açı avantajını sonuna kadar açar ama birden fazla tehdidi işlemeye vakit bırakmaz
 
 IF köşeden uzakta duruyorsan
-MEANING peek atan seni crosshair placement noktasında değil, ekranın kenarında görür — düzeltmek için vakit kaybeder
+MEANING peek atan seni crosshair placement (nişanı kafa hizasında/köşeye önceden koyma) noktasında değil, ekranın kenarında görür — düzeltmek için vakit kaybeder
 COUNTER birden fazla düşman swing atabilecekse uzak derinliği seç — tam resmi görmeden commit etmezsin
 WHY köşeden uzaklık, peek atanı hem yatay hem dikey ayar yapmaya zorlar, reaksiyon yükünü ikiye katlar
 
@@ -78,7 +78,7 @@ WHY bedava bilgi: düşman ateş ederse yerini ve silahının recovery'sini veri
 ### Ferrari Peek
 
 IF düşmanın tam olarak nerede durduğunu biliyorsan
-MEANING tam strafe hızında geniş açıyla yüklenirsin, karşı taraf seni gözüyle takip etmek zorunda kalır
+MEANING Ferrari peek (gaza basıp hızla gir-çık) — tam strafe hızında geniş açıyla yüklenirsin, karşı taraf seni gözüyle takip etmek zorunda kalır
 COUNTER bilinen noktaya açıyı tut, tam hızda swing at, counter-strafe yap ve ateş et
 WHY geniş swing seni köşe kenarından hızla uzaklaştırır — düşman baskı altında büyük bir ayar yapmaya zorlanır
 

@@ -10,7 +10,7 @@ tags: [general, advanced, mechanics]
 
 ## Counter-Strafe Zamanlama
 
-Counter-strafe şu demek: hareket ederken ters yöne basarsın, böylece anında durursun. Tuşu bırakmak yerine ters tuşa bas — bu fark kritik, çünkü seni çok daha hızlı doğru nişan aralığına sokar.
+Counter-strafe (ters tuşa basıp anında durup ateş etme) şu demek: hareket ederken ters yöne basarsın, böylece anında durursun. Tuşu bırakmak yerine ters tuşa bas — bu fark kritik, çünkü seni çok daha hızlı doğru nişan aralığına sokar.
 
 ### Silaha Göre Hız Farkı
 
@@ -35,7 +35,7 @@ Silah ne kadar ağırsa her iki yöntem de o kadar uzun sürer — ama counter-s
 
 ## Jiggle Peek Genişlik Optimizasyonu
 
-Jiggle peek'te amaç şu: başını değil sadece omzunu göster, bilgi al, çekil. Ne kadar açıkta kalacağın hedefe göre değişir.
+Jiggle peek (köşeden hızlı gir-çık, bilgi al)'te amaç şu: başını değil sadece omzunu göster, bilgi al, çekil. Ne kadar açıkta kalacağın hedefe göre değişir.
 
 ### Hedefe Göre Ne Kadar Görün
 
@@ -203,7 +203,7 @@ Her silahla koşarak ateş edemezsin. Hangisiyle edebileceğini ezberle:
 
 ## Spray Transfer
 
-Bir düşmandan diğerine geçerken ne kadar flick yapacağın mesafeye göre değişir:
+Spray transfer (seri ateşi bir hedeften diğerine kaydırma) — bir düşmandan diğerine geçerken ne kadar flick yapacağın mesafeye göre değişir:
 
 - Yakın düşman ekranda büyük görünür — büyük flick yaparsın.
 - Uzak düşman ekranda küçük görünür — küçük flick yaparsın.
@@ -339,7 +339,7 @@ Saniye ezberlemene gerek yok. Şu pattern'leri kafana sok:
 ### Jump Mekanikleri
 
 - Havadayken silahın isabetsiz olur. Havada ateş etme — Jett'in ultu hariç.
-- Jump peek'in amacı şu: silahlı çatışmaya girmeden açıyı taramak. Atlama zirvesinde kafan, standart peek'e göre daha zor takip edilir.
+- Jump peek (zıplayarak anlık göz atıp bilgi alma)'in amacı şu: silahlı çatışmaya girmeden açıyı taramak. Atlama zirvesinde kafan, standart peek'e göre daha zor takip edilir.
 - Zirvede counter-strafe yap. İniş noktanı tahmin edilemez hale getirirsin.
 
 ### Jump Peek Uygulamaları
@@ -365,7 +365,7 @@ WHY yerden koşmak seni o görüş hattına daha uzun süre kilitler
 
 ## Wallbang Noktaları ve Hasar
 
-Duvara göre hasar değişir. Bunları bil:
+Wallbang (ince duvarın içinden mermiyle vurma) hasarı duvara göre değişir. Bunları bil:
 
 | Materyal | Nüfuz Seviyesi |
 |---|---|

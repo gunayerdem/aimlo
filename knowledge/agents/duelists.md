@@ -430,37 +430,80 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
 
 ## Waylay
 
+> PATCH-SENSITIVE: Waylay yeni bir duelist. Meta oturdukça tier ve eşleşme notları güncellenir.
+
 ### Yetenek Analizi
-- **Waylay** Valorant'ın duelist kadrosuna eklenen yeni agentlardandır. Yeteneği yanlış yönlendirme ve yer değiştirme üzerine kuruludur.
-- Düşmanın gerçek pozisyonunu takip etmesini zorlaştıran kopyalar ve sahte sinyaller yaratır.
-- İmza yeteneğiyle yerleştirdiği bir klonla yer değiştirip girişlerde ve retake'lerde kafa karışıklığı yaratır.
-- ult'u, hareketini taklit eden birden çok klon yaratıp düşmanı hangisinin gerçek olduğunu tahmine zorlar.
+- **slow (C)** - 300 kredi, 1 şarj. Yere çarpınca patlayan ışık kümesi; çevredeki düşmanı sert yavaşlatır. Sadece koşma hızını değil; ateş hızını, geri tepme toparlanmasını, şarjör değiştirmeyi ve silah kuşanmayı da yavaşlatır. Şüphelendiğin köşeye/açıya at, yere otursun, düşman yavaşlasın, ondan SONRA dal. Yavaşlamış düşman geç nişan alır, geç kaçar — düelloyu önden açarsın.
+- **dash (Q)** - 300 kredi, 1 şarj. Kuşan ve fırlat: sol tık iki kez ileri dash atar, sağ tık tek dash. Yalnızca ilk dash seni yukarı çıkarabilir. İki dash'i tek seferde boşaltıp içeride sıkışma — birini girişe, diğerini kaçış/yeniden konumlanmaya sakla. İlk dash'le yükselip kutuların/yüksek noktaların üstünden beklenmedik açı al.
+- **geri-kayma (E)** - Bedava, 1 şarj, 2 kill ile yenilenir. İmza yeteneğin. Yere bir ışık feneri koyarsın; tekrar bastığında saf ışık olarak o fenere geri kayarsın ve kayarken DOKUNULMAZ olursun. Bu Waylay'i diğer duelist'lerden ayıran şey: dövüşü kaybetsen bile ölmeden geri kayabilirsin. Ama fener peek'ten ÖNCE yerde olmalı — yoksa güvence yok.
+- **ult (X)** - 8 ult puanı. Kendinin ışık huzmesi yansıtan bir hayaletini (afterimage) bırakırsın; kısa gecikmeden sonra sen güçlü bir hız patlaması alırsın ve huzme genişleyip alandaki düşmanları yavaşlatır. Hızlı execute'larda ve site basışlarında alanı hem yavaşlatıp hem hız avantajıyla kapatmak için kullan.
 
 ### Ne Zaman Seçilir
-- Yanlış yönlendirmenin yüksek değer taşıdığı, çoklu giriş noktalı haritalar.
-- Düşman, util tabanlı bilgi yerine görsel bilgiye güveniyorsa.
-- Retake ve round-ortası yer değiştirmede üstün bir duelist istiyorsan.
+- Takımın agresif bir giriş duelist'ine ihtiyaç duyuyor — ilk açıyı alıp ilk kanı dökmek senin işin.
+- Harita dar koridorlar ve net giriş boğazları barındırıyor (Bind, Haven, Ascent, Split); slow + dash bu yapılarda en yüksek değeri verir.
+- Düelloyu kaybetsen bile ölmeden çıkabilen, "kazan kal, kaybet kay" güvencesi olan bir duelist istiyorsun.
+- Mekanik aim'in güçlü; slow yavaşlattıktan sonra ilk düelloyu tetikle çekerek kapatabiliyorsun.
 
 ### Harita Güçleri
-- Dar koridorlu ve çok açılı haritalarda en güçlü (Split, Bind, Icebox).
-- Klonların kolayca ayırt edildiği geniş, açık haritalarda daha zayıf.
+- **Bind**: S-tier. Dar koridorlar ve teleport çıkışları yavaşlat-dal için ideal. A Short ve Hookah'ta köşeye slow at, dash ile dal; TP ile beklenmedik baskı kur, geri-kayma fenerini çıkışına koy.
+- **Haven**: S-tier. Üç site, çok giriş; mobilite altın değerinde. C Long'da slow + dash giriş açar, A Long'da hızlı boşluk kapatma güçlü. Fener'i her site için ayrı planla.
+- **Ascent**: S-tier. A Main'in dar girişi yavaşlat-dal'a biçilmiş kaftan. Mid kontrolünü dash hızıyla zorla. B Main'de slow'u savunucunun açısına at, dash ile gir.
+- **Split**: A-tier. A Ramp ve B Main dar koridorları slow'un kaçış alanını kapatır. Dikey dash ile Heaven/üst açılara çık. Dar yapı geri-kaymanı da kolaylaştırır.
+- **Lotus**: A-tier. Dönen kapılar ve dar geçişler dash'e oturur. A Main ve C Main'de slow + dash güçlü. B'nin dar yapısında fener'i yakına koy ki sıkışmadan çıkasın.
+- **Fracture**: B-tier. Çoklu giriş mobiliteni ödüllendirir ama dağıtır. Arcade ve Dish gibi dar geçişlerde slow + dash değerli; geniş alanda dikkatli.
+- **Breeze**: C-tier. Uzun görüş hatları açık alanda seni görünür yapar. Hall ve A Cave gibi kapalı yerlerde yavaşlat-dal işler; açık alanda tek başına dash'leme, önce slow'la pencere aç.
 
 ### Sık Yapılan Hatalar (IF/MEANING/COUNTER/WHY)
 
-1. **IF** klonları plansız gönderiyorsan
-   **MEANING** Klonlar belli bir oyunu desteklemeli, rastgele atılmamalı
-   **COUNTER** Her klonun bir amacı olsun; bilgi topla, dikkat çek ya da sahte rotasyon yarat
-   **WHY** Rastgele klon hem util israfı hem de düşmana "bu sahte" diye öğretmektir
+1. **IF** slow'u atıp beklemeden aynı anda üstüne dash'liyorsan
+   **MEANING** Yavaşlatma ile dash'i tek hamle gibi kullanıyorsun; ikisinin de değerini düşürüyorsun
+   **COUNTER** Slow'u köşeye/açıya at, yere otursun, düşmanın yavaşladığını gör, ondan SONRA dash ile gir
+   **WHY** Slow düşmanı yavaşlattığı an senin lehine açılan penceredir; beklemeden dalarsan tam tepki veren bir düşmanla düz dövüşürsün
 
-2. **IF** her zaman aynı sürede swap yapıyorsan
-   **MEANING** Düşman zamanlamayı öğrenir ve tam swap anında açı tutar
-   **COUNTER** Swap zamanlamanı değiştir; bazen erken, bazen geç, bazen hiç yapma
-   **WHY** Tahmin edilebilir swap, düşmanın tam swap anında seni vurması demektir
+2. **IF** geri-kayma fenerini önceden koymadan agresif peek atıyorsan
+   **MEANING** Waylay'in en büyük üstünlüğünü — "kazan kal, kaybet kay" güvencesini — kullanmıyorsun
+   **COUNTER** Peek'ten ÖNCE fener'i güvenli bir yere bırak; ilk öldürmeyi kaparsan kal, kaybedersen anında geri kay
+   **WHY** Fener kurulmamışsa kaybettiğin düelloda kaçacak yerin yok; sıradan bir duelist gibi öne çıkıp orada ölürsün
 
-3. **IF** klon vurulduğunda bilgiyi kullanmıyorsan
-   **MEANING** Vurulan klon, düşmanın tam pozisyonunu sana verir
-   **COUNTER** Klon vurulur vurulmaz o bilgiyle hareket et ya da takıma bildir
-   **WHY** Kullanılmayan bilgi, klonun tüm değerini çöpe atmaktır
+3. **IF** ilk öldürmeden sonra açıkta donup ikinci düşmana yakalanıyorsan
+   **MEANING** Frag'i aldın ama kalayım mı kayayım mı diye düşünürken ikinci düşman seni basıyor
+   **COUNTER** İlk öldürmeden sonra yarım saniyede karar ver: temizse kal ve siteyi tut, ses/gölge varsa fener'e geri kay
+   **WHY** İlk fragdan sonraki yarım saniye en ölümcül an; dikkatin dağılmışken geri-kayma güvencen yoksa ikinci düşman tam orada yakalar
+
+4. **IF** dash'i hep düz ileri kullanıp asla yukarı çıkmıyorsan
+   **MEANING** İlk dash'in yükselebildiğini bilmiyorsun; beklenmedik açıları boşa harcıyorsun
+   **COUNTER** İlk dash'le yükselip kutuların/yüksek noktaların üstünden beklenmedik bir açı al
+   **WHY** Düşman açıları göz hizasında tutar; yüksekten gelen giriş hazır crosshair'i bozar, o yarım saniye düelloyu açar
+
+5. **IF** iki dash'i de tek seferde harcayıp içeride sıkışıyorsan
+   **MEANING** Mobiliteni yönetemiyorsun; kaçacak/yeniden konumlanacak hamlen kalmıyor
+   **COUNTER** Bir dash'le gir, diğerini sakla; ilk düelloyu kaybedersen kalan dash + fener seni çıkarır
+   **WHY** İki dash'i de bitirirsen mobiliten sıfırlanır; açıkta, yavaş, kaçışsız kalırsın — tüm avantajın mobilitedeydi
+
+6. **IF** flash'ın varmış gibi kör açıya tek başına dash'liyorsan
+   **MEANING** Waylay'in flash'ı yok; flash'lı bir duelist gibi oynuyorsun
+   **COUNTER** Kör açıyı tek başına dash'leme; flash/körleme atan takım arkadaşının arkasından gir, körlemeyi ondan al, boşluğu sen kapat. Tek başınaysan önce slow'la pencere aç
+   **WHY** Açıyı tutan düşman körlenmeden seni temiz görür; dash hızlı ama görünür, körleme olmadan dalmak hazır crosshair'in önüne yürümektir
+
+7. **IF** geri-kayma fenerini her tur aynı yere koyuyorsan
+   **MEANING** Okunabilir hale geldin; düşman geri kaydığın anı ve yeri önceden biliyor
+   **COUNTER** Fener'i tur tur farklı yere koy; satın alma aşamasında geri alıp yeniden koyabilirsin, bunu kullan
+   **WHY** Düşman fener'ini ezberlerse kaydığın hattı nişanlar ve sen tam o noktaya dönerken seni basar — güvencen riske döner
+
+8. **IF** slow'u düşmanın geleceği yere değil, kendi takımının gireceği yola atıyorsan
+   **MEANING** Yavaşlatmanın kime yaradığını düşünmeden basıyorsun
+   **COUNTER** Slow'u düşmanın bekleyeceği/geleceği köşeye at; atmadan önce "bu kimi yavaşlatıyor?" diye sor
+   **WHY** Yanlış yere atılan slow kendi girişini yavaşlatır, düşmana hiçbir şey yapmaz; doğru yere atılan slow giriş pencereni açar
+
+### Pro Oyuncu Stilleri
+- Waylay yeni bir agent; pro meta'sı henüz oturuyor. Şu ana kadarki kullanım, onu net giriş boğazlı haritalarda (Bind, Ascent, Haven) birincil entry duelist'i olarak konumlandırıyor: slow ile pencere aç, dash ile boşluk kapat, geri-kayma fenerini güvenli execute için kur. Jett benzeri agresif-giriş + güvenli-çıkış kalıbı, ama mobilite yerine yavaşlat-ve-dal ekonomisiyle.
+
+### Eşleşme İpuçları
+- **vs. Jett**: İki mobilite duelist'i; fark hızlı ve doğru girişte. Jett dash'le kaçabilir ama önce slow'la onu yavaşlatırsan kaçış penceresini kaparsın — slow'un, onun mobilitesini iptal eder.
+- **vs. Chamber**: Op tutan, sabit açı bekleyen Chamber'a slow + dash zor düşman. Işınlanmasını tetiklemeden hızlı kapatırsan hazır op açısını bozarsın.
+- **vs. Cypher**: Tel ve kameraya rağmen dash hızı seni dar pencereden geçirir. Tetiklenen tuzağa yakalanmamak için slow'u önden at, sonra hızla geç.
+- **vs. KAY/O**: Bıçağı isabet ederse yeteneğin kapanır; dash ve geri-kayma çalışmaz, saf mekanik düelloya zorlanırsın. Bıçak alanından çık, o turda temkinli oyna.
+- **vs. Sova/Fade**: Keşif seni bulur; tarandığın an dash hızı yer değiştirtir, geri-kayma ile işaretlendiğin yerden anında temize sıyrıl.
 
 ---
 
