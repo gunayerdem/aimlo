@@ -2,134 +2,134 @@
 
 ## 1. Rol Kimliği
 
-Fade, Sova gibi lineup ezberlemez. Haunt'ı atar, düşmanı ortaya çıkarır, hemen üzerine gider. Kit'in tamamı tek bir döngü üzerine kurulu: gör, işaretle, cezalandır. Haunt iz bırakır, Prowler izi kovalar ve nearsight verir, Seize kaçış yolunu keser, Nightfall tüm koridoru devre dışı bırakır. Sova bilgi toplar ve takımın karar vermesini bekler. Fade bilgi toplar ve anında dövüşe girer. Dar haritada hızlı execute oynayan bir takımdaysan, Fade bu iş için var.
+Fade, Sova gibi lineup ezberlemez. Recon'unu atar, düşmanı ortaya çıkarır, hemen üzerine gider. Kitin tamamı tek bir döngü üzerine kurulu: gör, işaretle, cezalandır. Recon iz bırakır, bot o izi kovalar ve görüşü daraltır, stun kaçış yolunu keser, ult tüm koridoru devre dışı bırakır. Sova bilgi toplar ve takımın karar vermesini bekler. Fade bilgi toplar ve aynı saniye dövüşe girer. Dar haritada hızlı execute oynayan bir takımdaysan, Fade tam bu iş için var.
 
 ## 2. Temel Sorumluluklar
 
-- **Haunt bir ikilem aracı, tarama değil**: Haunt'ın işi bilgi vermek değil — savunucuya imkânsız bir seçim sunmak. Gözü vursun: o an entry yolundan bakışını çeviriyor. Görmezden gelsin: iz kalır, Prowler doğrudan pozisyonuna gider. Haunt'ı, yok etmenin savunucuyu entry açısından koparacağı yere koy. Duvara sektirilmiş Haunt, savunucuya hem zor bir açı hem de zorlu bir karar verir.
-- **Prowler üç modda çalışır**: (1) Kovalama: Haunt'ın izlediği düşmana gönder, takım swing atmadan önce nearsight ver. En yüksek değer bu. (2) Temizleme: köşe, girinti veya off-angle'a gönder, birinin orada olup olmadığını kontrol et. Kuru peek atamıyorsan kullan. (3) Bilgi: koridora gönder, kilitlenme sesini dinle. Kilitlenirse biri var, dolanırsa temiz. Bilgi modu en düşük değer — kovalama veya temizleme uygunsa o modu seç.
-- **Seize hareket tuzağı**: Seize öldürmez. Düşmanı yerinde tutar, takım onu swing atar. En iyi yerler: dar açı tutan savunucu (jiggle yapamaz, çekilemez), spike üzeri post-plant (defuse'u durdurur), choke'tan rotate etmeye çalışan oyuncu (açıkta takılır).
-- **Nightfall ekonomisi**: Nightfall 7 küre. Takımın birlikte gireceği silahlı turlarda at. Eko turda kullanma — takım düşük silahla iz ve sağırlıktan faydalanmaz. Force-buy'da bir istisna var: decay 75 HP sıyırır, Spectre ve Marshal için düşmanı tek vuruşa getirir. Save turunda sakla. Ult, müsait olduğu silahlı turda kullanılmalı — biriktirme.
-- **Zincir hızı**: Haunt ortaya çıkarır, Prowler bir sonraki hamlede izi kovalar, Seize kaçış yolunu keser, takım o kaos içinde girer. Yetenekler arasında uzun boşluk bırakırsan düşman toparlanır, zincir kırılır ve her yetenek tek başına zayıf kalır.
+- **Recon bir ikilem aracı, tarama değil**: Recon'un işi sadece bilgi vermek değil — savunucuya imkânsız bir seçim dayatmak. Gözü vursun: o an entry yolundan bakışını çevirmek zorunda kalır. Görmezden gelsin: iz kalır, bot doğrudan pozisyonuna gider. Recon'u öyle bir yere koy ki, onu yok etmek savunucuyu entry açısından kopartsın. Duvara sektirdiğin recon, savunucuya hem zor bir açı hem de ödeme zorlayan bir karar verir.
+- **Bot üç modda çalışır**: (1) Kovalama: recon'un işaretlediği düşmana gönder, takım swing atmadan önce görüşünü daralt. En yüksek değer burada. (2) Temizleme: köşe, girinti ya da off-angle'a gönder, orada biri var mı kontrol et. Kuru peek atamadığın yerde kullan. (3) Bilgi: koridora gönder, kilitlenme sesini dinle. Kilitleniyorsa biri var, dolanıyorsa temiz. Bilgi modu en düşük değer — kovalama ya da temizleme uygunsa onu seç.
+- **Stun hareket tuzağı**: Stun öldürmez. Düşmanı yerinde tutar, takım da onu rahatça swing atar. En iyi yerler: dar açı tutan savunucu (artık jiggle yapamaz, çekilemez), spike üstü post-plant (defuse'u durdurur), choke'tan rotate etmeye çalışan oyuncu (açıkta yakalanır).
+- **Ult ekonomisi**: Ult 7 küre. Takımın birlikte gireceği silahlı turlarda at. Eko turda kullanma — takım düşük silahla iz ve sağırlıktan faydalanamaz. Force-buy'da tek istisna var: hasar düşürme 75 HP sıyırır, Spectre ve Marshal için düşmanı tek vuruşa getirir. Save turunda sakla. Ult, müsait olduğu silahlı turda yansın — biriktirme.
+- **Zincir hızı**: Recon ortaya çıkarır, bot bir sonraki hamlede izi kovalar, stun kaçış yolunu keser, takım o kaosun içine girer. Yetenekler arasında uzun boşluk bırakırsan düşman toparlanır, zincir kırılır, her yetenek tek başına zayıf kalır.
 
 ## 3. Sık Yapılan Hatalar
 
-- Haunt'ı site ortasına atmak: beş farklı açıdan anında vurulur. Duvara, tavana veya kapak arkasına at — yalnızca bir veya iki açıdan yok edilebilinsin ve yok etmek entry yolundan bakışı koparsın.
-- Haunt veya takım arkadaşından bilgi olmadan Prowler göndermek: hedefsiz Prowler rastgele dolanır, yetenek boşa gider. Önce Haunt at, iz çıksın, sonra Prowler'ı o ize gönder.
-- Seize'i açık alana atmak: düşman birkaç adım yürür, tether'dan çıkar. Seize, zaten bir pozisyona bağlanmış birine inmeli — açı tutan, spike defuse eden veya choke'ta sıkışmış.
-- Nightfall'ı savunmada push yavaşlatmak için yakmak: 7 kürelik ult'ü tek bir geciktirme aracı gibi kullanmak israftır. Nightfall savunucuları zayıflatıp takımın üzerlerine girmesi için var.
-- Yetenekleri arasında uzun boşluk bırakmak: tur başında Haunt, sonra çok bekleyip, Haunt'ın çoktan unutulduğu yere rastgele Prowler. O noktada düşman çoktan yeniden konumlanmıştır.
-- Haunt'ı çok yüksek yay ile atmak: gökyüzü tarar, düşmanın durduğu yeri değil. Haunt düz veya hafif aşağı yönlü gitmelidir — baş seviyesinde tarasın.
+- Recon'u site ortasına atma: beş ayrı açıdan anında vurulur. Duvara, tavana ya da kapak arkasına at — sadece bir iki açıdan vurulabilsin, vurmak da savunucunun entry yolundan bakışını koparsın.
+- Recon ya da takım arkadaşından bilgi gelmeden bot gönderme: hedefsiz bot rastgele dolanır, yetenek boşa gider. Önce recon at, iz çıksın, sonra botu o ize gönder.
+- Stun'u açık alana atma: düşman birkaç adım yürür, tuzaktan çıkar. Stun, zaten bir pozisyona bağlanmış birinin üstüne inmeli — açı tutana, spike defuse edene ya da choke'ta sıkışana.
+- Ult'u savunmada push yavaşlatmak için yakma: 7 kürelik ulttu tek bir geciktirme aracı gibi kullanmak resmen israf. Ult, savunucuları zayıflatıp takımın üstlerine girmesi için var.
+- Yetenekler arasında uzun boşluk bırakma: tur başında recon, sonra çok bekleyip recon'un çoktan unutulduğu yere rastgele bot atma. O noktada düşman çoktan yeniden konumlanmıştır.
+- Recon'u çok yüksek yayla atma: gökyüzünü tarar, düşmanın durduğu yeri değil. Recon düz ya da hafif aşağı yönlü gitmeli — baş hizasından tarasın.
 
 ## 4. Örüntü -> Anlam
 
-**IF** Haunt her seferinde taramasını bitirmeden vuruluyorsa
-**MEANING** Haunt'ın nereye ineceği belli olmuş. Düşmanlar iniş noktasını önceden nişan alıyor.
-**COUNTER** Haunt'ı duvara sektirilere farklı açıdan getir. Ascent A'da A main arka duvarından sektirilere generator arkasına düşür — vurmak için A short'tan 180 derece dönmek gerekir. Her iki turda bir iniş noktasını değiştir.
-**WHY** Beklenmedik açıdan gelen Haunt'ı vurmak için savunucu entry yolundan bakışını koparır — o an takıma giriş penceresi açılır.
+**IF** Recon her seferinde taramasını bitirmeden vuruluyorsa
+**MEANING** Recon'un nereye ineceği belli olmuş. Düşmanlar iniş noktasını önceden nişan alıyor.
+**COUNTER** Recon'u duvara sektirerek farklı bir açıdan getir. Ascent A'da A main arka duvarından sektirip generator arkasına düşür — vurmak için A short'tan 180 derece dönmek gerekir. Her iki turda bir iniş noktasını değiştir.
+**WHY** Beklenmedik açıdan gelen recon'u vurmak için savunucu entry yolundan bakışını koparmak zorunda kalır — o an takıma giriş penceresi açılır.
 
-**IF** Prowler bilgi olmadan gönderiliyorsa ve kimseyi yakalamıyorsa
-**MEANING** Prowler takip aracı değil, ilk temas aracı olarak kullanılıyor. Kovalama özelliği hedef olmadan çalışmaz.
-**COUNTER** Prowler'ı Haunt birini ortaya çıkardıktan, takım arkadaşı pozisyon bildirdikten veya koridorda ayak sesi duyduktan sonra gönder. Bilgin yoksa önce Haunt kullan.
-**WHY** Hedef varsa Prowler çok yüksek değer üretir; hedefsiz gönderilirse rastgele dolanır, sıfır etki.
+**IF** Bot bilgi olmadan gönderiliyor ve kimseyi yakalamıyorsa
+**MEANING** Botu takip aracı değil, ilk temas aracı gibi kullanıyorsun. Kovalama özelliği hedef olmadan çalışmaz.
+**COUNTER** Botu, recon birini ortaya çıkardıktan, takım arkadaşı pozisyon bildirdikten ya da koridorda ayak sesi duyduktan sonra gönder. Bilgin yoksa önce recon kullan.
+**WHY** Hedef varken bot çok yüksek değer üretir; hedefsiz gönderirsen rastgele dolanır, sıfır etki.
 
-**IF** Seize sürekli boş yere düşüyorsa
-**MEANING** Seize doğrulanmamış yerlere atılıyor. Bilgi olmadan Seize tahmindir.
-**COUNTER** Seize yalnızca doğrulanmış pozisyonlara at: Haunt'ın izlediği düşman, takım arkadaşının bildirdiği konum, ses ipucu. Ya da tahmin edilebilir sabit noktalara: post-plant'te spike, retake'te heaven açısı. Bilgin yoksa Seize atma.
-**WHY** Doğru yere inen Seize kaçış yolunu keser ve garantili swing fırsatı yaratır. Boş alana inen Seize sadece yetenek israfı.
+**IF** Stun sürekli boşa düşüyorsa
+**MEANING** Stun'u doğrulanmamış yerlere atıyorsun. Bilgi olmadan stun resmen tahmin.
+**COUNTER** Stun'u sadece doğrulanmış pozisyonlara at: recon'un işaretlediği düşman, takım arkadaşının bildirdiği konum, ses ipucu. Ya da tahmin edilebilir sabit noktalara: post-plant'te spike, retake'te heaven açısı. Bilgin yoksa stun atma.
+**WHY** Doğru yere inen stun kaçış yolunu keser ve garantili bir swing fırsatı yaratır. Boş alana inen stun düpedüz yetenek israfı.
 
-**IF** Yetenekler arası boşluk uzunsa ve teker teker atılıyorsa
-**MEANING** Zincir kurulmuyorsa Fade'in gücü kullanılmıyor. Haunt tek başına orta seviye, Haunt'tan Prowler'a güçlü, tam zincir yıkıcı. Ayrık yetenekler bu farkı ortadan kaldırır.
-**COUNTER** Şu sıralamayı pratik yap: Haunt at, bir beat bekle, ize doğru Prowler gönder, bir beat bekle, kaçış yoluna Seize at, takım girer. Toplam pencere üç ila beş beat. Bundan uzun sürüyorsa zincir çok yavaş.
-**WHY** Zincirlenmiş yetenekler üst üste binen etkiler yaratır: iz, nearsight, sabitleme. Savunucuya toparlanma zamanı vermez. Ayrık kullanımda her yetenek izole ve zayıf kalır.
+**IF** Yetenekler arası boşluk uzun ve teker teker atılıyorsa
+**MEANING** Zincir kurmuyorsan Fade'in gücünü kullanmıyorsun. Recon tek başına orta seviye, recon'dan bota geçiş güçlü, tam zincir yıkıcı. Ayrık yetenekler bu farkı yok eder.
+**COUNTER** Şu sıralamayı pratik et: recon at, bir an bekle, ize doğru bot gönder, bir an bekle, kaçış yoluna stun at, takım girsin. Toplam pencere üç ila beş saniye. Bundan uzun sürüyorsa zincir fazla yavaş.
+**WHY** Zincirlenmiş yetenekler üst üste binen etki yaratır: iz, görüş daralması, sabitleme. Savunucuya toparlanma vakti bırakmaz. Ayrık kullanırsan her yetenek tek başına kalır, zayıflar.
 
-**IF** Nightfall 20'den fazla turda kullanılmadan tutuluyorsa
-**MEANING** Ult takım execute'u yerine tek başına kurtarma için saklanıyor. Nightfall solo-carry aracı değil, takım aracı.
-**COUNTER** Nightfall'ı müsait olduğu ilk silahlı turda kullan. Takım girmeden önce duvar arkasından site'a at. Decay tek başına değer — iki veya üç savunucudan sıyırılan 75 HP, gövde vuruşlarıyla ölmelerini sağlar.
-**WHY** Nightfall'ın değeri takımın birlikte üzerine gidebildiği silahlı turlarda en yüksek. Biriktirmek, en çok işe yarayacağı turları kaçırmak demek.
+**IF** Ult 20'den fazla tur boyunca kullanılmadan tutuluyorsa
+**MEANING** Ultu takım execute'u yerine tek başına kurtarmaya saklıyorsun. Ult solo-carry aracı değil, takım aracı.
+**COUNTER** Ultu müsait olduğun ilk silahlı turda yak. Takım girmeden önce duvar arkasından site'a at. Hasar düşürme tek başına bile değer — iki üç savunucudan sıyırılan 75 HP, onları gövde vuruşlarıyla öldürür.
+**WHY** Ultun değeri, takımın birlikte üzerine gidebildiği silahlı turlarda en yüksek. Biriktirmek, en çok işe yarayacağı turları kaçırmak demek.
 
-**IF** Nightfall eko veya save turlarında kullanılıyorsa
-**MEANING** Takımın düşük silahlarla iz ve sağırlıktan faydalanamayacağı bir turda 7 küre yakılıyor.
-**COUNTER** Eko ve save turlarında Nightfall'ı sakla. Classic'lerle koşan takıma iz ve sağırlık işe yaramaz. İstisna: Spectre'lı force-buy turlarında decay, düşmanı tek vuruşa getirir — o durumda değer var.
-**WHY** Decay'in avantajı yalnızca takımın hasarı çıkaracak silahları olduğunda anlam taşır. Zayıf silahla debuff ölüme dönüşmez.
+**IF** Ult eko ya da save turlarında kullanılıyorsa
+**MEANING** Takımın düşük silahla iz ve sağırlıktan faydalanamayacağı bir turda 7 küre yakıyorsun.
+**COUNTER** Eko ve save turlarında ultu sakla. Classic'le koşan takıma iz ve sağırlık işe yaramaz. İstisna: Spectre'lı force-buy turunda hasar düşürme düşmanı tek vuruşa getirir — orada değer var.
+**WHY** Hasar düşürmenin avantajı, ancak takımın o hasarı çıkaracak silahı varsa anlam taşır. Zayıf silahla debuff ölüme dönüşmez.
 
-**IF** Haunt bilgisi ölüme yol açıyor ama takım site'a girmiyorsa
-**MEANING** Fade kullanılmayan bilgi topluyor. Takip olmayan bilgi israf.
-**COUNTER** Haunt atmadan önce takımın push'a hazır olduğunu doğrula. Haunt takım hâlâ toparlanırken atılan bir keşif değil, 'başlama' sinyali olmalı.
-**WHY** Fade'in döngüsü takım agresyonuna bağlı olarak çalışır. Takip yoksa reveal sadece düşmanı yeniden konumlandırır.
+**IF** Recon bilgi getiriyor, düşman da ölüyor ama takım site'a girmiyorsa
+**MEANING** Fade kullanılmayan bilgi topluyor. Takip gelmeyen bilgi israftır.
+**COUNTER** Recon atmadan önce takımın push'a hazır olduğunu doğrula. Recon, takım hâlâ toparlanırken atılan bir keşif değil, 'başla' sinyali olmalı.
+**WHY** Fade'in döngüsü takım agresyonuyla çalışır. Takip yoksa açtığın bilgi sadece düşmanı yeniden konumlandırır.
 
-**IF** Prowler nearsight veriyorsa ama hiç takım arkadaşı o anda swing atmıyorsa
-**MEANING** Takım Prowler'ın getirdiği avantajı kullanmıyor. Nearsight birkaç beat sürer — o pencerede kimse peek atmazsa yetenek hiçbir şey başaramaz.
-**COUNTER** Prowler bağlandığında 'Prowler vurdu, swing atın' de. Daha iyisi: Prowler'ı, bir takım arkadaşı zaten on-swing atacak şekilde zamanla.
-**WHY** Nearsight penceresi garantili bir avantaj anıdır. O anda kimse girmezse fırsat tamamen boşa gider.
+**IF** Bot görüşü daraltıyor ama o anda kimse swing atmıyorsa
+**MEANING** Takım botun açtığı avantajı kullanmıyor. Görüş daralması birkaç saniye sürer — o pencerede kimse peek atmazsa yetenek hiçbir şey başaramaz.
+**COUNTER** Bot bağlandığında 'bot vurdu, swing atın' de. Daha iyisi: botu, bir takım arkadaşın zaten swing'in tam üstündeyken at, vuruşla aynı ana denk gelsin.
+**WHY** Görüş daralması penceresi garantili bir avantaj anıdır. O anda kimse girmezse fırsat tamamen boşa gider.
 
-**IF** Fade açılış kill'i alıyor ama takip frag gelmiyor
-**MEANING** Zincir çalışıyor ama takım trade yapmıyor. Fade'in kit'i pencere açar, kill değil. O pencereden girilmesi gerekiyor.
-**COUNTER** Tur öncesinde takıma şunu anlat: 'Haunt önce gider, Prowler takip eder, Prowler bağlandığını duyunca push yapın.' Takım girmezse zincirin değeri sıfıra düşer.
-**WHY** Fade tek başına öldürme makinesi değil. Kit düşmanın savunmasını bozar, bozan savunmayı yalnızca giren takım avantaja çevirir.
+**IF** Fade açılış kill'i alıyor ama takip frag gelmiyorsa
+**MEANING** Zincir çalışıyor ama takım trade yapmıyor. Fade'in kiti pencere açar, kill değil. O pencereden girilmesi gerekir.
+**COUNTER** Tur öncesi takıma net söyle: 'Recon önce gider, bot takip eder, botun bağlandığını duyunca push yapın.' Takım girmezse zincirin değeri sıfıra düşer.
+**WHY** Fade tek başına öldürme makinesi değil. Kit düşmanın savunmasını bozar, bozulan savunmayı sadece giren takım avantaja çevirir.
 
-**IF** Düşmanlar Fade'in zinciri kurmadan önce onu öldürüyorsa
-**MEANING** Fade temas noktasına çok yakın duruyor. Ön cepheden değil, bir adım geride zincirleme yapması gerekiyor.
-**COUNTER** Fade kapıdan giren ilk gövde değildir. Haunt ve Prowler'ı kapak arkasından at, takım ilk teması aldıktan sonra gir. Prowler inmeden ölürsen zincir kırılır.
-**WHY** Fade'in değeri yetenekleri güvenli mesafeden atabilmesindedir. Ön cephede ölürse zinciri bitiremez, takım hem bilgi hem oyuncu kaybeder.
+**IF** Düşmanlar Fade'i zincirini kurmadan önce öldürüyorsa
+**MEANING** Fade temas noktasına fazla yakın duruyor. Ön cepheden değil, bir adım geriden zincir kurmalı.
+**COUNTER** Fade kapıdan giren ilk gövde değildir. Recon ve botu kapak arkasından at, takım ilk teması aldıktan sonra gir. Bot inmeden ölürsen zincir kırılır.
+**WHY** Fade'in değeri yeteneklerini güvenli mesafeden atabilmesinde. Ön cephede ölürse zincirini bitiremez, takım hem bilgiyi hem oyuncuyu kaybeder.
 
 **IF** Fade aynı takımda Sova ile birlikte seçiliyorsa
-**MEANING** Çakışan bilgi rolleri. İkisi de ortaya çıkarır ama hiçbiri flash vermez. Takım bilgi dolu, flash yoksul.
-**COUNTER** Takım her ikisine de ihtiyaç duyuyorsa biri flash initiator (Skye, KAY/O, Gekko) ile değiştirilmeli. İstisna: Breeze veya Lotus'ta çift bilgi kompozisyonunun bilinçli seçildiği ve duelist'ten flash kapsamının sağlandığı özel yapılar.
-**WHY** Çift bilgi initiator takımı flash'sız bırakır, savunucuların peek'lere karşı cevap bulmasını kolaylaştırır ve execute'ları zayıflatır.
+**MEANING** Bilgi rolleri çakışıyor. İkisi de ortaya çıkarır ama hiçbiri flash vermez. Takım bilgi dolu, flash yoksul.
+**COUNTER** Takımın ikisine birden ihtiyacı yoksa biri flash veren bir initiatorla (Skye, KAY/O, Gekko) değiştirilmeli. İstisna: Breeze ya da Lotus'ta çift bilgi kompozisyonunun bilinçli seçildiği ve flash'ın duelist'ten geldiği özel yapılar.
+**WHY** Çift bilgi initiatorlü takım flash'sız kalır, savunucuların peek'lere cevap vermesi kolaylaşır, execute'lar zayıflar.
 
-**IF** Seize post-plant'te kullanılıyor ama düşman içinden defuse ediyorsa
-**MEANING** Seize spike'ın tam üzerine değil yakınına iniyor. Düşman tether dışında kalarak spike menzilinin kenarından defuse edebiliyor.
-**COUNTER** Seize doğrudan spike modelinin üzerine inmeli. Küçük bir sapma bile düşmanın tether dışında defuse etmesine izin verir. Ayrıca defuse açısını oku — düşmanın duracağı noktaya at, spike'ın etrafındaki defuse çizgisine. Radiant'lar bunu uygular: spike üzerine değil, düşmanın defuse için duracağı spesifik noktaya Seize atar.
-**WHY** Spike üzerine tam yerleşim, defuse eden oyuncunun tether'dan kaçınmasını imkânsız kılar ve defuse'u tamamen engeller ya da hasarla cezalandırır.
+**IF** Stun post-plant'te atılıyor ama düşman içinden defuse edebiliyorsa
+**MEANING** Stun spike'ın tam üstüne değil yakınına iniyor. Düşman tuzağın dışında kalıp spike menzilinin kenarından defuse ediyor.
+**COUNTER** Stun doğrudan spike modelinin üstüne inmeli. Küçük bir sapma bile düşmanın tuzağın dışından defuse etmesine izin verir. Bir de defuse açısını oku — düşmanın duracağı noktaya, spike etrafındaki defuse çizgisine at. Radiantlar tam bunu yapar: spike'ın üstüne değil, düşmanın defuse için duracağı o spesifik noktaya stun atar.
+**WHY** Spike'ın tam üstüne yerleşim, defuse eden oyuncunun tuzaktan kaçınmasını imkânsız kılar; defuse'u ya tamamen engeller ya da hasarla cezalandırır.
 
 ## 5. Harita Etkileşimleri
 
-- **Lotus (S-tier)**: Fade'in en güçlü haritası. C main: Haunt'ı C main içindeki duvara sektirilere tepenin arkasına düşür — site savunucusunu push'a karşı bakışını kesmek için yok etmeye zorlar. C main'den Prowler neredeyse kaçınılmazdır çünkü koridorda yan yol yoktur. Dönen kapıda Seize, rotate etmeye çalışanı yakalar. A site: A moloz üzerinden Haunt, ağaç-odası ve arka-site'i aynı anda tarar. A root'ta Seize, root tutucusunu tether yemek ya da pozisyonu bırakmak arasında seçime zorlar. B main'den Nightfall, sütun bölgesini, üstü ve altı tek atışta kapatır. Üç site yapısında Fade'in hızlı döngüsü Sova'nın lineup'a bağımlı yaklaşımını geçer.
+- **Lotus (S-tier)**: Fade'in en güçlü haritası. C main: recon'u C main içindeki duvara sektirip tepenin arkasına düşür — site savunucusu, push'a karşı bakışını kesip recon'u yok etmek zorunda kalır. C main'den bot neredeyse kaçınılmaz, çünkü koridorda yan yol yok. Dönen kapıda stun, rotate etmeye çalışanı yakalar. A site: A moloz üstünden recon, ağaç-odasını ve arka-site'ı aynı anda tarar. A root'ta stun, root tutucusunu ya tuzağı yemekle ya da pozisyonu bırakmakla baş başa bırakır. B main'den ult, sütun bölgesini, üstü ve altı tek atışta kapatır. Üç siteli yapıda Fade'in hızlı döngüsü, Sova'nın lineup'a bağımlı yaklaşımını geride bırakır.
 
-- **Pearl (S-tier)**: B main'den B site'a Haunt, heaven, site ve arka connector'ü aynı anda tarar. B'nin etrafındaki dikey duvarlar Haunt'a tek açıdan vurulabileceği mükemmel noktalar verir. B main choke'ta Seize, savunucuyu dar koridorda kilitler — duvarlar yana adım atmayı engeller. A site: A art'tan Haunt derin A ve connector'ü tarar, A main'den Prowler yakın girintiyi temizler. Ortadan Nightfall, A connector ve B link'i kapatır, rotate edenleri keser. Pearl'ün dikey geometrisi Haunt duvar sekmelerini diğer haritalara kıyasla çok daha çeşitli kılar.
+- **Pearl (S-tier)**: B main'den B site'a recon, heaven'ı, site'ı ve arka connector'ü aynı anda tarar. B'nin etrafındaki dikey duvarlar, recon'a sadece tek açıdan vurulabilen mükemmel noktalar verir. B main choke'ta stun, savunucuyu dar koridorda kilitler — duvarlar yana adım atmasını engeller. A site: A art'tan recon derin A'yı ve connector'ü tarar, A main'den bot yakın girintiyi temizler. Ortadan ult, A connector ile B link'i kapatır, rotate edenleri keser. Pearl'ün dikey geometrisi, recon'un duvar sekmelerini diğer haritalara göre çok daha çeşitli kılar.
 
-- **Ascent (A-tier)**: A site: A main arka duvarına sektirilmiş Haunt, generator arkasına düşer — heaven veya short'tan vurmak zor, ama tüm site taranır. A main'den Prowler, hell girintisini ve wine köşesini temizler. Varsayılan A plant'ta Seize, post-plant'te heaven tutucusunu engeller. B site: B main duvarı üzerinden Haunt, market, şerit ve arka-site'ı tarar. Market'ten Prowler, kapı arkasında güvende sanan rotate edeni yakalar. Bottom-mid'den Nightfall, catwalk, market penceresi ve orta-avluyu kapatır. Ascent, uzun A-short sightline'ı savunucuların Haunt'ı değer üretmeden vurmasına izin verdiği için S-tier'ın biraz altında.
+- **Ascent (A-tier)**: A site: A main arka duvarına sektirilen recon generator arkasına düşer — heaven ya da short'tan vurmak zor ama tüm site taranır. A main'den bot, hell girintisini ve wine köşesini temizler. Standart A plant'ta stun, post-plant'te heaven tutucusunu engeller. B site: B main duvarı üstünden recon, market'i, şeridi ve arka-site'ı tarar. Market'ten bot, kapı arkasında güvende sanan rotate edeni yakalar. Bottom-mid'den ult, catwalk'u, market penceresini ve orta-avluyu kapatır. Ascent, uzun A-short sightline'ı savunuculara recon'u değer üretmeden vurma şansı verdiği için S-tier'ın bir tık altında.
 
-- **Split (A-tier)**: Dar choke'lar Prowler'ı çok güçlü yapar. A main: Rampadan yukarı Prowler, yakın açıyı tutan herkesi nearsight yemek ya da site'a çekilmek arasında bırakır. A ramp'ta Seize, heaven oyuncusunu kilitler — aşağı atlayamaz, geri çekilemez. B site: B main'den Prowler yakın solu temizler ve arka-site tutanını tepki vermeye zorlar. Ortadan duvar üzerinden Haunt, B heaven ve site'ı aynı anda tarar. A veya B main'den Nightfall, choke ve giriş bölgesinin tamamını kapatır. Split'in dar koridorları Prowler için oyunun en iyi ortamı — kaçacak yer yok.
+- **Split (A-tier)**: Dar choke'lar botu çok güçlü kılar. A main: rampadan yukarı bot, yakın açıyı tutan herkesi ya görüş daralmasını yemekle ya da site'a çekilmekle baş başa bırakır. A ramp'ta stun, heaven oyuncusunu kilitler — ne aşağı atlayabilir ne geri çekilebilir. B site: B main'den bot yakın solu temizler ve arka-site tutanı tepki vermeye zorlar. Ortadan duvar üstünden recon, B heaven'ı ve site'ı aynı anda tarar. A ya da B main'den ult, choke'u ve giriş bölgesinin tamamını kapatır. Split'in dar koridorları bot için oyunun en iyi ortamı — kaçacak yer yok.
 
-- **Bind (A-tier)**: Hookah'tan Haunt, B site, garden ve arka-site'ı tarar. Hookah'tan Prowler güçlü bir temizleme aracı — düşüş bağlanma zorunluluğu yaratır. A'da teleporter çıkışında Seize, gelen rotate edenleri yakalar. A short: A short duvarı üzerinden Haunt, lamps, heaven ve U-hall'u tarar. Teleporter'dan gönderilen Haunt, varış noktasında ses uyarısı olmadan gelir — savunucu hazırlanamaz. A lobby'den duvar arkasından Nightfall, showers ve A site'ı kapatır.
+- **Bind (A-tier)**: Hookah'tan recon, B site'ı, garden'ı ve arka-site'ı tarar. Hookah'tan bot güçlü bir temizleme aracı — düşüş, düşmana bağlanma zorunluluğu dayatır. A'da teleporter çıkışında stun, gelen rotate edenleri yakalar. A short: A short duvarı üstünden recon, lamps'ı, heaven'ı ve U-hall'u tarar. Teleporter'dan gönderilen recon, varış noktasında ses uyarısı olmadan gelir — savunucu hazırlanamaz. A lobby'den duvar arkasından ult, showers'ı ve A site'ı kapatır.
 
-- **Haven (B-tier)**: Üç site Fade'in değerini seyreltir — tek site'ta zincir kuracak kadar hızlı rotate'lar arasında yetenekleri zamanlamak zor. C site: C long'dan duvar üzerinden Haunt, platform ve arka-site'ı tarar. A site: A long'dan Haunt, heaven, hell ve site'ı tarar. A short savunucusuna Seize, dar koridorda kilitler. B site: dar pencere choke'u Haunt ve Seize değerini sınırlar. Garajdan B veya C'ye Nightfall, Haven'ın az sayıdaki güçlü Fade ult çizgisinden biri. Sova, tek pozisyondan üç siteyi da tarayabileceği için burada daha fazla değer üretir.
+- **Haven (B-tier)**: Üç site Fade'in değerini seyreltir — tek site'ta zincir kuracak kadar hızlı rotate'ler arasında yetenekleri zamanlamak zor. C site: C long'dan duvar üstünden recon, platformu ve arka-site'ı tarar. A site: A long'dan recon, heaven'ı, hell'i ve site'ı tarar. A short savunucusuna stun, dar koridorda kilitler. B site: dar pencere choke'u recon ve stun değerini sınırlar. Garajdan B ya da C'ye ult, Haven'ın az sayıdaki güçlü Fade ult çizgisinden biri. Sova, tek pozisyondan üç siteyi de tarayabildiği için burada daha fazla değer üretir.
 
-- **Breeze (B-tier)**: Açık alanlar Prowler'ı zayıflatır — düşman yana adım atarak kovalamadan kaçar. A site: Piramit üzerinden Haunt, cave ve arka-site'ı tarar. Piramit'te Seize, tutucuyu güç pozisyonunu bırakmaya zorlar. B site: B duvarı üzerinden Haunt, sütun, arka-site ve tube çıkışını tarar. Tube'dan Prowler işe yarar ama uzun B main düşmanlara tepki zamanı verir. Ortadan A hall veya B tünel'den Nightfall, koridor uzunluğu sayesinde güçlü çalışır. Breeze'de Sova tercih et — açık alanlarda recon dart Haunt'tan daha büyük alan tarar ve lineup menzili fark yaratır.
+- **Breeze (B-tier)**: Açık alanlar botu zayıflatır — düşman yana adım atarak kovalamadan kaçar. A site: piramit üstünden recon, cave'i ve arka-site'ı tarar. Piramit'te stun, tutucuyu güç pozisyonunu bırakmaya zorlar. B site: B duvarı üstünden recon, sütunu, arka-site'ı ve tube çıkışını tarar. Tube'dan bot işe yarar ama uzun B main düşmana tepki süresi verir. Ortadan A hall ya da B tünel'den ult, koridor uzunluğu sayesinde güçlü çalışır. Breeze'de Sova tercih et — açık alanda recon dart, recon'dan daha geniş alan tarar ve lineup menzili fark yaratır.
 
 ## 6. Eşleşme Notları
 
-- **Omen'e karşı**: Haunt, Shrouded Step sonrasında bile Omen'i ortaya çıkarır ve korku izi yeni pozisyonunu takip eder. Prowler, smoke içinden Omen'i kovalar. Fade, Omen'in yer değiştirme hilesini iz ile geçersiz kıldığı için güçlü bir karşılık.
-- **Chamber'a karşı**: Seize, Chamber'ın Rendezvous ile kaçmasını engeller. Agresif açı tutan Chamber'a Seize inerse kaçamaz — takım onu bedavaya swing atar. Fade'in en yüksek değerli eşleşmelerinden biri.
-- **Killjoy'a karşı**: Prowler, alarmbot ve turret'i tetikler, takım girmeden önce Killjoy araçlarını temizler. Haunt, turret yerleşimini ortaya çıkarır. Fade, Prowler ile Killjoy ekosistemini gövde yerine direkt counter eder.
-- **Cypher'a karşı**: Prowler tripwire'ları tetikler, risksiz temizler. Haunt kamera pozisyonlarını ortaya çıkarır. Fade'in temizleme döngüsü Cypher'ın tuzak ağını sistematik olarak söker.
-- **Jett'e karşı**: Jett, tether kilitlenmeden önce dash yaparsa Seize'den kaçar. Jett'e karşı Seize'i mevcut pozisyonuna değil, dash varışlarına tahminsel olarak at.
-- **Fade vs. Sova**: Sova, recon dart lineup'ları ve owl drone ile daha uzun menzilli, daha hassas bilgi verir. Fade, doğrudan dövüşe bağlanan daha hızlı, daha yakın menzilli bilgi verir. Breeze ve Haven gibi açık haritalarda Sova daha iyi. Split, Lotus, Pearl gibi dar haritalarda Fade daha iyi. Sova'nın bilgisi daha güvenilir — recon dart yalnızca yok edilebilir. Fade'in bilgisi daha cezalandırıcı — iz ve nearsight birleşimi tek başına recon etiketinden çok daha sert bir baskı uygular. Takım yavaş default oynuyorsa Sova. Takım hızlı execute oynuyorsa Fade. Çoğu haritada birini seç — ikisini birden almak flash ajanın dolduracağı slotu boşa harcar.
-- **Flash ajanlarıyla (Skye, KAY/O, Gekko)**: Fade ortaya çıkarır, flash ajanı kör eder, takım girer. Reveal'dan flash'a sıra, savunuculara üst üste binen baskı uygular — her iki yeteneği ayrı ayrı kullanmaktan çok daha güçlü. Lotus veya Pearl'de Fade ile Skye, oyunun en güçlü initiator ikililerinden biri.
+- **Omen'e karşı**: Recon, Omen kaçışını kullanıp yer değiştirse bile onu ortaya çıkarır ve korku izi yeni pozisyonunu takip eder. Bot, smoke içinden Omen'i kovalar. Fade, Omen'in yer değiştirme hilesini izle geçersiz kıldığı için güçlü bir karşılık.
+- **Chamber'a karşı**: Stun, Chamber'ın kaçışıyla sıyrılmasını engeller. Agresif açı tutan Chamber'a stun inerse kaçamaz — takım onu bedavaya swing atar. Fade'in en yüksek değerli eşleşmelerinden biri.
+- **Killjoy'a karşı**: Bot, botunu ve turret'ini tetikler, takım girmeden önce Killjoy araçlarını temizler. Recon, turret yerleşimini ortaya çıkarır. Fade, botuyla Killjoy ekosistemini gövde harcamadan doğrudan counter eder.
+- **Cypher'a karşı**: Bot, teli tetikler, risksiz temizler. Recon, kamera pozisyonlarını ortaya çıkarır. Fade'in temizleme döngüsü, Cypher'ın tuzak ağını sistematik söker.
+- **Jett'e karşı**: Jett, stun kilitlenmeden önce dash atarsa stun'dan kaçar. Jett'e karşı stun'u mevcut pozisyonuna değil, dash varış noktasına tahminle at.
+- **Fade vs. Sova**: Sova, recon dart lineup'ları ve recon droneuyla daha uzun menzilli, daha hassas bilgi verir. Fade, doğrudan dövüşe bağlanan daha hızlı, daha yakın menzilli bilgi verir. Breeze ve Haven gibi açık haritalarda Sova daha iyi. Split, Lotus, Pearl gibi dar haritalarda Fade daha iyi. Sova'nın bilgisi daha güvenilir — recon dart'ı sadece yok edilebilir. Fade'in bilgisi daha cezalandırıcı — iz ve görüş daralması birleşimi, tek başına recon etiketinden çok daha sert bir baskı uygular. Takım yavaş default oynuyorsa Sova al. Takım hızlı execute oynuyorsa Fade al. Çoğu haritada birini seç — ikisini birden almak, flash ajanının dolduracağı slotu boşa harcar.
+- **Flash ajanlarıyla (Skye, KAY/O, Gekko)**: Fade ortaya çıkarır, flash ajanı kör eder, takım girer. Önce reveal sonra flash sıralaması, savunuculara üst üste binen baskı uygular — her iki yeteneği ayrı ayrı kullanmaktan çok daha güçlü. Lotus ya da Pearl'de Fade ile Skye, oyunun en güçlü initiator ikililerinden biri.
 
 ## 7. Oyuncuya Ne Söylenmeli
 
 ### İyi performans gösterirken
-**Oyuncu Eylemi:** Haunt'ı Prowler'a, Prowler'ı Seize'e üç ila beş beat içinde zincirliyor, Haunt'ı savunucunun entry yolundan bakışını koparacağı yere yerleştiriyorsun. Nightfall'ı silahlı turlarda kullanıyor, eko'larda saklıyorsun.
-**Düşman Algısı:** Haunt sesini duyuyorlar ve imkânsız bir seçimle karşılaşıyorlar: gözü vur ve entry açısını bırak, ya da bırak ve ize giren Prowler'ı ye. Fade'in kit'ini sıkılaşan bir tuzak gibi hissediyorlar — her yetenek bir öncekinin cezasını üstüne koyuyor.
-**Düşman Tepkisi:** Haunt'ı vurmak entry açısında kayıp demek. Haunt'ı bırakmak Prowler'ı iz üzerinden doğrudan pozisyona çeker. Prowler'dan kaçmak Seize'e yönlendirir. Tam zincir birkaç beat içinde görüşü, hareketi ve konumlanmayı devre dışı bırakır.
-**Faydalanma Penceresi:** Prowler bağlandığında swing zamanı — o an garantili avantaj. Seize de inmişse, o savunucu sabit hedef. Prowler bağlandığında 'swing atın' de.
-**Tekrar Stratejisi:** 1-2. tur: A açısından duvara sekme Haunt, ize Prowler, kaçış yoluna Seize. 3. tur: karşı taraftan Haunt, yeniden konumlananları yakala. 4. tur: Haunt'ı atla, Prowler'ı ham gönder — Haunt sesini bekleyen savunucu uyarısız Prowler'a yakalanır. 5. tur ve sonrası: duvar arkasından Nightfall, sonra standart zincir.
-**Düşman Adaptasyonu:** Birkaç tur sonra savunucular Haunt iniş noktalarını önceden nişan alır, Seize menzilinden kaçınmak için daha derine oynar ya da zincir kurmadan önce push yaparak yakın mesafede dövüşür.
-**Karşı-Adaptasyon:** Önceden nişan alıyorlarsa: duvara sektirilere gözün son ana kadar gizlendiği farklı açılar kullan veya her tur farklı noktadan at. Derin oynuyorlarsa: önce Seize'i derin pozisyona at, sabitlenen düşmanın üzerine Haunt. Erken push yaparlarsa: Prowler'ı nearsight için gönder, kör koşuculara collapse yap.
+**Oyuncu Eylemi:** Recon'u bota, botu stun'a üç ila beş saniye içinde zincirliyorsun, recon'u da savunucunun entry yolundan bakışını koparacağı yere koyuyorsun. Ultu silahlı turlarda yakıyor, eko'larda saklıyorsun.
+**Düşman Algısı:** Recon sesini duyuyor ve imkânsız bir seçimle yüzleşiyorlar: gözü vur, entry açısını bırak; ya da bırak, ize giren botu ye. Fade'in kitini sıkılaşan bir tuzak gibi hissediyorlar — her yetenek bir öncekinin cezasını üstüne koyuyor.
+**Düşman Tepkisi:** Recon'u vurmak entry açısında kayıp demek. Recon'u bırakmak, botu iz üzerinden doğrudan pozisyona çeker. Bottan kaçmak stun'a yönlendirir. Tam zincir birkaç saniyede görüşü, hareketi ve konumlanmayı devre dışı bırakır.
+**Faydalanma Penceresi:** Bot bağlandığında swing zamanı — o an garantili avantaj. Stun da inmişse o savunucu sabit hedef. Bot bağlandığında 'swing atın' de.
+**Tekrar Stratejisi:** 1-2. tur: A açısından duvara sekme recon, ize bot, kaçış yoluna stun. 3. tur: karşı taraftan recon, yeniden konumlananları yakala. 4. tur: recon'u atla, botu ham gönder — recon sesini bekleyen savunucu uyarısız bota yakalanır. 5. tur ve sonrası: duvar arkasından ult, ardından standart zincir.
+**Düşman Adaptasyonu:** Birkaç tur sonra savunucular recon iniş noktalarını önceden nişan alır, stun menzilinden kaçmak için daha derine oynar ya da sen zincir kurmadan push yapıp yakın mesafede dövüşür.
+**Karşı-Adaptasyon:** Önceden nişan alıyorlarsa: duvara sektirip gözün son ana kadar gizlendiği farklı açılar kullan ya da her tur farklı noktadan at. Derine oynuyorlarsa: önce stun'u derin pozisyona at, sabitlenen düşmanın üstüne recon getir. Erken push yapıyorlarsa: botu görüş daralması için gönder, kör koşuculara takımca yüklen.
 
-**Zorlanırken:** Yeteneklerin bağlantısız. Haunt çıkıyor, çok bekliyorsun, rastgele Prowler geliyor. Şunu yap: Haunt at, bir beat bekle, ize Prowler gönder, bir beat bekle, kaçış yoluna Seize at, takım girer. Toplam üç ila beş beat. Bundan yavaşsan düşman toparlanır, yetenekler hiçbir şey başaramaz.
+**Zorlanırken:** Yeteneklerin bağlantısız. Recon çıkıyor, çok bekliyorsun, sonra rastgele bot geliyor. Şunu yap: recon at, bir an bekle, ize bot gönder, bir an bekle, kaçış yoluna stun at, takım girsin. Toplam üç ila beş saniye. Bundan yavaşsan düşman toparlanır, yeteneklerin hiçbir şey başaramaz.
 
-**Tahmin edilebilir olunca:** Düşmanlar Haunt noktalarını önceden nişan alıyor, tarama bitmeden gözü yok ediyorlar. Farklı bir açıdan duvara sektirilere at, yeni pozisyondan at ya da kalıbı kırmak için Haunt'ı tamamen atla ve Prowler'ı ham gönder.
+**Tahmin edilebilir olunca:** Düşmanlar recon noktalarını önceden nişan alıyor, tarama bitmeden gözü yok ediyor. Farklı bir açıdan duvara sektir, yeni pozisyondan at ya da kalıbı kırmak için recon'u tamamen atla ve botu ham gönder.
 
 ## 8. Rank Modülasyonu
 
-**Düşük (Iron-Silver):** Haunt yerleştirmesine bak — düşmanın durduğu yere gerçekten insin, gökyüzünü tarayan yüksek yay atma, düz veya hafif aşağı at. Prowler'ı koridorlarda basit bir köşe kontrolü için kullan. Spike dikildikten sonra post-plant'te spike üzerine Seize at. Nightfall'ı takım bir site'a girerken kullan.
+**Düşük (Iron-Silver):** Recon yerleşimine bak — düşmanın durduğu yere gerçekten insin, gökyüzünü tarayan yüksek yay atma, düz ya da hafif aşağı at. Botu koridorlarda basit bir köşe kontrolü için kullan. Spike dikildikten sonra post-plant'te spike'ın üstüne stun at. Ultu takım site'a girerken yak.
 
-**Orta (Gold-Platinum):** Haunt'tan Prowler'a zinciri başlat. Haunt at, bir beat bekle, ize Prowler gönder. En çok oynadığın haritalarda site başına iki duvar sekmesi Haunt noktası öğren. Seize'i tahminlere değil, Haunt'ın izlediği doğrulanmış pozisyonlara at. Nightfall'ı yalnızca silahlı turlar için saklamaya başla.
+**Orta (Gold-Platinum):** Recon'dan bota zinciri başlat. Recon at, bir an bekle, ize bot gönder. En çok oynadığın haritalarda site başına iki duvar sekmesi recon noktası öğren. Stun'u tahmine değil, recon'un işaretlediği doğrulanmış pozisyona at. Ultu yalnızca silahlı turlara saklamaya başla.
 
-**Yüksek (Diamond-Ascendant):** Her execute'ta tam zincir, üç ila beş beat. Düşmanların önceden nişan alamayacağı çeşitli duvar sekmesi Haunt açıları. Post-plant'te spike üzerine ve retake'te belirli açılara Seize. Nightfall takım push başlayınca ateşlenir, öncesinde değil. Kuru peek atılamayan off-angle'lar için temizleme modunda Prowler.
+**Yüksek (Diamond-Ascendant):** Her execute'ta tam zincir, üç ila beş saniye. Düşmanların önceden nişan alamayacağı çeşitli duvar sekmesi recon açıları. Post-plant'te spike'ın üstüne, retake'te belirli açılara stun. Ult, takım push'u başlayınca yansın, öncesinde değil. Kuru peek atılamayan off-angle'lar için temizleme modunda bot.
 
-**Elit (Immortal-Radiant):** Her tur Haunt açısını savunucunun bir önceki turda nerede oynadığına göre uyarla. Seize'i belirli oyuncu alışkanlıklarını hedef al — her zaman agresif tutan Chamber, aynı noktaya dash yapan Jett. Savunucunun dayandığı ses kalıbını kırmak için belirli turlarda Prowler'ı ham gönder. Nightfall ekonomisi katı: yalnızca silahlı turlar ve decay HP matematığini takımın lehine çevirdiği force-buy'lar. Bu rankta Fade'in değeri zincir hızı ve öngörülemezlikte — zincirin kendisi beklenir ama açı ve zamanlama hiçbir zaman iki kez aynı olmasın. Seize'i spike modelinin üzerine değil, düşmanın defuse için duracağı spesifik noktaya at — küçük sapma bile tether dışında defuse ettirir.
+**Elit (Immortal-Radiant):** Her tur recon açısını, savunucunun bir önceki turda nerede oynadığına göre uyarla. Stun'u belirli oyuncu alışkanlıklarına yönelt — hep agresif tutan Chamber, hep aynı noktaya dash atan Jett. Savunucunun yaslandığı ses kalıbını kırmak için belirli turlarda botu ham gönder. Ult ekonomisi katı: yalnızca silahlı turlar ve hasar düşürme HP matematiğini takım lehine çeviren force-buy'lar. Bu rankta Fade'in değeri zincir hızı ve öngörülemezlikte — zincirin kendisi beklenir ama açı ve zamanlama asla iki kez aynı olmasın. Stun'u spike modelinin üstüne değil, düşmanın defuse için duracağı o spesifik noktaya at — küçük bir sapma bile tuzak dışından defuse ettirir.

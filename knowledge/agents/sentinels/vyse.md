@@ -1,105 +1,105 @@
 # AJAN: Vyse
 
 ## 1. Rol Kimliği
-Vyse tuzaklarla alan kontrol eden bir sentinel. Killjoy hasar verip geciktirir, Cypher bilgi toplar — Vyse bunların ikisini birden yapar ama farklı şekilde: düşmanın görmesini engeller, geçerse hasar verir, yeteneğini kullanmasını keser. Tuzakları kapılarda, dar koridorlarda ve köşelerde en güçlü çünkü düşmanın etrafından dolaşma şansı yok. Arc Rose'un en büyük farkı şu: sen bir şey yapmana gerek yok, düşman yaklaşınca kendisi açılıyor.
+Vyse tuzaklarla alan kapatan bir sentinel. Killjoy hasar verip geciktirir, Cypher bilgi toplar — Vyse ikisini birden yapar ama kendi tarzında: düşmanın görmesini engeller, geçerse hasar verir, yeteneğini kullanmasını keser. Tuzaklarını kapılarda, dar koridorlarda ve köşelerde kur — orada düşmanın etrafından dolaşma şansı yoktur. En büyük gücün şu: smoke tuzağına bakmana gerek yok, düşman yaklaşınca kendi kendine açılır.
 
 ## 2. Yetenek Seti
-- **Shear (Q)** — 250 kredi, 1 şarj. Metalik alan yarat, kısa gecikme sonrası içindeki düşmanlara hasar ver ve pozisyonlarını ele ver. Retake'te düşmanı bulmak için at, köşe temizlemek için at.
-- **Arc Rose (E)** — Bedava, toplanabilir. Dar koridor veya kapı girişine göm. Düşman yaklaştığında kendiliğinden duman açar — sen bakmak zorunda değilsin. Kullandıktan sonra geri topla, başka yere göm.
-- **Razorvine (C)** — 200 kredi, 2 şarj. Geçen düşmana hasar veren asma duvarı. Ses çıkarır — nereden geldiğini anlarsın. İki şarj var, iki farklı giriş yolunu kapat.
-- **Steel Garden (X)** — 8 ult puanı. Geniş alana metalik flora yayar. İçindeki düşmanlar yetenek kullanamaz, görüşleri bozulur. KAY/O'nun knife'ı gibi yetenek keser ama seninki sabit bir bölge — adam oradan çıkmazsa yetenek kullanamaz.
+- **Hasar Tuzağı (Q)** — 250 kredi, 1 şarj. Metal bir alan yarat; kısa gecikmeden sonra içindeki düşmanlara hasar verir ve pozisyonlarını ele verir. Retake'te at, düşmanın yerini öğren; köşeyi temizlemek için at.
+- **Smoke Tuzağı (E)** — bedava, geri toplanabilir. Dar koridora veya kapı girişine göm. Düşman yaklaşınca kendiliğinden smoke açar — bakmak zorunda değilsin. Kullandıktan sonra geri topla, başka yere göm.
+- **Hasar Duvarı (C)** — 200 kredi, 2 şarj. Geçen düşmana hasar veren dikenli duvar. Ses çıkarır, nereden geldiğini anında anlarsın. İki şarjın var, iki ayrı giriş yolunu kapat.
+- **Ult (X)** — 8 ult puanı. Geniş bir alana metal flora yayar. İçindeki düşman yetenek kullanamaz, görüşü bozulur. KAY/O'nun yetenek kesmesi gibi düşünebilirsin ama bu sabit bir bölge — adam oradan çıkmazsa hiçbir yeteneğini kullanamaz.
 
 ## 3. Temel Sorumluluklar
-- **İki Razorvine'ı iki ayrı giriş yoluna göm**: İkisini aynı yere koyma. Düşman geçince hasar alır, ses çıkar, anında anlarsın nereden geldiğini.
-- **Arc Rose'u düşmanın geçmek zorunda olduğu yere koy**: Hookah girişi, ramp, dar koridor — açık alana koyma, düşman etrafından döner ve hiç açılmaz.
-- **Shear'ı retake'te kullan**: Spike'a geri girerken önce Shear at. Düşman nerede duruyorsa ele verir, kör girme.
-- **Steel Garden'ı düşman geri almaya başlamadan önce aç**: Spike dikildikten hemen sonra, geri alış başlamadan. Açarsan düşman yetenek kullanamadan geri almak zorunda kalır.
-- **Arc Rose'u kullandıktan sonra geri topla**: Bedava ekstra tuzak — yerde bırakma.
-- **Tuzak açıldığında takıma söyle**: "Arc Rose A main'de açıldı", "Razorvine B long'dan ses verdi" — bu bilgi takımın hamlesi.
+- **İki hasar duvarını iki ayrı giriş yoluna göm**: İkisini aynı yere koyma. Düşman geçince hasar yer, ses çıkar, sen nereden geldiğini anında bilirsin.
+- **Smoke tuzağını düşmanın geçmek zorunda olduğu yere koy**: Hookah girişi, ramp, dar koridor. Açık alana koyma — düşman etrafından dolanır ve tuzak hiç açılmaz.
+- **Hasar tuzağını retake'te kullan**: Spike'a geri girerken önce hasar tuzağını at. Düşmanın nerede durduğunu ele verir, kör girme.
+- **Ult'u düşman geri almaya başlamadan önce aç**: Spike dikilir dikilmez, geri alış başlamadan aç. O zaman düşman yeteneklerini kullanamadan geri almak zorunda kalır.
+- **Smoke tuzağını kullandıktan sonra geri topla**: Bedava ekstra tuzak — yerde bırakma.
+- **Tuzak açılınca takıma söyle**: "Smoke tuzağı A main'de açıldı", "Hasar duvarı B long'dan ses verdi" — bu bilgi takımın bir sonraki hamlesidir.
 
 ## 4. Sık Yapılan Hatalar
-- İki Razorvine'ı aynı yere yığmak — tek bir Sova ok veya Fade haunt ikisini birden ortaya çıkarır
-- Arc Rose'u açık alana koymak — düşman etrafından döner, hiç açılmaz
-- Razorvine'ı düşmanın geçmek zorunda olmadığı yere gömmek — hasar vermez, ses vermez, sıfır değer
-- Steel Garden'ı düşman pozisyon aldıktan sonra açmak — yetenek zaten harcanmış, geç kalmışsın
-- Arc Rose'u yerde bırakmak — bedava ekstra tuzak kaçıyor
-- Retake'te Shear atmamak — kör giriyorsun
-- Kendi tuzaklarına yakın durmak — tuzağı temizleyen utility seni de öldürür
+- İki hasar duvarını aynı yere yığmak — tek bir Sova oku veya Fade recon'u ikisini birden ortaya çıkarır
+- Smoke tuzağını açık alana koymak — düşman etrafından dolanır, tuzak hiç açılmaz
+- Hasar duvarını düşmanın geçmek zorunda olmadığı yere gömmek — hasar vermez, ses vermez, sıfır değer
+- Ult'u düşman pozisyon aldıktan sonra açmak — yeteneği zaten harcadı, sen geç kaldın
+- Smoke tuzağını yerde bırakmak — bedava ekstra tuzağı kaçırıyorsun
+- Retake'te hasar tuzağı atmamak — kör giriyorsun
+- Kendi tuzaklarına yapışık durmak — tuzağını temizleyen util seni de öldürür
 
 ## 5. Kalıp -> Anlam
 
 **IF** Tuzakların sürekli açılmadan temizleniyor
-**MEANING** Koyduğun yerler çok belirgin — düşman gözüyle görüyor veya tahmin ediyor
-**COUNTER** Sesin ortam gürültüsüyle karıştığı yerlere göm. Haven C long'da ortam sesi tuzak sesini yutar. Bind A short'ta ise temizleme sesi kendisi bilgi verir — temizlemeye çalışan saldırgan pozisyonunu ele verir. Tuzağı temizlemek için düşman savunmasız pozisyona girmek zorunda kalacak yeri seç.
-**WHY** Gizli tuzak: düşman ya tetikler (hasar + bilgi) ya temizlemeye zaman harcar. Belirgin tuzak: bedava temizlenir, sıfır değer.
+**MEANING** Koyduğun yerler fazla belli — düşman gözüyle görüyor ya da nereye koyacağını tahmin ediyor
+**COUNTER** Sesin ortam gürültüsüne karıştığı yerlere göm. Haven C long'da ortam sesi tuzak sesini yutar. Bind A short'ta ise temizleme sesinin kendisi bilgi verir — tuzağı temizlemeye çalışan saldırgan pozisyonunu ele verir. Tuzağı temizlemek için düşmanın savunmasız bir pozisyona girmek zorunda kaldığı yeri seç.
+**WHY** Gizli tuzak: düşman ya tetikler (hasar + bilgi) ya da temizlemeye zaman harcar. Belli tuzak: bedavaya temizlenir, sıfır değer üretir.
 
-**IF** Arc Rose açık alanlara konulup düşmanlar etrafından dönüyor
-**MEANING** Reaktif duman sadece düşmanın geçmek zorunda olduğu yerde işe yarar
-**COUNTER** Bind Hookah girişi, Split A ramp, Lotus B main — bunlar dar geçiş, alternatif yok. Açık alanda düşmanın seçeneği var, dar yolda yok.
-**WHY** Dar koridor: açılması garantili, hem duman hem bilgi. Açık alan: düşman dolaşır, boşa gider.
+**IF** Smoke tuzağını açık alana koyuyorsun ve düşman etrafından dolanıyor
+**MEANING** Kendiliğinden açılan smoke sadece düşmanın geçmek zorunda olduğu yerde işe yarar
+**COUNTER** Bind Hookah girişi, Split A ramp, Lotus B main — bunlar dar geçit, alternatifi yok. Açık alanda düşmanın seçeneği var, dar yolda yok.
+**WHY** Dar koridor: tuzak garantili açılır, hem smoke hem bilgi alırsın. Açık alan: düşman dolanır, tuzak boşa gider.
 
-**IF** Razorvine hasar veriyor ama sen ya da takımın bu hasardan yararlanamıyor
-**MEANING** Asma duvarı senin açından göremediğin yere konulmuş — hasar verdi ama kimse peek atamadı
-**COUNTER** Razorvine'ı kendi güvenli açından düşmanları görebileceğin yere göm. Düşman asma duvardan geçerken hasar alır, sen o anda açıdan çıkarsın. Hasar almış düşmana peek = avantajlı dövüş.
-**WHY** Açın yoksa asma duvar sadece can yakar ama düşman ölmez. Açın varsa: hasar + peek = düşman gitti.
+**IF** Hasar duvarın can yakıyor ama ne sen ne takımın bundan faydalanamıyor
+**MEANING** Duvarı kendi göremediğin bir yere koymuşsun — hasar verdi ama kimse peek atamadı
+**COUNTER** Hasar duvarını kendi güvenli açından düşmanı görebileceğin yere göm. Düşman duvardan geçerken hasar yer, sen tam o anda açıdan çık. Hasar yemiş düşmana peek atmak = kazandığın dövüş.
+**WHY** Açın yoksa duvar sadece can yakar, düşman ölmez. Açın varsa: hasar + peek = düşman gitti.
 
-**IF** Steel Garden düşman zaten yerleşmiş pozisyonuna açılıyor
-**MEANING** Ult reaktif kullanıldı — düşman zaten utility'sini attı, pozisyon aldı
-**COUNTER** Spike dikildikten hemen sonra aç. Düşman geri almaya başlamadan önce bölge yetenek boşluğuna düşmeli. Takımdan "geri alıyoruz" sinyali gelince değil — spike dikimi sinyalin kendisi.
-**WHY** Erken açılırsa düşman yeteneğini kullanamadan geri almak zorunda. Geç açılırsa ult boşa gider.
+**IF** Ult'u düşman zaten yerleştiği pozisyona açıyorsun
+**MEANING** Ult'u geç kullandın — düşman utility'sini çoktan attı, pozisyonunu aldı
+**COUNTER** Spike dikilir dikilmez aç. Düşman geri almaya başlamadan o bölge yetenek boşluğuna düşmeli. Takımdan "geri alıyoruz" sinyali beklemeyeceksin — spike dikiminin kendisi senin sinyalin.
+**WHY** Erken açarsan düşman yeteneğini kullanamadan geri almak zorunda kalır. Geç açarsan ult boşa gider.
 
-**IF** Post-plant turları Vyse hayattayken kaybediliyor
-**MEANING** Spike yanına tuzak konulmadı — Vyse'ın post-plant gücü dikimden önce ön yerleştirme ister
-**COUNTER** Saldırıda en az bir Razorvine'ı post-plant için sakla. Spike dikilmeden önce spike'ın üstüne veya yanına göm. Düşman asma duvarı ya yok etmek zorunda (zaman harcar) ya da içinden geçmek zorunda (hasar alır).
-**WHY** Post-plant Razorvine: defuse gecikir + düşman hasar alır. Tuzaksız post-plant: spike savunmasız.
+**IF** Vyse hayattayken post-plant turları kaybediliyor
+**MEANING** Spike'ın yanına tuzak konulmamış — Vyse'ın post-plant gücü dikimden önce ön yerleştirme ister
+**COUNTER** Saldırıda en az bir hasar duvarını post-plant için sakla. Spike dikilmeden önce spike'ın üstüne veya yanına göm. Düşman ya duvarı yok etmek zorunda (zaman harcar) ya da içinden geçmek zorunda (hasar yer).
+**WHY** Post-plant hasar duvarı: defuse gecikir + düşman hasar yer. Tuzaksız post-plant: spike savunmasız.
 
-**IF** Tuzak kurulumun her turda aynı
-**MEANING** Düşman senin kurulumunu ezberledi, tur başında geliyor direkt temizliyor
-**COUNTER** Her turda en az bir tuzağın yerini değiştir. A main'e her tur soldan değil, bazen sağdan, bazen derininden. Düşman aynı yeri kontrol etmeye alışınca farklı yere koy.
-**WHY** Aynı kurulum: düşman tur başında temizler, tuzak sıfır değer. Değişen kurulum: her turda yeni bulmaca.
+**IF** Tuzak kurulumun her tur aynı
+**MEANING** Düşman kurulumunu ezberledi — tur başında gelip direkt temizliyor
+**COUNTER** Her tur en az bir tuzağın yerini değiştir. A main'e her tur soldan değil; bazen sağdan, bazen daha derinden. Düşman bir yeri kontrol etmeye alışınca farklı yere koy.
+**WHY** Aynı kurulum: düşman tur başında temizler, tuzak sıfır değer. Değişen kurulum: her tur yeni bir bulmaca.
 
 **IF** Vyse sürekli kullanılmamış tuzaklarla ölüyor
-**MEANING** Dövüşlere tuzak atmadan giriyorsun — tuzaksız Vyse sıradan bir ajan
-**COUNTER** Herhangi bir açıya çıkmadan önce elindeki her şeyi at. Alım aşamasında planla: Arc Rose nereye, Razorvine nereye, Shear ne için saklanıyor.
-**WHY** Atılmamış tuzak = alan yok = Vyse oynamanın anlamı yok.
+**MEANING** Dövüşe tuzak atmadan giriyorsun — tuzaksız Vyse sıradan bir ajandır
+**COUNTER** Herhangi bir açıya çıkmadan önce elindeki her şeyi at. Daha alım aşamasında planla: smoke tuzağı nereye, hasar duvarı nereye, hasar tuzağını ne için saklıyorsun.
+**WHY** Atılmamış tuzak = alan yok = Vyse oynamanın bir anlamı yok.
 
-**IF** Shear retake sırasında kullanılmıyor
+**IF** Hasar tuzağını retake'te kullanmıyorsun
 **MEANING** Spike'a girerken düşmanın nerede durduğunu bilmiyorsun — kör giriyorsun
-**COUNTER** Her retake girişinden önce Shear at. Düşman pozisyonları ortaya çıkar, ona göre girersin. Steel Garden + Shear: yetenek kesilmiş + pozisyon belli = retake çok daha kolay.
-**WHY** Kör retake girişi: düşman seni biliyor, sen bilmiyorsun. Shear atıldıktan sonra: dengeli bilgi, avantajlı giriş.
+**COUNTER** Her retake girişinden önce hasar tuzağını at. Düşman pozisyonları ortaya çıkar, sen de ona göre girersin. Ult + hasar tuzağı birlikte: yetenek kesilmiş + pozisyon belli = retake çok daha kolay.
+**WHY** Kör retake girişi: düşman seni görüyor, sen onu görmüyorsun. Hasar tuzağını attıktan sonra: bilgi dengeli, giriş avantajlı.
 
 ## 6. Harita Etkileşimleri
-- **Lotus**: Dönen kapılar ve dar B main Razorvine ve Arc Rose için biçilmiş kaftan. A main'deki dar geçiş tuzak açılmasını garantiler. C site'ın çoklu girişleri tuzakları dağıtmayı ödüllendirir — Steel Garden C site'ta geniş retake baskısı uygular.
-- **Bind**: Teleporter çıkışından çıkan düşman tuzağa düz girer — teleporter çıkışlarına tuzak koy. A short ve B long girişlerine Razorvine, Hookah'a Arc Rose — Hookah'ta etrafından dönme şansı yok, garantili açılır.
-- **Ascent**: A main ve A tree'ye birer tuzak, iki giriş kapanır. B main doğal Razorvine koridoru. Mid catwalk'ta Arc Rose rotate eden düşmanı bildirir. Steel Garden A site retake'te düşmanın elinden yeteneği alır.
-- **Split**: Dar yollar düşmanı yapıların içinden geçmeye zorlar. B heaven'dan B main'e geçişte Razorvine düşmanı savunmasız yakalar. A ramp'ta Arc Rose push yavaşlatır. Mid'de Shear catwalk kontrolü verir.
-- **Sunset**: Mid koridor Razorvine ve Arc Rose için ana nokta. A main ve B market'a birer tuzak. Mid geçişte Shear bilgi toplar.
+- **Lotus**: Dönen kapılar ve dar B main, hasar duvarı ve smoke tuzağı için biçilmiş kaftan. A main'deki dar geçit tuzağın açılmasını garantiler. C site'ın çoklu girişleri tuzakları dağıtmayı ödüllendirir — ult'u C site'ta aç, geniş retake baskısı kur.
+- **Bind**: Teleporter çıkışından çıkan düşman tuzağa düz girer — teleporter çıkışlarına tuzak koy. A short ve B long girişlerine hasar duvarı, Hookah'a smoke tuzağı — Hookah'ta etrafından dolanma şansı yok, garantili açılır.
+- **Ascent**: A main ve A tree'ye birer tuzak, iki giriş birden kapanır. B main doğal bir hasar duvarı koridoru. Mid catwalk'ta smoke tuzağı rotate eden düşmanı haber verir. Ult'u A site retake'te aç, düşmanın elinden yeteneğini al.
+- **Split**: Dar yollar düşmanı yapıların içinden geçmeye zorlar. B heaven'dan B main'e geçişte hasar duvarı düşmanı savunmasız yakalar. A ramp'ta smoke tuzağı push'u yavaşlatır. Mid'de hasar tuzağı catwalk kontrolü verir.
+- **Sunset**: Mid koridoru hasar duvarı ve smoke tuzağı için ana nokta. A main ve B market'a birer tuzak. Mid geçişte hasar tuzağı bilgi toplar.
 
 ## 7. Eşleştirme Notları
-- **Sova ve Fade'e karşı zayıf**: Recon Bolt ve Haunt güvenli mesafeden tuzakları bulur. Bu maçlarda tuzakları görüş hattından gizle — duvarın arkası, köşe dönüşleri.
-- **Hızlı baskı kompozisyonlarına karşı güçlü**: Tuzakları temizleyecek zamanı olmayan takımlar Razorvine ve Arc Rose'a direkt girer. Hızlı baskı = tuzak tetikleme = hasar + bilgi + duman aynı anda.
-- **Breach'e karşı**: Breach yapılar boyunca sersem atabilir, tuzakların güvenilirliği düşer. Tuzakları sersem hattının dışında yerleştir, dağıtık kur.
-- **Operator oyuncularına karşı güçlü**: Razorvine'ın hasar bölgesi Op tutan düşmanı pozisyondan çıkmaya zorlar. Arc Rose Op'un görüş hattını keser. Steel Garden Op'un yetenek desteğini keser.
-- **KAY/O'ya karşı**: Knife tüm tuzakları devre dışı bırakır, knife atımında kurulum çöker. Tuzakları knife menzili dışında kur, knife bittikten sonra hızlıca yeniden göm.
-- **Killjoy ile aynı takımda**: Site çift katman kilitlenir. Killjoy hasar + gecikme, Vyse görüş kesme + yetenek baskısı. İkisini aynı girişe yığma — farklı giriş yollarına dağıt.
+- **Sova ve Fade'e karşı zayıf**: Sova'nın recon'u ve Fade'in recon'u güvenli mesafeden tuzaklarını bulur. Bu maçlarda tuzakları görüş hattından gizle — duvar arkası, köşe dönüşleri.
+- **Hızlı baskı kompozisyonlarına karşı güçlü**: Tuzakları temizleyecek vakti olmayan takımlar hasar duvarına ve smoke tuzağına direkt girer. Hızlı baskı = tuzak tetiklenir = aynı anda hasar + bilgi + smoke alırsın.
+- **Breach'e karşı**: Breach duvarların ardından stun atabilir, tuzakların güvenilirliği düşer. Tuzaklarını stun hattının dışına, dağıtık kur.
+- **Operator oyuncularına karşı güçlü**: Hasar duvarının verdiği hasar Op tutan düşmanı pozisyondan çıkmaya zorlar. Smoke tuzağı Op'un görüş hattını keser. Ult Op'un yetenek desteğini keser.
+- **KAY/O'ya karşı**: Yetenek kesmesi tüm tuzaklarını devre dışı bırakır, atıldığı an kurulumun çöker. Tuzaklarını yetenek kesme menzilinin dışına kur; etkisi bitince hızlıca yeniden göm.
+- **Killjoy ile aynı takımda**: Site'ı çift katman kilitlersin. Killjoy hasar + gecikme verir, Vyse görüş keser + yetenek baskısı yapar. İkinizinkini aynı girişe yığmayın — farklı giriş yollarına dağıtın.
 
 ## 8. Oyuncuya Ne Söylenmeli
 
 ### İyi oynayınca
-Tuzakları 2-3 farklı girişe yayıyorsun, Arc Rose'u düşmanın geçmek zorunda olduğu yerlere koyuyorsun, post-plant için en az bir Razorvine saklıyorsun. Devam et. Düşman bir açıyı temizleyip ikincisinde de tuzakla karşılaşınca psikolojik baskı başlar — aynı mantığı koru ama her turda en az bir pozisyonu değiştir.
+Tuzakları 2-3 ayrı girişe yayıyorsun, smoke tuzağını düşmanın geçmek zorunda olduğu yerlere koyuyorsun, post-plant için en az bir hasar duvarı saklıyorsun. Aynen devam. Düşman bir açıyı temizleyip ikincisinde de tuzakla karşılaşınca üstünde psikolojik baskı kurarsın — aynı mantığı koru ama her tur en az bir pozisyonu değiştir.
 
 ### Zorlanınca
-Tuzakların ya çok kolay görünüyor ya da kimsenin geçmediği yerlerde. Düşmanların hangi yolları kullandığına bak, tuzakları oraya kaydır. Herhangi bir açıya çıkmadan önce elindeki her şeyi at.
+Tuzakların ya fazla göze batıyor ya da kimsenin geçmediği yerlerde. Düşmanın hangi yolları kullandığına bak, tuzakları oraya kaydır. Herhangi bir açıya çıkmadan önce elindeki her şeyi at.
 
 ### Tahmin edilebilir olunca
-Düşman her turda kurulumunu önceden temizliyor. Pozisyonları değiştir. Aynı açı, farklı nokta yeter. Saldırıda post-plant Razorvine'ı öncelikle göm — kit'inin en sert noktası orası.
+Düşman her tur kurulumunu önceden temizliyor. Pozisyonları değiştir. Aynı açı, farklı nokta bile yeter. Saldırıda önce post-plant hasar duvarını göm — kit'inin en sert noktası orası.
 
 ## 9. Rank Modülasyonu
 
-**Düşük (Iron-Silver)**: Tuzakların nereye gideceğini bilmiyor ya da unutuyor. Şunu öğret: her giriş yoluna bir Razorvine, ana dar geçişe Arc Rose, açıya çıkmadan önce her şeyi at. Alım aşamasında "3 tuzağımı nereye koyuyorum" diye sor kendine. Arc Rose'u kullandıktan sonra geri toplamayı alışkanlık yap.
+**Düşük (Iron-Silver)**: Tuzağı nereye koyacağını bilmiyor ya da unutuyor. Şunu öğret: her giriş yoluna bir hasar duvarı, ana dar geçide smoke tuzağı, açıya çıkmadan önce her şeyi at. Alım aşamasında kendine sor: "3 tuzağımı nereye koyuyorum?" Smoke tuzağını kullandıktan sonra geri toplamayı alışkanlık yap.
 
-**Orta (Gold-Platinum)**: Tuzak koyuyor ama her turda aynı yere. Shear az kullanıyor, Steel Garden geç açıyor. Her turda en az bir tuzak yerini değiştir. Shear'ı retake aracı olarak kullan. Steel Garden'ı spike dikiminden hemen sonra aç, bekletme.
+**Orta (Gold-Platinum)**: Tuzak koyuyor ama her tur aynı yere. Hasar tuzağını az kullanıyor, ult'u geç açıyor. Her tur en az bir tuzağın yerini değiştir. Hasar tuzağını retake aracı olarak kullan. Ult'u spike dikilir dikilmez aç, bekletme.
 
-**Yüksek (Diamond-Ascendant)**: Tuzak ağını anlıyor ama düşman karşı oynamaya başlayınca adapte olamıyor. Düşmanın hangi yollardan kaçındığını oku, tuzakları oraya kaydır. Steel Garden zamanlamasını düşman geri alışa başlamadan hemen öncesine denk getir. Arc Rose'u tur ortasında geri toplayıp yeniden göm.
+**Yüksek (Diamond-Ascendant)**: Tuzak ağını anlıyor ama düşman karşı oynamaya başlayınca adapte olamıyor. Düşmanın hangi yollardan kaçındığını oku, tuzakları oraya kaydır. Ult zamanlamasını düşman geri alışa başlamadan hemen önceye denk getir. Smoke tuzağını tur ortasında geri toplayıp yeniden göm.
 
-**Elit (Immortal-Radiant)**: Her tur farklı tuzak yerleşimi olmalı — aynı kurulum iki tur üst üste çıkmasın. Steel Garden zamanlaması keskin olmalı: düşman geri alışa başladığı an, tek saniye bile geç değil. Shear retake'in birincil bilgi aracı — Steel Garden + Shear birlikte at. Arc Rose'u tur içinde iki kez kullan: göm, açılsın, topla, başka yere göm.
+**Elit (Immortal-Radiant)**: Her tur farklı tuzak yerleşimi olmalı — aynı kurulum iki tur üst üste çıkmasın. Ult zamanlaması keskin olmalı: düşman geri alışa başladığı an aç, tek saniye bile geç kalma. Hasar tuzağı retake'in birincil bilgi aracın — ult ile hasar tuzağını birlikte at. Smoke tuzağını tur içinde iki kez kullan: göm, açılsın, topla, başka yere göm.

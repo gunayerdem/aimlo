@@ -1,129 +1,129 @@
 # AJAN: Harbor
 
 ## 1. Rol Kimliği
-Harbor push controller'ı. Smoke atmıyorsun — hareketli duvar çekiyorsun. Omen arkanda beklerken sen takımın önünde su sürüyorsun. Cascade takımın arkasında yürüdüğü kalkan. High Tide kıvrılarak birden fazla açıyı kesiyor. Cove spike üstünde kırılabilir kubbe.
+Harbor bir push controller'ı. Sen normal smoke atmıyorsun — hareketli duvar çekiyorsun. Omen arkanda otururken sen takımın önünde su sürüyorsun. Hareketli duvarın takımın arkasında yürüdüğü kalkandır. Eğri duvarın kıvrılarak birden fazla açıyı tek seferde keser. Spike üstüne attığın kubbe ise kırılabilir bir koruma.
 
-Bu kit hareketsiz duranı cezalandırır. Cascade'den kimse geçmezse o yetenek çöpe gitti. Birlikte hızlı alıyorsanız Harbor seç. Default oturuyorsanız alma.
+Bu kit yerinde duranı cezalandırır. Hareketli duvardan kimse geçmezse o yeteneği çöpe attın demektir. Takımla hızlı alıyorsanız Harbor seç. Default oturup bekliyorsanız alma.
 
 ## 2. Temel Sorumluluklar
-- **Cascade**: Smoke değil, hareketli barikat. En az iki takım arkadaşı choke'ta hazırsa at. Yoksa tut. Savunmada agresif peek'ten güvenli çekilmek için kullan.
-- **High Tide**: Düz çizgi = kit israfı. Her atış en az iki farklı sightline'ı kesmek için kıvrılmalı. Ascent B'de lane'den market kapısına bükerek koridor ve market peek'ini aynı anda kapat.
-- **Cove**: Planter spike'a dokunduğu an at, öncesinde değil. Erken Cove plant bitmeden ölür. İkinci kullanım: retake'de tek tehlikeli açıyı kapat.
-- **Reckoning**: Site take'de anchor'ı köşeden çıkarmak için. Retake'de post-plant tutanları açmak için. Dar koridorda kullanma — düşman tek adımla atlıyor.
-- **Çağrı yap**: "Cascade çıkıyor", "duvar sola bükülüyor." Takım ne zaman takip edeceğini bilmezse yetenek değersiz.
+- **Hareketli duvar**: Bu smoke değil, ilerleyen bir barikat. En az iki takım arkadaşı choke'ta hazır beklerken at. Hazır değillerse tut. Savunmada agresif peek attıktan sonra güvenle geri çekilmek için kullan.
+- **Eğri su duvarı**: Düz çekersen yeteneği yakarsın. Her atış en az iki ayrı sightline'ı kesecek şekilde kıvrılmalı. Ascent B'de lane'den market kapısına doğru bük — koridoru ve market peek'ini aynı anda kapatırsın.
+- **Spike kubbesi**: Plant'çi spike'a dokunduğu an at, bir saniye önce değil. Erken atarsan plant bitmeden kırılır. İkinci iş: retake'de tek tehlikeli açıyı kapatmak.
+- **Ult**: Site alırken anchor'ı köşeden söküp çıkarmak için. Retake'de post-plant tutanları yerinden oynatmak için. Dar koridorda atma — düşman tek adımla havuzların arasından kaçar.
+- **Çağrı yap**: "Duvar çıkıyor", "duvar sola bükülüyor" de. Takım ne zaman takip edeceğini bilmezse yeteneğin hiçbir değeri kalmaz.
 
 ## 3. Sık Yapılan Hatalar
-- Takım henüz spawn'dayken Cascade atmak. Kalkan choke'u geçiyor, arkasında kimse yok, sıfır değer.
-- High Tide'ı düz çizgi atmak. Her haritada kıvrımı ödüllendiren geometri var. Düz High Tide, toksini olmayan Viper duvarı — kesinlikle daha kötü.
-- Cove'u birden fazla açının ateş edebildiği yere koymak. HP sınırlı, iki düşman aynı anda spray yaparsa plant bitmeden ölür. Tek açının tehdit ettiği yere koy.
-- Reckoning'i dar odalarda kullanmak (Bind hookah, Split sewers). Gayzer havuzları alana ihtiyaç duyar; dar yerde düşman bir adım yana kayıyor.
-- Savunmada pasif köşe oturmak. Harbor'ın savunma araçları Omen veya Viper'dan zayıf. Köşede bekliyorsan ajanı yanlış oynuyorsun. Cascade'le agresif peek at, geri çekil. High Tide'ı retake rotasyon kesmek için kullan.
-- High Tide'ı takım arkadaşlarının yüzüne bükmek. Duelist A short'a bakıyorsa ve duvarın onun üzerinden kıvrılıyorsa, round bitti. Atmadan önce minimap'te takım pozisyonlarını kontrol et.
+- Takım daha spawn'dayken hareketli duvarı atmak. Kalkan choke'u geçer, arkasında kimse yoktur, sıfır değer üretir.
+- Su duvarını düz çekmek. Her haritada kıvrımı ödüllendiren bir geometri var. Düz çekilen su duvarı, hasarı olmayan bir Viper duvarı gibidir — yani açık ara daha kötüsü.
+- Kubbeyi birden fazla açının ateş edebildiği yere koymak. HP'si sınırlı; iki düşman aynı anda spray atarsa plant bitmeden kırılır. Sadece tek açının gördüğü yere koy.
+- Ult'u dar odalarda atmak (Bind hookah, Split sewers). Gayzer havuzları alana ihtiyaç duyar; dar yerde düşman bir adım yana kayıp kurtulur.
+- Savunmada pasif köşe oturmak. Harbor'ın savunma araçları Omen ya da Viper'ınkinden zayıf. Köşede bekliyorsan ajanı yanlış oynuyorsun. Hareketli duvarla agresif peek at, sonra geri çekil. Su duvarını retake rotasyonunu kesmek için kullan.
+- Su duvarını takım arkadaşlarının yüzüne doğru bükmek. Duelist A short'a bakıyorsa ve duvarın onun üzerinden kıvrılıyorsa o round bitti demektir. Atmadan önce minimap'ten takım pozisyonlarını kontrol et.
 
 ## 4. Kalıp -> Anlam
 
-**IF** Cascade choke'u geçiyor ama arkasında sıfır takım arkadaşı var
-**MEANING** Cascade takım hareketiyle senkronize değil. Harbor bunu smoke gibi kullanıyor.
-**COUNTER** Choke'ta en az iki takım arkadaşını görene veya duyана kadar atma. Atmadan önce "Cascade çıkıyor" de — push'a önceden commit etsinler.
-**WHY** Cascade hareketli barikat. Kimse takip etmezse geçici koruma boşa gider.
+**IF** Hareketli duvar choke'u geçiyor ama arkasında tek bir takım arkadaşı bile yok
+**MEANING** Duvar takım hareketiyle senkronize değil. Harbor onu sıradan bir smoke gibi kullanıyor.
+**COUNTER** Choke'ta en az iki takım arkadaşını görene veya duyana kadar atma. Atmadan önce "Duvar çıkıyor" de — push'a önceden hazırlansınlar.
+**WHY** Bu duvar hareket eden bir barikat. Kimse takip etmezse verdiği geçici koruma boşa gider.
 
-**IF** High Tide her round düz duvar olarak atılıyor
-**MEANING** Oyuncu bükme mekaniğini pratik etmemiş. Harbor'ı indirimli Viper gibi kullanıyor.
-**COUNTER** Custom'a gir. Her site için aynı anda iki sightline'ı kesen bükülme bul. Ascent B: lane'den market'e. Pearl B: B main'den B hall'a. Bu noktaları ezberle.
-**WHY** Harbor'ın tüm gücü bükülmede. Düz duvar kit avantajını sıfırlar, Viper'ın daha kötü versiyonuna dönüşürsün.
+**IF** Su duvarı her round düz bir hat olarak atılıyor
+**MEANING** Oyuncu bükme mekaniğini hiç çalışmamış. Harbor'ı ucuz bir Viper gibi oynuyor.
+**COUNTER** Custom'a gir. Her site için aynı anda iki sightline'ı kesen bir bükülme bul. Ascent B: lane'den market'e. Pearl B: B main'den B hall'a. Bu noktaları ezberle.
+**WHY** Harbor'ın bütün gücü bükülmede. Düz duvar kit avantajını sıfırlar, seni Viper'ın daha kötü bir versiyonuna çevirir.
 
-**IF** Cove plant tamamlanmadan yıkılıyor
-**MEANING** Cove çok erken atıldı veya birden fazla açı ateş edebiliyor.
-**COUNTER** Planter spike'a dokunana kadar bekle. Sadece bir savunucu açısının ateş edebildiği yere koy — kutu arkası, köşe ya da High Tide'ın zaten diğer açıyı kapattığı yer.
-**WHY** Cove HP'si sınırlı. Çoklu ateş altında hızla erir. Tek açıya maruz kalırsa hayatta kalır.
+**IF** Kubbe plant tamamlanmadan kırılıyor
+**MEANING** Kubbe ya çok erken atıldı ya da birden fazla açı ona ateş edebiliyor.
+**COUNTER** Plant'çi spike'a dokunana kadar bekle. Sadece tek bir savunucu açısının gördüğü yere koy — kutu arkası, bir köşe ya da su duvarının zaten diğer açıyı kapattığı yer.
+**WHY** Kubbenin HP'si sınırlı. Çapraz ateş altında hızla erir. Tek açıya maruz kalırsa ayakta kalır.
 
-**IF** Reckoning site take'lerde sıfır düşmanı sersemletiyor
-**MEANING** Ult dar alanda veya düşmanlar havuzları atlayabilecekleri yerde kullanılıyor.
-**COUNTER** Reckoning'i açık site'lar için sakla: Breeze A/B, Haven C, Pearl A. Dar haritalarda düşmanlar site'a yayıldığında kullan, tek köşede kümelenmişken değil.
-**WHY** Gayzer havuzları alan ister. Açık site kaçış rotasını kısaltır, isabet artar.
+**IF** Ult site alırken tek bir düşmanı bile sersemletmiyor
+**MEANING** Ult ya dar bir alanda atılıyor ya da düşmanlar havuzları atlayıp kaçabilecekleri yerde.
+**COUNTER** Ult'u açık site'lara sakla: Breeze A/B, Haven C, Pearl A. Dar haritalarda düşman site'a yayıldığı an kullan, tek köşede kümelendiklerinde değil.
+**WHY** Gayzer havuzları alan ister. Açık site'ta kaçış yolu kısalır, isabet artar.
 
-**IF** Harbor savunma round'larında en düşük ACS'ye sahip
+**IF** Harbor savunma round'larında takımın en düşük ACS'sine sahip
 **MEANING** Harbor pasif oturup temas bekliyor. Saldırı odaklı kit boşa gidiyor.
-**COUNTER** Round başında Cascade'le agresif peek at — geniş swing, bilgi al, Cascade'le geri dön. High Tide'ı önceden koymak yerine retake'de rotasyoncuları kesmek için kullan.
-**WHY** Harbor'ın savunma kiti agresyon üzerine kurulu. Pasif oynarsan hareketli siper avantajını tamamen terk etmiş olursun.
+**COUNTER** Round başında hareketli duvarla agresif peek at — geniş swing at, bilgi al, duvarın arkasından geri dön. Su duvarını önceden koymak yerine retake'de rotasyon yapanları kesmek için kullan.
+**WHY** Harbor'ın savunma kiti agresyon üzerine kurulu. Pasif oynarsan hareketli siper avantajını tamamen bırakmış olursun.
 
-**IF** Harbor tüm yeteneği kullanmasına rağmen takım site take'lerde sürekli başarısız oluyor
-**MEANING** Zamanlama yanlış. High Tide ve Cascade'in koruma penceresi kısa — duvar düştükten sonra takım girerse yetenek boşa gitti.
-**COUNTER** Execute'u sıkıştır. High Tide ve Cascade birbirinden bir tempo içinde çıkmalı, takım duvar düşmeden site'ta olmalı. Harbor execute'ları sprint, yavaş default değil.
-**WHY** Yeteneğin ömrü kısa. Geç giriş korumayı zaman dışına çıkarır.
+**IF** Harbor tüm yeteneğini kullanıyor ama takım site alırken sürekli başarısız oluyor
+**MEANING** Zamanlama bozuk. Su duvarının ve hareketli duvarın koruma penceresi kısa — duvar düştükten sonra takım giriyorsa yeteneği boşa attın demektir.
+**COUNTER** Execute'u sıkıştır. Su duvarı ve hareketli duvar tek bir tempo içinde peş peşe çıkmalı, takım duvar düşmeden site'ta olmalı. Harbor execute'ları sprint'tir, yavaş default değil.
+**WHY** Yeteneğin ömrü kısa. Geç giriş, korumayı zamanın dışına atar.
 
-**IF** Düşmanlar rutin olarak Cascade'in içinden push yapıp kill alıyor
-**MEANING** Takım Cascade'e kalıcı duvar gibi davranıyor. İnce ve yavaş hareket eden barikat — içinden push yapan anında yakın mesafeye gelir.
-**COUNTER** Bir takım arkadaşı Cascade üzerinde dar açı tutsun. İçinden push yapan doğrudan crosshair'a yürür. "Cascade'den push yapıyorlar" diye çağrı yap.
-**WHY** Cascade'den geçen kısa süre açıkta kalır. Hazır açı bu geçiş anını bedava kill'e çevirir.
+**IF** Düşmanlar düzenli olarak hareketli duvarın içinden push yapıp kill alıyor
+**MEANING** Takım o duvara kalıcı bir set gibi davranıyor. O ince ve yavaş ilerleyen bir barikat — içinden push yapan anında yakın mesafeye gelir.
+**COUNTER** Bir takım arkadaşı duvarın üstünde dar bir açı tutsun. İçinden push yapan doğrudan crosshair'ın önüne yürür. "Duvardan push yapıyorlar" diye çağrı yap.
+**WHY** Duvardan geçen kısa bir an açıkta kalır. Hazır bekleyen bir açı bu geçiş anını bedava kill'e çevirir.
 
-**IF** High Tide sürekli takım arkadaşlarının peek attığı yerlere bükülüyor
-**MEANING** Oyuncu bükme yönünü seçerken takım pozisyonlarını hesaba katmıyor.
-**COUNTER** Atmadan önce minimap'e bak. Bükülme her zaman takımının peek attığı yerden uzağa, düşmanın tuttuğu yere doğru kıvrılmalı.
-**WHY** Kendi takımının görüşünü engelleyen duvar düşmana avantaj verir — senin takımın kör dövüşürken düşman pozisyon koruyor.
+**IF** Su duvarı sürekli takım arkadaşlarının peek attığı yöne bükülüyor
+**MEANING** Oyuncu bükme yönünü seçerken takımın pozisyonunu hiç hesaba katmıyor.
+**COUNTER** Atmadan önce minimap'e bak. Bükülme her zaman takımının peek attığı yerden uzağa, düşmanın tuttuğu yöne doğru kıvrılmalı.
+**WHY** Kendi takımının görüşünü kapatan duvar düşmana avantaj verir — senin takımın kör dövüşürken düşman pozisyonunu rahatça korur.
 
 **IF** Takımda zaten Viper veya Astra varken Harbor seçiliyor
-**MEANING** Çift controller nadiren işe yarar. Harbor statik smoker'larla örtüşür, onları tamamlamaz.
-**COUNTER** Harbor tek controller veya bir sentinel ile çalışır. Takımın statik smoke'a ihtiyacı varsa Omen al. Harbor'ın gücü başka controller'ın veremediği hareketli siperde.
-**WHY** Kit örtüşmesi ikisinin de güçlü yönlerini törpüler. Harbor'ın hareketli siper nişi tek seçim olduğunda parlar.
+**MEANING** Çift controller nadiren işe yarar. Harbor statik smoker'larla aynı işi yapar, onları tamamlamaz.
+**COUNTER** Harbor tek controller olarak ya da bir sentinel ile çalışır. Takımın statik smoke'a ihtiyacı varsa Omen al. Harbor'ın değeri başka controller'ın veremediği hareketli siperde.
+**WHY** Kit örtüşmesi ikisinin de güçlü yanını köreltir. Harbor'ın hareketli siper nişi ancak tek controller olduğunda parlar.
 
-**IF** Cove plant dışında rastgele sightline kapatmak için defalarca kullanılıyor
-**MEANING** Cove düşük değerli oyunlarda harcanıyor. Uzun bekleme süresi var ve en yüksek değeri spike koruması.
-**COUNTER** Cove'u plant koruması veya kritik retake geçişleri için sakla. Rastgele peek'i iki tempo engellemek bekleme süresine değmez — aynısını High Tide bükülmesiyle yap.
-**WHY** Uzun cooldown onu nadir kaynak yapar. Düşük değerli kullanım en çok ihtiyaç duyduğunda elinden alır.
+**IF** Kubbe, plant dışında rastgele sightline kapatmak için defalarca harcanıyor
+**MEANING** Kubbe düşük değerli oyunlarda yakılıyor. Uzun bir cooldown'u var ve en yüksek değeri spike'ı korumak.
+**COUNTER** Kubbeyi plant koruması ya da kritik retake geçişleri için sakla. Sıradan bir peek'i iki tempo kapatmak bu cooldown'a değmez — aynısını su duvarını bükerek yap.
+**WHY** Uzun cooldown onu nadir bir kaynak yapar. Düşük değerli kullanım, en çok ihtiyaç duyduğun anda elinde kalmaz.
 
-**IF** Reckoning çok sayıda round kullanılmadan tutuluyor
-**MEANING** Oyuncu hiç gelmeyen "mükemmel an" için saklıyor. Reckoning hızlı şarj eder, serbest kullanılmalı.
-**COUNTER** Takım bir site'a execute yaptığında müsait olduğu ilk round'da kullan. Beş kişiye isabet etmesi gerekmiyor — execute'da tek anchor'ı sersemletmek bile değer.
-**WHY** Kullanılmayan ult sıfır üretir. Erken ve sık kullanım, biriktirmekten daha fazla etki yaratır.
+**IF** Ult birçok round boyunca kullanılmadan bekletiliyor
+**MEANING** Oyuncu hiç gelmeyen o "mükemmel an" için saklıyor. Ult hızlı dolar, rahatça kullanılmalı.
+**COUNTER** Takım bir site'a execute yaptığında, ult hazır olduğu ilk round'da kullan. Beş kişiye birden isabet etmesi gerekmez — execute sırasında tek bir anchor'ı sersemletmek bile değerli.
+**WHY** Kullanılmayan ult sıfır üretir. Erken ve sık kullanım, biriktirmekten çok daha fazla etki yaratır.
 
-**IF** Harbor atak round'larında sürekli ilk ölüm oluyor
-**MEANING** Harbor kendi yeteneğinin önünde push yapıyor veya Cascade gelmeden peek atıyor.
-**COUNTER** Yetenek öne gider, beden arkada kalır. Cascade önce gider, takım arkasından gelir, Harbor grubun içinde. Harbor duelist değil.
-**WHY** Harbor'ın hayatta kalma değeri devam eden yeteneğinde. Erken ölürsen takım kalan round boyunca controller'sız kalır.
+**IF** Harbor atak round'larında sürekli ilk ölen oluyor
+**MEANING** Harbor kendi yeteneğinin önünde push yapıyor ya da duvar gelmeden peek atıyor.
+**COUNTER** Yetenek önden gider, beden arkada kalır. Duvar önce çıkar, takım arkasından gelir, Harbor grubun içindedir. Harbor duelist değil.
+**WHY** Harbor'ın asıl değeri yaşayıp yeteneğini sürdürmesinde. Erken ölürsen takım round'un geri kalanını controller'sız geçirir.
 
 ## 5. Harita Etkileşimleri
 
-- **Pearl (S-tier)**: Harbor'ın en iyi haritası. B site: High Tide'ı B main'den B hall'a bükerek hem derin site'ı hem connector rotasyonunu aynı anda kes. B main'den Cascade, giriş ikilisine site öncesi uzun açık alandan geçerken hareketli kalkan verir. Varsayılan B plant'te Cove heaven açısını kapatır, duvar gerisini halleder. A site: High Tide'ı A main'den A art'a bükerek derin connector peek'ini ve yakın sol köşeyi aynı anda kapat. Reckoning açık düzen nedeniyle neredeyse tüm A site'ı kaplar. Savunmada Cascade güvenli çekilme duvarıyla agresif B long peek'lerini mümkün kılar.
+- **Pearl (S-tier)**: Harbor'ın en iyi haritası. B site: su duvarını B main'den B hall'a doğru bük — hem derin site'ı hem connector rotasyonunu aynı anda kesersin. B main'den çekilen hareketli duvar, giriş ikilisini site öncesindeki uzun açık alanı geçerken kalkan altına alır. Standart B plant'te kubbe heaven açısını kapatır, kalanını duvar halleder. A site: su duvarını A main'den A art'a bük — derin connector peek'ini ve yakın sol köşeyi aynı anda kapatırsın. Açık düzen sayesinde ult neredeyse tüm A site'ı kaplar. Savunmada hareketli duvar güvenli çekilme imkanı verdiği için agresif B long peek'lerini mümkün kılar.
 
-- **Lotus (S-tier)**: Üç site ve dönen kapılar High Tide bükülmeleri için doğal yollar yaratır. C site: High Tide'ı C main'den C mound'a bükerek waterfall ve arka site açılarını tek duvarla kes. C main'den Cascade oyundaki en güçlü Harbor entry araçlarından biri — koridor takımı kalkanın arkasında mükemmel hizalar. A site: High Tide A main'den A rubble'a bükülerek tree-room ve arka site'ı keser. B site'ta Reckoning hem sütun alanını hem üst katı kaplar. Dönen kapılar akıl oyununa izin verir — Cascade'i bir kapıdan push ederken takım diğerinden rotate eder.
+- **Lotus (S-tier)**: Üç site ve dönen kapılar, su duvarı bükülmeleri için doğal yollar açar. C site: su duvarını C main'den C mound'a bük — waterfall ve arka site açılarını tek duvarla kesersin. C main'den çekilen hareketli duvar oyundaki en güçlü Harbor giriş araçlarından biri; koridor takımını kalkanın arkasında kusursuz hizalar. A site: su duvarı A main'den A rubble'a bükülerek tree-room ve arka site'ı keser. B site'ta ult hem sütun alanını hem üst katı kaplar. Dönen kapılar akıl oyununa kapı açar — hareketli duvarı bir kapıdan push ederken takım diğerinden rotate eder.
 
-- **Haven (A-tier)**: Üç site esneklik verir. C site: High Tide C long'dan platform üzerinden bükülerek garaj ve arka site açılarını keser. Reckoning C'de yıkıcı — geniş açık alan düşmana pozisyon vermeden gayzer atlayacak yer bırakmaz. A site: High Tide'ı A long'dan A short'a bükerek heaven ve site açılarını kes. A long boyunca Cascade takıma açık yaklaşımı geçmek için zemin verir. B site Haven'da Harbor'ın en zayıf noktası — dar pencere choke'u Cascade değerini sınırlar, Reckoning yayılamaz.
+- **Haven (A-tier)**: Üç site sana esneklik verir. C site: su duvarını C long'dan platformun üzerinden bükerek garaj ve arka site açılarını kes. Ult C'de yıkıcıdır — geniş açık alan düşmana gayzerden kaçacak yer bırakmaz. A site: su duvarını A long'dan A short'a bük — heaven ve site açılarını kesersin. A long boyunca çekilen hareketli duvar takıma açık yaklaşımı geçecek zemini verir. B site Haven'da Harbor'ın en zayıf noktası — dar pencere choke'u duvarın değerini sınırlar, ult de yayılacak yer bulamaz.
 
-- **Breeze (A-tier)**: Geniş açık site'lar Reckoning'in hakim olduğu yer. A site: Reckoning tüm piramit alanını ve mağarayı kaplar. High Tide A hall'dan mid kapılarına bükülerek iki uzun sightline'ı aynı anda keser. B site: B main boyunca Cascade, tube'dan site'a güvenli geçiş sağlar. Varsayılan B plant'te Cove sütun açısını kapatır. B tunnel'dan High Tide arka site boyunca bükülerek derin CT tutma noktasını keser. Ama Breeze Harbor'ın savunma zayıflığını cezalandırır — uzun sightline'lar pasif savunmayı acımasız kılar.
+- **Breeze (A-tier)**: Geniş açık site'lar ult'un hüküm sürdüğü yer. A site: ult tüm piramit alanını ve mağarayı kaplar. Su duvarını A hall'dan mid kapılarına bükerek iki uzun sightline'ı aynı anda kes. B site: B main boyunca çekilen hareketli duvar, tube'dan site'a güvenli geçiş sağlar. Standart B plant'te kubbe sütun açısını kapatır. B tunnel'dan çekilen su duvarı arka site boyunca bükülerek derin CT tutma noktasını keser. Ama Breeze, Harbor'ın savunma zayıflığını acımasızca cezalandırır — uzun sightline'lar pasif savunmayı ölümcül yapar.
 
-- **Split (B-tier)**: Dar koridorlar High Tide bükme seçeneklerini kısıtlar ama belirli noktalarda Cascade güçlü. A main: rampaya Cascade takıma dar choke'tan push için kalkan verir. Mid: mid alttan üste Cascade, Split'teki en güçlü mid alma araçlarından biri. B site: sınırlı alan Reckoning'i daha az verimli kılar ama spike üzerinde Cove değerli çünkü sadece bir veya iki açı ateş edebilir. High Tide B main'den köşe etrafına site'a bükülür ama kıvrılma yarıçapı kısa. Harbor burada niş — takım her round A main veya mid kontrolü zorlamayı planlıyorsa al.
+- **Split (B-tier)**: Dar koridorlar su duvarı bükme seçeneklerini kısar ama belirli noktalarda hareketli duvar çok güçlü. A main: rampaya çekilen hareketli duvar, takıma dar choke'tan push için kalkan verir. Mid: mid alttan üste çekilen hareketli duvar, Split'teki en güçlü mid alma araçlarından biri. B site: dar alan ult'u daha az verimli kılar ama spike üstünde kubbe değerli, çünkü oraya sadece bir veya iki açı ateş edebiliyor. Su duvarı B main'den köşenin etrafından site'a bükülür ama kıvrılma yarıçapı kısadır. Harbor burada niş bir seçim — takım her round A main veya mid kontrolünü zorlamayı planlıyorsa al.
 
-- **Bind (B-tier)**: Teleporter'lar Cascade'i karmaşıklaştırır — seni takip edemez. B site: hookah'dan Cascade kısa giriş için güçlü push kalkanı verir. High Tide B long'dan bahçeye bükülerek yakın ve derin site açılarını kapatır. A site: A short boyunca Cascade geçiş koruması sağlar. A site Reckoning sağlam — alan gayzer yayılması için yeterli. Bind'ın rotasyon ağırlıklı metası Harbor'a zarar verir çünkü High Tide ve Cascade bir kez atıldığında tek site'a commit olursun.
+- **Bind (B-tier)**: Teleporter'lar hareketli duvarı zorlaştırır — duvar seni teleporttan takip edemez. B site: hookah'dan çekilen hareketli duvar kısa giriş için güçlü bir push kalkanı verir. Su duvarını B long'dan bahçeye bükerek yakın ve derin site açılarını kapat. A site: A short boyunca çekilen hareketli duvar geçiş koruması sağlar. A site'ta ult sağlamdır — alan gayzerin yayılmasına yeter. Bind'ın rotasyon ağırlıklı metası Harbor'a zarar verir, çünkü su duvarını ve hareketli duvarı bir kez attıktan sonra tek site'a commit olursun.
 
 ## 6. Eşleşme Notları
-- **Viper'a karşı**: Cascade'i siper olarak kullanarak Viper duvarından push yap — Viper duvarı hasar verir ama Cascade takip eden ateşi engeller. Ama Viper'ın pit'i site take'leri durdurur — Cascade ve High Tide toksik bölgeyi temizlemez.
-- **KAY/O'ya karşı**: Suppress atış ortasında seni etkisiz kılar, takımı push ortasında açıkta bırakır. Yetenek başlatırken suppress bıçağı yarıçapının dışında kal. Push sırasında suppress yenersen takım sen yeniden atana kadar durmalı.
-- **Sova'ya karşı**: Recon Bolt Cascade ve High Tide'ın içinden tarar — Harbor smoke controller gibi bilgiyi engellemez. Takımın başka ajandan ek smoke'a ihtiyacı var veya dart'ı push öncesinde yok etmeli.
-- **Cypher'a karşı**: Cascade yolundaki Trapwire'lar içinden geçen takım arkadaşlarını tetikler. Cascade arkasında push yapmadan önce Cypher yeteneğini temizle. High Tide kamera görüşünü engeller — savunmada nadir bilgi avantajı.
-- **Jett/Raze ile**: Harbor'ın en yüksek sinerji eşleşmesi. Entry duelist'in önünde Cascade, doğru anda dash veya satchel ile içinden geçtikleri hareketli kalkan yaratır. Duelist peek atar, savunucu sönen kalkan ile giriş arasında sıkışır.
-- **Gekko ile**: Cascade içinden Wingman ve Dizzy atarken takım arkasında push yaptığında örtüşen baskı yaratır. Gekko'nun geri toplama mekaniği yeteneğinin push'tan sağ çıkmasını ve retake'de yeniden kullanılmasını sağlar.
+- **Viper'a karşı**: Hareketli duvarı siper alıp Viper duvarından push yap — Viper duvarı hasar verir ama hareketli duvar arkadan gelen ateşi keser. Ama Viper'ın pit'i site almayı durdurur — ne hareketli duvar ne su duvarı o toksik bölgeyi temizler.
+- **KAY/O'ya karşı**: KAY/O'nun susturması atışının ortasında seni etkisiz bırakır, takımı push'un ortasında açıkta yakalar. Yeteneğini başlatırken susturma bıçağının yarıçapının dışında dur. Push sırasında susturma yersen takım sen yeniden atana kadar beklemeli.
+- **Sova'ya karşı**: Sova'nın recon'u hem hareketli duvarın hem su duvarının içinden tarar — Harbor smoke controller'ı gibi bilgiyi engellemez. Takımın başka bir ajandan ek smoke'a ihtiyacı var ya da push'tan önce recon okunu vurup düşürmesi lazım.
+- **Cypher'a karşı**: Hareketli duvarın yolundaki teller, içinden geçen takım arkadaşlarını tetikler. Duvarın arkasından push yapmadan önce Cypher'ın yeteneklerini temizle. Su duvarı kamera görüşünü keser — savunmada nadir bir bilgi avantajı.
+- **Jett/Raze ile**: Harbor'ın en yüksek sinerjili eşleşmesi. Giriş duelist'inin önüne çekilen hareketli duvar, onların doğru anda dash ya da satchel'la içinden geçtiği bir kalkan yaratır. Duelist peek atar, savunucu sönen kalkanla giriş arasında sıkışıp kalır.
+- **Gekko ile**: Hareketli duvarın içinden Gekko botlarını atarken takım da arkadan push yapınca üst üste binen baskı oluşur. Gekko'nun botunu geri toplama özelliği, yeteneğin push'tan sağ çıkmasını ve retake'de yeniden kullanılmasını sağlar.
 
 ## 7. Oyuncuya Ne Söylenmeli
 
 ### İyi performans gösterdiğinde
-**Oyuncu Eylemi:** High Tide'ı köşelerin etrafında bükerek aynı anda 3+ açıyı kapatıyorsun, Cascade'i yalnızca takım arkadaşları yakın mesafede hazırken atıyorsun, Cove'u planter spike'a dokunana kadar geciktiriyorsun.
-**Düşman Algısı:** Savunucular off-angle'larının ötesine bükülen duvar görüyor. Duvar ile geometri arasındaki boşluğu kullanmak için pozisyon almışlardı — kıvrılma onu kapattı. Cascade arkasında dört oyuncuyla geliyorsun, savunucuya bir tempoda karar verdiriyor: kalkanın içinden tut ya da geri çekil. Cove spike üzerine tek açı açıkta kalacak şekilde düşüyor, siper yıkılmadan planter bitiriyor.
-**Düşman Tepkisi:** Savunucular High Tide bükülmesinden ya tamamen geri çekilmeli ya da kör içinden push yapmalı. Boşlukta oynamaya çalışanlar kıvrılma geçerken açıkta yakalanır. Cascade ya tam commit ya bedava site zorlar. Cove plant'i tamamlamaya yetecek kadar ateş emer.
-**Fırsat:** Savunucular bükülmenin off-angle'larını kapatıp yeniden pozisyonlanmaya başladığı an entry penceresi. Bu yeniden pozisyonlanma sırasında gelen Cascade, onları pozisyonlar arasında yakalar — iki tempoluk temiz açısız an. Takım duvar düşmeden içeride olmalı.
+**Oyuncu Eylemi:** Su duvarını köşelerin etrafında bükerek aynı anda 3+ açıyı kapatıyorsun, hareketli duvarı yalnızca takım arkadaşların yakın mesafede hazırken atıyorsun, kubbeyi plant'çi spike'a dokunana kadar bekletiyorsun.
+**Düşman Algısı:** Savunucular kendi off-angle'larının ötesine kıvrılan bir duvar görüyor. Duvarla geometri arasındaki boşluğu kullanmak için pozisyon almışlardı — bükülme o boşluğu kapattı. Hareketli duvarın arkasından dört oyuncuyla geliyorsun ve savunucuyu tek bir tempoda karar vermeye zorluyorsun: kalkanın içinden tut ya da geri çekil. Kubbe spike'ın üstüne tek açı açıkta kalacak şekilde oturuyor, siper kırılmadan plant'çi bitiriyor.
+**Düşman Tepkisi:** Savunucular su duvarının bükülmesinden ya tamamen geri çekilmeli ya da körlemesine içinden push yapmalı. Boşlukta oynamaya çalışan, kıvrılma geçerken açıkta yakalanır. Hareketli duvar ya tam commit ettirir ya bedava site verir. Kubbe, plant'i bitirmeye yetecek kadar ateş yer.
+**Fırsat:** Savunucular bükülmenin kapattığı off-angle'ları bırakıp yeniden pozisyon almaya başladığı an, senin entry penceren. Tam o yeniden pozisyon anında gelen hareketli duvar, onları iki pozisyon arasında yakalar — iki tempoluk, temiz, açısız bir an. Takım duvar düşmeden içeride olmalı.
 **Yön değiştirme:** Savunucu bükülmeni okumaya başladığında ters yöne çevir. Orijinal kıvrılmaya fazla commit ettiklerinde düz git. Beklenen tarafa oynayanlara sürpriz yap.
-**Düşman Adapte Olduktan Sonra:** Cascade'den push yapıyorlarsa kısa tut, site'a takip etme — crossfire'larına yürümelerine izin ver. Cove'u erken yıkıyorlarsa plant animasyonu ortasında at, iki tempo hayatta kalması yeterli. Retake oynuyorlarsa site'ı bedavaya al, Cove ile plant yap, retake yoluna Reckoning bırak.
+**Düşman Adapte Olduktan Sonra:** Duvardan push yapıyorlarsa duvarı kısa tut, site'a takip etme — kendi crossfire'larının içine yürümelerine izin ver. Kubbeyi erken kırıyorlarsa plant animasyonunun ortasında at, iki tempo dayanması yeter. Retake oynuyorlarsa site'ı bedavaya al, kubbeyle plant yap, retake yoluna ult bırak.
 
-**Zorlandığında**: "Cascade takım arkasında olmadan çıkıyor. Takım arkadaşlarını choke'ta push'a hazır görene kadar atma. Atmadan önce 'Cascade çıkıyor' de. Kimse takip etmiyorsa tut."
+**Zorlandığında**: "Duvar takım arkanda değilken çıkıyor. Takım arkadaşlarını choke'ta push'a hazır görene kadar atma. Atmadan önce 'Duvar çıkıyor' de. Kimse takip etmiyorsa tut."
 
-**Tahmin edilebilir olduğunda**: "Her round aynı yöne bükülüyorsun, savunucular sen atmadan kıvrılmanın arkasında oynuyor. Ters yöne çevir ya da düz git — aşırı kaymalarını cezalandır."
+**Tahmin edilebilir olduğunda**: "Her round aynı yöne bükülüyorsun, savunucular sen atmadan kıvrımın arkasında oynuyor. Ters yöne çevir ya da düz git — aşırı kaymalarını cezalandır."
 
 ## 8. Rütbe Ayarı
 
-**Düşük (Iron-Silver)**: Cascade'i atak'ta basit ileri siper olarak kullan — choke'a at, arkasından site'a yürü. High Tide şimdilik kapı girişlerine düz gidebilir. Tek kural: suyun sahadayken push yap, olmadığında dur. Plant yaptığın her sefer Cove spike'a konur.
+**Düşük (Iron-Silver)**: Hareketli duvarı atak'ta basit bir ileri siper olarak kullan — choke'a at, arkasından site'a yürü. Su duvarını şimdilik kapı girişlerine düz çekebilirsin. Tek kuralın: su sahadayken push yap, su yokken dur. Plant yaptığın her seferde kubbeyi spike'ın üstüne koy.
 
-**Orta (Gold-Platinum)**: Her atışta en az bir köşenin etrafına High Tide bükmaya başla. Cascade'i kendin push etmek istediğinde değil, takım arkadaşları yakın mesafedeyken at. En çok oynadığın iki haritada site başına bir bükülmüş duvar açısı öğren. Reckoning'i saklama — site take'lerde kullan.
+**Orta (Gold-Platinum)**: Her atışta su duvarını en az bir köşenin etrafına bükmeye başla. Hareketli duvarı kendin push etmek istediğin an değil, takım arkadaşların yakındayken at. En çok oynadığın iki haritada site başına bir bükülmüş duvar açısı öğren. Ult'u saklama — site alırken kullan.
 
-**Yüksek (Diamond-Ascendant)**: Her High Tide 2+ sightline kesecek şekilde kıvrılmalı. Cove zamanlaması hassas — plant dokunuşunda, öncesinde değil. Savunucular okuyamasın diye üç round'luk bükülme yönü rotasyonu yap. Cascade yem olur: bir yöne gönder, diğer taraftan push yap. Ult müsait olduğu ilk round'da kullanılır.
+**Yüksek (Diamond-Ascendant)**: Her su duvarı 2+ sightline kesecek şekilde kıvrılmalı. Kubbenin zamanlaması hassas — plant dokunuşunda at, bir an önce değil. Savunucular okuyamasın diye bükülme yönünü üç round'da bir değiştir. Hareketli duvarı yem olarak kullan: bir yöne gönder, diğer taraftan push yap. Ult, hazır olduğu ilk round'da kullanılır.
 
-**Elit (Immortal-Radiant)**: High Tide bükülmeleri savunucu pozisyonu bilgisine göre round ortasında ayarlanır. Cascade atak'ta saldırı, savunmada agresif peek'ten çekilme kalkanı olarak kullanılır. Cove yerleşimi düşmanın hangi açıları oynadığını hesaba katar. Reckoning takımın entry penceresine isabet edecek şekilde zamanlanır, öncesinde değil. Bu rütbedeki Harbor gücü koordinasyon hızında — su arkasında tek bir takım olarak hareket ederlerse oyundaki en hızlı execute.
+**Elit (Immortal-Radiant)**: Su duvarı bükülmeleri savunucunun pozisyon bilgisine göre round ortasında ayarlanır. Hareketli duvar atak'ta saldırı aracı, savunmada ise agresif peek'ten çekilme kalkanı olarak kullanılır. Kubbe yerleşimi düşmanın hangi açıları oynadığını hesaba katar. Ult, takımın entry penceresine isabet edecek şekilde zamanlanır, bir an önce değil. Bu rütbede Harbor'ın gücü koordinasyon hızında — suyun arkasında tek bir takım gibi hareket ederlerse oyundaki en hızlı execute onlarınkidir.

@@ -1,87 +1,87 @@
 # AJAN: Brimstone
 
 ## 1. Rol Kimliği
-Brimstone en güvenilir smoker. Smoke atılır — beklemek yok, geri çekilmek yok. Üç smoke + Incendiary lineup'ları = her site girişinde avantaj sende. Kit sade; üç smoke doğru yere oturduğunda rakip giriş açısını kaybeder.
+Brimstone'un smoke'u en güvenilirisi. Sen smoke'u attığın an giriş açılır — beklemek, geri çekilmek yok. Üç smoke'u doğru yerlere oturt, üstüne molly noktalarını ezberle, her site girişinde avantaj sende olur. Kit sade ama keskin: üç smoke doğru yere düştüğünde rakip giriş açısını kaybeder, sen takımı içeri sokarsın.
 
 ## 2. Temel Sorumluluklar
-- Site girişinde üç smoke'u aynı anda at — giriş açılır
-- Her haritada site başına Incendiary noktalarını ezberle — rakip defuse denemelerini kesmek için
-- Site girişinde Stim Beacon koy — takım düellolarda ek ateş hızı alır
-- Orbital Strike'ı spike konumuna göre kullan — kill için değil, bölge baskısı için
-- Smoke'ları sakla — üçünü birden harcama, birini geri alım veya ara hamle için tut
-- Takımın giriş temposunu sen belirlersin — smoke atmadan kimse hareket etmez
+- Site girişinde üç smoke'u aynı anda at — girişi tek hamlede aç
+- Her haritada site başına molly noktalarını ezberle — rakibin defuse denemesini kes
+- Site girişinde takıma stim koy — yanındaki herkes ek ateş hızıyla düelloya girsin
+- Ult'u kill için değil, bölge baskısı için kullan — spike konumuna göre at
+- Üç smoke'u birden harcama — birini geri alım veya ara hamle için sakla
+- Giriş temposunu sen belirle — sen smoke atmadan kimse kıpırdamaz
 
 ## 3. Sık Yapılan Hatalar
-- Site girişinde üç smoke'u birden harcayıp geri alım için hiçbir şey bırakmamak
-- Stim Beacon'ı koymayı unutmak veya takımın geçmeyeceği yere koymak
-- Orbital Strike'ı kill için kullanmak — bu bölge aracı, kill aracı değil
-- Incendiary'yi aktif çatışmada boşa harcamak, spike sonrası için saklamamak
-- Atak'ta çok geride durmak — smoke menzili yetmez, öne çık
-- Incendiary noktası öğrenmemek — o zaman sadece smoke atıyorsun, Brimstone oynamıyorsun
+- Girişte üç smoke'u birden yakıp geri alım için elinde hiçbir şey bırakmamak
+- Stim koymayı unutmak ya da takımın hiç geçmeyeceği bir yere koymak
+- Ult'u kill umuduyla atmak — o bir bölge aracı, kafa avlama aracı değil
+- Molly'yi aktif çatışmada boşa yakmak, spike sonrası için saklamamak
+- Atak'ta çok geride durmak — smoke menzilin yetmez, öne çık
+- Molly noktası öğrenmemek — o zaman sadece smoke atıyorsun, Brimstone oynamıyorsun
 
 ## 4. Kalıp -> Anlam
 
-**IF** Her site girişinde üç smoke'un hepsini atıyorsun
-**MEANING** Smoke stoğun yok — geri alımda veya ara hamlede hiçbir şeyin kalmıyor
-**COUNTER** Girişte iki smoke at, birini sakla. Geri alım engeli veya yeniden kapama için kullan.
-**WHY** Üçünü harcayınca round'un ikinci yarısında tamamen açık kalırsın. Sakladığın smoke sana hareket özgürlüğü verir.
+**IF** Her site girişinde üç smoke'un üçünü birden atıyorsun
+**MEANING** Round'un geri kalanında elin boş — geri alımda da ara hamlede de hiçbir şeyin kalmıyor
+**COUNTER** Girişte iki smoke at, birini cebinde tut. Onu geri alım engeli veya yeniden kapama için sakla.
+**WHY** Üçünü baştan yakarsan round'un ikinci yarısında çırılçıplak kalırsın. Sakladığın o tek smoke sana sonradan hareket alanı açar.
 
-**IF** Incendiary'yi aktif çatışmada veya satın alma aşamasında harcıyorsun
-**MEANING** Brimstone'un spike sonrası değerini anlamamışsın
-**COUNTER** Atak round'larında Incendiary'yi sadece spike sonrası için sakla. Site başına en az 2 nokta öğren.
-**WHY** Incendiary defuse'u geciktirir — başka hiçbir yetenek bunu birebir yapamaz.
+**IF** Molly'yi aktif çatışmada ya da daha satın alma aşamasında yakıyorsun
+**MEANING** Brimstone'un asıl değerinin spike sonrasında olduğunu kaçırıyorsun
+**COUNTER** Atak round'larında molly'yi sadece spike sonrası için sakla. Her site için en az 2 molly noktası öğren ve körlemesine değil noktadan at.
+**WHY** Molly defuse'u geciktirir — başka hiçbir yetenek bunu birebir yapamaz. Doğru anda atılan tek molly, kazanılmış bir post-plant demektir.
 
-**IF** Orbital Strike sürekli sıfır değer alıyor
-**MEANING** Atış zamanın spike olaylarıyla örtüşmüyor
-**COUNTER** Atak'ta defuse sesi çıkınca spike üstüne at. Savunmada rakip spike'ı bastığı anda spike konumuna vur — yeniden konumlanmak zorunda kalsınlar.
-**WHY** Orbital Strike spike zamanlamasıyla örtüşünce baskı yapar. Spike'tan bağımsız attığında ult harcarsın, rakip sadece konum değiştirir.
+**IF** Ult sürekli boşa gidiyor, hiç değer üretmiyor
+**MEANING** Atış anını spike olaylarıyla denkleştiremiyorsun
+**COUNTER** Atak'ta defuse sesini duyduğun an spike'ın üstüne at. Savunmada rakip spike'ı basar basmaz spike konumuna vur — yer değiştirmek zorunda kalsınlar.
+**WHY** Ult spike zamanlamasına oturduğunda baskı yapar ve defuse'u kilitler. Spike'tan bağımsız attığında ult'u çöpe atarsın, rakip sadece bir adım yana kayar.
 
-**IF** Stim Beacon hiç alınmıyor veya her round kullanılmadan bitiyor
-**MEANING** Site girişinde takımın ek ateş hızı almıyor
-**COUNTER** Takım push yaparken giriş noktasına Stim Beacon koy. Phantom ve Spectre kullanan takım arkadaşın stim'li ateş hızıyla düelloyu kazanır.
-**WHY** Stim'li takım dövüşe ek ateş hızıyla girer — bu avantajı atlamak round kaybettirir.
+**IF** Stim hiç koyulmuyor ya da her round kullanılmadan bitiyor
+**MEANING** Takımın giriş anında bedava ateş hızı avantajını masada bırakıyor
+**COUNTER** Takım push'a başlamadan önce giriş noktasına stim koy. Phantom veya Spectre tutan takım arkadaşın o ateş hızıyla düelloyu açık ara kazanır.
+**WHY** Stim'li takım dövüşe artı ateş hızıyla girer — bu kadar net bir avantajı atlamak round kaybettirir.
 
-**IF** Smoke'lar hafif sapıyor veya küçük boşluklar bırakıyor
-**MEANING** Smoke yerleşimin hassas değil
-**COUNTER** Özel modda smoke yerleşimini pratik yap. Küçük boşluk bile savunucuya tek yönlü açı verir ve site girişini bozar.
-**WHY** Smoke boşluğu savunucuya bilgi verir, giriş sırasında takım arkadaşını düşürürler.
+**IF** Smoke'ların hafif kayıyor ya da kenarda küçük boşluk bırakıyor
+**MEANING** Smoke yerleşimin yeterince hassas değil
+**COUNTER** Özel modda smoke noktalarını tek tek oturt. Küçük bir boşluk bile savunucuya tek yönlü açı verir ve girişi bozar.
+**WHY** Smoke'taki boşluk savunucuya bilgi verir; o boşluktan tam push anında takım arkadaşını kafadan vurur.
 
 ## 5. Harita Etkileşimleri
-- **Bind**: En iyi haritalarından biri. Küçük alan, smoke her şeyi kapsar. Her iki site için Incendiary noktaları güçlü ve iyi biliniyor.
-- **Fracture**: Güçlü seçim. Çift yönlü atak anlık üçlü smoke'tan faydalanır. Breach girişlerinde Stim Beacon yüksek değer verir.
-- **Split**: A ve B darboğazları smoke yarıçapına tam giriyor. Her iki sitede spike sonrası Incendiary güvenilir.
-- **Sunset**: Mid kapılar ve B market anlık smoke'tan faydalanır. B site spike sonrasında Orbital Strike sert vurur.
-- **Ascent**: Oynanabilir ama güvenli pozisyondan derin açılara smoke ulaşmaz. Atak'ta öne çıkman gerekiyor.
-- **Breeze**: Harita çok büyük — smoke menzili yetmiyor. C-tier, Viper'ı tercih et.
-- **Haven**: Üç site üç smoke şarjını zorluyor. Tüm siteleri kapatmak güç ama geri alım smoke'ları değer üretir. B-tier.
-- **Icebox**: Oynanabilir ama Viper'ın duvar + orb ikilisi burada kesinlikle daha iyi. B-tier.
-- **Lotus**: Çoğu duman noktasına ulaşabilirsin ama dönen kapılar nokta çalışmasını zorlaştırıyor. B-tier.
+- **Bind**: En iyi haritalarından biri. Alan dar, smoke her şeyi örter. İki site için de molly noktaları güçlü ve oturmuş.
+- **Fracture**: Güçlü seçim. Çift yönlü atak, anında atılan üçlü smoke'tan tam fayda görür. Breach girişlerinde stim yüksek değer üretir.
+- **Split**: A ve B darboğazları tam smoke yarıçapına oturuyor. İki sitede de spike sonrası molly güvenilir.
+- **Sunset**: Mid kapılar ve B market anlık smoke'tan fayda görür. B site post-plant'te ult sert vurur.
+- **Ascent**: Oynanır ama güvenli pozisyondan derin açılara smoke ulaşmaz. Atak'ta öne çıkman şart.
+- **Breeze**: Harita çok büyük — smoke menzilin yetmiyor. C-tier, burada Viper tercih et.
+- **Haven**: Üç site, üç smoke şarjını zorlar. Hepsini birden kapatmak güç ama geri alım smoke'ları değer üretir. B-tier.
+- **Icebox**: Oynanır ama Viper'ın duvar + orb ikilisi burada açık ara daha iyi. B-tier.
+- **Lotus**: Çoğu smoke noktasına ulaşırsın ama dönen kapılar nokta çalışmasını zorlaştırır. B-tier.
 
 ## 6. Eşleşme Notları
-- **Viper'a karşı**: Brimstone smoke'ları anlık atılır, Viper'ın ise kalıcı duvarı var. Takım aynı anda push yaparsa Brimstone smoke'u site girişini hızlı açar; rakip rotasyon beklerken Viper duvarı keser.
-- **Agresif duelist'lere karşı**: Takım push yapmadan önce giriş noktasına Stim Beacon koy. Push başladıktan sonra koymak geç kalır.
-- **Geri alımda**: Görüş hattın olmasa bile herhangi bir mesafeden smoke atabilirsin — geri alımda smoke'u anlık en doğru konuma koyarsın.
-- **Viper ile birlikte**: Breeze ve Icebox'ta Viper ilk kapamayı halleder, sen smoke'ları geri alım için saklarsın. Bu ikili güçlü.
+- **Viper'a karşı**: Senin smoke'un anında çıkar, Viper'ınki kalıcı duvar. Takım aynı anda push yaparsa senin smoke'un girişi hızlı açar; rakip rotasyon beklerken Viper duvarıyla görüşü keser.
+- **Agresif duelist'lere karşı**: Takım push'a kalkmadan önce giriş noktasına stim koy. Push başladıktan sonra koymaya kalkarsan geç kalırsın.
+- **Geri alımda**: Görüş hattın olmasa bile her mesafeden smoke atabilirsin — geri alımda smoke'u tam gereken noktaya anında oturtursun.
+- **Viper ile birlikte**: Breeze ve Icebox'ta ilk kapamayı Viper halleder, sen smoke'larını geri alım için saklarsın. Bu ikili çok güçlü.
 
 ## 7. Oyuncuya Ne Söylenmeli
 
 ### İyi performans gösterdiğinde
-**Oyuncu Eylemi:** Site girişinde 2 smoke atarken birini ara hamle için saklıyorsun ve Incendiary'yi sadece spike sonrasında defuse noktasında kullanıyorsun.
-**Düşman Algısı:** Savunucular boşluksuz smoke görüyor. İlk 2 smoke sönünce push yapmayı planlıyorlar — sakladığın üçüncüyü hesaba katmıyorlar.
-**Düşman Tepkisi:** İlk smoke'ları beklemeye zorlanıyorlar ya da kör push yapıyorlar. Smoke sönünce push yaptıklarında yeniden kapama onları ortada yakalıyor — rotasyona girdiler, arkalarında duman var.
-**Fırsat Penceresi:** Savunucular push yaptığında yeniden duman yediklerinde sipersiz kalıyorlar. Spike sonrası çift Incendiary şarjı savunucuyu spike'a yaklaştırmaz — defuse denemeleri boşa çıkar.
-**Tekrar Stratejisi:** Girişte 2 smoke at, üçüncüyü yeniden kapama için sakla. Spike sonrası Incendiary noktasına geç, defuse sesi çıkana kadar atma. Sonraki round'larda yeniden kapama konumunu değiştir — her round aynı noktaya atma, rakip açı tutmaya başlar.
-**Düşman Adaptasyonu:** Savunucular yeniden kapama zamanını okumaya başlar, Incendiary noktana önceden nişan alır veya smoke atılmadan agresyon yığar.
-**Karşı Adaptasyon:** Yeniden kapama zamanlamasını değiştir — her round aynı noktaya atma. Incendiary noktandan avlanıyorlarsa farklı pozisyon dene ya da farklı açıdan at. Erken agresyon yapıyorlarsa Stim Beacon koy ve dövüş — stim'li takım aceleci push'u yener.
+**Oyuncu Eylemi:** Girişte iki smoke atıp birini ara hamle için saklıyorsun, molly'yi de yalnızca spike sonrası defuse noktasında kullanıyorsun.
+**Düşman Algısı:** Savunucular boşluksuz bir smoke duvarı görüyor. İlk iki smoke sönünce push yapmayı planlıyorlar — sakladığın üçüncüyü hesaba katmıyorlar.
+**Düşman Tepkisi:** Ya ilk smoke'ları bekleyip duruyorlar ya da körlemesine push'a kalkıyorlar. Smoke sönünce çıktıklarında ikinci kapama onları tam ortada yakalıyor — rotasyona girdiler, arkalarında duman var.
+**Fırsat Penceresi:** Push'a kalkıp ikinci dumanı yiyince sipersiz kalıyorlar. Spike sonrası art arda iki molly defuse'u kilitler — savunucu spike'a yaklaşamaz, denemeleri boşa çıkar.
+**Tekrar Stratejisi:** Girişte iki smoke at, üçüncüyü yeniden kapama için sakla. Spike basıldıktan sonra molly noktasına geç, defuse sesini duymadan atma. Sonraki round'larda kapama noktanı değiştir — her round aynı yere atarsan rakip açı tutmaya başlar.
+**Düşman Adaptasyonu:** Savunucular yeniden kapama anını okumaya başlar; molly noktana önceden nişan alır ya da sen smoke atmadan agresyon yığar.
+**Karşı Adaptasyon:** Kapama zamanlamanı bozup at — her round farklı an, farklı nokta. Molly noktandan avlanıyorlarsa pozisyon ya da açı değiştir. Erken agresyon yapıyorlarsa stim koy ve dövüş — stim'li takım aceleci push'u her zaman yener.
 
 ### Zorlandığında
-"Smoke'ları çok erken harcıyorsun. Ara hamle için en az bir smoke sakla. Incendiary'yi aktif çatışmada değil, spike sonrasında kullan."
+"Smoke'ları çok erken yakıyorsun. Ara hamle için en az birini sakla. Molly'yi aktif çatışmada değil, spike sonrasında defuse noktasına at."
 
 ### Tahmin edilebilir olduğunda
-"Rakipler Incendiary zamanını çözdü — her round aynı anda atıyorsun. Bir round spike basılır basılmaz at, sonraki round defuse sesi çıkınca at — zamanlamayı her round değiştir."
+"Rakip molly zamanını çözmüş — her round aynı anda atıyorsun. Bir round spike basılır basılmaz at, sonraki round defuse sesini duyunca at. Zamanlamayı her round değiştir, seni okuyamasınlar."
 
 ## 8. Rütbe Ayarı
-- **Iron-Silver**: Site girişinde üç smoke'u doğru yere at. Nokta çalışması şimdilik zorunlu değil — önce doğru yerleri duman.
-- **Gold-Platinum**: Site başına 2 Incendiary noktası öğren. Girişlerde Stim Beacon kullanmaya başla. Savunmada geri alım için bir smoke sakla.
-- **Diamond-Ascendant**: Tam Incendiary nokta kütüphanesi oluştur. Spike konumuna göre Orbital Strike zamanlaması yap. Round boyunca smoke stoğunu yönet.
-- **Immortal-Radiant**: Rakibin alışkanlığına göre smoke zamanlamasını değiştir. Incendiary zamanını tahmin edilemez tut. Stim Beacon'ı kendi için değil, takım takası için en verimli noktaya koy.
+- **Iron-Silver**: Önce üç smoke'u doğru yere oturtmayı öğren. Nokta çalışması şimdilik şart değil — odak doğru yerleri dumanlamakta.
+- **Gold-Platinum**: Site başına 2 molly noktası öğren. Girişlerde stim koymaya başla. Savunmada geri alım için bir smoke sakla.
+- **Diamond-Ascendant**: Tam molly nokta kütüphaneni kur. Spike konumuna göre ult zamanlaması yap. Round boyunca smoke stoğunu bilinçli yönet.
+- **Immortal-Radiant**: Smoke zamanlamanı rakibin alışkanlığına göre kaydır. Molly anını okunamaz tut. Stim'i kendin için değil, en verimli takas noktasına koy.

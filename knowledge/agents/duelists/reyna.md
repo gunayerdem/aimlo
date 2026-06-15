@@ -1,85 +1,85 @@
 # AJAN: Reyna
 
 ## 1. Rol Kimliği
-- Reyna'nın gücü doğrudan öldürme sayısına bağlı. Öldürdükçe güçleniyorsun, atlamazsan devre dışısın.
-- Nişanına güveniyorsan oyna. Açılış düellolarını tutarlı kazanıyorsan Reyna tam sana göre — her öldürme bir sonraki düelloyu kolaylaştırır. Nişanın tutarsızsa Reyna seçme; öldürme yoksa sunacağın hiçbir şey yok.
-- Reyna bir kartopu: öldürdükçe iyileşir, kaçar, bir dahaki düelloya tam canla girer. Öldüremezsen takımına sıfır katkı.
+- Reyna'nın gücü tamamen öldürmeye bağlı. Öldürdükçe güçlenirsin; öldüremezsen oyunda yoksun.
+- Nişanına güveniyorsan Reyna oyna. Açılış düellolarını düzenli kazanıyorsan Reyna tam sana göre — her kafa atışı bir sonraki düelloyu kolaylaştırır. Nişanın tutarsızsa Reyna seçme; öldürme yoksa takıma verebileceğin hiçbir şey yok.
+- Reyna kartopu gibi büyür: öldür, iyileş, kaç, bir sonrakine tam canla gir. Öldüremezsen takıma katkın sıfır.
 
 ## 2. Temel Sorumluluklar
-- **Atak:** Leer'i fırlat, kör etme açılırken çık, öldür. Öldürdükten sonra kapak arkasına geç ve Devour ile tam cana gel, sonra bir sonraki düelloya gir. Açıkta kaldıktan sonra ikinci açıdan biri varsa Dismiss ile koş. Nişanın iyiyse önce git. Nişanın kötüyse takım arkadaşının arkasından git ve Leer'le destek ver.
-- **Defans:** Leer'le alışılmadık açıdan bekle, ilk düelloyu al. Bir düşman öldürdükten sonra yanından biri çıkacaksa Dismiss ile kaç. Uzun savunmada kapak arkasından Devour ile düelloyu sürdür. Çoklu öldürme şansı varsa Empress'i aç.
-- **Takımın senden beklentisi:** Öldür. Öldürmezsen iyileşmen de Dismiss'in de anlamı kalmaz. Takım senin düelloları kazanmanı, canını korumanı ve baskıyı katlamanı bekler.
+- **Atak:** Kör küresini at, kör açılırken çık, kafadan vur. Düşmanı indirdikten sonra kapağın arkasına geç, heal ile tam cana gel, sonra bir sonraki düelloya gir. Açıkta kalıp ikinci açıda bir düşman gördüysen kaçış ile köşeye sıvış. Nişanın iyiyse sen önden git. Nişanın kötüyse takım arkadaşının arkasından gir ve kör küresiyle önünü aç.
+- **Defans:** Kör küresiyle beklenmedik açıdan tut, ilk düelloyu kap. Bir düşmanı indirdikten sonra yanından ikincisi çıkacaksa kaçış ile sıvış. Uzayan savunmada kapağın arkasına çekil, heal ile düelloyu sürdür. Çoklu öldürme kokusu aldıysan ult'u aç.
+- **Takımın senden beklentisi:** Öldür. Öldürmezsen iyileşmenin de kaçışının da hiçbir anlamı kalmaz. Takım senden düelloları kazanmanı, canını korumanı ve baskıyı katlamanı bekler.
 
 ## 3. Sık Yapılan Hatalar
-1. **Her öldürmede Dismiss yapmak** — Dismiss tehlike altındayken kaçış içindir. Kapak arkasındaysan varsayılan her zaman Devour olsun. Devour yapmadan kaçarsan bir sonraki düelloya düşük canla giriyorsun.
-2. **Leer'i düşmanın vurabileceği yere fırlatmak** — Leer'in canı var, vurulunca yok olur. Düşmana yakın açıkta fırlatırsan etkisi olmadan yok ederler. Duvarın içine veya düşmanın zor vurabileceği bir açıya fırlat.
-3. **Alan açmak yerine can korumak için oynamak** — Reyna öldürme ister. Ama sadece Dismiss'le hayatta kalıp geç öldürmeler topluyorsan takımına öncü olarak değer vermiyorsun.
-4. **Leer'i sadece kendine kullanmak** — Leer senin tek takım desteğin. Takım arkadaşın önce gidiyorsa onun için de fırlat.
-5. **Empress'te açıkta kalmak** — Empress seni hızlandırır ve her öldürmede bedava Dismiss verir ama yığılmış pozisyonlara dalarsan Dismiss bitmeden ölürsün. Empress açıkken de kapak arkasından çık.
-6. **Nişanın kötü olduğu günde Reyna seçmek** — Nişanın tutmuyorsa Reyna oyundaki en işlevsiz ajandır. Fark edersen ya takım arkadaşının arkasından git ya da ajan değiştir.
-7. **Düşmana doğru Dismiss yapmak** — Dismiss seni dokunulmaz yapar ama görünürdür. Dokunulmazlık bitince ölürsün. Dismiss'i her zaman kapak ya da köşe arkasına doğru kullan.
+1. **Her öldürmeden sonra kaçış basmak** — Kaçış tehlike altındayken sıvışmak içindir. Kapağın arkasındaysan varsayılan her zaman heal olsun. Heal almadan kaçarsan bir sonraki düelloya yarım canla girersin.
+2. **Kör küresini düşmanın vurabileceği yere atmak** — Kör küresinin canı var, vurulunca yok olur. Düşmanın burnunun dibine açıkta atarsan etki etmeden patlatırlar. Onun yerine duvarın içine ya da düşmanın zor nişan alacağı bir açıya at.
+3. **Alan açmak yerine sadece can koruyup oynamak** — Reyna öldürmek için var. Hep kaçışla hayatta kalıp geç gelen temizleme öldürmeleri topluyorsan takıma öncü değeri katmıyorsun.
+4. **Kör küresini sadece kendin için atmak** — Kör küresi senin tek takım desteğin. Takım arkadaşın önden giriyorsa düşmanı onun için de kör et.
+5. **Ult açıkken açıkta kalmak** — Ult seni hızlandırır ve her öldürmede bedava kaçış verir; ama yığılmış düşmanın üstüne dalarsan kaçış dolmadan ölürsün. Ult açıkken bile kapağın arkasından çık.
+6. **Nişanın tutmadığı gün Reyna seçmek** — Nişanın tutmuyorsa Reyna oyundaki en işlevsiz ajandır. Fark ettiğin an ya takım arkadaşının arkasına geç ya da ajan değiştir.
+7. **Düşmana doğru kaçış basmak** — Kaçış seni dokunulmaz yapar ama görünür bırakır. Dokunulmazlık bitince oracıkta ölürsün. Kaçışı her zaman kapağa ya da köşeye doğru kullan.
 
 ## 4. Kalıp -> Anlam
-IF: Öldürme sayın yüksek ama ilk öldürme yüzden düşük
-MEANING: Öncü olarak oynamıyorsun. Takım arkadaşlarının gerisinde kalıp temizleme öldürmeleri topluyorsun.
-COUNTER: İlk düelloyu sen al. Öldür, Devour yap, bir sonraki düelloya geç. Temizleme öldürmeleri alan açmaz.
-WHY: Devour seni sıralı düelolara hazırlar. Geride kalırsan bu döngü kırılır ve takıma öncü değeri vermiyorsun.
+IF: Öldürme sayın yüksek ama ilk öldürme oranın düşük
+MEANING: Öncü olarak oynamıyorsun. Takımın gerisinde kalıp temizleme öldürmeleri topluyorsun.
+COUNTER: İlk düelloyu sen kap. Kafadan vur, heal yap, bir sonraki düelloya geç. Temizleme öldürmeleri alan açmaz.
+WHY: Heal seni arka arkaya düellolara hazırlar. Geride kalırsan döngü kırılır ve takıma öncü değeri katamazsın.
 
-IF: Devour'dan iki katı Dismiss kullanıyorsun
-MEANING: Can korumasını alan açmaya tercih ediyorsun. Her düelloya düşük canla giriyorsun.
-COUNTER: Karar kuralı: birden fazla açıya maruz kalıyorsan Dismiss, kapak arkasındaysan veya tek tehdidi temizlediysen Devour. Varsayılan Devour olsun.
-WHY: Devour her düelloyu tam canda almanı sağlar. Devour yapmadan kaçarsan her seferinde can açığı birikir.
+IF: Heal'in iki katı kadar kaçış kullanıyorsun
+MEANING: Can korumayı alan açmaya tercih ediyorsun. Her düelloya yarım canla giriyorsun.
+COUNTER: Kuralı netleştir: birden fazla açıya açıksan kaçış, kapağın arkasındaysan ya da tek tehdidi temizlediysen heal. Varsayılan heal olsun.
+WHY: Heal her düelloyu tam canla almanı sağlar. Heal almadan kaçarsan her seferinde can açığı birikir.
 
 IF: Yüksek öldürmeli elden sonra sıfır öldürmeli eller geliyor
-MEANING: Klasik kartopu kırılması. Nişanın iyiyken yakıyorsun ama kötüyken yedek planın yok.
-COUNTER: Nişanın tutmayan elde takım arkadaşının arkasına geç. Leer'le önce onu destekle, sonra temizle. Bu elde ilk düelloyu sen alma.
-WHY: Arkadan oynamak, nişanın tutmayan elde öldürme yerine faydalı Leer kullanımı üretir ve takıma somut giriş avantajı verir.
+MEANING: Klasik kartopu kırılması. Nişanın tutarken yakıp yıkıyorsun ama tutmadığında yedek planın yok.
+COUNTER: Nişanın gitmediği elde takım arkadaşının arkasına geç. Kör küresiyle önce düşmanı kör edip onu destekle, sonra temizle. O elde ilk düelloyu sen kapma.
+WHY: Arkadan oynamak, nişanın gittiği elde bile faydalı kör küresi kullanımı üretir ve takıma somut giriş avantajı verir.
 
-IF: Kullanılmamış Leer'le ölüyorsun
-MEANING: Elinde kör etme varken kuru çıkış yapıyorsun.
-COUNTER: Önce Leer fırlat, sonra çık. Leer bekleme süresindeyken hariç asla Leer'siz düello alma.
-WHY: Leer senin tek öncü avantajın. Kullanmadan çıkmak bu avantajdan tamamen vazgeçmek.
+IF: Kör küresini kullanmadan ölüyorsun
+MEANING: Elinde kör etme varken kuru kuruya çıkıyorsun.
+COUNTER: Önce kör küresini at, sonra çık. Kör küresi bekleme süresindeyse o ayrı; onun dışında asla kör etmeden düello kapma.
+WHY: Kör küresi senin tek öncü avantajın. Kullanmadan çıkmak bu avantajdan resmen vazgeçmektir.
 
-IF: Empress sırasında sık ölüyorsun
+IF: Ult sırasında sık ölüyorsun
 MEANING: Ult açıkken normalde girmeyeceğin pozisyonlara dalmaya başlıyorsun.
-COUNTER: Empress'te de kapak arkasından çık. Bedava Dismiss yanlış açıyı affetmez — Dismiss bitmeden ikinci düşman seni görürse ölürsün.
-WHY: Empress her öldürmede bedava Dismiss verir ama canını artırmaz. Kötü pozisyon hala ölüm demek.
+COUNTER: Ult açıkken bile kapağın arkasından çık. Bedava kaçış yanlış açıyı affetmez — kaçış dolmadan ikinci düşman seni görürse ölürsün.
+WHY: Ult her öldürmede bedava kaçış verir ama canını artırmaz. Kötü pozisyon hâlâ ölüm demektir.
 
 ## 5. Harita Etkileşimleri
-- **Güçlü olduğun haritalar:** Ascent (uzun hatlar düello kazanıp Devour ile can doldurmayı ödüllendirir; A Short ve Mid güçlü Leer açılarıdır), Bind (dar koridorlar Leer'i vurmayı zorlaştırır; yakın mesafe düelloları kartopu etkini artırır), Split (dar alanlar Leer değerini artırır; A Main boyunca Devour ile dayanabilirsin).
-- **Zayıf olduğun haritalar:** Breeze (uzun hatlar Leer'e kolay atış açısı verir; düşman Leer'i yok edince kör etme avantajın düşer, kartopu döngün başlamadan kırılır), Lotus (çok bölgeli yapı seni böler; bir anda tek yerde olabiliyorsun).
-- **Özel açılar:** Ascent'te A Short'a duvarın içinden Leer at — savunucu vuramazken kör olur. Bind'da Hookah'ta Leer'i yakın mesafeden at — düşman yok etmeye zaman bulamaz, bu Reyna'nın en güçlü öncü girişlerinden biri.
+- **Güçlü olduğun haritalar:** Ascent (uzun hatlar düello kazanıp heal ile can doldurmayı ödüllendirir; A Short ve Mid güçlü kör küresi açılarıdır), Bind (dar koridorlar kör küresini vurmayı zorlaştırır; yakın mesafe düelloları kartopunu hızlandırır), Split (dar alanlar kör küresinin değerini artırır; A Main boyunca heal ile dayanabilirsin).
+- **Zayıf olduğun haritalar:** Breeze (uzun hatlar düşmana kör küresini rahat vurma açısı verir; küre patlayınca kör avantajın düşer, kartopu daha başlamadan kırılır), Lotus (çok bölgeli yapı seni böler; bir anda sadece tek yerde olabilirsin).
+- **Özel açılar:** Ascent'te A Short'a duvarın içinden kör küresi at — savunucu vuramazken kör olur. Bind'da Hookah'ta kör küresini yakın mesafeden at — düşman patlatmaya zaman bulamaz, bu Reyna'nın en güçlü öncü girişlerinden biri.
 
 ## 6. Eşleşme Notları
-- **Zorlandığın ajanlar:** KAY/O (bastırma yetenekleri Devour ve Dismiss'i tamamen kapatır, yeteneksiz kalırsın), Fade (Haunt Dismiss izini açığa çıkarır, Prowler Dismiss yaparken kovalar), Chamber (hassas tabancasıyla Leer-çıkış zamanlamanı cezalandırır).
-- **Baskıladığın ajanlar:** Düz düelloları kaybeden, yavaş, destek yeteneklerine dayanan ajanlar. Viper'ı doğrudan düelloda ezersin, molly'leri boyunca Devour ile dayanırsın. Sage'e karşı da verimlisin çünkü iyileşme döngüsünü bozarsın.
-- **Uyum:** KAY/O'ya karşı bıçağı bitene kadar bekle, sonra gir. Fade'e karşı Prowler karşı açıya koşmasın diye Dismiss'i takım arkadaşına doğru at, kaçmak için uzağa değil. Viper duvarı, Sage kalkanı gibi alan kapatan yetenekler aktifken çıkma — yetenek biter bitmez gir.
+- **Zorlandığın ajanlar:** KAY/O (bastırma yeteneği heal ve kaçışını tamamen kapatır, yeteneksiz kalırsın), Fade (recon'uyla seni ve kaçış izini açığa çıkarır, bot'u sen kaçarken peşine takılır), Chamber (keskin tabancasıyla kör-çıkış zamanlamanı cezalandırır).
+- **Baskıladığın ajanlar:** Düz düelloyu kaybeden yavaş, destek yeteneklerine yaslanan ajanlar. Viper'ı doğrudan düelloda ezersin, molly'leri boyunca heal ile dayanırsın. Sage'e karşı da verimlisin çünkü onun iyileşme döngüsünü bozarsın.
+- **Uyum:** KAY/O'ya karşı bıçağı bitene kadar bekle, sonra gir. Fade'e karşı bot karşı açıya koşmasın diye kaçışı takım arkadaşına doğru bas, kaçmak için ters yöne değil. Viper duvarı, Sage kalkanı gibi alan kapatan yetenekler açıkken çıkma — yetenek biter bitmez gir.
 
 ## 7. Oyuncuya Ne Söylenmeli
 ### İyi oynarken
-**Oyuncu Aksiyonu:** Leer'i duvar içinden atıyorsun, kör etme açılırken çıkıyorsun, sonra kapak arkasına geçip Devour'la tam cana geliyorsun.
-**Düşman Algısı:** Her düelloyu tam canla kazanan bir Reyna görüyorlar. Zor atış yaptığını sanıyorlar ama asıl avantaj Leer-Devour döngüsü: kör etme avantajıyla giriyor, öldürmeler arasında tam cana geliyorsun. Neden karşılık vermenin bu kadar zor olduğunu çözemiyorlar.
-**Düşman Tepkisi:** Ya kör halde düelloyu kabul ederler (kaybederler) ya da Leer'i vurmak için dönerler (nişanlarını giriş açısından anlık çekerler). Devour yüzünden yıpratamıyorlar seni — her düello senin tam canına karşı onların birikmiş hasarına sıfırlanıyor.
-**Fırsat Penceresi:** Duvar içinden gelen Leer düşmanı önceden ateş edemez bırakır. Her Devour sonraki düelloyu 20-50 can avantajıyla açıyor.
-**Tekrar Düzeni:** 1. düello: Leer'i duvardan geç, çık, öldür, kapak arkasından Devour. 2. düello: farklı açıdan Leer, tam canla çık, öldür, Devour. 3. düello: Empress varsa aç ve zincirle. Birden fazla açıya maruz kalıyorsan Dismiss, değilsen varsayılan Devour.
-**Düşman Uyumu:** 3-4 el sonra Leer'in ulaşamayacağı köşelere geçerler, Devour animasyonunda çift açıyla basarlar veya Leer kurulmadan önce agresif gelirler.
-**Karşı Uyum:** Anti-Leer pozisyon aldıklarında: Leer'i açıkta ama yüksekten at, yukarı bakmak zorunda kalsınlar. Çift açı bastıklarında: Dismiss'le dokunulmaz geç ve yeniden konumlan. Erken geldiklerinde: pasif açı tut ve Leer'e doğru yürümelerini sağla.
+**Oyuncu Aksiyonu:** Kör küresini duvarın içinden atıyorsun, kör açılırken çıkıyorsun, sonra kapağın arkasına geçip heal ile tam cana geliyorsun.
+**Düşman Algısı:** Her düelloyu tam canla kazanan bir Reyna görüyorlar. Zor atış yaptığını sanıyorlar ama asıl avantaj kör-heal döngüsü: kör avantajıyla giriyor, öldürmeler arasında tam cana dönüyorsun. Sana neden karşılık veremediklerini bir türlü çözemiyorlar.
+**Düşman Tepkisi:** Ya kör hâlde düelloyu kabul ederler (kaybederler) ya da küreyi vurmak için dönerler (nişanlarını giriş açısından bir an çekerler). Heal yüzünden seni yıpratamıyorlar — her düello senin tam canına karşı onların birikmiş hasarına sıfırlanıyor.
+**Fırsat Penceresi:** Duvarın içinden gelen kör küresi düşmanı önceden ateş edemez hâle getirir. Her heal sonraki düelloyu 20-50 can avantajıyla açar.
+**Tekrar Düzeni:** 1. düello: kör küresini duvardan geçir, çık, kafadan vur, kapağın arkasında heal. 2. düello: farklı açıdan kör küresi at, tam canla çık, kafadan vur, heal. 3. düello: ult varsa aç ve zincirle. Birden fazla açıya açıksan kaçış, değilsen varsayılan heal.
+**Düşman Uyumu:** 3-4 el sonra kör küresinin ulaşamadığı köşelere geçerler, heal animasyonunda çift açıyla basarlar veya küre kurulmadan önce agresif gelirler.
+**Karşı Uyum:** Küreden kaçınan pozisyon aldıklarında: küreyi açıkta ama yüksekten at, yukarı bakmak zorunda kalsınlar. Çift açı bastıklarında: kaçışla dokunulmaz geç ve yeniden konumlan. Erken geldiklerinde: pasif açı tut, küreye doğru yürümelerini sağla.
 
 ### Zorlanırken
-"Nişanın tutmuyor. Takım arkadaşının arkasına geç — önce o girsin, sen Leer'le destekle, sonra temizle."
+"Nişanın tutmuyor. Takım arkadaşının arkasına geç — önce o girsin, sen düşmanı kör edip destekle, sonra temizle."
 
 ### Öngörülebilir olduğunda
-"Leer açını okuyorlar. Farklı yerden at ya da çıkışı bir an geciktir."
+"Kör küresi açını okuyorlar. Farklı yerden at ya da çıkışı bir an geciktir."
 
 ## 8. Rank Modülasyonu
 ### Düşük Elo (Iron-Silver)
-Her düellodan önce Leer kullan. Devour ve Dismiss arasındaki farkı öğren: tehlike altında değilsen varsayılan Devour olsun. Nişanın tutmayan elde ajan değiştir veya takım arkadaşının arkasına geç. Harita başına bir Leer açısı çalış.
+Her düellodan önce kör küresini at. Heal ile kaçış arasındaki farkı öğren: tehlike altında değilsen varsayılan heal olsun. Nişanın gitmeyen elde ajan değiştir ya da takım arkadaşının arkasına geç. Her haritada bir kör küresi açısı çalış.
 
 ### Orta Elo (Gold-Diamond)
-Devour/Dismiss kararını netleştir. Leer'i sadece kendin için değil takım arkadaşın için de kullan. Duvar içi Leer açılarını öğren. Çoklu öldürme elleri için Empress zamanlamasını yönet.
+Heal/kaçış kararını netleştir. Kör küresini sadece kendin için değil takım arkadaşın için de at. Duvar içi kör küresi açılarını öğren. Çoklu öldürme elleri için ult zamanlamasını yönet.
 
 ### Yüksek Elo (Ascendant-Immortal)
-Nişanın tutmayan eller için arkadan oynama alışkanlığı geliştir. Empress'i ekonomiye en çok zarar vereceğin anlarda aç. Dismiss kullanımını izle — Devour'dan fazlaysa her elde düşük canla düelloya giriyorsun demektir.
+Nişanın gitmeyen ellerde arkadan oynamayı alışkanlık hâline getir. Ult'u düşman ekonomisine en çok zarar vereceğin anda aç. Kaçış kullanımını takip et — heal'den fazlaysa her el yarım canla düelloya giriyorsun demektir.
 
 ### Elit (Radiant)
-Radiant'lar Leer'i kör etme için değil nişan yönlendirme için kullanır: düşman Leer'e bakarken sen çıkış yapıyorsun, nişanı sende değil Leer'de. Bunu öğrenirsen Leer'siz çıkış tamamen anlamsız hale gelir. Empress açıkken de kapak arkasından çık — bedava Dismiss açıkta bırakmaz. Düşman yeteneklerinin bitmesini bekleyerek çıkış zamanlamanı kur; bu seviyede Reyna belirli haritalar ve yarılar için uzman bir seçim, ne zaman değiştireceğini bil.
+Radiant'lar kör küresini sadece kör etmek için değil, düşmanın nişanını yönlendirmek için kullanır: düşman küreye bakarken sen çıkış yapıyorsun, nişanı sende değil kürede. Bunu oturtursan küresiz çıkış tamamen anlamsız hâle gelir. Ult açıkken bile kapağın arkasından çık — bedava kaçış seni açıkta bırakmaz. Düşman yeteneklerinin bitmesini bekleyerek çıkış zamanlamanı kur; bu seviyede Reyna belirli haritalar ve yarılar için uzman bir seçim, ne zaman değiştireceğini bil.

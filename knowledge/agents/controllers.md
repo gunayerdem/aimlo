@@ -1,163 +1,163 @@
 # Controllers - Radiant Koçluk Bilgi Bankası
 
-Controller'lar görüş keser, alanı şekillendirir. İyi controller sadece duman atmaz — roundun akışını belirler, site girişlerini mümkün kılar, geri alımları engeller, spike sonrası savaşı kazanır. Duman zamanlaması ve yerleşimi seni ortalama controller'dan ayırır.
+Controller görüşü keser, alanı sen şekillendirirsin. İyi controller sadece duman atmaz — roundun akışını o belirler: site girişini açar, geri alımı boğar, spike sonrası savaşı kazandırır. Seni ortalama controller'dan ayıran şey dumanın zamanlaması ve yeri.
 
 ---
 
 ## Brimstone
 
 ### Yetenek Analizi
-- **Stim Beacon (C)** — 100 kredi, 2 sarj. Alandaki herkese ateş hızı, silah değiştirme hızı, şarjör hızı ve geri tepme toparlanması artışı verir. Phantom ve Spectre'da fark edilir artış sağlar.
-- **Incendiary (Q)** — 250 kredi. Ateş alanı açan roket molly. 60 DPS verir. Spike sonrası en güçlü yeteneklerden biri. Duvarlardan sektirilerek kullanılır.
-- **Sky Smoke (E)** — Bedava, 3 sarj. Taktik haritadan istenen noktaya yerleştirilen duman topları. Oyundaki en uzun süren dumanlar. Anında yerleşir.
-- **Orbital Strike (X)** — 7 ult puanı. Seçilen alana lazer çağırır. Minimap'te görünür. Spike üstünde, dar boğazda veya defuse sırasında kullan.
+- **stim (C)** — 100 kredi, 2 şarj. Alandaki herkese ateş hızı, silah değiştirme, şarjör değiştirme ve geri tepme toparlanması verir. Phantom ve Spectre'da farkı net hissedersin.
+- **molly (Q)** — 250 kredi. Yere ateş alanı açan roket molly, 60 DPS. Spike sonrasının en sert silahlarından biri. Duvardan sektirerek de kullan.
+- **smoke (E)** — bedava, 3 şarj. Haritadan istediğin noktaya bıraktığın dumanlar; oyundaki en uzun süren dumanlar bunlar, üstelik anında oturuyor.
+- **ult (X)** — 7 puan. Seçtiğin alana lazer indirir, minimap'te görünür. Spike üstüne, dar boğaza ya da defuse anına sakla.
 
 ### Duman Felsefesi
-- Brimstone dumanları en kolay yerleştirilen ama en uzun süren dumanlardır. Her duman başına en fazla görüş kesme süresi sağlar.
-- **Atak**: 3 dumanı aynı anda koy, hızlı gir. Anında yerleşme, Omen veya Astra dumanlarına göre savunucuları pozisyon almadan önce yakalar.
-- **Savunma**: Geri almak için 1-2 dumanı sakla. Görüş hattı olmadan duman koyabildiği için geri alımda en güvenilir seçim.
-- **Tek yönlüler**: Taktik haritadan koyduğu için tek yönlü kurmak Omen veya Viper'a göre daha zor. Standart derin dumanlara odaklan.
+- Brimstone dumanı en kolay bırakılan ama en uzun süren dumandır. Duman başına en çok görüş kesme süresini bu agent verir.
+- **Atak**: 3 dumanı aynı anda bırak, hemen gir. Anında oturduğu için savunucuyu daha açıyı tutamadan yakalarsın — Omen ya da Astra dumanında bu lüks yok.
+- **Savunma**: Geri alım için 1-2 dumanı sakla. Görüş hattına ihtiyaç duymadan duman bıraktığın için retake'te en güvenilir seçimsin.
+- **Tek yönlüler**: Haritadan bıraktığın için tek yönlü kurmak Omen ya da Viper'a göre daha zor. Sen derin, standart dumana odaklan.
 
 ### Ne Zaman Seçilir
-- Harita küçükse ve 3 duman tüm kilit noktaları kapıyorsa (Bind, Fracture, Split)
-- Spike sonrası Incendiary hatları kritikse
-- En hızlı site girişini istiyorsan (anında yerleşme)
-- Hat bazlı oynuyorsan
+- Harita küçükse ve 3 duman tüm kilit noktaları kapatıyorsa (Bind, Fracture, Split)
+- Spike sonrası molly hatları belirleyiciyse
+- En hızlı site girişini istiyorsan (anında oturan duman)
+- Hat üstünden, planlı oynuyorsan
 
 ### Harita Gücü
-- **Bind**: S-tier. Küçük harita, her yerden tam kapsam. Her iki site için kolay Incendiary hatları. Hookah veya Short'a ult yıkıcı.
-- **Fracture**: S-tier. Kompakt harita, tüm duman noktaları ulaşılabilir. Her iki site spike sonrası hatları çalışır.
-- **Split**: A-tier. Tüm boğazları güvenden duman altına alabilir. Her iki site Heaven için Incendiary hatları.
-- **Sunset**: A-tier. Mid kontrol dumanları, güçlü spike sonrası hatları.
-- **Lotus**: B-tier. Büyük harita ama çoğu noktaya ulaşır. Dönen kapılar hatları zorlaştırır.
-- **Breeze**: C-tier. Harita çok büyük. Spawn'dan karşı siteye duman yetişmez.
-- **Haven**: B-tier. 3 site 3 dumanı zorunlu kılar. 3 dumanı da 3 siteyi kapatacak şekilde böl.
-- **Icebox**: B-tier. Oynanabilir ama Viper burada daha fazla değer üretir.
+- **Bind**: S-tier. Küçük harita, her köşeyi kapatırsın. İki site için de kolay molly hatları var. Hookah ya da Short'a ult yıkıcı.
+- **Fracture**: S-tier. Kompakt harita, tüm duman noktalarına ulaşırsın. İki sitede de spike sonrası hatlar tutuyor.
+- **Split**: A-tier. Tüm boğazları güvenden duman altına alırsın. İki site Heaven'a molly hatları çalışıyor.
+- **Sunset**: A-tier. Mid'i duman altına alırsın, spike sonrası hatlar güçlü.
+- **Lotus**: B-tier. Büyük harita ama çoğu noktaya yetişirsin. Dönen kapılar hatları zorlaştırıyor.
+- **Breeze**: C-tier. Harita kocaman. Spawn'dan karşı sitenin dumanına yetişemezsin.
+- **Haven**: B-tier. 3 site var, 3 dumanı zorunlu kılıyor. Üç dumanı üç siteyi tutacak şekilde böl.
+- **Icebox**: B-tier. Oynanır ama burada Viper daha çok değer üretir.
 
 ### Sık Yapılan Hatalar (IF/MEANING/COUNTER/WHY)
 
 1. **IF** Dumanları çok erken atıyorsan
-   **MEANING** Takım henüz hazır değilken duman koyarsan giriş öncesinde söner
-   **COUNTER** Takım harekete geçtiğinde at, beklerken değil
-   **WHY** Erken duman = savunucu dumanın içinden geçip pozisyon alır
+   **MEANING** Takım daha hazır değilken bıraktığın duman, girişten önce söner
+   **COUNTER** Takım harekete geçtiği an at, beklerken değil
+   **WHY** Erken duman = savunucu dumanın içinden geçip açıyı tutar
 
 2. **IF** 3 dumanı tek siteye harcıyorsan
-   **MEANING** Spike sonrası veya round ortasında duman kalmaz
-   **COUNTER** Siteye iki, birini sakla
-   **WHY** Tüm dumanı harcamak = round ortasında görüş kontrolünü kaybetmek
+   **MEANING** Spike sonrasına ve round ortasına hiç duman kalmaz
+   **COUNTER** Siteye iki bırak, birini sakla
+   **WHY** Tüm dumanı yakmak = round ortasında görüş kontrolünü kaybetmek
 
-3. **IF** Incendiary hatları öğrenmiyorsan
-   **MEANING** Hatsız Brimstone yarım agent
-   **COUNTER** Harita başına en az 3 spike sonrası hat öğren
-   **WHY** Hat bilgisi = güvenden defuse kesme. Hat yok = risk alarak kesmek zorunda kalırsın
+3. **IF** molly hatlarını öğrenmiyorsan
+   **MEANING** Hattı olmayan Brimstone yarım agent
+   **COUNTER** Her haritada en az 3 spike sonrası hat ezberle
+   **WHY** Hat bilgisi = güvenden defuse kesme; hat yoksa risk alıp açığa çıkarak kesmek zorunda kalırsın
 
-4. **IF** Orbital Strike'ı boş noktaya atıyorsan
-   **MEANING** Ult önceden belli olur. Düşmanın kaçamayacağı yere at
-   **COUNTER** Spike üstü, dar boğaz içi, defuse sırasında kullan
-   **WHY** Boş noktaya ult = 7 puan çöp
+4. **IF** ult'u boş noktaya atıyorsan
+   **MEANING** Ult önceden okunur; düşmanın kaçamayacağı yere bırak
+   **COUNTER** Spike üstüne, dar boğaza ya da defuse anına sakla
+   **WHY** Boş noktaya ult = 7 puanı çöpe atmak
 
-5. **IF** Stim Beacon'u görmezden geliyorsan
-   **MEANING** 100 kredi ateş hızı artışı direkt DPS farkı yaratır
-   **COUNTER** Takım girerken geçeceği yere koy
-   **WHY** 100 kredi stim = takımın DPS artışı. Koymamak = bedava avantajı harcamak
+5. **IF** stim'i hiç kullanmıyorsan
+   **MEANING** 100 krediye aldığın ateş hızı doğrudan DPS demek
+   **COUNTER** Takımın gireceği yola bırak
+   **WHY** 100 kredilik stim = takıma bedava DPS; atmadan girmek = avantajı boşa harcamak
 
-6. **IF** Dumanları sığ koyuyorsan
-   **MEANING** Sığ duman savunucunun yakın durmasına ve dumanın içinden çıkmasına izin verir
-   **COUNTER** Dumanı sitenin derinliğine at, savunucuyu geriye it
-   **WHY** Sığ duman = düşman duman içinden geçerek sürpriz kazanır
+6. **IF** Dumanları sığ bırakıyorsan
+   **MEANING** Sığ duman savunucunun yakın durup içinden çıkmasına izin verir
+   **COUNTER** Dumanı sitenin derinine at, savunucuyu geriye it
+   **WHY** Sığ duman = düşman içinden çıkıp seni sürprizle kafadan vurur
 
 ### Spike Sonrası Değeri
-- Brimstone'un Incendiary'si spike sonrası en güçlü yeteneklerden biri. Hatlarla güvenden defuse kesilebilir.
-- **Standart kullanım**: Spike'ı bilinen noktaya dik. Hat noktasına çekil. Defuse sesi duyunca Incendiary at. Defuse eden ya hasar yiyerek ölür, ya bırakır, ya da seni bulmak zorunda kalır.
-- Defuse sırasında spike üstüne Orbital Strike tam sıfırlama zorlar. 7 puan pahalı ama doğru anda atarsan roundu kilitlersin.
+- Brimstone'un molly'si spike sonrasının en sert silahlarından biri. Hatlarla defuse'u güvenden kesersin.
+- **Standart kullanım**: Spike'ı bildiğin noktaya dik, hat noktana çekil. Defuse sesini duyunca molly at. Defuse eden ya hasar yiyip ölür, ya defuse'u bırakır, ya da seni aramak zorunda kalır.
+- Defuse sırasında spike üstüne ult tam sıfırlama zorlar. 7 puan pahalı ama doğru anda atarsan roundu kilitlersin.
 
 ---
 
 ## Viper
 
 ### Yetenek Analizi
-- **Snake Bite (C)** — 200 kredi, 2 sarj. Asit havuzu. 25 DPS hasar ve Vulnerable (tüm kaynaklardan çift hasar) uygular. Herhangi bir hasar kaynağıyla birleşince öldürücü.
-- **Poison Cloud (Q)** — 200 kredi. Fırlatılabilir gaz bombası. Aç/kapa yapılabilen zehirli duman. Yakıt kullanır (Toxic Screen ile ortak). İçindeki düşmanların canını düşürür (50 HP'ye kadar). Yeniden kullanılabilir olması Viper'ı tanımlar.
-- **Toxic Screen (E)** — Bedava. Geniş mesafe kaplayan zehirli duvar. Aç/kapa yapılabilir. Yakıt kullanır (Poison Cloud ile ortak). Round başında koy, yerini sonradan değiştiremezsin.
-- **Viper's Pit (X)** — 7 ult puanı. Viper etrafında devasa zehirli bulut. İçindeki düşmanlar görüş azalır, hasar alır. Viper onları işaretli görür. Viper içindeyken süresiz sürer. Spike sonrası site tutmada en baskılı ult.
+- **molly (C)** — 200 kredi, 2 şarj. Asit havuzu; 25 DPS verir ve Vulnerable uygular (düşman tüm hasarı çift alır). Herhangi bir hasarla birleşince öldürür.
+- **smoke (Q)** — 200 kredi. Fırlattığın, aç-kapa yapabildiğin zehirli duman. Yakıt harcar (duvarla ortak bar). İçindekinin canını düşürür (50 HP'ye kadar). Tekrar tekrar kullanabilmen Viper'ı Viper yapan şey.
+- **duvar (E)** — bedava. Geniş mesafe kaplayan zehirli duvar, aç-kapa yapılır. Yakıt harcar (smoke ile ortak bar). Round başında kur; yerini sonradan değiştiremezsin.
+- **ult (X)** — 7 puan. Viper'ın çevresinde devasa zehirli bulut. İçindeki düşmanın görüşü kararır, hasar alır, sen onu işaretli görürsün. İçinde durdukça süresiz sürer. Spike sonrası site tutmanın en baskıcı ult'u.
 
 ### Duman Felsefesi
-- Viper'ın dumanları aç/kapa yapılabilir ve yeniden kullanılır. Görüşün NEREDE olduğunu değil, NE ZAMAN kesildiğini sen belirlersin.
-- **Yakıt yönetimi**: Poison Cloud ve Toxic Screen aynı yakıt barını kullanır. İkisini aynı anda çalıştırırsan yakıt hızla biter. Sırayla veya kısa aralıklarla kullan.
-- **Tek yönlü Poison Cloud**: Viper tek yönlü dumanda rakipsiz. Poison Cloud'u yüksek yüzeylere (kutular, çıkıntılar, eşikler) koy — duman baş hizasının üstünde dursun. Sen ayakları görürsün, düşman hiçbir şey görmez.
-- **Toxic Screen yerleşimi**: Duvar tek bir açıyı değil, haritayı ikiye bölmeli. Icebox B'de iyi koyulmuş duvar tüm siteyi ayırır.
+- Viper'ın dumanı aç-kapa yapılır ve tekrar kullanılır. Görüşün NEREDE değil, NE ZAMAN kesileceğine sen karar verirsin.
+- **Yakıt yönetimi**: smoke ve duvar aynı yakıt barını paylaşır. İkisini birden açık tutarsan yakıt anında biter. Sırayla ya da kısa aralıklarla kullan.
+- **Tek yönlü smoke**: Tek yönlü dumanda Viper'ın rakibi yok. Dumanı yüksek bir yüzeye koy (kutu, çıkıntı, eşik) — duman baş hizasının üstünde dursun. Sen düşmanın ayağını görürsün, o hiçbir şey görmez.
+- **duvar yerleşimi**: Duvar tek bir açıyı değil, haritayı ikiye böler. Icebox B'de iyi kurulmuş duvar tüm siteyi keser.
 
 ### Duvar Kullanımı
-- **Atak**: Toxic Screen ile siteyi böl, savunucunun çapraz ateş potansiyelini kes. Breeze A'da duvar Hall'u sitten ayırır. Icebox B'de Kitchen'ı Yellow'dan ayır.
-- **Savunma**: Toxic Screen ile hızlı girişleri yavaşlat. Bind B'de B Long boyunca duvar, geçenleri kör geçmeye zorlar. Ayak sesi duyunca aç.
-- **Round ortası**: Duvarı kapat, düşmanı geçmeye ikna et, tekrar aç ve onu izole et.
+- **Atak**: duvarla siteyi böl, savunucunun çapraz ateşini kes. Breeze A'da duvar Hall'u site'tan ayırır. Icebox B'de Kitchen'ı Yellow'dan keser.
+- **Savunma**: duvarla hızlı girişi yavaşlat. Bind B'de B Long boyunca duvar, geçeni kör geçmeye zorlar. Ayak sesini duyunca aç.
+- **Round ortası**: Duvarı kapat, düşmanı geçmeye ikna et, sonra tekrar aç ve onu yalnız yakala.
 
 ### Ne Zaman Seçilir
-- Harita bölünmesi gereken geniş açık alanlar varsa (Breeze, Icebox, Lotus)
-- Spike sonrası Snake Bite hatları kritikse
-- Duvar bazlı site bölünmesi haritaya uyuyorsa
-- Viper's Pit ile savunmada siteyi tek başına tutmak istiyorsan
+- Bölmen gereken geniş, açık alanlar varsa (Breeze, Icebox, Lotus)
+- Spike sonrası molly hatları belirleyiciyse
+- Site'ı duvarla ikiye bölmek haritaya uyuyorsa
+- Savunmada siteyi ult ile tek başına tutmak istiyorsan
 
 ### Harita Gücü
-- **Breeze**: S-tier. A veya B boyunca Toxic Screen haritayı temiz böler. Mid Pillar'da tek yönlü. Her iki site Snake Bite hatları.
-- **Icebox**: S-tier. B site boyunca Toxic Screen standarttır. A'da Viper's Pit geri almayı tüm kaynağa zorlar. A Pipes'ta tek yönlüler.
-- **Lotus**: A-tier. C veya A main boyunca duvar. Snake Bite ile güçlü spike sonrası.
-- **Pearl**: A-tier. B veya Mid boyunca duvar. Her iki sitede Viper's Pit çok güçlü.
-- **Haven**: A-tier. C'den A'ya haritayı kesen duvar. C'de Viper's Pit geri almayı tüm kaynağa zorlar.
-- **Bind**: B-tier. Oynanabilir ama harita diğer controller'lar için yeterince küçük. B Long'dan duvar.
-- **Fracture**: A-tier. Toxic Screen çift girişli siteleri böler. Her iki site Snake Bite hatları güçlü. Duvar bir girişi tutarken takım diğerinden girer.
-- **Ascent**: B-tier. Bazı duvar hatları çalışır ama Omen tercih edilir.
-- **Split**: C-tier. Harita çok dar, Toxic Screen haritayı anlamlı şekilde bölmez.
+- **Breeze**: S-tier. A ya da B boyunca duvar haritayı tertemiz böler. Mid Pillar'da tek yönlü. İki sitede de molly hatları var.
+- **Icebox**: S-tier. B site boyunca duvar standarttır. A'da ult retake'i tüm takıma pahalıya patlatır. A Pipes'ta tek yönlüler.
+- **Lotus**: A-tier. C ya da A main boyunca duvar. molly ile spike sonrası güçlü.
+- **Pearl**: A-tier. B ya da Mid boyunca duvar. İki sitede de ult çok güçlü.
+- **Haven**: A-tier. C'den A'ya haritayı kesen duvar. C'de ult retake'i tüm takıma pahalıya patlatır.
+- **Bind**: B-tier. Oynanır ama harita başka controller'lar için yeterince küçük. B Long'dan duvar.
+- **Fracture**: A-tier. duvar çift girişli siteleri böler; iki sitede de molly hatları güçlü. Duvar bir girişi tutarken takım diğerinden basar.
+- **Ascent**: B-tier. Bazı duvar hatları çalışır ama burada Omen tercih edilir.
+- **Split**: C-tier. Harita çok dar, duvar haritayı anlamlı şekilde bölmez.
 
 ### Sık Yapılan Hatalar (IF/MEANING/COUNTER/WHY)
 
-1. **IF** Poison Cloud ve Toxic Screen'i uzun süre aynı anda açık tutuyorsan
-   **MEANING** Yakıt hızla biter ve her ikisini de kaybedersin
-   **COUNTER** Sırayla veya kısa aralıklarla kullan
-   **WHY** Aynı anda çalıştırma = yakıt biter = round ortasında görüş kontrolü gider
+1. **IF** smoke ve duvarı uzun süre aynı anda açık tutuyorsan
+   **MEANING** Yakıt anında biter, ikisini birden kaybedersin
+   **COUNTER** Sırayla ya da kısa aralıklarla kullan
+   **WHY** İkisini birden açmak = yakıt biter = round ortasında görüş kontrolün gider
 
-2. **IF** Toxic Screen'i takım hareket ettikten sonra koyuyorsan
-   **MEANING** Duvar koyma görünür ve zaman alır. Düşman nereye koyduğunu görür ve ona göre oynar
-   **COUNTER** Her round alım aşamasında duvarını koy
-   **WHY** Geç duvar = düşman pozisyonu okur ve hazırlanır
+2. **IF** duvarı takım hareket ettikten sonra kuruyorsan
+   **MEANING** Duvar kurma sesli ve görünür, üstelik zaman alır; düşman nereye kurduğunu görüp ona göre oynar
+   **COUNTER** Her round daha alım aşamasındayken duvarını kur
+   **WHY** Geç duvar = düşman pozisyonunu okur ve hazırlanır
 
-3. **IF** Snake Bite hatları öğrenmiyorsan
-   **MEANING** Vulnerable ile Snake Bite spike sonrasında öldürücü. Hatsız Viper yarım değer
-   **COUNTER** Her haritada en az 3 hat öğren
-   **WHY** Hat bilgisi = güvenden defuse kesme. Hat yok = spike sonrası değerinin yarısını kaybetmek
+3. **IF** molly hatlarını öğrenmiyorsan
+   **MEANING** Vulnerable ile birleşen molly spike sonrasında öldürür; hattı olmayan Viper yarım değer
+   **COUNTER** Her haritada en az 3 hat ezberle
+   **WHY** Hat bilgisi = güvenden defuse kesme; hat yoksa spike sonrası değerinin yarısını kaybedersin
 
-4. **IF** Viper's Pit'ten çok uzun süre ayrılıyorsan
-   **MEANING** Pit dışında kaldığın her an pit'in bitmesini yaklaştırır. Dönerken ult biter
-   **COUNTER** Pit içinde kal. Çıkman gerekiyorsa gir-çık yap ve hemen geri dön
-   **WHY** Pit'i kaybetmek = spike sonrası site tutma aracını harcamak
+4. **IF** ult'tan çok uzun ayrılıyorsan
+   **MEANING** Ult'un dışında geçirdiğin her an bitişini yaklaştırır; geri döndüğünde ult sönmüş olur
+   **COUNTER** Ult'un içinde kal; çıkman gerekiyorsa gir-çık yap ve hemen geri dön
+   **WHY** Ult'u kaybetmek = spike sonrası site tutma aracını çöpe atmak
 
-5. **IF** Tek yönlü Poison Cloud'u yanlış yüksekliğe koyuyorsan
-   **MEANING** Çok yüksek = sen de göremezsin. Çok alçak = düşman seni görür
-   **COUNTER** Her haritada tam noktayı pratik yap
+5. **IF** Tek yönlü smoke'u yanlış yüksekliğe koyuyorsan
+   **MEANING** Çok yüksekse sen de göremezsin, çok alçaksa düşman seni görür
+   **COUNTER** Her haritada doğru noktayı pratik yap
    **WHY** Yanlış yükseklik = avantaj yerine dezavantaj
 
-6. **IF** Duvarı bilgi için aç/kapa yapmıyorsan
-   **MEANING** Toxic Screen'i anlık kapatarak düşmanın nerede olduğunu okuyabilirsin
+6. **IF** Duvarı bilgi almak için aç-kapa yapmıyorsan
+   **MEANING** Duvarı bir an kapatıp düşmanın nerede olduğunu okuyabilirsin
    **COUNTER** Kapat, bak, tekrar aç — bedava bilgi
-   **WHY** Sabit duvar = bilgi toplama fırsatını kaçırmak
+   **WHY** Sabit duvar = bedava bilgi toplama fırsatını kaçırmak
 
 ### Spike Sonrası Değeri
-- Viper'ın Snake Bite'ı Vulnerable yüzünden spike sonrası en yıkıcı yeteneklerden biridir.
-- **Çift Snake Bite**: Dik, defuse sesi duyunca ilk Snake Bite hattını at, hemen ikincisini at. Uzun süreli defuse kesme sağlar. Düşman ya hasar yiyerek ölür ya her ikisinin bitmesini bekler.
-- **Viper's Pit ile spike sonrası**: Pit içinde dik — düşman defuse için pit'e girmek zorunda. Onları işaretli görürsün, decay hasarı alırlar. Pit içinde spike koruması oyundaki en baskılı kurulumlardan biridir.
+- Viper'ın molly'si Vulnerable sayesinde spike sonrasının en yıkıcı silahlarından biridir.
+- **Çift molly**: Dik, defuse sesini duyunca ilk molly hattını at, hemen ardından ikinciyi. Uzun süreli defuse kesme alırsın. Düşman ya hasar yiyip ölür ya ikisinin de bitmesini bekler.
+- **Ult ile spike sonrası**: Ult'un içinde dik — düşman defuse için içine girmek zorunda. Onu işaretli görürsün, üstelik hasar alır. Ult içinde spike koruması oyundaki en baskıcı kurulumlardan biridir.
 
 ---
 
 ## Omen
 
 ### Yetenek Analizi
-- **Shrouded Step (C)** — 100 kredi, 2 sarj. Kısa mesafe ışınlanma, animasyonlu. Her iki noktada ses ipucu var. Farklı açı almak, yüksek noktaya çıkmak veya sahte rotasyon yapmak için kullan.
-- **Paranoia (Q)** — 250 kredi. Duvarlardan geçen gölge mermisi, vurulan düşmanları geçici kör eder. Geniş isabet alanı. Site girişinde en güçlü kör etkilerinden biri.
-- **Dark Cover (E)** — Bedava, 2 sarj, yenilenir. Haritanın her yerine duman koyabilirsin (menzil sınırı yok). Uzaklığa göre ulaşma süresi değişir. Dumanlar içi boş — içlerinde saklanılabilir.
-- **From the Shadows (X)** — 7 ult puanı. Global ışınlanma. Omen hedef noktada gölge olarak belirir. Kanal sırasında iptal edebilirsin. Düşmanlar gölgeyi vurarak iptal eder. Yan giriş, rotasyon ve agresif yer değiştirme için kullan.
+- **kaçış (C)** — 100 kredi, 2 şarj. Kısa mesafe ışınlanma, animasyonlu. İki noktada da ses ipucu bırakır. Farklı açı almak, yüksek noktaya çıkmak ya da sahte rotasyon satmak için kullan.
+- **flash (Q)** — 250 kredi. Duvarlardan geçen gölge mermisi; vurduğu düşmanı geçici kör eder, isabet alanı geniş. Site girişinin en güçlü kör silahlarından biri.
+- **smoke (E)** — bedava, 2 şarj, yenilenir. Haritanın her yerine duman atabilirsin, menzil sınırı yok. Uzaklık arttıkça oturma süresi uzar. Dumanlar içi boş, içinde saklanabilirsin.
+- **ult (X)** — 7 puan. Global ışınlanma. Omen hedef noktada gölge olarak belirir. Kanal sırasında iptal edebilirsin; düşman gölgeyi vurursa o da iptal eder. Yan giriş, rotasyon ve agresif yer değiştirme için kullan.
 
 ### Duman Felsefesi
-- Omen dumanlarının menzil sınırı yok ama ulaşma süresi var. Duman ne kadar uzak, düşman o kadar geç fark eder.
-- **Yükseklik dumanları**: Omen dumanını istediği yüksekliğe koyabilir. Bir yüzeyin üstüne koy, tek yönlü duman elde et.
-- **İçi boş dumanlar**: Omen'in dumanları içi boş küreler. İçinde oturmak gireni görme avantajı verir — ancak düşman dumanı tarayarak içindeki pozisyonunu bulabilir. Duman içinde pozisyonunu değiştir.
-- **Sahte dumanlar**: Bir yöne duman gönder, karşı siteden bas. Ulaşma animasyonu görünür, düşman o yöne kilitlenir.
+- Omen dumanının menzil sınırı yok ama oturma süresi var. Duman ne kadar uzaktaysa düşman onu o kadar geç fark eder.
+- **Yükseklik dumanları**: Dumanı istediğin yüksekliğe koyabilirsin. Bir yüzeyin üstüne bırak, tek yönlü duman elde et.
+- **İçi boş dumanlar**: Omen'in dumanı içi boş küre. İçinde oturmak gireni görme avantajı verir — ama düşman dumanı tarayıp içindeki yerini bulabilir, o yüzden duman içinde pozisyon değiştir.
+- **Sahte dumanlar**: Bir yöne duman gönder, karşı siteden bas. Oturma animasyonu görünür, düşman o yöne kilitlenir.

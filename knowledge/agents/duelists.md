@@ -1,516 +1,516 @@
 # Duelists - Radiant Koçluk Bilgi Bankası
 
-Duellist'ler takımın alan acan oyuncuları. Kit'leri ilk dövüşü almak, alan yaratmak ve site'leri takım için acmak üzerine kurulu. İyi bir duellist sadece frag almaz -- takımı için alan ve bilgi takas eder.
+Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü almak, alan yaratmak ve site'leri takıma açmak için tasarlanmıştır. İyi bir duelist sadece kill toplamaz; takımı için alanı ve bilgiyi takas eder.
 
 ---
 
 ## Jett
 
 ### Yetenek Analizi
-- **Cloudburst (C)** - 200 kredi, 2 şarj. Yetenek tuşunu basılı tutarak eğrilebilen duman. Tek yönlü duman, reposition ve hızlı site baskınlarında kullanılır.
-- **Updraft (Q)** - 150 kredi. Jett'i yukarı fırlatır. Tailwind ile birleştirerek dikey oyun yap. Kutular, rafterlar ve yüksek pozisyonlara ulaşmak için kullan. Ses ipucu yüksek -- yakındaki düşmanlar duyar.
-- **Tailwind (E)** - 2 kill ile yenilenir. Hareket yönünde dash. Jett'in Op meta'sına hükmetmesinin sebebi. Nerf sonrası kısa aktivasyon penceresi gerektirir -- peek öncesi aktive et. Artık bedava kaçış aracı değil.
-- **Blade Storm (X)** - 7 ult puanı. 5 bıçak, sağ tık kalan tümünü fırlatır. Kill'ler bıçakları yeniler. Headshot her mesafede öldürüçü. Sağ tık hareket halinde %100 isabetli -- eco ve pistol roundlarda yıkıcı.
+- **smoke (C)** - 200 kredi, 2 şarj. Tuşu basılı tutarak eğebileceğin tek yönlü duman. Yer değiştirirken ve hızlı site baskınlarında kullan.
+- **zıplama (Q)** - 150 kredi. Jett'i yukarı fırlatır. Dash ile birleştirip dikey oyna. Kutuların, rafterların ve yüksek pozisyonların üstüne çık. Sesi yüksektir; yakındaki düşman seni duyar.
+- **dash (E)** - 2 kill ile yenilenir. Hareket yönünde fırlar. Jett'in op meta'sına hükmetmesinin sebebi budur. Nerf sonrası kısa bir aktivasyon penceresi ister; peek atmadan önce aktive et. Artık bedava kaçış değil.
+- **ult (X)** - 7 ult puanı. 5 bıçak verir, sağ tık kalanların hepsini fırlatır. Aldığın kill'ler bıçakları yeniler. Her mesafede kafa vuruşu öldürür. Sağ tık hareket halinde tam isabetlidir; eco ve pistol round'larda yıkıcıdır.
 
 ### Ne Zaman Seçilir
-- Takımın birincil Op oyuncususun
-- Harita uzun görüş hatları ve dikey pozisyonlara sahip (Breeze, Icebox, Lotus)
-- Takımın agresif off-angle oynayıp reposition yapabilen hızlı entry fragger istiyor
-- Güçlü mekanik aim'in var ve izole düello almak istiyorsun
+- Takımın birincil op oyuncususun.
+- Harita uzun görüş hatları ve dikey pozisyonlar barındırıyor (Breeze, Icebox, Lotus).
+- Takımın agresif off-angle oynayıp hemen yer değiştirebilen hızlı bir entry fragger istiyor.
+- Mekanik aim'in güçlü ve izole düello almak istiyorsun.
 
-### Harita Gücleri
-- **Breeze**: S-tier. Uzun görüş hatları Op için ideal. Updraft ile A site sütunlarına cık. Mid Doors'dan kill al, dash ile geri cekil.
-- **Icebox**: S-tier. A site tüpler, B site konteyner yığınlarında dikey oyun. Mid'den Op, dash ile güvenliğe.
-- **Lotus**: A-tier. Kapılardan hızlı rotasyonlar, C main boğazından dash.
-- **Haven**: A-tier. Üç site hızlı rotasyonu değerli kılar. C long, A long'dan Op.
-- **Ascent**: A-tier. Mid kontrolü Op ile, dash ile catwalk'a geri dön. A main pick sonrası dash.
-- **Bind**: B-tier. Teleporter'lar rotasyon avantajını azaltır. Yine de TP + dash oyunları güçlü.
-- **Split**: B-tier. Dar koridorlar Op'u sınırlar ama Updraft ile Heaven/rafter'a cıkmak değerli.
-- **Sunset**: B-tier. Mid kontrolü Op ile çalışır ama harita utility-ağır agentları tercih eder.
-- **Abyss**: A-tier. Updraft ile dikey oyunlar ve off-angle'lar son derece güçlü.
+### Harita Güçleri
+- **Breeze**: S-tier. Uzun görüş hatları op için ideal. zıplama ile A site sütunlarına çık. Mid Doors'tan kill al, dash ile geri çekil.
+- **Icebox**: S-tier. A site tüplerde, B site konteyner yığınlarında dikey oyna. Mid'den op çek, dash ile güvenliğe dön.
+- **Lotus**: A-tier. Kapılardan hızlı rotasyon yap, C main boğazından dash at.
+- **Haven**: A-tier. Üç site, hızlı rotasyonu değerli kılar. C long ve A long'dan op çek.
+- **Ascent**: A-tier. Mid'i op ile tut, dash ile catwalk'a dön. A main pick'ten sonra dash at.
+- **Bind**: B-tier. Teleportlar rotasyon avantajını kırar. Yine de TP + dash oyunları güçlü.
+- **Split**: B-tier. Dar koridorlar op'u sınırlar ama zıplama ile Heaven/rafter'a çıkmak değerli.
+- **Sunset**: B-tier. Mid kontrolü op ile çalışır ama harita util-ağırlıklı agentları sever.
+- **Abyss**: A-tier. zıplama ile dikey oyunlar ve off-angle'lar son derece güçlü.
 
 ### Sık Yapılan Hatalar (IF/MEANING/COUNTER/WHY)
 
-1. **IF** Tailwind ile tam takıma doğru dash atıyorsan
-   **MEANING** Dash'i pick sonrası reposition için değil, 5 kişiye giriş için kullanıyorsun
-   **COUNTER** Dash her zaman pick sonrası veya güvenli reposition için kullanılmalı
-   **WHY** Agresif dash 1v5 senaryosu yaratır ve trade edilemez -- takımına hiçbir şey kazandırmaz
+1. **IF** dash ile tam takıma doğru dalıyorsan
+   **MEANING** Dash'i pick'ten sonra yer değiştirmek için değil, 5 kişiye giriş için harcıyorsun
+   **COUNTER** Dash'i her zaman pick sonrası veya güvenli yer değiştirme için kullan
+   **WHY** Takıma dalmak 1v5 yaratır ve trade edilemezsin; takımına hiçbir şey kazandırmazsın
 
-2. **IF** Dash'i peek öncesi aktive etmeyi unutuyorsan
-   **MEANING** Nerf sonrası aktivasyon penceresi gerektiren sistemi anlamamışsın
-   **COUNTER** Her peek öncesi Tailwind'i aktive et, sonra peek at
-   **WHY** Aktive edilmemiş dash ile ölmek, Jett'in en büyük avantajını çöpe atmak demek
+2. **IF** dash'i peek öncesi aktive etmeyi unutuyorsan
+   **MEANING** Nerf sonrası gelen aktivasyon penceresini hâlâ kavramamışsın
+   **COUNTER** Her peek'ten önce dash'i aktive et, sonra peek at
+   **WHY** Aktive edilmemiş dash ile ölmek, Jett'in en büyük kozunu çöpe atmaktır
 
-3. **IF** Cloudburst'leri rastgele atıyorsan
-   **MEANING** Her biri 200 kredi ve belirli bir amacı olmalı
-   **COUNTER** Her dumanın tek yönlü, geçiş koruması veya reposition için kullanıldığından emin ol
-   **WHY** Amaçsız duman = 200 kredi çöp + takımın görüş avantajı kaybı
+3. **IF** smoke'ları rastgele atıyorsan
+   **MEANING** Her biri 200 kredi; her birinin net bir amacı olmalı
+   **COUNTER** Her dumanı tek yönlü kullan; ya geçişi koru ya da yer değiştirmeni sakla
+   **WHY** Amaçsız duman hem 200 krediyi hem de takımın görüş avantajını yakar
 
-4. **IF** Açık alanda Updraft yapıyorsan
-   **MEANING** Ses ipucu ve tahmin edilebilir yörünge seni bedava kill yapıyor
-   **COUNTER** Updraft'ı kapalı alan arkasında veya düşmanlar flash/smoke altındayken kullan
-   **WHY** Havada sabit hedef olursun -- düşman seni izlerken sen ateş edemezsin
+4. **IF** açık alanda zıplama atıyorsan
+   **MEANING** Sesin ve tahmin edilebilir yörüngen seni bedava kill yapar
+   **COUNTER** zıplamayı kapalı alan arkasında veya düşman flash/duman altındayken kullan
+   **WHY** Havada sabit hedef olursun; düşman seni izlerken sen ateş edemezsin
 
 5. **IF** Jett ile pasif oynuyorsan
-   **MEANING** Alan yaratma görevini yerine getirmiyorsun
-   **COUNTER** Pasif oynamak istiyorsan sentinel oyna. Jett'in değeri agresyon ve kill alde
-   **WHY** Pasif Jett = takımda duellist yok demek. Rolün gerektirdiği alanı yaratmıyorsun
+   **MEANING** Alan yaratma görevini yapmıyorsun
+   **COUNTER** Pasif oynamak istiyorsan sentinel oyna. Jett'in değeri agresyonda ve kill almakta
+   **WHY** Pasif Jett, takımda duelist yok demektir; rolünün açması gereken alanı açmıyorsun
 
-6. **IF** Op-and-dash tek planınsa
-   **MEANING** İyi takımlar dash aktivasyonunu zorlayıp süre dolunca sana basıyorlar
-   **COUNTER** Op pick sonrası farklı rotasyon planların olsun -- dash olmadan da pozisyon değiştir
-   **WHY** Tek boyutlu oyun okunabilir. Okuma yapan takıma karşı dash süresi dolunca savunmasız kalırsın
+6. **IF** tek planın op-and-dash'se
+   **MEANING** İyi takımlar dash aktivasyonunu zorlar, süre dolunca üstüne basar
+   **COUNTER** Op pick sonrası farklı rotasyon planların olsun; dash olmadan da pozisyon değiştir
+   **WHY** Tek boyutlu oyun okunur; seni okuyan takıma karşı dash süresi dolduğunda savunmasız kalırsın
 
 ### Pro Oyuncu Stilleri
-- **Aspas (LOUD)**: Agresif Jett. Tailwind'i ofansif kullanır, site'lere dash ile girer, aim ile 1v1 kazanır. Eco'larda sağ tık Blade Storm kill'leri ile tanınır. Ham mekaniği üst düzey olduğu için bu stil çalışır.
-- **Demon1 (EG/100T)**: Op Jett. Metodik, uzun açıları tutar, dash harcamaz. Updraft'ı az ama yıkıcı kullanır. Aspas'tan disiplinli ama eşit ölümcül.
-- **TenZ (Sentinels)**: Hibrit stil. Op ve rifle Jett arasında sorunsuz geçiş yapar. Yaratıcı Cloudburst tek yönlüleri ve öngörülemeyen hareket kalıpları ile tanınır.
+- **Aspas (LOUD)**: Agresif Jett. Dash'i ofansif kullanır, site'lere dash ile girer, aim ile 1v1 kazanır. Eco'larda sağ tık ult bıçaklarıyla tanınır. Ham mekaniği üst düzey olduğu için bu stil onda çalışır.
+- **Demon1 (EG/100T)**: Op Jett. Metodiktir, uzun açıları tutar, dash harcamaz. zıplamayı az ama yıkıcı kullanır. Aspas'tan daha disiplinli ama bir o kadar ölümcül.
+- **TenZ (Sentinels)**: Hibrit. Op ile rifle Jett arasında sorunsuz geçer. Yaratıcı tek yönlü smoke'ları ve öngörülemez hareketiyle tanınır.
 
 ### Eşleşme İpuçları
-- **vs. Chamber**: Chamber Op oyununu eşleyebilir ve Rendezvous kaçışı var. Onu düelloda değil, pozisyonda yenmelisin. Ulaşamayacağı Updraft açıları kullan.
-- **vs. Cypher**: Trapwire'ları flank'lerini ele verir. Kamerasını Cloudburst ile engelle ve gerekirse tuzaklardan dash ile geç.
-- **vs. Sova**: Recon dart seni off-angle'larda bulur. Dart'ı vurmaya veya tarama sonrası hemen dash yapmaya hazır ol.
-- **vs. Raze**: Yakın dövüşte Raze'in Blast Pack mobilitesi dash'ini eşleyebilir. Dar alanlarda ego yapma.
+- **vs. Chamber**: Chamber op oyununu eşler ve kaçış teleportu vardır. Onu düelloda değil pozisyonda yen. Ona ulaşamayacağı zıplama açıları kullan.
+- **vs. Cypher**: Telleri flank'ini ele verir. Kamerasını smoke ile kapat, gerekirse tellerin üstünden dash ile geç.
+- **vs. Sova**: recon seni off-angle'larda bulur. Dart'ı vurmaya ya da tarama biter bitmez dash atmaya hazır ol.
+- **vs. Raze**: Yakın dövüşte Raze'in satchel mobilitesi dash'ini eşler. Dar alanlarda ego yapma.
 
 ---
 
 ## Raze
 
 ### Yetenek Analizi
-- **Boom Bot (C)** - 200 kredi. Düz cizgide ilerleyen, duvarlardan seken, ön konisindeki düşmanlara kilitlenen robot. Hedefe ulaşırsa 80 hasar verir. Köşe temizlemek ve düşmanı yer değiştirmeye zorlamak için kullan.
-- **Blast Pack (Q)** - 200 kredi, 2 şarj. Yüzeylere yapışan fırlatılabilir patlayıcı. Havada patlatılarak mobilite veya yerde bırakılarak alan inkarı için kullanılır. Düşmanlara 50'ye kadar hasar verir. Temel mobilite aracı -- double satchel jump'ları yüksek elo'da zorunlu.
-- **Paint Shells (E)** - Bedava, 2 kill ile yenilenir. Alt mühimmata ayrılan bomba. İlk patlama 15-55, alt mühimmatlar 15-55 hasar verir. Toplam potansiyel: 200+ hasar. Düşmanları pozisyonlardan zorlar. Alt mühimmat dağılım kalıbı tahmin edilebilir -- küme açılarını öğren.
-- **Showstopper (X)** - 8 ult puanı. Geniş AoE roket. Yakınlığa göre 20-150 hasar verir. Blast Pack ile hava roketi için birleştirilebilir.
+- **bot (C)** - 200 kredi. Düz çizgide ilerleyen, duvarlardan seken, ön konisindeki düşmana kilitlenen robot. Hedefine ulaşırsa 80 hasar verir. Köşe temizlemek ve düşmanı yerinden oynatmak için kullan.
+- **satchel (Q)** - 200 kredi, 2 şarj. Yüzeylere yapışan fırlatılabilir patlayıcı. Havada patlatıp mobilite, yere bırakıp alan inkârı sağlar. Düşmana 50'ye kadar hasar verir. Temel mobilite aracın; double satchel jump'ları yüksek elo'da zorunludur.
+- **molly (E)** - Bedava, 2 kill ile yenilenir. Alt mühimmata ayrılan bomba. İlk patlama 15-55, alt mühimmatlar 15-55 hasar verir. Toplam 200+ hasar potansiyeli. Düşmanı pozisyonundan söker. Alt mühimmat dağılımı tahmin edilebilir; küme açılarını ezberle.
+- **ult (X)** - 8 ult puanı. Geniş alan roketi. Yakınlığa göre 20-150 hasar verir. satchel ile birleştirip havadan roket atabilirsin.
 
 ### Ne Zaman Seçilir
-- Harita dar boğaz noktaları ve yakın dövüşlere sahip (Bind, Split, Fracture)
-- Takımın düşmanları sabit pozisyonlardan zorlamaya ihtiyacı var
-- Sadece aim'e bağlı olmayan bir duellist istiyorsun
-- Düşman site'lerde sıkı stack oynuyor
+- Harita dar boğaz noktaları ve yakın dövüş içeriyor (Bind, Split, Fracture).
+- Takımın düşmanı sabit pozisyondan söküp atmaya ihtiyaç duyuyor.
+- Sadece aim'e bağlı kalmayan bir duelist istiyorsun.
+- Düşman site'lerde sıkı stack oynuyor.
 
-### Harita Gücleri
-- **Bind**: S-tier. Dar koridorlar, Boom Bot teleporter'lardan, Paint Shells Hookah/Short'a, double satchel B site'a.
-- **Split**: S-tier. Paint Shells her iki site Heaven'a, satchel A main duvarı üstünden, B main boğaz kontrolü.
-- **Fracture**: A-tier. Double satchel girişleri, Paint Shells Dish/Arcade'a, Boom Bot dar koridorlardan.
-- **Icebox**: A-tier. Satchel ile A site konteynerlerine, B site Kitchen temizliği Boom Bot ile.
-- **Sunset**: A-tier. Dar koridorlar ve boğazlar utility'sini destekler.
-- **Lotus**: B-tier. Bazı noktalar çalışır ama harita tutarlı Raze değeri için fazla açık.
-- **Breeze**: C-tier. Fazla açık. Paint Shells ve Boom Bot geniş alanlarda değer kaybeder.
+### Harita Güçleri
+- **Bind**: S-tier. Dar koridorlar; bot teleporttan, molly Hookah/Short'a, double satchel B site'a.
+- **Split**: S-tier. molly iki site'da da Heaven'a, satchel A main duvarının üstünden, B main boğaz kontrolü.
+- **Fracture**: A-tier. Double satchel girişleri, molly Dish/Arcade'a, bot dar koridorlardan.
+- **Icebox**: A-tier. satchel ile A site konteynerlerine, B site Kitchen temizliği bot ile.
+- **Sunset**: A-tier. Dar koridorlar ve boğazlar util'ini destekler.
+- **Lotus**: B-tier. Bazı noktalar işler ama harita tutarlı Raze değeri için fazla açık.
+- **Breeze**: C-tier. Fazla açık. molly ve bot geniş alanlarda değer kaybeder.
 - **Haven**: B-tier. C site Garage kontrolü güçlü ama A ve B fazla dağınık.
 
 ### Sık Yapılan Hatalar (IF/MEANING/COUNTER/WHY)
 
-1. **IF** Paint Shells'i kill için kullanıyorsan
-   **MEANING** Bombanın asıl amacı düşmanları pozisyonlardan zorlamak, kill değil
-   **COUNTER** Paint Shells'i alan yaratma aracı olarak düşün -- kill bonus
-   **WHY** Kill odaklı bomba atışı çoğu zaman yanlış yere düşer ve alan yaratma fırsatını kaçarırsın
+1. **IF** molly'yi kill almak için atıyorsan
+   **MEANING** Bombanın asıl işi düşmanı pozisyonundan sökmek, kill değil
+   **COUNTER** molly'yi alan yaratma aracı olarak düşün; kill bonustur
+   **WHY** Kill odaklı atış çoğu zaman yanlış yere düşer ve alan açma fırsatını kaçırırsın
 
-2. **IF** Site'a tek satchel ile giriyorsan
-   **MEANING** Tek satchel yavaş ve tahmin edilebilir -- havada vurulursun
-   **COUNTER** Double satchel ya da satchel yapma. Hız ve öngörülemezlik şart
-   **WHY** Tek satchel seni havada yavaş hedef yapar, double satchel hızlı ve okunması zor
+2. **IF** site'a tek satchel ile giriyorsan
+   **MEANING** Tek satchel yavaş ve tahmin edilebilirdir; havada vurulursun
+   **COUNTER** Ya double satchel at ya da hiç atma. Hız ve öngörülemezlik şart
+   **WHY** Tek satchel seni havada yavaş hedef yapar; double satchel hem hızlı hem okunması zordur
 
-3. **IF** Boom Bot gönderdikten sonra peek atmıyorsan
-   **MEANING** Bot ses cikarıp ilgi toplar -- peek olmadan 200 kredi ve pozisyon bilgisi harcadın
-   **COUNTER** Bot'un arkasından her zaman peek at veya takım arkadaşın swinglesin
-   **WHY** Takipsiz bot = bedava bilgi verip karşılığında hiçbir şey almamak
+3. **IF** bot gönderdikten sonra peek atmıyorsan
+   **MEANING** bot ses çıkarıp düşmanın dikkatini toplar; peek atmazsan 200 krediyi ve pozisyon bilgisini boşa harcadın
+   **COUNTER** bot'un arkasından her zaman ya sen peek at ya da takım arkadaşın swing atsın
+   **WHY** Takipsiz bot, bedava bilgi verip karşılığında hiçbir şey almamaktır
 
-4. **IF** Showstopper'ı yerden atıyorsan
-   **MEANING** Hava Showstopper'ı daha geniş alan kaplar ve kaçınması daha zor
-   **COUNTER** Her zaman satchel ile havalanıp sonra ateşle
-   **WHY** Yerden roket dar acı ve kolay kaçınılır; havadan roket geniş alan kaplar
+4. **IF** ult'u yerden atıyorsan
+   **MEANING** Havadan atılan ult daha geniş alan kaplar ve kaçınması zorlaşır
+   **COUNTER** Her zaman satchel ile havalan, sonra ateşle
+   **WHY** Yerden roket dar açılıdır ve kolay kaçınılır; havadan roket geniş alan kaplar
 
-5. **IF** Defense'ta Paint Shells'i retake için saklıyorsan
-   **MEANING** Erken kullanarak push'u inkar edip rotasyon için zaman kazanabilirsin
-   **COUNTER** Bombanı erken kullanarak push'u engelle, retake için saklama
-   **WHY** Erken deny push'u yavaşlatır ve takıma rotasyon penceresi açar
+5. **IF** savunmada molly'yi retake için saklıyorsan
+   **MEANING** Erken kullanırsan push'u durdurup rotasyona zaman kazanırsın
+   **COUNTER** Bombayı erken kullanıp push'u kes, retake için saklama
+   **WHY** Erken inkâr push'u yavaşlatır ve takımına rotasyon penceresi açar
 
 ### Pro Oyuncu Stilleri
-- **Aspas (LOUD)**: Raze'de hyper-agresif double satchel girişleri yapar. Satchel mekaniği referans düzeyde. Satchel-Showstopper komboları ile tanınır.
-- **Jinggg (PRX)**: Hesaplı Raze. Boom Bot'u giriş yerine bilgi için kullanır, ardından utility destekli girişler yapar. Paint Shell yerleşimleri hassas ve takım execute'ları ile zamanlanmış.
+- **Aspas (LOUD)**: Raze'de hiper-agresif double satchel girişleri yapar. satchel mekaniği referans düzeyindedir. satchel-ult komboları ile tanınır.
+- **Jinggg (PRX)**: Hesaplı Raze. bot'u giriş için değil bilgi için kullanır, ardından util destekli girer. molly yerleşimleri hassastır ve takım execute'larıyla zamanlanmıştır.
 
 ### Eşleşme İpuçları
-- **vs. Killjoy**: Paint Shells ve Boom Bot onun utility'sini (turret, Nanoswarm, Alarmbot) yok edebilir. Girişten önce setup'ını temizlemeye öncelik ver.
-- **vs. Sage**: Duvarlarının üstünden satchel at veya Paint Shells ile duvar noktasından zorla. Utility'n onun oyalamalarını doğrudan counter'lar.
-- **vs. Viper**: Blast Pack ile duvarının icinden gecerek gafil avla. Boom Bot toxic screen'den geçer.
+- **vs. Killjoy**: molly ve bot onun util'ini (tuzak, molly, bot) yok edebilir. Girmeden önce kurulumunu temizlemeye öncelik ver.
+- **vs. Sage**: Duvarının üstünden satchel at ya da molly ile duvar noktasından söküp at. Util'in onun oyalamalarını doğrudan kırar.
+- **vs. Viper**: satchel ile duvarının içinden geçip gafil avla. bot duvardan geçer.
 
 ---
 
 ## Reyna
 
 ### Yetenek Analizi
-- **Leer (C)** - 250 kredi, 2 şarj. Bakan düşmanları near-sight yapan göz. Yok edilebilir (100 HP). Duvarlardan geçer. Agresyonu ödüllendiren flash -- onu at ve bas, atıp bekleme.
-- **Devour (Q)** - Bedava. Soul Orb tüketerek 100 HP'ye kadar hızlı iyileşme. Kısa süreliğine 150'ye overheal. Agresif oyunu destekler.
-- **Dismiss (E)** - Bedava, Devour ile paylaşılan 2 şarj. Soul Orb tüketerek dokunulmaz (ult ile görünmez) olur. Kaçış aracın. Dismiss sırasında ateş edemez ve yetenek kullanamazsın.
-- **Empress (X)** - 6 ult puanı. Ateş hızı, equip hızı ve reload hızını artırır. Kill'ler otomatik Devour tetikler. Dismiss Empress sırasında Reyna'yı görünmez yapar.
+- **kör etme (C)** - 250 kredi, 2 şarj. Bakan düşmanı kör eden göz. Vurulup kırılabilir (100 HP). Duvarlardan geçer. Agresyonu ödüllendiren bir flash'tır; at ve bas, atıp bekleme.
+- **heal (Q)** - Bedava. Ruh küresi tüketerek 100 HP'ye kadar hızla iyileşir. Kısa süre 150'ye overheal eder. Agresif oyunu destekler.
+- **kaçış (E)** - Bedava, heal ile paylaşılan 2 şarj. Ruh küresi tüketerek dokunulmaz olur (ult ile görünmez). Kaçış aracın budur. kaçış sırasında ateş edemez ve yetenek kullanamazsın.
+- **ult (X)** - 6 ult puanı. Ateş hızını, kuşanma hızını ve şarjör değiştirme hızını artırır. Aldığın kill'ler otomatik heal tetikler. ult sırasında kaçış Reyna'yı görünmez yapar.
 
 ### Ne Zaman Seçilir
-- Mekanik olarak baskın ve tutarlı aim düelloları kazanabiliyorsun
-- Skill seviyenin altında bir rank'tesin
-- Agresif oynayıp tutarlı opening kill'ler alabiliyorsun
-- Düşman takım zayıf koordinasyona sahip (solo queue)
+- Mekanik olarak baskınsın ve aim düellolarını tutarlı kazanıyorsun.
+- Skill seviyenin altında bir rank'tesin.
+- Agresif oynayıp tutarlı opening kill alabiliyorsun.
+- Düşman takım koordinasyonu zayıf (solo queue).
 
-### Harita Gücleri
-- **Ascent**: A-tier. Mid kontrol agresyonu, A main peek'leri, B main push'ları. Leer için bol acı.
-- **Bind**: A-tier. Yakın dövüşler Reyna'nın 1v1 kit'ine uyar. Teleporter'lardan Dismiss.
-- **Split**: A-tier. Dar açılar Leer'ın zorla reposition ettirmesini sağlar.
-- **Haven**: B-tier. Coklu site daha fazla kill fırsatı ama rotasyon zor.
-- **Breeze**: C-tier. Uzun görüş hatları Reyna'nın yakın kit'ine uymaz. Leer uzaktan kolay vurulur.
-- **Icebox**: B-tier. Dikey oyun Reyna için sınırlı. B site push'larında çalışır.
-- **Lotus**: B-tier. Dar koridorlarda çalışabilir ama diğer duellst'ler daha fazla takım değeri sağlar.
+### Harita Güçleri
+- **Ascent**: A-tier. Mid kontrol agresyonu, A main peek'leri, B main push'ları. kör etme için bol açı.
+- **Bind**: A-tier. Yakın dövüş Reyna'nın 1v1 yeteneğine uyar. Teleporttan kaçış.
+- **Split**: A-tier. Dar açılar kör etme'nin düşmanı yer değiştirmeye zorlamasını sağlar.
+- **Haven**: B-tier. Çoklu site daha çok kill fırsatı ama rotasyon zor.
+- **Breeze**: C-tier. Uzun görüş hatları Reyna'nın yakın yeteneğine uymaz. kör etme uzaktan kolay kırılır.
+- **Icebox**: B-tier. Dikey oyun Reyna için sınırlı. B site push'larında işler.
+- **Lotus**: B-tier. Dar koridorlarda işleyebilir ama başka duelist'ler daha çok takım değeri katar.
 
 ### Sık Yapılan Hatalar (IF/MEANING/COUNTER/WHY)
 
-1. **IF** Immortal 3 üstünde koordineli takım oyununda Reyna oynuyorsan
-   **MEANING** Reyna'nın bencil kit'i bu seviyede yük haline gelir -- sıfır takım utility'si sağlar
-   **COUNTER** Sadece hard carry olacaksan seç. Aksi halde takım utility'si olan agent oyna
-   **WHY** Yüksek elo'da takım utility'si bireysel fraglardan daha değerli
+1. **IF** Immortal 3 üstü koordineli takım oyununda Reyna oynuyorsan
+   **MEANING** Reyna'nın bencil yeteneği bu seviyede yük olur; takıma sıfır util katar
+   **COUNTER** Sadece hard carry yapacaksan seç. Aksi halde takıma util katan bir agent oyna
+   **WHY** Yüksek elo'da takım util'i bireysel fraglardan daha değerlidir
 
-2. **IF** Dismiss yerine Devour kullanıyorsan (düşük HP, çevrili)
-   **MEANING** Devour seni yerinde tutar -- crossfire altında ölüm cezası
-   **COUNTER** Düşük HP + çevriliysen Dismiss ile çık, Devour değil
-   **WHY** Devour animasyonu sırasında sabit kalırsın ve birden fazla düşman seni anında öldürür
+2. **IF** düşük HP ve çevriliyken kaçış yerine heal kullanıyorsan
+   **MEANING** heal seni yerinde tutar; çapraz ateş altında bu ölüm cezasıdır
+   **COUNTER** Düşük HP + çevriliysen heal değil kaçış ile çık
+   **WHY** heal animasyonu boyunca sabit kalırsın ve birden fazla düşman seni anında öldürür
 
-3. **IF** Leer'ı peek'inden çok uzağa atıyorsan
-   **MEANING** Leer düşmanları ya kör ediyor ya da bakışlarını çeviriyor olmalı
-   **COUNTER** Leer'ı peek attığın açıya yakın yere yerleştir -- kör olsunlar veya sana sırtlarını dönsünler
-   **WHY** Uzak Leer = ne kör etkisi ne de açı avantajı sağlar
+3. **IF** kör etme'yi peek'inden çok uzağa atıyorsan
+   **MEANING** kör etme ya düşmanı kör etmeli ya da bakışını çevirtmeli
+   **COUNTER** kör etme'yi peek attığın açıya yakın koy; ya körelsinler ya da sana sırtlarını dönsünler
+   **WHY** Uzağa atılan kör etme ne kör eder ne de açı avantajı verir
 
-4. **IF** Empress'i "mükemmel an" için saklıyorsan
-   **MEANING** Ult'u ucuz (6 puan) ve agresyonu ödüllendiriyor
-   **COUNTER** Sık kullan. Mükemmel an beklerken kaçarılan roundlar daha pahalıya patlar
-   **WHY** Ucuz ult saklamak = bedava round kazanma fırsatlarını harcamak
+4. **IF** ult'u "mükemmel an" için saklıyorsan
+   **MEANING** ult ucuz (6 puan) ve agresyonu ödüllendiriyor
+   **COUNTER** Sık kullan. Mükemmel anı beklerken kaçırdığın round'lar çok daha pahalıdır
+   **WHY** Ucuz ult'u saklamak, bedava round kazanma fırsatlarını yakmaktır
 
-5. **IF** Her kill sonrası Devour ile iyileşiyorsan
-   **MEANING** Bu tahmin edilebilir bir kalıp oluşturur -- iyi oyuncular Devour animasyonun sırasında sana basarlar
-   **COUNTER** Devour zamanlamanı değiştir, güvenliyken iyileş, tehlikedeyken Dismiss
-   **WHY** Öngörülebilir iyileşme kalıbı = düşmana push penceresi vermek
+5. **IF** her kill'den sonra heal ile iyileşiyorsan
+   **MEANING** Bu tahmin edilebilir bir kalıp kurar; iyi oyuncular heal animasyonun sırasında üstüne basar
+   **COUNTER** heal zamanlamanı değiştir; güvendeyken iyileş, tehlikedeyken kaçış at
+   **WHY** Öngörülebilir iyileşme, düşmana push penceresi vermektir
 
 ### Pro Oyuncu Stilleri
-- Reyna Tier 1 VCT'de minimal oynanır. Mekanik olarak yetenekli oyuncuların pocket kill'i olarak ara sıra görünür. Takım utility eksikliği onu solo queue uzmanı yapar.
+- Reyna Tier 1 VCT'de çok az oynanır. Mekanik olarak güçlü oyuncuların yan-pick'i olarak ara sıra çıkar. Takım util eksikliği onu solo queue uzmanı yapar.
 
 ### Eşleşme İpuçları
-- **vs. flash agentlar**: Reyna'nın Leer'ı pseudo-flash. Flash takasında Reyna kaybeder çünkü Leer yok edilebilir, gerçek flashlar edilemez.
-- **vs. Fade**: Prowler'lar doğru zamanlandığında Dismiss sırasında bile Reyna'yı kovalar.
-- **vs. Chamber**: Chamber agresyonunu Headhunter ile eşler ve Rendezvous ile daha güvenli kaçışa sahiptir.
+- **vs. flash agentları**: Reyna'nın kör etme'si yarı-flash'tır. Flash takasında Reyna kaybeder çünkü kör etme kırılabilir, gerçek flash'lar kırılamaz.
+- **vs. Fade**: bot'ları doğru zamanlandığında kaçış sırasında bile Reyna'yı kovalar.
+- **vs. Chamber**: Chamber agresyonunu tabancasıyla eşler ve teleportu ile daha güvenli kaçar.
 
 ---
 
 ## Phoenix
 
 ### Yetenek Analizi
-- **Blaze (C)** - 150 kredi. Görüşü kapatan ve Phoenix'i icinde dururken iyileştiren ateş duvarı. Basılı tutarak eğrilebilir. Pseudo-smoke olarak site girişlerinde veya açıları kapatmak için kullan.
-- **Curveball (Q)** - 250 kredi, 2 şarj. Köşelerden dolaşan flash. Sol tık sola, sağ tık sağa eğrilir. Oyundaki hızlı flash'lardan biri ama aynı zamanda en tahmin edilebilirlerinden.
-- **Hot Hands (E)** - Bedava, 2 kill ile yenilenir. Ateş alanı yaratan ateş topu. Düşmanlara 60 DPS, Phoenix'i tüm süre boyunca 50 HP iyileştirir. Post-plant, alan inkarı veya kendi kendini iyileştirme için kullan.
-- **Run It Back (X)** - 6 ult puanı. Bir konum işaretler. Phoenix ölür veya süre dolarsa tam canla spawn noktasında yeniden doğar. Bedava site girişleri ve bilgi toplama için kullan.
+- **ateş duvarı (C)** - 150 kredi. Görüşü kapatan ve içinde dururken Phoenix'i iyileştiren ateş duvarı. Basılı tutarak eğebilirsin. Yarı-smoke gibi site girişlerinde veya açı kapatmada kullan.
+- **flash (Q)** - 250 kredi, 2 şarj. Köşeden dolanan flash. Sol tık sola, sağ tık sağa eğer. Oyunun en hızlı flash'larından biridir ama aynı zamanda en tahmin edilebilirlerinden.
+- **molly (E)** - Bedava, 2 kill ile yenilenir. Ateş alanı yaratan ateş topu. Düşmana 60 DPS verir, Phoenix'i süre boyunca 50 HP iyileştirir. Post-plant, alan inkârı veya kendini iyileştirme için kullan.
+- **ult (X)** - 6 ult puanı. Bir nokta işaretler. Phoenix ölür veya süre dolarsa o noktada tam canla yeniden doğar. Bedava site girişi ve bilgi toplamak için kullan.
 
 ### Ne Zaman Seçilir
-- Flash'lı bağımsız entry fragger lazım
-- Takımın hem flash hem smoke eksik ve hibrit lazım
-- Retake değeri olan duellist istiyorsun (Run It Back)
-- Harita Blaze duvarının güçlü çalıştığı dar koridorlara sahip
+- Flash'lı, kendi kendine giren bir entry fragger lazım.
+- Takımın hem flash hem duman eksik; hibrit bir agent gerek.
+- Retake değeri olan bir duelist istiyorsun (ult).
+- Harita, ateş duvarının güçlü çalıştığı dar koridorlar içeriyor.
 
-### Harita Gücleri
-- **Ascent**: A-tier. A main'de Blaze duvarı, B main köşesinde Curveball, Mid'den Run It Back girişleri.
-- **Split**: A-tier. Dar koridorlar Blaze duvarı için. A main'den Run It Back.
-- **Bind**: B-tier. Teleporter'lardan Curveball, Hookah'da Hot Hands.
-- **Sunset**: B-tier. Blaze duvarı ile Mid kontrolü, dar köşelerde Curveball.
-- Phoenix açık haritalarda (Breeze, Lotus) duvarı ve flash'ları değer kaybeder.
+### Harita Güçleri
+- **Ascent**: A-tier. A main'de ateş duvarı, B main köşesinde flash, Mid'den ult girişleri.
+- **Split**: A-tier. Dar koridorlar ateş duvarı için ideal. A main'den ult.
+- **Bind**: B-tier. Teleporttan flash, Hookah'da molly.
+- **Sunset**: B-tier. ateş duvarı ile Mid kontrolü, dar köşelerde flash.
+- Phoenix açık haritalarda (Breeze, Lotus) hem duvarın hem flash'ın değerini kaybeder.
 
 ### Sık Yapılan Hatalar (IF/MEANING/COUNTER/WHY)
 
-1. **IF** Curveball ile takım arkadaşlarını kör ediyorsan
-   **MEANING** Curveball geniş kör yarıçapına sahip -- iletişim şart
-   **COUNTER** Flash öncesi haberleşme yap veya sadece takımın izlemediği köşelerden at
+1. **IF** flash ile takım arkadaşını kör ediyorsan
+   **MEANING** flash'ın kör yarıçapı geniştir; iletişim şart
+   **COUNTER** Flash öncesi haber ver ya da yalnızca takımın izlemediği köşeden at
    **WHY** Takım flash'ı = trade edilemeyen ölüm = kaybedilen round
 
-2. **IF** Run It Back işaretini güvensiz yere koyuyorsan
-   **MEANING** Düşman işaretini bulursa, respawn'da seni bekleyip öldürür
-   **COUNTER** İşareti temizlenmiş alana, takım arkadaşı koruması altında koy
-   **WHY** Korumasız işaret = iki ölüm yerine bir ölüm. Ult değeri sıfır
+2. **IF** ult işaretini güvensiz yere koyuyorsan
+   **MEANING** Düşman işaretini bulursa yeniden doğduğun anda seni bekleyip öldürür
+   **COUNTER** İşareti temizlenmiş, takım arkadaşının koruduğu bir alana koy
+   **WHY** Korumasız işaret, bir ölüm yerine iki ölüm demektir; ult'un değeri sıfırlanır
 
-3. **IF** Blaze duvarını sadece görüş engeli için kullanıyorsan
+3. **IF** ateş duvarını yalnızca görüş engeli için kullanıyorsan
    **MEANING** Duvar aynı zamanda seni iyileştirir
-   **COUNTER** Acı tutarken duvarın icinde dur. 150 kredi iyileşme + görüş engeli
-   **WHY** İyileşme almadan duvar kullanmak = 150 kredilik değerin yarısını boşa harcamak
+   **COUNTER** Açı tutarken duvarın içinde dur; 150 kredilik iyileşme + görüş engeli birlikte gelir
+   **WHY** İyileşme almadan duvar kullanmak, 150 kredilik değerin yarısını boşa harcamaktır
 
-4. **IF** Curveball'u düzgün eğirmiyorsan
+4. **IF** flash'ı düzgün eğmiyorsan
    **MEANING** Köşeyi dönmek yerine önünde patlayan flash işe yaramaz
-   **COUNTER** Custom oyunlarda eğri zamanlamasını pratik yap
-   **WHY** Düz flash = kendin kör olursun, düşman görmeden kaçınır
+   **COUNTER** Custom oyunlarda eğiş zamanlamasını çalış
+   **WHY** Düz flash kendini kör eder; düşman görmeden kaçınır
 
-5. **IF** Hot Hands ve Blaze ile iyileşmeyi unutuyorsan
-   **MEANING** Phoenix iki yeteneğiyle kendini ciddi oranda iyileştirebilir
-   **COUNTER** Her utility kullanımında iyileşme değerini de al
-   **WHY** Utility'yi iyileşme almadan harcamak = Phoenix'in temel avantajını atmak
+5. **IF** molly ve ateş duvarı ile iyileşmeyi unutuyorsan
+   **MEANING** Phoenix bu iki yeteneğiyle kendini ciddi oranda iyileştirebilir
+   **COUNTER** Her util kullanımında iyileşmeyi de al
+   **WHY** Util'i iyileşme almadan harcamak, Phoenix'in temel kozunu çöpe atmaktır
 
 ### Pro Oyuncu Stilleri
-- Phoenix VCT 2024-2025 meta'sında belirli haritalarda yeniden yükseldi. Split ve Ascent'te self-entry kapasiteli ikincil duellist olarak kullanılıyor.
+- Phoenix 2024-2025 VCT meta'sında belirli haritalarda geri döndü. Split ve Ascent'te kendi kendine giren ikincil duelist olarak kullanılıyor.
 
 ### Eşleşme İpuçları
-- **vs. Jett**: Phoenix'in flash'ları Jett'in Op oyununu counter'lar. Köşeden Curveball at, kör iken peek at.
-- **vs. Killjoy**: Hot Hands Killjoy turret ve utility'sini yok eder. Lockdown icinden Run It Back yap.
-- **vs. Sage**: Blaze duvarı üst üste yerleştirildiğinde Sage'in Barrier Orb'unu zamanla eritir.
+- **vs. Jett**: Phoenix'in flash'ları Jett'in op oyununu kırar. Köşeden flash at, düşman körken peek at.
+- **vs. Killjoy**: molly Killjoy'un tuzaklarını ve util'ini yok eder. ult'unun içinden ult atıp gir.
+- **vs. Sage**: ateş duvarını üst üste yerleştirirsen Sage'in duvarını zamanla eritirsin.
 
 ---
 
 ## Yoru
 
 ### Yetenek Analizi
-- **Fakeout (C)** - 100 kredi. Ayak sesi taklit eden, tetiklendiğinde veya vurulduğunda düşmanları flash'layan sahte. Sahte rotasyonlar, atış çekme ve kaos yaratmak için kullan.
-- **Gatecrash (E)** - Bedava, yenilenebilir. İleri giden tether. Aktive ederek konumuna ışınlan. Sahte ışınlanma yapılabilir (basmadan). Tether düşmanlara görünür ve duyulabilir. Sabit bırakıldığında sınırlı süre aktif.
-- **Blindside (Q)** - 250 kredi, 2 şarj. Yüzeye çarptıktan sonra aktive olan seken flash. Duvar veya zemine çarpmalıdır. Çarpma sonrası patlama anı hızlı. Ustalaşıldığında oyundaki en güçlü flash'lardan biri.
-- **Dimensional Drift (X)** - 7 ult puanı. Yoru başka boyuta girer, görünmez ve dokunulmaz olur. Ult sırasında Gatecrash ve Fakeout kullanılabilir. Cıkışta kısa bir savunmasızlık penceresi var. Derin flanklar, site girişi ve bilgi toplama için kullan.
+- **klon (C)** - 100 kredi. Ayak sesi taklit eden, tetiklenince ya da vurulunca düşmanı kör eden sahte. Sahte rotasyon, atış çekme ve kaos yaratmak için kullan.
+- **teleport (E)** - Bedava, yenilenebilir. İleri giden bir bağ atar. Aktive ettiğinde o noktaya ışınlanır. Basmadan sahte ışınlanma yapabilirsin. Bağ düşmana görünür ve duyulur. Yerde bırakılınca sınırlı süre aktif kalır.
+- **flash (Q)** - 250 kredi, 2 şarj. Yüzeye çarptıktan sonra patlayan seken flash. Duvara ya da zemine çarpmalı. Çarpma sonrası patlama anı çok hızlıdır. Ustalaştığında oyunun en güçlü flash'larından biridir.
+- **ult (X)** - 7 ult puanı. Yoru başka bir boyuta girer; görünmez ve dokunulmaz olur. ult sırasında teleport ve klon kullanabilirsin. Çıkışta kısa bir savunmasızlık penceresi vardır. Derin flank, site girişi ve bilgi toplamak için kullan.
 
 ### Ne Zaman Seçilir
-- Kit'ini yoğun pratik ettin ve tether zamanlamasını anlıyorsun
-- Harita flank için çoklu rotasyon yollarına sahip (Haven, Lotus, Breeze)
-- Takımın kafa karışıklığı yaratan lurker/flanker'a ihtiyacı var
-- Tahmin edilebilir düşman rotasyonlarını cezalandırmak istiyorsun
+- Yeteneğini yoğun çalıştın ve teleport zamanlamasını kavradın.
+- Harita flank için çoklu rotasyon yolu sunuyor (Haven, Lotus, Breeze).
+- Takımın kafa karıştıran bir lurker/flanker'a ihtiyaç duyuyor.
+- Düşmanın tahmin edilebilir rotasyonlarını cezalandırmak istiyorsun.
 
-### Harita Gücleri
-- **Icebox**: A-tier. B Kitchen'dan Gatecrash, tube'dan Dimensional Drift.
-- **Lotus**: A-tier. Kapılar ve dönen yollarla üç site. Kapılardan Gatecrash, Fakeout ile sahte.
-- **Haven**: A-tier. Rotasyon sahteleri için üç site. Garage'dan Gatecrash.
-- **Split**: B-tier. Vent/kanalizasyonlardan Gatecrash, dar köşelerde Blindside.
-- **Bind**: A-tier. Teleporter oyunları Gatecrash ile. Fakeout ile sahte TP.
+### Harita Güçleri
+- **Icebox**: A-tier. B Kitchen'dan teleport, tüpten ult.
+- **Lotus**: A-tier. Kapılar ve dönen yollarla üç site. Kapılardan teleport, klon ile sahte.
+- **Haven**: A-tier. Rotasyon sahteleri için üç site. Garage'dan teleport.
+- **Split**: B-tier. Vent/kanalizasyondan teleport, dar köşelerde flash.
+- **Bind**: A-tier. Teleport oyunları teleport ile, klon ile sahte TP.
 
 ### Sık Yapılan Hatalar (IF/MEANING/COUNTER/WHY)
 
-1. **IF** Gatecrash'i her round aynı yöne gönderiyorsan
-   **MEANING** Düşmanlar tether'ını görüyor/duyuyor ve seni bekliyorlar
-   **COUNTER** Tether yerleşimini değiştir, aynı rotasyonu tekrarlama
-   **WHY** Tahmin edilebilir tether = düşman ambush pozisyonu alıyor
+1. **IF** teleport'u her round aynı yöne gönderiyorsan
+   **MEANING** Düşman bağını görüp duyar ve seni bekler
+   **COUNTER** Bağ yerleşimini değiştir, aynı rotasyonu tekrarlama
+   **WHY** Tahmin edilebilir bağ, düşmana pusu pozisyonu kazandırır
 
-2. **IF** Bilgi olmadan ışınlanıyorsan
-   **MEANING** Bilinmeyen pozisyona Gatecrash intihar
-   **COUNTER** Fakeout veya takım bilgisi ile güvenliği doğrula, sonra ışınlan
-   **WHY** Kör ışınlanma = en az %50 ölüm olasılığı
+2. **IF** bilgi olmadan ışınlanıyorsan
+   **MEANING** Bilinmeyen pozisyona teleport intihardır
+   **COUNTER** Önce klon veya takım bilgisiyle güvenliği doğrula, sonra ışınlan
+   **WHY** Kör ışınlanma en az %50 ölüm demektir
 
-3. **IF** Sadece lurk oynuyorsan
-   **MEANING** Yoru Blindside flash'ları ile entry de yapabilir
-   **COUNTER** Her round lurk oynamak takımını 4v5 yapar. Girişlere de katıl
-   **WHY** Tam zamanlı lurk = takımın site hit'te sürekli bir kişi eksik
+3. **IF** yalnızca lurk oynuyorsan
+   **MEANING** Yoru flash'larıyla entry de yapabilir
+   **COUNTER** Her round lurk oynamak takımını 4v5 yapar; girişlere de katıl
+   **WHY** Tam zamanlı lurk, takımının site vururken hep bir kişi eksik olması demektir
 
-4. **IF** Gatecrash sahte ışınlanma yapmıyorsan
-   **MEANING** Sahte ışınlanma sesi gerceğiyle aynı -- rotasyon cekebilirsin
-   **COUNTER** Sahte TP kullanarak rotasyonları cek, sonra karşı site'a bas
-   **WHY** Kullanılmayan sahte TP = bedava bilgi ve rotasyon manipülasyonu fırsatını harcamak
+4. **IF** sahte ışınlanmayı kullanmıyorsan
+   **MEANING** Sahte ışınlanma sesi gerçeğiyle aynıdır; rotasyon çekebilirsin
+   **COUNTER** Sahte TP ile rotasyonları çek, sonra karşı site'a bas
+   **WHY** Kullanılmayan sahte TP, bedava bilgi ve rotasyon manipülasyonu fırsatını yakmaktır
 
-5. **IF** Dimensional Drift'i sadece keşif için kullanıyorsan
-   **MEANING** Radiant seviyede düşmanlar ult sırasında ayak izlerini takip eder
-   **COUNTER** Ult'u off-angle reposition için kullan, sadece dolaşmak için değil
-   **WHY** Keşif amaçlı ult = yüksek elo'da düşman seni izler ve çıkışta öldürür
+5. **IF** ult'u yalnızca keşif için kullanıyorsan
+   **MEANING** Radiant seviyede düşman, ult sırasında ayak izlerini takip eder
+   **COUNTER** ult'u dolaşmak için değil, off-angle'a yer değiştirmek için kullan
+   **WHY** Keşif amaçlı ult, yüksek elo'da seni izleyip çıkışta öldürtür
 
 ### Pro Oyuncu Stilleri
-- **Ethan (eski 100T)**: Pro maclarda agresif Yoru oyununa öncülük etti. Gatecrash'i lurk yerine ofansif entry için kullandı.
-- **Zekken (Sentinels)**: Belirli haritalarda Yoru ile tanınır. Blindside flash'ları agresif kullanır ve Dimensional Drift ile düşman hatları arkasına derin flanklar yapar.
+- **Ethan (eski 100T)**: Pro maçlarda agresif Yoru oyununa öncülük etti. teleport'u lurk yerine ofansif entry için kullandı.
+- **Zekken (Sentinels)**: Belirli haritalarda Yoru ile tanınır. flash'larını agresif kullanır ve ult ile düşman hatlarının arkasına derin flank atar.
 
 ### Eşleşme İpuçları
-- **vs. Cypher**: Cypher'ın tripwire'ları Dimensional Drift Yoru'da tetiklenmez. Ult ile setup'ını bypass et, sonra düşman pozisyonlarını bildır.
-- **vs. Fade**: Haunt tether konumunu ele verir. Fade'in Haunt'u varken sabit tether yerlestirmesine ozen goster.
-- **vs. Sova**: Recon Dart Dimensional Drift çıkış animasyonunda bile Yoru'yu ele verir. Tarama zamanlamasının farkında ol.
+- **vs. Cypher**: Cypher'ın telleri ult'taki Yoru'da tetiklenmez. ult ile kurulumunu aş, sonra düşman pozisyonlarını bildir.
+- **vs. Fade**: recon'u bağının yerini ele verir. Fade'in recon'u açıkken sabit bağ bırakmaya dikkat et.
+- **vs. Sova**: recon, ult'tan çıkış animasyonunda bile Yoru'yu ele verir. Tarama zamanlamasının farkında ol.
 
 ---
 
 ## Neon
 
 ### Yetenek Analizi
-- **Fast Lane (C)** - 300 kredi. Görüşü kapatan iki paralel ateş duvarı. Güvenli geciş koridoru yaratır. Duvardaki düşmanlar hasar alır. Site girişleri ve crossfire kapatma için kullan.
-- **Relay Bolt (Q)** - 250 kredi, 1 şarj. Yüzeyden bir kez seken elektrik cıvı. Hem çarptığı noktada hem sektığı noktada concuss alanı yaratır. Köşe temizleme veya push geciktirme için kullan.
-- **High Gear (E)** - Bedava. Artırılmış hareket hızıyla sprint. Sprint sırasında enerji üret. Bir kez kayabilir (2 kill ile yenilenir). Kayma Neon'un imza hareketi -- köşelerde slide peek ana engagement aracı.
-- **Overdrive (X)** - 7 ult puanı. Neon'un elinden ateşlenen elektrik ışını. Hareket halinde yüksek isabet. Kill'lerde sıfırlanır. Enerji bitene kadar sürer. Gruplanmış düşmanlara karşı yıkıcı.
+- **duvar (C)** - 300 kredi. Görüşü kapatan iki paralel ateş duvarı. Güvenli bir geçiş koridoru açar. Duvardaki düşman hasar alır. Site girişi ve çapraz ateş kapatmak için kullan.
+- **stun (Q)** - 250 kredi, 1 şarj. Yüzeyden bir kez seken elektrik akımı. Hem çarptığı hem sektiği noktada sersemletme alanı yaratır. Köşe temizlemek veya push geciktirmek için kullan.
+- **sprint (E)** - Bedava. Artırılmış hızla koşar. Koşarken enerji üretir. Bir kez kayabilir (2 kill ile yenilenir). Kayma Neon'un imza hareketidir; köşelerde slide peek ana giriş aracın.
+- **ult (X)** - 7 ult puanı. Neon'un elinden çıkan elektrik ışını. Hareket halinde isabeti yüksektir. Aldığın kill'lerde sıfırlanır. Enerji bitene kadar sürer. Gruplanmış düşmana karşı yıkıcıdır.
 
 ### Ne Zaman Seçilir
-- Harita hızlı execute ve agresif girişleri ödüllendiriyor (Fracture, Sunset)
-- Hareket tabanlı aim'de (tracking, slide shooting) iyisin
-- Takımın hızla site'ları ezme istiyor
-- Düşman hızla aşılabilecek pasif setup'lar oynuyor
+- Harita hızlı execute ve agresif girişi ödüllendiriyor (Fracture, Sunset).
+- Hareket halinde aim'in (tracking, slide shooting) iyi.
+- Takımın site'ları hızla ezmek istiyor.
+- Düşman, hızla aşabileceğin pasif kurulumlar oynuyor.
 
-### Harita Gücleri
-- **Fracture**: S-tier. B Arcade'dan Fast Lane, her iki site'a slide girişleri, hız tabanlı rotasyonlar.
-- **Sunset**: A-tier. Mid'den Fast Lane, site'lara slide girişleri.
-- **Split**: A-tier. A main Fast Lane, ramp'lardan slide.
-- **Pearl**: A-tier. B main Fast Lane, mid üzerinden hızlı rotasyonlar.
-- **Breeze**: C-tier. Açık alanlar hız avantajını counter'lar. Sprint sırasında fazla açık kalırsın.
+### Harita Güçleri
+- **Fracture**: S-tier. B Arcade'dan duvar, iki site'a da slide girişleri, hıza dayalı rotasyonlar.
+- **Sunset**: A-tier. Mid'den duvar, site'lara slide girişleri.
+- **Split**: A-tier. A main duvar, ramp'lardan slide.
+- **Pearl**: A-tier. B main duvar, mid üzerinden hızlı rotasyonlar.
+- **Breeze**: C-tier. Açık alanlar hız avantajını kırar. Koşarken fazla açıkta kalırsın.
 
 ### Sık Yapılan Hatalar (IF/MEANING/COUNTER/WHY)
 
-1. **IF** Amaçsız slide yapıyorsan
-   **MEANING** Slide peek fazla kullanılırsa tahmin edilebilir hale gelir
+1. **IF** amaçsız slide atıyorsan
+   **MEANING** Slide peek'i fazla kullanırsan tahmin edilebilir olur
    **COUNTER** Slide'ları normal peek ve jiggle peek ile karıştır
-   **WHY** Her round aynı slide = düşman açı tutar ve seni havada yakalar
+   **WHY** Her round aynı slide, düşmanın açı tutup seni havada yakalaması demektir
 
-2. **IF** Her yerde sprint yapıyorsan
-   **MEANING** High Gear gürültülü -- düşmanlar seni haritanın öteki ucundan duyar
-   **COUNTER** Gizlilik lazım olduğunda yürü. Sprint sadece execute ve açık rotasyonlar için
-   **WHY** Duyulan sprint = düşman açıyı tutarak + ambush hazırlığı
+2. **IF** her yerde sprint yapıyorsan
+   **MEANING** sprint gürültülüdür; düşman seni haritanın öbür ucundan duyar
+   **COUNTER** Sessiz olman gerektiğinde yürü. sprint'i yalnızca execute ve açık rotasyon için sakla
+   **WHY** Duyulan sprint, düşmanın açı tutup pusu hazırlaması demektir
 
-3. **IF** Fast Lane duvarlarını takım takibi olmadan atıyorsan
-   **MEANING** Duvarların arkasından kimse push yapmıyorsa işe yaramazlar
-   **COUNTER** Execute zamanlamasını ilet. Duvar + takım push birlikte olmalı
-   **WHY** Takipsiz duvar = utility israfı + düşmana pozisyon bilgisi verme
+3. **IF** duvarları takım takibi olmadan atıyorsan
+   **MEANING** Arkalarından kimse push yapmazsa duvarlar işe yaramaz
+   **COUNTER** Execute zamanlamasını söyle; duvar ile takım push'u birlikte gelmeli
+   **WHY** Takipsiz duvar hem util israfı hem de düşmana pozisyonunu açmaktır
 
-4. **IF** Overdrive'ı uzak mesafeden kullanıyorsan
-   **MEANING** Işın mesafede hasar düşüşü ve dağılım yapar
-   **COUNTER** Ult öncesi mesafeyi kapat -- yakın/orta mesafede ult ac
-   **WHY** Uzak mesafe Overdrive = düşük hasar + kolay kaçınılır
+4. **IF** ult'u uzak mesafeden kullanıyorsan
+   **MEANING** Işın mesafede hasar düşer ve dağılır
+   **COUNTER** ult'tan önce mesafeyi kapat; yakın/orta mesafede aç
+   **WHY** Uzaktan ult, düşük hasar verir ve kolay kaçınılır
 
-5. **IF** Relay Bolt'u retake'ler için saklamıyorsan
-   **MEANING** Concuss retake'lerde çok değerli
-   **COUNTER** Defense'ta erken harcama. Retake senaryoları için sakla
-   **WHY** Erken bolt = retake'te concuss olmadan girmek zorunda kalma
+5. **IF** stun'u retake'ler için saklamıyorsan
+   **MEANING** Sersemletme retake'lerde çok değerlidir
+   **COUNTER** Savunmada erken harcama; retake senaryoları için sakla
+   **WHY** Erken harcanan stun, retake'e sersemletme olmadan girmek zorunda kalmaktır
 
 ### Pro Oyuncu Stilleri
-- **f0rsakeN (PRX)**: Pro play'deki referans Neon oyuncusu. Agresif girişler için slide mekanikleri kullanır. Slide sırasında çoğu oyuncunun yapamayacağı vuruşlar yapar. Fracture'da Neon'u mutlaka incele.
+- **f0rsakeN (PRX)**: Pro play'in referans Neon oyuncusu. Agresif girişlerde slide mekaniğini kullanır. Slide sırasında çoğu oyuncunun yapamayacağı vuruşları yapar. Fracture'da onun Neon'unu mutlaka incele.
 
 ### Eşleşme İpuçları
-- **vs. Cypher**: Hızın tripwire'larını o tepki vermeden tetikler. Ama iyi yerleştirilmiş Cage + Tripwire kombosu seni durdurabilir. Önce utility temizle.
-- **vs. Killjoy**: Nanoswarm tetikleme alanlarından aktive olmadan slide ile geç (aktivasyon gecikmesi vs. senin hızın).
-- **vs. Sage**: Slow Orb Neon'un hızını hard-counter'lar. Sage Slow Orb'u giriş yolun için saklıyorsa açı değiştir.
+- **vs. Cypher**: Hızın, o tepki veremeden tellerini tetikler. Ama iyi yerleştirilmiş smoke + tel kombosu seni durdurabilir. Önce util'i temizle.
+- **vs. Killjoy**: molly aktive olmadan tetikleme alanlarından slide ile geç (aktivasyon gecikmesi senin hızına karşı).
+- **vs. Sage**: yavaşlatma Neon'un hızını sert kırar. Sage yavaşlatmayı giriş yolun için saklıyorsa açı değiştir.
 
 ---
 
 ## Iso
 
 ### Yetenek Analizi
-- **Contingency (C)** - 250 kredi. Mermi engelleyen kalkan duvar. Yavaşca ileri hareket eder. Arkasında yürüyerek site girişi veya açıları gecici olarak engelleme için kullan.
-- **Undercut (Q)** - 200 kredi, 2 şarj. Duvarlardan geçen enerji cıvısı. Vurulan düşmanlar sonraki vuruştan iki kat hasar alır. Dövüş öncesi utility olarak son derece güçlü.
-- **Double Tap (E)** - Bedava, 2 kill ile yenilenir. Kill sonrası bir hasar örneği absorbe eden (headshot dahil) overshield üretir. Kalkan tüketilene kadar sürer. Iso'nun dayanıklılık aracı.
-- **Kill Contract (X)** - 7 ult puanı. Hedeflenen düşmanı 1v1 arenaya ceker. İki oyuncu da tam canla başlar. Kazanan maca döner. Kilit hedefleri (Op oyuncuları, yıldız oyuncular) izole düelloda elemek için kullan.
+- **duvar (C)** - 250 kredi. Mermi engelleyen kalkan duvar. Yavaşça ileri hareket eder. Arkasından yürüyerek site'a gir ya da açıları geçici olarak kapat.
+- **yavaşlatma (Q)** - 200 kredi, 2 şarj. Duvarlardan geçen enerji akımı. Vurulan düşman bir sonraki vuruştan iki kat hasar alır. Dövüş öncesi util olarak son derece güçlüdür.
+- **kalkan (E)** - Bedava, 2 kill ile yenilenir. Kill sonrası tek bir hasar örneğini (kafa vuruşu dâhil) emen bir kalkan üretir. Kalkan tükenene kadar sürer. Iso'nun dayanıklılık aracıdır.
+- **ult (X)** - 7 ult puanı. İşaretlediğin düşmanı 1v1 arenaya çeker. İki oyuncu da tam canla başlar. Kazanan maça döner. Kilit hedefleri (op oyuncuları, yıldız oyuncular) izole düelloda elemek için kullan.
 
 ### Ne Zaman Seçilir
-- Güçlü 1v1 mekaniğin var ve izole dövüşler zorlamak istiyorsun
-- Harita Contingency duvarının güvenli geciş sağladığı uzun koridorlara sahip (Ascent Mid, Haven A Long)
-- Takımın Double Tap shield ile trade'ler boyunca dayanabilen bir duellist'e ihtiyacı var
-- Düşmanın baskın Op oyuncusunu Kill Contract ile izole edebilirsin
+- 1v1 mekaniğin güçlü ve izole dövüş zorlamak istiyorsun.
+- Harita, duvarın güvenli geçiş sağladığı uzun koridorlar içeriyor (Ascent Mid, Haven A Long).
+- Takımın trade'ler boyunca kalkan ile ayakta kalan bir duelist'e ihtiyaç duyuyor.
+- Düşmanın baskın op oyuncusunu ult ile izole edebilirsin.
 
-### Harita Gücleri
-- **Ascent**: A-tier. A main veya Mid boyunca Contingency duvarı. Mid tutan Op'u Kill Contract ile al.
-- **Haven**: A-tier. Contingency için uzun koridorlar. Kill Contract için çoklu hedef.
-- **Pearl**: A-tier. Uzun görüş hatları Contingency push'larını destekler.
-- **Bind**: B-tier. Koridor değeri var ama dar alanlar Contingency'yi sınırlar.
+### Harita Güçleri
+- **Ascent**: A-tier. A main veya Mid boyunca duvar. Mid'i tutan op'u ult ile al.
+- **Haven**: A-tier. duvar için uzun koridorlar. ult için çoklu hedef.
+- **Pearl**: A-tier. Uzun görüş hatları duvar push'larını destekler.
+- **Bind**: B-tier. Koridor değeri var ama dar alanlar duvarı sınırlar.
 
 ### Sık Yapılan Hatalar (IF/MEANING/COUNTER/WHY)
 
-1. **IF** Kill Contract'ı yanlış hedefe kullanıyorsan
-   **MEANING** Her zaman düşmanın en zayıf aim'cısını veya Op oyuncusunu (arenada Op'u olmayacak) ult'la
-   **COUNTER** Reyna one-trick'i ult'lama. Aim düellosu onun avantajına. Op oyuncusu veya zayıf aim'ci seç
-   **WHY** Yanlış hedef = 7 ult puanı cöp + muhtemelen kaybedilen düello
+1. **IF** ult'u yanlış hedefe kullanıyorsan
+   **MEANING** Her zaman düşmanın en zayıf aim'cisini ya da op oyuncusunu (arenada op'u olmayacak) hedefle
+   **COUNTER** Reyna one-trick'ini hedefleme; aim düellosu onun lehine. op oyuncusu ya da zayıf aim'ci seç
+   **WHY** Yanlış hedef hem 7 ult puanını çöpe atmak hem de büyük ihtimalle düelloyu kaybetmektir
 
-2. **IF** Contingency arkasında takım desteği olmadan yürüyorsan
-   **MEANING** Duvar mermileri engeller ama bedenleri engellemez -- düşmanlar icinden gecip seni vurabilir
-   **COUNTER** Duvarın arkasına girerken takım arkadaşların flankleri kapatsın
-   **WHY** Solo duvar push = düşman duvardan geçer ve seni güvende sanırken öldürür
+2. **IF** duvar arkasında takım desteği olmadan yürüyorsan
+   **MEANING** Duvar mermiyi keser ama bedeni kesmez; düşman içinden geçip seni vurabilir
+   **COUNTER** Duvarın arkasına girerken takım arkadaşların flank'leri kapatsın
+   **WHY** Solo duvar push'unda düşman duvardan geçer ve sen güvende sanırken seni öldürür
 
-3. **IF** Peek öncesi Undercut kullanmıyorsan
-   **MEANING** Çift hasar debuff'ı devasa bir avantaj
-   **COUNTER** Her acı peek'inden önce Undercut at
-   **WHY** Undercut olmadan peek = düşmana eşit şartlarda dövüşme. Undercut ile peek = bir vuruş avantajı
+3. **IF** peek öncesi yavaşlatma kullanmıyorsan
+   **MEANING** Çift hasar debuff'ı devasa bir avantajdır
+   **COUNTER** Her açı peek'inden önce yavaşlatma at
+   **WHY** yavaşlatmasız peek, düşmanla eşit şartlarda dövüşmektir; yavaşlatma ile peek bir vuruş avantajı verir
 
-4. **IF** Double Tap shield'ini unutuyorsan
-   **MEANING** Shield headshot dahil bir vuruşu absorbe eder
-   **COUNTER** O buffer'a sahip olduğun için normalde kazanamayacağın dövüşleri al
-   **WHY** Kullanılmayan shield = Iso'nun en büyük dayanıklılık avantajını boşa harcamak
+4. **IF** kalkanı unutuyorsan
+   **MEANING** Kalkan kafa vuruşu dâhil tek bir vuruşu emer
+   **COUNTER** O tampona güvenip normalde kazanamayacağın dövüşleri al
+   **WHY** Kullanılmayan kalkan, Iso'nun en büyük dayanıklılık avantajını boşa harcamaktır
 
-5. **IF** Kill Contract'ı Reyna'ya karşı kullanıyorsan
-   **MEANING** Reyna arenada Dismiss veya Devour yapamaz -- saf aim düellosu
-   **COUNTER** Bu aslında iyi -- ama sadece aim'in ondan iyiyse. Aksi halde Op oyuncusunu hedefle
-   **WHY** Arena = saf mekanik. Daha iyi aim kazanır, utility yok
+5. **IF** ult'u Reyna'ya karşı kullanıyorsan
+   **MEANING** Reyna arenada kaçış veya heal yapamaz; saf aim düellosu olur
+   **COUNTER** Bu aslında iyi; ama yalnızca aim'in ondan iyiyse. Aksi halde op oyuncusunu hedefle
+   **WHY** Arena saf mekaniktir; util yok, daha iyi aim kazanır
 
 ### Pro Oyuncu Stilleri
-- Iso VCT 2024'te belirli haritalarda nis pick olarak oynanmıştır. DRX gibi takımlar Contingency'nin takıma güvenli geciş sağladığı yapılandırılmış execute'larda denemiştir.
+- Iso, 2024 VCT'de belirli haritalarda niş pick olarak oynandı. DRX gibi takımlar, duvarın takıma güvenli geçiş sağladığı yapılandırılmış execute'larda denedi.
 
 ### Eşleşme İpuçları
-- **vs. Jett**: Kill Contract Jett'in mobilite avantajını kaldırır. Arenada dash yapamaz.
-- **vs. Chamber**: Kill Contract Chamber'ın Headhunter ve Rendezvous avantajını kaldırır. Düelloyu zorla.
-- **vs. Reyna**: Reyna Kill Contract'ta Dismiss veya Devour yapamaz. Saf aim düellosu.
+- **vs. Jett**: ult Jett'in mobilite avantajını siler. Arenada dash atamaz.
+- **vs. Chamber**: ult Chamber'ın tabanca ve teleport avantajını siler. Düelloyu zorla.
+- **vs. Reyna**: Reyna ult arenasında kaçış veya heal yapamaz. Saf aim düellosu.
 
 ---
 
 ## Waylay
 
 ### Yetenek Analizi
-- **Waylay** Valorant'ın duellist kadrosuna eklenen yeni agentlardan. Kit'i yanlış yönlendirme ve reposition üzerine kurulu.
-- Düşmanların gerçek pozisyonunu takip etmesini zorlaştıran kopyalar ve sahte sinyaller yaratır.
-- İmza yeteneği ile yerleştirilmiş bir klonla pozisyon değiştirerek girişlerde ve retake'lerde kafa karışıklığı yaratır.
-- Ult'u hareketini taklit eden çoklu klonlar yaratarak düşmanları hangisinin gerçek olduğunu tahmin etmeye zorlar.
+- **Waylay** Valorant'ın duelist kadrosuna eklenen yeni agentlardandır. Yeteneği yanlış yönlendirme ve yer değiştirme üzerine kuruludur.
+- Düşmanın gerçek pozisyonunu takip etmesini zorlaştıran kopyalar ve sahte sinyaller yaratır.
+- İmza yeteneğiyle yerleştirdiği bir klonla yer değiştirip girişlerde ve retake'lerde kafa karışıklığı yaratır.
+- ult'u, hareketini taklit eden birden çok klon yaratıp düşmanı hangisinin gerçek olduğunu tahmine zorlar.
 
 ### Ne Zaman Seçilir
-- Yanlış yönlendirmenin yüksek değer taşıdığı çoklu giriş noktalı haritalar
-- Düşman takım utility tabanlı bilgi toplama yerine görsel bilgiye güveniyorsa
-- Retake ve mid-round reposition'da üstün bir duellist istiyorsan
+- Yanlış yönlendirmenin yüksek değer taşıdığı, çoklu giriş noktalı haritalar.
+- Düşman, util tabanlı bilgi yerine görsel bilgiye güveniyorsa.
+- Retake ve round-ortası yer değiştirmede üstün bir duelist istiyorsan.
 
-### Harita Gücleri
-- Dar koridorlar ve çoklu açılara sahip haritalarda en güçlü (Split, Bind, Icebox)
-- Klonların ayırt edilmesinin kolay olduğu geniş açık haritalarda daha zayıf
+### Harita Güçleri
+- Dar koridorlu ve çok açılı haritalarda en güçlü (Split, Bind, Icebox).
+- Klonların kolayca ayırt edildiği geniş, açık haritalarda daha zayıf.
 
 ### Sık Yapılan Hatalar (IF/MEANING/COUNTER/WHY)
 
-1. **IF** Klonları plansız gönderiyorsan
-   **MEANING** Klonlar belirli bir oyunu desteklemeli, rastgele atılmamalı
-   **COUNTER** Her klonun bir amacı olsun -- bilgi toplama, ilgi cekme veya sahte rotasyon
-   **WHY** Rastgele klon = utility israfı + düşmana "bu sahte" öğretme
+1. **IF** klonları plansız gönderiyorsan
+   **MEANING** Klonlar belli bir oyunu desteklemeli, rastgele atılmamalı
+   **COUNTER** Her klonun bir amacı olsun; bilgi topla, dikkat çek ya da sahte rotasyon yarat
+   **WHY** Rastgele klon hem util israfı hem de düşmana "bu sahte" diye öğretmektir
 
-2. **IF** Her zaman aynı sürede swap yapıyorsan
-   **MEANING** Düşmanlar zamanlamayı öğrenir ve swap anında açı tutar
-   **COUNTER** Swap zamanlamanı değiştir -- erken, geç, arada hic yapma
-   **WHY** Tahmin edilebilir swap = düşman tam swap anında seni vurur
+2. **IF** her zaman aynı sürede swap yapıyorsan
+   **MEANING** Düşman zamanlamayı öğrenir ve tam swap anında açı tutar
+   **COUNTER** Swap zamanlamanı değiştir; bazen erken, bazen geç, bazen hiç yapma
+   **WHY** Tahmin edilebilir swap, düşmanın tam swap anında seni vurması demektir
 
-3. **IF** Klon vurulduğunda bilgiyi kullanmıyorsan
-   **MEANING** Vurulan klon düşmanın tam pozisyonunu veriyor
-   **COUNTER** Klon vurulunca hemen o bilgiyle hareket et veya takıma bildir
-   **WHY** Kullanılmayan bilgi = klonun tüm değerini cöpe atmak
+3. **IF** klon vurulduğunda bilgiyi kullanmıyorsan
+   **MEANING** Vurulan klon, düşmanın tam pozisyonunu sana verir
+   **COUNTER** Klon vurulur vurulmaz o bilgiyle hareket et ya da takıma bildir
+   **WHY** Kullanılmayan bilgi, klonun tüm değerini çöpe atmaktır
 
 ---
 
-## Rank Modülasyonu - Duellist Koçluğu
+## Rank Modülasyonu - Duelist Koçluğu
 
 ### Iron-Silver
-- **Öncelik**: Temel aim mekaniği ve crosshair placement. Duellist olarak işin entry yapmak -- önce gir, bilgi ver veya kill al.
-- **Basit kural**: "Duellist'sen takımdan önce site'a gir. Arkada durma." Bu kadar.
-- **Utility kullanımı**: Basit tut. Jett'te Cloudburst at ve gir. Raze'de Boom Bot gönder ve takip et. Karmaşık kombo bekleme.
-- **En büyük hata**: Duellist alıp baiter oynamak. Bu rank'te sırf entry yapmak bile seni yukarı taşır.
+- **Öncelik**: Temel aim mekaniği ve crosshair placement. Duelist olarak işin entry yapmak; önce gir, bilgi ver ya da kill al.
+- **Basit kural**: "Duelist'sen takımdan önce site'a gir. Arkada durma." Bu kadar.
+- **Util kullanımı**: Basit tut. Jett'te smoke at ve gir. Raze'de bot gönder ve takip et. Karmaşık kombo bekleme.
+- **En büyük hata**: Duelist alıp bait oynamak. Bu rank'te sırf entry yapmak bile seni yukarı taşır.
 
 ### Gold-Platinum
-- **Öncelik**: Utility zamanlaması ve takım koordinasyonu. Entry öncesi initiator utility'si bekle.
-- **Gelişim**: Jett'te dash aktivasyonunu otomatikleştir. Raze'de double satchel öğren. Reyna'da Leer + peek zamanlamasını geliştir.
-- **Alana yaratma**: Kill almak değil, alan yaratmak öğren. 5-15 gidip her round A site'ı alan duellist, 20-10 giden exit frag duellist'ten daha değerli.
-- **Ekonomi**: Takım full buy'da duellist full buy yapmalı. Half-buy duellist = boşa giden rol.
+- **Öncelik**: Util zamanlaması ve takım koordinasyonu. Entry öncesi initiator util'ini bekle.
+- **Gelişim**: Jett'te dash aktivasyonunu refleks haline getir. Raze'de double satchel öğren. Reyna'da kör etme + peek zamanlamasını oturt.
+- **Alan yaratma**: Kill almayı değil, alan açmayı öğren. 5-15 gidip her round A site'ı alan bir duelist, 20-10 giden exit-frag duelist'inden daha değerlidir.
+- **Ekonomi**: Takım full buy'da duelist de full buy yapmalı. Half-buy duelist boşa harcanan roldür.
 
 ### Diamond-Ascendant
-- **Öncelik**: Trade mekaniği ve space creation derinliği. Entry yaptığında ölsen bile takımın trade edebileceği pozisyonda öl.
-- **Gelişim**: Jett'te Op + dash disiplinini geliştir -- tek plana bağımlı olma. Raze'de aerial Showstopper ustalaş. Yoru'da Gatecrash sahtelerini öğren.
-- **Okuma**: Düşman setup'ını okuyarak entry yolunu seç. Her round aynı yerden girme -- okunan entry = ölü duellist.
-- **Eşleşme bilgisi**: Karşı agent'a göre oyun stilini ayarla. Chamber'a karşı pozisyon, Cypher'a karşı utility temizleme, Sova'ya karşı dart farkındalığı.
+- **Öncelik**: Trade mekaniği ve alan yaratmanın derinliği. Entry yaparken ölsen bile takımının trade edebileceği bir yerde öl.
+- **Gelişim**: Jett'te op + dash disiplinini oturt; tek plana bağlanma. Raze'de havadan ult'a ustalaş. Yoru'da sahte teleport'u öğren.
+- **Okuma**: Düşmanın kurulumunu okuyup giriş yolunu seç. Her round aynı yerden girme; okunan entry, ölü duelist demektir.
+- **Eşleşme bilgisi**: Karşı agent'a göre stilini ayarla. Chamber'a karşı pozisyon, Cypher'a karşı util temizleme, Sova'ya karşı dart farkındalığı.
 
 ### Immortal+
-- **Öncelik**: Round kontrolü ve adaptasyon. Her round farklı entry yolu, farklı timing, farklı utility sırası.
-- **Gelişim**: Jett'te Aspas/Demon1 stillerini incele ve kendi hibrit stilini oluştur. Her agent'ın her haritadaki tüm kombo olasılıklarını bil.
-- **Takım rolü**: IGL ile koordine entry zamanlaması. Duellist olarak IGL olmak son derece zor -- bırak başkası callsın, sen entry yap.
-- **Meta okuma**: Mevcut meta'ya göre duellist seçimi yap. Op meta'da Jett/Chamber, utility meta'da Raze/Neon, lurk meta'da Yoru.
+- **Öncelik**: Round kontrolü ve adaptasyon. Her round farklı giriş yolu, farklı timing, farklı util sırası.
+- **Gelişim**: Jett'te Aspas/Demon1 stillerini incele ve kendi hibridini kur. Her agent'ın her haritadaki tüm kombo olasılığını bil.
+- **Takım rolü**: IGL ile koordineli giriş zamanlaması. Duelist olarak IGL'lik çok zordur; call'ı başkasına bırak, sen entry yap.
+- **Meta okuma**: Mevcut meta'ya göre duelist seç. Op meta'da Jett/Chamber, util meta'da Raze/Neon, lurk meta'da Yoru.
 
 ---
 
-## Genel Duellist Felsefesi
+## Genel Duelist Felsefesi
 
 ### Entry Fragging Protokolü
-1. **Initiator utility'si bekle** - Asla kuru peek atma. Flash, dart, drone veya scan bekle.
-2. **Girişini bildir** - "Giriyorum" takımına trade hazırlığı için alan açar.
-3. **Trade et veya öl** - İşin ya kill almak ya da takımına bilgi ve trade fırsatı vermek.
-4. **Bait yapma** - Duellist'sen ve execute'ta son hayattaysan, rolünü yapamadın.
+1. **Initiator util'i bekle** - Asla kuru peek atma. Flash, dart, drone veya tarama bekle.
+2. **Girişini bildir** - "Giriyorum" demek, takımına trade için alan açar.
+3. **Trade et ya da öl** - İşin ya kill almak ya da takımına bilgi ve trade fırsatı vermek.
+4. **Bait yapma** - Duelist'sen ve execute bittiğinde son hayatta sen kalıyorsan, rolünü yapamamışsın.
 
 ### Alan Yaratma vs. Fraglama
-- Her round A site'ı alan 5-15 duellist, exit frag ile 20-10 giden duellist'ten daha değerli.
-- Alan, kazanılan harita kontrolüyle ölçülür, kill'lerle değil.
-- Agresyonun yüzünden düşman rotate etmek zorunda kaldıysa, ateş etmeden bile alan yarattın.
+- Her round A site'ı alan 5-15'lik bir duelist, exit-frag'le 20-10 giden duelist'ten daha değerlidir.
+- Alan, kazandığın harita kontrolüyle ölçülür, kill sayısıyla değil.
+- Agresyonun yüzünden düşman rotate etmek zorunda kaldıysa, ateş etmeden bile alan açtın.
 
-### Duellist Ekonomisi
-- Takım full buy'da duellist full buy yapmalı. Half-buy duellist boşa giden rol.
-- Eco roundlarda Reyna ve Jett ult'ları yüksek değer taşır (Blade Storm, Empress).
-- Pistol round'da Raze Showstopper tek başına round kazandırabilir.
+### Duelist Ekonomisi
+- Takım full buy'da duelist de full buy yapmalı. Half-buy duelist boşa harcanan roldür.
+- Eco round'larda Reyna ve Jett ult'ları yüksek değer taşır (ult, ult).
+- Pistol round'da Raze ult'u tek başına round kazandırabilir.
 
-### Duellist SECMEMEn Gereken Durumlar
-- Takımında iki duellist varsa flex pick düşün.
-- Harita utility'yi destekliyorsa (Breeze, Lotus) ikinci initiator ikinci duellist'ten daha fazla değer sağlayabilir.
-- IGL'sen duellist oynarken call yapmak son derece zor. Entry'yi başkasına bırak.
+### Duelist SEÇMEMEN Gereken Durumlar
+- Takımında iki duelist varsa flex pick düşün.
+- Harita util'i destekliyorsa (Breeze, Lotus) ikinci initiator, ikinci duelist'ten daha çok değer verebilir.
+- IGL'sen duelist oynarken call yapmak çok zordur. Entry'yi başkasına bırak.

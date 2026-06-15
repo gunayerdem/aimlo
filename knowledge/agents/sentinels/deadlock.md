@@ -1,94 +1,94 @@
 # AJAN: Deadlock
 
 ## 1. Rol Kimliği
-Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi geniş alana yayar — sen bir noktayı kilitlersin. Barrier Mesh girişi tamamen kapatır, GravNet içinden geçeni yere yapıştırır, Sonic Sensor sesi cezalandırır, Annihilation yakaladığını garantili götürür. Hızla site alan takımlar senin avındır. Zayıflığın şu: utility kullandıktan sonra farklı bir açıdan gelen baskıya çok az cevabın kalır.
+Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi geniş alana yayar — sen bir noktayı kilitlersin. Duvarın girişi tamamen kapatır, ağ tuzağın içinden geçeni yere yapıştırır, tuzağın sesi cezalandırır, ult'un yakaladığını garanti götürür. Hızla site alan takımlar senin avın. Tek zayıf yanın şu: utility'ni boşalttıktan sonra başka açıdan gelen baskıya verecek çok az cevabın kalır.
 
 ## 2. Temel Sorumluluklar
-- **Girişi kapat**: Barrier Mesh'i düşmanın en çok bastığı tek noktaya koy. Sage duvarı gibi çabuk kırılmaz — düşman orbları yok etmek zorunda, bu süre ve konum satar.
-- **Rush'ı dağıt**: GravNet'i önceden atma. Düşman o koridora girdiğini duyduğunda at. Eğilmeye zorlarsan hızını, orbu yok etmeye zorlarsan pozisyonunu alırsın.
-- **Sesi cezalandır**: Sonic Sensor ayak sesine, yetenek sesine, silah sesine tepki verir — bilgi ve kısa sersemletme verir. Yalnızca takım arkadaşı geçmeyecek, düşmanın sessiz geçemeyeceği yollara koy.
-- **Round'u kapat**: Annihilation izole düşmanda veya spike kurulunca defuse yapmaya gelen üzerinde kullan. Koza yolu dar ve korunmalı olmalı — açıkta kozayı takım arkadaşları vurur, düşman kurtulur.
-- **Katmanla**: Barrier Mesh arkasına Sonic Sensor koy. Hem hızlı hem yavaş geleni aynı anda cezalandırırsın.
+- **Girişi kapat**: Duvarı düşmanın en çok bastığı tek noktaya koy. Sage duvarı gibi çabuk kırılmaz — düşman orbları tek tek vurmak zorunda, bu sana hem zaman hem konum kazandırır.
+- **Rush'ı dağıt**: Ağ tuzağını önceden atma. Düşmanın o koridora girdiğini duyduğun an at. Eğilmeye zorlarsan hızını alırsın, orbu vurmaya zorlarsan pozisyonunu alırsın.
+- **Sesi cezalandır**: Tuzağın ayak sesine, yetenek sesine, silah sesine tepki verir — sana bilgi ve kısa bir sersemletme kazandırır. Takım arkadaşının geçmeyeceği, düşmanın da sessiz geçemeyeceği yollara koy.
+- **Round'u kapat**: Ult'unu izole bir düşmana ya da spike kurulduktan sonra defuse'a gelen oyuncuya kullan. Koza yolu dar ve korunaklı olsun — açıkta kalan kozayı düşmanın takım arkadaşları vurur, içindeki kurtulur.
+- **Katmanla**: Duvarın arkasına tuzak koy. Hem hızlı geleni hem yavaş geleni aynı anda cezalandırırsın.
 
 ## 3. Sık Yapılan Hatalar
-- Mesh'i yanlış girişe koymak — düşman zaten o yolu kullanmıyorsa sıfır değer üretir.
-- GravNet'i açık alana atmak. Düşmanın mutlaka geçmek zorunda olduğu dar yola at.
-- Sonic Sensor'u takım arkadaşının utility'sinin veya kendi silah sesinin sürekli tetikleyeceği yere koymak. Sahte alarm yaratır, takım gerçek uyarıyı da yok sayar.
-- Annihilation'ı açık alanda kullanmak. Koza görünürdeyse düşman takım arkadaşları vurur, içindeki kurtulur.
-- Tüm utility'yi tek noktaya harcamak. Düşman rotate edince elde hiçbir şey kalmaz.
-- Mesh'in nasıl kırıldığını bilmemek. Orbları vurmayı bilen düşman mesh'i çabuk söker — bu sesi duy, önceden açı kur.
+- Duvarı yanlış girişe koymak — düşman zaten o yolu kullanmıyorsa hiçbir işe yaramaz.
+- Ağ tuzağını açık alana atmak. Düşmanın geçmek zorunda olduğu dar yola at.
+- Tuzağı, takım arkadaşının utility'sinin ya da kendi silah sesinin sürekli tetiklediği yere koymak. Boşa alarm verir, takım gerçek uyarıyı da ciddiye almaz.
+- Ult'u açık alanda kullanmak. Koza görünürdeyse düşmanın takım arkadaşları vurur, içindeki kurtulur.
+- Tüm utility'yi tek noktaya harcamak. Düşman rotate edince elinde hiçbir şey kalmaz.
+- Duvarın nasıl kırıldığını bilmemek. Orbları vurmayı bilen düşman duvarı çabuk söker — o sesi duy, önceden açını kur.
 
 ## 4. Kalıptan Anlama
 
-**IF** Barrier Mesh koyuyorsun ama düşman farklı yoldan site'a giriyor
+**IF** Duvar koyuyorsun ama düşman başka yoldan site'a giriyor
 **MEANING** Yanlış girişi kapatıyorsun. Düşmanın tercih ettiği rotayı okumamışsın.
-**COUNTER** İlk birkaç round'da düşmanın hangi girişi en çok kullandığına bak, mesh'i oraya taşı. Her round mesh pozisyonunu düşman rotasına göre ayarla.
-**WHY** Yanlış girişi kapatan mesh hiçbir değer üretmez. Doğru yolu oku — o zaman tek kullanımını maksimize edersin.
+**COUNTER** İlk birkaç round'da düşmanın en çok hangi girişi kullandığına bak, duvarı oraya taşı. Her round duvarın yerini düşmanın rotasına göre ayarla.
+**WHY** Yanlış girişi kapatan duvar hiçbir işe yaramaz. Doğru yolu oku — o zaman tek kullanımını sonuna kadar değerlendirirsin.
 
-**IF** GravNet atıyorsun ama birden fazla round sıfır düşman yakalıyor
-**MEANING** Zamanlama bozuk. Ya çok erken attın, düşman henüz orada değildi — ya da yanlış yola nişanladın.
-**COUNTER** GravNet'i elinde tut. Düşmanın o koridora girdiğini duyduğunda at. Önceden kurulum olarak atma.
-**WHY** Erken atılan GravNet düşman girmeden boşa gider. Düşman tam geçişteyken atarsan kaçış yoktur.
+**IF** Ağ tuzağı atıyorsun ama birkaç round üst üste hiç düşman yakalamıyorsun
+**MEANING** Zamanlaman bozuk. Ya çok erken attın, düşman daha gelmemişti — ya da yanlış yola nişanladın.
+**COUNTER** Ağ tuzağını elinde tut. Düşmanın o koridora girdiğini duyduğun an at. Önceden kurulum diye atma.
+**WHY** Erken atılan ağ tuzağı düşman gelmeden boşa gider. Düşman tam geçerken atarsan kaçışı olmaz.
 
-**IF** Sonic Sensor tetikleniyor ama hiçbir düşman gelmiyor
-**MEANING** Sensor, takım arkadaşı aktivitesinin veya ortam sesinin tetiklediği yere konmuş. Sahte alarm üretiyor.
-**COUNTER** Sensor'u sadece düşman ayak sesinin — crouch-walk dahil — tetikleyeceği sessiz köşelere, derin flank yollarına koy. Bind hookah'ta kapı arkası değil iç köşe gibi noktalar doğru seçimdir.
-**WHY** Sahte alarm bilgini öldürür. Takım gerçek tetiklenmeleri de yok saymaya başlar.
+**IF** Tuzak tetikleniyor ama hiç düşman gelmiyor
+**MEANING** Tuzağı, takım arkadaşının ya da ortam sesinin tetiklediği bir yere koymuşsun. Boşa alarm veriyor.
+**COUNTER** Tuzağı sadece düşmanın ayak sesinin — eğilerek yürüse bile — tetikleyeceği sessiz köşelere, derin flank yollarına koy. Bind'de hookah'ta kapı arkası değil, iç köşe gibi noktalar doğru tercihtir.
+**WHY** Boşa alarm bilgini öldürür. Takım gerçek tetiklenmeleri de ciddiye almamaya başlar.
 
-**IF** Annihilation kullanıyorsun ama düşman her seferinde kurtarılıyor
-**MEANING** Koza yolu birden fazla düşman açısına maruz kalıyor. Takım arkadaşları kozayı kolayca vuruyor.
-**COUNTER** Annihilation'ı dar koridorda veya köşede kullan. En iyi kullanım: spike kurulunca tek başına defuse yapmaya gelen üzerinde. Koza yolunun nereye gittiğine dikkat et — düşman ateş açısı bulamasın.
-**WHY** Açık alandaki koza kolay hedef. Dar alan düşmanın kurtarma için açı bulmasını engeller.
+**IF** Ult kullanıyorsun ama düşman her seferinde kurtarılıyor
+**MEANING** Koza yolu birden fazla düşman açısına açık kalıyor. Düşmanın takım arkadaşları kozayı rahatça vuruyor.
+**COUNTER** Ult'u dar koridorda ya da köşede kullan. En iyisi: spike kurulduktan sonra tek başına defuse'a gelen oyuncunun üstüne. Koza yolunun nereye gittiğine dikkat et — düşman ateş açısı bulamasın.
+**WHY** Açık alandaki koza kolay hedef. Dar alan, düşmanın kurtarma için açı bulmasını engeller.
 
-**IF** Erken ölüyorsun ve utility'n kullanılmamış kalıyor
+**IF** Erken ölüyorsun ve utility'n kullanılmadan elinde kalıyor
 **MEANING** Çok öne çıkıyorsun. Deadlock'un her yeteneği düşman hamlesi gelince değer kazanır — ölürsen hepsini çöpe atarsın.
 **COUNTER** Geri dur. Utility'ni düşman bir şey yaparken kullan, sen bir şey yaparken değil.
-**WHY** Ölü Deadlock sıfır utility'dir. Hayattayken düşman push'u gelince mesh + GravNet + sensor aynı anda çalışır.
+**WHY** Ölü Deadlock sıfır utility demek. Hayattayken düşman push'u gelince duvar, ağ tuzağı ve tuzak aynı anda çalışır.
 
-**IF** Mesh orbları düşman tarafından hızla temizleniyor ve mesh değer üretemiyor
-**MEANING** Düşman orb kırma mekanik bilgisine sahip ve bunu organize yapıyor. Mesh tek başına duruyor, tuzak değil engel gibi.
-**COUNTER** Orb kırma sesini aktif dinle — kıran düşman pozisyonunu açığa çıkarır. O ses gelince hazır açıda bekle. Arkasına Sonic Sensor koy, orb kırarken sensor tetiklensin.
-**WHY** Mesh yalnız durduğunda sadece geciktirir. Sonic Sensor ile birleşince orb kıran düşman hem sersemer hem pozisyon açığa çıkarır — mesh bir tuzak kapısına dönüşür.
+**IF** Düşman duvarın orblarını hızla temizliyor ve duvar değer üretemiyor
+**MEANING** Düşman orb kırmayı biliyor ve bunu organize yapıyor. Duvarın tek başına duruyor, tuzak değil sadece bir engel gibi.
+**COUNTER** Orb kırma sesini aktif dinle — kıran düşman pozisyonunu açığa çıkarır. O ses gelince hazır açıda bekle. Duvarın arkasına tuzak koy, orbu kırarken tuzak tetiklensin.
+**WHY** Duvar yalnız durduğunda sadece geciktirir. Tuzakla birleşince orbu kıran düşman hem sersemler hem pozisyonunu açığa çıkarır — duvar bir tuzak kapısına döner.
 
 ## 5. Harita Etkileşimleri
-- **Lotus**: Döner kapılar ve dar koridorlar Barrier Mesh + GravNet katmanlaması için biçilmiş kaftan. B main veya A root'ta Annihilation'ın kaçış yolu yok.
-- **Bind**: B site'ta güçlü. Hookah, Barrier Mesh için doğal geçiş noktası. B long'da rush gelen gruba GravNet dağıtır.
-- **Fracture**: Dar saldırı yolları işine yarar. Yer altı tünellerine Sonic Sensor koy — düşman rotasyonunu erken öğrenirsin.
-- **Haven**: Üç site zor. Garage'ı kilitleyerek C site'a odaklan — choke noktası nettir.
-- **Ascent**: B main Barrier Mesh için güçlü pozisyon. Market'e Sonic Sensor koy — flank'ı erken görürsün.
+- **Lotus**: Döner kapılar ve dar koridorlar duvar + ağ tuzağı katmanlaması için biçilmiş kaftan. B main ya da A root'ta ult'un için kaçış yolu yok.
+- **Bind**: B site'ta çok güçlüsün. Hookah, duvar için doğal geçiş noktası. B long'dan rush gelen gruba ağ tuzağını dağıt.
+- **Fracture**: Dar saldırı yolları işine yarar. Yer altı tünellerine tuzak koy — düşmanın rotasyonunu erken öğrenirsin.
+- **Haven**: Üç site'ı tutmak zor. Garage'ı kilitleyip C site'a odaklan — choke noktası nettir.
+- **Ascent**: B main duvar için güçlü pozisyon. Market'e tuzak koy — flank'ı erken görürsün.
 
 ## 6. Eşleşme Notları
-- **Raze**'e karşı zayıfsın. Patlayıcıları Barrier Mesh orblarını ve Sonic Sensor'ları uzaktan temizler. Mesh'i beklenmedik açıya koy.
-- **Neon** ve hız bazlı ajanlara karşı güçlüsün. Tüm kit'in bunları cezalandırmak için var.
-- **Sova** Sonic Sensor'ları temizleyebilir, Mesh pozisyonlarını güvenli mesafeden keşfeder. Sensor'ları standart yerden koy, tahmin edilemez ol.
-- Annihilation **izole düşmana** karşı counter'lanamaz. Grup halinde gelen takımlara karşı en zayıfısın — kozayı çabuk vururlar.
+- **Raze**'e karşı zayıfsın. Patlayıcıları duvarın orblarını ve tuzaklarını uzaktan temizler. Duvarı beklenmedik bir açıya koy.
+- **Neon** ve hız bazlı ajanlara karşı güçlüsün. Tüm kit'in tam da bunları cezalandırmak için var.
+- **Sova** tuzaklarını temizleyebilir, duvar pozisyonlarını güvenli mesafeden keşfeder. Tuzakları standart yerden çıkar, tahmin edilemez ol.
+- Ult'un **izole düşmana** karşı counter'lanamaz. En zayıf olduğun an grup halinde gelen takımlar — kozayı çabuk vururlar.
 
 ## 7. Oyuncuya Ne Söylenmeli
 
 ### İyi Gidiyorsa
-**Ne yapıyorsun:** İlk birkaç round düşmanın hangi girişi tercih ettiğini okudun, Mesh'i oraya koydun, arkasına Sonic Sensor katladın, GravNet'i düşman o koridora girerken attın.
+**Ne yapıyorsun:** İlk birkaç round'da düşmanın hangi girişi tercih ettiğini okudun, duvarı oraya koydun, arkasına tuzak katladın, ağ tuzağını da düşman tam o koridora girerken attın.
 
-**Düşman ne görüyor:** Barrier Mesh görüyor, orbları hızla kırabileceğini düşünüyor. Arkasındaki Sonic Sensor'dan haberi yok — orb kırmak için adım atıyor, tam o anda sersemiyor.
+**Düşman ne görüyor:** Duvarı görüyor, orbları hızla kırabileceğini sanıyor. Arkasındaki tuzaktan haberi yok — orbu kırmak için adım atıyor, tam o anda sersemliyor.
 
-**Düşman ne yapıyor:** Ya orbları yok ediyor — ateş sesiyle pozisyon açığa çıkar, üstüne sensor çarpar. Ya alternatif yola geçiyor — takımının crossfire kurduğu tarafa düşer. Rush yapanlar GravNet yediğinde koordineli grup 4-5 bireysel dövüşe parçalanır.
+**Düşman ne yapıyor:** Ya orbları vuruyor — ateş sesiyle pozisyonu açığa çıkar, üstüne tuzak çarpar. Ya alternatif yola geçiyor — takımının crossfire kurduğu tarafa düşer. Rush yapanlar ağ tuzağına yakalanınca koordineli grup 4-5 ayrı dövüşe parçalanır.
 
 **Düşman adapte olursa:**
-- AoE ile mesh + sensor'u aynı anda temizlemeye çalışırlarsa: ikisini birbirinden ayır, tek utility ikisini birden temizleyemesin.
-- Saldırıyı böler iki gruptan gelirlerse: küçük gruba GravNet at, takımın sayı üstünlüğü kazansın.
-- Senin site'ından kaçınıp diğer site'ı basarlarsa: mesh'i sonraki round oraya döndür veya retake'e odaklan, GravNet + Annihilation ile post-plant girişimini durdur.
+- Tek bir AoE ile duvar ve tuzağı aynı anda temizlemeye çalışırlarsa: ikisini birbirinden ayır, tek utility ikisini birden temizleyemesin.
+- Saldırıyı bölüp iki gruptan gelirlerse: küçük gruba ağ tuzağını at, takımın o tarafta sayı üstünlüğü kazansın.
+- Senin site'ından kaçınıp diğer site'ı basarlarsa: duvarı bir sonraki round oraya döndür ya da retake'e odaklan, ağ tuzağı + ult ile post-plant'i durdur.
 
 ### Zorlanıyorsa
-"Mesh yanlış girişi kapatıyor. İlk birkaç round'a bak — düşman en çok nereden geliyor? Mesh'i oraya taşı. GravNet'i elinde tut, düşman o yola girene kadar atma."
+"Duvar yanlış girişi kapatıyor. İlk birkaç round'a bak — düşman en çok nereden geliyor? Duvarı oraya taşı. Ağ tuzağını elinde tut, düşman o yola girmeden atma."
 
 ### Tahmin Edilebilir Olduysa
-"Düşman mesh pozisyonlarını ezberledi, etrafından dolanıyor. Round değiştir — hangi girişi kilitlediğini değiştir. Mesh'in kapamadığı yolu GravNet ile tut."
+"Düşman duvar yerlerini ezberledi, etrafından dolanıyor. Round değiştir — hangi girişi kilitlediğini değiştir. Duvarın kapamadığı yolu ağ tuzağıyla tut."
 
 ## 8. Rütbe Modülasyonu
 
-**Düşük (Iron-Silver):** Mesh'i rastgele koyuyorsun, Sonic Sensor'ları unutuyorsun, GravNet'i el bombası gibi atıyorsun. Mesh ana geçişe, sensor flank yoluna, GravNet tam koridora girince.
+**Düşük (Iron-Silver):** Duvarı rastgele koyuyorsun, tuzakları unutuyorsun, ağ tuzağını el bombası gibi atıyorsun. Duvarı ana geçişe koy, tuzağı flank yoluna koy, ağ tuzağını da düşman tam koridora girince at.
 
-**Orta (Gold-Platinum):** Utility işlevsel ama her round aynı yere koyuyorsun. Annihilation açık alanda patlıyor, düşman kurtarılıyor. Reaktif GravNet zamanlamasına ve koza yolunun korunmasına odaklan.
+**Orta (Gold-Platinum):** Utility işini görüyor ama her round aynı yere koyuyorsun. Ult açık alanda patlıyor, düşman kurtarılıyor. Reaktif ağ tuzağı zamanlamasına ve koza yolunu korumaya odaklan.
 
-**Yüksek (Diamond-Ascendant):** Katmanlama tamam ama tek site'a bağlısın. Düşman hangi round hangi girişi tercih ediyor — bunu okuyup mesh'i round'dan round'a taşı.
+**Yüksek (Diamond-Ascendant):** Katmanlama tamam ama tek site'a bağlı kalıyorsun. Düşman hangi round hangi girişi tercih ediyor — bunu oku ve duvarı round'dan round'a taşı.
 
-**Elit (Immortal-Radiant):** Deadlock'un gücü bir saldırı rotasını tek round'da tamamen kapatmaktır. Mesh ve GravNet her round okumalara göre değişmeli. Annihilation spike kurulunca post-plant için sakla — garantili defuse engeli olarak kullan. Orb kırma sesini aktif dinle ve o sese önceden açı kur: mesh geciktirici değil, tuzak olur.
+**Elit (Immortal-Radiant):** Deadlock'un asıl gücü bir saldırı rotasını tek round'da tamamen kapatmaktır. Duvar ve ağ tuzağı her round okumalarına göre değişsin. Ult'u spike kurulduktan sonra post-plant için sakla — garantili defuse engeli olarak kullan. Orb kırma sesini aktif dinle ve o sese önceden açını kur: o zaman duvar geciktirici değil, gerçek bir tuzak olur.
