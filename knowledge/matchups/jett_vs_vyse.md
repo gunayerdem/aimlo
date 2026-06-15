@@ -32,7 +32,7 @@ Jett hızıyla ve dash ile Vyse'ın gizli tuzaklarını aşmaya çalışır. Vys
 ## 3. Key Düellolar
 
 **IF** Jett dash ile site'a girdi, Vyse teli Jett'in giriş hattında tetikledi
-**MEANING** Tel seni yavaşlatır ve görüşünü bozar — dash sonrası reposition hızın kesilir, sabit hedef kalırsın
+**MEANING** Tel seni yavaşlatır ve görüşünü bozar — dash sonrası yer değiştirme hızın kesilir, sabit hedef kalırsın
 **COUNTER** İlk roundda telin nereye konduğunu gör, sonraki roundlarda o hattı geç. yukarı zıplama ile üstten gir — tel zemin tuzağı, havadan üstünden atlarsın.
 **WHY** Dashsiz + yavaş + görüşü kapalı üçlüsü seni öldürür. Tuzağı atlayan Jett'e Vyse'ın cevabı yok.
 
@@ -66,7 +66,7 @@ Jett hızıyla ve dash ile Vyse'ın gizli tuzaklarını aşmaya çalışır. Vys
 
 ---
 
-**IF** Vyse site arka hattına gizli tel koydu, Jett spike sonrası reposition ediyor
+**IF** Vyse site arka hattına gizli tel koydu, Jett spike sonrası yer değiştirme ediyor
 **MEANING** Site'ı temizledikten sonra Vyse tuzağı tetikler — yavaşlatma + hasar, dönüş yolun kapanır
 **COUNTER** Site'ı temizler temizlemez tel noktalarını aktif tara. Temizleyemiyorsan farklı bir plant pozisyonu kullan.
 **WHY** Vyse'ın gücü gizli yerleşim — görünmeyen tuzak, Jett'in hızını geçersiz kılar. Tuzağı görmek için aktif bakman şart.

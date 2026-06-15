@@ -78,9 +78,9 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
 
 ### Yetenek Analizi
 - **bot (C)** - 200 kredi. Düz çizgide ilerleyen, duvarlardan seken, ön konisindeki düşmana kilitlenen robot. Hedefine ulaşırsa 80 hasar verir. Köşe temizlemek ve düşmanı yerinden oynatmak için kullan.
-- **sıçrama (Q)** - 200 kredi, 2 şarj. Yüzeylere yapışan fırlatılabilir patlayıcı. Havada patlatıp mobilite, yere bırakıp alan inkârı sağlar. Düşmana 50'ye kadar hasar verir. Temel mobilite aracın; double sıçrama jump'ları yüksek elo'da zorunludur.
+- **Sıçrama (Q)** - 200 kredi, 2 şarj. Yüzeylere yapışan fırlatılabilir patlayıcı. Havada patlatıp mobilite, yere bırakıp alan inkârı sağlar. Düşmana 50'ye kadar hasar verir. Temel mobilite aracın; double sıçrama jump'ları yüksek elo'da zorunludur.
 - **molly (E)** - Bedava, 2 kill ile yenilenir. Alt mühimmata ayrılan bomba. İlk patlama 15-55, alt mühimmatlar 15-55 hasar verir. Toplam 200+ hasar potansiyeli. Düşmanı pozisyonundan söker. Alt mühimmat dağılımı tahmin edilebilir; küme açılarını ezberle.
-- **ult (X)** - 8 ult puanı. Geniş alan roketi. Yakınlığa göre 20-150 hasar verir. sıçrama ile birleştirip havadan roket atabilirsin.
+- **ult (X)** - 8 ult puanı. Geniş alan roketi. Yakınlığa göre 20-150 hasar verir. Sıçrama ile birleştirip havadan roket atabilirsin.
 
 ### Ne Zaman Seçilir
 - Harita dar boğaz noktaları ve yakın dövüş içeriyor (Bind, Split, Fracture).
@@ -92,7 +92,7 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
 - **Bind**: S-tier. Dar koridorlar; bot teleporttan, molly Hookah/Short'a, double sıçrama B site'a.
 - **Split**: S-tier. molly iki site'da da Heaven'a, sıçrama A main duvarının üstünden, B main boğaz kontrolü.
 - **Fracture**: A-tier. Double sıçrama girişleri, molly Dish/Arcade'a, bot dar koridorlardan.
-- **Icebox**: A-tier. sıçrama ile A site konteynerlerine, B site Kitchen temizliği bot ile.
+- **Icebox**: A-tier. Sıçrama ile A site konteynerlerine, B site Kitchen temizliği bot ile.
 - **Sunset**: A-tier. Dar koridorlar ve boğazlar util'ini destekler.
 - **Lotus**: B-tier. Bazı noktalar işler ama harita tutarlı Raze değeri için fazla açık.
 - **Breeze**: C-tier. Fazla açık. molly ve bot geniş alanlarda değer kaybeder.
@@ -126,7 +126,7 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
    **WHY** Erken inkâr push'u yavaşlatır ve takımına rotasyon penceresi açar
 
 ### Pro Oyuncu Stilleri
-- **Aspas (LOUD)**: Raze'de hiper-agresif double sıçrama girişleri yapar. sıçrama mekaniği referans düzeyindedir. sıçrama-ult komboları ile tanınır.
+- **Aspas (LOUD)**: Raze'de hiper-agresif double sıçrama girişleri yapar. Sıçrama mekaniği referans düzeyindedir. Sıçrama-ult komboları ile tanınır.
 - **Jinggg (PRX)**: Hesaplı Raze. bot'u giriş için değil bilgi için kullanır, ardından util destekli girer. molly yerleşimleri hassastır ve takım execute'larıyla zamanlanmıştır.
 
 ### Eşleşme İpuçları
@@ -404,7 +404,7 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
    **WHY** Solo duvar push'unda düşman duvardan geçer ve sen güvende sanırken seni öldürür
 
 3. **IF** peek öncesi yavaşlatma kullanmıyorsan
-   **MEANING** Çift hasar debuff'ı devasa bir avantajdır
+   **MEANING** Çift hasar zayıflatma'ı devasa bir avantajdır
    **COUNTER** Her açı peek'inden önce yavaşlatma at
    **WHY** yavaşlatmasız peek, düşmanla eşit şartlarda dövüşmektir; yavaşlatma ile peek bir vuruş avantajı verir
 

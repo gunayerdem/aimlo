@@ -1,7 +1,7 @@
 # EŞLEŞME: Raze vs Killjoy
 
 ## Bu Eşleşme Neden Önemli
-Killjoy'un kiti yerde sabit durur, kıpırdamaz. Raze'in botu siteye dalıp Killjoy'un tuzak ve botlarını bulur, üstüne yürür. Granat; turret'i, molly'yi ve botu güvenli mesafeden temizler. sıçrama ile yer seviyesindeki tuzakların üstünden atlarsın. Raze, Killjoy'un kiti hayattayken siteye girerse o raundda Killjoy hiçbir şey yapamaz.
+Killjoy'un kiti yerde sabit durur, kıpırdamaz. Raze'in botu siteye dalıp Killjoy'un tuzak ve botlarını bulur, üstüne yürür. Granat; turret'i, molly'yi ve botu güvenli mesafeden temizler. Sıçrama ile yer seviyesindeki tuzakların üstünden atlarsın. Raze, Killjoy'un kiti hayattayken siteye girerse o raundda Killjoy hiçbir şey yapamaz.
 
 ## Cezalandırma Kalıpları
 

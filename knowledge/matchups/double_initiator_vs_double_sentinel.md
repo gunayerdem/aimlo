@@ -92,7 +92,7 @@ Sonuç: round sayısı 15'in altındayken sentinel setup baskısı yüksektir �
 
 **Breeze (double initiator avantajlı):** Geniş site alanları tuzak hattını dağıtır, kaplatmaz. Recon zinciri site'ı tarar, giriş temiz olur.
 
-**Icebox (double initiator avantajlı):** Dikey oyun + uzun sightline recon ve flash için biçilmiş kaftandır. Sentinel tuzak hattı dikey ekonomide yetersiz kalır.
+**Icebox (double initiator avantajlı):** Dikey oyun + uzun görüş hattı recon ve flash için biçilmiş kaftandır. Sentinel tuzak hattı dikey ekonomide yetersiz kalır.
 
 **Ascent (dengeli):** Mid Courier initiator için, A ve B site sentinel içindir. Mid kontrolünü kim alırsa matchup ona açılır.
 

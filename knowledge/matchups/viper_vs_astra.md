@@ -68,7 +68,7 @@ Ult karşılaştırması:
 
 **IF** Astra tüm yıldızlarını harcadı, util'i bitti
 **MEANING** Astra artık sadece tüfekli. Viper'ın fuel'i hâlâ akıyor — alan kontrolü tek tarafta
-**COUNTER** Molly + duvar reposition yap. Astra cevap veremez
+**COUNTER** Molly + duvar yer değiştirme yap. Astra cevap veremez
 **WHY** Astra util'i round başında harcanır, toparlanmaz. Viper fuel'i round boyu sürer. Astra boşaldığında baskıyı bin.
 
 ---

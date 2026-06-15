@@ -40,7 +40,7 @@ Viper duvar kurar, görüşü keser. Sova bilgi açar, pozisyonları ifşa eder.
 
 **IF** Sova hasar oku Viper molly alanına önce atıldı
 **MEANING** hasar oku post-plant molly'ni siler, Sova takımına defuse için alan açar
-**COUNTER** İki molly at, ard arda. hasar oku birini siler, ikincisi aktif kalır.
+**COUNTER** İki molly at, ard arda. Hasar oku birini siler, ikincisi aktif kalır.
 **WHY** Sova'nın hasar oku tek molly'yi siler. İki molly Sova'nın hasar oku ekonomisini aşar — ikinci molly için cooldown yetmez. Spike basıldıktan sonra çift molly Viper'ın en sağlam silahı.
 
 ---
@@ -84,7 +84,7 @@ Viper'ın fuel bar'ı var: duvar ve smoke fuel paylaşır, molly ayrı. Fuel'i e
 
 Sova'nın utility sırası:
 - Recon → round başı bilgi
-- hasar oku → molly counter veya alan temizliği
+- Hasar oku → molly counter veya alan temizliği
 - Bot → retake veya kritik bilgi
 - Ult → duvar hattını delen vuruş
 
@@ -96,7 +96,7 @@ Round içi sıra şöyle döner: Sova recon açar → Viper duvar + smoke kurar 
 
 **Icebox (Viper lehine):** A Site ve B Site molly lineup'ları burada baskın. Duvar A Tube + B Long hattını keser. Sova recon Icebox rafters geometrisinde duvarı geçecek açı bulamaz.
 
-**Breeze (Viper lehine):** Uzun sightline Viper duvarı için ideal — duvar Breeze Mid + A Main'i ikiye böler. Sova recon uzun mesafede duvar hattını geçemez.
+**Breeze (Viper lehine):** Uzun görüş hattı Viper duvarı için ideal — duvar Breeze Mid + A Main'i ikiye böler. Sova recon uzun mesafede duvar hattını geçemez.
 
 **Haven (Sova lehine):** 3 site Sova recon'unun en geniş alanı. Recon A-B-C rotate bilgisini açar, Viper fuel tek sitede kalır.
 

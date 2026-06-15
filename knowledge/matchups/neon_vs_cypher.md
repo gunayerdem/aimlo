@@ -68,7 +68,7 @@ Bu eşleşme bilgi savaşı. Cypher tuzak kurar; sen oradan geçersen yerini ö�
 
 **IF** Ult'unla Cypher'ın tuzak hattını bastın
 **MEANING** Ult tuzakları yıkar; Cypher yerinde sabitse doğrudan ona da vurur.
-**COUNTER** Cypher tarafıysan ult sesini duyduğun an reposition yap. Ult bitince tuzakları yenile, ult penceresinde yerinde durma.
+**COUNTER** Cypher tarafıysan ult sesini duyduğun an yer değiştirme yap. Ult bitince tuzakları yenile, ult penceresinde yerinde durma.
 **WHY** Ult sürekli hasar verir, tel ve kamera ise yerinde sabit durur. Hasar hattı ve tuzaklar üst üste gelince Neon hem util'i siler hem kill alır.
 
 ---

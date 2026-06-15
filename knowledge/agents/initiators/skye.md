@@ -50,7 +50,7 @@ Skye'da hem flash, hem keşif, hem de can yenileme senin elinde — bunu tek ba�
 **IF** Kendi canın düştüğünde iyileştirme bekliyorsun ama hiçbir şey olmuyor
 **MEANING** Skye'ın can yenilemesi sadece takım arkadaşlarını iyileştirir, seni değil — kendini sayıyorsun
 **COUNTER** Can yenilemeyi takım arkadaşların için sakla, kendi canına güvenme. Sen yaralanmışsan duruşunu değiştir, kapağa çekil, dövüşü trade'e bırak. İyileştirmeyi takım arkadaşına ver, kendi HP'ni nişanla ve pozisyonla koru.
-**WHY** Skye'ın havuzu takım canıdır, senin değil. Kendini iyileştireceğini sanıp öne çıkarsan, geri dönüşü olmayan canla dövüşe girersin. Sen ön plandaki giriş ajanısın ama sıfır self-heal'in var — bunu pozisyonla telafi et.
+**WHY** Skye'ın havuzu takım canıdır, senin değil. Kendini iyileştireceğini sanıp öne çıkarsan, geri dönüşü olmayan canla dövüşe girersin. Sen ön plandaki giriş ajanısın ama sıfır kendini iyileştirme'in var — bunu pozisyonla telafi et.
 
 **IF** Köpeği gönderiyorsun ama düşman pozisyonu hakkında hiçbir şey öğrenemiyorsun
 **MEANING** Köpeği körlemesine ileri sürüyorsun, sersem bırakmaya odaklanıp kontrol etmeyi bırakıyorsun

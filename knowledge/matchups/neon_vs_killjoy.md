@@ -74,7 +74,7 @@ Neon sprint ve slide ile Killjoy'un kurduğu tuzak hattını kırmaya gelir. Kil
 ---
 
 **IF** Killjoy tareti + botu Neon'un giriş hattında birlikte kurulu
-**MEANING** Taret canını keser, bot debuff verir — ikinci açıda Killjoy rifle ile bitirir.
+**MEANING** Taret canını keser, bot zayıflatma verir — ikinci açıda Killjoy rifle ile bitirir.
 **COUNTER** Önce tareti rifle ile sessizce sustur, sonra botu molly ile patlat. Zincir kırılınca Neon'un hızı Killjoy'u yakalar.
 **WHY** Killjoy'un gücü zincirde, tek ekipmanda değil. İlk halka kırılınca gerisi dağılır.
 

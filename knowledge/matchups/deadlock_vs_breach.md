@@ -97,7 +97,7 @@ Deadlock engeller ve yakalar, Breach duvardan geçer ve bozar. Breach'in util'i 
 
 **Haven (Dengeli):** Deadlock B anchor tutar, Breach B Main'den stun atar.
 
-**Icebox (Deadlock avantajlı):** Uzun sightline'lar Breach'in stun erişimini zorlar.
+**Icebox (Deadlock avantajlı):** Uzun görüş hattı'lar Breach'in stun erişimini zorlar.
 
 **Lotus (Dengeli):** 3 site, iki ajan da nötr.
 

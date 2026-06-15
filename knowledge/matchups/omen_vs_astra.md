@@ -20,7 +20,7 @@ Omen hata affeder. Smoke yanlış yere gittiyse bir sonraki smoke onu düzeltir.
 Haritaya göre şöyle oku:
 - **Haven, Lotus, Fracture** → Astra. Üç site var, Omen'ın smoke sayısı yetmez.
 - **Ascent, Split, Sunset, Bind** → Omen. İki dar site, iki smoke yeter.
-- **Breeze, Icebox** → Astra hafif öne çıkar. Uzun sightline ve geniş alan star'ın değerini artırır.
+- **Breeze, Icebox** → Astra hafif öne çıkar. Uzun görüş hattı ve geniş alan star'ın değerini artırır.
 - **Pearl** → Omen'a yatkın. Orta kontrolü smoke ile tutarsın.
 
 Genel kural: aynı seviyede Omen öne çıkar. Ama Astra'yı gerçekten bilen biri seni haritanın her köşesinden kontrol eder; Omen ise bölgesel kalır.
@@ -43,7 +43,7 @@ Genel kural: aynı seviyede Omen öne çıkar. Ama Astra'yı gerçekten bilen bi
 
 **IF** Astra ult'unu açtı, harita ikiye bölündü
 
-**MEANING** Duvarın arkası sana kapalı — ses de geçmez, sightline da yok.
+**MEANING** Duvarın arkası sana kapalı — ses de geçmez, görüş hattı da yok.
 **COUNTER** Omen'ın teleportuyla duvarın arkasına geç, bak, geri çık. Flash duvardan geçmez, boşa atma.
 **WHY** Astra'nın ult duvarı bilgiyi keser, smoke'u kesmez. Kör smoke atarsan değer üretmez — önce bilgi al.
 
@@ -99,7 +99,7 @@ Fark şu: hata yaparsan Omen bir tur öder, Astra birkaç tur öder. Astra'yı f
 
 **Bind:** Omen. Teleporter + iki site, rotate smoke'u çalışır.
 
-**Breeze:** Astra hafif. Uzun sightline, star esnekliği değer kazanır.
+**Breeze:** Astra hafif. Uzun görüş hattı, star esnekliği değer kazanır.
 
 **Fracture:** Astra. İki taraflı saldırı haritası, star havuzu ödüllenir.
 

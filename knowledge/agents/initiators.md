@@ -162,7 +162,7 @@ Initiator bilgi toplar ve düşmanları yerinden oynatıp site girişini açar. 
 ### Yetenek Analizi
 - **flash (Q)** - 250 kredi, 2 şarj. Mouse hareketiyle bükülen, kontrol edilebilir şahin flash. Tekrar bastığında ya da menzilin sonunda patlar. Şahin birini kör ederse Skye "Blinded!" sesi duyar — bu ses doğrulaması başlı başına bilgi.
 - **recon (C)** - 250 kredi. Keşif yapan ve dar alanda düşmanı sersemletebilen pilotlu Tazmanya kaplanı. 100 HP. Tek yetenekte hem keşif hem sersemletme.
-- **heal (E)** - Bedava, görüş hattındaki tüm takım arkadaşlarını iyileştirmek için kanalize edilir. Skye kendini iyileştiremez. Toplam 100 HP'lik iyileştirme havuzu. Kanal kesilip tekrar başlatılabilir. Sage ult'u dışında oyundaki tek AoE heal.
+- **heal (E)** - Bedava, görüş hattındaki tüm takım arkadaşlarını iyileştirmek için kanalize edilir. Skye kendini iyileştiremez. Toplam 100 HP'lik iyileştirme havuzu. Kanal kesilip tekrar başlatılabilir. Sage ult'u dışında oyundaki tek alan hasarı heal.
 - **ult (X)** - 7 ult puanı. En yakın 3 düşmanı takip eden 3 takipçi yollar. Takipçi hedefine ulaşınca düşmanı yarı-kör yapar (görüşünü yakına daraltır, uzağı göremez). Her takipçi 150 HP, vurulur. Post-plant bilgisi, retake bilgisi ya da execute keşfi için kullan.
 
 ### Bilgi Toplama
@@ -222,7 +222,7 @@ Initiator bilgi toplar ve düşmanları yerinden oynatıp site girişini açar. 
    **WHY** Eco'da ult 7 puan israf. Silah round'unda ult round kazandırır
 
 6. **IF** Kendini iyileştirmeye çalışıyorsan
-   **MEANING** Heal Skye'ı iyileştirmez; self-heal beklentisiyle kanal süresi harcama
+   **MEANING** Heal Skye'ı iyileştirmez; kendini iyileştirme beklentisiyle kanal süresi harcama
    **COUNTER** Heal sadece takım arkadaşlarını iyileştirir — bunu kabul et
    **WHY** Kendini iyileştirmeye çalışmak hem zaman kaybı hem yanlış beklenti
 
@@ -381,7 +381,7 @@ Initiator bilgi toplar ve düşmanları yerinden oynatıp site girişini açar. 
 - **Fade + Breach**: Fade recon ile ele verir, Breach ele verilen pozisyona molly atar. Kaçarlarsa recon yaratığı kovalar.
 
 ### Pro Oyuncu Stilleri
-- Fade, çoğu haritada Sova'ya rakip olarak VCT'de en çok seçilen initiator'lardan biri oldu. Bilgi + debuff util ikilisi, Sova'nın saf bilgi kitinden daha agresif değer verir.
+- Fade, çoğu haritada Sova'ya rakip olarak VCT'de en çok seçilen initiator'lardan biri oldu. Bilgi + zayıflatma util ikilisi, Sova'nın saf bilgi kitinden daha agresif değer verir.
 
 ---
 
@@ -394,7 +394,7 @@ Initiator bilgi toplar ve düşmanları yerinden oynatıp site girişini açar. 
 - **ult (X)** - 7 ult puanı, toplanabilir. Düşmana yönlendirilebilen pilotlu yaratık. Temas edince yarıçaptaki herkesi durdurur (hareket ve ateş edemezler). Her kullanımdan sonra toplanabilir.
 
 ### Bilgi Toplama
-- **Tarayıcı olarak flash yaratığı (E)**: Yaratık ileri uçup tarar. Görüş hattında düşman varsa hem kör olurlar HEM yerlerini öğrenirsin. Skye'ın şahini gibi ama farklı debuff'la.
+- **Tarayıcı olarak flash yaratığı (E)**: Yaratık ileri uçup tarar. Görüş hattında düşman varsa hem kör olurlar HEM yerlerini öğrenirsin. Skye'ın şahini gibi ama farklı zayıflatma'la.
 - **Flash yaratığı (Q) keşfi**: Yaratığı bir alana gönder. Flash atıyorsa düşman var. Atmıyorsa alan büyük ihtimalle boş.
 - **Ult keşfi**: Ult'u pilotlarken onun gözünden görürsün. Durdurmaya bağlanmadan önce keşif için kullan.
 
@@ -461,12 +461,12 @@ Initiator bilgi toplar ve düşmanları yerinden oynatıp site girişini açar. 
 
 ### Ne Zaman Seçilir
 - Alan inkarı araçlarının en geniş kapsamayı verdiği kapalı haritalar.
-- Düşman, AoE ele verme ile bozulabilecek sıkı stack'ler oynuyor.
+- Düşman, alan hasarı ele verme ile bozulabilecek sıkı stack'ler oynuyor.
 - Takımın hasarı bilgiyle birleştiren bir initiator'a ihtiyacı var.
 
 ### Harita Güçleri
 - Belirgin boğaz noktaları ve kapalı site alanı olan haritalarda güçlü.
-- Dar alanların AoE'sini güçlendirdiği Bind, Split ve Sunset'te verimli.
+- Dar alanların alan hasarı'sini güçlendirdiği Bind, Split ve Sunset'te verimli.
 
 ### Sık Yapılan Hatalar (IF/MEANING/COUNTER/WHY)
 

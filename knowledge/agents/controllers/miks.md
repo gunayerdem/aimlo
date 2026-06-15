@@ -11,10 +11,10 @@ Ama bu çift rol ancak controller temellerini bildiğinde işe yarar: duman zama
 ## 2. Yetenek Seti
 
 ### E — Smoke (signature)
-Senin ana görüş kapatma aracın. Harita üzerinde hedefleyici açılıp birden çok nokta işaretliyorsun, smoke o noktalara anında düşüyor — gecikme yok. Her turun başında bir bedava şarjın var. Asıl işin bu: doğru sightline'ı doğru zamanda kapat. Retake için en az bir smoke sakla.
+Senin ana görüş kapatma aracın. Harita üzerinde hedefleyici açılıp birden çok nokta işaretliyorsun, smoke o noktalara anında düşüyor — gecikme yok. Her turun başında bir bedava şarjın var. Asıl işin bu: doğru görüş hattı'ı doğru zamanda kapat. Retake için en az bir smoke sakla.
 
 ### C — Heal / Sersemletme
-İki modlu bir cihaz atıyorsun. Bir modu düştüğü yerdeki takım arkadaşını iyileştirir — Miks, Sage ve Skye'dan sonra iyileştirebilen üçüncü ajan. Diğer modu düşmanı sersemletir: nişanı titretir, hareketini bozar. Heal modunu hasarlı takım arkadaşına, sersemletme modunu sıkışmış düşman açısına at. 2 şarjın var — birini destek, birini düşman bozmak için ayır.
+İki modlu bir cihaz atıyorsun. Bir modu düştüğü yerdeki takım arkadaşını iyileştirir — takım arkadaşını iyileştirebilen birkaç ajandan birisin (Sage ve Skye'ın yaptığı gibi). Diğer modu düşmanı sersemletir: nişanı titretir, hareketini bozar. Heal modunu hasarlı takım arkadaşına, sersemletme modunu sıkışmış düşman açısına at. 2 şarjın var — birini destek, birini düşman bozmak için ayır.
 
 ### Q — Stim
 Bir takım arkadaşını hedefleyip ateşliyorsun; hem sana hem ona stim/hız veriyor — daha hızlı koşma, daha hızlı nişan/ateş. Her kill'de yenileniyor, yani savaş kazandıkça devam eder. Entry'den hemen önce, sen ve giriş yapan takım arkadaşın aynı anda hız kazanacak şekilde bas.
@@ -26,7 +26,7 @@ Bir takım arkadaşını hedefleyip ateşliyorsun; hem sana hem ona stim/hız ve
 
 - **Execute desteği:** Takım girmeden hemen önce smoke'u koy. Çok erken koyarsan duman biter, giriş olmaz. Çok geç koyarsan takım açıkta kalır. Girişten hemen önce entry yapan arkadaşına stim de bas — siz ikiniz aynı anda hız kazanın.
 - **Choke kapatma:** Defansta dar geçişleri smoke ile kapat. Düşmanın push zamanlamasını boz, rotasyon için süre kazan. Düşman sıkışınca sersemletme at — nişanı titrer, takımın bedavaya açı açar.
-- **Takımı ayakta tut:** Hasarlı takım arkadaşına heal at — savaş arası onu tam cana getir. Sen iyileştirebilen üç ajandan birisin; o arkadaşı cana çevirip bir sonraki düelloyu eşit girdirmek senin işin. Ama heal'i kovalamak için açığa çıkma.
+- **Takımı ayakta tut:** Hasarlı takım arkadaşına heal at — savaş arası onu tam cana getir. Sen takım arkadaşını iyileştirebilen birkaç ajandan birisin; o arkadaşı cana çevirip bir sonraki düelloyu eşit girdirmek senin işin. Ama heal'i kovalamak için açığa çıkma.
 - **Yetenek saklama:** Her yeteneği bilinçli harca. Retake için elinde en az bir smoke kalsın; mümkünse bir heal/sersemletme de sakla.
 - **Çağrı yap:** Miks yeni bir ajan — takım arkadaşın yetenek görselini tanımıyor olabilir. Her kullanımdan önce söyle: "Smoke A short'a düşüyor", "Sana heal atıyorum", "Stim açtım, gir". Çağrısız atılan yetenek takım arkadaşını yanlış yerde yakalar.
 - **Tur planı:** A atak, B atak, defans ve retake için hangi yeteneği nereye koyacağını önceden düşün. Plansız oynarsan yeteneği rastgele harcarsın.
@@ -80,7 +80,7 @@ Bir takım arkadaşını hedefleyip ateşliyorsun; hem sana hem ona stim/hız ve
 **IF** Heal'i sadece tur sonunda ya da rastgele atıyorsun
 **MEANING** İyileştirmenin asıl değerini — savaş arası tam cana çevirmeyi — kaçırıyorsun
 **COUNTER** İlk düello biter bitmez hasarlı kalan takım arkadaşına heal at. Site alındıktan sonra postplant'e geçmeden hasarlıyı tam cana getir. Heal'i kovalamak için açığa çıkma; güvenli mesafeden at.
-**WHY** Hasarlı bir oyuncu retake'te ya da postplant'te bir kurşunla düşer. Savaş arası tam cana çevrilen arkadaş bir sonraki düelloyu eşit girer — Sage ve Skye dışında bunu sadece sen yapabilirsin.
+**WHY** Hasarlı bir oyuncu retake'te ya da postplant'te bir kurşunla düşer. Savaş arası tam cana çevrilen arkadaş bir sonraki düelloyu eşit girer — takım arkadaşını ayağa kaldırabilen birkaç ajandan birisin (Sage ve Skye gibi).
 
 **IF** Her tur aynı smoke sırasını kullanıyorsun
 **MEANING** Öngörülebilir oldun, rakipler yetenek zamanlamanı ve pozisyonunu biliyor
@@ -138,7 +138,7 @@ A site'ın çok katlı yapısı smoke yerleştirmeni zorlar — yükseklik fark�
 Omen oyuncuları kitlerini yıllardır biliyor. Sadece smoke yarışına girersen deneyim farkı rakibin lehine. Aynı yarışa girme — Miks'in farkı destek: takımını iyileştir, entry'ye stim ver, Omen'in tek başına yapamadığını yap. Omen'in flash'inden sonra peek edecek düşmanı sersemletme ile boz.
 
 ### Viper ile — Tamamlayıcı güç
-Viper duvarı uzun sightline'ları keserken sen smoke ile kısa açıları kapatırsın — çift katmanlı görüş kontrolü olur. Viper hasar verirken sen takımı heal ile ayakta tutarsın; ikiniz tam bir kontrol-destek ikilisisiniz. Yetenek zamanlamanı Viper oyuncusuyla koordine et — üst üste smoke israftır.
+Viper duvarı uzun görüş hattı'ları keserken sen smoke ile kısa açıları kapatırsın — çift katmanlı görüş kontrolü olur. Viper hasar verirken sen takımı heal ile ayakta tutarsın; ikiniz tam bir kontrol-destek ikilisisiniz. Yetenek zamanlamanı Viper oyuncusuyla koordine et — üst üste smoke israftır.
 
 ### Sova/Fade'e karşı — Bilgi savaşı
 Düşman recon aracını attığı anda oraya smoke koy — recon'u boşa çıkarırsın. Recon sonrası peek atacak düşmana sersemletme at, nişanını boz. Recon hasarı yediğin turlarda kendini ve arkadaşını heal ile toparla — bilgi savaşında ayakta kalan takım kazanır.

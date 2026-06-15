@@ -7,7 +7,7 @@ OP 4700 kredi — her mesafede tek vuruş öldürür ama yakın açıda çaresiz
 
 **IF**: OP'çi uzun açıyı tutuyor, her kill'den sonra teleport ya da dash ile yer değiştiriyor
 **MEANING**: Düşman, takım arkadaşının util'iyle oynuyor. Bir dövüşe 2-3 yetenek harcatıyor sana. Savunmada OP tek başına koridoru kilitliyor, geri kalan oyuncular serbest kalıyor.
-**COUNTER**: İki kişi aynı anda açıdan peek at — OP birini seçer, diğeri trade eder. Smoke'u sightline'a bas, farklı açıdan gir. Flash'la bakışını kopar, bir adım attır. Yerinden eden bir yetenek (stun ya da knockback) kullan — OP hareketsiz dururken iş yapar, hareket ettiği an yapamaz.
+**COUNTER**: İki kişi aynı anda açıdan peek at — OP birini seçer, diğeri trade eder. Smoke'u görüş hattı'a bas, farklı açıdan gir. Flash'la bakışını kopar, bir adım attır. Yerinden eden bir yetenek (stun ya da knockback) kullan — OP hareketsiz dururken iş yapar, hareket ettiği an yapamaz.
 **WHY**: OP izole duel'de baskındır — iki kişiyle aynı anda zorlarsan birini seçmek zorunda kalır, trade'den kaçamaz.
 
 **IF**: OP'çi iyi pozisyona rağmen sürekli ölüyor
@@ -18,7 +18,7 @@ OP 4700 kredi — her mesafede tek vuruş öldürür ama yakın açıda çaresiz
 **IF**: OP'çi smoke altında ya da flash sonrası yakın mesafede köşeye sıkışıyor
 **MEANING**: Düşman, OP'nin en kötü olduğu durumu yaratıyor — yakın açı, görüş kaybı, hareketsiz pozisyon. OP bu koşullarda Vandal veya Phantom karşısında ciddi dezavantajda; scope gecikmesi ve yavaş ADS hızı yüzünden.
 **COUNTER**: Yakın tehdit hissedince rifle'a geç ya da hemen yer değiştir. İki yönden aynı anda bas — OP birini seçmek zorunda kalır, diğeri girince iş biter. Molly ya da knockback pozisyondan söker, smoke açıyı kapatıp onu yakın çatışmaya iter.
-**WHY**: OP sadece uzun açıda ve temiz sightline'da güçlüdür — bu ikisini elinden al, silah etkisizleşir.
+**WHY**: OP sadece uzun açıda ve temiz görüş hattı'da güçlüdür — bu ikisini elinden al, silah etkisizleşir.
 
 ## Tekrarlayan Başarısızlık Ne Anlama Gelir
 Takım sürekli aynı OP'ye ölüyorsa mesele aim değil. Uzun açıyı tek başına peek atıyorlar, smoke basmıyorlar, trade'i koordine etmiyorlar. Bunları düzelt, OP'nin etkisi düşer.

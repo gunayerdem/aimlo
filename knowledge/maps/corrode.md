@@ -24,7 +24,7 @@ B Tunnel ile site connector'unun kesiştiği nokta bir crossfire tuzağı. Off-a
 
 ### Mid Pipes
 
-Endüstriyel borular bilinen bir op açısı. O sightline'a düz peek atarsan vurulursun. Op sesini duyduysan ya smoke at, ya flash koy, ya da başka rotadan git.
+Endüstriyel borular bilinen bir op açısı. O görüş hattı'a düz peek atarsan vurulursun. Op sesini duyduysan ya smoke at, ya flash koy, ya da başka rotadan git.
 
 ### A Site Catwalk
 
@@ -86,13 +86,13 @@ Back Alley bir retake ölüm bölgesi. Rotate yaparken dar koridoru util'siz ge�
 
 ### Pattern 5: B Tunnel Junction Yığılması
 
-**IF:** B Tunnel Junction'da aynı round içinde birden fazla oyuncu ölüyor — choke point'e birlikte doluyorsunuz.
+**IF:** B Tunnel Junction'da aynı round içinde birden fazla oyuncu ölüyor — boğaz'e birlikte doluyorsunuz.
 
 **MEANING:** Savunucu tek açıyla sizi teker teker düşürüyor. Junction'a yığılmak ona çoklu öldürme servisi yapmak demek.
 
 **COUNTER:** Girişi kademele — ilk oyuncu flash'la girer, ikinci oyuncu önündeki duel bitmeden içeri girmez. Ya da yaklaşımı böl: bir grup B Tunnel'dan, diğer grup connector'dan gelsin. Savunucuya crossfire kur, onun crossfire'ına yürüme.
 
-**WHY:** Choke point'e sırayla girerseniz hepiniz aynı sightline'a tek tek çıkarsınız. Yaklaşımı bölünce savunucu hangi açıyı tutacağına karar vermek zorunda kalır — ikisini birden tutamaz.
+**WHY:** boğaz'e sırayla girerseniz hepiniz aynı görüş hattı'a tek tek çıkarsınız. Yaklaşımı bölünce savunucu hangi açıyı tutacağına karar vermek zorunda kalır — ikisini birden tutamaz.
 
 ## 4. Savunma Stratejileri
 
@@ -135,7 +135,7 @@ Catwalk'taki adam ilk kontağı alıyor, saldırganın gözü yukarı gidiyor. C
 
 - **Smoke:** A Main koridorunun ortasına at. Saldırgan smoke'un içinden çıkmak zorunda kalır, ilk ateşi sen alırsın.
 - **Tel:** A Main girişine tel veya bot koy. Tetiklenirse bile bilgi verdi — saldırgan o koridora girmeye karar verdi demektir.
-- **Molly:** A Main choke point'ine molly at. Dar koridorda molly'den yana kaçacak yer yok — push yavaşlar.
+- **Molly:** A Main boğaz'ine molly at. Dar koridorda molly'den yana kaçacak yer yok — push yavaşlar.
 
 #### Anchor vs Rotate Rolleri
 
@@ -203,11 +203,11 @@ B anchor B Cubby'de veya site içinde durur. B'nin darlığı sayesinde tek anch
 
 **IF:** B Tunnel Junction'da molly veya slow atmadan push'u kuru ateşle karşılamaya çalışıyorsun.
 
-**MEANING:** Util kullanmıyorsun. Saldırganlar dar choke point'ten sayı avantajıyla akıyor ve savunucuyu eziyor.
+**MEANING:** Util kullanmıyorsun. Saldırganlar dar boğaz'ten sayı avantajıyla akıyor ve savunucuyu eziyor.
 
 **COUNTER:** Push sesi gelince önce molly veya slow at, sonra pozisyon al. Util push'u geciktirir — bu sürede rotate gelebilir. Kuru ateş son çare, ilk çare util.
 
-**WHY:** Dar choke point'te util senin en büyük silahın. Molly atmadan push karşılamak, saldırganın sayı avantajını doğrudan kabul etmek demek. Util zaman kazandırır, zaman ise rotate demektir.
+**WHY:** Dar boğaz'te util senin en büyük silahın. Molly atmadan push karşılamak, saldırganın sayı avantajını doğrudan kabul etmek demek. Util zaman kazandırır, zaman ise rotate demektir.
 
 ---
 
@@ -301,7 +301,7 @@ Mid almak istiyorsan en az iki oyuncu commit et: biri Mid Entrance'tan girer, di
 
 ### Savunma Tarafında Mid
 
-Mid'i savunmak agresif peek demek değil. Smoke ile Mid Pipes sightline'ını kapat, tel veya tuzak ile bilgi al. Mid'deki oyuncu ölürse her iki site'ın flank güvenliği biter.
+Mid'i savunmak agresif peek demek değil. Smoke ile Mid Pipes görüş hattı'ını kapat, tel veya tuzak ile bilgi al. Mid'deki oyuncu ölürse her iki site'ın flank güvenliği biter.
 
 ### Mid Kontrol Durumları
 
@@ -314,7 +314,7 @@ Mid'i savunmak agresif peek demek değil. Smoke ile Mid Pipes sightline'ını ka
 - Alternatif: mid'i smoke'la, contest etme — smoke arkasından Connector'a geç.
 - Tek oyuncuyu mid'e kurban verme.
 
-**WHY:** Mid Pipes dar sightline, bilinen açı, hazırlanmış pozisyon — savunucunun evi. Bunu kırmak için sayı ya da util üstünlüğü lazım. Tek kişiyle girersen bedava kill verirsin.
+**WHY:** Mid Pipes dar görüş hattı, bilinen açı, hazırlanmış pozisyon — savunucunun evi. Bunu kırmak için sayı ya da util üstünlüğü lazım. Tek kişiyle girersen bedava kill verirsin.
 
 ---
 
@@ -427,11 +427,11 @@ Viper burada güçlü çünkü duvarı tek seferde iki koridoru keser.
 
 ## 10. Comp / Harita Etkileşim Notları
 
-- Corrode'da controller almak zorundasın — dar koridorlarda smoke olmadan açı kapatamazsın. Viper ve Omen uzun sightline'ları tek başına kapatır, başkası kapatamaz.
+- Corrode'da controller almak zorundasın — dar koridorlarda smoke olmadan açı kapatamazsın. Viper ve Omen uzun görüş hattı'ları tek başına kapatır, başkası kapatamaz.
 - Killjoy veya Cypher al. Tel ve tuzak, sınırlı giriş noktalarını sana bedavaya kapatır — başka haritada bu kadar verimli çalışmaz.
 - Flash'lı duelist seç: Phoenix, Yoru. Dash-tabanlı duelist alırsan dar alan onun hareket becerisini sıfırlar — o yüzden Jett veya Neon burada zayıf kalır.
 - Breach veya Fade al. Stun ve flash duvarların arasından geçer, rakip stack'ini dağıtır. Geniş alan initiator'ı alırsan util'i boşa gider.
-- İki controller koy. Corrode'da aynı anda smoke gereken choke point çok — tek controller yetmez, açıkta kalırsın.
+- İki controller koy. Corrode'da aynı anda smoke gereken boğaz çok — tek controller yetmez, açıkta kalırsın.
 
 ## 11. Koçluk Satırları
 
@@ -477,11 +477,11 @@ Senin işin şu: düşmanın koridor alışkanlıklarını oku ve bir önceki ro
 
 ### S-Tier
 
-**Viper:** Duvarı A Main ile mid geçişini aynı anda kapatacak şekilde çek — tek duvar iki koridoru keser. Molly'yi dar choke point'lere at, kaçacak yer yok. Ult'unu dar site'ta kur, içine giremezler.
+**Viper:** Duvarı A Main ile mid geçişini aynı anda kapatacak şekilde çek — tek duvar iki koridoru keser. Molly'yi dar boğaz'lere at, kaçacak yer yok. Ult'unu dar site'ta kur, içine giremezler.
 
 **Omen:** İki smoke execute ve savunma için yeterli. Flash'ı koridorun içine at, tüm koridoru köreltir. Kaçışıyla flank pozisyonu al, dar haritada kimse nerede çıkacağını bilemez.
 
-**Killjoy:** Tuzak + bot ikilisini dar girişe koy, giriş noktası kapanır. Molly'yi choke point'e göm, kaçacak yer yok. Ult'unu site'ta patlat, kompakt alan olduğu için neredeyse tamamını kaplar.
+**Killjoy:** Tuzak + bot ikilisini dar girişe koy, giriş noktası kapanır. Molly'yi boğaz'e göm, kaçacak yer yok. Ult'unu site'ta patlat, kompakt alan olduğu için neredeyse tamamını kaplar.
 
 **Cypher:** Her koridoru tek tel ile kapat, genişlik tam o kadar. Kamerayı mid'e veya koridor köşesine çak, sürekli bilgi akar. Ult'uyla retake öncesi düşman yerini öğren — dar haritada bu bilgi maçı bitirir.
 
@@ -491,7 +491,7 @@ Senin işin şu: düşmanın koridor alışkanlıklarını oku ve bir önceki ro
 
 **Fade:** Bot'unu koridora sal, kaçış yolu yok, bilgi garantili gelir. Recon ile site kontrolünü al. Ult'unu dar alanda patlat, takımı toplu yakalar.
 
-**Phoenix:** Flash'ını koridorun köşesine at, dar alanda dodge edemezler. Molly'sini choke point'e koy, alan kontrolü sağlar. Ult'u açıkken koridora agresif gir, ölürsen dönersin.
+**Phoenix:** Flash'ını koridorun köşesine at, dar alanda dodge edemezler. Molly'sini boğaz'e koy, alan kontrolü sağlar. Ult'u açıkken koridora agresif gir, ölürsen dönersin.
 
 **Yoru:** Ult'uyla dar koridoru pas geç, pozisyon değiştir. Flash'ını koridora at, dodge edemezler. Ult'uyla bilgi topla — dash-tabanlı duelist'ler gibi hareket kısıtlaması yaşamazsın.
 
@@ -506,7 +506,7 @@ Senin işin şu: düşmanın koridor alışkanlıklarını oku ve bir önceki ro
 ## 14. Callout'lar & Pozisyon Rehberi
 
 ### A Site ve Çevresi
-- **A Main / A Lobby:** A site'e girişin ana koridoru. Sightline uzun — op ve crossfire seni vurur. Util atmadan girme.
+- **A Main / A Lobby:** A site'e girişin ana koridoru. görüş hattı uzun — op ve crossfire seni vurur. Util atmadan girme.
 - **A Catwalk:** Yüksek pozisyon, off-angle için güçlü. Ama sürekli duruyorsan düşman seni ezberler.
 - **A Site Default:** Standart plant noktası. Plant sonrası Catwalk ve Main'den izlenirsin — cover al.
 - **A Connector:** A site ile mid'i bağlar. Rotate ve split için kullan.
@@ -521,7 +521,7 @@ Senin işin şu: düşmanın koridor alışkanlıklarını oku ve bir önceki ro
 - **B CT:** Savunmanın B'ye geldiği yol.
 
 ### Mid
-- **Mid Pipes:** Boru bölgesi — op sightline'ı ve bilgi pozisyonu. Util atmadan geçme.
+- **Mid Pipes:** Boru bölgesi — op görüş hattı'ı ve bilgi pozisyonu. Util atmadan geçme.
 - **Mid Connector:** Her iki site'a bağlanır. Flank ve rotate yolu olarak kullan.
 - **Mid Entrance:** Saldırı tarafına yakın giriş. Erken kontrol için çekişilen alan — bırakırsan düşman mid'i bedava alır.
 
@@ -577,7 +577,7 @@ Full buy'da Op al diye bir kural yok Corrode'da. Dar koridorlar Op'un mesafe ava
 
 ### Bonus / Anti-Eco
 
-Anti-eco round'unu hafife alma. Corrode'un dar yapısı eco yapan takıma Classic sağ-tık ve Shorty ile sürpriz kill verir. Anti-eco'da dar koridora girme — düşmanı sana gelmeye zorla. A Main gibi uzun sightline'lardan oyna, B Tunnel gibi dar alanlarda eco takımına yakın mesafe dövüşü verme.
+Anti-eco round'unu hafife alma. Corrode'un dar yapısı eco yapan takıma Classic sağ-tık ve Shorty ile sürpriz kill verir. Anti-eco'da dar koridora girme — düşmanı sana gelmeye zorla. A Main gibi uzun görüş hattı'lardan oyna, B Tunnel gibi dar alanlarda eco takımına yakın mesafe dövüşü verme.
 
 ## 17. Anti-Strat
 
@@ -642,4 +642,4 @@ Anti-eco round'unu hafife alma. Corrode'un dar yapısı eco yapan takıma Classi
 
 Op'a kuru peek atma. Bu duel'i kaybedersin.
 
-**WHY:** Op görüş hattına bağımlı. Corrode'da tek smoke tüm sightline'ı keser — dar koridor bu işi kolaylaştırır. 4700 kredilik silahı duvara baktırmak bu kadar basit.
+**WHY:** Op görüş hattına bağımlı. Corrode'da tek smoke tüm görüş hattı'ı keser — dar koridor bu işi kolaylaştırır. 4700 kredilik silahı duvara baktırmak bu kadar basit.

@@ -6,7 +6,7 @@
 - Jett'in tek işi round'u açmak. Sen round kapatan duelist değilsin, round başlatan duelistsin.
 
 ## 2. Temel Sorumluluklar
-- **Atak:** İlk peek'i dash veya zıplamayla sen at. İlk düelloyu kazan. Takımın için tehlikeli sightline'ı smoke'la kapat. Tam alımda uzun açıyı Op'la tut.
+- **Atak:** İlk peek'i dash veya zıplamayla sen at. İlk düelloyu kazan. Takımın için tehlikeli görüş hattı'ı smoke'la kapat. Tam alımda uzun açıyı Op'la tut.
 - **Defans:** Op veya tüfekle off-angle tut, kill aldıysan dash'le çekil. Zıplamayla rakibin beklemediği yükseklikten gel. Erken bilgi al, sonra geri çekil.
 - **Takım senden ne bekliyor:** Atakta açılış kill'ini. Defansta agresif Op kill'ini. Lurk'ü değil, entry'yi.
 
@@ -52,7 +52,7 @@ MEANING: Dash'i bilgi aracı değil, kör dalış aracı gibi kullanıyorsun
 COUNTER: Önce ses ve util'le düşmanın nerede olduğunu anla, sonra dash'i o açıyı kapatmak için kullan. Dash'i körlemesine değil, hedefe at.
 WHY: Dash bittiği an birkaç saniye sersemsin ve yön değiştiremezsin — yanlış yöne dash attıysan açık hedefsin, geri dönemezsin.
 
-IF: Entry'de ilk öldüğünde takım de geriden trade alamıyor
+IF: Entry'de ilk öldüğünde takım da geriden trade alamıyor
 MEANING: Takımdan çok önde dash atıyorsun, arkanda kimse yok
 COUNTER: Dash'i takım arkadaşların seni trade'leyebilecek mesafedeyken at. Önce kendin değil, takımla birlikte gir.
 WHY: Entry'nin amacı sadece açmak değil, açılırken trade güvenliği bırakmak. Tek başına 10 metre önde ölürsen takım bilgi de alamaz, sayı da kaybeder.
@@ -71,7 +71,7 @@ WHY: Smoke'un kısa süreli; erken attıysan tam geçişte zaten dağılmış ol
 - **Güçlü haritalar:** Ascent (A Short dash, Mid Op), Breeze (uzun açı = Op-Jett), Haven (C Long, A Short), Lotus (A Main, C Main dash açıları).
 - **Zayıf haritalar:** Fracture (çok açı var, dash dağılıyor, yakın dövüş bol), Pearl (dar koridor, dikey alan yok).
 - **Spesifik:** Ascent A Short dash'ini iki round sonra okurlar — üçüncüde zıplayarak çık ya da bekle. Breeze'de A sütunundan Mid'i Op'la sen kapat.
-- **Açık, uzun hatlar Jett'in evi:** Breeze ve Icebox gibi geniş, uzun sightline'lı haritalarda Op-Jett en güçlü; dash'le açıyı kapatır, kaçarsan dash'le geri çekilirsin. Dar, çok köşeli haritalarda (Pearl, Fracture, Split) dash daha az iş görür çünkü her köşede yakın dövüş seni bekler — buralarda Op'tan çok tüfekle entry'ye yaslan.
+- **Açık, uzun hatlar Jett'in evi:** Breeze ve Icebox gibi geniş, uzun görüş hattı'lı haritalarda Op-Jett en güçlü; dash'le açıyı kapatır, kaçarsan dash'le geri çekilirsin. Dar, çok köşeli haritalarda (Pearl, Fracture, Split) dash daha az iş görür çünkü her köşede yakın dövüş seni bekler — buralarda Op'tan çok tüfekle entry'ye yaslan.
 - **Dikey alanı kullan:** Jett zıplamasıyla rakibin yere bakan crosshair'ini boşa düşürür. Yükseklik avantajı olan noktalarda (kutular, platformlar, üst geçişler) zıplama-entry'si en değerli; düşman seni göz hizasında beklerken sen üstten gelirsin.
 - **Smoke'unu giriş hattına göre planla:** Site execute'unda smoke'unu en tehlikeli tek açıyı (genelde uzun hat ya da arkadan bakan flank açısı) kapatmak için kullan, kendi geçişine değil. Kısa süreli olduğu için tam giriş saniyesine denk getir.
 

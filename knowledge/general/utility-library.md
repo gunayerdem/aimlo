@@ -66,7 +66,7 @@ Rakibin nerede olduğunu gösterir. Info olmadan savunma karar veremez, saldır�
 
 ---
 
-### 5. STUN / DEBUFF
+### 5. STUN / zayıflatma
 
 Rakibin hareketini veya aim'ini bozar. Flash yoksa alternatif entry aracı budur.
 
@@ -103,7 +103,7 @@ Kendi pozisyonunu değiştirir. Girmek veya kaçmak için kullanırsın.
 
 ---
 
-### 8. TELEPORT / REPOSITION
+### 8. TELEPORT / yer değiştirme
 
 Haritanın uzak noktasına ışınlanırsın. Flank ve sahte hareket için kullanırsın.
 
@@ -171,11 +171,11 @@ Takım arkadaşını iyileştirir veya ayağa kaldırır.
 
 ### BREEZE
 
-- **Viper — A Tunnel duvar + B Main duvar:** Uzun sightline'ları keser.
+- **Viper — A Tunnel duvar + B Main duvar:** Uzun görüş hattı'ları keser.
 - **Sova — Double recon mid:** Breeze info ağırlıklı, recon atışını çalış.
-- **Jett — Ass pozisyonunda Op:** Breeze'in uzun sightline'ları Op'a göre, Jett burada serbest.
+- **Jett — Ass pozisyonunda Op:** Breeze'in uzun görüş hattı'ları Op'a göre, Jett burada serbest.
 - **Harbor — Mid duvar + B duvar:** Double controller için ideal harita.
-- **Cypher — Long sightline tel:** A Cave veya B Pyramid flank'ini tut.
+- **Cypher — Long görüş hattı tel:** A Cave veya B Pyramid flank'ini tut.
 
 ### ICEBOX
 

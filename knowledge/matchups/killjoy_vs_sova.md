@@ -22,8 +22,8 @@ Sova seni round başında siler. Turret'ini, botunu, mollyni hasar oku patlatır
 - Sova aynı hattan recon atıyorsa — botunu o hattan çek, Sova boşa atsın.
 
 **Sova lehine durumlar:**
-- Uzun sightline'lı haritalarda (Breeze, Icebox) — recon her köşeyi tarar, saklanacak yer kalmaz.
-- hasar oku setupunu round başında vurursa — turret ve bot gider, Sova takımı boş siteye dalar.
+- Uzun görüş hattı'lı haritalarda (Breeze, Icebox) — recon her köşeyi tarar, saklanacak yer kalmaz.
+- Hasar oku setupunu round başında vurursa — turret ve bot gider, Sova takımı boş siteye dalar.
 - Ulti pozisyonuna gelirse — duvar arkası korumaz, HP'n erir.
 - Botu siteye girerse — mollyn, botun, turret'in hepsi haritaya çıkar.
 

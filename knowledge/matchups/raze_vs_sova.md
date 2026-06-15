@@ -34,7 +34,7 @@ Raze oynuyorsan: close range'de Sova'nın util'i seni durduramaz, üstüne git. 
 
 **IF** Sova recon Raze'in giriş hattını işaretledi
 **MEANING** Pozisyonun takıma gitti. Trade partner hazır, sen girince ölürsün.
-**COUNTER** Recon sesini duyduğun an sıçrama ile dikey reposition al. Yukarı çık — recon ground tarar, yukarıyı okumaz. O recon'u round 1'de öğren, round 2'de aynı hattan girme.
+**COUNTER** Recon sesini duyduğun an sıçrama ile dikey yer değiştirme al. Yukarı çık — recon ground tarar, yukarıyı okumaz. O recon'u round 1'de öğren, round 2'de aynı hattan girme.
 **WHY** Recon sabit süre tarar. O süre içinde hattan çıkarsan info eskir, trade gelmez.
 
 ---
@@ -101,7 +101,7 @@ Asıl fark şu: Sova util'i round başında çıkar ve biter. Raze util'i esnek,
 
 **Bind (Raze avantajlı):** Close range Raze'in oyunu. Sova Bind'da Raze'i durduracak uzun hat bulamaz.
 
-**Split (Raze avantajlı):** Dar koridorlar Raze molly için biçilmiş kaftan. Sova recon dar hatlarda reposition almana izin vermez — sıçrama ile yukarı çık, recon ground seviyesini tarar.
+**Split (Raze avantajlı):** Dar koridorlar Raze molly için biçilmiş kaftan. Sova recon dar hatlarda yer değiştirme almana izin vermez — sıçrama ile yukarı çık, recon ground seviyesini tarar.
 
 **Sunset (Raze avantajlı):** Dar choke ve close range Raze meta. Sova Sunset'te zayıf pick.
 
@@ -113,7 +113,7 @@ Asıl fark şu: Sova util'i round başında çıkar ve biter. Raze util'i esnek,
 
 **Flip 3 — Ult anchor'ı yakaladı:** Sova sabit durduysa Raze ult'u tek vurur, Sova'nın util döngüsü biter.
 
-**Flip 4 — Post-plant ult:** Raze'in post-plant pozisyonu Sova ult hattındaydı. sıçrama yoksa kaçış yok, HP gider.
+**Flip 4 — Post-plant ult:** Raze'in post-plant pozisyonu Sova ult hattındaydı. Sıçrama yoksa kaçış yok, HP gider.
 
 ## 7. Koç Notu
 

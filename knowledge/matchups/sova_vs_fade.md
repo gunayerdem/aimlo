@@ -79,7 +79,7 @@ Takımın retake oynuyorsa Sova al. Takımın site basıyorsa Fade al.
 **Sova araçları:**
 - recon — sabit konum bilgisi, görsel konum işareti
 - drone — uçan tarama, ses çıkarır
-- hasar oku — alan hasarı
+- Hasar oku — alan hasarı
 - ult — duvar delici 3 atış, bilgi + kill
 
 **Fade araçları:**

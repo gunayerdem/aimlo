@@ -44,7 +44,7 @@ Bu matchup bir bilgi savaşı. Sova'nın recon'u eski bilgi üretir — Jett yer
 
 **IF** hasar oku tam dash sonrası ineceğin noktaya atıldı
 **MEANING** Dash biter bitmez hasar yersin, HP düşer, dashsiz kalırsın
-**COUNTER** Her round farklı bir noktaya in. hasar oku sabit hedefleri vurur — hep aynı yere inersen ikinci round orada hazır bekler.
+**COUNTER** Her round farklı bir noktaya in. Hasar oku sabit hedefleri vurur — hep aynı yere inersen ikinci round orada hazır bekler.
 **WHY** hasar oku lineup'ları ezberlenmiş hatlara kurulur. İniş noktanı değiştirirsen lineup boşa gider.
 
 ---

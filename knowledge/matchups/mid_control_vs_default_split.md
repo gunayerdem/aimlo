@@ -29,7 +29,7 @@ Saldırı mid'i alır, iki site'a da rotate baskısı kurar. Savunma mid'i biler
 ## 3. Key Düellolar
 
 **IF** Saldırı round başı mid'e smoke + flash yatırdı
-**MEANING** Savunmanın mid oyuncusu kör ve sightline'sız — saldırı mid'e girer
+**MEANING** Savunmanın mid oyuncusu kör ve görüş hattı'sız — saldırı mid'e girer
 **COUNTER** Flash'ı yemeden back pozisyona çekil. Agresif hold yapma. Mid'i ver ama pozisyonunu değiştir — mid gider, sen rotate'ini zamanında yaparsın
 **WHY** Tek oyuncu 2-3 saldırgana karşı duramaz. Mid'i bedava vermekle bilgi alıp çekilmek farklı şeyler — ikincisinde rotate'ini daha erken başlatırsın
 
@@ -57,7 +57,7 @@ Saldırı mid'i alır, iki site'a da rotate baskısı kurar. Savunma mid'i biler
 ---
 
 **IF** Saldırı mid'e iki aşamada girdi — önce smoke, sonra entry
-**MEANING** Util sırası doğru; sightline kapandıktan sonra entry rahat gelir
+**MEANING** Util sırası doğru; görüş hattı kapandıktan sonra entry rahat gelir
 **COUNTER** Util sırasını boz: saldırı mid'e smoke attığı an mid'e molly yolla — saldırı smoke'un dışında kalmak zorunda kalır
 **WHY** Mid duellosu util sırası meselesi. Sırası doğru olan tarafa mid açılır
 

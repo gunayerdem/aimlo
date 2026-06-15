@@ -22,7 +22,7 @@
 IF: A Main'e flash ya da smoke olmadan giriyorsun — Tree ve Stairs açılarına yürüyerek dalıyorsun.
 MEANING: Tree'den ve Stairs'ten iki ayrı açı seni aynı anda görüyor. Defender açıyı tutarak bekliyor, sen yürüyerek giriyorsun — ilk atış zaten onun.
 COUNTER: Girmeden önce Tree'yi smoke'la. Stairs yönüne flash at. Flash patlar patlamaz swing at — arada boşluk bırakma. Girdikten sonra Root'u al, yoksa flank yersin.
-WHY: A Main dar, defender iki yükseklikten seni izliyor. Smoke sightline'ı keser. Flash defender'ı açıdan söker. Root'u kontrol etmeden yapılan her A execute flank riski taşır.
+WHY: A Main dar, defender iki yükseklikten seni izliyor. Smoke görüş hattı'ı keser. Flash defender'ı açıdan söker. Root'u kontrol etmeden yapılan her A execute flank riski taşır.
 
 **Pattern 2: B Duvar Timing Hataları**
 IF: Kırılabilir duvarı round başlar başlamaz kırıyorsun — her seferinde, hemen.
@@ -49,7 +49,7 @@ WHY: Silent Drop ses çıkarmadan site girişi sağlar. Diğer tüm girişlerde 
 
 **Pattern 5: C Mound Açıkta Kalma**
 IF: C Mound'da cover kullanmadan açıkta duruyorsun.
-MEANING: C Main'den uzun sightline var. Açıkta durursan Op ya da Vandal seni kolayca vurur. Mound'un gücü pozisyon almakta, açıkta durmakta değil.
+MEANING: C Main'den uzun görüş hattı var. Açıkta durursan Op ya da Vandal seni kolayca vurur. Mound'un gücü pozisyon almakta, açıkta durmakta değil.
 COUNTER: Cover arkasında oyna. Kısa peek at — bilgi al ya da kill al, hemen geri çekil. Mound kenarındaki kutu ve duvarları kullan. Attacker C Main'e smoke atarsa Mound'dan çekil, site içinden oyna.
 WHY: Yükseklik avantajı sadece cover ile çalışır. Açıkta duran yüksek pozisyon dezavantajdır — tüm vücut görünür, kaçış yolu sınırlı. Cover arkasından peek atarsan, sen onu görene kadar o seni göremez.
 
@@ -145,7 +145,7 @@ Her şeyi biliyorsun. Farkı yaratan şey round bazında okuma. Rakip hangi giri
 - **Omen**: Kaçışınla döner kapıyı ses çıkarmadan geç — defender kapı sesini beklerken sen çoktan karşı taraftasın. Smoke'unla 3 site arasına perde çek. Flash'ını A Main ve B Main gibi dar girişlerde kullan, tüm koridoru körleştirir. Ult'unla haritanın herhangi bir yerine TP at, defender'ın düzenini boz.
 - **Viper**: Duvarınla A-C arasını ya da B-Mid arasını böl — tek ability ile 2 site'ı etkilersin. Smoke'unla üçüncü site'ı kontrol al. Molly lineup'larını 3 site'ın hepsinde öğren, spike kurulduktan sonra defuse deny için şart. Ult'unu B site gibi kompakt alanlarda kullan, alanın tamamını kapatır.
 - **Skye**: Flash'ını kapı arkası için kullan — kapının diğer tarafına flash at, teammate geçsin. Bot'unu dar koridorlarda ve kapı geçişlerinde kullan; bot'la kapı arkasını, Silent Drop'u ve mid'i kontrol et. Ult'un 3 siteli haritada tüm düşman pozisyonlarını açığa çıkarır, boşa harcama.
-- **Harbor**: Lotus'ta en güçlü controller. Duvarınla A Main'den C Main'e kadar sightline kır — tek util ile 3 site arası geçişi smoke'larsın. Kalkan kubbeni spike'ın üstüne at, kubbe içinde defuse yapmak neredeyse imkânsız. Giriş smoke'unu A Main push'unda kullan. Ult'unu geniş site'larda birden fazla düşmanın üstüne bas.
+- **Harbor**: Lotus'ta en güçlü controller. Duvarınla A Main'den C Main'e kadar görüş hattı kır — tek util ile 3 site arası geçişi smoke'larsın. Kalkan kubbeni spike'ın üstüne at, kubbe içinde defuse yapmak neredeyse imkânsız. Giriş smoke'unu A Main push'unda kullan. Ult'unu geniş site'larda birden fazla düşmanın üstüne bas.
 
 ## 10. Post-Plant Stratejileri
 - **A Site Post-Plant**: Spike'ı A Default'a, kutuların arkasına dik. Sonra A Main ve A Root'ta crossfire kur — defender A Stairs ya da Tree'den gelecek, iki taraftan ateş altında kalacak. Tree'yi smoke'la, yoksa defender yüksekten seni görür. Silent Drop'u unutma — biri oradan düşüp spike'a ulaşabilir, birini oraya baktır.

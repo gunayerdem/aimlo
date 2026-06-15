@@ -203,7 +203,7 @@ WHY okuyamadıkları bir tempoyu önceden karşılamak için adam ya da util com
 
 IF spike kurulmuşsa ve savunucular retake'e geliyorsa
 MEANING artık baskı onların üzerinde — spike'a ulaşmaları, temizlemeleri ve defuse'u bitirmeleri lazım, hepsi üst üste
-COUNTER util at ve reposition yap — onların kaybettiği her saniye senin kazancın
+COUNTER util at ve yer değiştirme yap — onların kaybettiği her saniye senin kazancın
 WHY defuse sabit süreli bir animasyon; o pencereyi defuse süresinin altına çekersen round bitti
 
 ## Spawn Bazlı Okumalar

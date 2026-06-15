@@ -10,7 +10,7 @@
 - Savunmanın gücü bilgi akışında. Hangi sitenin baskı altında olduğunu erken anlayan takım rotate'i doğru yapar, oyunu kontrol eder.
 
 ## 2. Ölüm Bölgeleri
-- **A Long**: Haven'ın en uzun sightline'ı burası. Flash ya da smoke atmadan A Long'a giriyorsan Op seni bedavaya alır. Util atmadan bu koridora girme.
+- **A Long**: Haven'ın en uzun görüş hattı'ı burası. Flash ya da smoke atmadan A Long'a giriyorsan Op seni bedavaya alır. Util atmadan bu koridora girme.
 - **B Main Girişi**: B'ye tek sırada dalıyorsun, savunucu sizi teker teker biçiyor. B Main'e girerken giriş açısını util'le kır, sonra içeri gir.
 - **Garage/Mid Window**: Saldırıdaysan util'siz Garage'a girme — Window'dan direkt yersin. Savunmadaysan gereksiz peek atma — saldırgan seni kafadan vurur. Bu bölgede ölüyorsan bilgi almadan hareket ediyorsun.
 - **C Long Cross**: Plat'ı smoke'lamadan C site'a cross yapıyorsun, savunucu kafa atışını bedavaya alıyor. C Long'dan geçmeden önce Plat'ı kapat.
@@ -19,14 +19,14 @@
 ## 3. Pattern -> Meaning Eşleşmesi
 
 **Pattern 1: A Long Kuru Peek Ölümleri**
-IF: A Long'a smoke veya flash atmadan giriyorsun — util yok, düz sightline'a yürüyorsun.
-MEANING: Sightline disiplinin yok. A Long Haven'ın en uzun hatlarından biri. Savunucu orada seni bekliyor, açıyı tutuyor. Sen görünür olduğun anda o zaten tetiğe basmış oluyor.
-COUNTER: A Long'a girmeden önce sightline'ın ortasını smoke'la. Sonra flash at, flash patlarken swing at. Op tutan birine karşı Jett dash veya Neon dash kullan — sabit hedef olma.
+IF: A Long'a smoke veya flash atmadan giriyorsun — util yok, düz görüş hattı'a yürüyorsun.
+MEANING: görüş hattı disiplinin yok. A Long Haven'ın en uzun hatlarından biri. Savunucu orada seni bekliyor, açıyı tutuyor. Sen görünür olduğun anda o zaten tetiğe basmış oluyor.
+COUNTER: A Long'a girmeden önce görüş hattı'ın ortasını smoke'la. Sonra flash at, flash patlarken swing at. Op tutan birine karşı Jett dash veya Neon dash kullan — sabit hedef olma.
 WHY: Savunucu seni görür görmez ateş edebilir. Sen hâlâ pozisyon alırken o çoktan nişan almış oluyor. Smoke bu denklemi kırar — savunucu ya bekler ya smoke'a girer. Flash ise aim'ini bozar, sana swing için pencere açar.
 
 **Pattern 2: B Main Yığılma Ölümleri**
 IF: Takım B Main'den sırayla giriyor, 2-3 kişi arka arkaya aynı yerden vuruluyor.
-MEANING: Dar giriş disiplinin yok. B Main Haven'ın en dar boğaz noktası. Savunucu tek açıdan tüm girişi kontrol ediyor — her giren aynı sightline'a çıkıyor.
+MEANING: Dar giriş disiplinin yok. B Main Haven'ın en dar boğaz noktası. Savunucu tek açıdan tüm girişi kontrol ediyor — her giren aynı görüş hattı'a çıkıyor.
 COUNTER:
 - B Main'den 2 kişi util ile girerken Mid Window'dan 1-2 kişi baskı açsın.
 - Giriş öncesinde molly veya smoke ile savunucunun pozisyonunu kır.
@@ -106,7 +106,7 @@ WHY: Herkes farklı yerde farklı plan denerse rakip sizi birer birer yer. Koord
 - **Her round aynı siteye girmek** — Rakip seni okuyor ve o siteye yığılıyor. 3 site var, hepsini kullan. Çeşitlilik yoksa Haven'da saldırı tarafı tutmaz.
 - **B Main'e üst üste girmek** — Dar girişten 3-4 kişi aynı anda doluşma. Savunucu çoklu kill alır. B execute her zaman Window'dan split ile açılır.
 - **Fake yapmamak** — Haven fake için yapılmış bir harita. Bir siteye util at, ses çıkar, sonra başka siteye dön. Bunu yapmayan takım haritanın yapısal avantajını kullanmıyor demektir.
-- **A Long'a util olmadan peek atmak** — Uzun sightline'a kuru girme. Savunucuya bedava kill verirsin. Her A Long girişinde smoke + flash şart.
+- **A Long'a util olmadan peek atmak** — Uzun görüş hattı'a kuru girme. Savunucuya bedava kill verirsin. Her A Long girişinde smoke + flash şart.
 - **Bilgi topladıktan sonra commit'i geciktirmek** — Bilgiyi topladın, karar ver. Beklersen rakip yeniden diziliyor.
 
 ### Savunma
@@ -123,7 +123,7 @@ WHY: Herkes farklı yerde farklı plan denerse rakip sizi birer birer yer. Koord
 - **Breach**: B Main'den flash + molly at, B site'i aç. Dar koridorlarda Breach'in flash ve stun'larından kaçış yok. Stun'u duvar arkasına vurur, adam pozisyonunu bırakmak zorunda kalır.
 - **Jett**: C Long'da Op oyna, kill aldıktan sonra dash'le çekil. C Long'u tercih et — geri çekilme hattı daha kısa, daha güvenli. A Long'da da Op açarsın ama C pozisyonu daha az risk taşır.
 - **Cypher**: B'de Killjoy oynamak istemiyorsan Cypher al. Tel + kamera ile aynı anda B girişini ve Garage'ı izlersin. Killjoy geciktirme yapar, Cypher bilgi verir — flank izlemede Cypher üstündür. Haven'ın çok girişli yapısında bu fark önemli.
-- **Harbor**: C Long'dan A'ya su duvarı çek, birden fazla sightline'ı tek util'le kes. Su util'ini Garage push'unda kullan — dar koridorda su duvarından geçemezler. Spike dikme alanını su küresiyle kapat. Büyük açık alanlar Harbor'ın duvarlarını tam değerinde kullanmanı sağlar.
+- **Harbor**: C Long'dan A'ya su duvarı çek, birden fazla görüş hattı'ı tek util'le kes. Su util'ini Garage push'unda kullan — dar koridorda su duvarından geçemezler. Spike dikme alanını su küresiyle kapat. Büyük açık alanlar Harbor'ın duvarlarını tam değerinde kullanmanı sağlar.
 - **Astra**: Yıldızlarını Garage'a, A Long'a ve C Long'a koy — üç siteyi tek ajanla kontrol edersin. Macro oyunu seviyorsan Astra al. Ama tavan yüksek, taban da düşük: iyi oynayan Astra'nın karşısına geçilmez, kötü oynayan Astra takımı yük gibi taşır.
 
 ## 6. Koçluk Satırları
@@ -170,7 +170,7 @@ WHY: Herkes farklı yerde farklı plan denerse rakip sizi birer birer yer. Koord
 
 ## 11. Ajan Sinerjileri ve Takım Kompozisyonları
 - **Meta Comp (Omen + Killjoy + Sova + Breach + Jett)**: Haven'ın en dengeli komp'u. Omen smoke ile 3 siteyi kontrol edersin, Killjoy B'yi tutar, Sova bilgi toplar, Breach dar girişleri zorlar, Jett entry girer ve Op taşır. Her ajan Haven'ın yapısına birebir oturur.
-- **Double Controller (Omen + Harbor)**: Harbor'ın su duvarı + Omen smoke aynı anda birden fazla sightline'ı keser. C Long'dan A'ya Harbor duvarı çekip Garage'ı Omen smoke ile kapatırsan haritanın büyük bölümünü kontrol altına alırsın. Ama duelist yoksa entry tamamen bireysel performansa kalır — bunu göze al.
+- **Double Controller (Omen + Harbor)**: Harbor'ın su duvarı + Omen smoke aynı anda birden fazla görüş hattı'ı keser. C Long'dan A'ya Harbor duvarı çekip Garage'ı Omen smoke ile kapatırsan haritanın büyük bölümünü kontrol altına alırsın. Ama duelist yoksa entry tamamen bireysel performansa kalır — bunu göze al.
 - **Agresif Comp (Jett + Breach + Omen + Sova + Cypher)**: C Long'da Jett Op tutar, Breach flash ile A veya B'ye girersin, Cypher flank izler. Pick alamazsan bu kompla oyun açamazsın — o durumda siteye yürüme, geri çekil ve bilgi topla.
 - **Sentinel-Heavy (Killjoy + Cypher + Omen + Sova + Jett)**: Savunmada çok güçlü. Killjoy B'yi tutar, Cypher A veya C flank + Garage bilgisi verir. 3 siteyi sentinel util'iyle doldurursun. Ama saldırıda entry gücü zayıf — Jett bireysel iş yapmazsa tıkanırsın.
 - **Ajan Bazlı Sinerji Notları**:

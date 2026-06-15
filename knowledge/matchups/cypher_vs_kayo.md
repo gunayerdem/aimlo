@@ -109,7 +109,7 @@ Ult karşılaştırması: İkisi de 7 puan. Ama KAY/O ult'u Cypher'ın kimliğin
 
 **Sunset (Cypher hafif avantajlı):** A Main ve B Market dar boğaz, bıçak Market'e giremez — atış açısı yok. Mid Courtyard bıçak hattına açık, site anchor baskın.
 
-**Icebox (Cypher avantajlı):** Uzun sightline ve dikey katmanlar KAY/O'nun util menzilini zorlar. Mid Orange ve A Belt açı dışında, B Snowman ve Kitchen'daki dikey tel bıçak alanının üstünde durur.
+**Icebox (Cypher avantajlı):** Uzun görüş hattı ve dikey katmanlar KAY/O'nun util menzilini zorlar. Mid Orange ve A Belt açı dışında, B Snowman ve Kitchen'daki dikey tel bıçak alanının üstünde durur.
 
 ## 6. Dönüm Anları
 

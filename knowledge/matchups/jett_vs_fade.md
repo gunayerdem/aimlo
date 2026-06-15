@@ -16,7 +16,7 @@ Fade seni bulmaya çalışır, sen de bulunmamaya. Recon, bot ve stun zinciriyle
 ## 2. Kim Avantajlı?
 
 **Jett lehine:**
-- Uzun sightline'da (Breeze, Icebox) Fade botu yakın-orta mesafede kovalar; sen op'la önce bitirirsin.
+- Uzun görüş hattı'da (Breeze, Icebox) Fade botu yakın-orta mesafede kovalar; sen op'la önce bitirirsin.
 - Fade util'ini harcamışken — recon, stun ve bot yoksa o round'u aggressive bas, kazan.
 - Vertical çıkışın varsa (Split A Main, Icebox Rafters) yukarı zıplama yukarı çık, botun yer hattını atla.
 
@@ -59,7 +59,7 @@ Fade seni bulmaya çalışır, sen de bulunmamaya. Recon, bot ve stun zinciriyle
 
 **IF** Fade ult'unu post-plant pozisyonuna attı
 **MEANING** Alana korku, yarı-kör ve görüş bozulması yayar. Dashsiz kalırsan o alanın içinde savunmasızsın.
-**COUNTER** Ult'un sesini duyduğun an dash'le menzilin dışına çık. Ult hasar vermez, debuff verir — dışarı çıktığın an etkisi kesilir.
+**COUNTER** Ult'un sesini duyduğun an dash'le menzilin dışına çık. Ult hasar vermez, zayıflatma verir — dışarı çıktığın an etkisi kesilir.
 **WHY** Ult'un menzili sabit. Dash hazırsa çıkarsın; cooldown'daysan tuzaktasın — bunu önceden bilip pozisyonunu ona göre al.
 
 ---
@@ -93,7 +93,7 @@ Fade seni bulmaya çalışır, sen bulunmamaya. Yerini değiştirdiğin an Fade'
 
 **Icebox (Dengeli):** Recon Mid'in uzun açısını tutar, sen Rafters'a yukarı zıplama çıkarsın.
 
-**Breeze (Jett avantajlı):** Uzun sightline op'un gücüdür. Botun menzili Breeze'in geniş alanına yetmez.
+**Breeze (Jett avantajlı):** Uzun görüş hattı op'un gücüdür. Botun menzili Breeze'in geniş alanına yetmez.
 
 **Ascent (Dengeli):** Fade B Site recon'la meta, sen A Short'tan entry'yi işletirsin.
 
@@ -107,7 +107,7 @@ Fade seni bulmaya çalışır, sen bulunmamaya. Yerini değiştirdiğin an Fade'
 
 **Flip 3 — Stun rotate hattında:** Stun rotate'ini keser, dash'in değeri düşer.
 
-**Flip 4 — Ult'a karşı dash:** Dash hazırsa menzil dışına çıkarsın; cooldown'daysan debuff'un içinde kalırsın.
+**Flip 4 — Ult'a karşı dash:** Dash hazırsa menzil dışına çıkarsın; cooldown'daysan zayıflatma'un içinde kalırsın.
 
 ## 7. Koç Notu
 

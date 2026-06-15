@@ -53,15 +53,15 @@ Killjoy siteyi gizli kurulumla tutar. Fade recon ve bot ile o kurulumu bulup if�
 ---
 
 **IF** Fade ult'unu senin post-plant pozisyonuna attı
-**MEANING** Körlük ve korku basar, kapağın arkasında bile debuff yersin, savunma hattın çöker
+**MEANING** Körlük ve korku basar, kapağın arkasında bile zayıflatma yersin, savunma hattın çöker
 **COUNTER** Ult sesini duyunca alandan çık, ult'un geldiği yönden kapak al
-**WHY** Ult duvardan geçmez. Doğru yönden kapak alırsan debuff sana ulaşmaz
+**WHY** Ult duvardan geçmez. Doğru yönden kapak alırsan zayıflatma sana ulaşmaz
 
 ---
 
 **IF** Fade stun'u senin kurulum hattına düştü
 **MEANING** Alan kilitlenir, util'ini aktif edemezsin, turret tepki vermez
-**COUNTER** Kurulumunu stun'un inemeyeceği noktalara yap. Stun sesini duyunca hemen reposition al
+**COUNTER** Kurulumunu stun'un inemeyeceği noktalara yap. Stun sesini duyunca hemen yer değiştirme al
 **WHY** Stun zemine yapışan bir CC. Senin util'in yere bağlı — stun üstüne gelirse kurulum boşa gider
 
 ---

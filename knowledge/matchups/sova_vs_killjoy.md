@@ -1,7 +1,7 @@
 # EŞLEŞME: Sova vs Killjoy
 
 ## Ne Oluyor Bu Eşleşmede
-Sova, Killjoy'un turret'ini, bot'unu ve molly'sini daha site'a girmeden söküp atar. Recon onların nerede olduğunu açar. hasar oku duvarın arkasından temizler. Drone ucuz feda olur, geriye kalanı tetikler. Killjoy site'a tek adım atamadan biter — Sova'nın bu eşleşmedeki işi tam olarak budur.
+Sova, Killjoy'un turret'ini, bot'unu ve molly'sini daha site'a girmeden söküp atar. Recon onların nerede olduğunu açar. Hasar oku duvarın arkasından temizler. Drone ucuz feda olur, geriye kalanı tetikler. Killjoy site'a tek adım atamadan biter — Sova'nın bu eşleşmedeki işi tam olarak budur.
 
 ## Sova Killjoy'u Nasıl Bitirir
 

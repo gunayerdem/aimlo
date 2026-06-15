@@ -17,12 +17,12 @@ Breach seni sersemletir, sen Breach'i patlatırsın. Breach'in stunu sıçrama h
 
 **Raze lehine:**
 - Breach'in yanında trade yoksa stun tek başına öldürmez, sadece seni durdurur. Partner yoksa daha az hasar riski alırsın.
-- Uzun sightline'lı haritalarda Breach'in util menzili kısa kalır; sen uzaktan nade + rifle ile baskı kurarsın.
+- Uzun görüş hattı'lı haritalarda Breach'in util menzili kısa kalır; sen uzaktan nade + rifle ile baskı kurarsın.
 - Ult hazırsa Breach entry pozisyonuna girerken ulttan ölür, stun bile atamaz.
 
 **Breach lehine:**
 - Dar koridorlu haritalarda (Split, Bind, Sunset) stun koridoru tamamen kapatır, sıçrama ile kaçacak açı bulamazsın.
-- sıçrama cooldown'dayken mobiliten sıfırdır; Breach stun + flash ile seni sarar.
+- Sıçrama cooldown'dayken mobiliten sıfırdır; Breach stun + flash ile seni sarar.
 - Breach'in ultu hazırsa duvar arkasında bile seni yakalar; sıçrama ile çıkmaya çalışırsan ult hattına girersin.
 
 **Dengeli:** Haven, Ascent, Lotus'ta iki taraf da orta mesafede kalır. Önce yanlış pozisyona giren kaybeder.
@@ -86,7 +86,7 @@ Ult maliyeti: senin ultun 8 puan, Breach'in ultu 9 puan. Breach ultunu daha seyr
 
 ## 5. Harita Bazlı Durum
 
-**Split (Breach avantajlı):** Dar girişler stun ile kapanır. sıçrama ile geniş yer bulamazsın.
+**Split (Breach avantajlı):** Dar girişler stun ile kapanır. Sıçrama ile geniş yer bulamazsın.
 
 **Bind (Breach avantajlı):** Kısa mesafe Breach util'ine uygun. Teleport koridorları stun hattı için ideal.
 
@@ -112,7 +112,7 @@ Ult maliyeti: senin ultun 8 puan, Breach'in ultu 9 puan. Breach ultunu daha seyr
 
 ## 7. Radiant Seviyesi Notlar
 
-sıçrama iniş noktasını her round değiştir — aynı noktaya iki kez inme. Breach stunu sabit hatlara atılır; o hatları tanı, farklı noktadan in, Breach'in util'i boşa gitsin.
+Sıçrama iniş noktasını her round değiştir — aynı noktaya iki kez inme. Breach stunu sabit hatlara atılır; o hatları tanı, farklı noktadan in, Breach'in util'i boşa gitsin.
 
 Breeze ve Icebox'ta Breach'i outrange edersin — rifle mesafesinde Breach'in hiçbir util'i sana ulaşamaz. Split ve Bind'da Breach'in flash menzilinin dışında açı tut; flash açısına girmeden fight başlat.
 

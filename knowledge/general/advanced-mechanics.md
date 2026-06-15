@@ -136,7 +136,7 @@ WHY crouch strafe hızını sıfırlar, jiggle'ın tüm amacı biter
 IF 1vX clutch'tasın
 MEANING bir kill'den sonra sessizce pozisyon değiştirmen gerekiyor
 COUNTER crouch yapma, ayakta shift-walk yap
-WHY crouch ses çıkarır ve reposition'ı yavaşlatır
+WHY crouch ses çıkarır ve yer değiştirme'ı yavaşlatır
 
 IF birden fazla düşman seni izliyorsa
 MEANING bir düelloya crouch'la commit edersen diğerlerine karşı donup kalırsın

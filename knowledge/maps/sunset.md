@@ -4,7 +4,7 @@
 
 Sunset iki siteli bir harita ama her şeyi belirleyen tek bir yer var: Mid. Courtyard, Market ve Mid Top'tan oluşuyor bu bölge. Mid'i alırsan A'ya da B'ye istediğin gibi basarsın. Mid'i kaybedersen iki sitenin de arka kapısı açık kalır — rakip istediği yere kayar.
 
-Haritanın koridorları kısa, uzun sightline yok. Op yalnızca A Elbow ve Mid Top'ta işe yarar; başka yerde alırsan parayı çöpe attın. Burada force buy'da bile SMG ve shotgun güçlü. Sonuç: açıyı bilen kazanır, sadece nişan alabilen değil.
+Haritanın koridorları kısa, uzun görüş hattı yok. Op yalnızca A Elbow ve Mid Top'ta işe yarar; başka yerde alırsan parayı çöpe attın. Burada force buy'da bile SMG ve shotgun güçlü. Sonuç: açıyı bilen kazanır, sadece nişan alabilen değil.
 
 Market haritanın omurgası, A ile B arasındaki köprü.
 
@@ -36,7 +36,7 @@ Market'te bir karar ver ve geç. Burada bekleyerek hiçbir şey kazanmazsın.
 IF: A site'a execute ederken Elbow'u açmadan içeri giriyorsun ve ilk temasta ölüyorsun.
 MEANING: Elbow A site'ın kapısı. O kapıyı açmadan girersen savunan seni koridorda bekler ve ilk kurşunu o atar. Bu mekanik hata değil, yapısal hata.
 COUNTER: Execute öncesi iki util harca:
-- Elbow'a smoke at, sightline'ı kes.
+- Elbow'a smoke at, görüş hattı'ı kes.
 - Flash ile geç, köşede tutan oyuncuyu aç.
 
 Elbow alındıktan sonra bir oyuncuyu orada bırak, flank'a karşı dursun. Sonra site'a gir. Elbow'u atlarsan site'ı da atlarsın.
@@ -54,7 +54,7 @@ WHY: Tek hattan gelince savunan smoke'un arkasında durup çıkışını bekler.
 
 **Pattern 3: Default Fazında Agresif Ölüm**
 IF: Default fazında agresif peek atıyorsun, ölüyorsun, takım bilgi toplayamıyor.
-MEANING: Default fazı kill avı için değil, bilgi toplamak için var. Agresif ölünce takıma bilgi değil, sayı eksiği veriyorsun. Sunset'in kısa sightline'ları bu peek'leri daha da riskli yapıyor.
+MEANING: Default fazı kill avı için değil, bilgi toplamak için var. Agresif ölünce takıma bilgi değil, sayı eksiği veriyorsun. Sunset'in kısa görüş hattı'ları bu peek'leri daha da riskli yapıyor.
 COUNTER: Default fazında görevin şu üç şey:
 - A Main'de Elbow'a kadar git, geçme.
 - Mid'de Courtyard bilgisini util ile al, commit etme.
@@ -72,11 +72,11 @@ COUNTER: B Main'e girerken zamanlamayı ayır:
 - Üçüncü kişi Market'ten split yapar.
 
 Aynı koridorda üç kişi aynı anda olmasın. Koridor = sıra, alan = dağıl.
-WHY: Dar koridorda yığılma savunana bedava multi-kill verir, çünkü herkes aynı sightline'a sırayla giriyor. Zamanlamayı ayırır ve farklı hattan biri gelirse, savunan hangi açıya döneceğini seçmek zorunda kalır.
+WHY: Dar koridorda yığılma savunana bedava multi-kill verir, çünkü herkes aynı görüş hattı'a sırayla giriyor. Zamanlamayı ayırır ve farklı hattan biri gelirse, savunan hangi açıya döneceğini seçmek zorunda kalır.
 
 **Pattern 5: Eco Round Pasif Oynama**
 IF: Eco round'da pasif pozisyon alıyorsun ve silah almadan round'u kaybediyorsun.
-MEANING: Sunset kısa sightline'larla dolu. Burası Spectre, Stinger ve shotgun'ın tam menzili. Pasif eco oynamak, haritanın sana verdiği avantajı çöpe atmak.
+MEANING: Sunset kısa görüş hattı'larla dolu. Burası Spectre, Stinger ve shotgun'ın tam menzili. Pasif eco oynamak, haritanın sana verdiği avantajı çöpe atmak.
 COUNTER: Eco round'da agresif oyna:
 - Market push ya da Courtyard rush yap.
 - Judge ya da Bucky ile Market veya Elbow köşesinde bekle — yakın mesafede one-shot potansiyelin var.
@@ -112,7 +112,7 @@ WHY: Agresif pozisyonlar bir kez okununca seni tuzağa çeker. Rakip flash + smo
 
 **Pattern 5: Retake Sırasında Koordinasyonsuz Giriş**
 IF: Retake'te savunanlar tek tek site'a giriyor ve sırayla ölüyor.
-MEANING: Sunset'in dar girişleri tek tek girişi sert cezalandırıyor. Hepiniz aynı sightline'dan girince, post-plant tutan rakip sizi tek tek vurur. Takım olarak hareket etmiyorsunuz.
+MEANING: Sunset'in dar girişleri tek tek girişi sert cezalandırıyor. Hepiniz aynı görüş hattı'dan girince, post-plant tutan rakip sizi tek tek vurur. Takım olarak hareket etmiyorsunuz.
 COUNTER: Retake'e girmeden önce toplanın ve plan yapın.
 - Biri smoke/molly ile plant bölgesini temizlerken diğeri farklı açıdan girsin.
 - Flash ile girin, birlikte swing atın.
@@ -122,7 +122,7 @@ WHY: Post-plant tutan rakip açısını biliyor ve bekliyor. Tek tek giriş her 
 ## 5. Agent Tier Listesi
 
 **S Tier:**
-- **Omen**: Market'e TP at, Courtyard'da kaçış yeteneğini kullan, dar koridorlarda smoke ile sightline kes — Omen bu harita için var. Flash'i dar geçitte isabet edince düşman kör kalır, çıkışı yok. İki site için de smoke + TP ile tek başına destek verirsin.
+- **Omen**: Market'e TP at, Courtyard'da kaçış yeteneğini kullan, dar koridorlarda smoke ile görüş hattı kes — Omen bu harita için var. Flash'i dar geçitte isabet edince düşman kör kalır, çıkışı yok. İki site için de smoke + TP ile tek başına destek verirsin.
 - **Cypher**: Market'e tel + kamera koy, B Alley ve A Elbow'da erken bilgi al. Dar geçitlerde bypass yolu az olduğu için tellerini kimse atlayamaz. Saldırı nereden geliyor, sen zaten bilirsin.
 - **Breach**: A Elbow'dan stun at, ardından flash'i ekle — site açılır. B Main'de molly yakın mesafede duvar arkasındakini de bitirir. Bu haritanın dar yapısı Breach'in her yeteneğini bedavaya güçlendirir.
 
@@ -135,7 +135,7 @@ WHY: Post-plant tutan rakip açısını biliyor ve bekliyor. Tek tek giriş her 
 **B Tier:**
 - **Jett**: Courtyard'da agresif Op oynayabilirsin ama haritanın kısa mesafeleri hareket avantajını eritir. Dash ile Elbow'da play çıkarabilirsin ama üst tier ajanların yerini tutmaz.
 - **Sage**: Courtyard'a duvar çekerek Mid kontrolü alabilirsin, slow dar geçitte push'u yavaşlatır. Ama harita hızlı — Sage'in pasif stili burada sürekli baskı altında kalır.
-- **Viper**: Market ve Mid'e duvar çekebilirsin ama kısa sightline'lar uzun duvar avantajını boşa çıkarır. Omen kadar esnek değilsin, tek yönlü smoke'ların sınırlı noktada işe yarar.
+- **Viper**: Market ve Mid'e duvar çekebilirsin ama kısa görüş hattı'lar uzun duvar avantajını boşa çıkarır. Omen kadar esnek değilsin, tek yönlü smoke'ların sınırlı noktada işe yarar.
 
 ## 6. Rank Modülasyonu
 

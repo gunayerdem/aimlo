@@ -30,7 +30,7 @@ WHY Uzun rotasyon isteyen haritalarda Chamber zayıf — orada Killjoy daha güv
 
 IF sentinel açacaksan ve haritaya özel bir neden yoksa
 MEANING Killjoy'un tuzak + bot + molly ikilisi siteyi tek başına tutar
-COUNTER Varsayılan sentinel olarak Killjoy aç; dar chokepoint haritasında (Ascent A-Main gibi) Cypher'a geç
+COUNTER Varsayılan sentinel olarak Killjoy aç; dar boğaz haritasında (Ascent A-Main gibi) Cypher'a geç
 WHY Ult'unun retake gücü onu neredeyse her haritada birinci seçenek yapar
 
 ### Cypher

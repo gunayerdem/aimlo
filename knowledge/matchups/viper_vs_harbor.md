@@ -136,7 +136,7 @@ Aynı takımdaysanız kombo şu: Viper molly'sini plant alanına atar, Harbor ul
 
 - Viper duvarının kapandığını görünce kendi duvarını o hatta bas. Pencere kısa — geç kalma.
 - Duvarını Viper smoke'unun kapamadığı açıya at. Üst üste binen duman boşa gider.
-- Ult'unu tek kişi için değil takım savunması için kullan. Tek oyuncuyu reposition etmek için ult harcama.
+- Ult'unu tek kişi için değil takım savunması için kullan. Tek oyuncuyu yer değiştirme etmek için ult harcama.
 - Round başında bütün utilini boşaltma — en az birini round ortası için sakla.
 
 **İki kontrolcü aynı takımdaysa:**

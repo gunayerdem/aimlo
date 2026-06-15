@@ -8,7 +8,7 @@ Neon sprint ve slide'la açıları geçer — durmaz, tutmaz. Chamber Op'u tek a
 
 ### Neon Chamber'ı Cezalandırırken
 
-**IF**: Neon sprint hızıyla sightline'ı Chamber tepki veremeden geçiyor
+**IF**: Neon sprint hızıyla görüş hattı'ı Chamber tepki veremeden geçiyor
 **MEANING**: Op'un ateş penceresi kapandı — atış fırsatı yok
 **COUNTER**: Chamber Op yerine tabancaya geç — daha hızlı atış, sprint eden hedefe yetişir
 **WHY**: Sprint hızı Op'un tek atış mekaniğini boşa çıkarır
@@ -27,8 +27,8 @@ Neon sprint ve slide'la açıları geçer — durmaz, tutmaz. Chamber Op'u tek a
 
 **IF**: Chamber tabancayla sprint eden Neon'u vuruyor
 **MEANING**: Op'un yakalayamadığı hedefi tabanca yakaladı — atış oranı fark yarattı
-**COUNTER**: Neon duvarla sightline'ı tamamen kapat, açıyı geç
-**WHY**: Sightline kapanınca tabanca da işe yaramaz
+**COUNTER**: Neon duvarla görüş hattı'ı tamamen kapat, açıyı geç
+**WHY**: görüş hattı kapanınca tabanca da işe yaramaz
 
 **IF**: Chamber TP'yle Neon'un geçtiği açının arkasına çıkıyor
 **MEANING**: Neon çapraz ateşe sprint etti — iki açıyı aynı anda kapsayamaz
@@ -37,7 +37,7 @@ Neon sprint ve slide'la açıları geçer — durmaz, tutmaz. Chamber Op'u tek a
 
 ## Tekrarlanan Başarısızlık Ne Anlama Gelir
 
-**Neon** sürekli Op'a ölüyorsa: düz, temiz hatlarda sprint ediyor demektir. Önce duvarı at, sightline'ı kapat, sonra geç. Ya da o açıyı geçerken slide yap — hitbox değişir, atış zorlaşır.
+**Neon** sürekli Op'a ölüyorsa: düz, temiz hatlarda sprint ediyor demektir. Önce duvarı at, görüş hattı'ı kapat, sonra geç. Ya da o açıyı geçerken slide yap — hitbox değişir, atış zorlaşır.
 
 **Chamber** sürekli baskına uğruyorsa: çok yakın açılarda duruyor demektir. Neon düz hatlarda en hızlıdır — yakın mesafede TP kaçışa yetmez. Uzun hatta geç, 1 düşman düştüğünde bile aynı açıda kalma.
 
@@ -45,13 +45,13 @@ Neon sprint ve slide'la açıları geçer — durmaz, tutmaz. Chamber Op'u tek a
 
 ### Oyuncu cezalandırılan taraftayken
 
-**Neon Op'a ölüyorsa**: "Düz hat üzerinde sprint ediyorsun, Chamber'a temiz atış veriyorsun. Önce duvarı at, sightline'ı kapat, sonra geç. Ya da geçerken slide yap — hitbox değişir, atış güçleşir."
+**Neon Op'a ölüyorsa**: "Düz hat üzerinde sprint ediyorsun, Chamber'a temiz atış veriyorsun. Önce duvarı at, görüş hattı'ı kapat, sonra geç. Ya da geçerken slide yap — hitbox değişir, atış güçleşir."
 
 **Chamber Neon'a eziliyorsa**: "Çok yakın açıda duruyorsun. 1 kişi düştüğünde ya da footstep yaklaştığında daha uzun hatta geç. Yakın mesafede TP kaçışa yetmez — mesafeyi sen koru."
 
 ### Oyuncu cezalandıran taraftayken
 
-**Neon Chamber'ı geçiyorsa**: "Hızın Op'u işe yaramaz hale getiriyor. Duvarla sightline'ı kapatmaya, yakın mesafe dövüşü zorlamaya devam et — TP'ye yetişemeden bitir."
+**Neon Chamber'ı geçiyorsa**: "Hızın Op'u işe yaramaz hale getiriyor. Duvarla görüş hattı'ı kapatmaya, yakın mesafe dövüşü zorlamaya devam et — TP'ye yetişemeden bitir."
 
 **Chamber Neon'u durduruyorsa**: "Mesafe işe yarıyor. Neon entry yaptığında ya da takımı 1 kişi kaybettiğinde TP'yle boşalan açıyı kapat — aynı hat, farklı derinlik."
 
@@ -59,7 +59,7 @@ Neon sprint ve slide'la açıları geçer — durmaz, tutmaz. Chamber Op'u tek a
 
 **LOW**: Neon düz hatta sprint eder, Chamber atışı zaten ıskalar. İkisi de düzeltme yapmaz. Neon olarak slide zamanlamasını çalış — geçişin tam sırasında at, önce değil. Chamber olarak tabancayı sprint eden hedefe karşı kullan, Op'u bırak.
 
-**MID**: Neon duvar kullanmaya başlar, Chamber tahmin edilebilir açılarda takılır. Chamber olarak açını seç: uzun hat mı kısa hat mı — sightline'ın uzunluğuna bak, Op için uzun hatta dur. Neon olarak slide'ı geçişin sırasında at, önce değil.
+**MID**: Neon duvar kullanmaya başlar, Chamber tahmin edilebilir açılarda takılır. Chamber olarak açını seç: uzun hat mı kısa hat mı — görüş hattı'ın uzunluğuna bak, Op için uzun hatta dur. Neon olarak slide'ı geçişin sırasında at, önce değil.
 
 **HIGH**: İkisi de raunda göre değişir. Chamber olarak Neon'un bir önceki raundtaki entry yolunu oku — stun nereye gitti, duvar nereye açıldı, oradan tahmin yürüt. Neon olarak her raundda farklı açıdan gir.
 

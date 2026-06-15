@@ -5,7 +5,7 @@ Takımın tek iyileştiricisi, tek dirilticisi sensin. Değerin bilgiden ya da t
 
 ## 2. Temel Sorumluluklar
 - **İyileştirme:** İlk hasar alan arkadaşı değil, sıradaki dövüşe girecek arkadaşı iyileştir. HP'yi düelloyu kazanacak kişiye ver.
-- **Duvar:** Duvar bir sightline'ı kapatır ya da sana zaman kazandırır. Çapraz koy, dik koyma — düşman dik duvarı üstünden atlar.
+- **Duvar:** Duvar bir görüş hattı'ı kapatır ya da sana zaman kazandırır. Çapraz koy, dik koyma — düşman dik duvarı üstünden atlar.
 - **Slow:** Düşman push'a çıktığında at. Boş alana erken atma, gelene kadar dağılır.
 - **Ult (diriltme):** Duvar ya da takım koruması yoksa diriltme. İki kişiyi kaybetmek bir kişiyi kaybetmekten kötü.
 
@@ -28,7 +28,7 @@ Takımın tek iyileştiricisi, tek dirilticisi sensin. Değerin bilgiden ya da t
 
 **IF** Duvarın 2-3 round içinde etkisini yitiriyorsa
 **MEANING** Düşman duvar pozisyonunu ezberledi — üstünden atlıyor ya da kırıyor.
-**COUNTER** Açıyı değiştir. Dik yerine çapraz koy, sightline'ı tamamen kes. Her round aynı noktaya koyma.
+**COUNTER** Açıyı değiştir. Dik yerine çapraz koy, görüş hattı'ı tamamen kes. Her round aynı noktaya koyma.
 **WHY** Tahmin edilen duvar anında etkisiz kalır — açı çeşitliliği düşmanı her round sıfırdan düşündürür.
 
 **IF** Diriltirken sen de ölüyorsan
@@ -81,14 +81,14 @@ Takımın tek iyileştiricisi, tek dirilticisi sensin. Değerin bilgiden ya da t
 ## 7. Oyuncuya Ne Söylenmeli
 
 **İyi oynuyorsa:**
-Entry her dövüşe tam HP giriyor çünkü sen sıradaki dövüşçüyü iyileştiriyorsun. Düşman onun hasardan kaçındığını sanıyor — oysa sen her düellodan önce HP avantajı yaratıyorsun. Çapraz duvarların sightline'ı tamamen kesiyor, üstünden atlanamıyor, kırmak util istiyor. Duvar arkasında yaptığın diriltme düşmanın engelleyemeyeceği bir an açıyor.
+Entry her dövüşe tam HP giriyor çünkü sen sıradaki dövüşçüyü iyileştiriyorsun. Düşman onun hasardan kaçındığını sanıyor — oysa sen her düellodan önce HP avantajı yaratıyorsun. Çapraz duvarların görüş hattı'ı tamamen kesiyor, üstünden atlanamıyor, kırmak util istiyor. Duvar arkasında yaptığın diriltme düşmanın engelleyemeyeceği bir an açıyor.
 
 Yap: Her round sıradaki dövüşçüyü belirle, dövüş öncesi onu iyileştir. Duvar açısını her round biraz değiştir. Diriltmeden önce mutlaka duvar koy — sırayı ters çevirme. Slow'u push gelince at, erken atma. Post-plant'te slow'u sakla: defuse başlayınca bombanın üstüne at, düşman yavaşken o açıdan defuse'çuyu vur.
 
 Düşman adapte olunca: Duvar kırmak için util getirmeye başlarlarsa — duvarı choke'tan içeri taşı, açık alana taahhüt etmek zorunda kalsınlar. Rush atarlarsa — rush sırasında choke'a slow at, slow'un arkasına duvar koy. Diriltmeni beklerlerse — diriltmeyi atla, sayı avantajını kullan. Diriltme tehdidi bile onları bir oyuncuyu bedeni izlemeye ayırmaya zorlar.
 
 **Zorlanıyorsa:**
-Şu an iyileştirme ve duvar birlikte çalışmıyor. Hasar alanı değil, sıradaki dövüşe girecek kişiyi iyileştir. Duvarı sadece geciktirmek için değil, sightline'ı tamamen kesmek için koy. İyileştirirken köşe arkasına geç — açıkta iyileştirmek seni bedava kill yapar.
+Şu an iyileştirme ve duvar birlikte çalışmıyor. Hasar alanı değil, sıradaki dövüşe girecek kişiyi iyileştir. Duvarı sadece geciktirmek için değil, görüş hattı'ı tamamen kesmek için koy. İyileştirirken köşe arkasına geç — açıkta iyileştirmek seni bedava kill yapar.
 
 **Tahmin edilebilirse:**
 Duvarın her round aynı yerde, düşman biliyor. Açıyı değiştir. Slow'u push'a reaktif at, boş alana erken atma. Duvarı bazı round'lar saldırıda alan açmak için kullan — sadece savunma aracın değil.

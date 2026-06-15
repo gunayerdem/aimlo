@@ -92,7 +92,7 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 **Düşman ne yapıyor:** Ya orbları vuruyor — ateş sesiyle pozisyonu açığa çıkar, üstüne tuzak çarpar. Ya alternatif yola geçiyor — takımının crossfire kurduğu tarafa düşer. Rush yapanlar ağ tuzağına yakalanınca koordineli grup 4-5 ayrı dövüşe parçalanır.
 
 **Düşman adapte olursa:**
-- Tek bir AoE ile duvar ve tuzağı aynı anda temizlemeye çalışırlarsa: ikisini birbirinden ayır, tek utility ikisini birden temizleyemesin.
+- Tek bir alan hasarı ile duvar ve tuzağı aynı anda temizlemeye çalışırlarsa: ikisini birbirinden ayır, tek utility ikisini birden temizleyemesin.
 - Saldırıyı bölüp iki gruptan gelirlerse: küçük gruba ağ tuzağını at, takımın o tarafta sayı üstünlüğü kazansın.
 - Senin site'ından kaçınıp diğer site'ı basarlarsa: duvarı bir sonraki round oraya döndür ya da retake'e odaklan, ağ tuzağı + ult ile post-plant'i durdur.
 

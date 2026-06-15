@@ -19,7 +19,7 @@ Chamber oynuyorsan Op'un yoksa sen de yoksun. Deadlock oynuyorsan silahın ucuz 
 
 Deadlock net üstte. Haritaları aşağıda tek tek gör — site kapatma gereken her yerde Deadlock daha iyi iş çıkarır.
 
-Chamber'ın güçlü olduğu haritalar: **Breeze**, **Ascent**, **Abyss** — uzun sightline ya da çok katlı yapı var, Op + teleport oraya oturur.
+Chamber'ın güçlü olduğu haritalar: **Breeze**, **Ascent**, **Abyss** — uzun görüş hattı ya da çok katlı yapı var, Op + teleport oraya oturur.
 
 Bu üç harita dışında Deadlock oyna: duvar ve ses tuzağı info verir, Chamber'ın kit'iyse Op almaya bağlı — Op yoksa kit yarım kalır.
 
@@ -55,9 +55,9 @@ Chamber oynuyorsan ve karşıda Deadlock varsa duvar açısını round başında
 
 ---
 
-**IF** Deadlock'un ses tuzağı flank hattında, sen o hattan reposition yapacaksın
+**IF** Deadlock'un ses tuzağı flank hattında, sen o hattan yer değiştirme yapacaksın
 **MEANING** Ses tuzağı sesle tetiklenir — walk ile geçersen tetiklemezsin, koşarak geçersen sersemlersin
-**COUNTER** O hattan geçeceksen walk yap. Walk yavaştır — reposition'ın gecikeceğini hesaba kat
+**COUNTER** O hattan geçeceksen walk yap. Walk yavaştır — yer değiştirme'ın gecikeceğini hesaba kat
 **WHY** İki seçenek de Deadlock'un lehine: ya ses verirsin ya zaman kaybedersin. Bunu bilirsen hiç değilse zaman kaybını seçip sürprizini hazırlarsın
 
 ---
@@ -116,7 +116,7 @@ Deadlock'un kit'i Op alımından bağımsız çalışır. Chamber'ın kit'iyse O
 
 **Abyss:** Chamber önde. Çok katlı yapı teleporta uyar.
 
-**Ascent:** Chamber önde. B Main'in uzun sightline'ı Op için ideal.
+**Ascent:** Chamber önde. B Main'in uzun görüş hattı'ı Op için ideal.
 
 **Breeze:** Chamber önde. Uzun açılar Op ekonomisini destekler.
 
@@ -130,7 +130,7 @@ Deadlock'un kit'i Op alımından bağımsız çalışır. Chamber'ın kit'iyse O
 
 3. **Deadlock ult'u vs teleport.** Deadlock ult sesini duyunca beklemeden teleporta bas. Menzile girdikten sonra artık geç.
 
-4. **Ses tuzağını walk ile geç.** Geçmen gerekiyorsa walk yap — reposition yavaşlayacak, bunu hesaba kat.
+4. **Ses tuzağını walk ile geç.** Geçmen gerekiyorsa walk yap — yer değiştirme yavaşlayacak, bunu hesaba kat.
 
 5. **İki ult aynı anda.** Op ult'u uzaktan kill arar, Deadlock ult'u site içini kilitler — hangi ult önce değer üretirse round'u o sentinel taşır.
 

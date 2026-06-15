@@ -96,7 +96,7 @@ Somut fark: Breach kapağı deler, Killjoy zamanı dondurur. Biri pozisyonu kır
 
 **Haven (Dengeli):** Killjoy B anchor, Breach B Main stun — mid kontrolü belirleyici.
 
-**Icebox (Killjoy avantajlı):** Uzun sightline Breach menzilini aşar, tuzak uzak hattı tarar.
+**Icebox (Killjoy avantajlı):** Uzun görüş hattı Breach menzilini aşar, tuzak uzak hattı tarar.
 
 **Lotus (Dengeli):** 3 site yapısı ikisi için de nötr — mid bilgi hattını kim önce keserse yönlendirme onda.
 

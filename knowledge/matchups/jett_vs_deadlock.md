@@ -25,16 +25,16 @@ Deadlock seni durdurmaya değil yavaşlatmaya çalışıyor. Tuzağı ses hattı
 - Dar koridorlarda (Bind Hookah, Sunset A, Fracture B) — duvar yolu kapatıyor, ağ dash'i iptal ediyor.
 - Dash cooldown'dayken — dash yoksa dar alanda çıkış yok, Deadlock duvarla yolu kesiyor.
 - Ult aktifken post-plant'ta — kozaya girersen dash seni kurtarmıyor.
-- Ses çıkararak yaklaşıyorsan — tuzak stun ve debuff atar, entry öncesi pozisyonun açığa çıkar.
+- Ses çıkararak yaklaşıyorsan — tuzak stun ve zayıflatma atar, entry öncesi pozisyonun açığa çıkar.
 
 **Haritaya göre değişiyor:** Ascent, Haven, Lotus gibi orta mesafe haritalarda tuzak hattını kim daha erken okursa o önde. Sen tuzağın yerini ilk turda öğren, ikinci turdan bypass et. Deadlock da dash hattını okursa duvar ile ağ kombosunu oraya kuruyor.
 
 ## 3. Key Düellolar
 
 **IF** Ses çıkararak girdin, Deadlock tuzağı o hattaydı
-**MEANING** Tuzak patladı — stun ve debuff yedin, takım yerini biliyor.
+**MEANING** Tuzak patladı — stun ve zayıflatma yedin, takım yerini biliyor.
 **COUNTER** Tuzak hattını shift walk ile geç. İlk turda tuzağın yerini işaretle — ikinci turdan o hattan geçme ya da shift walk ile gir.
-**WHY** Dash ses çıkarıyor, ses tuzağı tetikliyor, debuff sonrası arkadaki düşman cover alıyor. Tek savunmasız anın bu.
+**WHY** Dash ses çıkarıyor, ses tuzağı tetikliyor, zayıflatma sonrası arkadaki düşman cover alıyor. Tek savunmasız anın bu.
 
 ---
 
@@ -67,7 +67,7 @@ Deadlock seni durdurmaya değil yavaşlatmaya çalışıyor. Tuzağı ses hattı
 ---
 
 **IF** C Long'da op tutuyorsun, Deadlock tuzağı C Cubby'e kurdu
-**MEANING** Tuzak rotate hattını kapsıyor — rotate etmeye kalkarsan debuff yiyorsun, Deadlock tarafı pozisyonunu biliyor.
+**MEANING** Tuzak rotate hattını kapsıyor — rotate etmeye kalkarsan zayıflatma yiyorsun, Deadlock tarafı pozisyonunu biliyor.
 **COUNTER** Rotate için tuzak dışı yol seç. Rotate öncesi tuzağı takım utility'siyle temizle ya da shift walk ile geç.
 **WHY** Op holder olarak değerin rotasyonda. Tuzak rotanı Deadlock'a söylüyor — op pozisyonun tahmin ediliyor, yeniden konumlanma gücün gidiyor.
 

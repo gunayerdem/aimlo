@@ -23,7 +23,7 @@ Deadlock seni durdurmak için tek bir şeye oynar: sıçramaini havada yakalamak
 
 **Deadlock avantajlı:**
 - Dar koridorlu haritalar (Split, Sunset, Fracture) — duvar geçişi keser, ağ sıçrama keser
-- sıçrama bekleme süresindeyken — o an durursan ağ ile rifle seni durdurur
+- Sıçrama bekleme süresindeyken — o an durursan ağ ile rifle seni durdurur
 - Tuzak giriş hattında aktifse — sıçrama patlama sesini duyar, tetiklenir; sersemlemişken nade atışın yavaşlar
 - Spike kurulduktan sonra ultunu atarsa — alternatif açıda değilsen kozaya alınmak kesin ölüm
 
@@ -94,7 +94,7 @@ Ultunu daha iyi konumda patlatan round'u alır.
 
 **Bind (Deadlock hafif avantajlı):** Hookah dar — duvar için ideal. Raze nade basarsa açar ama Deadlock geçidi sıfırdan kilitler.
 
-**Split (Deadlock avantajlı):** A Main ve B Main koridorları duvar ile ağ için biçilmiş kaftan. sıçrama hareketin burada ağ ile kesilir.
+**Split (Deadlock avantajlı):** A Main ve B Main koridorları duvar ile ağ için biçilmiş kaftan. Sıçrama hareketin burada ağ ile kesilir.
 
 **Sunset (Deadlock avantajlı):** A Main ve Market geçişleri Deadlock'un kurulumunu besler. Raze girmek için önce duvarı temizlemek zorunda.
 

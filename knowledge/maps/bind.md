@@ -14,7 +14,7 @@ Teleporter sistemi Bind'in gerçek kimliği. A Short ile B Short arasında iki y
 
 Teleporter ses çıkarır. O ses seni ele verir. Ama düşman seni duyduğunda, sen de düşmanın yerini biliyorsun. Düşman teleporter'dan geçiyorsa çıkış noktasına util at — Hookah'a smoke, A Short çıkışına flash. Ses duyunca donup bekleme, önlemini al.
 
-Site'lara gelince: A Site'ta açı bol. Heaven, Lamps, Triple Box, A Short — post-plant'te crossfire kurmak kolay. B Site'ta Hookah yukarıyı tutar, B Elbow güçlü bir anchor noktası, B Long dar ve choke point gibi çalışır.
+Site'lara gelince: A Site'ta açı bol. Heaven, Lamps, Triple Box, A Short — post-plant'te crossfire kurmak kolay. B Site'ta Hookah yukarıyı tutar, B Elbow güçlü bir anchor noktası, B Long dar ve boğaz gibi çalışır.
 
 Bind'de site'a girmek görece kolay, ama içeri girince düşman her açıdan gelir. Yarım execute atarsan site içindeki crossfire'a takılır, round'u bırakırsın. Execute kalitesi burada her şeyi belirler — yarıda bırakma, ya tam bas ya dönüp fake yap.
 
@@ -23,7 +23,7 @@ Bind'de site'a girmek görece kolay, ama içeri girince düşman her açıdan ge
 **Ölüm Bölgesi 1: A Bath (Hamam)**
 A Bath tek giriş tek çıkış — içeri girdin mi geri dönüş yok. Seni öldüren şey nişanın değil, util kullanmadan girmen. A Bath'a girerken en az bir flash, bir smoke harca. Smoke'suz flash'sız girersen A Short crossfire'ı ve Heaven açısı seni bitirir. Buraya tekrar tekrar girip ölüyorsan derdin nişan değil, util disiplini.
 
-**Ölüm Bölgesi 2: B Long Choke Point**
+**Ölüm Bölgesi 2: B Long boğaz**
 B Long'u tek başına peek atarak geçemezsin. Elbow'dan ve B Site'tan crossfire gelir — sırayla girerseniz tek tek dökülürsünüz. Çözüm net: takım olarak util dökün, aynı anda girin. Biri öne çıkarken diğerleri arkada beklerse B Long sizi yer.
 
 **Ölüm Bölgesi 3: Hookah (B Window)**
@@ -51,7 +51,7 @@ WHY: Bu execute'un gücü savunmacıyı aynı anda birden fazla yönden baskıla
 
 **Pattern 3: B Execute**
 IF: Takım B Site'a execute atıyorsa — B Elbow ve Hookah'a smoke, B Long'dan 3+ kişi util döküp push, Hookah önceden temizlenmiş.
-MEANING: B Execute, Bind'de en çok util isteyen saldırı kalıbı. B Elbow smoke'u anchor'ın görüş hattını keser, Hookah smoke'u yukarıdan gelecek flank'ı kapatır. B Long'dan giren üçlü flash + molly + grenade ile choke point'i açar. Hookah önceden temizlenmemişse B Execute atamazsın — savunucu oradan herkesi biçer.
+MEANING: B Execute, Bind'de en çok util isteyen saldırı kalıbı. B Elbow smoke'u anchor'ın görüş hattını keser, Hookah smoke'u yukarıdan gelecek flank'ı kapatır. B Long'dan giren üçlü flash + molly + grenade ile boğaz'i açar. Hookah önceden temizlenmemişse B Execute atamazsın — savunucu oradan herkesi biçer.
 COUNTER:
 - Hookah'ya flash + peek ya da sentinel util ile gir ve temizle.
 - B Long push için en az iki util aynı anda: biri choke'u açar (smoke veya molly), diğeri savunucuyu açıdan düşürür (flash).
@@ -85,7 +85,7 @@ COUNTER:
 - B Elbow'da flash gelince açıdan düş, geri çekil, flash bitince tekrar peek at.
 - Hookah kontrolcüsü tel veya bot kullan. Yaklaşan düşmanı sana o haber versin, kuru peek atmak zorunda kalma.
 - B Long oyuncusu ilk kontaktan sonra geri çekilir. Orada kalıp ölüm ararsan site'ı savunmasız bırakırsın.
-WHY: B Long ve Hookah dar girişler. Savunmacı bu dar noktalara ateş açarak saldırıyı durdurur. Ama bu avantaj sadece hayattayken geçerli. B'de erken ölüm choke point avantajını siler, saldırı tarafı bedava girer.
+WHY: B Long ve Hookah dar girişler. Savunmacı bu dar noktalara ateş açarak saldırıyı durdurur. Ama bu avantaj sadece hayattayken geçerli. B'de erken ölüm boğaz avantajını siler, saldırı tarafı bedava girer.
 
 **Pattern 3: Teleporter Kontrol**
 IF: Teleporter sesini duyuyorsun ama ya tüm takımla panik rotate yapıyorsun ya da sesi tamamen yok sayıyorsun.
@@ -265,7 +265,7 @@ WHY: Teleporter'dan çıkarken kısa bir an savunmasızsın. O anı utille veya 
 
 **Anti-Strat 3: Düşman B Long'dan 5 Kişi Rush Yapıyor**
 IF: Tüm util B Long'a dökülüyor, 5 kişi site'a akıyor.
-MEANING: Bireysel düelloyu atlamak istiyor, sayısal üstünlükle site almaya çalışıyor. B Long choke point tek util dump'la açılır.
+MEANING: Bireysel düelloyu atlamak istiyor, sayısal üstünlükle site almaya çalışıyor. B Long boğaz tek util dump'la açılır.
 COUNTER:
 - B Elbow'da peek atma — geri çekil, zaman kazan.
 - Hookah'ya oyuncu koy, crossfire kur.

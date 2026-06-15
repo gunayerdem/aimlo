@@ -53,7 +53,7 @@ COUNTER: En az bir flash ya da TP'yi gerçek dövüş anına sakla. Klonu erken 
 WHY: Yoru ham peek gücü olmayan bir ajan. Becerilerin bitince Jett gibi savaşamazsın — utility'siz kaldığın an ölüm anın.
 
 IF: Lurk yaparken takımdan tamamen kopuyorsun ve 1'e karşı çoğa kalıyorsun
-MEANING: Lurk derinliğini takım tempo'suyla eşleştirmiyorsun — takım girmeden o flank'ı tek başına dövüyorsun
+MEANING: Lurk derinliğini takım temposuyla eşleştirmiyorsun — takım girmeden o flank'ı tek başına dövüyorsun
 COUNTER: Lurk'i takımın site vuruşuyla zamanla. Sen flank'ı tutarken takım baskı yapmalı ki düşman iki yöne bölünsün. Yalnız flank dövüşüne girme, takım meşgul edene kadar bekle.
 WHY: Yoru'nun lurk değeri düşmanı böler — ama takım baskı yapmıyorsa düşman tüm dikkatini sana verir. Bölünmemiş düşmanın içine yalnız girersen sayıca yenilirsin.
 

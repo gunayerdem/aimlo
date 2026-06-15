@@ -23,7 +23,7 @@ Astra haritanın her noktasına smoke, stun ve çekim atar — yıldız sayısı
 
 **Chamber lehine durumlar:**
 - Yıldızını henüz yerleştirmediysen Chamber açısı serbest, op hattı açık kalır.
-- Uzun sightline varsa (Breeze orta, Icebox orta tüp, Haven A uzun) Chamber tek atışla sırayla keser.
+- Uzun görüş hattı varsa (Breeze orta, Icebox orta tüp, Haven A uzun) Chamber tek atışla sırayla keser.
 - Çekim ve stun'u harcadıysan, elinde yıldız kalmadıysa Chamber istediği açıyı rahatça tutar.
 - Retake'tesin: util saldırı için tasarlanmış, Chamber tuzak ve dash ile retake hattını kapatır.
 
@@ -32,7 +32,7 @@ Astra haritanın her noktasına smoke, stun ve çekim atar — yıldız sayısı
 ## 3. Key Düellolar
 
 **IF** Chamber op ile uzun açı tutuyor, sen yıldızını o açıya önceden gömdün
-**MEANING** Smoke tek tıkla düşer, Chamber'ın atış penceresi kapanır, reposition yapmak zorunda kalır
+**MEANING** Smoke tek tıkla düşer, Chamber'ın atış penceresi kapanır, yer değiştirme yapmak zorunda kalır
 **COUNTER** Her round aynı açıyı kullanma. Yıldızın olmadığı tarafa geç — Astra oraya smoke yetiştiremez, yıldız yoksa o açı serbest kalır
 **WHY** Op'un gücü ani açılmaktır. Astra smoke'u önceden yerleştirilmiş yıldıza basar, reaksiyon hızı fark yaratmaz. Ama yıldız o açıda değilse Astra kördür.
 

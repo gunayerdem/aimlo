@@ -11,18 +11,18 @@ tags: [matchup, iso, clove, duelist, controller]
 
 ## 1. Matchup Özü
 
-Iso shield'i, duvarı, vuruş buff'ı ve ult'uyla her duelloyu kendi şartlarında, 1v1 oynamak ister. Clove ise smoke'u, decay debuff'ı, kill sonrası buff'ı ve geri dönme ult'uyla "öldükten sonra bile sahadayım" der. Bu matchup tek bir soruya iner: Iso, Clove'u takımından koparıp tek başına yakalayabilecek mi, yoksa Clove ölüp geri gelerek Iso'yu bitirecek mi?
+Iso shield'i, duvarı, vuruş buff'ı ve ult'uyla her duelloyu kendi şartlarında, 1v1 oynamak ister. Clove ise smoke'u, decay zayıflatma'ı, kill sonrası buff'ı ve geri dönme ult'uyla "öldükten sonra bile sahadayım" der. Bu matchup tek bir soruya iner: Iso, Clove'u takımından koparıp tek başına yakalayabilecek mi, yoksa Clove ölüp geri gelerek Iso'yu bitirecek mi?
 
 ## 2. Kim Avantajlı?
 
 **Iso lehine:**
-- Clove smoke'unu ve decay debuff'ını harcadıysa eli boş kalır, saf aim duellosunda Iso baskındır.
+- Clove smoke'unu ve decay zayıflatma'ını harcadıysa eli boş kalır, saf aim duellosunda Iso baskındır.
 - Iso ult'unu Clove'a atarsa Clove izole olur, takım desteği kesilir, geri dönme de çalışmaz.
 - Clove geri dönme ult'unu henüz açmadıysa, onu öldürdüğünde ikinci şans yoktur.
 
 **Clove lehine:**
 - Clove smoke'u Iso'nun açısını kapatıyorsa, dumanın içinde aim avantajın sıfırlanır.
-- Decay debuff'ı yedin ve hâlâ etki alanının içindeysen shield'in tükenmeden hasar HP'ne geçer, duelloyu kaybedersin.
+- Decay zayıflatma'ı yedin ve hâlâ etki alanının içindeysen shield'in tükenmeden hasar HP'ne geçer, duelloyu kaybedersin.
 - Clove öldü ama geri dönme ult'u açıksa, sen kill'i aldım derken Clove ayağa kalkar, sen hazırlıksız yakalanırsın.
 - Clove az önce birini öldürüp kill buff'ını aldıysa hızı ve hasarı artar, üstüne körlemesine gitme.
 
@@ -37,16 +37,16 @@ Iso shield'i, duvarı, vuruş buff'ı ve ult'uyla her duelloyu kendi şartların
 
 ---
 
-**IF** Clove decay debuff'ını attı ve Iso etki alanının içinde
-**MEANING** Debuff shield'ini tüketir, shield gider ve hasar doğrudan HP'ne biner.
+**IF** Clove decay zayıflatma'ını attı ve Iso etki alanının içinde
+**MEANING** zayıflatma shield'ini tüketir, shield gider ve hasar doğrudan HP'ne biner.
 **COUNTER** Sesini duyar duymaz bir adım geri çık, etki alanının dışına çıkıp shield yenilenene kadar orada bekle.
-**WHY** Etki alanının içinde shield seni korumaz. Duelloya shield tam doluyken gir, debuff altındayken asla girme.
+**WHY** Etki alanının içinde shield seni korumaz. Duelloya shield tam doluyken gir, zayıflatma altındayken asla girme.
 
 ---
 
 **IF** Iso shield açıkken Clove ateş etti
 **MEANING** İlk atış shield'e gelir, Iso karşı atış için serbesttir. Aim duellosu Iso lehinedir.
-**COUNTER** Clove oynuyorsan Iso'nun shield'ini tek başına boşa harcatma. Debuff'la beraber takım trade'iyle harcat.
+**COUNTER** Clove oynuyorsan Iso'nun shield'ini tek başına boşa harcatma. zayıflatma'la beraber takım trade'iyle harcat.
 **WHY** Shield tek kullanımlık ve bekleme süresi var. Onu tek başına kıramazsın, takımla kır.
 
 ---
@@ -80,7 +80,7 @@ Iso shield'i, duvarı, vuruş buff'ı ve ult'uyla her duelloyu kendi şartların
 ## 4. Yetenek Takası
 
 Iso: shield + duvar + vuruş buff'ı + ult → solo aim, 1v1 izolasyon.
-Clove: smoke x2 + decay debuff'ı + kill buff'ı + geri dönme ult'u → alan kontrolü, ölüp geri dönme.
+Clove: smoke x2 + decay zayıflatma'ı + kill buff'ı + geri dönme ult'u → alan kontrolü, ölüp geri dönme.
 
 Iso her şeyini 1v1'e kurar, Clove her şeyini hayatta kalmaya ve ikinci şansa kurar. İki ult'un puan masrafı eşittir ama Iso'nun ult'u Clove'un tek ikinci şansını da kapatır.
 
@@ -104,7 +104,7 @@ Iso her şeyini 1v1'e kurar, Clove her şeyini hayatta kalmaya ve ikinci şansa 
 
 ## 6. Maç Döndüren Anlar
 
-**Döngü 1 — Decay debuff'ı shield'i bitirdi:** Iso etki alanının içinde kaldı, shield gitti, HP açıkta.
+**Döngü 1 — Decay zayıflatma'ı shield'i bitirdi:** Iso etki alanının içinde kaldı, shield gitti, HP açıkta.
 
 **Döngü 2 — Iso ult'u Clove'u izole etti:** Takım dumansız, Clove geri dönemez. Iso ideal şartta.
 
@@ -116,10 +116,10 @@ Iso her şeyini 1v1'e kurar, Clove her şeyini hayatta kalmaya ve ikinci şansa 
 
 Bu matchup'ta Iso oynuyorsan Clove'u 1v1'e çek, ult'unu at, içeride bitir. Geri dönme de çalışmaz. Clove'u takımından koparmazsan ölüp geri gelir.
 
-Clove oynuyorsan decay debuff'ını önce Iso'nun shield'ine at, smoke'unla açısını kapat ve öldükten sonra geri dön. Iso ikinci duelloya hazırlıksız yakalanır.
+Clove oynuyorsan decay zayıflatma'ını önce Iso'nun shield'ine at, smoke'unla açısını kapat ve öldükten sonra geri dön. Iso ikinci duelloya hazırlıksız yakalanır.
 
 **Matchup özeti:** Iso, Clove'u izole ederse kazanır. Clove, geri dönme döngüsünü açabilirse kazanır.
 
 **Sık sorulan:**
-- Decay debuff'ı Iso'nun shield'ini tek başına bitirmez ama etki alanının içinde kalırsan shield tükenmeden hasar HP'ne geçer.
+- Decay zayıflatma'ı Iso'nun shield'ini tek başına bitirmez ama etki alanının içinde kalırsan shield tükenmeden hasar HP'ne geçer.
 - Geri dönme ult'u Iso'nun ult boyutunda çalışmaz. Clove içeride ölürse geri dönemez.

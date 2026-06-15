@@ -24,7 +24,7 @@ Cypher kendi bölgesini kilitler. Sova o kilidi kırmaya gelir.
 - Kameran recon'u önceden görürse — recon geçmeden repoze al
 
 **Sova lehine:**
-- hasar oku teli patlatırsa — tel gider, Cypher o geçidi göremez
+- Hasar oku teli patlatırsa — tel gider, Cypher o geçidi göremez
 - Recon kamerayı bulursa — takım kamerayı kırar, Cypher kör kalır
 - Uzun açılı haritalarda — Sova recon'u Cypher'ın kurulumunu haritalar
 - Sova ult'u duvar deler — kapanın arkasında dursan bile hasar yersin

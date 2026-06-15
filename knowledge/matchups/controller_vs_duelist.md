@@ -24,7 +24,7 @@ Smoke perdedir, duvar değil. İçinden geçilir. Bunu ikisi de bilmeli.
 
 ---
 
-**IF**: Controller smoke'larını yenileyemiyor ve bu boşlukta açık sightline'lar oluşuyorsa
+**IF**: Controller smoke'larını yenileyemiyor ve bu boşlukta açık görüş hattı'lar oluşuyorsa
 **MEANING**: Duelist o pencerede peek alır, öldürür, dash'le güvene çekilir. Smoke'u yenilemesi geç dolan controller'lar o an tamamen açık kalır.
 **COUNTER**: Controller olarak — smoke biter bitmez takımına söyle, pozisyon değiştir, sabit durma. Duelist sabit hedefe peek atar. Smoke yokken cover arkasına çekil.
 **COUNTER**: Duelist olarak — smoke'un ne zaman biteceğini takım sesinden ya da görsel işaretten takip et. O pencere açılınca peek al, kapanınca çekil.
@@ -64,4 +64,4 @@ Smoke perdedir, duvar değil. İçinden geçilir. Bunu ikisi de bilmeli.
 
 **HIGH**: İkisi de dinamiği biliyor. Controller off-angle oynuyor, duelist flash'la koordineli giriyor. Öğretilecek şey şu: smoke yenileme zamanını takip et ve pozisyonu ona göre ayarla.
 
-**ELITE**: Smoke yerleştirme ve smoke geçişi ikisinde de hassas. Radiant controller'lar smoke'u sightline kapatmak için değil, duelist'in çıkış pozisyonunu yanlış tahmin ettirmek için koyar — smoke kenarına off-angle yerleşir, içinden çıkan ters tarafa bakar. Avantaj, karşı tarafın pozisyon alışkanlığını daha iyi okuyana geçer.
+**ELITE**: Smoke yerleştirme ve smoke geçişi ikisinde de hassas. Radiant controller'lar smoke'u görüş hattı kapatmak için değil, duelist'in çıkış pozisyonunu yanlış tahmin ettirmek için koyar — smoke kenarına off-angle yerleşir, içinden çıkan ters tarafa bakar. Avantaj, karşı tarafın pozisyon alışkanlığını daha iyi okuyana geçer.

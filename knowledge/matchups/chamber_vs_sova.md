@@ -1,12 +1,12 @@
 # MATCHUP: Chamber vs Sova
 
 ## Etkileşim Özeti
-Sova'nın recon'u sen açıdan çıkmadan op pozisyonunu ele veriyor. Drone seni açından koparıyor ya da tarayıp işaretliyor. hasar oku tuzağını haritanın öbür ucundan siliyor. Sen de TP ile cevap veriyorsun. Sova bilgiyi toplamadan onu öldürürsen açında kalırsın; toplamasına izin verirsen açın haritadan silinir.
+Sova'nın recon'u sen açıdan çıkmadan op pozisyonunu ele veriyor. Drone seni açından koparıyor ya da tarayıp işaretliyor. Hasar oku tuzağını haritanın öbür ucundan siliyor. Sen de TP ile cevap veriyorsun. Sova bilgiyi toplamadan onu öldürürsen açında kalırsın; toplamasına izin verirsen açın haritadan silinir.
 
 ## Yaygın Cezalandırma Kalıpları
 
 **IF**: Sova recon ile op pozisyonunu açığa çıkarıp hemen drone gönderiyorsa
-**MEANING**: Drone seni iki kötü seçenek arasına sıkıştırıyor. Drone'u vurursan op peek'ini açığa verirsin, vurmazsan tüm takım işaretlenir ve üstüne yığılır. hasar oku aynı anda tuzağını da temizliyor. Sova recon + drone ile hem bilgiyi hem baskıyı aynı anda kuruyor.
+**MEANING**: Drone seni iki kötü seçenek arasına sıkıştırıyor. Drone'u vurursan op peek'ini açığa verirsin, vurmazsan tüm takım işaretlenir ve üstüne yığılır. Hasar oku aynı anda tuzağını da temizliyor. Sova recon + drone ile hem bilgiyi hem baskıyı aynı anda kuruyor.
 **COUNTER**: Recon havadayken tabancanla tek tek nişan al ve düşür — taramadan önce gitsin. Sova drone'u sürerken yerinde donar, tam o anda op'unu çek. Tarandıysan TP et — bilgi bayatlar, takım boş konuma push eder.
 **WHY**: Sova'nın gücü bilginin hızında. Konumunu TP ile kaydırırsan topladığı bilgi çöpe gider.
 
@@ -23,7 +23,7 @@ Sova'nın recon'u sen açıdan çıkmadan op pozisyonunu ele veriyor. Drone seni
 ## Tekrarlayan Başarısızlık Ne Anlama Gelir
 **Chamber** tarandıktan sonra hâlâ aynı açıda duruyorsa: recon sesini duyduğun an TP'ye bas ve farklı açıya geç. Tarandıktan sonra orada oturmak, Sova'ya haritayı hediye etmek demektir.
 
-**Sova** drone'u açarken Chamber'a ölüyorsa: drone'u Chamber'in görebildiği açıdan kullanıyorsun. Drone'u duvarın arkasından, Chamber'in sightline'ı dışından aç. Drone'u sürerken bedenin yerinde donar.
+**Sova** drone'u açarken Chamber'a ölüyorsa: drone'u Chamber'in görebildiği açıdan kullanıyorsun. Drone'u duvarın arkasından, Chamber'in görüş hattı'ı dışından aç. Drone'u sürerken bedenin yerinde donar.
 
 ## AIMLO Ne Demeli
 ### Oyuncu cezalandırılan taraftayken

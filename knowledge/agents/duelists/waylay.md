@@ -19,7 +19,7 @@
 2. **Geri-kayma noktasını önceden koymadan agresif peek atmak** — Waylay'in en büyük gücü, düelloyu kaybetsen bile ölmeden geri kayman. Ama bunun için geri-kayma noktanı peek'ten ÖNCE yere koymuş olman gerekir. Koymazsan, kaybettiğin düelloda kaçacak yerin olmaz — sıradan bir duelist gibi orada ölürsün.
 3. **İlk öldürmeden sonra açıkta donup kalmak** — Frag'i aldın ama kalayım mı kayayım mı diye düşünürken ikinci düşman seni basar. İlk öldürmeden sonra yarım saniyede karar ver: temizse kal, ses varsa geri kay.
 4. **Dash'i hep düz ileri kullanmak** — İlk dash'in seni yukarı da çıkarabilir. Hep göz hizasında girersen kutuların/yüksek noktaların üstünden gelen sürpriz açıyı boşa harcarsın.
-5. **Tüm dash'i tek seferde harcamak** — İki dash'in var. İkisini de aynı anda boşaltıp içeride sıkışma. Bir dash'le gir, diğerini kaçış ya da reposition için sakla.
+5. **Tüm dash'i tek seferde harcamak** — İki dash'in var. İkisini de aynı anda boşaltıp içeride sıkışma. Bir dash'le gir, diğerini kaçış ya da yer değiştirme için sakla.
 6. **Flash'ı varmış gibi oynamak** — Waylay'in flash'ı yok. Kör açıya tek başına dash'lersen, açıyı tutan düşman seni temiz görür. Flash'lı bir takım arkadaşıyla oyna; körlemeyi ondan al, girişi sen yap.
 7. **Temel düeli ihmal etmek** — Yavaşlat-dal rutinine kaptırıp crosshair'ini düşürme. İlk temas hâlâ senden geçiyor; tetiği yine sen çekeceksin. Yetenek dövüşü kazandırmaz, kazanmana zemin hazırlar.
 8. **Geri-kaymayı sadece kaçış sanmak** — Geri-kayma seni kısa süre dokunulmaz yapar. Sadece kaçmak için değil, alev/molly içinden geçmek ya da kötü pozisyondan temize sıyrılmak için de kullanabilirsin.

@@ -16,7 +16,7 @@ Jett dash'le giriyor, Sage duvar, yavaşlatma ve heal ile o girişi durdurmaya �
 ## 2. Kim Avantajlı?
 
 **Jett lehine:**
-- Uzun sightline'larda (Breeze, Icebox Mid) — Sage duvarı kısa mesafe için, uzun açıda Op'u Jett kuşanır ve işini yapar
+- Uzun görüş hattı'larda (Breeze, Icebox Mid) — Sage duvarı kısa mesafe için, uzun açıda Op'u Jett kuşanır ve işini yapar
 - Sage duvarı harcandıktan sonra — ikinci giriş serbest, Sage'in elinde yalnızca yavaşlatma ve nişanı kalır
 - Sage site'ı tek başına tutuyorsa — tek yönlü duvar çift taraflı girişi tutamaz
 
@@ -25,7 +25,7 @@ Jett dash'le giriyor, Sage duvar, yavaşlatma ve heal ile o girişi durdurmaya �
 - Jett dash'i yenilenmemişse — yavaşlatma ve çapraz ateş Jett'i yerde yakalar
 - Ult'u hazırsa — Jett'in trade kill avantajı geri alınır, Sage'in takımı tekrar 5v5'e döner
 
-**Dengeli:** Haven, Ascent ve Lotus'ta Jett açık sightline bulursa kazanan Jett olur; Sage duvarı boğazı erken kapatırsa kazanan Sage olur.
+**Dengeli:** Haven, Ascent ve Lotus'ta Jett açık görüş hattı bulursa kazanan Jett olur; Sage duvarı boğazı erken kapatırsa kazanan Sage olur.
 
 ## 3. Key Düellolar
 
@@ -88,7 +88,7 @@ Ult farkı: Jett ult'u ekonomik round silahıdır — ucuz ama yalnızca kendine
 
 **Ascent (Dengeli):** A Short Jett girişi, Sage B anchor klasik. Taraflarda ayrışır.
 
-**Icebox (Jett):** Uzun sightline ve dikey alan Jett'e yarar. Mid tamamen Jett'in, A Site içinde Sage duvarı değerli.
+**Icebox (Jett):** Uzun görüş hattı ve dikey alan Jett'e yarar. Mid tamamen Jett'in, A Site içinde Sage duvarı değerli.
 
 **Split (Sage):** A Main ve B Main boğazları Sage duvarı için ideal. Dar koridorda dash duvara gömülür.
 
@@ -116,4 +116,4 @@ Matchup iki kurala iner:
 - **Jett oynuyorsan:** Duvarı harcattır, duvara yakalanma.
 - **Sage oynuyorsan:** Duvarı Jett'in ikinci girişine sakla, ilk girişi yavaşlatmayla kes.
 
-Jett duvarı harcatırsa ikinci girişte Sage'in eli boş kalır. Sage duvarı saklarsa Jett ilk girişten sonra reposition yapamaz.
+Jett duvarı harcatırsa ikinci girişte Sage'in eli boş kalır. Sage duvarı saklarsa Jett ilk girişten sonra yer değiştirme yapamaz.

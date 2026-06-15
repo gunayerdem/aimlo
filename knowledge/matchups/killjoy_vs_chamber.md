@@ -22,7 +22,7 @@ Killjoy her round aynı gücüyle başlar — cihazları cooldown'dan döner. Ch
 
 Killjoy şu an çoğu haritada Chamber'ın önünde. Nedeni basit: Killjoy her round tutarlı, Chamber ekonomisi bozulunca yok olur.
 
-Chamber'ın öne geçtiği yer: uzun koridorlu haritalarda Op hold. Breeze, Ascent, Abyss — bu haritalarda Chamber Op'la sightline'ı kontrol eder, Killjoy büyük site tuzağı için zorlanır.
+Chamber'ın öne geçtiği yer: uzun koridorlu haritalarda Op hold. Breeze, Ascent, Abyss — bu haritalarda Chamber Op'la görüş hattı'ı kontrol eder, Killjoy büyük site tuzağı için zorlanır.
 
 Ama Killjoy'un avantajlı olduğu alan çok daha geniş: dar yapılar, üç siteli haritalar, eco round'lar. Eco'da Killjoy full util ile gelir, Chamber Op'suz gelir.
 
@@ -30,7 +30,7 @@ Seçimini haritaya göre yap. Chamber oynuyorsan Op ekonomisini taşımak zorund
 
 ## 3. Temel Durumlar
 
-**IF** Chamber Op ile uzak sightline'dan agresif açı tutuyor, Killjoy site içinde kurulmuş
+**IF** Chamber Op ile uzak görüş hattı'dan agresif açı tutuyor, Killjoy site içinde kurulmuş
 **MEANING** İki sentinel farklı fazda — Chamber siteye girmeden önce öldürüyor, Killjoy site içinde bekliyor
 **COUNTER** Smoke + flash ikilisiyle Chamber'ın Op açısını kapat. Açı kapanınca Chamber ya tuzağını bırakır ya kaçışıyla geri çekilir. Her iki durumda da Op shot harcanmamış ama pozisyon kaybedilmiş
 **WHY** Chamber Op shot'ı boşa giderse o round ekonomisi zayıflar. Killjoy cihazları aynı kaybı yemez — tuzağı yeniden konumlandır, bedava
@@ -110,7 +110,7 @@ Killjoy tuzağı hem bilgi hem hasar verir — aynı cihaz iki iş yapar. Chambe
 
 **Sunset:** Killjoy. Dar koridorlar tuzağı değerli kılar.
 
-**Breeze:** Chamber. Uzun sightline Op için ideal, büyük site tuzağı için zor.
+**Breeze:** Chamber. Uzun görüş hattı Op için ideal, büyük site tuzağı için zor.
 
 **Bind:** Killjoy. Op'suz harita, Chamber buraya uymaz.
 

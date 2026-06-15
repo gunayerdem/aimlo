@@ -1,7 +1,7 @@
 # AJAN: Breach
 
 ## 1. Rol Kimliği
-Breach duvarın içinden vuran initiator. Flash'ı da, stun'u da, mollysi de — hepsi duvarları deler geçer. Düşmanı görmen gerekmez; nerede durduğunu bilmen yeter. Ama tek başına hiçbir şey ifade etmezsin: takımın seni takip etmiyorsa attığın her şey boşa gider. Takımın arkandan giriyorsa turu sen açarsın.
+Breach duvarın ardına vuran initiator. Flash'ı da, stun'u da, molly'si de — hiçbiri duvarı yıkmaz ya da delik açmaz; etkileri katı yüzeyin öbür tarafına ulaşır. Sen duvarın bu tarafında kalırsın, kör/sarsma/hasar duvarın arkasındaki düşmana iner. Düşmanı görmen gerekmez; nerede durduğunu bilmen yeter. Ama tek başına hiçbir şey ifade etmezsin: takımın seni takip etmiyorsa attığın her şey boşa gider. Takımın arkandan giriyorsa turu sen açarsın.
 
 ## 2. Temel Sorumluluklar
 - Flash'ı duvarın içinden at — düşman seni görmeden kör olsun, takımın o boşluktan girsin.

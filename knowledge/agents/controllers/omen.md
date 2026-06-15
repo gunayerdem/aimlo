@@ -58,10 +58,10 @@ Sen tek başına iş çeviren bir smoke ajanısın. Görevin sadece duman atmak 
 **COUNTER** Smoke'u takım girişe hazır olduğu an at, saniyeler önce değil. Önce "giriyoruz" çağrısı, sonra duman. Duman süresi kısa — boşa yanması, asıl ihtiyaç anında elinin boş olması demek.
 **WHY** Smoke'un değeri ancak takım o görüş kesik pencereden geçerken vardır. Erken atılan duman, takım daha gelmeden söner; geç atılan, geçişi açmaz. Smoke takımın ayağına göre zamanlanır.
 
-**IF** ult'unu (haritaya göz attıran/karanlık) attıktan sonra olduğun yerde kalıp bekliyorsun
-**MEANING** Ult'un asıl gücünü — düşmanı kör edip ya da konum gizleyip baskı açmasını — pasif kullanıyorsun.
-**COUNTER** Ult'la haritaya bakarken ya da körlüğü açarken o boşluğu agresif kullan: takımla aynı anda bas, ya da düşman görüşü kesikken yer değiştir. Ult'u tek başına bilgi/kaçış için değil, hemen ardından gelen bir hamleyle çiftle.
-**WHY** Ult düşmana anlık bir körlük/kafa karışıklığı penceresi açar. O pencere kısa — açtıktan sonra beklersen pencere kapanır ve avantajı çöpe atarsın. Ult bir kurulum, bitiş değil.
+**IF** ult'la haritanın öbür ucuna ışınlandıktan sonra olduğun yerde kalıp bekliyorsun
+**MEANING** Ult'un asıl gücünü — harita çapında anlık konum değiştirip beklenmedik açıdan baskı açmasını — pasif kullanıyorsun.
+**COUNTER** Işınlanma bittiği an o sürpriz konumu agresif kullan: takımla aynı anda bas, ya da savunmada bir bölgeden ötekine ışınlanıp düşmanın olmadığını sandığı yerden gel. Işınlanırken düşmanın mini haritası kapanır — o körlüğü değil, mini harita köründen kazandığın o saniyeyi baskıya çevir. Şeklini görüp seni vurabilirler; ışınlanma bitince hemen oyna ya da gerçekten gitmeyeceksen ışını iptal et, sahte ses bırakıp yerinde kal.
+**WHY** Ult seni haritanın istediğin yerine atar ve o sırada düşmanın mini haritasını kapatır — ama düşmanı kör etmez, kör eden senin flash'ın. Işınlanma sırasında gölge şeklin görünür, düşman onu vurursa eski yerine dönersin. Geldiğin anda oynamazsan sürpriz biter; ult bir kurulum, bitiş değil.
 
 ## 5. Harita Etkileşimleri
 - **Ascent**: Güçlü seçim. Kısa teleportla catwalk'a ya da market'e geç, mid kontrolünü tehdit altında tut. B main ve A main kapı girişlerinde yüksek one-way'ler iş görür. Mid'i alırsan iki bölgeye birden baskı kurarsın; teleportu mid kontrolünü genişletmek için kullan, sırf kaçış için değil. Savunmada mid'i dumanla geç kapat ki rakip orta turu bilgi alamadan kurusun.

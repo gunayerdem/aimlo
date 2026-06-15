@@ -7,7 +7,7 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
 ## Sage
 
 ### Yetenek Analizi
-- **Duvar (C)** - 400 kredi. Çok parçalı katı buz duvarı çekersin. Her parça tam yükselince 400 HP olur. Atmadan önce yönünü çevirebilirsin. Hareketi, mermileri ve yetenekleri keser. Düşman da sen de kırabilirsin.
+- **Duvar (C)** - 400 kredi. Çok parçalı katı buz duvarı çekersin. Her parça önce zayıf çıkar, birkaç saniye sonra sertleşip daha dayanıklı olur (kesin canı patch'e göre değişir). Atmadan önce yönünü çevirebilirsin. Hareketi, mermileri ve yetenekleri keser. Düşman da sen de kırabilirsin.
 - **Yavaşlatma topu (Q)** - 200 kredi, 2 şarj. Yere düşünce buz alanı açan top. Üstünden yürüyen herkesi yavaşlatır. Düşman üstünde yürürken gıcırtı çıkar (ses ipucu verir). Yavaşlama ciddidir, hareket hızını yaklaşık yarıya indirir.
 - **Heal (E)** - Bedava, dolan kaynak. Bir takım arkadaşını ya da kendini iyileştiren top. 60 HP geri verir. Canı tam doluysa fazlasını basmaz. Takım arkadaşına nişan al ve tut, ya da kendini iyileştirmek için tuşa bas.
 - **Ult (X)** - 8 ult puanı. Ölü bir takım arkadaşını tam canla geri getirir. Kanal sırasında Sage kısa süre yerinde kilitlenir, geri gelen oyuncu da bir an savunmasız kalır. Oyunda hasar vermeyen en güçlü ult budur.

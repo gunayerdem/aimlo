@@ -90,7 +90,7 @@ Eco taraftaysan util'inin olmadığını kabul et. Açı disiplini + aim ile kaz
 
 **Split (eco lehine):** Dar koridor — Spectre burada Vandal'ı yer. Full buy util'i dar koridorda sıkışır.
 
-**Breeze (full buy lehine):** Uzun sightline Sheriff ve Spectre'yi menzil dışında bırakır. Eco, Breeze'de savunmada bile zorlanır.
+**Breeze (full buy lehine):** Uzun görüş hattı Sheriff ve Spectre'yi menzil dışında bırakır. Eco, Breeze'de savunmada bile zorlanır.
 
 **Icebox (full buy lehine):** Uzun hat + dikey açılar full buy için ideal. Eco ancak yakın açı savunmasıyla değer üretir.
 
