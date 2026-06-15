@@ -116,7 +116,7 @@ WHY oraya koyduysan sadece tıklarsın. Tıkla-sonra-ayarla değil, sadece tıkl
 IF rotate ederken veya koşarken crosshair'i yere bırakıyorsan
 MEANING lurker seni o anda yakalarsa, crosshair baş yüksekliğine çıkana kadar zaten ölmüş olursun
 COUNTER rotasyonda da crosshair'i baş yüksekliğinde tut. Her geçtiğin açıyı süzgeçten geçir
-WHY crosshair'i bir kez gevşettiğin round, lurker'ın seni cezalandırdığı round olur
+WHY crosshair'i bir kez gevşettiğin round, lurker'ın seni o gevşek açıdan bedavaya vurduğu round olur
 
 ### İki Açı Aynı Anda
 

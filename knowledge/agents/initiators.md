@@ -150,7 +150,7 @@ Initiator bilgi toplar ve düşmanları yerinden oynatıp site girişini açar. 
 - **Stun + molly**: Koridor boyunca stun ile sersemlet, sonra geri çekildikleri köşeye molly at. Düşmanın gidecek yeri kalmaz.
 - **Ult + takım execute**: Site'a ult at, düşman havadayken tüm takım bassın. Sersemletme takıma diküm ve post-plant kurma zamanı verir.
 - **Breach + Sova**: Sova recon ile pozisyonu ele verir, Breach tam o pozisyona molly atar. Ya garanti hasar ya yer değiştirme.
-- **Breach + Raze**: Breach flash atar, Raze düşman körken satchel'la girer. En baskıcı entry kombolarından biri.
+- **Breach + Raze**: Breach flash atar, Raze düşman körken sıçrama girer. En baskıcı entry kombolarından biri.
 
 ### Pro Oyuncu Stilleri
 - Breach, Fracture ve Split'te istikrarlı pro oyunu görür. Takımlar, duvar util'inin en yüksek değeri verdiği haritalarda onu birincil initiator yapar. Flash'ları koordineli atıldığında oyundaki en güvenilir entry aracı sayılır.
@@ -163,7 +163,7 @@ Initiator bilgi toplar ve düşmanları yerinden oynatıp site girişini açar. 
 - **flash (Q)** - 250 kredi, 2 şarj. Mouse hareketiyle bükülen, kontrol edilebilir şahin flash. Tekrar bastığında ya da menzilin sonunda patlar. Şahin birini kör ederse Skye "Blinded!" sesi duyar — bu ses doğrulaması başlı başına bilgi.
 - **recon (C)** - 250 kredi. Keşif yapan ve dar alanda düşmanı sersemletebilen pilotlu Tazmanya kaplanı. 100 HP. Tek yetenekte hem keşif hem sersemletme.
 - **heal (E)** - Bedava, görüş hattındaki tüm takım arkadaşlarını iyileştirmek için kanalize edilir. Skye kendini iyileştiremez. Toplam 100 HP'lik iyileştirme havuzu. Kanal kesilip tekrar başlatılabilir. Sage ult'u dışında oyundaki tek AoE heal.
-- **ult (X)** - 7 ult puanı. En yakın 3 düşmanı takip eden 3 takipçi yollar. Takipçi hedefine ulaşınca düşmanı near-sight yapar. Her takipçi 150 HP, vurulur. Post-plant bilgisi, retake bilgisi ya da execute keşfi için kullan.
+- **ult (X)** - 7 ult puanı. En yakın 3 düşmanı takip eden 3 takipçi yollar. Takipçi hedefine ulaşınca düşmanı yarı-kör yapar (görüşünü yakına daraltır, uzağı göremez). Her takipçi 150 HP, vurulur. Post-plant bilgisi, retake bilgisi ya da execute keşfi için kullan.
 
 ### Bilgi Toplama
 - **Flash doğrulaması**: Şahin birini kör edince Skye "Blinded!" duyar. Bu bedava bilgi — gözünle görmesen bile o yönde düşman olduğunu bilirsin.
@@ -229,7 +229,7 @@ Initiator bilgi toplar ve düşmanları yerinden oynatıp site girişini açar. 
 ### Kombo Oyunları
 - **Skye flash + Jett dash**: Site'a flash at, Jett düşman körken dash ile girsin. Flash doğrulaması Jett'e tam nereye nişan alacağını söyler.
 - **Recon kaplanı + takım push**: Kaplan keşif yapar, düşmanı sersemletir, takım sersemleyen adama swing atar.
-- **Ult + takım execute**: Execute öncesi ult aç. Düşmanı ya ateş etmeye (pozisyon ele verir) ya da near-sight olmaya zorlar (bedava kill).
+- **Ult + takım execute**: Execute öncesi ult aç. Düşmanı ya ateş etmeye (pozisyon ele verir) ya da yarı-kör olmaya zorlar (bedava kill).
 - **Skye + Breach**: Maksimum flash çıktılı çift initiator. Skye'ın bükmeli flash'ı + Breach'in duvar flash'ı art arda gelince savunma için oynanamaz hale gelir.
 
 ### Pro Oyuncu Stilleri
@@ -243,11 +243,11 @@ Initiator bilgi toplar ve düşmanları yerinden oynatıp site girişini açar. 
 ### Yetenek Analizi
 - **molly (C)** - 200 kredi. Yere yapışan, çarpan fırlatılabilir patlayıcı. Her darbe artan hasar verir (25/50/75/100). Merkezde kalan düşman 4 darbe boyunca tam hasar yer (toplam 250). Alan inkarı ve köşe temizleme için kullan.
 - **flash (Q)** - 250 kredi, 2 şarj. Standart flash bombası. Sağ tık kısa, hızlı popflash atar. Sol tık uzun, yüksek yaylı flash atar. Flash kendiliğinden patlar, elle patlatmak gerekmez.
-- **suppress bıçağı (E)** - Bedava, yenilenir. Yüzeye yapışan, geniş yarıçapta herkesi baskılayan fırlatılabilir bıçak. Baskılanan düşman yetenek kullanamaz. Bıçak kısa gecikmeyle çarpar ve baskıladığı düşmanları minimap'te ele verir.
-- **ult (X)** - 8 ult puanı. KAY/O aşırı yüklenir, combat stim kazanır ve çevresinde geniş yarıçapta düşmanları sürekli baskılar. Ult sırasında düşürülürse yere yığılır, takım arkadaşları kaldırabilir. Baskılama aurası oyundaki en yıkıcı ult.
+- **yetenek-kapatma bıçağı (E)** - Bedava, yenilenir. Yüzeye yapışan, geniş yarıçapta herkesi baskılayan fırlatılabilir bıçak. Baskılanan düşman yetenek kullanamaz. Bıçak kısa gecikmeyle çarpar ve baskıladığı düşmanları minimap'te ele verir.
+- **ult (X)** - 8 ult puanı. KAY/O aşırı yüklenir, savaş hızlanması (ateş/şarjör hızı artışı) kazanır ve çevresinde geniş yarıçapta düşmanların yeteneklerini sürekli kapatır. Ult sırasında düşürülürse yere yığılır, takım arkadaşları kaldırabilir. Baskılama aurası oyundaki en yıkıcı ult.
 
 ### Bilgi Toplama
-- **Bilgi olarak suppress bıçağı**: Bıçak birini baskılayınca ekranda sayı belirir ("X ENEMIES SUPPRESSED"). Alandaki düşman sayısını ele verir.
+- **Bilgi olarak yetenek-kapatma bıçağı**: Bıçak birini baskılayınca ekranda sayı belirir ("X ENEMIES SUPPRESSED"). Alandaki düşman sayısını ele verir.
 - **Ses ipuçları**: Bıçak birini baskılayınca belirgin ses çıkar. Düşman yığılmasını anlamak için sayıyı dinle.
 - **Köşe temizleme için molly**: Düşman molly'den kaçarsa ayak sesi pozisyonunu ele verir.
 
@@ -259,23 +259,23 @@ Initiator bilgi toplar ve düşmanları yerinden oynatıp site girişini açar. 
 
 ### Ne Zaman Seçilir
 - Düşman yeteneğe çok bağımlı (Viper duvarı, Killjoy kurulumu, Raze util'i, Chamber kaçışı).
-- Harita molly ve suppress bıçağının geniş alan kapladığı dar boğazlara sahip.
+- Harita molly ve yetenek-kapatma bıçağının geniş alan kapladığı dar boğazlara sahip.
 - Takımın aynı anda frag da çıkarabilen bir initiator'a ihtiyacı var (KAY/O duellist hibridi gibi oynar).
 - Düşmanın util avantajını söndürmek istiyorsun.
 
 ### Harita Güçleri
-- **Ascent**: S-tier. Mid kapılarından suppress bıçağı tüm site'ı baskılar. A main duvarından flash. A Dice ve B Logs'a molly.
-- **Split**: A-tier. A Ramps boyunca suppress bıçağı Heaven'ı baskılar. B main boyunca flash.
-- **Haven**: A-tier. Garage'dan suppress bıçağı C site'ı baskılar. C Long'a molly.
-- **Bind**: A-tier. B duvarlarından suppress bıçağı. Dar koridor için molly.
-- **Sunset**: A-tier. Suppress bıçağı ile Mid kontrolü. Dar açılardan flash.
-- **Fracture**: A-tier. B main'den site'a suppress bıçağı. Arcade'a molly.
-- **Lotus**: B-tier. Açık alanlar suppress bıçağının baskılama yoğunluğunu düşürür.
-- **Breeze**: B-tier. Büyük harita ama A Hall ve B Tunnel'da suppress bıçağı değerlidir.
+- **Ascent**: S-tier. Mid kapılarından yetenek-kapatma bıçağı tüm site'ı baskılar. A main duvarından flash. A Dice ve B Logs'a molly.
+- **Split**: A-tier. A Ramps boyunca yetenek-kapatma bıçağı Heaven'ı baskılar. B main boyunca flash.
+- **Haven**: A-tier. Garage'dan yetenek-kapatma bıçağı C site'ı baskılar. C Long'a molly.
+- **Bind**: A-tier. B duvarlarından yetenek-kapatma bıçağı. Dar koridor için molly.
+- **Sunset**: A-tier. Yetenek-kapatma bıçağı ile Mid kontrolü. Dar açılardan flash.
+- **Fracture**: A-tier. B main'den site'a yetenek-kapatma bıçağı. Arcade'a molly.
+- **Lotus**: B-tier. Açık alanlar yetenek-kapatma bıçağının baskılama yoğunluğunu düşürür.
+- **Breeze**: B-tier. Büyük harita ama A Hall ve B Tunnel'da yetenek-kapatma bıçağı değerlidir.
 
 ### Sık Yapılan Hatalar (IF/MEANING/COUNTER/WHY)
 
-1. **IF** Suppress bıçağını yanlış zamanda atıyorsan
+1. **IF** Yetenek-kapatma bıçağını yanlış zamanda atıyorsan
    **MEANING** Execute'tan ÖNCE at, sonra değil; baskılama süresi takımın giriş penceresini kaplamalı
    **COUNTER** Execute zamanlamasına göre at — baskılama tam giriş anını kapatmalı
    **WHY** Yanlış zamanlı baskılama, düşmanın giriş sırasında yeteneklerini kullanmasına izin verir
@@ -306,9 +306,9 @@ Initiator bilgi toplar ve düşmanları yerinden oynatıp site girişini açar. 
    **WHY** Takım flash'ı kör takım arkadaşı, yani trade edilemeyen ölüm demek
 
 ### Kombo Oyunları
-- **Suppress bıçağı + takım execute**: Site'ı baskıla, tüm savunma util'ini söndür (Killjoy turret, Cypher tuzakları, Sage duvarı), sonra push at.
+- **Yetenek-kapatma bıçağı + takım execute**: Site'ı baskıla, tüm savunma util'ini söndür (Killjoy turret, Cypher tuzakları, Sage duvarı), sonra push at.
 - **Ult girişi**: Ult aç ve site'a koş. Baskılama aurası tüm düşman yeteneğini kapatır. Düşman util'siz kalırken takımın takip eder.
-- **KAY/O + Raze**: KAY/O flash atar, Raze satchel'la girer. Suppress bıçağı düşmanın kaçış yeteneğini söker (Jett dash, Chamber TP).
+- **KAY/O + Raze**: KAY/O flash atar, Raze sıçrama girer. Yetenek-kapatma bıçağı düşmanın kaçış yeteneğini söker (Jett dash, Chamber TP).
 - **Molly + Breach molly**: Bir köşeye iki taraftan hasar yığ. Biri üstten vurur, diğeri duvardan.
 
 ### Pro Oyuncu Stilleri
@@ -320,14 +320,14 @@ Initiator bilgi toplar ve düşmanları yerinden oynatıp site girişini açar. 
 ## Fade
 
 ### Yetenek Analizi
-- **recon yaratığı (C)** - 250 kredi, 2 şarj. İleri giden, düşmana ya da Fade'in izlerine kilitlenen yaratık. Düşmana ulaşırsa onu near-sight yapar. Bakış yönüyle yönlendirilir. 100 HP.
+- **recon yaratığı (C)** - 250 kredi, 2 şarj. İleri giden, düşmana ya da Fade'in izlerine kilitlenen yaratık. Düşmana ulaşırsa onu yarı-kör yapar (görüşünü yakına daraltır). Bakış yönüyle yönlendirilir. 100 HP.
 - **stun küresi (Q)** - 200 kredi, 1 şarj. Alandaki düşmanı bağlayan ve canını eriten fırlatılabilir küre. Bağlı düşman, bağı kırmadan (zaman alır) yarıçaptan çıkamaz. Erime canı geçici olarak düşürür.
 - **recon (E)** - Bedava, yenilenir. Görüş hattındaki düşmanı ele veren ve iz bırakan fırlatılabilir göz. İz kısa süre kalır ve recon yaratıklarının kilitlenmesini sağlar. Vurulup kırılır (1 HP). Fade'in birincil bilgi yeteneği.
 - **ult (X)** - 7 ult puanı. Koni şeklinde bir kâbus enerjisi dalgası gönderir. Vurulan düşman sağırlaşır, canı erir ve iz işaretlenir. İz, recon yaratıklarının kilitlenmesini sağlar. Sağırlaşma tüm sesi keser — son derece yön kaybettirir.
 
 ### Bilgi Toplama
 - **Birincil tarayıcı recon**: Sova'nın recon'u gibi çalışır ama iz de bırakır. Recon'u geniş alanı tarayacak şekilde yükseğe at. Düşman hem ele verilir HEM iz işaretlenir — bu da kalıcı takip sağlar.
-- **Doğrudan keşif için recon yaratığı**: Düşman kontrolü için alana yaratık gönder. Düşmana ya da izlere otomatik kilitlenir, pozisyonu doğrular. Skye'ın kaplanı gibi ama sersemletme yerine near-sight yapar.
+- **Doğrudan keşif için recon yaratığı**: Düşman kontrolü için alana yaratık gönder. Düşmana ya da izlere otomatik kilitlenir, pozisyonu doğrular. Skye'ın kaplanı gibi ama sersemletme yerine yarı-kör yapar.
 - **İz takibi**: Recon ya da ult düşmanı iz işaretlediğinde recon yaratıkları o izi otomatik arar. Bu da sürekli bilgi akıtan bir zincir kurar.
 - **Pozisyon doğrulaması için stun küresi**: Düşman küreyle bağlanırsa yerini tam bilirsin. Bağ animasyonu duvar arkasından bile görünür.
 
@@ -369,10 +369,10 @@ Initiator bilgi toplar ve düşmanları yerinden oynatıp site girişini açar. 
    **COUNTER** Orta mesafede at — geniş kapsama alır
    **WHY** Uzaktan ult dar koni demek, az düşman vurur
 
-5. **IF** Recon yaratığının near-sight'ını takip etmiyorsan
-   **MEANING** Yaratık düşmanı near-sight yapınca takımın kısa bir avantaj penceresi olur; hemen push at
-   **COUNTER** Yaratık near-sight yapınca anında push at ya da takıma bildir
-   **WHY** Takip edilmeyen near-sight penceresi kapanır, fırsatı kaçırırsın
+5. **IF** Recon yaratığının yarı-körünü takip etmiyorsan
+   **MEANING** Yaratık düşmanı yarı-kör yapınca takımın kısa bir avantaj penceresi olur; hemen push at
+   **COUNTER** Yaratık yarı-kör yapınca anında push at ya da takıma bildir
+   **WHY** Takip edilmeyen yarı-kör penceresi kapanır, fırsatı kaçırırsın
 
 ### Kombo Oyunları
 - **Recon + recon yaratığı zinciri**: Recon düşmanı iz işaretler, yaratıklar izi takip eder. Fade'in temel kombosu; her zaman bu sırayla kullan.
@@ -487,7 +487,7 @@ Initiator bilgi toplar ve düşmanları yerinden oynatıp site girişini açar. 
 
 ---
 
-## Rank Modülasyonu - Initiator Koçluğu
+## Rank'e Göre Initiator Koçluğu
 
 ### Iron-Silver
 - **Öncelik**: Temel bilgi toplama. Round başında recon/recon/drone at ve takıma söyle: "Düşman şurada."
@@ -532,7 +532,7 @@ Initiator bilgi toplar ve düşmanları yerinden oynatıp site girişini açar. 
 ### Initiator Ekonomisi
 - Her zaman tam util al. Util'siz initiator, kaçışı olmayan kötü bir duellist'tir.
 - Eco round'da sadece yeteneklerle Classic almayı düşün. Util'in silahsız bile round kazandırabilir.
-- Yenilenen yeteneklere öncelik ver (Sova recon, Fade recon, KAY/O suppress bıçağı) — zaman içinde bedava değer verirler.
+- Yenilenen yeteneklere öncelik ver (Sova recon, Fade recon, KAY/O yetenek-kapatma bıçağı) — zaman içinde bedava değer verirler.
 
 ### Çift Initiator Meta
 - Çift initiator (Sova + Skye, Fade + KAY/O) pro oyunda yaygındır. İlk initiator bilgi toplar, ikincisi giriş için flash ve bozma verir.

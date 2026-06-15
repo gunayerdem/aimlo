@@ -37,7 +37,7 @@ Saldırı mid'i alır, iki site'a da rotate baskısı kurar. Savunma mid'i biler
 
 **IF** Savunma mid'e sentinel kurdu — tel + kamera
 **MEANING** Mid girişindeki tel hattı, saldırının mid kontrolünü savunma için bilgiye çevirir — tel patlayınca savunma haberdar olur
-**COUNTER** Initiator util'iyle teli sök: shock dart teli patlatır, KAY/O bıçağı kamerayı reveal eder. Hat kırılınca mid duellosu açılır
+**COUNTER** Initiator util'iyle teli sök: hasar oku teli patlatır, KAY/O bıçağı kamerayı reveal eder. Hat kırılınca mid duellosu açılır
 **WHY** Tel kurmak savunma için ucuz, değeri yüksek. Sen teli sökmek için util harcarsan retake'te o util'i bulamazsın — ekonomik baskı sana biner
 
 ---

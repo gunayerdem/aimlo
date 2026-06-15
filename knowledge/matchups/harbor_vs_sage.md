@@ -41,7 +41,7 @@ Harbor koridoru duvarla kapatır ve push açar. Sage choke'u duvarıyla kilitler
 **IF** Sage yavaşlatma alanı Harbor execute girişindeki choke'a düştü
 **MEANING** Harbor takımı yavaşlatmaya basarsa giriş hızı düşer, sen crossfire'a hazır beklersin
 **COUNTER** Harbor duvarını yavaşlatma alanının üstüne at — Sage'in görüşünü keser, crossfire hedefini göremez. Cove'u yavaşlatma alanının iç çeperine koy, takım yavaştan çıkarken cover alsın.
-**WHY** Yavaşlatma hem ses hem hareket kısıtı verir: ses Sage'e bilgi taşır, hareket kısıtı Harbor takımını cezalandırır. Harbor util'i sesi kesmez ama görüşü keser — Sage yavaşlatmanın içindeki oyuncuyu göremezse avantajı biter.
+**WHY** Yavaşlatma hem ses hem hareket kısıtı verir: ses Sage'e bilgi taşır, hareket kısıtı Harbor takımını yavaşta yakalar — yavaş giren oyuncuyu Sage bedavaya vurur. Harbor util'i sesi kesmez ama görüşü keser — Sage yavaşlatmanın içindeki oyuncuyu göremezse avantajı biter.
 
 ---
 

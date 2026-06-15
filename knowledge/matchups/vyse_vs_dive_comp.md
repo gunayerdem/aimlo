@@ -3,16 +3,16 @@
 > **YAMA NOTU**: Vyse yeni bir sentinel. Yetenek değerleri yamadan yamaya değişir — buradaki kalıpları her yamadan sonra test et, yama notlarıyla karşılaştır.
 
 ## Bu Eşleşme Ne Hakkında
-Dive kompozisyonlar — Jett, Raze veya Neon yanında Breach ya da Gekko gibi destekle gelen yapılar — site'ye hızlı ve sert girer. Bilgi toplamak yerine hız üzerine oynarlar. Vyse'in tuzakları tam bunu cezalandırır: Jett dash atarken tuzağa basar, Raze satchelle inerken silahı bozulur, duvar destekçi oyuncuyu keser ve dalıcı içeride yalnız kalır. Dive seni tepki vermeden ezmek ister — ama Vyse'le tuzak zaten senin yerine tepki verir.
+Dive kompozisyonlar — Jett, Raze veya Neon yanında Breach ya da Gekko gibi destekle gelen yapılar — site'ye hızlı ve sert girer. Bilgi toplamak yerine hız üzerine oynarlar. Vyse'in tuzakları tam bunu cezalandırır: Jett dash atarken tuzağa basar, Raze sıçramale inerken silahı bozulur, duvar destekçi oyuncuyu keser ve dalıcı içeride yalnız kalır. Dive seni tepki vermeden ezmek ister — ama Vyse'le tuzak zaten senin yerine tepki verir.
 
 ## Cezalandırma Kalıpları
 
 ### Vyse Dive'ı Cezalandırırken
 
-**IF**: Jett dash atarken, Raze satchelle atlarken veya Neon kayarken tuzağa basıyor
+**IF**: Jett dash atarken, Raze sıçramale atlarken veya Neon kayarken tuzağa basıyor
 **MEANING**: Hareket yeteneklerinin gittiği yer sabittir — o yol tuzaklıysa kaçış yok
 **COUNTER**: Dive girmeden önce bir molly veya bot gönder, tuzağı temizle, sonra atla
-**WHY**: Dash ile satchel yönünü havada değiştiremezsin — tuzak o noktadaysa yakalanırsın
+**WHY**: Dash ile sıçrama yönünü havada değiştiremezsin — tuzak o noktadaysa yakalanırsın
 
 **IF**: Silah bozma alanı dalıcının iniş noktasında aktif oluyor
 **MEANING**: Dalıcı içeri girdiği anda silahı çalışmıyor — en savunmasız anında etkisiz kalıyor
@@ -45,7 +45,7 @@ Dive kompozisyonlar — Jett, Raze veya Neon yanında Breach ya da Gekko gibi de
 ## AIMLO Ne Demeli
 
 ### Oyuncu Vyse oynuyorsa
-**Dive tarafından eziliyorsa**: "Tuzakların onların iniş noktasında değil. Jett nereye dash atıyor, Raze nereye satchel yapıyor — tuzağı oraya koy. Koridorun ortasına koyduğun tuzak hareket yeteneğini yakalamaz."
+**Dive tarafından eziliyorsa**: "Tuzakların onların iniş noktasında değil. Jett nereye dash atıyor, Raze nereye sıçrama yapıyor — tuzağı oraya koy. Koridorun ortasına koyduğun tuzak hareket yeteneğini yakalamaz."
 
 **Dalıcıları yakalıyorsa**: "İniş noktalarını doğru okuyorsun. Site değişince iniş noktaları da değişir — tuzaklarını o yeni noktaya taşı."
 

@@ -69,7 +69,7 @@ WHY: Reyna'nın tek öncü avantajı sürpriz + kör. Düşman çıkışını ez
 - **Genel kural:** Reyna kısa ve dar hatlarda parlar (kör küresi vurulmadan iş görür, düello hızlı biter, heal döngüsü çabuk döner); uzun ve açık hatlarda zayıflar (küre uzaktan vurulur, tutuşlar küresiz çıkışı cezalandırır). Haritaya değil, oynayacağın açıya bak: aynı haritada bile dar bölgeyi seçersen Reyna çalışır. Açık alanda zorlanan bir elde Reyna'yı bırakıp dar hattı tutmak, kötü açıdan düello kapmaya çalışmaktan üstündür.
 
 ## 6. Eşleşme Notları
-- **Zorlandığın ajanlar:** KAY/O (bastırma yeteneği heal ve kaçışını tamamen kapatır, yeteneksiz kalırsın), Fade (recon'uyla seni ve kaçış izini açığa çıkarır, bot'u sen kaçarken peşine takılır), Chamber (keskin tabancasıyla kör-çıkış zamanlamanı cezalandırır).
+- **Zorlandığın ajanlar:** KAY/O (bastırma yeteneği heal ve kaçışını tamamen kapatır, yeteneksiz kalırsın), Fade (keşif yeteneğiyle seni ve kaçış izini açığa çıkarır, yaratığı sen kaçarken peşine takılır), Chamber (keskin tabancasıyla kör-çıkış zamanlamanı okur, sen küre patlatıp çıkarken o açıdan tek atışta keser).
 - **Baskıladığın ajanlar:** Düz düelloyu kaybeden yavaş, destek yeteneklerine yaslanan ajanlar. Viper'ı doğrudan düelloda ezersin, molly'leri boyunca heal ile dayanırsın. Sage'e karşı da verimlisin çünkü onun iyileşme döngüsünü bozarsın.
 - **Uyum:** KAY/O'ya karşı bıçağı bitene kadar bekle, sonra gir. Fade'e karşı bot karşı açıya koşmasın diye kaçışı takım arkadaşına doğru bas, kaçmak için ters yöne değil. Viper duvarı, Sage kalkanı gibi alan kapatan yetenekler açıkken çıkma — yetenek biter bitmez gir.
 

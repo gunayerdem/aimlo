@@ -25,7 +25,7 @@ Harbor duvarı + smoke'u + ikinci duvarı + ult'uyla sahayı örter, takımını
 - KAY/O bıçağı attı, flash'ı attı, ikisi de yerde patladı — duvarı da smoke'u da serbestçe kurarsın
 - Spike kuruldu — smoke + ikinci duvar defüz hattını örter, bıçak menzil dışındaysa suppress çalışmaz
 - İki ayrı hatta duvar açıyorsun — KAY/O util'i tek hatta kalır, öbür hat açık kalır
-- Ult'unu attın — concuss KAY/O'nun atışına denk gelirse suppress'i iptal eder
+- Ult'unu attın — sersemletme KAY/O'nun atışına denk gelirse suppress'i iptal eder
 
 **Dengeli haritalar:** Ascent ve Sunset'te kim bıçağını ve flash'ını yere patlattıktan sonra cast ederse o kazanır. Bıçak yere indi, flash patladı — ikisi de yerde, hemen cast et.
 
@@ -74,9 +74,9 @@ Harbor duvarı + smoke'u + ikinci duvarı + ult'uyla sahayı örter, takımını
 ---
 
 **IF** Ult'unu KAY/O'nun üstüne attın
-**MEANING** Concuss KAY/O'nun nişanını bozar; suppress atışının ortasında concuss gelirse atış iptal olur
+**MEANING** sersemletme KAY/O'nun nişanını bozar; suppress atışının ortasında sersemletme gelirse atış iptal olur
 **COUNTER** KAY/O'ysan ult sesini duyar duymaz engelin arkasına geç, bölgenin dışına çık. Bölgenin içinde suppress atma.
-**WHY** Ult concuss + sersemletme verir. KAY/O'nun atışı bu etkiyle kesilir. O round KAY/O util'i eksik, sen açık hatta duvar + smoke kurarsın.
+**WHY** Ult sersemletme + sersemletme verir. KAY/O'nun atışı bu etkiyle kesilir. O round KAY/O util'i eksik, sen açık hatta duvar + smoke kurarsın.
 
 ## 4. Utility Karşılaşması
 
@@ -116,7 +116,7 @@ Ult karşılaşması: KAY/O ult'u Harbor util'ini siler, Harbor ult'u KAY/O atı
 
 **3 — Frag smoke'a girdi:** Frag smoke'un içine düştü, takım hasar aldı → round KAY/O'ya. Smoke frag rotasının dışındaysa → round Harbor'a.
 
-**4 — KAY/O ult'a girdi:** KAY/O concuss yedi, util'i bozuldu → round Harbor'a. KAY/O engelin arkasına geçip bölgeden çıktıysa → round KAY/O'ya.
+**4 — KAY/O ult'a girdi:** KAY/O sersemletme yedi, util'i bozuldu → round Harbor'a. KAY/O engelin arkasına geçip bölgeden çıktıysa → round KAY/O'ya.
 
 ## 7. Koç Notu
 

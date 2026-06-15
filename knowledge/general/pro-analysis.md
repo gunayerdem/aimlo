@@ -42,7 +42,7 @@ WHY tek initiator hem bilgiyi hem desteği aynı anda veremez; birini seçmek zo
 
 IF bu tarza karşı oynuyorsan
 MEANING ilk tarama ve ses ipucu gelmeden commit etmezler, bilgi tamamlanınca execute ederler
-COUNTER ilk tarama atılmadan önce push yap — bilgi fazı başlar başlamaz site'a ya da mid'e baskı uygula, düşmanı hazır değilken yakala
+COUNTER ilk tarama atılmadan önce push at — bilgi fazı başlar başlamaz site'a ya da mid'e baskı uygula, düşmanı hazır değilken yakala
 WHY bu takımların gücü bilgi toplama ve mid-round adaptasyon; bilgi fazına girmelerine izin vermezsen o gücü sıfırlarsın
 
 **Bu tarzın özellikleri:**
@@ -114,7 +114,7 @@ WHY ana yıldızın 1v1 clutch kazanma oranı çok yüksek; onu izole tutarsan t
 
 IF bu stile karşı oynuyorsan
 MEANING geniş swing atıp önceden nişanlıyor, jiggle yapmaz, ham reaksiyon hızına güvenir
-COUNTER agresyonunu bait et — düşman peek attığında trade pozisyonunda dur, ego peek'lerini cezalandır
+COUNTER agresyonunu bait et — düşman peek attığında trade pozisyonunda dur, ego peek attığı an onu oradan vur
 WHY bu tip oyuncu takım pozisyonunu boşlayıp tek başına peek atar; o açığa utility at ve hemen trade'e gir
 
 **Özellikler:**
@@ -191,7 +191,7 @@ WHY stack hem sayı avantajını hem sürprizi yok eder
 IF yavaş default oynayan takıma karşı oynuyorsan
 MEANING ilk tarama ya da bilgi atışı gelmeden commit etmezler
 COUNTER ilk tarama atılmadan önce agresif peek at — bilgi fazına girmeden uyguladığın baskı onları hazırsız yakalar
-WHY ilk bilgi atışı gelmeden push yaparsan düşmanın ritmi kırılır
+WHY ilk bilgi atışı gelmeden push atarsan düşmanın ritmi kırılır
 
 IF Op'lu takıma karşı oynuyorsan
 MEANING Op açısını dry peek etmek intihar

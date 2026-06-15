@@ -71,14 +71,14 @@ Jett açıyı tutar, Omen o açıyı smoke ile kapatır. Omen arkadan gelir, Jet
 
 ---
 
-**IF** Jett updraft ile Omen'ın smoke hattının üstünden peek attı
-**MEANING** Smoke yatay hattı keser ama yukarıyı kapatmaz. Updraft Jett'e smoke üstü bir açı verir.
-**COUNTER** Smoke'u atarken updraft yüksekliğini hesaba kat. Yüksek plat veya rampa varsa smoke'u biraz daha yükseğe ve geriye koy.
-**WHY** Updraft dikey harekettir. Smoke yerleşimini sadece öne değil, yukarıya da göre ayarlamak zorundasın.
+**IF** Jett yukarı zıplama ile Omen'ın smoke hattının üstünden peek attı
+**MEANING** Smoke yatay hattı keser ama yukarıyı kapatmaz. yukarı zıplama Jett'e smoke üstü bir açı verir.
+**COUNTER** Smoke'u atarken yukarı zıplama yüksekliğini hesaba kat. Yüksek plat veya rampa varsa smoke'u biraz daha yükseğe ve geriye koy.
+**WHY** yukarı zıplama dikey harekettir. Smoke yerleşimini sadece öne değil, yukarıya da göre ayarlamak zorundasın.
 
 ## 4. Utility Karşılaştırması
 
-Jett: dash (anlık kaçış/saldırı), updraft (yüksek açı), 2 smoke (kısa süreli, sadece kendine), ult (sessiz kill).
+Jett: dash (anlık kaçış/saldırı), yukarı zıplama (yüksek açı), 2 smoke (kısa süreli, sadece kendine), ult (sessiz kill).
 
 Omen: 2 smoke (takım için, uzun süreli), flash (duvardan geçen kör), teleport (flank/kaçış), ult (harita çapında ışınlanma).
 

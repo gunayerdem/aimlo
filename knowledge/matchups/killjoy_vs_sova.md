@@ -11,19 +11,19 @@ tags: [matchup, killjoy, sova, sentinel, initiator]
 
 ## 1. Matchup Özü
 
-Sova seni round başında siler. Turret'ini, botunu, mollyni shock dart'la patlatır — sonra takımı girerken önünde hiçbir engel kalmaz. Senin kozun tek: setupu her round aynı yere kurma. Sova'nın recon'u sabit hedef bekler. Hedefi kaydır, recon boşa gider.
+Sova seni round başında siler. Turret'ini, botunu, mollyni hasar oku patlatır — sonra takımı girerken önünde hiçbir engel kalmaz. Senin kozun tek: setupu her round aynı yere kurma. Sova'nın recon'u sabit hedef bekler. Hedefi kaydır, recon boşa gider.
 
 ## 2. Kim Avantajlı?
 
 **Killjoy lehine durumlar:**
 - Dar choke'larda (Bind Hookah, Sunset B, Fracture B) — turret girişi tag'ler, Sova kaçacak yer bulamaz.
-- Sova recon ve shock dart'ı harcadıysa — setupun özgür çalışır, kimse yerini bilmez.
+- Sova recon ve hasar oku harcadıysa — setupun özgür çalışır, kimse yerini bilmez.
 - Ultin hazırsa — Sova'nın retake'i kapanır, takımın siteyi tutar.
 - Sova aynı hattan recon atıyorsa — botunu o hattan çek, Sova boşa atsın.
 
 **Sova lehine durumlar:**
 - Uzun sightline'lı haritalarda (Breeze, Icebox) — recon her köşeyi tarar, saklanacak yer kalmaz.
-- Shock dart setupunu round başında vurursa — turret ve bot gider, Sova takımı boş siteye dalar.
+- hasar oku setupunu round başında vurursa — turret ve bot gider, Sova takımı boş siteye dalar.
 - Ulti pozisyonuna gelirse — duvar arkası korumaz, HP'n erir.
 - Botu siteye girerse — mollyn, botun, turret'in hepsi haritaya çıkar.
 
@@ -31,10 +31,10 @@ Sova seni round başında siler. Turret'ini, botunu, mollyni shock dart'la patla
 
 ## 3. Key Düellolar
 
-**IF** Sova shock dart'la turret'ini patlattı
+**IF** Sova hasar oku turret'ini patlattı
 **MEANING** Turret gitti, o round setupun yarım — Sova takımı sana karşı bilgi avantajıyla giriyor.
-**COUNTER** Turret'i shock dart'ın geldiği hattan uzağa, köşe arkasına koy. Her round aynı nokta olmasın — en az iki ayrı yerleşim belirle ve sırayla kullan.
-**WHY** Shock dart lineupu sabit hedefe göre ayarlanır. Turret her round aynı yerdeyse Sova bir kere öğrenir, sonra her round basar.
+**COUNTER** Turret'i hasar oku geldiği hattan uzağa, köşe arkasına koy. Her round aynı nokta olmasın — en az iki ayrı yerleşim belirle ve sırayla kullan.
+**WHY** hasar oku lineupu sabit hedefe göre ayarlanır. Turret her round aynı yerdeyse Sova bir kere öğrenir, sonra her round basar.
 
 ---
 
@@ -73,7 +73,7 @@ Sova seni round başında siler. Turret'ini, botunu, mollyni shock dart'la patla
 
 ---
 
-**IF** Sova recon + bot + shock dart zinciriyle setupunu tek round'da sildi
+**IF** Sova recon + bot + hasar oku zinciriyle setupunu tek round'da sildi
 **MEANING** Tüm donanım haritaya çıktı ve temizlendi — o round çıplaksın.
 **COUNTER** Setupu tek katmana yığma. Turret bir tarafa, bot başka tarafa. Birini kaybedersen diğeri hâlâ çalışır. Sonraki round yerleşimi tamamen değiştir.
 **WHY** Tüm donanım aynı noktadaysa Sova tek hamlede hepsini bitirir. Dağıtırsan zincir kopar.
@@ -81,9 +81,9 @@ Sova seni round başında siler. Turret'ini, botunu, mollyni shock dart'la patla
 ## 4. Donanım Karşılaştırması
 
 Killjoy: turret + bot + 2x molly + ult (8 point)
-Sova: 2x recon + 2x shock dart + bot + ult (7 point)
+Sova: 2x recon + 2x hasar oku + bot + ult (7 point)
 
-Sova'nın donanımı ucuz ve hızlı. Recon + shock dart + bot zinciri round başında setupunu tamamen açabilir. Senin donanımın daha yavaş ama site kapama gücü yüksek. Ultin Sova'nın en büyük korkusu — retake tamamen kapanır. Sova'nın ulti ise senin en büyük korkun — cover arkası korumaz.
+Sova'nın donanımı ucuz ve hızlı. Recon + hasar oku + bot zinciri round başında setupunu tamamen açabilir. Senin donanımın daha yavaş ama site kapama gücü yüksek. Ultin Sova'nın en büyük korkusu — retake tamamen kapanır. Sova'nın ulti ise senin en büyük korkun — cover arkası korumaz.
 
 Kural şu: Sova donanımını harcamadan setupun tam güçte çalışmaz. Sova donanımı bitince setupun serbest kalır.
 
@@ -105,7 +105,7 @@ Kural şu: Sova donanımını harcamadan setupun tam güçte çalışmaz. Sova d
 
 ## 6. Dönüm Noktaları
 
-**Dönüm 1 — Shock dart setupu sildi:** Donanımın gitti, o round savunma çıplak.
+**Dönüm 1 — hasar oku setupu sildi:** Donanımın gitti, o round savunma çıplak.
 
 **Dönüm 2 — Turret botu bitirdi:** Bot düştü, Sova o round kör — site bilgisini sakladın.
 

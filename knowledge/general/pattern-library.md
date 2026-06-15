@@ -122,9 +122,9 @@ Rakibin ne yaptığını değil, **niye** yaptığını oku. Niye'yi bildiğinde
 **WHY:** Lurker bilgi avantajını çalar. Bilgi alamadığında lurker pasif kalır, takımı 4v5 oynar.
 
 ### Pattern: Duelist Çok Erken Ability Harcıyor
-**IF:** Jett dash'i ya da Raze satchel'ı round açılışında bitiyor
+**IF:** Jett dash'i ya da Raze sıçrama util'i round açılışında bitiyor
 **MEANING:** Duelist kontrolsüz ability harcadı — kaçışı kalmadı
-**COUNTER:** Ability'si biten duelist'i takip et, ikinci peek'te yakala. Dash'siz ya da satchel'sız duelist savunmasızdır.
+**COUNTER:** Ability'si biten duelist'i takip et, ikinci peek'te yakala. Dash'siz ya da sıçramasız duelist savunmasızdır.
 **WHY:** Duelist'in değeri kaçış ability'sidir. O gittiğinde sıradan bir oyuncuya döner.
 
 ---
@@ -134,7 +134,7 @@ Rakibin ne yaptığını değil, **niye** yaptığını oku. Niye'yi bildiğinde
 ### Pattern: Early Aggression (Defender)
 **IF:** Savunma her round agresif bilgi alıyor — A Main'den, B Main'den
 **MEANING:** Bilgiyi önceliklendiriyorlar, pozisyona değil oyuncuya göre anchor koymuşlar
-**COUNTER:** Agresif peek'i util ile cezalandır. 3. round flash + util at — o oyuncu bir kez ceza yerse 4. round geri çekilir. Artık o tarafta fazladan bilgin var.
+**COUNTER:** Agresif peek'e flash + util at, çıktığı anda onu oradan vur. 3. round bir kez bedavaya ölürse 4. round geri çekilir. Artık o tarafta fazladan bilgin var.
 **WHY:** Agresif peek tekrarlanırsa tahmin edilebilir olur. Tek bir ceza pattern'i kırar.
 
 ### Pattern: Passive Anchor Hold

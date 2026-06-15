@@ -4,7 +4,7 @@
 
 ## Tilt Tanıma ve Yönetimi
 
-Tilt, iyi oyuncuların kendi seviyelerinin altında oynamasının bir numaralı sebebidir. Tilt'i kontrol etmeden önce onu tanımak, her rekabetçi oyuncunun kazanması gereken ilk beceridir.
+İyi oyuncuyu kendi seviyesinin altına çeken bir numaralı şey tilt'tir. Tilt'i kontrol edemezsin, önce onu tanı — bunu öğrenmeden üst seviyeye çıkamazsın.
 
 ### Tilt Uyarı İşaretleri
 
@@ -39,9 +39,9 @@ WHY toksik takım arkadaşı iki kişiyi düşürür; susturmak zararı tek kiş
 
 ---
 
-## Performans Kaygısı
+## Kaybetme Korkusu
 
-Performans kaygısı (ranked kaygısı, merdiven kaygısı) Radiant dahil her rankta oyuncuyu vurur. RR kaybetme ya da rank düşme korkusu seni pasif oynatır, ranked'den kaçırtır veya kritik anlarda dondurur.
+Kaybetme korkusu (RR gitsin korkusu, rank düşsün korkusu) Radiant dahil herkesi vurur. RR kaybetmekten ya da rank düşmekten korkarsan pasif oynarsın, ranked açmaya korkarsın, kritik anda donar kalırsın. Korkuyla oynayan kaybeder.
 
 ### Kök Nedenler
 
@@ -57,11 +57,11 @@ WHY süreç hedefi hep senin kontrolünde; sonuç hedefi değil
 
 ### Çözümler
 
-1. **Süreç hedefi belirle**: "Bu maçı kazanmalıyım" yerine "Gördüğüm her düşman pozisyonunu çağırdım mı?" diye sor.
-2. **Sabit sayıda maç oyna**: Sonuç ne olursa olsun seans başına 3 ranked oyna. Bu, bir yenilgiden sonra durup tilt'le devam etme döngüsünü kırar.
-3. **Ranked'den önce ısın**: Aim antrenmanı (Aimlabs ya da Range), ardından bir unrated soğuk başlama kaygısını alır.
-4. **Varyansı kabul et**: Pro oyuncuların bile %40-45 kazanma oranlı günleri olur. Gerçek becerin ancak 50 maçta ortaya çıkar.
-5. **RR'ye takılma**: Rank Rating oynar durur. Rankına tek tek maçlarla değil, haftalar ve aylar üzerinden bak.
+1. **Sonuca değil işine odaklan**: "Bu maçı kazanmalıyım" deme, "Gördüğüm her düşmanı çağırdım mı?" diye sor. Galibiyet senin elinde değil, doğru oynamak senin elinde.
+2. **Sabit sayıda maç oyna**: Sonuç ne olursa olsun seansta 3 ranked oyna. Bir mağlubiyetin ardından durup tilt'le devam etme döngüsünü bu kırar.
+3. **Ranked'den önce ısın**: Aim antrenmanı (Aimlabs ya da Range), ardından bir unrated — soğuk başlamanın gerginliğini alır.
+4. **Kötü gün olur, kabul et ve devam et**: Pro'ların bile %40-45 kazandığı günler var. Bir-iki maç bir şey söylemez; gerçek seviyen 50 maçta belli olur. Tek maça bakıp kendini yargılama.
+5. **RR'ye takılma**: RR iner çıkar. Rankına tek tek maçlarla değil, haftalara ve aylara bakarak değerlendir.
 
 ---
 
@@ -295,7 +295,7 @@ WHY plansız VOD review belirsiz hisler bırakır; planlı review somut düzeltm
 
 - Rekabetçi oyuncular: Her 5 maçta 1 VOD review.
 - Gelişim odaklı oyuncular: Her 3 maçta 1 VOD, kayıplara odaklanarak.
-- Aşırıya kaçma. Analiz felci gerçektir. İzle, 1-2 odak alanı belirle, sonra pratik et.
+- Aşırıya kaçma. Saatlerce VOD izleyip hiç oynamazsan gelişmezsin — fazla analiz seni felç eder. İzle, 1-2 şeye odaklan, sonra çık oyna.
 
 ### Her Review'dan Ne Çıkmalı
 
@@ -310,9 +310,9 @@ WHY plansız VOD review belirsiz hisler bırakır; planlı review somut düzeltm
 ### Immortal+ İçin
 
 IF mental oyunun mekanik seviyene yetişemiyorsa
-MEANING tilt, kayıp serisi yönetimi ve performans kaygısı seni geri tutuyor
-COUNTER bu dokümandaki tilt yönetimi ve round arası reset adımlarını bilinçli uygula
-WHY Immortal+'da mekanik fark küçüktür; mental fark büyüktür -- mental üstünlük = istikrarlı performans
+MEANING seni geri tutan şey tilt, kayıp serisini toparlayamamak ve kaybetme korkusu
+COUNTER bu dosyadaki tilt yönetimi ve round arası reset adımlarını bilerek uygula
+WHY Immortal+'da nişan farkı küçük, kafa farkı büyük — kafan sağlamsa istikrarlı oynarsın
 
 ### Diamond-Ascendant İçin
 

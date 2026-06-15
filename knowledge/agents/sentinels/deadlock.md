@@ -1,14 +1,14 @@
 # AJAN: Deadlock
 
 ## 1. Rol Kimliği
-Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi geniş alana yayar — sen bir noktayı kilitlersin. Duvarın girişi tamamen kapatır, ağ tuzağın içinden geçeni yere yapıştırır, tuzağın sesi cezalandırır, ult'un yakaladığını garanti götürür. Hızla site alan takımlar senin avın. Tek zayıf yanın şu: utility'ni boşalttıktan sonra başka açıdan gelen baskıya verecek çok az cevabın kalır.
+Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi geniş alana yayar — sen bir noktayı kilitlersin. Duvarın girişi tamamen kapatır, ağ tuzağın içinden geçeni yere yapıştırır, tuzağın sese tepki verip düşmanı sersemletir ve yerini ele verir, ult'un yakaladığını garanti götürür. Hızla site alan takımlar senin avın. Tek zayıf yanın şu: utility'ni boşalttıktan sonra başka açıdan gelen baskıya verecek çok az cevabın kalır.
 
 ## 2. Temel Sorumluluklar
 - **Girişi kapat**: Duvarı düşmanın en çok bastığı tek noktaya koy. Sage duvarı gibi çabuk kırılmaz — düşman orbları tek tek vurmak zorunda, bu sana hem zaman hem konum kazandırır.
 - **Rush'ı dağıt**: Ağ tuzağını önceden atma. Düşmanın o koridora girdiğini duyduğun an at. Eğilmeye zorlarsan hızını alırsın, orbu vurmaya zorlarsan pozisyonunu alırsın.
 - **Sesi cezalandır**: Tuzağın ayak sesine, yetenek sesine, silah sesine tepki verir — sana bilgi ve kısa bir sersemletme kazandırır. Takım arkadaşının geçmeyeceği, düşmanın da sessiz geçemeyeceği yollara koy.
 - **Round'u kapat**: Ult'unu izole bir düşmana ya da spike kurulduktan sonra defuse'a gelen oyuncuya kullan. Koza yolu dar ve korunaklı olsun — açıkta kalan kozayı düşmanın takım arkadaşları vurur, içindeki kurtulur.
-- **Katmanla**: Duvarın arkasına tuzak koy. Hem hızlı geleni hem yavaş geleni aynı anda cezalandırırsın.
+- **Katmanla**: Duvarın arkasına tuzak koy. Hem hızlı geleni hem yavaş geleni aynı anda yakalarsın — duvarı kıran sersemler, geçen tuzağa basar.
 
 ## 3. Sık Yapılan Hatalar
 - Duvarı yanlış girişe koymak — düşman zaten o yolu kullanmıyorsa hiçbir işe yaramaz.
@@ -76,7 +76,7 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 
 ## 6. Eşleşme Notları
 - **Raze**'e karşı zayıfsın. Patlayıcıları duvarın orblarını ve tuzaklarını uzaktan temizler. Duvarı beklenmedik bir açıya koy.
-- **Neon** ve hız bazlı ajanlara karşı güçlüsün. Tüm kit'in tam da bunları cezalandırmak için var.
+- **Neon** ve hız bazlı ajanlara karşı güçlüsün. Tüm kit'in tam da bunları durdurmak için var — duvar hızını keser, ağ tuzağı dash'ini yere yapıştırır.
 - **Sova** tuzaklarını temizleyebilir, duvar pozisyonlarını güvenli mesafeden keşfeder. Tuzakları standart yerden çıkar, tahmin edilemez ol.
 - Ult'un **izole düşmana** karşı counter'lanamaz. En zayıf olduğun an grup halinde gelen takımlar — kozayı çabuk vururlar.
 - **Jett** ve **Chamber** gibi yüksek hareket kabiliyetli ajanlar ağ tuzağını ekonomik kullanmanı zorlar. Jett dash'le, Chamber TP'siyle net'in etkisini kısaltabilir — net'i onların hareket yeteneğini zaten kullandığı, geri çekilemeyeceği ana sakla.

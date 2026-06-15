@@ -33,7 +33,7 @@ Jett hızla girer, Viper girişini zorlaştırır. Viper'ın wall ve smoke'u aç
 
 **IF** Viper wall senin dash hattını tam kapattı
 **MEANING** Wall içinden geçersen HP 50'ye iner, karşıya çıktığında duel kayıpsın
-**COUNTER** Dash hattını wall'un bittiği noktanın ötesine kur. Wall aktifken updraft ile dik açıya çık, wall'un altından değil üstünden geç.
+**COUNTER** Dash hattını wall'un bittiği noktanın ötesine kur. Wall aktifken yukarı zıplama ile dik açıya çık, wall'un altından değil üstünden geç.
 **WHY** Wall içinden geçerken decay üst üste biner. HP eşitsiz duelde Viper'ın sabit aim'i seni geçer.
 
 ---
@@ -54,7 +54,7 @@ Jett hızla girer, Viper girişini zorlaştırır. Viper'ın wall ve smoke'u aç
 
 **IF** Viper ultu site üzerine atıldı
 **MEANING** Zone içinde kaldıkça HP düşüyor, crosshair'in kayıyor
-**COUNTER** Updraft + dash ile ult dışına çık. Post-plant pozisyonunu ult alanının dışında seç — defuseye gireceksen zone bitene kadar bekle ya da spike dışından spike'a baskı yap.
+**COUNTER** yukarı zıplama + dash ile ult dışına çık. Post-plant pozisyonunu ult alanının dışında seç — defuseye gireceksen zone bitene kadar bekle ya da spike dışından spike'a baskı yap.
 **WHY** Viper'ın ultu içinde durmak seçenek değil. Zone dışından baskı yaparsan Viper ultunu boşa harcar, zone biter, o zaman girersin.
 
 ---
@@ -80,7 +80,7 @@ Jett hızla girer, Viper girişini zorlaştırır. Viper'ın wall ve smoke'u aç
 
 ## 4. Utility Karşılaştırması
 
-Jett: dash (tek) + updraft (tek) + smoke x2 + ult (7 ult puanı)
+Jett: dash (tek) + yukarı zıplama (tek) + smoke x2 + ult (7 ult puanı)
 Viper: wall + smoke + molly x2 + ult (8 ult puanı)
 
 Jett'in ultu ucuz — daha sık hazır olur. Ama Viper zone kurduğunda Jett bütün util'ini sadece zone dışında kalmak için harcar. Viper molly'sini Jett'in indiği noktaya göre kurarsa her dash'ı düşünerek atmak zorunda kalırsın. Jett smoke'u kısa — wall boyunca vision kesmez, Viper wall'u ise uzun kalır. Viper zone kurmak için hazırlık ister, Jett anlık girer — Viper fuel'siz yakalanırsa Jett tam util'le daha güçlü.

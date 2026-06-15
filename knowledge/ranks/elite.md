@@ -2,15 +2,15 @@
 
 ## Bu Seviyede Koçluk Nasıl Çalışır
 
-Senin seviyende strateji bilgin eksiksiz. Kayıplar bilgi boşluğundan değil, aynı hareketi tekrarlayıp düşmanın ayarlamasını bir round geç okumaktan geliyor. Her konuşmada somut hareket, somut düzeltme. Jenerik yok.
+Senin seviyende strateji bilgin eksiksiz. Kayıplar bilmediğin bir şeyden değil — aynı hareketi tekrar edip düşmanın sana göre ayar yapmasını bir round geç fark etmekten geliyor. Her konuşmada somut hareket, somut düzeltme. Jenerik yok.
 
 ## Öncelikli Koçluk Alanları
 
-### Mikro-Zamanlama
+### Zamanlama
 
-Radiant'ta round farkı zamanlamadan gelir. Bu farklar maç içinde görünmez — round kaydında görünür.
+Radiant'ta round farkı zamanlamadan gelir. Bu farklar maç içinde gözüne çarpmaz — round kaydını izleyince ortaya çıkar.
 
-- **IF** smoke henüz açılırken push yapıyorsan
+- **IF** smoke henüz açılırken içeri giriyorsan
 - **MEANING** düşman tam o anı bekliyor, hazırlıklı duruyor
 - **COUNTER** smoke tamamen açıldıktan sonra bekle, düşman swing beklentisini bırakınca çık
 - **WHY** beklenti penceresi kapanınca karşı taraf hazırsız yakalanır
@@ -29,18 +29,18 @@ Kayıplarının büyük kısmı birlikte hareket edememekten geliyor.
 - **COUNTER** recon biter bitmez swing at, araya süre koyma
 - **WHY** recon bittikten sonra beklersen bilgi geçersizleşir, swing boşa çıkar
 
-### Tahmin Edilebilirlik
+### Okunabilir Olmak
 
 Radiant rakipler round kaydı izler ve bir sonraki maça senin sıranı ezberleyerek hazırlıklı gelir.
 
 - **IF** farklı maçlarda aynı util sırasını tekrar tekrar çalıştırıyorsan
 - **MEANING** rakip bir sonraki maça buna karşı hazırlanarak giriyor
-- **COUNTER** util sıranı kır — recon dart → flash → smoke sırasını değiştir. Karşı taraf recon'suz swing atar, seni boş bulursun
+- **COUNTER** util sıranı kır — recon → flash → smoke sırasını değiştir. Karşı taraf recon'suz swing atar, seni boş bulursun
 - **WHY** sıra değişince rakip hazırladığı karşı duruşu uygulayamaz
 
 - **IF** aynı açıyı iki round üst üste tutuyorsan
 - **MEANING** üçüncü round rakip o açıya hazırlanmış girer
-- **COUNTER** rakip cezalandırmadan değiştir — iki kez heaven'dan baktıysan üçüncüde oraya gitme, oynamasalar bile oynayacaklarını varsay
+- **COUNTER** rakip seni o açıdan kesmeden değiştir — iki kez heaven'dan baktıysan üçüncüde oraya gitme, oynamasalar bile oynayacaklarını varsay
 - **WHY** rakip karşı hamle geliştiremeden değiştirirsen o hazırlık işe yaramaz
 
 ## Bu Seviyede Yaygın Hatalar
@@ -49,7 +49,7 @@ Radiant rakipler round kaydı izler ve bir sonraki maça senin sıranı ezberley
 
 - **Kayıp sonrası daha fazla dövüş aramak**: 1v1 kaybından sonra sonraki roundlarda giderek daha çok dövüş arıyorsan, harekete geçmeden önce dur: util nerede, düşman sayısı kaç, hangi bilgin var? Bu üç soruyu yanıtla, sonra hareket et. Yanıt yoksa harekete geçme.
 
-- **Aynı hareketi sürdürmek**: Aynı pozisyonlar, aynı util sırası, her round. Rakip ilk düşman düşer düşmez sıranı okuduysa o an değiştir. Cezalandırılmayı bekleme.
+- **Aynı hareketi sürdürmek**: Aynı pozisyonlar, aynı util sırası, her round. Rakip ilk düşman düşer düşmez sıranı okuduysa o an değiştir. Seni o açıdan bedavaya kesmesini bekleme.
 
 - **Düşman ekonomisini kabaca okumak**: Düşmanın tam kredi miktarını bilmek o roundu nasıl oynayacağını değiştirir. 3900 kredili düşman muhtemelen kalkan + Vandal alır, util yok — buna göre al-ver yap. 1900 kredili düşmanın Spectre'si var, util'i yok — agresif gir, çünkü kaçış util'i yok.
 

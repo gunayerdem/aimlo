@@ -58,7 +58,7 @@ Astra'yı doğru oynarsan harita sana çalışır, sen haritaya değil. Yıldız
 **COUNTER** Yıldızı tam geçiş hattının üstüne koy — düşmanın bakması gereken açıyı tamamen kapat. Yarım kapalı smoke, kapalı değildir.
 **WHY** Bir smoke ya açıyı tamamen keser ya da işe yaramaz. Kenardan sızan görüş, smoke'un arkasındaki arkadaşını bedavaya öldürtür.
 
-**IF** stun'ı (Nova Pulse) yıldızı koyduğun an, kimse o açıda yokken patlatıyorsun
+**IF** stun'ı yıldızı koyduğun an, kimse o açıda yokken patlatıyorsun
 **MEANING** Stun'ı çatışma anına denk getiremiyorsun, boşa gidiyor
 **COUNTER** Stun yıldızını choke'a önceden koy, düşman tam o açıya girdiği anda patlat — hemen arkasından takım swing atsın.
 **WHY** Stun ancak içinde düşman varken değer üretir. Boş açıya patlayan stun, takımına hiçbir avantaj vermez ve cooldown'a girer.
@@ -98,7 +98,7 @@ Astra'yı doğru oynarsan harita sana çalışır, sen haritaya değil. Yıldız
 
 **Stun'ı çatışmaya denk getir:** Stun ancak içinde düşman varken altın değerinde. Yıldızı choke'a önceden koy, düşman tam o açıya girdiği an patlat ve aynı anda "şimdi" çağrısı yap — takım o pencerede swing atsın. Boş açıya patlayan stun cooldown'a girer, sana hiçbir şey kazandırmaz.
 
-**ult'u proaktif kur, clutch'a saklama:** Cosmic Divide 4v4-5v5'te haritayı ikiye bölerek takımın yarısını çatışma dışı bırakır. Bunu execute'in ilk anında ya da retake'e girerken at; duvarın engelleyen yüzünü düşman tarafına çevir ki kendi takımını köreltmeyesin. Az kişi kalınca atılan duvar bu makro etkisini tamamen kaybeder.
+**ult'u proaktif kur, clutch'a saklama:** ult 4v4-5v5'te haritayı ikiye bölerek takımın yarısını çatışma dışı bırakır. Bunu execute'in ilk anında ya da retake'e girerken at; duvarın engelleyen yüzünü düşman tarafına çevir ki kendi takımını köreltmeyesin. Az kişi kalınca atılan duvar bu makro etkisini tamamen kaybeder.
 
 **Zorlanıyorsan**: "Çatışmanın ortasında gökyüzüne çıkmayı bırak. Yıldızları satın alma aşamasında koy, okumana güven, yerden aktive et. Sen gökyüzündeyken bedenin ölüyor."
 

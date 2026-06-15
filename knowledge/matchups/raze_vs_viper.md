@@ -22,19 +22,19 @@ Viper oynuyorsan: duvarı sürekli açık tutma, yakıtın biter. Raze seni oyal
 **COUNTER**: Viper bot'un yoluna molly koyar
 **WHY**: Bot duvardan etkilenmez, içinden dümdüz geçer
 
-**IF**: Satchel'le duvarın üstünden atlayıp Viper'ın arkasına iniyorsun
+**IF**: sıçrama duvarın üstünden atlayıp Viper'ın arkasına iniyorsun
 **MEANING**: Hasar bölgesini tamamen atlıyorsun, Viper seni göremeden içeri giriyorsun
 **COUNTER**: Viper tahmin edilebilir iniş noktalarına önceden molly hazırlar
-**WHY**: Duvarın üstünden satchel tek yön — geri dönemezsin, Viper bunu bilir
+**WHY**: Duvarın üstünden sıçrama tek yön — geri dönemezsin, Viper bunu bilir
 
 ### Viper Raze'i Cezalandırırken
 
-**IF**: Girişte duvarın açık, Raze satchel'le içeri girdi ve diğer tarafta hasar bölgesinde kaldı
+**IF**: Girişte duvarın açık, Raze sıçrama içeri girdi ve diğer tarafta hasar bölgesinde kaldı
 **MEANING**: Raze can kaybetti ve kaçış yolu yok — her dövüşe eksik giriyor
 **COUNTER**: Raze girmeden önce molly'yle yayıcıyı patlatmalı
 **WHY**: Duvarın içinden geçmek tek yönlü bir bağlanma — yayıcı yerindeyse çıkış yok
 
-**IF**: Molly'ni Raze'in satchel iniş noktasına koyuyorsun, Raze her girişte can yiyor
+**IF**: Molly'ni Raze'in sıçrama iniş noktasına koyuyorsun, Raze her girişte can yiyor
 **MEANING**: İniş noktası zaten hasar bölgesi — Raze indiği an kayıpta
 **COUNTER**: Raze her raund farklı açıdan, farklı yükseklikten girer
 **WHY**: Aynı noktaya inen Raze'i molly'yle kilitlemek kolay
@@ -46,7 +46,7 @@ Viper oynuyorsan: duvarı sürekli açık tutma, yakıtın biter. Raze seni oyal
 
 ## Sürekli Kaybediyorsan
 
-**Raze oynuyorsun, hasar bölgesinde girip dövüş kaybediyorsan**: Yayıcıyı patlatmadan giriyorsun. Önce molly'ni yayıcıya at. Yayıcı yüksekteyse ya da köşedeyse iki sekme açısı dene — birincisi duvarı, ikincisi yayıcıyı vurur. Olmuyorsa duvarın üstünden satchel'le geç, içinden yürüme.
+**Raze oynuyorsun, hasar bölgesinde girip dövüş kaybediyorsan**: Yayıcıyı patlatmadan giriyorsun. Önce molly'ni yayıcıya at. Yayıcı yüksekteyse ya da köşedeyse iki sekme açısı dene — birincisi duvarı, ikincisi yayıcıyı vurur. Olmuyorsa duvarın üstünden sıçrama geç, içinden yürüme.
 
 **Viper oynuyorsun, kurulumunu Raze'e kaybediyorsan**: Yayıcın molly'nin direkt yetiştiği yerde duruyor. Yüksek köşeye ya da dar açıya koy — Raze sekme hesabını yapamazsa util harcamaz. Bir de duvar yakıtını takip et: Raze seni oyalayıp yakıt bitince push yapıyorsa, aç-kapa alışkanlığı edinmen şart.
 
@@ -54,7 +54,7 @@ Viper oynuyorsan: duvarı sürekli açık tutma, yakıtın biter. Raze seni oyal
 
 ### Oyuncu cezalandırılan taraftayken
 
-**Raze Viper'ın smoke'una kaybediyorsa**: "Yayıcıyı patlatmadan giriyorsun. Önce molly at, yayıcı patlasın, sonra gir. Yayıcıya ulaşamıyorsan duvarın üstünden satchel'le geç — içinden yürüme."
+**Raze Viper'ın smoke'una kaybediyorsa**: "Yayıcıyı patlatmadan giriyorsun. Önce molly at, yayıcı patlasın, sonra gir. Yayıcıya ulaşamıyorsan duvarın üstünden sıçrama geç — içinden yürüme."
 
 **Viper kurulumunu Raze'e kaybediyorsa**: "Yayıcın molly'nin direkt vurduğu yerde. Dar açıya ya da yükseğe koy — Raze sekme hesabını yapamazsa util harcamaz. Duvarı sürekli açık tutma, Raze yakıtını tüketip push yapıyor."
 

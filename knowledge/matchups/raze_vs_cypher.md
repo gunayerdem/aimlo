@@ -11,19 +11,19 @@ tags: [matchup, raze, cypher, duelist, sentinel]
 
 ## 1. Matchup Özü
 
-Raze nade ve satchel ile Cypher'ın telini patlatır, dar siteye dalar. Cypher ise telini ve kamerasını kullanıp Raze'in ne zaman geleceğini takıma söyler, Raze'in util'ini boşa harcatır. Kavga şu: Raze teli silmeden girerse Cypher takıma bilgi verir, Raze içeride yalnız kalır. Raze teli patlatarak girerse Cypher kör kalır.
+Raze nade ve sıçrama ile Cypher'ın telini patlatır, dar siteye dalar. Cypher ise telini ve kamerasını kullanıp Raze'in ne zaman geleceğini takıma söyler, Raze'in util'ini boşa harcatır. Kavga şu: Raze teli silmeden girerse Cypher takıma bilgi verir, Raze içeride yalnız kalır. Raze teli patlatarak girerse Cypher kör kalır.
 
 ## 2. Kim Avantajlı?
 
 **Raze lehine:**
-- Dar sitelerde (Bind Hookah, Split B Main, Sunset A Main) nade ve satchel teli patlatır, Raze tel hattını bedavaya temizler.
+- Dar sitelerde (Bind Hookah, Split B Main, Sunset A Main) nade ve sıçrama teli patlatır, Raze tel hattını bedavaya temizler.
 - Cypher kamera modunda Raze'e bakıyorsa eli kolu bağlı; Raze peek alırsa bedava kill.
 - Cypher'ın teli patladıktan sonra site tutuşu çöker, Raze ikinci girişte serbest kalır.
 - Raze ult hazırsa ult Cypher'ın durduğu yeri patlatır, hiçbir Cypher util'i o roketi durduramaz.
 
 **Cypher lehine:**
-- Uzun açılı haritalarda (Breeze A, Icebox) nade ve satchel yakın mesafe işidir; uzun açıda Cypher rifle basarsa Raze mesafeyi kapatamaz.
-- Raze satchel'ı yoksa yavaş kalır; Cypher tel ile rifle çaprazı Raze'i sabit hedefe çevirir.
+- Uzun açılı haritalarda (Breeze A, Icebox) nade ve sıçrama yakın mesafe işidir; uzun açıda Cypher rifle basarsa Raze mesafeyi kapatamaz.
+- Raze sıçrama yoksa yavaş kalır; Cypher tel ile rifle çaprazı Raze'i sabit hedefe çevirir.
 - Cypher teli görünmez bir hatta kuruluysa Raze tel'i göremeden nade atamaz, tel çalışır, takım bilgi alır.
 - Raze öldükten sonra Cypher ult atarsa Raze'in takımının yeri açılır, Cypher takımı buna göre oynar.
 
@@ -45,10 +45,10 @@ Raze nade ve satchel ile Cypher'ın telini patlatır, dar siteye dalar. Cypher i
 
 ---
 
-**IF** Raze satchel ile Cypher'ın anchor noktasına boost yaptı, telin üstünden geçti
-**MEANING** Satchel Raze'i tel hattının üstüne taşır — yere kurulu tel çalışmaz, Raze Cypher'ın üstüne düşer
+**IF** Raze sıçrama ile Cypher'ın anchor noktasına boost yaptı, telin üstünden geçti
+**MEANING** sıçrama Raze'i tel hattının üstüne taşır — yere kurulu tel çalışmaz, Raze Cypher'ın üstüne düşer
 **COUNTER** Teli hem yere hem yükseğe çift kat kur. Raze'in hangi açıdan boost yaptığını gör, tel'i tam o hatta yerleştir
-**WHY** Tek noktaya kurulan tel satchel boost'unu durduramaz. Çift kur ki biri hava hattını kapsasın
+**WHY** Tek noktaya kurulan tel sıçrama boost'unu durduramaz. Çift kur ki biri hava hattını kapsasın
 
 ---
 
@@ -66,7 +66,7 @@ Raze nade ve satchel ile Cypher'ın telini patlatır, dar siteye dalar. Cypher i
 
 ---
 
-**IF** Raze B Main'e satchel ile daldı, Cypher teli choke'ta çaldı
+**IF** Raze B Main'e sıçrama ile daldı, Cypher teli choke'ta çaldı
 **MEANING** Tel çalıştı, Cypher takıma bilgi verdi — ama Raze zaten site içinde, bilgi geç kaldı
 **COUNTER** Teli choke'a değil site içine kur. Site içinde çalan tel Raze'in içerideki hareketini keser, bilgi zamanında gelir
 **WHY** Choke tel'i Raze girince çalıyor, iş işten geçiyor. Site tel'i Raze içerideyken çalıyor, takım hâlâ rotate edebilir
@@ -80,7 +80,7 @@ Raze nade ve satchel ile Cypher'ın telini patlatır, dar siteye dalar. Cypher i
 
 ## 4. Utility Karşılaştırması
 
-Raze: nade (1) + satchel (2) + bot (1) + ult. Cypher: tel (2) + smoke (1) + kamera (1) + ult.
+Raze: nade (1) + sıçrama (2) + bot (1) + ult. Cypher: tel (2) + smoke (1) + kamera (1) + ult.
 
 Raze util'i zarar ve hareket için. Cypher util'i bilgi ve site kilitleme için.
 
@@ -90,7 +90,7 @@ Ult maliyeti eşit (her ikisi de 7 puan). Raze ult'ı round'u bitirir. Cypher ul
 
 ## 5. Haritaya Göre Durum
 
-**Bind (Raze avantajlı):** Hookah ve Showers dar, nade ve satchel burada iş görür. Cypher teli Raze nade'iyle eriyip gider.
+**Bind (Raze avantajlı):** Hookah ve Showers dar, nade ve sıçrama burada iş görür. Cypher teli Raze nade'iyle eriyip gider.
 
 **Split (Raze avantajlı):** A Main ve B Main choke'ları Raze nade'ine göre biçilmiş. Cypher telleri Raze'in nade'leriyle tükenir.
 
@@ -98,9 +98,9 @@ Ult maliyeti eşit (her ikisi de 7 puan). Raze ult'ı round'u bitirir. Cypher ul
 
 **Haven (Dengeli):** Cypher B ve Garage'ı kamerayla tutar, Raze A Short'tan girer. Farklı sitelerde farklı kavga.
 
-**Fracture (Raze avantajlı):** Çok taraflı giriş yapısı Raze satchel'ını güçlendirir. Cypher tek hatlı tel kurmakta zorlanır.
+**Fracture (Raze avantajlı):** Çok taraflı giriş yapısı Raze sıçrama güçlendirir. Cypher tek hatlı tel kurmakta zorlanır.
 
-**Icebox (Cypher hafif avantajlı):** Uzun açılar ve Rafters Cypher'ın kamera oyununu güçlendirir. Raze satchel burada kısıtlı.
+**Icebox (Cypher hafif avantajlı):** Uzun açılar ve Rafters Cypher'ın kamera oyununu güçlendirir. Raze sıçrama burada kısıtlı.
 
 **Breeze (Cypher avantajlı):** Uzun açılar Raze nade'ini değersizleştirir. Cypher A Site tutması meta.
 
@@ -108,7 +108,7 @@ Ult maliyeti eşit (her ikisi de 7 puan). Raze ult'ı round'u bitirir. Cypher ul
 
 **Dönüm 1 — Nade tel'i patlattı:** Raze nade'i Cypher tel hattını yok ettiği an Cypher kör kalır. Raze ikinci girişe hemen geçer.
 
-**Dönüm 2 — Satchel boost tel'i atladı:** Raze tel hattının üstünden geçerse Cypher bilgisiz kalır. Cypher tel yüksekliğini Raze'in boost açısına göre ayarlamalı.
+**Dönüm 2 — sıçrama boost tel'i atladı:** Raze tel hattının üstünden geçerse Cypher bilgisiz kalır. Cypher tel yüksekliğini Raze'in boost açısına göre ayarlamalı.
 
 **Dönüm 3 — Ult anchor'a düştü:** Raze ult'ı Cypher'ın durduğu yere gelirse Cypher ölür. Sabit duran Cypher rokete tam hedef olur — ult sesi duyulunca yer değiştir.
 

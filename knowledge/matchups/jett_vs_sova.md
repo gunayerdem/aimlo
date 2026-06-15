@@ -26,10 +26,10 @@ Bu matchup bir bilgi savaşı. Sova'nın recon'u eski bilgi üretir — Jett yer
 - Recon'un nereden atıldığını çözdükten sonra — bir sonraki round o açının kör noktasında dur
 
 **Sova lehine:**
-- Uzun açılı haritalarda (Breeze A, Icebox A) — recon + shock dart bu alanlarda kesin hasar verir, Jett peek atarsa shock dart'a girer
+- Uzun açılı haritalarda (Breeze A, Icebox A) — recon + hasar oku bu alanlarda kesin hasar verir, Jett peek atarsa hasar oku girer
 - Dash bittiğinde — recon, Jett'in dashsiz pozisyonunu takıma gösterir, ikinci düşman anında üstüne gelir
 - Ult aktifken — ult duvarı delerek geçer, off-angle dursan bile yakalar
-- Jett hep aynı hattan giriyorsa — ikinci round shock dart o hatta hazır bekler
+- Jett hep aynı hattan giriyorsa — ikinci round hasar oku o hatta hazır bekler
 
 **Dengeli:** Haven, Ascent ve Lotus'ta matchup, Sova'nın recon disiplinine ve Jett'in hareket çeşitliliğine göre kayar.
 
@@ -42,10 +42,10 @@ Bu matchup bir bilgi savaşı. Sova'nın recon'u eski bilgi üretir — Jett yer
 
 ---
 
-**IF** Shock dart tam dash sonrası ineceğin noktaya atıldı
+**IF** hasar oku tam dash sonrası ineceğin noktaya atıldı
 **MEANING** Dash biter bitmez hasar yersin, HP düşer, dashsiz kalırsın
-**COUNTER** Her round farklı bir noktaya in. Shock dart sabit hedefleri vurur — hep aynı yere inersen ikinci round orada hazır bekler.
-**WHY** Shock dart lineup'ları ezberlenmiş hatlara kurulur. İniş noktanı değiştirirsen lineup boşa gider.
+**COUNTER** Her round farklı bir noktaya in. hasar oku sabit hedefleri vurur — hep aynı yere inersen ikinci round orada hazır bekler.
+**WHY** hasar oku lineup'ları ezberlenmiş hatlara kurulur. İniş noktanı değiştirirsen lineup boşa gider.
 
 ---
 
@@ -71,7 +71,7 @@ Bu matchup bir bilgi savaşı. Sova'nın recon'u eski bilgi üretir — Jett yer
 ---
 
 **IF** Op'la açı tutuyorsun, recon pozisyonunu işaretledi
-**MEANING** Takım seni gördü, ya shock dart ya da karşı Op geliyor
+**MEANING** Takım seni gördü, ya hasar oku ya da karşı Op geliyor
 **COUNTER** Op'u attıktan sonra sabit kalma — dash ile yer değiştir. Aynı köşeden iki kez Op atma.
 **WHY** Recon + takım tepkisi, sabit duran Op holder'ı öldürür. Hareket edersen Sova'nın bilgisi eskir.
 
@@ -84,7 +84,7 @@ Bu matchup bir bilgi savaşı. Sova'nın recon'u eski bilgi üretir — Jett yer
 
 ## 4. Utility Dengesi
 
-Sova'nın util'i bilgi ve hasar üzerine kurulu — iki recon, iki shock dart, bir bot, bir ult. Jett'inki ise tamamen hareket — dash, iki yükseliş, smoke ve ult.
+Sova'nın util'i bilgi ve hasar üzerine kurulu — iki recon, iki hasar oku, bir bot, bir ult. Jett'inki ise tamamen hareket — dash, iki yükseliş, smoke ve ult.
 
 Sova daha çok util atar ama hiçbiri sabit duran bir düşman olmadan kesin öldürme yapmaz. Sova'nın util'i seni bulduğu an hareket et — o rounddaki bilgi değeri sıfırlanır.
 
@@ -112,7 +112,7 @@ Ult maliyeti ikisinde de aynı: 7 puan. Jett'in ult'u eco roundda parlar, Sova'n
 
 **Kırılma 2 — Recon'un dışına çıktın:** Yukarı sıçrayıp tarama alanının dışına çıkarsan Sova kör kalır, serbest hareket edersin.
 
-**Kırılma 3 — Shock dart tam iniş noktana denk geldi:** Hep aynı yere indiysen shock dart kesin hasar verir. HP düşer, matchup Sova'ya kayar.
+**Kırılma 3 — hasar oku tam iniş noktana denk geldi:** Hep aynı yere indiysen hasar oku kesin hasar verir. HP düşer, matchup Sova'ya kayar.
 
 **Kırılma 4 — Ult agresif hattını okudu:** Ult senin hattını biliyorsa dash ile bile tam çıkış zorlaşır. Post-plant pozisyonunu önceden değiştir.
 

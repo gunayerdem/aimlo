@@ -18,7 +18,7 @@ Fade seni bulmaya çalışır, sen de bulunmamaya. Recon, bot ve stun zinciriyle
 **Jett lehine:**
 - Uzun sightline'da (Breeze, Icebox) Fade botu yakın-orta mesafede kovalar; sen op'la önce bitirirsin.
 - Fade util'ini harcamışken — recon, stun ve bot yoksa o round'u aggressive bas, kazan.
-- Vertical çıkışın varsa (Split A Main, Icebox Rafters) updraft'la yukarı çık, botun yer hattını atla.
+- Vertical çıkışın varsa (Split A Main, Icebox Rafters) yukarı zıplama yukarı çık, botun yer hattını atla.
 
 **Fade lehine:**
 - Dar koridorlarda (Bind, Sunset, Fracture) bottan kaçacak yer yok, sıkışırsın.
@@ -31,13 +31,13 @@ Fade seni bulmaya çalışır, sen de bulunmamaya. Recon, bot ve stun zinciriyle
 
 **IF** Fade recon'u seni gösterdi
 **MEANING** Recon pozisyonunu Fade takımına işaretler. Trade ortağı gelir, peek'ini trade'lerler.
-**COUNTER** İlk round'da recon'un nereye oturduğunu öğren. İkinci round'da pozisyonunu o görüş hattının dışına taşı. Updraft'la yukarı çıkıp yerini değiştir — recon yer taramasını boşa düşürürsün.
+**COUNTER** İlk round'da recon'un nereye oturduğunu öğren. İkinci round'da pozisyonunu o görüş hattının dışına taşı. yukarı zıplama yukarı çıkıp yerini değiştir — recon yer taramasını boşa düşürürsün.
 **WHY** Recon sabit noktadan tarar, sen hareketlisin. Yerini değiştirdiğin an Fade'in elindeki bilgi bayatlar.
 
 ---
 
 **IF** Bot, dash sonrası indiğin noktaya girdi
-**MEANING** Bot seni nearsight'a sokar; hem dashsiz hem nearsight kalırsın, aim'in dağılır.
+**MEANING** Bot seni yarı-kör'a sokar; hem dashsiz hem yarı-kör kalırsın, aim'in dağılır.
 **COUNTER** Dash yönünü bot hattından uzak seç. Botun sesini duyduğun an dash'i ters yöne aç.
 **WHY** Bot, dash'ten sonra peşine düşer. Dash kaçış değil — asıl tehlike indikten sonra durduğun yer, çünkü Fade tam orayı hedefler. Farklı yöne çıkarsan bot boşa gider.
 
@@ -50,15 +50,15 @@ Fade seni bulmaya çalışır, sen de bulunmamaya. Recon, bot ve stun zinciriyle
 
 ---
 
-**IF** Updraft'la yukarıdan girdin, Fade recon'u üst katta
-**MEANING** Updraft recon görüşüne denk gelirse havada işaretlenirsin.
-**COUNTER** Updraft noktanı recon tarama hattının dışına al. Recon hem yeri hem üstü tarıyorsa farklı köşeden çık.
-**WHY** Recon duvarı geçmez. Updraft'ı recon'un patladığı noktanın bir saat yönüne at — kör nokta tam orada.
+**IF** yukarı zıplama yukarıdan girdin, Fade recon'u üst katta
+**MEANING** yukarı zıplama recon görüşüne denk gelirse havada işaretlenirsin.
+**COUNTER** yukarı zıplama noktanı recon tarama hattının dışına al. Recon hem yeri hem üstü tarıyorsa farklı köşeden çık.
+**WHY** Recon duvarı geçmez. yukarı zıplama recon'un patladığı noktanın bir saat yönüne at — kör nokta tam orada.
 
 ---
 
 **IF** Fade ult'unu post-plant pozisyonuna attı
-**MEANING** Alana korku, nearsight ve görüş bozulması yayar. Dashsiz kalırsan o alanın içinde savunmasızsın.
+**MEANING** Alana korku, yarı-kör ve görüş bozulması yayar. Dashsiz kalırsan o alanın içinde savunmasızsın.
 **COUNTER** Ult'un sesini duyduğun an dash'le menzilin dışına çık. Ult hasar vermez, debuff verir — dışarı çıktığın an etkisi kesilir.
 **WHY** Ult'un menzili sabit. Dash hazırsa çıkarsın; cooldown'daysan tuzaktasın — bunu önceden bilip pozisyonunu ona göre al.
 
@@ -67,7 +67,7 @@ Fade seni bulmaya çalışır, sen de bulunmamaya. Recon, bot ve stun zinciriyle
 **IF** Op tutuyorsun, bot pozisyonuna doğru geliyor
 **MEANING** Bot statik op tutan Jett'e yaklaşıyor. Atışını ve kaçışını aynı anda planlaman lazım.
 **COUNTER** Atışını yap, hemen dash'le çekil. Botun sesini duyduğun an dash'i bota ters yöne aç.
-**WHY** Op seni yerine çiviler, bot da statik hedefi kapar. Dash'le oradan çekilmezsen ya nearsight yersin ya da bot seni Fade takımına işaretler.
+**WHY** Op seni yerine çiviler, bot da statik hedefi kapar. Dash'le oradan çekilmezsen ya yarı-kör yersin ya da bot seni Fade takımına işaretler.
 
 ---
 
@@ -78,7 +78,7 @@ Fade seni bulmaya çalışır, sen de bulunmamaya. Recon, bot ve stun zinciriyle
 
 ## 4. Utility Karşılaştırması
 
-Jett'in util'i hareket üzerine: dash, updraft, 3 smoke ve ult (7 puan).
+Jett'in util'i hareket üzerine: dash, yukarı zıplama, 3 smoke ve ult (7 puan).
 Fade'in util'i bilgi ve kovalama üzerine: bot, recon, stun ve ult (7 puan).
 
 Fade seni bulmaya çalışır, sen bulunmamaya. Yerini değiştirdiğin an Fade'in bilgisi bayatlar. Dash hattını hep aynı tutarsan Fade bot lineup'larını öğrenir ve seni yakalar.
@@ -91,7 +91,7 @@ Fade seni bulmaya çalışır, sen bulunmamaya. Yerini değiştirdiğin an Fade'
 
 **Bind (Jett avantajlı):** Hookah'taki yakın çatışma Jett'e uyar. Hookah'ın 4-5 metrelik darlığında bot dönecek yer bulamaz.
 
-**Icebox (Dengeli):** Recon Mid'in uzun açısını tutar, sen Rafters'a updraft'la çıkarsın.
+**Icebox (Dengeli):** Recon Mid'in uzun açısını tutar, sen Rafters'a yukarı zıplama çıkarsın.
 
 **Breeze (Jett avantajlı):** Uzun sightline op'un gücüdür. Botun menzili Breeze'in geniş alanına yetmez.
 
@@ -103,7 +103,7 @@ Fade seni bulmaya çalışır, sen bulunmamaya. Yerini değiştirdiğin an Fade'
 
 **Flip 1 — Recon gösterir:** Recon görüşünde kaldıysan aggressive pozisyonun Fade takımına gider.
 
-**Flip 2 — Bot inişini kapar:** Dash sonrası aynı noktaya inersen nearsight yersin, trade'lenirsin.
+**Flip 2 — Bot inişini kapar:** Dash sonrası aynı noktaya inersen yarı-kör yersin, trade'lenirsin.
 
 **Flip 3 — Stun rotate hattında:** Stun rotate'ini keser, dash'in değeri düşer.
 

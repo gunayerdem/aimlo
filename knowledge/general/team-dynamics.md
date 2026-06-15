@@ -211,7 +211,7 @@ Controller ya da initiator oynuyorsan işin entry'yi yaşatmak. Util'in onun iç
 
 IF entry'nin arkasındaki destek oyuncusuysan
 MEANING util'in ve pozisyonun entry'yi güçlendirmek ve trade almak için var
-COUNTER entry düştüğünde sen pozisyon dışındaysan düşman seni cezalandırır — trade yok, site yok
+COUNTER entry düştüğünde sen pozisyon dışındaysan düşman trade'siz bedavaya kill alır — trade yok, site yok
 WHY smoke ve flash zamanlaman doğruysa ve doğru mesafedeysen site take olur; yanlışsa ikisi de boşa gider
 
 1. **smoke zamanlaması.** Entry içeri girmeden smoke'u koy. Entry girdikten sonra koyarsan zaten açıkta kalır.

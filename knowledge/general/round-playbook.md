@@ -47,7 +47,7 @@ Rakip Classic + minimal yetenekle geliyor. Sen tam paradasın. Kazanmak %80 gara
 **Savunma:** Tam alışveriş ama yeteneğe az dokun — ult puanı biriktir, hizalama uğruna harcama.
 **Saldırı:** Tam alışveriş, yeteneği kullan ama boşa atma.
 
-## FORCE — 2.900-3.900 TL arası, bu round'u kaybetmek pahalı
+## FORCE — 2.900-3.900 kredi arası, bu round'u kaybetmek pahalı
 
 Force karar round'udur. Kendine şunu sor: **"Bu round'u kaybedersem bir sonraki eco'yu kaldırabilir miyim?"** Kaldırabiliyorsan force. Kaldıramıyorsan save et, parayı koru.
 
@@ -149,7 +149,7 @@ Silahları topla, minimum yetenek al, parayı kontrollü tut. Yetenek eksikliği
 
 ## RANK NOTU
 
-**Gold-Plat:** Ekonomi kararını atlıyorsun. 2.400 TL ile Vandal alma, Spectre al. Save gerektiğinde ego clutch arama, silahı topla. Force geçiş kriterini öğren: "Kaybedersem parayı kaldırabilir miyim?"
+**Gold-Plat:** Ekonomi kararını atlıyorsun. 2.400 kredi ile Vandal alma, Spectre al. Save gerektiğinde ego clutch arama, silahı topla. Force geçiş kriterini öğren: "Kaybedersem parayı kaldırabilir miyim?"
 
 **Diamond-Ascendant:** Ekonomiyi biliyorsun ama round tipine göre plan değiştirmiyorsun. Pistol'de default, force'ta rush, eco'da tek pick oyunu — her birinin farklı giriş noktası, farklı yetenek sırası var. Hangi tipteysen ona göre yürüt.
 

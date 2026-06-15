@@ -69,7 +69,7 @@ COUNTER: Duvarı düşmanın görüş hattını kesecek şekilde koy, takımın 
 WHY: Ateş duvarı iki tarafı da keser. Yanlış konumda kendi entry'ni baltalar; takım yanından geçemeyince giriş zamanlaması bozulur ve düşman toplanır.
 
 IF: Molly'yi düşmanın üstüne değil hep kendi ayağına atıyorsun
-MEANING: Hot Hands'i sadece iyileşme aracı görüyorsun; alan reddetme / köşeden söküp atma işini hiç yapmıyorsun
+MEANING: Molly'yi sadece iyileşme aracı görüyorsun; alan reddetme / köşeden söküp atma işini hiç yapmıyorsun
 COUNTER: Tuttuğun açıyı bastıran düşman varsa molly'yi onun durduğu daracık köşeye at — ya hasar yer ya pozisyon değiştirir. İyileşme ihtiyacın yoksa molly bir alan-reddetme aracıdır.
 WHY: Phoenix'in tek molly'si var; her round'u iyileşmeye harcarsan post-plant'te ya da dar geçişte düşmanı söküp atacak aracın kalmaz. Aracı duruma göre seç.
 
@@ -108,7 +108,7 @@ WHY: Phoenix'in tek molly'si var; her round'u iyileşmeye harcarsan post-plant't
 
 **Tekrar düzeni:** 1. round sağ eğri, hemen swing. 2. round aynı köşede sol eğri. 3. round farklı köşeden sağ eğri. Her kill arasında kapak arkasına molly, bir sonraki dövüşe tam HP gir. Düşman 100 HP altındayken sen 150 HP ile giriyorsun.
 
-**Düşman adaptasyonu:** 4-5 round sonra önceden arkalarını dönmeye, flash menzilinin dışına çekilmeye ya da sen flash atmadan push yapmaya başlarlar.
+**Düşman adaptasyonu:** 4-5 round sonra önceden arkalarını dönmeye, flash menzilinin dışına çekilmeye ya da sen flash atmadan push atmaya başlarlar.
 
 **Karşı adaptasyon:**
 - Önceden arkasını dönüyorlarsa: swing'i bir an geciktir, flash tutmadı sanıp geri dönsünler, dönüşün ortasında yakala.

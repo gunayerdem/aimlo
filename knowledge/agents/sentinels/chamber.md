@@ -5,7 +5,7 @@ Chamber kağıt üstünde sentinel ama duelist gibi oyna. Tabancası güçlendir
 
 ## 2. Temel Sorumluluklar
 - **Agresif açı tut**: Anchor koy, açıyı tut, tek atış yap, teleport ol. Chamber'ın bütün oyunu bu döngü.
-- **Tabanca kredisini yönet**: Her mermi paraya mal oluyor. Pistol ve eco round'larda ana silahın olsun; tüfek aldığında onu sadece yedek olarak çek.
+- **Tabanca kredisini yönet**: Her mermi az da olsa paraya mal oluyor (mermi başına 100 kredi). Ucuz olduğu için pistol ve eco round'larda ana silahın olsun, save round'da yedek silah gibi çek; ama yine de boşa sıkma, her ıska o mermiyi çöpe attığın anlamına gelir.
 - **Ult'u ekonomi silahı gibi kullan**: Ult hazırken tüfek alma. O round silahın zaten elinde — parayı takıma dağıt.
 - **Tuzağı doğru yola koy**: Tek tuzakla yapabileceğin en fazla şey bir flank yolunu kapatmak. En tehlikeli yolu kapat, gerisini boşver.
 - **Anchor'u round başında yerleştir**: Round ortasında anchor değiştirme — hem geç kalırsın hem gürültü çıkarırsın hem de yerini ele verirsin.
@@ -35,7 +35,7 @@ Chamber kağıt üstünde sentinel ama duelist gibi oyna. Tabancası güçlendir
 **IF** Ult hazır ama yine tüfek alıyorsun
 **MEANING** Ult'un para değerini sokağa atıyorsun.
 **COUNTER** Ult hazırken tüfek parasını takıma ver. O round silahın zaten elinde.
-**WHY** Bedava op dururken tüfek almak 4700 krediyi çöpe atmak demek — takım ekonomisini de baltalıyorsun.
+**WHY** Bedava op dururken tüfek almak 2900 krediyi çöpe atmak demek — takım ekonomisini de baltalıyorsun.
 
 **IF** Tuzak birkaç round üst üste ya anında patlatılıyor ya da hiç tetiklenmiyor
 **MEANING** Ya tuzağın yeri fazla belli (görüp yok ediyorlar) ya da düşmanın hiç gelmediği bir yolu kapatıyorsun.
@@ -67,7 +67,7 @@ Chamber kağıt üstünde sentinel ama duelist gibi oyna. Tabancası güçlendir
 - **Icebox**: A site'ta rafters'tan uzun açı tutarken anchor'la site arkasına çekil. Düşman tüfekle yukarı bakmak zorunda, sen yukarıdan tek atış yapıp kaybolursun. Anchor'u rafters'a değil arkadaki güvenli zemine koy ki ilk atıştan sonra kimsenin göremeyeceği yere düş.
 - **Haven**: A long veya C long'da iş görür. Mid'deki kısa hatlar tabancayı tutarsız kılar, o koridorlardan uzak dur. Üç site var; flank yolu bol. Tuzağını her round o round'un en çok zorlanan flankine kaydır — Haven'da tek tuzakla iki yolu birden koruyamazsın, doğru olanı seç.
 - **Ascent**: Mid kontrolünü ult'la ezersin. Mid catwalk'tan market'e veya tiles'a teleport — işe yarayan kurulum bu. Ascent'te mid'i tutan takım round'u tutar; sen ult round'larında mid'i tek başına kilitleyip takıma site rotasyonu kazandırırsın. Mid düştüğünde de teleport sayesinde geri çekilip site'ı yeniden tutabilen tek sentinel'sin.
-- **Lotus**: A main ve B main'de açılar kısa, üç site girişi var. Anchor koyduğun noktayı anında basarlar — ult'u C long gibi daha uzun hatlara sakla. Lotus'un dar geçitleri tabancanı cezalandırır; kısa açıda tüfek tutan adam seni her zaman geçer. Bu haritada Chamber'ı oynamak istiyorsan oyununu C long'un uzun hattı etrafında kur, dar site'ları takıma bırak.
+- **Lotus**: A main ve B main'de açılar kısa, üç site girişi var. Anchor koyduğun noktayı anında basarlar — ult'u C long gibi daha uzun hatlara sakla. Lotus'un dar geçitlerinde tabancan zayıf kalır; kısa açıda tüfek tutan adam seni her zaman geçer. Bu haritada Chamber'ı oynamak istiyorsan oyununu C long'un uzun hattı etrafında kur, dar site'ları takıma bırak.
 - **Sunset**: Mid ve A main'deki orta-uzun hatlar tabanca için uygun. Mid'i ult'la tutup market kontrolü ver. Dar B'de zorlanırsın — tuzağını B flankine, ağırlığını mid ve A'ya koy.
 
 ## 6. Eşleşme Notları

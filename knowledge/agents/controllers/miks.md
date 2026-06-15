@@ -4,7 +4,7 @@
 
 ## 1. Rol Kimliği
 
-Miks bir controller — ama klasik smoke'çu değil. Hem görüş kapatır hem takımını ayakta tutar: smoke at, takım arkadaşını iyileştir, savaşa girmeden önce takıma hız ver. Omen ya da Brimstone tek iş yapar; Miks aynı turda hem duman hem destek üretir. Bu seni controller koltuğunda oturan yarı-destek oyuncusuna çevirir.
+Miks bir controller — ama klasik smoke'çu değil. Hem görüş kapatır hem takımını ayakta tutar: smoke at, takım arkadaşını iyileştir, savaşa girmeden önce takıma hız ver. Omen ya da Brimstone tek iş yapar; Miks aynı turda hem duman atar hem takımı ayakta tutar. Yani sen sadece smoke koymazsın, aynı zamanda takımın canını ve hızını yönetirsin.
 
 Ama bu çift rol ancak controller temellerini bildiğinde işe yarar: duman zamanlaması, choke kapatma, execute desteği, retake için yetenek saklama. Temelin sağlam değilse heal ve stim'in sadece dağınık enerji harcamasıdır.
 
@@ -13,21 +13,21 @@ Ama bu çift rol ancak controller temellerini bildiğinde işe yarar: duman zama
 ### E — Smoke (signature)
 Senin ana görüş kapatma aracın. Harita üzerinde hedefleyici açılıp birden çok nokta işaretliyorsun, smoke o noktalara anında düşüyor — gecikme yok. Her turun başında bir bedava şarjın var. Asıl işin bu: doğru sightline'ı doğru zamanda kapat. Retake için en az bir smoke sakla.
 
-### C — Heal / Concuss
-İki modlu bir cihaz atıyorsun. Bir modu düştüğü yerdeki takım arkadaşını iyileştirir — Miks, Sage ve Skye'dan sonra iyileştirebilen üçüncü ajan. Diğer modu düşmanı sersemletir (concuss): nişanı titretir, hareketini bozar. Heal modunu hasarlı takım arkadaşına, concuss modunu sıkışmış düşman açısına at. 2 şarjın var — birini destek, birini düşman bozmak için ayır.
+### C — Heal / Sersemletme
+İki modlu bir cihaz atıyorsun. Bir modu düştüğü yerdeki takım arkadaşını iyileştirir — Miks, Sage ve Skye'dan sonra iyileştirebilen üçüncü ajan. Diğer modu düşmanı sersemletir: nişanı titretir, hareketini bozar. Heal modunu hasarlı takım arkadaşına, sersemletme modunu sıkışmış düşman açısına at. 2 şarjın var — birini destek, birini düşman bozmak için ayır.
 
 ### Q — Stim
-Bir takım arkadaşını hedefleyip ateşliyorsun; hem sana hem ona dövüş hızı (combat stim) veriyor — daha hızlı koşma, daha hızlı nişan/ateş. Her kill'de yenileniyor, yani savaş kazandıkça devam eder. Entry'den hemen önce, sen ve giriş yapan takım arkadaşın aynı anda hız kazanacak şekilde bas.
+Bir takım arkadaşını hedefleyip ateşliyorsun; hem sana hem ona stim/hız veriyor — daha hızlı koşma, daha hızlı nişan/ateş. Her kill'de yenileniyor, yani savaş kazandıkça devam eder. Entry'den hemen önce, sen ve giriş yapan takım arkadaşın aynı anda hız kazanacak şekilde bas.
 
 ### X — Ult
-Önüne doğru bir ses dalgası salıyorsun: değdiği düşmanları geriye savurur, sağırlaştırır (deafen — ses ipuçlarını kaybeder) ve yavaşlatır. Sıkışık bir bölgede toplu düşmana ya da execute/retake anında girişe bas. Tek başına tur kazandırmaz — takım dalganın ardından girecekse değerli. Ekonomi düşükse ya da takım dağınıksa harcama.
+Önüne doğru bir ses dalgası salıyorsun: değdiği düşmanları geriye savurur, sağırlaştırır (ses ipuçlarını kaybeder) ve yavaşlatır. Sıkışık bir bölgede toplu düşmana ya da execute/retake anında girişe bas. Tek başına tur kazandırmaz — takım dalganın ardından girecekse değerli. Ekonomi düşükse ya da takım dağınıksa harcama.
 
 ## 3. Temel Sorumluluklar
 
 - **Execute desteği:** Takım girmeden hemen önce smoke'u koy. Çok erken koyarsan duman biter, giriş olmaz. Çok geç koyarsan takım açıkta kalır. Girişten hemen önce entry yapan arkadaşına stim de bas — siz ikiniz aynı anda hız kazanın.
-- **Choke kapatma:** Defansta dar geçişleri smoke ile kapat. Düşmanın push zamanlamasını boz, rotasyon için süre kazan. Düşman sıkışınca concuss at — nişanı titrer, takımın bedava açılır.
-- **Takımı ayakta tut:** Hasarlı takım arkadaşına heal at — savaş arası onu tam cana getir. Sen iyileştirebilen üç ajandan birisin; bu cana çevrilen turlar senin asıl katma değerin. Ama heal'i kovalamak için açığa çıkma.
-- **Yetenek saklama:** Her yeteneği bilinçli harca. Retake için elinde en az bir smoke kalsın; mümkünse bir heal/concuss de sakla.
+- **Choke kapatma:** Defansta dar geçişleri smoke ile kapat. Düşmanın push zamanlamasını boz, rotasyon için süre kazan. Düşman sıkışınca sersemletme at — nişanı titrer, takımın bedavaya açı açar.
+- **Takımı ayakta tut:** Hasarlı takım arkadaşına heal at — savaş arası onu tam cana getir. Sen iyileştirebilen üç ajandan birisin; o arkadaşı cana çevirip bir sonraki düelloyu eşit girdirmek senin işin. Ama heal'i kovalamak için açığa çıkma.
+- **Yetenek saklama:** Her yeteneği bilinçli harca. Retake için elinde en az bir smoke kalsın; mümkünse bir heal/sersemletme de sakla.
 - **Çağrı yap:** Miks yeni bir ajan — takım arkadaşın yetenek görselini tanımıyor olabilir. Her kullanımdan önce söyle: "Smoke A short'a düşüyor", "Sana heal atıyorum", "Stim açtım, gir". Çağrısız atılan yetenek takım arkadaşını yanlış yerde yakalar.
 - **Tur planı:** A atak, B atak, defans ve retake için hangi yeteneği nereye koyacağını önceden düşün. Plansız oynarsan yeteneği rastgele harcarsın.
 - **Okuma:** Rakipler sana karşı nasıl duracaklarını öğreniyor. Aynı yeri her tur tekrarlama — yerleştirmeni değiştir.
@@ -64,12 +64,12 @@ Bir takım arkadaşını hedefleyip ateşliyorsun; hem sana hem ona dövüş hı
 
 **IF** Bazı turlarda parlıyorsun ama diğerlerinde görünmez kalıyorsun
 **MEANING** Belirli kurulumlara bağımlısın, duruma göre oynayamıyorsun
-**COUNTER** Her tur durumu için varsayılan bir yetenek planı çıkar. A atak: hangi smoke'lar, hangi sıra, kime stim. B atak: aynı soru. Defans: hangi choke smoke'la kapatılacak, sıkışan düşmana concuss nereye. Retake: hangi smoke saklanacak, hasarlıya heal nereden.
+**COUNTER** Her tur durumu için varsayılan bir yetenek planı çıkar. A atak: hangi smoke'lar, hangi sıra, kime stim. B atak: aynı soru. Defans: hangi choke smoke'la kapatılacak, sıkışan düşmana sersemletme nereye. Retake: hangi smoke saklanacak, hasarlıya heal nereden.
 **WHY** Plansız tur yeteneği rastgele harcatır. Yapılandırılmış plan her turda en az şu kadar değer garantiler.
 
 **IF** Yetenek kullanımın başka bir controller'ı taklit ediyor
 **MEANING** Miks'in kendine özgü avantajını — duman + destek birleşimini — henüz keşfetmedin
-**COUNTER** Custom'da heal ve stim'i akışına otut. Smoke'u koyarken aynı turda kimi iyileştirebileceğini, kime stim atabileceğini planla. Entry öncesi stim + smoke kombosunu çalış.
+**COUNTER** Custom'da heal ve stim'i akışına oturt. Smoke'u koyarken aynı turda kimi iyileştirebileceğini, kime stim atabileceğini planla. Entry öncesi stim + smoke kombosunu çalış.
 **WHY** Miks'i sadece smoke'çu gibi oynarsan başka her controller'dan daha vasat kalırsın — Miks'in değeri ancak duman ile heal/stim'i aynı turda üst üste bindirdiğinde çıkar.
 
 **IF** Retake sırasında elinizde yetenek kalmıyor
@@ -84,7 +84,7 @@ Bir takım arkadaşını hedefleyip ateşliyorsun; hem sana hem ona dövüş hı
 
 **IF** Her tur aynı smoke sırasını kullanıyorsun
 **MEANING** Öngörülebilir oldun, rakipler yetenek zamanlamanı ve pozisyonunu biliyor
-**COUNTER** Yerleştirmeyi tur bazında değiştir. Bir turda smoke'u erken koy, sonrakinde geciktir. Concuss'u bir turda erken peek'i bozmak için, sonrakinde execute anında kullan.
+**COUNTER** Yerleştirmeyi tur bazında değiştir. Bir turda smoke'u erken koy, sonrakinde geciktir. Sersemletmeyi bir turda erken peek'i bozmak için, sonrakinde execute anında kullan.
 **WHY** Öngörülebilir yetenek kullanımı düşmanın smoke düzenini ve giriş zamanlamanı okumasını hızlandırır — sürpriz avantajın sıfırlanır.
 
 **IF** Ult'u her aldığında hemen kullanıyorsun
@@ -109,45 +109,45 @@ Bir takım arkadaşını hedefleyip ateşliyorsun; hem sana hem ona dövüş hı
 
 **IF** Spike kurulduktan sonra defuse'u kollamak yerine kill kovalayıp öldün, spike patladı
 **MEANING** Postplant'te işin düşmanı avlamak değil, zamanı ve görüşü yönetmek
-**COUNTER** Spike kurulunca smoke'u defuse açılarına sakla, hasarlı arkadaşını heal ile tam cana getir. Düşman defuse'a oturduğunda görüşünü smoke ile kapat ya da concuss ile sersemlet. Açık alanda kill aramak yerine yeteneğinle açıyı kilitle.
+**COUNTER** Spike kurulunca smoke'u defuse açılarına sakla, hasarlı arkadaşını heal ile tam cana getir. Düşman defuse'a oturduğunda görüşünü smoke ile kapat ya da sersemletme ile nişanını boz. Açık alanda kill aramak yerine yeteneğinle açıyı kilitle.
 **WHY** Postplant'te zaman senin tarafında. Gereksiz duello arayıp ölürsen düşmana serbest defuse açarsın — yeteneklerin yerinde durduğunda düşman ne defuse edebilir ne de güvenle yaklaşabilir.
 
 ## 6. Harita Etkileşimleri
 
 ### Split — S Tier
-Orta kontrol ve dar koridorlar Miks için ideal. A Ramp ve B Main'de duman zamanlaması ve choke kapatma güçlü çalışır. Ortadaki peek açılarını smoke ile kapat, sıkışan düşmana concuss at — dar koridorda kaçacak yer yok. Mail ve Vent geçişlerini aynı anda smoke'layabilirsin. Entry öncesi mid'i alan arkadaşına stim bas.
+Orta kontrol ve dar koridorlar Miks için ideal. A Ramp ve B Main'de duman zamanlaması ve choke kapatma güçlü çalışır. Ortadaki peek açılarını smoke ile kapat, sıkışan düşmana sersemletme at — dar koridorda kaçacak yer yok. Mail ve Vent geçişlerini aynı anda smoke'layabilirsin. Entry öncesi mid'i alan arkadaşına stim bas.
 
 ### Bind — S Tier
-Dar harita yapısı controller temellerini ödüllendirir. A Short ve B Long'da smoke ile execute'u kapatırsın. Teleport çıkışında concuss çok güçlü — çıkan düşman sersem yakalanır. Hookah'da smoke savunanların görüşünü keser; arkasından giren arkadaşına stim ver. Heal'in Bind'in uzun retake'lerinde hasarlı oyuncuyu ayakta tutar. Miks + Viper bu haritada çok iyi çalışır.
+Dar harita yapısı controller temellerini ödüllendirir. A Short ve B Long'da smoke ile execute'u kapatırsın. Teleport çıkışında sersemletme çok güçlü — çıkan düşman sersem yakalanır. Hookah'da smoke savunanların görüşünü keser; arkasından giren arkadaşına stim ver. Heal'in Bind'in uzun retake'lerinde hasarlı oyuncuyu ayakta tutar. Miks + Viper bu haritada çok iyi çalışır.
 
 ### Haven — A Tier
-Üç site var, yetenek yönetimi disiplin ister. Yeteneğini üç siteye dağıtmak zorundasın — tek bir bölgeye tüm yeteneği yığarsan diğer iki site çıplak kalır. C Long'da smoke push'ı kör eder; sıkışmış düşmana concuss ekle. Garage'da smoke mid oyununu destekler ve rotasyonu keser. Rotasyon bu haritada sık ve hızlı olduğu için retake'e mutlaka smoke sakla — üç site demek, hangi site düşerse düşsün retake'e koşmak demek; koşarken hasarlı arkadaşına heal at. Defansta erken yetenek harcamak Haven'da en pahalı hata: yanlış site'a yüklenen smoke, doğru site'ı savunmasız bırakır.
+Üç site var, yetenek yönetimi disiplin ister. Yeteneğini üç siteye dağıtmak zorundasın — tek bir bölgeye tüm yeteneği yığarsan diğer iki site çıplak kalır. C Long'da smoke push'ı kör eder; sıkışmış düşmana sersemletme ekle. Garage'da smoke mid oyununu destekler ve rotasyonu keser. Rotasyon bu haritada sık ve hızlı olduğu için retake'e mutlaka smoke sakla — üç site demek, hangi site düşerse düşsün retake'e koşmak demek; koşarken hasarlı arkadaşına heal at. Defansta erken yetenek harcamak Haven'da en pahalı hata: yanlış site'a yüklenen smoke, doğru site'ı savunmasız bırakır.
 
 ### Lotus — A Tier
-Dönen kapılar ve dar B Main koridoru smoke ve concuss için ideal. Smoke savunanların görüşünü keser, dar koridorda concuss'tan kaçış yok. A Main'de choke kapatma güçlü. C site'ta retake öncesi hasarlı arkadaşına heal at, sonra smoke ile gir. Kapı kapanırken sıkışan düşmana concuss — sersem ve köşeye kısılmış olur.
+Dönen kapılar ve dar B Main koridoru smoke ve sersemletme için ideal. Smoke savunanların görüşünü keser, dar koridorda sersemletmeden kaçış yok. A Main'de choke kapatma güçlü. C site'ta retake öncesi hasarlı arkadaşına heal at, sonra smoke ile gir. Kapı kapanırken sıkışan düşmana sersemletme at — sersem ve köşeye kısılmış olur.
 
 ### Ascent — B Tier
-A Main ve B Main'in geniş choke noktaları smoke için iyi ama mid'in açık yapısı yüzünden concuss açık alanda kolay atlatılır — sersemleyen düşman geniş alanda dolanıp toparlanır. Catwalk kontrolünde smoke değerli, çünkü mid'den A'ya akışı keser. Mid yerine site girişlerine yüklen: dar choke'ta concuss'ın değeri açık mid'dekinin çok üstünde. A'da kapı, B'de market gibi sabit yapılar yetenek planını kolaylaştırır — bu sabit noktaları her tur farklı zamanlamayla kullan ki rakip okuyamasın.
+A Main ve B Main'in geniş choke noktaları smoke için iyi ama mid'in açık yapısı yüzünden sersemletme açık alanda kolay atlatılır — sersemleyen düşman geniş alanda dolanıp toparlanır. Catwalk kontrolünde smoke değerli, çünkü mid'den A'ya akışı keser. Mid yerine site girişlerine yüklen: dar choke'ta sersemletmenin değeri açık mid'dekinin çok üstünde. A'da kapı, B'de market gibi sabit yapılar yetenek planını kolaylaştırır — bu sabit noktaları her tur farklı zamanlamayla kullan ki rakip okuyamasın.
 
 ### Icebox — B Tier
-A site'ın çok katlı yapısı smoke yerleştirmeni zorlar — yükseklik farkı olan alanlarda smoke'u test et. B site tünel girişi smoke + concuss için uygun ama geniş B site'ta savunanın kaçacak çok yeri var, concuss'ın etkisi dağılır. Bu haritada Viper daha güçlü bir tercih.
+A site'ın çok katlı yapısı smoke yerleştirmeni zorlar — yükseklik farkı olan alanlarda smoke'u test et. B site tünel girişi smoke + sersemletme için uygun ama geniş B site'ta savunanın kaçacak çok yeri var, sersemletmenin etkisi dağılır. Bu haritada Viper daha güçlü bir tercih.
 
 ## 7. Eşleşme Notları
 
 ### Omen'e karşı — Deneyim dezavantajı
-Omen oyuncuları kitlerini yıllardır biliyor. Sadece smoke yarışına girersen deneyim farkı rakibin lehine. Aynı yarışa girme — Miks'in farkı destek: takımını iyileştir, entry'ye stim ver, Omen'in tek başına yapamadığını yap. Omen'in flash'inden sonra peek edecek düşmanı concuss ile boz.
+Omen oyuncuları kitlerini yıllardır biliyor. Sadece smoke yarışına girersen deneyim farkı rakibin lehine. Aynı yarışa girme — Miks'in farkı destek: takımını iyileştir, entry'ye stim ver, Omen'in tek başına yapamadığını yap. Omen'in flash'inden sonra peek edecek düşmanı sersemletme ile boz.
 
 ### Viper ile — Tamamlayıcı güç
 Viper duvarı uzun sightline'ları keserken sen smoke ile kısa açıları kapatırsın — çift katmanlı görüş kontrolü olur. Viper hasar verirken sen takımı heal ile ayakta tutarsın; ikiniz tam bir kontrol-destek ikilisisiniz. Yetenek zamanlamanı Viper oyuncusuyla koordine et — üst üste smoke israftır.
 
 ### Sova/Fade'e karşı — Bilgi savaşı
-Düşman recon aracını attığı anda oraya smoke koy — recon'u boşa çıkarırsın. Recon sonrası peek atacak düşmana concuss at, nişanını boz. Recon hasarı yediğin turlarda kendini ve arkadaşını heal ile toparla — bilgi savaşında ayakta kalan takım kazanır.
+Düşman recon aracını attığı anda oraya smoke koy — recon'u boşa çıkarırsın. Recon sonrası peek atacak düşmana sersemletme at, nişanını boz. Recon hasarı yediğin turlarda kendini ve arkadaşını heal ile toparla — bilgi savaşında ayakta kalan takım kazanır.
 
-### Jett, Raze, Neon'a karşı — Concuss ve smoke cezası
-Agresif giren duelist'lere karşı smoke ile entry açısını kör et, sıkıştıkları anda concuss at — sersem giren duelist bedava ölür. Jett dash'le sıyrılabilir ama yavaşlatılmış/sersem bir Raze ya da Neon hız avantajını kaybeder. Düello sonrası hasarlı arkadaşını heal ile ayağa kaldır.
+### Jett, Raze, Neon'a karşı — Sersemletme ve smoke cezası
+Agresif giren duelist'lere karşı smoke ile entry açısını kör et, sıkıştıkları anda sersemletme at — sersem giren duelist bedavaya ölür. Jett dash'le sıyrılabilir ama yavaşlatılmış/sersem bir Raze ya da Neon hız avantajını kaybeder. Düello sonrası hasarlı arkadaşını heal ile ayağa kaldır.
 
-### KAY/O'ya karşı — Suppress tehdidi
-KAY/O'nun suppress'i tüm kitini — smoke, heal, stim — devre dışı bırakır. Suppress alanının dışında kal. KAY/O bıçağını gördüğünde yetenekleri suppress düşmeden hemen koy: smoke'u at, hasarlıya heal'i bas. KAY/O ult'unun suppress'i sürerken takım arkadaşlarının yeteneğine güven, sen yaşamaya odaklan.
+### KAY/O'ya karşı — yetenek kapatma tehdidi
+KAY/O'nun yetenek kapatması tüm kitini — smoke, heal, stim — devre dışı bırakır. Kapatma alanının dışında kal. KAY/O bıçağını gördüğünde yeteneklerini kapatma düşmeden hemen koy: smoke'u at, hasarlıya heal'i bas. KAY/O ult'unun kapatması sürerken takım arkadaşlarının yeteneğine güven, sen yaşamaya odaklan.
 
 ### Cypher/Killjoy'a karşı — Bilgi asimetrisi
 Sentinel'ler senin yetenek sıranı öğrendikçe tuzaklarını ona göre kurar. Yetenek sıranı değiştirirsen tuzak zamanlamasını bozarsın. Killjoy'un botu duman arkasından ateş edebilir — smoke'un botu gerçekten kapatıp kapatmadığını kontrol et.
@@ -163,11 +163,11 @@ Sentinel'ler senin yetenek sıranı öğrendikçe tuzaklarını ona göre kurar.
 
 **Fırsat Penceresi:** İlk turlar, savunanlar senin destek temponu okumadan önce en geniş fırsat. Bu turlarda agresif execute'ları stim + smoke ile bas.
 
-**Tekrar Stratejisi:** İlk turda standart smoke ve entry'ye stim. Sonraki turda smoke zamanlamasını kaydır ve sıkışan açıya concuss ekle. Heal'i hep hasarlının olduğu yere ayır. Her kullanımı takıma söyle.
+**Tekrar Stratejisi:** İlk turda standart smoke ve entry'ye stim. Sonraki turda smoke zamanlamasını kaydır ve sıkışan açıya sersemletme ekle. Heal'i hep hasarlının olduğu yere ayır. Her kullanımı takıma söyle.
 
 **Düşman Adaptasyonu:** 5+ turdan sonra savunanlar stim'li girişe karşı erken çıkar ya da retake ağırlıklı kurulur, hasarlı bıraktıklarını öldürmek için pozisyon alır.
 
-**Karşı Adaptasyon:** Erken çıkıyorlarsa: çıkan düşmanı concuss ile boz, takımın bedava açsın. Hasarlıyı kovalıyorlarsa: heal'i savaş biter bitmez bas, kovalayanı boşa düşür. Retake oynuyorlarsa: siteyi serbestçe al, smoke'u retake yollarına sakla ve giren arkadaşına stim ver.
+**Karşı Adaptasyon:** Erken çıkıyorlarsa: çıkan düşmanı sersemletme ile boz, takımın bedavaya açı açsın. Hasarlıyı kovalıyorlarsa: heal'i savaş biter bitmez bas, kovalayanı boşa düşür. Retake oynuyorlarsa: siteyi serbestçe al, smoke'u retake yollarına sakla ve giren arkadaşına stim ver.
 
 ### Zorlandığında
 "Temele dön. Heal ve stim'i şimdilik bırak. Doğru yerleri smoke'la kapat, doğru choke'ları tut ve hayatta kal. Duman zamanlaması ve choke kapatma her turda değer üretir. Destek katmanı temel oturunca eklenir. Bir tur boyunca sadece iki şeye bak: smoke'u doğru zamanda koy, bir smoke'u retake için sakla."
@@ -182,7 +182,7 @@ Sentinel'ler senin yetenek sıranı öğrendikçe tuzaklarını ona göre kurar.
 "Çok öne çıkıyorsun. Sen bir controller'sın — bilgiyi vücudunla değil yeteneğinle topla. Öldüğün anda takım o turda smokesız kalıyor, bu bir kill'den çok daha pahalı. Smoke'u koy, kenarına yapışma, bir adım geri çekil ve açıyı dumanın gerisinden tut. Geniş açıyla kısa peek at, açıyı tut, yaşa. Yaşayan bir controller turu kazandırır, ölü bir controller takımı çıplak bırakır."
 
 ### Postplant'i kötü oynuyorsa
-"Spike kurulunca işin bitti sanma — asıl iş o an başlıyor. Kill kovalama, zamanı yönet. Smoke'u defuse açılarına sakla, hasarlı arkadaşını heal ile tam cana getir. Düşman defuse'a oturduğunda görüşünü smoke ile kapat ya da concuss ile sersemlet. Açık alanda duello arayıp ölürsen düşmana serbest defuse açarsın. Yeteneğin yerinde dursun, zaman senin tarafında."
+"Spike kurulunca işin bitti sanma — asıl iş o an başlıyor. Kill kovalama, zamanı yönet. Smoke'u defuse açılarına sakla, hasarlı arkadaşını heal ile tam cana getir. Düşman defuse'a oturduğunda görüşünü smoke ile kapat ya da sersemletme ile nişanını boz. Açık alanda duello arayıp ölürsen düşmana serbest defuse açarsın. Yeteneğin yerinde dursun, zaman senin tarafında."
 
 ## 9. Rank Modülasyonu
 
@@ -190,10 +190,10 @@ Sentinel'ler senin yetenek sıranı öğrendikçe tuzaklarını ona göre kurar.
 Miks'i basit bir smoke'çu gibi oyna. Smoke'u takımın için doğru zamanda koy. Her turda "smoke nereye?" diye sor. Choke noktalarını kapatmayı öğren, destek katmanını sonraya bırak. Tek şey ekleyeceksen: ölmek üzere olan ya da hasarlı arkadaşına heal at — basit ama tur kazandırır. Retake için bir smoke sakla. Tek doğru smoke, üç yanlış süslü oyundan çok daha fazla değer üretir.
 
 ### Gold-Platinum
-Smoke'un üstüne destek katmanını ekle. Entry'den önce giren arkadaşına stim vermeyi alışkanlık yap — siz ikiniz aynı anda hızlanın. Düello sonrası hasarlıyı heal ile ayağa kaldır. Rakipler smoke arkasından peek atmayı biliyor — sıkışan o peek'i concuss ile boz. A atak, B atak ve retake için ayrı yetenek planı çıkar, bunu alışkanlık hâline getir.
+Smoke'un üstüne destek katmanını ekle. Entry'den önce giren arkadaşına stim vermeyi alışkanlık yap — siz ikiniz aynı anda hızlanın. Düello sonrası hasarlıyı heal ile ayağa kaldır. Rakipler smoke arkasından peek atmayı biliyor — sıkışan o peek'i sersemletme ile boz. A atak, B atak ve retake için ayrı yetenek planı çıkar, bunu alışkanlık hâline getir.
 
 ### Diamond-Ascendant
-Miks'e özgü bir oyun kitabı geliştir. Smoke + stim + heal'i tek bir akışta üst üste bindir: smoke düşer, stim'li arkadaş girer, hasar alanı heal ile kapanır. Concuss'u execute anında doğru açıya sakla. Rakiplerin sana karşı nasıl konumlandığını tur bazında oku: stim'li girişe karşı erken mi çıkıyorlar, hasarlı bıraktıklarını öldürmeye mi gidiyorlar, retake mi oynuyorlar? Her senaryo farklı bir hamle ister.
+Miks'e özgü bir oyun kitabı geliştir. Smoke + stim + heal'i tek bir akışta üst üste bindir: smoke düşer, stim'li arkadaş girer, hasar alanı heal ile kapanır. Sersemletmeyi execute anında doğru açıya sakla. Rakiplerin sana karşı nasıl konumlandığını tur bazında oku: stim'li girişe karşı erken mi çıkıyorlar, hasarlı bıraktıklarını öldürmeye mi gidiyorlar, retake mi oynuyorlar? Her senaryo farklı bir hamle ister.
 
 ### Immortal-Radiant
 Miks yeni bir ajan — Radiant seviyesinde yeni bir ajanda iyi oyunları erken keşfetmek büyük avantajdır. Rakiplerin sana karşı geliştirdiği macro stratejileri tespit et: retake ağırlıklı mı oynuyorlar, stim'li girişten önce mi saldırıyorlar, hasarlı oyuncunu mu hedefliyorlar? Yarı zamanında bu sorulara cevap ver ve planı değiştir. Scrim'de smoke + heal + stim kombolarını dene, ranked'da sadece kanıtlanmışları kullan. Takımın flash'leri ve entry zamanlamasıyla stim'i ve smoke'u hizala — yeteneğin tek başına değil, takımın hareketiyle birlikte çalışır.

@@ -108,7 +108,7 @@ WHY: Bind'in geniş site'leri yüzünden tek yönden retake tüm açılara açı
 ## 5. Agent Tier Listesi
 
 ### S-Tier
-- **Raze**: Bind'de Raze oynamak zorundasın. Bot'unu B Long'a gönder — bedava bilgi, düşman pozisyonu açılır. Satchel'la agresif entry at. Molly'sini A Bath ve Hookah'a at, karşılıksız hasar ver. Ult'u geniş site'larda birden fazla düşmanı bitirir. Takımında Raze yoksa dezavantajlı başlıyorsun.
+- **Raze**: Bind'de Raze oynamak zorundasın. Bot'unu B Long'a gönder — bedava bilgi, düşman pozisyonu açılır. Sıçrama util / patlayıcı ile agresif entry at. Molly'sini A Bath ve Hookah'a at, karşılıksız hasar ver. Ult'u geniş site'larda birden fazla düşmanı bitirir. Takımında Raze yoksa dezavantajlı başlıyorsun.
 - **Skye**: Flash'ı Bind'in dar girişlerinde çift iş yapar — hem kör eder hem düşmanın orada olup olmadığını söyler. Bot'uyla A Bath ve Hookah'yı tek başına temizle. Sert düellodan sonra heal'le takımı ayağa kaldır.
 - **Brimstone**: Harita küçük, smoke menzilin dert değil. A Execute'te Heaven + Lamps + ekstra, B Execute'te Elbow + Hookah + ekstra — üç smoke yeter. Molly'sini post-plant'te spike üstüne bırak, defuse'u engelle. Bu tek başına round kazandırır.
 
@@ -123,7 +123,7 @@ WHY: Bind'in geniş site'leri yüzünden tek yönden retake tüm açılara açı
 - **Jett**: Dar koridorlarda dash'in geri çekilme avantajı azalır. A Bath veya Hookah'ta dash'le kaçacak yerin yok. Heaven veya B Long'da op tut ama haritanın küçüklüğü menzilini kısıtlar.
 - **Phoenix**: Flash'ın dar koridorlarda çalışır ama Skye flash'ı bilgi de verir, genelde o tercih edilir. Molly'sini dar alanlarda alan kapatmak için kullan. Ult'unu B Site retake'te kullan, iyi bir koz olabilir.
 
-## 6. Rank Modulasyonu
+## 6. Rank Modülasyonu
 
 ### Iron-Silver
 Bind'de en büyük hatan teleporter'ı unutmak. Teleporter sesi geldi mi takımına söyle. Bu kadar. Her round'da bunu yap. A Bath veya Hookah'ya util atmadan giriyorsan ölürsün. Önce util at, sonra gir. Bu iki alışkanlık seni bir üst ranka taşır.
@@ -259,7 +259,7 @@ COUNTER:
 - Bot'unu çıkışa bak — çıkan düşman hem hasar alır hem ses verir.
 - Çıkışta oyuncu bekletebilirsin — teleporter animasyonu sırasında düşman ateş edemez, sen edebilirsin.
 
-WHY: Teleporter'dan çıkarken kısa bir an savunmasızsın. O anı utille veya oyuncuyla cezalandırırsan düşmanın bu stratejisi çöker.
+WHY: Teleporter'dan çıkarken kısa bir an savunmasızsın. O anı utille veya oyuncuyla yakalarsan çıkan düşmanı bedavaya vurursun ve bu stratejisi çöker.
 
 ---
 

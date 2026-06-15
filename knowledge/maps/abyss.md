@@ -132,7 +132,7 @@ WHY: Kenar kontrol edilmezse tahmin edemediğin bir açıdan vurulursun. Kenarı
 
 **S Tier**
 
-- **Jett**: Bu harita Jett için yapılmış. Dash ve updraft ile uçurumun üstünden atlarsın, kenardan açı açarsın, kimse seni beklemez. Bridge'de Op alırsın, uzun hatlarda kimse sana dokunamaz. Uçurum mekaniğiyle en iyi oynayan duelist bu.
+- **Jett**: Bu harita Jett için yapılmış. Dash ve yukarı sıçrama ile uçurumun üstünden atlarsın, kenardan açı açarsın, kimse seni beklemez. Bridge'de Op alırsın, uzun hatlarda kimse sana dokunamaz. Uçurum mekaniğiyle en iyi oynayan duelist bu.
 - **Sage**: Duvarı Bridge'e çekersin — bu haritanın en güçlü tek hamlesi. Yavaşlatmayı kenar bölgeye atarsın, düşman düşer. Açık alanda heal altın değerinde. Sage olmadan bu haritada savunma yapamazsın.
 - **Viper**: Duvarla mid'i kesersin ya da siteyi bölersin. Smoke ile site kontrolü alırsın. Duvarını uçurum kenarına çekersin. Haritanın geniş hatları Viper'in her şeyini daha güçlü kılar.
 
@@ -147,11 +147,11 @@ WHY: Kenar kontrol edilmezse tahmin edemediğin bir açıdan vurulursun. Kenarı
 **B Tier**
 
 - **Cypher**: Tel ile kenar geçişlerini izleyebilirsin ama haritanın açık alanları Cypher'i kısıtlıyor. Killjoy tuzağı kadar esnek değil. Yine de bilgi için oynayabilirsin.
-- **Sova**: Recon geniş alanda bilgi verir, shock dart post-plant'te işe yarar. Ama dikey oyun ve kenar mekaniği Sova'nın elini bağlıyor.
+- **Sova**: Recon geniş alanda bilgi verir, molly / hasar oku post-plant'te işe yarar. Ama dikey oyun ve kenar mekaniği Sova'nın elini bağlıyor.
 - **Brimstone**: Post-plant molly'lerin güçlü, smoke hızlı gelir. Ama Viper bu haritada çok daha baskın — ikinci controller seçimi olarak kalırsın.
 - **Phoenix**: Flash'la girişe yardım eder, ult bilgi toplar. Ama haritanın geniş alanları Phoenix'in yakın mesafe kitini çok kısıtlıyor.
 
-## 6. Rank Modulasyonu
+## 6. Rank Modülasyonu
 
 **Iron-Silver**: Abyss'te en büyük ölüm sebebin rakip değil, uçurum. Harita sınırlarını bilmiyorsun — ya kendin düşüyorsun ya da util'inle takım arkadaşını düşürüyorsun. Şu üç şeyi yap:
 - Her round ayaklarının nereye bastığını gör.
@@ -168,7 +168,7 @@ Kenar peek'lerini öğrenmene şu an gerek yok. Önce hayatta kal.
 Kenar peek'ini her round değil, sürpriz pozisyon olarak kullan.
 
 **Diamond-Ascendant**: Okunuyorsun. Her round aynı kenar pozisyonu, aynı Bridge stratejisi — rakip seni ezberliyor. Şu üç şeyi değiştir:
-- Aynı pozisyonu arka arkaya iki round kullanma, üçüncüde kesin cezalandırılırsın.
+- Aynı pozisyonu arka arkaya iki round kullanma, üçüncüde rakip o açıyı önceden tutar ve sen daha peek atmadan seni vurur.
 - Rakip Bridge'i stack edince yön değiştir, o round zorlama.
 - Post-plant'te uçurum kenarında pozisyon alma. Güvenli crossfire kur.
 
@@ -271,7 +271,7 @@ WHY: Post-plant'in tek amacı zamanı yemek ve defuse'u engellemek. Kenarda öl�
 
 ## 11. Anti-Strat
 
-**Rakip her round Bridge push yapıyorsa**: Duvar çek, üstüne smoke + molly koy. Duvara rağmen push devam ederse, duvarın arkasında molly ya da yavaşlatma beklet. Bridge'de stack yap, ilk push'u cezalandır. Rakip Bridge'den çekinmeye başlarsa Bridge agresyonunu bırak.
+**Rakip her round Bridge push yapıyorsa**: Duvar çek, üstüne smoke + molly koy. Duvara rağmen push devam ederse, duvarın arkasında molly ya da yavaşlatma beklet. Bridge'de stack yap, ilk push'a bedavaya kill al. Rakip Bridge'den çekinmeye başlarsa Bridge agresyonunu bırak.
 
 **Rakip void kenarlarını sürekli kullanıyorsa**: Breach molly ve stun'ını kenar pozisyonlara gönder. Rakibi kenardan at ya da geri çekilmeye zorla. Molly ve yavaşlatma ile kenar pozisyonları kapat. Tuzak ya da teli kenar geçişine dik — bilgi gelince util gönder.
 

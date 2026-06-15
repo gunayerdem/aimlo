@@ -9,7 +9,7 @@ tags: [matchup, raze, reyna, duelist_vs_duelist]
 
 ## 1. Matchup Özü
 
-Raze ile Reyna aynı rolde ama zıt iş yapar. Raze oynuyorsan takımına bilgi ve hasar üretirsin — botun köşeleri tarar, mollyn alana hasar basar, satchel seni yükseğe taşır. Kill alamasan bile bir şey üretirsin. Reyna oynuyorsan tek gelirin kill: kill alırsan heal ile can toplarsın, kaçışla bölgeden sıyrılırsın. Kill alamazsan elinde sadece flash kalır, o kadar. Bu yüzden Reyna karşısında hedefin net — ona ilk kill'i verme.
+Raze ile Reyna aynı rolde ama zıt iş yapar. Raze oynuyorsan takımına bilgi ve hasar üretirsin — botun köşeleri tarar, mollyn alana hasar basar, sıçrama seni yükseğe taşır. Kill alamasan bile bir şey üretirsin. Reyna oynuyorsan tek gelirin kill: kill alırsan heal ile can toplarsın, kaçışla bölgeden sıyrılırsın. Kill alamazsan elinde sadece flash kalır, o kadar. Bu yüzden Reyna karşısında hedefin net — ona ilk kill'i verme.
 
 ## 2. Kim Avantajlı?
 
@@ -45,10 +45,10 @@ Raze, her haritada. Reyna sadece takım dağınık oynayınca tehlikelidir — h
 
 ---
 
-**IF** Satchel ile tepeden iniyorsun, Reyna yerde duruyor
+**IF** sıçrama ile tepeden iniyorsun, Reyna yerde duruyor
 **MEANING** Yukarıdan geliyorsun, Reyna'nın yere bakacak açısı yok
-**COUNTER** Satcheli geniş alanlarda değil dar koridorlarda kullan. Dar giriş Reyna'nın seni görmesini geciktirir
-**WHY** Reyna'nın kaçışı onu görünmez yapar ama hep yerde tutar. Yukarıdan gelen satchele karşı kaçış işe yaramaz — kaçacak yer yok.
+**COUNTER** sıçramai geniş alanlarda değil dar koridorlarda kullan. Dar giriş Reyna'nın seni görmesini geciktirir
+**WHY** Reyna'nın kaçışı onu görünmez yapar ama hep yerde tutar. Yukarıdan gelen sıçramae karşı kaçış işe yaramaz — kaçacak yer yok.
 
 ---
 
@@ -66,7 +66,7 @@ Raze, her haritada. Reyna sadece takım dağınık oynayınca tehlikelidir — h
 
 ## 4. Yetenek Karşılaştırması
 
-Raze'ın elinde dört şey var: bot köşe tarar, satchel iki kez atlatır, molly alana hasar basar, ult roketi öldürür. Kill almasan bile hepsi çalışır — util yenilendikçe tekrar kullanırsın.
+Raze'ın elinde dört şey var: bot köşe tarar, sıçrama iki kez atlatır, molly alana hasar basar, ult roketi öldürür. Kill almasan bile hepsi çalışır — util yenilendikçe tekrar kullanırsın.
 
 Reyna'nın elinde ise şunlar var: flash kör eder, heal kill orbuyla can toplar, kaçış kill orbuyla görünmez yapar, ult ateş hızını açar. Kill almadan heal ve kaçış yok. Kill almadan Reyna elinde sadece flash'la kalır.
 
@@ -80,7 +80,7 @@ Ult karşılaştırması: senin ultun geniş alan roketi, direkt hasar. Reyna'n�
 
 **Split:** B Main koridoru Raze için ideal. Dar koridorda mollyden kaçış yok. Reyna kaçışla sıyrılmaya çalışsa da dar tünelde bot onu bulur.
 
-**Fracture:** İki taraflı saldırı satchel inişine açık. Reyna bu haritada iki yönden gelen baskıya karşılık verecek yeteneğe sahip değil.
+**Fracture:** İki taraflı saldırı sıçrama inişine açık. Reyna bu haritada iki yönden gelen baskıya karşılık verecek yeteneğe sahip değil.
 
 **Sunset:** Dar yapı molly hasarını artırır. Reyna dışarı çıkamaz, heal alan içinde işe yaramaz.
 
@@ -88,15 +88,15 @@ Ult karşılaştırması: senin ultun geniş alan roketi, direkt hasar. Reyna'n�
 
 **Haven:** Üç site'ın kapı girişleri bot için biçilmiş kaftan. Reyna kill almadan Garage veya C Long'da elinde bir şey yok.
 
-**Ascent:** Orta kontrolü kritik. Raze B Main veya A rafters'tan satchelle giriş yapar. Reyna Mid Window'da açıkta kalır.
+**Ascent:** Orta kontrolü kritik. Raze B Main veya A rafters'tan sıçramale giriş yapar. Reyna Mid Window'da açıkta kalır.
 
-**Breeze:** Geniş alan hem Raze'ı hem Reyna'yı kısıtlar. Raze satchelle mesafe kapatamaz, Reyna kill alamaz. İkisi de bu haritada sınırlı kalır.
+**Breeze:** Geniş alan hem Raze'ı hem Reyna'yı kısıtlar. Raze sıçramale mesafe kapatamaz, Reyna kill alamaz. İkisi de bu haritada sınırlı kalır.
 
 **Lotus:** Dar geçişler ve C kapısı molly için ideal. Reyna C'ye kaçışla giremez, alan hasarı kapıyı yakar.
 
 **Pearl:** A Main ve B kanalı bot için uygun. Reyna B kanalında heal kullanırsa mollyn hazır olsun.
 
-**Abyss:** Yukarı-aşağı geçişler satchele açık. Reyna'nın dikey hareketi yok — kaçış onu yerde tutar.
+**Abyss:** Yukarı-aşağı geçişler sıçramae açık. Reyna'nın dikey hareketi yok — kaçış onu yerde tutar.
 
 ## 6. Maçı Döndüren Anlar
 

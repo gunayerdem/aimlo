@@ -17,7 +17,7 @@ Skye'ın elinde şunlar var:
 - Köpek bot: koşar, kafaya yapışırsa sersemletir
 - Flash: sen yönlendirirsin, ne zaman patlatacağına sen karar verirsin
 - Heal: takımı iyileştirir
-- Ult: harita genelinde 3 yaratık gönderir, bulduğunu nearsight yapar
+- Ult: harita genelinde 3 yaratık gönderir, bulduğunu yarı-kör yapar
 
 Gekko'nun elinde şunlar var:
 - Bot: flash atar veya spike'ı senin yerine plant eder
@@ -64,8 +64,8 @@ Neden? Gekko'nun molly'si dar ve kapalı sitelerde çok daha sert çalışır. S
 ---
 
 **IF** Skye ult attı, 3 yaratık takıma dağıldı
-**MEANING** Yaratık bulduğu herkese nearsight uyguluyor — harita genelinde baskı, takım bir anda kör kalabilir
-**COUNTER** Yaratık sesini duyar duymaz kapağa gir ve onu vur. HP'si var, öldürürsün. Açıkta bırakırsan nearsight kaçınılmaz
+**MEANING** Yaratık bulduğu herkese yarı-kör uyguluyor — harita genelinde baskı, takım bir anda kör kalabilir
+**COUNTER** Yaratık sesini duyar duymaz kapağa gir ve onu vur. HP'si var, öldürürsün. Açıkta bırakırsan yarı-kör kaçınılmaz
 **WHY** Skye ult'u baskı silahı. Gekko ult'u ise tek kişiyi hedef alır, kill odaklıdır. Skye ult koordinasyonu bozar, Gekko ult round'u kapatır
 
 ---

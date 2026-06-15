@@ -244,7 +244,7 @@ Lineup = sabit bir noktadan sabit bir plant spot'una utility atmak. Her plant sp
 
 **Viper:** Molly + smoke ikilisi. Molly hasar verir ve yavaşlatır. Smoke'u post-plant kapatma için veya ult ile kullan.
 
-**Sova:** Shock dart + recon. Shock dart hasar verir, recon rakibin nerede olduğunu gösterir. Hem saldırı hem savunma için lineup'ı var.
+**Sova:** Hasar oku + recon. Hasar oku post-plant'te can götürür, recon rakibin nerede olduğunu gösterir. Hem saldırı hem savunma için lineup'ı var.
 
 **KAY/O:** Post-plant molly, entry flash'ı. Haritaya göre lineup öğren.
 

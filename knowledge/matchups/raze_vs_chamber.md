@@ -11,7 +11,7 @@ tags: [matchup, raze, chamber, duelist, sentinel]
 
 ## 1. Matchup Özü
 
-Raze, nade ve satchel ile Chamber'ın tuzağını, teleportunu ve tabancasını parçalar. Chamber ise teleportla Raze'in yakın mesafe baskısından sıyrılır. Nade'i doğru noktaya koy, Chamber kör kalır. Chamber teleport noktasını Raze'in satchel hattından uzakta tut, kaçış kapın açık kalır.
+Raze, nade ve sıçrama ile Chamber'ın tuzağını, teleportunu ve tabancasını parçalar. Chamber ise teleportla Raze'in yakın mesafe baskısından sıyrılır. Nade'i doğru noktaya koy, Chamber kör kalır. Chamber teleport noktasını Raze'in sıçrama hattından uzakta tut, kaçış kapın açık kalır.
 
 ## 2. Kim Avantajlı?
 
@@ -23,7 +23,7 @@ Raze, nade ve satchel ile Chamber'ın tuzağını, teleportunu ve tabancasını 
 
 **Chamber lehine durumlar:**
 - Uzun açılı sitelerde (Breeze A, Icebox Mid): op ve teleport, Raze'in kısa menzilini geçersiz kılar
-- Raze'in iki satchel'i de bittiyse: hareket kalmaz, Chamber teleportla açı değiştirir, Raze yakalayamaz
+- Raze'in iki sıçrama de bittiyse: hareket kalmaz, Chamber teleportla açı değiştirir, Raze yakalayamaz
 - Tuzak ve teleport beraber hazırsa: tuzak bilgi verir, teleport kaçışı sağlar — Raze nade ile tuzağı patlatsa bile Chamber açı değiştirir
 - Post-plant'te Chamber agresif peek atarsa: tek atışlık tabanca Raze'i durduğu noktada düşürür
 
@@ -38,10 +38,10 @@ Raze, nade ve satchel ile Chamber'ın tuzağını, teleportunu ve tabancasını 
 
 ---
 
-**IF** Chamber teleport noktasını kurdu, Raze satchel ile o noktaya zıpladı
+**IF** Chamber teleport noktasını kurdu, Raze sıçrama ile o noktaya zıpladı
 **MEANING** Raze teleport çıkışında Chamber'ı karşılar — teleportla gelen Chamber direkt Raze'in silahına girer
-**COUNTER** Teleport noktasını Raze'in satchel'inin ulaşamayacağı yere kur. Raze'in entry hattını önce oku, noktayı ona göre yerleştir.
-**WHY** Satchel Raze'e dikey hareket verir — Chamber'ın teleport noktasına yukarıdan ya da arkadan ulaşır. Teleport noktası her round değişmeli.
+**COUNTER** Teleport noktasını Raze'in sıçrama ulaşamayacağı yere kur. Raze'in entry hattını önce oku, noktayı ona göre yerleştir.
+**WHY** sıçrama Raze'e dikey hareket verir — Chamber'ın teleport noktasına yukarıdan ya da arkadan ulaşır. Teleport noktası her round değişmeli.
 
 ---
 
@@ -59,9 +59,9 @@ Raze, nade ve satchel ile Chamber'ın tuzağını, teleportunu ve tabancasını 
 
 ---
 
-**IF** Raze B Main'e satchel ile girdi, Chamber B Link'te teleport noktası kurmuş
+**IF** Raze B Main'e sıçrama ile girdi, Chamber B Link'te teleport noktası kurmuş
 **MEANING** Chamber Raze'in girişine teleportla döner — Raze'in arkasına düşebilir
-**COUNTER** Entry hattını Chamber'ın teleport menzilinin dışına planla. Takım nade ya da shock dart ile teleport noktasını önceden patlat.
+**COUNTER** Entry hattını Chamber'ın teleport menzilinin dışına planla. Takım nade ya da hasar oku ile teleport noktasını önceden patlat.
 **WHY** Teleport asimetrik avantaj verir — Raze hızlı girer ama Chamber hızlı döner. Menzilin dışına çıkarsan teleport işe yaramaz.
 
 ---
@@ -80,7 +80,7 @@ Raze, nade ve satchel ile Chamber'ın tuzağını, teleportunu ve tabancasını 
 
 ## 4. Utility Takası
 
-Raze'de: nade, iki satchel, paint nade ve ult. Chamber'da: tabanca, tuzak, teleport ve ult.
+Raze'de: nade, iki sıçrama, paint nade ve ult. Chamber'da: tabanca, tuzak, teleport ve ult.
 
 Raze hasar ve hareket getirir, Chamber bilgi ve teleport. Atakta Raze nade lineup'ı ile Chamber'ın tuzağını ve teleport noktasını sırayla siler. Savunmada Chamber teleport menzilini doğru kurarsa Raze'in entry hattını kırar.
 
@@ -92,7 +92,7 @@ Ult karşılaştırması: Raze ultu 7 puan, Chamber ultu 8. Chamber'ınki daha p
 
 **Bind (Raze avantajlı):** Dar koridorlar Raze'in. Hookah ve Short'ta Chamber teleportu kısıtlanır, nade her şeyi kapatır.
 
-**Split (Raze avantajlı):** A Main ve B Main dar, nade ve satchel baskındır. Chamber Split'te zayıf kalır.
+**Split (Raze avantajlı):** A Main ve B Main dar, nade ve sıçrama baskındır. Chamber Split'te zayıf kalır.
 
 **Sunset (Raze avantajlı):** Dar choke'lar paint nade ve nade için kesin değerdir. Chamber uzun açı bulamaz.
 
@@ -112,7 +112,7 @@ Ult karşılaştırması: Raze ultu 7 puan, Chamber ultu 8. Chamber'ınki daha p
 
 **Flip 2 — Teleport noktası patlaması:** Nokta gitti mi Chamber'ın kaçış aracı kalmaz. Matchup tam o noktada çöker.
 
-**Flip 3 — Raze ultu ile teleport timing'i:** Chamber ult sesini duyduğu an teleport çekerse roket hedefe ulaşamaz. Geç çekerse ölür. Raze olarak bu sesi tanı — roket havadayken Chamber'ın teleport animasyonunu izle, ikinci satchel hattını ona göre planla.
+**Flip 3 — Raze ultu ile teleport timing'i:** Chamber ult sesini duyduğu an teleport çekerse roket hedefe ulaşamaz. Geç çekerse ölür. Raze olarak bu sesi tanı — roket havadayken Chamber'ın teleport animasyonunu izle, ikinci sıçrama hattını ona göre planla.
 
 **Flip 4 — Op ult pozisyon okuma:** Chamber op ultunu Raze'in agresif hattına çevirirse kesin kill. Raze off-angle'daysa shot bulamaz — post-plant'te asla düz durma.
 

@@ -1,7 +1,7 @@
 # AJAN: Gekko
 
 ## 1. Rol Kimliği
-Gekko'yu diğer initiator'lardan ayıran tek şey şu: yaratıklarını geri alıp yeniden kullanırsın. Flash'ı attın, globülü topladın, tekrar atarsın. Bot diker, globülü toplar, tekrar diker. Bu döngüyü çalıştırırsan tur başına iki kat yaratık çıkarırsın — başka hiçbir initiator bunu yapamaz. Bot spike diker ve defuse eder, flash yaratığın düşmanı kör eder ve bilgi getirir, molly gecikmeli hasarla alanı kapatır, ult'un bölgedeki herkesi sersemletir.
+Gekko'yu diğer initiator'lardan ayıran tek şey şu: yaratıklarını geri alıp yeniden kullanırsın. Her yaratık işini bitirince yere düşen bir küreye (globül) dönüşür; o küreyi toplarsan o yeteneği aynı tur içinde bir daha kullanırsın. Flash'ı attın, globülü topladın, tekrar atarsın. Bot diker, globülü toplar, tekrar diker. Bu döngüyü çalıştırırsan tur başına iki kat yaratık çıkarırsın — başka hiçbir initiator bunu yapamaz. Bot spike diker ve defuse eder, flash yaratığın düşmanı kör eder ve bilgi getirir, molly gecikmeli hasarla alanı kapatır, ult'un bölgedeki herkesi sersemletir.
 
 ## 2. Temel Sorumluluklar
 - Her yaratık kullanımından sonra globülü topla — Gekko'yu Gekko yapan tek şey budur.

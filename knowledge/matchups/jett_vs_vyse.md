@@ -33,15 +33,15 @@ Jett hızıyla ve dash ile Vyse'ın gizli tuzaklarını aşmaya çalışır. Vys
 
 **IF** Jett dash ile site'a girdi, Vyse teli Jett'in giriş hattında tetikledi
 **MEANING** Tel seni yavaşlatır ve görüşünü bozar — dash sonrası reposition hızın kesilir, sabit hedef kalırsın
-**COUNTER** İlk roundda telin nereye konduğunu gör, sonraki roundlarda o hattı geç. Updraft ile üstten gir — tel zemin tuzağı, havadan üstünden atlarsın.
+**COUNTER** İlk roundda telin nereye konduğunu gör, sonraki roundlarda o hattı geç. yukarı zıplama ile üstten gir — tel zemin tuzağı, havadan üstünden atlarsın.
 **WHY** Dashsiz + yavaş + görüşü kapalı üçlüsü seni öldürür. Tuzağı atlayan Jett'e Vyse'ın cevabı yok.
 
 ---
 
-**IF** Jett updraft ile üstten girdi, Vyse duvarını üst kata kurdu
+**IF** Jett yukarı zıplama ile üstten girdi, Vyse duvarını üst kata kurdu
 **MEANING** Duvar havadaki inişini keser — yavaşken nereye düşeceğin de belli olur
-**COUNTER** Updraft atmadan önce takımdan duvar bilgisi al. Duvarı Breach stun veya Sova shock dart ile kır.
-**WHY** Duvar Vyse'ın tek dikey kilidi. Updraft hattını okutursan duvar bedavaya çalışır — her round aynı hattan girme.
+**COUNTER** yukarı zıplama atmadan önce takımdan duvar bilgisi al. Duvarı Breach stun veya Sova hasar oku ile kır.
+**WHY** Duvar Vyse'ın tek dikey kilidi. yukarı zıplama hattını okutursan duvar bedavaya çalışır — her round aynı hattan girme.
 
 ---
 
@@ -80,7 +80,7 @@ Jett hızıyla ve dash ile Vyse'ın gizli tuzaklarını aşmaya çalışır. Vys
 
 ## 4. Utility Takası
 
-Jett aktif alan açar: dash, updraft, smoke. Vyse pasif alan kapatır: tel, duvar, flash, gizli tuzaklar. Kritik nokta şu: Vyse'ın tuzağı bir kez görününce işe yaramaz — o roundda o hattı geçmezsin. Görünmez kaldığı sürece Vyse'ın tuzağı değerli.
+Jett aktif alan açar: dash, yukarı zıplama, smoke. Vyse pasif alan kapatır: tel, duvar, flash, gizli tuzaklar. Kritik nokta şu: Vyse'ın tuzağı bir kez görününce işe yaramaz — o roundda o hattı geçmezsin. Görünmez kaldığı sürece Vyse'ın tuzağı değerli.
 
 Jett oynuyorsan kazanç bilgide: neyin nerede olduğunu bilirsen bypass edersin. Vyse oynuyorsan kazanç çeşitlilikte: aynı noktaya iki kez koyarsan Jett üçüncü roundda oraya bakmaz bile.
 

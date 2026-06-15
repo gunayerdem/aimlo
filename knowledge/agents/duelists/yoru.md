@@ -22,8 +22,8 @@
 9. **Klonu doğru yöne sürmemek** — Klonu düşmana doğru sürmezsen sadece ses verir, açı baktırmaz. Klonu düşmanın tutması gereken hattın üstünden geçir ki tek atış için bile olsa nişan alsınlar — o anda gerçek açından gir.
 
 ## 4. Kalıp -> Anlam
-IF: Oyuncu ışınlandıktan sonra sık ölüyor
-MEANING: TP noktaları tahmin edilebilir ya da girmeden önce ne yapacağını planlamıyor
+IF: Işınlandıktan sonra sık ölüyorsun
+MEANING: TP noktaların tahmin edilebilir ya da girmeden önce ne yapacağını planlamıyorsun
 COUNTER: TP'yi kutunun arkasına, düşmanın dönmek zorunda olduğu köşelere göm. Girmeden önce flash'ı elinde hazır tut.
 WHY: Düşman nereye çıkacağını bilirse seni önceden nişanlar. Beklenmedik çıkış noktası tepki süresini zorlar.
 
@@ -32,12 +32,12 @@ MEANING: Her round aynı zamanlamada lurk yapıyor, düşman kalıbı okumuş
 COUNTER: Lurk zamanlamasını değiştir. Bir round takımla oyna, lurk yapma. Düşman flank beklemeyi bıraktığında lurk yap.
 WHY: Tekrar eden zamanlama pozisyonunu düşmana bedavaya verir. Yoru'nun tek silahı olan sürpriz kalkar.
 
-IF: Oyuncu ult sırasında veya sonrasında kill almıyor
-MEANING: Ult'u sadece keşif için kullanıyor, çıkışta flash atıp swing atmıyor
+IF: Ult sırasında veya sonrasında kill almıyorsun
+MEANING: Ult'u sadece keşif için kullanıyorsun, çıkışta flash atıp swing atmıyorsun
 COUNTER: Ult'tan çık, anında flash at, düşman flash'lanırken swing at. Ult her seferinde en az bir kill ya da zorlanmış ölümle bitmeli.
 WHY: Yalnız keşif bilgiyi verir ama round kazandırmaz. Çıkışta flash-swing yoksa ult sadece harita turundan ibarettir.
 
-IF: Klon gönderiyor ama hemen takip etmiyor
+IF: Klon gönderiyorsun ama hemen takip etmiyorsun
 MEANING: Klon ile kendi pozisyonun senkronsuz — düşman klona bakıp sana dönüyor
 COUNTER: Düşman klonu vururken ya da klona tepki verirken swing at. Klon ile sen farklı açılardan aynı anda gelmelisiniz.
 WHY: Geç gelen swing düşmana toparlanma süresi verir. Koordinesiz klon sadece yerini ele verir.
@@ -47,18 +47,18 @@ MEANING: TP çok açık bırakılmış ya da düşman TP rotalarını ezberlemi�
 COUNTER: Daha az görünür noktalara göm — duman içi, nesnenin arkası. TP attığın roundlarla atmadığın roundları karıştır.
 WHY: Yok edilen TP flank ve yeniden konumlanma seçeneklerini sıfırlar.
 
-IF: Oyuncu round başında bütün becerilerini hemen harcıyor, son saniyelerde elinde hiçbir şey kalmıyor
-MEANING: Klon ve flash'ı erken atıp boşa harcıyor, asıl dövüş geldiğinde çıplak peek atmak zorunda kalıyor
+IF: Round başında bütün becerilerini hemen harcıyorsun, son saniyelerde elinde hiçbir şey kalmıyor
+MEANING: Klon ve flash'ı erken atıp boşa harcıyorsun, asıl dövüş geldiğinde çıplak peek atmak zorunda kalıyorsun
 COUNTER: En az bir flash ya da TP'yi gerçek dövüş anına sakla. Klonu erken at ama giriş aletini (flash veya TP) son saniyeye bırak.
 WHY: Yoru ham peek gücü olmayan bir ajan. Becerilerin bitince Jett gibi savaşamazsın — utility'siz kaldığın an ölüm anın.
 
-IF: Oyuncu lurk yaparken takımdan tamamen kopuyor ve 1'e karşı çoğa kalıyor
-MEANING: Lurk derinliğini takım tempo'suyla eşleştirmiyor — takım girmeden o flank'ı tek başına dövüyor
+IF: Lurk yaparken takımdan tamamen kopuyorsun ve 1'e karşı çoğa kalıyorsun
+MEANING: Lurk derinliğini takım tempo'suyla eşleştirmiyorsun — takım girmeden o flank'ı tek başına dövüyorsun
 COUNTER: Lurk'i takımın site vuruşuyla zamanla. Sen flank'ı tutarken takım baskı yapmalı ki düşman iki yöne bölünsün. Yalnız flank dövüşüne girme, takım meşgul edene kadar bekle.
 WHY: Yoru'nun lurk değeri düşmanı böler — ama takım baskı yapmıyorsa düşman tüm dikkatini sana verir. Bölünmemiş düşmanın içine yalnız girersen sayıca yenilirsin.
 
-IF: TP ile girişten sonra hemen geri ışınlanamadan ölüyor (kaçış penceresi kaçırılıyor)
-MEANING: TP'yi tek yönlü giriş aleti gibi kullanıyor, geri dönüş şansını hesaba katmıyor
+IF: TP ile girişten sonra hemen geri ışınlanamadan ölüyorsun (kaçış penceresini kaçırıyorsun)
+MEANING: TP'yi tek yönlü giriş aleti gibi kullanıyorsun, geri dönüş şansını hesaba katmıyorsun
 COUNTER: TP girişinde bir kill al ya da bilgi topla, kötü gidiyorsa hemen geri ışınlan — TP iki yönlü çalışır, geri dönüşü trade'den kaçmak için kullan.
 WHY: Yoru'nun kaçış aleti TP'dir. Girişi kapatamadıysan oraya saplanıp kalma; geri dön, yeniden konumlan, ikinci girişi farklı açıdan yap. Tek pencerede her şeyi riske atma.
 
@@ -71,9 +71,9 @@ WHY: Yoru'nun kaçış aleti TP'dir. Girişi kapatamadıysan oraya saplanıp kal
 - **Yükseklik kullanımı:** Dikey katmanı olan haritalarda (Split mid, Icebox B) TP'yi düşmanın göz hizasının dışına — alt kata ya da üst platforma — göm. Düşman yatay tarar; farklı yükseklikten çıkan TP tepki süresini en çok zorlayan giriş açısıdır.
 
 ## 6. Eşleşme Notları
-- **Zorlandığın ajanlar:** Fade (recon ult'u seni içinde işaretler, TP noktalarını açığa çıkarır — recon yerde aktifken TP açma, bitip kaybolunca gir), Sova (recon lurk yolunu açar ve klonu fark eder — lurk'e girmeden önce reconu yok et), Killjoy (bot ile tuzaklar klonu ve TP'yi yakalar, ult'u seni sıkıştırır — bombasının becerileri temizlenmeden TP açma).
+- **Zorlandığın ajanlar:** Fade (keşif ult'u seni içinde işaretler, TP noktalarını açığa çıkarır — işaretleme yerde aktifken TP açma, bitip kaybolunca gir), Sova (keşif oku lurk yolunu açar ve klonu fark eder — lurk'e girmeden önce o oku yok et), Killjoy (bot ile tuzaklar klonu ve TP'yi yakalar, ult'u seni sıkıştırır — bombasının becerileri temizlenmeden TP açma).
 - **Baskıladığın ajanlar:** Ses duyunca dönen takımlar — klon ayak sesi ve TP sesi onları yerinden eder. Cypher'a karşı etkilisin, TP teli atlar. Omen, Astra gibi sahte bilgiyle oynayan ajanlara karşı güçlüsün — kendi sahten onların sahtesini ezer.
-- **Adaptasyon:** Fade karşısında recon kaybolmadan TP'ye girme. Sova karşısında recon yok edildiği anda lurk yap — recon yerde aktifken hareket etme. Bilgi ağırlıklı kompoza karşı klona yaslan — sahte pozisyonunu "bulsunlar", sen gerçek yerden gir.
+- **Adaptasyon:** Fade karşısında keşif işaretlemesi kaybolmadan TP'ye girme. Sova karşısında keşif oku yok edildiği anda lurk yap — keşif yerde aktifken hareket etme. Bilgi ağırlıklı kompoza karşı klona yaslan — sahte pozisyonunu "bulsunlar", sen gerçek yerden gir.
 
 ## 7. Oyuncuya Ne Söylenmeli
 ### İyi oynarken

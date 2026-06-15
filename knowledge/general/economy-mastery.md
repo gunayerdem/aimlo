@@ -15,7 +15,7 @@
 
 ### Kill Kredisi
 
-Her kill 200 kredi, bıçakla öldürürsen 400. Kill sayısını aklında tut — düşmanın ekonomisini buradan okursun.
+Her kill 200 kredi — silahtan bağımsız, bıçakla öldürsen bile aynı 200. Kill sayısını aklında tut — düşmanın ekonomisini buradan okursun.
 
 ### Kayıp Bonusu
 

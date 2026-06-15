@@ -7,7 +7,7 @@
 
 ## 2. Temel Sorumluluklar
 - **Atakta:** Dövüşe girmeden kalkanı aç. Duvarla savunucuyu kes, onu 1v1'e zorla, site'a öyle gir. Ult'u site'ı tek başına tutan anchor'a sakla.
-- **Savunmada:** 1v1'e dönecek açıları tut. Düşman toplu geliyorsa duvarla araya gir, teker teker dövüş. Kalkan seni trade'e karşı korur — ileri pozisyon tut, geri çekilme.
+- **Savunmada:** 1v1'e dönecek açıları tut. Düşman toplu geliyorsa duvarla araya gir, teker teker dövüş. Kalkan ilk atışı yer, sana trade penceresi açar — ileri pozisyon tut, geri çekilme.
 - **Takımın senden beklediği:** Her düelloyu kazan, kalkan biriktir, duvarı izolasyon için kullan.
 
 ## 3. Sık Yapılan Hatalar
@@ -54,7 +54,7 @@ COUNTER: Kalkanı dövüşe girmeden hemen önce aç, köşeyi tam dönerken. Bo
 WHY: Kalkan süresi kısıtlı. Erken açarsan tam isabetin geleceği saniyede koruma yok — çıplak peek atmış olursun.
 
 IF: Çok pasif oynuyorsun, kalkanlıyken bile geri çekiliyorsun
-MEANING: Kit'in sana verdiği avantajı kullanmıyorsun — kalkan doluyken trade'e karşı korumalısın ama yine de geri basıyorsun
+MEANING: Kit'in sana verdiği avantajı kullanmıyorsun — kalkan doluyken ilk atışı yiyip trade penceresi açabilirsin ama yine de geri basıyorsun
 COUNTER: Kalkan aktifken alanı sen al. İlk mermi seni öldürmez, bu pencerede ileri pozisyon tut ve açıyı zorla. Geri çekilmek kalkanı boşa harcamaktır.
 WHY: Iso'nun farkı tek dövüşte bir fazladan mermiye dayanmak. Kalkanlıyken geri çekilirsen o avantajı hiç kullanmadan kaybedersin — sıradan duelist'e dönersin.
 

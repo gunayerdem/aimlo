@@ -33,7 +33,7 @@ Karşıda Neon varsa: dar haritada üstünlük onda, geniş haritada sende. Pozi
 **IF** Jett dash ile girdi, Neon trade için sprint ile koşuyor
 **MEANING** Neon'un trade hattı kısa, sprint onu hızla yaklaştırır. Jett dash'ini harcadıysa yerinde sabit kalır
 **COUNTER** Dash bittikten sonra açıkta durma — Neon trade'e geliyorsa ya çekil ya pozisyonunu değiştir. Dash hazırsa düelloyu bitir, hazır değilse çekil
-**WHY** Dash'i biten Jett savunmasızdır. Neon sprint ile bu açığı anında cezalandırır.
+**WHY** Dash'i biten Jett savunmasızdır. Neon sprint ile o açığa anında girer ve seni yerinde sabit yakalayıp vurur.
 
 ---
 

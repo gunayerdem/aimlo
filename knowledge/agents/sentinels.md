@@ -24,7 +24,7 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
 - **Yavaşlatma + duvar kombosu**: Boğaza duvar çek, hemen önüne yavaşlatma topunu at. Düşman duvara ulaşmak için önce yavaşlatmadan geçecek (gıcırtı sesi), sonra duvarı kıracak (kırılma sesi). Bu sana ciddi süre kazandırır.
 - **Tek başına tutma**: Duvar ve yavaşlatmayı üst üste bindirerek site'ı tek başına tutarsın. Push duyulana kadar takım arkadaşların öbür site'a yığılabilir.
 - **Agresif duvar boost**: Duvarı bir kutuya ya da çıkıntıya yasla, üstüne basıp kendini veya takım arkadaşını off-angle'a çıkar. Örnekler: Bind A Short'ta duvar üstünden peek boost'u, Icebox A konteyner boost'u, Split B Heaven çıkıntısına boost.
-- **Retake duvarı**: Duvarı retake için sakla. Site'ı ikiye bölecek şekilde at, spike eken adamı takımından ayır, sonra tek taraftan push yap.
+- **Retake duvarı**: Duvarı retake için sakla. Site'ı ikiye bölecek şekilde at, spike eken adamı takımından ayır, sonra tek taraftan push at.
 
 ### Ne Zaman Seçilir
 - Takımın site'ı tek başına tutacak bir anchor'a ihtiyacı varsa
@@ -45,7 +45,7 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
 ### Sık Yapılan Hatalar (IF/MEANING/COUNTER/WHY)
 
 1. **IF** Duvarı çok erken atıyorsan
-   **MEANING** Round başında duvarı atıp da kimse push yapmazsa 400 kredin çöpe gider
+   **MEANING** Round başında duvarı atıp da kimse push atmazsa 400 kredin çöpe gider
    **COUNTER** Ses ipucunu ya da ilk teması bekle, duvarı ondan sonra at
    **WHY** Erken duvar = düşman gelmediyse bedava 400 kredi kaybı
 
@@ -71,7 +71,7 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
 
 6. **IF** Yavaşlatma topunu takım arkadaşlarının üstüne atıyorsan
    **MEANING** Kendi takımını da yavaşlatırsın
-   **COUNTER** Takımının push yaptığı yere atma
+   **COUNTER** Takımının push attığı yere atma
    **WHY** Takımı yavaşlatmak = push hızını düşürmek = execute'un bozulması
 
 ### Retake Değeri
@@ -169,7 +169,7 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
 
 ### Yetenek Analizi
 - **Molly (C)** - 200 kredi, 2 şarj. Aktive edilene kadar yerde duran yerleştirilebilir bomba. Aktive olunca kısa süre 45 DPS yapan bir bot sürüsü yayar. Aktive olana kadar düşman göremez. Molly başına toplam potansiyel: 180 hasar.
-- **Bot (Q)** - 200 kredi. En yakın düşmanı kovalayan, temas edince patlayıp Vulnerable (her kaynaktan çift hasar) basan bot. Killjoy'un etrafında sınırlı bir aktif menzili vardır. 100 HP.
+- **Bot (Q)** - 200 kredi. En yakın düşmanı kovalayan, temas edince patlayıp çift hasar basan bot (vurulan düşman kısa süre her kaynaktan iki kat hasar alır). Killjoy'un etrafında sınırlı bir aktif menzili vardır. 100 HP.
 - **Taret (E)** - Bedava, kırılınca dolar. Görüş konisindeki düşmana otomatik ateş eden taret. Hasarı düşüktür (3'lü seri, mermi başına 8 hasar) ama düşmanı yavaşlatma etkisiyle işaretler. Asıl işi bilgi vermektir, hasar değil.
 - **Ult (X)** - 8 ult puanı. Uzun bir hazırlanma süresinden sonra geniş alandaki tüm düşmanları kısa süre yerine mıhlayan cihaz kurar. Mıhlanan düşman ne hareket eder, ne ateş eder, ne yetenek kullanır. Cihazın canı 150 HP'dir ve hazırlanırken kırılabilir.
 
@@ -177,15 +177,15 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
 - **Killjoy site kilitlemenin kraliçesidir.** Kurulumu bomb site'ı bir öldürme alanına çevirir.
 - **Standart site kurulumu**:
   1. Taret'i ana giriş yolunu izleyecek şekilde koy (bilgi için, hasar için değil).
-  2. Bot'u giriş noktasına koy (Vulnerable debuff'ı ve ses ipucu için).
+  2. Bot'u giriş noktasına koy (çift hasar etkisi ve ses ipucu için).
   3. İki molly'yi de varsayılan spike noktasının ya da sık kullanılan push yollarının altına koy.
   4. Güvenli açıyı tut ve ses ipuçlarını bekle.
-- **Düşman kuruluma çarpınca**: Bot kovalar ve Vulnerable basar; Vulnerable yemiş düşmana molly'yi aktive et (çift hasar = 45 yerine 90 DPS = molly başına 360 hasar). Bu kombo öldürücüdür.
+- **Düşman kuruluma çarpınca**: Bot kovalar ve çift hasar basar; çift hasar yemiş düşmana molly'yi aktive et (çift hasar = 45 yerine 90 DPS = molly başına 360 hasar). Bu kombo öldürücüdür.
 
 ### Setup Stratejileri
 - **Güvenden molly atışları**: Molly'leri round başında, spike noktalarına denk gelen gizli yerlere koyabilirsin. Spike ekilince güvenden aktive ederek post-plant'i kapatırsın. Her harita için bu gizli noktaları ezberle.
 - **Agresif taret yerleşimi**: Düşman rotasyonu hakkında erken bilgi almak için taret'i flank'i ya da agresif bir açıyı izleyecek şekilde koy. Taret'in yavaşlatma işaretini görmesen bile düşmanın yerini doğrular.
-- **Bot tuzağı**: Bot'u bir köşenin hafif arkasına koy. Bot düşmanı kovalarken düşman karar vermek zorunda kalır: ya bot'u vurur (o sırada sana peek şansı verir) ya da seni vurur (bot'un Vulnerable'ını yer).
+- **Bot tuzağı**: Bot'u bir köşenin hafif arkasına koy. Bot düşmanı kovalarken düşman karar vermek zorunda kalır: ya bot'u vurur (o sırada sana peek şansı verir) ya da seni vurur (bot'un çift hasarını yer).
 - **Menzil farkındalığı**: Killjoy'un bot'u ve taret'i fazla uzaklaşırsa devre dışı kalır (yaklaşık 40m). Yani site'ında ya da yakınında KALMAN gerekir. Çok uzağa rotate etmek tüm kurulumunu kapatır.
 - **Sahte kurulum**: Tam kurulum yapıyormuş gibi göstermek için taret ve bir molly'yi bir site'a koy, aslında öbür site'ı tut. Sadece taret'in varlığı bile push'ları caydırır.
 
@@ -212,10 +212,10 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
    **COUNTER** 4-5 farklı nokta arasında dön
    **WHY** Aynı noktalar = düşman bedava temizler = kurulum değeri sıfır
 
-2. **IF** Molly'yi düşman Vulnerable değilken aktive ediyorsan
-   **MEANING** Bot'un Vulnerable'ından gelen çift hasar molly'yi öldürücü yapar
+2. **IF** Molly'yi düşman çift hasar yemeden aktive ediyorsan
+   **MEANING** Bot'un bastığı çift hasar molly'yi öldürücü yapar
    **COUNTER** Bot tetiklensin, molly'yi ondan sonra aktive et
-   **WHY** Vulnerable'sız molly = 45 DPS (dayanılır). Vulnerable'lı molly = 90 DPS (öldürücü)
+   **WHY** Çift hasarsız molly = 45 DPS (dayanılır). Çift hasarlı molly = 90 DPS (öldürücü)
 
 3. **IF** Taret yanlış yöne bakıyorsa
    **MEANING** Taret SENİN izlemediğin açıyı izlesin. Sen A Main'e bakıyorsan taret Catwalk'a baksın
@@ -238,7 +238,7 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
    **WHY** Görünür molly = düşman vurur ve geçer = util değeri sıfır
 
 ### Retake Değeri
-- **Ult senin retake ult'undur.** Site tutmak için harcama (onun için kurulumun var). Ult'u retake için sakla: koruma arkasına kur, hazırlanmasını bekle ve düşman mıhlandığında push yap.
+- **Ult senin retake ult'undur.** Site tutmak için harcama (onun için kurulumun var). Ult'u retake için sakla: koruma arkasına kur, hazırlanmasını bekle ve düşman mıhlandığında push at.
 - Retake sırasında spike'ın üstüne molly at, defuse denemelerini engelle.
 - Retake sırasında yeniden konumlandırdığın taret düşmanın yeri hakkında bilgi verir.
 
@@ -313,7 +313,7 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
 
 6. **IF** Ult'la gövdeden vurduktan sonra üstüne gitmiyorsan
    **MEANING** Asıl değer kill'in açtığı yavaşlatma alanıdır. Vurup saklanma; vur, yavaşlatma alanını yarat ve yavaşlamış düşmanlara push at
-   **COUNTER** Kill'den sonra yavaşlatma alanını kullanarak push yap
+   **COUNTER** Kill'den sonra yavaşlatma alanını kullanarak push at
    **WHY** Yavaşlatma alanını kullanmamak = ult'un kilit util'ini çöpe atmak
 
 ### Retake Değeri
@@ -399,7 +399,7 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
 - **Tel (C)** - 200 kredi, 2 şarj. Üstünden geçen düşmana hasar veren yerleştirilebilir asma duvarı. Hem hasar bariyeri hem de görsel/ses ipucu olarak çalışan metalik bir asma bölgesi açar. Alan kapatmak ve push'u yavaşlatmak için kullan.
 - **Stun (Q)** - 250 kredi, 1 şarj. Hedeflediğin yere metalik bir alan açan yetenek. Kısa gecikmeden sonra alan aktive olup içindeki düşmana hasar verir ve onu ele verir. Köşe temizlemek ve bilgi toplamak için kullan.
 - **Smoke (E)** - Bedava, toplanabilir. Düşman yaklaşınca görüşü kesen bir alan açan, yerleştirilebilir metalik çiçek. Düşman yakınlığında kendiliğinden aktive olan tepkili duman. Kendiliğinden aktive olması, Vyse'ın elle tetiklemesine gerek kalmaması demektir.
-- **Ult (X)** - 8 ult puanı. Düşman yeteneklerini bastıran ve görüşlerini bozan geniş bir metalik flora alanı açar. İçindeki düşman yetenek kullanamaz ve görüşü daralır. Bastırma bölgesi geniş bir alan kaplar.
+- **Ult (X)** - 8 ult puanı. Geniş bir metalik flora alanı açar; kısa gecikmeden sonra alandaki düşmanların ANA silahını kilitler (birincil silahı bir süre ateş edemez; tabanca ve bıçak çalışır). Düşman ya kötü silahla dövüşür ya kaçar. Geniş bir alan kaplar.
 
 ### Site Anchor
 - Vyse tepkili util ile tutar. Kit'i düşman agresyonuna kendiliğinden cevap verir, önceden planlanmış aktivasyon istemez.
@@ -409,13 +409,13 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
 
 ### Setup Stratejileri
 - **Smoke + tel kombosu**: Düşman push atınca smoke görüşünü keser, tel geçerken hasar verir. Bu ikili push'u hem yavaşlatır hem cezalandırır.
-- **Retake'i kapatmak için ult**: Bastırma alanı post-plant sırasında düşmanın yetenek kullanımını sıfırlar; KAY/O'nun NULL/CMD'sine benzer ama aura yerine bölge olarak çalışır.
+- **Retake'i kapatmak için ult**: Post-plant sırasında alandaki düşmanların ana silahını kilitler; KAY/O ult'unun yetenek kapatması gibi düşmanı eli kolu bağlı bırakır ama yeteneği değil ANA silahı keser, üstelik aura yerine sabit bölge olarak çalışır. Retake'e giren takım kötü silaha düşmüş düşmanı kolayca temizler.
 - **Agresif stun kullanımı**: Atakta takımının push'undan önce pozisyonları temizlemek için stun'ı proaktif kullan.
 
 ### Ne Zaman Seçilir
 - Tepkili, kendiliğinden çalışan util'i olan bir sentinel istiyorsan (Killjoy/Cypher'dan daha az mikro-yönetim)
 - Harita, tel ve smoke kapsamını en üst düzeye çıkaran dar koridorlara sahipse
-- Takımın yetenek bastıran bir sentinel'e ihtiyacı varsa (ult)
+- Takımın düşmanın ana silahını kilitleyen bir sentinel'e ihtiyacı varsa (ult)
 - Stun bilgisiyle hem atakta hem savunmada değer veren bir sentinel istiyorsan
 
 ### Harita Güçleri
@@ -453,7 +453,7 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
    **WHY** Retake'te bilgisiz push = kör giriş = ölüm riski
 
 ### Retake Değeri
-- Ult senin asıl retake aracın. Düşmanın yeteneklerini bastırarak retake'i ciddi ölçüde kolaylaştırır.
+- Ult senin asıl retake aracın. Düşmanın ana silahını kilitleyerek retake'i ciddi ölçüde kolaylaştırır.
 - Stun retake sırasında düşmanın yerini ele verir.
 - Tel, retake push'u sırasında kaçış yollarını kapatır.
 
@@ -514,14 +514,14 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
    **WHY** Agresif sentinel = gereksiz ölüm = site korumasız
 
 ### Eşleşme İpuçları
-- **vs. Sova**: Hard counter. Sova'nın tüm değeri bilgi toplamaktır. Veto, Sova'nın recon, drone ve pozisyon bilgisine dayanan shock dart lineup'larını doğrudan geçersiz kılar.
+- **vs. Sova**: Hard counter. Sova'nın tüm değeri bilgi toplamaktır. Veto, Sova'nın recon, drone ve pozisyon bilgisine dayanan molly (shock ok) lineup'larını doğrudan geçersiz kılar.
 - **vs. Fade**: Güçlü counter. Fade'in bot'u ve recon'u yüksek değerli keşif araçlarıdır; Veto bunları bozarak Fade'in asıl katkısını boşa çıkarabilir.
-- **vs. KAY/O**: KAY/O'nun suppress'i Veto'nun engellemesini devre dışı bırakabilir, böylece bir counter-counter dinamiği doğar. Suppress bıçağının zamanlamasına dikkat et.
+- **vs. KAY/O**: KAY/O'nun yetenek kapatması Veto'nun engellemesini devre dışı bırakabilir, böylece bir karşı-karşı dinamiği doğar. Yetenek-kapatma bıçağının zamanlamasına dikkat et.
 - **vs. Raze**: Zayıf eşleşme. Raze kit'ini kullanmak için bilgiye bağımlı değildir. Engelleme yerine silah oyununa ve pozisyonlamaya odaklan.
 
 ---
 
-## Rank Modülasyonu - Sentinel Koçluğu
+## Rank'e Göre Sentinel Koçluğu
 
 ### Iron-Silver
 - **Öncelik**: Her round util kur. Sentinel olarak senin değerin kurulumdur; util kurmadan round başlatma.
@@ -537,12 +537,12 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
 
 ### Diamond-Ascendant
 - **Öncelik**: Tepkili kurulumlar ve adaptasyon. Düşmanın kurulum temizleme kalıbını oku, ona göre ayarla.
-- **Gelişim**: Killjoy'da bot Vulnerable + molly çift hasar kombosunu ustalaş. Cypher'da tek yönlü smoke yerleşimlerini öğren. Chamber'da Op + ışınlanma disiplinini oturt.
+- **Gelişim**: Killjoy'da bot çift hasar + molly kombosunu ustalaş. Cypher'da tek yönlü smoke yerleşimlerini öğren. Chamber'da Op + ışınlanma disiplinini oturt.
 - **Okuma**: Düşman kurulumunu bir kez temizlediyse, sonraki round çalışan yöntemi tekrarlar. Sen setup'ını değiştir.
 - **Menzil farkındalığı**: Killjoy'da menzil sınırını öğren. Çok uzağa rotate etmek = kurulum devre dışı = site korumasız.
 
 ### Immortal+
-- **Öncelik**: Round bazlı setup optimizasyonu ve takım koordinasyonu. Her round için farklı bir setup (agresif, standart, retake odaklı).
+- **Öncelik**: Round bazında setup'ı en iyiye çekmek ve takım koordinasyonu. Her round için farklı bir setup (agresif, standart, retake odaklı).
 - **Gelişim**: Pro seviye setup çeşitliliği uygula. En az üç farklı kalıbı kafanda etiketle: "Setup A" (agresif), "Setup B" (standart), "Setup C" (retake odaklı).
 - **Takım rolü**: Hit doğrulanmadıkça en son rotate eden sentinel olmalı. Kurulumun senin değerin; onu bırakmak etkini azaltır.
 - **Meta okuma**: Düşman kompozisyonuna göre sentinel seç. Hızlı execute'çı düşmana Killjoy kurulum cezası, recon-ağırlıklı düşmana Veto bilgi kapatması, uzun görüş hattı haritasında Chamber Op oyunu.
@@ -556,7 +556,7 @@ Sentinel'ler takımın savunma omurgasıdır. Site'ı tutarlar, push'ları gecik
 2. Her round başında pasif bilgini kur. Bu, sentinel oyuncusu için tartışmasızdır.
 3. Tüm bilgiyi anında bildir: "Bir kişi B Long'tan geçiyor", "Tel Hookah'da tetiklendi", "Taret A Main'i işaretledi".
 
-### Rotasyon Protokolü
+### Rotasyon Kuralları
 - Hit doğrulanmadıkça en son rotate eden sentinel olmalı. Kurulumun senin değerin; onu bırakmak etkini azaltır.
 - Rotate etmen gerekiyorsa util'i geri al ya da kır, yeni site'a yeniden kur.
 - İstisna: Düşman site'ına tam execute yapıyorsa ve tutamıyorsan erken rotate et, retake kur.

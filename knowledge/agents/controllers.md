@@ -76,8 +76,8 @@ Controller görüşü keser, alanı sen şekillendirirsin. İyi controller sadec
 ## Viper
 
 ### Yetenek Analizi
-- **molly (C)** — 200 kredi, 2 şarj. Asit havuzu; 25 DPS verir ve Vulnerable uygular (düşman tüm hasarı çift alır). Herhangi bir hasarla birleşince öldürür.
-- **smoke (Q)** — 200 kredi. Fırlattığın, aç-kapa yapabildiğin zehirli duman. Yakıt harcar (duvarla ortak bar). İçindekinin canını düşürür (50 HP'ye kadar). Tekrar tekrar kullanabilmen Viper'ı Viper yapan şey.
+- **molly (C)** — 200 kredi, 2 şarj. Asit havuzu; 25 DPS verir ve düşmana çift hasar bindirir (içindeyken tüm hasarı iki katı alır). Herhangi bir hasarla birleşince öldürür.
+- **smoke (Q)** — 200 kredi. Fırlattığın, aç-kapa yapabildiğin zehirli duman. Yakıt harcar (duvarla ortak bar). İçinde duran düşmanın canını sürekli eritir (decay; içinde kaldıkça düşmeye devam eder, ama tek başına öldürmez — düşman çıkınca can yavaşça geri dolar). Tekrar tekrar kullanabilmen Viper'ı Viper yapan şey.
 - **duvar (E)** — bedava. Geniş mesafe kaplayan zehirli duvar, aç-kapa yapılır. Yakıt harcar (smoke ile ortak bar). Round başında kur; yerini sonradan değiştiremezsin.
 - **ult (X)** — 7 puan. Viper'ın çevresinde devasa zehirli bulut. İçindeki düşmanın görüşü kararır, hasar alır, sen onu işaretli görürsün. İçinde durdukça süresiz sürer. Spike sonrası site tutmanın en baskıcı ult'u.
 
@@ -122,7 +122,7 @@ Controller görüşü keser, alanı sen şekillendirirsin. İyi controller sadec
    **WHY** Geç duvar = düşman pozisyonunu okur ve hazırlanır
 
 3. **IF** molly hatlarını öğrenmiyorsan
-   **MEANING** Vulnerable ile birleşen molly spike sonrasında öldürür; hattı olmayan Viper yarım değer
+   **MEANING** Çift hasar ile birleşen molly spike sonrasında öldürür; hattı olmayan Viper yarım değer
    **COUNTER** Her haritada en az 3 hat ezberle
    **WHY** Hat bilgisi = güvenden defuse kesme; hat yoksa spike sonrası değerinin yarısını kaybedersin
 
@@ -142,7 +142,7 @@ Controller görüşü keser, alanı sen şekillendirirsin. İyi controller sadec
    **WHY** Sabit duvar = bedava bilgi toplama fırsatını kaçırmak
 
 ### Spike Sonrası Değeri
-- Viper'ın molly'si Vulnerable sayesinde spike sonrasının en yıkıcı silahlarından biridir.
+- Viper'ın molly'si çift hasar sayesinde spike sonrasının en yıkıcı silahlarından biridir.
 - **Çift molly**: Dik, defuse sesini duyunca ilk molly hattını at, hemen ardından ikinciyi. Uzun süreli defuse kesme alırsın. Düşman ya hasar yiyip ölür ya ikisinin de bitmesini bekler.
 - **Ult ile spike sonrası**: Ult'un içinde dik — düşman defuse için içine girmek zorunda. Onu işaretli görürsün, üstelik hasar alır. Ult içinde spike koruması oyundaki en baskıcı kurulumlardan biridir.
 
@@ -219,14 +219,14 @@ Controller görüşü keser, alanı sen şekillendirirsin. İyi controller sadec
 ## Astra
 
 ### Yetenek Analizi
-- **yıldız (C)** — round başında haritaya yerleştirdiğin işaret noktaları. Tek başına bir şey yapmaz; smoke, stun ya da çekme bunların üstünden aktive olur. Yanlış koyduğunu geri çekip taşıyabilirsin.
+- **yıldız (C)** — gökyüzüne (astral moda) çıkıp haritaya yerleştirdiğin işaret noktaları. Genelde round başında astral modda koyarsın ama round içinde de tekrar çıkıp ekleyebilir ya da taşıyabilirsin. Tek başına bir şey yapmaz; smoke, stun ya da çekme bunların üstünden aktive olur — aktivasyon için astral moda çıkman gerekmez, yerdeki yıldızı normal moddan tetiklersin.
 - **smoke (E)** — yerleştirdiğin yıldızı görüş kesen dumana çevirir. Astra'nın temel görüş aracı budur.
 - **stun (Q)** — yıldızı sersemletme alanına çevirir; içindeki düşman yavaşlar, nişanı bozulur. Çekme ile birleşince ölümcül.
 - **çekme** — yıldızı kısa süre kendine çeken bir alana çevirir; menzilindeki düşmanı içeri toplar. Dar geçitte düşmanı açığa çıkarır.
 - **ult (X)** — haritayı ikiye bölen bir duvar. Rotasyonu keser, siteyi izole eder. Execute ya da retake'in ilk anında en güçlüsü.
 
 ### Duman Felsefesi
-- Astra haritanın beynidir: yıldızları round başlamadan koyar, düşman ilerledikçe aktive edersin. Takımın rotasyonu, smoke'u, stun'ı, çekmesi hep senden beklenir.
+- Astra haritanın beynidir: yıldızları astral moda çıkıp (genelde round başında) koyar, düşman ilerledikçe yerden aktive edersin. Takımın rotasyonu, smoke'u, stun'ı, çekmesi hep senden beklenir.
 - **Statik değil, esnek**: 5 yıldızı koyup round boyunca öylece bırakma. Düşmanın kalıbını oku — 2-3 round aynı yolu kullandıysa yıldızını oraya koy, yanlış koyduğunu geri çek.
 - **Yıldız bütçesi**: 5 yıldızını yönet; hepsini smoke'a harcama. Böl — bir kısmı duman, biri dar girişe çekme, biri push koridoruna stun. Her round en az bir smoke dışı aktivasyonun olsun.
 - **Çekme + stun**: Bu kombo dar alanda çalışır, açıkta çalışmaz. Çekme yıldızını kapı girişlerine, dar koridorlara koy; düşman çekilemezse stun garanti vurur, takımından kim swing atarsa kill alır.
@@ -333,7 +333,7 @@ Controller görüşü keser, alanı sen şekillendirirsin. İyi controller sadec
    **WHY** Kendi takımının görüşünü kapatan duvar düşmana avantaj verir — takımın kör dövüşür
 
 6. **IF** Harbor atak round'larında sürekli ilk ölense
-   **MEANING** Kendi yeteneğinin önünde push yapıyorsun ya da duvar gelmeden peek atıyorsun
+   **MEANING** Kendi yeteneğinin önünde push atıyorsun ya da duvar gelmeden peek atıyorsun
    **COUNTER** Yetenek önden gider, beden arkada kalır; duvar önce çıkar, takım arkadan gelir, Harbor grubun içinde
    **WHY** Harbor'ın asıl değeri yaşayıp yeteneğini sürdürmesinde; erken ölürsen takım round'u controller'sız geçirir
 
@@ -471,7 +471,7 @@ Controller görüşü keser, alanı sen şekillendirirsin. İyi controller sadec
 
 ---
 
-## Rank Modülasyonu - Controller Koçluğu
+## Rank'e Göre Controller Koçluğu
 
 ### Iron-Silver
 - **Öncelik**: Önce smoke'ları öğren. Controller olarak temel işin, takım girmeden doğru noktayı doğru zamanda dumanla kapatmak. Gösterişi sonraya bırak.
@@ -501,7 +501,7 @@ Controller görüşü keser, alanı sen şekillendirirsin. İyi controller sadec
 
 ## Genel Controller Felsefesi
 
-### Smoke Protokolü
+### Smoke Kuralları
 1. **Önce smoke, sonra her şey** - Controller'ın birinci görevi takıma görüş kontrolü vermek. Frag, teleport, agresyon hepsi dumandan sonra gelir. Smoke atmadan ölürsen rolünü yapmamışsın.
 2. **Zamanla, erken atma** - Duman takım harekete geçtiği an düşmeli. Erken duman girişten önce söner, savunucu içinden geçip açıyı tutar.
 3. **Derine at** - Sığ duman savunucunun yakın durup içinden çıkmasına izin verir. Dumanı sitenin derinine at, savunucuyu geriye it.

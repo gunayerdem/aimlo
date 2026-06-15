@@ -11,20 +11,20 @@ tags: [matchup, raze, deadlock, duelist, sentinel]
 
 ## 1. Matchup Özü
 
-Deadlock seni durdurmak için tek bir şeye oynar: satchelini havada yakalamak. Ağı satchel sırasında seni tutarsa Raze'in hareket gücü gider, sıradan bir düelliste dönersin. Senin işin net: duvarı nade ile yık, ağın düşüş hattını oku, tuzağı patlat. Sıra bu, oyun bu.
+Deadlock seni durdurmak için tek bir şeye oynar: sıçramaini havada yakalamak. Ağı sıçrama sırasında seni tutarsa Raze'in hareket gücü gider, sıradan bir düelliste dönersin. Senin işin net: duvarı nade ile yık, ağın düşüş hattını oku, tuzağı patlat. Sıra bu, oyun bu.
 
 ## 2. Kim Avantajlı?
 
 **Raze avantajlı:**
-- Dar geçit noktalarında (Bind Hookah, Sunset A Main, Split B Main) — nade ile satchel birlikte duvarı çökertir
+- Dar geçit noktalarında (Bind Hookah, Sunset A Main, Split B Main) — nade ile sıçrama birlikte duvarı çökertir
 - Deadlock ult attıktan sonra — geri alma gücü kalmadı, post-plant'te agresif dur
 - Ult hazırsa — ult roketi duvarı ve arkasındaki Deadlock'u aynı anda yıkar
 - Deadlock araçlarını henüz kurmadıysa — boş rotasyon aç, site'a gir
 
 **Deadlock avantajlı:**
-- Dar koridorlu haritalar (Split, Sunset, Fracture) — duvar geçişi keser, ağ satchel'ı keser
-- Satchel bekleme süresindeyken — o an durursan ağ ile rifle seni durdurur
-- Tuzak giriş hattında aktifse — satchel patlama sesini duyar, tetiklenir; sersemlemişken nade atışın yavaşlar
+- Dar koridorlu haritalar (Split, Sunset, Fracture) — duvar geçişi keser, ağ sıçrama keser
+- sıçrama bekleme süresindeyken — o an durursan ağ ile rifle seni durdurur
+- Tuzak giriş hattında aktifse — sıçrama patlama sesini duyar, tetiklenir; sersemlemişken nade atışın yavaşlar
 - Spike kurulduktan sonra ultunu atarsa — alternatif açıda değilsen kozaya alınmak kesin ölüm
 
 **Dengeli:** Haven, Ascent, Lotus — açık site tasarımı her ikisine de alan verir, araç yerleşimi belirler.
@@ -32,23 +32,23 @@ Deadlock seni durdurmak için tek bir şeye oynar: satchelini havada yakalamak. 
 ## 3. Key Düellolar
 
 **IF** Deadlock duvarı geçişin önüne koydu
-**MEANING** Duvarın HP'si sınırlı — nade ile satchel'i birlikte atar, ikisi yeter
+**MEANING** Duvarın HP'si sınırlı — nade ile sıçrama birlikte atar, ikisi yeter
 **COUNTER** Duvar tam geçit ortasındaysa iki patlamayla çöker. Sen Deadlock oynuyorsan duvarı köşeye, kenara bitişik kur — Raze'in doğrudan atış hattı bulması zorlaşır
 **WHY** Duvar görüşü ve hareketi keser ama HP barı var. Raze'in iki hasarı onu eritir. Tek duvar tek round dayanmaz.
 
 ---
 
-**IF** Satchel ile atladın, Deadlock ağ attı
-**MEANING** Ağ seni havada yakalar — satchel ivmen kesilir, yavaşlarsın, kolay hedef olursun
-**COUNTER** Raze oynuyorsan ağın düştüğü hattı izle, satchel yönünü o noktadan uzağa al. Ağ tek kullanım — harcattıktan sonra ikinci atlamada hareketin serbest
-**WHY** Ağ, satchel hareketini tam kesen tek araç. Hattını okursan geçersin.
+**IF** sıçrama ile atladın, Deadlock ağ attı
+**MEANING** Ağ seni havada yakalar — sıçrama ivmen kesilir, yavaşlarsın, kolay hedef olursun
+**COUNTER** Raze oynuyorsan ağın düştüğü hattı izle, sıçrama yönünü o noktadan uzağa al. Ağ tek kullanım — harcattıktan sonra ikinci atlamada hareketin serbest
+**WHY** Ağ, sıçrama hareketini tam kesen tek araç. Hattını okursan geçersin.
 
 ---
 
 **IF** Deadlock tuzağı giriş hattında aktive oldu
 **MEANING** Sersemledin — nişanın ve animasyonun yavaşlar, nade atışın gecikir
 **COUNTER** Shift yürüyüşüyle geçmeye kalkma — Raze zaten sessiz gezmez. Tuzağı nade ile patlat, geçmeden önce hattı temizle
-**WHY** Tuzak ses tabanlı — satchel patlama sesini duyar, tetiklenir. Nade ile patlatmak tek atışta iki işi birden bitirir: hem patlama hem tuzağı harcatma.
+**WHY** Tuzak ses tabanlı — sıçrama patlama sesini duyar, tetiklenir. Nade ile patlatmak tek atışta iki işi birden bitirir: hem patlama hem tuzağı harcatma.
 
 ---
 
@@ -60,13 +60,13 @@ Deadlock seni durdurmak için tek bir şeye oynar: satchelini havada yakalamak. 
 ---
 
 **IF** Deadlock ultunu post-plant pozisyonuna attı
-**MEANING** Ult ışını seni yakalarsa kozaya alır — koza kesin ölüm, satchel seni çıkartmaz
+**MEANING** Ult ışını seni yakalarsa kozaya alır — koza kesin ölüm, sıçrama seni çıkartmaz
 **COUNTER** Spike kurulur kurulmaz alternatif açıya geç, ışın görüş hattının dışında dur. Işın sesini duyduğun an köşeye gir, pozisyon değiştir
 **WHY** Bu ult hedef takip eder. Pozisyon kararını ult başlamadan vermişsen hayatta kalırsın — başladıktan sonra geç kalırsın.
 
 ---
 
-**IF** Nade ile satchel kombosunu Deadlock'un araç yığınına aynı anda attın
+**IF** Nade ile sıçrama kombosunu Deadlock'un araç yığınına aynı anda attın
 **MEANING** Çift hasar duvarı, tuzağı, sensörü tek seferde siler — Deadlock o round araçsız kalır
 **COUNTER** Deadlock oynuyorsan araçlarını tek noktada toplama. Site içine dağıt — Raze iki ayrı noktayı silmek için iki ayrı atış hattı harcamak zorunda kalsın
 **WHY** Raze'in çift hasarı tek noktaya yeter, iki noktaya yetmez. Dağılım Deadlock'un araç ömrünü uzatır.
@@ -80,7 +80,7 @@ Deadlock seni durdurmak için tek bir şeye oynar: satchelini havada yakalamak. 
 
 ## 4. Araç Takası
 
-Raze aktif baskıyla gelir: nade + satchel kombosu + çift satchel hareketi + ult. Deadlock pasif engelle bekler: duvar + ağ + tuzak + ult.
+Raze aktif baskıyla gelir: nade + sıçrama kombosu + çift sıçrama hareketi + ult. Deadlock pasif engelle bekler: duvar + ağ + tuzak + ult.
 
 Öz takas şu: Raze nade atar → duvar düşer → Deadlock ağ atar → Raze durur → Deadlock öldürür.
 
@@ -94,13 +94,13 @@ Ultunu daha iyi konumda patlatan round'u alır.
 
 **Bind (Deadlock hafif avantajlı):** Hookah dar — duvar için ideal. Raze nade basarsa açar ama Deadlock geçidi sıfırdan kilitler.
 
-**Split (Deadlock avantajlı):** A Main ve B Main koridorları duvar ile ağ için biçilmiş kaftan. Satchel hareketin burada ağ ile kesilir.
+**Split (Deadlock avantajlı):** A Main ve B Main koridorları duvar ile ağ için biçilmiş kaftan. sıçrama hareketin burada ağ ile kesilir.
 
 **Sunset (Deadlock avantajlı):** A Main ve Market geçişleri Deadlock'un kurulumunu besler. Raze girmek için önce duvarı temizlemek zorunda.
 
 **Haven (Dengeli):** Deadlock B'yi tutar, Raze A Short'tan girer. Site'a göre avantaj kayar.
 
-**Icebox (Raze avantajlı):** Uzun görüş hatları Deadlock'un yakın mesafe araçlarını etkisiz bırakır. Mid'de satchel yükselişiyle dikey alan açarsın.
+**Icebox (Raze avantajlı):** Uzun görüş hatları Deadlock'un yakın mesafe araçlarını etkisiz bırakır. Mid'de sıçrama yükselişiyle dikey alan açarsın.
 
 **Breeze (Raze avantajlı):** Geniş alanlar Deadlock'un araçlarını dağıtır, tek noktada toplayamaz. Nade hasarın burada öldürür.
 
@@ -108,9 +108,9 @@ Ultunu daha iyi konumda patlatan round'u alır.
 
 ## 6. Dönüm Noktaları
 
-**Dönüm 1 — Duvar düştü:** Nade ile satchel birlikte duvarı çökertir. O an Deadlock'un harita kilidi açılır — site'a girmenin anı bu.
+**Dönüm 1 — Duvar düştü:** Nade ile sıçrama birlikte duvarı çökertir. O an Deadlock'un harita kilidi açılır — site'a girmenin anı bu.
 
-**Dönüm 2 — Ağ harcandı:** Deadlock ağ attı, ıskaladı ya da sen harcattın. İkinci satchelinle hareketin serbest — işte o anda gir.
+**Dönüm 2 — Ağ harcandı:** Deadlock ağ attı, ıskaladı ya da sen harcattın. İkinci sıçramainle hareketin serbest — işte o anda gir.
 
 **Dönüm 3 — Ult pozisyon okuması:** Işın alanındaysan ölürsün. Alternatif açıdaysan ult boşa gider.
 
@@ -120,6 +120,6 @@ Ultunu daha iyi konumda patlatan round'u alır.
 
 **Deadlock oynayanın kitabı:** Araçlarını her round aynı noktaya koyma. Raze nade atış hattını bir round gördü mü, bir sonraki round duvarı başka hatta kur. Araçları site içinde dağıt — Raze'in çift hasarı bir noktayı siler, iki noktayı silemez.
 
-**Raze oynayanın kitabı:** Nade ile duvarı yık. İkinci hasarınla tuzağı temizle. Satcheli ağ hattından uzağa al. Bu üç adımı uygularsan Deadlock geçişini kesemez.
+**Raze oynayanın kitabı:** Nade ile duvarı yık. İkinci hasarınla tuzağı temizle. sıçramai ağ hattından uzağa al. Bu üç adımı uygularsan Deadlock geçişini kesemez.
 
-**Doğrulama gereken:** Duvarın HP değeri ile nade + satchel hasarının toplamının yeterliliği — patch notlarını kontrol et. Ağın satchel hareketini tam kesip kesmediği — özel lobide dene.
+**Doğrulama gereken:** Duvarın HP değeri ile nade + sıçrama hasarının toplamının yeterliliği — patch notlarını kontrol et. Ağın sıçrama hareketini tam kesip kesmediği — özel lobide dene.

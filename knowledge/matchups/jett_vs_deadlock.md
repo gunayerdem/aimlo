@@ -61,7 +61,7 @@ Deadlock seni durdurmaya değil yavaşlatmaya çalışıyor. Tuzağı ses hattı
 
 **IF** Deadlock duvarı A Main girişine kurdu, sen entry duelistisin
 **MEANING** Dash duvarı aşmıyor — tek yönlü giriş kapandı, ikinci yol lazım.
-**COUNTER** Duvarı önce kır: Sova shock dart, Raze nade ya da Breach stun. Duvar sökülene kadar alternatif girişten gir.
+**COUNTER** Duvarı önce kır: Sova hasar oku, Raze nade ya da Breach stun. Duvar sökülene kadar alternatif girişten gir.
 **WHY** Duvar tek yönlü girişte Jett'in değerini sıfırlıyor. Kırmak takım işi — tek başına kıramazsın.
 
 ---

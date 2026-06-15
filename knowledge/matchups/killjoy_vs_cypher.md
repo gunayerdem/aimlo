@@ -73,7 +73,7 @@ Harita seçerken şuna bak: site dar ve tek girişliyse Killjoy, flank hattı ç
 ## 4. Utility Karşılaştırması
 
 **Killjoy:** turret (hasar), bot (sersemletme), molly (hasar + spike söndürmeyi engelleme), ult (dondurma)\
-**Cypher:** tel (2 adet, bilgi + yavaşlatma), kamera (bilgi + shock dart), round başı tuzak yenileme, ult (düşman konumu)
+**Cypher:** tel (2 adet, bilgi + yavaşlatma), kamera (bilgi + hasar oku), round başı tuzak yenileme, ult (düşman konumu)
 
 Fark şu: Killjoy utility'si hasar basar, Cypher utility'si basmaz. Bu yüzden Killjoy site retake'inde birinci tercih, Cypher bilgi toplamada birinci tercih. Ult karşılaştırması: Killjoy ult'u o round'u kazandırır, Cypher ult'u bir sonraki round'u planlatır.
 

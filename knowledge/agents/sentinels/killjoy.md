@@ -85,7 +85,7 @@ Killjoy tek başına site tutan en güçlü ajandır. Botun bilgi getirir, ikinc
 - **Raze** ile karşılaştığında dikkatli ol — botuyla senin botunu temizler, molly'leriyle botunu ve molly'ni güvenli mesafeden patlatır. Yeteneğini daha iç pozisyonlara al.
 - **Sova** ile karşılaştığında kurulumunu iki ayrı açıya yay — tek recon hepsini silemesin.
 - Rush kompozisyonlarına karşı güçlüsün — yeteneğini temizlemeye vakit bulamadan girerler.
-- Astra ya da Viper gibi yavaş site oturan takımları sert vurursun — alanı terk etmeden geçiş yapamazlar; ult'un tam bu anı cezalandırır.
+- Astra ya da Viper gibi yavaş site oturan takımları sert vurursun — alanı terk etmeden geçiş yapamazlar; ult'unu tam bu anda atarsan hepsini alandan söker, sıkışıp kalırlar.
 - Recon yeteneği olan ajanlara (drone/dart/recon atışı) karşı botunu duvar/köşe arkasına gizle — taranamayacağı yere koy, taranırsa hemen yer değiştir; aynı yere ikinci kez kurma.
 - Flash'lı saldırgan ajanlara karşı kör kaldığında botunun ve molly'nin sesine güven — göremesen bile düşmanın nereden geldiğini ses söyler, körken o yöne molly bırak.
 

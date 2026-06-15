@@ -11,7 +11,7 @@ tags: [matchup, raze, sage, duelist, sentinel]
 
 ## 1. Matchup Özü
 
-Raze, nade ve satchel ile Sage'in duvar ve slow savunmasını kırmaya gelir. Sen Sage oynuyorsan duvarı ve slow'u kullanıp Raze'in hızını ve yakın mesafe hasarını boğarsın. Kazanmak istiyorsan: Raze'e karşı duvarı nereye kuracağını ve Raze olarak nade'i duvarın neresine atacağını bil. Duvarı nade yönüne göre değil, kaçış yoluna göre kur.
+Raze, nade ve sıçrama ile Sage'in duvar ve slow savunmasını kırmaya gelir. Sen Sage oynuyorsan duvarı ve slow'u kullanıp Raze'in hızını ve yakın mesafe hasarını boğarsın. Kazanmak istiyorsan: Raze'e karşı duvarı nereye kuracağını ve Raze olarak nade'i duvarın neresine atacağını bil. Duvarı nade yönüne göre değil, kaçış yoluna göre kur.
 
 ## 2. Kim Avantajlı?
 
@@ -23,8 +23,8 @@ Raze, nade ve satchel ile Sage'in duvar ve slow savunmasını kırmaya gelir. Se
 
 **Sage lehine:**
 - Uzun açılı haritalarda (Breeze A, Icebox Mid) duvar görüşü keser, Raze nade'i o noktaya ulaşamaz.
-- Sage duvarla dar girişi kapatır ve Raze satchel'ini harcadıysa: ikinci giriş aracı kalmaz, Raze sıkışır.
-- Slow Raze'in giriş hattına düştüyse: satchel slow içinde başlarsa Raze hedefe varamaz.
+- Sage duvarla dar girişi kapatır ve Raze sıçrama harcadıysa: ikinci giriş aracı kalmaz, Raze sıkışır.
+- Slow Raze'in giriş hattına düştüyse: sıçrama slow içinde başlarsa Raze hedefe varamaz.
 - Sage post-plant duvarla defuse koridorunu kapatırsa: Raze nade lineup'ı yoksa duvarı atlayamaz.
 
 **Eşit avantaj — bu üç haritada (Haven, Ascent, Lotus):** Sage duvarı giriş noktasına değil B Short veya Link gibi kaçış yoluna kurarsa, lineup öğrenmemiş Raze ilk engele takılmaz; ama site içinde duvar yine de Raze'i zorlar.
@@ -38,15 +38,15 @@ Raze, nade ve satchel ile Sage'in duvar ve slow savunmasını kırmaya gelir. Se
 
 ---
 
-**IF** Raze satchel ile Sage duvarının üstünden geçti
-**MEANING** Satchel boost Raze'i duvarın üstünden aşırır, duvar değer kaybeder.
-**COUNTER** Duvarı tek düz çizgi yerine çift katmanlı kur (yatay ve dikey açıyı birlikte kapat). Ya da Raze'in satchel atabileceği alanın dışına yerleştir.
-**WHY** Satchel iki boyutu birden aşar: görüş ve yükseklik. Duvar sadece birini kapatıyorsa Raze geçer.
+**IF** Raze sıçrama ile Sage duvarının üstünden geçti
+**MEANING** sıçrama boost Raze'i duvarın üstünden aşırır, duvar değer kaybeder.
+**COUNTER** Duvarı tek düz çizgi yerine çift katmanlı kur (yatay ve dikey açıyı birlikte kapat). Ya da Raze'in sıçrama atabileceği alanın dışına yerleştir.
+**WHY** sıçrama iki boyutu birden aşar: görüş ve yükseklik. Duvar sadece birini kapatıyorsa Raze geçer.
 
 ---
 
 **IF** Sage slow'u Raze'in giriş noktasına düştü
-**MEANING** Satchel slow içinde başlarsa Raze hızını kaybeder ve hedefe varamaz.
+**MEANING** sıçrama slow içinde başlarsa Raze hızını kaybeder ve hedefe varamaz.
 **COUNTER** Sage'in slow'u koyduğu noktaları ilk turda öğren. Sonraki turda giriş hattını slow'un dışına taşı.
 **WHY** Slow, Raze'in tek silahı olan hızı etkisiz kılar. Slow içindeyken Raze sıradan bir tüfekçiye döner.
 
@@ -80,7 +80,7 @@ Raze, nade ve satchel ile Sage'in duvar ve slow savunmasını kırmaya gelir. Se
 
 ## 4. Utility Takası
 
-Raze'in elinde: nade + molly + 2x satchel + ult (roket). Hepsi hasar ya da hareket.
+Raze'in elinde: nade + molly + 2x sıçrama + ult (roket). Hepsi hasar ya da hareket.
 Sage'in elinde: duvar + slow + heal + ult (canlandırma). Hepsi alan kontrolü ya da takım kurtarma.
 
 Bu maçın özeti:
@@ -102,7 +102,7 @@ Bu maçın özeti:
 
 **Breeze (Sage avantajlı):** Uzun açı Sage duvarının görüş gücünü en üste taşır. Raze nade'i o mesafede duvarın arkasına ulaşamaz.
 
-**Fracture (Raze avantajlı):** İki yönlü giriş Raze satchel'ine yarar. Sage tek duvarla iki yönü birden tutamaz.
+**Fracture (Raze avantajlı):** İki yönlü giriş Raze sıçrama yarar. Sage tek duvarla iki yönü birden tutamaz.
 
 ## 6. Flip Anları
 
@@ -110,7 +110,7 @@ Bu maçın özeti:
 
 **Flip 2 — Nade lineup tutması:** Raze nade'i duvarın arkasındaki noktaya denk gelirse Sage'in savunması çöker.
 
-**Flip 3 — Slow Raze satchel'ini yakaladı:** Satchel slow içinde başlarsa Raze durur, Sage o pencerede kill alır.
+**Flip 3 — Slow Raze sıçrama yakaladı:** sıçrama slow içinde başlarsa Raze durur, Sage o pencerede kill alır.
 
 **Flip 4 — Canlandırmayla tur çevirme:** Takımın en çok util taşıyan oyuncusu canlandırılırsa tur geri döner. Zaten util'i bitmiş ölü oyuncu canlandırılırsa Sage ult'u boşa gitti, tur kazanılmadı.
 
@@ -120,7 +120,7 @@ Bu maçın özeti:
 Duvar gördüğünde refleksle nade atma. Önce duvarın nerede durduğunu oku. Lineup'ın varsa nade'i duvarın arkasına gönder; yoksa önce takımdan bilgi al, sonra gir. Duvarın arkasını kör geçme.
 
 **Sage oynuyorsan:**
-Duvarı giriş noktasına değil kaçış yoluna kur. Raze satchel ile duvarın üstüne çıkabilir — duvarın tam altında bekleme. Raze nade attıktan hemen sonra mı giriyor? O pencerede heal kullanma, önce cover al.
+Duvarı giriş noktasına değil kaçış yoluna kur. Raze sıçrama ile duvarın üstüne çıkabilir — duvarın tam altında bekleme. Raze nade attıktan hemen sonra mı giriyor? O pencerede heal kullanma, önce cover al.
 
 **Üst seviyede ne yapılır:**
-Sage oynuyorken duvarı Raze'in satchel menzilinin ucuna kur — satchel duvarı geçse bile sen duvarın kör açısında pozisyon al. Raze oynuyorken Sage'in duvarını harcattıktan sonra ikinci girişi nade lineup ile aç. Bu iki disiplin çakışırsa crosshair placement ve ilk kurşun isabeti tutan kazanır.
+Sage oynuyorken duvarı Raze'in sıçrama menzilinin ucuna kur — sıçrama duvarı geçse bile sen duvarın kör açısında pozisyon al. Raze oynuyorken Sage'in duvarını harcattıktan sonra ikinci girişi nade lineup ile aç. Bu iki disiplin çakışırsa crosshair placement ve ilk kurşun isabeti tutan kazanır.

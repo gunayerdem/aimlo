@@ -9,29 +9,29 @@ tags: [matchup, jett, raze, duelist_vs_duelist]
 
 ## 1. Matchup Özü
 
-Jett dash'e dayanır, Raze util'e. Jett'in tek kaçış kartı dash — bir kez basarsın, cooldown'a girer. Raze'in botu, satcheli ve mollysi her round geri gelir. Jett uzun mesafede Op'la taşır, Raze dar koridorda util'le taşır. Raze yaklaşırsa Op'u bırak, dash at, Vandal'a geç.
+Jett dash'e dayanır, Raze util'e. Jett'in tek kaçış kartı dash — bir kez basarsın, cooldown'a girer. Raze'in botu, sıçramai ve mollysi her round geri gelir. Jett uzun mesafede Op'la taşır, Raze dar koridorda util'le taşır. Raze yaklaşırsa Op'u bırak, dash at, Vandal'a geç.
 
 ## 2. Kim Avantajlı?
 
 Harita belirler — karakter olarak net üstünlük kimsede yok.
 
 - **Uzun sightline'lı haritalar** (Breeze, Haven, Ascent): Jett'in Op ekonomisi açık, Raze burada pick alamaz.
-- **Dar koridor haritaları** (Bind, Split, Sunset): Raze molly + satchel ile baskın, Jett'in dash'i tek yönde sıkışır.
+- **Dar koridor haritaları** (Bind, Split, Sunset): Raze molly + sıçrama ile baskın, Jett'in dash'i tek yönde sıkışır.
 - **Icebox**: Karakter avantajı sıfır — bot sesini duyunca cover al, dash cooldown'dayken öne çıkma.
 
 ## 3. Key Düellolar
 
 **IF** Jett'in dash'i cooldown'da, Raze'in botu aktif
-**MEANING** Dash'siz Jett sabit kalır — bot konumunu bulur, satchel ile üstüne atlanır
+**MEANING** Dash'siz Jett sabit kalır — bot konumunu bulur, sıçrama ile üstüne atlanır
 **COUNTER** Dash cooldown'a girdiği an aggressive açıdan çekil, pasif bir köşe tut. Bot sesini duyunca cover'a gir, bot patlamadan önce yer değiştir
 **WHY** Dash olmadan Jett sıradan bir rifler. Raze bu pencereyi yakalarsa hem bedava bilgi hem bedava push alır.
 
 ---
 
-**IF** Raze satchel ile havaya çıktı, Jett'in updraft'i hazır
-**MEANING** Raze'in satchel yüksekliği bir anlık — Jett updraft ile daha uzun süre üstte kalır
-**COUNTER** Jett olarak updraft ile Raze'in satchel yüksekliğinin üstüne çık, yukarıdan aşağı vur
-**WHY** Dikey düelloda üstteki kazanır. Raze satchel'den düşerken Jett yukarıdan rahat ateş eder.
+**IF** Raze sıçrama ile havaya çıktı, Jett'in yukarı zıplama hazır
+**MEANING** Raze'in sıçrama yüksekliği bir anlık — Jett yukarı zıplama ile daha uzun süre üstte kalır
+**COUNTER** Jett olarak yukarı zıplama ile Raze'in sıçrama yüksekliğinin üstüne çık, yukarıdan aşağı vur
+**WHY** Dikey düelloda üstteki kazanır. Raze sıçrama düşerken Jett yukarıdan rahat ateş eder.
 
 ---
 
@@ -49,10 +49,10 @@ Harita belirler — karakter olarak net üstünlük kimsede yok.
 
 ---
 
-**IF** Jett Op'la uzun açı tutuyor, Raze bot + satchel ile yakına geliyor
+**IF** Jett Op'la uzun açı tutuyor, Raze bot + sıçrama ile yakına geliyor
 **MEANING** Raze açıyı kırmak istiyor — Op yakın mesafede işe yaramaz
-**COUNTER** Raze olarak önce botu gönder, Jett'in konumunu ortaya çıkar, sonra satchel ile yakına gir. Jett olarak Raze yaklaşıyorsa Op'u bırak, dash ile geri çekil, Vandal ya da Phantom'a geç
-**WHY** Jett uzakta güçlü, Raze yakında güçlü. Bot Jett'i pozisyondan söker, satchel mesafeyi kapatır.
+**COUNTER** Raze olarak önce botu gönder, Jett'in konumunu ortaya çıkar, sonra sıçrama ile yakına gir. Jett olarak Raze yaklaşıyorsa Op'u bırak, dash ile geri çekil, Vandal ya da Phantom'a geç
+**WHY** Jett uzakta güçlü, Raze yakında güçlü. Bot Jett'i pozisyondan söker, sıçrama mesafeyi kapatır.
 
 ---
 
@@ -63,22 +63,22 @@ Harita belirler — karakter olarak net üstünlük kimsede yok.
 
 ---
 
-**IF** Jett dash ile peek attı, Raze'in satcheli hazır
-**MEANING** Raze satchel ile anında trade mesafesine girer — Jett'in peek'i Raze'in önünde açık kalır
-**COUNTER** Jett olarak dash sonrası hemen cover'a dön, Raze'e trade penceresi açma. Raze'in satchel hızını aklında tut — dash'ten sonra sabit durma
-**WHY** Jett'in dash'i tek yönde gider, ileri. Raze satchel ile hem ileri hem yukarı gider. Trade mesafesi Raze için çok kısa.
+**IF** Jett dash ile peek attı, Raze'in sıçramai hazır
+**MEANING** Raze sıçrama ile anında trade mesafesine girer — Jett'in peek'i Raze'in önünde açık kalır
+**COUNTER** Jett olarak dash sonrası hemen cover'a dön, Raze'e trade penceresi açma. Raze'in sıçrama hızını aklında tut — dash'ten sonra sabit durma
+**WHY** Jett'in dash'i tek yönde gider, ileri. Raze sıçrama ile hem ileri hem yukarı gider. Trade mesafesi Raze için çok kısa.
 
 ## 4. Utility Karşılaştırması
 
 **Jett'in elinde:**
 - Dash — tek kaçış + entry
-- Updraft — dikey pozisyon
+- yukarı zıplama — dikey pozisyon
 - Smoke x3 — kısa süreli duman
 - Ult (bıçak) — bedava silah, eco round'da taşır
 
 **Raze'in elinde:**
 - Bot — düşman konumunu bulur
-- Satchel x2 — mobilite + hasar
+- sıçrama x2 — mobilite + hasar
 - Molly x2 — alan temizler
 - Ult (roket) — execute round'da alan kapatır
 
@@ -100,19 +100,19 @@ Harita belirler — karakter olarak net üstünlük kimsede yok.
 
 **Split:** Raze oyna. B Main ve A Ramps'in dar koridoru Raze'in.
 
-**Fracture:** Raze oyna. İki taraflı baskı satchel mobilitesiyle çok güçlü.
+**Fracture:** Raze oyna. İki taraflı baskı sıçrama mobilitesiyle çok güçlü.
 
 **Sunset:** Raze oyna. Dar yapı molly hasarını katlar.
 
-**Lotus:** Karakter avantajı yok. Raze satchel ile B rotasyonunu hızlandırır, Jett ise C uzun açısını Op'la tutar — takımın baskı yaptığı site belirler.
+**Lotus:** Karakter avantajı yok. Raze sıçrama ile B rotasyonunu hızlandırır, Jett ise C uzun açısını Op'la tutar — takımın baskı yaptığı site belirler.
 
 **Pearl:** Karakter avantajı yok. Mid'in dar koridoru Raze'e, A Long Jett'in Op'una açık — takımın tercih ettiği site belirler.
 
-**Abyss:** Jett hafif avantajlı. Dikey yapı updraft ile iyi açılar verir.
+**Abyss:** Jett hafif avantajlı. Dikey yapı yukarı zıplama ile iyi açılar verir.
 
 ## 6. Flip Anlar
 
-1. **Dash cooldown.** Dash'in girdiyse aggressive açıdan çekil — Raze bot + satchel kombosuyla seni bulur ve basar.
+1. **Dash cooldown.** Dash'in girdiyse aggressive açıdan çekil — Raze bot + sıçrama kombosuyla seni bulur ve basar.
 2. **Roket (Raze ult).** Dash'in yoksa cover'da dur. Açıkta yakalanırsan kaçış yok.
 3. **Jett ult'u yakın mesafe.** Raze yakın mesafede Jett'in bıçak burst'üne karşı zayıf — Raze olarak bu ult açıkken yakın kapanma.
 4. **Mesafe kontrolü.** Jett uzakta, Raze yakında güçlü. Raze yaklaşıyorsa Jett dash at ve silah değiştir; Raze olarak bot ile Jett'i açıdan sök, sonra mesafeyi kapat.

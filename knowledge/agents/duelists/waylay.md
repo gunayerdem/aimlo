@@ -11,7 +11,7 @@
 
 ## 2. Temel Sorumluluklar
 - **Atak:** Giriş senin işin. Şüphelendiğin köşeye slow at, düşman yavaşlasın, dash ile dal, ilk öldürmeyi al. Geri-kayma noktanı dalmadan ÖNCE güvenli bir yere koy ki düelloyu kaybedersen ölmeden geri kayasın.
-- **Defans:** Geri-kayma noktanı geri çekilme pozisyonuna bırak, choke'a agresif kısa peek at, ilk öldürmeyi kap, trade gelmeden anında geri kay. Slow'u dar geçide atıp push yapan düşmanı yavaşlat.
+- **Defans:** Geri-kayma noktanı geri çekilme pozisyonuna bırak, choke'a agresif kısa peek at, ilk öldürmeyi kap, trade gelmeden anında geri kay. Slow'u dar geçide atıp push atan düşmanı yavaşlat.
 - **Takım beklentisi:** Takım senden iki şey bekler — ilk girişi açmak ve ilk öldürmeyi almak. Geri durup beklersen giriş boşluğu açık kalır. Kör dalıp ölürsen takım sayıca geri düşer. Hızlı gir, ilk kanı al, yaşa.
 
 ## 3. Sık Yapılan Hatalar
@@ -28,55 +28,55 @@
 
 ## 4. Kalıp -> Anlam
 
-**IF** Oyuncu slow'u atıyor ama beklemeden aynı anda üstüne dalıyor
-**MEANING** Yavaşlatma ile dash'i ayrı iki araç gibi değil, tek hamle gibi kullanıyor — ikisinin de değerini düşürüyor
-**COUNTER** Slow'u şüphelendiğin köşeye/açıya at, yere otursun, düşmanın yavaşladığını gör, ondan SONRA dash ile gir. Yavaşlamış düşman daha geç nişan alır, daha geç kaçar — düelloyu sen önde başlatırsın.
-**WHY** Slow düşmanı yavaşlattığı an senin lehine açılan penceredir. O pencereyi beklemeden dalarsan, hâlâ tam tepki verebilen bir düşmana karşı düz dövüş yapmış olursun — yeteneğin avantajı boşa gider.
+IF: Slow'u atıyorsun ama beklemeden aynı anda üstüne dalıyorsun
+MEANING: Yavaşlatma ile dash'i ayrı iki araç gibi değil, tek hamle gibi kullanıyorsun — ikisinin de değerini düşürüyorsun
+COUNTER: Slow'u şüphelendiğin köşeye/açıya at, yere otursun, düşmanın yavaşladığını gör, ondan SONRA dash ile gir. Yavaşlamış düşman daha geç nişan alır, daha geç kaçar — düelloyu sen önde başlatırsın.
+WHY: Slow düşmanı yavaşlattığı an senin lehine açılan penceredir. O pencereyi beklemeden dalarsan, hâlâ tam tepki verebilen bir düşmana karşı düz dövüş yapmış olursun — yeteneğin avantajı boşa gider.
 
-**IF** Oyuncu agresif peek atıyor ama geri-kayma noktasını önceden yere koymamış
-**MEANING** Waylay'in en büyük üstünlüğünü — "kazan kal, kaybet kaç" güvencesini — kullanmıyor
-**COUNTER** Peek atmadan ÖNCE geri-kayma noktanı güvenli bir yere bırak. Sonra açıyı al: ilk öldürmeyi kaparsan kal, kaybedersen ya da ikinci düşman çıkarsa anında geri kay. Nokta yerde olmadan agresif peek atma.
-**WHY** Nokta önceden kurulmamışsa, kaybettiğin düelloda kaçacak yerin yok. O zaman Waylay'in tüm güvencesi boşa gider — sıradan bir duelist gibi öne çıkıp orada ölürsün.
+IF: Agresif peek atıyorsun ama geri-kayma noktasını önceden yere koymamışsın
+MEANING: Waylay'in en büyük üstünlüğünü — "kazan kal, kaybet kaç" güvencesini — kullanmıyorsun
+COUNTER: Peek atmadan ÖNCE geri-kayma noktanı güvenli bir yere bırak. Sonra açıyı al: ilk öldürmeyi kaparsan kal, kaybedersen ya da ikinci düşman çıkarsa anında geri kay. Nokta yerde olmadan agresif peek atma.
+WHY: Nokta önceden kurulmamışsa, kaybettiğin düelloda kaçacak yerin yok. O zaman Waylay'in tüm güvencesi boşa gider — sıradan bir duelist gibi öne çıkıp orada ölürsün.
 
-**IF** Oyuncu ilk öldürmeyi alıyor ama hemen ardından ikinci düşmana yakalanıp ölüyor
-**MEANING** İlk fragdan sonra ne kalacağına ne kayacağına karar veremiyor — açıkta donup kalıyor
-**COUNTER** İlk öldürmeden sonra anında karar ver: ortalık temizse kal ve siteyi tut, başka ses/gölge varsa geri-kayma noktana dön. Açıkta tereddüt etme — Waylay'in geri kayması tam bu an için var.
-**WHY** İlk fragdan sonraki yarım saniye en ölümcül an: ekranında bir düşman düşmüş, dikkatin dağılmış. Geri-kayma güvencen yoksa ikinci düşman seni tam orada yakalar. O güvenceyi önceden kur ki bu anı atlatabilesin.
+IF: İlk öldürmeyi alıyorsun ama hemen ardından ikinci düşmana yakalanıp ölüyorsun
+MEANING: İlk fragdan sonra ne kalacağına ne kayacağına karar veremiyorsun — açıkta donup kalıyorsun
+COUNTER: İlk öldürmeden sonra anında karar ver: ortalık temizse kal ve siteyi tut, başka ses/gölge varsa geri-kayma noktana dön. Açıkta tereddüt etme — Waylay'in geri kayması tam bu an için var.
+WHY: İlk fragdan sonraki yarım saniye en ölümcül an: ekranında bir düşman düşmüş, dikkatin dağılmış. Geri-kayma güvencen yoksa ikinci düşman seni tam orada yakalar. O güvenceyi önceden kur ki bu anı atlatabilesin.
 
-**IF** Oyuncu dash'i sadece düz ileri atılım için kullanıyor, asla yukarı çıkmak için kullanmıyor
-**MEANING** İlk dash'in yükselebildiğini bilmiyor — beklenmedik açıları boşa harcıyor
-**COUNTER** İlk dash'le yükselip kutuların/yüksek noktaların üstünden beklenmedik bir açı al. Düşman göz hizasını tutarken sen üstten girersen, crosshair'ini sana çevirmesi gecikir.
-**WHY** Düşmanlar açıları göz hizasında tutar. Yüksekten gelen beklenmedik bir giriş, hazırlanmış crosshair'i bozar — o yarım saniye senin lehine düelloyu açar.
+IF: Dash'i sadece düz ileri atılım için kullanıyorsun, asla yukarı çıkmak için kullanmıyorsun
+MEANING: İlk dash'in yükselebildiğini bilmiyorsun — beklenmedik açıları boşa harcıyorsun
+COUNTER: İlk dash'le yükselip kutuların/yüksek noktaların üstünden beklenmedik bir açı al. Düşman göz hizasını tutarken sen üstten girersen, crosshair'ini sana çevirmesi gecikir.
+WHY: Düşmanlar açıları göz hizasında tutar. Yüksekten gelen beklenmedik bir giriş, hazırlanmış crosshair'i bozar — o yarım saniye senin lehine düelloyu açar.
 
-**IF** Oyuncu iki dash'i de tek seferde harcayıp içeride sıkışıyor
-**MEANING** Mobilitesini yönetemiyor — kaçacak/yeniden konumlanacak hamlesi kalmıyor
-**COUNTER** Bir dash'le gir, diğerini sakla. İlk düelloyu kaybedersen ya da ikinci düşman çıkarsa kalan dash + geri-kayma noktası seni çıkarır. İki dash'i birden ancak çıkışını geri-kaymaya bağladıysan kullan.
-**WHY** İki dash'i de bitirirsen mobiliten sıfırlanır. Açıkta, yavaş, kaçışsız kalırsın — Waylay'in tüm avantajı mobilitedeydi.
+IF: İki dash'i de tek seferde harcayıp içeride sıkışıyorsun
+MEANING: Mobiliteni yönetemiyorsun — kaçacak/yeniden konumlanacak hamlen kalmıyor
+COUNTER: Bir dash'le gir, diğerini sakla. İlk düelloyu kaybedersen ya da ikinci düşman çıkarsa kalan dash + geri-kayma noktası seni çıkarır. İki dash'i birden ancak çıkışını geri-kaymaya bağladıysan kullan.
+WHY: İki dash'i de bitirirsen mobiliten sıfırlanır. Açıkta, yavaş, kaçışsız kalırsın — Waylay'in tüm avantajı mobilitedeydi.
 
-**IF** Oyuncu körlemesi olmadığı hâlde kör açıya tek başına dash'liyor
-**MEANING** Flash'lı bir duelist gibi oynuyor — ama Waylay'in flash'ı yok
-**COUNTER** Kör açıyı tek başına dash'leme. Flash/körleme atan bir takım arkadaşının arkasından gir: körlemeyi ondan al, dash ile boşluğu sen kapat, ilk öldürmeyi sen al. Tek başınaysan önce slow'la pencere aç, sonra dal.
-**WHY** Açıyı tutan düşman, körlenmeden seni temiz görür. Dash hızlı ama görünür — körleme olmadan dalmak, hazır crosshair'in önüne yürümektir.
+IF: Körlemesi olmadığı hâlde kör açıya tek başına dash'liyorsun
+MEANING: Flash'lı bir duelist gibi oynuyorsun — ama Waylay'in flash'ı yok
+COUNTER: Kör açıyı tek başına dash'leme. Flash/körleme atan bir takım arkadaşının arkasından gir: körlemeyi ondan al, dash ile boşluğu sen kapat, ilk öldürmeyi sen al. Tek başınaysan önce slow'la pencere aç, sonra dal.
+WHY: Açıyı tutan düşman, körlenmeden seni temiz görür. Dash hızlı ama görünür — körleme olmadan dalmak, hazır crosshair'in önüne yürümektir.
 
-**IF** Oyuncu geri-kayma noktasını her turda aynı yere koyuyor
-**MEANING** Okunabilir hale gelmiş — düşman geri kaydığın anı ve yeri önceden biliyor
-**COUNTER** Noktanı tur tur farklı yere koy. Bir tur agresif pozisyona, sonraki tur farklı bir geri çekilme açısına. Satın alma aşamasında geri alıp yeniden koyabilirsin — bunu kullan.
-**WHY** Düşman geri-kayma noktanı ezberlerse, kaydığın hattı nişanlar ve sen tam o noktaya dönerken seni basar. Güvencen senin için risk olur.
+IF: Geri-kayma noktasını her turda aynı yere koyuyorsun
+MEANING: Okunabilir hale geldin — düşman geri kaydığın anı ve yeri önceden biliyor
+COUNTER: Noktanı tur tur farklı yere koy. Bir tur agresif pozisyona, sonraki tur farklı bir geri çekilme açısına. Satın alma aşamasında geri alıp yeniden koyabilirsin — bunu kullan.
+WHY: Düşman geri-kayma noktanı ezberlerse, kaydığın hattı nişanlar ve sen tam o noktaya dönerken seni basar. Güvencen senin için risk olur.
 
-**IF** Oyuncu yavaşlatmayı düşmanın geleceği yere değil, takımın gireceği yola atıyor
-**MEANING** Yavaşlatmayı kime yaradığını düşünmeden basıyor
-**COUNTER** Slow'u düşmanın bekleyeceği/geleceği köşeye at. Takımının girdiği hattı değil, düşmanın tuttuğu açıyı yavaşlat. Atmadan önce "bu kimi yavaşlatıyor?" diye sor.
-**WHY** Yanlış yere atılan slow kendi girişini yavaşlatır, düşmana hiçbir şey yapmaz. Doğru yere atılan slow düşmanın nişanını ve kaçışını geciktirir — giriş pencereni o açar.
+IF: Yavaşlatmayı düşmanın geleceği yere değil, takımın gireceği yola atıyorsun
+MEANING: Yavaşlatmayı kime yaradığını düşünmeden basıyorsun
+COUNTER: Slow'u düşmanın bekleyeceği/geleceği köşeye at. Takımının girdiği hattı değil, düşmanın tuttuğu açıyı yavaşlat. Atmadan önce "bu kimi yavaşlatıyor?" diye sor.
+WHY: Yanlış yere atılan slow kendi girişini yavaşlatır, düşmana hiçbir şey yapmaz. Doğru yere atılan slow düşmanın nişanını ve kaçışını geciktirir — giriş pencereni o açar.
 
-**IF** Oyuncu yeteneklerini kullanmadan ölüyor
-**MEANING** Yeteneği ne zaman kullanacağını henüz oturtamamış
-**COUNTER** Her turu en sade zincire indir: önce geri-kayma noktanı koy, slow at, yavaşlasın, dash ile gir. Başka bir şey düşünme. Bu sırayı oturtmadan üstüne karmaşıklık ekleme.
-**WHY** Kullanılmayan yetenek çöpe atılan paradır — hem tur şansına hem takım ekonomisine zarar verir.
+IF: Yeteneklerini kullanmadan ölüyorsun
+MEANING: Yeteneği ne zaman kullanacağını henüz oturtamadın
+COUNTER: Her turu en sade zincire indir: önce geri-kayma noktanı koy, slow at, yavaşlasın, dash ile gir. Başka bir şey düşünme. Bu sırayı oturtmadan üstüne karmaşıklık ekleme.
+WHY: Kullanılmayan yetenek çöpe atılan paradır — hem tur şansına hem takım ekonomisine zarar verir.
 
-**IF** Oyuncu her turda aynı açıdan, aynı zamanlamayla giriyor
-**MEANING** Okunabilir hale gelmiş — düşman, sen dalmadan seni bekliyor
-**COUNTER** Giriş açını ve zamanlamanı tur tur değiştir. Bir tur erken slow + hızlı dash, sonraki tur gecikmeli giriş, öbür tur farklı açı. Aynı noktadan üst üste aynı şeyi yapma.
-**WHY** Waylay'in avantajı sürprizde ve hızda. Düşman giriş kalıbını öğrenirse açını önceden tutar, dash'in hızı işe yaramaz.
+IF: Her turda aynı açıdan, aynı zamanlamayla giriyorsun
+MEANING: Okunabilir hale geldin — düşman, sen dalmadan seni bekliyor
+COUNTER: Giriş açını ve zamanlamanı tur tur değiştir. Bir tur erken slow + hızlı dash, sonraki tur gecikmeli giriş, öbür tur farklı açı. Aynı noktadan üst üste aynı şeyi yapma.
+WHY: Waylay'in avantajı sürprizde ve hızda. Düşman giriş kalıbını öğrenirse açını önceden tutar, dash'in hızı işe yaramaz.
 
 ## 5. Harita Etkileşimleri
 - **Bind — S Tier:** Dar koridorlar ve teleport çıkışları yavaşlat-dal için ideal. A Short ve Hookah'ta köşeye slow at, yavaşlasın, dash ile dal. Teleport'la beklenmedik anda baskı kur; geri-kayma noktanı çıkışına koy.
@@ -91,8 +91,8 @@
 - **Jett'e karşı — Dengeli:** İki mobilite duelist'i. Fark hızlı ve doğru girişte. Jett dash'le kaçabilir, ama sen önce slow'la onu yavaşlatırsan kaçış penceresini kaparsın. Senin slow'un, onun mobilitesini iptal eder.
 - **Chamber'a karşı — Güçlü:** Op tutan, sabit açı bekleyen Chamber'a slow + dash zor düşman. Onun ışınlanmasını tetiklemeden hızlı kapatırsan, hazır op açısını bozarsın.
 - **Cypher'a karşı — Güçlü:** Tel ve kameraya rağmen dash hızı seni dar pencereden geçirir. Tetiklenen tuzağa yakalanmamak için slow'u önden at, sonra hızla geç.
-- **KAY/O'ya karşı — Zor:** Bıçağı isabet ederse yeteneğin kapanır. Suppress yiyince dash ve geri-kayma çalışmaz — saf mekanik düelloya zorlanırsın. Bıçak alanından çık, o turda temkinli oyna.
-- **Fade/Sova'ya karşı — Dengeli:** Recon'ları seni bulur. Tarandığın an dash'in hızı seni yer değiştirtir; geri-kayma ile recon'un işaretlediği yerden anında temize sıyrıl.
+- **KAY/O'ya karşı — Zor:** Bıçağı isabet ederse yeteneğin kapanır. Yetenek kapatma yiyince dash ve geri-kayma çalışmaz — saf mekanik düelloya zorlanırsın. Bıçak alanından çık, o turda temkinli oyna.
+- **Fade/Sova'ya karşı — Dengeli:** Keşif yetenekleri seni bulur. Tarandığın an dash'in hızı seni yer değiştirtir; geri-kayma ile işaretlendiğin yerden anında temize sıyrıl.
 - **Killjoy'a karşı — Dengeli:** Bot ve tuzak kurulumunu hızla zorlarsın, ama tuzağa körlemesiz dash'leme. Önce slow'la pencere aç, sonra dal; bot ateşine yavaş girme.
 
 ## 7. Oyuncuya Ne Söylenmeli

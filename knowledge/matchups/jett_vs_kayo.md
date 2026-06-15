@@ -11,7 +11,7 @@ tags: [matchup, jett, kayo, duelist, initiator]
 
 ## 1. Matchup Özü
 
-KAY/O'nun bıçağı Jett'in dash'ini, updraft'ını ve smoke'unu aynı anda kapatır. Bıçak değdiği an Jett sıradan bir rifler olur. Bu matchup tek soruya iner: bıçak sana çarpacak mı, çarpmayacak mı?
+KAY/O'nun bıçağı Jett'in dash'ini, yukarı zıplama ve smoke'unu aynı anda kapatır. Bıçak değdiği an Jett sıradan bir rifler olur. Bu matchup tek soruya iner: bıçak sana çarpacak mı, çarpmayacak mı?
 
 ## 2. Kim Avantajlı?
 
@@ -21,7 +21,7 @@ KAY/O'nun bıçağı Jett'in dash'ini, updraft'ını ve smoke'unu aynı anda kap
 - Harita açık ve uzunsa — bıçağın menzili yetmez, op'la köşeyi tut
 
 **KAY/O lehine:**
-- Bıçak değdiyse — dash yok, updraft yok, smoke yok, düelloyu kaybedersin
+- Bıçak değdiyse — dash yok, yukarı zıplama yok, smoke yok, düelloyu kaybedersin
 - KAY/O çift flash attıysa — el flash'ı + bıçak flash'ı arka arkaya gelir, peek açamazsın
 - KAY/O ult'u aktifse — yarıçapın içindeysen bütün util'in kapanır, olduğun yere çakılırsın
 - Hookah, A Main gibi dar koridorlarda — bıçak duvardan geçer, saklandığın köşede seni bulur
@@ -31,7 +31,7 @@ KAY/O'nun bıçağı Jett'in dash'ini, updraft'ını ve smoke'unu aynı anda kap
 ## 3. Key Düellolar
 
 **IF** KAY/O bıçağı sana değdi
-**MEANING** Dash yok, updraft yok, smoke yok. KAY/O takımı hemen baskıya geçer — sen artık sıradan bir riflersin
+**MEANING** Dash yok, yukarı zıplama yok, smoke yok. KAY/O takımı hemen baskıya geçer — sen artık sıradan bir riflersin
 **COUNTER** Önceki round'da bıçağın hangi açıdan geldiğini aklında tut. Sonraki round'da o açının dışında dur, bıçak sesini duyduğun an hattın karşı tarafına geç
 **WHY** KAY/O'nun tek kozu bu. Bıçak seni bulamadığı sürece KAY/O elinden bir şey gelmez
 
@@ -60,14 +60,14 @@ KAY/O'nun bıçağı Jett'in dash'ini, updraft'ını ve smoke'unu aynı anda kap
 
 **IF** Jett util'ini harcadı, KAY/O bıçağını henüz atmadı
 **MEANING** Bıçak şimdi gelirse zaten bitmiş util'i iptal eder — fark yok. Ama elinde dash kalmadıysa ölüm hızlanır
-**COUNTER** Bıçak tehdidi varken dash'i en sona sakla. Smoke ve updraft'ı erken harcama
+**COUNTER** Bıçak tehdidi varken dash'i en sona sakla. Smoke ve yukarı zıplama erken harcama
 **WHY** KAY/O bıçağının asıl gücü dash'i almak. Dash dururken bıçak yalnızca baskı kurar — ama yine de seni öldürür
 
 ---
 
-**IF** Updraft'la yükseğe çıktın, KAY/O bıçağı o noktaya geldi
+**IF** yukarı zıplama yükseğe çıktın, KAY/O bıçağı o noktaya geldi
 **MEANING** Bıçak duvardan geçer, havadayken yavaşsın — bıçak seni orada yakalar
-**COUNTER** Updraft atacağın yeri bıçak hattının dışından seç. Bıçak sesi gelirse updraft yönünü o hattın tersine ver
+**COUNTER** yukarı zıplama atacağın yeri bıçak hattının dışından seç. Bıçak sesi gelirse yukarı zıplama yönünü o hattın tersine ver
 **WHY** KAY/O bıçağı köşe, duvar, yükseklik tanımaz. Havadayken çok daha kolay hedefsin
 
 ---
@@ -79,7 +79,7 @@ KAY/O'nun bıçağı Jett'in dash'ini, updraft'ını ve smoke'unu aynı anda kap
 
 ## 4. Utility Takası
 
-Jett'in elinde dash, updraft, smoke ve ult var. KAY/O'nun elinde bıçak, iki flash, molly ve ult.
+Jett'in elinde dash, yukarı zıplama, smoke ve ult var. KAY/O'nun elinde bıçak, iki flash, molly ve ult.
 
 KAY/O'nun gerçek silahı bıçak — gerisi flash + molly ikilisi. Bıçak Jett'i yakalarsa matchup KAY/O'ya döner. Bıçak ıskalayınca KAY/O, elinde iki flash ve molly kalan sıradan bir initiator olur — Jett'in mobilite üstünlüğü açıkta kalır.
 

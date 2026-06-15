@@ -7,7 +7,7 @@ Entry olarak siteye hızlı girersen, savunma crossfire kurmaya vakit bulamaz. T
 
 **IF**: Kapıdaki teller rush eden entry'yi yakalıyor, choke'taki botlar çatışmadan önce tetikleniyor, mollyler sen temizlemeden hasar veriyor
 **MEANING**: Tuzak oyuncusu senin hızını sana karşı kullanıyor. Temizlemek için durursan tempo gidiyor, durmazsan arkadan etiketleniyorsun — ikisi de tuzağın işine yarar. Tuzak koşarken patlarsa bağlı olduğun tempoyu tam ortasından keser.
-**COUNTER**: Flash + entry'yi tek hamlede execute et, tuzak sentineli tepki veremesin. Görünen tuzağı push etmeden mesafeden patlat. Yer seviyesindeki tuzağın üstünden dash veya satchel ile geç. Önüne initiator kat — commit etmeden tuzak konumunu açığa çıkar.
+**COUNTER**: Flash + entry'yi tek hamlede execute et, tuzak sentineli tepki veremesin. Görünen tuzağı push etmeden mesafeden patlat. Yer seviyesindeki tuzağın üstünden dash veya sıçrama ile geç. Önüne initiator kat — commit etmeden tuzak konumunu açığa çıkar.
 **WHY**: Hızın, tuzağın gecikme mantığıyla doğrudan çarpışır. Tuzak tetiklenmeden içeri girersen savunmanın penceresi kapanır.
 
 **IF**: Entry, sen yetenek koysan bile tuzak oyuncusunu sürekli eziyorsa

@@ -9,7 +9,7 @@ tags: [matchup, composition, double-initiator, double-sentinel, meta]
 
 ## 1. Matchup Özü
 
-Double initiator (Sova + KAY/O, Breach + Skye, Fade + Gekko) bilgi üretir — flash, recon ve shock dart ile site'ı görmeden girer. Double sentinel (Killjoy + Cypher, Chamber + Killjoy, Deadlock + Cypher) bilgi kapatır — tuzak, bot ve tel ile seni görmeden durdurur.
+Double initiator (Sova + KAY/O, Breach + Skye, Fade + Gekko) bilgi üretir — flash, recon ve hasar oku ile site'ı görmeden girer. Double sentinel (Killjoy + Cypher, Chamber + Killjoy, Deadlock + Cypher) bilgi kapatır — tuzak, bot ve tel ile seni görmeden durdurur.
 
 Bu matchup tek şeye bakar: bilgiyi topla, o bilgiyi girişe çevir, kazan. Karşı taraf o bilgiyi keser ve telini tetikletirse o kazanır. İkisi de yarım iş yaparsa maç uzar.
 

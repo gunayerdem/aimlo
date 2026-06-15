@@ -83,7 +83,7 @@ Takımın tek iyileştiricisi, tek dirilticisi sensin. Değerin bilgiden ya da t
 **İyi oynuyorsa:**
 Entry her dövüşe tam HP giriyor çünkü sen sıradaki dövüşçüyü iyileştiriyorsun. Düşman onun hasardan kaçındığını sanıyor — oysa sen her düellodan önce HP avantajı yaratıyorsun. Çapraz duvarların sightline'ı tamamen kesiyor, üstünden atlanamıyor, kırmak util istiyor. Duvar arkasında yaptığın diriltme düşmanın engelleyemeyeceği bir an açıyor.
 
-Yap: Her round sıradaki dövüşçüyü belirle, dövüş öncesi onu iyileştir. Duvar açısını her round biraz değiştir. Diriltmeden önce mutlaka duvar koy — sırayı ters çevirme. Slow'u push gelince at, erken atma. Post-plant'te slow'u sakla: defuse başlayınca bombanın üstüne at, o saniyelerde defuse'çuyu vur.
+Yap: Her round sıradaki dövüşçüyü belirle, dövüş öncesi onu iyileştir. Duvar açısını her round biraz değiştir. Diriltmeden önce mutlaka duvar koy — sırayı ters çevirme. Slow'u push gelince at, erken atma. Post-plant'te slow'u sakla: defuse başlayınca bombanın üstüne at, düşman yavaşken o açıdan defuse'çuyu vur.
 
 Düşman adapte olunca: Duvar kırmak için util getirmeye başlarlarsa — duvarı choke'tan içeri taşı, açık alana taahhüt etmek zorunda kalsınlar. Rush atarlarsa — rush sırasında choke'a slow at, slow'un arkasına duvar koy. Diriltmeni beklerlerse — diriltmeyi atla, sayı avantajını kullan. Diriltme tehdidi bile onları bir oyuncuyu bedeni izlemeye ayırmaya zorlar.
 

@@ -60,7 +60,7 @@ Haritaya ve faza göre değişir.
 **IF** Killjoy molly'sini Viper duvarı boyunca yerleştirdi
 **MEANING** Duvardan geçen düşman hem görüşsüz hem zehirli bölgeye girer — molly aktive olursa geçiş öldürücü olur
 **COUNTER** Aynı takımdaysan molly'yi duvar çizgisine göm — saldırı geçişte yanar. Karşı takımdaysan duvardan geçmeden önce molly sesini dinle, aktifse dur
-**WHY** Duvar görüşü keser, molly geçişi cezalandırır. İkisi aynı anda gelince saldırı durur.
+**WHY** Duvar görüşü keser, molly geçişi yakar — geçmeye kalkan oyuncu görüşsüzken can kaybeder. İkisi aynı anda gelince saldırı durur.
 
 ---
 

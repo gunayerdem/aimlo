@@ -125,7 +125,7 @@ Mid kontrolü her şey. Sova recon'u mid'i ve siteleri tarar. KAY/O bıçağı s
 
 **Bind**
 Raze, Skye, Brimstone, Fade, Cypher
-Mid yok — rotasyonlar teleporterdan geçer. Cypher tuzakları teleporter flank'ını yakalarken Raze satchel ile girişi hızlandırır.
+Mid yok — rotasyonlar teleporterdan geçer. Cypher tuzakları teleporter flank'ını yakalarken Raze sıçrama util'iyle girişi hızlandırır.
 
 **Haven**
 Jett, Breach, Omen, Killjoy, Sova veya Fade
@@ -170,7 +170,7 @@ WHY Sayı değişikliği ajan değiştirmeyi gerektirmez
 IF yetenek yeniden tasarımı geldiyse
 MEANING Eski kas hafızan geçersiz — zamanlamalar değişti, yerleştirme değişti
 COUNTER Custom oyunda yeni zamanlamaları çalış, sonra ranked'e dön
-WHY Eski alışkanlıkla yeni tasarımı oynamak seni iki kez cezalandırır
+WHY Eski alışkanlıkla yeni tasarımı oynarsan hem yetenek boşa gider hem o açıdan ölürsün — iki kez kaybedersin
 
 IF temel mekanik değişikliği geldiyse
 MEANING Ajan eski rolünde artık iş görmüyor

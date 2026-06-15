@@ -115,7 +115,7 @@ Ult karşılaştırması: İkisi de 7 puan. Ama KAY/O ult'u Cypher'ın kimliğin
 
 **Dönüm 1 — Bıçak boşa gitti:** KAY/O entry için bıçak attı ama Cypher'ın kurulumu bıçak alanının dışındaydı. Baskı boş bölgeye geldi, util tam çalıştı. Kamerayla KAY/O'nun dönüşünü okudun, post-plant tel ve kamera retake hattını kilitledi. Bıçak geri dönene kadar KAY/O util'siz savaştı, takımın entry hattı çöktü. Cypher baskın sentinel rolünü geri aldı.
 
-**Dönüm 2 — Cypher aynı yere kurdu:** Birkaç round üst üste tel A Short'ta aynı noktaya kuruldu. Sonraki roundda KAY/O o noktaya açıyı tutarak bıçak attı, tel ve kamera merkezine saplandı. Baskı bütün util'i ult olmadan sildi, takım serbestçe girdi. Yedek tel yoktu, retake açık kaldı. Yer değiştirmeyi ihmal etmek cezasını ödetti.
+**Dönüm 2 — Cypher aynı yere kurdu:** Birkaç round üst üste tel A Short'ta aynı noktaya kuruldu. Sonraki roundda KAY/O o noktaya açıyı tutarak bıçak attı, tel ve kamera merkezine saplandı. Baskı bütün util'i ult olmadan sildi, takım serbestçe girdi. Yedek tel yoktu, retake açık kaldı. Yer değiştirmeyi ihmal etmek roundu bedavaya kaybettirdi.
 
 **Dönüm 3 — Kamera bıçağı stun'ladı:** KAY/O entry için bıçak attı, kamera asimetrik bir noktadaydı. Bıçağın gidiş yolu kameranın görüş alanından geçti, stun dart bıçağı havada vurdu, atış iptal oldu. Baskı sıfır, tel tetiklendiğinde KAY/O hem util'siz hem aimde geride kaldı. Asimetrik kamera yerleşimi eşleşmeyi çevirdi.
 

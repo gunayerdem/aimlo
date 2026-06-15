@@ -90,7 +90,7 @@ Fade, Sova gibi lineup ezberlemez. Recon'unu atar, düşmanı ortaya çıkarır,
 **COUNTER** Savunmada recon'u tetikleyici bir bilgi varken at: spike sesi geldi, ekonomi okuması belli bir siteyi işaret ediyor, ya da takım arkadaşın 'kalabalık var' dedi. Tahmini push yönüne, push başladıktan sonra at — boşa erken değil.
 **WHY** Recon savunmada bir doğrulama aracı: nereye yığıldıklarını gösterir, takım rotate kararını ona göre verir. Boş tarama hem bilgiyi hem yeteneği çöpe atar, kritik anda elin boş kalır.
 
-**IF** Düşman Fade'in botunu duyunca refleks dönüp kovalayan creature'ı vuruyor ve etkisiz bırakıyorsa
+**IF** Düşman Fade'in botunu duyunca refleks dönüp kovalayan botu vuruyor ve etkisiz bırakıyorsa
 **MEANING** Botu tek başına, takım baskısı olmadan gönderiyorsun. Bot vurulabilir bir hedef — yalnız gelen botu deneyimli savunucu dönüp patlatır, görüş daralması hiç olmaz.
 **COUNTER** Botu, savunucunun dikkati başka yöne kilitliyken at: takım arkadaşın o açıdan peek atıyorken, ya da recon zaten gözünü çekmişken. Bot 'bana bak' diyen tek araç olmamalı — savunucu botu mu yoksa giren oyuncuyu mu vuracağına karar veremesin.
 **WHY** Bot, savunucuyu ikilemde bırakınca değer üretir: ya botu vur (o an oyuncuyu kaçır) ya oyuncuyu vur (görüş daralmasını ye). İkilem yoksa savunucu rahatça botu patlatır, yetenek boşa gider.

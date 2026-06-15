@@ -99,7 +99,7 @@ Harbor round başında doğru yerleştirdiyse alan kontrolü senden iyidir. Yanl
 
 **Split:** Omen önde. Mid ve A Main Omen'ın alanı. Harbor'un burada işi yok.
 
-**Sunset:** Omen önde. Kısa geçişler Harbor'un bekleme sürelerini cezalandırır.
+**Sunset:** Omen önde. Kısa geçişlerde Harbor'un uzun bekleme süresi açık yaratır — smoke'u dolmadan Omen ikinci hamlesini yapar.
 
 **Bind:** Omen önde. Teleporter yapısı Omen'ın hız oyununa uygun.
 

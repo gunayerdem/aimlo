@@ -24,7 +24,7 @@ Cypher kendi bölgesini kilitler. Sova o kilidi kırmaya gelir.
 - Kameran recon'u önceden görürse — recon geçmeden repoze al
 
 **Sova lehine:**
-- Shock dart teli patlatırsa — tel gider, Cypher o geçidi göremez
+- hasar oku teli patlatırsa — tel gider, Cypher o geçidi göremez
 - Recon kamerayı bulursa — takım kamerayı kırar, Cypher kör kalır
 - Uzun açılı haritalarda — Sova recon'u Cypher'ın kurulumunu haritalar
 - Sova ult'u duvar deler — kapanın arkasında dursan bile hasar yersin
@@ -33,10 +33,10 @@ Cypher kendi bölgesini kilitler. Sova o kilidi kırmaya gelir.
 
 ## 3. Duel Senaryoları
 
-**IF** Sova shock dart'ı Cypher telinin üstüne patlattı
+**IF** Sova hasar oku Cypher telinin üstüne patlattı
 **MEANING** Tel gitti, o geçitten artık bilgi gelmiyor, Sova oradan rahatça girer
-**COUNTER** Teli her el aynı yere koyma. Sova shock dart'ı sabit bir noktaya ezberlemiştir — yeri değiştir, dart boşa gitsin
-**WHY** Shock dart ezbere atılan bir hamledir. Teli döndürürsen ezberi tutmaz.
+**COUNTER** Teli her el aynı yere koyma. Sova hasar oku sabit bir noktaya ezberlemiştir — yeri değiştir, dart boşa gitsin
+**WHY** hasar oku ezbere atılan bir hamledir. Teli döndürürsen ezberi tutmaz.
 
 ---
 
@@ -56,8 +56,8 @@ Cypher kendi bölgesini kilitler. Sova o kilidi kırmaya gelir.
 
 **IF** Cypher teli Sova'yı yakaladı
 **MEANING** Sova yavaşladı ve kısa süre görüşünü kaybetti — girişi bozuldu, sen öndesin
-**COUNTER** (Sova için) Girmeden önce shock dart ile teli sil. Tel duruyorsa düz girme, yanından dön.
-**WHY** Tel tetiklenince nearsight ve yavaşlama gelir. O sürede Cypher seni görür, sen göremezsin.
+**COUNTER** (Sova için) Girmeden önce hasar oku ile teli sil. Tel duruyorsa düz girme, yanından dön.
+**WHY** Tel tetiklenince yarı-kör ve yavaşlama gelir. O sürede Cypher seni görür, sen göremezsin.
 
 ---
 
@@ -83,7 +83,7 @@ Cypher kendi bölgesini kilitler. Sova o kilidi kırmaya gelir.
 ## 4. Util Karşılaştırması
 
 Cypher: 2 tel + 2 duman + kamera + ult. Hepsi pasif — kurarsın, beklersin.
-Sova: 2 recon + 2 shock dart + drone + ult. Hepsi aktif — atarsın, uçurursun.
+Sova: 2 recon + 2 hasar oku + drone + ult. Hepsi aktif — atarsın, uçurursun.
 
 İki util setinin de ult maliyeti 7 puan — eşit.
 
@@ -118,6 +118,6 @@ Eşleşmenin özü şu: Sova aktif olarak Cypher'ın kurduğunu bulup silmeye ç
 ## 7. Koç Notu
 
 **Radiant'lar bu eşleşmede ne yapar:**
-Cypher tel yerini her el döndürür — Sova'nın shock dart ezberi o yerde değilse dart boşa gider. Radiant Sova'lar ise drone'u girişten önce yollar: önce kamerayı ve teli tespit eder, sonra girer. Sırayı bozmak istiyorsan drone'u erken vur.
+Cypher tel yerini her el döndürür — Sova'nın hasar oku ezberi o yerde değilse dart boşa gider. Radiant Sova'lar ise drone'u girişten önce yollar: önce kamerayı ve teli tespit eder, sonra girer. Sırayı bozmak istiyorsan drone'u erken vur.
 
 **Temel kural:** Cypher gizler, Sova bulur. Cypher varyasyon yapmazsa Sova ezberiyle teli siler. Sova drone'u geciktirirse Cypher kör noktayı korur. Hangisi daha az tahmin edilebilirse round onun.

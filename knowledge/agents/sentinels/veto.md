@@ -2,23 +2,25 @@
 
 ## 1. Rol Kimliği
 
-Veto bilgi keser. Tuzağıyla düşmanın recon araçlarını yok eder, mollysiyle push yapan düşmanı yerinde kilitler, ışınlanmasıyla beklenmedik açılara geçer, ultuyla düşman utility'sinin hiçbirini hissetmez.
+Veto bilgi keser. Tuzağıyla düşmanın recon araçlarını yok eder, mollysiyle push atan düşmanı yerinde kilitler, ışınlanmasıyla beklenmedik açılara geçer, ultuyla düşman utility'sinin hiçbirini hissetmez.
 
 Cypher bilgi toplar, Killjoy alan tutar — Veto ise düşmanın bilgi toplamasını keser. Düşman kör girince execute'lar tahmine döner. O körlüğü sen yaratırsın.
 
 ## 2. Yetenek Seti
 
-- **Molly (Q)** — Parça atar. Vurulan düşman yerinde kalır, sesini kaybeder, canı erir. Push yapan birini durdururken üçü birden çalışır. Düşman hareket halindeyken at — pozisyon almışsa değeri düşer.
+- **Molly (Q)** — Parça atar. Vurulan düşman yerinde kalır, sesini kaybeder, canı erir. Push atan birini durdururken üçü birden çalışır. Düşman hareket halindeyken at — pozisyon almışsa değeri düşer.
 - **Işınlanma (C)** — Yere bir nokta bırakırsın. O noktaya bakarken tekrar bas, oraya ışınlanırsın. Satın alma aşamasında geri alıp yeniden koyabilirsin. Beklenmedik açı tutmak ve hızlı yer değiştirmek için.
 - **Tuzak (E)** — İmza yeteneğin. Bir noktaya koy, tekrar basınca aktive et. Aktifken o bölgeye giren ya da oradan geçen her düşman recon aracını, drone'u ve fırlatılan utility'yi yok eder.
-- **Ult (X)** — Aktive edince hiçbir debuff sana işlemez. Flash, suppress, decay, blind, concuss — hiçbiri geçmez. 1v2-1v3'te düşman seni durdurmak için ne atarsa atsın, sen yürümeye devam edersin.
+- **Ult (X)** — Aktive edince hiçbir kötü etki sana işlemez. Flash, yetenek kapatma, can eritme, kör etme, sersemletme — hiçbiri geçmez. 1v2-1v3'te düşman seni durdurmak için ne atarsa atsın, sen yürümeye devam edersin.
 
 ## 3. Temel Sorumluluklar
 
 - **Tuzakla bilgiyi kes**: Düşman recon attığında tuzağı aktive et. Recon, drone, fırlatılan utility — hepsi gider. Sonra takıma çağır: "Recon gitti, kör geliyorlar."
 - **Mollyle push'u durdur**: Ayak sesi duyduğunda ya da takımdan "geliyor" çağrısı geldiğinde mollyi at. Düşman hareket halindeyken at — içeri girince değil.
+
+- **Yetenek kapatma (suppress) ile ilgili not**: Düşman seni susturursa (KAY/O bıçağı, Tejo recon'u, Tejo ultu) tuzağın ve mollyin çalışmaz. O pencerede yeni yetenek de koyamazsın — geleceğini hissedince ultunu aç.
 - **Işınlanmayla açı değiştir**: Noktayı her turda aynı yere koyma. Bir turda agresif pozisyon tut, sonraki turda retake için farklı yerden flankla. Düşman nereden çıkacağını bilemesin.
-- **Ultu clutch için sakla**: Tam takım dövüşünde takım arkadaşların debuffu üstüne çeker. Tek başına kaldığında düşman seni durdurmak için her şeyi atar — ultu tam o anda aç.
+- **Ultu clutch için sakla**: Tam takım dövüşünde düşmanın engelleyici yetenekleri (flash, yavaşlatma, sersemletme) takım arkadaşlarına dağılır. Tek başına kaldığında düşman seni durdurmak için her şeyi atar — ultu tam o anda aç.
 - **Her inkarı çağır**: Recon yok ettin mi, hemen söyle. Takım bunu bilmezse kör düşmana karşı bile temkinli oynar — avantajı boşa harcarsın.
 
 ## 4. Sık Yapılan Hatalar
@@ -36,7 +38,7 @@ Cypher bilgi toplar, Killjoy alan tutar — Veto ise düşmanın bilgi toplamas�
 ## 5. Kalıp -> Anlam
 
 **IF** Tuzağı aktive ediyorsun ama düşmanın recon aracı yok olmuyor
-**MEANING** Tuzak yanlış hatta — recon başka yerden geliyor. Ya da düşman recon atmadan push yapıyor.
+**MEANING** Tuzak yanlış hatta — recon başka yerden geliyor. Ya da düşman recon atmadan push atıyor.
 **COUNTER** Tuzağı düşmanın recon attığı hatta koy. Recon A main'den geliyorsa tuzak A main girişinde dursun. Düşman recon atmadan geliyorsa bu turda tuzak değersiz — mollye ve silah pozisyonuna geç.
 **WHY** Doğru hatta tuzak otomatik yok eder. Yanlış hatta boş alan bekleyen pahalı bir kutudur.
 
@@ -105,16 +107,16 @@ Cypher bilgi toplar, Killjoy alan tutar — Veto ise düşmanın bilgi toplamas�
 
 ---
 
-**IF** Düşman seni susturduktan (suppress) sonra tüm tuzağın ve mollyin devre dışı kalıyor
-**MEANING** Suppress aktifken yeteneklerin çalışmaz. KAY/O bıçağı ya da ulttayken tuzak ve molly ölü util.
-**COUNTER** Suppress geldiğini hissedince ya da KAY/O ultu duyunca ultunu aç — suppress sana geçmez, yetenekler açık kalır. Bıçak atıldıysa hızlıca yok et ya da kırılma alanından çık. Util'ini suppress beklentisiyle erken harcama, çünkü o pencerede yenisini koyamazsın.
-**WHY** Bağışıklık ultun tam olarak suppress'i sıfırlamak için var. Doğru anda açarsan düşmanın susturma yatırımı boşa gider; geç açarsan sentinel oyunun çöker.
+**IF** Düşman seni susturduktan sonra tüm tuzağın ve mollyin devre dışı kalıyor
+**MEANING** Yeteneğin kapatıldığında (suppress) hiçbiri çalışmaz. KAY/O bıçağı ya da ulttayken tuzak ve molly ölü util.
+**COUNTER** Yeteneğin kapatılacağını hissedince ya da KAY/O ultu duyunca ultunu aç — bu etki sana geçmez, yetenekler açık kalır. Bıçak atıldıysa hızlıca yok et ya da kırılma alanından çık. Util'ini bu beklentiyle erken harcama, çünkü o pencerede yenisini koyamazsın.
+**WHY** Bağışıklık ultun tam olarak yetenek kapatmayı sıfırlamak için var. Doğru anda açarsan düşmanın susturma yatırımı boşa gider; geç açarsan sentinel oyunun çöker.
 
 ## 6. Harita Etkileşimleri
 
 - **Ascent**: Mid bilgiyle döner. Tuzağı mid'e koy — düşman recon mid'den geçemez, ne yapacağını bilemez. A main ve B main'de molly push'u durdurur. Işınlanmayla mid-A veya mid-B arası hızlı geç.
 - **Haven**: Üç site var, saldıran hangi site'ın boş olduğunu bulmak için recon'a muhtaç. Tuzak bu bilgiyi keser. Garage'da molly rotasyon kesen bir engel olarak çalışır. Işınlanmayla C'den A'ya hızlı geç.
-- **Breeze**: Uzun görüş hatları bilgiyi hayati kılar. Tuzakla recon'u kes — düşman kör taahhüde girmek zorunda kalır. Açık alanda mollyden kaçış uzun sürer. Ultla utility spam'ini geçip push yap.
+- **Breeze**: Uzun görüş hatları bilgiyi hayati kılar. Tuzakla recon'u kes — düşman kör taahhüde girmek zorunda kalır. Açık alanda mollyden kaçış uzun sürer. Ultla utility spam'ini geçip push at.
 - **Split**: Mid'de bilgi savaşı döner. Tuzak mid'de recon'u keser, orta kontrol saldıran için tahmine döner. A heaven ve B main'de molly savunma pozisyonunu kilitler. Işınlanma ramplar arası geçiş sağlar.
 - **Sunset**: Mid koridorda tuzak güçlü. İki takım da yaklaşımını belirlemek için bilgiye güvenir — tuzak bunu keser. B market'ta molly dar alanda kaçışa yer bırakmaz.
 
@@ -124,9 +126,9 @@ Genel kural: Tuzağı her zaman düşmanın bilgiye en çok güvendiği daralma 
 
 - **Sova karşı**: Sova'nın her şeyi bilgi toplamaya dayanır. Recon oku, drone, recon lineup'ı — tuzak hepsini yer. Sova karşı doğru tuzak pozisyonu, o tur onun yarısını sahadan siler.
 - **Fade karşı**: Recon iti ve recon küresi yüksek değerli keşif araçları. Tuzak ikisini de yok eder. Recon iti seni takip ederken mollyi at — düşman hem kilitlenir hem bilgisiz kalır.
-- **KAY/O karşı**: KAY/O suppress atarsa tuzak ve molly çalışmaz. Suppress geldiğini hissedince ultu aç — suppress sana geçmez. Bu eşleşmede ult zamanlaması her şeyi belirler.
+- **KAY/O karşı**: KAY/O yeteneğini kapatırsa (suppress) tuzak ve molly çalışmaz. Bunun geldiğini hissedince ultu aç — bu etki sana geçmez. Bu eşleşmede ult zamanlaması her şeyi belirler.
 - **Raze ve bilgisiz giren duelciler karşı**: Bilgiye bağımlı değiller. Raze nerede olduğunu bilmeden bomba atar, Jett dash ile dalar. Bu eşleşmede tuzak az değer verir. Mollye ve silah pozisyonuna yaslan.
-- **Tejo karşı**: Recon drone'u ve güdümlü mollyi tuzağa gider. Tejo'nun recon zincirini kırmak Veto'nun en güçlü eşleşmelerinden biri. Ama Tejo suppress ederse tuzak da çalışmaz — önce zamanlamayı kazan.
+- **Tejo karşı**: Recon drone'u ve güdümlü mollyi tuzağa gider. Tejo'nun recon zincirini kırmak Veto'nun en güçlü eşleşmelerinden biri. Ama Tejo'nun drone'u seni susturursa (yeteneğini kapatma) tuzak da çalışmaz — önce zamanlamayı kazan, yetenek kapatma penceresinde util koymaya çalışma.
 
 ## 8. Oyuncuya Ne Söylenmeli
 
@@ -150,7 +152,7 @@ Aynen sürdür: 1. turda ses ipucuyla recon'u yok et ve çağır. 2. turda tuza�
 
 ### Tuzağı boşa harcıyorsa
 
-"Tuzağın görünür yere koyma — vurup susturuyorlar. Köşe arkasına, kör noktaya koy: düşman görmeden geçsin, sen sesi duyup tepki ver. Önce uyarı, sonra inkar. Suppress yiyorsan tuzaktan önce ultunu aç, yoksa util ölü kalır."
+"Tuzağın görünür yere koyma — vurup susturuyorlar. Köşe arkasına, kör noktaya koy: düşman görmeden geçsin, sen sesi duyup tepki ver. Önce uyarı, sonra inkar. Yeteneğin kapatılıyorsa (suppress) tuzaktan önce ultunu aç, yoksa util ölü kalır."
 
 ## 9. Rank Modülasyonu
 
@@ -160,4 +162,4 @@ Aynen sürdür: 1. turda ses ipucuyla recon'u yok et ve çağır. 2. turda tuza�
 
 **Yüksek (Diamond-Ascendant)**: Tuzak zamanlaman oturmuş, ama recon atmayı bırakan düşmana uyum sağlaman gerek. Düşman recon'dan vazgeçtiğinde standart sentinel oyununa geçişi oku. Işınlanmayla farklı açı tut. Ultu duruma göre seç — her 1v2'de değil, utility spam'i geldiğinde.
 
-**Elit (Immortal-Radiant)**: Veto'nun değeri, düşmanın tüm bilgi stratejisini güvensiz kılmaktır. Her turda tuzak zamanlaman farklı olsun. Düşmanın bilgi ekonomisini oku — recon'a ne zaman bağlandıklarını, ne zaman vazgeçtiklerini ayırt et. Bıraktıklarında tuzağı spike kurulduktan sonrasına sakla. Ultu KAY/O suppress'i ya da Fade ultu anında aç. Işınlanmayla tur ortasında beklenmedik açı yarat.
+**Elit (Immortal-Radiant)**: Veto'nun değeri, düşmanın tüm bilgi stratejisini güvensiz kılmaktır. Her turda tuzak zamanlaman farklı olsun. Düşmanın bilgi ekonomisini oku — recon'a ne zaman bağlandıklarını, ne zaman vazgeçtiklerini ayırt et. Bıraktıklarında tuzağı spike kurulduktan sonrasına sakla. Ultu KAY/O'nun yetenek kapatması ya da Fade ultu anında aç. Işınlanmayla tur ortasında beklenmedik açı yarat.

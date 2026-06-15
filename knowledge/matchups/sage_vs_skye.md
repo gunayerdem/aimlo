@@ -25,7 +25,7 @@ Sage duvar + slow + heal + diriltme ult ile bölgeyi kapatır. Skye flash + bot 
 - Flash Sage'in peek hattına gelirse — Sage kör, duelde tüm avantajı sıfırlanır.
 - Bot Sage'i vurup stun'larsa — stun bitene kadar Sage ne duvar atabilir ne slow.
 - Skye takımına konum bilgisi verirse — Sage duvarı nereye koyacağını bilmeden kurarsa, takım o duvarı bypass eder.
-- Recon ult Sage'i bulursa — nearsight + takım follow-up, Sage köşeye sıkışır.
+- Recon ult Sage'i bulursa — yarı-kör + takım follow-up, Sage köşeye sıkışır.
 
 **Nötr haritalar:** Haven, Ascent, Lotus gibi orta mesafe açık haritalarda matchup iki tarafın hamle kalitesine bağlı — Sage bölge kontrolü kurar, Skye bilgi toplar, kim rakibin ult'una göre pozisyonunu önce alırsa öne geçer.
 
@@ -60,7 +60,7 @@ Sage duvar + slow + heal + diriltme ult ile bölgeyi kapatır. Skye flash + bot 
 ---
 
 **IF** Skye recon ult'unu attı ve Sage'e kilitlendi
-**MEANING** Recon Sage'i bulur, nearsight uygular — takım konum bilgisiyle üstüne yürür.
+**MEANING** Recon Sage'i bulur, yarı-kör uygular — takım konum bilgisiyle üstüne yürür.
 **COUNTER** Recon sesini duyar duymaz dönüp recon'u vur. Canı düşük, tek-iki ateşle ölür — sana ulaşmadan bitir.
 **WHY** Recon'un tüm gücü seni bulmakta. Seni bulmadan ölürse Skye'ın ult'u boşa gider.
 

@@ -82,7 +82,7 @@ Cypher'ı doğru oynarsan takımın asla kör kalmaz. Site'ı ateş gücüyle de
 
 ## 6. Eşleşme Notları
 - **Sova/Fade**: Zor eşleşme. Pozisyonunu açığa çıkarır, teli yeniden kurmak zorunda kalırsın. Kamera yerlerini sık değiştir.
-- **Lurk ağırlıklı kompozisyon**: Güçlüsün. Teller solo flank atanları cezalandırır.
+- **Lurk ağırlıklı kompozisyon**: Güçlüsün. Tellerin solo flank atanı yakalar — tel patlar, tek başına dolanan düşmanın yerini sana verir, sen de oradan vurursun.
 - **Hızlı execute**: En zayıf noktan. Bilgiyi iletemeden site ezilir. Erken choke tellerine bel bağla.
 - **Split strateji uygulayan takım**: Ult burada özellikle güçlü — geç round, pozisyonlar belirsizken aç.
 

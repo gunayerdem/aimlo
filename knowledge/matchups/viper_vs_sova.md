@@ -17,7 +17,7 @@ Viper duvar kurar, görüşü keser. Sova bilgi açar, pozisyonları ifşa eder.
 
 **Viper lehine:**
 - Spike kurulduktan sonra — duvar + smoke + molly komboyu çakarsın, Sova'nın recon'u duvar hattında yarım bilgi verir, defuse hamlesi körelir.
-- Sova recon ve shock dart harcandıktan sonra — Sova silahsız kalır, aim'e düşer, duvar açısı o aim'i keser.
+- Sova recon ve hasar oku harcandıktan sonra — Sova silahsız kalır, aim'e düşer, duvar açısı o aim'i keser.
 - Ult açıkken — sis içinde Sova recon sana pozisyon vermez, sen içeriden görürsün.
 - Lineup ağır haritalarda (Icebox A, Breeze A) — molly lineup'ı Sova'nın recon alanını baskı altına alır.
 
@@ -38,10 +38,10 @@ Viper duvar kurar, görüşü keser. Sova bilgi açar, pozisyonları ifşa eder.
 
 ---
 
-**IF** Sova shock dart Viper molly alanına önce atıldı
-**MEANING** Shock dart post-plant molly'ni siler, Sova takımına defuse için alan açar
-**COUNTER** İki molly at, ard arda. Shock dart birini siler, ikincisi aktif kalır.
-**WHY** Sova'nın shock dart'ı tek molly'yi siler. İki molly Sova'nın shock dart ekonomisini aşar — ikinci molly için cooldown yetmez. Spike basıldıktan sonra çift molly Viper'ın en sağlam silahı.
+**IF** Sova hasar oku Viper molly alanına önce atıldı
+**MEANING** hasar oku post-plant molly'ni siler, Sova takımına defuse için alan açar
+**COUNTER** İki molly at, ard arda. hasar oku birini siler, ikincisi aktif kalır.
+**WHY** Sova'nın hasar oku tek molly'yi siler. İki molly Sova'nın hasar oku ekonomisini aşar — ikinci molly için cooldown yetmez. Spike basıldıktan sonra çift molly Viper'ın en sağlam silahı.
 
 ---
 
@@ -84,11 +84,11 @@ Viper'ın fuel bar'ı var: duvar ve smoke fuel paylaşır, molly ayrı. Fuel'i e
 
 Sova'nın utility sırası:
 - Recon → round başı bilgi
-- Shock dart → molly counter veya alan temizliği
+- hasar oku → molly counter veya alan temizliği
 - Bot → retake veya kritik bilgi
 - Ult → duvar hattını delen vuruş
 
-Round içi sıra şöyle döner: Sova recon açar → Viper duvar + smoke kurar → Sova shock dart molly'e cevap verir → Viper spike sonrası molly atar → Sova bot ile reaktif bilgi alır → Viper ult açar.
+Round içi sıra şöyle döner: Sova recon açar → Viper duvar + smoke kurar → Sova hasar oku molly'e cevap verir → Viper spike sonrası molly atar → Sova bot ile reaktif bilgi alır → Viper ult açar.
 
 İki ult aynı round'da patlarsa: Sova ultu sis içini tarar. Sis içinde cover'ın arkasında dur — ama cover'ı ult hattının dışında seç.
 
@@ -114,7 +114,7 @@ Round içi sıra şöyle döner: Sova recon açar → Viper duvar + smoke kurar 
 
 **Dönüm 2 — Bot içeride:** Bot içeri girdi ve sağ çıktı → Viper alan kontrolü kayboldu, round Sova'ya. Bot rifle'la düştü → kontrol Viper'da, round Viper'a.
 
-**Dönüm 3 — Çift molly vs shock dart:** Viper çift molly attı, shock dart birini sildi ama ikincisi aktif → post-plant round Viper'a. Tek molly attıysa shock dart sildi → round Sova'ya.
+**Dönüm 3 — Çift molly vs hasar oku:** Viper çift molly attı, hasar oku birini sildi ama ikincisi aktif → post-plant round Viper'a. Tek molly attıysa hasar oku sildi → round Sova'ya.
 
 **Dönüm 4 — Sova ult isabeti:** Ult hattı Viper takımını duvar arkasında buldu → takım hasar aldı, round Sova'ya. Viper takımı ult hattının dışındaysa → ult boşa gitti, round Viper'a.
 

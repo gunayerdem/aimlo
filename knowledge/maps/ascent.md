@@ -174,7 +174,7 @@ Retake öncesi bilgi topla: bot, recon, Fade recon'u. Sonra takım olarak aynı 
 
 ### B-Tier
 
-**Raze:** B site darlığında bot ve satchel işe yarar. Ama A site genişliğinde yetersiz kalırsın. Jett op taşırken Raze tercih listesinde ikinci sıraya düşer.
+**Raze:** B site darlığında bot ve sıçrama util / patlayıcı işe yarar. Ama A site genişliğinde yetersiz kalırsın. Jett op taşırken Raze tercih listesinde ikinci sıraya düşer.
 
 **Sage:** Duvar ile mid girişini veya site kapısını kapat, heal ile takımı ayakta tut. Killjoy ve Cypher kadar bilgi ve alan kontrolü veremez, bu yüzden geride kalır.
 

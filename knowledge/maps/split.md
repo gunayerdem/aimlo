@@ -102,14 +102,14 @@ MEANING: Heaven'ı kaybedince rakip seni yukarıdan görür, sen onu zor görür
 COUNTER:
 - Heaven kaybedilince geri çekil, takımla retake planı yap.
 - Retake'te Heaven'ı önce al — Heaven geri gelince site kontrolü kendiliğinden gelir.
-- Heaven'ı flush etmek için Raze nade, Breach molly ya da Sova shock dart kullan.
+- Heaven'ı flush etmek için Raze nade, Breach molly ya da Sova molly / hasar oku kullan.
 WHY: Yukarıdan bakan her zaman avantajlıdır. Heaven'daki rakip seni görür, sen onu göremezsin. Site'ta direnmeye devam edersen bu dezavantajla her saniye savaşırsın.
 
 ## 5. Agent Tier Listesi
 
 **S Tier**
 - **Sage**: Split'in en değerlisi bu. Mid duvarı tek başına haritanın yarısını kapatır. A Ramp'a atılan duvar saldırıyı oracıkta bitirebilir. Slow dar koridorda karşı tarafı dondurur — trade'ler yakın olduğu için heal ve diriltme burada her haritadan daha kritik.
-- **Raze**: B Main'e girişin en temiz yolu satchel. Önce bot at, bilgi al, sonra satchel ile içeri gir. Patlayan utili dar alanda patladığında düşman kaçacak yer bulamaz. Ult koridorda çarpmamak neredeyse imkânsız.
+- **Raze**: B Main'e girişin en temiz yolu sıçrama util / patlayıcı. Önce bot at, bilgi al, sonra sıçrama util / patlayıcı ile içeri gir. Patlayan utili dar alanda patladığında düşman kaçacak yer bulamaz. Ult koridorda çarpmamak neredeyse imkânsız.
 - **Jett**: A Ramp'ta op oynamak istiyorsan Jett al. Vurursun, dash'le çekilirsin — açık kalmazsın. Yukarı çıkışla Heaven'a sıçrarsın, dash'le dar bölgeden anında sıyrılırsın.
 
 **A Tier**
@@ -120,10 +120,10 @@ WHY: Yukarıdan bakan her zaman avantajlıdır. Heaven'daki rakip seni görür, 
 
 **B Tier**
 - **Killjoy**: Ult dar sitede güçlü. Tuzak ve bot bilgi verir ama Cypher'in telleri bu haritaya daha iyi oturur.
-- **Sova**: Recon dar alanda daha kolay kırılır, yine de bilgi değeri var. Recon util mid kontrolü için işe yarar. Shock dart post-plant'te baskı kurar.
+- **Sova**: Recon dar alanda daha kolay kırılır, yine de bilgi değeri var. Recon util mid kontrolü için işe yarar. Molly / hasar oku post-plant'te baskı kurar.
 - **Skye**: Flash'leri koridorda etkili ama Breach duvar arkasına işleyen utili sayesinde burada daha değerli. Recon bilgi almak için kullanılabilir.
 
-## 6. Rank Modulasyonu (4 Tier)
+## 6. Rank Modülasyonu (4 Tier)
 
 **Iron-Silver**
 Split'in yapısını henüz bilmiyorsun. Bütün takım tek noktaya yükleniyor, sen mid'i yok sayıyorsun. Her roundda en az bir kişi mid'e bilgi almaya gitsin. A Ramp'a kuru çıkma — önce flash at, sonra çık. B Main'de takım arkadaşının utilini bekle, sonra gir. Rope kullanmayı öğren — çoğunuz bilmiyor bile. Heaven pozisyonlarının var olduğunu fark et: aşağıya bakmayı bırak, yukarıya bak.
@@ -150,7 +150,7 @@ Burada her round'u, rakibin önceki round'da nereden girdiğine göre kur. Split
 
 - "B Main dar ve tehlikeli, ama geçilir. Tek şart: önünde flash yürüsün."
 
-- "Dar girişler acele eden tarafı cezalandırır, util kullanan tarafı ödüllendirir."
+- "Dar girişler acele eden tarafı bedavaya vurdurur, util kullanan tarafa ise temiz giriş açar."
 
 - "Aynı pozisyonda iki round üst üste kill aldıysan üçüncüde pozisyon değiştir. Rakip açı tutar — boş açıya ateş etsin."
 
@@ -249,7 +249,7 @@ WHY: Mid Split'in kalbi. Mid giderse her yer gider.
 IF: Rakip her round az utille kalabalık B Main push yapıyor.
 MEANING: Dar koridoru kullanarak seni ezmek istiyor. Tek başına durman imkânsız.
 COUNTER: B Main'e Breach stun veya Killjoy molly at. B Garage'da iki kişi tut. B Heaven'dan nade, molly, slow dök.
-WHY: Rush hazırlıksız savunmaya işe yarar. Hazırlıklı savunmaya karşı dar koridordan gelen rush kendini cezalandırır — bir molly B Main'i kapatır.
+WHY: Rush hazırlıksız savunmaya işe yarar. Hazırlıklı savunmaya karşı dar koridordan gelen rush kendi sonunu getirir — bir molly B Main'i kapatır, sıkışan kalabalığı tek util biçer.
 
 **Rakip split execute yapıyorsa:**
 IF: Rakip mid üzerinden split execute yapıyor, siteye iki yönden giriyor.
@@ -260,5 +260,5 @@ WHY: Split execute'un zayıf noktası zamanlama. Mid ve Main'den aynı anda girm
 **Rakip Heaven play yapıyorsa:**
 IF: Rakip her round Heaven pozisyonlarını agresif kullanıyor.
 MEANING: Heaven bilgi ve kill verir ama oyuncuyu açık pozisyona düşürür.
-COUNTER: Heaven'a util dök — Raze nade, Breach molly, Sova shock dart. Heaven oyuncusu ya ölür ya pozisyon bırakır.
+COUNTER: Heaven'a util dök — Raze nade, Breach molly, Sova molly / hasar oku. Heaven oyuncusu ya ölür ya pozisyon bırakır.
 WHY: Heaven'dan kaçış yolu az. Utille flush edilen oyuncu rope veya merdivenle inmek zorunda kalır, o geçiş sırasında savunmasız kalır.

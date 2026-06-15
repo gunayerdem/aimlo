@@ -11,28 +11,28 @@ tags: [matchup, yoru, fade, duelist, initiator]
 
 ## 1. Matchup Özü
 
-Yoru yalan satar — clone, teleport ve flash'la Fade'i yanıltır. Fade gerçeği avlar — recon, bot ve stun'la Yoru'nun asıl yerini çeker çıkarır. Mesele tek bir soruya iner: Yoru'nun yalanı kaç saniye ayakta kalıyor, Fade onu ne kadar hızlı çözüyor?
+Yoru yalan satar — clone, teleport ve flash'la Fade'i yanıltır. Fade gerçeği avlar — recon, bot ve sersemletmeyle Yoru'yu sıkıştırır. Ama kilit nokta şu: Fade'in recon'u ve bot'u Yoru'nun clone'unu OKUMAZ — clone taranmaz, bot içinden geçer, görüşle işaretlenmez. Yani Fade clone'u util'le ayıramaz; ayırmak için sese ve davranışa bakmak zorunda. Mesele tek bir soruya iner: Yoru clone'u ne kadar inandırıcı oynatıyor, Fade gerçeğe ne kadar hızlı yürüyor?
 
 ## 2. Kim Avantajlı?
 
 **Yoru lehine:**
-- Fade'in recon'u ve bot'u harcandıysa clone tam değer basar, Fade kör oynar.
+- Fade'in recon'u ve bot'u zaten clone'u okumaz; bir de bunları harcadıysa Fade gerçek Yoru'yu bulacak hiçbir aracı kalmaz, kör oynar.
 - Teleport çıkışını her round başka yere koy — Fade bot'u nereye süreceğini kestiremez.
 - Ult açıkken Yoru görünmez, Fade'in elindeki hiçbir şey iş görmez.
 
 **Fade lehine:**
-- Recon hem Yoru'yu hem clone'u aynı anda yakaladıysa HP barına bak: clone'un HP'si 1, Yoru tam can — gerçek Yoru ortada.
+- Recon yalnız gerçek Yoru'yu işaretler — clone taranmaz. Sahada iki Yoru görünüp recon tek birini tag'liyorsa, tag'lenen gerçek, tag'lenmeyen clone'tur. Fade bunu görüp doğru hedefe yürür.
 - Bot, teleport iner inmez üstüne biniyorsa Yoru inişte savunmasız, o anı bot kapar.
 - Yoru teleport'a güveniyorsa kaçışı yok; Fade takımı sıkıştırır.
 
-**Haritaya göre değişir:** Yoru iki ayrı hat açar ve recon bu hatlardan sadece birini kaplarsa Fade kör kalır. Recon'u clone ile Yoru'nun aynı anda göründüğü açıdan atarsan yalanın değeri sıfıra iner.
+**Haritaya göre değişir:** Yoru iki ayrı hat açar ve recon bu hatlardan sadece birini kaplarsa Fade kör kalır. Recon'u clone ile Yoru'nun aynı anda göründüğü açıdan atarsan Fade hangisinin tag aldığını tek bakışta görür — yalanın değeri sıfıra iner.
 
 ## 3. Key Düellolar
 
-**IF** Recon hem Yoru'yu hem clone'u aynı anda ortaya döktü
-**MEANING** Clone'un HP'si 1, Yoru tam can — Fade takımı HP barına bakıp gerçek Yoru'yu anında ayırır, yalanın değeri sıfır.
-**COUNTER** Clone'u öne sür, kendin kıpırdama. Recon sırasında hareket eden clone, HP barından önce göz çeker — beyin önce hareketi okur, HP'ye sonra bakar. Tam bu anı kullan: Yoru dur, clone koşsun.
-**WHY** Recon hem HP hem hareket bilgisi verir, ama göz önce harekete kilitlenir. Clone koşuyorsa Fade HP'ye bakmaya fırsat bulamadan ona ateş açar.
+**IF** Fade recon attı, sahada hem Yoru hem clone var
+**MEANING** Recon clone'a değmez — sadece gerçek Yoru'ya tarama işareti basar. İşaretli olan gerçek, işaretsiz olan clone. Fade doğru hedefi bir bakışta seçer.
+**COUNTER** Clone'u recon'un göremeyeceği ayrı bir açıya/koridora sür; sen recon hattının dışında dur. İki ayrı hat açarsan recon ikisini aynı karede yan yana göstermez — Fade hangisinin işaretsiz olduğunu kıyaslayamaz.
+**WHY** Recon yalnız oyuncu modelini tag'ler, clone modelini atlar. İki Yoru aynı karede olursa fark anında ortaya çıkar — onları ayrı açılara böl ki kıyas yapılamasın.
 
 ---
 
@@ -64,10 +64,10 @@ Yoru yalan satar — clone, teleport ve flash'la Fade'i yanıltır. Fade gerçe�
 
 ---
 
-**IF** Fade stun'ı teleport marker'ının üstüne attı
-**MEANING** Stun animasyonu keser — marker içindeyken teleport atamazsın, orada kalakalırsın.
-**COUNTER** Marker'ı stun'ın gelebileceği açık hattan uzakta tut. Stun'ın geldiğini ses işaretinden anlarsın — marker'ı hemen güncelle.
-**WHY** Stun alan bazlı bir tutmadır. Marker oraya düşerse kaçış kapanır.
+**IF** Fade'in tutma alanı gerçek Yoru'nun ayağının dibine düştü
+**MEANING** Alan içinde kalırsan yerinde sabitlenirsin — yön değiştiremez, geri çekilemezsin, sersemlersin. Fade takımı o sabit hedefe yürür.
+**COUNTER** Tutma sesini duyduğun an alanın dışına çık; teleport'un hazırsa marker'a basıp alandan ışınlan. Clone'u alanın içine bırak — tutma clone'u yakalamaz, sen dışarıdan vurursun.
+**WHY** Tutma alan bazlı çalışır ve yalnız gerçek oyuncuyu kavrar, clone'a etki etmez. Alanın dışına çıkan ya da clone'u yem bırakan Yoru sabitlenmeyi boşa düşürür.
 
 ---
 
@@ -78,7 +78,7 @@ Yoru yalan satar — clone, teleport ve flash'la Fade'i yanıltır. Fade gerçe�
 
 ## 4. Utility Takası
 
-Yoru yanlış bilgi üretir — clone, teleport, flash, ult. Fade doğru bilgiyi toplar — recon, bot, stun, ult. İkisi de bilgi üzerine oynar ama zıt taraftan. Yoru kazanmak için Fade'i şaşırtacak, Fade kazanmak için Yoru'nun gerçek yerini ayıracak. Ult maliyeti eşit — ikisi de 7 puan.
+Yoru yanlış bilgi üretir — clone, teleport, flash, ult. Fade doğru bilgiyi toplar — recon, bot, tutma, ult. İkisi de bilgi üzerine oynar ama zıt taraftan. Yoru kazanmak için Fade'i şaşırtacak, Fade kazanmak için Yoru'nun gerçek yerini ayıracak. Ult maliyeti eşit — ikisi de 7 puan.
 
 ## 5. Haritaya Göre Değişim
 
@@ -98,11 +98,11 @@ Yoru yanlış bilgi üretir — clone, teleport, flash, ult. Fade doğru bilgiyi
 
 ## 6. Dönüm Noktaları
 
-**Dönüm 1 — Recon Yoru'yu yakaladı:** HP barı okundu, clone ayıklandı, yalan çöktü. Fade takımı gerçek Yoru'nun üstüne yürür.
+**Dönüm 1 — Recon gerçek Yoru'yu işaretledi:** Tarama clone'a değmedi, sadece gerçek Yoru tag aldı. İşaretsiz olan clone diye ayıklandı, yalan çöktü. Fade takımı işaretli Yoru'nun üstüne yürür.
 
 **Dönüm 2 — Clone Fade'i şaşırttı:** Fade clone'u takip etti, Yoru arkadan çıktı. Kill Yoru'nun.
 
-**Dönüm 3 — Stun marker'ı kesti:** Teleport iptal, Yoru açıkta. Fade takımı toplar.
+**Dönüm 3 — Tutma alanı Yoru'yu sabitledi:** Tutma gerçek Yoru'yu kavradı, yön değiştiremedi. Teleport'a basacak vakit bulamadıysa açıkta kaldı. Fade takımı toplar.
 
 **Dönüm 4 — Ult Fade'i kilitledi:** Yoru ultta, Fade elinden bir şey gelmez. Çıkışta avantaj Yoru'da.
 
@@ -110,12 +110,13 @@ Yoru yanlış bilgi üretir — clone, teleport, flash, ult. Fade doğru bilgiyi
 
 **Yoru oynuyorsan:** Teleport marker'ını her round başka yere koy — Fade bot'un nereye gideceğini ezberleyemesin. Fade recon atarken clone'u hareket ettir, kendin dur.
 
-**Fade oynuyorsan:** Recon'u clone ile Yoru'nun aynı anda göründüğü açıdan at — HP barını oku, gerçek Yoru'ya yürü. Bot'u Yoru'nun teleport marker'ına önceden yönlendir.
+**Fade oynuyorsan:** Recon'u clone ile Yoru'nun aynı karede göründüğü açıdan at — tarama işaretini oku, sadece gerçek Yoru tag alır, işaretli olana yürü. Recon clone'u tanımaz; ikisini ayıramazsan sese bak — adım sesi çıkaran gerçektir. Bot'u Yoru'nun teleport marker'ına önceden yönlendir.
 
 **Harita seçiminde:** Haven ve Lotus'ta Fade'i seç — 3 site, Yoru'nun tek başına karıştıramayacağı kadar geniş. Bind ve Icebox'ta Yoru'ya yönel — teleport çeşitliliği Fade recon'unu geçersiz kılar.
 
-**Test edilmesi gereken:**
-- Clone, recon sırasında HP barı gösteriyor mu? Fade takımı bunu pratik maçta okuyabiliyor mu?
-- Stun gerçekten teleport animasyonunu kesiyor mu? Pratik modda dene.
+**Kesinleşmiş mekanikler (clone'a karşı Fade işe yaramaz):**
+- Fade'in recon'u, bot'u ve tutma alanı clone'a ETKİ ETMEZ — tarama clone'u işaretlemez, bot içinden geçer, tutma onu kavramaz. Yani Fade clone'u util'le ayıramaz; ayırmak için davranışa bakar.
+- Clone ADIM SESİ ÇIKARMAZ. Fade'in gerçeği bulmadaki tek sağlam ipucu ses — ses çıkaran gerçek, sessiz olan clone. Yoru sessiz oynarsa bu ipucunu da kapatır.
+- Clone vurulunca düşmana döner, kısa bir gecikmeyle patlar ve koni şeklinde flash atar. Fade clone'a ateş ederse hem yerini ele verir hem flash yer.
 
-**Özet:** Yoru yalan satar, Fade gerçek avlar. Clone disiplinini kur, Fade'in ses + HP okumasını kır. Her round marker'ı kaydır, her round clone hareketini değiştir — Fade pattern bulamazsa kör oynar.
+**Özet:** Yoru yalan satar, Fade gerçek avlar. Clone disiplinini kur, Fade'in ses okumasını kır — clone'u util'le ayıramadığı için tek dayanağı ses. Her round marker'ı kaydır, her round clone hareketini değiştir — Fade pattern bulamazsa kör oynar.

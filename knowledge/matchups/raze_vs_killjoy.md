@@ -1,7 +1,7 @@
 # EŞLEŞME: Raze vs Killjoy
 
 ## Bu Eşleşme Neden Önemli
-Killjoy'un kiti yerde sabit durur, kıpırdamaz. Raze'in botu siteye dalıp Killjoy'un tuzak ve botlarını bulur, üstüne yürür. Granat; turret'i, molly'yi ve botu güvenli mesafeden temizler. Satchel ile yer seviyesindeki tuzakların üstünden atlarsın. Raze, Killjoy'un kiti hayattayken siteye girerse o raundda Killjoy hiçbir şey yapamaz.
+Killjoy'un kiti yerde sabit durur, kıpırdamaz. Raze'in botu siteye dalıp Killjoy'un tuzak ve botlarını bulur, üstüne yürür. Granat; turret'i, molly'yi ve botu güvenli mesafeden temizler. sıçrama ile yer seviyesindeki tuzakların üstünden atlarsın. Raze, Killjoy'un kiti hayattayken siteye girerse o raundda Killjoy hiçbir şey yapamaz.
 
 ## Cezalandırma Kalıpları
 
@@ -17,10 +17,10 @@ Killjoy'un kiti yerde sabit durur, kıpırdamaz. Raze'in botu siteye dalıp Kill
 **COUNTER**: Turret'i rafa, kasaya ya da yüksek zemine al — granata düz açı verme
 **WHY**: Yer seviyesindeki turret, granat için bedava hedef
 
-**IF**: Satchel ile molly'nin olduğu alandan atlanarak geçiliyor
+**IF**: sıçrama ile molly'nin olduğu alandan atlanarak geçiliyor
 **MEANING**: Hasar bölgen boşa gidiyor, Raze hiç hasar yemeden içeri giriyor
-**COUNTER**: Molly'ni giriş köşesine değil, içeri girdikten sonraki ikinci adıma göm — Raze satchel ile ilk noktayı geçer ama ikinciye basar
-**WHY**: Satchel sadece ilk tuzak katmanını atlatır, derinlikteki tuzağı atlatamaz
+**COUNTER**: Molly'ni giriş köşesine değil, içeri girdikten sonraki ikinci adıma göm — Raze sıçrama ile ilk noktayı geçer ama ikinciye basar
+**WHY**: sıçrama sadece ilk tuzak katmanını atlatır, derinlikteki tuzağı atlatamaz
 
 ### Killjoy, Raze'i Cezalandırıyorsa
 

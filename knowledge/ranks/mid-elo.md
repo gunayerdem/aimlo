@@ -67,7 +67,7 @@ Aynı açıdan, aynı şekilde peek atıyorsun. Düşman bunu okur ve seni bekle
 
 - **IF** aynı pozisyonda tekrar tekrar ölüyorsan
 - **MEANING** sorun pozisyon değil — tahmin edilebilirlik. İyi bir köşe seçtin ama çok fazla kullandın
-- **COUNTER** o açıyı bırak, off-angle'a geç ya da peek'ini birkaç saniye geciktir
+- **COUNTER** o açıyı bırak, off-angle'a geç ya da hemen peek atma — ayak sesini duyana kadar bekle
 - **WHY** düşman önceden nişan alamazsa dövüş eşit başlar
 
 - **IF** post-plant durumlarında ölüyorsan

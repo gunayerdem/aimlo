@@ -70,7 +70,7 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
 - **vs. Chamber**: Chamber op oyununu eşler ve kaçış teleportu vardır. Onu düelloda değil pozisyonda yen. Ona ulaşamayacağı zıplama açıları kullan.
 - **vs. Cypher**: Telleri flank'ini ele verir. Kamerasını smoke ile kapat, gerekirse tellerin üstünden dash ile geç.
 - **vs. Sova**: recon seni off-angle'larda bulur. Dart'ı vurmaya ya da tarama biter bitmez dash atmaya hazır ol.
-- **vs. Raze**: Yakın dövüşte Raze'in satchel mobilitesi dash'ini eşler. Dar alanlarda ego yapma.
+- **vs. Raze**: Yakın dövüşte Raze'in sıçrama mobilitesi dash'ini eşler. Dar alanlarda ego yapma.
 
 ---
 
@@ -78,9 +78,9 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
 
 ### Yetenek Analizi
 - **bot (C)** - 200 kredi. Düz çizgide ilerleyen, duvarlardan seken, ön konisindeki düşmana kilitlenen robot. Hedefine ulaşırsa 80 hasar verir. Köşe temizlemek ve düşmanı yerinden oynatmak için kullan.
-- **satchel (Q)** - 200 kredi, 2 şarj. Yüzeylere yapışan fırlatılabilir patlayıcı. Havada patlatıp mobilite, yere bırakıp alan inkârı sağlar. Düşmana 50'ye kadar hasar verir. Temel mobilite aracın; double satchel jump'ları yüksek elo'da zorunludur.
+- **sıçrama (Q)** - 200 kredi, 2 şarj. Yüzeylere yapışan fırlatılabilir patlayıcı. Havada patlatıp mobilite, yere bırakıp alan inkârı sağlar. Düşmana 50'ye kadar hasar verir. Temel mobilite aracın; double sıçrama jump'ları yüksek elo'da zorunludur.
 - **molly (E)** - Bedava, 2 kill ile yenilenir. Alt mühimmata ayrılan bomba. İlk patlama 15-55, alt mühimmatlar 15-55 hasar verir. Toplam 200+ hasar potansiyeli. Düşmanı pozisyonundan söker. Alt mühimmat dağılımı tahmin edilebilir; küme açılarını ezberle.
-- **ult (X)** - 8 ult puanı. Geniş alan roketi. Yakınlığa göre 20-150 hasar verir. satchel ile birleştirip havadan roket atabilirsin.
+- **ult (X)** - 8 ult puanı. Geniş alan roketi. Yakınlığa göre 20-150 hasar verir. sıçrama ile birleştirip havadan roket atabilirsin.
 
 ### Ne Zaman Seçilir
 - Harita dar boğaz noktaları ve yakın dövüş içeriyor (Bind, Split, Fracture).
@@ -89,10 +89,10 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
 - Düşman site'lerde sıkı stack oynuyor.
 
 ### Harita Güçleri
-- **Bind**: S-tier. Dar koridorlar; bot teleporttan, molly Hookah/Short'a, double satchel B site'a.
-- **Split**: S-tier. molly iki site'da da Heaven'a, satchel A main duvarının üstünden, B main boğaz kontrolü.
-- **Fracture**: A-tier. Double satchel girişleri, molly Dish/Arcade'a, bot dar koridorlardan.
-- **Icebox**: A-tier. satchel ile A site konteynerlerine, B site Kitchen temizliği bot ile.
+- **Bind**: S-tier. Dar koridorlar; bot teleporttan, molly Hookah/Short'a, double sıçrama B site'a.
+- **Split**: S-tier. molly iki site'da da Heaven'a, sıçrama A main duvarının üstünden, B main boğaz kontrolü.
+- **Fracture**: A-tier. Double sıçrama girişleri, molly Dish/Arcade'a, bot dar koridorlardan.
+- **Icebox**: A-tier. sıçrama ile A site konteynerlerine, B site Kitchen temizliği bot ile.
 - **Sunset**: A-tier. Dar koridorlar ve boğazlar util'ini destekler.
 - **Lotus**: B-tier. Bazı noktalar işler ama harita tutarlı Raze değeri için fazla açık.
 - **Breeze**: C-tier. Fazla açık. molly ve bot geniş alanlarda değer kaybeder.
@@ -105,10 +105,10 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
    **COUNTER** molly'yi alan yaratma aracı olarak düşün; kill bonustur
    **WHY** Kill odaklı atış çoğu zaman yanlış yere düşer ve alan açma fırsatını kaçırırsın
 
-2. **IF** site'a tek satchel ile giriyorsan
-   **MEANING** Tek satchel yavaş ve tahmin edilebilirdir; havada vurulursun
-   **COUNTER** Ya double satchel at ya da hiç atma. Hız ve öngörülemezlik şart
-   **WHY** Tek satchel seni havada yavaş hedef yapar; double satchel hem hızlı hem okunması zordur
+2. **IF** site'a tek sıçrama ile giriyorsan
+   **MEANING** Tek sıçrama yavaş ve tahmin edilebilirdir; havada vurulursun
+   **COUNTER** Ya double sıçrama at ya da hiç atma. Hız ve öngörülemezlik şart
+   **WHY** Tek sıçrama seni havada yavaş hedef yapar; double sıçrama hem hızlı hem okunması zordur
 
 3. **IF** bot gönderdikten sonra peek atmıyorsan
    **MEANING** bot ses çıkarıp düşmanın dikkatini toplar; peek atmazsan 200 krediyi ve pozisyon bilgisini boşa harcadın
@@ -117,7 +117,7 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
 
 4. **IF** ult'u yerden atıyorsan
    **MEANING** Havadan atılan ult daha geniş alan kaplar ve kaçınması zorlaşır
-   **COUNTER** Her zaman satchel ile havalan, sonra ateşle
+   **COUNTER** Her zaman sıçrama ile havalan, sonra ateşle
    **WHY** Yerden roket dar açılıdır ve kolay kaçınılır; havadan roket geniş alan kaplar
 
 5. **IF** savunmada molly'yi retake için saklıyorsan
@@ -126,13 +126,13 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
    **WHY** Erken inkâr push'u yavaşlatır ve takımına rotasyon penceresi açar
 
 ### Pro Oyuncu Stilleri
-- **Aspas (LOUD)**: Raze'de hiper-agresif double satchel girişleri yapar. satchel mekaniği referans düzeyindedir. satchel-ult komboları ile tanınır.
+- **Aspas (LOUD)**: Raze'de hiper-agresif double sıçrama girişleri yapar. sıçrama mekaniği referans düzeyindedir. sıçrama-ult komboları ile tanınır.
 - **Jinggg (PRX)**: Hesaplı Raze. bot'u giriş için değil bilgi için kullanır, ardından util destekli girer. molly yerleşimleri hassastır ve takım execute'larıyla zamanlanmıştır.
 
 ### Eşleşme İpuçları
 - **vs. Killjoy**: molly ve bot onun util'ini (tuzak, molly, bot) yok edebilir. Girmeden önce kurulumunu temizlemeye öncelik ver.
-- **vs. Sage**: Duvarının üstünden satchel at ya da molly ile duvar noktasından söküp at. Util'in onun oyalamalarını doğrudan kırar.
-- **vs. Viper**: satchel ile duvarının içinden geçip gafil avla. bot duvardan geçer.
+- **vs. Sage**: Duvarının üstünden sıçrama at ya da molly ile duvar noktasından söküp at. Util'in onun oyalamalarını doğrudan kırar.
+- **vs. Viper**: sıçrama ile duvarının içinden geçip gafil avla. bot duvardan geçer.
 
 ---
 
@@ -191,7 +191,7 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
 
 ### Eşleşme İpuçları
 - **vs. flash agentları**: Reyna'nın kör etme'si yarı-flash'tır. Flash takasında Reyna kaybeder çünkü kör etme kırılabilir, gerçek flash'lar kırılamaz.
-- **vs. Fade**: bot'ları doğru zamanlandığında kaçış sırasında bile Reyna'yı kovalar.
+- **vs. Fade**: recon yaratığı doğru zamanlandığında kaçış sırasında bile Reyna'yı kovalar (iz sürücü kaçışını takip eder).
 - **vs. Chamber**: Chamber agresyonunu tabancasıyla eşler ve teleportu ile daha güvenli kaçar.
 
 ---
@@ -266,7 +266,7 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
 - Yeteneğini yoğun çalıştın ve teleport zamanlamasını kavradın.
 - Harita flank için çoklu rotasyon yolu sunuyor (Haven, Lotus, Breeze).
 - Takımın kafa karıştıran bir lurker/flanker'a ihtiyaç duyuyor.
-- Düşmanın tahmin edilebilir rotasyonlarını cezalandırmak istiyorsun.
+- Düşmanın tahmin edilebilir rotasyonlarını yakalayıp arkadan bedavaya kill almak istiyorsun.
 
 ### Harita Güçleri
 - **Icebox**: A-tier. B Kitchen'dan teleport, tüpten ult.
@@ -347,7 +347,7 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
    **WHY** Duyulan sprint, düşmanın açı tutup pusu hazırlaması demektir
 
 3. **IF** duvarları takım takibi olmadan atıyorsan
-   **MEANING** Arkalarından kimse push yapmazsa duvarlar işe yaramaz
+   **MEANING** Arkalarından kimse push atmazsa duvarlar işe yaramaz
    **COUNTER** Execute zamanlamasını söyle; duvar ile takım push'u birlikte gelmeli
    **WHY** Takipsiz duvar hem util israfı hem de düşmana pozisyonunu açmaktır
 
@@ -464,7 +464,7 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
 
 ---
 
-## Rank Modülasyonu - Duelist Koçluğu
+## Rank'e Göre Duelist Koçluğu
 
 ### Iron-Silver
 - **Öncelik**: Temel aim mekaniği ve crosshair placement. Duelist olarak işin entry yapmak; önce gir, bilgi ver ya da kill al.
@@ -474,7 +474,7 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
 
 ### Gold-Platinum
 - **Öncelik**: Util zamanlaması ve takım koordinasyonu. Entry öncesi initiator util'ini bekle.
-- **Gelişim**: Jett'te dash aktivasyonunu refleks haline getir. Raze'de double satchel öğren. Reyna'da kör etme + peek zamanlamasını oturt.
+- **Gelişim**: Jett'te dash aktivasyonunu refleks haline getir. Raze'de double sıçrama öğren. Reyna'da kör etme + peek zamanlamasını oturt.
 - **Alan yaratma**: Kill almayı değil, alan açmayı öğren. 5-15 gidip her round A site'ı alan bir duelist, 20-10 giden exit-frag duelist'inden daha değerlidir.
 - **Ekonomi**: Takım full buy'da duelist de full buy yapmalı. Half-buy duelist boşa harcanan roldür.
 
@@ -494,7 +494,7 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
 
 ## Genel Duelist Felsefesi
 
-### Entry Fragging Protokolü
+### Entry Fragging Kuralları
 1. **Initiator util'i bekle** - Asla kuru peek atma. Flash, dart, drone veya tarama bekle.
 2. **Girişini bildir** - "Giriyorum" demek, takımına trade için alan açar.
 3. **Trade et ya da öl** - İşin ya kill almak ya da takımına bilgi ve trade fırsatı vermek.

@@ -118,7 +118,7 @@ Bu kit yerinde duranı cezalandırır. Hareketli duvardan kimse geçmezse o yete
 - **KAY/O'ya karşı**: KAY/O'nun susturması atışının ortasında seni etkisiz bırakır, takımı push'un ortasında açıkta yakalar. Yeteneğini başlatırken susturma bıçağının yarıçapının dışında dur. Push sırasında susturma yersen takım sen yeniden atana kadar beklemeli.
 - **Sova'ya karşı**: Sova'nın recon'u hem hareketli duvarın hem su duvarının içinden tarar — Harbor smoke controller'ı gibi bilgiyi engellemez. Takımın başka bir ajandan ek smoke'a ihtiyacı var ya da push'tan önce recon okunu vurup düşürmesi lazım.
 - **Cypher'a karşı**: Hareketli duvarın yolundaki teller, içinden geçen takım arkadaşlarını tetikler. Duvarın arkasından push yapmadan önce Cypher'ın yeteneklerini temizle. Su duvarı kamera görüşünü keser — savunmada nadir bir bilgi avantajı.
-- **Jett/Raze ile**: Harbor'ın en yüksek sinerjili eşleşmesi. Giriş duelist'inin önüne çekilen hareketli duvar, onların doğru anda dash ya da satchel'la içinden geçtiği bir kalkan yaratır. Duelist peek atar, savunucu sönen kalkanla giriş arasında sıkışıp kalır.
+- **Jett/Raze ile**: Harbor'ın en yüksek sinerjili eşleşmesi. Giriş duelist'inin önüne çekilen hareketli duvar, onların doğru anda dash ya da sıçrama içinden geçtiği bir kalkan yaratır. Duelist peek atar, savunucu sönen kalkanla giriş arasında sıkışıp kalır.
 - **Gekko ile**: Hareketli duvarın içinden Gekko botlarını atarken takım da arkadan push yapınca üst üste binen baskı oluşur. Gekko'nun botunu geri toplama özelliği, yeteneğin push'tan sağ çıkmasını ve retake'de yeniden kullanılmasını sağlar.
 
 ## 7. Oyuncuya Ne Söylenmeli

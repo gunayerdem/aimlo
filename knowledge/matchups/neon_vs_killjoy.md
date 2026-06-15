@@ -114,6 +114,6 @@ Neon'un ekipmanı hız ve hasar üzerine: sprint, slide, stun, fast lane. Killjo
 
 **Tier durumu:** Neon A tier, Killjoy S tier. Doğrudan karşılaşmada Killjoy hafif önde — ama uzun koridor haritalarında Neon bu farkı kapatır.
 
-**Pratik kontrol:** Neon sprint hızının taretin nişan takibini aşıp aşmadığını test et — custom serverde taretin önünden sprint at, aldığın hasarı izle. Beam'in tareti kaç vuruşta bitirdiğini de aynı yöntemle doğrula.
+**Pratik drill:** Taret otomatik nişan alır ve yakaladığında Neon'u yavaşlatır — yani sprintle önünden geçmek bedava can kaybıdır, çözüm tareti önce susturmak. Custom serverde şunu kasla: taretin görüş hattına girmeden açıdan tareti rifle ile patlat, sonra sprintle gir. Beam'i taretin (125 HP) üstüne tutarsan birkaç vuruşta erir; bunu da custom'da tekrarlayıp refleksini oturt.
 
 **Koç testi:** Killjoy seni taret hattına çekmeye çalışır. Sen o hattı bırakıp alternatif koridora geçersin. Matchup bu seçimde döner — koridor sende ise sen kazanırsın, Killjoy'da ise Killjoy.
