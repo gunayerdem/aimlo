@@ -11,119 +11,119 @@ tags: [matchup, harbor, kayo, controller, initiator]
 
 ## 1. Matchup Özü
 
-Harbor wall + cove + Cascade + Reckoning ile sahayı örter ve takımını içinden geçirir. KAY/O bıçak + flash + frag + ult ile senin bu örtüyü kurmadan önce siler. Temel çatışma şu: sen utility'ini atmadan önce bıçak gelirse o round silahsızsın. KAY/O'nun gücü tam bu — kurmanı engelliyor.
+Harbor duvarı + smoke'u + ikinci duvarı + ult'uyla sahayı örter, takımını içinden geçirir. KAY/O bıçağı + flash'ı + frag'ı + ult'uyla sen bu örtüyü kurmadan hepsini siler. Çatışmanın özü şu: util'ini atmadan önce bıçak değerse o round silahsız kalırsın. KAY/O'nun gücü tam burada — seni kurarken yakalar.
 
 ## 2. Kim Avantajlı?
 
 **KAY/O lehine:**
-- Bıçak cove hattına değdi — o round cove yok, takımın açıkta
-- KAY/O ultu aktifken — wall da cove da atma, hepsi iptal
-- Frag cove içine düştü — içeridekiler hasar alır, cove görüşü keser ama kurşunu durdurmaz
-- KAY/O erken girerken — flash + bıçak + frag kombosu sen wall kurmadan hattı geçer
+- Bıçak smoke hattına değdi — o round smoke yok, takımın açıkta kalır
+- KAY/O ult'u aktifken — duvarı da smoke'u da atma, hepsi iptal olur
+- Frag smoke'un içine düştü — içeridekiler hasar yer; smoke görüşü keser ama kurşunu durdurmaz
+- KAY/O erken giriyor — flash + bıçak + frag kombosu sen duvarı kurmadan hattı geçer
 
 **Harbor lehine:**
-- KAY/O bıçağı attı, flash attı, ikisi de yerde patladıysa — wall + cove serbestçe kurulur
-- Spike kurulduktan sonra — cove + Cascade defüz hattını örter, bıçak menzil dışındaysa suppress çalışmaz
-- İki farklı hatta wall yayıyorsan — KAY/O utility tek hatta kalır, diğer hat açık
-- Reckoning atıldığında — concuss KAY/O'nun atışına denk gelirse suppress iptal olur
+- KAY/O bıçağı attı, flash'ı attı, ikisi de yerde patladı — duvarı da smoke'u da serbestçe kurarsın
+- Spike kuruldu — smoke + ikinci duvar defüz hattını örter, bıçak menzil dışındaysa suppress çalışmaz
+- İki ayrı hatta duvar açıyorsun — KAY/O util'i tek hatta kalır, öbür hat açık kalır
+- Ult'unu attın — concuss KAY/O'nun atışına denk gelirse suppress'i iptal eder
 
-**Dengeli haritalar:** Ascent ve Sunset'te kim bıçağını ve flashını yere patlattıktan sonra cast ederse o kazanır. Bıçak yere indi, flash patladı — her ikisi de yerde, hemen cast et.
+**Dengeli haritalar:** Ascent ve Sunset'te kim bıçağını ve flash'ını yere patlattıktan sonra cast ederse o kazanır. Bıçak yere indi, flash patladı — ikisi de yerde, hemen cast et.
 
 ## 3. Key Düellolar
 
-**IF** KAY/O bıçağı site'a attı, sen tam o an cove atıyordun
-**MEANING** Bıçak alanı cove atışını yakaladı — cove suppress yedi, kapandı, hat açık
-**COUNTER** Bıçak sesini duydun — atışı bırak, engel arkasına geç. Bıçak yere indi ve alan etkisi çalıştı, alan etkisi sona erdi — o an cove at. Alternatif: wall'u bıçağın önüne at, bıçağın görüş hattını kes.
-**WHY** Bıçak alana etki eder, cove atışı o alana girerse suppress yer. Alan etkisi sona erdikten sonra atarsan cove hayatta kalır.
+**IF** KAY/O bıçağı site'a attı, sen tam o an smoke atıyordun
+**MEANING** Bıçağın alanı smoke atışını yakaladı — smoke suppress yedi, kapandı, hat açıldı
+**COUNTER** Bıçak sesini duyunca atışı bırak, engelin arkasına geç. Bıçak yere indi, alan etkisi çalıştı, sonra söndü — işte o an smoke at. Alternatif: duvarı bıçağın önüne çek, görüş hattını kes.
+**WHY** Bıçak alana etki eder; smoke o alana girerse suppress yer. Alan etkisi söndükten sonra atarsan smoke ayakta kalır.
 
 ---
 
-**IF** KAY/O ultu patladı, sen siteye girmek üzeresin
-**MEANING** Ult aktifken wall da cove da atma — hepsi iptal, takımın sadece tüfekle girer
-**COUNTER** Ult sesini duyduğun an girişi durdur. KAY/O ultu düşmanlar tarafından kesilirse ya da ult alanından çıkarsan — wall + cove kombosunu kur ve gir. Reckoning elindeyse KAY/O ult aktifken at — KAY/O'nun atışını boz.
-**WHY** Harbor utility iptal olunca sadece tüfekle girersin. Ult kesildikten sonra oynarsın, utility'ni tam kullanırsın.
+**IF** KAY/O ult'u patladı, sen site'a girmek üzeresin
+**MEANING** Ult aktifken duvarı da smoke'u da atma — hepsi iptal, takımın yalnız tüfekle girer
+**COUNTER** Ult sesini duyduğun an girişi durdur. KAY/O ult'unu düşmanlar keserse ya da sen ult alanından çıkarsan — duvar + smoke kombosunu kur ve gir. Ult'un elindeyse KAY/O ult'u aktifken at, atışını boz.
+**WHY** Harbor util'i iptal olunca yalnız tüfekle girersin. Ult kesildikten sonra oyna, util'ini tam kullan.
 
 ---
 
-**IF** KAY/O frag cove alanına düştü
-**MEANING** Frag içeridekilere hasar verir — cove görüşü keser ama hasarı durdurmaz
-**COUNTER** Cove'u frag'ın geldiği açıdan uzağa koy. Cascade'i frag hattına sürerek takımı engel arkasında bırak.
-**WHY** Frag hasar verir, cove görüş keser. Cove'u frag rotasına göre ayarlarsan içeridekileri kurtarırsın.
+**IF** KAY/O frag'ı smoke alanına düştü
+**MEANING** Frag içeridekilere hasar verir — smoke görüşü keser ama hasarı durdurmaz
+**COUNTER** Smoke'u frag'ın geldiği açıdan uzağa koy. İkinci duvarı frag hattına sür, takımı engelin arkasında bırak.
+**WHY** Frag hasar verir, smoke görüş keser. Smoke'u frag rotasına göre ayarlarsan içeridekileri kurtarırsın.
 
 ---
 
-**IF** High Tide duvarını KAY/O flash hattının önüne attın
-**MEANING** Wall flash'ı durdurmaz — flash wall üstünden geçerse hala kör eder. Wall sadece arkasını örter.
-**COUNTER** KAY/O'ysan flash'ı wall üstünden at, yanından değil. Harbor oynuyorsan wall'u flash parabolünü kesecek yüksekliğe koy.
-**WHY** Wall yüksekliği flash'ın parabolünü keser. Flash wall çeperinden atılırsa wall onu durdurur. Üstünden atılırsa geçer.
+**IF** Duvarı KAY/O flash'ının hattının önüne attın
+**MEANING** Duvar flash'ı durdurmaz — flash duvarın üstünden geçerse yine kör eder. Duvar yalnız arkasını örter.
+**COUNTER** KAY/O'ysan flash'ı duvarın üstünden at, yanından değil. Harbor oynuyorsan duvarı flash'ın parabolünü kesecek yüksekliğe koy.
+**WHY** Duvar yüksekliği flash'ın parabolünü keser. Flash duvarın çeperinden atılırsa duvar onu durdurur; üstünden atılırsa geçer.
 
 ---
 
-**IF** Cascade'i KAY/O'nun önüne sürdün
-**MEANING** Cascade KAY/O'nun görüş hattını yavaşça keser — ama bıçak Cascade'in içinden de alana etki eder, arkasındakileri suppress eder
-**COUNTER** KAY/O'ysan bıçağı Cascade'in gerisindeki alana at, görüş kesilirken alan etkisi çalışmaya devam eder. Harbor oynuyorsan Cascade + cove arka arkaya at, bıçak alanını daralt.
-**WHY** Cascade görsel, bıçak bölgesel. Cascade görüşü keser, bıçak duvarın içinden suppress eder.
+**IF** İkinci duvarı KAY/O'nun önüne sürdün
+**MEANING** Duvar KAY/O'nun görüş hattını yavaşça keser — ama bıçak duvarın içinden de alana etki eder, arkasındakini suppress eder
+**COUNTER** KAY/O'ysan bıçağı duvarın gerisindeki alana at; görüş kesilirken alan etkisi çalışmaya devam eder. Harbor oynuyorsan duvar + smoke'u arka arkaya at, bıçağın alanını daralt.
+**WHY** Duvar görsel, bıçak bölgesel. Duvar görüşü keser, bıçak duvarın içinden suppress eder.
 
 ---
 
-**IF** KAY/O B'de tutukken sen A'ya girmek hazırlıyorsun
-**MEANING** KAY/O utility B için hazır, A'ya geçince A kapısında utility'si yok
-**COUNTER** KAY/O'ysan bıçağı geçiş yoluna at, Harbor wall hattına denk getir. Flash'ını geçiş için kullan, A kapısına utility atmadan girme.
-**WHY** KAY/O utility bulunduğun yerde çalışır. Geçiş mesafesinde etkisi yoktur. Harbor A'ya yoğunlaşıyorsa KAY/O B utility'siyle A'yı geçemez.
+**IF** KAY/O B'de tutarken sen A'ya girmeye hazırlanıyorsun
+**MEANING** KAY/O util'i B için hazır; A'ya geçince A kapısında util'i kalmaz
+**COUNTER** KAY/O'ysan bıçağı geçiş yoluna at, Harbor'ın duvar hattına denk getir. Flash'ını geçiş için kullan, A kapısına util atmadan girme.
+**WHY** KAY/O util'i bulunduğun yerde çalışır, geçiş mesafesinde etki etmez. Harbor A'ya yükleniyorsa KAY/O B util'iyle A'yı geçemez.
 
 ---
 
-**IF** Reckoning'i KAY/O'nun üstüne attın
-**MEANING** Concuss KAY/O'nun nişanını bozar, suppress atışı içinde concuss gelirse atış iptal olur
-**COUNTER** KAY/O'ysan Reckoning sesini duyar duymaz engel arkasına geç, bölge dışına çık. Bölge içinde suppress atma.
-**WHY** Reckoning concuss + sersemletme verir. KAY/O atışı bu etkiyle kesilir. O round KAY/O utility eksik, sen açık hatta wall + cove kurarsın.
+**IF** Ult'unu KAY/O'nun üstüne attın
+**MEANING** Concuss KAY/O'nun nişanını bozar; suppress atışının ortasında concuss gelirse atış iptal olur
+**COUNTER** KAY/O'ysan ult sesini duyar duymaz engelin arkasına geç, bölgenin dışına çık. Bölgenin içinde suppress atma.
+**WHY** Ult concuss + sersemletme verir. KAY/O'nun atışı bu etkiyle kesilir. O round KAY/O util'i eksik, sen açık hatta duvar + smoke kurarsın.
 
 ## 4. Utility Karşılaşması
 
-Harbor: wall + cove + Cascade + Reckoning — dört katmanlı alan kontrolü.
+Harbor: duvar + smoke + ikinci duvar + ult — dört katmanlı alan kontrolü.
 KAY/O: frag + flash + bıçak + ult — suppress + hasar + kör.
 
 Her aşamada ne yaparsın:
-- Round başı → Harbor'san wall + cove hattını kur; KAY/O bıçağını ve flashını yere patlattıysa, ikisi yerdeyken gir
-- Siteye girerken → KAY/O'ysan flash + bıçakla o hattı sil, Harbor utility'siz kalsın
-- Savunmada → Harbor'san Cascade + cove ikinci hattı çek, KAY/O tek hatta kalsın
-- Spike kurulunca → KAY/O'ysan frag + flash ile defüz hattını zorlaştır
-- Retake'te → Harbor'san Reckoning'i at, KAY/O atışını boz
+- Round başı → Harbor'san duvar + smoke hattını kur; KAY/O bıçağını ve flash'ını yere patlattıysa ikisi yerdeyken gir
+- Site'a girerken → KAY/O'ysan flash + bıçakla o hattı sil, Harbor util'siz kalsın
+- Savunmada → Harbor'san ikinci duvar + smoke'la ikinci hattı çek, KAY/O tek hatta kalsın
+- Spike kurulunca → KAY/O'ysan frag + flash'la defüz hattını zorlaştır
+- Retake'te → Harbor'san ult'unu at, KAY/O'nun atışını boz
 
-Ult karşılaşması: KAY/O ultu Harbor utility'sini siler, Harbor ultu KAY/O atışını bozar. Aynı roundda ikisi patlarsa: Harbor Reckoning daha hızlı alan etkisine girer, KAY/O ult daha uzun aktif kalır — Reckoning önce patlar ve KAY/O atışını bozarsa o round Harbor'a gider.
+Ult karşılaşması: KAY/O ult'u Harbor util'ini siler, Harbor ult'u KAY/O atışını bozar. Aynı roundda ikisi patlarsa: Harbor ult'u alan etkisine daha hızlı girer, KAY/O ult'u daha uzun aktif kalır — Harbor ult'u önce patlayıp KAY/O atışını bozarsa o round Harbor'a gider.
 
 ## 5. Haritaya Göre Değişim
 
-**Lotus (Harbor avantajlı):** 3 site döner kapı, Harbor C Link + B Hall + A Main hattını tek wall ile kapatır. KAY/O geniş hatlarda bıçak alanını dolduramaz.
+**Lotus (Harbor avantajlı):** 3 site döner kapı; Harbor C Link + B Hall + A Main hattını tek duvarla kapatır. KAY/O geniş hatlarda bıçağın alanını dolduramaz.
 
-**Pearl (Harbor avantajlı):** B Long + Mid Connector + A Link Harbor wall için geniş. KAY/O bıçak alanı açık alanda seyreltir.
+**Pearl (Harbor avantajlı):** B Long + Mid Connector + A Link Harbor duvarı için geniş. KAY/O bıçağının alanı açık alanda seyrelir.
 
-**Bind (KAY/O avantajlı):** Hookah ve Showers dar geçit — KAY/O flash + bıçak kombosu bu hatlarda tam çalışır. Teleporter KAY/O'yu ikinci siteye taşır.
+**Bind (KAY/O avantajlı):** Hookah ve Showers dar geçit — KAY/O flash + bıçak kombosu bu hatlarda tam çalışır. Teleporter KAY/O'yu ikinci site'a taşır.
 
-**Split (KAY/O avantajlı):** Dikey dar geçitler KAY/O utility için biçilmiş. Harbor wall dar alanda işe yaramaz.
+**Split (KAY/O avantajlı):** Dikey dar geçitler KAY/O util'i için biçilmiş kaftan. Harbor duvarı dar alanda işe yaramaz.
 
-**Ascent (Dengeli):** A Main Harbor wall, Mid + B Market KAY/O flash hattı. İki agent farklı bölgede baskın.
+**Ascent (Dengeli):** A Main Harbor duvarı, Mid + B Market KAY/O flash hattı. İki agent farklı bölgede baskın.
 
-**Sunset (Dengeli):** Çok açılı siteler. Harbor cove A'da, KAY/O flash Market'ta tam çalışır.
+**Sunset (Dengeli):** Çok açılı site'lar. Harbor smoke'u A'da, KAY/O flash'ı Market'ta tam çalışır.
 
-**Haven (Harbor hafif avantajlı):** 3 site geçişi Harbor B Hall + C Long + A Main hattı için geniş. KAY/O tek initiator rolünde B ve C arasında utility'siz kalır.
+**Haven (Harbor hafif avantajlı):** 3 site geçişi Harbor B Hall + C Long + A Main hattı için geniş. KAY/O tek initiator rolünde B ile C arasında util'siz kalır.
 
 ## 6. Roundu Döndüren Anlar
 
-**1 — Bıçak atışı yakaladı:** Bıçak Harbor atışına denk geldi → round KAY/O'ya. Bıçak alanı dışındayken atıyorsan → round Harbor'a.
+**1 — Bıçak atışı yakaladı:** Bıçak Harbor atışına denk geldi → round KAY/O'ya. Bıçağın alanı dışındayken atıyorsan → round Harbor'a.
 
-**2 — Ult ult'a karşı:** KAY/O ultu önce patladı, Harbor utility silindi → round KAY/O'ya. Reckoning önce patladı, KAY/O atışı bozuldu → round Harbor'a.
+**2 — Ult ult'a karşı:** KAY/O ult'u önce patladı, Harbor util'i silindi → round KAY/O'ya. Harbor ult'u önce patladı, KAY/O atışı bozuldu → round Harbor'a.
 
-**3 — Frag cove'a girdi:** Frag cove içine düştü, takım hasar aldı → round KAY/O'ya. Cove frag rotasının dışındaysa → round Harbor'a.
+**3 — Frag smoke'a girdi:** Frag smoke'un içine düştü, takım hasar aldı → round KAY/O'ya. Smoke frag rotasının dışındaysa → round Harbor'a.
 
-**4 — KAY/O Reckoning'e girdi:** KAY/O concuss yedi, utility bozuk → round Harbor'a. KAY/O engel arkasına geçip bölgeden çıktıysa → round KAY/O'ya.
+**4 — KAY/O ult'a girdi:** KAY/O concuss yedi, util'i bozuldu → round Harbor'a. KAY/O engelin arkasına geçip bölgeden çıktıysa → round KAY/O'ya.
 
 ## 7. Koç Notu
 
-**Haritaya göre agent seç:** Lotus ve Pearl'de Harbor'ı oyna. Bind ve Split'te KAY/O'ya geç.
+**Haritaya göre agent seç:** Lotus ve Pearl'de Harbor oyna. Bind ve Split'te KAY/O'ya geç.
 
-**Harbor oynuyorsan:** Wall ve cove'u bıçak yere inmeden önce ya da bıçak alan etkisi sona erdikten sonra at. Cove'u grenade geldiği açıdan uzağa koy. Reckoning'i KAY/O ult attığı roundlara sakla.
+**Harbor oynuyorsan:** Duvarı ve smoke'u ya bıçak yere inmeden önce ya da bıçağın alan etkisi söndükten sonra at. Smoke'u frag'ın geldiği açıdan uzağa koy. Ult'unu KAY/O ult attığı roundlara sakla.
 
-**KAY/O oynuyorsan:** Bıçağı Harbor siteye girmeden önce at. Frag'ı cove bıraktığı noktalara kilitle. Ultu Harbor ult attığı roundlara sakla.
+**KAY/O oynuyorsan:** Bıçağı Harbor site'a girmeden önce at. Frag'ı smoke'un bıraktığı noktalara kilitle. Ult'unu Harbor ult attığı roundlara sakla.
 
-Özet: Harbor atarsa roundu alır. KAY/O atıştan önce suppress ederse roundu alır. İkisi aynı anda atarsa: bıçak ve flash yere indi mi — o an ikisi de yerde, hemen cast et.
+Özet: Harbor atarsa roundu alır. KAY/O atıştan önce suppress ederse roundu alır. İkisi aynı anda atarsa: bıçak ve flash yere indi mi — ikisi de yerde, hemen cast et.

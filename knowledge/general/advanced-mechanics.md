@@ -4,7 +4,7 @@
 
 ## Counter-Strafe Zamanlama
 
-Counter-strafe şu demek: hareket ederken ters yöne basıyorsun, böylece anında duruyorsun. Tuşu bırakmak yerine ters tuşa basmak — bu fark kritik, çünkü seni çok daha hızlı doğru nişan aralığına sokuyor.
+Counter-strafe şu demek: hareket ederken ters yöne basarsın, böylece anında durursun. Tuşu bırakmak yerine ters tuşa bas — bu fark kritik, çünkü seni çok daha hızlı doğru nişan aralığına sokar.
 
 ### Silaha Göre Hız Farkı
 
@@ -12,24 +12,24 @@ Her silah counter-strafe'e farklı tepki verir:
 
 | Kademe | Silahlar | Counter-Strafe Hızı | Tuşu Bırakmaya Göre Fark |
 |---|---|---|---|
-| En Hızlı | Shorty, Stinger, Classic, Frenzy, Spectre | Neredeyse anında hazır | Durma süresini neredeyse yarıya indiriyor |
+| En Hızlı | Shorty, Stinger, Classic, Frenzy, Spectre | Neredeyse anında hazır | Durma süresini neredeyse yarıya indirir |
 | Hızlı | Phantom, Bulldog, Ghost, Marshal, Guardian, Vandal, Sheriff | Çok hızlı hazır | Belirgin kazanç |
 | Orta | Operator, Ares, Odin | Daha yavaş hazır | Yine de büyük kazanç, pencere biraz daha geniş |
 
-Silah ne kadar ağırsa, her iki yöntemde de o kadar uzun sürer — ama counter-strafe her zaman tuşu bırakmaktan daha hızlı seni hazır hale getirir.
+Silah ne kadar ağırsa her iki yöntem de o kadar uzun sürer — ama counter-strafe seni her zaman tuşu bırakmaktan daha hızlı hazır eder.
 
 ### Teknik Detaylar
 
-- **Basma süresi**: Ters tuşa bir-iki frame bas, hepsi bu. Uzun tutarsan yön değiştirir, işe yaramaz.
-- **Eşik değeri**: Hızın maksimum koşu hızının yaklaşık %30'una düştüğünde nişan doğrulanıyor. Counter-strafe seni oraya tuşu bırakmaktan çok daha hızlı ulaştırıyor.
-- **Çift-tap counter-strafe**: A-D-A veya D-A-D sırasıyla basıyorsun. Bu mikro-jiggle oluşturur — düşman seni takip edemez, sen kuru peek atarken nişan eşiğinin yakınında kalırsın. Radiant'ta yaygın açıları temizlerken bunu görürsün.
-- **Çapraz counter-strafe**: W+A veya W+D ile hareket ediyorsan, durduğunda her iki tuşa da aynı anda ters basmalısın. Birini atlayan hız kalıntısı bırakırsın ve nişan bozulur.
+- **Basma süresi**: Ters tuşa bir-iki frame bas, hepsi bu. Uzun tutarsan yön değiştirirsin, işe yaramaz.
+- **Eşik değeri**: Hızın maksimum koşu hızının yaklaşık %30'una düştüğünde nişanın doğrulanır. Counter-strafe seni oraya tuşu bırakmaktan çok daha hızlı ulaştırır.
+- **Çift-tap counter-strafe**: A-D-A veya D-A-D sırasıyla bas. Bu mikro-jiggle yaratır — düşman seni takip edemez, sen kuru peek atarken nişan eşiğinin yakınında kalırsın. Radiant'ta açıları temizlerken bunu sık görürsün.
+- **Çapraz counter-strafe**: W+A veya W+D ile hareket ediyorsan, durduğunda her iki tuşa da aynı anda ters bas. Birini atlarsan hız kalıntısı kalır ve nişanın bozulur.
 
 ---
 
 ## Jiggle Peek Genişlik Optimizasyonu
 
-Jiggle peek'te amaç şu: başını değil sadece omzunu göster, bilgi al, çekil. Ne kadar açıkta kalacağın hedefe göre değişiyor.
+Jiggle peek'te amaç şu: başını değil sadece omzunu göster, bilgi al, çekil. Ne kadar açıkta kalacağın hedefe göre değişir.
 
 ### Hedefe Göre Ne Kadar Görün
 
@@ -43,24 +43,24 @@ Jiggle peek'te amaç şu: başını değil sadece omzunu göster, bilgi al, çek
 ### Mesafeye Göre Jiggle Genişliği
 
 IF 30 metre üstü bir açıda jiggle atıyorsan
-MEANING düşman ekranında çok az hareket görüyor — açısal hız düşük, küçük bir kaymayı zor fark eder
+MEANING düşman ekranında çok az hareket görür — açısal hız düşük, küçük bir kaymayı zor fark eder
 COUNTER strafe tuşuna daha hafif bas, daha sıkı jiggle at
-WHY bu mesafede küçük bir hareket bile bilgi toplamana yetiyor, gereksiz yere açıkta kalma
+WHY bu mesafede küçük bir hareket bile bilgi toplamana yeter, gereksiz yere açıkta kalma
 
 IF 15 metre altı bir açıda jiggle atıyorsan
-MEANING düşman ekranında her hareketinle büyük bir alan kaplıyorsun — açısal hız yüksek
+MEANING düşman ekranında her hareketinle büyük bir alan kaplarsın — açısal hız yüksek
 COUNTER strafe tuşunu biraz daha uzun bas, jiggle'ı genişlet
-WHY yakında çok sıkı jiggle atarsan düşman seni zar zor görür ama tepki de vermez — tepki vermesini istiyorsan biraz daha fazla görün
+WHY bu kadar yakında çok sıkı jiggle atarsan düşman seni zar zor görür ama tepki de vermez — tepki vermesini istiyorsan biraz daha fazla görün
 
 IF 15–30 metre arası bir açıda jiggle atıyorsan
 MEANING standart mesafe, açısal hız dengeli
 COUNTER orta genişlikte jiggle at — strafe tuşuna kısa ama net bas
-WHY bu temel noktandır; duruma göre biraz daralt ya da genişlet
+WHY bu senin temel noktan; duruma göre biraz daralt ya da genişlet
 
 ### Jiggle Sıralaması
 
-- **Tek jiggle**: Bir hızlı giriş-çıkış. Normal bir oyuncudan atış bait etmek için yeter.
-- **Çift jiggle**: Arka arkaya iki jiggle. Op kullanan birini erken ateş ettirirsin ya da beklemeye zorlarsın — her ikisi de sana bilgi verir.
+- **Tek jiggle**: Bir hızlı giriş-çıkış. Normal bir oyuncudan atış bait etmeye yeter.
+- **Çift jiggle**: Arka arkaya iki jiggle. Op kullanan birini erken ateş ettirir ya da beklemeye zorlarsın — her ikisi de sana bilgi verir.
 - **Jiggle'dan geniş swing'e**: Bir jiggle at, kısa dur, sonra içeri gir. Duraklamayla rakibin ritim beklentisini kırarsın.
 
 ---
@@ -104,17 +104,17 @@ Takım arkadaşınla peek atıyor musun (çift peek)?
 IF spray'in tam ortasındasın, 4-5. mermiye geldin
 MEANING spray pattern dışa açılıyor, mermiler dağılıyor
 COUNTER tam 4-5. mermide crouch yap — ilk mermide asla
-WHY bu hareketi sıkıştırır, sonraki mermiler hedefe oturur
+WHY crouch bu noktada hareketi sıkıştırır, sonraki mermiler hedefe oturur
 
 IF düşman açıyı kafan hizasında bekliyorsa
-MEANING peek attığında başın tam crosshair'inin üstüne geliyor
+MEANING peek attığında başın tam crosshair'inin üstüne gelir
 COUNTER peek'e girerken anında crouch yap, crosshair'inin altına in
 WHY bu sadece dövüşün ilk anında çalışır — iyi oyuncular hemen aşağı ayarlar
 
 IF cover arkasında açı tutuyorsan
 MEANING görünen vücudunu küçültmek istiyorsun
-COUNTER cover arkasında crouch'la
-WHY dışarıda kalan yüzey alanı azalır, vurulacak yer kalır
+COUNTER cover arkasında crouch'a in
+WHY dışarıda kalan yüzey alanı azalır, düşmanın vuracak yeri kalmaz
 
 ### Crouch Seni Ne Zaman Öldürür
 
@@ -126,10 +126,10 @@ WHY crouch hızını yarıya düşürür, seni sabit hedef yapar
 IF yüksek aim'li biriyle düello yapıyorsan
 MEANING o oyuncu crouch'a anında uyum sağlar
 COUNTER ayakta dur, strafe yap
-WHY crouch sadece başını daha yavaş ve daha alçak bir hedef yapar — trade yok
+WHY crouch başını sadece daha yavaş ve daha alçak bir hedef yapar — trade alamazsın
 
 IF jiggle peek atıyorsan
-MEANING hız ve minimum görünürlük için yapıyorsun bunu
+MEANING bunu hız ve minimum görünürlük için yapıyorsun
 COUNTER jiggle'da asla crouch yapma
 WHY crouch strafe hızını sıfırlar, jiggle'ın tüm amacı biter
 
@@ -139,9 +139,9 @@ COUNTER crouch yapma, ayakta shift-walk yap
 WHY crouch ses çıkarır ve reposition'ı yavaşlatır
 
 IF birden fazla düşman seni izliyorsa
-MEANING bir düelloya crouch'la commit edersen diğerleri için donup kalırsın
+MEANING bir düelloya crouch'la commit edersen diğerlerine karşı donup kalırsın
 COUNTER ilk kill'den sonra cover'a strafe edebilmek için ayakta kal
-WHY crouch'layan oyuncu diğer düşmanlar için bedava kill
+WHY crouch'a giren oyuncu diğer düşmanlara bedava kill verir
 
 ### Crouch Zamanlama Penceresi
 
@@ -162,14 +162,14 @@ Sayıları ezberleme. Kademeleri bil, sahada uygula:
 | Yavaş | Guardian, Marshal | Tüfeklerden biraz yavaş |
 | En Yavaş | Operator, Odin, Ares | Tüfeklerden çok daha yavaş |
 
-Yürürken koşmanın yaklaşık %60'ı hızındasın. Çömelince bu %40'a düşüyor. Bu oran hangi silahı tuttuğundan bağımsız — hep böyle.
+Yürürken koşmanın yaklaşık %60'ı hızındasın. Çömelince bu %40'a düşer. Bu oran hangi silahı tuttuğundan bağımsız — hep böyle.
 
 ### Hız Etkileri
 
 - Bıçakla site'a koşarsan tüfek tutana göre belirgin önce varırsın. Çoğu haritada ilk teması sen yaparsın — bu büyük avantaj.
 - Mid, her iki tarafın birbirine en yakın zamanda ulaştığı nokta. İlk çatışma neredeyse her haritada orada olur.
-- Pistol round'unda tabancayla koşan tüfek tutandan biraz hızlı. Eco rush'ta bu farkı kullan.
-- Lotus gibi kapılı haritalarda kapılar rotasyonu geciktirir. Kapıya yaklaşmadan önce rotasyon çağır — geç kalırsın.
+- Pistol round'unda tabancayla koşan, tüfek tutandan biraz hızlı. Eco rush'ta bu farkı kullan.
+- Lotus gibi kapılı haritalarda kapılar rotasyonu geciktirir. Kapıya yaklaşmadan önce rotasyon çağır — yoksa geç kalırsın.
 
 ## Run-and-Gun Uygulanabilirliği
 
@@ -180,7 +180,7 @@ Her silahla koşarak ateş edemezsin. Hangisiyle edebileceğini ezberle:
 | Spectre | EVET | Yakın-orta mesafe — en iyi seçim |
 | Stinger | EVET | Sadece yakın mesafe |
 | Judge / Bucky | EVET | Çok yakın mesafe |
-| Classic (sağ tık) | EVET | Çok yakın mesafe — burst ile kafaya vurursan tek öldürürsün |
+| Classic (sağ tık) | EVET | Çok yakın mesafe — burst ile kafaya vurursan tek atışta öldürürsün |
 | Frenzy | EVET | Yakın mesafe |
 | Ares / Odin | EVET (spin-up sonrası) | Yakın-orta mesafe |
 | Ghost | Zor | Sadece çok yakın mesafe |
@@ -190,8 +190,8 @@ Her silahla koşarak ateş edemezsin. Hangisiyle edebileceğini ezberle:
 ### Run-and-Gun Mekanikleri
 
 - Spectre ile koşarken spray at — hareket cezası neredeyse yok. Eco roundlarda bu silahla strafe-spray yap, bu meşru bir strateji.
-- Classic sağ tık: düşman çok yakına geldiğinde koşarken ateşle. Burst gövdeye vurursa ve kafaya çarparsa tek öldürür.
-- Ares / Odin ile birkaç atış yaptıktan sonra hareket halindeyken isabet artar — bu yüzden bekleme, önceden ateşe başla.
+- Classic sağ tık: düşman çok yakına geldiğinde koşarken ateşle. Burst gövdeye vurur ve kafaya çarparsa tek atışta öldürür.
+- Ares / Odin ile birkaç atış yaptıktan sonra hareket halindeyken isabetin artar — bu yüzden bekleme, önceden ateşe başla.
 
 ---
 
@@ -201,14 +201,14 @@ Bir düşmandan diğerine geçerken ne kadar flick yapacağın mesafeye göre de
 
 - Yakın düşman ekranda büyük görünür — büyük flick yaparsın.
 - Uzak düşman ekranda küçük görünür — küçük flick yaparsın.
-- Uzaktaki düşmana transfer daha sıkı, daha az el hareketi. Çoğu oyuncu bunu tersine anlıyor.
+- Uzaktaki düşmana transfer daha sıkı, daha az el hareketi ister. Çoğu oyuncu bunu tersine anlar.
 
 ### Spray Transfer Tekniği
 
 1. 1. düşmanı spray'le bitir (1-6. mermi arası). Crosshair'i 2. düşmana yapıştır.
-2. Mid-spray'de silahın bir yöne çektiğini hissedeceksin — bunu tersiyle kapat.
-3. **Vandal ile transfer**: Silah sola çekiyor. Crosshair'i AŞAĞI-SAĞA kaydır.
-4. **Phantom ile transfer**: Silah sağa çekiyor. Crosshair'i AŞAĞI-SOLA kaydır.
+2. Mid-spray'de silahın bir yöne çektiğini hissedersin — bunu tersiyle kapat.
+3. **Vandal ile transfer**: Silah sola çeker. Crosshair'i AŞAĞI-SAĞA kaydır.
+4. **Phantom ile transfer**: Silah sağa çeker. Crosshair'i AŞAĞI-SOLA kaydır.
 5. 2. düşman uzaktaysa spray'i sıfırla: dur, micro counter-strafe yap, sıfırdan spray başlat.
 
 ---
@@ -228,7 +228,7 @@ Tüm sesler iki gruba girer:
 - Yürüme ayak sesleri
 - Crouch yürüme — yürümeyle aynı ses yarıçapı, hiçbir gizlilik avantajı yok
 
-Yürüme veya crouch dışında attığın her adım pozisyonunu düşmana söylüyor. Koşuyorsan, zıplıyorsan, silah değiştiriyorsan — haritanın her yerine ilan ediyorsun nerede olduğunu.
+Yürüme veya crouch dışında attığın her adım pozisyonunu düşmana söyler. Koşuyorsan, zıplıyorsan, silah değiştiriyorsan — nerede olduğunu haritanın her yerine ilan ediyorsun.
 
 ---
 
@@ -237,20 +237,20 @@ Yürüme veya crouch dışında attığın her adım pozisyonunu düşmana söyl
 | Yetenek | Sesin Sana Söylediği |
 |---|---|
 | Jett dash | Dash yönü — Jett'in pozisyonunu onaylar |
-| Raze satchel | Yön ve muhtemel peek açısı |
-| Omen Shrouded Step | Nereden değil, nereye gittiği |
+| Raze bot | Yön ve muhtemel peek açısı |
+| Omen kaçış | Nereden değil, nereye gittiği |
 | Omen ult | Varış sesini duyduysan, oraya iniyor |
 | Chamber TP | Anchor konumu |
-| Reyna dismiss | Kaçış yönü |
+| Reyna kaçış | Kaçış yönü |
 | Yoru TP | Hem çıkış hem varış noktası |
-| Yoru clone ayak sesleri | Gerçekten ayırt edemezsin — bait için tasarlanmış |
-| KAY/O knife inişi | Baskılama alanının tam merkezi |
-| Sova drone | Yön ve yaklaşık konum |
+| Yoru klon ayak sesleri | Gerçek olanı ayırt edemezsin — bait için tasarlanmış |
+| KAY/O bot inişi | Baskılama alanının tam merkezi |
+| Sova recon | Yön ve yaklaşık konum |
 | Skye köpek | Yön; düşmana yaklaşınca ses değişir |
-| Fade prowler | Seyahat yönü |
-| Breach aftershock | Aftershock'un tam yeri — duvardan şarj eder |
-| Killjoy turret atışı | Turret konumu; ateş ediyorsa düşman orada |
-| Cypher tripwire | Tetiklenen tripwire'ın tam pozisyonu |
+| Fade bot | Hareket yönü |
+| Breach molly | Mollynin tam yeri — duvardan şarj eder |
+| Killjoy bot atışı | Bot konumu; ateş ediyorsa düşman orada |
+| Cypher tel | Tetiklenen telin tam pozisyonu |
 
 ---
 
@@ -265,10 +265,10 @@ Yürüme veya crouch dışında attığın her adım pozisyonunu düşmana söyl
 
 ### Temel Spike Mekanikleri
 
-- **Plant**: Plant animasyonunu hasar keserek durduramazsın — ya görüş hattını kes ya da planter'ı öldür.
+- **Plant**: Plant animasyonunu hasar vererek durduramazsın — ya görüş hattını kes ya da planter'ı öldür.
 - **Full defuse**: Plant'ın yaklaşık iki katı sürer.
 - **Yarı defuse**: Yarıda bıraktığında %50 ilerleme kaydolur. Bir sonraki girişimde sadece kalan yarıyı tamamlarsın.
-- **Spike patlama**: Bip sesi patlamaya yaklaştıkça hızlanır — başta yavaş, ortada belirgin, sona doğru sürekli. Bunu duyarak nerede olduğunu anlarsın.
+- **Spike patlama**: Bip sesi patlamaya yaklaştıkça hızlanır — başta yavaş, ortada belirgin, sona doğru sürekli. Bunu duyarak patlamaya ne kadar kaldığını anlarsın.
 
 ### Fake Defuse
 
@@ -318,11 +318,11 @@ Saniye ezberlemene gerek yok. Şu pattern'leri kafana sok:
 
 - **Savunucu her site'a senden önce girer.** Bu fark küçük olabilir (mid) ya da büyük olabilir (Bind'da B-Long, Lotus'ta C-Main). Buna göre hamle yap.
 - **Mid her zaman ilk çatışma noktası.** Her iki takım mid'e neredeyse aynı anda girer. Mid'in bu kadar kanlı olmasının sebebi bu.
-- **Bıçak koşarsan farkı kapatırsın.** Ama silahın hazır olmaz. O yüzden düşman sesini duyduğunda bıçakla koşma.
+- **Bıçakla koşarsan farkı kapatırsın.** Ama silahın hazır olmaz. O yüzden düşman sesini duyduğunda bıçakla koşma.
 
 ---
 
-**Lotus kapıları:** Kapı animasyonu zaman yiyor. Rotasyon çağrısı geldiğinde erken basmalısın, yoksa geç kalırsın.
+**Lotus kapıları:** Kapı animasyonu zaman yer. Rotasyon çağrısı geldiğinde erken basmalısın, yoksa geç kalırsın.
 
 **Haven:** Üç site savunucuyu böler. Her zaman bir site'ta geç rotasyon olur. Hangi savunucu hangi site'i tutuyor, takip et. Zayıf olan tarafa gir.
 
@@ -332,21 +332,21 @@ Saniye ezberlemene gerek yok. Şu pattern'leri kafana sok:
 
 ### Jump Mekanikleri
 
-- Havadayken silahın hassasiyetsizdir. Havada ateş etme — Jett'in Bladestorm'u hariç.
-- Jump peek'in amacı şu: Silahlı çatışmaya girmeden açıyı taramak. Atlama zirvesinde kafan standart peek'e göre daha zor takip edilir.
+- Havadayken silahın isabetsiz olur. Havada ateş etme — Jett'in ultu hariç.
+- Jump peek'in amacı şu: silahlı çatışmaya girmeden açıyı taramak. Atlama zirvesinde kafan, standart peek'e göre daha zor takip edilir.
 - Zirvede counter-strafe yap. İniş noktanı tahmin edilemez hale getirirsin.
 
 ### Jump Peek Uygulamaları
 
 IF bir açının tutulup tutulmadığını öğrenmek istiyorsun ama ölüm riskini alamıyorsan
-MEANING birinin orada olup olmadığını görmek istiyorsun, commit etmeden
+MEANING birinin orada olup olmadığını commit etmeden görmek istiyorsun
 COUNTER jump peek at — havadayken kısa bir penceren var, o pencerede tara, sonra cover'a in
 WHY zirvede kafan doğrusal olmayan bir yol izler, takip etmek zorlaşır
 
 IF tehlikeli bir görüş hattını geçmen gerekiyorsa — Ascent mid avlusu veya Icebox mid gibi
 MEANING koşarak geçersen daha uzun süre açıkta kalırsın
 COUNTER atlayarak geç — yatay hız ile dikey hareket birleşince düşmanın crosshair'inde geçirdiğin süre kısalır
-WHY yerden koşmak seni daha uzun süre o görüş hattına kilitler
+WHY yerden koşmak seni o görüş hattına daha uzun süre kilitler
 
 ### Yaygın Jump Peek Noktaları
 
@@ -363,7 +363,7 @@ Duvara göre hasar değişir. Bunları bil:
 
 | Materyal | Nüfuz Seviyesi |
 |---|---|
-| İnce tahta | Yüksek — hasarın çoğu geçiyor |
+| İnce tahta | Yüksek — hasarın çoğu geçer |
 | Kalın tahta | Orta — yaklaşık yarı hasar |
 | İnce metal | Orta-yüksek |
 | Kalın metal | Düşük — hasar büyük ölçüde emilir |
@@ -389,15 +389,15 @@ COUNTER hemen baş hizasına tüfek veya Odin'le wallbang yap
 WHY yarım hasar bile düşmanı pozisyondan atar, defuse'u keser ve ince materyalden kill alırsın
 
 IF SMG veya tabancayla wallbang yapmayı düşünüyorsan
-MEANING bu silahlar nüfuzda çok fazla hasar kaybediyor
+MEANING bu silahlar nüfuzda çok fazla hasar kaybeder
 COUNTER mermiyi harcama, doğrudan açıya gir
-WHY düşük kalibre silahlarda nüfuz hasarı o kadar düşüyor ki wallbang işe yaramaz — sadece tüfek ve ağır silahlar yeterli hasarı taşır
+WHY düşük kalibre silahlarda nüfuz hasarı o kadar düşer ki wallbang işe yaramaz — yeterli hasarı sadece tüfek ve ağır silahlar taşır
 
 ---
 
 ## One-Way Smoke Pozisyonları
 
-One-way smoke şu anlama gelir: düşman seni göremez ama sen onun ayaklarını görürsün. Smoke'un alt kenarı tam göz hizanda durur, karşı taraf ise smoke'un içine bakar.
+One-way smoke şu demek: düşman seni göremez ama sen onun ayaklarını görürsün. Smoke'un alt kenarı tam göz hizanda durur, karşı taraf ise smoke'un içine bakar.
 
 ### Prensipler
 
@@ -408,18 +408,18 @@ One-way smoke şu anlama gelir: düşman seni göremez ama sen onun ayaklarını
 ### Ajan Bazlı Pozisyonlar
 
 - **Omen – Bind B-Long**: Smoke'u uzun duvarın üstüne at. Site içinden smoke altında ayak görürsün.
-- **Viper – Ascent A-Main**: A-Main girişindeki alçak duvara Poison Cloud koy. Jeneratör arkasından ayak görürsün.
-- **Jett – Split A-Ramp**: Ramp çıkıntısına Cloud Burst at. Ramp'tan A-Main ayaklarını görürsün.
+- **Viper – Ascent A-Main**: A-Main girişindeki alçak duvara smoke koy. Jeneratör arkasından ayak görürsün.
+- **Jett – Split A-Ramp**: Ramp çıkıntısına smoke at. Ramp'tan A-Main ayaklarını görürsün.
 - **Brimstone – Haven C-Long**: Long duvarın kenarına smoke at. Site içinden long'dan gelen ayakları görürsün.
-- **Astra – Icebox B-Site**: Turuncu konteynerin üstüne yıldız koy. B-Main'e bakan one-way açılır.
-- **Harbor – Lotus A-Main**: A-Main üstündeki duvar çıkıntısına Cove at. Molozdan one-way çıkar.
+- **Astra – Icebox B-Site**: Turuncu konteynerin üstüne smoke koy. B-Main'e bakan one-way açılır.
+- **Harbor – Lotus A-Main**: A-Main üstündeki duvar çıkıntısına smoke at. Molozdan one-way çıkar.
 
 ### One-Way'e Karşı Oynama
 
 IF düşman senin one-way'ini öğrendi
 MEANING altından crouch-walk yapar ya da içine doğru agresif girer
 COUNTER pozisyonu round'lar arasında değiştir, aynı noktaya yapıştırma
-WHY düşman nereye bakacağını bilirse one-way'in sıfır değeri kalır — tek avantajın sürpriz olmak
+WHY düşman nereye bakacağını bilirse one-way'in sıfır değer kalır — tek avantajın sürpriz olmak
 
 ---
 
@@ -428,13 +428,13 @@ WHY düşman nereye bakacağını bilirse one-way'in sıfır değeri kalır — 
 ### Immortal+ İçin
 
 IF mekaniklerini keskinleştirmek istiyorsan
-MEANING bu seviyede counter-strafe zamanlaması, jiggle peek genişliği ve crouch zamanlaması round kazanıp kaybettirir
+MEANING bu seviyede counter-strafe zamanlaması, jiggle peek genişliği ve crouch zamanlaması round kazandırır ya da kaybettirir
 COUNTER her mekaniği ayrı ayrı çalış: counter-strafe için Range botları, jiggle peek için custom oyun, crouch zamanlaması için deathmatch
 WHY Immortal+'da fark küçük ama belirleyici — bu mikro düzeltmeler üst ile alt sıra arasındaki tek farktır
 
 ### Diamond-Ascendant İçin
 
 IF mekanik temelini oturtmak istiyorsan
-MEANING counter-strafe, ses bilgisi ve spray transfer bu sıralamada sana en fazla round kazandırır
+MEANING bu sıralamada sana en çok round'u counter-strafe, ses bilgisi ve spray transfer kazandırır
 COUNTER counter-strafe'i kas hafızasına göm, düşman seslerini aktif dinle, spray transfer'i pratik et
 WHY bu üç mekanik bir arada diğer her şeyden fazla round kazandırır

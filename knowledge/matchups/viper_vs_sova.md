@@ -11,127 +11,127 @@ tags: [matchup, viper, sova, controller, initiator]
 
 ## 1. Matchup Özü
 
-Viper hat kurar, körleştirir. Sova bilgi açar, pozisyonları ifşa eder. Bu matchup'ta soru şu: Viper'ın hatları Sova'nın bilgisinden önce mi kurulur, Sova'nın bilgisi Viper'ın hatlarından önce mi gelir? İlk ulaşan kazanır.
+Viper duvar kurar, görüşü keser. Sova bilgi açar, pozisyonları ifşa eder. Bu matchup'ta tek soru var: Viper'ın duvarı mı Sova'nın bilgisinden önce kalkar, yoksa Sova'nın bilgisi mi Viper'ın duvarından önce gelir? Önce yetişen kazanır.
 
 ## 2. Kim Avantajlı?
 
 **Viper lehine:**
-- Spike kurulduktan sonra — wall + orb + snake bite kombosunu çakarsın, Sova'nın dart'ı wall hattında yarım bilgi verir, defuse hamlesi körelir
-- Sova dart ve shock dart harcandıktan sonra — Sova silahsız, aim'e düşer, wall açısı o aim'i keser
-- Viper's Pit aktifken — Pit içinde Sova dart'ı sana pozisyon vermez, sen içeriden görürsün
-- Lineup ağır haritalarda (Icebox A, Breeze A) — molly lineup Sova'nın recon alanını baskı altına alır
+- Spike kurulduktan sonra — duvar + smoke + molly komboyu çakarsın, Sova'nın recon'u duvar hattında yarım bilgi verir, defuse hamlesi körelir.
+- Sova recon ve shock dart harcandıktan sonra — Sova silahsız kalır, aim'e düşer, duvar açısı o aim'i keser.
+- Ult açıkken — sis içinde Sova recon sana pozisyon vermez, sen içeriden görürsün.
+- Lineup ağır haritalarda (Icebox A, Breeze A) — molly lineup'ı Sova'nın recon alanını baskı altına alır.
 
 **Sova lehine:**
-- Sova recon dart Viper wall arkasına girdiğinde — takımın wall arkasında gizli duramaz
-- Viper fuel bittiğinde — wall ve orb aynı anda tutulamazsa Sova dart boşluğu bulur
-- Hunter's Fury aktifken — üç shot wall'u geçer, Pit içinde bile seni yakalar
-- Drone + dart ikilisi çalıştığında — Sova takımına canlı bilgi akar, sen pozisyon değiştirmek zorunda kalırsın
+- Sova recon duvar arkasına girdiğinde — takımın duvar arkasında gizli duramaz.
+- Viper fuel bittiğinde — duvar ve smoke aynı anda tutulamayınca Sova recon boşluğu bulur.
+- Sova ult açıkken — üç vuruş duvarı geçer, sis içinde bile seni yakalar.
+- Bot + recon birlikte çalışınca — Sova takımına canlı bilgi akar, sen pozisyon değiştirmek zorunda kalırsın.
 
-**Dengeli:** Ascent, Haven, Sunset'te matchup wall timing'i ile dart timing'ine bağlı. Viper wall'u Sova dart'tan önce kurarsa bilgi yarım kalır. Sova dart wall'dan önce atılırsa wall arkası çoktan bilgili.
+**Dengeli:** Ascent, Haven, Sunset'te matchup duvar timing'i ile recon timing'ine bağlı. Viper duvarı recon'dan önce kurarsa bilgi yarım kalır. Sova recon'u duvardan önce atarsa duvar arkası çoktan bilgili.
 
 ## 3. Key Düellolar
 
-**IF** Sova recon dart Viper wall hattının arkasına atıldı
-**MEANING** Dart wall arkasını tarar, takımın ifşa olur, Sova takımı açı tutmaya geçer
-**COUNTER** Wall'u dart'ın giriş açısına dik yerleştir. Dart wall'u dikey hatta çarparsa içeri giremez. Orb'u dart lokasyonuna at, ikinci smoke bilgi görüşünü kapar.
-**WHY** Dart wall yüksekliğinin altından giremez, üstünden girerse yüksekliği artır. Dart ses verir ama bilgi vermez — Sova takımı sadece "wall arkasında biri var" bilgisi alır, yer bilmez.
+**IF** Sova recon Viper duvar hattının arkasına atıldı
+**MEANING** Recon duvar arkasını tarar, takımın ifşa olur, Sova takımı açı tutmaya geçer
+**COUNTER** Duvarı recon'un giriş açısına dik yerleştir. Recon duvara dikey hattan çarparsa içeri giremez. Smoke'u recon lokasyonuna at, ikinci smoke görüşü tamamen kapat.
+**WHY** Recon, duvar yüksekliğinin altından giremez; üstünden giriyorsa duvarı yükselt. Recon ses verir ama net bilgi vermez — Sova takımı sadece "duvar arkasında biri var" bilgisini alır, yerini bilmez.
 
 ---
 
-**IF** Sova shock dart Viper snake bite alanına önce atıldı
-**MEANING** Shock dart post-plant molly'ni siler, Sova takımı defuse için alan açar
-**COUNTER** İki snake bite at — ard arda. Shock dart birini siler, ikincisi aktif kalır.
-**WHY** Sova'nın shock dart'ı tek molly'yi siler. İki molly Sova'nın shock dart ekonomisini aşar — ikinci molly için cooldown yetmez. Spike basıldıktan sonra çift snake bite Viper'ın en sağlam silahı.
+**IF** Sova shock dart Viper molly alanına önce atıldı
+**MEANING** Shock dart post-plant molly'ni siler, Sova takımına defuse için alan açar
+**COUNTER** İki molly at, ard arda. Shock dart birini siler, ikincisi aktif kalır.
+**WHY** Sova'nın shock dart'ı tek molly'yi siler. İki molly Sova'nın shock dart ekonomisini aşar — ikinci molly için cooldown yetmez. Spike basıldıktan sonra çift molly Viper'ın en sağlam silahı.
 
 ---
 
-**IF** Viper Pit aktif, Sova drone Pit içine girdi
-**MEANING** Drone Pit içini tarar, Sova takımı seni önceden hedefleyebilir
-**COUNTER** Drone sesini duyduğun an rifle'ınla vur. Pit içi sis sana görüş verir, drone'u kontrol eden Sova dışarıdan reaksiyon verir — sen daha hızlısın. Drone'u vururken Pit içinde microhareket yap — feed'deki pozisyonun artık eski olur.
-**WHY** Drone metal HP'li, iki rifle shot'u yeterli. Drone düştüğünde Sova Pit içi bilgisi biter, Pit kontrolü senin. Drone sesinde hem vur hem kay — feed'deki pozisyon gerçeği yansıtmaz.
+**IF** Viper ult açık, Sova bot ult alanına girdi
+**MEANING** Bot içeriyi tarar, Sova takımı seni önceden hedefleyebilir
+**COUNTER** Bot sesini duyduğun an rifle'ınla vur. İçerideki sis sana görüş verir, bot'u süren Sova dışarıdan reaksiyon verir — sen daha hızlısın. Bot'u vururken yer değiştir — feed'deki pozisyonun artık eski olur.
+**WHY** Bot metal HP'li, iki rifle vuruşu yeter. Bot düşünce Sova'nın içeri bilgisi biter, kontrol senin. Bot sesinde hem vur hem kay — feed'deki pozisyon gerçeği yansıtmaz.
 
 ---
 
-**IF** Sova Hunter's Fury ultunu wall hattının üstünden attı
-**MEANING** Üç shot wall'u geçer, wall arkasındaki takım shot alır
-**COUNTER** Ult sesini duyduğun an wall'dan 90 derece uzaklaş. Fiziksel cover arkasına geç — ama cover'ı ult hattının açısının dışında seç.
-**WHY** Hunter's Fury wall'u deler ama fiziksel duvara takılır. Wall'u cover olarak görme — ult sesinde hattın dışına çık. Wall'a yaslı duruyorsan shot kaçınılmaz.
+**IF** Sova ultunu duvar hattının üstünden attı
+**MEANING** Üç vuruş duvarı geçer, duvar arkasındaki takım hasar alır
+**COUNTER** Ult sesini duyduğun an duvardan 90 derece uzaklaş. Fiziksel cover arkasına geç — ama cover'ı ult hattının açısının dışında seç.
+**WHY** Ult duvarı deler ama fiziksel duvara takılır. Duvarı cover olarak görme — ult sesinde hattın dışına çık. Duvara yaslı duruyorsan vuruş kaçınılmaz.
 
 ---
 
-**IF** Viper A execute hazırlanıyor, Sova B'de tek drone elinde
-**MEANING** Sova drone ile A execute bilgisi açabilir, rotate kararı drone feed'ine kilitli
-**COUNTER** Fake execute — wall'u A Main'e çak, takım B'ye rotate et. Sova drone A'ya giderse B açık, execute B'ye.
-**WHY** Drone iki siteyi aynı anda tarayamaz. Fake execute drone'u harcar, gerçek execute drone cooldown'unda gelir — Sova kör.
+**IF** Viper A execute hazırlıyor, Sova B'de tek bot elinde
+**MEANING** Sova bot ile A execute bilgisi açabilir, rotate kararı bot feed'ine kilitli
+**COUNTER** Fake execute — duvarı A Main'e çak, takımı B'ye rotate et. Sova bot'u A'ya giderse B açık, execute B'ye.
+**WHY** Bot iki siteyi aynı anda tarayamaz. Fake execute bot'u harcar, gerçek execute bot cooldown'undayken gelir — Sova kör.
 
 ---
 
-**IF** Viper fuel düşük, orb tek başına, Sova recon dart round başında atıldı
+**IF** Viper fuel düşük, smoke tek başına, Sova recon round başında atıldı
 **MEANING** Viper utility yarım, Sova bilgi silahı tam dolu, round Sova'ya açılıyor
-**COUNTER** Orb'u choke noktasına at, wall'u bırak. Fuel'i tek utility'e kilitle. Snake bite'ı orb'un arkasına ekle.
-**WHY** İki smoke aynı anda tutulamazsa bir tanesini seç. Tek smoke + tek molly, yarım iki smoke'tan değerlidir.
+**COUNTER** Smoke'u choke noktasına at, duvarı bırak. Fuel'i tek utility'e kilitle. Molly'yi smoke'un arkasına ekle.
+**WHY** İki smoke aynı anda tutulamıyorsa birini seç. Tek smoke + tek molly, yarım iki smoke'tan değerlidir.
 
 ---
 
-**IF** Sova recon dart atıldı, dart hattında ses duydun
-**MEANING** Dart ifşa etmeden önce silebilirsin
-**COUNTER** Dart'a bak, rifle ile vur — iki shot yeterli. Dart silinirse Sova o dart'tan bilgi alamaz.
-**WHY** Recon dart kırılabilir utility. Dart silme alışkanlığı Viper takımı için bedava bilgi engelidir — dart unutulursa Sova takımına bedava feed gider.
+**IF** Sova recon atıldı, recon hattında ses duydun
+**MEANING** Recon ifşa etmeden önce silebilirsin
+**COUNTER** Recon'a bak, rifle ile vur — iki vuruş yeter. Recon silinirse Sova ondan bilgi alamaz.
+**WHY** Recon kırılabilir utility. Recon'u silme alışkanlığı Viper takımı için bedava bilgi engelidir — recon unutulursa Sova takımına bedava feed gider.
 
 ## 4. Utility Takası
 
-Viper'ın fuel bar'ı var: wall ve orb fuel paylaşır, snake bite ayrı. Fuel erken harcarsan post-plant'te hat yok. Fuel geç kurarsan execute Sova dart'ına açık kalırsın.
+Viper'ın fuel bar'ı var: duvar ve smoke fuel paylaşır, molly ayrı. Fuel'i erken harcarsan post-plant'te görüş kesemezsin. Fuel'i geç kurarsan execute Sova recon'una açık kalırsın.
 
 Sova'nın utility sırası:
-- Recon dart → round başı bilgi
+- Recon → round başı bilgi
 - Shock dart → molly counter veya alan temizliği
-- Drone → retake veya kritik bilgi
-- Hunter's Fury → wall hattını delen ult
+- Bot → retake veya kritik bilgi
+- Ult → duvar hattını delen vuruş
 
-Round içi sıra şöyle döner: Sova dart açar → Viper wall + orb kurar → Sova shock dart molly'e cevap verir → Viper spike sonrası snake bite → Sova drone reaktif bilgi → Viper Pit ult.
+Round içi sıra şöyle döner: Sova recon açar → Viper duvar + smoke kurar → Sova shock dart molly'e cevap verir → Viper spike sonrası molly atar → Sova bot ile reaktif bilgi alır → Viper ult açar.
 
-İki ult aynı round'da patlarsa: Hunter's Fury Pit içini shot'lar. Pit içinde cover'ın arkasında ol — ama cover'ı ult hattının dışında seç.
+İki ult aynı round'da patlarsa: Sova ultu sis içini tarar. Sis içinde cover'ın arkasında dur — ama cover'ı ult hattının dışında seç.
 
 ## 5. Haritaya Göre Değişim
 
-**Icebox (Viper lehine):** A Site ve B Site snake bite lineup'ları burada baskın. Wall A Tube + B Long hattını keser. Sova recon dart Icebox rafters geometrisinde wall'u geçecek açı bulamaz.
+**Icebox (Viper lehine):** A Site ve B Site molly lineup'ları burada baskın. Duvar A Tube + B Long hattını keser. Sova recon Icebox rafters geometrisinde duvarı geçecek açı bulamaz.
 
-**Breeze (Viper lehine):** Uzun sightline Viper wall için ideal — wall Breeze Mid + A Main'i ikiye böler. Sova dart uzun mesafede wall hattını geçemez.
+**Breeze (Viper lehine):** Uzun sightline Viper duvarı için ideal — duvar Breeze Mid + A Main'i ikiye böler. Sova recon uzun mesafede duvar hattını geçemez.
 
-**Haven (Sova lehine):** 3 site Sova dart'ının en geniş alanı. Recon dart A-B-C rotate bilgisini açar, Viper fuel tek sitede kalır.
+**Haven (Sova lehine):** 3 site Sova recon'unun en geniş alanı. Recon A-B-C rotate bilgisini açar, Viper fuel tek sitede kalır.
 
-**Ascent (Sova lehine):** Mid orb door, A Main Tree, B Switch Sova recon hatlarına uyar. Dart Ascent geometrisiyle bütünleşir.
+**Ascent (Sova lehine):** Mid orb door, A Main Tree, B Switch Sova recon hatlarına uyar. Recon Ascent geometrisiyle bütünleşir.
 
-**Bind (Dengeli):** Teleporter rotate Sova bilgisini geçersiz kılar, ama Viper'ın dar choke hakimiyeti güçlü. Hookah wall + shower dart karşılıklı baskı.
+**Bind (Dengeli):** Teleporter rotate Sova bilgisini geçersiz kılar, ama Viper'ın dar choke hakimiyeti güçlü. Hookah duvarı + shower recon'u karşılıklı baskı.
 
-**Sunset (Dengeli):** A Main choke Viper wall için, Market ise Sova dart hattı için. İki agent farklı bölgelerde baskın.
+**Sunset (Dengeli):** A Main choke Viper duvarı için, Market ise Sova recon hattı için. İki agent farklı bölgelerde baskın.
 
-**Lotus (Dengeli):** Döner kapı Sova'ya rotate avantajı verir, Viper C Mound snake bite lineup'ı buna karşı koyar.
+**Lotus (Dengeli):** Döner kapı Sova'ya rotate avantajı verir, Viper C Mound molly lineup'ı buna karşı koyar.
 
 ## 6. Dönüm Noktaları
 
-**Dönüm 1 — Fuel zamanlaması:** Fuel round başında bitti → orta round'da hat yok, Sova dart serbestleşir, round Sova'ya. Fuel ortaya saklandıysa → post-plant hat sağlam, round Viper'a.
+**Dönüm 1 — Fuel zamanlaması:** Fuel round başında bitti → orta round'da görüş kesemezsin, Sova recon serbestleşir, round Sova'ya. Fuel'i ortaya sakladıysan → post-plant görüş sağlam, round Viper'a.
 
-**Dönüm 2 — Drone Pit'te:** Drone Pit'e girdi ve sağ çıktı → Viper Pit kontrolü kayboldu, round Sova'ya. Drone rifle'la düştü → Pit kontrolü Viper'da, round Viper'a.
+**Dönüm 2 — Bot içeride:** Bot içeri girdi ve sağ çıktı → Viper alan kontrolü kayboldu, round Sova'ya. Bot rifle'la düştü → kontrol Viper'da, round Viper'a.
 
-**Dönüm 3 — Çift molly vs shock dart:** Viper çift snake bite attı, shock dart birini sildi ama ikincisi aktif → post-plant round Viper'a. Tek snake bite attıysa shock dart sildi → round Sova'ya.
+**Dönüm 3 — Çift molly vs shock dart:** Viper çift molly attı, shock dart birini sildi ama ikincisi aktif → post-plant round Viper'a. Tek molly attıysa shock dart sildi → round Sova'ya.
 
-**Dönüm 4 — Hunter's Fury isabeti:** Ult hattı Viper takımını wall arkasında buldu → takım shot aldı, round Sova'ya. Viper takımı ult hattının dışındaysa → ult boşa, round Viper'a.
+**Dönüm 4 — Sova ult isabeti:** Ult hattı Viper takımını duvar arkasında buldu → takım hasar aldı, round Sova'ya. Viper takımı ult hattının dışındaysa → ult boşa gitti, round Viper'a.
 
 ## 7. Koç Notu
 
-Bu matchup'ın özü şu: **hat bilgiden önce kurulursa Viper kazanır, bilgi hattan önce gelirse Sova kazanır.**
+Bu matchup'ın özü şu: **görüş bilgiden önce kesilirse Viper kazanır, bilgi görüşten önce gelirse Sova kazanır.**
 
 Viper tarafındaysan:
-- Wall'u Sova dart sesine göre dinamik yerleştir
-- Snake bite'ı çift at, tek atma
-- Pit'e drone girdiğinde hem vur hem kay — feed'deki pozisyon artık sahte
-- Fuel'i erken harcama — post-plant hat öncelik
+- Duvarı Sova recon sesine göre dinamik yerleştir.
+- Molly'yi çift at, tek atma.
+- İçeri bot girince hem vur hem kay — feed'deki pozisyon artık sahte.
+- Fuel'i erken harcama — post-plant görüş öncelik.
 
 Sova tarafındaysan:
-- Dart'ı Viper fuel bittiğinde at — wall + orb aynı anda tutulamıyorsa boşluk açılır
-- Drone'u ult round'ları için sakla
-- Hunter's Fury'yi wall hattının üstünden kullan, ama Viper'ın cover seçimini oku — cover'ın dışına çıkmışsa ult hattın boşa gider
-- Recon dart silinebilir — Viper takımı silmeye alışkınsa dart'ı daha gizli açıdan at
+- Recon'u Viper fuel bittiğinde at — duvar + smoke aynı anda tutulamıyorsa boşluk açılır.
+- Bot'u ult round'ları için sakla.
+- Ultu duvar hattının üstünden kullan, ama Viper'ın cover seçimini oku — cover'ın dışına çıkmışsa ult hattın boşa gider.
+- Recon silinebilir — Viper takımı silmeye alışkınsa recon'u daha gizli açıdan at.
 
-Wall'u her round sabit kullanma — Sova dart trajektoriyle birlikte değiştir. Dart'ı Viper fuel pencerelerini okuyarak at — wall aktifken değil, wall + orb ikisi de düşünce dart'ı kaldır.
+Duvarı her round sabit kullanma — Sova recon'unun yörüngesiyle birlikte değiştir. Recon'u Viper fuel pencerelerini okuyarak at — duvar aktifken değil, duvar + smoke ikisi de düşünce recon'u kaldır.

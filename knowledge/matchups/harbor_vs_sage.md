@@ -11,127 +11,127 @@ tags: [matchup, harbor, sage, controller, sentinel]
 
 ## 1. Matchup Özü
 
-Harbor geniş koridoru duvara gömer, push açar. Sage choke'u dondurur, push keser. İkisi de alan satar — ama farklı yoldan. Harbor duvarı hareket eder, Sage barrier'ı sabit durur. Biri öne koyar, diğeri tepki verir. Kimin önce koymak zorunda kaldığı round'u belirler.
+Harbor koridoru duvarla kapatır ve push açar. Sage choke'u duvarıyla kilitler, push'u keser. İkisi de alan satar ama farklı yoldan: Harbor'un duvarı ilerler, Sage'in duvarı sabit durur. Biri inisiyatifi alır, diğeri tepki verir. Kim önce util koymak zorunda kalırsa o round'da geri düşer.
 
 ## 2. Kim Avantajlı?
 
 **Harbor lehine durumlar:**
-- Lotus A Main, Pearl B Long gibi uzun koridorlar — High Tide tüm koridoru kapatır, Sage barrier yarısını örter
-- Sage barrier kurulmadan Harbor duvarı gelirse — Sage'in sabit cevabı yok, push hattı açık
-- Spike kurulduktan sonra — Harbor cove defuse alanına cover verir, Sage slow orb defuse sesini bırakır ama durduramaz
-- Execute round'larında — Harbor duvar + cove çift cover, Sage tek barrier ile iki hattı kapatamaz
+- Lotus A Main, Pearl B Long gibi uzun koridorlarda Harbor duvarı koridorun tamamını kapatır; Sage'in duvarı sadece yarısını örter.
+- Sage duvarını kurmadan Harbor duvarı gelirse Sage'in sabit cevabı kalmaz, push hattı açılır.
+- Spike kurulduktan sonra Harbor cove ile defuse alanına cover verir; Sage'in yavaşlatma alanı defuse sesini duyurur ama defuse'u durduramaz.
+- Execute round'larında Harbor duvar + cove ile iki hatta birden cover basar; Sage tek duvarla iki hattı kapatamaz.
 
 **Sage lehine durumlar:**
-- Bind Showers, Split Mid gibi dar choke'larda — Sage barrier tek noktayı komple kapatır, Harbor duvarı aynı alanda artı değer vermez
-- 1 savunmacı düştüğünde Sage Resurrection'ı kullanırsa — Harbor execute utility'si harcandı, tekrar giremez
-- Harbor cove kullanılmışken — cove olmadan spike üstü cover zayıf, Sage slow orb defuse'u zorlar
-- Retake round'larında — Sage slow orb + barrier retake koridorunu daraltır, Harbor reactive kalır
+- Bind Showers, Split Mid gibi dar choke'larda Sage duvarı tek noktayı komple kapatır; Harbor duvarı aynı alanda fazladan değer katmaz.
+- Bir savunmacı düşünce Sage ult'unu kullanıp onu diriltirse Harbor'un execute util'i çoktan harcanmıştır, takım aynı yere tekrar giremez.
+- Harbor cove zaten kullanılmışsa spike üstündeki cover zayıflar; Sage yavaşlatma alanıyla defuse'u zorlar.
+- Retake round'larında Sage yavaşlatma alanı + duvar retake koridorunu daraltır, Harbor tepki vermek zorunda kalır.
 
-**Dengeli:** Haven, Sunset, Ascent orta hatlarında eşit. Harbor duvarını Sage barrier kurulmadan açarsa Sage hattı bozulur. Sage barrier önce kurulursa Harbor duvarı hattın dışından geçmek zorunda kalır.
+**Dengeli:** Haven, Sunset, Ascent orta hatlarında iş eşit. Harbor duvarını Sage duvarı kurulmadan açarsa Sage'in hattı bozulur. Sage duvarını önce kurarsa Harbor duvarını hattın dışından geçirmek zorunda kalır.
 
 ## 3. Key Düellolar
 
-**IF** Harbor High Tide duvarı Sage barrier'ın önünden geçti
-**MEANING** Sage hattın arkasını göremez, push yönü Harbor'un elinde
-**COUNTER** Barrier'ı duvar hattının arkasına değil içine koy — duvar içinden geçemez, push yönünü bloklar. Ya da slow orb'u duvar çıkış noktasına at, Harbor takımı duvar düştüğünde yavaşlasın.
-**WHY** Harbor duvarı hareket eder, Sage barrier sabit. İkisi üst üste gelirse Harbor duvarı Sage'in gözünü kapar. Barrier'ın değeri Harbor duvarından bağımsız hat kurmakta.
+**IF** Harbor duvarı Sage duvarının önünden geçti
+**MEANING** Sage hattın arkasını göremez, push yönü tamamen Harbor'un elinde
+**COUNTER** Duvarını Harbor duvarının arkasına değil tam içine kur — Harbor duvarı içinden geçemez, push yönünü bloklarsın. Ya da yavaşlatmayı Harbor duvarının çıkış noktasına at; duvar düştüğünde giren takım yavaşlasın.
+**WHY** Harbor duvarı ilerler, senin duvarın sabit. İkisi üst üste binerse Harbor duvarı senin gözünü kapatır. Senin duvarının değeri, Harbor duvarından bağımsız bir hat kurmakta.
 
 ---
 
-**IF** Sage slow orb Harbor execute girişindeki choke'a düştü
-**MEANING** Harbor takımı slow'a basarsa giriş hızı düşer, Sage crossfire hazır
-**COUNTER** Harbor Cascade'i slow orb alanının üstüne at — görüşü keser, Sage crossfire hedefi göremez. Cove'u slow alanının iç çeperine koy, takım yavaştan çıkarken cover alır.
-**WHY** Slow orb hem ses hem hareket kısıtı. Ses Sage'e bilgi verir, hareket Harbor takımını cezalandırır. Harbor utility'si sesi kesmez ama görüşü keser — Sage slow içindeki oyuncuyu göremediğinde avantajı biter.
+**IF** Sage yavaşlatma alanı Harbor execute girişindeki choke'a düştü
+**MEANING** Harbor takımı yavaşlatmaya basarsa giriş hızı düşer, sen crossfire'a hazır beklersin
+**COUNTER** Harbor duvarını yavaşlatma alanının üstüne at — Sage'in görüşünü keser, crossfire hedefini göremez. Cove'u yavaşlatma alanının iç çeperine koy, takım yavaştan çıkarken cover alsın.
+**WHY** Yavaşlatma hem ses hem hareket kısıtı verir: ses Sage'e bilgi taşır, hareket kısıtı Harbor takımını cezalandırır. Harbor util'i sesi kesmez ama görüşü keser — Sage yavaşlatmanın içindeki oyuncuyu göremezse avantajı biter.
 
 ---
 
-**IF** Sage Resurrection ultunu Harbor execute sonrası ilk trade'de kullandı
-**MEANING** Sage ilk ölen savunmacıyı geri getirdi, Harbor takımı aynı site'ı tekrar temizlemek zorunda, utility bitti
-**COUNTER** Res olan savunmacının iniş noktasını önceden işaretle. Cove'u o noktaya kaydır — res animasyonu bitip savunmacı hareket etmeden önce cove baskısı yap, trade al.
-**WHY** Res animasyonu bitene kadar savunmacı hareket edemez. O anda Harbor utility hazırsa res bedava gelmez. Bu noktayı bilmeden oynamak Sage'e bedava round verir.
+**IF** Sage ult'unu Harbor execute sonrası ilk trade'de kullandı
+**MEANING** Sage ilk ölen savunmacıyı geri getirdi; Harbor takımı aynı site'ı baştan temizlemek zorunda ve util'i bitti
+**COUNTER** Dirilen savunmacının iniş noktasını önceden işaretle. Cove'u o noktaya kaydır — diriliş animasyonu bitip savunmacı hareket etmeden cove baskısını bas, trade'i al.
+**WHY** Diriliş animasyonu bitene kadar savunmacı hareket edemez. O pencerede Harbor util'i hazırsa diriliş bedavaya gelmez. Bu noktayı bilmeden oynamak Sage'e bedava round verir.
 
 ---
 
-**IF** Harbor Reckoning ult'u Sage + partner hattına atıldı
-**MEANING** İki oyuncu aynı anda etkilenir, Sage barrier kuramaz, Harbor takımı serbest girer
-**COUNTER** Reckoning sesini duyduğunda zone'dan çık. Barrier'ı zone dışına önceden koy. Zone içinde kalıp hasar alırsan round biter.
-**WHY** Reckoning nişan cezası + sersemletme. Sage barrier kurma süresi bu pencereyle çakışırsa kurulum iptal, barrier heba. Zone dışına çıkan Sage utility'sini kurtarır.
+**IF** Harbor ult'u Sage ve partnerinin hattına atıldı
+**MEANING** İki oyuncu aynı anda etkilenir, Sage duvar kuramaz, Harbor takımı serbest girer
+**COUNTER** Ult'un sesini duyduğun an alandan çık. Duvarını alanın dışına önceden kur. Alanın içinde kalıp hasar alırsan round biter.
+**WHY** Harbor ult'u nişanı bozar ve sersemletir. Sage'in duvar kurma süresi bu pencereyle çakışırsa kurulum iptal olur, duvar heba gider. Alanın dışına çıkan Sage util'ini kurtarır.
 
 ---
 
-**IF** Sage B'de tek başına bekliyor, Harbor A execute hazırlıyor
-**MEANING** Sage rotate mesafesi uzun, koşarken slow orb veya barrier kuramaz
-**COUNTER** Harbor A'ya fake utility at, Sage B barrier'ı kurmadan rotate etsin. Rotate hattında Sage utility'siz — Harbor A utility'si dönüşe hazır.
-**WHY** Sage'in gücü beklediği pozisyonda. Hareket halindeyken utility değeri düşer. Harbor tempo silahı — proaktif açar, Sage tepki vermek zorunda kalır. Sage'in statik hesabı tempo karşısında iki siteden birinde boşluk açar.
+**IF** Sage B'de tek başına bekliyor, Harbor A'da execute hazırlıyor
+**MEANING** Sage'in rotate mesafesi uzun; koşarken yavaşlatma veya duvar kuramaz
+**COUNTER** Harbor A'ya fake util at; Sage B duvarını kurmadan rotate etsin. Rotate hattında Sage util'siz kalır — Harbor'un A util'i dönüşe hazırdır.
+**WHY** Sage'in gücü beklediği pozisyonda. Hareket halindeyken util'inin değeri düşer. Harbor tempo silahı — proaktif açar, Sage tepki vermek zorunda kalır. Sage'in statik hesabı tempo karşısında iki siteden birinde mutlaka boşluk açar.
 
 ---
 
-**IF** Harbor cove spike üstünde, Sage slow orb cove içine atıldı
-**MEANING** Slow orb görüşü örtmez ama defuse edenin hızını keser, defuse uzar, Sage savunmacıları ekstra zaman kazanır
-**COUNTER** Cove açısını slow orb düşüş hattından kaydır. Cove'un çeperi choke'u örtsün, spike merkezi olmasın — slow orb spike'a düşerse cove işe yaramaz.
-**WHY** Cove görsel cover, slow mekanik yavaşlatma. İkisi farklı eksende çalışır. Harbor cove'u spike merkezine atarsa Sage slow orb + retake hattı Harbor takımını defuse'dan koparır.
+**IF** Harbor cove spike üstündeyken Sage yavaşlatma alanı cove içine atıldı
+**MEANING** Yavaşlatma görüşü örtmez ama defuse edenin hızını keser; defuse uzar, savunmacılar ekstra zaman kazanır
+**COUNTER** Cove açısını yavaşlatmanın düşüş hattından kaydır. Cove'un çeperi choke'u örtsün, spike'ın tam merkezini değil — yavaşlatma spike'a düşerse cove işe yaramaz.
+**WHY** Cove görsel cover, yavaşlatma mekanik kısıt. İkisi farklı eksende çalışır. Cove'u spike'ın tam merkezine atarsan Sage yavaşlatma + retake hattıyla takımını defuse'dan koparır.
 
 ---
 
-**IF** Harbor Cascade Sage barrier kurulduktan sonra aynı choke'a düştü
-**MEANING** İki sabit hat aynı choke'ta, iki tarafın da cover'ı var, push yavaşladı
-**COUNTER** Cascade'i barrier kurulmadan önce kullan — Sage choke'un iç yüzünü göremez, barrier cevabı geç gelir.
-**WHY** Harbor'un avantajı tempo. Sage'in avantajı tepki. Harbor önceden açarsa Sage tepki vermek zorunda kalır. Harbor sonradan açarsa Sage proaktif barrier ile durdurur.
+**IF** Harbor duvarı Sage duvarı kurulduktan sonra aynı choke'a geldi
+**MEANING** İki sabit hat aynı choke'ta; iki tarafın da cover'ı var, push yavaşladı
+**COUNTER** Harbor duvarını Sage duvarı kurulmadan önce kullan — Sage choke'un iç yüzünü göremez, duvar cevabı geç kalır.
+**WHY** Harbor'un avantajı tempo, Sage'in avantajı tepki. Harbor önceden açarsa Sage tepki vermek zorunda kalır. Harbor sonradan açarsa Sage proaktif duvarla durdurur.
 
 ## 4. Utility Sırası
 
-Harbor dört elde oynar: High Tide, Cove, Cascade, Reckoning. Sage üç savunma bir tempo ile gelir: Barrier, Slow Orb, Heal, Resurrection.
+Harbor dört util'le oynar: ilerleyen duvar, cove, kısa duvar ve ult. Sage üç savunma util'i ve bir tempo util'iyle gelir: duvar, yavaşlatma alanı, heal ve ult diriliş.
 
-Harbor her utility'sini öne koyar, Sage cevap verir. Sage barrier önce kurulursa Harbor duvarını hattın dışına açmak zorunda. Harbor duvarı önce gelirse Sage barrier artık geri pozisyonda.
+Harbor her util'ini önden koyar, Sage cevap verir. Sage duvarını önce kurarsa Harbor duvarını hattın dışına açmak zorunda kalır. Harbor duvarı önce gelirse Sage'in duvarı artık geri pozisyonda kalır.
 
-Öne geçen taraf bu sırayı kendi lehine kırar:
-- Harbor Cascade choke'u örter
-- Sage Barrier Cascade hattının dışına kurulur
-- Harbor High Tide Sage barrier'ı bypass eder
-- Sage Slow Orb duvar çıkış noktasına düşer
-- Harbor Cove spike üstünü örter
-- Sage Heal retake sırasında HP dengeler
+İnisiyatifi alan taraf bu sırayı kendi lehine kırar:
+- Harbor kısa duvarıyla choke'u örter.
+- Sage duvarını Harbor duvarının dışına kurar.
+- Harbor ilerleyen duvarıyla Sage duvarını aşar.
+- Sage yavaşlatmayı Harbor duvarının çıkış noktasına düşürür.
+- Harbor cove'la spike üstünü örter.
+- Sage heal ile retake sırasında HP'yi dengeler.
 
-Ult karşılaşması: Reckoning zone açar, Resurrection trade'i geri alır. Aynı round ikisi birden patlarsa — Reckoning önce gelsin, anında push yap, Resurrection animasyonu bitmeden savunmacıyı trade et.
+Ult karşılaşması: Harbor ult'u alanı açar, Sage ult'u trade'i geri alır. Aynı round ikisi birden patlarsa Harbor ult'u önce gelsin, anında push at, diriliş animasyonu bitmeden savunmacıyı trade et.
 
 ## 5. Map Bazlı Değişim
 
-**Lotus (Harbor avantajlı):** A Main ve C Mound geniş — High Tide tüm choke'u kapatır. Sage barrier yalnızca iki slot örter.
+**Lotus (Harbor avantajlı):** A Main ve C Mound geniş — Harbor duvarı choke'un tamamını kapatır. Sage duvarı yalnızca iki slot örter.
 
-**Pearl (Harbor avantajlı):** B Long, Mid Connector, A Link geniş hatlar. Sage Pearl'de B Main anchor'da güçlü ama A tarafında Harbor serbest.
+**Pearl (Harbor avantajlı):** B Long, Mid Connector ve A Link geniş hatlar. Sage Pearl'de B Main anchor'da güçlü ama A tarafında Harbor serbest oynar.
 
-**Bind (Sage avantajlı):** Showers, Hookah dar. Sage barrier choke'u komple kapar, Harbor duvarı artı değer vermez.
+**Bind (Sage avantajlı):** Showers ve Hookah dar. Sage duvarı choke'u komple kapatır, Harbor duvarı fazladan değer katmaz.
 
-**Split (Sage avantajlı):** B Main, A Ramps dar ve dikey. Sage barrier + slow kombosu bu choke'lar için biçilmiş. Harbor duvarı dikey alanı kapamaz.
+**Split (Sage avantajlı):** B Main ve A Ramps dar ve dikey. Sage'in duvar + yavaşlatma kombosu bu choke'lar için biçilmiş kaftan. Harbor duvarı dikey alanı kapatamaz.
 
-**Ascent (Dengeli):** A Main Harbor'un, B Main Sage'in. Kimin duvarı önce geldi — o round'u götürür.
+**Ascent (Dengeli):** A Main Harbor'un, B Main Sage'in. Kimin duvarı önce geldiyse o round'u götürür.
 
-**Sunset (Dengeli):** A Main ve B Market çift choke. Harbor cove A Site'ta güçlü, Sage barrier Market choke'unda güçlü.
+**Sunset (Dengeli):** A Main ve B Market çift choke. Harbor cove A Site'ta güçlü, Sage duvarı Market choke'unda güçlü.
 
-**Haven (Harbor hafif avantajlı):** 3 site, Sage rotate yolu uzun. Harbor A Long + C Long için duvar değeri yüksek.
+**Haven (Harbor hafif avantajlı):** 3 site, Sage'in rotate yolu uzun. Harbor'un A Long ve C Long için duvar değeri yüksek.
 
 ## 6. Flip Anlar
 
-**Flip 1 — Barrier zamanlaması:** Sage barrier'ı Harbor duvarından önce kurarsa round Sage'e döner. Sonra kurarsa barrier etkisiz, round Harbor'a.
+**Flip 1 — Duvar zamanlaması:** Sage duvarını Harbor duvarından önce kurarsa round Sage'e döner. Sonra kurarsa duvarı etkisiz kalır, round Harbor'a gider.
 
-**Flip 2 — Cove noktası:** Harbor cove'u spike merkezine atarsa retake zorlaşır. Yanlış açıya atarsa Sage slow orb retake hattını açar.
+**Flip 2 — Cove noktası:** Harbor cove'u spike merkezine atarsa retake zorlaşır. Yanlış açıya atarsa Sage yavaşlatmayla retake hattını açar.
 
-**Flip 3 — Res hedefi:** Sage Resurrection'ı yanlış oyuncuya kullanırsa — HP'si düşük support yerine entry — round Harbor'a döner. Doğru anchor'a kullanırsa round Sage'e.
+**Flip 3 — Diriliş hedefi:** Sage ult'unu yanlış oyuncuya kullanırsa — HP'si düşük support yerine entry'yi diriltirse — round Harbor'a döner. Doğru anchor'a kullanırsa round Sage'e gider.
 
-**Flip 4 — Reckoning isabeti:** Reckoning Sage hattını tutarsa barrier kurulum iptal, round Harbor'a. Tutmazsa Sage zone dışından barrier kurar, round Sage'e.
+**Flip 4 — Harbor ult'unun isabeti:** Harbor ult'u Sage hattını tutarsa duvar kurulumu iptal olur, round Harbor'a. Tutmazsa Sage alanın dışından duvarını kurar, round Sage'e.
 
 ## 7. Koç Notları
 
-**Rotate oku:** Bu matchup'ı rotate üzerinden oku. Harbor geniş hatlı map'lerde açılır — Lotus, Pearl. Sage dar choke map'lerinde — Bind, Split. İkisi aynı map'te karşılaşırsa Harbor'un işi Sage barrier kurulmadan duvarı açmak. Sage barrier hazırken açılan Harbor duvarı hatta artı katmaz.
+**Rotate oku:** Bu matchup'ı rotate üzerinden oku. Harbor geniş hatlı map'lerde açılır — Lotus, Pearl. Sage dar choke map'lerinde parlar — Bind, Split. İkisi aynı map'te karşılaşırsa Harbor'un işi Sage duvarı kurulmadan kendi duvarını açmak. Sage duvarı hazırken açılan Harbor duvarı hatta fazladan değer katmaz.
 
 **Harbor oynuyorsan:**
-- Duvarı Sage'in barrier'ı kurulmadan aç
-- Cove'u spike kurulana kadar sakla
-- Reckoning'i Sage utility hattının üstüne kilitle
+- Duvarını Sage'in duvarı kurulmadan aç.
+- Cove'u spike kurulana kadar sakla.
+- Ult'unu Sage'in util hattının tam üstüne kilitle.
 
 **Sage oynuyorsan:**
-- Barrier'ı Harbor duvarı gelmeden önceden kur — tepkiyle değil
-- Slow orb'u Harbor cove alanının dışına at
-- Resurrection'ı ilk ölen anchor için sakla, entry için değil
+- Duvarını Harbor duvarı gelmeden önceden kur — tepkiyle değil.
+- Yavaşlatmayı Harbor cove alanının dışına at.
+- Ult dirilişini ilk ölen anchor için sakla, entry için harcama.
 
-**Özet:** Harbor tempo getirir, Sage tepki verir. Sage önce hareket ederse roller tersine döner. Kim önce mecbur kalırsa o kaybeder.
+**Özet:** Harbor tempo getirir, Sage tepki verir. Sage önce hareket ederse roller tersine döner. Kim önce util koymaya mecbur kalırsa o kaybeder.

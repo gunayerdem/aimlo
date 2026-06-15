@@ -9,123 +9,123 @@ tags: [matchup, raze, reyna, duelist_vs_duelist]
 
 ## 1. Matchup Özü
 
-Raze ile Reyna aynı rol ama zıt iş yapıyor. Raze oynuyorsan takımına bilgi ve hasar veriyorsun — Boombot köşeleri tarar, Paint Shells alana hasar atar, Blast Pack seni yukarı çıkarır. Kill alamasan bile bir şey üretiyorsun. Reyna oynuyorsan tek gelirin kill — kill alırsan Devour ile can alırsın, Dismiss ile kaçarsın. Kill alamazsan elinde bir Leer var, o kadar. Bu yüzden Reyna karşısında hedefin basit: ilk kill'ini verme.
+Raze ile Reyna aynı rolde ama zıt iş yapar. Raze oynuyorsan takımına bilgi ve hasar üretirsin — botun köşeleri tarar, mollyn alana hasar basar, satchel seni yükseğe taşır. Kill alamasan bile bir şey üretirsin. Reyna oynuyorsan tek gelirin kill: kill alırsan heal ile can toplarsın, kaçışla bölgeden sıyrılırsın. Kill alamazsan elinde sadece flash kalır, o kadar. Bu yüzden Reyna karşısında hedefin net — ona ilk kill'i verme.
 
 ## 2. Kim Avantajlı?
 
-Raze. Her haritada. Reyna sadece takım dağınık oynayınca tehlikeli — herkes ayrı köşede bekliyorsa Reyna tek başına round çalabilir. Takımın birlikte hareket ediyorsa Reyna'nın kill zinciri kırılır ve elinde sadece Leer kalır. Raze'ın elindekiler ise takım oynasın oynamasın çalışır.
+Raze, her haritada. Reyna sadece takım dağınık oynayınca tehlikelidir — herkes ayrı köşede beklerse Reyna tek başına round çalar. Takımın birlikte hareket ederse Reyna'nın kill zinciri kırılır, elinde sadece flash kalır. Raze'ın util'i ise takım oynasın oynamasın çalışır.
 
 ## 3. Key Düellolar
 
-**IF** Reyna Leer flash atıp içeriye giriyor, sen Boombot sürdün
-**MEANING** Reyna flash ile körleştirmeye çalışıyor ama Boombot zaten Reyna'nın geleceği köşeyi tarıyor
-**COUNTER** Leer sesini duyar duymaz kapak arkasına gir. Boombot Reyna'yı sesle buluyor — Boombot'u duvara değil doğrudan kapıya sürmüşsen, Reyna flash atarken bile Boombot'u yiyecek
-**WHY** Leer sadece göz hizasında çalışır. Boombot yerde gidiyor, flash almıyor. İki yetenek farklı seviyede — Boombot flash'ı geçer.
+**IF** Reyna flash atıp içeri giriyor, sen botu sürdün
+**MEANING** Reyna flash ile seni körleştirmeye çalışıyor ama bot zaten Reyna'nın geleceği köşeyi tarıyor
+**COUNTER** Flash sesini duyar duymaz kapak arkasına gir. Bot Reyna'yı sesten buluyor — botu duvara değil doğrudan kapıya sürersen, Reyna flash atarken bile botu yer
+**WHY** Flash sadece göz hizasında çalışır. Bot yerde gider, flash almaz. İki yetenek farklı seviyede; bot flash'ı geçer.
 
 ---
 
-**IF** Reyna kill aldı ve Devour veya Dismiss seçecek
-**MEANING** Düşmanı öldürünce orb çıkıyor. Dismiss'i seçerse görünmez olup kaçıyor, Devour'u seçerse yerinde durup can dolduruyor
-**COUNTER** Devour seçtiyse Paint Shells at — can dolarken Reyna hareketsiz ve alanda hasar alıyor. Dismiss seçtiyse Dismiss sesine dikkat et, yönü belli oluyor. Boombot sür, ses takip ediyor
-**WHY** Reyna her kill'den sonra bir karar veriyor ve o karar penceresi Dismiss veya Devour animasyonu boyunca açık. O pencerede baskı uygulamak Reyna'yı yanlış seçime zorluyor.
+**IF** Reyna kill aldı ve heal veya kaçış seçecek
+**MEANING** Düşmanı öldürünce orb düşer. Kaçışı seçerse görünmez olup bölgeden sıyrılır, heal'i seçerse yerinde durup can toplar
+**COUNTER** Heal seçtiyse mollyni at — can toplarken Reyna hareketsiz ve alanda hasar yiyor. Kaçışı seçtiyse kaçış sesine kulak ver, yön belli olur. Botu sür, ses takip ediyor
+**WHY** Reyna her kill'den sonra bir karar verir ve o karar penceresi heal ya da kaçış animasyonu boyunca açık kalır. O pencerede baskı uygulamak Reyna'yı yanlış seçime zorlar.
 
 ---
 
-**IF** Reyna Paint Shells alanına girdi ve Devour kullanıyor
-**MEANING** Paint Shells hasarı Devour'un iyileştirme hızından daha yüksek — alan içinde Reyna can dolduramıyor
-**COUNTER** Paint Shells'i Reyna'nın ayağına değil Devour kullandığı zemine at. Reyna ya alanı terk ediyor ya da hasar altında ölüyor
-**WHY** Devour Reyna'yı yerinde sabit tutuyor. Paint Shells o yeri yakıyor. İkisi üst üste gelince Reyna seçim yapamıyor.
+**IF** Reyna mollynin alanına girdi ve heal kullanıyor
+**MEANING** Molly hasarı heal'in can toplama hızından yüksek — alan içinde Reyna can dolduramaz
+**COUNTER** Mollyni Reyna'nın ayağına değil, heal kullandığı zemine at. Reyna ya alanı terk eder ya da hasar altında ölür
+**WHY** Heal Reyna'yı yerinde sabitler. Molly o zemini yakar. İkisi üst üste gelince Reyna seçim yapamaz.
 
 ---
 
-**IF** Reyna Empress ult açtı
-**MEANING** Empress aktifken Reyna ateş hızı artar, kill alırsa otomatik can doldurur. Kill gelmezse ult söner
-**COUNTER** Empress sesini duyar duymaz takımınla birlikte kapak arkasına çekilin. Reyna'ya teker teker girme — art arda giren ölür, kill zinciri Empress'i canlı tutar. Takım olarak odakla, Reyna kill alamadan ult söner
-**WHY** Empress kill zinciriyle çalışır. Kill vermezsen ult solar. Reyna tek başına kalırsa ult işlevsiz kalır.
+**IF** Reyna ult açtı
+**MEANING** Ult aktifken Reyna'nın ateş hızı artar, kill alırsa otomatik can toplar. Kill gelmezse ult söner
+**COUNTER** Ult sesini duyar duymaz takımınla birlikte kapak arkasına çekil. Reyna'ya teker teker girme — art arda giren ölür, kill zinciri ulta canlı tutar. Takım olarak odaklan, Reyna kill alamadan ult söner
+**WHY** Ult kill zinciriyle ayakta durur. Kill vermezsen solar. Reyna tek başına kalırsa ult işe yaramaz.
 
 ---
 
-**IF** Blast Pack ile tepeden iniyorsun, Reyna yerde duruyor
-**MEANING** Yukarıdan geliyorsun, Reyna açın yok — Reyna'nın yere bakacak açısı yok
-**COUNTER** Blast Pack'i geniş alanlarda değil dar koridorlarda kullan. Dar giriş Reyna'nın seni görmesini geciktiriyor
-**WHY** Reyna'nın Dismiss'i görünmez yapıyor ama hep yerde kalıyor. Yukarıdan gelen Blast Pack'e karşı Dismiss işe yaramıyor — kaçacak yer yok.
+**IF** Satchel ile tepeden iniyorsun, Reyna yerde duruyor
+**MEANING** Yukarıdan geliyorsun, Reyna'nın yere bakacak açısı yok
+**COUNTER** Satcheli geniş alanlarda değil dar koridorlarda kullan. Dar giriş Reyna'nın seni görmesini geciktirir
+**WHY** Reyna'nın kaçışı onu görünmez yapar ama hep yerde tutar. Yukarıdan gelen satchele karşı kaçış işe yaramaz — kaçacak yer yok.
 
 ---
 
-**IF** Reyna kill aldı, Dismiss ile görünmez oldu
-**MEANING** Reyna kaçmak için Dismiss kullandı, ama ses duyuluyor ve hareketi devam ediyor
-**COUNTER** Boombot sür, Dismiss görünmez yapar ama Boombot ses ile takip ediyor. Paint Shells geniş alana at, Reyna alanı kesmek zorunda
-**WHY** Dismiss görünmezlik veriyor ama dokunulmazlık değil. Hasar alıyor, ses çıkıyor. Boombot bu durumda kontr.
+**IF** Reyna kill aldı, kaçışla görünmez oldu
+**MEANING** Reyna kaçmak için kaçış kullandı ama sesi duyuluyor ve hareketi devam ediyor
+**COUNTER** Botu sür, kaçış görünmez yapar ama bot sesle takip eder. Mollyni geniş alana at, Reyna alanı kesmek zorunda
+**WHY** Kaçış görünmezlik verir ama dokunulmazlık değil. Hasar alır, ses çıkarır. Bot bu durumda doğru kontr.
 
 ---
 
 **IF** Reyna ilk kill'i aldı, sen de o anda aynı köşedesin
-**MEANING** Reyna ilk kill'le orb aldı — şimdi ya Dismiss ile kaçacak ya Devour ile can dolduracak, o karar penceresinde zayıf
-**COUNTER** Takımınla o noktaya bak, Reyna karar verirken çapraz ateş ver. Tek başına girme — çapraz pozisyon Reyna'yı bir açıya zorlur
-**WHY** Reyna karar anında düz duruyor. Çapraz açıdan bakan biri o pencerede Reyna'yı yakalayabiliyor.
+**MEANING** Reyna ilk kill'le orb aldı — şimdi ya kaçışla sıyrılacak ya heal ile can toplayacak, o karar penceresinde zayıf
+**COUNTER** Takımınla o noktaya bak, Reyna karar verirken çapraz ateş aç. Tek başına girme — çapraz pozisyon Reyna'yı tek açıya hapseder
+**WHY** Reyna karar anında düz durur. Çapraz açıdan bakan biri o pencerede Reyna'yı yakalar.
 
 ## 4. Yetenek Karşılaştırması
 
-Raze'ın elinde dört şey var: Boombot köşe tarar, Blast Pack iki kez atlar, Paint Shells alana hasar atar, Showstopper roketi öldürür. Kill almasan bile her şey çalışıyor — yetenekler yenilendikçe tekrar kullanırsın.
+Raze'ın elinde dört şey var: bot köşe tarar, satchel iki kez atlatır, molly alana hasar basar, ult roketi öldürür. Kill almasan bile hepsi çalışır — util yenilendikçe tekrar kullanırsın.
 
-Reyna'nın elinde şunlar var: Leer flash atar, Devour kill orbuyla can doldurur, Dismiss kill orbuyla görünmez olur, Empress ult açar. Kill almadan Devour ve Dismiss yok. Kill almadan Reyna elinde sadece Leer ile oyunda.
+Reyna'nın elinde ise şunlar var: flash kör eder, heal kill orbuyla can toplar, kaçış kill orbuyla görünmez yapar, ult ateş hızını açar. Kill almadan heal ve kaçış yok. Kill almadan Reyna elinde sadece flash'la kalır.
 
-Bu fark senin için şu anlama geliyor: Reyna karşısında Boombot'unu ve Paint Shells'ini harca — Reyna bunlara karşılık verecek yeteneği yok. Reyna'nın tek silahı Leer, sen de Leer'e kapak arkasıyla cevap veriyorsun.
+Bu fark senin için şu anlama gelir: Reyna karşısında botunu ve mollyni harca — Reyna bunlara karşılık verecek yeteneğe sahip değil. Reyna'nın tek silahı flash, sen de flash'a kapak arkasıyla cevap verirsin.
 
-Ult karşılaştırması: Showstopper geniş alan roketi, direk hasar. Empress ateş hızı ve can dolumu verir — buff ult. Showstopper bir pozisyonu temizler, Empress kill zinciri olmadan söner. Roketi Reyna'nın tahmin ettiğin pozisyonuna at — Dismiss ile görünmez olsa bile ses + alan hasarı vuruyor.
+Ult karşılaştırması: senin ultun geniş alan roketi, direkt hasar. Reyna'nın ultu ateş hızı ve can dolumu verir — bu bir buff ult. Senin ultun bir pozisyonu temizler, Reyna'nın ultu kill zinciri olmadan söner. Roketi Reyna'nın tahmin ettiğin pozisyonuna at — kaçışla görünmez olsa bile ses ve alan hasarı onu vurur.
 
 ## 5. Harita Bazlı Değişim
 
-**Bind:** Hookah girişi ve A Short dar — Paint Shells bu girişlerde kaçış yeri bırakmıyor. Reyna Hookah'ta Devour kullanamaz, Paint Shells alanı çok küçük.
+**Bind:** Hookah girişi ve A Short dar — molly bu girişlerde kaçış yeri bırakmaz. Reyna Hookah'ta heal kullanamaz, alan çok küçük.
 
-**Split:** B Main koridoru Raze için ideal. Dar koridor Paint Shells'ten kaçış yok. Reyna Dismiss ile kaçmaya çalışsa da dar tünel Boombot'u buluyor.
+**Split:** B Main koridoru Raze için ideal. Dar koridorda mollyden kaçış yok. Reyna kaçışla sıyrılmaya çalışsa da dar tünelde bot onu bulur.
 
-**Fracture:** İki taraflı saldırı Blast Pack ile iniş için açık. Reyna bu haritada iki yönden gelen baskıya karşılık verecek yeteneği yok.
+**Fracture:** İki taraflı saldırı satchel inişine açık. Reyna bu haritada iki yönden gelen baskıya karşılık verecek yeteneğe sahip değil.
 
-**Sunset:** Dar yapı Paint Shells hasarını artırıyor. Reyna dışarı çıkamıyor, Devour alan içinde çalışmıyor.
+**Sunset:** Dar yapı molly hasarını artırır. Reyna dışarı çıkamaz, heal alan içinde işe yaramaz.
 
-**Icebox:** B Orange ve Kitchen küçük alanlar — Boombot bu köşeleri temizliyor, Reyna Dismiss ile çıkacak yer bulamıyor.
+**Icebox:** B Orange ve Kitchen küçük alanlar — bot bu köşeleri temizler, Reyna kaçışla çıkacak yer bulamaz.
 
-**Haven:** Üç site kapı girişleri Boombot için. Reyna kill almadan Garage veya C Long'da yeteneği yok.
+**Haven:** Üç site'ın kapı girişleri bot için biçilmiş kaftan. Reyna kill almadan Garage veya C Long'da elinde bir şey yok.
 
-**Ascent:** Orta kontrol önemli. Raze B Main veya A rafters'tan Blast Pack ile giriyor. Reyna Mid Window'da açığa kalıyor.
+**Ascent:** Orta kontrolü kritik. Raze B Main veya A rafters'tan satchelle giriş yapar. Reyna Mid Window'da açıkta kalır.
 
-**Breeze:** Geniş alan hem Raze'ı hem Reyna'yı kısıtlıyor. Raze Blast Pack ile kapanmıyor, Reyna kill alamıyor. İkisi de bu haritada sınırlı.
+**Breeze:** Geniş alan hem Raze'ı hem Reyna'yı kısıtlar. Raze satchelle mesafe kapatamaz, Reyna kill alamaz. İkisi de bu haritada sınırlı kalır.
 
-**Lotus:** Dar geçişler ve C kapısı Paint Shells için. Reyna C'ye Dismiss ile giremez, alan hasarı kapıyı yakıyor.
+**Lotus:** Dar geçişler ve C kapısı molly için ideal. Reyna C'ye kaçışla giremez, alan hasarı kapıyı yakar.
 
-**Pearl:** A Main ve B kanalı Boombot için uygun. Reyna B kanalında Devour kullanırsa Paint Shells hazır.
+**Pearl:** A Main ve B kanalı bot için uygun. Reyna B kanalında heal kullanırsa mollyn hazır olsun.
 
-**Abyss:** Yukarı-aşağı geçişler Blast Pack'e açık. Reyna dikey hareketi yok — Dismiss yerde tutuyor.
+**Abyss:** Yukarı-aşağı geçişler satchele açık. Reyna'nın dikey hareketi yok — kaçış onu yerde tutar.
 
 ## 6. Maçı Döndüren Anlar
 
-1. **Reyna kill alamadı.** O round Reyna'nın elinde sadece Leer var. Leer'e kapak arkası ver, Reyna sıradan bir silahla oynuyor.
+1. **Reyna kill alamadı.** O round Reyna'nın elinde sadece flash var. Flash'a kapak arkasıyla cevap ver, Reyna sıradan bir silahla oynar.
 
-2. **Empress açıldı ama takım birlikte girdi.** Kill zinciri art arda kill ile büyüyor — teker teker girme. Takımın Reyna'ya odaklanırsa ult söner.
+2. **Ult açıldı ama takım birlikte girdi.** Kill zinciri art arda kill'le büyür — teker teker girme. Takımın Reyna'ya odaklanırsa ult söner.
 
-3. **Paint Shells Devour'u kırdı.** Reyna can doldurmak için durdu, sen alanı yaktın. Reyna öldü ya da kaçtı — Reyna pozisyon verdi.
+3. **Molly heal'i kırdı.** Reyna can toplamak için durdu, sen alanı yaktın. Reyna ya öldü ya kaçtı — her iki halde de pozisyon verdi.
 
-4. **Showstopper Reyna'nın pozisyonuna.** Reyna Dismiss ile görünmez oldu ama roket geniş alan. Sesi duyuyorsan o yönde bırak — Dismiss hasar engellemez.
+4. **Ult roketi Reyna'nın pozisyonuna gitti.** Reyna kaçışla görünmez oldu ama roket geniş alan vurur. Sesi duyuyorsan o yöne bırak — kaçış hasarı engellemez.
 
-5. **Reyna'nın Dismiss'i yanlış anda geldi.** Dismiss'i kaçmak yerine duel içinde kullandıysa pozisyon verdi. Boombot sür, ses takip eder.
+5. **Reyna kaçışı yanlış anda kullandı.** Kaçışı kaçmak yerine düello içinde kullandıysa pozisyon verdi. Botu sür, ses onu takip eder.
 
 ## 7. Koç Notları
 
 **Raze oynuyorsan:**
 
-Reyna kill almasın — bu karşılaşmadaki hedefin bu. Reyna kill alana kadar elinde hiçbir şey yok. Köşe tut, Boombot gönder, Reyna'nın giriş noktasını önceden yak. Reyna Leer ile girmeye çalışınca Paint Shells'i girişe bırak — flash'lı veya değil, alana hasar işliyor.
+Reyna kill almasın — bu karşılaşmadaki tek hedefin bu. Reyna kill alana kadar elinde hiçbir şey yok. Köşe tut, bot gönder, Reyna'nın giriş noktasını önceden yak. Reyna flash ile girmeye çalışınca mollyni girişe bırak — flash'lı ya da değil, alan hasarı işler.
 
-Reyna Devour kullanıyorsa Paint Shells at — can dolumu durur, Reyna ya ölür ya kaçar.
+Reyna heal kullanıyorsa mollyni at — can dolumu durur, Reyna ya ölür ya kaçar.
 
-Reyna Empress açtıysa tek başına girme. Takımınla odakla, kill vermezsen ult söner.
+Reyna ult açtıysa tek başına girme. Takımınla odaklan, kill vermezsen ult söner.
 
 **Reyna oynuyorsan:**
 
-Duel seç — hepsine girme. Boombot'u gördüğünde dur, Boombot'u öldür veya Leer at kaç. Boombot seni buluyor ve Paint Shells seni yakıyor.
+Düellonu seç — hepsine girme. Botu gördüğünde dur, botu öldür ya da flash atıp kaç. Bot seni bulur, molly seni yakar.
 
-Dismiss'i her duel için harcama. Dismiss rekonumlanmak için — duel içinde değil, kill aldıktan sonra güvenli noktaya geçmek için kullan. Dismiss sesi pozisyonunu veriyor, gereksiz kullanma.
+Kaçışı her düello için harcama. Kaçış rekonumlanmak içindir — düello içinde değil, kill aldıktan sonra güvenli noktaya geçmek için kullan. Kaçış sesi pozisyonunu ele verir, gereksiz harcama.
 
-Empress'i düşük bütçeli roundlarda aç. Karşı takım tam alımla oynarken Empress hızlı söner. Spectre veya Stinger ile Empress açarsan ateş hızı farkı belirginleşir — o roundda Raze'ı yormadan kill alırsın.
+Ultu düşük bütçeli roundlarda aç. Karşı takım tam alımla oynarken ult hızlı söner. Spectre veya Stinger ile ult açarsan ateş hızı farkı belirginleşir — o roundda Raze'ı yormadan kill alırsın.
 
-Raze Paint Shells'ten uzak dur. Paint Shells'in attığı yerde Devour kullanma — can dolduramadan ölürsün.
+Raze'ın mollysinden uzak dur. Mollynin düştüğü yerde heal kullanma — can dolduramadan ölürsün.

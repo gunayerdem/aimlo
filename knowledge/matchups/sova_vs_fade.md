@@ -9,135 +9,135 @@ tags: [matchup, sova, fade, initiator_vs_initiator]
 
 ## 1. Matchup Özü
 
-Sova dart atar — dart düştüğü an o nokta açılır, konum kesin gelir. Fade Prowler bırakır — Prowler rakibin peşinden koşar, vurursa iz round sonuna kadar aktif kalır.
+Sova recon atar — recon düştüğü an o nokta açılır, konum kesin gelir. Fade bot bırakır — bot rakibin peşinden koşar, vurursa iz round sonuna kadar açık kalır.
 
-Sova'yı oynarken dart nereye düşürsen orayı açıyorsun, başka yer kör. Fade'i oynarken Prowler rakibi vurursa sen o oyuncunun konumunu sürekli okuyorsun.
+Sova oynarken recon'u nereye atarsan orayı açıyorsun, gerisi kör. Fade oynarken bot rakibe değerse o oyuncunun konumunu round boyu okursun.
 
-Bu matchup'ta hedefin şu: karşı tarafın bilgi aracını işe yaramaz hale getir. Dart düştüyse hareket et. Prowler koşuyorsa öldür.
+Bu matchup'ta tek bir hedefin var: karşı tarafın bilgi aracını işe yaramaz hale getir. Recon düştüyse yer değiştir. Bot koşuyorsa öldür.
 
 ## 2. Kim Avantajlı?
 
 Haritaya göre değişir.
 
-**Sova'nın güçlü olduğu haritalar:** Haven, Ascent, Breeze, Icebox — uzun görüş hatları ve çoklu site var, dart noktaları kesin çalışan açılar mevcut.
+**Sova'nın güçlü olduğu haritalar:** Haven, Ascent, Breeze, Icebox — uzun görüş hatları ve çoklu site var, recon noktaları kesin çalışan açılar açık.
 
-**Fade'in güçlü olduğu haritalar:** Sunset, Split, Bind, Lotus — dar koridorlar ve tarama gerektiren köşeler Prowler + Haunt kombosu için doğru zemin.
+**Fade'in güçlü olduğu haritalar:** Sunset, Split, Bind, Lotus — dar koridorlar ve taranması gereken köşeler bot + recon kombosu için biçilmiş kaftan.
 
 Takımın retake oynuyorsa Sova al. Takımın site basıyorsa Fade al.
 
 ## 3. Key Düellolar
 
-**IF** Sova dart ile bilgi aldı, Fade takımı bulunduğu yerden oynamaya devam etti
-**MEANING** Dart bilgisi taze — Sova takımı hemen aksiyon alabilir, konum belli
-**COUNTER** Dart sesini duyar duymaz yerini değiştir. Aynı köşede duruyorsan Sova takımına bedava konum veriyorsun
-**WHY** Dart sesi açık sinyal. Rakip duydu, artık nerede olduğunu biliyor. Hareket etmezsen konum bilgisi rakibin elinde kalır.
+**IF** Sova recon ile bilgi aldı, Fade takımı bulunduğu yerden oynamaya devam etti
+**MEANING** Recon bilgisi taze — Sova takımı hemen aksiyon alır, konumun belli
+**COUNTER** Recon sesini duyar duymaz yerini değiştir. Aynı köşede kalırsan Sova takımına bedava konum veriyorsun
+**WHY** Recon sesi açık sinyal. Rakip duydu, artık nerede olduğunu biliyor. Yer değiştirmezsen konumun rakibin elinde kalır.
 
 ---
 
-**IF** Prowler rakip oyuncuyu vurdu, iz aktif
-**MEANING** Fade takımı o oyuncuyu round boyu izleyebilir — Sova dart'tan çok daha uzun süreli bilgi
-**COUNTER** Prowler sesini duyar duymaz Prowler'ı öldür — tripwire, nanoswarm, molly, ne varsa yoluna at. Prowler ölmezse iz kesilmez
-**WHY** Prowler'ı öldürmek Fade'in en büyük avantajını keser. Öldürmezsen Fade round boyu peşinde.
+**IF** Fade botu rakip oyuncuya değdirdi, iz açık
+**MEANING** Fade takımı o oyuncuyu round boyu izler — Sova recon'undan çok daha uzun süreli bilgi
+**COUNTER** Bot sesini duyar duymaz botu öldür — tel, molly, ne varsa yoluna at. Bot ölmezse iz kesilmez
+**WHY** Botu öldürmek Fade'in en büyük kozunu keser. Öldürmezsen Fade round boyu peşinde.
 
 ---
 
-**IF** Sova aynı dart noktasına üst üste atıyor
-**MEANING** Fade takımı o açıyı ezberledi — dart düşmeden önce yetenek hazır bekliyor
-**COUNTER** Her round dart noktasını değiştir. Aynı açı iki kez okununca üçüncüde karşında flash veya molly olur
-**WHY** Sova dart tek açıdan gelir. Rakip öğrenirse dart atmadan önce sen yetenek yiyorsun.
+**IF** Sova aynı recon noktasına üst üste atıyor
+**MEANING** Fade takımı o açıyı ezberledi — recon düşmeden önce yetenek hazır bekliyor
+**COUNTER** Her round recon noktasını değiştir. Aynı açı iki kez okununca üçüncüde karşında flash veya molly bulursun
+**WHY** Sova recon'u tek açıdan gelir. Rakip öğrenirse recon atmadan önce sen yetenek yiyorsun.
 
 ---
 
-**IF** Fade Haunt gözü ve Sova dart aynı alanı tarıyor
-**MEANING** İki bilgi aracı tek bölge için harcanıyor — haritanın diğer tarafı kör
-**COUNTER** Haunt ve dart'ı farklı alanlara böl. Birisi siteyi tararsa diğeri flanki tarasın
-**WHY** Aynı bölgeye iki bilgi aracı atmak iki aracı bir bölgeye gömer. Farklı hatlara dağıtırsan iki kat harita bilgisi toplarsın.
+**IF** Fade recon gözü ve Sova recon'u aynı alanı tarıyor
+**MEANING** İki bilgi aracı tek bölgeye gidiyor — haritanın diğer yarısı kör
+**COUNTER** Recon gözünü ve recon'u farklı alanlara böl. Biri siteyi tararsa diğeri flank'i tarasın
+**WHY** Aynı bölgeye iki bilgi aracı atmak ikisini de tek yere gömer. Farklı hatlara dağıtırsan iki kat harita bilgisi toplarsın.
 
 ---
 
-**IF** Hunter's Fury ult aktif, Fade Haunt öncesinde rakibi vurmuştu
-**MEANING** İz hâlâ aktifse Sova ult'u duvarın arkasından izli hedefe basabilir
+**IF** Sova ult'u açık, Fade öncesinde recon gözüyle rakibe değmişti
+**MEANING** İz hâlâ açıksa Sova ult'u duvarın arkasından izli hedefe basar
 **COUNTER** Sova ult sesini duyar duymaz kapak değiştir ve hareket et — ult sabit hedef ister
-**WHY** Haunt izi + Hunter's Fury ikilisi aynı takımda 2-3 kill getirir. Karşı takımda izliysen hareketsiz durma.
+**WHY** Recon izi + Sova ult'u aynı takımda 2-3 kill getirir. Karşı takımda izliysen sabit durma.
 
 ---
 
-**IF** Nightfall ult aktif, Sova takımı ult alanında
+**IF** Fade ult'u açık, Sova takımı ult alanında
 **MEANING** Alandaki herkes yavaşlar, sağır olur, iz bırakır — Fade takımı içeri girerken Sova takımı cevap veremez
-**COUNTER** Nightfall sesini duyar duymaz kapağa gir, ult alanından çık. Ağırlaşma altındayken dart bilgisini sen kullanamazsın — dart atmayı bekle
-**WHY** Nightfall site basmak için kullanılır. Sova takımı ult sırasında geri dönüş yapamaz, yalnızca kaçabilir.
+**COUNTER** Fade ult sesini duyar duymaz kapağa gir, ult alanından çık. Ağırlaşma altındayken recon bilgisini kullanamazsın — recon atmayı bekle
+**WHY** Fade ult'u site basmak için gelir. Sova takımı ult sırasında geri dönemez, sadece kaçar.
 
 ---
 
-**IF** Sova Owl Drone ve Fade Prowler aynı anda aynı bölgede
-**MEANING** İki tarama aracı tek yerde — iki araç aynı bilgiyi topluyor
-**COUNTER** Drone'u uzak site veya flank için kullan, Prowler'ı yakın koridor için bırak
-**WHY** Drone görsel verir ama ses çıkarır, ele geçirilir. Prowler iz bırakır, hızlı gider. İkisi farklı hatlarda iki kat bilgi demek.
+**IF** Sova drone'u ve Fade botu aynı anda aynı bölgede
+**MEANING** İki tarama aracı tek yerde — ikisi aynı bilgiyi topluyor
+**COUNTER** Drone'u uzak site veya flank için kullan, botu yakın koridor için bırak
+**WHY** Drone görsel verir ama ses çıkarır, vurulup düşürülür. Bot iz bırakır, hızlı gider. İkisini farklı hatlara salarsan iki kat bilgi toplarsın.
 
 ## 4. Yetenek Karşılaştırması
 
 **Sova araçları:**
-- Recon Bolt — sabit konum bilgisi, görsel konum işareti
-- Owl Drone — uçan tarama, ses çıkarır
-- Shock Bolt — dart hasarı
-- Hunter's Fury — duvar delici 3 atış, bilgi + kill
+- recon — sabit konum bilgisi, görsel konum işareti
+- drone — uçan tarama, ses çıkarır
+- shock dart — alan hasarı
+- ult — duvar delici 3 atış, bilgi + kill
 
 **Fade araçları:**
-- Haunt — göz, vurma + iz
-- Prowler — koşucu, vurma + yakın kör etme
-- Seize — alan sabitleme, yavaşlatma + ağırlaşma
-- Nightfall — geniş alan, yavaşlatma + sağırlaştırma + iz
+- recon gözü — vurma + iz
+- bot — koşucu, vurma + yakın kör etme
+- alan tutucu — alanı sabitler, yavaşlatır + ağırlaştırır
+- ult — geniş alan, yavaşlatma + sağırlaştırma + iz
 
 **Fark şu:**
-Sova'nın bilgisi tek noktada kesin gelir. Fade'in bilgisi yayılır ama rakibin peşinden koşar — iz uzun sürer.
-Site basmak istiyorsan Fade ult'u Hunter's Fury'den daha geniş alan vurur. Retake'de kill aramak istiyorsan Hunter's Fury tek hedefe daha keskin basar.
+Sova'nın bilgisi tek noktada kesin gelir. Fade'in bilgisi yayılır ve rakibin peşinden koşar — iz uzun sürer.
+Site basacaksan Fade ult'u Sova ult'undan daha geniş alan vurur. Retake'de kill arıyorsan Sova ult'u tek hedefe daha keskin basar.
 
 ## 5. Harita Bazlı Seçim
 
-**Haven:** Sova al. Üç site var, her site için kesin dart noktaları çalışır.
+**Haven:** Sova al. Üç site var, her site için kesin recon noktaları çalışır.
 
-**Ascent:** Sova al. Mid Top ve A Site dart açıları rakibin konumunu açık verir.
+**Ascent:** Sova al. Mid Top ve A Site recon açıları rakibin konumunu açık verir.
 
-**Breeze:** Sova al. Geniş site ve uzun görüş hatları — Prowler dar koridora ihtiyaç duyar, burada açık alanda kaybolur.
+**Breeze:** Sova al. Geniş site ve uzun görüş hatları — bot dar koridor ister, burada açık alanda kaybolur.
 
-**Icebox:** Sova al. B Mid ve Mid Kitchen için dart noktaları belirleyicidir.
+**Icebox:** Sova al. B Mid ve Mid Kitchen için recon noktaları belirleyici.
 
-**Sunset:** Fade al. Mid ve A koridoru dardır, Prowler kapıdan kapıya rakibi köşeye sıkıştırır.
+**Sunset:** Fade al. Mid ve A koridoru dar, bot kapıdan kapıya rakibi köşeye sıkıştırır.
 
-**Split:** Fade al. B Main ve A Main dar — Prowler + Haunt kombosu her iki main'i aynı anda kapatır, Sova dart o dar açılarda uygun nokta bulamaz.
+**Split:** Fade al. B Main ve A Main dar — bot + recon gözü kombosu iki main'i aynı anda kapatır, Sova recon'u o dar açılarda düzgün nokta bulamaz.
 
-**Bind:** Fade al. Teleporter geçişlerini Prowler kapatır, Sova dart teleporter sonrasını göremez.
+**Bind:** Fade al. Teleporter geçişlerini bot kapatır, Sova recon'u teleporter sonrasını göremez.
 
-**Lotus:** Fade al. Üç site ve döner kapılar — Prowler döner kapıdan geçen rakibi yakalar, Sova dart açısı döner kapıda çalışmaz.
+**Lotus:** Fade al. Üç site ve döner kapılar — bot döner kapıdan geçen rakibi yakalar, Sova recon açısı döner kapıda çalışmaz.
 
 **Fracture:** Takımın site basıyorsa Fade al; retake oynuyorsa Sova al.
 
 **Abyss:** Takımın site basıyorsa Fade al; retake oynuyorsa Sova al.
 
-**Pearl:** Sova al. Mid Link dart noktaları site geçişlerini erken açar, Prowler'ın dar koridor avantajı Mid'de sınırlı kalır.
+**Pearl:** Sova al. Mid Link recon noktaları site geçişlerini erken açar, botun dar koridor avantajı Mid'de zayıf kalır.
 
 ## 6. Maçı Çeviren Anlar
 
-1. **Sova aynı dart noktasını tekrarlarsa.** Üçüncü roundda Fade takımı dart düşmeden yetenek hazırlamış olur. Rakip seni ezberlediyse o noktayı bırak.
+1. **Sova aynı recon noktasını tekrarlarsa.** Üçüncü roundda Fade takımı recon düşmeden yeteneğini hazırlamış olur. Rakip seni ezberlediyse o noktayı bırak.
 
-2. **Prowler ölürse.** Sova takımı Prowler'ı öldürdüğünde Fade round ortasında kör kalır. Prowler sesini duyar duymaz önüne yetenek at.
+2. **Bot ölürse.** Sova takımı botu öldürdüğünde Fade round ortasında kör kalır. Bot sesini duyar duymaz önüne yetenek at.
 
-3. **Haunt izi + Hunter's Fury aynı takımda.** Fade izler, Sova duvarın arkasından basar. Bu komboyu kullanıyorsan Haunt'u önce at, ult ikinci gelsin.
+3. **Recon izi + Sova ult'u aynı takımda.** Fade izler, Sova duvarın arkasından basar. Bu komboyu sen kullanıyorsan recon gözünü önce at, ult ikinci gelsin.
 
-4. **Nightfall site basma anında gelirse.** Sova takımı ult sesini duyduğunda açık alandaysa round gider. Nightfall sesini duyar duymaz kapağa gir.
+4. **Fade ult'u site basma anında gelirse.** Sova takımı ult sesini duyduğunda açık alandaysa round gider. Fade ult sesini duyar duymaz kapağa gir.
 
-5. **Drone ve Prowler hız farkı.** Drone yavaş, ses çıkarır, ele geçirilebilir. Prowler hızlı ama öldürülebilir. Drone'u uzak hat için, Prowler'ı yakın koridor için kullan.
+5. **Drone ve bot hız farkı.** Drone yavaş, ses çıkarır, vurulup düşürülür. Bot hızlı ama öldürülebilir. Drone'u uzak hat için, botu yakın koridor için kullan.
 
 ## 7. Koç Notları
 
 **Sova oynarken:**
-Dart'ı her round aynı yere atma. Takım dart bilgisini kullanmayacaksa dart harcama — atılan dart tüketilir, bir sonraki round elinde olmaz.
+Recon'u her round aynı yere atma. Takım recon bilgisini kullanmayacaksa recon harcama — atılan recon biter, sonraki round elinde olmaz.
 
 **Fade oynarken:**
-Prowler'ı rakip bir kapıyı geçtikten veya yer değiştirdikten sonra bırak — o anda gerçek konumu yakalar. Rakip sabitken Prowler'ı bırakırsan boş koridor tarar.
+Botu rakip bir kapıyı geçtikten veya yer değiştirdikten sonra bırak — o anda gerçek konumu yakalar. Rakip sabitken botu bırakırsan boş koridor tarar.
 
 **Ult kullanımı:**
-Hunter's Fury'de Haunt izi veya dart bilgisi yoksa ult basma — önce bilgi al, sonra ult. Nightfall'ı site basma anında kullan; round ortasında bırakırsan Sova takımı dağılmadan önce kapağa girer.
+Sova ult'unda recon izi veya recon bilgisi yoksa ult basma — önce bilgi al, sonra ult. Fade ult'unu site basma anında kullan; round ortasında bırakırsan Sova takımı dağılmadan kapağa girer.
 
 **Her ikisini de oynarken geçerli:**
-Karşı takımda bilgi açıcısı varsa ilk hedefin onun bilgi aracını kesmek. Dart düştüyse hareket et. Prowler koşuyorsa öldür.
+Karşı takımda bilgi açıcısı varsa ilk hedefin onun bilgi aracını kesmek. Recon düştüyse yer değiştir. Bot koşuyorsa öldür.

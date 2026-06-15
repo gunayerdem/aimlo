@@ -11,76 +11,76 @@ tags: [matchup, iso, skye, duelist, initiator]
 
 ## 1. Matchup Özü
 
-Iso'nun bütün gücü 1v1'de. Shield ilk kurşunu yutar, wall projectile'ı keser, Kill Contract Skye'ı senden koparır. Skye ise sana değil takımına çalışır — flash kör eder, dog durdurur, heal takımı ayakta tutar. Bu maçup şu soruya gelir: Skye'ı yalnız yakalayabiliyor musun? Yakalayabilirsen sen kazanırsın. Takımıyla kalırsa Skye kazanır.
+Iso'nun bütün gücü 1v1'de. Shield ilk kurşunu yutar, duvarı önündeki atışı keser, ultu Skye'ı senden koparır. Skye ise sana değil takımına oynar — flash kör eder, bot durdurur, heal takımı ayakta tutar. Bu matchup tek soruya iner: Skye'ı yalnız yakalayabiliyor musun? Yakalarsan sen kazanırsın. Takımıyla kalırsa Skye kazanır.
 
 ## 2. Kim Avantajlı?
 
 **Iso lehine durumlar:**
-- 1v1 kapandıysa (Haven A Long, Lotus B Main gibi dar alanlar) — shield Skye'ın tek kurşununu yutar, sen karşılık verirsin
-- Skye flash + dog + kuş harcandıysa — elinde util kalmayan Skye sıradan bir rifler, aim düeloda sen öndesin
-- Kill Contract hazırsa — Skye'ı boyuta çeker, orada takımsız kalır
-- Skye heal harcadıysa — takımın HP'si düşük, round sana dönüyor
+- 1v1 kapandıysa (Haven A Long, Lotus B Main gibi dar alanlar) — shield Skye'ın ilk kurşununu yutar, sen karşılık verirsin
+- Skye flash + bot + recon harcadıysa — elinde util kalmayan Skye sıradan bir rifler, aim düelloda sen öndesin
+- Ultun hazırsa — Skye'ı izole alana çekersin, orada takımsız kalır
+- Skye heal harcadıysa — takımın canı düşük, round sana döner
 
 **Skye lehine durumlar:**
-- Flash kuşunu yüzüne patlatırsa — kör kalırsın, shield körlüğü durdurmaz, aim düelonu kaybedersin
-- Dog seni durdurursa — shield durdurmayı değil hasarı tutar, sen donuk kalırsın
+- Flash'ı yüzüne patlatırsa — kör kalırsın, shield körlüğü durdurmaz, aim düellonu kaybedersin
+- Bot seni durdurursa — shield hasarı tutar ama durmayı tutmaz, donuk kalırsın
 - Skye takımıyla beraberse — flash + bilgi + heal üçlüsü karşısında tek başına boğulursun
-- Seekers ultunu sana attıysa — seni bulur, yavaşlatır, takımı üstüne gelir
+- Ultunu sana attıysa — seni bulur, yavaşlatır, takımı üstüne gelir
 
-**Eşit:** Bind, Split, Sunset'te maçup ikiye bölünür — dar köşe düellosu sana yarar, Skye flash kuşunu köşe açısına yerleştirirse ona yarar.
+**Eşit:** Bind, Split, Sunset'te matchup ikiye bölünür — dar köşe düellosu sana yarar, Skye flash'ı köşe açısına yerleştirirse ona yarar.
 
 ## 3. Key Düellolar
 
-**IF** Skye flash kuşunu aim hattına patlattı
-**MEANING** Kör kalırsın. Shield kurşunu tutar ama körlüğü tutmaz. Kör aim düelonu kaybedersin.
-**COUNTER** Kuş sesini duyar duymaz shield aç ve duvara dön. Flash bittikten sonra shield hâlâ aktifse düelo sana döner.
-**WHY** Kuşun nereye gideceğini ses verir — dönersen yüzüne patlamaz. Flash biter, shield durur, sen öndesin.
+**IF** Skye flash'ı aim hattına patlattı
+**MEANING** Kör kalırsın. Shield kurşunu tutar ama körlüğü tutmaz. Kör halde aim düellonu kaybedersin.
+**COUNTER** Flash sesini duyar duymaz shield aç ve duvara dön. Flash bittikten sonra shield hâlâ aktifse düello sana döner.
+**WHY** Flash'ın nereye geleceğini ses belli eder — dönersen yüzüne patlamaz. Flash biter, shield durur, sen öndesin.
 
 ---
 
-**IF** Dog seni durdurdu
-**MEANING** Dururken aim yapamazsın. Shield hasarı tutar, durdurmayı tutmaz.
-**COUNTER** Dog sesini duyar duymaz köşeye çekil ve iki kurşun sıkarak dog'u bitir. HP'si düşük, dayanmaz.
-**WHY** Dog'u öldürmek en hızlı cevap. Dururken beklemek ölüm, dog'u temizlemek döngüyü kırar.
+**IF** Bot seni durdurdu
+**MEANING** Durduğun an aim yapamazsın. Shield hasarı tutar, durmayı tutmaz.
+**COUNTER** Bot sesini duyar duymaz köşeye çekil ve iki kurşunla botu bitir. Canı düşük, dayanmaz.
+**WHY** Botu öldürmek en hızlı cevap. Durup beklemek ölüm; botu temizlemek döngüyü kırar.
 
 ---
 
 **IF** Shield açıkken Skye sana kurşun sıktı
-**MEANING** İlk kurşun tutulur, sen karşılık verirsin. Aim düeloda öndesin.
-**COUNTER** Skye'ın bunu kırmak için flash + takım baskısına ihtiyacı var. Tek başınaysa shield'ı kıramaz.
-**WHY** Shield tek kurşun yutar. Skye solo bunu çözemez — takımıyla gelirse aşabilir.
+**MEANING** İlk kurşun tutulur, sen karşılık verirsin. Aim düelloda öndesin.
+**COUNTER** Skye'ın bunu kırmak için flash + takım baskısı lazım. Tek başınaysa shield'ı kıramaz.
+**WHY** Shield bir kurşun yutar. Skye solo bunu çözemez — takımıyla gelirse aşar.
 
 ---
 
-**IF** Kill Contract'ı Skye'a attın
-**MEANING** Boyuta çekti, takımsız kaldı. 1v1 aim düelonu sen belirlersin.
-**COUNTER** Skye olarak: ult atılacak açıya girme, takım arkadaşların önceden cover alsın.
-**WHY** Skye'ın gücü takımında. Boyutta o güç yoktur — 1v1 shield + aim avantajı senin.
+**IF** Ultunu Skye'a attın
+**MEANING** İzole alana çektin, takımsız kaldı. 1v1 aim düellosunu sen belirlersin.
+**COUNTER** Skye olarak: ultun düşeceği açıya girme, takım arkadaşların önceden cover alsın.
+**WHY** Skye'ın gücü takımında. İzole kaldığında o güç yok — 1v1'de shield + aim avantajı senin.
 
 ---
 
-**IF** Skye Seekers'ı sana attı
-**MEANING** Seeker seni bulur, yavaşlatır. Takımı üstüne gelir.
-**COUNTER** Seeker sesini duyar duymaz köşeye gir, shield aç, seeker'a kurşun sık — birkaç kurşunla düşer.
-**WHY** Seeker yok edilebilir. Duruyorsan seni teslim edersin, seeker'ı temizlersen avantaj gider.
+**IF** Skye ultunu sana attı
+**MEANING** Ult seni bulur, yavaşlatır. Takımı üstüne gelir.
+**COUNTER** Ses gelir gelmez köşeye gir, shield aç ve seni arayan işarete kurşun sık — birkaç kurşunla düşer.
+**WHY** Ultun izini yok edebilirsin. Durursan kendini teslim edersin; temizlersen avantaj gider.
 
 ---
 
-**IF** Wall ile dog'un yolunu kesmek istedin
-**MEANING** Dog wall'dan geçemez, seni durdurma şansı sıfır.
-**COUNTER** Skye olarak: wall yokken dog gönder. Iso'nun wall kullanımı sınırlı, harcattıktan sonra dog serbesttir.
-**WHY** Wall tek yön keser. Dog wall'a çarpar durur — wall harcandıktan hemen sonra dog atmak en ucuz cevap.
+**IF** Duvarla botun yolunu kesmek istedin
+**MEANING** Bot duvardan geçemez, seni durdurma şansı sıfır.
+**COUNTER** Skye olarak: duvar yokken bot gönder. Iso'nun duvar kullanımı sınırlı, harcattıktan sonra bot serbesttir.
+**WHY** Duvar tek yönü keser. Bot duvara çarpar durur — duvar harcandıktan hemen sonra bot atmak en ucuz cevap.
 
 ---
 
 **IF** Skye heal yaparken peek attın
-**MEANING** Heal sırasında Skye sabit durur. O anda hedefe alma en kolay.
+**MEANING** Heal sırasında Skye sabit durur. O an hedefe almak en kolay.
 **COUNTER** Skye olarak: heal'i köşe arkasında, görünmeden yap. Açıkta heal yapmak bedava kurşun davet eder.
-**WHY** Sabit hedef, aim avantajı maksimum. Skye heal'i doğru zamanlamazsa ver de gider.
+**WHY** Sabit hedef, aim avantajı tavan. Skye heal'i yanlış zamanlarsa ölür gider.
 
 ## 4. Utility Takası
 
-Iso'nun her şeyi kendine yarar: shield, wall, double tap, ult — hepsi 1v1 içindir. Skye'ın her şeyi takıma yarar: flash, dog, heal, ult — hepsi bilgi ve destek içindir. Ult maliyeti: Kill Contract 7 puan, Seekers 8 puan. Iso ultu daha ucuza gelir ve 1v1 kilitler. Skye ultu pahalı ama seni takımına teslim eder.
+Iso'nun her şeyi kendine yarar: shield, duvar, vuruş galerisi, ult — hepsi 1v1 için. Skye'ın her şeyi takıma yarar: flash, bot, heal, ult — hepsi bilgi ve destek için. Ult maliyeti: Iso ultu 7 puan, Skye ultu 8 puan. Iso ultu daha ucuza gelir ve 1v1'i kilitler. Skye ultu pahalı ama seni takımına teslim eder.
 
 Bu matchup'ın tek sorusu şu: Skye'ı takımından koparabilir misin?
 - Koparabilirsen → sen kazanırsın
@@ -88,34 +88,34 @@ Bu matchup'ın tek sorusu şu: Skye'ı takımından koparabilir misin?
 
 ## 5. Map Bazlı Değişim
 
-**Haven (Skye açık ara avantajlı):** 3 site bilgisi Skye'ın tam alanı. Iso burada zorlanır — izole düelo bulmak çok zor.
+**Haven (Skye açık ara avantajlı):** 3 site bilgisi tam Skye'ın alanı. Iso burada zorlanır — izole düello bulmak çok zor.
 
-**Lotus (Skye hafif avantajlı):** 3 site yine Skye'a yarar. Ama Lotus'ta B Main dar köşeleri Iso'ya açık kapı.
+**Lotus (Skye hafif avantajlı):** 3 site yine Skye'a yarar. Ama Lotus'ta B Main'in dar köşeleri Iso'ya açık kapı.
 
-**Bind (Iso hafif avantajlı):** Tp ve dar koridorlar 1v1 kapıyor. Shield ekonomisi burada işe yarar.
+**Bind (Iso hafif avantajlı):** Tp ve dar koridorlar 1v1'i kapatır. Shield ekonomisi burada işe yarar.
 
-**Split (Eşit):** A Main'de Skye bilgi sağlar, B Main dar köşelerinde Iso döner.
+**Split (Eşit):** A Main'de Skye bilgi sağlar, B Main'in dar köşelerinde Iso döner.
 
-**Ascent (Skye avantajlı):** Orta uzunlukta açık çatışmalar Iso'nun shield'ını boşa düşürür, Skye A Main'de flash + dog ile köşe hakimiyeti kurar.
+**Ascent (Skye avantajlı):** Orta mesafe açık çatışmalar Iso'nun shield'ını boşa düşürür, Skye A Main'de flash + bot ile köşe hakimiyeti kurar.
 
-**Icebox (Iso avantajlı):** Tüp ve rafters dar, izole 1v1 çıkar. Shield + aim burada zirve.
+**Icebox (Iso avantajlı):** Tüp ve rafters dar, izole 1v1 çıkar. Shield + aim burada tavan yapar.
 
-**Sunset (Eşit):** Dar köşeler Iso'ya, flash açıları Skye'a. Kimin util'i önce boşalırsa o geriler.
+**Sunset (Eşit):** Dar köşeler Iso'ya, flash açıları Skye'a. Kimin util'i önce biterse o geriler.
 
 ## 6. Flip Anlar
 
-**Flip 1 — Flash yüzüne patlarsa:** Shield işe yaramaz, kör aim düelonu kaybedersin.
+**Flip 1 — Flash yüzüne patlarsa:** Shield işe yaramaz, kör halde aim düellonu kaybedersin.
 
-**Flip 2 — Dog seni durdurursa:** Shield hasarı tutar, durmayı tutmaz — duruyorken ölürsün.
+**Flip 2 — Bot seni durdurursa:** Shield hasarı tutar, durmayı tutmaz — dururken ölürsün.
 
 **Flip 3 — Shield açıkken 1v1:** İlk kurşun tutulur, karşılık verirsin — bu senin en güçlü anın.
 
-**Flip 4 — Kill Contract isabet ederse:** Skye boyuta girer, takımsız kalır, 1v1 senin sahanın.
+**Flip 4 — Ult isabet ederse:** Skye izole alana girer, takımsız kalır, 1v1 senin sahan.
 
 ## 7. Koç Notu
 
-Iso oynuyorsan Skye'ı peek'e zorla — direkt yüzleşme. Dog veya flash harcatmak için sahte baskı yap, util boşaldığında 1v1'e gir. Skye util'siz kaldığında sıradan bir rifler — o an senin girişin.
+Iso oynuyorsan Skye'ı peek'e zorla — direkt yüzleşme. Bot veya flash harcatmak için sahte baskı kur, util boşaldığında 1v1'e gir. Skye util'siz kaldığında sıradan bir rifler — girişini o an yap.
 
-Skye oynuyorsan Iso'ya hiçbir zaman yalnız gitme. Flash + dog kombosu olmadan peek alma. Iso shield açık durumda tek başına gittiğinde kaybedersin.
+Skye oynuyorsan Iso'ya asla yalnız gitme. Flash + bot kombosu olmadan peek alma. Iso shield açıkken tek başına gidersen kaybedersin.
 
 **Özet:** Iso 1v1'e çekerse kazanır. Skye takımıyla kalırsa kazanır. Sen hangisini zorlayabilirsin?

@@ -1,46 +1,46 @@
 # MATCHUP: Chamber vs Sova
 
 ## Etkileşim Özeti
-Sova'nın Recon Bolt'u Op açını ifşa eder — açıdan çıkmadan önce. Owl Drone seni açıdan koparır ya da tarar. Shock Dart Trademark'ini haritanın öbür ucundan siler. Sen TP ile buna cevap verirsin. Sova bilgiyi toplamadan önce öldürürsen açında kalırsın. Toplayamazsan açın haritadan silinir.
+Sova'nın recon'u sen açıdan çıkmadan op pozisyonunu ele veriyor. Drone seni açından koparıyor ya da tarayıp işaretliyor. Shock dart tuzağını haritanın öbür ucundan siliyor. Sen de TP ile cevap veriyorsun. Sova bilgiyi toplamadan onu öldürürsen açında kalırsın; toplamasına izin verirsen açın haritadan silinir.
 
 ## Yaygın Cezalandırma Kalıpları
 
-**IF**: Sova Recon Bolt ile Op pozisyonunu açığa çıkarıp hemen Owl Drone gönderiyorsa
-**MEANING**: Drone seni iki seçenek arasında sıkıştırır. Drone'u vurursan Op peek'ini kaybedersin. Vurmazsan tüm takım etiketlenir ve üstüne yığılır. Shock Dart Trademark'i aynı anda temizler. Takım Recon + drone bileşimiyle hem bilgi hem baskı kazanır.
-**COUNTER**: Recon havadayken Headhunter ile vur — taramadan önce düşer. Sova drone pilotluk yaparken hareketsiz kalır, o an Op çek. Tarandıktan sonra TP et — bilgi bayat olur, takım boş konuma push eder.
-**WHY**: Sova'nın gücü bilginin hızından geliyor. TP ile konumu değiştirirsen bilgi işe yaramaz.
+**IF**: Sova recon ile op pozisyonunu açığa çıkarıp hemen drone gönderiyorsa
+**MEANING**: Drone seni iki kötü seçenek arasına sıkıştırıyor. Drone'u vurursan op peek'ini açığa verirsin, vurmazsan tüm takım işaretlenir ve üstüne yığılır. Shock dart aynı anda tuzağını da temizliyor. Sova recon + drone ile hem bilgiyi hem baskıyı aynı anda kuruyor.
+**COUNTER**: Recon havadayken tabancanla tek tek nişan al ve düşür — taramadan önce gitsin. Sova drone'u sürerken yerinde donar, tam o anda op'unu çek. Tarandıysan TP et — bilgi bayatlar, takım boş konuma push eder.
+**WHY**: Sova'nın gücü bilginin hızında. Konumunu TP ile kaydırırsan topladığı bilgi çöpe gider.
 
-**IF**: Her Recon sonrası TP ediyorsun ve Sova'nın bilgisi sürekli bayat kalıyorsa
-**MEANING**: Sova'nın takımı bilgiyi değerlendiremiyor çünkü sen zaten oradan gittin. Bu seni her raund serbest bir Op peek'e sokar.
-**COUNTER**: Sova, Recon attıktan sonra takım hemen push etmeli — beklersen Chamber çoktan gitmiştir. Dart ve drone'u birbirine karıştır, aynı rotayı izleme. Chamber'in TP hedefini önceden tahmin et, oraya Shock Dart bırak.
-**WHY**: TP sonrası Chamber'in gittiği açı sınırlı — Sova o açıları ezberleyince TP artık kaçış değil, tuzak olur.
+**IF**: Her recon sonrası TP edip Sova'nın bilgisini sürekli bayat bırakıyorsan
+**MEANING**: Sova'nın takımı topladığı bilgiyi kullanamıyor çünkü sen çoktan oradan gittin. Bu sana her raund bedava bir op peek'i kazandırır.
+**COUNTER**: Sova açısından: recon attıktan sonra takım anında push etmeli — bir saniye beklersen Chamber çoktan gitmiştir. Dart ile drone'u harmanla, hep aynı rotayı izleme. Chamber'in TP çıkış açısını önceden oku ve oraya shock dart bırak.
+**WHY**: TP sonrası Chamber'in çıkabileceği açı sayılı. Sova o açıları ezberleyince TP artık kaçış değil, tuzak olur.
 
-**IF**: Sova Hunter's Fury'yi bilinen TP anchor'ından geçirip Trademark'leri Shock Dart ile temizliyorsa
-**MEANING**: Hem TP anchor'ın hem tuzak ağın aynı anda söküldü. Bir sonraki raunda anchor'sız ve Trademark'siz başlarsın — kurulumun sıfırlandı.
-**COUNTER**: Trademark'i standart Shock Dart açılarından görünmeyen noktalara koy — dar köşeler, duvarın arkası. Her raund anchor'ı değiştir. Sova ulti şarj olduğunda anchor'ı o ulti gelmeden taşı.
-**WHY**: Anchor ve Trademark'i aynı yerde bırakırsan Sova seni harita bilgisiyle bedavaya atar. Değişkenlik getir.
+**IF**: Sova ult'ünü bilinen TP anchor'ından geçirip tuzaklarını shock dart ile temizliyorsa
+**MEANING**: TP anchor'ın da tuzak ağın da aynı anda söküldü. Sonraki raunda anchor'sız ve tuzaksız başlarsın — bütün kurulumun sıfırlandı.
+**COUNTER**: Tuzağını standart shock dart açılarından görünmeyen yerlere koy — dar köşeler, duvarın arkası. Her raund anchor'ını değiştir. Sova ult'ü dolduğunda anchor'ını ult gelmeden taşı.
+**WHY**: Anchor ve tuzağı hep aynı yerde bırakırsan Sova seni harita bilgisiyle bedavaya alır. Yerini değiştir, tahmin edilebilir olma.
 
 ## Tekrarlayan Başarısızlık Ne Anlama Gelir
-**Chamber** tarandıktan sonra hâlâ aynı açıda duruyorsa: Recon sesi duyulduğu an TP'ye bas ve farklı açıya geç. Tarandıktan sonra oturmak — Sova takıma haritayı hediye eder.
+**Chamber** tarandıktan sonra hâlâ aynı açıda duruyorsa: recon sesini duyduğun an TP'ye bas ve farklı açıya geç. Tarandıktan sonra orada oturmak, Sova'ya haritayı hediye etmek demektir.
 
-**Sova** drone'u açarken Chamber'a ölüyorsa: Chamber'in görebildiği açıdan drone kullanıyorsun. Drone'u duvarın arkasından, Chamber'in sightline'ı dışından aç. Pilotluk yaparken bedenin yerinde durur.
+**Sova** drone'u açarken Chamber'a ölüyorsa: drone'u Chamber'in görebildiği açıdan kullanıyorsun. Drone'u duvarın arkasından, Chamber'in sightline'ı dışından aç. Drone'u sürerken bedenin yerinde donar.
 
 ## AIMLO Ne Demeli
 ### Oyuncu cezalandırılan taraftayken
-**Chamber ifşa edilip avlanıyorsa**: "Recon sesi duyulduğu an TP'ye bas — aynı açıda durma. Sova'nın Recon'u attığı yer değil, takımın push ettiği yer önemli. Oradan git."
+**Chamber ifşa edilip avlanıyorsa**: "Recon sesini duyduğun an TP'ye bas, aynı açıda kalma. Sova recon'u nereye attı değil, takım nereye push ediyor önemli. Oradan git."
 
-**Sova drone kullanırken Chamber'a ölüyorsa**: "Chamber'in görebildiği yerden drone açıyorsun. Köşenin arkasına çekil, sonra drone'u uçur. Bedenin açıkta durursa Chamber seni drone'dan önce öldürür."
+**Sova drone kullanırken Chamber'a ölüyorsa**: "Drone'u Chamber'in gördüğü yerden açıyorsun. Köşenin arkasına çekil, sonra drone'u uçur. Bedenin açıkta kalırsa Chamber seni drone'dan önce vurur."
 
 ### Oyuncu cezalandıran taraftayken
-**Sova Chamber'i köşeye sıkıştırıyorsa**: "Her Recon'dan sonra takım hemen yürüsün — Chamber TP etse bile yeni açıya hazırsınız. Bilgi bayatlamadan kullan."
+**Sova Chamber'i köşeye sıkıştırıyorsa**: "Her recon'dan sonra takım hemen yürüsün — Chamber TP etse bile yeni açıya hazır olursunuz. Bilgiyi bayatlamadan kullan."
 
-**Chamber Sova'nın drone'unu cezalandırıyorsa**: "Drone kalktığını gördüğün an baskıyı sürdür — Sova o an hareketsiz. O pencerede çek veya push et."
+**Chamber Sova'nın drone'unu cezalandırıyorsa**: "Drone'un kalktığını gördüğün an baskıyı sürdür — Sova o an hareketsiz. O pencerede çek ya da push et."
 
 ## Rank Modülasyonu
-**LOW**: Sova Recon attığında Chamber aynı açıda oturur. Ona şunu öğret: Recon sesi duyulunca TP, açı değişikliği. Başka bir şey değil.
+**LOW**: Sova recon attığında Chamber aynı açıda oturuyor. Ona tek şeyi öğret: recon sesini duyunca TP'ye bas, açını değiştir. Başka hiçbir şey değil.
 
-**MID**: Sova Chamber'i tarar ama takım bilgiyi değerlendirmez, push etmez. Sova'ya şunu öğret: Recon attıktan sonra sesli bildir ve takım hemen yürüsün. Chamber'a şunu öğret: TP sonrası Sova'nın önceki raundlarda dart bırakmadığı açıya geç.
+**MID**: Sova Chamber'i tarıyor ama takım bilgiyi kullanmıyor, push etmiyor. Sova'ya öğret: recon attıktan sonra sesli çağır ve takım hemen yürüsün. Chamber'a öğret: TP sonrası Sova'nın önceki raundlarda dart bırakmadığı açıya geç.
 
-**HIGH**: İkisi de temel döngüyü biliyor. Sova'ya şunu öğret: 1 düşman düştüğünde Owl Drone'u o boşluğa sok, Shock Dart'ı Trademark'e değil anchor'a at. Chamber'a şunu öğret: Sova ulti şarj olduğu raunda anchor'ı standart pozisyondan çıkar.
+**HIGH**: İkisi de temel döngüyü biliyor. Sova'ya öğret: bir düşman düştüğünde drone'u o boşluğa sok, shock dart'ı tuzağa değil anchor'a at. Chamber'a öğret: Sova ult'ü dolduğu raunda anchor'ını standart pozisyondan çıkar.
 
-**ELITE**: Chamber Recon gelmeden TP yapar — önceki raundlardaki Recon açısını okuyarak pozisyonunu değiştirir. Sova TP hedefini ezberler ve o noktaya önceden dart bırakır. Öğretilecek şey: Chamber'a öngörülü TP, Sova'ya TP hedef tahmini ve o noktaya önceden dart yerleştirme.
+**ELITE**: Chamber recon gelmeden TP yapıyor — önceki raundların recon açısını okuyup pozisyonunu önceden değiştiriyor. Sova ise TP hedefini ezberleyip o noktaya peşinen dart bırakıyor. Öğretilecek: Chamber'a öngörülü TP, Sova'ya TP hedefini tahmin edip o noktaya önceden dart yerleştirme.

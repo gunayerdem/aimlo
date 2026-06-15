@@ -8,139 +8,139 @@ tags: [post-plant, spike, lineup, retake-defense, crossfire, spread]
 
 # POST-PLANT PLAYBOOK — Plant Sonrası Taktik Kitabı
 
-Round'un ikinci yarısı plant'ten sonra başlar. Plant koydun mu, artık savunma modundasın. Gold-Plat'ta bu yarı genelde heba edilir — spike'ın yanında durulur, utility önceden biter, kimse nereye bakacağını bilmez. Bu dosya plant sonrası her durumda ne yapacağını gösterir.
+Round'un ikinci yarısı plant'ten sonra başlar. Plant'i koydun mu artık savunma modundasın. Gold-Plat'ta bu yarı genelde heba edilir: spike'ın dibinde durulur, util erkenden tükenir, kimse nereye bakacağını bilmez. Bu dosya plant sonrası karşına çıkan her durumda ne yapacağını gösterir.
 
 ## POST-PLANT'İN TEMEL PRENSİBİ
 
-Plant biter bitmez her oyuncunun nerede duracağını ve hangi açıyı tutacağını plant öncesinde karar ver. Plant koymadan önce kim nereye gidiyor, kim neyi tutuyor — bunu sormak plant bittikten sonra çok geç.
+Plant biter bitmez kimin nerede duracağına ve hangi açıyı tutacağına plant'ten ÖNCE karar ver. Kim nereye gidiyor, kim neyi tutuyor — bunu plant bittikten sonra düşünmeye kalkarsan çok geç.
 
 ### Üç Temel Kural
 
-1. **Plant biter bitmez yerini değiştir.** Spike'ın tam yanında durma. Rakip lineuplarını spike'ın konumuna göre ayarlar. Yerinde kalan oyuncu kolayca molly'lenir.
-2. **Çapraz açı kur.** İki oyuncu aynı yönden bakmasın. Defuse yapmaya gelen rakip iki farklı noktadan vurulabilmeli.
-3. **En az bir utility'ni sakla.** Siteye girerken her şeyi harcama. Elinde molly, smoke veya flash olmadan plant sonrası defuse durdurmak mümkün değil.
+1. **Plant biter bitmez yerini değiştir.** Spike'ın dibinde durma. Rakip lineup'larını spike'ın konumuna göre ayarlar; yerinde kalan oyuncu kolayca molly'lenir.
+2. **Çapraz açı kur.** İki oyuncu aynı yönden bakmasın. Defuse'a gelen rakibi iki ayrı noktadan vurabilmelisin.
+3. **En az bir util'ini sakla.** Siteye girerken her şeyi harcama. Elinde molly, smoke veya flash olmadan plant sonrası defuse'u durduramazsın.
 
 ## PLANT SPOT SEÇİMİ
 
-Nereye koyacağını değil, plant sonrası neyi savunacağını düşünerek karar ver.
+Spike'ı nereye koyacağını değil, plant sonrası neyi savunacağını düşünerek karar ver.
 
 ### Default Plant (Orta Nokta)
-Site'ın ortası, çapraz açı kurmak için en uygun yer. İki farklı noktadan tutulabilir, cover var. Dezavantaj: rakibin hazırlayabileceği lineuplar orta spota göre ayarlıdır.
+Site'ın ortası, çapraz açı kurmak için en uygun yer. İki ayrı noktadan tutulur, cover var. Dezavantajı: rakibin hazır lineup'ları çoğunlukla orta spota ayarlıdır.
 
 ### Kapalı Plant (Duvar veya Köşe Yanı)
-Spike zor görünür, retake riski azalır. Ama sana da dar açı kalır. Rakip lineup ağırlıklıysa veya retake'e güvenmiyorsan tercih et.
+Spike zor görünür, retake riski düşer. Ama sana da dar açı kalır. Rakip lineup ağırlıklı oynuyorsa veya retake'e güvenmiyorsan bunu tercih et.
 
 ### Açık Plant (Geniş Alan)
-Defuse kolay görünür ama çapraz açı daha rahat kurulur. Rakip Op taşıyorsa spike'ı bu noktadan tutmadan önce uzun hattı smoke'la kes.
+Defuse kolay görünür ama çapraz açıyı çok daha rahat kurarsın. Rakip op taşıyorsa spike'ı bu noktadan tutmadan önce uzun hattı smoke'la kes.
 
 ### Ne Zaman Hızlı, Ne Zaman Yavaş Plant?
 
-**Hızlı plant:** Site içinde hala rakip varsa veya rotate yaklaşıyorsa, hemen koy. Temizlik tam değil ama beklersen rotate gelir.
+**Hızlı plant:** Site içinde hâlâ rakip varsa veya rotate yaklaşıyorsa hemen koy. Temizlik tam değil ama beklersen rotate yetişir.
 
-**Yavaş plant:** Site temiz, flanktan bilgi geldi. Çevreyi bir daha gör, sonra koy. Plant sırasında ölüm riskini sıfırla.
+**Yavaş plant:** Site temiz, flank'tan bilgi geldi. Çevreyi bir kez daha tara, sonra koy. Plant sırasında ölüm riskini sıfıra indir.
 
-**Karar:** Site içinde 2+ rakip görüldüyse hızlı plant. Site temiz ve flanktan bilgi geldiyse yavaş plant.
+**Karar:** Site içinde 2+ rakip gördüysen hızlı plant. Site temiz ve flank'tan bilgi geldiyse yavaş plant.
 
 ## POST-PLANT POZİSYON MANTIĞI
 
 ### Yayılma mı, Yığılma mı?
 
-**Yayılma (Varsayılan):** Oyuncular farklı noktalarda. Retake eden rakip bir seni görürken diğeri onu vurabilir. Çok fazla kişi kayıpsa yayılma işe yaramaz — her nokta zayıf kalır.
+**Yayılma (Varsayılan):** Oyuncular ayrı noktalarda. Retake'e gelen rakip birini görürken diğeri onu vurur. Çok kişi kaybettiysen yayılma işe yaramaz — her nokta tek başına zayıf kalır.
 
-**Yığılma:** 2-3 oyuncu aynı noktada. Az kişiyle bile kill değişimi garanti. Tek açı tutulur ama rakip diğer taraftan defuse yapabilir.
+**Yığılma:** 2-3 oyuncu aynı noktada. Az kişiyle bile kill değişimini garantiye alırsın. Tek açıyı tutarsın ama rakip diğer taraftan defuse'a kaçabilir.
 
 **Karar:** Elinde 4+ oyuncu varsa yayıl. 3 ve altıysa yığıl.
 
 ### Çapraz Açı Nasıl Kurulur?
 
-İki oyuncu aynı noktaya bakmasın. Biri rakibi görürken diğeri onun kaçış veya defuse hattına baksın. Rakip bir tarafa odaklanınca diğer taraftan vurulur.
+İki oyuncu aynı noktaya bakmasın. Biri rakibi karşılarken diğeri onun kaçış veya defuse hattını tutsun. Rakip bir tarafa odaklanınca diğer taraftan açığa düşer.
 
 **A Site örnek dizilim:**
 - 1 oyuncu A giriş hattında
 - 1 oyuncu site içi cover arkasında
-- 1 oyuncu üst veya yandan alışılmadık açıda
+- 1 oyuncu üstten veya yandan off-angle'da
 - 1 oyuncu flank yolunda
 - 1 oyuncu spike yakınını izliyor
 
-Retake eden rakip bir açıya girince ikinci oyuncu o rakibi açığa düşürür.
+Retake'e gelen rakip bir açıya girince ikinci oyuncu onu açığa düşürür.
 
 ## POST-PLANT UTILITY KULLANIMI
 
 ### Öncelik Sırası
 
-**1. Hasar utility (molly/ısırma):** Brimstone molly, Viper snake bite, KAY/O molly. Defuse yapan rakibi kanaldan çıkarır. Her plant öncesinde bu utility'lerden birini mutlaka sakla.
+**1. Hasar util'i (molly):** Defuse'a oturan rakibi spike'tan kaldırır. Her plant öncesinde elinde bir molly mutlaka tut.
 
-**2. Duman (smoke):** Rakibin defuse hattını kes. Dumanı spike'ın üstüne değil, rakibin giriş açısına at.
+**2. Smoke:** Rakibin defuse hattını kes. Smoke'u spike'ın üstüne değil, rakibin giriş açısına at.
 
-**3. Bilgi utility (dart, drone, kamera):** Rotate hattını görürsen pozisyonunu ona göre ayarla. Sova dart ile plant çevresi, Cypher kamera ile rakibin hangi yoldan geldiğini gör.
+**3. Bilgi util'i (recon, kamera):** Rotate hattını görürsen pozisyonunu ona göre ayarla. Recon ile plant çevresini, kamerayla rakibin hangi yoldan geldiğini oku.
 
-**4. Flash:** Defuse yapmaya gelen rakip peek attığında önüne gönder. Doğru zamanlı flash neredeyse bedava kill.
+**4. Flash:** Defuse'a gelen rakip peek attığı an önüne gönder. Doğru zamanlanan flash neredeyse bedava kill.
 
 ### Ne Zaman Kullanırsın?
 
-**Defuse sesi duyar duymaz molly at.** Rakip defuse'a başladıysa artık oradan ayrılması zor. Hasar hemen başlar, geri çekilemez.
+**Defuse sesini duyar duymaz molly at.** Rakip defuse'a oturduysa oradan kalkması zor. Hasar anında başlar, geri çekilemez.
 
-**Dumanı plant öncesinde atma.** Smoke'un süresi biter, retake tam gelirken saha açık kalır.
+**Smoke'u plant'ten önce atma.** Süresi biter, retake tam gelirken saha açık kalır.
 
-**Flashı peek'ten önce at.** Sonra atarsan rakip zaten açıya girmiş, kör olması işe yaramaz.
+**Flash'ı peek'ten önce at.** Sonra atarsan rakip zaten açıya girmiştir, kör olması işe yaramaz.
 
 ## DEFUSE SESİNİ OKUMA
 
-Defuse sesi duymadan peek atma. Erken peek, rakibin hazır beklediği açıya girmen demek.
+Defuse sesini duymadan peek atma. Erken peek, rakibin hazır beklediği açıya girmen demek.
 
-Defuse sesini duyduğunda şunları biliyorsun:
+Defuse sesini duyduğunda şunları bilirsin:
 - Rakip oraya kilitlendi, artık kaçamaz
-- Spike'a yakın bir yerde, tahmin edebilirsin
+- Spike'a yakın bir yerde, konumunu tahmin edersin
 - Defuse sırasında savunmasız — peek timing'in tam bu an
 
-**Sahte defuse:** Rakip defuse sesi çıkarıp bekler, sen peek atarsın, o seni vurur. Ses kesilip tekrar başladıysa sahte defuse. Ses kesildikten sonra bekle, tekrar başlarsa peek at.
+**Sahte defuse:** Rakip defuse sesi çıkarıp bekler, sen peek atınca seni vurur. Ses kesilip tekrar başladıysa sahte defuse demektir. Ses kesildikten sonra bekle, tekrar başlarsa peek at.
 
 ## OYUNCU SAYISINA GÖRE PLAN
 
 ### 5v5 Plant Sonrası
-Yayıl, çapraz açı kur, utility'yi paylaş. 4 farklı nokta tutulur, 1 kişi flank izler. En rahat senaryo.
+Yayıl, çapraz açı kur, util'i paylaştır. 4 ayrı noktayı tut, 1 kişi flank izlesin. En rahat senaryo.
 
 ### 4v5 Plant Sonrası
-Yayıl ama bir açıyı bırak. Flank izlemek zorunlu, çapraz açı hala kurulabilir. En sık yaşanan durum.
+Yayıl ama bir açıyı boş bırak. Flank izlemek zorunlu, çapraz açıyı yine de kurarsın. En sık karşına çıkan durum.
 
 ### 3v5 Plant Sonrası
-Yığılmaya geç. 2 kişi aynı noktada, 1 kişi alışılmadık açıda. Her kayıp kritik, defuse sesini bekle.
+Yığılmaya geç. 2 kişi aynı noktada, 1 kişi off-angle'da dursun. Her kayıp kritik — defuse sesini bekle.
 
 ### 2v5 Plant Sonrası
-Defuse sesi duyana kadar görünme. Ses gelince ikisi aynı anda farklı iki noktadan peek at. Yalnız peek etme, biri mutlaka ölür.
+Defuse sesini duyana kadar görünme. Ses gelince ikiniz aynı anda iki ayrı noktadan peek atın. Yalnız peek etme, biri mutlaka ölür.
 
 ### 1v5 Plant Sonrası
-Görünme. Defuse başlar başlamaz peek at, 1 kill al, tekrar saklan. 1 kill aldıktan sonra tekrar görünmeden defuse sesini bekle.
+Görünme. Defuse başlar başlamaz peek at, 1 kill al, tekrar saklan. Kill'i aldıktan sonra görünmeden bir sonraki defuse sesini bekle.
 
 ## RETAKE TARAFI — Plant Geldi, Sen Savunmadasın
 
-Takımın siteyi kaptırdı ve plant oldu. Retake edeceksin.
+Takımın siteyi kaptırdı, spike yerde. Retake edeceksin.
 
-- **Utility olmadan girme.** Flash + molly + duman olmadan retake girişi başarısız biter.
+- **Util'siz girme.** Flash + molly + smoke olmadan retake girişi başarısız biter.
 - **Birlikte gir.** Tek kişi retake yapmaz. 2+ kişi aynı anda girmeli.
-- **Önce bilgi topla.** Cypher kamerası, Sova dart veya takım callout'u ile spike nerede, kaç rakip var, hangi açıdan tutuyorlar öğren. Bunu bilmeden site girişine geçme.
-- **Önce rakibi temizle, sonra spike'a git.** Rakipler hayattayken defuse yapamazsın zaten.
+- **Önce bilgi topla.** Kamera, recon veya takım callout'uyla spike nerede, kaç rakip var, hangi açıdan tutuyorlar öğren. Bunu bilmeden site girişine yüklenme.
+- **Önce rakibi temizle, sonra spike'a git.** Rakipler hayattayken zaten defuse yapamazsın.
 
 ## HARİTAYA GÖRE POST-PLANT NOTLARI
 
-**Haven:** 3 site olduğu için rotate uzun. Rakip geç gelir, lineup'lar çok işe yarar. Brimstone molly ve Viper orb burada defuse'u doğrudan durdurur.
+**Haven:** 3 site olduğu için rotate uzun. Rakip geç gelir, lineup'lar çok işe yarar. Molly ve smoke-duvar burada defuse'u direkt durdurur.
 
-**Bind:** Teleport'tan retake gelebilir, flank izlemek şart. Plant sonrası her iki yönden açı tut.
+**Bind:** Teleport'tan retake gelebilir, flank izlemek şart. Plant sonrası her iki yönden de açı tut.
 
 **Ascent:** Kapılar açıksa çapraz açı genişler, kapalıysa daralır. Plant sonrası kapı durumunu bil.
 
-**Split:** Dar siteler, yığılma daha işlevsel. Yakın mesafe çapraz açı.
+**Split:** Dar siteler, yığılma daha işlevsel. Yakın mesafe çapraz açı kur.
 
 **Sunset:** Yakın mesafe haritası, pompalı ve SMG tehdidi yüksek. Uzaktan açı tut.
 
-**Icebox/Breeze:** Uzun hatlar, Op tehdidi var. Uzun açıları kesmek için duman at, açık tutma.
+**Icebox/Breeze:** Uzun hatlar, op tehdidi var. Uzun açıları kesmek için smoke at, açık tutma.
 
-**Lotus:** Döner kapılar her round değişir. Kapının hangi yönde olduğunu takip et, post-plant açıların buna göre değişir.
+**Lotus:** Döner kapılar her round değişir. Kapının hangi yönde olduğunu takip et, post-plant açıların buna göre kayar.
 
 ## RANK'A GÖRE ODAK NOKTALARI
 
-**Gold-Plat:** Plant biter bitmez yerini değiştir. Spike'ın yanında durmak molly'ye davetiye çıkarmak. Çapraz açı kur, bir utility'ni sakla.
+**Gold-Plat:** Plant biter bitmez yerini değiştir. Spike'ın dibinde durmak molly'ye davetiye çıkarmaktır. Çapraz açı kur, bir util'ini sakla.
 
-**Diamond-Ascendant:** Açıları biliyorsun ama zamanlama kayıyor. Defuse sesi duymadan peek atma. Molly'yi defuse başlar başlamaz at, bekleme.
+**Diamond-Ascendant:** Açıları biliyorsun ama timing'in kayıyor. Defuse sesini duymadan peek atma. Molly'yi defuse başlar başlamaz at, bekleme.
 
-**Immortal-Radiant:** Plant spot ve utility zamanlamanı her round aynı tutma. Radiant oyuncular pattern okur — aynı spota koyarsan lineup hazır bekler. Plant noktasını ve kullandığın utility'yi round içinde değiştir.
+**Immortal-Radiant:** Plant spot ve util timing'ini her round aynı tutma. Radiant oyuncular pattern okur — aynı spota koyarsan lineup hazır bekler. Plant noktanı ve kullandığın util'i round içinde değiştir.

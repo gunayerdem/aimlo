@@ -11,110 +11,110 @@ tags: [matchup, killjoy, kayo, sentinel, initiator]
 
 ## 1. Matchup Özü
 
-KAY/O'nun suppress knife'ı Killjoy'un tüm cihazlarını kapatır — turret, alarmbot, nanoswarm, hepsi. Killjoy olarak oynuyorsan bu matchup'ta bir şeyi çözmek zorundasın: cihazlarını knife'ın göremeyeceği yere koy. KAY/O olarak oynuyorsan bir şeyi çözmek zorundasın: knife atmadan önce turret'i bul.
+KAY/O'nun suppress knife'ı Killjoy'un bütün cihazlarını susturur — turret, bot, molly, hepsi kapanır. Killjoy oynuyorsan tek bir işin var: cihazlarını knife'ın göremeyeceği yere koy. KAY/O oynuyorsan tek bir işin var: knife atmadan önce turret'i bul.
 
 ## 2. Kim Avantajlı?
 
 **Killjoy lehine durumlar:**
-- KAY/O knife kullandı — suppress bitti, cihazların açık, şimdi site'ı kilitle
-- Dar geçit (Bind Hookah, Sunset B) — turret KAY/O girerken tag'ler, kaçacak yer yok
-- Lockdown hazır — knife menzili dışından at, KAY/O dondurulur, suppress gelemez
-- KAY/O yalnız giriyorsa — suppress olsa bile arkası yok, trade yok
+- KAY/O knife'ını kullandı — suppress bitti, cihazların geri açıldı, şimdi site'ı kilitle.
+- Dar geçit (Bind Hookah, Sunset B) — turret KAY/O içeri girerken hasar verir, kaçacak yer yok.
+- Ult'ın hazır — knife menzilinin dışından at, KAY/O donar, knife atamaz.
+- KAY/O yalnız giriyorsa — suppress yese bile arkası boş, trade gelmez.
 
 **KAY/O lehine durumlar:**
-- Knife Killjoy cihaz hattına saplandı — turret, alarmbot, nanoswarm hepsi kapanır, site boş kalır
-- Flash Killjoy peek anında geldi — aim bozulur, turret çalışır ama Killjoy kendisi kördür
-- Null Cmd açık — tüm cihazların kapanır, KAY/O hasar alsa bile kalkar
-- Molly + knife aynı noktaya geldi — hem HP hem cihaz gider, iki ceza aynı anda
+- Knife Killjoy'un cihaz hattına saplandı — turret, bot, molly hepsi kapanır, site boş kalır.
+- Flash Killjoy peek anında patladı — aim bozulur, turret çalışmaya devam eder ama Killjoy'un kendisi kör.
+- KAY/O ult'ı açık — bütün cihazların kapanır, KAY/O hasar yese bile geri kalkar.
+- Molly + knife aynı noktaya geldi — hem HP hem cihaz gider, iki ceza aynı anda.
 
-**Dengeli:** Haven, Ascent, Lotus'ta knife zamanlamasına ve cihaz yerleşimine göre değişir.
+**Dengeli:** Haven, Ascent, Lotus'ta iş knife zamanlamasına ve cihaz yerleşimine kalır.
 
 ## 3. Key Düellolar
 
-**IF** KAY/O suppress knife Killjoy cihaz hattına saplandı
-**MEANING** Turret, alarmbot, nanoswarm kapanır — Killjoy cihazlarından gelen bilgi ve hasar sıfırlanır
-**COUNTER** Knife sesini duyar duymaz köşeye çekil. Knife'ın kendisi az HP'li — görüyorsan vur, yok et. Cihazlarını knife menzilinin dışına, duvarın arkasına veya köşeye koy. Knife seni göremezse kapatamaz.
-**WHY** Knife Killjoy'u cihazlarından tamamen soyar. Ama knife'ı yok edersen suppress biter — bu matchup'ın dönüm noktası.
+**IF** KAY/O suppress knife'ı Killjoy'un cihaz hattına saplandı
+**MEANING** Turret, bot, molly kapanır — Killjoy'un cihazlarından gelen bütün bilgi ve hasar sıfırlanır.
+**COUNTER** Knife sesini duyar duymaz köşeye çekil. Knife'ın HP'si düşük — görüyorsan vur, yok et. Cihazlarını knife menzilinin dışına, duvarın arkasına ya da köşeye koy. Knife seni göremezse susturamaz.
+**WHY** Knife, Killjoy'u cihazlarından tamamen soyar. Ama knife'ı yok edersen suppress de biter — bu matchup'ın dönüm noktası burası.
 
 ---
 
-**IF** KAY/O flash Killjoy peek hattına atıldı
-**MEANING** Aim bozulur, Killjoy kör anda açıkta kalır — turret çalışır ama Killjoy kendisi savunmasızdır
-**COUNTER** Flash sesini duyar duymaz köşe al, peek atma. Turret flash'tan bağımsız çalışır — arkanda tag'lemeye devam eder.
-**WHY** Flash Killjoy'un aim'ini etkiler, turret'i etkilemez. Köşede beklersen turret iş yapar, sen hasar almadan çıkarsın.
+**IF** KAY/O flash'ı Killjoy'un peek hattına attı
+**MEANING** Aim bozulur, Killjoy kör halde açıkta kalır — turret çalışır ama oyuncunun kendisi savunmasız.
+**COUNTER** Flash sesini duyar duymaz köşe al, peek atma. Turret flash'tan etkilenmez — arkanda hasar vermeye devam eder.
+**WHY** Flash Killjoy'un aim'ini bozar, turret'i bozmaz. Köşede beklersen turret işini yapar, sen hasar almadan çıkarsın.
 
 ---
 
-**IF** Killjoy Lockdown'ı KAY/O giriş hattına attı
-**MEANING** Menzil içindeki KAY/O donar, knife atamaz — suppress gelemez
-**COUNTER** KAY/O menzil sesini duyar duymaz geri çekil. Menzil dışından knife atabilirsin ama içerideyken throw animasyonu kesilir.
-**WHY** Lockdown KAY/O'nun knife atmasını fiziksel olarak engeller. İçeride yakalanırsan suppress şansın sıfır.
+**IF** Killjoy ult'ını KAY/O'nun giriş hattına attı
+**MEANING** Menzil içindeki KAY/O donar, knife atamaz — suppress gelemez.
+**COUNTER** KAY/O, ult sesini duyar duymaz geri çekil. Menzil dışından knife atabilirsin ama içerideyken atış animasyonun kesilir.
+**WHY** Killjoy'un ult'ı KAY/O'nun knife atmasını fiziksel olarak engeller. İçeride yakalanırsan suppress şansın sıfır.
 
 ---
 
-**IF** KAY/O Null Cmd açtı, Killjoy site'ında
-**MEANING** Tüm cihazların kapanır, Killjoy duvar arkasına çekilse de bilgi ve hasar sıfır — KAY/O hasar alsa bile kalkar
-**COUNTER** Ult sesini duyar duymaz cover'a gir, bekle. Ult bitince cihazları hemen yeniden aktive et. Ult süresince aim duelünü kabul etme — utility olmadan kazanamazsın.
-**WHY** Null Cmd Killjoy'un tüm kimliğini geçici siler. Direkt cevap yok — ult bitene kadar hayatta kal, sonra site'ı yeniden kur.
+**IF** KAY/O ult'ını açtı, Killjoy site'ında
+**MEANING** Bütün cihazların kapanır, Killjoy duvarın arkasına çekilse bile bilgi ve hasar sıfır — KAY/O hasar yese bile geri kalkar.
+**COUNTER** Ult sesini duyar duymaz cover'a gir, bekle. Ult bitince cihazlarını hemen yeniden kur. Ult açıkken aim düellosuna girme — util olmadan o duelloyu kazanamazsın.
+**WHY** KAY/O'nun ult'ı Killjoy'un bütün kimliğini geçici siler. Direkt cevabı yok — ult bitene kadar hayatta kal, sonra site'ı baştan kur.
 
 ---
 
-**IF** Killjoy turret KAY/O knife hattında
-**MEANING** Turret knife throw animasyonunu yakalar, KAY/O throw anında HP kaybeder
-**COUNTER** KAY/O knife atmadan önce turret'i bul — throw pozisyonunu turret açısı dışından seç.
-**WHY** Throw animasyonu sabittir, KAY/O o an hareket edemez. Turret bedava hasar verir. Radiant KJ oyuncuları turret'i zaten knife'ın gelebileceği açıya değil, entry noktasına koyar — knife atsan bile turret içeride bekler.
+**IF** Killjoy turret KAY/O'nun knife hattında
+**MEANING** Turret, knife atış animasyonunu yakalar — KAY/O atış anında HP kaybeder.
+**COUNTER** KAY/O knife atmadan önce turret'i bul, atış pozisyonunu turret açısının dışından seç.
+**WHY** Atış animasyonu sabittir, KAY/O o an yerinden kıpırdayamaz. Turret bedava hasar verir. Radiant KJ oyuncuları turret'i knife'ın gelebileceği açıya değil, doğrudan entry noktasına koyar — knife atsan bile turret içeride bekliyor olur.
 
 ---
 
-**IF** Killjoy nanoswarm KAY/O knife atış hattında
-**MEANING** Throw pozisyonu sabittir — nanoswarm throw anında aktive edilirse KAY/O hasar alır ve suppress de gidebilir
-**COUNTER** KAY/O nanoswarm sesi çıkarsa throw pozisyonunu değiştir, aynı noktadan atma.
-**WHY** KAY/O knife atarken hareket edemez. Radiant KJ oyuncuları nanoswarm'ı KAY/O'nun knife atabileceği 2-3 noktaya göre önceden yerleştirir — knife gelir gelmez aktive eder, throw anında hasar kesilir.
+**IF** Killjoy molly KAY/O'nun knife atış hattında
+**MEANING** Atış pozisyonu sabittir — molly tam o anda patlatılırsa KAY/O hem hasar alır hem suppress'i boşa gidebilir.
+**COUNTER** KAY/O, molly sesini duyarsa atış pozisyonunu değiştir, aynı noktadan atma.
+**WHY** KAY/O knife atarken yerinden kıpırdayamaz. Radiant KJ oyuncuları molly'yi KAY/O'nun knife atabileceği 2-3 noktaya göre önceden kurar — knife gelir gelmez patlatır, atış anında hasarı keser.
 
 ---
 
 **IF** KAY/O molly + knife aynı noktaya geldi, Killjoy anchor pozisyonunda
-**MEANING** Hem HP kaybı hem cihaz kaybı — iki ceza aynı anda, Killjoy hem hasar alır hem kördür
-**COUNTER** Anchor pozisyonunu molly hattı ve knife hattı dışına al. İki lineup aynı noktayı hedefliyorsa orası artık güvensiz — değiştir.
-**WHY** KAY/O zincir utility aynı noktayı vurur. Pozisyonu değiştirmek tek cevap, iki hattı aynı anda bypass etmen gerekir.
+**MEANING** Hem HP kaybı hem cihaz kaybı — iki ceza aynı anda, Killjoy hem hasar alır hem kör kalır.
+**COUNTER** Anchor pozisyonunu molly hattının ve knife hattının dışına al. İki lineup aynı noktayı tutuyorsa orası artık güvenli değil — yer değiştir.
+**WHY** KAY/O util'i zincirleyip aynı noktayı vurur. Pozisyon değiştirmek tek cevap — iki hattı aynı anda boşa çıkarman gerekir.
 
 ## 4. Utility Karşılaştırması
 
-Killjoy: turret + alarmbot + nanoswarm x2 + Lockdown. Cihaz ağırlıklı, bilgi ve alan kontrolü.
-KAY/O: knife + flash x2 + molly + Null Cmd. Utility iptal + kör + hasar zinciri.
+Killjoy: turret + bot + molly x2 + ult. Cihaz ağırlıklı; bilgi ve alan kontrolü.
+KAY/O: knife + flash x2 + molly + ult. Util iptali + kör + hasar zinciri.
 
-Bu matchup asimetrik değil, ters: KAY/O'nun işi Killjoy gibi cihaz ağırlıklı ajanları etkisizleştirmek. Killjoy'un cevabı cihazları knife menzilinin dışına koymak ve knife'ı aim ile yok etmek.
+Bu matchup asimetrik değil, ters yönlü: KAY/O'nun işi Killjoy gibi cihaz ağırlıklı ajanları etkisizleştirmek. Killjoy'un cevabı cihazları knife menzilinin dışına koymak ve knife'ı aim'le yok etmek.
 
-Ult farkı: Lockdown 8 puan, Null Cmd 7 puan. KAY/O ult'ı bir puan ucuz ve Killjoy için en büyük tehdit. Null Cmd açıldıysa Lockdown'ı sakla — ult bitince at.
+Ult farkı: Killjoy'un ult'ı 8 puan, KAY/O'nun ult'ı 7 puan. KAY/O ult'ı bir puan ucuz ve Killjoy için en büyük tehdit. KAY/O ult'ını açtıysa kendi ult'ını sakla — onun ult'ı bitince at.
 
 ## 5. Map Bazlı Değişim
 
-**Bind (Killjoy avantajlı):** Hookah ve dar geçitler turret için ideal — KAY/O knife atma mesafesi burada çok işe yaramaz.
+**Bind (Killjoy avantajlı):** Hookah ve dar geçitler turret için ideal — KAY/O'nun knife atma mesafesi burada pek işe yaramaz.
 
-**Haven (Dengeli):** 3 site her iki ajan için nötr — knife timing her site'ta farklı.
+**Haven (Dengeli):** 3 site iki ajan için de nötr — knife timing her site'ta farklı.
 
-**Ascent (Dengeli):** Killjoy A/B anchor, KAY/O A Main'den girer — knife hattını öğren.
+**Ascent (Dengeli):** Killjoy A/B anchor tutar, KAY/O A Main'den girer — knife hattını ezbere öğren.
 
-**Lotus (Dengeli):** 3 site yapısı nötr, knife zamanlamasına göre değişir.
+**Lotus (Dengeli):** 3 site yapısı nötr, iş knife zamanlamasına kalır.
 
 **Sunset (Killjoy hafif avantajlı):** Dar geçit Killjoy cihaz kurulumu için iyi.
 
 **Split (KAY/O hafif avantajlı):** Yakın mesafe knife Killjoy savunmasını kapatır.
 
-**Icebox (Killjoy avantajlı):** Uzun sightline KAY/O knife menzilini zorlaştırır — cihazlar daha kolay güvende kalır.
+**Icebox (Killjoy avantajlı):** Uzun sightline'lar KAY/O'nun knife menzilini zorlar — cihazlar daha kolay güvende kalır.
 
 ## 6. Flip Anları
 
-**Flip 1 — Knife cihaz hattına saplandı:** Killjoy utility'siz, site açık — bu anı kazanırsan round biter.
+**Flip 1 — Knife cihaz hattına saplandı:** Killjoy util'siz kaldı, site açık — bu anı kazanırsan round biter.
 
-**Flip 2 — Turret knife'ı kesti:** KAY/O throw anında tag yedi, suppress gelemedi — Killjoy açık, KAY/O harcandı.
+**Flip 2 — Turret knife'ı kesti:** KAY/O atış anında hasar yedi, suppress gelemedi — Killjoy açık, KAY/O util'ini boşa harcadı.
 
-**Flip 3 — Lockdown KAY/O girişini dondurdu:** Knife atılamadı, Killjoy site'ı utility ile kapattı.
+**Flip 3 — Killjoy ult'ı KAY/O'yu dondurdu:** Knife atılamadı, Killjoy site'ı util ile kilitledi.
 
-**Flip 4 — Null Cmd açık, Killjoy cover'da bekledi:** Ult bitti, Killjoy cihazları yeniden kurdu — KAY/O fırsatı kaçırdı.
+**Flip 4 — KAY/O ult'ı açıkken Killjoy cover'da bekledi:** Ult bitti, Killjoy cihazlarını yeniden kurdu — KAY/O fırsatı kaçırdı.
 
 ## 7. Koç Notu
 
-Bu matchup'ta Killjoy'un tek gerçek sorunu knife. Knife menzili turret menzilinden geniş — turret'i her zaman duvarın arkasına veya köşeye koy, knife doğrudan göremezse kapatamaz. Knife sesini duyar duymaz köşe al ve knife'ı vur. Bunu yaparsan KAY/O sadece flash + molly kalan bir ajan — o zaman matchup senin.
+Bu matchup'ta Killjoy'un tek gerçek derdi knife. Knife menzili turret menzilinden geniş — turret'i her zaman duvarın arkasına ya da köşeye koy, knife doğrudan göremezse susturamaz. Knife sesini duyar duymaz köşe al ve knife'ı vur. Bunu yaparsan KAY/O elinde sadece flash + molly kalan bir ajan olur — o zaman matchup senin.
 
-KAY/O oynuyorsan: knife atmadan önce turret'i bul. Nanoswarm hattı bilinen pozisyonlardan gel. Null Cmd'yi Killjoy site'ı aktif savunurken aç — cihazlar kapanınca takımın girer.
+KAY/O oynuyorsan: knife atmadan önce turret'i bul. Molly'yi bilinen knife noktalarına önceden kur. Ult'ını Killjoy site'ı aktif savunurken aç — cihazlar kapanınca takımın içeri girer.

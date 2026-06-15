@@ -2,65 +2,65 @@
 
 ## Bu Eşleşme Ne Demek
 
-Yoru'nun tek amacı: bilgi araçlarını boşa harcatmak. Sova + Cypher, Fade + Killjoy gibi takımlar her an nerede olduğunu bilmek zorunda. Yoru bunu kırar — tuzağı tripwire'ları ve alarmbot'ları sahte hedefe patlatır, teleport'u kameraların ve teller'in arkasına geçirir, ulti'si ise tüm kurulumun içinden görünmez yürür. Bu eşleşmenin sonucu şuna bağlı: bilgi araçları Yoru'yu gerçekten takip edebiliyor mu, yoksa sahteye mi koşuyor?
+Yoru'nun tek işi var: bilgi araçlarını boşa harcat. Sova + Cypher, Fade + Killjoy gibi takımlar her an senin nerede olduğunu bilmek zorunda. Yoru bunu kırar — sahte kopyayı düşmanın teline ve botuna patlatır, teleportu kameraların ve tellerin arkasına atar, ultiyle tüm kurulumun içinden görünmez yürür. Bu eşleşmeyi tek soru belirler: bilgi araçları gerçek Yoru'yu mu takip ediyor, yoksa sahteye mi koşuyor?
 
 ## Yaygın Cezalandırma Kalıpları
 
 ### Yoru Bilgi Kompozisyonunu Cezalandırırken
 
-**IF**: Fakeout (tuzak) Cypher telini veya Killjoy alarmbot'unu tetikliyor
-**MEANING**: Bilgi aracı sahte hedefe harcandı — gerçek pozisyon gizli
-**COUNTER**: Tek kat bilgi yetmez. Yoru birini geçse ikincisi yakalar — teli art arda koy, aynı hizaya değil
-**WHY**: Tek katman bir bypass'la biter
+**IF**: Sahte kopya Cypher telini veya Killjoy botunu tetikliyor
+**MEANING**: Bilgi aracı sahteye harcandı — gerçek pozisyon hâlâ gizli
+**COUNTER**: Tek tel yetmez. Yoru birini geçse ikincisi yakalar — telleri art arda, aynı hizaya değil farklı derinliklere koy
+**WHY**: Tek katman tek bir bypass'la biter
 
-**IF**: Teleport ile kameraların ve turret'ların arkasına geçiyor
-**MEANING**: Bilgi ağının dışında — kimse görmüyor
-**COUNTER**: Turret'ı teleport iniş noktasına bak. Kamerayı köşeye değil, iniş açısına dön
+**IF**: Teleportla kameraların ve botların arkasına geçiyor
+**MEANING**: Bilgi ağının dışına çıktı — kimse görmüyor
+**COUNTER**: Botu teleport iniş noktasına çevir. Kamerayı köşeye değil, iniş açısına bak
 **WHY**: Teleport seni bilgi hattının gerisine atar
 
-**IF**: Ulti ile tüm kurulumun içinden geçip pozisyonları topluyorsa
-**MEANING**: Nerede durduğunu, hangi açıda beklendiğini öğreniyor — sıfır riskle
-**COUNTER**: Ulti süresince pozisyon değiştir. Ulti bittiğinde beklediğin yerden vurur. Yerinde durma
-**WHY**: Ulti bitişinde Yoru tam olarak nereye çıkacağını biliyor — sen bilmiyorsun
+**IF**: Ultiyle tüm kurulumun içinden geçip pozisyonları topluyor
+**MEANING**: Nerede durduğunu, hangi açıdan beklendiğini sıfır riskle öğreniyor
+**COUNTER**: Ulti boyunca yerini değiştir. Ulti bitince beklediğin yerden vurur — kazığa oturma, hareket et
+**WHY**: Ulti bittiğinde Yoru tam olarak nereye çıkacağını biliyor, sen onun nereden geleceğini bilmiyorsun
 
 ### Bilgi Kompozisyonu Yoru'yu Cezalandırırken
 
-**IF**: İkinci kat bilgi aracı teleport'tan sonra Yoru'yu yakalıyorsa
-**MEANING**: Bilgi ağı yeterince derin — birini geçsen ikincisine düşüyorsun
-**COUNTER**: Kurulumu oku: tüm teller, kameralar, turret'lar nerede? En derin noktanın ötesine teleport et — ilkinin değil
+**IF**: İkinci kat bilgi aracı teleporttan sonra Yoru'yu yakalıyor
+**MEANING**: Bilgi ağın yeterince derin — birini geçse ikincisine düşüyor
+**COUNTER**: Kurulumu oku: tüm teller, kameralar, botlar nerede? En derin noktanın ötesine teleport et, ilkinin değil
 **WHY**: Katmanlı ağda her bypass seni bir sonraki tespit noktasının önüne koyar
 
-**IF**: Fade Haunt alışılmadık açıdan bile seni buluyor
-**MEANING**: Haunt açısı tüm flank yollarını kapsıyor
-**COUNTER**: Haunt'u izle — ekrana çıktığı an pozisyon değiştir. Haunt bitene kadar dur, sonra teleport
-**WHY**: Haunt geniş tarar, geleneksel açıya bağlı değildir
+**IF**: Fade recon'u alışılmadık bir açıdan bile seni buluyor
+**MEANING**: Recon açısı tüm flank yollarını tarıyor
+**COUNTER**: Recon'u izle — ekrana çıktığı an yerini değiştir. Recon bitene kadar bekle, sonra teleport at
+**WHY**: Recon geniş tarar, tek bir açıya bağlı değil
 
 ## Sürekli Kaybediyorsan Bu Demektir
 
-**Bilgi kompozisyonusun, Yoru sürekli kandırıyorsa**: Tüm tuzakları gerçek hareket gibi işliyorsunuz. Fakeout'un sesi farklı — ayak sesi var ama koşu ritmi yok. Teli tetikleyen sesin ardından hareket sesi gelmiyorsa, sahte. Hemen alternatif açıdan gerçek Yoru'yu ara.
+**Bilgi kompozisyonusun, Yoru sürekli kandırıyorsa**: Her sahteyi gerçek hareket sanıyorsun. Sahte kopyanın sesi farklı — ayak sesi var ama koşu ritmi yok. Teli tetikleyen sesin ardından gerçek hareket sesi gelmiyorsa o sahtedir. Hemen başka açıdan gerçek Yoru'yu ara.
 
-**Yoru'sun, sürekli yakalanıyorsan**: İlk katmanın arkasına geçiyorsun ama ikincisinin önüne düşüyorsun. Bütün kurulumu gör: kameralar nerede, teller nerede, turret nereye bakıyor? En derin olanın ötesine teleport et.
+**Yoru'sun, sürekli yakalanıyorsan**: İlk katmanı geçiyorsun ama ikincisinin önüne düşüyorsun. Bütün kurulumu gör: kameralar nerede, teller nerede, bot nereye bakıyor? En derin engelin ötesine teleport et.
 
 ## AIMLO Ne Demeli
 
 ### Oyuncu cezalandırılan taraftayken
 
-**Bilgi kompozisyonusun, Yoru karıştırıyorsa**: "Tuzağı telini boşa patlatıyor. Fakeout sesi ile gerçek adım farklı — tetiklenme sonrası hareket sesi yoksa sahte demektir. Hemen alternatif açıdan bak."
+**Bilgi kompozisyonusun, Yoru karıştırıyorsa**: "Sahte kopyayı telinde boşa patlatıyor. Sahtenin sesiyle gerçek adım farklı — tetiklendikten sonra hareket sesi gelmiyorsa o sahtedir. Hemen başka açıdan bak."
 
-**Yoru'sun, yakalanıyorsan**: "Çok erken teleport ediyorsun. Kurulumu oku — tüm teller ve kameralar nerede? En derin noktanın ötesine geç, ilk engelin değil."
+**Yoru'sun, yakalanıyorsan**: "Çok erken teleport atıyorsun. Kurulumu oku — bütün teller ve kameralar nerede? En derin noktanın ötesine geç, ilk engelin değil."
 
 ### Oyuncu cezalandıran taraftayken
 
-**Yoru kaos yaratıyorsa**: "Tuzağı kurulumlarına gönder, beklemedikleri açıya teleport et. Bilgi araçları sahteye koşarken gerçek push'u aç."
+**Yoru kaos yaratıyorsa**: "Sahte kopyayı kurulumlarının üstüne gönder, beklemedikleri açıdan teleport at. Bilgi araçları sahteye koşarken gerçek push'u aç."
 
-**Bilgi kompozisyonu seni izliyorsa**: "Sahteleri tanıyorlar. Tuzak zamanlamasını değiştir — bir turda önce tuzak sonra teleport yap, bir sonraki turda önce teleport sonra tuzak. Sırayı aynı tutarsan okurlar."
+**Bilgi kompozisyonu seni izliyorsa**: "Sahtelerini tanımaya başladılar. Düzenini değiştir — bir tur önce sahte sonra teleport, sonraki tur önce teleport sonra sahte yap. Sırayı sabit tutarsan seni okurlar."
 
 ## Rank Modülasyonu
 
-**LOW**: Yoru tuzağı rastgele atar, bilgi kompozisyonu zaten kurulum yapmaz. Yoru'ya önce Fakeout + teleport sırasını öğret: tuzağı öne at, düşman tele bakarken teleport kanalını aç.
+**LOW**: Yoru sahte kopyayı rastgele atar, bilgi kompozisyonu zaten düzgün kurulum yapmaz. Yoru'ya önce sahte kopya + teleport sırasını öğret: sahteyi öne at, düşman tele bakarken teleportunu aç.
 
-**MID**: Yoru Fakeout atmaya başlar ama bilgi oyuncuları sahteyi tanımaz. Bilgi oyuncusuna ses farkını öğret: tetiklenme sesi geldi, hareket sesi gelmedi — sahte, dönerek gerçek açıyı kapat. Yoru'ya: tuzak + teleport sırasını koru — önce tuzak, düşman dönerken teleport.
+**MID**: Yoru sahte kopya atmaya başlar ama bilgi oyuncuları sahteyi tanımaz. Bilgi oyuncusuna ses farkını öğret: tetiklenme sesi geldi, hareket sesi gelmedi — o sahte, dönüp gerçek açıyı kapat. Yoru'ya: sahte + teleport sırasını koru, düşman dönerken teleport at.
 
-**HIGH**: Her iki taraf adapte olur. Yoru tuzak zamanlamasını değiştirir, bilgi oyuncuları ses ipuçlarını öğrenir. Burada öğretilecek şey: ritim değişikliği. Yoru aynı komboyu tekrarlarsa okunur.
+**HIGH**: İki taraf da adapte olur. Yoru sahte kopyanın zamanlamasını değiştirir, bilgi oyuncuları ses ipuçlarını öğrenir. Burada öğreteceğin tek şey var: ritmi boz. Yoru aynı komboyu tekrarlarsa okunur.
 
-**ELITE**: Fakeout + ses + teleport ikilisini bir turda yapıp bir sonraki turda sırayı değiştir. Bilgi oyuncusu hangi seste hangi hareketi beklediğini çözemez hale gelir. Bu seviyede Yoru'nun değeri sadece kaçmak değil — her tuzak tetiklemesini şüpheli kılmak. Bilgi oyuncusu emin olamıyorsa rotate edemez.
+**ELITE**: Sahte kopya + ses + teleport üçlüsünü bir tur peş peşe yap, sonraki tur sırayı değiştir. Bilgi oyuncusu artık hangi sesin ardından hangi hareketi bekleyeceğini çözemez. Bu seviyede Yoru'nun değeri sadece kaçmak değil — her sahte tetiklemeyi şüpheli kılmak. Bilgi oyuncusu emin olamazsa rotate edemez.

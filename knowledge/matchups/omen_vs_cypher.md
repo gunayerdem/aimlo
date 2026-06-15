@@ -9,97 +9,97 @@ tags: [matchup, omen, cypher, controller_vs_sentinel]
 
 ## 1. Matchup Özü
 
-Omen ve Cypher aynı takımda olunca iş bölümü net: Omen gözü kapatır, Cypher gözü açar. Omen dumanlarla düşmanın seni görmesini engeller, Cypher kamera ve trapwire ile düşmanın nerede olduğunu söyler. Bu ikisi birbirini tamamlar — farklı alanlara bak, çakışma.
+Aynı takımdaysan iş bölümü net: Omen gözü kapatır, Cypher gözü açar. Omen smoke'larla düşmanın seni görmesini keser, Cypher kamera ve tel ile düşmanın yerini sana söyler. İkisi birbirini tamamlar — farklı alanlara bak, üst üste binme.
 
-Karşı takımda bu ikisi karşı karşıya gelince aynı savaş ters taraflarda devam eder. Omen dumanı Cypher kamerasını kör eder. Cypher trapwire'ı Omen teleport iniş noktasını yakalar. Kimin kalıbını önce okuduğun bu roundu belirler.
+Karşı takımda aynı savaş ters taraflarda döner. Omen smoke'u Cypher kamerasını kör eder. Cypher teli Omen'in teleport iniş noktasını yakalar. Kimin kalıbını önce okursan round senin.
 
 ## 2. Kim Avantajlı?
 
-Doğrudan 1v1 karşılaşmaları az — bu iki karakter takım üzerinden birbirini döver.
+Düz 1v1 az çıkar — bu ikisi takım üzerinden birbirini döver.
 
-Aynı takımda: Haven ve Fracture gibi geniş haritalarda bu ikili güçlü. Omen saldırı yönünü gizler, Cypher flanku izler. Sinerji net.
+Aynı takımda: Haven ve Fracture gibi geniş haritalarda bu ikili güçlü. Omen saldırı yönünü gizler, Cypher flank'ı tutar. Sinerji net.
 
 Karşı takımda:
-- Omen dumanı Cypher kamerasını kapatırsa Cypher takımı kör kalır — Omen açık kazanır.
-- Cypher trapwire Omen teleport iniş noktasını yakalıyorsa Omen hareketi tuzağa döner — Cypher takımı kazanır.
+- Omen smoke'u Cypher kamerasını kapatırsa Cypher takımı kör kalır — Omen öne geçer.
+- Cypher teli Omen'in teleport iniş noktasını yakalarsa Omen'in hamlesi tuzağa döner — Cypher takımı kazanır.
 
-Hangi tarafın rakip alışkanlığını önce tespit ettiği o roundu belirler.
+Rakibin alışkanlığını önce kim okursa round'u o çevirir.
 
 ## 3. Temel Düellolar
 
-**IF** Omen dumanı Cypher kamerasının görüş hattına girdi
-**MEANING** Kamera kör olur. Cypher takımı o anda senin nerede olduğunu göremez.
-**COUNTER** Cypher olarak kamerayı dumanın ulaşamayacağı yüksek noktalara veya duman açısı dışına koy — round başında planla.
-**WHY** Duman kamera görüşünü tamamen keser. Omen roundda en az iki duman atar — kamera her ikisinin açısından kaçınan bir yerde olmalı.
+**IF** Omen smoke'u Cypher kamerasının görüş hattına oturdu
+**MEANING** Kamera kör olur. Cypher takımı o an senin nerede olduğunu göremez.
+**COUNTER** Cypher oynuyorsan kamerayı smoke'un ulaşamayacağı yüksek noktalara ya da smoke açısının dışına koy — round başında planla.
+**WHY** Smoke kamera görüşünü tamamen keser. Omen round'da en az iki smoke atar — kamera ikisinin de açısından kaçacak bir yerde dursun.
 
 ---
 
-**IF** Omen Shrouded Step ile atladığı noktada Cypher trapwire var
-**MEANING** İniş animasyonu sırasında trapwire tetiklenir. Omen hem görünür hem de yavaşlar — kolay av.
-**COUNTER** Omen olarak Shrouded Step atmadan önce iniş noktasını gözle. Trapwire'lar aynı yerde durur — bir kez gördüysen o noktayı atlama, başka spot seç.
-**WHY** Shrouded Step'in iniş noktası sabit. Cypher trapwire bu tür sabit hedefler için koyulur. Teleport avantajı tuzağa dönmeden önce iniş noktasını temizle veya değiştir.
+**IF** Omen teleport ile çıktığı noktada Cypher teli var
+**MEANING** İniş anında tel patlar. Omen hem görünür olur hem yavaşlar — kolay av.
+**COUNTER** Omen oynuyorsan teleport atmadan önce iniş noktasını gözle. Teller hep aynı yerde durur — bir kez gördüysen o noktaya inme, başka spot seç.
+**WHY** Teleport iniş noktası sabit. Cypher teli tam da bu sabit hedefler için kurulur. Teleport avantajın tuzağa dönmeden önce noktayı temizle ya da değiştir.
 
 ---
 
-**IF** Cypher Neural Theft kullandı ve Omen o roundda teleport yapıyor
-**MEANING** Neural Theft kullanıldığı anda Cypher takımı senin konumunu görür. Teleport sırasında yerini değiştiriyorsan yeni konumun da açığa çıkabilir.
-**COUNTER** Omen olarak Neural Theft'in kullanıldığını duyduysan teleport iptal et veya hedef değiştir. Cypher takımı zaten nerede olduğunu biliyor — aynı yerde beklemek daha da kötü.
-**WHY** Neural Theft ölen takım arkadaşının konumlarını verir. Teleport yaptıysan yeni konumun görünür. Cypher takımı seni açı tutar.
+**IF** Cypher ult'unu açtı ve Omen o round teleport atıyor
+**MEANING** Ult açıldığı an Cypher takımı senin konumunu görür. Teleport ile yer değiştiriyorsan yeni konumun da açığa çıkar.
+**COUNTER** Omen oynuyorsan Cypher ult'unun açıldığını duyduysan teleport'u iptal et ya da hedef değiştir. Cypher takımı zaten nerede olduğunu biliyor — aynı yerde beklemek daha kötü.
+**WHY** Bu ult ölen takım arkadaşlarının konumunu rakibe verir. Teleport attıysan yeni yerin de görünür olur, Cypher takımı seni açı tutar.
 
 ---
 
-**IF** Omen Paranoia attı ve kendi Paranoia alanına girecek
-**MEANING** Paranoia kör içinde Cypher trapwire görünmez olur. Kör içinde trapwire'a basarsan çıkış zor.
-**COUNTER** Omen olarak Paranoia attıktan sonra trapwire olabilecek alanlara girme. Önce temizle, sonra gir.
-**WHY** Paranoia seni de etkiler. Kör içinde trapwire görsel uyarı vermez — sesli uyarı geldiğinde zaten yakalandın.
+**IF** Omen flash attı ve kendi flash alanına girecek
+**MEANING** Kör içinde Cypher teli görünmez olur. Kör içinde tele basarsan çıkışın yok.
+**COUNTER** Omen oynuyorsan flash attıktan sonra tel olabilecek alanlara girme. Önce temizle, sonra gir.
+**WHY** Flash seni de kör eder. Kör içinde tel görsel uyarı vermez — sesi geldiğinde zaten yakalanmışsındır.
 
 ---
 
-**IF** Cypher Cyberzone ult kullandı ve Omen aynı alana ikinci teleport yapıyor
-**MEANING** Cyberzone trapwire'ları yeniler. İlkinde kurtulan Omen aynı noktaya tekrar atlarsa yeni trapwire hazır bekler.
-**COUNTER** Omen olarak Cyberzone sesini duyduysan teleport noktalarını değiştir. Aynı spot artık güvenli değil.
-**WHY** Cypher ult round içinde tüm trapwire'ları sıfırlar. Omen sık aynı noktaları kullanıyorsa Cypher bunu fark eder ve orayı kapatır.
+**IF** Cypher ult'unu açtı ve Omen aynı alana ikinci kez teleport atıyor
+**MEANING** Ult telleri sıfırlar. İlkinden kurtulan Omen aynı noktaya tekrar inerse yeni tel hazır bekler.
+**COUNTER** Omen oynuyorsan Cypher ult sesini duyduysan teleport noktanı değiştir. O spot artık güvenli değil.
+**WHY** Cypher ult'u round içinde tüm telleri yeniler. Omen sık sık aynı noktaları kullanıyorsa Cypher bunu fark eder ve orayı kapatır.
 
 ---
 
-**IF** Omen iki farklı bölgeyi dumanladı, Cypher trapwire tek bölgede
-**MEANING** Omen saldırı yönünü belirsizleştirdi. Cypher trapwire ise sadece bir tarafı izliyor — diğer taraf açık.
-**COUNTER** Cypher olarak Omen'ın hangi bölgeyi daha sık dumanladığını izle. Duman yoğunluğu gitme niyetini ele verir. Trapwire'ı o tarafa kaydır.
-**WHY** Omen round içinde duman yerini değiştirebilir, Cypher trapwire'ı değiştiremez. Erken karar ver — Omen duman tercihini iki round içinde okursun.
+**IF** Omen iki ayrı bölgeyi smoke'ladı, Cypher teli tek bölgede
+**MEANING** Omen saldırı yönünü belirsizleştirdi. Cypher teli sadece bir tarafı tutuyor — diğer taraf açık.
+**COUNTER** Cypher oynuyorsan Omen'in hangi bölgeyi daha sık smoke'ladığını izle. Smoke yoğunluğu gidiş niyetini ele verir. Teli o tarafa kaydır.
+**WHY** Omen round içinde smoke yerini değiştirir, Cypher teli sabittir. Erken karar ver — Omen'in smoke tercihini iki round içinde okursun.
 
 ---
 
-**IF** Omen agresif açı alıyor ve Cypher kamerası o açıyı izliyor
-**MEANING** Cypher takımı senin açını biliyor. Oradan peek aldığında karşı taraf hazır.
-**COUNTER** Omen olarak kameranın göremeyeceği açılardan peek at. Kameranın yerini görüyorsan Paranoia ile kör et — kamera o round bilgi veremez.
-**WHY** Paranoia kamerayı kör eder. Kamerayı kör etmeden peek aldığında Cypher takımı seni pre-fire eder.
+**IF** Omen agresif açı alıyor ve Cypher kamerası o açıyı tutuyor
+**MEANING** Cypher takımı senin açını biliyor. Oradan peek aldığında karşı taraf hazır bekler.
+**COUNTER** Omen oynuyorsan kameranın göremediği açılardan peek at. Kameranın yerini gördüysen flash ile kör et — kamera o round bilgi veremez.
+**WHY** Flash kamerayı kör eder. Kamerayı kör etmeden peek aldığında Cypher takımı seni pre-fire eder.
 
 ## 4. Yetenek Karşılaştırması
 
-Bu iki karakter farklı şeyler yapar — karşılaştırma şöyle çalışır:
+İki karakter farklı işler yapar — karşılaştırma şöyle çalışır:
 
-- **Görüş:** Omen dumanı tek yönlü keser. Cypher bilgiyi tek yönlü toplar.
-- **Hasar:** İkisi de doğrudan hasar verme aracı değil — Cypher trapwire yavaşlatır, Omen Paranoia kör eder.
-- **Hareket:** Omen Shrouded Step ve From the Shadows ile hareket eder. Cypher hareket etmez. Hareket kabiliyeti tamamen Omen lehine.
-- **Yenileme:** İkisi de cooldown ile çalışır. Omen roundda yenilenir, Cypher round başında tam dolup round içi yenilenmez — Cyberzone hariç.
+- **Görüş:** Omen smoke'u tek yönlü keser. Cypher bilgiyi tek yönlü toplar.
+- **Hasar:** İkisi de doğrudan hasar aracı değil — Cypher teli yavaşlatır, Omen flash'ı kör eder.
+- **Hareket:** Omen teleport ve ult ile yer değiştirir. Cypher yerinden oynamaz. Hareket kabiliyeti tamamen Omen'de.
+- **Yenileme:** İkisi de cooldown ile çalışır. Omen util'i round içinde dolar, Cypher round başında tam dolar ama round içinde yenilenmez — ult hariç.
 
-Aynı takımda bu fark avantaj: Omen görüşü kapatır, Cypher bilgiyi toplar. Aynı alanda çakışma olmasın — Omen A'yı karartıyorsa Cypher B'yi izlesin.
+Aynı takımda bu fark avantaj: Omen görüşü kapatır, Cypher bilgiyi toplar. Aynı alanda çakışmayın — Omen A'yı karartıyorsa Cypher B'yi tutsun.
 
-Karşı takımda bu fark savaş alanı: Omen dumanı Cypher'ın gözünü kapatır, Cypher trapwire Omen'ın ayağına tuzak kurar. Hangi taraf rakibin tercihini önce tespit ederse o taraf döner.
+Karşı takımda bu fark savaş alanı: Omen smoke'u Cypher'ın gözünü kapatır, Cypher teli Omen'in ayağına tuzak kurar. Rakibin tercihini önce kim okursa o taraf çevirir.
 
 ## 5. Harita Bazlı Durum
 
-**Haven:** İkisi de burada güçlü. Aynı takımda Omen + Cypher iyi çalışır — üç site Omen dumanını zorlar, Cypher flanku izler.
+**Haven:** İkisi de burada güçlü. Aynı takımda Omen + Cypher iyi çalışır — üç site Omen smoke'unu zorlar, Cypher flank'ı tutar.
 
 **Fracture:** İkisi de burada işe yarar. Cypher bu haritada sağlam — iki taraflı yapı Cypher bilgisini değerli kılar. Omen ikinci kontrolör olarak yanına girer.
 
-**Bind:** Cypher burada güçlü — teleporter geçişlerini trapwire ile izler. Omen Bind'de Brimstone veya Astra kadar değer katmaz.
+**Bind:** Cypher burada güçlü — teleporter geçişlerini tel ile tutar. Omen Bind'de Brimstone veya Astra kadar değer katmaz.
 
 **Abyss:** Cypher burada işe yarar. Omen bu haritada tercih edilmez.
 
-**Lotus:** Omen burada güçlü — üç site Omen dumanına uygun. Cypher Lotus'ta Killjoy'un gerisinde kalır.
+**Lotus:** Omen burada güçlü — üç site Omen smoke'una uygun. Cypher Lotus'ta Killjoy'un gerisinde kalır.
 
-**Sunset:** Omen burada çalışır. Cypher Sunset'te nadiren seçilir — harita Cypher trapwire için yeterince dar değil.
+**Sunset:** Omen burada çalışır. Cypher Sunset'te nadiren seçilir — harita Cypher teli için yeterince dar değil.
 
 **Ascent:** Omen burada güçlü. Cypher Ascent'te Killjoy'un arkasında kalır — Killjoy bu haritayı daha iyi kontrol eder.
 
@@ -109,26 +109,26 @@ Karşı takımda bu fark savaş alanı: Omen dumanı Cypher'ın gözünü kapat�
 
 **Icebox:** İkisi de burada zayıf. Killjoy bu haritayı tamamen kontrol eder.
 
-**Pearl:** İkisi de haritaya göre değişir — comp'a bak.
+**Pearl:** İkisi de comp'a göre değişir — kadroya bak.
 
 ## 6. Roundu Döndüren Anlar
 
-1. **Omen teleport iniş noktasında trapwire var.** Shrouded Step attın, iniş noktasında trapwire var — yakalandın. Teleport avantajı tuzağa döndü. Önce noktayı gözle.
+1. **Omen'in teleport iniş noktasında tel var.** Teleport attın, indiğin yerde tel patladı — yakalandın. Teleport avantajın tuzağa döndü. Önce noktayı gözle.
 
-2. **Omen dumanı Cypher kamerasını kapattı.** Cypher takımı o roundda kör. Omen yönünü bilmiyorlar — hemen baskı yap.
+2. **Omen smoke'u Cypher kamerasını kapattı.** Cypher takımı o round kör. Omen'in yönünü bilmiyorlar — hemen baskıyı bin.
 
-3. **Neural Theft sonrası Omen teleport yaptı.** Cypher ult kullanıldı, Omen teleport attı — yeni konumu Cypher takımına açıklandı. Neural Theft sesini duyduysan teleport yapma.
+3. **Cypher ult sonrası Omen teleport attı.** Cypher ult'u açtı, Omen teleport çıktı — yeni konumu Cypher takımına gitti. Ult sesini duyduysan teleport atma.
 
-4. **Paranoia kameraya çarptı.** Omen Paranoia'yı kamera üzerine attı — kamera round boyu kör. Cypher o roundda bilgi toplamak için başka şey yok.
+4. **Flash kameraya çarptı.** Omen flash'ı kameranın üstüne attı — kamera round boyu kör. Cypher'ın o round bilgi toplayacak başka aracı yok.
 
-5. **Cyberzone sonrası Omen aynı noktaya döndü.** Cypher ult trapwire'ları yeniledi. Omen ilk roundda o noktayı kullandı ve tekrar gitti — Cypher bunu biliyordu. Spot değiştir.
+5. **Cypher ult sonrası Omen aynı noktaya döndü.** Cypher ult'u telleri yeniledi. Omen ilk round o noktayı kullandı ve tekrar gitti — Cypher bunu biliyordu. Spot değiştir.
 
 ## 7. Koç Notları
 
-Omen oynuyorsan şunu yap: Her roundda Shrouded Step noktalarını değiştir. Aynı noktaya iki kez gidersen Cypher seni bekler. Cypher kamerasının yerini gördüğünde Paranoia at — kamera kör olur, o roundda bilgi veremez.
+Omen oynuyorsan şunu yap: Her round teleport noktanı değiştir. Aynı noktaya iki kez gidersen Cypher seni bekler. Cypher kamerasının yerini gördüğünde flash at — kamera kör olur, o round bilgi veremez.
 
-Cypher oynuyorsan şunu yap: Kamerayı Omen'ın duman attığı açılardan uzak koy. Round başında Omen hangi bölgeyi dumanladıysa trapwire'ını oraya yakın tut — duman yoğun tarafa geçiş yapacak.
+Cypher oynuyorsan şunu yap: Kamerayı Omen'in smoke attığı açılardan uzak koy. Round başında Omen hangi bölgeyi smoke'ladıysa teli oraya yakın tut — smoke'un yoğun olduğu taraftan geçiş yapacak.
 
-İki oyuncunun da yapmaması gereken: Omen Shrouded Step'i her round aynı noktaya atmasın. Cypher trapwire'ı Paranoia menzilinin önüne koymasın — Omen kör içinde trapwire'a basar ve çıkamaz; Paranoia sonrası o alana giren Cypher takımı da kendini açığa çıkarır.
+İki oyuncunun da yapmaması gereken: Omen teleport'u her round aynı noktaya atmasın — Cypher seni okur. Cypher teli flash menzilinin önüne koymasın — Omen kör içinde tele basıp çıkamaz; flash sonrası o alana giren Cypher takımı da kendini açığa verir.
 
-Aynı takımda kullanırken: Omen hangi bölgeyi kapatıyorsa Cypher diğer bölgeyi izlesin. Aynı alanı ikisi birden izlerse bir bölge boş kalır.
+Aynı takımda kullanırken: Omen hangi bölgeyi kapatıyorsa Cypher diğer bölgeyi tutsun. Aynı alanı ikisi birden tutarsa bir bölge boş kalır.

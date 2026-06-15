@@ -11,139 +11,139 @@ tags: [matchup, killjoy, chamber, sentinel_vs_sentinel]
 
 Killjoy sahayı kilitler, Chamber Op'la öldürür.
 
-Killjoy turret ve alarmbot'u site içine gömer — sen uzakta durursun, düşman cihazlarına gelir. Chamber ise Trademark ve Rendezvous'u koş-vur-kaç için kullanır. İki sentinel aynı roldeymiş gibi görünür ama değil:
+Killjoy tuzağını ve botunu site içine gömer — sen uzakta durursun, düşman cihazlarına gelir. Chamber ise tuzağını ve kaçışını koş-vur-kaç için kullanır. İki sentinel aynı roldeymiş gibi görünür ama değil:
 
-- Killjoy: düşman sana gelsin, utility savaşsın
-- Chamber: sen düşmana git, Op öldürsün, TP ile dön
+- Killjoy: düşman sana gelsin, util savaşsın
+- Chamber: sen düşmana git, Op öldürsün, kaçışla geri dön
 
-Killjoy her round aynı gücüyle başlar — cihazların cooldown'dan döner. Chamber Op alamazsa yarım sentinel. Bunu unutma.
+Killjoy her round aynı gücüyle başlar — cihazları cooldown'dan döner. Chamber Op alamazsa yarım sentinel kalır. Bunu unutma.
 
 ## 2. Kim Avantajlı?
 
-Killjoy şu an çoğu haritada Chamber'ın önünde. Nedenini basit söyleyelim: Killjoy her round tutarlı, Chamber ekonomisi bozulunca yok olur.
+Killjoy şu an çoğu haritada Chamber'ın önünde. Nedeni basit: Killjoy her round tutarlı, Chamber ekonomisi bozulunca yok olur.
 
-Chamber'ın öne geçtiği yer: uzun koridorlu haritalarda Op hold. Breeze, Ascent, Abyss — bu haritalarda Chamber Op'la sightline'ı kontrol eder, Killjoy büyük site turret için zorlanır.
+Chamber'ın öne geçtiği yer: uzun koridorlu haritalarda Op hold. Breeze, Ascent, Abyss — bu haritalarda Chamber Op'la sightline'ı kontrol eder, Killjoy büyük site tuzağı için zorlanır.
 
-Ama Killjoy'un avantajlı olduğu yer çok daha geniş: dar yapılar, üç siteli haritalar, eco round'lar. Eco'da Killjoy full utility ile gelir, Chamber Op'suz gelir.
+Ama Killjoy'un avantajlı olduğu alan çok daha geniş: dar yapılar, üç siteli haritalar, eco round'lar. Eco'da Killjoy full util ile gelir, Chamber Op'suz gelir.
 
-Seçim haritaya göre yap. Chamber seçiyorsan Op ekonomisini taşımak zorundasın — Op alamadığın round'da zayıf olduğunu bil.
+Seçimini haritaya göre yap. Chamber oynuyorsan Op ekonomisini taşımak zorundasın — Op alamadığın round'da zayıf düştüğünü bil.
 
 ## 3. Temel Durumlar
 
 **IF** Chamber Op ile uzak sightline'dan agresif açı tutuyor, Killjoy site içinde kurulmuş
 **MEANING** İki sentinel farklı fazda — Chamber siteye girmeden önce öldürüyor, Killjoy site içinde bekliyor
-**COUNTER** Smoke + flash ikilisiyle Chamber'ın Op açısını kapat. Açı kapanınca Chamber ya Trademark bırakır ya Rendezvous ile çekilir. Her iki durumda Op shot harcanmamış ama pozisyon kaybedilmiş
-**WHY** Chamber Op shot boşa giderse Chamber ekonomisi o round zayıflar. Killjoy cihazları aynı kayıpla karşılaşmaz — turret yeniden konumlandır, bedava
+**COUNTER** Smoke + flash ikilisiyle Chamber'ın Op açısını kapat. Açı kapanınca Chamber ya tuzağını bırakır ya kaçışıyla geri çekilir. Her iki durumda da Op shot harcanmamış ama pozisyon kaybedilmiş
+**WHY** Chamber Op shot'ı boşa giderse o round ekonomisi zayıflar. Killjoy cihazları aynı kaybı yemez — tuzağı yeniden konumlandır, bedava
 
 ---
 
-**IF** Chamber Rendezvous anchor'ını her round aynı yerde bırakıyor
-**MEANING** Anchor okundu — takım o noktayı açı tutar, Chamber teleport eder etmez ölür
-**COUNTER** Killjoy turret'ı Rendezvous anchor noktasına veya tam çıkışına dik. Chamber teleport yapar yapmaz turret vurur
-**WHY** Rendezvous sabit bir nokta. Killjoy'un cihazları sabit hedef için biçilmiş kaftan. Chamber anchor değiştirmezse her TP ölüm riskidir
+**IF** Chamber kaçış noktasını her round aynı yere koyuyor
+**MEANING** Noktayı ezberledin — takım orayı açıyla tutar, Chamber teleport eder etmez ölür
+**COUNTER** Killjoy tuzağını kaçış noktasına ya da tam çıkışına dik. Chamber teleport yapar yapmaz tuzak vurur
+**WHY** Kaçış noktası sabit bir nokta. Killjoy'un cihazları sabit hedef için biçilmiş kaftan. Chamber noktayı değiştirmezse her teleport ölüm riskidir
 
 ---
 
-**IF** Killjoy alarmbot + nanoswarm flank hattını kapattı, Chamber Trademark da aynı hattı tutuyor
-**MEANING** Tek hat çift utility ile kilitli — saldırı o hattan gelemiyor
-**COUNTER** Saldırıyı flank'tan tamamen bırak, main push ağırlığını artır. Çift utility tek hatta = diğer hat boş
-**WHY** İki sentinel aynı hatta yığılmışsa ekonomi israf. Saldırı zaten o hatta gelmez, sen de bu bilgiyi kullan
+**IF** Killjoy bot + molly flank hattını kapattı, Chamber tuzağı da aynı hattı tutuyor
+**MEANING** Tek hat çift util ile kilitli — saldırı o hattan gelemiyor
+**COUNTER** Saldırıyı flank'tan tamamen bırak, main push ağırlığını artır. Çift util tek hatta yığılmışsa diğer hat boş kalır
+**WHY** İki sentinel aynı hatta yığıldıysa util israf olur. Saldırı zaten o hattan gelmez, sen de bu bilgiyi kullan
 
 ---
 
-**IF** Chamber Headhunter aktif, Killjoy eco round oynuyor
-**MEANING** Headhunter bu fazda güçlü — tek atış öldürür, pistol ekonomisine düşer ama işe yarar
-**COUNTER** Turret'ı anti-rush pozisyona al. Chamber Headhunter için sokulmak zorunda — turret tetiklenirse Chamber'ın nerede olduğu açığa çıkar
-**WHY** Eco round'da info para eder. Turret'ın tetiklenmesi bedava bilgi, Chamber Headhunter pozisyonu ortaya çıkar
+**IF** Chamber tabancası (kredi harcayan atış) aktif, Killjoy eco round oynuyor
+**MEANING** Bu atış eco fazında güçlü — tek isabet öldürür, pistol ekonomisine düşürür ama işe yarar
+**COUNTER** Tuzağını anti-rush pozisyona al. Chamber bu atış için yakına sokulmak zorunda — tuzak tetiklenirse Chamber'ın nerede olduğu açığa çıkar
+**WHY** Eco round'da info para eder. Tuzağın tetiklenmesi bedava bilgi verir, Chamber'ın pozisyonunu ortaya çıkarır
 
 ---
 
-**IF** Chamber ult (Tour de Force) aktif, Killjoy ult (Lockdown) hazır
-**MEANING** İki ult farklı faz için — Tour de Force erken round kill için, Lockdown retake kilitlemek için
-**COUNTER** Chamber ult'unu round başı ya ortasında kullan. Killjoy ult'unu post-plant ya retake için sakla. İkisini aynı anda harcama
-**WHY** Chamber ult erken kullanılmadığında değeri düşer. Killjoy ult geç kullanılmadığında round biter. Faz yanlışsa iki ult da boşa gider
+**IF** Chamber ult'u (Op) aktif, Killjoy ult'u (alan kilidi) hazır
+**MEANING** İki ult farklı faza hizmet eder — Chamber ult'u erken round kill için, Killjoy ult'u retake'i kilitlemek için
+**COUNTER** Chamber ult'unu round başında ya ortasında kullan. Killjoy ult'unu post-plant ya da retake için sakla. İkisini aynı anda harcama
+**WHY** Chamber ult'u erken kullanılmazsa değeri düşer. Killjoy ult'u geç kullanılmazsa round biter. Fazı yanlış seçersen iki ult da boşa gider
 
 ---
 
-**IF** Killjoy turret + nanoswarm + alarmbot aynı alan üstünde kilitli
-**MEANING** O alana girmek için önce turret'ı kırmak şart — turret görüşü kapatır, Chamber Trademark içeri giremez
-**COUNTER** Chamber tarafındaysan Op ile turret'ı tek atışta kır. Turret kırıldıktan sonra alan savunması yarım kalır
-**WHY** Killjoy alan savunması cihaz HP'sine dayanır. Turret kırılırsa zincir bozulur. Op bu iş için en hızlı çözüm
+**IF** Killjoy tuzak + molly + bot aynı alan üstünde kilitli
+**MEANING** O alana girmek için önce tuzağı kırmak şart — tuzak görüşü kapatır, Chamber içeri sokulamaz
+**COUNTER** Chamber tarafındaysan Op ile tuzağı tek atışta kır. Tuzak kırıldıktan sonra alan savunması yarım kalır
+**WHY** Killjoy alan savunması cihaz canına dayanır. Tuzak kırılırsa zincir bozulur. Op bu iş için en hızlı çözüm
 
 ---
 
-**IF** Chamber Rendezvous ile reposition yaptı, Op mermisi hâlâ dolu, Killjoy turret aktif
-**MEANING** Chamber yer değiştirdi ama op tehlikesi bitmedi — turret yeni pozisyonu yakında bildirir
-**COUNTER** Turret sesini duyduysan Chamber'ın yeni açısına flash at, sonra push. Op mermisi var ama pozisyon bilindi
-**WHY** Turret reposition sesini yakalar. Bu bedava bilgi — takımın flash atıp push yapması için yeter
+**IF** Chamber kaçışıyla yer değiştirdi, Op mermisi hâlâ dolu, Killjoy tuzağı aktif
+**MEANING** Chamber yer değiştirdi ama Op tehlikesi bitmedi — tuzak yeni pozisyonu yakında haber verir
+**COUNTER** Tuzak sesini duyduysan Chamber'ın yeni açısına flash at, sonra push et. Op mermisi dolu ama pozisyonu artık belli
+**WHY** Tuzak yer değiştirme sesini yakalar. Bu bedava bilgi — takımın flash atıp push yapması için yeter
 
-## 4. Utility Karşılaştırması
+## 4. Util Karşılaştırması
 
 **Killjoy:**
-- Turret: sürekli bildirir, hasar verir, kırılana kadar çalışır
-- Alarmbot: stealth, concussive, bir kez tetiklenir
-- Nanoswarm (x2): alan hasarı, post-plant için güçlü
-- Lockdown (ult): retake kilidi, alan detain
+- Tuzak: sürekli haber verir, hasar verir, kırılana kadar çalışır
+- Bot: gizli durur, sersemletir, bir kez tetiklenir
+- Molly (x2): alan hasarı, post-plant için güçlü
+- Ult (alan kilidi): retake kilidi, alanı detain eder
 
 **Chamber:**
-- Trademark (x1): tek seferlik yavaşlatan tel
-- Rendezvous (x2 anchor): teleport kaçışı, reposition
-- Headhunter: kredi harcayarak atış, eco'da işlevli
-- Tour de Force (ult): Op, kill başına slow orb
+- Tuzak (x1): tek seferlik yavaşlatan tel
+- Kaçış (x2 nokta): teleport kaçışı, yer değiştirme
+- Tabanca (kredi harcayan atış): eco'da işlevli
+- Ult (Op): kill başına slow orb
 
 **Kritik fark:**
-Killjoy round başı full utility ile başlar, cooldown'dan döner. Chamber Headhunter ve Op için kredi harcar. Eco round'da Killjoy avantajlı, Chamber Op'suz gelir.
+Killjoy round başı full util ile başlar, cooldown'dan döner. Chamber tabancası ve Op için kredi harcar. Eco round'da Killjoy avantajlı, Chamber Op'suz gelir.
 
-Killjoy turret hem bilgi hem hasar — aynı cihaz iki iş yapar. Chamber Trademark sadece bilgi, Headhunter sadece hasar — ayrı ayrı.
+Killjoy tuzağı hem bilgi hem hasar verir — aynı cihaz iki iş yapar. Chamber tuzağı sadece bilgi, tabancası sadece hasar — ayrı ayrı işler.
 
 ## 5. Haritaya Göre Durum
 
-**Icebox:** Killjoy. B site lockdown mimarisi için biçilmiş.
+**Icebox:** Killjoy. B site kilitleme mimarisi için biçilmiş.
 
-**Haven:** Killjoy. Üç site Killjoy utility dağılımı için uygun.
+**Haven:** Killjoy. Üç site Killjoy util dağılımı için uygun.
 
 **Ascent:** Chamber hafif öne çıkar. B Main Op hold burada güçlü.
 
-**Split:** Killjoy. Dar yapı, turret için ideal.
+**Split:** Killjoy. Dar yapı, tuzak için ideal.
 
 **Lotus:** Killjoy. Üç site yapısı.
 
-**Sunset:** Killjoy. Dar koridorlar turret'ı değerli kılar.
+**Sunset:** Killjoy. Dar koridorlar tuzağı değerli kılar.
 
-**Breeze:** Chamber. Uzun sightline Op için ideal, büyük site turret için zor.
+**Breeze:** Chamber. Uzun sightline Op için ideal, büyük site tuzağı için zor.
 
 **Bind:** Killjoy. Op'suz harita, Chamber buraya uymaz.
 
-**Fracture:** Killjoy. İki taraflı saldırıya karşı lockdown gerekir, Chamber burada zayıf.
+**Fracture:** Killjoy. İki taraflı saldırıya karşı alan kilidi gerekir, Chamber burada zayıf.
 
-**Abyss:** Chamber. Çok katlı yapı Rendezvous için iyi, Op açıları uzun.
+**Abyss:** Chamber. Çok katlı yapı kaçış için iyi, Op açıları uzun.
 
 **Pearl:** İkisi de oynanabilir. Net avantaj yok.
 
 ## 6. Maçı Döndüren Anlar
 
-1. **Chamber Op alamazsa.** Op olmayan Chamber sıradan bir silah tutuyor. Bu round'da Killjoy'un utility'sine karşı duracak gücü kalmaz.
+1. **Chamber Op alamazsa.** Op'suz Chamber sıradan bir silah tutuyor demektir. O round'da Killjoy'un util'ine karşı duracak gücü kalmaz.
 
-2. **Rendezvous anchor okundu.** Chamber her round aynı noktaya anchor koyuyorsa takım oraya açıyı önceden tutar. Killjoy turret da aynı noktada bekliyorsa Chamber her TP'de ölüm riskine girer.
+2. **Kaçış noktasını ezberlersen.** Chamber her round aynı noktaya kaçış kuruyorsa takım orayı önceden açıyla tutar. Killjoy tuzağı da aynı noktada beklerse Chamber her teleport'ta ölüm riskine girer.
 
-3. **Lockdown retake.** Killjoy ult + takımın retake'e girmesi = round çevrilir. Chamber tarafı cihazı kırmak için Op shot harcamak zorunda.
+3. **Alan kilidiyle retake.** Killjoy ult'u + takımın retake'e girmesi = round çevrilir. Chamber tarafı cihazı kırmak için Op shot harcamak zorunda kalır.
 
-4. **Eco asimetrisi.** Killjoy eco round'da full utility getirir. Chamber Op'suz, Headhunter sınırlı. Bu round Killjoy'un.
+4. **Eco asimetrisi.** Killjoy eco round'da full util getirir. Chamber Op'suz, tabancası sınırlı. Bu round Killjoy'un.
 
-5. **Tour de Force çift kill.** Chamber ult ile tek round'da iki kill alırsa round tek başına döner. Ama bu erken kullanılmalı — Lockdown round sonu için bekler, Tour de Force erken round için.
+5. **Op ult'uyla çift kill.** Chamber ult ile tek round'da iki kill alırsa round'u tek başına çevirir. Ama bu ult'u erken kullan — Killjoy ult'u round sonu için bekler, Chamber ult'u erken round için.
 
 ## 7. Koç Notu
 
 **Killjoy oynuyorsan:**
 
-Chamber'ın Rendezvous anchor noktalarını ezberle. Turret'ı o noktaya veya hemen çıkışına dik — Chamber teleport yapar yapmaz turret devreye girer. Her round aynı yere turret koyma: round başı farklı nokta, takımın ses çıkarmasına bakarak pozisyon değiştir.
+Chamber'ın kaçış noktalarını ezberle. Tuzağını o noktaya ya da hemen çıkışına dik — Chamber teleport yapar yapmaz tuzak devreye girer. Her round aynı yere tuzak kurma: round başı farklı noktaya geç, takımın çıkardığı seslere bakarak pozisyon değiştir.
 
 **Chamber oynuyorsan:**
 
-Killjoy turret alanını bil. Op peek'lerini turret'ın dışında yap. Smoke geldi ve açı kapandıysa Op tutma, Vandal'a geç — smoke içine Op shot harcama. Rendezvous anchor'ını her round aynı yerde bırakma: round başı bir tarafta, takım rotate edince anchor'ı taşı.
+Killjoy tuzak alanını bil. Op peek'lerini tuzağın dışından yap. Smoke geldiyse ve açı kapandıysa Op tutma, Vandal'a geç — smoke içine Op shot harcama. Kaçış noktanı her round aynı yere koyma: round başı bir tarafa kur, takım rotate edince noktayı taşı.
 
 **Yaygın hatalar:**
 
-- Chamber anchor'ı round boyu sabit tutar → Killjoy turret tuzak kurar, her TP ölüm olur
-- Killjoy turret'ı her round aynı köşeye koyar → Chamber Op shot ile kırar, Killjoy savunması yarım kalır
-- Chamber smoke içine Op atar → Op ekonomisi boşa gider, Vandal'a geçmesi gerekirdi
+- Chamber kaçış noktasını round boyu sabit tutar → Killjoy tuzakla pusu kurar, her teleport ölüme döner
+- Killjoy tuzağını her round aynı köşeye koyar → Chamber Op shot ile kırar, Killjoy savunması yarım kalır
+- Chamber smoke içine Op atar → Op ekonomisi boşa gider, oysa Vandal'a geçmesi gerekirdi

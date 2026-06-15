@@ -11,109 +11,109 @@ tags: [matchup, neon, astra, duelist, controller]
 
 ## 1. Matchup Özü
 
-Neon hızla Astra'nın dumanını geçmeye çalışır. Astra dumanı, gravity well ve nova pulse ile Neon'un sprint hattını kapatır. Neon sprint hattını değiştirmezse Astra kazanır — Astra yanlış yere star koyarsa Neon kazanır.
+Neon, Astra'nın smoke'unu hızla geçmeye çalışır. Astra ise smoke ve stun ile Neon'un sprint hattını kapatır. Neon sprint hattını değiştirmezse Astra kazanır; Astra smoke'u yanlış yere koyarsa Neon kazanır.
 
 ## 2. Kim Avantajlı?
 
 **Neon lehine:**
-- Astra star harcanmış — duman yok, Neon sprint hattı açık
-- Uzun koridorlarda (Breeze, Icebox, Pearl Mid) — Neon sprint Astra'nın tepki veremeden koridoru kapatır
-- Neon ulti hazır — beam Astra astral formunu yakalar
-- Yakın mesafede — sprint + slide + tüfek Astra'nın sabit açısını geçer
+- Astra util'ini boşa harcadıysa smoke yok, sprint hattın açık demektir — bas geç.
+- Uzun koridorlarda (Breeze, Icebox, Pearl Mid) sprint'inle Astra daha tepki veremeden koridoru kapatırsın.
+- Ult'un hazırsa beam Astra'yı sabit yakalar.
+- Yakın mesafede sprint + slide + tüfekle Astra'nın sabit açısını geçersin.
 
 **Astra lehine:**
-- Neon'un sprint hattında duman — Neon kör ilerler, düello kaybedilir
-- Gravity well sprint koridorunda — Neon duraksız, sabit hedef olur
-- Nova pulse peek hattında — Neon'un nişanı silinir
-- Cosmic Divide ulti açık — ses ve hasar kesilir, takım bilgisi kopar
+- Sprint hattında smoke varsa kör ilerlersin, düelloyu kaybedersin.
+- Sprint koridoruna stun gelirse duraksarsın ve sabit hedef olursun.
+- Peek hattına stun gelirse nişanın bozulur.
+- Astra ult'unu açtıysa ses ve hasar kesilir, takım bilgisi kopar.
 
-**Dengeli:** Haven, Ascent, Lotus'ta sonuç Astra'nın star konumuna ve Neon'un sprint hattı seçimine göre değişir.
+**Dengeli:** Haven, Ascent ve Lotus'ta sonuç Astra'nın smoke konumuna ve senin sprint hattı seçimine göre değişir.
 
 ## 3. Key Düellolar
 
-**IF** Astra smoke Neon sprint hattına geldi
-**MEANING** Neon kör ilerler — dumanın arkası belirsiz, tüfek düellosu kayıp olur
-**COUNTER** Sprint hattını değiştir — aynı koridorda ısrar etme. Astra dumanı global, birden fazla hat hazırla.
-**WHY** Astra dumanı yeniden yüklenirse aynı hattı tekrar kapatır. Hattı değiştirmek duman ekonomisini boşa çıkarır.
+**IF** Astra senin sprint hattına smoke attı
+**MEANING** Kör ilerlersin — smoke'un arkası belirsiz, tüfek düellosunu kaybedersin
+**COUNTER** Sprint hattını değiştir, aynı koridorda ısrar etme. Astra smoke'u tüm haritaya koyabilir, o yüzden birden fazla hat hazırla.
+**WHY** Astra smoke'u yeniden dolarsa aynı hattı tekrar kapatır. Hattı değiştirmek onun util ekonomisini boşa çıkarır.
 
 ---
 
-**IF** Gravity well sesi duyulduysa veya animasyonu gördüysen
-**MEANING** Ayakta durursun, sabit hedef olursun — gravity well seni içine çeker
-**COUNTER** Ses geldiği anda slide yap — gravity well alanı sınırlı, dışı güvenli.
-**WHY** Gravity well Neon'u dondurur. Sprint hızın well alanından kaçmaya yeter, ama geç kalırsan değil.
+**IF** Stun sesini duydun ya da animasyonunu gördün
+**MEANING** Duraksarsın ve sabit hedef olursun — stun seni içine çeker
+**COUNTER** Sesi duyduğun an slide yap. Stun alanı sınırlı, dışı güvenli.
+**WHY** Stun Neon'u yavaşlatır. Sprint hızın alandan çıkmaya yeter, ama geç kalırsan yetmez.
 
 ---
 
-**IF** Nova pulse peek hattına geldi
-**MEANING** Nişanın silinir, yakında düello kaybedersin
-**COUNTER** Ses geldiği anda duvara slide — nova pulse patlamadan önce alan dışına çıkabilirsin.
-**WHY** Nova pulse anlık etki değil, patlamadan önce hareket penceren var. Slide o pencereyi kullanır.
+**IF** Peek hattına stun geldi
+**MEANING** Nişanın bozulur, hemen ardından düelloyu kaybedersin
+**COUNTER** Sesi duyduğun an duvara slide at, stun patlamadan alan dışına çıkarsın.
+**WHY** Stun anlık değil; patlamadan önce hareket pencere var. Slide o pencereyi kullanır.
 
 ---
 
-**IF** Neon ulti açık ve Astra astral forma girdi
-**MEANING** Beam sabit hedefe gider — astral form Astra'yı hareket ettiremez
-**COUNTER** Beam'i astral form konumuna tut — Astra formu kıramazsa ölür.
-**WHY** Astral form Astra'yı sabit bırakır. Neon ulti bu anı bedava öldürmeye çevirir.
+**IF** Ult'un açık ve Astra kaçış formuna girdi
+**MEANING** Beam sabit hedefe gider — bu form Astra'yı yerinde dondurur
+**COUNTER** Beam'i Astra'nın form konumunda tut, formu kıramazsa ölür.
+**WHY** Form Astra'yı sabit bırakır. Neon ult'u bu anı bedava kafadan vurmaya çevirir.
 
 ---
 
-**IF** Astra Cosmic Divide ultini haritaya çekti
-**MEANING** Duvarın arkasındaki takım sesini duymuyorsun, hasar da kesilir — koordinasyon kopar
-**COUNTER** Duvar nereden geçiyor öğren, ona göre pozisyon al. Ulti bitmeden duvarı geçme.
+**IF** Astra ult'unu haritaya çekti
+**MEANING** Duvarın arkasındaki takımın sesini duymazsın, hasar da kesilir — koordinasyon kopar
+**COUNTER** Duvarın nereden geçtiğini öğren, pozisyonunu ona göre al. Ult bitmeden duvarı geçme.
 **WHY** Duvarı geçmeye zorlanırsan hem ses hem hasar avantajını kaybedersin.
 
 ---
 
-**IF** Neon stunu Astra'nın astral form animasyonunu kesti
-**MEANING** Astra star koyamaz — o round star ekonomisi eksik başlar
-**COUNTER** Astra astral forma Neon sprint hattından uzak, kapalı bir noktada gir. Hızlı koy, çık.
-**WHY** Astral form seni sabit bırakır. Neon stun menzilindeysen star yerleşimi iptal olur.
+**IF** Stun'un Astra'nın kaçış formu animasyonunu kesti
+**MEANING** Astra smoke'unu koyamaz — o round eksik util'le başlar
+**COUNTER** Astra kaçış formuna girerken sprint hattından uzak, kapalı bir noktaya çek. Sonra hızlı koy, hızlı çık.
+**WHY** Form seni de sabit bırakır. Stun menzilindeysen smoke yerleşimi iptal olur.
 
 ---
 
-**IF** Neon'un sprint hattı Astra duman + gravity well ikisini üst üste yedi
-**MEANING** Hem kör hem donmuş — hat o round kapandı
-**COUNTER** Her round sprint hattını değiştir — aynı hat iki star birden harcatmaya değmez, farklı hat star ekonomisini dağıtır.
-**WHY** Astra çift star stack sabit hatta maksimum değer üretir. Farklı hat her seferinde iki star harcatmak zorunda bırakır.
+**IF** Sprint hattın hem smoke hem stun yedi
+**MEANING** Hem körsün hem duraksadın — hat o round kapandı
+**COUNTER** Her round sprint hattını değiştir. Aynı hat iki util birden harcatmaya değmez, farklı hat Astra'nın util ekonomisini dağıtır.
+**WHY** Astra çift util'i sabit hatta yığarsa maksimum değer alır. Farklı hat onu her seferinde iki util birden harcamak zorunda bırakır.
 
 ## 4. Util Karşılaştırması
 
-Neon ulti dahil sprint + slide + stun + hız duvarına sahip — hepsi hareket ve tepki üzerine. Astra 5 star'dan duman, gravity well, nova pulse ve büyük duvar çıkarır — hepsi önceden yerleştirilmiş, hareketsiz.
+Neon'da sprint, slide, stun, hız duvarı ve ult var — hepsi hareket ve tepki üzerine kurulu. Astra ise smoke, stun ve büyük duvar çıkarır — hepsi önceden yerleştirilen, hareketsiz util.
 
-Neon hızla Astra'nın hazırlığını atlatır. Astra önceden doğru yere star koyarsa Neon'un hızı işe yaramaz. İkisi de 7 ult puanında ulti açar — ult ekonomisi round baskısı açısından eşit başlar.
+Neon hızla Astra'nın hazırlığını atlatır. Astra util'ini önceden doğru yere koyarsa senin hızın işe yaramaz. İkisi de aynı ult puanında ult açar, yani ult ekonomisi round baskısı açısından eşit başlar.
 
 ## 5. Haritaya Göre Durum
 
-**Icebox (Astra avantajlı):** Mid duman meta — Astra star Neon sprint hattını sürekli kapatır.
+**Icebox (Astra avantajlı):** Mid smoke meta — Astra senin sprint hattını sürekli kapatır.
 
-**Fracture (Astra avantajlı):** Çok girişli site yapısı Astra star ekonomisine uyuyor.
+**Fracture (Astra avantajlı):** Çok girişli site yapısı Astra'nın util ekonomisine yarıyor.
 
-**Split (Dengeli):** Dar geçitler ikisi için de nötr.
+**Split (Dengeli):** Dar geçitler ikiniz için de nötr.
 
-**Haven (Astra hafif avantajlı):** 3 site Astra'ya star dağıtım avantajı verir.
+**Haven (Astra hafif avantajlı):** Üç site Astra'ya util dağıtım avantajı verir.
 
-**Ascent (Neon avantajlı):** Mid sprint hattı Astra'nın star ekonomisini zorlarsın.
+**Ascent (Neon avantajlı):** Mid sprint hattıyla Astra'nın util ekonomisini zorlarsın.
 
-**Breeze (Neon avantajlı):** Geniş alan sprint Astra'nın dumanını atlayabilirsin.
+**Breeze (Neon avantajlı):** Geniş alanda sprint'le Astra'nın smoke'unu atlayabilirsin.
 
-**Pearl (Neon avantajlı):** Mid uzun koridor sprint Astra tepkisinden önce kapatırsın.
+**Pearl (Neon avantajlı):** Mid'in uzun koridorunu sprint'le Astra tepki veremeden kapatırsın.
 
 ## 6. Maçı Döndüren Anlar
 
-**Dönüm 1 — Duman sprint hattını kapattı:** Neon kör, dur ya da farklı hatta geç.
+**Dönüm 1 — Smoke sprint hattını kapattı:** Körsün, ya dur ya farklı hatta geç.
 
-**Dönüm 2 — Gravity well momentum kesti:** Neon sabit — slide geç değilse düello kaybedilir.
+**Dönüm 2 — Stun momentumunu kesti:** Sabit kaldın — geç slide atmazsan düelloyu kaybedersin.
 
-**Dönüm 3 — Ulti Astra astral formunu yakaladı:** Beam sabit hedefe gider, bedava öldürme.
+**Dönüm 3 — Ult Astra'nın kaçış formunu yakaladı:** Beam sabit hedefe gider, bedava kafadan vur.
 
-**Dönüm 4 — Cosmic Divide bilgiyi kesti:** Takım koordinasyonu kopar — duvar hattını öğren, buna göre oyna.
+**Dönüm 4 — Astra ult'u bilgiyi kesti:** Takım koordinasyonu kopar — duvar hattını öğren, ona göre oyna.
 
 ## 7. Koç Notları
 
-Neon oynarken her round sprint hattını değiştir — Astra star nereye koyacağını bilemez. Astra star hep aynı hattaysa o hattı bırak, Astra star ekonomisi boşa gider.
+Neon oynarken her round sprint hattını değiştir, Astra smoke'unu nereye koyacağını bilemesin. Astra smoke'u hep aynı hattaysa o hattı bırak, util'i boşa gitsin.
 
-Astra oynarken star konumunu Neon'un geçen round kullandığı hatta göre güncelle. Neon aynı hattı tekrar kullanırsa star hazır — kullanmazsa Neon o koridoru kaybetmiş demektir.
+Astra oynarken smoke konumunu Neon'un geçen round kullandığı hatta göre güncelle. Neon aynı hattı tekrar kullanırsa smoke'un hazır olur; kullanmazsa Neon o koridoru zaten kaybetmiş demektir.
 
-Neon sprint hattını her round değiştirirse Astra star ekonomisi dağılır. Astra star konumunu güncellemezse Neon hattı serbestçe kullanır.
+Neon her round sprint hattını değiştirirse Astra'nın util ekonomisi dağılır. Astra smoke konumunu güncellemezse Neon hattı serbestçe kullanır.

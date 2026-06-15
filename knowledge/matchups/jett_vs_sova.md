@@ -11,115 +11,115 @@ tags: [matchup, jett, sova, duelist, initiator]
 
 ## 1. Matchup Özü
 
-Sova seni görmek ister. Jett kaçmak ister. Hepsi bu.
+Sova seni görmek ister. Jett kaçmak ister. Mesele bu kadar.
 
-Sova dart atar, pozisyonun belli olur, takım üstüne gelir. Jett olarak: dart seni bulmadan önce hareket et, dart seni bulduktan sonra yerinde durma. Sova olarak: dart bilgisini takıma iletmeden Jett kaybolmasın.
+Sova recon atar, pozisyonun açığa çıkar, takım üstüne gelir. Jett oynuyorsan: recon seni bulmadan hareket et, recon seni bulduktan sonra sakın yerinde kalma. Sova oynuyorsan: recon bilgisini takıma iletene kadar Jett'in kaybolmasına izin verme.
 
-Matchup bilgi savaşı. Sova'nın dart'ı eski bilgi üretir — Jett hareket değiştirirse o bilgi işe yaramaz.
+Bu matchup bir bilgi savaşı. Sova'nın recon'u eski bilgi üretir — Jett yerini değiştirdiği an o bilgi çöpe gider.
 
 ## 2. Kim Avantajlı?
 
 **Jett lehine:**
-- Sova yanında trade partneri yoksa — dart tek başına seni öldürmez, Sova solo kalırsa Jett bilgi sonrası peek atar ve kill alır
-- Dikey harekete açık haritalarda (Split A Main, Icebox Rafters) — updraft ile dart tarama alanının dışına çıkarsın
-- Sova ultsüz dönemdeyken — Hunter's Fury olmadan Sova'nın alan hasarı yok, post-plant agresif dur
-- Dart'ın nereden atıldığını öğrendikten sonra — bir sonraki roundda o açının kör noktasına dur
+- Sova'nın yanında trade partneri yoksa — recon tek başına seni öldürmez, Sova solo kaldıysa Jett bilgi düştükten sonra peek atar ve kill alır
+- Dikey harekete açık haritalarda (Split A Main, Icebox Rafters) — yukarı sıçrayıp recon'un tarama alanının dışına çıkarsın
+- Sova ultsuzken — ult olmadan Sova'nın alan hasarı yok, post-plant agresif dur
+- Recon'un nereden atıldığını çözdükten sonra — bir sonraki round o açının kör noktasında dur
 
 **Sova lehine:**
-- Uzun açılı haritalarda (Breeze A, Icebox A) — dart + shock dart bu alanlarda kesin hasar verir, Jett peek atarsa shock dart'a girer
-- Dash bittiğinde — dart takıma Jett'in dashsiz pozisyonunu gösterir, ikinci düşman anında gelir
-- Hunter's Fury aktifken — ult duvarı delerken geçer, off-angle dursan bile yakalar
-- Jett hep aynı hattan giriyorsa — ikinci roundda shock dart o hatta hazır olur
+- Uzun açılı haritalarda (Breeze A, Icebox A) — recon + shock dart bu alanlarda kesin hasar verir, Jett peek atarsa shock dart'a girer
+- Dash bittiğinde — recon, Jett'in dashsiz pozisyonunu takıma gösterir, ikinci düşman anında üstüne gelir
+- Ult aktifken — ult duvarı delerek geçer, off-angle dursan bile yakalar
+- Jett hep aynı hattan giriyorsa — ikinci round shock dart o hatta hazır bekler
 
-**Dengeli:** Haven, Ascent, Lotus'ta matchup Sova'nın dart disiplinine ve Jett'in hareket çeşitliliğine göre kayar.
+**Dengeli:** Haven, Ascent ve Lotus'ta matchup, Sova'nın recon disiplinine ve Jett'in hareket çeşitliliğine göre kayar.
 
 ## 3. Düellolar
 
-**IF** Sova recon dart senin pozisyonunu işaretledi
-**MEANING** Takım pozisyonunu biliyor, trade partner hazır, peek atarsan karşıdan biri daha gelir
-**COUNTER** Dart sesini duyduğun an yer değiştir — tarama bitmeden farklı noktada ol. Updraft kullanırsan dart'ın zemin taraması seni bulamaz.
-**WHY** Dart sabit bir alanı tarar, Jett o alanı terk ederse Sova takımına yanlış konum bilgisi gider.
+**IF** Sova recon senin pozisyonunu işaretledi
+**MEANING** Takım yerini biliyor, trade partner hazır, peek atarsan karşıdan biri daha çıkar
+**COUNTER** Recon sesini duyduğun an yer değiştir — tarama bitmeden farklı bir noktada ol. Yukarı sıçrarsan recon'un zemin taraması seni bulamaz.
+**WHY** Recon sabit bir alanı tarar; Jett o alanı terk ederse Sova'nın takımına yanlış konum gider.
 
 ---
 
-**IF** Shock dart tam dash sonrası ineceğin noktaya atılmış
+**IF** Shock dart tam dash sonrası ineceğin noktaya atıldı
 **MEANING** Dash biter bitmez hasar yersin, HP düşer, dashsiz kalırsın
-**COUNTER** Her roundda farklı bir noktaya in. Shock dart sabit hedeflere çalışır — hep aynı noktaya inersen ikinci round orada hazır olur.
-**WHY** Shock dart lineup'ları ezberlenmiş hatlara kurulur. Noktayı değiştirirsen lineup boşa gider.
+**COUNTER** Her round farklı bir noktaya in. Shock dart sabit hedefleri vurur — hep aynı yere inersen ikinci round orada hazır bekler.
+**WHY** Shock dart lineup'ları ezberlenmiş hatlara kurulur. İniş noktanı değiştirirsen lineup boşa gider.
 
 ---
 
-**IF** Sova owl drone site içinde seni görüyor
-**MEANING** Drone pozisyonunu canlı aktarıyor, dart atarsa işaretlenirsin, takım üstüne gelir
-**COUNTER** Drone sesini duyduğun an rifle ile vur — iki atışta düşer. Drone'u indirmek bilgi dengesini tersine çevirir.
-**WHY** Drone HP'si düşük. Vurursan Sova hem drone'unu hem bilgisini kaybeder.
+**IF** Sova recon'u site içinde seni görüyor
+**MEANING** Pozisyonunu canlı aktarıyor, işaretlenirsen takım üstüne gelir
+**COUNTER** Sesini duyduğun an rifle ile vur — iki atışta düşer. Onu indirmek bilgi dengesini sana çevirir.
+**WHY** Recon'un canı düşük. Vurursan Sova hem recon'unu hem bilgisini kaybeder.
 
 ---
 
-**IF** Updraft ile üst kata çıkıyorsun, Sova dart o alanda
-**MEANING** Havadayken işaretlenirsen yavaş hedefsin, takım pozisyonunu bilir
-**COUNTER** Updraft'ı dart'ın taramadığı üst kat noktasına yöelt — dart zemin seviyesini tarar, üst kat farklı açı gerektirir.
-**WHY** Dart tarama alanı sabit, updraft noktası senin elinde. Üst kata çıkarsan dart seni bulamaz.
+**IF** Yukarı sıçrayıp üst kata çıkıyorsun, Sova'nın recon'u o alanda
+**MEANING** Havadayken işaretlenirsen yavaş ve açık hedefsin, takım yerini öğrenir
+**COUNTER** Sıçrayışını recon'un taramadığı üst kat noktasına yönelt — recon zemin seviyesini tarar, üst kat farklı açı ister.
+**WHY** Recon'un tarama alanı sabit, sıçrama noktası senin elinde. Üst kata çıkarsan recon seni bulamaz.
 
 ---
 
-**IF** Sova Hunter's Fury ultunu post-plant pozisyonuna attı
-**MEANING** Ult duvarı delerken geçer, off-angle durursan bile hasar alırsın, dash yoksa çıkamazsın
+**IF** Sova ult'unu post-plant pozisyonuna attı
+**MEANING** Ult duvarı delerek geçer, off-angle dursan bile hasar alırsın, dash yoksa çıkamazsın
 **COUNTER** Post-plant pozisyonunu ult'un bilinen hatlarından uzak seç. Ult sesini duyduğun an dash ile çık.
-**WHY** Hunter's Fury sabit hat üzerinden geçer. Dart seni vermediyse ult seni bulamaz.
+**WHY** Ult sabit bir hat üzerinden geçer. Recon seni vermediyse ult de seni bulamaz.
 
 ---
 
-**IF** Op'la açı tutuyorsun, dart pozisyonunu işaretledi
-**MEANING** Takım seni biliyor, shock dart ya da karşı Op geliyor
-**COUNTER** Op attıktan sonra sabit kalma — dash ile yer değiştir. Aynı köşeden iki kez Op atma.
-**WHY** Dart + takım tepkisi = sabit duran Op holder ölür. Hareket edersen Sova'nın bilgisi eskir.
+**IF** Op'la açı tutuyorsun, recon pozisyonunu işaretledi
+**MEANING** Takım seni gördü, ya shock dart ya da karşı Op geliyor
+**COUNTER** Op'u attıktan sonra sabit kalma — dash ile yer değiştir. Aynı köşeden iki kez Op atma.
+**WHY** Recon + takım tepkisi, sabit duran Op holder'ı öldürür. Hareket edersen Sova'nın bilgisi eskir.
 
 ---
 
-**IF** Round başında agresif dash atıyorsun, Sova dart o hatta hazır
-**MEANING** Dash sesli harekettir, dart taramasıyla aynı anda girersen görünürsün, takım rotate başlar
-**COUNTER** Dart sesini duyarsan dash'i beklet. Dart bittikten sonra geç. Sessiz yürüyüşle geçersen dart seni yakalayamaz.
-**WHY** Dart ses + tarama ikisini birden kullanır. Ses çıkarmazsan tarama seni bulamaz.
+**IF** Round başında agresif dash atıyorsun, Sova'nın recon'u o hatta hazır
+**MEANING** Dash sesli harekettir, tarama anında girersen görünürsün, takım rotate başlatır
+**COUNTER** Recon sesini duyarsan dash'i beklet. Tarama bitince geç. Sessiz yürüyüşle geçersen recon seni yakalayamaz.
+**WHY** Recon hem ses hem tarama kullanır. Ses çıkarmazsan tarama seni bulamaz.
 
 ## 4. Utility Dengesi
 
-Sova'nın 6 utility'si var — dart, dart, shock, shock, drone, ult. Hepsi bilgi ve hasar. Jett'in 5 utility'si var — dash, updraft, updraft, 3 duman, ult. Hepsi hareket.
+Sova'nın util'i bilgi ve hasar üzerine kurulu — iki recon, iki shock dart, bir bot, bir ult. Jett'inki ise tamamen hareket — dash, iki yükseliş, smoke ve ult.
 
-Sova daha fazla utility atar ama hiçbiri sabit duran düşman olmadan kesin öldürme yapmaz. Sova utility'si seni bulduğunda hareket et — o rounddaki bilgi değeri sıfırlanır.
+Sova daha çok util atar ama hiçbiri sabit duran bir düşman olmadan kesin öldürme yapmaz. Sova'nın util'i seni bulduğu an hareket et — o rounddaki bilgi değeri sıfırlanır.
 
-Ult maliyeti ikisi de 7 — Blade Storm ve Hunter's Fury aynı puanda. Blade Storm eco roundda çalışır, Hunter's Fury alan hasarı için. Sova ult aktifse Jett post-plant pozisyonunu değiştir. Jett ult aktifse Sova drone'unu kullanmaktan çekinir.
+Ult maliyeti ikisinde de aynı: 7 puan. Jett'in ult'u eco roundda parlar, Sova'nınki alan hasarı için. Sova ult aktifse post-plant pozisyonunu değiştir. Jett ult aktifse Sova recon'unu kullanmaya çekinir.
 
 ## 5. Haritaya Göre Değişim
 
-**Breeze (Sova avantajlı):** Uzun açılar dart + shock için ideal. Jett Op tutuyorsa dart hedefinde — Op attıktan hemen yer değiştir.
+**Breeze (Sova avantajlı):** Uzun açılar recon + shock için biçilmiş kaftan. Jett Op tutuyorsa recon hedefindesin — Op'u attıktan hemen sonra yer değiştir.
 
-**Icebox (Sova avantajlı):** Sova'nın en güçlü haritalarından. Dart kapsama alanı büyük. Rafters'ta updraft ile dart taramasının dışına çıkabilirsin.
+**Icebox (Sova avantajlı):** Sova'nın en güçlü haritalarından. Recon kapsama alanı geniş. Rafters'ta yukarı sıçrayıp tarama alanının dışına çıkabilirsin.
 
-**Haven (Dengeli):** Sova 3 site bilgi oyuncusu, Jett C Long'da Op. Çatışma C Long, B Mid ve A Short rotate noktalarında olur.
+**Haven (Dengeli):** Sova üç site bilgi oyuncusu, Jett C Long'da Op tutar. Çatışma C Long, B Mid ve A Short rotate noktalarında çıkar.
 
-**Ascent (Dengeli):** Sova A Site bilgi meta, Jett A Short girişi. Dart seni A Short'ta bulursa B'den rotate et.
+**Ascent (Dengeli):** Sova A Site bilgi meta, Jett A Short girişi yapar. Recon seni A Short'ta bulursa B'den rotate et.
 
-**Lotus (Sova hafif avantajlı):** 3 site yapısı dart için iyi — Sova her sitede bilgi alır. Jett aynı hattan iki round üst üste girerse dart üçüncü roundda o hatta hazır olur.
+**Lotus (Sova hafif avantajlı):** Üç site yapısı recon için iyi — Sova her sitede bilgi alır. Jett aynı hattan iki round üst üste girerse recon üçüncü round o hatta hazır bekler.
 
-**Bind (Jett avantajlı):** Sova Bind'da zayıf pick. Yakın mesafe çatışmalar dart'tan önce olur, Jett avantajlı.
+**Bind (Jett avantajlı):** Sova Bind'da zayıf pick. Yakın mesafe çatışmalar recon'dan önce çıkar, Jett önde.
 
-**Split (Dengeli):** Sova B Main dart kullanır, Jett A Main vent dikey girişi yapar. Haritanın iki tarafı farklı oynuyor.
+**Split (Dengeli):** Sova B Main'de recon kullanır, Jett A Main vent'ten dikey giriş yapar. Haritanın iki tarafı bambaşka oynanır.
 
 ## 6. Denge Kırılma Anları
 
-**Kırılma 1 — Dart hattı deşifre:** Dart'ın nereden atıldığını bir roundda öğrendin. Bir sonraki roundda o açının kör noktasına dur — Sova ya açı değiştirir ya da dart boşa gider.
+**Kırılma 1 — Recon hattını çözdün:** Recon'un nereden atıldığını bir roundda öğrendin. Sonraki round o açının kör noktasında dur — Sova ya açı değiştirir ya recon boşa gider.
 
-**Kırılma 2 — Updraft dart dışına çıktı:** Updraft ile dart tarama alanının dışına çıkarsan Sova kör kalır, serbest hareket edersin.
+**Kırılma 2 — Recon'un dışına çıktın:** Yukarı sıçrayıp tarama alanının dışına çıkarsan Sova kör kalır, serbest hareket edersin.
 
-**Kırılma 3 — Shock dart tam iniş noktasına denk geldi:** Hep aynı noktaya indiysen shock dart kesin hasar verir. HP düşer, matchup Sova'ya kayar.
+**Kırılma 3 — Shock dart tam iniş noktana denk geldi:** Hep aynı yere indiysen shock dart kesin hasar verir. HP düşer, matchup Sova'ya kayar.
 
-**Kırılma 4 — Hunter's Fury pozisyonu okudu:** Ult agresif hattını biliyorsa dash ile bile tam çıkış zor. Post-plant pozisyonunu önceden değiştir.
+**Kırılma 4 — Ult agresif hattını okudu:** Ult senin hattını biliyorsa dash ile bile tam çıkış zorlaşır. Post-plant pozisyonunu önceden değiştir.
 
 ## 7. Koç Notu
 
-Sova seni bir kez bulduğunda takımına söyler. Takım gelir. Sen ölürsün. Bu matchup'ta ölümlerin büyük çoğunluğu dart bilgisinden gelir, dart hasarından değil.
+Sova seni bir kez bulduğunda takımına söyler. Takım gelir. Sen ölürsün. Bu matchup'ta ölümlerin büyük çoğunluğu recon hasarından değil, recon bilgisinden gelir.
 
-Jett olarak: her roundda farklı bir yerden gir, farklı bir yere in, farklı bir noktada dur. Sova'nın lineup'ları sana değil, senin alışkanlıklarına karşı çalışır.
+Jett oynuyorsan: her round farklı bir yerden gir, farklı bir noktaya in, farklı bir yerde dur. Sova'nın lineup'ları sana değil, alışkanlıklarına karşı çalışır.
 
-Sova olarak: dart attıktan sonra bilgiyi hemen takıma ver ve kendin de hareket et. 1 düşman düşmeden önce Jett konum değiştirir — dart attın mı hemen bask.
+Sova oynuyorsan: recon'u attıktan sonra bilgiyi hemen takıma ver, kendin de hareket et. Tek düşman düşmeden Jett konum değiştirir — recon'u attıysan hemen bas.

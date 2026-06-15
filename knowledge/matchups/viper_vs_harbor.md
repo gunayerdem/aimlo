@@ -9,13 +9,13 @@ tags: [matchup, viper, harbor, controller_vs_controller]
 
 ## 1. Matchup Özü
 
-İki alan kontrolcüsü karşı karşıya. Ama aynı şeyi yapmıyorlar.
+İki alan kontrolcüsü karşı karşıya. Ama aynı işi yapmıyorlar.
 
-Viper dumanına zehir ekler — wall ve cloud aynı havuzdan içer. Havuz bitince alan yok. Harbor duman atar ama zehri yok — her util ayrı bekleme süresinde çalışır, biri bitince diğeri devreye girer ama yenisi uzun sürer.
+Viper dumanına zehir katar — duvar ve smoke aynı yakıt havuzundan beslenir. Havuz bitince alan da biter. Harbor smoke atar ama zehri yok — her util ayrı bekleme süresinde çalışır, biri biter, diğeri devreye girer ama yenisinin gelmesi uzun sürer.
 
-Kilit fark şu: Viper haritanın bir bölümünü kilitler ve o kilidi yakıt ölçerek yönetir. Harbor her utilini ayrı atar, ama biri gidince geri gelmesi uzun sürer.
+Kilit fark şu: Viper haritanın bir bölümünü kilitler ve o kilidi yakıtını ölçerek yönetir. Harbor her utilini ayrı atar, gidince geri gelmesi uzun sürer.
 
-Kim yakıtını veya utilini daha uzun aktif tutarsa o round'un haritasını tutar.
+Yakıtını ya da utilini daha uzun aktif tutan, o round'un haritasını tutar.
 
 ## 2. Kim Avantajlı?
 
@@ -25,70 +25,70 @@ Harbor'un tek sağlam yeri Pearl. Orada Viper'dan daha iyi.
 
 Diğer haritalarda (Haven, Lotus, Split, Ascent) ikisi de ilk tercih değil — o rolü Omen alır.
 
-Neden Viper üstte? Çünkü yakıtı parça parça kullanabilirsin — duvarı kapat, yakıt kazan, tekrar aç. Harbor böyle çalışmaz: attın mı bitti, bekliyorsun. Viper round boyunca 2-3 farklı bölgeyi kapatabilir. Harbor 1-2 bölge.
+Neden Viper üstte? Çünkü yakıtı parça parça harca. Duvarı kapat, yakıt topla, tekrar aç. Harbor böyle çalışmaz: attın mı bitti, beklersin. Viper bir round boyunca 2-3 farklı bölgeyi kapatır, Harbor 1-2 bölge.
 
-Ult karşılaştırması: Viper's Pit uzun süreli alan kilidi, Harbor Reckoning kısa süreli sersemletme. Pit retake çevirir. Reckoning retake açar. Farklı aşamalarda kullanılır.
+Ult karşılaştırması: Viper'ın ult'u uzun süreli alan kilidi, Harbor'ın ult'u kısa süreli sersemletme. Viper'ın ult'u retake çevirir, Harbor'ın ult'u retake açar. Farklı anlarda kullanılır.
 
 ## 3. Key Düellolar
 
 **IF** Viper duvarını erken kapattı, yakıt topluyor
-**MEANING** Duvar kapandığında o hat kontrolsüz. Rotate alanı açık.
-**COUNTER** Harbor tarafısın — duvarın kapandığını gördüğünde High Tide'ı o hatta bas. Viper kontrolsüz, sen doldur.
-**WHY** Viper duvarı kapatmak taktiksel yakıt hamlesi. Ama o pencerede Viper alansız. Bu pencere Harbor için ideal giriş.
+**MEANING** Duvar kapanınca o hat kontrolsüz kalır. Rotate alanı açılır.
+**COUNTER** Harbor tarafındaysan, duvarın kapandığını görür görmez duvarını o hatta bas. Viper kontrolsüz, sen alanı doldur.
+**WHY** Viper duvarı kapatınca yakıt kazanır ama o pencerede alansız kalır. O pencere Harbor için biçilmiş giriş anı.
 
 ---
 
-**IF** Harbor Cascade'ını Viper cloud'uyla aynı hatta attı
-**MEANING** İki duman üst üste — Cascade Viper cloud'un içinden geçiyor, ekstra görüş engeli sıfır, util harcandı.
-**COUNTER** Cascade'ı Viper cloud'un kapamadığı açıya at. Zaten kapalı yere ikinci duman boşa.
-**WHY** Dumanlarda üst üste binme yok — her util ayrı açıyı kapatmalı.
+**IF** Harbor duvarını Viper smoke'uyla aynı hatta attı
+**MEANING** İki duman üst üste biner — Harbor duvarı Viper smoke'unun içinden geçer, ekstra görüş engeli sıfır, util boşa gider.
+**COUNTER** Duvarını Viper smoke'unun kapamadığı açıya at. Zaten kapalı yere ikinci duman koymak boşa.
+**WHY** Dumanlar üst üste binmez — her util ayrı bir açıyı kapatmalı.
 
 ---
 
-**IF** Viper Snake Bite plant alanına düştü, Harbor Cove kurulu
-**MEANING** Cove görüşü keser ama zehiri durdurmaz. Cove içindeki oyuncu Snake Bite hasarı alır, hem kör hem yanıyor.
-**COUNTER** Viper tarafısın — Cove'u gördüğünde içine Snake Bite lineup at. Cove savunuculara yardım etmez, zehre karşı savunmasız.
-**WHY** Cove görüş engeli, fiziksel engel değil. Snake Bite görüşten bağımsız hasar verir.
+**IF** Viper molly'sini plant alanına düşürdü, Harbor ult'u kurulu
+**MEANING** Harbor ult'u görüşü keser ama zehri durdurmaz. İçindeki oyuncu molly hasarı alır, hem kör hem yanar.
+**COUNTER** Viper tarafındaysan, Harbor ult'unu görünce içine molly lineup'ı at. O dome savunmacıları zehre karşı korumaz.
+**WHY** Harbor ult'u görüş engeli, fiziksel engel değil. Molly görüşten bağımsız hasar verir.
 
 ---
 
-**IF** Harbor High Tide ile Viper duvarı aynı hatta
-**MEANING** İki duvar aynı rotayı kapatıyor — çift kat ama tek hat, diğer hat açık.
-**COUNTER** Duvarları farklı hatlara dağıt. Biri A, diğeri Mid — böylece haritanın iki tarafı kapanır. Aynı hatta iki duvar boşa.
-**WHY** İki kontrolcü aynı takımdaysa farklı hatlarda çalışır: Viper dikey alan, Harbor yatay alan.
+**IF** Harbor duvarıyla Viper duvarı aynı hatta
+**MEANING** İki duvar aynı rotayı kapatır — çift kat ama tek hat, diğer hat açık kalır.
+**COUNTER** Duvarları farklı hatlara dağıt. Biri A, diğeri Mid — böylece haritanın iki yanı kapanır. Aynı hatta iki duvar boşa gider.
+**WHY** İki kontrolcü aynı takımdaysa farklı hatlarda çalışır: Viper dikey alanı, Harbor yatay alanı tutar.
 
 ---
 
-**IF** Viper's Pit aktif, Harbor Reckoning hazır
-**MEANING** Pit içinde avantajlısın ama Pit dışına çıkamazsın — Reckoning Pit sınırına basılırsa içinde hapsolursun.
-**COUNTER** Harbor tarafısın — Reckoning'i Pit çıkış noktasına bas. Viper Pit'ten çıkamaz, takımın Pit dışını alır.
-**WHY** Pit savunma silahı — içi güçlü, dışı sıradan. Reckoning Pit kenarında Viper'ı kilitler.
+**IF** Viper ult'u aktif, Harbor ult'u hazır
+**MEANING** Viper ult'unun içinde avantajlısın ama dışına çıkamazsın — Harbor ult'u alanın sınırına basılırsa içinde hapsolursun.
+**COUNTER** Harbor tarafındaysan, ult'unu Viper ult'unun çıkış noktasına bas. Viper dışarı çıkamaz, takımın çevreyi alır.
+**WHY** Viper ult'u savunma silahı — içi güçlü, dışı sıradan. Harbor ult'u Viper'ı kendi alanının kenarında kilitler.
 
 ---
 
 **IF** Harbor tüm utilini round başında bir siteye boşalttı
-**MEANING** Round ortasında Harbor elde yok. Viper hâlâ yakıtını yönetiyor, hâlâ çalışıyor.
-**COUNTER** Harbor tarafısın — en az bir utilini sakla. Round başı her şeyi ver, sonra yok kalma.
-**WHY** Viper yakıtı parçalı — round boyunca dağıtır. Harbor öyle çalışmaz, binary: attın mı bitti. Aynı şekilde yönetirsen round ortasında eli boş kalırsın.
+**MEANING** Round ortasında Harbor'ın elinde util kalmaz. Viper hâlâ yakıtını yönetir, hâlâ çalışır.
+**COUNTER** Harbor tarafındaysan en az bir utilini sakla. Round başında her şeyi verme, sonra eli boş kalma.
+**WHY** Viper yakıtı parçalı, round boyunca dağıtır. Harbor öyle çalışmaz, ya hep ya hiç: attın mı bitti. Aynı şekilde harcarsan round ortasında çıplak kalırsın.
 
 ---
 
 **IF** Viper duvarını round başında açtı ve tüm round açık bıraktı
-**MEANING** Yakıt sürekli akıyor — round sonunda ikinci duvar veya cloud için yakıt yok.
-**COUNTER** Duvarı tap kullan. Aç, kapa, aç. Yakıtı parçalı harca, round boyunca aktif kal.
-**WHY** Duvarı sürekli açık tutmak yakıtı mahveder. Parçalı kullanım Viper'ın gerçek gücü.
+**MEANING** Yakıt sürekli akar — round sonunda ikinci duvar ya da smoke için yakıt kalmaz.
+**COUNTER** Duvarı tap kullan. Aç, kapat, aç. Yakıtı parça parça harca, round boyunca aktif kal.
+**WHY** Duvarı sürekli açık tutmak yakıtı mahveder. Parçalı kullanım Viper'ın asıl gücü.
 
 ## 4. Utility Karşılaştırması
 
-Viper: wall ve cloud aynı havuzdan içer. Parça parça kullanırsan round boyunca 2-3 farklı alanı kapatırsın.
+Viper: duvar ve smoke aynı yakıt havuzundan beslenir. Parça parça harcarsan round boyunca 2-3 farklı alanı kapatırsın.
 
-Harbor: her util ayrı bekleme süresi. Round başı attın mı, geri gelmesi uzun. Round içi tekrar kullanım zor.
+Harbor: her util ayrı bekleme süresinde. Round başında attın mı, geri gelmesi uzun. Round içinde tekrar kullanmak zor.
 
-Viper'ın Harbor'da olmayan silahı: zehir. Snake Bite defuse engeller, hasarı görüşten bağımsız verir.
+Viper'ın Harbor'da olmayan silahı: zehir. Molly defuse'u engeller, hasarı görüşten bağımsız verir.
 
-Harbor'un Viper'da olmayan silahı: Cove. Post-plant kupol mimarisi — Viper'da eşdeğeri yok.
+Harbor'un Viper'da olmayan silahı: dome'lu ult. Post-plant kubbe mimarisi — Viper'da dengi yok.
 
-Aynı takımdaysan kombo şu: Viper Snake Bite plant alanına, Harbor Cove retake'i kilitler. Karşı takımda bu kombo yok — Harbor bu matchup'ta zehirsiz kalır.
+Aynı takımdaysanız kombo şu: Viper molly'sini plant alanına atar, Harbor ult'u retake'i kilitler. Karşı takımda bu kombo yok — Harbor bu matchup'ta zehirsiz kalır.
 
 ## 5. Harita Bazlı Fark
 
@@ -96,50 +96,50 @@ Aynı takımdaysan kombo şu: Viper Snake Bite plant alanına, Harbor Cove retak
 
 **Icebox:** Viper. Mid Kitchen ve B kontrolü Viper ile kurulur. Harbor Icebox'ta işe yaramaz.
 
-**Fracture:** Viper. İki taraflı saldırı yapısı Pit için ideal. Harbor burada ikinci kontrolcü bile değil.
+**Fracture:** Viper. İki taraflı saldırı yapısı Viper ult'u için ideal. Harbor burada ikinci kontrolcü bile değil.
 
 **Pearl:** Harbor. Harbor'un tek sağlam haritası. Viper Pearl'de Harbor kadar değerli değil.
 
-**Haven:** Nötr. İkisi de tek kontrolcü rolde ilk tercih değil — Omen alır.
+**Haven:** Nötr. İkisi de tek kontrolcü rolünde ilk tercih değil — Omen alır.
 
 **Lotus:** Nötr. Viper C Long için, Harbor double kontrolcü seçeneği. Tek kontrolcü kararı yine Omen'a gider.
 
-**Sunset:** Viper hafif üstte. Dar yapı Viper cloud'larına uygun.
+**Sunset:** Viper hafif üstte. Dar yapı Viper smoke'larına uygun.
 
 **Bind:** Viper eğilimli. Harbor Bind'de neredeyse hiç oynanmaz.
 
 **Split:** Nötr. Viper B Main için, Harbor ikinci kontrolcü olabilir.
 
-**Ascent:** İkisi de ilk tercih değil. Omen o rolü alır.
+**Ascent:** İkisi de ilk tercih değil. O rolü Omen alır.
 
 ## 6. Dönüm Noktaları
 
-1. **Yakıt sıfırlandı.** Viper yakıtı bittiğinde sıradan bir tüfekçiye döner. Harbor bu pencerede haritanın kontrolsüz bölümünü doldurur. Yakıt yönetimi bu matchup'ta kazan-kaybet çizgisi.
+1. **Yakıt sıfırlandı.** Viper yakıtı bitince sıradan bir tüfekçiye döner. Harbor bu pencerede haritanın kontrolsüz bölümünü doldurur. Yakıt yönetimi bu matchup'ta kazan-kaybet çizgisi.
 
-2. **Pit vs Reckoning zamanlaması.** İkisi aynı roundda kullanılırsa Pit süresi uzun, Reckoning kısa — Pit zamanlaması öne geçer. Ama Reckoning Pit sınırına basılırsa Viper içinde hapsolur.
+2. **İki ult'un zamanlaması.** İkisi aynı roundda kullanılırsa Viper ult'u uzun, Harbor ult'u kısa sürer — Viper'ın zamanlaması öne geçer. Ama Harbor ult'u Viper alanının sınırına basılırsa Viper içeride hapsolur.
 
-3. **Double kontrolcü vs tek kontrolcü.** Karşı takım Viper + başka bir kontrolcü getirirse Harbor tek başına yetersiz kalır. Comp seçimi bu matchup'ı başlamadan bitirebilir.
+3. **Double kontrolcü vs tek kontrolcü.** Karşı takım Viper'ın yanına bir kontrolcü daha getirirse Harbor tek başına yetmez. Comp seçimi bu matchup'ı başlamadan bitirebilir.
 
-4. **Post-plant zehir + Cove kombosu.** Aynı takımdaysan Snake Bite + Cove retake'i neredeyse imkansız kılar. Karşı takımda bu kombo yok — Harbor zehirsiz, Cove tek başına yetmez.
+4. **Post-plant zehir + dome kombosu.** Aynı takımdaysanız Viper molly'si + Harbor ult'u retake'i neredeyse imkansız kılar. Karşı takımda bu kombo yok — Harbor zehirsiz, dome'u tek başına yetmez.
 
-5. **Duvar yönü.** Viper duvarı yanlış yöne giderse Harbor doğru hatta High Tide basar, haritanın bir yarısı Harbor'da. Tek yanlış yön kararı round'un harita kontrolünü çevirir.
+5. **Duvar yönü.** Viper duvarını yanlış yöne kurarsa Harbor doğru hatta kendi duvarını basar, haritanın bir yarısı Harbor'a geçer. Tek yanlış yön kararı round'un harita kontrolünü çevirir.
 
 ## 7. Koç Notları
 
 **Viper oynuyorsan:**
 
 - Duvarı tap kullan — aç, kapat, aç. Sürekli açık bırakma.
-- Reckoning sesini duyduğunda Pit'ten çık. Ses geldi mi içeride kalma — Pit sınırına Reckoning basılır, hapsolursun.
-- Snake Bite'ı Cove içine at. Cove görüşü keser ama zehri durdurmaz.
+- Harbor ult'unun sesini duyunca kendi ult'undan çık. Ses geldi mi içeride kalma — alanının sınırına Harbor ult'u basılır, hapsolursun.
+- Molly'ni Harbor ult'unun içine at. O dome görüşü keser ama zehri durdurmaz.
 
 **Harbor oynuyorsan:**
 
-- Viper duvarının kapandığını gördüğünde High Tide'ı o hatta bas. Pencere kısa — geç kalma.
-- Cascade'ı Viper cloud'un kapamadığı açıya at. Üst üste binen duman boşa.
-- Cove'u tek kişi için değil takım savunması için kullan. Tek oyuncu reposition için Cove harcama.
-- Round başında her utilini boşaltma — en az biri sakla, round ortası için.
+- Viper duvarının kapandığını görünce kendi duvarını o hatta bas. Pencere kısa — geç kalma.
+- Duvarını Viper smoke'unun kapamadığı açıya at. Üst üste binen duman boşa gider.
+- Ult'unu tek kişi için değil takım savunması için kullan. Tek oyuncuyu reposition etmek için ult harcama.
+- Round başında bütün utilini boşaltma — en az birini round ortası için sakla.
 
 **İki kontrolcü aynı takımdaysa:**
 
-- Viper dikey alan, Harbor yatay alan. Aynı hatta çakışma — zıt hatlara dağıt.
-- Snake Bite + Cove post-plant kombosunu önceden konuş. Spontane değil, planlı.
+- Viper dikey alanı, Harbor yatay alanı tutar. Aynı hatta çakışmayın — zıt hatlara dağılın.
+- Viper molly'si + Harbor ult'u post-plant kombosunu önceden konuşun. Spontane değil, planlı olsun.

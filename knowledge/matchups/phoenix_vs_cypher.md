@@ -11,110 +11,110 @@ tags: [matchup, phoenix, cypher, duelist, sentinel]
 
 ## 1. Matchup Özü
 
-Sen Phoenix oynuyorsan Cypher'ın tuzaklarını utility ile çözmek zorundasın — flash + molly + wall olmadan Cypher seni okur, tuzaklar ve bilgiyi takımına satar. Sen Cypher oynuyorsan Phoenix'in peek açısını önceden bil, tuzaklar sabit durmasın — Phoenix ult ile haritalar, bir sonraki roundda bilgin eskir.
+Phoenix oynuyorsan Cypher'ın tellerini util ile temizlemek zorundasın — flash, molly ve duvar olmadan girersen Cypher seni önceden okur, teli görür ve yerini takımına söyler. Cypher oynuyorsan Phoenix'in nereden peek atacağını önceden tahmin et, telleri sabit bırakma — Phoenix ult ile haritayı tarar, bir sonraki round bilgin eskir.
 
 ## 2. Kim Avantajlı?
 
 **Phoenix avantajlı:**
-- Dar boğazlarda (Bind Hookah, Split A Main) — flash + molly zinciri tuzağı yıkar, close range dövüşte Phoenix'in kendi kendini iyileştirmesi fark yaratır
-- Cypher kamera modundayken — kamera açıkken Cypher savunmasızdır, flash peek ile yakalarsın
-- Cypher ulti hazır değilken — Neural Theft olmadan Cypher'ın takım bilgisi kısıtlı, baskı yap
-- Run It Back hazırken — ult marker ile Cypher'ın tuzak hattını test et, ölürsen geri dönersin, bilgiyi tutarsın
+- Dar boğazlarda (Bind Hookah, Split A Main) — flash + molly zinciri teli yakar, close range dövüşte Phoenix kendini iyileştirdiği için fark açar.
+- Cypher kameradayken — kamerayı kullandığı an Cypher savunmasız, flash peek ile üstüne git.
+- Cypher ulti hazır değilken — ult olmadan Cypher takımına az bilgi verir, baskıyı sen kur.
+- Phoenix ulti hazırken — ult ile Cypher'ın tel hattını ölmeden test et, ölürsen geri dönersin, topladığın bilgiyi tutarsın.
 
 **Cypher avantajlı:**
-- Uzun sightline haritalarda (Breeze A, Icebox Mid) — Phoenix flash bu mesafede işe yaramaz, Cypher rifle dominance
-- Phoenix utility yokken — flash yok, molly yok, sen sıradan bir riflersin, Cypher tuzak + crossfire seni okur
-- Trip + cage + kamera zinciri kurulduysa — katmanlı savunma var, tek utility ile kıramazsın
-- Phoenix retake ediyorken Cypher site içindeyse — tuzak retake yolunu keser, cage görüşü kapatır
+- Uzun açıların açık olduğu haritalarda (Breeze A, Icebox Mid) — flash bu mesafede işe yaramaz, Cypher tüfekle baskın çıkar.
+- Phoenix utili yokken — flash yok, molly yok, sıradan bir tüfekçisin; Cypher teli + crossfire ile seni köşeye sıkıştırır.
+- Tel + smoke + kamera zinciri kurulduysa — katmanlı savunma var, tek util ile kıramazsın.
+- Phoenix retake ederken Cypher site içindeyse — tel retake yolunu keser, smoke görüşü kapatır.
 
-**Dengeli:** Haven, Ascent, Fracture gibi haritalarda matchup senin utility kullanımına göre değişir — her round ayrı değerlendir.
+**Dengeli:** Haven, Ascent, Fracture gibi haritalarda matchup senin util kullanımına göre değişir — her round'u ayrı oku.
 
 ## 3. Key Düellolar
 
 **IF** Phoenix flash ile Cypher'ı kör etti, Phoenix peek alıyor
-**MEANING** Flash yediği an Cypher'ın tuzak refleksi çalışmaz, Phoenix flash süresi boyunca kill hattında
-**COUNTER** Flash sesini duyduğun an duvara dön, gözünü kapat. Flash bitmeden pozisyon değiştirme — trade partnerın Phoenix'i yakalar.
-**WHY** Phoenix flash duvardan dönerek gelir. Sese reaksiyon vermezsen açık hedefsin. Crosshair'ini kapat, flash geçsin, sonra trade yap.
+**MEANING** Flash yediği an Cypher tele basamaz, Phoenix flash süresi boyunca kill hattında
+**COUNTER** Flash sesini duyduğun an duvara dön, gözünü kapat. Flash bitmeden yerinden kıpırdama — trade partnerin Phoenix'i alır.
+**WHY** Phoenix flash'i duvardan dönerek atar. Sese reaksiyon vermezsen açık hedefsin. Crosshair'ini duvara çevir, flash geçsin, sonra trade'e gir.
 
 ---
 
-**IF** Phoenix molly'yi Cypher tuzak hattına attı
-**MEANING** Molly tuzağı siler, Cypher bir tuzak kaybeder
-**COUNTER** Tripi molly hattından uzak köşeye kur. İki tuzağı farklı noktalara dağıt — biri yıkılırsa ikincisi hâlâ çalışır.
-**WHY** Phoenix molly tek HP'lik tuzağı temizler. Trip sabit ve öngörülür yerleşimdeyse Phoenix zaten lineup'ını biliyor demektir.
+**IF** Phoenix molly'yi Cypher'ın tel hattına attı
+**MEANING** Molly teli yakar, Cypher bir tel kaybeder
+**COUNTER** Teli molly hattının uzağına, ayrı bir köşeye kur. İki teli farklı noktaya dağıt — biri yanarsa ikincisi hâlâ çalışsın.
+**WHY** Phoenix molly tek canlı teli temizler. Tel hep aynı sabit noktadaysa Phoenix lineup'ını çoktan ezberlemiştir.
 
 ---
 
-**IF** Phoenix wall ile close range cover aldı, Cypher kamera ile izledi
-**MEANING** Wall görüşü keser ama Cypher kamera wall'un bir tarafından Phoenix'i görür — bilgiyi takıma iletir
-**COUNTER** Wall'u iki yönü kapatacak şekilde at — tek yönlü wall kamera açısına zayıf. L ya da T şeklinde düşün.
-**WHY** Phoenix wall'u küçük alan kaplar. Kamera multi-açı görür. Wall açısı yanlışsa kamera bilgi akmaya devam eder.
+**IF** Phoenix duvar ile close range cover aldı, Cypher kamera ile izledi
+**MEANING** Duvar görüşü keser ama Cypher kamera duvarın bir yanından Phoenix'i görür — bilgiyi takıma iletir
+**COUNTER** Duvarı iki yönü birden kapatacak şekilde at — tek yönlü duvar kamera açısına açık kalır. L ya da T şeklinde düşün.
+**WHY** Phoenix duvarı küçük bir alan kaplar. Kamera birden çok açıyı görür. Duvar açısı yanlışsa kameradan bilgi akmaya devam eder.
 
 ---
 
-**IF** Phoenix Run It Back ile Cypher tuzak hattını test etti
-**MEANING** Phoenix ölürse marker'a döner, test sonrası tuzak konumlarını bilir
-**COUNTER** Her round tuzağı farklı noktaya kur. Phoenix bir roundda haritaladıysa bir sonraki round o bilgi işe yaramaz.
-**WHY** Phoenix ult Cypher traplerini ölmeden ölçmek için var. Tripler sabit kalırsa ult bedava bilgi toplar.
+**IF** Phoenix ult ile Cypher'ın tel hattını test etti
+**MEANING** Phoenix ölürse marker'a döner, testten sonra tel konumlarını bilir
+**COUNTER** Her round teli farklı noktaya kur. Phoenix bir round'da haritayı çıkardıysa bir sonraki round o bilgi işe yaramaz.
+**WHY** Phoenix ulti tellerini ölmeden ölçmek için var. Teller sabit kalırsa ult bedava bilgi toplar.
 
 ---
 
-**IF** Cypher Neural Theft ile Phoenix'i öldürdükten sonra takım konumlarını gördü
+**IF** Cypher ult ile Phoenix'i öldürdükten sonra takım konumlarını gördü
 **MEANING** Tüm Phoenix takımının yeri açığa çıktı, Cypher takımı buna göre rotate eder
-**COUNTER** Neural Theft attıktan sonra Phoenix takımı hemen hareket etsin. Aynı pozisyonda kalmak bilginin değerini artırır.
-**WHY** Bilgi eskirse işe yaramaz. Pozisyon değiştirirsen Neural Theft'in etkisi sıfıra iner.
+**COUNTER** Ult atıldıktan hemen sonra Phoenix takımı yer değiştirsin. Aynı pozisyonda durmak bilginin değerini katlar.
+**WHY** Bilgi eskirse hükmü kalmaz. Pozisyon değiştirirseniz ultin etkisi sıfıra iner.
 
 ---
 
 **IF** Phoenix heal hattında iyileşti, Cypher kamera ile izledi
-**MEANING** Phoenix wall veya molly üzerinde dururken HP toplar — ama bu sırada sabittir
-**COUNTER** Kameranı Phoenix'in heal pozisyonunu görecek açıya kur. Heal sırasında hareketsiz — o an kill fırsatı.
-**WHY** Phoenix heal alırken yerinden kıpırdayamaz. Kamera bu anı yakalıyorsa bilgi + fırsat aynı anda senin elinde.
+**MEANING** Phoenix duvarın ya da molly'nin üstünde dururken can toplar — ama o sırada sabittir
+**COUNTER** Kamerayı Phoenix'in heal pozisyonunu görecek açıya kur. Heal sırasında hareketsizdir — o an kill fırsatı.
+**WHY** Phoenix can alırken yerinden kıpırdayamaz. Kamera o anı yakalıyorsa bilgi de fırsat da senin elinde.
 
 ---
 
 **IF** Phoenix flash + molly + peek zinciri Cypher'ın tuttuğu açıya geldi
-**MEANING** Utility zinciri Cypher'ı yerinden eder, tuzak hattını harcatır, Phoenix close range dövüşe girer
-**COUNTER** Cypher buna tek utility ile cevap veremez — trade partner şart. Close range dövüşte Phoenix'i trade partnerın yakalar.
-**WHY** Phoenix tek başına entry alabilir. Cypher'ın bu zincirine tek başına cevabı yoksa sen pozisyon değiştir, takımı bekle.
+**MEANING** Util zinciri Cypher'ı yerinden eder, tel hattını harcatır, Phoenix close range dövüşe girer
+**COUNTER** Buna tek util ile cevap veremezsin — trade partner şart. Close range dövüşte Phoenix'i trade partnerin alır.
+**WHY** Phoenix tek başına entry alabilir. Bu zincire yalnız başına cevabın yoksa pozisyon değiştir, takımı bekle.
 
 ## 4. Utility Karşılaştırması
 
-Phoenix: flash x2, molly, wall, kendi kendini iyileştirme, Run It Back. Hepsi aktif baskı içindir.
-Cypher: tuzak x2, cage, kamera, Neural Theft. Hepsi bilgi + kilitleme içindir.
+Phoenix: flash x2, molly, duvar, kendini iyileştirme, ult. Hepsi aktif baskı için.
+Cypher: tel x2, smoke, kamera, ult. Hepsi bilgi ve alan kilitleme için.
 
-Phoenix Cypher'ın tuzak hattını utility ile temizleyebilir. Cypher Phoenix'in peek açısını önceden öğrenebilir. Ult maliyeti: Run It Back 6 puan, Neural Theft 7 puan — Phoenix ulti daha çabuk gelir, Cypher ulti daha yüksek ult puanı ister.
+Phoenix, Cypher'ın tel hattını util ile temizleyebilir. Cypher, Phoenix'in peek açısını önceden çözebilir. Ult maliyeti: Phoenix ulti 6 puan, Cypher ulti 7 puan — Phoenix ulti daha çabuk gelir, Cypher ulti daha çok puan ister.
 
 ## 5. Haritaya Göre Değişim
 
-**Bind (Phoenix avantajlı):** Hookah ve dar boğazlar Phoenix'in flash + molly ikilisinin haritası.
+**Bind (Phoenix avantajlı):** Hookah ve dar boğazlar Phoenix'in flash + molly ikilisine birebir.
 
-**Split (Dengeli):** A Main Phoenix utility zinciri için uygun, B Main Cypher tuzak hattı için.
+**Split (Dengeli):** A Main Phoenix util zinciri için uygun, B Main Cypher tel hattı için.
 
 **Sunset (Phoenix avantajlı):** Dar geçitler Phoenix'in. Cypher Sunset'te flash + molly zincirine cevap verecek açı bulamaz.
 
-**Haven (Cypher avantajlı):** B anchor + Garage kamerası Cypher'ın meta oyunu. Phoenix Haven'da flash menzili dışında kalır.
+**Haven (Cypher avantajlı):** B anchor + Garage kamerası Cypher'ın oyunu. Phoenix Haven'da flash menzilinin dışında kalır.
 
-**Ascent (Cypher avantajlı):** A Main anchor Cypher'a uygun. Phoenix Ascent'ta flash + molly ile kapatamadığı uzun açılar Cypher rifle'ına açık kalır.
+**Ascent (Cypher avantajlı):** A Main anchor Cypher'a uygun. Phoenix Ascent'ta flash + molly ile kapatamadığı uzun açıları Cypher tüfeğine açık bırakır.
 
-**Icebox (Cypher avantajlı):** Uzun sightline'lar Cypher'ın. Phoenix flash bu mesafede etkisiz.
+**Icebox (Cypher avantajlı):** Uzun açılar Cypher'ın. Phoenix flash bu mesafede etkisiz.
 
-**Fracture (Dengeli):** İki yönden giriş Phoenix'in self-sufficient entry'sine yarar, ama Cypher tuzak hattı iki yönü de tutabilir.
+**Fracture (Dengeli):** İki yönden giriş Phoenix'in kendi kendine entry alabilmesine yarar, ama Cypher tel hattı iki yönü de tutabilir.
 
 ## 6. Maçı Döndüren Anlar
 
-**An 1 — Cypher flash yedi:** Flash refleksi yoksa bedava kill. Matchup Phoenix'e döner.
+**An 1 — Cypher flash yedi:** Flash'e basamazsa bedava kill. Matchup Phoenix'e döner.
 
-**An 2 — Molly tuzağı sildi:** Cypher bir tuzak kaybetti. İkinci tuzak hâlâ çalışıyor — ikinci tuzağa de molly atmadan peek atma.
+**An 2 — Molly teli yaktı:** Cypher bir tel kaybetti. İkinci tel hâlâ ayakta — ikinci tele molly atmadan peek atma.
 
-**An 3 — Run It Back tuzak hattını haritaladı:** Phoenix ult ile tüm tuzak pozisyonlarını öğrendi. Bu bilgi takımının.
+**An 3 — Phoenix ulti tel hattını çıkardı:** Phoenix ult ile bütün tel konumlarını öğrendi. Bu bilgi artık takımının.
 
-**An 4 — Cypher kamera modunda yakalandı:** Phoenix agresif peek attığında Cypher kameradaysa kesin ölüm.
+**An 4 — Cypher kamerada yakalandı:** Phoenix agresif peek attığında Cypher kameradaysa kesin ölüm.
 
 ## 7. Koç Notları
 
-Phoenix oynuyorsan Cypher'a karşı şu zinciri kur: flash + molly'yi Cypher'ın tuzak hattına yolla, cage'i harcat, sonra peek al. Sadece peek atmaya kalkma — utility önce, peek sonra.
+Phoenix oynuyorsan Cypher'a karşı şu zinciri kur: flash + molly'yi tel hattına yolla, smoke'u harcat, sonra peek al. Direkt peek atmaya kalkma — önce util, sonra peek.
 
-Cypher oynuyorsan ve Phoenix Run It Back ile saldırıyorsa tuzaklar sabit kalmasın. Her round tuzakları farklı noktaya taşı — Phoenix'in bir önceki round topladığı bilgi işe yaramasın.
+Cypher oynuyorsan ve Phoenix ult ile saldırıyorsa telleri sabit bırakma. Her round telleri farklı noktaya taşı — Phoenix'in bir önceki round topladığı bilgi işe yaramasın.
 
-Phoenix heal alırken hareketsiz kalır. Kameranı heal hattına kur. O pencerede Phoenix'i öldürürsen karşı taraf utility harcamış, HP'siz kalmış, trade yok — round senin.
+Phoenix heal alırken hareketsiz kalır. Kamerayı heal hattına kur. O pencerede Phoenix'i öldürürsen karşı taraf utilini harcamış, can'ı düşmüş, trade'i de yok — round senin.

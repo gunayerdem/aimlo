@@ -11,112 +11,112 @@ tags: [matchup, killjoy, sova, sentinel, initiator]
 
 ## 1. Matchup Özü
 
-Sova seni erken basar. Turret'ini, alarmbot'unu, nanoswarm'ını round başında shock dart ile siler — sonra takım girerken önünde hiçbir şey olmaz. Senin silahın: her round aynı yere koyma. Sova'nın lineupu sabit bir hedef bekler. Hedef değişirse lineup çöpe gider.
+Sova seni round başında siler. Turret'ini, botunu, mollyni shock dart'la patlatır — sonra takımı girerken önünde hiçbir engel kalmaz. Senin kozun tek: setupu her round aynı yere kurma. Sova'nın recon'u sabit hedef bekler. Hedefi kaydır, recon boşa gider.
 
 ## 2. Kim Avantajlı?
 
 **Killjoy lehine durumlar:**
-- Dar choke'larda (Bind Hookah, Sunset B, Fracture B) — turret Sova girişini tag'ler, Sova kaçacak yer bulamaz
-- Sova dart + shock dart ikisi de harcanmışsa — setup özgür çalışır, kimse yer bilmiyor
-- Lockdown hazırsa — Sova'nın retake'i kapanır, takım siteyi tutar
-- Sova aynı hat üzerinden dart atıyorsa — alarmbot'u o hattan çek, Sova boşa atar
+- Dar choke'larda (Bind Hookah, Sunset B, Fracture B) — turret girişi tag'ler, Sova kaçacak yer bulamaz.
+- Sova recon ve shock dart'ı harcadıysa — setupun özgür çalışır, kimse yerini bilmez.
+- Ultin hazırsa — Sova'nın retake'i kapanır, takımın siteyi tutar.
+- Sova aynı hattan recon atıyorsa — botunu o hattan çek, Sova boşa atsın.
 
 **Sova lehine durumlar:**
-- Uzun sightline'lı haritalarda (Breeze, Icebox) — dart her köşeyi tarar, Killjoy saklanacak yer bulamaz
-- Shock dart Killjoy setup'ını round başında vurursa — turret + alarmbot gider, Sova takımı boş siteye girer
-- Hunter's Fury Killjoy'un pozisyonuna gelirse — duvar arkası korumaz, HP erir
-- Drone Killjoy sitesine girerse — nanoswarm, alarmbot, turret hepsi haritaya düşer
+- Uzun sightline'lı haritalarda (Breeze, Icebox) — recon her köşeyi tarar, saklanacak yer kalmaz.
+- Shock dart setupunu round başında vurursa — turret ve bot gider, Sova takımı boş siteye dalar.
+- Ulti pozisyonuna gelirse — duvar arkası korumaz, HP'n erir.
+- Botu siteye girerse — mollyn, botun, turret'in hepsi haritaya çıkar.
 
-**Dengeli haritalar:** Haven, Ascent, Lotus — Killjoy turret ve alarmbot yerleşimini round başında değiştirirse Sova'nın önceki lineup'ı işe yaramaz; Sova her round drone veya dart harcamak zorunda kalır.
+**Dengeli haritalar:** Haven, Ascent, Lotus — turret ve bot yerleşimini round başında kaydırırsan Sova'nın önceki recon'u işe yaramaz; Sova her round recon veya bot harcamak zorunda kalır.
 
 ## 3. Key Düellolar
 
-**IF** Sova shock dart Killjoy turret'ini patlattı
-**MEANING** Turret gitti, o round setup yarım — Sova takımı sana karşı bilgi avantajıyla giriyor
-**COUNTER** Turret'i shock dart'ın geldiği hattan uzak, köşe arkasına koy. Her round aynı nokta değil — en az iki alternatif yerleşim belirle ve sırayla kullan
-**WHY** Shock dart lineupu sabit hedefe ayarlanmış. Turret her round aynı yerdeyse Sova bir kere öğrenir, her round basar
+**IF** Sova shock dart'la turret'ini patlattı
+**MEANING** Turret gitti, o round setupun yarım — Sova takımı sana karşı bilgi avantajıyla giriyor.
+**COUNTER** Turret'i shock dart'ın geldiği hattan uzağa, köşe arkasına koy. Her round aynı nokta olmasın — en az iki ayrı yerleşim belirle ve sırayla kullan.
+**WHY** Shock dart lineupu sabit hedefe göre ayarlanır. Turret her round aynı yerdeyse Sova bir kere öğrenir, sonra her round basar.
 
 ---
 
-**IF** Sova dart Killjoy alarmbot'unu buldu
-**MEANING** Takım alarmbot'un yerini biliyor — ya etrafından geçer ya da rifle ile siler, sürpriz bitti
-**COUNTER** Alarmbot'u dart tarayamayacağı köşeye, ters tarafa göm. Alarmbot görünmese de ses verdiğinde yer belli olur — bunu bil, gizleme önceliği tarama açısına göre
-**WHY** Alarmbot'un gücü sürpriz. Yer bilinirse değeri sıfır
+**IF** Sova recon'la botunu buldu
+**MEANING** Takım botun yerini biliyor — ya etrafından dolanır ya rifle'la siler, sürpriz bitti.
+**COUNTER** Botu recon'un tarayamayacağı köşeye, ters tarafa göm. Bot görünmese de ses verdiği an yeri belli olur — buna göre gizle, önceliği tarama açısı.
+**WHY** Botun gücü sürpriz. Yeri bilinirse değeri sıfır.
 
 ---
 
-**IF** Killjoy Lockdown'ı Sova retake esnasında attı
-**MEANING** Sova radius içindeyse donar, donanımını kullanamaz, retake penceresi kapanır
-**COUNTER** Lockdown sesini duyduğun an dışarı çık. Ult süresi boyunca kapıda bekle, süre dolunca gir
-**WHY** Lockdown içindeyken hiçbir şey yapamazsın. Dışarıda beklersen ult boşa gider
+**IF** Sova retake atarken ultini açtın
+**MEANING** Sova radius içindeyse donar, donanımını kullanamaz, retake penceresi kapanır.
+**COUNTER** Ult sesini duyduğun an dışarı çık. Ult süresi boyunca kapıda bekle, süre dolunca gir.
+**WHY** Ult içindeyken hiçbir şey yapamazsın. Dışarıda beklersen ult boşa döner.
 
 ---
 
-**IF** Sova Hunter's Fury Killjoy'un pozisyonuna geldi
-**MEANING** Duvar geçer, cover işe yaramaz — HP erir, donanım hattı da hasar görür
-**COUNTER** Hunter's Fury sesini duyduğunda yana yürü. Ult tek yön — yön dışına çık, sağ ya da sola iki adım yeter
-**WHY** Ult duvar geçiyor. Aynı yerde kalırsan cover seni kurtarmaz
+**IF** Sova ultiyle pozisyonunu taradı
+**MEANING** Duvar geçer, cover işe yaramaz — HP'n erir, donanım hattın da hasar yer.
+**COUNTER** Ult sesini duyduğun an yana yürü. Ult tek yön — yön dışına çık, sağa ya da sola iki adım yeter.
+**WHY** Ult duvar geçiyor. Aynı yerde durursan cover seni kurtarmaz.
 
 ---
 
-**IF** Sova drone Killjoy sitesine girdi
-**MEANING** Turret, alarmbot, nanoswarm hepsi Sova takımının ekranına düşer — setup haritaya çıktı
-**COUNTER** Drone'u gördüğünde rifle ile vur. Turret otomatik tag'ler — turret varsa drone iki vuruştan fazla dayanamaz
-**WHY** Drone HP çok düşük. Vurmazsan o round setup'ın sıfırlanır
+**IF** Sova botunu siteye soktu
+**MEANING** Turret, bot, molly hepsi Sova takımının ekranına düşer — setupun haritaya çıktı.
+**COUNTER** Botu gördüğün an rifle'la vur. Turret zaten otomatik tag'ler — turret varsa bot iki vuruştan fazla dayanmaz.
+**WHY** Botun HP'si çok düşük. Vurmazsan o round setupun sıfırlanır.
 
 ---
 
-**IF** Killjoy nanoswarm Sova'nın dart attığı noktaya yerleştirildi
-**MEANING** Sova dart atacak, durması gerekiyor — nanoswarm tam o anda patlarsa Sova biter
-**COUNTER** Sova olarak dart atma noktanı her round değiştir. Aynı köşeden atarsan Killjoy bir kere öğrenir, ikinci round nanoswarm seni bekler
-**WHY** Dart lineup'ı durarak atılır — sabit duran adam nanoswarm için hazır hedef
+**IF** Mollyni Sova'nın recon attığı noktaya koydun
+**MEANING** Sova recon atacak, durmak zorunda — tam o anda molly patlarsa Sova biter.
+**COUNTER** Sova oynuyorsan recon atma noktanı her round değiştir. Aynı köşeden atarsan Killjoy bir kere öğrenir, ikinci round molly seni bekler.
+**WHY** Recon dururken atılır — sabit duran adam molly için hazır hedef.
 
 ---
 
-**IF** Sova dart + drone + shock dart zinciri Killjoy setup'ını tek round'da sildi
-**MEANING** Tüm donanım haritaya çıktı ve temizlendi — Killjoy o round çıplak
-**COUNTER** Setup'ı tek katmana koyma. Turret bir tarafa, alarmbot başka bir tarafa. Birini kaybedersen diğeri hâlâ çalışır. Bir sonraki round yerleşimi tamamen değiştir
-**WHY** Tüm donanım aynı noktadaysa Sova tek atışta hepsini bitirir. Dağıtırsan zincir kopar
+**IF** Sova recon + bot + shock dart zinciriyle setupunu tek round'da sildi
+**MEANING** Tüm donanım haritaya çıktı ve temizlendi — o round çıplaksın.
+**COUNTER** Setupu tek katmana yığma. Turret bir tarafa, bot başka tarafa. Birini kaybedersen diğeri hâlâ çalışır. Sonraki round yerleşimi tamamen değiştir.
+**WHY** Tüm donanım aynı noktadaysa Sova tek hamlede hepsini bitirir. Dağıtırsan zincir kopar.
 
 ## 4. Donanım Karşılaştırması
 
-Killjoy: turret + alarmbot + 2x nanoswarm + Lockdown (8 point)
-Sova: 2x dart + 2x shock dart + drone + Hunter's Fury (7 point)
+Killjoy: turret + bot + 2x molly + ult (8 point)
+Sova: 2x recon + 2x shock dart + bot + ult (7 point)
 
-Sova donanımı ucuz ve hızlı. Dart + shock dart + drone zinciri round başında Killjoy setup'ını tamamen açabilir. Killjoy donanımı daha yavaş ama site kapama gücü daha yüksek. Lockdown Sova'nın en büyük korkusu — retake tamamen kapanır. Hunter's Fury Killjoy'un en büyük korkusu — cover arkası korumaz.
+Sova'nın donanımı ucuz ve hızlı. Recon + shock dart + bot zinciri round başında setupunu tamamen açabilir. Senin donanımın daha yavaş ama site kapama gücü yüksek. Ultin Sova'nın en büyük korkusu — retake tamamen kapanır. Sova'nın ulti ise senin en büyük korkun — cover arkası korumaz.
 
-Kural şu: Sova donanımı harcanmadan Killjoy setup tam güçte çalışmaz. Sova donanımı bittikten sonra Killjoy setup serbestleşir.
+Kural şu: Sova donanımını harcamadan setupun tam güçte çalışmaz. Sova donanımı bitince setupun serbest kalır.
 
 ## 5. Haritaya Göre Değişim
 
-**Breeze (Sova avantajlı):** Uzun açılar Sova dart'a uygun, Killjoy choke bulamaz.
+**Breeze (Sova avantajlı):** Uzun açılar Sova recon'una uygun, choke bulamazsın.
 
-**Icebox (Sova avantajlı):** Dar ama dikey yapı dart lineup'ına çok uygun, Killjoy ikincil sentinel rolüne düşer.
+**Icebox (Sova avantajlı):** Dar ama dikey yapı recon lineupına çok uygun, ikincil sentinel rolüne düşersin.
 
-**Haven (Dengeli):** Killjoy B anchor güçlü, Sova 3 site bilgisi verir — kim daha az donanım harcarsa o round site kontrolünü alır.
+**Haven (Dengeli):** B anchor'ın güçlü, Sova 3 site bilgisi verir — kim daha az donanım harcarsa o round site kontrolünü alır.
 
-**Ascent (Dengeli):** Killjoy A Main veya B anchor, Sova A Main dart atar. Killjoy turret'ini A Main choke'a koyarsa Sova dart atmak yerine drone harcamak zorunda kalır — bu Sova'nın round bütçesini tüketir.
+**Ascent (Dengeli):** A Main veya B anchor tut, Sova A Main recon atar. Turret'ini A Main choke'a koyarsan Sova recon yerine bot harcamak zorunda kalır — bu Sova'nın round bütçesini tüketir.
 
-**Bind (Killjoy avantajlı):** Dar choke'lar Killjoy setup'ına uygun, Sova uzun açı bulamaz.
+**Bind (Killjoy avantajlı):** Dar choke'lar setupuna uygun, Sova uzun açı bulamaz.
 
-**Lotus (Dengeli):** Killjoy C site anchor, Sova 3 kapı dart bilgisi. Eşit değişim.
+**Lotus (Dengeli):** C site anchor'ın var, Sova 3 kapı recon bilgisi verir. Eşit değişim.
 
-**Fracture (Killjoy hafif avantajlı):** İki yönden giriş var — Lockdown iki hattı da kapatır, Sova buna cevap veremez.
+**Fracture (Killjoy hafif avantajlı):** İki yönden giriş var — ultin iki hattı da kapatır, Sova buna cevap veremez.
 
 ## 6. Dönüm Noktaları
 
-**Dönüm 1 — Shock dart setup'ı sildi:** Killjoy donanımı gitti, o round savunma çıplak.
+**Dönüm 1 — Shock dart setupu sildi:** Donanımın gitti, o round savunma çıplak.
 
-**Dönüm 2 — Turret drone'u bitirdi:** Drone düştü, Sova o round kör — Killjoy site bilgisini sakladı.
+**Dönüm 2 — Turret botu bitirdi:** Bot düştü, Sova o round kör — site bilgisini sakladın.
 
-**Dönüm 3 — Hunter's Fury Killjoy'u pozisyondan çıkardı:** Cover işe yaramadı, Killjoy geri çekilmek zorunda.
+**Dönüm 3 — Sova ulti seni pozisyondan çıkardı:** Cover işe yaramadı, geri çekilmek zorundasın.
 
-**Dönüm 4 — Lockdown Sova retake'i kapattı:** Sova radius dışında bekledi, ult boşa gitti — ya da içerde dondu ve öldü.
+**Dönüm 4 — Ultin Sova retake'ini kapattı:** Sova radius dışında bekledi, ult boşa gitti — ya da içeride dondu ve öldü.
 
 ## 7. Koç Notu
 
-**Killjoy olarak:** Sova seni her round bulur — ama her round aynı yerden buldurtma. Turret'i, alarmbot'u, nanoswarm'ı iki farklı yerleşim planıyla oyna. Birini bilirse diğerine geç.
+**Killjoy olarak:** Sova seni her round bulur — ama her round aynı yerden buldurtma. Turret'i, botu, mollyni iki ayrı yerleşim planıyla oyna. Birini bilirse diğerine geç.
 
-**Sova olarak:** Killjoy turret'ini round başında göremiyorsan drone gönder. Drone düşerse yer belli, drone yaşarsa harita çıktı. Her iki sonuç da sana bilgi verir.
+**Sova olarak:** Killjoy turret'ini round başında göremiyorsan bot gönder. Bot düşerse yer belli, bot yaşarsa harita çıktı. İki sonuç da sana bilgi verir.
 
-**İkisi için de:** Killjoy turret ve alarmbot yerini round başında değiştirirse Sova'nın önceki lineup'ı boşa gider. Sova drone ile yeri bulursa Killjoy o round çıplak kalır. Yerleşimi tahmin ettiren taraf round'u kaybeder.
+**İkisi için de:** Killjoy turret ve bot yerini round başında kaydırırsa Sova'nın önceki recon'u boşa gider. Sova bot ile yeri bulursa Killjoy o round çıplak kalır. Yerleşimini tahmin ettiren taraf round'u kaybeder.

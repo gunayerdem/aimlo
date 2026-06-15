@@ -1,55 +1,55 @@
 # MATCHUP: Chamber vs Fade
 
 ## Etkileşim Kimliği
-Chamber Op'la uzun açı tutar, Headhunter'la kısa mesafede de sert. Fade onu görmek için var — Haunt açını yakar, Prowler seni açıdan kovar, Seize TP anchor'ını kilitler. Soru basit: Fade taradıktan sonra takımı yeterince hızlı geliyor mu, yoksa sen TP'yi çekip bilgiyi çöpe mi atıyorsun?
+Chamber op'la uzun açı tutar, tabancasıyla kısa mesafede de sert vurur. Fade tam onu sökmek için var — recon açını yakar, bot seni açıdan kovar, stun TP anchor'ını yerine çiviler. Soru basit: Fade taradıktan sonra takımı yeterince hızlı geliyor mu, yoksa sen TP'yi erken çekip bilgiyi çöpe mi atıyorsun?
 
 ## Yaygın Cezalandırma Kalıpları
 
-**IF**: Fade Haunt attı, Op açın yandı, Prowler üstüne geliyor
-**MEANING**: Tarandın. İki kötü seçeneğin var — yerinde kalırsan Prowler'a yakalanırsın, hemen TP atarsan anchor'ı boşaltırsın ve Fade takımı bedavaya site alır.
+**IF**: Fade recon attı, op açın yandı, bot üstüne geliyor
+**MEANING**: Tarandın. İki kötü seçeneğin var — yerinde kalırsan bota yakalanırsın, hemen TP atarsan anchor'ı boşaltırsın ve Fade takımı site'ı bedavaya alır.
 **COUNTER**:
-- Prowler'ı Headhunter'la kafadan al
-- Prowler düşer düşmez Fade'e quick peek
-- Peek'ten sonra TP, önce değil
-**WHY**: Prowler düştükten sonra ilk peek'i cezalandırırsan hem frag hem pozisyon kazanırsın. Anında TP = bedava bilgi verdin.
+- Botu tabancayla kafadan vur
+- Bot düşer düşmez Fade'e quick peek at
+- Önce peek, TP sonra
+**WHY**: Bot düştükten sonra ilk peek'i cezalandırırsan hem frag hem pozisyon kazanırsın. Anında TP atarsan bedava bilgi vermiş olursun.
 
 **IF**: Fade her tarama sonrası sen anında TP ediyorsun
-**MEANING**: Bilgisi bayat. Takımı eski açıya push ediyor, sen yeni açıdayken Tour De Force ile yavaş gireni alıyorsun.
+**MEANING**: Bilgisi bayatladı. Takımı eski açına push ediyor, sen yeni açıdayken yavaş gireni ult'la topluyorsun.
 **COUNTER**:
 - TP hedefini her raund değiştir
-- Aynı iki nokta arasında ping-pong yapma
+- Aynı iki nokta arasında gidip gelme
 - TP indikten sonra farklı köşeden bekle
-**WHY**: Fade takımı senin nereye TP attığını ezberlerse Seize oraya düşer. Her raund farklı noktaya in.
+**WHY**: Fade takımı senin nereye TP attığını ezberlerse stun tam oraya düşer. Her raund farklı noktaya in.
 
-**IF**: Fade Nightfall bastı, Seize de TP anchor'ında
-**MEANING**: İki anchor'ın da yandı. Ses kesik, kaçacak güvenli zemin yok, takım dar pencereyi kullanıyor.
+**IF**: Fade ult bastı, stun da TP anchor'ında
+**MEANING**: İki anchor'ın da yandı. Ses kesildi, kaçacak güvenli zemin kalmadı, takım o dar pencereyi kullanıyor.
 **COUNTER**:
-- İkinci anchor'ı Seize hattının dışına kur
-- Trademark'i TP indiğin koridorun başına
-- Nightfall dışına çıkıp peek, içeride durma
-**WHY**: Chamber'in tek silahı anchor esnekliği. İkisi de basıldığında esneklik biter — anchor'ları aynı çizgiye dizme.
+- İkinci anchor'ı stun hattının dışına kur
+- Tuzağını TP indiğin koridorun başına bırak
+- Ult dışına çıkıp peek at, içeride durma
+**WHY**: Chamber'ın tek silahı anchor esnekliği. İkisi de basıldığında esneklik biter — anchor'larını aynı çizgiye dizme.
 
 ## Tekrarlayan Başarısızlık Ne Anlama Gelir
-**Chamber sürekli ölüyorsa**: TP'yi geç çekiyorsun ya da hep aynı yere atıyorsun. Haunt vurdu mu — Headhunter'la peek al sonra TP, ya da direkt TP. Açıda donup kalma.
+**Chamber sürekli ölüyorsa**: TP'yi geç çekiyorsun ya da hep aynı yere atıyorsun. Recon vurdu mu — ya tabancayla peek al sonra TP, ya direkt TP çek. Açıda donup kalma.
 
-**Fade tarıyor ama Chamber kaçıyorsa**: Takımın Haunt'tan sonra bekliyor. Tarama anı = push anı. Haunt yere değdi mi Chamber zaten yeni açıya geçti.
+**Fade tarıyor ama Chamber kaçıyorsa**: Takımın recon'dan sonra bekliyor. Tarama anı = push anı. Recon yere değdi mi Chamber çoktan yeni açıya geçti.
 
 ## AIMLO Ne Demeli
 ### Oyuncu cezalandırılan taraftayken
-**Chamber sürekli taranıyorsa**: "Fade her raund seni buluyor. Haunt vurdu mu — ya Headhunter'la peek'i al sonra TP, ya direkt TP. Açıda donup kalma, takımı seni önceden çapraz tutuyor."
+**Chamber sürekli taranıyorsa**: "Fade her raund seni buluyor. Recon vurdu mu — ya tabancayla peek'i al sonra TP, ya direkt TP çek. Açıda donup kalma, takım seni önceden çapraz tutuyor."
 
-**Fade'in bilgisi boşa gidiyorsa**: "Tarıyorsun, takımın gelmiyor. Haunt yere değdi anında push, bekleme. Gecikirsen Chamber zaten başka açıda."
+**Fade'in bilgisi boşa gidiyorsa**: "Tarıyorsun ama takımın gelmiyor. Recon yere değdi anında push at, bekleme. Geç kalırsan Chamber çoktan başka açıda olur."
 
 ### Oyuncu cezalandıran taraftayken
-**Fade Chamber'i kilitlemişse**: "Haunt'un onu açıdan söküyor. Seize'i ikinci anchor'a at — birinciye değil, oradan zaten kaçacak."
+**Fade Chamber'ı kilitlemişse**: "Recon'un onu açıdan söküyor. Stun'ı ikinci anchor'a at — birinciye değil, oradan zaten kaçacak."
 
-**Chamber Fade'den kurtuluyorsa**: "TP'n taramayı çöpe atıyor. Hedefini her raund değiştir, aynı iki noktayı kullanma yoksa Seize üstüne düşer."
+**Chamber Fade'den kurtuluyorsa**: "TP'n taramayı çöpe atıyor. Hedefini her raund değiştir, aynı iki noktayı kullanma yoksa stun tam üstüne düşer."
 
 ## Rank Modülasyonu
-**LOW**: Fade taramayı bilmez, Chamber TP'yi unutur. Haunt vurdu mu TP çek — bu kadar. Bilgi-kaçış döngüsünü oturt.
+**LOW**: Fade taramayı bilmez, Chamber TP'yi unutur. Recon vurdu mu TP çek — bu kadar. Bilgi-kaçış döngüsünü oturt.
 
-**MID**: Fade tarıyor ama takım yavaş. Chamber TP atıyor ama hep aynı yere. TP hedefini raund içinde değiştir, Haunt vurur vurmaz takım hareket etsin.
+**MID**: Fade tarıyor ama takım yavaş. Chamber TP atıyor ama hep aynı yere. TP hedefini raund içinde değiştir, recon vurur vurmaz takım hareket etsin.
 
-**HIGH**: İkisi de oyunu biliyor. Fade takımına Haunt'tan sonra ilk düşman kapıyı geçer geçmez push, Chamber'a her raund farklı TP noktası.
+**HIGH**: İkisi de oyunu biliyor. Fade takımı recon'dan sonra ilk düşman kapıyı geçer geçmez push atsın, Chamber her raund farklı TP noktası kullansın.
 
-**ELITE**: Seize TP anchor'ını avlıyor, Chamber anchor'ı maç içinde değiştiriyor. Fade hangi anchor'ın aktif olduğunu okumaya çalışıyor, Chamber bunu yanıltıyor — okuma-karşı okuma oyunu öğret.
+**ELITE**: Stun, TP anchor'ını avlıyor; Chamber anchor'ını maç içinde değiştiriyor. Fade hangi anchor'ın aktif olduğunu okumaya çalışıyor, Chamber bunu yanıltıyor — okuma-karşı okuma oyununu öğret.

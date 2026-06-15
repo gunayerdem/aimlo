@@ -9,139 +9,139 @@ tags: [matchup, chamber, deadlock, sentinel_vs_sentinel]
 
 ## 1. Matchup Özü
 
-Chamber ile Deadlock karşı takımda aynı anda varsa şunu bil: bunlar aynı işi yapmıyor.
+Karşı takımda hem Chamber hem Deadlock varsa şunu bil: ikisi aynı işi yapmıyor.
 
-Chamber Op ile erken kill alır, Rendezvous ile çıkar — rolün tamamen silahına bağlı. Deadlock ise GravNet + Sonic Sensor + Barrier + Annihilation ile push'u yavaşlatır, site girişini fiziksel olarak kapatır. Deadlock duel kazanmaz, duel'i imkânsız hale getirir.
+Chamber Op ile erken kill alır, teleportla güvenli açıya kaçar — rolü tamamen silahına bağlı. Deadlock ise ağ, ses tuzağı, duvar ve ult ile push'u yavaşlatır, site girişini fiziksel olarak kapatır. Deadlock duel kazanmaz, duel'i imkânsız hale getirir.
 
-Chamber oynuyorsan: Op'un yoksa sen de yoksun. Deadlock oynuyorsan: silahın ucuzsa bile kit'in çalışıyor.
+Chamber oynuyorsan Op'un yoksa sen de yoksun. Deadlock oynuyorsan silahın ucuz olsa bile kit'in iş görür.
 
 ## 2. Kim Avantajlı?
 
-Deadlock net üstte. Haritaları aşağıda tek tek gör — site kapatma gerektiren her yerde Deadlock daha iyi iş yapar.
+Deadlock net üstte. Haritaları aşağıda tek tek gör — site kapatma gereken her yerde Deadlock daha iyi iş çıkarır.
 
-Chamber'ın güçlü olduğu haritalar: **Breeze**, **Ascent**, **Abyss** — uzun sightline veya çok katlı yapı var, Op + Rendezvous uyar.
+Chamber'ın güçlü olduğu haritalar: **Breeze**, **Ascent**, **Abyss** — uzun sightline ya da çok katlı yapı var, Op + teleport oraya oturur.
 
-Bu üç harita dışında Deadlock oyna: Barrier + Sonic Sensor info sağlar, Chamber'ın kit'i Op satın almaya bağlı — Op yoksa kit yarım kalır.
+Bu üç harita dışında Deadlock oyna: duvar ve ses tuzağı info verir, Chamber'ın kit'iyse Op almaya bağlı — Op yoksa kit yarım kalır.
 
-Eğer Chamber oynuyorsan ve karşıda Deadlock varsa: Barrier açısını round başı oku. Yanlış yere koymuşsa — o yönden bas.
+Chamber oynuyorsan ve karşıda Deadlock varsa duvar açısını round başında oku. Yanlış yere koymuşsa o yönden bas.
 
 ## 3. Key Düellolar
 
-**IF** Deadlock Sonic Sensor'ı koydu, sen de Trademark'ı aynı bölgeye koydun
-**MEANING** İki info kit aynı alanı kapıyor — Sonic Sensor sesi yakalar, Trademark görsel tether. İkisi çakışıyor, biri israf
-**COUNTER** Trademark'ı uzak rotate hattına koy, Sonic Sensor'ı yakın flank hattına bırak. Aynı hatta iki kit olmasın
-**WHY** İki sentinel aynı hattı kapatırsa diğer hat açık kalır. Dağıtırsan iki farklı hattı kapatırsın
+**IF** Deadlock ses tuzağını koydu, sen de tuzağını aynı bölgeye koydun
+**MEANING** İki info kit aynı alanı kapıyor — ses tuzağı sesi yakalar, senin tuzağın görüş hattını tutar. İkisi çakışınca biri boşa gider
+**COUNTER** Tuzağını uzak rotate hattına koy, ses tuzağını yakın flank hattına bırak. Aynı hatta iki kit olmasın
+**WHY** İki sentinel aynı hattı kapatırsa diğer hat açık kalır. Dağıtırsan iki ayrı hattı birden tutarsın
 
 ---
 
-**IF** Sen Chamber Op ile aggressive hold alıyorsun, Deadlock Barrier Mesh site girişinde
-**MEANING** Sen erken kill arıyorsun, Deadlock push'u yavaşlatıyor — iki farklı fazda çalışıyorsunuz. İlk atımda kill alırsan Barrier destek olur. Alamazsan Barrier tek savunma olur
-**COUNTER** Saldırı tarafındaysan Op açısını smoke'la, ardından Barrier'ı kit dökerek kır — katmanları sırayla geç
-**WHY** Op value ilk atımda biter. Deadlock Barrier value push süresince devam eder. Chamber kill alamazsa Barrier round'u taşır
+**IF** Sen Chamber Op ile aggressive hold tutuyorsun, Deadlock duvarı site girişine kurdu
+**MEANING** Sen erken kill arıyorsun, Deadlock push'u yavaşlatıyor — iki ayrı fazda çalışıyorsunuz. İlk atışta kill alırsan duvar destek kalır; alamazsan duvar tek başına savunma yükünü taşır
+**COUNTER** Saldırı tarafındaysan Op açısını smoke'la, sonra duvarı util dökerek kır — katmanları sırayla geç
+**WHY** Op'un değeri ilk atışta biter. Duvarın değeri push boyunca sürer. Chamber kill alamazsa round'u duvar taşır
 
 ---
 
-**IF** Deadlock Annihilation'ı attı, sen Rendezvous ile kaçmaya çalışıyorsun
-**MEANING** Annihilation seni çekip büküyor — Rendezvous teleport bile Annihilation menzilinde çalışmaz. İçinde kalırsan çıkamazsın
-**COUNTER** Annihilation sesini duyar duymaz, menzile girmeden Rendezvous'a bas. Menzile girdikten sonra teleport işe yaramaz
-**WHY** Annihilation hareketi kilitler — dash da, teleport da. Rendezvous sadece menzil dışındayken seni kurtarır. Geç kalırsan mahsur kalırsın
+**IF** Deadlock ult'unu attı, sen teleportla kaçmaya çalışıyorsun
+**MEANING** Ult seni çekip sürüklüyor — teleport bile ult menzilinde işe yaramaz. İçinde kalırsan çıkamazsın
+**COUNTER** Ult sesini duyar duymaz, menzile girmeden teleporta bas. Menzile girdikten sonra teleport seni kurtarmaz
+**WHY** Ult hareketi kilitler — dash da, teleport da. Teleport seni yalnızca menzil dışındayken kurtarır. Geç kalırsan mahsur kalırsın
 
 ---
 
-**IF** Sen Tour de Force ult'u açtın, Deadlock GravNet atıyor
-**MEANING** GravNet seni crouch'a zorlar ve yavaşlatır — Op atarken kısıtlanırsan açı bozulur
-**COUNTER** Eğer Deadlock oynuyorsan: GravNet'i Chamber'ın beklediğin Op açısına at, crouch'da tut, takımın o pencereden geçer
-**WHY** Chamber Op'ta hareket şart — hareketsiz Op kolay hedef. Tek bir GravNet Chamber'ın ult'unu etkisiz kılar
+**IF** Sen Op ult'unu açtın, Deadlock ağı atıyor
+**MEANING** Ağ seni crouch'a zorlar ve yavaşlatır — Op atarken kısıtlanırsan açın bozulur
+**COUNTER** Deadlock oynuyorsan: ağı, Chamber'ın beklediğini düşündüğün Op açısına at, crouch'ta tut, takımın o pencereden geçsin
+**WHY** Chamber Op'ta hareket şart — hareketsiz Op kolay hedeftir. Tek bir ağ, Chamber'ın ult'unu etkisiz bırakır
 
 ---
 
-**IF** Deadlock Sonic Sensor flank hattında, sen o hattan reposition yapacaksın
-**MEANING** Sonic Sensor sesi tetikliyor — walk ile geçersen tetiklemezsin, sprint ile geçersen concussive yersin
-**COUNTER** O hattan geçeceksen walk yap. Walk yavaş — reposition gecikeceğini hesapla
-**WHY** İki seçenek de Deadlock lehine: ya ses verirsin ya zaman kaybedersin. Bunu bilirsen en azından zaman kaybını seçip sürpriz hazırlarsın
+**IF** Deadlock'un ses tuzağı flank hattında, sen o hattan reposition yapacaksın
+**MEANING** Ses tuzağı sesle tetiklenir — walk ile geçersen tetiklemezsin, koşarak geçersen sersemlersin
+**COUNTER** O hattan geçeceksen walk yap. Walk yavaştır — reposition'ın gecikeceğini hesaba kat
+**WHY** İki seçenek de Deadlock'un lehine: ya ses verirsin ya zaman kaybedersin. Bunu bilirsen hiç değilse zaman kaybını seçip sürprizini hazırlarsın
 
 ---
 
 **IF** Op'un yok, Deadlock full kit ile karşında
-**MEANING** Trademark + Rendezvous var ama Op yok — sen bu round yarım sentinelsin. Deadlock her kitin kullanabilir
-**COUNTER** Bu round save yap. Deadlock anchor olsun, sen yük olma
-**WHY** Chamber'ın sentinel rolü silaha bağlı. Op yoksa sahaya girme — Deadlock bu round senden iyi
+**MEANING** Tuzağın ve teleportun var ama Op yok — bu round yarım sentinelsin. Deadlock ise her kit'ini kullanabilir
+**COUNTER** Bu round save yap. Deadlock anchor'lık etsin, sen takıma yük olma
+**WHY** Chamber'ın sentinel rolü silaha bağlı. Op yoksa sahaya girme — bu round Deadlock senden iyi
 
 ---
 
-**IF** Deadlock Barrier'ı yanlış yöne koydu
-**MEANING** Barrier push yönünü kapamıyor — saldırı o açıdan serbestçe ilerleyebilir
-**COUNTER** Chamber oynuyorsan: Barrier'ın zayıf kaldığı yönü gör ve o yönden bas
-**WHY** Barrier round başı kararı — yanlış konumlanırsa düzeltemezsin. Chamber bu hatayı okursa push zorunlu
+**IF** Deadlock duvarı yanlış yöne koydu
+**MEANING** Duvar push yönünü kapatmıyor — saldırı o açıdan serbestçe ilerleyebilir
+**COUNTER** Chamber oynuyorsan duvarın zayıf kaldığı yönü gör ve o yönden bas
+**WHY** Duvar round başı kararıdır — yanlış konumlanırsa düzeltemez. Chamber bu hatayı okursa push zorunlu hale gelir
 
 ## 4. Kit Karşılaştırması
 
 **Chamber:**
-- Trademark — tek tripwire, yavaşlatır
-- Rendezvous — iki anchor, teleport
-- Headhunter — kredi ile çalışır
-- Tour de Force — ult Op
+- Tuzak — tek tel, yavaşlatır
+- Teleport — iki anchor noktası arasında ışınlanma
+- Tabanca — kredi ile çalışan ağır vuruşlu pistol
+- Op ult — bedava Operator
 
 **Deadlock:**
-- GravNet — crouch + yavaşlatır
-- Sonic Sensor — ses tetikli, sersemletir
-- Barrier Mesh — fiziksel duvar, 4 panel
-- Annihilation — ult, kaçışsız projectile
+- Ağ — crouch'a zorlar, yavaşlatır
+- Ses tuzağı — sesle tetiklenir, sersemletir
+- Duvar — fiziksel engel, dört panel
+- Ult — kaçışı olmayan çekme atışı
 
-Info karşılaştırması: Sonic Sensor Trademark'tan güçlü — daha geniş alan, ses tabanlı.
+Info karşılaştırması: ses tuzağı Chamber'ın tuzağından güçlü — daha geniş alanı, sesle tarar.
 
-Alan kapatma: Deadlock tek taraflı önde, Chamber'ın bu kategoride kiti yok.
+Alan kapatma: Deadlock açık ara önde, Chamber'ın bu kategoride kit'i yok.
 
-Hasar: Headhunter hasar yapar, Deadlock yapmaz — ama Headhunter kredi ister.
+Hasar: Chamber'ın tabancası hasar yapar, Deadlock yapmaz — ama tabanca kredi ister.
 
-Ult karşılaştırması: Tour de Force hedef kaçabilir. Annihilation'dan kaçış zor — menzile girmeden önce Rendezvous'a basman gerek.
+Ult karşılaştırması: Op ult'unda hedef kaçabilir. Deadlock ult'undan kaçmak zor — menzile girmeden teleporta basman gerek.
 
-Deadlock kiti Op satın alımından bağımsız çalışır. Chamber kiti Op'a bağlı — para yoksa kit de zayıflar.
+Deadlock'un kit'i Op alımından bağımsız çalışır. Chamber'ın kit'iyse Op'a bağlı — para yoksa kit de zayıflar.
 
 ## 5. Harita Bazlı Tercih
 
-**Icebox:** Deadlock. Geniş site + uzun rotate Barrier için uygun.
+**Icebox:** Deadlock. Geniş site ve uzun rotate, duvara birebir uyar.
 
-**Haven:** Deadlock. Üç site ve Garage Sonic Sensor + Barrier için ideal.
+**Haven:** Deadlock. Üç site ve Garage, ses tuzağı + duvar için ideal.
 
-**Split:** Deadlock. A Ramps ve B Main Barrier ile kapanır.
+**Split:** Deadlock. A Ramps ve B Main duvarla kapanır.
 
-**Lotus:** Deadlock. Üç site + döner kapılar Sonic Sensor'ı çalıştırır.
+**Lotus:** Deadlock. Üç site ve döner kapılar ses tuzağını çalıştırır.
 
-**Sunset:** Deadlock. Dar yapı Barrier'a uyar.
+**Sunset:** Deadlock. Dar yapı duvara uyar.
 
-**Fracture:** Deadlock. İki yönlü saldırı Deadlock anchor için uyar.
+**Fracture:** Deadlock. İki yönlü saldırı Deadlock'un anchor'lığına uyar.
 
-**Bind:** Chamber hafif önde. Teleporter Chamber Rendezvous ile uyar — ama Cypher burada birinci tercih.
+**Bind:** Chamber hafif önde. Teleporter, Chamber'ın teleportuyla uyar — ama burada birinci tercih Cypher.
 
-**Abyss:** Chamber önde. Çok katlı yapı Rendezvous'a uyar.
+**Abyss:** Chamber önde. Çok katlı yapı teleporta uyar.
 
-**Ascent:** Chamber önde. B Main uzun sightline Op için ideal.
+**Ascent:** Chamber önde. B Main'in uzun sightline'ı Op için ideal.
 
 **Breeze:** Chamber önde. Uzun açılar Op ekonomisini destekler.
 
-**Pearl:** İkisi de çalışır.
+**Pearl:** İkisi de iş görür.
 
 ## 6. Dönüm Noktaları
 
-1. **Op yoksa Chamber işlevsiz.** Eco ya da force round'da Chamber bu round'u bırak — Deadlock anchor olsun.
+1. **Op yoksa Chamber işlevsiz.** Eco ya da force round'da Chamber'ı bu round bırak — anchor'lığı Deadlock yapsın.
 
-2. **Barrier yanlış yönde.** Deadlock Barrier açısını okuyamazsa Chamber o yönden bas.
+2. **Duvar yanlış yönde.** Deadlock duvar açısını okuyamazsa Chamber o yönden bas.
 
-3. **Annihilation vs Rendezvous.** Deadlock ult sesini duyunca beklemeden Rendezvous'a bas. Menzile girdikten sonra artık geç.
+3. **Deadlock ult'u vs teleport.** Deadlock ult sesini duyunca beklemeden teleporta bas. Menzile girdikten sonra artık geç.
 
-4. **Sonic Sensor walk bypass.** Geçmen gerekiyorsa walk yap — reposition yavaşlayacak, bunu hesapla.
+4. **Ses tuzağını walk ile geç.** Geçmen gerekiyorsa walk yap — reposition yavaşlayacak, bunu hesaba kat.
 
-5. **İki ult aynı anda.** Tour de Force uzaktan kill arar, Annihilation site içini kilitler — hangi ult önce değer üretirse o sentinel o round'u taşır.
+5. **İki ult aynı anda.** Op ult'u uzaktan kill arar, Deadlock ult'u site içini kilitler — hangi ult önce değer üretirse round'u o sentinel taşır.
 
 ## 7. Koç Notları
 
 **Chamber oynuyorsan:**
-- Rendezvous anchor'ını round içi yeniden konumlandır. Annihilation sesini duyunca anchor'ın nerede olduğunu bil ve hemen bas.
-- Trademark'ı Rendezvous'tan uzak hatta koy — ikisi ayrı hattı kapatmalı. Aynı hatta ikisi olursa diğer hat açık kalır.
-- Deadlock'un Barrier'ını round başı gör. Yanlış yöndeyse o yönden bas, doğru yöndeyse cepheden gitme.
+- Teleport anchor'ını round içinde yeniden konumlandır. Deadlock ult sesini duyunca anchor'ının nerede olduğunu bil ve hemen bas.
+- Tuzağını teleport hattından uzağa koy — ikisi ayrı hattı tutmalı. Aynı hatta ikisi olursa diğer hat açık kalır.
+- Deadlock'un duvarını round başında gör. Yanlış yöndeyse o yönden bas, doğru yöndeyse cepheden gitme.
 
 **Deadlock oynuyorsan:**
-- Barrier'ı koyduktan sonra saldırı rotasyonu değişirse yeniden değerlendir — yeni Barrier atabilirsin.
-- GravNet'i Chamber'ın Op açısına at. Op atarken crouch'ta tutan tek kit GravNet — Chamber ult'unu bu şekilde etkisiz bırakırsın.
-- Sonic Sensor'ı Chamber'ın flank hattına koy. Chamber walk ile bypass edecek — ama yavaşlayacak. Her iki sonuç da senin lehinedir.
+- Duvarı kurduktan sonra saldırı rotasyonu değişirse yeniden değerlendir — yeni duvar atabilirsin.
+- Ağı Chamber'ın Op açısına at. Op atarken Chamber'ı crouch'ta tutan tek kit ağdır — Chamber'ın ult'unu böyle etkisiz bırakırsın.
+- Ses tuzağını Chamber'ın flank hattına koy. Chamber walk ile bypass edecek ama yavaşlayacak. Her iki sonuç da senin lehine.

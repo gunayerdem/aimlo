@@ -9,122 +9,122 @@ tags: [matchup, composition, op-comp, rush-comp, tempo]
 
 ## 1. Bu Matchup Nedir
 
-OP comp uzak mesafe açı tutar — düşman yaklaşamadan öldürür. Rush comp yakın mesafe zorla kapatır — OP'un açısını yok sayarak koridordan geçer. Bu maçup şu soruya dayanır: rush comp OP'u koridora sokabilir mi, yoksa OP comp bunu engeller mi?
+OP comp uzaktan açı tutar, düşman daha yaklaşamadan öldürür. Rush comp ise yakına gelip açıyı zorla kapatır, OP'un baktığı hattı umursamadan koridordan basar. Bu matchup tek soruya iner: rush comp OP'u koridora çekebilecek mi, yoksa OP comp bu baskıyı kıracak mı?
 
 ## 2. Kim Avantajlı
 
 **OP comp lehine:**
-- Harita uzun — Breeze, Icebox, Ascent Mid gibi. Rush comp bu açıları dumansız geçemez.
-- Rush comp'un sadece bir controller'ı var — duman bitince OP açık kalır.
-- OP comp çift OP ile iki ayrı hattan bakar — rush comp her ikisini aynı anda kapayacak dumanı yok.
+- Harita uzun. Breeze, Icebox, Ascent Orta gibi. Rush comp bu açıları dumansız geçemez.
+- Rush comp'un tek controller'ı var. Duman bitince OP açıkta kalan hattı tarar.
+- OP comp çift OP ile iki ayrı hattan bakar. Rush comp'un ikisini aynı anda kapatacak dumanı yoktur.
 
 **Rush comp lehine:**
-- Harita dar — Bind, Split, Fracture. Koridor baskısı OP'u boşa çıkarır.
-- Rush comp duman + flash + molly zinciri hazır, OP comp tek OP ile bunu kaldıramaz.
-- Rush comp çift duelist ile giriş yaparsa tek OP oyuncusu ikisini durduramaz.
+- Harita dar. Bind, Split, Fracture. Koridor baskısı OP'u boşa düşürür.
+- Rush comp'ta duman + flash + molly zinciri hazır, OP comp tek OP ile bunu kaldıramaz.
+- Rush comp çift duelist ile entry alırsa tek OP oyuncusu ikisini birden durduramaz.
 
 ## 3. Key Düellolar
 
 **IF** Rush comp duman + flash zincirini OP açısına attı, içeri girdi
-**MEANING** OP artık göremez, tüfekçi gibi oynamak zorunda — ekonomik değeri sıfırlandı
-**COUNTER** OP oyuncusu o açıyı bırak, yan açıya geç. Sentinel kapan hattı duman dışından rush comp'u etiketler
-**WHY** OP'un silahı açıdır. Açı kapanınca OP tüfek değerinde — rush comp bunu istiyor zaten.
+**MEANING** OP artık göremez, tüfekçi gibi yakın oynamak zorunda kalır, ekonomik değeri sıfırlanır
+**COUNTER** O açıyı bırak, yan açıya geç. Sentinel tuzak hattı duman dışından rush comp'u işaretler
+**WHY** OP'un gücü açıdadır. Açı kapanınca OP tüfek değerine düşer, rush comp tam bunu ister.
 
 ---
 
 **IF** OP comp çift OP ile iki ayrı hattan bakar
-**MEANING** Rush comp bir koridordan baskı yapar ama iki açıya çarpar — bir dumanla ikisini kapatamaz
-**COUNTER** Rush comp çift duman kullan — iki controller ile iki açıyı aynı anda kapat. Omen + Viper bu yüzden çift controller oynamak zorunda
-**WHY** Çift OP comp'a karşı her iki siteyi aynı anda iki duelist ile zorla. OP comp ikiye bölününce ne geri dönüş ne çapraz ateş kurar — comp kendi içinde kopar.
+**MEANING** Rush comp tek koridordan baskı yapar ama iki açıya çarpar, bir dumanla ikisini birden kapatamaz
+**COUNTER** Rush comp çift duman aç, iki controller ile iki açıyı aynı anda kapat. Omen + Viper bu yüzden çift controller oynar
+**WHY** Çift OP'a karşı iki siteyi aynı anda iki duelist ile zorla. OP comp ikiye bölününce ne geri dönüş yapabilir ne de çapraz ateş kurabilir, kendi içinde kopar.
 
 ---
 
-**IF** Rush comp giriş oyuncusu içeri daldı, trade ortağı geride kaldı
-**MEANING** İçeri giren tek başına — OP açısından tag'lenir, trade edecek kimse yok
-**COUNTER** İkinci oyuncu yakında olmalı. İlk giriş düştüyse ikincisi hemen tek trade ile içeri girer
-**WHY** Rush comp değeri zincirden gelir. İlk giriş ölünce round bitmez. İkincisi de ölünce biter. OP tek kill'i trade penceresi dışında alırsa bedava, içinde alırsa takas.
+**IF** Rush comp entry oyuncusu içeri daldı, trade ortağı geride kaldı
+**MEANING** İçeri giren yalnız kalır. OP onu anında alır, trade edecek kimse yoktur
+**COUNTER** İkinci oyuncu hemen arkasında dursun. İlk entry düştüğü an ikincisi tek hamleyle içeri girip trade alır
+**WHY** Rush comp'un gücü zincirden gelir. İlk entry ölünce round bitmez, ikincisi de ölünce biter. OP tek kill'i trade penceresi dışında alırsa bedava kapar, içinde alırsa takas olur.
 
 ---
 
-**IF** OP comp sentinel anchor'ı rush comp'un giriş hattında
-**MEANING** Kapan hattı + OP çapraz ateşi giriş yolunu iki katman kaplar, tek duman/flash ile açılmaz
-**COUNTER** Rush comp çift başlatıcı kullan — önce kapanı temizle, sonra OP açısına duman + flash at. İki aşama gerekiyor
-**WHY** Tek katmanı kıran rush comp ikincisinde takılır. İki aşamaya ayırmayan her giriş çöker.
+**IF** OP comp sentinel anchor'ı rush comp'un entry hattında duruyor
+**MEANING** Tuzak hattı + OP çapraz ateşi entry yolunu iki katman örter, tek duman ya da flash ile açılmaz
+**COUNTER** Rush comp çift util kullan: önce tuzağı temizle, sonra OP açısına duman + flash at. İki aşama şart
+**WHY** İlk katmanı kıran rush comp ikincisinde takılır. Girişi iki aşamaya bölmeyen her entry çöker.
 
 ---
 
-**IF** Rush comp spike kurdu, OP comp geri almaya başladı
-**MEANING** Rush comp içeri girerken tüm dumanı + flashı harcadı — spike etrafında koruma yok
-**COUNTER** Rush comp hamlelerini böl: giriş için duman + flash, spike sonrası için molly + flash. OP'un geri alış açısını molly ile kapat
-**WHY** Rush comp'un spike sonrası zayıf olması comp'un yapısıdır — bu değişmez. OP comp geri alışta uzun mesafe atar, spike bölgesinden açı alır. Buna karşılık hazırda molly olmazsa rush comp savunmasız.
+**IF** Rush comp spike kurdu, OP comp retake'e başladı
+**MEANING** Rush comp içeri girerken tüm dumanı + flashı harcadı, spike çevresinde koruma kalmadı
+**COUNTER** Util'i ikiye böl: entry için duman + flash, post-plant için molly + flash. OP'un retake açısını molly ile kapat
+**WHY** Rush comp post-plant'te zayıf düşer, bu comp'un yapısı gereği değişmez. OP comp retake'te uzaktan shot atar, spike bölgesine açı bulur. Hazırda molly olmazsa rush comp savunmasız kalır.
 
 ---
 
 **IF** Breeze B'de, rush comp B Koridoru'ndan içeri girdi
-**MEANING** B Koridoru'nun çıkışı geniş — iki OP arkadan ve dirsekten çapraz bakıyor, dumansız açılan rush comp ikisini alır
-**COUNTER** B Koridoru push'unda çift duman şart: biri arka açıya, biri dirsek açısına. İki duman söndüğünde OP henüz yeniden konumlanmamıştır — o pencerede gir
-**WHY** Breeze B OP comp'ın ev sahasıdır. Ya full duman ekonomisiyle geç ya A'ya yönlen. Yarı yolda kalan giriş iki OP shot'ı alır.
+**MEANING** B Koridoru'nun çıkışı geniş, iki OP arkadan ve dirsekten çapraz bakar, dumansız açılan rush comp ikisini de verir
+**COUNTER** B Koridoru push'unda çift duman şart: biri arka açıya, biri dirsek açısına. İki duman söndüğünde OP henüz yeniden yerleşmemiştir, o pencerede gir
+**WHY** Breeze B, OP comp'ın evidir. Ya full duman ekonomisiyle geç ya da A'ya yönel. Yarım kalan giriş iki OP shot'ı yer.
 
 ---
 
 **IF** Rush comp orta bölgeyi aldı, OP comp orta açısını kaybetti
-**MEANING** OP comp'un geçiş hattı ikiye bölündü — iki OP birbirini destekleyemez
-**COUNTER** OP comp round başında orta bölgeyi öncelik ver — utility'yi oraya yatır. Orta giderse OP comp tek tek solo tutar, bu kaybettirir
-**WHY** Orta OP comp'un bel kemiğidir. Orta gidince iki OP ayrı ayrı solo oynamak zorunda kalır — bu rush comp'un istediği şeydir.
+**MEANING** OP comp'un geçiş hattı ikiye bölündü, iki OP birbirini destekleyemez
+**COUNTER** OP comp round başında ortaya öncelik versin, util'i oraya yatırsın. Orta giderse iki OP tek tek solo tutar, bu round'u kaybettirir
+**WHY** Orta, OP comp'ın bel kemiğidir. Orta gidince iki OP ayrı ayrı solo oynamak zorunda kalır, rush comp da tam bunu ister.
 
 ## 4. Kaynak Dengesi
 
-OP comp silaha para yatırır — tek OP 4.700, çift OP 9.400. Utility az kalır.
-Rush comp silah + utility dengeli — utility tam.
+OP comp parayı silaha yatırır: tek OP 4.700, çift OP 9.400. Geriye az util kalır.
+Rush comp'ta silah + util dengelidir, util tam açılır.
 
-**OP comp kazanırsa:** Pahalı silahlar değer üretir, karlı round.
-**OP comp kaybederse:** Düşürülen OP rush comp'a bedava silah — bu en büyük tehlike. Rush comp her OP düşüşünü anında site-push'a çevirir. OP oyuncusu düşeceğini anlayınca kill almayı bırak, çekil, silahı kurtar.
+**OP comp kazanırsa:** Pahalı silahlar değerini verir, round karlı geçer.
+**OP comp kaybederse:** Düşen OP rush comp'a bedava silah olur, en büyük tehlike budur. Rush comp her OP düşüşünü anında site push'a çevirir. OP oyuncusu öleceğini sezdiği an kill peşini bırak, çekil, silahı kurtar.
 
-**Rush comp kazanırsa:** Utility sıfırlanır, sonraki round baştan kurar.
-**Rush comp kaybederse:** Ekonomi az etkilenir, utility yine tam açılır.
+**Rush comp kazanırsa:** Util sıfırlanır, sonraki round'u baştan kurar.
+**Rush comp kaybederse:** Ekonomisi az sarsılır, util yine tam açılır.
 
-Uzun maçta bu denge rush comp lehine çalışır — OP comp iki-üç round kaybedince çift OP alamaz, rush comp aynı durumda utility'yi korur.
+Uzun maçta bu denge rush comp lehine işler. OP comp iki-üç round kaybedince çift OP alamaz, rush comp aynı durumda util'ini korur.
 
-**Not:** Rush comp tek controller oynamak zorunda kaldığında dumanı OP açısına atma — giriş oyuncusunun arkasına at. Böylece OP shot alırken duelist zaten içeridedir, duman OP'u değil trade'i korur.
+**Not:** Rush comp tek controller oynamak zorunda kaldığında dumanı OP açısına atma, entry oyuncusunun arkasına at. Böylece OP shot ararken duelist çoktan içeride olur, duman OP'u değil trade'i korur.
 
 ## 5. Haritaya Göre Değişim
 
-**Breeze (OP avantajlı):** Orta Sütun + A Ana Giriş + B Koridoru — uzun açılar. Rush comp full duman ekonomisi ister, yoksa geçemez.
+**Breeze (OP avantajlı):** Orta Sütun + A Ana Giriş + B Koridoru, hepsi uzun açı. Rush comp full duman ekonomisi ister, yoksa geçemez.
 
-**Icebox (OP avantajlı):** Orta Tüp + Rafters + B Uzun dikey. Rush comp ancak A Site tam baskı ile değer üretir.
+**Icebox (OP avantajlı):** Orta Tüp + Rafters + B Uzun dikey. Rush comp ancak A Site'ye tam baskıyla değer üretir.
 
-**Bind (rush comp avantajlı):** Işınlık + dar koridor + Hookah. Rush comp burada baskın, OP comp tek OP ile haritanın yarısını kullanamaz.
+**Bind (rush comp avantajlı):** Işınlık + dar koridor + Hookah. Rush comp burada baskındır, OP comp tek OP ile haritanın yarısını kullanamaz.
 
 **Split (rush comp avantajlı):** Dar koridor + dikey + yakın mesafe. OP sadece Orta ve A Çatı'da açı tutar, rush comp B + A Ana commit ile OP'u geçer.
 
-**Ascent (dengeli):** Orta Kurye açısı OP için, A ve B siteleri rush comp için uygun. Round başı site seçimi belirler.
+**Ascent (dengeli):** Orta Kurye açısı OP'a yarar, A ve B siteleri rush comp'a uygundur. Round başında seçilen site dengeyi belirler.
 
-**Haven (dengeli):** A Uzun + C Uzun iki OP açısı, B Site rush comp için yakın. Üç site her iki comp'ın avantajını böler.
+**Haven (dengeli):** A Uzun + C Uzun iki OP açısı verir, B Site rush comp için yakındır. Üç site her iki comp'ın avantajını böler.
 
-**Lotus (rush comp hafif avantajlı):** Döner kapı + üç site rush comp hızını artırır. OP C Uzun'da sabit açı tutar, rush comp A'ya tam baskı yaparak kazanır.
+**Lotus (rush comp hafif avantajlı):** Döner kapı + üç site rush comp'ın hızını artırır. OP C Uzun'da sabit açı tutar, rush comp A'ya tam baskı yaparak kazanır.
 
-**Sunset (dengeli):** A Ana Giriş geniş — OP için. B Market + Orta — rush comp için. Comp tercih oyuncu rolüne bağlı.
+**Sunset (dengeli):** A Ana Giriş geniş, OP'a yarar. B Market + Orta rush comp'a yarar. Comp tercihini oyuncu rolleri belirler.
 
 ## 6. Dönüm Noktaları
 
-**Dönüm 1 — İlk OP shot:** Shot isabet aldıysa rush comp temposu kırıldı. Kaçırdıysa rush comp utility ile push bitirir.
+**Dönüm 1 — İlk OP shot:** Shot isabet ettiyse rush comp'un temposu kırılır. Iskaladıysa rush comp util ile push'u bitirir.
 
-**Dönüm 2 — Utility bölünmesi:** Rush comp tüm utility'yi girişe harcarsa matchup OP comp'a döner. Yarıya böldüyse matchup açık.
+**Dönüm 2 — Util bölünmesi:** Rush comp tüm util'i girişe harcarsa matchup OP comp'a döner. Yarıya bölerse matchup açık kalır.
 
-**Dönüm 3 — Orta kontrol:** Orta rush comp'takiyse OP comp geçiş hattı kopar. Orta OP comp'takiyse rush comp tek koridora sıkışır.
+**Dönüm 3 — Orta kontrol:** Orta rush comp'taysa OP comp'ın geçiş hattı kopar. Orta OP comp'taysa rush comp tek koridora sıkışır.
 
-**Dönüm 4 — Ekonomi:** OP comp iki round üst üste kaybederse çift OP alamaz, force-buy'a düşer. Rush comp aynı durumda utility yine tam.
+**Dönüm 4 — Ekonomi:** OP comp üst üste iki round kaybederse çift OP alamaz, force-buy'a düşer. Rush comp aynı durumda util'ini yine tam açar.
 
-**Dönüm 5 — Çift duelist:** Rush comp giriş zinciri sağlamsa matchup rush comp'a kayar. Zincir kopuksa OP comp kazanır.
+**Dönüm 5 — Çift duelist:** Rush comp'un entry zinciri sağlamsa matchup rush comp'a kayar. Zincir kopuksa OP comp kazanır.
 
 ## 7. Koç Notları
 
-OP comp takım oyunudur — OP oyuncusu round başında hangi açıyı tutacağını takıma söyler. Söylemezse OP solo oynuyor demektir, bu kaybettirir.
+OP comp takım oyunudur. OP oyuncusu round başında hangi açıyı tutacağını takıma söyler. Söylemezse OP solo oynuyor demektir, bu da round'u kaybettirir.
 
-Rush comp beş kişi aynı anda utility açmalıdır — kim önce duman, kim önce flash, bunu round başında belirle. Belirlemezsen utility dağınık patlar, etkisi sıfırlanır.
+Rush comp'ta beş kişi util'i aynı anda açmalı. Kim önce duman, kim önce flash, bunu round başında belirle. Belirlemezsen util dağınık patlar, etkisi sıfırlanır.
 
-OP comp'a karşı oynuyorsan iki siteyi aynı anda iki duelist ile zorla — OP comp ikiye bölünür, ne geri dönüş ne çapraz ateş kurar. Bu pattern'i gördüğünde OP comp olarak orta açıyı bırakma, önce ikiye bölünmeyi engelle.
+OP comp'a karşı oynuyorsan iki siteyi aynı anda iki duelist ile zorla. OP comp ikiye bölünür, ne geri dönüş yapar ne çapraz ateş kurar. OP comp'tayken bu kalıbı gördüğün an orta açıyı bırakma, önce ikiye bölünmeyi engelle.
 
-**Rank notu:** Diamond altında oyuncular OP comp'u solo oynar — tek OP açı tutar, takım habersiz. Bu yanlış. OP açısı takımın bildiği açıdır, yoksa OP değil sniper kafası oynuyorsun.
+**Rank notu:** Diamond altında oyuncular OP comp'u solo oynar, tek OP açı tutar, takım habersiz kalır. Bu yanlış. OP açısı takımın bildiği açıdır, yoksa OP değil sniper kafasıyla oynuyorsun.
 
-**Özet:** OP comp açısını korursa kazanır. Rush comp temposunu korursa kazanır. OP comp açısını dumana kaptırırsa yenildi. Rush comp temposu kapan hattında duruyorsa yenildi. Her iki comp da utility'yi doğru anda açmak zorunda — açmayanın temeli çöker.
+**Özet:** OP comp açısını korursa kazanır. Rush comp temposunu korursa kazanır. OP comp açısını dumana kaptırdıysa yenildi. Rush comp temposu tuzak hattında takıldıysa yenildi. Her iki comp da util'i doğru anda açmak zorunda, açmayanın temeli çöker.

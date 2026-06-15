@@ -2,74 +2,74 @@
 
 ## Bu Eşleşmede Ne Oluyor
 
-Raze, Viper'ın kurulumunu bombalarla fiziksel olarak yok edebilir. Viper, Raze'in her girişini decay tuzağına çevirebilir. Kim önce hareket ederse değil — kim karşı tarafın araçlarını tüketirse kazanır.
+Raze, Viper'ın kurulumunu bombayla fiziksel olarak söküp atar. Viper de Raze'in her girişini hasar bölgesine sokar. Kim önce hareket ederse değil — kim karşının araçlarını önce tüketirse kazanır.
 
-Raze olarak: Poison Cloud yayıcısını patlat, sonra gir. Yayıcı yerinde varken Toxic Screen içinden geçme — diğer tarafta düşük canla ve kaçış yolu olmadan çıkarsın.
+Raze oynuyorsan: önce smoke yayıcısını patlat, sonra gir. Yayıcı ayaktayken duvarın içinden geçme — diğer tarafa düşük canla, kaçış yolun kapalı çıkarsın.
 
-Viper olarak: Screen'i sürekli açık tutma, fuel biter. Raze seni meşgul ederken fuel'ın biterse duvarsız kalırsın — o noktada Raze istediği zaman girer.
+Viper oynuyorsan: duvarı sürekli açık tutma, yakıtın biter. Raze seni oyalarken yakıtın bitti mi duvarsız kalırsın — o an Raze istediği zaman girer.
 
 ## Cezalandırma Kalıpları
 
 ### Raze Viper'ı Cezalandırırken
 
-**IF**: Paint Shell'i Poison Cloud yayıcısına atıyorsun, Viper ya yayıcıyı kaybediyor ya pozisyon değiştiriyor
-**MEANING**: Viper sahadaki kontrolü anlık olarak çöküyor — toksini olmayan bir Viper sadece bir silah
-**COUNTER**: Viper yayıcıyı Paint Shell'in sekme açısının ulaşamayacağı yere koyar — yüksek köşe, dar angle
-**WHY**: Yayıcıya ulaşmak için iki sekme gerekiyorsa Raze grenade harcamayı göze alamaz
+**IF**: Molly'ni smoke yayıcısına atıyorsun, Viper ya yayıcıyı kaybediyor ya yer değiştiriyor
+**MEANING**: Viper'ın saha kontrolü o an çöküyor — smoke'u olmayan Viper sadece bir silah
+**COUNTER**: Viper yayıcıyı molly'nin sekme açısının yetişemeyeceği yere koyar — yüksek köşe, dar açı
+**WHY**: Yayıcıya ulaşmak iki sekme istiyorsa Raze molly harcamayı göze alamaz
 
-**IF**: Boom Bot'u Toxic Screen içinden gönderiyorsun, Viper'ın arkasındaki pozisyonu tarıyor
-**MEANING**: Screen görüş kesiyordu, bilgi kesmiyordu — Boom Bot geçip düşman yerini veriyor
-**COUNTER**: Viper Boom Bot'un yoluna Snake Bite koyar
-**WHY**: Boom Bot Toxic Screen'den etkilenmiyor, içinden düz geçiyor
+**IF**: Bot'u duvarın içinden gönderiyorsun, Viper'ın arkadaki pozisyonunu tarıyor
+**MEANING**: Duvar görüşü kesiyordu ama bilgiyi kesmiyor — bot içinden geçip düşmanın yerini veriyor
+**COUNTER**: Viper bot'un yoluna molly koyar
+**WHY**: Bot duvardan etkilenmez, içinden dümdüz geçer
 
-**IF**: Blast Pack ile Toxic Screen'in üzerinden atlayıp Viper'ın arkasına iniyorsun
-**MEANING**: Decay bölgesini tamamen atlıyorsun, Viper seni göremeden içeri giriyorsun
-**COUNTER**: Viper tahmin edebileceği iniş noktalarına Snake Bite hazırlar
-**WHY**: Screen üzerinden satchel tek yön — geri dönemezsin, Viper bunu bilir
+**IF**: Satchel'le duvarın üstünden atlayıp Viper'ın arkasına iniyorsun
+**MEANING**: Hasar bölgesini tamamen atlıyorsun, Viper seni göremeden içeri giriyorsun
+**COUNTER**: Viper tahmin edilebilir iniş noktalarına önceden molly hazırlar
+**WHY**: Duvarın üstünden satchel tek yön — geri dönemezsin, Viper bunu bilir
 
 ### Viper Raze'i Cezalandırırken
 
-**IF**: Toxic Screen girişte aktif, Raze satchel'le içeri girdi ve diğer tarafta decay'li kaldı
-**MEANING**: Raze hasar almış ve kaçış yolu yok — her dövüşe eksik giriyor
-**COUNTER**: Raze girmeden önce Paint Shell'le yayıcıyı yok etmeli
-**WHY**: Screen içinden geçmek tek yönlü bir bağlanma — yayıcı yerindeyse çıkış yok
+**IF**: Girişte duvarın açık, Raze satchel'le içeri girdi ve diğer tarafta hasar bölgesinde kaldı
+**MEANING**: Raze can kaybetti ve kaçış yolu yok — her dövüşe eksik giriyor
+**COUNTER**: Raze girmeden önce molly'yle yayıcıyı patlatmalı
+**WHY**: Duvarın içinden geçmek tek yönlü bir bağlanma — yayıcı yerindeyse çıkış yok
 
-**IF**: Snake Bite'ı Raze'in satchel iniş noktasına koyuyorsun, Raze her girişte hasar yiyor
-**MEANING**: İniş noktası zaten hasar bölgesi — Raze indiği anda kayıpta
+**IF**: Molly'ni Raze'in satchel iniş noktasına koyuyorsun, Raze her girişte can yiyor
+**MEANING**: İniş noktası zaten hasar bölgesi — Raze indiği an kayıpta
 **COUNTER**: Raze her raund farklı açıdan, farklı yükseklikten girer
-**WHY**: Aynı noktaya inen Raze'i Snake Bite ile kilitlemek kolay
+**WHY**: Aynı noktaya inen Raze'i molly'yle kilitlemek kolay
 
-**IF**: Screen'i Raze meşgul ederken sürekli açık tutuyorsun, fuel bitiyor
-**MEANING**: Raze grenade harcamadan screen'ini tüketiyor — fuel bitince duvarsız kalıyorsun
-**COUNTER**: Screen'i toggle et: Raze push etmediğinde kapat, push geldiğinde aç
-**WHY**: Sürekli açık screen fuel'ı boşa harcar, Raze bunu bilerek baskı kurar
+**IF**: Raze seni oyalarken duvarı sürekli açık tutuyorsun, yakıt bitiyor
+**MEANING**: Raze tek util harcamadan duvarını tüketiyor — yakıt bitince duvarsız kalıyorsun
+**COUNTER**: Duvarı aç-kapa kullan: Raze push etmiyorken kapat, push gelince aç
+**WHY**: Sürekli açık duvar yakıtı boşa harcar, Raze bunu bilerek baskı kurar
 
 ## Sürekli Kaybediyorsan
 
-**Raze olarak decay'li girip dövüş kaybediyorsan**: Yayıcıyı yok etmeden giriyorsun. Paint Shell'i önce yayıcıya at. Yayıcı yüksekte veya köşedeyse iki sekme açısı dene — birincisi duvarı, ikincisi yayıcıyı vurur. Ya da screen'in üzerinden satchel'le, içinden geçme.
+**Raze oynuyorsun, hasar bölgesinde girip dövüş kaybediyorsan**: Yayıcıyı patlatmadan giriyorsun. Önce molly'ni yayıcıya at. Yayıcı yüksekteyse ya da köşedeyse iki sekme açısı dene — birincisi duvarı, ikincisi yayıcıyı vurur. Olmuyorsa duvarın üstünden satchel'le geç, içinden yürüme.
 
-**Viper olarak kurulumunu Raze'e kaybediyorsan**: Yayıcı Paint Shell'in direkt ulaştığı yerde. Yayıcıyı yüksek köşeye veya dar açıya koy — Raze sekme hesabını yapamazsa grenade harcamaz. Ayrıca screen fuel'ını takip et: Raze seni meşgul edip fuel bitince push yapıyorsa, toggle alışkanlığı edinmen lazım.
+**Viper oynuyorsun, kurulumunu Raze'e kaybediyorsan**: Yayıcın molly'nin direkt yetiştiği yerde duruyor. Yüksek köşeye ya da dar açıya koy — Raze sekme hesabını yapamazsa util harcamaz. Bir de duvar yakıtını takip et: Raze seni oyalayıp yakıt bitince push yapıyorsa, aç-kapa alışkanlığı edinmen şart.
 
 ## AIMLO Ne Demeli
 
 ### Oyuncu cezalandırılan taraftayken
 
-**Raze Viper'ın toksinine kaybediyorsa**: "Yayıcıyı yok etmeden giriyorsun. Önce Paint Shell at, yayıcı patladıktan sonra gir. Yayıcıya ulaşamıyorsan screen'in üzerinden satchel'le — içinden yürüme."
+**Raze Viper'ın smoke'una kaybediyorsa**: "Yayıcıyı patlatmadan giriyorsun. Önce molly at, yayıcı patlasın, sonra gir. Yayıcıya ulaşamıyorsan duvarın üstünden satchel'le geç — içinden yürüme."
 
-**Viper kurulumunu Raze'e kaybediyorsa**: "Yayıcın Paint Shell'in direkt vurduğu yerde. Dar açıya veya yükseğe koy — Raze sekme hesabını yapamıyorsa grenade harcamaz. Screen'i sürekli açık tutma, Raze fuel'ını tüketip push yapıyor."
+**Viper kurulumunu Raze'e kaybediyorsa**: "Yayıcın molly'nin direkt vurduğu yerde. Dar açıya ya da yükseğe koy — Raze sekme hesabını yapamazsa util harcamaz. Duvarı sürekli açık tutma, Raze yakıtını tüketip push yapıyor."
 
 ### Oyuncu cezalandıran taraftayken
 
-**Raze Viper'ı parçalıyorsa**: "Yayıcıyı patlatmaya devam et. Yayıcı değişti mi bak — Raze'e uyum sağlamaya çalışıyorsa yeni pozisyona yeni sekme açısı bul."
+**Raze Viper'ı parçalıyorsa**: "Yayıcıyı patlatmaya devam et. Yayıcı yer değiştirdi mi bak — Viper sana uyum sağlamaya çalışıyorsa yeni pozisyona yeni sekme açısı bul."
 
-**Viper Raze'i durduruyorsa**: "Screen fuel'ını takip et. Raze push gelmediğinde screen'i kapat, fuel'ı koru. Raze gelince aç — decay'li dövüşemez."
+**Viper Raze'i durduruyorsa**: "Duvar yakıtını takip et. Raze push gelmiyorken duvarı kapat, yakıtı koru. Raze gelince aç — hasar bölgesinde dövüşemez."
 
 ## Rank Modülasyonu
 
-**LOW**: Raze Viper'ın toksini aktifken içinden giriyor. Viper screen'i açmayı unutuyor. Tek mesaj: yayıcı yerindeyse girme, üzerinden geç veya önce patlat.
+**LOW**: Raze, Viper'ın smoke'u açıkken içinden giriyor. Viper duvarı açmayı unutuyor. Tek mesaj: yayıcı yerindeyse girme, üstünden geç ya da önce patlat.
 
-**MID**: Raze yayıcıyı vurmaya çalışıyor ama grenade açısı yanlış. Viper screen'i sürekli açık tutuyor, fuel bitiyor. Raze'e sekme açısı göster. Viper'a toggle alışkanlığı öğret.
+**MID**: Raze yayıcıyı vurmaya çalışıyor ama sekme açısı yanlış. Viper duvarı sürekli açık tutuyor, yakıt bitiyor. Raze'e sekme açısını göster. Viper'a aç-kapa alışkanlığını öğret.
 
-**HIGH**: Raze yayıcıyı sistematik yok ediyor, Viper yayıcı pozisyonunu değiştiriyor. Her ikisi de birbirinin kalıbına uyum sağlıyor. Bu noktada grenade sekme çeşitlendirmesi ve yayıcı yerleştirme varyasyonlarını çalış.
+**HIGH**: Raze yayıcıyı sistematik patlatıyor, Viper yayıcı pozisyonunu değiştiriyor. İkisi de birbirinin kalıbına uyum sağlıyor. Bu noktada sekme çeşitlendirmesini ve yayıcı yerleştirme varyasyonlarını çalış.
 
-**ELITE**: Belirleyici olan Viper'ın screen fuel durumu ile Raze'in grenade sayısı. Raze yayıcıyı patlatmak yerine screen'i meşgul edip fuel tüketirse aynı sonucu grenade harcamadan alır. Viper Raze'in grenade sayısını okumalı — grenade yoksa yayıcı güvende, varsa pozisyon değiştir.
+**ELITE**: İşi belirleyen Viper'ın duvar yakıtı ile Raze'in elindeki util sayısı. Raze yayıcıyı patlatmak yerine duvarı oyalayıp yakıt tüketirse aynı sonucu util harcamadan alır. Viper Raze'in util sayısını okumalı — util yoksa yayıcı güvende, varsa pozisyon değiştir.

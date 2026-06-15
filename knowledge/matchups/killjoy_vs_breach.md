@@ -11,111 +11,111 @@ tags: [matchup, killjoy, breach, sentinel, initiator]
 
 ## 1. Matchup Özü
 
-Breach, duvardan geçen stun ve hasar ile Killjoy'un kurduğu her şeyi kapak arkasında bile vurur. Killjoy ise Lockdown'la Breach'in push penceresini tamamen kapatır. Bu matchup ikisinin de aynı choke'ta çakıştığı bir bilgi savaşı — Breach'in fault line hattını veya Killjoy'un turret noktasını kim önce değiştirirse o round'u o alır.
+Breach, duvardan geçen stun ve hasarıyla Killjoy'un kurduğu her şeyi kapak arkasında bile vurur. Killjoy ise ult'uyla Breach'in push penceresini tamamen kapatır. Bu matchup ikisinin de aynı choke'ta çakıştığı bir bilgi savaşı — Breach'in stun hattını veya Killjoy'un tuzak noktasını kim önce değiştirirse o round onun olur.
 
 ## 2. Kim Avantajlı?
 
 **Killjoy lehine:**
-- Dar choke'ta (Bind Hookah, Sunset B Main) — turret entry'i tag'ler, Breach sokulamaz
-- Breach iki yeteneğini harcadıysa — stun ve flash yoksa Killjoy serbestçe kurar
-- Lockdown Breach push'unun ortasına düştüyse — Breach orada donar, yetenek kullanamaz
-- Uzun koridorlarda — Breach'in menzili kısa, turret uzak hattı tarar
+- Dar choke'ta (Bind Hookah, Sunset B Main) tuzak entry'i tag'ler, Breach sokulamaz.
+- Breach iki yeteneğini harcadıysa, stun ve flash yokken Killjoy serbestçe kurar.
+- Killjoy ult'u Breach push'unun ortasına düştüyse Breach orada donar, yetenek kullanamaz.
+- Uzun koridorlarda Breach'in menzili kısa kalır, tuzak uzak hattı tarar.
 
 **Breach lehine:**
-- Fault line Killjoy'un durduğu noktayı duvarden geçerek stun'larsa — kapak işe yaramaz, turret'i de aktive edemezsin
-- Aftershock turret + alarmbot'un üstüne düşerse — duvardan geçen hasar utility'yi eritir
-- Flash peek hattına gelirse — Killjoy kendisi kör olur, turret hâlâ çalışır ama duel bozulur
-- Rolling Thunder site'a girerse — duvardan geçen alan stun, Killjoy anchor'ı donuklaşır
+- Breach stun'u Killjoy'un durduğu noktayı duvardan geçerek vurursa kapak işe yaramaz, tuzağı da aktive edemezsin.
+- Molly tuzak + botun üstüne düşerse duvardan geçen hasar util'i eritir.
+- Flash peek hattına gelirse Killjoy kör olur, tuzak hâlâ çalışır ama duel bozulur.
+- Breach ult'u site'a girerse duvardan geçen alan stun yüzünden Killjoy anchor donar.
 
-**Dengeli:** Haven, Ascent, Lotus'ta matchup ortaya düşer — Breach fault line hattını veya Killjoy nanoswarm noktasını kim önce değiştirirse o bükülür.
+**Dengeli:** Haven, Ascent, Lotus'ta matchup ortaya düşer — Breach stun hattını veya Killjoy molly noktasını kim önce değiştirirse o bükülür.
 
 ## 3. Key Düellolar
 
-**IF** Breach fault line Killjoy'un durduğu yeri duvardan geçerek stun'ladı
-**MEANING** Kapak korumaz — fault line solid geometry'yi deler. Turret'i aktive edemezsin, reaksiyon penceren yok.
-**COUNTER** Aynı köşede kalma. Fault line sesini duyduğunda iki adım yan kayarsın — stun hattı sabit, sen değişirsen boşa gider.
-**WHY** Fault line her round aynı açıdan gelir. Pozisyon değiştirirsen bu yetenek sana bir daha işe yaramaz.
+**IF** Breach stun'u Killjoy'un durduğu yeri duvardan geçerek vurdu
+**MEANING** Kapak korumaz, stun solid geometry'yi deler. Tuzağı aktive edemezsin, reaksiyon penceren yok.
+**COUNTER** Aynı köşede kalma. Stun sesini duyduğunda iki adım yana kay — hat sabit, sen değişirsen boşa gider.
+**WHY** Breach stun'u her round aynı açıdan gelir. Pozisyonunu değiştirirsen o yetenek sana bir daha işlemez.
 
 ---
 
-**IF** Breach aftershock turret + alarmbot'un üstüne atıldı
-**MEANING** Duvardan geçen hasar utility'yi eritir — turret 125 HP, aftershock üç vuruşta bitirir.
-**COUNTER** Turret ve alarmbot'u Breach'in bilinen lineup hattının dışına koy. Aftershock sabit bir lineup gerektirir — sen yerini değiştirirsen o lineup işe yaramaz.
-**WHY** Breach aftershock'u her seferinde aynı açıdan atar. Yerini bir kez öğrenirsen bir daha koyabileceği yer kalmaz.
+**IF** Breach molly'sini tuzak + botun üstüne attı
+**MEANING** Duvardan geçen hasar util'i eritir — tuzak 125 HP, molly üç vuruşta bitirir.
+**COUNTER** Tuzağı ve botu Breach'in bilinen lineup hattının dışına koy. Molly sabit bir lineup ister — yerini değiştirirsen o lineup tutmaz.
+**WHY** Breach molly'yi her seferinde aynı açıdan atar. Yerini bir kez öğrenirsen koyabileceği yer kalmaz.
 
 ---
 
-**IF** Killjoy Lockdown'ı Breach push'unun ortasına attı
-**MEANING** Lockdown alandaki Breach'i dondurur — yetenek kullanamaz, çekilemez.
-**COUNTER** Breach Lockdown sesini duyduğunda alandan çıkar, yoksa donar. Çıkamazsan fault line'ı Lockdown kanalına önceden at — kurulum sırasında vurursan Lockdown daha aktive olmadan kesilir.
-**WHY** Lockdown kanalına girersen o round bitti. Ses duyulduğunda dışarısın — içerideysen geç.
+**IF** Killjoy ult'u Breach push'unun ortasına attı
+**MEANING** Ult alandaki Breach'i dondurur — yetenek kullanamaz, çekilemez.
+**COUNTER** Breach ult sesini duyduğunda alandan çık, yoksa donarsın. Çıkamıyorsan stun'u ult kanalına önceden at — kurulum sırasında vurursan ult aktive olmadan kesilir.
+**WHY** Ult kanalına girersen o round bitti. Ses duyulduğunda dışarıda ol — içerideysen geç kaldın.
 
 ---
 
-**IF** Breach Rolling Thunder'ı site'a attı
+**IF** Breach ult'unu site'a attı
 **MEANING** Sabit yönde duvardan geçen alan stun — Killjoy kapak arkasında bile yakalanır, site anchor çöker.
-**COUNTER** Rolling Thunder sesini duyduğunda dik açıya kay. Ult tek yönde gider — yön dışında olan alan güvende.
-**WHY** Rolling Thunder yön değiştirmez. Dik açıda duruyorsan sana ulaşamaz.
+**COUNTER** Breach ult'unun sesini duyduğunda dik açıya kay. Ult tek yönde gider, yön dışında kalan alan güvende.
+**WHY** Breach ult'u yön değiştirmez. Dik açıda duruyorsan sana ulaşamaz.
 
 ---
 
-**IF** Killjoy turret Breach'in entry hattında, Breach fault line'ı aynı hatta kullanıyor
-**MEANING** İkisi aynı anda aktive olur — turret tag + fault line stun çakışır.
-**COUNTER** Breach olarak fault line'ı turret'in göremediği köşeden at. Killjoy olarak turret'i fault line hattının dışına koy.
-**WHY** Kim önce aktive olursa avantaj onda. Fault line atış hızlı, turret reaksiyon hızlı — açı değişimi ikisi için de belirleyici.
+**IF** Killjoy tuzağı Breach'in entry hattında, Breach stun'u aynı hatta kullanıyor
+**MEANING** İkisi aynı anda aktive olur — tuzak tag + stun çakışır.
+**COUNTER** Breach olarak stun'u tuzağın göremediği köşeden at. Killjoy olarak tuzağı stun hattının dışına koy.
+**WHY** Kim önce aktive olursa avantaj onda. Stun atışı hızlı, tuzak reaksiyonu hızlı — açıyı değiştirmek ikisi için de belirleyici.
 
 ---
 
-**IF** Killjoy nanoswarm Breach'in fault line attığı noktaya koyuldu
-**MEANING** Fault line atarken Breach pozisyonu sabittir — nanoswarm tam o anda açılırsa Breach biter.
-**COUNTER** Breach fault line lineup noktasını her round değiştir. Killjoy nanoswarm harcatmak için alternatif noktadan at — utility harcatırsan sonraki round serbestsin.
-**WHY** Nanoswarm sabit hedefe gider. Sabit duruyorsan bedava hedefsin.
+**IF** Killjoy molly'si Breach'in stun attığı noktaya koyuldu
+**MEANING** Stun atarken Breach'in pozisyonu sabittir — molly tam o anda açılırsa Breach biter.
+**COUNTER** Breach stun lineup noktasını her round değiştir. Killjoy molly'yi harcatmak için alternatif noktadan at — util'i harcatırsan sonraki round serbestsin.
+**WHY** Molly sabit hedefe gider. Sabit duruyorsan bedava hedefsin.
 
 ---
 
-**IF** Breach flash Killjoy'un peek hattına geldi
-**MEANING** Killjoy kör olur, aim duelı bozulur — ama turret flash'tan etkilenmez, hâlâ tag'ler.
-**COUNTER** Flash sesini duyduğunda kapağa çekil. Turret zaten çalışıyor — sen kendin kör olmaktan kaçınırsan Breach follow-up'ında sürprizle karşılaşır.
-**WHY** Turret'in aim'i sana bağlı değil. Kendini flash'tan koruduktan sonra turret tag'ini Breach duel'ına eklersin — ikili avantaj.
+**IF** Breach flash'ı Killjoy'un peek hattına geldi
+**MEANING** Killjoy kör olur, aim duel'ı bozulur — ama tuzak flash'tan etkilenmez, hâlâ tag'ler.
+**COUNTER** Flash sesini duyduğunda kapağa çekil. Tuzak zaten çalışıyor, sen körlükten kaçınırsan Breach follow-up'ta sürprizle karşılaşır.
+**WHY** Tuzağın aim'i sana bağlı değil. Kendini flash'tan koruduktan sonra tuzak tag'ini Breach duel'ına eklersin — ikili avantaj.
 
 ## 4. Yetenek Takası
 
-Breach'in her yeteneği duvardan geçer — kapak seni korumaz. Killjoy'un her yeteneği sabit kalır — Breach lineup'u öğrenirse siler. Ama Lockdown (8 point) Breach'in push penceresini tamamen kapatır, Rolling Thunder (9 point) ise Killjoy'un site anchor'ını dondurur. Ult takasında Killjoy bir adım ucuz — daha sık açar.
+Breach'in her yeteneği duvardan geçer, kapak seni korumaz. Killjoy'un her yeteneği sabit kalır, Breach lineup'u öğrenirse siler. Ama Killjoy ult'u (8 point) Breach'in push penceresini tamamen kapatır, Breach ult'u (9 point) ise Killjoy'un site anchor'ını dondurur. Ult takasında Killjoy bir adım ucuz, daha sık açar.
 
 Somut fark: Breach kapağı deler, Killjoy zamanı dondurur. Biri pozisyonu kırar, öbürü push'u durdurur.
 
 ## 5. Haritaya Göre Değişim
 
-**Split (Breach hafif avantajlı):** Dar koridorlar fault line'ı güçlendirir. Killjoy B anchor dışında baskı altında.
+**Split (Breach hafif avantajlı):** Dar koridorlar stun'u güçlendirir. Killjoy B anchor dışında baskı altında.
 
-**Bind (Killjoy avantajlı):** Dar choke turret'i güçlendirir. Breach menzili sıkışır.
+**Bind (Killjoy avantajlı):** Dar choke tuzağı güçlendirir. Breach menzili sıkışır.
 
-**Sunset (Breach hafif avantajlı):** B Main choke fault line için ideal — Breach stun burada baskın.
+**Sunset (Breach hafif avantajlı):** B Main choke stun için ideal — Breach burada baskın.
 
 **Ascent (Dengeli):** Killjoy A/B anchor, Breach A Main entry — ikisi ayrı hatlarda çalışır.
 
-**Haven (Dengeli):** Killjoy B anchor, Breach B Main stun — mid kontrol belirleyici.
+**Haven (Dengeli):** Killjoy B anchor, Breach B Main stun — mid kontrolü belirleyici.
 
-**Icebox (Killjoy avantajlı):** Uzun sightline Breach menzilini aşar, turret uzak hattı tarar.
+**Icebox (Killjoy avantajlı):** Uzun sightline Breach menzilini aşar, tuzak uzak hattı tarar.
 
 **Lotus (Dengeli):** 3 site yapısı ikisi için de nötr — mid bilgi hattını kim önce keserse yönlendirme onda.
 
 ## 6. Dönüm Noktaları
 
-**Dönüm 1 — Fault line anchor stun:** Kapak arkasında bile stun geçti — Killjoy'un defend penceresi kapandı.
+**Dönüm 1 — Stun anchor'ı vurdu:** Kapak arkasında bile stun geçti, Killjoy'un defend penceresi kapandı.
 
-**Dönüm 2 — Nanoswarm Breach lineup pozisyonunu yakaladı:** Breach fault line atarken nanoswarm açıldı — Breach biter.
+**Dönüm 2 — Molly Breach'in lineup pozisyonunu yakaladı:** Breach stun atarken molly açıldı, Breach biter.
 
-**Dönüm 3 — Lockdown Breach push'unu dondurdu:** Breach o round utility'siz, Killjoy site'ta serbestçe reset atar.
+**Dönüm 3 — Killjoy ult'u Breach push'unu dondurdu:** Breach o round util'siz, Killjoy site'ta serbestçe reset atar.
 
-**Dönüm 4 — Rolling Thunder site anchor'ı stun altına aldı:** Killjoy dondu, site savunması çöktü.
+**Dönüm 4 — Breach ult'u site anchor'ı stun altına aldı:** Killjoy dondu, site savunması çöktü.
 
 ## 7. Koç Notları
 
-**Pattern — Killjoy:** Turret ve alarmbot'u her round farklı noktaya koy — Breach aynı lineup'ı iki round üst üste kullanırsa boşa gider. Breach fault line hattını öğrenirse bir sonraki round pozisyonu kaydır.
+**Pattern — Killjoy:** Tuzağı ve botu her round farklı noktaya koy — Breach aynı lineup'ı iki round üst üste kullanırsa boşa gider. Breach stun hattını öğrenirse bir sonraki round pozisyonunu kaydır.
 
-**Pattern — Breach:** Fault line ve aftershock'ı önce boş bir round'da harcatarak Killjoy'un nanoswarm noktasını öğren. Killjoy utility'yi o noktaya gömmüşse sonraki round gerçek push'ta temiz gir.
+**Pattern — Breach:** Stun'u ve molly'yi önce boş bir round'da harcatarak Killjoy'un molly noktasını öğren. Killjoy util'i o noktaya gömmüşse sonraki round gerçek push'ta temiz gir.
 
-**Kritik kontrol:** Fault line stun, turret'in aktive olmasını keser — turret stun sırasında ateş edemez. Aftershock üç vuruşta (her vuruş ~40 hasar) turret'i (125 HP) biter, tek atışta değil — turret'i Breach'in ilk aftershock atışından sonra başka yere çekersen iki atışı boşa gider.
+**Kritik kontrol:** Stun, tuzağın aktive olmasını keser — tuzak stun sırasında ateş edemez. Molly üç vuruşta (her vuruş ~40 hasar) tuzağı (125 HP) bitirir, tek atışta değil — tuzağı Breach'in ilk molly atışından sonra başka yere çekersen kalan iki atış boşa gider.
 
-**Kontrol sorusu:** "Breach'in fault line hattını mı biliyorsun, Killjoy'un turret noktasını mı? Hangisini biliyorsan o round'u baştan önde bitirirsin."
+**Kontrol sorusu:** "Breach'in stun hattını mı biliyorsun, Killjoy'un tuzak noktasını mı? Hangisini biliyorsan o round'u baştan önde bitirirsin."

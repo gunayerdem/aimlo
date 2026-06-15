@@ -1,70 +1,70 @@
 # EŞLEŞME: Viper vs Hızlı Execute
 
 ## Ne Oluyor Burada
-Viper'ın tek işi şu: Toxic Screen ve Poison Cloud açıkken site'a giren herkesi decay'li ve kör sokmak. Hızlı execute tam bunu geçmeye çalışır — screen devrede değilken, Viper hazırlanmamışken site'a girmek. Screen ayaktaysa execute çöker. Screen yoksa Viper elinde silahıyla yalnız kalır.
+Viper'ın tek işi şu: duvarı ve smoke'u açıkken site'a giren herkesi decay'li ve görüşü kapalı yakalamak. Hızlı execute tam bunu kırmak için var — duvar inmeden, Viper hazırlanmadan site'a dalmak. Duvar ayaktaysa execute çöker. Duvar yoksa Viper elindeki silahla yalnız kalır.
 
 ## Cezalandırma Kalıpları
 
 ### Hızlı Execute Viper'ı Yeniyorsa
 
-**IF**: Takım screen kapalıyken içinden geçiyor
-**MEANING**: Screen devrede değil — Viper'ın elinde sadece silahı var
-**COUNTER**: Screen'i entry yoluna aç — takım harekete geçmeden önce
-**WHY**: Kapalı screen sıfır değer verir
+**IF**: Takım duvar kapalıyken içinden geçiyor
+**MEANING**: Duvar devrede değil — Viper'ın elinde sadece silahı var
+**COUNTER**: Duvarı entry yoluna kur, takım harekete geçmeden önce
+**WHY**: Kapalı duvar sıfır değer verir
 
-**IF**: Yakıt erken raundda tükenmiş, takım o pencerede basıyor
+**IF**: Yakıt raundun başında tükenmiş, takım o pencerede basıyor
 **MEANING**: Yakıt bitince tüm toksin kontrolü kapanır
-**COUNTER**: Erken raund util atmaktan kaçın — yakıtı execute için sakla
-**WHY**: Yakıtın bitti mi, Viper normal bir ajana döner
+**COUNTER**: Raund başında util harcama — yakıtı execute'a sakla
+**WHY**: Yakıt bittiği an Viper sıradan bir ajana döner
 
-**IF**: Takım screen'in kapsamadığı açıdan giriyor
-**MEANING**: Screen bir çizgi — her açıyı kapatmıyor
-**COUNTER**: Screen açısını en olası entry yoluna göre ayarla
-**WHY**: Bir çizgiyle çoklu açıdan gelen push'u tutamazsın
+**IF**: Takım duvarın kapatmadığı açıdan giriyor
+**MEANING**: Duvar tek bir çizgi — her açıyı örtmüyor
+**COUNTER**: Duvarın açısını en olası entry yoluna göre ayarla
+**WHY**: Tek çizgiyle çok açıdan gelen push'u tutamazsın
 
 ### Viper Hızlı Execute'u Durduruyorsa
 
-**IF**: Screen raundun başında entry yolunu ikiye bölüyor, içinden geçen herkes decay alıyor
-**MEANING**: Takım bölünüyor — yarısı screen'in bu tarafında, yarısı öte tarafında
-**COUNTER**: Screen'in kapsamadığı açıdan gir ya da yakıt tükendiğinde bas
-**WHY**: Screen hem fiziksel duvar hem sürekli hasar — ikisi birden seni ezer
+**IF**: Duvar raundun başında entry yolunu ikiye bölüyor, içinden geçen herkes decay alıyor
+**MEANING**: Takım ikiye ayrılıyor — yarısı duvarın bu yanında, yarısı öte yanında
+**COUNTER**: Duvarın örtmediği açıdan gir ya da yakıt tükenince bas
+**WHY**: Duvar hem fiziksel set hem sürekli hasar — ikisi birden seni ezer
 
-**IF**: Snake Bite entry noktasında patlıyor, takım üstünden koşuyor
-**MEANING**: Silah dövüşüne 25+ hasar eksiğiyle giriyorsunuz
-**COUNTER**: Entry noktasını değiştir ya da Snake Bite patladıktan sonra gir
-**WHY**: 25 hasar eksiğiyle girdiğin dövüşü, karşı taraf tam canla karşılar — sayısal eşitlik yok
+**IF**: Molly entry noktasında patlıyor, takım üstünden koşuyor
+**MEANING**: Silah dövüşüne 25+ can eksiğiyle giriyorsunuz
+**COUNTER**: Entry noktasını değiştir ya da molly söndükten sonra gir
+**WHY**: 25 can eksiğiyle girdiğin dövüşü düşman tam canla karşılar — eşit dövüş değil
 
-**IF**: Viper's Pit kurulmuş, takım retake için giriyor
-**MEANING**: Pit'e giren herkes 1hp decay ile içeri girer
-**COUNTER**: Pit'i lineup, drone veya uzak mesafe utility ile zorla — Viper'ı dışarı çek
-**WHY**: Pit içindeki Viper'ı içeriden öldüremezsin — dışarı çıkarmak zorundasın
+**IF**: Viper ult'u kurulmuş, takım retake için giriyor
+**MEANING**: Ult'a giren herkes 1 cana düşmüş decay ile içeri adım atar
+**COUNTER**: Viper'ı ult'tan çıkmaya zorla — lineup, recon ya da uzak util ile dışarı çek
+**WHY**: Ult'un içindeki Viper'ı içeriden söküp atamazsın — onu dışarı çıkarman şart
 
 ## Sürekli Kaybediyorsan Ne Anlama Gelir
 
-**Viper sürekli eziliyorsa**: Screen ya entry yolunda değil ya da harekete geçildiğinde kapalı. Ya da erken raund util attın, execute geldiğinde yakıt kalmadı.
+**Viper sürekli eziliyorsa**: Duvar ya entry yolunda değil ya da push geldiğinde kapalı. Ya da raund başında util harcadın, execute geldiğinde yakıt kalmadı.
 
-**Hızlı execute sürekli duruyorsa**: Toksinin içinden koşuyorsunuz, 25+ hasar eksiğiyle dövüşüyorsunuz. Screen'in kapsamadığı açıyı bul. Açı yoksa yakıt tükendiğinde gir.
+**Hızlı execute sürekli duruyorsa**: Toksinin içinden koşuyorsunuz, 25+ can eksiğiyle dövüşüyorsunuz. Duvarın örtmediği açıyı bul. Açı yoksa yakıt tükenince gir.
 
 ## Oyuncu Sana Geldiğinde Ne Söylersin
 
 ### Viper olarak eziliyorsa
-"Screen push geldiğinde kapalı. Entry yoluna aç — takım harekete geçmeden önce. Yoksa yakıtını erken util'e harcama — execute için sakla."
+"Duvarın push geldiğinde kapalı. Entry yoluna kur, takım harekete geçmeden. Yoksa yakıtını raund başında util'e harcama — execute'a sakla."
 
 ### Hızlı execute Viper'a karşı duruyorsa
-"Toksinin içinden koşuyorsunuz, 25 hasar eksiğiyle dövüşüyorsunuz. Screen'in kapsamadığı açıyı bul. Bulamazsan yakıt tükendiğinde bas."
+"Toksinin içinden koşuyorsunuz, 25 can eksiğiyle dövüşüyorsunuz. Duvarın örtmediği açıyı bul. Bulamazsan yakıt tükenince bas."
 
 ### Viper execute'u durduruyorsa
-"Screen push'ları entry yolunu ikiye bölüyor. Yakıtını execute penceresine sakla — site'i temiz alamazlar."
+"Duvarın push'ları entry yolunu ikiye kesiyor. Yakıtını execute penceresine sakla — site'ı temiz alamazlar."
 
 ### Hızlı execute Viper'ı geçiyorsa
-"Screen kapalıyken giriyorsunuz, bu yüzden işe yarıyor. Her raund farklı açıdan bas — screen'i o noktaya önceden pozisyonlayamasın."
+"Duvar kapalıyken giriyorsunuz, o yüzden tutuyor. Her raund farklı açıdan bas — duvarı o noktaya önceden kuramasın."
 
 ## Rank'a Göre Odak
 
-**LOW**: Screen'i entry yoluna aç — takım harekete geçmeden önce, hareket başladıktan sonra değil.
+**LOW**: Duvarı entry yoluna kur — takım harekete geçmeden önce, hareket başladıktan sonra değil.
 
-**MID**: Screen açık ama yanlış açıda. Screen'in bittiği uç noktayı bul — toksinin içinden geçmek yerine o noktadan gir.
+**MID**: Duvar açık ama yanlış açıda. Duvarın bittiği uç noktayı bul — toksinin içinden geçmek yerine oradan gir.
 
-**HIGH**: Karşı takım seni erken util atmaya zorluyor. Erken utility atmaktan vazgeç — yakıtı execute penceresine sakla.
+**HIGH**: Karşı takım seni raund başında util atmaya zorluyor. Erken util harcamayı bırak — yakıtı execute penceresine sakla.
 
-**ELITE**: Viper olarak karşı takımın util sırasını takip et — birden fazla utility aynı raundda kullanıldıysa execute geliyordur, yakıtı o ana sakla. Execute oynuyorsan Viper'ın yakıt göstergesini izle — yakıt tükendiği anda bas.
+**ELITE**: Viper olarak karşı takımın util sırasını oku — aynı raundda birden fazla util yandıysa execute geliyordur, yakıtı o ana sakla. Execute oynuyorsan Viper'ın yakıt göstergesini izle — yakıt tükendiği an bas.
