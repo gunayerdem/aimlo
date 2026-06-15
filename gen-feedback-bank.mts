@@ -95,7 +95,7 @@ function clean(s: string, lang: "tr" | "en" = "tr"): string {
   if (lang === "tr") out = out
     .replace(/micro-?position(['’][a-zçğıöşü]+)?/gi, "açı")
     .replace(/high flash/gi, "flash'ı yukarı at").replace(/low flash/gi, "alçak flash").replace(/first shot/gi, "ilk atış")
-    .replace(/\bblind ?zone\b/gi, "kör nokta")
+    .replace(/\bblind ?zone\b/gi, "kör nokta").replace(/\badvantage['’]?[a-zçğıöşü]*/gi, "avantajı")
     .replace(/\bcover\b/gi, "siper").replace(/\bsightline\b/gi, "açı").replace(/\bwall\b/gi, "duvar");
   // düz Türkçe terim yanlış apostroflanmışsa düzelt (duvar'i → duvarı, açı'yı → açıyı)
   if (lang === "tr") out = fixTurkishApostrophe(out);
