@@ -1,0 +1,5 @@
+/* AIMLO IRIS — tasarım sistemi giriş stili.
+   Tüm görünüm bu dosyanın @import kapanışından gelir: önce token'lar, sonra bileşen sınıfları. */
+@import "./tokens.css";
+@import "./_iris-components.css";
+@import "./_app-components.css";

@@ -1,0 +1,52 @@
+/* AIMLO IRIS — uygulama bileşen stilleri (FeedbackCard + MetricCard).
+   Landing'deki gerçek değerlerden birebir çıkarıldı. */
+
+/* ── FeedbackCard — imza koç-feedback kartı ── */
+.fb-card {
+  position: relative;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+}
+.fb-card-spectrum {
+  height: 2px;
+  background: linear-gradient(90deg, var(--iris-pink), var(--iris-violet), var(--iris-cyan));
+}
+.fb-card-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.fb-card-title { font-size: 12px; font-weight: 700; color: #fff; }
+.fb-card-meta { font-size: 10px; color: #737373; }
+.fb-card-body { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.fb-label {
+  font-size: 9px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.05em; margin: 0 0 4px;
+}
+.fb-label-death { color: var(--fb-death); }
+.fb-label-enemy { color: var(--fb-enemy); }
+.fb-label-next { color: var(--fb-next); }
+.fb-text { font-size: 12px; color: #e5e5e5; line-height: 1.6; margin: 0; }
+
+/* ── MetricCard — KPI kartı ── */
+.metric-card {
+  display: flex; flex-direction: column; gap: 4px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.metric-label {
+  font-size: 12px; color: #9ca3af;
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+.metric-value {
+  font-size: 26px; font-weight: 800; color: #fff;
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums; line-height: 1.1;
+}
+.metric-hint { font-size: 11px; color: #6b7280; }

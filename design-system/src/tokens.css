@@ -1,0 +1,35 @@
+/* AIMLO IRIS — tasarım token'ları (aimlo.gg globals.css ile birebir)
+   Markanın ruhu GÖZ: iris spektrumu pembe→camgöbeği. Tek sabit: ember CTA kırmızısı. */
+:root {
+  --background: #060814;
+  --foreground: #eef0f8;
+
+  /* Ember — ürün CTA sabiti (yalnızca ana eylem butonları) */
+  --neon: #FF4655;
+  --accent: #FF4655;
+  --accent-dim: rgba(255, 70, 85, 0.12);
+  --neon-soft: rgba(255, 70, 85, 0.5);
+
+  /* Iris spektrumu — vurgu/gradyan */
+  --iris-pink: #FF5E8A;
+  --iris-magenta: #E14DDA;
+  --iris-violet: #A855F7;
+  --iris-blue: #4D7CFF;
+  --iris-cyan: #22D3EE;
+  --neon-2: #4D7CFF;
+
+  /* Yüzeyler */
+  --card-bg: rgba(255, 255, 255, 0.028);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --surface-1: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.014));
+  --ring: rgba(168, 85, 247, 0.6);
+
+  /* Feedback bölüm renkleri */
+  --fb-death: #FF6B77;
+  --fb-enemy: #f59e0b;
+  --fb-next: #22D3EE;
+
+  /* Tipografi */
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), "SF Mono", "JetBrains Mono", monospace;
+}

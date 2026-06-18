@@ -1,0 +1,20 @@
+// AIMLO IRIS design system — public API.
+// Görünüm için styles.css'i de import et: import "@aimlo/iris/styles.css";
+export { Button } from "./components/Button";
+export type { ButtonProps } from "./components/Button";
+export { Badge } from "./components/Badge";
+export type { BadgeProps } from "./components/Badge";
+export { Card } from "./components/Card";
+export type { CardProps } from "./components/Card";
+export { FeedbackCard } from "./components/FeedbackCard";
+export type { FeedbackCardProps } from "./components/FeedbackCard";
+export { MetricCard } from "./components/MetricCard";
+export type { MetricCardProps } from "./components/MetricCard";
+export { AgentChip } from "./components/AgentChip";
+export type { AgentChipProps } from "./components/AgentChip";
+export { FeatureIcon } from "./components/FeatureIcon";
+export type { FeatureIconProps } from "./components/FeatureIcon";
+export { HeroOrb } from "./components/HeroOrb";
+export { SectionDivider } from "./components/SectionDivider";
+export { GradientText } from "./components/GradientText";
+export type { GradientTextProps } from "./components/GradientText";
