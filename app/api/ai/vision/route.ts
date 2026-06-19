@@ -4,6 +4,48 @@ import { realityCheck } from "@/lib/reality-checker";
 import { loadVisionKnowledge } from "@/lib/knowledge-loader";
 import { sanitizePromptInput } from "@/lib/prompt-safety";
 import { isUuidV4 } from "@/lib/uuid";
+import { plainifyAbilities, fixTurkishApostrophe } from "@/lib/ability-plain-map";
+
+// ── Coach-voice OUTPUT cleaner (live-test 2026-06-19) ──────────────────────
+// gpt-5-mini still leaks English jargon, ability codenames, lowercase agent names
+// and apostrophe errors into the TR coach text (this route builds its own inline
+// SYSTEM_PROMPT and does NOT use buildPolicyBlock, so ai-policy rules never reach
+// it). This deterministic net corrects the output on the wire — the guaranteed
+// safety layer. Lang-aware: TR-jargon translation + apostrophe-fix run ONLY for tr.
+// WHITELISTED English (ai-policy ENGLISH_WHITELIST_RULE — peek/swing/entry/default/
+// util/molly/smoke/flash/op/off-angle...) is intentionally LEFT untouched.
+const TR_JARGON: [RegExp, string][] = [
+  [/\bpredict edilebilir(sin)?\b/gi, "tahmin edilebilirsin"],
+  [/\bpredict\b/gi, "tahmin edilebilir"],
+  [/\bduel['’]?(le|la|de|da|ler)?\b/gi, "teke tek"],
+  // Verb Tarzanca. NOTE: JS \b breaks on Turkish letters (ı/ş…), so use a
+  // negative-lookahead boundary. Direction matters: "frag/kill ALDI" = killed
+  // → öldür-; "frag VERDİ" = died → öl-.
+  [/\b(kill|frag) ald[ıi](?![a-zçğıöşü])/gi, "öldürdü"],
+  [/\b(kill|frag) al[ıi]yor(lar|sunuz|sun)?\b/gi, "öldürüyor$1"],
+  [/\bfrag verd[ıi](?![a-zçğıöşü])/gi, "öldü"],
+  [/\bfrag ver[ıi]yor(lar|sunuz|sun)?\b/gi, "ölüyor$1"],
+  [/\bteammate\b/gi, "takım arkadaşı"],            // ai-policy line 99: zorunlu çeviri
+  [/\bcounter\s*:/gi, "Karşılık:"],
+  [/\bshift[- ]?walk\b/gi, "sessiz yürü"],
+  [/\bdry\b/gi, "utility'siz"],                     // ai-policy line 99: dry→utility'siz
+  [/\bblade\b/gi, "bıçak"],                         // Raze ult codename — Silver rule
+];
+
+const CLEAN_AGENT_NAMES = ["Jett","Raze","Phoenix","Reyna","Yoru","Neon","Iso","Waylay","Sage","Killjoy","Cypher","Chamber","Deadlock","Vyse","Omen","Brimstone","Viper","Astra","Harbor","Clove","Sova","Breach","Skye","Fade","Gekko","Tejo","Veto"];
+
+function cleanCoachText(text: string, lang: "tr" | "en"): string {
+  if (!text) return text;
+  let t = plainifyAbilities(text, lang);             // ability codenames → plain (both langs)
+  for (const a of CLEAN_AGENT_NAMES) {               // phoenix → Phoenix (both langs)
+    t = t.replace(new RegExp("\\b" + a + "\\b", "gi"), a);
+  }
+  if (lang === "tr") {
+    for (const [re, rep] of TR_JARGON) t = t.replace(re, rep);
+    t = fixTurkishApostrophe(t);                     // duvar'i → duvarı (TR plain terms)
+  }
+  return t.replace(/\s{2,}/g, " ").trim();
+}
 
 /**
  * POST /api/ai/vision
@@ -958,9 +1000,11 @@ export async function POST(request: NextRequest) {
         //   deathAnalysis      : ~350 chars (1-2 sentences with explanation)
         //   enemyAnalysis      : 2 items × ~180 chars each
         //   nextRoundSuggestion: ~350 chars (1-2 sentences)
-        deathAnalysis: checkedAnalysis.text.slice(0, 350),
-        enemyAnalysis: fb.enemyAnalysis.slice(0, 2).map((s) => String(s).slice(0, 180)),
-        nextRoundSuggestion: checkedSuggestion.text.slice(0, 350),
+        // Clean BEFORE slice — plainify/apostrophe can change length, so slicing
+        // after avoids mid-word truncation. Live product is TR (no lang field).
+        deathAnalysis: cleanCoachText(checkedAnalysis.text, "tr").slice(0, 350),
+        enemyAnalysis: fb.enemyAnalysis.slice(0, 2).map((s) => cleanCoachText(String(s), "tr").slice(0, 180)),
+        nextRoundSuggestion: cleanCoachText(checkedSuggestion.text, "tr").slice(0, 350),
         patternData: null,
       });
     }
