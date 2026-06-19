@@ -25,6 +25,22 @@ const TR_JARGON: [RegExp, string][] = [
   [/\b(kill|frag) al[ıi]yor(lar|sunuz|sun)?\b/gi, "öldürüyor$1"],
   [/\bfrag verd[ıi](?![a-zçğıöşü])/gi, "öldü"],
   [/\bfrag ver[ıi]yor(lar|sunuz|sun)?\b/gi, "ölüyor$1"],
+  // "swing yap-" Tarzanca: bare noun "swing" is WHITELISTED, but verb-ifying it
+  // with "yap-" is banned (CLAUDE.md "swing yapıyor"). Rewrite to the approved
+  // coach idiom "peek at-" / "geniş açıyla peek". Order: most-specific suffix
+  // first (yapıyor* before yap, so the longer match wins). Right boundary is the
+  // negative-lookahead (JS \b breaks on ı/ş…), NOT \b — same convention as above.
+  [/\bswing yapma(?![a-zçğıöşü])/gi, "geniş açıyla peek atma"],          // olumsuz emir: "yapma"
+  [/\bswing yapt[ıi]n(?![a-zçğıöşü])/gi, "geniş açıyla peek attın"],     // geçmiş 2.tekil: "yaptın"
+  [/\bswing yapt[ıi](?![a-zçğıöşün])/gi, "geniş açıyla peek attı"],      // geçmiş 3.tekil: "yaptı" (n hariç → "yaptın" üstte)
+  [/\bswing yap[ıi]yor(lar|sunuz|sun)?\b/gi, "peek atıyor$1"],           // şimdiki: "yapıyor(sun/lar)"
+  [/\bswing yapar(?![a-zçğıöşü])/gi, "peek atar"],                       // geniş zaman: "yapar"
+  [/\bswing yap(?![a-zçğıöşü])/gi, "geniş açıyla peek at"],              // emir / kök: "yap"
+  // CATCH-ALL backstop (verify): yukarıdaki lookahead'ler "yaparsan/yapabilirsin/
+  // yapmadan" gibi nadir ekleri kaçırır. "yap" ve "at" aynı ek-morfolojisini aldığı
+  // için $1 (ek) korunarak yeniden eklenir → "yaparsan"→"atarsan", "yapmadan"→
+  // "atmadan" doğru çıkar. EN SONDA: spesifik kalıplar metni zaten tüketmişse boşa düşer.
+  [/\bswing yap([a-zçğıöşü]*)/gi, "geniş açıyla peek at$1"],
   [/\bteammate\b/gi, "takım arkadaşı"],            // ai-policy line 99: zorunlu çeviri
   [/\bcounter\s*:/gi, "Karşılık:"],
   [/\bshift[- ]?walk\b/gi, "sessiz yürü"],

@@ -58,6 +58,12 @@ export const BANNED_PHRASES = [
   "shift walk",
   "kill aldı",
   "frag verdi",
+  // "swing yap-" verb form is Tarzanca in ANY language (EN noun + TR verb). Bare
+  // "swing" stays WHITELISTED (it's a noun, see ENGLISH_WHITELIST_RULE) — we ban
+  // only the verb-ified stem "swing yap", which substring-catches all suffixes
+  // (yapma/yaptın/yapıyor/yapar). Safe for EN output: "swing yap" never appears
+  // in English coach text.
+  "swing yap",
 ] as const;
 
 // ═══════════════════════════════════════════════════════════
@@ -118,6 +124,7 @@ export const NATURAL_COACH_RULE = `\nDOĞAL KOÇ DİLİ: Gerçek bir Radiant ko�
 "konumlandırma/pozisyonlandırma/konuşlanma" → "pozisyon / açı"
 "kuru entry/kuru giriş/kuru peek" → "utility'siz giriş / dry peek"
 "pre-aim" → "açıyı önceden tutuyor / köşeyi önceden nişanlamış" (TR'de 'pre-aim' YAZMA)
+"swing yap-" (Tarzanca: İng. isim + TR fiil) → "geniş açıyla peek at- / peek at-" ('swing' tek başına isim olarak SERBEST; 'yap-' ile fiilleştirme YASAK: "swing yapma/yaptın/yapıyor")
 "ilk mermi avantajı/ellerinde olan ilk mermi" gibi DEVRİK kalıp YASAK → "ilk atışı sen yaparsın"
 DİLBİLGİSİ: cümleler tam, akıcı ve düzgün kurulsun; devrik/yarım/bozuk Türkçe YASAK. Yüksek sesle
 okununca gerçek bir koç öyle der mi — demezse yeniden yaz. Net, kısa, sert ama spesifik (callout + ne yap).`;
