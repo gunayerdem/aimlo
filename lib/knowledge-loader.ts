@@ -61,7 +61,11 @@ const RANK_FILE_MAP: Record<string, string> = {
   radiant: "elite.md",
 };
 
-const DEFAULT_RANK_FILE = "mid-elo.md";
+// Product's actual target audience is SILVER (CLAUDE.md coach-voice Silver rule).
+// When the desktop omits rank (it currently never sends it), fall back to the
+// silver tier file — NOT mid-elo — so missing-rank users get coaching pitched at
+// the real audience. An explicit ctx.rank still overrides this via RANK_FILE_MAP.
+const DEFAULT_RANK_FILE = "low-elo.md"; // silver → low-elo.md (see RANK_FILE_MAP)
 
 // ── Task types and their knowledge requirements ───────────
 

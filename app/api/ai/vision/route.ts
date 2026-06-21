@@ -3,6 +3,7 @@ import { verifyAuthAndRateLimit } from "@/lib/api-auth";
 import { realityCheck } from "@/lib/reality-checker";
 import { loadVisionKnowledge } from "@/lib/knowledge-loader";
 import { sanitizePromptInput } from "@/lib/prompt-safety";
+import { loadPlayerMemory, buildMemoryContext } from "@/lib/player-memory";
 import { isUuidV4 } from "@/lib/uuid";
 import { plainifyAbilities, fixTurkishApostrophe } from "@/lib/ability-plain-map";
 
@@ -177,6 +178,12 @@ EKONOMİ SPESİFİK KURALLARI (economyType varsa UYGULA)
 - economyType="full_buy": loadout'a göre spesifik angle öner. Vandal=long range, Phantom=close range, Operator=one-shot angles.
 - economyType="pistol": Ghost headshot + utility öncelik öner.
 - economyType boşsa bu konudan BAHSETME.
+
+DÜŞMAN EKONOMİSİ / SİLAHI (killerInfo veya enemyRoster'da silah/ekonomi ipucu VARSA — yoksa BAHSETME):
+- Düşmanın silahını/ekonomisini OYUNCUNUN buy'ı ile karşılaştır. killerInfo'da silah geçiyorsa (ör. "operator", "vandal", "sheriff") buna göre açı oku.
+- Düşman eco/pistol görünüyorsa (ucuz silah, sheriff/classic): oyuncu full-buy'da agresif olabilir ama yine de utility'siz geniş açı yeme; düşman pistolle bedava kill arıyor.
+- Düşmanda operator varsa: utility'siz (dry) açı tutma/peek atma — smoke veya flash ile kör et, ya da operator'ın tutmadığı kısa açıdan git. "eco'da operator'lı düşmana utility'siz peek atma."
+- Bu çıkarımı SADECE round context'inde silah/ekonomi verisi varsa yap. Veri yoksa düşman ekonomisi hakkında TAHMİN YÜRÜTME — uydurma yasak.
 
 KOÇ TONU — KRİTİK
 
@@ -665,7 +672,7 @@ export async function POST(request: NextRequest) {
       `rank=${reqRank ?? "-"} enemies=${reqEnemyComp?.length ?? 0}`,
     );
     if (!reqRank) {
-      console.warn(`[KB] rank MISSING → defaulted to mid-elo.md (desktop never sent rank). Coaching tier may be wrong.`);
+      console.warn(`[KB] rank MISSING → defaulted to silver tier (low-elo.md), the product's target audience (desktop never sent rank).`);
     }
     if (kbTotal === 0) {
       console.warn(`[KB] EMPTY — tracing regression? knowledge/*.md missing from serverless bundle.`);
@@ -689,6 +696,33 @@ export async function POST(request: NextRequest) {
     if (kb.blocks.agent)      systemSections.push(kb.blocks.agent);
     if (kb.blocks.map)        systemSections.push(kb.blocks.map);
     if (kb.blocks.contextual) systemSections.push(kb.blocks.contextual);
+
+    // ── Cross-match player memory (GROUNDED prior history) ──────────────────
+    // buildMemoryContext returns ONLY persisted facts (top death spots, weak
+    // map, best agent, detected tendencies) — never invented stats. Same
+    // service-role load + builder the report route uses (lib/player-memory.ts).
+    // Injected as a clearly-labelled CROSS-MATCH block so the coach may
+    // reference long-term patterns ("A Short'ta 23 kez öldün") but must not
+    // treat it as this-round truth. Loaded best-effort: a memory failure never
+    // blocks live round feedback. Length-capped to protect the token budget.
+    let playerMemoryBlock: string | null = null;
+    try {
+      const memory = await loadPlayerMemory(auth.userId);
+      const memoryContext = buildMemoryContext(memory, "tr");
+      if (memoryContext && memoryContext.trim().length > 0) {
+        // buildMemoryContext is bounded (top-3 deaths + 1 map + 1 agent +
+        // short tendency list) so it's already small; cap defensively.
+        const cappedMemory = memoryContext.trim().slice(0, 1200);
+        playerMemoryBlock =
+          `[CROSS-MATCH GEÇMİŞİ — uzun vadeli oyuncu profili (kalıcı veriden, bu round'a ait DEĞİL)]\n` +
+          `Bu, oyuncunun geçmiş maçlardan birikmiş profilidir. İlgiliyse koç gibi referans verebilirsin ` +
+          `(ör. "yine A Short'ta öldün — bu senin tekrar eden noktan"); ama bu round'un OCR verisi her zaman önceliklidir. ` +
+          `Buradaki sayıları DEĞİŞTİRME, yeni istatistik UYDURMA.\n${cappedMemory}`;
+      }
+    } catch (e) {
+      console.log(`[Aimlo AI] Vision: player memory unavailable: ${(e as Error).message}`);
+    }
+    if (playerMemoryBlock) systemSections.push(playerMemoryBlock);
 
     let patternContextBlock: string | null = null;
     if (reqPatternContext) {
