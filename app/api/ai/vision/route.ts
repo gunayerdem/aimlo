@@ -148,6 +148,10 @@ KURALLAR (HEPSİ ZORUNLU — HER KURAL BİR RED BAYRAĞI)
 3. patternContext varsa ONA referans ver. "2 round üst üste cypher seni B short'tan operator'la aldı — bu sefer flash atmadan girme" gibi. Pattern yoksa generic feedback verme, bu round'a odaklan.
 4. enemyComp'u kullan. Cypher varsa trip/cam/cage'ini düşün. Killjoy varsa lockdown'ı. Jett varsa dash okuması. Chamber varsa Headhunter açıları.
 5. Map-spesifik callout kullan. Ascent'te "B Short, Market Window, Mid Courtyard, Heaven, Hell". Bind'da "Hookah, U Hall, Showers, Baths, Lamps". Yanlış map callout = sıfır güven.
+5b. ⚔ SIDE ZORUNLU (side="attack" → SALDIRI / side="defense" → SAVUNMA). Saldırı ve savunma TAMAMEN farklı koçluk ister — gelen side'a göre feedback'i ZORUNLU uyarla:
+   • SALDIRI (attack) — sen siteye giriyorsun: entry açma, execute (smoke+flash ile birlikte giriş), trade kurma, lurk/space alma, plant sonrası post-plant açıları, util ile yer açma. "Köşeyi tut" deme — sen ilerleyen taraftasın. Hata tipi: solo dry entry, trade'siz peek, util'siz açık alan geçişi, erken/yalnız lurk.
+   • SAVUNMA (defense) — sen siteyi tutuyorsun: açı tutma, off-angle, crossfire kurma, info util (tel/kamera/recon), retake (kaybedilen site'ı geri alma), düşük HP/sayısal dezavantajda save, rotate. "Entry at" deme — sen savunan taraftasın. Hata tipi: tek tutulan açıyı geniş peek, trade'siz over-peek, kayıp round'da save etmeyip ekonomiyi yakma, geç rotate.
+   Side belli ama feedback ona uymuyorsa = RED BAYRAĞI. deathAnalysis ve nextRoundSuggestion mutlaka side'ın diliyle konuşmalı (saldırıda "entry/execute/trade/space", savunmada "tut/off-angle/crossfire/retake/save").
 6. ⚠ ZAMAN-BAĞIMLI TAVSİYE YASAK. "Timer 16'da", "45s'de", "30 saniye sonra" gibi saniye/timer referansı KULLANMA. Oyuncu saate bakmıyor — durumu okur. Yerine OLAY-BAZLI konuş: "1 düşman düştü", "Op sesi duyuldu", "spike kuruldu", "düşman B'den rotate ettiyse", "takımın 2 kişisi A'ya yaklaştı", "ekonomi düşükse".
 7. ⚠ BASİT TÜRKÇE. Karışık dil yasak — "deployment", "protocol", "optimal" gibi corp/İngilizce yığını kullanma. Oyun terimleri (peek, trade, retake, lurk, anchor, rotate, default, execute, fake, stack, smoke, flash, util, op, dash) tutarlı kullan ama cümle Türkçe akıcı olsun. Sokak dili Türkçe, gerçek koç gibi.
 8. Türkçe. Kısa. Direkt. Brutal. Gerçek koç tonu — empati yok ama insanca. "sen" hitabı.
@@ -293,6 +297,8 @@ KURAL:
 const USER_PROMPT = `Valorant round sonu. Aşağıdaki OCR/CLIENT pixel truth — screenshot'tan güvenilir.
 
 GÖREVİN: Gerçek bir koç gibi, kısa ve direkt feedback ver. AI tarzı uzun açıklamalar YASAK. Her alan tek cümle (enemyAnalysis 2 madde × 1 cümle).
+
+ÖNCE side'a bak: "side":"attack" ise SALDIRI round'u (sen giriyorsun → entry/execute/trade/space/lurk dilini kullan), "side":"defense" ise SAVUNMA round'u (sen tutuyorsun → açı tut/off-angle/crossfire/retake/save dilini kullan). Feedback'i bu side'a göre yaz — yanlış side dili kullanma.
 
 Sadece JSON döndür — markdown yok, code block yok, başka açıklama yok.`;
 
@@ -721,7 +727,14 @@ export async function POST(request: NextRequest) {
     if (typeof reqBody.result === "string") ctx.result = reqBody.result.toUpperCase();
     if (typeof reqMap === "string") ctx.map = reqMap;
     if (typeof reqAgent === "string") ctx.agent = reqAgent;
-    if (typeof reqBody.side === "string") ctx.side = reqBody.side;
+    if (typeof reqBody.side === "string") {
+      // Label the side so the model can't misread the raw token. Attack = sen
+      // giriyorsun (entry/execute), Defense = sen tutuyorsun (hold/retake/save).
+      ctx.side =
+        reqBody.side === "attack" ? "attack (SALDIRI — sen siteye giriyorsun)"
+        : reqBody.side === "defense" ? "defense (SAVUNMA — sen siteyi tutuyorsun)"
+        : reqBody.side;
+    }
     if (typeof reqBody.mode === "string") ctx.mode = reqBody.mode;
     if (Array.isArray(reqEnemyComp) && reqEnemyComp.length > 0) {
       const comp = reqEnemyComp.filter(a => typeof a === "string" && a.length > 0).slice(0, 5);

@@ -206,7 +206,7 @@ function loadMatchupFiles(
  *   growth-plan      → core + rank + per-agent
  */
 export function loadKnowledge(task: TaskType, options: LoadOptions = {}): string {
-  const { map, agent, rank, enemyAgents } = options;
+  const { map, agent, rank, enemyAgents, side } = options;
 
   const sections: string[] = [];
 
@@ -222,7 +222,7 @@ export function loadKnowledge(task: TaskType, options: LoadOptions = {}): string
   if (map && (task === "feedback" || task === "report" || task === "critical-mistake")) {
     const mapSlug = map.toLowerCase().replace(/[^a-z]/g, "");
     const mapContent = loadFile(`maps/${mapSlug}.md`);
-    if (mapContent) sections.push(mapContent);
+    if (mapContent) sections.push(filterSectionsBySide(mapContent, side));
   }
 
   // Agent knowledge — included for insight, feedback, report, critical-mistake, growth-plan
@@ -230,7 +230,7 @@ export function loadKnowledge(task: TaskType, options: LoadOptions = {}): string
     const agentFile = getAgentFile(agent);
     if (agentFile) {
       const agentContent = loadFile(agentFile);
-      if (agentContent) sections.push(agentContent);
+      if (agentContent) sections.push(filterSectionsBySide(agentContent, side));
     }
   }
 
@@ -327,7 +327,7 @@ function stripKbWhitespace(content: string): string {
  * is conservative — it only acts on explicit keyword matches, so files without
  * clean splits get loaded fully (no risk of dropping useful content).
  */
-function filterSectionsBySide(content: string, side?: string): string {
+export function filterSectionsBySide(content: string, side?: string): string {
   if (!side || (side !== "attack" && side !== "defense")) return content;
 
   // No \b boundary — \b doesn't handle Turkish 'ı' well in JS regex.

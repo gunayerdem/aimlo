@@ -639,6 +639,7 @@ async function generateAIReport(body: ReportRequest, userId?: string): Promise<R
       agent: setup.agent,
       rank: setup.rank, // rank from client for rank-appropriate coaching
       enemyAgents: setup.enemyComp?.filter(a => a && a !== "Unknown"),
+      side: setup.side, // side-aware KB: drops opposite-side map/agent sections
     });
   } catch (e) {
     console.log("[Aimlo] Knowledge base not available, using default prompt");
@@ -680,6 +681,7 @@ KURALLAR (HER BİRİ RED BAYRAĞI)
 6. "sen" hitabı, "siz" değil.
 7. MİKRO-POZİSYON ZORUNLU: "A Short", "B Main entry", "Generator off-angle" — "site" veya "mid" tek başına KABUL EDİLMEZ.
 8. Her round feedback'inde deathAnalysis/coachInsight varsa BUNLARA referans ver. Mesela 3 round'da "Cypher operator B Short" pattern'i tekrarlıyorsa mistake alanında bunu vurgula.
+9. ⚔ SIDE'a göre koçla (userPrompt'taki "Side" alanı). attack=SALDIRI (oyuncu giriyor → entry/execute/trade/space/lurk/post-plant dili; hata: solo dry entry, trade'siz peek, util'siz geçiş), defense=SAVUNMA (oyuncu tutuyor → açı tut/off-angle/crossfire/retake/save/rotate dili; hata: tek açıyı geniş peek, trade'siz over-peek, kayıp round'da save etmemek). mistake/adjustment/tendencies bu side'ın diliyle olmalı — savunma maçında "entry açmadın" yazmak, saldırı maçında "açıyı tutmadın" yazmak = RED BAYRAĞI.
 
 ═══════════════════════════════════════════════
 🚫 YASAK TÜRKÇE İFADELER (varyantları dahil — Türkçe çıktıda ASLA üretme)
@@ -802,7 +804,12 @@ IMPROVEMENT FOCUS: ${plan.dailyFocus.title} — ${plan.dailyFocus.description}
 ${memoryContext}
 `;
 
-  const userPrompt = `Map: ${setup.map}, Agent: ${setup.agent}, Side: ${setup.side}${setup.rank ? `, Rank: ${setup.rank}` : ""}${setup.mode ? `, Mode: ${setup.mode}` : ""}
+  const sideLabelForPrompt = setup.side === "attack"
+    ? "attack (SALDIRI — oyuncu site'lara giriyor: entry/execute/trade/space)"
+    : setup.side === "defense"
+      ? "defense (SAVUNMA — oyuncu site'ları tutuyor: hold/off-angle/retake/save)"
+      : setup.side;
+  const userPrompt = `Map: ${setup.map}, Agent: ${setup.agent}, Side: ${sideLabelForPrompt}${setup.rank ? `, Rank: ${setup.rank}` : ""}${setup.mode ? `, Mode: ${setup.mode}` : ""}
 Score: ${score.yours}-${score.enemy} (${Number(score.yours) > Number(score.enemy) ? "WIN" : "LOSS"})
 Team: ${(setup.teamComp || []).join(",")} vs Enemy: ${setup.unknownEnemyComp ? "unknown" : (setup.enemyComp || []).join(",")}
 Rounds:\n${roundSummary}
