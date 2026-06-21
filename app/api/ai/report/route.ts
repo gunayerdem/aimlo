@@ -146,11 +146,22 @@ function validateRequest(
 
   // Support both nested { setup: {...} } and flat { map, agent, side, ... } formats.
   // Desktop app sends flat format; web UI sends nested.
+  //
+  // GRACEFUL DEGRADE (2026-06-21 council): the desktop OCR pipeline can ship a
+  // match report with map/agent/side missing (e.g. the agent-select read failed
+  // but rounds + score are real). The owner explicitly wants a GENERAL report
+  // from the rounds/score in that case — NOT a hard 400 that drops the match.
+  // So we accept whatever setup arrives, then below default the empties:
+  //   map/agent → "Unknown"
+  //   side      → derive from rounds[].side, else "attack"
+  // This is no-fake-output safe: a deterministic/AI report built from REAL OCR
+  // rounds and score is not synthesized coach text — it's a report of what
+  // actually happened, just without the map/agent label.
   let setup: Record<string, unknown>;
   if (b.setup && typeof b.setup === "object") {
-    setup = b.setup as Record<string, unknown>;
-  } else if (typeof b.map === "string" && typeof b.agent === "string") {
-    // Flat format from desktop app — construct setup object
+    setup = { ...(b.setup as Record<string, unknown>) };
+  } else {
+    // Flat format from desktop app — construct setup object (fields may be absent).
     setup = {
       map: b.map,
       agent: b.agent,
@@ -161,16 +172,29 @@ function validateRequest(
       enemyComp: b.enemyComp,
       unknownEnemyComp: b.unknownEnemyComp,
     };
-  } else {
-    return { valid: false, error: "Missing setup or map/agent" };
   }
 
-  if (typeof setup.map !== "string" || !setup.map)
-    return { valid: false, error: "Missing setup.map" };
-  if (typeof setup.agent !== "string" || !setup.agent)
-    return { valid: false, error: "Missing setup.agent" };
-  if (!VALID_SIDES.has(setup.side as string))
-    return { valid: false, error: "Invalid setup.side" };
+  // Default missing/empty map + agent to "Unknown" instead of 400-ing.
+  if (typeof setup.map !== "string" || !setup.map) setup.map = "Unknown";
+  if (typeof setup.agent !== "string" || !setup.agent) setup.agent = "Unknown";
+
+  // Side: if missing/invalid, derive from the first round that carries a valid
+  // side, else default "attack". Never 400 for side.
+  if (!VALID_SIDES.has(setup.side as string)) {
+    let derivedSide: string | undefined;
+    if (Array.isArray(b.rounds)) {
+      for (const r of b.rounds as unknown[]) {
+        if (r && typeof r === "object") {
+          const rSide = (r as Record<string, unknown>).side;
+          if (typeof rSide === "string" && VALID_SIDES.has(rSide)) {
+            derivedSide = rSide;
+            break;
+          }
+        }
+      }
+    }
+    setup.side = derivedSide ?? "attack";
+  }
 
   // lang — default to "tr" if missing (desktop may omit)
   const lang = VALID_LANGS.has(b.lang as string) ? (b.lang as "tr" | "en") : "tr";
