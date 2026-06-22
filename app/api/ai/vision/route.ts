@@ -185,6 +185,20 @@ DÜŞMAN EKONOMİSİ / SİLAHI (killerInfo veya enemyRoster'da silah/ekonomi ipu
 - Düşmanda operator varsa: utility'siz (dry) açı tutma/peek atma — smoke veya flash ile kör et, ya da operator'ın tutmadığı kısa açıdan git. "eco'da operator'lı düşmana utility'siz peek atma."
 - Bu çıkarımı SADECE round context'inde silah/ekonomi verisi varsa yap. Veri yoksa düşman ekonomisi hakkında TAHMİN YÜRÜTME — uydurma yasak.
 
+GİRİŞ YOLU / ROTA — KRİTİK ANTI-UYDURMA KURALI:
+- deathLocation = ÖLDÜĞÜN YER. Oraya NEREDEN geldiğin / hangi yoldan gittiğin DEĞİL. İkisini KARIŞTIRMA.
+- playerRoute VARSA: bu senin GERÇEK, ölçülmüş rotandır — feedback'i buna bağla. routeConfidence="low" ise temkinli söyle ("görünüşe göre mid üstünden gittin"); "high" ise net söyle.
+- playerRoute YOKSA: oyuncunun nereden geldiğini, hangi yoldan açıldığını veya rotasyon yapıp yapmadığını BİLMİYORSUN. "mid'den açıldın / B'den çıkıp geldin / A'dan girdin / rotasyon attın" gibi GİRİŞ YOLU iddiası ETME. Sadece NEREDE öldüğünü (deathLocation) ve hangi YÖNDEN vurulduğunu (deathAngle) biliyorsun. Yol uydurmak = RED BAYRAĞI.
+
+TRADE (tradedByAlly VARSA UYGULA, yoksa BAHSETME):
+- tradedByAlly=false: ölümün trade'siz kaldı — muhtemelen solo peek attın veya takımdan kopuk space aldın. Yanındakinin trade'e hazır olup olmadığını sorgulat.
+- tradedByAlly=true: takımın seni TRADE ETTİ — bunu hata gibi yazma. Asıl sorun ölümün kendisiyse ona odaklan.
+- tradedByAlly YOKSA: trade alınıp alınmadığı hakkında İDDİA ETME ("trade alamadın" deme).
+
+SCOREBOARD (playerKills / playerDeaths VARSA UYGULA, yoksa BAHSETME):
+- Ölüm çok, kill az (D belirgin şekilde K'dan büyük): teke-tek düello kaybediyorsun — utility ve trade ile çarpışmaya gir, dürtüsel geniş açı peek'i azalt.
+- Bu yorumu SADECE sayı verisi geldiğinde yap. Veri yoksa performans istatistiği hakkında TAHMİN YÜRÜTME.
+
 KOÇ TONU — KRİTİK
 
 Sen oyuncuya konuşan GERÇEK BİR KOÇSUN. AI gibi konuşma.
@@ -370,6 +384,20 @@ type VisionRequest = {
   healthAtDeath?: number; // HP + shield at death (0-150)
   ultReady?: boolean; // was ultimate ready when player died
   roundTimerAtDeath?: number; // seconds remaining on round timer (0-140)
+  // ── FAZ2/FAZ3 additive fields (default-absent) ──
+  // Desktop sends these ONLY when its feature flags are on AND the value was
+  // actually measured. Absent ⇒ byte-identical request to before. The route
+  // never invents them; reality-checker.guardUnprovenFacts strips any AI claim
+  // about route/trade when the matching field is absent.
+  playerKills?: number;      // scoreboard K this match (0-99)
+  playerDeaths?: number;     // scoreboard D this match (0-99)
+  playerAssists?: number;    // scoreboard A this match (0-99)
+  tradedByAlly?: boolean;    // was the player's death traded by a teammate (killfeed-derived)
+  tradeKillerAgent?: string; // agent that traded the killer (optional context)
+  playerRoute?: string;      // MEASURED route, e.g. "B Main → Mid → A Site" (FAZ3 minimap)
+  routeConfidence?: string;  // "high" | "medium" | "low" — gates how firmly AI may state it
+  scoreboardKda?: string;    // free-form "K/D/A" summary, if desktop sends as text
+  killfeedOrder?: string[];  // chronological kill events this round
   // Match correlation — desktop generates UUID v4 in its SQLite queue so
   // per-round vision calls + the eventual match-report INSERT all share
   // the same matchId. Optional; vision itself does NOT persist anything,
@@ -802,6 +830,27 @@ export async function POST(request: NextRequest) {
       }
       if (reqBody.ultReady === true) ctx.ultReady = true;
       if (reqBody.spikePlanted === true) ctx.spikePlanted = true;
+      // FAZ2: trade truth (killfeed-derived). Meaningful BOTH ways — true = the
+      // death was traded (don't scold the trade), false = solo/no-trade death.
+      // Only set when actually present so guardUnprovenFacts can tell.
+      if (typeof reqBody.tradedByAlly === "boolean") {
+        ctx.tradedByAlly = reqBody.tradedByAlly;
+      }
+      if (typeof reqBody.tradeKillerAgent === "string" && reqBody.tradeKillerAgent.length > 0) {
+        const safe = sanitizePromptInput(reqBody.tradeKillerAgent, { max: 30, collapseWhitespace: true });
+        if (safe) ctx.tradeKillerAgent = safe;
+      }
+      // FAZ3: MEASURED route (minimap tracking). Present ONLY when the desktop
+      // actually tracked the path — without it the AI must not infer a route.
+      if (typeof reqBody.playerRoute === "string" && reqBody.playerRoute.length > 0) {
+        const safe = sanitizePromptInput(reqBody.playerRoute, { max: 120, collapseWhitespace: true });
+        if (safe) {
+          ctx.playerRoute = safe;
+          if (reqBody.routeConfidence === "high" || reqBody.routeConfidence === "medium" || reqBody.routeConfidence === "low") {
+            ctx.routeConfidence = reqBody.routeConfidence;
+          }
+        }
+      }
     } else if (reqBody.died === false) {
       ctx.died = false;
     }
@@ -814,6 +863,23 @@ export async function POST(request: NextRequest) {
     if (typeof reqBody.loadout === "string" && reqBody.loadout.length > 0) {
       const safe = sanitizePromptInput(reqBody.loadout, { max: 30, collapseWhitespace: true });
       if (safe) ctx.loadout = safe;
+    }
+
+    // FAZ2: scoreboard performance (match-cumulative — valid on any round).
+    if (typeof reqBody.playerKills === "number") ctx.playerKills = Math.min(Math.max(Math.trunc(reqBody.playerKills), 0), 99);
+    if (typeof reqBody.playerDeaths === "number") ctx.playerDeaths = Math.min(Math.max(Math.trunc(reqBody.playerDeaths), 0), 99);
+    if (typeof reqBody.playerAssists === "number") ctx.playerAssists = Math.min(Math.max(Math.trunc(reqBody.playerAssists), 0), 99);
+    if (typeof reqBody.scoreboardKda === "string" && reqBody.scoreboardKda.length > 0) {
+      const safe = sanitizePromptInput(reqBody.scoreboardKda, { max: 40, collapseWhitespace: true });
+      if (safe) ctx.scoreboardKda = safe;
+    }
+    if (Array.isArray(reqBody.killfeedOrder) && reqBody.killfeedOrder.length > 0) {
+      const events = reqBody.killfeedOrder
+        .filter(e => typeof e === "string" && e.length > 0)
+        .slice(0, 10)
+        .map(e => sanitizePromptInput(e, { max: 60, collapseWhitespace: true }))
+        .filter((e): e is string => !!e);
+      if (events.length > 0) ctx.killfeedOrder = events;
     }
 
     // Pattern context (multi-round history) — kept as raw text since it's already
@@ -1041,8 +1107,14 @@ export async function POST(request: NextRequest) {
         death_position: r.death_position as string | null | undefined,
         position_confidence: r.position_confidence as string | undefined,
       }));
-      const checkedAnalysis = realityCheck(fb.deathAnalysis, memoryForCheck);
-      const checkedSuggestion = realityCheck(fb.nextRoundSuggestion, memoryForCheck);
+      // Present-round ground truth so the checker can strip route/trade claims
+      // the desktop never actually measured (anti-fabrication, works on round 1).
+      const factGround = {
+        hasRoute: typeof ctx.playerRoute === "string" && (ctx.playerRoute as string).length > 0,
+        hasTradeData: typeof reqBody.tradedByAlly === "boolean",
+      };
+      const checkedAnalysis = realityCheck(fb.deathAnalysis, memoryForCheck, factGround);
+      const checkedSuggestion = realityCheck(fb.nextRoundSuggestion, memoryForCheck, factGround);
       if (checkedAnalysis.modified || checkedSuggestion.modified) {
         console.log(`[Aimlo AI] Reality check: deathAnalysis rewrite=${checkedAnalysis.rewriteLevel}, suggestion rewrite=${checkedSuggestion.rewriteLevel}`);
       }

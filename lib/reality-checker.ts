@@ -280,37 +280,132 @@ export function rewriteUnsafeClaims(
   return result.trim();
 }
 
+// ── Route / Trade Anti-Fabrication Guard ──
+//
+// deathLocation tells us WHERE the player died — NEVER the route they took to
+// get there. So "mid'den çıkıp A'da öldün" is a fabrication unless the desktop
+// actually measured the route (FAZ3 minimap tracking). Likewise "trade
+// alamadın" is a claim about a trade OUTCOME we may not have observed. This
+// guard strips such unproven claims when the supporting fact is absent.
+//
+// Anchored to real callout names (POSITION_NAMES) so legitimate death-angle
+// wording like "arkadan geldi" (came from behind) is NEVER touched — that's a
+// direction, not a route origin. Imperative advice ("trade kur", "rotate yap")
+// is also untouched; only PAST-TENSE origin/outcome claims match.
+//
+// factGround.hasRoute / hasTradeData are derived in the route from whether the
+// desktop actually sent playerRoute / tradedByAlly for this round.
+
+function escapeRe(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+// Motion verbs that, following "<callout>'dan/den", assert an entry/route.
+// ONLY past-tense / gerund CLAIM forms (çıkıp, geldin, gelerek…). Conditional
+// or future advice ("gelirsen", "gelince", "çıkarsan", aorist "gelir") is
+// deliberately NOT listed — stripping legit advice would degrade coach quality.
+const ROUTE_ORIGIN_VERBS =
+  "(çıkıp|çıktın|çıkmışsın|çıkarak|gelip|geldin|gelmişsin|gelerek|geçip|geçtin|geçmişsin|geçerek|açılıp|açıldın|açılmışsın|girip|girdin|girmişsin|girerek|ilerleyip|ilerledin|gittin|gitmişsin)";
+
+// NOTE: \w does NOT match Turkish ı/ş/ğ/ç/ö/ü, so suffixed claim verbs are
+// enumerated explicitly rather than via \w+ (e.g. "attın" would slip past att\w+).
+const ROUTE_GENERIC_PATTERNS: RegExp[] = [
+  /\brotasyon\s+(attın|attı|atmışsın|atmış|yaptın|yaptı|yapmışsın|yapmış)/gi,
+  /\brotate\s+(ettin|etti|etmişsin)/gi,
+  /\bgeri\s+dön(dün|üp|erek)/gi,
+];
+
+const TRADE_CLAIM_PATTERNS: RegExp[] = [
+  /\btrade\s*['’]?\s*(alamadın|alınmadı|kuramadın|kurulmadı|edilemedin|edilmedi|yapılmadı|olmadı)/gi,
+  /\btakım(ın)?\s+(seni\s+)?trade\s+(etmedi|alamadı|kurmadı|edemedi)/gi,
+  /\btrade\s*['’]?\s*siz\s+(öldün|kaldın|gittin)/gi,
+];
+
+/**
+ * Strip route-origin and trade-outcome claims the supporting fact can't back.
+ * Deterministic, grammar-collapsing (same house style as rewriteUnsafeClaims).
+ */
+export function guardUnprovenFacts(
+  text: string,
+  factGround: { hasRoute?: boolean; hasTradeData?: boolean },
+): string {
+  let result = text;
+
+  if (factGround.hasRoute !== true) {
+    // Origin claims anchored to a known callout: "<callout>'dan çıkıp/gelip..."
+    for (const pos of POSITION_NAMES) {
+      const re = new RegExp(
+        `\\b${escapeRe(pos)}\\s*['’]?\\s*(d[ae]n|t[ae]n)\\s+${ROUTE_ORIGIN_VERBS}`,
+        "gi",
+      );
+      result = result.replace(re, "");
+    }
+    for (const re of ROUTE_GENERIC_PATTERNS) result = result.replace(re, "");
+  }
+
+  if (factGround.hasTradeData !== true) {
+    for (const re of TRADE_CLAIM_PATTERNS) result = result.replace(re, "");
+  }
+
+  // Collapse spaces and repair orphaned punctuation left by removals.
+  result = result
+    .replace(/\s{2,}/g, " ")
+    .replace(/\s+([,.;:!?])/g, "$1")
+    .replace(/([,;:]\s*){2,}/g, ", ")
+    .replace(/[,;:]\s*([.!?])/g, "$1")   // "attın,." → "attın."
+    .replace(/^[\s,;:.]+/, "")
+    .replace(/[\s,;:]+$/, "")            // drop trailing orphan comma
+    .trim();
+
+  return result;
+}
+
 // ── Main Entry Point ──
 
 /**
- * Validate AI output against round memory.
+ * Validate AI output against round memory + present-round facts.
  * Call this AFTER AI generation, BEFORE returning response.
  *
  * @param outputText - The AI-generated text (deathAnalysis, insight, etc.)
  * @param roundHistory - Current round memory from the watch session
+ * @param factGround - OPTIONAL present-round ground truth (route/trade presence).
+ *                     When omitted, behaviour is identical to before — every
+ *                     existing 2-arg caller is unaffected.
  * @returns Safe text with false claims rewritten
  */
 export function realityCheck(
   outputText: string,
   roundHistory: RoundMemoryEntry[],
+  factGround?: { hasRoute?: boolean; hasTradeData?: boolean },
 ): { text: string; modified: boolean; rewriteLevel: number } {
-  if (!outputText || roundHistory.length === 0) {
+  if (!outputText) {
     return { text: outputText, modified: false, rewriteLevel: 1 };
   }
 
-  const claims = extractClaims(outputText);
+  let text = outputText;
+  let rewriteLevel = 1;
 
-  // If no verifiable claims found, pass through
-  if (!claims.claimedCount && !claims.claimedPosition && !claims.repetitionClaim) {
-    return { text: outputText, modified: false, rewriteLevel: 1 };
+  // Present-fact guard (route/trade) — runs even with EMPTY round history
+  // (round 1) because it validates against the current round's facts, not the
+  // match's past memory.
+  if (factGround) {
+    const guarded = guardUnprovenFacts(text, factGround);
+    if (guarded !== text) {
+      text = guarded;
+      rewriteLevel = Math.max(rewriteLevel, 2);
+    }
   }
 
-  const validation = validateClaims(claims, roundHistory);
-  const safeText = rewriteUnsafeClaims(outputText, claims, validation);
+  // Memory-based claim check (count/window/position/repetition) — logic
+  // unchanged; just operates on the (possibly guard-trimmed) text.
+  if (roundHistory.length > 0) {
+    const claims = extractClaims(text);
+    if (claims.claimedCount || claims.claimedPosition || claims.repetitionClaim) {
+      const validation = validateClaims(claims, roundHistory);
+      text = rewriteUnsafeClaims(text, claims, validation);
+      rewriteLevel = Math.max(rewriteLevel, validation.rewriteLevel);
+    }
+  }
 
-  return {
-    text: safeText,
-    modified: safeText !== outputText,
-    rewriteLevel: validation.rewriteLevel,
-  };
+  return { text, modified: text !== outputText, rewriteLevel };
 }
