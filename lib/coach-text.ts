@@ -155,11 +155,22 @@ const TR_JARGON: [RegExp, string][] = [
   [/\bzonel[ae]y([ıi]p|arak)\b/gi, "alanı kapatıp"],       // S6: "zonelayıp" → "alanı kapatıp"
   [/\bzonel[ae][a-zçğıöşü]*/gi, "alanı kapat"],            // zone+TR fiil backstop
   [/\btelemetriyle\b/gi, "bilgisiyle"],                    // S10: halüsinasyon "telemetri"
-  [/\btelemetri[a-zçğıöşü]*/gi, "bilgi"],                  // telemetri backstop
+  [/\btelemetr[a-zçğıöşü]*/gi, "bilgi"],                   // S8: "telemetreli" dahil tüm "telemetr-" stem (bitişik "bilgi bilgi" → dedup collapse)
+  // NOT: JS \b Türkçe harfte (ı/ö/ş…) kırıldığı için ek-sonunda \b kullanma →
+  // "sightline'ını" yanlış kesilip "görüş hattıı" üretiyordu. \S* ile ek+apostrofu
+  // tümden yut (sightline İngilizce, boşluğa kadar güvenle tüketilir).
+  [/\bsightline\S*/gi, "görüş hattı"],                     // S9: "sightline'ını" → "görüş hattı"
+  [/\bwall(?![a-zçğıöşü])\S*/gi, "duvar"],                 // S9: Viper/Sage "wall('ı)" → "duvar"
   [/\bcezaland[ıi]r[ıi]ls[ıi]n\b/gi, "bedavaya ölsün"],    // S6: pasif "cezalandırılsın"
   [/\bcezaland[ıi]r[ıi]l[ıi]r\b/gi, "bedavaya ölür"],      // pasif "cezalandırılır"
   // bare "wide" (jargon) → "geniş" — EN SONDA, "wide swing/peek" spesifikleri zaten çevirdiyse boşa düşer
   [/\bwide\b/gi, "geniş"],                                 // "wide açıdan" → "geniş açıdan"
+  // Türkçe yön + apostrof-ek backstop (Cycle 4): yön combo dönüşümü dative/acc
+  // ekini ("front-right'e" → bare → "sağ ön'e") bırakabiliyor; apostrofu kaldırıp
+  // birleştir ("ön'e"→"öne", "arka'dan"→"arkadan"). NOT: JS \b "ö"de kırıldığı için
+  // lookbehind/lookahead sınırı kullan (\b ASLA çalışmaz — bu yüzden ilk denemede
+  // "sağ ön'e" düzelmedi). EN SONDA çalışır.
+  [/(?<![a-zçğıöşü])(ön|arka|sağ|sol)['’]([a-zçğıöşü]+)/gi, "$1$2"],
 ];
 
 const CLEAN_AGENT_NAMES = ["Jett","Raze","Phoenix","Reyna","Yoru","Neon","Iso","Waylay","Sage","Killjoy","Cypher","Chamber","Deadlock","Vyse","Omen","Brimstone","Viper","Astra","Harbor","Clove","Sova","Breach","Skye","Fade","Gekko","Tejo","Veto"];
