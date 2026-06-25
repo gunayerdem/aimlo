@@ -4,6 +4,7 @@ import { saveAiUsage } from "@/lib/ai-usage";
 import { loadKnowledge } from "@/lib/knowledge-loader";
 import { checkOutputQuality } from "@/evals/generic-detector";
 import { buildPolicyBlock } from "@/lib/ai-policy";
+import { cleanCoachTextDeep } from "@/lib/coach-text";
 import { sanitizeJsonStrings } from "@/lib/prompt-safety";
 
 /**
@@ -345,6 +346,12 @@ export async function POST(request: NextRequest) {
         if (score2 > score1) { output = retry.value; }
       }
     }
+
+    // Cycle 2 fix #7: run the shared coach-voice cleaner recursively over the
+    // nested insight output (dashboardInsight / criticalPattern / growthPlan).
+    // cleanCoachTextDeep preserves shape and skips enum/label keys
+    // (confidence/category/frequency/matchIndex/title) — string contents only.
+    output = cleanCoachTextDeep(output, lang === "en" ? "en" : "tr") as typeof output;
 
     return NextResponse.json(output);
   } catch (err) {

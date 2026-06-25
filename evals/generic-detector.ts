@@ -44,6 +44,11 @@ const FORBIDDEN_PHRASES: string[] = [
   "daha verimli kullan",
   "daha agresif oyna",
   "daha yaratıcı kullan",
+  // Cycle 2 fix #15 — enemy-gate / "not enough data" filler the vision route
+  // must never emit (mirrors ai-policy BANNED_PHRASES additions).
+  "düşman analizi için yeterli veri yok",
+  "yeterli veri yok",
+  "düşman iyi oynadı",
 ];
 
 const VALORANT_MAPS: string[] = [
@@ -229,8 +234,12 @@ export function checkOutputQuality(
     summary?: string;
     mistake?: string;
   },
-  context?: { map?: string; agent?: string }
+  // Cycle 2 fix #15: optional `route:'vision'` opts into vision-specific checks
+  // (max-sentence guard, lower per-item word floor, relaxed numeric-ref) so the
+  // report/feedback scoring stays UNCHANGED when the flag is absent.
+  context?: { map?: string; agent?: string; route?: "vision" }
 ): QualityCheckResult {
+  const isVision = context?.route === "vision";
   const issues: string[] = [];
   let score = 100;
 
@@ -288,25 +297,50 @@ export function checkOutputQuality(
   }
 
   // --- Minimum word count per field ---
+  // Cycle 2 fix #15(4): make the floor field-aware. enemyAnalysis array items
+  // are terse-but-specific counters (~6-12 words); a flat 10-word floor
+  // false-fails good output. Array items (name has "[") get a lower floor.
   for (const field of fields) {
     const wc = countWords(field.text);
-    if (wc < MIN_WORD_COUNT) {
+    const floor = field.name.includes("[") ? 6 : MIN_WORD_COUNT;
+    if (wc < floor) {
       issues.push(
-        `${field.name} is too short (${wc} words, minimum ${MIN_WORD_COUNT})`
+        `${field.name} is too short (${wc} words, minimum ${floor})`
       );
       score -= 10;
     }
   }
 
-  // --- Numeric reference count ---
-  const numericReferenceCount = countNumericReferences(allText);
-  if (numericReferenceCount === 0) {
-    issues.push("No numeric references (stats, percentages, round numbers) found in output");
-    score -= 25;
-  } else if (numericReferenceCount <= 1) {
-    score -= 10;
+  // --- Max sentence / narration guard (vision only) ---
+  // Cycle 2 fix #15(3): vision schema caps deathAnalysis / nextRoundSuggestion
+  // at 1-2 sentences. >2 sentences = narration creep (the old "max 4 cümle"
+  // contradiction). Only enforced for the vision route so report/feedback
+  // (longer fields by design) are unaffected.
+  if (isVision) {
+    for (const field of fields) {
+      if (!/deathAnalysis|nextRound/i.test(field.name)) continue;
+      const sentenceCount = field.text.split(/[.!?]+/).filter((s) => s.trim().length > 0).length;
+      if (sentenceCount > 2) {
+        issues.push(`${field.name} is too long / narration (${sentenceCount} sentences, max 2)`);
+        score -= 15;
+      }
+    }
   }
-  // 3+ is good, no deduction
+
+  // --- Numeric reference count ---
+  // Cycle 2 fix #15(5): the vision route legitimately has no match-level stats
+  // (after fix #2 it anchors on OCR truth, not invented numbers) — so the
+  // numeric-ref deduction would punish correct output. Skip it for vision.
+  const numericReferenceCount = countNumericReferences(allText);
+  if (!isVision) {
+    if (numericReferenceCount === 0) {
+      issues.push("No numeric references (stats, percentages, round numbers) found in output");
+      score -= 25;
+    } else if (numericReferenceCount <= 1) {
+      score -= 10;
+    }
+    // 3+ is good, no deduction
+  }
 
   // --- Map reference ---
   const hasMapReference =
@@ -380,6 +414,9 @@ export function checkOutputQuality(
     "head atıyor", "head attı", "head buldu", "swing yapıyor", "swing yaptın",
     "peek yapıyor", "hold ediyor", "hold yapıyor", "pre-aim",
     "stun çekiyor", "flash çekiyor", "smoke çekiyor", "pick alıyor", "cezalandır",
+    // Cycle 2 fix #15 — additional leaks observed / guarded this cycle.
+    "kill aldı", "frag verdi", "frag verir", "shift walk", "predict",
+    "blade storm", "swing yap",
   ];
   const tarzancaHits = TARZANCA.filter(p => allTextLower.includes(p));
   if (tarzancaHits.length > 0) {
@@ -393,6 +430,9 @@ export function checkOutputQuality(
   const SILVER_BANNED = [
     "cloudburst", "curveball", "snake bite", "recon bolt", "owl drone",
     "trapwire", "blade storm", "showstopper", "poison cloud", "toxic screen",
+    // Cycle 2 fix #15 — more official codenames that must be plainified.
+    "nebula", "poison cloud", "cyber cage", "barrier orb", "dismiss",
+    "tailwind", "fault line",
   ];
   const silverHits = SILVER_BANNED.filter(p => allTextLower.includes(p));
   if (silverHits.length > 0) {

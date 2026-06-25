@@ -7,123 +7,19 @@ import { loadVisionKnowledge } from "@/lib/knowledge-loader";
 import { sanitizePromptInput } from "@/lib/prompt-safety";
 import { loadPlayerMemory, buildMemoryContext } from "@/lib/player-memory";
 import { isUuidV4 } from "@/lib/uuid";
-import { plainifyAbilities, fixTurkishApostrophe } from "@/lib/ability-plain-map";
 import { buildPolicyBlock } from "@/lib/ai-policy";
+import { cleanCoachText } from "@/lib/coach-text";
 
-// ── Coach-voice OUTPUT cleaner (live-test 2026-06-19) ──────────────────────
-// gpt-5-mini still leaks English jargon, ability codenames, lowercase agent names
-// and apostrophe errors into the TR coach text (this route builds its own inline
-// SYSTEM_PROMPT and does NOT use buildPolicyBlock, so ai-policy rules never reach
-// it). This deterministic net corrects the output on the wire — the guaranteed
-// safety layer. Lang-aware: TR-jargon translation + apostrophe-fix run ONLY for tr.
-// WHITELISTED English (ai-policy ENGLISH_WHITELIST_RULE — peek/swing/entry/default/
-// util/molly/smoke/flash/op/off-angle...) is intentionally LEFT untouched.
-const TR_JARGON: [RegExp, string][] = [
-  [/\bpredict edilebilir(sin)?\b/gi, "tahmin edilebilirsin"],
-  [/\bpredict\b/gi, "tahmin edilebilir"],
-  [/\bduel['’]?(le|la|de|da|ler)?\b/gi, "teke tek"],
-  // Verb Tarzanca. NOTE: JS \b breaks on Turkish letters (ı/ş…), so use a
-  // negative-lookahead boundary. Direction matters: "frag/kill ALDI" = killed
-  // → öldür-; "frag VERDİ" = died → öl-.
-  [/\b(kill|frag) ald[ıi](?![a-zçğıöşü])/gi, "öldürdü"],
-  [/\b(kill|frag) al[ıi]yor(lar|sunuz|sun)?\b/gi, "öldürüyor$1"],
-  [/\bfrag verd[ıi](?![a-zçğıöşü])/gi, "öldü"],
-  [/\bfrag ver[ıi]yor(lar|sunuz|sun)?\b/gi, "ölüyor$1"],
-  // "swing yap-" Tarzanca: bare noun "swing" is WHITELISTED, but verb-ifying it
-  // with "yap-" is banned (CLAUDE.md "swing yapıyor"). Rewrite to the approved
-  // coach idiom "peek at-" / "geniş açıyla peek". Order: most-specific suffix
-  // first (yapıyor* before yap, so the longer match wins). Right boundary is the
-  // negative-lookahead (JS \b breaks on ı/ş…), NOT \b — same convention as above.
-  [/\bswing yapma(?![a-zçğıöşü])/gi, "geniş açıyla peek atma"],          // olumsuz emir: "yapma"
-  [/\bswing yapt[ıi]n(?![a-zçğıöşü])/gi, "geniş açıyla peek attın"],     // geçmiş 2.tekil: "yaptın"
-  [/\bswing yapt[ıi](?![a-zçğıöşün])/gi, "geniş açıyla peek attı"],      // geçmiş 3.tekil: "yaptı" (n hariç → "yaptın" üstte)
-  [/\bswing yap[ıi]yor(lar|sunuz|sun)?\b/gi, "peek atıyor$1"],           // şimdiki: "yapıyor(sun/lar)"
-  [/\bswing yapar(?![a-zçğıöşü])/gi, "peek atar"],                       // geniş zaman: "yapar"
-  [/\bswing yap(?![a-zçğıöşü])/gi, "geniş açıyla peek at"],              // emir / kök: "yap"
-  // CATCH-ALL backstop (verify): yukarıdaki lookahead'ler "yaparsan/yapabilirsin/
-  // yapmadan" gibi nadir ekleri kaçırır. "yap" ve "at" aynı ek-morfolojisini aldığı
-  // için $1 (ek) korunarak yeniden eklenir → "yaparsan"→"atarsan", "yapmadan"→
-  // "atmadan" doğru çıkar. EN SONDA: spesifik kalıplar metni zaten tüketmişse boşa düşer.
-  [/\bswing yap([a-zçğıöşü]*)/gi, "geniş açıyla peek at$1"],
-  [/\bteammate\b/gi, "takım arkadaşı"],            // ai-policy line 99: zorunlu çeviri
-  [/\bcounter\s*:/gi, "Karşılık:"],
-  [/\bshift[- ]?walk\b/gi, "sessiz yürü"],
-  [/\bdry\b/gi, "utility'siz"],                     // ai-policy line 99: dry→utility'siz
-
-  // ── Post-audit Tarzanca net (council 2026-06-25) ────────────────────────
-  // Deterministic last-line defense for jargon the model still leaks in TR
-  // output: pre-aim / head+TR-verb / peek-hold "yap-ed-" / "X çekiyor" utility /
-  // slang / "cezalandır-". Convention: JS \b breaks on Turkish letters, so use
-  // the negative-lookahead boundary (?![a-zçğıöşü]). ORDER MATTERS — specific
-  // patterns FIRST, catch-all / head / pre-aim backstops LAST.
-  //
-  // pre-aim (SYSTEM_PROMPT yasak listesi)
-  [/\bhead pre[- ]?aim['’]?l[ae]\s*(vurdu|kesti)/gi, "açıyı önceden tutup kafadan $1"],
-  [/\bpre[- ]?aim['’]?l[ae]\s*(vurdu|kesti|aldı)/gi, "açıyı önceden tutup $1"],
-  [/\bpre[- ]?aim (ediyordu|çekiyordu)(?![a-zçğıöşü])/gi, "açıyı önceden tutuyordu"],
-  [/\bpre[- ]?aim (ediyor|çekiyor|yapıyor)(?![a-zçğıöşü])/gi, "açıyı önceden tutuyor"],
-  [/\bpre[- ]?aim (etti|çekti|yaptı)(?![a-zçğıöşü])/gi, "açıyı önceden tuttu"],
-  [/\bpre[- ]?aim (eder|çeker|yapar)(?![a-zçğıöşü])/gi, "açıyı önceden tutar"],
-  // head + TR fiil (SYSTEM_PROMPT yasak listesi)
-  [/\bhead at[ıi]yordu(?![a-zçğıöşü])/gi, "kafadan vuruyordu"],
-  [/\bhead at[ıi]yor(lar|sun)?(?![a-zçğıöşü])/gi, "kafadan vuruyor$1"],
-  [/\bhead att[ıi]n(?![a-zçğıöşü])/gi, "kafadan vurdun"],
-  [/\bhead att[ıi](?![a-zçğıöşün])/gi, "kafadan vurdu"],
-  [/\bhead at[ıi]yor(?![a-zçğıöşü])/gi, "kafadan vuruyor"],
-  [/\bhead bulu?yor(du)?(?![a-zçğıöşü])/gi, "kafadan vuruyor"],
-  [/\bhead buldu(?![a-zçğıöşü])/gi, "kafadan vurdu"],
-  [/\bhead aç[ıi]s[ıi]n[ıi] tut([a-zçğıöşü]*)/gi, "açıyı tut$1"],
-  // peek / hold "yap-ed-"
-  [/\bpeek yap([a-zçğıöşü]*)/gi, "peek at$1"],
-  [/\bpeek ediyor(?![a-zçğıöşü])/gi, "peek atıyor"],
-  [/\bpeek etti(?![a-zçğıöşü])/gi, "peek attı"],
-  // "hold yap-/ed-" → "tut-" (object comes from context — NO "açıyı" prefix, else
-  // "açıyı hold ediyor" → "açıyı açıyı tutuyor" duplication).
-  [/\bhold yap[ıi]yor(?![a-zçğıöşü])/gi, "tutuyor"],
-  [/\bhold yapt[ıi]n(?![a-zçğıöşü])/gi, "tuttun"],
-  [/\bhold ediyor(?![a-zçğıöşü])/gi, "tutuyor"],
-  [/\bhold (yap|ed)[a-zçğıöşü]*/gi, "tut"],
-  // X çekiyor → X atıyor (utility). EXPLICIT conjugations (vowel harmony: çek→at,
-  // "çekiyor"→"atıyor" not "atiyor"). Specific suffixes first, bare root last.
-  [/\b(stun|flash|molly|smoke|util|utility)\s*['’]?\s*çek[ıi]yor(lar|sun|sunuz)?(?![a-zçğıöşü])/gi, "$1 atıyor$2"],
-  [/\b(stun|flash|molly|smoke|util|utility)\s*['’]?\s*çekti(n|niz)?(?![a-zçğıöşü])/gi, "$1 attı$2"],
-  [/\b(stun|flash|molly|smoke|util|utility)\s*['’]?\s*çekmeden(?![a-zçğıöşü])/gi, "$1 atmadan"],
-  [/\b(stun|flash|molly|smoke|util|utility)\s*['’]?\s*çekme(?![a-zçğıöşü])/gi, "$1 atma"],
-  [/\b(stun|flash|molly|smoke|util|utility)\s*['’]?\s*çekecek(?![a-zçğıöşü])/gi, "$1 atacak"],
-  [/\b(stun|flash|molly|smoke|util|utility)\s*['’]?\s*çeker(?![a-zçğıöşü])/gi, "$1 atar"],
-  [/\b(stun|flash|molly|smoke|util|utility)\s*['’]?\s*çek(?![a-zçğıöşü])/gi, "$1 at"],
-  [/\bult çek[ıi]yor(?![a-zçğıöşü])/gi, "ult kullanıyor"],
-  [/\bult çekti(?![a-zçğıöşü])/gi, "ult kullandı"],
-  [/\bult bast[ıi](?![a-zçğıöşü])/gi, "ult kullandı"],
-  // slang
-  [/\bwide\s+swing\b/gi, "geniş açıyla peek"],
-  [/\bop var\b/gi, "operator'la bekliyor"],
-  [/\btrip(?!wire)\b/gi, "tuzak"],
-  [/\bpick al([ıi]yor|d[ıi]n?|[ıi]r)(?![a-zçğıöşü])/gi, "kill al$1"],
-  // cezalandır- (ai-policy NATURAL_COACH_RULE: "cezalandırıyor/cezalandırdı/cezalandıracak" yasak)
-  [/\bcezaland[ıi]r[ıi]l[ıi]yorsun(?![a-zçğıöşü])/gi, "aynı açıdan bedavaya öldürülüyorsun"],
-  [/\bcezaland[ıi]r[ıi]yor(du|lar)?(?![a-zçğıöşü])/gi, "bedavaya kill alıyor$1"],
-  [/\bcezaland[ıi]rd[ıi](?![a-zçğıöşün])/gi, "bedavaya kill aldı"],
-  [/\bcezaland[ıi]racak(?![a-zçğıöşü])/gi, "oradan kafadan vuracak"],
-  // CATCH-ALL backstops (head/pre-aim) — EN SONDA, spesifikler tüketmediyse devreye girer
-  [/\bhead pre[- ]?aim\b/gi, "açıyı önceden tutarak"],
-  [/\bpre[- ]?aim\b/gi, "açıyı önceden tutuyor"],
-];
-
-const CLEAN_AGENT_NAMES = ["Jett","Raze","Phoenix","Reyna","Yoru","Neon","Iso","Waylay","Sage","Killjoy","Cypher","Chamber","Deadlock","Vyse","Omen","Brimstone","Viper","Astra","Harbor","Clove","Sova","Breach","Skye","Fade","Gekko","Tejo","Veto"];
-
-function cleanCoachText(text: string, lang: "tr" | "en"): string {
-  if (!text) return text;
-  let t = plainifyAbilities(text, lang);             // ability codenames → plain (both langs)
-  for (const a of CLEAN_AGENT_NAMES) {               // phoenix → Phoenix (both langs)
-    t = t.replace(new RegExp("\\b" + a + "\\b", "gi"), a);
-  }
-  if (lang === "tr") {
-    for (const [re, rep] of TR_JARGON) t = t.replace(re, rep);
-    t = fixTurkishApostrophe(t);                     // duvar'i → duvarı (TR plain terms)
-  }
-  return t.replace(/\s{2,}/g, " ").trim();
-}
+// ── Coach-voice OUTPUT cleaner ─────────────────────────────────────────────
+// cleanCoachText is now the SHARED single-source deterministic net in
+// lib/coach-text.ts (council 2026-06-25, Cycle 2 fix #1) — every AI route
+// applies the same cleanup. This route both builds an inline SYSTEM_PROMPT AND
+// injects ai-policy.buildPolicyBlock (see the systemSections assembly below),
+// so the coach-voice rules reach the model; cleanCoachText is the on-the-wire
+// guaranteed safety layer applied to the parsed output. Lang-aware: TR-jargon
+// translation + apostrophe-fix run ONLY for tr. WHITELISTED English (ai-policy
+// ENGLISH_WHITELIST_RULE — peek/swing/entry/default/util/molly/smoke/flash/op/
+// off-angle...) is intentionally LEFT untouched.
 
 /**
  * POST /api/ai/vision
@@ -166,7 +62,7 @@ const ROUND_FEEDBACK_SCHEMA = {
       },
       enemyAnalysis: {
         type: "array",
-        description: "Tam 2 madde, her biri 1 cümle. Madde 1 = düşmanın bu round'daki SOMUT setup/util/pozisyonu (callout+ajan içermeli). Madde 2 = pratik counter (somut eylem). Generic gözlem YASAK. Örn: ['Cypher tuzaklarını B Main girişine dizdi','A'dan default açılın, B'yi tek başına zorlamayın'].",
+        description: "Tam 2 madde, her biri 1 cümle. Madde 1 = düşmanın bu round'daki SOMUT setup/util/pozisyonu (callout+ajan içermeli). Madde 2 = pratik counter (somut eylem, callout+util ZORUNLU); generic gözlem YASAK. Örn: ['Cypher tuzaklarını B Main girişine dizdi','A'dan default açılın, B'yi tek başına zorlamayın'].",
         items: { type: "string" },
         minItems: 2,
         maxItems: 2,
@@ -181,12 +77,7 @@ const ROUND_FEEDBACK_SCHEMA = {
 
 const SYSTEM_PROMPT = `Sen AIMLO'sun: Radiant seviye gerçek bir Valorant koçusun. Görevin oyuncuya GERÇEK pattern-aware feedback vermek — generic "iyi nişan al" / "aim well" laflarını YASAKLIYORUM.
 
-🎯 KAYNAK = KB (aşağıdaki knowledge blokları) — EN ÖNEMLİ KURAL / TOP RULE:
-Koçluğu SIFIRDAN UYDURMA. OCR gerçeğini (ajan + harita + ölüm yeri + düşman + skor) knowledge bloklarıyla EŞLE; feedback'i o blokların DİLİYLE ver.
-- Bu ölümü KB'deki "Kalıp → Anlam → Counter/WHY" ve "Oyuncuya Ne Söylenmeli" bloklarıyla eşle, en uygununu seç.
-- O bloğun ifadesini AL, sadece spesifik callout/ajan/silah/duruma uyarla. KB'nin dili senin yazımından İYİ — onun cümlesini kullan, kendi cümleni sıfırdan kurma.
-- KB'de karşılığı olmayan tavsiye verme. Sonuç: oyuncu o round'u CANLI izlemişsin gibi hissetmeli (KB bilgisini SPESİFİK ölüme bağladığın için).
-- EN: Do NOT invent coaching — MATCH the OCR truth to the knowledge blocks and deliver feedback in THEIR wording, adapted only to the specific callout/agent. The player must feel you watched that exact round.
+KAYNAK=KB kuralı aşağıdaki politika bloğunda (ai-policy KB_SOURCE_RULE) — koçluğu SIFIRDAN UYDURMA, OCR gerçeğini KB ile eşle.
 
 DİL — ZORUNLU
 
@@ -379,6 +270,16 @@ SENARYO B — Bind, Sage, SALDIRI, R1 / az veri (pattern YOK, hedge dili DOĞRU 
   "nextRoundSuggestion": "Bu round A'ya direkt yüklenme — Sage duvarını A Main'e çapraz at, flash'la birlikte execute girin, solo Showers peek'i bırak."
 }
 
+SENARYO C — Haven, SALDIRI, died=false (ölüm YOK): died=false ise ölümden BAHSETME, round'daki pozisyon/util hatasına odaklan.
+{
+  "deathAnalysis": "Bu round ölmedin ama A Long'da utility'siz açıkta durdun — sonraki execute'ta smoke/flash ile o açıyı kapatıp ilerle, bedava trade yeme riskini düşür.",
+  "enemyAnalysis": [
+    "Düşman A Long açısını tutuyordu, sen açıkta kalınca baskı kuramadın.",
+    "A'ya girerken Long'u smoke'la kapat, takımla aynı anda yüklenin."
+  ],
+  "nextRoundSuggestion": "A'yı tekrar zorlayacaksan Long'a smoke at, mid kontrolünü al, sonra birlikte execute girin."
+}
+
 KÖTÜ KARŞI-ÖRNEK (ASLA böyle yazma — muğlak + generic + tarzanca):
 {
   "deathAnalysis": "genelde biraz erken peek atıyorsun, dikkatli ol ve pozisyonunu kontrol et",
@@ -395,7 +296,7 @@ Neden kötü: callout yok, ajan yok, silah yok, "genelde/biraz" muğlak, "dikkat
   "deathAnalysis": "<1-2 cümle Türkçe (ya da İngilizce): hata + sebep + kısa düzeltme. Spesifik callout + ajan + silah/utility dahil. Anlaşılır, akıcı dil. Örn TR: 'B Main'den geniş açıyla peek attın, Cypher seni Heaven'dan operator'la oradan bekliyordu — bir sonraki round o açıyı smoke atmadan deneme.'>",
   "enemyAnalysis": [
     "<1 cümle: düşman bu round'da ne yaptı (setup/utility/pozisyon)>",
-    "<1 cümle: pratik counter ya da gözlem>"
+    "<1 cümle: pratik counter — somut eylem, callout+util içerir>"
   ],
   "nextRoundSuggestion": "<1-2 cümle: basit, işleyen taktik. Hangi site, neden mantıklı, kısa nasıl. Mikro-detay (dash zamanlaması vs) yok. Örn TR: 'Bu round B'yi bırak, takımca A'dan default ilerleyin — Cypher tuzaklarını B'ye dikti, rotate edip A'yı tutamayacak.'>"
 }
@@ -835,6 +736,13 @@ export async function POST(request: NextRequest) {
         lang: "tr",
         includeEnemyGate: true,
         includeDecisionRubric: false,
+        // Cycle 2 (council 2026-06-25) — vision opts into the schema-aligned
+        // variants: OCR anchor (no invent-a-stat), single-fix 1-2 sentence
+        // focus, concrete-anchor enemy items. Resolves the prompt vs schema
+        // contradictions; report/insight keep defaults (byte-identical).
+        anchorMode: "ocr",
+        outputFocusMode: "single",
+        enemyGateMode: "vision",
       }),
     ];
     if (kb.blocks.agent)      systemSections.push(kb.blocks.agent);

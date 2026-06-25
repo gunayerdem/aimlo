@@ -10,6 +10,7 @@ import { generateImprovementPlan } from "@/lib/improvement-plan";
 import { loadPlayerMemory, updatePlayerMemory, buildMemoryContext } from "@/lib/player-memory";
 import { loadKnowledge } from "@/lib/knowledge-loader";
 import { buildPolicyBlock } from "@/lib/ai-policy";
+import { cleanCoachText } from "@/lib/coach-text";
 import { isUuidV4 } from "@/lib/uuid";
 import type { RoundData as EngineRoundData } from "@/types";
 
@@ -513,7 +514,7 @@ function generateDeterministicReport(body: ReportRequest): ReportResponse {
       : `OBSERVATION: ${topDeathCount} deaths at ${topDeathLoc} (${deathRoundStr}). INFERENCE: Enemy reads this angle, holds crosshair. RECOMMENDATION: As ${setup.agent}, shift to off-angle or clear with utility before peeking.`;
   } else if (hasRotateIssue) {
     mistake = isTr
-      ? `GÖZLEM: Birden fazla round'da rotasyon sırasında ölüm. ÇIKARIM: Timing hatası — crosshair placement hazır değildi, düşman rotasyonu okuyor. ÖNERİ: ${setup.agent} olarak rotasyonda her köşenin açısını önceden tut, ability ile info topla.`
+      ? `GÖZLEM: Birden fazla round'da rotasyon sırasında ölüm. ÇIKARIM: Timing hatası — nişan noktası hazır değildi, düşman rotasyonu okuyor. ÖNERİ: ${setup.agent} olarak rotasyonda her köşenin açısını önceden tut, util ile bilgi topla.`
       : `OBSERVATION: Deaths during rotation in multiple rounds. INFERENCE: Timing error — crosshair placement wasn't ready, enemy reads rotations. RECOMMENDATION: As ${setup.agent}, pre-aim every corner during rotation, use ability for info.`;
   } else if (hasSoloIssue) {
     mistake = isTr
@@ -521,11 +522,11 @@ function generateDeterministicReport(body: ReportRequest): ReportResponse {
       : `OBSERVATION: Isolated deaths in solo anchor positions. INFERENCE: No teammate for trade, ${setup.agent} vulnerable in isolation. RECOMMENDATION: Wait for teammate trade angle, set up crossfire, no solo peeks.`;
   } else if (hasUtilIssue) {
     mistake = isTr
-      ? `GÖZLEM: ${setup.agent} utility sonrası savunmasız kalınan round'lar var. ÇIKARIM: Ability kullandıktan sonra aynı pozisyonda duruyorsun — düşman bunu cezalandırıyor. ÖNERİ: Utility sonrası reposition yap, off-angle'a geç.`
+      ? `GÖZLEM: ${setup.agent} utility sonrası savunmasız kalınan round'lar var. ÇIKARIM: Util kullandıktan sonra aynı pozisyonda duruyorsun — düşman aynı açıdan bedavaya kill alıyor. ÖNERİ: Util sonrası çekil, yer değiştir, off-angle'a geç.`
       : `OBSERVATION: Rounds where ${setup.agent} was vulnerable after utility use. INFERENCE: Holding same position after ability — enemy punishes this. RECOMMENDATION: Reposition after utility, shift to off-angle.`;
   } else {
     mistake = isTr
-      ? `GÖZLEM: ${topDeathLoc !== "N/A" ? `${topDeathLoc}'da` : `${setup.map}'de`} tekrarlayan pozisyonlama hataları. ÇIKARIM: Crosshair placement ve angle seçimi zayıf — düşman ilk peek'i kazanıyor. ÖNERİ: ${setup.agent} olarak off-angle tut, jiggle peek ile info topla.`
+      ? `GÖZLEM: ${topDeathLoc !== "N/A" ? `${topDeathLoc}'da` : `${setup.map}'de`} tekrarlayan pozisyon hataları. ÇIKARIM: Nişan noktası ve angle seçimi zayıf — düşman ilk peek'i kazanıyor. ÖNERİ: ${setup.agent} olarak off-angle tut, jiggle peek ile bilgi topla.`
       : `OBSERVATION: Recurring positioning errors ${topDeathLoc !== "N/A" ? `at ${topDeathLoc}` : `on ${setup.map}`}. INFERENCE: Weak crosshair placement and angle selection — enemy wins first peek. RECOMMENDATION: As ${setup.agent}, hold off-angle, jiggle peek for info.`;
   }
   const enemyAgents = setup.unknownEnemyComp
@@ -566,13 +567,18 @@ function generateDeterministicReport(body: ReportRequest): ReportResponse {
     ? `${score_num}/10 — ${score_num >= 7 ? `Pozisyon çeşitliliği iyi, ${setup.agent} utility zamanlaması doğru` : score_num >= 5 ? `${topDeathLoc !== "N/A" ? `${topDeathLoc}'da tekrar ölümler` : "Tekrarlayan pozisyon hataları"}, trade setup'lar eksik` : `Aynı açılarda ölüm tekrarı, ${setup.agent} utility'si etkisiz kullanılıyor`}`
     : `${score_num}/10 — ${score_num >= 7 ? `Good positional variety, ${setup.agent} utility timing correct` : score_num >= 5 ? `${topDeathLoc !== "N/A" ? `Repeat deaths at ${topDeathLoc}` : "Recurring position errors"}, trade setups lacking` : `Repeating deaths at same angles, ${setup.agent} utility used ineffectively`}`;
 
+  // Cycle 2 fix #8 (EK SAVUNMA): run the shared coach-voice cleaner on the 6
+  // text fields so any future deterministic wording is also guarded. Numeric
+  // fields (won/lost/matchWon/...) untouched. This path NEVER emits "Analiz
+  // yapılamadı." — no-fake-safe (real stats), verified.
+  const lc: "tr" | "en" = isTr ? "tr" : "en";
   return {
-    summary,
-    mistake,
-    tendencies,
-    adjustment,
-    bestRound,
-    decisionScore,
+    summary: cleanCoachText(summary, lc),
+    mistake: cleanCoachText(mistake, lc),
+    tendencies: cleanCoachText(tendencies, lc),
+    adjustment: cleanCoachText(adjustment, lc),
+    bestRound: cleanCoachText(bestRound, lc),
+    decisionScore: cleanCoachText(decisionScore, lc),
     won,
     lost,
     skipped,
@@ -912,16 +918,20 @@ ${scoringContext}`;
       return stats;
     }
 
-    // Validate shape + merge with stats (stats always provides numeric fields)
+    // Validate shape + merge with stats (stats always provides numeric fields).
+    // Cycle 2 fix #5: run the shared coach-voice cleaner on every text field
+    // before returning — tarzanca/codename/apostrophe the model leaks gets
+    // corrected on the wire. Shape + persist payload unchanged (only contents).
     if (isValidAITextFields(parsed)) {
+      const clean = (s: string, cap: number) => cleanCoachText(s, isTr ? "tr" : "en").slice(0, cap);
       return {
         ...stats,
-        summary: parsed.summary.slice(0, 1000),
-        mistake: parsed.mistake.slice(0, 1000),
-        tendencies: parsed.tendencies.slice(0, 1000),
-        adjustment: parsed.adjustment.slice(0, 1000),
-        bestRound: parsed.bestRound.slice(0, 500),
-        decisionScore: parsed.decisionScore.slice(0, 200),
+        summary: clean(parsed.summary, 1000),
+        mistake: clean(parsed.mistake, 1000),
+        tendencies: clean(parsed.tendencies, 1000),
+        adjustment: clean(parsed.adjustment, 1000),
+        bestRound: clean(parsed.bestRound, 500),
+        decisionScore: clean(parsed.decisionScore, 200),
       };
     }
 
@@ -1076,7 +1086,9 @@ Sadece düzeltilmiş metni döndür.`;
           const rd = await rr.json();
           const refined = rd?.choices?.[0]?.message?.content?.trim();
           if (refined && refined.length > 30) {
-            (report as Record<string, unknown>)[fs.weakest] = refined.slice(0, 600);
+            // Cycle 2 fix #5: clean the refined field too (same coach-voice net).
+            const refinedClean = cleanCoachText(refined, validation.data.lang === "en" ? "en" : "tr");
+            (report as Record<string, unknown>)[fs.weakest] = refinedClean.slice(0, 600);
             console.log(`[Aimlo AI] Report field refined: ${fs.weakest}`);
           }
         }

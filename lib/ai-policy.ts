@@ -64,6 +64,13 @@ export const BANNED_PHRASES = [
   // (yapma/yaptın/yapıyor/yapar). Safe for EN output: "swing yap" never appears
   // in English coach text.
   "swing yap",
+  // Cycle 2 fix #15 (council 2026-06-25) — enemy-gate "not enough data" filler.
+  // TR-specific phrases (never appear in EN coach output) so safe for the
+  // dil-agnostik substring-check validators. The vision enemyGate:'vision'
+  // variant forbids these inline; banning them here is defense-in-depth.
+  "düşman analizi için yeterli veri yok",
+  "yeterli veri yok",
+  "düşman iyi oynadı",
 ] as const;
 
 // ═══════════════════════════════════════════════════════════
@@ -71,8 +78,12 @@ export const BANNED_PHRASES = [
 // ═══════════════════════════════════════════════════════════
 
 export const CONFIDENCE_PROMPTS: Record<string, string> = {
-  calibrating: `\nVERİ SEVİYESİ: KALİBRASYON — Çok az veri var. Kesin ifade YASAK. "İlk gözlemler..." veya "henüz yeterli veri yok" dili kullan. Pattern iddiası yapma.`,
-  low: `\nVERİ SEVİYESİ: DÜŞÜK — Sınırlı veri. "Görünüyor ki", "muhtemelen", "erken verilere göre" kullan. Kesin kalıp tespiti yapma.`,
+  // Cycle 2 fix #11: hedge ONLY past/pattern claims — OCR pixel-truth (killer
+  // agent, death spot, weapon) is fact, say it NET. The old wording hedged
+  // known facts too ("henüz yeterli veri yok"), which softened the one thing
+  // the desktop measured reliably.
+  calibrating: `\nVERİ SEVİYESİ: KALİBRASYON — Çok az GEÇMİŞ veri var. GEÇMİŞ/pattern hakkında kesin iddia YASAK ("İlk gözlemler..."). AMA bu round'un OCR gerçeğini (killer ajan, ölüm yeri, silah) NET söyle — onlar pixel-truth, hedge'leme.`,
+  low: `\nVERİ SEVİYESİ: DÜŞÜK — Sınırlı geçmiş. Pattern için "görünüyor ki/muhtemelen"; OCR gerçeğini net söyle.`,
   medium: `\nVERİ SEVİYESİ: ORTA — Koşullu dil kullanabilirsin. Net tavsiye ver ama "her zaman" gibi ifadelerden kaçın.`,
   high: `\nVERİ SEVİYESİ: YÜKSEK — Net, doğrudan ifadeler kullanabilirsin. Pattern'leri kesin olarak belirt.`,
 };
@@ -166,6 +177,17 @@ Düşman davranışı hakkında yorum SADECE şu durumlarda yapılabilir:
 Kanıt YOKSA → düşman davranışı hakkında İDDİA YAPMA. "Düşman analizi için yeterli veri yok" de.
 "Düşman seni okuyor", "düşman adapte oldu" → SADECE tekrar eden pattern kanıtlanmışsa söylenebilir.`;
 
+// Vision variant (enemyGateMode:'vision', Cycle 2 fix #4): the vision schema
+// demands EXACTLY 2 specific enemyAnalysis items, so the strict gate's "kanıt
+// yoksa 'yeterli veri yok' de" escape produced generic filler that the schema
+// forbids. Here item 1 = OCR/visual enemy FACT (no fabricated "reading you"),
+// item 2 = a PRACTICAL counter (advice, not a claim). "Yeterli veri yok" /
+// "düşman iyi oynadı" are explicitly banned — every item carries a concrete
+// anchor. Still anti-uydurma: forbids inventing enemy reads without evidence.
+export const ENEMY_ANALYSIS_GATE_VISION = `\nDÜŞMAN ANALİZİ (VISION):
+- Madde 1 = SADECE OCR/görselde olan düşman gerçeği (killerInfo ajan+silah, görünen pozisyon). Kanıt yoksa "düşman okuyor" diye UYDURMA — eldeki killer/pozisyon gerçeğine bağla.
+- Madde 2 = oyuncuya PRATİK counter (eylem) — iddia değil tavsiye, callout+util içermeli. ASLA "yeterli veri yok" / "düşman iyi oynadı" yazma.`;
+
 // ═══════════════════════════════════════════════════════════
 // PERSONALIZATION — unified for round + match context
 // ═══════════════════════════════════════════════════════════
@@ -182,6 +204,18 @@ export const ZERO_FAKE_AI = `\nSIFIR SAHTE AI:
 - İstatistik tekrarı YASAK — yorumla, sadece sayı verme
 - YASAK KALIPLAR: ${BANNED_PHRASES.join(", ")}`;
 
+// Vision variant (anchorMode:'ocr', Cycle 2 fix #2): the round-level vision
+// route has NO match-level stats, so "her cümlede yüzde/round sayısı ZORUNLU"
+// was a PRESSURE TO INVENT numbers (the #1 reason reality-checker mangled the
+// TR text). Here the anchor is OCR truth (callout/agent/weapon/HP/alive count),
+// and percentages/round-counts are used ONLY if they genuinely exist. This
+// STRENGTHENS anti-uydurma — it removes the fabrication incentive.
+export const ZERO_FAKE_AI_VISION = `\nSIFIR SAHTE AI:
+- Veride OLMAYAN bilgiyi UYDURMA
+- Her cümle SOMUT bir çapa taşımalı: callout (A Short), ajan (Cypher), silah/util (operator/smoke) ya da OCR'dan gelen sayı (HP, alive sayısı). Yüzde/round-sayısı UYDURMA — sadece veride GERÇEKTEN varsa kullan.
+- İstatistik tekrarı YASAK — yorumla, sadece sayı verme
+- YASAK KALIPLAR: ${BANNED_PHRASES.join(", ")}`;
+
 // ═══════════════════════════════════════════════════════════
 // OUTPUT FOCUS — 1 problem, 1 fix
 // ═══════════════════════════════════════════════════════════
@@ -192,6 +226,17 @@ export const OUTPUT_FOCUS_RULE = `\nODAK KURALI:
 - 1 ana fix + 1 alternatif (min 2 varyasyon)
 - Tek fix YASAK — düşman tek fix'e adapte olur
 - Mikro-pozisyon ZORUNLU: "A Short", "B Main entry" — "site" veya "mid" tek başına KABUL EDİLMEZ
+- Öncelik: tekrar eden pattern > net hata > tek gözlem`;
+
+// Vision variant (outputFocusMode:'single', Cycle 2 fix #3): the multi-fix /
+// "max 4 cümle, min 2 fix, tek fix YASAK" rule CONTRADICTS the vision schema
+// (1-2 sentences/field, 1 fix). Aligning to the schema: one most-important
+// problem, one clean fix (alternative not required), 1-2 sentences, no
+// narration. Micro-position still mandatory.
+export const OUTPUT_FOCUS_RULE_VISION = `\nODAK KURALI:
+- SADECE en önemli 1 soruna odaklan, 1 net fix ver (alternatif şart değil).
+- 1-2 cümle, en fazla. Paragraf/narration YASAK.
+- Mikro-pozisyon ZORUNLU: "A Short", "B Main entry" — yalnız "site"/"mid" KABUL EDİLMEZ.
 - Öncelik: tekrar eden pattern > net hata > tek gözlem`;
 
 // ═══════════════════════════════════════════════════════════
@@ -223,9 +268,11 @@ export const DECISION_SCORE_RUBRIC = `\nKARAR SKORU RUBRİK:
 
 export const KB_SOURCE_RULE = `\n🎯 KAYNAK = KB (knowledge blokları) — EN ÖNEMLİ KURAL:
 Sen koçluğu SIFIRDAN UYDURMAZSIN. OCR'dan gelen gerçeği (ajan + harita + ölüm yeri + düşman + skor) yukarıdaki knowledge bloklarıyla EŞLERSİN ve feedback'i o blokların DİLİYLE verirsin.
-- Bu ölümü KB'deki "Kalıp → Anlam → Counter/WHY" ve "Oyuncuya Ne Söylenmeli" bloklarıyla eşle; en uygun olanı seç.
+- Bu ölümü KB'deki kalıp/hata bloklarıyla (IF/MEANING/COUNTER/WHY satırları, agent "Sık Yapılan Hatalar", harita "Ölüm Bölgeleri"/"Callout'lar") eşle; başlık adı dosyadan dosyaya değişir, İÇERİĞE bak. En uygun olanı seç.
 - O bloğun ifadesini AL, sadece spesifik callout/ajan/silah/duruma uyarla. KB'nin Türkçesi senin Türkçenden İYİDİR — onun cümlesini kullan, kendi cümleni kurma.
+- KB'nin genel-prensip/"Zorlanırken" satırlarını OLDUĞU GİBİ kopyalama — bu round'un callout+ajan+silahıyla SOMUTLAŞTIR; muğlak-dil yasağı (VAGUE_BAN) üstündür.
 - KB'de karşılığı OLMAYAN tavsiye verme; kendi genel koçluğunu yazma.
+- KB'de bu ölüme uygun blok YOKSA: yine de OCR gerçeğine (callout+killer+silah) dayanarak SOMUT koçluk ver; generic'e kaçma ama uydurma da yapma.
 - Sonuç: oyuncu o round'u CANLI izlemişsin gibi hissetmeli — çünkü KB'nin gerçek bilgisini onun SPESİFİK ölümüne bağlıyorsun.`;
 
 export const KB_SOURCE_RULE_EN = `\n🎯 SOURCE = KB (knowledge blocks) — TOP RULE:
@@ -241,14 +288,26 @@ export function buildPolicyBlock(options: {
   lang?: string;
   includeEnemyGate?: boolean;
   includeDecisionRubric?: boolean;
+  // Cycle 2 (council 2026-06-25) — vision-specific opt-in modes. DEFAULTS keep
+  // the EXACT prior behavior (report/insight/feedback output byte-identical);
+  // only the vision route opts into the variants.
+  anchorMode?: "stats" | "ocr";          // fix #2: 'ocr' drops the invent-a-stat pressure
+  outputFocusMode?: "multi" | "single";  // fix #3: 'single' matches the vision 1-2 sentence schema
+  enemyGateMode?: "strict" | "vision";   // fix #4: 'vision' = concrete-anchor enemy items
 }): string {
   const parts: string[] = [];
 
   parts.push(options.lang === "en" ? KB_SOURCE_RULE_EN : KB_SOURCE_RULE);
-  parts.push(ZERO_FAKE_AI);
+  parts.push(options.anchorMode === "ocr" ? ZERO_FAKE_AI_VISION : ZERO_FAKE_AI);
   parts.push(EVIDENCE_POLICY);
-  parts.push(options.includeEnemyGate !== false ? ENEMY_ANALYSIS_GATE : "");
-  parts.push(OUTPUT_FOCUS_RULE);
+  // enemyGateMode:'vision' → concrete-anchor variant; otherwise preserve the
+  // includeEnemyGate behavior exactly (strict gate, or omitted when false).
+  parts.push(
+    options.enemyGateMode === "vision"
+      ? ENEMY_ANALYSIS_GATE_VISION
+      : options.includeEnemyGate !== false ? ENEMY_ANALYSIS_GATE : "",
+  );
+  parts.push(options.outputFocusMode === "single" ? OUTPUT_FOCUS_RULE_VISION : OUTPUT_FOCUS_RULE);
   parts.push(VAGUE_BAN_RULE);
   parts.push(TONE_PROMPTS[options.tone || "strict"] || TONE_PROMPTS.strict);
   parts.push(CONFIDENCE_PROMPTS[options.confidence || "medium"] || CONFIDENCE_PROMPTS.medium);

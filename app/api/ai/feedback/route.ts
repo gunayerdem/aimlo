@@ -8,6 +8,7 @@ import { generateImprovementPlan } from "@/lib/improvement-plan";
 import type { RoundData as EngineRoundData } from "@/types";
 import { loadKnowledge } from "@/lib/knowledge-loader";
 import { buildPolicyBlock } from "@/lib/ai-policy";
+import { cleanCoachText } from "@/lib/coach-text";
 import { sanitizePromptInput } from "@/lib/prompt-safety";
 
 /**
@@ -522,10 +523,14 @@ ${patternContext}`;
     }
 
     if (isValidFeedbackShape(parsed)) {
+      // Cycle 2 fix #6: run the shared coach-voice cleaner on every text field
+      // (deathAnalysis / enemyPatterns[] / nextRoundPlan). Shape/contract
+      // unchanged — only string contents are corrected.
+      const lc: "tr" | "en" = isTr ? "tr" : "en";
       const result = {
-        deathAnalysis: parsed.deathAnalysis.slice(0, 500),
-        enemyPatterns: parsed.enemyPatterns.slice(0, 4).map((p: string) => p.slice(0, 200)),
-        nextRoundPlan: parsed.nextRoundPlan.slice(0, 500),
+        deathAnalysis: cleanCoachText(parsed.deathAnalysis, lc).slice(0, 500),
+        enemyPatterns: parsed.enemyPatterns.slice(0, 4).map((p: string) => cleanCoachText(String(p), lc).slice(0, 200)),
+        nextRoundPlan: cleanCoachText(parsed.nextRoundPlan, lc).slice(0, 500),
       };
 
       // Field-level quality gate
@@ -578,11 +583,16 @@ Sadece düzeltilmiş metni döndür.`;
             const rLower = (repaired || "").toLowerCase();
             const posWords = ["a short", "a long", "a main", "b short", "b long", "b main", "mid", "heaven", "hell", "market", "garage", "hookah", "catwalk", "cubby", "elbow", "lobby"];
             const hasPosition = posWords.some(p => rLower.includes(p));
-            const hasEnemy = ["düşman", "enemy", "rakip", "açı tut", "pre-aim", "exploit", "okuy", "bekliy"].some(k => rLower.includes(k));
+            // Cycle 2 fix #9: 'pre-aim' removed from the allow-list — it's a
+            // BANNED phrase, so treating it as "improved" passed raw banned text
+            // through. Replaced with banned-free synonyms.
+            const hasEnemy = ["düşman", "enemy", "rakip", "açı tut", "tutuyordu", "önceden", "okuy", "bekliy"].some(k => rLower.includes(k));
             if (repaired && repaired.length > 30 && (hasPosition || hasEnemy)) {
-              if (fs.weakest === "deathAnalysis") result.deathAnalysis = repaired.slice(0, 500);
-              else if (fs.weakest === "nextRoundPlan") result.nextRoundPlan = repaired.slice(0, 500);
-              else result.enemyPatterns = [repaired.slice(0, 200), ...result.enemyPatterns.slice(1)];
+              // Cycle 2 fix #6: clean the repaired text before assigning (same net).
+              const repairedClean = cleanCoachText(repaired, lc);
+              if (fs.weakest === "deathAnalysis") result.deathAnalysis = repairedClean.slice(0, 500);
+              else if (fs.weakest === "nextRoundPlan") result.nextRoundPlan = repairedClean.slice(0, 500);
+              else result.enemyPatterns = [repairedClean.slice(0, 200), ...result.enemyPatterns.slice(1)];
               console.log(`[Aimlo AI] Feedback field repaired: ${fs.weakest}`);
             }
           }
