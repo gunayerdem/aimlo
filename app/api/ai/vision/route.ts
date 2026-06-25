@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAuthAndRateLimit } from "@/lib/api-auth";
 import { saveAiUsage } from "@/lib/ai-usage";
+import { saveMatchEvent } from "@/lib/match-events";
 import { realityCheck } from "@/lib/reality-checker";
 import { loadVisionKnowledge } from "@/lib/knowledge-loader";
 import { sanitizePromptInput } from "@/lib/prompt-safety";
@@ -1033,6 +1034,19 @@ export async function POST(request: NextRequest) {
     console.log(`[CACHE ${cacheStatus}] cached=${cachedTokens} fresh=${freshTokens} total_in=${promptTokens} hit_ratio=${cacheRatio}% output=${completionTokens} finish=${finishReason}`);
     // Persist usage for the admin /cost panel (non-blocking, fail-safe).
     saveAiUsage({ userId: auth.userId, routeType: "vision", model: data?.model ?? "gpt-5-mini", promptTokens, completionTokens, cachedTokens });
+    // Live match feed (admin /live): one row per death — piggybacks this vision call,
+    // zero extra AI cost, non-blocking + fail-safe.
+    saveMatchEvent({
+      userId: auth.userId,
+      matchId: (body as VisionRequest).matchId ?? null,
+      kind: "death",
+      map: reqMap ?? null,
+      agent: reqAgent ?? null,
+      side: (body as VisionRequest).side ?? null,
+      roundNo: (body as VisionRequest).round ?? null,
+      score: (body as VisionRequest).score ?? null,
+      deathLoc: (body as VisionRequest).deathLocation ?? null,
+    });
 
     const text: string = data?.choices?.[0]?.message?.content || "";
     if (!text) {
