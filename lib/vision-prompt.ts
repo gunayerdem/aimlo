@@ -95,6 +95,10 @@ DÜŞMAN EKONOMİSİ / SİLAHI (killerInfo veya enemyRoster'da silah/ekonomi ipu
 - Düşmanda operator varsa: utility'siz (dry) açı tutma/peek atma — smoke veya flash ile kör et, ya da operator'ın tutmadığı kısa açıdan git. "eco'da operator'lı düşmana utility'siz peek atma."
 - Bu çıkarımı SADECE round context'inde silah/ekonomi verisi varsa yap. Veri yoksa düşman ekonomisi hakkında TAHMİN YÜRÜTME — uydurma yasak.
 
+KİLLER (öldüren) — ANTI-UYDURMA:
+- killerInfo VARSA: o ajan + silah deathAnalysis'te geçmeli.
+- killerInfo YOKSA: seni hangi DÜŞMANIN öldürdüğünü BİLMİYORSUN. enemyComp'taki bir ajanı seçip "Cypher seni kesti / Jett vurdu" diye İSİM verme — bu uydurma. Bunun yerine ölüm yerine + açıya odaklan ("A Main'de sağ açıdan vuruldun") veya "bir düşman" de. enemyComp'u sadece GENEL counter için kullan ("rosterlarında Cypher var, tuzaklara dikkat"), kesin katil olarak DEĞİL.
+
 GİRİŞ YOLU / ROTA — KRİTİK ANTI-UYDURMA KURALI:
 - deathLocation = ÖLDÜĞÜN YER. Oraya NEREDEN geldiğin / hangi yoldan gittiğin DEĞİL. İkisini KARIŞTIRMA.
 - playerRoute VARSA: bu senin GERÇEK, ölçülmüş rotandır — feedback'i buna bağla. routeConfidence="low" ise temkinli söyle ("görünüşe göre mid üstünden gittin"); "high" ise net söyle.
@@ -245,6 +249,14 @@ KÖTÜ KARŞI-ÖRNEK (ASLA böyle yazma — muğlak + generic + tarzanca):
   "nextRoundSuggestion": "daha iyi oyna ve takımınla koordine ol"
 }
 Neden kötü: callout yok, ajan yok, silah yok, "genelde/biraz" muğlak, "dikkatli ol/daha iyi oyna" generic. Senin çıktın HER ZAMAN Senaryo A/B gibi spesifik olmalı.
+
+KÖTÜ KARŞI-ÖRNEK 2 (ASLA böyle yazma — AŞIRI MİKRO-YÖNETİM, koordinat-seviye komut):
+{
+  "deathAnalysis": "Killjoy olarak botunu A Site'ın tam ortasına, defuse hattının 2 metre soluna koymalıydın",
+  "enemyAnalysis": ["Reyna soldan geldi", "molly'ni defuse noktasının sağ üst köşesine, spike'ın 1 metre ilerisine sakla"],
+  "nextRoundSuggestion": "tuzağını A Main'in tam girişine, yerden 1.5 metre yükseğe kur ve smoke'unu Heaven'ın sol çeyreğine at"
+}
+Neden kötü: "tam ortasına / 2 metre soluna / sağ üst köşesine / 1.5 metre yükseğe / sol çeyreğine" = koordinat-seviye mikro-yönetim. Oyuncu sahada bunu uygulayamaz. SİTE/açı düzeyinde kal: "botu sol hattı izleyecek şekilde koy", "molly'yi defuse'u geciktirecek yere at" — util'i NEREYE atacağını metreyle/yön-çeyreğiyle TARİF ETME.
 
 ÇIKTI — SADECE JSON (markdown yok, code block yok)
 

@@ -161,6 +161,12 @@ const TR_JARGON: [RegExp, string][] = [
   // tümden yut (sightline İngilizce, boşluğa kadar güvenle tüketilir).
   [/\bsightline\S*/gi, "görüş hattı"],                     // S9: "sightline'ını" → "görüş hattı"
   [/\bwall(?![a-zçğıöşü])\S*/gi, "duvar"],                 // S9: Viper/Sage "wall('ı)" → "duvar"
+  // C5: minor İngilizce sızıntılar ("contest et-" — vokal-uyumlu açık formlar)
+  [/\bcontest\s+etmeden\b/gi, "zorlamadan"],
+  [/\bcontest\s+etme\b/gi, "zorlama"],
+  [/\bcontest\s+ediyor\b/gi, "zorluyor"],
+  [/\bcontest\s+et\b/gi, "zorla"],
+  [/\bsingle[- ]?entry\b/gi, "tek başına giriş"],          // "single-entry" → "tek başına giriş"
   [/\bcezaland[ıi]r[ıi]ls[ıi]n\b/gi, "bedavaya ölsün"],    // S6: pasif "cezalandırılsın"
   [/\bcezaland[ıi]r[ıi]l[ıi]r\b/gi, "bedavaya ölür"],      // pasif "cezalandırılır"
   // bare "wide" (jargon) → "geniş" — EN SONDA, "wide swing/peek" spesifikleri zaten çevirdiyse boşa düşer

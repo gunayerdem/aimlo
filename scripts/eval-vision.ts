@@ -206,6 +206,96 @@ const SCENARIOS: Scenario[] = [
       "En çok öldüğün yerler: B Link (18 kez), A Main (11 kez). En zayıf harita: Pearl (%38 winrate). " +
       "En iyi ajan: Fade. Tespit edilen eğilim: savunmada açıyı çok geniş tutuyorsun.",
   },
+  // ── Cycle 5 genişletme: daha çok ajan + restore haritalar + edge case ──
+  {
+    id: "S11-fracture-breach-atk",
+    note: "Fracture (restore) / Breach / SALDIRI / initiator + full data",
+    body: {
+      round: 9, score: "4-4", result: "loss", map: "Fracture", agent: "Breach", rank: "silver",
+      side: "attack", mode: "competitive", enemyComp: ["Cypher", "Viper", "Jett", "Killjoy", "Astra"],
+      died: true, killerInfo: "killed by killjoy with vandal", deathLocation: "A Hall", deathAngle: "front",
+      healthAtDeath: 100, alliesAlive: 3, enemiesAlive: 4, economyType: "full_buy", loadout: "vandal",
+      roundHistory: Array.from({ length: 8 }, (_, i) => ({ round_index: i + 1, died: i % 2 === 0, round_won: i % 2 === 1, death_detected_confidence: "observed", timestamp: i })),
+    },
+  },
+  {
+    id: "S12-corrode-gekko-def",
+    note: "Corrode (yeni harita) / Gekko / SAVUNMA / initiator",
+    body: {
+      round: 6, score: "3-2", result: "loss", map: "Corrode", agent: "Gekko", rank: "silver",
+      side: "defense", mode: "competitive", enemyComp: ["Raze", "Sova", "Omen", "Sage", "Chamber"],
+      died: true, killerInfo: "killed by raze with vandal", deathLocation: "B Site", deathAngle: "right",
+      healthAtDeath: 60, alliesAlive: 3, enemiesAlive: 5, economyType: "full_buy", loadout: "phantom",
+      roundHistory: Array.from({ length: 5 }, (_, i) => ({ round_index: i + 1, died: i % 2 === 0, round_won: i % 2 === 1, death_detected_confidence: "observed", timestamp: i })),
+    },
+  },
+  {
+    id: "S13-icebox-harbor-atk",
+    note: "Icebox (restore) / Harbor / SALDIRI / controller — KB grounding retest",
+    body: {
+      round: 11, score: "6-5", result: "loss", map: "Icebox", agent: "Harbor", rank: "silver",
+      side: "attack", mode: "competitive", enemyComp: ["Sage", "Viper", "Jett", "Sova", "Killjoy"],
+      died: true, killerInfo: "killed by sage with operator", deathLocation: "Mid", deathAngle: "front-left",
+      healthAtDeath: 100, alliesAlive: 2, enemiesAlive: 3, economyType: "full_buy", loadout: "vandal",
+      roundHistory: Array.from({ length: 10 }, (_, i) => ({ round_index: i + 1, died: i % 3 === 0, round_won: i % 2 === 0, death_detected_confidence: "observed", timestamp: i })),
+    },
+  },
+  {
+    id: "S14-bind-yoru-atk-nokiller",
+    note: "Bind / Yoru / SALDIRI / EDGE: killerInfo YOK (öldü ama kimden belli değil) — uydurma kontrolü",
+    body: {
+      round: 7, score: "3-4", result: "loss", map: "Bind", agent: "Yoru", rank: "silver",
+      side: "attack", mode: "competitive", enemyComp: ["Cypher", "Viper", "Raze", "Skye", "Brimstone"],
+      died: true, deathLocation: "Hookah", healthAtDeath: 100, alliesAlive: 2, enemiesAlive: 3,
+      economyType: "full_buy", loadout: "vandal",
+      roundHistory: Array.from({ length: 6 }, (_, i) => ({ round_index: i + 1, died: i % 2 === 1, round_won: i % 2 === 0, death_detected_confidence: "observed", timestamp: i })),
+    },
+  },
+  {
+    id: "S15-ascent-iso-def-unknowncomp",
+    note: "Ascent / Iso / SAVUNMA / EDGE: unknownEnemyComp (düşman roster YOK) — uydurma kontrolü",
+    body: {
+      round: 4, score: "2-1", result: "loss", map: "Ascent", agent: "Iso", rank: "silver",
+      side: "defense", mode: "competitive", enemyComp: [], unknownEnemyComp: true,
+      died: true, killerInfo: "killed by unknown with phantom", deathLocation: "A Main", deathAngle: "right",
+      healthAtDeath: 80, alliesAlive: 3, enemiesAlive: 4, economyType: "full_buy", loadout: "phantom",
+      roundHistory: Array.from({ length: 3 }, (_, i) => ({ round_index: i + 1, died: i % 2 === 0, round_won: i % 2 === 1, death_detected_confidence: "observed", timestamp: i })),
+    },
+  },
+  {
+    id: "S16-sunset-deadlock-def-ult",
+    note: "Sunset / Deadlock / SAVUNMA / sentinel + ultReady + spikePlanted (retake)",
+    body: {
+      round: 16, score: "9-6", result: "loss", map: "Sunset", agent: "Deadlock", rank: "silver",
+      side: "defense", mode: "competitive", enemyComp: ["Jett", "Sova", "Omen", "Breach", "Reyna"],
+      died: true, killerInfo: "killed by jett with vandal", deathLocation: "B Site", deathAngle: "left",
+      healthAtDeath: 40, alliesAlive: 1, enemiesAlive: 2, spikePlanted: true, ultReady: true,
+      economyType: "full_buy", loadout: "vandal",
+      roundHistory: Array.from({ length: 15 }, (_, i) => ({ round_index: i + 1, died: i % 3 === 0, round_won: i % 2 === 0, death_detected_confidence: "observed", timestamp: i })),
+    },
+  },
+  {
+    id: "S17-lotus-astra-atk-eco",
+    note: "Lotus / Astra / SALDIRI / controller + eco (save kararı)",
+    body: {
+      round: 5, score: "2-3", result: "loss", map: "Lotus", agent: "Astra", rank: "silver",
+      side: "attack", mode: "competitive", enemyComp: ["Chamber", "Killjoy", "Viper", "Skye", "Fade"],
+      died: true, killerInfo: "killed by killjoy with sheriff", deathLocation: "A Main", deathAngle: "right",
+      healthAtDeath: 30, alliesAlive: 1, enemiesAlive: 3, economyType: "eco", credits: 1200, loadout: "classic",
+      roundHistory: Array.from({ length: 4 }, (_, i) => ({ round_index: i + 1, died: true, round_won: false, death_detected_confidence: "observed", timestamp: i })),
+    },
+  },
+  {
+    id: "S18-haven-phoenix-def-r2",
+    note: "Haven / Phoenix / SAVUNMA / duelist-on-defense + düşük confidence (R2)",
+    body: {
+      round: 2, score: "1-0", result: "win", map: "Haven", agent: "Phoenix", rank: "silver",
+      side: "defense", mode: "competitive", enemyComp: ["Sova", "Cypher", "Jett", "Omen", "Sage"],
+      died: true, killerInfo: "killed by sova with guardian", deathLocation: "C Long", deathAngle: "front",
+      healthAtDeath: 100, alliesAlive: 4, enemiesAlive: 4, economyType: "full_buy", loadout: "vandal",
+      roundHistory: [{ round_index: 1, died: false, round_won: true, death_detected_confidence: "observed", timestamp: 0 }],
+    },
+  },
 ];
 
 // ── confidence derivation (route 725-730) ──
