@@ -195,6 +195,13 @@ export const OUTPUT_FOCUS_RULE = `\nODAK KURALI:
 - Öncelik: tekrar eden pattern > net hata > tek gözlem`;
 
 // ═══════════════════════════════════════════════════════════
+// VAGUE BAN — muğlak nicelik/sıklık belirteci yasağı + somut anchor zorunlu
+// ═══════════════════════════════════════════════════════════
+
+export const VAGUE_BAN_RULE = `
+MUĞLAK DİL YASAĞI: Belirsiz nicelik/sıklık belirteci YASAK — 'biraz', 'genelde', 'genel olarak', 'bazen', 'galiba', 'sanırım', 'şöyle böyle', 'bir şekilde', 'çoğunlukla', 'kabaca', 'aşağı yukarı'. (İstisna: gerçek veri-azlığı için confidence-hedge — 'görünüyor ki', 'muhtemelen', 'erken verilere göre' — SADECE veri azsa serbest.) Her cümle KESİN bir callout (A Short) + ajan (Cypher) + silah/util (operator/smoke) taşımalı. Anchor'sız/muğlak cümle = RED BAYRAĞI, yeniden yaz. Örn YANLIŞ: 'genelde biraz erken peek atıyorsun, dikkatli ol'. DOĞRU: 'B Main'i smoke atmadan peek atma — Cypher Heaven'dan operator tutuyor.'`;
+
+// ═══════════════════════════════════════════════════════════
 // DECISION SCORE RUBRIC — anchored scoring
 // ═══════════════════════════════════════════════════════════
 
@@ -242,6 +249,7 @@ export function buildPolicyBlock(options: {
   parts.push(EVIDENCE_POLICY);
   parts.push(options.includeEnemyGate !== false ? ENEMY_ANALYSIS_GATE : "");
   parts.push(OUTPUT_FOCUS_RULE);
+  parts.push(VAGUE_BAN_RULE);
   parts.push(TONE_PROMPTS[options.tone || "strict"] || TONE_PROMPTS.strict);
   parts.push(CONFIDENCE_PROMPTS[options.confidence || "medium"] || CONFIDENCE_PROMPTS.medium);
   parts.push(PERSONALIZATION_RULE);

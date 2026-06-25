@@ -86,7 +86,7 @@ export const ABILITY_PLAIN_MAP: AbilityPlain[] = [
   { official: "Regrowth", tr: "heal", en: "heal" },
   { official: "Seekers", tr: "ult", en: "ult" },
   { official: "Recon Bolt", tr: "recon", en: "recon" },
-  { official: "Shock Bolt", tr: "hasar oku", en: "hasar oku" },
+  { official: "Shock Bolt", tr: "hasar oku", en: "shock bolt" },
   { official: "Owl Drone", tr: "drone", en: "drone" },
   { official: "Hunter's Fury", tr: "ult", en: "ult" },
   { official: "Stealth Drone", tr: "drone", en: "drone" },
@@ -112,7 +112,6 @@ export const ABILITY_PLAIN_MAP: AbilityPlain[] = [
   { official: "Slow Orb", tr: "yavaşlatma", en: "slow" },
   { official: "Healing Orb", tr: "heal", en: "heal" },
   { official: "Resurrection", tr: "diriltme", en: "res" },
-  { official: "Vyse", tr: "recon", en: "recon" },
   { official: "Arc Rose", tr: "flash", en: "flash" },
   { official: "Razorvine", tr: "diken", en: "thorns" },
   { official: "Steel Garden", tr: "ult", en: "ult" },
@@ -131,7 +130,13 @@ export function plainifyAbilities(text: string, lang: "tr" | "en"): string {
   let outText = text;
   for (const e of SORTED) {
     const term = lang === "tr" ? e.tr : e.en;
-    const re = new RegExp("\\b" + escapeRe(e.official) + "\\b(['’][a-zçğıöşü]+)?", "gi");
+    // Unicode-aware letter boundary (\p{L} + 'u' flag): JS \b breaks on Turkish
+    // letters, so an APOSTROPHELESS bitişik ek ("Boltu", "Boltuyla") slipped past
+    // the old \b boundary and leaked the codename. The suffix group's apostrophe
+    // is now OPTIONAL so the contiguous ek is captured too. isAscii(term) ⇒ keep
+    // term+suf (English jargon "recon" stays "recon"); else drop the ek and let
+    // fixTurkishApostrophe re-attach the correct Turkish suffix.
+    const re = new RegExp("(?<![\\p{L}])" + escapeRe(e.official) + "(['’]?[a-zçğıöşü]+)?(?![\\p{L}])", "giu");
     outText = outText.replace(re, (_m: string, suf?: string) => (suf && isAscii(term)) ? term + suf : term);
   }
   return outText;

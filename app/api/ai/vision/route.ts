@@ -8,6 +8,7 @@ import { sanitizePromptInput } from "@/lib/prompt-safety";
 import { loadPlayerMemory, buildMemoryContext } from "@/lib/player-memory";
 import { isUuidV4 } from "@/lib/uuid";
 import { plainifyAbilities, fixTurkishApostrophe } from "@/lib/ability-plain-map";
+import { buildPolicyBlock } from "@/lib/ai-policy";
 
 // ── Coach-voice OUTPUT cleaner (live-test 2026-06-19) ──────────────────────
 // gpt-5-mini still leaks English jargon, ability codenames, lowercase agent names
@@ -48,7 +49,65 @@ const TR_JARGON: [RegExp, string][] = [
   [/\bcounter\s*:/gi, "Karşılık:"],
   [/\bshift[- ]?walk\b/gi, "sessiz yürü"],
   [/\bdry\b/gi, "utility'siz"],                     // ai-policy line 99: dry→utility'siz
-  [/\bblade\b/gi, "bıçak"],                         // Raze ult codename — Silver rule
+
+  // ── Post-audit Tarzanca net (council 2026-06-25) ────────────────────────
+  // Deterministic last-line defense for jargon the model still leaks in TR
+  // output: pre-aim / head+TR-verb / peek-hold "yap-ed-" / "X çekiyor" utility /
+  // slang / "cezalandır-". Convention: JS \b breaks on Turkish letters, so use
+  // the negative-lookahead boundary (?![a-zçğıöşü]). ORDER MATTERS — specific
+  // patterns FIRST, catch-all / head / pre-aim backstops LAST.
+  //
+  // pre-aim (SYSTEM_PROMPT yasak listesi)
+  [/\bhead pre[- ]?aim['’]?l[ae]\s*(vurdu|kesti)/gi, "açıyı önceden tutup kafadan $1"],
+  [/\bpre[- ]?aim['’]?l[ae]\s*(vurdu|kesti|aldı)/gi, "açıyı önceden tutup $1"],
+  [/\bpre[- ]?aim (ediyordu|çekiyordu)(?![a-zçğıöşü])/gi, "açıyı önceden tutuyordu"],
+  [/\bpre[- ]?aim (ediyor|çekiyor|yapıyor)(?![a-zçğıöşü])/gi, "açıyı önceden tutuyor"],
+  [/\bpre[- ]?aim (etti|çekti|yaptı)(?![a-zçğıöşü])/gi, "açıyı önceden tuttu"],
+  [/\bpre[- ]?aim (eder|çeker|yapar)(?![a-zçğıöşü])/gi, "açıyı önceden tutar"],
+  // head + TR fiil (SYSTEM_PROMPT yasak listesi)
+  [/\bhead at[ıi]yordu(?![a-zçğıöşü])/gi, "kafadan vuruyordu"],
+  [/\bhead at[ıi]yor(lar|sun)?(?![a-zçğıöşü])/gi, "kafadan vuruyor$1"],
+  [/\bhead att[ıi]n(?![a-zçğıöşü])/gi, "kafadan vurdun"],
+  [/\bhead att[ıi](?![a-zçğıöşün])/gi, "kafadan vurdu"],
+  [/\bhead at[ıi]yor(?![a-zçğıöşü])/gi, "kafadan vuruyor"],
+  [/\bhead bulu?yor(du)?(?![a-zçğıöşü])/gi, "kafadan vuruyor"],
+  [/\bhead buldu(?![a-zçğıöşü])/gi, "kafadan vurdu"],
+  [/\bhead aç[ıi]s[ıi]n[ıi] tut([a-zçğıöşü]*)/gi, "açıyı tut$1"],
+  // peek / hold "yap-ed-"
+  [/\bpeek yap([a-zçğıöşü]*)/gi, "peek at$1"],
+  [/\bpeek ediyor(?![a-zçğıöşü])/gi, "peek atıyor"],
+  [/\bpeek etti(?![a-zçğıöşü])/gi, "peek attı"],
+  // "hold yap-/ed-" → "tut-" (object comes from context — NO "açıyı" prefix, else
+  // "açıyı hold ediyor" → "açıyı açıyı tutuyor" duplication).
+  [/\bhold yap[ıi]yor(?![a-zçğıöşü])/gi, "tutuyor"],
+  [/\bhold yapt[ıi]n(?![a-zçğıöşü])/gi, "tuttun"],
+  [/\bhold ediyor(?![a-zçğıöşü])/gi, "tutuyor"],
+  [/\bhold (yap|ed)[a-zçğıöşü]*/gi, "tut"],
+  // X çekiyor → X atıyor (utility). EXPLICIT conjugations (vowel harmony: çek→at,
+  // "çekiyor"→"atıyor" not "atiyor"). Specific suffixes first, bare root last.
+  [/\b(stun|flash|molly|smoke|util|utility)\s*['’]?\s*çek[ıi]yor(lar|sun|sunuz)?(?![a-zçğıöşü])/gi, "$1 atıyor$2"],
+  [/\b(stun|flash|molly|smoke|util|utility)\s*['’]?\s*çekti(n|niz)?(?![a-zçğıöşü])/gi, "$1 attı$2"],
+  [/\b(stun|flash|molly|smoke|util|utility)\s*['’]?\s*çekmeden(?![a-zçğıöşü])/gi, "$1 atmadan"],
+  [/\b(stun|flash|molly|smoke|util|utility)\s*['’]?\s*çekme(?![a-zçğıöşü])/gi, "$1 atma"],
+  [/\b(stun|flash|molly|smoke|util|utility)\s*['’]?\s*çekecek(?![a-zçğıöşü])/gi, "$1 atacak"],
+  [/\b(stun|flash|molly|smoke|util|utility)\s*['’]?\s*çeker(?![a-zçğıöşü])/gi, "$1 atar"],
+  [/\b(stun|flash|molly|smoke|util|utility)\s*['’]?\s*çek(?![a-zçğıöşü])/gi, "$1 at"],
+  [/\bult çek[ıi]yor(?![a-zçğıöşü])/gi, "ult kullanıyor"],
+  [/\bult çekti(?![a-zçğıöşü])/gi, "ult kullandı"],
+  [/\bult bast[ıi](?![a-zçğıöşü])/gi, "ult kullandı"],
+  // slang
+  [/\bwide\s+swing\b/gi, "geniş açıyla peek"],
+  [/\bop var\b/gi, "operator'la bekliyor"],
+  [/\btrip(?!wire)\b/gi, "tuzak"],
+  [/\bpick al([ıi]yor|d[ıi]n?|[ıi]r)(?![a-zçğıöşü])/gi, "kill al$1"],
+  // cezalandır- (ai-policy NATURAL_COACH_RULE: "cezalandırıyor/cezalandırdı/cezalandıracak" yasak)
+  [/\bcezaland[ıi]r[ıi]l[ıi]yorsun(?![a-zçğıöşü])/gi, "aynı açıdan bedavaya öldürülüyorsun"],
+  [/\bcezaland[ıi]r[ıi]yor(du|lar)?(?![a-zçğıöşü])/gi, "bedavaya kill alıyor$1"],
+  [/\bcezaland[ıi]rd[ıi](?![a-zçğıöşün])/gi, "bedavaya kill aldı"],
+  [/\bcezaland[ıi]racak(?![a-zçğıöşü])/gi, "oradan kafadan vuracak"],
+  // CATCH-ALL backstops (head/pre-aim) — EN SONDA, spesifikler tüketmediyse devreye girer
+  [/\bhead pre[- ]?aim\b/gi, "açıyı önceden tutarak"],
+  [/\bpre[- ]?aim\b/gi, "açıyı önceden tutuyor"],
 ];
 
 const CLEAN_AGENT_NAMES = ["Jett","Raze","Phoenix","Reyna","Yoru","Neon","Iso","Waylay","Sage","Killjoy","Cypher","Chamber","Deadlock","Vyse","Omen","Brimstone","Viper","Astra","Harbor","Clove","Sova","Breach","Skye","Fade","Gekko","Tejo","Veto"];
@@ -103,18 +162,18 @@ const ROUND_FEEDBACK_SCHEMA = {
     properties: {
       deathAnalysis: {
         type: "string",
-        description: "1-2 sentence Turkish/English: hata + sebep + kısa düzeltme. callout + ajan + silah.",
+        description: "1-2 cümle Türkçe koç sesi. ZORUNLU: ölüm callout'u + killer ajan + silah/utility + 1 somut düzeltme. Muğlak kelime (genelde/biraz/şöyle böyle) YASAK. Örn: 'B Main'den geniş açıyla peek attın, Cypher seni Heaven'dan operator'la kesti — smoke atmadan o köşeyi sallama.'",
       },
       enemyAnalysis: {
         type: "array",
-        description: "Exactly 2 items, 1 sentence each.",
+        description: "Tam 2 madde, her biri 1 cümle. Madde 1 = düşmanın bu round'daki SOMUT setup/util/pozisyonu (callout+ajan içermeli). Madde 2 = pratik counter (somut eylem). Generic gözlem YASAK. Örn: ['Cypher tuzaklarını B Main girişine dizdi','A'dan default açılın, B'yi tek başına zorlamayın'].",
         items: { type: "string" },
         minItems: 2,
         maxItems: 2,
       },
       nextRoundSuggestion: {
         type: "string",
-        description: "1-2 sentence simple working tactic.",
+        description: "1-2 cümle: hangi SİTE + neden mantıklı + kısa nasıl. 'simple' deme — somut taktik. Mikro-detay (smoke koordinatı/dash zamanı) yok. Örn: 'Bu round B'yi bırak, takımca A'dan default girin — Cypher util'ini B'ye attı, rotate edip A'yı tutamaz.'",
       },
     },
   },
@@ -298,6 +357,36 @@ traps are pinned to B Main entry."
 Fark: koç hatayı net söyler + KISA bir nasıl-düzeltirsin ekler. AI gibi adım
 adım açıklama yapmaz.
 
+ÖRNEK SENARYOLAR — 3 ALAN + CONFIDENCE (kelime-kelime KOPYALAMA; kalıbı öğren, kendi round'una uyarla):
+
+SENARYO A — Ascent, Cypher, SAVUNMA, güçlü veri (net pattern):
+{
+  "deathAnalysis": "B Main'i tek başına geniş açıyla tuttun, düşman Jett mid'den gelip seni arkadan kafadan vurdu — savunmada o açıyı crossfire'sız tutma, Market'e doğru off-angle al ki tek taraftan yenmeyesin.",
+  "enemyAnalysis": [
+    "Jett mid'i dash'le hızlı aldı ve B Main'in arkasına sarktı, sen ön açıya bakarken yan taraftan girdi.",
+    "B Main'i tek tutma — Market penceresine bir takım arkadaşı koy, mid'den geleni birlikte trade'leyin."
+  ],
+  "nextRoundSuggestion": "Bu round B'yi yalnız tutma, mid'e erken bir smoke at ve Market'ten crossfire kur — Jett mid kontrolü almadan B'ye sarkamaz."
+}
+
+SENARYO B — Bind, Sage, SALDIRI, R1 / az veri (pattern YOK, hedge dili DOĞRU ama yine SPESİFİK):
+{
+  "deathAnalysis": "İlk round, henüz pattern yok ama A Showers'a utility'siz girdin, savunan düşman A Main'den seni açık alanda yakaladı — duvar atmadan o boşluğu geçme.",
+  "enemyAnalysis": [
+    "Düşman A Main açısını tutuyor görünüyor, sen Showers'tan çıkınca açık hedef oldun.",
+    "Showers'ı tek başına dry açma; Sage duvarını giriş açısına çapraz koy, sonra birlikte girin."
+  ],
+  "nextRoundSuggestion": "Bu round A'ya direkt yüklenme — Sage duvarını A Main'e çapraz at, flash'la birlikte execute girin, solo Showers peek'i bırak."
+}
+
+KÖTÜ KARŞI-ÖRNEK (ASLA böyle yazma — muğlak + generic + tarzanca):
+{
+  "deathAnalysis": "genelde biraz erken peek atıyorsun, dikkatli ol ve pozisyonunu kontrol et",
+  "enemyAnalysis": ["düşman iyi oynadı", "daha dikkatli ol"],
+  "nextRoundSuggestion": "daha iyi oyna ve takımınla koordine ol"
+}
+Neden kötü: callout yok, ajan yok, silah yok, "genelde/biraz" muğlak, "dikkatli ol/daha iyi oyna" generic. Senin çıktın HER ZAMAN Senaryo A/B gibi spesifik olmalı.
+
 ÇIKTI — SADECE JSON (markdown yok, code block yok)
 
 3 alan yaz:
@@ -315,7 +404,9 @@ KURAL:
 - enemyAnalysis 2 madde × 1 cümle.
 - deathAnalysis ve nextRoundSuggestion 1-2 cümle, en fazla.
 - Generic değil, detaylı ama akıcı.
-- coachInsight field'ı YAZMA — yok.`;
+- coachInsight field'ı YAZMA — yok.
+
+NOT: Bu route'ta alan başına EN FAZLA 1-2 cümle — aşağıdaki politikada geçen "Max 4 cümle" üst sınırdır, bu route için geçerli sınır 1-2 cümledir.`;
 
 const USER_PROMPT = `Valorant round sonu. Aşağıdaki OCR/CLIENT pixel truth — screenshot'tan güvenilir.
 
@@ -722,7 +813,30 @@ export async function POST(request: NextRequest) {
     // same agent but different map, blocks 1+2 still cache-hit (cached at 90%
     // discount = $0.025/M instead of $0.25/M). Blocks 3+4 rewrite as fresh input.
     // Cache lifetime ~5 minutes for first-tier, ~1h for high-volume keys.
-    const systemSections: string[] = [SYSTEM_PROMPT];
+    //
+    // Single-source coach policy (ai-policy.buildPolicyBlock): the inline
+    // SYSTEM_PROMPT alone never reached ai-policy's BANNED_PHRASES / vague-ban /
+    // natural-coach / Silver rules. Inject them right after SYSTEM_PROMPT so the
+    // stable prefix carries them (cache-friendly). includeDecisionRubric:false is
+    // MANDATORY — vision has no decision score. Confidence is derived from how
+    // much round history the desktop sent (calibrating→high) so the coach hedges
+    // language when data is thin.
+    const _rh = (body as VisionRequest).roundHistory;
+    const visionConfidence = (!_rh || !_rh.length)
+      ? "calibrating"
+      : _rh.length < 4 ? "low"
+      : _rh.length < 8 ? "medium"
+      : "high";
+    const systemSections: string[] = [
+      SYSTEM_PROMPT,
+      buildPolicyBlock({
+        confidence: visionConfidence,
+        tone: "strict",
+        lang: "tr",
+        includeEnemyGate: true,
+        includeDecisionRubric: false,
+      }),
+    ];
     if (kb.blocks.agent)      systemSections.push(kb.blocks.agent);
     if (kb.blocks.map)        systemSections.push(kb.blocks.map);
     if (kb.blocks.contextual) systemSections.push(kb.blocks.contextual);
@@ -962,7 +1076,7 @@ export async function POST(request: NextRequest) {
         const isNewArea = lastPos && prevPositions.length > 0 && !prevPositions.includes(lastPos);
 
         if (consecutiveCount >= 3) {
-          deathZoneNote = `\nDeath zone pattern (GÜÇLÜ): ${consecutivePos} bölgesinde ${consecutiveCount} round art arda öldün — bu bölgede tekrar cezalandırılıyorsun.`;
+          deathZoneNote = `\nDeath zone pattern (GÜÇLÜ): ${consecutivePos} bölgesinde ${consecutiveCount} round art arda öldün — bu açıdan tekrar tekrar bedavaya öldürülüyorsun.`;
         } else if (consecutiveCount >= 2) {
           deathZoneNote = `\nDeath zone pattern: ${consecutivePos} bölgesinde art arda ölüm — bu bölge sorun oluşturuyor olabilir.`;
         } else if (isNewArea) {

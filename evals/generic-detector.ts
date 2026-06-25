@@ -359,11 +359,45 @@ export function checkOutputQuality(
   }
 
   // --- Vague verb / fake specificity detection ---
-  const VAGUE_PATTERNS = ["geliştir", "improve", "adjust", "iyileştir", "düzelt", "farklı dene", "daha iyi", "try different", "be better"];
+  // NOTE: "biraz daha" is added (vague comparative), but bare "biraz" is NOT —
+  // it false-positives in legitimate concrete sentences.
+  const VAGUE_PATTERNS = [
+    "geliştir", "improve", "adjust", "iyileştir", "düzelt", "farklı dene",
+    "daha iyi", "try different", "be better",
+    "genelde", "genel olarak", "biraz daha", "şöyle böyle", "galiba",
+    "sanırım", "bir şekilde", "aşağı yukarı", "kabaca", "çoğunlukla",
+  ];
   const vagueCount = VAGUE_PATTERNS.filter(p => allTextLower.includes(p)).length;
   if (vagueCount >= 1) {
     issues.push(`Vague verbs detected (${vagueCount})`);
     score -= 15 * vagueCount;
+  }
+
+  // --- Tarzanca (broken EN-noun+TR-verb jargon) detection ---
+  // Deterministic regression guard for the jargon the model still leaks and the
+  // TR_JARGON net should have scrubbed. Any hit = a real defect (-30 each).
+  const TARZANCA = [
+    "head atıyor", "head attı", "head buldu", "swing yapıyor", "swing yaptın",
+    "peek yapıyor", "hold ediyor", "hold yapıyor", "pre-aim",
+    "stun çekiyor", "flash çekiyor", "smoke çekiyor", "pick alıyor", "cezalandır",
+  ];
+  const tarzancaHits = TARZANCA.filter(p => allTextLower.includes(p));
+  if (tarzancaHits.length > 0) {
+    issues.push(`Tarzanca jargon detected: ${tarzancaHits.map(p => `"${p}"`).join(", ")}`);
+    score -= 30 * tarzancaHits.length;
+  }
+
+  // --- Silver-banned ability codename detection ---
+  // Reader is Silver/Gold — official ability codenames must be plainified
+  // (ability-plain-map). A leaked codename = a real defect (-30 each).
+  const SILVER_BANNED = [
+    "cloudburst", "curveball", "snake bite", "recon bolt", "owl drone",
+    "trapwire", "blade storm", "showstopper", "poison cloud", "toxic screen",
+  ];
+  const silverHits = SILVER_BANNED.filter(p => allTextLower.includes(p));
+  if (silverHits.length > 0) {
+    issues.push(`Silver-banned ability codename(s): ${silverHits.map(p => `"${p}"`).join(", ")}`);
+    score -= 30 * silverHits.length;
   }
 
   // --- Repeated template detection ---

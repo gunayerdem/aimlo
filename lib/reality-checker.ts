@@ -69,6 +69,12 @@ const POSITION_NAMES = [
   "lobby", "hookah", "lamps", "showers", "link",
   "sewers", "pizza", "wine", "tiles", "u-hall",
   "rafters", "pocket", "generator", "ct spawn",
+  // Lotus / Sunset / Abyss / Split callouts (council 2026-06-25 — extractClaims
+  // now recognizes positions on these maps too, so count/position checks run).
+  "a rubble", "a flower", "b elbow", "c side", "waterfall",
+  "mound", "c nest", "b yard", "b market", "mid alley",
+  "a yard", "b nest", "a nest", "a cliff", "mid platform",
+  "a drop", "ramen", "screen", "mail",
 ];
 
 const REPETITION_KEYWORDS = [
@@ -233,16 +239,26 @@ export function rewriteUnsafeClaims(
 
   if (validation.rewriteLevel === 3) {
     // No memory support — strip ALL historical and repetition claims.
-    // Detect language from the (already-mostly-cleaned) result so we
-    // pick a same-language replacement instead of leaving an English
-    // sentence with "bu round'da" Turkish stuffed in.
+    // Detect language from the (already-mostly-cleaned) result so the neutral
+    // fallback (used only if EVERY sentence gets dropped) matches the language.
     const isTr = /[şçğıöü]|round'da|maç|tur|round'lar/i.test(result);
-    const stripWith = isTr ? "bu round'da" : "this round";
 
-    for (const keyword of REPETITION_KEYWORDS) {
-      if (result.toLowerCase().includes(keyword)) {
-        result = result.replace(new RegExp(keyword, "gi"), stripWith);
-      }
+    // DROP the ENTIRE sentence that carries an unproven repetition claim,
+    // instead of the old in-place keyword→"bu round'da" substitution which
+    // produced broken Turkish like "Bu bu round'da eden hata". Split on
+    // sentence boundaries, keep only sentences with NO repetition keyword.
+    const sentences = result.split(/(?<=[.!?])\s+/);
+    const safe = sentences.filter(
+      (sent) => !REPETITION_KEYWORDS.some((k) => sent.toLowerCase().includes(k)),
+    );
+    result = safe.join(" ").trim();
+    if (!result) {
+      // Every sentence was an unproven repetition claim → neutral, language-
+      // matched fallback. NOT coach advice (no-fake: this is a safety strip,
+      // not synthesized coaching) — just a factual, non-overclaiming line.
+      result = isTr
+        ? "Bu round beklenen açıdan vuruldun."
+        : "You were caught at the expected angle this round.";
     }
 
     // Remove count claims entirely (TR + EN forms).
