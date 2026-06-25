@@ -8,7 +8,7 @@ Aimin var. Haritayı biliyorsun. Çoğu dövüşte ne yapman gerektiğini de bil
 
 ### Utility Zamanlaması
 
-Smoke'u çok erken atıyorsun — takım daha harekete geçmeden smoke bitiyor, giriş açılıyor. Flash'ı kimse swing atmaya hazır değilken kullanıyorsun. Molly'i reaktif atıyorsun, proaktif değil.
+Smoke'u çok erken atıyorsun — takım daha harekete geçmeden smoke bitiyor, giriş açılıyor. Flash'ı kimse swing atmaya hazır değilken kullanıyorsun. Molly'yi düşmanı görünce atıyorsun, oysa açıyı önceden kapatmak için atman lazım.
 
 - **IF** takım daha hareket etmeden smoke attıysan
 - **MEANING** smoke bittiğinde giriş açık kalıyor, düşman rahatça tepki veriyor
@@ -21,7 +21,7 @@ Solo peek atıp ölüyorsun ve kimse seni trade edemiyor. Trade'in ne olduğunu 
 
 - **IF** sürekli tek başına peek atıp desteksiz ölüyorsan
 - **MEANING** ölümün boşa gidiyor, takım sayı kaybediyor
-- **COUNTER** peek'ten önce yanındakiyle konuş: biri wide peek atsın, diğeri off-angle'da refrag için beklesin — aynı anda, koordineli
+- **COUNTER** peek'ten önce yanındakiyle konuş: biri geniş açıyla peek atsın, diğeri off-angle'da trade için hazır beklesin — aynı anda, koordineli
 - **WHY** her ölüm trade edilirse sayı avantajı korunur
 
 ### Site Anchoring
@@ -39,7 +39,7 @@ Solo peek atıp ölüyorsun ve kimse seni trade edemiyor. Trade'in ne olduğunu 
 
 - **IF** takım arkadaşınla aynı köşeyi yan yana tutuyorsanız
 - **MEANING** saldırgan tek hareketle ikinizi de temizliyor, crossfire avantajı sıfır
-- **COUNTER** biri klasik köşeyi tutsun, diğeri karşı taraftan ya da beklenmedik bir açıdan baksın — biri standart pozisyon, diğeri yüksek ya da alçak; vücut pozisyonlarınız örtüşmesin
+- **COUNTER** biri klasik köşeyi tutsun, diğeri yüksek ya da alçak bir açıdan baksın — aynı hizada durmayın ki tek peek'le ikinizi birden göremesin.
 - **WHY** saldırgan ikinizi aynı anda göremezse peek atmak çok daha riskli olur
 
 ### Anti-Read Oyunu

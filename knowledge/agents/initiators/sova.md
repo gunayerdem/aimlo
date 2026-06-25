@@ -6,16 +6,16 @@ Sova'nın silahı bilgi. Recon oku ve drone — üçü de her tur tekrar tekrar 
 ## 2. Temel Sorumluluklar
 - Ezberlediğin recon noktalarından dövüş başlamadan bilgi al
 - Girmeden önce drone'u sür — takım kör değil, gördüğü yere gitsin
-- İki recon okunu da spike kurulana kadar elinde tut
+- İki shock okunu (hasar oku) da spike kurulana kadar sakla — defuse'a oturan rakibi spike'ın üstünden vuran ok budur
 - Ult'i sadece gördüğün ya da az önce ortaya çıkardığın hedefe at
 - Her tur takıma somut bilgi ver: "B'de iki kişi, sol köşede" gibi
 
 ## 3. Sık Yapılan Hatalar
 - Bilmediğin noktaya recon atmak — dart havada vurulur, bilgi sıfır
 - Drone'u fazla uzun sürüp gövdenin başında ölmek
-- İki recon okunu da spike kurulmadan harcamak — defuse'u engelleme şansını kendin kapatıyorsun
+- İki shock okunu (hasar oku) spike kurulmadan harcamak — defuse'a oturanı vuran ok bu, erken atarsan post-plant kozunu kendin kapatırsın (recon oku konumu açar, hasar vermez)
 - Ult'i bilgisiz, körüne atmak
-- Sadece atak noktası ezberleyip savunma noktası bilmemek
+- Sadece saldırı noktası ezberleyip savunma noktası bilmemek
 - Savunmada recon'u rakip daha açılmadan, çok erken atmak
 - Bilgi aldıktan sonra takıma söylememek — recon'u tek başına izleyip değerini öldürmek
 - Recon'a o kadar güvenip silahla dövüşmeyi unutmak — Sova da bir tüfek taşır, körü körüne yetenek beklemekten ölme
@@ -54,7 +54,7 @@ Sova'nın silahı bilgi. Recon oku ve drone — üçü de her tur tekrar tekrar 
 
 **IF** hasar veren recon okunu (shock) köşe temizlemek ya da spike üstü yerine rastgele atıyorsun
 **MEANING** Garantili hasar/temizleme aracını tahmine harcıyorsun
-**COUNTER** Hasar recon okununı iki işe ayır: dar köşede saklanan rakibi açığa zorlamak ya da spike kurulduktan sonra defuse'a oturanı yerinden kaldırmak. Boş havaya değil, daralttığın açıya at.
+**COUNTER** Hasar okunu (shock) iki işe ayır: dar köşede saklanan rakibi açığa çıkar, ya da spike kurulduktan sonra defuse'a oturanı yerinden kaldır. Boş havaya değil, daralttığın açıya at.
 **WHY** Bu dart küçük bir alana yoğun hasar basar. Bilinen bir köşeye ya da spike üstüne atılınca rakibi ya kımıldatır ya yaralar — ikisi de senin lehine. Rastgele atılınca sadece sesten ibaret kalır.
 
 **IF** recon hep bir tur içinde aynı saniyede iniyor (özellikle savunmada erken)
@@ -68,7 +68,7 @@ Sova'nın silahı bilgi. Recon oku ve drone — üçü de her tur tekrar tekrar 
 - **Haven**: Üç site, üç kat nokta demek — A, B ve C için ayrı ayrı hazırlan. Uzun koridorlardan drone sür, rakibin yerini erkenden öğren. Üç bombsite'ın hangisinin boş olduğunu erken recon ile bul; rotasyon mesafeleri uzun, bilgiyi erken verirsen takım boş siteye basar.
 - **Bind**: Dar tavanlar bazı recon açılarını kısar — duvardan sekme noktalarına yığıl. Teleporter çıkışına dart at, rakip geçerken hasar yer. Burada ses kapan smoke yok; recon'un teleport rotasyonunu açığa çıkarmada en güçlü silahın, "biri ışınlandı" çağrısını hemen yap.
 - **Icebox**: A ve B site üst raflarına recon at — yukarıyı tutan savunmacı anında açığa çıkar. A site açık çatıdan gelen sekme noktaları aynı anda birden fazla rakibi tarar. Çok katmanlı, dikey bir harita; recon'u sadece zemini değil üst kademeleri de tarayacak açıdan at yoksa yarısı kör kalır.
-- **Lotus / Sunset / Pearl**: Bu haritalarda da kuralı taşı — site başına en az iki yükseklikten nokta, savunmada reaktif zamanlama, atak recon okununı giriş açısından çevrilmeden vurulamayan yere indir. Hangi harita olursa olsun mantık aynı: zor açıdaki dart ikilem yaratır, kolay açıdaki bayatlar.
+- **Lotus / Sunset / Pearl**: Bu haritalarda da kuralı taşı — site başına en az iki yükseklikten nokta, savunmada reaktif zamanlama, atakta recon okunu rakibin giriş açısından dönmeden vuramayacağı yere indir. Hangi harita olursa olsun mantık aynı: zor açıdaki dart ikilem yaratır, kolay açıdaki bayatlar.
 
 ## 6. Eşleşme Notları
 - **Omen'e karşı**: Recon, Omen'in ışınlandığı yeri açığa çıkarır. Drone, smoke'un içinden takip eder ve yerini doğrular.
@@ -79,7 +79,7 @@ Sova'nın silahı bilgi. Recon oku ve drone — üçü de her tur tekrar tekrar 
 ## 7. Oyuncuya Ne Söylenmeli
 
 ### İyi performans gösterirken
-**Oyuncu Eylemi:** Recon'ları savunmacının, giriş yolundan bakışını çevirmeden vuramayacağı tavan ve duvar noktalarına indiriyorsun. İki recon okunu da spike kurulana kadar elinde tutuyorsun.
+**Oyuncu Eylemi:** Recon'ları savunmacının, giriş yolundan bakışını çevirmeden vuramayacağı tavan ve duvar noktalarına indiriyorsun. İki shock okunu (hasar oku) spike kurulana kadar saklıyorsun — defuse'a oturanı spike'ın üstünden vuran ok bu.
 **Düşman Algısı:** Savunmacı recon'u görüyor ve kendini açmadan vurup vuramayacağını hesaplıyor. Dart, takımından daha acil bir tehdit gibi duruyor — bakışı yukarı kayıyor.
 **Düşman Tepkisi:** Ya dönüp recon okunu vuruyor ve giriş açısından kısa süreliğine kopuyor, ya da görmezden gelip pozisyonunu tüm takımına açık ediyor. İki seçenek de onun için kötü.
 **Faydalanma Penceresi:** Savunmacı dart'a bakarken takımına giriş penceresi açılıyor. Görmezden gelirse etiket, pozisyonu takımına önceden veriyor. Spike sonrası iki dart, ulaşamayacakları yerden defuse'u engelliyor.

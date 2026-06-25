@@ -7,13 +7,13 @@
 
 ## 2. Temel Sorumluluklar
 - **Atak:** İlk peek'i dash veya zıplamayla sen at. İlk düelloyu kazan. Takımın için tehlikeli görüş hattını smoke'la kapat. Tam alımda uzun açıyı Op'la tut.
-- **Defans:** Op veya tüfekle off-angle tut, kill aldıysan dash'le çekil. Zıplamayla rakibin beklemediği yükseklikten gel. Erken bilgi al, sonra geri çekil.
+- **Defans:** Op veya tüfekle beklenmedik bir açı tut, kill aldıysan dash'le çekil. Zıplamayla rakibin beklemediği yükseklikten gel. Erken bilgi al, sonra geri çekil.
 - **Takım senden ne bekliyor:** Atakta açılış kill'ini. Defansta agresif Op kill'ini. Lurk'ü değil, entry'yi.
 
 ## 3. Sık Yapılan Hatalar
 1. **Dash'i kaçmak için yakmak** — Dash'i entry için sakla. Kaçarken harcadıysan site execute'unda dash'siz kalırsın.
 2. **Zıplamadan sonra havada asılı kalmak** — Havada yavaş ve kolay hedefsin. Kısaca dokun, hemen in. Süzülme.
-3. **Hep aynı yerden dash atmak** — İki kez aynı noktadan çıktıysan üçüncüde seni preaim'liyorlar. Ya açıyı ya zamanı değiştir.
+3. **Hep aynı yerden dash atmak** — İki kez aynı noktadan çıktıysan üçüncüde o açıyı önceden tutup seni bekliyorlar. Ya açıyı ya zamanı değiştir.
 4. **Bıçakları sağ tıkla spam'lemek** — Orta mesafede sol tık daha güvenli. Sağ tık'ı yakın mesafeye sakla.
 5. **Smoke'u sadece kendine atmak** — Smoke'un kısa, onu takımın geçişine at. Kendini kapatmak için harcama.
 6. **Dash cooldown'dayken Op tutmak** — Dash hazır değilken Op açısı tutma. Iskaladığın anda ölürsün.
@@ -96,7 +96,7 @@ WHY: Smoke'un kısa süreli; erken attıysan tam geçişte zaten dağılmış ol
 "Kuru peek zorlama. Önce util'i gör, sonra dash at. Senin işin ilk kill, ilk ölüm değil."
 "Dash'i hemen koşmak için yakma. Önce sesle ve util'le düşmanı bul, sonra dash'i o açıyı kapatmak için kullan."
 ### Öngörülebilir olduğunda
-"Dash açını preaim'liyorlar. Yerini değiştir ya da bir an bekle, sonra çık."
+"Dash açını önceden nişanlıyorlar. Yerini değiştir ya da bir an bekle, sonra çık."
 "Hep aynı saniyede çıkıyorsun, ritmini okuyorlar. Bir round geciktirip peek'e dönenleri yakala."
 ### Op'u yanlış kullanırken
 "Op'u dar koridorda taşıma, orada yavaş kalırsın. Op'u uzun hatta tut; köşelerde tüfeğe geç."

@@ -104,7 +104,7 @@ Bir takım arkadaşını hedefleyip ateşliyorsun; hem sana hem ona stim/hız ve
 
 **IF** Defansta erken bilgi almak için solo öne çıkıp düşman kalabalığına yakalanıyorsun
 **MEANING** Controller olduğun hâlde duelist gibi entry açmaya çalışıyorsun
-**COUNTER** Controller'ın bilgisi yetenekten gelir, vücudundan değil. Geniş açıdan kısa peek at, açıyı tut, ölme. Erken ölürsen takım o turda smokesız kalır — bu, bir kill'den çok daha pahalı.
+**COUNTER** Controller bilgiyi yeteneğiyle toplar, kendini öne atarak değil. Geniş açıyla kısa peek at, açıyı tut, sağ kal. Erken ölürsen takım o turda smokesız kalır — bu, bir kill'den çok daha pahalı.
 **WHY** Sen öldüğünde takım hem bir oyuncu hem de tüm yetenek altyapısını kaybeder. Yaşayan bir controller, ölü bir controller'dan kat kat değerlidir; site savunması ve retake senin hayatta kalmana bağlı.
 
 **IF** Spike kurulduktan sonra defuse'u kollamak yerine kill kovalayıp öldün, spike patladı

@@ -143,7 +143,7 @@ WHY izole fight aradığında aynısını ona yapamazsın — sen toplu baskı u
 ### Metodolojik Op Duelist
 
 IF bu stile karşı oynuyorsan
-MEANING off-angle tutar, dry peek edersen açıyı sen aramak zorunda kalırsın
+MEANING off-angle tutar, utility'siz peek atarsan açıyı sen aramak zorunda kalırsın
 COUNTER Op açısına drone ya da tarama at, sonra flash at — bilgi olmadan swing atma
 WHY off-angle tutar ve sadece atış için gereken süre kadar peek atar; drone veya tarama açıyı sıfırlar
 
@@ -200,7 +200,7 @@ COUNTER ilk tarama atılmadan önce agresif peek at — bilgi fazına girmeden u
 WHY ilk bilgi atışı gelmeden push atarsan düşmanın ritmi kırılır
 
 IF Op'lu takıma karşı oynuyorsan
-MEANING Op açısını dry peek etmek intihar
+MEANING Op açısına utility'siz peek atmak intihar
 COUNTER Op açısına bakmadan önce en az 3-4 utility kullan: flash, smoke, drone veya tarama, sonra swing at
 WHY her utility Op oyuncusunu bir sonraki adıma zorlar — atış, yer değiştirme ya da geri çekilme; swing'e geçtiğinde açı çoktan kirlenmiştir
 

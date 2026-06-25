@@ -1,7 +1,7 @@
 # AJAN: Clove
 
 ## 1. Rol Kimliği
-Clove sıradan, pasif smoke atan bir controller değil. Öldükten sonra bile smoke atabilirsin — bunu başka hiçbir controller yapamaz. Kill aldığında kendini iyileştirir, can eritme yeteneğinle düşmanı zayıflatır, ölsen bile kendini diriltirsin. Clove'la hem dövüşeceksin hem de takımın smoke'larını çıkaracaksın. İkisini birden yapamıyorsan Clove'u doğru oynamıyorsun.
+Clove sıradan, pasif smoke atan bir controller değil. Öldükten sonra bile smoke atabilirsin — bunu başka hiçbir controller yapamaz. Kill aldığında kendini iyileştirir, can eritme yeteneğinle düşmanı zayıflatır, ölsen bile kendini diriltirsin. Clove'la hem dövüşeceksin hem de takımın smoke'larını çıkaracaksın. Sadece dövüşürsen takım smoke'suz kalır, sadece smoke atarsan Clove'un saldırgan gücünü çöpe atarsın.
 
 ## 2. Temel Sorumluluklar
 - Hem hayattayken hem öldükten sonra takım için smoke çıkar.
@@ -15,7 +15,7 @@ Clove sıradan, pasif smoke atan bir controller değil. Öldükten sonra bile sm
 - Ölüm noktasının ortasında dirilip anında tekrar ölmek.
 - Smoke atmadan dövüşe dalmak — frag asla smoke'tan önce gelmez.
 - Can eritmeyi takımın aktif olarak dövüşmediği düşmanlara atmak — etkisi boşa gider.
-- Fazla canı bahane edip daha tehlikeli açılara girmek — fazla can bir bonus, gerekçe değil.
+- Kill sonrası gelen fazla canı, daha tehlikeli açılara dalmak için kullanmak — o can erir, sen erimiş canla dövüşün ortasında kalırsın.
 - Her ölümde otomatik olarak dirilmek — önce çıkışın güvenli mi diye bak.
 - Kazanamayacağın bir round'da öldükten sonra smoke yeteneğini boşa harcamak.
 - Round başında bütün smoke'larını birden harcayıp geç gelişen kavgaya smoke'suz girmek — en az birini saklamak gerekir.
@@ -71,7 +71,7 @@ Clove sıradan, pasif smoke atan bir controller değil. Öldükten sonra bile sm
 - **Split**: Fazla canla mid'i saldırgan al. Ramp'ta öldükten sonra smoke at — takım oyunda kalsın. Bu haritada mid kontrolü tüm round'u belirler; mid düellosunu kazanırsan kendini iyileştirip ikinci düelloya da avantajlı gir, kaybedersen smoke'u takımın geri çekildiği eksene at.
 
 ## 6. Eşleşme Notları
-- **Sage'e karşı**: Sage duvarı can eritmeyi engellemez. Duvarın arkasındaki oyunculara da etki geçer.
+- **Sage'e karşı**: Sage duvarına dayanan düşmana, duvarın senin tarafına bakan ağzına can eritme at — duvara yapışıp bekleyeni oradan zayıflatırsın. Can eritme bir fırlatma orb'u; katı Sage duvarının arkasına geçmez, duvar orb'un yolunu fiziksel keser.
 - **Chamber'a karşı**: Chamber teleportunu kullandıktan sonra can eritme at — kaçış yolu kalmamışken yakala.
 - **Duelist ile**: İkili entry yapabilirsiniz. Sen ölürsen smoke'lar yine çıkar. Hayatta kalırsan kendini iyileştirip devam edersin.
 - **Fade'e karşı**: Fade'in recon'u ölüm noktanı gösterir, dirilme zamanını ele verir. Dirilişini geciktir ya da farklı açıdan çık.

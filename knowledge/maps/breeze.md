@@ -126,12 +126,12 @@ WHY: Rakip wall'un nerede açılacağını bilirse ne zaman push edeceğini, ner
 
 ## 5. Kompozisyon / Harita Etkileşim Notları
 - **Viper zorunlu pick.** Breeze'de Viper wall en güçlü utility. A site'i ikiye böler, Mid'i keser, B'yi izole eder. Viper olmadan baştan dezavantajdasın. Post-plant snake bite lineup'ları da defuse'u durdurmak için tek güvenilir yol.
-- **Chamber S-tier.** Op kill aldıktan sonra TP ile pozisyon değiştir — düşman trade yapamaz. Uzun çizgilerde bu ikili Breeze'e özel çalışır. Trademark flankleri kapatır.
+- **Chamber S-tier.** Op kill aldıktan sonra TP ile pozisyon değiştir — düşman trade yapamaz. Uzun çizgilerde bu ikili Breeze'e özel çalışır. Tuzağı flank yollarını kapatır.
 - **Sova S-tier.** Recon bolt A site ya da B site'ı tamamen tarar. Shock dart post-plant lineup'ları da geniş, açık siteler yüzünden çok işe yarar.
-- **KAY/O A-tier.** A Hall ve B Main girişinde flash'ları doğrudan verir. Suppression blade ile girişte düşmanın utility'sini kapat — temiz entry alırsın. Uzun çizgide flash pop yapar, savunucunun avantajı sıfırlanır.
+- **KAY/O A-tier.** A Hall ve B Main girişinde flash'ları doğrudan verir. Bıçağını site'a at, girişte düşmanın util'ini kapat — temiz entry alırsın. Uzun çizgide flash pop yapar, savunucunun avantajı sıfırlanır.
 - **Cypher A-tier.** Tripwire A Hall girişine ve B Chute'a koy. Kamerayla uzaktan bilgi al. Breeze'de giriş noktası az, Cypher utility'si burada tam verim verir.
-- **Jett A-tier.** Op + dash repozisyon Breeze'de işe yarar ama Chamber'ın TP'si kadar esnek değil. Tailwind ile açık site'lara girmek hâlâ güçlü.
-- **Harbor A-tier.** Cascade A Hall'da dar koridoru kapatır, savunucu göremez. High Tide Mid split yaratır. Cove A Bridge plant korumasında kullanılır. Viper'ın yanında ikinci controller olarak tam uyumlu.
+- **Jett A-tier.** Op + dash repozisyon Breeze'de işe yarar ama Chamber'ın TP'si kadar esnek değil. Dash ile açık site'lara girmek hâlâ güçlü.
+- **Harbor A-tier.** Duvarınla A Hall'da dar koridoru kapat, savunucu göremez. İkinci duvarla Mid split yarat. Smoke küresini A Bridge'de plant korumasında kullan. Viper'ın yanında ikinci controller olarak tam uyumlu.
 - **Skye B-tier.** Flash'ları uzun mesafede iş görür ama dog açık alanda çabuk ölür. Harita büyük olduğu için dog bilgisi de sınırlı kalır.
 - **Duelist seçimi:** Breeze'de dash ya da TP olan duelist'i seç — Jett veya Chamber. Op kill sonrası repozisyon yapamıyorsan açık çizgilerde mahvolursun. Neon veya Raze burada değer kaybeder.
 - **Çift controller viable.** Viper + Harbor ya da Viper + Omen çalışır. Tek controller tüm uzun çizgileri kapatamaz, ikinci birine ihtiyacın var.
@@ -237,7 +237,7 @@ WHY: Viper wall güçlü ama okununca değer kaybediyor. Her round aynı yere ge
 **Rakip B rush yapıyorsa:**
 IF: Rakip sık sık B Main'den hızlı push yaparak site'i alıyorsa.
 MEANING: B site savunması yetersiz ya da B Main'i utility'le yavaşlatmıyorsun.
-COUNTER: B Pillar'da Op tut ve utility dök. KAY/O molly veya Viper snake bite B Main girişine at. Killjoy turret'i B Main'e baktır. B Main'de erken bilgi al, push geldiğini erkenden haber ver.
+COUNTER: B Pillar'da Op tut ve utility dök. KAY/O molly veya Viper snake bite B Main girişine at. Killjoy botunu B Main'e baktır. B Main'de erken bilgi al, push geldiğini erkenden haber ver.
 WHY: B rush dar B Main koridorunu kullanır ve bu koridor utility'le rahat kontrol edilir. Molly + slow + Op ikilisi rush'i durdurur — koridor dar, kaçacak yer yok.
 
 **Rakip Mid kontrolü alıyorsa:**
@@ -249,22 +249,22 @@ WHY: Mid, Breeze'de haritanın kilit noktası. Rakip Mid'i alırsa hem A Bridge 
 **Rakip Chute kullanıyorsa:**
 IF: Rakip B Chute'tan flank yaparak savunmanı arkadan çökertiyorsa.
 MEANING: Chute kontrolün yok ve rakip bunu exploit ediyor.
-COUNTER: Chute çıkışına tripwire veya turret koy. Killjoy alarmbotu Chute içine gönder. Cypher kamerasını Chute'u gören açıya yerleştir.
+COUNTER: Chute çıkışına tripwire veya turret koy. Killjoy botunu Chute içine gönder. Cypher kamerasını Chute'u gören açıya yerleştir.
 WHY: Chute dar bir düşüş noktası, tek utility'le kapatılır. Tripwire veya turret Chute'u tamamen kilitler. Kontrol maliyeti düşük, geri dönüşü yüksek.
 
 ## 12. Agent Tier Listesi
 
 ### S-Tier
-- **Viper**: Breeze'de oynayacaksan Viper öğren. Toxic Screen A Hall'dan site'a veya B Main'den site'a uzanan bütün açıları kapatır — bu duvarsız execute olmuyor. Snake Bite lineuplarını öğrenirsen spike kurulduktan sonra defuse eden adamı öldürürsün, açık siteler buna çok uygun. Viper Pit de bu haritada kabusa dönüyor savunucu için — alan çok geniş, içeride savaşmak zorunda kalıyor.
-- **Sova**: Recon Bolt at, bütün site temizleniyor — başka haritada bu kadar açık alan yok, burada Sova çok daha güçlü. Shock Dart lineuplarını öğren, post-plant'te spike başında bekleyen adamı açıktan öldürürsün. Hunter's Fury haritanın uzun eksenine çekersen birden fazla adam yer.
+- **Viper**: Breeze'de oynayacaksan Viper öğren. Duvarını A Hall'dan site'a veya B Main'den site'a uzanan açılara çek — bu duvar olmadan execute olmuyor. Molly lineup'larını öğrenirsen spike kurulduktan sonra defuse eden adamı öldürürsün, açık siteler buna çok uygun. Viper Pit de bu haritada kabusa dönüyor savunucu için — alan çok geniş, içeride savaşmak zorunda kalıyor.
+- **Sova**: Recon okunu at, bütün site açılıyor — başka haritada bu kadar açık alan yok, burada Sova çok daha güçlü. Molly oku lineup'larını öğren, post-plant'te spike başında bekleyen adamı açıktan öldürürsün. Hunter's Fury haritanın uzun eksenine çekersen birden fazla adam yer.
 
 ### A-Tier
-- **Jett**: Op alacaksan Jett al. Uzun sightlinelar Op'in avantajını katlar, imza atıp Dash ile geri çekilirsin — Pyramid veya yükseltilerde Updraft ile açı çıkarırsın, adam seni bulamaz.
+- **Jett**: Op alacaksan Jett al. Uzun sightlinelar Op'in avantajını katlar, op atıp dash ile geri çekilirsin — Pyramid veya yükseltilerde yukarı sıçrayıp açı çıkarırsın, adam seni bulamaz.
 - **KAY/O**: Utility'e dayalı execute karşı takımda varsa Zero/Point at, bastırırsın. Flash geniş alanda çok iyi açıyor. Spike kurulduktan sonra Molly lineup koy, defuse ettirmezsin.
-- **Chamber**: A Hall veya B Long'da Op tut. Tehlike görünce TP ile çık, orada kalmak zorunda değilsin. Trademark'ı flank girişine koy, arkandan adam gelmez. Tour de Force bu haritada Vandal'dan bile keskin çalışır.
+- **Chamber**: A Hall veya B Long'da Op tut. Tehlike görünce TP ile çık, orada kalmak zorunda değilsin. Tuzağını flank girişine koy, arkandan adam gelmez. Op ult'un bu haritada Vandal'dan bile keskin çalışır.
 
 ### B-Tier
 - **Cypher**: Tripwire A Hall ve B Chute gibi dar geçişlerde tutar, ama Breeze açık alan — kapalı köşe bulamıyorsun, utility'nin yarısı boşa gidiyor.
-- **Killjoy**: Tek başına bir siteyi anchor yapabilirsin Turret + Alarmbot ile, Lockdown geniş alanda iyi. Ama harita çok büyük, utility menzili yetişmiyor.
-- **Skye**: Flash atınca bilgi gelir, Trailblazer koridoru temizler. Ama bilgi toplamada Sova'nın yanına yaklaşamazsın — Sova varsa Skye alma.
+- **Killjoy**: Bot ve tuzakla bir siteyi tek başına tutarsın; ult'un geniş alanda iyi çalışır. Ama harita çok büyük, utility menzili yetişmiyor.
+- **Skye**: Flash atınca bilgi de gelir, kaplanla koridoru temizlersin. Ama bilgi toplamada Sova'nın yanına yaklaşamazsın — Sova varsa Skye alma.
 - **Harbor**: Cascade'i uzun geçişlerde hareket eden kalkan gibi kullanırsın, High Tide birden fazla sightlinei keser. Ama Viper varsa Harbor ikinci kalır, aynı işi daha iyi yapıyor Viper.

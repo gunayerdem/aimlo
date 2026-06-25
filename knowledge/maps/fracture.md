@@ -78,15 +78,15 @@ WHY: Fracture'in ortası savunmanın omurgası. Omurga kırılırsa iki site'i b
 - Aynı pozisyonda defalarca durma — saldırganlar açıyı önceden tutar, pozisyonunu değiştir
 
 ## 5. Kompozisyon / Harita Etkileşim Notları
-- **Breach**: Fracture'de en iyi initiator bu. Fault Line duvarların arkasından geçer — dar geçişlerde savunucuyu pozisyondan söküp atar. Aftershock ile site içindeki köşeleri temizlersin. A Hall'dan fault line + flash koy, giriş garantilenir.
+- **Breach**: Fracture'de en iyi initiator bu. Stun'ın duvarların arkasından geçer — dar geçişlerde savunucuyu pozisyondan söküp atar. Molly'nle site içindeki köşeleri temizlersin. A Hall'dan stun + flash bas, giriş garantilenir.
 - **Neon**: A Dish'e hızlı girmek istiyorsan Neon kullan. Duvarla siteyi ikiye bölersin, savunucu crossfire kuramaz. Sprint ile diğer duelist'lerden önce commit edersin — split push'ta senkron çok kolaylaşır.
-- **Fade**: Haunt'u at, iki girişi tek ability ile tararsın. Prowler dar geçişlerdeki savunucuyu köşeden çıkarır. Fracture bilgi haritası, Fade burada çift değer üretir.
+- **Fade**: Recon'unu at, iki girişi tek util ile tararsın. Yaratığınla dar geçişlerdeki savunucuyu köşeden çıkar. Fracture bilgi haritası, Fade burada çift değer üretir.
 - **Cypher**: İki girişin var, iki tripwire koy. İkincil girişlere tel at, biri tetiklenince zaten bilgin olur. Kamerayı mid ya da CT Spawn'a as — Fracture savunmasında sütun bu.
-- **Raze**: B Arcade'e satchel ile gir, B Tower'a boombot at. Paint shells dar geçişleri kontrol eder. Showstopper dar alanda kimseye kaçacak yer bırakmaz.
+- **Raze**: B Arcade'e sıçramayla gir, B Tower'a bot at. Molly'nle dar geçişleri kontrol et. Ult'un dar alanda kimseye kaçacak yer bırakmaz.
 - **Chamber**: A Dish uzun açısını Op ile tut, düşman yaklaşınca TP ile çekil. B Tower'da aynısını yap. Fracture'in uzun sightline'ları Op oyununa biçilmiş, TP ise çifte giriş haritasında seni hayatta tutar.
-- **KAY/O**: Suppression blade'i site'e at, savunucunun tüm utility'si kapanır, entry açılır. Flash'i dar geçişlerde iki yönden aynı anda at — push'u bölmek imkânsız hale gelir.
-- **Viper**: Toxic Screen ile site'i ikiye böl, crossfire bitsin. Snake Bite lineup'larını öğren — spike pozisyonları tahmin edilebilir, post-plant burada çok güçlü. Wall ile iki girişten birini tamamen kapat.
-- **Brimstone**: Fracture'de S-tier controller bu. Tek ability ile iki farklı girişi aynı anda kapatırsın — başka controller bunu yapamaz. Incendiary lineup'larını öğren, her iki sitede de spike pozisyonları dar. Stim Beacon'ı dar girişe koy, takım daha hızlı içeri girer. Orbital Strike kompakt sitede kimseye kaçacak yer bırakmaz. Haritanın boyutu smoke menzilini kesmez, her pozisyona rahat ulaşırsın.
+- **KAY/O**: Bıçağını site'a at, savunucunun tüm util'i kapanır, entry açılır. Flash'ı dar geçişlerde iki yönden aynı anda at — push'u bölmek imkânsız hale gelir.
+- **Viper**: Duvarınla site'i ikiye böl, crossfire bitsin. Molly lineup'larını öğren — spike pozisyonları tahmin edilebilir, post-plant burada çok güçlü. Duvarla iki girişten birini tamamen kapat.
+- **Brimstone**: Fracture'de S-tier controller bu. Tek util ile iki farklı girişi aynı anda kapatırsın — başka controller bunu yapamaz. Molly lineup'larını öğren, her iki sitede de spike pozisyonları dar. Hız küreni dar girişe koy, takım daha hızlı içeri girer. Ult'un kompakt sitede kimseye kaçacak yer bırakmaz. Haritanın boyutu smoke menzilini kesmez, her pozisyona rahat ulaşırsın.
 - Controller olmadan Fracture oynama — smoke'suz siteye giremezsin. Viper + Omen ya da Viper + Harbor combo'su iki girişi aynı anda smoke'lar, giderek daha çok kullanılıyor.
 
 ## 6. Koçluk Satırları
@@ -160,13 +160,13 @@ WHY: Fracture'in ortası savunmanın omurgası. Omurga kırılırsa iki site'i b
 ## 12. Agent Tier Listesi
 
 ### S-Tier
-- **Breach**: Fracture'in dar koridorları ve çifte giriş yapısı Breach'e çok fazla değer veriyor. Fault Line ve Aftershock duvarların arkasını temizliyor. Flash dar girişlerde çaresizsin karşı taraf. Rolling Thunder site girişinde savunucuyu tamamen dağıtıyor. Başka hiçbir haritada Breach bu kadar güçlü değil.
-- **Raze**: Boombot dar koridorda bilgi topluyor ve temizliyor. Satchel ile beklenmedik açılardan giriyorsun — Arcade'den B site'a satchel girişi özellikle sert. Paint Shells dar alanda kaçış yok. Showstopper anchor'i zorla köşesinden çıkarıyor.
+- **Breach**: Fracture'in dar koridorları ve çifte giriş yapısı Breach'e çok fazla değer veriyor. Stun ve molly'n duvarların arkasını temizliyor. Flash'ı dar girişlere at — karşı taraf çaresiz kalır, kör girer. Ult'un site girişinde savunucuyu tamamen dağıtıyor. Başka hiçbir haritada Breach bu kadar güçlü değil.
+- **Raze**: Botu dar koridorda bilgi topluyor ve temizliyor. Sıçramayla beklenmedik açılardan giriyorsun — Arcade'den B site'a sıçrama girişi özellikle sert. Molly'nle dar alanda kaçış bırakma. Ult'un anchor'ı zorla köşesinden çıkarır.
 
 ### A-Tier
-- **Fade**: Haunt ile çifte girişin birini tarıyorsun. Prowler dar koridoru boşaltıyor. Seize spike kurulduktan sonra alanı kilitliyor. Fracture'in bilgi ihtiyacını Fade karşılıyor.
-- **Brimstone**: Smoke'lar dar boğaz noktalarını kapatmak için biçilmiş kaftan. Molly post-plant lineup'ları sert. Stim Beacon takımı push'larken güç katıyor. Orbital Strike hem temizlemede hem spike sonrasında kullanıyorsun.
-- **Killjoy**: Çifte giriş sorununu utility ile çözüyorsun. Turret bir girişi izlerken sen diğerini tutuyorsun. Nanoswarm dar koridorda rush'ı durduruyorsun. 1 düşman düştüğünde Lockdown retake'i kazanıyor.
+- **Fade**: Recon'unla çifte girişin birini tararsın. Yaratığınla dar koridoru boşalt. Tuzak ult'un spike kurulduktan sonra alanı kilitler. Fracture'in bilgi ihtiyacını Fade karşılıyor.
+- **Brimstone**: Smoke'lar dar boğaz noktalarını kapatmak için biçilmiş kaftan. Molly post-plant lineup'ları sert. Hız küren takım push yaparken güç katar. Ult'unu hem temizlemede hem spike sonrasında kullan.
+- **Killjoy**: Çifte giriş sorununu utility ile çözüyorsun. Botun bir girişi izlerken sen diğerini tutuyorsun. Molly'yi dar koridora at, rush'ı orada durdurursun. 1 düşman düştüğünde ult'un retake'i kazanıyor.
 
 ### B-Tier
 - **Chamber**: Op + TP işliyor ama çifte giriş seni sıkıştırıyor — TP ile sadece bir taraftan kaçabiliyorsun. Trademark ise flank izlemede değerini koruyor.

@@ -17,13 +17,13 @@ tags: [general, mental, game]
 | Aşama | Belirtiler | Oyun Üzerindeki Etki |
 |---|---|---|
 | Aşama 1 (Hafif) | İçinden söylenme, oflama | Birazcık daha agresif peek'ler, sabır azalması |
-| Aşama 2 (Orta) | Chat'e yazma, takımı sesli suçlama | Util'siz dry-peek, ego uğruna düello arama |
+| Aşama 2 (Orta) | Chat'e yazma, takımı sesli suçlama | Utility'siz peek atma, ego uğruna düello arama |
 | Aşama 3 (Şiddetli) | Util savurma, iletişimi kesme | Site'a koşma, stratejiyi takmama |
 | Aşama 4 (Tam Tilt) | AFK anlar, toksik konuşma, bile bile kötü oynama | Maç gitti; takımına zarar veriyorsun |
 
 ### Tilt Yönetim Teknikleri
 
-IF öldüğün an sinirle hareket ediyorsan (hemen peek atıyor, kafadan karar veriyorsan)
+IF öldüğün an sinirle hareket ediyorsan (hemen peek atıp kafadan karar veriyorsan)
 MEANING dürtüsel tepkiler kötü kararlara dönüşüyor
 COUNTER öldükten sonra kısa bir an dur -- tuşa basmadan, konuşmadan önce bekle; ölümünü sakin kafayla izle ve dersini çıkar
 WHY o kısa duraklama dürtüsel tepkiyi keser, ölümü bilgiye çevirir

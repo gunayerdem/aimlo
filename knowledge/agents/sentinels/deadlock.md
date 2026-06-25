@@ -6,7 +6,7 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 ## 2. Temel Sorumluluklar
 - **Girişi kapat**: Duvarı düşmanın en çok bastığı tek noktaya koy. Sage duvarı gibi çabuk kırılmaz — düşman orbları tek tek vurmak zorunda, bu sana hem zaman hem konum kazandırır.
 - **Rush'ı dağıt**: Ağ tuzağını önceden atma. Düşmanın o koridora girdiğini duyduğun an at. Eğilmeye zorlarsan hızını alırsın, orbu vurmaya zorlarsan pozisyonunu alırsın.
-- **Sesi cezalandır**: Tuzağın ayak sesine, yetenek sesine, silah sesine tepki verir — sana bilgi ve kısa bir sersemletme kazandırır. Takım arkadaşının geçmeyeceği, düşmanın da sessiz geçemeyeceği yollara koy.
+- **Sesle yakala**: Tuzağın ayak sesine, yetenek sesine, silah sesine tepki verir — sana hem bilgi hem kısa bir sersemletme kazandırır. Takım arkadaşının geçmeyeceği, düşmanın da sessiz geçemeyeceği yollara koy.
 - **Round'u kapat**: Ult'unu izole bir düşmana ya da spike kurulduktan sonra defuse'a gelen oyuncuya kullan. Koza yolu dar ve korunaklı olsun — açıkta kalan kozayı düşmanın takım arkadaşları vurur, içindeki kurtulur.
 - **Katmanla**: Duvarın arkasına tuzak koy. Hem hızlı geleni hem yavaş geleni aynı anda yakalarsın — duvarı kıran sersemler, geçen tuzağa basar.
 

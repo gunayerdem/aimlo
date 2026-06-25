@@ -20,9 +20,9 @@
 
 **Pattern 1: A Belt Dry Peek Ölümleri**
 IF: A Belt'e smoke veya flash atmadan giriyorsun — o uzun sightline'a korumasız çıkıyorsun
-MEANING: A Belt açık bir koridor. Rafters'taki veya Screens'teki savunucu seni görür görmez vurur. Senin modellin yaklaşım boyunca tamamen açıkta, savunucunun sadece tıklaması yeterli.
+MEANING: A Belt açık bir koridor. Rafters'taki veya Screens'teki savunucu seni görür görmez vurur. Sen yaklaşırken tüm round boyunca açıktasın, savunucunun sadece tetiğe basması yeterli.
 COUNTER: A Belt'e girmeden önce Rafters veya Screens yönüne smoke at, sonra flash'ı izlet, sonra swing at. Smoke görüş hattını keser, flash savunucuyu açıdan çıkarır. Smoke veya flash olmadan A Belt'e girme — her seferinde en az birini harca.
-WHY: Uzun sightline savunucuyu güçlendiriyor çünkü hareketini okuyabiliyor ve seni uzaktan vurabiliyror. Smoke attığında savunucu ya smoke içinden sana doğru gelir — bu sefer yakın dövüş senin avantajın — ya da pozisyonu terk eder.
+WHY: Uzun görüş hattı savunucuyu güçlendiriyor çünkü hareketini okuyup seni uzaktan vurabiliyor. Smoke attığında savunucu ya smoke içinden sana doğru gelir — bu sefer yakın dövüş senin avantajın — ya da pozisyonu terk eder.
 
 **Pattern 2: Mid'de Op'a Karşı Ego Peek**
 IF: Mid'de Op tutan birine karşı utility olmadan peek atıyorsun — aynı sightline'dan tekrar tekrar vuruluyorsun
@@ -89,13 +89,13 @@ WHY: Off-angle'ın değeri sürpriz faktöründen gelir. Rakip Snowman'ı bildi�
 - B Kitchen'dan retake yaparken utility atmadan içeri girme — o dar geçitte utility yoksa ölürsün, trade da olmaz.
 
 ## 5. Kompozisyon / Harita Etkileşim Notları
-- **Viper S-tier**: Wall'u A veya B site'i ikiye böler. A'da Rafters'ı site'tan kesersin — savunucunun avantajı gider. B'de Yellow'u izole edersin — o karmaşık nested yapı sadeleşir. Toxic screen + snake bite post-plant ikilisi bu haritada korkunç güçlü.
+- **Viper S-tier**: Wall'u A veya B site'i ikiye böler. A'da Rafters'ı site'tan kesersin — savunucunun avantajı gider. B'de Yellow'u izole edersin — o karmaşık nested yapı sadeleşir. Duvar + molly post-plant ikilisi bu haritada korkunç güçlü.
 - **Sage S-tier**: B Green'e wall at, push yavaşlar, takımına rotasyon zamanı kazanırsın. A Belt'te wall sightline'ı tamamen kapatır. Slow orb'u Tube veya Orange'a at — dar geçişlerde değeri çok yüksek.
 - **Jett S-tier**: Zip line ile hızlı giriş, A Pipes'ta agresif Op oyna, işin bitince dash ile çekil. Updraft ile Rafters'a çık — başka hiçbir duelist o dikey hareketi yapamaz.
 - **Sova / Fade**: Bu haritada bilgi almak kritik çünkü her iki site'ta da temizlemen gereken köşe ve seviye çok. Sova dart'ı A veya B başında at, erken bilgi al. Fade prowler ile nested B site'taki köşeleri temizle.
 - **Killjoy**: B site'ta turret + alarmbot nested yapıyı senin için tutar. Lockdown ile B'ye basan saldırganları site'tan söküp atarsın. Killjoy'un değerinin büyük kısmı B site'a özel — bunu bil.
 - **Chamber**: Op + TP ikilisi bu harita için biçilmiş kaftan. A Pipes'ta agresif dur, kill al ya da kötü giderse TP ile güvenli noktaya çekil. Mid sightline'da da aynı şekilde oyna.
-- **Omen**: TP ile A Rafters'a veya B Yellow'a beklenmedik pozisyonlarda çık. Tube içinde Shrouded Step ile sessiz hareket et. Paranoia'yı B Orange veya Tube'a at — dar geçişlerde değeri çok yüksek.
+- **Omen**: TP ile A Rafters'a veya B Yellow'a beklenmedik pozisyonlarda çık. Tube içinde teleport'la sessiz hareket et. Flash'ı B Orange veya Tube'a at — dar geçişlerde değeri çok yüksek.
 
 ## 6. Koçluk Satırları
 - "Icebox dikey oyunun haritası. Sadece yer seviyesinde geziyorsan haritanın yarısından vazgeçiyorsun."
@@ -108,7 +108,7 @@ WHY: Off-angle'ın değeri sürpriz faktöründen gelir. Rakip Snowman'ı bildi�
 - "Post-plant'te rakiple aynı yükseklikte durma. Farklı katlarda crossfire kur — retake yapmak isteyen için kabusa döner."
 
 ## 7. Rank Modülasyonu
-- **Iron-Silver**: B site'teki Orange, Yellow, Green callout'larını karıştırıyorsun. Zip line'e atlamadan önce düşünmüyorsun, mid'e hiç bakmıyorsun. Şunu yap: A Belt'e girmeden önce bir ability kullan, sonra ilerle. Bu tek hareket seni öldürten açı sayısını ikiye böler. Zip line ses çıkarır — rakip duyar. Bunu bil.
+- **Iron-Silver**: B site'teki Orange, Yellow, Green callout'larını karıştırıyorsun. Zip line'e atlamadan önce düşünmüyorsun, mid'e hiç bakmıyorsun. Şunu yap: A Belt'e girmeden önce bir util at, sonra ilerle. Bu tek hareket seni öldüren açı sayısını yarıya indirir. Zip line ses çıkarır — rakip duyar. Bunu bil.
 - **Gold-Platinum**: Flash atıyorsun ama arkasından swing atmıyorsun — utility boşa gidiyor. B site'te Orange girişinde tüm takım aynı anda yığılıyor, hiç aralık yok. Şunu yap: ilk oyuncu flash ile girer, ikincisi flash patladıktan sonra girer. Mid'i "başkasının işi" sanıyorsun — değil. Birini oraya ata.
 - **Diamond-Ascendant**: Rafters, Snowman, aynı entry, aynı default — rakip seni ezberledi. Rakip A Belt'i yığıyorsa mid'e geç, Tube'dan split yap. Rafters'tan kill aldıysan bir sonraki roundda Nest'e taşın. Orange yerine Kitchen split dene. Rakibin alışkanlığını oku ve değiştir.
 - **Immortal-Radiant**: Mekanikleri biliyorsun, fark yaratan şey anti-strat. Rakip her round A Belt push yapıyorsa smoke Belt + Pipes üzerinden flank kur. Tube split geliyorsa Tube'a utility göm. Rakibin Op'inin kimde olduğunu, nerede durduğunu, save edip edemeyeceğini takip et. Eco roundlarda Icebox'un yakın dövüş alanlarını kullan: B rush Green üzerinden, Orange içi Spectre. Kim rakibin harita alışkanlığını önce okursa, o yarıyı kazanır.
@@ -125,7 +125,7 @@ WHY: Off-angle'ın değeri sürpriz faktöründen gelir. Rakip Snowman'ı bildi�
 ### B Site Post-Plant
 - B Orange + B Green crossfire kur — retake yolunu iki açıdan kes
 - Kitchen'ı gözle — retake Kitchen'dan gelir, başka yol yok
-- Viper snake bite + Killjoy nano swarm B Default'a yüklen — defuse etmesi çok zorlaşır
+- Viper molly'sini ve Killjoy molly'sini B Default'a yüklen — defuse etmesi çok zorlaşır
 
 ### Genel Post-Plant
 - Dikey crossfire kur — biri site seviyesinde, biri yüksekte dursun. Icebox'ta bu ikili retake'i mahveder
@@ -195,16 +195,16 @@ WHY: Op tek sightline'da güçlüdür. O sightline kapanır ya da iki hedefe bö
 ## 12. Agent Tier Listesi
 
 ### S-Tier
-- **Sova**: Sova için en iyi harita burası. Recon Bolt ile A site ve B site'i geniş açıdan tararsın. Shock Dart lineupları her iki site için çalışır. Owl Drone'u Tube ve Mid'e sok, bilgi al. Hunter's Fury dikey yapıda da güçlü — A Rafters'taki oyuncuyu yerden vurursun.
-- **Viper**: Toxic Screen ile A site ya da B site'i ikiye bölersin. Snake Bite post-plant lineupları dar plant bölgelerinde defuse'u durdurur. Viper Pit A site'in açık yapısında tam alan kontrolü verir.
+- **Sova**: Sova için en iyi harita burası. Recon oku ile A site ve B site'i geniş açıdan tararsın. Hasar oku lineup'ları her iki site için çalışır. Drone'u Tube ve Mid'e sok, bilgi al. Ult'u dikey yapıda da güçlü — A Rafters'taki oyuncuyu yerden vurursun.
+- **Viper**: Duvarınla A site ya da B site'i ikiye bölersin. Molly lineup'ların dar plant bölgelerinde defuse'u durdurur. Ult'un A site'in açık yapısında tam alan kontrolü verir.
 
 ### A-Tier
-- **Jett**: Op alıyorsan Jett seç. A Belt, Mid ve A Pipes uzun sightline sunuyor. Updraft ile Rafters'a ve yüksek noktalara çıkarsın. Agresif peek sonrası Dash ile çekilirsin — Mid ve Belt'te bu seni kurtarır.
-- **Sage**: Wall burada maç dönüştürür. A Belt wall saldırıyı keser, B Orange wall rush'u durdurur. Slow Orb'u dar koridora at, push yavaşlar. Resurrect uzun roundlarda büyük değer üretir.
-- **Killjoy**: Turret + Alarmbot ile bir siteyi tek başına tutarsın. Nanoswarm'ı B Orange ve A Belt girişine göm, rush durur. Lockdown retake'te sana büyük avantaj verir. Dar girişler Killjoy'un utility'sini doğrudan güçlendirir.
+- **Jett**: Op alıyorsan Jett seç. A Belt, Mid ve A Pipes uzun sightline sunuyor. Zıplamayla Rafters'a ve yüksek noktalara çıkarsın. Agresif peek sonrası dash'le çekilirsin — Mid ve Belt'te bu seni kurtarır.
+- **Sage**: Wall burada maç dönüştürür. A Belt wall saldırıyı keser, B Orange wall rush'u durdurur. Yavaşlatmayı dar koridora at, push yavaşlar. Diriltme uzun round'larda büyük değer üretir.
+- **Killjoy**: Bot ve tuzakla bir siteyi tek başına tutarsın. Molly'ni B Orange ve A Belt girişine göm, rush durur. Ult'un retake'te sana büyük avantaj verir. Dar girişler Killjoy'un utility'sini doğrudan güçlendirir.
 
 ### B-Tier
-- **Chamber**: Op + TP ile Mid ve A Belt'te güçlü. Trademark'ı Tube ya da Boiler'a koy, flank izlersin. Ama haritanın dikey yapısı utility menzilini kısıtlar.
-- **KAY/O**: Suppress burada değerli — Viper wall'unu veya Sage wall'unu düşürürsün. Flashler dar koridorlarda işe yarar, Molly post-plant için kullanırsın. Ama Sova bilgi toplamada seni geride bırakır.
-- **Fade**: Haunt ile site tararsın. Prowler'ı Tube ve dar koridorlarda kullan, temizlersin. Seize post-plant'te alanı kapatır. Sova kadar geniş tarayamazsın ama yakın mesafe bilgisinde Sova'dan iyisin.
-- **Omen**: Smoke ile sightline'ı kapatırsın. Rafters'a TP güçlü, beklenmedik pozisyon alırsın. Paranoia dar koridorlarda çalışır. Ama Viper bu haritaya özel bu kadar baskın ki Omen tamamlayıcı role düşer.
+- **Chamber**: Op + TP ile Mid ve A Belt'te güçlü. Tuzağını Tube ya da Boiler'a koy, flank izlersin. Ama haritanın dikey yapısı utility menzilini kısıtlar.
+- **KAY/O**: Yetenek kapatan bıçağın burada değerli — Viper'ın duvarını veya Sage'in duvarını düşürürsün. Flash'ların dar koridorlarda işe yarar, molly'ni post-plant için kullanırsın. Ama Sova bilgi toplamada seni geride bırakır.
+- **Fade**: Recon'la site tararsın. Bot'unu Tube ve dar koridorlarda kullan, temizlersin. Sabitlemen post-plant'te alanı kapatır. Sova kadar geniş tarayamazsın ama yakın mesafe bilgisinde Sova'dan iyisin.
+- **Omen**: Smoke ile sightline'ı kapatırsın. Rafters'a teleport güçlü, beklenmedik pozisyon alırsın. Flash'ın dar koridorlarda çalışır. Ama Viper bu haritaya özel bu kadar baskın ki Omen tamamlayıcı role düşer.

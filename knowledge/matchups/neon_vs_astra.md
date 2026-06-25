@@ -52,8 +52,8 @@ Neon, Astra'nın smoke'unu hızla geçmeye çalışır. Astra ise smoke ve stun 
 
 ---
 
-**IF** Ult'un açık ve Astra kaçış formuna girdi
-**MEANING** Beam sabit hedefe gider — bu form Astra'yı yerinde dondurur
+**IF** Ult'un açık ve Astra yıldız koyma moduna (astral form) girdi
+**MEANING** Beam sabit hedefe gider — bu mod Astra'yı yerinde dondurur
 **COUNTER** Beam'i Astra'nın form konumunda tut, formu kıramazsa ölür.
 **WHY** Form Astra'yı sabit bırakır. Neon ult'u bu anı bedava kafadan vurmaya çevirir.
 
@@ -66,9 +66,9 @@ Neon, Astra'nın smoke'unu hızla geçmeye çalışır. Astra ise smoke ve stun 
 
 ---
 
-**IF** Stun'un Astra'nın kaçış formu animasyonunu kesti
-**MEANING** Astra smoke'unu koyamaz — o round eksik util'le başlar
-**COUNTER** Astra kaçış formuna girerken sprint hattından uzak, kapalı bir noktaya çek. Sonra hızlı koy, hızlı çık.
+**IF** Stun'un Astra'yı yıldız koyma modundayken (astral form) kesti
+**MEANING** Astra'nın bedeni o an yerinde sabit, smoke'unu koyamaz — o round eksik util'le kalır
+**COUNTER** Astra yıldız koyma moduna girerken sprint hattından uzak, kapalı bir noktaya çek. Sonra hızlı koy, hızlı çık.
 **WHY** Form seni de sabit bırakır. Stun menzilindeysen smoke yerleşimi iptal olur.
 
 ---
@@ -106,7 +106,7 @@ Neon hızla Astra'nın hazırlığını atlatır. Astra util'ini önceden doğru
 
 **Dönüm 2 — Stun momentumunu kesti:** Sabit kaldın — geç slide atmazsan düelloyu kaybedersin.
 
-**Dönüm 3 — Ult Astra'nın kaçış formunu yakaladı:** Beam sabit hedefe gider, bedava kafadan vur.
+**Dönüm 3 — Ult Astra'yı yıldız koyma modunda yakaladı:** Beam sabit hedefe gider, bedava kafadan vur.
 
 **Dönüm 4 — Astra ult'u bilgiyi kesti:** Takım koordinasyonu kopar — duvar hattını öğren, ona göre oyna.
 

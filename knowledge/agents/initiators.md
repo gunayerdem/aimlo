@@ -456,30 +456,30 @@ Initiator bilgi toplar ve düşmanları yerinden oynatıp site girişini açar. 
 ### Yetenek Analizi
 - **drone (C)** - 400 kredi, 1 şarj. İleri atıp doğrudan sürdüğün gizli drone. Tekrar ateşlersen bir nabız atar: vurduğu düşmanı hem **suppress eder** (yeteneklerini kapatır) hem yerini takıma ele verir. Tek yetenekte bilgi + baskı. Sürerken Tejo açıkta, drone vurulup düşürülebilir.
 - **stun (Q)** - 200 kredi, 1 şarj. Çarptığı yüzeye yapışıp patlayan, yakınındaki herkesi sersemleten el bombası. Alt ateşle bir kez sektirip köşe arkasına atarsın. Sersemlik nişanı bozar — girişten önce açıyı temizlemenin ve savunucuyu yerinden söküp atmanın aracı.
-- **missile (E)** - 150 kredi, 2 şarj. İmza yeteneğin. Haritada **iki ayrı nokta** seçer, alt ateşle füzeleri yollarsın; her füze seçtiğin noktaya kendi gider ve varınca patlar. Çift hedefleme sayesinde iki tutma açısını ya da bir açı + kaçış rotasını aynı anda kaparsın.
+- **molly (E)** - 150 kredi, 2 şarj. İmza yeteneğin. Haritada **iki ayrı nokta** seçer, alt ateşle iki patlayıcıyı yollarsın; her patlayıcı seçtiğin noktaya kendi gider ve varınca patlar. Çift hedefleme sayesinde iki tutma açısını ya da bir açı + kaçış rotasını aynı anda kaparsın.
 - **ult (X)** - 9 ult puanı. Haritayı açar, önce başlangıç noktasını sonra bitiş noktasını seçersin; bu hat boyunca art arda patlama dalgası gelir. Bütün bir koridoru süpürür ya da retake yolunu komple kapatır.
 
 ### Bilgi Toplama
 - **Suppress nabzı çift değer**: Drone'un nabzı düşmanı sadece ele vermez, **yeteneklerini de kapatır**. Suppress'teki düşman flash, smoke, dash, heal — hiçbir kurtarma yeteneğini kullanamaz. Bu, oyundaki en agresif giriş penceresidir.
 - **Drone'u gizli sok**: Drone sessiz ve görünmez gelirse nabız oturur. Köşeden, kör açıdan ya da düşmanın bakmadığı yükseklikten sür; açık koridordan düz uçuş = anında ölü drone, sıfır bilgi.
 - **Suppress'i anında çağır**: Pencere kısa. "Suppress'te, yetenekleri kapalı, girin." Takım fark etmezse düşman tam kapasiteye döner ve avantaj buharlaşır.
-- **Missile öncesi bilgi al**: Füzeleri tahmine değil bilgiye dayandır. Drone birini gördü → füzeyi o noktaya ve kaçış rotasına kur. Bilgisiz füze boş zemine patlar.
+- **Molly öncesi bilgi al**: Molly'leri tahmine değil bilgiye dayandır. Drone birini gördü → molly'yi o noktaya ve kaçış rotasına kur. Bilgisiz molly boş zemine patlar.
 
 ### Ne Zaman Seçilir
-- Dar koridorlu, tek-girişli site'ları olan kapalı haritalar — çift füze ve ult düşmana kaçacak yer bırakmaz.
+- Dar koridorlu, tek-girişli site'ları olan kapalı haritalar — çift molly ve ult düşmana kaçacak yer bırakmaz.
 - Takımın hasarı bilgiyle birleştiren orta-mesafe baskı initiator'ı istiyor (Sova'nın uzak lineup'ı değil).
-- Düşman sıkı stack tutuyor — suppress nabzı + çift füze stack'i söker.
+- Düşman sıkı stack tutuyor — suppress nabzı + çift molly stack'i söker.
 - Takımın suppress'le düşman yeteneğini söndürebilen ve aynı anda hasar basabilen bir initiator'a ihtiyacı var.
 
 ### Harita Güçleri
-- **Bind**: S-tier. Dar alanlar stun'dan kaçmayı zorlaştırır. Teleporter çıkışlarına çift füze düşmanı iki yönden sıkıştırır. A short'ta drone → stun → füze tam execute kalitesi. Hookah boyunca ult koridoru süpürür.
-- **Split**: A-tier. Dar mid drone'un gizliliğini korur. A ramp ve B main'de stun'dan kaçmak çok zor. Füzelerle A heaven ile A main'i aynı anda kapat. Ult B main koridoru boyunca savunucuyu pozisyonundan söker.
-- **Sunset**: A-tier. Mid koridoru drone için doğal güzergah. B market'ta dar alanda stun kaçınılmaz. A main'de çift füze push kalitesini yükseltir.
-- **Lotus**: A-tier. Dönen kapılar drone rotalarını çeşitlendirir. Dar B main stun ve füze için ideal. C site'ın çoklu girişleri ult hat yönü seçimini ödüllendirir.
-- **Haven**: B-tier. Üç site keşif yanını ödüllendirir — drone ile hangi site'ın zayıf tutulduğunu oku. C long'da drone → stun → füze execute'u keskinleştirir. A long'da çift füze A site'ı iki yönden kapatır. Ult garage rotasyonlarını keser.
-- **Ascent**: B-tier. A main ve B main drone için ideal koridor. Mid'de stun catwalk savunucusunu sersemletir. Füzelerle A site'ta tree ile generator açılarını aynı anda kapat. Harita biraz açık olduğu için drone uzaktan vurulabilir.
+- **Bind**: S-tier. Dar alanlar stun'dan kaçmayı zorlaştırır. Teleporter çıkışlarına çift molly düşmanı iki yönden sıkıştırır. A short'ta drone → stun → molly tam execute kalitesi. Hookah boyunca ult koridoru süpürür.
+- **Split**: A-tier. Dar mid drone'un gizliliğini korur. A ramp ve B main'de stun'dan kaçmak çok zor. Molly'lerle A heaven ile A main'i aynı anda kapat. Ult B main koridoru boyunca savunucuyu pozisyonundan söker.
+- **Sunset**: A-tier. Mid koridoru drone için doğal güzergah. B market'ta dar alanda stun kaçınılmaz. A main'de çift molly push kalitesini yükseltir.
+- **Lotus**: A-tier. Dönen kapılar drone rotalarını çeşitlendirir. Dar B main stun ve molly için ideal. C site'ın çoklu girişleri ult hat yönü seçimini ödüllendirir.
+- **Haven**: B-tier. Üç site keşif yanını ödüllendirir — drone ile hangi site'ın zayıf tutulduğunu oku. C long'da drone → stun → molly execute'u keskinleştirir. A long'da çift molly A site'ı iki yönden kapatır. Ult garage rotasyonlarını keser.
+- **Ascent**: B-tier. A main ve B main drone için ideal koridor. Mid'de stun catwalk savunucusunu sersemletir. Molly'lerle A site'ta tree ile generator açılarını aynı anda kapat. Harita biraz açık olduğu için drone uzaktan vurulabilir.
 
-**Genel ilke (her harita)**: Dar koridorlu, tek-girişli site'larda çift füze ve ult en çok değeri üretir — düşmanın kaçacak yeri yoktur. Açık, çok-girişli site'larda drone bilgisi öne çıkar: önce nereyi tutuyorlar gör, util'i o yöne yığ. Post-plant'ta füzeyi her zaman defuse'u iki yönden kapatacak şekilde sakla; retake'te ult'u düşmanın gireceği ana koridora kur, site'ın içine değil.
+**Genel ilke (her harita)**: Dar koridorlu, tek-girişli site'larda çift molly ve ult en çok değeri üretir — düşmanın kaçacak yeri yoktur. Açık, çok-girişli site'larda drone bilgisi öne çıkar: önce nereyi tutuyorlar gör, util'i o yöne yığ. Post-plant'ta molly'yi her zaman defuse'u iki yönden kapatacak şekilde sakla; retake'te ult'u düşmanın gireceği ana koridora kur, site'ın içine değil.
 
 ### Sık Yapılan Hatalar (IF/MEANING/COUNTER/WHY)
 
@@ -498,24 +498,24 @@ Initiator bilgi toplar ve düşmanları yerinden oynatıp site girişini açar. 
    **COUNTER** Stun'dan sonra geniş açıyla, mesafeli peek at
    **WHY** Mesafe varsa sen net nişan alırken o alamaz; sıfır mesafede sersemliğin avantajı işe yaramaz
 
-4. **IF** İki füzeyi de aynı noktaya yakın seçiyorsan
-   **MEANING** Çift hedeflemenin tüm değeri iki ayrı açıyı kapatmasında; üst üste atınca tek füzeye düşer
-   **COUNTER** Bir füzeyi tutma açısına, ötekini kaçış rotasına kur — düşmanı iki yönden sıkıştır
-   **WHY** Ayrı noktalar düşmana kaçacak yer bırakmaz; üst üste füze yarısı boşa gider
+4. **IF** İki molly'yi de aynı noktaya yakın seçiyorsan
+   **MEANING** Çift hedeflemenin tüm değeri iki ayrı açıyı kapatmasında; üst üste atınca tek molly'ye düşer
+   **COUNTER** Bir molly'yi tutma açısına, ötekini kaçış rotasına kur — düşmanı iki yönden sıkıştır
+   **WHY** Ayrı noktalar düşmana kaçacak yer bırakmaz; üst üste molly yarısı boşa gider
 
-5. **IF** Füzeleri bilgi olmadan tahminî atıyorsan
-   **MEANING** Hedefleme bilgiye değil umuda dayanıyor, füzeler boş zemine düşüyor
-   **COUNTER** Füzeyi her zaman drone'dan ya da takım bilgisinden sonra at
-   **WHY** Bilgili füze düşmanı sıkıştırır; bilgisiz füze 150 kredi boş zemine patlayıcı
+5. **IF** Molly'leri bilgi olmadan tahminî atıyorsan
+   **MEANING** Hedefleme bilgiye değil umuda dayanıyor, molly'ler boş zemine düşüyor
+   **COUNTER** Molly'yi her zaman drone'dan ya da takım bilgisinden sonra at
+   **WHY** Bilgili molly düşmanı sıkıştırır; bilgisiz molly 150 kredi boş zemine patlayıcı
 
 6. **IF** Bütün util'i site girişinde harcayıp post-plant'a hiçbir şey bırakmıyorsan
-   **MEANING** Füze ve ult post-plant'ta da büyük değer taşır; hepsini girişe yığma
-   **COUNTER** En az bir füzeyi ya da stun'ı post-plant için sakla — füze defuse'u iki yönden kapatır, stun retake atanı durdurur
+   **MEANING** Molly ve ult post-plant'ta da büyük değer taşır; hepsini girişe yığma
+   **COUNTER** En az bir molly'yi ya da stun'ı post-plant için sakla — molly defuse'u iki yönden kapatır, stun retake atanı durdurur
    **WHY** Post-plant Tejo defuse'u kilitler; sadece girişe oynayan Tejo spike dikildikten sonra yarım ajan
 
-7. **IF** Her round drone → stun → füze sırasını ezbere tekrarlıyorsan
+7. **IF** Her round drone → stun → molly sırasını ezbere tekrarlıyorsan
    **MEANING** Diziliş tahmin edilebilir oldu, düşman her adımını önceden bekliyor
-   **COUNTER** Sırayı boz — bir round önce stun at, ötekinde füzeyle aç, üçüncüde drone'u atla ve hızlı execute yap
+   **COUNTER** Sırayı boz — bir round önce stun at, ötekinde molly'yle aç, üçüncüde drone'u atla ve hızlı execute yap
    **WHY** Sabit sıra düşmanı her adıma hazırlar; tahmin edilemezlik bu kitin asıl silahı
 
 8. **IF** Ult'u düşman varlığını doğrulamadan spekülatif alana atıyorsan
@@ -526,12 +526,12 @@ Initiator bilgi toplar ve düşmanları yerinden oynatıp site girişini açar. 
 ### Kombo Oyunları
 - **Drone suppress + takım swing**: Drone nabzı düşmanı suppress'ler, o açıya tam takım swing atar. Suppress'teki düşmanın silahtan başka silahı yok — garantili düello penceresi.
 - **Stun + duellist girişi**: Stun savunucuyu sersemletir, duellist geniş açıyla girer. Sersemlik nişanı bozarken duellist net nişan alır.
-- **Çift füze sıkıştırma**: Bir füzeyi tutma açısına, ötekini kaçış rotasına kur. Düşman birinden kaçarsa ötekine koşar — iki yönden yakalarsın.
+- **Çift molly sıkıştırma**: Bir molly'yi tutma açısına, ötekini kaçış rotasına kur. Düşman birinden kaçarsa ötekine koşar — iki yönden yakalarsın.
 - **Tejo + Sova**: İki katmanlı bilgi. Sova geniş tarar, sen hedefli suppress ve hasar verirsin. Sova uzak lineup ajanı, sen orta-mesafe baskı ajanısın — çakışmaz, tamamlarsınız.
 - **Ult + controller smoke**: Ult hattını smoke'un içinden ya da kenarından kur. Düşman göremediği patlama hattından kaçamaz, retake yolu komple kapanır.
 
 ### Pro Oyuncu Stilleri
-- Tejo, çıkışından sonra dar ve util-ağır haritalarda hızla pick oranına girdi. Suppress nabzı + çift füze ikilisi, hasarı bilgiyle birleştiren tek initiator olması sayesinde double-initiator kompozisyonlarında Sova/Fade'in yanına oturur: biri geniş tarar, Tejo hedefli suppress'ler ve hattı kapatır.
+- Tejo, çıkışından sonra dar ve util-ağır haritalarda hızla pick oranına girdi. Suppress nabzı + çift molly ikilisi, hasarı bilgiyle birleştiren tek initiator olması sayesinde double-initiator kompozisyonlarında Sova/Fade'in yanına oturur: biri geniş tarar, Tejo hedefli suppress'ler ve hattı kapatır.
 
 ---
 

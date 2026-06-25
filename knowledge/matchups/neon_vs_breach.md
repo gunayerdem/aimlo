@@ -32,21 +32,21 @@ Breach duvardan geçen stun + flash + arka dalgayla Neon'un sprint koridorunu ka
 
 ## 3. Önemli Düellolar
 
-**IF** Breach'in stun'u Neon'un sprint hattında patladı
+**IF** Breach stun'u Neon'un sprint hattında patladı
 **MEANING** Sprint kesilir. Neon yavaşlar, slide yapamaz, açıkta kalır.
 **COUNTER** Sprint hattını değiştir — her round aynı koridoru kullanma. Breach 2 round sonra o hattı ezberler, 3. roundda zaten orada bekler. Stun sesini duyar duymaz sprint'i kes, köşeye çekil.
 **WHY** Stun duvardan geçer, koridorun tamamını kapatır. Aynı hattı tekrarlarsan Breach seni görmeden yakalar.
 
 ---
 
-**IF** Breach flash + stun zincirini geldi — önce flash, ardından stun
+**IF** Breach flash + stun zincirini kurdu — önce flash, ardından stun
 **MEANING** Neon flash gelince refleksle sprint atar, tam o an stun'un içine girer. İkisi çakışır, Neon kör + sersem, açık hedef olur.
 **COUNTER** Flash sesini duyar duymaz sprint'i kes, köşeye çekil. Flash geçene kadar bekle, sonra sprint'e geç. Sprint içinde flash'a girme.
 **WHY** Breach bu sırayı bilerek kurar: önce flash gelir, Neon'un sprint refleksi tetiklenir, stun içine çeker. Sırayı tanırsan refleksini frenlersin.
 
 ---
 
-**IF** Breach flash'ı Neon'un slide peek hattına geldi
+**IF** Breach flash'ı Neon'un slide peek hattına attı
 **MEANING** Flash Neon'u kör eder, slide'ın nişanı gider, yakın mesafede savunmasız kalır.
 **COUNTER** Flash sesini duyduysan slide'ı atma — bekle. Ses geçtikten sonra pozisyonu değiştir, sonra slide.
 **WHY** Slide'ın gücü sürpriz + nişan. Flash ikisini de sıfırlar, kör slide bedava hedef olur.

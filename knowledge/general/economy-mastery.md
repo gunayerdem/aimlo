@@ -69,7 +69,7 @@ NEDEN: save'in işi bu round'u kazanmak değil, sonraki round'da herkesin elinde
 
 DURUM: düşman eco'da, sen full'sün.
 NE ANLAMA GELİR: yakına gelip kafana sıkmaya çalışacaklar.
-NE YAPARSIN: uzak mesafe tut. Spectre veya Ares al, duvarları sprey'le. Op ALMA — yakına gelince işe yaramaz.
+NE YAPARSIN: Uzak mesafe tut. Spectre veya Ares al, duvarlara spray sık. Op ALMA — yakına gelince işe yaramaz.
 NEDEN: eco takımı agresif gelir, Sheriff one-tap'leri uçuşur — mesafe seni korur.
 
 ---

@@ -173,7 +173,7 @@ Takım arkadaşını iyileştirir veya ayağa kaldırır.
 
 - **Viper — A Tunnel duvar + B Main duvar:** Uzun görüş hattını keser.
 - **Sova — Double recon mid:** Breeze info ağırlıklı, recon atışını çalış.
-- **Jett — Ass pozisyonunda Op:** Breeze'in uzun görüş hattını Op'a göre, Jett burada serbest.
+- **Jett — A Site Op:** Breeze'in uzun görüş hattını A Site'tan Op'la kilitle, Jett burada en rahat oynar.
 - **Harbor — Mid duvar + B duvar:** Double controller için ideal harita.
 - **Cypher — Long görüş hattı tel:** A Cave veya B Pyramid flank'ini tut.
 
@@ -280,4 +280,4 @@ Her ajanın round başında sınırlı utility hakkı var. Onu nasıl harcadığ
 
 **Diamond-Ascendant:** Utility'yi kullanıyorsun ama zamanlaman zayıf. Flash, arkadaşın peek atmadan patlamalı. Molly, defuse sesini duyar duymaz atılmalı. Smoke, arkadaşın içinden geçmeden önce yerine oturmalı. Bu üç şeyi düzeltirsen utility'nin değeri ikiye katlanır.
 
-**Immortal-Radiant:** Utility ekonomisi ve lineup ustalığı. Her haritada 5-10 lineup ezberi + rakibin utility'sini okuyup kendininkini ona göre kullan. Rakip smoke attıysa arkasına molly at. Rakip flash attıysa duvara dön, peek etme. Rakibin attığı her utility'ye senin elinde bir karşılık var.
+**Immortal-Radiant:** Utility ekonomisi ve lineup ustalığı. Her haritada 5-10 lineup ezberi + rakibin utility'sini okuyup kendininkini ona göre kullan. Rakip smoke attıysa arkasına molly at. Rakip flash attıysa duvara dön, peek atma. Rakibin attığı her utility'ye senin elinde bir karşılık var.

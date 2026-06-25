@@ -6,7 +6,7 @@ Vyse tuzaklarla alan kapatan bir sentinel. Killjoy hasar verip geciktirir, Cyphe
 ## 2. Yetenek Seti
 - **Duvar Tuzağı (Q)** — 200 kredi, 1 şarj. Yere gizli bir tuzak göm; düşman üstünden geçince arkasında yıkılmaz bir duvar yükselir ve kısa süre durur. Hasar vermez — işi düşmanı bölmek, kaçışını veya geri çekilişini kesmek. Bir düşmanı içeri kapatıp ekibinden ayır, ya da push eden takımı ikiye böl.
 - **Flash Tuzağı (E)** — bedava, geri toplanabilir. Bir yüzeye gizli bir çiçek koy; tetiklediğinde ona bakan herkesi kör eder. Tuzak görünmez durur — düşman varlığını bilmez. Kullandıktan sonra geri topla, başka yere göm. Sen tetiklersin: tam peek atacağın an aç, kör düşmana çık.
-- **Diken (C)** — 150 kredi, 2 şarj. Attığın yere gizli iner; tetiklendiğinde geniş bir diken alanına açılır, içinden geçen düşmana hasar verir ve yavaşlatır. Killjoy molly mantığı ama kalıcı tuzak gibi — dar geçide göm, geçen yavaşlar + hasar yer. İki şarjın var, iki ayrı giriş yolunu kapat.
+- **Diken (C)** — 150 kredi, 2 şarj. Attığın yere gizli iner; tetiklendiğinde geniş bir diken alanına açılır, içinden geçen düşmana hasar verir ve yavaşlatır. Molly mantığında ama gömülü duran bir tuzak gibi — dar geçide göm, üstünden geçen yavaşlar ve hasar yer. İki şarjın var, iki ayrı giriş yolunu kapat.
 - **Ult (X)** — 8 ult puanı. Geniş bir alana metal diken yayar; içinde kalan düşmanın ana silahı kilitlenir, ateş edemez. Tabancası ve yetenekleri çalışır ama tüfek/marksman avantajı sıfırlanır. Düşmanı tabanca dövüşüne mecbur bırakırsın — siz tüfekliyken bu turu kazanırsınız.
 
 ## 3. Temel Sorumluluklar

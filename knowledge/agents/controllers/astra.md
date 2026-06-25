@@ -14,19 +14,19 @@ Astra'yı doğru oynarsan harita sana çalışır, sen haritaya değil. Yıldız
 ## 3. Sık Yapılan Hatalar
 - 5 yıldızı koyup round boyunca hiç taşımamak — yıldız statik değil, esnek
 - çekiş ve stun'ı hiç kullanmayıp Astra'yı kötü bir smoke ajanı gibi oynamak
-- Çatışmanın ortasında gökyüzüne çıkmak — bedenin açıkta kalır, ölürsün
+- Çatışmanın ortasında yıldız koyma moduna geçmek — bedenin açıkta kalır, bedavaya ölürsün
 - ult'u takım arkadaşlarının rotasyon yoluna koymak
 - Yıldızları düşman bölgesine çok erken koyup düşmanın yok etmesine izin vermek
 - Geri çekme animasyonu sırasında smoke'ta boşluk açmak
-- Round başında 5 yıldızı koymadan gökyüzünden inmek — round içinde yeni yıldız koymak için tekrar gökyüzüne çıkmak zorunda kalmak, yani gereksiz risk
+- Round başında beş yıldızını koymadan yıldız moddan çıkmak — sonra yeni yıldız koymak için tekrar moda geçmen gerekir, o da seni boşuna açığa çıkarır
 - Geri çekme bıraktığı sahte smoke'a güvenip onu gerçek kapatma sanmak — o gölge saniyeler içinde dağılır, düşmanı durdurmaz
 
 ## 4. Kalıp -> Anlam
 
-**IF** aktif çatışma sırasında round başına 2-3'ten fazla gökyüzüne çıkıyorsun
-**MEANING** Astral düzlemde fazla zaman harcıyorsun, bedenin açıkta
-**COUNTER** Yıldızları satın alma aşamasında ve round'un ilk anında yerleştir. Çatışma sırasında gökyüzüne sadece hızlı geri çek-yeniden koy için çık.
-**WHY** Her gökyüzüne çıkışta bedenin savunmasız. Ne kadar az çıkarsan o kadar hayatta kalırsın.
+**IF** çatışmanın ortasında round başına ikiden fazla kez yıldız koyma moduna geçiyorsun
+**MEANING** O sırada bedenin açıkta, vurulursun
+**COUNTER** Yıldızları satın alma aşamasında ve round'un ilk anında yerleştir. Çatışma sırasında yıldız moduna sadece hızlı geri çek-yeniden koy için geç.
+**WHY** Her yıldız moduna geçişte bedenin savunmasız. Ne kadar az geçersen o kadar hayatta kalırsın.
 
 **IF** tüm yıldızları smoke olarak kullanıyorsun, stun ve çekişe hiç dokunmuyorsun
 **MEANING** Astra'yı kötü bir smoke ajanı gibi oynuyorsun
@@ -63,10 +63,10 @@ Astra'yı doğru oynarsan harita sana çalışır, sen haritaya değil. Yıldız
 **COUNTER** Stun yıldızını choke'a önceden koy, düşman tam o açıya girdiği anda patlat — hemen arkasından takım swing atsın.
 **WHY** Stun ancak içinde düşman varken değer üretir. Boş açıya patlayan stun, takımına hiçbir avantaj vermez ve cooldown'a girer.
 
-**IF** ult duvarını koyduğun yöne (engelleyen yüzüne) dikkat etmiyorsun
-**MEANING** Duvar mermini ve sesini hangi yöne kestiğini bilmiyorsun, kendi takımını da köreltebiliyorsun
-**COUNTER** Duvarı yerleştirirken düşman tarafını ayır: mermi ve ses sadece o yönden kesilsin. Takımın duvarın güvenli tarafında kalsın.
-**WHY** ult iki taraftan da görüşü ve sesi keser. Yanlış yöne kurarsan takımının çatışmasını da köreltirsin, avantajı düşmana verirsin.
+**IF** ult duvarını yanlış yere kurup kendi takımının da görüşünü kapatıyorsun
+**MEANING** Duvar her iki yönden de mermi ve sesi kesiyor, sen de takımının dövüşeceği açıyı kapatmış oluyorsun
+**COUNTER** Ult duvarını takımının görüş hattını kesmeyecek yere kur. Duvar iki tarafı da kör ettiği için kendi takımının dövüşeceği açıyı kapatma — site'ı düşmanla aranızdan böl, takımının arkasından değil.
+**WHY** ult iki taraftan da görüşü ve sesi eşit keser. Yanlış yere kurarsan takımının çatışmasını da köreltirsin, avantajı düşmana verirsin.
 
 ## 5. Harita Etkileşimleri
 - **Breeze**: Geniş açık alanlar yüzünden smoke'lar her şeyden önemli. ult mid'i keser, oyunu ikiye böler. A Hall ve B Hall'a yıldız koy, harita çapında kontrol kur. Açık alanlarda çekiş zayıf — yıldızlarını smoke önceliğiyle dağıt, çekişi sadece dar geçitlere sakla.
@@ -76,9 +76,9 @@ Astra'yı doğru oynarsan harita sana çalışır, sen haritaya değil. Yıldız
 - **Ascent**: A main ve B main birincil çekiş noktaların — daracık girişler stun + çekiş kombosu için ideal. Mid'deki yıldız (özellikle Market/Catwalk hattında) sana erken push bilgisi verir; düşman mid'i zorladığında o yıldızı stun'a çevirip tempoyu kır. ult'u A'da Main ile site arasına kurarsan execute'i tek başına durdurabilirsin.
 
 ## 6. Eşleşme Notları
-- **Sova'ya karşı**: recon gökyüzündeyken bedenini açığa çıkarır. Sova recon attığında gökyüzüne çıkma.
-- **Breach'e karşı**: molly gökyüzündeyken bedenine hasar verir. Breach'in bilinen yetenek yolları yakınında gökyüzüne çıkma.
-- **Rush comp'a karşı**: çekiş ve stun hızlı push'ları cezalandırır. Yıldızları giriş noktalarına önceden koy, düşman girdiği an aktive et.
+- **Sova'ya karşı**: Sova recon attığında yıldız moduna geçme — o moddayken bedenin açıkta kalır, recon seni gösterir.
+- **Breach'e karşı**: Breach'in molly'si sen yıldız modundayken bile bedenine hasar verir. Breach'in molly atacağı bilinen geçitlerin yakınında yıldız moduna geçme.
+- **Rush comp'a karşı**: çekiş ve stun hızlı push'u durdurur — düşman koşarken çekişle yakalayıp stun'la sersemletirsin, takımın bedavaya kill alır. Yıldızları giriş noktalarına önceden koy, düşman girdiği an aktive et.
 - **Sentinel ile**: Sentinel siteyi tutar, sen yıldızları uzaktan aktive ederek harita çapında kontrol sağlarsın — fiziksel rotate etmene gerek kalmaz.
 
 ## 7. Oyuncuya Ne Söylenmeli
@@ -98,9 +98,9 @@ Astra'yı doğru oynarsan harita sana çalışır, sen haritaya değil. Yıldız
 
 **Stun'ı çatışmaya denk getir:** Stun ancak içinde düşman varken altın değerinde. Yıldızı choke'a önceden koy, düşman tam o açıya girdiği an patlat ve aynı anda "şimdi" çağrısı yap — takım o pencerede swing atsın. Boş açıya patlayan stun cooldown'a girer, sana hiçbir şey kazandırmaz.
 
-**ult'u proaktif kur, clutch'a saklama:** ult 4v4-5v5'te haritayı ikiye bölerek takımın yarısını çatışma dışı bırakır. Bunu execute'in ilk anında ya da retake'e girerken at; duvarın engelleyen yüzünü düşman tarafına çevir ki kendi takımını köreltmeyesin. Az kişi kalınca atılan duvar bu makro etkisini tamamen kaybeder.
+**ult'u proaktif kur, clutch'a saklama:** ult 4v4-5v5'te haritayı ikiye bölerek takımın yarısını çatışma dışı bırakır. Bunu execute'in ilk anında ya da retake'e girerken at; duvarı düşmanla takımın arasına kur, site'ı ikiye bölsün — kendi takımının dövüştüğü açının üstüne çekme, yoksa onları da kör edersin. Az kişi kalınca atılan duvar bu makro etkisini tamamen kaybeder.
 
-**Zorlanıyorsan**: "Çatışmanın ortasında gökyüzüne çıkmayı bırak. Yıldızları satın alma aşamasında koy, okumana güven, yerden aktive et. Sen gökyüzündeyken bedenin ölüyor."
+**Zorlanıyorsan**: "Çatışmanın ortasında yıldız koyma moduna geçmeyi bırak. Yıldızları satın alma aşamasında yerleştir, okumana güven, yerden aktive et. Sen o moddayken bedenin açıkta, ölürsün."
 
 **Tahmin edilebilirsen**: "Düşman yıldız noktalarından kaçınıyor çünkü her round aynı yere koyuyorsun. Önceki round gördüklerine göre her round 2-3 yıldızı farklı noktaya taşı."
 
@@ -110,4 +110,4 @@ Astra'yı doğru oynarsan harita sana çalışır, sen haritaya değil. Yıldız
 - **Iron-Silver**: 3-4 yıldızı yaygın smoke noktalarına koy, takım ihtiyaç duyduğunda smoke aç. Çekiş ve stun'ı yalnızca dar girişlerde dene.
 - **Gold-Platinum**: Dar girişlerde çekiş kullan. Round ortasında yanlış koyduğun yıldızı geri çekip taşı. Her harita için bir stun kombosu belirle.
 - **Diamond-Ascendant**: 5 yıldızı tam yönet. Çekiş + stun komboları her round standardın olsun. ult'u execute ve retake başında proaktif kullan.
-- **Immortal-Radiant**: Her round rakibi oku, yıldız yerleşimini ona göre değiştir. Çatışma sırasında gökyüzüne çıkışı minimuma indir. ult zamanlaması round'un sonucunu belirler — bunu bil.
+- **Immortal-Radiant**: Her round rakibi oku, yıldız yerleşimini ona göre değiştir. Çatışma sırasında yıldız koyma moduna geçişi minimuma indir. ult zamanlaması round'un sonucunu belirler — bunu bil.

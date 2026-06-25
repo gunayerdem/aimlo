@@ -6,18 +6,18 @@
 - Senin işin site almayı ayak yarışına çevirmek. Savunma crossfire kurmadan sen içeride olacaksın.
 
 ## 2. Temel Sorumluluklar
-- **Atakta:** Duvarını kur, sprint at, site'a ilk gir. Duvarla crossfire'ı böl, takıma koridor aç. Slide ile dar açılara gir — choke çıkışı, box köşesi, kapı kenarı. 2+ düşman görünce ult'unu aç.
+- **Atakta:** Duvarını kur, sprint at, site'a ilk gir. Duvarla crossfire'ı böl, takıma koridor aç. Slide ile dar açılara gir — choke çıkışı, kutu köşesi, kapı kenarı. 2+ düşman görünce ult'unu aç.
 - **Defansta:** Site'lar arası geçişte sprint at, yürüme. Slide-peek ile ileri açıyı tut. Duvarınla push'u istediğin yere yönlendir. Site düşünce retake'e sprint at.
 - **Takımın senden beklentisi:** Site'a ilk varan sensin. Ya açılış kill'ini al, ya da takımın hemen trade yapabileceği kadar kaos çıkar. İkisi de iş görür.
 
 ## 3. Sık Yapılan Hatalar
 1. **Duvarsız sprint** — Sprint ses çıkarır. Duvar yoksa açık crossfire'a koşarsın, slide bitmeden ölürsün. Önce duvar, sonra sprint.
-2. **Yanlış mesafeden slide** — Çok uzaktan slide atarsan düşman seni takip eder. Çok yakından atarsan hız avantajın biter. Orta mesafeden gir: düşmanı cezalandıracak kadar yakın, tepki veremeyeceği kadar hızlı.
+2. **Yanlış mesafeden slide** — Çok uzaktan slide atarsan düşman seni takip eder. Çok yakından atarsan hız avantajın biter. Orta mesafeden gir: bedavaya kill alacak kadar yakın, tepki veremeyeceği kadar hızlı.
 3. **Takımı kesen duvar** — Takım arkadaşının açısını kapatan duvar, hiç duvar olmamasından kötü. Duvarın koridor açacak, bariyer örmeyecek.
 4. **Ult'u çok erken açmak** — Dövüş alanına girmeden açarsan süreyi yolda harcarsın. Önce pozisyona gir, düşman menzile girince aç.
 5. **Aynı açıdan tekrar slide** — Bir kez gördüler mi, slide yüksekliğini önceden nişanlarlar. Her round aynı köşeyi kullanma.
 6. **Defansta sprint'i unutmak** — Senin en büyük savunma silahın hız. Yürüyorsan bu gücü çöpe atıyorsun.
-7. **Ult'u panik butonu yapmak** — Kaybederken açarsan spin-up süresi seni öldürür. Ult'u önde olduğun anlarda aç, umutsuzlukta değil.
+7. **Ult'u panik anında açmak** — Kaybederken açarsan ult hızlanana kadar seni vururlar. Ult'u önde olduğun anlarda aç, umutsuzlukta değil.
 8. **Hareket halinde ateş etmek** — Slide ya da sprint sırasında tetiğe basarsan mermilerin saçılır. Hız seni açıya taşır; vuruşu daima duruşta yap.
 9. **Tüm kiti girişe yakmak** — Duvar, sprint ve stun'ı hep girişte boşaltırsan post-plant savunmasında elin boş kalır. Bir kaynağı plant sonrasına sakla.
 
@@ -54,7 +54,7 @@ WHY: Slide momentumu seni geçtiğin düşmana sırtını döndürür ve ikinci 
 
 IF: Slide ya da sprint sırasında ateş ediyorsun ama mermilerin hedefi tutmuyor
 MEANING: Hareket halindeyken nişan dağılır — koşarken/slide ederken ateş etmek isabeti yok eder
-COUNTER: Slide'ı mesafe kapatmak için kullan, ateş etmek için değil. Slide bitsin, dur, sonra vur. Sprint'ten çıkışta da bir an dur — hareket dururken nişanın oturur, çapraşık değil.
+COUNTER: Slide'ı mesafe kapatmak için kullan, ateş etmek için değil. Slide bitsin, dur, sonra vur. Sprint'ten çıkışta da bir an dur — hareket dururken nişanın oturur, dağılmaz.
 WHY: Valorant'ta koşarken/slide ederken ateşin yayılır. Hızın işi seni açıya taşımak; tetiği duruşta çekersin.
 
 IF: Plant'tan sonra duvarını çoktan harcamış oluyorsun, retake gelince elin boş
@@ -81,13 +81,13 @@ WHY: Slide yörüngesi sabittir; bir kez okunduğunda düşman tetik açısını
 
 ## 7. Oyuncuya Ne Söylenmeli
 ### İyi oynarken
-**Oyuncu Aksiyonu:** Site'ı bölmek için önce duvarını açıyorsun, sonra sprint atıyorsun. Slide-peek orta mesafeye iniyor — cezalandıracak kadar yakın, tepki veremeyecek kadar hızlı.
+**Oyuncu Aksiyonu:** Site'ı bölmek için önce duvarını açıyorsun, sonra sprint atıyorsun. Slide-peek orta mesafeye iniyor — bedavaya kill alacak kadar yakın, tepki veremeyecek kadar hızlı.
 **Düşman Algısı:** Savunma duvarını görür ve sprint girişinin geleceğini bilir. Her seferinde aynı taraftan, duvar koridorunun ucundan çıkmanı bekler.
 **Düşman Tepkisi:** İki seçenekleri var: ya duvar çıkışını tutup diğer taraftaki arkadaşlarından kopuk kalırlar, ya da tamamen geri çekilirler. Duvarın arkasındaki oyuncunun açısı yok, trade yapamaz.
 **Fırsat Penceresi:** Duvar iki savunucuyu birbirinden kestiği an senin kill pencerendir. Slide attığın oyuncunun crossfire desteği sıfır — arkadaşı duvarın diğer tarafında kilitli, tüm süre boyunca trade gelemez.
-**Tekrar Stratejisi:** İlk execute'ta: ortadan duvar, sprint, sola slide. 1 düşman düşünce: aynı duvar açısı, sağa slide. Savunma duvar çıkışını beklemeye başlayınca: duvarı at, duvara kilitlenen savunucuları cezalandırmak için off-angle'dan ham sprint. Savunma retake'e koşunca ult'unu duvarın içinde aç: crossfire azalır, hasar pencerin açılır.
+**Tekrar Stratejisi:** İlk execute'ta: ortadan duvar, sprint, sola slide. 1 düşman düşünce: aynı duvar açısı, sağa slide. Savunma duvar çıkışını beklemeye başlayınca: duvarı at, duvara takılan savunucuların üstüne beklemedikleri bir açıdan sprint at. Savunma retake'e koşunca ult'unu duvarın içinde aç: crossfire azalır, hasar pencerin açılır.
 **Düşman Adaptasyonu:** Savunma duvarın arkasında beklemeye başlarsa, slide bitiş noktanı önceden nişanlarsa ya da duvarın kapatmadığı tarafa yığılırsa.
-**Karşı Adaptasyon:** Duvarın arkasında bekliyorlarsa — sprint sırasında duvarın üstünden stun at, beklemeyi cezalandır. Slide bitiş noktanı önceden nişanlıyorlarsa — sprint'i erken kes, slide yerine geniş peek at. Kapatılmamış tarafa yığıldılarsa — duvar açını değiştir ya da tamamen farklı yoldan gir.
+**Karşı Adaptasyon:** Duvarın arkasında bekliyorlarsa — sprint sırasında duvarın üstünden stun at, beklediği yerde kafadan vur. Slide bitiş noktanı önceden nişanlıyorlarsa — sprint'i erken kes, slide yerine geniş peek at. Kapatılmamış tarafa yığıldılarsa — duvar açını değiştir ya da tamamen farklı yoldan gir.
 ### Zorlanırken
 "Önce duvarını aç. Duvar yoksa sprint atma — bu kadar basit."
 ### Öngörülebilir olduğunda

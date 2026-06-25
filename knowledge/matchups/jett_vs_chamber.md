@@ -13,7 +13,7 @@ tags: [matchup, jett, chamber]
 
 **IF**: Jett dash'le yakına atlayıp Chamber'ın tabanca ve op avantajını sıfırlıyorsa
 **MEANING**: Dash yön değiştirir, Chamber'ın ışınlanma noktasının kapsamadığı bir açıya geçer. Jett yukarı da çıkabilir; ışınlanma noktası aşağıda kalır, ışınlanma işe yaramaz. Üstüne Jett noktanın yerini biliyorsa ışınlanan Chamber'ı oraya kadar kovalar.
-**COUNTER**: Tabancayla dash animasyonuna ateş et — dash sırasında Jett düz hareket eder, atışı tahmin edebilirsin. Ult uzun görüş hattında ilk atışı sana verir. Işınlanma noktasını hazır tut, Jett dash'le geçince at ve hemen ışınlan. Noktayı her raund farklı yere koy ki Jett aynı rotayla yaklaşamasın.
+**COUNTER**: Tabancayla dash animasyonuna ateş et — dash sırasında Jett düz hareket eder, atışı tahmin edebilirsin. Ult uzun açıda ilk atışı sana verir — ilk kurşun sende olur. Işınlanma noktasını hazır tut, Jett dash'le geçince at ve hemen ışınlan. Noktayı her raund farklı yere koy ki Jett aynı rotayla yaklaşamasın.
 **WHY**: Bu matchup'ı mesafe belirler. Jett yakında kazanır, Chamber uzakta.
 
 **IF**: Chamber'ın ışınlanma noktası okunmuş, Jett her raund aynı noktaya kovalıyorsa
@@ -53,6 +53,6 @@ tags: [matchup, jett, chamber]
 
 **MID**: Kaçış kullanmaya başlarlar ama nokta ve dash yerleri tekrar eder. Chamber'a noktayı her raund farklı tarafa koymayı göster. Jett'e dash yönünü her seferinde değiştirmeyi göster — aynı yönden girince Chamber okur.
 
-**HIGH**: Açı ve önceden okuma devreye girer. Jett'e şunu göster: smoke'la görüş hattını kapat, Shorty ya da flash ile yakın mesafeye zorla. Chamber'a şunu göster: Jett smoke attığında noktayı smoke'un karşı tarafına koy, Jett smoke'tan çıkınca ult hazır olsun. Işınlanma kilitlenmesini tanıt — Jett için girişin ne zaman, Chamber için nasıl önleneceğini göster.
+**HIGH**: Açı ve önceden okuma devreye girer. Jett'e şunu göster: smoke'la görüş hattını kapat, shotgun ya da flash ile yakın mesafeye zorla. Chamber'a şunu göster: Jett smoke attığında noktayı smoke'un karşı tarafına koy, Jett smoke'tan çıkınca ult hazır olsun. Işınlanma kilitlenmesini tanıt — Jett için girişin ne zaman, Chamber için nasıl önleneceğini göster.
 
 **ELITE**: İkisi de birbirinin nokta ve dash yönünü okur. Chamber noktayı her raund değiştirmeli, peek öncesi değil raund başında koymalı. Jett ışınlanma kilitlenmesine denk peek atmalı — Chamber geri çekilince hemen gir. Mesafeyi kendi lehine çeken raundı alır: Jett smoke ve flash ile yakına zorlar, Chamber görüş hattını açık tutarak uzakta tutar.

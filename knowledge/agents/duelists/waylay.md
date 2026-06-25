@@ -79,7 +79,7 @@ COUNTER: Giriş açını ve zamanlamanı tur tur değiştir. Bir tur erken slow 
 WHY: Waylay'in avantajı sürprizde ve hızda. Düşman giriş kalıbını öğrenirse açını önceden tutar, dash'in hızı işe yaramaz.
 
 ## 5. Harita Etkileşimleri
-- **Bind — S Tier:** Dar koridorlar ve teleport çıkışları yavaşlat-dal için ideal. A Short ve Hookah'ta köşeye slow at, yavaşlasın, dash ile dal. Teleport'la beklenmedik anda baskı kur; geri-kayma noktanı çıkışına koy.
+- **Bind — çok güçlü:** Dar koridorlar ve teleport çıkışları yavaşlat-dal için ideal. A Short ve Hookah'ta köşeye slow at, yavaşlasın, dash ile dal. Teleport'la beklenmedik anda baskı kur; geri-kayma noktanı çıkışına koy.
 - **Haven — S Tier:** Üç site, çok giriş; mobilite burada altın. C Long'da slow + dash giriş açar, A Long'da hızlı boşluk kapatma çok güçlü. Geri-kayma noktanı her site için ayrı planla.
 - **Ascent — S Tier:** A Main'in dar girişi yavaşlat-dal için biçilmiş kaftan. Mid kontrolünü dash hızıyla zorla. B Main'de slow'u savunucunun tuttuğu açıya at, dash ile gir.
 - **Split — A Tier:** A Ramp ve B Main'deki dar koridorlar slow'un kaçış alanını kapatır — yavaşlat, dal, ilk öldürmeyi al. Dikey dash'le heaven/üst açılara çık. Dar yapı geri-kaymanı da kolaylaştırır.
@@ -102,7 +102,7 @@ WHY: Waylay'in avantajı sürprizde ve hızda. Düşman giriş kalıbını öğr
 **Düşman Algısı:** Karşındakiler dash'inin çok hızlı olduğunu sanıyor. Aslında her düelloyu önden açıyorsun — slow düşmanı yavaşlattı, sen tam tepki veren bir hedefe değil, geri kalmış bir hedefe nişan alıyorsun.
 **Düşman Tepkisi:** Ya yavaşladıkları açıyı terk ediyorlar (değerli süre harcayarak) ya da yerinde kalıp yavaşlamış hâlde seninle dövüşmek zorunda kalıyorlar.
 **Fırsat Penceresi:** Slow yere oturduğu an gir. Düşman yavaşladı; nişanı geç, kaçışı geç. Giriş anı tam şimdi.
-**Tur Rotasyonu:** Bir tur erken slow + hızlı dash ile birincil açıyı bas. Sonraki tur gecikmeli gir, taramanı bekleyenleri hız farkıyla cezalandır. Öbür tur farklı açıdan veya yukarıdan dikey dash'le gel. Geri-kayma noktanı her tur farklı yere koy ki kaydığın anı önceden nişanlamasınlar.
+**Tur Rotasyonu:** Bir tur erken slow + hızlı dash ile birincil açıyı bas. Sonraki tur gecikmeli gir, seni bekleyenleri hız farkıyla yakala, kafadan vur. Öbür tur farklı açıdan veya yukarıdan dikey dash'le gel. Geri-kayma noktanı her tur farklı yere koy ki kaydığın anı önceden nişanlamasınlar.
 **Düşman Adaptasyonu:** Birkaç temastan sonra düşman giriş açını önceden tutar, slow'dan kaçacak yere geçer ya da geri kaydığın noktayı nişanlar.
 **Karşı Adaptasyon:** Açını tutuyorlarsa — farklı açıdan ya da yukarıdan gir. Slow'dan kaçıyorlarsa — slow'u kaçacakları yere at, dash'i asıl açıya. Geri-kaymanı nişanlıyorlarsa — noktanı farklı yere koy ya da o turda hiç geri kayma, kal ve tut.
 

@@ -64,7 +64,7 @@ Viper haritayı ikiye böler. Duvarı ve orb'u tek bir paylaşımlı yakıt havu
 
 **IF** savunmada duvarı/smoke'u sadece düşmanı engellemek için kullanıyorsun, içine girip beklemiyorsun
 **MEANING** Viper'ın savunma gücünü tek yönlü kullanıyorsun — kendi dumanın içinden bakma avantajını atlıyorsun
-**COUNTER** Savunmada kendi duvarının/smoke'unun içine otur. Sen düşmanı flu görürsün ama düşman seni hiç göremez; içeri push edeni decay'le yavaşken yakalarsın.
+**COUNTER** Savunmada kendi duvarının/smoke'unun içine otur. Sen düşmanı bulanık da olsa görürsün ama düşman seni hiç göremez; içeri push edeni, can eritme yavaşlatmışken yakalarsın.
 **WHY** Viper kendi dumanından nettir, düşman değildir. Bu tek yönlü görüş savunmada bedava açı kazandırır — duvarı sadece kapı gibi kullanırsan bu avantajı çöpe atarsın.
 
 ## 5. Harita Etkileşimleri

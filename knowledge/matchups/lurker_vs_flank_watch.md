@@ -36,12 +36,12 @@ Lurker, saldırı takımından kopup savunmanın arkasını tehdit eden solo oyu
 
 **IF** Flank watch oynarken tuttuğun hatta ayak sesi duydun
 **MEANING** Lurker pozisyon değiştiriyor — bilgi artık sende
-**COUNTER** Lurker'ken sesini kesmek için walk bas; silah çekmeyi ve reload'u dikkatli zamanla
+**COUNTER** Lurker'ken sesini kesmek için yürüyerek bas (walk); silah çekmeyi ve reload'u dikkatli zamanla
 **WHY** Ayak sesi lurker'ın en büyük açığıdır. Ses verdiğin an avantaj karşıya geçer.
 
 ---
 
-**IF** Lurker, Chamber tuzak + keskin nişancı tabancasıyla pasif pozisyon kurdu
+**IF** Lurker, Chamber tuzağı + tek atışlık tabancasıyla pasif pozisyon kurdu
 **MEANING** Tuzak ona bilgi taşır, tabanca tek vuruşla seni alır
 **COUNTER** Flank watch olarak tuzak sesini duyduğun an takıma haber ver. Recon ile tuzağı söktür — Chamber'ın üç parçasından biri kırılırsa sıradan bir duelist'e döner
 **WHY** Chamber lurker'ı tuzak + TP + tek-vuruş tabanca üçlüsüyle çalışır. Birini bozarsan kalan ikisi de zayıflar.

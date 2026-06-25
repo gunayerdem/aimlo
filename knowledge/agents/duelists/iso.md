@@ -18,7 +18,7 @@
 5. **Kill sonrası küreyi kaçırmak** — Küre kısa süre durur. Vurmayı kaçırırsan kalkan gelmez, Iso'nun tüm döngüsü kırılır.
 6. **Dövüşten kaçmak** — Iso dövüşmezse kalkan birikmez, duvar değer üretmez. Bir düşman açıkta göründüğü an kalkanı aç ve gir.
 7. **Kötü duvar açısı** — Duvarın açısı hangi düşmanı izole ettiğini belirler. Yanlış açı yanlış kişiyi keser ya da savunucuya yeniden konumlanma süresi tanır. Her site için duvar açını ezbere bil.
-8. **Kalkanlıyken çok ileri gidip util'e yakalanmak** — Kalkan mermiyi emer ama düşman util'i (molotof, stun, flash) seni hâlâ etkiler. Kalkana güvenip dar geçide dalarsan ateş düellosunu kazanmadan util'le ezilirsin. Kalkan nişan düellosu içindir, util tarama için değil.
+8. **Kalkanlıyken çok ileri gidip util'e yakalanmak** — Kalkan mermiyi emer ama düşman util'i (molly, stun, flash) seni hâlâ etkiler. Kalkana güvenip dar geçide dalarsan ateş düellosunu kazanmadan util'le ezilirsin. Kalkan nişan düellosu içindir, util tarama için değil.
 9. **Ult arena'sında kötü konum** — Ult'la rakibi 1v1 arena'ya çektiğinde iş bitmedi. Arena'ya çıplak swing atarsan kalkan avantajını boşa atarsın. Önce kalkanı aç, sonra arena açısını net tut — bu garanti kazanılacak bir dövüş, mahvetme.
 
 ## 4. Kalıp -> Anlam
@@ -84,13 +84,13 @@ WHY: Iso bir entry duelist'i — duvar ve kalkan takımı içeri sokmak için. T
 **Fırsat Penceresi:** Kalkan düşmanı ekstra mermi harcamaya zorlar, her düelloda pencere senindir. Duvar her dövüşü kalkan avantajlı bir 1v1'e çevirir — crossfire bunu bozamaz.
 **Döngü:** Yaklaşırken kalkanı aç. Duvarla savunucuyu izole et, açıktakine peek at. Kill'den hemen sonra küreyi vur. Taze kalkanla sıradakine peek at. Ult'u site'ı tutan anchor'a ya da op'çuya kullan.
 **Düşman Adaptasyonu:** 4-5 round sonra vücut atışıyla kalkanı eritmeye, duvar açılarından kaçınmaya ya da retake'e çekilmeye başlarlar.
-**Karşı Adaptasyon:** Vücuda spam atıyorlarsa — counterstrafe yap ve crosshair'i baş hizasına aç; onlar vücuda yüklenirken sen kafadan vur. Duvar açından kaçıyorlarsa — duvarı farklı eksene taşı ya da rotation yolunu kes. Retake'e çekiliyorlarsa — site'ı bedavaya al, spike'ı plant et, ult'la en iyi oyuncularını kalkanlı 1v1 arena'ya çek.
+**Karşı Adaptasyon:** Vücuda spam atıyorlarsa — durup nişanını sabitle, crosshair'i baş hizasına çek; onlar vücuda yüklenirken sen kafadan vur. Duvar açından kaçıyorlarsa — duvarı farklı yöne taşı ya da geçiş yolunu kes. Retake'e çekiliyorlarsa — site'ı bedavaya al, spike'ı plant et, ult'la en iyi oyuncularını kalkanlı 1v1 arena'ya çek.
 ### Zorlanırken
 "Kalkansız dövüşe giriyorsun. Her peek'ten önce kalkanı aç. Küreyi kaçırdıysan dur, yeniden konumlan."
 "Kalkanı çok erken açıyorsun — köşeyi dönmeden bitiyor. Açıyı tam açacağın an aç, boş koridorda değil."
 "Birden fazla açıya tek kalkanla yükleniyorsun. Kalkan tek mermi emer; önce duvarla araya gir, sadece biriyle dövüş."
 ### Öngörülebilir olduğunda
-"Duvar açından kaçınıp izolasyonun etrafından dolaşıyorlar. Duvarı farklı eksene taşı, rotation yolunu kes."
+"Duvar açından kaçınıp izolasyonun etrafından dolaşıyorlar. Duvarı farklı yöne taşı, geçiş yolunu kes."
 "Aynı yerden aynı zamanda giriyorsun — savunucu kalkanını bekleyip vücuda spam'liyor. Giriş zamanlamanı ve açını round bazlı değiştir."
 "Ult'unu hep aynı hedefe atıyorsun, ona göre konumlanıyorlar. Hedefi round'un ekonomisine ve kim site'ı tutuyorsa ona göre seç."
 

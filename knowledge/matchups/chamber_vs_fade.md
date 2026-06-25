@@ -15,7 +15,7 @@ Chamber op'la uzun açı tutar, tabancasıyla kısa mesafede de sert vurur. Fade
 **MEANING**: Tarandın. İki kötü seçeneğin var — yerinde kalırsan bota yakalanırsın, hemen TP atarsan anchor'ı boşaltırsın ve Fade takımı site'ı bedavaya alır.
 **COUNTER**:
 - Botu tabancayla kafadan vur
-- Bot düşer düşmez Fade'e quick peek at
+- Bot düşer düşmez Fade'e hızlı peek at
 - Önce peek, TP sonra
 **WHY**: Bot düştükten sonra ilk peek'i cezalandırırsan hem frag hem pozisyon kazanırsın. Anında TP atarsan bedava bilgi vermiş olursun.
 

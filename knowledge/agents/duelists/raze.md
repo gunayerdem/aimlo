@@ -7,7 +7,7 @@
 
 ## 2. Temel Sorumluluklar
 - **Atak:** Site'a girmeden botu öne sür, düşmanın nerede beklediğini öğren. Dar açıları bombayla temizle. Sıçrama içeri dal, kaos çıkar. Savunma bir noktada yığıldıysa ult'u patlat.
-- **Defans:** Düşman push'u başlamadan botu öne at. Dar açıda gruplanan saldırganı bombayla cezalandır. Baskı altında kaldığında ya da spike kurulduktan sonra site'a dönmek için sıçrama kullan.
+- **Defans:** Düşman push'u başlamadan botu öne at. Dar açıda toplanan saldırganları bombayla söküp at, hasarla dağıt. Baskı altında kaldığında ya da spike kurulduktan sonra site'a dönmek için sıçrama kullan.
 - **Takım senden şunu bekler:** Site'a girmeden util'i çalıştır. Bot bilgisi, bomba hasarı ve sıçrama entry — bu üçünü peş peşe ver.
 
 ## 3. Sık Yapılan Hatalar
@@ -19,7 +19,7 @@
 6. **Bombayı retake'e saklamak** — Bombanın en değerli anı execute. Post-plant için saklarsan temizleme gücünü boşa harcarsın.
 7. **Botun kimseyi kilitleyemediği anı görmezden gelmek** — Bot kimseyi kovalamasa bile o açının boş olduğunu söylüyor. Bu bilgiyi oku, körlemesine girme.
 8. **Kendi util'inle kendine hasar vermek** — Raze'in bombası ve granatı sana da hasar verir. Çok yakına atarsan ya da patlama menzilinde durursan, kavgaya yarım canla girersin. Util'i at, sonra menzilden çık.
-9. **Sıçrama iner inmez ateş edememek** — Sıçrama havadayken ya da iniş anında nişanın oturmaz; düşürmüşsen ya da hareket halindeyken ateş edersen seri kaçar. İnişi düşmana değil, hemen yanındaki bir kapağa/duvara denk getir, yere basınca crosshair'i yerleştir, öyle aç.
+9. **Sıçrama iner inmez ateş edememek** — Sıçrama havadayken ya da iniş anında nişanın oturmaz; havadayken ya da hareket halindeyken ateş edersen seri kaçar. İnişi düşmana değil, hemen yanındaki bir kapağa/duvara denk getir, yere basınca crosshair'i yerleştir, öyle aç.
 
 ## 4. Kalıp -> Anlam
 IF: Site'a sıçrama iniyorsun ve anında ölüyorsun
@@ -87,7 +87,7 @@ WHY: Sıçrama seni mesafeden kurtarır ama kör bir köşeye atarsan tava tutul
 ### Zorlanırken
 "Bilmediğin yere sıçrama atma. Önce botu gönder, ne gösterdiğine bak, sonra gir."
 "Util'i kendine atma — patlamadan önce menzilden çık. Kavgaya tam canla gir, yarım canla değil."
-"sıçrama açık alana inme. İnişi bir kapağın ardına denk getir, yere basınca crosshair'i yerleştir, öyle aç."
+"Sıçramayla açık alana inme. İnişi bir kapağın ardına denk getir, yere basınca crosshair'i yerleştir, öyle aç."
 
 ### Öngörülebilir olduğunda
 "Botunu daha girişte tarayıp vuruyorlar. Bir tık geciktir ya da farklı açıdan sok."

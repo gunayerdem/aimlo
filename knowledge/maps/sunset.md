@@ -24,7 +24,7 @@ Sunset oynamayı öğrenmek istiyorsan önce Market oynamayı öğren. Orası ç
 
 Market'te bir karar ver ve geç. Burada bekleyerek hiçbir şey kazanmazsın.
 
-**Mid Courtyard**: Courtyard açık alan — geniş açıyla yüklenirsen seni tutan rakibe kolay hedef olursun. Courtyard'a çıkmadan önce Mid Top'tan ya da Market'ten bilgi topla. Bilgi yoksa swing yok.
+**Mid Courtyard**: Courtyard açık alan — geniş açıyla yüklenirsen seni tutan rakibe kolay hedef olursun. Courtyard'a çıkmadan önce Mid Top'tan ya da Market'ten bilgi topla. Bilgi yoksa peek yok.
 
 **B Main Girişi**: B Main dar ve düz — savunan sonu tutuyor, senin hareket alanın yok. Takım aynı hatta yığılıyor ve ilk oyuncu düşünce kalanlar aynı açıdan peek atıyor. İlk düşman düştüğünde ikinci oyuncu aynı açıdan girmesin — Market tarafından split yap.
 

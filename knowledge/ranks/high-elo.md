@@ -18,7 +18,7 @@ Haritayı dövüşmeden tutmak, Immortal ile Diamond arasındaki farkın büyük
 
 - **IF** util'i sadece kill almak için harcıyorsan
 - **MEANING** düşman serbest dolaşıyor, sen göremiyorsun
-- **COUNTER** smoke'u bir açıyı sürekli kapalı tutmak için kullan. Örnek: Haven'da mid box'ı kesen smoke düşmanın A'ya geçişini kapatır ve sana rotasyon bilgisi verir
+- **COUNTER** smoke'u bir açıyı sürekli kapalı tutmak için kullan. Örnek: Haven'da Garage'ı kesen smoke düşmanın A'ya geçişini kapatır ve sana rotasyon bilgisi verir
 - **WHY** düşman o açıdan geçemeyince nereye gittiğini takım okur, harita üstünlüğü sana geçer
 
 ### Düşman Alışkanlığını Okuma
@@ -47,7 +47,7 @@ Half-buy round'da hafif zırh + Spectre, doğru util ile düşmanı zorlar. Ama 
 
 - **Kazanılmış round'da peek atmak**: 4v2'desin, peek atıyorsun, 3v2'ye düşüyorsun. O round zaten sendeydi — sıfır kazançlı bir risk ekledin. Sayı avantajın varken zamanı oyna, dövüşü değil.
 
-- **Bilgiyi geç kullanmak**: recon attın, düşmanı gördün ama takım yerinden oynamadı. Bilgi eskir — recon düşman o pozisyondayken geldiyse o anda hareket et. Düşman bir sonraki noktaya geçtiyse bilgi geçersiz, o açıya commit etme.
+- **Bilgiyi geç kullanmak**: recon attın, düşmanı gördün ama takım yerinden oynamadı. Bilgi eskir — recon düşman o pozisyondayken geldiyse o anda hareket et. Düşman bir sonraki noktaya geçtiyse bilgi geçersiz, o açıya yüklenme.
 
 - **Taktik soruna mekanik çözüm aramak**: Plan tutmayınca "aim'le geçerim" diyorsun. Bu seviyede karşı taraf da iyi vuruyor. Çözüm aim'de değil, okumada.
 
@@ -68,6 +68,6 @@ Bu seviyede aim farkı küçük. Daha iyi bilgi toplayan, daha hızlı hareket e
 - **WHY** doğru karar tekrarlandığında tutarlı sonuç üretir
 
 - **IF** round açılışında sürekli ölüyorsan
-- **MEANING** kör agresyon yapıyorsun — bilgi almadan commit ediyorsun
+- **MEANING** kör agresyon yapıyorsun — bilgi almadan dalıyorsun
 - **COUNTER** peek atmadan önce somut bir tetikleyici bekle: takım arkadaşın karşıyı bağladığında, düşman smoke'u yere indiğinde ya da ayak sesi yaklaştığında hareket et
 - **WHY** tetikleyiciye bağlı agresyon çok daha yüksek oranda tutar

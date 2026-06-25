@@ -17,7 +17,7 @@ Breach duvarın ardına vuran initiator. Flash'ı da, stun'u da, molly'yi de —
 - Ult'u 1v2'de çaresizlikten yakıyorsun — ult böyle harcanmaz.
 - Duvarsız bir yerde oturuyorsun — Breach'in bütün kiti çöpe gidiyor.
 - Flash'ı çok erken atıyorsun — sen takip etmeden patlayıp sönüyor, düşman gözünü açtığında karşısında kimse yok.
-- Util'inin hepsini turun başında "bilgi" için boşaltıyorsun — site'a girerken elinde flash yok, kuru dalıyorsun.
+- Util'inin hepsini turun başında "bilgi" için boşaltıyorsun — site'a girerken elinde flash yok, utility'siz dalıyorsun.
 
 ## 4. Kalıp -> Anlam
 
@@ -59,7 +59,7 @@ Breach duvarın ardına vuran initiator. Flash'ı da, stun'u da, molly'yi de —
 **IF** Bütün util'i turun ilk saniyelerinde "bilgi almak" için atıyorsun
 **MEANING** Stun ve flash'ı erken harcıyorsun, asıl girişte elin boş kalıyor
 **COUNTER** Tek bir util'le yokla (örneğin uzaktan stun), gerisini gerçek giriş için sakla. Bilgi toplama turu başka, site açma turu başka — ikisini aynı util'le karıştırma.
-**WHY** Breach'in değeri girişi açmakta. Util biterse takımın site'a kuru dalar, sen de elinde hiçbir şey olmadan ilk kurşunu yersin. Util zamanlaması kadar saklamak da beceridir.
+**WHY** Breach'in değeri girişi açmakta. Util biterse takımın site'a utility'siz dalar, sen de elinde hiçbir şey olmadan ilk kurşunu yersin. Util zamanlaması kadar saklamak da beceridir.
 
 ## 5. Harita Etkileşimleri
 - **Fracture**: Her köşede bir duvar var. Flash'ı, stun'u, molly'yi ayrı yüzeylerden at. Ult her iki site'ı birden vuruyor. İki taraftan giriş yapısı Breach'e biçilmiş kaftan — bir taraftan stun at, takım öbür taraftan dalsın.
@@ -82,7 +82,7 @@ Breach duvarın ardına vuran initiator. Flash'ı da, stun'u da, molly'yi de —
 **Düşman Tepkisi:** Ya flash'ı yüzlerine yiyorlar ya duvara bitişik her pozisyonu terk ediyorlar. Stun sarsıyorsa kalan herkes sabit hedef. O anda takımın girerse iş biter.
 **Faydalanma Penceresi:** Sarsma anında düşman hareket edemez, nişan alamaz, yetenek kullanamaz. Takımın tam o pencerede girsin — sesli hazırlığı bu yüzden flash atmadan önce verirsin, sonra değil.
 **Düşman Adaptasyonu:** Birkaç tur sonra duvar dibini terk eder, açık alanda oynar ya da sen kurulumunu yapmadan erken çıkarlar.
-**Karşı-Adaptasyon:** Açık alanda oynuyorlarsa en güçlü açılarını bırakmışlardır — takımın Breach'e gerek kalmadan kuru girebilir. Erken çıkıyorlarsa stun'la koşuyu durdur, flash'la takip et. Breach duvarın içinden vurduğu için koşarak giren düşmana da aynısını yaparsın. Düşman flash'ı duymaya başladıysa stun'la aç, flash'ı ikinci dalgada sakla — ezberini boz.
+**Karşı-Adaptasyon:** Açık alanda oynuyorlarsa en güçlü açılarını bırakmışlardır — takımın Breach'e gerek kalmadan utility'siz girebilir. Erken çıkıyorlarsa stun'la koşuyu durdur, flash'la takip et. Breach duvarın içinden vurduğu için koşarak giren düşmana da aynısını yaparsın. Düşman flash'ı duymaya başladıysa stun'la aç, flash'ı ikinci dalgada sakla — ezberini boz.
 
 ### Zorlanırken
 "Takımın seni takip etmiyor çünkü ne zaman ne atacağını söylemiyorsun. Her util'i atmadan önce sesli ver: hangi duvar, hangi yetenek. Söylemezsen takım hazırlanamaz, hazırlanamayan takım da girmez. Flash'ı erken atma — takım girişin ağzına gelince geri say, sayı bitince hep birlikte çıkın."

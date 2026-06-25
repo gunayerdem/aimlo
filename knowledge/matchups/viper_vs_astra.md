@@ -39,7 +39,7 @@ Ult karşılaştırması:
 ---
 
 **IF** Astra ult'unun çekim alanını Viper smoke'unun içine attı
-**MEANING** Çekim alanı smoke içindeki savunmacıyı dışarı çeker — smoke devre dışı kalır
+**MEANING** Astra'nın çekme alanı (pull) smoke içindeki oyuncuyu dışarı çeker — smoke devre dışı kalır
 **COUNTER** Smoke'tan çık, fuel alanını çekimin dışına kaydır. Astra seni sabitlemeye çalışıyor
 **WHY** Smoke'un içinde durursan çekim seni dışarı fırlatır ve açıkta kalırsın. Pozisyonunu çekime göre değiştir.
 

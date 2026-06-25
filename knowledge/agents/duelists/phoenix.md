@@ -89,7 +89,7 @@ WHY: Phoenix'in tek molly'si var; her round'u iyileşmeye harcarsan post-plant't
 **Zorlandığın ajanlar:**
 - **Skye:** Flash'i tam senin swing'inin ortasında seni körleştirir. Skye'ın flash'ini gördüğünde swing'e devam etme, çekil.
 - **KAY/O:** Bastırması tüm becerilerini keser — molly yok, flash yok, iyileşme yok. Bastırma yarıçapının dışında oyna, bıçak bitmeden entry'ni zamanla.
-- **Chamber:** Öngörülebilir flash-swing döngünü cezalandırır. Flash zamanlamasını değiştir, o açıdan swing beklediğini anlamasın.
+- **Chamber:** Flash-swing'in hep aynıysa o açıdan tek atışla seni keser. Flash zamanlamasını değiştir, o açıdan swing beklediğini anlamasın.
 
 **Baskıladığın ajanlar:**
 - **Cypher:** Tellerini flash ile geç, tuzaklar seni durduramaz.

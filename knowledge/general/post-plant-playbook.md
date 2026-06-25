@@ -107,7 +107,7 @@ Yayıl ama bir açıyı boş bırak. Flank izlemek zorunlu, çapraz açıyı yin
 Yığılmaya geç. 2 kişi aynı noktada, 1 kişi off-angle'da dursun. Her kayıp kritik — defuse sesini bekle.
 
 ### 2v5 Plant Sonrası
-Defuse sesini duyana kadar görünme. Ses gelince ikiniz aynı anda iki ayrı noktadan peek atın. Yalnız peek etme, biri mutlaka ölür.
+Defuse sesini duyana kadar görünme. Ses gelince ikiniz aynı anda iki ayrı noktadan peek atın. Yalnız peek atma, biri mutlaka ölür.
 
 ### 1v5 Plant Sonrası
 Görünme. Defuse başlar başlamaz peek at, 1 kill al, tekrar saklan. Kill'i aldıktan sonra görünmeden bir sonraki defuse sesini bekle.

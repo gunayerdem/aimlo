@@ -11,7 +11,7 @@ Jett havaya çıkar, Killjoy yere kurar. Jett'in kiti Killjoy'un kurulumunu doğ
 
 ## Yaygın Cezalandırma Kalıpları
 
-**IF**: Jett molly'lerin üstünden yukarı dash atıp tareti smoke'layarak giriyor, ult'uyla tareti mesafeden söküyor
+**IF**: Jett molly'lerin üstünden yukarı dash atıp tareti smoke'layarak giriyor, ult'uyla tareti uzaktan söküyor
 **MEANING**: Killjoy'un tüm yer kurulumu işlevsiz kalıyor. Taret açıyı kapayamıyor, molly hasar veremiyor, bot zaten geç uyarıyor.
 **COUNTER**: Killjoy ult'unu Jett site'a girdiği anda aç — içeriden dash'le çıkamaz. Tareti iniş noktasına dönük koy — Jett yukarı dash'ten inerken taretin sinyali takıma nereye ineceğini söyler. Molly'yi iniş noktasına bırak — Jett toparlanırken yakalar.
 **WHY**: Killjoy'un kurulumu yerde, Jett'in kiti yeri terk etmek için. Killjoy ult ise dikey oyunu umursamaz.

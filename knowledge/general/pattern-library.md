@@ -52,7 +52,7 @@ Rakibin ne yaptığını değil, **niye** yaptığını oku. Niye'yi bildiğinde
 ### Pattern: Fast Execute (Az Utility)
 **IF:** Saldırı hızlı site'a basıyor, util'i az kullanıyor
 **MEANING:** Eco veya force round — hızla sürpriz yakalamak istiyorlar
-**COUNTER:** Close range hazır ol, spread et. Stack yapma — hıza open angle verme.
+**COUNTER:** Yakın mesafeye hazır ol, yayıl. Stack yapma — hıza açık açı verme.
 **WHY:** Fast execute'da ilk düşen yalnız anchor'dır. Spread + info ile ilk dövüşü trade'le, hız avantajı biter.
 
 ### Pattern: Default Execute
@@ -90,18 +90,18 @@ Rakibin ne yaptığını değil, **niye** yaptığını oku. Niye'yi bildiğinde
 ### Pattern: 2 Round Üst Üste Kayıp + Utility Yok
 **IF:** Rakip iki round kaybetti, 3. round'da az util ile geliyor
 **MEANING:** Save + force geçişi — ult ve silah topluyorlar
-**COUNTER:** Anti-eco spread'ini kur, Sheriff ve Spectre'ye hazır ol. Bu round'u bırakma — kaybedersen rakibin momentumu maçı çevirebilir.
+**COUNTER:** Anti-eco için yayıl, Sheriff ve Spectre'ye hazır ol. Bu round'u bırakma — kaybedersen rakibin momentumu maçı çevirebilir.
 **WHY:** Save round ekonomiyi kurtarır ama rakip tam da en zayıf anda. O anı kullan.
 
 ### Pattern: Eco Round'da Rush Göstergeleri
 **IF:** Rakip eco round'da Judge/Spectre ile grup halinde hareket ediyor
-**MEANING:** Close range ile round çalmak istiyorlar
+**MEANING:** Yakın mesafede round çalmak istiyorlar
 **COUNTER:** O noktada stack yapma — uzak açı zorla.
 **WHY:** Eco rush'ın işleyişi sürpriz + yakın mesafe. Uzakta rifle yakalar.
 
 ### Pattern: Bonus Round'da Utility Açığı
 **IF:** Rakip eco kazandı, bonus round oynuyor — silahları var ama util'i eksik
-**MEANING:** Silahları var ama ability hole'ları kapatılmamış
+**MEANING:** Silahları var ama util açıkları kapatılmamış
 **COUNTER:** Util ağırlıklı execute yap. Post-plant'te bile util savaşını sen kazanırsın.
 **WHY:** Bonus round'da silah eşitse util farkı round'u belirler.
 
@@ -172,7 +172,7 @@ Rakibin ne yaptığını değil, **niye** yaptığını oku. Niye'yi bildiğinde
 ### Pattern: 1vN Clutch — Gizlenme vs Agresif
 **IF:** Rakip clutch oyuncusu spike koyulduktan sonra ses çıkarmıyor
 **MEANING:** Gizlenme oynuyor — spike'ı defuse etmeni bekliyor, sesle yerini açacaksın
-**COUNTER:** Spike'a yaklaşma. Util spreyle, onu peek'e zorla. Süre azaldıkça clutch oyuncusu kötü açıdan çıkmak zorunda kalır.
+**COUNTER:** Spike'a yaklaşma. Üstüne util at, onu peek'e zorla. Süre azaldıkça clutch oyuncusu kötü açıdan çıkmak zorunda kalır.
 **WHY:** Gizlenmenin silahı zamandır. Zaman baskısı onu savunmadan saldırıya geçirir, kötü açıda peek eder.
 
 ---

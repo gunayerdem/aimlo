@@ -78,7 +78,7 @@ WHY Killjoy kurulumlarını bilmeden Vyse oynarsan hem yeni ajanı hem savunma k
 
 IF harita başına initiator seçiyorsan şu eşleşmelere bak:
 
-- **Fade**: Çoğu haritada varsayılan. Bot bilgi getirir, çekme yeteneği alan reddi yapar, ult retake'i taşır — üç iş birden.
+- **Fade**: Çoğu haritada varsayılan. Bot bilgi getirir, sabitleme yeteneği düşmanı yerinde kilitler, ult retake'i taşır — üç iş birden.
 - **Sova**: Ascent ve Breeze gibi açık haritalarda güçlü; dar haritalarda recon atacak yer yok.
 - **Breach**: Fracture ve Lotus'ta duvardan geçen flash ve stun — dar haritada en iyi.
 - **KAY/O**: Yetenek kapatan bıçağı bir alandaki yetenekleri kapar — her haritada işe yarar ama hiçbirinde birinci değil.
@@ -92,7 +92,7 @@ IF harita başına initiator seçiyorsan şu eşleşmelere bak:
 ### Vandal mı, Phantom mı?
 
 IF iki silah arasında kararsızsan
-MEANING Vandal her mesafede kafadan vurursa bitirir; Phantom daha hızlı ateş eder, smoke içinde iz bırakmaz
+MEANING Vandal her mesafede kafadan vurursa tek atışta bitirir; Phantom daha hızlı ateş eder ve smoke içinde iz bırakmaz, ama uzakta gövdeden tek seferde öldürmez
 COUNTER Kafa vuruşuna güveniyorsan Vandal al; smoke içi çatışma ve spray transferi yapıyorsan Phantom
 WHY Geniş açılı haritada Vandal, smoke yoğun haritada Phantom — haritaya göre değiştir
 

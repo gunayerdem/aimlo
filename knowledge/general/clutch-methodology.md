@@ -201,7 +201,7 @@ Chamber'ın kaçış yeteneği sana clutch'ta rakibin olmadığı bir kaçış y
 
 ### Jett Dash Clutch Pattern'leri
 
-1. **Peek sonrası dash**: Agresif açı peek et, kill al, dash ile çık. Temel Jett 1vX budur.
+1. **Peek sonrası dash**: Agresif açıya peek at, kill al, dash'le çık. Temel Jett 1vX budur.
 2. **Yukarı sıçrama peek'i**: Kutuya ya da duvara yukarı sıçra, beklenmedik açıdan kill al, dash ile kaç.
 3. **Ult clutch'ı**: Ult aktifken hareket ederken tam isabetle vurursun. Her kill ult'u yeniler — 1vX'te koş, vur, dur.
 4. **Smoke kaçışı**: Ayağına smoke at, içinden dash yap. Düşman nereye gittiğini göremez.
@@ -264,7 +264,7 @@ Chamber oynuyorsan Op ile bir açı tut, kill al, kaçış yeteneğiyle çık. Y
 
 ### 1v2'de Agresif Push Pattern'i
 
-1v2'de spike kurulduysa ve rakiplerin ayrı pozisyondaysa hemen push et — birlikte kümelenmişlerse asla. Rakipler senden pasif oynamanı bekler; ayrılmış iki düşmana beklentinin tersine swing at, ikisi de hazırlıksız yakalanır. Bu pattern crosshair'in head-level'da hazır olduğu durumlarda çalışır.
+1v2'de spike kurulduysa ve rakiplerin ayrı pozisyondaysa hemen push et — birlikte kümelenmişlerse asla. Rakipler senden pasif oynamanı bekler; ayrılmış iki düşmana beklentinin tersine swing at, ikisi de hazırlıksız yakalanır. Bu, crosshair'in kafa hizasında hazır olduğu durumlarda çalışır.
 
 ---
 

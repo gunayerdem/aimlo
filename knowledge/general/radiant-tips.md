@@ -110,7 +110,7 @@ MEANING her dövüşe dikey bir flick'le başlarsın — reaksiyon süren daha b
 COUNTER haritadaki referans noktalara kilitlen: kutu üstleri, pencere çerçeveleri, duvar doku çizgileri. O seviyeyi hareket halinde de koru
 WHY dikey ayarı sıfırlarsan, düşman çıktığında sadece yatay düzeltme yaparsın. Tepki süren neredeyse yarıya iner
 
-### Pre-Aim Noktaları
+### Açıyı Önceden Tutma Noktaları
 
 IF crosshair'i köşeye yakın ama ortada tutuyorsan
 MEANING düşman peek attığında hem tepki verip hem ayar yapman gerekir — bu iki iş birden

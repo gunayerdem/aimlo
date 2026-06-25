@@ -40,7 +40,7 @@ Rakip Classic + minimal yetenekle geliyor. Sen tam paradasın. Kazanmak %80 gara
 
 **Shotgun ve SMG riski.** Rakip Judge ya da Spectre'la rush atar. Yakın mesafede açı verme, uzun çizgiye zorla. Tüfeğin shotgun menzilinin dışında kazanır.
 
-**Bilgi al, peek etme.** Savunmadaysan bilgi topla, kapanma. Saldırıdaysan bedava kill kovala ama ölüm verme.
+**Bilgi al, peek atma.** Savunmadaysan bilgi topla, kapanma. Saldırıdaysan bedava kill kovala ama ölüm verme.
 
 ### Anti-Eco Alışverişi
 

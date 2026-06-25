@@ -55,7 +55,7 @@ KAY/O düşmanın yeteneklerini kapatan ajandır. Bıçağı yakınındaki herke
 
 **IF** Savunmada bıçağı agresif info için atıp sonra peek'te ölüyorsun
 **MEANING** KAY/O'yu sadece saldırı ajanı sanıyorsun — savunmada bıçağı ölmek için yem yapıyorsun
-**COUNTER** Savunmada bıçağı rush'ı durdurmak ve kilitlemek için sakla. Düşman dar geçide yığıldığında bıçağı oraya at, hepsini kilitle, sonra takımla retake değil direkt hold yap. Molly'yi choke'a koy. Bıçak attıktan sonra agresif peek'e çıkma — bıçak zaten bilgiyi verdi, açıyı silahla tut.
+**COUNTER** Savunmada bıçağı rush'ı durdurmak ve kilitlemek için sakla. Düşman dar geçide yığıldığında bıçağı oraya at, hepsini kilitle, sonra takımla retake'e değil doğrudan savun/açıyı tut. Molly'yi choke'a at. Bıçak attıktan sonra agresif peek'e çıkma — bıçak zaten bilgiyi verdi, açıyı silahla tut.
 **WHY** Kilitli, dar geçitte sıkışmış bir push grubu savunma için en kolay hedeftir. KAY/O savunmada da güçlü; bıçağı ölerek değil, düşmanı çıplak yakalayarak kullan.
 
 **IF** Bıçağı hep aynı standart açıdan atıyorsun, düşman artık o yarıçaptan kaçıyor

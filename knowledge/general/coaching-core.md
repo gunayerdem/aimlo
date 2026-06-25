@@ -66,7 +66,7 @@ WHY anlık trade düşmanı açıkta yakalar; geç gelen trade düşmana yeni po
 
 ### Flash + Çıkış Koordinasyonu
 
-IF flash atmadan kuru çıkış yapıyorsan
+IF flash atmadan utility'siz çıkıyorsan
 MEANING düşmanın nişanı sana kilitli, avantaj tamamen onda
 COUNTER flash at, patladığı anda çık
 WHY flash düşmanın nişanını bozar; o kısa pencerede savunmasız kalır

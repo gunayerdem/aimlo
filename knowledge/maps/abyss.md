@@ -140,7 +140,7 @@ WHY: Kenar kontrol edilmezse tahmin edemediğin bir açıdan vurulursun. Kenarı
 
 - **Breach**: Mollysini uçurum kenarına gönderirsin, düşman haritadan düşer. Stun'ı Bridge'de çok sert çalışır. Kenar mekaniği Breach'in elini güçlendiriyor, başka haritalarda bu kadar değil.
 - **Raze**: Atlamayla uçurumun üstünden site'a dalarsın. Bot kenar kontrol eder. Kenar oyununda Jett'e yakın mobilite alırsın.
-- **Omen**: Kaçış util'iyle uçurum kenarları arasında kaybolursun, kimse nerede olduğunu bilemez. TP ile Bridge'i kontrol edersin. Flash dar geçişlerde sert çalışır. Yaratıcı oynuyorsan tavanı yüksek.
+- **Omen**: Kaçışınla uçurum kenarları arasında kaybolursun, kimse nerede olduğunu bilemez. Smoke'la Bridge'i kontrol edersin. Flash dar geçişlerde sert çalışır. Yaratıcı oynuyorsan tavanı yüksek.
 - **Killjoy**: Tuzağı uçurum kenarına bakacak şekilde koyarsın, bilgi gelir. Bot Bridge'i kapatır. B site kompakt, ult orada çok güçlü.
 - **Fade**: Bot kenar pozisyonları temizler. Stun'ı uçurum kenarına gider, düşman hem kilitlenir hem düşme riskiyle uğraşır. Recon geniş alanda her şeyi gösterir.
 

@@ -1,14 +1,14 @@
 # AJAN: Yoru
 
 ## 1. Rol Kimliği
-- Yoru aldatma ajanıdır. TP, klon ve ult ile düşmanı yanlış yere baktırır, sonra cezalandırırsın.
+- Yoru aldatma ajanıdır. TP, klon ve ult ile düşmanı yanlış yere baktırır, sonra gerçek açından kafadan vurursun.
 - Düşman rotasyona aşırı tepki veriyorsa, ses duyunca koşuyorsa Yoru'yu seç — onları tam orada yersin. Takımda lurk tabanlı bir plan varsa da senin ajanın.
 - İşin tek bir şey: düşmanın seni yanlış yerde görmesini sağla, sonra gerçek yerinde ol.
 
 ## 2. Temel Sorumluluklar
 - **Atakta:** TP'yi öne göm, klon gönder, klon tepki çekince TP ile gir. Her girişte flash-TP komboyu hazır tut. Ult ile düşman hattının arkasına geç — bilgi topla ya da round'u kapat.
 - **Savunmada:** Push gelirken düşmanın arkasına TP kur. Choke'a klon bırak, mollyleri çektir. Post-plant'te ult ile bilgi al ya da spike'ı savun. Kaçış TP'sini her zaman cepte tut.
-- **Takım senden ne bekler:** Boşluk aç. Klon ve TP ile düşmanı fazladan açı tutmaya zorla. Başka düelcinin giremeyeceği zamanlamalardan gir.
+- **Takım senden ne bekler:** Boşluk aç. Klon ve TP ile düşmanı fazladan açı tutmaya zorla. Başka duelist'in giremeyeceği zamanlamalardan gir.
 
 ## 3. Sık Yapılan Hatalar
 1. **TP'yi açık yere gömmek** — TP ses verir. Herkesin bildiği noktaya koyarsan düşman seni orada bekler. Kutunun arkası, köşe, duman içi — kimsenin bakmadığı yere göm.
@@ -18,7 +18,7 @@
 5. **Yoru'yu Jett gibi oynamak** — Yoru'nun ham peek gücü yok. Klon, flash, TP olmadan kuru peek atıyorsan yanlış ajanı oynuyorsun.
 6. **Her round aynı lurk zamanlaması** — Düşman kalıbını okur, flank açını tutar, gittiğin anda hazır bekler. Bir round erken lurk yap, bir round geç lurk yap, bir round hiç yapma — çeşitlendir.
 7. **Flash-TP kombosu bozuk** — Flash, TP varmadan patlarsa düşman toparlanır. TP varıp düşman tepki verdikten sonra patlarsa geç kalırsın. Flash, TP girişiyle aynı anda patlamalı.
-8. **Flash'ı kendine attırmak** — Yoru flash'ı sektirilen bir top. Yanlış açıdan atarsan kendini ya da takımı kör edersin. Flash'ı düşmanın bakacağı yöne sektir, sonra ters yönden swing at — kendi gözün her zaman flash'ın arkasında kalsın.
+8. **Flash'ı kendine patlatmak** — Yoru'nun flash'ı sektirilen bir top. Yanlış açıdan atarsan kendini ya da takımı kör edersin. Flash'ı düşmanın bakacağı yöne sektir, sonra ters yönden swing at — kendi gözün her zaman flash'ın arkasında kalsın.
 9. **Klonu doğru yöne sürmemek** — Klonu düşmana doğru sürmezsen sadece ses verir, açı baktırmaz. Klonu düşmanın tutması gereken hattın üstünden geçir ki tek atış için bile olsa nişan alsınlar — o anda gerçek açından gir.
 
 ## 4. Kalıp -> Anlam

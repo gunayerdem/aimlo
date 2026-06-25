@@ -9,9 +9,9 @@ tags: [matchup, raze, harbor]
 ## Matchup Özü
 Harbor'ın duvarları görüşü keser ama Raze'in patlayıcıları duvardan geçer. Bot suyu takmıyor, itiş duvarın üstünden aşırır, granat duvarın arkasına düşer. Harbor'ın elindeki tek gerçek koz kalkanı ve ult'u — onlar fiziksel, durdurur. Geri kalan her şeyi Raze umursamaz.
 
-## Cezalandırma Kalıpları
+## Baskı Kalıpları
 
-### Raze, Harbor'ı Cezalandırırken
+### Raze, Harbor'ı Okuyup Keserken
 
 **IF**: Granatı duvarın üstünden veya içinden atıyorsun, arkadaki düşman hasar yiyor
 **MEANING**: Harbor'ın duvarı patlayıcıyı tutmuyor, sadece görüşü kesiyor
@@ -28,7 +28,7 @@ Harbor'ın duvarları görüşü keser ama Raze'in patlayıcıları duvardan ge�
 **COUNTER**: Harbor ult'unu iniş noktana açıyı tutarak atabiliyor — iniş açını son anda değiştir, duvar çizgisi boyunca kaydır
 **WHY**: İniş noktası tahmin edilebilir; Radiant Harbor bunu okur ve ult'unu oraya bırakır
 
-### Harbor, Raze'i Cezalandırırken
+### Harbor, Raze'i Okuyup Keserken
 
 **IF**: Duvarı geniş çekiyorsun, Raze tamamen üstünden aşamıyor, havada daha uzun kalıyor
 **MEANING**: İtiş penceresi daralıyor, Raze daha savunmasız

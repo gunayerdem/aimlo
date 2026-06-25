@@ -1,7 +1,7 @@
 # AJAN: Harbor
 
 ## 1. Rol Kimliği
-Harbor bir push controller'ı. Sen normal smoke atmıyorsun — hareketli duvar çekiyorsun. Omen arkanda otururken sen takımın önünde su sürüyorsun. Hareketli duvarın takımın arkasında yürüdüğü kalkandır. Eğri duvarın kıvrılarak birden fazla açıyı tek seferde keser. Spike üstüne attığın kubbe ise kırılabilir bir koruma.
+Harbor bir push controller'ı. Sen normal smoke atmıyorsun — hareketli duvar çekiyorsun. Omen arkanda otururken sen takımın önünde su sürüyorsun. Hareketli duvar, takımının arkasına saklanıp ilerlediği bir kalkandır. Eğri su duvarın kıvrılarak birden fazla açıyı tek seferde kapatır. Spike üstüne attığın kubbe ise kırılabilir bir koruma.
 
 Bu kit yerinde duranı cezalandırır. Hareketli duvardan kimse geçmezse o yeteneği çöpe attın demektir. Takımla hızlı alıyorsanız Harbor seç. Default oturup bekliyorsanız alma.
 
@@ -14,7 +14,7 @@ Bu kit yerinde duranı cezalandırır. Hareketli duvardan kimse geçmezse o yete
 
 ## 3. Sık Yapılan Hatalar
 - Takım daha spawn'dayken hareketli duvarı atmak. Kalkan choke'u geçer, arkasında kimse yoktur, sıfır değer üretir.
-- Su duvarını düz çekmek. Her haritada kıvrımı ödüllendiren bir geometri var. Düz çekilen su duvarı, hasarı olmayan bir Viper duvarı gibidir — yani açık ara daha kötüsü.
+- Su duvarını düz çekmek. Her haritada kıvrımı ödüllendiren bir geometri var. Düz çektiğin su duvarı, hasarı olmayan bir Viper duvarından farksız kalır — Harbor'ı oynamanın bütün anlamını kaybedersin.
 - Kubbeyi birden fazla açının ateş edebildiği yere koymak. HP'si sınırlı; iki düşman aynı anda spray atarsa plant bitmeden kırılır. Sadece tek açının gördüğü yere koy.
 - Ult'u dar odalarda atmak (Bind hookah, Split sewers). Gayzer havuzları alana ihtiyaç duyar; dar yerde düşman bir adım yana kayıp kurtulur.
 - Savunmada pasif köşe oturmak. Harbor'ın savunma araçları Omen ya da Viper'ınkinden zayıf. Köşede bekliyorsan ajanı yanlış oynuyorsun. Hareketli duvarla agresif peek at, sonra geri çekil. Su duvarını retake rotasyonunu kesmek için kullan.
@@ -92,7 +92,7 @@ Bu kit yerinde duranı cezalandırır. Hareketli duvardan kimse geçmezse o yete
 **IF** Hareketli duvar her execute'ta tam aynı choke'tan, aynı saniyede çıkıyor
 **MEANING** Push tamamen okunabilir hale gelmiş. Savunucular duvarın çıktığı saniyeyi ezberleyip ya önceden flash atıyor ya da otomatik rotate ediyor.
 **COUNTER** Bazı round'larda duvarı yem olarak çıkar — bir choke'tan sal, takımı diğer taraftan push et. Bazen duvar çıktıktan sonra bir-iki saniye bekle, savunucu duvarı yer açtıktan sonra gerçek girişi yap.
-**WHY** Harbor'ın gücü bilgi reddinde; ama her round aynı ritim, reddi tahmine çevirir. Çeşitlilik savunucunun ön-okumasını cezalandırır.
+**WHY** Harbor'ın gücü düşmanın görüşünü kesmekte; ama her round aynı ritimle çıkarsan düşman ne zaman geleceğini ezberler. Zamanlamayı değiştir — seni önceden okumaya çalışan savunucuyu yanlış yere baktırırsın.
 
 **IF** Eco/force round'larında Harbor tüm yeteneğini full-buy gibi harcıyor
 **MEANING** Yetenek ekonomisi yok. Su duvarı ve hareketli duvarın ikisi de para ister; her round full döküm yaparsan zayıf round'larda elin boş kalır.
@@ -107,7 +107,7 @@ Bu kit yerinde duranı cezalandırır. Hareketli duvardan kimse geçmezse o yete
 
 - **Haven (A-tier)**: Üç site sana esneklik verir. C site: su duvarını C long'dan platformun üzerinden bükerek garaj ve arka site açılarını kes. Ult C'de yıkıcıdır — geniş açık alan düşmana gayzerden kaçacak yer bırakmaz. A site: su duvarını A long'dan A short'a bük — heaven ve site açılarını kesersin. A long boyunca çekilen hareketli duvar takıma açık yaklaşımı geçecek zemini verir. B site Haven'da Harbor'ın en zayıf noktası — dar pencere choke'u duvarın değerini sınırlar, ult de yayılacak yer bulamaz.
 
-- **Breeze (A-tier)**: Geniş açık site'lar ult'un hüküm sürdüğü yer. A site: ult tüm piramit alanını ve mağarayı kaplar. Su duvarını A hall'dan mid kapılarına bükerek iki uzun görüş hattını aynı anda kes. B site: B main boyunca çekilen hareketli duvar, tube'dan site'a güvenli geçiş sağlar. Standart B plant'te kubbe sütun açısını kapatır. B tunnel'dan çekilen su duvarı arka site boyunca bükülerek derin CT tutma noktasını keser. Ama Breeze, Harbor'ın savunma zayıflığını acımasızca cezalandırır — uzun görüş hattını pasif savunmayı ölümcül yapar.
+- **Breeze (A-tier)**: Geniş açık site'lar ult'un hüküm sürdüğü yer. A site: ult tüm piramit alanını ve mağarayı kaplar. Su duvarını A hall'dan mid kapılarına bükerek iki uzun görüş hattını aynı anda kes. B site: B main boyunca çekilen hareketli duvar, tube'dan site'a güvenli geçiş sağlar. Standart B plant'te kubbe sütun açısını kapatır. B tunnel'dan çekilen su duvarı arka site boyunca bükülerek derin CT tutma noktasını keser. Ama Breeze, Harbor'ın savunma zayıflığını açığa çıkarır — uzun görüş hatlarında pasif savunursan kolayca açıktan vurulursun.
 
 - **Split (B-tier)**: Dar koridorlar su duvarı bükme seçeneklerini kısar ama belirli noktalarda hareketli duvar çok güçlü. A main: rampaya çekilen hareketli duvar, takıma dar choke'tan push için kalkan verir. Mid: mid alttan üste çekilen hareketli duvar, Split'teki en güçlü mid alma araçlarından biri. B site: dar alan ult'u daha az verimli kılar ama spike üstünde kubbe değerli, çünkü oraya sadece bir veya iki açı ateş edebiliyor. Su duvarı B main'den köşenin etrafından site'a bükülür ama kıvrılma yarıçapı kısadır. Harbor burada niş bir seçim — takım her round A main veya mid kontrolünü zorlamayı planlıyorsa al.
 
@@ -133,7 +133,7 @@ Bu kit yerinde duranı cezalandırır. Hareketli duvardan kimse geçmezse o yete
 
 **Zorlandığında**: "Duvar takım arkanda değilken çıkıyor. Takım arkadaşlarını choke'ta push'a hazır görene kadar atma. Atmadan önce 'Duvar çıkıyor' de. Kimse takip etmiyorsa tut."
 
-**Tahmin edilebilir olduğunda**: "Her round aynı yöne bükülüyorsun, savunucular sen atmadan kıvrımın arkasında oynuyor. Ters yöne çevir ya da düz git — aşırı kaymalarını cezalandır."
+**Tahmin edilebilir olduğunda**: "Her round aynı yöne bükülüyorsun, savunucular sen atmadan kıvrımın arkasında oynuyor. Ters yöne bük ya da düz çek — fazla kayan savunucuyu açıkta yakalarsın."
 
 **Zamanlama bozukken**: "Su duvarın ve hareketli duvarın peş peşe değil, ayrı tempolarda çıkıyor. İkisini tek nefeste çıkar, takım duvar düşmeden site'ta olsun. Geç giriş korumayı zamanın dışına atar."
 

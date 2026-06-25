@@ -9,9 +9,9 @@ tags: [matchup, sova, harbor]
 ## Matchup Özü
 Sova'nın recon'u ve drone'u, Harbor'ın su duvarlarını her durumda kapatamaz. Recon dart ile hedef arasına duvar girerse tarama iptal olur — ama drone duvarın üstünden geçer, hasar oku ise duvardan geçip hasar verir. Harbor duvar koydu diye Sova kör kaldı sayma. Duvar gördüğünde drone'a geç ya da dart'ı üst köşeden zıprat — düz dart atma.
 
-## Yaygın Cezalandırma Kalıpları
+## Yaygın Baskı Kalıpları
 
-### Sova Harbor'ı Cezalandırırken
+### Sova Harbor'ı Okuyup Keserken
 
 **IF**: Drone'u duvarın üstünden uçuruyor ve arkasını tarıyorsun
 **MEANING**: Harbor'ın duvarı havadan gelen keşfe hiçbir şey yapmaz
@@ -28,7 +28,7 @@ Sova'nın recon'u ve drone'u, Harbor'ın su duvarlarını her durumda kapatamaz.
 **COUNTER**: Duvarı dart düştükten sonra değil, dart havadayken dart ile takımın arasına sok
 **WHY**: Dart yere indikten sonra duvar girerse tarama zaten tamamlanmış olur
 
-### Harbor Sova'yı Cezalandırırken
+### Harbor Sova'yı Okuyup Keserken
 
 **IF**: Duvarı recon dart'ın düştüğü an dart ile takımın arasına koyuyorsun
 **MEANING**: Dart tarama yapamıyor — Sova kör kaldı

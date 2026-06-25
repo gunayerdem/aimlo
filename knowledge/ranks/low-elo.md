@@ -53,7 +53,7 @@ Takımın yarısı alıp yarısı save yaparsa ne round'u kazanırsın ne de dü
 
 ## Bu Seviyede Sık Karşılaşılan Hatalar
 
-- **Kaç düşmanın açıyı tuttuğunu bilmeden peek atmak**: Köşeye girmeden jiggle at ya da flash kullan — kaç düşman olduğunu önce anla.
+- **Kaç düşmanın açıyı tuttuğunu bilmeden peek atmak**: Köşeye dalmadan önce bir flash at ya da kısacık göz at, kaç düşman olduğunu önce anla.
 
 - **Kill aldıktan sonra aynı yerde kalmak**: Kill alınca hemen yer değiştir. Aynı noktada kalmak seni kolay hedef yapar.
 

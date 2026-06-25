@@ -60,8 +60,8 @@ Sen tek başına iş çeviren bir smoke ajanısın. Görevin sadece duman atmak 
 
 **IF** ult'la haritanın öbür ucuna ışınlandıktan sonra olduğun yerde kalıp bekliyorsun
 **MEANING** Ult'un asıl gücünü — harita çapında anlık konum değiştirip beklenmedik açıdan baskı açmasını — pasif kullanıyorsun.
-**COUNTER** Işınlanma bittiği an o sürpriz konumu agresif kullan: takımla aynı anda bas, ya da savunmada bir bölgeden ötekine ışınlanıp düşmanın olmadığını sandığı yerden gel. Işınlanırken düşmanın mini haritası kapanır — o körlüğü değil, mini harita köründen kazandığın o saniyeyi baskıya çevir. Şeklini görüp seni vurabilirler; ışınlanma bitince hemen oyna ya da gerçekten gitmeyeceksen ışını iptal et, sahte ses bırakıp yerinde kal.
-**WHY** Ult seni haritanın istediğin yerine atar ve o sırada düşmanın mini haritasını kapatır — ama düşmanı kör etmez, kör eden senin flash'ın. Işınlanma sırasında gölge şeklin görünür, düşman onu vurursa eski yerine dönersin. Geldiğin anda oynamazsan sürpriz biter; ult bir kurulum, bitiş değil.
+**COUNTER** Işınlanma biter bitmez o sürpriz açıyı sertçe oyna: takımla aynı anda bas, ya da savunmada bir bölgeden ötekine ışınlanıp düşmanın seni beklemediği yerden çık. Işınlanırken düşmanın mini haritası kapanır — o körlüğü değil, mini harita köründen kazandığın o saniyeyi baskıya çevir. Şeklini görüp seni vurabilirler; ışınlanma bitince hemen oyna ya da gerçekten gitmeyeceksen ışını iptal et, sahte ses bırakıp yerinde kal.
+**WHY** Ult seni haritanın istediğin yerine atar ve ışınlanırken adın düşmanın mini haritasından kaybolur — ama bu onları kör etmez, kör eden senin flash'ın. Işınlanma sırasında gölge şeklin görünür, düşman onu vurursa eski yerine dönersin. Geldiğin anda oynamazsan sürpriz biter; ult bir kurulum, bitiş değil.
 
 ## 5. Harita Etkileşimleri
 - **Ascent**: Güçlü seçim. Kısa teleportla catwalk'a ya da market'e geç, mid kontrolünü tehdit altında tut. B main ve A main kapı girişlerinde yüksek one-way'ler iş görür. Mid'i alırsan iki bölgeye birden baskı kurarsın; teleportu mid kontrolünü genişletmek için kullan, sırf kaçış için değil. Savunmada mid'i dumanla geç kapat ki rakip orta turu bilgi alamadan kurusun.
@@ -75,7 +75,7 @@ Sen tek başına iş çeviren bir smoke ajanısın. Görevin sadece duman atmak 
 
 ## 6. Eşleşme Notları
 - Karşıda çift initiator varsa: Onlar bilgi topladıktan hemen sonra teleportla yer değiştir — topladıkları bilgi anında değersizleşir.
-- Karşında agresif duelist varsa: Flash kuru peek'i cezalandırır. Savunmada düşman köşeyi açmaya çalışırken at, körleşme onu açığa çıkardığı anda gelsin.
+- Karşında agresif duelist varsa: Utility'siz peek atan duelist'i flash'la yakalarsın. Savunmada düşman köşeyi açmaya çalışırken flash'ı at — kör olduğu anda kafadan vur.
 - Takımda sentinel varsa: Sentinel bölgeyi tutsun, sen serbestçe lurk yap.
 - Fade karşısında: Onun recon'u teleport noktanı ele verir — recon aktifken teleport edersen pozisyonun açılır. Kısa teleportu recon yokken kullan.
 
@@ -86,7 +86,7 @@ Sen tek başına iş çeviren bir smoke ajanısın. Görevin sadece duman atmak 
 **Düşman Algısı:** Geçen roundki teleport noktana önceden nişan aldılar. Sen başka açıdan çıkınca onlar hâlâ oraya bakıyor, sen arkalarında duruyorsun.
 **Düşman Tepkisi:** Hem eski noktayı izlemek hem yeni açıyı kapatmak için iki ayrı oyuncu ayırmak zorundalar. O iki oyuncu round boyunca başka işe yaramaz.
 **Fırsat Penceresi:** Düşman eski teleport noktana bakarken takımın girişi karşısız kalır. Üstüne flash körleştiriyorsa o bölgede kimse doğru dürüst göremez.
-**Tekrar Şablonu:** Giriş 1: smoke + flash, yüksek zemin açısına teleport. Giriş 2: aynı smoke'lar, bu sefer zemin seviyesinde farklı açı. Giriş 3: hiç teleport yok — eski noktalarını aramaya giden savunucuları cezalandır. Her teleporttan önce smoke'u koy, sonra değil.
+**Tekrar Şablonu:** Giriş 1: smoke + flash, yüksek zemin açısına teleport. Giriş 2: aynı smoke'lar, bu sefer zemin seviyesinde farklı açı. Giriş 3: hiç teleport atma — eski noktalarını aramaya giden savunuculardan bedavaya kill al. Her teleporttan önce smoke'u koy, sonra değil.
 **Düşman Uyumu:** 4-5 round sonra yaygın teleport noktalarını el bombası ya da molly ile temizlemeye başlarlar, ya da teleport sesini dinlesin diye özel bir oyuncu ayırırlar.
 **Karşı Uyum:** Noktanı temizlemeye çalışıyorlarsa flash kör ederken teleport yap — animasyonu ne görür ne duyarlar. Smoke'undan basıyorlarsa kendi smoke'unun arkasında bekle, push'un ortasında yakala. Teleport noktana oyuncu ayırdılarsa o bölgede bir savunucu eksik demektir, takımın girişte sayı üstünlüğü kapar.
 

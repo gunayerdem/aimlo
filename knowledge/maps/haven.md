@@ -10,7 +10,7 @@
 - Savunmanın gücü bilgi akışında. Hangi sitenin baskı altında olduğunu erken anlayan takım rotate'i doğru yapar, oyunu kontrol eder.
 
 ## 2. Ölüm Bölgeleri
-- **A Long**: Haven'ın en uzun görüş hattını burası. Flash ya da smoke atmadan A Long'a giriyorsan Op seni bedavaya alır. Util atmadan bu koridora girme.
+- **A Long**: Haven'ın en uzun görüş hattı burası. Flash ya da smoke atmadan A Long'a giriyorsan Op seni bedavaya alır. Util atmadan bu koridora girme.
 - **B Main Girişi**: B'ye tek sırada dalıyorsun, savunucu sizi teker teker biçiyor. B Main'e girerken giriş açısını util'le kır, sonra içeri gir.
 - **Garage/Mid Window**: Saldırıdaysan util'siz Garage'a girme — Window'dan direkt yersin. Savunmadaysan gereksiz peek atma — saldırgan seni kafadan vurur. Bu bölgede ölüyorsan bilgi almadan hareket ediyorsun.
 - **C Long Cross**: Plat'ı smoke'lamadan C site'a cross yapıyorsun, savunucu kafa atışını bedavaya alıyor. C Long'dan geçmeden önce Plat'ı kapat.
@@ -75,8 +75,8 @@ COUNTER:
 WHY: 3-site haritada saldırının en büyük gücü seçim zenginliği. Tek siteye bağlanırsan bu avantajı çöpe atıyorsun. Savunma kaynağını odaklayabilirse her site'ta daha güçlü olur. Çeşitlilik savunmanın tahmin etmesini engeller.
 
 **Pattern 8: Post-Plant Pozisyon Hatası**
-IF: Spike dikildikten sonra spike'ın hemen yanında duruyorsun — savunucunun mollysi veya granadı spike'la birlikte seni de öldürüyor.
-MEANING: Post-plant mesafe yönetimin yok. Spike'ın yanında durmak, savunucunun alan temizleme util'inin sana da gelmesi demek.
+IF: Spike dikildikten sonra spike'ın hemen yanında duruyorsun — savunucunun molly'si veya nade'i spike'la birlikte seni de öldürüyor.
+MEANING: Post-plant mesafe yönetimin yok. Spike'ın yanında durursan, savunucunun alan temizleme util'i sana da gelir.
 COUNTER: Spike dikildikten sonra uzaklaş ve crossfire pozisyonu al.
 - A site: A Long + A Short crossfire
 - B site: B Main + Mid Window crossfire
@@ -122,7 +122,7 @@ WHY: Herkes farklı yerde farklı plan denerse rakip sizi birer birer yer. Koord
 - **Sova**: Round başı üç siteden herhangi birine recon at, bilgi al. A Long ve C Long recon'ları savunmanın ilk bilgi katmanıdır. Haven'ın açık alanları drone ve okların tam gücüyle çalışmasına izin verir.
 - **Breach**: B Main'den flash + molly at, B site'i aç. Dar koridorlarda Breach'in flash ve stun'larından kaçış yok. Stun'u duvar arkasına vurur, adam pozisyonunu bırakmak zorunda kalır.
 - **Jett**: C Long'da Op oyna, kill aldıktan sonra dash'le çekil. C Long'u tercih et — geri çekilme hattı daha kısa, daha güvenli. A Long'da da Op açarsın ama C pozisyonu daha az risk taşır.
-- **Cypher**: B'de Killjoy oynamak istemiyorsan Cypher al. Tel + kamera ile aynı anda B girişini ve Garage'ı izlersin. Killjoy geciktirme yapar, Cypher bilgi verir — flank izlemede Cypher üstündür. Haven'ın çok girişli yapısında bu fark önemli.
+- **Cypher**: B'de Killjoy oynamak istemiyorsan Cypher al. Tel ve kamerayla aynı anda B girişini ve Garage'ı izlersin. Killjoy geciktirme yapar, Cypher bilgi verir — flank izlemede Cypher üstündür. Haven'ın çok girişli yapısında bu fark önemli.
 - **Harbor**: C Long'dan A'ya su duvarı çek, birden fazla görüş hattını tek util'le kes. Su util'ini Garage push'unda kullan — dar koridorda su duvarından geçemezler. Spike dikme alanını su küresiyle kapat. Büyük açık alanlar Harbor'ın duvarlarını tam değerinde kullanmanı sağlar.
 - **Astra**: Yıldızlarını Garage'a, A Long'a ve C Long'a koy — üç siteyi tek ajanla kontrol edersin. Macro oyunu seviyorsan Astra al. Ama tavan yüksek, taban da düşük: iyi oynayan Astra'nın karşısına geçilmez, kötü oynayan Astra takımı yük gibi taşır.
 

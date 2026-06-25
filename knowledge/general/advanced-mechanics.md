@@ -28,7 +28,7 @@ Silah ne kadar ağırsa her iki yöntem de o kadar uzun sürer — ama counter-s
 
 - **Basma süresi**: Ters tuşa bir-iki frame bas, hepsi bu. Uzun tutarsan yön değiştirirsin, işe yaramaz.
 - **Eşik değeri**: Hızın maksimum koşu hızının yaklaşık %30'una düştüğünde nişanın doğrulanır. Counter-strafe seni oraya tuşu bırakmaktan çok daha hızlı ulaştırır.
-- **Çift-tap counter-strafe**: A-D-A veya D-A-D sırasıyla bas. Bu mikro-jiggle yaratır — düşman seni takip edemez, sen kuru peek atarken nişan eşiğinin yakınında kalırsın. Radiant'ta açıları temizlerken bunu sık görürsün.
+- **Çift-tap counter-strafe**: A-D-A veya D-A-D sırasıyla bas. Bu mikro-jiggle yaratır — düşman seni takip edemez, sen utility'siz peek atarken nişan eşiğinin yakınında kalırsın. Radiant'ta açıları temizlerken bunu sık görürsün.
 - **Çapraz counter-strafe**: W+A veya W+D ile hareket ediyorsan, durduğunda her iki tuşa da aynı anda ters bas. Birini atlarsan hız kalıntısı kalır ve nişanın bozulur.
 
 ---
@@ -188,7 +188,7 @@ Her silahla koşarak ateş edemezsin. Hangisiyle edebileceğini ezberle:
 | Judge / Bucky | EVET | Çok yakın mesafe |
 | Classic (sağ tık) | EVET | Çok yakın mesafe — burst ile kafaya vurursan tek atışta öldürürsün |
 | Frenzy | EVET | Yakın mesafe |
-| Ares / Odin | EVET (spin-up sonrası) | Yakın-orta mesafe |
+| Ares / Odin | HAYIR | Koşarken dağılır, dur ve spin-up'la ateş et |
 | Ghost | Zor | Sadece çok yakın mesafe |
 | Phantom | HAYIR | Sıfır mesafe bile riskli |
 | Vandal | HAYIR | Koşarken hiç deneme |
@@ -197,7 +197,7 @@ Her silahla koşarak ateş edemezsin. Hangisiyle edebileceğini ezberle:
 
 - Spectre ile koşarken spray at — hareket cezası neredeyse yok. Eco roundlarda bu silahla strafe-spray yap, bu meşru bir strateji.
 - Classic sağ tık: düşman çok yakına geldiğinde koşarken ateşle. Burst gövdeye vurur ve kafaya çarparsa tek atışta öldürür.
-- Ares / Odin ile birkaç atış yaptıktan sonra hareket halindeyken isabetin artar — bu yüzden bekleme, önceden ateşe başla.
+- Ares ve Odin'in spin-up'ı sadece atış HIZINI artırır, isabeti değil — hareket halindeyken hiçbir silahta isabet artmaz, tersine dağılır. Bu ikisi koşarken neredeyse hiç vuramazsın. Vuracaksan dur, spin-up'ı tutturup ateş et.
 
 ---
 
