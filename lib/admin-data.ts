@@ -230,6 +230,8 @@ export type UserMatch = {
   score: string | null;
   won: boolean | null;
   createdAt: string;
+  summary: string | null;
+  mistake: string | null;
 };
 
 export type UserDetail = {
@@ -254,7 +256,7 @@ export async function getUserDetail(userId: string): Promise<UserDetail | null> 
     svc.from("profiles").select("username, display_name").eq("user_id", userId).maybeSingle(),
     svc
       .from("analyses")
-      .select("id, riot_id, region, raw_result_json, created_at")
+      .select("id, riot_id, region, summary, weakness, raw_result_json, created_at")
       .eq("user_id", userId)
       .order("created_at", { ascending: false })
       .limit(500),
@@ -274,6 +276,8 @@ export async function getUserDetail(userId: string): Promise<UserDetail | null> 
     id: string;
     riot_id: string | null;
     region: string | null;
+    summary: string | null;
+    weakness: string | null;
     raw_result_json: Record<string, unknown> | null;
     created_at: string;
   }[]).map((a) => {
@@ -286,6 +290,8 @@ export async function getUserDetail(userId: string): Promise<UserDetail | null> 
       score: (r.score as string) ?? null,
       won: typeof r.won === "boolean" ? (r.won as boolean) : null,
       createdAt: a.created_at,
+      summary: a.summary ?? (r.summary as string) ?? null,
+      mistake: a.weakness ?? (r.mistake as string) ?? null,
     };
   });
 

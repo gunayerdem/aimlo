@@ -76,6 +76,26 @@ export default async function AdminUserDetailPage({ params }: { params: Promise<
           </tbody>
         </table>
       </div>
+
+      {detail.matches.some((m) => m.summary || m.mistake) ? (
+        <div style={{ marginTop: 22 }}>
+          <h3 style={{ fontSize: 15, fontWeight: 700, margin: "0 0 12px" }}>
+            Feedback&apos;ler <span style={{ color: "rgba(238,240,248,0.4)", fontWeight: 400, fontSize: 13 }}>— bu oyuncuya giden gerçek koç-metinleri</span>
+          </h3>
+          <div className="adm-grid cols-2">
+            {detail.matches.filter((m) => m.summary || m.mistake).slice(0, 24).map((m) => (
+              <div key={m.id} className="adm-card">
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10, fontSize: 12 }}>
+                  <span style={{ color: "var(--iris-violet)", fontWeight: 600, textTransform: "capitalize" }}>{m.map ?? "?"} · {m.agent ?? "?"}</span>
+                  <span style={{ color: "rgba(238,240,248,0.45)" }}>{fmt(m.createdAt)}</span>
+                </div>
+                {m.summary ? <p style={{ fontSize: 13, lineHeight: 1.6, color: "rgba(238,240,248,0.86)", margin: "0 0 10px" }}>{m.summary}</p> : null}
+                {m.mistake ? <p style={{ fontSize: 13, lineHeight: 1.55, color: "#ff9aa3", margin: 0 }}><b style={{ color: "#ff8a95" }}>Hata:</b> {m.mistake}</p> : null}
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
     </>
   );
 }

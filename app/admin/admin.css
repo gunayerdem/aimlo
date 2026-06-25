@@ -24,22 +24,15 @@
   background: rgba(255, 255, 255, 0.015);
   backdrop-filter: blur(6px);
 }
-.adm-brand {
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 4px;
+.adm-brand { display: flex; align-items: center; margin-bottom: 6px; }
+.adm-logo {
+  height: 30px; width: auto;
+  filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.5));
 }
-.adm-brand b {
-  background: linear-gradient(90deg, var(--iris-pink), var(--iris-violet), var(--iris-blue));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.adm-brand-sub {
+  font-size: 10px; color: rgba(238, 240, 248, 0.4); margin-bottom: 24px;
+  letter-spacing: 0.26em; text-transform: uppercase; font-weight: 600;
 }
-.adm-brand-sub { font-size: 11px; color: rgba(238, 240, 248, 0.42); margin-bottom: 22px; letter-spacing: 0.14em; text-transform: uppercase; }
 .adm-nav { display: flex; flex-direction: column; gap: 4px; }
 .adm-nav a {
   display: flex; align-items: center; gap: 10px;
@@ -59,8 +52,13 @@
 
 .adm-main { padding: 30px 34px 60px; max-width: 1280px; }
 @media (max-width: 860px) { .adm-main { padding: 22px 16px 48px; } }
-.adm-h1 { font-size: 24px; font-weight: 800; letter-spacing: -0.01em; margin: 0 0 4px; }
-.adm-sub { color: rgba(238, 240, 248, 0.5); font-size: 13px; margin: 0 0 24px; }
+.adm-h1 {
+  font-size: 27px; font-weight: 900; letter-spacing: -0.025em; margin: 0 0 5px;
+  background: linear-gradient(92deg, #ffffff 30%, #d9c2ff 70%, var(--iris-violet));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 0 30px rgba(168, 85, 247, 0.16);
+}
+.adm-sub { color: rgba(238, 240, 248, 0.46); font-size: 13px; margin: 0 0 24px; letter-spacing: 0.01em; }
 
 .adm-grid { display: grid; gap: 14px; }
 .adm-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
@@ -76,6 +74,8 @@
   padding: 18px;
 }
 .adm-card h3 { font-size: 13px; font-weight: 600; color: rgba(238,240,248,0.6); margin: 0 0 14px; letter-spacing: 0.02em; }
+.adm-fb { transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s; }
+.adm-fb:hover { border-color: rgba(168, 85, 247, 0.45); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(168, 85, 247, 0.12); }
 
 .adm-stat-label { font-size: 12px; color: rgba(238, 240, 248, 0.5); margin: 0 0 8px; letter-spacing: 0.04em; }
 .adm-stat-num {

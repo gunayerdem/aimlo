@@ -22,7 +22,8 @@ export default async function AdminLayout({ children }: { children: ReactNode })
     <div className="adm-shell">
       <aside className="adm-side">
         <div className="adm-brand">
-          <span aria-hidden>▲</span> <b>AIMLO</b>&nbsp;Admin
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/aimlo-logo.png?v=3" alt="AIMLO" className="adm-logo" draggable={false} />
         </div>
         <div className="adm-brand-sub">Founder Console</div>
         <AdminNav />

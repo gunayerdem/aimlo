@@ -229,6 +229,7 @@ export async function getInsights(): Promise<InsightsData> {
 
 export type FeedbackSample = {
   id: string;
+  userId: string;
   userLabel: string;
   createdAt: string;
   summary: string | null;
@@ -264,6 +265,7 @@ export async function getRecentFeedback(limit = 25): Promise<FeedbackSample[]> {
     const j = r.raw_result_json ?? {};
     return {
       id: r.id,
+      userId: r.user_id,
       userLabel: labelById.get(r.user_id) ?? r.user_id.slice(0, 8),
       createdAt: r.created_at,
       summary: r.summary ?? (j.summary as string) ?? null,
