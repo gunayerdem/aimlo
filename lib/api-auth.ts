@@ -21,7 +21,7 @@ const STRICT_RATE_LIMIT = process.env.STRICT_RATE_LIMIT === "true";
 
 // ── Rate limiting configuration ──
 
-type RouteKey = "feedback" | "report" | "vision" | "insight" | "telemetry" | "default";
+type RouteKey = "feedback" | "report" | "vision" | "insight" | "telemetry" | "admin" | "default";
 
 const RATE_LIMITS: Record<RouteKey, { window: number; max: number }> = {
   feedback:  { window: 60, max: 15 }, // 15/min
@@ -29,6 +29,7 @@ const RATE_LIMITS: Record<RouteKey, { window: number; max: number }> = {
   vision:    { window: 60, max: 4 },  // 4/min (vision is $0.015+/call — keep tight)
   insight:   { window: 60, max: 10 }, // 10/min
   telemetry: { window: 60, max: 60 }, // 60/min — generous, telemetry must not eat user's AI quota
+  admin:     { window: 60, max: 30 }, // 30/min — owner panel; defense-in-depth vs heavy aggregation abuse
   default:   { window: 60, max: 20 },
 };
 

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAuthAndRateLimit } from "@/lib/api-auth";
+import { saveAiUsage } from "@/lib/ai-usage";
 import { checkOutputQuality, scoreFields } from "@/evals/generic-detector";
 import { analyzeRoundPatterns, generateDeathContext, generateNextRoundPlan } from "@/lib/round-engine";
 import { calculatePlayerScore } from "@/lib/scoring";
@@ -496,6 +497,8 @@ ${patternContext}`;
     if (usage) {
       const cached = usage.prompt_tokens_details?.cached_tokens ?? 0;
       console.log(`[Aimlo AI tokens] feedback in=${usage.prompt_tokens ?? 0} cached=${cached} out=${usage.completion_tokens ?? 0}`);
+      // userId isn't in this helper's scope (text-only, cheap call) — track by route.
+      saveAiUsage({ userId: null, routeType: "feedback", model: data?.model ?? "gpt-5-mini", promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, cachedTokens: cached });
     }
     const text: string = data?.choices?.[0]?.message?.content || "";
 

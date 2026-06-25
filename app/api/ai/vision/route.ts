@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAuthAndRateLimit } from "@/lib/api-auth";
+import { saveAiUsage } from "@/lib/ai-usage";
 import { realityCheck } from "@/lib/reality-checker";
 import { loadVisionKnowledge } from "@/lib/knowledge-loader";
 import { sanitizePromptInput } from "@/lib/prompt-safety";
@@ -1030,6 +1031,8 @@ export async function POST(request: NextRequest) {
     const cacheStatus = cachedTokens > 0 ? "HIT" : "MISS";
     const cacheRatio = promptTokens > 0 ? ((cachedTokens / promptTokens) * 100).toFixed(1) : "0.0";
     console.log(`[CACHE ${cacheStatus}] cached=${cachedTokens} fresh=${freshTokens} total_in=${promptTokens} hit_ratio=${cacheRatio}% output=${completionTokens} finish=${finishReason}`);
+    // Persist usage for the admin /cost panel (non-blocking, fail-safe).
+    saveAiUsage({ userId: auth.userId, routeType: "vision", model: data?.model ?? "gpt-5-mini", promptTokens, completionTokens, cachedTokens });
 
     const text: string = data?.choices?.[0]?.message?.content || "";
     if (!text) {

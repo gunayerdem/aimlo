@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { verifyAuthAndRateLimit } from "@/lib/api-auth";
+import { saveAiUsage } from "@/lib/ai-usage";
 import { sanitizePromptInput } from "@/lib/prompt-safety";
 import { checkOutputQuality, scoreFields } from "@/evals/generic-detector";
 import { computeMatchInsights, analyzeRoundPatterns } from "@/lib/round-engine";
@@ -879,6 +880,7 @@ ${scoringContext}`;
     if (usage) {
       const cached = usage.prompt_tokens_details?.cached_tokens ?? 0;
       console.log(`[Aimlo AI tokens] report in=${usage.prompt_tokens ?? 0} cached=${cached} out=${usage.completion_tokens ?? 0} finish=${stopReason}`);
+      saveAiUsage({ userId, routeType: "report", model: data?.model ?? "gpt-5-mini", promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, cachedTokens: cached });
     }
 
     // Robust JSON extraction: strips markdown fences, balances braces

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAuthAndRateLimit } from "@/lib/api-auth";
+import { saveAiUsage } from "@/lib/ai-usage";
 import { loadKnowledge } from "@/lib/knowledge-loader";
 import { checkOutputQuality } from "@/evals/generic-detector";
 import { buildPolicyBlock } from "@/lib/ai-policy";
@@ -273,6 +274,7 @@ export async function POST(request: NextRequest) {
         if (usage) {
           const cached = usage.prompt_tokens_details?.cached_tokens ?? 0;
           console.log(`[Aimlo AI tokens] insight in=${usage.prompt_tokens ?? 0} cached=${cached} out=${usage.completion_tokens ?? 0}`);
+          saveAiUsage({ userId: null, routeType: "insight", model: d?.model ?? "gpt-5-mini", promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, cachedTokens: cached });
         }
         const t: string = d?.choices?.[0]?.message?.content || "";
         try { return { ok: true, value: JSON.parse(t) }; } catch {
