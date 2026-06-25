@@ -75,6 +75,11 @@ const POSITION_NAMES = [
   "mound", "c nest", "b yard", "b market", "mid alley",
   "a yard", "b nest", "a nest", "a cliff", "mid platform",
   "a drop", "ramen", "screen", "mail",
+  // Summit callouts (2026-06-26 — yeni harita; extractClaims Summit pozisyonlarını
+  // da tanısın ki "Mid Fountain'da tekrar ölüyorsun" gibi pattern doğrulansın).
+  "mid fountain", "mid bend", "mid window", "mid tiles", "double box",
+  "a garden", "a cave", "a link", "a art", "b link", "b tower",
+  "b trophy", "b gym", "triples", "close box",
 ];
 
 const REPETITION_KEYWORDS = [
