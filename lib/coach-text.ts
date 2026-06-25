@@ -122,6 +122,11 @@ const TR_JARGON: [RegExp, string][] = [
   [/\bfrag verirsin(?![a-zçğıöşü])/gi, "ölürsün"],                       // frag verir 2.tekil
   [/\bfrag verirsiniz(?![a-zçğıöşü])/gi, "ölürsünüz"],                   // frag verir 2.çoğul
   [/\bfrag verir(?![ia-zçğıöşü])/gi, "ölür"],                            // frag verir 3.tekil (sin/siniz hariç → üstte)
+  // pre-aim İSİM bağlamı (C6 report: "pre-aim ile/ile kesiyor" → fiil-formu "açıyı
+  // önceden tutuyor ile" bozuk çıkıyordu). Bare catch-all'dan ÖNCE, ulaç-form ver.
+  [/\bhead pre[- ]?aim['’]?(le|la)\b/gi, "önceden kafa hizasına nişan alarak"],
+  [/\bpre[- ]?aim['’]?(le|la)\b/gi, "önceden nişan alarak"],
+  [/\bpre[- ]?aim\s+ile\b/gi, "önceden nişan alarak"],
   // CATCH-ALL backstops (head/pre-aim) — EN SONDA, spesifikler tüketmediyse devreye girer
   [/\bhead pre[- ]?aim\b/gi, "açıyı önceden tutarak"],
   [/\bpre[- ]?aim\b/gi, "açıyı önceden tutuyor"],
@@ -167,6 +172,8 @@ const TR_JARGON: [RegExp, string][] = [
   [/\bcontest\s+ediyor\b/gi, "zorluyor"],
   [/\bcontest\s+et\b/gi, "zorla"],
   [/\bsingle[- ]?entry\b/gi, "tek başına giriş"],          // "single-entry" → "tek başına giriş"
+  // C6 report-surfaced sızıntılar
+  [/\btrade\s+buddy\b/gi, "trade arkadaşı"],               // "trade buddy" → "trade arkadaşı"
   [/\bcezaland[ıi]r[ıi]ls[ıi]n\b/gi, "bedavaya ölsün"],    // S6: pasif "cezalandırılsın"
   [/\bcezaland[ıi]r[ıi]l[ıi]r\b/gi, "bedavaya ölür"],      // pasif "cezalandırılır"
   // bare "wide" (jargon) → "geniş" — EN SONDA, "wide swing/peek" spesifikleri zaten çevirdiyse boşa düşer
