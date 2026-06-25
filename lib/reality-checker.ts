@@ -79,7 +79,15 @@ const POSITION_NAMES = [
 
 const REPETITION_KEYWORDS = [
   // Turkish
-  "tekrar eden", "tekrar", "art arda", "sürekli",
+  // Cycle 3 (council 2026-06-26): bare "tekrar" REMOVED — it matched FUTURE
+  // coach advice ("o açıyı tekrar deneme", "A'ya tekrar girersen") and falsely
+  // flagged it as a PAST repetition claim, which (with no death_position in the
+  // round memory) cascaded to a level-3 strip that DESTROYED a good suggestion
+  // (empirical S9: "...A'ya tekrar giriyorsanız operator'la smoke/flash..." →
+  // gutted to a stub). PAST-claim forms kept: "tekrar eden" (sıfat-fiil) +
+  // "tekrar tekrar" (yineleme). Anti-uydurma intact — count/position/window
+  // checks below still catch fabricated stats.
+  "tekrar eden", "tekrar tekrar", "art arda", "sürekli",
   "hep aynı", "aynı bölge", "aynı pozisyon",
   "pattern", "kalıcı",
   // English
@@ -185,6 +193,13 @@ export function rewriteUnsafeClaims(
   text: string,
   claims: ExtractedClaims,
   validation: ValidationResult,
+  // Cycle 3 (council 2026-06-26): when EVERY sentence is an unproven repetition
+  // claim and gets dropped, the neutral death-fallback ("Bu round beklenen
+  // açıdan vuruldun.") is fine for a deathAnalysis but WRONG for a
+  // nextRoundSuggestion (a past-tense death line in a "next round plan" field =
+  // useless stub). When false, return "" instead so the caller can keep the
+  // original advice. Defaults true → every existing caller is byte-identical.
+  allowEmptyFallback: boolean = true,
 ): string {
   if (validation.rewriteLevel === 1) {
     return text; // all claims verified
@@ -253,6 +268,11 @@ export function rewriteUnsafeClaims(
     );
     result = safe.join(" ").trim();
     if (!result) {
+      // Cycle 3 (council 2026-06-26): a nextRoundSuggestion must NOT be replaced
+      // by a past-tense death stub — return "" so the caller keeps the original
+      // (still-actionable) advice instead. Only deathAnalysis/generic get the
+      // neutral fallback.
+      if (!allowEmptyFallback) return "";
       // Every sentence was an unproven repetition claim → neutral, language-
       // matched fallback. NOT coach advice (no-fake: this is a safety strip,
       // not synthesized coaching) — just a factual, non-overclaiming line.
@@ -393,6 +413,11 @@ export function realityCheck(
   outputText: string,
   roundHistory: RoundMemoryEntry[],
   factGround?: { hasRoute?: boolean; hasTradeData?: boolean },
+  // Cycle 3 (council 2026-06-26): field-type hint. "suggestion" suppresses the
+  // neutral death-fallback (returns "" instead so the route keeps the original
+  // advice). Omitted ⇒ "death"/"generic" behavior = byte-identical to before;
+  // every existing report/insight/feedback caller is unaffected.
+  kind?: "death" | "suggestion" | "generic",
 ): { text: string; modified: boolean; rewriteLevel: number } {
   if (!outputText) {
     return { text: outputText, modified: false, rewriteLevel: 1 };
@@ -418,7 +443,7 @@ export function realityCheck(
     const claims = extractClaims(text);
     if (claims.claimedCount || claims.claimedPosition || claims.repetitionClaim) {
       const validation = validateClaims(claims, roundHistory);
-      text = rewriteUnsafeClaims(text, claims, validation);
+      text = rewriteUnsafeClaims(text, claims, validation, kind !== "suggestion");
       rewriteLevel = Math.max(rewriteLevel, validation.rewriteLevel);
     }
   }

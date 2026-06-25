@@ -40,8 +40,18 @@ const TR_JARGON: [RegExp, string][] = [
   // için $1 (ek) korunarak yeniden eklenir → "yaparsan"→"atarsan", "yapmadan"→
   // "atmadan" doğru çıkar. EN SONDA: spesifik kalıplar metni zaten tüketmişse boşa düşer.
   [/\bswing yap([a-zçğıöşü]*)/gi, "geniş açıyla peek at$1"],
+  // teammate + (apostrof?) + TR ek → düzgün AYRI-sözcük TR. Türkçede "takım
+  // arkadaşı" iyelik/edat ekini ayrı alır; eki köke yapıştırmak "arkadaşı'le"
+  // gibi bozuk çıkarıyordu (empirik S7/S8, council 2026-06-26). Ekli formlar
+  // çıplak "teammate"ten ÖNCE gelmeli (uzun eşleşme kazanır).
+  [/\bteammate['’]?(le|la|yle|yla|ile)\b/gi, "takım arkadaşı ile"],
+  [/\bteammate['’]?(nin|nın|in|ın)\b/gi, "takım arkadaşının"],
+  [/\bteammate['’]?(yi|yı|i|ı)\b/gi, "takım arkadaşını"],
+  [/\bteammate['’]?(ye|ya|e|a)\b/gi, "takım arkadaşına"],
   [/\bteammate\b/gi, "takım arkadaşı"],            // ai-policy line 99: zorunlu çeviri
-  [/\bcounter\s*:/gi, "Karşılık:"],
+  // "Counter:"/"Karşılık:" etiket-önekini SİL — koç etiket basmaz, direkt söyler
+  // (empirik S1, council 2026-06-26). Sadece iki nokta varsa = etiket.
+  [/\b(counter|karşılık)\s*:\s*/gi, ""],
   [/\bshift[- ]?walk\b/gi, "sessiz yürü"],
   [/\bdry\b/gi, "utility'siz"],                     // ai-policy line 99: dry→utility'siz
 
@@ -115,6 +125,41 @@ const TR_JARGON: [RegExp, string][] = [
   // CATCH-ALL backstops (head/pre-aim) — EN SONDA, spesifikler tüketmediyse devreye girer
   [/\bhead pre[- ]?aim\b/gi, "açıyı önceden tutarak"],
   [/\bpre[- ]?aim\b/gi, "açıyı önceden tutuyor"],
+
+  // ── Cycle 3 net (council 2026-06-26) — empirik eval'de .final'e sızan jargon/yön/halüsinasyon ──
+  // Yön (İngilizce → TR). Kombinasyonlar (front-left), apostrof+ek'i YUTARAK
+  // (Cycle 3b: "front-right'tan" → "sağ önden", yoksa "sağ ön'tan" bozuğu çıkıyor).
+  // Ablatif (-tan/-den) ve lokatif (-ta/-de) formlar ÖNCE, çıplak SONRA.
+  [/\bfront[- ]?left['’]?(t[ae]n|d[ae]n)\b/gi, "sol önden"],
+  [/\bfront[- ]?left['’]?(t[ae]|d[ae])\b/gi, "sol önde"],
+  [/\bfront[- ]?left\b/gi, "sol ön"],
+  [/\bfront[- ]?right['’]?(t[ae]n|d[ae]n)\b/gi, "sağ önden"],
+  [/\bfront[- ]?right['’]?(t[ae]|d[ae])\b/gi, "sağ önde"],
+  [/\bfront[- ]?right\b/gi, "sağ ön"],
+  [/\bback[- ]?left['’]?(t[ae]n|d[ae]n)\b/gi, "sol arkadan"],
+  [/\bback[- ]?left['’]?(t[ae]|d[ae])\b/gi, "sol arkada"],
+  [/\bback[- ]?left\b/gi, "sol arka"],
+  [/\bback[- ]?right['’]?(t[ae]n|d[ae]n)\b/gi, "sağ arkadan"],
+  [/\bback[- ]?right['’]?(t[ae]|d[ae])\b/gi, "sağ arkada"],
+  [/\bback[- ]?right\b/gi, "sağ arka"],
+  [/\bleft\s+(açı)/gi, "sol $1"],          // "left açıda" → "sol açıda"
+  [/\bright\s+(açı)/gi, "sağ $1"],
+  [/\bfront\s+(açı)/gi, "ön $1"],          // "front açısıyla" → "ön açısıyla"
+  [/\bback\s+(açı)/gi, "arka $1"],
+  [/\bfront['’](tan|ten)\b/gi, "önden"],    // "front'tan" → "önden"
+  // Jargon kısaltma / tarzanca-fiil / halüsinasyon terim / İngilizce sızıntı
+  [/\bone[- ]?tap\b/gi, "tek atışta kafadan"],            // S1: Silver-sade (SILVER kuralı whitelist'ten üstün)
+  [/\bone[- ]?on[- ]?one\b/gi, "teke tek"],                // S10: "one-on-one" → "teke tek"
+  [/\bTP['’]?(yi|yı|si|ler|ini)?\b/g, "teleport"],         // S9: Chamber "TP" kısaltması (case-sensitive)
+  [/\bcrosshair['’]?([a-zçğıöşü]+)?\b/gi, "nişangâh$1"],   // S6: "crosshair'i" → "nişangâhı"
+  [/\bzonel[ae]y([ıi]p|arak)\b/gi, "alanı kapatıp"],       // S6: "zonelayıp" → "alanı kapatıp"
+  [/\bzonel[ae][a-zçğıöşü]*/gi, "alanı kapat"],            // zone+TR fiil backstop
+  [/\btelemetriyle\b/gi, "bilgisiyle"],                    // S10: halüsinasyon "telemetri"
+  [/\btelemetri[a-zçğıöşü]*/gi, "bilgi"],                  // telemetri backstop
+  [/\bcezaland[ıi]r[ıi]ls[ıi]n\b/gi, "bedavaya ölsün"],    // S6: pasif "cezalandırılsın"
+  [/\bcezaland[ıi]r[ıi]l[ıi]r\b/gi, "bedavaya ölür"],      // pasif "cezalandırılır"
+  // bare "wide" (jargon) → "geniş" — EN SONDA, "wide swing/peek" spesifikleri zaten çevirdiyse boşa düşer
+  [/\bwide\b/gi, "geniş"],                                 // "wide açıdan" → "geniş açıdan"
 ];
 
 const CLEAN_AGENT_NAMES = ["Jett","Raze","Phoenix","Reyna","Yoru","Neon","Iso","Waylay","Sage","Killjoy","Cypher","Chamber","Deadlock","Vyse","Omen","Brimstone","Viper","Astra","Harbor","Clove","Sova","Breach","Skye","Fade","Gekko","Tejo","Veto"];
@@ -136,7 +181,29 @@ export function cleanCoachText(text: string, lang: "tr" | "en"): string {
     for (const [re, rep] of TR_JARGON) t = t.replace(re, rep);
     t = fixTurkishApostrophe(t);                     // duvar'i → duvarı (TR plain terms)
   }
+  // Cycle 3b: collapse an accidental adjacent duplicate of the SAME long word
+  // ("utility'siz utility'siz tutma" → "utility'siz tutma"). ≥5 chars only, so
+  // legitimate short reduplication ("tek tek", "yan yan") is untouched.
+  t = t.replace(/\b([^\s]{5,})\s+\1\b/giu, "$1");
+  // Strip a dangling clause separator left when the model started a 2nd clause
+  // then stopped ("...aynı açıyı tutuyor;" → "...aynı açıyı tutuyor.").
+  t = t.replace(/\s*;\s*$/, ".").replace(/\s+([.,!?])/g, "$1");
   return t.replace(/\s{2,}/g, " ").trim();
+}
+
+/**
+ * Word-safe length clamp (Cycle 3b). The vision route caps each field at a byte
+ * length for the overlay; a raw String.slice can cut mid-word ("...trade fırsatı
+ * y"). This slices to max, then backs up to the last word boundary (only if that
+ * keeps ≥60% of the budget, so a single very long word still gets cut) and trims
+ * a trailing separator. Never adds an ellipsis (coach text stays clean).
+ */
+export function clampWords(s: string, max: number): string {
+  if (!s || s.length <= max) return s;
+  const cut = s.slice(0, max);
+  const lastSpace = cut.lastIndexOf(" ");
+  const out = lastSpace > max * 0.6 ? cut.slice(0, lastSpace) : cut;
+  return out.replace(/[\s,;:–-]+$/, "").trim();
 }
 
 /**

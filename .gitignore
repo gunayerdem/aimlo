@@ -51,3 +51,6 @@ node_modules/
 # Desktop build logs (redirected here during fix sessions) + research artifacts
 _tauri_*.log
 BLITZ_OVERWOLF_INJECTION_FINDINGS.json
+
+# Cycle-3 empirical eval samples (generated, regenerable via scripts/eval-vision.ts)
+scripts/eval-out/

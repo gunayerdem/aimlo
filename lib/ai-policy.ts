@@ -186,7 +186,9 @@ Kanıt YOKSA → düşman davranışı hakkında İDDİA YAPMA. "Düşman analiz
 // anchor. Still anti-uydurma: forbids inventing enemy reads without evidence.
 export const ENEMY_ANALYSIS_GATE_VISION = `\nDÜŞMAN ANALİZİ (VISION):
 - Madde 1 = SADECE OCR/görselde olan düşman gerçeği (killerInfo ajan+silah, görünen pozisyon). Kanıt yoksa "düşman okuyor" diye UYDURMA — eldeki killer/pozisyon gerçeğine bağla.
-- Madde 2 = oyuncuya PRATİK counter (eylem) — iddia değil tavsiye, callout+util içermeli. ASLA "yeterli veri yok" / "düşman iyi oynadı" yazma.`;
+- Madde 2 = oyuncuya PRATİK counter (eylem) — iddia değil tavsiye, callout+util içermeli. ASLA "yeterli veri yok" / "düşman iyi oynadı" yazma.
+- HER İKİ MADDE de TEK kısa cümle (Cycle 3): noktalı virgül (;) ile iki ayrı emir BİRLEŞTİRME, en önemli tek şeyi söyle. Başına "Counter:"/"Karşılık:" gibi ETİKET koyma — direkt söyle.
+- O ajanın GERÇEK yeteneğini kullan (Cycle 3): bir ajana olmayan yeteneği atfetme (ör. Clove'da tel/duvar YOK). Emin değilsen yeteneği adlandırma, düz "util" de.`;
 
 // ═══════════════════════════════════════════════════════════
 // PERSONALIZATION — unified for round + match context
@@ -237,6 +239,9 @@ export const OUTPUT_FOCUS_RULE_VISION = `\nODAK KURALI:
 - SADECE en önemli 1 soruna odaklan, 1 net fix ver (alternatif şart değil).
 - 1-2 cümle, en fazla. Paragraf/narration YASAK.
 - Mikro-pozisyon ZORUNLU: "A Short", "B Main entry" — yalnız "site"/"mid" KABUL EDİLMEZ.
+- Mikro-DETAY YASAK (Cycle 3): util'i tam nereye atacağını/saklayacağını söyleme — "molly'yi X yönünde sakla", "smoke'u Y'ye at", "dash'ini Z için tut" gibi koordinat/yön talimatı VERME. Site/açı düzeyinde kal.
+- Slash-liste YASAK (Cycle 3): "kamera/tel", "smoke/flash", "Heaven/Screen" yazma — "kamera veya tel", "smoke ya da flash", "Heaven ya da Screen" diye AÇIK yaz.
+- İngilizce yön YASAK (Cycle 3): "front-left/back-right/left açı" yazma → "sol ön / sağ arka / sol açı" gibi Türkçe yön kullan.
 - Öncelik: tekrar eden pattern > net hata > tek gözlem`;
 
 // ═══════════════════════════════════════════════════════════
