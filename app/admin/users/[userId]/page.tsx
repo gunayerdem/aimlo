@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getUserDetail } from "@/lib/admin-data";
 import { getAdminUser, logAdminAudit } from "@/lib/admin-auth";
 import { formatUsd } from "@/lib/openai-pricing";
+import { RateBypassToggle } from "../../RateBypassToggle";
 
 export const dynamic = "force-dynamic";
 
@@ -32,6 +33,9 @@ export default async function AdminUserDetailPage({ params }: { params: Promise<
         {detail.username ?? detail.displayName ?? detail.userId.slice(0, 8)}
       </h1>
       <p className="adm-sub">{detail.email ?? "email yok"} · {detail.userId}</p>
+      <div style={{ marginBottom: 20 }}>
+        <RateBypassToggle userId={detail.userId} initial={detail.rateBypassed} />
+      </div>
 
       <div className="adm-grid cols-4">
         <div className="adm-card"><p className="adm-stat-label">TOPLAM MAÇ</p><div className="adm-stat-num iris">{detail.matches.length}</div></div>

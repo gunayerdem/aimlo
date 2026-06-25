@@ -6,6 +6,7 @@ import "server-only";
 import type { SupabaseClient, User } from "@supabase/supabase-js";
 import { createServiceSupabase } from "@/lib/supabase/server";
 import { computeCost } from "@/lib/openai-pricing";
+import { isRateBypassedPublic } from "@/lib/api-auth";
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -244,6 +245,7 @@ export type UserDetail = {
   matches: UserMatch[];
   memory: Record<string, unknown> | null;
   cost: number;
+  rateBypassed: boolean;
 };
 
 export async function getUserDetail(userId: string): Promise<UserDetail | null> {
@@ -318,6 +320,7 @@ export async function getUserDetail(userId: string): Promise<UserDetail | null> 
     matches,
     memory: (memoryRes.data?.memory_data as Record<string, unknown>) ?? null,
     cost,
+    rateBypassed: await isRateBypassedPublic(userId),
   };
 }
 

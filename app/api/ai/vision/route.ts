@@ -1034,19 +1034,6 @@ export async function POST(request: NextRequest) {
     console.log(`[CACHE ${cacheStatus}] cached=${cachedTokens} fresh=${freshTokens} total_in=${promptTokens} hit_ratio=${cacheRatio}% output=${completionTokens} finish=${finishReason}`);
     // Persist usage for the admin /cost panel (non-blocking, fail-safe).
     saveAiUsage({ userId: auth.userId, routeType: "vision", model: data?.model ?? "gpt-5-mini", promptTokens, completionTokens, cachedTokens });
-    // Live match feed (admin /live): one row per death — piggybacks this vision call,
-    // zero extra AI cost, non-blocking + fail-safe.
-    saveMatchEvent({
-      userId: auth.userId,
-      matchId: (body as VisionRequest).matchId ?? null,
-      kind: "death",
-      map: reqMap ?? null,
-      agent: reqAgent ?? null,
-      side: (body as VisionRequest).side ?? null,
-      roundNo: (body as VisionRequest).round ?? null,
-      score: (body as VisionRequest).score ?? null,
-      deathLoc: (body as VisionRequest).deathLocation ?? null,
-    });
 
     const text: string = data?.choices?.[0]?.message?.content || "";
     if (!text) {
@@ -1139,8 +1126,28 @@ export async function POST(request: NextRequest) {
       // Note: coachInsight field removed — purple "KOÇ İÇGÖRÜSÜ" block dropped from overlay.
       // Pattern-aware insight now folds into deathAnalysis or nextRoundSuggestion when relevant.
 
-      // Copy meta fields from REQUEST (desktop is source of truth for round/score/result/died —
-      // no longer asking AI to echo them back, saves tokens).
+      // Final coach text (clean BEFORE slice — plainify/apostrophe can change length).
+      const deathAnalysisOut = cleanCoachText(checkedAnalysis.text, "tr").slice(0, 350);
+      const enemyAnalysisOut = fb.enemyAnalysis.slice(0, 2).map((s) => cleanCoachText(String(s), "tr").slice(0, 180));
+      const nextRoundOut = cleanCoachText(checkedSuggestion.text, "tr").slice(0, 350);
+
+      // Live match feed (admin /live + /feedback): one row per death with the ACTUAL
+      // coaching the user received — piggybacks this vision call, ZERO extra AI cost,
+      // non-blocking + fail-safe.
+      saveMatchEvent({
+        userId: auth.userId,
+        matchId: (body as VisionRequest).matchId ?? null,
+        kind: "death",
+        map: reqMap ?? null,
+        agent: reqAgent ?? null,
+        side: (body as VisionRequest).side ?? null,
+        roundNo: (body as VisionRequest).round ?? null,
+        score: (body as VisionRequest).score ?? null,
+        deathLoc: (body as VisionRequest).deathLocation ?? null,
+        feedback: { deathAnalysis: deathAnalysisOut, enemyAnalysis: enemyAnalysisOut, nextRoundSuggestion: nextRoundOut },
+      });
+
+      // Copy meta fields from REQUEST (desktop is source of truth for round/score/result/died).
       return NextResponse.json({
         round: typeof reqBody.round === "number" ? reqBody.round : 0,
         score: typeof reqBody.score === "string" ? reqBody.score.slice(0, 10) : "?-?",
@@ -1148,15 +1155,9 @@ export async function POST(request: NextRequest) {
           ? (reqBody.result.toLowerCase() === "won" ? "win" : reqBody.result.toLowerCase() === "lost" ? "loss" : reqBody.result.toLowerCase())
           : "loss",
         died: typeof reqBody.died === "boolean" ? reqBody.died : true,
-        // Length caps for coach-voice format (1-2 sentence Turkish):
-        //   deathAnalysis      : ~350 chars (1-2 sentences with explanation)
-        //   enemyAnalysis      : 2 items × ~180 chars each
-        //   nextRoundSuggestion: ~350 chars (1-2 sentences)
-        // Clean BEFORE slice — plainify/apostrophe can change length, so slicing
-        // after avoids mid-word truncation. Live product is TR (no lang field).
-        deathAnalysis: cleanCoachText(checkedAnalysis.text, "tr").slice(0, 350),
-        enemyAnalysis: fb.enemyAnalysis.slice(0, 2).map((s) => cleanCoachText(String(s), "tr").slice(0, 180)),
-        nextRoundSuggestion: cleanCoachText(checkedSuggestion.text, "tr").slice(0, 350),
+        deathAnalysis: deathAnalysisOut,
+        enemyAnalysis: enemyAnalysisOut,
+        nextRoundSuggestion: nextRoundOut,
         patternData: null,
       });
     }

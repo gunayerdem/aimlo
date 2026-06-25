@@ -17,6 +17,7 @@ export type MatchEventInput = {
   score?: string | null;
   deathLoc?: string | null;
   result?: string | null;
+  feedback?: Record<string, unknown> | null;
 };
 
 export function saveMatchEvent(input: MatchEventInput): void {
@@ -34,6 +35,7 @@ export function saveMatchEvent(input: MatchEventInput): void {
         score: input.score ?? null,
         death_loc: input.deathLoc ?? null,
         result: input.result ?? null,
+        feedback: input.feedback ?? null,
       });
       if (error) console.error("[match-events] insert failed:", error.message);
     })

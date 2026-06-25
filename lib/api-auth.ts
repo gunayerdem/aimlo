@@ -66,6 +66,44 @@ function isDevUser(userId: string): boolean {
   return DEV_USER_ALLOWLIST.has(userId);
 }
 
+// ── Admin-granted rate-limit bypass (Upstash set) ──
+// Like DEV_USER_ALLOWLIST but runtime-editable from the admin panel (no redeploy).
+// CHECKED ONLY on the rate-limit-EXCEEDED path → zero cost for normal traffic.
+// Members bypass per-minute + daily + per-IP, same as the dev allowlist.
+const RL_BYPASS_SET = "aimlo:rl_bypass";
+
+async function upstashSet(cmd: "sadd" | "srem", userId: string): Promise<void> {
+  if (!isUpstashConfigured()) return;
+  const url = process.env.UPSTASH_REDIS_REST_URL!;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN!;
+  await fetch(`${url}/${cmd}/${RL_BYPASS_SET}/${encodeURIComponent(userId)}`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+}
+
+/** True iff the admin granted this user a runtime rate-limit bypass. Fail-safe (false on error). */
+async function isRateBypassed(userId: string): Promise<boolean> {
+  if (!isUpstashConfigured()) return false;
+  try {
+    const url = process.env.UPSTASH_REDIS_REST_URL!;
+    const token = process.env.UPSTASH_REDIS_REST_TOKEN!;
+    const res = await fetch(`${url}/sismember/${RL_BYPASS_SET}/${encodeURIComponent(userId)}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) return false;
+    const d = await res.json();
+    return d?.result === 1 || d?.result === "1";
+  } catch {
+    return false;
+  }
+}
+
+/** Admin actions (called from the admin panel only, behind requireAdmin). */
+export async function grantRateBypass(userId: string): Promise<void> { await upstashSet("sadd", userId); }
+export async function revokeRateBypass(userId: string): Promise<void> { await upstashSet("srem", userId); }
+export async function isRateBypassedPublic(userId: string): Promise<boolean> { return isRateBypassed(userId); }
+
 // In-memory fallback (dev only — see prod-strictness logic in checkRateLimit).
 const memoryStore = new Map<string, { count: number; resetAt: number }>();
 const dailyStore  = new Map<string, { count: number; resetAt: number }>();
@@ -246,6 +284,7 @@ export async function checkRateLimit(
       : memoryRateCheck(userKey, limits.max, limits.window);
 
     if (!rateResult.allowed) {
+      if (await isRateBypassed(userId)) return { allowed: true, remaining: Number.MAX_SAFE_INTEGER };
       return { allowed: false, remaining: 0, retryAfter: limits.window, reason: "rate" };
     }
 
@@ -253,6 +292,7 @@ export async function checkRateLimit(
     if (dailyLimit) {
       const dailyResult = await dailyQuotaCheck(userId, route, dailyLimit);
       if (!dailyResult.allowed) {
+        if (await isRateBypassed(userId)) return { allowed: true, remaining: Number.MAX_SAFE_INTEGER };
         return { allowed: false, remaining: 0, retryAfter: 3600, reason: "daily" };
       }
     }
@@ -264,6 +304,7 @@ export async function checkRateLimit(
         ? await upstashRateCheck(ipKey, limits.max * 3, limits.window)
         : memoryRateCheck(ipKey, limits.max * 3, limits.window);
       if (!ipResult.allowed) {
+        if (await isRateBypassed(userId)) return { allowed: true, remaining: Number.MAX_SAFE_INTEGER };
         return { allowed: false, remaining: 0, retryAfter: limits.window, reason: "ip" };
       }
     }

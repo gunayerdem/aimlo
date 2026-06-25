@@ -122,3 +122,20 @@
 .adm-chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .adm-chip { padding: 6px 12px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid var(--card-border); font-size: 13px; }
 .adm-chip b { color: var(--iris-cyan); }
+
+.adm-toggle {
+  padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--card-border); color: rgba(238,240,248,0.8);
+  transition: all 0.15s;
+}
+.adm-toggle:hover { border-color: var(--ring); }
+.adm-toggle.on { background: rgba(34, 211, 238, 0.14); border-color: rgba(34,211,238,0.4); color: #7ee8f7; }
+.adm-toggle:disabled { opacity: 0.5; cursor: default; }
+
+.adm-btn {
+  display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 10px;
+  font-size: 13px; font-weight: 600; text-decoration: none; cursor: pointer;
+  background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.3); color: #d9c2ff;
+  transition: all 0.15s;
+}
+.adm-btn:hover { background: rgba(168,85,247,0.2); border-color: rgba(168,85,247,0.5); }
