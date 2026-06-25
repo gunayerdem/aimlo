@@ -286,6 +286,28 @@ const SCENARIOS: Scenario[] = [
     },
   },
   {
+    id: "S19-summit-raze-atk-walls",
+    note: "Summit (YENİ harita) / Raze / SALDIRI / Mid kontrol + duvar mekaniği — KB grounding testi",
+    body: {
+      round: 8, score: "4-3", result: "loss", map: "Summit", agent: "Raze", rank: "silver",
+      side: "attack", mode: "competitive", enemyComp: ["Cypher", "Sova", "Omen", "Killjoy", "Jett"],
+      died: true, killerInfo: "killed by cypher with vandal", deathLocation: "A Main", deathAngle: "front",
+      healthAtDeath: 100, alliesAlive: 3, enemiesAlive: 4, economyType: "full_buy", loadout: "vandal",
+      roundHistory: Array.from({ length: 7 }, (_, i) => ({ round_index: i + 1, died: i % 2 === 0, round_won: i % 2 === 1, death_detected_confidence: "observed", timestamp: i, death_position: i % 2 === 0 ? "A Main" : "Mid Fountain", position_confidence: "high" })),
+    },
+  },
+  {
+    id: "S20-summit-cypher-def-mid",
+    note: "Summit (YENİ harita) / Cypher / SAVUNMA / Mid Fountain + duvar — sentinel/kamera-duvar etkileşimi",
+    body: {
+      round: 12, score: "6-5", result: "loss", map: "Summit", agent: "Cypher", rank: "silver",
+      side: "defense", mode: "competitive", enemyComp: ["Jett", "Sova", "Skye", "Omen", "Raze"],
+      died: true, killerInfo: "killed by jett with operator", deathLocation: "Mid Fountain", deathAngle: "right",
+      healthAtDeath: 100, alliesAlive: 2, enemiesAlive: 4, economyType: "full_buy", loadout: "vandal",
+      roundHistory: Array.from({ length: 11 }, (_, i) => ({ round_index: i + 1, died: i % 3 === 0, round_won: i % 2 === 0, death_detected_confidence: "observed", timestamp: i })),
+    },
+  },
+  {
     id: "S18-haven-phoenix-def-r2",
     note: "Haven / Phoenix / SAVUNMA / duelist-on-defense + düşük confidence (R2)",
     body: {
