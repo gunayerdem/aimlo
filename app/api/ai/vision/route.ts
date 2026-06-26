@@ -416,9 +416,9 @@ export async function POST(request: NextRequest) {
     // KB observability (council 2026-06-08): prove per-request whether the KB is
     // actually injected (softi: "feedback benim KB'den gelmiyor"). The KB IS loaded
     // + concatenated below; this logs the injected byte sizes + selectors so it's
-    // visible in Vercel logs. Also surfaces the REAL defect the council found: rank
-    // is structurally always empty (desktop never sends it) → backend always serves
-    // mid-elo.md → every user gets mid-elo coaching regardless of true rank.
+    // visible in Vercel logs. Rank-gating was REMOVED (2026-06-26): every rank now
+    // maps to the single un-gated universal.md, so a missing/empty rank no longer
+    // caps insight — depth is selected by death-type RAG inside the file.
     const agentLen = kb.blocks.agent?.length ?? 0;
     const mapLen = kb.blocks.map?.length ?? 0;
     const ctxLen = kb.blocks.contextual?.length ?? 0;
@@ -429,7 +429,7 @@ export async function POST(request: NextRequest) {
       `rank=${reqRank ?? "-"} enemies=${reqEnemyComp?.length ?? 0}`,
     );
     if (!reqRank) {
-      console.warn(`[KB] rank MISSING → defaulted to silver tier (low-elo.md), the product's target audience (desktop never sent rank).`);
+      console.warn(`[KB] rank MISSING → universal.md served (rank-gating removed; insight depth is death-type driven, not rank).`);
     }
     if (kbTotal === 0) {
       console.warn(`[KB] EMPTY — tracing regression? knowledge/*.md missing from serverless bundle.`);

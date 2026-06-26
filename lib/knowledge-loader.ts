@@ -49,23 +49,28 @@ export const AGENT_ROLE_MAP: Record<string, string> = {
 
 // ── Rank-to-file mapping ──────────────────────────────────
 
+// Rank-gating REMOVED (2026-06-26, softi's standing decision). Every player —
+// Iron to Radiant — gets the same Radiant-depth insight, expressed in universal
+// plain language. The OLD per-tier files (low/mid/high-elo, elite) actively
+// CAPPED insight ("şu konuyu açma: counter-strafing, off-angle, …") and, because
+// the desktop never sends rank, EVERY user was silently served the gated
+// low-elo.md. The single universal.md replaces all of them. Insight depth is now
+// selected by DEATH TYPE (via RAG inside the file), not rank. Every rank maps to
+// universal.md so an explicit ctx.rank can never reintroduce gating.
 const RANK_FILE_MAP: Record<string, string> = {
-  iron: "low-elo.md",
-  bronze: "low-elo.md",
-  silver: "low-elo.md",
-  gold: "mid-elo.md",
-  platinum: "mid-elo.md",
-  diamond: "mid-elo.md",
-  ascendant: "high-elo.md",
-  immortal: "high-elo.md",
-  radiant: "elite.md",
+  iron: "universal.md",
+  bronze: "universal.md",
+  silver: "universal.md",
+  gold: "universal.md",
+  platinum: "universal.md",
+  diamond: "universal.md",
+  ascendant: "universal.md",
+  immortal: "universal.md",
+  radiant: "universal.md",
 };
 
-// Product's actual target audience is SILVER (CLAUDE.md coach-voice Silver rule).
-// When the desktop omits rank (it currently never sends it), fall back to the
-// silver tier file — NOT mid-elo — so missing-rank users get coaching pitched at
-// the real audience. An explicit ctx.rank still overrides this via RANK_FILE_MAP.
-const DEFAULT_RANK_FILE = "low-elo.md"; // silver → low-elo.md (see RANK_FILE_MAP)
+// Desktop currently never sends rank; the default must also be the un-gated file.
+const DEFAULT_RANK_FILE = "universal.md";
 
 // ── Task types and their knowledge requirements ───────────
 
@@ -416,7 +421,7 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
   const rankFile = getRankFile(rank);
   const rankContent = loadFile(`ranks/${rankFile}`);
   if (rankContent) {
-    contextualParts.push(`[RANK BİLGİSİ — ${rank || "default"}]\n${stripKbWhitespace(rankContent)}`);
+    contextualParts.push(`[KOÇLUK PROFİLİ — her rank için Radiant derinliği, sade dil]\n${stripKbWhitespace(rankContent)}`);
     files.push(`ranks/${rankFile}`);
   }
 
