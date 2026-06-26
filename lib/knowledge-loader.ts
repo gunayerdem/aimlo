@@ -138,13 +138,21 @@ export function getAgentFile(agentName: string): string | null {
   return null;
 }
 
-/** Resolve an agent name to its role string (case-insensitive). */
+/** Resolve an agent name to its role string (case-insensitive + slug-tolerant). */
 function resolveAgentRole(agentName: string): string | null {
   if (AGENT_ROLE_MAP[agentName]) return AGENT_ROLE_MAP[agentName];
-  const match = Object.entries(AGENT_ROLE_MAP).find(
-    ([key]) => key.toLowerCase() === agentName.toLowerCase()
+  const lower = agentName.toLowerCase();
+  const ci = Object.entries(AGENT_ROLE_MAP).find(([key]) => key.toLowerCase() === lower);
+  if (ci) return ci[1];
+  // Slug fallback (2026-06-26): the "KAY/O" key's slash breaks the case-insensitive
+  // match when the desktop/OCR sends "KAYO" or "kayo" → KAY/O's KB never loaded
+  // (caught by scripts/verify-kb.ts). Compare alphanumeric-only slugs so KAY/O
+  // resolves no matter how the agent name arrives (KAY/O, KAYO, kayo).
+  const slug = lower.replace(/[^a-z0-9]/g, "");
+  const bySlug = Object.entries(AGENT_ROLE_MAP).find(
+    ([key]) => key.toLowerCase().replace(/[^a-z0-9]/g, "") === slug,
   );
-  return match ? match[1] : null;
+  return bySlug ? bySlug[1] : null;
 }
 
 /**
