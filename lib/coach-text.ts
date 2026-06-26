@@ -221,6 +221,26 @@ const TR_JARGON: [RegExp, string][] = [
   // lookbehind/lookahead sınırı kullan (\b ASLA çalışmaz — bu yüzden ilk denemede
   // "sağ ön'e" düzelmedi). EN SONDA çalışır.
   [/(?<![a-zçğıöşü])(ön|arka|sağ|sol)['’]([a-zçğıöşü]+)/gi, "$1$2"],
+  // ── KILL-EUFEMİZM NET (2026-06-26, softi canlı-test) — ölümü DÜZ söyle, argo/
+  //    yumuşatma YOK. "seni kafadan aldı/temizledi/kesti/götürdü/vurdu" → "kafadan
+  //    vurup öldürdü"; yön+euph → "[yön] vurup öldürdü"; bare euph → "öldürdü".
+  //    NESNE "seni" ŞART → "açıyı/görüş hattını/koridoru/alanı kesti" DOKUNULMAZ
+  //    (lookbehind). Clause-sınırı (.;—!?\n) ile aynı cümlede tutulur. Evidential
+  //    (-miş→-di) net'inden SONRA çalışır ("kafadan kesmiş"→"kesti"→"vurup öldürdü").
+  [/((?<![a-zçğıöşü])seni(?![a-zçğıöşü])[^.;:—!?\n]{0,45}?)kafadan (?:vurup öldürdü|vurdu|aldı|aldılar|temizledi|kesti|götürdü|biçti|düşürdü|indirdi|devirdi)(?![a-zçğıöşü])/gi, "$1kafadan vurup öldürdü"],
+  [/((?<![a-zçğıöşü])seni(?![a-zçğıöşü])[^.;:—!?\n]{0,45}?(?<![a-zçğıöşü])(?:arkadan|yandan|önden|uzaktan|yakından|sağdan|soldan|geriden)\s+)(?:aldı|aldılar|kesti|götürdü|temizledi|vurdu|biçti|düşürdü|indirdi|devirdi)(?![a-zçğıöşü])/gi, "$1vurup öldürdü"],
+  [/((?<![a-zçğıöşü])seni(?![a-zçğıöşü])[^.;:—!?\n]{0,40}?)(?<!açıyı )(?<!açını )(?<!görüş )(?<!hattını )(?<!koridoru )(?<!alanı )(?<!bölgeyi )(?<!siteyi )(?<!trade )(?<!bilgi )(?<!round )(?<!kontrol )(?<!kontrolü )(?:kesti|kestiler|götürdü|götürdüler|biçti|devirdi)(?![a-zçğıöşü])/gi, "$1öldürdü"],
+  [/(?<![a-zçğıöşü])seni ald[ıi](?![a-zçğıöşü])/gi, "seni öldürdü"],
+  // varyant eufemizmler (canlı-test 2026-06-26): "öde-"(made pay), causative
+  // "kestir-", "-ip öldürdü", potansiyel "kafadan al-". Hepsi düz öldür-/vur-.
+  [/(seni[^.;:—!?\n]{0,45}?)öde(di|cek)(?![a-zçğıöşü])/gi, "$1öldür$2"],
+  [/(seni[^.;:—!?\n]{0,45}?)öd(üyor|etiyor)(?![a-zçğıöşü])/gi, "$1öldürüyor"],
+  [/(seni[^.;:—!?\n]{0,45}?)öde(r|tir)(?![a-zçğıöşü])/gi, "$1öldürür"],
+  [/(seni[^.;:—!?\n]{0,45}?)kestir(di|iyor|ir)(?![a-zçğıöşü])/gi, "$1öldürdü"],
+  [/(?<![a-zçğıöşü])(?:kes|al)(?:ip|erek|arak)\s+öldür/gi, "vurup öldür"],
+  [/(?<![a-zçğıöşü])kafadan al(acak|abilir|abilece[kğ]i?)(?![a-zçğıöşü])/gi, "kafadan vur$1"],
+  [/(?<![a-zçğıöşü])kafadan alır(?![a-zçğıöşü])/gi, "kafadan vurur"],
+  [/(?<![a-zçğıöşü])kafadan alıyor(?![a-zçğıöşü])/gi, "kafadan vuruyor"],
 ];
 
 const CLEAN_AGENT_NAMES = ["Jett","Raze","Phoenix","Reyna","Yoru","Neon","Iso","Waylay","Sage","Killjoy","Cypher","Chamber","Deadlock","Vyse","Omen","Brimstone","Viper","Astra","Harbor","Clove","Sova","Breach","Skye","Fade","Gekko","Tejo","Veto"];

@@ -154,6 +154,7 @@ export const NATURAL_COACH_RULE = `\nDOĞAL KOÇ DİLİ: Gerçek bir Radiant ko�
 "pre-aim" → "açıyı önceden tutuyor / köşeyi önceden nişanlamış" (TR'de 'pre-aim' YAZMA)
 "swing yap-" (Tarzanca: İng. isim + TR fiil) → "geniş açıyla peek at- / peek at-" ('swing' tek başına isim olarak SERBEST; 'yap-' ile fiilleştirme YASAK: "swing yapma/yaptın/yapıyor")
 "ilk mermi avantajı/ellerinde olan ilk mermi" gibi DEVRİK kalıp YASAK → "ilk atışı sen yaparsın"
+ÖLÜMÜ DÜZ SÖYLE: oyuncu öldüyse "öldürdü" / "kafadan vurup öldürdü" de. Yumuşatma/argo YASAK: "seni kafadan aldı / kesti / götürdü / temizledi / biçti / düşürdü" → hepsi "öldürdü". (Düşmanın bir AÇIYI/görüş hattını "kesmesi" farklı şeydir, o serbest — yasak olan oyuncuyu öldürmeyi yumuşatmak.)
 DİLBİLGİSİ: cümleler tam, akıcı ve düzgün kurulsun; devrik/yarım/bozuk Türkçe YASAK. Yüksek sesle
 okununca gerçek bir koç öyle der mi — demezse yeniden yaz. Net, kısa, sert ama spesifik (callout + ne yap).`;
 
