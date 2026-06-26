@@ -362,15 +362,38 @@ const TRADE_CLAIM_PATTERNS: RegExp[] = [
   /\btrade\s*['’]?\s*siz\s+(öldün|kaldın|gittin)/gi,
 ];
 
+// Agent names for the killer-when-absent guard (2026-06-26 grounding audit).
+const AGENT_NAMES = [
+  "Jett", "Raze", "Phoenix", "Reyna", "Yoru", "Neon", "Iso", "Waylay",
+  "Sage", "Killjoy", "Cypher", "Chamber", "Deadlock", "Vyse",
+  "Omen", "Brimstone", "Viper", "Astra", "Harbor", "Clove",
+  "Sova", "Breach", "Skye", "Fade", "Gekko", "KAY/O", "Kayo", "Tejo",
+];
+// Definite kill verbs (after coach-text's -miş→-di normalization runs upstream).
+const KILL_VERBS = "(öldürdü|öldürdün|kesti|vurdu|düşürdü|indirdi|biçti)";
+
 /**
  * Strip route-origin and trade-outcome claims the supporting fact can't back.
  * Deterministic, grammar-collapsing (same house style as rewriteUnsafeClaims).
  */
 export function guardUnprovenFacts(
   text: string,
-  factGround: { hasRoute?: boolean; hasTradeData?: boolean },
+  factGround: { hasRoute?: boolean; hasTradeData?: boolean; hasKiller?: boolean },
 ): string {
   let result = text;
+
+  // Killer-when-absent (grounding audit 2026-06-26): killerInfo OCR'da YOKKEN
+  // model belirli bir düşman ajanını katil olarak İSİMLENDİREMEZ (S14: "Cypher
+  // seni kesti" uydurması). Ajan adını "bir düşman"a indir — ölüm gerçek ama
+  // katilin KİMLİĞİ bilinmiyor. hasKiller=true iken (killfeed var) DOKUNMA:
+  // model killer'ı doğru isimlendirmeli. reality-checker bunu daha önce HİÇ
+  // denetlemiyordu (audit'in #1 fabrikasyon kaynağı).
+  if (factGround.hasKiller === false) {
+    for (const ag of AGENT_NAMES) {
+      const re = new RegExp(`\\b${escapeRe(ag)}\\b([^.!?]{0,45}?)\\s${KILL_VERBS}`, "gi");
+      result = result.replace(re, (_m: string, mid: string, verb: string) => `bir düşman${mid} ${verb}`);
+    }
+  }
 
   if (factGround.hasRoute !== true) {
     // Origin claims anchored to a known callout: "<callout>'dan çıkıp/gelip..."
@@ -417,7 +440,7 @@ export function guardUnprovenFacts(
 export function realityCheck(
   outputText: string,
   roundHistory: RoundMemoryEntry[],
-  factGround?: { hasRoute?: boolean; hasTradeData?: boolean },
+  factGround?: { hasRoute?: boolean; hasTradeData?: boolean; hasKiller?: boolean },
   // Cycle 3 (council 2026-06-26): field-type hint. "suggestion" suppresses the
   // neutral death-fallback (returns "" instead so the route keeps the original
   // advice). Omitted ⇒ "death"/"generic" behavior = byte-identical to before;

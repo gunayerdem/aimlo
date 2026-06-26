@@ -485,8 +485,11 @@ function postProcess(s: Scenario, fb: { deathAnalysis: string; enemyAnalysis: st
 
 async function main() {
   const results: unknown[] = [];
-  console.log(`\n══════ EMPIRICAL EVAL — Cycle ${CYCLE} — ${SCENARIOS.length} scenarios ══════\n`);
-  for (const s of SCENARIOS) {
+  // EVAL_ONLY=S1,S9 → sadece bu id-prefix'leri çalıştır (grounding izi için odak).
+  const only = process.env.EVAL_ONLY ? process.env.EVAL_ONLY.split(",").map((x) => x.trim()) : null;
+  const list = only ? SCENARIOS.filter((s) => only.some((o) => s.id.startsWith(o))) : SCENARIOS;
+  console.log(`\n══════ EMPIRICAL EVAL — Cycle ${CYCLE} — ${list.length} scenarios ══════\n`);
+  for (const s of list) {
     process.stdout.write(`[${s.id}] generating... `);
     try {
       const sm = buildSystemMessage(s) as unknown as { msg: string; confidence: string; kb: { files: string[] } };
@@ -498,6 +501,9 @@ async function main() {
         id: s.id, note: s.note, confidence: sm.confidence, kbFiles: sm.kb.files,
         systemPromptBytes: sm.msg.length, usage,
         raw: parsed, final,
+        // EVAL_DUMP_PROMPTS=1 → grounding izi için TAM enjekte KB + OCR. Böylece
+        // her çıktı cümlesi KB/OCR/model-bilgisi diye sınıflanabilir.
+        ...(process.env.EVAL_DUMP_PROMPTS === "1" ? { systemMessage: sm.msg, userPrompt: up } : {}),
       });
     } catch (e) {
       console.log(`FAILED: ${(e as Error).message}`);

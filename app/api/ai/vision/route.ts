@@ -872,6 +872,9 @@ export async function POST(request: NextRequest) {
       const factGround = {
         hasRoute: typeof ctx.playerRoute === "string" && (ctx.playerRoute as string).length > 0,
         hasTradeData: typeof reqBody.tradedByAlly === "boolean",
+        // Grounding audit 2026-06-26: killerInfo OCR'da yoksa, reality-checker
+        // belirli-ajan katil iddialarını "bir düşman"a indirir (uydurma katil engeli).
+        hasKiller: typeof reqBody.killerInfo === "string" && (reqBody.killerInfo as string).length > 0,
       };
       const checkedAnalysis = realityCheck(fb.deathAnalysis, memoryForCheck, factGround, "death");
       const checkedSuggestion = realityCheck(fb.nextRoundSuggestion, memoryForCheck, factGround, "suggestion");
@@ -884,7 +887,14 @@ export async function POST(request: NextRequest) {
 
       // Final coach text (clean BEFORE slice — plainify/apostrophe can change length).
       const deathAnalysisOut = clampWords(cleanCoachText(checkedAnalysis.text, "tr"), 350);
-      const enemyAnalysisOut = fb.enemyAnalysis.slice(0, 2).map((s) => clampWords(cleanCoachText(String(s), "tr"), 180));
+      // enemyAnalysis de reality-check'ten GEÇER (grounding audit 2026-06-26: bu dizi
+      // önceden HİÇ denetlenmiyordu → killer/rota/sayı uydurması elenmeden çıkıyordu).
+      // kind:"suggestion" → tümü stripped olursa "" döner, orijinali koru.
+      const enemyAnalysisOut = fb.enemyAnalysis.slice(0, 2).map((s) => {
+        const c = realityCheck(String(s), memoryForCheck, factGround, "suggestion");
+        const safe = c.text && c.text.trim() ? c.text : String(s);
+        return clampWords(cleanCoachText(safe, "tr"), 180);
+      });
       // Cycle 3: if reality-check emptied the suggestion (every sentence was an
       // unproven repetition claim → "suggestion" kind returns "" rather than a
       // past-tense death stub), keep the model's original advice — still a valid
