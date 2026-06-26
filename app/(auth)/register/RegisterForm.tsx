@@ -290,6 +290,18 @@ export function RegisterForm() {
           <p className="text-[11px] text-[#FF3D71]">{state.fieldErrors.kvkk}</p>
         )}
 
+        <p className="text-[11px] text-neutral-500 leading-relaxed">
+          AIMLO ekranını okur, oyuna müdahale etmez — hile değildir, ban riski yoktur.{" "}
+          <a
+            href="/guvenlik"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="auth-link hover-underline"
+          >
+            Güvenlik &amp; SSS
+          </a>
+        </p>
+
         {state.error && !state.fieldErrors && (
           <div className="rounded-xl bg-[#FF3D71]/[0.06] border border-[#FF3D71]/15 px-4 py-3 animate-scale-in">
             <p className="text-xs text-[#FF3D71] font-semibold">{state.error}</p>

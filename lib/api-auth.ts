@@ -26,7 +26,7 @@ type RouteKey = "feedback" | "report" | "vision" | "insight" | "telemetry" | "ad
 const RATE_LIMITS: Record<RouteKey, { window: number; max: number }> = {
   feedback:  { window: 60, max: 15 }, // 15/min
   report:    { window: 60, max: 5 },  // 5/min (more expensive)
-  vision:    { window: 60, max: 4 },  // 4/min (vision is $0.015+/call — keep tight)
+  vision:    { window: 60, max: 6 },  // 6/min (beta 2026-06-26: bir maçta ölümler kümelenebilir; 4→6 nefes payı. ~$0.0015-0.002/call)
   insight:   { window: 60, max: 10 }, // 10/min
   telemetry: { window: 60, max: 60 }, // 60/min — generous, telemetry must not eat user's AI quota
   admin:     { window: 60, max: 30 }, // 30/min — owner panel; defense-in-depth vs heavy aggregation abuse
@@ -37,7 +37,7 @@ const RATE_LIMITS: Record<RouteKey, { window: number; max: number }> = {
 const DAILY_QUOTA: Partial<Record<RouteKey, number>> = {
   feedback:  200,
   report:    30,
-  vision:    30,  // vision is most expensive — tight daily cap
+  vision:    100, // beta 2026-06-26: 30→100 (~6-10 maç/gün; 30 ~2 maçta bitiyordu). ~$0.20/gün üst sınır/kullanıcı; /cost panelinden izle
   insight:   60,
   telemetry: 1000, // generous — desktop batches every 24h, but instrumentation can fire often during a long session
 };
