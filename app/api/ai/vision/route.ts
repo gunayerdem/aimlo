@@ -8,6 +8,7 @@ import { sanitizePromptInput } from "@/lib/prompt-safety";
 import { loadPlayerMemory, buildMemoryContext } from "@/lib/player-memory";
 import { isUuidV4 } from "@/lib/uuid";
 import { buildPolicyBlock } from "@/lib/ai-policy";
+import { buildAgentAbilityHint, enforceAgentKit } from "@/lib/agent-abilities";
 import { cleanCoachText, clampWords } from "@/lib/coach-text";
 import { ROUND_FEEDBACK_SCHEMA, SYSTEM_PROMPT, USER_PROMPT } from "@/lib/vision-prompt";
 
@@ -482,6 +483,10 @@ export async function POST(request: NextRequest) {
     if (kb.blocks.agent)      systemSections.push(kb.blocks.agent);
     if (kb.blocks.map)        systemSections.push(kb.blocks.map);
     if (kb.blocks.contextual) systemSections.push(kb.blocks.contextual);
+    // Agent-ability grounding (2026-06-26): oyuncunun GERÇEK kitini enjekte et →
+    // model ajana OLMAYAN yeteneği önermez (canlı bug: Killjoy'a "tel"=Cypher's).
+    const abilityHint = buildAgentAbilityHint(reqAgent, "tr");
+    if (abilityHint) systemSections.push(abilityHint);
 
     // ── Cross-match player memory (GROUNDED prior history) ──────────────────
     // buildMemoryContext returns ONLY persisted facts (top death spots, weak
@@ -886,14 +891,14 @@ export async function POST(request: NextRequest) {
       // Pattern-aware insight now folds into deathAnalysis or nextRoundSuggestion when relevant.
 
       // Final coach text (clean BEFORE slice — plainify/apostrophe can change length).
-      const deathAnalysisOut = clampWords(cleanCoachText(checkedAnalysis.text, "tr"), 350);
+      const deathAnalysisOut = clampWords(enforceAgentKit(cleanCoachText(checkedAnalysis.text, "tr"), reqAgent), 350);
       // enemyAnalysis de reality-check'ten GEÇER (grounding audit 2026-06-26: bu dizi
       // önceden HİÇ denetlenmiyordu → killer/rota/sayı uydurması elenmeden çıkıyordu).
       // kind:"suggestion" → tümü stripped olursa "" döner, orijinali koru.
       const enemyAnalysisOut = fb.enemyAnalysis.slice(0, 2).map((s) => {
         const c = realityCheck(String(s), memoryForCheck, factGround, "suggestion");
         const safe = c.text && c.text.trim() ? c.text : String(s);
-        return clampWords(cleanCoachText(safe, "tr"), 180);
+        return clampWords(enforceAgentKit(cleanCoachText(safe, "tr"), reqAgent), 180);
       });
       // Cycle 3: if reality-check emptied the suggestion (every sentence was an
       // unproven repetition claim → "suggestion" kind returns "" rather than a
@@ -902,7 +907,7 @@ export async function POST(request: NextRequest) {
       const safeSuggestion = checkedSuggestion.text && checkedSuggestion.text.trim()
         ? checkedSuggestion.text
         : fb.nextRoundSuggestion;
-      const nextRoundOut = clampWords(cleanCoachText(safeSuggestion, "tr"), 350);
+      const nextRoundOut = clampWords(enforceAgentKit(cleanCoachText(safeSuggestion, "tr"), reqAgent), 350);
 
       // Live match feed (admin /live + /feedback): one row per death with the ACTUAL
       // coaching the user received — piggybacks this vision call, ZERO extra AI cost,

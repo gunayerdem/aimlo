@@ -5,7 +5,7 @@ export type AbilityPlain = { official: string; tr: string; en: string };
 
 export const ABILITY_PLAIN_MAP: AbilityPlain[] = [
   { official: "Double Tap", tr: "kalkan", en: "shield" },
-  { official: "Undercut", tr: "yavaşlatma", en: "slow" },
+  { official: "Undercut", tr: "zayıflatma", en: "vulnerability bolt" }, // web-doğrulandı 2026-06-26: Undercut vuln+suppress okudur, SLOW DEĞİL (eski map yanlıştı)
   { official: "Contingency", tr: "duvar", en: "wall" },
   { official: "Kill Contract", tr: "ult", en: "ult" },
   { official: "Cloudburst", tr: "smoke", en: "smoke" },

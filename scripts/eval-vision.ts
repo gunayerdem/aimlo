@@ -30,6 +30,7 @@ import { buildPolicyBlock } from "../lib/ai-policy";
 import { loadVisionKnowledge } from "../lib/knowledge-loader";
 import { realityCheck } from "../lib/reality-checker";
 import { cleanCoachText } from "../lib/coach-text";
+import { buildAgentAbilityHint, enforceAgentKit } from "../lib/agent-abilities";
 import { sanitizePromptInput } from "../lib/prompt-safety";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
@@ -353,6 +354,8 @@ function buildSystemMessage(s: Scenario): string {
   if (kb.blocks.agent) sections.push(kb.blocks.agent);
   if (kb.blocks.map) sections.push(kb.blocks.map);
   if (kb.blocks.contextual) sections.push(kb.blocks.contextual);
+  const abilityHint = buildAgentAbilityHint(b.agent as string | undefined, "tr");
+  if (abilityHint) sections.push(abilityHint);
   if (s.memoryContext) {
     const capped = s.memoryContext.trim().slice(0, 1200);
     sections.push(
@@ -474,10 +477,11 @@ function postProcess(s: Scenario, fb: { deathAnalysis: string; enemyAnalysis: st
   };
   const ca = realityCheck(fb.deathAnalysis, memoryForCheck, factGround);
   const cs = realityCheck(fb.nextRoundSuggestion, memoryForCheck, factGround);
+  const agent = s.body.agent as string | undefined;
   return {
-    deathAnalysis: cleanCoachText(ca.text, "tr").slice(0, 350),
-    enemyAnalysis: (fb.enemyAnalysis || []).slice(0, 2).map((x) => cleanCoachText(String(x), "tr").slice(0, 180)),
-    nextRoundSuggestion: cleanCoachText(cs.text, "tr").slice(0, 350),
+    deathAnalysis: enforceAgentKit(cleanCoachText(ca.text, "tr"), agent).slice(0, 350),
+    enemyAnalysis: (fb.enemyAnalysis || []).slice(0, 2).map((x) => enforceAgentKit(cleanCoachText(String(x), "tr"), agent).slice(0, 180)),
+    nextRoundSuggestion: enforceAgentKit(cleanCoachText(cs.text, "tr"), agent).slice(0, 350),
     realityModified: ca.modified || cs.modified,
     rewriteLevels: { death: ca.rewriteLevel, suggestion: cs.rewriteLevel },
   };
