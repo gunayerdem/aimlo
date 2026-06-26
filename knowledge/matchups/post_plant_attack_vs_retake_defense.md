@@ -31,7 +31,7 @@ Spike kurulduktan sonra saldırı tarafındaysan görevin defuse açılarını k
 
 **IF** Spike kurulduktan sonra takımın tek açıda yığıldı
 **MEANING** Defuse açıları kapalı değil. Savunma tek molly ile o açıyı temizler, sen çapraz ateş kuramazsın
-**COUNTER** Bir oyuncuyu plant yakınına, birini off-angle'a, birini lurk rotasına koy. Üç ayrı açı, savunmaya üç ayrı molly/flash harcatır
+**COUNTER** Bir oyuncuyu plant yakınına, birini off-angle'a, birini lurk rotasına koy. Üç ayrı açı, savunmaya üç ayrı molly ya da flash harcatır
 **WHY** Üç açı, üç ayrı molly ve flash ister. Savunmanın eli biter, açılar açık kalır. Tek yığılma ise tek molly'ye yem olur.
 
 ---
@@ -125,4 +125,4 @@ Saldırı tarafındaysan ult'unu plant sırasında harcama. Savunma push'a girdi
 
 Saldırı tarafı post-plant avantajını pozisyonla korur. Savunma hangi açıdan geleceğini bilmek zorunda, saldırı yalnızca bekler. Açıyı kapatan kazanır, spike'a yapışan kaybeder.
 
-**Temel kural:** Post-plant oyununun işi spike'ı korumak değil, savunmanın giriş açısını kapatmaktır. Retake oyununun işi siteyi geri almak değil, molly/flash dalgasını giriş anıyla aynı saniyeye denk getirmektir. İkisi ayrı ayrı çalışırsa round çözülür — biri erken, biri geç gelirse round dağılır.
+**Temel kural:** Post-plant oyununun işi spike'ı korumak değil, savunmanın giriş açısını kapatmaktır. Retake oyununun işi siteyi geri almak değil, molly ve flash dalgasını giriş anıyla aynı saniyeye denk getirmektir. İkisi ayrı ayrı çalışırsa round çözülür — biri erken, biri geç gelirse round dağılır.
