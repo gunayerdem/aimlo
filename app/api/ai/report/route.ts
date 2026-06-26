@@ -28,6 +28,7 @@ import type { RoundData as EngineRoundData } from "@/types";
    ══════════════════════════════════════════════════════════ */
 type RoundData = {
   roundNumber: number;
+  score?: string; // per-round cumulative score snapshot (e.g. "1-0", "2-0") — desktop sends it; persisted so the match-detail UI shows score AT that round, not the final.
   deathLocation: string;
   enemyCount: string;
   yourNote: string;
@@ -251,7 +252,14 @@ function validateRequest(
       (r): r is Record<string, unknown> => r != null && typeof r === "object",
     )
     .map((r) => ({
-      roundNumber: typeof r.roundNumber === "number" ? r.roundNumber : 0,
+      // Desktop sends the round index under "round" (ai_client RoundFeedback);
+      // older/web payloads use "roundNumber". Read both → fixes "R0" on every
+      // saved-match card (2026-06-26 live test). Fallback 0 only if truly absent.
+      roundNumber: typeof r.roundNumber === "number" ? r.roundNumber
+                 : typeof r.round === "number" ? r.round : 0,
+      // Per-round cumulative score snapshot ("1-0","2-0") — persist so the match
+      // detail shows the score AT that round, not the final match score.
+      score: typeof r.score === "string" ? sanitize(r.score, 12) : undefined,
       deathLocation: sanitize(r.deathLocation, 100),
       enemyCount: sanitize(r.enemyCount, 5),
       yourNote: sanitize(r.yourNote, MAX_NOTE_LENGTH),

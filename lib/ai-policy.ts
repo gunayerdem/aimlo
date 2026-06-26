@@ -71,6 +71,20 @@ export const BANNED_PHRASES = [
   "düşman analizi için yeterli veri yok",
   "yeterli veri yok",
   "düşman iyi oynadı",
+  // ── HEDGE / TAHMİN DİLİ (2026-06-26, softi canlı-test): "olabilir/muhtemelen
+  // defalarca yasakladım hâlâ geliyor". KÖK NEDEN: policy bunları TEŞVİK
+  // ediyordu (CONFIDENCE.low/VAGUE_BAN istisnası/EVIDENCE örnekleri) — hepsi
+  // bu commit'te düzeltildi. Koç KESİN konuşur; bilmediğini SÖYLEMEZ (susar),
+  // "olabilir" demez. TR-only (EN çıktıda geçmez) → substring-ban güvenli.
+  // "olabilir" substring'i olabilirsin/olabilirdi/olabilirler'i de yakalar.
+  "olabilir",
+  "muhtemelen",
+  "görünüyor ki",
+  "gibi görünüyor",
+  "büyük ihtimalle",
+  "sanırım",
+  "galiba",
+  "belki",
 ] as const;
 
 // ═══════════════════════════════════════════════════════════
@@ -82,10 +96,13 @@ export const CONFIDENCE_PROMPTS: Record<string, string> = {
   // agent, death spot, weapon) is fact, say it NET. The old wording hedged
   // known facts too ("henüz yeterli veri yok"), which softened the one thing
   // the desktop measured reliably.
-  calibrating: `\nVERİ SEVİYESİ: KALİBRASYON — Çok az GEÇMİŞ veri var. GEÇMİŞ/pattern hakkında kesin iddia YASAK ("İlk gözlemler..."). AMA bu round'un OCR gerçeğini (killer ajan, ölüm yeri, silah) NET söyle — onlar pixel-truth, hedge'leme.`,
-  low: `\nVERİ SEVİYESİ: DÜŞÜK — Sınırlı geçmiş. Pattern için "görünüyor ki/muhtemelen"; OCR gerçeğini net söyle.`,
-  medium: `\nVERİ SEVİYESİ: ORTA — Koşullu dil kullanabilirsin. Net tavsiye ver ama "her zaman" gibi ifadelerden kaçın.`,
-  high: `\nVERİ SEVİYESİ: YÜKSEK — Net, doğrudan ifadeler kullanabilirsin. Pattern'leri kesin olarak belirt.`,
+  // 2026-06-26: hedge ENCOURAGEMENT kaldırıldı. Az veri = HEDGE değil OMISSION:
+  // bilmediğini "olabilir/muhtemelen" diye söyleme, O KONUYU HİÇ AÇMA. Bildiğini
+  // (OCR: killer/yer/silah) her zaman KESİN söyle. Koç asla tahmin etmez.
+  calibrating: `\nVERİ SEVİYESİ: KALİBRASYON — Az GEÇMİŞ veri var. Geçmiş/pattern hakkında İDDİA ETME — ama bunu "olabilir/muhtemelen" diyerek değil, o konuyu HİÇ AÇMAYARAK yap. Bu round'un OCR gerçeğini (killer ajan, ölüm yeri, silah) KESİN söyle. Tahmin/olasılık dili (olabilir, görünüyor ki, muhtemelen, belki) YASAK.`,
+  low: `\nVERİ SEVİYESİ: DÜŞÜK — Sınırlı geçmiş. Pattern'i bilmiyorsan onu HİÇ YAZMA (boş bırak); ASLA "görünüyor ki/muhtemelen/olabilir" deme. OCR gerçeğini KESİN söyle, tek net tavsiye ver.`,
+  medium: `\nVERİ SEVİYESİ: ORTA — Net ve KESİN konuş. "her zaman" gibi aşırı genelleme yapma; tahmin/olasılık dili (olabilir/muhtemelen) de KULLANMA.`,
+  high: `\nVERİ SEVİYESİ: YÜKSEK — Net, doğrudan, KESİN ifadeler. Pattern'leri kesin belirt. Tahmin dili yok.`,
 };
 
 // ═══════════════════════════════════════════════════════════
@@ -159,23 +176,22 @@ export const SILVER_AUDIENCE_RULE_EN = `\nAUDIENCE — SILVER PLAYER: The reader
 // EVIDENCE POLICY — strictest version (from vision route)
 // ═══════════════════════════════════════════════════════════
 
-export const EVIDENCE_POLICY = `\nKANIT POLİTİKASI:
-GÖZLEM (kesin dil): Veride OLAN bilgi → "Son 5 round'da 3 kez öldün"
-ÇIKARIM (ihtimalli dil): Veride ima edilen → "Bu tekrar, okunabilir hale geldiğini gösteriyor olabilir"
-YASAK KESİNLİK: Veride OLMAYAN → "Jett 3 rounddur seni bekliyor" killer bilgisi yoksa YASAK
-KURAL: Kanıt yoksa iddia yapma. Korelasyon ≠ nedensellik.`;
+export const EVIDENCE_POLICY = `\nKANIT POLİTİKASI (HER ZAMAN KESİN DİL — tahmin YOK):
+GÖZLEM: Veride OLAN → "Son 5 round'da 3 kez aynı açıda öldün"
+ÇIKARIM (yine KESİN): Veride güçlü ima → "Aynı açıda 3. ölümün — bu açıyı bırak" (ASLA "...gösteriyor olabilir" deme; ya kesin söyle ya hiç söyleme)
+YASAK: Veride OLMAYAN → killer bilgisi yoksa "Jett seni bekliyor" YASAK. Bilmiyorsan O KONUYU AÇMA — tahmin etme, "olabilir" deme, sus.
+KURAL: Kanıt yoksa iddia yapma; ama "olabilir/muhtemelen" diye de hedge'leme. Sadece bildiğin KESİN şeyi söyle.`;
 
 // ═══════════════════════════════════════════════════════════
 // ENEMY ANALYSIS GATE — conditional, not mandatory
 // ═══════════════════════════════════════════════════════════
 
-export const ENEMY_ANALYSIS_GATE = `\nDÜŞMAN ANALİZİ KOŞULU:
+export const ENEMY_ANALYSIS_GATE = `\nDÜŞMAN ANALİZİ KOŞULU (KESİN dille):
 Düşman davranışı hakkında yorum SADECE şu durumlarda yapılabilir:
-1. Round geçmişinde tekrar eden ölüm pattern'i kanıtlanmışsa → "düşman bu pozisyonu okuyor olabilir"
+1. Round geçmişinde tekrar eden ölüm pattern'i kanıtlanmışsa → "düşman bu açını okuyor, değiştir" (kesin, "okuyor olabilir" DEĞİL)
 2. Killer bilgisi varsa (killfeed) → "Jett aynı açıdan kafadan vuruyor"
-3. Görsel kanıtta düşman pozisyonu görünüyorsa → "düşman dar angle'dan bekliyordu"
-Kanıt YOKSA → düşman davranışı hakkında İDDİA YAPMA. "Düşman analizi için yeterli veri yok" de.
-"Düşman seni okuyor", "düşman adapte oldu" → SADECE tekrar eden pattern kanıtlanmışsa söylenebilir.`;
+3. Görsel kanıtta düşman pozisyonu görünüyorsa → "düşman dar açıdan bekliyordu"
+Kanıt YOKSA → düşman hakkında HİÇBİR ŞEY YAZMA (tahmin etme, "olabilir/yeterli veri yok" deme); onun yerine oyuncunun kendi pozisyon/util hatasına KESİN odaklan.`;
 
 // Vision variant (enemyGateMode:'vision', Cycle 2 fix #4): the vision schema
 // demands EXACTLY 2 specific enemyAnalysis items, so the strict gate's "kanıt

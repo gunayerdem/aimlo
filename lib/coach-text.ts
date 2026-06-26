@@ -172,6 +172,43 @@ const TR_JARGON: [RegExp, string][] = [
   [/\bcontest\s+ediyor\b/gi, "zorluyor"],
   [/\bcontest\s+et\b/gi, "zorla"],
   [/\bsingle[- ]?entry\b/gi, "tek başına giriş"],          // "single-entry" → "tek başına giriş"
+  // ── HEDGE/TAHMİN DİLİ NET (2026-06-26, son-savunma) — koç KESİN konuşur.
+  //    Prompt+BANNED_PHRASES birincil; bu net olasılık modalını + evidential
+  //    -miş'i + tahmin adverb'lerini siler/kesin'e çevirir. SIRA: önce olasılık
+  //    modalı düşer ("vurmuş olabilirsin"→"vurmuş"), sonra -miş→-di ("vurdu").
+  //    JS \b Türkçe harfte (ş/ı/ü) kırıldığı için -miş'te lookbehind/lookahead.
+  [/\s+olabilirsiniz(?![a-zçğıöşü])/gi, ""],
+  [/\s+olabilirsin(?![a-zçğıöşü])/gi, ""],
+  [/\s+olabilirler(?![a-zçğıöşü])/gi, ""],
+  [/\s+olabilir(?![a-zçğıöşü])/gi, ""],
+  [/(?<![a-zçğıöşü])kesilmiş(?![a-zçğıöşü])/gi, "kesildin"],
+  [/(?<![a-zçğıöşü])kesmiş(?![a-zçğıöşü])/gi, "kesti"],
+  [/(?<![a-zçğıöşü])vurulmuş(?![a-zçğıöşü])/gi, "vuruldun"],
+  [/(?<![a-zçğıöşü])vurmuş(?![a-zçğıöşü])/gi, "vurdu"],
+  [/(?<![a-zçğıöşü])almış(?![a-zçğıöşü])/gi, "aldı"],
+  [/(?<![a-zçğıöşü])yapmış(?![a-zçğıöşü])/gi, "yaptı"],
+  [/(?<![a-zçğıöşü])atmış(?![a-zçğıöşü])/gi, "attı"],
+  [/(?<![a-zçğıöşü])girmiş(?![a-zçğıöşü])/gi, "girdi"],
+  [/(?<![a-zçğıöşü])gelmiş(?![a-zçğıöşü])/gi, "geldi"],
+  [/(?<![a-zçğıöşü])tutmuş(?![a-zçğıöşü])/gi, "tuttu"],
+  [/(?<![a-zçğıöşü])öldürmüş(?![a-zçğıöşü])/gi, "öldürdü"],
+  [/(?<![a-zçğıöşü])basmış(?![a-zçğıöşü])/gi, "bastı"],
+  [/(?<![a-zçğıöşü])kullanmış(?![a-zçğıöşü])/gi, "kullandı"],
+  [/(?<![a-zçğıöşü])bırakmış(?![a-zçğıöşü])/gi, "bıraktı"],
+  [/(?<![a-zçğıöşü])koymuş(?![a-zçğıöşü])/gi, "koydu"],
+  [/(?<![a-zçğıöşü])dizmiş(?![a-zçğıöşü])/gi, "dizdi"],
+  [/(?<![a-zçğıöşü])yakalamış(?![a-zçğıöşü])/gi, "yakaladı"],
+  [/(?<![a-zçğıöşü])bekliyormuş(?![a-zçğıöşü])/gi, "bekliyordu"],
+  [/(?<![a-zçğıöşü])tutuyormuş(?![a-zçğıöşü])/gi, "tutuyordu"],
+  [/(?<![a-zçğıöşü])geliyormuş(?![a-zçğıöşü])/gi, "geliyordu"],
+  [/(?<![a-zçğıöşü])yapıyormuş(?![a-zçğıöşü])/gi, "yapıyordu"],
+  [/\bmuhtemelen\s+/gi, ""],
+  [/\bbüyük ihtimalle\s+/gi, ""],
+  [/\bgaliba\s+/gi, ""],
+  [/\bsanırım\s+/gi, ""],
+  [/\bbelki\s+/gi, ""],
+  [/\bgörünüyor ki\s+/gi, ""],
+  [/\s+gibi görünüyor(?![a-zçğıöşü])/gi, ""],
   // C6 report-surfaced sızıntılar
   [/\btrade\s+buddy\b/gi, "trade arkadaşı"],               // "trade buddy" → "trade arkadaşı"
   [/\bcezaland[ıi]r[ıi]ls[ıi]n\b/gi, "bedavaya ölsün"],    // S6: pasif "cezalandırılsın"
