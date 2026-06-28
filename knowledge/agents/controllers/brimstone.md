@@ -6,7 +6,7 @@ Brimstone'un smoke'u en güvenilirisi. Sen smoke'u attığın an giriş açılı
 ## 2. Temel Sorumluluklar
 - Site girişinde üç smoke'u aynı anda at — girişi tek hamlede aç
 - Her haritada site başına molly noktalarını ezberle — rakibin defuse denemesini kes
-- Site girişinde takıma stim koy — yanındaki herkes ek ateş hızıyla düelloya girsin
+- Site girişinde takıma stim koy — yanındaki herkes ek ateş hızı ve hızla düelloya girsin
 - Ult'u kill için değil, bölge baskısı için kullan — spike konumuna göre at
 - Üç smoke'u birden harcama — birini geri alım veya ara hamle için sakla
 - Giriş temposunu sen belirle — sen smoke atmadan kimse kıpırdamaz
@@ -39,9 +39,9 @@ Brimstone'un smoke'u en güvenilirisi. Sen smoke'u attığın an giriş açılı
 **WHY** Ult spike zamanlamasına oturduğunda baskı yapar ve defuse'u kilitler. Spike'tan bağımsız attığında ult'u çöpe atarsın, rakip sadece bir adım yana kayar.
 
 **IF** Stim hiç koyulmuyor ya da her round kullanılmadan bitiyor
-**MEANING** Takımın giriş anında bedava ateş hızı avantajını masada bırakıyor
-**COUNTER** Takım push'a başlamadan önce giriş noktasına stim koy. Phantom veya Spectre tutan takım arkadaşın o ateş hızıyla düelloyu açık ara kazanır.
-**WHY** Stim'li takım dövüşe artı ateş hızıyla girer — bu kadar net bir avantajı atlamak round kaybettirir.
+**MEANING** Takımın giriş anında bedava ateş hızı ve hız avantajını masada bırakıyor
+**COUNTER** Takım push'a başlamadan önce giriş noktasına stim koy. Phantom veya Spectre tutan takım arkadaşın o ateş hızı ve ek hareket hızıyla düelloyu açık ara kazanır.
+**WHY** Stim'li takım dövüşe artı ateş hızı ve hareket hızıyla girer — bu kadar net bir avantajı atlamak round kaybettirir.
 
 **IF** Smoke'ların hafif kayıyor ya da kenarda küçük boşluk bırakıyor
 **MEANING** Smoke yerleşimin yeterince hassas değil

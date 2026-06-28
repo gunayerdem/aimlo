@@ -30,7 +30,7 @@ KAY/O düşmanın yeteneklerini kapatan ajandır. Bıçağı yakınındaki herke
 
 **IF** Flash hep üst atışla atılıyor
 **MEANING** Düşman flash sesini duyunca sırtını dönüyor — aynı açıdan aynı atış arka arkaya okunur hale gelir
-**COUNTER** Üst atış (sağ tık) ile alt atış (sol tık) arasında geç. Alt atış köşede hızlı patlar ama atıp koşma — önce dur, sonra at, sonra çık, yoksa kendi flash'ını yersin. Üst atış engelin üstünden aşar; savunucunun pozisyonunu kör etmek için kullan.
+**COUNTER** Üst atış (sol tık) ile alt atış (sağ tık) arasında geç. Alt atış köşede hızlı patlar ama atıp koşma — önce dur, sonra at, sonra çık, yoksa kendi flash'ını yersin. Üst atış engelin üstünden aşar; savunucunun pozisyonunu kör etmek için kullan.
 **WHY** İkisini karıştırırsan düşman zamanlamanı çözemez. Tek tip atarsan her seferinde kaçar.
 
 **IF** Molly yalnızca düşmana hasar vermek için atılıyor

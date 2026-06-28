@@ -14,7 +14,7 @@
 - **A Long / Pyramid Önü**: Oyundaki en uzun açılardan biri burada. Pyramid'den veya CT'den Op tutan biri seni görür görmez vurur — cover yok, kaçacak yer yok. Buraya kuru peek atmak yok.
 - **Mid Top (Açık Alan)**: Smoke veya flash atmadan Mid Top'a girersen Nest'ten veya Arch'tan tutan rakip seni yer. Bilgin yokken ilerleme.
 - **B Elbow**: Elbow'u temizlemeden push atarsan off-angle savunucu seni yakalar. Köşeyi temizle, sonra geç.
-- **B Chute Çıkışı**: Chute'dan atlarken ateş edemiyorsun — aşağıda bekleyen savunucu bunu biliyor. Atlayacaksan takımın önce aşağıyı kontrol etmeli.
+- **B Tunnel Çıkışı**: B Tunnel Mid'i B site'a bağlar. Tunnel'dan dar bir ağızla çıkarsın — site'ı tutan savunucu o ağzı zaten açıyı tutuyor. Önce util at, sonra çık; kuru çıkarsan bedavaya vurulursun.
 - **Mid Cannon / Arch Bağlantısı**: Mid'i almadan Arch'a geçmeye çalışırsan iki taraftan aynı anda vurulursun. Önce Mid'i al, sonra Arch'a bak.
 
 ## 3. Pattern -> Meaning Eşleşmesi
@@ -63,14 +63,14 @@ WHY: Kapı sesi bilgi verir ama bu bilgiyi sen de kullanabilirsin. Fake kapı se
 
 ---
 
-**Pattern 5: B Chute'u Kontrol Etmeme**
-IF: B Chute'u izlemiyorsun ve rakip oradan bedavaya site'a giriyor.
-MEANING: B site'in ikinci girişini açık bırakıyorsun. Chute kontrol etmesi kolay bir nokta — ignore edince rakibe bedava flank yolu veriyorsun.
+**Pattern 5: B Tunnel'ı (Mid bağlantısı) Kontrol Etmeme**
+IF: Mid'den B'ye açılan Tunnel'ı izlemiyorsun ve rakip oradan bedavaya site'a/arkana giriyor.
+MEANING: B site'in Mid'den gelen ikinci girişini açık bırakıyorsun. Tunnel kontrol etmesi kolay bir nokta — ignore edince rakibe bedava flank yolu veriyorsun.
 COUNTER:
-- Sentinel oynuyorsan Chute'a tripwire veya kamera koy.
-- Sentinel yoksa düşüş sesini dinle ya da arada peek at.
-- Chute'tan ses gelirse hemen callout ver, pozisyon al.
-WHY: B Main'i tutup Chute'u açık bırakmak ön kapıyı kilitleyip arka kapıyı açık bırakmak gibi. Rakip her zaman en zayıf noktayı kullanır.
+- Sentinel oynuyorsan Tunnel ağzına tuzak teli veya kamera koy.
+- Sentinel yoksa Tunnel'dan gelen ayak sesini dinle ya da arada peek at.
+- Tunnel'dan ses gelirse hemen callout ver, pozisyon al.
+WHY: B Main'i tutup Tunnel'ı açık bırakmak ön kapıyı kilitleyip arka kapıyı açık bırakmak gibi. Rakip her zaman en zayıf noktayı kullanır.
 
 ---
 
@@ -129,7 +129,7 @@ WHY: Rakip wall'un nerede açılacağını bilirse ne zaman push edeceğini, ner
 - **Chamber S-tier.** Op kill aldıktan sonra TP ile pozisyon değiştir — düşman trade yapamaz. Uzun çizgilerde bu ikili Breeze'e özel çalışır. Tuzağı flank yollarını kapatır.
 - **Sova S-tier.** Recon bolt A site ya da B site'ı tamamen tarar. Shock dart post-plant lineup'ları da geniş, açık siteler yüzünden çok işe yarar.
 - **KAY/O A-tier.** A Hall ve B Main girişinde flash'ları doğrudan verir. Bıçağını site'a at, girişte düşmanın util'ini kapat — temiz entry alırsın. Uzun çizgide flash pop yapar, savunucunun avantajı sıfırlanır.
-- **Cypher A-tier.** Tripwire A Hall girişine ve B Chute'a koy. Kamerayla uzaktan bilgi al. Breeze'de giriş noktası az, Cypher utility'si burada tam verim verir.
+- **Cypher A-tier.** Tripwire A Hall girişine ve B Tunnel'a koy. Kamerayla uzaktan bilgi al. Breeze'de giriş noktası az, Cypher utility'si burada tam verim verir.
 - **Jett A-tier.** Op + dash repozisyon Breeze'de işe yarar ama Chamber'ın TP'si kadar esnek değil. Dash ile açık site'lara girmek hâlâ güçlü.
 - **Harbor A-tier.** Duvarınla A Hall'da dar koridoru kapat, savunucu göremez. İkinci duvarla Mid split yarat. Smoke küresini A Bridge'de plant korumasında kullan. Viper'ın yanında ikinci controller olarak tam uyumlu.
 - **Skye B-tier.** Flash'ları uzun mesafede iş görür ama dog açık alanda çabuk ölür. Harita büyük olduğu için dog bilgisi de sınırlı kalır.
@@ -149,11 +149,11 @@ WHY: Rakip wall'un nerede açılacağını bilirse ne zaman push edeceğini, ner
 ## 7. Rank Modülasyonu
 
 ### Iron-Silver
-Breeze'in ne kadar büyük olduğunu anlamıyorsun. Spectre alıp A Long'a çıkıyorsun — bu intihar. Metal kapıların varlığından bile haberin yok, B Chute'u hiç kullanmıyorsun.
+Breeze'in ne kadar büyük olduğunu anlamıyorsun. Spectre alıp A Long'a çıkıyorsun — bu intihar. Metal kapıların varlığından bile haberin yok, Mid'i ve B Tunnel'ı hiç kullanmıyorsun.
 
 Yapman gereken tek şey şu:
 - Uzun açı görüyorsan Vandal, Marshal ya da Op al.
-- Her giriş noktasını tek tek öğren — A Hall, A Long, B Chute, B Main.
+- Her giriş noktasını tek tek öğren — A Hall, A Long, B Main, B Tunnel (Mid bağlantısı).
 - Metal kapıların ne işe yaradığını öğren, bak ve kullan.
 
 Silahı doğru seçersen ölüm sayın yarıya düşer. O kadar.
@@ -163,7 +163,7 @@ Haritayı biliyorsun ama utility'yi rastgele atıyorsun. Flash entry'den önce p
 
 Şunları düzelt:
 - Flash, entry oyuncusu köşeyi dönerken patlasın — önce değil, tam o an.
-- Smoke A Long ya da B Hall sightline'ını tam kapatsın — yarım bırakma.
+- Smoke A Long ya da B Main sightline'ını tam kapatsın — yarım bırakma.
 - Mid'den bilgi almadan execute başlatma.
 
 A Hall'a 5 kişiyle yığılmayı bırak. Stagger gir, ön oyuncu çıktıktan sonra arkası gelsin. Bunu uyguladığın anda round kazanma oranın artar.
@@ -184,7 +184,7 @@ Haritayı biliyorsun, utility'yi biliyorsun, tempoyu biliyorsun. Artık mesele r
 Odaklanman gereken şeyler:
 - Rakibin default'u 2-3 roundda belli olur — o bilgiyle A Bridge split savunmasını organize et.
 - Viper wall'ını aynı yere atma. Varyasyon yap, rakip alışmasın.
-- Op ekonomisini yönet — yarım ekonomide bile Chute'tan bilgi toplayacak birini koy.
+- Op ekonomisini yönet — yarım ekonomide bile Mid/B Tunnel'dan bilgi toplayacak birini koy.
 - Fake kapı stratejisini ince ayarla: hangi roundda, hangi kapı, kim açıyor — hepsi plan dahilinde olsun.
 
 Breeze bu seviyede satranç. Her hamlenin bir sonraki hamleyi kurması lazım.
@@ -200,8 +200,8 @@ Breeze bu seviyede satranç. Her hamlenin bir sonraki hamleyi kurması lazım.
 
 ## 9. Temel Pozisyonlar ve Callout'lar
 - **A Tarafı:** A Lobby / A Hall (Cave) / A Bridge / A Pyramid / A Site / A Back / A Switch / A Metal Door
-- **B Tarafı:** B Main / B Elbow / B Tunnel / B Chute / B Pillar / B Column / B Site / B Back / B Arch
-- **Mid:** Mid Top / Mid Nest / Mid Arch / Mid Cannon / Mid Door (Metal Door)
+- **B Tarafı:** B Main / B Elbow / B Tunnel / B Pillar / B Column / B Site / B Back / B Arch
+- **Mid:** Mid Top / Mid Nest / Mid Arch / Mid Cannon / Mid Chute (Vent) / Mid Pillar / Mid Door (Metal Door)
 - **Genel:** CT Spawn / T Spawn
 
 ### Pozisyon Detayları
@@ -210,7 +210,7 @@ Breeze bu seviyede satranç. Her hamlenin bir sonraki hamleyi kurması lazım.
 - **A Bridge:** Mid'den A site'a bağlantı noktası. Split atmak istiyorsan burası şart. Savunmadaysan Mid'den gelen baskıyı burada karşılarsın.
 - **Mid Nest:** Haritanın bilgi merkezi. Buradan hem A Bridge hem B Arch görürsün. Nest kimde — harita kimde.
 - **B Pillar/Column:** B site'in ana cover noktası. Anchor oynuyorsan buradan crossfire kur — tek başına tutmaya çalışma.
-- **B Chute:** B site'a alternatif düşüş girişi. Dar, kontrol kolay. Ama gözden çıkarırsan düşman bedavaya arkana geçer.
+- **B Tunnel:** Mid'i B site'a bağlayan geçit (B Elbow üzerinden). B'nin Mid tarafından gelen ikinci girişi. Dar, kontrol kolay. Ama gözden çıkarırsan düşman Mid'den bedavaya arkana geçer.
 - **Metal Kapılar:** A Hall ve Mid'de açılıp kapanıyor. Sightline kes, bilgi topla, fake yarat — kullanmıyorsan haritanın yarısını boşa harcıyorsun.
 
 ## 10. Post-Plant Stratejileri
@@ -246,11 +246,11 @@ MEANING: Mid savunman yetersiz ya da Mid'e yeterli kaynak koymuyorsun.
 COUNTER: Agresif Nest fight yap — erken pozisyon al, Mid'e giren ilk oyuncuyu vur. Sova recon bolt Mid'e at. Top Mid'i smoke'la kapat ve bilgi topla.
 WHY: Mid, Breeze'de haritanın kilit noktası. Rakip Mid'i alırsa hem A Bridge hem B Arch split opsiyonu açılıyor. Mid'i erken contest edersen bu split opsiyonları kapanıyor, saldırı tek boyutlu kalıyor.
 
-**Rakip Chute kullanıyorsa:**
-IF: Rakip B Chute'tan flank yaparak savunmanı arkadan çökertiyorsa.
-MEANING: Chute kontrolün yok ve rakip bunu exploit ediyor.
-COUNTER: Chute çıkışına tripwire veya turret koy. Killjoy botunu Chute içine gönder. Cypher kamerasını Chute'u gören açıya yerleştir.
-WHY: Chute dar bir düşüş noktası, tek utility'le kapatılır. Tripwire veya turret Chute'u tamamen kilitler. Kontrol maliyeti düşük, geri dönüşü yüksek.
+**Rakip B Tunnel'dan flank yapıyorsa:**
+IF: Rakip Mid'i alıp B Tunnel'dan flank yaparak savunmanı arkadan çökertiyorsa.
+MEANING: Tunnel kontrolün yok ve rakip Mid üzerinden bunu exploit ediyor.
+COUNTER: Tunnel ağzına tuzak teli veya bot-turret koy. Killjoy botunu Tunnel içine gönder. Cypher kamerasını Tunnel'ı gören açıya yerleştir.
+WHY: Tunnel dar bir geçit, tek utility'le kapatılır. Tuzak teli veya turret Tunnel'ı tamamen kilitler. Kontrol maliyeti düşük, geri dönüşü yüksek.
 
 ## 12. Agent Tier Listesi
 
@@ -261,10 +261,10 @@ WHY: Chute dar bir düşüş noktası, tek utility'le kapatılır. Tripwire veya
 ### A-Tier
 - **Jett**: Op alacaksan Jett al. Uzun sightlinelar Op'in avantajını katlar, op atıp dash ile geri çekilirsin — Pyramid veya yükseltilerde yukarı sıçrayıp açı çıkarırsın, adam seni bulamaz.
 - **KAY/O**: Utility'e dayalı execute karşı takımda varsa Zero/Point at, bastırırsın. Flash geniş alanda çok iyi açıyor. Spike kurulduktan sonra Molly lineup koy, defuse ettirmezsin.
-- **Chamber**: A Hall veya B Long'da Op tut. Tehlike görünce TP ile çık, orada kalmak zorunda değilsin. Tuzağını flank girişine koy, arkandan adam gelmez. Op ult'un bu haritada Vandal'dan bile keskin çalışır.
+- **Chamber**: A Long veya A Hall'da Op tut. Tehlike görünce TP ile çık, orada kalmak zorunda değilsin. Tuzağını flank girişine koy, arkandan adam gelmez. Op ult'un bu haritada Vandal'dan bile keskin çalışır.
 
 ### B-Tier
-- **Cypher**: Tripwire A Hall ve B Chute gibi dar geçişlerde tutar, ama Breeze açık alan — kapalı köşe bulamıyorsun, utility'nin yarısı boşa gidiyor.
+- **Cypher**: Tripwire A Hall ve B Tunnel gibi dar geçişlerde tutar, ama Breeze açık alan — kapalı köşe bulamıyorsun, utility'nin yarısı boşa gidiyor.
 - **Killjoy**: Bot ve tuzakla bir siteyi tek başına tutarsın; ult'un geniş alanda iyi çalışır. Ama harita çok büyük, utility menzili yetişmiyor.
 - **Skye**: Flash atınca bilgi de gelir, kaplanla koridoru temizlersin. Ama bilgi toplamada Sova'nın yanına yaklaşamazsın — Sova varsa Skye alma.
 - **Harbor**: Cascade'i uzun geçişlerde hareket eden kalkan gibi kullanırsın, High Tide birden fazla sightlinei keser. Ama Viper varsa Harbor ikinci kalır, aynı işi daha iyi yapıyor Viper.

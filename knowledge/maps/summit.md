@@ -4,7 +4,7 @@
 
 ## 1. Harita Karakteri
 
-Summit, Çin dağlarındaki bir Radiant antrenman akademisinde geçen geniş bir harita — Ascent ve Sunset'ten büyük. İki site (A ve B) ve üç hatlı bir Mid var. Ama Summit'i diğer haritalardan ayıran tek şey büyüklük değil: haritada üç tane düşürülebilir duvar var (A Wall, Mid Wall, B Wall). Yakındaki bir switch'e iki kez sağ-tık ya da bir yetenek (Sova'nın recon oku anında indirir) duvarı düşürür. Bir kez düştü mü round boyunca kapalı kalır — ve altında kalan ölür, Yoru'nun ult dokunulmazlığında bile. Bu mekanik her kararını etkilemeli.
+Summit, Çin dağlarındaki bir Radiant antrenman akademisinde geçen geniş bir harita — Ascent ve Sunset'ten büyük. İki site (A ve B) ve üç hatlı bir Mid var. Ama Summit'i diğer haritalardan ayıran tek şey büyüklük değil: haritada üç tane düşürülebilir duvar var (A Wall, Mid Wall, B Wall). Her duvarın yanında bir anahtar paneli var (125 can) — birkaç el ateş edip paneli kırarsan duvar düşer. Bir hasar yeteneği (Sova'nın patlayan/hasar oku gibi) de paneli anında kırar; ama bilgi/recon oku paneli düşürmez. Bir kez düştü mü round boyunca kapalı kalır — ve altında kalan ölür, dokunulmazlık yeteneklerinde bile. Bu mekanik her kararını etkilemeli.
 
 **Saldırı:** Site'a commit etmeden önce Mid kontrolünü al — büyük harita demek, kuru girişlerin cezası ağır demek. Duvarları alanı aldıktan ya da plant'tan sonra düşür; erken düşürürsen kendi rotate yolunu da kapatırsın.
 
@@ -444,7 +444,7 @@ Senin işin şu: düşmanın Mid ve duvar alışkanlıklarını oku, bir önceki
 
 **Omen:** İki smoke Summit'in geniş görüş hatlarını ve execute'unu kapatmaya yeter. Flash'ı girişe at, açıyı boz. Kaçışıyla flank pozisyonu al ya da Mid'den ani split kur — büyük haritada kimse nerede çıkacağını bilemez.
 
-**Sova:** Ventleri kullanarak recon okunu uzaklara at, geniş alanda bilgi topla — Summit'in ventleri menzilini artırır. Okun bir duvarı anında düşürebileceğini unutma, zamanlamayı buna göre planla. Ult ile post-plant'ı tara.
+**Sova:** Ventleri kullanarak recon okunu uzaklara at, geniş alanda bilgi topla — Summit'in ventleri menzilini artırır. Hasar okunla bir duvar panelini anında kırıp duvarı düşürebileceğini unutma (bilgi/recon oku paneli kırmaz), zamanlamayı buna göre planla. Ult ile post-plant'ı tara.
 
 **Cypher:** Kamerayı duvar düşmeden arkaya koy, duvar kapansa bile bilgi akmaya devam eder — Summit'e özel bir avantaj. Tek tel ile girişleri kapat, Mid Link'i izle. Ult ile retake öncesi düşman yerini öğren.
 

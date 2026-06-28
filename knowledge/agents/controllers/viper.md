@@ -25,7 +25,7 @@ Viper haritayı ikiye böler. Duvarı ve orb'u tek bir paylaşımlı yakıt havu
 **IF** yakıt bir round içinde birden fazla kez tamamen bitiyor
 **MEANING** Duvarı ve orb'u aynı anda çok uzun çalıştırıyorsun
 **COUNTER** Sırayla kullan: takım site'a girerken duvarı aç, geçer geçmez kapat; orb'u post-plant için sakla. Çok kısa pencereler dışında ikisini aynı anda asla açma.
-**WHY** İkisi aynı anda yandığında yakıt iki kat hızlı erir. Sırayla kullanırsan toplam aktif süren neredeyse ikiye katlanır.
+**WHY** İkisi aynı anda yandığında yakıt %50 daha hızlı erir; aynı toplam yakıtla çok daha az süre açık kalır. Sırayla kullanırsan bu cezadan kurtulur, toplam aktif süreni belirgin biçimde uzatırsın.
 
 **IF** molly her round dövüş sırasında harcanıyor, post-plant'te değil
 **MEANING** Molly'yi lineup aracı olarak değil, dövüş hasarı olarak kullanıyorsun

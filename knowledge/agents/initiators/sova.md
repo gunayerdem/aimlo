@@ -74,7 +74,7 @@ Sova'nın silahı bilgi. Recon oku ve drone — üçü de her tur tekrar tekrar 
 - **Omen'e karşı**: Recon, Omen'in ışınlandığı yeri açığa çıkarır. Drone, smoke'un içinden takip eder ve yerini doğrular.
 - **Cypher'a karşı**: Recon, teli tetiklemeden rakip pozisyonunu tarar — Cypher'ın bilgisiyle doğrudan yarışırsın.
 - **Duelist ile**: Önce drone, sonra recon — duelist tam bilgiyle girer. Köşede bekleyen rakibe duelisti boş açıyla göndermezsin.
-- **Viper'a karşı**: Recon, Viper'ın duvarının ve smoke'unun içinden tarar. Viper kurulumunu bozmada en etkili ajanlardan birisin.
+- **Viper'a karşı**: Recon görüş hattıyla çalışır — Viper'ın duvarının ve sisinin **içinden taramaz**, sis tarama hattını keser. Ama ult'in (üç enerji patlaması) duvar ve sis delip karşı tarafa hasar verir ve konum açar; hasar okunu da sisin arkasındaki bilinen açıya yollayarak Viper'ı kurulumundan kaldırırsın. Viper'ı sisin dışına zorlamada güçlüsün — sisin içini değil, kenarını ve arkasını oku.
 
 ## 7. Oyuncuya Ne Söylenmeli
 

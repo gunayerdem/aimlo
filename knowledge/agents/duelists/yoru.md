@@ -19,7 +19,7 @@
 6. **Her round aynı lurk zamanlaması** — Düşman kalıbını okur, flank açını tutar, gittiğin anda hazır bekler. Bir round erken lurk yap, bir round geç lurk yap, bir round hiç yapma — çeşitlendir.
 7. **Flash-TP kombosu bozuk** — Flash, TP varmadan patlarsa düşman toparlanır. TP varıp düşman tepki verdikten sonra patlarsa geç kalırsın. Flash, TP girişiyle aynı anda patlamalı.
 8. **Flash'ı kendine patlatmak** — Yoru'nun flash'ı sektirilen bir top. Yanlış açıdan atarsan kendini ya da takımı kör edersin. Flash'ı düşmanın bakacağı yöne sektir, sonra ters yönden swing at — kendi gözün her zaman flash'ın arkasında kalsın.
-9. **Klonu doğru yöne sürmemek** — Klonu düşmana doğru sürmezsen sadece ses verir, açı baktırmaz. Klonu düşmanın tutması gereken hattın üstünden geçir ki tek atış için bile olsa nişan alsınlar — o anda gerçek açından gir.
+9. **Klonu yanlış yöne göndermek** — Klonu düşmana doğru göndermezsen sadece ses verir, açı baktırmaz. Klon attığın anda düz bir hatta koşar — yönünü sonradan değiştiremezsin, bu yüzden atış anında düşmanın tutması gereken hattın üstüne nişanla ki tek atış için bile olsa ona dönsünler — o anda gerçek açından gir.
 
 ## 4. Kalıp -> Anlam
 IF: Işınlandıktan sonra sık ölüyorsun
@@ -57,10 +57,10 @@ MEANING: Lurk derinliğini takım temposuyla eşleştirmiyorsun — takım girme
 COUNTER: Lurk'i takımın site vuruşuyla zamanla. Sen flank'ı tutarken takım baskı yapmalı ki düşman iki yöne bölünsün. Yalnız flank dövüşüne girme, takım meşgul edene kadar bekle.
 WHY: Yoru'nun lurk değeri düşmanı böler — ama takım baskı yapmıyorsa düşman tüm dikkatini sana verir. Bölünmemiş düşmanın içine yalnız girersen sayıca yenilirsin.
 
-IF: TP ile girişten sonra hemen geri ışınlanamadan ölüyorsun (kaçış penceresini kaçırıyorsun)
-MEANING: TP'yi tek yönlü giriş aleti gibi kullanıyorsun, geri dönüş şansını hesaba katmıyorsun
-COUNTER: TP girişinde bir kill al ya da bilgi topla, kötü gidiyorsa hemen geri ışınlan — TP iki yönlü çalışır, geri dönüşü trade'den kaçmak için kullan.
-WHY: Yoru'nun kaçış aleti TP'dir. Girişi kapatamadıysan oraya saplanıp kalma; geri dön, yeniden konumlan, ikinci girişi farklı açıdan yap. Tek pencerede her şeyi riske atma.
+IF: TP ile girişten sonra çıkış aletin olmadan saplanıp ölüyorsun (kaçış penceresini kaçırıyorsun)
+MEANING: Tek TP harcayıp giriyorsun, ikinci TP'yi güvenli noktaya kurmadığın için geri çekilecek aletin kalmıyor
+COUNTER: İki TP yükün var — birini güvenli bir noktaya (geri hattın, kapağın arkası) kur, sonra öbürüyle gir. Giriş kötü giderse güvenli kurduğun TP'ye ışınlanıp dövüşten çık. Kalan TP'yi her zaman kaçış için cepte tut.
+WHY: Yoru'nun TP'si tek yönlüdür — geldiğin yere otomatik geri dönemezsin. Kaçış istiyorsan önce güvenli noktaya bir tether bırakmalısın. Girişi kapatamadıysan oraya saplanma; güvenli TP'ye çık, yeniden konumlan, ikinci girişi farklı açıdan yap.
 
 ## 5. Harita Etkileşimleri
 - **Güçlü haritalar:** Bind (haritanın kendi teleportu Yoru TP'sini katlar — önce kendi TP'ni, ardından harita TP'sini art arda kullanırsın), Split (dikey mid güçlü flank rotaları verir), Haven (üç site var, Yoru her round farklı yerden çıkar — düşman okuyamaz), Icebox (B tüpler üzerinden hattın arkasına TP — düşman beklemiyor).
@@ -92,8 +92,8 @@ WHY: Yoru'nun kaçış aleti TP'dir. Girişi kapatamadıysan oraya saplanıp kal
 "Round başında her şeyi attın, dövüş gelince elin boştu. En az bir flash ya da TP'yi asıl dövüş anına sakla — Yoru utility'siz savaşamaz."
 ### Yalnız flank dövüşüne saplandığında
 "Lurk'e takımdan kopuk girdin, çoğa kaldın. Flank'ını takımın site vuruşuyla zamanla — düşman iki yöne bölünmeden tek başına içlerine dalma."
-### TP'yi tek yönlü kullandığında
-"TP iki yönlü çalışıyor. Giriş kötü gittiğinde oraya saplanma — hemen geri ışınlan, yeniden konumlan, ikinci girişi farklı açıdan yap."
+### Tek TP harcayıp kaçış aletsiz kaldığında
+"İki TP yükün var — birini güvenli noktaya kur, öbürüyle gir. Giriş kötü gittiğinde oraya saplanma; güvenli kurduğun TP'ye ışınlanıp çık, yeniden konumlan, ikinci girişi farklı açıdan yap. TP geldiğin yere otomatik geri götürmez — kaçışı önceden kurman gerekir."
 
 ## 8. Rank Modülasyonu
 ### Düşük Elo (Iron-Silver)

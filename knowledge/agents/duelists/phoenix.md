@@ -93,7 +93,7 @@ WHY: Phoenix'in tek molly'si var; her round'u iyileşmeye harcarsan post-plant't
 
 **Baskıladığın ajanlar:**
 - **Cypher:** Tellerini flash ile geç, tuzaklar seni durduramaz.
-- **Sage:** Ateş duvarın onun buz duvarını eritir; kapıya duvar koyarsa yakıp geçersin.
+- **Sage:** Buz duvarını ateş duvarın yıkamaz (engellere yarı hasar verir, segment canı yüksek), ama flash'inle buz duvarının kenarından peek alırsın — sen flash atıp swing atarken o duvar kuruyor, görüşü kapatamaz.
 - Sabit pozisyon tutan her ajan — flash onları açıdan çıkmaya zorlar.
 
 ## 7. Oyuncuya Ne Söylenmeli

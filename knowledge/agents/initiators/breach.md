@@ -49,7 +49,7 @@ Breach duvarın ardına vuran initiator. Flash'ı da, stun'u da, molly'yi de —
 **IF** Flash patlıyor ama takım daha köşeye gelmeden sönüyor
 **MEANING** Flash'ı çok erken atıyorsun — kör etme penceresiyle takımın girişi tutmuyor
 **COUNTER** Flash'ı takım girişin tam ağzındayken at, önce değil. "Üç, iki, bir, flash" diye geri say; sayı bitince hem sen hem takım aynı anda öne çıksın. Flash önde, ayaklar arkasında.
-**WHY** Flash'ın kör etmesi yarım saniyeden kısa sürer. Çok erken atarsan düşman gözünü açacak vakit bulur; tam girişte atarsan kör hâldeki düşmana sıfır direnişle dalarsın. Değer zamanlamada, atışta değil.
+**WHY** Flash atışla patlama arasında yarım saniye gecikir; bu pencerede sen girişe yetişemezsen kör süresi takım gelmeden boşa akar. Çok erken atarsan düşman dönüp toparlanacak vakit bulur; tam girişte atarsan kör hâldeki düşmana sıfır direnişle dalarsın. Değer zamanlamada, atışta değil.
 
 **IF** Stun'la girip ölüyorsun ama önce flash atmamışsın
 **MEANING** Stun düşmanı yavaşlatır ama körleştirmez — sersemlemiş düşman hâlâ ezberlediği açına ateş eder
@@ -62,7 +62,7 @@ Breach duvarın ardına vuran initiator. Flash'ı da, stun'u da, molly'yi de —
 **WHY** Breach'in değeri girişi açmakta. Util biterse takımın site'a utility'siz dalar, sen de elinde hiçbir şey olmadan ilk kurşunu yersin. Util zamanlaması kadar saklamak da beceridir.
 
 ## 5. Harita Etkileşimleri
-- **Fracture**: Her köşede bir duvar var. Flash'ı, stun'u, molly'yi ayrı yüzeylerden at. Ult her iki site'ı birden vuruyor. İki taraftan giriş yapısı Breach'e biçilmiş kaftan — bir taraftan stun at, takım öbür taraftan dalsın.
+- **Fracture**: Her köşede bir duvar var. Flash'ı, stun'u, molly'yi ayrı yüzeylerden at. Ult tek yöne açılan bir koni olduğu için bir site'ı boydan boya sarsmaya odaklan; site'ı seç, koniyi o yöne sür. İki taraftan giriş yapısı Breach'e biçilmiş kaftan — bir taraftan stun at, takım öbür taraftan dalsın.
 - **Split**: Dar koridorlar, yüksek duvarlar. A ramp'tan, B heaven'dan duvarın içinden flash at. Mid'de stun düşmanı yerinden söküyor. Dar geometride molly çıkış bırakmaz; defans pozisyonunu terk etmek zorunda kalır.
 - **Ascent**: A main ve B main duvarlarından flash. Varsayılan plant noktalarına molly. Mid'i sıktıktan sonra stun'la rotate'i geciktir.
 - **Bind**: Hookah ve showers duvarının içinden flash kaçınılmaz. Teleporter duvarından atılan molly düşmanı koşturuyor. Burada flash'ı duvar dibinde bekleyen savunmacıya at — Bind'de yakın açılar çok.

@@ -168,7 +168,7 @@ Burada her round'u, rakibin önceki round'da nereden girdiğine göre kur. Split
 - **A Site**: Spike'ı buraya kurarsın. Varsayılan plant Screens arkası — buna A Default denir.
 - **A Back**: A Site'ın CT Spawn'a yakın arka köşesi. Retake'te savunma buradan gelir.
 - **A Rafters**: A tarafındaki platform. Yükseklik avantajı sağlar.
-- **Sewer**: A tarafındaki alt geçit. Alternatif rotasyon yolu olarak kullan.
+- **Sewer**: A Lobby'yi Mid Bottom'a bağlayan alt geçit (iple inilir). Mid ile A arasında alternatif rotasyon ve flank yolu olarak kullan.
 
 **B Tarafı**
 - **B Main**: Saldırının B'ye girdiği ana koridor. Çok dar — util atmadan buradan geçmeye çalışma.

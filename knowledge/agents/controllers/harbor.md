@@ -69,10 +69,10 @@ Bu kit yerinde duranı cezalandırır. Hareketli duvardan kimse geçmezse o yete
 **COUNTER** Harbor tek controller olarak ya da bir sentinel ile çalışır. Takımın statik smoke'a ihtiyacı varsa Omen al. Harbor'ın değeri başka controller'ın veremediği hareketli siperde.
 **WHY** Kit örtüşmesi ikisinin de güçlü yanını köreltir. Harbor'ın hareketli siper nişi ancak tek controller olduğunda parlar.
 
-**IF** Kubbe, plant dışında rastgele görüş hattı kapatmak için defalarca harcanıyor
-**MEANING** Kubbe düşük değerli oyunlarda yakılıyor. Uzun bir cooldown'u var ve en yüksek değeri spike'ı korumak.
-**COUNTER** Kubbeyi plant koruması ya da kritik retake geçişleri için sakla. Sıradan bir peek'i iki tempo kapatmak bu cooldown'a değmez — aynısını su duvarını bükerek yap.
-**WHY** Uzun cooldown onu nadir bir kaynak yapar. Düşük değerli kullanım, en çok ihtiyaç duyduğun anda elinde kalmaz.
+**IF** Kubbe, plant dışında rastgele görüş hattı kapatmak için round başında harcanıyor
+**MEANING** Kubbe düşük değerli oyunda yakılıyor. Round başına tek hakkın var ve parayla alınıyor — en yüksek değeri spike'ı korumak.
+**COUNTER** Kubbeyi plant koruması ya da kritik retake geçişleri için sakla. Sıradan bir peek'i kapatmak tek kubbe hakkına değmez — aynısını su duvarını bükerek yap.
+**WHY** Round başına tek hak ve para maliyeti onu sınırlı bir kaynak yapar. Erken yakarsan plant anında elinde kalmaz.
 
 **IF** Ult birçok round boyunca kullanılmadan bekletiliyor
 **MEANING** Oyuncu hiç gelmeyen o "mükemmel an" için saklıyor. Ult hızlı dolar, rahatça kullanılmalı.
