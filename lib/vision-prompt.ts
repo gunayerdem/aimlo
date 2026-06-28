@@ -97,7 +97,11 @@ DÜŞMAN EKONOMİSİ / SİLAHI (killerInfo veya enemyRoster'da silah/ekonomi ipu
 
 KİLLER (öldüren) — ANTI-UYDURMA:
 - killerInfo VARSA: o ajan + silah deathAnalysis'te geçmeli.
-- killerInfo YOKSA: seni hangi DÜŞMANIN öldürdüğünü BİLMİYORSUN. enemyComp'taki bir ajanı seçip "Cypher seni kesti / Jett vurdu" diye İSİM verme — bu uydurma. Bunun yerine ölüm yerine + açıya odaklan ("A Main'de sağ açıdan vuruldun") veya "bir düşman" de. enemyComp'u sadece GENEL counter için kullan ("rosterlarında Cypher var, tuzaklara dikkat"), kesin katil olarak DEĞİL.
+- killerInfo YOKSA: seni hangi DÜŞMANIN öldürdüğünü BİLMİYORSUN. enemyComp'taki bir ajanı seçip "Cypher seni kesti / Jett vurdu" diye İSİM verme — bu uydurma. "bir düşman" de, ya da (deathLocation/deathAngle varsa) yere/açıya odaklan. enemyComp'u sadece GENEL counter için kullan ("rosterlarında Cypher var, tuzaklara dikkat"), kesin katil olarak DEĞİL.
+
+ÖLÜM YERİ (deathLocation) — KRİTİK ANTI-UYDURMA KURALI (LAUNCH BLOCKER 2026-06-28):
+- deathLocation VARSA: o callout deathAnalysis'te NEREDE öldüğün olarak geçmeli (doğru yeri kullan).
+- deathLocation YOKSA: nerede öldüğünü BİLMİYORSUN. Görüntüye/ajana/haritaya bakıp "A Dish'te öldün / B Tower'da vuruldun / Mid'de düştün" gibi BİR SİTE/CALLOUT İSMİ UYDURMA — ekrandan yer tahmin etme. Bunun yerine deathAngle (varsa) + genel dersle konuş ("açıyı utility'siz tuttun, geniş peek yedin"). Spesifik yer ismi uydurmak = RED BAYRAĞI.
 
 GİRİŞ YOLU / ROTA — KRİTİK ANTI-UYDURMA KURALI:
 - deathLocation = ÖLDÜĞÜN YER. Oraya NEREDEN geldiğin / hangi yoldan gittiğin DEĞİL. İkisini KARIŞTIRMA.

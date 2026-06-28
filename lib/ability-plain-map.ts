@@ -50,7 +50,10 @@ export const ABILITY_PLAIN_MAP: AbilityPlain[] = [
   { official: "Ruse", tr: "smoke", en: "smoke" },
   { official: "Not Dead Yet", tr: "dirilme", en: "self-res" },
   { official: "Cascade", tr: "duvar", en: "wall" },
-  { official: "Cove", tr: "kalkan kubbe", en: "shield dome" },
+  // "Cove" (Harbor E) KALDIRILDI 2026-06-28: İngilizce "cover" kelimesinin prefix'i
+  // olduğu için plainify "cover"→"Cove"+"r"→"kalkan kubbe"+"r"="kalkan kubber"
+  // felaket-uydurmasını üretiyordu (canlı-test S8/S10/S13). Harbor kalkanı nadir +
+  // koç zaten "kalkan/siper" der; "cover" jargonu coach-text'te siper/kapat'a çevrilir.
   { official: "High Tide", tr: "duvar", en: "wall" },
   { official: "Reckoning", tr: "ult", en: "ult" },
   { official: "Geometrik Duman", tr: "smoke", en: "smoke" },
@@ -145,7 +148,7 @@ export function plainifyAbilities(text: string, lang: "tr" | "en"): string {
 // ─── Türkçe düz-terim apostrof düzeltici ──────────────────────────────────
 // Model bazen düz Türkçe terimi yanlış apostroflar ("duvar'i", "tuzak'ı", "tel'i").
 // Türkçe ortak isimler apostrof almaz — doğru eki (ünlü uyumu + ünsüz yumuşaması) getir.
-const TR_TERMS = ["yavaşlatma", "sersemletme", "sabitleme", "diriltme", "çekme", "zıplama", "kalkan", "kamera", "tuzak", "bıçak", "kaçış", "duvar", "diken", "siper", "açı", "tel"];
+const TR_TERMS = ["yavaşlatma", "sersemletme", "sabitleme", "diriltme", "çekme", "zıplama", "kalkan", "kamera", "tuzak", "bıçak", "kaçış", "duvar", "diken", "siper", "açı", "tel", "bot", "molly", "smoke", "flash", "ağ", "recon", "drone"];
 const VOWELS = "aeıioöuü";
 const lastVowel = (w: string) => { for (let i = w.length - 1; i >= 0; i--) if (VOWELS.includes(w[i])) return w[i]; return "a"; };
 const highV = (lv: string) => (({ a: "ı", "ı": "ı", o: "u", u: "u", e: "i", i: "i", "ö": "ü", "ü": "ü" } as Record<string, string>)[lv] ?? "ı");

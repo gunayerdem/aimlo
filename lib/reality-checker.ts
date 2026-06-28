@@ -80,6 +80,10 @@ const POSITION_NAMES = [
   "mid fountain", "mid bend", "mid window", "mid tiles", "double box",
   "a garden", "a cave", "a link", "a art", "b link", "b tower",
   "b trophy", "b gym", "triples", "close box",
+  // Fracture callouts (2026-06-28 LAUNCH-BLOCKER: canlı-test "A Dish"/"B Tower"
+  // ölüm-yeri halüsinasyonu — "a dish" listede yoktu, death-loc-absent guard
+  // onu tanıyamıyordu). death_location-absent guard + repetition bunları tanısın.
+  "a dish", "a rope", "a hall", "b tree", "b arcade", "b canteen",
 ];
 
 const REPETITION_KEYWORDS = [
@@ -378,7 +382,7 @@ const KILL_VERBS = "(öldürdü|öldürdün|kesti|vurdu|düşürdü|indirdi|biç
  */
 export function guardUnprovenFacts(
   text: string,
-  factGround: { hasRoute?: boolean; hasTradeData?: boolean; hasKiller?: boolean },
+  factGround: { hasRoute?: boolean; hasTradeData?: boolean; hasKiller?: boolean; hasDeathLocation?: boolean },
 ): string {
   let result = text;
 
@@ -392,6 +396,23 @@ export function guardUnprovenFacts(
     for (const ag of AGENT_NAMES) {
       const re = new RegExp(`\\b${escapeRe(ag)}\\b([^.!?]{0,45}?)\\s${KILL_VERBS}`, "gi");
       result = result.replace(re, (_m: string, mid: string, verb: string) => `bir düşman${mid} ${verb}`);
+    }
+  }
+
+  // Death-location-when-absent (LAUNCH BLOCKER 2026-06-28): deathLocation OCR'da
+  // YOKKEN model belirli bir callout'u ÖLDÜĞÜN YER olarak iddia edemez (canlı-test
+  // R2 "A Dish'te öldün" / R5 "B Tower'da vuruldun" = saf halüsinasyon; desktop
+  // payload'ı o maçta 4/4 deathLocation göndermedi). Konum+lokatif(-da/-de/-ta/-te)
+  // + ölüm/öldürme-fiili çapasını yakalayıp SADECE yer-iddiasını siler (fiil kalır).
+  // hasDeathLocation=true iken DOKUNMA. Yön ("arkadan geldi") lokatif değil → güvenli.
+  if (factGround.hasDeathLocation === false) {
+    const DEATH_AT_VERBS = "(öldün|öldürüldün|vuruldun|düştün|yakalandın|kaldın|öldürdü|vurdu|düşürdü|kesti|indirdi)";
+    for (const pos of POSITION_NAMES) {
+      const re = new RegExp(
+        `\\b${escapeRe(pos)}\\s*['’]?\\s*(?:d[ae]|t[ae])\\s+([^.!?]{0,30}?)${DEATH_AT_VERBS}`,
+        "gi",
+      );
+      result = result.replace(re, (_m: string, mid: string, verb: string) => `${mid}${verb}`);
     }
   }
 
@@ -440,7 +461,7 @@ export function guardUnprovenFacts(
 export function realityCheck(
   outputText: string,
   roundHistory: RoundMemoryEntry[],
-  factGround?: { hasRoute?: boolean; hasTradeData?: boolean; hasKiller?: boolean },
+  factGround?: { hasRoute?: boolean; hasTradeData?: boolean; hasKiller?: boolean; hasDeathLocation?: boolean },
   // Cycle 3 (council 2026-06-26): field-type hint. "suggestion" suppresses the
   // neutral death-fallback (returns "" instead so the route keeps the original
   // advice). Omitted ⇒ "death"/"generic" behavior = byte-identical to before;

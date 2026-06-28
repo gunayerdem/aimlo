@@ -49,6 +49,18 @@ const TR_JARGON: [RegExp, string][] = [
   [/\bteammate['’]?(yi|yı|i|ı)\b/gi, "takım arkadaşını"],
   [/\bteammate['’]?(ye|ya|e|a)\b/gi, "takım arkadaşına"],
   [/\bteammate\b/gi, "takım arkadaşı"],            // ai-policy line 99: zorunlu çeviri
+  // "ally" sızıntısı (KB-ton audit 2026-06-28: S6/S15/S16 — teammate çevriliyor, ally atlanmış)
+  [/\bally['’]?(le|la|yle|yla|ile)\b/gi, "takım arkadaşı ile"],
+  [/\bally['’]?(nin|nın|in|ın)\b/gi, "takım arkadaşının"],
+  [/\bally['’]?(den|dan)\b/gi, "takım arkadaşından"],
+  [/\bally['’]?(yi|yı|i|ı)\b/gi, "takım arkadaşını"],
+  [/\bally['’]?(ye|ya|e|a)\b/gi, "takım arkadaşına"],
+  [/\ballies\b/gi, "takım arkadaşları"],
+  [/\bally\b/gi, "takım arkadaşı"],
+  // "cover" jargonu (Cove map-kaydı kaldırıldı; cover'ı isim=siper / fiil=kapat yap — ASLA kelime-içi parça-replace)
+  [/\bcover\s+et(?![a-zçğıöşü])/gi, "kapat"],
+  [/\bcover\s+etmek\b/gi, "kapatmak"],
+  [/\bcover\b/gi, "siper"],
   // "Counter:"/"Karşılık:" etiket-önekini SİL — koç etiket basmaz, direkt söyler
   // (empirik S1, council 2026-06-26). Sadece iki nokta varsa = etiket.
   [/\b(counter|karşılık)\s*:\s*/gi, ""],
@@ -164,7 +176,13 @@ const TR_JARGON: [RegExp, string][] = [
   // NOT: JS \b Türkçe harfte (ı/ö/ş…) kırıldığı için ek-sonunda \b kullanma →
   // "sightline'ını" yanlış kesilip "görüş hattıı" üretiyordu. \S* ile ek+apostrofu
   // tümden yut (sightline İngilizce, boşluğa kadar güvenle tüketilir).
-  [/\bsightline\S*/gi, "görüş hattı"],                     // S9: "sightline'ını" → "görüş hattı"
+  // S9 (KB-ton audit 2026-06-28): bare \S* ek'i TÜMDEN yutup "görüş hattı direkt
+  // girdin" (devrik, hâl-eki düşmüş) üretiyordu. Ek-koruyan formlar ÖNCE:
+  [/\bsightline['’]?(ın[ae]|in[ae])\b/gi, "görüş hattına"],
+  [/\bsightline['’]?(ını|ini)\b/gi, "görüş hattını"],
+  [/\bsightline['’]?(ında|inde)\b/gi, "görüş hattında"],
+  [/\bsightline['’]?(ından|inden)\b/gi, "görüş hattından"],
+  [/\bsightline\S*/gi, "görüş hattı"],                     // bare backstop: "sightline" → "görüş hattı"
   [/\bwall(?![a-zçğıöşü])\S*/gi, "duvar"],                 // S9: Viper/Sage "wall('ı)" → "duvar"
   // C5: minor İngilizce sızıntılar ("contest et-" — vokal-uyumlu açık formlar)
   [/\bcontest\s+etmeden\b/gi, "zorlamadan"],
@@ -241,6 +259,22 @@ const TR_JARGON: [RegExp, string][] = [
   [/(?<![a-zçğıöşü])kafadan al(acak|abilir|abilece[kğ]i?)(?![a-zçğıöşü])/gi, "kafadan vur$1"],
   [/(?<![a-zçğıöşü])kafadan alır(?![a-zçğıöşü])/gi, "kafadan vurur"],
   [/(?<![a-zçğıöşü])kafadan alıyor(?![a-zçğıöşü])/gi, "kafadan vuruyor"],
+  // ── KB-ton audit (2026-06-28) deterministik temizlikler ──
+  // 'mollywood...' gpt halüsinasyon-birleşiği (S6) → molly; util-uydurma birleşik parçala
+  [/\bmollywood[a-zçğıöşü]*/gi, "molly"],
+  [/\bmolly\+[a-zçğıöşü]+/gi, "molly"],
+  // calque + yazım (S15): "vücut avantajı" (body advantage) → "peek avantajı"; "menzaj" → "menzil"
+  [/\bvücut avantaj(ı(?:n[ıi]|na|nda|ndan)?)?/gi, "peek avantaj$1"],
+  [/(?<![a-zçğıöşü])menzaj(ın[ıi]|[ıi])?(?![a-zçğıöşü])/gi, "menzil$1"],
+  // Deadlock GravNet düz-terim (S16 "netle ani tutuş" anlamsız) → "ağ"
+  [/(?<![a-zçğıöşü])netle(?![a-zçğıöşü])/gi, "ağla"],
+  // "utility'siz ... utility'siz" çift-tekrar (S9): apostrof-normalize sonra dedup
+  [/(utility['’]?siz)(,?\s+\1)+/gi, "utility'siz"],
+  // slash-liste: util/callout token'ları arasında '/' → ' ya da ' (S8/S16/S19; '+' liste de)
+  [/(?<=[a-zçğıöşü])\/(?=[a-zçğıöşü])/gi, " ya da "],
+  [/\b(bot|tuzak|molly|smoke|flash|duvar|tel|kamera|net|ağ)\s*\+\s*(bot|tuzak|molly|smoke|flash|duvar|tel|kamera|net|ağ)\b/gi, "$1 ve $2"],
+  // em-dash boşluk normalize (S2 "yüklenme—Showers")
+  [/\s*—\s*/g, " — "],
 ];
 
 const CLEAN_AGENT_NAMES = ["Jett","Raze","Phoenix","Reyna","Yoru","Neon","Iso","Waylay","Sage","Killjoy","Cypher","Chamber","Deadlock","Vyse","Omen","Brimstone","Viper","Astra","Harbor","Clove","Sova","Breach","Skye","Fade","Gekko","Tejo","Veto"];

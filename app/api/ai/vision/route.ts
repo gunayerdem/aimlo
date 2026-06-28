@@ -880,6 +880,10 @@ export async function POST(request: NextRequest) {
         // Grounding audit 2026-06-26: killerInfo OCR'da yoksa, reality-checker
         // belirli-ajan katil iddialarını "bir düşman"a indirir (uydurma katil engeli).
         hasKiller: typeof reqBody.killerInfo === "string" && (reqBody.killerInfo as string).length > 0,
+        // LAUNCH BLOCKER 2026-06-28: deathLocation OCR'da yoksa, reality-checker
+        // "X'te öldün" gibi spesifik yer-iddialarını siler (canlı-test halüsinasyonu:
+        // payload deathLocation göndermeyince model "A Dish"/"B Tower" uyduruyordu).
+        hasDeathLocation: typeof ctx.deathLocation === "string" && ctx.deathLocation.length > 0,
       };
       const checkedAnalysis = realityCheck(fb.deathAnalysis, memoryForCheck, factGround, "death");
       const checkedSuggestion = realityCheck(fb.nextRoundSuggestion, memoryForCheck, factGround, "suggestion");
