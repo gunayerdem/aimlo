@@ -7,13 +7,13 @@
 - Zip line sana iki şey verir: hızlı rotasyon ve dikey avantaj. Kullanmayı öğren
 - Saldırı: A site'a smoke ve flash atmadan girme — savunucu bedavaya ilk kurşunu atar. B site'ta Orange, Yellow, Green'i sırayla temizle; atlarsan üst üste ölürsün
 - Savunma: A Rafters ve A Nest'ten oyna, açı avantajı senin olsun. B site'ta Yellow ve Snowman off-angle'ları saldırganı durdurur. Her iki sitede de crossfire kur — tek başına durma
-- Mid kontrolü her şey. Mid'i tutarsan Tube üzerinden A'ya, Kitchen üzerinden B'ye split atarsın. Mid yoksa execute'un tek yönlü kalır, savunucu rahat retake atar. Savunmada mid'i kaybedersen her iki site tehlikeye girer
+- Mid kontrolü her şey. Mid'i tutarsan Tube ve Kitchen üzerinden B'ye, mid açılarından A'ya baskı kurarsın. Mid yoksa execute'un tek yönlü kalır, savunucu rahat retake atar. Savunmada mid'i kaybedersen her iki site tehlikeye girer
 
 ## 2. Ölüm Bölgeleri
 - **A Belt / A Main**: A site'a giden ana koridor. Burada ölüyorsan sebebi basit: util atmadan düz yürüyüp peek açıyorsun. A Rafters'taki veya A Screens'teki savunucu seni zaten önceden hedeflemiş, bedava ölüyorsun. A Belt'te sürekli ölüyorsan, girişten önce attığın util sayısı sıfırdır.
 - **Mid Sightline**: Icebox'in en uzun sightline'ı mid'de. Smoke veya flash yoksa mid'e adım atma — op tutan savunucu seni görmeden sen onu göremezsin. Burada tekrar tekrar ölüyorsan, bilgisiz peek açıyorsun.
 - **B Orange Girişi**: Orange bir tuzak. Yellow'dan ve Green'den gelen crossfire, ilk içeri giren adamı anında yiyor. Koordinasyon yoksa, ilk adam ölür. Her zaman.
-- **Tube / Container**: Savunucu Tube çıkışında seni bekliyor. Tube'u temizlemeden geçersen arkandan vurulursun. Savunma yapıyorsan da Tube split'ini erken okuyamazsan orada kalırsın.
+- **Tube**: Tube, mid'in saldırgan tarafını Kitchen üzerinden B site'ın arkasına bağlar — B'ye giden yan koridor. Savunucu Tube çıkışında seni bekliyor. Tube'u temizlemeden geçersen arkandan vurulursun. Savunma yapıyorsan da Tube'dan gelen B split'ini erken okuyamazsan orada kalırsın.
 - **B Kitchen / CT**: Retake için Kitchen'a giriyorsan, ilk açıyı kim kontrol ediyorsa o kazanır. Lurker veya post-plant'taki adam seni dar geçişte yakalıyor. Kapıya körü körüne dalmadan köşeyi kontrol et.
 
 ## 3. Pattern -> Meaning Eşleşmesi
@@ -59,10 +59,10 @@ Roundun sessiz anlarında zip kullanma — ses seni satar.
 WHY: Zip hız ve pozisyon avantajı verir ama ses bilgi sızdırır, iniş noktası tahmin edilebilir, inişte hareket kısıtlısın. Bu üç şey üst üste gelince korumasız zip çok riskli olur. Utility veya fake bu riski kırar çünkü rakibin beklentisini bozar.
 
 **Pattern 6: Tube Kontrolsuz Bırakma**
-IF: A execute yapıyorsun ama Tube kontrol edilmemiş — Tube'dan gelen flank'a karşı hiçbir şey yok
-MEANING: Tube, mid'den A site'a açılan yan giriş. Kontrol etmezsen savunucu Tube'dan flank atıp execute'u arkadan vurur. Savunma tarafında Tube'u bırakmak da A site'i tehlikeye atar çünkü saldırganlar Tube'dan split yapar.
-COUNTER: A execute planlanıyorsa Tube'a bir oyuncu gönder veya girişe sentinel utility'si koy — tripwire, turret veya alarmbot. Tube'u ignore etmek A site'i tek boyutlu kılar. Saldırı tarafında Tube kontrolü = A site'e iki yönlü baskı.
-WHY: Tube A site'in yan kapısıdır. Yan kapıyı açık bırakırsan rakibe bedava flank verirsin. Tube kontrolü olmadan savunucu nereye bakacağını bilir ve tüm utility'sini tek girişe harcar. Tube'u tutarsan iki açıya birden bakmak zorunda kalır.
+IF: B execute yapıyorsun ama Tube kontrol edilmemiş — Tube'dan gelen flank'a karşı hiçbir şey yok
+MEANING: Tube, mid'in saldırgan tarafını Kitchen üzerinden B site'a bağlayan yan giriş. Kontrol etmezsen savunucu Tube'dan flank atıp execute'u arkadan vurur. Savunma tarafında Tube'u bırakmak da B site'i tehlikeye atar çünkü saldırganlar Tube ve Kitchen üzerinden B'ye split yapar.
+COUNTER: B execute planlanıyorsa Tube'a bir oyuncu gönder veya girişe sentinel utility'si koy — tripwire, turret veya alarmbot. Tube'u ignore etmek B site'i tek boyutlu kılar. Saldırı tarafında Tube kontrolü = B site'e iki yönlü baskı.
+WHY: Tube B site'in yan kapısıdır. Yan kapıyı açık bırakırsan rakibe bedava flank verirsin. Tube kontrolü olmadan savunucu nereye bakacağını bilir ve tüm utility'sini tek girişe harcar. Tube'u tutarsan iki açıya birden bakmak zorunda kalır.
 
 **Pattern 7: B Site Retake Gecikmesi**
 IF: Spike plant olduktan sonra retake başlatmayı geciktiriyorsun — kaç kişiyle ve hangi utility'yle gireceğini planlamadan beklemeye devam ediyorsun
@@ -80,7 +80,7 @@ WHY: Off-angle'ın değeri sürpriz faktöründen gelir. Rakip Snowman'ı bildi�
 
 ### Saldırı
 - A Belt'e smoke veya flash atmadan girme — o sightline'da savunucu seni bedavaya öldürür.
-- Mid'i tamamen bırakma — Tube ve Boiler üzerinden her iki siteye split açılır; mid yoksa saldırın tek yönlü kalır ve okunur.
+- Mid'i tamamen bırakma — mid açılarından A'ya, Tube ve Kitchen üzerinden B'ye split açılır; mid yoksa saldırın tek yönlü kalır ve okunur.
 - B site'te Orange, Yellow, Green temizlenmeden spike basma — plant yaparsın ama retake çok kolay olur; önce o köşeleri temizle.
 
 ### Savunma
@@ -104,13 +104,13 @@ WHY: Off-angle'ın değeri sürpriz faktöründen gelir. Rakip Snowman'ı bildi�
 - "B site'te Orange, Yellow, Green bunaltıyorsa her birini ayrı oda say. Her odaya girerken util at, sonra gir."
 - "A Rafters'tan kill aldın, hemen in. Aynı noktayı iki round üst üste kullanırsan rakip seni orada bekler."
 - "Op burada sadece silah değil. Op economy'ni doğru kur — haritayı o zaman yönetirsin."
-- "Tube'u geçmezsen A site'e tam kontrol kuramazsın. Tube yan kapıdır. Yan kapıyı açık bırakma."
+- "Tube'u geçmezsen B site'e tam kontrol kuramazsın. Tube yan kapıdır. Yan kapıyı açık bırakma."
 - "Post-plant'te rakiple aynı yükseklikte durma. Farklı katlarda crossfire kur — retake yapmak isteyen için kabusa döner."
 
 ## 7. Rank Modülasyonu
 - **Iron-Silver**: B site'teki Orange, Yellow, Green callout'larını karıştırıyorsun. Zip line'e atlamadan önce düşünmüyorsun, mid'e hiç bakmıyorsun. Şunu yap: A Belt'e girmeden önce bir util at, sonra ilerle. Bu tek hareket seni öldüren açı sayısını yarıya indirir. Zip line ses çıkarır — rakip duyar. Bunu bil.
 - **Gold-Platinum**: Flash atıyorsun ama arkasından swing atmıyorsun — utility boşa gidiyor. B site'te Orange girişinde tüm takım aynı anda yığılıyor, hiç aralık yok. Şunu yap: ilk oyuncu flash ile girer, ikincisi flash patladıktan sonra girer. Mid'i "başkasının işi" sanıyorsun — değil. Birini oraya ata.
-- **Diamond-Ascendant**: Rafters, Snowman, aynı entry, aynı default — rakip seni ezberledi. Rakip A Belt'i yığıyorsa mid'e geç, Tube'dan split yap. Rafters'tan kill aldıysan bir sonraki roundda Nest'e taşın. Orange yerine Kitchen split dene. Rakibin alışkanlığını oku ve değiştir.
+- **Diamond-Ascendant**: Rafters, Snowman, aynı entry, aynı default — rakip seni ezberledi. Rakip A'yı yığıyorsa mid'e geç, Tube ve Kitchen'dan B'ye split yap. Rafters'tan kill aldıysan bir sonraki roundda Nest'e taşın. Orange yerine Kitchen split dene. Rakibin alışkanlığını oku ve değiştir.
 - **Immortal-Radiant**: Mekanikleri biliyorsun, fark yaratan şey anti-strat. Rakip her round A Belt push yapıyorsa smoke Belt + Pipes üzerinden flank kur. Tube split geliyorsa Tube'a utility göm. Rakibin Op'inin kimde olduğunu, nerede durduğunu, save edip edemeyeceğini takip et. Eco roundlarda Icebox'un yakın dövüş alanlarını kullan: B rush Green üzerinden, Orange içi Spectre. Kim rakibin harita alışkanlığını önce okursa, o yarıyı kazanır.
 
 ## 8. Post-Plant Stratejileri
@@ -124,7 +124,7 @@ WHY: Off-angle'ın değeri sürpriz faktöründen gelir. Rakip Snowman'ı bildi�
 
 ### B Site Post-Plant
 - B Orange + B Green crossfire kur — retake yolunu iki açıdan kes
-- Kitchen'ı gözle — retake Kitchen'dan gelir, başka yol yok
+- Kitchen'ı gözle — retake'in ana yolu Kitchen'dır; ama B Main/Green/Orange'dan da geri dönüş gelebilir, hepsini kapatacak crossfire kur
 - Viper molly'sini ve Killjoy molly'sini B Default'a yüklen — defuse etmesi çok zorlaşır
 
 ### Genel Post-Plant
@@ -148,7 +148,7 @@ COUNTER: Belt'e smoke at, Pipes'tan flank kur. Smoke Belt'i tıkar, Pipes flanki
 WHY: Tek giriş noktası kapandığında o strateji çöker. Flank eklersen saldırı tarafı iki yönden baskı yer, karar veremez.
 
 **Rakip Tube'dan split yapıyorsa:**
-IF: Saldırı tarafı mid kontrolü alıp Tube'dan A site'a split yapıyor
+IF: Saldırı tarafı mid kontrolü alıp Tube ve Kitchen üzerinden B site'a split yapıyor
 MEANING: Mid'in zayıf, Tube korumasız
 COUNTER: Tube girişine sentinel utility göm — tripwire, turret, alarmbot. Sova dart veya Fade haunt ile mid'den erken bilgi al. Bilgi gelince pozisyon al, sürpriz kalmaz.
 WHY: Split'i güçlü yapan sürpriz faktörü. Erken bilgi o sürprizi yok eder, pozisyon alırsın.
@@ -172,9 +172,9 @@ COUNTER: Mid'e smoke at, flash sok, iki yönden swing at. Smoke sightline'ı kes
 WHY: Op tek sightline'da güçlüdür. O sightline kapanır ya da iki hedefe bölünürse avantajı gider. Smoke + flash + dual swing üçünü aynı anda uygular.
 
 ## 11. Temel Pozisyonlar ve Callout'lar
-- **A Tarafı**: A Belt / A Main / A Pipes / A Rafters / A Nest / A Screens / A Site / A Zip / A Default (plant)
+- **A Tarafı**: A Belt / A Main / A Pipes / A Rafters / A Nest / A Screens / A Site / A Zip / A Box / A Default (plant)
 - **B Tarafı**: B Main / B Orange / B Green / B Yellow / B Snowman / B Kitchen / B Site / B Hall / B Default (plant)
-- **Mid**: Mid / Tube / Boiler / Blue / Mid Pillar / Container
+- **Mid**: Mid / Tube / Boiler / Blue / Mid Pillar
 - **Genel**: CT Spawn / T Spawn
 
 ### Callout Açıklamaları
@@ -186,11 +186,11 @@ WHY: Op tek sightline'da güçlüdür. O sightline kapanır ya da iki hedefe bö
 - **B Yellow**: B site içindeki yüksek köşe. Anchor burada duruyorsa spike kurarken sırtın dönük olmasın.
 - **B Green**: B site'in yan girişi. Yeşil ışıklı bu bölgeden gelen split rakibi çabuk fark etmezsin, ilet.
 - **B Snowman**: B site'taki kardan adam yanındaki köşe. Retake'te buraya bakan off-angle'ı unutursan öylece ölürsün.
-- **B Kitchen**: B site CT tarafındaki mutfak bölgesi. B'ye rotasyon yapıyorsan buradan geçersin, başka yol yok.
-- **Tube**: Mid'den A site'a açılan boru geçişi. Split yaparken bu geçiş kapalıysa A split çalışmaz.
-- **Boiler**: Mid'den B Kitchen'a bağlanan bölge. B'ye split atarken Boiler kontrolü olmadan girme.
+- **B Kitchen**: B site'a açılan mutfak bölgesi. İki işlevi var: savunmada CT'den B'ye rotasyon/retake yolu, saldırıda ise mid'den (Tube üzerinden) B site'a yapılan ana split girişi. B'ye B Main/Green/Orange ile de girilir — Kitchen tek yol değil.
+- **Tube**: Mid'in saldırgan tarafını Kitchen üzerinden B site'a bağlayan uzun boru geçişi. B split yaparken bu geçiş kapalıysa B split çalışmaz.
+- **Boiler**: Mid'in tepesindeki yükseltilmiş savunucu platformu — uzun bir sightline ucu (Boiler'dan Blue'ya doğru). Mid'i gözleyen güçlü bir açı pozisyonu; buradan tutulan açıyı temizlemeden mid'e dalma.
 - **Blue**: Mid'deki mavi ışıklı alan. Buradan bilgi almadan ne A'ya ne B'ye rahat geçiş yaparsın.
-- **Container**: A site'taki konteyner yapısı. Hem kapak olarak kullan hem off-angle aç, ikisi de işe yarar.
+- **A Box**: A site'taki kutu/kapak yapısı. Hem siper olarak kullan hem yanından off-angle aç, ikisi de işe yarar.
 
 ## 12. Agent Tier Listesi
 

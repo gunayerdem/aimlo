@@ -79,9 +79,9 @@ COUNTER: Giriş açını ve zamanlamanı tur tur değiştir. Bir tur erken slow 
 WHY: Waylay'in avantajı sürprizde ve hızda. Düşman giriş kalıbını öğrenirse açını önceden tutar, dash'in hızı işe yaramaz.
 
 ## 5. Harita Etkileşimleri
-- **Bind — çok güçlü:** Dar koridorlar ve teleport çıkışları yavaşlat-dal için ideal. A Short ve Hookah'ta köşeye slow at, yavaşlasın, dash ile dal. Teleport'la beklenmedik anda baskı kur; geri-kayma noktanı çıkışına koy.
-- **Haven — S Tier:** Üç site, çok giriş; mobilite burada altın. C Long'da slow + dash giriş açar, A Long'da hızlı boşluk kapatma çok güçlü. Geri-kayma noktanı her site için ayrı planla.
-- **Ascent — S Tier:** A Main'in dar girişi yavaşlat-dal için biçilmiş kaftan. Mid kontrolünü dash hızıyla zorla. B Main'de slow'u savunucunun tuttuğu açıya at, dash ile gir.
+- **Bind — durumsal:** Dar koridorlar ve teleport çıkışları yavaşlat-dal için uygun. A Short ve Hookah'ta köşeye slow at, yavaşlasın, dash ile dal. Teleport'la beklenmedik anda baskı kur; geri-kayma noktanı çıkışına koy. Yine de Bind'de Waylay üstünlüğü garanti değil — kazanma oranı nötr seviyede, dar yapıyı doğru kullanırsan değer üretir.
+- **Haven — orta/durumsal:** Üç site, çok giriş; mobilite işine yarar ama açık uzun hatlar Waylay'in kısa menzilli kitine pek oturmaz. C Long'da slow + dash giriş açar, A Long'da hızlı boşluk kapatma işe yarar. Geri-kayma noktanı her site için ayrı planla; körlemesiz uzun hatta tek başına dash'leme.
+- **Ascent — zayıf:** Ascent Waylay'in en zorlandığı haritalardan biri. Uzun görüş hatları ve açık mid, kısa menzilli yavaşlat-dal kitine ters; uzaktan görünür kalırsın. Oynaman gerekirse dar A Main girişinde slow + dash'e güven, açık alanda tek başına dash'leme, slow'la pencere açmadan girme.
 - **Split — A Tier:** A Ramp ve B Main'deki dar koridorlar slow'un kaçış alanını kapatır — yavaşlat, dal, ilk öldürmeyi al. Dikey dash'le heaven/üst açılara çık. Dar yapı geri-kaymanı da kolaylaştırır.
 - **Lotus — A Tier:** Dönen kapılar ve dar geçişler dash'e oturur. A Main ve C Main'de slow + dash güçlü. B'nin dar yapısında geri-kayma noktanı yakına koy ki sıkışmadan çıkasın.
 - **Breeze — B Tier:** Uzun görüş hatları açık alanda seni görünür yapar. Hall ve A Cave gibi kapalı yerlerde yavaşlat-dal güçlü; açık alanda tek başına dash'leme, slow'la pencere aç.

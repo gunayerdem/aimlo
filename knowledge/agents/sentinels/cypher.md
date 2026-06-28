@@ -5,8 +5,9 @@ Cypher'ı doğru oynarsan takımın asla kör kalmaz. Site'ı ateş gücüyle de
 
 ## 2. Temel Sorumluluklar
 - **Bilgi topla, anında ilet**: Tel ve kamera, düşman kapıya dayanmadan iş görmeli. Düşman hangi koridordan geldi, kaç kişi — takım rotate etmeden önce bunu sen söyle.
-- **Flankı kapat**: En az bir tel flank yolunda dursun. Atak round'larında bu pazarlık konusu değil.
+- **Flankı kapat**: En az bir tel flank yolunda dursun. Atak round'larında bu pazarlık konusu değil. Tel yalnızca alarm vermez — tetiklenen düşmanı yerinde yakalar, kısa sürede teli kıramazsa onu açığa çıkarır ve sersemletir. Yani flank teli hem haber verir hem de o düşmanı bir an için savunmasız bırakır.
 - **Site'ı tut**: Tek başına ya da neredeyse yalnız, site'ı geciktir. Telin ve kameranın kazandırdığı zaman takım arkadaşlarını serbest bırakır — stack atarlar, lurk yaparlar.
+- **Görüş-engelleyen küreni (kafes) kullan**: Cypher'ın kendi taşıdığı bir görüş-engelleyici küresi var (ucuz, round başına yenilenir). Bir açıyı kapatmak, push'u yavaşlatmak ya da güvenli rotate için at. Bu küre düşman içinden geçtiğinde ses çıkarır — yani salt görüşü kesmez, kim geçti onu da sana söyler. Tek başına site tutarken bir açıyı bununla kapatıp dikkatini tehlikeli yöne ver.
 - **Ult zamanlaması**: Ult'u sadece kill onaylamak için harcama. Düşman pozisyonları belirsizken, özellikle takım rotate kararı verecekken aç.
 - **Post-plant kamera**: Spike kurulduktan sonra kamerayı giriş yolunu izlemek için değil, defuse açısını görmek için koy.
 
@@ -60,7 +61,7 @@ Cypher'ı doğru oynarsan takımın asla kör kalmaz. Site'ı ateş gücüyle de
 **IF** Savunmada tel patladı ama ne çağrı yaptın ne de o yöne baktın
 **MEANING** Teli pasif bir tuzak gibi kullanıyorsun, bilgi kaynağı olarak değil. Tetiklenme sana fayda üretmeden sönüyor.
 **COUNTER** Tel patladığı an iki şey yap: tam sayı ve yön çağrısı geç, sonra crosshair'i o açıya çevir. Tetiklenme bir alarm değil, hareket emridir.
-**WHY** Tel kaç düşmanın o yoldan geldiğini gösterir — bu rotate kararının ham verisidir. Sessizce patlayan tel, takım için hiç patlamamış kadar değersizdir.
+**WHY** Tel kaç düşmanın o yoldan geldiğini gösterir — bu rotate kararının ham verisidir. Üstelik tetiklenen tel düşmanı yerinde yakalar; teli kısa sürede vurup kıramazsa onu açığa çıkarır ve sersemletir. Yani çağrı geçerken aynı anda peek atarsan yakalanmış, sersemlemiş düşmanı bedavaya vurursun. Sessizce patlayan tel, takım için hiç patlamamış kadar değersizdir.
 
 **IF** Kamerayı sürekli aynı düz hat üzerinde, kolay görünen yüksekliğe koyuyorsun
 **MEANING** Düşman kamerayı refleksle ilk geçtiği saniyede vuruyor; off-angle bilgi alamıyorsun.
@@ -71,6 +72,11 @@ Cypher'ı doğru oynarsan takımın asla kör kalmaz. Site'ı ateş gücüyle de
 **MEANING** Util'i kazanamayacağın round'a yatırıyorsun; bir sonraki tam silahlı round'a hiçbir şey kalmıyor.
 **COUNTER** Zayıf round'larda util'i sakla ya da yalnızca bilgi için minimum kurulum yap. Kamerayı topla, tel atma; bir sonraki round'a tam util'le başla.
 **WHY** Cypher util'i round başına yenilenir ama yerleşim zaman ister. Kaybedeceğin round'a yatırılan tel, kazanabileceğin round'da elinde olmaz. Util'i kazanılabilir round'lara biriktir.
+
+**IF** Görüş-engelleyen küreni (kafes) round başında ya da hiç kullanmadan boşa harcıyorsun
+**MEANING** Cypher'ın görüş kapatma aracını ölü bırakıyorsun. Bir açıyı tek başına tutarken bütün yönleri aynı anda kollamaya çalışıp birinden vuruluyorsun.
+**COUNTER** Küreyi tehdit yönlerinden birini kapatmak için at — geriye tek açı kalır, dikkatini oraya ver. Düşman küreden geçerse çıkardığı ses sana erken haber verir; geçmezse o yönü zaten kapatmış olursun.
+**WHY** Küre hem görüşü keser hem içinden geçeni sesle ele verir. Tek açıya indirgenen savunma, beş açıya bölünmüş dikkatten her zaman daha güçlüdür; bu da bir sentinel'in tek başına site geciktirmesinin temelidir.
 
 ## 5. Harita Etkileşimleri
 - **Bind**: Çok güçlüsün. İki site dar, flank yolu bol, teleporter'lar yön değiştirmeyi kolaylaştırır. B site'ı tek başına kilitle, mid'den kamerayla A'ya bilgi ver. Teleporter'lar Bind'in can damarı: bir teli daima TP çıkışına ya da TP'ye giden koridora bırak — düşman ses yapmadan yer değiştiremesin, takım fake rotate'i anında okusun. Mid yok denecek kadar dar olduğundan tek tel + tek kamera tüm mid'i kilitler, kalan util'i site'a yatır.

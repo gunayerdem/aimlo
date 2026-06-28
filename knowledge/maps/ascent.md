@@ -250,7 +250,7 @@ Timeout'u doğru kullan — momentum kırmak için, skor farkı kapanmadan önce
 - **Generator / Gen:** A site içindeki büyük obje. Hem cover alırsın hem off-angle oynarsın.
 - **Wine / Tree:** A site'in arkası. Clutch ve retake için güçlü — ama orada kalmaya devam edersen tahmin edilirsin.
 - **Dice:** A site girişinin yanındaki küçük kutu. İçeri girerken arkasından cover al.
-- **Garden:** A Main'in başındaki açık alan, spawn'a yakın. Burada durmak yok, geçmek var.
+- **Garden / Tree:** Catwalk'tan A site'e inen bağlantı bölgesi, savunma tarafına yakın. A Window buraya bakar. Mid kontrolünü aldıktan sonra A'ya split için buradan inersin. Burada durmak yok, geçmek var — A Window'dan tutan biri seni keser.
 
 ### B Site ve Çevresi
 - **B Main / B Lobby:** B site'e giden ana koridor. Dar ve kapalı — util olmadan dolu girme.

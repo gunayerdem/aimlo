@@ -4,14 +4,15 @@
 
 ## 1. Temel Prensipler
 - Lotus 3 siteli (A, B, C) bir harita — Haven gibi geniş ama mekanik olarak çok daha zengin.
-- Döner kapılar (A Main ile C Mound arası), kırılabilir duvar (B site) ve Silent Drop (A site) bu haritayı diğerlerinden ayırır.
+- İki döner kapı (biri A Main ile A Tree arası, diğeri C Mound ile B Main arası), kırılabilir duvar (A site, A Main ile A Link arası) ve Silent Drop (A site) bu haritayı diğerlerinden ayırır.
 - Saldırı temeli: Lotus saldırı tarafına avantajlı, çünkü giriş noktası çok fazla. Tek bir siteye kuru push atma — kapıyı, duvarı, drop'u kullan, defender'ı yanlış yere çek, sonra gir.
 - Savunma temeli: 5 kişiyle 3 siteyi tutamazsın. Sentinel ve initiator bilgisi yoksa nereye rotate edeceğini bilemezsin. Agresif anchor yerine retake odaklı dur — attacker'ın giriş seçeneği çok fazla.
 - Tempo: Döner kapı ile anında site değiştir — bu sadece bu haritada var. Duvarı ne zaman kırdığın, drop'u ne zaman kullandığın round'un akışını belirler. Çok erken oynama, çok geç de oynama — haritanın araçlarını doğru anda kullan.
 
 ## 2. Ölüm Bölgeleri
 - **A Main (Root Girişine Kadar)**: A Tree ve A Stairs'ten çapraz ateş gelir. Flash ya da smoke atmadan kuru girersen ölürsün. Önce util at, sonra gir.
-- **B Main Corridor**: B Upper'daki defender tüm odağını sana verir, çünkü tek açıdan kontrol ediyor. Duvarı kırmadan push atma — duvarı kırmadan içeri girersen karşında tek başınasın.
+- **A Main (Kırılabilir Duvar)**: A Main ile A Link arasındaki kırılabilir duvar sağlamken defender tek açıdan kontrol ediyor, tüm odağını sana verir. Duvarı kırmadan kuru girersen karşında tek başınasın — önce util at ya da execute anında duvarı kır, ikinci açıyı aç.
+- **B Main Corridor**: B Upper'daki defender uzun koridoru tek açıdan tutuyor. Flash ya da smoke atmadan dalarsan ilk atış onun. Önce görüş hattını kes, sonra gir.
 - **C Mound**: Mound'a çıktıktan sonra hareketsiz durma. C Main'den gelen attacker için sabit hedefsin. Yüksekliği kullan ama açıkta bekleme.
 - **Mid Link**: Mid'i kimse sahiplenmezse herkes kendi sahasına bakar, o kesişim boş kalır ve flank yolu açılır. Takımdan biri mid'i kapatmalı.
 - **Döner Kapı Geçişleri**: Kapıdan geçerken karşı tarafın peek attığını varsay. Kapıyı açıp direkt dalma — önce durumu oku, sonra geç.
@@ -24,20 +25,20 @@ MEANING: Tree'den ve Stairs'ten iki ayrı açı seni aynı anda görüyor. Defen
 COUNTER: Girmeden önce Tree'yi smoke'la. Stairs yönüne flash at. Flash patlar patlamaz swing at — arada boşluk bırakma. Girdikten sonra Root'u al, yoksa flank yersin.
 WHY: A Main dar, defender iki yükseklikten seni izliyor. Smoke görüş hattını keser. Flash defender'ı açıdan söker. Root'u kontrol etmeden yapılan her A execute flank riski taşır.
 
-**Pattern 2: B Duvar Timing Hataları**
-IF: Kırılabilir duvarı round başlar başlamaz kırıyorsun — her seferinde, hemen.
-MEANING: Defender iki şeyi öğreniyor: B'ye geliyorsun ve hangi taraftan geleceğini tahmin edebiliyor. Kendini ele veriyorsun.
-COUNTER: Duvarı execute anında kır, round başında değil. Önce B Main'den baskı yap — duvar sağlamken defender tek açıya odaklanır. Execute anında kır, ikinci girişi aç. Bazı round'larda hiç kırma — bu da bilgi manipülasyonu.
+**Pattern 2: A Duvar Timing Hataları**
+IF: A Main ile A Link arasındaki kırılabilir duvarı round başlar başlamaz kırıyorsun — her seferinde, hemen.
+MEANING: Defender iki şeyi öğreniyor: A'ya geliyorsun ve hangi taraftan geleceğini tahmin edebiliyor. Kendini ele veriyorsun.
+COUNTER: Duvarı execute anında kır, round başında değil. Önce A Main'den baskı yap — duvar sağlamken defender tek açıya odaklanır. Execute anında kır, A Link'e ikinci girişi aç. Bazı round'larda hiç kırma — bu da bilgi manipülasyonu.
 WHY: Duvar sağlam = defender tek açıya bakar. Duvar kırık = iki açıya bakmak zorunda. Bu kararı ne zaman verdiğin round'u belirler. Erken kırarsan bu avantajı defender'a teslim edersin.
 
 **Pattern 3: Döner Kapıyı Kullanmamak**
-IF: Takım döner kapıları hiç kullanmıyor — A ile C arasında hep dış kenardan rotate ediyorsunuz.
+IF: Takım döner kapıları hiç kullanmıyor — C ile B arasında hep dış kenardan rotate ediyorsunuz.
 MEANING: Haritanın en güçlü mekaniğini çöpe atıyorsun. Saldırıda split seçeneğin yok, savunmada rotasyonun yavaş.
 COUNTER:
-- Saldırıda: A Main'de baskı yarat, kapıdan 2 kişiyi C'ye gönder — defender A'ya dönerken C boş kalır.
+- Saldırıda: B Main'de baskı yarat, C Mound kapısından 2 kişiyi C'ye gönder — defender B'ye dönerken C boş kalır. (A tarafında ise A Main↔A Tree kapısıyla site içinde açı değiştir.)
 - Savunmada: Kapı sesini duy, karşı taraftan peek at.
-- Eco'da: Kapıyla hızlı site switch yap, defender'ın setup'ını boz.
-WHY: Kapı A ile C arasında 2-3 adımlık geçiş sağlar. Dış kenardan aynı rotasyon 5-6 kat uzun sürer. Bu fark round ortasında site değiştirmeyi mümkün kılar.
+- Eco'da: C Mound↔B Main kapısıyla hızlı rotate yap, defender'ın setup'ını boz.
+WHY: C Mound ile B Main'i bağlayan kapı çapraz-site geçişi 2-3 adıma indirir. Dış kenardan aynı rotasyon 5-6 kat uzun sürer. Bu fark round ortasında C ile B arasında site değiştirmeyi mümkün kılar.
 
 **Pattern 4: Silent Drop Farkındalıksızlığı**
 IF: Saldırıda Silent Drop kullanılmıyor, savunmada kontrol edilmiyor.
@@ -65,12 +66,12 @@ WHY: 3 siteli haritada her site'ta en fazla 2 kişi var. Biri gidince 1 kişi ka
 **Pattern 7: Post-Plant'te Kapı Kullanmamak**
 IF: Spike dikildi ama post-plant pozisyonlarını sadece site içinde alıyorsunuz.
 MEANING: Kapıyı kullanmayan takımın nerede olduğunu defender retake sırasında tam olarak bilir.
-COUNTER: Spike A'ya dikildiğinde 1 kişiyi kapıyla C tarafına gönder — retake sırasında kapı arkasında bekler. Spike C'ye dikildiğinde aynısını A için yap. Bu crossfire defender'ın retake'ini çok zorlaştırır.
+COUNTER: Spike C'ye dikildiğinde 1 kişiyi C Mound kapısıyla B tarafına gönder — retake sırasında kapı arkasında bekler. Spike B'ye dikildiğinde aynısını C için yap (aynı kapı iki yönü de bağlar). Bu crossfire defender'ın retake'ini çok zorlaştırır.
 WHY: Defender retake'te hem site içini hem kapı arkasını kontrol etmek zorunda kalır. Bu ek kontrol süresi defuse için zamanı azaltır. Kapı kullanan takım defender'a iki problemi birden çıkarır.
 
 **Pattern 8: B Anchor Sessiz Ölüm**
 IF: B anchor callout yapmadan, retake çağrısı vermeden yalnız ölüyor.
-MEANING: B'de kırılabilir duvar yüzünden push geldiğinde hızlı erirsin — ama bilgi vermeden ölürsen takım ne olduğunu anlayana kadar site çoktan gitmiş olur.
+MEANING: B'de iki giriş (B Main ve C Mound kapısı) aynı anda baskı yapabildiği için push geldiğinde hızlı erirsin — ama bilgi vermeden ölürsen takım ne olduğunu anlayana kadar site çoktan gitmiş olur.
 COUNTER: B anchor olarak ilk işin bilgi vermek, kill almak değil. Push gelir gelmez callout yap: kaç kişi, hangi yönden, duvar kırıldı mı. Sonra delay util'ini kullan (molly, slow, tuzak) ve geride kal. Kill fırsatı varsa al ama trade yemeyecek yerde dur — ölsen bile takım bilgiyi almış olsun.
 WHY: B anchor tek başına tutar, iki girişi kontrol etmek zorundadır. Bu rolün işi zaman kazanmak ve bilgi vermek. Sessiz ölüm takıma sıfır bilgi verir — en kötü ölüm budur.
 
@@ -98,9 +99,9 @@ WHY: Mid 3 site'a birden bağlandığı için etkisi katlanır. Mid'i bırakırs
 ## 5. Kompozisyon / Harita Etkileşim Notları
 - **Harbor**: Lotus'ta S-tier oyna. Duvarıyla 3 site arası geçişi smoke'la, kalkan kubbeyle spike'ı kapat, A Main push'unu giriş smoke'uyla destekle. Haritanın geniş yapısı ve çoklu giriş noktaları Harbor'un büyük util'lerine birebir oturur.
 - **Viper**: Duvarıyla A-C arasını ya da B-Mid arasını böl. Smoke'uyla üçüncü siteyi kontrol et. Tek controller'la 2 siteyi başka hiçbir ajan bu kadar iyi etkileyemez. Molly lineup'larını post-plant'te kullan — defuse deny için Lotus'ta çok sert.
-- **Raze**: Bot'uyla kırılabilir duvarı kır — ability harcamazsın, timing senin elinde olur. B Main ve C Main'de dash ile entry al. Bot'u dar koridorlara süre — bilgi gelir, mermi harcamazsın.
-- **Breach**: Stun'ı B Main'e bas, çoklu düşmanı vurur. Flash combo A Main girişine sanki o açı için yapılmış gibi oturur. Kırılabilir duvar arkasında bekleyen defender'ı molly ile cezalandır. Lotus'un dar girişleri Breach'in stun ve flash'ını doğal olarak güçlendirir.
-- **Killjoy**: B'yi anchor'lamak istiyorsan en iyi seçim budur. Tuzağı ve botu duvarı ve B Main'i aynı anda izleyecek şekilde koy. Ult'unu B'de bas — site kompakt olduğu için çıkış yok. Molly'sini duvar kırıldığı anda tetikle, geçişi orada kes.
+- **Raze**: Bot'uyla A Main↔A Link kırılabilir duvarını kır — ability harcamazsın, timing senin elinde olur. B Main ve C Main'de dash ile entry al. Bot'u dar koridorlara süre — bilgi gelir, mermi harcamazsın.
+- **Breach**: Stun'ı B Main'e bas, çoklu düşmanı vurur. Flash combo A Main girişine sanki o açı için yapılmış gibi oturur. A Main↔A Link kırılabilir duvarı kırıldıktan sonra arkada bekleyen defender'ı molly ile cezalandır. Lotus'un dar girişleri Breach'in stun ve flash'ını doğal olarak güçlendirir.
+- **Killjoy**: B'yi anchor'lamak istiyorsan en iyi seçim budur. Tuzağı ve botu B Main ile C Mound kapısını aynı anda izleyecek şekilde koy — B'nin iki girişini de duyarsın. Ult'unu B'de bas — site kompakt olduğu için çıkış yok. A'yı anchor'larken ise molly'sini A Main↔A Link kırılabilir duvarının arkasına ayarla, duvar kırıldığı anda tetikle, geçişi orada kes.
 - **Fade**: Recon'unu 3 siteyi taramak için kullan — bu kadar geniş bir haritada o bilgi çok kritik. Bot'unu döner kapı arkasına ve Silent Drop'a sok. Ult'unu dar koridorda bas, tüm takımı etkiler.
 - **Omen**: Kaçışıyla döner kapıyı bypass et — kapı sesi çıkmaz, defender ne olduğunu anlamaz. C Waterfall'a TP at, off-angle al. Flash'ını dar koridorlarda bas, kaçacak yer yok.
 - **Skye**: Flash'ını kapı arkasına at, teammate kapıdan geçerken güvende olsun. Bot'unu dar koridorlara ve kapı geçişlerine süre — bilgi gelir, sen açılmadan önce ne olduğunu bilirsin.
@@ -108,7 +109,7 @@ WHY: Mid 3 site'a birden bağlandığı için etkisi katlanır. Mid'i bırakırs
 ## 6. Koçluk Satırları
 - "Lotus'ta round kapı, duvar, drop'la başlar. Bunları kullanmıyorsan haritanın yarısında yoksun."
 - "Kırılabilir duvarı her round kırmak strateji değil, refleks. Strateji şu: onu ne zaman kırıp ne zaman kırmayacağını seçmek."
-- "Döner kapı ses çıkarır — bu seni de satar, düşmanı da. O sesi fake olarak kullan. Kapıyı açıp geçme, sesle kafayı karıştır."
+- "Döner kapı ses çıkarır ve minimap'te 10 saniye dönerken herkese görünür — bu seni de satar, düşmanı da. O sesi fake olarak kullan. Kapıyı açıp geçme, sesle kafayı karıştır. Çapraz-site rotate için C Mound↔B Main kapısını kullan; A tarafındaki kapı (A Main↔A Tree) site içi açı içindir."
 - "3 siteli haritada fazla rotate etmek en çok round öldüren şeydir. Ses duydun diye 3 kişi gönderme — önce bilgiyi al, sonra rotate et."
 - "Silent Drop'u saldırıda kullanmıyorsan A execute'un tek yönlü kalır. Savunmada kontrol etmiyorsan arkandan girerler."
 - "B anchor'ın işi öldürmek değil, yaşamak ve bilgi vermek. Sessiz ölürsen takıma sıfır katkın olur."
@@ -138,9 +139,9 @@ Her şeyi biliyorsun. Farkı yaratan şey round bazında okuma. Rakip hangi giri
 - Defender tarafında gereksiz peek atma. Silahını kaybedersen sonraki round 3 siteyi util'siz savunursun.
 
 ## 9. Ajan Bazlı İpuçları
-- **Raze**: Bot'unla kırılabilir duvarı kır — B Main ve C Main'e dash ile gir, bu iki noktada çok işe yarar. Molly'n dar koridorlarda alanı tutmana yardımcı olur. Ult'unu B site ve C site'ta kullan, kompakt alan olduğu için her şeyi vurur. Bot'unu döner kapı arkasını ve Silent Drop'u kontrol etmek için at.
-- **Breach**: Stun'ı B Main'de at, birden fazla düşmanı yakalar. Flash combo'yu A Main girişinde uygula — önce flash at, sonra teammate swing atsın. Molly ile kırılabilir duvar arkasında bekleyen defender'ı cezalandır; spike kurulduktan sonra aynı şeyi defuse deny için kullan. Ult'unu B site gibi dar alanlarda kullan, tüm takımı etkiler.
-- **Killjoy**: B anchor için en iyi seçim. Tuzağını B Main'i izleyecek şekilde koy, botunu kapı tarafına ya da kırık duvara yerleştir. Molly'ni duvar kırılma anında ya da spike kurulduktan sonra defuse deny için bırak. Ult'unla B site'a gelecek execute'u durdurabilirsin. A site'ta tuzağını Silent Drop'a baktır.
+- **Raze**: Bot'unla A Main↔A Link kırılabilir duvarını kır — A girişini açar, ability harcamadan ikinci açıyı kazanırsın. B Main ve C Main'e dash ile gir, bu iki noktada çok işe yarar. Molly'n dar koridorlarda alanı tutmana yardımcı olur. Ult'unu B site ve C site'ta kullan, kompakt alan olduğu için her şeyi vurur. Bot'unu döner kapı arkasını ve Silent Drop'u kontrol etmek için at.
+- **Breach**: Stun'ı B Main'de at, birden fazla düşmanı yakalar. Flash combo'yu A Main girişinde uygula — önce flash at, sonra teammate swing atsın. Molly ile A Main↔A Link kırılabilir duvarının arkasında bekleyen defender'ı cezalandır; spike kurulduktan sonra aynı şeyi defuse deny için kullan. Ult'unu B site gibi dar alanlarda kullan, tüm takımı etkiler.
+- **Killjoy**: B anchor için en iyi seçim. Tuzağını B Main'i izleyecek şekilde koy, botunu C Mound kapısı tarafına yerleştir — B'nin iki girişini birden duyarsın. A'yı anchor'larken botunu A Main↔A Link kırılabilir duvarına baktır, molly'ni duvar kırılma anında ya da spike kurulduktan sonra defuse deny için bırak. Ult'unla site'a gelecek execute'u durdurabilirsin. A site'ta ayrıca tuzağını Silent Drop'a baktır.
 - **Fade**: Recon'unla 3 site'a bilgi topla — Lotus'ta bu bilgi her şeyden değerli. Bot'unu döner kapı arkasına ve dar koridorlara sok. Ult'unu A Main ya da B Main'de at, tüm saldırı grubunu yakalar. Ult'unu spike kurulduktan sonra defuse deny için de kullanabilirsin.
 - **Omen**: Kaçışınla döner kapıyı ses çıkarmadan geç — defender kapı sesini beklerken sen çoktan karşı taraftasın. Smoke'unla 3 site arasına perde çek. Flash'ını A Main ve B Main gibi dar girişlerde kullan, tüm koridoru körleştirir. Ult'unla haritanın herhangi bir yerine TP at, defender'ın düzenini boz.
 - **Viper**: Duvarınla A-C arasını ya da B-Mid arasını böl — tek ability ile 2 site'ı etkilersin. Smoke'unla üçüncü site'ı kontrol al. Molly lineup'larını 3 site'ın hepsinde öğren, spike kurulduktan sonra defuse deny için şart. Ult'unu B site gibi kompakt alanlarda kullan, alanın tamamını kapatır.
@@ -148,14 +149,14 @@ Her şeyi biliyorsun. Farkı yaratan şey round bazında okuma. Rakip hangi giri
 - **Harbor**: Lotus'ta en güçlü controller. Duvarınla A Main'den C Main'e kadar görüş hattı kır — tek util ile 3 site arası geçişi smoke'larsın. Kalkan kubbeni spike'ın üstüne at, kubbe içinde defuse yapmak neredeyse imkânsız. Giriş smoke'unu A Main push'unda kullan. Ult'unu geniş site'larda birden fazla düşmanın üstüne bas.
 
 ## 10. Post-Plant Stratejileri
-- **A Site Post-Plant**: Spike'ı A Default'a, kutuların arkasına dik. Sonra A Main ve A Root'ta crossfire kur — defender A Stairs ya da Tree'den gelecek, iki taraftan ateş altında kalacak. Tree'yi smoke'la, yoksa defender yüksekten seni görür. Silent Drop'u unutma — biri oradan düşüp spike'a ulaşabilir, birini oraya baktır.
-- **B Site Post-Plant**: Spike'ı B Default'a dik. B Main ve kırık duvar arkasında crossfire kur — defender B Upper'dan gelecek. Kırık duvar burada sana ekstra bir açı verir, defender oraya yaklaşmak zorunda kalır. Viper'ın molly'sini ya da Brimstone'un molly'sini spike üstüne bırak, defuse yaptırma.
+- **A Site Post-Plant**: Spike'ı A Default'a, kutuların arkasına dik. Sonra A Main ve A Root'ta crossfire kur — defender A Stairs ya da Tree'den gelecek, iki taraftan ateş altında kalacak. Kırılabilir duvarı execute'ta kırdıysan A Link açısı sana ekstra bir crossfire kolu verir, defender oraya da bakmak zorunda kalır. Tree'yi smoke'la, yoksa defender yüksekten seni görür. Silent Drop'u unutma — biri oradan düşüp spike'a ulaşabilir, birini oraya baktır.
+- **B Site Post-Plant**: Spike'ı B Default'a dik. B Main ve C Mound kapısı tarafında crossfire kur — defender B Upper'dan ya da kapıdan gelecek, iki girişe birden bakmak zorunda kalır. Viper'ın molly'sini ya da Brimstone'un molly'sini spike üstüne bırak, defuse yaptırma.
 - **C Site Post-Plant**: Spike'ı C Default'a, Waterfall tarafına dik. C Main ve C Mound'da crossfire kur — Mound'un yüksekliğini post-plant'te kullan. Waterfall'ı izle, defender oradan sokulacak. C Hall'dan gelen rotate'u da bir gözle takip et.
-- **Kapı Kullanımı Post-Plant'te**: A'ya spike diktiysen kapıdan 1 kişiyi C tarafına gönder. Defender A'ya retake yaparken kapı arkasında biri beklesin — hem site içini hem kapı arkasını kontrol etmek zorunda kalacaklar, retake planları çöküyor. C'ye diktiysen aynısını tersine yap, 1 kişiyi kapıyla A tarafına at.
+- **Kapı Kullanımı Post-Plant'te**: C'ye spike diktiysen C Mound↔B Main kapısından 1 kişiyi B tarafına gönder. Defender C'ye retake yaparken kapı arkasında biri beklesin — hem site içini hem kapı arkasını kontrol etmek zorunda kalacaklar, retake planları çöküyor. B'ye diktiysen aynısını tersine yap, aynı kapıyla 1 kişiyi C tarafına at. (A tarafındaki kapı A Main↔A Tree site içi olduğundan A post-plant'inde A Link/Root crossfire'ına yaslan.)
 - **3 Site Retake Farkı**: Lotus'ta 3 site var, defender retake için toplanmak zorunda. Spike dikildikten sonra bu sana çalışır. Lineup'lar ve delay util bu yüzden bu haritada çok daha değerli — defender geç kalır, spike tıklar.
 
 ## 11. Anti-Strat İpuçları
-- Rakip her round B duvarını kırıyorsa: duvar arkasında bekleme. Duvar kırılma anında peek at, trade al. Molly'ni kırılma noktasına göm — geçerken yer.
+- Rakip her round A duvarını (A Main↔A Link) kırıyorsa: duvar arkasında bekleme. Duvar kırılma anında peek at, trade al. Molly'ni kırılma noktasına göm — geçerken yer.
 - Rakip döner kapıyla sürekli rotate ediyorsa: kapının iki tarafına da tel ya da tuzak bırak. Kapı açılır açılmaz bilgi gelir, karşı taraftan peek at — kapıdan geçen oyuncu o an savunmasız.
 - Rakip A Silent Drop'u kullanıyorsa: Drop'un altına tel, tuzak ya da bot koy. Util yoksa Drop'u sürekli peek etmek zorunda kalırsın, bu seni A Main'e karşı açık bırakır. Drop kapalıysa dikkatini A Main'e ver.
 - Rakip C Mound'da agresif oynuyorsa: C Main'den Mound'a erken smoke at, flash'la contest et. Agresif Mound oyuncusu smoke içinden push etmek zorunda kalır — bu senin lehine. Ya da Mound'u hiç umursama, siteye farklı açıdan gir.

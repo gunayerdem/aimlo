@@ -2,52 +2,52 @@
 
 ## 1. Rol Kimliği
 
-Veto bilgi keser. Tuzağıyla düşmanın recon araçlarını yok eder, mollysiyle push atan düşmanı yerinde kilitler, ışınlanmasıyla beklenmedik açılara geçer, ultuyla düşman utility'sinin hiçbirini hissetmez.
+Veto bilgi keser. Önleyicisiyle düşmanın recon araçlarını yok eder, yakınlık tuzağıyla push atan düşmanı yerinde bağlar, ışınlanmasıyla beklenmedik açılara geçer, ultuyla düşman utility'sinin hiçbirini hissetmez.
 
 Cypher bilgi toplar, Killjoy alan tutar — Veto ise düşmanın bilgi toplamasını keser. Düşman kör girince execute'lar tahmine döner. O körlüğü sen yaratırsın.
 
 ## 2. Yetenek Seti
 
-- **Molly (Q)** — Parça atar. Vurulan düşman yerinde kalır, sesini kaybeder, canı erir. Push atan birini durdururken üçü birden çalışır. Düşman hareket halindeyken at — pozisyon almışsa değeri düşer.
+- **Yakınlık tuzağı (Q)** — Yere bir tuzak yerleştirirsin. Yere düşünce kurulur ve görünmez olur; menzilindeki görüş hattına bir düşman girdiğinde otomatik tetiklenir. Tetiklenen düşmanı yerinde bağlar, sesini kaybettirir (sağırlaştırır) ve canını eritir. Atılıp anında hasar veren bir molotof değil — kör köşeye, düşmanın geçeceği yere kur. Düşman kurulmadan önce vurup yok edebilir; bu yüzden görünür yere koyma.
 - **Işınlanma (C)** — Yere bir nokta bırakırsın. O noktaya bakarken tekrar bas, oraya ışınlanırsın. Satın alma aşamasında geri alıp yeniden koyabilirsin. Beklenmedik açı tutmak ve hızlı yer değiştirmek için.
-- **Tuzak (E)** — İmza yeteneğin. Bir noktaya koy, tekrar basınca aktive et. Aktifken o bölgeye giren ya da oradan geçen her düşman recon aracını, drone'u ve fırlatılan utility'yi yok eder.
+- **Önleyici (E)** — İmza yeteneğin. İleriye bir önleyici fırlat, tekrar basınca aktive et. Aktifken o bölgeye giren ya da oradan geçen her düşman recon aracını, drone'u ve fırlatılan/seken utility'yi yok eder (recon oku, drone, grenade, hatta Sage ve Deadlock duvarları). Düşman onu silahla vurup kırabilir; bu yüzden gizli kur.
 - **Ult (X)** — Aktive edince hiçbir kötü etki sana işlemez. Flash, yetenek kapatma, can eritme, kör etme, sersemletme — hiçbiri geçmez. 1v2-1v3'te düşman seni durdurmak için ne atarsa atsın, sen yürümeye devam edersin.
 
 ## 3. Temel Sorumluluklar
 
-- **Tuzakla bilgiyi kes**: Düşman recon attığında tuzağı aktive et. Recon, drone, fırlatılan utility — hepsi gider. Sonra takıma çağır: "Recon gitti, kör geliyorlar."
-- **Mollyle push'u durdur**: Ayak sesi duyduğunda ya da takımdan "geliyor" çağrısı geldiğinde mollyi at. Düşman hareket halindeyken at — içeri girince değil.
+- **Önleyiciyle bilgiyi kes**: Düşman recon attığında önleyiciyi aktive et. Recon, drone, fırlatılan utility — hepsi gider. Sonra takıma çağır: "Recon gitti, kör geliyorlar."
+- **Yakınlık tuzağıyla push'u durdur**: Tuzağı düşmanın geçeceği kör köşeye önceden kur. İçinden geçen düşmanı otomatik bağlar, sağırlaştırır ve canını eritir — sen sesi duyup tepki verirsin. Atılıp anında patlayan bir molotof değil; girişten önce yerini almış olmalı.
 
-- **Yetenek kapatma (suppress) ile ilgili not**: Düşman seni susturursa (KAY/O bıçağı, Tejo recon'u, Tejo ultu) tuzağın ve mollyin çalışmaz. O pencerede yeni yetenek de koyamazsın — geleceğini hissedince ultunu aç.
+- **Yetenek kapatma (suppress) ile ilgili not**: Düşman seni susturursa (KAY/O bıçağı, Tejo recon drone'u) yakınlık tuzağın ve önleyicin çalışmaz. O pencerede yeni yetenek de koyamazsın — geleceğini hissedince ultunu aç.
 - **Işınlanmayla açı değiştir**: Noktayı her turda aynı yere koyma. Bir turda agresif pozisyon tut, sonraki turda retake için farklı yerden flankla. Düşman nereden çıkacağını bilemesin.
 - **Ultu clutch için sakla**: Tam takım dövüşünde düşmanın engelleyici yetenekleri (flash, yavaşlatma, sersemletme) takım arkadaşlarına dağılır. Tek başına kaldığında düşman seni durdurmak için her şeyi atar — ultu tam o anda aç.
 - **Her inkarı çağır**: Recon yok ettin mi, hemen söyle. Takım bunu bilmezse kör düşmana karşı bile temkinli oynar — avantajı boşa harcarsın.
 
 ## 4. Sık Yapılan Hatalar
 
-- Tuzağı düşman bir şey atmadan erken aktive etmek — pencere kapanır, boşa gider
-- Mollyi düşman içeri girdikten sonra atmak — push sırasında at, push bittikten sonra değil
+- Önleyiciyi düşman bir şey atmadan erken aktive etmek — pencere kapanır, boşa gider
+- Yakınlık tuzağını düşman push'u başladıktan sonra kurmaya çalışmak — push gelmeden, geçeceği köşeye önceden kur
 - Işınlanma noktasını her turda aynı yere koymak — düşman ışınlandığın anı önceden nişanlar
 - Ultu takım dövüşünde erkenden açmak — clutch ve retake için sakla
-- Tuzağa güvenip silah pozisyonunu boşa atmak — tuzak seni taşımaz, pozisyon taşır
+- Önleyiciye güvenip silah pozisyonunu boşa atmak — yetenek seni taşımaz, pozisyon taşır
 - Utility inkarını takıma söylememek — çağrısız inkar avantaja dönmez
-- Mollyi takımın geçeceği alana atmak — kendi geçişini kaparsın
+- Yakınlık tuzağını takımın geçeceği alana kurmak — kendi geçişini kaparsın
 - Tuttuğun site'ı bırakıp erken rotasyona çıkmak — sentinel çapadır, takım çağrısı olmadan terk etme
-- Tuzağı çok ileri, görüş hattının dibine koymak — düşman vurup susturur, sen duymazsın bile
+- Önleyiciyi çok ileri, görüş hattının dibine koymak — düşman vurup kırar, sen duymazsın bile
 
 ## 5. Kalıp -> Anlam
 
-**IF** Tuzağı aktive ediyorsun ama düşmanın recon aracı yok olmuyor
-**MEANING** Tuzak yanlış hatta — recon başka yerden geliyor. Ya da düşman recon atmadan push atıyor.
-**COUNTER** Tuzağı düşmanın recon attığı hatta koy. Recon A main'den geliyorsa tuzak A main girişinde dursun. Düşman recon atmadan geliyorsa bu turda tuzak değersiz — mollye ve silah pozisyonuna geç.
-**WHY** Doğru hatta tuzak otomatik yok eder. Yanlış hatta boş alan bekleyen pahalı bir kutudur.
+**IF** Önleyiciyi aktive ediyorsun ama düşmanın recon aracı yok olmuyor
+**MEANING** Önleyici yanlış hatta — recon başka yerden geliyor. Ya da düşman recon atmadan push atıyor.
+**COUNTER** Önleyiciyi düşmanın recon attığı hatta koy. Recon A main'den geliyorsa önleyici A main girişinde dursun. Düşman recon atmadan geliyorsa bu turda önleyici değersiz — yakınlık tuzağına ve silah pozisyonuna geç.
+**WHY** Doğru hatta önleyici düşman utility'sini otomatik yok eder. Yanlış hatta boş alan bekleyen pahalı bir araçtır.
 
 ---
 
-**IF** Mollyi atıyorsun ama düşman çoktan pozisyon almış
-**MEANING** Zamanlamayı kaçırdın. Molly hareket eden düşmana değer verir, durana değil.
-**COUNTER** Ayak sesi duyduğunda at. Takımdan "geliyor" çağrısı geldiğinde at. Köşeye geçmiş, kapıyı tutuyorsa molly anlamsız — silahla aç.
-**WHY** Hareket eden düşmana molly tuzaktır. Pozisyon almış, durağan hedefe ise gereksiz harcamadır.
+**IF** Yakınlık tuzağını push başladıktan sonra kurmaya çalışıyorsun, geç kalıyor
+**MEANING** Zamanlamayı kaçırdın. Tuzak önceden kurulup gizlenmeli — düşman geldiğinde kendiliğinden tetiklenir, anlık atılan bir şey değil.
+**COUNTER** Tuzağı tur başında, düşmanın geçeceği kör köşeye kur. İçinden geçen düşmanı otomatik bağlar, sağırlaştırır ve canını eritir. Düşman çoktan köşeye geçmiş, kapıyı tutuyorsa o noktada tuzak işe yaramaz — silahla aç.
+**WHY** Önceden kurulu gizli tuzak, geçen düşmanı kendiliğinden yakalar ve sana erken uyarı verir. Push anında kurmaya çalışmak hem geç kalır hem görünür olur.
 
 ---
 
@@ -66,14 +66,14 @@ Cypher bilgi toplar, Killjoy alan tutar — Veto ise düşmanın bilgi toplamas�
 ---
 
 **IF** Düşman takım recon atmayı bıraktı ama Veto aynı oyunu oynuyor
-**MEANING** Tuzak amacına ulaştı — düşman recon'dan vazgeçti. Ama sen hâlâ recon bekliyorsun.
-**COUNTER** Recon atmayan düşman kör giriyor — bu senin avantajın. Tuzağı spike kurulduktan sonrasına sakla: smoke ve heal utility'sini yok et. Girişi mollyle ve silahla tut.
+**MEANING** Önleyici amacına ulaştı — düşman recon'dan vazgeçti. Ama sen hâlâ recon bekliyorsun.
+**COUNTER** Recon atmayan düşman kör giriyor — bu senin avantajın. Önleyiciyi spike kurulduktan sonrasına sakla: smoke ve heal utility'sini yok et. Girişi yakınlık tuzağıyla ve silahla tut.
 **WHY** Düşmanın recon'dan vazgeçtiği an, senin kazandığın andır. Buna uyum sağlamazsan avantajı boşa harcarsın.
 
 ---
 
-**IF** Veto her turda aynı tuzak zamanlamasını kullanıyor
-**MEANING** Düşman recon zamanlamanı okudu. Yem recon atıyor, sen tuzağı erkenden tüketiyorsun, asıl recon geçiyor.
+**IF** Veto her turda aynı önleyici zamanlamasını kullanıyor
+**MEANING** Düşman recon zamanlamanı okudu. Yem recon atıyor, sen önleyiciyi erkenden tüketiyorsun, asıl recon geçiyor.
 **COUNTER** Zamanlamayı değiştir: bir turda anında aktive et, sonraki turda bekle, üçüncüde hiç aktive etme. İlk recon'u geçir, ikincisini yok et. Düşman hangi recon'un gideceğini bilemesin.
 **WHY** Sabit zamanlama düşmana seni okutur. Değişen zamanlama recon planlamasını imkansızlaştırır.
 
@@ -81,15 +81,15 @@ Cypher bilgi toplar, Killjoy alan tutar — Veto ise düşmanın bilgi toplamas�
 
 **IF** Takım arkadaşları Veto'nun inkarından yararlanamıyor
 **MEANING** İletişim yok. Takım düşmanın kör olduğunu bilmiyor, temkinli oynuyor.
-**COUNTER** Her tuzak aktivasyonundan sonra çağır: "Recon gitti, bilgileri yok" ya da "Drone'u yedim, kör geliyorlar." Takım bunu duyunca agresif pozisyon alır.
+**COUNTER** Her önleyici aktivasyonundan sonra çağır: "Recon gitti, bilgileri yok" ya da "Drone'u yedim, kör geliyorlar." Takım bunu duyunca agresif pozisyon alır.
 **WHY** Çağrısız inkar takımı hâlâ korkuyla oynatır. Çağrılı inkar takımı kör düşmana baskı yaptırır.
 
 ---
 
 **IF** Veto spike kurulduktan sonra etkisiz kalıyor
-**MEANING** Tüm utility tur başında bitti. Oysa tuzak ve molly spike kurulduktan sonra da büyük değer taşır.
-**COUNTER** En az birini sakla. Düşman retake'e smoke ve mollyle gelir — tuzak bunları yer. Molly defuse yapan düşmanı kilitler.
-**WHY** Spike kurulduktan sonra tuzak, düşmanın retake utility'sini götürür. Molly ise defuse girişimini durdurur.
+**MEANING** Tüm utility tur başında bitti. Oysa önleyici ve yakınlık tuzağı spike kurulduktan sonra da büyük değer taşır.
+**COUNTER** En az birini sakla. Düşman retake'e smoke ve mollyle gelir — önleyici bunları yer. Yakınlık tuzağı defuse yapan düşmanı bağlar.
+**WHY** Spike kurulduktan sonra önleyici, düşmanın retake utility'sini götürür. Yakınlık tuzağı ise defuse girişimini durdurur.
 
 ---
 
@@ -100,66 +100,66 @@ Cypher bilgi toplar, Killjoy alan tutar — Veto ise düşmanın bilgi toplamas�
 
 ---
 
-**IF** Tuzağı görüş hattının dibine, çok ileri bir noktaya koyuyorsun
-**MEANING** Düşman tuzağı görür görmez vurup susturuyor. Sen aktive edemeden ya da uyarı sesini duymadan tuzak ölüyor.
-**COUNTER** Tuzağı köşe arkasına, kör noktaya koy — düşman görmeden geçsin, sen sesi duyup tepki ver. Görüş açık bir noktaya koyacaksan en az birini gizli bir destek noktasına yedekle. Amaç önce uyarı, sonra inkar.
-**WHY** Görünen tuzak bedava vurulur ve sana sıfır bilgi bırakır. Gizli tuzak hem düşmanı yakalar hem sana erken uyarı verir.
+**IF** Yakınlık tuzağını görüş hattının dibine, çok açık bir noktaya kuruyorsun
+**MEANING** Düşman tuzağı görür görmez vurup kırıyor. Tuzak tetiklenemeden ya da sana uyarı sesi vermeden ölüyor.
+**COUNTER** Tuzağı köşe arkasına, kör noktaya kur — düşman görmeden geçsin, kendiliğinden tetiklensin, sen sesi duyup tepki ver. Görüş açık bir noktaya kuracaksan ikinci bir tuzağı gizli destek noktasına yedekle. Amaç önce uyarı, sonra inkar.
+**WHY** Görünen tuzak bedava kırılır ve sana sıfır bilgi bırakır. Gizli tuzak hem düşmanı yakalar hem sana erken uyarı verir.
 
 ---
 
-**IF** Düşman seni susturduktan sonra tüm tuzağın ve mollyin devre dışı kalıyor
-**MEANING** Yeteneğin kapatıldığında (suppress) hiçbiri çalışmaz. KAY/O bıçağı ya da ulttayken tuzak ve molly ölü util.
+**IF** Düşman seni susturduktan sonra tüm önleyicin ve yakınlık tuzağın devre dışı kalıyor
+**MEANING** Yeteneğin kapatıldığında (suppress) hiçbiri çalışmaz. KAY/O bıçağı sana saplıyken önleyici ve yakınlık tuzağı ölü util.
 **COUNTER** Yeteneğin kapatılacağını hissedince ya da KAY/O ultu duyunca ultunu aç — bu etki sana geçmez, yetenekler açık kalır. Bıçak atıldıysa hızlıca yok et ya da kırılma alanından çık. Util'ini bu beklentiyle erken harcama, çünkü o pencerede yenisini koyamazsın.
 **WHY** Bağışıklık ultun tam olarak yetenek kapatmayı sıfırlamak için var. Doğru anda açarsan düşmanın susturma yatırımı boşa gider; geç açarsan sentinel oyunun çöker.
 
 ## 6. Harita Etkileşimleri
 
-- **Ascent**: Mid bilgiyle döner. Tuzağı mid'e koy — düşman recon mid'den geçemez, ne yapacağını bilemez. A main ve B main'de molly push'u durdurur. Işınlanmayla mid-A veya mid-B arası hızlı geç.
-- **Haven**: Üç site var, saldıran hangi site'ın boş olduğunu bulmak için recon'a muhtaç. Tuzak bu bilgiyi keser. Garage'da molly rotasyon kesen bir engel olarak çalışır. Işınlanmayla C'den A'ya hızlı geç.
-- **Breeze**: Uzun görüş hatları bilgiyi hayati kılar. Tuzakla recon'u kes — düşman kör taahhüde girmek zorunda kalır. Açık alanda mollyden kaçış uzun sürer. Ultla utility spam'ini geçip push at.
-- **Split**: Mid'de bilgi savaşı döner. Tuzak mid'de recon'u keser, orta kontrol saldıran için tahmine döner. A heaven ve B main'de molly savunma pozisyonunu kilitler. Işınlanma ramplar arası geçiş sağlar.
-- **Sunset**: Mid koridorda tuzak güçlü. İki takım da yaklaşımını belirlemek için bilgiye güvenir — tuzak bunu keser. B market'ta molly dar alanda kaçışa yer bırakmaz.
+- **Ascent**: Mid bilgiyle döner. Önleyiciyi mid'e koy — düşman recon mid'den geçemez, ne yapacağını bilemez. A main ve B main'de yakınlık tuzağı push'u durdurur. Işınlanmayla mid-A veya mid-B arası hızlı geç.
+- **Haven**: Üç site var, saldıran hangi site'ın boş olduğunu bulmak için recon'a muhtaç. Önleyici bu bilgiyi keser. Garage'da yakınlık tuzağı rotasyon kesen bir engel olarak çalışır. Işınlanmayla C'den A'ya hızlı geç.
+- **Breeze**: Uzun görüş hatları bilgiyi hayati kılar. Önleyiciyle recon'u kes — düşman kör taahhüde girmek zorunda kalır. Açık alanda yakınlık tuzağına yakalanan düşmanın kaçışı uzun sürer. Ultla utility spam'ini geçip push at.
+- **Split**: Mid'de bilgi savaşı döner. Önleyici mid'de recon'u keser, orta kontrol saldıran için tahmine döner. A heaven ve B main'de yakınlık tuzağı savunma pozisyonunu kilitler. Işınlanma ramplar arası geçiş sağlar.
+- **Sunset**: Mid koridorda önleyici güçlü. İki takım da yaklaşımını belirlemek için bilgiye güvenir — önleyici bunu keser. B market'ta yakınlık tuzağı dar alanda kaçışa yer bırakmaz.
 
-Genel kural: Tuzağı her zaman düşmanın bilgiye en çok güvendiği daralma noktasına koy — geniş açık alana değil, mid'in, main'in ya da rotasyon koridorunun düşmanın görmeden geçeceği kör köşesine. Mollyi savunmada düşman hareket halindeyken at; saldırıda ise post-plant'te defuse açısını kapatmak için sakla. Işınlanma noktasını turn başında değil, çağrı sonrası gerçek rotasyon ihtiyacına göre koy.
+Genel kural: Önleyiciyi her zaman düşmanın bilgiye en çok güvendiği daralma noktasına koy — geniş açık alana değil, mid'in, main'in ya da rotasyon koridorunun düşmanın recon'unu geçireceği hatta. Yakınlık tuzağını savunmada düşmanın geçeceği kör köşeye önceden kur; saldırıda ise post-plant'te defuse açısını kapatmak için sakla. Işınlanma noktasını turn başında değil, çağrı sonrası gerçek rotasyon ihtiyacına göre koy.
 
 ## 7. Eşleştirme Notları
 
-- **Sova karşı**: Sova'nın her şeyi bilgi toplamaya dayanır. Recon oku, drone, recon lineup'ı — tuzak hepsini yer. Sova karşı doğru tuzak pozisyonu, o tur onun yarısını sahadan siler.
-- **Fade karşı**: Recon iti ve recon küresi yüksek değerli keşif araçları. Tuzak ikisini de yok eder. Recon iti seni takip ederken mollyi at — düşman hem kilitlenir hem bilgisiz kalır.
-- **KAY/O karşı**: KAY/O yeteneğini kapatırsa (suppress) tuzak ve molly çalışmaz. Bunun geldiğini hissedince ultu aç — bu etki sana geçmez. Bu eşleşmede ult zamanlaması her şeyi belirler.
-- **Raze ve bilgisiz giren duelciler karşı**: Bilgiye bağımlı değiller. Raze nerede olduğunu bilmeden bomba atar, Jett dash ile dalar. Bu eşleşmede tuzak az değer verir. Mollye ve silah pozisyonuna yaslan.
-- **Tejo karşı**: Recon drone'u ve güdümlü mollyi tuzağa gider. Tejo'nun recon zincirini kırmak Veto'nun en güçlü eşleşmelerinden biri. Ama Tejo'nun drone'u seni susturursa (yeteneğini kapatma) tuzak da çalışmaz — önce zamanlamayı kazan, yetenek kapatma penceresinde util koymaya çalışma.
+- **Sova karşı**: Sova'nın her şeyi bilgi toplamaya dayanır. Recon oku, drone, recon lineup'ı — önleyici hepsini yer. Sova karşı doğru önleyici pozisyonu, o tur onun yarısını sahadan siler.
+- **Fade karşı**: Recon iti ve recon küresi yüksek değerli keşif araçları. Önleyici ikisini de yok eder. Recon iti seni takip ederken yakınlık tuzağına çek — düşman hem bağlanır hem bilgisiz kalır.
+- **KAY/O karşı**: KAY/O yeteneğini kapatırsa (suppress) önleyici ve yakınlık tuzağı çalışmaz. Bunun geldiğini hissedince ultu aç — bu etki sana geçmez. Bu eşleşmede ult zamanlaması her şeyi belirler.
+- **Raze ve bilgisiz giren duelciler karşı**: Bilgiye bağımlı değiller. Raze nerede olduğunu bilmeden bomba atar, Jett dash ile dalar. Bu eşleşmede önleyici az değer verir. Yakınlık tuzağına ve silah pozisyonuna yaslan.
+- **Tejo karşı**: Recon drone'u ve güdümlü füze saldırısı önleyiciye gider. Tejo'nun recon zincirini kırmak Veto'nun en güçlü eşleşmelerinden biri. Ama Tejo'nun drone'u seni susturursa (yeteneğini kapatma) önleyici de çalışmaz — önce zamanlamayı kazan, yetenek kapatma penceresinde util koymaya çalışma.
 
 ## 8. Oyuncuya Ne Söylenmeli
 
 ### İyi oynuyorsa
 
-Tuzağı recon sesini duyar duymaz aktive ediyorsun, mollyi push anında atıyorsun, her inkarı takıma çağırıyorsun. Düşman recon'unu attığını görüyor ama sıfır bilgi dönüyor. İlk turda kötü lineup zannediyor. 2-3 recon yok edildikten sonra tuzağı fark ediyor — ama ne zaman aktive edeceğini bilemiyor.
+Önleyiciyi recon sesini duyar duymaz aktive ediyorsun, yakınlık tuzağını push anında tetikletiyorsun, her inkarı takıma çağırıyorsun. Düşman recon'unu attığını görüyor ama sıfır bilgi dönüyor. İlk turda kötü lineup zannediyor. 2-3 recon yok edildikten sonra önleyiciyi fark ediyor — ama ne zaman aktive edeceğini bilemiyor.
 
-Aynen sürdür: 1. turda ses ipucuyla recon'u yok et ve çağır. 2. turda tuzağı farklı pozisyona koy. 3. turda ilk recon'u geçir, execute sırasındaki ikincisini yok et. Düşman seni okuyamasın.
+Aynen sürdür: 1. turda ses ipucuyla recon'u yok et ve çağır. 2. turda önleyiciyi farklı pozisyona koy. 3. turda ilk recon'u geçir, execute sırasındaki ikincisini yok et. Düşman seni okuyamasın.
 
 ### Zorlanıyorsa
 
-"Tuzak zamanlaman kayıyor. Recon sesini duyduktan sonra aktive et — önce değil. Rush yapıyorlarsa mollye ve silah pozisyonuna geç, bu turda tuzak değer vermez."
+"Önleyici zamanlaman kayıyor. Recon sesini duyduktan sonra aktive et — önce değil. Rush yapıyorlarsa yakınlık tuzağına ve silah pozisyonuna geç, bu turda önleyici değer vermez."
 
 ### Tahmin edilebilir olduğunda
 
-"Düşman zamanlamanı okudu. Bir turda erken aktive et, sonraki turda geç, üçüncüde hiç. Recon atmayı bıraktılarsa mollye ve ışınlanmaya yaslanıp standart sentinel oyununa geç."
+"Düşman zamanlamanı okudu. Bir turda erken aktive et, sonraki turda geç, üçüncüde hiç. Recon atmayı bıraktılarsa yakınlık tuzağına ve ışınlanmaya yaslanıp standart sentinel oyununa geç."
 
 ### Çapayı erken bırakıyorsa
 
-"Tuttuğun site'ı sesle terk etme — kesin çağrı bekle. Tuzağı arkana, geldiğin koridora koy ki çıkmak zorunda kalırsan flank'ı yakalasın. Sentinel yerinde durduğu sürece o site düşmana kapalı; erken çıkınca bedava açıyorsun."
+"Tuttuğun site'ı sesle terk etme — kesin çağrı bekle. Yakınlık tuzağını arkana, geldiğin koridora kur ki çıkmak zorunda kalırsan flank'ı yakalasın. Sentinel yerinde durduğu sürece o site düşmana kapalı; erken çıkınca bedava açıyorsun."
 
-### Tuzağı boşa harcıyorsa
+### Util'i boşa harcıyorsa
 
-"Tuzağın görünür yere koyma — vurup susturuyorlar. Köşe arkasına, kör noktaya koy: düşman görmeden geçsin, sen sesi duyup tepki ver. Önce uyarı, sonra inkar. Yeteneğin kapatılıyorsa (suppress) tuzaktan önce ultunu aç, yoksa util ölü kalır."
+"Yakınlık tuzağını görünür yere kurma — vurup kırıyorlar. Köşe arkasına, kör noktaya kur: düşman görmeden geçsin, kendiliğinden tetiklensin, sen sesi duyup tepki ver. Önce uyarı, sonra inkar. Yeteneğin kapatılıyorsa (suppress) util koymadan önce ultunu aç, yoksa hepsi ölü kalır."
 
 ## 9. Rank Modülasyonu
 
-**Düşük (Iron-Silver)**: Bu ranktaki düşmanlar recon'u verimli kullanmıyor — tuzak az değer verir. Önce pozisyonlamaya ve silah dövüşüne bak. Tuzağı basit tut: düşman recon attığında aktive et. Mollyi ayak sesinde at. Işınlanmayı şimdilik unut — önce temeller otursun.
+**Düşük (Iron-Silver)**: Bu ranktaki düşmanlar recon'u verimli kullanmıyor — önleyici az değer verir. Önce pozisyonlamaya ve silah dövüşüne bak. Önleyiciyi basit tut: düşman recon attığında aktive et. Yakınlık tuzağını ayak sesi geleceği köşeye önceden kur. Işınlanmayı şimdilik unut — önce temeller otursun.
 
-**Orta (Gold-Platinum)**: Tuzak zamanlaman çalışıyor ama tutarsız. Mollyi atıyorsun, çağrıyı yapmıyorsun. Her aktivasyonu ve her molly kilitlemesini çağırmaya odaklan. Işınlanmayı retake flanklaması için kullanmaya başla. Ultu clutch için sakla.
+**Orta (Gold-Platinum)**: Önleyici zamanlaman çalışıyor ama tutarsız. Yakınlık tuzağını kuruyorsun, çağrıyı yapmıyorsun. Her aktivasyonu ve her tuzak bağlamasını çağırmaya odaklan. Işınlanmayı retake flanklaması için kullanmaya başla. Ultu clutch için sakla.
 
-**Yüksek (Diamond-Ascendant)**: Tuzak zamanlaman oturmuş, ama recon atmayı bırakan düşmana uyum sağlaman gerek. Düşman recon'dan vazgeçtiğinde standart sentinel oyununa geçişi oku. Işınlanmayla farklı açı tut. Ultu duruma göre seç — her 1v2'de değil, utility spam'i geldiğinde.
+**Yüksek (Diamond-Ascendant)**: Önleyici zamanlaman oturmuş, ama recon atmayı bırakan düşmana uyum sağlaman gerek. Düşman recon'dan vazgeçtiğinde standart sentinel oyununa geçişi oku. Işınlanmayla farklı açı tut. Ultu duruma göre seç — her 1v2'de değil, utility spam'i geldiğinde.
 
-**Elit (Immortal-Radiant)**: Veto'nun değeri, düşmanın tüm bilgi stratejisini güvensiz kılmaktır. Her turda tuzak zamanlaman farklı olsun. Düşmanın bilgi ekonomisini oku — recon'a ne zaman bağlandıklarını, ne zaman vazgeçtiklerini ayırt et. Bıraktıklarında tuzağı spike kurulduktan sonrasına sakla. Ultu KAY/O'nun yetenek kapatması ya da Fade ultu anında aç. Işınlanmayla tur ortasında beklenmedik açı yarat.
+**Elit (Immortal-Radiant)**: Veto'nun değeri, düşmanın tüm bilgi stratejisini güvensiz kılmaktır. Her turda önleyici zamanlaman farklı olsun. Düşmanın bilgi ekonomisini oku — recon'a ne zaman bağlandıklarını, ne zaman vazgeçtiklerini ayırt et. Bıraktıklarında önleyiciyi spike kurulduktan sonrasına sakla. Ultu KAY/O'nun yetenek kapatması ya da Fade ultu anında aç. Işınlanmayla tur ortasında beklenmedik açı yarat.

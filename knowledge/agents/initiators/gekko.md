@@ -1,20 +1,20 @@
 # AJAN: Gekko
 
 ## 1. Rol Kimliği
-Gekko'yu diğer initiator'lardan ayıran tek şey şu: yaratıklarını geri alıp yeniden kullanırsın. Her yaratık işini bitirince yere düşen bir küreye (globül) dönüşür; o küreyi toplarsan o yeteneği aynı tur içinde bir daha kullanırsın. Flash'ı attın, globülü topladın, tekrar atarsın. Bot diker, globülü toplar, tekrar diker. Bu döngüyü çalıştırırsan tur başına iki kat yaratık çıkarırsın — başka hiçbir initiator bunu yapamaz. Bot spike diker ve defuse eder, flash yaratığın düşmanı kör eder ve bilgi getirir, molly atılınca yere yayılır ve birkaç saniyelik bekleme sonrası tek seferde patlayıp o anda alandakileri vurur, ult'un bölgedeki herkesi sersemletir.
+Gekko'yu diğer initiator'lardan ayıran tek şey şu: yaratıklarını geri alıp yeniden kullanırsın. Her yaratık işini bitirince yere düşen bir küreye (globül) dönüşür; o küreyi toplarsan o yeteneği aynı tur içinde bir daha kullanırsın. Flash'ı attın, globülü topladın, tekrar atarsın. Bot diker, globülü toplar, tekrar diker. Bu döngüyü çalıştırırsan tur başına iki kat yaratık çıkarırsın — başka hiçbir initiator bunu yapamaz. Bot spike diker ve defuse eder, flash yaratığın düşmanı kör eder ve bilgi getirir, molly yere yayılır yayılmaz alandakilere sürekli hasar vermeye başlar ve kısa bir bekleme sonunda patlayarak ek bir hasar darbesi indirir — hem alan-reddi hem patlama aracıdır, ult'un bölgedeki herkesi sersemletir.
 
 ## 2. Temel Sorumluluklar
 - Her yaratık kullanımından sonra globülü topla — Gekko'yu Gekko yapan tek şey budur.
 - Spike dikmek tehlikeliyse botu gönder — takımın beş kişi silahlı kalır, kimse savunmasız düşmez.
 - Girişten önce flash at, globülü geri al, ikinci dalgada tekrar at.
-- Molly'yi düşmanın tam patlama anında duracağı yere at: post-plant'ta spike'ın üzerine, dar köşeye ya da takım arkadaşının çekme/stun yeteneğiyle aynı anda. Molly anında yanmaz, birkaç saniye sonra tek seferde patlar — düşmanı o patlama anında orada tutacak şekilde kullan.
+- Molly'yi düşmanın geçmek ya da durmak zorunda olduğu yere at: post-plant'ta spike'ın üzerine, dar köşeye ya da takım arkadaşının çekme/stun yeteneğiyle aynı anda. Molly yere yayılır yayılmaz alandakilere sürekli hasar verir, kısa beklemenin sonunda da patlayıp ek hasar darbesi indirir — alana basan düşman ya hasarı yer ya pozisyonunu erken bırakmak zorunda kalır.
 - Ult'unu site alımında ve retake'te kullan — geniş alan sersemletmesi takımına pencere açar.
 - Globülün nereye düşeceğini yaratığı atmadan önce planla — toplamak için dövüşten sonra koşturma kendini.
 
 ## 3. Sık Yapılan Hatalar
 - Globülü yerde bırakmak — süresi dolunca o yetenek o tur için gitti demektir.
 - Botu hâlâ 2-3 düşman varken plant'a göndermek — bot çabuk ölür, site temiz değilken gönderme.
-- Molly'yi açık alana atmak — patlama gecikmeli olduğu için düşman bekleme süresinde rahatça yürüyüp çıkar, patladığında orada kimse kalmaz, sıfır etki.
+- Molly'yi geniş, geçişi serbest bir açık alana atmak — düşman alana hiç basmadan etrafından dolaşır; molly sürekli hasar verse de kimse içinden geçmezse değeri düşer. Molly'yi düşmanın geçmek zorunda olduğu dar hat ya da tutması gereken noktaya at.
 - Flash yaratığını düşmanın beklediği açıdan göndermek — aktive olmadan vurulur, düşer.
 - Ult'unu çok uzun yönlendirmek — o süre boyunca sen tamamen açıktasın.
 - Globülü toplamak için çok geride durmak — dövüşe katkı veremeyecek kadar uzakta kalma.
@@ -33,10 +33,10 @@ Gekko'yu diğer initiator'lardan ayıran tek şey şu: yaratıklarını geri al�
 **COUNTER** Botu ancak site'ta en fazla 1 düşman kaldığında ya da açılar smoke'la kapandığında gönder. Bot bir plant aracıdır, ilk temas aracı değil. Bot plant yaptığında takımın beş kişi silahlı durur — bunu boşa harcama.
 **WHY** Botun canı azdır, çapraz ateşte hemen düşer. Temizlenmiş ya da smoke'la kapanmış site'ta ise plant kesindir ve takımından kimse savunmasız kalmaz.
 
-**IF** molly sürekli sıfır hasar veriyor
-**MEANING** Molly'nin gecikmeli tek patlamasını yanlış okuyorsun — düşman bekleme süresinde alandan çıkıyor, patlama anında orada kimse kalmıyor.
-**COUNTER** Molly'yi düşmanın patlama anında zaten orada olacağı yere at: post-plant'ta spike'ın üzerine (defuse'u zorlamak için), dar köşelere, ya da takım arkadaşının çekme/stun yeteneğiyle aynı anda. Bekleyip de yürüyerek çıkacağı açık alana atma.
-**WHY** Molly anında yanan bir alan değil; yere yayılıp birkaç saniye bekledikten sonra tek seferde patlar ve sadece o patlama anında alanda olanları vurur. Doğru zamanda doğru noktada patlatırsan düşman ya hasarı yer ya pozisyonunu erkenden bırakmak zorunda kalır; yanlış yere atarsan bekleme süresinde çekilir ve patlama boşa gider.
+**IF** molly atıyorsun ama düşmanı ne durdurabiliyor ne hasar verebiliyorsun
+**MEANING** Molly'yi düşmanın hiç basmak zorunda olmadığı yere atıyorsun — alana girmeden etrafından dolaşıyor, sürekli hasarı da patlaması da boşa gidiyor.
+**COUNTER** Molly'yi düşmanın geçmek ya da tutmak zorunda olduğu yere at: post-plant'ta spike'ın üzerine (defuse'u zorlamak için), dar köşelere, ya da takım arkadaşının çekme/stun yeteneğiyle aynı anda. Geçişi serbest geniş açık alana atma.
+**WHY** Molly yere yayılır yayılmaz alandakilere sürekli hasar vermeye başlar, kısa beklemenin sonunda da patlayıp ek hasar darbesi indirir. Doğru noktaya atarsan düşman ya hasarı yer ya pozisyonunu erkenden bırakmak zorunda kalır — klasik alan-reddi. Yanlış noktaya atarsan düşman hiç basmaz, alanı boşuna kapatırsın.
 
 **IF** flash yaratığın kimseyi kör etmeden vuruluyor
 **MEANING** Flash'ı önceden nişan alınmış bir açıdan gönderiyorsun.
@@ -50,7 +50,7 @@ Gekko'yu diğer initiator'lardan ayıran tek şey şu: yaratıklarını geri al�
 
 **IF** globülü toplamak için dövüşün ortasında geri açılıyor ve oradan ölüyorsun
 **MEANING** Geri almayı yanlış zamanlıyorsun — globülü canlı toplama hayali için pozisyonunu bozuyorsun.
-**COUNTER** Globül 7 saniye yerde durur; acele etme. Önce mevcut dövüşü çöz veya takımın açıyı kapatsın, sonra topla. Geri almak senin kazancın ama hayatına mal olacaksa o tur tek kullanımı kabul et.
+**COUNTER** Globül uzun süre (yaklaşık 15-20 saniye) yerde durur; acele etme. Önce mevcut dövüşü çöz veya takımın açıyı kapatsın, sonra topla. Geri almak senin kazancın ama hayatına mal olacaksa o tur tek kullanımı kabul et.
 **WHY** Ölmüş bir Gekko hiç yaratık çıkaramaz. İkinci yaratık ancak hayatta kalırsan değerli — geri alma her zaman güvenli pencerede yapılır, dövüşün göbeğinde değil.
 
 **IF** botu hep en sona plant için saklıyorsun, hiç bilgi için kullanmıyorsun
@@ -64,11 +64,11 @@ Gekko'yu diğer initiator'lardan ayıran tek şey şu: yaratıklarını geri al�
 **WHY** Ult bir açılış/retake aracıdır: dar bir alanda birden çok düşmanı aynı anda durdurur, böylece takımın peş peşe kill alır. Takip ateşi olmadan attığın ult sadece düşmanı uyaran bir sesten ibarettir.
 
 ## 5. Harita Etkileşimleri
-- **Bind**: Botu teleporter'dan spike'a gönder — başka hiçbir ajan bunu yapamaz. Dar koridorlar (Hookah, Showers) flash'tan kaçmayı zorlaştırır; düşman dönecek yer bulamaz. Hookah gibi dar geçitlerde molly güçlüdür: patlamaya kadar bekleme süresinde düşmanın yana kaçacak yeri yoktur, patladığında hâlâ koridordadır. Bind'de smoke yoksa flash giriş için tek görüş engelleyicindir — önden gönder, körlüğün arkasından gir.
+- **Bind**: Botu teleporter'dan spike'a gönder — başka hiçbir ajan bunu yapamaz. Dar koridorlar (Hookah, Showers) flash'tan kaçmayı zorlaştırır; düşman dönecek yer bulamaz. Hookah gibi dar geçitlerde molly güçlüdür: sürekli hasarından yana sıyrılacak yer yoktur, geçmek isteyen düşman ya hasarı yer ya geri çekilir, patlama da koridordaki düşmana ek hasar darbesi vurur. Bind'de smoke yoksa flash giriş için tek görüş engelleyicindir — önden gönder, körlüğün arkasından gir.
 - **Sunset**: Mid dövüşleri Gekko'nun hızlı yaratık döngüsüne birebir uyar — mid kontrolünde flash at, topla, tekrar at. B site'ta bot plant güvenilirdir; market açısı smoke'la kapanınca botu içeri gönder.
 - **Haven**: Üç site birden fazla molly engelleme noktası verir. C long'da ult dar alandadır, kaçış yoktur — long'dan basan takımı durdurmak için ideal. Üç bombsite, savunmada botu rotasyon hattına önden keşfe gönderme fırsatı verir.
 - **Lotus**: Dönen kapılar flash için düşmanın göremeyeceği açılar yaratır — kapı sesini örtün, flash'ı arkasından at. Kapılardan botu plant'a gönder; kapı kapanınca bot içeride güvende kalır.
-- **Split**: Dar alanlar (Mail, Vents, Rafters) molly için idealdir — bekleme süresinde dar geçitten yana sıyrılmak zordur, patlama anında düşman hâlâ içerideyse ya hasarı yer ya pozisyonu erkenden bırakır. A ramp ve B'ye giriş dar olduğu için flash güçlüdür. Dar alanlarda globül toplamak da daha kolaydır, açı az.
+- **Split**: Dar alanlar (Mail, Vents, Rafters) molly için idealdir — sürekli hasarından dar geçitte yana sıyrılmak zordur, geçmek isteyen düşman ya hasarı yer ya pozisyonu erkenden bırakır; patlama da hâlâ içeride kalana ek hasar verir. A ramp ve B'ye giriş dar olduğu için flash güçlüdür. Dar alanlarda globül toplamak da daha kolaydır, açı az.
 
 ## 6. Eşleşme Notları
 - **Killjoy'a karşı**: Molly'yi turret veya botunun üzerine düşürürsen Killjoy'un yaratıklarını temizlersin. Botu keşfe gönder — tuzakları üzerine çeker, sen güvende kalırsın.

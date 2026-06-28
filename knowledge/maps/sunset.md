@@ -2,25 +2,25 @@
 
 ## 1. Harita Karakteri
 
-Sunset iki siteli bir harita ama her şeyi belirleyen tek bir yer var: Mid. Courtyard, Market ve Mid Top'tan oluşuyor bu bölge. Mid'i alırsan A'ya da B'ye istediğin gibi basarsın. Mid'i kaybedersen iki sitenin de arka kapısı açık kalır — rakip istediği yere kayar.
+Sunset iki siteli bir harita ama her şeyi belirleyen tek bir yer var: Mid. Courtyard, Tiles ve Mid Top/Bottom'dan oluşuyor bu bölge. Mid'i alırsan A'ya da B'ye istediğin gibi basarsın. Mid'i kaybedersen iki sitenin de arka kapısı açık kalır — rakip istediği yere kayar.
 
 Haritanın koridorları kısa, uzun görüş hattı yok. Op yalnızca A Elbow ve Mid Top'ta işe yarar; başka yerde alırsan parayı çöpe attın. Burada force buy'da bile SMG ve shotgun güçlü. Sonuç: açıyı bilen kazanır, sadece nişan alabilen değil.
 
-Market haritanın omurgası, A ile B arasındaki köprü.
+Mid Courtyard haritanın omurgası, A ile B arasındaki gerçek bağlantı. Market ise B site'ın bir parçası (B-tarafı yan bölge) — hem Mid'den hem Boba'dan girilir.
 
-- Market'i alırsan iki siteye de hızlı baskı yaparsın.
-- Market'i kaybedersen rotasyon için uzun yoldan dönmek zorunda kalırsın.
-- Saldırıda Market'i tutarsan split baskısı yaparsın, rakip hangi siteyi tutacağını bilemez.
+- Mid Courtyard'ı alırsan iki siteye de hızlı baskı yaparsın.
+- Mid'i kaybedersen rotasyon için uzun yoldan dönmek zorunda kalırsın.
+- Saldırıda Mid kontrolünü tutarsan split baskısı yaparsın, rakip hangi siteyi tutacağını bilemez.
 
-Sunset oynamayı öğrenmek istiyorsan önce Market oynamayı öğren. Orası çözülünce haritanın geri kalanı kendiliğinden açılır.
+Sunset oynamayı öğrenmek istiyorsan önce Mid Courtyard oynamayı öğren. Orası çözülünce haritanın geri kalanı kendiliğinden açılır.
 
 ## 2. Ölüm Bölgeleri
 
 **A Elbow**: A site'a girmek istiyorsan Elbow'dan geçmek zorundasın. Savunan Elbow'u tuttuğunda tüm yaklaşım hattını görür. Flash ve smoke olmadan Elbow'a girme — burası koridor değil, kapan. Önce util at, sonra geç.
 
-**Market / Boba Bölgesi**: Market haritanın tam ortasında, iki siteye de bağlanıyor. Burada ölüyorsan iki şeyden biri oluyor:
+**B Market / Boba**: Market B site'ın yan bölgesi; Boba ise savunan spawn'ından gelip Mid Top ile B Market'e ayrılan dar geçit. Bu B-tarafı koridorda ölüyorsan iki şeyden biri oluyor:
 - Bilgi almadan Market'e giriyorsun.
-- Market'te fazla kalıyorsun, iki taraftan crossfire yiyorsun.
+- Market'te fazla kalıyorsun, hem Boba hem B site açısından crossfire yiyorsun.
 
 Market'te bir karar ver ve geç. Burada bekleyerek hiçbir şey kazanmazsın.
 
@@ -42,12 +42,12 @@ COUNTER: Execute öncesi iki util harca:
 Elbow alındıktan sonra bir oyuncuyu orada bırak, flank'a karşı dursun. Sonra site'a gir. Elbow'u atlarsan site'ı da atlarsın.
 WHY: Bu koridorda savunan, saldıranın nereden geleceğini bilir. Smoke bu bilgiyi alır, flash tepki süresini sıfırlar. Util attıktan sonra savunan ya çekilir ya dezavantajlı düelloyu kabul eder. Başka seçeneği yok.
 
-**Pattern 2: Mid/Market Split Yetersizliği**
-IF: Her round aynı hattan — A Main ya da B Main — full execute yapıyorsun, Market'e hiç adam göndermiyorsun.
+**Pattern 2: Mid Split Yetersizliği**
+IF: Her round aynı hattan — A Main ya da B Main — full execute yapıyorsun, Mid'e hiç adam göndermiyorsun.
 MEANING: Sunset'in en güçlü saldırı aracını kullanmıyorsun. Tek hattan gelince savunan tüm util'ini ve odağını o tarafa kilitler. Haritayı değil, başka haritaların alışkanlığını oynuyorsun.
-COUNTER: Her execute planında en az bir adam Market'ten split görevine gitsin:
-- A execute: Ana grup A Main'den, bir kişi Market'ten A site'a.
-- B execute: Aynı mantık, Market'ten B site'a destek.
+COUNTER: Her execute planında en az bir adam Mid'den split görevine gitsin:
+- A execute: Ana grup A Main'den, bir kişi Mid Courtyard üzerinden A Link'e split.
+- B execute: Ana grup B Main'den, bir kişi Mid Courtyard'dan B Market kapısı üzerinden B site'a split.
 
 Split, savunanı iki açıdan bakmaya zorlar, crossfire yaratır.
 WHY: Tek hattan gelince savunan smoke'un arkasında durup çıkışını bekler. İki hattan gelince hangi tarafa döneceğine karar vermek zorunda kalır. O karar anı senin entry'ini açar.
@@ -86,11 +86,11 @@ WHY: Kısa mesafede pahalı silahın avantajı küçülür. Sunset'te Phantom il
 
 ## 4. Savunma Stratejileri — Pattern Mapping
 
-**Pattern 1: Market Kaybı ve Çöküş**
-IF: Market erken kaybediliyor ve ardından iki site de basılıyor.
-MEANING: Market savunmanın omurgası. Market gidince A ile B arasındaki bağ kopar, rotasyon uzar, rakip istediği split'i çeker. Market kaybı = harita kaybı.
-COUNTER: Market'e en az bir oyuncu ve util ayır. Cypher teli + kamera ya da Killjoy tuzağı + bot ile orayı bilgi bölgesine çevir. Market'te biri düşerse hemen rotate yap — ama Market'i tamamen bırakma. Util'i orada bırak, bilgi gelmeye devam etsin.
-WHY: Market her iki site'a açılıyor. Market'i kaybettiğinde iki ayrı adada savunma yaparsın — birbirine destek veremezsin.
+**Pattern 1: Mid Kaybı ve Çöküş**
+IF: Mid Courtyard erken kaybediliyor ve ardından iki site de basılıyor.
+MEANING: Mid Courtyard savunmanın omurgası. Mid gidince A ile B arasındaki bağ kopar, rotasyon uzar, rakip istediği split'i çeker. Mid kaybı = harita kaybı.
+COUNTER: Mid'e en az bir oyuncu ve util ayır. Cypher teli + kamera ya da Killjoy tuzağı + bot ile Courtyard ve B Market kapısını bilgi bölgesine çevir. Mid'de biri düşerse hemen rotate yap — ama mid'i tamamen bırakma. Util'i orada bırak, bilgi gelmeye devam etsin.
+WHY: Mid Courtyard hem A'ya hem B'ye açılıyor. Mid'i kaybettiğinde iki ayrı adada savunma yaparsın — birbirine destek veremezsin.
 
 **Pattern 2: Heaven'da Tekrarlayan Aynı Açı**
 IF: A ya da B Heaven'da üç veya daha fazla round aynı pozisyonda durarak ölüyorsun.
@@ -101,7 +101,7 @@ WHY: Off-angle'lar tahmin edilemezlikten güç alır. Rakip bir yeri okuduğunda
 **Pattern 3: Over-Rotate Tuzağı**
 IF: Bir taraftan ses ya da hareket gelince takım tamamen o tarafa dönüyor ve diğer site boş kalıyor.
 MEANING: Sunset'te rotasyon mesafeleri kısa, bu yüzden over-rotate cazip gelir. Ama rakip bunu bilir — fake yapıp boş kalan site'a döner. Takım, bilgi ile panik arasındaki farkı göremiyor.
-COUNTER: Rotasyon kuralını sen koy: bilgi gelince en fazla bir kişi rotate etsin. İkincisi ancak spike görüldüğünde ya da plant sesi duyulduğunda hareket etsin. Mid/Market oyuncusu ortada kalsın — iki tarafa da yetişebilsin.
+COUNTER: Rotasyon kuralını sen koy: bilgi gelince en fazla bir kişi rotate etsin. İkincisi ancak spike görüldüğünde ya da plant sesi duyulduğunda hareket etsin. Mid Courtyard oyuncusu ortada kalsın — iki tarafa da yetişebilsin.
 WHY: Rakip fake yapıp geri döndüğünde, over-rotate eden takım açık pozisyonlarda yakalanır. Disiplinli rotasyon, haritanın iki tarafında da varlık sürdürmeni sağlar.
 
 **Pattern 4: A Elbow Agresif Tutma Riski**
@@ -139,7 +139,7 @@ WHY: Post-plant tutan rakip açısını biliyor ve bekliyor. Tek tek giriş her 
 
 ## 6. Rank Modülasyonu
 
-**Iron-Silver**: Market'in nerede olduğunu bile bilmiyorsun muhtemelen. Takım A Main ya da B Main'den düz dalıyor, elinde util yok, Elbow'a körü körüne giriyorsun. Önce Market'in konumunu ezberle. Sonra şunu yap: Elbow'a girmeden önce flash at. Tek bu alışkanlık A tarafındaki ölümlerini yarıya indirir. Savunmada Heaven'a çık — site seviyesinde durup yükseklik avantajını kullanmamak bedava ölüm demek.
+**Iron-Silver**: Mid Courtyard'ın nerede olduğunu bile bilmiyorsun muhtemelen. Takım A Main ya da B Main'den düz dalıyor, elinde util yok, Elbow'a körü körüne giriyorsun. Önce Mid Courtyard'ın konumunu ezberle. Sonra şunu yap: Elbow'a girmeden önce flash at. Tek bu alışkanlık A tarafındaki ölümlerini yarıya indirir. Savunmada Heaven'a çık — site seviyesinde durup yükseklik avantajını kullanmamak bedava ölüm demek.
 
 **Gold-Platinum**: Util atıyorsun ama zamanlama yok. Flash patladı, entry oyuncusu hâlâ yerinde oturuyor. Smoke aktif, takım bekliyor, smoke bitiyor. Bunun sonu gelmez. Flash patladığı anda içeri girmelisin, smoke içindeyken hareket etmelisin. Bir de şunu gör: Market'i tamamen yok sayıp tek yönden saldırıyorsunuz — rakip okuyup stack ediyor. Market'i oyun planına sok. Savunmada over-rotate alışkanlığını izle ve kır.
 
@@ -149,13 +149,13 @@ WHY: Post-plant tutan rakip açısını biliyor ve bekliyor. Tek tek giriş her 
 
 ## 7. Koçluk Satırları
 
-- "Market'i kontrol etmiyorsan haritanın yarısını rakibe veriyorsun. Bu kadar basit."
+- "Mid Courtyard'ı kontrol etmiyorsan haritanın yarısını rakibe veriyorsun. Bu kadar basit."
 - "A Elbow'a flash atmadan girme. Savunan orada bekliyordur. Önce flash, sonra geç."
 - "Sunset uzun koridorların haritası değil — yakın dövüş haritası. Op alma, Spectre al."
 - "Aynı koridora üç kişi dolmayın. Biri Market'ten baskı yapsın, biri beklesin. Sıra değil, yayılma."
 - "Heaven'ı smoke'lamadan site'a girme. Yukarı bakan her zaman ezilir."
 - "Eco round'da köşe başında bekleme. Spectre ve Judge bu mesafelerde rifle ile boy ölçüşür. Swing at, silah çal."
-- "Savunmada Market'i bırakma. Market düşerse A da gider, B da gider."
+- "Savunmada Mid Courtyard'ı bırakma. Mid düşerse A da gider, B da gider."
 - "Retake'e tek tek dalma. Toplanın, birlikte girin. Tek girersen saldıranın işini kendin yapıyorsun."
 
 ## 8. Callout'lar & Pozisyon Rehberi
@@ -173,15 +173,16 @@ WHY: Post-plant tutan rakip açısını biliyor ve bekliyor. Tek tek giriş her 
 - **B Site**: Spike plant alanı. Default plant ortadaki yapının arkası.
 - **B Heaven**: B site'ın üstündeki yüksek pozisyon. A Heaven gibi çalışır — temizlemeden girme.
 - **B Alley**: B site'ın yan geçidi. Off-angle oynamak istiyorsan burası, flank da buradan gelir.
+- **B Market**: B site'ın yan bölgesi. Hem Mid Courtyard'dan (kırılabilir kapı üzerinden) hem Boba'dan girilir. B'ye split yapmak istiyorsan buradan basarsın.
+- **Boba**: Savunan spawn'ından gelip Mid Top ile B Market'e ayrılan dar geçit. B'ye gelen flank ve rotasyon buradan akar.
 - **B Back**: Site'ın arka kısmı, CT tarafından retake hattı. Retake'te ilk burayı kontrol et.
-- **B Market Side**: Market'e bakan taraf. Split yapmak istiyorsan buradan basarsın.
 
 **Mid Bölgesi:**
 - **Mid Top**: Mid'e ilk girdiğin nokta. Bilgi topla, karar ver — boşuna açılma.
 - **Mid Bottom**: Savunanın mid'deki pozisyonu. Buradan kontrol kaybedersen mid çöker.
-- **Courtyard**: Mid'deki açık alan. Geniş görüş var ama her yerden vurulursun — util kullan, yoksa geçme.
-- **Market (Boba)**: A ile B arasındaki bağlantı. Haritanın en kritik noktası — burası kimin elindeyse split yapar, karşı taraf yapamaz.
-- **Mid Doors**: Mid'deki geçiş noktaları. Smoke ya da flash atmadan geçme.
+- **Courtyard**: Mid'in açık alanı ve haritanın gerçek merkezi — A ile B arasındaki asıl bağlantı. Geniş görüş var ama her yerden vurulursun; util kullan, yoksa geçme. Burayı kim tutuyorsa split'i o yapar.
+- **Tiles**: Courtyard'dan Mid Top'a açılan ara geçiş. Mid kontrolü için Courtyard ile birlikte tutulur.
+- **B Market Kapısı**: Mid Courtyard ile B Market arasındaki tek kırılabilir/mekanik kapı — Sunset'in imza mekaniği. Saldıran kapıyı kırarak ya da açıkken geçerek Courtyard'dan B Market'e split açar; savunan kapıyı kapalı tutup bu girişi durdurur. Smoke ya da flash atmadan kırıp geçme.
 
 **Genel:**
 - **CT Spawn**: Savunmanın başladığı yer. Rotasyonunu ve retake'ini buradan organize et.
@@ -192,7 +193,7 @@ WHY: Post-plant tutan rakip açısını biliyor ve bekliyor. Tek tek giriş her 
 **Pattern 1: A Site Post-Plant Crossfire**
 IF: Spike A site'a plant edildi, takım pozisyon alıyor.
 MEANING: A site'ta post-plant'i tek açıdan tutarsan, retake yapan savunan seni rahat okur. Gücün crossfire'dan gelir.
-COUNTER: Bir oyuncu A Main'de, biri Market tarafında dursun. Heaven'a smoke at — yukarı bakan düello istemezsin. Sayın azaldıysa A Main'den ses ver, Market oyuncusu arkadan bassın.
+COUNTER: Bir oyuncu A Main'de, biri A Link / Mid tarafında dursun. Heaven'a smoke at — yukarı bakan düello istemezsin. Sayın azaldıysa A Main'den ses ver, A Link oyuncusu arkadan bassın.
 WHY: Crossfire, savunanın hangi açıya döneceğini çözmesini engeller. Heaven smoke'u en tehlikeli açıyı kapatır, savunan site seviyesine inmek zorunda kalır.
 
 **Pattern 2: B Site Post-Plant Market Kontrolü**

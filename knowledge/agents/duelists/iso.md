@@ -4,9 +4,10 @@
 - Iso'nun işi tek: her düelloyu kazan, her kill'den kalkan kazan, sıradaki dövüşe kalkanlı gir.
 - Takım dar site'larda düşmanı sırayla temizlemeni istiyorsa, Jett'in çıkış oyunu yerine saf izolasyon gerekiyorsa Iso'yu seç.
 - Iso'nun özü her kill'i dayanıklılığa çevirmek. Seni düşürmek için düşman fazladan mermi ve util harcamak zorunda kalır.
+- Dört yeteneğin var: duvar (izolasyon ve giriş), kalkan/küre (her dövüşten önce aç, her kill'den sonra topla), ult (1v1 arena) ve Q — duvarın/zeminin içinden geçen mol bolt. Q düştüğü düşmana hem zarar-katlama (aldığı tüm hasar iki katına çıkar) hem bastırma uygular. Bu, kalkanlı düellondan önceki en güçlü kurulum: önce Q'yu yedir, sonra kalkanla 1v1'e gir — düşman çıplak ve iki kat hasar alıyorken sen tam korumalısın.
 
 ## 2. Temel Sorumluluklar
-- **Atakta:** Dövüşe girmeden kalkanı aç. Duvarla savunucuyu kes, onu 1v1'e zorla, site'a öyle gir. Ult'u site'ı tek başına tutan anchor'a sakla.
+- **Atakta:** Dövüşe girmeden kalkanı aç. Duvarla savunucuyu kes, onu 1v1'e zorla, site'a öyle gir. Köşeyi dönmeden Q'yu beklediğin açıya/duvar arkasına yedir — isabet eden savunucu iki kat hasar alır ve bastırılır, kalkanlı peek'in garanti dövüşe döner. Ult'u site'ı tek başına tutan anchor'a sakla.
 - **Savunmada:** 1v1'e dönecek açıları tut. Düşman toplu geliyorsa duvarla araya gir, teker teker dövüş. Kalkan ilk atışı yer, sana trade penceresi açar — ileri pozisyon tut, geri çekilme.
 - **Takımın senden beklediği:** Her düelloyu kazan, kalkan biriktir, duvarı izolasyon için kullan.
 
@@ -20,6 +21,7 @@
 7. **Kötü duvar açısı** — Duvarın açısı hangi düşmanı izole ettiğini belirler. Yanlış açı yanlış kişiyi keser ya da savunucuya yeniden konumlanma süresi tanır. Her site için duvar açını ezbere bil.
 8. **Kalkanlıyken çok ileri gidip util'e yakalanmak** — Kalkan mermiyi emer ama düşman util'i (molly, stun, flash) seni hâlâ etkiler. Kalkana güvenip dar geçide dalarsan ateş düellosunu kazanmadan util'le ezilirsin. Kalkan nişan düellosu içindir, util tarama için değil.
 9. **Ult arena'sında kötü konum** — Ult'la rakibi 1v1 arena'ya çektiğinde iş bitmedi. Arena'ya çıplak swing atarsan kalkan avantajını boşa atarsın. Önce kalkanı aç, sonra arena açısını net tut — bu garanti kazanılacak bir dövüş, mahvetme.
+10. **Q'yu hiç kullanmamak** — Q duvarın/zeminin içinden geçer; düşmana isabet ettiğinde aldığı tüm hasarı iki katına çıkarır ve onu kısa süre bastırır. Peek öncesi beklediğin açıya yedirmezsen en güçlü düello kurulumunu boşa atarsın. Önce Q ile düşmanı işaretle, sonra kalkanla gir — düşman iki kat hasar alıyorken senin tek bir doğru atışın yetiyor.
 
 ## 4. Kalıp -> Anlam
 
@@ -57,6 +59,11 @@ IF: Çok pasif oynuyorsun, kalkanlıyken bile geri çekiliyorsun
 MEANING: Kit'in sana verdiği avantajı kullanmıyorsun — kalkan doluyken ilk atışı yiyip trade penceresi açabilirsin ama yine de geri basıyorsun
 COUNTER: Kalkan aktifken alanı sen al. İlk mermi seni öldürmez, bu pencerede ileri pozisyon tut ve açıyı zorla. Geri çekilmek kalkanı boşa harcamaktır.
 WHY: Iso'nun farkı tek dövüşte bir fazladan mermiye dayanmak. Kalkanlıyken geri çekilirsen o avantajı hiç kullanmadan kaybedersin — sıradan duelist'e dönersin.
+
+IF: Düellolara giriyorsun ama Q'yu hiç yedirmiyorsun
+MEANING: En güçlü kurulumunu atlıyorsun — düşmana zarar-katlama uygulamadan kalkanlı 1v1'e giriyorsun
+COUNTER: Köşeyi dönmeden Q'yu beklediğin açıya ya da duvarın arkasına yedir. İsabet eden düşman iki kat hasar alır ve bastırılır — sonra kalkanla gir, tek doğru atış yeter.
+WHY: Q + kalkan, Iso'nun imza kombosu: düşman çıplak ve iki kat hasar alırken sen tam korumalısın. Q'suz girersen sıradan bir kalkanlı duelist olursun, kit avantajının yarısını kullanmamış olursun.
 
 IF: Takım seninle entry bekliyor ama sen kalkanı doldurmaya odaklanıyorsun
 MEANING: Kill avına çıkıp küre topluyorsun ama takım girişin için orada değilsin — site boş kalıyor
@@ -98,8 +105,8 @@ WHY: Iso bir entry duelist'i — duvar ve kalkan takımı içeri sokmak için. T
 ### Düşük Elo (Iron-Silver)
 Tek şeye odaklan: her dövüşten önce kalkanı aç. Kill'den sonra küreyi vur. İki düşman aynı anda açıktayken duvarı aralarına kur — biri kesilir, sen biriyle dövüşürsün. Ult'u site'ı tek başına tutan düşman için sakla.
 ### Orta Elo (Gold-Diamond)
-Her site için duvar açılarını bil — hangi savunucuyu kesiyor, hangisini kesmiyor. Kill sonrası küre vurmayı her round'da yap. Ult'u yüksek değerli hedefe at. Döngüyü uygula: kill al, küreyi vur, kalkanı topla, sıradaki dövüşe gir.
+Her site için duvar açılarını bil — hangi savunucuyu kesiyor, hangisini kesmiyor. Kill sonrası küre vurmayı her round'da yap. Ult'u yüksek değerli hedefe at. Q'yu düello kurulumu olarak kullanmaya başla: peek öncesi beklediğin açıya yedir, isabet eden düşman iki kat hasar alır — sonra kalkanla gir. Döngüyü uygula: kill al, küreyi vur, kalkanı topla, sıradaki dövüşe gir.
 ### Yüksek Elo (Ascendant-Immortal)
-Duvar zamanlamanı keskinleştir — düşman yeniden konumlanmadan duvar aktif olmalı. Ult hedefini düşmanın ekonomisine ve rolüne göre seç. Kalkanın doluyken daha dar açılar tut, daha az geri çekil.
+Duvar zamanlamanı keskinleştir — düşman yeniden konumlanmadan duvar aktif olmalı. Q'yu duvarla zincirle: duvarla izole ettiğin düşmana Q'yu yedir, iki kat hasarla kalkanlı 1v1'i tek atışa indir. Ult hedefini düşmanın ekonomisine ve rolüne göre seç. Kalkanın doluyken daha dar açılar tut, daha az geri çekil.
 ### Elit (Radiant)
 Her round'a ult hedefini belirleyerek başla: ekonomi, util, round etkisi. Duvar açılarını round bazlı değiştir — düşman pozisyon değiştirdikçe duvar da değişir. Her kill seni bir sonraki kalkanlı dövüşe yönlendirir — küreyi sakın kaçırma.

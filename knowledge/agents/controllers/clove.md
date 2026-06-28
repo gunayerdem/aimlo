@@ -7,26 +7,26 @@ Clove sıradan, pasif smoke atan bir controller değil. Öldükten sonra bile sm
 - Hem hayattayken hem öldükten sonra takım için smoke çıkar.
 - Takımın peek atmasından hemen önce can eritme at — düşman zayıflamış halde dövüşsün.
 - Kill alır almaz kendini iyileştir — fazla canla bir sonraki dövüşe gir.
-- Diriliş ult'unu yalnızca güvenli çıkışın varken kullan — ölüm noktasının ortasında değil.
+- Diriliş ult'unu yalnızca dönünce kill ya da hasarlı asist alabileceğin zaman kullan — dirilince kısa bir dokunulmazlık penceren var, ama o süre içinde kill/asist alamazsan otomatik tekrar ölürsün.
 - Önce smoke, sonra dövüş — Clove saldırgan oynar ama controller görevi her zaman fragdan önce gelir.
 - Smoke atmadan ölürsen Clove'u boşa harcadın; smoke atıp ölürsen round'a katkı sundun.
 
 ## 3. Sık Yapılan Hatalar
-- Ölüm noktasının ortasında dirilip anında tekrar ölmek.
+- Dirildikten sonra kill ya da hasarlı asist almayı başaramayıp süre dolunca otomatik tekrar ölmek — dirilişin tek şartı budur, dönünce mutlaka angaje olup bir frag/hasar çıkar.
 - Smoke atmadan dövüşe dalmak — frag asla smoke'tan önce gelmez.
 - Can eritmeyi takımın aktif olarak dövüşmediği düşmanlara atmak — etkisi boşa gider.
 - Kill sonrası gelen fazla canı, daha tehlikeli açılara dalmak için kullanmak — o can erir, sen erimiş canla dövüşün ortasında kalırsın.
-- Her ölümde otomatik olarak dirilmek — önce çıkışın güvenli mi diye bak.
+- Her ölümde otomatik olarak dirilmek — önce dönünce kill/hasarlı asist alabilecek misin diye bak; alamazsan zaten süre dolunca tekrar ölürsün.
 - Kazanamayacağın bir round'da öldükten sonra smoke yeteneğini boşa harcamak.
 - Round başında bütün smoke'larını birden harcayıp geç gelişen kavgaya smoke'suz girmek — en az birini saklamak gerekir.
-- Diriliş ult'unu, bomba çoktan kurulmuşken ve takım çekilmişken kullanmak — kimseyi tradeleyemeyeceğin boş bir round'a tek başına dönüyorsun.
+- Diriliş ult'unu, bomba çoktan kurulmuşken ve takım çekilmişken kullanmak — tek başına kill/hasarlı asist alamayacağın boş bir round'a dönüyorsun, süre dolunca yeniden ölürsün.
 
 ## 4. Kalıp -> Anlam
 
-**IF** Diriliyorsun ama her dirilişten sonra anında ölüyorsun
-**MEANING** Takım arkadaşın yakında değil ya da ölüm noktanı terk etmiyorsun
-**COUNTER** Sadece takım arkadaşın trade mesafesindeyken ya da güvenli bir çıkışın varken diril. Dirilir dirilmez ölüm noktasından uzaklaş — eski açıdan peek atma.
-**WHY** Ölüm noktasında dirilen oyuncuya düşman zaten nişan almış bekliyor — konumunu değiştirmezsen bedava kill veriyorsun.
+**IF** Diriliyorsun ama her dirilişten sonra süre dolunca tekrar ölüyorsun
+**MEANING** Diriliş penceresinde kill ya da hasarlı asist alamıyorsun — diriliş ult'unun şartını karşılamıyorsun
+**COUNTER** Dirilişi sadece dönünce aktif olarak angaje olup kill/hasarlı asist çıkarabileceğin zaman kullan: takım hâlâ savaşıyorken ya da net bir frag fırsatı varken. Dirilince kısa dokunulmazlık penceresini kullanıp ölüm noktasından çık, ama eski açıdan pasif peek atma — bir hedef bul ve hasar ver.
+**WHY** diriliş ult'u seni canla geri getirir ama dirildikten sonra belirli süre içinde bir kill ya da hasarlı asist almazsan otomatik tekrar ölürsün. Dövüş bitmiş boş bir round'a dönersen vuracak kimse olmaz, süre dolar, bedava ikinci ölümü verirsin.
 
 **IF** Smoke'larını sadece hayattayken atıyorsun, öldükten sonra hiç atmıyorsun
 **MEANING** Clove'un asıl farkını kullanmıyorsun
@@ -59,9 +59,9 @@ Clove sıradan, pasif smoke atan bir controller değil. Öldükten sonra bile sm
 **WHY** Ölümden sonraki tek smoke'un en değerli kaynağındır; korunan tarafı bir daha kapatmak sıfır değer üretir, açık tarafı kapatmak takımın kalan oyuncularını hayatta tutar.
 
 **IF** Diriliş ult'unu bomba kurulduktan sonra, takım siteden çekilmişken kendi başına kullanıyorsun
-**MEANING** Geri dönüşünü destekleyecek kimse yok — boş round'a tek başına dönüyorsun
-**COUNTER** Dirilişi ya takım hâlâ savaşırken (seni tradeleyebilecekken) ya da retake'i birlikte yapacakken kullan. Tek başına 1vX retake'e dönmek için değil.
-**WHY** Diriliş seni tam canla geri getirir ama düşmanın sayı üstünlüğünü değiştirmez; arkanı kollayacak takım arkadaşı yoksa, ult'u bir sonraki round için saklamak çoğu zaman daha değerlidir.
+**MEANING** Dönünce kill/hasarlı asist alabileceğin bir hedef yok — diriliş ult'unun şartını karşılayamayacağın boş round'a dönüyorsun
+**COUNTER** Dirilişi ya takım hâlâ savaşırken (dönünce hemen frag/hasar çıkarabileceğin) ya da retake'i birlikte yapacakken kullan. Tek başına 1vX retake'e dönmek için değil.
+**WHY** Diriliş seni canla geri getirir ama belirli süre içinde bir kill ya da hasarlı asist almazsan otomatik tekrar ölürsün. Dövüş bitmiş boş round'a yalnız dönersen vuracak kimse olmaz, süre dolar ve ult'u bedavaya harcarsın — o yüzden çoğu zaman bir sonraki round'a saklamak daha değerlidir.
 
 ## 5. Harita Etkileşimleri
 - **Sunset**: Mid kavgaları Clove'un saldırgan tarzına oturur. B market ya da mid kapı için öldükten sonra smoke at — takım korunmaya devam etsin. Mid'i sen alırsan iki siteye de hızlı rotasyon açılır; mid kontrolünü kaybetsen bile en az bir smoke'u B'nin retake'i için sakla.
@@ -95,14 +95,14 @@ Clove sıradan, pasif smoke atan bir controller değil. Öldükten sonra bile sm
 "Öldükten sonra smoke'u kullanmıyorsun — Clove'un tek farkı bu. Öldüğün an haritaya bak, takımın açık kalan tarafını kapat. Bu pencere başka hiçbir controller'da yok."
 
 ### Tahmin edilebilir olduğunda
-"Rakipler dirilme noktanı kamp ediyor. Ya dirilmeyi atla, takım senin trade'inden oynasın; ya da onlar çekilene kadar bekle."
+"Rakipler dirilme noktanı kamp ediyor. Dirilince kill/hasarlı asist alamazsan zaten süre dolunca tekrar ölürsün — bu yüzden ya dirilmeyi atla ve takım senin trade'inden oynasın, ya da onlar çekilene kadar bekle."
 
-"Diriliyorsun ama hep aynı açıdan çıkıyorsun — düşman önceden nişan alıp bekliyor. Dirilir dirilmez konum değiştir; eski ölüm açından peek atma."
+"Diriliyorsun ama hep aynı açıdan çıkıyorsun — düşman önceden nişan alıp bekliyor. Dirilir dirilmez konum değiştir, eski ölüm açından peek atma; kısa dokunulmazlık penceresini kullanıp bir hedef bul, çünkü süre içinde frag/hasar çıkarman gerek."
 
-"Dirilişi her round bomba kurulduktan sonra tek başına retake'e dönmek için kullanıyorsun. Arkanı kollayacak takım yoksa ult'u sakla — boş round'a yalnız dönmek seni bedava kill yapar."
+"Dirilişi her round bomba kurulduktan sonra tek başına retake'e dönmek için kullanıyorsun. Dönünce kill/hasarlı asist alamazsan süre dolar ve yeniden ölürsün — arkanı kollayacak takım yoksa ult'u sakla."
 
 ## 8. Rank Modülasyonu
 - **Düşük (Iron-Silver)**: Önce smoke at. Dirilişi tutumlu kullan. İyileşme için dövüş kovalama — smoke at, takıma destek ver.
 - **Orta (Gold-Platinum)**: İyileştikten sonra saldırgan peek'leri dene. Öldükten sonra smoke atmayı tutarlı hale getir. Takım push'larında can eritme at.
-- **Yüksek (Diamond-Ascendant)**: Entry ile smoke zamanlamasını dengele. Dirilişi sadece güvenli çıkışın varken kullan. Can eritmeyi takım peek'iyle tam zamanla.
-- **Elit (Immortal-Radiant)**: Her yeteneği birbirine bağla. Öldükten sonra atacağın smoke'u önceden oku — takım nereye ihtiyaç duyacaksa oraya at. Dirilişi bazen hiç dövüşmeden kullan — düşmanı konumundan çıkarmaya bile yeter.
+- **Yüksek (Diamond-Ascendant)**: Entry ile smoke zamanlamasını dengele. Dirilişi sadece dönünce kill/hasarlı asist alabileceğin zaman kullan — yoksa süre dolunca tekrar ölürsün. Can eritmeyi takım peek'iyle tam zamanla.
+- **Elit (Immortal-Radiant)**: Her yeteneği birbirine bağla. Öldükten sonra atacağın smoke'u önceden oku — takım nereye ihtiyaç duyacaksa oraya at. Dirilişi, dönünce kill/hasarlı asist çıkarabileceğin anı önceden okuyup zamanla — frag/hasar alman dirilişi kalıcı kılar; alamazsan süre dolunca tekrar ölürsün.

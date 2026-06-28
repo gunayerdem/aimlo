@@ -3,7 +3,7 @@
 > ⚠ PATCH NOTU: Fracture, Valorant'taki tek çifte-spawn haritas. Zip line sistemi yüzünden her patch'te meta kayabilir. Buradaki bilgileri güncel patch notlarıyla karşılaştır.
 
 ## 1. Temel Prensipler
-- Fracture'da iki ayrı saldırgan spawn'ı var: Attacker Side Dish ve Attacker Side Hall. Savunucuları iki yönden sıkıştırmak üzerine kurulu bir harita — bu felsefe değişmiyor.
+- Fracture'da iki ayrı saldırgan spawn'ı var: biri haritanın A-tarafında, diğeri B-tarafında (kuzey/güney). İkisi, Defender Spawn'ın altından geçen haritayı kateden zip line'larla birbirine bağlı. Savunucuları iki yönden sıkıştırmak üzerine kurulu bir harita — bu felsefe değişmiyor.
 - Defender spawn ortada, sen haritanın çevresinden geliyorsun. Savunma her zaman baskı altında — bunu bil ve bunu kullan.
 - Saldırı: A Site'a ya da B Site'a tek girişten girme. Her site'in en az iki girişi var. İki farklı girişten aynı anda baskı yapmazsan, Fracture'ın sana verdiği avantajın yarısını çöpe atıyorsun. Split execute bu haritanın ana stratejisi — iki yönden aynı anda gir.
 - Savunma: Tek bir girişi tutmaya çalışma. Crossfire kur, utility ile ikincil girişleri kapat, rotasyona hazır bekle.
@@ -14,7 +14,7 @@
 - **A Hall Drop**: Drop sesi pozisyonunu ele veriyor. Savunucu o sesi duyar, açı tutar. Atlamadan önce util at.
 - **B Tower Açılması**: Tower'dan girerken B Tree'yi kontrol etmezsen crossfire'a yatıyorsun. Önce Tree'yi temizle, sonra gir.
 - **B Arcade Geçişi**: Arcade'i tek başına push etme. Canteen tarafından destek yoksa commit etme — dar geçiş seni çuvala sokar.
-- **Zip Line Çıkışları**: Zip line sesi düşmana bilgi veriyor. Çıkış noktasında açıyı tutarak seni bekliyor. Çıkmadan önce çıkış açısını util'le kapat.
+- **Zip Line Çıkışları**: Haritayı kateden uzun zip line'lara aslında sessizce binebilirsin; sesi yalnızca Defender Spawn yakınındaki savunucu duyar (alım fazında savunucu zip'i hiç duyamaz). Yine de çıkış noktası tahmin edilebilir bir yer — Defender Spawn'daki düşman zip'i duyduysa çıkışta açı tutar. Riskli çıkışlarda çıkış açısını util'le kapat.
 
 ## 3. Pattern -> Meaning Eşleşmesi
 
@@ -26,9 +26,9 @@ WHY: Fracture'in saldırı gücü tamamen çifte girişten geliyor. Bunu kullanm
 
 **Pattern 2: Zip Line Kullanım Hatası**
 IF: Zip line ile rotate ederken karşıdan vurularak ölüyorsun — aynı ölüm tekrar tekrar geliyor
-MEANING: Zip line sesi tüm haritaya yayılır, çıkış noktası tahmin edilebilir. Zip line'ı güvenli ulaşım gibi kullanıyorsun ama aslında bu bir bilgi sinyali. Karşı taraf sesi duyar, çıkışı açı tutar.
-COUNTER: Zip'e binmeden önce çıkış noktasını smoke veya flash ile kapat. Ya da zip'i fake için kullan — sesi çıkar ama binme, rakibin rotasyonunu tetikle. Takım arkadaşın zip kullanacaksa sen çıkışı izleyerek cover ver.
-WHY: Zip line Fracture'in en güçlü rotasyon aracı ama ses yüzünden risk taşıyor. Util desteği olmadan tek başına kullanmak rakibe bedava kill vermek. Util ile kullanırsan haritanın iki yarısını birleştiren bir silaha dönüşüyor.
+MEANING: Zip line'a aslında sessizce binebilirsin; ama çıkış noktası belli bir yer ve Defender Spawn yakınındaki savunucu standart zip kullanımını duyar (alım fazı dışında). Zip'i hep aynı anda, hiç bilgi toplamadan kullanıyorsan, sesi duyan savunucu çıkışı açı tutuyor ve seni hareketsiz yakalıyor.
+COUNTER: Çıkış riskli olduğunda çıkış noktasını smoke veya flash ile kapat. Ya da zip'i fake için kullan — Defender Spawn'daki düşman sesi duysun, sen binme, rakibin rotasyonunu tetikle. Takım arkadaşın zip kullanacaksa sen çıkışı izleyerek cover ver. Zip kullanımını aynı zamanlamada tekrarlamaktan kaçın.
+WHY: Zip line Fracture'in en güçlü rotasyon aracı — sessiz binilebilmesi büyük avantaj. Risk, sesi değil, tahmin edilebilir çıkış noktasını hep aynı şekilde kullanmaktan doğuyor. Çıkışı util ile kapatıp zamanlamayı karıştırırsan haritanın iki yarısını birleştiren bir silaha dönüşüyor.
 
 **Pattern 3: Savunmada Tek Girişe Kilitlenme**
 IF: Defender olarak hep aynı girişi izliyorsun ve diğer girişten arkadan vurularak ölüyorsun — 2+ raund bu şekilde geçiyor
@@ -64,7 +64,7 @@ WHY: Fracture'in ortası savunmanın omurgası. Omurga kırılırsa iki site'i b
 
 ### Saldırı
 - Tek taraftan push ediyorsan Fracture'da zaten kaybetmişsin — bu harita iki yönlü baskı için yapılmış, tek yönden girersen duvar gibi çarparsın
-- Zip line'i yanında smoke ya da flash olmadan kullanma — çıkış noktanı herkes bilir, bedava ölüm verirsin
+- Zip line'a sessizce binebilirsin ama çıkış noktası belli — Defender Spawn'daki düşman sesi duyduysa orada açı tutar. Çıkış riskliyse smoke ya da flash ile kapat, kuru çıkıp bedava ölme
 - A Drop'a inmeden önce flash at ya da smoke koy — drop sesi savunucuya tam pozisyonunu söyler, korumasız inersen çıkamazsın
 - B Tower'dan kuru peek atma — savunucu zaten o açıyı bekliyor, util kullanmadan açmaya çalışırsan trade bile çıkmaz
 - Post-plant'te crossfire kur — tek tarafa yığılırsan defuse'u durdurmak için tek açı yeterli olur
@@ -91,7 +91,7 @@ WHY: Fracture'in ortası savunmanın omurgası. Omurga kırılırsa iki site'i b
 
 ## 6. Koçluk Satırları
 - "Fracture'de aim değil zamanlama kazandırır. İki taraftan aynı anda girmezsen savunucu seni tek tek temizler."
-- "Zip line'e binmeden önce utility yak. Bindiysen karşı taraf seni duydu — hazırsız girme."
+- "Zip line'a sessizce binebilirsin ama çıkışın belli. Defender Spawn'daki düşman duyduysa orada bekler — riskli çıkışta önce utility yak, hazırsız çıkma."
 - "Tek taraftan push ediyorsan bu haritayı yanlış oynuyorsun. İki tarafın var, ikisini de kullan."
 - "Savunmada bir girişe kilitlenip diğerini unutuyorsan, rakip oradan geçer. İki girişi aynı anda gözlemle."
 - "Post-plant'te üst üste duruyorsanız rakip tek flash'la hepinizi siler. Dağıl, crossfire kur."
@@ -134,7 +134,7 @@ WHY: Fracture'in ortası savunmanın omurgası. Omurga kırılırsa iki site'i b
 
 ## 9. Ekonomi Stratejileri
 - Fracture saldırı taraflı bir harita. Force buy raundlarında bile A Dish + Hall split çalışır — haritanın yapısı zaten sana avantaj veriyor, az utility ile bile baskı kurabilirsin.
-- Eco raundlarda Zip line'dan flank at. Spectre + sürpriz ikilisi raund çalar. Zip line ses veriyor ama eco'da bu riski alman gerekiyor.
+- Eco raundlarda Zip line'dan flank at. Spectre + sürpriz ikilisi raund çalar. Zip'e sessizce binilebildiği için (özellikle alım fazında savunucu duyamaz) sürpriz flank eco'da güçlüdür — riskli kısım belli olan çıkış noktası, oraya dikkat et.
 - Full buy raundlarda her girişe utility yükle. Çift giriş var, çift utility lazım. Her raund en az 3-4 ability harca.
 - Savunmada utility biriktirme. Saldırganlar her yönden geliyor — bir girişi boş bıraktığında oradan ezilirsin. Hangi girişi açık bırakacağına önceden karar ver.
 - Eco veya force raundlarda A Dish'te Marshal al. Uzun sightline'da çok güçlü. Hall'dan Spectre push ile birleştir.
@@ -149,12 +149,12 @@ WHY: Fracture'in ortası savunmanın omurgası. Omurga kırılırsa iki site'i b
 - Rakip 2-1-2 savunma oynuyorsa: Mid'e bas, rotasyon omurgasını kır. Mid'i alırsan savunucular geç rotate eder, split execute'un işe yarar.
 
 ## 11. Zip Line Ustalığı
-- Zip line Fracture'ın en farklı mekaniği. Doğru kullanırsan oyunu kırarsın, yanlış kullanırsan bedava ölürsün.
-- **Temel kullanım kuralları**: Zip'e binmeden önce çıkış noktasını smoke veya flash ile kapat. Çıkışı izleyen bir takım arkadaşın yoksa zip'e binme. Zip kararı solo değil, takım kararıdır.
+- Zip line Fracture'ın en farklı mekaniği. Doğru kullanırsan oyunu kırarsın, yanlış kullanırsan bedava ölürsün. Önemli nüans: haritayı kateden uzun zip'lere SESSİZCE binilir — sesi yalnızca Defender Spawn yakınındaki savunucu duyar, alım fazında ise savunucu zip'i hiç duyamaz. Risk sesin yayılması değil, çıkış noktasının tahmin edilebilir olmasıdır.
+- **Temel kullanım kuralları**: Çıkış riskliyse (Defender Spawn'daki düşman sesi duymuş olabilir) çıkış noktasını smoke veya flash ile kapat. Tehlikeli bir çıkışı izleyen takım arkadaşın yoksa, kuru zip çıkışı yapma. Zip kararı çoğu zaman takım kararıdır.
 - **Fake zip**: Zip'e yaklaş, sesi çıkart, binme. Savunucu rotate eder — o hareketi kullan. B'den A'ya rotasyon izlenimi vermek istiyorsan bu bire bir çalışır.
 - **Eco round zip saldırısı**: Eco raundlarında zip ile beklenmedik taraftan gir. Spectre veya Judge ile yakın mesafe avantajı kur. Karşı taraf eco'da zip beklemiyor, sürpriz faktörü senin lehinedir.
 - **Aynı zamanlama alışkanlığı yapma**: Her raund aynı anda zip kullanırsan rakip seni okur ve pozisyon alır. Raundun başında, ortasında, sonunda karıştır.
-- **Rotate aracı olarak**: Savunmada CT Spawn'dan koşmak yerine zip kullan, daha hızlı geçersin — ama ses verdiğini biliyorsun. Zip'e bindiğinde çıkış noktasını izleyen biri olsun.
+- **Rotate aracı olarak**: Savunmada CT Spawn'dan koşmak yerine zip kullan, daha hızlı geçersin — üstelik sessiz binilebildiği için rotaten çoğu zaman gizli kalır. Yine de çıkış noktası tahmin edilebilir; riskli çıkışta izleyen biri olsun.
 - **Bilgi aracı olarak**: Düşman zip kullandığında hangi yönde gittiğini ve hangi site'a geçeceğini anlarsın. Bu bilgiyi hemen takıma ilet, savunma pozisyonunu ona göre ayarlayın.
 
 ## 12. Agent Tier Listesi

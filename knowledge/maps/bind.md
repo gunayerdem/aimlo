@@ -6,13 +6,18 @@ Bind'in diğer haritalara göre tek farkı var: mid yok. Başka haritalarda mid 
 
 Savunmada mid diye bir şey olmadığı için her siteye daha fazla oyuncu koyabilirsin. Agresif anchor pozisyonları al. Ama haritayı basit yapan bu rahatlık sadece teleporter'ı saymadığında geçerli — ve teleporter'ı sayma lüksün yok.
 
-Teleporter sistemi Bind'in gerçek kimliği. A Short ile B Short arasında iki yönlü çalışıyor. Doğru kullan:
+Teleporter sistemi Bind'in gerçek kimliği. İki ayrı teleporter var ve her biri TEK YÖNLÜ çalışır — aynı teleporter'dan geri dönemezsin:
 
-- Bir sitede fake at, teleporter'dan diğerine geç.
+- **A Short → B Window (Hookah tarafı):** A Short'taki girişe gir, B'nin üst tarafına çıkarsın.
+- **B Long (Garden) → A Lobby (Showers/Baths tarafı):** B Long'daki girişe gir, A'nın saldırgan tarafına (Showers/A Bath ağzı) çıkarsın.
+
+Doğru kullan:
+
+- Bir sitede fake at, teleporter'dan diğerine geç — ama hangi teleporter'ın nereye çıktığını bil.
 - Split push kur — önden baskı yap, arkadan teleporter çıkışıyla sıkıştır.
 - Savunmadaysan teleporter sesini duyar duymaz rotate hızını ayarla.
 
-Teleporter ses çıkarır. O ses seni ele verir. Ama düşman seni duyduğunda, sen de düşmanın yerini biliyorsun. Düşman teleporter'dan geçiyorsa çıkış noktasına util at — Hookah'a smoke, A Short çıkışına flash. Ses duyunca donup bekleme, önlemini al.
+Teleporter ses çıkarır. O ses seni ele verir. Ama düşman seni duyduğunda, sen de düşmanın yerini biliyorsun. Düşman teleporter'dan geçiyorsa çıkış noktasına util at — A Short'tan gelen B Window'a çıkar (oraya smoke), B Long'dan gelen A Lobby/Showers'a çıkar (oraya flash). Ses duyunca donup bekleme, önlemini al.
 
 Site'lara gelince: A Site'ta açı bol. Heaven, Lamps, Triple Box, A Short — post-plant'te crossfire kurmak kolay. B Site'ta Hookah yukarıyı tutar, B Elbow güçlü bir anchor noktası, B Long dar ve boğaz gibi çalışır.
 
@@ -29,8 +34,8 @@ B Long'u tek başına peek atarak geçemezsin. Elbow'dan ve B Site'tan crossfire
 **Ölüm Bölgesi 3: Hookah (B Window)**
 Hookah'yı kim alırsa B Site'ı o kontrol eder. Saldırıdaysan Hookah'yı almadan B Site'a girme — yukarı açı seni durmadan vurur. Savunmadaysan Hookah'yı verme, yoksa B düşer. Tek başına kuru peek ile Hookah'yı almaya kalkma. Ya tel ya bot koy, ya da takımınla birlikte temizle.
 
-**Ölüm Bölgesi 4: A Short / Teleporter Çıkışı**
-A Short'ta iki ayrı tehdit var: A Bath'tan gelenler ve teleporter'dan çıkanlar. İkisini tek başına yönetemezsin. A Short'u her zaman en az iki kişiyle tut — biri teleporter çıkışına bakar, biri A Bath'a. Saldırıdaysan Lamps açısını ve Heaven'ı da hesaba kat, ikisini aynı anda görmeden push yapma.
+**Ölüm Bölgesi 4: A Short / Teleporter Girişi**
+A Short, A'dan B'ye giden teleporter'ın GİRİŞİDİR (A Short → B Window). Çıkış değil — bu yüzden tehdit teleporter'dan "çıkanlar" değil, A Bath'tan ve Lamps tarafından gelir. A Short'u tek başına tutma; A Bath ile Lamps açısını aynı anda göremezsin. Saldırıdaysan Lamps açısını ve Heaven'ı da hesaba kat, ikisini aynı anda görmeden push yapma. (A tarafına gerçek teleporter çıkışı A Lobby/Showers'tadır — B Long teleporter'ından gelen oraya çıkar.)
 
 **Ölüm Bölgesi 5: B Garden (Arka Bahçe)**
 Spike B Default'a kurulduktan sonra en tehlikeli yer B Garden olur. Saldırı B Garden ve B Long'dan crossfire kurar. Retake yaparken B Garden'a util atmadan girme — lurker orada seni bekler. Retake'ten önce B Garden'a molly veya flash at, sonra gir.
@@ -44,8 +49,8 @@ COUNTER: A'daki iki kişi kuru peek atmaz — sadece util ve sesle bilgi toplar.
 WHY: Bind'de mid yok, yani bilgi sadece iki yoldan gelir. Default her iki yolu da okur ve sana seçim hakkı verir. Bilgi almadan execute atarsan kör giriyorsun — düşman 3 kişiyle tutuyorsa bile util dezavantajında boğulursun.
 
 **Pattern 2: A Execute**
-IF: Takım A Site'a tam execute atıyorsa — Heaven ve Lamps'a smoke, A Bath'tan flash, teleporter ile B'den biri A Short'a flank.
-MEANING: Heaven smoke'u yukarı açıyı kapatır. Lamps smoke'u crossfire'ı kırar, entry için güvenli geçiş açar. A Bath flash'ı savunucuyu açıdan düşürür. Teleporter'dan gelen beşinci kişi A Short'tan baskı kurar, savunmayı iki yönden sıkıştırır.
+IF: Takım A Site'a tam execute atıyorsa — Heaven ve Lamps'a smoke, A Bath'tan flash, B Long teleporter'ı ile biri A Lobby/Showers'tan flank.
+MEANING: Heaven smoke'u yukarı açıyı kapatır. Lamps smoke'u crossfire'ı kırar, entry için güvenli geçiş açar. A Bath flash'ı savunucuyu açıdan düşürür. B Long teleporter'ından gelen beşinci kişi A Lobby/Showers tarafından (A Bath ağzı) baskı kurar, savunmayı iki yönden sıkıştırır. (B'den teleporter ile A Short'a çıkılmaz — o teleporter A Lobby/Showers'a açılır.)
 COUNTER: En az üç util harcanmalı: Heaven smoke + Lamps smoke + flash. Flash, entry oyuncusunun swing'iyle aynı anda patlamalı — erken patlarsa savunucu açısını tekrar alır. Teleporter'daki oyuncu execute sesini duyunca hareket eder; çok erken gelirse yakalanır, çok geç gelirse trade penceresi kapanır. Plant yeri A Default (Triple Box arkası) — oradan Lamps ve A Short'a çapraz ateş kurarsın.
 WHY: Bu execute'un gücü savunmacıyı aynı anda birden fazla yönden baskılaması. Smoke görüşü keser, flash açıdan düşürür, flank onu iki ateş arasına sıkıştırır. Üç eleman birlikte çalışınca savunmacının tek seçeneği retake'e çekilmek olur. Bir eleman eksik olursa execute yarım kalır, site içi crossfire seni öldürür.
 
@@ -154,7 +159,7 @@ Bind bu seviyede tamamen karşı okuma haritası. Düşmanın default'unu gör, 
 - **A Heaven**: Site'in üstündeki yükselti. Buradan tüm saldırıyı yukarıdan okursun. Güçlü — ama flash'la veya smoke'la içini alan biri seni çıplak bırakır.
 - **A Hell**: Heaven'ın altındaki boşluk. Heaven'dan drop atarsan veya sessiz girmek istersen burası. Saldırı buraya bakmayı unutur.
 - **A Lamps**: A Short tarafındaki karanlık alan. Off-angle için biçilmiş kaftan — saldırı oraya bakacağını aklına getirmez. İlk birkaç round'da yerini ele verme.
-- **A Short**: A Bath ile teleporter çıkışının birleştiği nokta. İki yönden aynı anda tehdit gelir. Burayı tek başına tutmaya kalkma — yanında biri olmadan açık kalırsın.
+- **A Short**: A Bath ile A site'ı birbirine bağlayan dar geçit; burada A'dan B'ye giden teleporter'ın GİRİŞİ var (A Short → B Window). Çıkış değil — tehdit A Bath ve Lamps yönünden gelir. Burayı tek başına tutmaya kalkma — A Bath ile Lamps açısını aynı anda göremezsin.
 - **A Bath (Hamam)**: A saldırısının ana girişi. Dar, tek yön. Elinde flash veya smoke yoksa içeri girme — doğrudan ölürsün.
 - **Triple Box**: A Site içindeki üç kutunun olduğu köşe. Spike buraya kurulur (A Default), arkası korunma sağlar.
 
@@ -185,7 +190,7 @@ MEANING: Savunmacı defuse için spike'a yaklaşmak zorunda — iki farklı aç�
 
 COUNTER (Saldırı):
 - Spike konduktan hemen sonra pozisyonunu al. Sonradan hareket edersen ses çıkar, seni bulurlar.
-- Lamps'taysan dar açıyı tut, gereksiz peek atma. A Short'taysan teleporter çıkışını da gözünde bulundur — savunma oradan flanklayabilir.
+- Lamps'taysan dar açıyı tut, gereksiz peek atma. A tarafında post-plant tutuyorsan A Lobby/Showers'ı (B Long teleporter'ının A çıkışı) gözünde bulundur — savunma oradan flanklayabilir.
 - Defuse sesi gelince molly veya grenade'i spike üstüne at, defuse'u kes.
 
 COUNTER (Savunma retake):
@@ -255,8 +260,8 @@ WHY: Sentinel utili o açıyı sürekli tutar, ölme riski almaz. Düşman aynı
 IF: Düşman her round teleporter'dan geçerek split push yapıyorsa.
 MEANING: Teleporter çıkışını kim kontrol ederse round'u o kontrol eder.
 COUNTER:
-- A Short veya B Short teleporter çıkışına tel koy — çıkan düşman anında açılır.
-- Bot'unu çıkışa bak — çıkan düşman hem hasar alır hem ses verir.
+- Gerçek teleporter çıkışlarına tel koy: B Window/Hookah tarafına (A Short → B teleporter çıkışı) ve A Lobby/Showers'a (B Long → A teleporter çıkışı). A Short çıkış değil giriştir, oraya tel koymak teleporter'dan çıkanı yakalamaz.
+- Bot'unu bu çıkışlara bak — çıkan düşman hem hasar alır hem ses verir.
 - Çıkışta oyuncu bekletebilirsin — teleporter animasyonu sırasında düşman ateş edemez, sen edebilirsin.
 
 WHY: Teleporter'dan çıkarken kısa bir an savunmasızsın. O anı utille veya oyuncuyla yakalarsan çıkan düşmanı bedavaya vurursun ve bu stratejisi çöker.

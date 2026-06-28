@@ -4,7 +4,7 @@
 Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi geniş alana yayar — sen bir noktayı kilitlersin. Duvarın girişi tamamen kapatır, ağ tuzağın içinden geçeni yere yapıştırır, tuzağın sese tepki verip düşmanı sersemletir ve yerini ele verir, ult'un yakaladığını garanti götürür. Hızla site alan takımlar senin avın. Tek zayıf yanın şu: utility'ni boşalttıktan sonra başka açıdan gelen baskıya verecek çok az cevabın kalır.
 
 ## 2. Temel Sorumluluklar
-- **Girişi kapat**: Duvarı düşmanın en çok bastığı tek noktaya koy. Sage duvarı gibi çabuk kırılmaz — düşman orbları tek tek vurmak zorunda, bu sana hem zaman hem konum kazandırır.
+- **Girişi kapat**: Duvarı düşmanın en çok bastığı tek noktaya koy. Düşman orbları teker teker vurabilir; ama merkezdeki büyük orbu vuran duvarın tamamını birden düşürür. Merkez orb en dayanıklısıdır (yan orblara göre çok daha fazla mermi yer), bu yüzden tek başına bir duvar yerine onu tuzakla katmanla — yine de kırılması zaman ister, bu sana hem süre hem konum kazandırır.
 - **Rush'ı dağıt**: Ağ tuzağını önceden atma. Düşmanın o koridora girdiğini duyduğun an at. Eğilmeye zorlarsan hızını alırsın, orbu vurmaya zorlarsan pozisyonunu alırsın.
 - **Sesle yakala**: Tuzağın ayak sesine, yetenek sesine, silah sesine tepki verir — sana hem bilgi hem kısa bir sersemletme kazandırır. Takım arkadaşının geçmeyeceği, düşmanın da sessiz geçemeyeceği yollara koy.
 - **Round'u kapat**: Ult'unu izole bir düşmana ya da spike kurulduktan sonra defuse'a gelen oyuncuya kullan. Koza yolu dar ve korunaklı olsun — açıkta kalan kozayı düşmanın takım arkadaşları vurur, içindeki kurtulur.
@@ -16,7 +16,7 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 - Tuzağı, takım arkadaşının utility'sinin ya da kendi silah sesinin sürekli tetiklediği yere koymak. Boşa alarm verir, takım gerçek uyarıyı da ciddiye almaz.
 - Ult'u açık alanda kullanmak. Koza görünürdeyse düşmanın takım arkadaşları vurur, içindeki kurtulur.
 - Tüm utility'yi tek noktaya harcamak. Düşman rotate edince elinde hiçbir şey kalmaz.
-- Duvarın nasıl kırıldığını bilmemek. Orbları vurmayı bilen düşman duvarı çabuk söker — o sesi duy, önceden açını kur.
+- Duvarın nasıl kırıldığını bilmemek. Merkez orbu hedeflemeyi bilen düşman duvarın hepsini birden düşürebilir — o orb kırma sesini duy, önceden açını kur.
 - Tuzağı ve ağ tuzağını görünür yere koymak. İkisi de gözle bulunabilir — düşman görürse tuzağı uzaktan vurur, ağ tuzağının üstünden eğilip geçmeden önce yavaşlar ama yine de planını bozar. Köşeye, alçak zemine, görüş hattının dışına koy.
 - Ult'u boşa, ilk teması açmak için atmak. Ult senin en güçlü kapanış aracın — onu round'u garanti almak için sakla, dövüş başlatmak için değil. Sadece sersemletmek istiyorsan zaten tuzağın var.
 
@@ -34,7 +34,7 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 
 **IF** Tuzak tetikleniyor ama hiç düşman gelmiyor
 **MEANING** Tuzağı, takım arkadaşının ya da ortam sesinin tetiklediği bir yere koymuşsun. Boşa alarm veriyor.
-**COUNTER** Tuzağı sadece düşmanın ayak sesinin — eğilerek yürüse bile — tetikleyeceği sessiz köşelere, derin flank yollarına koy. Bind'de hookah'ta kapı arkası değil, iç köşe gibi noktalar doğru tercihtir.
+**COUNTER** Tuzak sese tepki verir, harekete değil — eğilerek geçen düşman ses çıkarmaz ve tuzağı tetiklemez. Bu yüzden tuzağı, düşmanın koşmak, atlamak, ateş etmek ya da reload yapmak zorunda kalacağı; ama takım arkadaşının sessizce geçemeyeceği noktalara koy. Bind'de hookah'ta kapı arkası değil, iç köşe gibi noktalar doğru tercihtir.
 **WHY** Boşa alarm bilgini öldürür. Takım gerçek tetiklenmeleri de ciddiye almamaya başlar.
 
 **IF** Ult kullanıyorsun ama düşman her seferinde kurtarılıyor
@@ -52,8 +52,8 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 **COUNTER** Orb kırma sesini aktif dinle — kıran düşman pozisyonunu açığa çıkarır. O ses gelince hazır açıda bekle. Duvarın arkasına tuzak koy, orbu kırarken tuzak tetiklensin.
 **WHY** Duvar yalnız durduğunda sadece geciktirir. Tuzakla birleşince orbu kıran düşman hem sersemler hem pozisyonunu açığa çıkarır — duvar bir tuzak kapısına döner.
 
-**IF** Düşman ağ tuzağına yakalanıyor ama sen ona ateş açamadan eğilip kurtuluyor
-**MEANING** Ağ tuzağını attın ama üstünü tutmuyorsun. Yere yapışan düşman birkaç saniyede eğilip ağdan çıkıyor — sen o pencerede ateş etmezsen bedava bir kaçış vermiş oluyorsun.
+**IF** Düşman ağ tuzağına yakalanıyor ama sen ona ateş açamadan kurtuluyor
+**MEANING** Ağ tuzağını attın ama üstünü tutmuyorsun. Yere yapışan düşman ağı söküp çıkmak için kısa süre kanalize eder (F'ye basar) ve bu sırada sana sesli uyarı gelir — sen o pencerede ateş etmezsen bedava bir kaçış vermiş oluyorsun.
 **COUNTER** Ağ tuzağını her zaman ateş açabileceğin bir açıya at. Yakalanan düşmana anında ateş aç ya da takım arkadaşını çağır. Net düşmanı öldürmez, sadece kısa süre tutar — değeri ancak biri o pencereyi kullanırsa çıkar.
 **WHY** Ağ tuzağı bir tutuş aracı, bir öldürme aracı değil. Tutulan düşmana hiçbir baskı binmezse net'i hatırlatıcı bir uyarıdan ibaret kalır. Sen ya da takımın o pencerede tetiği çekmeli.
 
@@ -103,7 +103,7 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 "Düşman duvar yerlerini ezberledi, etrafından dolanıyor. Round değiştir — hangi girişi kilitlediğini değiştir. Duvarın kapamadığı yolu ağ tuzağıyla tut."
 
 ### Ağ Tuzağını Boşa Harcıyorsa
-"Ağ tuzağı yakalıyor ama düşman eğilip çıkıyor çünkü üstünü tutmuyorsun. Net öldürmez, sadece tutar — yakaladığın an ateş aç ya da takımı çağır. Tutamayacağın açıya net atma."
+"Ağ tuzağı yakalıyor ama düşman ağı söküp çıkıyor çünkü üstünü tutmuyorsun. Net öldürmez, sadece tutar — yakaladığın an ateş aç ya da takımı çağır. Tutamayacağın açıya net atma."
 
 ### Utility'yi Erken Boşaltıyorsa
 "Düşmanın ilk sesine bütün yeteneğini harcıyorsun, gerçek push gelince elin boş kalıyor. Önce duvar ya da tuzakla bilgi al — fake mi gerçek mi anla. Ağ tuzağını asıl baskı geldiğinde sakla."
