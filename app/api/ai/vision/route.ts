@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { verifyAuthAndRateLimit } from "@/lib/api-auth";
 import { saveAiUsage } from "@/lib/ai-usage";
 import { saveMatchEvent } from "@/lib/match-events";
-import { realityCheck } from "@/lib/reality-checker";
+import { realityCheck, buildFactGround } from "@/lib/reality-checker";
 import { loadVisionKnowledge } from "@/lib/knowledge-loader";
 import { sanitizePromptInput } from "@/lib/prompt-safety";
 import { loadPlayerMemory, buildMemoryContext } from "@/lib/player-memory";
@@ -10,7 +10,7 @@ import { isUuidV4 } from "@/lib/uuid";
 import { buildPolicyBlock } from "@/lib/ai-policy";
 import { buildAgentAbilityHint, enforceAgentKit } from "@/lib/agent-abilities";
 import { cleanCoachText, clampWords } from "@/lib/coach-text";
-import { ROUND_FEEDBACK_SCHEMA, SYSTEM_PROMPT, USER_PROMPT } from "@/lib/vision-prompt";
+import { ROUND_FEEDBACK_SCHEMA, SYSTEM_PROMPT, USER_PROMPT, buildFactSheet } from "@/lib/vision-prompt";
 
 // ── Coach-voice OUTPUT cleaner ─────────────────────────────────────────────
 // cleanCoachText is now the SHARED single-source deterministic net in
@@ -651,9 +651,19 @@ export async function POST(request: NextRequest) {
       ? sanitizePromptInput(reqBody.patternContext, { max: 2000 })
       : "";
 
+    // Death-Data Contract (Ölüm-Veri Sözleşmesi 2026-06-29): build the ground
+    // truth ONCE here so BOTH the prompt fact-sheet AND the post-process guard
+    // read the SAME object (no drift). Same helper is reused by report/route.ts.
+    const factGround = buildFactGround(
+      reqBody as unknown as Record<string, unknown>,
+      ctx as unknown as Record<string, unknown>,
+    );
+    const factSheet = buildFactSheet(factGround, ctx as unknown as Record<string, unknown>);
+
     // Assemble JSON-formatted context — single block, no decorative borders, no header chrome.
     const ctxJson = Object.keys(ctx).length > 0 ? JSON.stringify(ctx, null, 2) : "";
     const clientContext =
+      factSheet +   // BİLİNEN/BİLİNMEYEN sözleşmesi EN BAŞTA — model olgu-sınırını önce görsün
       (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, screenshot'tan güvenilir]\n${ctxJson}` : "") +
       (patternBlock ? `\n\n[PATTERN — son round'lardaki tekrar eden hata. Bu varsa deathAnalysis veya nextRoundSuggestion'da koç gibi referans ver — extra alan açma]\n${patternBlock}` : "");
 
@@ -872,24 +882,10 @@ export async function POST(request: NextRequest) {
         death_position: r.death_position as string | null | undefined,
         position_confidence: r.position_confidence as string | undefined,
       }));
-      // Present-round ground truth so the checker can strip route/trade claims
-      // the desktop never actually measured (anti-fabrication, works on round 1).
-      const factGround = {
-        hasRoute: typeof ctx.playerRoute === "string" && (ctx.playerRoute as string).length > 0,
-        hasTradeData: typeof reqBody.tradedByAlly === "boolean",
-        // Grounding audit 2026-06-26: killerInfo OCR'da yoksa, reality-checker
-        // belirli-ajan katil iddialarını "bir düşman"a indirir (uydurma katil engeli).
-        hasKiller: typeof reqBody.killerInfo === "string" && (reqBody.killerInfo as string).length > 0,
-        // LAUNCH BLOCKER 2026-06-28: deathLocation OCR'da yoksa, reality-checker
-        // "X'te öldün" gibi spesifik yer-iddialarını siler (canlı-test halüsinasyonu:
-        // payload deathLocation göndermeyince model "A Dish"/"B Tower" uyduruyordu).
-        hasDeathLocation: typeof ctx.deathLocation === "string" && ctx.deathLocation.length > 0,
-        // Headshot OCR'da HİÇ okunmuyor (canlı-test 2026-06-29): combat-report sadece
-        // "killed by X" verir, headshot bilgisi yok → hasHeadshot pratikte DAİMA false
-        // → reality-checker ölüm-tarifindeki uydurma "kafadan"ı siler. İleride OCR
-        // headshot okursa reqBody.headshot=true gelir, strip atlanır.
-        hasHeadshot: (reqBody as Record<string, unknown>).headshot === true,
-      };
+      // Present-round ground truth (factGround) built ABOVE via buildFactGround
+      // (Ölüm-Veri Sözleşmesi 2026-06-29) — same object that produced the prompt
+      // fact-sheet, so the guard strips exactly the facts the model was told were
+      // unknown (killer/weapon/location/headshot/alive/spike/route/trade).
       const checkedAnalysis = realityCheck(fb.deathAnalysis, memoryForCheck, factGround, "death");
       const checkedSuggestion = realityCheck(fb.nextRoundSuggestion, memoryForCheck, factGround, "suggestion");
       if (checkedAnalysis.modified || checkedSuggestion.modified) {

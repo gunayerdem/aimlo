@@ -11,7 +11,7 @@ import { loadPlayerMemory, updatePlayerMemory, buildMemoryContext } from "@/lib/
 import { loadKnowledge } from "@/lib/knowledge-loader";
 import { buildPolicyBlock } from "@/lib/ai-policy";
 import { cleanCoachText } from "@/lib/coach-text";
-import { realityCheck } from "@/lib/reality-checker";
+import { realityCheck, buildFactGround, type FactGround } from "@/lib/reality-checker";
 import { isUuidV4 } from "@/lib/uuid";
 import type { RoundData as EngineRoundData } from "@/types";
 
@@ -937,9 +937,25 @@ ${scoringContext}`;
       // Maç boyu hiç killerAgent okunmadıysa hasKiller=false → uydurma katil "bir
       // düşman"a iner; headshot daima okunmuyor → "kafadan" silinir. realityCheck
       // cleanCoachText'ten ÖNCE (killer-collapse + headshot-strip ham metinde çalışsın).
+      // Ölüm-Veri Sözleşmesi 2026-06-29: report is MATCH-level (not a single
+      // reqBody/ctx) → derive the contract flags from the rounds array so the
+      // SAME guards run as in vision. Build a neutral base via buildFactGround
+      // (alive/spike→false, headshot→false) then set match-level aggregates:
+      //   hasKiller       = ANY round read a killerAgent (else collapse to "bir düşman")
+      //   hasDeathLocation= ANY round read a deathLocation (denetim fix #2: blanket-false
+      //                     would kill legit "A Site'te sürekli öldün" coaching; blanket-
+      //                     true would let "A Dish'te öldün" fabrication through. Derive it.)
+      // hasWeapon stays false (report has no enemy weapon string in the AI text path);
+      // hasRoute/hasTradeData false (not measured/sent at match-report time).
       const anyKiller = Array.isArray(body.rounds)
         && body.rounds.some((r) => typeof r.killerAgent === "string" && r.killerAgent.length > 0);
-      const fg = { hasKiller: anyKiller, hasHeadshot: false, hasDeathLocation: true, hasRoute: false };
+      const anyLoc = Array.isArray(body.rounds)
+        && body.rounds.some((r) => typeof r.deathLocation === "string" && r.deathLocation.length > 0);
+      const fg: FactGround = {
+        ...buildFactGround({}, {}),
+        hasKiller: anyKiller,
+        hasDeathLocation: anyLoc,
+      };
       const clean = (s: string, cap: number) =>
         cleanCoachText(realityCheck(s, [], fg, "generic").text, isTr ? "tr" : "en").slice(0, cap);
       return {

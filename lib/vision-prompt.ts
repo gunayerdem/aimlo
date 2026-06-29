@@ -6,6 +6,56 @@
 // eval harness (scripts/eval-vision.ts) assemble the EXACT same prompt. The
 // per-request policy/KB/context blocks are layered on top by the route.
 
+import type { FactGround } from "./reality-checker";
+
+/**
+ * Death-Data Contract fact-sheet (Ölüm-Veri Sözleşmesi 2026-06-29).
+ *
+ * Turns the factGround + ctx into an explicit per-round "BİLİNEN / BİLİNMEYEN"
+ * line injected into the USER message (NOT the cached system prefix — it's
+ * per-round so it would pollute the prompt cache). This is the FIRST line of
+ * defense: the model is told exactly which facts are real and which it must
+ * never name/invent. The reality-checker guard remains the deterministic second
+ * line. Compact single block to keep the uncached token cost low.
+ */
+export function buildFactSheet(fg: FactGround, ctx: Record<string, unknown>): string {
+  const known: string[] = [];
+  const unknown: string[] = [];
+
+  // killer + weapon (killerInfo is one string: agent + optional "with <weapon>")
+  if (fg.hasKiller) known.push(`katil=${ctx.killerInfo}`);
+  else unknown.push("katil (ajan)");
+  if (!fg.hasWeapon) unknown.push("öldüren silah"); // present → already in killerInfo
+
+  if (fg.hasDeathLocation) known.push(`ölüm yeri=${ctx.deathLocation}`);
+  else unknown.push("ölüm yeri/callout");
+
+  if (fg.hasDeathAngle) known.push(`yön=${ctx.deathAngle}`);
+  else unknown.push("vurulma yönü");
+
+  if (fg.hasHeadshot) known.push("kafadan vuruldu");
+  else unknown.push("headshot (kafadan mı)");
+
+  if (fg.hasAliveCount) known.push(`hayatta: müttefik=${ctx.alliesAlive ?? "?"}, düşman=${ctx.enemiesAlive ?? "?"}`);
+  else unknown.push("kaç kişi hayatta (sayı)");
+
+  if (fg.hasSpike) known.push(`spike=${ctx.spikePlanted ? "kurulu" : "kurulu değil"}`);
+  else unknown.push("spike durumu");
+
+  if (fg.hasTradeData) known.push(`trade=${ctx.tradedByAlly ? "alındı" : "alınmadı"}`);
+  else unknown.push("trade alındı mı");
+
+  if (fg.hasRoute) known.push(`rota=${ctx.playerRoute}`);
+  else unknown.push("giriş yolu/rota");
+
+  const knownLine = known.length ? known.join(", ") : "(bu round net olgu yok)";
+  const unknownLine = unknown.length ? unknown.join(", ") : "(yok)";
+  return `\n\n[ÖLÜM-VERİ SÖZLEŞMESİ — BU ROUND İÇİN KESİN]\n`
+    + `BİLİNEN (yalnız bunları olgu olarak kullan): ${knownLine}.\n`
+    + `BİLİNMEYEN (bunları ASLA İSİMLENDİRME/İDDİA ETME, uydurma): ${unknownLine}.\n`
+    + `Kural: BİLİNMEYEN bir olguyu doldurma. Katil bilinmiyorsa "bir düşman" de; yer/silah/headshot/sayı/spike/rota bilinmiyorsa o konuyu AÇMA, ekrandan/roster'dan tahmin etme.`;
+}
+
 export const ROUND_FEEDBACK_SCHEMA = {
   name: "round_feedback",
   strict: true,

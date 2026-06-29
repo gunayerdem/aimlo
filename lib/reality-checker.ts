@@ -30,6 +30,28 @@ interface ValidationResult {
   rewriteLevel: 1 | 2 | 3;
 }
 
+// ── Death-Data Contract (Ölüm-Veri Sözleşmesi 2026-06-29) ──
+//
+// Single ground-truth shape shared by BOTH the vision route AND the report
+// route (built once via buildFactGround → no per-route drift). Each flag means
+// "this fact was actually OBSERVED for this round" (OCR/desktop truth present).
+// When a flag is false/absent, guardUnprovenFacts DETERMINISTICALLY removes any
+// AI claim about that fact — the model can never assert an unobserved fact.
+// When a flag is TRUE the corresponding guard NEVER touches the text (a correct
+// killer/location/weapon is preserved verbatim). All optional → every existing
+// caller (route/trade/killer/location/headshot only) stays type-compatible.
+export interface FactGround {
+  hasKiller?: boolean;        // killerInfo OCR present
+  hasWeapon?: boolean;        // killerInfo contains "with <weapon>" (enemy weapon parsed)
+  hasDeathLocation?: boolean; // deathLocation OCR present
+  hasDeathAngle?: boolean;    // deathAngle OCR present (NO guard — meşru "arkadan geldi")
+  hasHeadshot?: boolean;      // headshot===true (desktop never sends → effectively always false)
+  hasAliveCount?: boolean;    // alive counts RELIABLE (desktop can't distinguish 0-vs-unread → always false)
+  hasSpike?: boolean;         // spike state RELIABLE (only set when true → can't tell false/absent → always false)
+  hasTradeData?: boolean;     // tradedByAlly boolean present
+  hasRoute?: boolean;         // playerRoute measured
+}
+
 // ── Claim Extraction ──
 
 const COUNT_PATTERNS = [
@@ -377,13 +399,57 @@ const AGENT_NAMES = [
 // Definite kill verbs (after coach-text's -miş→-di normalization runs upstream).
 const KILL_VERBS = "(öldürdü|öldürdün|kesti|vurdu|düşürdü|indirdi|biçti)";
 
+// Weapon names for the weapon-when-absent guard (Ölüm-Veri Sözleşmesi 2026-06-29).
+// Used to strip a FABRICATED enemy-weapon claim when killerInfo has no "with <X>"
+// (i.e. the killing weapon was never read). 'op'/'awp'/short ambiguous tokens
+// DELIBERATELY EXCLUDED — 'operator' already covers it and short tokens risk
+// matching unrelated words ('open', 'op' inside other words). loadout (the
+// PLAYER'S own weapon) is a SEPARATE fact and is NEVER touched: the strip is
+// anchored to a "seni ... <weapon> ... <kill-verb>" (enemy→player) pattern so
+// legit loadout advice ("Vandal aldın ama vuramadın") and enemy-economy
+// observations ("düşman shorty aldı") stay byte-identical (denetim fix #1/#3).
+const WEAPON_NAMES = [
+  "operator", "vandal", "phantom", "sheriff", "ghost", "classic", "spectre",
+  "bulldog", "guardian", "marshal", "outlaw", "judge", "bucky", "ares", "odin",
+  "stinger", "frenzy", "shorty",
+];
+
+/**
+ * Build the Death-Data Contract ground truth from the raw request body + the
+ * sanitized ctx. SINGLE source for BOTH the vision route AND the report route so
+ * the fact-sheet (prompt) and the guard (post-process) read the SAME object —
+ * no per-route drift. Every flag means "this fact was actually OBSERVED".
+ *
+ * alive/spike are HARD-false: the desktop sends no reliable signal (can't tell
+ * "0" from "unread", spike only set when planted). Safe side = those claims are
+ * always neutralized = zero fabrication. If the desktop later sends an explicit
+ * read-flag/sentinel, flip these here — backend-only, no desktop dependency.
+ */
+export function buildFactGround(
+  reqBody: Record<string, unknown>,
+  ctx: Record<string, unknown>,
+): FactGround {
+  const killerInfo = typeof reqBody.killerInfo === "string" ? reqBody.killerInfo : "";
+  return {
+    hasKiller: killerInfo.length > 0,
+    hasWeapon: killerInfo.length > 0 && /\bwith\s+\S/i.test(killerInfo),
+    hasDeathLocation: typeof ctx.deathLocation === "string" && (ctx.deathLocation as string).length > 0,
+    hasDeathAngle: typeof ctx.deathAngle === "string" && (ctx.deathAngle as string).length > 0,
+    hasHeadshot: reqBody.headshot === true,
+    hasAliveCount: false,
+    hasSpike: false,
+    hasTradeData: typeof reqBody.tradedByAlly === "boolean",
+    hasRoute: typeof ctx.playerRoute === "string" && (ctx.playerRoute as string).length > 0,
+  };
+}
+
 /**
  * Strip route-origin and trade-outcome claims the supporting fact can't back.
  * Deterministic, grammar-collapsing (same house style as rewriteUnsafeClaims).
  */
 export function guardUnprovenFacts(
   text: string,
-  factGround: { hasRoute?: boolean; hasTradeData?: boolean; hasKiller?: boolean; hasDeathLocation?: boolean; hasHeadshot?: boolean },
+  factGround: FactGround,
 ): string {
   let result = text;
 
@@ -412,6 +478,54 @@ export function guardUnprovenFacts(
     result = result.replace(new RegExp(`${NLB}(?:unknown|bilinmeyen)${NL}`, "gi"), "bir düşman");
     // STEP4: "bir düşman ya da bir düşman" run'larını tek'e çökert
     result = result.replace(/bir düşman(?:\s*(?:ya da|veya|\/|,)\s*bir düşman)+/gi, "bir düşman");
+  }
+
+  // WEAPON-absent (Ölüm-Veri Sözleşmesi #2, 2026-06-29): killerInfo'da "with <silah>"
+  // YOKKEN öldüren DÜŞMAN silahı BİLİNMİYOR → model silah-ismini UYDURAMAZ. Strip
+  // SADECE "seni ... <silah> ... <öl-fiili>" (düşman→oyuncu öldürme) çapasına bağlı:
+  // böylece (a) loadout/oyuncu-silahı ("Vandal aldın ama vuramadın") ve (b) düşman-
+  // ekonomi gözlemi ("düşman shorty aldı") DOKUNULMADAN kalır (denetim fix #1/#3).
+  // hasWeapon=true iken (killerInfo silahı içeriyor) DOKUNMA. 'aldı' fiil-listesinde
+  // DEĞİL (çift-anlam: öldürdü/satın-aldı). Fiilden SONRA NL sınırı → 'vurdun/öldürdün'
+  // gibi ekli formlar kısmi eşleşmesin.
+  if (factGround.hasWeapon === false) {
+    const WALT = WEAPON_NAMES.map(escapeRe).sort((a, b) => b.length - a.length).join("|");
+    const NLB = "(?<![a-zçğıöşüâîû])", NL = "(?![a-zçğıöşüâîû])";
+    const WKV = "(öldürdü|öldürdün|vurdu|vurdun|kesti|düşürdü|indirdi|biçti)";
+    // "seni ... operator'la ... öldürdü" → silahı (+edatı) sil, geri kalanı koru.
+    const re = new RegExp(
+      `((?<![a-zçğıöşü])seni(?![a-zçğıöşü])[^.!?;:—\\n]{0,40}?)${NLB}(?:${WALT})${NL}\\s*['’]?\\s*(?:l[ae]|ile)?\\s+([^.!?;:—\\n]{0,30}?)${WKV}${NL}`,
+      "gi",
+    );
+    result = result.replace(re, (_m, pre, mid, verb) => `${pre}${mid}${verb}`);
+  }
+
+  // ALIVE-COUNT-absent (Ölüm-Veri Sözleşmesi #6, 2026-06-29): hayatta-sayısı
+  // güvenilir DEĞİL (desktop '0 gerçekten 0' vs 'OCR okunamadı' ayrımı göndermiyor)
+  // → hasAliveCount DAİMA false → "N düşman kaldı / 1vN kaldın / takımın N kişi sağ"
+  // sayı-iddiasını sil. hasAliveCount=true iken (ileride desktop güvenilir sinyal
+  // gönderirse) DOKUNMA.
+  if (factGround.hasAliveCount === false) {
+    const ALIVE_PATTERNS: RegExp[] = [
+      /\b\d+\s*(düşman|rakip)\s*(kaldı|sağ|hayatta|vardı)/gi,
+      /\b\d+\s*v\s*\d+\b/gi,                       // "1v3", "2 v 4"
+      /\btakım(ın)?\s+\d+\s*kişi\s*(sağ|kaldı|hayatta)/gi,
+      /\b\d+\s*kişi\s*(sağ\s*kaldı|hayatta\s*kaldı)/gi,
+    ];
+    for (const re of ALIVE_PATTERNS) result = result.replace(re, "");
+  }
+
+  // SPIKE-absent (Ölüm-Veri Sözleşmesi #7, 2026-06-29): spike durumu güvenilir DEĞİL
+  // (ctx.spikePlanted yalnız true iken set → false/absent ayırt edilemiyor) → hasSpike
+  // DAİMA false → "spike kuruldu/kurulmadı/defuse ediyordun" iddiasını sil. hasSpike=true
+  // iken DOKUNMA.
+  if (factGround.hasSpike === false) {
+    const SPIKE_PATTERNS: RegExp[] = [
+      /\bspike\s*['’]?\s*(kuruldu|kurulmuştu|kurulmadı|kurulmamıştı|kurmuştun|açılmıştı)/gi,
+      /\b(defuse|defüz)\s*(ediyordun|ettin|etmeye|alıyordun)/gi,
+      /\bspike\s*(defuse|çöz)/gi,
+    ];
+    for (const re of SPIKE_PATTERNS) result = result.replace(re, "");
   }
 
   // HEADSHOT-absent (canlı-test 2026-06-29): headshot verisi sistemde HİÇ okunmuyor
@@ -492,7 +606,7 @@ export function guardUnprovenFacts(
 export function realityCheck(
   outputText: string,
   roundHistory: RoundMemoryEntry[],
-  factGround?: { hasRoute?: boolean; hasTradeData?: boolean; hasKiller?: boolean; hasDeathLocation?: boolean; hasHeadshot?: boolean },
+  factGround?: FactGround,
   // Cycle 3 (council 2026-06-26): field-type hint. "suggestion" suppresses the
   // neutral death-fallback (returns "" instead so the route keeps the original
   // advice). Omitted ⇒ "death"/"generic" behavior = byte-identical to before;
