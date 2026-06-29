@@ -11,6 +11,7 @@ import { loadPlayerMemory, updatePlayerMemory, buildMemoryContext } from "@/lib/
 import { loadKnowledge } from "@/lib/knowledge-loader";
 import { buildPolicyBlock } from "@/lib/ai-policy";
 import { cleanCoachText } from "@/lib/coach-text";
+import { realityCheck } from "@/lib/reality-checker";
 import { isUuidV4 } from "@/lib/uuid";
 import type { RoundData as EngineRoundData } from "@/types";
 
@@ -931,7 +932,16 @@ ${scoringContext}`;
     // before returning — tarzanca/codename/apostrophe the model leaks gets
     // corrected on the wire. Shape + persist payload unchanged (only contents).
     if (isValidAITextFields(parsed)) {
-      const clean = (s: string, cap: number) => cleanCoachText(s, isTr ? "tr" : "en").slice(0, cap);
+      // Canlı-test 2026-06-29: report route'ta killer/headshot guard HİÇ yoktu →
+      // mistake/tendencies'te "Reyna ya da unknown kafadan öldürdü" denetimsiz çıkıyordu.
+      // Maç boyu hiç killerAgent okunmadıysa hasKiller=false → uydurma katil "bir
+      // düşman"a iner; headshot daima okunmuyor → "kafadan" silinir. realityCheck
+      // cleanCoachText'ten ÖNCE (killer-collapse + headshot-strip ham metinde çalışsın).
+      const anyKiller = Array.isArray(body.rounds)
+        && body.rounds.some((r) => typeof r.killerAgent === "string" && r.killerAgent.length > 0);
+      const fg = { hasKiller: anyKiller, hasHeadshot: false, hasDeathLocation: true, hasRoute: false };
+      const clean = (s: string, cap: number) =>
+        cleanCoachText(realityCheck(s, [], fg, "generic").text, isTr ? "tr" : "en").slice(0, cap);
       return {
         ...stats,
         summary: clean(parsed.summary, 1000),

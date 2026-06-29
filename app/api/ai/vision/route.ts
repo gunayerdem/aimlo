@@ -884,6 +884,11 @@ export async function POST(request: NextRequest) {
         // "X'te öldün" gibi spesifik yer-iddialarını siler (canlı-test halüsinasyonu:
         // payload deathLocation göndermeyince model "A Dish"/"B Tower" uyduruyordu).
         hasDeathLocation: typeof ctx.deathLocation === "string" && ctx.deathLocation.length > 0,
+        // Headshot OCR'da HİÇ okunmuyor (canlı-test 2026-06-29): combat-report sadece
+        // "killed by X" verir, headshot bilgisi yok → hasHeadshot pratikte DAİMA false
+        // → reality-checker ölüm-tarifindeki uydurma "kafadan"ı siler. İleride OCR
+        // headshot okursa reqBody.headshot=true gelir, strip atlanır.
+        hasHeadshot: (reqBody as Record<string, unknown>).headshot === true,
       };
       const checkedAnalysis = realityCheck(fb.deathAnalysis, memoryForCheck, factGround, "death");
       const checkedSuggestion = realityCheck(fb.nextRoundSuggestion, memoryForCheck, factGround, "suggestion");

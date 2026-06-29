@@ -16,7 +16,7 @@ export const ROUND_FEEDBACK_SCHEMA = {
     properties: {
       deathAnalysis: {
         type: "string",
-        description: "1-2 cümle Türkçe koç sesi. ZORUNLU: ölüm callout'u + killer ajan + silah/utility + 1 somut düzeltme. Muğlak kelime (genelde/biraz/şöyle böyle) YASAK. Örn: 'B Main'den geniş açıyla peek attın, Cypher seni Heaven'dan operator'la kesti — smoke atmadan o köşeyi sallama.'",
+        description: "1-2 cümle Türkçe koç sesi. ZORUNLU: 1 somut düzeltme (callout + util/karar). killerInfo VARSA killer ajan + silahı yaz; killerInfo YOKSA ajan ismi UYDURMA, 'bir düşman' de (asla 'X ya da Y' aday-listesi, asla 'unknown'). HEADSHOT bilgisi YOK — 'kafadan vuruldun/öldün' YAZMA (headshot okunmuyor); sadece 'öldürdü/vurdu' de. Muğlak kelime (genelde/biraz) YASAK. Örn (killer biliniyor): 'B Main'de geniş açı tuttun, Cypher seni operator'la öldürdü — smoke atmadan o köşeyi sallama.' Örn (killer yok): 'B Main'de utility'siz geniş açıda kaldın, bir düşman seni oradan vurdu — köşeyi smoke'layıp öyle tut.'",
       },
       enemyAnalysis: {
         type: "array",

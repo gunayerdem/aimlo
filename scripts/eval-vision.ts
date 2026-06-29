@@ -474,6 +474,10 @@ function postProcess(s: Scenario, fb: { deathAnalysis: string; enemyAnalysis: st
   const factGround = {
     hasRoute: typeof s.body.playerRoute === "string" && (s.body.playerRoute as string).length > 0,
     hasTradeData: typeof s.body.tradedByAlly === "boolean",
+    // prod ile eşle (2026-06-29): killerInfo varsa hasKiller; headshot HİÇ okunmuyor → daima false.
+    hasKiller: typeof s.body.killerInfo === "string" && (s.body.killerInfo as string).length > 0,
+    hasDeathLocation: typeof s.body.deathLocation === "string" && (s.body.deathLocation as string).length > 0,
+    hasHeadshot: false,
   };
   const ca = realityCheck(fb.deathAnalysis, memoryForCheck, factGround);
   const cs = realityCheck(fb.nextRoundSuggestion, memoryForCheck, factGround);

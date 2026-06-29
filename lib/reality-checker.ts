@@ -372,6 +372,7 @@ const AGENT_NAMES = [
   "Sage", "Killjoy", "Cypher", "Chamber", "Deadlock", "Vyse",
   "Omen", "Brimstone", "Viper", "Astra", "Harbor", "Clove",
   "Sova", "Breach", "Skye", "Fade", "Gekko", "KAY/O", "Kayo", "Tejo",
+  "Reay", // model/OCR garble of "Reyna" (canlı-test 2026-06-29) — yakala ki katil-guard onu da nötrlesin
 ];
 // Definite kill verbs (after coach-text's -miş→-di normalization runs upstream).
 const KILL_VERBS = "(öldürdü|öldürdün|kesti|vurdu|düşürdü|indirdi|biçti)";
@@ -382,7 +383,7 @@ const KILL_VERBS = "(öldürdü|öldürdün|kesti|vurdu|düşürdü|indirdi|biç
  */
 export function guardUnprovenFacts(
   text: string,
-  factGround: { hasRoute?: boolean; hasTradeData?: boolean; hasKiller?: boolean; hasDeathLocation?: boolean },
+  factGround: { hasRoute?: boolean; hasTradeData?: boolean; hasKiller?: boolean; hasDeathLocation?: boolean; hasHeadshot?: boolean },
 ): string {
   let result = text;
 
@@ -392,11 +393,41 @@ export function guardUnprovenFacts(
   // katilin KİMLİĞİ bilinmiyor. hasKiller=true iken (killfeed var) DOKUNMA:
   // model killer'ı doğru isimlendirmeli. reality-checker bunu daha önce HİÇ
   // denetlemiyordu (audit'in #1 fabrikasyon kaynağı).
+  // killerInfo OCR'da YOKKEN model katil ismi UYDURAMAZ. Canlı-test 2026-06-29:
+  // killerInfo prefetch-timing yüzünden gönderilmiyordu → model roster'dan tahmin
+  // edip (a) yanlış katil, (b) çoklu-aday hedge "Reyna ya da Jett ya da Deadlock",
+  // (c) "unknown" sızıntısı üretiyordu. 4-adımlı deterministik collapse → tek
+  // "bir düşman". hasKiller=true iken (killfeed okundu) DOKUNMA. (council node-test 8/8)
   if (factGround.hasKiller === false) {
-    for (const ag of AGENT_NAMES) {
-      const re = new RegExp(`\\b${escapeRe(ag)}\\b([^.!?]{0,45}?)\\s${KILL_VERBS}`, "gi");
-      result = result.replace(re, (_m: string, mid: string, verb: string) => `bir düşman${mid} ${verb}`);
-    }
+    const NAME_ALT = AGENT_NAMES.map(escapeRe).sort((a, b) => b.length - a.length).join("|");
+    const KILLER_TOKEN = `(?:${NAME_ALT}|unknown|bilinmeyen)`;
+    const KV2 = "(?:vurup öldürdü|öldürdü|öldürdün|öldürüldün|kestiler|kesti|vuruldun|vurdun|vurdu|düşürdü|indirdi|biçti|aldılar|aldı|avladı|devirdi|götürdü|temizledi)";
+    const NLB = "(?<![a-zçğıöşüâîû])", NL = "(?![a-zçğıöşüâîû])";
+    // STEP1: ≥2 üyeli katil-disjunction ("X ya da Y ya da Z") → tek "bir düşman"
+    result = result.replace(new RegExp(`${NLB}${KILLER_TOKEN}(?:\\s*(?:ya da|veya|/|,)\\s*${KILLER_TOKEN})+`, "gi"), "bir düşman");
+    // STEP2: tek isimli katil + aynı clause'da kill-verb → "bir düşman" (char-cap YOK)
+    const SINGLE = new RegExp(`${NLB}${KILLER_TOKEN}\\b([^.!?;:—\\n]*?\\s)${KV2}${NL}`, "gi");
+    result = result.replace(SINGLE, (m: string, mid: string) => "bir düşman" + m.slice(m.indexOf(mid)));
+    // STEP3: kalan stray "unknown"/"bilinmeyen" → "bir düşman"
+    result = result.replace(new RegExp(`${NLB}(?:unknown|bilinmeyen)${NL}`, "gi"), "bir düşman");
+    // STEP4: "bir düşman ya da bir düşman" run'larını tek'e çökert
+    result = result.replace(/bir düşman(?:\s*(?:ya da|veya|\/|,)\s*bir düşman)+/gi, "bir düşman");
+  }
+
+  // HEADSHOT-absent (canlı-test 2026-06-29): headshot verisi sistemde HİÇ okunmuyor
+  // (combat-report sadece "killed by X"; silah/yer/headshot YOK) → "kafadan vuruldun/
+  // öldün" %100 UYDURMA. Ölüm-tarifindeki "kafadan"ı sil ("seni ... kafadan [öl-verb]"
+  // → "seni ... [öl-verb]"). İMPERATİF/GELECEK ÖĞÜT "kafadan vur" KORUNUR (anchor:
+  // "seni" + ölüm-fiili). hasHeadshot=true gelirse (ileride OCR) strip atlanır.
+  if (factGround.hasHeadshot === false) {
+    result = result.replace(
+      /((?<![a-zçğıöşü])seni(?![a-zçğıöşü])[^.;:—!?\n]{0,50}?)kafadan (vurup öldürdü|öldürdü|öldürdün|vurdu|vurdun|kesti|düşürdü|indirdi|biçti|aldı)(?![a-zçğıöşü])/gi,
+      (_m: string, pre: string, verb: string) => pre + (verb === "vurup öldürdü" ? "vurup öldürdü" : (verb === "vurdu" || verb === "vurdun") ? "öldürdü" : verb),
+    );
+    result = result.replace(
+      /((?<![a-zçğıöşü])seni(?![a-zçğıöşü])[^.;:—!?\n]{0,50}?)kafadan (vurarak|tek atışta) /gi,
+      "$1",
+    );
   }
 
   // Death-location-when-absent (LAUNCH BLOCKER 2026-06-28): deathLocation OCR'da
@@ -461,7 +492,7 @@ export function guardUnprovenFacts(
 export function realityCheck(
   outputText: string,
   roundHistory: RoundMemoryEntry[],
-  factGround?: { hasRoute?: boolean; hasTradeData?: boolean; hasKiller?: boolean; hasDeathLocation?: boolean },
+  factGround?: { hasRoute?: boolean; hasTradeData?: boolean; hasKiller?: boolean; hasDeathLocation?: boolean; hasHeadshot?: boolean },
   // Cycle 3 (council 2026-06-26): field-type hint. "suggestion" suppresses the
   // neutral death-fallback (returns "" instead so the route keeps the original
   // advice). Omitted ⇒ "death"/"generic" behavior = byte-identical to before;
