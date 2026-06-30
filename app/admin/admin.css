@@ -103,6 +103,8 @@
 .adm-badge.loss { background: rgba(255, 70, 85, 0.14); color: #ff8a95; }
 .adm-badge.muted { background: rgba(255, 255, 255, 0.06); color: rgba(238,240,248,0.6); }
 .adm-badge.ok { background: rgba(74, 222, 128, 0.14); color: #86efac; }
+.adm-badge.warn { background: rgba(245, 158, 11, 0.16); color: #fcd28a; }
+.adm-badge.bad { background: rgba(255, 70, 85, 0.16); color: #ff9aa3; }
 
 /* Support status toggle button (admin → Yardım / Sorular) */
 .adm-act { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; cursor: pointer;

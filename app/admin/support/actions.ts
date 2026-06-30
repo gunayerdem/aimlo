@@ -5,7 +5,7 @@ import { getAdminUser, logAdminAudit } from "@/lib/admin-auth";
 import { createServiceSupabase } from "@/lib/supabase/server";
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-const ALLOWED_STATUS = new Set(["open", "resolved"]);
+const ALLOWED_STATUS = new Set(["open", "in_progress", "resolved", "rejected"]);
 
 /**
  * Toggle a support message between "open" and "resolved" from the admin panel.

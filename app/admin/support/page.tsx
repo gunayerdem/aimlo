@@ -4,13 +4,29 @@ import { updateSupportStatus } from "./actions";
 
 export const dynamic = "force-dynamic";
 
+// 4 durum: açık → işlemde → çözüldü / reddedildi. Anahtarlar server action
+// whitelist'i (actions.ts) ile BİREBİR aynı olmalı.
+const STATUS_META: Record<string, { label: string; badge: string }> = {
+  open: { label: "açık", badge: "muted" },
+  in_progress: { label: "işlemde", badge: "warn" },
+  resolved: { label: "çözüldü", badge: "ok" },
+  rejected: { label: "reddedildi", badge: "bad" },
+};
+const ACTIONS: { key: string; label: string; cls: string }[] = [
+  { key: "in_progress", label: "⏳ İşlemde", cls: "warn" },
+  { key: "resolved", label: "✓ Çözüldü", cls: "ok" },
+  { key: "rejected", label: "✗ Reddet", cls: "bad" },
+  { key: "open", label: "↻ Aç", cls: "" },
+];
+
 function fmt(iso: string): string {
   return new Date(iso).toLocaleString("tr", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" });
 }
 
 export default async function AdminSupportPage() {
   const { messages, tableMissing } = await getSupportMessages(100);
-  const openCount = messages.filter((m) => m.status === "open").length;
+  const pendingCount = messages.filter((m) => m.status === "open" || m.status === "in_progress").length;
+  const resolvedCount = messages.filter((m) => m.status === "resolved").length;
 
   return (
     <>
@@ -28,8 +44,8 @@ export default async function AdminSupportPage() {
         <>
           <div className="adm-grid cols-3">
             <div className="adm-card"><p className="adm-stat-label">TOPLAM</p><div className="adm-stat-num">{messages.length}</div></div>
-            <div className="adm-card"><p className="adm-stat-label">AÇIK</p><div className="adm-stat-num iris">{openCount}</div><p className="adm-stat-sub">henüz çözülmedi</p></div>
-            <div className="adm-card"><p className="adm-stat-label">ÇÖZÜLDÜ</p><div className="adm-stat-num">{messages.length - openCount}</div></div>
+            <div className="adm-card"><p className="adm-stat-label">BEKLEYEN</p><div className="adm-stat-num iris">{pendingCount}</div><p className="adm-stat-sub">açık + işlemde</p></div>
+            <div className="adm-card"><p className="adm-stat-label">ÇÖZÜLDÜ</p><div className="adm-stat-num">{resolvedCount}</div></div>
           </div>
 
           <div className="adm-card" style={{ marginTop: 14, padding: 4 }}>
@@ -48,20 +64,22 @@ export default async function AdminSupportPage() {
                     {/* React escapes m.message by default — no dangerouslySetInnerHTML. */}
                     <td style={{ whiteSpace: "pre-wrap", lineHeight: 1.55, maxWidth: 560 }}>{m.message}</td>
                     <td>
-                      <span className={`adm-badge ${m.status === "open" ? "muted" : "ok"}`}>
-                        {m.status === "open" ? "açık" : m.status === "resolved" ? "çözüldü" : m.status}
+                      <span className={`adm-badge ${STATUS_META[m.status]?.badge ?? "muted"}`}>
+                        {STATUS_META[m.status]?.label ?? m.status}
                       </span>
                     </td>
                     <td>
-                      {/* Server action — re-verifies admin inside actions.ts (a server
-                          action is its own POST endpoint; the layout gate isn't enough). */}
-                      <form action={updateSupportStatus}>
-                        <input type="hidden" name="id" value={m.id} />
-                        <input type="hidden" name="status" value={m.status === "open" ? "resolved" : "open"} />
-                        <button type="submit" className={`adm-act ${m.status === "open" ? "ok" : ""}`}>
-                          {m.status === "open" ? "✓ Çözüldü işaretle" : "↻ Yeniden aç"}
-                        </button>
-                      </form>
+                      {/* Her durum için ayrı buton (mevcut durum hariç). Server action
+                          actions.ts içinde admin'i yeniden doğruluyor (bağımsız POST endpoint'i). */}
+                      <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                        {ACTIONS.filter((a) => a.key !== m.status).map((a) => (
+                          <form action={updateSupportStatus} key={a.key}>
+                            <input type="hidden" name="id" value={m.id} />
+                            <input type="hidden" name="status" value={a.key} />
+                            <button type="submit" className={`adm-act ${a.cls}`}>{a.label}</button>
+                          </form>
+                        ))}
+                      </div>
                     </td>
                   </tr>
                 ))}
