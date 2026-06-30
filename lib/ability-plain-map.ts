@@ -148,7 +148,12 @@ export function plainifyAbilities(text: string, lang: "tr" | "en"): string {
 // ─── Türkçe düz-terim apostrof düzeltici ──────────────────────────────────
 // Model bazen düz Türkçe terimi yanlış apostroflar ("duvar'i", "tuzak'ı", "tel'i").
 // Türkçe ortak isimler apostrof almaz — doğru eki (ünlü uyumu + ünsüz yumuşaması) getir.
-const TR_TERMS = ["yavaşlatma", "sersemletme", "sabitleme", "diriltme", "çekme", "zıplama", "kalkan", "kamera", "tuzak", "bıçak", "kaçış", "duvar", "diken", "siper", "açı", "tel", "bot", "molly", "smoke", "flash", "ağ", "recon", "drone"];
+// SADECE düz-TÜRKÇE ortak isimler — bunlar apostrof ALMAZ ("duvar'ı"→"duvarı").
+// İngilizce whitelist kelimeleri (smoke/flash/molly/bot/recon/drone) BİLEREK ÇIKARILDI
+// (audit 2026-06-30): yabancı kelime Türkçe yazımda apostrof KORUR ("smoke'u", "flash'ı");
+// onları buraya koymak fixTurkishApostrophe'u "smoke'un"→"smokenin", "flash'ı"→"flashı"
+// gibi BOZUK çıktıya zorluyordu (raw'dan kötü). Yabancı kökler dokunulmaz kalsın.
+const TR_TERMS = ["yavaşlatma", "sersemletme", "sabitleme", "diriltme", "çekme", "zıplama", "kalkan", "kamera", "tuzak", "bıçak", "kaçış", "duvar", "diken", "siper", "açı", "tel", "ağ"];
 const VOWELS = "aeıioöuü";
 const lastVowel = (w: string) => { for (let i = w.length - 1; i >= 0; i--) if (VOWELS.includes(w[i])) return w[i]; return "a"; };
 const highV = (lv: string) => (({ a: "ı", "ı": "ı", o: "u", u: "u", e: "i", i: "i", "ö": "ü", "ü": "ü" } as Record<string, string>)[lv] ?? "ı");

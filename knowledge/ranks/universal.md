@@ -88,6 +88,13 @@ Doğru yerdeydin ama yanlış anda çıktın — pencere açıkken değil kapal�
 - **COUNTER** smoke daha açılırken çıkma; tam oturana kadar bekle, oturduktan sonra bir an daha bekle ki düşman seni beklemeyi bıraksın; tam o gevşeme anında geniş açıyla tek adım peek at, ilk atışı sen yap
 - **WHY** beklenti penceresi kapanınca karşı taraf hazırlığını boşa harcar, seni hazırlıksız yakalayamaz
 
+### Operatöre karşı timing'ini kır
+
+- **IF** seni bir operatör (ya da uzun-hat tek-atış silahı) uzun bir hattan, çoğu zaman aynı açıya aynı anda çıktığında vurduysa
+- **MEANING** operatör tek bir açıya kilitlidir ve sabit timing'le çıkan oyuncuyu bedavaya alır — sen ona kendi ritminde, beklediği anda hediye oldun
+- **COUNTER** o açıya dry (util'siz) ikinci kez aynı timing'le çıkma; üç seçenekten birini yap: (1) takım smoke'uyla o hattı kapat ve smoke arkasından geç, (2) operatörcü açıdan çekildiği/yeniden konumlandığı kısa aralıkta hemen re-peek at, (3) ikinci açıyı farklı bir yükseklikten ya da daha geniş bir swing'le zorla ki tek-açı nişanını bozsun
+- **WHY** operatör çevirme süresi ve tek-hedef doğası onu ritim-okumaya açık bırakır — timing'ini sen değiştirirsen o silah pahalı bir dezavantaja döner, çünkü kaçıran bir operatörcü yakın mesafede en zayıf oyuncudur
+
 ### Ayak sesi kesilince çık
 
 - **IF** peek zamanlaman düşmanın yer değiştirmesine bağlı değilse, hep geç çıkıyorsan

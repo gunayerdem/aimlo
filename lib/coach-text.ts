@@ -165,7 +165,12 @@ const TR_JARGON: [RegExp, string][] = [
   [/\bback\s+(açı)/gi, "arka $1"],
   [/\bfront['’](tan|ten)\b/gi, "önden"],    // "front'tan" → "önden"
   // Jargon kısaltma / tarzanca-fiil / halüsinasyon terim / İngilizce sızıntı
-  [/\bone[- ]?tap\b/gi, "tek atışta kafadan"],            // S1: Silver-sade (SILVER kuralı whitelist'ten üstün)
+  // "one-tap" → sade Türkçe. ESKİ "tek atışta kafadan" YASAK "kafadan"ı üretiyordu +
+  // ek-almış "one-tap'ine"yi "kafadan'ine" gibi BOZUYORDU (audit 2026-06-30). Ek-farkında,
+  // kafadan'sız. Sıra önemli: ekli formlar bare'den ÖNCE.
+  [/\bone[- ]?tap['’]?(ine|ına|nesine)\b/gi, "tek atışta öldürmesine"],   // yönelme: "one-tap'ine karşı"
+  [/\bone[- ]?tap['’]?(ini|ını|i|ı)\b/gi, "tek atışta öldürmesini"],      // belirtme
+  [/\bone[- ]?tap\b/gi, "tek atışta öldürme"],                            // çıplak (kafadan YOK)
   [/\bone[- ]?on[- ]?one\b/gi, "teke tek"],                // S10: "one-on-one" → "teke tek"
   [/\bTP['’]?(yi|yı|si|ler|ini)?\b/g, "teleport"],         // S9: Chamber "TP" kısaltması (case-sensitive)
   [/\bcrosshair['’]?([a-zçğıöşü]+)?\b/gi, "nişangâh$1"],   // S6: "crosshair'i" → "nişangâhı"

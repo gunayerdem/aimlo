@@ -31,6 +31,7 @@ export type DeathType =
   | "low-hp-no-save"
   | "clutch-lost"
   | "lurk-caught"
+  | "def-wide-hold"
   | "info-less-push";
 
 /** Per-type coaching guide: the universal.md block to anchor on, the one-line lesson
@@ -49,7 +50,8 @@ const DEATH_TYPE_GUIDE: Record<DeathType, { kbBlock: string; angle: string; conc
   "low-hp-no-save":      { kbBlock: "Karar ve Ekonomi", angle: "düşük canla save etmeyip silahı sundun — düşük HP + dezavantajda silahı kurtar, sonraki round'a yatırım yap", concept: "save-etmedin" },
   "clutch-lost":         { kbBlock: "Karar ve Ekonomi — Clutch", angle: "son canlıyken sonuca göre değil panikle oynadın — tek açı izole et, sesle bilgi al, durumu 1v1'e indirgemeye çalış", concept: "clutch" },
   "lurk-caught":         { kbBlock: "Takım Koordinasyonu — Lurk", angle: "takımdan kopuk erken lurk'te yakalandın — lurk'ünü execute'a senkronla, takım baskısı havadayken bilgi al", concept: "lurk" },
-  "info-less-push":      { kbBlock: "Zamanlama — Tetikleyici bekle", angle: "somut bir tetikleyici beklemeden, bilgi almadan bastın — ses kesilmesi ya da ilk kontağı bekle, sonra çık", concept: "tetikleyici-yok" },
+  "def-wide-hold":       { kbBlock: "Pozisyon ve Açı — Açıkta değil siperin yanında dur", angle: "savunmada açıyı erken/geniş açtın ve ilk atışı yedin — siperin yanında dur, off-angle al, peek atmadan ilk kontağı bekle", concept: "savunma-genis-aci" },
+  "info-less-push":      { kbBlock: "Zamanlama — Tetikleyici bekle", angle: "saldırıda somut bir tetikleyici beklemeden, bilgi almadan bastın — ses kesilmesi ya da ilk kontağı bekle, sonra çık", concept: "tetikleyici-yok" },
 };
 
 /** Subset of the vision request used for classification. All optional — absent fields
@@ -95,7 +97,11 @@ export function classifyDeath(b: DeathSignals): DeathType {
   if (atk && b.tradedByAlly === false) return "entry-no-trade";          // un-traded entry
   if (b.deathTiming === "early" && atk) return "timing-window";          // peeked into the window
   if (typeof hp === "number" && hp >= 100 && !isEcoWeapon) return "crosshair-loss"; // full hp, rifle duel
-  return "info-less-push";                                                // genuine default
+  // Side-aware default: a defense death with no specific signal is a wide-angle
+  // hold (NOT an attack "push") — info-less-push uses attack language ("bastın")
+  // which is wrong on a defender (audit 2026-06-30, S10). Split by side.
+  if (def) return "def-wide-hold";
+  return "info-less-push";                                                // attack default
 }
 
 /** Build the user-message directive: which block + lesson for THIS death, plus a ban
