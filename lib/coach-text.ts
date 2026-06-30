@@ -172,8 +172,24 @@ const TR_JARGON: [RegExp, string][] = [
   [/\bone[- ]?tap['’]?(ini|ını|i|ı)\b/gi, "tek atışta öldürmesini"],      // belirtme
   [/\bone[- ]?tap\b/gi, "tek atışta öldürme"],                            // çıplak (kafadan YOK)
   [/\bone[- ]?on[- ]?one\b/gi, "teke tek"],                // S10: "one-on-one" → "teke tek"
+  // Çıplak İngilizce sızıntısı (audit 2026-06-30 S2/S13/S14): info/roster whitelist'te DEĞİL.
+  [/\binfo\b/gi, "bilgi"],
+  [/\broster['’]?(ın[ıi]|in[ıi])\b/gi, "kadrosunu"],
+  [/\broster['’]?(ınd[ae]|ind[ae]|d[ae]|t[ae])\b/gi, "kadrosunda"],
+  [/\broster['’]?(ın|in)\b/gi, "kadrosunun"],
+  [/\broster['’]?([ıi])\b/gi, "kadrosunu"],
+  [/\broster\b/gi, "kadro"],
   [/\bTP['’]?(yi|yı|si|ler|ini)?\b/g, "teleport"],         // S9: Chamber "TP" kısaltması (case-sensitive)
-  [/\bcrosshair['’]?([a-zçğıöşü]+)?\b/gi, "nişangâh$1"],   // S6: "crosshair'i" → "nişangâhı"
+  // crosshair → nişangâh. ESKİ tek-satır ham-ek yapıştırıyordu: "crosshair'i"→"nişangâhi"
+  // (YANLIŞ — â art-ünlü, ek "ı" olmalı), "crosshair'in"→"nişangâhin" (audit 2026-06-30,
+  // S8/S11/S14 gerçek gramer hatası). 'nişangâh' TR_TERMS'te olmadığı için fixTurkishApostrophe
+  // de kurtaramıyor. Vokal-uyumlu açık eşleme (â → ı/a/ta), ÖNCE-spesifik sıra:
+  [/\bcrosshair['’]?(ın[ıi]|in[ıi])\b/gi, "nişangâhını"],
+  [/\bcrosshair['’]?(ın|in)\b/gi, "nişangâhın"],
+  [/\bcrosshair['’]?(d[ae]|t[ae])\b/gi, "nişangâhta"],
+  [/\bcrosshair['’]?(y[ae]|[ae])\b/gi, "nişangâha"],
+  [/\bcrosshair['’]?([ıi])\b/gi, "nişangâhı"],
+  [/\bcrosshair\b/gi, "nişangâh"],
   [/\bzonel[ae]y([ıi]p|arak)\b/gi, "alanı kapatıp"],       // S6: "zonelayıp" → "alanı kapatıp"
   [/\bzonel[ae][a-zçğıöşü]*/gi, "alanı kapat"],            // zone+TR fiil backstop
   [/\btelemetriyle\b/gi, "bilgisiyle"],                    // S10: halüsinasyon "telemetri"
