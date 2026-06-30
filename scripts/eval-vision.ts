@@ -32,6 +32,7 @@ import { realityCheck } from "../lib/reality-checker";
 import { cleanCoachText } from "../lib/coach-text";
 import { buildAgentAbilityHint, enforceAgentKit } from "../lib/agent-abilities";
 import { sanitizePromptInput } from "../lib/prompt-safety";
+import { classifyDeath, buildDeathTypeDirective } from "../lib/death-type";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
 const CYCLE = process.env.EVAL_CYCLE || "3";
@@ -416,7 +417,35 @@ function buildUserPrompt(s: Scenario): string {
 
   const ctxJson = Object.keys(ctx).length ? JSON.stringify(ctx, null, 2) : "";
   const patternBlock = typeof b.patternContext === "string" && b.patternContext ? sanitizePromptInput(b.patternContext, { max: 2000 }) : "";
+
+  // DEATH-TYPE directive — MIRROR route.ts (variety fix 2026-06-30) so the eval measures
+  // the SAME pipeline the desktop hits. Without this the eval would test the OLD behavior.
+  let deathTypeDirective = "";
+  if (b.died === true) {
+    const rh2 = b.roundHistory as Record<string, unknown>[] | undefined;
+    const loc = (typeof b.deathLocation === "string" ? b.deathLocation : "").toLowerCase();
+    const repeatedPosition = !!loc && Array.isArray(rh2) && rh2.some((r) =>
+      r.died === true && typeof r.death_position === "string" &&
+      (r.death_position as string).toLowerCase().includes(loc) &&
+      (r.position_confidence === "high" || r.position_confidence === "medium"));
+    const dtype = classifyDeath({
+      side: b.side as string | undefined,
+      killerInfo: b.killerInfo as string | undefined,
+      deathLocation: b.deathLocation as string | undefined,
+      deathTiming: b.deathTiming as string | undefined,
+      healthAtDeath: b.healthAtDeath as number | undefined,
+      alliesAlive: b.alliesAlive as number | undefined,
+      enemiesAlive: b.enemiesAlive as number | undefined,
+      spikePlanted: b.spikePlanted as boolean | undefined,
+      economyType: b.economyType as string | undefined,
+      tradedByAlly: b.tradedByAlly as boolean | undefined,
+      repeatedPosition,
+    });
+    deathTypeDirective = buildDeathTypeDirective(dtype, []);
+  }
+
   let prompt = USER_PROMPT +
+    deathTypeDirective +
     (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, screenshot'tan güvenilir]\n${ctxJson}` : "") +
     (patternBlock ? `\n\n[PATTERN — son round'lardaki tekrar eden hata. Bu varsa deathAnalysis veya nextRoundSuggestion'da koç gibi referans ver — extra alan açma]\n${patternBlock}` : "");
 
