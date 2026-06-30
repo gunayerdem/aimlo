@@ -21,7 +21,7 @@ const STRICT_RATE_LIMIT = process.env.STRICT_RATE_LIMIT === "true";
 
 // ── Rate limiting configuration ──
 
-type RouteKey = "feedback" | "report" | "vision" | "insight" | "telemetry" | "admin" | "default";
+type RouteKey = "feedback" | "report" | "vision" | "insight" | "telemetry" | "admin" | "support" | "default";
 
 const RATE_LIMITS: Record<RouteKey, { window: number; max: number }> = {
   feedback:  { window: 60, max: 15 }, // 15/min
@@ -30,6 +30,7 @@ const RATE_LIMITS: Record<RouteKey, { window: number; max: number }> = {
   insight:   { window: 60, max: 10 }, // 10/min
   telemetry: { window: 60, max: 60 }, // 60/min — generous, telemetry must not eat user's AI quota
   admin:     { window: 60, max: 30 }, // 30/min — owner panel; defense-in-depth vs heavy aggregation abuse
+  support:   { window: 60, max: 5 },  // 5/min — Destek form; abuse/spam guard (no AI cost, just storage)
   default:   { window: 60, max: 20 },
 };
 
@@ -40,6 +41,7 @@ const DAILY_QUOTA: Partial<Record<RouteKey, number>> = {
   vision:    100, // beta 2026-06-26: 30→100 (~6-10 maç/gün; 30 ~2 maçta bitiyordu). ~$0.20/gün üst sınır/kullanıcı; /cost panelinden izle
   insight:   60,
   telemetry: 1000, // generous — desktop batches every 24h, but instrumentation can fire often during a long session
+  support:   20, // 20/day — a real user won't file 20 support tickets a day; caps spam
 };
 
 // ── Dev allowlist (intensive test sessions bypass quota gates) ──

@@ -335,3 +335,65 @@ export async function getRecentDeathFeedback(limit = 30): Promise<DeathFeedback[
     };
   });
 }
+
+// ── SUPPORT MESSAGES (Yardım / Sorular) ──────────────────────────────────────
+// User-submitted support questions from the desktop "Destek" screen. Read via
+// service-role (RLS-bypass) for the admin panel. Graceful when the table doesn't
+// exist yet (migration 0010 not applied) — the page shows a hint, never crashes.
+
+export type SupportMessage = {
+  id: string;
+  userId: string | null;
+  userLabel: string;
+  email: string | null;
+  message: string;
+  status: string;
+  createdAt: string;
+};
+
+export type SupportMessages = {
+  messages: SupportMessage[];
+  tableMissing: boolean;
+};
+
+export async function getSupportMessages(limit = 100): Promise<SupportMessages> {
+  const svc = createServiceSupabase();
+  const { data, error } = await svc
+    .from("support_messages")
+    .select("id, user_id, email, message, status, created_at")
+    .order("created_at", { ascending: false })
+    .limit(limit);
+
+  // Table not created yet (migration 0010 not applied) → graceful.
+  if (error) return { messages: [], tableMissing: true };
+
+  const rows = (data ?? []) as {
+    id: string; user_id: string | null; email: string | null;
+    message: string; status: string; created_at: string;
+  }[];
+
+  // Resolve usernames for a friendlier label (falls back to email, then id).
+  const ids = [...new Set(rows.map((r) => r.user_id).filter(Boolean) as string[])];
+  const labelById = new Map<string, string>();
+  if (ids.length > 0) {
+    const { data: profs } = await svc.from("profiles").select("user_id, username").in("user_id", ids);
+    for (const p of (profs ?? []) as { user_id: string; username: string | null }[]) {
+      if (p.username) labelById.set(p.user_id, p.username);
+    }
+  }
+
+  return {
+    tableMissing: false,
+    messages: rows.map((r) => ({
+      id: r.id,
+      userId: r.user_id,
+      userLabel: r.user_id
+        ? (labelById.get(r.user_id) ?? r.email ?? r.user_id.slice(0, 8))
+        : (r.email ?? "—"),
+      email: r.email,
+      message: r.message,
+      status: r.status,
+      createdAt: r.created_at,
+    })),
+  };
+}
