@@ -111,7 +111,8 @@ export function buildDeathTypeDirective(type: DeathType, prev: DeathType[] = [])
   const g = DEATH_TYPE_GUIDE[type];
   const bannedConcepts = [...new Set(prev)]
     .filter((p) => p !== type)
-    .map((p) => DEATH_TYPE_GUIDE[p].concept);
+    .map((p) => DEATH_TYPE_GUIDE[p]?.concept)   // optional: ignore unknown types the client may send
+    .filter((c): c is string => !!c);
   const banLine = bannedConcepts.length
     ? `\nBU MAÇTA ÖNCEKİ ROUND'LARDA ŞU AÇILARI ZATEN VERDİN: ${bannedConcepts.join(", ")}. Aynısını (eşanlamlısı dahil) TEKRARLAMA — bu round farklı bir ölüm-tipi, farklı bir kavramdan konuş.`
     : "";

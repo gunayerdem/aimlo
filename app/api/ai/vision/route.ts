@@ -669,6 +669,7 @@ export async function POST(request: NextRequest) {
     // context yields a different concept by construction. No new AI call, no I/O; injected
     // into the USER message so the SYSTEM prompt-cache prefix is untouched (zero cache impact).
     let deathTypeDirective = "";
+    let deathTypeOut: string | null = null;   // returned in the response (Phase-2 cross-round loop)
     if (reqBody.died === true) {
       const rh = (body as VisionRequest).roundHistory;
       const loc = (reqBody.deathLocation || "").toLowerCase();
@@ -691,8 +692,16 @@ export async function POST(request: NextRequest) {
         tradedByAlly: reqBody.tradedByAlly,
         repeatedPosition,
       });
-      deathTypeDirective = buildDeathTypeDirective(dtype, []);
-      console.log(`[Aimlo AI] death-type=${dtype} repeatPos=${repeatedPosition}`);
+      deathTypeOut = dtype;
+      // CROSS-ROUND ban (Phase 2-ready): prior rounds' death-types from roundHistory IF the
+      // desktop stamps them (death_type). Until the desktop sends it this is empty → per-death
+      // classification alone drives variety (Phase 1). When the desktop echoes deathType back,
+      // the in-match same-type repetition ban activates with ZERO further backend change.
+      const prevDeathTypes = (Array.isArray(rh) ? rh : [])
+        .map((r: Record<string, unknown>) => (typeof r.death_type === "string" ? r.death_type : ""))
+        .filter((s): s is string => s.length > 0) as import("@/lib/death-type").DeathType[];
+      deathTypeDirective = buildDeathTypeDirective(dtype, prevDeathTypes);
+      console.log(`[Aimlo AI] death-type=${dtype} repeatPos=${repeatedPosition} prevTypes=${prevDeathTypes.length}`);
     }
 
     // Assemble JSON-formatted context — single block, no decorative borders, no header chrome.
@@ -978,6 +987,7 @@ export async function POST(request: NextRequest) {
         enemyAnalysis: enemyAnalysisOut,
         nextRoundSuggestion: nextRoundOut,
         patternData: null,
+        deathType: deathTypeOut,   // Phase-2: desktop stores → echoes back in roundHistory[].death_type
       });
     }
 
