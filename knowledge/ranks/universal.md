@@ -321,6 +321,47 @@ Aşağıdaki temeller her seviyede geçerlidir; ileri içgörünün yerine geçm
 - **COUNTER** round başında takım kredisine birlikte bakın ve tek karar verin: kredi herkese yetiyorsa herkes tam alsın, yetmiyorsa herkes save yapsın; yarı yarıya bölünme
 - **WHY** koordineli ekonomi bir sonraki round'a herkesin tam silahla girmesini sağlar
 
+## Post-Plant Ölümleri
+
+### Çapraz açı kur, tek noktadan tutma
+
+- **IF** spike kurulduktan sonra saldırıda tek bir açıdan site'ı tutarken öldüysen (spikePlanted ve sen saldırıdaysan, takım arkadaşların azaldıysa)
+- **MEANING** retake gelen takım senin tek açını kolayca temizledi; bilgiyi tek noktadan verdin ve trade'lenecek arkadaşın yoktu
+- **COUNTER** spike'ı iki ayrı açıdan tut: biri defuse hattını, diğeri giriş hattını görsün; düşman birini temizlerken diğeri trade alsın ya da bilgi versin
+- **WHY** post-plant'ta zaman senin lehine işler — sen onlara gitme, onları iki ateş hattına gelmeye zorla, çünkü acele eden taraf retake yapan taraftır
+
+### Zamanı oyna, defuse sesini bekle
+
+- **IF** spike kuruluyken erken peek atıp öldüysen, oysa beklemen yeterdi
+- **MEANING** avantaj sendeyken gereksiz bilgi aramaya çıktın; bomba zaten senin için sayıyor
+- **COUNTER** post-plant'ta peek arama; defuse başlama sesini ya da ilk kontağı bekle, util'ini (molly/yavaşlatma) defuse'u bozmak için sakla
+- **WHY** retake yapan taraf bombayı çözmek zorunda — bekleyen taraf, sesle tetiklenip util atan taraftır, çünkü inisiyatif zaten sende
+
+## Retake Ölümleri
+
+### Util'le defuse'u geciktir, dağınık girme
+
+- **IF** savunmada spike kurulduktan sonra site'ı geri alırken util'siz/tek tek girip öldüysen (spikePlanted ve sen savunmadaysan)
+- **MEANING** retake'i koordinesiz aldın; düşmanın post-plant açılarına tek tek yem oldun ve defuse için zaman kalmadı
+- **COUNTER** önce util'i (smoke/flash/molly) defuse hattını açmak ve düşman açılarını kapatmak için harca, sonra takımla AYNI anda sayı bas; tek başına entry alma
+- **WHY** retake bir zaman yarışıdır — util düşmanın açısını bozarsa defuse'a saniye kazanırsın, çünkü dağınık giren her oyuncu ayrı bir 1v1 hediye eder
+
+### Defuse hattını oku, body-block'a güven
+
+- **IF** retake'te defuse'a başlayamadan ya da yarıda öldüysen
+- **MEANING** defuse'u koruyan kurulumu yapmadan açtın; tek başına hem temizleyip hem çözemezsin
+- **COUNTER** defuse'u birinin yaparken diğerlerinin açıları tuttuğu şekilde böl; fake defuse + gerçek defuse karışımıyla düşmanı erken peek'e zorla
+- **WHY** defuse 7 saniye savunmasızlık demek — bu yüzden çözen oyuncunun arkası mutlaka tutulmalı, çünkü tek başına defuse her zaman trade'siz ölümdür
+
+## Lurk Ölümleri
+
+### Lurk'ü execute'a senkronla
+
+- **IF** takımdan kopuk, tek başına haritanın uzak bir bölgesinde (mid/flank) erken lurk yaparken öldüysen (saldırıdasın, takım arkadaşların hayatta ama uzakta)
+- **MEANING** lurk'ün takım baskısından kopuktu; düşman seni rahatça izole edip trade'siz aldı, çünkü lurk ancak takım dikkat çekerken işe yarar
+- **COUNTER** lurk'ünü takımın execute'una senkronla: takım bir siteye baskı kurup düşmanın dikkatini çekerken sen arka/flank bilgisini al, izole 1v1 peek arama
+- **WHY** lurk'ün değeri bilgi ve rotasyon kesmektir, kill değil — takım baskısı yokken lurk sadece sayısal dezavantaj yaratır, çünkü düşman tek bir hedefe odaklanabilir
+
 ## Ölüm Tipini Doğru Eşle
 
 Bu profilin kalbi: hangi blok seçilecekse onu ölümün tipi belirler, rankın değil. Ölümün tipini round JSON'ındaki OCR gerçeğinden — killerInfo (öldüren ajan ve silah), deathLocation, HP düşüşü ve score'dan — türet, sonra eşleştir.
@@ -337,5 +378,9 @@ Bu profilin kalbi: hangi blok seçilecekse onu ölümün tipi belirler, rankın 
 - **Clutch / son round ölümü** (1vX, baskı altında; score maç sonuna yakın ya da round son canlı sensin) → Karar ve Ekonomi: clutch kararı, baskıda üç soru.
 - **Erken round ölümü** (pistol / ilk silah round'u; score 0-0 ya da ekonomi-resetli ilk round'lar) → Erken Round bloğu.
 - **Açıkta / kör giriş ölümü** (ortada, util'siz; deathLocation açık alan, ölüm anı giriş denemesinde) → Temel Mekanik: util'siz girme + Pozisyon: siperin yanında dur.
+- **Post-plant ölümü** (spike kurulu + sen saldırıdasın; tek açıdan tuttun ya da gereksiz peek aradın) → Post-Plant Ölümleri: çapraz açı kur, zamanı oyna.
+- **Retake ölümü** (spike kurulu + sen savunmadasın; util'siz/dağınık geri alma, defuse'a varamadın) → Retake Ölümleri: util'le defuse'u geciktir, defuse hattını böl.
+- **Lurk ölümü** (saldırıda takımdan kopuk, uzak bölgede tek başına yakalandın) → Lurk Ölümleri: lurk'ü execute'a senkronla.
+- **Entry / trade'siz ölüm** (saldırıda solo giriş, trade alınmadı) → Pozisyon: solo peek yerine geri-alım kurulumu; yanındaki trade'e hazır beklesin.
 
 Doğru blok seçildiğinde içgörü hem tam derinlikte hem de oyuncunun anlayacağı sade dilde verilir. Hiçbir içgörü "rank düşük" diye eksiltilmez.

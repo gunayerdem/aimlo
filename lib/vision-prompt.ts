@@ -66,7 +66,7 @@ export const ROUND_FEEDBACK_SCHEMA = {
     properties: {
       deathAnalysis: {
         type: "string",
-        description: "1-2 cümle Türkçe koç sesi. ZORUNLU: 1 somut düzeltme (callout + util/karar). killerInfo VARSA killer ajan + silahı yaz; killerInfo YOKSA ajan ismi UYDURMA, 'bir düşman' de (asla 'X ya da Y' aday-listesi, asla 'unknown'). HEADSHOT bilgisi YOK — 'kafadan vuruldun/öldün' YAZMA (headshot okunmuyor); sadece 'öldürdü/vurdu' de. Muğlak kelime (genelde/biraz) YASAK. Örn (killer biliniyor): 'B Main'de geniş açı tuttun, Cypher seni operator'la öldürdü — smoke atmadan o köşeyi sallama.' Örn (killer yok): 'B Main'de utility'siz geniş açıda kaldın, bir düşman seni oradan vurdu — köşeyi smoke'layıp öyle tut.'",
+        description: "1-2 cümle Türkçe koç sesi. ZORUNLU: 1 somut düzeltme (callout + util/karar). killerInfo VARSA killer ajan + silahı yaz; killerInfo YOKSA ajan ismi UYDURMA, 'bir düşman' de (asla 'X ya da Y' aday-listesi, asla 'unknown'). HEADSHOT bilgisi YOK — 'kafadan vuruldun/öldün' YAZMA (headshot okunmuyor); sadece 'öldürdü/vurdu' de. Muğlak kelime (genelde/biraz) YASAK. Örn (killer biliniyor): 'B Main'de geniş açı tuttun, Cypher seni operator'la öldürdü — smoke atmadan o köşeyi sallama.' Örn (killer yok): 'B Main'de utility'siz geniş açıda kaldın, bir düşman seni oradan vurdu — köşeyi smoke'layıp öyle tut.' Kullanıcı mesajında [ÖLÜM-TİPİ] direktifi geldiyse deathAnalysis'i O tipin dersine çıpala ve 'açıkta/utility'siz' kalıbını yalnızca tip gerçekten util-yokluğu ise kullan.",
       },
       enemyAnalysis: {
         type: "array",
@@ -286,14 +286,14 @@ SENARYO B — Bind, Sage, SALDIRI, R1 / az veri (pattern YOK ama yine KESİN + S
   "nextRoundSuggestion": "Bu round A'ya direkt yüklenme — Sage duvarını A Main'e çapraz at, flash'la birlikte execute girin, solo Showers peek'i bırak."
 }
 
-SENARYO C — Haven, SALDIRI, died=false (ölüm YOK): died=false ise ölümden BAHSETME, round'daki pozisyon/util hatasına odaklan.
+SENARYO C — Haven, SALDIRI, died=false (ölüm YOK): died=false ise ölümden BAHSETME, round'daki KARAR hatasına odaklan. (NOT: "utility'siz açıkta durdun" kalıbını her round'un varsayılanı yapma — bu örnek bilerek FARKLI bir kavram, avantaj yönetimi.)
 {
-  "deathAnalysis": "Bu round ölmedin ama A Long'da utility'siz açıkta durdun — sonraki execute'ta smoke/flash ile o açıyı kapatıp ilerle, bedava trade yeme riskini düşür.",
+  "deathAnalysis": "Bu round 4v3 öndeyken A Site'a fazladan peek aradın — sayı üstünündeyken sen dövüşü açma, köşeleri kur ve düşmanı sana gelmeye zorla, kazanılmış avantajı eşitleme.",
   "enemyAnalysis": [
-    "Düşman A Long açısını tutuyordu, sen açıkta kalınca baskı kuramadın.",
-    "A'ya girerken Long'u smoke'la kapat, takımla aynı anda yüklenin."
+    "Düşman A Site'ı 3 kişiyle tuttu, senin ekstra peek'ini bekliyordu.",
+    "Sayı üstününde çapraz köşe kur — zaman senin lehine işliyor, acele etme."
   ],
-  "nextRoundSuggestion": "A'yı tekrar zorlayacaksan Long'a smoke at, mid kontrolünü al, sonra birlikte execute girin."
+  "nextRoundSuggestion": "Önde olduğun round'larda ikinci giriş arama; köşeleri temizle, post-plant açılarını kur ve düşmanı zamana karşı sana peek atmaya zorla."
 }
 
 KÖTÜ KARŞI-ÖRNEK (ASLA böyle yazma — muğlak + generic + tarzanca):

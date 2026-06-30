@@ -11,6 +11,7 @@ import { buildPolicyBlock } from "@/lib/ai-policy";
 import { buildAgentAbilityHint, enforceAgentKit } from "@/lib/agent-abilities";
 import { cleanCoachText, clampWords } from "@/lib/coach-text";
 import { ROUND_FEEDBACK_SCHEMA, SYSTEM_PROMPT, USER_PROMPT, buildFactSheet } from "@/lib/vision-prompt";
+import { classifyDeath, buildDeathTypeDirective } from "@/lib/death-type";
 
 // ── Coach-voice OUTPUT cleaner ─────────────────────────────────────────────
 // cleanCoachText is now the SHARED single-source deterministic net in
@@ -660,10 +661,45 @@ export async function POST(request: NextRequest) {
     );
     const factSheet = buildFactSheet(factGround, ctx as unknown as Record<string, unknown>);
 
+    // DEATH-TYPE directive (variety fix 2026-06-30, softi canlı-test): in one match all
+    // rounds collapsed to the same idea ("açıkta kaldın + utility'siz girme") because the
+    // model (reasoning_effort:minimal) couldn't pick the right block from the 300-line KB
+    // and fell back to the two most generic ones. We DETERMINISTICALLY classify THIS death
+    // from the OCR fields and tell the model exactly which lesson to give → different death
+    // context yields a different concept by construction. No new AI call, no I/O; injected
+    // into the USER message so the SYSTEM prompt-cache prefix is untouched (zero cache impact).
+    let deathTypeDirective = "";
+    if (reqBody.died === true) {
+      const rh = (body as VisionRequest).roundHistory;
+      const loc = (reqBody.deathLocation || "").toLowerCase();
+      const repeatedPosition = !!loc && Array.isArray(rh) && rh.some((r: Record<string, unknown>) =>
+        r.died === true &&
+        typeof r.death_position === "string" &&
+        (r.death_position as string).toLowerCase().includes(loc) &&
+        (r.position_confidence === "high" || r.position_confidence === "medium"),
+      );
+      const dtype = classifyDeath({
+        side: reqBody.side,
+        killerInfo: reqBody.killerInfo,
+        deathLocation: reqBody.deathLocation,
+        deathTiming: reqBody.deathTiming,
+        healthAtDeath: reqBody.healthAtDeath,
+        alliesAlive: reqBody.alliesAlive,
+        enemiesAlive: reqBody.enemiesAlive,
+        spikePlanted: reqBody.spikePlanted,
+        economyType: reqBody.economyType,
+        tradedByAlly: reqBody.tradedByAlly,
+        repeatedPosition,
+      });
+      deathTypeDirective = buildDeathTypeDirective(dtype, []);
+      console.log(`[Aimlo AI] death-type=${dtype} repeatPos=${repeatedPosition}`);
+    }
+
     // Assemble JSON-formatted context — single block, no decorative borders, no header chrome.
     const ctxJson = Object.keys(ctx).length > 0 ? JSON.stringify(ctx, null, 2) : "";
     const clientContext =
       factSheet +   // BİLİNEN/BİLİNMEYEN sözleşmesi EN BAŞTA — model olgu-sınırını önce görsün
+      deathTypeDirective +   // ÖLÜM-TİPİ çıpası — factSheet'ten hemen sonra (per-round, user-msg)
       (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, screenshot'tan güvenilir]\n${ctxJson}` : "") +
       (patternBlock ? `\n\n[PATTERN — son round'lardaki tekrar eden hata. Bu varsa deathAnalysis veya nextRoundSuggestion'da koç gibi referans ver — extra alan açma]\n${patternBlock}` : "");
 
