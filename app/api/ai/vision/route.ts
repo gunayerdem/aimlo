@@ -673,8 +673,14 @@ export async function POST(request: NextRequest) {
     if (reqBody.died === true) {
       const rh = (body as VisionRequest).roundHistory;
       const loc = (reqBody.deathLocation || "").toLowerCase();
+      // CRITICAL (canlı 2026-06-30): roundHistory NOW includes the CURRENT round (recorded
+      // on-death before this call), so the current death matched ITSELF → repeatedPosition was
+      // true for EVERY death → everything classified repeat-angle → every feedback "o açıyı boş
+      // bırak". EXCLUDE the current round (round_index !== current) so a repeat means a PRIOR round.
+      const curRound = typeof reqBody.round === "number" ? reqBody.round : -1;
       const repeatedPosition = !!loc && Array.isArray(rh) && rh.some((r: Record<string, unknown>) =>
         r.died === true &&
+        r.round_index !== curRound &&
         typeof r.death_position === "string" &&
         (r.death_position as string).toLowerCase().includes(loc) &&
         (r.position_confidence === "high" || r.position_confidence === "medium"),

@@ -116,11 +116,16 @@ export function buildDeathTypeDirective(type: DeathType, prev: DeathType[] = [])
   const banLine = bannedConcepts.length
     ? `\nBU MAÇTA ÖNCEKİ ROUND'LARDA ŞU AÇILARI ZATEN VERDİN: ${bannedConcepts.join(", ")}. Aynısını (eşanlamlısı dahil) TEKRARLAMA — bu round farklı bir ölüm-tipi, farklı bir kavramdan konuş.`
     : "";
+  // ÖNEMLİ (canlı 2026-06-30, softi "KBye bağlı değil"): direktif HAZIR CÜMLE DAYATMAZ.
+  // Önceki sürüm tam-cümle 'angle' veriyordu, model onu kopyalıyordu → KB bypass, robotik.
+  // Şimdi sadece ölüm-tipini + KB BÖLÜMÜNÜ işaret eder; modelin KENDİ derin cümlesini
+  // (sistem prompt'undaki tam KB bölümünden) bu round'un somut detayına bağlayarak yazmasını ister.
   return (
-    `\n[ÖLÜM-TİPİ — BU ROUND İÇİN DETERMİNİSTİK SEÇİLDİ]\n` +
-    `Tip: ${type}. KB bloğu: "${g.kbBlock}".\n` +
-    `Bu round'un dersi (deathAnalysis'i BUNA çıpala): ${g.angle}.\n` +
-    `"açıkta kaldın / utility'siz girme" kalıbını SADECE tip gerçekten util-yokluğu ise (info-less-push veya entry-no-trade) kullan; bu tip o değilse o kalıbı KULLANMA, yukarıdaki dersi ver.` +
+    `\n[ÖLÜM-TİPİ İPUCU — bu round'un odağı]\n` +
+    `Bu ölümün tipi: ${type}. Sistem prompt'undaki KB'de bu tipe karşılık gelen bölüm: "${g.kbBlock}".\n` +
+    `deathAnalysis'i O KB bölümünün dersine dayandır — ama bölümün cümlesini KOPYALAMA. Bu round'un ` +
+    `somut detayına (callout + ajan + silah) bağlayarak, KB'nin derinliğini KENDİ cümlenle ver.\n` +
+    `"açıkta kaldın / utility'siz girme" kalıbını SADECE bu tip gerçekten util-yokluğu ise (info-less-push / entry-no-trade) kullan; değilse o tipin KENDİ dersini ver.` +
     banLine
   );
 }
