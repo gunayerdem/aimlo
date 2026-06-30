@@ -158,7 +158,28 @@ function isValidInsightShape(obj: unknown): boolean {
    ROUTE HANDLER
    ══════════════════════════════════════════════════════════ */
 
+// CORS — insightService.ts (desktop) hits this with a plain browser fetch, so the
+// WebView2 preflight needs these headers or the call is silently CORS-blocked (returns
+// null → dashboard shows no AI insight). Same safe rationale as /api/support: Bearer
+// header auth, no cookies/credentials, so wildcard ACAO grants no abusable access.
+const CORS_HEADERS: Record<string, string> = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  "Access-Control-Max-Age": "86400",
+};
+
+export async function OPTIONS(): Promise<NextResponse> {
+  return new NextResponse(null, { status: 204, headers: CORS_HEADERS });
+}
+
 export async function POST(request: NextRequest) {
+  const res = await handleInsight(request);
+  for (const [k, v] of Object.entries(CORS_HEADERS)) res.headers.set(k, v);
+  return res;
+}
+
+async function handleInsight(request: NextRequest) {
   try {
     // Reject oversized payloads
     const contentLength = request.headers.get("content-length");

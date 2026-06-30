@@ -35,7 +35,33 @@ export const maxDuration = 10;
 const MAX_PAYLOAD_BYTES = 20_000; // 20KB — a 4000-char message + overhead, plenty.
 const MAX_MESSAGE_CHARS = 4000;
 
+// CORS — the desktop webview (tauri:// origin) calls this CROSS-ORIGIN with a Bearer
+// token in a header (NOT cookies). vision/report/telemetry don't need CORS because they
+// go through Rust reqwest; this route is hit by a plain browser fetch, so without these
+// headers the WebView2 CORS preflight blocks it and the desktop "Bize Sor" button hangs.
+// Wildcard ACAO is safe here: auth is a header Bearer (no ambient credentials to abuse),
+// and we deliberately do NOT send Access-Control-Allow-Credentials.
+const CORS_HEADERS: Record<string, string> = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  "Access-Control-Max-Age": "86400",
+};
+
+// Preflight — must answer WITHOUT auth (browsers send OPTIONS with no Authorization).
+export async function OPTIONS(): Promise<NextResponse> {
+  return new NextResponse(null, { status: 204, headers: CORS_HEADERS });
+}
+
+// Thin wrapper: run the handler, then stamp CORS headers on EVERY response path
+// (success, validation 4xx, and the auth/rate-limit failures from verifyAuthAndRateLimit).
 export async function POST(request: NextRequest): Promise<NextResponse> {
+  const res = await handleSupport(request);
+  for (const [k, v] of Object.entries(CORS_HEADERS)) res.headers.set(k, v);
+  return res;
+}
+
+async function handleSupport(request: NextRequest): Promise<NextResponse> {
   // Reject oversize payloads before parsing JSON.
   const contentLength = request.headers.get("content-length");
   if (contentLength && parseInt(contentLength, 10) > MAX_PAYLOAD_BYTES) {
