@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getSupportMessages } from "@/lib/admin-analytics";
+import { updateSupportStatus } from "./actions";
 
 export const dynamic = "force-dynamic";
 
@@ -14,7 +15,7 @@ export default async function AdminSupportPage() {
   return (
     <>
       <h1 className="adm-h1">Yardım / Sorular</h1>
-      <p className="adm-sub">Kullanıcıların Destek ekranından gönderdiği sorular — en yeni en üstte</p>
+      <p className="adm-sub">Kullanıcıların Destek ekranından gönderdiği sorular — en yeni en üstte. Hallettiğini <b>Çözüldü</b> işaretle, sayaçlar güncellensin.</p>
 
       {tableMissing ? (
         <div className="adm-note">
@@ -34,7 +35,7 @@ export default async function AdminSupportPage() {
           <div className="adm-card" style={{ marginTop: 14, padding: 4 }}>
             <table className="adm-table">
               <thead>
-                <tr><th>Tarih</th><th>Kullanıcı</th><th>E-posta</th><th>Mesaj</th><th>Durum</th></tr>
+                <tr><th>Tarih</th><th>Kullanıcı</th><th>E-posta</th><th>Mesaj</th><th>Durum</th><th>İşlem</th></tr>
               </thead>
               <tbody>
                 {messages.map((m) => (
@@ -50,6 +51,17 @@ export default async function AdminSupportPage() {
                       <span className={`adm-badge ${m.status === "open" ? "muted" : "ok"}`}>
                         {m.status === "open" ? "açık" : m.status === "resolved" ? "çözüldü" : m.status}
                       </span>
+                    </td>
+                    <td>
+                      {/* Server action — re-verifies admin inside actions.ts (a server
+                          action is its own POST endpoint; the layout gate isn't enough). */}
+                      <form action={updateSupportStatus}>
+                        <input type="hidden" name="id" value={m.id} />
+                        <input type="hidden" name="status" value={m.status === "open" ? "resolved" : "open"} />
+                        <button type="submit" className={`adm-act ${m.status === "open" ? "ok" : ""}`}>
+                          {m.status === "open" ? "✓ Çözüldü işaretle" : "↻ Yeniden aç"}
+                        </button>
+                      </form>
                     </td>
                   </tr>
                 ))}

@@ -104,6 +104,15 @@
 .adm-badge.muted { background: rgba(255, 255, 255, 0.06); color: rgba(238,240,248,0.6); }
 .adm-badge.ok { background: rgba(74, 222, 128, 0.14); color: #86efac; }
 
+/* Support status toggle button (admin → Yardım / Sorular) */
+.adm-act { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; cursor: pointer;
+  font-size: 11px; font-weight: 600; padding: 5px 11px; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04);
+  color: rgba(238,240,248,0.66); transition: background .15s, border-color .15s, color .15s; }
+.adm-act:hover { background: rgba(255,255,255,0.08); color: rgba(238,240,248,0.9); border-color: rgba(255,255,255,0.22); }
+.adm-act.ok { border-color: rgba(74,222,128,0.32); color: #86efac; background: rgba(74,222,128,0.08); }
+.adm-act.ok:hover { background: rgba(74,222,128,0.16); border-color: rgba(74,222,128,0.5); color: #b6f7cf; }
+
 .adm-input {
   width: 100%; max-width: 360px; padding: 10px 14px; border-radius: 10px;
   background: rgba(255, 255, 255, 0.03); border: 1px solid var(--card-border);
