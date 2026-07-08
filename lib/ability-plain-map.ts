@@ -109,6 +109,7 @@ export const ABILITY_PLAIN_MAP: AbilityPlain[] = [
   { official: "Barrier Mesh", tr: "duvar", en: "wall" },
   { official: "Annihilation", tr: "ult", en: "ult" },
   { official: "Alarmbot", tr: "bot", en: "bot" },
+  { official: "Turret", tr: "taret", en: "turret" }, // duelist-KB denetimi 2026-07-08: map bu adı çevirmiyordu (raze/neon 'taret' diliyle hizalı)
   { official: "Nanoswarm", tr: "molly", en: "molly" },
   { official: "Lockdown", tr: "ult", en: "ult" },
   { official: "Barrier Orb", tr: "duvar", en: "wall" },
@@ -118,6 +119,12 @@ export const ABILITY_PLAIN_MAP: AbilityPlain[] = [
   { official: "Arc Rose", tr: "flash", en: "flash" },
   { official: "Razorvine", tr: "diken", en: "thorns" },
   { official: "Steel Garden", tr: "ult", en: "ult" },
+  { official: "Shear", tr: "duvar tuzağı", en: "hidden wall" }, // Vyse Q — kapsama boşluğu fix 2026-07-08
+  // Veto (v11.07b) — sentinel-KB denetimi 2026-07-08: 4 resmi ad haritada hiç yoktu (kod-ad sızma deliği)
+  { official: "Chokehold", tr: "tuzak", en: "trap" },
+  { official: "Crosscut", tr: "teleport", en: "teleport" },
+  { official: "Interceptor", tr: "önleyici", en: "interceptor" },
+  { official: "Evolution", tr: "ult", en: "ult" },
 ];
 
 const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\/]/g, "\\$&");
@@ -153,7 +160,9 @@ export function plainifyAbilities(text: string, lang: "tr" | "en"): string {
 // (audit 2026-06-30): yabancı kelime Türkçe yazımda apostrof KORUR ("smoke'u", "flash'ı");
 // onları buraya koymak fixTurkishApostrophe'u "smoke'un"→"smokenin", "flash'ı"→"flashı"
 // gibi BOZUK çıktıya zorluyordu (raw'dan kötü). Yabancı kökler dokunulmaz kalsın.
-const TR_TERMS = ["yavaşlatma", "sersemletme", "sabitleme", "diriltme", "çekme", "zıplama", "kalkan", "kamera", "tuzak", "bıçak", "kaçış", "duvar", "diken", "siper", "açı", "tel", "ağ"];
+// "taret" BİLEREK YOK (2026-07-08): soften() t→d kuralı "taret'i"→"taredi" yanlış-kelimesi üretiyor
+// (loanword yumuşamaz, doğrusu "tareti"); apostroflu kalması yanlış kelimeden daha az zararlı.
+const TR_TERMS = ["yavaşlatma", "sersemletme", "sabitleme", "diriltme", "çekme", "zıplama", "kalkan", "kamera", "tuzak", "bıçak", "kaçış", "duvar", "diken", "siper", "açı", "tel", "ağ", "önleyici"];
 const VOWELS = "aeıioöuü";
 const lastVowel = (w: string) => { for (let i = w.length - 1; i >= 0; i--) if (VOWELS.includes(w[i])) return w[i]; return "a"; };
 const highV = (lv: string) => (({ a: "ı", "ı": "ı", o: "u", u: "u", e: "i", i: "i", "ö": "ü", "ü": "ü" } as Record<string, string>)[lv] ?? "ı");

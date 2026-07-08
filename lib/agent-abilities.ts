@@ -13,7 +13,7 @@ export const AGENT_ABILITIES: Record<string, string[]> = {
   Chamber: ["tuzak", "teleport", "ult"],               // Trademark(slow-tuzak)/Rendezvous/Tour de Force
   Deadlock: ["stun", "duvar", "tuzak", "ult"],
   Vyse: ["duvar", "flash", "slow", "ult"],
-  Veto: ["molly", "teleport", "tuzak", "ult"],         // gerçek ajan; Interceptor=tuzak (tel DEĞİL)
+  Veto: ["tuzak", "teleport", "önleyici", "ult"],      // web-doğrulandı 2026-07-08: Chokehold=tuzak (bağlar+sağırlaştırır, molotof DEĞİL), Crosscut=teleport, Interceptor=önleyici (utility yok-edici), Evolution=ult; molly YOK
   // — Controllers —
   Brimstone: ["molly", "smoke", "ult"],                // Stim=buff (düz-terim yok); stun YOK
   Viper: ["molly", "smoke", "duvar", "ult"],
