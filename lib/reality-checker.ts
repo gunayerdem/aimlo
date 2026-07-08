@@ -5,6 +5,8 @@
  * Deterministic — no extra AI calls.
  */
 
+import { extractKillerWeapon } from "@/lib/comp-weapon";
+
 // ── Types ──
 
 interface RoundMemoryEntry {
@@ -456,7 +458,14 @@ export function buildFactGround(
   const killerInfo = typeof reqBody.killerInfo === "string" ? reqBody.killerInfo : "";
   return {
     hasKiller: killerInfo.length > 0,
-    hasWeapon: killerInfo.length > 0 && /\bwith\s+\S/i.test(killerInfo),
+    // TEK-KAYNAK (güvenlik denetimi L-1, 2026-07-08): eski /\bwith\s+\S/ kalıbı,
+    // OCR'ın "with"i düşürdüğü "by reyna sheriff" formunu KAÇIRIYORDU → [SİLAH+KOMP
+    // İPUCU] "silah: sheriff" derken factSheet "silah BİLİNMEYEN" diyor, guard
+    // gerçek silahı strip'liyordu (çelişkili sinyal). extractKillerWeapon sözlük-
+    // bağlı (yalnız gerçek silah adları eşleşir, serbest metin asla) → çıplak
+    // token da GÖZLENMİŞ silahtır. İşaretçi + factSheet + guard artık aynı gerçeği
+    // paylaşır; silah token'ı hiç yoksa guard eskisi gibi strip'ler.
+    hasWeapon: killerInfo.length > 0 && extractKillerWeapon(killerInfo) !== null,
     hasDeathLocation: typeof ctx.deathLocation === "string" && (ctx.deathLocation as string).length > 0,
     hasDeathAngle: typeof ctx.deathAngle === "string" && (ctx.deathAngle as string).length > 0,
     hasHeadshot: reqBody.headshot === true,
