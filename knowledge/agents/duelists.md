@@ -434,9 +434,9 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
 
 ### Yetenek Analizi
 - **slow (C)** - 300 kredi, 1 şarj. Yere çarpınca patlayan ışık kümesi; çevredeki düşmanı sert yavaşlatır. Sadece koşma hızını değil; ateş hızını, geri tepme toparlanmasını, şarjör değiştirmeyi ve silah kuşanmayı da yavaşlatır. Şüphelendiğin köşeye/açıya at, yere otursun, düşman yavaşlasın, ondan SONRA dal. Yavaşlamış düşman geç nişan alır, geç kaçar — düelloyu önden açarsın.
-- **dash (Q)** - 300 kredi, 1 şarj. Kuşan ve fırlat: sol tık iki kez ileri dash atar, sağ tık tek dash. Yalnızca ilk dash seni yukarı çıkarabilir. İki dash'i tek seferde boşaltıp içeride sıkışma — birini girişe, diğerini kaçış/yeniden konumlanmaya sakla. İlk dash'le yükselip kutuların/yüksek noktaların üstünden beklenmedik açı al.
-- **geri-kayma (E)** - Bedava, 1 şarj, 2 kill ile yenilenir. İmza yeteneğin. Yere bir ışık feneri koyarsın; tekrar bastığında saf ışık olarak o fenere geri kayarsın ve kayarken DOKUNULMAZ olursun. Bu Waylay'i diğer duelist'lerden ayıran şey: dövüşü kaybetsen bile ölmeden geri kayabilirsin. Ama fener peek'ten ÖNCE yerde olmalı — yoksa güvence yok.
-- **ult (X)** - 8 ult puanı. Kendinin ışık huzmesi yansıtan bir hayaletini (afterimage) bırakırsın; kısa gecikmeden sonra sen güçlü bir hız patlaması alırsın ve huzme genişleyip alandaki düşmanları yavaşlatır. Hızlı execute'larda ve site basışlarında alanı hem yavaşlatıp hem hız avantajıyla kapatmak için kullan.
+- **dash (Q)** - 300 kredi, TEK kullanım. Kuşan ve fırlat: sol tık iki kez ileri dash atar, sağ tık tek dash — kararı basmadan verirsin, ikinci dash'i sonraya saklayamazsın. Yalnızca ilk dash seni yukarı çıkarabilir: kutuların/yüksek noktaların üstünden beklenmedik açı al. Derin giriş için çift, kısa boşluk için tek; kaçış planın dash değil geri-kayma.
+- **geri-kayma (E)** - Bedava, 1 şarj, iki öldürmeyle yenilenir. İmza yeteneğin. Yere bir ışık feneri koyarsın; tekrar bastığında o fenere geri kayarsın ve kayarken DOKUNULMAZ olursun. Fener bırakıldıktan 8 saniye sonra kendiliğinden kaybolur — tur boyu duran bir sigorta DEĞİL, peek'ten hemen önce kurulan kısa ömürlü bir güvence. Dövüşü kaybetsen bile ölmeden geri kayarsın; ama fener o an yerde olmalı.
+- **ult (X)** - 8 ult puanı. Öne doğru genişleyen bir ışık huzmesi yollarsın: değen düşmanlar yavaş hareket eder, yavaş ateş eder, yavaş şarjör değiştirir; sana kısa süreli hız verir, hasar vermez. Execute'un hemen önüne bas — savunucular yavaş dövüşürken hız avantajıyla site'a ilk sen gir.
 
 ### Ne Zaman Seçilir
 - Takımın agresif bir giriş duelist'ine ihtiyaç duyuyor — ilk açıyı alıp ilk kanı dökmek senin işin.
@@ -462,32 +462,32 @@ Duelist'ler takımın alan açan oyuncularıdır. Yetenekleri ilk dövüşü alm
 
 2. **IF** geri-kayma fenerini önceden koymadan agresif peek atıyorsan
    **MEANING** Waylay'in en büyük üstünlüğünü — "kazan kal, kaybet kay" güvencesini — kullanmıyorsun
-   **COUNTER** Peek'ten ÖNCE fener'i güvenli bir yere bırak; ilk öldürmeyi kaparsan kal, kaybedersen anında geri kay
-   **WHY** Fener kurulmamışsa kaybettiğin düelloda kaçacak yerin yok; sıradan bir duelist gibi öne çıkıp orada ölürsün
+   **COUNTER** Fener'i peek'ten HEMEN önce güvenli bir yere bırak (8 saniyede kaybolur, erken kurma); ilk öldürmeyi kaparsan kal, kaybedersen anında geri kay
+   **WHY** Fener o an yerde değilse kaybettiğin düelloda kaçacak yerin yok; sıradan bir duelist gibi öne çıkıp orada ölürsün
 
 3. **IF** ilk öldürmeden sonra açıkta donup ikinci düşmana yakalanıyorsan
-   **MEANING** Frag'i aldın ama kalayım mı kayayım mı diye düşünürken ikinci düşman seni basıyor
-   **COUNTER** İlk öldürmeden sonra yarım saniyede karar ver: temizse kal ve siteyi tut, ses/gölge varsa fener'e geri kay
-   **WHY** İlk fragdan sonraki yarım saniye en ölümcül an; dikkatin dağılmışken geri-kayma güvencen yoksa ikinci düşman tam orada yakalar
+   **MEANING** Öldürdün ama kalayım mı kayayım mı diye düşünürken ikinci düşman seni basıyor
+   **COUNTER** İlk öldürmeden sonra anında karar ver: temizse kal ve siteyi tut, ses/gölge varsa fener'e geri kay
+   **WHY** İlk öldürmeden sonraki an en ölümcül an; dikkatin dağılmışken geri-kayma güvencen yoksa ikinci düşman tam orada yakalar
 
 4. **IF** dash'i hep düz ileri kullanıp asla yukarı çıkmıyorsan
    **MEANING** İlk dash'in yükselebildiğini bilmiyorsun; beklenmedik açıları boşa harcıyorsun
    **COUNTER** İlk dash'le yükselip kutuların/yüksek noktaların üstünden beklenmedik bir açı al
    **WHY** Düşman açıları göz hizasında tutar; yüksekten gelen giriş hazır crosshair'i bozar, o yarım saniye düelloyu açar
 
-5. **IF** iki dash'i de tek seferde harcayıp içeride sıkışıyorsan
-   **MEANING** Mobiliteni yönetemiyorsun; kaçacak/yeniden konumlanacak hamlen kalmıyor
-   **COUNTER** Bir dash'le gir, diğerini sakla; ilk düelloyu kaybedersen kalan dash + fener seni çıkarır
-   **WHY** İki dash'i de bitirirsen mobiliten sıfırlanır; açıkta, yavaş, kaçışsız kalırsın — tüm avantajın mobilitedeydi
+5. **IF** çift dash ile en derine dalıp içeride sıkışıyorsan
+   **MEANING** Dash'in tek kullanım olduğunu hesaba katmıyorsun; patlamayı bastıktan sonra mobiliten sıfır
+   **COUNTER** Basmadan önce karar ver: derin giriş için çift dash, kısa boşluk için tek dash; çıkışını her zaman geri-kaymaya bağla
+   **WHY** Dash bittikten sonra yavaşsın; fener de yerde değilse açıkta kaçışsız kalırsın — tüm avantajın mobilitedeydi
 
 6. **IF** flash'ın varmış gibi kör açıya tek başına dash'liyorsan
    **MEANING** Waylay'in flash'ı yok; flash'lı bir duelist gibi oynuyorsun
    **COUNTER** Kör açıyı tek başına dash'leme; flash/körleme atan takım arkadaşının arkasından gir, körlemeyi ondan al, boşluğu sen kapat. Tek başınaysan önce slow'la pencere aç
    **WHY** Açıyı tutan düşman körlenmeden seni temiz görür; dash hızlı ama görünür, körleme olmadan dalmak hazır crosshair'in önüne yürümektir
 
-7. **IF** geri-kayma fenerini her tur aynı yere koyuyorsan
+7. **IF** geri-kayma fenerini hep aynı yere bırakıyorsan
    **MEANING** Okunabilir hale geldin; düşman geri kaydığın anı ve yeri önceden biliyor
-   **COUNTER** Fener'i tur tur farklı yere koy; satın alma aşamasında geri alıp yeniden koyabilirsin, bunu kullan
+   **COUNTER** Fener'i her peek öncesi yeniden ve farklı yere bırak; okunduğunu hissettiğin turda hiç geri kayma — kal ve açıyı tut
    **WHY** Düşman fener'ini ezberlerse kaydığın hattı nişanlar ve sen tam o noktaya dönerken seni basar — güvencen riske döner
 
 8. **IF** slow'u düşmanın geleceği yere değil, kendi takımının gireceği yola atıyorsan

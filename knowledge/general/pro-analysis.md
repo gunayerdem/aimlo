@@ -22,8 +22,8 @@ WHY ışınlanma kısıtlaması Chamber'ın temel oyununu kırıyor — "her har
 ### Çift Initiator Meta'sı
 
 IF tek initiator + çift duelist oynuyorsan
-MEANING bilgi toplaman ve entry desteğin yetersiz kalıyor
-COUNTER çift initiator dene: Sova + Skye, Fade + KAY/O, Fade + Gekko — flash atan initiator entry'yi açarken bilgi atan initiator geriden tarar, round kontrolün katlanır
+MEANING keşfin ve entry desteğin yetersiz kalıyor
+COUNTER çift initiator dene: Sova + Skye, Fade + KAY/O, Fade + Gekko — flash atan initiator entry'yi açarken recon atan initiator geriden tarar, round kontrolün katlanır
 WHY tek initiator hem bilgiyi hem desteği aynı anda veremez; birini seçmek zorunda kalırsın, çift olunca ikisini de alırsın
 
 ### Controller Haritası
@@ -49,7 +49,7 @@ WHY tek initiator hem bilgiyi hem desteği aynı anda veremez; birini seçmek zo
 IF bu tarza karşı oynuyorsan
 MEANING ilk tarama ve ses ipucu gelmeden commit etmezler, bilgi tamamlanınca execute ederler
 COUNTER ilk tarama atılmadan önce push at — bilgi fazı başlar başlamaz site'a ya da mid'e baskı uygula, düşmanı hazır değilken yakala
-WHY bu takımların gücü bilgi toplama ve mid-round adaptasyon; bilgi fazına girmelerine izin vermezsen o gücü sıfırlarsın
+WHY bu takımların gücü keşif ve mid-round adaptasyon; bilgi fazına girmelerine izin vermezsen o gücü sıfırlarsın
 
 **Bu tarzın özellikleri:**
 - İlk tarama veya ses ipucu gelmeden commit etmez
@@ -182,7 +182,7 @@ WHY her round doğruyu yapmak hata oranını düşürür; bu tipe karşı sen de
 ### Standart Default
 
 1. **Yayılma**: Controller mid'e smoke atar, sentinel site'ı kurar, initiator ilk bilgi atışını yapar.
-2. **Bilgi toplama**: Tarama sonuçları ve ses ipuçları gelince pozisyona göre karar ver.
+2. **Keşif**: Tarama sonuçları ve ses ipuçları gelince pozisyona göre karar ver.
 3. **Commit veya fake**: Zayıf savunma görüyorsan execute et. Stack varsa fake at, rotate et.
 4. **Execute**: Smoke iner, flash atılır, duelist girer. Execute başlar başlamaz spike'ı dik.
 5. **Post-plant**: Açıları tut, utility ile defuse'u engelle, zamanı oyna.
@@ -201,7 +201,7 @@ WHY ilk bilgi atışı gelmeden push atarsan düşmanın ritmi kırılır
 
 IF Op'lu takıma karşı oynuyorsan
 MEANING Op açısına utility'siz peek atmak intihar
-COUNTER Op açısına bakmadan önce en az 3-4 utility kullan: flash, smoke, drone veya tarama, sonra swing at
+COUNTER Op açısına bakmadan önce en az 3-4 utility harca: flash, smoke, drone veya tarama, sonra geniş peek at
 WHY her utility Op oyuncusunu bir sonraki adıma zorlar — atış, yer değiştirme ya da geri çekilme; swing'e geçtiğinde açı çoktan kirlenmiştir
 
 ---
@@ -225,8 +225,8 @@ WHY force buy round'unda tek bir pick snowball'a dönerse hem round'u hem silah�
 
 IF full eco'daysan (0–1.900 kredi)
 MEANING Classic + zırhsız — fight zorlamak anlamsız
-COUNTER bilgi topla, çıkış kill'i ara, spike'ı dik (oyuncu başına 300 kredi)
-WHY eco round'unda hedef kazanmak değil — ekonomiyi hazırla, bilgi topla, çık
+COUNTER düşmanın yerini öğren, çıkışta tek düşman öldürmeyi ara, spike'ı dik (oyuncu başına 300 kredi)
+WHY eco round'unda hedef kazanmak değil — ekonomiyi hazırla, düşman planını öğren, sağ çık
 
 IF hafif buy'daysan (1.900–3.000 kredi)
 MEANING Marshal ya da Spectre + hafif zırh — pick potansiyelin var
@@ -256,6 +256,26 @@ WHY tek bir pick round'u çevirebilir
 ### Lotus
 - **Standart**: Raze, Fade, Omen/Harbor, Gekko/Skye, Killjoy/Deadlock
 - **Varyant**: Çift controller (Omen + Harbor) ikinci initiator'u düşürüyor.
+
+---
+
+## Uyum ve Otopilot — Maç İçi Adaptasyon
+
+Stratejiyi sorgulamadan döndürmek bedava bilgi verir; rakip ayar yaptıktan sonra değişmemek, kazandığın avantajı geri verir.
+
+### Otopilottan çık
+
+IF düşmanın geçen round ne gösterdiğine bakmadan her round aynı standart açılışı çalıştırıyorsan
+MEANING stratejiyi o kadar otomatik döndürüyorsun ki doğru olup olmadığını sormayı bırakmışsın
+COUNTER round ortasında dur ve sor: "Bu açılış geçen round'a göre hâlâ tutuyor mu?"; düşman geçen round bir karşı hamle gösterdiyse açılışı o anda değiştir, aynısını tekrar çalıştırma
+WHY rakip senin tekrarını okur; sorgulamadan çalıştırmak ona bedava bilgi verir
+
+### Devre arasında değiş
+
+IF ilk yarıyı bir planla kazandın ama ikinci yarıda hâlâ aynı şeyi çalıştırıyorsan
+MEANING düşman seni okudu ve ayar yaptı, sen ayar yapmadın
+COUNTER devre arasında iki soruyu yanıtla: onlar neyi değiştirdi, biz buna karşı neyi değiştireceğiz?; ikinci yarının ilk round'una eski planla değil, bu yanıtla kurduğun yeni planla gir
+WHY rakip ayar yaptıktan sonra değişmemek, ilk yarıda kazandığın avantajı geri verir
 
 ---
 

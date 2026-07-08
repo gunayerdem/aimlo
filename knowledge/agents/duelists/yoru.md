@@ -1,3 +1,8 @@
+---
+patch: "13.00"
+verified: 2026-07-08
+---
+
 # AJAN: Yoru
 
 ## 1. Rol Kimliği
@@ -5,17 +10,22 @@
 - Düşman rotasyona aşırı tepki veriyorsa, ses duyunca koşuyorsa Yoru'yu seç — onları tam orada yersin. Takımda lurk tabanlı bir plan varsa da senin ajanın.
 - İşin tek bir şey: düşmanın seni yanlış yerde görmesini sağla, sonra gerçek yerinde ol.
 
-## 2. Temel Sorumluluklar
-- **Atakta:** TP'yi öne göm, klon gönder, klon tepki çekince TP ile gir. Her girişte flash-TP komboyu hazır tut. Ult ile düşman hattının arkasına geç — bilgi topla ya da round'u kapat.
-- **Savunmada:** Push gelirken düşmanın arkasına TP kur. Choke'a klon bırak, mollyleri çektir. Post-plant'te ult ile bilgi al ya da spike'ı savun. Kaçış TP'sini her zaman cepte tut.
-- **Takım senden ne bekler:** Boşluk aç. Klon ve TP ile düşmanı fazladan açı tutmaya zorla. Başka duelist'in giremeyeceği zamanlamalardan gir.
+- Takım senden ne bekler: boşluk aç. Klon ve TP ile düşmanı fazladan açı tutmaya zorla. Başka duelist'in giremeyeceği zamanlamalardan gir.
+
+## Saldırıda Görevin
+- TP'yi ya öne göm ya da girişini flash + klonla yap — TP'n TEK, hem giriş hem kaçış olamaz. Klon tepki çekince gir; her girişte flash-TP komboyu hazır tut.
+- Ult ile düşman hattının arkasına geç — düşman yerlerini gör ya da round'u kapat.
+
+## Savunmada Görevin
+- Push gelirken düşmanın arkasına TP kur. Dar girişe klon bırak, mollyleri çektir.
+- Post-plant'te ult ile düşman yerlerini gör ya da spike'ı savun. TP'yi girişte harcadıysan kaçışın yok — ona göre pozisyon al.
 
 ## 3. Sık Yapılan Hatalar
 1. **TP'yi açık yere gömmek** — TP ses verir. Herkesin bildiği noktaya koyarsan düşman seni orada bekler. Kutunun arkası, köşe, duman içi — kimsenin bakmadığı yere göm.
 2. **TP'ye plansız girmek** — Işınlandın, şimdi ne? Bilmiyorsan ölürsün. Her TP girişinin arkasında bir eylem olsun: flash at ve swing at, ult, ya da temizleyeceğin belirli bir açı.
-3. **Klonu yalnız bırakmak** — Klon tepki çekince swing atmaya hazır değilsen, düşman klonu fark eder ve geçer. Klonu gönder, düşman tepki verdiği anda hemen swing at.
-4. **Ult'u sadece gezmek için kullanmak** — Etrafı dolaştın, sonra ne? Ult, flash-çıkış ve kill ile bitmeli. Pasif ult round kazandırmaz.
-5. **Yoru'yu Jett gibi oynamak** — Yoru'nun ham peek gücü yok. Klon, flash, TP olmadan kuru peek atıyorsan yanlış ajanı oynuyorsun.
+3. **Klonu yalnız bırakmak** — Klon vurulunca patlar ve vurana bakıyorsa körlük basar. Düşman klonu patlattığı an kör penceresi senindir — tam o an swing at. Hazır değilsen düşman klonu fark eder ve pencere boşa gider.
+4. **Ult'u sadece gezmek için kullanmak** — Etrafı dolaştın, sonra ne? Ult, flash-çıkış ve öldürmeyle bitmeli. Pasif ult round kazandırmaz.
+5. **Yoru'yu Jett gibi oynamak** — Yoru'nun ham peek gücü yok. Klon, flash, TP olmadan utility'siz peek atıyorsan yanlış ajanı oynuyorsun.
 6. **Her round aynı lurk zamanlaması** — Düşman kalıbını okur, flank açını tutar, gittiğin anda hazır bekler. Bir round erken lurk yap, bir round geç lurk yap, bir round hiç yapma — çeşitlendir.
 7. **Flash-TP kombosu bozuk** — Flash, TP varmadan patlarsa düşman toparlanır. TP varıp düşman tepki verdikten sonra patlarsa geç kalırsın. Flash, TP girişiyle aynı anda patlamalı.
 8. **Flash'ı kendine patlatmak** — Yoru'nun flash'ı sektirilen bir top. Yanlış açıdan atarsan kendini ya da takımı kör edersin. Flash'ı düşmanın bakacağı yöne sektir, sonra ters yönden swing at — kendi gözün her zaman flash'ın arkasında kalsın.
@@ -32,15 +42,15 @@ MEANING: Her round aynı zamanlamada lurk yapıyor, düşman kalıbı okumuş
 COUNTER: Lurk zamanlamasını değiştir. Bir round takımla oyna, lurk yapma. Düşman flank beklemeyi bıraktığında lurk yap.
 WHY: Tekrar eden zamanlama pozisyonunu düşmana bedavaya verir. Yoru'nun tek silahı olan sürpriz kalkar.
 
-IF: Ult sırasında veya sonrasında kill almıyorsun
+IF: Ult sırasında veya sonrasında öldürme çıkmıyor
 MEANING: Ult'u sadece keşif için kullanıyorsun, çıkışta flash atıp swing atmıyorsun
-COUNTER: Ult'tan çık, anında flash at, düşman flash'lanırken swing at. Ult her seferinde en az bir kill ya da zorlanmış ölümle bitmeli.
+COUNTER: Ult'tan çık, anında flash at, düşman körken swing at. Her ult en az bir öldürmeyle ya da düşmana zorlatılmış bir hatayla bitmeli.
 WHY: Yalnız keşif bilgiyi verir ama round kazandırmaz. Çıkışta flash-swing yoksa ult sadece harita turundan ibarettir.
 
 IF: Klon gönderiyorsun ama hemen takip etmiyorsun
 MEANING: Klon ile kendi pozisyonun senkronsuz — düşman klona bakıp sana dönüyor
-COUNTER: Düşman klonu vururken ya da klona tepki verirken swing at. Klon ile sen farklı açılardan aynı anda gelmelisiniz.
-WHY: Geç gelen swing düşmana toparlanma süresi verir. Koordinesiz klon sadece yerini ele verir.
+COUNTER: Klon vurulunca patlar ve vurana körlük basar — düşman klonu patlattığı an kör penceresi senindir, tam o an swing at. Klon ile sen farklı açılardan aynı anda gelmelisiniz.
+WHY: Klonun asıl gücü patlama körlüğü. Geç gelen swing o pencereyi harcar, görüşü açılmış düşmana atış yaparsın; koordinesiz klon sadece yerini ele verir.
 
 IF: TP aktive olmadan sık yok ediliyor
 MEANING: TP çok açık bırakılmış ya da düşman TP rotalarını ezberlemiş
@@ -57,21 +67,22 @@ MEANING: Lurk derinliğini takım temposuyla eşleştirmiyorsun — takım girme
 COUNTER: Lurk'i takımın site vuruşuyla zamanla. Sen flank'ı tutarken takım baskı yapmalı ki düşman iki yöne bölünsün. Yalnız flank dövüşüne girme, takım meşgul edene kadar bekle.
 WHY: Yoru'nun lurk değeri düşmanı böler — ama takım baskı yapmıyorsa düşman tüm dikkatini sana verir. Bölünmemiş düşmanın içine yalnız girersen sayıca yenilirsin.
 
-IF: TP ile girişten sonra çıkış aletin olmadan saplanıp ölüyorsun (kaçış penceresini kaçırıyorsun)
-MEANING: Tek TP harcayıp giriyorsun, ikinci TP'yi güvenli noktaya kurmadığın için geri çekilecek aletin kalmıyor
-COUNTER: İki TP yükün var — birini güvenli bir noktaya (geri hattın, kapağın arkası) kur, sonra öbürüyle gir. Giriş kötü giderse güvenli kurduğun TP'ye ışınlanıp dövüşten çık. Kalan TP'yi her zaman kaçış için cepte tut.
-WHY: Yoru'nun TP'si tek yönlüdür — geldiğin yere otomatik geri dönemezsin. Kaçış istiyorsan önce güvenli noktaya bir tether bırakmalısın. Girişi kapatamadıysan oraya saplanma; güvenli TP'ye çık, yeniden konumlan, ikinci girişi farklı açıdan yap.
+IF: TP ile girişten sonra çıkış aracın olmadan saplanıp ölüyorsun
+MEANING: TP'n TEK — girişte harcadıysan kaçışın yok, bunu hesaba katmadan giriyorsun
+COUNTER: Kararı TP'yi atmadan ver: TP ya giriş ya kaçış — ikisini birden alamazsın. Girişte harcayacaksan takım seni trade'leyecek mesafedeyken gir. Kaçış istiyorsan TP'yi güvenli noktaya (geri hattın, kapağın arkası) göm, girişini flash + klonla yap.
+WHY: TP tek yönlü ve tek hak — geldiğin yere otomatik geri dönemezsin. Girişte harcanan TP'nin çıkışı takım trade'ine bağlıdır; yalnızken harcarsan oraya saplanırsın.
 
 ## 5. Harita Etkileşimleri
 - **Güçlü haritalar:** Bind (haritanın kendi teleportu Yoru TP'sini katlar — önce kendi TP'ni, ardından harita TP'sini art arda kullanırsın), Split (dikey mid güçlü flank rotaları verir), Haven (üç site var, Yoru her round farklı yerden çıkar — düşman okuyamaz), Icebox (B tüpler üzerinden hattın arkasına TP — düşman beklemiyor).
 - **Zayıf haritalar:** Breeze (çok açık, kapak yok, TP noktası bulmak zor), Lotus (döner kapılar flank beklentisini artırır, TP değeri düşer).
 - **Pozisyona özel:** Bind'da önce kendi TP'ni gönder, sonra harita teleportunu kullan — düşman nerede olduğunu kaybeder. Split'te B'ye sahte saldırı yaparken A Main'den A Heaven'a TP klasik geçiştir. Haven'da C Long TP'ni Garage arkasına göm — A saldırısı sırasında düşman seni arkadan göremez.
-- **Dar haritada öncelik:** Split ve Bind gibi sıkışık, çok daralan haritalarda klon-flash kombosu altın değerinde — düşmanın kaçacak yeri yok, kör olunca tutturduğun açıda kalır. Bu haritalarda Yoru kuru peek'e hiç ihtiyaç duymadan her açıyı utility ile temizler.
+- **Dar haritada öncelik:** Split ve Bind gibi sıkışık, çok daralan haritalarda klon-flash kombosu altın değerinde — düşmanın kaçacak yeri yok, kör olunca tutturduğun açıda kalır. Bu haritalarda Yoru utility'siz peek'e hiç ihtiyaç duymadan her açıyı utility ile temizler.
+- **TP sesini yem yap:** Gerçekte girmeden, sadece TP sesiyle düşman rotasyonunu çek — küreyi duyan savunucu döner, asıl site'ı eksik bırakır. Sen de boşalan taraftan gir.
 - **Açık haritada sınır:** Breeze ve Icebox gibi uzun-açık hatlarda flash sektirecek duvar az, klon uzaktan vurulup yok edilir. Buralarda Yoru'yu yakın-orta menzilde tut; TP'yi uzun hatta değil, dövüşün gerçekten yaşandığı sıkışık geçişin arkasına göm.
 - **Yükseklik kullanımı:** Dikey katmanı olan haritalarda (Split mid, Icebox B) TP'yi düşmanın göz hizasının dışına — alt kata ya da üst platforma — göm. Düşman yatay tarar; farklı yükseklikten çıkan TP tepki süresini en çok zorlayan giriş açısıdır.
 
 ## 6. Eşleşme Notları
-- **Zorlandığın ajanlar:** Fade (keşif ult'u seni içinde işaretler, TP noktalarını açığa çıkarır — işaretleme yerde aktifken TP açma, bitip kaybolunca gir), Sova (keşif oku lurk yolunu açar ve klonu fark eder — lurk'e girmeden önce o oku yok et), Killjoy (bot ile tuzaklar klonu ve TP'yi yakalar, ult'u seni sıkıştırır — bombasının becerileri temizlenmeden TP açma).
+- **Zorlandığın ajanlar:** Fade (keşif ult'u seni içinde işaretler, TP noktalarını açığa çıkarır — işaretleme yerde aktifken TP açma, bitip kaybolunca gir), Sova (keşif oku lurk yolunu açar ve klonu fark eder — lurk'e girmeden önce o oku yok et), Killjoy (bot ile tuzaklar klonu ve TP'yi yakalar, ult'u seni sıkıştırır — botu ve tuzakları temizlenmeden TP açma).
 - **Baskıladığın ajanlar:** Ses duyunca dönen takımlar — klon ayak sesi ve TP sesi onları yerinden eder. Cypher'a karşı etkilisin, TP teli atlar. Omen, Astra gibi sahte bilgiyle oynayan ajanlara karşı güçlüsün — kendi sahten onların sahtesini ezer.
 - **Adaptasyon:** Fade karşısında keşif işaretlemesi kaybolmadan TP'ye girme. Sova karşısında keşif oku yok edildiği anda lurk yap — keşif yerde aktifken hareket etme. Bilgi ağırlıklı kompoza karşı klona yaslan — sahte pozisyonunu "bulsunlar", sen gerçek yerden gir.
 
@@ -85,22 +96,17 @@ WHY: Yoru'nun TP'si tek yönlüdür — geldiğin yere otomatik geri dönemezsin
 **Düşman Adaptasyonu:** Birkaç round sonra savunucular klon sesine dönmeyi bırakır, görünür TP kürelerini yok eder ya da flank yolunu sürekli tutan bir oyuncu koyar.
 **Karşı Adaptasyon:** Klonu görmezden geliyorlarsa — klonla birlikte koş, sahteyi gerçek yap, görmezden gelen ölür. TP'yi yok ediyorlarsa — duman içine, kutunun arkasına göm ya da yıkılma sesini yem olarak kullan, sen başka açıdan gir. Flank'ını tutuyorlarsa — lurk yerine doğrudan dövüşülen siteye TP at, flank aracı değil giriş aracı olarak kullan.
 ### Zorlanırken
-"Yoru'yu Jett gibi oynuyorsun. Kuru peek'i bırak. Her dövüş klon, flash ya da TP ile başlamalı — ham peek ile asla."
+"Yoru'yu Jett gibi oynuyorsun. Utility'siz peek'i bırak. Her dövüş klon, flash ya da TP ile başlamalı."
 ### Öngörülebilir olduğunda
 "Lurk zamanlamanı okudular. İki round takımla oyna, beklemeyi bıraktıklarında tekrar lurk yap."
 ### Becerilerini erken harcadığında
 "Round başında her şeyi attın, dövüş gelince elin boştu. En az bir flash ya da TP'yi asıl dövüş anına sakla — Yoru utility'siz savaşamaz."
 ### Yalnız flank dövüşüne saplandığında
 "Lurk'e takımdan kopuk girdin, çoğa kaldın. Flank'ını takımın site vuruşuyla zamanla — düşman iki yöne bölünmeden tek başına içlerine dalma."
-### Tek TP harcayıp kaçış aletsiz kaldığında
-"İki TP yükün var — birini güvenli noktaya kur, öbürüyle gir. Giriş kötü gittiğinde oraya saplanma; güvenli kurduğun TP'ye ışınlanıp çık, yeniden konumlan, ikinci girişi farklı açıdan yap. TP geldiğin yere otomatik geri götürmez — kaçışı önceden kurman gerekir."
+### TP'yi plansız harcadığında
+"TP'n tek — ya giriş ya kaçış. Girişte harcadıysan takımının trade mesafesinde kal; kaçış istiyorsan TP'yi güvenli noktaya göm, girişi flash ve klonla yap. TP geldiğin yere otomatik geri götürmez."
 
-## 8. Rank Modülasyonu
-### Düşük Elo (Iron-Silver)
-Önce flash-TP komboyu kur. Her açıya girmeden önce klon gönder. Her round lurk yapma — yarısında takımla oyna. Ult'u karmaşık oyunlar için değil güvenli site keşfi için kullan.
-### Orta Elo (Gold-Diamond)
-Lurk zamanlamasını çeşitlendir — erken, geç, hiç. Ult'tan çıkarken flash at, swing at — her ult en az bir kill ile bitmeli. Her haritada yaygın TP-yok-etme noktalarından kaçan iki-üç rota öğren. Klon zamanlamasını takım saldırısıyla senkronize et.
-### Yüksek Elo (Ascendant-Immortal)
-Gerçekte TP'ye girmeden, sadece TP sesiyle düşmanın rotasyonunu çek. Round bazlı zamanlama çeşitliliğini bilinçli yönet. Belirli bir beceriyi zorla çıkarmak için klonu kullan, yeniden dolum biter bitmez saldır.
-### Elit (Radiant)
-Düşmanın adaptasyon kalıbını oku. Klon sesine artık dönmüyorlarsa — klonla gerçekten koş, görmezden gelen ölür. Her Yoru kararını düşmanın o round ne beklediğine göre kur, sonra tersini yap. Düşman bir beceri attıktan hemen sonra ult at — o anda en az utility var, en savunmasız hâldeler.
+## Karşısında: Yoru seni öldürdüyse
+- **Klon önde, gerçek Yoru başka açıda:** Klonu yakın mesafede patlatma — patlama sana körlük basar ve Yoru tam o pencerede girer. Karşı-hamle: klonu uzaktan tek mermiyle patlat ya da hiç vurma; gerçek Yoru'nun geleceği açıyı tut.
+- **TP ile arkandan geliyor:** TP küresinin sesi ve görünümü bellidir. Karşı-hamle: gördüğün TP'yi hemen yok et; ışınlanma sesini duyduğun an çıkış noktasına dön — Yoru varış sonrasında silahını yeni çıkarıyor, ilk atış sende.
+- **Flash-TP girişi:** Sektirilmiş flash gördüğün an arkanı dön ve bir adım geri çekil — Yoru flash'ın patlamasıyla aynı anda girer. Körlenmediysen dönüşünde açıyı sen bas: girişini senin körlüğüne göre kurdu, kör değilsen plan çöktü.

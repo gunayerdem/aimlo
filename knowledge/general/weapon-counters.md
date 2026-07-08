@@ -2,13 +2,14 @@
 id: general_weapon_counters
 type: general
 topic: weapon-counter-tactics
-patch: "9.x"
-tags: [weapons, operator, odin, judge, bucky, marshal, sheriff, spectre, counter-tactics]
+patch: "13.00"
+verified: 2026-07-08
+tags: [weapons, operator, outlaw, odin, judge, bucky, marshal, sheriff, bandit, spectre, counter-tactics]
 ---
 
 # WEAPON COUNTERS — Silah Karşıtı Taktikler
 
-Rakibin silahını tanı. Tanımazsan aynı açıyı aynı şekilde tutarsın, ölürsün, neden öldüğünü de bilmezsin. Her silahın sevdiği bir mesafe var. Counter oynamak = o mesafeyi ona vermemek.
+Rakibin silahını tanı. Tanımazsan aynı açıyı aynı şekilde tutarsın, ölürsün, neden öldüğünü de bilmezsin. Her silahın sevdiği bir mesafe var. Karşı oynamak = o mesafeyi ona vermemek.
 
 ---
 
@@ -18,27 +19,39 @@ Rakibin silahını tanı. Tanımazsan aynı açıyı aynı şekilde tutarsın, �
 
 Op uzun hatta tek vuruşla öldürür. Hattı o tutuyor; sen onun açısına yürüyerek girersen bedava ölürsün.
 
-### Nasıl Counter Edersin
+### Nasıl Karşılarsın
 
-**Op shot attıktan sonra bir boşluk açılır.** Atış sesini duydun mu, o an peek at. Ama iyi Op oyuncusu shot sonrası pozisyon değiştirir; aynı köşeden tekrar peek atma, farklı açıdan gir.
+**Op atışından sonra bir boşluk açılır.** Atış sesini duydun mu, o an peek at. Ama iyi Op oyuncusu atıştan sonra pozisyon değiştirir; aynı köşeden tekrar peek atma, farklı açıdan gir. Round'dan round'a hangi köşeyi tuttuğunu da izle — pattern netleşince anti-oyununu ona göre kur.
 
 **Op'un açısını besleme.** Smoke'u Op'un baktığı hattın önüne at. Seni göremezse tehdit de yok.
 
-**Flash ve jiggle olmadan Op açısına çıkma.** Flashsız, jigglesız girersen Op seni bedava vurur.
+**Flash ve jiggle olmadan Op açısına çıkma.** Flash'ın patlamasını bekle, patladığı an peek at — flash patlamadan çıkarsan Op seni bedava vurur.
 
-### Counter Taktikleri
+### Karşı Taktikler
 
-- **Flash + jiggle.** Flash at, küçük peek at, geri çekil. Op shot atarsa boşluk açıldı demektir, o an wide peek at.
+- **Flash + jiggle.** Flash at, küçük peek at, geri çekil. Op atışını yaparsa boşluk açıldı demektir, o an geniş açıyla peek at.
 - **İki açıdan aynı anda peek at.** Op tek hattı tutar. İki kişi iki farklı köşeden aynı anda çıkarsa, o birini vururken diğeri onu alır.
 - **Diğer taraftan baskı kur.** Takımın öbür taraftan zorlarsa Op oraya döner, sen boşalan açıdan girersin.
 
-### Rank Notu
+---
 
-**Gold-Plat:** Op gördün, hemen dalıyorsun. Flash ve smoke olmadan o açıya çıkma — flashsız peek bedava kill demektir.
+## OUTLAW — Çift Namlulu Keskin Nişancı
 
-**Elmas-Yükselen:** Flash zamanlaman kayıyor, flash patlamadan peek atıyorsun. Flashın patlamasını bekle, patladığı an peek at.
+### Neden Tehlikeli
 
-**Ölümsüz-Radiant:** Op oyuncusunun round'dan round'a hangi köşeyi tuttuğunu takip et. 2-3 round sonra pattern netleşir, o zaman anti-oyun kur. Bir de: Op shot sesini duyduktan sonra aynı yerden asla peek atma, iyi Op oyuncusu çoktan kaymıştır.
+Marshal ile Operator arasındaki 2.400 kredilik keskin nişancı. Marshal gibi kafaya muhtaç değil: hafif zırhlıyı gövde atışıyla tek seferde düşürür. Force buy roundlarında sık görülür; arka arkaya iki atışı var.
+
+### Nasıl Karşılarsın
+
+**Tam zırh al.** Ağır kalkan Outlaw'ın gövde atışını tekten ikiye çıkarır; hafif zırhla o hatta çıkmak bedava ölüm.
+
+**Tek jiggle'a güvenme.** İki atış arası boşluk kısa — ilk atış ıskalasa da ikinci namlu seni bekler.
+
+### Karşı Taktikler
+
+- **Geniş ve hızlı peek at.** Yavaş, dar peek Outlaw'ın en sevdiği hedeftir.
+- **İki namlu boşalınca bas.** İkinci atışı da duyduysan doldurma penceresi açıldı — o an üstüne git.
+- **Hattı smoke'la kes, mesafeyi kapat.** Keskin nişancının ortak zayıflığı yakın mesafedir.
 
 ---
 
@@ -48,7 +61,7 @@ Op uzun hatta tek vuruşla öldürür. Hattı o tutuyor; sen onun açısına yü
 
 Odin duvardan geçer, çok mermi atar, baskı kurar. Dar koridorda ya da ince duvar arkasında Odin'in önünde sabit durursan mermiler seni bulur.
 
-### Nasıl Counter Edersin
+### Nasıl Karşılarsın
 
 **Odin ilk mermilerde tutarsızdır.** Sürekli spray atarken nişanı kayar. Kısa çıkış yap, geri çekil — Odin'e uzun bir hedef verme.
 
@@ -56,17 +69,11 @@ Odin duvardan geçer, çok mermi atar, baskı kurar. Dar koridorda ya da ince du
 
 **Uzun hatta Odin spray tutabilir.** Vandal veya Phantom ile tek kafa isabeti Odin'i geri çekmeye yeter.
 
-### Counter Taktikleri
+### Karşı Taktikler
 
-- **Yakın mesafede Judge veya Spectre ile gir.** Odin yakına hızlı dönemez; yakında shotgun ya da SMG Odin'i ezer.
+- **Yakın mesafede Judge veya Spectre ile gir.** Odin yakına hızlı dönemez; yakında pompalı ya da hafif makineli Odin'i ezer.
 - **Uzaktan tek kafa.** Odin spray tutuyorsa sen kafadan vur. Bir isabet Odin'i duraksatır.
-- **Smoke at, yer değiştir.** Odin'e sabit hedef verme. Smoke at, cover'ını değiştir.
-
-### Rank Notu
-
-**Gold-Plat:** Aynı noktada bekliyorsun, Odin seni duvardan buluyor. Hareket et.
-
-**Elmas+:** Odin gördüğün an pozisyonu takıma söyle, cover planını hemen değiştirin.
+- **Smoke at, yer değiştir.** Odin'e sabit hedef verme. Smoke at, siperini değiştir.
 
 ---
 
@@ -74,28 +81,23 @@ Odin duvardan geçer, çok mermi atar, baskı kurar. Dar koridorda ya da ince du
 
 ### Neden Tehlikeli
 
-Yakın mesafede tek vuruşla öldürür. Dar koridor, köşe çıkışı, aniden açılan açı — bu mesafelerde pompalı, rifle'ı yener. Eco round'larda en tehlikeli silah budur.
+Yakın mesafede tek vuruşla öldürür. Dar koridor, köşe çıkışı, aniden açılan açı — bu mesafelerde pompalı, tüfeği yener. Eco round'larda en tehlikeli silah budur.
 
-### Nasıl Counter Edersin
+### Nasıl Karşılarsın
 
-**Pompalının menzili kısadır.** Uzağa çek, rifle'ınla vur. Etkili mesafenin dışında pompalı sıradan bir silaha döner.
+**Pompalının menzili kısadır.** Uzağa çek, tüfeğinle vur. Etkili mesafenin dışında pompalı sıradan bir silaha döner.
 
-**Köşeye yakın durma.** Pompalı oyuncusu köşeden yakın çıkış için bekler. Köşeye yapışırsan bedava kill verirsin.
+**Köşeye yakın durma.** Pompalı oyuncusu köşeden yakın çıkış için bekler. Köşeye yapışırsan bedava ölürsün.
 
 **Uzaktan peek at.** Köşeyi kontrol edeceksen uzaktan bak. Pompalı oyuncusu köşeyi dar tutar, sen uzakta kal.
 
-### Counter Taktikleri
+### Karşı Taktikler
 
-- **Uzun hat zorla.** Pompalı sana yaklaşmak ister. Uzak açı tut, rifle'ınla hat üzerinde vur.
+- **Uzun hat zorla.** Pompalı sana yaklaşmak ister. Uzak açı tut, tüfeğinle hat üzerinde vur.
 - **Molly ile yerinden et.** Pompalı oyuncusu yakına gelmek zorunda. Molly'yi yoluna at, uzağa çekmeye zorla.
-- **Takımı yayma.** Pompalı tek hedefe odaklanır. Aynı anda birden fazla kişi yakın durmasın — stack yapmayın, uzak açı tutun.
+- **Takımı yayma.** Pompalı tek hedefe odaklanır. Aynı anda birden fazla kişi yakın durmasın — uzak açı tutun.
 - **Açını önceden nişanla.** Köşede pompalı beklentin varsa daha çıkmadan nişanı oraya kilitle.
-
-### Rank Notu
-
-**Gold-Plat:** Yakın mesafede rifle'da ısrar edip ölüyorsun. Ekonomin yoksa sen de Judge al.
-
-**Elmas+:** Rakip eco round'da Judge'a geçiyor mu? Açını uzun tut, yakın verme.
+- **Eko okuması.** Rakip eco round'da pompalıya geçtiyse açını uzun tut, yakını hiç verme.
 
 ---
 
@@ -103,21 +105,21 @@ Yakın mesafede tek vuruşla öldürür. Dar koridor, köşe çıkışı, aniden
 
 ### Neden Tehlikeli
 
-Eco round'un keskin nişancısı. Tek kafa shot öldürür. Düşük maliyetle açık hatta ölümcüldür.
+Eco round'un keskin nişancısı. Tek kafa isabetiyle öldürür. Düşük maliyetle açık hatta ölümcüldür.
 
-### Nasıl Counter Edersin
+### Nasıl Karşılarsın
 
 **Marshal, Op değildir.** İlk vuruşta öldürmesi için kafana isabet etmesi gerek. Peek açını değiştir — yüksekten aşağıya hareket Marshal'ın takibini bozar.
 
-**Marshal yavaş nişan alır.** Jiggle peek at, nişan almak zorunda kalsın. O an flash at, wide peek at.
+**Marshal yavaş nişan alır.** Jiggle peek at, nişan almak zorunda kalsın. O an flash at, geniş açıyla peek at.
 
-**Marshal gördüysen rakip eco round'dadır.** Round kontrolü sende — uzak açı tut, rifle'ınla baskı kur.
+**Marshal gördüysen rakip eco round'dadır.** Round kontrolü sende — uzak açı tut, tüfeğinle baskı kur.
 
-### Counter Taktikleri
+### Karşı Taktikler
 
-- **Jiggle + flash.** Marshal nişan alırken flash at, ardından hızlı wide peek at.
+- **Jiggle + flash.** Marshal nişan alırken flash at, ardından hızlı ve geniş peek at.
 - **Peek yüksekliğini değiştir.** Marshal kafa hizasında nişanlı bekler. Yüksekten aşağıya inerek peek at, takibini bozarsın.
-- **Hızlı swing + rifle.** Marshal yavaş nişan alır; hızlı swing ile çık, rifle'la kafadan vur.
+- **Hızlı swing + tüfek.** Marshal yavaş nişan alır; hızlı swing ile çık, tüfekle kafadan vur.
 
 ---
 
@@ -125,25 +127,38 @@ Eco round'un keskin nişancısı. Tek kafa shot öldürür. Düşük maliyetle a
 
 ### Neden Tehlikeli
 
-Eco round'un en tehlikeli tabancası. Hafif zırhla bile tek kafa shot öldürür. Tabanca round'unda rifle kadar baskı kurar.
+Eco round'un en tehlikeli tabancası. Hafif zırhla bile tek kafa isabetiyle öldürür. Tabanca round'unda tüfek kadar baskı kurar.
 
-### Nasıl Counter Edersin
+### Nasıl Karşılarsın
 
-**Sheriff kafaya isabet ister.** Hareket et — crouch at, yön değiştir. Sabit durursan isabeti kolaylaştırırsın.
+**Sheriff kafaya isabet ister.** Hareket et — eğil, yön değiştir. Sabit durursan isabeti kolaylaştırırsın.
 
 **Sheriff oyuncusu yerinde bekler.** Bu bir pozisyon silahı, hızlı peek silahı değil. O köşeyi util ile temizle.
 
-### Counter Taktikleri
+### Karşı Taktikler
 
-- **Flash + swing.** Flash atınca nişanı bozulur, o an swing at.
-- **Hareketle peek at.** Strafe at, öyle peek at — hareket eden hedefe Sheriff'in isabeti düşer.
+- **Flash + peek.** Flash atınca nişanı bozulur, o an geniş açıyla peek at.
+- **Hareketle peek at.** Yana kayarak peek at — hareket eden hedefe Sheriff'in isabeti düşer.
 - **İkinci dalga.** Sheriff oyuncusu ateş ettikten sonra yeniden nişan almak zorunda. Takımdan biri çıkar, diğeri hemen arkasından girer.
 
-### Rank Notu
+---
 
-**Gold:** Eco round'da Sheriff kullan. Kafadan vur, rifle al.
+## BANDIT — Eko Tabancası
 
-**Elmas+:** Sheriff bir pozisyon oyunudur. Köşeyi tut, kafa hizasında bekle, rakip gelince vur.
+### Neden Tehlikeli
+
+600 kredilik hassas tabanca; pistol ve eco round'larda yaygın. Yakın mesafede hafif zırhlıyı bile kafadan tek atar, Sheriff'ten hızlı ve az sekmeli tap atar.
+
+### Nasıl Karşılarsın
+
+**Gücü yakın mesafede biter.** Mesafe açıldıkça kafa vuruşu bile öldürmez olur — uzak açıdan karşıla, yakın köşe verme.
+
+**Sheriff gibi kafa ister.** Sabit durma; hareketli peek isabeti bozar.
+
+### Karşı Taktikler
+
+- **Mesafeyi aç.** Bandit'in tek atış gücü yakında; uzak hatta sıradan bir tabancaya döner.
+- **Gövde düellosuna zorla.** Tam zırhın varsa gövde düellosunu sen kazanırsın — geniş peek'le kafa isabetini boz.
 
 ---
 
@@ -153,45 +168,46 @@ Eco round'un en tehlikeli tabancası. Hafif zırhla bile tek kafa shot öldürü
 
 Eco round'un yakın mesafe silahı. Yakında Vandal'ı ezer, orta mesafede hâlâ tehlikelidir. Düşük maliyet, yüksek ateş hızı.
 
-### Nasıl Counter Edersin
+### Nasıl Karşılarsın
 
 **Spectre uzakta zayıflar.** Mesafe arttıkça mermiler dağılır, hasar düşer. Uzak açı tut.
 
-**Spectre yakında rifle'ı yener.** O mesafede peek atma — uzağa çek, sonra rifle'ınla vur.
+**Spectre yakında tüfeği yener.** O mesafede peek atma — uzağa çek, sonra tüfeğinle vur.
 
-### Counter Taktikleri
+### Karşı Taktikler
 
-- **Uzun hat zorla.** Spectre push ediyorsa uzak açı tut; mesafe farkı rifle'ı kazandırır.
+- **Uzun hat zorla.** Spectre üstüne geliyorsa uzak açı tut; mesafe farkı tüfeği kazandırır.
 - **Köşeyi önceden nişanla.** Spectre oyuncusu dar köşelerden çıkar. Nişanı çıkmadan oraya kilitle.
 - **Flash at.** Spectre'nin yakın avantajı spray dayanağına bağlıdır. Flash nişanını bozar, fırsatı kullan.
 - **Ekonomilerini çökert.** Bu round'u tam baskıyla al — kaybederlerse bir sonraki round da eco oynamak zorunda kalırlar.
 
 ---
 
-## SPECTRE RUSH / JUDGE RUSH COUNTER
+## SPECTRE / JUDGE BASKINI KARŞILAMA
 
 ### Tehdit Nedir
 
-Eco round'da takım, Spectre veya Judge ile dar bir bölgeye birlikte hücum eder. Yakın mesafe ve sürpriz zamanlama. Bind, Split, Sunset gibi dar haritalarda özellikle tehlikelidir.
+Eco round'da takım, Spectre veya Judge ile dar bir bölgeye hep birlikte yüklenir. Yakın mesafe ve sürpriz zamanlama. Bind, Split, Sunset gibi dar haritalarda özellikle tehlikelidir.
 
-Rakip spawn'dan hızlı çıkıyor, ses yüksek, util yok — bu görüntüyü gördüysen rush geliyor demektir. O an normal dağılma yapma, stack yap.
+Rakip spawn'dan hızlı çıkıyor, ses yüksek, util yok — bu görüntü baskın demektir. O an normal dağılıma geçme, yığıl.
 
-### Counter
+### Karşılığı
 
-- **O bölgeye yığıl.** Rush'a karşı sayı avantajı şart. İki kişi rush'ı durdurur.
-- **Molly veya smoke ile duraksat.** Rush'ın gücü hızdır. Molly'yi yoluna at, smoke görüşü kessin — hız kırılır.
-- **Dağılma, yığıl.** Normal dağılım rush'a karşı kötüdür; ilk oyuncu bedava ölür. Yığılırsan trade'i garantilersin.
-- **Uzun açı ver.** Rush yakın mesafe ister. Uzak açıdan karşıla — Spectre/Judge mesafesini kırarsan rifle kazanır.
-- **Yavaşlatan util kullan.** KJ molly, Brim molly, Viper duvarı — rush'ı en iyi durduran util, hem yavaşlatan hem hasar verendir.
+- **O bölgeye yığıl.** Baskına karşı sayı avantajı şart. İki kişi baskını durdurur.
+- **Molly veya smoke ile duraksat.** Baskının gücü hızdır. Molly'yi yoluna at, smoke görüşü kessin — hız kırılır.
+- **Dağılma, yığıl.** Normal dağılım baskına karşı kötüdür; ilk oyuncu bedava ölür. Yığılırsan trade'i garantilersin.
+- **Uzun açı ver.** Baskın yakın mesafe ister. Uzak açıdan karşıla — Spectre ve Judge mesafesini kırarsan tüfek kazanır.
+- **Yavaşlatan util at.** KJ molly, Brim molly, Viper duvarı — baskını en iyi durduran util, hem yavaşlatan hem hasar verendir.
 
 ---
 
 ## GENEL KURAL
 
-Her silahın sevdiği bir mesafe var. Counter oynamak = o mesafeyi ona vermemek.
+Her silahın sevdiği bir mesafe var. Karşı oynamak = o mesafeyi ona vermemek.
 
-- Op'un yakınına smoke, shotgun'ın uzağına rifle, rifle'ın yakınına shotgun.
+- Op'a karşı smoke atıp yakınına gir, pompalıya karşı uzakta kal, tüfeğe karşı pompalıyla yakına sok.
 - Silahı gör, mesafesini bil, açını ona göre seç.
+- Silah + pozisyon + ekonomi — üçünü birlikte oku; rakibin ne alacağını önceden hesaplarsan savunma açın ve util dağılımın baştan netleşir.
 
 **Ekonomi Okuma:**
 
@@ -199,16 +215,6 @@ Rakibin silahını bilmek savunma planını belirler.
 
 - Tabanca round'u → pompalıyı anchor'a koy.
 - Eco round → uzak hatta yığıl.
-- Eco round ama hızlı çıkış sesi → rush geliyor, stack yap.
+- Eco round ama hızlı çıkış sesi → baskın geliyor, yığıl.
 
 Round tipi + silah tahmini = savunma planı.
-
----
-
-## RANK NOTU
-
-**Gold-Plat:** Silah-mesafe eşleşmesini henüz oturtamamışsın. Uzakta pompalıdan çekiniyorsun, yakında rifle'da ısrar ediyorsun. Silahını mesafeye göre seç.
-
-**Elmas-Yükselen:** Silahları biliyorsun ama rakibin silahına göre plan değiştirmiyorsun. Rakipte Op gördün — flashsız peek bırak. Rakip eco gördün — yakın mesafede tuzak kur.
-
-**Ölümsüz-Radiant:** Silah + pozisyon + ekonomi, üçünü birlikte oku. Her round'da rakibin ne alacağını tahmin et. Bu tahmin savunma açını, saldırı girişini ve util dağılımını baştan sona değiştirir.

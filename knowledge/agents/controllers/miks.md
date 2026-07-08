@@ -28,7 +28,7 @@ Bir takım arkadaşını hedefleyip ateşliyorsun; hem sana hem ona stim/hız ve
 - **Choke kapatma:** Defansta dar geçişleri smoke ile kapat. Düşmanın push zamanlamasını boz, rotasyon için süre kazan. Düşman sıkışınca sersemletme at — nişanı titrer, takımın bedavaya açı açar.
 - **Takımı ayakta tut:** Hasarlı takım arkadaşına heal at — savaş arası onu tam cana getir. Sen takım arkadaşını iyileştirebilen birkaç ajandan birisin; o arkadaşı cana çevirip bir sonraki düelloyu eşit girdirmek senin işin. Ama heal'i kovalamak için açığa çıkma.
 - **Yetenek saklama:** Her yeteneği bilinçli harca. Retake için elinde en az bir smoke kalsın; mümkünse bir heal/sersemletme de sakla.
-- **Çağrı yap:** Miks yeni bir ajan — takım arkadaşın yetenek görselini tanımıyor olabilir. Her kullanımdan önce söyle: "Smoke A short'a düşüyor", "Sana heal atıyorum", "Stim açtım, gir". Çağrısız atılan yetenek takım arkadaşını yanlış yerde yakalar.
+- **Çağrı yap:** Miks yeni bir ajan — takım arkadaşın yetenek görselini henüz tanımaz. Her kullanımdan önce söyle: "Smoke A short'a düşüyor", "Sana heal atıyorum", "Stim açtım, gir". Çağrısız atılan yetenek takım arkadaşını yanlış yerde yakalar.
 - **Tur planı:** A atak, B atak, defans ve retake için hangi yeteneği nereye koyacağını önceden düşün. Plansız oynarsan yeteneği rastgele harcarsın.
 - **Okuma:** Rakipler sana karşı nasıl duracaklarını öğreniyor. Aynı yeri her tur tekrarlama — yerleştirmeni değiştir.
 

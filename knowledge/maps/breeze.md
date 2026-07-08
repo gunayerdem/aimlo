@@ -1,270 +1,146 @@
-# BREEZE — Detaylı Strateji ve Analiz
+---
+patch: "13.00"
+verified: 2026-07-08
+---
 
-> Breeze oyunun en büyük haritası. Op burada kral, Viper olmadan bu haritaya girme. Patch değişirse bu ikisi değişir — notlara bak.
+# BREEZE — Koçluk Rehberi
 
-## 1. Temel Prensipler
-- Breeze 2 siteli, oyundaki en uzun sightline'lara sahip açık bir harita. Her şey mesafe kontrolü etrafında dönüyor.
-- Metal kapı mekaniği (A Hall ve Mid) bu haritaya özgü. Bu mekaniği kullanmayan takım baştan dezavantajlı başlıyor.
-- Saldırıda kuru push yapma — bu haritada o intihar. Her execute smoke + flash + bilgi üçlüsüyle başlar. Op sesini duyduysan açık alanda yürüme. Utility'siz siteye girmeyi aklına bile getirme.
-- Savunmada Pyramid, Pillar, Nest gibi yüksek cover pozisyonlarını tut. Crossfire için iki farklı açı tut — tek açıdan oynayan anchor çabuk ölür.
-- Saldırıda yavaş, bilgi odaklı default oyna. Harita büyük, rotasyonlar uzun. Bilgi toplamadan karar verirsen haritanın yanlış tarafında kalırsın. Savunmada retake setup'ları güçlü — siteler açık, utility'siz temizlemek zor.
+> Breeze, Patch 12.00 (Ocak 2026) ile oyunun en büyük harita rework'ünü aldı: açılar sadeleşti, açık alanlar daraldı, savunma rotasyonları kısaldı. Bu rehber SADECE rework-sonrası haritayı anlatır. Breeze şu an rekabetçi havuzda değil; Swiftplay/Unrated'de karşına çıkar.
+
+## 1. Harita Karakteri
+
+Breeze hâlâ uzun mesafe düellosunun haritası — ama eski "her yerden beş açı birden vurulursun" Breeze'i öldü. Rework açık alanları duvarlarla ve kutularla böldü; özellikle Mid artık geniş bir meydan değil, köşe köşe temizleyerek ilerlediğin koridorlar.
+
+Oyununu değiştiren dört rework gerçeği:
+- **Mid koridorlaştı.** Aynı anda bir-iki açı temizlersin. Smoke ve flash'ın değeri arttı; tek Op'un tüm ortayı kilitlediği dönem bitti.
+- **Halls üzerinden A flank'i kapandı.** O koridor artık yok. Eski Chute'un yerinde attacker spawn'ı Mid'e bağlayan, yaklaşınca kendiliğinden açılan çift kapı var — iki yönden de geçilir ve ses verir.
+- **Nest'e düz zıplama kaldırıldı.** Yukarı çıkmak mobilite ister (Jett zıplaması, Raze sıçraması, Omen teleportu) ya da savunma tarafından dolaşırsın. Nest sadeleşti — standart smoke onu artık tam kapatıyor, Viper şart değil.
+- **Site'lara siper geldi.** A'da arka duvar uzatıldı, yeni kutular ve girinti eklendi — post-plant için korunaklı pozisyon. B'de Cubby büyüdü, arka duvarlar yükseldi — temizlenecek köşe azaldı.
+
+Öz: mesafe disiplini hâlâ her şey — açık hatta utility'siz yürüyen ölür — ama harita artık kontrol edilebilir parçalara bölünmüş durumda. Önce görüş hattını kes, sonra gir: bu sıra her iki sitede de işler.
 
 ## 2. Ölüm Bölgeleri
-- **A Hall (Cave) Girişi**: A Hall dar, uzun, tek yönlü. Flash ve smoke atmadan girersen karşı taraftaki Op oyuncusuna bedava kafa veriyorsun. Hall'a girerken en az bir flash ve bir smoke kullan. Kullanmıyorsan zaten ölmeyi hak ediyorsun.
-- **A Long / Pyramid Önü**: Oyundaki en uzun açılardan biri burada. Pyramid'den veya CT'den Op tutan biri seni görür görmez vurur — cover yok, kaçacak yer yok. Buraya kuru peek atmak yok.
-- **Mid Top (Açık Alan)**: Smoke veya flash atmadan Mid Top'a girersen Nest'ten veya Arch'tan tutan rakip seni yer. Bilgin yokken ilerleme.
-- **B Elbow**: Elbow'u temizlemeden push atarsan off-angle savunucu seni yakalar. Köşeyi temizle, sonra geç.
-- **B Tunnel Çıkışı**: B Tunnel Mid'i B site'a bağlar. Tunnel'dan dar bir ağızla çıkarsın — site'ı tutan savunucu o ağzı zaten açıyı tutuyor. Önce util at, sonra çık; kuru çıkarsan bedavaya vurulursun.
-- **Mid Cannon / Arch Bağlantısı**: Mid'i almadan Arch'a geçmeye çalışırsan iki taraftan aynı anda vurulursun. Önce Mid'i al, sonra Arch'a bak.
 
-## 3. Pattern -> Meaning Eşleşmesi
+**A Main**: A'ya giren ana hat. Yeni duvar blokları alanı daralttı ama açı hâlâ uzun — ağzı Op'la tutuluyorsa utility'siz çıkan ilk kafayı verir. A Main'de ölüyorsan giriş sıran bozuk: önce görüş hattına smoke, flash patlarken çık.
 
-**Pattern 1: A Hall Kuru Push Ölümleri**
-IF: A Hall'a flash atmadan, smoke atmadan giriyorsun ve her seferinde ölüyorsun.
-MEANING: Savunucu Hall çıkışını zaten açıyı tutuyor. Hall dar ve uzun — flashsız giren herkesi bedavaya vuruyor. Kendi kendini öldürüyorsun.
-COUNTER:
-- Flash atmadan Hall'a girme. Flash patlayınca swing at.
-- Op sesini duyduysan smoke at, smoke içinden kapat mesafeyi.
-- Utility atmadan Hall'a adım atma — utility atana kadar orası ölüm tuzağı.
-WHY: Dar koridorda hareket yönün bellidir, savunucu seni bekler. Flash savunucunun reaksiyon avantajını yok eder. Smoke onu ya yakın dövüşe ya da pozisyonu bırakmaya zorlar.
+**Mid / Doors (Chute kapıları)**: Mid koridorlarında ölüyorsan köşe temizlemeden düz yürüyorsun. Kapıların açılışı ses verir — savunucu sesi duyup açıyı önceden nişanlar. Kapıdan geçmeden önce karşı açıya flash at ya da sesi fake olarak kullan, gerçek geçişi başka anda yap.
 
----
+**Nest**: Mid'in yüksek bilgi noktası; saldıran artık kolay çıkamaz, savunma kendi tarafından ulaşır. Nest'ten vurulup ölüyorsan Mid'e Nest'i kapatan smoke atmadan giriyorsun — standart smoke orayı artık tam kapatır, kullan.
 
-**Pattern 2: A Long'da Op'a Karşı Açıkta Kalma**
-IF: A Long'da cover olmadan Op'a peek atıyorsun ve aynı şekilde ölüyorsun.
-MEANING: A Long oyunun en uzun sightline'larından biri. Açıkta peek atmak, Op tutana hedef tahtası olmak demek.
-COUNTER:
-- A Long'u direkt contest etme. Smoke ile sightline'i kes, Hall veya Bridge'den split yap.
-- Jett veya Chamber oynuyorsan dash/TP ile peek at, hemen repozisyon al.
-- Op'un tutamayacağı dar açılara yönlen.
-WHY: Op tek vuruşta öldürüyor, sen iki headshot atman gerekiyor. Açık alanda bu denklemi kazanamazsın. Sightline'ı smoke ile kes ya da farklı açıdan gel.
+**Elbow**: Mid'den B tarafına kıvrılan dirsek — artık kapalı yapı, üstünden atlanmıyor, utility pencereleri var. Elbow'da ölüyorsan pencere açılarını hesaba katmadan dönüyorsun: önce util at, sonra geç.
 
----
+**B Main**: B'nin ana girişi; site içinden ve B Window tarafından çapraz tutulur. B Main'de ölüyorsan iki açıyı aynı anda yiyorsun — biri Window'u smoke'lasın, ilk giren flash'la girsin, ikinci trade mesafesinde dursun.
 
-**Pattern 3: Mid Kontrolünü Ignore Etme**
-IF: Takım Mid'e hiç bakmıyor — bilgi yok, presence yok, rakip Mid'den serbestçe geçiyor.
-MEANING: Mid Breeze'in tam ortası. Mid'i bırakırsan A Bridge ve B Arch split opsiyonlarını kaybedersin. Rakip her iki site'a da kolayca döner.
-COUNTER:
-- Her round en az bir oyuncu Mid'e bilgi almaya gitsin.
-- Sova recon bolt veya Fade haunt Mid Nest'e gönder, ya da Top Mid'den hızlı peek al.
-- Mid kontrolü alındıktan sonra A Bridge veya B Arch split kararını ver.
-WHY: Mid'i kim tutarsa tempo onda. Mid'i kaybedince tek boyutlu saldırılara mahkûm olursun. Rakip Mid'i alırsa hem A Bridge hem B Arch tehlikeye girer.
+**B Window**: Pencere genişletildi ama attacker spawn'dan direkt çıkış kaldırıldı. Window hattında ölüyorsan pencereye bakan karşı açıyı unutuyorsun — Window'u smoke'la kapatmadan o hattı geçme.
 
----
+**A Site / B Site içi**: Site'ı aldıktan sonra açık ortada ölüyorsan rework'ün sana verdiği siperi kullanmıyorsun: A'da uzatılmış arka duvarın kutuları, B'de büyüyen Cubby. Plant'ten sonra siper arkasına geç — detay Post-Plant bölümünde.
 
-**Pattern 4: Metal Kapıları Kullanmama**
-IF: Metal kapılara hiç dokunmuyorsun — ne açıyorsun ne kapatıyorsun.
-MEANING: Breeze'e özgü bir mekanik var ve sen onu tamamen çöpe atıyorsun. Kapılar sightline açıp kapatır, bilgi verir, fake yaratır.
-COUNTER:
-- A Hall metal kapısını push sırasında kapat — sightline kesilir, güvenli geçersin.
-- Mid kapısını açıp kapatarak timing oyna — rakibi karıştırır.
-- Kapıyı aç, push yapma — rakip rotate etsin, sen başka yere git.
-WHY: Kapı sesi bilgi verir ama bu bilgiyi sen de kullanabilirsin. Fake kapı sesi rakibi döndürür, asıl hedefiniz boşalır. Kapıları kullanan oyuncu haritayı anlıyor demektir.
+## 3. Saldırı Stratejileri — Pattern Mapping
 
----
+**Pattern 1: Uzun hatta utility'siz peek**
+IF: A Main ya da B tarafının uzun hattında util atmadan peek atıp ölüyorsun.
+MEANING: Harita daraldı ama düellolar hâlâ uzun mesafede. Op ya da Vandal tutan savunucu açıyı önceden nişanlamış — sen çıkmadan vurur.
+COUNTER: Görüş hattını smoke'la kes ya da flash patlarken çık. Op sesi duyduysan aynı hattı zorlama — kapılardan Mid'e geç, ikinci koldan bas.
+WHY: Uzun hatta ilk atış avantajı her şeydir; utility o avantajı sıfırlar. Kapılar sana Op'un hattına hiç girmeyen ikinci yolu tam bunun için verir.
 
-**Pattern 5: B Tunnel'ı (Mid bağlantısı) Kontrol Etmeme**
-IF: Mid'den B'ye açılan Tunnel'ı izlemiyorsun ve rakip oradan bedavaya site'a/arkana giriyor.
-MEANING: B site'in Mid'den gelen ikinci girişini açık bırakıyorsun. Tunnel kontrol etmesi kolay bir nokta — ignore edince rakibe bedava flank yolu veriyorsun.
-COUNTER:
-- Sentinel oynuyorsan Tunnel ağzına tuzak teli veya kamera koy.
-- Sentinel yoksa Tunnel'dan gelen ayak sesini dinle ya da arada peek at.
-- Tunnel'dan ses gelirse hemen callout ver, pozisyon al.
-WHY: B Main'i tutup Tunnel'ı açık bırakmak ön kapıyı kilitleyip arka kapıyı açık bırakmak gibi. Rakip her zaman en zayıf noktayı kullanır.
+**Pattern 2: Mid'i boş verme**
+IF: Takım Mid koridorlarına hiç girmiyor; rakip Mid'den serbest rotate ediyor ya da arkanıza sarkıyor.
+MEANING: Mid artık korunaklı koridorlar — kontrolü eskisinden ucuz. Kimse almazsa rakibe bedava geçiş ve bedava rotate veriyorsunuz.
+COUNTER: Her round en az bir oyuncu kapı hattını dinlesin ya da recon'la Mid'i tarasın. Mid alınınca A'ya ya da Elbow üzerinden B'ye ikinci kol aç.
+WHY: Kapılar iki yönlü — Mid kimdeyse spawn-Mid geçişi de onda. Mid'siz saldırı tek kapılı odaya dönüşür; savunma nereden geleceğini bilir.
 
----
+**Pattern 3: Kapıdan plansız geçiş**
+IF: Chute kapılarından geçerken ölüyorsun — kapı açılır açılmaz karşıda hazır bekliyorlar.
+MEANING: Kapı yaklaşınca kendiliğinden açılır ve ses verir; savunucu sesi duyunca açıyı önceden nişanlar.
+COUNTER: Kapıyı bilgi silahına çevir: yaklaş, sesi ver, geçme — rakip Mid'e dönerken A Main'e bas. Gerçekten geçeceksen flash önde gitsin, sen arkasından.
+WHY: Otomatik kapının sesi kaçınılmaz; o sesin rakibi nereye baktıracağını sen seçersin. Fake ses bedava rotasyon yaratır.
 
-**Pattern 6: Post-Plant'te Açıkta Durma**
-IF: Spike dikildi, sen hâlâ açıkta duruyorsun ve vurularak ölüyorsun.
-MEANING: Breeze'in açık site'larında spike'ın yanında beklemek ölümdür. Retake yapan takım uzun sightline'lardan seni rahatça görür.
-COUNTER:
-- Spike dikilir dikilmez cover'a çekil.
-- A site'ta A Hall veya A Bridge'den crossfire kur.
-- B site'ta B Main veya B Arch'tan izle.
-- Amacın spike'ı görmek değil — defuse sesini duymak ve utility ile delay yapmak.
-WHY: Cover arkasından crossfire kurduğunda retake yapan takım iki farklı açıyla uğraşmak zorunda kalır. Koordinasyonsuz retake'ler bu yüzden çöker.
+**Pattern 4: Plant'i açıkta dikme**
+IF: A site'ı alıyorsun ama plant sırasında ya da hemen sonrasında vuruluyorsun.
+MEANING: Site alındı diye iş bitmedi — retake açıları hâlâ uzun ve savunma rotasyonları rework'le kısaldı: retake eskisinden erken gelir.
+COUNTER: Spike'ı arka duvarın siperli bölgesine dik — kutular ve girinti tam bunun için eklendi. Plant eden korunurken bir kişi A Main'i, bir kişi Mid bağlantısını tutsun.
+WHY: Yeni arka-site siperi plant ve post-plant'i eski Breeze'den kat kat güvenli yapar; kullanmayan, eski haritadaki gibi açıkta ölür.
 
----
+**Pattern 5: B'ye tek koldan yığılma**
+IF: Beş kişi B Main'e diziliyorsunuz; ilk iki oyuncu aynı açıya üst üste ölüyor.
+MEANING: B Main dar — savunucu tek açıdan sırayla vurur. İkinci kol yoksa savunma tüm util'ini tek girişe döker.
+COUNTER: B'yi iki koldan aç: B Main + Mid'den Elbow/Window. Window'u smoke'suz bırakma. Girişi sırala: ilk oyuncu flash'la girer, ikincisi ilk düello bitmeden girmez.
+WHY: İki kol savunucunun crossfire'ını böler; sıralı giriş tek spray'e iki ölüm vermeni engeller.
 
-**Pattern 7: Aynı Pozisyonda Tekrar Tekrar Oynama**
-IF: A Pyramid'de veya B Pillar'da her round aynı noktadasın ve 3-4 round sonra sürekli ölüyorsun.
-MEANING: Rakip seni okudu. Artık o açıyı tutuyor. Güçlü pozisyon bile tekrarlanınca işe yaramaz hale gelir.
-COUNTER:
-- Her 2-3 round'da pozisyon değiştir.
-- Pyramid'de kill aldıysan bir sonraki round aşağı in veya Switch'e geç.
-- Aynı yerde üst üste 3 round oynama — bu kural.
-WHY: Off-angle'lar sürpriz faktöründen güç alır. Rakip seni biliyorsa açıyı önceden tutar ve avantaj sıfırlanır. Pozisyon rotasyonu rakibi her girişte birden fazla açı kontrol etmeye zorlar — giriş yavaşlar, tereddüt yaratır.
+## 4. Savunma Stratejileri — Pattern Mapping
 
----
+**Pattern 1: Sipersiz açı tutma**
+IF: Site önünde açık bir açı tutuyorsun ve ilk temasta ölüyorsun.
+MEANING: Rework derin açıların çoğunu duvarla kesti; kalan açılar daha yakın mesafeli — açıkta tutulan açı tek kurşunluk.
+COUNTER: Açıyı siperli tut: A'da arka-site kutuları, B'de Cubby. İlk temastan sonra pozisyonunu değiştir; aynı açıyı iki round üst üste tutma, üçüncüsünde rakip önceden nişanlamış olur.
+WHY: Daralan alan savunucuya da yakın düello dayatır — siper ve geri çekilme planı olmayan açı, rakibe bedava ilk atış verir.
 
-**Pattern 8: Viper Wall Tekrarı**
-IF: Viper her round aynı noktaya wall atıyor ve rakip wall açılarına adapte olmuş.
-MEANING: Utility'n okundu. Viper wall Breeze'de en güçlü araçlardan biri ama her round aynı wall rakibe tam olarak ne olacağını söyler.
-COUNTER:
-- Wall açısını ve zamanlamasını round'dan round'a değiştir.
-- Bir round A site wall, sonraki round Mid split wall.
-- Fake wall at — wall'u bir tarafa at, diğer site'a execute yap.
-WHY: Rakip wall'un nerede açılacağını bilirse ne zaman push edeceğini, nerede bekleyeceğini hesaplar. Varyasyon rakibi sürekli tahmin yapmaya zorlar — bu da giriş zamanlamasını bozar.
+**Pattern 2: Mid koridorlarını sahipsiz bırakma**
+IF: Savunmada kimse Mid'i izlemiyor; saldırı kapılardan geçip istediği site'a sarkıyor.
+MEANING: Kapılar iki yönlü — Mid'i bırakan, spawn bağlantısını da bırakır.
+COUNTER: Bir oyuncu Elbow'un utility pencerelerinden ya da Nest'ten Mid'i izlesin. Sentinel'sen kapı hattına tel ya da bot koy — kapı sesi + util tetiklenmesi bedava haber verir.
+WHY: Rotasyonlar kısaldı; erken haber alırsan siteyi sayıca eşit karşılarsın. Haber yoksa saldırı siteye sayı üstünlüğüyle girer.
 
-## 4. Taraf Bazlı Hatalar
+**Pattern 3: Nest'te oturma**
+IF: Nest'e çıkıyorsun ama orada uzun kalıp smoke içinde ölüyorsun ya da hiç haber vermeden iniyorsun.
+MEANING: Nest artık kalıcı pozisyon değil — standart smoke onu tamamen kapatır. Değeri erken bilgide.
+COUNTER: Round başında bak, ilk teması gör, haber ver, in. Smoke gelince orada durma — kör açıda beklemek trade'siz ölümdür.
+WHY: Erken bilgi + hızlı iniş = hem takımın haberi var hem sen hayattasın. Nest'te oturan, saldırının ilk smoke'una kurban gider.
 
-### Saldırı
-- **Op karşısında smoke/flash atmadan uzun sightline'a çıkma.** Breeze'de op baskını her şeyin önünde. Açıkta kuru peek atarsan takıma bedava ölüm hediye edersin.
-- **Mid'i sıfır kontrol etme.** Mid'i pas geçersen A Bridge split ve B Arch split seçeneklerin kapanır, sadece tek bir yönden saldırırsın.
-- **A Hall'a 5 kişi yığma.** Hall dar ve tek yönlü. İçeride utility patlarsa veya op kill alınırsa geri çıkmak imkânsız, art arda ölürsünüz.
-- **Metal kapıları kullanmama.** Harita sana bu aracı vermiş, kullanmasan dezavantajlısın.
-- **Spectre veya kısa menzilli silah alma.** Breeze'in sightline'ları uzun. Vandal, Op veya Marshal al; Spectre bu haritada seni öldürür.
-- **Spike diktikten sonra açıkta durma.** Site ortasında kalırsan retake'e gelen takım seni rahatça keser. Pozisyon al.
+**Pattern 4: Tek koldan retake**
+IF: Site düştü; retake'e tek koridordan sırayla giriyorsunuz ve post-plant crossfire'ına tek tek ölüyorsunuz.
+MEANING: Saldıranın artık gerçek siperi var (A arka kutular, B Cubby) — tek koldan giren, hazır bekleyen iki açıya yürür.
+COUNTER: Rotasyonlar kısa — toplan, iki yönden aynı anda gir. Girmeden önce siper arkasını molly'yle söktür, spike bölgesine smoke at.
+WHY: İki yön post-plant crossfire'ını böler; molly siperin değerini siler. Tek tek giren retake sayı hediye eder.
 
-### Savunma
-- **Mid Nest'i bırakma.** Nest bu haritanın bilgi noktası. Kontrolü kaybedersen hem A Bridge hem B Arch tehlikeye girer.
-- **B Arch'tan gelen flankı görmezden gelme.** Arch, Mid'den B site'a açılan bir yol. Kontrol etmezsen rakip serbest flank alır.
-- **Her round aynı pozisyonda oynama.** Pyramid, Pillar veya Nest'te sürekli aynı açıyı tutarsan rakip seni okur, geçer.
-- **Retake'e koordinasyonsuz girme.** Site açık ve utility olmadan içeri girersen çoklu ölüm kesin. Önce utility konuş, sonra gir.
-- **Op alacak paran varsa alma.** Breeze op-dominant bir harita. Paran varken op almamak veya op'u gereksiz kaybetmek ekonomini mahveder.
-- **A Hall kapısını ignore etme.** Kapı kontrolü agresif peek mi yoksa güvenli anchor mi oynayacağını belirler. Kontrol etmezsen seçim yapamazsın.
+## 5. Kompozisyon Notları
 
-## 5. Kompozisyon / Harita Etkileşim Notları
-- **Viper zorunlu pick.** Breeze'de Viper wall en güçlü utility. A site'i ikiye böler, Mid'i keser, B'yi izole eder. Viper olmadan baştan dezavantajdasın. Post-plant snake bite lineup'ları da defuse'u durdurmak için tek güvenilir yol.
-- **Chamber S-tier.** Op kill aldıktan sonra TP ile pozisyon değiştir — düşman trade yapamaz. Uzun çizgilerde bu ikili Breeze'e özel çalışır. Tuzağı flank yollarını kapatır.
-- **Sova S-tier.** Recon bolt A site ya da B site'ı tamamen tarar. Shock dart post-plant lineup'ları da geniş, açık siteler yüzünden çok işe yarar.
-- **KAY/O A-tier.** A Hall ve B Main girişinde flash'ları doğrudan verir. Bıçağını site'a at, girişte düşmanın util'ini kapat — temiz entry alırsın. Uzun çizgide flash pop yapar, savunucunun avantajı sıfırlanır.
-- **Cypher A-tier.** Tripwire A Hall girişine ve B Tunnel'a koy. Kamerayla uzaktan bilgi al. Breeze'de giriş noktası az, Cypher utility'si burada tam verim verir.
-- **Jett A-tier.** Op + dash repozisyon Breeze'de işe yarar ama Chamber'ın TP'si kadar esnek değil. Dash ile açık site'lara girmek hâlâ güçlü.
-- **Harbor A-tier.** Duvarınla A Hall'da dar koridoru kapat, savunucu göremez. İkinci duvarla Mid split yarat. Smoke küresini A Bridge'de plant korumasında kullan. Viper'ın yanında ikinci controller olarak tam uyumlu.
-- **Skye B-tier.** Flash'ları uzun mesafede iş görür ama dog açık alanda çabuk ölür. Harita büyük olduğu için dog bilgisi de sınırlı kalır.
-- **Duelist seçimi:** Breeze'de dash ya da TP olan duelist'i seç — Jett veya Chamber. Op kill sonrası repozisyon yapamıyorsan açık çizgilerde mahvolursun. Neon veya Raze burada değer kaybeder.
-- **Çift controller viable.** Viper + Harbor ya da Viper + Omen çalışır. Tek controller tüm uzun çizgileri kapatamaz, ikinci birine ihtiyacın var.
+Rework'ün ilan edilmiş hedefi controller çeşitliliğini açmaktı — "Viper yoksa Breeze oynanmaz" dönemi kapandı:
+- **Controller**: Omen, Brimstone, Astra artık gerçek seçenek — Nest ve koridor ağızları standart smoke'la kapanıyor. Viper hâlâ güçlü (duvarı uzun hatları hâlâ böler) ama zorunlu değil. Çift controller da işler.
+- **Op / keskin nişancı**: Uzun düello hâlâ haritanın kimliği — A Main ve B'nin uzun hatlarında Op değerli. Ama koridorlaşan Mid'de tek Op ortayı kilitleyemez; okunan Op'çunun arkası kapılardan alınır.
+- **Initiator / recon**: Sova ve Fade güçlü — Mid-A bağlantısındaki küçük pencere recon utility'si için bilerek bırakıldı; site taraması bu haritada hâlâ altın değerinde.
+- **Sentinel**: Kapı ve koridor yapısı tel, bot ve tuzağa alan açtı — Cypher ve Killjoy rework'ten kazançlı çıktı. Teli kapı hattına, botu Elbow'a.
+- **Duelist / mobilite**: Nest ve yüksek açılara sadece mobilite çıkar — Jett zıplaması, Raze sıçraması, Omen teleportu burada ekstra iş görür.
 
 ## 6. Koçluk Satırları
-- "Breeze mesafe haritası. Her push öncesi util kullan — açık alanda ne arıyorsun?"
-- "A Hall'a flash'siz girme. Hall çıkışında Op varsa doğruca ölüme koşuyorsun. Util yoksa adım atma."
-- "Mid kontrol seçimlik değil. Mid'i bırakırsan haritanın yarısını karşıya hediye ediyorsun."
-- "Metal kapılar sana bedava bil ve kandır aracı veriyor. Aç, kapat, ses çıkar, fake yarat — kullanmıyorsan haritanın mekaniğini çöpe atıyorsun."
-- "Op burada kral. Op alamıyorsan Marshal al. İkisi de yoksa açık alandan çekil, dar açıları zorla."
-- "Spike kurduktan sonra spike'ın yanında durma. Cover bul, crossfire kur, defuse sesini bekle. Açıkta duran oyuncu ölüme davetiye çıkarıyor."
-- "Viper wall'unu her round aynı yere atıyorsan, rakip birkaç round sonra nereye geldiğini, ne zaman düştüğünü ve arkasında ne olduğunu ezbere biliyor. Yeri değiştir."
-- "Retake'e tek girme. Önce util at, crossfire kur, sonra birlikte gir. Breeze'in açık siteleri tek tek giren oyuncuları tek tek yiyor."
+- "Breeze hâlâ mesafe haritası. Açık hatta utility'siz yürüyen, Op'a bedava kafa verir."
+- "Kapılar ses verir — o sesi yönet. Fake ses at, rakibi Mid'e döndür, boşalan tarafa gir."
+- "Mid artık koridor: beş açı birden değil, tek köşe temizliyorsun. Köşe köşe ilerle."
+- "Halls'tan A flank'i artık yok. Eski Breeze rotalarını unut — kapıları plana kat."
+- "Plant'i siperli bölgeye dik. Arka duvarın kutuları oraya süs için konmadı."
+- "Nest ev değil, bakış noktası: bak, haber ver, in."
 
-## 7. Rank Modülasyonu
+## 7. Callout'lar & Pozisyon Rehberi
+- **A Main**: A'ya giden ana uzun hat. Duvar blokları alanı daralttı; açı hâlâ uzun — utility'siz çıkma.
+- **A Site**: Arka duvar uzatıldı; siper kutuları ve girinti plant/post-plant için korunak verir.
+- **A Pyramid**: Site içindeki piramit yapı — site içi siper; her round aynı yüzünde durma.
+- **Halls**: Eski A flank koridoru kapatıldı — bu rota artık oynanmıyor.
+- **Doors / Chute (Çift Kapı)**: Attacker spawn'ı Mid'e bağlayan, yaklaşınca kendiliğinden açılan çift kapı. İki yönden geçilir, ses verir; eski tek yönlü düşüş yok.
+- **Mid**: Koridorlara bölünmüş orta bölge — pillar'ın bir yüzü kapalı, ip kaldırıldı. Koridor ağızları tutulur: köşe temizlemeden yürüme.
+- **Nest**: Mid'in yüksek noktası. Düz zıplama yok — mobilite ya da savunma tarafından ulaşılır; standart smoke'la kapanır.
+- **Elbow**: Mid'den B tarafına dönüş. Kapalı yapı, utility pencereleri var, duvarına tırmanılmıyor.
+- **B Main**: B'nin ana girişi; site içinden ve Window'dan çapraz tutulur.
+- **B Window**: Genişletilmiş pencere; attacker spawn'dan direkt çıkış kaldırıldı.
+- **B Site / Cubby**: Arka duvarlar yüksek, Cubby büyük — retake ve post-plant siperi.
 
-### Iron-Silver
-Breeze'in ne kadar büyük olduğunu anlamıyorsun. Spectre alıp A Long'a çıkıyorsun — bu intihar. Metal kapıların varlığından bile haberin yok, Mid'i ve B Tunnel'ı hiç kullanmıyorsun.
+## 8. Post-Plant Stratejileri
+- **A Post-Plant**: Spike'ı arka-site siperinin dibine dik. Bir oyuncu A Main'i, bir oyuncu Mid bağlantısını tutar — crossfire hazır. Molly lineup'ın varsa defuse sesinde spike üstüne bırak.
+- **B Post-Plant**: Cubby senin siperin. B Main ve Window/Elbow hattından çapraz izle. Retake gelen önce Cubby'ye util atmak zorunda — o util gelince siper değiştir, düelloyu yeni açıdan al.
+- **Genel**: Spike'ın dibinde bekleme — site hâlâ uzun açılardan izlenir. Siper arkasından defuse sesini dinle, utility ile kes. Retake rotasyonları rework'le kısaldı: post-plant pozisyonunu plant biter bitmez al, gezinme.
 
-Yapman gereken tek şey şu:
-- Uzun açı görüyorsan Vandal, Marshal ya da Op al.
-- Her giriş noktasını tek tek öğren — A Hall, A Long, B Main, B Tunnel (Mid bağlantısı).
-- Metal kapıların ne işe yaradığını öğren, bak ve kullan.
+## 9. Ekonomi Stratejileri
+- **Full buy**: Vandal ya da Op öncelik — uzun düello kimliği sürüyor. Dar Mid koridorlarında Phantom da işler.
+- **Op ekonomisi**: Op hâlâ değer üretir ama "tek Op haritayı kilitler" dönemi bitti. Op'la koridor savaşına girme; Op'çu düşerse save düşün.
+- **Yarım alım**: Marshal ya da Outlaw uzun hatlarda işler — Outlaw hafif zırhlıyı gövdeden tek atışta düşürür.
+- **Eco**: Sheriff ya da Bandit ile dar koridorlara (Mid, Elbow) sok kendini — Bandit yakın mesafede hafif zırhlıyı kafadan tek atar. Açık hatta eco silahıyla çıkma.
+- **Kısa menzil uyarısı**: Spectre gibi kısa menzilli silahla uzun hatlara çıkma; alacaksan planını koridor ve site içi düellolara kur.
 
-Silahı doğru seçersen ölüm sayın yarıya düşer. O kadar.
+## 10. Anti-Strat
 
-### Gold-Platinum
-Haritayı biliyorsun ama utility'yi rastgele atıyorsun. Flash entry'den önce patlıyor, smoke yanlış yeri kapatıyor. Metal kapıları görüyorsun ama sadece geçiş için kullanıyorsun.
+**Rakip uzun hatları Op'la kilitliyorsa**: Görüş hattını smoke'la kes ve o hattı o round hiç zorlama — kapılardan Mid'e geç, ikinci koldan dolan. Op sesi geldiyse aynı açıya utility'siz ikinci kez çıkmak yok.
 
-Şunları düzelt:
-- Flash, entry oyuncusu köşeyi dönerken patlasın — önce değil, tam o an.
-- Smoke A Long ya da B Main sightline'ını tam kapatsın — yarım bırakma.
-- Mid'den bilgi almadan execute başlatma.
+**Rakip B Main'e yığılıyorsa**: B Main ağzına molly + yavaşlatma hazırla, Elbow pencerelerinden çapraz tut. İlk push'u util'le boğ, rotate bekle — rotasyonlar artık senin lehine kısa.
 
-A Hall'a 5 kişiyle yığılmayı bırak. Stagger gir, ön oyuncu çıktıktan sonra arkası gelsin. Bunu uyguladığın anda round kazanma oranın artar.
+**Rakip kapı sesini fake kullanıyorsa**: Sese komple rotate etme — bir kişi doğrular, gerisi pozisyon korur. Kapı sesinin ardından ayak sesi ya da atış gelmiyorsa fake'tir.
 
-### Diamond-Ascendant
-Utility kullanıyorsun, default oynuyorsun — ama her round aynı şeyi yapıyorsun. Aynı Viper wall, aynı execute, aynı savunma pozisyonu. Rakip bunu okudu, seni bekliyorlar.
-
-Adaptasyon yap:
-- Rakip A Long'u her round Op ile tutuyorsa B'ye kayı yap.
-- Aynı Pyramid pozisyonundan üst üste öldüysen oradan çık — başka yer bul.
-- Metal kapı fake'lerini öğren: kapıyı aç, ses çıkar, gitme. Rakibi oraya çek, B'den gir.
-
-Anti-strat bu seviyede fark yaratır. Rakibin ne yaptığını oku, karşı hamleyi hazırla.
-
-### Immortal-Radiant
-Haritayı biliyorsun, utility'yi biliyorsun, tempoyu biliyorsun. Artık mesele rakibin patternini okuyup bir sonraki hamleyi önceden hazırlamak.
-
-Odaklanman gereken şeyler:
-- Rakibin default'u 2-3 roundda belli olur — o bilgiyle A Bridge split savunmasını organize et.
-- Viper wall'ını aynı yere atma. Varyasyon yap, rakip alışmasın.
-- Op ekonomisini yönet — yarım ekonomide bile Mid/B Tunnel'dan bilgi toplayacak birini koy.
-- Fake kapı stratejisini ince ayarla: hangi roundda, hangi kapı, kim açıyor — hepsi plan dahilinde olsun.
-
-Breeze bu seviyede satranç. Her hamlenin bir sonraki hamleyi kurması lazım.
-
-## 8. Ekonomi Stratejileri
-- **Op önce gelir.** Breeze'de Op alacak paran varsa başka bir şey alma. Takım ekonomisini Op etrafında kur — Op düşerse save düşün.
-- **Vandal > Phantom.** Uzun açılarda Vandal headshot tek öldürür, Phantom'un hasarı düşer. Breeze'de Vandal default seçimin olsun.
-- **Marshal alternatifi.** Op'a paran yetmiyorsa Marshal al. Uzun açıda tek headshot öldürür, Op'un yarı fiyatı.
-- **Force round'da B'ye git.** B Main dar, Op sightline'ları A Long kadar uzun değil. Force round'da en iyi şansın B üzerinden Elbow rush.
-- **Eco'da A Hall'a gir.** Hall dar ve mesafe kısa — Sheriff headshot burada çalışır. Açık alana çıkma, dar açılara sok kendini.
-- **Spectre alma.** Sightline'lar çok uzun, Spectre her düelloda seni kaybettirir. Paran yetmiyorsa Marshal veya Sheriff al.
-- **Op'u taşı, peek atma.** Breeze'de Op diğer haritalara göre çok daha fazla değer üretir. Op tutan oyuncu kill al, pozisyon değiştir, ölme.
-
-## 9. Temel Pozisyonlar ve Callout'lar
-- **A Tarafı:** A Lobby / A Hall (Cave) / A Bridge / A Pyramid / A Site / A Back / A Switch / A Metal Door
-- **B Tarafı:** B Main / B Elbow / B Tunnel / B Pillar / B Column / B Site / B Back / B Arch
-- **Mid:** Mid Top / Mid Nest / Mid Arch / Mid Cannon / Mid Chute (Vent) / Mid Pillar / Mid Door (Metal Door)
-- **Genel:** CT Spawn / T Spawn
-
-### Pozisyon Detayları
-- **A Pyramid:** A site'in ortasındaki yükseklik. Hem cover hem yükseklik sana aynı anda geliyor. Anchor olarak güçlü — ama her round aynı açıya girme, okutursun kendini.
-- **A Hall (Cave):** A site'a giden ana koridor. Dar, uzun, tek yönlü. Hall'u almadan A execute atmaya kalkma — doğruca ölürsün.
-- **A Bridge:** Mid'den A site'a bağlantı noktası. Split atmak istiyorsan burası şart. Savunmadaysan Mid'den gelen baskıyı burada karşılarsın.
-- **Mid Nest:** Haritanın bilgi merkezi. Buradan hem A Bridge hem B Arch görürsün. Nest kimde — harita kimde.
-- **B Pillar/Column:** B site'in ana cover noktası. Anchor oynuyorsan buradan crossfire kur — tek başına tutmaya çalışma.
-- **B Tunnel:** Mid'i B site'a bağlayan geçit (B Elbow üzerinden). B'nin Mid tarafından gelen ikinci girişi. Dar, kontrol kolay. Ama gözden çıkarırsan düşman Mid'den bedavaya arkana geçer.
-- **Metal Kapılar:** A Hall ve Mid'de açılıp kapanıyor. Sightline kes, bilgi topla, fake yarat — kullanmıyorsan haritanın yarısını boşa harcıyorsun.
-
-## 10. Post-Plant Stratejileri
-- **A Site Post-Plant:** Spike'i Pyramid arkasına dik — default plant bu. Sonra bir kişi A Hall'dan, bir kişi A Bridge'den crossfire kur, ikisi aynı anda spike'i izlesin. Viper snake bite ve Sova shock dart ile defuse'u kes. Pyramid'in arkasına saklanma — açıkta kalırsın. Hall ya da Bridge çok daha güvenli.
-- **B Site Post-Plant:** Spike'i B default'a dik. B Main ve B Arch'tan crossfire kur. B Pillar'a girme — retake gelen takım direkt oraya bakar. Op varsa B Main'den izle, defuse girişimini tek atar durdurursun.
-- **Op post-plant hold:** Breeze'de Op tutan oyuncu diğer haritalara kıyasla çok daha baskın. Site'lar açık, sightline'lar uzun — uzak pozisyondan spike'i izle, defuse girişiminde tek vur.
-- **Utility post-plant:** Viper snake bite, Brimstone molly, Sova shock dart, KAY/O molly lineup'larını kullan. Breeze'de site açık olduğu için defuse yapan oyuncunun kaçacak yeri yok — lineup atmak kolay, kaçmak zor.
-- **Retake'e karşı:** Harita büyük, rotasyon mesafeleri uzun. Retake gelen takım geç gelir. Gereksiz peek atma, utility ile defuse girişimini kes, pozisyonunu koru.
-
-## 11. Anti-Strat Rehberi
-
-**Rakip her round A Long Op oynuyorsa:**
-IF: Rakibin Op'çusu her round A Long'u tutuyor ve A push'u tamamen kapatıyorsa.
-MEANING: Rakip A site'i tek Op'la kilitliyor, geri kalanını B ve Mid'e dağıtıyor.
-COUNTER: A Long'u smoke'la kapat, B execute'a geç. Ya da Mid'den A Bridge split yap, Op'un arkasına dön. Op'a direkt girme — görüş hattını kes.
-WHY: Op'a direkt girersen tam istediğini veriyorsun. Smoke'la görüş hattını kesersen Op değersizleşiyor. Bridge split yaptığında pozisyon avantajı tamamen tersine dönüyor.
-
-**Rakip Viper wall'unu her round aynı yere atıyorsa:**
-IF: Rakip Viper her round aynı wall açısını kullanıyor, arkasında aynı setup'i oynuyor.
-MEANING: Execute okunabilir hale geldi. Wall'un nereye geldiğini, ne zaman düştüğünü, arkasında ne olduğunu biliyorsun.
-COUNTER: Wall'un altından veya kenarından push yap. Wall düştüğü anda agresif çık, setup tamamlanmadan pozisyon al. Ya da wall'un geldiği tarafı boş bırak, diğer tarafa stack yap.
-WHY: Viper wall güçlü ama okununca değer kaybediyor. Her round aynı yere geliyorsa ne zaman nereye pozisyon alacağını zaten biliyorsun — wall'un yarattığı belirsizlik sıfırlanıyor.
-
-**Rakip B rush yapıyorsa:**
-IF: Rakip sık sık B Main'den hızlı push yaparak site'i alıyorsa.
-MEANING: B site savunması yetersiz ya da B Main'i utility'le yavaşlatmıyorsun.
-COUNTER: B Pillar'da Op tut ve utility dök. KAY/O molly veya Viper snake bite B Main girişine at. Killjoy botunu B Main'e baktır. B Main'de erken bilgi al, push geldiğini erkenden haber ver.
-WHY: B rush dar B Main koridorunu kullanır ve bu koridor utility'le rahat kontrol edilir. Molly + slow + Op ikilisi rush'i durdurur — koridor dar, kaçacak yer yok.
-
-**Rakip Mid kontrolü alıyorsa:**
-IF: Rakip her round Mid'i kontrol ediyor, Arch veya Bridge üzerinden split yapıyorsa.
-MEANING: Mid savunman yetersiz ya da Mid'e yeterli kaynak koymuyorsun.
-COUNTER: Agresif Nest fight yap — erken pozisyon al, Mid'e giren ilk oyuncuyu vur. Sova recon bolt Mid'e at. Top Mid'i smoke'la kapat ve bilgi topla.
-WHY: Mid, Breeze'de haritanın kilit noktası. Rakip Mid'i alırsa hem A Bridge hem B Arch split opsiyonu açılıyor. Mid'i erken contest edersen bu split opsiyonları kapanıyor, saldırı tek boyutlu kalıyor.
-
-**Rakip B Tunnel'dan flank yapıyorsa:**
-IF: Rakip Mid'i alıp B Tunnel'dan flank yaparak savunmanı arkadan çökertiyorsa.
-MEANING: Tunnel kontrolün yok ve rakip Mid üzerinden bunu exploit ediyor.
-COUNTER: Tunnel ağzına tuzak teli veya bot-turret koy. Killjoy botunu Tunnel içine gönder. Cypher kamerasını Tunnel'ı gören açıya yerleştir.
-WHY: Tunnel dar bir geçit, tek utility'le kapatılır. Tuzak teli veya turret Tunnel'ı tamamen kilitler. Kontrol maliyeti düşük, geri dönüşü yüksek.
-
-## 12. Agent Tier Listesi
-
-### S-Tier
-- **Viper**: Breeze'de oynayacaksan Viper öğren. Duvarını A Hall'dan site'a veya B Main'den site'a uzanan açılara çek — bu duvar olmadan execute olmuyor. Molly lineup'larını öğrenirsen spike kurulduktan sonra defuse eden adamı öldürürsün, açık siteler buna çok uygun. Viper Pit de bu haritada kabusa dönüyor savunucu için — alan çok geniş, içeride savaşmak zorunda kalıyor.
-- **Sova**: Recon okunu at, bütün site açılıyor — başka haritada bu kadar açık alan yok, burada Sova çok daha güçlü. Molly oku lineup'larını öğren, post-plant'te spike başında bekleyen adamı açıktan öldürürsün. Hunter's Fury haritanın uzun eksenine çekersen birden fazla adam yer.
-
-### A-Tier
-- **Jett**: Op alacaksan Jett al. Uzun sightlinelar Op'in avantajını katlar, op atıp dash ile geri çekilirsin — Pyramid veya yükseltilerde yukarı sıçrayıp açı çıkarırsın, adam seni bulamaz.
-- **KAY/O**: Utility'e dayalı execute karşı takımda varsa Zero/Point at, bastırırsın. Flash geniş alanda çok iyi açıyor. Spike kurulduktan sonra Molly lineup koy, defuse ettirmezsin.
-- **Chamber**: A Long veya A Hall'da Op tut. Tehlike görünce TP ile çık, orada kalmak zorunda değilsin. Tuzağını flank girişine koy, arkandan adam gelmez. Op ult'un bu haritada Vandal'dan bile keskin çalışır.
-
-### B-Tier
-- **Cypher**: Tripwire A Hall ve B Tunnel gibi dar geçişlerde tutar, ama Breeze açık alan — kapalı köşe bulamıyorsun, utility'nin yarısı boşa gidiyor.
-- **Killjoy**: Bot ve tuzakla bir siteyi tek başına tutarsın; ult'un geniş alanda iyi çalışır. Ama harita çok büyük, utility menzili yetişmiyor.
-- **Skye**: Flash atınca bilgi de gelir, kaplanla koridoru temizlersin. Ama bilgi toplamada Sova'nın yanına yaklaşamazsın — Sova varsa Skye alma.
-- **Harbor**: Cascade'i uzun geçişlerde hareket eden kalkan gibi kullanırsın, High Tide birden fazla sightlinei keser. Ama Viper varsa Harbor ikinci kalır, aynı işi daha iyi yapıyor Viper.
+**Rakip Mid'i her round alıyorsa**: Kapı hattına tel ya da bot koy, Elbow pencerelerinden util'le yokla. Erken haber alırsan split daha kurulmadan çöker — Mid'i sahipsiz bırakma.

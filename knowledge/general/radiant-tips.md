@@ -19,7 +19,7 @@ MEANING sen o default açıyı tutuyorsan, peek atmadan seni çoktan bulmuş dem
 COUNTER default'tan biraz kay — aynı lane'i kapatacak kadar yakın dur, ama seni bulmak için mikro-ayar yapmak zorunda kalsın
 WHY o zorladığın mikro-ayar, sana önce ateş etme fırsatı veren reaksiyon boşluğunu açar
 
-IF o off-angle'dan kill aldıysan
+IF o off-angle'dan düşman öldürdüysen
 MEANING düşman takımı o noktayı işaretledi, sıradaki round o açıyı tutarak gelecekler
 COUNTER her off-angle'ı tek round kullan, sonra farklı pozisyona geç
 WHY o açıyı bekliyorlarsa cover'ını da feda etmiş olursun — default'tan bile kötü bir pozisyona döner
@@ -66,7 +66,7 @@ WHY Valorant'ta en ufak hareket bile atışı dağıtıyor, bu cezası ağır bi
 IF aynı hareketle hem jiggle atıp hem ateş etmek istiyorsan
 MEANING tek counter-strafe yetmez, çift counter-strafe gerekir
 COUNTER bir yana git, karşı tuşla dur, o kısa sabit anda ateş et, sonra çık — A-D-A veya D-A-D dizisini kas hafızana yerleşene kadar drill et
-WHY bu döngü bilgi toplamayı, atışı ve kaçmayı tek harekette birleştirir — Radiant'ta temel budur
+WHY bu döngü açıyı yoklamayı, atışı ve kaçmayı tek harekette birleştirir — Radiant'ta temel budur
 
 ### Jiggle Peek
 
@@ -248,7 +248,7 @@ WHY smoke'u push eden, arkasında biri olduğunu bilir ve oraya bakar — yana k
 
 IF düşman takımı senden fazla bilgiye sahipse
 MEANING onlar her hamlesini veriye dayandırır, sen tahminle oynarsın
-COUNTER recon util'inle bilgi topla, sesinle ve pozisyonunla da bilgi verme — ikisini aynı anda yürüt
+COUNTER recon util'inle düşmanın yerini öğren, sesinle ve pozisyonunla da bilgi verme — ikisini aynı anda yürüt
 WHY bilgi farkı üst seviyede round'u belirleyen şeydir; elinde daha fazla veri olan takım daha az hata yapar
 
 ---
@@ -371,7 +371,7 @@ MEANING düşman o site'a tam adamını koymamış
 COUNTER o site'a tüm util'ini dökerek hemen gir
 WHY rotasyon gelmeden vurursan sayı üstünlüğü işe yarar
 
-IF bilgi topladın ama hangi site'a gideceğini hâlâ bilmiyorsan
+IF keşif yaptın ama hangi site'a gideceğini hâlâ bilmiyorsan
 MEANING düşman ya öngörülemez şekilde yığılmış ya da seni okuyor
 COUNTER iki site'ta da baskı uygula, hangisi daha az direnç gösterirse oraya commit et
 WHY çift baskı düşmanı seçim yapmaya zorlar, belirsizliği ortadan kaldırır

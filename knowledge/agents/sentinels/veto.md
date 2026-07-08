@@ -1,17 +1,22 @@
+---
+patch: "13.00"
+verified: 2026-07-08
+---
+
 # AJAN: Veto
 
 ## 1. Rol Kimliği
 
 Veto bilgi keser. Önleyicisiyle düşmanın recon araçlarını yok eder, yakınlık tuzağıyla push atan düşmanı yerinde bağlar, ışınlanmasıyla beklenmedik açılara geçer, ultuyla düşman utility'sinin hiçbirini hissetmez.
 
-Cypher bilgi toplar, Killjoy alan tutar — Veto ise düşmanın bilgi toplamasını keser. Düşman kör girince execute'lar tahmine döner. O körlüğü sen yaratırsın.
+Cypher düşmanın yerini görür, Killjoy alan tutar — Veto ise düşmanın görmesini keser. Düşman kör girince execute'lar tahmine döner. O körlüğü sen yaratırsın.
 
 ## 2. Yetenek Seti
 
 - **Yakınlık tuzağı (Q)** — Yere bir tuzak yerleştirirsin. Yere düşünce kurulur ve görünmez olur; menzilindeki görüş hattına bir düşman girdiğinde otomatik tetiklenir. Tetiklenen düşmanı yerinde bağlar, sesini kaybettirir (sağırlaştırır) ve canını eritir. Atılıp anında hasar veren bir molotof değil — kör köşeye, düşmanın geçeceği yere kur. Düşman kurulmadan önce vurup yok edebilir; bu yüzden görünür yere koyma.
-- **Işınlanma (C)** — Yere bir nokta bırakırsın. O noktaya bakarken tekrar bas, oraya ışınlanırsın. Satın alma aşamasında geri alıp yeniden koyabilirsin. Beklenmedik açı tutmak ve hızlı yer değiştirmek için.
-- **Önleyici (E)** — İmza yeteneğin. İleriye bir önleyici fırlat, tekrar basınca aktive et. Aktifken o bölgeye giren ya da oradan geçen her düşman recon aracını, drone'u ve fırlatılan/seken utility'yi yok eder (recon oku, drone, grenade, hatta Sage ve Deadlock duvarları). Düşman onu silahla vurup kırabilir; bu yüzden gizli kur.
-- **Ult (X)** — Aktive edince hiçbir kötü etki sana işlemez. Flash, yetenek kapatma, can eritme, kör etme, sersemletme — hiçbiri geçmez. 1v2-1v3'te düşman seni durdurmak için ne atarsa atsın, sen yürümeye devam edersin.
+- **Işınlanma (C)** — Yere bir nokta bırakırsın. O noktaya bakarken tekrar bas, oraya ışınlanırsın; nokta uzaktan da (30 metreye kadar) kullanılır ve yarım saniyede kurulur. Satın alma aşamasında geri alıp yeniden koyabilirsin. Beklenmedik açı tutmak ve hızlı yer değiştirmek için.
+- **Önleyici (E)** — İmza yeteneğin. İleriye bir önleyici fırlat, tekrar basınca aktive et. Aktifken o bölgeye giren ya da oradan geçen her düşman recon aracını, drone'u ve fırlatılan/seken utility'yi yok eder (recon oku, drone, grenade — silahla kırılabilir utility, Sage duvarı dahil). Düşman onu silahla vurup kırabilir; bu yüzden gizli kur.
+- **Ult (X)** — Aktive edince üç şey birden olur: hiçbir kötü etki sana işlemez (flash, yetenek kapatma, can eritme, sersemletme — hiçbiri geçmez), canın saniyede 40 yenilenir ve silah kullanımın hızlanır (çekme, atış, şarjör değiştirme, toparlanma). 1v2-1v3'te düşman ne atarsa atsın hem durdurulamazsın hem toparlanırsın — canın erimişken bile ult açmak seni düelloya geri sokar.
 
 ## 3. Temel Sorumluluklar
 
@@ -60,8 +65,8 @@ Cypher bilgi toplar, Killjoy alan tutar — Veto ise düşmanın bilgi toplamas�
 
 **IF** Ultu clutch'larda kullanmıyorsun, takım dövüşünde erkenden açıyorsun
 **MEANING** Ultun gücü, düşman tüm utility'sini sana attığında ortaya çıkar. Takım dövüşünde o utility takım arkadaşlarına dağılır.
-**COUNTER** 1v2 veya 1v3'e girdiğinde aç. Düşman seni durdurmak için her şeyi atar — hiçbiri tutmaz. Takım dövüşünde kapalı tut.
-**WHY** Clutch'ta ult, düşmanın tüm utility yatırımını sıfırlar. Erken ult ise düşman zaten util harcamadan bağışıklık demektir.
+**COUNTER** 1v2 veya 1v3'e girdiğinde aç — canın erimişse de aç, saniyede 40 yenilenir ve düelloya geri girersin. Düşman seni durdurmak için her şeyi atar — hiçbiri tutmaz. Takım dövüşünde kapalı tut.
+**WHY** Clutch'ta ult, düşmanın tüm utility yatırımını sıfırlar ve eriyen canını geri doldurur. Erken ult ise düşman zaten util harcamadan bağışıklık demektir.
 
 ---
 
@@ -124,7 +129,7 @@ Genel kural: Önleyiciyi her zaman düşmanın bilgiye en çok güvendiği daral
 
 ## 7. Eşleştirme Notları
 
-- **Sova karşı**: Sova'nın her şeyi bilgi toplamaya dayanır. Recon oku, drone, recon lineup'ı — önleyici hepsini yer. Sova karşı doğru önleyici pozisyonu, o tur onun yarısını sahadan siler.
+- **Sova karşı**: Sova'nın her şeyi keşfe dayanır. Recon oku, drone, recon lineup'ı — önleyici hepsini yer. Sova karşı doğru önleyici pozisyonu, o tur onun yarısını sahadan siler.
 - **Fade karşı**: Recon iti ve recon küresi yüksek değerli keşif araçları. Önleyici ikisini de yok eder. Recon iti seni takip ederken yakınlık tuzağına çek — düşman hem bağlanır hem bilgisiz kalır.
 - **KAY/O karşı**: KAY/O yeteneğini kapatırsa (suppress) önleyici ve yakınlık tuzağı çalışmaz. Bunun geldiğini hissedince ultu aç — bu etki sana geçmez. Bu eşleşmede ult zamanlaması her şeyi belirler.
 - **Raze ve bilgisiz giren duelciler karşı**: Bilgiye bağımlı değiller. Raze nerede olduğunu bilmeden bomba atar, Jett dash ile dalar. Bu eşleşmede önleyici az değer verir. Yakınlık tuzağına ve silah pozisyonuna yaslan.
@@ -154,12 +159,6 @@ Aynen sürdür: 1. turda ses ipucuyla recon'u yok et ve çağır. 2. turda önle
 
 "Yakınlık tuzağını görünür yere kurma — vurup kırıyorlar. Köşe arkasına, kör noktaya kur: düşman görmeden geçsin, kendiliğinden tetiklensin, sen sesi duyup tepki ver. Önce uyarı, sonra inkar. Yeteneğin kapatılıyorsa (suppress) util koymadan önce ultunu aç, yoksa hepsi ölü kalır."
 
-## 9. Rank Modülasyonu
+## 9. İleri Okuma — Düşmanın Bilgi Ekonomisi
 
-**Düşük (Iron-Silver)**: Bu ranktaki düşmanlar recon'u verimli kullanmıyor — önleyici az değer verir. Önce pozisyonlamaya ve silah dövüşüne bak. Önleyiciyi basit tut: düşman recon attığında aktive et. Yakınlık tuzağını ayak sesi geleceği köşeye önceden kur. Işınlanmayı şimdilik unut — önce temeller otursun.
-
-**Orta (Gold-Platinum)**: Önleyici zamanlaman çalışıyor ama tutarsız. Yakınlık tuzağını kuruyorsun, çağrıyı yapmıyorsun. Her aktivasyonu ve her tuzak bağlamasını çağırmaya odaklan. Işınlanmayı retake flanklaması için kullanmaya başla. Ultu clutch için sakla.
-
-**Yüksek (Diamond-Ascendant)**: Önleyici zamanlaman oturmuş, ama recon atmayı bırakan düşmana uyum sağlaman gerek. Düşman recon'dan vazgeçtiğinde standart sentinel oyununa geçişi oku. Işınlanmayla farklı açı tut. Ultu duruma göre seç — her 1v2'de değil, utility spam'i geldiğinde.
-
-**Elit (Immortal-Radiant)**: Veto'nun değeri, düşmanın tüm bilgi stratejisini güvensiz kılmaktır. Her turda önleyici zamanlaman farklı olsun. Düşmanın bilgi ekonomisini oku — recon'a ne zaman bağlandıklarını, ne zaman vazgeçtiklerini ayırt et. Bıraktıklarında önleyiciyi spike kurulduktan sonrasına sakla. Ultu KAY/O'nun yetenek kapatması ya da Fade ultu anında aç. Işınlanmayla tur ortasında beklenmedik açı yarat.
+Veto'nun asıl değeri, düşmanın tüm bilgi stratejisini güvensiz kılmaktır. Düşmanın bilgi ekonomisini oku: recon'a ne zaman bağlandıklarını, ne zaman vazgeçtiklerini ayırt et. Bıraktıklarında önleyiciyi spike kurulduktan sonrasına sakla — retake smoke'unu ve heal'ini yer. Ultu KAY/O'nun yetenek kapatması ya da Fade ultu anında aç; ışınlanmayla round ortasında beklenmedik açı yarat. Her round önleyici zamanlaman farklı olsun ki düşman recon planı kuramasın.

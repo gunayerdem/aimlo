@@ -4,7 +4,7 @@
 Cypher'ı doğru oynarsan takımın asla kör kalmaz. Site'ı ateş gücüyle değil bilgiyle tutarsın. Kurulumun temizse düşman nereye bastığını daha push başlamadan bilirsin — takım pozisyon alır, hazırlıksız yakalanan onlar olur. Haritayı okudukça değerin katlanır: attığın her tel, koyduğun her kamera bir bilgi katmanı ekler.
 
 ## 2. Temel Sorumluluklar
-- **Bilgi topla, anında ilet**: Tel ve kamera, düşman kapıya dayanmadan iş görmeli. Düşman hangi koridordan geldi, kaç kişi — takım rotate etmeden önce bunu sen söyle.
+- **Düşmanın yerini öğren, anında ilet**: Tel ve kamera, düşman kapıya dayanmadan iş görmeli. Düşman hangi koridordan geldi, kaç kişi — takım rotate etmeden önce bunu sen söyle.
 - **Flankı kapat**: En az bir tel flank yolunda dursun. Atak round'larında bu pazarlık konusu değil. Tel yalnızca alarm vermez — tetiklenen düşmanı yerinde yakalar, kısa sürede teli kıramazsa onu açığa çıkarır ve sersemletir. Yani flank teli hem haber verir hem de o düşmanı bir an için savunmasız bırakır.
 - **Site'ı tut**: Tek başına ya da neredeyse yalnız, site'ı geciktir. Telin ve kameranın kazandırdığı zaman takım arkadaşlarını serbest bırakır — stack atarlar, lurk yaparlar.
 - **Görüş-engelleyen küreni (kafes) kullan**: Cypher'ın kendi taşıdığı bir görüş-engelleyici küresi var (ucuz, round başına yenilenir). Bir açıyı kapatmak, push'u yavaşlatmak ya da güvenli rotate için at. Bu küre düşman içinden geçtiğinde ses çıkarır — yani salt görüşü kesmez, kim geçti onu da sana söyler. Tek başına site tutarken bir açıyı bununla kapatıp dikkatini tehlikeli yöne ver.
@@ -38,7 +38,7 @@ Cypher'ı doğru oynarsan takımın asla kör kalmaz. Site'ı ateş gücüyle de
 **COUNTER** Geri çekil. Tel ya da kamera sana avantaj sağladıktan sonra düelloya gir.
 **WHY** Erken ölürsen site'ın bütün bilgi katmanı sıfırlanır. Takım karanlıkta kalır.
 
-**IF** Kill aldığın round'larda ult'u hiç açmıyorsun
+**IF** Düşman öldürdüğün round'larda ult'u hiç açmıyorsun
 **MEANING** Ult'u gereksiz saklıyorsun ya da düello baskısında aklına gelmiyor.
 **COUNTER** 3 ve üzeri düşman varken her kill'den sonra ult'u açma değerini anında tart.
 **WHY** Açılmayan ult sıfır değer üretir. 3+ düşman varken pozisyon bilgisi rotate kararını tamamen değiştirir.

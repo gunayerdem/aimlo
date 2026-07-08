@@ -1,3 +1,8 @@
+---
+patch: "13.00"
+verified: 2026-07-08
+---
+
 # AJAN: Omen
 
 ## 1. Rol Kimliği
@@ -16,7 +21,7 @@ Sen tek başına iş çeviren bir smoke ajanısın. Görevin sadece duman atmak 
 - Flash'ı takım hazır değilken atmak — kimse peek atmıyorsa kör boşa gider.
 - Smoke'ları aksatıp kill peşinde koşmak — smoke yoksa takım içeri giremez.
 - Ult'u düşmanın rahatça duyduğu açık alanda kullanmak — ses seni ele verir.
-- One-way smoke'u fazla alçak koymak — o zaman avantaj sende değil düşmanda olur.
+- Tek yönlü smoke'u fazla alçak koymak — o zaman avantaj sende değil düşmanda olur.
 - Çatışma başladıktan sonra kısa teleport kullanmak — teleport sesi tam o anda yerini düşmana söyler.
 - Smoke'u tam bölgenin önüne değil de içine atmak — düşman dumanın kenarından seni görür, sen onu göremezsin; smoke girişin önünü kapatsın ki takım arkasında güvenle ilerlesin.
 - Bütün smoke'ları aynı anda salıp eli boş kalmak — smoke'lar yenilenir ama yenilenme süresi var; round başında hepsini harcarsan retake ya da ikinci giriş için elinde duman kalmaz.
@@ -33,9 +38,9 @@ Sen tek başına iş çeviren bir smoke ajanısın. Görevin sadece duman atmak 
 **COUNTER** Takım arkadaşın köşeyi tutmadan hemen önce at. Körleşme o anla çakışsın — bir saniye önce değil, tam o anda.
 **WHY** Flash körleştirdiğinde ancak biri hemen peek atarsa kill'e döner. Yoksa düşman bekler, görüşü geri gelir, sen flash'ı boşa harcamış olursun.
 
-**IF** smoke'larını hep aynı standart kapı ağzına koyuyorsun, hiç one-way yapmıyorsun
+**IF** smoke'larını hep aynı standart kapı ağzına koyuyorsun, hiç tek yönlü smoke kurmuyorsun
 **MEANING** Omen'in en güçlü kozunu kullanmıyorsun.
-**COUNTER** Her harita için 2-3 yüksek one-way noktası öğren. Smoke'u kutu üstüne, kapı üstüne koy — düşman smoke'u salmak için çıkmak zorunda kalsın, sen hazır beklerken.
+**COUNTER** Her harita için 2-3 yüksek tek yönlü smoke noktası öğren. Smoke'u kutu üstüne, kapı üstüne koy — düşman smoke'u salmak için çıkmak zorunda kalsın, sen hazır beklerken.
 **WHY** Yüksek koyulan smoke düşmana seçim dayatır: ya geç ya da aç. İkisi de sana avantaj verir. Standart smoke bunu yapmaz.
 
 **IF** ult'unu sadece arkadan basmak için kullanıyorsun
@@ -45,7 +50,7 @@ Sen tek başına iş çeviren bir smoke ajanısın. Görevin sadece duman atmak 
 
 **IF** kısa teleport sırasında ya da hemen sonrasında sık sık ölüyorsun
 **MEANING** Reaktif teleport atıyorsun — çatışma başladıktan sonra kaçmaya ya da yer değiştirmeye çalışıyorsun.
-**COUNTER** Teleportu çatışma başlamadan at. Teleport sesini örtmek için önce smoke ya da flash kullan. İleri seviye: teleport sesini ver ama animasyonu iptal et — düşman sese dönerken sen aslında yerinde durursun, asıl baskı başka noktadan gelir.
+**COUNTER** Teleportu çatışma başlamadan at. Teleport sesini örtmek için önce smoke ya da flash kullan.
 **WHY** Teleport sesi düşmana yerini net söyler. Çatışmanın ortasında bu ses seni öldürür. Önceden yerleştiğinde düşman tahmin oyunu oynamak zorunda kalır.
 
 **IF** smoke'u attıktan sonra hep dumanın kenarında bekleyip kendi smoke'undan göz teması arıyorsun
@@ -64,9 +69,9 @@ Sen tek başına iş çeviren bir smoke ajanısın. Görevin sadece duman atmak 
 **WHY** Ult seni haritanın istediğin yerine atar ve ışınlanırken adın düşmanın mini haritasından kaybolur — ama bu onları kör etmez, kör eden senin flash'ın. Işınlanma sırasında gölge şeklin görünür, düşman onu vurursa eski yerine dönersin. Geldiğin anda oynamazsan sürpriz biter; ult bir kurulum, bitiş değil.
 
 ## 5. Harita Etkileşimleri
-- **Ascent**: Güçlü seçim. Kısa teleportla catwalk'a ya da market'e geç, mid kontrolünü tehdit altında tut. B main ve A main kapı girişlerinde yüksek one-way'ler iş görür. Mid'i alırsan iki bölgeye birden baskı kurarsın; teleportu mid kontrolünü genişletmek için kullan, sırf kaçış için değil. Savunmada mid'i dumanla geç kapat ki rakip orta turu bilgi alamadan kurusun.
+- **Ascent**: Güçlü seçim. Kısa teleportla catwalk'a ya da market'e geç, mid kontrolünü tehdit altında tut. B main ve A main kapı girişlerinde yüksek tek yönlü smoke'lar iş görür. Mid'i alırsan iki bölgeye birden baskı kurarsın; teleportu mid kontrolünü genişletmek için kullan, sırf kaçış için değil. Savunmada mid'i dumanla geç kapat ki rakip orta turu bilgi alamadan kurusun.
 - **Bind**: Lurk için iyi harita. Teleporter'larla birlikte ult çoklu baskı açar. Hookah'dan atılan flash geçişi kapatır.
-- **Icebox**: Tube, nest ve rafters'a teleport beklenmedik açılar verir. A site'ta pipe'lardaki smoke one-way açısı açar.
+- **Icebox**: Tube, nest ve rafters'a teleport beklenmedik açılar verir. A site'ta pipe'lardaki smoke tek yönlü açı açar.
 - **Haven**: Üç bölge ult'unun değerini katlar — bir bölgeden ötekine hızlı geçiş savunma dengesini bozar. Mid pencereye kısa teleport, rotate eden savunucuyu yakalar. Üç bölge demek savunmada daha çok boşluk demek: dumanlarını rotate yolunu kesecek yere koy ki bir savunucu bölgeyi tutarken sen ötekine kayabilesin. Bölgeyi açan en çok smoke isteyen haritalardan biri — duman yönetimini round başında planla.
 - **Sunset**: Mid kapılarından flash geçişi kapatır. Teleport noktası daha az ama B market'te baskı açıları var.
 - **Pearl**: A Main ve B Long'a derin smoke iş görür. B Hall kutularına kısa teleport beklenmedik açı verir. Dar koridorlarda flash bütün geçişi kapatır.
@@ -74,7 +79,7 @@ Sen tek başına iş çeviren bir smoke ajanısın. Görevin sadece duman atmak 
 - **Corrode**: Dar koridorlar flash'ın etkisini tavana vurdurur — tek atışta bütün geçiş kapanır. Koridor arkasındaki açılara kısa teleportla geç, savunucu nereden geldiğini anlayamaz. Smoke dar bakış açılarını tamamen kapatır.
 
 ## 6. Eşleşme Notları
-- Karşıda çift initiator varsa: Onlar bilgi topladıktan hemen sonra teleportla yer değiştir — topladıkları bilgi anında değersizleşir.
+- Karşıda çift initiator varsa: Onların recon'u/dronu bilgiyi verdikten hemen sonra teleportla yer değiştir — topladıkları bilgi anında değersizleşir.
 - Karşında agresif duelist varsa: Utility'siz peek atan duelist'i flash'la yakalarsın. Savunmada düşman köşeyi açmaya çalışırken flash'ı at — kör olduğu anda kafadan vur.
 - Takımda sentinel varsa: Sentinel bölgeyi tutsun, sen serbestçe lurk yap.
 - Fade karşısında: Onun recon'u teleport noktanı ele verir — recon aktifken teleport edersen pozisyonun açılır. Kısa teleportu recon yokken kullan.
@@ -86,7 +91,7 @@ Sen tek başına iş çeviren bir smoke ajanısın. Görevin sadece duman atmak 
 **Düşman Algısı:** Geçen roundki teleport noktana önceden nişan aldılar. Sen başka açıdan çıkınca onlar hâlâ oraya bakıyor, sen arkalarında duruyorsun.
 **Düşman Tepkisi:** Hem eski noktayı izlemek hem yeni açıyı kapatmak için iki ayrı oyuncu ayırmak zorundalar. O iki oyuncu round boyunca başka işe yaramaz.
 **Fırsat Penceresi:** Düşman eski teleport noktana bakarken takımın girişi karşısız kalır. Üstüne flash körleştiriyorsa o bölgede kimse doğru dürüst göremez.
-**Tekrar Şablonu:** Giriş 1: smoke + flash, yüksek zemin açısına teleport. Giriş 2: aynı smoke'lar, bu sefer zemin seviyesinde farklı açı. Giriş 3: hiç teleport atma — eski noktalarını aramaya giden savunuculardan bedavaya kill al. Her teleporttan önce smoke'u koy, sonra değil.
+**Tekrar Şablonu:** Giriş 1: smoke + flash, yüksek zemin açısına teleport. Giriş 2: aynı smoke'lar, bu sefer zemin seviyesinde farklı açı. Giriş 3: hiç teleport atma — eski noktalarını aramaya giden savunucuları bedavaya öldür. Her teleporttan önce smoke'u koy, sonra değil.
 **Düşman Uyumu:** 4-5 round sonra yaygın teleport noktalarını el bombası ya da molly ile temizlemeye başlarlar, ya da teleport sesini dinlesin diye özel bir oyuncu ayırırlar.
 **Karşı Uyum:** Noktanı temizlemeye çalışıyorlarsa flash kör ederken teleport yap — animasyonu ne görür ne duyarlar. Smoke'undan basıyorlarsa kendi smoke'unun arkasında bekle, push'un ortasında yakala. Teleport noktana oyuncu ayırdılarsa o bölgede bir savunucu eksik demektir, takımın girişte sayı üstünlüğü kapar.
 
@@ -98,8 +103,8 @@ Sen tek başına iş çeviren bir smoke ajanısın. Görevin sadece duman atmak 
 
 **Smoke zamanlaması kaydığında:** "Dumanı takım hazır olmadan attın, giriş gelmeden söndü. Önce 'giriyoruz' çağrısı, sonra duman. Smoke takımın ayağına göre zamanlanır — saniyeler önce atılan duman, asıl ihtiyaç anında elini boş bırakır."
 
-## 8. Rank Modülasyonu
-- **Düşük (Iron-Silver):** Önce smoke'ları öğren. Teleport oyununu sonraya bırak. Flash'ı kendin peek atacaksan kullan, takım koordinasyonunu sonra ekle.
-- **Orta (Gold-Platinum):** One-way smoke noktaları öğren — harita başına 2-3 tane yeter. Kısa teleport için 2-3 güvenilir nokta belirle. Flash'ı takım girişiyle aynı anda atmaya başla.
-- **Yüksek (Diamond-Ascendant):** Smoke zamanlamasını takımın girişine göre ayarla. Teleport rotalarını round başlamadan planla. Ult'u sadece arkadan baskı için değil, hızlı bölge geçişi için de kullan.
-- **Elit (Immortal-Radiant):** Smoke, teleport ve flash aynı anda çalışır. Teleport ses bluff'unu kullan: sesi ver, animasyonu iptal et — düşman tepki verirken asıl baskı başka noktadan gelir. Düşmanın hareket kalıplarını okuyup teleport noktalarını ona göre seç. Ult'la spike kurulduktan sonra karşı bölgede varlık yarat.
+## 8. Bu Ajana Karşı
+- Kısa teleport sesi yerini söyler ve atıldıktan sonra iptal edilemez — sesi duyduğun an bilinen çıkış açısına dön; Omen inişte savunmasızdır.
+- Omen kendi smoke'unun kenarında oynamayı sever — dumandan çıkan ilk silüeti bekleyen açı tut, o düelloyu hazır olan kazanır.
+- Ult sesi tek başına kanıt değil — Omen ışını iptal edip yerinde kalabilir; gölge şeklini görürsen vur (vurulan Omen eski yerine döner), görmüyorsan pozisyonunu sese göre bozma.
+- Flash'ı duvardan geçer ve gelirken ses verir — sesi duyduğun an görüş hattından çık; kör yakalanan köşe tutuşu bedava ölümdür.

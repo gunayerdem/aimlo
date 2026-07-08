@@ -1,3 +1,8 @@
+---
+patch: "13.00"
+verified: 2026-07-08
+---
+
 # AJAN: Neon
 
 ## 1. Rol Kimliği
@@ -5,14 +10,19 @@
 - Takım hızlı site almak istiyorsa ve sahada zaten bir Op varsa Jett'i değil seni seçer. Dikey oyun değil, zemin hızı kazandırıyorsun.
 - Senin işin site almayı ayak yarışına çevirmek. Savunma crossfire kurmadan sen içeride olacaksın.
 
-## 2. Temel Sorumluluklar
-- **Atakta:** Duvarını kur, sprint at, site'a ilk gir. Duvarla crossfire'ı böl, takıma koridor aç. Slide ile dar açılara gir — choke çıkışı, kutu köşesi, kapı kenarı. 2+ düşman görünce ult'unu aç.
-- **Defansta:** Site'lar arası geçişte sprint at, yürüme. Slide-peek ile ileri açıyı tut. Duvarınla push'u istediğin yere yönlendir. Site düşünce retake'e sprint at.
-- **Takımın senden beklentisi:** Site'a ilk varan sensin. Ya açılış kill'ini al, ya da takımın hemen trade yapabileceği kadar kaos çıkar. İkisi de iş görür.
+- Takımın senden beklentisi: site'a ilk varan sensin. Ya açılış öldürmesini al, ya da takımın hemen trade yapabileceği kadar kaos çıkar. İkisi de iş görür.
+
+## Saldırıda Görevin
+- Duvarını kur, sprint at, site'a ilk gir. Duvarla crossfire'ı böl, takıma koridor aç.
+- Slide ile dar açılara gir — geçit çıkışı, kutu köşesi, kapı kenarı. 2+ düşman görünce ult'unu aç.
+
+## Savunmada Görevin
+- Site'lar arası geçişte sprint at, yürüme. Slide-peek ile ileri açıyı tut.
+- Duvarınla push'u istediğin yere yönlendir. Site düşünce retake'e sprint at.
 
 ## 3. Sık Yapılan Hatalar
 1. **Duvarsız sprint** — Sprint ses çıkarır. Duvar yoksa açık crossfire'a koşarsın, slide bitmeden ölürsün. Önce duvar, sonra sprint.
-2. **Yanlış mesafeden slide** — Çok uzaktan slide atarsan düşman seni takip eder. Çok yakından atarsan hız avantajın biter. Orta mesafeden gir: bedavaya kill alacak kadar yakın, tepki veremeyeceği kadar hızlı.
+2. **Yanlış mesafeden slide** — Çok uzaktan slide atarsan düşman seni takip eder. Çok yakından atarsan hız avantajın biter. Orta mesafeden gir: bedavaya öldürecek kadar yakın, tepki veremeyeceği kadar hızlı.
 3. **Takımı kesen duvar** — Takım arkadaşının açısını kapatan duvar, hiç duvar olmamasından kötü. Duvarın koridor açacak, bariyer örmeyecek.
 4. **Ult'u çok erken açmak** — Dövüş alanına girmeden açarsan süreyi yolda harcarsın. Önce pozisyona gir, düşman menzile girince aç.
 5. **Aynı açıdan tekrar slide** — Bir kez gördüler mi, slide yüksekliğini önceden nişanlarlar. Her round aynı köşeyi kullanma.
@@ -27,10 +37,10 @@ MEANING: Duvar koruması olmadan açık açılardan koşuyorsun ya da takım ark
 COUNTER: Önce duvarını aç, sonra sprint at. Flash veya smoke çıkan anda koş — tek başına dalma.
 WHY: Duvarsız sprint seni hızlı bir hedefe çevirir. Açık alanda hız artık avantaj değil.
 
-IF: Açılış kill'ini alıyorsun ama takım arkandan gelemiyor
+IF: Açılış öldürmesini alıyorsun ama takım arkandan gelemiyor
 MEANING: Duvarın takım arkadaşlarının açısını kesiyor ya da gruptan çok önde sprint atıyorsun
 COUNTER: Duvarı takımın içinden geçebileceği açıya kur, etrafından dolanacak şekilde değil. Sprint'e başlarken bir adım geri dur, takım trade menziline girsin.
-WHY: Takımdan kopuk kill değersiz. Arkadaşın avantajı kullanamıyorsa trade gelmez.
+WHY: Takımdan kopuk öldürme değersiz. Arkadaşın avantajı kullanamıyorsa trade gelmez.
 
 IF: Ult'unu ya nadiren açıyorsun ya da hep kaybettiğin round'da açıyorsun
 MEANING: Ult'un ne işe yaradığını yanlış okuyorsun — bu bir kurtarma aleti değil, round kazanma aleti
@@ -59,7 +69,7 @@ WHY: Valorant'ta koşarken/slide ederken ateşin yayılır. Hızın işi seni a�
 
 IF: Plant'tan sonra duvarını çoktan harcamış oluyorsun, retake gelince elin boş
 MEANING: Tüm kitini giriş için yakıp post-plant'ı düşünmüyorsun
-COUNTER: Mümkünse duvarın bir şarjını ya da stun'ı plant sonrasına sakla. Retake'çi spike'a yaklaşırken duvarı bomb'ın önüne çek, sprint sesiyle birden çok açıdan baskı kur.
+COUNTER: Duvarın tek hakkın — ya girişte ya post-plant'te, kararını round başında ver. Stun'ın iki şarjından birini retake'e sakla. Retake'çi spike'a yaklaşırken duvarı spike'ın önüne çek, sprint sesiyle birden çok açıdan baskı kur.
 WHY: Round çoğu zaman plant'tan sonra kazanılır/kaybedilir. Kit'in tamamı girişte biterse, retake'i çıplak savunursun.
 
 IF: Defansta slide-peek atıyorsun ama düşman seni her seferinde önceden vuruyor
@@ -69,7 +79,7 @@ WHY: Slide yörüngesi sabittir; bir kez okunduğunda düşman tetik açısını
 
 ## 5. Harita Etkileşimleri
 - **Güçlü haritalar:** Fracture (çoklu giriş noktası sprint almalarını ödüllendirir), Pearl (B Main gibi uzun koridorlar duvar-sprint girişine biçilmiş kaftan), Lotus (A Main ve C Mound güçlü duvar açıları verir), Split (A Main'de doğru duvarla slide yıkıcı).
-- **Zayıf haritalar:** Breeze (uzun açılar sen varmadan seni cezalandırır), Ascent (mid çok açık, site'lar dikey oyun ister).
+- **Zayıf haritalar:** Breeze (uzun açılarda sen daha varamadan uzaktan öldürülürsün), Ascent (mid çok açık, site'lar dikey oyun ister).
 - **Pozisyona özel:** Pearl'de B Main boyunca duvarını aç, sprint at — sahanın en hızlı site girişlerinden biri. Lotus'ta C Mound duvarı Waterfall savunucusunu izole eder, sen rakipsiz site'a dalarsın. Duvarını tek düz çizgi değil, iki kapıyı aynı anda örten çapraz açıyla at — hem sol hem sağ entry'yi aynı anda kapat.
 - **Dar choke'ları sev, açık alanı bırak:** Duvarın ve hızın en çok dar geçitlerde kazandırır — Fracture'ın çoklu girişleri, Split'in A Main'i, Pearl B Main gibi tek hatlı koridorlar slide girişine biçilmiş. Geniş açık alanlarda (Breeze ortası, Ascent mid) düşman seni varmadan görür ve uzun mesafe tüfeği hızını yener; oralarda hızdan önce bilgi al.
 - **Yatay haritaları seç:** Senin gücün zemin hızı, dikey oyun değil. Çok katlı/yükseltili site'lar (Ascent'in dikey açıları, Icebox'ın yükseklikleri) hızını değil pozisyonu ödüllendirir; orada bir Jett/Raze daha çok iş görür. Düz, koşulabilir hatlar senin sahandır.
@@ -77,17 +87,17 @@ WHY: Slide yörüngesi sabittir; bir kez okunduğunda düşman tetik açısını
 ## 6. Eşleşme Notları
 - **Zorlandığın ajanlar:** Killjoy (botu sprint sırasında seni takip eder, ult'u seni geri çekilmeye zorlar), Sage (duvarı yolu keser, yavaşlatma topu hızını öldürür), Cypher (telleri sprint şeritlerini yakalar).
 - **Baskıladığın ajanlar:** Brimstone ve Harbor gibi util kurmaya zaman isteyen ajanlar — kurulum bitmeden sen varmış olursun. Viper'a karşı da işe yararsın — duvarının etkinleşmesi zaman alır, sen beklemiyorsun.
-- **Adaptasyon:** Sage'e karşı execute'tan önce bir takım arkadaşından duvarı kırmasını iste. Killjoy'a karşı turret'in görüş açısının dışından sprint at — önce turret konumunu tespit et, sonra o açıyı kes. Chamber'a karşı tuzak açılarını kapatmak için duvarını kullan.
+- **Adaptasyon:** Sage'e karşı execute'tan önce bir takım arkadaşından duvarı kırmasını iste. Killjoy'a karşı taretin görüş açısının dışından sprint at — önce taret konumunu tespit et, sonra o açıyı kes. Chamber'a karşı tuzak açılarını kapatmak için duvarını kullan.
 
 ## 7. Oyuncuya Ne Söylenmeli
 ### İyi oynarken
-**Oyuncu Aksiyonu:** Site'ı bölmek için önce duvarını açıyorsun, sonra sprint atıyorsun. Slide-peek orta mesafeye iniyor — bedavaya kill alacak kadar yakın, tepki veremeyecek kadar hızlı.
+**Oyuncu Aksiyonu:** Site'ı bölmek için önce duvarını açıyorsun, sonra sprint atıyorsun. Slide-peek orta mesafeye iniyor — bedavaya öldürecek kadar yakın, tepki veremeyecek kadar hızlı.
 **Düşman Algısı:** Savunma duvarını görür ve sprint girişinin geleceğini bilir. Her seferinde aynı taraftan, duvar koridorunun ucundan çıkmanı bekler.
 **Düşman Tepkisi:** İki seçenekleri var: ya duvar çıkışını tutup diğer taraftaki arkadaşlarından kopuk kalırlar, ya da tamamen geri çekilirler. Duvarın arkasındaki oyuncunun açısı yok, trade yapamaz.
-**Fırsat Penceresi:** Duvar iki savunucuyu birbirinden kestiği an senin kill pencerendir. Slide attığın oyuncunun crossfire desteği sıfır — arkadaşı duvarın diğer tarafında kilitli, tüm süre boyunca trade gelemez.
+**Fırsat Penceresi:** Duvar iki savunucuyu birbirinden kestiği an senin öldürme pencerendir. Slide attığın oyuncunun crossfire desteği sıfır — arkadaşı duvarın diğer tarafında kilitli, tüm süre boyunca trade gelemez.
 **Tekrar Stratejisi:** İlk execute'ta: ortadan duvar, sprint, sola slide. 1 düşman düşünce: aynı duvar açısı, sağa slide. Savunma duvar çıkışını beklemeye başlayınca: duvarı at, duvara takılan savunucuların üstüne beklemedikleri bir açıdan sprint at. Savunma retake'e koşunca ult'unu duvarın içinde aç: crossfire azalır, hasar pencerin açılır.
 **Düşman Adaptasyonu:** Savunma duvarın arkasında beklemeye başlarsa, slide bitiş noktanı önceden nişanlarsa ya da duvarın kapatmadığı tarafa yığılırsa.
-**Karşı Adaptasyon:** Duvarın arkasında bekliyorlarsa — sprint sırasında duvarın üstünden stun at, beklediği yerde kafadan vur. Slide bitiş noktanı önceden nişanlıyorlarsa — sprint'i erken kes, slide yerine geniş peek at. Kapatılmamış tarafa yığıldılarsa — duvar açını değiştir ya da tamamen farklı yoldan gir.
+**Karşı Adaptasyon:** Duvarın arkasında bekliyorlarsa — sprint sırasında duvarın üstünden stun at, beklediği yerde kafadan vur. Slide bitiş noktanı önceden nişanlıyorlarsa — sprint'i erken kes, slide yerine geniş peek at. Kapatılmamış tarafa yığıldılarsa — duvar açını değiştir ya da tamamen farklı yoldan gir. Sprint sesini yem olarak da kullan: bir hatta ses ver, düşman rotate edince boşalan açıyı sabitle.
 ### Zorlanırken
 "Önce duvarını aç. Duvar yoksa sprint atma — bu kadar basit."
 ### Öngörülebilir olduğunda
@@ -99,12 +109,7 @@ WHY: Slide yörüngesi sabittir; bir kez okunduğunda düşman tetik açısını
 ### Tüm kiti girişe yakıyorsa
 "Duvarı ve stun'ı girişte bitirme. Bir kaynağı plant sonrasına sakla — round çoğu zaman retake'te kazanılır."
 
-## 8. Rank Modülasyonu
-### Düşük Elo (Iron-Silver)
-Her site girişinde duvar-sprint-slide sırasını uygula. Duvarı açmadan sprint atma. 2 düşman menzile girene kadar ult'unu açma. Her maçta bir temiz execute seç, onu iyi yap.
-### Orta Elo (Gold-Diamond)
-Slide mesafeni ayarla: ne çok uzak ne çok yakın. Slide biter bitmez dur — momentum sürerken nişanın oturmaz. Defansta sprint'i geçiş için kullan, yürüme. En az bir takım arkadaşının util'iyle gir.
-### Yüksek Elo (Ascendant-Immortal)
-Sadece kendin için değil, takımının arkandan gelebileceği duvar aç. Ult'unu çoklu kill için zamanla. Sprint fake'ini geliştir — taahhüt etmeden ses çıkar, düşman rotate edince boşalan açıyı tut.
-### Elit (Radiant)
-Savunma kurulumunu okuyup hızlı mı yoksa gecikmeli mi gireceğine karar ver. Sprint sesini yem olarak kullan — defansta sprint at, düşman rotate edince boşalan açıyı sabitle. Ult'unu duvarın içinde aç: crossfire azalır, hasar pencerin genişler. Duvar açını her round düşmanın bir önceki ayarına göre değiştir — aynı açı iki kez işe yaramaz.
+## Karşısında: Neon seni öldürdüyse
+- **Duvar + sprint girişi:** Duvarı gördüğün an giriş geliyor demektir; koridordan çıkacağı uç bellidir. Karşı-hamle: duvar çıkışını koridorun dibinden değil, bir adım açıktan geniş açıyla tut — duvara yapışık beklersen üstünden gelen stun'ı yersin; çıktığı an vur.
+- **Slide ile köşeden kayıyor:** Slide yörüngesi sabittir ve Neon kayarken isabetli ateş edemez. Karşı-hamle: bir kez gördüysen crosshair'i slide'ın bitiş noktasına indir — durduğu an en savunmasız anı, orada vur.
+- **Stun yedin, arkasından girdi:** Neon stun'ın hemen arkasından gelir. Karşı-hamle: stun yediğin açıda düello alma; bir adım geriye, yeni bir açıya kay ve giriş anını hazır crosshair'le bekle — sarsıntı geçtiğinde ilk atış sende.

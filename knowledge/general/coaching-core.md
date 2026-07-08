@@ -19,7 +19,7 @@ MEANING düşman nişanını tam o noktaya kilitledi, seni daha görmeden hazır
 COUNTER aynı koridoru kapatan farklı bir açıya geç, her round konumunu değiştir
 WHY o mikro fark sana ilk ateşi kazandırır; aynı yeri tutarsan bu avantajı düşmana teslim edersin
 
-IF off-angle'dan kill aldıysan
+IF off-angle'dan düşman öldürdüysen
 MEANING düşman takımı o noktayı işaretledi, sonraki round oraya önceden nişan alır
 COUNTER o açıyı bir daha kullanma, yeni bir pozisyona geç
 WHY bu açılar tek kullanımlık; beklenen off-angle, varsayılan pozisyondan bile kötüdür çünkü arkanda kapanacak yer yok
@@ -78,7 +78,7 @@ WHY flash etkisi düşmanın gözleri açılınca biter; o pencereyi kaçırırs
 
 ---
 
-## UTILITY KULLANIMI
+## UTILITY DİSİPLİNİ
 
 ### Dağıtım
 
@@ -146,11 +146,11 @@ WHY birlikte alım dağınık alımdan her zaman güçlüdür — beş kişi ayn
 
 ## ROUND OKUMA
 
-### Bilgi Toplama
+### Düşmanın Yerini Öğren
 
 IF round başında hemen bir siteye girmeye çalışıyorsan
 MEANING kaç düşmanın orada olduğunu bilmeden giriyorsun
-COUNTER önce bilgi topla: haritanın iki yanına yayıl, düşman hareketini oku, sonra karar ver
+COUNTER önce düşmanın yerini öğren: haritanın iki yanına yayıl, düşman hareketini oku, sonra karar ver
 WHY kör giriş seni kalabalık siteye dalma riskine sokar; bilgi doğru siteyi seçtirir
 
 ### İlk Ölümden Sonra

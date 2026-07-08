@@ -1,3 +1,8 @@
+---
+patch: "13.00"
+verified: 2026-07-08
+---
+
 # ABYSS — Koçluk Rehberi
 
 ## 1. Harita Karakteri
@@ -12,7 +17,7 @@ Bu haritayı öğrenmek callout ezberlemek değil. Uçurum mesafelerini öğrene
 
 Mid bu haritanın kalbi ama tek bir köprü değil — çok şeritli bir bölge. Mid Top ve Mid Bottom iki ayrı yükseklik, Mid Library ve Mid Catwalk yan geçişler, Mid Bend ise B Main'den ascender ile çıkılan kıvrım. Tam ortada ölüm-uçurumu var: yanlış adım atan oradan düşer. Mid'i alan takım A'ya da B'ye split atar, rotate hızını yönetir, rakibin hareket alanını daraltır. Mid kavgası neredeyse her round çıkar.
 
-Bu haritanın imzası ascender'lar (yükseltici): A Site'tan A Tower'a, B Main'den Mid Bend'e çıkarsın. Hareketin ve rotate'in temeli bu dikey geçişler. Ayrıca Danger ve Secret denen dar kenar ledge'leri atlama-kısayolu olarak kullanılır — ama uçuruma açık, yanlış zıplama seni siler.
+Bu haritanın imzası ascender'lar (yükseltici): A Site'tan A Tower'a, B Main'den Mid Bend'e çıkarsın. Hareketin ve rotate'in temeli bu dikey geçişler. Ayrıca Danger ve Secret denen dar kenar çıkıntıları atlama-kısayolu olarak kullanılır — ama uçuruma açık, yanlış zıplama seni siler.
 
 Mid'e yaklaşırken üç seçeneğin var:
 - Duvar çekip mid geçişini kapat.
@@ -23,31 +28,33 @@ Mid kontrolün yoksa saldırın tek boyutlu kalır. Savunmada da rotate'ini kaç
 
 ## 2. Ölüm Bölgeleri
 
-**A Main / A Security**: A site'a giren ana koridor ve A Security geçidi. Savunanlar A Tower'dan ve A Site içinden bu koridoru tutuyor. Burada ölüyorsan, util atmadan kuru giriyorsun ya da dur-bak-ilerle yapmadan akıyorsun. A Main'de arka arkaya ölüyorsan, giriş util'ini kullanma alışkanlığın yok demektir.
+**A Main / A Security**: A site'a giren ana koridor ve A Security geçidi. Savunanlar A Tower'dan ve A Site içinden bu koridoru tutuyor. Burada ölüyorsan, util atmadan giriyorsun ya da dur-bak-ilerle yapmadan akıyorsun. A Main'de arka arkaya ölüyorsan, giriş util'ini kullanma alışkanlığın yok demektir.
 
-**B Main / B Lobby**: B site'a giden ana koridor ve toplanma alanı. Savunan dar açıda bekliyor, sen arkadaşınla üst üste giriyorsun — ikinizi de bitiriyor. Stagger girmeden akarsan, savunana bedava çoklu frag verirsin.
+**B Main / B Lobby**: B site'a giden ana koridor ve toplanma alanı. Savunan dar açıda bekliyor, sen arkadaşınla üst üste giriyorsun — ikinizi de bitiriyor. Sıralı girmeden akarsan, savunana ikinizi birden bedavaya öldürtürsün.
 
-**Mid (Bend / Library / Catwalk)**: Haritanın en kalabalık çatışma noktası. Op burada çok güçlü ama uçurum her an yanında. Mid'de tekrar tekrar ölüyorsan şu ikisinden biri:
+**Mid (Bend / Library / Catwalk)**: Haritanın en kalabalık çatışma noktası. Op burada çok güçlü ama uçurum her an yanında. Mid'de ölüyorsan şu ikisinden biri:
 - Util atmadan peek açıyorsun.
 - Uçurum kenarını hesaplamadan pozisyon alıyorsun.
 
 Mid'i kaybettiğin her round, haritanın ortasını rakibe bırakıyorsun.
 
-**Mid Uçurumu ve Danger/Secret Ledge'leri**: Uçurum ağırlıkla mid'de yoğunlaşır; dar kenar ledge'leri (B Danger, A Secret) atlama-kısayolu olarak kullanılır. Buradaki ölümler iki şekilde gelir:
+**Mid Uçurumu ve Danger/Secret Çıkıntıları**: Uçurum ağırlıkla mid'de yoğunlaşır; dar kenar çıkıntıları (B Danger, A Secret) atlama-kısayolu olarak kullanılır. Buradaki ölümler iki şekilde gelir:
 - Kenardan düşmek — yanlış hareket ya da yanlış util.
 - Kenar pozisyonda yakalanmak — arkanda kaçış yolu yok.
 
 Kenardan düşmen tekrarlanıyorsa kaçış rotanı planlamıyorsun demektir.
 
-**CT / Spawn Geçişleri**: Rotate sırasında geçmek zorunda kaldığın alanlar. Bu geçişlerde ölüyorsan iki sebebi var: lurk kontrolü yapmadın ya da rotate'e geç kaldın. Temizlemeden koşma.
+**A Site içi / B Site içi**: Site'ın içinde — girişten sonra ya da savunurken — ölüyorsan açık ortada duruyorsun demektir. A geniş: mesafeni koru, crossfire kur. B dar: util'e karşı köşe değiştir. Plant sonrası site içi pozisyon dersi Post-Plant bölümünde — özellikle uçurum kenarından uzak dur.
+
+**CT / Spawn Geçişleri**: Rotate sırasında geçmek zorunda kaldığın alanlar. Bu geçişlerde ölüyorsan iki sebebi var: lurk kontrolü yapmadın ya da rotate'e geç kaldın. Temizlemeden koşma. Rotate kararını erken ver — Abyss'te geç kalan rotate uçurumun etrafından dolanmak zorunda kalır, diğer haritalardan çok daha fazla zaman kaybedersin.
 
 ## 3. Saldırı Stratejileri — Pattern Mapping
 
 **Pattern 1: Default (2-1-2)**
 
-IF: Takım bilgi toplamadan direkt site'a giriyor — hiçbir şey bilmeden execute başlatıyorsunuz.
+IF: Takım düşmanın yerini öğrenmeden direkt site'a giriyor — hiçbir şey bilmeden execute başlatıyorsunuz.
 MEANING: Rakibin nerede durduğunu bilmiyorsun. Stack'in üstüne düz giriyorsun. Bu karar değil, zar atmak.
-COUNTER: 2-1-2 ile aç. 2 kişi A Main'de bilgi toplar, 1 kişi Mid'i tutar, 2 kişi B Main/Lobby'de bilgi alır. Rakibin B'de tek kaldığı anlaşılınca commit et. Mid'deki oyuncu split yönüne geçer.
+COUNTER: 2-1-2 ile aç. 2 kişi A Main'i yoklar, 1 kişi Mid'i tutar, 2 kişi B Main/Lobby'de bilgi alır. Rakibin B'de tek kaldığı anlaşılınca commit et. Mid'deki oyuncu split yönüne geçer.
 WHY: Abyss'te uçurum kenarları rakibe off-angle veriyor. Bilgi olmadan girdiğinde o açıdan ölürsün. 2-1-2 sana o bilgiyi verir.
 
 **Pattern 2: A Execute**
@@ -61,8 +68,8 @@ WHY: A site geniş. Util olmadan savunan her açıdan ateş açar. Smoke görü�
 
 IF: B Main'de birden fazla oyuncu aynı anda ölüyor — dar geçişte yığılma var.
 MEANING: B Main Abyss'in en dar girişlerinden. Aynı anda girince savunan tek spray'le hepinizi biçer.
-COUNTER: Stagger gir — ilk oyuncu flash'la girer, ikincisi ilk duel bitmeden girmez. Smoke: B Site + B Tower. B Link'ten split ekle, savunan iki açıyı aynı anda tutamaz. Spike: B Default. Post-plant: B Main + B Link crossfire.
-WHY: Dar geçişte savunan nişanını değiştirmek zorunda kalmıyor çünkü herkes aynı görüş hattını giriyor. Stagger ve split onu iki açıyla uğraşmaya zorlar.
+COUNTER: Sıralı gir — ilk oyuncu flash'la girer, ikincisi ilk düello bitmeden girmez. Smoke: B Site + B Tower. B Link'ten split ekle, savunan iki açıyı aynı anda tutamaz. Spike: B Default. Post-plant: B Main + B Link crossfire.
+WHY: Dar geçişte savunan nişanını değiştirmek zorunda kalmıyor çünkü herkes aynı görüş hattını giriyor. Sıralı giriş ve split onu iki açıyla uğraşmaya zorlar.
 
 **Pattern 4: Mid Kontrolü**
 
@@ -71,9 +78,9 @@ MEANING: Mid gitmişse rakip rotate hızını kendi belirler, split'ini engeller
 COUNTER: Round başında 1 oyuncu mid'e (Library/Catwalk hattına) smoke ya da flash gönderir. Mid alındıktan sonra split yönü belirlenir. Mid'de Op güçlü ama uçurum yakınında durma. Duvar gecikme ve kontrol için iyi bir seçenek.
 WHY: Mid'i tutan takım rakibin rotate süresini uzatır ve split açar. Mid gidince savunanlar rahatça stack yapar. Abyss'te mid kontrolü round temposunu belirler.
 
-**Pattern 5: Void/Edge Plays (Kenar Oynama)**
+**Pattern 5: Kenar Oyunu (Void/Edge)**
 
-IF: Uçurum kenarında pozisyon alıyorsun ama kaçış rotan yok — aynı hatadan sürekli ölüyorsun.
+IF: Uçurum kenarında pozisyon alıyorsun ama kaçış rotan yok — aynı hatadan yine ölüyorsun.
 MEANING: Kenar açısı güçlü ama tek bir duel'a kilitleniyorsun. Kaybedersen trade yok, takım 4v5'e düşüyor.
 COUNTER: Kenar pozisyon almadan önce kaçış yönünü belirle. Jett dash ya da Raze atlaması ile uçurum geçişini planlı entry olarak kullan. Takım arkadaşın senin kenar oyununu bilsin, trade pozisyonu alsın. Her round aynı kenarı oynama — okunduğun an değeri biter.
 WHY: Kenar, rakibin kontrol etmediği bir açı yaratır, ilk atış avantajı verir. Ama kaçış yoksa bu avantaj bir işe yaramaz.
@@ -85,7 +92,8 @@ WHY: Kenar, rakibin kontrol etmediği bir açı yaratır, ilk atış avantajı v
 IF: Her round aynı pozisyonda, A Tower'da duruyorsun — rakip açını tutup ilk atışta indiriyor.
 MEANING: A Tower güçlü bir yüksek-zemin pozisyonu (A Site'tan ascender ile çıkılır). Ama aynı yerde durursan rakip seni ezberler. Sana ulaşmadan kafasını oraya çevirip geliyor.
 COUNTER:
-- A Tower'dan kill aldığın roundun arkasından site seviyesine in. Rakip yukarı bakarken sen aşağıdan vurursun.
+- A Tower'dan öldürdüğün roundun arkasından site seviyesine in. Rakip yukarı bakarken sen aşağıdan vurursun.
+- Aynı pozisyonu arka arkaya iki round kullanma — üçüncüde rakip o açıyı önceden nişanlamış gelir, sen daha peek atmadan ölürsün.
 - Uçurum tarafı off-angle'ını sürpriz olarak kullan — varsayılan pozisyon yapma.
 - A Main'e agresif çık, ilk temas sonrası geri çekil.
 
@@ -96,13 +104,13 @@ WHY: Off-angle, rakip onu beklediği an işe yaramaz. Pozisyon değiştirirsen r
 **Pattern 2: B Site Savunma**
 
 IF: B Main'de agresif peek atıyorsun, erken ölüyorsun — site boş kalıyor.
-MEANING: B Main'de agresif oynamak kill fırsatı verir ama ölürsen B site tamamen açık kalır. Agresif peek atarken anchor rolünden vazgeçiyorsun.
+MEANING: B Main'de agresif oynamak öldürme fırsatı verir ama ölürsen B site tamamen açık kalır. Agresif peek atarken anchor rolünden vazgeçiyorsun.
 COUNTER:
-- B Tower'dan site kontrolünü bırakma. Önce anchor, sonra pick.
-- B Main'de erken aggression yerine sentinel util'i koy — tel ya da tuzak bilgiyi sana getirir.
+- B Tower'dan site kontrolünü bırakma. Önce anchor, sonra düello.
+- B Main'de erken agresiflik yerine sentinel util'i koy — tel ya da tuzak bilgiyi sana getirir.
 - B Nest'te off-angle oyna. Retake'e gelen rakip seni göremez.
 
-WHY: Kompakt site'larda anchor ölürse site düşer. B site'in sınırlı girişleri senin lehine — ama sadece sen hayattayken. B Main'den gelen tek bir kill, anchor rolünün sana verdiği site kontrolünden daha az değerli.
+WHY: Kompakt site'larda anchor ölürse site düşer. B site'in sınırlı girişleri senin lehine — ama sadece sen hayattayken. B Main'de öldürdüğün tek kişi, anchor rolünün sana verdiği site kontrolünden daha az değerli.
 
 ---
 
@@ -151,38 +159,9 @@ WHY: Kenar kontrol edilmezse tahmin edemediğin bir açıdan vurulursun. Kenarı
 - **Cypher**: Tel ile kenar geçişlerini izleyebilirsin ama haritanın açık alanları Cypher'i kısıtlıyor. Killjoy tuzağı kadar esnek değil. Yine de bilgi için oynayabilirsin.
 - **Sova**: Recon geniş alanda bilgi verir, molly / hasar oku post-plant'te işe yarar. Ama dikey oyun ve kenar mekaniği Sova'nın elini bağlıyor.
 - **Brimstone**: Post-plant molly'lerin güçlü, smoke hızlı gelir. Ama Viper bu haritada çok daha baskın — ikinci controller seçimi olarak kalırsın.
-- **Phoenix**: Flash'la girişe yardım eder, ult bilgi toplar. Ama haritanın geniş alanları Phoenix'in yakın mesafe kitini çok kısıtlıyor.
+- **Phoenix**: Flash'la girişe yardım eder, ult düşmanların yerini gösterir. Ama haritanın geniş alanları Phoenix'in yakın mesafe kitini çok kısıtlıyor.
 
-## 6. Rank Modülasyonu
-
-**Iron-Silver**: Abyss'te en büyük ölüm sebebin rakip değil, uçurum. Harita sınırlarını bilmiyorsun — ya kendin düşüyorsun ya da util'inle takım arkadaşını düşürüyorsun. Şu üç şeyi yap:
-- Her round ayaklarının nereye bastığını gör.
-- A Tower, B Tower, mid girişi arkası — bu üç pozisyona gir, başka yere gitme.
-- Mid kavgasına girme. Uzaktan bilgi ver, takımla birlikte hareket et.
-
-Kenar peek'lerini öğrenmene şu an gerek yok. Önce hayatta kal.
-
-**Gold-Plat**: Haritayı tanıyorsun ama mid kontrolünü atlıyorsun. Bu hata seni öldürüyor — mid'i kaybedersen rotate'i kaybediyorsun, rotate'i kaybedersen round'u kaybediyorsun. Şu üç şeyi düzelt:
-- Mid kontrolü her round zorunlu, opsiyonel değil.
-- Flash patladığı anda swing at, smoke girmeden önce atılmış olsun.
-- Execute'da herkes aynı anda hareket etsin — biri beklerken diğerleri girmesin.
-
-Kenar peek'ini her round değil, sürpriz pozisyon olarak kullan.
-
-**Diamond-Ascendant**: Okunuyorsun. Her round aynı kenar pozisyonu, aynı mid stratejisi — rakip seni ezberliyor. Şu üç şeyi değiştir:
-- Aynı pozisyonu arka arkaya iki round kullanma, üçüncüde rakip o açıyı önceden tutar ve sen daha peek atmadan seni vurur.
-- Rakip mid'i stack edince yön değiştir, o round zorlama.
-- Post-plant'te uçurum kenarında pozisyon alma. Güvenli crossfire kur.
-
-Eco round'da uçurum kenarı shotgun play'i deneme — risk yüksek, kazancın düşük.
-
-**Immortal+**: Her round kenar oynuyorsan rakip seni anti-strat'lar. Bunu kır: bir round Breach molly'sini ya da molly'yi kenara at, rakip düşer. Sonraki round rakip deny beklediği için kenar tekrar açılır. Bunu bilerek döngüye sok. Şu iki şeye odaklan:
-- Round-to-round uyum: önceki round ne yaptığını bil, aynısını yapma.
-- Rotate kararını erken ver. Abyss'te geç kalan rotate, uçurum etrafında dolanmak zorunda kalır — diğer haritalara göre çok daha fazla zaman kaybedersin.
-
-Timeout'u al, takımla o round kenar stratejisini konuş, sonraki round farklı çık.
-
-## 7. Koçluk Satırları
+## 6. Koçluk Satırları
 
 - "Abyss'te ayağın nereye basıyorsa o kadar değerlisin. Kenardan düştüğün her round rakibe bedava round veriyorsun."
 - "Mid'i verme. Mid'i kaybettiğin anda haritanın yarısını kaybedersin — rakip seni istediği yere böler, sen sadece tepki verirsin."
@@ -193,17 +172,17 @@ Timeout'u al, takımla o round kenar stratejisini konuş, sonraki round farklı 
 - "Spike kurulduktan sonra spike'ı uçurumdan uzağa koy. Defuse eden oyuncu tahmin edilebilir bir noktada durursa, sen crossfire kurarsın."
 - "Eco round'da uçurum kenarında shotgun tutmak cazip gelir — ama düşersen silahı hiç kullanamamış olursun. Riski hesapla."
 
-## 8. Callout'lar & Pozisyon Rehberi
+## 7. Callout'lar & Pozisyon Rehberi
 
 **A Tarafındaki Callout'lar**:
 - **A Main**: A site'a giden ana koridor. Saldıran tarafın ilk geçmesi gereken yer.
 - **A Security**: A Main ile site arasındaki güvenlik geçidi. Burası temizlenmeden execute başlatma.
 - **A Tower**: A site'in yüksek-zemin pozisyonu — A Site'tan ascender (yükseltici) ile çıkılır. Anchor için güçlü ama aynı pozisyonda çok durma — okunursun, işe yaramaz olursun.
 - **A Site**: Spike'ı koyduğun alan. Geniş ve açık — tek başına tutma, crossfire kur.
-- **A Bridge**: A site yakınındaki uçuruma açık ledge — spike buraya koyulabilir ama düşme riski var. Off-angle sürprizi için saklıyorsun, her round açma.
+- **A Bridge**: A site yakınındaki uçuruma açık çıkıntı — spike buraya koyulabilir ama düşme riski var. Off-angle sürprizi için saklıyorsun, her round açma.
 - **A Link**: Mid'den A site'a bağlanan geçiş. Split execute'un ikinci kolu olarak kullan.
 - **A Vent**: Kırılabilir kapılı A-mid bağlantısı. Açtığında rotate/flank açar.
-- **A Secret**: A tarafındaki dar atlama-kısayolu ledge'i. Sürpriz geçiş için, uçuruma açık.
+- **A Secret**: A tarafındaki dar atlama-kısayolu çıkıntısı. Sürpriz geçiş için, uçuruma açık.
 - **A Lobby**: A Main öncesi toplanma alanı.
 
 **B Tarafındaki Callout'lar**:
@@ -212,7 +191,7 @@ Timeout'u al, takımla o round kenar stratejisini konuş, sonraki round farklı 
 - **B Tower**: B site'in yüksek-zemin pozisyonu. Anchor ve retake için kullan.
 - **B Site**: Spike'ı koyduğun alan. Dar ve kapalı — util burada çok daha etkili.
 - **B Link**: Mid'den B site'a bağlanan geçiş. Split için kullan.
-- **B Danger**: B tarafındaki uçuruma açık dar atlama-kısayolu ledge'i. Off-angle ama risk yüksek — yanlış adım atarsan düşersin.
+- **B Danger**: B tarafındaki uçuruma açık dar atlama-kısayolu çıkıntısı. Off-angle ama risk yüksek — yanlış adım atarsan düşersin.
 - **B Nest**: Site'in arka/yüksek köşesi. Retake ve lurk için kullan.
 
 **Mid Bölgesi**:
@@ -230,20 +209,20 @@ Timeout'u al, takımla o round kenar stratejisini konuş, sonraki round farklı 
 
 **Pozisyon Kullanım Rehberi**:
 
-A site savunuyorsan: Round açılışında A Main/A Security'de bilgi al. İlk temas olduktan sonra A Tower ya da A Site seviyesine çekil. Aynı pozisyonda üst üste oturma — pozisyonu değiştir. A Bridge ledge'ini sürpriz olarak saklıyorsun, her round açma.
+A site savunuyorsan: Round açılışında A Main/A Security'de bilgi al. İlk temas olduktan sonra A Tower ya da A Site seviyesine çekil. Aynı pozisyonda üst üste oturma — pozisyonu değiştir. A Bridge çıkıntısını sürpriz olarak saklıyorsun, her round açma.
 
 B site savunuyorsan: B Tower'dan anchor oyna. B Main'i sentinel util'iyle izle, agresif peek atma. B Nest off-angle'ını retake için saklıyorsun — erken açarsan sürpriz değerini kaybedersin.
 
 Mid tutuyorsan: Duvar ya da smoke ile rakibi geciktir. Op varsa elinde, uçuruma mesafeni koru — peek sonrası geri çekilme yönün kapalı olmasın. Mid kavgasını kaybetsen bile bilgiyi takıma ver ve hayatta kal.
 
-## 9. Post-Plant Stratejileri
+## 8. Post-Plant Stratejileri
 
 **Pattern 1: A Site Post-Plant**
 
 IF: Spike A site'ta plant edildi, takım A Main'e yığıldı — tek açıdan izleme.
 MEANING: Savunanlar A Security ve A Link'ten retake atar. Tek açıdan beklersen, savunan tek bir smoke'la seni kör eder.
 COUNTER: A Main + A Link'te crossfire kur. A Tower'ı smoke'la — savunan yukarı çıkıp sizi ezmesin. Spike'ı uçurumdan uzağa plant et: defuse'a gelen oyuncu tahmin edilebilir bir noktaya gitmek zorunda kalır, crossfire'ın çalışır. Brimstone molly'si ya da Viper molly'si direkt spike üzerine.
-WHY: Crossfire, retake eden oyuncuyu aynı anda iki açıyı kontrol etmeye zorlar — o kararı veremez. Tek açı beklersen prefire'la düşersin.
+WHY: Crossfire, retake eden oyuncuyu aynı anda iki açıyı kontrol etmeye zorlar — o kararı veremez. Tek açı beklersen rakip o açıyı önceden nişanlar, sen göremeden ölürsün.
 
 **Pattern 2: B Site Post-Plant**
 
@@ -256,17 +235,17 @@ WHY: B site'in kapalı yapısı A'dan farklı çalışır. Molly ve yavaşlatma 
 
 IF: Post-plant'te uçurum kenarında off-angle pozisyon alıyorsun.
 MEANING: Kenar pozisyonu savunanın kontrol etmediği bir açı açar. Ama ölürsen trade alınamaz — silah uçuruma gider.
-COUNTER: Kenar pozisyonu yalnızca şu durumda kullan: takımdan en az bir oyuncu güvenli bir noktada crossfire kuruyor olsun. Tek başına kenar post-plant oynama — ölünce round biter. Bir kill aldıktan sonra hemen güvenli pozisyona çekil.
+COUNTER: Kenar pozisyonu yalnızca şu durumda kullan: takımdan en az bir oyuncu güvenli bir noktada crossfire kuruyor olsun. Tek başına kenar post-plant oynama — ölünce round biter. Birini öldürdükten sonra hemen güvenli pozisyona çekil.
 WHY: Post-plant'in tek amacı zamanı yemek ve defuse'u engellemek. Kenarda ölürsen silah da gider, trade da olmaz, takımın elinde hiçbir şey kalmaz. Crossfire + lineup ikilisi, kenar riskinden her zaman daha tutarlı sonuç verir.
 
-## 10. Ekonomi Stratejileri
+## 9. Ekonomi Stratejileri
 
 **Operator Ekonomisi**: Op Abyss'te çok güçlü — uzun görüş hattını her yerde. Op alan oyuncu mid'e gider, takım onun etrafında round planlar. Op'u uçurumdan düşürürsen para gider, round gider. Bunu yapma.
 
 **Force Buy Kararları**: Force buy'da B'ye rush at. B site kapalı — Spectre ve shotgun orada güçlü. A site'a force buy silahıyla girme, mesafe seni ezer.
 
-**Eco Round Stratejileri**: Eco'da mid'de Sheriff oyna. Kenar pozisyondan tek atışla kill alırsın. Judge ya da Bucky alıyorsan uçurum kenarına yaklaşma — silahı kullanamadan düşersin. Eco'nun amacı:
-- 1-2 kill al
+**Eco Round Stratejileri**: Eco'da mid'de Sheriff oyna. Kenar pozisyondan tek atışla öldürürsün. Judge ya da Bucky alıyorsan uçurum kenarına yaklaşma — silahı kullanamadan düşersin. Eco'nun amacı:
+- 1-2 düşman öldür
 - Silah topla
 - Tamamen yok olma
 
@@ -274,20 +253,20 @@ WHY: Post-plant'in tek amacı zamanı yemek ve defuse'u engellemek. Kenarda öl�
 
 **Save Round Disiplini**: Save round'da uçurum kenarına gitme. Düşersen silahı kaybedersin, save'in amacı kalmaz. Güvenli dur, gereksiz duel alma, round bitsin.
 
-## 11. Anti-Strat
+## 10. Anti-Strat
 
-**Rakip her round mid push yapıyorsa**: Duvar çek, üstüne smoke + molly koy. Duvara rağmen push devam ederse, duvarın arkasında molly ya da yavaşlatma beklet. Mid'de stack yap, ilk push'a bedavaya kill al. Rakip mid'den çekinmeye başlarsa mid agresyonunu bırak.
+**Rakip her round mid push yapıyorsa**: Duvar çek, üstüne smoke + molly koy. Duvara rağmen push devam ederse, duvarın arkasında molly ya da yavaşlatma beklet. Mid'de stack yap, ilk push'ta öne gireni bedavaya öldür. Rakip mid'den çekinmeye başlarsa mid agresyonunu bırak.
 
-**Rakip void kenarlarını sürekli kullanıyorsa**: Breach molly ve stun'ını kenar pozisyonlara gönder. Rakibi kenardan at ya da geri çekilmeye zorla. Molly ve yavaşlatma ile kenar pozisyonları kapat. Tuzak ya da teli kenar geçişine dik — bilgi gelince util gönder.
+**Rakip void kenarlarını her round kullanıyorsa**: Breach molly ve stun'ını kenar pozisyonlara gönder. Rakibi kenardan at ya da geri çekilmeye zorla. Molly ve yavaşlatma ile kenar pozisyonları kapat. Tuzak ya da teli kenar geçişine dik — bilgi gelince util gönder.
 
-**Rakip her round A rush yapıyorsa**: A Main/A Security'e util dök: flash + molly + slow. A Tower'da crossfire kur. A Main'e smoke at, push'u yavaşlat, trade al. Mid kontrolünü elinde tut — Mid'den A Link üzerinden rotate gelsin.
+**Rakip her round A rush yapıyorsa**: A Main/A Security'e util dök: flash + molly + yavaşlatma. A Tower'da crossfire kur. A Main'e smoke at, push'u yavaşlat, trade al. Mid kontrolünü elinde tut — Mid'den A Link üzerinden rotate gelsin.
 
 **Rakip B split yapıyorsa**: B Main'e sentinel util koy: tuzak + tel. Mid kontrolünü artır, split'in ikinci kolu oradan geliyor. B Tower'da anchor tut. B Main push'unu tek başına durdurmaya kalkma — util ile geciktir, rotate bekle.
 
-**Rakip agresif void plays yapıyorsa (Jett dash, Raze atlaması üzerinden entry)**: Kenar bölgelerini molly ve slow ile önceden kapat. Uçurumdan gelen entry'yi bekle — iniş noktasına crossfire kur. Killjoy molly'si ya da Cypher smoke'unu iniş noktasına göm. Rakip uçurumdan giremediğini görünce klasik entry'ye geçer — o zaman standart savunma kurulumuna dön.
+**Rakip uçurum üzerinden agresif giriyorsa (Jett dash, Raze atlaması ile entry)**: Kenar bölgelerini molly ve yavaşlatmayla önceden kapat. Uçurumdan gelen entry'yi bekle — iniş noktasına crossfire kur. Killjoy molly'si ya da Cypher smoke'unu iniş noktasına göm. Rakip uçurumdan giremediğini görünce klasik entry'ye geçer — o zaman standart savunma kurulumuna dön.
 
-**Rakip mid'e duvar çekiyorsa**: Duvarı erken kıracak util hazırla: Raze grenade ya da Breach molly'si. Duvar kırılınca push at — rakip duvara güvenip arkasında agresif durmuş olabilir. İstersen duvarı dikkate alma, diğer taraftan split yap. Duvar bir tarafı kapatırken diğer taraf açılır.
+**Rakip mid'e duvar çekiyorsa**: Duvarı erken kıracak util hazırla: Raze grenade ya da Breach molly'si. Duvar kırılınca push at — duvara güvenen rakip arkasında agresif yakalanır. İstersen duvarı dikkate alma, diğer taraftan split yap. Duvar bir tarafı kapatırken diğer taraf açılır.
 
-**Rakip Op mid'de dominant oynuyorsa**: Mid'e smoke at, Op'un görüş hattını kes. Flash'la salla, flash sonrası peek at. Jett dash ya da Raze atlamasıyla hızlı geç, Op'un scope açmasına fırsat verme. Op oyuncusu aynı açıyı tutuyorsa off-angle'dan peek at.
+**Rakip Op mid'de dominant oynuyorsa**: Mid'e smoke at, Op'un görüş hattını kes. Flash'la salla, flash sonrası peek at. Jett dash ya da Raze atlamasıyla hızlı geç, Op'un dürbün açmasına fırsat verme. Op oyuncusu aynı açıyı tutuyorsa off-angle'dan peek at.
 
-**Round-to-Round Uyum Prensibi**: Abyss'te anti-strat statik değil. Kenar oyununu kapattın, rakip kenarı bırakır. Bir sonraki round kenar tekrar açılır çünkü rakip artık deny beklemez. Aynı karşı hamleyi üst üste kullanma — rakip seni de okur, her round anti-strat'ı güncelle.
+**Round-to-Round Uyum Prensibi**: Abyss'te anti-strat statik değil. Kenar oyununu kapattın, rakip kenarı bırakır. Bir sonraki round kenar tekrar açılır çünkü rakip artık deny beklemez. Bu döngüyü bilerek kur: bir round Breach stun'ını ya da molly'yi kenara at — rakip ya düşer ya vazgeçer; sonraki round deny beklemediği için o kenar sana yeniden açılır. Aynı karşı hamleyi üst üste kullanma — rakip seni de okur, her round anti-strat'ı güncelle.

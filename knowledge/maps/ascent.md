@@ -1,10 +1,17 @@
+---
+patch: "13.00"
+verified: 2026-07-08
+---
+
 # ASCENT — Koçluk Rehberi
 
 ## 1. Harita Karakteri
 
 Ascent mid-merkezli bir harita. Mid'den hem A'ya hem B'ye doğrudan geçiş var — Catwalk ve Market bu iki yolu birbirine bağlıyor. Mid'i tutan takım haritanın her yerine rotasyon yapabiliyor. Saldırdığında mid'i almadan site'a yürürsen arkandan flank yersin. Savunurken mid'i kaptırırsan iki site aynı anda tehdit altına girer.
 
-Bu harita savunucuyu seviyor. A site'ta Heaven yüksekliği ve açık görüş var. B site'ta dar girişler ve Market bağlantısı crossfire kurmayı kolaylaştırıyor. Bu avantajı kırmak istiyorsan util kullan — kuru peek atarak site almaya çalışırsan round'u kaybedersin.
+Bu harita savunucuyu seviyor. A site'ta Heaven yüksekliği ve açık görüş var. B site'ta dar girişler ve Market bağlantısı crossfire kurmayı kolaylaştırıyor. Bu avantajı kırmak istiyorsan util kullan — utility'siz peek atarak site almaya çalışırsan round'u kaybedersin.
+
+Ascent'in imzası iki mekanik kapı: biri Garden'dan A site'a inen geçidi, diğeri savunma spawn tarafından B site'a giren arka geçidi kapatır. Kapı panelden açılıp kapanır, kurşunla kırılır — kırmak ses verir ve zaman yer, kırılan kapı o round geri gelmez. Kapıyı plana kat: savunmada erken kapatıp flank yolunu kes, saldırıda kapalı kapıya körlemesine execute atma — ya paneli ele geçir ya kırarken vereceğin sesi zamanlamana koy. Post-plant'te B kapısını kapatmak CT retake yolunu keser, bedava zaman kazandırır.
 
 Haritanın temposu mid kontrolüyle döner. Mid'i tutuyorsan bilgi senin elinde, rotasyon serbest. Mid'i bırakırsan her round kör oynarsın — karşı takıma bedava flank yolu ve bilgi vermiş olursun.
 
@@ -12,7 +19,7 @@ Haritanın temposu mid kontrolüyle döner. Mid'i tutuyorsan bilgi senin elinde,
 
 ### A Main
 
-A Main'de kuru peek atarsan, Heaven veya Generator'dan tutan biri seni kafadan vurur. Sebep basit: uzun koridorda vücudun tamamen açıkta. Mekanik sorunu yok — giriş sırasını bozuyorsun. Önce flash at, sonra smoke koy, sonra çık. Bu sırayı atlarsan canınla ödersin.
+A Main'de utility'siz peek atarsan, Heaven veya Generator'dan tutan biri seni kafadan vurur. Sebep basit: uzun koridorda vücudun tamamen açıkta. Mekanik sorunu yok — giriş sırasını bozuyorsun. Önce flash at, sonra smoke koy, sonra çık. Bu sırayı atlarsan canınla ödersin.
 
 ### B Main
 
@@ -20,7 +27,7 @@ B Main'de dar alanda yığılmak seni öldürür. Üçünüz aynı anda girmeye 
 
 ### Mid Top / Mid Courtyard
 
-Karşıda op olduğunu biliyorsun ve yine de kuru peek atıyorsun. Bu taktik hatası değil, karar hatası. Mid Top'a bilgisiz girme. Smoke at, flash koy — ya da tamamen farklı rotadan yürü.
+Karşıda op olduğunu biliyorsun ve yine de utility'siz peek atıyorsun. Bu taktik hatası değil, karar hatası. Mid Top'a bilgisiz girme. Smoke at, flash koy — ya da tamamen farklı rotadan yürü.
 
 ### Catwalk
 
@@ -28,7 +35,11 @@ Catwalk bir geçiş noktası, kamp yeri değil. Saldırıda: kontrol etmeden gir
 
 ### Market / B Link
 
-Retake'de Market'i clear etmeden geçersen arkandan vurulursun. Orada lurk eden biri varsa util olmadan geçmek ölüm demek. Her rotasyon öncesi Market'e util at ya da gözle kontrol et.
+Retake'de Market'i temizlemeden geçersen arkandan vurulursun. Orada lurk eden biri varsa util olmadan geçmek ölüm demek. Her rotasyon öncesi Market'e util at ya da gözle kontrol et.
+
+### Kapılar (A Garden / B Arka Geçit)
+
+Kapalı kapının arkasında sıkışıp ölüyorsan çıkış planın yoktu: kapı kapalıyken o yol yok say, rotanı ona göre kur. Kapıyı kurşunla kırarak açıyorsan o ses tüm site'a "geliyorum" der — kırdıysan bekleme, ya hemen bas ya tamamen vazgeç. Kapalı kapıya güvenip arkasında dikilme: kapı kırılır, sen hazırlıksız yakalanırsın.
 
 ## 3. Saldırı Stratejileri — Pattern Mapping
 
@@ -38,7 +49,7 @@ Retake'de Market'i clear etmeden geçersen arkandan vurulursun. Orada lurk eden 
 
 **MEANING:** Default'ın amacı tek bir şey: savunmanın nerede durduğunu anlamak. Mid'deki oyuncu en kritik kişi. Catwalk'ta hareket var mı? Market'ten ses geliyor mu? Bunu anlayıp takıma iletirsen execute kör olmaz — veriye dayanır.
 
-**COUNTER:** Mid oyuncun erken ölürse kör kalırsın. Savunma bunu bildiği için ya mid'e agresif peek atar ya da mid'i smoke'layıp her iki taraftan da gözünü kör eder. Mid oyuncusu agresif peek atmasın — görevi bilgi toplamak, kill almak değil.
+**COUNTER:** Mid oyuncun erken ölürse kör kalırsın. Savunma bunu bildiği için ya mid'e agresif peek atar ya da mid'i smoke'layıp her iki taraftan da gözünü kör eder. Mid oyuncusu agresif peek atmasın — görevi düşmanın yerini öğrenmek, öldürmek değil.
 
 **WHY:** Savunmayı üç noktaya yaymak zorunda bırakıyorsun. 3 kişiyi tek site'a yığarlarsa diğer taraf boş kalır, oraya execute edersin. Eşit dağılırlarsa util ile herhangi bir site'i açarsın.
 
@@ -80,9 +91,9 @@ En yaygın hata: smoke atıp flash beklemeden girmek. Savunucu smoke kenarında 
 
 **IF:** Takım mid kontrolünü almaya öncelik veriyor — Mid Top'tan bilgi alıp Catwalk veya Market'e ilerliyor.
 
-**MEANING:** Mid'i alan takım A Short üzerinden A site'a veya Market üzerinden B site'a split yapabilir. Bu esneklik savunmayı sürekli tahmin yapmaya zorlar. Mid kontrolü olmadan execute yaparsan savunma nereden geleceğini biliyor — tek boyutlu saldırı olur.
+**MEANING:** Mid'i alan takım A Short üzerinden A site'a veya Market üzerinden B site'a split yapabilir. Bu esneklik savunmayı her an tahmin yapmaya zorlar. Mid kontrolü olmadan execute yaparsan savunma nereden geleceğini biliyor — tek boyutlu saldırı olur.
 
-**COUNTER:** Top Mid'de op varsa oraya kuru peek atamazsın. Flash + swing ikilisi kullan ya da smoke ile op'un görüş hattını kapat. Mid'i aldıktan sonra takımla iletişim kur — sen Market'tesin ama takım hâlâ A Main'deyse yalnız kalırsın.
+**COUNTER:** Top Mid'de op varsa oraya utility'siz peek atamazsın. Flash + swing ikilisi kullan ya da smoke ile op'un görüş hattını kapat. Mid'i aldıktan sonra takımla iletişim kur — sen Market'tesin ama takım hâlâ A Main'deyse yalnız kalırsın.
 
 **WHY:** Mid'i kontrol eden taraf haritanın tamamına erişir. Mid'siz saldırı tek kapılı oda — savunma nereden geleceğini biliyor. Mid kontrolüyle saldırı üç kapılı oda — savunma hangisine bakacağını bilemez.
 
@@ -146,7 +157,7 @@ En yaygın hata: smoke atıp flash beklemeden girmek. Savunucu smoke kenarında 
 - Tek tek giriyorsunuz — post-plant tutan saldırgana sırayla duel veriyorsunuz.
 - Bilgisiz giriyorsunuz — spike nerede, kaç kişi site'ta bilmiyorsunuz.
 
-Retake öncesi bilgi topla: bot, recon, Fade recon'u. Sonra takım olarak aynı anda gir.
+Retake öncesi düşmanın yerini öğren: bot ya da recon at. Sonra takım olarak aynı anda gir.
 
 **WHY:** Post-plant tutan saldırgan senin nereden geleceğini biliyor ve ona göre durmuş. Tek yönden girersen tek açıya odaklanır, seni öldürür. Birden fazla yönden aynı anda girersen hangi yöne bakacağını seçmek zorunda kalır — o tereddüt senin avantajın.
 
@@ -156,11 +167,11 @@ Retake öncesi bilgi topla: bot, recon, Fade recon'u. Sonra takım olarak aynı 
 
 **Killjoy:** Killjoy'u Ascent'te oynuyorsan her iki site'i de tek başına tutabilirsin. Ult attığında site retake veya savunma senin lehine döner. Tuzak ile bot'u B Main ya da A Main'e koy — düşman nerede, anında öğrenirsin. Molly'i spike bölgesinin etrafına göm, plant pozisyonunu kapat. Killjoy yoksa savunmanda dev bir delik var, bunu bil.
 
-**Omen:** Ascent smoke ister ve Omen'in iki smoke'u hem attack execute hem de defense için yeterli. Flash'ı A Main veya B Main'e giren düşmanlara bas — dar koridorda kör kalan düşman bilgi toplamadan girer. Kaçış ile Heaven'a veya Market'e atla, pozisyonunu tahmin ettirme. Ult'unu fake veya rotate için kullan, round'u döndür.
+**Omen:** Ascent smoke ister ve Omen'in iki smoke'u hem attack execute hem de defense için yeterli. Flash'ı A Main veya B Main'e giren düşmanlara bas — dar koridorda kör kalan düşman önünü göremeden girer. Kaçış ile Heaven'a veya Market'e atla, pozisyonunu tahmin ettirme. Ult'unu fake veya rotate için kullan, round'u döndür.
 
 **KAY/O:** Killjoy'un tuzağını, bot'unu, Cypher'ın tellerini, Omen'in smoke'larını devre dışı bırak — execute aniden çok kolaylaşır. Flash ile girişi aç, molly'i post-plant veya alan tutmak için kullan. KAY/O olmadan attack oynarsan savunucunun tüm util'iyle teker teker uğraşmak zorunda kalırsın.
 
-**Cypher:** Catwalk, Market, A Short — hepsi dar, hepsi tele uygun. İki tel ile hem mid'i hem flank yolunu kapat, takımın iki ekstra göz kazanır. Kamerayı mid kontrolü için kullan, bilgi topla. Ult attığında retake öncesi düşmanların nerede durduğunu görürsün.
+**Cypher:** Catwalk, Market, A Short — hepsi dar, hepsi tele uygun. İki tel ile hem mid'i hem flank yolunu kapat, takımın iki ekstra göz kazanır. Kamerayı mid'e bakacak şekilde koy, düşmanın nereden geldiğini gör. Ult attığında retake öncesi düşmanların nerede durduğunu görürsün.
 
 **Jett:** A Main ve Mid Top uzun — op oynamak için biçilmiş kaftan. Dash ile agresif peek at, bilgi al, geri çekil. Ult ile A site Heaven'a beklenmedik açıdan çık. Haritanın açık alanlarında diğer duelistlerden mobilite olarak öndesin, op'u sen taşı.
 
@@ -168,7 +179,7 @@ Retake öncesi bilgi topla: bot, recon, Fade recon'u. Sonra takım olarak aynı 
 
 **Sova:** Recon'u mid'e veya site'a at, entry öncesi bot ile tarama yap. Ascent'in açık alanları Sova için iyi ama KAY/O onun util'ini devre dışı bırakabildiğinde Sova bir kademe geride kalır.
 
-**Fade:** Recon ve bot ile yakın mesafe bilgi toplama ve entry desteğinde Sova'dan güçlüsün. Ama Ascent'in uzun görüş hattını recon daha fazla alan görür — bu yüzden Sova'nın biraz gerisinde durursun.
+**Fade:** Recon ve bot ile yakın mesafe keşifte ve entry desteğinde Sova'dan güçlüsün. Ama Ascent'in uzun görüş hattını recon daha fazla alan görür — bu yüzden Sova'nın biraz gerisinde durursun.
 
 **Breach:** Molly ve stun ile savunucuları pozisyonlarından sök. Duvar yapısı bazı noktalarda util'ini güçlendirir ama harita genişledikçe Breach'in menzili kısa kalır.
 
@@ -180,53 +191,11 @@ Retake öncesi bilgi topla: bot, recon, Fade recon'u. Sonra takım olarak aynı 
 
 **Viper:** Duvarı ile mid'i kes veya site execute'ta geniş smoke aç. Ama Omen iki smoke veriyor ve çok daha esnek — bu yüzden Viper tercih listesinde aşağıda kalır.
 
-## 6. Rank Modülasyonu
-
-### Iron-Silver
-
-Util kullanmadan site'a giriyorsun — bu en büyük hatan. A Main'den kuru peek atıyorsun, B Main'de yığılıyorsunuz, mid'e hiç bakmıyorsunuz. Bunu bırak.
-
-Site'a girmeden önce en az bir util kullan:
-- Flash at, flash patladığı an gir.
-- Smoke at, smoke düştüğü an ilerle.
-
-Bu iki alışkanlık yerleşince ölüm oranın yarı yarıya düşer. Mid'i şu an öğrenmeye çalışma — önce bu otursun. Bir de şunu yap: crosshair'ini kafa hizasında tut, yerde değil. Spike kurulduktan sonra peek atmayı bırak — spike senin için çalışıyor, dur bekle.
-
-### Gold-Platinum
-
-Util atıyorsun ama zamanlaması yanlış. Flash atıyorsun, flash patlayıp sönüyor, sen sonra giriyorsun — savunucu çoktan pozisyon almış oluyor. Bu flash'in hiçbir faydası yok.
-
-Kural basit: flash patladığı an swing at, smoke düştüğü an gir. Takımca pratik edin:
-- Birisi "flash atıyorum" der.
-- Herkes aynı anda girer.
-
-Mid'e de artık adam at — her round en az biri mid'den bilgi çeksin. Ekonomiyi de birlikte yönetin: force buy veya eco kararını tek başına verme, takımla ver.
-
-### Diamond-Ascendant
-
-Temel becerilerin var ama tahmin edilir oldun. Aynı default'u üç round üst üste yapıyorsun, smoke'ları aynı yere atıyorsun, aynı noktadan giriyorsun. Düşman seni okuyor.
-
-Her round bir öncekinden farklı bir şey yap:
-- Düşman A'yı stack ediyorsa mid üzerinden B'ye split yap.
-- Düşman mid'e agresif çıkıyorsa mid'i smoke'la, direkt site execute yap.
-
-Retake'te de takımca hareket et: önce bilgi topla, sonra hep beraber gir — dağınık girme.
-
-### Immortal-Radiant
-
-Bu seviyede bireysel fark küçük. Farkı yaratan şey düşmanı okumak ve exploit etmek.
-
-Düşmanın pattern'ini takip et:
-- Her pistol round'da B rush yapıyorsa, üçüncü pistol'da B'yi stack et.
-- Mid'i her round smoke'luyorsa, smoke bittiği an agresif çık.
-
-Timeout'u doğru kullan — momentum kırmak için, skor farkı kapanmadan önce at. Anti-eco round'larda rahat durma: Sheriff headshot seni de öldürür. Harita veto kararını da takım kompozisyonuna göre ver — Ascent her zaman seçilmez, ne zaman veto edeceğini bil.
-
-## 7. Koçluk Satırları
+## 6. Koçluk Satırları
 
 1. Mid'i kontrol etmeyen takım Ascent'i kaybeder. Round başında bir göz at mid'e. Başka bir şey değil, sadece bunu yap.
 
-2. A Main'den flash atmadan, smoke koymadan çıkıyorsan karşı tarafa bedava kill veriyorsun. Her girişte, her round'da — istisna yok.
+2. A Main'den flash atmadan, smoke koymadan çıkıyorsan kendini karşı tarafa bedavaya öldürtüyorsun. Her girişte, her round'da — istisna yok.
 
 3. B Main'de birbirinizin üstüne yığılmayın. Aranda mesafe bırak. Yoksa savunucu tek spray'de ikinizi birden biçer.
 
@@ -234,41 +203,41 @@ Timeout'u doğru kullan — momentum kırmak için, skor farkı kapanmadan önce
 
 5. Retake'e tek tek girme. Önce bilgiyi topla, takımla aynı anda gir. Tek tek girersen post-plant bekleyen oyuncuya sırayla duel vermiş olursun.
 
-6. Mid'deki görevin frag değil, bilgi toplamak. Agresif peek atıp ölürsen iki site aynı anda açık kalır.
+6. Mid'deki görevin öldürmek değil, düşmanın yerini takıma söylemek. Agresif peek atıp ölürsen iki site aynı anda açık kalır.
 
 7. Post-plant'te spike senin için çalışıyor. Peek atma. Pozisyonunda kal, spike patlasın.
 
 8. Ekonomi takımın kararı. Takım force buy yaparken sen tek başına full buy yaparsan o round hem kendi hem de takımın round'unu yakarsın.
 
-## 8. Callout'lar & Pozisyon Rehberi
+## 7. Callout'lar & Pozisyon Rehberi
 
 ### A Site ve Çevresi
 - **A Main / A Lobby:** A site'e giden ana koridor. Burada yavaş yürü — op çekiyor, uzun görüş hattı var.
 - **A Short / Catwalk:** Mid'den A site'e inen dar yol. Split baskı için burası şart.
 - **Heaven / Rafters:** A site'in üstündeki yüksek pozisyon. Savunmanın A'daki en güçlü durma noktası — önce buraya util at, sonra gir.
 - **Hell:** Heaven'ın hemen altı. Heaven'dan düşülen ya da saklanılan alan.
-- **Generator / Gen:** A site içindeki büyük obje. Hem cover alırsın hem off-angle oynarsın.
-- **Wine / Tree:** A site'in arkası. Clutch ve retake için güçlü — ama orada kalmaya devam edersen tahmin edilirsin.
-- **Dice:** A site girişinin yanındaki küçük kutu. İçeri girerken arkasından cover al.
-- **Garden / Tree:** Catwalk'tan A site'e inen bağlantı bölgesi, savunma tarafına yakın. A Window buraya bakar. Mid kontrolünü aldıktan sonra A'ya split için buradan inersin. Burada durmak yok, geçmek var — A Window'dan tutan biri seni keser.
+- **Generator / Gen:** A site içindeki büyük obje. Hem siper alırsın hem off-angle oynarsın.
+- **Wine:** A site'in arkası. Clutch ve retake için güçlü — ama orada kalmaya devam edersen tahmin edilirsin.
+- **Tree / Window:** A site'a bakan pencere alanı. Garden'dan gelen bakışı buradan kesersin — savunmada güçlü bir geri açı. Saldırıda site'ı temizlerken pencereye bakmadan ilerleme.
+- **Dice:** A site girişinin yanındaki küçük kutu. İçeri girerken arkasını siper olarak kullan.
+- **Garden:** Catwalk'tan A site'e inen bağlantı bölgesi, savunma tarafına yakın; Tree penceresi buraya bakar. Mid kontrolünü aldıktan sonra A'ya split için buradan inersin — kapı kapalıysa bu yol yok, planını ona göre kur. Burada durmak yok, geçmek var: Tree'den tutan biri seni görür görmez vurur.
 
 ### B Site ve Çevresi
 - **B Main / B Lobby:** B site'e giden ana koridor. Dar ve kapalı — util olmadan dolu girme.
 - **B Lanes:** B Main girişindeki dar geçitler. Tel ve util için biçilmiş konum.
 - **Market / B Link:** Mid'den B'ye geçiş. Rotate da buradan, flank da buradan gelir — gözünü ayırma.
-- **Switch:** B site içindeki yüksek panel alanı. Savunmada buraya sahip olan B'yi kontrol eder.
+- **Switch:** B site içindeki yükselti — adını B kapısını açıp kapatan panelden alır. Savunmada burayı tutan hem B'yi kontrol eder hem kapı paneli elinin altındadır.
 - **Closet / Back B:** B site'in arka küçük odası. Clutch pozisyonu ama ilk bakılan yer orası — öngörülebilir.
-- **CT B / Defender Spawn B:** Savunmanın B'ye indiği yol. Rotate'ler buradan gelir.
-- **Boathouse:** B site yakınındaki alan. Callout olarak bilmen yeterli.
+- **CT B / Defender Spawn B:** Savunmanın B'ye indiği yol. Rotate'ler buradan gelir; B kapısı kapalıysa bu yol da kapalı demektir.
+- **Boathouse:** B Lobby yanındaki su kenarı odası. Savunma buradan B push'unun arkasına sarkar — execute öncesi bir kişi kapısına baksın, temizlemeden sırtını dönme.
 
 ### Mid
-- **Mid Top / Top Mid:** Mid'in savunma tarafı. Op görüş hattını — kapalı kapı yoksa kafanı çıkarma.
-- **Mid Bottom / Mid Courtyard:** Mid'in saldırı tarafı. Kapıyı aç, bilgi topla.
+- **Mid Top / Top Mid:** Mid'in savunma tarafı. Op görüş hattının tam sonundasın — smoke ya da flash olmadan kafanı çıkarma.
+- **Mid Bottom / Mid Courtyard:** Mid'in saldırı tarafı. Pizza ve Cubby köşelerini temizlemeden ilerleme.
 - **Pizza / Cubby:** Mid içindeki küçük saklanma köşesi. Bilgi almak için durulur, savaş için değil.
-- **Arches:** Mid'den A Short'a geçiş noktası. Buradan split baskı kurarsın.
 - **Mid Link:** Mid'den Market'e bağlanan geçit. B rotate buradan geçer.
 
-## 9. Post-Plant — Pattern Mapping
+## 8. Post-Plant — Pattern Mapping
 
 ### A Site Post-Plant
 
@@ -296,9 +265,9 @@ Timeout'u doğru kullan — momentum kırmak için, skor farkı kapanmadan önce
 
 **COUNTER:** Market'i kontrol eden taraf retake'in bir kolunu tamamen kapatır. Market çıkışına bir molly veya smoke at — savunucunun seçeneği yarıya düşer. Closet güçlü bir pozisyon ama tahmin edilebilir. Her round aynı yerde durma, yoksa savunucu seni bekliyordur.
 
-**WHY:** B site dar — bu post-plant'te senin avantajın. Savunucunun girmesi gereken her giriş noktası küçük ve kontrol edilebilir. Bir util ile dar girişi kapatırsın, savunucu içeri giremeden süre dolar. Molly, slow, smoke — bunları bu dar noktalara kullan, savunucuyu oyala.
+**WHY:** B site dar — bu post-plant'te senin avantajın. Savunucunun girmesi gereken her giriş noktası küçük ve kontrol edilebilir. Bir util ile dar girişi kapatırsın, savunucu içeri giremeden süre dolar. Molly, yavaşlatma, smoke — bunları bu dar noktalara kullan, savunucuyu oyala.
 
-## 10. Ekonomi
+## 9. Ekonomi
 
 ### Pistol Round (Round 1 ve Round 13)
 
@@ -312,13 +281,13 @@ Tek başına force buy yapma — takımın ekonomisini mahvedersin. Eco'da B rus
 
 ### Full Buy Yönetimi
 
-Op aldıysan hayatta kalmak zorundasın — ölürsen 4700 kredi gitti, bir sonraki iki-üç round etkilenir. Saldırıda op'u mid ya da A Main'de kullan, opening kill al. Savunmada Heaven ya da Top Mid'den tut. Agresif pozisyonlarda op ile ölme.
+Op aldıysan hayatta kalmak zorundasın — ölürsen 4700 kredi gitti, bir sonraki iki-üç round etkilenir. Saldırıda op'u mid ya da A Main'de kullan, ilk düşmanı sen öldür. Savunmada Heaven ya da Top Mid'den tut. Agresif pozisyonlarda op ile ölme.
 
 ### Bonus / Anti-Eco
 
 Anti-eco'yu hafife alma. Sheriff her zırhı deler, Classic sağ tık yakında seni öldürür. B Main ve Market'e gereksiz girme — eco takım orada seni bekliyor. A Main ve Mid Top gibi uzun hatlarda dur, mesafeni koru.
 
-## 11. Anti-Strat
+## 10. Anti-Strat
 
 ### Tekrar Eden Saldırı Desenlerini Okuma
 
@@ -329,6 +298,7 @@ Anti-eco'yu hafife alma. Sheriff her zırhı deler, Classic sağ tık yakında s
 **COUNTER:**
 - Devam edeceklerini düşünüyorsan o site'a 3 kişi yüklen, crossfire kur.
 - Değiştireceklerini düşünüyorsan normal dağıl ama önceki round'larda boş bıraktıkları site'a ekstra util hazırla.
+- Pistol round'ları da desen olarak say: rakip her pistol'de B rush attıysa, sonraki pistol'de B'yi stack et.
 - Her iki durumda da takıma "son 3 round A geldi, bu round X yapalım" de.
 
 **WHY:** Düşmanı kendi planına göre karşılarsın, düşmanın planına tepki vermezsin. Proaktif taraf her zaman öndedir.
@@ -343,7 +313,8 @@ Anti-eco'yu hafife alma. Sheriff her zırhı deler, Classic sağ tık yakında s
 
 **COUNTER:**
 - Mid'i erken smoke'la, içine tel veya bot koy — geçmek zorunda kalırlar, sen haber alırsın.
-- Ya da 2 kişiyle mid'e karşılık ver ve erken duel al. Mid'de ilk kill senin olursa saldırı planları çöker.
+- Ya da 2 kişiyle mid'e karşılık ver ve erken düello al. Mid'de ilk öldüren sen olursan saldırı planları çöker.
+- Rakip mid'i her round smoke'luyorsa zamanlamasını ezberle: smoke söndüğü an agresif çık, pozisyon almadan yakala.
 
 **WHY:** Mid'de ölen oyuncu takımını 4v5 bırakır, execute için yeterli sayı kalmaz. Bu riski görmek için mid'de erken bilgi alman gerekiyor.
 
@@ -353,7 +324,7 @@ Anti-eco'yu hafife alma. Sheriff her zırhı deler, Classic sağ tık yakında s
 
 **IF:** Düşmanda op oynayan biri var — özellikle A Main veya Top Mid'de duruyor.
 
-**MEANING:** Uzun hatlarda herkesi tek atar, kuru peek atarsan ölürsün.
+**MEANING:** Uzun hatlarda herkesi tek atar, utility'siz peek atarsan ölürsün.
 
 **COUNTER:** Üç seçeneğin var:
 - Görüş hattını smoke'la — op işlevsiz kalır.
@@ -371,7 +342,7 @@ Anti-eco'yu hafife alma. Sheriff her zırhı deler, Classic sağ tık yakında s
 **MEANING:** Saldırı rotalarını kısıtlıyorlar, bedava bilgi topluyorlar.
 
 **COUNTER:**
-- KAY/O varsa knife veya ult at — tüm sentinel util'i bir anda gider.
+- KAY/O varsa bıçağını ya da ult'unu at — tüm sentinel util'i bir anda gider.
 - KAY/O yoksa teker teker kır: Sova bot ile teli tetikle, Raze bot ile tuzağı yok et.
 
 **WHY:** Sentinel kurulumu kırıldığında geriye sadece silah kalır. Kurulumu bozmadan içeri girersen düşmana bedava bilgi verirsin. KAY/O bu yüzden Ascent'te çok güçlü — tek ult ile tüm kurulumu çökertir.

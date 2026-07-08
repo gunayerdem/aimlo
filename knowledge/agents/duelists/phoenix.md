@@ -1,3 +1,8 @@
+---
+patch: "13.00"
+verified: 2026-07-08
+---
+
 # AJAN: Phoenix
 
 ## 1. Rol Kimliği
@@ -5,21 +10,17 @@ Phoenix kadroda tek başına entry yapabilen ajan. Flash, ateş duvarı ve molly
 
 Takımda flash yoksa ya da uzun süre hayatta kalıp dövüşmek istiyorsan Phoenix al. Jett'ten farkın şu: kaçışın yok, ama kendini iyileştiriyorsun.
 
-Kimliğin üç şeye dayanır: flash disiplini, kendi becerinden HP kazanmak, ult ile risk almak.
+Kimliğin üç şeye dayanır: flash disiplini, kendi becerinden HP kazanmak, ult ile risk almak. Takım senden ilk teması kurmanı bekler: kendi flash'inle girersin, HP avantajıyla daha uzun dövüşürsün. Ult'u düşman yerlerini görmek ya da agresif giriş için kullanırsın — saklamazsın.
 
-## 2. Temel Sorumluluklar
-**Atak tarafında:**
-- Flash at, körlük bitmeden swing at
-- Ateş duvarıyla savunucunun görüş hattını kes, geçişi zorla
-- Ult aktifken site'a gir — bilgi topla, açıları temizle
+## Saldırıda Görevin
+- Flash at, körlük bitmeden swing at.
+- Ateş duvarıyla savunucunun görüş hattını kes, geçişi zorla.
+- Ult aktifken site'a gir — düşman yerlerini gör, açıları temizle.
 
-**Defansta:**
-- Agresif açıdan flash atıp peek kazan
-- Push başladığında ateş duvarını kapıya koy, zaman kazan
-- Uzun bekleme varsa molly'yi kendi üstüne koy ve HP doldur
-
-**Takım senden ne bekler:**
-İlk teması sen kurarsın. Kendi flash'inle girersin. Daha uzun yaşar, HP avantajıyla dövüşürsün. Ult'u bilgi toplamak veya agresif giriş için kullanırsın — saklamazsın.
+## Savunmada Görevin
+- Agresif açıdan flash atıp peek kazan.
+- Push başladığında ateş duvarını kapıya koy, zaman kazan.
+- Uzun bekleme varsa molly'yi kapak arkasında kendi üstüne koy ve HP doldur.
 
 ## 3. Sık Yapılan Hatalar
 1. **Takım arkadaşını flash'lemek** — Flash köşeyi döner, geniş bir alanı körleştirir. Atmadan önce takımının nerede olduğunu bil. Yönü sesle söyle: "sağ flash."
@@ -33,7 +34,7 @@ Kimliğin üç şeye dayanır: flash disiplini, kendi becerinden HP kazanmak, ul
 9. **Ateş duvarını kendi giriş yoluna koymak** — Duvar iki tarafı da keser ve görüşü bloklar. Takımın geçeceği koridora atarsan kendi entry'nizi yavaşlatırsın. Duvarı düşmanın açısına koy, sizin geçiş hattınıza değil.
 
 ## 4. Kalıp -> Anlam
-IF: Flash kullanıyorsun ama ilk kill oranın düşük
+IF: Flash kullanıyorsun ama ilk öldürme oranın düşük
 MEANING: Flash'in arkasından swing atmıyorsun ya da hep aynı açıdan atıyorsun, düşman alışmış
 COUNTER: Flash patlıyor — hemen çık. Swing flash patlamadan başlasın, sonra değil. Her round flash açını değiştir: önce sağ eğri, sonra sol, sonra farklı köşe.
 WHY: Geciken swing, körlüğü bitmiş düşmana atış yapar. Flash'in hiçbir değeri kalmaz.
@@ -41,7 +42,7 @@ WHY: Geciken swing, körlüğü bitmiş düşmana atış yapar. Flash'in hiçbir
 IF: Ult bitince hemen ölüyorsun
 MEANING: Ult'u koyduğun yer düşmanın bastırdığı veya tuttuğu bir nokta
 COUNTER: Ult'u kapağı olan, temizlenmiş bir yere koy. Yanında takım arkadaşın varsa daha iyi. Yoksa en azından düşmanın kolay ulaşamayacağı bir nokta seç.
-WHY: Dönüş noktan güvensizse ult'tan topladığın tüm bilgi ve kill değeri sıfırlanır.
+WHY: Dönüş noktan güvensizse ult'tan topladığın tüm bilgi ve öldürmeler boşa gider.
 
 IF: Hasarın yüksek ama HP'siz dövüşüyorsun
 MEANING: Dövüşler arasında molly kullanmıyorsun, her dövüşe yarı HP ile giriyorsun
@@ -53,15 +54,15 @@ MEANING: Flash yönünü söylemiyorsun ya da takımının nerede olduğuna bakm
 COUNTER: Flash atmadan önce sesle söyle: "sağ flash" veya "sol flash." Flash'i fırlatmadan önce mini haritaya bir bak.
 WHY: Takım arkadaşını körletmek sayısal üstünlüğü tersine çevirir.
 
-IF: Ult'ta çoklu kill alıyorsun ama round'u kaybediyorsun
-MEANING: Ult'u frag için kullanıyorsun, site almak için değil. Kill aldın, ama takım içeri giremedi.
-COUNTER: Ult'la site'a gir, iki-üç açıyı temizle, takım arkandan gelsin. Ult'un amacı alan açmak, frag değil.
-WHY: Kill ancak site kontrolüne ya da düşman becerilerini tüketmeye yol açarsa round kazandırır.
+IF: Ult'ta üst üste öldürüyorsun ama round'u kaybediyorsun
+MEANING: Ult'u öldürme sayısı için kullanıyorsun, site almak için değil. Öldürdün, ama takım içeri giremedi.
+COUNTER: Ult'la site'a gir, iki-üç açıyı temizle, takım arkandan gelsin. Ult'un amacı alan açmak.
+WHY: Öldürme ancak site kontrolüne ya da düşman becerilerini tüketmeye yol açarsa round kazandırır.
 
 IF: Kendi flash'ine bakıp körleniyorsun
 MEANING: Flash'i çok yakına atıyorsun ya da fırlattıktan sonra ona doğru ilerliyorsun — patladığında ekran senin de gözünde patlıyor
 COUNTER: Flash'i köşenin ötesine, kör etmek istediğin alanın üstüne at. Patlayana kadar arkanı dönük tut ya da köşeyi dönerken ekranını flash'in arkasında bırak. Patladıktan sonra çık.
-WHY: Kendi flash'in seni körleştirirse en kötü senaryodasın: hem sen körsün hem düşman körlükten çıkmış olabilir. Flash senin lehine değil, aleyhine çalışır.
+WHY: Kendi flash'in seni körleştirirse en kötü senaryodasın: hem sen körsün hem düşmanın görüşü çoktan açılmış olur. Flash senin lehine değil, aleyhine çalışır.
 
 IF: Ateş duvarını atıyorsun ama takımın geçemiyor / takımını yakıyorsun
 MEANING: Duvarı yanlış yere koyuyorsun — ya kendi giriş yolunuzu kapatıyor ya da takımın geçmesi gereken hatta oturuyor
@@ -106,7 +107,7 @@ WHY: Phoenix'in tek molly'si var; her round'u iyileşmeye harcarsan post-plant't
 
 **Fırsat penceresi:** Flash patlamasıyla düşmanın görüşünün açılması arasındaki an garantili ilk atış penceresi. Eğriyi değiştirince doğru tahmin edenler bile o anı kaçırıyor.
 
-**Tekrar düzeni:** 1. round sağ eğri, hemen swing. 2. round aynı köşede sol eğri. 3. round farklı köşeden sağ eğri. Her kill arasında kapak arkasına molly, bir sonraki dövüşe tam HP gir. Düşman 100 HP altındayken sen 150 HP ile giriyorsun.
+**Tekrar düzeni:** 1. round sağ eğri, hemen swing. 2. round aynı köşede sol eğri. 3. round farklı köşeden sağ eğri. Her öldürme arasında kapak arkasına molly, bir sonraki dövüşe tam HP gir. Düşman birikmiş hasarla dövüşürken sen her düelloya tam can + kalkanla giriyorsun.
 
 **Düşman adaptasyonu:** 4-5 round sonra önceden arkalarını dönmeye, flash menzilinin dışına çekilmeye ya da sen flash atmadan push atmaya başlarlar.
 
@@ -127,15 +128,7 @@ WHY: Phoenix'in tek molly'si var; her round'u iyileşmeye harcarsan post-plant't
 ### Duvarı yanlış koyduğunda
 "Duvarı kendi giriş yolunuza koydun, takım geçemedi. Duvar iki tarafı da kesiyor — onu düşmanın açısına koy, sizin koridora değil. Atarken 'duvar atıyorum, geçin' de ki takım zamanlamayı kaçırmasın."
 
-## 8. Rank Modülasyonu
-### Düşük Elo (Iron-Silver)
-Önce tek şeyi öğren: flash at, hemen çık. Flash'in hangi tarafa döndüğünü bil ve atmadan önce sesle söyle. Dövüşten çıkınca molly koy, HP doldur. Ult'u her açıldığında kullan — saklama.
-
-### Orta Elo (Gold-Diamond)
-Flash-swing'i refleks hale getir — düşünmeden yapıyor olmalısın. İki-üç haritada kilit görüş hattı kesen duvar noktalarını öğren. Ult'u takım arkadaşının yakınına, kapağı olan bir yere koy. Molly'yi ne zaman iyileşme ne zaman alan kontrolü için kullanacağını ayırt et.
-
-### Yüksek Elo (Ascendant-Immortal)
-Düşman arkasını dönmesin diye flash zamanlamasını her round değiştir. Ult girişini takım hareketiyle birleştir — sen gir, takım arkandan gelsin. Ateş duvarını sadece görüş kesmek için değil, düşmanı pozisyon değiştirmeye zorlamak için de kullan.
-
-### Elit (Radiant)
-Her round düşmanın flash'ine nasıl tepki verdiğini oku ve bir sonraki round'da farklı yap. Ult yerleşimini maksimum bilgi + güvenli dönüş için seç. 50 HP ile hayatta kalıp molly ile iyileşmek, ölüp tekrar satın almaktan daha değerli — her HP'yi koru.
+## Karşısında: Phoenix seni öldürdüyse
+- **Eğri flash + swing:** Phoenix flash'ı köşeden kıvırır ve patlamayla birlikte girer. Karşı-hamle: flash sesini duyduğun an arkanı dön, patlama biter bitmez geri dön — girişini senin körlük sürene ayarladı; erken toparlarsan ilk atış sende.
+- **Ateş duvarının içinden çıkış:** Duvar görüşü keser; Phoenix içinden canını doldurarak çıkar. Karşı-hamle: duvarın içine körlemesine sıkma — duvarın kenarını ya da çıkış ucunu hazır crosshair'le tut, duvardan çıktığı ilk an vur.
+- **Ultlu Phoenix dalışı:** Ult'la ölse bile başladığı noktaya geri döner. Karşı-hamle: ult bedenine mermi ziyan etme, geri çekilip trade pozisyonu kur — dönüş noktası sesle bellidir, oraya önceden nişanlan; döndüğü an düello senin şartlarında başlar.

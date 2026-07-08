@@ -58,7 +58,7 @@ Breach duvarın ardına vuran initiator. Flash'ı da, stun'u da, molly'yi de —
 
 **IF** Bütün util'i turun ilk saniyelerinde "bilgi almak" için atıyorsun
 **MEANING** Stun ve flash'ı erken harcıyorsun, asıl girişte elin boş kalıyor
-**COUNTER** Tek bir util'le yokla (örneğin uzaktan stun), gerisini gerçek giriş için sakla. Bilgi toplama turu başka, site açma turu başka — ikisini aynı util'le karıştırma.
+**COUNTER** Tek bir util'le yokla (örneğin uzaktan stun), gerisini gerçek giriş için sakla. Yoklama başka, site açma başka — ikisini aynı util'le karıştırma.
 **WHY** Breach'in değeri girişi açmakta. Util biterse takımın site'a utility'siz dalar, sen de elinde hiçbir şey olmadan ilk kurşunu yersin. Util zamanlaması kadar saklamak da beceridir.
 
 ## 5. Harita Etkileşimleri

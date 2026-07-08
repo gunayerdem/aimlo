@@ -64,7 +64,7 @@ Defuse kolay görünür ama çapraz açıyı çok daha rahat kurarsın. Rakip op
 
 Retake'e gelen rakip bir açıya girince ikinci oyuncu onu açığa düşürür.
 
-## POST-PLANT UTILITY KULLANIMI
+## POST-PLANT UTILITY PLANI
 
 ### Öncelik Sırası
 
@@ -118,7 +118,7 @@ Takımın siteyi kaptırdı, spike yerde. Retake edeceksin.
 
 - **Util'siz girme.** Flash + molly + smoke olmadan retake girişi başarısız biter.
 - **Birlikte gir.** Tek kişi retake yapmaz. 2+ kişi aynı anda girmeli.
-- **Önce bilgi topla.** Kamera, recon veya takım callout'uyla spike nerede, kaç rakip var, hangi açıdan tutuyorlar öğren. Bunu bilmeden site girişine yüklenme.
+- **Önce düşmanın yerini öğren.** Kamera, recon veya takım callout'uyla spike nerede, kaç rakip var, hangi açıdan tutuyorlar öğren. Bunu bilmeden site girişine yüklenme.
 - **Önce rakibi temizle, sonra spike'a git.** Rakipler hayattayken zaten defuse yapamazsın.
 
 ## HARİTAYA GÖRE POST-PLANT NOTLARI

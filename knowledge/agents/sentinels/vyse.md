@@ -1,7 +1,7 @@
 # AJAN: Vyse
 
 ## 1. Rol Kimliği
-Vyse tuzaklarla alan kapatan bir sentinel. Killjoy hasar verip geciktirir, Cypher bilgi toplar — Vyse ikisini birden yapar ama kendi tarzında: düşmanı kör eder, dikenle yavaşlatıp hasar verir, geçerse arkasına duvar dikip kaçışını keser. Tuzaklarını kapılarda, dar koridorlarda ve köşelerde kur — orada düşmanın etrafından dolaşma şansı yoktur. En büyük gücün şu: flash tuzağına bakmana gerek yok, gizli durur, sen tetikleyene kadar düşman varlığını bilmez.
+Vyse tuzaklarla alan kapatan bir sentinel. Killjoy hasar verip geciktirir, Cypher düşmanın yerini görür — Vyse ikisini birden yapar ama kendi tarzında: düşmanı kör eder, dikenle yavaşlatıp hasar verir, geçerse arkasına duvar dikip kaçışını keser. Tuzaklarını kapılarda, dar koridorlarda ve köşelerde kur — orada düşmanın etrafından dolaşma şansı yoktur. En büyük gücün şu: flash tuzağına bakmana gerek yok, gizli durur, sen tetikleyene kadar düşman varlığını bilmez.
 
 ## 2. Yetenek Seti
 - **Duvar Tuzağı (Q)** — 200 kredi, 1 şarj. Yere gizli bir tuzak göm; düşman üstünden geçince arkasında yıkılmaz bir duvar yükselir ve kısa süre durur. Hasar vermez — işi düşmanı bölmek, kaçışını veya geri çekilişini kesmek. Bir düşmanı içeri kapatıp ekibinden ayır, ya da push eden takımı ikiye böl.

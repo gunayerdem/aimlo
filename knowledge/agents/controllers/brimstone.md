@@ -1,3 +1,8 @@
+---
+patch: "13.00"
+verified: 2026-07-08
+---
+
 # AJAN: Brimstone
 
 ## 1. Rol Kimliği
@@ -6,20 +11,20 @@ Brimstone'un smoke'u en güvenilirisi. Sen smoke'u attığın an giriş açılı
 ## 2. Temel Sorumluluklar
 - Site girişinde üç smoke'u aynı anda at — girişi tek hamlede aç
 - Her haritada site başına molly noktalarını ezberle — rakibin defuse denemesini kes
-- Site girişinde takıma stim koy — yanındaki herkes ek ateş hızı ve hızla düelloya girsin
+- Site girişine ateş hızı bufunu bırak — üstünden geçen herkes düelloya ek ateş ve hareket hızıyla girsin
 - Ult'u kill için değil, bölge baskısı için kullan — spike konumuna göre at
 - Üç smoke'u birden harcama — birini geri alım veya ara hamle için sakla
 - Giriş temposunu sen belirle — sen smoke atmadan kimse kıpırdamaz
 
 ## 3. Sık Yapılan Hatalar
 - Girişte üç smoke'u birden yakıp geri alım için elinde hiçbir şey bırakmamak
-- Stim koymayı unutmak ya da takımın hiç geçmeyeceği bir yere koymak
+- Ateş hızı bufunu hiç kullanmamak ya da takımın hiç geçmeyeceği bir yere bırakmak
 - Ult'u kill umuduyla atmak — o bir bölge aracı, kafa avlama aracı değil
 - Molly'yi aktif çatışmada boşa yakmak, spike sonrası için saklamamak
 - Atak'ta çok geride durmak — smoke menzilin yetmez, öne çık
 - Molly noktası öğrenmemek — o zaman sadece smoke atıyorsun, Brimstone oynamıyorsun
-- Smoke'u takımın push'undan saniyeler önce atmak — duman çok uzun durmaz, sen daha içeri girmeden söner
-- Stim'i kendi üstüne atıp tek başına dövüşe girmek — stim takım aracı, yanında biri yokken değerinin yarısını kaybeder
+- Smoke'u takım hazır olmadan çok erken atmak — duman uzun durur ama sonsuz değil; rakip sönmesini bekleyip taze açıyla karşılar
+- Ateş hızı bufunu kendi üstüne bırakıp tek başına dövüşe girmek — o bir takım aracı, yanında kimse yokken değerinin yarısını kaybeder
 
 ## 4. Kalıp -> Anlam
 
@@ -38,10 +43,10 @@ Brimstone'un smoke'u en güvenilirisi. Sen smoke'u attığın an giriş açılı
 **COUNTER** Atak'ta defuse sesini duyduğun an spike'ın üstüne at. Savunmada rakip spike'ı basar basmaz spike konumuna vur — yer değiştirmek zorunda kalsınlar.
 **WHY** Ult spike zamanlamasına oturduğunda baskı yapar ve defuse'u kilitler. Spike'tan bağımsız attığında ult'u çöpe atarsın, rakip sadece bir adım yana kayar.
 
-**IF** Stim hiç koyulmuyor ya da her round kullanılmadan bitiyor
-**MEANING** Takımın giriş anında bedava ateş hızı ve hız avantajını masada bırakıyor
-**COUNTER** Takım push'a başlamadan önce giriş noktasına stim koy. Phantom veya Spectre tutan takım arkadaşın o ateş hızı ve ek hareket hızıyla düelloyu açık ara kazanır.
-**WHY** Stim'li takım dövüşe artı ateş hızı ve hareket hızıyla girer — bu kadar net bir avantajı atlamak round kaybettirir.
+**IF** Ateş hızı bufu hiç yere bırakılmıyor ya da her round kullanılmadan bitiyor (bu bloğu yalnız ölüm tipi/round geçmişi bunu gösteriyorsa kullan)
+**MEANING** Takımın giriş anında bedava ateş hızı ve hareket hızı avantajını masada bırakıyor
+**COUNTER** Takım push'a başlamadan önce giriş noktasına ateş hızı bufunu bırak. Phantom veya Spectre tutan takım arkadaşın o ateş hızı ve ek hareket hızıyla düelloyu açık ara kazanır.
+**WHY** Buflu takım dövüşe artı ateş hızı ve hareket hızıyla girer — bu kadar net bir avantajı atlamak round kaybettirir.
 
 **IF** Smoke'ların hafif kayıyor ya da kenarda küçük boşluk bırakıyor
 **MEANING** Smoke yerleşimin yeterince hassas değil
@@ -51,7 +56,7 @@ Brimstone'un smoke'u en güvenilirisi. Sen smoke'u attığın an giriş açılı
 **IF** Smoke'u erken atıyorsun, takım daha hazır değilken duman söndü ve giriş kapandı
 **MEANING** Smoke süresiyle takımının temposunu denkleştiremiyorsun
 **COUNTER** Smoke'u takım giriş noktasına dayandığı an at, saniyeler önce değil. Önce "girelim mi" çağrısını yap, smoke'u o çağrıyla aynı anda bas.
-**WHY** Senin dumanın kısa ömürlü — Viper duvarı gibi round boyu durmaz. Erken atarsan rakip dumanı bekler, sönünce taze açıyla seni karşılar. Smoke ile ayak birlikte gitmeli.
+**WHY** Duman uzun durur ama sonsuz değil — takım hazır olmadan atarsan rakip sönmesini bekleyip taze açıyla karşılar. Smoke ile ayak birlikte gitmeli.
 
 **IF** Site içine girdin ama smoke'ları sadece girişi kapatmak için kullandın, içerideki açıları açık bıraktın
 **MEANING** Smoke'u sadece "kapı" gibi görüyorsun, içerideki tehlikeli açıları kapatmıyorsun
@@ -64,22 +69,22 @@ Brimstone'un smoke'u en güvenilirisi. Sen smoke'u attığın an giriş açılı
 **WHY** Brimstone savunmada da retake controller'ı gibi oynar — smoke'la içeri kör girersin, savunucunun (artık atakçının) açısını kapatırsın. Erken yakarsan retake'i çıplak yaparsın.
 
 ## 5. Harita Etkileşimleri
-- **Bind**: En iyi haritalarından biri. Alan dar, smoke her şeyi örter. İki site için de molly noktaları güçlü ve oturmuş. Hookah ve showers gibi dar geçitler smoke yarıçapına tam oturur — tek smoke koca bir girişi kapatır. Teleport sesleri rotayı ele verir, smoke'u o bilgiye göre at.
-- **Fracture**: Güçlü seçim. Çift yönlü atak, anında atılan üçlü smoke'tan tam fayda görür. İki taraftan da aynı anda smoke atıp savunucuyu iki açı arasında sıkıştırırsın. Breach girişlerinde stim yüksek değer üretir.
-- **Split**: A ve B darboğazları tam smoke yarıçapına oturuyor. Dar mid ve site girişleri tek smoke'la kilitlenir. İki sitede de spike sonrası molly güvenilir — dar plant alanları molly'yle savunulması en kolay haritalardan.
-- **Sunset**: Mid kapılar ve B market anlık smoke'tan fayda görür. B site post-plant'te ult sert vurur — dar plant alanı ult yarıçapından kaçışı zorlaştırır.
-- **Ascent**: Oynanır ama güvenli pozisyondan derin açılara smoke ulaşmaz. Atak'ta öne çıkman şart. Açık mid yüzünden smoke menzilin sık sık yetmez — yakın mesafeden at.
-- **Breeze**: Harita çok büyük — smoke menzilin yetmiyor, açık alanlar yarıçapından geniş. C-tier, burada Viper tercih et.
-- **Haven**: Üç site, üç smoke şarjını zorlar. Hepsini birden kapatmak güç ama geri alım smoke'ları değer üretir. Üç site demek üç ayrı rotasyon demek — smoke'unu tek site girişine yığ, bölme. B-tier.
-- **Icebox**: Oynanır ama Viper'ın duvar + orb ikilisi burada açık ara daha iyi. Dikey açılar ve uzun hatlar senin kısa dumanını zorlar. B-tier.
-- **Lotus**: Çoğu smoke noktasına ulaşırsın ama dönen kapılar nokta çalışmasını zorlaştırır. B-tier.
+- **Bind**: En iyi haritalarından biri. Alan dar, smoke her şeyi örter; Hookah ve Showers gibi dar geçitleri tek smoke kapatır. Teleport sesleri rotayı ele verir — smoke'u o bilgiye göre at. Post-plant: B default plant'e Hookah tarafından güvenli molly at.
+- **Split**: A ve B darboğazları tam smoke yarıçapına oturur; dar mid ve site girişleri tek smoke'la kilitlenir. Post-plant: A default plant'e Screens gerisinden, Heaven'a maruz kalmadan molly at — dar plant alanları molly'yle savunması en kolay olanlardan.
+- **Sunset**: Mid kapılar ve B Market anlık smoke'tan fayda görür. Post-plant: B default plant'e Market tarafından güvenli molly at; dar plant alanı ult yarıçapından kaçışı da zorlaştırır.
+- **Fracture**: Çift yönlü atak anında atılan üçlü smoke'tan tam fayda görür — iki taraftan aynı anda smoke atıp savunucuyu iki açı arasında sıkıştırırsın. Giriş noktalarında ateş hızı bufu yüksek değer üretir.
+- **Ascent**: Oynanır ama güvenli pozisyondan derin açılara smoke ulaşmaz — atak'ta öne çık, yakın mesafeden at.
+- **Haven**: Üç site üç smoke şarjını zorlar — smoke'unu tek site girişine yığ, bölme; geri alım smoke'ları değer üretir.
+- **Icebox**: Dikey açılar ve uzun hatlar kısa menzilli smoke'unu zorlar — burada Viper'ın duvar + smoke ikilisi açık ara daha iyi.
+- **Breeze**: Açık alanlar smoke yarıçapından geniş, menzilin sık sık yetmez — burada Viper tercih et.
+- **Lotus**: Çoğu smoke noktasına ulaşırsın ama dönen kapılar nokta çalışmasını zorlaştırır.
 
 ## 6. Eşleşme Notları
 - **Viper'a karşı**: Senin smoke'un anında çıkar, Viper'ınki kalıcı duvar. Takım aynı anda push yaparsa senin smoke'un girişi hızlı açar; rakip rotasyon beklerken Viper duvarıyla görüşü keser.
-- **Agresif duelist'lere karşı**: Takım push'a kalkmadan önce giriş noktasına stim koy. Push başladıktan sonra koymaya kalkarsan geç kalırsın.
+- **Agresif duelist'lere karşı**: Takım push'a kalkmadan önce giriş noktasına ateş hızı bufunu bırak. Push başladıktan sonra bırakırsan geç kalırsın.
 - **Geri alımda**: Görüş hattın olmasa bile her mesafeden smoke atabilirsin — geri alımda smoke'u tam gereken noktaya anında oturtursun.
 - **Viper ile birlikte**: Breeze ve Icebox'ta ilk kapamayı Viper halleder, sen smoke'larını geri alım için saklarsın. Bu ikili çok güçlü.
-- **Recon yeteneklerine karşı (Sova/Fade/Skye)**: Rakip recon attığında smoke'unla bilgiyi kes — recon dronu/oku açtığında smoke duvarı görüşü keser, takımının nereye toplandığını gizlersin. Anlık smoke'un recon timing'ini bozar.
+- **Recon yeteneklerine karşı (Sova/Fade/Skye)**: Rakip recon attığında smoke'unla bilgiyi kes — recon dronu/oku açıldığında smoke duvarı görüşü keser, takımının nereye toplandığını gizlersin. Anlık smoke'un recon timing'ini bozar.
 - **Diğer smoke ajanlarına (Omen/Astra) karşı retake'te**: Onların duvarı kalıcı/uzaktan, seninki anlık ve yakın. Retake'te onlar dumanı önceden kuruyorsa sen son saniye smoke'la gerçek giriş anını gizle — okunamayan zamanlaman avantajın.
 
 ## 7. Oyuncuya Ne Söylenmeli
@@ -91,16 +96,16 @@ Brimstone'un smoke'u en güvenilirisi. Sen smoke'u attığın an giriş açılı
 **Fırsat Penceresi:** Push'a kalkıp ikinci dumanı yiyince sipersiz kalıyorlar. Spike sonrası art arda iki molly defuse'u kilitler — savunucu spike'a yaklaşamaz, denemeleri boşa çıkar.
 **Tekrar Stratejisi:** Girişte iki smoke at, üçüncüyü yeniden kapama için sakla. Spike basıldıktan sonra molly noktasına geç, defuse sesini duymadan atma. Sonraki round'larda kapama noktanı değiştir — her round aynı yere atarsan rakip açı tutmaya başlar.
 **Düşman Adaptasyonu:** Savunucular yeniden kapama anını okumaya başlar; molly noktana önceden nişan alır ya da sen smoke atmadan agresyon yığar.
-**Karşı Adaptasyon:** Kapama zamanlamanı bozup at — her round farklı an, farklı nokta. Molly noktandan avlanıyorlarsa pozisyon ya da açı değiştir. Erken agresyon yapıyorlarsa stim koy ve dövüş — stim'li takım aceleci push'u her zaman yener.
+**Karşı Adaptasyon:** Kapama zamanlamanı bozup at — her round farklı an, farklı nokta. Molly noktandan avlanıyorlarsa pozisyon ya da açı değiştir. Erken agresyon yapıyorlarsa ateş hızı bufunu bırak ve dövüş — buflu takım aceleci push'u her zaman yener.
 
 ### Zorlandığında
-"Smoke'ları çok erken yakıyorsun. Ara hamle için en az birini sakla. Molly'yi aktif çatışmada değil, spike sonrasında defuse noktasına at. Smoke'u takım giriş ağzına dayandığı an at — saniyeler önce atarsan duman söner, çıplak girersin."
+"Smoke'ları çok erken yakıyorsun. Ara hamle için en az birini sakla. Molly'yi aktif çatışmada değil, spike sonrasında defuse noktasına at. Smoke'u takım giriş ağzına dayandığı an at — çok erken atarsan rakip sönmesini bekler, taze açıyla karşılar."
 
 ### Tahmin edilebilir olduğunda
 "Rakip molly zamanını çözmüş — her round aynı anda atıyorsun. Bir round spike basılır basılmaz at, sonraki round defuse sesini duyunca at. Zamanlamayı her round değiştir, seni okuyamasınlar. Smoke noktanı da kaydır — aynı dumandan her round aynı açıyı bekliyorlar."
 
-## 8. Rank Modülasyonu
-- **Iron-Silver**: Önce üç smoke'u doğru yere oturtmayı öğren. Nokta çalışması şimdilik şart değil — odak doğru yerleri dumanlamakta.
-- **Gold-Platinum**: Site başına 2 molly noktası öğren. Girişlerde stim koymaya başla. Savunmada geri alım için bir smoke sakla.
-- **Diamond-Ascendant**: Tam molly nokta kütüphaneni kur. Spike konumuna göre ult zamanlaması yap. Round boyunca smoke stoğunu bilinçli yönet.
-- **Immortal-Radiant**: Smoke zamanlamanı rakibin alışkanlığına göre kaydır. Molly anını okunamaz tut. Stim'i kendin için değil, en verimli takas noktasına koy.
+## 8. Bu Ajana Karşı
+- Brimstone smoke'u söndüğü an tempo sende — girişte üçünü birden yaktıysa yeniden kapatacak dumanı yoktur, sönme anında bas.
+- Post-plant molly'si ezber noktadan gelir — defuse'a oturmadan önce molly beklentisiyle bir adım kenarda dur; molly tek şarj, yanarken çekil, biter bitmez sök.
+- Ult spike konumuna gelir — çemberi gördüğün an spike bölgesinden koşarak çık, içinde beklersen ölürsün; çember söner sönmez defuse'a geri dön.
+- Ateş hızı bufu yerdeki cihazdan yayılır — buflu push'u düz düelloyla karşılama; açıdan çekil, util'le yavaşlat, buf sönmüş takımı karşıla.

@@ -1,8 +1,16 @@
+---
+type: map
+map: pearl
+patch: "13.00"
+verified: 2026-07-08
+pool: "rotasyon-dışı — 13.00'da rekabetçi havuzdan çıktı"
+---
+
 # PEARL — Detaylı Strateji ve Analiz
 
 ## 1. Harita Karakteri
 
-- Pearl iki siteli, mid ağırlıklı bir harita. Teleporter yok, zip line yok, kapı yok. Burada her şey saf pozisyon ve stratejiyle dönüyor.
+- Pearl iki siteli, mid ağırlıklı bir harita. Işınlanma yok, ip yok, kapı yok. Burada her şey saf pozisyon ve stratejiyle dönüyor.
 - Mid Plaza haritanın kalbi. Plaza'yı tutan takım hem A Link hem B Link üzerinden iki siteye birden baskı kurar. Plaza'yı kaptırırsan tek yönlü oyuna mahkum kalırsın.
 - A tarafında A Art belirleyici. Art elinde değilse A Site'a girme — savunucu seni rahat bitirir. Art'ı aldıysan A Main'den temiz execute edersin. Art yoksa A'ya commit etme.
 - B tarafında B Main uzun bir hat sunar. Op varsa burada kralı oynar. B Hall ve B Screen ise site içinde off-angle tutar.
@@ -14,7 +22,7 @@
 
 **A Main Koridor**
 IF: A Main'e util atmadan düz yürüyerek giriyorsun ve ölüyorsun.
-MEANING: Savunucu koridorun sonuna çoktan nişan almış, seni bekliyor. A Main dar ve uzun — cover yok. Adımını atar atmaz tüm vücudun açıkta. Bu bedava kill.
+MEANING: Savunucu koridorun sonuna çoktan nişan almış, seni bekliyor. A Main dar ve uzun — siper yok. Adımını atar atmaz tüm vücudun açıkta. Bu bedava kill.
 COUNTER: Girmeden önce flash at, koridorun ortasına smoke koy. Smoke'un içinden geçerken koşma — yürü. Çıkışta trade pozisyonu al.
 WHY: Flash savunucunun reaksiyon avantajını sıfırlar. Smoke onu iki kötü seçenekle bırakır: ya smoke'a girer (yakın dövüşte avantaj sana geçer) ya da pozisyonunu terk eder. İkisi de senin lehine.
 
@@ -41,6 +49,24 @@ IF: B Link'ten rotasyon yaparken Mid'den gelen lurker'a yakalanıyorsun.
 MEANING: Mid bilgin yok. B Link, Mid Shops'tan beslenir. Mid'i tutmadan B Link'in temiz olduğunu sayamazsın. Dar geçitte lurker'a bedava kill veriyorsun.
 COUNTER: Rotasyon öncesi Mid'de bilgi al — kamera, recon ya da jiggle peek. B Link'e girmeden takım arkadaşına sor: "Mid temiz mi?" Bilgi yoksa util ile temizleyerek ilerle.
 WHY: Rotasyon geçitleri dar ve tahmin edilebilir — lurker için biçilmiş kaftan. Bilgiyle rotasyon yaparsan lurker'ın yerini önceden bilirsin, ya üstüne karşı util atarsın ya da başka yoldan dönersin.
+
+**A Dugout Anchor Ölümü (Savunma)**
+IF: Savunmada her round A Dugout'ta aynı köşede bekliyorsun ve execute başlar başlamaz util ile sökülüp ölüyorsun.
+MEANING: Dugout güçlü ama bilinen pozisyon. Saldırgan A Main'den girmeden önce flash ve molly'yi doğrudan Dugout'a atıyor — sen daha peek atamadan ölüyorsun.
+COUNTER: İlk util sesiyle Dugout'tan in; site seviyesinden ya da Flowers'tan ikinci açıyı tut. Dugout'a molly düştüyse orada direnme — o pozisyon bu round yandı. Dugout, Flowers ve site seviyesi arasında round round dön.
+WHY: Sabit anchor pozisyonu bir kez okununca util mıknatısıdır. Pozisyon değiştiren savunucu saldırganın util'ini boşa harcatır ve temiz açıdan vurur.
+
+**B Screen Sabit Anchor Ölümü (Savunma)**
+IF: B Screen arkasından her push'u tek başına karşılıyorsun ve B Main + B Link aynı anda gelince ölüyorsun.
+MEANING: Screen tek açıya karşı güçlü; iki girişli push'ta crossfire'ın ortasında kalıyorsun ve trade edecek takım arkadaşın yok.
+COUNTER: Push iki koldan gelince Screen'de direnme — B Tower'a ya da CT tarafına çekil, rotasyonla birlikte geri al. Çekilmeden önce kaç kişi ve hangi girişten geldiklerini söyle.
+WHY: Anchor'ın işi zaman kazanmak ve bilgi vermek. Screen'de ölüp site'ı sessiz teslim etmek retake şansını da götürür.
+
+**Mid Plaza Op Ölümü (Savunma)**
+IF: Plaza'da Op ile duruyorsun; öldüğünde takım hem Mid'i hem 4700'lük silahı kaybediyor.
+MEANING: Plaza Op'un en güçlü yeri ama trade'siz tuttuğunda flash + rush seni tek başına yakalar.
+COUNTER: Op'la Shops ya da Connector hattına yakın dur — bir peek, bir geri adım. Flash sesi duyunca scope'tan çık, çekil. Takım arkadaşın Connector'ı tutmuyorsa derin açı alma.
+WHY: Op'çu trade'siz öldüğünde rakip hem Mid'i hem ekonomik avantajı alır. Geri çekilme hattı olan Op'çu ölmez, pozisyon değiştirir.
 
 ## 3. Saldırı Pattern
 
@@ -83,9 +109,9 @@ WHY: Art'ı aldığında savunucunun A Main'e flank atma yolu kapanır. A Main p
 
 **A Site Savunma**
 IF: Saldırı tarafı A Main'e util döküp push atıyor.
-MEANING: A Dugout anchor olarak güçlü — hem yüksektesin hem cover'ın var. A Art'taki oyuncu kill alıp çekilebilir.
+MEANING: A Dugout anchor olarak güçlü — hem yüksektesin hem siperin var. A Art'taki oyuncu öldürüp çekilebilir.
 COUNTER: A Dugout'tan site'ı tut, util ile A Main push'unu yavaşlat. A Flowers off-angle'ı sürpriz olarak kullan — her round değil, arada bir. A Art'ta erken bilgi al ama ölme; bilgiyi ver, geri çekil.
-WHY: A site'in savunması yüksekliğe dayanır. Dugout'tan bakan adam saldırı tarafını yukarı bakmak zorunda bırakır. Ama Dugout'ta çok beklersen util ile flush ederler — pozisyon değiştir.
+WHY: A site'in savunması yüksekliğe dayanır. Dugout'tan bakan adam saldırı tarafını yukarı bakmak zorunda bırakır. Ama Dugout'ta çok beklersen util ile söküp atarlar — pozisyon değiştir.
 
 **B Site Savunma**
 IF: Saldırı tarafı B Main push ya da B Link split yapıyor.
@@ -108,7 +134,7 @@ WHY: Mid kontrolü A Link ve B Link'e erişimi belirler. Mid'i bırakırsan tek 
 
 **A-Tier (Güçlü Seçimler)**
 - **Fade**: Recon Mid'e gidince savunucunun yerini öğrenirsin, o bilgiyle karar verirsin. Bot ile A Art'ı temizle.
-- **Chamber**: Mid Plaza'ya Op otur, TP ile peek at, kill al, geri çekil. B Main'deki Op play bu haritanın en sağlam savunma noktalarından biri.
+- **Chamber**: Mid Plaza'ya Op otur, TP ile peek at, öldür, geri çekil. B Main'deki Op oyunu bu haritanın en sağlam savunma noktalarından biri.
 - **KAY/O**: Dar girişler flash olmadan açılmaz. A Art + A Main entry'de flash kullan. Ult site'a girince savunucunun util'i iptal olur, utility'siz entry imkânı doğar.
 - **Cypher**: A Art'a tel koyunca A Main push güvenli olur. Kamera ile Mid'i izle. Pearl'deki flank yolları dar ve net, Cypher bunları tek başına kilitler.
 - **Killjoy**: B site'in iki girişini tuzak + bot ile kapat. Ult B site retake'te ya da post-plant'ta round kazandırır.
@@ -118,54 +144,24 @@ WHY: Mid kontrolü A Link ve B Link'e erişimi belirler. Mid'i bırakırsan tek 
 - **Breach**: Stun duvarın arkasına geçer, savunucu pozisyondan kalkar. A Main ve B Hall bunun için biçilmiş kaftan.
 - **Jett**: Entry yapar ama haritanın dar yapısı dash'ın değerini düşürür. Chamber'ın TP'si burada Jett'in dash'ından daha güvenli.
 
-## 6. Rank Modulasyonu
-
-**Iron-Silver**
-Mid Plaza'yı yok sayıp her round A'ya 5 kişi doluyorsun — bir molly ya da grenade tüm takımı bitirir. Pearl'ün en klasik Iron-Silver hatası bu.
-
-- Mid'e bir adam gönder, bilgi al, sonra gir.
-- A Art'ı almadan A push atma.
-- B Main'de kontrolsüz geniş açıyla swing atma; jiggle peek ile bak, takımla beraber gir.
-
-**Gold-Platinum**
-Util kullanıyorsun ama sıra yanlış. Smoke atıyorsun, flash atmıyorsun — savunucu smoke'tan çıkınca seni hazırlıksız yakalıyor. Mid'e tek başına giriyorsun ve bedava ölüyorsun.
-
-- Önce flash at, sonra smoke, sonra gir.
-- Mid takım işi — solo deneme yapma.
-- Spike kurulduktan sonra açıkta durma, crossfire'a geç.
-
-**Diamond-Ascendant**
-Default'u doğru yapıyorsun ama Mid'den bilgi gelince harekete geçemiyorsun. Rakip o sürede rotate ediyor. A Dugout'ta da her round aynı noktada oturuyorsun — savunucu seni okur, açıyı önceden tutar.
-
-- Mid bilgisi gelince anında karar ver, bekleme.
-- Dugout, Flowers ve site seviyesi arasında pozisyon döndür.
-- Rakip 3 round üst üste aynı şeyi yapıyorsa fark et ve karşı plan üret.
-
-**Immortal+**
-Her round aynı default'u oynarsan rakip okur, karşı util ile cezalandırır. Mid-round tek bir karar bile fark yaratır — savunucu rotate eder, sen geç kalırsın.
-
-- Her yarıda en az 2 farklı execute planı kullan, tek pattern oynama.
-- Rakip A Link kullanıyorsa Mid'de 2 kişi tut ya da A Link'e util koy.
-- Fake execute yap, savunucunun nasıl rotate ettiğini gör, sonra karşı rotate et.
-
-## 7. Koçluk Satırları
+## 6. Koçluk Satırları
 
 - "Mid'i kim tutarsa Pearl'de round'u o yönetir. Mid'e bilgi göndermeden oraya dalıyorsan, kör oynuyorsun."
 - "A Main dar bir koridor. Flash atmadan, smoke koymadan giriyorsan, karşı tarafa bedava kill veriyorsun. Önce util, sonra gir. Her seferinde."
 - "A Art'ı almadan A push atma. Art'ı kaybedersen arkan açık — flank her an gelir."
-- "B Main'de ego peek atma. Op seni bekliyordur. Smoke at, jiggle peek ile bak, sonra takım olarak gir."
+- "B Main'de ego peek atma — orası Op açısı. Smoke at, jiggle peek ile bak, sonra takım olarak gir."
 - "Mid Plaza'yı kaybedince iki siteye birden split yiyorsun. Mid'i bırakma — util ile alanı kes, peek ile bilgi al."
 - "Post-plant'te açıkta durma. Pearl'de her site'in iki girişi var. Crossfire kur, savunucuyu iki açı arasına sıkıştır."
-- "Her round aynı execute'ı atıyorsan, rakip seni okumuştur. İkinci yarıda farklı bir şey dene — aynı planı iki kez oynamak Pearl'de ceza yedirir."
+- "Her round aynı execute'ı atıyorsan, rakip seni okumuştur. İkinci yarıda planı değiştir — aynı planı iki kez oynamak Pearl'de bedava ölüm yedirir."
 - "Retake'e aceleyle girme. Site'a util atmadan dalarsan, savunucu için bile intihar olan girişlere kendin giriyorsun."
 - "Savunmada her round pozisyonunu değiştir. Dugout'ta üst üste oturuyorsan, rakip bir sonraki round açını tutar."
 - "Eco round'da A Art'ta agresif Sheriff oyna. Art'ın dar yapısı one-tap'i kolaylaştırır — bu avantajı kullan."
 
-## 8. Callout'lar
+## 7. Callout'lar
 
 **A Tarafı**
 - **A Main**: A site'a giden ana koridor. Dar ve uzun, savunucu senden önce davranır. Entry buradan geçer.
-- **A Art**: Mid ile A Link arasındaki oda; A site'a buradan açılır. Pearl'e özgü kritik bölge. Flanker buradan gelir, gözünü aç.
+- **A Art**: Mid ile A Link arasındaki oda; A site'a buradan açılır. Pearl'e özgü kritik bölge. Flank buradan gelir, gözünü aç.
 - **A Dugout**: A site'in üstündeki yüksek nokta. Anchor buraya oturur, açı avantajı tam burada.
 - **A Flowers**: A site içindeki off-angle pozisyon. Her round deneme — savunucu bunu bekler, yanarsın.
 - **A Site**: Spike yeri. Kompakt, iki girişi var: A Main ve A Link.
@@ -194,12 +190,12 @@ Her round aynı default'u oynarsan rakip okur, karşı util ile cezalandırır. 
 - **CT Spawn**: Savunucu tarafının başlangıç noktası.
 - **T Spawn**: Saldırı tarafının başlangıç noktası.
 
-## 9. Post-Plant
+## 8. Post-Plant
 
 **A Site Post-Plant**
 IF: Spike A Default'a (kutuların arkası) plant edildiyse.
 MEANING: Savunucu A Main ve A Link'ten gelecek. İki girişi aynı anda tutamazlar — bu senin avantajın.
-COUNTER: Bir adam A Main'e bak, bir adam A Link'e bak — crossfire kur. A Dugout'u smoke'la; oradan site'ı okumaya çalışacaklar. Spike'ın üstüne molly at (molly ne varsa) — spike'ı göremeden defuse edemezler.
+COUNTER: Bir adam A Main'e bak, bir adam A Link'e bak — crossfire kur. A Dugout'u smoke'la; oradan site'ı okumaya çalışacaklar. Spike'ın üstüne molly at (elde ne varsa) — spike'ı göremeden defuse edemezler.
 WHY: Crossfire'da savunucu bir açıya odaklanır, diğer açıdan trade gelir. Üstüne atılan util defuse'u zorlaştırır ve round'u kapatma şansını sana verir.
 
 **B Site Post-Plant**
@@ -214,16 +210,16 @@ MEANING: Savunucu Mid'den döner ve seni beklemediğin bir açıdan yakalar. Mid
 COUNTER: Bir adam Mid'de kalsın, rotasyonu kessin. Sentinel util'ini (tel, tuzak) Mid geçişlerine koy — rotasyon gelince haberin olur. Mid'i tamamen bırakman gerekiyorsa en azından Link girişlerini smoke'la.
 WHY: Mid kimin elindeyse savunucu o takımın rotasyon yolunu kullanır. Mid'i kilitleyen taraf savunucuyu tek girişe mahkum eder, crossfire bozulmaz.
 
-## 10. Ekonomi
+## 9. Ekonomi
 
 **Op Ekonomisi**
-Pearl'de Op'un en sert olduğu yer Mid Plaza ve B Main. Savunmada Op'u önce al — Mid Plaza ya da B Main'de dur, haritanın en uzun görüş hattını sen tut. Chamber oynuyorsan TP'yi koy, peek at, kill al, geri çekil. Op'u kaybetme riskin sıfırlanır. Saldırıda Mid Top'tan Plaza'ya Op ile baskı yapabilirsin ama karşı tarafta da Op varsa trade olur, bunu göze al.
+Pearl'de Op'un en sert olduğu yer Mid Plaza ve B Main. Savunmada Op'u önce al — Mid Plaza ya da B Main'de dur, haritanın en uzun görüş hattını sen tut. Chamber oynuyorsan TP'yi koy, peek at, öldür, geri çekil. Op'u kaybetme riskin sıfırlanır. Saldırıda Mid Top'tan Plaza'ya Op ile baskı yapabilirsin ama karşı tarafta da Op varsa trade olur, bunu göze al.
 
 **Force Buy**
 Force buy'da en sağlam seçenek 5 kişiyle A Main rush. A Main dar — Spectre burada Vandal kadar öldürür. Flash, smoke, molly dök, hızlı gir. Dar koridor spray'ini güçlendirir, savunucunun uzun mesafe avantajını siler.
 
 **Eco Round**
-Eco'da A Art'a agresif Sheriff girişi Pearl'ün en iyi eco oyunudur. Art dar — one-tap çok kolay. İki kişi Art'a gir, kill alırsan silahı çal, round'a dön. Kill alamazsan bilgiyi ver, takım save eder.
+Eco'da A Art'a agresif Sheriff girişi Pearl'ün en iyi eco oyunudur. Art dar — one-tap çok kolay. İki kişi Art'a gir, öldürürsen silahını al, round'a dön. Öldüremezsen bilgiyi ver, takım save eder.
 
 **Bonus Round**
 Bonus round'da util harcama, silah avantajını koru. Rakip eco yapıyorsa üstüne gitme — pozisyonunda dur, onlar sana gelsin. Pearl'de bu round'da Mid bilgisi kritik; eco yapan takım rush atar, Mid'den yönü oku, hazır ol.
@@ -231,7 +227,7 @@ Bonus round'da util harcama, silah avantajını koru. Rakip eco yapıyorsa üst�
 **Vandal vs Phantom**
 Pearl ikisini de ödüllendirir. Mid Plaza ve B Main'de Vandal'ın one-tap'i öne çıkar. A Main ve B Hall gibi dar yerlerde Phantom'un spray kontrolü ve sessizliği işine yarar. Kendi tarzına göre seç.
 
-## 11. Anti-Strat
+## 10. Anti-Strat
 
 **Rakip Her Round Mid Push Yapıyorsa**
 IF: Rakip takım her round Mid Plaza'ya erken push atıyor ve Mid kontrolünü alıyor.
@@ -247,8 +243,8 @@ WHY: Art için savaşmak yerine tel ile bilgi al, smoke ile zaman kazan, flash i
 
 **Rakip B Rush Yapıyorsa**
 IF: Rakip takım 4-5 kişiyle B Main'e hızlı push atıyor.
-MEANING: B site'in geniş yapısına güveniyorlar, util dump ile hızlı entry planlıyorlar.
-COUNTER: B Hall'a util dump yap — tuzak, molly, smoke. B Hall dar, util etkisi katlanır. Rotasyonu hemen çağır, rush hızlı gelir.
+MEANING: B site'in geniş yapısına güveniyorlar, util yığarak hızlı entry planlıyorlar.
+COUNTER: B Hall'a util yığ — tuzak, molly, smoke. B Hall dar, util etkisi katlanır. Rotasyonu hemen çağır, rush hızlı gelir.
 WHY: Rush hıza dayanır. Yavaşlatıcı util o hızı kırar. Tek bir molly koridoru kapatır, tüm takımı etkiler. Tuzak gelirse rush tamamen durur.
 
 **Rakip Split Execute Yapıyorsa**
@@ -258,7 +254,7 @@ COUNTER: Mid'e 2 kişi kilitle. Mid'i vermezsen split zaten mümkün olmaz. Vere
 WHY: Split gücünü iki açıdan girmesinden alır. Mid'i tutarsan o planın bir bacağını koparmış olursun. Mid'i tutamasan bile Link util'i zamanlama avantajlarını kırar.
 
 **Rakip Lurk-Heavy Oynuyorsa**
-IF: Rakip takımda biri sürekli lurk yapıyor, flank kill alıyor.
+IF: Rakip takımda biri sürekli lurk yapıyor, flank'tan öldürüyor.
 MEANING: Flank yollarını tutmuyorsun. Pearl'de A Art, Mid ve B Link flank yolu olarak kullanılır.
-COUNTER: Cypher ya da KJ şart. A Art'a tel, B Link'e tuzak ya da bot koy. Her round util'in yerinde olduğunu kontrol et — tetiklendiyse yeniden kur. Lurker hep aynı yoldan geliyorsa o yola util göm, cezalandır.
+COUNTER: Cypher ya da KJ şart. A Art'a tel, B Link'e tuzak ya da bot koy. Her round util'in yerinde olduğunu kontrol et — tetiklendiyse yeniden kur. Lurker hep aynı yoldan geliyorsa o yola util göm — geçerken ölsün.
 WHY: Lurk bilgi boşluğuna dayanır — takım site'a odaklanırken arkayı kimse tutmaz. Sentinel util o boşluğu kapatır. Lurker ya util'i tetikler ya da başka yol arar — her iki durumda da etkisi düşer.

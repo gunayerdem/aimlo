@@ -54,7 +54,7 @@ NEDEN: ateş gücün düşmanla eşit ya da üstte — round'u nişanınla kazan
 ### Force Buy
 
 TAKIM ORTALAMASI: 2,200-3,500 arası
-NE ANLAMA GELİR: full alamıyorsun ama save de gereksiz olabilir.
+NE ANLAMA GELİR: full alamıyorsun ama save de şart değil.
 NE YAPARSIN: kayıp serine bak. 2. kayıptaysan force at, 3. kayıptaysan force daha da kârlı — kaybetsen bile 2,900 geliyor. 1. kayıptaysan save daha mantıklı.
 NEDEN: kayıp bonusu yüksekken force etmenin riski düşer — kaybetsen bile gelecek round full alırsın.
 

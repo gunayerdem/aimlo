@@ -88,7 +88,7 @@ Killjoy tek başına site tutan en güçlü ajandır. Botun bilgi getirir, ikinc
 - **Corrode**: Dar koridorlar ve sınırlı girişler yeteneğinin değerini ikiye katlar. Molly dar alanda kaçınılmaz hasar verir. Koridor kesişimlerindeki botun birden fazla açıya bilgi getirir.
 
 ## 7. Eşleşme Notları
-- **Raze** ile karşılaştığında dikkatli ol — botuyla senin botunu temizler, molly'leriyle botunu ve molly'ni güvenli mesafeden patlatır. Yeteneğini daha iç pozisyonlara al.
+- **Raze** ile karşılaştığında kurulumunu koru — botuyla senin botunu temizler, molly'leriyle botunu ve molly'ni güvenli mesafeden patlatır. Yeteneğini daha iç pozisyonlara al.
 - **Sova** ile karşılaştığında kurulumunu iki ayrı açıya yay — tek recon hepsini silemesin.
 - Rush kompozisyonlarına karşı güçlüsün — yeteneğini temizlemeye vakit bulamadan girerler.
 - Astra ya da Viper gibi yavaş site oturan takımları sert vurursun — alanı terk etmeden geçiş yapamazlar; ult'unu tam bu anda atarsan hepsini alandan söker, sıkışıp kalırlar.

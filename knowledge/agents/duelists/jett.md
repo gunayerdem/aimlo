@@ -1,14 +1,24 @@
+---
+patch: "13.00"
+verified: 2026-07-08
+---
+
 # AJAN: Jett
 
 ## 1. Rol Kimliği
-- Jett bir entry duelist. Senin işin belli: ilk açıyı al, ilk kill'i çıkar, dash'le çekil. Op'la agresif tutuş da senin sahanda.
+- Jett bir entry duelist. Senin işin belli: ilk açıyı al, ilk öldürmeyi çıkar, dash'le çekil. Op'la agresif tutuş da senin sahanda.
 - Takımın entry'ye ihtiyacı varsa ya da uzun açılarda Op taşıyacak biri lazımsa Jett seç. Patlama hasarı ve alan kapatma istiyorsan Raze daha iyi iş çıkarır. Site'a hızla dalıp boğmak istiyorsan Neon daha iyi.
 - Jett'in tek işi round'u açmak. Sen round kapatan duelist değilsin, round başlatan duelistsin.
 
-## 2. Temel Sorumluluklar
-- **Atak:** İlk peek'i dash veya zıplamayla sen at. İlk düelloyu kazan. Takımın için tehlikeli görüş hattını smoke'la kapat. Tam alımda uzun açıyı Op'la tut.
-- **Defans:** Op veya tüfekle beklenmedik bir açı tut, kill aldıysan dash'le çekil. Zıplamayla rakibin beklemediği yükseklikten gel. Erken bilgi al, sonra geri çekil.
-- **Takım senden ne bekliyor:** Atakta açılış kill'ini. Defansta agresif Op kill'ini. Lurk'ü değil, entry'yi.
+- Takım senden ne bekliyor: atakta açılış öldürmesini, defansta agresif Op öldürmesini. Lurk'ü değil, entry'yi.
+
+## Saldırıda Görevin
+- İlk peek'i dash veya zıplamayla sen at. İlk düelloyu kazan.
+- Takımın için tehlikeli görüş hattını smoke'la kapat. Tam alımda uzun açıyı Op'la tut.
+
+## Savunmada Görevin
+- Op veya tüfekle beklenmedik bir açı tut; öldürdüysen dash'le çekil.
+- Zıplamayla rakibin beklemediği yükseklikten gel. Erken teması sen kur, sonra geri çekil.
 
 ## 3. Sık Yapılan Hatalar
 1. **Dash'i kaçmak için yakmak** — Dash'i entry için sakla. Kaçarken harcadıysan site execute'unda dash'siz kalırsın.
@@ -16,31 +26,31 @@
 3. **Hep aynı yerden dash atmak** — İki kez aynı noktadan çıktıysan üçüncüde o açıyı önceden tutup seni bekliyorlar. Ya açıyı ya zamanı değiştir.
 4. **Bıçakları sağ tıkla spam'lemek** — Orta mesafede sol tık daha güvenli. Sağ tık'ı yakın mesafeye sakla.
 5. **Smoke'u sadece kendine atmak** — Smoke'un kısa, onu takımın geçişine at. Kendini kapatmak için harcama.
-6. **Dash cooldown'dayken Op tutmak** — Dash hazır değilken Op açısı tutma. Iskaladığın anda ölürsün.
+6. **Dash hazır değilken Op tutmak** — Dash'i önce aktive etmen gerekir ve harcandıktan sonra ancak iki öldürmeyle yenilenir. Hakkın hazır değilken Op açısı tutma — ıskaladığın anda ölürsün.
 7. **Plant sonrası ortada kalmak** — Spike'ı diktikten sonra zıplamayla zor temizlenen bir yere çık. Aynı açıda kalma.
 8. **Dash'i takımdan kopuk, çok erken yakmak** — Tek başına site'a dalıp ölürsen takım hâlâ dışarıda kalır ve trade gelmez. Dash'ini takım girişiyle eşle, önünde 10 metre boşluk varken tek başına dalma.
 9. **Op iskaladıktan sonra Op'la inatlaşmak** — İlk Op atışını kaçırdıysan rakip artık üstüne kapanıyor. Op'u indirip tabancaya/tüfeğe geç ya da dash'le açıyı tamamen terk et, aynı yerde ikinci atış kovalama.
 
 ## 4. Kalıp -> Anlam
 IF: Atakta round açılışında sürekli ölüyorsun
-MEANING: Kuru peek atıyorsun, takım util'ini beklemiyorsun
+MEANING: Utility'siz peek atıyorsun, takım util'ini beklemiyorsun
 COUNTER: Önce bir flash ya da smoke gör, sonra dash at. Util'in yerine geçme, util'i takip et.
 WHY: Util'siz peek'te dash hızı sana hiçbir şey kazandırmaz — bilgin yok, ilk mermiyi sen yersin.
 
-IF: Atak round başına 0.5'in altında ilk kill alıyorsun
+IF: Atakta ilk öldürme nadiren senden geliyor
 MEANING: Entry yapmıyorsun, lurk'e kaçıyorsun
 COUNTER: İlk temasa sen geç. Lurk oynamak istiyorsan Jett'i bırak, başka ajan al.
 WHY: Jett'in tüm yetenekleri açılış için. Lurk Jett oynamak, takıma util'siz bir duelist bırakmaktır.
 
-IF: Skor tablonda kill çok ama ilk kill yok
+IF: Skor tablonda öldürme çok ama ilk öldürme yok
 MEANING: Round'u sen açmıyorsun, zaten kazanılmış round'u temizliyorsun
-COUNTER: Toplam kill'e değil, ilk düello kazanma oranına bak. Açılışı sen yap.
-WHY: Temizlik kill'i round'u çevirmez. Round'u açılış kill'i kazandırır.
+COUNTER: Toplam öldürmeye değil, ilk düello kazanma oranına bak. Açılışı sen yap.
+WHY: Temizlik öldürmesi round'u çevirmez. Round'u açılış öldürmesi kazandırır.
 
-IF: Defansta kill aldıktan sonra ölüyorsun
-MEANING: Dash'i kill'den önce yakmışsın ya da kill sonrası açıda kalmışsın
-COUNTER: Peek-kill-dash. Üç adım, bu sırayla. Dash kill'den önce yakılmaz.
-WHY: Defans Jett'i kill alıp yaşamak için var. Trade verirsen takımı 4v5'e düşürürsün.
+IF: Defansta öldürdükten sonra ölüyorsun
+MEANING: Dash'i öldürmeden önce yakmışsın ya da öldürme sonrası aynı açıda kalmışsın
+COUNTER: Peek - öldür - dash. Üç adım, bu sırayla. Dash öldürmeden önce yakılmaz.
+WHY: Defans Jett'i öldürüp yaşamak için var. Trade verirsen takımı 4v5'e düşürürsün.
 
 IF: Jett oynuyorsun ama Op almıyorsun
 MEANING: Op-Jett'in asıl değerini almıyorsun
@@ -50,7 +60,7 @@ WHY: Dash'li Op oyundaki en güvenli agresif Op'tur. Bunu kullanmıyorsan Jett'i
 IF: Dash atar atmaz, daha hiç bilgi yokken ilk düşmana koşuyorsun
 MEANING: Dash'i bilgi aracı değil, kör dalış aracı gibi kullanıyorsun
 COUNTER: Önce ses ve util'le düşmanın nerede olduğunu anla, sonra dash'i o açıyı kapatmak için kullan. Dash'i körlemesine değil, hedefe at.
-WHY: Dash bittiği an birkaç saniye sersemsin ve yön değiştiremezsin — yanlış yöne dash attıysan açık hedefsin, geri dönemezsin.
+WHY: Dash tek yönlü ve tek hak — yanlış yöne attıysan geri dönecek aracın kalmaz, açık hedefsin.
 
 IF: Entry'de ilk öldüğünde takım da geriden trade alamıyor
 MEANING: Takımdan çok önde dash atıyorsun, arkanda kimse yok
@@ -70,7 +80,7 @@ WHY: Smoke'un kısa süreli; erken attıysan tam geçişte zaten dağılmış ol
 ## 5. Harita Etkileşimleri
 - **Güçlü haritalar:** Ascent (A Short dash, Mid Op), Breeze (uzun açı = Op-Jett), Haven (C Long, A Short), Lotus (A Main, C Main dash açıları).
 - **Zayıf haritalar:** Fracture (çok açı var, dash dağılıyor, yakın dövüş bol), Pearl (dar koridor, dikey alan yok).
-- **Spesifik:** Ascent A Short dash'ini iki round sonra okurlar — üçüncüde zıplayarak çık ya da bekle. Breeze'de A sütunundan Mid'i Op'la sen kapat.
+- **Spesifik:** Ascent A Short dash'ini iki round sonra okurlar — üçüncüde zıplayarak çık ya da bekle. Breeze'de Mid Pillar'dan Mid'i Op'la sen kapat.
 - **Açık, uzun hatlar Jett'in evi:** Breeze ve Icebox gibi geniş, uzun görüş hattını haritalarda Op-Jett en güçlü; dash'le açıyı kapatır, kaçarsan dash'le geri çekilirsin. Dar, çok köşeli haritalarda (Pearl, Fracture, Split) dash daha az iş görür çünkü her köşede yakın dövüş seni bekler — buralarda Op'tan çok tüfekle entry'ye yaslan.
 - **Dikey alanı kullan:** Jett zıplamasıyla rakibin yere bakan crosshair'ini boşa düşürür. Yükseklik avantajı olan noktalarda (kutular, platformlar, üst geçişler) zıplama-entry'si en değerli; düşman seni göz hizasında beklerken sen üstten gelirsin.
 - **Smoke'unu giriş hattına göre planla:** Site execute'unda smoke'unu en tehlikeli tek açıyı (genelde uzun hat ya da arkadan bakan flank açısı) kapatmak için kullan, kendi geçişine değil. Kısa süreli olduğu için tam giriş saniyesine denk getir.
@@ -79,7 +89,7 @@ WHY: Smoke'un kısa süreli; erken attıysan tam geçişte zaten dağılmış ol
 - **Sana zor:** Chamber (Op'una Op'la cevap verir, tuzağı dash hattını yakalar), Cypher (teli dash hattını yakalar), Killjoy (botu dash yönünü ele verir).
 - **Sen baskılarsın:** Yerinde duran controller'lar — Viper, Brimstone. Hız ve yükseklikle kurulumlarını dağıt.
 - **Adaptasyon:** Karşıda çift sentinel varsa dash hattını her round değiştir, util'i atlamak için zıplamayı kullan. Karşıda agresif duelist varsa ilk düelloyu sen al, trade'e bırakma.
-- **Tutucu yetenekler dash'ini öldürür:** Düşman bir yere yapışkan tutucu (durdurma/yavaşlatma) attıysa o hatta dash atma — dash bittiği anda yakalanır, sersem ve hareketsiz kalırsın. Önce o açıyı temizle ya da başka hattan gir.
+- **Tutucu yetenekler dash'ini öldürür:** Düşman bir yere yapışkan tutucu (durdurma/yavaşlatma) attıysa o hatta dash atma — dash bittiği yerde yavaşlar ve tutulursun, hazır crosshair'in önünde hedefsin. Önce o açıyı temizle ya da başka hattan gir.
 - **Recon/bilgi yeteneklerine karşı zaman değiştir:** Düşman tarama/bilgi yeteneğiyle dash zamanını okuyorsa, hep aynı saniyede çıkma. Bilgi yeteneği patladıktan hemen sonraki boşlukta gir ya da bir an bekleyip çık — ritmini bozarsan okuyamazlar.
 
 ## 7. Oyuncuya Ne Söylenmeli
@@ -91,9 +101,9 @@ WHY: Smoke'un kısa süreli; erken attıysan tam geçişte zaten dağılmış ol
 **Tekrar planı:** Round 1-2: farklı yükseklik açıları. Round 3: zıplamalı entry. Round 4: dash'i bir an geciktir, peek'e dönenleri yakala. Arka arkaya aynı entry'yi tekrarlama.
 **Düşman adapte olunca:** Birkaç round sonra savunucular daha derinde oynar, site'ı yığar ya da senin zamanına util saklar.
 **Karşı adaptasyon:** Derinde oynuyorlarsa dash atma, açıları tek tek temizle. Yığılıyorlarsa bir site'a ses ver (smoke + ayak sesi), sonra diğerine git. Util saklıyorlarsa önce takım arkadaşına util çektir, sonra sen dash at.
-**Op-Jett notu:** Op'la uzun açıyı tutup kill alıp dash'le güvenli çekildiğin round'larda en yüksek değerini veriyorsun. Bu kalıbı tekrarla: tut-vur-dash, ardından açıyı değiştir.
+**Op-Jett notu:** Op'la uzun açıyı tutup öldürüp dash'le güvenle çekildiğin round'larda en yüksek değerini veriyorsun. Bu kalıbı tekrarla: tut-vur-dash, ardından açıyı değiştir.
 ### Zorlanırken
-"Kuru peek zorlama. Önce util'i gör, sonra dash at. Senin işin ilk kill, ilk ölüm değil."
+"Utility'siz peek zorlama. Önce util'i gör, sonra dash at. Senin işin ilk öldürme, ilk ölüm değil."
 "Dash'i hemen koşmak için yakma. Önce sesle ve util'le düşmanı bul, sonra dash'i o açıyı kapatmak için kullan."
 ### Öngörülebilir olduğunda
 "Dash açını önceden nişanlıyorlar. Yerini değiştir ya da bir an bekle, sonra çık."
@@ -101,12 +111,7 @@ WHY: Smoke'un kısa süreli; erken attıysan tam geçişte zaten dağılmış ol
 ### Op'u yanlış kullanırken
 "Op'u dar koridorda taşıma, orada yavaş kalırsın. Op'u uzun hatta tut; köşelerde tüfeğe geç."
 
-## 8. Rank Modülasyonu
-### Iron-Silver
-Jett entry'dir, lurk değil. Bunu kafana kazı. Temel dash-peek zamanlamasını çalış. Tüfekle rahat olmadan Op alma. Her harita için bir smoke yeri ezberle.
-### Gold-Diamond
-Dövüşe girmeden dash'inin cooldown'da olup olmadığını bil. Zıplamayı post-plant'a sok. Her harita için iki-üç Op açısı ve her birinin kaçış yolunu ezberle.
-### Ascendant-Immortal
-Entry zamanını round'dan round'a değiştir. Zıplamadan sonra havada asılı kalma — kısaca dokun. Dash'i takım flash'iyle eşle. Harita ya da komp Jett'e uymuyorsa başka ajan al.
-### Radiant
-Karşı takımın dash'ini ne zaman beklediğini oku. Bekledikleri round'da entry'yi taklit et, başka site'a git. Bıçakları doğru round'da harca, panikle atma. Zıplama zamanını rakibin önceki round'daki tepkisine göre kaydır.
+## Karşısında: Jett seni öldürdüyse
+- **Dash-peek girişi:** Jett dash'le açıyı bir anda kapatır. Karşı-hamle: dash sesini duyduğun an bir adım geri çekil ve crosshair'i dash'in bittiği noktaya kilitle — dash biterken Jett silahını yeni topluyor, ilk atışı sen yap.
+- **Op + dash kaçışı:** Jett Op'la tutar, öldürür, dash'le çekilir. Karşı-hamle: aynı açıya utility'siz ikinci kez çıkma — açıyı flash ya da smoke ile bozup geniş peek'le bas; dash'ini az önce harcadıysa bu baskında kaçışı yok.
+- **Zıplamayla üstten gelen Jett:** Göz hizasındaki crosshair onu ıskalar. Karşı-hamle: zıplama sesinde yukarı bak — havada yavaş ve isabetsiz bir hedef, en savunmasız anı iniş anı; yere değdiği noktayı vur.

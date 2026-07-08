@@ -2,7 +2,8 @@
 id: general_team_comp_library
 type: general
 topic: team-composition
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [comp, team-composition, meta, synergy, map-picks, counter-comp]
 ---
 
@@ -15,7 +16,7 @@ Comp kurmak "beş sevdiğin ajanı seç" demek değil. Rol dağılımı, haritay
 ## COMP KURMA İLKELERİ
 
 ### 1. Rol Dengesi
-Her takımda en az 1 duelist, 1 initiator, 1 controller, 1 sentinel olsun. Beşinciyi haritaya göre seç — ikinci duelist, ikinci controller ya da haritaya özel bir pick.
+Her takımda en az 1 duelist, 1 initiator, 1 controller, 1 sentinel olsun. Beşinciyi haritaya göre seç — ikinci duelist, ikinci controller ya da haritaya özel bir pick. Dört ana rol dolmadan üçüncü-dördüncü duelisti ekleme; duelist yığını round çalmaz.
 
 ### 2. Nasıl Kazanacağını Bil
 Comp'un kazanma yolu tek cümleyle söylenebilmeli: "hızlı execute", "util baskısı", "bilgi üstünlüğü" ya da "spike kurulduktan sonra kazan". Birini seç, geri kalan dört oyuncu o yola hizmet etsin.
@@ -27,17 +28,19 @@ Comp'ta spike sonrası iş gören en az bir util oyuncusu olsun: Brimstone molly
 Comp'ta en az bir bilgi ajanı şart: Sova, Cypher, Fade, KAY/O. Bilgi ajanın yoksa rakip B'den A'ya rotate ettiğinde bunu okuyamazsın, her seferinde geç kalırsın.
 
 ### 5. Haritaya Uyum
-Her ajan her haritada iş görmez. Viper Bind'ın dar koridorlarında duvardan değer çıkaramaz. Jett Breeze'in uzun hatlarında baskındır. Sage Split'te duvar olmadan mid açılmaz. Comp'u haritaya göre kur, ezbere değil.
+Her ajan her haritada iş görmez. Viper Bind'da B Long duvarıyla uzun geçişi tek başına kapatır. Jett Icebox'ın uzun hatlarında baskındır. Sage Split'te duvar olmadan mid açılmaz. Comp'u haritaya göre kur, ezbere değil.
 
 ---
 
 ## HARİTAYA GÖRE COMP REHBERİ
 
+Güncel rekabetçi havuz (patch 13.00): Ascent, Bind, Haven, Icebox, Abyss, Split, Summit, Sunset. Havuz dışına çıkan haritalar başlıklarında "rotasyon dışı" olarak işaretlidir.
+
 ### ASCENT
 
 **S-Tier: Jett / KAY/O / Sova / Omen / Killjoy**
 - Nasıl kazanır: Mid'den bilgi al, A Short'ta Jett'le Op tut, B'yi Killjoy ile kapat
-- Jett Op ağırlıklı oynar, KAY/O entry flash atar, Sova bilgi toplar, Omen smoke kurar, Killjoy B'yi tutar
+- Jett Op ağırlıklı oynar, KAY/O entry flash atar, Sova hatları tarar, Omen smoke kurar, Killjoy B'yi tutar
 - Zayıf tarafı: KAY/O ult'u yanlış atılırsa entry komple çöker
 
 **Double Controller: Omen / Harbor / Breach / Sova / Chamber**
@@ -46,7 +49,7 @@ Her ajan her haritada iş görmez. Viper Bind'ın dar koridorlarında duvardan d
 
 **Agresif: Raze / Neon / Breach / Omen / Cypher**
 - Nasıl kazanır: Tempo ve hızlı execute ile bastır
-- Zayıf tarafı: Default tur oyunu zayıf
+- Zayıf tarafı: Default round oyunu zayıf
 
 ---
 
@@ -55,11 +58,11 @@ Her ajan her haritada iş görmez. Viper Bind'ın dar koridorlarında duvardan d
 **S-Tier: Raze / Skye / Brimstone / Cypher / Viper**
 - Nasıl kazanır: Util yığını, spike sonrası molly dizisi ve TP baskısı
 - Raze giriş yapar, Skye flash atar, Brimstone spike sonrası molly döker, Cypher TP'leri izler, Viper B Long duvarını kurar
-- Zayıf tarafı: Viper Bind'ın dar koridorlarında duvardan değer çıkaramaz, başka haritalarda bırak
+- Zayıf tarafı: Tek duelist; Raze erken düşerse giriş yükünü taşıyacak kimse kalmaz
 
 **Double Duelist: Raze / Neon / Gekko / Omen / Killjoy**
 - Nasıl kazanır: Yakın mesafe hızı ve sürpriz push
-- Zayıf tarafı: Bilgi az, default tur zorlanır
+- Zayıf tarafı: Bilgi az, default round zorlanır
 
 **Double Controller: Omen / Harbor / Skye / Raze / Cypher**
 - Nasıl kazanır: Dar koridoru smoke ile kapat, geniş alan kontrolü kur
@@ -88,16 +91,29 @@ Her ajan her haritada iş görmez. Viper Bind'ın dar koridorlarında duvardan d
 
 **S-Tier: Jett / Sage / Breach / Sova / Cypher**
 - Nasıl kazanır: Mid'i al, util baskısıyla execute'ı garantile
-- Sage mid duvarını kurar, Breach B Main'i açar, Sova bilgi toplar, Cypher B'yi tutar
-- Zayıf tarafı: Tek controller, smoke biten oyuncunun turu zorlaşır
+- Sage mid duvarını kurar, Breach B Main'i açar, Sova keşifle tarar, Cypher B'yi tutar
+- Zayıf tarafı: Tek controller, smoke biten oyuncunun roundu zorlaşır
 
 **Double Controller: Omen / Viper / Breach / Jett / Killjoy**
 - Nasıl kazanır: Spike sonrası util üstünlüğü, Mid smoke ile Viper duvarı
-- Zayıf tarafı: Default tur yavaş
+- Zayıf tarafı: Default round yavaş
 
 **Agresif: Raze / Jett / Breach / Brimstone / Killjoy**
 - Nasıl kazanır: Tempo ile dar koridorda hızlı push
 - Zayıf tarafı: Bilgi az
+
+---
+
+### SUMMIT
+
+**S-Tier: Jett / Tejo / Omen / Killjoy / Sova**
+- Nasıl kazanır: Kırılabilir duvar panellerini kendi zamanlamanda kırıp yeni hat aç, açılan açıyı ilk sen tut
+- Sova açılan hatları tarar, Jett yeni açıda op tutar, Tejo molly'siyle geçişi bastırır, Killjoy arka alanı kilitler
+- Zayıf tarafı: Duvarı rakip kırarsa açı haritası bir anda değişir — kırılma sesinde tutulan her açı yeniden seçilmeli
+
+**Double Initiator: Sova / Tejo / Jett / Omen / Cypher**
+- Nasıl kazanır: Duvar kırılmadan önce ve sonra keşif üstünlüğü; hangi panelin kırıldığını ilk okuyan taraf rotasyonu kazanır
+- Zayıf tarafı: Tek controller, iki hattı aynı anda smoke'layamaz
 
 ---
 
@@ -118,7 +134,7 @@ Her ajan her haritada iş görmez. Viper Bind'ın dar koridorlarında duvardan d
 
 ---
 
-### BREEZE
+### BREEZE (rotasyon dışı — 13.00 havuzunda değil)
 
 **S-Tier: Jett / Sova / Viper / Cypher / KAY/O**
 - Nasıl kazanır: Uzun hatlarda Jett Op, Viper duvarı ve bilgi
@@ -127,7 +143,7 @@ Her ajan her haritada iş görmez. Viper Bind'ın dar koridorlarında duvardan d
 
 **Op İkilisi: Jett / Chamber / Sova / Viper / Killjoy**
 - Nasıl kazanır: Çift Op ile uzun hatları kilitle
-- Zayıf tarafı: Ekonomi ağır, pistol turda ikisi de tabancayla oynamak zorunda
+- Zayıf tarafı: Ekonomi ağır, pistol round'da ikisi de tabancayla oynamak zorunda
 
 ---
 
@@ -145,7 +161,7 @@ Her ajan her haritada iş görmez. Viper Bind'ın dar koridorlarında duvardan d
 
 ---
 
-### LOTUS
+### LOTUS (rotasyon dışı — 13.00 havuzunda değil)
 
 **S-Tier: Raze / Skye / Omen / Astra / Killjoy**
 - Nasıl kazanır: Üç site kapsamı, Astra ile harita geneli smoke ve Killjoy C tutucu
@@ -159,7 +175,7 @@ Her ajan her haritada iş görmez. Viper Bind'ın dar koridorlarında duvardan d
 
 ---
 
-### PEARL
+### PEARL (rotasyon dışı — 13.00 havuzunda değil)
 
 **S-Tier: Jett / Fade / Astra / Chamber / Harbor**
 - Nasıl kazanır: Mid kontrolü, util baskısı ve spike sonrası kazan
@@ -172,12 +188,12 @@ Her ajan her haritada iş görmez. Viper Bind'ın dar koridorlarında duvardan d
 
 ---
 
-### FRACTURE
+### FRACTURE (rotasyon dışı — 13.00 havuzunda değil)
 
 **S-Tier: Neon / Breach / Brimstone / Sova / Killjoy**
 - Nasıl kazanır: İki yönlü çıkış avantajını tempo ile kullan
 - Neon dash ile bölünmüş execute yapar, Breach B Main'de stun atar
-- Zayıf tarafı: Brimstone'un smoke sayısı kısıtlı, 10+ tur sonra her turda smoke eksiği çıkar
+- Zayıf tarafı: Brimstone'un smoke menzili haritanın iki ucundaki eş zamanlı baskıya yetişmez — rotasyonda smoke'suz kalırsın
 
 **Double Initiator: Breach / Sova / Neon / Omen / Killjoy**
 - Nasıl kazanır: Bilgi ve stun baskısı; Fracture'ın bölünmüş yapısına birebir uyar
@@ -194,11 +210,11 @@ Her ajan her haritada iş görmez. Viper Bind'ın dar koridorlarında duvardan d
 
 **Double Initiator: Breach / Sova / Omen / Jett / Cypher**
 - Nasıl kazanır: Bilgi ve kenar karşı oyunu
-- Zayıf tarafı: Tek controller, tur uzayınca smoke tükenir
+- Zayıf tarafı: Tek controller, round uzayınca smoke yetişmez
 
 ---
 
-### CORRODE
+### CORRODE (rotasyon dışı — 13.00 havuzunda değil)
 
 **S-Tier: Phoenix / Breach / Viper / Omen / Cypher**
 - Nasıl kazanır: Dar koridorda util baskısı
@@ -216,38 +232,38 @@ Her ajan her haritada iş görmez. Viper Bind'ın dar koridorlarında duvardan d
 
 ### Standart Comp (1-1-1-1-1)
 1 duelist, 1 initiator, 1 controller, 1 sentinel, 1 flex. Her haritada çalışır çünkü her rol boşluğu dolu.
-**Ne zaman oyna:** Çoğu harita, çoğu ranked tur.
+**Ne zaman oyna:** Çoğu harita, çoğu ranked maç.
 
 ### Double Duelist
 2 duelist ile hızlı execute ve tempo baskısı. Yakın mesafe haritalarda iş görür.
-**Ne zaman oyna:** Bind, Sunset, Split'in B tarafı, zorla tur ağırlıklı maçlar.
-**Zayıf tarafı:** Bilgi az, default tur zor.
+**Ne zaman oyna:** Bind, Sunset, Split'in B tarafı, force buy ağırlıklı roundlar.
+**Zayıf tarafı:** Bilgi az, default round zor.
 
 ### Double Controller
 2 smoke ile util baskısı ve spike sonrası meta. Dar koridorlu ya da çok siteli haritalarda güçlü.
-**Ne zaman oyna:** Haven, Lotus, Icebox, Corrode.
+**Ne zaman oyna:** Haven, Icebox, Abyss.
 **Zayıf tarafı:** Tempo yok, giriş yavaş.
 
 ### Double Initiator
 2 bilgi/stun oyuncusuyla bilgi üstünlüğü. Adaptasyon odaklı oyun.
-**Ne zaman oyna:** Haven, Breeze, Lotus — üç sitede ya da uzun hatlarda bilginin rotasyonu belirlediği haritalar.
+**Ne zaman oyna:** Haven, Abyss — üç sitede ya da uzun hatlarda bilginin rotasyonu belirlediği haritalar.
 **Zayıf tarafı:** Giriş zayıf, duelist kapasitesi az.
 
 ### Double Sentinel
 2 sentinel ile flank engeli ve retake hakimiyeti. Ağır savunma odaklı.
-**Ne zaman oyna:** Retake odaklı oyuncularla, alt ranklarda anchor eksiği varsa.
+**Ne zaman oyna:** Retake odaklı oyuncularla, takımda anchor eksiği varsa.
 **Zayıf tarafı:** Atak çok zayıf, tempo yok.
 
 ### Op Komp
 Çift Op (Jett + Chamber) ile uzun hat hakimiyeti.
-**Ne zaman oyna:** Breeze, Icebox gibi uzun hatların turu belirlediği haritalar.
+**Ne zaman oyna:** Icebox, Abyss gibi uzun hatların round'u belirlediği haritalar.
 **Zayıf tarafı:** Ekonomi ağır, pistol turda ikisi de tabancayla oynamak zorunda.
 
 ---
 
 ## RAKİP KOMP OKUMA
 
-Rakibin kompunu gördüğünde onu kullan. Karşı-komp rakibi görmezden gelmek değil — onların kazanma yolunu kesmek demek.
+Rakibin kompunu gördüğünde onu kullan. Karşı-komp rakibi görmezden gelmek değil — onların kazanma yolunu kesmek demek. Kompu kurmak değil, kompu okumak kazandırır.
 
 ### Rakip Double Controller İse
 - Util'ini erken harcatmak için hızlı execute zorla
@@ -268,13 +284,3 @@ Rakibin kompunu gördüğünde onu kullan. Karşı-komp rakibi görmezden gelmek
 - Farklı siteden baskı yap, sentinel util'ini harcatıp kurulumlarını boz
 - Util yığınıyla sentinel kurulumlarını kapat
 - Hızlı execute ile sentinel'e kurulum zamanı tanıma
-
----
-
-## RANK NOTU
-
-**Gold-Plat:** 4 duelist comp oynuyorsun ve round alamıyorsun. Dur. 1 duelist, 1 initiator, 1 controller, 1 sentinel — bu dört rol dolmadan comp yok. Beşinci rolü haritaya göre seç.
-
-**Diamond-Ascendant:** Comp kuruyorsun ama haritaya göre ayarlamıyorsun. Viper Bind'ın dar koridorlarında duvardan değer çıkaramaz. Jett Breeze'in uzun hatlarında baskındır. Chamber Fracture'da çabuk köşeye sıkışır. Haritayı seçtiğinde comp'u da ona göre değiştir.
-
-**Immortal-Radiant:** Rakip kompu gördükten sonra senin kompunun ona karşı nasıl oynayacağını bil. Rakip çift Op oynuyorsa smoke'u çoğalt. Rakip sentinel ağırlıklıysa her tur farklı siteden baskı üret. Kompu kurmak değil, kompu okumak kazandırır.
