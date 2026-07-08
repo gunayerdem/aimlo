@@ -725,10 +725,14 @@ export async function POST(request: NextRequest) {
     // ilgili bölümünü gösteren işaretçi eklenir. Sinyal yoksa boş → uydurma teşviki yok.
     const killerWeapon = reqBody.died === true ? extractKillerWeapon(reqBody.killerInfo) : null;
     const compArchetype = classifyCompArchetype(reqEnemyComp);
+    // GÜVENLİK: loadout kullanıcı-kontrollü — direktife HAM reqBody.loadout değil,
+    // yukarıda sanitizePromptInput'tan geçmiş ctx.loadout gömülür (max 30, tag/bidi
+    // temiz). killerWeapon zaten sözlük-bağlı (yalnız whitelist silah adı çıkar),
+    // compArchetype enum — ikisi injection taşıyamaz.
     const weaponCompDirective = buildWeaponCompDirective(
       killerWeapon,
       compArchetype,
-      typeof reqBody.loadout === "string" ? reqBody.loadout : undefined,
+      typeof ctx.loadout === "string" ? ctx.loadout : undefined,
     );
     if (weaponCompDirective) {
       console.log(`[Aimlo AI] weapon=${killerWeapon?.name ?? "-"} comp=${compArchetype ?? "-"}`);
