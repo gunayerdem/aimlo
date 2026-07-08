@@ -106,6 +106,30 @@ const POSITION_NAMES = [
   // ölüm-yeri halüsinasyonu — "a dish" listede yoktu, death-loc-absent guard
   // onu tanıyamıyordu). death_location-absent guard + repetition bunları tanısın.
   "a dish", "a rope", "a hall", "b tree", "b arcade", "b canteen",
+  // KB gece nöbeti denetimi (2026-07-08) — Fracture "A Dish" sınıfı boşlukların
+  // kalanı kapatıldı: KB harita dosyalarında geçen ama burada TANINMAYAN callout'lar
+  // (deathLocation-absent guard bunları süzemiyordu, Abyss/Ascent/Bind/Icebox/Haven
+  // ölümlerinde uydurma callout iddiası nötrlenemiyordu).
+  // Abyss:
+  "a security", "a tower", "a bridge", "a vent", "a secret", "b danger", "mid library",
+  // Ascent ("switch" bilinçli DIŞARIDA — İngilizce fiil olarak koç metninde
+  // geçebilir, yanlış-pozitif riski; bileşik "b switch" güvenli):
+  "closet", "boathouse", "dice", "mid courtyard", "b lanes", "b switch",
+  // Bind:
+  "a bath", "b hall", "triple box",
+  // Icebox:
+  "a belt", "nest", "pipes", "kitchen", "tube", "boiler",
+  "blue", "orange", "yellow", "green", "snowman",
+  // Haven:
+  "c link", "c platform",
+  // Lotus / Pearl / Split / Sunset kalanları (maps-3 denetimi):
+  "a ramp", "vents", "sewer", "pillar", "plaza", "dugout", "shops",
+  "connector", "club", "tunnel", "courtyard", "boba", "alley",
+  "a root", "b upper", "a stairs", "c hall", "tower", "ramp",
+  // Corrode gerçek callout seti (maps-2 denetimi, 2026-07-08 — corrode.md
+  // web-doğrulanmış isimlerle sıfırdan yazıldı; elbow/pocket/a yard/mid window/
+  // tower zaten listede):
+  "stairs", "top mid", "bottom mid",
 ];
 
 const REPETITION_KEYWORDS = [
@@ -391,8 +415,8 @@ const TRADE_CLAIM_PATTERNS: RegExp[] = [
 // Agent names for the killer-when-absent guard (2026-06-26 grounding audit).
 const AGENT_NAMES = [
   "Jett", "Raze", "Phoenix", "Reyna", "Yoru", "Neon", "Iso", "Waylay",
-  "Sage", "Killjoy", "Cypher", "Chamber", "Deadlock", "Vyse",
-  "Omen", "Brimstone", "Viper", "Astra", "Harbor", "Clove",
+  "Sage", "Killjoy", "Cypher", "Chamber", "Deadlock", "Vyse", "Veto",
+  "Omen", "Brimstone", "Viper", "Astra", "Harbor", "Clove", "Miks",
   "Sova", "Breach", "Skye", "Fade", "Gekko", "KAY/O", "Kayo", "Tejo",
   "Reay", // model/OCR garble of "Reyna" (canlı-test 2026-06-29) — yakala ki katil-guard onu da nötrlesin
 ];

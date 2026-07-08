@@ -239,7 +239,7 @@ export function loadKnowledge(task: TaskType, options: LoadOptions = {}): string
   if (map && (task === "feedback" || task === "report" || task === "critical-mistake")) {
     const mapSlug = map.toLowerCase().replace(/[^a-z]/g, "");
     const mapContent = loadFile(`maps/${mapSlug}.md`);
-    if (mapContent) sections.push(filterSectionsBySide(mapContent, side));
+    if (mapContent) sections.push(filterSectionsBySide(stripRankSections(mapContent), side));
   }
 
   // Agent knowledge — included for insight, feedback, report, critical-mistake, growth-plan
@@ -247,7 +247,7 @@ export function loadKnowledge(task: TaskType, options: LoadOptions = {}): string
     const agentFile = getAgentFile(agent);
     if (agentFile) {
       const agentContent = loadFile(agentFile);
-      if (agentContent) sections.push(filterSectionsBySide(agentContent, side));
+      if (agentContent) sections.push(filterSectionsBySide(stripRankSections(agentContent), side));
     }
   }
 
@@ -259,7 +259,7 @@ export function loadKnowledge(task: TaskType, options: LoadOptions = {}): string
       if (enemyFile && !loadedFiles.has(enemyFile)) {
         loadedFiles.add(enemyFile);
         const content = loadFile(enemyFile);
-        if (content) sections.push(content);
+        if (content) sections.push(stripRankSections(content));
       }
     }
   }
@@ -304,6 +304,15 @@ interface VisionKnowledgeResult {
    * block stays cached even when the map block is rewritten.
    */
   blocks: {
+    /**
+     * Block 0 — statik silah+komp rehberi (weapon-comp-compact.md). TÜM
+     * isteklerde AYNI içerik → en-kararlı prefix; policy bloğundan hemen sonra
+     * push edilir ki kullanıcılar/maçlar arası prompt-cache paylaşımı maksimum
+     * olsun. Round-bazlı BÖLÜM SEÇİMİ YAPILMAZ (yapılsaydı sistem bloğu her
+     * round değişir, arkasındaki ~65KB cache'ten düşerdi) — hangi bölümün
+     * kullanılacağını user-message'daki [SİLAH+KOMP İPUCU] işaretçisi söyler.
+     */
+    static?: string;
     agent?: string;
     map?: string;
     contextual?: string;
@@ -344,6 +353,27 @@ function stripKbWhitespace(content: string): string {
  * is conservative — it only acts on explicit keyword matches, so files without
  * clean splits get loaded fully (no risk of dropping useful content).
  */
+/**
+ * Rank-gating bölümlerini düşür (defense-in-depth, denetim 2026-07-08).
+ * softi'nin 2026-06-26 kararı: rank-tiering YASAK — herkes Radiant-derinlik alır.
+ * KB fix dalgası dosyalardaki "## Rank Modülasyonu" / "## Rank Notu" bölümlerini
+ * söküyor; bu filtre, gözden kaçan ya da İLERİDE eklenen bir rank bölümünün
+ * prompt'a sızmasını LOADER seviyesinde engeller (tipik istekte ~2.9KB tasarruf
+ * + "bu rankta bunu öğrenme" gating-dilinin çıktıya bulaşma riski kapanır).
+ * filterSectionsBySide ile aynı H2-bölme mekaniği.
+ */
+export function stripRankSections(content: string): string {
+  const rankHeader = /rank\s*(modülasyonu|modulasyonu|notu|başına|basina)/i;
+  const sections = content.split(/(?=^## )/gm);
+  const kept: string[] = [];
+  for (const section of sections) {
+    const headerMatch = section.match(/^## (.+)$/m);
+    if (headerMatch && rankHeader.test(headerMatch[1])) continue;
+    kept.push(section);
+  }
+  return kept.join("");
+}
+
 export function filterSectionsBySide(content: string, side?: string): string {
   if (!side || (side !== "attack" && side !== "defense")) return content;
 
@@ -378,6 +408,22 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
   const { map, agent, rank, enemyAgents, spikePlanted, economyType, side } = options;
   const files: string[] = [];
 
+  // ── Block 0: Statik silah+komp rehberi (istekten BAĞIMSIZ — en kararlı blok) ──
+  // killerInfo(silah)/loadout/enemyRoster verisi zaten geliyor ama KB'si hiç
+  // yüklenmiyordu (denetim 2026-07-08) → silah/komp-özel ders üretilemiyordu.
+  // Kullanım: user-message'daki [SİLAH+KOMP İPUCU] işaretçisi bölüm seçer.
+  let staticBlock: string | undefined;
+  {
+    const content = loadFile("general/weapon-comp-compact.md");
+    if (content) {
+      staticBlock =
+        `[SİLAH + KOMP REHBERİ — user message'daki [SİLAH+KOMP İPUCU] işaretçisinin ` +
+        `gösterdiği bölümü kullan; işaretçi yoksa bu rehberden ders çıkarma]\n` +
+        stripKbWhitespace(content);
+      files.push("general/weapon-comp-compact.md");
+    }
+  }
+
   // ── Block 1: Agent KB (most stable across matches — main agent rarely changes) ──
   let agentBlock: string | undefined;
   if (agent) {
@@ -386,7 +432,8 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
       const content = loadFile(agentFile);
       if (content) {
         // Side-filter agent file too: agents have "Saldırı" / "Savunma" usage sections.
-        const filtered = filterSectionsBySide(content, side);
+        // stripRankSections: rank-gating bölümleri loader'da düşer (defense-in-depth).
+        const filtered = filterSectionsBySide(stripRankSections(content), side);
         agentBlock = `[AGENT BİLGİSİ — ${agent}]\n${stripKbWhitespace(filtered)}`;
         files.push(agentFile);
       }
@@ -405,7 +452,7 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
     const mapPath = `maps/${mapSlug}.md`;
     const content = loadFile(mapPath);
     if (content) {
-      const filtered = filterSectionsBySide(content, side);
+      const filtered = filterSectionsBySide(stripRankSections(content), side);
       mapBlock = `[HARİTA BİLGİSİ — ${map}]\n${stripKbWhitespace(filtered)}`;
       files.push(mapPath);
     }
@@ -457,12 +504,13 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
     : undefined;
 
   // Joined content (backward-compat).
-  const allParts = [agentBlock, mapBlock, contextualBlock].filter(Boolean) as string[];
+  const allParts = [staticBlock, agentBlock, mapBlock, contextualBlock].filter(Boolean) as string[];
 
   return {
     content: allParts.join("\n\n---\n\n"),
     files,
     blocks: {
+      static: staticBlock,
       agent: agentBlock,
       map: mapBlock,
       contextual: contextualBlock,

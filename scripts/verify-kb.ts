@@ -7,6 +7,8 @@
 import * as fs from "fs";
 import * as path from "path";
 import { loadVisionKnowledge, loadKnowledge } from "../lib/knowledge-loader";
+import { DEATH_TYPE_GUIDE } from "../lib/death-type";
+import { BANNED_PHRASES } from "../lib/ai-policy";
 
 const KB = path.join(process.cwd(), "knowledge");
 let fail = 0, pass = 0;
@@ -68,6 +70,71 @@ try {
   const kb = loadVisionKnowledge({ map: "Summit", agent: "Raze", rank: "silver", side: "attack" });
   check("Summit vision map bloğu", !!kb.blocks.map && kb.blocks.map.includes("Mid Fountain"), "(Summit içeriği yok)");
 } catch (e) { check("Summit", false, `(throw: ${(e as Error).message})`); }
+
+// 6) DEATH-TYPE ÇAPA SÖZLEŞMESİ (KB gece nöbeti 2026-07-08 — 5 çapa parafraz
+//    yüzünden KOPUKTU ve model generic bloğa kaçıyordu). Her kbBlock, universal.md'de
+//    VERBATIM "H2" ya da "H2 — H3" karşılığı olmalı. universal.md'yi yeniden
+//    yapılandıran HERKES bu testi kırmadan geçemez.
+console.log(`\n[6] death-type kbBlock çapaları ↔ universal.md başlıkları`);
+{
+  const uni = fs.readFileSync(path.join(KB, "ranks", "universal.md"), "utf8");
+  const h2s: string[] = [];
+  const h3sByH2 = new Map<string, string[]>();
+  let curH2 = "";
+  for (const line of uni.split("\n")) {
+    const h2 = line.match(/^## (.+?)\s*$/);
+    const h3 = line.match(/^### (.+?)\s*$/);
+    if (h2) { curH2 = h2[1]; h2s.push(curH2); h3sByH2.set(curH2, []); }
+    else if (h3 && curH2) h3sByH2.get(curH2)!.push(h3[1]);
+  }
+  for (const [dtype, guide] of Object.entries(DEATH_TYPE_GUIDE)) {
+    const kb = guide.kbBlock;
+    // Kural: kbBlock === H2, ya da kbBlock === `${H2} — ${H3}` (H3 içinde de
+    // em-dash olabilir → startsWith + kalan-eşitlik ile çöz).
+    const ok = h2s.some((h2) => {
+      if (kb === h2) return true;
+      if (!kb.startsWith(h2 + " — ")) return false;
+      const rest = kb.slice(h2.length + 3);
+      return (h3sByH2.get(h2) ?? []).includes(rest);
+    });
+    check(`çapa ${dtype} → "${kb}"`, ok, "(universal.md'de verbatim H2 / H2 — H3 karşılığı YOK)");
+  }
+}
+
+// 7) YASAK-KELİME TARAMASI — KB dosyaları BANNED_PHRASES içermemeli (KB'nin cümlesi
+//    çıktının cümlesidir; yasaklı kalıp KB'deyse model onu birebir üretir).
+//    İstisna: yasak-örneği olarak TIRNAK içinde öğretilen satırlar ("kill aldı" deme,
+//    → düzeltme okları, YASAK etiketli satırlar) taranmaz.
+console.log(`\n[7] KB yasak-kelime taraması (${BANNED_PHRASES.length} kalıp)`);
+{
+  const exemptLine = /(yasak|deme\b|denmez|kullanma|yerine|→|❌)/i;
+  let hits = 0;
+  for (const f of files) {
+    const rel = path.relative(KB, f);
+    const lines = fs.readFileSync(f, "utf8").split("\n");
+    lines.forEach((line, i) => {
+      if (exemptLine.test(line)) return;
+      const lower = line.toLowerCase();
+      for (const phrase of BANNED_PHRASES) {
+        if (lower.includes(phrase.toLowerCase())) {
+          hits++;
+          check(`${rel}:${i + 1}`, false, `(yasak kalıp: "${phrase}")`);
+        }
+      }
+    });
+  }
+  check("KB yasak-kelime temiz", hits === 0, `(${hits} ihlal)`);
+}
+
+// 8) Statik silah+komp bloğu vision'a yükleniyor mu?
+console.log(`\n[8] weapon-comp-compact statik bloğu`);
+try {
+  const kb = loadVisionKnowledge({ map: "Ascent", agent: "Jett", side: "attack" });
+  check("static blok dolu", !!kb.blocks.static && kb.blocks.static.length > 500, "(weapon-comp-compact.md yok/boş)");
+  check("static blok komp bölümlü", !!kb.blocks.static && kb.blocks.static.includes("Komp Okuma"), "(Komp Okuma bölümü yok)");
+  const sizeOk = !kb.blocks.static || kb.blocks.static.length <= 8500;
+  check("static blok ≤8.5KB (maliyet disiplini)", sizeOk, `(${kb.blocks.static?.length ?? 0}b)`);
+} catch (e) { check("static blok", false, `(throw: ${(e as Error).message})`); }
 
 console.log(`\n══════ SONUÇ: ${pass} geçti, ${fail} başarısız ══════`);
 if (fail > 0) { console.log("❌ KB BOZUK — bir şey kırılmış!"); process.exit(1); }

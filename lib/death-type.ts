@@ -17,10 +17,19 @@
 // NO FAKE / NO word-killing: this does not delete words; it STEERS the concept at the
 // source. The "exposed/no-utility" concept stays valid for the two types where it is
 // genuinely correct (info-less-push, entry-no-trade); it just stops being the default.
+//
+// NOT (denetim 2026-07-08): "lurk-caught" tipi classifyDeath'in HİÇBİR dalından
+// dönmez — DeathSignals'ta takımdan-uzaklık sinyali yok (desktop göndermiyor).
+// Tip + KB bloğu bilinçli DURUYOR: desktop bir gün team-distance/flank sinyali
+// gönderirse tek dalla aktive olur; ayrıca desktop roundHistory'de death_type
+// echo'lar, dışarıdan gelen "lurk-caught" ban-listesi yolunda geçerli kalmalı.
+
+import { extractKillerWeapon } from "@/lib/comp-weapon";
 
 export type DeathType =
   | "repeat-angle"
   | "op-angle"
+  | "pistol-round"
   | "eco-force-loss"
   | "entry-no-trade"
   | "post-plant-solo"
@@ -36,22 +45,29 @@ export type DeathType =
 
 /** Per-type coaching guide: the universal.md block to anchor on, the one-line lesson
  *  (DISTINCT concept, not a synonym of another), and a short concept tag used for the
- *  cross-round "don't repeat" ban list. Lessons are deliberately different IDEAS. */
-const DEATH_TYPE_GUIDE: Record<DeathType, { kbBlock: string; angle: string; concept: string }> = {
-  "repeat-angle":        { kbBlock: "Okunabilirlik ve Bilgi Sızıntısı", angle: "aynı açıdan tekrar öldün, pozisyonun okundu — o açıyı bir round tamamen boş bırak, düşmanın okumasını boşa çıkar", concept: "okunma" },
-  "op-angle":            { kbBlock: "Zamanlama — Operatöre karşı timing", angle: "tek açıya kilitli bir operatör/awp seni aynı timing'le yakaladı — o silah çekilince veya körlenince re-peek at, kendi zamanlamanı kır", concept: "op-timing" },
-  "eco-force-loss":      { kbBlock: "Karar ve Ekonomi", angle: "zayıf ekonomide tam-alımmış gibi oynayıp silahı yaktın — düşman elini oku, yarım alımla bas ya da bilgi toplayıp sağ kal", concept: "ekonomi-karari" },
-  "entry-no-trade":      { kbBlock: "Pozisyon — Geri-alım (trade) kurulumu", angle: "solo giriş yapıp space aldın ama ölümün geri-alınmadı — yanındaki arkadaş trade'e hazır beklerken, senkronlu gir", concept: "trade-yok" },
+ *  cross-round "don't repeat" ban list. Lessons are deliberately different IDEAS.
+ *
+ *  kbBlock SÖZLEŞMESİ (denetim 2026-07-08 — 5 çapa parafraz yüzünden KOPUKTU):
+ *  kbBlock = universal.md'deki başlığın VERBATIM hâli: "H2" ya da "H2 — H3".
+ *  ASLA parafraz/kısaltma yazma — reasoning minimal'de model başlığı arayıp
+ *  bulamazsa en generic bloğa kaçıyor (çeşitlilik fixi delinir).
+ *  scripts/verify-kb.ts bu sözleşmeyi assert eder (kırık çapa CI'da patlar). */
+export const DEATH_TYPE_GUIDE: Record<DeathType, { kbBlock: string; angle: string; concept: string }> = {
+  "repeat-angle":        { kbBlock: "Okunabilirlik ve Bilgi Sızıntısı Ölümleri", angle: "aynı açıdan tekrar öldün, pozisyonun okundu — o açıyı bir round tamamen boş bırak, düşmanın okumasını boşa çıkar", concept: "okunma" },
+  "op-angle":            { kbBlock: "Zamanlama Ölümleri — Operatöre karşı timing'ini kır", angle: "tek açıya kilitli bir operatör/awp seni aynı timing'le yakaladı — o silah çekilince veya körlenince re-peek at, kendi zamanlamanı kır", concept: "op-timing" },
+  "pistol-round":        { kbBlock: "Erken Round Ölümleri", angle: "pistol round'da tüfek-round'u gibi düello aradın — tabanca mesafesinde oyna, util'le açı kapat, ilk ölümü sen olma", concept: "pistol-acilis" },
+  "eco-force-loss":      { kbBlock: "Karar ve Ekonomi Ölümleri", angle: "zayıf ekonomide tam-alımmış gibi oynayıp silahı yaktın — düşman elini oku, yarım alımla bas ya da düşmanın yerini öğrenip sağ kal", concept: "ekonomi-karari" },
+  "entry-no-trade":      { kbBlock: "Pozisyon ve Açı Ölümleri — Solo peek yerine geri-alım kurulumu", angle: "solo giriş yapıp space aldın ama ölümün geri-alınmadı — yanındaki arkadaş trade'e hazır beklerken, senkronlu gir", concept: "trade-yok" },
   "post-plant-solo":     { kbBlock: "Post-Plant Ölümleri", angle: "spike kurulduktan sonra tek açı tuttun ve retake'i tek karşıladın — çapraz post-plant açısı kur, zamanı oyna, sen onlara gitme", concept: "post-plant-tek-aci" },
   "retake-no-util":      { kbBlock: "Retake Ölümleri", angle: "site'ı util'siz/dağınık geri almaya çalıştın — util'i defuse'u geciktirmeye harca ve birlikte sayı bas, tek tek girme", concept: "retake-dagintik" },
-  "over-peek-advantage": { kbBlock: "Avantaj Yönetimi", angle: "sayı üstünündeyken gereksiz peek arayıp avantajı eşitledin — önde olduğun round'da köşe kur, düşmanı sana gelmeye zorla", concept: "avantaj-yaktin" },
-  "crosshair-loss":      { kbBlock: "Aim ve Crosshair Disiplini", angle: "tam can ve açık düelloda göründüğün an vuruldun, nişanın hazır değildi — crosshair'i baş hizasında tut, dur-ateş-et disiplinine gir", concept: "crosshair" },
-  "timing-window":       { kbBlock: "Zamanlama — Beklenti penceresi", angle: "smoke/duvar daha açılırken, beklenti penceresi açıkken çıktın — pencere kapanınca, düşmanın gevşeme anında peek at", concept: "zamanlama-penceresi" },
-  "low-hp-no-save":      { kbBlock: "Karar ve Ekonomi", angle: "düşük canla save etmeyip silahı sundun — düşük HP + dezavantajda silahı kurtar, sonraki round'a yatırım yap", concept: "save-etmedin" },
-  "clutch-lost":         { kbBlock: "Karar ve Ekonomi — Clutch", angle: "son canlıyken sonuca göre değil panikle oynadın — tek açı izole et, sesle bilgi al, durumu 1v1'e indirgemeye çalış", concept: "clutch" },
-  "lurk-caught":         { kbBlock: "Takım Koordinasyonu — Lurk", angle: "takımdan kopuk erken lurk'te yakalandın — lurk'ünü execute'a senkronla, takım baskısı havadayken bilgi al", concept: "lurk" },
-  "def-wide-hold":       { kbBlock: "Pozisyon ve Açı — Açıkta değil siperin yanında dur", angle: "savunmada açıyı erken/geniş açtın ve ilk atışı yedin — siperin yanında dur, off-angle al, peek atmadan ilk kontağı bekle", concept: "savunma-genis-aci" },
-  "info-less-push":      { kbBlock: "Zamanlama — Tetikleyici bekle", angle: "saldırıda somut bir tetikleyici beklemeden, bilgi almadan bastın — ses kesilmesi ya da ilk kontağı bekle, sonra çık", concept: "tetikleyici-yok" },
+  "over-peek-advantage": { kbBlock: "Avantaj Yönetimi — Üstünlüğü Sadeleştir", angle: "sayı üstünündeyken gereksiz peek arayıp avantajı eşitledin — önde olduğun round'da köşe kur, düşmanı sana gelmeye zorla", concept: "avantaj-yaktin" },
+  "crosshair-loss":      { kbBlock: "Aim ve Crosshair Ölümleri", angle: "tam can ve açık düelloda göründüğün an vuruldun, nişanın hazır değildi — crosshair'i baş hizasında tut, dur-ateş-et disiplinine gir", concept: "crosshair" },
+  "timing-window":       { kbBlock: "Zamanlama Ölümleri — Beklenti penceresi kapanınca çık", angle: "smoke/duvar daha açılırken, beklenti penceresi açıkken çıktın — pencere kapanınca, düşmanın gevşeme anında peek at", concept: "zamanlama-penceresi" },
+  "low-hp-no-save":      { kbBlock: "Karar ve Ekonomi Ölümleri — Düşük canla dövüşü zorlama — silahı kurtar", angle: "düşük canla save etmeyip silahı sundun — düşük HP + dezavantajda silahı kurtar, sonraki round'a yatırım yap", concept: "save-etmedin" },
+  "clutch-lost":         { kbBlock: "Karar ve Ekonomi Ölümleri — Clutch'ı 1v1 dizisine indir", angle: "son canlıyken sonuca göre değil panikle oynadın — tek açı izole et, sesle düşmanları ayır, durumu ardışık 1v1'lere indir", concept: "clutch" },
+  "lurk-caught":         { kbBlock: "Lurk Ölümleri", angle: "takımdan kopuk erken lurk'te yakalandın — lurk'ünü execute'a senkronla, takım baskısı havadayken düşmanın yerini öğren", concept: "lurk" },
+  "def-wide-hold":       { kbBlock: "Pozisyon ve Açı Ölümleri — Açıkta değil, siperin yanında dur", angle: "savunmada açıyı erken/geniş açtın ve ilk atışı yedin — siperin yanında dur, off-angle al, peek atmadan ilk kontağı bekle", concept: "savunma-genis-aci" },
+  "info-less-push":      { kbBlock: "Zamanlama Ölümleri — Tetikleyici bekle — açılışta da, basarken de", angle: "somut bir tetikleyici beklemeden, düşmanın yerini öğrenmeden bastın — ses kesilmesi ya da ilk kontağı bekle, sonra çık", concept: "tetikleyici-yok" },
 };
 
 /** Subset of the vision request used for classification. All optional — absent fields
@@ -75,25 +91,39 @@ export type DeathSignals = {
  *  solo entry. `info-less-push` is the genuine default (no specific signal). */
 export function classifyDeath(b: DeathSignals): DeathType {
   const killer = (b.killerInfo || "").toLowerCase();
-  const isOp = /\b(operator|op|marshal|awp|outlaw)\b/.test(killer);
-  const isEcoWeapon = /\b(classic|shorty|frenzy|ghost|sheriff|stinger|spectre|bucky|bulldog)\b/.test(killer);
+  // Tek-kaynak silah sözlüğü (lib/comp-weapon.ts WEAPON_CLASS) — denetim 2026-07-08:
+  // eski yerel regex'te judge EKSİKTİ (eco/force'un ana silahı) ve bulldog (2050
+  // kredilik tüfek) yanlışlıkla eco sayılıyordu. "op"/"awp" kısaltmaları sözlükte
+  // yok ama OCR'da geçebilir — sniper dalı için ayrıca kabul edilir.
+  const kw = extractKillerWeapon(killer);
+  const isOp = kw?.cls === "sniper" || /\b(op|awp)\b/.test(killer);
+  const isEcoWeapon = kw ? kw.cls === "pistol" || kw.cls === "smg" || kw.cls === "shotgun" : false;
   const side = (b.side || "").toLowerCase();
   const atk = side.startsWith("attack");
   const def = side.startsWith("defend") || side.startsWith("defens");
   const hp = typeof b.healthAtDeath === "number" ? b.healthAtDeath : undefined;
   const aa = b.alliesAlive, ea = b.enemiesAlive;
   const eco = (b.economyType || "").toLowerCase();
+  // GÜVENİLİRLİK GUARD'I (denetim, wiring bulgusu-2): reality-checker aynı sinyali
+  // "desktop 0-ile-okunamadı'yı ayırt edemez" diye güvenilmez sayıyor (hasAliveCount
+  // hard-false). aa=0 ∧ ea=0 = "okunamadı" imzası → clutch-lost/over-peek dalları
+  // bu durumda ATLANIR; yoksa her okunamayan round yanlış "clutch paniği" dersi alır.
+  const aliveReliable = typeof aa === "number" && typeof ea === "number" && !(aa === 0 && ea === 0);
 
   // Priority order: specific → generic.
   if (b.repeatedPosition) return "repeat-angle";                          // read by the enemy — top priority
   if (isOp) return "op-angle";                                            // weapon-anchored
   if (b.spikePlanted && atk) return "post-plant-solo";                    // attack + spike up
   if (b.spikePlanted && def) return "retake-no-util";                     // defense + spike up = retake
-  if (eco === "eco" || eco === "force_buy" || (eco !== "full_buy" && eco !== "" && isEcoWeapon))
-    return "eco-force-loss";                                              // economy decision
+  // Pistol round = kendi bloğu (denetim: universal.md "Erken Round Ölümleri" bölümü
+  // hiçbir tipe bağlı değildi = ölü içerik; pistol ölümü eco dersi değil açılış dersi ister).
+  if (eco === "pistol") return "pistol-round";
+  // Eco dalı KENDİ ekonomine bakar (denetim: katilin silahından oyuncunun ekonomisini
+  // çıkarsamak yanlıştı — half_buy'da spectre'ye ölen "silahı yaktın" dersi alıyordu).
+  if (eco === "eco" || eco === "force_buy") return "eco-force-loss";      // economy decision
   if (typeof hp === "number" && hp > 0 && hp < 50) return "low-hp-no-save"; // should have saved
-  if (aa === 0) return "clutch-lost";                                     // last alive
-  if (typeof aa === "number" && typeof ea === "number" && aa > ea) return "over-peek-advantage"; // man-advantage
+  if (aliveReliable && aa === 0) return "clutch-lost";                    // last alive (sayı okunduysa)
+  if (aliveReliable && (aa as number) > (ea as number)) return "over-peek-advantage"; // man-advantage
   if (atk && b.tradedByAlly === false) return "entry-no-trade";          // un-traded entry
   if (b.deathTiming === "early" && atk) return "timing-window";          // peeked into the window
   if (typeof hp === "number" && hp >= 100 && !isEcoWeapon) return "crosshair-loss"; // full hp, rifle duel

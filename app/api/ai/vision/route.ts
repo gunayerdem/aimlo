@@ -12,6 +12,7 @@ import { buildAgentAbilityHint, enforceAgentKit } from "@/lib/agent-abilities";
 import { cleanCoachText, clampWords } from "@/lib/coach-text";
 import { ROUND_FEEDBACK_SCHEMA, SYSTEM_PROMPT, USER_PROMPT, buildFactSheet } from "@/lib/vision-prompt";
 import { classifyDeath, buildDeathTypeDirective } from "@/lib/death-type";
+import { extractKillerWeapon, classifyCompArchetype, buildWeaponCompDirective } from "@/lib/comp-weapon";
 
 // ── Coach-voice OUTPUT cleaner ─────────────────────────────────────────────
 // cleanCoachText is now the SHARED single-source deterministic net in
@@ -420,12 +421,13 @@ export async function POST(request: NextRequest) {
     // visible in Vercel logs. Rank-gating was REMOVED (2026-06-26): every rank now
     // maps to the single un-gated universal.md, so a missing/empty rank no longer
     // caps insight — depth is selected by death-type RAG inside the file.
+    const staticLen = kb.blocks.static?.length ?? 0;
     const agentLen = kb.blocks.agent?.length ?? 0;
     const mapLen = kb.blocks.map?.length ?? 0;
     const ctxLen = kb.blocks.contextual?.length ?? 0;
-    const kbTotal = agentLen + mapLen + ctxLen;
+    const kbTotal = staticLen + agentLen + mapLen + ctxLen;
     console.log(
-      `[KB] injected agent=${agentLen}b map=${mapLen}b ctx=${ctxLen}b total=${kbTotal}b ` +
+      `[KB] injected static=${staticLen}b agent=${agentLen}b map=${mapLen}b ctx=${ctxLen}b total=${kbTotal}b ` +
       `files=[${kb.files.join(", ")}] selectors map=${reqMap ?? "-"} agent=${reqAgent ?? "-"} ` +
       `rank=${reqRank ?? "-"} enemies=${reqEnemyComp?.length ?? 0}`,
     );
@@ -481,13 +483,20 @@ export async function POST(request: NextRequest) {
         enemyGateMode: "vision",
       }),
     ];
+    // Block 0 — statik silah+komp rehberi (2026-07-08): istekten bağımsız TEK içerik,
+    // policy'den hemen sonra → tüm kullanıcılar/maçlar arası prefix-cache paylaşır.
+    // Bölüm seçimi user-message [SİLAH+KOMP İPUCU] işaretçisinde (cache'e dokunmaz).
+    if (kb.blocks.static)     systemSections.push(kb.blocks.static);
     if (kb.blocks.agent)      systemSections.push(kb.blocks.agent);
-    if (kb.blocks.map)        systemSections.push(kb.blocks.map);
-    if (kb.blocks.contextual) systemSections.push(kb.blocks.contextual);
     // Agent-ability grounding (2026-06-26): oyuncunun GERÇEK kitini enjekte et →
     // model ajana OLMAYAN yeteneği önermez (canlı bug: Killjoy'a "tel"=Cypher's).
+    // SIRA (denetim 2026-07-08): abilityHint AGENT-stabil → map/contextual'dan ÖNCE
+    // push edilir; eskiden contextual'dan sonraydı ve spike/eco toggle'ı her round
+    // contextual'ı değiştirdiğinde abilityHint+memory de cache'ten düşüyordu.
     const abilityHint = buildAgentAbilityHint(reqAgent, "tr");
     if (abilityHint) systemSections.push(abilityHint);
+    if (kb.blocks.map)        systemSections.push(kb.blocks.map);
+    if (kb.blocks.contextual) systemSections.push(kb.blocks.contextual);
 
     // ── Cross-match player memory (GROUNDED prior history) ──────────────────
     // buildMemoryContext returns ONLY persisted facts (top death spots, weak
@@ -710,11 +719,27 @@ export async function POST(request: NextRequest) {
       console.log(`[Aimlo AI] death-type=${dtype} repeatPos=${repeatedPosition} prevTypes=${prevDeathTypes.length}`);
     }
 
+    // SİLAH+KOMP işaretçisi (2026-07-08, death-type direktifi deseni): katil silahı
+    // (killerInfo'dan sözlük-bağlı) + düşman komp arketipi (enemyRoster'dan sayım-bazlı)
+    // deterministik türetilir, user-message'a sistem-prompt'taki SİLAH + KOMP REHBERİ'nin
+    // ilgili bölümünü gösteren işaretçi eklenir. Sinyal yoksa boş → uydurma teşviki yok.
+    const killerWeapon = reqBody.died === true ? extractKillerWeapon(reqBody.killerInfo) : null;
+    const compArchetype = classifyCompArchetype(reqEnemyComp);
+    const weaponCompDirective = buildWeaponCompDirective(
+      killerWeapon,
+      compArchetype,
+      typeof reqBody.loadout === "string" ? reqBody.loadout : undefined,
+    );
+    if (weaponCompDirective) {
+      console.log(`[Aimlo AI] weapon=${killerWeapon?.name ?? "-"} comp=${compArchetype ?? "-"}`);
+    }
+
     // Assemble JSON-formatted context — single block, no decorative borders, no header chrome.
     const ctxJson = Object.keys(ctx).length > 0 ? JSON.stringify(ctx, null, 2) : "";
     const clientContext =
       factSheet +   // BİLİNEN/BİLİNMEYEN sözleşmesi EN BAŞTA — model olgu-sınırını önce görsün
       deathTypeDirective +   // ÖLÜM-TİPİ çıpası — factSheet'ten hemen sonra (per-round, user-msg)
+      weaponCompDirective +  // SİLAH+KOMP işaretçisi — statik rehberin bölüm seçicisi (per-round, user-msg)
       (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, screenshot'tan güvenilir]\n${ctxJson}` : "") +
       (patternBlock ? `\n\n[PATTERN — son round'lardaki tekrar eden hata. Bu varsa deathAnalysis veya nextRoundSuggestion'da koç gibi referans ver — extra alan açma]\n${patternBlock}` : "");
 
