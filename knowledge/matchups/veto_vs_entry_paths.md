@@ -1,74 +1,70 @@
 ---
 id: matchup_veto_vs_entry_paths
 type: matchup
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, veto, entry, paths]
 ---
 
 # EŞLEŞME: Veto vs Entry Yolları
 
-> **YAMA NOTU**: Veto yeni bir sentinel. Yetenek etkileri yamadan yamaya değişebilir — buradaki patternleri güncel yamaya göre kontrol et.
-
 ## Bu Eşleşme Ne Hakkında
 
-Veto entry oyununu öldürmez — hazırlığını zehirler. Standart entry, push öncesi bilgi toplar: recon, tarama, flash. Veto o bilgiyi bozar. Sonuç ya kör push edersin ya da zaman kaybedersin. Temel çatışma tam burada.
+Veto entry oyununu öldürmez — hazırlığını yok eder. Standart entry, giriş öncesi util atar: recon, flash, hasar oku. Veto'nun önleyici cihazı bu fırlatılan util'i HAVADA İMHA EDER — recon hiç düşmez, flash hiç patlamaz. Sonuç: ya util'siz kör girersin ya da zaman kaybedersin. Temel çatışma tam burada.
 
-## Yaygın Cezalandırma Kalıpları
+Veto'nun diğer kozları: bağlama alanı entry'ciyi yakalayıp sağırlaştırır ve canını eritir; ışınlanma noktası onu tuzağının yanına anında taşır (satın alma aşamasında söküp başka yere kurabilir); ult'u açıkken kör etme ve sersemletme ona işlemez.
+
+## Baskı Kalıpları
 
 ### Veto Entry Yollarını Ezerken
 
-**IF**: Recon ya da tarama atıyorsun, Veto cihazını aktive edip sıfır veya yanlış bilgi döndürüyor
-**MEANING**: O bilgiye güvenemezsin — site'ta kaç kişi var bilmiyorsun
-**COUNTER**: Recon atmadan push et — flash önde, doğrudan gir
-**WHY**: Veto cihazı bilgi araçlarını hedef alır, flash'ı değil
+**IF**: Recon ya da flash atıyorsun, Veto'nun önleyicisi onu havada imha ediyor
+**MEANING**: Girişin util'siz kaldı — site'ta kaç kişi var bilmiyorsun, açacak flash'ın da yok
+**COUNTER**: Önleyicinin kapsadığı hattan util atma — önce cihazı gör ve vur, ya da util'i farklı açıdan sok
+**WHY**: Önleyici seken ya da silahla vurulabilir util'i yok eder — ama kendisi de vurulup kırılabilen bir cihaz
 
-**IF**: Hareket maskesi açık, site'ta kaç savunucu olduğunu göremiyorsun
-**MEANING**: 1 kişiye mi giriyorsun 3 kişiye mi, hiç bilmiyorsun
-**COUNTER**: Aynı anda birden fazla açıdan bilgi topla — Veto hepsini birden bozamaz
-**WHY**: Tek bilgi kaynağına yaslanırsan maskeleme seni kör bırakır
+**IF**: Giriş koridorunda bağlama alanına yakalandın
+**MEANING**: Sağırsın, canın eriyor, hareketin kısıtlı — arkandan gelen takım seni teker teker bitirir
+**COUNTER**: Bağlama cihazını girmeden önce ara ve kır; yakalandıysan alandan en kısa hattan çık, düello alma
+**WHY**: Bağlanan entry'ci trade edilemez — alan seni tutarken Veto takımı pozisyon alır
 
-**IF**: Recon attın, Veto bozdu, ama yine de o bilgiyle giriyorsun
-**MEANING**: Bozulmuş bilgiyle push ediyorsun — ölürsün
-**COUNTER**: Bozulmayı gördüğün an dur, diğer site'a reset at ya da flash öne alıp gir
-**WHY**: Bozulmuş bilgi sıfır bilgi demek; sıfır bilgiyle push, hazırlıksız push'tur
+**IF**: Veto'yu düşürdüğünü sandın, ışınlanmayla tuzağının yanına geri döndü
+**MEANING**: Veto'nun pozisyonu sabit değil — kurulumuyla arasında anında geçiş var
+**COUNTER**: Işınlanma noktasını gördüysen takımına söyle; Veto'ya baskı kurarken dönüş noktasını da tutun
+**WHY**: Işınlanma Veto'ya iki pozisyon birden verir — tek açıdan baskı yetmez
 
-### Entry Veto'yu Cezalandırırken
+### Entry Veto'yu Ezerken
 
-**IF**: Düşman takım recon atmadan, flash öne alıp direkt giriyor
-**MEANING**: Bozacak bilgi toplama yok — Veto cihazı boşta kalır
-**COUNTER**: Standart sentinel gibi oyna — silah dövüşü için köşe tut, hareket maskesiyle kaç kişi olduğunu gizle
-**WHY**: Veto'nun değeri bilgiyi kesmekte; bilgi toplanmıyorsa sen sadece kötü konumlanmış bir sentinel'sin
+**IF**: Düşman takım util'i önleyicinin kapsamı dışından sokuyor ya da önce cihazı vurup sonra atıyor
+**MEANING**: Veto'nun imha cihazı boşa gitti — entry hazırlığı tam çalışıyor
+**COUNTER**: Cihazı bilinen util hatlarına değil, beklenmedik açıya kur; her round yerini değiştir
+**WHY**: Sabit kurulan önleyici bir kez okunduğunda artık sadece hedef tahtası
 
-**IF**: Düşmanın recon'unu bozdun ama düşman yine de o site'a geliyor
-**MEANING**: Bozma onlara ters bilgi verdi — "Veto orada" diye okuyup geldiler
-**COUNTER**: Bozma zamanını ve yerini değiştir — her seferinde aynı anda aktive edersen seni okurlar
-**WHY**: Sabit pattern konumunu ele verir
+**IF**: Düşman takım hiç util atmadan, silah önde direkt giriyor
+**MEANING**: İmha edecek bir şey yok — önleyicin boşta kalır
+**COUNTER**: Standart sentinel gibi oyna — bağlama alanını giriş koridoruna kur, köşe tut, silah dövüşünü kazan
+**WHY**: Veto'nun değeri hazırlığı kesmekte; hazırlık yoksa değerin kurulumundan ve tüfeğinden gelir
 
 ## Sürekli Kaybediyorsan Ne Anlama Gelir
 
-**Entry sürekli Veto'ya takılıyorsa**: Recon atıp bozulmuş bilgiyle yine push ediyorsun. Bozulma dur sinyalidir. Ya diğer site'a dön ya da recon'u bırak, flash öne al.
+**Entry sürekli Veto'ya takılıyorsa**: Util'ini hep aynı hattan atıyorsun, önleyici hepsini yiyor. Önce cihazı bul ve kır — o da vurulabilir. Kıramıyorsan util'i farklı açıdan sok ya da silah önde gir.
 
-**Veto sürekli entry'leri tutamıyorsa**: Düşman takım zaten recon atmıyor — flash-and-go geliyor. Bozacak bir şey yok. O maçta Veto'dan sentinel değeri çıkar: köşe tut, sayıyı gizle, silah dövüşünü kazan.
+**Veto sürekli entry'leri tutamıyorsa**: Düşman ya cihazını kırıyor ya util atmadan geliyor. O maçta Veto'dan sentinel değeri çıkar: bağlamayı koridora kur, köşe tut, silah dövüşünü kazan. Kurulumunu da her round taşı — satın alma aşamasında ışınlanma noktanı söküp yeniden kurabilirsin.
 
 ## AIMLO Ne Demeli
 
-### Oyuncu cezalandırılan taraftaysa
+### Kaybeden taraftaysan
 
-**Entry Veto'ya karşı patlıyorsa**: "Recon'un bozuldu ve yine de girdin. Bozulma sana bilgi veriyor — Veto o site'ta. Ya diğer site'a çekil ya da recon'u unutup flash öne alarak gir."
+**Entry Veto'ya karşı patlıyorsa**: "Util'in havada imha oluyor ve yine de aynı hattan atıyorsun. Önce önleyici cihazı bul ve vur — kırılıyor. Ya da util'i bırak, silah önde farklı açıdan gir."
 
-**Veto entry'leri tutamıyorsa**: "Recon atmıyorlar, flash-and-go geliyorlar. Bozacak bir şey yok. Sentinel gibi köşe tut, hareket maskesiyle sayıyı gizle, silah dövüşünü kazan."
+**Veto entry'leri tutamıyorsa**: "Util atmıyorlar, silah önde geliyorlar. İmha edecek bir şey yok. Bağlamayı giriş koridoruna kur, köşe tut, silah dövüşünü kazan."
 
-### Oyuncu cezalandıran taraftaysa
+### Kazanan taraftaysan
 
-**Veto entry'leri eziyorsa**: "Recon'larını bozuyorsun, kör giriyorlar. Bozma zamanını sabit tut — her tarama atıldığında aktive et, site hakkında güvenilir tek bilgileri kalmasın."
+**Veto entry'leri eziyorsa**: "Girişlerinin util'ini havada yok ediyorsun, kör giriyorlar. Cihazının yerini her round biraz kaydır — okunursa vurulur."
 
-**Entry Veto'yu geçiyorsa**: "Bilgi yerine flash ile giriyorsun, Veto'nun bozacak bir şeyi yok. Aynen devam — flash-and-peek'i Veto durduramaz."
+**Entry Veto'yu geçiyorsa**: "Önce cihazı kırıp sonra util atıyorsun — doğru sıra bu. Her girişte aynısını yap; Veto'nun ult sesi geldiğinde flash'a güvenme, o pencerede kör olmaz."
 
-## Rank Modülasyonu
+## Koç Notları
 
-**LOW**: Entry'ler zaten recon atmıyor — Veto'nun bozacak bir şeyi yok. Önce düşmana recon attırmayı sağla; o dinamik yoksa eşleşme çalışmaz.
-
-**MID**: Entry'ler recon atıyor ama bozulmuş bilgiyle yine push ediyor. Bozulmayı fark etmiyorlar. Bozulduğu an dur ve kararını yenile.
-
-**HIGH**: İki taraf da dinamiği biliyor. Veto ne zaman bozacağını, entry ne zaman recon'u bırakıp flash'a geçeceğini hesaplıyor. Zamanlama ve okuma oyunu burada başlıyor.
-
-**ELITE**: Entry takımı recon'lu ve recon'suz push arasında anlık geçiş yapıyor. Veto hangisinin geldiğini okuyup bozma zamanlamasını buna göre ayarlıyor. Okuma ve adaptif hamle burada kritik.
+Üst seviyede bu eşleşme okuma savaşı: entry takımı util'li ve util'siz giriş arasında anlık geçiş yapar, Veto hangisinin geldiğini okuyup cihaz yerleşimini buna göre ayarlar. Veto ult'unu klatch anına sakla — açıkken kör etme ve sersemletme işlemez, canı da yenilenir; o pencerede düelloyu Veto kazanır.

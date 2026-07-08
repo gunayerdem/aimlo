@@ -1,6 +1,8 @@
 ---
 id: general_coaching-core
 type: general
+patch: "13.00"
+verified: 2026-07-08
 tags: [general, coaching, core]
 ---
 
@@ -29,9 +31,9 @@ WHY bu açılar tek kullanımlık; beklenen off-angle, varsayılan pozisyondan b
 IF dar koridorda tek düşman geliyorsa
 MEANING köşeye yakın durmak sana açı avantajı verir
 COUNTER köşeye yanaş; tek düşman geldiğinde avantajın en yüksek seviyede
-WHY yakın derinlik tek düşmana karşı en güçlüsü; ama birden fazla swing gelirse seni yakar
+WHY yakın derinlik tek düşmana karşı en güçlüsü; ama birden fazla peek gelirse seni yakar
 
-IF birden fazla düşman aynı açıdan swing atabilecek konumdaysa
+IF birden fazla düşman aynı açıdan peek atabilecek konumdaysa
 MEANING köşeye yakın kalırsan hepsini aynı anda göremezsin — ilkini vursan ikincisi seni alır
 COUNTER köşeden uzaklaş, geniş görüş aç, hepsini gör ve ona göre karar ver
 WHY uzakta durman düşmana hem yatay hem dikey düzeltme yaptırır, tepki yükünü artırırsın
@@ -55,7 +57,7 @@ WHY sayı üstünlüğünü kontrollü ilerlemeyle round kazancına çevirirsin
 ### İkili Hareket
 
 IF solo çıkış yapıyorsan
-MEANING düştüğünde kimse trade alamaz — düşman bedavaya kill alır ve konum değiştirir
+MEANING düştüğünde kimse trade alamaz — düşman seni bedavaya öldürür ve konum değiştirir
 COUNTER ikili hareket et: biri çıkar, diğeri trade pozisyonunda bekler
 WHY solo çıkış takıma ne bilgi ne trade verir; ikili hareket her ölümü bilgiye ve trade'e çevirir
 
@@ -131,9 +133,9 @@ COUNTER eco yap, 3. roundda full alımla gir
 WHY 0-2'de zorlayıp kaybedersen 0-3 olursun ve ekonomin çöker
 
 IF overtime'daysan
-MEANING para biriktirmenin hiçbir anlamı yok
-COUNTER elinde ne varsa harca, full alım yap
-WHY overtime'da tasarruf işe yaramaz — ya kazanırsın ya kaybedersin
+MEANING her overtime round'unda herkese sabit 5.000 verilir — biriktirme diye bir şey yok
+COUNTER her round full alım yap: tüfek, ağır zırh, tam util
+WHY overtime'da kredi sonraki round'a taşınmaz — harcamadığın her kuruş boşa gider
 
 ### Takım Ekonomisi
 
@@ -174,50 +176,44 @@ WHY eco takımı yakın mesafede Classic sağ tıkıyla seni anında öldürür;
 
 ---
 
-## RANK BAZLI KOÇLUK
+## SIK HATA TİPLERİ
 
-### Iron-Silver
+### Crosshair Yüksekliği
 
 IF nişanın boşluğa ya da ayak seviyesine bakıyorsa
 MEANING her düelloda önce nişanı yukarı çekmek zorundasın, tepki süren ikiye katlanır
 COUNTER nişanı kafa seviyesinde tut — etraftaki kutu üstlerine, pencere kenarlarına hizala
 WHY kafa seviyesindeki nişan sadece yatay düzeltme ister; aşağı bakan nişan hem yatay hem dikey düzeltme ister
 
+### Koşarken Ateş
+
 IF koşarken ateş ediyorsan
 MEANING mermilerin hedefe gitmiyor, isabeti şansa bırakıyorsun
-COUNTER dur, karşı-hamle yap, sonra ateş et
+COUNTER dur — bastığın yön tuşunun tersine kısa dokun, nişan sabitlendiği an ateş et
 WHY Valorant'ta hareket halinde isabet ciddi düşer; bu oyunda doğru atış hareketsizken yapılır
 
-### Gold-Platinum
+### Pattern Tekrarı
 
 IF her round aynı pozisyondan oynuyorsan
 MEANING düşman seni okuyor, önceden nişan alıyor, avantajın sıfırlanıyor
 COUNTER her round en az bir farklı açı tut, util zamanlamanı değiştir
 WHY çeşitlilik seni okumayı zorlaştırır; tekrar düşmana bedava bilgi verir
 
-IF round başında tüm util'ini harcadıysan
-MEANING round ortası ve geri alma için elinde hiçbir şey kalmıyor
-COUNTER util'ini böl: bir tane erken, bir-iki tane orta, kalanı geri almaya sakla
-WHY her aşama için util'in varsa her duruma cevap verebilirsin
-
-### Diamond-Ascendant
+### Solo Ego-Peek
 
 IF solo çıkıp ego peek atıyorsan
 MEANING takımın seni trade edemiyor, ölümün boşa gidiyor
 COUNTER yanında biri olsun, bilgi olmadan çıkma, her çıkışının bir sebebi olsun
-WHY solo oyun bireysel kill getirebilir ama takım olarak roundu batırırsın
+WHY solo oyun sana düello kazandırsa bile takım olarak roundu batırırsın
+
+### Takım Ekonomi Kopukluğu
 
 IF takım ekonomisini takip etmiyorsan
 MEANING biri full alırken diğeri eco yapar, takımın gücü dağılır
 COUNTER her round öncesi beş kişinin parasını kontrol et, alım kararını IGL versin
 WHY birlikte alım roundun kalitesini doğrudan belirler
 
-### Immortal-Radiant
-
-IF düşman seni iki rounddur aynı konumda buluyorsa
-MEANING kalıbını okudu ve seni karşılamaya hazır geliyor
-COUNTER her bir-iki roundda konumunu, zamanlamanı ya da util sıranı değiştir
-WHY bu seviyede tekrar seni öldürür; değişim sana avantaj kazandırır
+### Kayıp Serisi Kırma
 
 IF üst üste iki round kaybının ardından agresif solo çıkışlar yapıyorsan
 MEANING bu kararlar verimsiz, ölüm oranını yükseltiyor
@@ -229,7 +225,7 @@ WHY bir round bunu yaparsan kötü gidiş kırılır; aynı agresif çıkışa d
 ## FEEDBACK KURALLARI
 
 1. **Spesifik ol**: "A Short'ta 3 kez aynı açıdan öldün, B Main'e geç" de — genel tavsiye verme
-2. **Veriye dayan**: kalıbı göster, sayıyla destekle, "o roundda şunu yaptın" de
+2. **Veriye dayan**: kalıbı göster, "o roundda şunu yaptın" de — sayı SADECE veride gerçekten varsa; yoksa sayı uydurma, gözlemi callout'la çapala
 3. **Aksiyon ver**: "şunu yap" formatında konuş — ne yapılacağı net olsun
 4. **Kısa kes**: 2-3 cümle feedback yeter, uzatma
 5. **Ajan bazlı**: oyuncunun ajanına uygun tavsiye ver

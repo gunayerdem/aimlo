@@ -56,7 +56,7 @@ Fade, Sova gibi lineup ezberlemez. Recon'unu atar, düşmanı ortaya çıkarır,
 **WHY** Ult'un değeri, takımın birlikte üzerine gidebildiği silahlı turlarda en yüksek. Biriktirmek de yanlış turda yakmak da en çok işe yarayacağı turları kaçırmak demek.
 
 **IF** Recon bilgi getiriyor, düşman da ölüyor ama takım site'a girmiyorsa
-**MEANING** Fade kullanılmayan bilgi topluyor. Takip gelmeyen keşif israftır.
+**MEANING** Fade'in açtığı keşif kullanılmadan sönüyor. Takip gelmeyen keşif israftır.
 **COUNTER** Recon atmadan önce takımın push'a hazır olduğunu doğrula. Recon, takım hâlâ toparlanırken atılan bir yoklama değil, "başla" sinyali olmalı.
 **WHY** Fade'in döngüsü takım agresyonuyla çalışır. Takip yoksa açtığın bilgi sadece düşmanı yeniden konumlandırır.
 

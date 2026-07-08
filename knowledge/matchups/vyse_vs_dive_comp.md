@@ -1,21 +1,21 @@
 ---
 id: matchup_vyse_vs_dive_comp
 type: matchup
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, vyse, dive, comp]
 ---
 
 # EŞLEŞME: Vyse vs Dive Kompozisyonu
 
-> **YAMA NOTU**: Vyse yeni bir sentinel. Yetenek değerleri yamadan yamaya değişir — buradaki kalıpları her yamadan sonra test et, yama notlarıyla karşılaştır.
-
 ## Bu Eşleşme Ne Hakkında
-Dive kompozisyonlar — Jett, Raze veya Neon yanında Breach ya da Gekko gibi destekle gelen yapılar — site'ye hızlı ve sert girer. Bilgi toplamak yerine hız üzerine oynarlar. Vyse'in tuzakları tam bunu cezalandırır: Jett dash atarken tuzağa basar, Raze sıçramale inerken silahı bozulur, duvar destekçi oyuncuyu keser ve dalıcı içeride yalnız kalır. Dive seni tepki vermeden ezmek ister — ama Vyse'le tuzak zaten senin yerine tepki verir.
+Dive kompozisyonlar — Jett, Raze veya Neon yanında Breach ya da Gekko gibi destekle gelen yapılar — site'ye hızlı ve sert girer. Bilgi yerine hız üzerine oynarlar. Vyse'in tuzakları tam bunu yakalar: Jett dash atarken tuzağa basar, Raze sıçramayla inerken silahı bozulur, duvar destekçi oyuncuyu keser ve dalıcı içeride yalnız kalır. Dive seni tepki vermeden ezmek ister — ama Vyse'le tuzak zaten senin yerine tepki verir.
 
-## Cezalandırma Kalıpları
+## Baskı Kalıpları
 
-### Vyse Dive'ı Cezalandırırken
+### Vyse Dive'ı Yeniyorsa
 
-**IF**: Jett dash atarken, Raze sıçramale atlarken veya Neon kayarken tuzağa basıyor
+**IF**: Jett dash atarken, Raze sıçramayla atlarken veya Neon kayarken tuzağa basıyor
 **MEANING**: Hareket yeteneklerinin gittiği yer sabittir — o yol tuzaklıysa kaçış yok
 **COUNTER**: Dive girmeden önce bir molly veya bot gönder, tuzağı temizle, sonra atla
 **WHY**: Dash ile sıçrama yönünü havada değiştiremezsin — tuzak o noktadaysa yakalanırsın
@@ -30,7 +30,7 @@ Dive kompozisyonlar — Jett, Raze veya Neon yanında Breach ya da Gekko gibi de
 **COUNTER**: Asıl dalıştan önce bir recon veya bot gönder, duvarı erkenden tetikle
 **WHY**: Duvar tetiklendikten sonra yeniden aktif olana kadar kısa bir boşluk var — o boşlukta gir
 
-### Dive Vyse'ı Cezalandırırken
+### Dive Vyse'ı Yeniyorsa
 
 **IF**: Tuzakların olmadığı açıdan ya da tuzak aktive olmadan önce içeri giriliyor
 **MEANING**: Tuzaklar yanlış noktada veya geç koyulmuş
@@ -60,12 +60,6 @@ Dive kompozisyonlar — Jett, Raze veya Neon yanında Breach ya da Gekko gibi de
 
 **Temizleyip giriyorsa**: "Önce yetenek harcayıp tuzağı patlatıyor, sonra giriyorsun — doğru sıra bu. Her girişte aynısını yap."
 
-## Rank Modülasyonu
+## Koç Notları
 
-**LOW**: Bu rankta dive kompozisyon yok, push'lar dağınık. Vyse'in tuzakları rastgele oyuncuları yakalar. Temel iniş noktası tuzaklaması yeter — koridorun ortasına değil, oyuncunun bastığı yere koy.
-
-**MID**: Dive şekilleniyor ama koordineli değil. Tuzaklar bazı girişleri keser. Vyse'a: iniş noktasını oku, tuzağı oraya koy. Dive'a: girmeden önce bir yetenek harca, içeride sürprizle karşılaşma.
-
-**HIGH**: Dive koordineli, Vyse'in tuzakları iniş noktalarına göre yerleştirilmeli. Vyse'a: dalış kalıbını raunddan raunda oku, tuzağı taşı. Dive'a: temizleme sırasını uygula — önce recon veya molly, sonra dal.
-
-**ELITE**: İki taraf da kalıplarını biliyor. Belirleyici olan şu: Dive, tuzakları Vyse fark etmeden temizler mi? Vyse, tuzak pozisyonunu bir önceki raunda göre değiştirir mi? Dive aynı açıdan girerse Vyse o açıyı tuzaklar — Vyse aynı noktayı tuzaklarsa Dive oraya recon atar. Hangisi önce açı değiştirir, o kazanır.
+Belirleyici olan şu: Dive, tuzakları Vyse fark etmeden temizler mi? Vyse, tuzak pozisyonunu bir önceki rounda göre değiştirir mi? Dive aynı açıdan girerse Vyse o açıyı tuzaklar — Vyse aynı noktayı tuzaklarsa Dive oraya recon atar. Hangisi önce açı değiştirir, o kazanır.

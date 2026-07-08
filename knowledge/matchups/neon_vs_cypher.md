@@ -3,7 +3,8 @@ id: matchup_neon_vs_cypher
 type: matchup
 agent_a: neon
 agent_b: cypher
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, neon, cypher, duelist, sentinel]
 ---
 
@@ -17,7 +18,7 @@ Bu eşleşme bilgi savaşı. Cypher tuzak kurar; sen oradan geçersen yerini ö�
 
 **Neon lehine durumlar:**
 - Uzun koridorlarda (Breeze, Icebox Mid, Pearl) — sprintle mesafeyi hızlı kapat, Cypher tuzak kurmaya vakit bulamaz.
-- Cypher kamera modundayken tek başına açı tutuyorsa — kameraya geçince aim hattı yok, direkt peek at, bedava kill al.
+- Cypher kamera modundayken tek başına açı tutuyorsa — kameraya geçince silahı devrede değil, direkt peek at, bedavaya öldür.
 - Tuzaklar bittiyse veya smoke yoksa — o an Cypher'ın bilgisi körleşir, agresif gir.
 - Stun'ı Cypher'ı pozisyonda yakaladıysa — stun yiyince reaksiyon veremez, hemen üstüne düş.
 
@@ -47,7 +48,7 @@ Bu eşleşme bilgi savaşı. Cypher tuzak kurar; sen oradan geçersen yerini ö�
 
 **IF** Slide'la girdin ama gizli tuzağı fark etmedin
 **MEANING** Tel seni yavaşlatır, sprint momentumun kırılır, Cypher takımı rotate eder.
-**COUNTER** Girmeden önce recon at veya bot sür — tuzak hattını açar. Neon tek başına bilgi toplamak zorunda değil.
+**COUNTER** Girmeden önce recon at veya bot sür — tuzak hattını açar. Neon bilgiyi tek başına çıkarmak zorunda değil.
 **WHY** Neon'un gücü hız, Cypher'ın gücü gizlilik. Hızı körü körüne kullanırsan gizli tuzağa girersin — önce tuzağı bul, sonra bas.
 
 ---
@@ -59,9 +60,9 @@ Bu eşleşme bilgi savaşı. Cypher tuzak kurar; sen oradan geçersen yerini ö�
 
 ---
 
-**IF** Cypher ult'unu Neon öldükten sonra çekti
-**MEANING** Tüm takımın yeri açığa çıktı, agresif push planın okundu.
-**COUNTER** Ult atılır atılmaz takım pozisyon değiştirsin. Sabit duran oyuncu bilgi verir; hareket eden eski bilgiyi işe yaramaz hale getirir.
+**IF** Cypher ult'unu attı, Neon takımının konumları göründü
+**MEANING** Bu ult yaşayan tüm rakiplerin yerini iki kez gösterir — agresif giriş planın okundu.
+**COUNTER** Ult sesi gelir gelmez takım pozisyon değiştirsin. İlk gösterimden sonra aynı yerde kalan ikinci gösterimde de yakalanır.
 **WHY** Ult o anki konumu çeker. Hareket edersen bilgi hızla eskir — yerinde durma.
 
 ---
@@ -69,7 +70,7 @@ Bu eşleşme bilgi savaşı. Cypher tuzak kurar; sen oradan geçersen yerini ö�
 **IF** Ult'unla Cypher'ın tuzak hattını bastın
 **MEANING** Ult tuzakları yıkar; Cypher yerinde sabitse doğrudan ona da vurur.
 **COUNTER** Cypher tarafıysan ult sesini duyduğun an yer değiştirme yap. Ult bitince tuzakları yenile, ult penceresinde yerinde durma.
-**WHY** Ult sürekli hasar verir, tel ve kamera ise yerinde sabit durur. Hasar hattı ve tuzaklar üst üste gelince Neon hem util'i siler hem kill alır.
+**WHY** Ult sürekli hasar verir, tel ve kamera ise yerinde sabit durur. Hasar hattı ve tuzaklar üst üste gelince Neon hem util'i siler hem Cypher'ı öldürür.
 
 ---
 
@@ -83,7 +84,7 @@ Bu eşleşme bilgi savaşı. Cypher tuzak kurar; sen oradan geçersen yerini ö�
 Neon: sprint + slide + stun + duvar + ult — hepsi aktif baskı.
 Cypher: tuzak x2 + smoke + kamera + ult — hepsi bilgi ve kilitleme.
 
-Neon hız verir, Cypher bilgi. Eşleşmenin kilidi şu: Neon tuzağa değmeden kill alırsa Cypher bilgisini kullanmaya vakit bulamaz. Ama Neon körü körüne sprint atarsa Cypher her şeyi okur ve takımını hazırlar.
+Neon hız verir, Cypher bilgi. Eşleşmenin kilidi şu: Neon tuzağa değmeden öldürürse Cypher bilgisini kullanmaya vakit bulamaz. Ama Neon körü körüne sprint atarsa Cypher her şeyi okur ve takımını hazırlar.
 
 Ult maliyeti ikisinde de eşit. Neon ult'u direkt kill yapar. Cypher ult'u tek başına kill yapmaz ama doğru anda çekilirse tüm round planını çökertir.
 
@@ -115,6 +116,6 @@ Ult maliyeti ikisinde de eşit. Neon ult'u direkt kill yapar. Cypher ult'u tek b
 
 ## 7. Koç Notları
 
-Radiant seviyede Cypher oyuncuları tuzak hattını her round değiştirir. Aynı hattı iki round üst üste koyarlarsa Neon atlatır, bilgi kesilir. Neon tarafında ilk round'u bilgi toplamaya ayır — util yak, kamerayı bul, tuzakları öğren. İkinci round o bilgiyle gir.
+Radiant seviyede Cypher oyuncuları tuzak hattını her round değiştirir. Aynı hattı iki round üst üste koyarlarsa Neon atlatır, bilgi kesilir. Neon tarafında ilk round'u bilgiye ayır — util yak, kamerayı bul, tuzakları öğren. İkinci round o bilgiyle gir.
 
 Bu eşleşmede kim daha çok bilgiye sahipse round o tarafa gider. Neon hız verir ama körü körüne hız bilginin karşısında kaybeder. Cypher bilgi verir ama Neon tuzak hattını öğrenince o bilgi kesilir. Her round bilgi savaşı baştan başlar — bir önceki round öğrendiğini sonrakinde kullan.

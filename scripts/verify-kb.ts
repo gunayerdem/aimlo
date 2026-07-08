@@ -105,25 +105,47 @@ console.log(`\n[6] death-type kbBlock çapaları ↔ universal.md başlıkları`
 //    çıktının cümlesidir; yasaklı kalıp KB'deyse model onu birebir üretir).
 //    İstisna: yasak-örneği olarak TIRNAK içinde öğretilen satırlar ("kill aldı" deme,
 //    → düzeltme okları, YASAK etiketli satırlar) taranmaz.
+//    SÖZLEŞME (2026-07-08): FAIL yalnız RUNTIME'A YÜKLENEN dosyada — prompt'a
+//    ulaşamayan dosya (yüklenmeyen general/* kaynak-materyali) yalnız UYARI sayılır.
+//    Runtime seti knowledge-loader'dan türetilir: maps/** + matchups/** + ranks/** +
+//    agents/<rol>/*.md + general'in loader'da geçen 6 dosyası. Yeni bir general
+//    dosyası runtime'a bağlanırsa BURAYA da eklenmeli (yoksa ihlali fail etmez).
 console.log(`\n[7] KB yasak-kelime taraması (${BANNED_PHRASES.length} kalıp)`);
 {
+  const RUNTIME_GENERAL = new Set([
+    "coaching-core.md", "post-plant-playbook.md", "economy-mastery.md",
+    "pro-analysis.md", "radiant-tips.md", "weapon-comp-compact.md",
+  ]);
+  const isRuntimeFile = (rel: string): boolean => {
+    const p = rel.replace(/\\/g, "/");
+    if (p.startsWith("maps/") || p.startsWith("matchups/") || p.startsWith("ranks/")) return true;
+    if (/^agents\/[^/]+\/[^/]+\.md$/.test(p)) return true; // per-agent dosyaları (rol klasörü altında)
+    if (p.startsWith("general/")) return RUNTIME_GENERAL.has(p.slice("general/".length));
+    return false;
+  };
   const exemptLine = /(yasak|deme\b|denmez|kullanma|yerine|→|❌)/i;
-  let hits = 0;
+  let hits = 0, warns = 0;
   for (const f of files) {
     const rel = path.relative(KB, f);
+    const runtime = isRuntimeFile(rel);
     const lines = fs.readFileSync(f, "utf8").split("\n");
     lines.forEach((line, i) => {
       if (exemptLine.test(line)) return;
       const lower = line.toLowerCase();
       for (const phrase of BANNED_PHRASES) {
         if (lower.includes(phrase.toLowerCase())) {
-          hits++;
-          check(`${rel}:${i + 1}`, false, `(yasak kalıp: "${phrase}")`);
+          if (runtime) {
+            hits++;
+            check(`${rel}:${i + 1}`, false, `(yasak kalıp: "${phrase}")`);
+          } else {
+            warns++;
+          }
         }
       }
     });
   }
-  check("KB yasak-kelime temiz", hits === 0, `(${hits} ihlal)`);
+  if (warns > 0) console.log(`  ⚠ runtime-dışı (yüklenmeyen) dosyalarda ${warns} yasak-kalıp — fail değil, temizlik adayı`);
+  check("KB yasak-kelime temiz (runtime)", hits === 0, `(${hits} ihlal)`);
 }
 
 // 8) Statik silah+komp bloğu vision'a yükleniyor mu?

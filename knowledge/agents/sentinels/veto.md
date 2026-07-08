@@ -7,26 +7,25 @@ verified: 2026-07-08
 
 ## 1. Rol Kimliği
 
-Veto bilgi keser. Önleyicisiyle düşmanın recon araçlarını yok eder, yakınlık tuzağıyla push atan düşmanı yerinde bağlar, ışınlanmasıyla beklenmedik açılara geçer, ultuyla düşman utility'sinin hiçbirini hissetmez.
+Veto bilgi keser. Önleyicisiyle düşmanın recon araçlarını yok eder, yakınlık tuzağıyla push atan düşmanı yerinde bağlar, ışınlanmasıyla beklenmedik açılara geçer, ultuyla düşman utility'sinin hiçbirini hissetmez — üstelik canı yenilenip silahı hızlanırken.
 
 Cypher düşmanın yerini görür, Killjoy alan tutar — Veto ise düşmanın görmesini keser. Düşman kör girince execute'lar tahmine döner. O körlüğü sen yaratırsın.
 
 ## 2. Yetenek Seti
 
 - **Yakınlık tuzağı (Q)** — Yere bir tuzak yerleştirirsin. Yere düşünce kurulur ve görünmez olur; menzilindeki görüş hattına bir düşman girdiğinde otomatik tetiklenir. Tetiklenen düşmanı yerinde bağlar, sesini kaybettirir (sağırlaştırır) ve canını eritir. Atılıp anında hasar veren bir molotof değil — kör köşeye, düşmanın geçeceği yere kur. Düşman kurulmadan önce vurup yok edebilir; bu yüzden görünür yere koyma.
-- **Işınlanma (C)** — Yere bir nokta bırakırsın. O noktaya bakarken tekrar bas, oraya ışınlanırsın; nokta uzaktan da (30 metreye kadar) kullanılır ve yarım saniyede kurulur. Satın alma aşamasında geri alıp yeniden koyabilirsin. Beklenmedik açı tutmak ve hızlı yer değiştirmek için.
-- **Önleyici (E)** — İmza yeteneğin. İleriye bir önleyici fırlat, tekrar basınca aktive et. Aktifken o bölgeye giren ya da oradan geçen her düşman recon aracını, drone'u ve fırlatılan/seken utility'yi yok eder (recon oku, drone, grenade — silahla kırılabilir utility, Sage duvarı dahil). Düşman onu silahla vurup kırabilir; bu yüzden gizli kur.
+- **Işınlanma (C)** — Yere bir nokta bırakırsın. O noktaya bakarken tekrar bas, oraya ışınlanırsın; nokta uzaktan da (30 metreye kadar) kullanılır ve bir saniyeden kısa sürede kurulur — peek'ten hemen önce koyup çıkmak artık gerçekçi bir hamle. Satın alma aşamasında geri alıp yeniden koyabilirsin. Beklenmedik açı tutmak ve hızlı yer değiştirmek için.
+- **Önleyici (E)** — İmza yeteneğin. İleriye bir önleyici fırlat, tekrar basınca aktive et. Aktifken o bölgeye giren ya da oradan geçen her düşman recon aracını, drone'u ve fırlatılan/seken utility'yi yok eder (recon oku, drone, grenade — silahla kırılabilir utility, Sage duvarı dahil). Düşman onu silahla vurup kırabilir; bu yüzden gizli kur. Geri toplaması hızlandı — düşman hattı değiştirdiyse önleyiciyi söküp yeni hatta taşımak artık makul, yanlış hatta ölü bırakma.
 - **Ult (X)** — Aktive edince üç şey birden olur: hiçbir kötü etki sana işlemez (flash, yetenek kapatma, can eritme, sersemletme — hiçbiri geçmez), canın saniyede 40 yenilenir ve silah kullanımın hızlanır (çekme, atış, şarjör değiştirme, toparlanma). 1v2-1v3'te düşman ne atarsa atsın hem durdurulamazsın hem toparlanırsın — canın erimişken bile ult açmak seni düelloya geri sokar.
 
 ## 3. Temel Sorumluluklar
 
 - **Önleyiciyle bilgiyi kes**: Düşman recon attığında önleyiciyi aktive et. Recon, drone, fırlatılan utility — hepsi gider. Sonra takıma çağır: "Recon gitti, kör geliyorlar."
-- **Yakınlık tuzağıyla push'u durdur**: Tuzağı düşmanın geçeceği kör köşeye önceden kur. İçinden geçen düşmanı otomatik bağlar, sağırlaştırır ve canını eritir — sen sesi duyup tepki verirsin. Atılıp anında patlayan bir molotof değil; girişten önce yerini almış olmalı.
+- **Yakınlık tuzağıyla push'u durdur**: Tuzağı push gelmeden, düşmanın geçeceği kör köşeye kur — anlık atılan bir molotof değil, önceden yerini almış olmalı. Tetiklenince sen sesi duyup tepki verirsin.
 
 - **Yetenek kapatma (suppress) ile ilgili not**: Düşman seni susturursa (KAY/O bıçağı, Tejo recon drone'u) yakınlık tuzağın ve önleyicin çalışmaz. O pencerede yeni yetenek de koyamazsın — geleceğini hissedince ultunu aç.
 - **Işınlanmayla açı değiştir**: Noktayı her turda aynı yere koyma. Bir turda agresif pozisyon tut, sonraki turda retake için farklı yerden flankla. Düşman nereden çıkacağını bilemesin.
-- **Ultu clutch için sakla**: Tam takım dövüşünde düşmanın engelleyici yetenekleri (flash, yavaşlatma, sersemletme) takım arkadaşlarına dağılır. Tek başına kaldığında düşman seni durdurmak için her şeyi atar — ultu tam o anda aç.
-- **Her inkarı çağır**: Recon yok ettin mi, hemen söyle. Takım bunu bilmezse kör düşmana karşı bile temkinli oynar — avantajı boşa harcarsın.
+- **Ultu clutch için sakla**: Tam takım dövüşünde düşmanın engelleyici yetenekleri (flash, yavaşlatma, sersemletme) takım arkadaşlarına dağılır. Tek başına kaldığında düşman seni durdurmak için her şeyi atar — ultu tam o anda aç. Açtıktan sonra pasif yürüme, dövüşü sen başlat: flash yemezsin, canın dolar, silahın hızlanır — güç penceresi sende, düelloları zincirle.
 
 ## 4. Sık Yapılan Hatalar
 
@@ -51,7 +50,7 @@ Cypher düşmanın yerini görür, Killjoy alan tutar — Veto ise düşmanın g
 
 **IF** Yakınlık tuzağını push başladıktan sonra kurmaya çalışıyorsun, geç kalıyor
 **MEANING** Zamanlamayı kaçırdın. Tuzak önceden kurulup gizlenmeli — düşman geldiğinde kendiliğinden tetiklenir, anlık atılan bir şey değil.
-**COUNTER** Tuzağı tur başında, düşmanın geçeceği kör köşeye kur. İçinden geçen düşmanı otomatik bağlar, sağırlaştırır ve canını eritir. Düşman çoktan köşeye geçmiş, kapıyı tutuyorsa o noktada tuzak işe yaramaz — silahla aç.
+**COUNTER** Tuzağı tur başında, düşmanın geçeceği kör köşeye kur. Düşman çoktan köşeye geçmiş, kapıyı tutuyorsa o noktada tuzak işe yaramaz — silahla aç.
 **WHY** Önceden kurulu gizli tuzak, geçen düşmanı kendiliğinden yakalar ve sana erken uyarı verir. Push anında kurmaya çalışmak hem geç kalır hem görünür olur.
 
 ---
@@ -125,7 +124,7 @@ Cypher düşmanın yerini görür, Killjoy alan tutar — Veto ise düşmanın g
 - **Split**: Mid'de bilgi savaşı döner. Önleyici mid'de recon'u keser, orta kontrol saldıran için tahmine döner. A heaven ve B main'de yakınlık tuzağı savunma pozisyonunu kilitler. Işınlanma ramplar arası geçiş sağlar.
 - **Sunset**: Mid koridorda önleyici güçlü. İki takım da yaklaşımını belirlemek için bilgiye güvenir — önleyici bunu keser. B market'ta yakınlık tuzağı dar alanda kaçışa yer bırakmaz.
 
-Genel kural: Önleyiciyi her zaman düşmanın bilgiye en çok güvendiği daralma noktasına koy — geniş açık alana değil, mid'in, main'in ya da rotasyon koridorunun düşmanın recon'unu geçireceği hatta. Yakınlık tuzağını savunmada düşmanın geçeceği kör köşeye önceden kur; saldırıda ise post-plant'te defuse açısını kapatmak için sakla. Işınlanma noktasını turn başında değil, çağrı sonrası gerçek rotasyon ihtiyacına göre koy.
+Genel kural: Önleyiciyi düşmanın bilgiye en çok güvendiği daralma noktasına koy — recon'un geçeceği hatta, geniş açık alana değil. Yakınlık tuzağını savunmada kör köşeye önceden kur; saldırıda post-plant'te defuse açısı için sakla. Işınlanma noktasını tur başında değil, çağrı sonrası gerçek rotasyon ihtiyacına göre koy.
 
 ## 7. Eşleştirme Notları
 
@@ -139,7 +138,7 @@ Genel kural: Önleyiciyi her zaman düşmanın bilgiye en çok güvendiği daral
 
 ### İyi oynuyorsa
 
-Önleyiciyi recon sesini duyar duymaz aktive ediyorsun, yakınlık tuzağını push anında tetikletiyorsun, her inkarı takıma çağırıyorsun. Düşman recon'unu attığını görüyor ama sıfır bilgi dönüyor. İlk turda kötü lineup zannediyor. 2-3 recon yok edildikten sonra önleyiciyi fark ediyor — ama ne zaman aktive edeceğini bilemiyor.
+Önleyiciyi recon sesini duyar duymaz aktive ediyorsun, yakınlık tuzağını push anında tetikletiyorsun, her inkarı takıma çağırıyorsun. Düşman recon'unu attığını görüyor ama sıfır bilgi dönüyor; 2-3 recon yok edildikten sonra önleyiciyi fark etse bile ne zaman aktive edeceğini bilemiyor.
 
 Aynen sürdür: 1. turda ses ipucuyla recon'u yok et ve çağır. 2. turda önleyiciyi farklı pozisyona koy. 3. turda ilk recon'u geçir, execute sırasındaki ikincisini yok et. Düşman seni okuyamasın.
 
@@ -157,8 +156,8 @@ Aynen sürdür: 1. turda ses ipucuyla recon'u yok et ve çağır. 2. turda önle
 
 ### Util'i boşa harcıyorsa
 
-"Yakınlık tuzağını görünür yere kurma — vurup kırıyorlar. Köşe arkasına, kör noktaya kur: düşman görmeden geçsin, kendiliğinden tetiklensin, sen sesi duyup tepki ver. Önce uyarı, sonra inkar. Yeteneğin kapatılıyorsa (suppress) util koymadan önce ultunu aç, yoksa hepsi ölü kalır."
+"Yakınlık tuzağını görünür yere kurma — vurup kırıyorlar. Köşe arkasına, kör noktaya kur. Yeteneğin kapatılıyorsa (suppress) util koymadan önce ultunu aç, yoksa hepsi ölü kalır."
 
 ## 9. İleri Okuma — Düşmanın Bilgi Ekonomisi
 
-Veto'nun asıl değeri, düşmanın tüm bilgi stratejisini güvensiz kılmaktır. Düşmanın bilgi ekonomisini oku: recon'a ne zaman bağlandıklarını, ne zaman vazgeçtiklerini ayırt et. Bıraktıklarında önleyiciyi spike kurulduktan sonrasına sakla — retake smoke'unu ve heal'ini yer. Ultu KAY/O'nun yetenek kapatması ya da Fade ultu anında aç; ışınlanmayla round ortasında beklenmedik açı yarat. Her round önleyici zamanlaman farklı olsun ki düşman recon planı kuramasın.
+Veto'nun asıl değeri, düşmanın tüm bilgi stratejisini güvensiz kılmaktır. Düşmanın bilgi ekonomisini oku: recon'a ne zaman bağlandıklarını, ne zaman vazgeçtiklerini ayırt et — vazgeçtiklerinde önleyiciyi spike kurulduktan sonrasına sakla, retake smoke'unu ve heal'ini yer. Ultu KAY/O'nun yetenek kapatması ya da Fade ultu anında aç.

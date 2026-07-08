@@ -1,75 +1,67 @@
 ---
 id: matchup_sova_vs_killjoy
 type: matchup
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, sova, killjoy]
 ---
 
 # EŞLEŞME: Sova vs Killjoy
 
 ## Matchup Özü
-Sova, Killjoy'un turret'ini, bot'unu ve molly'sini daha site'a girmeden söküp atar. Recon onların nerede olduğunu açar. Hasar oku duvarın arkasından temizler. Drone ucuz feda olur, geriye kalanı tetikler. Killjoy site'a tek adım atamadan biter — Sova'nın bu eşleşmedeki işi tam olarak budur.
+Sova, Killjoy'un taretini, botunu ve molly'sini daha site'a girmeden söküp atar. Recon onların nerede olduğunu açar. Hasar oku duvarın arkasından temizler. Drone ucuz feda olur, geriye kalanı tetikler. Killjoy site'a tek adım atamadan biter — Sova'nın bu eşleşmedeki işi tam olarak budur.
 
 ## Sova Killjoy'u Nasıl Bitirir
 
-### Recon yetenek seti açar
+### Recon kurulumu açar
 
-**IF**: Raund başında attığın recon, Killjoy'un turret, bot ve molly pozisyonlarını tüm takıma gösteriyor
-**MEANING**: Killjoy'un sürpriz değeri sıfır — yetenek setin nerede olduğunu artık herkes biliyor
-**COUNTER**: Killjoy yetenek setini recon'un sabit vurduğu noktadan uzağa kurar, standart dart açısının dışında kalır
-**WHY**: Scan değdiği an tüm savunma yapısı okunur, hazırlığın hükmü kalmaz
+**IF**: Round başında attığın recon, Killjoy'un taret, bot ve molly pozisyonlarını tüm takıma gösteriyor
+**MEANING**: Killjoy'un sürpriz değeri sıfır — cihazlarının nerede olduğunu artık herkes biliyor
+**COUNTER**: Killjoy cihazlarını recon'un sabit vurduğu noktadan uzağa kurar, standart dart açısının dışında kalır
+**WHY**: Tarama değdiği an tüm savunma yapısı okunur, hazırlığın hükmü kalmaz
 
-### hasar oku lineup'ları yetenek seti güvenle temizler
+### Hasar oku lineup'ları kurulumu güvenle temizler
 
-**IF**: Duvarın arkasından hasar oku lineup'ıyla turret ve bot'u temizliyorsun
-**MEANING**: Killjoy sana hiç görünmeden yetenek setini kaybediyor — ne trade var ne açı
-**COUNTER**: Killjoy turret'i drone'u anında görüp vurabileceği açıya koyar; drone içeri girmeden etiketlenir, tarama tamamlanmaz
-**WHY**: Lineup sıfır riskle kit söker; Killjoy'un tek savunması drone'u durdurabilmektir
+**IF**: Duvarın arkasından hasar oku lineup'ıyla taret ve botu temizliyorsun
+**MEANING**: Killjoy sana hiç görünmeden cihazlarını kaybediyor — ne trade var ne açı
+**COUNTER**: Killjoy tareti drone'u anında görüp vurabileceği açıya koyar; drone içeri girmeden vurulur, tarama tamamlanmaz
+**WHY**: Lineup sıfır riskle kurulum söker; Killjoy'un tek savunması drone'u durdurabilmektir
 
 ### Drone ucuz bilgi ve tetik
 
-**IF**: Drone'u site'a sokup bot'ları tetikliyor ve molly'lerin nerede olduğunu görüyorsun
+**IF**: Drone'u site'a sokup botları tetikliyor ve molly'lerin nerede olduğunu görüyorsun
 **MEANING**: Drone öldü ama tüm tuzak haritası ortaya çıktı — takım nereye basmayacağını biliyor
 **COUNTER**: Killjoy molly'leri recon'un taramadığı köşelere saklar; drone görse bile yerlerini öğrenemezsin
-**WHY**: Drone hem tetikler hem keşfeder — kit gidince giriş açılır
+**WHY**: Drone hem tetikler hem keşfeder — kurulum gidince giriş açılır
 
 ## Killjoy Sova'yı Nasıl Karşılar
 
 ### Alışılmadık yerleştirme
 
-**IF**: Kit'ini Sova'nın standart lineup'larının düşmediği noktalara koyuyorsun
+**IF**: Cihazlarını Sova'nın standart lineup'larının düşmediği noktalara koyuyorsun
 **MEANING**: Sova hazırladığı dart'ları boşa harcıyor, standart açıların dışından atmak zorunda kalıyor
 **COUNTER**: Sova standart açıların dışına çıkıp alışılmadık noktaları da tararsa bu avantajın kapanır
 **WHY**: Standart lineup'lar standart yerleşime göre çalışılmıştır — sen standart koymazsan o ıskalamak zorunda kalır
 
-### Kit bilgisi ≠ Killjoy'un yeri
+### Cihaz bilgisi ≠ Killjoy'un yeri
 
-**IF**: Kit'inden uzakta duruyorsun; Sova yetenek setini buluyor ama seni bulamıyor
-**MEANING**: Sova kit pozisyonunu biliyor ama senin nerede olduğunu bilmiyor — o iki bilgi ayrı
-**COUNTER**: Sova recon'u kit ile oyuncu pozisyonunu aynı anda kapatacak şekilde atar, ikisini tek scanda yakalamaya çalışır
-**WHY**: Kit açılsa bile sen pozisyonunu saklarsan Sova körleşir
+**IF**: Cihazlarından uzakta duruyorsun; Sova kurulumu buluyor ama seni bulamıyor
+**MEANING**: Sova cihaz pozisyonunu biliyor ama senin nerede olduğunu bilmiyor — o iki bilgi ayrı
+**COUNTER**: Sova recon'u cihazlarla oyuncu pozisyonunu aynı anda kapatacak şekilde atar, ikisini tek taramada yakalamaya çalışır
+**WHY**: Kurulum açılsa bile sen pozisyonunu saklarsan Sova körleşir
 
 ## Sürekli Kaybediyorsan
 
-**Killjoy** olarak her raund tüm yetenek setin Sova tarafından scan edilip yok ediliyorsa: yetenek setini standart yerlere koyuyorsun, Sova'nın lineup'ları tam orası için çalışılmış. Turret ve bot'u beklenmedik köşelere taşı — Sova scan atmadan önce seni bulmakta zorlansın.
+**Killjoy** olarak her round tüm kurulumun Sova tarafından taranıp yok ediliyorsa: cihazları standart yerlere koyuyorsun, Sova'nın lineup'ları tam orası için çalışılmış. Tareti ve botu beklenmedik köşelere taşı; tarama geldikçe kendi pozisyonunu da değiştir — sabit kalırsan Sova bir sonraki rounda çözümü hazır getirir.
 
-**Sova** olarak Killjoy'un yetenek setini temizleyemiyorsan: recon'u oyunculara atıyorsun, kit'e değil. Killjoy'a karşı önce turret ve bot nerede, onu bul. Scan'i gördükten sonra hasar oku takip et. Kit gidince site açılır.
+**Sova** olarak Killjoy'un kurulumunu temizleyemiyorsan: recon'u oyunculara atıyorsun, cihazlara değil. Killjoy'a karşı önce taret ve bot nerede, onu bul. Taramayı gördükten sonra hasar okuyla takip et. Kurulum gidince site açılır. Killjoy yerleşimini değiştirdiyse eski lineup'ında ısrar etme — her maç yeni açı üret.
 
 ## AIMLO Ne Demeli
 
-**Killjoy Sova tarafından sürekli temizleniyorsa**: "Kit'in tam Sova'nın beklediği yerde. Turret ve bot'u standart açılardan uzağa al. Lineup'larını standart dışı atmak zorunda kalırsa isabeti düşer, temizliği tamamlayamaz."
+**Killjoy Sova tarafından sürekli temizleniyorsa**: "Kurulumun tam Sova'nın beklediği yerde. Tareti ve botu standart açılardan uzağa al. Sova lineup'larını standart dışı atmak zorunda kalırsa isabeti düşer, temizliği tamamlayamaz."
 
-**Sova Killjoy'u temizleyemiyorsa**: "Oyunculara değil kit'e odaklan. Recon önce turret ve bot'u göstermeli. Gördükten sonra hasar oku bitir. Kit gidince site açılır."
+**Sova Killjoy'u temizleyemiyorsa**: "Oyunculara değil cihazlara odaklan. Recon önce taret ve botu göstermeli. Gördükten sonra hasar okuyla bitir. Kurulum gidince site açılır."
 
-**Sova Killjoy'u parçalıyorsa**: "Kit'ini haritanın diğer ucundan bitiriyorsun. Lineup'larını güncel tut, her raund önce kit pozisyonlarını hedefle."
+**Sova Killjoy'u parçalıyorsa**: "Kurulumunu haritanın diğer ucundan bitiriyorsun. Lineup'larını güncel tut, her round önce cihaz pozisyonlarını hedefle."
 
-**Killjoy Sova'nın scan'larından kurtuluyorsa**: "Alışılmadık yerleştirme işe yarıyor. Aynı köşeleri tekrarlama — Sova yeni açılar bulmak zorunda kalsın."
-
-## Rank Modülasyonu
-
-**LOW**: Sova'nın Killjoy'a özel lineup'ı yok. Killjoy yetenek seti varsayılan yerlere koyuyor. Sova'ya o harita için Killjoy'un sık kullandığı turret ve bot noktalarını açan tek bir recon lineup'ı öğret — onu tekrar et.
-
-**MID**: Sova temel lineup'ı biliyor ama scan attıktan sonra hasar oku takip etmiyor. Killjoy scan geldikçe pozisyon değiştirmiyor. Sırayı netleştir: tara, hasar oku at, sonra gir.
-
-**HIGH**: Sova sistematik temizliyor, Killjoy yaratıcı saklıyor. Killjoy'a alışılmadık yerleştirme ikilileri göster. Sova'ya kit standart yerde değilken farklı açıdan nasıl scan atacağını öğret.
-
-**ELITE**: Killjoy'un kit yerleşimi, Sova'nın bilinen lineup'larından kaçmak için özel kurulmuş. Sova her maçta yeni açılar üretmeli. Killjoy scan geldikçe pozisyon değiştirmeli — sabit kalırsa Sova bir sonraki raunda çözümü hazır getirir.
+**Killjoy Sova'nın taramalarından kurtuluyorsa**: "Alışılmadık yerleştirme işe yarıyor. Aynı köşeleri tekrarlama — Sova yeni açılar bulmak zorunda kalsın."

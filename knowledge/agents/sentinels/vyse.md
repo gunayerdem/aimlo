@@ -1,20 +1,25 @@
+---
+patch: "13.00"
+verified: 2026-07-08
+---
+
 # AJAN: Vyse
 
 ## 1. Rol Kimliği
 Vyse tuzaklarla alan kapatan bir sentinel. Killjoy hasar verip geciktirir, Cypher düşmanın yerini görür — Vyse ikisini birden yapar ama kendi tarzında: düşmanı kör eder, dikenle yavaşlatıp hasar verir, geçerse arkasına duvar dikip kaçışını keser. Tuzaklarını kapılarda, dar koridorlarda ve köşelerde kur — orada düşmanın etrafından dolaşma şansı yoktur. En büyük gücün şu: flash tuzağına bakmana gerek yok, gizli durur, sen tetikleyene kadar düşman varlığını bilmez.
 
 ## 2. Yetenek Seti
-- **Duvar Tuzağı (Q)** — 200 kredi, 1 şarj. Yere gizli bir tuzak göm; düşman üstünden geçince arkasında yıkılmaz bir duvar yükselir ve kısa süre durur. Hasar vermez — işi düşmanı bölmek, kaçışını veya geri çekilişini kesmek. Bir düşmanı içeri kapatıp ekibinden ayır, ya da push eden takımı ikiye böl.
+- **Duvar Tuzağı (Q)** — 1 şarj (fiyat patch'e göre değişir). Yere gizli bir tuzak göm; düşman üstünden geçince arkasında bir duvar yükselir ve kısa süre durur. Hasar vermez — işi düşmanı bölmek, kaçışını veya geri çekilişini kesmek. Bir düşmanı içeri kapatıp ekibinden ayır, ya da push eden takımı ikiye böl.
 - **Flash Tuzağı (E)** — bedava, geri toplanabilir. Bir yüzeye gizli bir çiçek koy; tetiklediğinde ona bakan herkesi kör eder. Tuzak görünmez durur — düşman varlığını bilmez. Kullandıktan sonra geri topla, başka yere göm. Sen tetiklersin: tam peek atacağın an aç, kör düşmana çık.
-- **Diken (C)** — 150 kredi, 2 şarj. Attığın yere gizli iner; tetiklendiğinde geniş bir diken alanına açılır, içinden geçen düşmana hasar verir ve yavaşlatır. Molly mantığında ama gömülü duran bir tuzak gibi — dar geçide göm, üstünden geçen yavaşlar ve hasar yer. İki şarjın var, iki ayrı giriş yolunu kapat.
-- **Ult (X)** — 8 ult puanı. Geniş bir alana metal diken yayar; içinde kalan düşmanın ana silahı kilitlenir, ateş edemez. Tabancası ve yetenekleri çalışır ama tüfek/marksman avantajı sıfırlanır. Düşmanı tabanca dövüşüne mecbur bırakırsın — siz tüfekliyken bu turu kazanırsınız.
+- **Diken (C)** — 2 şarj (fiyat patch'e göre değişir). Attığın yere gizli iner; tetiklendiğinde geniş bir diken alanına açılır, içinden geçen düşmana hasar verir ve yavaşlatır. Molly mantığında ama gömülü duran bir tuzak gibi — dar geçide göm, üstünden geçen yavaşlar ve hasar yer. İki şarjın var, iki ayrı giriş yolunu kapat.
+- **Ult (X)** — puan maliyeti patch'e göre değişir. Geniş bir alana metal diken yayar; içinde kalan düşmanın ana silahı kilitlenir, ateş edemez. Tabancası ve yetenekleri çalışır ama tüfek/marksman avantajı sıfırlanır. Düşmanı tabanca dövüşüne mecbur bırakırsın — siz tüfekliyken bu turu kazanırsınız.
 
 ## 3. Temel Sorumluluklar
 - **İki dikeni iki ayrı giriş yoluna göm**: İkisini aynı yere koyma. Düşman geçince yavaşlar, hasar yer; sen geçtiği yolu anında bilirsin.
 - **Flash tuzağını düşmanın geçmek zorunda olduğu yere koy**: Hookah girişi, ramp, dar koridor. Tuzak gizli durur, sen tetikleyene kadar düşman görmez. Tam peek atacağın yere koy ki kör + sen açıdan çık.
 - **Duvar tuzağını kaçış/rotate hattına koy**: Düşman geçince arkasında duvar yükselir — ya içeride kapanır (ekibinden ayrı düşer) ya da geri dönemez. Bir adamı yalnız bırakıp ekibin onu temizlesin.
 - **Ult'u düşman silah avantajını kullanmadan önce aç**: Site'a tüfekle giren ya da Op tutan düşmanı kapsama al; silahı kilitlenince tabancaya düşer, siz tüfekle bastırırsınız.
-- **Flash tuzağını kullandıktan sonra geri topla**: Bedava ekstra tuzak — yerde bırakma, tur içinde yeniden göm.
+- **Flash tuzağını kullandıktan sonra geri topla**: Bedava ekstra tuzak — yerde bırakma. Tur içinde iki kez kullan: göm, tetikle, topla, başka yere göm.
 - **Tuzak tetiklenince takıma söyle**: "A main'de flash attım, kör girin", "B long'da duvar diktim, ayrıldı" — bu bilgi takımın bir sonraki hamlesidir.
 
 ## 4. Sık Yapılan Hatalar
@@ -106,14 +111,4 @@ Tuzakları 2-3 ayrı girişe yayıyorsun, flash tuzağını peek hattına koyup 
 Tuzakların ya fazla göze batıyor ya da kimsenin geçmediği yerlerde. Düşmanın hangi yolları kullandığına bak, tuzakları oraya kaydır. Flash'ı kendi peek hattına koy ve tam çıkacağın an tetikle — kör ile peek aynı anda olmalı. Herhangi bir açıya çıkmadan önce elindeki her şeyi at.
 
 ### Tahmin edilebilir olunca
-Düşman her tur kurulumunu önceden temizliyor. Pozisyonları değiştir. Aynı açı, farklı nokta bile yeter. Saldırıda önce post-plant dikenini ve duvarını göm — yetenek setinin post-plant'te en sert noktası orası. Sova/Fade varsa tuzakları görüş hattının dışına, kör noktaya gizle.
-
-## 9. Rank Modülasyonu
-
-**Düşük (Iron-Silver)**: Tuzağı nereye koyacağını bilmiyor ya da unutuyor; flash'ı tetiklemeyi unutuyor. Şunu öğret: her giriş yoluna bir diken, ana dar geçide flash tuzağı, açıya çıkmadan önce her şeyi at. Flash gizli durur — sen tetikleyeceksin, peek atacağın an aç. Alım aşamasında kendine sor: "tuzaklarımı nereye koyuyorum?" Flash tuzağını kullandıktan sonra geri toplamayı alışkanlık yap.
-
-**Orta (Gold-Platinum)**: Tuzak koyuyor ama her tur aynı yere. Flash'ı yanlış anda açıyor, ult'u rastgele basıyor. Her tur en az bir tuzağın yerini değiştir. Flash'ı kendi peek'ine bağla — kör + çık aynı anda. Ult'u tüfek avantajının olduğu ana sakla: Op tutan veya tam-alımlı düşmana aç.
-
-**Yüksek (Diamond-Ascendant)**: Tuzak ağını anlıyor ama düşman karşı oynamaya başlayınca adapte olamıyor. Düşmanın hangi yollardan kaçındığını oku, tuzakları oraya kaydır. Duvarı kaçış hattına koyup tek düşmanı ayırmayı öğren. Ult zamanlamasını düşmanın silah avantajını kullanacağı ana denk getir, erken/geç basma. Flash tuzağını tur ortasında geri toplayıp yeniden göm.
-
-**Elit (Immortal-Radiant)**: Her tur farklı tuzak yerleşimi olmalı — aynı kurulum iki tur üst üste çıkmasın. Flash'ı peek'inle saniyesinde senkronla; duvarı düşmanı bölüp sayı üstünlüğü yaratacak kavşağa diktir. Ult, retake'te ya da post-plant'te tüfek avantajını tersine çevirdiğin an açılmalı — tek saniye geç kalma. Diken'i hem geciktirme hem peek-bait olarak kullan: düşman yavaşlarken sen çıkarsın. Flash tuzağını tur içinde iki kez kullan: göm, tetikle, topla, başka yere göm. Sova/Fade'e karşı tuzaklarını recon'un kör noktasına gizleyerek gizli-kalma avantajını koru.
+Düşman her tur kurulumunu önceden temizliyor. Pozisyonları değiştir. Aynı açı, farklı nokta bile yeter. Saldırıda önce post-plant dikenini ve duvarını göm — yetenek setinin post-plant'te en sert noktası orası. Sova/Fade varsa tuzakları görüş hattının dışına, kör noktaya gizle. Diken'i hem geciktirme hem peek-yemi olarak kullan: düşman yavaşlarken sen çıkarsın.

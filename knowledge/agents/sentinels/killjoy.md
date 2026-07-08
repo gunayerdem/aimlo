@@ -1,12 +1,17 @@
+---
+patch: "13.00"
+verified: 2026-07-08
+---
+
 # AJAN: Killjoy
 
 ## 1. Rol Kimliği
-Killjoy tek başına site tutan en güçlü ajandır. Botun bilgi getirir, ikinci botun ile molly'n hasar verir, ult'un site'ı temizler. Düşman site'a girmek için bile yetenek harcamak zorunda kalır — sen tam burayı sömürürsün. Senin işin frag değil: düşmanın zamanını ve yeteneğini tüket, takımına alan aç.
+Killjoy tek başına site tutan en güçlü ajandır. Botun ve taretin bilgi getirir, molly'n hasar verir, ult'un site'ı temizler. Düşman site'a girmek için bile yetenek harcamak zorunda kalır — sen tam burayı sömürürsün. Senin işin öldürmek değil: düşmanın zamanını ve yeteneğini tüket, takımına alan aç.
 
 ## 2. Yetenek Seti
 - **Alarm Botu (Q)** — 1 şarj, fiyat patch'e göre değişir, tur arası geri toplanır. Yere gizli bir bot bırak; menziline giren düşmanı kovalar, yakınında patlar ve onu savunmasız (aldığı hasar artar) yapar. İşi hasar değil — bilgi vermek ve düşmanı bir sonraki yeteneğine açık hale getirmek. Botu molly'nin patlayacağı yere koy: bot savunmasız bırakır, molly üstüne biner.
-- **Taret (E)** — 1 şarj, bedava (imza yeteneği), geri toplanıp yeniden kurulabilir. Önüne baktığı 100 derecelik koniyi tarayan, otomatik ateş eden bir taret kur. Düşman görünce ateşler — asıl değeri hasar değil, sana "düşman şu anda buradan geliyor" bilgisini sesle vermesi. Sınırlı bir menzili var: o menzilden çok uzağa gidersen taret devre dışı kalır, yani rotate ederken menzilini hesaba kat.
-- **Molly / Nano Sürü (C)** — fiyat ve şarj patch'e göre değişir. Bir el bombası at; yere inince gizlenir, sen tetikleyince geniş bir alana saniyede hasar veren bir hasar bulutu açılır (yaklaşık 45 hasar/sn, patch'e göre değişir). Düşmanı alandan söker ya da ciddi hasar yedirir. Post-plant için sakla: defuse'a gelen düşmanın üstüne patlat, defuse'u böl.
+- **Taret (E)** — 1 şarj, bedava (imza yeteneği), geri toplanıp yeniden kurulabilir. Önüne baktığı 180 derecelik yayı tarayan, otomatik ateş eden bir taret kur. Ateş temposu güçlendirildi — açıkta yakalanan düşmana artık gerçek hasar baskısı da kurar; yine de asıl değeri sana "düşman şu anda buradan geliyor" bilgisini sesle vermesi. Sınırlı bir menzili var: o menzilden çok uzağa gidersen taret devre dışı kalır, yani rotate ederken menzilini hesaba kat.
+- **Molly (C)** — fiyat ve şarj patch'e göre değişir. Bir el bombası at; yere inince gizlenir, sen tetikleyince geniş bir alana saniyede hasar veren bir hasar bulutu açılır (yaklaşık 45 hasar/sn, patch'e göre değişir). Bulut artık daha uzun açık kalır — defuse'u bölme gücü arttı. Düşmanı alandan söker ya da ciddi hasar yedirir. Post-plant için sakla: defuse'a gelen düşmanın üstüne patlat, defuse'u böl.
 - **Ult / Kilit (X)** — 9 ult puanı (patch'e göre değişir). Geniş bir alana bir cihaz kur; uzun bir hazırlanma süresinden sonra menzildeki tüm düşmanları kısa süreliğine kilitler (ateş edemez, yetenek kullanamaz, yavaşlar). Hazırlık süresi uzun olduğu için cihaz açıkta dururken anında patlatılır — duvar arkasına ya da düşmanın içeri girmeden ulaşamayacağı yere koy. Site temizlemek veya post-plant'te retake'i kırmak için en güçlü kozun.
 
 ## 3. Temel Sorumluluklar
@@ -19,7 +24,7 @@ Killjoy tek başına site tutan en güçlü ajandır. Botun bilgi getirir, ikinc
 ## 4. Sık Yapılan Hatalar
 - Botunu tek peek'te ölen açık yere koyuyorsun — bilgi getirmeden öldürülüyor.
 - Tüm yeteneğini tek choke'a yığıyorsun — tek bir recon hepsini siliyor.
-- İkinci botun tetiklendikten sonra molly'ni atıyorsun — ikisini önceden üst üste koy, otomatik tetiklensin.
+- Botun tetiklendikten sonra molly'ni atıyorsun — ikisini önceden üst üste koy, otomatik tetiklensin.
 - Ult'unu açıkta kullanıyorsun — duvar arkası ya da düşmanın içeri girmeden ulaşamayacağı yer şart.
 - Botunun yanında duruyorsun — yeteneğinin yarattığı gecikmeden faydalanmak için mesafeni koru.
 - Çok uzağa rotate edip yeteneğini devre dışı bırakıyorsun — menzilini bil.
@@ -40,12 +45,12 @@ Killjoy tek başına site tutan en güçlü ajandır. Botun bilgi getirir, ikinc
 
 **IF** Ult'unu koyuyorsun ama düşmanlar aktive olmadan sürekli yok ediyorsa
 **MEANING** Cihazı görünür ya da kolay ulaşılır yere koyuyorsun. Uzun hazırlanma süresi korunaklı yer ister.
-**COUNTER** Ult'unu duvar arkasına ya da düşmanın fiziksel olarak içeri girmeden ulaşamayacağı kapalı alana koy. Cihazı takımınla birlikte koru.
+**COUNTER** Ult'unu duvar arkasına ya da düşmanın fiziksel olarak içeri girmeden ulaşamayacağı kapalı alana koy. Cihazı takımınla birlikte koru. Mümkünse tek başına da patlatma — Astra ya da Omen gibi kapatan bir ajanın duvarı ya da smoke'uyla birlikte kur; düşman hem çıkışı hem cihazı aynı anda yönetemez.
 **WHY** Açık ult anında yok edilir. Duvar arkası düşmanı ya tehlikeli girişe ya da alanı terk etmeye zorlar.
 
-**IF** Her round 1-2 kill alıyorsun ama site hâlâ düşüyorsa
-**MEANING** Geciktirmek yerine frag için oynuyorsun. Senin işin düşmanın zamanını ve yeteneğini tüketmek — düello kazanmak değil.
-**COUNTER** Düşman site'a 2+ yetenek harcayarak girdiyse kurulumun işini yaptı. Kill sayına değil, düşmanın kaç yetenek harcadığına bak.
+**IF** Her round 1-2 kişi öldürüyorsun ama site hâlâ düşüyorsa
+**MEANING** Geciktirmek yerine öldürmek için oynuyorsun. Senin işin düşmanın zamanını ve yeteneğini tüketmek — düello kazanmak değil.
+**COUNTER** Düşman site'a 2+ yetenek harcayarak girdiyse kurulumun işini yaptı. Öldürme sayına değil, düşmanın kaç yetenek harcadığına bak.
 **WHY** Sentinel'in değeri gecikme ve kaynak tüketiminde. Kill peşine düşersen site'ı tutmak yerine dövüşe giriyorsun.
 
 **IF** Yeteneğin sık sık menzil dışına çıktığın için devre dışı kalıyorsa
@@ -53,7 +58,7 @@ Killjoy tek başına site tutan en güçlü ajandır. Botun bilgi getirir, ikinc
 **COUNTER** Her harita için menzil mesafeni öğren. Rotate etmeden önce yeteneğini topla ya da devre dışı kalacağını hesaba kat.
 **WHY** Devre dışı yetenek sıfır değer üretir. Menzil sınırını aşan her rotate kurulumunu sıfırlar.
 
-**IF** İkinci botun tetikleniyor ama molly takip etmiyorsa
+**IF** Botun tetikleniyor ama molly takip etmiyorsa
 **MEANING** Molly'leri botundan çok uzağa koyuyorsun ya da tetiklenmeyi izlemiyorsun.
 **COUNTER** Molly botunla aynı noktayı örtmeli. Bot çaldığında molly'yi hemen patlat — düşmanın savunmasızlığı kısa sürer, molly yakındaysa yetişir.
 **WHY** Düşman savunmasızken molly hasarı artar. Ayrı koyarsan iki yetenek üst üste çalışmaz.
@@ -80,11 +85,11 @@ Killjoy tek başına site tutan en güçlü ajandır. Botun bilgi getirir, ikinc
 
 ## 6. Harita Etkileşimleri
 - **Bind**: B site'ta baskınsın. B long ve hookah'taki dar girişler molly için biçilmiş kaftan. Ult'un B site girişlerini kapatır. Teleport girişleri yüzünden flank hızlı gelir — botunu ana açıya değil, teleport çıkışını ya da rotate hattını izleyecek şekilde koy ki sırtın güvende olsun.
-- **Ascent**: B site'ta market'i izleyen bot ve lane'deki ikinci bot + molly güçlü. A site'ta A main'i kapsayan yeteneğin de işe yarar. Mid kontrolü kaybolursa flank açılır; botunu mid'den B'ye akan rotate hattını da görecek şekilde konumla.
-- **Haven**: B site anchor bu haritanın en güçlü pozisyonu. Botun B main ve garage'ı izler, ikinci bot + molly B girişini kapatır. Ult'un B site girişlerini bloke eder. Üç site'lı harita olduğu için tek başına anchor'larken botun rotate uyarısı kritik — yanlış site'ı tutmamak için bilgiye güven.
+- **Ascent**: B site'ta market'i izleyen taret ve lane'deki bot + molly güçlü. A site'ta A main'i kapsayan yeteneğin de işe yarar. Mid kontrolü kaybolursa flank açılır; botunu mid'den B'ye akan rotate hattını da görecek şekilde konumla.
+- **Haven**: B site anchor bu haritanın en güçlü pozisyonu. Taretin B main ve garage'ı izler, botun + molly B girişini kapatır. Ult'un B site girişlerini bloke eder. Üç site'lı harita olduğu için tek başına anchor'larken botun rotate uyarısı kritik — yanlış site'ı tutmamak için bilgiye güven.
 - **Lotus**: Döner kapılar yeteneğin için doğal huni oluşturur — B site verimli. Kapalı B site alanında ult'unu yok etmek zordur. Döner kapı sesi düşmanı ele verir; molly'ni kapının hemen ardına koy, geçen düşman hem sesle yakalanır hem hasarla karşılaşır.
 - **Sunset**: B site'ta güçlü. Dar site geometrisi molly kapsamını en yükseğe çıkarır. Mid'i izleyen botun erken bilgi getirir. Mid'i kapatabilirsen iki site arası rotate kesilir — botu mid'e koyup mid push'u erken oku.
-- **Icebox**: B site'ta güçlü. Container üstündeki botun yellow ve orange'ı aynı anda izler. Default plant noktasına molly zorunlu. Dikey alan bol — molly'ni plant noktasının üstüne koy ki defuse için açığa çıkmak zorunda kalsınlar.
+- **Icebox**: B site'ta güçlü. Botunu Orange girişine koy — ana giriş erken haber verir; taretini Kitchen'dan gelen retake/split'i görecek şekilde kur. Default plant noktasına molly zorunlu. Dikey alan bol — molly'ni plant noktasının üstüne koy ki defuse için açığa çıkmak zorunda kalsınlar.
 - **Corrode**: Dar koridorlar ve sınırlı girişler yeteneğinin değerini ikiye katlar. Molly dar alanda kaçınılmaz hasar verir. Koridor kesişimlerindeki botun birden fazla açıya bilgi getirir.
 
 ## 7. Eşleşme Notları
@@ -98,11 +103,8 @@ Killjoy tek başına site tutan en güçlü ajandır. Botun bilgi getirir, ikinc
 ## 8. Oyuncuya Ne Söylenmeli
 
 ### Kurulum çalışırken
-**Oyuncu ne yapıyor:** İki yeteneği üst üste koyuyor, botunu birkaç roundda bir off-angle'a taşıyor.
-**Düşman ne yapıyor:** İlk roundlarda bot pozisyonunu öğrenip önceden nişanlamaya geliyor. Bot yeni açıya taşınınca eski noktayı kontrol edip zaman harcıyorlar. Botun savunmasızlığını hafife alıp molly'ye düz giriyorlar.
-**Düşman ne öder:** Botunu temizlemek için yetenek ya da zaman harcıyor. İki yeteneğin üst üste patladığı yere girenler 100+ HP kaybedip site'a giriyor — sonraki her silah dövüşünde tek atışlık hedef oluyorlar.
-**Düşman adapte olduğunda:** recon ile kurulumu keşfetmeye başlar, alan hasarı ile menzilden temizler ya da molly'yi patlatamadan rush yapar.
-**Sen nasıl karşı adapte edersin:** recon'un ulaşamayacağı köşelere botunu koy. alan hasarı ile temizliyorlarsa kurulumu yay — tek yetenek ikisini birden silemesin. Rush yapıyorlarsa bot tetiklendiği an molly'yi patlat.
+**Oyuncu ne yapıyor:** İki yeteneği üst üste koyuyor, botunu birkaç roundda bir off-angle'a taşıyor. İki yeteneğin üst üste patladığı yere giren düşman ağır hasarla site'a girer — sonraki silah dövüşünde tek atışlık hedef olur.
+**Karşı hamle (kanıta göre):** Botun art arda ilk temas anında vuruluyorsa yerini ezberlemişler — recon'un ulaşamayacağı köşeye taşı; eski noktayı kontrol edip zaman harcarlar. Kurulumun tek alan-hasarıyla birden temizleniyorsa yay — tek yetenek ikisini birden silemesin. Rush yiyorsan bot tetiklendiği an molly'yi patlat, bekleme.
 
 ### Sorun bildirimi
 **Yeteneğin kolayca temizleniyorsa:** "Her şeyi tek koridora yığmışsın. Kurulumunu birden fazla açıya yay. Botun bilgi için — hasar ikincil."
@@ -110,13 +112,3 @@ Killjoy tek başına site tutan en güçlü ajandır. Botun bilgi getirir, ikinc
 **Flank'tan ölüyorsan:** "Botunu baktığın açıya koymuşsun, sırtın boşta. Botu kör noktana — flank hattına — al, gözün olmayan yeri o izlesin."
 **Botun bilgi getiriyor ama tepki vermiyorsan:** "Bot çaldığında crosshair'ini o açıya çevir. Bot sana düşmanın nereden geldiğini söylüyor — sen onu peek zamanlamasına çevir."
 **Post-plant'te molly kalmıyorsa:** "Molly'ni retake'te erken harcamışsın. En az bir molly'yi defuse cezası için sakla — bir molly tam defuse süresini katlar."
-
-## 9. Rank Modülasyonu
-
-**Düşük (Iron-Silver):** Botunu açık alana koyuyorsun, molly'ni atmayı unutuyorsun. İki yeteneği aynı noktaya yerleştir, botun farklı açıyı izlesin — önce bu ikisini oturt.
-
-**Orta (Gold-Platinum):** Komboları kuruyorsun ama kurulum her round aynı. Ult'unu ya çok erken ya panikle kullanıyorsun. Kurulum çeşitliliğine ve ult'unu duvar arkasına koymaya odaklan. Botunu kör noktanı/flank'ı izleyecek şekilde koymayı da bu seviyede öğren — ana açıyı zaten sen tutuyorsun.
-
-**Yüksek (Diamond-Ascendant):** Kurulumların sağlam ama düşman takım counter-strat öğrendi. Her site için en az 3-4 farklı kurulum geliştir — düşmanın hangi yeteneği taşıdığını oku, ona göre hangisini kullanacağını seç. Botunun aktivasyon sesini ve molly hasarını round içi bilgiye çevir: nereden, kaç kişi geldiğini sesten oku, takımına net callout ver.
-
-**Elit (Immortal-Radiant):** Değerin adaptif post-plant oyununda ve ult kullanımında. Post-plant için molly lineup'ların beklenir. Spike kurulunca, düşman rotate edip site'a dönerken ult'unu koy — rotasyonunu tamamlayamadan alanı terk etmeye zorla. Ult'unu tek başına patlatma — Astra ya da Omen gibi kapatan bir ajanın duvarı ya da smoke'uyla birlikte kur, düşman hem çıkışı hem cihazı birden yönetemesin. Kurulumunu round başında değil, ilk bilgiye göre kur: düşmanın hangi site'a yüklendiğini okuyup yeteneğini oraya kaydır, kör atış yapma.

@@ -1,7 +1,8 @@
 ---
 id: matchup_omen_vs_viper
 type: matchup
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, omen, viper, controller_vs_controller]
 ---
 
@@ -9,36 +10,36 @@ tags: [matchup, omen, viper, controller_vs_controller]
 
 ## 1. Matchup Özü
 
-Omen ve Viper aynı role girer ama farklı çalışır. Omen'ın smoke'u kısa sürer, hızlı döner, round ortasında yeniden yerleştirir. Viper'ın duvarı ve bulutu süreli çalışır — ama fuel biter, yenisi gelmez. Bu matchup'ta savaş şu: Omen Viper'ın fuel barını okur, Viper Omen'ın smoke cooldown'unu okur. Kim rakibin kaynağını önce tüketirse, o round'un kontrolünü o alır.
+Omen ve Viper aynı role girer ama farklı çalışır. Omen'ın smoke'u kısa sürer, hızlı döner, round ortasında yeniden yerleştirir. Viper'ın duvarı ve bulutu süreli çalışır — ama fuel biter, yenisi gelmez. Bu matchup'ta savaş şu: Omen Viper'ın duvarının ne kadar süredir açık olduğunu okur (uzun süredir açık duvar = yakıt bitmek üzere), Viper Omen'ın smoke sayısını sayar. Kim rakibin kaynağını önce tüketirse, o round'un kontrolünü o alır.
 
 ## 2. Kim Avantajlı?
 
 Haritaya göre ciddi şekilde değişir.
 
-- **Viper avantajlı:** Breeze, Icebox, Fracture. Uzun hat ve geniş alan var. Viper duvarı haritayı keser, Omen üç smoke'la aynı işi yapamaz.
-- **Omen avantajlı:** Haven, Ascent, Sunset, Pearl. Çok koridor, kısa rotate. Üç smoke + dash Omen'ın doğal alanı.
+- **Viper avantajlı:** Icebox. Uzun hat ve geniş alan var. Viper duvarı haritayı keser, Omen iki smoke'la aynı işi yapamaz.
+- **Omen avantajlı:** Haven, Ascent, Sunset. Çok koridor, kısa rotate. İki smoke + teleport Omen'ın doğal alanı.
 - **Nötr:** Split, Lotus. Avantaj kadronun geri kalanına ve oyunculara bağlı.
 
 ## 3. Önemli Düellolar
 
-**IF** Viper round başında duvarı tam açtı ve fuel barı yarının altına düştü
-**MEANING** Round ortasında Viper ikinci tam duvarı kuramaz — smoke cross gelirse alan kapanmaz
-**COUNTER** Omen bu pencerede atağı başlatır. İki site için smoke hazır, dash ile bilgi al, fuel sıfıra yaklaşırken gir
-**WHY** Fuel bitince Viper sadece aimer kalır, alan yok. Omen'ın smoke cooldown'u bu pencerede tam verimde.
+**IF** Viper duvarı round başından beri kapanmadan açık
+**MEANING** Yakıt sürekli aktı — round ortasında Viper ikinci tam duvarı kuramaz, smoke cross gelirse alan kapanmaz
+**COUNTER** Omen bu pencerede atağı başlatır. Smoke hazır, teleport ile bilgi al, duvar uzun süredir açıkken gir
+**WHY** Yakıt bitince Viper'ın elinde sadece silahı kalır, alan yok. Omen'ın smoke'u bu pencerede tam verimde.
 
 ---
 
 **IF** Omen round açılışında iki smoke'u birden harcadı
 **MEANING** İkisi de cooldown'da, mid-round ikinci smoke yok — rotate'e veya sahte hamleye Omen cevap veremez
 **COUNTER** Viper sahte bir atak başlat (util patlaması, koşu sesi). Omen cooldown bitmeden bekle, asıl site için duvarı sakla
-**WHY** Omen'ın gücü smoke rotasyonu. İki smoke yanıyorken Omen controller değil, rifler. Bu pencereyi görürsen round'un ritmini çalarsın.
+**WHY** Omen'ın gücü smoke rotasyonu. İki smoke yanıyorken Omen'in elinde alan aracı yok, sadece silahı var. Bu pencereyi görürsen round'un ritmini çalarsın.
 
 ---
 
 **IF** Viper duvarı haritayı ikiye böldü ve Omen tarafı sadece bir yönden bilgi alıyor
-**MEANING** Duvarın diğer yüzü kör — saldırı duvar arkasında yeniden dizilmiş olabilir, rotate için bilgi yok
-**COUNTER** Dash'i duvarın karşı tarafına at. Tek geçiş, tek peek, geri gel. Recon veya başka bilgi util'in varsa duvar arkasına bas
-**WHY** Duvar çift yönlü körlük yaratır. Omen'ın dash'i bu körlüğü kıran tek şey — kullanmazsan duvar savunmanın değil saldırının silahı olur.
+**MEANING** Duvarın diğer yüzü kör — saldırı duvar arkasında yeniden diziliyor, rotate için bilgi yok
+**COUNTER** Teleportu duvarın karşı tarafına at. Tek geçiş, tek peek, geri gel. Recon veya başka bilgi util'in varsa duvar arkasına bas
+**WHY** Duvar çift yönlü körlük yaratır. Omen'ın teleportu bu körlüğü kıran tek şey — kullanmazsan duvar savunmanın değil saldırının silahı olur.
 
 ---
 
@@ -56,10 +57,10 @@ Haritaya göre ciddi şekilde değişir.
 
 ---
 
-**IF** Dash sesi Viper tarafından duyuldu ve Omen'ın ineceği yer tahmin edilebilir
+**IF** Teleport sesi Viper tarafından duyuldu ve Omen'ın ineceği yer tahmin edilebilir
 **MEANING** Ses "Omen hareket etti" bilgisi verir — Viper molly'yi muhtemel iniş noktasına atar
-**COUNTER** Dash'i ses maskesi altında at: takım util patlatırken, yoğun silah sesi varken. Aynı round'da arka arkaya iki kez aynı noktaya dash atma
-**WHY** Dash'in değeri sürpriz. Ses sinyali verince Viper'ın molly ekonomisi dash iniş noktasına yönlenir — dash pahalı bir ölüme döner. En güvenli pencere: takımın util patlattığı an, o ses altında at.
+**COUNTER** Teleportu ses maskesi altında at: takım util patlatırken, yoğun silah sesi varken. Aynı round'da arka arkaya iki kez aynı noktaya teleport atma
+**WHY** Teleportun değeri sürpriz. Ses sinyali verince Viper'ın molly'si iniş noktasına yönlenir — teleport pahalı bir ölüme döner. En güvenli pencere: takımın util patlattığı an, o ses altında at.
 
 ---
 
@@ -78,35 +79,27 @@ Pratik oku:
 
 Flash tek kör anı açar, molly süreli hasar bölgesi kurar. Flash atağı başlatır, molly atağı kapatır. Kim rakibin kaynağını önce tüketirse, round o tarafa döner.
 
-**Viper duvar 'tap' tekniği:** Duvarı tam açık tutmak yerine kısa aralıklarla aç-kapat. Fuel barı round boyunca dengede kalır, tek seferlik tam açılım yerine Mid cross ve geçiş noktalarını birden fazla kez kapatabilirsin. Breeze ve Icebox'ta duvarın değeri en yüksek olduğundan bu haritalar için tercih edilen yöntem budur.
+**Viper duvar 'tap' tekniği:** Duvarı tam açık tutmak yerine kısa aralıklarla aç-kapat. Yakıt round boyunca dengede kalır, tek seferlik tam açılım yerine Mid cross ve geçiş noktalarını birden fazla kez kapatabilirsin. Icebox gibi duvar-bağımlı haritalarda tercih edilen yöntem budur.
 
 ## 5. Haritaya Göre Değişim
 
-**Breeze:** Viper kurucu, Omen destek rolünde. Duvar haritayı ikiye böler, Mid Pillar kör kalır. Omen burada dash ile duvar arkasına bilgi almak zorunda, yoksa geride kalır. Viper favored.
+**Icebox:** Viper kurucu. Duvar Mid-A Kitchen hattını kilitler. Omen A Belt için işe yarar ama B Mid'de Viper duvarı olmadan B tutulmaz. Viper avantajlı.
 
-**Icebox:** Viper yine kurucu. Duvar Mid-A Kitchen hattını kilitler. Omen A Belt için işe yarar ama B Mid'de Viper duvarı olmadan B tutulmaz. Viper favored.
+**Haven:** Omen avantajlı. Üç site ve Garage Omen'ın smoke + teleport ekonomisiyle uyumlu. Viper tek duvarla üç siteyi çözemez.
 
-**Haven:** Omen favored. Üç site ve Garage Omen'ın üç smoke + dash ekonomisiyle uyumlu. Viper tek duvarla üç siteyı çözemez.
+**Ascent:** Omen kurucu. A Main, Catwalk ve Mid Omen'ın doğal alanı. Viper duvarı Mid'i kapatır ama A saldırıları Viper duvarına bağımlı değil. Omen avantajlı.
 
-**Ascent:** Omen kurucu. A Main, Catwalk ve Mid için üç smoke Omen'ın doğal alanı. Viper duvarı Mid'i kapatır ama A saldırıları Viper duvarına bağımlı değil. Omen favored.
+**Split:** Nötr. Omen Mid ve A Main smoke'uyla işe yarar, Viper B Main duvarıyla işe yarar.
 
-**Fracture:** Viper değerli — geniş alan ve çift taraflı yapı fuel'e dayanan duvarı ödüllendirir. Omen'ın smoke sayısı haritanın iki tarafını birden karşılamaz. Viper favored.
-
-**Split:** Nötr. Omen Mid ve A Main smoke'uyla işe yarar, Viper B Main duvarıyla işe yarar. Kadronun geri kalanına göre seç.
-
-**Sunset:** Omen favored. Dar koridor, kısa rotate, Mid kontrolü Omen'ın cooldown ekonomisini ödüllendirir. Viper fuel'inin değeri burada düşük.
-
-**Lotus:** Omen eğilimli. Üç site Omen'a yakın, Viper yalnızca C Long duvarı için tercih edilir.
-
-**Pearl:** Omen favored. Mid kontrolü smoke ile akıcı çalışır. Viper duvarı Mid'de değer taşır ama Omen'ın hız avantajı baskın.
+**Sunset:** Omen avantajlı. Dar koridor, kısa rotate, Mid kontrolü Omen'ın hızlı smoke dönüşünü ödüllendirir. Viper yakıtının değeri burada düşük.
 
 ## 6. Dönüm Noktaları
 
-1. **Viper fuel %30 altına düştü.** Round içinde kapatabildiği alan yarıdan aşağı. Bu anı görürsen atağı başlat — fuel tamamen bitmeden gir.
+1. **Viper duvarı uzun süredir açık.** Yakıt sürekli aktı, kapatabildiği alan azaldı. Bu işareti görürsen atağı başlat — yakıt tamamen bitmeden gir.
 
-2. **Omen'ın iki smoke'u aynı anda cooldown'da.** İkisi de yenilenmeden Omen rotate'e veya cevap smoke'una gidemez. Bu pencerede iki site sahte hamle + gerçek giriş ile cevapsız kalan siteyi bas.
+2. **Omen'ın iki smoke'u aynı anda yenileniyor.** İkisi de dolana kadar Omen rotate'e veya cevap smoke'una gidemez. Bu pencerede iki site sahte hamle + gerçek giriş ile cevapsız kalan siteyi bas.
 
-3. **Viper duvarı haritayı böldü ama Omen dash'i hâlâ cepte.** Dash'i duvar arkasına at — savunma bir anda iki yönlü olur, Viper'ın tek yönlü alan kurgusu çöker.
+3. **Viper duvarı haritayı böldü ama Omen teleportu hâlâ cepte.** Teleportu duvar arkasına at — savunma bir anda iki yönlü olur, Viper'ın tek yönlü alan kurgusu çöker.
 
 4. **Ult asimetrisi.** Omen ult'u hazırken Viper ult'u harcanmış — Omen harita genelinde hareket eder, Viper cevap veremez. Bu tek round değil, seri çevirir.
 
@@ -114,9 +107,9 @@ Flash tek kör anı açar, molly süreli hasar bölgesi kurar. Flash atağı ba�
 
 ## 7. Koç Notları
 
-Omen oynuyorsan: Viper'ın fuel barını her round izle. Fuel %30'a düştü mü? O an atağın penceresi. Üç smoke'undan birini her zaman elde tut — mid-round bir hamleye cevap vereceksin, üçünü birden aynı anda harcama.
+Omen oynuyorsan: Viper duvarının ne kadar süredir açık olduğunu oku. Round başından beri kapanmadıysa yakıt bitmek üzere — atağın penceresi o an. İki smoke'undan birini her zaman elde tut — mid-round bir hamleye cevap vereceksin, ikisini birden aynı anda harcama.
 
-Viper oynuyorsan: Omen'ın smoke ikonunu izle. İki smoke aynı anda cooldown'a girdi mi? O an agresif duvar al, sahte hamle veya gerçek giriş başlat. Duvarı round başı tam açıp unutma — tap tekniğiyle aç-kapat, fuel'i round boyunca dağıt.
+Viper oynuyorsan: Omen'ın smoke'larını say. Kısa aralıkla iki smoke attıysa ikisi de yenileniyor — o an agresif duvar al, sahte hamle veya gerçek giriş başlat. Duvarı round başı tam açıp unutma — aç-kapa kullan, yakıtı round boyunca dağıt.
 
 Yaygın hata — Omen: Atak için iki smoke + bir flash aynı anda harcandı, round ortasında Viper duvarı düştü, Omen'ın cevap smoke'u yok. Çözüm: bir smoke her zaman reserve.
 

@@ -3,7 +3,8 @@ id: matchup_astra_vs_breach
 type: matchup
 agent_a: astra
 agent_b: breach
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, astra, breach, controller, initiator]
 ---
 
@@ -11,128 +12,105 @@ tags: [matchup, astra, breach, controller, initiator]
 
 ## 1. Matchup Özü
 
-Astra smoke ile alanı kapatır, çekimi ve stun'ı ile Breach'i durdurmaya çalışır. Breach ise duvardan geçen stun ve flash ile o smoke'un arkasını patlatır. Matchup tek soruya iner: Breach smoke arkasını delmeden alanı kilitleyebiliyor musun?
+Astra smoke ile alanı kapatır, çekimi ve sersemletmesiyle Breach'i durdurmaya çalışır. Breach ise duvardan geçen sersemletme ve flash ile o smoke'un arkasını patlatır. Matchup tek soruya iner: Breach smoke arkasını delmeden alanı kilitleyebiliyor musun?
 
 ## 2. Kim Avantajlı?
 
 **Astra lehine:**
-- Ult'u açıkken Breach'in hiçbir mühimmesi o duvarı geçemez, Breach silahsız kalır.
-- Breach stun ve flash bekleme süresindeyken çekimini Breach'in köşesine bırak, onu sıkıştır.
-- 3 site haritalarda (Haven, Lotus) iki siteyi aynı anda kapat, Breach tek bölgede sıkışır.
+- Ult'un mermileri keser ve sesi boğar — takıma güvenli plant/geçiş penceresi açar, Breach takımı o hatta silahla giremez.
+- Breach yetenekleri bekleme süresindeyken çekimini Breach'in köşesine bırak, onu sıkıştır.
+- 3 siteli haritada (Haven) iki siteyi aynı anda kapat, Breach tek bölgede sıkışır.
 
 **Breach lehine:**
-- Stun ve flash dolu, duvardan geçen stun smoke arkasını yakalar, takımın yerinde çakılı kalır.
+- Sersemletme ve flash dolu — duvardan geçer, smoke arkasını yakalar, takımın yerinde çakılı kalır.
 - Yıldızların yanlış sitede, Breach'in geldiği yönde yıldız yoksa cevap veremezsin.
-- Breach ult'unu açıyor, tüm hat bir anda çöker, karşılık verecek ult'un yoksa round biter.
+- Breach ult'unu açıyor, tüm hat bir anda sarsılıyor — pozisyonun hattın içindeyse round biter.
 
 **Haritaya göre:**
-- Split, Ascent, Bind: dar koridorlar Breach stun'ı için biçilmiş kaftan, Breach baskın.
-- Haven, Lotus: 3 site Astra'nın global smoke'unu değerli kılar, Astra baskın.
-- Pearl, Sunset: ikisi de alan bulur, fark yok.
+- Split, Ascent, Bind: dar koridorlar Breach sarsıntısı için biçilmiş kaftan, Breach baskın.
+- Haven: 3 site Astra'nın global smoke'unu değerli kılar, Astra baskın.
+- Sunset: ikisi de alan bulur, fark yok.
 
 ## 3. Önemli Düellolar
 
-**IF** Breach stun'ı smoke arkasındaki takım hattına girdi
-**MEANING** Stun duvardan geçer, smoke onu durdurmaz, takımın felç oldu.
-**COUNTER** Breach atışı yapmadan çekimini Breach'in ayağına bırak. Cast süresince oradan çekilmek zorunda kalır, stun boşa gider.
-**WHY** Smoke görüşü keser ama fiziksel engel değildir. Breach'in stun'ı smoke içindeki herkesi yakalar. Tek cevabın Breach'i cast'ten önce yerinden sökmek.
+**IF** Breach sersemletmesi smoke arkasındaki takım hattına girdi
+**MEANING** Sarsıntı duvardan geçer, smoke onu durdurmaz — takımın nişanı bozuldu.
+**COUNTER** Breach yeteneğini basmadan çekimini Breach'in ayağına bırak. Oradan çekilmek zorunda kalır, sarsıntı boşa gider.
+**WHY** Smoke görüşü keser ama fiziksel engel değildir. Breach'in sarsıntısı smoke içindeki herkesi yakalar. Tek cevabın Breach'i basmadan önce yerinden sökmek.
 
 ---
 
-**IF** Çekimin Breach'in stun atacağı noktanın üstüne indi
-**MEANING** Çekim Breach'i merkeze sürükler, stun hattı kayar, cast boşa gider.
-**COUNTER** Breach çekim sesini duyunca yan açıya kay, çekim alanından çık. Breach oynuyorsan çekimin dışından farklı açıyla stun at.
-**WHY** Çekim alanı kilitler. Breach cast'ini o noktada harcatırsan stun işlevsiz kalır. Astra oynuyorsan zamanlama her şey, Breach'in cast animasyonu başlarken bırak.
+**IF** Çekimin Breach'in sersemletme atacağı noktanın üstüne indi
+**MEANING** Çekim Breach'i merkeze sürükler, sarsıntı hattı kayar, yetenek boşa gider.
+**COUNTER** (Breach için) Çekim sesini duyunca yan açıya kay, çekim alanından çık; farklı açıyla at.
+**WHY** Çekim alanı kilitler. Breach yeteneğini o noktada harcatırsan sarsıntı işlevsiz kalır. Astra oynuyorsan zamanlama her şey — Breach basmaya başlarken bırak.
 
 ---
 
 **IF** Breach flash'ı smoke arkasına girdi
 **MEANING** Flash duvardan geçer, smoke körleşmeyi engellemez, takımın kör kaldı.
-**COUNTER** Stun'ı Breach'in bulunduğu tarafa at. Flash'ı atmadan sarsarsan flash'ın açısı kayar.
+**COUNTER** Sersemletmeni Breach'in bulunduğu tarafa at. Flash'ı atmadan sarsarsan flash'ın açısı kayar.
 **WHY** Flash smoke arkasını okur. Tek çözüm Breach'i flash'tan önce sarsmak. Smoke flash'a karşı koruma vermez.
 
 ---
 
 **IF** Breach ult'u takım hattına girdi
-**MEANING** Tüm hat sarsılır, havaya kalkar ve felç olur, Breach takımı arkadan rahatça girer.
-**COUNTER** Ult'unu hemen o hattın ortasına çek. Senin ult'un Breach'in ult'unu ikiye böler, ikinci yarısı hatta ulaşamaz.
-**WHY** Breach ult'u tek hatta her şeyi bitirir. Ama senin ult'un o hattı keser, Breach ult'u yarı değerle çalışır. Bu matchup'ın en kritik ult takası budur.
+**MEANING** Tüm hat sarsılır ve havaya kalkar, Breach takımı arkadan rahatça girer.
+**COUNTER** Ult dalgası zeminden ilerler ve duvar dinlemez — onu utility'yle durduramazsın. Tek cevap pozisyon: dalganın kapsama alanı sınırlı, kenarından çık, sonra girişi kes.
+**WHY** Breach ult'u tek hatta her şeyi bozar ama alanı bellidir. Hattın dışında duran takım sarsılmaz — üstünlük pozisyonla alınır, utility ile değil.
 
 ---
 
-**IF** Yıldızlarını A'ya yığdın, Breach B'den stun hazırlıyor
+**IF** Yıldızlarını A'ya yığdın, Breach B'den sarsıntı hazırlıyor
 **MEANING** B'de yıldız yok, Breach o hatta cevapsız, round Breach'e gider.
-**COUNTER** Round başında yıldızlarını iki siteye dağıt. Bir siteye 3 yıldız yığarsan diğer site açık kalır.
+**COUNTER** Round başında yıldızlarını iki siteye dağıt. Bir siteye hepsini yığarsan diğer site açık kalır.
 **WHY** Astra global oynar ama yıldızların sınırlı. Yanlış dağıtım global silahını tek site silahına çevirir, Breach'in yerel avantajı geri döner.
 
 ---
 
-**IF** Astra modundayken Breach'in stun'ı bedenini yakaladı
-**MEANING** Beden o modda savunmasız, stun yersen mod iptal olur, hem yıldızı hem canını verirsin.
-**COUNTER** O moda girerken bedenini kapı arkasına, köşeye sok. Beden Breach'in görebileceği bir hatta asla durmasın.
+**IF** Astra yıldız modundayken Breach'in sersemletmesi bedenini yakaladı
+**MEANING** Beden o modda savunmasız — sarsılırsan planın bozulur, vurulursan hem yıldızı hem canını verirsin.
+**COUNTER** O moda girerken bedenini kapı arkasına, köşeye sok. Beden Breach'in yeteneklerinin geçtiği hatta asla durmasın.
 **WHY** Sen yıldız moddasın ama beden orada açıkta. Breach o bedeni yakalarsa hem yıldızı hem oyuncuyu kaybedersin.
 
 ---
 
 **IF** Breach spike'ın etrafına molly attı
 **MEANING** Molly hasarı smoke içinden de geçer, kapıda beklesen bile yanarsın.
-**COUNTER** Takımı molly alanının dışına çek, smoke'u sadece görüş için değil konum için kullan. Stun ile Breach'i cast sırasında sars.
+**COUNTER** Takımı molly alanının dışına çek, smoke'u sadece görüş için değil konum için kullan. Sersemletmeyle Breach'i basarken sars.
 **WHY** Molly smoke'tan etkilenmez. Doğru pozisyon almak görüşü kapatmaktan önce gelir.
 
 ## 4. Utility Dengesi
 
-Astra: 4 yıldız (smoke / çekim / stun olarak kullanım) + ult'u.
-Breach: molly + flash + stun + ult'u.
+Astra: 4 yıldız (smoke / çekim / sersemletme olarak kullanım) + ult.
+Breach: molly + flash + sersemletme + ult.
 
 Astra alan kurar, Breach alanı deler. Kim önce davranırsa round onun.
 
-- Breach stun ya da flash atmadan Astra'nın çekimi veya stun'ı önce giderse Breach sarsılır, cast'i bozulur.
-- Breach stun ya da flash'ı önce atarsa Astra takımı felç olur, Breach rahatça girer.
-- Ult karşılaşmasında Astra'nın ult'u Breach'in ult'unu ortadan keser.
+- Astra'nın çekimi veya sersemletmesi önce giderse Breach sarsılır, yeteneği bozulur.
+- Breach sersemletme ya da flash'ı önce atarsa Astra takımı çakılır, Breach rahatça girer.
+- Ult'lar farklı işler: Astra duvarı mermi keser, Breach'in duvar-aşan yetenekleri ise geçer — Astra ult'unu Breach'e cevap olarak değil, haritayı bölüp güvenli alan yaratmak için kullan.
 
-Astra oynarken round öncesi yıldızlarını yerleştirirken tek soruyu sor: Breach stun'ı nereden gelir? O hatları kapat.
+Astra oynarken round öncesi yıldızlarını yerleştirirken tek soruyu sor: Breach sarsıntısı nereden gelir? O hatları kapat.
 
 ## 5. Haritaya Göre Fark
 
-**Split:** A Ramps ve B Main dar koridorlar stun için ideal. Breach baskın.
+**Split / Ascent / Bind (Breach):** dar koridorlar ve kısa boğazlar duvar-aşan sarsıntı için ideal.
+**Haven (Astra):** 3 site global smoke'u değerli kılar, Breach tek bölgede kalır.
+**Sunset (Dengeli):** A Main ve Market çok açılı, iki ajan da verimli.
 
-**Ascent:** A Main ağaç geçidi, B Switch, Mid Catwalk stun için biçilmiş. Breach baskın.
+## 6. Koç Notları
 
-**Bind:** Hookah ve Showers dar çıkışları stun için kolay. Breach baskın.
-
-**Haven:** 3 site Astra'nın global smoke'unu değerli kılar. Astra baskın.
-
-**Lotus:** 3 site ve dönen kapılar Astra'nın rotate oyununa yarar. Astra baskın.
-
-**Pearl:** B Long ve A Link stun için uygun, Mid Astra için uygun, ikisi de alan bulur.
-
-**Sunset:** A Main ve Market çok açılı, iki agent da verimli.
-
-## 6. Round'u Çeviren Anlar
-
-**An 1 — Stun isabeti:** Breach smoke arkasını yakaladı, round Breach'e. Astra çekimi ile Breach'i durdurdu, round Astra'ya.
-
-**An 2 — Yıldız dağılımı:** İki siteye dağıttın, Breach'in yerel avantajı kalkar. Tek siteye yığdın, diğer site açık, round Breach'e.
-
-**An 3 — Ult takası:** Astra ult'u Breach ult'unu kesti, round Astra'ya. Kesemedi, round Breach'e.
-
-**An 4 — Beden yakalandı:** Yıldız moddasın, beden stun'a girdi, round Breach'e. Beden kapı arkasındaysa yıldız özgür, round Astra'ya.
-
-## 7. Koç Notları
-
-**Matchup özeti:** Astra alan kurar, Breach alanı deler. Ama duvardan geçen her şey (stun, flash, molly) smoke arkasını da yakalar, bunu kafana kaz.
+**Matchup özeti:** Astra alan kurar, Breach alanı deler. Duvardan geçen her şey (sersemletme, flash, ult) smoke arkasını da yakalar — bunu kafana kaz.
 
 **Astra oynuyorsan:**
 - Yıldızlarını Breach'in geleceği hatta göre yerleştir, iki site dengeli olsun.
-- O moda girerken bedenin kapı arkasında olsun.
-- Ult'unu Breach ult'una karşı sakla.
+- Yıldız moduna girerken bedenin kapı arkasında olsun.
+- Ult'unu alan bölmek ve plant penceresi açmak için kullan — Breach ult'unu durdurmaz.
 
 **Breach oynuyorsan:**
-- Stun'ı smoke hattının arkasına göre ayarla.
+- Sersemletmeyi smoke hattının arkasına göre ayarla.
 - Flash'ı smoke kapılarına göre fırlat.
 - Ult'unu Astra takımı toplandığında kullan, dağılmışken değer vermez.
 
-**Kritik test:** Bir sonraki Astra round'unda yıldızlarını yerleştirmeden önce şunu sor: Breach stun'ı buradan geçer mi? Cevap evetse o hatta çekimin veya stun'ın hazır olsun.
-
-> ⚠ Stun süresi ve menzil değerlerini patch 9.x'te kontrol et.
-> ⚠ Astra ult'unun Breach mühimmatını tam engelleyip engellemediğini pratik alanında test et.
+**Kritik test:** Bir sonraki Astra round'unda yıldızlarını yerleştirmeden önce şunu sor: Breach sarsıntısı buradan geçer mi? Cevap evetse o hatta çekimin veya sersemletmen hazır olsun.

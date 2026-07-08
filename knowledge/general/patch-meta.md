@@ -1,89 +1,63 @@
 ---
 id: general_patch-meta
 type: general
+patch: "13.00"
+verified: 2026-07-08
 tags: [general, patch, meta]
 ---
 
-# Patch Meta — Radiant Seviye Bilgi Bankası
+# Patch Meta — Sezon 2026 Act 4 / Patch 13.00
 
-## Güncel Meta Özeti (Episode 9-10)
+Bu dosyanın çıpası patch 13.00 (Sezon 2026 Act 4). Buradaki her sayı web-doğrulanmış patch gerçeğidir; koçluk satırları olay-bazlıdır.
 
-Ep9-10 boyunca ajan yeniden tasarımları ve silah değişiklikleri tek-ajan oynayanı vurdu. Esnek havuz tut: 1 main + 2 yedek.
+## Meta Özeti (13.00)
+
+13.00'ın yönü net: sentinel ve initiator buff dalgası. Savunma kurulumları daha hızlı hazır, bilgi util'i daha sık elde — utility'siz peek eskisinden daha pahalı. Rakip sentinel'in teli ve tareti artık neredeyse her an yerinde; kurulum kırmadan siteye girme. Esnek ajan havuzu tut: 1 ana ajan + 2 yedek.
 
 ---
 
-## Ajan Değişiklikleri
+## Ajan Değişiklikleri (13.00)
 
-### Jett
+### Sentinel Buff Dalgası
 
-IF Jett main'sin ve dash nerf'inden sonra kayıpların arttıysa
-MEANING Dash artık anlık değil — kavgaya girmeden önce bas; reaktif kaçış olarak kullanamazsın
-COUNTER Op alıyorsan peekten önce bas, basmadan girme
-WHY Jett, Op için dash + peek açısı verir; Raze ve Chamber bu mekaniği taşımaz — Ascent ve Breeze gibi uzun açılı haritalarda Jett, Haven ve Bind'da Raze daha güçlü
+- **Killjoy**: taret %50 daha hızlı sıkar, molly süresi 4→5 sn. Siteyi tek başına tutma gücü arttı — varsayılan sentinel seçimi hâlâ Killjoy.
+- **Cypher**: tel kurulumu hızlandı (0.9→0.7 sn) — tel artık peek'ten önce hazır olur. Dar girişli haritalarda (Ascent A-Main, Bind B-Long) Killjoy'dan fazla baskı kurar.
+- **Sage**: kendine attığı heal 50→100 — düello sonrası tama yakın cana döner.
+- **Deadlock**: çekme yeteneği daha sık elde (bekleme 60→50 sn).
+- **Veto**: tuzak geri-alma 30→20 sn; ışınlanma noktası artık 30 metreden kullanılır ve yarım saniyede kurulur — site arası dönüş hızlandı.
 
-- Chamber ve Raze belirli haritalarda Jett'in yerini alır. Harita başına hangisini açacağını bilmen yeter.
+### Initiator Buff Dalgası
 
-### Chamber
+- **Sova, Fade, Skye, Breach, KAY/O**: imza yetenek bekleme süresi 60→50 sn — recon ve flash her round daha erken geri gelir.
+- **Gekko**: bot geri toplama 20→15 sn — plant/defuse botu round içinde daha sık döner.
 
-IF eski agresif TP-Op stilini oynuyorsan
-MEANING TP menzili kısaldı — sitenin karşı ucundan açı tutup kaçamazsın artık
-COUNTER Anchor'larına yakın dur; Breeze ve Ascent gibi TP menzilinin yettiği haritalarda aç
-WHY Uzun rotasyon isteyen haritalarda Chamber zayıf — orada Killjoy daha güvenli
+IF savunmadaysan ve bu buff'ları oynuyorsan
+MEANING kurulumun ve bilgi util'in round içinde daha sık elinde
+COUNTER util'i saklamak için değil döndürmek için kullan — recon'u ilk kontakta at, geri gelecek
+WHY 13.00 öncesi "imza util'i sakla" refleksi artık değer kaybettirir; util döngüsü hızlandı
 
-- TP menzili, tabanca maliyeti, teleport menzili hepsi kısaldı. Dar açılı haritalarda güçlü, geniş rotasyonlularda değil.
+### Giriş / Op Rolü: Jett mi, Raze mi, Chamber mı?
 
-### Killjoy
+- **Jett**: dash reaktif kaçış değil — kavgaya girmeden önce bas, basmadan Op açısına çıkma. Ascent, Icebox, Abyss gibi uzun açılı haritalarda birinci seçim.
+- **Raze**: dar ve patlayıcı-dostu haritalarda (Bind, Split) Jett'in yerini alır.
+- **Chamber**: ışınlanma menzili sınırlı — sitenin karşı ucundan açı tutup kaçamazsın; anchor'ına yakın oyna. Dar açılı haritalarda güçlü, geniş rotasyonlularda Killjoy daha güvenli.
 
-IF sentinel açacaksan ve haritaya özel bir neden yoksa
-MEANING Killjoy'un tuzak + bot + molly ikilisi siteyi tek başına tutar
-COUNTER Varsayılan sentinel olarak Killjoy aç; dar boğaz haritasında (Ascent A-Main gibi) Cypher'a geç
-WHY Ult'unun retake gücü onu neredeyse her haritada birinci seçenek yapar
+### 4 Yeni Ajanın Meta Konumu
 
-### Cypher
+- **Tejo (initiator)**: harita üzerinden iki noktaya güdümlü molly + drone. Drone'un ikinci basışla patlayan dalgası yakınındaki herkesin yeteneklerini kapatır ve yerlerini açar. Execute'ü tek başına açabilen initiator — Summit ve Sunset komplarında standart.
+- **Waylay (duelist)**: dash'i tek kullanımlık — çift atılım mı, tek atılım + temkin mi, kararı basmadan verirsin. Geri-kayma noktası agresif hamleden hemen önce bırakılır; kısa ömürlüdür ve 2 öldürmede yenilenir. Jett ve Raze'e alternatif giriş duelist'i; ult'u öne genişleyen ışık huzmesiyle değdiği düşmanları yavaşlatır — giriş penceresi açar.
+- **Veto (sentinel)**: kurulum kıran sentinel — tuzağı düşman utility'sini havada yok eder, ışınlanmasıyla iki nokta arasında döner, bağlama yeteneği yakaladığını sağırlaştırıp canını eritir. Ult'u dokunulmazlık + saniyede 40 can yenileme + daha hızlı silah kullanımı verir — clutch'ta hem durdurulamaz hem toparlanır. 13.00 buff'larıyla Killjoy/Cypher'a gerçek alternatif.
+- **Miks (controller)**: smoke + heal + hız desteği aynı kitte. Takım arkadaşını iyileştirebilen az ajandan biri; solo controller olarak Omen/Brimstone alternatifi. Smoke'ları harita üzerinden işaretlenir ve gecikmesiz düşer.
 
-IF Killjoy varken Cypher açıp açmayacağını bilmiyorsan
-MEANING Recon yeniden tasarlandı, artık gerçek zamanlı düşman konumu veriyor — geç roundda bilgi aracı olarak çok güçlü
-COUNTER Ascent A-Main veya Bind B-Long gibi dar girişlerde Cypher aç; açık haritalarda Killjoy daha iyi
-WHY Telden kaçmanın zor olduğu dar koridorlarda Cypher, Killjoy'dan daha fazla baskı kurar
+### Initiator Seçimi (harita başına)
 
-### Deadlock
-
-IF komposizyona sentinel lazımsa ve Killjoy/Cypher yoksa
-MEANING Çekme yeteneği ve duvarı bufflandı, dar koridorlu haritalarda işe yarar
-COUNTER Killjoy veya Cypher varsa onları aç; Deadlock'u Bind veya Fracture'da dene
-WHY Killjoy/Cypher'ın baktığı haritaların çoğunda Deadlock geride kalır — rakip Deadlock'a alışık değilse ilk iki roundda sürpriz yersin, üçüncüde okuyup konumlanır
-
-### Iso
-
-IF çift duelist düşünüyorsan
-MEANING Iso'nun kalkanı düelloda tek atışa karşı korur, duvarı site girişinde farklı açı açar
-COUNTER Pearl ve Lotus'ta çift duelist işe yarar — orada dene
-WHY Birincil duelist'in yerini tutmaz; ikinci duelist olarak o haritalarda güçlü flex seçenek
-
-### Clove
-
-IF Omen oynuyorsan ve agresif controller rolü istiyorsan
-MEANING Clove öldükten sonra smoke'ları devam eder — takımın smoke'suz kalmaz
-COUNTER Omen yerine Clove'u agresif peek'e dayalı haritalarda dene
-WHY Omen, pasif smoke rotasyonu olan haritalarda daha güçlü; Bind ve Lotus gibi baskı haritalarında Clove üstün
-
-### Vyse
-
-IF Killjoy veya Cypher'dan farklı bir sentinel denemek istiyorsan
-MEANING Duvarı ve tuzağı alan kapatma üzerine kurulu — bilgi değil bölge reddi sentineli
-COUNTER Killjoy'un bilgi oyununun yetmediği dar retake haritalarında dene; önce Killjoy'la o haritadaki setup'ları öğren, sonra Vyse'a geç
-WHY Killjoy kurulumlarını bilmeden Vyse oynarsan hem yeni ajanı hem savunma kurmayı bilmezsin
-
-### Initiator Seçimi
-
-IF harita başına initiator seçiyorsan şu eşleşmelere bak:
-
-- **Fade**: Çoğu haritada varsayılan. Bot bilgi getirir, sabitleme yeteneği düşmanı yerinde kilitler, ult retake'i taşır — üç iş birden.
-- **Sova**: Ascent ve Breeze gibi açık haritalarda güçlü; dar haritalarda recon atacak yer yok.
-- **Breach**: Fracture ve Lotus'ta duvardan geçen flash ve stun — dar haritada en iyi.
-- **KAY/O**: Yetenek kapatan bıçağı bir alandaki yetenekleri kapar — her haritada işe yarar ama hiçbirinde birinci değil.
-- **Skye**: Flash ağırlıklı komposizyonlarda aç; bot hem bilgi hem sersemletme verir.
-- **Gekko**: Bot'u spike plant/defuse yapar — yaratıcı giriş stratejileri için.
+- **Fade**: çoğu haritada varsayılan — bot bilgi getirir, sabitleme düşmanı kilitler, ult retake'i taşır.
+- **Sova**: Ascent ve Icebox gibi açık haritalarda güçlü; dar haritada recon atacak yer yok.
+- **Tejo**: koordinasyon istemeyen execute — güdümlü molly savunanı yerinden söker.
+- **Breach**: Split ve Haven'da duvardan geçen flash ve sersemletme — dar haritada en iyi.
+- **KAY/O**: yetenek kapatan bıçağı her haritada işe yarar ama hiçbirinde birinci değil.
+- **Skye**: flash ağırlıklı komplarda; bot hem bilgi hem sersemletme verir.
+- **Gekko**: bot'u spike plant/defuse yapar — 13.00 sonrası daha sık döner.
 
 ---
 
@@ -92,126 +66,99 @@ IF harita başına initiator seçiyorsan şu eşleşmelere bak:
 ### Vandal mı, Phantom mı?
 
 IF iki silah arasında kararsızsan
-MEANING Vandal her mesafede kafadan vurursa tek atışta bitirir; Phantom daha hızlı ateş eder ve smoke içinde iz bırakmaz, ama uzakta gövdeden tek seferde öldürmez
-COUNTER Kafa vuruşuna güveniyorsan Vandal al; smoke içi çatışma ve spray transferi yapıyorsan Phantom
-WHY Geniş açılı haritada Vandal, smoke yoğun haritada Phantom — haritaya göre değiştir
+MEANING Vandal her mesafede kafadan tek atışta bitirir; Phantom daha hızlı sıkar ve smoke içinde iz bırakmaz, ama uzakta tek seferde öldürmez
+COUNTER kafa vuruşuna güveniyorsan Vandal; smoke içi çatışma ve spray geçişi yapıyorsan Phantom
+WHY geniş açılı haritada Vandal, smoke yoğun haritada Phantom — haritaya göre değiştir
+
+### Bandit (600 kredi)
+
+Eco round tabancası: yakın mesafede hafif zırhlıyı kafadan tek atar, Sheriff'ten hızlı ve az sekmeli tap atar; mesafe açıldıkça kafa hasarı düşer. 13.00'da üç buff yedi (toparlanma, tap verimi, sekme) — pistol ve eco roundlarda artık standart görürsün. Karşısında: mesafeyi aç, hareketli peek at; tam zırhlıysan gövde avantajı sende.
+
+### Outlaw (2.400 kredi)
+
+Çift namlulu keskin nişancı — Marshal (950) ile Operator (4.700) arasındaki basamak. Hafif zırhlıyı gövdeden tek atışta düşürür; force-buy roundlarının silahı. Karşısında: tam zırh al (gövdeyi iki atışa çıkarır), geniş ve hızlı peek at, ilk atış sonrası ikinci namlu penceresinde baskı kur.
 
 ### Spectre / Stinger
 
-- **Spectre**: Eco veya zorla alım roundlarında yakın mesafede öldürür. Hareket ederken doğruluğu az düşer.
+- **Spectre**: eco ve force roundlarında yakın mesafede öldürür; hareket hâlinde doğruluğu az düşer.
 - **Stinger**: Spectre'dan ucuz; para çok kısıtlıysa al ama uzak açıda yetersiz.
 
 ### Op Ekonomisi
 
 IF Op alacaksan
 MEANING 4.700 kredi — takımda bir kişi alır, duelist veya sentinel'e verilir
-COUNTER Op'u önceki roundda kaybettiysen veya ekonomin 3.000 kreditin altındaysa alma — alıyorsan çıkış açını önceden belirle
-WHY Tek atışta gövdeyi düşürür, oyunun en güçlü silahı, ama kaybın maliyeti çok yüksek
+COUNTER Op'u önceki roundda kaybettiysen veya ekonomin 3.000'in altındaysa alma; alıyorsan çıkış açını önceden belirle
+WHY tek atışta gövdeyi düşürür, oyunun en güçlü silahı — ama kaybın maliyeti çok yüksek
 
 ---
 
-## Harita Havuzu
+## Harita Havuzu (13.00: 8 harita)
+
+Aktif rekabetçi havuz: **Ascent, Bind, Haven, Icebox, Abyss, Split, Summit, Sunset.** 13.00 ile Summit ve Sunset girdi; Fracture ve Pearl çıktı (Lotus/Breeze/Corrode da rotasyon dışı).
 
 ### Harita Karakterleri
 
-- **Saldırgan ağırlıklı** (Lotus, Pearl, Fracture): Çok yol var, savunan rotasyona yetişemez. Saldırı tarafında daha agresif oyna.
-- **Savunan ağırlıklı** (Ascent, Split, Bind): Dar girişler savunanı kayırır. Saldırırken güçlü util gerekir.
-- **Dengeli** (Haven, Icebox, Sunset): İki taraf da iş görür — karşı tarafın hamlesini oku ve buna göre değiş.
+- **Savunan ağırlıklı** (Ascent, Split, Bind): dar girişler savunanı kayırır — saldırırken güçlü util şart.
+- **Uzun açılar** (Icebox, Abyss): Op ve uzun düello değeri yüksek — hattı smoke'suz geçme.
+- **Dengeli** (Haven, Sunset): iki taraf da iş görür — rakibin hamlesini oku, ona göre değiş.
+- **Summit**: 3 düşürülebilir duvar — paneller 125 HP, vurarak indirilir ve indirilen panel yeni açı/geçiş açar. Panel indiyse o hat artık peek hattı; duvar durumunu bilmeden rotasyon planlama.
 
-IF havuza yeni harita girdiyse
-MEANING İlk haftalarda ne sen ne rakibin doğru komposizyonu bilir
-COUNTER İlk 5 maçta o haritada agresif duelist + varsayılan sentinel (Killjoy) dene; sonra zayıf noktanı belirle ve initiator veya controller'ı değiştir
-WHY Erken başlarsan kendi zayıf açılarını test edip düzeltirsin; geride kalırsan bu fırsatı kaçırırsın
+IF havuza yeni harita girdiyse (Summit/Sunset hâlâ taze)
+MEANING ilk haftalarda ne sen ne rakibin doğru kompoyu bilir
+COUNTER ilk maçlarda agresif duelist + varsayılan sentinel (Killjoy) dene; zayıf noktanı görünce initiator veya controller'ı değiştir
+WHY erken denersen kendi zayıf açılarını test edip düzeltirsin; geride kalırsan bu fırsatı kaçırırsın
 
-### Harita Başına Güçlü Komposizyonlar
+### Havuz Haritaları için Komp Önerileri
 
-**Ascent**
-Jett, Sova, KAY/O, Omen, Killjoy
-Mid kontrolü her şey. Sova recon'u mid'i ve siteleri tarar. KAY/O bıçağı savunan setini kapatır.
-
-**Bind**
-Raze, Skye, Brimstone, Fade, Cypher
-Mid yok — rotasyonlar teleporterdan geçer. Cypher tuzakları teleporter flank'ını yakalarken Raze sıçrama util'iyle girişi hızlandırır.
-
-**Haven**
-Jett, Breach, Omen, Killjoy, Sova veya Fade
-Üç site savunanı ince yayar. Breach duvardan agresif peek açar — dar girişte bunu kullan.
-
-**Lotus**
-Raze, Fade, Omen, Killjoy, Breach veya KAY/O
-Döner kapılar ve yıkılabilir duvarlar fazladan yol açar. Raze patlayıcısı duvarı kırar, Breach flash'ı duvardan geçer.
+- **Ascent**: Jett, KAY/O, Sova, Omen, Killjoy — mid kontrolü her şey; Sova recon'u mid'i ve siteleri tarar.
+- **Bind**: Raze, Skye, Brimstone, Cypher, Viper — mid yok, rotasyon teleport'tan geçer; teller teleport flank'ını yakalar.
+- **Haven**: Jett, Breach, Sova, Omen, Killjoy — üç site savunanı ince yayar; Breach duvardan geçen util ile giriş açar.
+- **Icebox**: Jett, Sova, Viper, Killjoy, Sage — uzun hatlar; Viper duvarı ve Sage duvarı plant alanını kapatır.
+- **Abyss**: Jett, Breach, Omen, Sova, Killjoy — uzun hatlar ve kenarsız düşüşler; Op değeri yüksek, bilgi util'i şart.
+- **Split**: Jett, Sage, Breach, Sova, Cypher — dar orta ve üst geçitler; Sage duvarı mid baskısını keser.
+- **Summit**: Jett, Tejo, Omen, Killjoy, Sova — panel indirimi yeni hat açtığı için bilgi util'i ve esnek smoke ister; Tejo'nun güdümlü molly'si panel arkası kurulumları söker.
+- **Sunset**: Jett, KAY/O, Omen, Sova, Cypher — dengeli yapı; standart 1-1-1-1-1 iyi çalışır.
 
 ---
 
-## Yükselen ve Düşen Ajanlar
+## Yükselen ve Düşen (13.00)
 
 ### Yükselen
 
-- **Cypher**: Recon yeteneği artık gerçek zamanlı konum verir — geç roundda 1v1 veya retake kararında rakibin nerede olduğunu bilirsin.
-- **Gekko**: Bot'u spike plant/defuse yapar. Clutch roundlarda bot'u göndermek, site'ı ikinci kez temizleme yükünü azaltır.
-- **Clove**: Öldükten sonra smoke'ları devam eder — takım hiç smoke'suz kalmaz. Bind ve Lotus gibi agresif haritalarda Omen'den değerli.
-- **Harbor**: Kalkan kubbesi güvenli plant/defuse alanı verir. Duvarı oyunun en uzun süreli yönlü smoke'u.
+- **Sentinel'ler** (Killjoy, Cypher, Sage, Deadlock, Veto): buff dalgasının merkezi — kurulumlar hızlı, taret ölümcül, tuzaklar sık dönüyor.
+- **Initiator'lar** (Sova, Fade, Skye, Breach, KAY/O, Gekko): imza util daha sık elde — bilgi oyunu ucuzladı.
+- **Tejo**: execute'ü tek başına açan kit — solo queue'da koordinasyon istemez.
 
-### Düşen
+### Göreli Gerileyen
 
-IF Reyna veya Phoenix oynuyorsan ve çıkmak istiyorsan
-MEANING Reyna takıma sıfır fayda verir — heal ve kaçışı tamamen kendine dönük. Phoenix'in kiti yeni ajanlar çıkınca güç kaybetti
-COUNTER Takıma fayda veren bir ajana geç — Skye, Fade veya Killjoy'a bak
-WHY Util roundu belirler; sen util vermezsen takımını 4v5 oynatırsın
-
-- **Astra**: Yıldız geri çağırma gecikmesi hızlı tempoya yetişemez.
-- **Yoru**: Teleport, klon ve flash ancak takım fake'i okuyup hemen siteye girerse işe yarar. Takımın Yoru setup'larını bildiği maçlarda al; bilmiyorsa fake'lerin boşa gider ve 4v5 oynarsın.
+IF takıma util vermeyen duelist'le (Reyna gibi) solo giriş oynuyorsan
+MEANING 13.00 duelist'lere dokunmadı ama savunma kurulumları güçlendi — utility'siz giriş eskisinden daha pahalı
+COUNTER girişten önce takım util'i iste ya da util veren ajana geç — Skye, Fade veya Tejo'ya bak
+WHY util roundu belirler; sen util vermezsen takımını 4v5 oynatırsın
 
 ---
 
 ## Main'in Nerf Yediğinde Ne Yaparsın
 
-### Şiddeti Ölç
-
 IF sayı değişikliği geldiyse (hasar, süre, menzil)
-MEANING Ajan çalışıyor ama farklı sayılarla — aynı kararlarda yeni değerleri hesaba kat
-COUNTER Aynı ajana devam et, yeni sayıları ilk maçlarda hisset
-WHY Sayı değişikliği ajan değiştirmeyi gerektirmez
+MEANING ajan çalışıyor ama farklı sayılarla — aynı kararlarda yeni değerleri hesaba kat
+COUNTER aynı ajana devam et, yeni sayıları ilk maçlarda hisset
+WHY sayı değişikliği ajan değiştirmeyi gerektirmez
 
 IF yetenek yeniden tasarımı geldiyse
-MEANING Eski kas hafızan geçersiz — zamanlamalar değişti, yerleştirme değişti
-COUNTER Custom oyunda yeni zamanlamaları çalış, sonra ranked'e dön
-WHY Eski alışkanlıkla yeni tasarımı oynarsan hem yetenek boşa gider hem o açıdan ölürsün — iki kez kaybedersin
+MEANING eski kas hafızan geçersiz — zamanlamalar ve yerleştirmeler değişti
+COUNTER custom oyunda yeni zamanlamaları çalış, sonra ranked'e dön
+WHY eski alışkanlıkla yeni tasarımı oynarsan hem yetenek boşa gider hem o açıdan ölürsün
 
 IF temel mekanik değişikliği geldiyse
-MEANING Ajan eski rolünde artık iş görmüyor
-COUNTER Taşıyabileceğin becerileri bul, yeni ajanda 10-15 maç oyna, o ajan için 3-5 temel setup öğren
-WHY Açı okuma, util zamanlaması, site alım kararı — bunlar ajanla değişmez; mekaniği taşı
+MEANING ajan eski rolünde artık iş görmüyor
+COUNTER taşıyabileceğin becerileri bul, yeni ajanda düzenli maç oyna, o ajan için 3-5 temel kurulum öğren
+WHY açı okuma, util zamanlaması, site alım kararı — bunlar ajanla değişmez; mekaniği taşı
 
 ### Beceri Aktarımı
 
 | Eski Ajan | Geç Buraya | Neden |
 |---|---|---|
-| Jett | Raze, Neon, Chamber | Aynı giriş / Op odaklı rol |
-| Killjoy | Cypher, Deadlock, Sage | Benzer sentinel / bilgi kiti |
+| Jett | Raze, Neon, Waylay, Chamber | Aynı giriş / Op odaklı rol |
+| Killjoy | Cypher, Veto, Deadlock, Sage | Benzer sentinel / kurulum kiti |
 | Chamber | Jett (Op), Killjoy (sentinel) | Op veya sentinel mekaniği geçiyor |
-
----
-
-## Rank Başına Meta Okuma
-
-### Immortal ve Üzeri
-
-IF rank'ında işe yarayan komposizyonları bulduysan
-MEANING Bu elo'da takım arkadaşların execution biliyor — koordineli setup'lar çalışıyor
-COUNTER Komposizyonu direkt uyarla, çünkü takımın aynı setup'ı çalışıyor
-WHY Takım arkadaşların execution bildiği için karmaşık setup'ların çalışma koşulu bu elo'da karşılanıyor
-
-### Diamond / Ascendant
-
-IF rank'ında işe yaramayan komposizyonları kopyalıyorsan
-MEANING O setup koordinasyon ister — solo queue'da takım o setup'ı bilmez
-COUNTER Prensibi al, karmaşıklığı bırak: Killjoy veya Sage gibi kendi başına yeten ajanlarla aynı kararları uygula — Reyna veya Jett'le taşıma yapma
-WHY Bu elo'da karar kalitesi rankı belirler, setup bilgisi değil
-
-### Gold / Platinum
-
-IF metayı takip edip meta ajana geçmeyi düşünüyorsan
-MEANING Bu elo'da ajanı tanımak karar doğruluğunu artırır; az oynadığın ajanda doğru kararı geç verirsin
-COUNTER 2-3 ajanlık havuz kur, onları derinlemesine öğren
-WHY Az oynadığın Fade'le doğru kararı geç verirsin; çok oynadığın Phoenix'le erken verirsin — ajanı tanımak farkı buradan gelir

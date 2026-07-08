@@ -1,3 +1,8 @@
+---
+patch: "13.00"
+verified: 2026-07-08
+---
+
 # AJAN: Cypher
 
 ## 1. Rol Kimliği
@@ -5,7 +10,7 @@ Cypher'ı doğru oynarsan takımın asla kör kalmaz. Site'ı ateş gücüyle de
 
 ## 2. Temel Sorumluluklar
 - **Düşmanın yerini öğren, anında ilet**: Tel ve kamera, düşman kapıya dayanmadan iş görmeli. Düşman hangi koridordan geldi, kaç kişi — takım rotate etmeden önce bunu sen söyle.
-- **Flankı kapat**: En az bir tel flank yolunda dursun. Atak round'larında bu pazarlık konusu değil. Tel yalnızca alarm vermez — tetiklenen düşmanı yerinde yakalar, kısa sürede teli kıramazsa onu açığa çıkarır ve sersemletir. Yani flank teli hem haber verir hem de o düşmanı bir an için savunmasız bırakır.
+- **Flankı kapat**: En az bir tel flank yolunda dursun. Atak round'larında bu pazarlık konusu değil. Tel yalnızca alarm vermez — tetiklenen düşmanı yerinde yakalar, kısa sürede teli kıramazsa onu açığa çıkarır ve sersemletir. Yani flank teli hem haber verir hem de o düşmanı bir an için savunmasız bırakır. Tel artık neredeyse anında kurulur — rotate sonrası toplamak ve yeni hatta yeniden kurmak eskisinden ucuz, teli taşımaktan kaçınma.
 - **Site'ı tut**: Tek başına ya da neredeyse yalnız, site'ı geciktir. Telin ve kameranın kazandırdığı zaman takım arkadaşlarını serbest bırakır — stack atarlar, lurk yaparlar.
 - **Görüş-engelleyen küreni (kafes) kullan**: Cypher'ın kendi taşıdığı bir görüş-engelleyici küresi var (ucuz, round başına yenilenir). Bir açıyı kapatmak, push'u yavaşlatmak ya da güvenli rotate için at. Bu küre düşman içinden geçtiğinde ses çıkarır — yani salt görüşü kesmez, kim geçti onu da sana söyler. Tek başına site tutarken bir açıyı bununla kapatıp dikkatini tehlikeli yöne ver.
 - **Ult zamanlaması**: Ult'u sadece kill onaylamak için harcama. Düşman pozisyonları belirsizken, özellikle takım rotate kararı verecekken aç.
@@ -23,9 +28,9 @@ Cypher'ı doğru oynarsan takımın asla kör kalmaz. Site'ı ateş gücüyle de
 
 ## 4. Kalıp -> Anlam
 
-**IF** Tel bilgisinden sürekli kill alıyorsun ama takım round kaybediyor
+**IF** Tel bilgisiyle sürekli öldürüyorsun ama takım round kaybediyor
 **MEANING** Bilgiyi kendine saklıyorsun, paylaşmıyorsun. Tel çalışıyor ama takım bundan fayda görmüyor.
-**COUNTER** Tel tetiklendiği an çağrını yap — kill'i onayladıktan sonra değil.
+**COUNTER** Tel tetiklendiği an çağrını yap — düelloyu bitirdikten sonra değil.
 **WHY** Geç gelen bilgi ölü bilgidir. Anında çağrı, takımın daha peek atmadan o açıyı nişanlamasını sağlar.
 
 **IF** Kameran çoğu round daha ilk saniyelerde kırılıyor
@@ -40,7 +45,7 @@ Cypher'ı doğru oynarsan takımın asla kör kalmaz. Site'ı ateş gücüyle de
 
 **IF** Düşman öldürdüğün round'larda ult'u hiç açmıyorsun
 **MEANING** Ult'u gereksiz saklıyorsun ya da düello baskısında aklına gelmiyor.
-**COUNTER** 3 ve üzeri düşman varken her kill'den sonra ult'u açma değerini anında tart.
+**COUNTER** 3 ve üzeri düşman varken her öldürmeden sonra ult'u açma değerini anında tart.
 **WHY** Açılmayan ult sıfır değer üretir. 3+ düşman varken pozisyon bilgisi rotate kararını tamamen değiştirir.
 
 **IF** Teller birkaç round boyunca hiç tetiklenmiyor
@@ -95,31 +100,17 @@ Cypher'ı doğru oynarsan takımın asla kör kalmaz. Site'ı ateş gücüyle de
 ## 7. Oyuncuya Ne Söylenmeli
 
 ### İyi performans gösterirken
-**Oyuncu Eylemi:** Telleri site başına 3 farklı kurulum arasında döndürüyorsun ve kameradan bilgi alır almaz, daha peek atmadan takıma çağrını yapıyorsun.
-**Düşman Algısı:** İlk round tel yerini ezberleyen saldırgan, birkaç round sonra bambaşka bir kurulumla karşılaşır. Zihnindeki harita yanlış — güvenli sandığı yola yürür.
-**Düşman Tepkisi:** Ya yavaşlayıp yeni teli ararlar (round süresi erir) ya da acele edip beklemedikleri tele basarlar (pozisyon açılır, hasar yer). İki sonuç da execute hızlarını düşürür.
-**Faydalanma Penceresi:** Tel rotasyonu girişlerini yavaşlatır. Kamera çağrıların takım arkadaşlarına crosshair'i önceden doğru açıya koyma şansı verir — hazırlıksız düello, hazırlıklı düelloya döner.
+**Oyuncu Eylemi:** Telleri site başına 3 farklı kurulum arasında döndürüyorsun ve kameradan bilgi alır almaz, daha peek atmadan takıma çağrını yapıyorsun. Değişen kurulum düşmanı her round yeniden aramaya zorlar — execute hızları düşer.
 **Tekrar Stratejisi:** Kurulum setlerini sırayla kullan: A kurulumu, B kurulumu, C kurulumu — aynı seti arka arkaya tekrarlama. Takım swing atmadan önce daima kamera çağrısı geçir — tam sayı ve pozisyon ver. Ult açtıktan sonra bütün pozisyonları anında ilet. Atak'ta push'un arkasını kapatan en az bir tel bırak — spike kurulduktan sonra retake koridoruna tel at, arkadan gelenleri anında yakala.
-**Düşman Adaptasyonu:** Drone, Fade recon'u ya da KAY/O bıçağı yollayıp kurulumunu temizlemeye başlarlar ya da bildikleri tel noktalarını önceden ateşlerler.
-**Karşı Adaptasyon:** Drone ve recon'un kaçırdığı alışılmadık yüksekliklere tel koy. Önceden ateş ediyorlarsa o sesi bedava bilgi olarak oku — nerede olduklarını ve hangi site'a bastıklarını sana kendileri söyledi. Bir de: tam öldürülmek üzereyken kamerayı topla, böylece düşman kamerana el koyamaz ve sonraki round'a sıfır bilgiyle başlarsın.
+**Karşı hamle (kanıta göre):** Kurulumun drone/recon/KAY-O bıçağıyla art arda temizleniyorsa: teli recon'un kaçırdığı alışılmadık yüksekliklere ve kör noktalara taşı. Tel noktaların önceden ateşleniyorsa: o sesi bedava bilgi olarak oku — nerede olduklarını ve hangi site'a bastıklarını sana kendileri söyledi. Bir de: tam öldürülmek üzereyken kamerayı topla — düşman kamerana el koyamaz, sonraki round'a sıfır bilgiyle başlar.
 
 ### Zorlanırken
 **Util tahmin edilebilir ya da değersiz:** "Tellerin fazla derin, bilgi çok geç geliyor. Erken choke noktalarına çek — push başlamadan çalmalı. Her tetiklenmeyi anında ilet."
 
 **Kurulumların her round temizleniyor:** "Düşman yerlerini ezberlemiş. Harita başına en az 3 farklı kurulum kullan ve her round hangisini kullandığını değiştir."
 
-**Erken ölüyorsun, site bilgisiz kalıyor:** "Sentinel olarak ilk düelloya girme. Önce tel ya da kamera sana avantaj versin, sonra peek at. Erken ölen sentinel takımı kör bırakır — sağ kalıp bilgi üreten sentinel, kill alan sentinelden değerlidir."
+**Erken ölüyorsun, site bilgisiz kalıyor:** "Sentinel olarak ilk düelloya girme. Önce tel ya da kamera sana avantaj versin, sonra peek at. Erken ölen sentinel takımı kör bırakır — sağ kalıp bilgi üreten sentinel, sadece öldüren sentinelden değerlidir."
 
-**Bilgiyi alıyorsun ama çağrı geç/eksik:** "Tel patladığı an konuş — kaç kişi, hangi yön. 'Düşman var' yetmez; sayı ve yer ver. Kill'i onaylamayı bekleme, ham bilgiyi anında geçir; takım o saniyede rotate kararı verir."
+**Bilgiyi alıyorsun ama çağrı geç/eksik:** "Tel patladığı an konuş — kaç kişi, hangi yön. 'Düşman var' yetmez; sayı ve yer ver. Öldürmeyi onaylamayı bekleme, ham bilgiyi anında geçir; takım o saniyede rotate kararı verir."
 
 **Post-plant'ta sürekli arkadan/retake'te ölüyorsun:** "Util'inin hepsini girişe harcama. Spike kurulmadan flank/retake yoluna bir tel sakla, kamerayı defuse açısına koy. Sentinel'in asıl işi spike kurulduktan sonra başlar — kurulu bomu tek başına kapatabilmelisin."
-
-## 8. Rank Modülasyonu
-
-**Düşük (Iron-Silver):** Telin yerini hiç değiştirmiyorsun, kamerayı ya hiç kullanmıyorsun ya da fazla uzun izliyorsun. Şimdilik şu yeter: tel koy, bilgiyi al, takıma ilet.
-
-**Orta (Gold-Platinum):** Tellerin iş görüyor ama düşman artık aynı yerden geçmiyor. Kamera açıların iyi ama her round aynı noktaya gidiyorsun. Kurulum rotasyonuna ve ult zamanlamasına odaklan.
-
-**Yüksek (Diamond-Ascendant):** Bilgi akışın iyi ama çağrın düello başladıktan sonra geliyor. Round ortasında adapte ol — okumalarına göre telleri topla, yeniden kur. Smoke + tel ikilisini aktif kullan.
-
-**Elit (Immortal-Radiant):** Değerin tamamen öngörülemezlikte ve çağrı hızında. Her kurulum ya benzersiz ya da düşmanın oyununa göre reaktif olmalı. Ult zamanlaması solo karar değil, takımla koordineli bir karar. Kamerayı ölmeden topla, spike sonrası retake koridoruna tel at — bu seviyede ikisi de standart beklenti.

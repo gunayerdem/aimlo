@@ -3,7 +3,8 @@ id: matchup_omen_vs_fade
 type: matchup
 agent_a: omen
 agent_b: fade
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, omen, fade, controller, initiator]
 ---
 
@@ -11,7 +12,7 @@ tags: [matchup, omen, fade, controller, initiator]
 
 ## 1. Matchup Özü
 
-Omen kaybolur — smoke, TP ve flash ile pozisyonunu siler. Fade ise seni açar — recon, bot ve stun ile peşine düşer. Bu matchup tek bir soruya bakar: Omen kendini silmeden mi davranıyor, yoksa Fade Omen'i çizmeden mi? Kim önce davranırsa round onun.
+Omen kaybolur — smoke, TP ve flash ile pozisyonunu siler. Fade ise seni açar — recon, bot ve sabitleme ile peşine düşer. Bu matchup tek bir soruya bakar: Omen kendini silmeden mi davranıyor, yoksa Fade Omen'i çizmeden mi? Kim önce davranırsa round onun.
 
 ## 2. Kim Avantajlı?
 
@@ -19,12 +20,12 @@ Omen kaybolur — smoke, TP ve flash ile pozisyonunu siler. Fade ise seni açar 
 - TP attığında Fade'in botu seni yeni pozisyonda bulamaz — ses gelir ama iz kalmaz.
 - Fade'in ultu yoksa takip gücü yarıya iner; normal smoke ve flash ile kontrolü sen alırsın.
 - İki smoke birden açıkken recon'un görüşü iki kat kısalır — recon arkasını okuyamaz.
-- Flash hazırsa Fade'in botunu kör et, bot yönünü kaybeder.
+- Fade'in botunu görür görmez vur — birkaç mermiyle düşer, Fade bilgi alamaz.
 
 **Fade öne geçer:**
 - Round başında recon attıysa smoke hattının arkası artık gizli değil; Fade takımı önceden açıyı tutuyor.
 - TP'n henüz dolmadıysa Fade'in botu seni sabit pozisyonda yakalar, kaçamazsın.
-- Stun'ın bastığı yere girersen smoke içinde olman seni kurtarmaz — hem yavaşlarsın hem hasar alırsın.
+- Sabitleme alanına girersen smoke içinde olman seni kurtarmaz — yerinde tutulursun, canın erir.
 - Ult açıkken tüm takımın iz bırakır, gizlenme silahın sıfırlanır.
 
 **Dengeli — Ascent, Bind, Sunset:** Omen TP ile Fade'in botundan ve recon'undan sıyrılır; Fade ise botla Omen'in smoke arkasını tarar. Recon sesini duyduğun an smoke'u kaydırırsan Omen öne geçer; smoke sabit kalırsa Fade öne geçer.
@@ -38,16 +39,16 @@ Omen kaybolur — smoke, TP ve flash ile pozisyonunu siler. Fade ise seni açar 
 
 ---
 
-**IF** Omen flash'ı Fade'in bot hattına girdi
-**MEANING** Bot kör olur, hedef bulamaz, Fade takımı bilgi alamaz
-**COUNTER** Fade oynuyorsan botu flash hattından farklı açıya at. Flash açıkken bot ses çıkarır ama iş yapmaz.
-**WHY** Flash yakın görüşü siler, botun gözü de odur. İkisi karşılaşırsa flash kazanır. Fade botun yönünü flash sesini duyar duymaz değiştirmeli.
+**IF** Fade'in botu Omen'in hattına girdi, Omen botu erken gördü
+**MEANING** Bot vurulup düşerse Fade takımı bilgi alamaz — botun değeri sıfırlanır
+**COUNTER** Fade oynuyorsan botu düz açık hattan sürme; köşe arkasından, Omen'in nişan alamayacağı açıdan gönder.
+**WHY** Bot birkaç mermiyle kırılır. Erken görülen bot bilgi getiremeden ölür — Fade'in giriş planı botun getirdiği bilgiye bağlı.
 
 ---
 
-**IF** Omen TP sesi geldi, Fade stun'ı varış noktasına bastı
-**MEANING** Omen TP'nin çıktığı yere stun düştü; hem hasar hem yavaşlama var, TP'nin değeri sıfırlandı
-**COUNTER** Her round TP varış noktasını değiştir. Aynı yere iki kez TP atma. Fade oynuyorsan stun'ı Omen'in TP hatlarından uzakta kullan.
+**IF** Omen TP sesi geldi, Fade sabitlemeyi varış noktasına bastı
+**MEANING** Omen TP'nin çıktığı yere sabitleme düştü; yerinde tutulur, canı erir — TP'nin değeri sıfırlandı
+**COUNTER** Her round TP varış noktasını değiştir. Aynı yere iki kez TP atma. Fade oynuyorsan sabitlemeyi Omen'in TP hatlarına göre kullan.
 **WHY** TP çıkışında kısa bir savunmasız an var. Fade bu pencereyi yakalarsa Omen silahını kaybeder. Aynı köşe iki round üst üste çalışmaz.
 
 ---
@@ -66,26 +67,26 @@ Omen kaybolur — smoke, TP ve flash ile pozisyonunu siler. Fade ise seni açar 
 
 ---
 
-**IF** Omen ultunu açtı, Fade stun'ı varış noktasına bastı
-**MEANING** Ult çıkışı uzun sürer, savunmasız bir an var. Fade stun'ı bu anı yakalarsa ult boşa gider, Omen ölür.
-**COUNTER** Ult varış noktasını kapak arkası seç, stun'ın gelebileceği açıdan uzak tut. Fade'in stun'ını ancak aktif molly veya kapakla örtebilirsin.
-**WHY** Omen ultu uzun çıkışlı bir silah. Fade stun'ı varışı yakalarsa Omen hem ölür hem ult gider. Ultun değeri varış noktası seçimine bağlı.
+**IF** Omen ultunu açtı, Fade sabitlemeyi varış noktasına bastı
+**MEANING** Ult çıkışı uzun sürer, savunmasız bir an var. Fade sabitlemesi bu anı yakalarsa ult boşa gider, Omen ölür.
+**COUNTER** Ult varış noktasını kapak arkası seç, sabitlemenin gelebileceği açıdan uzak tut.
+**WHY** Omen ultu uzun çıkışlı bir silah. Sabitleme varışı yakalarsa Omen hem ölür hem ult gider. Ultun değeri varış noktası seçimine bağlı.
 
 ---
 
 **IF** Fade'in botu Omen smoke içinden geçti, takımını gördü
 **MEANING** Bot smoke görüşünü kesmez, içinden geçer; smoke arkası okunur, Fade takımı bilgi aldı
-**COUNTER** Smoke'a ek flash at, botun gözünü kör et. İki katman — smoke görseli, flash yakın görüşü siler. Bot smoke içinde flash'e çarparsa görüş iptal olur.
-**WHY** Tek smoke Fade'in botu için yeterli değil. Flash ve smoke kombosu botun iki gözünü de kapatır. Tek katman, Fade takımının bilgi alacağı bir delik bırakır.
+**COUNTER** Bot sesini duyunca smoke arkasında sabit durma — kenara kay ve botu görür görmez vur. Bot birkaç mermiyle düşer.
+**WHY** Smoke bota engel değil — botu durduran tek şey mermi. Kırmadan beklersen Fade takımına pozisyonun gider.
 
 ## 4. Silah Sırası
 
-Omen elinde: 2 smoke, flash, TP ve ult taşır. Fade elinde: 2 bot, recon, stun ve ult taşır. İkisi de katmanlı util taşır; matchup, kimin silahı karşı tarafa önce ulaşıyor sorusudur.
+Omen elinde: smoke, flash, TP ve ult taşır. Fade elinde: bot, recon, sabitleme ve ult taşır. İkisi de katmanlı util taşır; matchup, kimin silahı karşı tarafa önce ulaşıyor sorusudur.
 
 Round içi akış — Fade recon attığında:
-1. Fade recon'u smoke hattına düşürür → Omen flash ile recon'u kör eder → Omen smoke'u kaydırır ve TP ile pozisyon değiştirir → Fade bot ve stun ile girişe geçer → Omen ult ile rotate eder → Fade ultu ile bilgiyi geri alır.
+1. Fade recon'u smoke hattına düşürür → Omen flash ile recon alanını kapatır → Omen smoke'u kaydırır ve TP ile pozisyon değiştirir → Fade bot ve sabitleme ile girişe geçer → Omen ult ile rotate eder → Fade ultu ile bilgiyi geri alır.
 
-Ult karşılaşması: Omen ultunu Fade ultunun alanı dışında kullanırsa Fade onu yakalayamaz. Omen ultunun savunmasız anı Fade stun'ı için yem — varış noktasını buna göre seç.
+Ult karşılaşması: Omen ultunu Fade ultunun alanı dışında kullanırsa Fade onu yakalayamaz. Omen ultunun savunmasız anı Fade sabitlemesi için yem — varış noktasını buna göre seç.
 
 ## 5. Haritaya Göre Değişim
 
@@ -95,7 +96,7 @@ Ult karşılaşması: Omen ultunu Fade ultunun alanı dışında kullanırsa Fad
 
 **Ascent (Fade avantajlı):** Mid kapı ve A Ana ağaç önü, recon hatları için biçilmiş kaftan. Fade'in recon ve botu bu haritada Omen'in smoke arkasını sürekli deler. Omen burada rotate yerine smoke odağına geçmeli.
 
-**Split (Fade avantajlı):** Dikey ve dar geçitler Fade'in botu için ideal. Omen TP değer taşır ama Fade'in recon ve stun kombosu Split'in dikey alanını keser.
+**Split (Fade avantajlı):** Dikey ve dar geçitler Fade'in botu için ideal. Omen TP değer taşır ama Fade'in recon ve sabitleme kombosu Split'in dikey alanını keser.
 
 **Sunset (Dengeli):** Çok açılı siteler. Omen smoke A Anası'nda, Fade recon Market'ta baskın. Recon sesini duyduğun an smoke'u kaydırırsan round Omen'e, smoke sabit kalırsa round Fade'e gider.
 
@@ -109,23 +110,20 @@ Ult karşılaşması: Omen ultunu Fade ultunun alanı dışında kullanırsa Fad
 
 **Dönüm 2 — Flash isabet:** Omen flash'ı Fade'in bot hattını kapattı → round Omen'e. Flash yanlış açıya gittiyse bot serbest → round Fade'e.
 
-**Dönüm 3 — TP varışı + stun:** Omen TP'si stun alanına düştü → round Fade'e. TP kapak arkasına düştüyse → round Omen'e.
+**Dönüm 3 — TP varışı + sabitleme:** Omen TP'si sabitleme alanına düştü → round Fade'e. TP kapak arkasına düştüyse → round Omen'e.
 
 **Dönüm 4 — İki ult aynı round:** Omen ultu Fade ultunun alanı dışında kullanıldıysa → round Omen'e. Fade ultunun içinde kaldıysa → round Fade'e.
 
 ## 7. Koç Notları
 
 **Omen oynuyorsan:**
-- TP varışını her round değiştir — Fade stun'ı için TP rotanı ezberler.
+- TP varışını her round değiştir — Fade sabitlemesi için TP rotanı ezberler.
 - Flash'ı Fade'in botuna cevap olarak sakla, boşa harcama.
-- Ult varış noktasını stun açısından uzak, kapak arkası seç.
+- Ult varış noktasını sabitleme açısından uzak, kapak arkası seç.
 
 **Fade oynuyorsan:**
 - Recon'u Omen'in smoke hattının üstüne at — smoke arkasını açar.
-- Stun'ı Omen'in TP varış noktalarına göre yerleştir — Omen'in TP rotasını bir iki round izle, kalıbı yakala.
+- Sabitlemeyi Omen'in TP varış noktalarına göre yerleştir — Omen'in TP rotasını bir iki round izle, kalıbı yakala.
 - Ultu Omen takımı rotate etmeden önce at — iz bilgisi rotate öncesinde değerlidir.
 
 **Özet:** Omen kendini siler, Fade Omen'i çizer. Silme, çizmeden önce gelirse round Omen'e gider. Çizim, silmeden önce gelirse round Fade'e gider.
-
-⚠ Patch 9.x kontrol: TP menzili ve savunmasız an süresi güncel mi?
-⚠ Patch 9.x kontrol: Fade recon iz süresi ve ult menzili değişti mi?

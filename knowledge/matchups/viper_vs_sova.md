@@ -3,7 +3,8 @@ id: matchup_viper_vs_sova
 type: matchup
 agent_a: viper
 agent_b: sova
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, viper, sova, controller, initiator]
 ---
 
@@ -33,22 +34,22 @@ Viper duvar kurar, görüşü keser. Sova bilgi açar, pozisyonları ifşa eder.
 
 **IF** Sova recon Viper duvar hattının arkasına atıldı
 **MEANING** Recon duvar arkasını tarar, takımın ifşa olur, Sova takımı açı tutmaya geçer
-**COUNTER** Duvarı recon'un giriş açısına dik yerleştir. Recon duvara dikey hattan çarparsa içeri giremez. Smoke'u recon lokasyonuna at, ikinci smoke görüşü tamamen kapat.
-**WHY** Recon, duvar yüksekliğinin altından giremez; üstünden giriyorsa duvarı yükselt. Recon ses verir ama net bilgi vermez — Sova takımı sadece "duvar arkasında biri var" bilgisini alır, yerini bilmez.
+**COUNTER** Recon'u gördüğün an vur — iki mermiyle kırılır. Kıramıyorsan tarama açısının dışına, fiziksel engelin arkasına kay.
+**WHY** Recon görüş hattıyla tarar — arada duvar, kutu, köşe varsa seni işaretleyemez. Duvarın kendisi taramayı durdurmaz; seni kurtaran fiziksel engel ve hızlı yer değiştirme.
 
 ---
 
-**IF** Sova hasar oku Viper molly alanına önce atıldı
-**MEANING** Hasar oku post-plant molly'ni siler, Sova takımına defuse için alan açar
-**COUNTER** İki molly at, ard arda. Hasar oku birini siler, ikincisi aktif kalır.
-**WHY** Sova'nın hasar oku tek molly'yi siler. İki molly Sova'nın hasar oku ekonomisini aşar — ikinci molly için cooldown yetmez. Spike basıldıktan sonra çift molly Viper'ın en sağlam silahı.
+**IF** Sova hasar okunu defuse alanını temizlemek için erken harcadı
+**MEANING** Sova'nın alan temizliği bitti — senin molly'n hâlâ elinde, defuse penceresi sende
+**COUNTER** Tek molly'ni erken yakma. Sova hasar oklarını harcayana kadar bekle, molly'yi defuse başladığında at.
+**WHY** Molly'n tek şarj — hasar okuna yem edersen post-plant çıplak kalırsın. Sıralamayı sen kazanırsan son söz zehirde biter.
 
 ---
 
 **IF** Viper ult açık, Sova bot ult alanına girdi
 **MEANING** Bot içeriyi tarar, Sova takımı seni önceden hedefleyebilir
-**COUNTER** Bot sesini duyduğun an rifle'ınla vur. İçerideki sis sana görüş verir, bot'u süren Sova dışarıdan reaksiyon verir — sen daha hızlısın. Bot'u vururken yer değiştir — feed'deki pozisyonun artık eski olur.
-**WHY** Bot metal HP'li, iki rifle vuruşu yeter. Bot düşünce Sova'nın içeri bilgisi biter, kontrol senin. Bot sesinde hem vur hem kay — feed'deki pozisyon gerçeği yansıtmaz.
+**COUNTER** Bot sesini duyduğun an tüfeğinle vur. İçerideki sis sana görüş verir, bot'u süren Sova dışarıdan reaksiyon verir — sen daha hızlısın. Bot'u vururken yer değiştir — Sova'nın gördüğü pozisyonun artık eski olur.
+**WHY** Bot iki tüfek mermisiyle düşer. Bot düşünce Sova'nın içeri bilgisi biter, kontrol senin. Bot sesinde hem vur hem kay — Sova'ya giden görüntü gerçeği yansıtmaz.
 
 ---
 
@@ -60,7 +61,7 @@ Viper duvar kurar, görüşü keser. Sova bilgi açar, pozisyonları ifşa eder.
 ---
 
 **IF** Viper A execute hazırlıyor, Sova B'de tek bot elinde
-**MEANING** Sova bot ile A execute bilgisi açabilir, rotate kararı bot feed'ine kilitli
+**MEANING** Sova bot ile A execute bilgisini açar, savunmanın rotate kararı botun görüntüsüne kilitli
 **COUNTER** Fake execute — duvarı A Main'e çak, takımı B'ye rotate et. Sova bot'u A'ya giderse B açık, execute B'ye.
 **WHY** Bot iki siteyi aynı anda tarayamaz. Fake execute bot'u harcar, gerçek execute bot cooldown'undayken gelir — Sova kör.
 
@@ -114,7 +115,7 @@ Round içi sıra şöyle döner: Sova recon açar → Viper duvar + smoke kurar 
 
 **Dönüm 2 — Bot içeride:** Bot içeri girdi ve sağ çıktı → Viper alan kontrolü kayboldu, round Sova'ya. Bot rifle'la düştü → kontrol Viper'da, round Viper'a.
 
-**Dönüm 3 — Çift molly vs hasar oku:** Viper çift molly attı, hasar oku birini sildi ama ikincisi aktif → post-plant round Viper'a. Tek molly attıysa hasar oku sildi → round Sova'ya.
+**Dönüm 3 — Molly zamanlaması vs hasar oku:** Viper molly'yi Sova'nın hasar okları harcandıktan sonra attı → post-plant round Viper'a. Molly erken atıldı, hasar oku sildi → round Sova'ya.
 
 **Dönüm 4 — Sova ult isabeti:** Ult hattı Viper takımını duvar arkasında buldu → takım hasar aldı, round Sova'ya. Viper takımı ult hattının dışındaysa → ult boşa gitti, round Viper'a.
 
@@ -124,8 +125,8 @@ Bu matchup'ın özü şu: **görüş bilgiden önce kesilirse Viper kazanır, bi
 
 Viper tarafındaysan:
 - Duvarı Sova recon sesine göre dinamik yerleştir.
-- Molly'yi çift at, tek atma.
-- İçeri bot girince hem vur hem kay — feed'deki pozisyon artık sahte.
+- Tek molly'n var — hasar okuna yem etme, defuse başladığında at.
+- İçeri bot girince hem vur hem kay — Sova'nın gördüğü pozisyon artık sahte.
 - Fuel'i erken harcama — post-plant görüş öncelik.
 
 Sova tarafındaysan:
@@ -135,3 +136,5 @@ Sova tarafındaysan:
 - Recon silinebilir — Viper takımı silmeye alışkınsa recon'u daha gizli açıdan at.
 
 Duvarı her round sabit kullanma — Sova recon'unun yörüngesiyle birlikte değiştir. Recon'u Viper fuel pencerelerini okuyarak at — duvar aktifken değil, duvar + smoke ikisi de düşünce recon'u kaldır.
+
+Hızlı execute'a karşı Viper notu: rakibin birden fazla util'i aynı anda patladıysa execute geliyor demektir — yakıtını tam o ana sakla, duvarı ve smoke'u erken açıp boşa yakma.

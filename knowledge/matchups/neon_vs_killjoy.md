@@ -3,7 +3,8 @@ id: matchup_neon_vs_killjoy
 type: matchup
 agent_a: neon
 agent_b: killjoy
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, neon, killjoy, duelist, sentinel]
 ---
 
@@ -19,7 +20,7 @@ Neon sprint ve slide ile Killjoy'un kurduğu tuzak hattını kırmaya gelir. Kil
 - Uzun koridor varsa (Breeze A/B hattı, Icebox Mid, Pearl Mid) — Neon, taretin nişan alma menziline girmeden koridoru sprintle kapatır.
 - Killjoy tek başına anchor oynuyorsa — Neon flash + slide ile bastığında trade gelmez, Killjoy yalnız kalır.
 - Killjoy ult bekliyorsa — ult yokken post-plant agresif oyna, retake gücü düşüktür.
-- Neon ult hazırsa — beam, tareti ve Killjoy'u anında eritir.
+- Neon ult hazırsa — ışın, tareti ve Killjoy'u anında eritir.
 
 **Killjoy lehine durumlar:**
 - Dar site koridorlarında (Bind Hookah, Sunset B, Fracture B) — taret Neon'u yakın mesafede yakalar, bot önceden haber verir.
@@ -53,9 +54,9 @@ Neon sprint ve slide ile Killjoy'un kurduğu tuzak hattını kırmaya gelir. Kil
 ---
 
 **IF** Neon ultu ile siteye girdi, Killjoy tareti + molly aktif
-**MEANING** Beam tareti anında yıkar ama molly seni de yakar — can düşer.
+**MEANING** Işın tareti anında yıkar ama molly seni de yakar — can düşer.
 **COUNTER** Killjoy oynuyorsan tareti, Neon ultunun görüş hattı dışına koy. Görüş hattındaysa taret anında gider.
-**WHY** Beam sürekli hasar verir, taret 125 HP — birkaç vuruşta biter. Ult sırasında Killjoy'un ekipmanı hızla erir.
+**WHY** Işın sürekli hasar verir, taret 125 HP — birkaç vuruşta biter. Ult sırasında Killjoy'un ekipmanı hızla erir.
 
 ---
 
@@ -80,7 +81,7 @@ Neon sprint ve slide ile Killjoy'un kurduğu tuzak hattını kırmaya gelir. Kil
 
 ## 4. Ekipman Takası
 
-Neon'un ekipmanı hız ve hasar üzerine: sprint, slide, stun, fast lane. Killjoy'unki bilgi ve kontrol üzerine: taret, bot, molly, ult. Killjoy sayıca fazla ama Neon'un hızı, Killjoy'un kurulum süresiyle yarışır. Round başında Neon erken baskı yaparsa Killjoy kurulumu tamamlayamaz, Neon serbest kalır. Killjoy kurulumunu bitirirse Neon yanlış koridorda ölür. Ult için: Neon ultu 7 puan, Killjoy ultu 8 puan — Neon ultu sahaya giriş için, Killjoy ultu alan kontrolü için.
+Neon'un ekipmanı hız ve hasar üzerine: sprint, slide, stun, fast lane. Killjoy'unki bilgi ve kontrol üzerine: taret, bot, molly, ult. Killjoy sayıca fazla ama Neon'un hızı, Killjoy'un kurulum süresiyle yarışır. Round başında Neon erken baskı yaparsa Killjoy kurulumu tamamlayamaz, Neon serbest kalır. Killjoy kurulumunu bitirirse Neon yanlış koridorda ölür. Ult için: Neon ultu sahaya giriş için, Killjoy ultu alan kontrolü için.
 
 ## 5. Haritaya Göre Değişim
 
@@ -106,14 +107,12 @@ Neon'un ekipmanı hız ve hasar üzerine: sprint, slide, stun, fast lane. Killjo
 
 **Dönüm 3 — Neon ultu zamanlaması:** Neon ultunu post-plant değil de giriş için kullanırsan taret + ekipman anında yıkılır. Post-plant'te kullanırsan ult boşa gider.
 
-**Dönüm 4 — Killjoy ultu detain:** Sprint yönünü Killjoy ultunun alanından çıkaramazsan detain + trade ile ölürsün.
+**Dönüm 4 — Killjoy ultu tutukladı:** Sprint yönünü Killjoy ultunun alanından çıkaramazsan tutuklanırsın, arkasından gelen takım seni öldürür.
 
 ## 7. Koç Notları
 
 **Radiant'lar ne yapar:** Neon oynayanlar sprint hattını her roundda değiştirir — aynı koridora iki kez girme. Killjoy oynayanlar ilk roundda Neon'un giriş hattını okur, bot + molly'yi tam o hatta yeniden kurar. Matchup koridor seçiminde başlar, koridor seçiminde biter.
 
-**Tier durumu:** Neon A tier, Killjoy S tier. Doğrudan karşılaşmada Killjoy hafif önde — ama uzun koridor haritalarında Neon bu farkı kapatır.
-
-**Pratik drill:** Taret otomatik nişan alır ve yakaladığında Neon'u yavaşlatır — yani sprintle önünden geçmek bedava can kaybıdır, çözüm tareti önce susturmak. Custom serverde şunu kasla: taretin görüş hattına girmeden açıdan tareti rifle ile patlat, sonra sprintle gir. Beam'i taretin (125 HP) üstüne tutarsan birkaç vuruşta erir; bunu da custom'da tekrarlayıp refleksini oturt.
+**Pratik çalışma:** Taret otomatik nişan alır ve yakaladığında Neon'u yavaşlatır — yani sprintle önünden geçmek bedava can kaybıdır, çözüm tareti önce susturmak. Özel oyunda şunu çalış: taretin görüş hattına girmeden açıdan tareti tüfekle patlat, sonra sprintle gir. Ult ışınını taretin üstüne tutarsan hızla erir; bunu da tekrarlayıp refleksini oturt.
 
 **Koç testi:** Killjoy seni taret hattına çekmeye çalışır. Sen o hattı bırakıp alternatif koridora geçersin. Matchup bu seçimde döner — koridor sende ise sen kazanırsın, Killjoy'da ise Killjoy.

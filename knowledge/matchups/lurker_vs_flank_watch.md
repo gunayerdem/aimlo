@@ -1,7 +1,8 @@
 ---
 id: matchup_lurker_vs_flank_watch
 type: matchup
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, lurker, flank-watch, role, tactical]
 ---
 
@@ -120,7 +121,7 @@ Lurker ult'u daha esnek, flank watch ult'u daha dar ama vurucu. O round kimin ul
 
 ## 7. Koç Notları
 
-Lurker oynarken takımın siteye baskı kurmadan kıpırdama — baskı yoksa savunma rotate etmez, o zaman lurker hattı zaten boş değildir. Lurker'ı bilinçli bir taktik seçim olarak oyna: push başladığı an zıt hatta geç, bilgi topla, fırsat çıkınca girişe gir.
+Lurker oynarken takımın siteye baskı kurmadan kıpırdama — baskı yoksa savunma rotate etmez, o zaman lurker hattı zaten boş değildir. Lurker'ı bilinçli bir taktik seçim olarak oyna: baskı başladığı an zıt hatta geç, düşmanın yerini öğren, fırsat çıkınca girişe gir.
 
 Flank watch rolünü round başında takımda netleştir — kimin tutacağı belli olsun. Savunma kaptanı çağırmadan hattı bırakma. Tek başına rotate edersen flank hattı açılır, round gider.
 

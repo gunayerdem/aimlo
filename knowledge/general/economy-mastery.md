@@ -1,6 +1,8 @@
 ---
 id: general_economy-mastery
 type: general
+patch: "13.00"
+verified: 2026-07-08
 tags: [general, economy, mastery]
 ---
 
@@ -16,8 +18,7 @@ tags: [general, economy, mastery]
 |---|---|
 | Round kazandın | 3,000 |
 | Round kaybettin | 1,900 + kayıp bonusu |
-| Spike diktin (kaybetsen bile) | +300 sana |
-| Spike dikildi, round kaybedildi | +200 takıma |
+| Spike dikildi (kaybetsen bile) | +300 saldıran takımın herkesine |
 
 ### Kill Kredisi
 
@@ -38,7 +39,8 @@ Round kazandığın an sıfırlanır. Kazandıktan sonra kaybedersen yine 1,900'
 - Pistol: 800
 - Pistol kazandıysan 2. round: 3,800
 - Pistol kaybettiysen 2. round: 2,700
-- Overtime her yarı: 2,400
+- Devre arası: herkes 800'e döner, birikim taşınmaz
+- Overtime: her round herkese sabit 5,000
 
 ---
 
@@ -84,7 +86,7 @@ Round bittiğinde takımın ortalamasına bak:
 3,000-3,899 → FORCE mu SAVE mi?
   ├─ 2.+ kayıptaysan → force at
   ├─ 1. kayıptaysan → save, sonraki round full
-  └─ Yarının son round'u → her zaman force
+  └─ Yarının son round'u → force at (devre arasında krediler sıfırlanır, taşıdığın her kuruş yanar)
 2,000-2,999 → ECO
   ├─ Kayıp bonusu maksimumda → force düşün
   └─ Değilse → save
@@ -97,7 +99,7 @@ Round bittiğinde takımın ortalamasına bak:
 
 Düşmanın kredisini doğrudan göremezsin ama hesaplarsın:
 
-1. **Kill say**: her kill 200. Geçen round 3 kill alan 600 ekstra topladı.
+1. **Kill say**: her kill 200. Geçen round 3 kişi öldüren 600 ekstra topladı.
 2. **Round sonucu**: kazandılarsa 3,000, kaybettilerse 1,900 + bonus.
 3. **Önceki alışverişine bak**: geçen round Op aldıysa bu round eli kısa.
 4. **Silah topla**: yerdeki Vandal'ı al — düşman 2,900'ü yeniden harcamak zorunda kalır.
@@ -106,7 +108,7 @@ Düşmanın kredisini doğrudan göremezsin ama hesaplarsın:
 
 DURUM: düşman pistol'ü kazandı, 2. round'a giriyor.
 NE ANLAMA GELİR: ellerinde ~3,800, Spectre + Light alırlar.
-NE YAPARSIN: yakın mesafede SMG'yi bekleme, mesafe tutup Sheriff/Ghost ile pick'le.
+NE YAPARSIN: yakın mesafede SMG'yi bekleme, mesafe tutup Sheriff ya da Ghost ile kafadan vur.
 NEDEN: bonus round'da SMG'nin geleceğini bilirsen pozisyonunu ona göre kurarsın.
 
 DURUM: düşman force atıp kaybetti.
@@ -130,7 +132,7 @@ NEDEN: thrifty round maçı çevirir — 2-3 round'luk değer üretir.
 
 ### Eco'yu Çevirme Yolları
 
-1. **5'li rush**: Spectre/Judge al, tek site'a hep birlikte koş. Hız ve kaos tüfek kurulumlarını bozar.
+1. **Beşli baskın**: Spectre ya da Judge al, tek site'a hep birlikte koş. Hız ve kaos tüfek kurulumlarını bozar.
 2. **Off-angle Sheriff**: yayıl, beklenmedik açıdan kafadan vur. Bir kill bir tüfek demek.
 3. **Site yığını**: 4-5 kişi tek site'a, yakın mesafe silahıyla. Düşmanı SMG mesafesine çek.
 4. **Fake + flash döndürme**: bir site'ta gürültü çıkar, sessizce öbür site'a kay.
@@ -158,28 +160,15 @@ NEDEN: save etmek anlamsız — para taşımanın bir faydası kalmadı.
 
 ## Ult Orb Ekonomisi
 
-Kill, ölüm, orb pickup ve round bitişi ult'unu doldurur.
+Kill, ölüm, orb ve round bitişi ult'u doldurur. Tek kural yeter: round çeviren ult'a (diriliş, site söken duvar, bedava keskin nişancı) yaklaşan takım arkadaşın varsa orb önceliği onda. Orb alırken ses verirsin — önce köşeyi temizle, sonra al.
 
-### Hangi Ult İçin Eco Yapılır Hangisi İçin Yapılmaz
+---
 
-| Ajan | Orb | Eco Önceliği | Sebep |
-|---|---|---|---|
-| Sage | 8 | YÜKSEK | Diriliş round çevirir |
-| Viper | 7 | YÜKSEK | Site savunmasını söker |
-| Chamber | 7 | YÜKSEK | Bedava Op = 4,700 tasarruf |
-| Brimstone | 7 | ORTA | Post-plant engeli |
-| Killjoy | 8 | ORTA | Retake için kilit |
-| KAY/O | 7 | ORTA | Giriş kırar |
-| Cypher | 6 | ORTA | Bilgi verir, ucuz orb |
-| Jett | 7 | DÜŞÜK | Zaten silah alıyor |
-| Raze | 8 | DÜŞÜK | Çok orb gerekiyor |
-| Sova | 8 | DÜŞÜK | Pahalı orb |
+## Pistol Round
 
-### Orb Kuralları
-
-- Round başı 2 orb spawn olur, genelde mid bölgesinde kapışma çıkar.
-- Bir orb 200+ kredilik değer taşır — rotasyon yaparken orb'u yolunun üzerinde al.
-- Orb alırken ses çıkar, düşman duyar — orb'a giderken önce köşeyi temizle, sonra al.
+- **Silah kararı**: kafadan tek atış hattı tutacaksan Ghost; yakın mesafe ve dayanıklılık istiyorsan Classic + Light kalkan. İkisi de meşru — pozisyonuna göre seç.
+- **Her kill 200**: pistol'de 2-3 kişi öldürmek bonus round alımını büyütür — SMG yerine SMG + kalkan + util'e çıkarsın.
+- **Plant +300 herkese**: pistol kaybedilecek gibi olsa bile plant, takımın 2. round alımını değiştirir. Plant şansı varsa dik.
 
 ---
 
@@ -194,20 +183,16 @@ Kill, ölüm, orb pickup ve round bitişi ult'unu doldurur.
 
 ### Pistol Kaybettin
 
-- Pistol sonu: 2,700, save.
-- Bonus sonu: 2,700 + 2,400 = 5,100 — 3. round tam yüklü full buy.
-- Bu yüzden pistol kaybedince save yapılır, 5,100 seni bekliyor.
+Sayılar aşağıda "Force Senaryoları"nda — özet: save standart, bonus sonu 5,100 ile 3. round tam yüklü full buy.
 
 ---
 
 ## Overtime
 
 DURUM: overtime'dasın.
-NE ANLAMA GELİR: herkese 2,400 — Vandal/Phantom (2,900) bile tek başına alınamıyor.
-NE YAPARSIN: Silah > Shield > Util sırasıyla git. Shieldsız Vandal her zaman Spectre + Heavy'den iyi.
-NEDEN: OT'de tek kafa atışı belirleyici — tüfek mesafesini tut.
-
-Önceki OT round'unu kazanmadıysan heavy shield yok, kabullen.
+NE ANLAMA GELİR: her OT round'unda herkese sabit 5,000 verilir — full buy standart (tüfek + heavy + util). Save ve eco kavramı yok; kredi sonraki round'a taşınmaz.
+NE YAPARSIN: her round tam al — tüfek, ağır kalkan, tam util.
+NEDEN: iki taraf da full geliyor — farkı silah değil, ilk düello ve util kullanımı yaratır.
 
 ---
 
@@ -254,10 +239,10 @@ NEDEN: Op'çu öldü, silah toplandı = bir sonraki round 1,800 açıkla giriyor
 
 ## Chamber Ekonomik Etkisi
 
-DURUM: Chamber ult'u dolduysa.
-NE ANLAMA GELİR: ult'la gelen Op bedava (4,700 tasarruf), ult'la gelen tabanca (800, 8 mermi) eco'nun en iyi silahı.
-NE YAPARSIN: Chamber'ın Op parasını başkasının util'ine kaydır ya da takıma kredi paylaştır.
-NEDEN: yarı başına 4,700-9,400 kredilik avantaj — Chamber'lı takım ekonomide 1-2 round önde başlar.
+DURUM: takımında Chamber var.
+NE ANLAMA GELİR: ult'u bedava ağır keskin nişancı verir — Op parası (4,700) cebinde kalır. Tabancası ayrı bir araç: eco round'ların kafadan tek atış seçeneği, mermileri kredi ile satın alınır, ult'la gelmez.
+NE YAPARSIN: Chamber ult'luyken Op parasını takım util'ine ya da silah atmaya kaydır.
+NEDEN: bedava keskin nişancı binlerce kredilik avantaj — Chamber'lı takım ekonomide önde başlar.
 
 ---
 
@@ -274,21 +259,3 @@ NEDEN: birleşik buy bölük buy'ı her zaman yener, istisnası yok.
 2. **Buy turunu takım belirler**: tek başına sapma, ya al ya save yap.
 3. **Almadan önce kontrol et**: 5 oyuncunun kredisine bak. 3+ kişi full alamıyorsa takım save.
 4. **Bonus round = Spectre + Light, hepiniz**: tüfek alma, ekonomi tutmaz.
-
----
-
-## Rank'a Göre Odak
-
-### Immortal+
-
-DURUM: ekonomiyi temelden biliyorsun.
-NE ANLAMA GELİR: bu seviyede ekonomi farkı round'u belirliyor.
-NE YAPARSIN: her round düşman kredisini hesapla, takım buy'ını konuşarak yönet, Op aldıktan sonra arkandaki pozisyonu kapat.
-NEDEN: bu rankta nişan farkı küçük — ekonomi okuması round'u belirleyen fark olur.
-
-### Diamond-Ascendant
-
-DURUM: buy turlarını, force kararını ve save'i henüz oturtamadın.
-NE ANLAMA GELİR: yanlış buy 2-3 round art arda seni silahsız oynatır, doğru buy sürekli tüfek avantajı verir.
-NE YAPARSIN: bu dosyadaki karar akışını uygula, her round öncesi takım kredisine bak.
-NEDEN: yanlış ekonomi kararı silah dezavantajını zincirler — doğru buy round avantajını korur.

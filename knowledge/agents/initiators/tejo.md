@@ -79,7 +79,7 @@ Tejo iki işi aynı anda yapabilen tek initiator: önce görür, sonra o görü�
 - **Haven**: Üç site Tejo'nun keşif yanını ödüllendirir — drone ile hangi site'ın zayıf tutulduğunu oku. C long'da drone → stun → füze execute kalitesini yükseltir. Ult, garage boyunca rotasyonları keser. A long'da çift füze A site'ı iki yönden kapatır.
 - **Ascent**: A main ve B main, drone keşfi için ideal koridorlar. Mid'de stun, catwalk'taki savunucuyu sersemletir. Füzelerle A site'ta tree ile generator açılarını aynı anda kapat. Ult, B main boyunca execute'a destek verir.
 - **Sunset**: Mid koridoru drone için doğal güzergah. B market'ta stun dar alanda kaçınılmazdır. A main'de çift füze push kalitesini yükseltir.
-- **Lotus**: Dönen kapılar drone rotalarını çeşitlendirmek için fırsat açar. Dar B main stun ve füze için idealdir. C site'ın çoklu girişleri ult'un hat yönü seçimini ödüllendirir.
+- **Lotus (rotasyon dışı)**: Dönen kapılar drone rotalarını çeşitlendirmek için fırsat açar. Dar B main stun ve füze için idealdir. C site'ın çoklu girişleri ult'un hat yönü seçimini ödüllendirir.
 
 **Genel ilke (her harita)**: Dar koridorlu, tek-girişli site'larda çift füze ve ult en çok değeri üretir — düşmanın kaçacak yeri yoktur. Açık, çok-girişli site'larda ise drone keşfi öne çıkar: önce nereyi tutuyorlar gör, util'i o yöne yığ.
 

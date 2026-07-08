@@ -1,7 +1,8 @@
 ---
 id: matchup_omen_vs_astra
 type: matchup
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, omen, astra, controller_vs_controller]
 ---
 
@@ -36,37 +37,37 @@ Genel kural: aynı seviyede Omen öne çıkar. Ama Astra'yı gerçekten bilen bi
 
 **IF** Omen iki smoke'unu da yaktı, yenisi henüz dolmadı
 **MEANING** O pencerede Omen controller değil. Astra bunu görürse star'ını çeker, alanı açar.
-**COUNTER** Astra olarak: stun'ını tam bu pencereye bas. Omen cevap veremez.
+**COUNTER** Astra olarak: sersemletmeni tam bu pencereye bas. Omen cevap veremez.
 **WHY** Smoke dolmadan Omen'ın görüş kapatma gücü yok. Bu pencere kısa ama Astra için bedava round.
 
 ---
 
 **IF** Astra ult'unu açtı, harita ikiye bölündü
 
-**MEANING** Duvarın arkası sana kapalı — ses de geçmez, görüş hattı da yok.
-**COUNTER** Omen'ın teleportuyla duvarın arkasına geç, bak, geri çık. Flash duvardan geçmez, boşa atma.
-**WHY** Astra'nın ult duvarı bilgiyi keser, smoke'u kesmez. Kör smoke atarsan değer üretmez — önce bilgi al.
+**MEANING** Duvarın arkası sana kapalı — ses de geçmez, görüş hattı da yok, mermi de geçmez.
+**COUNTER** Omen'ın teleportuyla duvarın arkasına geç, bak, geri çık. Flash'ın da duvardan geçer — arkada bekleyeni körlemek için kullan.
+**WHY** Astra'nın ult duvarı mermiyi ve sesi keser ama duvardan geçen yetenekleri (Omen flash'ı dahil) durdurmaz. Kör smoke atarsan değer üretmez — önce bilgi al ya da flash'la aç.
 
 ---
 
 **IF** Omen ult'uyla bir noktaya iniş yaptın, Astra'nın star'ı orada
-**MEANING** İniş animasyonunda savunmasızsın. Stun tam o noktada patlarsa çıkamazsın.
+**MEANING** İniş animasyonunda savunmasızsın. Sersemletme tam o noktada patlarsa çıkamazsın.
 **COUNTER** Astra olarak: iniş noktasını tahmin et, star'ını önceden bas. Omen iniş + yakalanma = round bitti.
 **WHY** Omen ult'unun zayıf anı iniştir. Astra bunu biliyorsa ult seni kurtarmaz, tam tersine tuzağa çeker.
 
 ---
 
-**IF** Astra beş star'ı beş ayrı noktaya yaydı, hiçbiri çift değil
+**IF** Astra star'larını ayrı noktalara teker teker yaydı, hiçbiri çift değil
 **MEANING** Her yerde tek star var. Tek star tek etki yapar — iki util'e karşı savunmasız.
 **COUNTER** Omen olarak: smoke + flash'ı aynı noktaya bas. Astra'nın tek star'ı çift cevaba yetmez.
 **WHY** Astra yayılımla değil yoğunlukla çalışır. Beş noktaya dağıtırsan her yerde yarım savunma olursun.
 
 ---
 
-**IF** Flash'ı Astra'nın star çektiği (pull) noktaya attın
-**MEANING** Astra pull sırasında yerinde sabit durur. Flash o anda çarparsa pull tamamlanamaz, star ekonomisi o tur donar.
-**COUNTER** Astra'nın varsayılan pull pozisyonuna — spawn ya da spike alanı — flash at. Astra pull yapamaz.
-**WHY** Pull animasyonu savunmasız andır. Astra astral formdayken bedeni yerinde kalır — flash bedenini kör eder, geri dönünce komut verememiş olur.
+**IF** Astra yıldız geri çağırdı ya da astral forma girdi
+**MEANING** İki ayrı gerçek: geri çağrılan yıldız kısa süreli sahte bir smoke bırakır — o duman gerçek kapatma değil. Astral formdayken de Astra'nın bedeni yerinde savunmasız durur.
+**COUNTER** Sahte smoke'a gerçek smoke muamelesi yapma — kısa sürede dağılır, arkasında plan yok. Astra'nın bedenini bulduysan bas: formdayken kendini savunamaz.
+**WHY** Yıldız geri çağırma Astra'nın yerleşimini düzeltme aracı — bedeli, o pencerede bedenin açıkta kalması ve dumanın yanıltıcı olması.
 
 ---
 
@@ -79,7 +80,7 @@ Genel kural: aynı seviyede Omen öne çıkar. Ama Astra'yı gerçekten bilen bi
 
 Omen'ın elinde: iki smoke (cooldown ile yenilenir) + teleport + flash. Her turu tam util ile başlarsın.
 
-Astra'nın elinde: beş star, tur başı yerleştirilir, tur içinde harcanır, yavaş dolar. Hepsini bir turda harcarsan sonraki tur yarım başlar.
+Astra'nın elinde: star havuzu — tur başı yerleştirilir, tur içinde harcanır, yavaş dolar. Hepsini bir turda harcarsan sonraki tur yarım başlar.
 
 Fark şu: hata yaparsan Omen bir tur öder, Astra birkaç tur öder. Astra'yı fazla harcamaya zorlayan her baskı seni ileriki turlarda daha güçlü bırakır.
 
@@ -109,11 +110,11 @@ Fark şu: hata yaparsan Omen bir tur öder, Astra birkaç tur öder. Astra'yı f
 
 1. **Astra dört star'ı tek siteye koydu, saldırı diğer siteden geldi.** Astra o turu utility'siz geçirir. Smoke'unla execute'u kilitle.
 
-2. **Omen'ın smoke'u dolmadı, Astra'nın stun'ı hazır.** Smoke yokken Astra star çeker, alanı açar. Bu pencerede pozisyon verme.
+2. **Omen'ın smoke'u dolmadı, Astra'nın sersemletmesi hazır.** Smoke yokken Astra star çeker, alanı açar. Bu pencerede pozisyon verme.
 
 3. **Astra ult'unu açtı, harita ikiye bölündü.** Duvarın arkası kör. Teleportla önce bak, sonra karar ver.
 
-4. **Flash Astra'nın pull noktasına gitti.** Astra o tur komut veremez. Commit et.
+4. **Astra astral formda yakalandı.** Bedeni savunmasız, o an komut veremez. Bas.
 
 5. **Astra star'larını birkaç turda harcadı.** Sonraki tur Astra yarım controller. O turu agresif bas.
 
@@ -121,8 +122,10 @@ Fark şu: hata yaparsan Omen bir tur öder, Astra birkaç tur öder. Astra'yı f
 
 Omen olarak ilk turu izle: Astra star'ını nereye koydu? Astra oyuncularının çoğu her tur aynı star dağılımını tekrarlar. Dağılımı bir kez oku, boş tarafı bul, her tur oradan bas.
 
-Astra olarak: Omen'ın smoke göstergesine bak. İki smoke de dolmamışsa o pencere senin pencerendir — star'ını o an çek.
+Astra olarak: Omen'ın smoke'larını say. Kısa aralıkla iki smoke attıysa ikisi de yenileniyor — o pencere senin pencerendir, star'ını o an çek.
 
-Şunu yapma: Astra olarak star'ı her siteye teker teker dağıtma. İki star aynı sitede dursun — biri smoke, biri stun. Geri kalanı diğer noktalara. Yoğunluk olmadan Astra sadece yavaş bir Omen olur.
+Şunu yapma: Astra olarak star'ı her siteye teker teker dağıtma. İki star aynı sitede dursun — biri smoke, biri sersemletme. Geri kalanı diğer noktalara. Yoğunluk olmadan Astra sadece yavaş bir Omen olur.
 
 Omen olarak da şunu yapma: Astra star'ını görünce ona reaksiyon verme. Star seni kendi planından saptırmak için orada. Planına göre smoke at, Astra'nın zamanını çal.
+
+Op'lu rakibe karşı iki smoke dersi (her controller matchup'ında geçerli): smoke düştüğü an Op oyuncusu yer değiştirmek zorundadır — düşüş anında baskı kur. Ve kendi smoke'unun içinden çıkarken kenarından çıkma — Op kenar çizgisini önceden nişanlar.

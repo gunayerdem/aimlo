@@ -1,3 +1,8 @@
+---
+patch: "13.00"
+verified: 2026-07-08
+---
+
 # AJAN: Deadlock
 
 ## 1. Rol Kimliği
@@ -54,8 +59,8 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 
 **IF** Düşman ağ tuzağına yakalanıyor ama sen ona ateş açamadan kurtuluyor
 **MEANING** Ağ tuzağını attın ama üstünü tutmuyorsun. Yere yapışan düşman ağı söküp çıkmak için kısa süre kanalize eder (F'ye basar) ve bu sırada sana sesli uyarı gelir — sen o pencerede ateş etmezsen bedava bir kaçış vermiş oluyorsun.
-**COUNTER** Ağ tuzağını her zaman ateş açabileceğin bir açıya at. Yakalanan düşmana anında ateş aç ya da takım arkadaşını çağır. Net düşmanı öldürmez, sadece kısa süre tutar — değeri ancak biri o pencereyi kullanırsa çıkar.
-**WHY** Ağ tuzağı bir tutuş aracı, bir öldürme aracı değil. Tutulan düşmana hiçbir baskı binmezse net'i hatırlatıcı bir uyarıdan ibaret kalır. Sen ya da takımın o pencerede tetiği çekmeli.
+**COUNTER** Ağ tuzağını her zaman ateş açabileceğin bir açıya at. Yakalanan düşmana anında ateş aç ya da takım arkadaşını çağır. Ağ düşmanı öldürmez, sadece kısa süre tutar — değeri ancak biri o pencereyi kullanırsa çıkar.
+**WHY** Ağ tuzağı bir tutuş aracı, bir öldürme aracı değil. Tutulan düşmana hiçbir baskı binmezse ağ, hatırlatıcı bir uyarıdan ibaret kalır. Sen ya da takımın o pencerede tetiği çekmeli.
 
 **IF** Site'ı tek başına savunuyorsun ama düşman utility'ni boşalttıktan sonra üstüne basıyor
 **MEANING** Tüm yeteneğini düşmanın ilk fake'inde ya da yavaş yaklaşımında harcadın. Şimdi gerçek push geldiğinde elin boş.
@@ -79,7 +84,7 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 - **Neon** ve hız bazlı ajanlara karşı güçlüsün. Tüm yetenek setin tam da bunları durdurmak için var — duvar hızını keser, ağ tuzağı dash'ini yere yapıştırır.
 - **Sova** tuzaklarını temizleyebilir, duvar pozisyonlarını güvenli mesafeden keşfeder. Tuzakları standart yerden çıkar, tahmin edilemez ol.
 - Ult'un **izole düşmana** karşı counter'lanamaz. En zayıf olduğun an grup halinde gelen takımlar — kozayı çabuk vururlar.
-- **Jett** ve **Chamber** gibi yüksek hareket kabiliyetli ajanlar ağ tuzağını ekonomik kullanmanı zorlar. Jett dash'le, Chamber TP'siyle net'in etkisini kısaltabilir — net'i onların hareket yeteneğini zaten kullandığı, geri çekilemeyeceği ana sakla.
+- **Jett** ve **Chamber** gibi yüksek hareket kabiliyetli ajanlar ağ tuzağını ekonomik kullanmanı zorlar. Jett dash'le, Chamber TP'siyle ağın etkisini kısaltabilir — ağı onların hareket yeteneğini zaten kullandığı, geri çekilemeyeceği ana sakla.
 - Recon temizleyen ajanlara (**Sova**, **Fade**, **Skye**) karşı tuzağını ve ağ tuzağını görüş hattının dışına, alçak zemine koy. Açıkta duran utility taranıp imha edilir; gizli duran utility değer üretir.
 
 ## 7. Oyuncuya Ne Söylenmeli
@@ -87,9 +92,7 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 ### İyi Gidiyorsa
 **Ne yapıyorsun:** İlk birkaç round'da düşmanın hangi girişi tercih ettiğini okudun, duvarı oraya koydun, arkasına tuzak katladın, ağ tuzağını da düşman tam o koridora girerken attın.
 
-**Düşman ne görüyor:** Duvarı görüyor, orbları hızla kırabileceğini sanıyor. Arkasındaki tuzaktan haberi yok — orbu kırmak için adım atıyor, tam o anda sersemliyor.
-
-**Düşman ne yapıyor:** Ya orbları vuruyor — ateş sesiyle pozisyonu açığa çıkar, üstüne tuzak çarpar. Ya alternatif yola geçiyor — takımının crossfire kurduğu tarafa düşer. Rush yapanlar ağ tuzağına yakalanınca koordineli grup 4-5 ayrı dövüşe parçalanır.
+**Katmanın değeri:** Orb kırma sesi duyduğunda düşman duvarı söküyor demektir — o ses pozisyonunu ele verir, arkadaki tuzak tam o adımda tetiklenir; sen hazır açıda bekle. Rush ağ tuzağına yakalandığında koordineli grup ayrı dövüşlere parçalanır — takımla tek tek temizleyin.
 
 **Düşman adapte olursa:**
 - Tek bir alan hasarı ile duvar ve tuzağı aynı anda temizlemeye çalışırlarsa: ikisini birbirinden ayır, tek utility ikisini birden temizleyemesin.
@@ -103,20 +106,10 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 "Düşman duvar yerlerini ezberledi, etrafından dolanıyor. Round değiştir — hangi girişi kilitlediğini değiştir. Duvarın kapamadığı yolu ağ tuzağıyla tut."
 
 ### Ağ Tuzağını Boşa Harcıyorsa
-"Ağ tuzağı yakalıyor ama düşman ağı söküp çıkıyor çünkü üstünü tutmuyorsun. Net öldürmez, sadece tutar — yakaladığın an ateş aç ya da takımı çağır. Tutamayacağın açıya net atma."
+"Ağ tuzağı yakalıyor ama düşman ağı söküp çıkıyor çünkü üstünü tutmuyorsun. Ağ öldürmez, sadece tutar — yakaladığın an ateş aç ya da takımı çağır. Tutamayacağın açıya ağ atma."
 
 ### Utility'yi Erken Boşaltıyorsa
 "Düşmanın ilk sesine bütün yeteneğini harcıyorsun, gerçek push gelince elin boş kalıyor. Önce duvar ya da tuzakla bilgi al — fake mi gerçek mi anla. Ağ tuzağını asıl baskı geldiğinde sakla."
 
 ### Post-Plant'i Tutamıyorsa
-"Spike kurulduktan sonra senin en güçlü anın ama o ana eli boş giriyorsun. Ağ tuzağını ve ult'unu post-plant için sakla — net'i spike'a koşana at, ult'u defuse'a geleni garanti götürmek için kullan."
-
-## 8. Rank Modülasyonu
-
-**Düşük (Iron-Silver):** Duvarı rastgele koyuyorsun, tuzakları unutuyorsun, ağ tuzağını el bombası gibi atıyorsun. Duvarı ana geçişe koy, tuzağı flank yoluna koy, ağ tuzağını da düşman tam koridora girince at.
-
-**Orta (Gold-Platinum):** Utility işini görüyor ama her round aynı yere koyuyorsun. Ult açık alanda patlıyor, düşman kurtarılıyor. Reaktif ağ tuzağı zamanlamasına ve koza yolunu korumaya odaklan.
-
-**Yüksek (Diamond-Ascendant):** Katmanlama tamam ama tek site'a bağlı kalıyorsun. Düşman hangi round hangi girişi tercih ediyor — bunu oku ve duvarı round'dan round'a taşı.
-
-**Elit (Immortal-Radiant):** Deadlock'un asıl gücü bir saldırı rotasını tek round'da tamamen kapatmaktır. Duvar ve ağ tuzağı her round okumalarına göre değişsin. Ult'u spike kurulduktan sonra post-plant için sakla — garantili defuse engeli olarak kullan. Orb kırma sesini aktif dinle ve o sese önceden açını kur: o zaman duvar geciktirici değil, gerçek bir tuzak olur. Utility'ni düşmanın fake'ine yakma — önce bilgi al, asıl push'a tam donanımla cevap ver.
+"Spike kurulduktan sonra senin en güçlü anın ama o ana eli boş giriyorsun. Ağ tuzağını ve ult'unu post-plant için sakla — ağı spike'a koşana at, ult'u defuse'a geleni garanti götürmek için kullan."

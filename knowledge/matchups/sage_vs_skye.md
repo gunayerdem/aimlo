@@ -3,7 +3,8 @@ id: matchup_sage_vs_skye
 type: matchup
 agent_a: sage
 agent_b: skye
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, sage, skye, sentinel, initiator]
 ---
 
@@ -27,7 +28,7 @@ Sage duvar + slow + heal + diriltme ult ile bölgeyi kapatır. Skye flash + bot 
 - Skye takımına konum bilgisi verirse — Sage duvarı nereye koyacağını bilmeden kurarsa, takım o duvarı bypass eder.
 - Recon ult Sage'i bulursa — yarı-kör + takım follow-up, Sage köşeye sıkışır.
 
-**Nötr haritalar:** Haven, Ascent, Lotus gibi orta mesafe açık haritalarda matchup iki tarafın hamle kalitesine bağlı — Sage bölge kontrolü kurar, Skye bilgi toplar, kim rakibin ult'una göre pozisyonunu önce alırsa öne geçer.
+**Nötr haritalar:** Haven ve Ascent gibi orta mesafe açık haritalarda matchup iki tarafın hamle kalitesine bağlı — Sage bölge kontrolü kurar, Skye bilgi üretir, kim rakibin ult'una göre pozisyonunu önce alırsa öne geçer.
 
 ## 3. Önemli Düellolar
 
@@ -81,7 +82,7 @@ Sage duvar + slow + heal + diriltme ult ile bölgeyi kapatır. Skye flash + bot 
 ## 4. Utility Karşılaştırması
 
 Sage'de slow x2, duvar, heal, diriltme ult var. Amacı bölgeyi kapatmak ve takımı ayakta tutmak.
-Skye'da flash, bot, heal, recon ult var. Amacı bilgi toplamak ve takımı açmak.
+Skye'da flash, bot, heal, recon ult var. Amacı bilgi üretmek ve takımı açmak.
 
 İkisi de heal yapar ama şekli ayrı: Skye oynuyorsan çevrendeki herkesi toplarsın; Sage oynuyorsan tek kişiyi seçersin. Ult maliyeti ikisinde de 8 — eşit. Senin için asıl fark şu: Sage ult'u clutch'ta hayata döndürür, Skye ult'u site'a girmeden bilgi verir. Retake senaryosunda Sage ult'u maç değiştirir; bilgi senaryosunda Skye ult'u round kırar.
 

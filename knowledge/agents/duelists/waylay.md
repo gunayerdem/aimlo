@@ -10,7 +10,7 @@ verified: 2026-07-08
 ## 1. Rol Kimliği
 - Waylay bir mobilite duelist'i. Hızla içeri girer, ilk öldürmeyi alır, düelloyu kaybederse ölmeden geri kayar. İşi keşif değil — alan açmak ve ilk öldürmeyi almak.
 - Jett'e en yakın akraba: ikisi de dash'le boşluk kapatır. Fark: Waylay geri-kayma noktasına dönerken kısa süre dokunulmaz ve elinde bir de yavaşlatma var.
-- Kit gerçekleri (ezberle): Geri-kayma noktası bırakıldıktan 8 saniye sonra kendiliğinden kaybolur, şarjı iki öldürmeyle yenilenir — tur boyu duran bir sigorta DEĞİL, peek'ten hemen önce kurulan kısa ömürlü bir güvence. Dash TEK kullanımlık: normal atışla çift dash patlaması, alternatif atışla tek dash — ikinci dash'i sonraya saklayamazsın, karar basmadan önce verilir; ilk dash seni yukarı da çıkarabilir. Ult öne doğru genişleyen bir ışık huzmesi: değen düşman yavaş hareket eder, yavaş ateş eder, yavaş şarjör değiştirir; sana kısa süreli hız verir, hasar vermez.
+- Kit gerçekleri (ezberle): Geri-kayma noktası bırakıldıktan 8 saniye sonra kendiliğinden kaybolur, şarjı iki öldürmeyle yenilenir — tur boyu duran bir sigorta DEĞİL, peek'ten hemen önce kurulan kısa ömürlü bir güvence. Dash TEK kullanımlık: normal atışla çift dash patlaması, alternatif atışla tek dash — ikinci dash'i sonraya saklayamazsın, karar basmadan önce verilir; ilk dash seni yukarı da çıkarabilir. Ult öne doğru genişleyen bir ışık huzmesi: değen düşman 6 saniye boyunca yavaş hareket eder, yavaş ateş eder, yavaş şarjör değiştirir; sana 7 saniyelik hız verir, hasar vermez.
 - Takım senden iki şey bekler — ilk girişi açmak ve ilk öldürmeyi almak. Geri durursan giriş boşluğu açık kalır; kör dalıp ölürsen takım sayıca geri düşer.
 
 ## Saldırıda Görevin
@@ -30,7 +30,7 @@ verified: 2026-07-08
 5. **Dash'i hep düz ileri kullanmak** — İlk dash seni yukarı da çıkarır. Hep göz hizasından girersen kutuların üstünden gelen sürpriz açıyı boşa harcarsın.
 6. **Dash kararını basmadan önce vermemek** — Dash tek kullanım: çift dash patlaması mı, tek dash mı — atış anında seçersin, ikinciyi sonraya saklayamazsın. Derin giriş için çift, kısa boşluk için tek; kaçış planın dash değil geri-kayma.
 7. **Flash'ı varmış gibi oynamak** — Waylay'in flash'ı yok. Kör açıya tek başına dash'leme; körlemeyi flash'lı takım arkadaşından al, girişi sen yap.
-8. **Ult'u atıp beklemek** — Huzme değdiği an savunucular yavaş dövüşüyor; o pencerede girmezsen ult boşa gider. Işık düşmana değdiği an dal.
+8. **Ult'u atıp beklemek** — Huzme değdiği an savunucular 6 saniye yavaş dövüşüyor; pencere kapanmadan girmezsen ult boşa gider. Işık düşmana değdiği an dal.
 9. **Geri-kaymayı sadece kaçış sanmak** — Geri kayarken kısa süre dokunulmazsın: molly içinden geçmek ya da kötü pozisyondan temize sıyrılmak için de kullan.
 10. **Yavaşlatmayı kendi takımının geçeceği yola atmak** — Onu düşmanın geleceği/bekleyeceği yere at; yanlış yere atarsan kendi girişini yavaşlatırsın.
 11. **Noktayı hep aynı yere bırakmak** — Düşman kaydığın yeri ezberlerse döndüğün anı önceden nişanlar. Her peek öncesi yeniden ve farklı yere bırak.

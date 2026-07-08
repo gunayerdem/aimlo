@@ -3,7 +3,8 @@ id: matchup_raze_vs_sage
 type: matchup
 agent_a: raze
 agent_b: sage
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, raze, sage, duelist, sentinel]
 ---
 
@@ -52,7 +53,7 @@ Raze, nade ve sıçrama ile Sage'in duvar ve slow savunmasını kırmaya gelir. 
 
 ---
 
-**IF** Sage ult'unu Raze kill'i sonrası kullanıp ölen takım arkadaşını canlandırdı
+**IF** Sage ult'unu Raze birini öldürdükten sonra kullanıp ölen takım arkadaşını canlandırdı
 **MEANING** Raze'in kazandığı trade geri alındı, sayı üstünlüğü silindi.
 **COUNTER** Raze olarak şunu oku: Sage canlandırdıysa, canlandırılan oyuncu Sage'in dibinde çıkar. İkisi aynı noktada — nade için iki hedef bir arada.
 **WHY** Canlandırma iki oyuncuyu aynı yere toplar. Raze nade alan hasarı verir; iki hedef tek noktada nade için en yüksek değer.
@@ -68,8 +69,8 @@ Raze, nade ve sıçrama ile Sage'in duvar ve slow savunmasını kırmaya gelir. 
 
 **IF** Sage heal ile Raze'in nade hasarını kapattı
 **MEANING** Heal Sage'in canını geri yükler, nade baskısı boşa gider.
-**COUNTER** Raze olarak: nade'i at, hemen gir. Heal alırken Sage yerinde sabit kalır — o pencere senin kill fırsatın.
-**WHY** Sage heal'i kullanırken hareket edemez. Nade ardından hemen giriş, o sabit pencereyi vurur.
+**COUNTER** Raze olarak: nade'i at, hemen gir. Heal sırasında Sage'in dikkati canında, silahı geç kalkar — o pencere senin fırsatın.
+**WHY** Heal hareket halinde çalışır ama Sage o pencerede düelloya hazır değil. Nade ardından hemen giriş, o pencereyi vurur.
 
 ---
 
@@ -104,13 +105,13 @@ Bu maçın özeti:
 
 **Fracture (Raze avantajlı):** İki yönlü giriş Raze sıçrama yarar. Sage tek duvarla iki yönü birden tutamaz.
 
-## 6. Dönüm Noktalarıı
+## 6. Dönüm Noktaları
 
 **Flip 1 — Duvar harcanması:** Sage duvarı attığı an, tur içinde ikinci giriş serbest kalır. Raze nade'i hazırsa o pencereyi kullan.
 
 **Flip 2 — Nade lineup tutması:** Raze nade'i duvarın arkasındaki noktaya denk gelirse Sage'in savunması çöker.
 
-**Flip 3 — Slow Raze sıçrama yakaladı:** Sıçrama slow içinde başlarsa Raze durur, Sage o pencerede kill alır.
+**Flip 3 — Slow Raze sıçramasını yakaladı:** Sıçrama slow içinde başlarsa Raze durur, Sage o pencerede onu öldürür.
 
 **Flip 4 — Canlandırmayla tur çevirme:** Takımın en çok util taşıyan oyuncusu canlandırılırsa tur geri döner. Zaten util'i bitmiş ölü oyuncu canlandırılırsa Sage ult'u boşa gitti, tur kazanılmadı.
 

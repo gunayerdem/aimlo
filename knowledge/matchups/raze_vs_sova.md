@@ -3,7 +3,8 @@ id: matchup_raze_vs_sova
 type: matchup
 agent_a: raze
 agent_b: sova
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, raze, sova, duelist, initiator]
 ---
 
@@ -13,12 +14,12 @@ tags: [matchup, raze, sova, duelist, initiator]
 
 Sova recon atınca senin pozisyonun takımına gider — trade gelir, sen ölürsün. Raze molly atınca Sova'nın recon'u düşer, hasar oku lineup'ı boşa çıkar. Bu matchup şuna iner: Sova recon atmadan sen mi girdin, yoksa recon seni yakaladı mı.
 
-Raze oynuyorsan: close range'de Sova'nın util'i seni durduramaz, üstüne git. Sova oynuyorsan: uzun hatlarda Raze'in her girişini recon'la işaretle, takımın trade'i bağlar.
+Raze oynuyorsan: yakın mesafede Sova'nın util'i seni durduramaz, üstüne git. Sova oynuyorsan: uzun hatlarda Raze'in her girişini recon'la işaretle, takımın trade'i bağlar.
 
 ## 2. Kim Avantajlı?
 
 **Raze lehine:**
-- Close choke'larda (Bind Hookah, Split B Main, Sunset A) — Raze molly Sova'nın info avantajını geçersiz kılar, close range düelloyu Raze alır
+- Dar geçişlerde (Bind Hookah, Split B Main, Sunset A) — Raze nade'i Sova'nın bilgi avantajını geçersiz kılar, yakın mesafe düellosunu Raze alır
 - Sova recon + hasar oku harcandıysa — Sova bilgi üretemez, Raze molly baskısı açılır
 - Ult hazırsa — Sova anchor pozisyon tutar, ult düz vurur
 
@@ -81,17 +82,16 @@ Raze oynuyorsan: close range'de Sova'nın util'i seni durduramaz, üstüne git. 
 
 ## 4. Utility Karşılaştırması
 
-Raze'in elinde ne var: molly, paintshell, iki sıçrama, ult. Hepsi hasar ve hareket.
-Sova'nın elinde ne var: iki recon, iki hasar oku, recon bot, ult. Bunlar bilgi ve hasar.
+Raze'in elinde ne var: bot, nade, iki sıçrama, ult. Hepsi hasar ve hareket.
+Sova'nın elinde ne var: recon, iki hasar oku, drone, ult. Bunlar bilgi ve hasar.
 
-Raze close range choke'ta Sova'nın recon bilgisini molly ile geçersiz kılar — recon atıldı, Raze molly attı, bilgi anlamsız. Sova uzak hatta recon harcanmadan Raze'in girişini durdurur.
-Ult maliyeti: Raze ult'u 8 puan, Sova ult'u 7 puan — Sova'nın ult'u biraz daha ucuz.
+Raze dar geçişte Sova'nın recon bilgisini nade ile geçersiz kılar — recon atıldı, Raze nade attı, bilgi anlamsız. Sova uzak hatta recon harcanmadan Raze'in girişini durdurur.
 
 Asıl fark şu: Sova util'i round başında çıkar ve biter. Raze util'i esnek, duruma göre kullanılır. Recon atıldıktan sonra bilgi eskir — sen o andan sonra sıçrama yönünü değiştirirsen Sova o round'a harcadığı util'i boşa harcamış olur.
 
 ## 5. Haritaya Göre Değişim
 
-**Breeze (Sova avantajlı):** Uzun hatlar Sova'nın işi. Raze molly bu mesafede yetmez. Raze oynuyorsan Mid push at veya Sova util'i bitmeden girme.
+**Breeze (Sova avantajlı):** Uzun hatlar Sova'nın işi. Raze nade'i bu mesafede yetmez. Raze oynuyorsan Mid'den bas veya Sova util'i bitmeden girme.
 
 **Icebox (Sova avantajlı):** Sova'nın en güçlü haritalarından biri. Raze oynuyorsan Mid Tube'dan dikey sıçrama bypass dene — Sova recon Mid Tube üstüne nadiren atılır.
 
@@ -99,11 +99,11 @@ Asıl fark şu: Sova util'i round başında çıkar ve biter. Raze util'i esnek,
 
 **Ascent (Dengeli):** Sova A Main recon meta. Raze B molly lineup güçlü. Recon sesini A'da duyunca A'dan gir, recon harcandı mı B'den bas.
 
-**Bind (Raze avantajlı):** Close range Raze'in oyunu. Sova Bind'da Raze'i durduracak uzun hat bulamaz.
+**Bind (Raze avantajlı):** Yakın mesafe Raze'in oyunu. Sova Bind'da Raze'i durduracak uzun hat bulamaz.
 
 **Split (Raze avantajlı):** Dar koridorlar Raze molly için biçilmiş kaftan. Sova recon dar hatlarda yer değiştirme almana izin vermez — Sıçrama ile yukarı çık, recon ground seviyesini tarar.
 
-**Sunset (Raze avantajlı):** Dar choke ve close range Raze meta. Sova Sunset'te zayıf pick.
+**Sunset (Raze avantajlı):** Dar geçişler ve yakın mesafe Raze'in oyunu. Sova burada uzun hat bulamaz.
 
 ## 6. Dönüm Noktaları
 
@@ -117,7 +117,7 @@ Asıl fark şu: Sova util'i round başında çıkar ve biter. Raze util'i esnek,
 
 ## 7. Koç Notları
 
-Bu matchup'ta iki oyuncu da lineup kullanır ama amaç farklı — Raze hasar atar, Sova bilgi toplar.
+Bu matchup'ta iki oyuncu da lineup kullanır ama amaç farklı — Raze hasar atar, Sova bilgi üretir.
 
 Radiant Raze şunu yapar: Sova recon sesini duyar duymaz sıçrama yönünü değiştirir. Recon zaten yere düştü, bilgi eskidi — şimdi girmek güvenli.
 Radiant Sova şunu yapar: Raze'in sıçrama iniş noktalarını ezberler, hasar oku o noktaya önceden atar. Raze havaya kalkınca dart zaten orada bekler.

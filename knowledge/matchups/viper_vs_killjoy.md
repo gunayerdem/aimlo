@@ -1,7 +1,8 @@
 ---
 id: matchup_viper_vs_killjoy
 type: matchup
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, viper, killjoy, controller_vs_sentinel]
 ---
 
@@ -82,27 +83,15 @@ Viper'ın yakıtı biter — round boyunca dikkatli kullanmazsan duvar düşer. 
 
 ## 5. Haritaya Göre Değişim
 
-**Breeze:** İkisini birlikte oyna. Breeze'de bu ikili birbirini tamamlar.
+**Icebox:** Bu ikili haritanın bel kemiği — Viper duvarı Mid'i keser, Killjoy B'yi kilitler; kuleyi duvarın görüş hattının dışına kur.
 
-**Icebox:** Aynı şekilde. Icebox'ın bel kemiği bu ikili.
+**Haven:** Üç sitede Killjoy tek siteyi kilitler, Viper duvarı oynanan hatta saklanmalı — boş siteye erken yakıt harcama.
 
-**Fracture:** Viper oyna. Killjoy Fracture'da ikinci tercih — Cypher kapıları daha iyi tutar.
+**Ascent:** Killjoy'un kilit haritası — Viper'lı rakibe karşı kuleyi duvarın kapatamayacağı derin köşeye koy.
 
-**Haven:** Killjoy oyna. Viper Haven'da ikinci kontrolcü olarak girer, tek başına yeterli değil.
+**Sunset / Split:** Dar geçişlerde molly ve kule değer üretir — Viper'a karşı cihazları smoke hattının dışında tut.
 
-**Lotus:** Killjoy oyna. Viper Lotus'ta ikinci kontrolcü rolünde.
-
-**Split:** Killjoy oyna. Viper Split'te işe yaramaz.
-
-**Sunset:** Killjoy oyna. Viper Sunset'te işe yaramaz.
-
-**Bind:** İkisi de oynanır.
-
-**Ascent:** Killjoy oyna. Viper Ascent'te işe yaramaz.
-
-**Pearl:** İkisi de oynanır.
-
-**Abyss:** İkisi de oynanır.
+**Bind / Abyss:** İki işlev de çalışır — duvar geçişleri keser, kule flank tutar; ayrı bölgelere yayın.
 
 ## 6. Kritik Dönüm Noktaları
 

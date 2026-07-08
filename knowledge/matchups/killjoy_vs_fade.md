@@ -3,7 +3,8 @@ id: matchup_killjoy_vs_fade
 type: matchup
 agent_a: killjoy
 agent_b: fade
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, killjoy, fade, sentinel, initiator]
 ---
 
@@ -11,108 +12,88 @@ tags: [matchup, killjoy, fade, sentinel, initiator]
 
 ## 1. Matchup Özü
 
-Killjoy siteyi gizli kurulumla tutar. Fade recon ve bot ile o kurulumu bulup ifşa eder. Matchup tek cümle: Killjoy yerini saklarsa kazanır, Fade yerini öğrenirse kazanır. İki taraf da bilgi savaşı verir, ama yöntemleri tam ters.
+Killjoy siteyi gizli kurulumla tutar. Fade recon'uyla (karanlık göz) OYUNCULARI işaretler — kurulumu değil. Turret'in ve tuzağın işaretlenmez; açığa çıkan sensin. Matchup tek cümle: Killjoy kendini saklarsa kazanır, Fade Killjoy'u her round bulursa kazanır.
 
 ## 2. Kim Avantajlı?
 
 **Killjoy lehine durumlar:**
-- Fade recon ve bot harcandı — kurulumunu rahatça kur, kimse görmez
-- Dar geçişli bir sitede oynuyorsun (Bind Hookah, Sunset B) — bottan girişi zorlaştır
-- Ult hazır — Fade retake'e gelirken at, bot chase'i orada biter
-- Turret botu görür — iki-üç vuruda botu söker, Fade chase'i kaybeder
+- Fade recon ve botunu harcadı — kurulumunu rahatça kur, seni arayan kalmadı
+- Dar geçişli bir sitede oynuyorsun (Bind Hookah, Sunset B) — bot girişi turret görüşüne düşer
+- Ult hazır — Fade retake'e gelirken at, alandaki herkes donar
+- Turret botu görür — vurup söker, Fade takip aracını kaybeder
 
 **Fade lehine durumlar:**
-- Recon turret ve botunun yerini takıma gösterdi — takım tüfekle o util'i siler
-- Bot tam senin durduğun yere girdi — aim'in bozulur, takım arkandan basar
-- Stun kurulum hattına düştü — alan kilitlenir, turret tepki veremez
-- Ult post-plant hattına geldi — körlük ve korku basar, Killjoy retake yapamaz
+- Recon seni işaretledi — pozisyonun takıma gitti, kurulumundan ayrı yakalanırsın
+- Bot izini alıp üstüne geldi — nişanın bozulur, takım arkasından basar
+- Sabitleme küresi seni yakaladı — yere kilitlisin, canın eriyor, takımı o anda girer
+- Ult post-plant hattına geldi — can erimesi ve sağırlık basar, savunma hattın çöker
 
-**Dengeli haritalar:** Haven, Ascent, Lotus — hangi taraf kurulum/recon döngüsünü öne alırsa o round'u alır.
+**Dengeli haritalar:** Haven, Ascent — hangi taraf kurulum/recon döngüsünü öne alırsa o round'u alır.
 
 ## 3. Önemli Düellolar
 
-**IF** Fade recon turret ve botunun yerini gösterdi
-**MEANING** Takım o noktayı biliyor — tüfekle ya da util'le kurulumu siler
-**COUNTER** Turret'i recon'un göremeyeceği köşelere kur. Her round farklı yer seç — recon aynı yeri iki kez yakalayamaz
-**WHY** Recon geniş alan tarar. Sabit kurulum, düşmana bedava bilgi verir. Yer değiştir, recon değersizleşir
+**IF** Fade recon attı, sen görüş hattındaydın
+**MEANING** İşaretlendin — takım senin yerini biliyor, kurulumun sahipsiz kalacak
+**COUNTER** Recon sesini duyunca görüş hattından çık ya da gözü silahla kır. Turret ve tuzak işaretlenmez — sen saklan, kurulum işini yapsın
+**WHY** Recon oyuncu işaretler, utility göremez. Sen görünmezsen Fade'in bilgisi boş döner, kurulumun sürprizi bozulmaz
 
 ---
 
-**IF** Fade botu tam senin durduğun yere girdi
-**MEANING** Aim'ini bozar, takım hemen arkasından gelir
-**COUNTER** Bot sesini duyar duymaz kapağa çekil — turret botu otomatik vurup bitirir
-**WHY** Botun canı az, turret iki-üç vuruda söker. Turret görüş hattındaysa Fade botu körü körüne atamaz; önce turret'in yerini çözmesi gerekir
+**IF** Fade botu izini alıp üstüne geldi
+**MEANING** Nişanını bozar, takım hemen arkasından gelir
+**COUNTER** Bot sesini duyar duymaz turret görüşüne çekil — turret botu otomatik vurup bitirir
+**WHY** Botun canı az, turret söker. Turret görüş hattındaysa Fade botu körü körüne salamaz
 
 ---
 
-**IF** ult'unu Fade'in retake hattına attın
+**IF** Ult'unu Fade'in retake hattına attın
 **MEANING** Alandaki Fade donar, util kullanamaz
-**COUNTER** Ult sesini duyunca alandan hemen çık, süre bitene kadar kapağın arkasında bekle
+**COUNTER** (Fade için) Ult sesini duyunca alandan hemen çık, süre bitene kadar siperde bekle
 **WHY** Ult retake'i iptal eder. Fade'in tüm gücü retake'te — ult süresi boyunca Fade etkisiz kalır
 
 ---
 
 **IF** Fade ult'unu senin post-plant pozisyonuna attı
-**MEANING** Körlük ve korku basar, kapağın arkasında bile zayıflatma yersin, savunma hattın çöker
-**COUNTER** Ult sesini duyunca alandan çık, ult'un geldiği yönden kapak al
-**WHY** Ult duvardan geçmez. Doğru yönden kapak alırsan zayıflatma sana ulaşmaz
+**MEANING** Dalga duvardan geçer — siper korumaz; can erimesi, sağırlık ve iz basar
+**COUNTER** Dalganın geliş yönünü sesten oku, hattından yana kaç — menzili sınırlı, alanından çıkarsan etki yemezsin
+**WHY** Dalga düz ilerler ve genişliği bellidir. Hattında kalan herkes zayıf ve sağır retake bekler
 
 ---
 
-**IF** Fade stun'u senin kurulum hattına düştü
-**MEANING** Alan kilitlenir, util'ini aktif edemezsin, turret tepki vermez
-**COUNTER** Kurulumunu stun'un inemeyeceği noktalara yap. Stun sesini duyunca hemen yer değiştirme al
-**WHY** Stun zemine yapışan bir CC. Senin util'in yere bağlı — stun üstüne gelirse kurulum boşa gider
+**IF** Fade'in sabitleme küresi senin durduğun alana indi
+**MEANING** Yere kilitlendin, canın eriyor — takımı tam o pencerede girer
+**COUNTER** Kürenin havada geliş sesini duyunca açık alandan köşeye çekil. Kurulumunun dibinde bekleme — sabitlenirsen ikisi birden gider
+**WHY** Sabitleme açık alandaki oyuncuyu yakalar. Sen köşedeysen küre boşa iner, kurulumun tehdit olmaya devam eder
 
 ---
 
 **IF** Molly'n Fade'in recon attığı noktaya denk geldi
-**MEANING** Recon atarken Fade sabit durur, yeri bellidir — molly o an basar, Fade biter
-**COUNTER** Fade recon hattını molly'nin erişemeyeceği yerden seçer. İlk round'da alternatif hat dene, karşı tarafa molly harcat
-**WHY** Recon atarken Fade kıpırdamaz. Sabit hedef, molly için bedava kill
+**MEANING** Recon atarken Fade sabit durur, yeri bellidir — molly o an basar, Fade ölür
+**COUNTER** (Fade için) Recon hattını molly'nin erişemeyeceği yerden seç. İlk round'da alternatif hat dene, karşı tarafa molly harcat
+**WHY** Recon atarken Fade kıpırdamaz. Sabit hedef molly için bedava av
 
 ---
 
 **IF** Turret round başında Fade'in botunu yakaladı
-**MEANING** Bot biter, Fade chase aracını ve bilgiyi kaybeder
-**COUNTER** Fade önce recon atıp turret'in yerini öğrensin — sonra turret görüş hattının dışından bot göndersin
-**WHY** Botun canı az, turret iki-üç vuruda söker. Turret'i recon hattını değil bot giriş hattını kesecek şekilde kur — recon yeri açsa bile bot yine ölür
+**MEANING** Bot biter, Fade takip aracını ve bilgiyi kaybeder
+**COUNTER** (Fade için) Önce turret'in yerini gözünle ya da takım bilgisiyle öğren — sonra turret görüş hattının dışından bot gönder
+**WHY** Botun canı az, turret söker. Turret'i bot giriş hattını kesecek şekilde kur — bot yine ölür
 
 ## 4. Utility Karşılaştırması
 
-Killjoy: turret + bot + molly x2 + ult (kurulum + alan + dondurma).
-Fade: recon + bot + stun + ult (ifşa + chase + CC).
+Killjoy: turret + bot + molly + ult (kurulum + alan + dondurma).
+Fade: recon + bot + sabitleme + ult (oyuncu işaretleme + takip + yere kilitleme).
 
-İkisi de bilgi oyunu oynar, ama ters yönde: Killjoy yerini gizler, Fade o yeri bulur. Killjoy ult'u 8 puan, Fade ult'u 7 puan — Fade'in ult'u bir puan daha ucuz.
+İkisi de bilgi oyunu oynar, ama ters yönde: Killjoy yerini gizler, Fade oyuncuyu bulur. Killjoy'un kurulumu pasif çalışır; Fade her round yetenek yakar.
 
 ## 5. Haritaya Göre Değişim
 
-**Bind (Killjoy avantajlı):** Dar geçişler turret için ideal. Hookah ve A Short girişi turret'i zorlar, Fade'in botu bu darlıkta turret görüş hattına girer.
+**Bind / Sunset (Killjoy):** dar geçişler turret için ideal — bot girişi turret görüşüne düşer.
+**Haven (Fade):** 3 site recon'u verimli kullandırır; Killjoy B'yi tutar, Fade aramaya devam eder.
+**Ascent / Icebox (Dengeli):** kurulum ve recon döngüsünü kim öne alırsa o kazanır.
 
-**Haven (Fade avantajlı):** 3 site Fade'in recon'unu çok daha verimli kullandırır, Killjoy B'yi tutar.
+## 6. Koç Notları
 
-**Lotus (Fade hafif avantajlı):** 3 site yapısı Fade'in lehine.
+Bu matchup'ta hem turret'i hem kendini her round başka yere koy. Fade seni bir kez işaretlerse sonraki round takımı doğrudan o noktaya oynar. Yer değiştirirsen Fade her round sıfırdan başlar.
 
-**Ascent (Dengeli):** Killjoy A/B tutar, Fade A Main'den recon atar.
-
-**Icebox (Dengeli):** Killjoy B Site'ı tutar, Fade Mid'den recon atar.
-
-**Sunset (Killjoy hafif avantajlı):** Dar geçişler Killjoy kurulumu için biçilmiş kaftan.
-
-**Fracture (Dengeli):** Çok yönlü giriş iki agent için de nötr.
-
-## 6. Dönüm Noktaları
-
-**Flip 1 — Recon kurulumu ifşa etti:** Killjoy'un util hattı açığa çıktı, takım tüfekle veya util'le siler.
-
-**Flip 2 — Turret botu bitirdi:** Fade chase aracını kaybetti, avantaj Killjoy'a geçti.
-
-**Flip 3 — Killjoy ult'u retake'i kesti:** Ult süresi Fade util'siz geçti.
-
-**Flip 4 — Fade ult'u savunma hattını çökertti:** Killjoy körlük ve korku altında, retake yok.
-
-## 7. Koç Notları
-
-Bu matchup'ta turret'i her round başka yere koy. Fade recon ile yeri bir kez öğrenirse, sonraki round'da botu doğrudan o noktaya gönderir. Yer değiştirirsen Fade her round sıfırdan başlar, recon'u boşa gider.
-
-Fade tarafındaysan kural net: turret'in yerini bilmeden bot atma. Botun canı az, turret görürse anında bitirir. Önce recon, sonra bot — sırayı bozarsan botu bedavaya verirsin.
+Fade tarafındaysan kural net: turret'in yerini bilmeden bot salma. Botun canı az, turret görürse anında bitirir. Önce işaret al, sonra bot — sırayı bozarsan botu bedavaya verirsin.

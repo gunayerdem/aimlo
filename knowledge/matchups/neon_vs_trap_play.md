@@ -1,6 +1,8 @@
 ---
 id: matchup_neon_vs_trap_play
 type: matchup
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, neon, trap, play]
 ---
 
@@ -9,9 +11,9 @@ tags: [matchup, neon, trap, play]
 ## Matchup Özü
 Neon, sprint ve slide ile sahayı herkesten hızlı geçer. Tuzak kuran ajanlar (Killjoy, Cypher, Deadlock, Vyse) bu hıza göre tasarlanmadı — düşmanın normal tempoda yürüyeceğini varsayarlar. Neon o varsayımı yıkar. Tek katman tuzak koyarsan Neon üstünden geçer gider. Ama Neon duvarı ve stunü kullanmadan körü körüne sprint ederse, katmanlı bir kuruluma dalar ve orada ölür.
 
-## Yaygın Cezalandırma Kalıpları
+## Baskı Kalıpları
 
-### Neon Tuzak Oyununu Cezalandırırken
+### Neon Tuzak Oyununu Yeniyorsa
 
 **IF**: Neon sprint hızıyla telin üstünden geçiyor, tuzakçı onu durduramıyor
 **MEANING**: Tek tuzak tetikleniyor ama Neon içinden çıkmadan dövüşe giriyor — arkada ek katman yok
@@ -28,7 +30,7 @@ Neon, sprint ve slide ile sahayı herkesten hızlı geçer. Tuzak kuran ajanlar 
 **COUNTER**: Tuzak kurulumunun gerisinde değil, yanında ya da ayrı bir açıda dur
 **WHY**: Ayrı açıda duran tuzakçı stunün menzilinden çıkar, tuzağı korur
 
-### Tuzak Oyunu Neon'u Cezalandırırken
+### Tuzak Oyunu Neon'u Yeniyorsa
 
 **IF**: Üç katman tuzak art arda dizilmiş — Neon hepsini geçemiyor
 **MEANING**: Sprint hızı katmanları tek tek aşar ama üçüncüye varmadan duraksar
@@ -48,24 +50,14 @@ Neon, sprint ve slide ile sahayı herkesten hızlı geçer. Tuzak kuran ajanlar 
 
 ## AIMLO Ne Demeli
 
-### Oyuncu cezalandırılan taraftayken
+### Kaybeden taraftaysan
 
-**Tuzak oyuncusu Neon'a eziliyorsa**: "Tuzakların çok dağınık — aralarındaki boşluktan sprint ediyor. Üst üste diz: teli, botu, mollyyi. Birini geçer ama üçünü geçemez."
+**Tuzak oyuncusu Neon'a eziliyorsa**: "Tuzakların çok dağınık — aralarındaki boşluktan sprint ediyor. Üst üste diz: teli, botu, mollyyi. Birini geçer ama üçünü geçemez. Molly'yi Neon slide ile çıkarken patlat, girişte değil."
 
 **Neon tuzaklara ölüyorsa**: "Önünü açmadan hazır kuruluma dalıyorsun. Duvarı koy, stun at, tuzakçı uzaklaşsın — sonra sprint et. Util'siz hız, hızlı ölümdür."
 
-### Oyuncu cezalandıran taraftayken
+### Kazanan taraftaysan
 
-**Neon tuzakları geçiyorsa**: "Hızın tek katman kurulumu biçip geçiyor. Sprint etmeye devam et, tuzakçı tepki veremeden dövüşe gir."
+**Neon tuzakları geçiyorsa**: "Hızın tek katman kurulumu biçip geçiyor. Sprint etmeye devam et, tuzakçı tepki veremeden dövüşe gir. Bir düşman düşünce sprint et; rotasyon gelmediyse yürü ve önce açıyı temizle."
 
-**Tuzak oyuncusu Neon'u durduruyorsa**: "Katmanlı kurulum tam hızda bile onu durduruyor. Util'leri sırayla yığmaya devam et — ya duraksar ya ölür."
-
-## Rank Modülasyonu
-
-**LOW**: Neon her seferinde dümdüz sprint eder, tuzak oyuncusu tek tuzak koyar. İkisi de adapte olmaz. Neon'a şunu söyle: önce temizle, sonra gir. Tuzak oyuncusuna şunu söyle: art arda diz.
-
-**MID**: Neon ara sıra util kullanmaya başlar. Tuzak oyuncusunun kurulumu var ama tek katmanlı. Neon'a söyle: entry öncesi duvar at, stun at, sonra sprint et. Tuzak oyuncusuna söyle: teli, botu, mollyyi üst üste diz.
-
-**HIGH**: İki taraf da hız vs. yoğunluk oyununu bilir. Neon'a söyle: 1 düşman düşünce sprint et, rotasyon daha gelmediyse yürü ve önce açı temizle. Tuzak oyuncusuna söyle: Neon slide ile çıkarken mollyyi patlat, girişte değil.
-
-**ELITE**: Tuzak kurulumları artık Neon hızını hesaba katarak yapılır. İlk katmanı atlayıp atlayamayacağına anında karar ver — util'siz girersen bu seviyede ölürsün. Tuzak oyuncusuna söyle: Neon'un slide çıkış noktasına mollyyi göm, teli yan koridora değil doğrudan sprint hattına koy.
+**Tuzak oyuncusu Neon'u durduruyorsa**: "Katmanlı kurulum tam hızda bile onu durduruyor. Util'leri sırayla yığmaya devam et — ya duraksar ya ölür. Neon'un slide çıkış noktasına molly'yi göm, teli yan koridora değil doğrudan sprint hattına koy."

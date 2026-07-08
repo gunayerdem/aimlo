@@ -3,7 +3,8 @@ id: matchup_raze_vs_breach
 type: matchup
 agent_a: raze
 agent_b: breach
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, raze, breach, duelist, initiator]
 ---
 
@@ -46,7 +47,7 @@ Breach seni sersemletir, sen Breach'i patlatırsın. Breach'in stunu sıçrama h
 **IF** Ultu Breach'in entry girişine attın
 **MEANING** Breach stun atamadan, flash açamadan ulttan ölür — entry biter
 **COUNTER** Breach entry'ye girdiğini gördüğün anda ultu bas. Giriş darsa ult maksimum değer verir.
-**WHY** Ult tek noktaya büyük hasar verir. Breach entry pozisyonu sabitse ult bedava kill demektir.
+**WHY** Ult tek noktaya büyük hasar verir. Breach entry pozisyonu sabitse ult onu bedavaya öldürür.
 
 ---
 
@@ -65,7 +66,7 @@ Breach seni sersemletir, sen Breach'i patlatırsın. Breach'in stunu sıçrama h
 ---
 
 **IF** Breach molly'si sıçrama ile ineceğin noktaya atılmış
-**MEANING** Sıçrama ile indiğinde molly hasarı alırsın, HP'n eriyerek fight'a girersin
+**MEANING** Sıçrama ile indiğinde molly hasarı alırsın, düelloya eksik canla girersin
 **COUNTER** Molly'nin hangi köşelerden atıldığını öğren — sabit trajektörleri var. O köşelerden uzak bir noktaya in.
 **WHY** Molly de duvar deler. Cover seni korumaz — tek çözüm iniş noktasını doğru seçmek.
 
@@ -78,11 +79,11 @@ Breach seni sersemletir, sen Breach'i patlatırsın. Breach'in stunu sıçrama h
 
 ## 4. Utility Karşılaştırması
 
-Sende hasar + hareket var: nade, ek nade, iki sıçrama, ult. Breach'te durdurma + hasar var: stun, flash, molly, ult.
+Sende hasar + hareket var: bot, nade, iki sıçrama, ult. Breach'te durdurma + hasar var: stun, flash, molly, ult.
 
 Raze lehine: sen duvarın arkasına geçersin, Breach'in stunu seni bulamaz. Breach lehine: dar koridorda sen geçemezsin, Breach her açıyı kapatır.
 
-Ult maliyeti: senin ultun 8 puan, Breach'in ultu 9 puan. Breach ultunu daha seyrek atar — ama attığında alanı tamamen kapatır.
+Breach ultunu daha seyrek doldurur — ama attığında alanı tamamen kapatır.
 
 ## 5. Haritaya Göre Değişim
 
@@ -96,7 +97,7 @@ Ult maliyeti: senin ultun 8 puan, Breach'in ultu 9 puan. Breach ultunu daha seyr
 
 **Icebox (Raze avantajlı):** Uzun mid + dikey hareket senin alanın. Breach'in util menzili kısa kalır.
 
-**Breeze (Raze avantajlı):** Geniş alan nade ve rifle için ideal. Breach close range fırsatı az bulur.
+**Breeze (Raze avantajlı):** Geniş alan nade ve tüfek için ideal. Breach yakın mesafe fırsatı az bulur.
 
 **Sunset (Breach avantajlı):** Dar girişler Breach'in işine yarar, sıçrama kaçış yolun azalır.
 
@@ -114,6 +115,6 @@ Ult maliyeti: senin ultun 8 puan, Breach'in ultu 9 puan. Breach ultunu daha seyr
 
 Sıçrama iniş noktasını her round değiştir — aynı noktaya iki kez inme. Breach stunu sabit hatlara atılır; o hatları tanı, farklı noktadan in, Breach'in util'i boşa gitsin.
 
-Breeze ve Icebox'ta Breach'i outrange edersin — rifle mesafesinde Breach'in hiçbir util'i sana ulaşamaz. Split ve Bind'da Breach'in flash menzilinin dışında açı tut; flash açısına girmeden fight başlat.
+Uzun hatlı haritalarda (Icebox gibi) mesafeyi açık tut — tüfek mesafesinde Breach'in hiçbir util'i sana ulaşamaz. Split ve Bind'da Breach'in flash menzilinin dışında açı tut; flash açısına girmeden düelloyu başlat.
 
 Post-plant Breach ultundan kaçış: ult sesini duyduğun anda sıçrama hemen bas. Harita kenarı veya ult hattına dik açı — ikisinden biri seni kurtarır. Beklersen stun seni yakalar ve sıçrama iptal olur.

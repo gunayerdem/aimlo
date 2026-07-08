@@ -3,7 +3,8 @@ id: matchup_neon_vs_astra
 type: matchup
 agent_a: neon
 agent_b: astra
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, neon, astra, duelist, controller]
 ---
 
@@ -11,20 +12,20 @@ tags: [matchup, neon, astra, duelist, controller]
 
 ## 1. Matchup Özü
 
-Neon, Astra'nın smoke'unu hızla geçmeye çalışır. Astra ise smoke ve stun ile Neon'un sprint hattını kapatır. Neon sprint hattını değiştirmezse Astra kazanır; Astra smoke'u yanlış yere koyarsa Neon kazanır.
+Neon, Astra'nın smoke'unu hızla geçmeye çalışır. Astra ise smoke, sersemletme ve çekme yıldızıyla Neon'un sprint hattını kapatır. Neon sprint hattını değiştirmezse Astra kazanır; Astra smoke'u yanlış yere koyarsa Neon kazanır.
 
 ## 2. Kim Avantajlı?
 
 **Neon lehine:**
 - Astra util'ini boşa harcadıysa smoke yok, sprint hattın açık demektir — bas geç.
 - Uzun koridorlarda (Breeze, Icebox, Pearl Mid) sprint'inle Astra daha tepki veremeden koridoru kapatırsın.
-- Ult'un hazırsa beam Astra'yı sabit yakalar.
+- Ult'un hazırsa ışının Astra'yı sabit yakalar.
 - Yakın mesafede sprint + slide + tüfekle Astra'nın sabit açısını geçersin.
 
 **Astra lehine:**
 - Sprint hattında smoke varsa kör ilerlersin, düelloyu kaybedersin.
-- Sprint koridoruna stun gelirse duraksarsın ve sabit hedef olursun.
-- Peek hattına stun gelirse nişanın bozulur.
+- Sprint koridoruna çekme yıldızı gelirse merkeze çekilir, sabit hedef olursun.
+- Peek hattına sersemletme gelirse nişanın bozulur.
 - Astra ult'unu açtıysa ses ve hasar kesilir, takım bilgisi kopar.
 
 **Dengeli:** Haven, Ascent ve Lotus'ta sonuç Astra'nın smoke konumuna ve senin sprint hattı seçimine göre değişir.
@@ -38,23 +39,23 @@ Neon, Astra'nın smoke'unu hızla geçmeye çalışır. Astra ise smoke ve stun 
 
 ---
 
-**IF** Stun sesini duydun ya da animasyonunu gördün
-**MEANING** Duraksarsın ve sabit hedef olursun — stun seni içine çeker
-**COUNTER** Sesi duyduğun an slide yap. Stun alanı sınırlı, dışı güvenli.
-**WHY** Stun Neon'u yavaşlatır. Sprint hızın alandan çıkmaya yeter, ama geç kalırsan yetmez.
+**IF** Çekme yıldızının sesini duydun ya da açıldığını gördün
+**MEANING** Alan seni merkeze doğru çeker — çekilirken sabit hedefsin
+**COUNTER** Sesi duyduğun an alanın dışına doğru slide at. Çekme alanı sınırlı, dışı güvenli.
+**WHY** Çekme yalnız alanın içindekini yakalar. Sprint hızın alandan çıkmaya yeter, ama geç kalırsan yetmez.
 
 ---
 
-**IF** Peek hattına stun geldi
+**IF** Peek hattına sersemletme geldi
 **MEANING** Nişanın bozulur, hemen ardından düelloyu kaybedersin
-**COUNTER** Sesi duyduğun an duvara slide at, stun patlamadan alan dışına çıkarsın.
-**WHY** Stun anlık değil; patlamadan önce hareket pencere var. Slide o pencereyi kullanır.
+**COUNTER** Sesi duyduğun an hattan çık — sersemletme patlamadan alan dışına slide at.
+**WHY** Sersemletme anlık değil; patlamadan önce hareket penceresi var. Slide o pencereyi kullanır.
 
 ---
 
 **IF** Ult'un açık ve Astra yıldız koyma moduna (astral form) girdi
-**MEANING** Beam sabit hedefe gider — bu mod Astra'yı yerinde dondurur
-**COUNTER** Beam'i Astra'nın form konumunda tut, formu kıramazsa ölür.
+**MEANING** Ult ışının sabit hedefe gider — bu mod Astra'yı yerinde dondurur
+**COUNTER** Işını Astra'nın bedeninin durduğu noktada tut, formu kıramazsa ölür.
 **WHY** Form Astra'yı sabit bırakır. Neon ult'u bu anı bedava kafadan vurmaya çevirir.
 
 ---
@@ -73,16 +74,16 @@ Neon, Astra'nın smoke'unu hızla geçmeye çalışır. Astra ise smoke ve stun 
 
 ---
 
-**IF** Sprint hattın hem smoke hem stun yedi
+**IF** Sprint hattın hem smoke hem sersemletme yedi
 **MEANING** Hem körsün hem duraksadın — hat o round kapandı
 **COUNTER** Her round sprint hattını değiştir. Aynı hat iki util birden harcatmaya değmez, farklı hat Astra'nın util ekonomisini dağıtır.
 **WHY** Astra çift util'i sabit hatta yığarsa maksimum değer alır. Farklı hat onu her seferinde iki util birden harcamak zorunda bırakır.
 
 ## 4. Util Karşılaştırması
 
-Neon'da sprint, slide, stun, hız duvarı ve ult var — hepsi hareket ve tepki üzerine kurulu. Astra ise smoke, stun ve büyük duvar çıkarır — hepsi önceden yerleştirilen, hareketsiz util.
+Neon'da sprint, slide, stun ve hız duvarı var — hepsi hareket ve tepki üzerine kurulu. Astra ise smoke, sersemletme, çekme ve büyük duvar (ult) çıkarır — hepsi önceden yerleştirilen, hareketsiz util.
 
-Neon hızla Astra'nın hazırlığını atlatır. Astra util'ini önceden doğru yere koyarsa senin hızın işe yaramaz. İkisi de aynı ult puanında ult açar, yani ult ekonomisi round baskısı açısından eşit başlar.
+Neon hızla Astra'nın hazırlığını atlatır. Astra util'ini önceden doğru yere koyarsa senin hızın işe yaramaz.
 
 ## 5. Haritaya Göre Durum
 
@@ -104,9 +105,9 @@ Neon hızla Astra'nın hazırlığını atlatır. Astra util'ini önceden doğru
 
 **Dönüm 1 — Smoke sprint hattını kapattı:** Körsün, ya dur ya farklı hatta geç.
 
-**Dönüm 2 — Stun momentumunu kesti:** Sabit kaldın — geç slide atmazsan düelloyu kaybedersin.
+**Dönüm 2 — Sersemletme ya da çekme hızını kesti:** Sabit kaldın — geç slide atmazsan düelloyu kaybedersin.
 
-**Dönüm 3 — Ult Astra'yı yıldız koyma modunda yakaladı:** Beam sabit hedefe gider, bedava kafadan vur.
+**Dönüm 3 — Ult Astra'yı yıldız koyma modunda yakaladı:** Işın sabit hedefe gider, bedava kafadan vur.
 
 **Dönüm 4 — Astra ult'u bilgiyi kesti:** Takım koordinasyonu kopar — duvar hattını öğren, ona göre oyna.
 

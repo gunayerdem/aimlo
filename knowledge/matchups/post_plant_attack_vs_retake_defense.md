@@ -1,7 +1,8 @@
 ---
 id: matchup_post_plant_attack_vs_retake_defense
 type: matchup
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, post-plant, retake, utility, tactical]
 ---
 

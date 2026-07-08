@@ -1,7 +1,8 @@
 ---
 id: matchup_mid_control_vs_default_split
 type: matchup
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, mid-control, default-split, map-control, tactical]
 ---
 

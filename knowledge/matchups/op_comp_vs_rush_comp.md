@@ -1,7 +1,8 @@
 ---
 id: matchup_op_comp_vs_rush_comp
 type: matchup
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, composition, op-comp, rush-comp, tempo]
 ---
 
@@ -125,6 +126,6 @@ Rush comp'ta beş kişi util'i aynı anda açmalı. Kim önce duman, kim önce f
 
 OP comp'a karşı oynuyorsan iki siteyi aynı anda iki duelist ile zorla. OP comp ikiye bölünür, ne geri dönüş yapar ne çapraz ateş kurar. OP comp'tayken bu kalıbı gördüğün an orta açıyı bırakma, önce ikiye bölünmeyi engelle.
 
-**Rank notu:** Diamond altında oyuncular OP comp'u solo oynar, tek OP açı tutar, takım habersiz kalır. Bu yanlış. OP açısı takımın bildiği açıdır, yoksa OP değil sniper kafasıyla oynuyorsun.
+OP açısı takımın bildiği açıdır — OP oyuncusu hangi açıyı tuttuğunu söylemezse takım habersiz kalır ve OP değil solo keskin nişancı kafasıyla oynanmış olur.
 
 **Özet:** OP comp açısını korursa kazanır. Rush comp temposunu korursa kazanır. OP comp açısını dumana kaptırdıysa yenildi. Rush comp temposu tuzak hattında takıldıysa yenildi. Her iki comp da util'i doğru anda açmak zorunda, açmayanın temeli çöker.

@@ -1,7 +1,8 @@
 ---
 id: matchup_omen_vs_harbor
 type: matchup
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, omen, harbor, controller_vs_controller]
 ---
 
@@ -17,19 +18,13 @@ Karşı takımda Harbor görürsen şunu kafana kaz: smoke'unu nereye atacağın
 
 ## 2. Kim Avantajlı?
 
-Pearl ve Lotus dışında her haritada Omen önde. Pearl ve Lotus'ta iki controller oynuyorsan Harbor eşit ya da bir tık üstün.
-
-Harbor'u tek controller olarak alma — bekleme süreleri uzun, round içinde cevap verecek kapasitesi yok. Omen tek başına ayakta durur, Harbor duramaz.
-
-- Pearl ve Lotus'ta iki controller'la: Harbor işe yarar
-- Haven, Ascent, Split, Sunset, Bind, Fracture, Icebox, Corrode'da: Omen önde
-- Tek controller karşılaşmasında: her zaman Omen önde
+Neredeyse her haritada Omen önde: bekleme süreleri kısa, round içinde cevap verir. Harbor'ın bekleme süreleri uzun — kararını round başında verir, sonra düzeltemez. Harbor ancak ikinci controller'ın yanında değer üretir; tek başına round içi cevap kapasitesi yok.
 
 ## 3. Önemli Düellolar
 
 **IF** Harbor duvarı kurdu, harita ikiye bölündü
 **MEANING** Omen teleportu olmadan bir tarafa hapsolursun — duvarı geçemezsin, smoke'la da aşamazsın
-**COUNTER** Kısa teleportunu duvarın karşı tarafına bas. Harbor duvar arkasını körleme bırakır — sen orada bilgi toplarsın
+**COUNTER** Kısa teleportunu duvarın karşı tarafına bas. Harbor duvar arkasını körleme bırakır — düşmanın yerini orada sen öğrenirsin
 **WHY** Duvar iki yönlü körlük yaratır. Teleport bu körlüğü tek taraflı avantaja çevirir — Harbor seni göremez, sen rahat konumlanırsın.
 
 ---
@@ -41,10 +36,10 @@ Harbor'u tek controller olarak alma — bekleme süreleri uzun, round içinde ce
 
 ---
 
-**IF** İki smoke'unu harcadın, Harbor site içine smoke kubbesi kurdu
-**MEANING** Harbor post-plant kontrolünü aldı — kubbe sesi ve görüşü keser, retake iki kat zorlaşır
-**COUNTER** Flash'ını kubbe kenarına at, smoke'unu kubbe dışına bas. Köşeleri tek tek temizle, tek yönden dalma
-**WHY** Kubbenin içindeki oyuncu hem görünmez hem ses duymaz. Tek smoke'la açmaya kalkma — kademe kademe aç.
+**IF** İki smoke'unu harcadın, Harbor site içine kalkan kubbesi kurdu
+**MEANING** Harbor post-plant kontrolünü aldı — kubbe mermiyi durdurur ve görüşü keser, retake iki kat zorlaşır
+**COUNTER** Flash'ın kubbeden geçer — içeri flash bas, köşeleri tek tek temizle, tek yönden dalma
+**WHY** Kubbenin içindeki oyuncu mermiden korunur ve görünmez — ama flash'a ve fırlatılan util'e karşı savunmasız. Kademe kademe aç.
 
 ---
 
@@ -69,10 +64,10 @@ Harbor'u tek controller olarak alma — bekleme süreleri uzun, round içinde ce
 
 ---
 
-**IF** Flash'ını Harbor duvarının içine attın
-**MEANING** Flash görüş hattı ister — duvar görüşü keser, flash duvar içinde hiçbir şeye değmez
-**COUNTER** Flash'ını duvar kurulmadan önce ya da duvarın dışındaki oyunculara at. Duvar varsa flash zamanlamanı ona göre ayarla
-**WHY** Flash düz hat çalışır. Duvar o hattı keser — içeri atarsan boşa gider.
+**IF** Harbor duvarının arkasına oyuncu saklandı, flash'ın hazır
+**MEANING** Duvar sadece görüşü keser — senin flash'ın duvardan geçer, arkasındakini körler
+**COUNTER** Flash'ını duvarın içinden geçir, arkadaki oyuncuyu körle, körken bas. Duvar senin flash'ını durdurmaz
+**WHY** Omen flash'ının imza özelliği duvarlardan geçmesi. Harbor duvarı rakibe güvenli alan gibi görünür — flash o güveni tek hamlede kırar.
 
 ## 4. Utility Karşılaştırması
 
@@ -89,39 +84,25 @@ Harbor round başında doğru yerleştirdiyse alan kontrolü senden iyidir. Yanl
 
 ## 5. Haritaya Göre Değişim
 
-**Pearl:** Harbor'un işe yaradığı tek harita. Mid Link, A Main ve B Main için duvar mimarisi Pearl'e oturur. Pearl'de Harbor'u ikinci controller olarak al.
+**Haven:** Üç sitede Harbor'ın duvarı tek hattı kapatır — Omen oynuyorsan duvarın kapatmadığı siteye teleportla erken bilgi al.
 
-**Lotus:** İki controller'la Harbor bir tık önde. C Long için duvar Lotus savunmasına oturur. Tek controller rolünde yine Omen al.
+**Ascent:** Harita hızlı, Harbor'un bekleme süreleri yetişmez — Harbor util'ini harcadığı an Mid'i zorla.
 
-**Haven:** Tek controller'la Omen önde. Omen + Harbor iki controller kombosu üç site için yetenek bolluğu yaratır.
+**Sunset:** Kısa geçişlerde Harbor'un uzun bekleme süresi açık yaratır — Harbor smoke'u dolmadan ikinci hamleni yap.
 
-**Ascent:** Omen önde. Harita hızlı, Harbor'un bekleme süreleri bu hıza yetişmez.
+**Bind:** Işınlanma geçişleri Omen'ın hız oyununa uygun — Harbor duvarı kurulmadan rotasyonu bitir.
 
-**Split:** Omen önde. Mid ve A Main Omen'ın alanı. Harbor'un burada işi yok.
-
-**Sunset:** Omen önde. Kısa geçişlerde Harbor'un uzun bekleme süresi açık yaratır — smoke'u dolmadan Omen ikinci hamlesini yapar.
-
-**Bind:** Omen önde. Teleporter yapısı Omen'ın hız oyununa uygun.
-
-**Breeze:** Harbor A Main için duvar atabilir ama bu rolü Viper daha iyi doldurur — Omen seç.
-
-**Fracture:** Omen önde. İki taraflı saldırı yapısı Harbor'un round başı tek karar mantığını zorlar.
-
-**Icebox:** Harbor mid için iş görür ama Omen yine hız avantajı alır — Omen seç.
-
-**Corrode:** Omen önde. Dar yapı Omen lehine.
+**Icebox:** Harbor duvarı Mid hattını keser — duvar açıksa içinden yürüme, teleportla arkasına bak.
 
 ## 6. Round Kırılma Anları
 
-1. **Pearl'de ilk smoke kararı.** Harbor yeteneğini doğru yere koyarsa round Harbor'un, yanlış koyarsa Omen baskıya geçer. Pearl'de Harbor oynarken smoke kararını takım koşmaya başlamadan ver.
+1. **İlk smoke kararı.** Harbor yeteneğini doğru yere koyarsa round Harbor'un, yanlış koyarsa Omen baskıya geçer. Harbor oynarken smoke kararını takım koşmaya başlamadan ver.
 
-2. **Duvar ve yürüyen smoke ikisi birden bekleme süresinde.** Bu olduysa Harbor'un smoke'u kalmadı — elinde sadece silahı var. Bunu gördüğün an baskı bas.
+2. **Duvar ve yürüyen smoke ikisi birden bekleme süresinde.** Bu olduysa Harbor'un smoke'u kalmadı — elinde sadece silahı var. Bunu gördüğün an bas.
 
 3. **Site içi smoke kubbesi post-plant.** Harbor kubbeyi spike bölgesine kurduysa retake iki katına çıkar. Kubbeyi açmadan spike'a gitme.
 
-4. **Karşı takım Omen + Harbor iki controller.** Senin tarafın tek controller ise yetenek açığı var — draft aşamasında bunu gör ve buna göre seç.
-
-5. **Harbor ult'u hazır, Omen ult'u harcandı.** Harbor haritayı hareket ettirir, Omen ultsuz cevap oynar. O round yetenek avantajı Harbor'da.
+4. **Harbor ult'u hazır, Omen ult'u harcandı.** Harbor haritayı hareket ettirir, Omen ultsuz cevap oynar. O round yetenek avantajı Harbor'da.
 
 ## 7. Koç Notları
 

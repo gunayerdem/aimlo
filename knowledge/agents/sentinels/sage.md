@@ -1,10 +1,15 @@
+---
+patch: "13.00"
+verified: 2026-07-08
+---
+
 # AJAN: Sage
 
 ## 1. Rol Kimliği
 Takımın tek iyileştiricisi, tek dirilticisi sensin. Değerin bilgiden ya da tuzaktan gelmiyor — takımı ayakta tutan kişi sensin. Ama bu seni pasif yapmaz. Kimi iyileştireceğin, duvarı nereye koyacağın, dirilteceğin ya da diriltmeyeceğin — bu kararlar round'u doğrudan belirler. Karar kalitesi seni iyi Sage yapar.
 
 ## 2. Temel Sorumluluklar
-- **İyileştirme:** İlk hasar alan arkadaşı değil, sıradaki dövüşe girecek arkadaşı iyileştir. HP'yi düelloyu kazanacak kişiye ver.
+- **İyileştirme:** İlk hasar alan arkadaşı değil, sıradaki dövüşe girecek arkadaşı iyileştir. HP'yi düelloyu kazanacak kişiye ver. Kendini iyileştirmek artık tam değer veriyor — dövüşe eksik canla dönme, köşe arkasında önce kendini doldur.
 - **Duvar:** Duvar bir görüş hattını kapatır ya da sana zaman kazandırır. Çapraz koy, dik koyma — düşman dik duvarı üstünden atlar.
 - **Slow:** Düşman push'a çıktığında at. Boş alana erken atma, gelene kadar dağılır.
 - **Ult (diriltme):** Duvar ya da takım koruması yoksa diriltme. İki kişiyi kaybetmek bir kişiyi kaybetmekten kötü.
@@ -43,18 +48,18 @@ Takımın tek iyileştiricisi, tek dirilticisi sensin. Değerin bilgiden ya da t
 
 **IF** Slow'u ya hiç kullanmıyorsan ya da her round başında aynı noktaya atıyorsan
 **MEANING** Slow'u taktiksel araç olarak değil, alışkanlık olarak kullanıyorsun.
-**COUNTER** Düşman push'a çıktığında at. Spike kurulduktan sonra defuse'ü geciktirmek için kullan.
+**COUNTER** Düşman push'a taahhüt ettiğinde at. Post-plant'te defuse başlamadan spike çevresine at — yaklaşan düşman yavaşlar ve ayak sesi verir, sen açıdan hazır beklersin.
 **WHY** Düşman gelmeden atılan slow dağılır. Taahhüt etmiş bir push'a atılan slow dövüşü orada bitirir.
 
 **IF** Duvarı saldırıda hiç kullanmıyor, sadece savunmada koyuyorsan
 **MEANING** Duvarı yalnızca kapatma aracı gibi görüyorsun, oysa saldırıda alan açan en güçlü aletin o.
-**COUNTER** Saldırıda duvarı bir düşman açısını kesmek için dik koy — site'a girerken seni görecek konumu duvarla kapat, takım o açı kapalıyken içeri aksın.
-**WHY** İyi yerleştirilmiş bir saldırı duvarı bir savunmacıyı dövüşten siler. Duvar arkasından geçen takım, o açıyı tutan adamla hiç karşılaşmaz — bu, kill almadan kazanılan bir düello demek.
+**COUNTER** Saldırıda duvarı bir düşman açısını kesmek için dik koy — site'a girerken seni görecek konumu duvarla kapat, takım o açı kapalıyken içeri aksın. Plant anında da aynı mantık: duvarı, takımın spike'ı dikip crossfire kurmasını garantilemek için koy.
+**WHY** İyi yerleştirilmiş bir saldırı duvarı bir savunmacıyı dövüşten siler. Duvar arkasından geçen takım, o açıyı tutan adamla hiç karşılaşmaz — tek kurşun atmadan kazanılmış bir düello demek.
 
-**IF** Spike kurulduktan sonra duvarı ve slow'u elinde tutuyorsun, defuse'ü hiç geciktirmiyorsun
+**IF** Spike kurulduktan sonra duvarı ve slow'u elinde tutuyorsun, post-plant'e hiç katkı vermiyorsun
 **MEANING** Post-plant'te yeteneklerini ölü tutuyorsun — round'un en kritik anında elin boş kalıyor.
-**COUNTER** Defuse başladığında bombanın üstüne slow at, defuse eden adamı yerinde dondur. Açık açıyı duvarla kapat ki defuse'çuyu vurabilesin.
-**WHY** Bir slow defuse süresini birkaç saniye uzatır — o saniyeler takımının rotasyonla yetişmesi için yeter. Post-plant'te tutulan yetenek, kaybedilen round demektir.
+**COUNTER** Slow'u defuse başlamadan spike'ın çevresine at — yaklaşan düşman yavaşlar ve ayak sesi verir, sen atışını hazırlarsın. Başlamış defuse'u slow durdurmaz; defuse'çuyu ancak ateşin kaldırır. Açık açıyı duvarla kapat ki defuse'çuyu güvenle vurabilesin.
+**WHY** Slow sana erken uyarıyı ve o atışı hazırlama süresini kazandırır; duvar seni retake ateşinden korur. Post-plant'te tutulan yetenek, kaybedilen round demektir.
 
 **IF** Duvarı düşmanla aynı anda, dövüş tam başlamışken koyuyorsun
 **MEANING** Duvarı reaktif değil, panikle koyuyorsun — yerleşene kadar zaten görüş açığısın.
@@ -64,8 +69,8 @@ Takımın tek iyileştiricisi, tek dirilticisi sensin. Değerin bilgiden ya da t
 ## 5. Harita Etkileşimleri
 - **Bind:** B hookah penceresine duvar gir, girişi tamamen kapat. B long'da düşman push'una slow at, hareketi parçala.
 - **Split:** Mid'e duvar koy — saldırganları mid kontrolü olmadan A ya da B seçmeye zorlarsın. Split'te dar koridorlar slow'u öldürücü kılar: tek çıkışlı geçide atılan slow düşmanı sıkışık tutar, takım rahat trade'ler.
-- **Icebox:** B site'ta duvarla yükseklik avantajı yarat. A site'ta duvarla zipline yaklaşımını kapat.
-- **Sunset:** Mid koridoruna duvar koy, merkezi geçişi kes. A main'de push'a slow at.
+- **Icebox:** A Belt duvarı o uzun görüş hattını tamamen kapatır — saldırı Belt'ten eriyorsa duvar oraya. B'de duvarı default plant'in üstüne kur: plant yükselir, Kitchen açısından korunur. Yavaşlatmayı Tube ya da Orange'a at — dar geçişte değeri en yüksek.
+- **Sunset:** Courtyard'a çekilen duvar mid kontrolünü kavgasız verir — Courtyard'ı tutan taraf split'i seçer. A Elbow dönüşüne slow at: site'a kıvrılan push dar noktada yavaşlar, sen A site açısından hazır beklersin. B Market kapısı kırılıp geçiliyorsa slow'u kapının ardına bırak — geçen herkes ses verir.
 - **Haven:** C garage girişine duvar ciddi zaman kazandırır. A long push'una atılan slow yüksek kazanç sağlar. Üç site'lı haritada rotasyon uzun — bir choke'u duvarla kapatmak, takımına diğer site'a yetişecek zamanı doğrudan satın alır.
 - **Ascent:** Mid'i duvarla bölersen takım mid kontrolünü kavgasız alır — Ascent'te mid'i tutan round'u tutar. B site'ta dar girişe duvar koymak retake'i tek başına geciktirir.
 - **Lotus:** Üç girişli site'larda slow daha değerli: dönen kapı ve dar geçitlerde slow düşmanı dar açıda dondurur, duvarı bir girişi tamamen kesmeye sakla.
@@ -83,22 +88,12 @@ Takımın tek iyileştiricisi, tek dirilticisi sensin. Değerin bilgiden ya da t
 **İyi oynuyorsa:**
 Entry her dövüşe tam HP giriyor çünkü sen sıradaki dövüşçüyü iyileştiriyorsun. Düşman onun hasardan kaçındığını sanıyor — oysa sen her düellodan önce HP avantajı yaratıyorsun. Çapraz duvarların görüş hattını tamamen kesiyor, üstünden atlanamıyor, kırmak util istiyor. Duvar arkasında yaptığın diriltme düşmanın engelleyemeyeceği bir an açıyor.
 
-Yap: Her round sıradaki dövüşçüyü belirle, dövüş öncesi onu iyileştir. Duvar açısını her round biraz değiştir. Diriltmeden önce mutlaka duvar koy — sırayı ters çevirme. Slow'u push gelince at, erken atma. Post-plant'te slow'u sakla: defuse başlayınca bombanın üstüne at, düşman yavaşken o açıdan defuse'çuyu vur.
+Yap: Her round sıradaki dövüşçüyü belirle, dövüş öncesi onu iyileştir. Duvar açısını her round biraz değiştir. Diriltmeden önce mutlaka duvar koy — sırayı ters çevirme. Slow'u push gelince at, erken atma. Post-plant'te slow'u sakla: düşman spike'a yaklaşırken çevresine at — yavaşlar, ayak sesi verir, sen defuse'çuyu açından vurursun.
 
 Düşman adapte olunca: Duvar kırmak için util getirmeye başlarlarsa — duvarı choke'tan içeri taşı, açık alana taahhüt etmek zorunda kalsınlar. Rush atarlarsa — rush sırasında choke'a slow at, slow'un arkasına duvar koy. Diriltmeni beklerlerse — diriltmeyi atla, sayı avantajını kullan. Diriltme tehdidi bile onları bir oyuncuyu bedeni izlemeye ayırmaya zorlar.
 
 **Zorlanıyorsa:**
-Şu an iyileştirme ve duvar birlikte çalışmıyor. Hasar alanı değil, sıradaki dövüşe girecek kişiyi iyileştir. Duvarı sadece geciktirmek için değil, görüş hattını tamamen kesmek için koy. İyileştirirken köşe arkasına geç — açıkta iyileştirmek seni bedava kill yapar.
+Şu an iyileştirme ve duvar birlikte çalışmıyor. Hasar alanı değil, sıradaki dövüşe girecek kişiyi iyileştir. Duvarı sadece geciktirmek için değil, görüş hattını tamamen kesmek için koy. İyileştirirken köşe arkasına geç — açıkta iyileştirmek seni bedava hedef yapar.
 
 **Tahmin edilebilirse:**
 Duvarın her round aynı yerde, düşman biliyor. Açıyı değiştir. Slow'u push'a reaktif at, boş alana erken atma. Duvarı bazı round'lar saldırıda alan açmak için kullan — sadece savunma aracın değil.
-
-## 8. Rank Modülasyonu
-
-**Düşük (Iron-Silver):** Kendini iyileştiriyorsun, her round aynı noktaya duvar koyuyorsun, açık alanda diriltiyorsun. Üç şeyi düzelt: takım arkadaşını iyileştir, diriltmeden önce duvar koy, push'a slow at.
-
-**Orta (Gold-Platinum):** İyileştirmen iyi ama duvar hep aynı yerde. Diriltme kimi round kazandırıyor, kimi round iki kayba dönüşüyor. Duvar açılarını değiştir, diriltme kararını net bir kurala bağla: alan güvenliyse dirilt, değilse atla.
-
-**Yüksek (Diamond-Ascendant):** Triyajı biliyorsun ama yetenekleri saklıyorsun. Duvarların çalışıyor ama round değiştirmiyor. Hücum duvarını ve post-plant slow'u geliştir. Duvarı rakibi geciktirmek için değil, takımının plant ve crossfire kurulum süresini garantilemek için koy — fark burada.
-
-**Elit (Immortal-Radiant):** Her şey karar kalitesinde bitiyor. Duvar açın her round farklı olmalı, iyileştirme zamanlaman net olmalı. Ult'u erken round'da acele harcama — ekonomi round'unda ya da full-buy bir oyuncuyu diriltirken beden güvendeyse bekle. Kötü bir diriltme bu seviyede round'u direkt kaybettirir.

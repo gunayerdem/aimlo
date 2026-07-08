@@ -1,7 +1,8 @@
 ---
 id: matchup_omen_vs_cypher
 type: matchup
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, omen, cypher, controller_vs_sentinel]
 ---
 
@@ -17,7 +18,7 @@ Karşı takımda aynı savaş ters taraflarda döner. Omen smoke'u Cypher kamera
 
 Düz 1v1 az çıkar — bu ikisi takım üzerinden birbirini döver.
 
-Aynı takımda: Haven ve Fracture gibi geniş haritalarda bu ikili güçlü. Omen saldırı yönünü gizler, Cypher flank'ı tutar. Sinerji net.
+Aynı takımda: Haven gibi geniş haritalarda bu ikili güçlü. Omen saldırı yönünü gizler, Cypher flank'ı tutar. Sinerji net.
 
 Karşı takımda:
 - Omen smoke'u Cypher kamerasını kapatırsa Cypher takımı kör kalır — Omen öne geçer.
@@ -42,9 +43,9 @@ Rakibin alışkanlığını önce kim okursa round'u o çevirir.
 ---
 
 **IF** Cypher ult'unu açtı ve Omen o round teleport atıyor
-**MEANING** Ult açıldığı an Cypher takımı senin konumunu görür. Teleport ile yer değiştiriyorsan yeni konumun da açığa çıkar.
-**COUNTER** Omen oynuyorsan Cypher ult'unun açıldığını duyduysan teleport'u iptal et ya da hedef değiştir. Cypher takımı zaten nerede olduğunu biliyor — aynı yerde beklemek daha kötü.
-**WHY** Bu ult ölen takım arkadaşlarının konumunu rakibe verir. Teleport attıysan yeni yerin de görünür olur, Cypher takımı seni açı tutar.
+**MEANING** Bu ult yaşayan tüm rakiplerin konumunu iki kez gösterir. İlk göstermeden sonra yer değiştirmezsen ikinci göstermede de aynı yerdesin.
+**COUNTER** Omen oynuyorsan Cypher ult sesini duyduğun an yer değiştir — teleport tam bu iş için. Cypher takımı eski konumuna açı tutarken sen başka hattan çık.
+**WHY** Ult'un iki gösterimi arasında hareket etmeyen oyuncu ikinci gösterimde de aynı noktada yakalanır. Konumun zaten açıldıysa orada beklemek en kötü seçenek.
 
 ---
 
@@ -52,13 +53,6 @@ Rakibin alışkanlığını önce kim okursa round'u o çevirir.
 **MEANING** Kör içinde Cypher teli görünmez olur. Kör içinde tele basarsan çıkışın yok.
 **COUNTER** Omen oynuyorsan flash attıktan sonra tel olabilecek alanlara girme. Önce temizle, sonra gir.
 **WHY** Flash seni de kör eder. Kör içinde tel görsel uyarı vermez — sesi geldiğinde zaten yakalanmışsındır.
-
----
-
-**IF** Cypher ult'unu açtı ve Omen aynı alana ikinci kez teleport atıyor
-**MEANING** Ult telleri sıfırlar. İlkinden kurtulan Omen aynı noktaya tekrar inerse yeni tel hazır bekler.
-**COUNTER** Omen oynuyorsan Cypher ult sesini duyduysan teleport noktanı değiştir. O spot artık güvenli değil.
-**WHY** Cypher ult'u round içinde tüm telleri yeniler. Omen sık sık aynı noktaları kullanıyorsa Cypher bunu fark eder ve orayı kapatır.
 
 ---
 
@@ -71,8 +65,8 @@ Rakibin alışkanlığını önce kim okursa round'u o çevirir.
 
 **IF** Omen agresif açı alıyor ve Cypher kamerası o açıyı tutuyor
 **MEANING** Cypher takımı senin açını biliyor. Oradan peek aldığında karşı taraf hazır bekler.
-**COUNTER** Omen oynuyorsan kameranın göremediği açılardan peek at. Kameranın yerini gördüysen flash ile kör et — kamera o round bilgi veremez.
-**WHY** Flash kamerayı kör eder. Kamerayı kör etmeden peek aldığında Cypher takımı seni pre-fire eder.
+**COUNTER** Omen oynuyorsan kameranın göremediği açılardan peek at. Kamerayı gördüğün an vur — tek mermiyle kırılır, Cypher yenisini koyana kadar o hat kör kalır.
+**WHY** Kamera ancak vurularak susturulur. Kamerayı kırmadan peek atarsan Cypher takımı köşeyi önceden nişanlamış bekler.
 
 ## 4. Utility Karşılaştırması
 
@@ -81,7 +75,7 @@ Rakibin alışkanlığını önce kim okursa round'u o çevirir.
 - **Görüş:** Omen smoke'u tek yönlü keser. Cypher bilgiyi tek yönlü toplar.
 - **Hasar:** İkisi de doğrudan hasar aracı değil — Cypher teli yavaşlatır, Omen flash'ı kör eder.
 - **Hareket:** Omen teleport ve ult ile yer değiştirir. Cypher yerinden oynamaz. Hareket kabiliyeti tamamen Omen'de.
-- **Yenileme:** İkisi de cooldown ile çalışır. Omen util'i round içinde dolar, Cypher round başında tam dolar ama round içinde yenilenmez — ult hariç.
+- **Yenileme:** Omen util'i round içinde dolar; Cypher round başında tam dolar, round içinde yenilenmez — kırılan kamera ve tel ancak Cypher onları geri toplayıp yeniden kurarsa döner.
 
 Aynı takımda bu fark avantaj: Omen görüşü kapatır, Cypher bilgiyi toplar. Aynı alanda çakışmayın — Omen A'yı karartıyorsa Cypher B'yi tutsun.
 
@@ -89,27 +83,13 @@ Karşı takımda bu fark savaş alanı: Omen smoke'u Cypher'ın gözünü kapat�
 
 ## 5. Haritaya Göre Değişim
 
-**Haven:** İkisi de burada güçlü. Aynı takımda Omen + Cypher iyi çalışır — üç site Omen smoke'unu zorlar, Cypher flank'ı tutar.
+**Haven:** Üç site Cypher'ı tek bölgeye kilitler — Omen oynuyorsan telsiz kalan siteye smoke basıp oradan gir; Cypher oynuyorsan Garaj geçişini telle tut.
 
-**Fracture:** İkisi de burada işe yarar. Cypher bu haritada sağlam — iki taraflı yapı Cypher bilgisini değerli kılar. Omen ikinci kontrolör olarak yanına girer.
+**Bind:** Cypher ışınlanma geçişlerini telle tutar — Omen oynuyorsan ışınlanmadan çıkmadan önce tel hattını temizle, kör geçme.
 
-**Bind:** Cypher burada güçlü — teleporter geçişlerini tel ile tutar. Omen Bind'de Brimstone veya Astra kadar değer katmaz.
+**Ascent:** Kamera çoğu round Mid'i izler — Mid'e açılmadan önce kamerayı ara ve kır; kırmadan peek atma.
 
-**Abyss:** Cypher burada işe yarar. Omen bu haritada tercih edilmez.
-
-**Lotus:** Omen burada güçlü — üç site Omen smoke'una uygun. Cypher Lotus'ta Killjoy'un gerisinde kalır.
-
-**Sunset:** Omen burada çalışır. Cypher Sunset'te nadiren seçilir — harita Cypher teli için yeterince dar değil.
-
-**Ascent:** Omen burada güçlü. Cypher Ascent'te Killjoy'un arkasında kalır — Killjoy bu haritayı daha iyi kontrol eder.
-
-**Split:** Omen burada işe yarar. Cypher Split'te nadiren seçilir.
-
-**Breeze:** İkisi de burada zayıf. Harita çok açık — Viper ve Killjoy önce gelir.
-
-**Icebox:** İkisi de burada zayıf. Killjoy bu haritayı tamamen kontrol eder.
-
-**Pearl:** İkisi de comp'a göre değişir — kadroya bak.
+**Split:** Dar koridorlarda tel yoğunluğu artar — smoke içinden yürümeden önce tel temizliği yap; Cypher oynuyorsan telleri farklı derinliklere kur.
 
 ## 6. Roundu Döndüren Anlar
 
@@ -117,15 +97,13 @@ Karşı takımda bu fark savaş alanı: Omen smoke'u Cypher'ın gözünü kapat�
 
 2. **Omen smoke'u Cypher kamerasını kapattı.** Cypher takımı o round kör. Omen'in yönünü bilmiyorlar — hemen baskıyı bin.
 
-3. **Cypher ult sonrası Omen teleport attı.** Cypher ult'u açtı, Omen teleport çıktı — yeni konumu Cypher takımına gitti. Ult sesini duyduysan teleport atma.
+3. **Cypher ult sonrası Omen yerinde bekledi.** İlk gösterimde konumu açıldı, hareket etmedi — ikinci gösterimde aynı yerde yakalandı. Ult sesini duyduğun an yer değiştir.
 
-4. **Flash kameraya çarptı.** Omen flash'ı kameranın üstüne attı — kamera round boyu kör. Cypher'ın o round bilgi toplayacak başka aracı yok.
-
-5. **Cypher ult sonrası Omen aynı noktaya döndü.** Cypher ult'u telleri yeniledi. Omen ilk round o noktayı kullandı ve tekrar gitti — Cypher bunu biliyordu. Spot değiştir.
+4. **Kamera vuruldu.** Omen kamerayı görüp tek mermiyle kırdı — Cypher yenisini koyana kadar o hat kör. Cypher'ın o bölgede bilgi üretecek aracı kalmadı.
 
 ## 7. Koç Notları
 
-Omen oynuyorsan şunu yap: Her round teleport noktanı değiştir. Aynı noktaya iki kez gidersen Cypher seni bekler. Cypher kamerasının yerini gördüğünde flash at — kamera kör olur, o round bilgi veremez.
+Omen oynuyorsan şunu yap: Her round teleport noktanı değiştir. Aynı noktaya iki kez gidersen Cypher seni bekler. Cypher kamerasının yerini gördüğünde vur — tek mermiyle kırılır, o hat Cypher yenisini koyana kadar kör kalır.
 
 Cypher oynuyorsan şunu yap: Kamerayı Omen'in smoke attığı açılardan uzak koy. Round başında Omen hangi bölgeyi smoke'ladıysa teli oraya yakın tut — smoke'un yoğun olduğu taraftan geçiş yapacak.
 

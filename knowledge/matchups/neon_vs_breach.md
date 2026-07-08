@@ -3,7 +3,8 @@ id: matchup_neon_vs_breach
 type: matchup
 agent_a: neon
 agent_b: breach
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, neon, breach, duelist, initiator]
 ---
 
@@ -20,7 +21,7 @@ Breach duvardan geçen stun + flash + arka dalgayla Neon'un sprint koridorunu ka
 **Neon lehine:**
 - Uzun koridorlarda (Breeze, Icebox, Pearl Mid) — sprint hızı, Breach stun menziline ulaşmadan koridoru geçer.
 - Breach becerilerini harcadıysa — stun yok, flash yok, Neon flank'ı serbestçe açar.
-- Neon ult hazırsa — sprint + beam Breach'in kurulum süresini sıfırlar.
+- Neon ult hazırsa — sprint + ışın Breach'in kurulum süresini sıfırlar.
 
 **Breach lehine:**
 - Dar boğazlarda (Split, Bind, Sunset) — stun koridorun tamamını kapatır, sprint kaçacak yer bulamaz.
@@ -68,7 +69,7 @@ Breach duvardan geçen stun + flash + arka dalgayla Neon'un sprint koridorunu ka
 ---
 
 **IF** Neon ult'la Breach'e baskı kuruyor
-**MEANING** Beam + sprint birlikte Breach'in stun kurulum süresini sıfırlar.
+**MEANING** Işın + sprint birlikte Breach'in stun kurulum süresini sıfırlar.
 **COUNTER** Breach'sen: ult sesini duyar duymaz refleksle stun at. Geç kalırsan ult boyunca yakalanırsın.
 **WHY** Neon ult'unun süresi kısa ama hasarı yüksek. Breach bu pencerede hızlı tepki vermezse temizlenir.
 
@@ -93,7 +94,7 @@ Breach: stun + flash + molly + ult — alan durdurma, duvardan geçer.
 
 Breach'in stun'u alanı kaplar, Neon'unki tek kişiyi tutar. Ama Neon hız avantajıyla Breach'in kurulum süresine yetişir. Breach engeli aşar, Neon hızla kurulumu bozar.
 
-Ult maliyeti: Neon ult'u 7 puan, Breach ult'u 9 puan. Breach daha pahalı — bunu hesaba kat.
+Breach ultu daha seyrek dolar — bunu hesaba kat.
 
 ## 5. Haritaya Göre Değişim
 

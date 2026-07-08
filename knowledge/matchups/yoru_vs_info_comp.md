@@ -1,6 +1,8 @@
 ---
 id: matchup_yoru_vs_info_comp
 type: matchup
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, yoru, info, comp]
 ---
 
@@ -10,9 +12,9 @@ tags: [matchup, yoru, info, comp]
 
 Yoru'nun tek işi var: bilgi araçlarını boşa harcat. Sova + Cypher, Fade + Killjoy gibi takımlar her an senin nerede olduğunu bilmek zorunda. Yoru bunu kırar — sahte kopyayı düşmanın teline ve botuna patlatır, teleportu kameraların ve tellerin arkasına atar, ultiyle tüm kurulumun içinden görünmez yürür. Bu eşleşmeyi tek soru belirler: bilgi araçları gerçek Yoru'yu mu takip ediyor, yoksa sahteye mi koşuyor?
 
-## Yaygın Cezalandırma Kalıpları
+## Baskı Kalıpları
 
-### Yoru Bilgi Kompozisyonunu Cezalandırırken
+### Yoru Bilgi Takımını Yeniyorsa
 
 **IF**: Sahte kopya Cypher telini veya Killjoy botunu tetikliyor
 **MEANING**: Bilgi aracı sahteye harcandı — gerçek pozisyon hâlâ gizli
@@ -29,7 +31,7 @@ Yoru'nun tek işi var: bilgi araçlarını boşa harcat. Sova + Cypher, Fade + K
 **COUNTER**: Ulti boyunca yerini değiştir. Ulti bitince beklediğin yerden vurur — kazığa oturma, hareket et
 **WHY**: Ulti bittiğinde Yoru tam olarak nereye çıkacağını biliyor, sen onun nereden geleceğini bilmiyorsun
 
-### Bilgi Kompozisyonu Yoru'yu Cezalandırırken
+### Bilgi Takımı Yoru'yu Yeniyorsa
 
 **IF**: İkinci kat bilgi aracı teleporttan sonra Yoru'yu yakalıyor
 **MEANING**: Bilgi ağın yeterince derin — birini geçse ikincisine düşüyor
@@ -43,30 +45,24 @@ Yoru'nun tek işi var: bilgi araçlarını boşa harcat. Sova + Cypher, Fade + K
 
 ## Sürekli Kaybediyorsan Bu Demektir
 
-**Bilgi kompozisyonusun, Yoru sürekli kandırıyorsa**: Her sahteyi gerçek hareket sanıyorsun. Sahte kopyanın sesi farklı — ayak sesi var ama koşu ritmi yok. Teli tetikleyen sesin ardından gerçek hareket sesi gelmiyorsa o sahtedir. Hemen başka açıdan gerçek Yoru'yu ara.
+**Bilgi kompozisyonusun, Yoru sürekli kandırıyorsa**: Her sahteyi gerçek hareket sanıyorsun. Sahte kopya koşu ve adım sesini taklit eder — sesle ayıramazsın. Davranışına bak: kopya düz hatta koşar, tel patlayınca tepki vermez, peek atmaz, ateş etmez. Tele basıp dönmeyen, açı almayan şey sahtedir — hemen başka açıdan gerçek Yoru'yu ara.
 
 **Yoru'sun, sürekli yakalanıyorsan**: İlk katmanı geçiyorsun ama ikincisinin önüne düşüyorsun. Bütün kurulumu gör: kameralar nerede, teller nerede, bot nereye bakıyor? En derin engelin ötesine teleport et.
 
 ## AIMLO Ne Demeli
 
-### Oyuncu cezalandırılan taraftayken
+### Kaybeden taraftaysan
 
-**Bilgi kompozisyonusun, Yoru karıştırıyorsa**: "Sahte kopyayı telinde boşa patlatıyor. Sahtenin sesiyle gerçek adım farklı — tetiklendikten sonra hareket sesi gelmiyorsa o sahtedir. Hemen başka açıdan bak."
+**Bilgi kompozisyonusun, Yoru karıştırıyorsa**: "Sahte kopyayı telinde boşa patlatıyor. Kopya sesle ayırt edilmez — davranışa bak: tele basıp tepki vermeyen, düz koşup ateş etmeyen şey sahtedir. Hemen başka açıdan bak."
 
 **Yoru'sun, yakalanıyorsan**: "Çok erken teleport atıyorsun. Kurulumu oku — bütün teller ve kameralar nerede? En derin noktanın ötesine geç, ilk engelin değil."
 
-### Oyuncu cezalandıran taraftayken
+### Kazanan taraftaysan
 
-**Yoru kaos yaratıyorsa**: "Sahte kopyayı kurulumlarının üstüne gönder, beklemedikleri açıdan teleport at. Bilgi araçları sahteye koşarken gerçek push'u aç."
+**Yoru kaos yaratıyorsa**: "Sahte kopyayı kurulumlarının üstüne gönder, beklemedikleri açıdan teleport at. Bilgi araçları sahteye koşarken gerçek girişini aç."
 
 **Bilgi kompozisyonu seni izliyorsa**: "Sahtelerini tanımaya başladılar. Düzenini değiştir — bir tur önce sahte sonra teleport, sonraki tur önce teleport sonra sahte yap. Sırayı sabit tutarsan seni okurlar."
 
-## Rank Modülasyonu
+## Koç Notları
 
-**LOW**: Yoru sahte kopyayı rastgele atar, bilgi kompozisyonu zaten düzgün kurulum yapmaz. Yoru'ya önce sahte kopya + teleport sırasını öğret: sahteyi öne at, düşman tele bakarken teleportunu aç.
-
-**MID**: Yoru sahte kopya atmaya başlar ama bilgi oyuncuları sahteyi tanımaz. Bilgi oyuncusuna ses farkını öğret: tetiklenme sesi geldi, hareket sesi gelmedi — o sahte, dönüp gerçek açıyı kapat. Yoru'ya: sahte + teleport sırasını koru, düşman dönerken teleport at.
-
-**HIGH**: İki taraf da adapte olur. Yoru sahte kopyanın zamanlamasını değiştirir, bilgi oyuncuları ses ipuçlarını öğrenir. Burada öğreteceğin tek şey var: ritmi boz. Yoru aynı komboyu tekrarlarsa okunur.
-
-**ELITE**: Sahte kopya + ses + teleport üçlüsünü bir tur peş peşe yap, sonraki tur sırayı değiştir. Bilgi oyuncusu artık hangi sesin ardından hangi hareketi bekleyeceğini çözemez. Bu seviyede Yoru'nun değeri sadece kaçmak değil — her sahte tetiklemeyi şüpheli kılmak. Bilgi oyuncusu emin olamazsa rotate edemez.
+Yoru'nun asıl değeri sadece kaçmak değil — her sahte tetiklemeyi şüpheli kılmak. Kopya + teleport sırasını tur tur değiştirirsen bilgi oyuncusu hangi tetiklemenin gerçek olduğundan emin olamaz; emin olamayan savunma rotate edemez.

@@ -1,6 +1,8 @@
 ---
 id: general_pro-analysis
 type: general
+patch: "13.00"
+verified: 2026-07-08
 tags: [general, pro, analysis]
 ---
 
@@ -10,16 +12,16 @@ Bu bilgiyi kendi maçlarında karşılaştığın durumlara bağla — her böl�
 
 ---
 
-## Meta Evrimi
+## Kompo Prensipleri
 
-### Chamber Düşüşü
+### Chamber'lı Takıma Karşı
 
-IF takımın Chamber'a bağımlıysa
-MEANING ışınlanma menzili kısaldı, pahalı tabancası zayıfladı, Op'la atış hızı yavaş — agresif açı tutma stratejisi artık iş görmüyor
-COUNTER savunma kimliğini yeniden kur: Jett'i birincil Op duelist'e al, Killjoy veya Cypher ile pasif kuruluma geç
-WHY ışınlanma kısıtlaması Chamber'ın temel oyununu kırıyor — "her haritada zorunlu" devri bitti
+IF rakipte Chamber varsa
+MEANING açıyı ışınlanma güvencesiyle tutar — ilk atışı kaçırsa bile bedavaya kaçar
+COUNTER açısına utility'siz peek atma; ışınlanma sesini duyduğun an bas — güvencesi gidince açıkta
+WHY Chamber'ın gücü bedavaya açı tutmak; ışınlanması gittiği an sıradan bir Op'çudan kolay hedef
 
-### Çift Initiator Meta'sı
+### Çift Initiator
 
 IF tek initiator + çift duelist oynuyorsan
 MEANING keşfin ve entry desteğin yetersiz kalıyor
@@ -28,17 +30,12 @@ WHY tek initiator hem bilgiyi hem desteği aynı anda veremez; birini seçmek zo
 
 ### Controller Haritası
 
-- Viper: Breeze ve Icebox'ta zorunlu. Çıkar, harita kapanır.
+- Viper: Icebox'ta zorunlu. Çıkar, harita kapanır.
 - Harbor: İkinci controller olarak Viper'ın yanına giriyor — belli haritalarda çift smoke için.
 - Clove: Saldırgan controller oynamak istiyorsan Sunset ve Bind'da değerlendir. Agresif pozisyon alıp geriden smoke atar.
-- Omen: Çoğu haritada varsayılan solo controller. Smoke süresi ve şarj hızı buff aldı.
+- Omen: Çoğu haritada varsayılan solo controller.
 - Astra: Ult round'larında etkili ama tek başına seçilmez — kompozisyon ona göre kurulmadıkça zorlama.
-
-### Kompo Yakınsaması (2025)
-
-- Meta oturdu: 1 duelist, 1 controller, 1-2 initiator, 1-2 sentinel.
-- En değerli oyuncu tipi: Fade, Skye, KAY/O ve Gekko arasında geçiş yapabilen flex oyuncu.
-- Tek duelist meta'sında duelist'in bireysel olarak güçlü olması şart — kompo bunu zorunlu kılıyor.
+- Miks: Smoke + heal + hız desteği aynı kitte — solo controller alternatifi.
 
 ---
 
@@ -47,26 +44,16 @@ WHY tek initiator hem bilgiyi hem desteği aynı anda veremez; birini seçmek zo
 ### Utility-Yoğun, Yapılandırılmış Takımlar
 
 IF bu tarza karşı oynuyorsan
-MEANING ilk tarama ve ses ipucu gelmeden commit etmezler, bilgi tamamlanınca execute ederler
-COUNTER ilk tarama atılmadan önce push at — bilgi fazı başlar başlamaz site'a ya da mid'e baskı uygula, düşmanı hazır değilken yakala
+MEANING ilk tarama ve ses ipucu gelmeden tam girişe geçmezler, bilgi tamamlanınca execute ederler; mid kontrolü her haritada öncelikleri, retake'leri koordineli ve sert
+COUNTER ilk tarama atılmadan önce bas — bilgi fazı başlar başlamaz site'a ya da mid'e baskı uygula, düşmanı hazır değilken yakala
 WHY bu takımların gücü keşif ve mid-round adaptasyon; bilgi fazına girmelerine izin vermezsen o gücü sıfırlarsın
-
-**Bu tarzın özellikleri:**
-- İlk tarama veya ses ipucu gelmeden commit etmez
-- Mid kontrolü her haritada öncelik — mid'i tutan iki tarafa da baskı kurar
-- Retake sert: koordineli utility ile kaybettiği site'ı bile geri alır
 
 ### Yıldız-Merkezli Takımlar
 
 IF bu tarza karşı oynuyorsan
-MEANING yıldız oyuncu kötü gününde takım yapısı bunu telafi edemiyor
-COUNTER yıldızı sustur — double peek at, utility ile girişini engelle, izole düelloya sokma
+MEANING strateji tek oyuncuya alan açmak üzerine kurulu — yoğun flash desteğiyle hızlı execute, flank + karşı taraftan entry ikilisiyle kıskaç; ama yıldız kötü gününde takım yapısı bunu telafi edemiyor
+COUNTER yıldızı sustur — iki kişi aynı anda peek at, utility ile girişini engelle, izole düelloya sokma
 WHY yıldız vururken durdurulamazlar; yıldızı çıkarınca yapı yetersiz kalıyor
-
-**Bu tarzın özellikleri:**
-- Strateji tek oyuncuya alan açmak üzerine kurulu
-- Yoğun flash desteğiyle hızlı execute — utility hızla harcanır, site bunalır
-- Flank + karşı taraftan entry ikilisiyle kıskaç kurar
 
 ### Çeşitli / Anti-Strat Takımlar
 
@@ -78,23 +65,16 @@ WHY bu tarzın gücü karmaşıklık; baskı altında o karmaşıklık kendi tak
 ### Hiper-Agresif Takımlar
 
 IF bu tarza karşı oynuyorsan
-MEANING bilgi beklemeden execute ederler — en hızlı site alma zamanlamasına sahipler
+MEANING bilgi beklemeden execute ederler, default oynamazlar — bu tarzı taşıyan şey bireysel hareket ve nişan; mekanik düşerse strateji de çöker
 COUNTER site'a stack yap, crossfire kur, utility'yi erken kullan — ilk düşman girer girmez patlat
 WHY stack hem sayı avantajını hem sürprizi yok eder
-
-**Bu tarzın özellikleri:**
-- Erken fazda site'ı hızla alır, default oynamaz
-- Bu tarzı taşıyan şey bireysel hareket ve aim — mekanik düşerse strateji de çöker
 
 ### Dengeli Saldırgan Takımlar
 
 IF bu tarza karşı oynuyorsan
-MEANING yapılı oyunu patlayıcı bireysel yetenekle birleştirirler
-COUNTER ana yıldızı izole düelloya sokma — double peek ve utility baskısıyla kapat
+MEANING yapılı oyunu patlayıcı bireysel yetenekle birleştirirler — yıldız duelist'e alan açan initiator eşleşmesi kritik, birinin bilgisi diğerinin saldırganlığını besler
+COUNTER ana yıldızı izole düelloya sokma — iki kişilik peek ve utility baskısıyla kapat
 WHY ana yıldızın 1v1 clutch kazanma oranı çok yüksek; onu izole tutarsan takım denklemi bozulur
-
-**Bu tarzın özellikleri:**
-- Yıldız duelist'e alan açan initiator eşleşmesi kritik — birinin bilgisi diğerinin saldırganlığını besler
 
 ### Utility-Verimli, Disiplinli Takımlar
 
@@ -116,17 +96,12 @@ WHY ana yıldızın 1v1 clutch kazanma oranı çok yüksek; onu izole tutarsan t
 
 ## Oyuncu Stilleri
 
-### Agresif Swing Duelist
+### Agresif Giriş Duelist'i
 
 IF bu stile karşı oynuyorsan
-MEANING geniş swing atıp önceden nişanlıyor, jiggle yapmaz, ham reaksiyon hızına güvenir
+MEANING geniş açıyla peek atıp önceden nişanlıyor, jiggle yapmaz, ham reaksiyon hızına güvenir; crosshair'i hep baş seviyesinde (ajan: birincil Jett)
 COUNTER agresyonunu bait et — düşman peek attığında trade pozisyonunda dur, ego peek attığı an onu oradan vur
 WHY bu tip oyuncu takım pozisyonunu boşlayıp tek başına peek atar; o açığa utility at ve hemen trade'e gir
-
-**Özellikler:**
-- Peek'e commit eder, fight'ı reaksiyon hızıyla kazanmayı hedefler
-- Crosshair'i hep baş seviyesinde — dikey ayar yapmaz
-- Ajan: birincil Jett
 
 ### Clutch-Odaklı Duelist
 
@@ -136,7 +111,7 @@ COUNTER izole fight verme, utility ile pozisyonunu gör, önceden nişanlayıp a
 WHY izole fight aradığında aynısını ona yapamazsın — sen toplu baskı uygula
 
 **Özellikler:**
-- Counter-strafe ve geniş swing'i tam zamanında atar
+- Durup ateş etmeyi ve geniş peek'i tam zamanında yapar
 - Flank kontrolü titiz — minimap'i çoğu duelist'ten sık kontrol eder
 - Ajan: birincil Jett, Raze
 
@@ -144,7 +119,7 @@ WHY izole fight aradığında aynısını ona yapamazsın — sen toplu baskı u
 
 IF bu stile karşı oynuyorsan
 MEANING off-angle tutar, utility'siz peek atarsan açıyı sen aramak zorunda kalırsın
-COUNTER Op açısına drone ya da tarama at, sonra flash at — bilgi olmadan swing atma
+COUNTER Op açısına drone ya da tarama at, sonra flash at — bilgi olmadan geniş peek atma
 WHY off-angle tutar ve sadece atış için gereken süre kadar peek atar; drone veya tarama açıyı sıfırlar
 
 **Özellikler:**
@@ -152,7 +127,7 @@ WHY off-angle tutar ve sadece atış için gereken süre kadar peek atar; drone 
 - Op peek zamanlaması minimal: atış için gereken süre kadar peek atıp yeniden pozisyon alır
 - Off-angle tercih eder — beklediğin yerde değildir
 
-### Hata Yapmayan IGL / Flex Sentinel
+### Hata Yapmayan IGL / Çok Rollü Sentinel
 
 - Utility'yi düşman görüldüğünde ya da ses ipucu geldiğinde yakar — ne erken ne geç
 - Her round aynı kararı verir: bilgi gelince utility yak, bilgi yoksa tut
@@ -160,13 +135,9 @@ WHY off-angle tutar ve sadece atış için gereken süre kadar peek atar; drone 
 ### Saf Mekanik Duelist
 
 IF bu stile karşı oynuyorsan
-MEANING gördüğü ilk düelloyu alır, utility beklemeden swing atar
+MEANING gördüğü ilk düelloyu alır, utility beklemeden peek atar — tek başına düello arar, takım pozisyonunu ikinci plana atar
 COUNTER giriş açısını utility ile kapat, tek taraflı peek'e çıkmasını engelle
 WHY mekaniğine güvenir ama utility baskısı altında tercih yapamazsa o güç devre dışı kalır
-
-**Özellikler:**
-- Gördüğü ilk düelloyu alır
-- Tek başına fight arar — takım pozisyonunu ikinci plana atar
 
 ### Tutarlılık Odaklı Sentinel/Duelist
 
@@ -183,7 +154,7 @@ WHY her round doğruyu yapmak hata oranını düşürür; bu tipe karşı sen de
 
 1. **Yayılma**: Controller mid'e smoke atar, sentinel site'ı kurar, initiator ilk bilgi atışını yapar.
 2. **Keşif**: Tarama sonuçları ve ses ipuçları gelince pozisyona göre karar ver.
-3. **Commit veya fake**: Zayıf savunma görüyorsan execute et. Stack varsa fake at, rotate et.
+3. **Gir ya da fake**: Zayıf savunma görüyorsan execute et. Stack varsa fake at, rotate et.
 4. **Execute**: Smoke iner, flash atılır, duelist girer. Execute başlar başlamaz spike'ı dik.
 5. **Post-plant**: Açıları tut, utility ile defuse'u engelle, zamanı oyna.
 
@@ -195,71 +166,18 @@ COUNTER bekledikleri push site'ına 3 oyuncu stack yap: ilk düşman girer girme
 WHY stack hem sayı avantajını hem sürprizi yok eder
 
 IF yavaş default oynayan takıma karşı oynuyorsan
-MEANING ilk tarama ya da bilgi atışı gelmeden commit etmezler
+MEANING ilk tarama ya da bilgi atışı gelmeden girişe geçmezler
 COUNTER ilk tarama atılmadan önce agresif peek at — bilgi fazına girmeden uyguladığın baskı onları hazırsız yakalar
-WHY ilk bilgi atışı gelmeden push atarsan düşmanın ritmi kırılır
+WHY ilk bilgi atışı gelmeden bastığında düşmanın ritmi kırılır
 
 IF Op'lu takıma karşı oynuyorsan
 MEANING Op açısına utility'siz peek atmak intihar
 COUNTER Op açısına bakmadan önce en az 3-4 utility harca: flash, smoke, drone veya tarama, sonra geniş peek at
-WHY her utility Op oyuncusunu bir sonraki adıma zorlar — atış, yer değiştirme ya da geri çekilme; swing'e geçtiğinde açı çoktan kirlenmiştir
+WHY her utility Op oyuncusunu bir sonraki adıma zorlar — atış, yer değiştirme ya da geri çekilme; sen peek'e geçtiğinde açı çoktan kirlenmiştir
 
 ---
 
-## Ekonomi
-
-### Full Buy
-
-- Phantom/Vandal + full utility + ağır zırh: 3.900–4.500 kredi.
-- Op buy: sadece Op oyuncusu (Jett) her full buy round'unda alır — Op + hafif zırh + temel utility.
-- Takım birlikte buy yapar: biri full buy yapamıyorsa ya hepsi force eder ya hepsi save eder.
-
-### Force Buy
-
-IF pistol round'unu kaybettikten sonraki round'daysan
-MEANING full save kredi biriktirir ama o round'u kaybedince ekonomi daha da kötüye gider
-COUNTER Spectre + hafif zırh + kısmi utility ile force et — execute'ü önceden belirle
-WHY force buy round'unda tek bir pick snowball'a dönerse hem round'u hem silahı kazanırsın
-
-### Eco
-
-IF full eco'daysan (0–1.900 kredi)
-MEANING Classic + zırhsız — fight zorlamak anlamsız
-COUNTER düşmanın yerini öğren, çıkışta tek düşman öldürmeyi ara, spike'ı dik (oyuncu başına 300 kredi)
-WHY eco round'unda hedef kazanmak değil — ekonomiyi hazırla, düşman planını öğren, sağ çık
-
-IF hafif buy'daysan (1.900–3.000 kredi)
-MEANING Marshal ya da Spectre + hafif zırh — pick potansiyelin var
-COUNTER pick + trade odaklı oyna; tek kill snowball'a döner ve düşmanın silahını çalarsın
-WHY tek bir pick round'u çevirebilir
-
----
-
-## Harita Bazlı Kompo
-
-### Ascent
-- **Standart**: Jett, Sova, KAY/O, Omen, Killjoy/Cypher
-- **Varyant**: Iso, duvarıyla mid take için Jett'in yerini alıyor.
-
-### Bind
-- **Standart**: Raze, Skye/Fade, Brimstone/Omen, Breach/KAY/O, Cypher/Killjoy
-- **Varyant**: Clove agresif hibrit oyun için geleneksel controller'ın yerine geçiyor.
-
-### Haven
-- **Standart**: Jett/Raze, Omen/Astra, Sova/Fade, Breach/Skye, Killjoy/Cypher
-- **Varyant**: Üç site'lı haritada Killjoy'un ult'u herhangi bir site retake'inde belirleyici.
-
-### Icebox
-- **Standart**: Jett, Viper + Omen/Harbor, Sova, Killjoy/Sage
-- **Varyant**: Sage duvarıyla A-site boost + Killjoy B-site anchor ikilisi.
-
-### Lotus
-- **Standart**: Raze, Fade, Omen/Harbor, Gekko/Skye, Killjoy/Deadlock
-- **Varyant**: Çift controller (Omen + Harbor) ikinci initiator'u düşürüyor.
-
----
-
-## Uyum ve Otopilot — Maç İçi Adaptasyon
+## Uyum ve Otopilot (maç düzeyi)
 
 Stratejiyi sorgulamadan döndürmek bedava bilgi verir; rakip ayar yaptıktan sonra değişmemek, kazandığın avantajı geri verir.
 
@@ -279,18 +197,9 @@ WHY rakip ayar yaptıktan sonra değişmemek, ilk yarıda kazandığın avantaj�
 
 ---
 
-## Rank Modülasyonu
+## Pro Stratejiyi Solo Queue'ya Uyarlama
 
-### Immortal+
-
-IF bu bilgiyi oyununa uygulamak istiyorsan
-MEANING bu seviyede bireysel mekanik tek başına yetmez — takım koordinasyonu ve pattern okuma fark yaratır
-COUNTER default pattern'leri doğrudan uygula: 2-1-2 yayılım, trade buddy, ekonomi koordinasyonu
-WHY taktiksel derinlik bu seviyede mekanik derinlikten daha fazla round kazandırıyor
-
-### Diamond–Ascendant
-
-IF pro stratejileri solo queue'ya uyarlamak istiyorsan
-MEANING tam pro kompo solo queue'da execute edilemez
-COUNTER basitleştir: temel default kavramını kullan, trade buddy bul, ekonomiyi iletişime aç
-WHY pro stratejinin temel adımları (trade, default yayılım, ekonomi koordinasyonu) solo queue'da da round kazandırır — tüm kompoyu birebir kopyalamak gerekmez
+IF pro maçlarda gördüğün stratejiyi kendi maçına taşımak istiyorsan
+MEANING tam pro kompo ve koordineli setup solo queue'da birebir çalışmaz — takımın o setup'ı bilmiyor
+COUNTER prensibi al, karmaşıklığı bırak: 2-1-2 yayılım, trade'li ikili hareket, alım kararını sesli söyleme — kompoyu birebir kopyalama
+WHY round kazandıran şey setup'ın adı değil temel adımları (trade, default yayılım, ekonomi koordinasyonu); bu adımlar her takımda çalışır

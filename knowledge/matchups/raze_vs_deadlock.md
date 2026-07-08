@@ -3,7 +3,8 @@ id: matchup_raze_vs_deadlock
 type: matchup
 agent_a: raze
 agent_b: deadlock
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, raze, deadlock, duelist, sentinel]
 ---
 
@@ -11,7 +12,7 @@ tags: [matchup, raze, deadlock, duelist, sentinel]
 
 ## 1. Matchup Özü
 
-Deadlock seni durdurmak için tek bir şeye oynar: sıçramaini havada yakalamak. Ağı sıçrama sırasında seni tutarsa Raze'in hareket gücü gider, sıradan bir düelliste dönersin. Senin işin net: duvarı nade ile yık, ağın düşüş hattını oku, tuzağı patlat. Sıra bu, oyun bu.
+Deadlock seni durdurmak için tek bir şeye oynar: sıçramanı havada yakalamak. Ağı sıçrama sırasında seni tutarsa Raze'in hareket gücü gider, sıradan bir düelliste dönersin. Senin işin net: duvarı nade ile yık, ağın düşüş hattını oku, tuzağı patlat. Sıra bu, oyun bu.
 
 ## 2. Kim Avantajlı?
 
@@ -25,7 +26,7 @@ Deadlock seni durdurmak için tek bir şeye oynar: sıçramaini havada yakalamak
 - Dar koridorlu haritalar (Split, Sunset, Fracture) — duvar geçişi keser, ağ sıçrama keser
 - Sıçrama bekleme süresindeyken — o an durursan ağ ile rifle seni durdurur
 - Tuzak giriş hattında aktifse — Sıçrama patlama sesini duyar, tetiklenir; sersemlemişken nade atışın yavaşlar
-- Spike kurulduktan sonra ultunu atarsa — alternatif açıda değilsen kozaya alınmak kesin ölüm
+- Spike kurulduktan sonra ultunu atarsa — solo yakalanırsan koza ölüm demek; takımın kozayı vurup kırabilir ama sen o pencerede çaresizsin
 
 **Dengeli:** Haven, Ascent, Lotus — açık site tasarımı her ikisine de alan verir, araç yerleşimi belirler.
 
@@ -47,7 +48,7 @@ Deadlock seni durdurmak için tek bir şeye oynar: sıçramaini havada yakalamak
 
 **IF** Deadlock tuzağı giriş hattında aktive oldu
 **MEANING** Sersemledin — nişanın ve animasyonun yavaşlar, nade atışın gecikir
-**COUNTER** Shift yürüyüşüyle geçmeye kalkma — Raze zaten sessiz gezmez. Tuzağı nade ile patlat, geçmeden önce hattı temizle
+**COUNTER** Sessiz yürüyerek geçmeye kalkma — Raze zaten sessiz gezmez. Tuzağı nade ile patlat, geçmeden önce hattı temizle
 **WHY** Tuzak ses tabanlı — Sıçrama patlama sesini duyar, tetiklenir. Nade ile patlatmak tek atışta iki işi birden bitirir: hem patlama hem tuzağı harcatma.
 
 ---
@@ -60,9 +61,9 @@ Deadlock seni durdurmak için tek bir şeye oynar: sıçramaini havada yakalamak
 ---
 
 **IF** Deadlock ultunu post-plant pozisyonuna attı
-**MEANING** Ult ışını seni yakalarsa kozaya alır — koza kesin ölüm, sıçrama seni çıkartmaz
-**COUNTER** Spike kurulur kurulmaz alternatif açıya geç, ışın görüş hattının dışında dur. Işın sesini duyduğun an köşeye gir, pozisyon değiştir
-**WHY** Bu ult hedef takip eder. Pozisyon kararını ult başlamadan vermişsen hayatta kalırsın — başladıktan sonra geç kalırsın.
+**MEANING** Ult dalgası seni yakalarsa kozaya alır — solo isen ölürsün, takımın ancak kozayı vurup kurtarabilir
+**COUNTER** Spike kurulur kurulmaz alternatif açıya geç. Dalga sesini duyduğun an hattına dik açıya kaç, düz geri koşma
+**WHY** Bu ult düz hat ilerler, hedef takip etmez. Dik açıya kaçarsan ıskalar — hattında kalırsan geç kalırsın.
 
 ---
 
@@ -102,17 +103,13 @@ Ultunu daha iyi konumda patlatan round'u alır.
 
 **Icebox (Raze avantajlı):** Uzun görüş hatları Deadlock'un yakın mesafe araçlarını etkisiz bırakır. Mid'de sıçrama yükselişiyle dikey alan açarsın.
 
-**Breeze (Raze avantajlı):** Geniş alanlar Deadlock'un araçlarını dağıtır, tek noktada toplayamaz. Nade hasarın burada öldürür.
-
-**Fracture (Deadlock avantajlı):** Çok yönlü giriş yapısı Deadlock'a duvar hattı kurmak için seçenek verir, Raze tek yönden baskı yapamaz.
-
 ## 6. Dönüm Noktaları
 
 **Dönüm 1 — Duvar düştü:** Nade ile sıçrama birlikte duvarı çökertir. O an Deadlock'un harita kilidi açılır — site'a girmenin anı bu.
 
-**Dönüm 2 — Ağ harcandı:** Deadlock ağ attı, ıskaladı ya da sen harcattın. İkinci sıçramainle hareketin serbest — işte o anda gir.
+**Dönüm 2 — Ağ harcandı:** Deadlock ağ attı, ıskaladı ya da sen harcattın. İkinci sıçramanla hareketin serbest — işte o anda gir.
 
-**Dönüm 3 — Ult pozisyon okuması:** Işın alanındaysan ölürsün. Alternatif açıdaysan ult boşa gider.
+**Dönüm 3 — Ult pozisyon okuması:** Dalganın hattındaysan yakalanırsın. Dik açıya kaçtıysan ult boşa gider.
 
 **Dönüm 4 — Ultun duvar üstüne patladı:** Deadlock pozisyon değiştirmediyse duvar ile Deadlock aynı anda gider. Değiştirdiyse ult değer kaybeder.
 
@@ -120,6 +117,4 @@ Ultunu daha iyi konumda patlatan round'u alır.
 
 **Deadlock oynayanın kitabı:** Araçlarını her round aynı noktaya koyma. Raze nade atış hattını bir round gördü mü, bir sonraki round duvarı başka hatta kur. Araçları site içinde dağıt — Raze'in çift hasarı bir noktayı siler, iki noktayı silemez.
 
-**Raze oynayanın kitabı:** Nade ile duvarı yık. İkinci hasarınla tuzağı temizle. sıçramai ağ hattından uzağa al. Bu üç adımı uygularsan Deadlock geçişini kesemez.
-
-**Doğrulama gereken:** Duvarın HP değeri ile nade + sıçrama hasarının toplamının yeterliliği — patch notlarını kontrol et. Ağın sıçrama hareketini tam kesip kesmediği — özel lobide dene.
+**Raze oynayanın kitabı:** Nade ile duvarı yık. İkinci hasarınla tuzağı temizle. Sıçramanı ağ hattından uzağa al. Bu üç adımı uygularsan Deadlock geçişini kesemez.

@@ -3,7 +3,8 @@ id: matchup_raze_vs_chamber
 type: matchup
 agent_a: raze
 agent_b: chamber
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, raze, chamber, duelist, sentinel]
 ---
 
@@ -53,7 +54,7 @@ Raze, nade ve sıçrama ile Chamber'ın tuzağını, teleportunu ve tabancasın�
 ---
 
 **IF** Chamber op ultunu post-plant'te Raze'in üstüne çevirdi, Raze düz site ortasındaydı
-**MEANING** Tek atışlık op ult kesin kill — Raze açıkta duruyorsa vurulur.
+**MEANING** Op ult tek atışta öldürür — Raze açıkta duruyorsa vurulur.
 **COUNTER** Post-plant'te off-angle'da dur, site ortasında açık kalma. Ult sesi duyulunca takıma rotate sinyali ver.
 **WHY** Op ult uzun açıda çok güçlü — ama Raze ult hattının dışına çıkarsa Chamber atışı bulamaz.
 
@@ -86,7 +87,7 @@ Raze hasar ve hareket getirir, Chamber bilgi ve teleport. Atakta Raze nade lineu
 
 Nade ile tuzak takası Raze lehine — nade daha uzun hattan atılır. Op ile rifle takası Chamber lehine — açık görüş hattını Raze yakın mesafe bulamadığında Chamber her atışta öne geçer.
 
-Ult karşılaştırması: Raze ultu 7 puan, Chamber ultu 8. Chamber'ınki daha pahalı ama tutarlı — doğru shot kesin kill. Raze ultunu Chamber'ın beklediği hatta atarsan teleportla geçersiz kılınır; beklenmedik hattan at.
+Ult karşılaştırması: Chamber'ınki tutarlı — doğru atış kesin öldürür. Raze ultunu Chamber'ın beklediği hatta atarsan teleportla geçersiz kılınır; beklenmedik hattan at.
 
 ## 5. Haritaya Göre Değişim
 
@@ -114,7 +115,7 @@ Ult karşılaştırması: Raze ultu 7 puan, Chamber ultu 8. Chamber'ınki daha p
 
 **Flip 3 — Raze ultu ile teleport timing'i:** Chamber ult sesini duyduğu an teleport çekerse roket hedefe ulaşamaz. Geç çekerse ölür. Raze olarak bu sesi tanı — roket havadayken Chamber'ın teleport animasyonunu izle, ikinci sıçrama hattını ona göre planla.
 
-**Flip 4 — Op ult pozisyon okuma:** Chamber op ult'unu Raze'in agresif hattına çevirirse kesin kill. Raze off-angle'daysa Chamber atışı bulamaz — post-plant'te asla düz durma.
+**Flip 4 — Op ult pozisyon okuma:** Chamber op ult'unu Raze'in agresif hattına çevirirse Raze ölür. Raze off-angle'daysa Chamber atışı bulamaz — post-plant'te asla düz durma.
 
 ## 7. Koç Notları
 
@@ -126,4 +127,4 @@ Ult karşılaştırması: Raze ultu 7 puan, Chamber ultu 8. Chamber'ınki daha p
 
 **Chamber'ın teleport noktasını patlat, tuzağını patlat — sırayla.** İkisi de gidince Chamber o round ultsuz oynamak zorunda kalır.
 
-**Patch 9.x notu:** Chamber teleport noktasının menzili sınırlı — noktanı erken kur, çatışma anına bırakma yoksa kaçış kapın açılmaz. Op ult bu patch'te 3 atış hakkıyla geliyor; Chamber 3. atışı kullanana kadar ult aktif, 3. atıştan sonra biter.
+**Chamber teleport noktasının menzili sınırlı** — noktanı erken kur, çatışma anına bırakma; yoksa kaçış kapın açılmaz.

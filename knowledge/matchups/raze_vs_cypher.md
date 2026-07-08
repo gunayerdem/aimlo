@@ -3,7 +3,8 @@ id: matchup_raze_vs_cypher
 type: matchup
 agent_a: raze
 agent_b: cypher
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, raze, cypher, duelist, sentinel]
 ---
 
@@ -86,7 +87,7 @@ Raze util'i zarar ve hareket için. Cypher util'i bilgi ve site kilitleme için.
 
 Kritik nokta: Raze nade'i Cypher tel'ini patlatabilir, tersi olmaz. Cypher'ın cevabı tel'i nade'in düşmeyeceği yere kurmak.
 
-Ult maliyeti eşit (her ikisi de 7 puan). Raze ult'ı round'u bitirir. Cypher ult'ı round için zemin hazırlar — ama o zemini takım değerlendirirse işe yarar.
+Raze ult'ı round'u bitirir. Cypher ult'ı round için zemin hazırlar — ama o zemini takım değerlendirirse işe yarar.
 
 ## 5. Haritaya Göre Durum
 

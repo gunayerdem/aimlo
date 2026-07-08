@@ -3,7 +3,8 @@ id: matchup_harbor_vs_kayo
 type: matchup
 agent_a: harbor
 agent_b: kayo
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, harbor, kayo, controller, initiator]
 ---
 
@@ -11,119 +12,97 @@ tags: [matchup, harbor, kayo, controller, initiator]
 
 ## 1. Matchup Özü
 
-Harbor duvarı + smoke'u + ikinci duvarı + ult'uyla sahayı örter, takımını içinden geçirir. KAY/O bıçağı + flash'ı + frag'ı + ult'uyla sen bu örtüyü kurmadan hepsini siler. Çatışmanın özü şu: util'ini atmadan önce bıçak değerse o round silahsız kalırsın. KAY/O'nun gücü tam burada — seni kurarken yakalar.
+Harbor duvarı + koruma kubbesi + dalga duvarı + ult'uyla sahayı örter, takımını içinden geçirir. KAY/O bıçağı + flash'ı + molly'si + ult'uyla seni bu örtüyü kurmadan yakalamaya çalışır. Çatışmanın özü şu: util'ini atmadan önce bıçak SENİ yakalarsa o pencere boyunca hiçbir şey atamazsın. Atılmış duvar ve kubbe ise yerinde durur — bıçak sahadaki utility'yi silmez, oyuncuyu susturur. KAY/O'nun gücü tam burada — seni kurarken yakalar.
 
 ## 2. Kim Avantajlı?
 
 **KAY/O lehine:**
-- Bıçak smoke hattına değdi — o round smoke yok, takımın açıkta kalır
-- KAY/O ult'u aktifken — duvarı da smoke'u da atma, hepsi iptal olur
-- Frag smoke'un içine düştü — içeridekiler hasar yer; smoke görüşü keser ama kurşunu durdurmaz
-- KAY/O erken giriyor — flash + bıçak + frag kombosu sen duvarı kurmadan hattı geçer
+- Bıçak seni tam kurulum anında yakaladı — o pencere duvar yok, takımın açıkta kalır
+- KAY/O ult'u aktifken alanın içindeysen — hiçbir şey atamazsın, alandan çıkana kadar elin boş
+- Molly kubbenin içine düştü — kubbe kurşunu durdurur ama utility'yi durdurmaz, içeridekiler hasar yer
+- KAY/O erken giriyor — flash + bıçak + molly kombosu sen duvarı kurmadan hattı geçer
 
 **Harbor lehine:**
-- KAY/O bıçağı attı, flash'ı attı, ikisi de yerde patladı — duvarı da smoke'u da serbestçe kurarsın
-- Spike kuruldu — smoke + ikinci duvar defüz hattını örter, bıçak menzil dışındaysa suppress çalışmaz
+- KAY/O bıçağı ve flash'ı yere patladı — duvarı da kubbeyi de serbestçe kurarsın
+- Spike kuruldu — kubbe + dalga duvarı defüz hattını örter, bıçak menzil dışındaysa sana işlemez
 - İki ayrı hatta duvar açıyorsun — KAY/O util'i tek hatta kalır, öbür hat açık kalır
-- Ult'unu attın — sersemletme KAY/O'nun atışına denk gelirse suppress'i iptal eder
+- Ult'un KAY/O'yu yakaladı — sersemleyen KAY/O bıçağını isabetli atamaz
 
-**Dengeli haritalar:** Ascent ve Sunset'te kim bıçağını ve flash'ını yere patlattıktan sonra cast ederse o kazanır. Bıçak yere indi, flash patladı — ikisi de yerde, hemen cast et.
+**Dengeli haritalar:** Ascent ve Sunset'te kim rakibin bıçağını/flash'ını boşa çıkardıktan sonra util'ini atarsa o kazanır.
 
 ## 3. Önemli Düellolar
 
-**IF** KAY/O bıçağı site'a attı, sen tam o an smoke atıyordun
-**MEANING** Bıçağın alanı smoke atışını yakaladı — smoke suppress yedi, kapandı, hat açıldı
-**COUNTER** Bıçak sesini duyunca atışı bırak, engelin arkasına geç. Bıçak yere indi, alan etkisi çalıştı, sonra söndü — işte o an smoke at. Alternatif: duvarı bıçağın önüne çek, görüş hattını kes.
-**WHY** Bıçak alana etki eder; smoke o alana girerse suppress yer. Alan etkisi söndükten sonra atarsan smoke ayakta kalır.
+**IF** KAY/O bıçağı seni tam kubbe atacakken yakaladı
+**MEANING** Bıçak süresi boyunca hiçbir util atamazsın — hat açık kaldı, takımın örtüsüz giriyor
+**COUNTER** Bıçak sesini duyunca alandan çık ya da bıçağı silahla vurup kır. Süre bittiği an kubbeyi at — atılmış utility'ne bıçak dokunamaz.
+**WHY** Bıçak oyuncuyu susturur, sahadaki utility'yi silmez. Kritik olan senin atış pencereni kaçırmaman.
 
 ---
 
 **IF** KAY/O ult'u patladı, sen site'a girmek üzeresin
-**MEANING** Ult aktifken duvarı da smoke'u da atma — hepsi iptal, takımın yalnız tüfekle girer
-**COUNTER** Ult sesini duyduğun an girişi durdur. KAY/O ult'unu düşmanlar keserse ya da sen ult alanından çıkarsan — duvar + smoke kombosunu kur ve gir. Ult'un elindeyse KAY/O ult'u aktifken at, atışını boz.
-**WHY** Harbor util'i iptal olunca yalnız tüfekle girersin. Ult kesildikten sonra oyna, util'ini tam kullan.
+**MEANING** Alan içindeyken duvarı da kubbeyi de atamazsın — takımın yalnız tüfekle girer
+**COUNTER** Ult sesini duyduğun an girişi durdur ya da alanın dışına çık — dışarıda util'in çalışır. Kendi ult'un doluysa KAY/O ult'u aktifken at, nişanını boz.
+**WHY** Harbor util atamayınca takım örtüsüz girer. Alan dışına çıkıp kur, sonra gir.
 
 ---
 
-**IF** KAY/O frag'ı smoke alanına düştü
-**MEANING** Frag içeridekilere hasar verir — smoke görüşü keser ama hasarı durdurmaz
-**COUNTER** Smoke'u frag'ın geldiği açıdan uzağa koy. İkinci duvarı frag hattına sür, takımı engelin arkasında bırak.
-**WHY** Frag hasar verir, smoke görüş keser. Smoke'u frag rotasına göre ayarlarsan içeridekileri kurtarırsın.
+**IF** KAY/O molly'si koruma kubbesinin içine düştü
+**MEANING** Kubbe kurşunu durdurur ama utility'yi durdurmaz — içeridekiler hasar yer
+**COUNTER** Kubbenin içinde yığılma. Molly düştüyse kubbeyi terk et — kubbe sabit, sen değilsin.
+**WHY** Kubbe mermiye karşı kalkan, mollyye karşı değil. KAY/O bunu bilir ve kubbenin içini hedefler.
 
 ---
 
 **IF** Duvarı KAY/O flash'ının hattının önüne attın
 **MEANING** Duvar flash'ı durdurmaz — flash duvarın üstünden geçerse yine kör eder. Duvar yalnız arkasını örter.
-**COUNTER** KAY/O'ysan flash'ı duvarın üstünden at, yanından değil. Harbor oynuyorsan duvarı flash'ın parabolünü kesecek yüksekliğe koy.
-**WHY** Duvar yüksekliği flash'ın parabolünü keser. Flash duvarın çeperinden atılırsa duvar onu durdurur; üstünden atılırsa geçer.
+**COUNTER** (KAY/O için) Flash'ı duvarın üstünden at, yanından değil. (Harbor için) Flash sesi duyunca duvara güvenme, arkanı dön.
+**WHY** Duvar görüşü keser ama flash parabolü yüksekten aşar. Duvar arkasında kör olmuş takım duvarsız takımdan farksız.
 
 ---
 
-**IF** İkinci duvarı KAY/O'nun önüne sürdün
-**MEANING** Duvar KAY/O'nun görüş hattını yavaşça keser — ama bıçak duvarın içinden de alana etki eder, arkasındakini suppress eder
-**COUNTER** KAY/O'ysan bıçağı duvarın gerisindeki alana at; görüş kesilirken alan etkisi çalışmaya devam eder. Harbor oynuyorsan duvar + smoke'u arka arkaya at, bıçağın alanını daralt.
-**WHY** Duvar görsel, bıçak bölgesel. Duvar görüşü keser, bıçak duvarın içinden suppress eder.
+**IF** Dalga duvarını KAY/O'nun önüne sürdün
+**MEANING** Duvar KAY/O'nun görüş hattını keser — ama bıçağın etki alanı duvardan geçer, arkasındakini yine susturur
+**COUNTER** (KAY/O için) Bıçağı duvarın gerisindeki alana at; görüş kesilirken alan etkisi çalışır. (Harbor için) Duvar + kubbeyi arka arkaya at, bıçağın hedefleyeceği alanı daralt.
+**WHY** Duvar görsel, bıçak bölgesel. Duvar görüşü keser, bıçak duvarın içinden alana işler.
 
 ---
 
 **IF** KAY/O B'de tutarken sen A'ya girmeye hazırlanıyorsun
 **MEANING** KAY/O util'i B için hazır; A'ya geçince A kapısında util'i kalmaz
-**COUNTER** KAY/O'ysan bıçağı geçiş yoluna at, Harbor'ın duvar hattına denk getir. Flash'ını geçiş için kullan, A kapısına util atmadan girme.
-**WHY** KAY/O util'i bulunduğun yerde çalışır, geçiş mesafesinde etki etmez. Harbor A'ya yükleniyorsa KAY/O B util'iyle A'yı geçemez.
+**COUNTER** (KAY/O için) Bıçağı geçiş yoluna at, Harbor'ın duvar hattına denk getir. Flash'ını geçiş için kullan.
+**WHY** KAY/O util'i bulunduğu yerde çalışır. Harbor A'ya yükleniyorsa KAY/O B util'iyle A'yı geçemez.
 
 ---
 
 **IF** Ult'unu KAY/O'nun üstüne attın
-**MEANING** sersemletme KAY/O'nun nişanını bozar; suppress atışının ortasında sersemletme gelirse atış iptal olur
-**COUNTER** KAY/O'ysan ult sesini duyar duymaz engelin arkasına geç, bölgenin dışına çık. Bölgenin içinde suppress atma.
-**WHY** Ult sersemletme + sersemletme verir. KAY/O'nun atışı bu etkiyle kesilir. O round KAY/O util'i eksik, sen açık hatta duvar + smoke kurarsın.
+**MEANING** Sersemletme KAY/O'nun nişanını ve görüşünü bozar — bıçağı isabetli atamaz
+**COUNTER** (KAY/O için) Ult sesini duyar duymaz bölgenin dışına çık. Bölgenin içinden bıçak atma — hedefini bulmaz.
+**WHY** Sersemlemiş KAY/O verimsizdir. O pencerede sen açık hatta duvar + kubbe kurarsın.
 
 ## 4. Utility Karşılaşması
 
-Harbor: duvar + smoke + ikinci duvar + ult — dört katmanlı alan kontrolü.
-KAY/O: frag + flash + bıçak + ult — suppress + hasar + kör.
+Harbor: duvar + koruma kubbesi + dalga duvarı + ult — çok katmanlı alan kontrolü.
+KAY/O: molly + flash + bıçak + ult — susturma + hasar + kör.
 
 Her aşamada ne yaparsın:
-- Round başı → Harbor'san duvar + smoke hattını kur; KAY/O bıçağını ve flash'ını yere patlattıysa ikisi yerdeyken gir
-- Site'a girerken → KAY/O'ysan flash + bıçakla o hattı sil, Harbor util'siz kalsın
-- Savunmada → Harbor'san ikinci duvar + smoke'la ikinci hattı çek, KAY/O tek hatta kalsın
-- Spike kurulunca → KAY/O'ysan frag + flash'la defüz hattını zorlaştır
-- Retake'te → Harbor'san ult'unu at, KAY/O'nun atışını boz
+- Round başı → Harbor'san duvar hattını kur; KAY/O bıçağını ve flash'ını yere patlattıysa serbestsin
+- Site'a girerken → KAY/O'ysan flash + bıçakla Harbor'ı kurulum anında yakala
+- Savunmada → Harbor'san dalga duvarı + kubbeyle ikinci hattı çek, KAY/O tek hatta kalsın
+- Spike kurulunca → KAY/O'ysan molly + flash'la defüz hattını zorlaştır
+- Retake'te → Harbor'san ult'unu at, KAY/O'nun nişanını boz
 
-Ult karşılaşması: KAY/O ult'u Harbor util'ini siler, Harbor ult'u KAY/O atışını bozar. Aynı roundda ikisi patlarsa: Harbor ult'u alan etkisine daha hızlı girer, KAY/O ult'u daha uzun aktif kalır — Harbor ult'u önce patlayıp KAY/O atışını bozarsa o round Harbor'a gider.
+Ult karşılaşması: KAY/O ult'u Harbor'ı alan içinde util'siz bırakır, Harbor ult'u KAY/O'nun nişanını bozar. Aynı roundda ikisi patlarsa pozisyon kazanır: alanın dışında kalan taraf üstünlüğü alır.
 
 ## 5. Haritaya Göre Değişim
 
-**Lotus (Harbor avantajlı):** 3 site döner kapı; Harbor C Link + B Hall + A Main hattını tek duvarla kapatır. KAY/O geniş hatlarda bıçağın alanını dolduramaz.
+**Haven (Harbor):** 3 site geçişi geniş duvar hatlarına uyar; KAY/O tek başına B ile C arasında util'siz kalır.
+**Bind / Split (KAY/O):** dar geçitlerde flash + bıçak kombosu tam çalışır, geniş duvarın açılacak yeri yok.
+**Ascent / Sunset (Dengeli):** iki ajan farklı bölgede baskın — A Main Harbor duvarı, Mid/Market KAY/O flash hattı.
 
-**Pearl (Harbor avantajlı):** B Long + Mid Connector + A Link Harbor duvarı için geniş. KAY/O bıçağının alanı açık alanda seyrelir.
+## 6. Koç Notları
 
-**Bind (KAY/O avantajlı):** Hookah ve Showers dar geçit — KAY/O flash + bıçak kombosu bu hatlarda tam çalışır. Teleporter KAY/O'yu ikinci site'a taşır.
+**Harbor oynuyorsan:** Duvarı ve kubbeyi ya bıçak yere inmeden önce ya da bıçağın etkisi söndükten sonra at. Kubbenin içinde yığılma — molly yersin. Ult'unu KAY/O ult attığı roundlara sakla.
 
-**Split (KAY/O avantajlı):** Dikey dar geçitler KAY/O util'i için biçilmiş kaftan. Harbor duvarı dar alanda işe yaramaz.
+**KAY/O oynuyorsan:** Bıçağı Harbor site'a girmeden, tam kurulum anında at — hedefin utility değil oyuncu. Molly'yi kubbenin içine kilitle. Ult'unu Harbor ult attığı roundlara sakla.
 
-**Ascent (Dengeli):** A Main Harbor duvarı, Mid + B Market KAY/O flash hattı. İki agent farklı bölgede baskın.
-
-**Sunset (Dengeli):** Çok açılı site'lar. Harbor smoke'u A'da, KAY/O flash'ı Market'ta tam çalışır.
-
-**Haven (Harbor hafif avantajlı):** 3 site geçişi Harbor B Hall + C Long + A Main hattı için geniş. KAY/O tek initiator rolünde B ile C arasında util'siz kalır.
-
-## 6. Roundu Döndüren Anlar
-
-**1 — Bıçak atışı yakaladı:** Bıçak Harbor atışına denk geldi → round KAY/O'ya. Bıçağın alanı dışındayken atıyorsan → round Harbor'a.
-
-**2 — Ult ult'a karşı:** KAY/O ult'u önce patladı, Harbor util'i silindi → round KAY/O'ya. Harbor ult'u önce patladı, KAY/O atışı bozuldu → round Harbor'a.
-
-**3 — Frag smoke'a girdi:** Frag smoke'un içine düştü, takım hasar aldı → round KAY/O'ya. Smoke frag rotasının dışındaysa → round Harbor'a.
-
-**4 — KAY/O ult'a girdi:** KAY/O sersemletme yedi, util'i bozuldu → round Harbor'a. KAY/O engelin arkasına geçip bölgeden çıktıysa → round KAY/O'ya.
-
-## 7. Koç Notları
-
-**Haritaya göre agent seç:** Lotus ve Pearl'de Harbor oyna. Bind ve Split'te KAY/O'ya geç.
-
-**Harbor oynuyorsan:** Duvarı ve smoke'u ya bıçak yere inmeden önce ya da bıçağın alan etkisi söndükten sonra at. Smoke'u frag'ın geldiği açıdan uzağa koy. Ult'unu KAY/O ult attığı roundlara sakla.
-
-**KAY/O oynuyorsan:** Bıçağı Harbor site'a girmeden önce at. Frag'ı smoke'un bıraktığı noktalara kilitle. Ult'unu Harbor ult attığı roundlara sakla.
-
-Özet: Harbor atarsa roundu alır. KAY/O atıştan önce suppress ederse roundu alır. İkisi aynı anda atarsa: bıçak ve flash yere indi mi — ikisi de yerde, hemen cast et.
+Özet: Harbor örtüsünü kurarsa roundu alır. KAY/O Harbor'ı örtü kurulmadan susturursa roundu alır. Her şey o birkaç saniyelik atış penceresinde kararlaşır.

@@ -1,7 +1,8 @@
 ---
 id: matchup_skye_vs_gekko
 type: matchup
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, skye, gekko, initiator_vs_initiator]
 ---
 
@@ -20,10 +21,10 @@ Skye'ın elinde şunlar var:
 - Ult: harita genelinde 3 yaratık gönderir, bulduğunu yarı-kör yapar
 
 Gekko'nun elinde şunlar var:
-- Bot: flash atar veya spike'ı senin yerine plant eder
+- Bot: sersemletme dalgası atar ya da spike'ı senin yerine kurar/söker
 - Uçan flash: otomatik tarayan flash — sen yönlendiremezsin
 - Molly: alan hasarı verir
-- Ult: kontrol ettiğin saldırı yaratığı, yakaladığını öldürür
+- Ult: kontrol ettiğin saldırı yaratığı, yakaladığını tutuklar — takım o pencerede bitirir
 
 Kısa kes: Gekko round içinde daha çok yaratık atar. Skye ise daha hassas flash ve tek elden iyileştirme verir.
 
@@ -66,14 +67,14 @@ Neden? Gekko'nun molly'si dar ve kapalı sitelerde çok daha sert çalışır. S
 **IF** Skye ult attı, 3 yaratık takıma dağıldı
 **MEANING** Yaratık bulduğu herkese yarı-kör uyguluyor — harita genelinde baskı, takım bir anda kör kalabilir
 **COUNTER** Yaratık sesini duyar duymaz kapağa gir ve onu vur. HP'si var, öldürürsün. Açıkta bırakırsan yarı-kör kaçınılmaz
-**WHY** Skye ult'u baskı silahı. Gekko ult'u ise tek kişiyi hedef alır, kill odaklıdır. Skye ult koordinasyonu bozar, Gekko ult round'u kapatır
+**WHY** Skye ult'u baskı silahı. Gekko ult'u ise tek kişiyi hedef alır, tutuklayıp takıma teslim eder. Skye ult koordinasyonu bozar, Gekko ult round'u kapatır
 
 ---
 
 **IF** Gekko ult ile saldırıyor, Skye flash ile takımı destekliyor
-**MEANING** Gekko ult yakaladığını öldürür ama alanı sınırlı. Skye flash'ı aynı anda takımın girişini açar
+**MEANING** Gekko ult'u yakaladığını tutuklar — sabitlenen oyuncuyu Gekko takımı o pencerede bitirir. Skye flash'ı aynı anda takımın girişini açar
 **COUNTER** Gekko ult sesini duyar duymaz kapağa çekil. Yaratık patladığında etki alanı belli — dışına çık
-**WHY** Gekko ult kontrol ister, Skye ult istemez. Gekko ult'unu iyi kullanmak pratik gerektirir. Skye ult ise az pratikle bile etkili
+**WHY** Gekko ult kontrol ister, Skye ult istemez. Tutuklanan oyuncu kurtarılana kadar savunmasız — asıl tehlike yaratık değil, arkasından gelen takım
 
 ---
 
@@ -91,15 +92,15 @@ Neden? Gekko'nun molly'si dar ve kapalı sitelerde çok daha sert çalışır. S
 
 ## 4. Utility Karşılaştırması
 
-**Flash:** Skye 1 flash atar, manuel. Gekko 2 flash atar (bot + uçan flash). Sayıca flash Gekko lehine. Ama Skye'ın flash'ını sen yönlendirirsin — Gekko'nun uçan flash'ı nereye gideceğine kendi karar verir.
+**Flash:** Skye'da 2 şarjlı, yönlendirilebilir flash var. Gekko'da 1 flash var (uçan flash) — botu flash atmaz, sersemletir. Sayıca ve kontrolce flash Skye lehine: seninkini sen yönlendirirsin, Gekko'nun uçan flash'ı nereye gideceğine kendi karar verir.
 
 **Alan hasarı:** Sadece Gekko'da var — molly. Skye'da yok.
 
 **İyileştirme:** Sadece Skye'da var — heal. Gekko'da yok. Takım hasar aldıkça bu fark açılır.
 
-**Bilgi:** Skye köpek botuyla aktif bilgi toplar, kontrol sende. Gekko'nun yaratıkları bilgi değil baskı için çalışır.
+**Bilgi:** Skye köpek botuyla aktif bilgi üretir, kontrol sende. Gekko'nun yaratıkları bilgi değil baskı için çalışır.
 
-**Ult karşılaştırması:** Skye ult tüm takımı etkiler, Gekko ult tek kişiyi öldürür. Skye ult round'un akışını bozar, Gekko ult round'u kapatır.
+**Ult karşılaştırması:** Skye ult tüm takımı etkiler, Gekko ult tek kişiyi tutuklar. Skye ult round'un akışını bozar, Gekko ult sabitlediği hedefi takımına teslim edip round'u kapatır.
 
 Kısa kes: Gekko daha çok yaratık atar. Skye iyileştirme verir ve flash'ını daha hassas kullanır.
 

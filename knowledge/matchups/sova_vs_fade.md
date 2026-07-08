@@ -1,7 +1,8 @@
 ---
 id: matchup_sova_vs_fade
 type: matchup
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, sova, fade, initiator_vs_initiator]
 ---
 
@@ -9,9 +10,9 @@ tags: [matchup, sova, fade, initiator_vs_initiator]
 
 ## 1. Matchup Özü
 
-Sova recon atar — recon düştüğü an o nokta açılır, konum kesin gelir. Fade bot bırakır — bot rakibin peşinden koşar, vurursa iz round sonuna kadar açık kalır.
+Sova recon atar — recon düştüğü an o nokta açılır, konum kesin gelir. Fade bot bırakır — bot rakibin peşinden koşar, vurursa kısa süreli bir iz açılır ve takımı o hedefe yönlendirir.
 
-Sova oynarken recon'u nereye atarsan orayı açıyorsun, gerisi kör. Fade oynarken bot rakibe değerse o oyuncunun konumunu round boyu okursun.
+Sova oynarken recon'u nereye atarsan orayı açıyorsun, gerisi kör. Fade oynarken bot rakibe değerse o oyuncu kısa bir pencere boyunca işaretli — o pencerede takım basmalı.
 
 Bu matchup'ta tek bir hedefin var: karşı tarafın bilgi aracını işe yaramaz hale getir. Recon düştüyse yer değiştir. Bot koşuyorsa öldür.
 
@@ -19,11 +20,9 @@ Bu matchup'ta tek bir hedefin var: karşı tarafın bilgi aracını işe yaramaz
 
 Haritaya göre değişir.
 
-**Sova'nın güçlü olduğu haritalar:** Haven, Ascent, Breeze, Icebox — uzun görüş hatları ve çoklu site var, recon noktaları kesin çalışan açılar açık.
+**Sova'nın güçlü olduğu haritalar:** Haven, Ascent, Icebox — uzun görüş hatları ve çoklu site var, recon noktaları kesin çalışan açılar açık.
 
-**Fade'in güçlü olduğu haritalar:** Sunset, Split, Bind, Lotus — dar koridorlar ve taranması gereken köşeler bot + recon kombosu için biçilmiş kaftan.
-
-Takımın retake oynuyorsa Sova al. Takımın site basıyorsa Fade al.
+**Fade'in güçlü olduğu haritalar:** Sunset, Split, Bind — dar koridorlar ve taranması gereken köşeler bot + recon kombosu için biçilmiş kaftan.
 
 ## 3. Önemli Düellolar
 
@@ -35,9 +34,9 @@ Takımın retake oynuyorsa Sova al. Takımın site basıyorsa Fade al.
 ---
 
 **IF** Fade botu rakip oyuncuya değdirdi, iz açık
-**MEANING** Fade takımı o oyuncuyu round boyu izler — Sova recon'undan çok daha uzun süreli bilgi
-**COUNTER** Bot sesini duyar duymaz botu öldür — tel, molly, ne varsa yoluna at. Bot ölmezse iz kesilmez
-**WHY** Botu öldürmek Fade'in en büyük kozunu keser. Öldürmezsen Fade round boyu peşinde.
+**MEANING** İz kısa sürer ama o pencerede Fade takımı hedefe yürür — işaretliyken her hamlen okunur
+**COUNTER** Bot sesini duyar duymaz botu vur — bot ölmeden iz açılmasın. İz açıldıysa pozisyon değiştir, işaret sönene kadar düello alma
+**WHY** Botu öldürmek Fade'in en büyük kozunu keser. İz açıkken sabit duran oyuncu bedava hedef.
 
 ---
 
@@ -58,13 +57,13 @@ Takımın retake oynuyorsa Sova al. Takımın site basıyorsa Fade al.
 **IF** Sova ult'u açık, Fade öncesinde recon gözüyle rakibe değmişti
 **MEANING** İz hâlâ açıksa Sova ult'u duvarın arkasından izli hedefe basar
 **COUNTER** Sova ult sesini duyar duymaz kapak değiştir ve hareket et — ult sabit hedef ister
-**WHY** Recon izi + Sova ult'u aynı takımda 2-3 kill getirir. Karşı takımda izliysen sabit durma.
+**WHY** Recon izi + Sova ult'u aynı takımda birden fazla düşman düşürür. Karşı takımda izliysen sabit durma.
 
 ---
 
 **IF** Fade ult'u açık, Sova takımı ult alanında
-**MEANING** Alandaki herkes yavaşlar, sağır olur, iz bırakır — Fade takımı içeri girerken Sova takımı cevap veremez
-**COUNTER** Fade ult sesini duyar duymaz kapağa gir, ult alanından çık. Ağırlaşma altındayken recon bilgisini kullanamazsın — recon atmayı bekle
+**MEANING** Alandaki herkes sağırlaşır, canı erir, iz bırakır — Fade takımı içeri girerken Sova takımı cevap veremez
+**COUNTER** Fade ult sesini duyar duymaz kapağa gir, ult alanından çık. Sağırken ve izliyken düello alma — alandan çıkınca toparlan
 **WHY** Fade ult'u site basmak için gelir. Sova takımı ult sırasında geri dönemez, sadece kaçar.
 
 ---
@@ -72,49 +71,39 @@ Takımın retake oynuyorsa Sova al. Takımın site basıyorsa Fade al.
 **IF** Sova drone'u ve Fade botu aynı anda aynı bölgede
 **MEANING** İki tarama aracı tek yerde — ikisi aynı bilgiyi topluyor
 **COUNTER** Drone'u uzak site veya flank için kullan, botu yakın koridor için bırak
-**WHY** Drone görsel verir ama ses çıkarır, vurulup düşürülür. Bot iz bırakır, hızlı gider. İkisini farklı hatlara salarsan iki kat bilgi toplarsın.
+**WHY** Drone görsel verir ama ses çıkarır, vurulup düşürülür. Bot iz bırakır, hızlı gider. İkisini farklı hatlara salarsan iki kat bilgi çıkarırsın.
 
 ## 4. Utility Karşılaştırması
 
 **Sova araçları:**
 - recon — sabit konum bilgisi, görsel konum işareti
 - drone — uçan tarama, ses çıkarır
-- Hasar oku — alan hasarı
-- ult — duvar delici 3 atış, bilgi + kill
+- hasar oku — alan hasarı
+- ult — duvar delici enerji atışları, bilgi + hasar
 
 **Fade araçları:**
 - recon gözü — vurma + iz
 - bot — koşucu, vurma + yakın kör etme
-- alan tutucu — alanı sabitler, yavaşlatır + ağırlaştırır
-- ult — geniş alan, yavaşlatma + sağırlaştırma + iz
+- alan tutucu — yakaladığını yerinde tutar + canını eritir
+- ult — geniş alan, sağırlaştırma + can eritme + iz
 
 **Fark şu:**
-Sova'nın bilgisi tek noktada kesin gelir. Fade'in bilgisi yayılır ve rakibin peşinden koşar — iz uzun sürer.
-Site basacaksan Fade ult'u Sova ult'undan daha geniş alan vurur. Retake'de kill arıyorsan Sova ult'u tek hedefe daha keskin basar.
+Sova'nın bilgisi tek noktada kesin gelir. Fade'in bilgisi yayılır ve rakibin peşinden koşar.
+Site basacaksan Fade ult'u Sova ult'undan daha geniş alan vurur. Retake'de tek hedef arıyorsan Sova ult'u daha keskin basar.
 
 ## 5. Haritaya Göre Değişim
 
-**Haven:** Sova al. Üç site var, her site için kesin recon noktaları çalışır.
+**Haven:** Üç sitede recon noktaları kesin çalışır — Sova oynuyorsan siteye özel recon açını round round değiştir, Fade'e karşı bilgi yarışını erken kazan.
 
-**Ascent:** Sova al. Mid Top ve A Site recon açıları rakibin konumunu açık verir.
+**Ascent:** Mid Top ve A Site recon açıları rakibin konumunu açık verir — Fade oynuyorsan botu Mid koridoruna sakla, açık alana sürme.
 
-**Breeze:** Sova al. Geniş site ve uzun görüş hatları — bot dar koridor ister, burada açık alanda kaybolur.
+**Icebox:** B Mid ve Mid Kitchen için recon noktaları belirleyici — Fade botu bu dar geçitlerde değer üretir, açık alanda kaybolur.
 
-**Icebox:** Sova al. B Mid ve Mid Kitchen için recon noktaları belirleyici.
+**Sunset:** Mid ve A koridoru dar — Fade botu kapıdan kapıya rakibi köşeye sıkıştırır; Sova oynuyorsan bot sesinde koridordan çık.
 
-**Sunset:** Fade al. Mid ve A koridoru dar, bot kapıdan kapıya rakibi köşeye sıkıştırır.
+**Split:** B Main ve A Main dar — bot + recon gözü kombosu iki main'i aynı anda kapatır; Sova dar açıda düzgün recon noktası bulamaz, drone'a geç.
 
-**Split:** Fade al. B Main ve A Main dar — bot + recon gözü kombosu iki main'i aynı anda kapatır, Sova recon'u o dar açılarda düzgün nokta bulamaz.
-
-**Bind:** Fade al. Teleporter geçişlerini bot kapatır, Sova recon'u teleporter sonrasını göremez.
-
-**Lotus:** Fade al. Üç site ve döner kapılar — bot döner kapıdan geçen rakibi yakalar, Sova recon açısı döner kapıda çalışmaz.
-
-**Fracture:** Takımın site basıyorsa Fade al; retake oynuyorsa Sova al.
-
-**Abyss:** Takımın site basıyorsa Fade al; retake oynuyorsa Sova al.
-
-**Pearl:** Sova al. Mid Link recon noktaları site geçişlerini erken açar, botun dar koridor avantajı Mid'de zayıf kalır.
+**Bind:** Işınlanma geçişlerini Fade botu kapatır — Sova oynuyorsan geçiş sonrasını recon'la değil drone'la aç.
 
 ## 6. Maçı Çeviren Anlar
 

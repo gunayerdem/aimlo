@@ -3,7 +3,8 @@ id: matchup_phoenix_vs_brimstone
 type: matchup
 agent_a: phoenix
 agent_b: brimstone
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, phoenix, brimstone, duelist, controller]
 ---
 
@@ -80,9 +81,9 @@ Brimstone smoke koyar, açını kapatır, molly ile hasar verir. Phoenix bu zinc
 
 ## 4. Ult Ekonomisi
 
-Phoenix ult 6 puan, Brimstone ult 7 puan. Phoenix'in ult'u daha ucuz, daha sık gelir. Ama Phoenix ult'u sadece kendisine fayda sağlar; Brimstone ult'u takım için alan kapatır. Uzun vadede Brimstone'un ult ekonomisi daha ağır basar.
+Phoenix'in ult'u daha sık gelir ama sadece kendisine fayda sağlar; Brimstone ult'u takım için alan kapatır. Uzun vadede Brimstone'un ult ekonomisi daha ağır basar.
 
-Phoenix flash x2 + molly + duvar — hepsi "kendi canını koru, üstüne gir" üzerine kurulu. Brimstone smoke x3 + molly + stim — hepsi "takımın geçeceği ya da geçemeyeceği alanı belirle" üzerine kurulu.
+Phoenix flash + molly + duvar — hepsi "kendi canını koru, üstüne gir" üzerine kurulu. Brimstone smoke + molly + stim — hepsi "takımın geçeceği ya da geçemeyeceği alanı belirle" üzerine kurulu.
 
 ## 5. Haritaya Göre Değişim
 
@@ -102,7 +103,7 @@ Phoenix flash x2 + molly + duvar — hepsi "kendi canını koru, üstüne gir" �
 
 ## 6. Dönüm Noktaları
 
-**Dönüm 1 — Smoke angle'ı kapattı:** Phoenix aim'ini kaybeder, başka hat bulmalı.
+**Dönüm 1 — Smoke açıyı kapattı:** Phoenix hattını kaybeder, başka hat bulmalı.
 
 **Dönüm 2 — Flash smoke arkasına döndü:** Brimstone savunması bir anlığına açılır, Phoenix girer.
 
@@ -111,8 +112,6 @@ Phoenix flash x2 + molly + duvar — hepsi "kendi canını koru, üstüne gir" �
 **Dönüm 4 — Brimstone ult'u post-plant:** Phoenix spike başından ayrılmak zorunda kalır, Brimstone zaman kazanır.
 
 ## 7. Koç Notları
-
-**Tier durumu:** Phoenix B tier, Brimstone A+ tier.
 
 **Radiant pattern:** Brimstone oynayanlar smoke'u Phoenix'in duvar koyacağı noktalara göre ayarlar — duvar çıkmadan smoke atmaz, duvarın yerini okur, molly'yi duvarın üstüne atar. Phoenix oynayanlar duvarı Brimstone'un molly hattının tam dışına, smoke kenarına dik açıyla kurar: hem smoke'u böler hem molly alanının dışında kalır.
 

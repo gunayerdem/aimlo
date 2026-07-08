@@ -3,7 +3,8 @@ id: matchup_jett_vs_omen
 type: matchup
 agent_a: jett
 agent_b: omen
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-08
 tags: [matchup, jett, omen, duelist, controller]
 ---
 
@@ -18,14 +19,14 @@ Jett açıyı tutar, Omen o açıyı smoke ile kapatır. Omen arkadan gelir, Jet
 **Jett lehine:**
 - Omen flash'ı harcadıysa — çekinmeden peek at, kimse seni köreltemez
 - Uzun koridorda Op tutuyorsan — Omen flank için o uzun hattı kesip gelemez
-- Ult hazırsa — smoke içinde bile sessizce kill toplarsın
+- Ult hazırsa — smoke içinde bile sessizce öldürürsün
 
 **Omen lehine:**
 - Smoke Jett'in Op hattını kapattıysa — atış yapacak yerin kalmaz
-- Flash Jett'in koştuğu hatta geldiyse — körleşirsin, close range'de ölürsün
-- Jett post-plant'te duruyor ve dash cooldown'daysa — Omen arkandan yakalar
+- Flash Jett'in koştuğu hatta geldiyse — körleşirsin, yakın mesafede ölürsün
+- Jett post-plant'te duruyor ve dash'i yoksa — Omen arkadan yakalar
 
-**Haritaya göre değişir:** Dar koridorlu haritalarda Omen smoke'u daha baskın. Uzun hatlı haritalarda Jett Op'u öne çıkar. Hangi haritada kimin avantajlı olduğunu aşağıdaki harita bölümünden oku.
+**Haritaya göre değişir:** Dar koridorlu haritalarda Omen smoke'u daha baskın. Uzun hatlı haritalarda Jett Op'u öne çıkar.
 
 ## 3. Önemli Düellolar
 
@@ -37,29 +38,29 @@ Jett açıyı tutar, Omen o açıyı smoke ile kapatır. Omen arkadan gelir, Jet
 ---
 
 **IF** Omen flash'ı Jett'in koştuğu hatta geldi
-**MEANING** Körleştin. Close range'de düşmanı göremeden atışa girersin, ölürsün.
-**COUNTER** Flash sesini duyar duymaz dur. Dash ile cover'a çekil. Flash sönmeden peek atma.
+**MEANING** Körleştin. Yakın mesafede düşmanı göremeden atışa girersin, ölürsün.
+**COUNTER** Flash sesini duyar duymaz dur. Dash ile sipere çekil. Flash sönmeden peek atma.
 **WHY** Flash duvardan geçer, saklanarak önleyemezsin. Tek çıkışın dash ile uzaklaşmak.
 
 ---
 
 **IF** Jett dash ile smoke'un içinden Omen'ın üstüne atladı
 **MEANING** Omen smoke'u attıktan sonra aynı yerde kaldıysa, Jett onu kapalı alanda yakalar.
-**COUNTER** Smoke'u attıktan sonra hemen yerinden ayrıl. Jett'in dash hattını oku, o hattın karşısına geç.
+**COUNTER** (Omen için) Smoke'u attıktan sonra hemen yerinden ayrıl. Jett'in dash hattını oku, o hattın karşısına geç.
 **WHY** Smoke konumunu gizler ama Jett dash ile o smoke'u aşar. Yerinde kalan Omen kolay hedeftir.
 
 ---
 
 **IF** Jett ult ile Omen'ı smoke içinde yakaladı
 **MEANING** Sessiz bıçak smoke'un arkasını da deler. Omen sesi duyup döner ama geç kalır.
-**COUNTER** Smoke içinde sabit durma. Sürekli hareket et, Jett'in bıçak hattını zorlaştır.
+**COUNTER** (Omen için) Smoke içinde sabit durma. Sürekli hareket et, Jett'in bıçak hattını zorlaştır.
 **WHY** Ult ses çıkarmaz. Smoke görsel engeldir, sesi kesmez — tek korunman hareket etmek.
 
 ---
 
 **IF** Omen flank için Jett'in post-plant pozisyonuna geldi
 **MEANING** Jett arkadan sıkıştı. Ön cepheye bakıyorsun, Omen arkandan geliyor.
-**COUNTER** Post-plant'te dur ama flank açısını kapatan bir köşe seç. Teleport sesini duyarsan anında dash ile kaç — dash cooldown'da değilse ölmezsin.
+**COUNTER** Post-plant'te dur ama flank açısını kapatan bir köşe seç. Teleport sesini duyarsan anında dash ile kaç.
 **WHY** Omen'ın teleport sesi net duyulur. Dash hazırsa kaçışın garanti. Dash yoksa tek çözüm önceden yer değiştirmiş olmak.
 
 ---
@@ -67,50 +68,30 @@ Jett açıyı tutar, Omen o açıyı smoke ile kapatır. Omen arkadan gelir, Jet
 **IF** Omen ult ile haritanın başka bir bölgesine ışınlandı
 **MEANING** Takımın artık Omen'ın nerede olduğunu bilmiyor. Rotasyonu okumak zorlaşır.
 **COUNTER** Omen ult sesini duyduğun an takımına söyle. Nereye gittiğini oku — spike bölgesine mi, flanke mi — ve o açıyı bekle.
-**WHY** Omen ult inerken ses çıkarır, o ses yerini ele verir. Dash ile o noktaya yakın bir açı tutarsan iner inmez yakalarsın.
+**WHY** Omen ult inerken ses çıkarır, o ses yerini ele verir. İniş noktasına yakın açı tutarsan iner inmez yakalarsın.
 
 ---
 
-**IF** Jett yukarı zıplama ile Omen'ın smoke hattının üstünden peek attı
-**MEANING** Smoke yatay hattı keser ama yukarıyı kapatmaz. yukarı zıplama Jett'e smoke üstü bir açı verir.
-**COUNTER** Smoke'u atarken yukarı zıplama yüksekliğini hesaba kat. Yüksek plat veya rampa varsa smoke'u biraz daha yükseğe ve geriye koy.
-**WHY** yukarı zıplama dikey harekettir. Smoke yerleşimini sadece öne değil, yukarıya da göre ayarlamak zorundasın.
+**IF** Jett sıçrayışla Omen'ın smoke hattının üstünden peek attı
+**MEANING** Smoke yatay hattı keser ama yukarıyı kapatmaz. Sıçrama Jett'e smoke üstü bir açı verir.
+**COUNTER** (Omen için) Smoke'u atarken sıçrama yüksekliğini hesaba kat. Yüksek çıkıntı veya rampa varsa smoke'u biraz daha yükseğe ve geriye koy.
+**WHY** Sıçrama dikey harekettir. Smoke yerleşimini sadece öne değil, yukarıya göre de ayarlamak zorundasın.
 
 ## 4. Utility Karşılaştırması
 
-Jett: dash (anlık kaçış/saldırı), yukarı zıplama (yüksek açı), 2 smoke (kısa süreli, sadece kendine), ult (sessiz kill).
+Jett: dash (anlık kaçış/saldırı), yukarı sıçrama (yüksek açı), smoke (kısa süreli, sadece kendine), ult (sessiz bıçak).
 
-Omen: 2 smoke (takım için, uzun süreli), flash (duvardan geçen kör), teleport (flank/kaçış), ult (harita çapında ışınlanma).
+Omen: smoke (takım için, uzun süreli), flash (duvardan geçen kör), teleport (flank/kaçış), ult (harita çapında ışınlanma).
 
 Kesişim noktası: İkisi de smoke kullanır ama amaçları farklı. Jett smoke'u sadece kendini gizlemek için atar. Omen smoke'u takımın geçişini açmak için atar. Bu yüzden Omen smoke'ta üstün, Jett harekette üstün — matchup tam bu fark üzerine kurulu.
 
 ## 5. Haritaya Göre Avantaj
 
-**Ascent (Jett avantajlı):** A Main'in uzun hattı Op için açık. Omen smoke'u o hattı tam kapatamaz, Jett açı değiştirir.
+**Ascent / Icebox (Jett):** uzun hatlar Op için açık — Omen smoke'u hepsini örtemez, açı değiştirirsin.
+**Bind / Split (Omen):** dar geçitler smoke ile tamamen kapanır, teleport flankı güçlenir — Op'a uzun hat kalmaz.
+**Haven / Sunset (Dengeli):** 3 site Omen'ın smoke ekonomisini zorlar, orta mesafeli hatlar iki tarafa eşit şans verir.
 
-**Bind (Omen avantajlı):** Teleporter geçişleri Omen flankını güçlendirir. Jett'in Op hattı kısa, dash kaçış mesafesi dar.
-
-**Haven (Dengeli):** 3 site Omen'ın smoke ekonomisini zorlar. Jett birden fazla hatta açı tutabilir.
-
-**Lotus (Omen hafif avantajlı):** 3 site geçişleri dar. Omen smoke + teleport ikilisi Jett'in açı seçimini kısar.
-
-**Split (Omen avantajlı):** Dar geçitler Omen smoke ile tamamen kapanır. Jett'e Op için uzun hat kalmaz.
-
-**Icebox (Jett avantajlı):** A ve B uzun hatları Op için ideal. Omen smoke'u o hatları tam örtemez.
-
-**Sunset (Dengeli):** Orta mesafeli hatlar iki tarafa da eşit şans verir.
-
-## 6. Dönüm Noktaları
-
-**Dönüm 1 — Smoke hattı kapandı:** Jett Op'unu kaybeder, Omen baskıyı eline alır.
-
-**Dönüm 2 — Flash tam hatta geldi:** Jett körleşir, close range'de ölür.
-
-**Dönüm 3 — Ult ile smoke içinde kill:** Jett sessiz bıçakla Omen'ı bitirir.
-
-**Dönüm 4 — Flank tuttu:** Omen arkadan Jett'i yakalar, post-plant biter.
-
-## 7. Koç Notları
+## 6. Koç Notları
 
 Bu matchup'ta Jett olarak en büyük hatan şu: Omen smoke ile hattı kapattıktan sonra aynı hatta tutunmak. Smoke düştü, o hat bitti — hemen başka açıya geç.
 
