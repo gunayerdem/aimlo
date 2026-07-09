@@ -9,7 +9,7 @@ import { loadPlayerMemory, buildMemoryContext } from "@/lib/player-memory";
 import { isUuidV4 } from "@/lib/uuid";
 import { buildPolicyBlock } from "@/lib/ai-policy";
 import { buildAgentAbilityHint, enforceAgentKit } from "@/lib/agent-abilities";
-import { cleanCoachText, clampWords } from "@/lib/coach-text";
+import { cleanCoachText, clampWords, stripNumericHp } from "@/lib/coach-text";
 import { ROUND_FEEDBACK_SCHEMA, SYSTEM_PROMPT, USER_PROMPT, buildFactSheet } from "@/lib/vision-prompt";
 import { classifyDeath, buildDeathTypeDirective } from "@/lib/death-type";
 import { extractKillerWeapon, classifyCompArchetype, buildWeaponCompDirective } from "@/lib/comp-weapon";
@@ -113,6 +113,7 @@ type VisionRequest = {
   // New fields from desktop app
   spikePlanted?: boolean; // was spike planted when player died
   healthAtDeath?: number; // HP + shield at death (0-150)
+  hpSampleAgeSec?: number; // 2026-07-09 additive: age of the last-alive HP sample at death-confirm (older desktop builds omit it)
   ultReady?: boolean; // was ultimate ready when player died
   roundTimerAtDeath?: number; // seconds remaining on round timer (0-140)
   // ── FAZ2/FAZ3 additive fields (default-absent) ──
@@ -593,9 +594,11 @@ export async function POST(request: NextRequest) {
         const safe = sanitizePromptInput(reqBody.deathAngle, { max: 30, collapseWhitespace: true });
         if (safe) ctx.deathAngle = safe;
       }
-      if (typeof reqBody.healthAtDeath === "number" && reqBody.healthAtDeath > 0) {
-        ctx.healthAtDeath = Math.min(Math.max(reqBody.healthAtDeath, 0), 150);
-      }
+      // healthAtDeath deliberately NOT put into ctx (live-test #5, 2026-07-09):
+      // the value is the last-alive OCR sample and can be seconds stale (a death
+      // logged "HP 100"), so a numeric HP in the prompt invites a fabricated
+      // "(41 HP)" claim. The number stays a classifyDeath signal below; the
+      // death-type directive carries the qualitative "düşük canla" state instead.
       if (typeof reqBody.alliesAlive === "number") ctx.alliesAlive = reqBody.alliesAlive;
       if (typeof reqBody.enemiesAlive === "number") ctx.enemiesAlive = reqBody.enemiesAlive;
       if (typeof reqBody.roundTimerAtDeath === "number" && reqBody.roundTimerAtDeath > 0) {
@@ -657,8 +660,11 @@ export async function POST(request: NextRequest) {
 
     // Pattern context (multi-round history) — kept as raw text since it's already
     // a free-form analysis string from Rust client (not structured fields).
+    // .slice re-clamp (security audit M1): the bucket text is longer than the
+    // number it replaces, so stripNumericHp can grow past sanitize's 2000 cap —
+    // re-clamp so one field can't dominate the prompt budget.
     const patternBlock = (typeof reqBody.patternContext === "string" && reqBody.patternContext.length > 0)
-      ? sanitizePromptInput(reqBody.patternContext, { max: 2000 })
+      ? stripNumericHp(sanitizePromptInput(reqBody.patternContext, { max: 2000 }) || "", "tr").slice(0, 2000)
       : "";
 
     // Death-Data Contract (Ölüm-Veri Sözleşmesi 2026-06-29): build the ground
@@ -699,7 +705,15 @@ export async function POST(request: NextRequest) {
         killerInfo: reqBody.killerInfo,
         deathLocation: reqBody.deathLocation,
         deathTiming: reqBody.deathTiming,
-        healthAtDeath: reqBody.healthAtDeath,
+        // Stale-gate (2026-07-09): the desktop stamps how old the last-alive HP
+        // sample was at death-confirm; the confirm itself lags 2-3s, so ≤4s means
+        // "as fresh as physically possible". Older builds omit the field → legacy
+        // behavior (use the value) so low-hp classification doesn't vanish there.
+        healthAtDeath:
+          typeof reqBody.hpSampleAgeSec !== "number" ||
+          (Number.isFinite(reqBody.hpSampleAgeSec) && reqBody.hpSampleAgeSec >= 0 && reqBody.hpSampleAgeSec <= 4)
+            ? reqBody.healthAtDeath
+            : undefined,
         alliesAlive: reqBody.alliesAlive,
         enemiesAlive: reqBody.enemiesAlive,
         spikePlanted: reqBody.spikePlanted,
@@ -976,7 +990,14 @@ export async function POST(request: NextRequest) {
       // Pattern-aware insight now folds into deathAnalysis or nextRoundSuggestion when relevant.
 
       // Final coach text (clean BEFORE slice — plainify/apostrophe can change length).
-      const deathAnalysisOut = clampWords(enforceAgentKit(cleanCoachText(checkedAnalysis.text, "tr"), reqAgent), 350);
+      // Empty-guard (security audit L1): stripNumericHp's deletion forms can empty a
+      // text that was ONLY an HP label — keep the reality-checked original then
+      // (mirrors the enemyAnalysis/safeSuggestion fallback pattern below).
+      const cleanedAnalysis = cleanCoachText(checkedAnalysis.text, "tr");
+      const deathAnalysisOut = clampWords(
+        enforceAgentKit(cleanedAnalysis && cleanedAnalysis.trim() ? cleanedAnalysis : checkedAnalysis.text, reqAgent),
+        350,
+      );
       // enemyAnalysis de reality-check'ten GEÇER (grounding audit 2026-06-26: bu dizi
       // önceden HİÇ denetlenmiyordu → killer/rota/sayı uydurması elenmeden çıkıyordu).
       // kind:"suggestion" → tümü stripped olursa "" döner, orijinali koru.

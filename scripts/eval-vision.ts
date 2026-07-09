@@ -29,7 +29,7 @@ import { SYSTEM_PROMPT, USER_PROMPT, ROUND_FEEDBACK_SCHEMA } from "../lib/vision
 import { buildPolicyBlock } from "../lib/ai-policy";
 import { loadVisionKnowledge } from "../lib/knowledge-loader";
 import { realityCheck } from "../lib/reality-checker";
-import { cleanCoachText } from "../lib/coach-text";
+import { cleanCoachText, stripNumericHp } from "../lib/coach-text";
 import { buildAgentAbilityHint, enforceAgentKit } from "../lib/agent-abilities";
 import { sanitizePromptInput } from "../lib/prompt-safety";
 import { classifyDeath, buildDeathTypeDirective } from "../lib/death-type";
@@ -393,7 +393,8 @@ function buildUserPrompt(s: Scenario): string {
     if (typeof b.killerInfo === "string") ctx.killerInfo = sanitizePromptInput(b.killerInfo, { max: 120, collapseWhitespace: true });
     if (typeof b.deathLocation === "string") ctx.deathLocation = sanitizePromptInput(b.deathLocation, { max: 50, collapseWhitespace: true });
     if (typeof b.deathAngle === "string") ctx.deathAngle = sanitizePromptInput(b.deathAngle, { max: 30, collapseWhitespace: true });
-    if (typeof b.healthAtDeath === "number") ctx.healthAtDeath = b.healthAtDeath;
+    // MIRROR route.ts (2026-07-09): healthAtDeath is no longer put into ctx —
+    // numeric HP stays out of the prompt (classifyDeath below still gets the number).
     if (typeof b.alliesAlive === "number") ctx.alliesAlive = b.alliesAlive;
     if (typeof b.enemiesAlive === "number") ctx.enemiesAlive = b.enemiesAlive;
     if (b.spikePlanted === true) ctx.spikePlanted = true;
@@ -416,7 +417,7 @@ function buildUserPrompt(s: Scenario): string {
   }
 
   const ctxJson = Object.keys(ctx).length ? JSON.stringify(ctx, null, 2) : "";
-  const patternBlock = typeof b.patternContext === "string" && b.patternContext ? sanitizePromptInput(b.patternContext, { max: 2000 }) : "";
+  const patternBlock = typeof b.patternContext === "string" && b.patternContext ? stripNumericHp(sanitizePromptInput(b.patternContext, { max: 2000 }) || "", "tr") : "";
 
   // DEATH-TYPE directive — MIRROR route.ts (variety fix 2026-06-30) so the eval measures
   // the SAME pipeline the desktop hits. Without this the eval would test the OLD behavior.
@@ -433,7 +434,13 @@ function buildUserPrompt(s: Scenario): string {
       killerInfo: b.killerInfo as string | undefined,
       deathLocation: b.deathLocation as string | undefined,
       deathTiming: b.deathTiming as string | undefined,
-      healthAtDeath: b.healthAtDeath as number | undefined,
+      // MIRROR route.ts stale-gate (2026-07-09): stale HP (>4s sample age) is
+      // dropped as a classifier signal, exactly like the prod route.
+      healthAtDeath:
+        typeof b.hpSampleAgeSec !== "number" ||
+        (Number.isFinite(b.hpSampleAgeSec) && (b.hpSampleAgeSec as number) >= 0 && (b.hpSampleAgeSec as number) <= 4)
+          ? (b.healthAtDeath as number | undefined)
+          : undefined,
       alliesAlive: b.alliesAlive as number | undefined,
       enemiesAlive: b.enemiesAlive as number | undefined,
       spikePlanted: b.spikePlanted as boolean | undefined,

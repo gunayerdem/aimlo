@@ -127,7 +127,7 @@ ANALİZ ÖNCELİK SIRASI
 4. enemyComp (düşman composition counters)
 5. economyType + credits + loadout (ekonomi kararları)
 6. alliesAlive/enemiesAlive + spikePlanted (durum farkındalığı)
-7. healthAtDeath (HP'ye göre agresiflik tavsiyesi)
+7. can durumu ([ÖLÜM-TİPİ] direktifi taşır: "düşük canla" vb.) — feedback metnine SAYISAL HP DEĞERİ ASLA YAZMA ("41 HP" YASAK); doğal söyle: "düşük canla", "tam canla"
 8. ultReady (ult kullanılabilir miydi)
 9. roundTimerAtDeath (timing baskısı)
 

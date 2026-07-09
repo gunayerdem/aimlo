@@ -301,7 +301,46 @@ const TR_JARGON: [RegExp, string][] = [
 const CLEAN_AGENT_NAMES = ["Jett","Raze","Phoenix","Reyna","Yoru","Neon","Iso","Waylay","Sage","Killjoy","Cypher","Chamber","Deadlock","Vyse","Omen","Brimstone","Viper","Astra","Harbor","Clove","Sova","Breach","Skye","Fade","Gekko","Tejo","Veto"];
 
 /**
+ * Numeric-HP stripper (live-test #5, 2026-07-09). The instantaneous HP OCR
+ * sample is unreliable (last-alive-sample can be seconds stale — log showed
+ * "HP 100" on a death), so a numeric HP claim in coach text is treated as a
+ * fabricated fact. Rewrites "41 HP ile / (41 HP) / 30 canla / HP: 41" into the
+ * natural qualitative bucket (aligned with classifyDeath: <50 düşük, 50-80
+ * orta, >80 sağlam). Language-scoped: TR patterns never touch EN text and
+ * vice versa. Bucket forms rewrite in place; the parenthetical/label forms
+ * DELETE, so a string that was ONLY an HP label ("HP: 41") comes back empty —
+ * callers that must never show an empty field keep their own fallback.
+ */
+const HP_BUCKET_TR = (n: number) => (n < 50 ? "düşük canla" : n <= 80 ? "orta canla" : "sağlam canla");
+const HP_BUCKET_EN = (n: number) => (n < 50 ? "at low HP" : n <= 80 ? "at half HP" : "at high HP");
+
+export function stripNumericHp(text: string, lang: "tr" | "en"): string {
+  if (!text) return text;
+  // Parenthetical "(41 HP)" / "(41 can)" — pure deletion, both langs' safest form.
+  let t = text.replace(/\s*\(\s*\d{1,3}\s*(?:hp|can)\s*\)/gi, "");
+  if (lang === "tr") {
+    // "41 HP ile direnip" / "30 canla" / "100 HP'yle" / "41 HP'den" → bucket.
+    // Suffix group covers attached ("canla") and apostrophe ("HP'yle") forms.
+    // can(?!l[ıiuü]): "2 canlı düşman" (alive-count) must NOT match — only HP phrases.
+    t = t.replace(
+      /(?<![a-zçğıöşü0-9])(\d{1,3})\s*(?:hp(?:['’]?[a-zçğıöşü]{1,6})?|can(?!l[ıiuü])(?:['’]?[a-zçğıöşü]{1,6})?)(?:\s+ile)?(?![0-9a-zçğıöşü])/gi,
+      (_m, n) => HP_BUCKET_TR(parseInt(n, 10)),
+    );
+    // Label form "HP: 41" / "can=30" — deletion.
+    t = t.replace(/\b(?:hp|can)\s*[:=]\s*\d{1,3}\b/gi, "");
+  } else {
+    // "at/with/on 41 hp" → bucket (parseInt — NOT string compare; "41">="100" is a lexicographic trap).
+    t = t.replace(/\b(?:at|with|on)\s+(\d{1,3})\s*hp\b/gi, (_m, n) => HP_BUCKET_EN(parseInt(n, 10)));
+    // Bare "41 hp" → bucket adjective ("low HP" / "half HP" / "high HP").
+    t = t.replace(/(?<![a-z0-9])(\d{1,3})\s*hp\b/gi, (_m, n) => HP_BUCKET_EN(parseInt(n, 10)).replace(/^at /, ""));
+    t = t.replace(/\bhp\s*[:=]\s*\d{1,3}\b/gi, "");
+  }
+  return t;
+}
+
+/**
  * Deterministic coach-voice cleaner. string → string.
+ * - stripNumericHp: numeric HP claims → qualitative bucket (both langs)
  * - plainifyAbilities: ability codenames → plain Silver term (both langs)
  * - agent-name casing fix (phoenix → Phoenix, both langs)
  * - TR only: TR_JARGON tarzanca→koç-Türkçesi + apostrophe fix
@@ -309,7 +348,7 @@ const CLEAN_AGENT_NAMES = ["Jett","Raze","Phoenix","Reyna","Yoru","Neon","Iso","
  */
 export function cleanCoachText(text: string, lang: "tr" | "en"): string {
   if (!text) return text;
-  let t = plainifyAbilities(text, lang);             // ability codenames → plain (both langs)
+  let t = plainifyAbilities(stripNumericHp(text, lang), lang); // HP strip → ability codenames → plain
   for (const a of CLEAN_AGENT_NAMES) {               // phoenix → Phoenix (both langs)
     t = t.replace(new RegExp("\\b" + a + "\\b", "gi"), a);
   }

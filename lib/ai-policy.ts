@@ -136,6 +136,14 @@ YANLIŞ: "yetenek kullan", "tuzak kur" DOĞRU: "utility kullanmadan entry atıyo
 export const TIME_BAN_RULE = `\nZAMAN YASAĞI: Saniye/timer tabanlı tavsiye YASAK ("0.5 saniyede", "0.3-0.6s", "2 saniye bekle", "0.8-1.2s", "after 3s"). Olay-bazlı konuş: "flash patlayınca", "ilk kill düşünce", "spike kurulunca", "op sesi gelince" / "after the first contact", "once the flash pops". Sayısal süre/mesafe verme.`;
 
 // ═══════════════════════════════════════════════════════════
+// HP BAN — sayısal can değeri yasağı (live-test #5, 2026-07-09)
+// Anlık HP OCR okuması güvenilmez (son-canlı-örnek bayat olabilir);
+// sayı iddiası uydurma sayılır. Sinyal (death-type eşiği) serbest, METİN yasak.
+// ═══════════════════════════════════════════════════════════
+
+export const HP_BAN_RULE = `\nSAYISAL HP YASAK: Feedback metnine sayısal can değeri YAZMA — "41 HP", "(100 HP)", "30 canla", "HP 41" hepsi YASAK. Anlık HP okuması güvenilmez; sayı iddiası uydurma sayılır. Doğal söyle: "düşük canla", "canın azken", "tam canla" / "at low HP", "at full HP".`;
+
+// ═══════════════════════════════════════════════════════════
 // KATI İNGİLİZCE WHITELIST — TR çıktıda whitelist-dışı İngilizce yasak
 // ═══════════════════════════════════════════════════════════
 
@@ -239,7 +247,7 @@ export const ZERO_FAKE_AI = `\nSIFIR SAHTE AI:
 // STRENGTHENS anti-uydurma — it removes the fabrication incentive.
 export const ZERO_FAKE_AI_VISION = `\nSIFIR SAHTE AI:
 - Veride OLMAYAN bilgiyi UYDURMA
-- Her cümle SOMUT bir çapa taşımalı: callout (A Short), ajan (Cypher), silah/util (operator/smoke) ya da OCR'dan gelen sayı (HP, alive sayısı). Yüzde/round-sayısı UYDURMA — sadece veride GERÇEKTEN varsa kullan.
+- Her cümle SOMUT bir çapa taşımalı: callout (A Short), ajan (Cypher), silah/util (operator/smoke) ya da veriden gelen durum (düşük canla, sayıca azken). Sayısal HP YAZMA — can durumunu doğal söyle ("düşük canla"). Yüzde/round-sayısı UYDURMA — sadece veride GERÇEKTEN varsa kullan.
 - İstatistik tekrarı YASAK — yorumla, sadece sayı verme
 - YASAK KALIPLAR: ${BANNED_PHRASES.join(", ")}`;
 
@@ -354,6 +362,7 @@ export function buildPolicyBlock(options: {
   parts.push(CONFIDENCE_PROMPTS[options.confidence || "medium"] || CONFIDENCE_PROMPTS.medium);
   parts.push(PERSONALIZATION_RULE);
   parts.push(TIME_BAN_RULE);
+  parts.push(HP_BAN_RULE);
   if (options.lang === "en") {
     parts.push(NATURAL_COACH_RULE_EN);
     parts.push(SILVER_AUDIENCE_RULE_EN);

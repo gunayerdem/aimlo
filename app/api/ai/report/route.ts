@@ -10,7 +10,7 @@ import { generateImprovementPlan } from "@/lib/improvement-plan";
 import { loadPlayerMemory, updatePlayerMemory, buildMemoryContext } from "@/lib/player-memory";
 import { loadKnowledge } from "@/lib/knowledge-loader";
 import { buildPolicyBlock } from "@/lib/ai-policy";
-import { cleanCoachText } from "@/lib/coach-text";
+import { cleanCoachText, stripNumericHp } from "@/lib/coach-text";
 import { realityCheck, buildFactGround, type FactGround } from "@/lib/reality-checker";
 import { isUuidV4 } from "@/lib/uuid";
 import type { RoundData as EngineRoundData } from "@/types";
@@ -626,20 +626,25 @@ async function generateAIReport(body: ReportRequest, userId?: string): Promise<R
         : "";
       const anglePart = r.deathAngle ? ` angle=${r.deathAngle}` : "";
       const baseLine = `R${r.roundNumber}: ${r.result}${r.survived ? " (alive)" : ` died@${r.deathLocation || "?"}${killerPart}${anglePart} vs ${r.enemyCount || "?"}`}${note ? ` <user_note>${note}</user_note>` : ""}`;
-      const death = r.deathAnalysis ? `\n    deathAnalysis: ${r.deathAnalysis.slice(0, 200)}` : "";
-      const coach = r.coachInsight ? `\n    coachInsight: ${r.coachInsight.slice(0, 200)}` : "";
+      // stripNumericHp (2026-07-09): older per-round feedback rows may still carry
+      // "(41 HP)" text — keep the stale number out of the report prompt so the
+      // summary can't echo it ("R3'te 41 HP ile direnip" leak).
+      const death = r.deathAnalysis ? `\n    deathAnalysis: ${stripNumericHp(r.deathAnalysis, isTr ? "tr" : "en").slice(0, 200)}` : "";
+      const coach = r.coachInsight ? `\n    coachInsight: ${stripNumericHp(r.coachInsight, isTr ? "tr" : "en").slice(0, 200)}` : "";
       return baseLine + death + coach;
     })
     .join("\n");
 
   // Aggregate patterns from per-round feedback
+  // .slice(0, 500) re-clamp (security audit M1): stripNumericHp's bucket text can
+  // grow past the input sanitizer's cap — re-clamp per line.
   const allDeathAnalyses = safeRounds
     .filter(r => r.deathAnalysis && !r.survived)
-    .map(r => `R${r.roundNumber}: ${r.deathAnalysis}`)
+    .map(r => `R${r.roundNumber}: ${stripNumericHp(r.deathAnalysis!, isTr ? "tr" : "en").slice(0, 500)}`)
     .slice(0, MAX_PROMPT_ROUNDS);
   const allCoachInsights = safeRounds
     .filter(r => r.coachInsight && r.coachInsight.length > 0)
-    .map(r => `R${r.roundNumber}: ${r.coachInsight}`)
+    .map(r => `R${r.roundNumber}: ${stripNumericHp(r.coachInsight!, isTr ? "tr" : "en").slice(0, 500)}`)
     .slice(0, MAX_PROMPT_ROUNDS);
   const killerFrequency: Record<string, number> = {};
   safeRounds.forEach(r => {
