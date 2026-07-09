@@ -339,6 +339,33 @@ export function stripNumericHp(text: string, lang: "tr" | "en"): string {
 }
 
 /**
+ * Türkçe lokatif ek seçici (beta cilası 2026-07-09): "X'da/de/ta/te" eklerini
+ * sabit kodlamak ünlü uyumunu bozuyordu ("Ascent'da" ✗ → "Ascent'te" ✓).
+ * Kural: son ünlü kalın (a/ı/o/u) → -da, ince (e/i/ö/ü) → -de; son harf sert
+ * ünsüzse (f s t k ç ş h p + İngilizce x) d→t. İngilizce okunuşu yazılıştan
+ * sapan bilinen Valorant terimleri istisna tablosunda ("Bind" → baynd → 'da).
+ * Apostroflu biçim korunur — improvement-plan previousPlan eşleştirmesi
+ * split("'") kullanıyor, biçim değişmemeli.
+ */
+const TR_LOCATIVE_EXCEPTIONS: Record<string, string> = {
+  bind: "da", icebox: "ta", abyss: "te", site: "ta", showers: "ta",
+  hookah: "da", pearl: "de", corrode: "da", fracture: "da", haven: "da",
+  cave: "de", garage: "da", spike: "ta",
+};
+
+export function trLocative(word: string): string {
+  const w = (word || "").trim();
+  if (!w) return w;
+  const last = w.split(/\s+/).pop()!.toLowerCase();
+  const exc = TR_LOCATIVE_EXCEPTIONS[last];
+  if (exc) return `${w}'${exc}`;
+  const vowels = last.match(/[aıouâûeiöüî]/g);
+  const back = vowels ? /[aıouâû]/.test(vowels[vowels.length - 1]) : false;
+  const hard = /[fstkçşhpx]$/.test(last);
+  return `${w}'${hard ? "t" : "d"}${back ? "a" : "e"}`;
+}
+
+/**
  * Deterministic coach-voice cleaner. string → string.
  * - stripNumericHp: numeric HP claims → qualitative bucket (both langs)
  * - plainifyAbilities: ability codenames → plain Silver term (both langs)

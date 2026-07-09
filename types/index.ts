@@ -12,7 +12,10 @@ export type Screen =
   | "_setup_disabled"
   | "_round_disabled"
   | "_scoreInput_disabled";
-export type RoundResult = "win" | "loss";
+// "unknown" (2026-07-09): desktop OCR round sonucunu okuyamadığında raporda
+// tri-state taşınır ve raw_result_json'a aynen persist edilir — tip gerçeği
+// yansıtmalı ki yeni tüketiciler üçüncü hali derleyiciden görsün.
+export type RoundResult = "win" | "loss" | "unknown";
 export type SetupStep = "mapAgent" | "sideComp" | "confirm";
 export type SetupData = {
   map: string;

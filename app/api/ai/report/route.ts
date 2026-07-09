@@ -10,7 +10,8 @@ import { generateImprovementPlan } from "@/lib/improvement-plan";
 import { loadPlayerMemory, updatePlayerMemory, buildMemoryContext } from "@/lib/player-memory";
 import { loadKnowledge } from "@/lib/knowledge-loader";
 import { buildPolicyBlock } from "@/lib/ai-policy";
-import { cleanCoachText, stripNumericHp } from "@/lib/coach-text";
+import { cleanCoachText, stripNumericHp, clampWords, trLocative } from "@/lib/coach-text";
+import { formatMap, formatAgent, formatMode, normalizeSide, knownAgent } from "@/lib/format-display";
 import { realityCheck, buildFactGround, type FactGround } from "@/lib/reality-checker";
 import { isUuidV4 } from "@/lib/uuid";
 import type { RoundData as EngineRoundData } from "@/types";
@@ -33,7 +34,11 @@ type RoundData = {
   deathLocation: string;
   enemyCount: string;
   yourNote: string;
-  result: "win" | "loss";
+  // "unknown" (2026-07-09): desktop SCORE-BACKUP yolu round sonucunu okuyamadığında
+  // "unknown" gönderir; eskiden "loss"a zorlanıyordu → kazanılan round "Kaybedildi"
+  // görünüyordu. Artık tri-state taşınır; engine kütüphanelerine girerken binary'e
+  // indirgenir (aşağıda engine-cast noktaları), UI/persist/prompt dürüst kalır.
+  result: "win" | "loss" | "unknown";
   skipped: boolean;
   survived: boolean;
   // Optional per-round AI feedback fields (from vision route)
@@ -106,26 +111,17 @@ const MAX_NOTE_LENGTH = 500;
 export const maxDuration = 60;
 const AI_TIMEOUT_MS = 30_000;
 const MAX_PROMPT_ROUNDS = 30; // limit rounds sent to AI prompt
-const VALID_RESULTS = new Set(["win", "loss"]);
 const VALID_LANGS = new Set(["tr", "en"]);
 const VALID_SIDES = new Set(["attack", "defense"]);
-const VALID_SCORES = new Set([
-  "0",
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "11",
-  "12",
-  "13",
-  "14",
-]);
+// Overtime fix (backend-review 2026-07-09): eski VALID_SCORES seti 14'te
+// bitiyordu → 15-13/17-15 gibi overtime skorları 400 "Invalid score values"
+// ile REDDEDİLİYORDU (maç hiç rapora dönüşmüyor, desktop kuyruğu takılıyordu).
+// Sayısal aralık kontrolü: 0-40 (OT teorik üst sınırının çok üstünde tampon).
+const MAX_SCORE_VALUE = 40;
+function isValidScoreValue(s: string): boolean {
+  const n = Number(s);
+  return Number.isInteger(n) && n >= 0 && n <= MAX_SCORE_VALUE;
+}
 
 /* ══════════════════════════════════════════════════════════
    VALIDATION
@@ -182,15 +178,18 @@ function validateRequest(
   if (typeof setup.map !== "string" || !setup.map) setup.map = "Unknown";
   if (typeof setup.agent !== "string" || !setup.agent) setup.agent = "Unknown";
 
-  // Side: if missing/invalid, derive from the first round that carries a valid
-  // side, else default "attack". Never 400 for side.
+  // Side: desktop OCR "attacking"/"defending" gönderir (ocr.rs Region-5) — eskiden
+  // VALID_SIDES bunları tanımayıp her desktop maçını "attack" default'una düşürüyordu.
+  // Önce kanonikleştir, sonra doğrula (2026-07-09 beta cilası).
+  const canonSide = normalizeSide(setup.side);
+  if (canonSide) setup.side = canonSide;
   if (!VALID_SIDES.has(setup.side as string)) {
     let derivedSide: string | undefined;
     if (Array.isArray(b.rounds)) {
       for (const r of b.rounds as unknown[]) {
         if (r && typeof r === "object") {
-          const rSide = (r as Record<string, unknown>).side;
-          if (typeof rSide === "string" && VALID_SIDES.has(rSide)) {
+          const rSide = normalizeSide((r as Record<string, unknown>).side);
+          if (rSide && VALID_SIDES.has(rSide)) {
             derivedSide = rSide;
             break;
           }
@@ -240,7 +239,7 @@ function validateRequest(
       }
     }
   }
-  if (!VALID_SCORES.has(yours) || !VALID_SCORES.has(enemy)) {
+  if (!isValidScoreValue(yours) || !isValidScoreValue(enemy)) {
     return { valid: false, error: "Invalid score values" };
   }
 
@@ -264,19 +263,38 @@ function validateRequest(
       deathLocation: sanitize(r.deathLocation, 100),
       enemyCount: sanitize(r.enemyCount, 5),
       yourNote: sanitize(r.yourNote, MAX_NOTE_LENGTH),
-      result: VALID_RESULTS.has(r.result as string)
-        ? (r.result as "win" | "loss")
-        : "loss",
+      // "won"/"lost" = desktop victory-screen override değerleri (lib.rs:2823,
+      // AUTHORITATIVE kaynak) — eskiden tanınmayıp İKİSİ DE "loss"a çevriliyordu:
+      // maç kazanılsa bile son round "Kaybedildi" görünüyordu. Tanınmayan/eksik
+      // değer artık "unknown" (loss değil) — OCR-only: bilmediğini uydurma.
+      result: ((): "win" | "loss" | "unknown" => {
+        const s = typeof r.result === "string" ? r.result.trim().toLowerCase() : "";
+        if (s === "win" || s === "won") return "win";
+        if (s === "loss" || s === "lost") return "loss";
+        return "unknown";
+      })(),
       skipped: Boolean(r.skipped),
-      survived: Boolean(r.survived),
+      // Desktop RoundFeedback `died:bool` gönderir, `survived` ALANI HİÇ YOK —
+      // eskiden Boolean(undefined)=false ile her desktop round'u "öldü" sayılıyordu:
+      // bestRound daima "Hayatta kalınan round yok" fallback'i, survival istatistiği
+      // hep 0, prompt hayatta kalınan roundu bile "died@?" anlatıyordu. died'den türet.
+      survived: typeof r.survived === "boolean" ? r.survived : r.died === false,
       deathAnalysis: typeof r.deathAnalysis === "string" ? sanitize(r.deathAnalysis, 500) : undefined,
       enemyAnalysis: Array.isArray(r.enemyAnalysis)
         ? (r.enemyAnalysis as unknown[]).filter((s): s is string => typeof s === "string").slice(0, 5).map((s) => sanitize(s, 200))
         : undefined,
       nextRoundSuggestion: typeof r.nextRoundSuggestion === "string" ? sanitize(r.nextRoundSuggestion, 500) : undefined,
       coachInsight: typeof r.coachInsight === "string" ? sanitize(r.coachInsight, 500) : undefined,
-      killerAgent: typeof r.killerAgent === "string" ? sanitize(r.killerAgent, 30) : undefined,
-      killerWeapon: typeof r.killerWeapon === "string" ? sanitize(r.killerWeapon, 30) : undefined,
+      // killerInfo fallback (2026-07-09): desktop RoundFeedback yapısal killerAgent
+      // göndermez, ham "killed by reyna with vandal" bağlamını gönderir — topKillers
+      // rapor bölümü bu yüzden desktop maçlarında hep boştu. Yapısal alan öncelikli;
+      // yoksa ham metinden çıkar (parse edilemezse undefined — asla uydurma).
+      killerAgent: typeof r.killerAgent === "string"
+        ? (formatAgent(sanitize(r.killerAgent, 30)) || undefined)
+        : parseKillerAgent(r.killerInfo),
+      killerWeapon: typeof r.killerWeapon === "string"
+        ? sanitize(r.killerWeapon, 30)
+        : parseKillerWeapon(r.killerInfo),
       deathAngle: typeof r.deathAngle === "string" ? sanitize(r.deathAngle, 30) : undefined,
     }));
 
@@ -295,22 +313,30 @@ function validateRequest(
   // queue can rely on a single source of truth.
   const persistOnServer = b.persistOnServer === true;
 
+  // Skor-delta ile unknown round çözümleme (2026-07-09): round snapshot'larından
+  // sonuç TÜRETİLEBİLİYORSA türet; belirsizse "unknown" bırak (asla uydurma).
+  resolveUnknownResults(rounds);
+
   return {
     valid: true,
     data: {
       setup: {
-        map: sanitize(setup.map, 50),
-        agent: sanitize(setup.agent, 50),
+        // Kanonik normalizasyon (2026-07-09): OCR ham "bind"/"reyna" değerleri
+        // prompt'a, deterministik metne, DB'ye ve panele küçük harf gidiyordu.
+        // "Unknown" senteli korunur (desktop kontratının parçası) — insan-okur
+        // metinler basım noktasında Türkçeleştirir.
+        map: formatMap(sanitize(setup.map, 50)) || "Unknown",
+        agent: formatAgent(sanitize(setup.agent, 50)) || "Unknown",
         side: setup.side as string,
         rank: typeof setup.rank === "string" ? sanitize(setup.rank, 30) : undefined,
         mode: typeof setup.mode === "string" ? sanitize(setup.mode, 30) : undefined,
         teamComp: Array.isArray(setup.teamComp)
-          ? (setup.teamComp as string[]).slice(0, 5).map((s) => sanitize(s, 50))
+          ? (setup.teamComp as string[]).slice(0, 5).map((s) => formatAgent(sanitize(s, 50)) || sanitize(s, 50))
           : [],
         enemyComp: Array.isArray(setup.enemyComp)
           ? (setup.enemyComp as string[])
               .slice(0, 5)
-              .map((s) => sanitize(s, 50))
+              .map((s) => formatAgent(sanitize(s, 50)) || sanitize(s, 50))
           : [],
         unknownEnemyComp: Boolean(setup.unknownEnemyComp),
       },
@@ -321,6 +347,98 @@ function validateRequest(
       persistOnServer,
     },
   };
+}
+
+/* ══════════════════════════════════════════════════════════
+   UNKNOWN-ROUND ÇÖZÜMLEME — skor-delta, hizalama-doğrulamalı (2026-07-09)
+   ══════════════════════════════════════════════════════════ */
+
+/**
+ * "killed by reyna with vandal" → "Reyna". Audit L1+L2 (2026-07-09): çıktı 30
+ * karaktere cap'li VE yalnız tablo-eşleşen ajan kabul edilir — OCR gürültüsü
+ * ("killed by xhtx") rapora katil diye giremez, anyKiller guard'ını da açamaz.
+ */
+function parseKillerAgent(killerInfo: unknown): string | undefined {
+  if (typeof killerInfo !== "string" || !killerInfo) return undefined;
+  const m = killerInfo.toLowerCase().match(/killed by\s+([a-zçğıöşü/]+)/i);
+  if (!m) return undefined;
+  return knownAgent(m[1].slice(0, 30));
+}
+
+/** "killed by reyna with the vandal" → "vandal" (cap 30 + sanitize; parse edilemezse undefined). */
+function parseKillerWeapon(killerInfo: unknown): string | undefined {
+  if (typeof killerInfo !== "string" || !killerInfo) return undefined;
+  const m = killerInfo.toLowerCase().match(/\bwith\s+(?:the\s+)?([a-z0-9-]+)/i);
+  if (!m) return undefined;
+  // Regex sınıfı zaten dar bir allowlist; sanitize sarmalaması "tüm kullanıcı
+  // metni prompt-safety'den geçer" ilkesiyle tutarlılık için (backend-review M3).
+  return sanitize(m[1].slice(0, 30), 30) || undefined;
+}
+
+function parseRoundScore(s: string | undefined): [number, number] | null {
+  if (!s) return null;
+  const m = s.replace(/\s+/g, "").match(/^(\d{1,2})-(\d{1,2})$/);
+  return m ? [parseInt(m[1], 10), parseInt(m[2], 10)] : null;
+}
+
+/**
+ * Desktop'un round snapshot skoru ("2-1") yola göre round-ÖNCESİ (prefetch,
+ * get_runtime_score) ya da round-SONRASI (banner, computed_score) yazılmış
+ * olabilir — hizalama garantili değil. Bu yüzden iki hizalamayı da BİLİNEN
+ * round sonuçlarıyla test ederiz; yalnız TAM BİR hizalama tutarlıysa unknown
+ * round'ları o hizalamanın TAM tek-taraf-+1 deltasından türetiriz. İkisi de
+ * tutarlı/tutarsızsa DOKUNMAYIZ (OCR-only sözleşme: asla uydurma) — UI dürüst
+ * "Bilinmiyor" gösterir.
+ */
+function resolveUnknownResults(rounds: RoundData[]): void {
+  if (!rounds.some((r) => r.result === "unknown")) return;
+  const ordered = [...rounds].sort((a, b) => a.roundNumber - b.roundNumber);
+  const snaps = ordered.map((r) => parseRoundScore(r.score));
+  const deltaResult = (
+    from: [number, number] | null,
+    to: [number, number] | null,
+  ): "win" | "loss" | null => {
+    if (!from || !to) return null;
+    const dw = to[0] - from[0];
+    const dl = to[1] - from[1];
+    if (dw === 1 && dl === 0) return "win";
+    if (dw === 0 && dl === 1) return "loss";
+    return null; // 0 delta, çift artış, geriye gidiş = OCR şüpheli → türetme
+  };
+  // POST hizalaması: snap[i] round i'nin SONRASI → sonuç(i) = snap[i-1]→snap[i].
+  // [0,0] başlangıcı YALNIZ dizinin ilk kaydı gerçekten maçın 1. round'uysa
+  // varsayılabilir (backend-review H2: desktop ilk round'ları hiç göndermemiş
+  // olabilir — o durumda ilk kayıt için türetme yapma).
+  const post = (i: number) =>
+    deltaResult(
+      i === 0 ? (ordered[0].roundNumber === 1 ? ([0, 0] as [number, number]) : null) : snaps[i - 1],
+      snaps[i],
+    );
+  // PRE hizalaması: snap[i] round i'nin ÖNCESİ → sonuç(i) = snap[i]→snap[i+1]
+  const pre = (i: number) => deltaResult(snaps[i], i + 1 < snaps.length ? snaps[i + 1] : null);
+  const validates = (f: (i: number) => "win" | "loss" | null): boolean => {
+    let checked = 0;
+    for (let i = 0; i < ordered.length; i++) {
+      if (ordered[i].result === "unknown") continue;
+      const d = f(i);
+      if (d === null) continue;
+      if (d !== ordered[i].result) return false;
+      checked++;
+    }
+    return checked > 0; // hiç doğrulanamadıysa hizalamaya güvenme
+  };
+  const postOk = validates(post);
+  const preOk = validates(pre);
+  if (postOk === preOk) return; // belirsiz → dokunma
+  const f = postOk ? post : pre;
+  for (let i = 0; i < ordered.length; i++) {
+    if (ordered[i].result !== "unknown") continue;
+    const d = f(i);
+    if (d) {
+      ordered[i].result = d; // ordered, rounds ile aynı obje referansları
+      console.log(`[Aimlo] R${ordered[i].roundNumber} unknown → ${d} (skor-delta, ${postOk ? "post" : "pre"} hizalama)`);
+    }
+  }
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -459,8 +577,29 @@ function generateDeterministicReport(body: ReportRequest): ReportResponse {
   const safeRounds = (rounds || []).filter(
     (r): r is RoundData => r != null && typeof r === "object",
   );
-  const won = safeRounds.filter((r) => r.result === "win").length;
-  const lost = safeRounds.filter((r) => r.result === "loss").length;
+  let won = safeRounds.filter((r) => r.result === "win").length;
+  let lost = safeRounds.filter((r) => r.result === "loss").length;
+  const unknownCount = safeRounds.filter((r) => r.result === "unknown").length;
+  // Skor tutarlılık kapısı (2026-07-09): Valorant'ta maç skoru = kazanılan round
+  // sayısı → skor round toplamıyla birebir örtüşüyorsa sayaçlar için otoritatiftir
+  // ("wins=1 losses=4 ama skor 2-4" çelişkisi buradan çıkıyordu). Guard: son
+  // round'un sonucu okunamadıysa skorun kendisi o round'un bayat snapshot'ı
+  // olabilir (desktop top-level skor göndermez, son snapshot'tan türetilir) → uygulama.
+  {
+    const scoreW = Number(score.yours);
+    const scoreL = Number(score.enemy);
+    const lastByNumber = [...safeRounds].sort((a, b) => a.roundNumber - b.roundNumber).pop();
+    if (
+      unknownCount > 0 &&
+      Number.isFinite(scoreW) && Number.isFinite(scoreL) &&
+      scoreW + scoreL === safeRounds.length &&
+      scoreW >= won && scoreL >= lost &&
+      lastByNumber?.result !== "unknown"
+    ) {
+      won = scoreW;
+      lost = scoreL;
+    }
+  }
   const skipped = safeRounds.filter((r) => r.skipped).length;
   const survivedCount = safeRounds.filter(
     (r) => r.survived && !r.skipped,
@@ -513,13 +652,18 @@ function generateDeterministicReport(body: ReportRequest): ReportResponse {
     .map((r) => `R${r.roundNumber}`);
   const deathRoundStr = deathRounds.slice(0, 3).join(", ");
 
+  // İnsan-okur başlık: "Unknown — Unknown Savunma" diye başlamasın (basım
+  // noktasında Türkçeleştir; yapısal "Unknown" senteli DB'de aynen kalır).
+  const mapLabel = setup.map === "Unknown" ? (isTr ? "Bilinmeyen harita" : "Unknown map") : setup.map;
+  const agentLabel = setup.agent === "Unknown" ? (isTr ? "bilinmeyen ajan" : "unknown agent") : setup.agent;
+  const unreadNote = unknownCount > 0 ? (isTr ? ` (${unknownCount} round okunamadı)` : ` (${unknownCount} unread)`) : "";
   const summary = isTr
-    ? `${setup.map} — ${setup.agent} ${sideLabel}. Skor: ${scoreStr}. ${total} round, ${won}W/${lost}L.${survivedText} ${topDeathLoc !== "N/A" ? `${topDeathLoc}'da ${topDeathCount}x ölüm — bu pozisyon okunuyor.` : ""} Ort. düşman temas: ${avgEnemy} kişi.`
-    : `${setup.map} — ${setup.agent} ${sideLabel}. Score: ${scoreStr}. ${total} rounds, ${won}W/${lost}L.${survivedText} ${topDeathLoc !== "N/A" ? `${topDeathCount}x death at ${topDeathLoc} — this position is being read.` : ""} Avg enemy contact: ${avgEnemy}.`;
+    ? `${mapLabel} — ${agentLabel}, ${sideLabel}. Skor: ${scoreStr}. ${total} round, ${won}W/${lost}L${unreadNote}.${survivedText} ${topDeathLoc !== "N/A" ? `${trLocative(topDeathLoc)} ${topDeathCount}x ölüm — bu pozisyon okunuyor.` : ""} Ort. düşman temas: ${avgEnemy} kişi.`
+    : `${mapLabel} — ${agentLabel}, ${sideLabel}. Score: ${scoreStr}. ${total} rounds, ${won}W/${lost}L${unreadNote}.${survivedText} ${topDeathLoc !== "N/A" ? `${topDeathCount}x death at ${topDeathLoc} — this position is being read.` : ""} Avg enemy contact: ${avgEnemy}.`;
   let mistake: string;
   if (topDeathCount >= 3) {
     mistake = isTr
-      ? `GÖZLEM: ${topDeathLoc}'da ${topDeathCount} ölüm (${deathRoundStr}). ÇIKARIM: Düşman bu açıyı okuyor, crosshair hazır tutuyor. ÖNERİ: ${setup.agent} olarak off-angle'a geç veya utility ile açıyı temizleyip peek at.`
+      ? `GÖZLEM: ${trLocative(topDeathLoc)} ${topDeathCount} ölüm (${deathRoundStr}). ÇIKARIM: Düşman bu açıyı okuyor, crosshair hazır tutuyor. ÖNERİ: ${setup.agent} olarak off-angle'a geç veya utility ile açıyı temizleyip peek at.`
       : `OBSERVATION: ${topDeathCount} deaths at ${topDeathLoc} (${deathRoundStr}). INFERENCE: Enemy reads this angle, holds crosshair. RECOMMENDATION: As ${setup.agent}, shift to off-angle or clear with utility before peeking.`;
   } else if (hasRotateIssue) {
     mistake = isTr
@@ -535,7 +679,7 @@ function generateDeterministicReport(body: ReportRequest): ReportResponse {
       : `OBSERVATION: Rounds where ${setup.agent} was vulnerable after utility use. INFERENCE: Holding same position after ability — enemy punishes this. RECOMMENDATION: Reposition after utility, shift to off-angle.`;
   } else {
     mistake = isTr
-      ? `GÖZLEM: ${topDeathLoc !== "N/A" ? `${topDeathLoc}'da` : `${setup.map}'de`} tekrarlayan pozisyon hataları. ÇIKARIM: Nişan noktası ve angle seçimi zayıf — düşman ilk peek'i kazanıyor. ÖNERİ: ${setup.agent} olarak off-angle tut, jiggle peek ile bilgi topla.`
+      ? `GÖZLEM: ${topDeathLoc !== "N/A" ? trLocative(topDeathLoc) : trLocative(mapLabel)} tekrarlayan pozisyon hataları. ÇIKARIM: Nişan noktası ve angle seçimi zayıf — düşman ilk peek'i kazanıyor. ÖNERİ: ${setup.agent} olarak off-angle tut, jiggle peek ile bilgi topla.`
       : `OBSERVATION: Recurring positioning errors ${topDeathLoc !== "N/A" ? `at ${topDeathLoc}` : `on ${setup.map}`}. INFERENCE: Weak crosshair placement and angle selection — enemy wins first peek. RECOMMENDATION: As ${setup.agent}, hold off-angle, jiggle peek for info.`;
   }
   const enemyAgents = setup.unknownEnemyComp
@@ -573,7 +717,7 @@ function generateDeterministicReport(body: ReportRequest): ReportResponse {
   else if (topDeathCount >= 3) score_num -= 1;
   score_num = Math.max(1, Math.min(10, score_num));
   const decisionScore = isTr
-    ? `${score_num}/10 — ${score_num >= 7 ? `Pozisyon çeşitliliği iyi, ${setup.agent} utility zamanlaması doğru` : score_num >= 5 ? `${topDeathLoc !== "N/A" ? `${topDeathLoc}'da tekrar ölümler` : "Tekrarlayan pozisyon hataları"}, trade setup'lar eksik` : `Aynı açılarda ölüm tekrarı, ${setup.agent} utility'si etkisiz kullanılıyor`}`
+    ? `${score_num}/10 — ${score_num >= 7 ? `Pozisyon çeşitliliği iyi, ${setup.agent} utility zamanlaması doğru` : score_num >= 5 ? `${topDeathLoc !== "N/A" ? `${trLocative(topDeathLoc)} tekrar ölümler` : "Tekrarlayan pozisyon hataları"}, trade setup'lar eksik` : `Aynı açılarda ölüm tekrarı, ${setup.agent} utility'si etkisiz kullanılıyor`}`
     : `${score_num}/10 — ${score_num >= 7 ? `Good positional variety, ${setup.agent} utility timing correct` : score_num >= 5 ? `${topDeathLoc !== "N/A" ? `Repeat deaths at ${topDeathLoc}` : "Recurring position errors"}, trade setups lacking` : `Repeating deaths at same angles, ${setup.agent} utility used ineffectively`}`;
 
   // Cycle 2 fix #8 (EK SAVUNMA): run the shared coach-voice cleaner on the 6
@@ -625,7 +769,9 @@ async function generateAIReport(body: ReportRequest, userId?: string): Promise<R
         ? ` killedBy=${r.killerAgent}${r.killerWeapon ? `/${r.killerWeapon}` : ""}`
         : "";
       const anglePart = r.deathAngle ? ` angle=${r.deathAngle}` : "";
-      const baseLine = `R${r.roundNumber}: ${r.result}${r.survived ? " (alive)" : ` died@${r.deathLocation || "?"}${killerPart}${anglePart} vs ${r.enemyCount || "?"}`}${note ? ` <user_note>${note}</user_note>` : ""}`;
+      // "unknown" → "result-unread": model okunamayan round için galibiyet/kayıp
+      // iddiası KURAMASIN (OCR-only sözleşme, anti-uydurma).
+      const baseLine = `R${r.roundNumber}: ${r.result === "unknown" ? "result-unread" : r.result}${r.survived ? " (alive)" : ` died@${r.deathLocation || "?"}${killerPart}${anglePart} vs ${r.enemyCount || "?"}`}${note ? ` <user_note>${note}</user_note>` : ""}`;
       // stripNumericHp (2026-07-09): older per-round feedback rows may still carry
       // "(41 HP)" text — keep the stale number out of the report prompt so the
       // summary can't echo it ("R3'te 41 HP ile direnip" leak).
@@ -671,8 +817,14 @@ async function generateAIReport(body: ReportRequest, userId?: string): Promise<R
     .map(([loc, count]) => `${loc} ×${count}`)
     .join(", ");
 
-  // Pre-compute match insights for richer AI context
-  const engineRounds = safeRounds.map((r) => ({ ...r, feedback: null })) as EngineRoundData[];
+  // Pre-compute match insights for richer AI context.
+  // Engine kütüphaneleri (round-engine/scoring/skill/playstyle) result'ı binary
+  // varsayar — "unknown" onlara girerken bugünkü davranışla aynı şekilde "loss"a
+  // indirgenir (engine istatistiği değişmez); UI/persist/prompt tri-state kalır.
+  const engineSafe = safeRounds.map((r) =>
+    r.result === "unknown" ? { ...r, result: "loss" as const } : r,
+  );
+  const engineRounds = engineSafe.map((r) => ({ ...r, feedback: null })) as EngineRoundData[];
   const insights = computeMatchInsights(engineRounds, setup);
   const patterns = analyzeRoundPatterns(engineRounds, setup);
 
@@ -819,15 +971,15 @@ ${allCoachInsights.length > 0 ? `\n═══════════════
   // Calculate player scoring
   const matchWon = Number(score.yours) > Number(score.enemy);
   const playerScore = calculatePlayerScore(
-    [{ won: matchWon, rounds: safeRounds.map(r => ({ ...r, feedback: null })) }] as Parameters<typeof calculatePlayerScore>[0],
-    safeRounds.map(r => ({ ...r, feedback: null })) as Parameters<typeof calculatePlayerScore>[1],
+    [{ won: matchWon, rounds: engineSafe.map(r => ({ ...r, feedback: null })) }] as Parameters<typeof calculatePlayerScore>[0],
+    engineSafe.map(r => ({ ...r, feedback: null })) as Parameters<typeof calculatePlayerScore>[1],
   );
 
   const plan = generateImprovementPlan([{
     won: matchWon,
     map: setup?.map,
     agent: setup?.agent,
-    rounds: safeRounds.map(r => ({ ...r, feedback: null }))
+    rounds: engineSafe.map(r => ({ ...r, feedback: null }))
   }]);
 
   // Try loading player memory
@@ -854,9 +1006,12 @@ ${memoryContext}
     : setup.side === "defense"
       ? "defense (SAVUNMA — oyuncu site'ları tutuyor: hold/off-angle/retake/save)"
       : setup.side;
-  const userPrompt = `Map: ${setup.map}, Agent: ${setup.agent}, Side: ${sideLabelForPrompt}${setup.rank ? `, Rank: ${setup.rank}` : ""}${setup.mode ? `, Mode: ${setup.mode}` : ""}
+  // Enemy bilinmiyorsa satırı HİÇ yazma — "Enemy: unknown" literal'i modele
+  // küçük-harf 'unknown'u TR metne sızdırıyordu (canlı vaka: "Reyna ya da
+  // unknown kafadan öldürdü"). Mode display formunda (Spike Rush, snake_case değil).
+  const userPrompt = `Map: ${setup.map}, Agent: ${setup.agent}, Side: ${sideLabelForPrompt}${setup.rank ? `, Rank: ${setup.rank}` : ""}${setup.mode ? `, Mode: ${formatMode(setup.mode, "en")}` : ""}
 Score: ${score.yours}-${score.enemy} (${Number(score.yours) > Number(score.enemy) ? "WIN" : "LOSS"})
-Team: ${(setup.teamComp || []).join(",")} vs Enemy: ${setup.unknownEnemyComp ? "unknown" : (setup.enemyComp || []).join(",")}
+Team: ${(setup.teamComp || []).join(",")}${setup.unknownEnemyComp ? "" : ` vs Enemy: ${(setup.enemyComp || []).join(",")}`}
 Rounds:\n${roundSummary}
 ${insightContext}
 ${scoringContext}`;
@@ -873,7 +1028,11 @@ ${scoringContext}`;
       },
       body: JSON.stringify({
         model: "gpt-5-mini",
-        max_completion_tokens: 700,
+        // 700 → 1400 (2026-07-09): 6 alanlık Türkçe JSON ~1000+ token; 700'de
+        // finish=length ile JSON yarım kalıp SESSİZCE şablon rapora düşülüyordu
+        // ("rapor tam gelmiyor" şikayetinin bir ayağı). 1400 yalnız tavan —
+        // çıktı token'ı üretilen kadar faturalanır.
+        max_completion_tokens: 1400,
         reasoning_effort: "minimal",
         // OpenAI auto-cache: stable systemPrompt prefix is cached automatically.
         // Report schema is rich (multiple optional sections); use json_object mode.
@@ -928,7 +1087,7 @@ ${scoringContext}`;
 
     const parsed = extractJSON(text);
     if (parsed === null) {
-      console.error("[Aimlo AI] Report JSON parse failed. Raw:", text.slice(0, 300));
+      console.error(`[Aimlo AI] Report JSON parse failed (finish=${stopReason}). Raw:`, text.slice(0, 300));
       return stats;
     }
 
@@ -961,8 +1120,10 @@ ${scoringContext}`;
         hasKiller: anyKiller,
         hasDeathLocation: anyLoc,
       };
+      // clampWords (2026-07-09): ham .slice kelime ortasında kesiyordu ("rotasy") —
+      // kelime sınırına geri çekilen mevcut word-safe clamp kullanılır.
       const clean = (s: string, cap: number) =>
-        cleanCoachText(realityCheck(s, [], fg, "generic").text, isTr ? "tr" : "en").slice(0, cap);
+        clampWords(cleanCoachText(realityCheck(s, [], fg, "generic").text, isTr ? "tr" : "en"), cap);
       return {
         ...stats,
         summary: clean(parsed.summary, 1000),
@@ -1070,7 +1231,8 @@ export async function POST(request: NextRequest) {
             deathLocation: r.deathLocation,
             survived: r.survived,
             skipped: r.skipped,
-            result: r.result,
+            // player-memory binary tüketici — unknown, engine'lerdeki gibi loss'a iner
+            result: r.result === "unknown" ? "loss" : r.result,
           }))
         });
       }
@@ -1111,7 +1273,10 @@ Sadece düzeltilmiş metni döndür.`;
           headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
           body: JSON.stringify({
             model: "gpt-5-mini",
-            max_completion_tokens: 300,
+            // 300 → 500 (2026-07-09): gpt-5-mini'de reasoning token'ları da bu
+            // bütçeden düşer; 300'de refine finish=length ile kelime ortasında
+            // kesiliyordu (canlı kanıt: summary "...rotasy" / 672 bayt).
+            max_completion_tokens: 500,
             reasoning_effort: "minimal",
             messages: [
               { role: "system", content: "Radiant Valorant koçu. Her cümlede pozisyon + düşman + aksiyon ZORUNLU." },
@@ -1124,11 +1289,18 @@ Sadece düzeltilmiş metni döndür.`;
         if (rr.ok) {
           const rd = await rr.json();
           const refined = rd?.choices?.[0]?.message?.content?.trim();
-          if (refined && refined.length > 30) {
+          const rFinish = rd?.choices?.[0]?.finish_reason;
+          // finish_reason kapısı (2026-07-09, canlı-kanıtlı kök fix): token
+          // kapağına çarpan YARIM refine metni orijinal alanın üzerine yazılıyordu
+          // ("...rakip defansif rotasy"). "stop" değilse REDDET — mevcut geçerli
+          // metin kalır (no-fake ilkesi: yarım metin basmaktansa eldeki tam metin).
+          if (refined && refined.length > 30 && rFinish === "stop") {
             // Cycle 2 fix #5: clean the refined field too (same coach-voice net).
             const refinedClean = cleanCoachText(refined, validation.data.lang === "en" ? "en" : "tr");
-            (report as Record<string, unknown>)[fs.weakest] = refinedClean.slice(0, 600);
+            (report as Record<string, unknown>)[fs.weakest] = clampWords(refinedClean, 600);
             console.log(`[Aimlo AI] Report field refined: ${fs.weakest}`);
+          } else if (refined && rFinish !== "stop") {
+            console.warn(`[Aimlo AI] Report refine REJECTED (finish=${rFinish}) — keeping original ${fs.weakest}`);
           }
         }
       } catch { /* refinement failed — keep original */ }
