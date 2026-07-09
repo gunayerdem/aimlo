@@ -1117,8 +1117,9 @@ body::after {
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 30px 80px rgba(0,0,0,0.5);
 }
 
-/* Uppercase labels render with Latin (i→I) casing even under lang=tr — the
-   landing's display labels use I, not the dotted Turkish İ. */
+/* Uppercase display labels. Patron kararı 2026-07-09: TR yazım kuralları
+   geçerli — kaynak metin noktalı İ'yi doğrudan taşır ("İZLE", "ANALİZ");
+   zaten-büyük harfler text-transform'dan etkilenmez. */
 .section-kicker, .hero-kicker, .hero-stat-label, .marquee-item,
 .feature-tab-num, .story-num, .nav-num, .mega-wordmark { text-transform: uppercase; }
 

@@ -7,8 +7,9 @@ const initial: RegisterState = { ok: false };
 
 const inputCls = "auth-input";
 
-// Labels written already in Latin uppercase (no Turkish İ) — text-transform
-// honors document lang="tr" and would re-add the dot otherwise.
+// Labels written directly in Turkish uppercase (dotted İ) — patron kararı
+// 2026-07-09: TR yazım kuralları geçerli ("ŞİFRE", "İNDİR"). Already-uppercase
+// text is unaffected by any text-transform, so lang="tr" is safe.
 const labelCls = "auth-label";
 
 // Eye / EyeOff SVG — replaces 👁️ / 🙈 emojis
@@ -163,7 +164,7 @@ export function RegisterForm() {
         </div>
 
         <div>
-          <label htmlFor="reg-pw" className={labelCls}>ŞIFRE</label>
+          <label htmlFor="reg-pw" className={labelCls}>ŞİFRE</label>
           <div className="relative">
             <input
               id="reg-pw"
@@ -193,7 +194,7 @@ export function RegisterForm() {
         </div>
 
         <div>
-          <label htmlFor="reg-pw2" className={labelCls}>ŞIFRE TEKRAR</label>
+          <label htmlFor="reg-pw2" className={labelCls}>ŞİFRE TEKRAR</label>
           <div className="relative">
             <input
               id="reg-pw2"

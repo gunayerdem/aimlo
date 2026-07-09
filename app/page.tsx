@@ -2,6 +2,8 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { supabase } from "@/lib/supabase";
 import { saveDraft, loadDraft, clearDraft, saveLang, loadLang } from "@/lib/storage";
+import { formatMap, formatAgent, normalizeSide } from "@/lib/format-display";
+import { trLocative } from "@/lib/coach-text";
 import { calculateSkillProfile } from "@/lib/skill-system";
 import { analyzePlaystyle } from "@/lib/playstyle-system";
 import { ds } from "@/constants/design";
@@ -199,6 +201,7 @@ const t = {
     wonLabel: "G",
     lostLabel: "M",
     skippedLabel: "A",
+    unknownLabel: "Bilinmiyor",
     roundResultWin: "Kazanıldı",
     roundResultLoss: "Kaybedildi",
     scoreTitle: "Maç skoru nedir?",
@@ -305,7 +308,7 @@ const t = {
 
 Oyuncuların %42'si bir round'da aynı açıdan iki kez peek atıyor. Bu, AI'ın tespit ettiği en yaygın hata. Rakip ilk peek'te seni görmediyse bile, sesini duydu ve crosshair'ini oraya sabitledi. İkinci peek = kesin ölüm.
 
-**Çözüm:** Her peek sonrası 2-3 metre yer değiştir. Farklı yükseklikten (headglitch, crouch) peek at. Sma köşeyi kullan, swing at.
+**Çözüm:** Her peek sonrası 2-3 metre yer değiştir. Farklı yükseklikten (headglitch, crouch) peek at. Smoke'lu köşeyi kullan, swing at.
 
 ## 2. Kötü Off-angle Kullanımı
 
@@ -336,7 +339,7 @@ Adım, reload, ability sesleri en değerli info kaynağı. Düşük rank oyuncul
 Bu 5 hatayı düzelten AIMLO kullanıcılarının ortalama **2-3 ay içinde Diamond'a çıkma oranı %61 arttı**. Pozisyonlama, aim'den daha önemlidir. AI ile her round'unu analiz edersen hangi hataları tekrarladığını görebilir ve hızlıca düzeltebilirsin.`,
       },
       {
-        category: "Meta Analizi",
+        category: "META ANALİZİ",
         title: "2026 Meta: Duelist Havuzundaki Değişimler",
         excerpt: "Jett'in gerilemesinden Waylay'in yükselişine. Bu patch'te hangi duelist'ler öne çıkıyor? AI verilerine dayalı detaylı analiz.",
         readTime: "7 dk",
@@ -507,7 +510,7 @@ Eco round'lar rank atlatacak kadar önemli. Her eco round'u kazanırsan rakibin 
         color: "#B44DFF",
       },
       {
-        category: "Meta Analizi",
+        category: "META ANALİZİ",
         title: "Chamber Rework Sonrası: Hala Viable mi?",
         excerpt: "Rework sonrası Chamber'ın pick rate'i düştü ama hala kazanma oranı yüksek. Hangi haritalarda ve takım kompozisyonlarında işe yarıyor?",
         readTime: "5 dk",
@@ -568,7 +571,7 @@ Eco round'lar rank atlatacak kadar önemli. Her eco round'u kazanırsan rakibin 
     landingFeatures: [
       {
         icon: "zap",
-        title: "Otomatik Izleme",
+        title: "Otomatik İzleme",
         desc: "AIMLO ekranını gerçek zamanlı OCR ile okur — skor, ajanlar, ekonomi, öldüğün konum ve hangi açıdan düştüğün. Ayar yok, veri girmek yok. Bir kez başlat, her maçın her round'unu arka planda sessizce izlesin.",
       },
       {
@@ -589,7 +592,7 @@ Eco round'lar rank atlatacak kadar önemli. Her eco round'u kazanırsan rakibin 
     ],
     landingHowTitle: "Nasıl Çalışıyor?",
     landingHowSteps: [
-      { step: "1", title: "Uygulamayı Indir", desc: "AIMLO'yu Windows'a yükle ve başlat" },
+      { step: "1", title: "Uygulamayı İndir", desc: "AIMLO'yu Windows'a yükle ve başlat" },
       {
         step: "2",
         title: "Valorant'ı Oyna",
@@ -597,7 +600,7 @@ Eco round'lar rank atlatacak kadar önemli. Her eco round'u kazanırsan rakibin 
       },
       {
         step: "3",
-        title: "AI Otomatik Izler",
+        title: "AI Otomatik İzler",
         desc: "Yapay zeka maçını canlı analiz eder ve her round'u inceler",
       },
       {
@@ -730,6 +733,7 @@ Eco round'lar rank atlatacak kadar önemli. Her eco round'u kazanırsan rakibin 
     wonLabel: "W",
     lostLabel: "L",
     skippedLabel: "S",
+    unknownLabel: "Unknown",
     roundResultWin: "Won",
     roundResultLoss: "Lost",
     scoreTitle: "What was the final score?",
@@ -1752,15 +1756,17 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             <div className="mb-7 animate-slide-up flex items-center justify-center lg:justify-start gap-3">
               <span className="hero-kicker" style={{ color: '#FF4655' }}>●</span>
               <span className="hero-kicker">
-                {lang === "tr" ? "AI Valorant Koçu — OCR + GPT, tam otomatik" : "AI Valorant Coach — OCR + GPT, fully automatic"}
+                {/* TR ön-büyütülmüş (2026-07-09): CSS text-transform:uppercase'in
+                    i→İ dönüşümü tarayıcı/locale bağımlı — literal büyük harf garanti. */}
+                {lang === "tr" ? "AI VALORANT KOÇU — OCR + GPT, TAM OTOMATİK" : "AI Valorant Coach — OCR + GPT, fully automatic"}
               </span>
             </div>
 
             {/* Stacked display headline — split-line clip reveal (P2),
                 outlined middle line (P1 weight mix). TR display: I, not İ. */}
             <h1 className="hero-display">
-              <span className="hero-line hero-line-1"><span>{lang === "tr" ? "IZLE." : "WATCH."}</span></span>
-              <span className="hero-line hero-line-2"><span className="hero-outline">{lang === "tr" ? "ANALIZ ET." : "ANALYZE."}</span></span>
+              <span className="hero-line hero-line-1"><span>{lang === "tr" ? "İZLE." : "WATCH."}</span></span>
+              <span className="hero-line hero-line-2"><span className="hero-outline">{lang === "tr" ? "ANALİZ ET." : "ANALYZE."}</span></span>
               <span className="hero-line hero-line-3"><span className="hero-display-accent">{lang === "tr" ? "RANK ATLA." : "RANK UP."}</span></span>
             </h1>
 
@@ -1798,15 +1804,17 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             <div className="mt-12 pt-8 border-t border-white/[0.08] grid grid-cols-3 gap-6 animate-slide-up stagger-4 max-w-md mx-auto lg:mx-0">
               <div className="text-center lg:text-left">
                 <p className="hero-stat-num">7/24</p>
-                <p className="hero-stat-label mt-1.5">{lang === "tr" ? "Otomatik Izleme" : "Auto Tracking"}</p>
+                {/* TR ön-büyütülmüş: hero-stat-label CSS'i uppercase yapıyor ve
+                    tarayıcının i→İ dönüşümü locale-güvenilir değil ("OTOMATIK"). */}
+                <p className="hero-stat-label mt-1.5">{lang === "tr" ? "OTOMATİK İZLEME" : "Auto Tracking"}</p>
               </div>
               <div className="text-center lg:text-left">
                 <p className="hero-stat-num">0</p>
-                <p className="hero-stat-label mt-1.5">{lang === "tr" ? "Manuel Veri" : "Manual Input"}</p>
+                <p className="hero-stat-label mt-1.5">{lang === "tr" ? "MANUEL VERİ" : "Manual Input"}</p>
               </div>
               <div className="text-center lg:text-left">
                 <p className="hero-stat-num">~60sn</p>
-                <p className="hero-stat-label mt-1.5">{lang === "tr" ? "Round Analizi" : "Round Analysis"}</p>
+                <p className="hero-stat-label mt-1.5">{lang === "tr" ? "ROUND ANALİZİ" : "Round Analysis"}</p>
               </div>
             </div>
 
@@ -1851,7 +1859,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
           {[0, 1].map((seg) => (
             <div key={seg} className="marquee-seg">
               {(lang === "tr"
-                ? ["OCR YAKALAMA", "AI ANALIZ", "ROUND GERI BILDIRIMI", "MAÇ RAPORU", "PATERN TESPITI", "RANK ATLA"]
+                ? ["OCR YAKALAMA", "AI ANALİZ", "ROUND GERİ BİLDİRİMİ", "MAÇ RAPORU", "PATTERN TESPİTİ", "RANK ATLA"]
                 : ["OCR CAPTURE", "AI ANALYSIS", "ROUND FEEDBACK", "MATCH REPORT", "PATTERN DETECTION", "RANK UP"]
               ).map((item, mi) => (
                 <span key={mi} className="marquee-item">{item}<span className="marquee-dot">◆</span></span>
@@ -1913,7 +1921,8 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             <div className="relative rounded-xl border border-[#A855F7]/[0.18] p-4" style={{ background: "linear-gradient(180deg, rgba(168,85,247,0.07), rgba(34,211,238,0.02))" }}>
               <div className="flex items-center gap-2 mb-2">
                 <img src="/aimlo-logo.png?v=3" alt="" className="w-4 h-auto" />
-                <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: "#C9B6FF" }}>AI {lang === "tr" ? "Analiz" : "Analysis"}</span>
+                {/* TR ön-büyütülmüş: CSS uppercase i→İ dönüşümü Chromium'da locale-farkındasız */}
+                <span className="text-[11px] font-bold uppercase tracking-wider" style={{ color: "#C9B6FF" }}>AI {lang === "tr" ? "ANALİZ" : "Analysis"}</span>
                 <span className="text-[9px] text-neutral-600 ml-auto">{lang === "tr" ? "Maç sonu" : "Post-match"}</span>
               </div>
               <p className="text-[12px] text-neutral-300 leading-relaxed">{lang === "tr"
@@ -1933,15 +1942,15 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
                   </div>
                   <div className="p-4 space-y-3">
                     <div>
-                      <p className="text-[9px] font-bold text-[#FF6B77] uppercase tracking-wider mb-1">{lang === "tr" ? "Ölüm Nedeni" : "Death Cause"}</p>
+                      <p className="text-[9px] font-bold text-[#FF6B77] uppercase tracking-wider mb-1">{lang === "tr" ? "ÖLÜM NEDENİ" : "Death Cause"}</p>
                       <p className="text-[12px] text-neutral-200 leading-relaxed">{fb.deathAnalysis}</p>
                     </div>
                     <div>
-                      <p className="text-[9px] font-bold text-[#f59e0b] uppercase tracking-wider mb-1">{lang === "tr" ? "Düşman Analizi" : "Enemy Read"}</p>
+                      <p className="text-[9px] font-bold text-[#f59e0b] uppercase tracking-wider mb-1">{lang === "tr" ? "DÜŞMAN ANALİZİ" : "Enemy Read"}</p>
                       <p className="text-[12px] text-neutral-300 leading-relaxed">{fb.enemyPatterns}</p>
                     </div>
                     <div>
-                      <p className="text-[9px] font-bold text-[#22D3EE] uppercase tracking-wider mb-1">{lang === "tr" ? "Sonraki Round" : "Next Round"}</p>
+                      <p className="text-[9px] font-bold text-[#22D3EE] uppercase tracking-wider mb-1">{lang === "tr" ? "SONRAKİ ROUND" : "Next Round"}</p>
                       <p className="text-[12px] text-neutral-300 leading-relaxed">{fb.nextRoundPlan}</p>
                     </div>
                   </div>
@@ -2003,7 +2012,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
         onMouseLeave={() => setFeaturePaused(false)}
       >
         <p className="section-kicker mb-6">
-          <span className="sk-num">01</span>{lang === "tr" ? "ÖZELLIKLER" : "FEATURES"}
+          <span className="sk-num">01</span>{lang === "tr" ? "ÖZELLİKLER" : "FEATURES"}
         </p>
         <h2 className="section-display mb-12 max-w-3xl">
           {lang === "tr" ? "AI ile Oyununu Bir Üst Seviyeye Taşı" : "Take Your Game to the Next Level with AI"}
@@ -2169,9 +2178,9 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
           {/* Live numbers */}
           <div className="bento-cell flex flex-col justify-center gap-5">
             {[
-              { n: "7/24", t: lang === "tr" ? "OTOMATIK IZLEME" : "AUTO TRACKING" },
-              { n: "0", t: lang === "tr" ? "MANUEL VERI" : "MANUAL INPUT" },
-              { n: "~60sn", t: lang === "tr" ? "ROUND ANALIZI" : "ROUND ANALYSIS" },
+              { n: "7/24", t: lang === "tr" ? "OTOMATİK İZLEME" : "AUTO TRACKING" },
+              { n: "0", t: lang === "tr" ? "MANUEL VERİ" : "MANUAL INPUT" },
+              { n: "~60sn", t: lang === "tr" ? "ROUND ANALİZİ" : "ROUND ANALYSIS" },
             ].map((s, i) => (
               <div key={i} className="flex items-baseline gap-3">
                 <span className="text-[26px] font-extrabold text-white tracking-tight">{s.n}</span>
@@ -2207,7 +2216,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               handle: "@kahve_op",
               rank: "Plat 2",
               maps: "Bind / Lotus",
-              text: "Yusuf'un B Long sürekli ölme problemim varmış. Üst üste 4 round tek rapor 'aynı açıdan ikinci peek atıyorsun' dedi. Haklıymış. O round'lardan sonra Bind defansta %30 daha iyiyim. Reklam edilen 'Diamond garanti' olayı yok ama kendi hatalarını görmek için işe yarıyor.",
+              text: "B Long'da sürekli ölme problemim varmış. Üst üste 4 round tek rapor 'aynı açıdan ikinci peek atıyorsun' dedi. Haklıymış. O round'lardan sonra Bind defansta %30 daha iyiyim. Reklam edilen 'Diamond garanti' olayı yok ama kendi hatalarını görmek için işe yarıyor.",
               color: "#32B8B8",
             },
             {
@@ -2554,10 +2563,10 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       <section id="download-section" data-animate className="relative z-10 mx-auto max-w-4xl px-5 sm:px-8 pb-36 pt-10">
         <div className={`download-card p-12 sm:p-20 text-center transition-all duration-700 ${isVisible("download-section") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <p className="section-kicker justify-center mb-6">
-            <span className="sk-num">04</span>{lang === "tr" ? "INDIR" : "DOWNLOAD"}
+            <span className="sk-num">04</span>{lang === "tr" ? "İNDİR" : "DOWNLOAD"}
           </p>
           <h2 className="section-display mb-6">
-            {lang === "tr" ? "Hemen Indirin, Oynamaya Başlayın" : "Download Now, Start Playing"}
+            {lang === "tr" ? "Hemen İndirin, Oynamaya Başlayın" : "Download Now, Start Playing"}
           </h2>
           <p className="text-[15px] text-neutral-400 mb-10 max-w-md mx-auto leading-relaxed">
             {lang === "tr"
@@ -2897,10 +2906,10 @@ export default function Home() {
 
     let text = "";
     if (lang === "tr") {
-      if (topDeath) text += `${topDeath[0]}'de ${topDeath[1]} kez öldün — en zayıf bölgen. `;
+      if (topDeath) text += `${trLocative(topDeath[0])} ${topDeath[1]} kez öldün — en zayıf bölgen. `;
       if (recentWR < 40) text += "Son maçlarda performans düşük. ";
       else if (recentWR > 60) text += "Performansın yükselişte. ";
-      if (worst) text += `${worst[0]}'te winrate %${Math.round(worst[1].w / worst[1].t * 100)} — strateji değişikliği öneriyorum.`;
+      if (worst) text += `${trLocative(worst[0])} winrate %${Math.round(worst[1].w / worst[1].t * 100)} — strateji değişikliği öneriyorum.`;
     } else {
       if (topDeath) text += `Died ${topDeath[1]} times at ${topDeath[0]} — your weakest spot. `;
       if (recentWR < 40) text += "Recent performance is declining. ";
@@ -2983,7 +2992,7 @@ export default function Home() {
     const topRepeat = Object.entries(deaths).filter(e => e[1] >= 3).sort((a, b) => b[1] - a[1])[0];
     if (topRepeat) {
       return lang === "tr"
-        ? `${topRepeat[0]}'de ${topRepeat[1]} ${ll.matchInsightDeaths} — ${ll.matchInsightRepeat}`
+        ? `${trLocative(topRepeat[0])} ${topRepeat[1]} ${ll.matchInsightDeaths} — ${ll.matchInsightRepeat}`
         : `${topRepeat[1]} ${ll.matchInsightDeaths} at ${topRepeat[0]} — ${ll.matchInsightRepeat}`;
     }
     if (entry.won && entry.winPct >= 60) return ll.matchInsightStrong;
@@ -2997,7 +3006,9 @@ export default function Home() {
     report.rounds.filter(r => !r.skipped && !r.survived && r.deathLocation)
       .forEach(r => { deaths[r.deathLocation] = (deaths[r.deathLocation] || 0) + 1; });
     const top = Object.entries(deaths).sort((a,b) => b[1]-a[1])[0];
-    if (top && top[1] >= 2) return `${top[0]}'de ${top[1]}x death — position repeat`;
+    if (top && top[1] >= 2) return lang === "tr"
+      ? `${top[0]} bölgesinde ${top[1]} ölüm — pozisyon tekrarı`
+      : `${top[1]} deaths at ${top[0]} — position repeat`;
     if (report.won && Number(report.score?.split(/[-–]/)?.[0]) >= 13) return lang === "tr" ? "Güçlü maç performansı" : "Strong match performance";
     if (!report.won) return lang === "tr" ? "Gelişim alanları tespit edildi" : "Improvement areas detected";
     return null;
@@ -3070,9 +3081,13 @@ export default function Home() {
       const isValidDate = !isNaN(parsedDate.getTime());
       return {
         id: (row.id as string) || crypto.randomUUID(),
-        map: (json.map as string) || (row.riot_id as string) || "",
-        agent: (json.agent as string) || (row.region as string) || "",
-        side: (json.side as string) || "",
+        // Tek-nokta display normalizasyonu (beta cilası 2026-07-09): eski DB
+        // satırları ham OCR slug'ı ("bind"/"reyna") ya da "Unknown" senteli
+        // taşır — formatMap/formatAgent resmi ada çevirir, tanınmazsa "" döner
+        // (render noktaları "—" basar). normalizeSide "attacking"→"attack".
+        map: formatMap((json.map as string) || (row.riot_id as string) || ""),
+        agent: formatAgent((json.agent as string) || (row.region as string) || ""),
+        side: normalizeSide(json.side),
         score: (json.score as string) || "",
         won: (json.won as boolean) ?? false,
         rawDate: isValidDate
@@ -3838,9 +3853,9 @@ export default function Home() {
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-sm font-bold text-white">{entry.map}</span>
+                          <span className="text-sm font-bold text-white">{entry.map || "—"}</span>
                           <span className="text-xs text-neutral-600">&middot;</span>
-                          <span className="text-xs text-neutral-500">{entry.agent}</span>
+                          <span className="text-xs text-neutral-500">{entry.agent || "—"}</span>
                           {tag && <span className="rounded bg-white/[0.04] px-1.5 py-0.5 text-[9px] font-semibold" style={{ color: tag.color }}>{tag.label}</span>}
                         </div>
                         <p className="mt-0.5 text-[11px] text-neutral-600">{entry.date}</p>
@@ -3963,13 +3978,13 @@ export default function Home() {
                     {/* Info */}
                     <div className="min-w-0 flex-1" onClick={() => { setViewingReport(entry); setScreen("reportDetail"); }} style={{ cursor: "pointer" }}>
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-sm font-bold text-white">{entry.map}</span>
-                        <span className="text-[11px] text-neutral-500">{entry.agent}</span>
+                        <span className="text-sm font-bold text-white">{entry.map || "—"}</span>
+                        <span className="text-[11px] text-neutral-500">{entry.agent || "—"}</span>
                         <span className={`rounded px-1.5 py-0.5 text-[9px] font-bold uppercase ${entry.won ? "bg-emerald-500/10 text-emerald-400" : "bg-[#FF4655]/10 text-[#FF4655]"}`}>
                           {entry.won ? l.victory : l.defeat}
                         </span>
                       </div>
-                      <p className="mt-1 text-[10px] text-neutral-600">{entry.date} · {entry.side === "attack" ? l.sideAttack : l.sideDefense}</p>
+                      <p className="mt-1 text-[10px] text-neutral-600">{entry.date} · {entry.side === "attack" ? l.sideAttack : entry.side === "defense" ? l.sideDefense : "—"}</p>
                     </div>
 
                     {/* Score */}
@@ -4057,7 +4072,7 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="text-right space-y-1">
-                  <p className="text-[11px] text-neutral-500">{vr.map} {IC.dot} {vr.agent}</p>
+                  <p className="text-[11px] text-neutral-500">{vr.map || "—"} {IC.dot} {vr.agent || "—"}</p>
                   <p className="text-[11px] text-neutral-600">{vr.date}</p>
                   <p className="text-lg font-extrabold text-[#FF4655]">{vr.winPct}%</p>
                 </div>
@@ -4095,9 +4110,9 @@ export default function Home() {
                       const el = document.getElementById(`round-detail-${i}`);
                       el?.scrollIntoView({ behavior: "smooth", block: "center" });
                     }}
-                    className={`rounded-lg px-2.5 py-1.5 text-[10px] font-bold uppercase border cursor-pointer transition-all duration-200 hover:scale-105 ${r.result === "win" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/15 hover:bg-emerald-500/20" : "bg-red-500/10 text-red-400 border-red-500/15 hover:bg-red-500/20"} ${r.skipped ? "opacity-40" : ""}`}
+                    className={`rounded-lg px-2.5 py-1.5 text-[10px] font-bold uppercase border cursor-pointer transition-all duration-200 hover:scale-105 ${r.result === "win" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/15 hover:bg-emerald-500/20" : r.result === "loss" ? "bg-red-500/10 text-red-400 border-red-500/15 hover:bg-red-500/20" : "bg-white/[0.04] text-neutral-400 border-white/[0.10] hover:bg-white/[0.08]"} ${r.skipped ? "opacity-40" : ""}`}
                   >
-                    R{r.roundNumber} {r.result === "win" ? l.wonLabel : l.lostLabel}{r.skipped ? l.skippedLabel : ""}
+                    R{r.roundNumber} {r.result === "win" ? l.wonLabel : r.result === "loss" ? l.lostLabel : l.unknownLabel}{r.skipped ? l.skippedLabel : ""}
                   </button>
                 ))}
               </div>
@@ -4108,11 +4123,11 @@ export default function Home() {
                   <div
                     key={i}
                     id={`round-detail-${i}`}
-                    className={`${ds.card} p-4 border-l-2 ${r.result === "win" ? "border-l-emerald-500/40" : "border-l-red-500/40"}`}
+                    className={`${ds.card} p-4 border-l-2 ${r.result === "win" ? "border-l-emerald-500/40" : r.result === "loss" ? "border-l-red-500/40" : "border-l-neutral-500/40"}`}
                   >
                     <div className="flex items-center justify-between mb-2">
-                      <span className={`text-xs font-bold ${r.result === "win" ? "text-emerald-400" : "text-red-400"}`}>
-                        Round {r.roundNumber} {r.result === "win" ? l.wonLabel : l.lostLabel}
+                      <span className={`text-xs font-bold ${r.result === "win" ? "text-emerald-400" : r.result === "loss" ? "text-red-400" : "text-neutral-400"}`}>
+                        Round {r.roundNumber} {r.result === "win" ? l.wonLabel : r.result === "loss" ? l.lostLabel : l.unknownLabel}
                         {r.survived ? ` ${IC.dot} ${l.survivedShort}` : ""}
                       </span>
                       {!r.skipped && r.deathLocation && (

@@ -77,7 +77,7 @@ export function generateImprovementPlan(
     .filter(([, c]) => c >= 3)
     .forEach(([loc, count]) => {
       problems.push({
-        issue: `${loc}'de ${count} kez oldun — bu pozisyonu degistir veya utility kullan`,
+        issue: `${loc}'de ${count} kez öldün — bu pozisyonu değiştir veya utility kullan`,
         severity: count,
         category: "positioning",
       });
@@ -88,7 +88,7 @@ export function generateImprovementPlan(
     allRounds.filter((r) => r.survived).length / allRounds.length;
   if (survivalRate < 0.35) {
     problems.push({
-      issue: `Hayatta kalma oranin cok dusuk (${Math.round(survivalRate * 100)}%) — gereksiz olumlerden kacin`,
+      issue: `Hayatta kalma oranın çok düşük (${Math.round(survivalRate * 100)}%) — gereksiz ölümlerden kaçın`,
       severity: 8,
       category: "decision",
     });
@@ -100,7 +100,7 @@ export function generateImprovementPlan(
   ).length;
   if (isolatedDeaths >= 3) {
     problems.push({
-      issue: `${isolatedDeaths} kez 3+ dusmana karsi izole oldun — takimla beraber oyna`,
+      issue: `${isolatedDeaths} kez 3+ düşmana karşı izole öldün — takımla beraber oyna`,
       severity: isolatedDeaths,
       category: "positioning",
     });
@@ -118,7 +118,7 @@ export function generateImprovementPlan(
     .filter(([, s]) => s.w + s.l >= 2 && s.w / (s.w + s.l) < 0.3)
     .forEach(([map, s]) => {
       problems.push({
-        issue: `${map}'te winrate ${Math.round((s.w / (s.w + s.l)) * 100)}% — bu haritada strateji degistir`,
+        issue: `${map}'te winrate ${Math.round((s.w / (s.w + s.l)) * 100)}% — bu haritada strateji değiştir`,
         severity: 6,
         category: "decision",
       });
@@ -140,11 +140,11 @@ export function generateImprovementPlan(
         title:
           topProblem.category === "positioning"
             ? topDeathSpots.length > 0
-              ? `Pozisyon Degisikligi: ${topDeathSpots[0]}`
-              : "Pozisyon Degisikligi"
+              ? `Pozisyon Değişikliği: ${topDeathSpots[0]}`
+              : "Pozisyon Değişikliği"
             : topProblem.category === "decision"
               ? "Karar Verme"
-              : "Mekanik Gelistirme",
+              : "Mekanik Geliştirme",
         description: topProblem.issue,
         priority:
           topProblem.severity >= 7
@@ -155,7 +155,7 @@ export function generateImprovementPlan(
       }
     : {
         title: "Devam Et",
-        description: "Belirgin problem yok — mevcut performansi koru",
+        description: "Belirgin problem yok — mevcut performansı koru",
         priority: "medium",
       };
 
@@ -165,7 +165,7 @@ export function generateImprovementPlan(
     .map((p, i) => ({
       id: `task_${i}`,
       task: p.issue,
-      reason: p.severity >= 5 ? `Bu pattern ${p.severity} kez tespit edildi (yuksek guven)` : p.severity >= 3 ? `Bu pattern ${p.severity} kez tespit edildi` : `Bu pattern ${p.severity} kez goruldu (sinirli veri)`,
+      reason: p.severity >= 5 ? `Bu pattern ${p.severity} kez tespit edildi (yüksek güven)` : p.severity >= 3 ? `Bu pattern ${p.severity} kez tespit edildi` : `Bu pattern ${p.severity} kez görüldü (sınırlı veri)`,
       category: p.category,
       completed: false,
     }));
@@ -175,8 +175,8 @@ export function generateImprovementPlan(
     if (survivalRate < 0.4) {
       tasks.push({
         id: "task_practice",
-        task: "Oldugu pozisyonlara alternatif acilar dene — custom game'de pratik yap",
-        reason: `Hayatta kalma oranin %${Math.round(survivalRate * 100)} — farkli acilar hayatta kalmayi artirir`,
+        task: "Öldüğün pozisyonlara alternatif açılar dene — custom game'de pratik yap",
+        reason: `Hayatta kalma oranın %${Math.round(survivalRate * 100)} — farklı açılar hayatta kalmayı artırır`,
         category: "positioning",
         completed: false,
       });
@@ -184,24 +184,24 @@ export function generateImprovementPlan(
       const topSpot = Object.entries(deathLocs).sort(([, a], [, b]) => b - a)[0];
       tasks.push({
         id: "task_practice",
-        task: `${topSpot[0]} pozisyonunda utility kullanarak giris pratigi yap`,
-        reason: `Bu pozisyonda ${topSpot[1]} kez oldun — utility ile acmayi dene`,
+        task: `${topSpot[0]} pozisyonunda utility kullanarak giriş pratiği yap`,
+        reason: `Bu pozisyonda ${topSpot[1]} kez öldün — utility ile açmayı dene`,
         category: "positioning",
         completed: false,
       });
     } else if (isolatedDeaths >= 1) {
       tasks.push({
         id: "task_practice",
-        task: "Takim arkadasinla trade pozisyonu kur — birlikte peek yap",
-        reason: "Izole olumlerin var — trade setup ile risk azalir",
+        task: "Takım arkadaşınla trade pozisyonu kur — birlikte peek at",
+        reason: "İzole ölümlerin var — trade setup ile risk azalır",
         category: "decision",
         completed: false,
       });
     } else {
       tasks.push({
         id: "task_practice",
-        task: "Farkli pozisyonlardan oynamayi dene — pozisyon cesitliligini artir",
-        reason: "Ongoru zorlugun artar, dusman seni okuyamaz",
+        task: "Farklı pozisyonlardan oynamayı dene — pozisyon çeşitliliğini artır",
+        reason: "Öngörü zorluğun artar, düşman seni okuyamaz",
         category: "positioning",
         completed: false,
       });
@@ -218,7 +218,7 @@ export function generateImprovementPlan(
       const stillExists = problems.some((p) => p.issue.includes(taskKey));
       const taskLabel = oldTask.task.split("—")[0].trim();
       if (!stillExists) {
-        improvements.push(`${taskLabel} — iyilesti`);
+        improvements.push(`${taskLabel} — iyileşti`);
       } else {
         ongoingIssues.push(`${taskLabel} — devam ediyor`);
       }
@@ -231,15 +231,15 @@ export function generateImprovementPlan(
 function getDefaultPlan(): ImprovementPlan {
   return {
     dailyFocus: {
-      title: "Basla",
-      description: "Birkac mac oyna, AI seni analiz etsin",
+      title: "Başla",
+      description: "Birkaç maç oyna, AI seni analiz etsin",
       priority: "medium",
     },
     tasks: [
       {
         id: "t1",
-        task: "Ilk 3 macini tamamla",
-        reason: "AI pattern tespiti icin veri gerekiyor",
+        task: "İlk 3 maçını tamamla",
+        reason: "AI pattern tespiti için veri gerekiyor",
         category: "decision",
         completed: false,
       },

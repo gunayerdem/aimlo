@@ -61,7 +61,7 @@ export function LoginForm() {
 
         <div>
           <label htmlFor="login-pw" className={labelCls}>
-            ŞIFRE
+            ŞİFRE
           </label>
           <div className="relative">
             <input

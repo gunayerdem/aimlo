@@ -54,31 +54,31 @@ const ARCHETYPE_LABELS: Record<
 > = {
   aggressive_entry: {
     label: "Agresif Entry",
-    desc: "Ilk temasa giren, riski seven oyuncu. Olumlerin cogu takima faydali.",
+    desc: "İlk temasa giren, riski seven oyuncu. Ölümlerin çoğu takıma faydalı.",
   },
   passive_anchor: {
     label: "Pasif Anchor",
-    desc: "Pozisyon tutan, hayatta kalmayi oncelik yapan oyuncu.",
+    desc: "Pozisyon tutan, hayatta kalmayı öncelik yapan oyuncu.",
   },
   balanced_flex: {
     label: "Dengeli Flex",
-    desc: "Duruma gore agresif veya pasif oynayabilen cok yonlu oyuncu.",
+    desc: "Duruma göre agresif veya pasif oynayabilen çok yönlü oyuncu.",
   },
   chaotic_aggressive: {
-    label: "Kontrolsuz Agresif",
-    desc: "Cok oluyorsun ve olumlerin takima katki saglamiyor. Disiplin gerekli.",
+    label: "Kontrolsüz Agresif",
+    desc: "Çok ölüyorsun ve ölümlerin takıma katkı sağlamıyor. Disiplin gerekli.",
   },
   careful_lurker: {
     label: "Dikkatli Lurker",
-    desc: "Hayatta kalip farkli acilardan oynayan, bilgi toplayan oyuncu.",
+    desc: "Hayatta kalıp farklı açılardan oynayan, bilgi toplayan oyuncu.",
   },
   trade_player: {
     label: "Trade Oyuncusu",
-    desc: "Olumlerin cogu takimin round kazanmasina yardimci oluyor.",
+    desc: "Ölümlerin çoğu takımın round kazanmasına yardımcı oluyor.",
   },
   unknown: {
     label: "Belirleniyor",
-    desc: "Daha fazla mac verisi gerekiyor.",
+    desc: "Daha fazla maç verisi gerekiyor.",
   },
 };
 
@@ -162,37 +162,37 @@ export function analyzePlaystyle(
     mismatch = {
       detected: true,
       message:
-        "Agresif oynuyorsun ama kazanma oranin dusuk. Entry almadan once utility kullan.",
+        "Agresif oynuyorsun ama kazanma oranın düşük. Entry almadan önce utility kullan.",
     };
   } else if (archetype === "chaotic_aggressive") {
     mismatch = {
       detected: true,
       message:
-        "Cok oluyorsun ve olumlerin ise yaramiyor. Daha kontrollu oyna, trade pozisyonu kur.",
+        "Çok ölüyorsun ve ölümlerin işe yaramıyor. Daha kontrollü oyna, trade pozisyonu kur.",
     };
   } else if (archetype === "passive_anchor" && winRate < 0.4) {
     mismatch = {
       detected: true,
       message:
-        "Pasif oynuyorsun ama kazanamiyorsun. Bazen agresif olman gerekiyor.",
+        "Pasif oynuyorsun ama kazanamıyorsun. Bazen agresif olman gerekiyor.",
     };
   }
 
   // Coach message
   const coachMessages: Record<PlaystyleArchetype, string> = {
     aggressive_entry:
-      "Entry oynuyorsun — olumlerin cogu takima yariyor. Flash/drone ile entry kaliteni artir.",
+      "Entry oynuyorsun — ölümlerin çoğu takıma yarıyor. Flash/drone ile entry kaliteni artır.",
     chaotic_aggressive:
-      "Agresyonun kontrolsuz. Her peek'in bir sebebi olmali. Utility kullanmadan girme.",
+      "Agresyonun kontrolsüz. Her peek'in bir sebebi olmalı. Utility kullanmadan girme.",
     passive_anchor:
-      "Iyi anchor oynuyorsun. Retake zamanlamani ve bilgi verme kaliteni gelistir.",
+      "İyi anchor oynuyorsun. Retake zamanlamanı ve bilgi verme kaliteni geliştir.",
     careful_lurker:
-      "Lurk oyunun iyi ama zamanlamaya dikkat et — takimin senden bilgi bekliyor.",
+      "Lurk oyunun iyi ama zamanlamaya dikkat et — takımın senden bilgi bekliyor.",
     trade_player:
-      "Trade pozisyonlarin guclu. Entry fragger'inla koordinasyonu artir.",
+      "Trade pozisyonların güçlü. Entry fragger'ınla koordinasyonu artır.",
     balanced_flex:
-      "Dengeli oynuyorsun. Bir yonunu guclendirmek icin odaklan.",
-    unknown: "Birkac mac daha oyna, oyun tarzini analiz edelim.",
+      "Dengeli oynuyorsun. Bir yönünü güçlendirmek için odaklan.",
+    unknown: "Birkaç maç daha oyna, oyun tarzını analiz edelim.",
   };
 
   return {
@@ -212,12 +212,12 @@ function getDefaultPlaystyle(): PlaystyleProfile {
   return {
     archetype: "unknown",
     archetypeLabel: "Belirleniyor",
-    archetypeDescription: "Daha fazla mac verisi gerekiyor.",
+    archetypeDescription: "Daha fazla maç verisi gerekiyor.",
     aggressionLevel: 50,
     positionDiversity: 50,
     tradeSuccessRate: 50,
     confidence: 0,
     mismatch: null,
-    coachMessage: "Birkac mac daha oyna, oyun tarzini analiz edelim.",
+    coachMessage: "Birkaç maç daha oyna, oyun tarzını analiz edelim.",
   };
 }

@@ -7,6 +7,7 @@ import type { SupabaseClient, User } from "@supabase/supabase-js";
 import { createServiceSupabase } from "@/lib/supabase/server";
 import { computeCost } from "@/lib/openai-pricing";
 import { isRateBypassedPublic } from "@/lib/api-auth";
+import { formatMap, formatAgent, formatSide } from "@/lib/format-display";
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -286,9 +287,12 @@ export async function getUserDetail(userId: string): Promise<UserDetail | null> 
     const r = a.raw_result_json ?? {};
     return {
       id: a.id,
-      map: (r.map as string) ?? a.riot_id ?? null,
-      agent: (r.agent as string) ?? a.region ?? null,
-      side: (r.side as string) ?? null,
+      // Display normalizasyonu (beta cilası 2026-07-09): eski satırlar ham OCR
+      // slug'ı ("bind"/"reyna"/"attacking") ya da "Unknown" senteli taşır —
+      // resmi ad/Türkçe taraf; tanınmayan/boş → null (render "—" basar).
+      map: formatMap((r.map as string) ?? a.riot_id) || null,
+      agent: formatAgent((r.agent as string) ?? a.region) || null,
+      side: formatSide(r.side) || null,
       score: (r.score as string) ?? null,
       won: typeof r.won === "boolean" ? (r.won as boolean) : null,
       createdAt: a.created_at,

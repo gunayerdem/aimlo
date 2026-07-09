@@ -6,6 +6,18 @@ import "server-only";
 
 import type { SupabaseClient, User } from "@supabase/supabase-js";
 import { createServiceSupabase } from "@/lib/supabase/server";
+import { formatMap, formatAgent, formatSide } from "@/lib/format-display";
+
+// Display normalizasyonu (beta cilası 2026-07-09): match_events/analyses ham OCR
+// değeri ("bind"/"reyna"/"attacking") ya da İngilizce "Unknown" senteli taşır.
+// Admin ekranı Türkçe — resmi ad/Türkçe taraf basılır; tanınmayan/boş → null
+// (render "—" gösterir). death_loc için kanonik callout tablosu yok: yalnız
+// unknown-sentinel temizlenir, casing render'daki CSS capitalize'a kalır.
+function scrubDeathLoc(raw: string | null): string | null {
+  const s = (raw ?? "").trim();
+  if (!s || /^(unknown|bilinmiyor|n\/a|\?)$/i.test(s)) return null;
+  return s;
+}
 
 function startOfDayUtc(daysAgo = 0): Date {
   const d = new Date();
@@ -95,12 +107,12 @@ export async function getLiveActivity(): Promise<LiveActivity> {
       userId: r.user_id,
       label: r.user_id ? (labelById.get(r.user_id) ?? r.user_id.slice(0, 8)) : "—",
       kind: r.kind,
-      map: r.map,
-      agent: r.agent,
-      side: r.side,
+      map: formatMap(r.map) || null,
+      agent: formatAgent(r.agent) || null,
+      side: formatSide(r.side) || null,
       roundNo: r.round_no,
       score: r.score,
-      deathLoc: r.death_loc,
+      deathLoc: scrubDeathLoc(r.death_loc),
       createdAt: r.created_at,
     })),
   };
@@ -209,18 +221,25 @@ export async function getInsights(): Promise<InsightsData> {
     if (typeof ds === "number" && Number.isFinite(ds)) { dsSum += ds; dsCount++; }
   }
 
-  function top(m: Map<string, { n: number; w: number; known: number }>, limit: number): DistRow[] {
+  // fmt (2026-07-09 beta cilası): gruplama anahtarı lowercase-kanonik kalır
+  // ('bind'/'Bind' birleşik sayılır) ama görüntü adı resmi biçime çevrilir;
+  // 'unknown' senteli TR 'Bilinmiyor' olur — panele İngilizce 'unknown' çıkmaz.
+  function top(
+    m: Map<string, { n: number; w: number; known: number }>,
+    limit: number,
+    fmt: (s: string) => string,
+  ): DistRow[] {
     return [...m.entries()]
       .sort((a, b) => b[1].n - a[1].n)
       .slice(0, limit)
-      .map(([name, v]) => ({ name, matches: v.n, winRate: v.known > 0 ? Math.round((v.w / v.known) * 100) : null }));
+      .map(([name, v]) => ({ name: fmt(name) || "Bilinmiyor", matches: v.n, winRate: v.known > 0 ? Math.round((v.w / v.known) * 100) : null }));
   }
 
   return {
     totalRated: rows.length,
-    maps: top(mapAgg, 12),
-    agents: top(agentAgg, 12),
-    sides: top(sideAgg, 4),
+    maps: top(mapAgg, 12, formatMap),
+    agents: top(agentAgg, 12, formatAgent),
+    sides: top(sideAgg, 4, (s) => formatSide(s, "tr")),
     avgDecisionScore: dsCount > 0 ? Math.round((dsSum / dsCount) * 10) / 10 : null,
   };
 }
@@ -270,8 +289,8 @@ export async function getRecentFeedback(limit = 25): Promise<FeedbackSample[]> {
       createdAt: r.created_at,
       summary: r.summary ?? (j.summary as string) ?? null,
       mistake: r.weakness ?? (j.mistake as string) ?? null,
-      map: (j.map as string) ?? r.riot_id ?? null,
-      agent: (j.agent as string) ?? r.region ?? null,
+      map: formatMap((j.map as string) ?? r.riot_id) || null,
+      agent: formatAgent((j.agent as string) ?? r.region) || null,
     };
   });
 }
@@ -325,9 +344,9 @@ export async function getRecentDeathFeedback(limit = 30): Promise<DeathFeedback[
       userId: r.user_id,
       userLabel: r.user_id ? (labelById.get(r.user_id) ?? r.user_id.slice(0, 8)) : "—",
       createdAt: r.created_at,
-      map: r.map,
-      agent: r.agent,
-      deathLoc: r.death_loc,
+      map: formatMap(r.map) || null,
+      agent: formatAgent(r.agent) || null,
+      deathLoc: scrubDeathLoc(r.death_loc),
       deathAnalysis: (f.deathAnalysis as string) ?? null,
       enemyAnalysis: enemy,
       nextRoundSuggestion: (f.nextRoundSuggestion as string) ?? null,

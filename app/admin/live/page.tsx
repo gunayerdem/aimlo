@@ -49,9 +49,11 @@ export default async function AdminLivePage() {
                     <tr key={e.id}>
                       <td style={{ color: "rgba(238,240,248,0.55)", whiteSpace: "nowrap" }}>{ago(e.createdAt)}</td>
                       <td>{e.userId ? <Link href={`/admin/users/${e.userId}`}>{e.label}</Link> : e.label}</td>
-                      <td style={{ textTransform: "capitalize" }}>{e.map ?? "—"}</td>
-                      <td style={{ textTransform: "capitalize" }}>{e.agent ?? "—"}</td>
-                      <td style={{ textTransform: "capitalize", color: "rgba(238,240,248,0.6)" }}>{e.side ?? "—"}</td>
+                      {/* casing artık lib/admin-analytics → format-display'den;
+                          CSS capitalize "KAY/O"yu bozuyordu, kaldırıldı */}
+                      <td>{e.map ?? "—"}</td>
+                      <td>{e.agent ?? "—"}</td>
+                      <td style={{ color: "rgba(238,240,248,0.6)" }}>{e.side ?? "—"}</td>
                       <td className="adm-num">{e.roundNo ?? "—"}</td>
                       <td className="adm-num">{e.score ?? "—"}</td>
                       <td style={{ textTransform: "capitalize", color: "rgba(238,240,248,0.6)" }}>{e.deathLoc ?? "—"}</td>

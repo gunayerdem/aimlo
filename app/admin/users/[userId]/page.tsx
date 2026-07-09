@@ -65,9 +65,11 @@ export default async function AdminUserDetailPage({ params }: { params: Promise<
               detail.matches.map((m) => (
                 <tr key={m.id}>
                   <td style={{ color: "rgba(238,240,248,0.6)" }}>{fmt(m.createdAt)}</td>
-                  <td style={{ textTransform: "capitalize" }}>{m.map ?? "—"}</td>
-                  <td style={{ textTransform: "capitalize" }}>{m.agent ?? "—"}</td>
-                  <td style={{ textTransform: "capitalize", color: "rgba(238,240,248,0.6)" }}>{m.side ?? "—"}</td>
+                  {/* casing artık lib/format-display'den geliyor — CSS capitalize
+                      "KAY/O"yu "Kay/O", "Spike_rush"u bozuyordu, kaldırıldı */}
+                  <td>{m.map ?? "—"}</td>
+                  <td>{m.agent ?? "—"}</td>
+                  <td style={{ color: "rgba(238,240,248,0.6)" }}>{m.side ?? "—"}</td>
                   <td className="adm-num">{m.score ?? "—"}</td>
                   <td>
                     {m.won === true ? <span className="adm-badge win">galibiyet</span>
@@ -90,7 +92,7 @@ export default async function AdminUserDetailPage({ params }: { params: Promise<
             {detail.matches.filter((m) => m.summary || m.mistake).slice(0, 24).map((m) => (
               <div key={m.id} className="adm-card">
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10, fontSize: 12 }}>
-                  <span style={{ color: "var(--iris-violet)", fontWeight: 600, textTransform: "capitalize" }}>{m.map ?? "?"} · {m.agent ?? "?"}</span>
+                  <span style={{ color: "var(--iris-violet)", fontWeight: 600 }}>{m.map ?? "?"} · {m.agent ?? "?"}</span>
                   <span style={{ color: "rgba(238,240,248,0.45)" }}>{fmt(m.createdAt)}</span>
                 </div>
                 {m.summary ? <p style={{ fontSize: 13, lineHeight: 1.6, color: "rgba(238,240,248,0.86)", margin: "0 0 10px" }}>{m.summary}</p> : null}

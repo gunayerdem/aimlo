@@ -39,7 +39,7 @@ export function ResetForm() {
 
       <form action={action} noValidate className="space-y-5">
         <div>
-          <label htmlFor="reset-pw" className={labelCls}>YENI ŞIFRE</label>
+          <label htmlFor="reset-pw" className={labelCls}>YENİ ŞİFRE</label>
           <div className="relative">
             <input
               id="reset-pw"
@@ -69,7 +69,7 @@ export function ResetForm() {
         </div>
 
         <div>
-          <label htmlFor="reset-pw2" className={labelCls}>YENI ŞIFRE TEKRAR</label>
+          <label htmlFor="reset-pw2" className={labelCls}>YENİ ŞİFRE TEKRAR</label>
           <div className="relative">
             <input
               id="reset-pw2"

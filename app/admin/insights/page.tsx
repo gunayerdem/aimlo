@@ -14,7 +14,7 @@ function DistTable({ title, rows }: { title: string; rows: DistRow[] }) {
           ) : (
             rows.map((r) => (
               <tr key={r.name}>
-                <td style={{ textTransform: "capitalize" }}>{r.name}</td>
+                <td>{r.name}</td>
                 <td className="adm-num">{r.matches}</td>
                 <td className="adm-num" style={{ color: r.winRate == null ? "rgba(238,240,248,0.4)" : r.winRate >= 50 ? "#7ee8f7" : "#ff8a95" }}>
                   {r.winRate == null ? "—" : `${r.winRate}%`}
@@ -43,7 +43,7 @@ export default async function AdminInsightsPage() {
           <p className="adm-stat-label">TARAF DAĞILIMI</p>
           <div className="adm-chip-row" style={{ marginTop: 8 }}>
             {i.sides.length === 0 ? <span style={{ color: "rgba(238,240,248,0.4)" }}>veri yok</span> :
-              i.sides.map((s) => <span key={s.name} className="adm-chip" style={{ textTransform: "capitalize" }}>{s.name}: <b>{s.matches}</b>{s.winRate != null ? ` (${s.winRate}%)` : ""}</span>)}
+              i.sides.map((s) => <span key={s.name} className="adm-chip">{s.name}: <b>{s.matches}</b>{s.winRate != null ? ` (${s.winRate}%)` : ""}</span>)}
           </div>
         </div>
       </div>
