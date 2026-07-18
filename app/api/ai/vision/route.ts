@@ -519,11 +519,19 @@ export async function POST(request: NextRequest) {
         // buildMemoryContext is bounded (top-3 deaths + 1 map + 1 agent +
         // short tendency list) so it's already small; cap defensively.
         const cappedMemory = memoryContext.trim().slice(0, 1200);
-        playerMemoryBlock =
-          `[CROSS-MATCH GEÇMİŞİ — uzun vadeli oyuncu profili (kalıcı veriden, bu round'a ait DEĞİL)]\n` +
-          `Bu, oyuncunun geçmiş maçlardan birikmiş profilidir. İlgiliyse koç gibi referans verebilirsin ` +
-          `(ör. "yine A Short'ta öldün — bu senin tekrar eden noktan"); ama bu round'un OCR verisi her zaman önceliklidir. ` +
-          `Buradaki sayıları DEĞİŞTİRME, yeni istatistik UYDURMA.\n${cappedMemory}`;
+        // Sarmalayıcı reqLang'de: EN'de Türkçe örnek cümle ("yine A Short'ta
+        // öldün") model tarafından aynen taklit edilebiliyordu (canlı-test
+        // 2026-07-18 dil sızıntısı). Blok zaten kullanıcıya-özel → cache'e ek
+        // etkisi yok; tr'de bayt-bayt eski hali.
+        playerMemoryBlock = reqLang === "en"
+          ? `[CROSS-MATCH HISTORY — long-term player profile (from persisted data, NOT this round)]\n` +
+            `This is the player's accumulated profile from past matches. You may reference it like a coach when relevant ` +
+            `(e.g. "you died at A Short again — that is your recurring spot"); but this round's OCR data always takes priority. ` +
+            `Do NOT alter these numbers, do NOT invent new statistics.\n${cappedMemory}`
+          : `[CROSS-MATCH GEÇMİŞİ — uzun vadeli oyuncu profili (kalıcı veriden, bu round'a ait DEĞİL)]\n` +
+            `Bu, oyuncunun geçmiş maçlardan birikmiş profilidir. İlgiliyse koç gibi referans verebilirsin ` +
+            `(ör. "yine A Short'ta öldün — bu senin tekrar eden noktan"); ama bu round'un OCR verisi her zaman önceliklidir. ` +
+            `Buradaki sayıları DEĞİŞTİRME, yeni istatistik UYDURMA.\n${cappedMemory}`;
       }
     } catch (e) {
       console.log(`[Aimlo AI] Vision: player memory unavailable: ${(e as Error).message}`);
@@ -571,9 +579,11 @@ export async function POST(request: NextRequest) {
       // Label the side so the model can't misread the raw token. Attack = sen
       // giriyorsun (entry/execute), Defense = sen tutuyorsun (hold/retake/save).
       ctx.side =
-        reqBody.side === "attack" ? "attack (SALDIRI — sen siteye giriyorsun)"
-        : reqBody.side === "defense" ? "defense (SAVUNMA — sen siteyi tutuyorsun)"
-        : reqBody.side;
+        reqBody.side === "attack"
+          ? (reqLang === "en" ? "attack (ATTACK — you are entering the site)" : "attack (SALDIRI — sen siteye giriyorsun)")
+          : reqBody.side === "defense"
+            ? (reqLang === "en" ? "defense (DEFENSE — you are holding the site)" : "defense (SAVUNMA — sen siteyi tutuyorsun)")
+            : reqBody.side;
     }
     if (typeof reqBody.mode === "string") ctx.mode = reqBody.mode;
     if (Array.isArray(reqEnemyComp) && reqEnemyComp.length > 0) {
@@ -762,7 +772,7 @@ export async function POST(request: NextRequest) {
     // İngilizce" kuralına AÇIK sinyal. KB Türkçe olduğu için çeviri emri şart.
     // User-message'da → prompt-cache'e sıfır etki; tr'de boş → eski davranış birebir.
     const langDirective = reqLang === "en"
-      ? `\n[LANGUAGE] The player's language is ENGLISH. Write deathAnalysis, enemyAnalysis and nextRoundSuggestion ONLY in natural English coach language (keep universal game terms: peek, trade, smoke, eco...). The knowledge blocks are in Turkish — translate their LESSON into English; never output Turkish words.`
+      ? `\n[LANGUAGE] The player's language is ENGLISH. Write deathAnalysis, enemyAnalysis and nextRoundSuggestion ONLY in natural English coach language (keep universal game terms: peek, trade, smoke, eco...). The knowledge blocks and some context/instruction lines are in Turkish — use them as source FACTS and LESSONS but always RESTATE them in English. NEVER copy a Turkish sentence or word into your output.`
       : "";
     const clientContext =
       factSheet +   // BİLİNEN/BİLİNMEYEN sözleşmesi EN BAŞTA — model olgu-sınırını önce görsün
@@ -776,9 +786,13 @@ export async function POST(request: NextRequest) {
     let userPromptWithHistory = USER_PROMPT + clientContext;
     const roundHistory = (body as VisionRequest).roundHistory;
     if (roundHistory && Array.isArray(roundHistory) && roundHistory.length > 0) {
+      // Dil-duyarlı (canlı-test 2026-07-18 EN: model bu Türkçe olgu-cümlelerini
+      // AYNEN kopyalayıp EN feedback'in içine Türkçe parça sızdırıyordu —
+      // "bölgesinde 2 kez öldün"). Olgu-notları artık reqLang'de yazılır.
+      const en = reqLang === "en";
       const historyLines = roundHistory.map((r: Record<string, unknown>) => {
-        const status = r.died ? "öldü" : "hayatta kaldı";
-        const confidence = r.death_detected_confidence === "observed" ? " (güven: observed)" : "";
+        const status = r.died ? (en ? "died" : "öldü") : (en ? "survived" : "hayatta kaldı");
+        const confidence = r.death_detected_confidence === "observed" ? (en ? " (confidence: observed)" : " (güven: observed)") : "";
         // Include position info if available
         const posInfo = r.death_position ? ` @ ${r.death_position}` : "";
         return `R${r.round_index}: ${status}${confidence}${posInfo}`;
@@ -786,8 +800,12 @@ export async function POST(request: NextRequest) {
       const deathCount = roundHistory.filter((r) => r.died).length;
       const total = roundHistory.length;
       const patternNote = deathCount >= total * 0.5
-        ? `Pattern: Son ${total} round'un ${deathCount}'${deathCount > 1 ? "inde" : "unda"} ölüm → tekrar eden sorun kanıtlanmış`
-        : `Son ${total} round'da ${deathCount} ölüm`;
+        ? (en
+            ? `Pattern: died in ${deathCount} of the last ${total} rounds → a repeating problem is proven`
+            : `Pattern: Son ${total} round'un ${deathCount}'${deathCount > 1 ? "inde" : "unda"} ölüm → tekrar eden sorun kanıtlanmış`)
+        : (en
+            ? `${deathCount} death(s) in the last ${total} rounds`
+            : `Son ${total} round'da ${deathCount} ölüm`);
 
       // Position pattern detection with temporal stability scoring
       const posEntries = roundHistory
@@ -810,9 +828,13 @@ export async function POST(request: NextRequest) {
         const isRecent = span <= 5; // within last 5 rounds = temporally clustered
 
         if (topPos[1] >= 3 && isRecent) {
-          posNote = `\nPosition pattern (GÜÇLÜ — ${topPos[1]} kez, son ${span + 1} round içinde): ${topPos[0]} bölgesinde tekrar eden ölüm. Bu pattern zamanlama olarak da tutarlı.`;
+          posNote = en
+            ? `\nPosition pattern (STRONG — ${topPos[1]} times within the last ${span + 1} rounds): repeated deaths in the ${topPos[0]} area. The timing of this pattern is consistent too.`
+            : `\nPosition pattern (GÜÇLÜ — ${topPos[1]} kez, son ${span + 1} round içinde): ${topPos[0]} bölgesinde tekrar eden ölüm. Bu pattern zamanlama olarak da tutarlı.`;
         } else if (topPos[1] >= 2) {
-          posNote = `\nPosition pattern (KANITLANMIŞ): ${topPos[0]} bölgesinde ${topPos[1]} kez öldün`;
+          posNote = en
+            ? `\nPosition pattern (PROVEN): you died ${topPos[1]} times in the ${topPos[0]} area`
+            : `\nPosition pattern (KANITLANMIŞ): ${topPos[0]} bölgesinde ${topPos[1]} kez öldün`;
         }
       }
 
@@ -838,15 +860,23 @@ export async function POST(request: NextRequest) {
         const isNewArea = lastPos && prevPositions.length > 0 && !prevPositions.includes(lastPos);
 
         if (consecutiveCount >= 3) {
-          deathZoneNote = `\nDeath zone pattern (GÜÇLÜ): ${consecutivePos} bölgesinde ${consecutiveCount} round art arda öldün — bu açıdan tekrar tekrar bedavaya öldürülüyorsun.`;
+          deathZoneNote = en
+            ? `\nDeath zone pattern (STRONG): you died ${consecutiveCount} rounds in a row in the ${consecutivePos} area — you keep getting killed for free from that angle.`
+            : `\nDeath zone pattern (GÜÇLÜ): ${consecutivePos} bölgesinde ${consecutiveCount} round art arda öldün — bu açıdan tekrar tekrar bedavaya öldürülüyorsun.`;
         } else if (consecutiveCount >= 2) {
-          deathZoneNote = `\nDeath zone pattern: ${consecutivePos} bölgesinde art arda ölüm — bu bölge sorun oluşturuyor olabilir.`;
+          deathZoneNote = en
+            ? `\nDeath zone pattern: back-to-back deaths in the ${consecutivePos} area — this area may be a problem.`
+            : `\nDeath zone pattern: ${consecutivePos} bölgesinde art arda ölüm — bu bölge sorun oluşturuyor olabilir.`;
         } else if (isNewArea) {
-          deathZoneNote = `\nÖlüm bölgesi değişti: önceki round'larda ${prevPositions[prevPositions.length - 1]} bölgesindeydin, şimdi ${lastPos}.`;
+          deathZoneNote = en
+            ? `\nDeath area changed: in earlier rounds you were in the ${prevPositions[prevPositions.length - 1]} area, now ${lastPos}.`
+            : `\nÖlüm bölgesi değişti: önceki round'larda ${prevPositions[prevPositions.length - 1]} bölgesindeydin, şimdi ${lastPos}.`;
         }
       }
 
-      userPromptWithHistory += `\n\nSon round geçmişi (gözlemlenmiş):\n${historyLines.join("\n")}\n${patternNote}${posNote}${deathZoneNote}`;
+      userPromptWithHistory += en
+        ? `\n\nRecent round history (observed):\n${historyLines.join("\n")}\n${patternNote}${posNote}${deathZoneNote}`
+        : `\n\nSon round geçmişi (gözlemlenmiş):\n${historyLines.join("\n")}\n${patternNote}${posNote}${deathZoneNote}`;
     }
 
     // Call OpenAI GPT-5 mini (Chat Completions API)
