@@ -109,6 +109,7 @@ type VisionRequest = {
   enemiesAlive?: number; // 0-5
   credits?: number; // round start credits e.g. 3900
   loadout?: string; // current weapon e.g. "vandal", "spectre"
+  lang?: string; // "tr" | "en" — feedback language (desktop Settings; absent = tr, back-compat)
   economyType?: string; // "full_buy"/"force_buy"/"half_buy"/"eco"/"pistol"
   // New fields from desktop app
   spikePlanted?: boolean; // was spike planted when player died
@@ -403,6 +404,9 @@ export async function POST(request: NextRequest) {
     const reqSpikePlanted = typeof (body as VisionRequest).spikePlanted === "boolean" ? (body as VisionRequest).spikePlanted : undefined;
     const reqEconomyType = typeof (body as VisionRequest).economyType === "string" ? (body as VisionRequest).economyType : undefined;
     const reqSide = typeof (body as VisionRequest).side === "string" ? (body as VisionRequest).side : undefined;
+    // Feedback dili (canlı-test 2026-07-18): desktop Ayarlar → "Geri Bildirim Dili".
+    // Whitelist — yalnız "en" kabul, diğer her şey tr (eski desktop lang göndermez → tr).
+    const reqLang: "tr" | "en" = (body as VisionRequest).lang === "en" ? "en" : "tr";
 
     const kb = loadVisionKnowledge({
       map: reqMap,
@@ -472,7 +476,7 @@ export async function POST(request: NextRequest) {
       buildPolicyBlock({
         confidence: visionConfidence,
         tone: "strict",
-        lang: "tr",
+        lang: reqLang,
         includeEnemyGate: true,
         includeDecisionRubric: false,
         // Cycle 2 (council 2026-06-25) — vision opts into the schema-aligned
@@ -494,7 +498,7 @@ export async function POST(request: NextRequest) {
     // SIRA (denetim 2026-07-08): abilityHint AGENT-stabil → map/contextual'dan ÖNCE
     // push edilir; eskiden contextual'dan sonraydı ve spike/eco toggle'ı her round
     // contextual'ı değiştirdiğinde abilityHint+memory de cache'ten düşüyordu.
-    const abilityHint = buildAgentAbilityHint(reqAgent, "tr");
+    const abilityHint = buildAgentAbilityHint(reqAgent, reqLang);
     if (abilityHint) systemSections.push(abilityHint);
     if (kb.blocks.map)        systemSections.push(kb.blocks.map);
     if (kb.blocks.contextual) systemSections.push(kb.blocks.contextual);
@@ -510,7 +514,7 @@ export async function POST(request: NextRequest) {
     let playerMemoryBlock: string | null = null;
     try {
       const memory = await loadPlayerMemory(auth.userId);
-      const memoryContext = buildMemoryContext(memory, "tr");
+      const memoryContext = buildMemoryContext(memory, reqLang);
       if (memoryContext && memoryContext.trim().length > 0) {
         // buildMemoryContext is bounded (top-3 deaths + 1 map + 1 agent +
         // short tendency list) so it's already small; cap defensively.
@@ -664,7 +668,7 @@ export async function POST(request: NextRequest) {
     // number it replaces, so stripNumericHp can grow past sanitize's 2000 cap —
     // re-clamp so one field can't dominate the prompt budget.
     const patternBlock = (typeof reqBody.patternContext === "string" && reqBody.patternContext.length > 0)
-      ? stripNumericHp(sanitizePromptInput(reqBody.patternContext, { max: 2000 }) || "", "tr").slice(0, 2000)
+      ? stripNumericHp(sanitizePromptInput(reqBody.patternContext, { max: 2000 }) || "", reqLang).slice(0, 2000)
       : "";
 
     // Death-Data Contract (Ölüm-Veri Sözleşmesi 2026-06-29): build the ground
@@ -754,8 +758,15 @@ export async function POST(request: NextRequest) {
 
     // Assemble JSON-formatted context — single block, no decorative borders, no header chrome.
     const ctxJson = Object.keys(ctx).length > 0 ? JSON.stringify(ctx, null, 2) : "";
+    // Dil direktifi (2026-07-18): SYSTEM_PROMPT'un "kullanıcı dili İngilizce ise →
+    // İngilizce" kuralına AÇIK sinyal. KB Türkçe olduğu için çeviri emri şart.
+    // User-message'da → prompt-cache'e sıfır etki; tr'de boş → eski davranış birebir.
+    const langDirective = reqLang === "en"
+      ? `\n[LANGUAGE] The player's language is ENGLISH. Write deathAnalysis, enemyAnalysis and nextRoundSuggestion ONLY in natural English coach language (keep universal game terms: peek, trade, smoke, eco...). The knowledge blocks are in Turkish — translate their LESSON into English; never output Turkish words.`
+      : "";
     const clientContext =
       factSheet +   // BİLİNEN/BİLİNMEYEN sözleşmesi EN BAŞTA — model olgu-sınırını önce görsün
+      langDirective +        // dil emri — olgu sınırından hemen sonra (EN'de aktif)
       deathTypeDirective +   // ÖLÜM-TİPİ çıpası — factSheet'ten hemen sonra (per-round, user-msg)
       weaponCompDirective +  // SİLAH+KOMP işaretçisi — statik rehberin bölüm seçicisi (per-round, user-msg)
       (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, screenshot'tan güvenilir]\n${ctxJson}` : "") +
@@ -993,7 +1004,7 @@ export async function POST(request: NextRequest) {
       // Empty-guard (security audit L1): stripNumericHp's deletion forms can empty a
       // text that was ONLY an HP label — keep the reality-checked original then
       // (mirrors the enemyAnalysis/safeSuggestion fallback pattern below).
-      const cleanedAnalysis = cleanCoachText(checkedAnalysis.text, "tr");
+      const cleanedAnalysis = cleanCoachText(checkedAnalysis.text, reqLang);
       const deathAnalysisOut = clampWords(
         enforceAgentKit(cleanedAnalysis && cleanedAnalysis.trim() ? cleanedAnalysis : checkedAnalysis.text, reqAgent),
         350,
@@ -1004,7 +1015,7 @@ export async function POST(request: NextRequest) {
       const enemyAnalysisOut = fb.enemyAnalysis.slice(0, 2).map((s) => {
         const c = realityCheck(String(s), memoryForCheck, factGround, "suggestion");
         const safe = c.text && c.text.trim() ? c.text : String(s);
-        return clampWords(enforceAgentKit(cleanCoachText(safe, "tr"), reqAgent), 180);
+        return clampWords(enforceAgentKit(cleanCoachText(safe, reqLang), reqAgent), 180);
       });
       // Cycle 3: if reality-check emptied the suggestion (every sentence was an
       // unproven repetition claim → "suggestion" kind returns "" rather than a
@@ -1013,7 +1024,7 @@ export async function POST(request: NextRequest) {
       const safeSuggestion = checkedSuggestion.text && checkedSuggestion.text.trim()
         ? checkedSuggestion.text
         : fb.nextRoundSuggestion;
-      const nextRoundOut = clampWords(enforceAgentKit(cleanCoachText(safeSuggestion, "tr"), reqAgent), 350);
+      const nextRoundOut = clampWords(enforceAgentKit(cleanCoachText(safeSuggestion, reqLang), reqAgent), 350);
 
       // Live match feed (admin /live + /feedback): one row per death with the ACTUAL
       // coaching the user received — piggybacks this vision call, ZERO extra AI cost,
