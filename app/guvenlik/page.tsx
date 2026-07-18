@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Güvenlik & Sık Sorulanlar — AIMLO",
   description:
-    "AIMLO nasıl çalışır, Vanguard/ban güvenliği, gizlilik. AIMLO ekranı okur — oyuna müdahale etmez, hile değildir.",
+    "AIMLO nasıl çalışır, Vanguard/ban güvenliği, gizlilik. AIMLO maçını izler — oyuna müdahale etmez, hile değildir.",
 };
 
 export default function GuvenlikPage() {
@@ -31,16 +31,17 @@ export default function GuvenlikPage() {
           <p>
             <strong className="text-white">Hayır.</strong> AIMLO bir hile (cheat)
             değildir. Oyunun belleğine girmez, dosyalarına dokunmaz, hiçbir kod
-            enjekte etmez ve oyunun çalışmasına müdahale etmez. AIMLO sadece{" "}
-            <strong className="text-white">ekranını okur</strong> — tıpkı bir yayın
-            programının (OBS) ya da Discord ekran paylaşımının yaptığı gibi. Bu
-            yüzden Riot Vanguard&apos;ın tespit ettiği türden bir yazılım değildir.
+            enjekte etmez ve oyunun çalışmasına müdahale etmez. AIMLO maçını{" "}
+            <strong className="text-white">yalnızca ekrandan izler</strong> — tıpkı
+            bir yayın programının (OBS) ya da Discord ekran paylaşımının yaptığı
+            gibi. Bu yüzden Riot Vanguard&apos;ın tespit ettiği türden bir yazılım
+            değildir.
           </p>
           <p className="text-neutral-400">
             Not: Hiçbir üçüncü taraf yazılım Riot tarafından resmî olarak
-            &quot;onaylı&quot; değildir; ama AIMLO&apos;nun çalışma yöntemi
-            (salt ekran okuma, müdahalesiz) yaygın yayın/overlay araçlarıyla
-            aynıdır.
+            &quot;onaylı&quot; değildir; ama AIMLO&apos;nun çalışma biçimi
+            (oyun dışından, müdahalesiz izleme) yaygın yayın/overlay araçlarıyla
+            aynı sınıftadır.
           </p>
         </section>
 
@@ -48,22 +49,21 @@ export default function GuvenlikPage() {
           <h2 className="text-lg font-bold text-white">AIMLO nasıl çalışır?</h2>
           <ol className="list-decimal pl-5 space-y-1">
             <li>
-              &quot;İzlemeye Başla&quot; dediğinde AIMLO Valorant&apos;ın açık
+              &quot;Maçı İzle&quot; dediğinde AIMLO Valorant&apos;ın açık
               olup olmadığını kontrol eder (sadece Windows).
             </li>
             <li>
-              Valorant açıkken ekranının bir görüntüsünü periyodik olarak alır
-              (ekran görüntüsü) ve round sonu / ölüm gibi anları tanır.
+              Sen oynarsın; AIMLO maçını arka planda sessizce izler — senin
+              hiçbir şey yapman gerekmez.
             </li>
             <li>
-              Bir round bittiğinde o anki ekran görüntüsü küçültülüp koçluk
-              analizi için yapay zekâya gönderilir; sana saniyeler içinde geri
-              bildirim döner.
+              Her round bittiğinde, o rounda özel koçluk saniyeler içinde
+              ekranına gelir: neden öldün, düşman ne yaptı, sonraki round ne
+              yapmalısın.
             </li>
             <li>
-              Tüm bunlar oyunun <strong className="text-white">dışında</strong>,
-              sadece ekran görüntüsü üzerinden olur. Oyuna hiçbir şekilde
-              müdahale edilmez.
+              Tüm bunlar oyunun <strong className="text-white">dışında</strong>{" "}
+              olur. Oyuna hiçbir şekilde müdahale edilmez.
             </li>
           </ol>
         </section>
@@ -83,22 +83,23 @@ export default function GuvenlikPage() {
 
         <section className="space-y-3 text-sm leading-relaxed text-neutral-300">
           <h2 className="text-lg font-bold text-white">
-            Gizlilik — ekran görüntüme ne oluyor?
+            Gizlilik — izleme sırasında ne işlenir?
           </h2>
           <ul className="list-disc pl-5 space-y-1">
             <li>
-              Ekran görüntüsü koçluk analizi için{" "}
+              Koçluk üretmek için izleme sırasında ekrandaki maç görüntüsü
+              işlenir ve analiz için{" "}
               <strong className="text-white">OpenAI</strong> yapay zekâ servisine
-              (gpt-5-mini) güvenli bağlantıyla (HTTPS) gönderilir.
+              güvenli bağlantıyla (HTTPS) gönderilir.
             </li>
             <li>
-              Görüntü AIMLO tarafından <strong className="text-white">kalıcı
-              olarak saklanmaz</strong>; sadece o anlık analiz için kullanılır.
+              Görüntüler AIMLO tarafından <strong className="text-white">kalıcı
+              olarak saklanmaz</strong>; yalnızca o anlık analiz için kullanılır.
             </li>
             <li>
-              AIMLO <strong className="text-white">tüm ekranı</strong> yakalar,
+              İzleme <strong className="text-white">tüm ekranı</strong> kapsar,
               sadece Valorant penceresini değil. Açık başka pencereler görünürse
-              içerikleri de görüntüye girebilir.
+              içerikleri de işlenebilir.
             </li>
             <li>
               <strong className="text-white">Tavsiye:</strong> izlemeyi başlatmadan

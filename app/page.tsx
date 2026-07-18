@@ -557,7 +557,7 @@ Eco round'lar rank atlatacak kadar önemli. Her eco round'u kazanırsan rakibin 
       },
       {
         q: "Hangi rank seviyelerine uygun?",
-        a: "AIMLO, Iron'dan Radiant'a kadar her seviyedeki Valorant oyuncusu için tasarlanmıştır. Analiz motoru, oyuncunun seviyesine göre öneriler üretir. Düşük ranklarda temel pozisyonlama ve rotasyon hataları vurgulanırken, yüksek ranklarda utility zamanlaması, trade pozisyonları ve takım koordinasyonu gibi daha ileri konulara odaklanılır.",
+        a: "AIMLO, Iron'dan Radiant'a kadar her seviyedeki Valorant oyuncusu için tasarlanmıştır. Her oyuncu aynı Radiant-derinlikte analizi alır — sade, anlaşılır bir dille. Koçluk senin rankına göre kısılmaz; o round gerçekte ne olduysa ona göre üretilir: pozisyon, zamanlama, ekonomi kararı, utility kullanımı ve düşman okuma.",
       },
       {
         q: "Verilerim güvende mi?",
@@ -571,8 +571,8 @@ Eco round'lar rank atlatacak kadar önemli. Her eco round'u kazanırsan rakibin 
     landingFeatures: [
       {
         icon: "zap",
-        title: "Otomatik İzleme",
-        desc: "AIMLO ekranını gerçek zamanlı OCR ile okur — skor, ajanlar, ekonomi, öldüğün konum ve hangi açıdan düştüğün. Ayar yok, veri girmek yok. Bir kez başlat, her maçın her round'unu arka planda sessizce izlesin.",
+        title: "Her Round Sonunda Canlı Koçluk",
+        desc: "Round biter bitmez ekranına o rounda özel koçluk düşer: neden öldün, düşman ne yaptı, sonraki round ne yapmalısın. Ayar yok, veri girmek yok — AIMLO maçını arka planda kendisi izler. Bunu maç içinde, round round yapabilen başka bir araç yok.",
       },
       {
         icon: "chart",
@@ -939,7 +939,7 @@ Eco round'lar rank atlatacak kadar önemli. Her eco round'u kazanırsan rakibin 
       },
       {
         q: "What rank levels is it for?",
-        a: "AIMLO is designed for every Valorant player from Iron to Radiant. The analysis engine adapts its suggestions to your level. Lower-ranked players receive guidance on positioning and rotation fundamentals, while higher-ranked players get insights on utility timing, trade setups, and team coordination.",
+        a: "AIMLO is designed for every Valorant player from Iron to Radiant. Everyone gets the same Radiant-depth analysis, delivered in plain, clear language. The coaching is never dumbed down by your rank — it's built from what actually happened that round: positioning, timing, economy decisions, utility usage, and reading the enemy.",
       },
       {
         q: "Is my data safe?",
@@ -953,8 +953,8 @@ Eco round'lar rank atlatacak kadar önemli. Her eco round'u kazanırsan rakibin 
     landingFeatures: [
       {
         icon: "zap",
-        title: "Automatic Tracking",
-        desc: "AIMLO reads your screen in real time with OCR — score, agents, economy, your death location and the angle you fell to. Nothing to configure, no stats to type. Launch it once and it watches every round of every match, silently in the background.",
+        title: "Live Coaching After Every Round",
+        desc: "The moment a round ends, coaching for that exact round lands on your screen: why you died, what the enemy did, and what to change next round. Nothing to configure, no stats to type — AIMLO watches your match by itself in the background. No other tool does this in-match, round by round.",
       },
       {
         icon: "chart",
@@ -1758,7 +1758,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               <span className="hero-kicker">
                 {/* TR ön-büyütülmüş (2026-07-09): CSS text-transform:uppercase'in
                     i→İ dönüşümü tarayıcı/locale bağımlı — literal büyük harf garanti. */}
-                {lang === "tr" ? "AI VALORANT KOÇU — OCR + GPT, TAM OTOMATİK" : "AI Valorant Coach — OCR + GPT, fully automatic"}
+                {lang === "tr" ? "AI VALORANT KOÇU — SENİ İZLER, HER ROUND KOÇLUK VERİR" : "AI Valorant Coach — watches your game, coaches every round"}
               </span>
             </div>
 
@@ -1859,8 +1859,8 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
           {[0, 1].map((seg) => (
             <div key={seg} className="marquee-seg">
               {(lang === "tr"
-                ? ["OCR YAKALAMA", "AI ANALİZ", "ROUND GERİ BİLDİRİMİ", "MAÇ RAPORU", "PATTERN TESPİTİ", "RANK ATLA"]
-                : ["OCR CAPTURE", "AI ANALYSIS", "ROUND FEEDBACK", "MATCH REPORT", "PATTERN DETECTION", "RANK UP"]
+                ? ["CANLI İZLEME", "AI ANALİZ", "ROUND GERİ BİLDİRİMİ", "MAÇ RAPORU", "PATTERN TESPİTİ", "RANK ATLA"]
+                : ["LIVE TRACKING", "AI ANALYSIS", "ROUND FEEDBACK", "MATCH REPORT", "PATTERN DETECTION", "RANK UP"]
               ).map((item, mi) => (
                 <span key={mi} className="marquee-item">{item}<span className="marquee-dot">◆</span></span>
               ))}
@@ -2131,8 +2131,8 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               {/* supporting proof chips — concrete, honest */}
               <div className="flex flex-wrap gap-2">
                 {(lang === "tr"
-                  ? ["Ekran okuma (OCR)", "Vanguard-güvenli", "Sıfır manuel giriş", "Her round otomatik"]
-                  : ["Screen reading (OCR)", "Vanguard-safe", "Zero manual input", "Every round, auto"]
+                  ? ["Maçını canlı izler", "Vanguard-güvenli", "Sıfır manuel giriş", "Her round otomatik"]
+                  : ["Watches your match live", "Vanguard-safe", "Zero manual input", "Every round, auto"]
                 ).map((chip, ci) => (
                   <span key={ci} className="text-[11px] font-medium px-3 py-1.5 rounded-full border border-white/[0.1] bg-white/[0.03] text-neutral-300">
                     {chip}
