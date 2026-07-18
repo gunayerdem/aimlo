@@ -2586,8 +2586,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             ))}
           </div>
           <a
-            href="https://bzwnchzetebwrdedkjkq.supabase.co/storage/v1/object/public/downloads/Aimlo-Setup.msi"
-            download
+            href="/download"
             className="btn-neon rounded-xl px-10 py-4 text-[14px] inline-flex items-center gap-2 mx-auto"
           >
             {lang === "tr" ? "Windows için İndir" : "Download for Windows"}
