@@ -107,8 +107,28 @@ export function buildWeaponCompDirective(
   weapon: { name: string; cls: WeaponClass } | null,
   archetype: CompArchetype | null,
   loadout?: string,
+  // Dil (2026-07-18): EN istekte İngilizce sarmalayıcı — rehber bölüm başlığı
+  // Türkçe kalır (KB Türkçe), talimat dersi İngilizce yeniden ifade ettirir.
+  lang: "tr" | "en" = "tr",
 ): string {
   if (!weapon && (!archetype || archetype === "standart")) return "";
+  if (lang === "en") {
+    const L: string[] = ["\n[WEAPON+COMP HINT — from the WEAPON + COMP GUIDE in the system prompt (guide is in Turkish)]"];
+    if (weapon) {
+      L.push(
+        `The weapon that killed you: ${weapon.name} → the guide section titled "${WEAPON_CLASS_LABEL[weapon.cls]}". ` +
+        `Tie that section's lesson to THIS round's callout and enemy agent, restated in ENGLISH — do not copy its sentence` +
+        (loadout ? `; the player's own weapon is ${loadout}, compare range/duel odds against it.` : "."),
+      );
+    }
+    if (archetype && archetype !== "standart") {
+      L.push(
+        `Enemy comp archetype: ${archetype} (from roster OCR). Fold that section's read into one of the ` +
+        `enemyAnalysis items or into nextRoundSuggestion — do not open a separate field.`,
+      );
+    }
+    return L.join("\n");
+  }
   const L: string[] = ["\n[SİLAH+KOMP İPUCU — sistem prompt'undaki SİLAH + KOMP REHBERİ'nden]"];
   if (weapon) {
     L.push(

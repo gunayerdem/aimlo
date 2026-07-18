@@ -18,36 +18,58 @@ import type { FactGround } from "./reality-checker";
  * never name/invent. The reality-checker guard remains the deterministic second
  * line. Compact single block to keep the uncached token cost low.
  */
-export function buildFactSheet(fg: FactGround, ctx: Record<string, unknown>): string {
+export function buildFactSheet(
+  fg: FactGround,
+  ctx: Record<string, unknown>,
+  // Dil (canlı-test 2026-07-18 "bir TR bir EN"): factSheet clientContext'in en
+  // görünür bloğu — EN istekte Türkçe etiketler + "'bir düşman' de" talimatı
+  // modeli Türkçeye çekiyordu. Default "tr" → mevcut çağıranlar bayt-aynı.
+  lang: "tr" | "en" = "tr",
+): string {
+  const en = lang === "en";
   const known: string[] = [];
   const unknown: string[] = [];
 
   // killer + weapon (killerInfo is one string: agent + optional "with <weapon>")
-  if (fg.hasKiller) known.push(`katil=${ctx.killerInfo}`);
-  else unknown.push("katil (ajan)");
-  if (!fg.hasWeapon) unknown.push("öldüren silah"); // present → already in killerInfo
+  if (fg.hasKiller) known.push(en ? `killer=${ctx.killerInfo}` : `katil=${ctx.killerInfo}`);
+  else unknown.push(en ? "killer (agent)" : "katil (ajan)");
+  if (!fg.hasWeapon) unknown.push(en ? "killer's weapon" : "öldüren silah"); // present → already in killerInfo
 
-  if (fg.hasDeathLocation) known.push(`ölüm yeri=${ctx.deathLocation}`);
-  else unknown.push("ölüm yeri/callout");
+  if (fg.hasDeathLocation) known.push(en ? `death location=${ctx.deathLocation}` : `ölüm yeri=${ctx.deathLocation}`);
+  else unknown.push(en ? "death location/callout" : "ölüm yeri/callout");
 
-  if (fg.hasDeathAngle) known.push(`yön=${ctx.deathAngle}`);
-  else unknown.push("vurulma yönü");
+  if (fg.hasDeathAngle) known.push(en ? `direction=${ctx.deathAngle}` : `yön=${ctx.deathAngle}`);
+  else unknown.push(en ? "hit direction" : "vurulma yönü");
 
-  if (fg.hasHeadshot) known.push("kafadan vuruldu");
-  else unknown.push("headshot (kafadan mı)");
+  if (fg.hasHeadshot) known.push(en ? "headshot" : "kafadan vuruldu");
+  else unknown.push(en ? "headshot (yes/no)" : "headshot (kafadan mı)");
 
-  if (fg.hasAliveCount) known.push(`hayatta: müttefik=${ctx.alliesAlive ?? "?"}, düşman=${ctx.enemiesAlive ?? "?"}`);
-  else unknown.push("kaç kişi hayatta (sayı)");
+  if (fg.hasAliveCount) known.push(en
+    ? `alive: allies=${ctx.alliesAlive ?? "?"}, enemies=${ctx.enemiesAlive ?? "?"}`
+    : `hayatta: müttefik=${ctx.alliesAlive ?? "?"}, düşman=${ctx.enemiesAlive ?? "?"}`);
+  else unknown.push(en ? "alive counts" : "kaç kişi hayatta (sayı)");
 
-  if (fg.hasSpike) known.push(`spike=${ctx.spikePlanted ? "kurulu" : "kurulu değil"}`);
-  else unknown.push("spike durumu");
+  if (fg.hasSpike) known.push(en
+    ? `spike=${ctx.spikePlanted ? "planted" : "not planted"}`
+    : `spike=${ctx.spikePlanted ? "kurulu" : "kurulu değil"}`);
+  else unknown.push(en ? "spike status" : "spike durumu");
 
-  if (fg.hasTradeData) known.push(`trade=${ctx.tradedByAlly ? "alındı" : "alınmadı"}`);
-  else unknown.push("trade alındı mı");
+  if (fg.hasTradeData) known.push(en
+    ? `trade=${ctx.tradedByAlly ? "traded" : "not traded"}`
+    : `trade=${ctx.tradedByAlly ? "alındı" : "alınmadı"}`);
+  else unknown.push(en ? "whether the death was traded" : "trade alındı mı");
 
-  if (fg.hasRoute) known.push(`rota=${ctx.playerRoute}`);
-  else unknown.push("giriş yolu/rota");
+  if (fg.hasRoute) known.push(en ? `route=${ctx.playerRoute}` : `rota=${ctx.playerRoute}`);
+  else unknown.push(en ? "entry path/route" : "giriş yolu/rota");
 
+  if (en) {
+    const knownLine = known.length ? known.join(", ") : "(no hard facts this round)";
+    const unknownLine = unknown.length ? unknown.join(", ") : "(none)";
+    return `\n\n[DEATH-DATA CONTRACT — DEFINITIVE FOR THIS ROUND]\n`
+      + `KNOWN (use ONLY these as facts): ${knownLine}.\n`
+      + `UNKNOWN (NEVER name/claim/invent these): ${unknownLine}.\n`
+      + `Rule: never fill in an UNKNOWN fact. If the killer is unknown say "an enemy"; if location/weapon/headshot/counts/spike/route are unknown, do NOT bring that topic up or guess from the screen/roster.`;
+  }
   const knownLine = known.length ? known.join(", ") : "(bu round net olgu yok)";
   const unknownLine = unknown.length ? unknown.join(", ") : "(yok)";
   return `\n\n[ÖLÜM-VERİ SÖZLEŞMESİ — BU ROUND İÇİN KESİN]\n`
@@ -82,6 +104,87 @@ export const ROUND_FEEDBACK_SCHEMA = {
     },
   },
 } as const;
+
+// ── EN şema (canlı-test 2026-07-18 "bir TR bir EN" kök-nedeni ★1) ──
+// ROUND_FEEDBACK_SCHEMA description'ları kelimesi kelimesine "Türkçe koç sesi"
+// diyordu ve örnekleri Türkçeydi — json_schema strict modda bu, üretimden hemen
+// önceki EN GÜÇLÜ dil sinyali. EN istekte şema da İngilizce konuşmalı. Şekil
+// (required/properties) birebir aynı → desktop kontratı değişmez; şema
+// response_format'ta olduğundan prompt-cache prefix'ine sıfır etki.
+const ROUND_FEEDBACK_SCHEMA_EN = {
+  name: "round_feedback",
+  strict: true,
+  schema: {
+    type: "object",
+    additionalProperties: false,
+    required: ["deathAnalysis", "enemyAnalysis", "nextRoundSuggestion"],
+    properties: {
+      deathAnalysis: {
+        type: "string",
+        description: "1-2 sentence ENGLISH coach voice. MANDATORY: 1 concrete fix (callout + util/decision). If killerInfo EXISTS, name the killer agent + weapon; if killerInfo is MISSING do NOT invent an agent name, say 'an enemy' (never a candidate list 'X or Y', never 'unknown'). There is NO headshot data — do NOT write 'headshot/one-tapped in the head'; just say 'killed/shot you'. Vague words (generally/a bit) are BANNED. Example (killer known): 'You held a wide angle at B Main and the Cypher killed you with the Operator — don't take that corner without a smoke.' Example (no killer): 'You were caught wide open at B Main without utility and an enemy shot you — smoke the corner before holding it.' If a [DEATH-TYPE] directive is present in the user message, anchor deathAnalysis to THAT type's lesson and use the 'caught without utility' framing ONLY if the type really is a utility-absence type.",
+      },
+      enemyAnalysis: {
+        type: "array",
+        description: "Exactly 2 items, each ONE short ENGLISH sentence (do NOT merge two commands with a semicolon). No 'Counter:' style labels — write directly. Item 1 = the enemy's CONCRETE setup/util/position this round (must include callout+agent). Item 2 = a practical counter (concrete action, callout+util MANDATORY); generic observations are BANNED. Example: ['Cypher lined his traps at the B Main entrance','Default out of A together, don't force B solo'].",
+        items: { type: "string" },
+        minItems: 2,
+        maxItems: 2,
+      },
+      nextRoundSuggestion: {
+        type: "string",
+        description: "1-2 ENGLISH sentences: which SITE + why it makes sense + a short how. Don't say 'simple' — concrete tactics. No micro-detail (smoke coordinates/dash timing). Example: 'Drop B this round and default into A as a team — Cypher spent his util on B, he can't rotate and hold A.'",
+      },
+    },
+  },
+} as const;
+
+export function buildRoundFeedbackSchema(lang: "tr" | "en" = "tr") {
+  return lang === "en" ? ROUND_FEEDBACK_SCHEMA_EN : ROUND_FEEDBACK_SCHEMA;
+}
+
+// ── EN sistem-prompt eki (kök-neden ★2) ──
+// SYSTEM_PROMPT'un few-shot'ları ~%90 Türkçe; reasoning minimal'de model baskın
+// örnek dilini kopyalıyor → EN istek bazen tamamen Türkçe dönüyordu. Çözüm:
+// TR gövde AYNEN kalır (TR cache'i bozulmaz), EN isteklerde bu ek SONA gelir —
+// recency etkisiyle İngilizce örnekler kazanır. EN istekler için de sabit
+// prefix → EN kendi cache hattında stabil.
+export const SYSTEM_PROMPT_EN_ADDENDUM = `
+
+═══ ENGLISH OUTPUT MODE — ACTIVE FOR THIS REQUEST ═══
+
+The player's language is ENGLISH. Everything above defines coaching QUALITY, structure and the anti-fabrication rules — they all still apply. The Turkish example scenarios above illustrate STRUCTURE ONLY. Your output MUST be natural English coach language. Never output a Turkish word or sentence (universal game terms stay: peek, trade, smoke, eco, retake, lurk, anchor, rotate, default, execute).
+
+ENGLISH EXAMPLE SCENARIOS (learn the pattern, do NOT copy word-for-word):
+
+SCENARIO A — Ascent, Cypher, DEFENSE, strong data:
+{
+  "deathAnalysis": "You held B Main alone on a wide angle and the Jett came through mid and shot you from behind — don't hold that angle without a crossfire, take an off-angle toward Market so you can't be beaten from one side.",
+  "enemyAnalysis": [
+    "Jett took mid fast with her dash and wrapped behind B Main while you were watching the front angle.",
+    "Don't hold B Main alone — put a teammate on Market window and trade the mid push together."
+  ],
+  "nextRoundSuggestion": "Don't anchor B alone this round; smoke mid early and set a crossfire from Market — Jett can't wrap B without taking mid control first."
+}
+
+SCENARIO B — Bind, Sage, ATTACK, R1 / little data (no pattern but still DEFINITIVE + SPECIFIC — no hedging, 'maybe/it seems' is BANNED):
+{
+  "deathAnalysis": "You walked into A Showers without utility and the defender caught you in the open from A Main — don't cross that gap before walling it off.",
+  "enemyAnalysis": [
+    "The defender held the A Main angle and you were an open target coming out of Showers.",
+    "Don't dry-push Showers solo; place the Sage wall across the entry angle, then go in together."
+  ],
+  "nextRoundSuggestion": "Don't force A directly this round — throw the Sage wall across A Main, execute in together with a flash, and drop the solo Showers peek."
+}
+
+OUTPUT TEMPLATE (EN):
+{
+  "deathAnalysis": "<1-2 English sentences: mistake + cause + short fix. Specific callout + agent + weapon/utility.>",
+  "enemyAnalysis": [
+    "<1 sentence: what the enemy did this round (setup/utility/position)>",
+    "<1 sentence: practical counter — concrete action with callout+util>"
+  ],
+  "nextRoundSuggestion": "<1-2 English sentences: which site, why, short how. No micro-detail.>"
+}`;
 
 export const SYSTEM_PROMPT = `Sen AIMLO'sun: Radiant seviye gerçek bir Valorant koçusun. Görevin oyuncuya GERÇEK pattern-aware feedback vermek — generic "iyi nişan al" / "aim well" laflarını YASAKLIYORUM.
 
@@ -340,3 +443,13 @@ GÖREVİN: Gerçek bir koç gibi, kısa ve direkt feedback ver. AI tarzı uzun a
 ÖNCE side'a bak: "side":"attack" ise SALDIRI round'u (sen giriyorsun → entry/execute/trade/space/lurk dilini kullan), "side":"defense" ise SAVUNMA round'u (sen tutuyorsun → açı tut/off-angle/crossfire/retake/save dilini kullan). Feedback'i bu side'a göre yaz — yanlış side dili kullanma.
 
 Sadece JSON döndür — markdown yok, code block yok, başka açıklama yok.`;
+
+// EN görev satırı (kök-neden ★3): user-message iskelesi de EN istekte İngilizce
+// konuşmalı — Türkçe görev satırı modelin çıktı dilini Türkçeye çekiyordu.
+export const USER_PROMPT_EN = `Valorant round end. The OCR/CLIENT data below is pixel truth — more reliable than the screenshot.
+
+YOUR TASK: give short, direct feedback like a real coach. Long AI-style explanations are BANNED. One sentence per field (enemyAnalysis 2 items × 1 sentence).
+
+Check the side FIRST: "side":"attack" means an ATTACK round (you are entering → use entry/execute/trade/space/lurk language), "side":"defense" means a DEFENSE round (you are holding → use hold/off-angle/crossfire/retake/save language). Write the feedback for that side — never use the wrong side's language.
+
+Return ONLY JSON — no markdown, no code block, no extra explanation.`;

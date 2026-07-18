@@ -137,12 +137,31 @@ export function classifyDeath(b: DeathSignals): DeathType {
 /** Build the user-message directive: which block + lesson for THIS death, plus a ban
  *  on concepts already used earlier this match. Injected into the USER message (per-round,
  *  uncached) so the SYSTEM prompt-cache prefix is untouched (zero cache-hit impact). */
-export function buildDeathTypeDirective(type: DeathType, prev: DeathType[] = []): string {
+export function buildDeathTypeDirective(
+  type: DeathType,
+  prev: DeathType[] = [],
+  // Dil (2026-07-18 "bir TR bir EN"): direktif user-message'ın büyük Türkçe
+  // bloklarındandı — EN istekte İngilizce sarmalayıcı (KB bölüm başlığı Türkçe
+  // kalır, KB Türkçe; talimat "dersi İngilizce yeniden ifade et" der).
+  lang: "tr" | "en" = "tr",
+): string {
   const g = DEATH_TYPE_GUIDE[type];
   const bannedConcepts = [...new Set(prev)]
     .filter((p) => p !== type)
     .map((p) => DEATH_TYPE_GUIDE[p]?.concept)   // optional: ignore unknown types the client may send
     .filter((c): c is string => !!c);
+  if (lang === "en") {
+    const banLineEn = bannedConcepts.length
+      ? `\nEARLIER ROUNDS THIS MATCH ALREADY COVERED: ${bannedConcepts.join(", ")}. Do NOT repeat those angles (or synonyms) — this round has a different death-type, coach a different concept.`
+      : "";
+    return (
+      `\n[DEATH-TYPE HINT — this round's focus]\n` +
+      `This death's type: ${type}. The KB section in the system prompt for this type is titled "${g.kbBlock}" (the KB is in Turkish).\n` +
+      `Base deathAnalysis on THAT section's lesson — but do NOT copy its sentence; restate the lesson in ENGLISH, tied to this round's concrete details (callout + agent + weapon).\n` +
+      `Use the "caught in the open / don't push without utility" framing ONLY if this type really is a utility-absence type (info-less-push / entry-no-trade); otherwise give THIS type's own lesson.` +
+      banLineEn
+    );
+  }
   const banLine = bannedConcepts.length
     ? `\nBU MAÇTA ÖNCEKİ ROUND'LARDA ŞU AÇILARI ZATEN VERDİN: ${bannedConcepts.join(", ")}. Aynısını (eşanlamlısı dahil) TEKRARLAMA — bu round farklı bir ölüm-tipi, farklı bir kavramdan konuş.`
     : "";

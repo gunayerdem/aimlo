@@ -10,7 +10,7 @@ import { isUuidV4 } from "@/lib/uuid";
 import { buildPolicyBlock } from "@/lib/ai-policy";
 import { buildAgentAbilityHint, enforceAgentKit } from "@/lib/agent-abilities";
 import { cleanCoachText, clampWords, stripNumericHp } from "@/lib/coach-text";
-import { ROUND_FEEDBACK_SCHEMA, SYSTEM_PROMPT, USER_PROMPT, buildFactSheet } from "@/lib/vision-prompt";
+import { SYSTEM_PROMPT, SYSTEM_PROMPT_EN_ADDENDUM, USER_PROMPT, USER_PROMPT_EN, buildFactSheet, buildRoundFeedbackSchema } from "@/lib/vision-prompt";
 import { classifyDeath, buildDeathTypeDirective } from "@/lib/death-type";
 import { extractKillerWeapon, classifyCompArchetype, buildWeaponCompDirective } from "@/lib/comp-weapon";
 
@@ -472,7 +472,9 @@ export async function POST(request: NextRequest) {
       : _rh.length < 8 ? "medium"
       : "high";
     const systemSections: string[] = [
-      SYSTEM_PROMPT,
+      // EN modunda TR gövde + İngilizce few-shot eki (★2): TR gövde bayt-aynı
+      // kalır (TR cache'i korunur); EN istekler kendi sabit prefix'inde cache'lenir.
+      reqLang === "en" ? SYSTEM_PROMPT + SYSTEM_PROMPT_EN_ADDENDUM : SYSTEM_PROMPT,
       buildPolicyBlock({
         confidence: visionConfidence,
         tone: "strict",
@@ -688,7 +690,7 @@ export async function POST(request: NextRequest) {
       reqBody as unknown as Record<string, unknown>,
       ctx as unknown as Record<string, unknown>,
     );
-    const factSheet = buildFactSheet(factGround, ctx as unknown as Record<string, unknown>);
+    const factSheet = buildFactSheet(factGround, ctx as unknown as Record<string, unknown>, reqLang);
 
     // DEATH-TYPE directive (variety fix 2026-06-30, softi canlı-test): in one match all
     // rounds collapsed to the same idea ("açıkta kaldın + utility'siz girme") because the
@@ -743,7 +745,7 @@ export async function POST(request: NextRequest) {
       const prevDeathTypes = (Array.isArray(rh) ? rh : [])
         .map((r: Record<string, unknown>) => (typeof r.death_type === "string" ? r.death_type : ""))
         .filter((s): s is string => s.length > 0) as import("@/lib/death-type").DeathType[];
-      deathTypeDirective = buildDeathTypeDirective(dtype, prevDeathTypes);
+      deathTypeDirective = buildDeathTypeDirective(dtype, prevDeathTypes, reqLang);
       console.log(`[Aimlo AI] death-type=${dtype} repeatPos=${repeatedPosition} prevTypes=${prevDeathTypes.length}`);
     }
 
@@ -761,6 +763,7 @@ export async function POST(request: NextRequest) {
       killerWeapon,
       compArchetype,
       typeof ctx.loadout === "string" ? ctx.loadout : undefined,
+      reqLang,
     );
     if (weaponCompDirective) {
       console.log(`[Aimlo AI] weapon=${killerWeapon?.name ?? "-"} comp=${compArchetype ?? "-"}`);
@@ -774,16 +777,24 @@ export async function POST(request: NextRequest) {
     const langDirective = reqLang === "en"
       ? `\n[LANGUAGE] The player's language is ENGLISH. Write deathAnalysis, enemyAnalysis and nextRoundSuggestion ONLY in natural English coach language (keep universal game terms: peek, trade, smoke, eco...). The knowledge blocks and some context/instruction lines are in Turkish — use them as source FACTS and LESSONS but always RESTATE them in English. NEVER copy a Turkish sentence or word into your output.`
       : "";
-    const clientContext =
-      factSheet +   // BİLİNEN/BİLİNMEYEN sözleşmesi EN BAŞTA — model olgu-sınırını önce görsün
-      langDirective +        // dil emri — olgu sınırından hemen sonra (EN'de aktif)
-      deathTypeDirective +   // ÖLÜM-TİPİ çıpası — factSheet'ten hemen sonra (per-round, user-msg)
-      weaponCompDirective +  // SİLAH+KOMP işaretçisi — statik rehberin bölüm seçicisi (per-round, user-msg)
-      (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, screenshot'tan güvenilir]\n${ctxJson}` : "") +
-      (patternBlock ? `\n\n[PATTERN — son round'lardaki tekrar eden hata. Bu varsa deathAnalysis veya nextRoundSuggestion'da koç gibi referans ver — extra alan açma]\n${patternBlock}` : "");
+    // Dil-uzman denetimi 2026-07-18 ★3: EN'de dil emri EN BAŞA (model önce dili
+    // görsün) + kalan başlıklar reqLang'de. TR yolunda sıra/bayt birebir eski.
+    const clientContext = reqLang === "en"
+      ? langDirective +      // dil emri EN BAŞTA — Türkçe bloklardan önce
+        factSheet +
+        deathTypeDirective +
+        weaponCompDirective +
+        (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, more reliable than the screenshot]\n${ctxJson}` : "") +
+        (patternBlock ? `\n\n[PATTERN — recurring mistake across recent rounds. If present, reference it like a coach inside deathAnalysis or nextRoundSuggestion — do not open an extra field]\n${patternBlock}` : "")
+      : factSheet +   // BİLİNEN/BİLİNMEYEN sözleşmesi EN BAŞTA — model olgu-sınırını önce görsün
+        langDirective +        // dil emri — olgu sınırından hemen sonra (EN'de aktif)
+        deathTypeDirective +   // ÖLÜM-TİPİ çıpası — factSheet'ten hemen sonra (per-round, user-msg)
+        weaponCompDirective +  // SİLAH+KOMP işaretçisi — statik rehberin bölüm seçicisi (per-round, user-msg)
+        (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, screenshot'tan güvenilir]\n${ctxJson}` : "") +
+        (patternBlock ? `\n\n[PATTERN — son round'lardaki tekrar eden hata. Bu varsa deathAnalysis veya nextRoundSuggestion'da koç gibi referans ver — extra alan açma]\n${patternBlock}` : "");
 
     // Build round history context for the user prompt
-    let userPromptWithHistory = USER_PROMPT + clientContext;
+    let userPromptWithHistory = (reqLang === "en" ? USER_PROMPT_EN : USER_PROMPT) + clientContext;
     const roundHistory = (body as VisionRequest).roundHistory;
     if (roundHistory && Array.isArray(roundHistory) && roundHistory.length > 0) {
       // Dil-duyarlı (canlı-test 2026-07-18 EN: model bu Türkçe olgu-cümlelerini
@@ -879,6 +890,12 @@ export async function POST(request: NextRequest) {
         : `\n\nSon round geçmişi (gözlemlenmiş):\n${historyLines.join("\n")}\n${patternNote}${posNote}${deathZoneNote}`;
     }
 
+    // Sandviç tekniği (dil-uzman denetimi ★3): üretimden hemen önceki SON satır
+    // dil emri olsun — model son talimata en çok ağırlık verir. TR'de eklenmez.
+    if (reqLang === "en") {
+      userPromptWithHistory += `\n\n[REMINDER] Output language: ENGLISH ONLY. All three fields in natural English coach voice — never a Turkish word.`;
+    }
+
     // Call OpenAI GPT-5 mini (Chat Completions API)
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), AI_TIMEOUT_MS);
@@ -896,7 +913,7 @@ export async function POST(request: NextRequest) {
         max_completion_tokens: resolvedMaxTokens,
         // Strict JSON enforcement — server rejects malformed schema. Eliminates
         // the markdown-fence/preamble extraction logic we needed with Anthropic.
-        response_format: { type: "json_schema", json_schema: ROUND_FEEDBACK_SCHEMA },
+        response_format: { type: "json_schema", json_schema: buildRoundFeedbackSchema(reqLang) },
         // Minimal reasoning effort — coach output is template-fill, not chain-of-thought.
         // Saves output tokens + latency. Bump to "low" or "medium" if quality drops.
         reasoning_effort: "minimal",

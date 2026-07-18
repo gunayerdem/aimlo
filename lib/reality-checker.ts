@@ -264,6 +264,12 @@ export function rewriteUnsafeClaims(
 
   let result = text;
 
+  // Dil tespiti (canlı-test 2026-07-18 "bir TR bir EN"): replacement metinleri
+  // ÇIKTININ diliyle eşleşmeli — EN cümleye "kez" enjekte etmek (ve TR cümleye
+  // "recently") kelime-düzeyi dil karışmasının kaynağıydı. Türkçe özel harf
+  // heuristiği level-3'teki mevcut isTr tespitiyle aynı ailedendir.
+  const trText = /[şçğıöü]/i.test(text);
+
   if (validation.rewriteLevel === 2) {
     // Position valid but count/repetition overclaimed
     if (claims.claimedCount !== null && !validation.countValid) {
@@ -278,7 +284,7 @@ export function rewriteUnsafeClaims(
         new RegExp(`${ct}\\s*match(es)?\\s*in\\s*a\\s*row`, "gi"),
       ];
       const replacement = validation.actualCount >= 2
-        ? `${validation.actualCount} kez`
+        ? (trText ? `${validation.actualCount} kez` : `${validation.actualCount} times`)
         : "";
       for (const re of countPatterns) {
         result = result.replace(re, replacement);
@@ -295,7 +301,7 @@ export function rewriteUnsafeClaims(
         new RegExp(`past\\s+${w}\\s*round(s)?`, "gi"),
       ];
       for (const re of windowPatterns) {
-        result = result.replace(re, "recently");
+        result = result.replace(re, trText ? "son round'larda" : "recently");
       }
     }
 
@@ -498,19 +504,24 @@ export function guardUnprovenFacts(
   // (c) "unknown" sızıntısı üretiyordu. 4-adımlı deterministik collapse → tek
   // "bir düşman". hasKiller=true iken (killfeed okundu) DOKUNMA. (council node-test 8/8)
   if (factGround.hasKiller === false) {
+    // Dil (2026-07-18): "bir düşman" EN çıktıya Türkçe sızdırıyordu — replacement
+    // metnin diline uyar (EN kill-fiilleri de token'a eklendi ki STEP2 EN'de tetiklensin).
+    const trText = /[şçğıöü]/i.test(result);
+    const AN_ENEMY = trText ? "bir düşman" : "an enemy";
     const NAME_ALT = AGENT_NAMES.map(escapeRe).sort((a, b) => b.length - a.length).join("|");
     const KILLER_TOKEN = `(?:${NAME_ALT}|unknown|bilinmeyen)`;
-    const KV2 = "(?:vurup öldürdü|öldürdü|öldürdün|öldürüldün|kestiler|kesti|vuruldun|vurdun|vurdu|düşürdü|indirdi|biçti|aldılar|aldı|avladı|devirdi|götürdü|temizledi)";
+    const KV2 = "(?:vurup öldürdü|öldürdü|öldürdün|öldürüldün|kestiler|kesti|vuruldun|vurdun|vurdu|düşürdü|indirdi|biçti|aldılar|aldı|avladı|devirdi|götürdü|temizledi|killed you|shot you|killed|shot|picked you off|took you down|caught you)";
     const NLB = "(?<![a-zçğıöşüâîû])", NL = "(?![a-zçğıöşüâîû])";
-    // STEP1: ≥2 üyeli katil-disjunction ("X ya da Y ya da Z") → tek "bir düşman"
-    result = result.replace(new RegExp(`${NLB}${KILLER_TOKEN}(?:\\s*(?:ya da|veya|/|,)\\s*${KILLER_TOKEN})+`, "gi"), "bir düşman");
-    // STEP2: tek isimli katil + aynı clause'da kill-verb → "bir düşman" (char-cap YOK)
+    // STEP1: ≥2 üyeli katil-disjunction ("X ya da Y ya da Z" / "X or Y") → tek genel-düşman
+    result = result.replace(new RegExp(`${NLB}${KILLER_TOKEN}(?:\\s*(?:ya da|veya|or|/|,)\\s*${KILLER_TOKEN})+`, "gi"), AN_ENEMY);
+    // STEP2: tek isimli katil + aynı clause'da kill-verb → genel-düşman (char-cap YOK)
     const SINGLE = new RegExp(`${NLB}${KILLER_TOKEN}\\b([^.!?;:—\\n]*?\\s)${KV2}${NL}`, "gi");
-    result = result.replace(SINGLE, (m: string, mid: string) => "bir düşman" + m.slice(m.indexOf(mid)));
-    // STEP3: kalan stray "unknown"/"bilinmeyen" → "bir düşman"
-    result = result.replace(new RegExp(`${NLB}(?:unknown|bilinmeyen)${NL}`, "gi"), "bir düşman");
-    // STEP4: "bir düşman ya da bir düşman" run'larını tek'e çökert
+    result = result.replace(SINGLE, (m: string, mid: string) => AN_ENEMY + m.slice(m.indexOf(mid)));
+    // STEP3: kalan stray "unknown"/"bilinmeyen" → genel-düşman
+    result = result.replace(new RegExp(`${NLB}(?:unknown|bilinmeyen)${NL}`, "gi"), AN_ENEMY);
+    // STEP4: "bir düşman ya da bir düşman" / "an enemy or an enemy" run'larını tek'e çökert
     result = result.replace(/bir düşman(?:\s*(?:ya da|veya|\/|,)\s*bir düşman)+/gi, "bir düşman");
+    result = result.replace(/an enemy(?:\s*(?:or|\/|,)\s*an enemy)+/gi, "an enemy");
   }
 
   // WEAPON-absent (Ölüm-Veri Sözleşmesi #2, 2026-06-29): killerInfo'da "with <silah>"
