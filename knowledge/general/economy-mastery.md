@@ -73,6 +73,13 @@ NE ANLAMA GELİR: yakına gelip kafana sıkmaya çalışacaklar.
 NE YAPARSIN: Uzak mesafe tut. Spectre veya Ares al, duvarlara spray sık. Op ALMA — yakına gelince işe yaramaz.
 NEDEN: eco takımı agresif gelir, Sheriff one-tap'leri uçuşur — mesafe seni korur.
 
+### Tam Alımdayken Eco Silahına Ölmek
+
+DURUM: sen tam alımdasın ve seni tabanca, SMG ya da pompalı öldürdü (killerInfo ucuz silah).
+NE ANLAMA GELİR: kredi avantajını mesafe seçimiyle çöpe attın — eco silahı yakın mesafede tüfekle eşitlenir, uzakta erir.
+NE YAPARSIN: eco'ya karşı düelloyu uzun hatta al; köşe dibine, dar geçide, yakın açıya girme — düşmanı sana açık alandan gelmek zorunda bırak.
+NEDEN: ölünce sadece round değil silahın da gider — 2,900'lük tüfek eco takıma bedava geçer, ekonomi farkın bir round'da kapanır.
+
 ---
 
 ## Buy Karar Akışı

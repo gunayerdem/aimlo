@@ -12,7 +12,7 @@ Takımın tek iyileştiricisi, tek dirilticisi sensin. Değerin bilgiden ya da t
 - **İyileştirme:** İlk hasar alan arkadaşı değil, sıradaki dövüşe girecek arkadaşı iyileştir. HP'yi düelloyu kazanacak kişiye ver. Kendini iyileştirmek artık tam değer veriyor — dövüşe eksik canla dönme, köşe arkasında önce kendini doldur.
 - **Duvar:** Duvar bir görüş hattını kapatır ya da sana zaman kazandırır. Çapraz koy, dik koyma — düşman dik duvarı üstünden atlar.
 - **Slow:** Düşman push'a çıktığında at. Boş alana erken atma, gelene kadar dağılır.
-- **Ult (diriltme):** Duvar ya da takım koruması yoksa diriltme. İki kişiyi kaybetmek bir kişiyi kaybetmekten kötü.
+- **Ult (diriltme):** Duvar ya da takım koruması yoksa diriltme. İki kişiyi kaybetmek bir kişiyi kaybetmekten kötü. Birden fazla beden varsa dövüşe en hızlı dönecek olanı dirilt: silahı değerli, konumu çatışmaya yakın beden sayıyı anında düzeltir — spawn'a düşmüş beden geç döner.
 
 ## 3. Sık Yapılan Hatalar
 - İlk hasar alan kişiyi iyileştirmek. Lurk eden adam 120 HP'de saklanıyorsa ve entry 100 HP'de dövüşe girecekse — entry'yi iyileştir.
@@ -23,6 +23,8 @@ Takımın tek iyileştiricisi, tek dirilticisi sensin. Değerin bilgiden ya da t
 - Diriltirken duvar koymadan açıkta beklemek.
 - Duvarı tam göğüs hizasına değil, ayak hizasına basıp düşmana yarım duvar bırakmak — alt kısmından bacak görünür, peek atılır.
 - İyileştirme animasyonu sırasında açıkta durmak. İyileştirirken silahını çekemezsin; köşe arkasında, görüş dışında iyileştir.
+- Açıkta yatan bedene doğrudan koşmak. Düşman bedeni bilerek yem olarak açıkta bırakır — önce bedeni gören açıları temizle ya da duvarla kes, sonra dirilt.
+- Çatışma sürerken diriltmeye başlamak. Animasyon boyunca dövüşe katılamazsın; dövüş sessizleşince ya da duvar arkası güvence kurulunca dirilt.
 
 ## 4. Kalıp -> Anlam
 
@@ -41,6 +43,11 @@ Takımın tek iyileştiricisi, tek dirilticisi sensin. Değerin bilgiden ya da t
 **COUNTER** Önce duvar koy, arkasına gir, sonra dirilt. Düşman görüş açısındaysa diriltme — sayı avantajını kullan.
 **WHY** Ölü Sage + ölü diriltilen = iki kayıp. Diriltmemek bazen doğru hamledir.
 
+**IF** Diriltmen hazırken öldüysen
+**MEANING** Tek ölümle iki şey kaybettin — kendini ve cebindeki diriltmeyi. Takımın sayıyı düzeltme şansı da seninle gömüldü.
+**COUNTER** Diriltme hazırken pozisyon riskini bir kademe düşür: ilk teması sen alma, dövüşü arkadan destekle, diriltmeyi kullanacağın anı sen seç.
+**WHY** Diriltme sonraki round'a taşınır ama bu round takımın onsuz oynandı — hazır ult taşıyan Sage takımın en korunması gereken oyuncusudur.
+
 **IF** İyileştirme çıktın yüksek ama round kazanmıyorsan
 **MEANING** Sadece iyileştirme tuşuna basıyorsun, haritayı okumuyorsun.
 **COUNTER** Duvar koyarak alan aç. Slow ile push'u kes. İyileştirme tek yeteneğin değil.
@@ -58,7 +65,7 @@ Takımın tek iyileştiricisi, tek dirilticisi sensin. Değerin bilgiden ya da t
 
 **IF** Spike kurulduktan sonra duvarı ve slow'u elinde tutuyorsun, post-plant'e hiç katkı vermiyorsun
 **MEANING** Post-plant'te yeteneklerini ölü tutuyorsun — round'un en kritik anında elin boş kalıyor.
-**COUNTER** Slow'u defuse başlamadan spike'ın çevresine at — yaklaşan düşman yavaşlar ve ayak sesi verir, sen atışını hazırlarsın. Başlamış defuse'u slow durdurmaz; defuse'çuyu ancak ateşin kaldırır. Açık açıyı duvarla kapat ki defuse'çuyu güvenle vurabilesin.
+**COUNTER** Slow'u defuse başlamadan spike'ın çevresine at — yaklaşan düşman yavaşlar ve ayak sesi verir, sen atışını hazırlarsın. Başlamış defuse'u slow durdurmaz; defuse'çuyu ancak ateşin kaldırır. Açık açıyı duvarla kapat ki defuse'çuyu güvenle vurabilesin. Takımdan biri düştüyse ve diriltmen hazırsa, alan sessizken dirilt — retake'e gelen düşman sayı hesabını baştan yapmak zorunda kalır.
 **WHY** Slow sana erken uyarıyı ve o atışı hazırlama süresini kazandırır; duvar seni retake ateşinden korur. Post-plant'te tutulan yetenek, kaybedilen round demektir.
 
 **IF** Duvarı düşmanla aynı anda, dövüş tam başlamışken koyuyorsun
@@ -88,12 +95,18 @@ Takımın tek iyileştiricisi, tek dirilticisi sensin. Değerin bilgiden ya da t
 **İyi oynuyorsa:**
 Entry her dövüşe tam HP giriyor çünkü sen sıradaki dövüşçüyü iyileştiriyorsun. Düşman onun hasardan kaçındığını sanıyor — oysa sen her düellodan önce HP avantajı yaratıyorsun. Çapraz duvarların görüş hattını tamamen kesiyor, üstünden atlanamıyor, kırmak util istiyor. Duvar arkasında yaptığın diriltme düşmanın engelleyemeyeceği bir an açıyor.
 
-Yap: Her round sıradaki dövüşçüyü belirle, dövüş öncesi onu iyileştir. Duvar açısını her round biraz değiştir. Diriltmeden önce mutlaka duvar koy — sırayı ters çevirme. Slow'u push gelince at, erken atma. Post-plant'te slow'u sakla: düşman spike'a yaklaşırken çevresine at — yavaşlar, ayak sesi verir, sen defuse'çuyu açından vurursun.
+Yap: Her round sıradaki dövüşçüyü belirle, dövüş öncesi onu iyileştir. Duvar açısını her round biraz değiştir. Diriltmeden önce mutlaka duvar koy — sırayı ters çevirme. Slow'u push gelince at, erken atma. Post-plant'te slow'u sakla: düşman spike'a yaklaşırken çevresine at — yavaşlar, ayak sesi verir, sen defuse'çuyu açından vurursun. Dirilttiğin arkadaş öldüğü noktada, silahı yerdeyken kalkar — o silahını alıp toparlanana kadar açıyı sen tut. Yaralı arkadaş ve beden aynı anda önündeyse önce dirilt, sonra iyileştir — diriltme takıma bir silah daha ekler; alan güvensizse sırayı ters çevir, diriltmeyi güvence kurulunca yap.
 
-Düşman adapte olunca: Duvar kırmak için util getirmeye başlarlarsa — duvarı choke'tan içeri taşı, açık alana taahhüt etmek zorunda kalsınlar. Rush atarlarsa — rush sırasında choke'a slow at, slow'un arkasına duvar koy. Diriltmeni beklerlerse — diriltmeyi atla, sayı avantajını kullan. Diriltme tehdidi bile onları bir oyuncuyu bedeni izlemeye ayırmaya zorlar.
+Düşman adapte olunca: Duvar kırmak için util getirmeye başlarlarsa — duvarı choke'tan içeri taşı, açık alana taahhüt etmek zorunda kalsınlar. Rush atarlarsa — rush sırasında choke'a slow at, slow'un arkasına duvar koy. Diriltmeni beklerlerse — diriltmeyi atla, sayı avantajını kullan. Diriltme tehdidi bile onları bir oyuncuyu bedeni izlemeye ayırmaya zorlar. Bedeni bilerek açıkta bırakıyorlarsa yemdir — bedeni gören açıyı duvarla kes, kesemiyorsan diriltmeyi atla.
 
 **Zorlanıyorsa:**
 Şu an iyileştirme ve duvar birlikte çalışmıyor. Hasar alanı değil, sıradaki dövüşe girecek kişiyi iyileştir. Duvarı sadece geciktirmek için değil, görüş hattını tamamen kesmek için koy. İyileştirirken köşe arkasına geç — açıkta iyileştirmek seni bedava hedef yapar.
 
 **Tahmin edilebilirse:**
 Duvarın her round aynı yerde, düşman biliyor. Açıyı değiştir. Slow'u push'a reaktif at, boş alana erken atma. Duvarı bazı round'lar saldırıda alan açmak için kullan — sadece savunma aracın değil.
+
+## Sage'e Karşı Oynarken
+Bu bölüm düşman kompunda Sage varken geçerlidir. Sage'li takıma karşı her kill yarımdır: beden yerde kaldıkça diriltme tehdidi sürer.
+- Birini indirdikten sonra bedenin göründüğü açıyı bırakma. Diriltmeye gelen Sage animasyon boyunca kıpırdayamaz ve silah çekemez — o anda vurursan tek pozisyondan iki sayı alırsın.
+- Sayı avantajını Sage ölmeden kesin sayma: Sage hayattayken üstünlüğün diriltmeyle eşitlenir — fazladan risk eklemeden önce Sage'i düşürmeyi öncele.
+- Duvar arkasındaki diriltmeyi engelleyemezsin; o zaman bedenin kalktığı noktayı gören açıyı kur — diriltilen oyuncu silahını yerden almadan dövüşe hazır değildir, doğduğu an açındaysa ikinci sayı bedavadır.

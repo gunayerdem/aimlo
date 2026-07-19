@@ -14,7 +14,7 @@ Kullanım: user message'daki [SİLAH+KOMP İPUCU] işaretçisinin gösterdiği b
 ## Silah Dersleri
 
 ### Operator / Marshal / Outlaw (keskin nişancı)
-**Buna öldüysen:** Keskin nişancı tek açı tutar; sen o açıya utility'siz çıktın. Atış sesinden hemen sonra FARKLI köşeden geniş açıyla peek at — iyi Op oyuncusu atıştan sonra kayar, aynı köşeden ikinci çıkış bedava ölüm. Hattın önüne smoke inince mesafeyi kapat; flash patlamadan o açıya adım atma. Marshal kafaya muhtaç: peek yüksekliğini değiştir, nişan takibini boz. Outlaw hafif zırhı gövdeden tek atar: o hatta ağır kalkanla çık; ilk atıştan hemen sonra ikinci namlu hazır, tek jiggle'a güvenme.
+**Buna öldüysen:** Keskin nişancı tek açı tutar; sen o açıya utility'siz çıktın. Atış sesinden hemen sonra FARKLI köşeden geniş açıyla peek at — iyi Op oyuncusu atıştan sonra kayar, aynı köşeden ikinci çıkış bedava ölüm. Hattın önüne smoke inince mesafeyi kapat; flash patlamadan o açıya adım atma. Marshal kafaya muhtaç: peek yüksekliğini değiştir, nişan takibini boz. Outlaw hafif zırhı gövdeden tek atar: o hatta ağır kalkanla çık; ilk atıştan hemen sonra ikinci namlu hazır, tek jiggle'a güvenme. Aynı keskin nişancıya aynı pozisyondan ikinci kez öldüysen açın ezberlendi — o hattı bir round tamamen boş bırak ya da peek'i farklı yükseklikten, smoke indikten sonra aç.
 **Bunu taşıyorsan:** Her atıştan sonra yer değiştir — atış sesin adresini söyler. Kaçışın (dash, teleport) yoksa yakın baskıda hattı erken terk et; ölürsen silah düşmana kalır.
 
 ### Vandal / Phantom / Guardian / Bulldog (tüfek)
@@ -22,7 +22,7 @@ Kullanım: user message'daki [SİLAH+KOMP İPUCU] işaretçisinin gösterdiği b
 **Bunu taşıyorsan:** Gücün ilk mermide — dur, sonra ateş et; koşarken sıkma. Uzun spreye güvenme, crosshair hep kafa hizasında. Phantom'daysan uzun hat düellosunu zorlama, mesafeyi kapat; Guardian'daysan tek tık disiplini, yakın baskında geri çekil.
 
 ### Spectre / Stinger (hafif makineli)
-**Buna öldüysen:** Yakında tüfeği bile ezer, uzakta dağılır. Düşman bunu taşıyorsa zayıf ekodadır: mesafeyi aç, dar köşeyi çıkmadan nişanla, yakın açı verme. Bu roundu tam baskıyla al — kaybederlerse yine düşük ekoya düşerler; sen de eco'daysan save yerine yarım alımla bas.
+**Buna öldüysen:** Yakında tüfeği bile ezer, uzakta dağılır. Düşman bunu taşıyorsa zayıf ekodadır: mesafeyi aç, dar köşeyi çıkmadan nişanla, yakın açı verme. Sen tam alımdayken buna öldüysen mesafe seçimini düşman yaptı — tüfeğin gücü orta-uzun hatta; dövüşü oraya çek, dar geçitte SMG mesafesine inme. Bu roundu tam baskıyla al — kaybederlerse yine düşük ekoya düşerler; sen de eco'daysan save yerine yarım alımla bas.
 **Bunu taşıyorsan:** Yakın açı seç, uzun hat düellosuna girme; ilk kontaktan sonra mesafe kapanıyorsa bas, açılıyorsa köşeye çekil.
 
 ### Judge / Bucky / Shorty (pompalı)
@@ -30,7 +30,7 @@ Kullanım: user message'daki [SİLAH+KOMP İPUCU] işaretçisinin gösterdiği b
 **Bunu taşıyorsan:** Dar köşe ve koridor bekle, açık alana taşınma; teması sen köşede karşıla. Uzaktan görüldüğün an silahın sıradanlaşır.
 
 ### Sheriff / Bandit / Ghost / Classic / Frenzy (tabanca)
-**Buna öldüysen:** Tabancada herkesin tek şansı kafa. Sheriff ve Bandit yakında kafadan tek atar (Bandit hafif zırhı da deler, hızlı tap'ler); Classic sağ tık ve Frenzy yakın mesafede erir. Sabit durma, hareketli peek at, mesafeyi aç — mesafe açıldıkça tabanca kafa isabetiyle bile öldürmez olur. Tabanca oyuncusu her atıştan sonra yeniden nişan alır: biri çıkar, öbürü hemen arkasından girer.
+**Buna öldüysen:** Tabancada herkesin tek şansı kafa. Sheriff ve Bandit yakında kafadan tek atar (Bandit hafif zırhı da deler, hızlı tap'ler); Classic sağ tık ve Frenzy yakın mesafede erir. Sabit durma, hareketli peek at, mesafeyi aç — mesafe açıldıkça tabanca kafa isabetiyle bile öldürmez olur. Sen tam alımdayken tabancaya öldüysen kredi avantajını mesafeyle çöpe attın — kısa açıya girme, düelloyu uzun hatta al. Tabanca oyuncusu her atıştan sonra yeniden nişan alır: biri çıkar, öbürü hemen arkasından girer.
 **Bunu taşıyorsan:** Dur-ateş, kafa hizası; ikinci mermiye güvenme. Ghost'la mesafeyi koru, Frenzy'yle yakına sok, Bandit'le seri tap at ama uzun hat düellosu arama.
 
 ### Odin / Ares (ağır makineli)

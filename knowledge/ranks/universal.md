@@ -67,6 +67,7 @@ Yanlış yerde durduğun için vuruldun — açıkta kaldın, birden çok yerden
 - **MEANING** ölümün boşa gidiyor, kimse seni hemen geri alamıyor, takım sayı kaybediyor
 - **COUNTER** peek'ten önce yanındakiyle anlaş; "üç deyince" deyip aynı anda hareket edin; sen geniş açıyla peek at, o yan açıda hazır beklesin; vurulursan seni vuranı hemen geri alsın
 - **WHY** her ölüm hemen geri alınırsa sayı avantajın bozulmaz
+- **TRADE EDİLDİYSEN** ölümün takım arkadaşın tarafından hemen geri alındıysa (tradedByAlly) bu ölüm kurulum hatası değil, onay: space alımın işledi, sayı korundu — kurulumu değiştirme, aynı senkronu sonraki girişlerde de tekrarla
 
 ### Site'ı ilk seste bırakma
 
@@ -94,6 +95,7 @@ Doğru yerdeydin ama yanlış anda çıktın — pencere açıkken değil kapal�
 - **MEANING** operatör tek bir açıya kilitlidir ve sabit timing'le çıkan oyuncuyu bedavaya alır — sen ona kendi ritminde, beklediği anda hediye oldun
 - **COUNTER** o açıya util'siz ikinci kez aynı timing'le çıkma; üç seçenek: (1) takım smoke'uyla hattı kapat ve arkasından geç, (2) operatörcü açıdan çekildiği kısa aralıkta hemen re-peek at, (3) ikinci açıyı farklı yükseklikten ya da daha geniş swing'le zorla ki tek-açı nişanını bozsun
 - **WHY** operatör tek hedefe kilitlidir, ritim-okumaya açıktır — timing'ini değiştirirsen o silah pahalı bir dezavantaja döner; kaçıran operatörcü yakın mesafede en zayıf oyuncudur
+- **TEKRARLA BİRLEŞİRSE** killerInfo'daki silah keskin nişancıysa VE aynı pozisyonda üst üste öldüysen: o hatta üçüncü peek yok — açıyı bir round tamamen boş bırak, ya da ancak takım smoke'u inince farklı yükseklikten zorla; aynı adrese aynı ritimle üçüncü çıkış operatöre bedava atıştır
 
 ### Ayak sesi kesilince çık
 
@@ -211,6 +213,13 @@ Yanlış kararla öldün — almaman gereken dövüşe girdin, düşmanın elini
 - **MEANING** sonuca değil kararına bak — doğru karar verip kafadan vurulduğun round hata değildir; düşman ıskaladığı için tutan yanlış karar ise yine hatadır
 - **COUNTER** round bitince ölümünü yeniden düşün: karar bilgine göre doğruysa sonraki clutch'ta tereddütsüz tekrar ver; yanlıştı ama tuttuysa yine de bırak
 - **WHY** doğru karar tekrarlandığında tutarlı sonuç üretir, sonuç eninde sonunda döner
+
+### Dolu ult'la ölme — hazır ult'u cebinde gömme
+
+- **IF** öldüğünde ult'un hazırsa (ultReady) ve bu round hiç kullanılmadıysa
+- **MEANING** tek ölümle iki kayıp verdin: sayı düştün ve round'u çevirecek aracın sahaya hiç çıkmadı — düşman o baskıyı hissetmeden round'u aldı
+- **COUNTER** ult'un dolduğu andan itibaren risk hesabını değiştir: ölüm riski yüksek hamleyi (ilk peek, solo giriş) ult'suz alma — hamleyi ult'la aç ya da ult'u kullanacağın anı görene kadar ilk teması takımına bırak
+- **WHY** dolu ult bedava bir round-çevirme hakkıdır; ult sonraki round'a taşınır ama bu round sensiz ve ult'suz oynandı — o hakkın bedelini bu round ödedi
 
 ## Avantaj Yönetimi — Üstünlüğü Sadeleştir
 
@@ -431,6 +440,7 @@ Round mesajında [ÖLÜM-TİPİ İPUCU] varsa tipi ORADAN al, kendin türetme �
 - **Avantajlı durumda ölüm** (sayı üstünündeyken gereksiz peek) → Avantaj Yönetimi blokları.
 - **Clutch ölümü** (son canlı sensin, 1vX) → Clutch'ı 1v1 dizisine indir + baskıda üç soru.
 - **Erken round ölümü** (pistol / ilk silah round'u) → Erken Round bloğu.
+- **Dolu ult'la ölüm** (ultReady doluyken öldün) → Karar ve Ekonomi: Dolu ult'la ölme.
 - **Kör giriş ölümü** (util'siz açık alanda giriş denemesi) → Erken Round'daki util'le giriş dersi + Pozisyon: siperin yanında dur.
 - **Post-plant ölümü** (spike kurulu + sen saldırıdasın) → Post-Plant Ölümleri blokları.
 - **Retake ölümü** (spike kurulu + sen savunmadasın) → Retake Ölümleri blokları.
