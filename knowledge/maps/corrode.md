@@ -1,10 +1,14 @@
 ---
-map: Corrode
+type: map
+map: corrode
 patch: "13.00"
-verified: 2026-07-08
+verified: 2026-07-19
+pool: "rotasyon-dışı (rekabetçi) — V26 Act 2'de (Nisan 2026) rekabetçi havuzdan çıktı; Unrated/Swiftplay gibi rekabetçi-dışı modlarda oynanmaya devam ediyor"
 ---
 
 # CORRODE — Koçluk Rehberi
+
+> Havuz notu: Corrode 13.00 rekabetçi havuzunda değil (V26 Act 2'de çıktı) — Unrated ve Swiftplay gibi modlarda hâlâ karşına çıkar. Bu rehber o maçlar için geçerli.
 
 ## 1. Harita Karakteri
 

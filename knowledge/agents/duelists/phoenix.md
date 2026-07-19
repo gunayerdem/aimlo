@@ -81,13 +81,23 @@ WHY: Phoenix'in tek molly'si var; her round'u iyileşmeye harcarsan post-plant't
 - **Split:** A Main ve B Heaven'da flash-peek güçlü. Uzun site dövüşlerinde molly iyileşmesi fark yaratır.
 
 **Phoenix'in zayıf olduğu haritalar:**
-- **Breeze:** Uzun görüş hatları flash değerini düşürür. Geniş alanlar ateş duvarını işlevsiz kılar.
+- **Breeze:** Rework öncesi en zayıf haritandı; rework sonrası durumu aşağıdaki Breeze bloğunda.
 - **Icebox:** Dikey dövüşler yer seviyesi flash'inin etkisini düşürür. Geniş site'lar duvarı seyreltir.
 
 **Summit (yeni harita — durumsal):**
 - Geniş Summit hat seçimini zorunlu kılar: uzun A Main boyu flash menzilini aşar — flash-swing'i A Garden'lı site ağzına ve A Link gibi dar geçişlere kur, körlenen düşmanla dövüş mesafesinde kal.
 - Ateş duvarını Mid Fountain'in çapraz açılarından birini kesmek için at — Fountain'e utility'siz peek atma. B'de duvarı B Tower görüş hattına koy, geniş girişi tek açıya indir.
 - A Wall, Mid Wall ve B Wall düştü mü o rota round boyunca kapalı — daralan tek girişte flash'ın değeri artar, girişini oraya kur. Düşen duvarın altında molly ile iyileşmeye durma ve ult dönüş noktanı duvar düştüğünde takımından kopacağın tarafa koyma; duvarın altında kalan ölür.
+
+**Breeze (rework sonrası — durumsal):**
+- A Main gibi uzun hatlar hâlâ flash menzilini aşar — uzun açıda silikleşirsin; dövüşünü koridorlaşan Mid'e ve kapı geçişlerine taşı: flash'ı dar boğazda sektir, patlarken çık, körlenen düşmanla dövüş mesafesinde kal.
+- Ateş duvarını B Main girişine koy — site içinden ve B Window'dan gelen çapraz açının birini kes, iki açılı girişi tek açıya indir.
+- Otomatik kapıların sesi savunucuya bedava bilgi: sesi duyan açıyı önceden nişanlar — kapıdan geçeceksen flash önde gitsin, sen arkasından; ya da sesi yem yap, gerçek geçişi başka anda yap.
+
+**Corrode:**
+- A Main senin girişin: flash'ı köşeden sektir, patlama anında gir — Elbow ve Pocket temizlenmeden hiçbir A girişi güvenli değil, köşeleri flash'la aç.
+- Stairs–Top Mid uzun hattını zorlama — flash orada yetişmez, savunucu uzaktan seni keser; rotanı A Link / B Link dar geçişlerine kur.
+- B'ye girerken ilk util Tower'a: flash'ınla o açıyı boz ya da takım smoke'unu bekle — dikey kapanmadan site'a yayılma. Yard'ı görüş hattı kesilmeden koşarak geçme.
 
 **Karar notu (radiant):** Phoenix dar koridorlarda ve tek-açı geçişlerde parlar; geniş açık alanda silikleşir. Bu yüzden haritayı seçemezsin ama nereden gireceğini seçebilirsin: aynı haritada bile dar bir giriş hattı (B Main, Hookah, daracık bir geçit) seç, geniş açık peek'ten kaçın. Flash'in körlüğü kısa — körleşen düşmanla aranda 1-2 metrelik dövüş mesafesi olmalı ki körlük penceresinde temas kurabilesin. Uzun mesafede flash patlar, sen yetişemeden düşman görüşünü toplar. Ateş duvarı bir bütçedir: turun başında "duvarı görüş kesmeye mi, post-plant alan reddetmeye mi saklıyorum" diye karar ver, ortada harcama.
 

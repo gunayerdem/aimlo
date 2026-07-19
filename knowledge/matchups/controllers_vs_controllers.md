@@ -33,3 +33,7 @@ Aynadaki controller'a sürekli ölüyorsan smoke savaşını değil, smoke sonra
 
 ## Koç Notları
 Çift-controller round'unda avantaj ikinci smoke'u atana geçer: ilk smoke planı açık eder, ikinci smoke o plana cevap verir. Rakibin perdesini gördüğünde planını okudun demektir — kapattığı açıdan gelecekler. Kendi perdeni bu bilgiyle at; körü körüne değil, cevap olarak.
+
+## Clove Varsa: Diriliş Penceresi
+
+Düşman kompunda Clove varsa Clove üzerine aldığın kill'i teyit etmeden sayma: Clove kendini diriltebilir ve hep bedeninin olduğu adreste kalkar. Dirilen Clove süre içinde kill ya da hasarlı asist çıkaramazsa kendiliğinden ölür — o pencerede panik peek atma, geri çekil ve temas verme; gerekirse beden açısını perdenle kes, hedef göremeyen Clove'u süre senin yerine bitirir. Clove öldükten sonra bile smoke atar: o perde ezberden ve sesten beslenir — ses disiplinini koru ki duman yanlış adrese insin; ölü Clove'un dumanına canlı controller tepkisi diye oynama.

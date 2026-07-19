@@ -1,6 +1,9 @@
 ---
+type: map
+map: abyss
 patch: "13.00"
-verified: 2026-07-08
+verified: 2026-07-19
+pool: "rotasyon-dışı — V26 Act 2'de (Nisan 2026) rekabetçi havuzdan çıktı, 13.00 havuzunda değil"
 ---
 
 # ABYSS — Koçluk Rehberi

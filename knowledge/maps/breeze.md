@@ -1,6 +1,9 @@
 ---
+type: map
+map: breeze
 patch: "13.00"
-verified: 2026-07-08
+verified: 2026-07-19
+pool: "aktif — patch 12.00 rework'üyle (V26 Act 1, Ocak 2026) rekabetçi havuza döndü, 13.00 rekabetçi havuzunda"
 ---
 
 # BREEZE — Koçluk Rehberi

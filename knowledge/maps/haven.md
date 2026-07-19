@@ -1,7 +1,9 @@
 ---
-map: Haven
+type: map
+map: haven
 patch: "13.00"
-verified: 2026-07-08
+verified: 2026-07-19
+pool: "aktif — 13.00 rekabetçi havuzunda"
 ---
 
 # HAVEN — Detaylı Strateji ve Analiz

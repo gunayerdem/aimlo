@@ -33,3 +33,7 @@ Sentinel'li kompa sürekli ölüyorsan tempon yanlış: kilitli alana kilidin be
 
 ## Koç Notları
 Controller sentinel'in doğal panzehiridir: onun gücü sabit kurulumda, seninki o kurulumu görünmez kılmakta. Uzayan round'dan korkma — kurulumu sökülmüş sentinel yeteneksiz bir çapa oyuncusudur ve site'ı perdene karşı tek tüfekle tutar.
+
+## Clove Varsa: Diriliş Penceresi
+
+Düşman kompunda Clove varsa Clove üzerine aldığın kill'i teyit etmeden sayma: Clove kendini diriltebilir ve hep bedeninin olduğu adreste kalkar. Dirilen Clove süre içinde kill ya da hasar çıkaramazsa kendiliğinden ölür — o pencerede panik peek atma, geri çekil ve temas verme; gerekirse beden açısını perdenle kes, hedef göremeyen Clove'u süre senin yerine bitirir. Clove öldükten sonra bile smoke atar: o perde ezberden ve sesten beslenir — ses disiplinini koru ki duman yanlış adrese insin; ölü Clove'un dumanına canlı controller tepkisi diye oynama.

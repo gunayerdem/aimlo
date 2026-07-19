@@ -128,6 +128,12 @@ A Main ve B Main girişleri smoke için iyi ama açık mid'de sersemletme kolay 
 ### Icebox
 A site'ın çok katlı yapısı smoke yerleştirmeni zorlar — yükseklik farkı olan alanlarda smoke'u önceden dene. B tünel girişi smoke + sersemletme için uygun ama geniş B site'ta etki dağılır. Bu haritada Viper daha güçlü bir tercih.
 
+### Corrode
+Uzun mid şeridi ve Yard cross'u smoke'suz oynanmaz — smoke önceliğin bu iki hat. Yard'ı geçecek takıma smoke ile hız desteğini birlikte ver: duman inince desteği bas, açık alan daha kısa sürede geçilir. Elbow ve Pocket dar köşe — sersemletmeyi köşeyi tutan savunucuya at, nişanı titrerken takım geçsin. Mid Window rotasyon kapısı: sesi dinle, smoke'u gerçek push'un geldiği hatta koy — erken yüklenen duman yanlış hattı kapatır. B retake'inde ilk iş Tower — smoke'u o açıya sakla, retake'e giren hasarlı arkadaşına heal at.
+
+### Breeze
+Rework sonrası Nest ve Mid koridor ağızları standart smoke'la tam kapanıyor — kitin burada tam iş görür. Smoke önceliğin A Main'in uzun hattı ve Nest; B'de Window hattını kes. Çift kapının (Chute) sesi bedava haber: ses gelince sersemletmeyi kapı çıkışına at, çıkan düşman sersem yakalanır. Uzun hattı geçecek entry arkadaşına hız desteğini girişten hemen önce bas — açık alanda geçirilen süre kısalır. Rotasyonlar kısaldı, retake erken gelir — bir smoke'u ve mümkünse bir heal'i post-plant'e sakla.
+
 ### Summit
 Yeni harita — geniş görüş hatları smoke planını sınar. Smoke önceliğin A Main görüş hattının ortası ve Mid Fountain; geniş B site retake'i smoke'suz girilmez, en az bir smoke'u oraya sakla. Hız desteğini uzun giriş koridorlarında (A Main, B Main) entry'den hemen önce bas — arkadaşın açık alanı daha kısa sürede geçer; sersemletmeyi A Garden ya da B Tower gibi dar açıyı tutan savunucuya at. Düşürülebilir duvarlar (A Wall, Mid Wall, B Wall) düştü mü o rota round boyunca kapalı: kapanan girişi hesaba kat, smoke'unu kalan rotaya kaydır ve düşen duvarın altında durma — altında kalan ölür.
 

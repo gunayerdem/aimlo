@@ -1,6 +1,9 @@
 ---
+type: map
+map: ascent
 patch: "13.00"
-verified: 2026-07-08
+verified: 2026-07-19
+pool: "aktif — V26 Act 3'te (patch 12.08, Nisan 2026) Bind'in yerine havuza döndü, 13.00 rekabetçi havuzunda"
 ---
 
 # ASCENT — Koçluk Rehberi
@@ -12,8 +15,6 @@ Ascent mid-merkezli bir harita. Mid'den hem A'ya hem B'ye doğrudan geçiş var 
 Bu harita savunucuyu seviyor. A site'ta Heaven yüksekliği ve açık görüş var. B site'ta dar girişler ve Market bağlantısı crossfire kurmayı kolaylaştırıyor. Bu avantajı kırmak istiyorsan util kullan — utility'siz peek atarak site almaya çalışırsan round'u kaybedersin.
 
 Ascent'in imzası iki mekanik kapı: biri Garden'dan A site'a inen geçidi, diğeri savunma spawn tarafından B site'a giren arka geçidi kapatır. Kapı panelden açılıp kapanır, kurşunla kırılır — kırmak ses verir ve zaman yer, kırılan kapı o round geri gelmez. Kapıyı plana kat: savunmada erken kapatıp flank yolunu kes, saldırıda kapalı kapıya körlemesine execute atma — ya paneli ele geçir ya kırarken vereceğin sesi zamanlamana koy. Post-plant'te B kapısını kapatmak CT retake yolunu keser, bedava zaman kazandırır.
-
-Haritanın temposu mid kontrolüyle döner. Mid'i tutuyorsan bilgi senin elinde, rotasyon serbest. Mid'i bırakırsan her round kör oynarsın — karşı takıma bedava flank yolu ve bilgi vermiş olursun.
 
 ## 2. Ölüm Bölgeleri
 
@@ -164,6 +165,12 @@ Site başına util sırası:
 - **B retake:** Market çıkışına önce flash — post-plant oyuncusu o kapıyı nişanlamış bekler. Closet'a molly, spike ile B Main açısı arasına smoke; Market + CT + Closet kollarından birlikte gir. B kapısı kapatılmışsa kırma sesini girişinle aynı ana denk getir — ses zaten çıkacak, bari saldırgan sana dönemeden çıksın.
 
 **WHY:** Post-plant tutan saldırgan senin nereden geleceğini biliyor ve ona göre durmuş. Tek yönden girersen tek açıya odaklanır, seni öldürür. Birden fazla yönden aynı anda girersen hangi yöne bakacağını seçmek zorunda kalır — o tereddüt senin avantajın.
+
+### Site Bazlı Retake Rotaları
+
+- **A Retake**: Ana kol Heaven'dan yükseklikle girer, ikinci kol CT'den Hell üzerinden site zeminine iner; A Main tutulmuyorsa üçüncü açı oradan bassın. Saldırganın A Main + A Short crossfire'ını kır — util sırası yukarıda. Wine ve Tree köşeleri temizlenmeden defuse'a başlama; Heaven sende olunca defuse eden arkadaşını yukarıdan korursun.
+- **B Retake**: Ana kol Market'ten girer, ikinci kol CT B'den Switch tarafına basar. Saldırgan post-plant'te B Main + Market crossfire'ına yaslanır — Market çıkışına flash, Closet'a molly ile iki açıyı da sök. Üçüncü seçenek Boathouse: oradan B Main hattının arkasına sarkarsın, post-plant oyuncusu önünü tutarken arkadan düşürürsün. B kapısı kapalıysa kırma sesini girişle aynı ana denk getir.
+- İki sitede de sıra aynı: önce bilgi (bot ya da recon), sonra util, sonra kollar aynı anda girer. İlk düşman düşünce kalanlar pozisyon değiştirmek zorunda kalır — ikinci kol tam o anda bassın.
 
 ## 5. Agent Tier Listesi
 

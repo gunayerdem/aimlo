@@ -1,6 +1,9 @@
 ---
+type: map
+map: bind
 patch: "13.00"
-verified: 2026-07-08
+verified: 2026-07-19
+pool: "rotasyon-dışı — V26 Act 3'te (patch 12.08, Nisan 2026) rekabetçi havuzdan çıktı, 13.00 havuzunda değil"
 ---
 
 # BIND — Koçluk Rehberi
@@ -148,7 +151,7 @@ WHY: Bind'in geniş site'leri yüzünden tek yönden retake tüm açılara açı
 ## 7. Callout'lar & Pozisyon Rehberi
 
 ### A Site Callout'ları
-- **A Heaven**: Site'in üstündeki yükselti. Buradan tüm saldırıyı yukarıdan okursun. Güçlü — ama flash'la veya smoke'la içini alan biri seni çıplak bırakır.
+- **A Heaven (resmi ad: A Tower)**: Site'in üstündeki yükselti. Buradan tüm saldırıyı yukarıdan okursun. Güçlü — ama flash'la veya smoke'la içini alan biri seni çıplak bırakır.
 - **A Hell**: Heaven'ın altındaki boşluk. Heaven'dan drop atarsan veya sessiz girmek istersen burası. Saldırı buraya bakmayı unutur.
 - **A Lamps**: A Short tarafındaki karanlık alan. Off-angle için biçilmiş kaftan — saldırı oraya bakacağını aklına getirmez. İlk birkaç round'da yerini ele verme.
 - **A Short**: A Bath ile A site'ı birbirine bağlayan dar geçit; burada A'dan B'ye giden teleporter'ın GİRİŞİ var (A Short → B Window). Çıkış değil — tehdit A Bath ve Lamps yönünden gelir. Burayı tek başına tutmaya kalkma — A Bath ile Lamps açısını aynı anda göremezsin.

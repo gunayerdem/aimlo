@@ -25,12 +25,12 @@ Spike kurulduktan sonra ilk iş siteyi taramak. Recon, kamera, bot — elinde ne
 
 ### 2. Util Sırasını Bozma
 
-- **İlk:** Recon. Pozisyonları öğren, açıyı netleştir.
-- **İkinci:** Smoke. Bir açıyı kapat, tek tarafa odaklan.
-- **Üçüncü:** Molly. Saldırıyı post-plant oturduğu yerden kaldır.
-- **Dördüncü:** Flash. Tam giriş anında, öne at.
+- **İlk:** Recon. Girişten önce pozisyonları öğren, açıyı netleştir.
+- **İkinci:** Smoke. Saldırının siteyi tuttuğu en tehlikeli hattı kes — göremeyen rakip girişte ateş açamaz.
+- **Üçüncü:** Flash. Tam giriş anında öne gönder; takım flash patlarken siteye girer.
+- **Dördüncü:** Molly. Bilinen post-plant köşesini girişle aynı anda sök — rakip ya hasar alır ya açılır.
 
-Bu sırayı bozarsan util çöpe gider. Molly atmadan flash atarsan rakip zaten kapanmış olur, flash'ı yer, sen açıkta ölürsün.
+Bu sırayı bozarsan util çöpe gider. Giriş util'ini girişten önce harcarsan rakip kapanıp yeniden pozisyon alır, giriş anında elin boş kalır: flash ve molly giriş anına aittir.
 
 ### 3. Birlikte Gir
 
@@ -82,28 +82,28 @@ Bu ikisinden birini seçmeden girme. 2v4'e kör girmek save yapma fırsatını �
 
 ### 1vX Clutch
 
-Spike'a koşma. En sık yapılan hata bu.
+Son savunmacı sensin, saat senin aleyhine — ama siteye düz koşma. En sık yapılan hata bu.
 
 Yapacağın şu:
-1. **Off-angle bul.** Rakip standart check açılarını tarar — sen orada durma.
-2. **Bekle.** Rakip defuse başlatınca pozisyonu sabitlenir ve açılır. İşte o an peek at.
-3. **1 kill al, çekil.** Multi-kill peşinde koşma. 1 kill, yeniden konumlan, tekrar bekle.
-4. **Shift yürü.** Ayak sesi verme, adımlarını kıs.
+1. **Sessiz yaklaş.** Adımlarını kıs, ayak sesi verme. Saldırı kurulu spike'a güvenip dağılıyorsa fark edilmeden siteye sok.
+2. **Defuse dokunuşuyla util'i boşa attırt.** Spike'a otur, ses ver, hemen bırak, sipere geç. Saldırı post-plant için sakladığı molly'yi ve peek'ini o sese harcar — sen siperdeyken boşa gider.
+3. **Peek atanı off-angle'dan vur.** Defuse sesi saldırıyı sana gelmeye zorlar; standart check açısında durma, geleni beklemediği açıdan indir, sonra yeniden konumlan.
+4. **Gerçek defuse'u ayak sesi kesilince aç.** Siteden gelen ses tamamen kesilmeden oturma; ses dönerse bırak ve sipere kapan. Yarıyı geçtiysen ilerleme saklı kalır — düelloyu kazanınca kalan yarıdan bitirirsin.
 
-Ult'un varsa kullan. Sage ult, Viper ult, KJ ult, Fade ult — clutch için sakladığın ult round'u çevirir. Ult elinde dururken ölme — kullanmadıysan zaten kaybettin.
+Ult'un varsa clutch için sakladığın ult round'u çevirir — siteyi boşaltan ya da defuse'u koruyan ult'u burada kullan. Ult elinde dururken ölme — kullanmadıysan zaten kaybettin.
 
 ## UTIL SIRASI — NEDEN ÖNEMLİ
 
 Elinde 5 flash olması tek başına bir şey ifade etmez. Yanlış sırayla atılan 5 flash boşa gider.
 
 Sıra şu:
-1. Recon — pozisyon öğren.
-2. Smoke — bir açıyı kapat.
-3. Molly — saldırıyı yerinden kaldır.
-4. Flash — giriş anında öne at.
-5. Ult — son an için sakla.
+1. Recon — girişten önce pozisyon öğren.
+2. Smoke — en tehlikeli hattı kes.
+3. Flash — giriş anında öne gönder.
+4. Molly — girişle aynı anda bilinen post-plant köşesine.
+5. Ult — clutch ve defuse koruması için sakla.
 
-Molly'yi atlayıp flash atarsan rakip post-plant'te oturur, flash'ı görmez, sen açıkta ölürsün.
+Sıra bilgiden girişe akar: önce gör, sonra kapat, giriş util'ini giriş anında at. Erken atılan flash'ı kapanan rakip yemez, giriş anında elin boş kalır.
 
 ## YAYGIN HATALAR
 
@@ -134,16 +134,16 @@ Rakip aynı spike noktasına sürekli molly atıyor, sen her seferinde tam orada
 - Elinde flash + molly varsa.
 - Saldırı tek noktada toplanmışsa.
 
-**Bekle (defuse sesine kadar):**
-- Sayı çok düşükse (2v4, 3v5).
+**Girme — silahı taşı ya da sessiz defuse şansı kolla:**
+- Sayı çok düşükse (2v4, 3v5) — umutsuz retake iki round birden kaybettirir.
 - Util bitmişse.
 - Saldırı site'a yayılmışsa — her açı dolu, giren ölür.
-- Round zaten satılabilir durumdaysa.
+- Round zaten satılabilir durumdaysa — tutulmayan yoldan ayrıl, tüfeği sonraki round'a taşı; saldırı siteden uzaklaştıysa sessiz defuse'u dene, ses dönerse bırak.
 
 ## RANK BAZINDA NOTLAR
 
 **Gold-Plat:** Retake'e plan yapmadan giriyorsun. Kim nereden girecek, hangi util, hangi sırayla — bunları konuşmadan "go" demek yetmez. Takımda kimse plan söylemiyorsa sen söyle: "Ben A'dan flash atıyorum, sen B'den gir."
 
-**Diamond-Ascendant:** Util'i biliyorsun ama zamanlamayı kaçırıyorsun. Flash, peek'ten önce patlıyor. Molly'yi defuse sesine göre değil, giriş kararına göre at. Recon ilk, smoke ikinci, molly üçüncü, flash dördüncü.
+**Diamond-Ascendant:** Util'i biliyorsun ama zamanlamayı kaçırıyorsun. Flash, peek'ten önce patlıyor. Giriş util'ini giriş kararına göre at: recon girişten önce, smoke ilk, flash giriş anında, molly girişle aynı anda.
 
 **Immortal-Radiant:** Karşı takım retake girişini okumuş, seni bekliyor. Sürekli aynı açıdan girersen hazır dururlar. En az 2-3 farklı retake girişin olsun — A site'da ramp'tan gir, CT'den gir, ya da ikisini aynı anda zorla. Her round aynısını yapma. Rotation sesini ve hızını dinle: rakip ayak sesini sakınmadan koşarak dönüyorsa site'a geç kapanmıştır, o boşlukta farklı açıdan gir.

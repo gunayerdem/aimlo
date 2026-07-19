@@ -33,3 +33,7 @@ Controller'lı kompa üst üste ölüyorsan keşfinle dumanın saati uyuşmuyor 
 
 ## Koç Notları
 Controller'a karşı en değerli sayaç duman sayısıdır: kaç duman atıldı, kaç kaldı? Dumanı biten controller çıplaktır — keşfini o pencereye denk getirirsen bilgin karşılıksız kalmaz. Post-plant'te rol değişir: artık site açmıyorsun, siteyi tutuyorsun — keşif de girişe değil retake koluna akar.
+
+## Clove Varsa: Diriliş Penceresi
+
+Düşman kompunda Clove varsa Clove üzerine aldığın kill'i teyit etmeden sayma: Clove kendini diriltebilir ve hep bedeninin olduğu adreste kalkar. Dirilen Clove süre içinde kill ya da hasar çıkaramazsa kendiliğinden ölür — o pencerede panik peek atma, geri çekil ve temas verme; beden adresini gövdenle değil keşfinle izle, süre onu senin yerine bitirir. Clove öldükten sonra bile smoke atar: o perde ezberden ve sesten beslenir — ses disiplinini koru ki duman yanlış adrese insin; ölü Clove'un dumanına canlı controller tepkisi diye oynama.

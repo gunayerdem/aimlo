@@ -33,3 +33,7 @@ Ayna eşleşmede sürekli ölüyorsan sabırsız taraf sensin: rakip kurulumuna,
 
 ## Koç Notları
 Sentinel aynasında kazanan, düelloyu en az veren taraftır. Saat kimin lehineyse o beklesin: savunmadaysan saat zaten senin; saldırıdaysan yavaşlığı plansızlıkla karıştırma — yavaş başla ama execute'u tek dalgada, utility'yle bitir. Ve unutma: iki kurulumlu round'da en değerli bilgi rakibin nerede OLMADIĞIDIR — cihazının sessizliği de bilgidir.
+
+## Clove Varsa: Diriliş Penceresi
+
+Düşman kompunda Clove varsa Clove üzerine aldığın kill'i teyit etmeden sayma: Clove kendini diriltebilir ve hep bedeninin olduğu adreste kalkar. Dirilen Clove süre içinde kill ya da hasar çıkaramazsa kendiliğinden ölür — o pencerede panik peek atma, geri çekil ve temas verme; beden açısını gövdenle değil cihazınla tut, süre onu senin yerine bitirir. Clove öldükten sonra bile smoke atar: o perde ezberden ve sesten beslenir — ses disiplinini koru ki duman yanlış adrese insin; ölü Clove'un dumanına canlı controller tepkisi diye oynama.

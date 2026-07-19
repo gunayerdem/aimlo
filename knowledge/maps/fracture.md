@@ -1,8 +1,9 @@
 ---
-map: Fracture
+type: map
+map: fracture
 patch: "13.00"
-status: "rotasyon dışı (13.00) — rekabetçi harita havuzunda değil"
-verified: 2026-07-08
+verified: 2026-07-19
+pool: "rotasyon-dışı — 13.00'da rekabetçi havuzdan çıktı (V26 Act 2'de kısa süre havuzdaydı)"
 ---
 
 # FRACTURE — Detaylı Strateji ve Analiz
@@ -113,7 +114,7 @@ WHY: Fracture'in ortası savunmanın omurgası. Omurga kırılırsa iki site'i b
 ## 9. A Site Savunma
 - A Rope en güçlü pozisyon — yükseklik ve geniş açı var. Ama her round burada durma: 2-3 round sonra açıyı önceden tutarlar ve hedef olursun; site seviyesine in.
 - A Drop'tan gelen saldırgan drop sesiyle kendini ele verir — o sesi duyar duymaz açı tut. Ama drop'a molly veya smoke atmak daha sağlam, girişi yavaşlatır.
-- A Sand off-angle saldırganın aklında yoktur. İlk round burada oyna, birini öldür, pozisyonu değiştir.
+- Site içinde kutu arkası off-angle saldırganın aklında yoktur. İlk round burada oyna, birini öldür, pozisyonu değiştir.
 - İki yönden aynı anda geliyorlarsa: tel veya alarm util'ini Dish ya da Hall'dan birine koy, sen diğerini izle. Util tetiklenince reaksiyon zamanın olur.
 
 ## 10. B Site Saldırı

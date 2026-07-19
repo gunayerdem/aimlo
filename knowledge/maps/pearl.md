@@ -2,7 +2,7 @@
 type: map
 map: pearl
 patch: "13.00"
-verified: 2026-07-08
+verified: 2026-07-19
 pool: "rotasyon-dışı — 13.00'da rekabetçi havuzdan çıktı"
 ---
 

@@ -1,7 +1,9 @@
 ---
-map: Icebox
+type: map
+map: icebox
 patch: "13.00"
-verified: 2026-07-08
+verified: 2026-07-19
+pool: "rotasyon-dışı — 2026 rekabetçi havuzlarına (12.00/13.00) girmedi"
 ---
 
 # ICEBOX — Detaylı Strateji ve Analiz
@@ -177,7 +179,7 @@ Rakibin Op'unun kimde olduğunu, nerede durduğunu ve save edip edemediğini rou
 ## 11. Temel Pozisyonlar ve Callout'lar
 - **A Tarafı**: A Belt / A Main / A Pipes / A Rafters / A Nest / A Screens / A Site / A Zip / A Box / A Default (plant)
 - **B Tarafı**: B Main / B Orange / B Green / B Yellow / B Snowman / B Kitchen / B Site / B Hall / B Default (plant)
-- **Mid**: Mid / Tube / Boiler / Blue / Mid Pillar
+- **Mid**: Mid / Tube / Boiler / Blue / Pallet
 - **Genel**: CT Spawn / T Spawn
 
 ### Callout Açıklamaları

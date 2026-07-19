@@ -33,3 +33,7 @@ Initiator'lı kompa sürekli ölüyorsan ritmi yanlış okuyorsun; zincir hiç d
 
 ## Koç Notları
 Controller'a karşı initiator'ın tek gerçek hedefi seni erken düşürmektir: controller ölünce takımın perdesi ölür. En değerli alışkanlığın hayatta kalmak — smoke'ların tüfeğinden değerlidir. Rakibin yetenekleri bittiğinde hâlâ ayaktaysan round senin alanında oynanır.
+
+## Clove Varsa: Diriliş Penceresi
+
+Düşman kompunda Clove varsa Clove üzerine aldığın kill'i teyit etmeden sayma: Clove kendini diriltebilir ve hep bedeninin olduğu adreste kalkar. Dirilen Clove süre içinde kill ya da hasar çıkaramazsa kendiliğinden ölür — o pencerede panik peek atma, geri çekil ve temas verme; gerekirse beden açısını perdenle kes, hedef göremeyen Clove'u süre senin yerine bitirir. Clove öldükten sonra bile smoke atar: o perde ezberden ve sesten beslenir — ses disiplinini koru ki duman yanlış adrese insin; ölü Clove'un dumanına canlı controller tepkisi diye oynama.

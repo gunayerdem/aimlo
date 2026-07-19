@@ -2,7 +2,7 @@
 id: matchup_duelists_vs_controllers
 type: matchup
 patch: "13.00"
-verified: 2026-07-08
+verified: 2026-07-19
 tags: [matchup, duelist, controller, role_fallback]
 ---
 
@@ -33,3 +33,7 @@ Controller'lı takıma üst üste ölüyorsan dumanla savaşıyorsun demektir �
 
 ## Koç Notları
 Controller'a karşı en değerli bilgi duman sayacı: kaç duman attı, kaç kaldı? Dumanı biten controller çıplaktır — o roundun geri kalanında tempo tamamen senindir. Takımına da söylet: "duman bitti" çağrısı, duelist için "gir" emridir.
+
+## Clove Varsa: Diriliş Penceresi
+
+Düşman kompunda Clove varsa Clove üzerine aldığın kill'i teyit etmeden sayma: Clove kendini diriltebilir ve hep bedeninin olduğu adreste kalkar. Dirilen Clove süre içinde kill ya da hasar çıkaramazsa kendiliğinden ölür — o pencerede panik peek atma, geri çekil ve temas verme; dirilen bedene ikinci düelloya koşma, hızını mesafe açmak ve açı değiştirmek için kullan, süre onu senin yerine bitirir. Clove öldükten sonra bile smoke atar: o perde ezberden ve sesten beslenir — ses disiplinini koru ki duman yanlış adrese insin; ölü Clove'un dumanına canlı controller tepkisi diye oynama.

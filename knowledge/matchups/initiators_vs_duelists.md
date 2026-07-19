@@ -33,3 +33,7 @@ Duelist-ağır kompa üst üste ölüyorsan hikâye neredeyse hep aynıdır: ke�
 
 ## Koç Notları
 Duelist komp yetenekten değil hızdan beslenir; sen yeteneklerinle o hızı yavaşlatırsın. En değerli alışkanlık: her açı değişiminde "keşfim hazır mı?" sorusu. Hazır değilse açıyı açma — bekleyen initiator, koşan duelist'ten daha zor öldürülür. Takımına da söylet: keşfin gösterdiği açı çağrıyla paylaşılırsa dive gücü tek kişiye değil beş kişiye çarpar.
+
+## Clove Varsa: Diriliş Penceresi
+
+Düşman kompunda Clove varsa Clove üzerine aldığın kill'i teyit etmeden sayma: Clove kendini diriltebilir ve hep bedeninin olduğu adreste kalkar. Dirilen Clove süre içinde kill ya da hasar çıkaramazsa kendiliğinden ölür — o pencerede panik peek atma, geri çekil ve temas verme; beden adresini gövdenle değil keşfinle izle, süre onu senin yerine bitirir. Clove öldükten sonra bile smoke atar: o perde ezberden ve sesten beslenir — ses disiplinini koru ki duman yanlış adrese insin; ölü Clove'un dumanına canlı controller tepkisi diye oynama.

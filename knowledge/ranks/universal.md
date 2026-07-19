@@ -218,10 +218,11 @@ Yanlış kararla öldün — almaman gereken dövüşe girdin, düşmanın elini
 
 ### Düşük canla dövüşü zorlama — silahı kurtar
 
-- **IF** ağır hasar yemişken ve sayı ya da pozisyon dezavantajındayken hâlâ dövüş arıyorsan
+- **IF** dövüş sayı ya da pozisyon olarak net aleyhine dönmüşken save yerine hâlâ dövüş arıyorsan
 - **MEANING** o dövüş çoktan kaybedilmiş; ölürsen silahın düşmana hediye gider
 - **COUNTER** dövüş aramayı bırak; tutulmayan bir açıdan spawn'a doğru çekil ve tüfeği sonraki round'a taşı; takım save sinyali verdiyse peek hiç atma, sadece hayatta kal
 - **WHY** kurtarılan tüfek sonraki round'un tam alımıdır; ölü tüfek düşmana bedava ikinci silah demektir
+- **NOT** can/HP durumu sinyallerde yok — feedback metninde can seviyesinden bahsetmek yasak; dersi cana değil karara bağla: kaybedilmiş dövüşü zorlama, silahı kurtar
 
 ### Clutch'ı 1v1 dizisine indir
 
@@ -499,7 +500,7 @@ Takım baskı kurarken haritanın uzak kolunda tek başınasın; lurk'ün değer
 - **Hep aynı rakibe** → Sızıntıyı kapat bloğu.
 - **Karar/ekonomi** (üstünlüksüz dövüş) → Karar ve Ekonomi blokları.
 - **Ucuz silaha ölüm** → Rakip eline bak; düşman ekonomisini round geçmişinden doğrula.
-- **Ağır hasarlıyken dövüş** → Düşük canla dövüşü zorlama — silahı kurtar.
+- **Kaybedilmiş dövüşü zorlama** (sayı/pozisyon net aleyhteyken ya da takım save çağrısındayken dövüş arama) → Düşük canla dövüşü zorlama — silahı kurtar; can durumunu metne yazma.
 - **Sayı üstünken gereksiz peek** → Avantaj Yönetimi blokları.
 - **Son canlı (1vX)** → 1v2 ise Clutch'ı 1v1 dizisine indir + baskıda üç soru; 1v3+ ve spike yoksa Sayı azken silahı taşı.
 - **Pistol/ilk silah** → Erken Round bloğu.
