@@ -99,6 +99,22 @@ WHY: Phoenix'in tek molly'si var; her round'u iyileşmeye harcarsan post-plant't
 - Stairs–Top Mid uzun hattını zorlama — flash orada yetişmez, savunucu uzaktan seni keser; rotanı A Link / B Link dar geçişlerine kur.
 - B'ye girerken ilk util Tower'a: flash'ınla o açıyı boz ya da takım smoke'unu bekle — dikey kapanmadan site'a yayılma. Yard'ı görüş hattı kesilmeden koşarak geçme.
 
+**Haven:**
+- Uzun hatlar (A Long, C Long) flash menzilini aşar — o koridorlara girişi takım smoke'una bırak; kendi dövüşünü Garage ve Mid Doors gibi dar geçişlere kur: dar kapıda flash'ten kaçış yok.
+- Mid Doors'tan B'ye girişte flash önde patlasın, sen patlamayla gir — dar giriş tek açıdan tutulur, körlenen savunucu o açıyı bırakmak zorunda kalır.
+- C Long'dan site'a cross'u açık geçme — C Platform yüksekten bakar; ateş duvarını cross hattına çek, o görüşü kes, duvar sönmeden geç.
+
+**Lotus:**
+- A Main'de Tree ve Stairs'ten çapraz açı bekler: flash'ı Stairs yönüne sektir, patlarken gir; Tree tarafını takım smoke'u kapatsın — iki açıya tek flash yetmez.
+- Dar B Main koridoru flash-girişinin evi: körlenen savunucunun uzun koridorda kaçacak yeri yok — patlamayla dal, dövüş mesafesinde kal.
+- Döner kapının sesi bedava yem: sesi ver, geçme — savunucu kapıya dönerken gerçek girişini flash'la başka koldan yap.
+- C Mound'u agresif tutan savunucuyu flash'la aç — sipere yapışan oyuncu körlendiğinde yükseklik avantajı biter.
+
+**Sunset:**
+- Kısa koridor haritası senin sahan: A Elbow'a flash atmadan girme — orası kapan; flash patlarken geç, körlenen savunucuyla zaten dövüş mesafesindesin.
+- Market'te iki açıdan (Boba + site içi) crossfire yersin — ateş duvarıyla birini kes, kalan açıya flash at; Market'te bekleme, karar ver ve geç.
+- Ateş duvarını B Main'in düz hattına koy — savunucu koridorun sonunu tutar, duvar o tek açıyı kapatınca giriş güvenli geçişe döner.
+
 **Karar notu (radiant):** Phoenix dar koridorlarda ve tek-açı geçişlerde parlar; geniş açık alanda silikleşir. Bu yüzden haritayı seçemezsin ama nereden gireceğini seçebilirsin: aynı haritada bile dar bir giriş hattı (B Main, Hookah, daracık bir geçit) seç, geniş açık peek'ten kaçın. Flash'in körlüğü kısa — körleşen düşmanla aranda 1-2 metrelik dövüş mesafesi olmalı ki körlük penceresinde temas kurabilesin. Uzun mesafede flash patlar, sen yetişemeden düşman görüşünü toplar. Ateş duvarı bir bütçedir: turun başında "duvarı görüş kesmeye mi, post-plant alan reddetmeye mi saklıyorum" diye karar ver, ortada harcama.
 
 ## 6. Eşleşme Notları
@@ -143,7 +159,9 @@ WHY: Phoenix'in tek molly'si var; her round'u iyileşmeye harcarsan post-plant't
 ### Duvarı yanlış koyduğunda
 "Duvarı kendi giriş yolunuza koydun, takım geçemedi. Duvar iki tarafı da kesiyor — onu düşmanın açısına koy, sizin koridora değil. Atarken 'duvar atıyorum, geçin' de ki takım zamanlamayı kaçırmasın."
 
-## Karşısında: Phoenix seni öldürdüyse
-- **Eğri flash + swing:** Phoenix flash'ı köşeden kıvırır ve patlamayla birlikte girer. Karşı-hamle: flash sesini duyduğun an arkanı dön, patlama biter bitmez geri dön — girişini senin körlük sürene ayarladı; erken toparlarsan ilk atış sende.
-- **Ateş duvarının içinden çıkış:** Duvar görüşü keser; Phoenix içinden canını doldurarak çıkar. Karşı-hamle: duvarın içine körlemesine sıkma — duvarın kenarını ya da çıkış ucunu hazır crosshair'le tut, duvardan çıktığı ilk an vur.
-- **Ultlu Phoenix dalışı:** Ult'la ölse bile başladığı noktaya geri döner. Karşı-hamle: ult bedenine mermi ziyan etme, geri çekilip trade pozisyonu kur — dönüş noktası sesle bellidir, oraya önceden nişanlan; döndüğü an düello senin şartlarında başlar.
+## 8. Bu Ajana Karşı
+- Phoenix'in kozu köşeden kıvrılan eğri flash: patlamayla aynı anda girer. Flash sesini duyduğun an arkanı dön, patlama biter bitmez geri dön — girişini senin körlük sürene ayarladı, erken toparlarsan ilk atış sende. Körlenmediysen açıyı sen bas: planı çöktü.
+- Ateş duvarı görüşü iki yönde de keser ve Phoenix içinden kendini iyileştirerek çıkabilir. Duvarın içine körlemesine sıkma — çıkış ucunu hazır crosshair'le tut, duvardan çıktığı ilk an vur.
+- Ult'la ölse bile başladığı noktaya geri döner. Ult bedenine mermi ziyan etme — geri çekilip trade pozisyonu kur; dönüş noktası sesle bellidir, oraya önceden nişanlan: döndüğü an düello senin şartlarında başlar.
+- Molly'siyle dövüş aralarında toparlanır — uzayan düelloda avantaj ona kayar. Dövüşü ilk temasta bitir ya da açıyı değiştir; kapak arkasında nefes penceresi verme.
+- Flash'ı boşa patladıysa (kimse körlenmedi, arkasından giriş gelmedi) pencere senindir: utility'siz Phoenix sıradan bir yakın mesafe duelist'i — mesafeyi aç, uzun açıdan dövüş.

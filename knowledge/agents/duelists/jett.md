@@ -89,6 +89,7 @@ WHY: Smoke'un kısa süreli; erken attıysan tam geçişte zaten dağılmış ol
 - **Summit'te zıplamayı geniş B'de kullan:** B Site'ın kutu ve siper bolluğu (Triples, Close Box) zıplama girişine sürpriz açı verir — göz hizasını tarayan savunucuyu üstten geç.
 - **Breeze (rework sonrası):** Uzun düello kimliği sürüyor — A Main ve B'nin uzun hatlarında Op-Jett hâlâ evinde; ama Mid koridorlaştı, tek Op ortayı kilitleyemez — okunduysan arkan kapılardan alınır, Op'u uzun hatta tut, koridor dövüşünde tüfeğe geç. Nest'e düz zıplama kalktı, yukarı çıkmak mobilite ister — zıplamanla çıkabilen az duelist'tensin: erken bilgi al, smoke gelince in, standart smoke Nest'i artık tam kapatıyor.
 - **Corrode:** Stairs–Top Mid haritanın en uzun hattı ve Op-Jett'in evi — hattı tut, vur, dash'le güvenliğe çekil; aynı açıya ikinci atış kovalama. A girişinde dash'ini Elbow ve Pocket temizlenmeden yakma — köşe dövüşü dash'i affetmez, önce util gör, sonra gir. B'ye girerken önce yukarı bak: Tower kapanmadan site'a yayılma; Yard'ı dash'le açık geçmeye kalkma — dash mesafeyi değil açıyı kapatır, smoke inince geç.
+- **Sunset — zayıf, açı seç:** Kısa koridor haritası hareket avantajını eritir — Op yalnız A Elbow ve Mid Top'ta işler, başka yerde alma, o parayı tüfeğe ver. Mid Courtyard'da agresif Op açısı var ama Courtyard açık alan: bilgi yoksa peek yok. Dash'ini A Elbow geçişine sakla — Elbow koridor değil kapan, önce flash ya da smoke gör, sonra gir. B Main dar ve düz: orada dash mesafe değil hedef kazandırır — girişini Market split'iyle eşle, takım iki koldan bassın.
 
 ## 6. Eşleşme Notları
 - **Sana zor:** Chamber (Op'una Op'la cevap verir, tuzağı dash hattını yakalar), Cypher (teli dash hattını yakalar), Killjoy (botu dash yönünü ele verir).
@@ -116,7 +117,9 @@ WHY: Smoke'un kısa süreli; erken attıysan tam geçişte zaten dağılmış ol
 ### Op'u yanlış kullanırken
 "Op'u dar koridorda taşıma, orada yavaş kalırsın. Op'u uzun hatta tut; köşelerde tüfeğe geç."
 
-## Karşısında: Jett seni öldürdüyse
-- **Dash-peek girişi:** Jett dash'le açıyı bir anda kapatır. Karşı-hamle: dash sesini duyduğun an bir adım geri çekil ve crosshair'i dash'in bittiği noktaya kilitle — dash biterken Jett silahını yeni topluyor, ilk atışı sen yap.
-- **Op + dash kaçışı:** Jett Op'la tutar, öldürür, dash'le çekilir. Karşı-hamle: aynı açıya utility'siz ikinci kez çıkma — açıyı flash ya da smoke ile bozup geniş peek'le bas; dash'ini az önce harcadıysa bu baskında kaçışı yok.
-- **Zıplamayla üstten gelen Jett:** Göz hizasındaki crosshair onu ıskalar. Karşı-hamle: zıplama sesinde yukarı bak — havada yavaş ve isabetsiz bir hedef, en savunmasız anı iniş anı; yere değdiği noktayı vur.
+## 8. Bu Ajana Karşı
+- Jett'in kozu dash-peek: açıyı bir anda kapatır ama dash biterken silahını yeni toplar. Dash sesini duyduğun an bir adım geri çekil, crosshair'i dash'in bittiği noktaya kilitle — ilk atışı sen yap.
+- Op'la tutar, vurur, dash'le çekilir. Aynı açıya utility'siz ikinci kez çıkma — açıyı smoke ya da flash ile boz, geniş açıyla peek at. Dash'i yeni harcadıysa kaçışı yok: yenilenmesi iki öldürme ister, baskıyı tam o pencerede kur.
+- Zıplamayla üstten gelir; göz hizasındaki crosshair onu ıskalar. Zıplama sesinde yukarı bak — havada yavaş ve isabetsiz bir hedef, en savunmasız anı iniş: yere değdiği noktayı vur.
+- Smoke'ları kısa ömürlü ve geçiş içindir — Jett smoke attıysa giriş o saniyede geliyor demektir. Dumanın söndüğü an açıyı geri bas; ikinci bir duman hakkı çoğu kez kalmamıştır.
+- Düelloyu Jett'in seçtiği anda alma: ilk peek hep onundur. Açıdan geri çekilip trade pozisyonuna yerleş — ilk teması karşılıksız bırakmadığın her düello Jett'in aleyhine döner.

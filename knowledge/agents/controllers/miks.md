@@ -128,6 +128,9 @@ A Main ve B Main girişleri smoke için iyi ama açık mid'de sersemletme kolay 
 ### Icebox
 A site'ın çok katlı yapısı smoke yerleştirmeni zorlar — yükseklik farkı olan alanlarda smoke'u önceden dene. B tünel girişi smoke + sersemletme için uygun ama geniş B site'ta etki dağılır. Bu haritada Viper daha güçlü bir tercih.
 
+### Sunset
+Kısa koridorlar ve dar girişler kite uygun bir zemin — sersemletme dar geçitte kaçış bırakmaz: A Elbow'u tutan savunucuya ya da Market kapısından geçene at, takım o pencerede girsin. Smoke önceliğin A Elbow ve yan açılar — A'da A Link çıkışı, B'de Market kapısı; yan açı açıkken siteye giren önünü temizlese bile yandan ölür. Mid Courtyard haritanın omurgası: Courtyard açık alan, oraya çıkacak arkadaşına hız desteğini girişten hemen önce bas, açıkta geçirilen süre kısalsın. Rotasyonlar kısa, retake erken gelir — bir smoke'u ve mümkünse bir heal'i post-plant'e sakla. Ult'u dar B Main girişinde takım arkasından girecekse bas — tek başına tur kazandırmaz.
+
 ### Corrode
 Uzun mid şeridi ve Yard cross'u smoke'suz oynanmaz — smoke önceliğin bu iki hat. Yard'ı geçecek takıma smoke ile hız desteğini birlikte ver: duman inince desteği bas, açık alan daha kısa sürede geçilir. Elbow ve Pocket dar köşe — sersemletmeyi köşeyi tutan savunucuya at, nişanı titrerken takım geçsin. Mid Window rotasyon kapısı: sesi dinle, smoke'u gerçek push'un geldiği hatta koy — erken yüklenen duman yanlış hattı kapatır. B retake'inde ilk iş Tower — smoke'u o açıya sakla, retake'e giren hasarlı arkadaşına heal at.
 

@@ -122,8 +122,13 @@ Düşman adapte olunca: Duvar kırmak için util getirmeye başlarlarsa — duva
 **Tahmin edilebilirse:**
 Duvarın her round aynı yerde, düşman biliyor. Açıyı değiştir. Slow'u push'a reaktif at, boş alana erken atma. Duvarı bazı round'lar saldırıda alan açmak için kullan — sadece savunma aracın değil.
 
+## 8. Bu Ajana Karşı
+- Sage'in kozu alan reddi: slow alanına bastığın an yavaşlarsın ve her adımın ses verir — yavaşken düello alma; geri çık, alan dağılana kadar bekle ya da rotanı değiştir.
+- Duvar anında katılaşmaz, aşağıdan yukarı yükselir — erken yakalarsan yükselirken altından vurulur; geç kaldıysan zorlamak yerine yeni açı kur. Sage duvarın üstüne çıkıp yükseklik de alır: duvar sesi geldiğinde yalnız zemin hizasını değil üst hattı da tara.
+- Sage kendini ve sıradaki dövüşçüyü dövüşten önce iyileştirir — çip hasarına güvenip aynı düelloyu ikinci kez alma; ya bitir ya baştan kur. İyileştirme animasyonunda silah çekemez, o âna denk gelen peek bedavadır.
+- Sage'li takıma karşı her kill yarımdır: beden yerde kaldıkça diriltme tehdidi sürer. Bedeni gören açıyı bırakma — diriltmeye eğilen Sage animasyon boyunca kıpırdayamaz ve silah çekemez; o pencerede tek pozisyondan iki sayı alırsın.
+- Duvar arkasındaki diriltmeyi engelleyemezsin — bedenin kalktığı noktayı gören açıyı kur: diriltilen oyuncu silahıyla doğar ama kalkış ânında sana dönük değildir, ikinci sayı o pencerede senindir.
+
 ## Sage'e Karşı Oynarken
-Bu bölüm düşman kompunda Sage varken geçerlidir. Sage'li takıma karşı her kill yarımdır: beden yerde kaldıkça diriltme tehdidi sürer.
-- Birini indirdikten sonra bedenin göründüğü açıyı bırakma. Diriltmeye gelen Sage animasyon boyunca kıpırdayamaz ve silah çekemez — o anda vurursan tek pozisyondan iki sayı alırsın.
+Bu bölüm düşman kompunda Sage varken geçerlidir; ayrıntılı karşı-oyun rehberi "8. Bu Ajana Karşı" bölümünde.
 - Sayı avantajını Sage ölmeden kesin sayma: Sage hayattayken üstünlüğün diriltmeyle eşitlenir — fazladan risk eklemeden önce Sage'i düşürmeyi öncele.
-- Duvar arkasındaki diriltmeyi engelleyemezsin; o zaman bedenin kalktığı noktayı gören açıyı kur — diriltilen oyuncu silahıyla doğar ama kalkış ânında sana dönük değildir, o pencerede açındaysa ikinci sayı senindir.

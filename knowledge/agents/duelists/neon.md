@@ -87,6 +87,8 @@ WHY: Slide yörüngesi sabittir; bir kez okunduğunda düşman tetik açısını
 - **Summit duvar gerçeği:** A Wall, Mid Wall ve B Wall düştü mü round boyunca kapalı — sprint rotanı duvar durumuna göre seç ve düşen duvarın altından geçmeye kalkma, altında kalan ölür. Mid Wall düştüyse Mid üzerinden site değiştirme hattın kapanır; savunmada retake sprint'ini CT tarafından planla.
 - **Breeze (rework sonrası) — hat seç:** A Main ve B'nin uzun hatlarında hız seni kurtarmaz — varamadan düşersin. Ama Mid artık korunaklı koridor: duvarını koridor ağzına aç, sprint'i o hatta bas — dar hat tam senin girişin. Otomatik kapıların sesini yem yap: bir hatta ses ver, savunucu dönünce boşalan koldan sprint at. B Main'de site içi + Window çaprazı seni bekler: duvarın site içinden gelen açıyı kessin, Window'u takım smoke'u kapatsın, sonra koş.
 - **Corrode:** Uzun mid şeridi (Top Mid–Stairs) hız için tuzak — Op seni varamadan keser; sprint rotanı A Link / B Link geçişlerine ve dar girişlere kur. Yard'ı duvarsız geçme — açık alanda hız korunma değil; duvar inince ya da takım smoke'uyla geç, tek tek değil aynı anda. B'ye girerken Tower yukarıdan bakar: ilk util o açıya gitsin, dikey kapanmadan site'a yayılma.
+- **Haven — hat seç:** A Long ve C Long uzun hatlarında varamadan düşersin — o koridorlar Op'un evi, senin değil. Girişini dar boğazlara kur: Mid Doors'a duvarını aç, tek açılı kapıyı böl, sprint'i o hatta bas. C Long'a mecbursan cross'u duvarsız geçme — C Platform yüksekten bakar. Üç siteli haritada asıl kozun savunmada: rotasyon yolları uzun, site'lar arası geçişte sprint herkesi geride bırakır — retake'e ilk sen varırsın.
+- **Sunset — güçlü, düz zemin:** Kısa ve yatay koridorlar tam senin sahan. Duvarını B Main'in düz hattına aç — dar koridorda crossfire kuracak yer yok, sprint'le ilk sen varırsın. Courtyard'dan Market kapısı üzerinden B'ye split rotası hız ister, o koşuyu senden iyi kimse yapamaz — ama Market'te Boba + site içi çaprazı bekler, duvarın birini kessin. Mid Courtyard açık alan: bilgi yoksa geniş yüklenme, hız açık alanda korunma değil.
 
 ## 6. Eşleşme Notları
 - **Zorlandığın ajanlar:** Killjoy (botu sprint sırasında seni takip eder, ult'u seni geri çekilmeye zorlar), Sage (duvarı yolu keser, yavaşlatma topu hızını öldürür), Cypher (telleri sprint şeritlerini yakalar).
@@ -113,7 +115,9 @@ WHY: Slide yörüngesi sabittir; bir kez okunduğunda düşman tetik açısını
 ### Tüm kiti girişe yakıyorsa
 "Duvarı ve stun'ı girişte bitirme. Bir kaynağı plant sonrasına sakla — round çoğu zaman retake'te kazanılır."
 
-## Karşısında: Neon seni öldürdüyse
-- **Duvar + sprint girişi:** Duvarı gördüğün an giriş geliyor demektir; koridordan çıkacağı uç bellidir. Karşı-hamle: duvar çıkışını koridorun dibinden değil, bir adım açıktan geniş açıyla tut — duvara yapışık beklersen üstünden gelen stun'ı yersin; çıktığı an vur.
-- **Slide ile köşeden kayıyor:** Slide yörüngesi sabittir ve Neon kayarken isabetli ateş edemez. Karşı-hamle: bir kez gördüysen crosshair'i slide'ın bitiş noktasına indir — durduğu an en savunmasız anı, orada vur.
-- **Stun yedin, arkasından girdi:** Neon stun'ın hemen arkasından gelir. Karşı-hamle: stun yediğin açıda düello alma; bir adım geriye, yeni bir açıya kay ve giriş anını hazır crosshair'le bekle — sarsıntı geçtiğinde ilk atış sende.
+## 8. Bu Ajana Karşı
+- Neon'un kozu duvar + sprint girişi: duvarı gördüğün an giriş geliyor demektir ve çıkacağı koridor ucu bellidir. Çıkışı dibinden değil bir adım açıktan geniş açıyla tut — duvara yapışık beklersen üstünden gelen stun'ı yersin; çıktığı an vur.
+- Slide yörüngesi sabittir ve Neon kayarken isabetli ateş edemez. Bir kez gördüysen crosshair'i slide'ın bitiş noktasına indir — durduğu an en savunmasız anı, orada vur.
+- Stun'ın hemen arkasından girer. Stun yediğin açıda düello alma — bir adım geri, yeni bir açıya kay ve girişini hazır crosshair'le bekle: sarsıntı geçtiğinde ilk atış sende.
+- Sprint ses çıkarır — hızının sürprizini sesle satar. Koşu sesini duyduğun an geldiği koridorun çıkışını nişanla; ses yem de olur — görsel doğrulama gelmeden pozisyonunu bozma.
+- Ult'unu panikte açan Neon açılış anında savunmasızdır. Sesi duyduğun an baskıyı hemen kur — hız penceresi oturmadan düelloyu bitir; kaosuna girmek yerine dövüşü kendi mesafende tut.
