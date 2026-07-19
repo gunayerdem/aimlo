@@ -136,12 +136,16 @@ YANLIŞ: "yetenek kullan", "tuzak kur" DOĞRU: "utility kullanmadan entry atıyo
 export const TIME_BAN_RULE = `\nZAMAN YASAĞI: Saniye/timer tabanlı tavsiye YASAK ("0.5 saniyede", "0.3-0.6s", "2 saniye bekle", "0.8-1.2s", "after 3s"). Olay-bazlı konuş: "flash patlayınca", "ilk kill düşünce", "spike kurulunca", "op sesi gelince" / "after the first contact", "once the flash pops". Sayısal süre/mesafe verme.`;
 
 // ═══════════════════════════════════════════════════════════
-// HP BAN — sayısal can değeri yasağı (live-test #5, 2026-07-09)
-// Anlık HP OCR okuması güvenilmez (son-canlı-örnek bayat olabilir);
-// sayı iddiası uydurma sayılır. Sinyal (death-type eşiği) serbest, METİN yasak.
+// HP BAN — CAN/HP iddiası TOTAL yasağı (live-test #5 sayısal → live-test #8 TOTAL)
+// Canlı-test #8 (2026-07-19, softi: "tam canla çatışırken 'az canla' dendi"):
+// ölüm anındaki tek HP örneği çatışma-öncesi canı KANITLAYAMAZ → yalnız sayı
+// değil, NİTEL can iddiası da uydurmadır. Eski metnin "doğal söyle: düşük canla"
+// önerisi bayattı — model tam o kalıbı üretiyor, stripHpClaims süzgeci sonra
+// siliyordu (kırık cümle riski). Sinyal katmanı zaten söküldü (death-type hp<50
+// tetikleyicisi kaldırıldı); bu kural metin katmanını TOTAL yasağa hizalar.
 // ═══════════════════════════════════════════════════════════
 
-export const HP_BAN_RULE = `\nSAYISAL HP YASAK: Feedback metnine sayısal can değeri YAZMA — "41 HP", "(100 HP)", "30 canla", "HP 41" hepsi YASAK. Anlık HP okuması güvenilmez; sayı iddiası uydurma sayılır. Doğal söyle: "düşük canla", "canın azken", "tam canla" / "at low HP", "at full HP".`;
+export const HP_BAN_RULE = `\nCAN/HP İDDİASI TOTAL YASAK: Feedback metnine oyuncunun CAN durumu hakkında HİÇBİR iddia yazma — ne sayısal ("41 HP", "(100 HP)", "30 canla", "HP 41") ne nitel ("düşük canla", "az canla", "canın azken", "tam canla", "full canla" / "at low HP", "at full HP", "low health"). Ölüm anındaki HP okuması çatışma öncesini kanıtlayamaz; her can iddiası uydurma sayılır ve silinir. Can durumundan HİÇ bahsetme — dersi pozisyon, zamanlama, util ve karar üzerinden ver.`;
 
 // ═══════════════════════════════════════════════════════════
 // KATI İNGİLİZCE WHITELIST — TR çıktıda whitelist-dışı İngilizce yasak
@@ -242,12 +246,13 @@ export const ZERO_FAKE_AI = `\nSIFIR SAHTE AI:
 // Vision variant (anchorMode:'ocr', Cycle 2 fix #2): the round-level vision
 // route has NO match-level stats, so "her cümlede yüzde/round sayısı ZORUNLU"
 // was a PRESSURE TO INVENT numbers (the #1 reason reality-checker mangled the
-// TR text). Here the anchor is OCR truth (callout/agent/weapon/HP/alive count),
+// TR text). Here the anchor is OCR truth (callout/agent/weapon/alive count —
+// HP hariç: canlı-test #8 TOTAL can-iddiası yasağı),
 // and percentages/round-counts are used ONLY if they genuinely exist. This
 // STRENGTHENS anti-uydurma — it removes the fabrication incentive.
 export const ZERO_FAKE_AI_VISION = `\nSIFIR SAHTE AI:
 - Veride OLMAYAN bilgiyi UYDURMA
-- Her cümle SOMUT bir çapa taşımalı: callout (A Short), ajan (Cypher), silah/util (operator/smoke) ya da veriden gelen durum (düşük canla, sayıca azken). Sayısal HP YAZMA — can durumunu doğal söyle ("düşük canla"). Yüzde/round-sayısı UYDURMA — sadece veride GERÇEKTEN varsa kullan.
+- Her cümle SOMUT bir çapa taşımalı: callout (A Short), ajan (Cypher), silah/util (operator/smoke) ya da veriden gelen durum (sayıca azken, spike kuruluyken). CAN/HP durumu ÇAPA DEĞİLDİR — can iddiası yazma (sayısal da nitel de TOTAL yasak, HP kuralına bak). Yüzde/round-sayısı UYDURMA — sadece veride GERÇEKTEN varsa kullan.
 - İstatistik tekrarı YASAK — yorumla, sadece sayı verme
 - YASAK KALIPLAR: ${BANNED_PHRASES.join(", ")}`;
 

@@ -408,6 +408,19 @@ export async function POST(request: NextRequest) {
     // Whitelist — yalnız "en" kabul, diğer her şey tr (eski desktop lang göndermez → tr).
     const reqLang: "tr" | "en" = (body as VisionRequest).lang === "en" ? "en" : "tr";
 
+    // Karşı-ajan kesiti kapısı (denetim 2026-07-19): loader'daki [KARŞI-AJAN] yolu
+    // killerInfo bekliyordu ama buradan hiç geçmiyordu — ölü kod. died===true kapısı
+    // ŞART (aşağıdaki extractKillerWeapon ile aynı desen): ölünmeyen round'da bayat
+    // killerInfo karşı-ajan kesiti tetiklemesin. Loader sözlük-bağlı — prompt'a ham
+    // metin DEĞİL, yalnız AGENT_ROLE_MAP anahtarı + yerel dosya kesiti girer;
+    // sanitizePromptInput yine de uygulanır (defense-in-depth, ctx.killerInfo
+    // yolundaki parametrelerin birebir aynısı: max 120, collapseWhitespace).
+    const rawKillerInfo = (body as VisionRequest).killerInfo;
+    const reqKillerInfo =
+      (body as VisionRequest).died === true && typeof rawKillerInfo === "string" && rawKillerInfo.length > 0
+        ? sanitizePromptInput(rawKillerInfo, { max: 120, collapseWhitespace: true }) || undefined
+        : undefined;
+
     const kb = loadVisionKnowledge({
       map: reqMap,
       agent: reqAgent,
@@ -418,6 +431,8 @@ export async function POST(request: NextRequest) {
       // Side-aware filter: drops only explicit opposite-side strategy sections.
       // Conservative — keeps all general/callout/agent-tier/anti-strat sections.
       side: reqSide,
+      // Karşı-ajan kesiti: seni öldüren ajanın "Bu Ajana Karşı" bölümü (died-kapılı).
+      killerInfo: reqKillerInfo,
     });
 
     // KB observability (council 2026-06-08): prove per-request whether the KB is

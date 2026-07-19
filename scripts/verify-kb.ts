@@ -108,13 +108,14 @@ console.log(`\n[6] death-type kbBlock çapaları ↔ universal.md başlıkları`
 //    SÖZLEŞME (2026-07-08): FAIL yalnız RUNTIME'A YÜKLENEN dosyada — prompt'a
 //    ulaşamayan dosya (yüklenmeyen general/* kaynak-materyali) yalnız UYARI sayılır.
 //    Runtime seti knowledge-loader'dan türetilir: maps/** + matchups/** + ranks/** +
-//    agents/<rol>/*.md + general'in loader'da geçen 6 dosyası. Yeni bir general
+//    agents/<rol>/*.md + general'in loader'da geçen 7 dosyası. Yeni bir general
 //    dosyası runtime'a bağlanırsa BURAYA da eklenmeli (yoksa ihlali fail etmez).
 console.log(`\n[7] KB yasak-kelime taraması (${BANNED_PHRASES.length} kalıp)`);
 {
   const RUNTIME_GENERAL = new Set([
     "coaching-core.md", "post-plant-playbook.md", "economy-mastery.md",
     "pro-analysis.md", "radiant-tips.md", "weapon-comp-compact.md",
+    "retake-playbook.md", // knowledge-loader: spikePlanted && side==="defense" (2026-07-19)
   ]);
   const isRuntimeFile = (rel: string): boolean => {
     const p = rel.replace(/\\/g, "/");
@@ -157,6 +158,89 @@ try {
   const sizeOk = !kb.blocks.static || kb.blocks.static.length <= 8500;
   check("static blok ≤8.5KB (maliyet disiplini)", sizeOk, `(${kb.blocks.static?.length ?? 0}b)`);
 } catch (e) { check("static blok", false, `(throw: ${(e as Error).message})`); }
+
+// 9) UNIVERSAL.MD BOYUT TAVANI — universal.md HER istekte prompt'a gider (maliyet
+//    disiplini). Tavanı aşmak = her AI isteğinin maliyetini KALICI büyütmek.
+//    Ölçüm 2026-07-19: 40.955 bayt → tavan = ~%10 pay ile 45.000 bayt.
+//    Aşarsan bu BİLİNÇLİ bir karar olmalı: önce içeriği yoğunlaştır / IF-kapıla /
+//    arşive taşı; gerçekten gerekiyorsa tavanı commit mesajında gerekçelendirerek yükselt.
+console.log(`\n[9] universal.md boyut tavanı`);
+{
+  const UNI_CAP_BYTES = 45_000;
+  const uniSize = fs.statSync(path.join(KB, "ranks", "universal.md")).size;
+  check(
+    `universal.md ≤${UNI_CAP_BYTES}b (her-istek maliyet tavanı)`,
+    uniSize <= UNI_CAP_BYTES,
+    `(${uniSize}b — tavan aşıldı! Bu bilinçli bir karar olmalı: önce yoğunlaştır, olmuyorsa tavanı gerekçeyle güncelle)`
+  );
+}
+
+// 10) HARİTA DOSYASI TAVANI — harita bloğu her vision isteğinde prompt'a gider.
+//     Ölçüm 2026-07-19: en büyük dosya summit.md = 33.447 bayt → tavan = ~%10 pay
+//     ile 37.000 bayt. Aşım = bilinçli karar (yoğunlaştır ya da tavanı gerekçeyle yükselt).
+console.log(`\n[10] harita dosyası boyut tavanı (${maps.length} dosya)`);
+{
+  const MAP_CAP_BYTES = 37_000;
+  for (const m of maps) {
+    const mSize = fs.statSync(path.join(KB, "maps", `${m}.md`)).size;
+    check(
+      `maps/${m}.md ≤${MAP_CAP_BYTES}b`,
+      mSize <= MAP_CAP_BYTES,
+      `(${mSize}b — tavan aşıldı! Bilinçli karar gerekir: yoğunlaştır ya da tavanı gerekçeyle güncelle)`
+    );
+  }
+}
+
+// 11) AJAN × AKTİF-HAVUZ KAPSAM GUARD'I — pool frontmatter'ı "aktif" olan her
+//     harita, 29 aktif ajan dosyasının her birinde adıyla geçmeli (ajan rehberi
+//     aktif havuzu kapsamalı). ŞİMDİLİK UYARI MODU (FAIL değil): KB süpürme
+//     dalgaları devam ediyor, tüm ajan dosyaları havuz haritalarını işleyince
+//     STRICT_POOL_COVERAGE = true yapıp FAIL'e çevir.
+console.log(`\n[11] ajan × aktif-havuz kapsam guard'ı`);
+{
+  const STRICT_POOL_COVERAGE = false; // süpürme dalgaları tamamlanınca true → eksik kapsam FAIL olur
+  const frontmatterOf = (content: string): string => {
+    const fm = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+    return fm ? fm[1] : "";
+  };
+  // SAVUNMA KATMANI (2026-07-19): pool anahtarı OLMAYAN harita dosyası bu guard'ın
+  // kör noktasıdır (aktif olsa bile kapsam asla zorlanmaz — false-PASS). Eksik
+  // anahtar sessiz kalmasın: uyarı bas + STRICT modda FAIL'e dönüşür.
+  const noPoolMaps: string[] = [];
+  const activeMaps = maps.filter((m) => {
+    const fm = frontmatterOf(fs.readFileSync(path.join(KB, "maps", `${m}.md`), "utf8"));
+    if (!/^pool:/im.test(fm)) { noPoolMaps.push(m); return false; }
+    return /^pool:\s*["']?aktif/im.test(fm);
+  });
+  for (const m of noPoolMaps) {
+    console.log(`  ⚠ ${m}: pool frontmatter'ı YOK — kapsam guard'ı bu haritayı göremiyor (aktifse sessiz kör nokta)`);
+  }
+  check(
+    `her harita dosyasında pool frontmatter'ı var (${maps.length - noPoolMaps.length}/${maps.length}${STRICT_POOL_COVERAGE ? "" : " — uyarı modu"})`,
+    STRICT_POOL_COVERAGE ? noPoolMaps.length === 0 : true,
+    `(pool anahtarı eksik: [${noPoolMaps.join(", ")}])`
+  );
+  const agentFiles = roleDirs.flatMap((r) =>
+    fs.readdirSync(path.join(KB, "agents", r))
+      .filter((f) => f.endsWith(".md"))
+      .map((f) => path.join(KB, "agents", r, f))
+  );
+  console.log(`  (pool=aktif harita: ${activeMaps.length} → [${activeMaps.join(", ")}] × ${agentFiles.length} ajan dosyası)`);
+  for (const m of activeMaps) {
+    // Harita adı ASCII slug — 'i' bayrağı Türkçe İ tuzağına girmeden case-insensitive eşler.
+    const re = new RegExp(m.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i");
+    const missing = agentFiles.filter((f) => !re.test(fs.readFileSync(f, "utf8")));
+    if (missing.length > 0) {
+      const names = missing.map((f) => path.basename(f, ".md")).join(", ");
+      console.log(`  ⚠ ${m}: ${missing.length}/${agentFiles.length} ajan dosyasında adı geçmiyor → [${names}] (uyarı — süpürme dalgası tamamlanınca FAIL olacak)`);
+    }
+    check(
+      `havuz kapsamı ${m} (${agentFiles.length - missing.length}/${agentFiles.length} ajan${STRICT_POOL_COVERAGE ? "" : " — uyarı modu"})`,
+      STRICT_POOL_COVERAGE ? missing.length === 0 : true,
+      `(${missing.length} ajan dosyası ${m} adını içermiyor)`
+    );
+  }
+}
 
 console.log(`\n══════ SONUÇ: ${pass} geçti, ${fail} başarısız ══════`);
 if (fail > 0) { console.log("❌ KB BOZUK — bir şey kırılmış!"); process.exit(1); }

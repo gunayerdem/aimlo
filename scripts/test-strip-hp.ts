@@ -63,5 +63,19 @@ eq("cleanCoachText asla boş dönmez (yalnız HP-öbeği yeniden yazılır)",
   cleanCoachText("41 HP ile öldün.", "tr").length > 0,
   true);
 
+// ── dalga-6 (2026-07-19): Clove-decay KB dilinin sızma yolları ──
+eq("'erimiş canla' silinir",
+  cleanCoachText("Erimiş canla düelloya girdin; geri çekilmeliydin.", "tr").toLowerCase().includes("erimiş"),
+  false);
+eq("'eksik canla' silinir ama cümle kalır",
+  cleanCoachText("Düelloya eksik canla girdin; açıyı bırak.", "tr").includes("açıyı bırak"),
+  true);
+eq("'canın eriyordu' silinir",
+  cleanCoachText("Canın eriyordu, yine de peek attın.", "tr").toLowerCase().includes("eriyor"),
+  false);
+eq("'eriyen' fiil-sıfatı can'sız bağlamda KORUNUR",
+  cleanCoachText("Alanda eriyen smoke'un ardından girdin.", "tr").includes("eriyen"),
+  true);
+
 console.log(fail ? `\n${fail} FAIL` : "\nTAM YESIL");
 process.exit(fail ? 1 : 0);

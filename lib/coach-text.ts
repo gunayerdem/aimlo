@@ -358,13 +358,16 @@ export function stripHpClaims(text: string, lang: "tr" | "en"): string {
     // iddiası çıktıya sızıyordu (TR kova sızıntısı); (b) baştaki \b → lookbehind
     // (JS \b "ç"de kırılır — "çok az canla"da "çok" sarkıyordu, dosya başı tuzak
     // notuyla aynı kök); (c) can(?!avar) — "tam canavar gibi" övgüsü yutulmasın.
-    t = t.replace(/(?<![a-zçğıöşü])(?:çok\s+)?(?:az|düşük|orta|sağlam|tam|full|yarım)\s*(?:can(?!avar)|hp)['’]?[a-zçğıöşü]*/gi, "");
+    // Denetim dalga-6 (2026-07-19): erimiş|eriyen|eksik EKLENDİ — Clove decay
+    // anlatan matchup KB'si bu sıfatları öğretiyor ("erimiş canla girme");
+    // model kopyalarsa süzgeçten kaçıyordu.
+    t = t.replace(/(?<![a-zçğıöşü])(?:çok\s+)?(?:az|düşük|orta|sağlam|tam|full|yarım|erimiş|eriyen|eksik)\s*(?:can(?!avar)|hp)['’]?[a-zçğıöşü]*/gi, "");
     // "canın azken / canı düşükken / canın azdı" kalıpları. KAPALI ek listesi
     // (denetim 2026-07-19): eski açık kuyruk [a-zçğıöşü]* "azal-" fiil kökünü de
     // yutuyor, koşullu ÖĞÜDÜN koşulunu siliyordu ("canın azalınca save et" →
     // " save et"). Yalnız iddia-ekleri kapalı listede; "az önce" (zaman zarfı,
     // can iddiası değil) lookahead ile dışarıda.
-    t = t.replace(/(?<![a-zçğıöşü])can[ıi]n?[ıi]?\s+(?:az(?:ken|d[ıi])?(?!\s*önce)|düşük(?:ken|tü)?)(?![a-zçğıöşü])/gi, "");
+    t = t.replace(/(?<![a-zçğıöşü])can[ıi]n?[ıi]?\s+(?:az(?:ken|d[ıi])?(?!\s*önce)|düşük(?:ken|tü)?|eri(?:yor(?:du)?|di|miş(?:ti|ken)?))(?![a-zçğıöşü])/gi, "");
   } else {
     // "at/with/on low|full|half|high HP/health" + bare "low HP" + "low on health".
     t = t.replace(/\b(?:at|with|on)\s+(?:low|full|half|high)\s+(?:hp|health)\b/gi, "");

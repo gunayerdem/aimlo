@@ -53,5 +53,34 @@ eq("bulldog artık rifle (crosshair-loss açık)", classifyDeath({ economyType: 
 eq("op-angle korunur", classifyDeath({ killerInfo: "killed by chamber with operator", side: "defense" }), "op-angle");
 eq("awp kısaltması korunur", classifyDeath({ killerInfo: "awp", side: "defense" }), "op-angle");
 
+// classifyDeath — dalga-5 yeni tipler/dallar (KB wiring 2026-07-19): pozitif vakalar
+eq("retake-advantage-thrown (def+spike+aa>ea)", classifyDeath({ spikePlanted: true, side: "defense", alliesAlive: 3, enemiesAlive: 1 }), "retake-advantage-thrown");
+eq("op-loss (kendi loadout Operator)", classifyDeath({ loadout: "operator", side: "attack" }), "op-loss");
+eq("op-loss awp kısaltması (loadout OCR)", classifyDeath({ loadout: "awp", side: "attack" }), "op-loss");
+eq("ult-in-pocket (Jett dolu ult)", classifyDeath({ ultReady: true, playerAgent: "Jett", side: "attack" }), "ult-in-pocket");
+eq("numbers-down-carry (aa<ea-1 + late)", classifyDeath({ alliesAlive: 1, enemiesAlive: 3, deathTiming: "late", side: "attack" }), "numbers-down-carry");
+eq("late-no-plant (atk+late+spike AÇIK false)", classifyDeath({ side: "attack", deathTiming: "late", spikePlanted: false }), "late-no-plant");
+eq("late-def-no-plant (def+late+spike AÇIK false)", classifyDeath({ side: "defense", deathTiming: "late", spikePlanted: false }), "late-def-no-plant");
+eq("full-buy-first-contact (full_buy+atk+early)", classifyDeath({ economyType: "full_buy", side: "attack", deathTiming: "early" }), "full-buy-first-contact");
+eq("def-no-crossfire (def+trade'lenmedi)", classifyDeath({ side: "defense", tradedByAlly: false }), "def-no-crossfire");
+eq("loss-streak (3+ kayıp serisi)", classifyDeath({ lossStreak: true, side: "attack" }), "loss-streak");
+eq("win-streak-comfort (3+ kazanç serisi)", classifyDeath({ winStreak: true, side: "defense" }), "win-streak-comfort");
+eq("overtime-matchpoint (skor 12 → highStakes)", classifyDeath({ highStakes: true, side: "attack" }), "overtime-matchpoint");
+
+// classifyDeath — dalga-5 kritik öncelik-çakışma vakaları
+eq("op-loss > ult-in-pocket (Operator + dolu ult)", classifyDeath({ loadout: "operator", ultReady: true, playerAgent: "Jett", side: "attack" }), "op-loss");
+eq("spike > op-loss (post-plant Operator'lı)", classifyDeath({ spikePlanted: true, side: "attack", loadout: "operator" }), "post-plant-solo");
+eq("retake aa==ea eşitlik avantaj DEĞİL → retake-no-util", classifyDeath({ spikePlanted: true, side: "defense", alliesAlive: 2, enemiesAlive: 2 }), "retake-no-util");
+eq("retake alive 0/0 güvenilmez → retake-no-util", classifyDeath({ spikePlanted: true, side: "defense", alliesAlive: 0, enemiesAlive: 0 }), "retake-no-util");
+eq("late+plant-yok+atk > entry-no-trade", classifyDeath({ side: "attack", deathTiming: "late", spikePlanted: false, tradedByAlly: false }), "late-no-plant");
+eq("spike sinyali YOKKEN late-no-plant DEĞİL (undefined ≠ false)", classifyDeath({ side: "attack", deathTiming: "late", tradedByAlly: false }), "entry-no-trade");
+eq("Clove + ultReady → ult-in-pocket ATLANIR", classifyDeath({ ultReady: true, playerAgent: "Clove", side: "attack" }), "info-less-push");
+eq("aa+1==ea eşit sayı → numbers-down-carry DEĞİL", classifyDeath({ alliesAlive: 2, enemiesAlive: 3, deathTiming: "late", side: "attack", spikePlanted: false }), "late-no-plant");
+eq("aa<ea-1 ama late DEĞİL → numbers-down-carry DEĞİL", classifyDeath({ alliesAlive: 1, enemiesAlive: 3, deathTiming: "early", side: "attack" }), "timing-window");
+eq("full-buy-first-contact > timing-window (eco sinyali önce)", classifyDeath({ economyType: "full_buy", side: "attack", deathTiming: "early", tradedByAlly: true }), "full-buy-first-contact");
+eq("overtime > loss-streak (highStakes öncelikli)", classifyDeath({ highStakes: true, lossStreak: true, side: "attack" }), "overtime-matchpoint");
+eq("def-no-crossfire > over-peek (spesifik dal önce)", classifyDeath({ side: "defense", tradedByAlly: false, alliesAlive: 3, enemiesAlive: 2 }), "def-no-crossfire");
+eq("over-peek katman fix: sinyalsiz aa>=ea hâlâ yakalanır", classifyDeath({ alliesAlive: 2, enemiesAlive: 2, side: "attack" }), "over-peek-advantage");
+
 console.log(fail === 0 ? "\nTÜM TESTLER GEÇTİ ✓" : `\n${fail} TEST BAŞARISIZ ✗`);
 process.exit(fail === 0 ? 0 : 1);

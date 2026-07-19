@@ -85,6 +85,13 @@ interface LoadOptions {
   economyType?: string;
   /** "attack" | "defense" — when set, side-irrelevant sections are dropped. */
   side?: string;
+  /**
+   * Ham killfeed metni (ör. "killed by jett with vandal"). Yalnız vision loader
+   * kullanır: resmi ajan sözlüğüyle TAM-KELİME eşleşen düşman ajan bulunursa o
+   * ajanın dosyasından "Bu Ajana Karşı" kesiti contextual (cache-sonrası) bölgeye
+   * eklenir. Statik prompt-cache önekini ETKİLEMEZ.
+   */
+  killerInfo?: string;
 }
 
 // ── File loading helpers ──────────────────────────────────
@@ -199,14 +206,18 @@ function loadMatchupFiles(
   // Sort enemy roster alphabetically for cache-key stability (see comment above).
   const sortedEnemies = [...enemyAgents].sort();
 
-  // SAGE ÖNE (KB pipeline denetimi 2026-07-19): diriliş-tehdidi modülü *_vs_sage
-  // dosyalarında yaşıyor ve komptaki HER kill'i ilgilendiriyor; alfabede "s" geç
-  // kaldığından vision limit=1'de bu dosyalar neredeyse hiç yüklenmiyordu.
-  // Hoist deterministik (aynı komp → aynı sıra) → cache-key stabil kalır.
+  // SAGE + CLOVE ÖNE (KB pipeline denetimi 2026-07-19): diriliş-tehdidi modülü
+  // *_vs_sage / *_vs_clove dosyalarında yaşıyor ve komptaki HER kill'i
+  // ilgilendiriyor (Sage takım arkadaşını diriltir, Clove ölünce kendini
+  // diriltir); alfabede "s"/"c" sırası yüzünden vision limit=1'de bu dosyalar
+  // sıklıkla yüklenmiyordu. Sıra sabit (önce sage, sonra clove, sonra kalanlar)
+  // ve deterministik (aynı komp → aynı sıra) → cache-key stabil kalır.
   const slugOf = (a: string) => a.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const RES_THREAT_SLUGS = new Set(["sage", "clove"]);
   const prioritizedEnemies = [
     ...sortedEnemies.filter((e) => slugOf(e) === "sage"),
-    ...sortedEnemies.filter((e) => slugOf(e) !== "sage"),
+    ...sortedEnemies.filter((e) => slugOf(e) === "clove"),
+    ...sortedEnemies.filter((e) => !RES_THREAT_SLUGS.has(slugOf(e))),
   ];
 
   // İKİ GEÇİŞ (aynı denetim): spesifik ajan-vs-ajan dosyası HER ZAMAN rol-vs-rol
@@ -393,7 +404,10 @@ function stripKbWhitespace(content: string): string {
  * filterSectionsBySide ile aynı H2-bölme mekaniği.
  */
 export function stripRankSections(content: string): string {
-  const rankHeader = /rank\s*(modülasyonu|modulasyonu|notu|başına|basina)/i;
+  // "baz[ıiİI]nda": retake-playbook'un "## RANK BAZINDA NOTLAR" başlığı BÜYÜK
+  // harf — JS /i bayrağı 'ı'↔'I' eşlemez (Chromium uppercase-İ tuzağı), bu
+  // yüzden dört i-varyantı açık karakter sınıfında.
+  const rankHeader = /rank\s*(modülasyonu|modulasyonu|notu|başına|basina|baz[ıiİI]nda)/i;
   const sections = content.split(/(?=^## )/gm);
   const kept: string[] = [];
   for (const section of sections) {
@@ -434,8 +448,82 @@ export function filterSectionsBySide(content: string, side?: string): string {
   return kept.join("");
 }
 
+/* ── Karşı-ajan kesiti (vision, 2026-07-19) ─────────────────
+   killerInfo ham metninde resmi ajan sözlüğüyle (AGENT_ROLE_MAP anahtarları)
+   TAM-KELİME eşleşen düşman ajan aranır; bulunursa o ajanın dosyasından YALNIZ
+   "Bu Ajana Karşı" H2 bölümü kesilir. Kesit contextual (cache-sonrası) bölgeye
+   gider — statik önek bozulmaz. Bölüm yoksa sessiz geçilir (normal durum:
+   duelist dosyalarında bu bölüm yok). */
+
+/** Kesit sert tavanı (~1.4KB) — aşarsa son tam satırda kesilir. */
+const COUNTER_SECTION_CAP_BYTES = 1400;
+
+/**
+ * killerInfo ham metninden düşman ajanı sözlük-eşleşmesiyle çıkar.
+ * - TAM kelime: alfasayısal-olmayan sınırlar şart ("cloverfield" Clove DEĞİL).
+ * - Case-insensitive + slug toleransı ("kayo" ve "kay/o" → KAY/O).
+ * - Birden fazla ajan adı geçerse metinde EN ÖNCE geçen kazanır (killfeed
+ *   formatında killer önce yazılır); eşitlikte alfabetik — deterministik.
+ * Eşleşme yoksa null (uyarı yok — silah-only killerInfo normal durum).
+ */
+export function extractEnemyAgentFromKillerInfo(killerInfo: string): string | null {
+  if (!killerInfo) return null;
+  // Türkçe-locale OCR tuzağı: "VİPER".toLowerCase() → "vi" + U+0307 (combining
+  // dot) + "per" ve tam-kelime regex eşleşmez (3 aylık dotted-i bug'ının
+  // birebir aynı kök nedeni). NFD + combining-dot strip ile normalize et —
+  // davranış yalnız GENİŞLER (eşleşmeyen eşleşir), yanlış-pozitif eklemez.
+  // Karakter kasıtlı olarak fromCharCode ile üretiliyor: kaynakta görünmez
+  // combining-char literal'i bırakmak editör/format tuzağı olur.
+  const COMBINING_DOT_ABOVE = String.fromCharCode(0x0307);
+  const text = killerInfo
+    .toLowerCase()
+    .normalize("NFD")
+    .split(COMBINING_DOT_ABOVE)
+    .join("");
+  let best: { agent: string; index: number } | null = null;
+  const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  for (const agent of Object.keys(AGENT_ROLE_MAP).sort()) {
+    const lower = agent.toLowerCase();
+    const slug = lower.replace(/[^a-z0-9]/g, "");
+    // Ad + slug varyantı (KAY/O → "kay/o" ve "kayo"); tam-kelime sınırları ile.
+    const variants = lower === slug ? [lower] : [lower, slug];
+    for (const v of variants) {
+      const m = new RegExp(`(?<![a-z0-9])${esc(v)}(?![a-z0-9])`).exec(text);
+      if (m && (best === null || m.index < best.index)) {
+        best = { agent, index: m.index };
+      }
+    }
+  }
+  return best ? best.agent : null;
+}
+
+/**
+ * Düşman ajan dosyasından yalnız "Bu Ajana Karşı" H2 bölümünü döndürür
+ * (whitespace-strip + ~1.4KB tavan). Dosya ya da bölüm yoksa null — sessiz.
+ */
+function loadCounterAgentSection(enemyAgent: string): string | null {
+  const agentFile = getAgentFile(enemyAgent);
+  if (!agentFile) return null;
+  const content = loadFile(agentFile);
+  if (!content) return null;
+  // filterSectionsBySide/stripRankSections ile aynı H2-bölme mekaniği.
+  const sections = content.split(/(?=^## )/gm);
+  for (const section of sections) {
+    const headerMatch = section.match(/^## (.+)$/m);
+    // "Bu Ajana Karşı" başlıkları numaralı ("## 8. Bu Ajana Karşı") — içerik-eşle.
+    if (!headerMatch || !/bu ajana karş[ıi]/i.test(headerMatch[1])) continue;
+    let body = stripKbWhitespace(section);
+    if (body.length > COUNTER_SECTION_CAP_BYTES) {
+      const cut = body.lastIndexOf("\n", COUNTER_SECTION_CAP_BYTES);
+      body = body.slice(0, cut > 0 ? cut : COUNTER_SECTION_CAP_BYTES).trimEnd();
+    }
+    return body;
+  }
+  return null;
+}
+
 export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeResult {
-  const { map, agent, rank, enemyAgents, spikePlanted, economyType, side } = options;
+  const { map, agent, rank, enemyAgents, spikePlanted, economyType, side, killerInfo } = options;
   const files: string[] = [];
 
   // ── Block 0: Statik silah+komp rehberi (istekten BAĞIMSIZ — en kararlı blok) ──
@@ -519,6 +607,22 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
     }
   }
 
+  // Retake (2026-07-19): post-plant-playbook'un SAVUNMA-simetriği — spike kurulu
+  // + savunma isteğinde yüklenir (retake ölümü en sık koçlanabilir savunma
+  // senaryosu, rehberi hiç yüklenmiyordu). filterSectionsBySide BİLİNÇLİ olarak
+  // uygulanmadı: dosyanın H2'lerinde side kelimesi yok (STANDART RETAKE / SAYISAL
+  // DEZAVANTAJ / UTIL SIRASI / YAYGIN HATALAR...) → filtre no-op olurdu
+  // (economy-mastery ile aynı gerekçe). stripRankSections İSE uygulanır:
+  // "## RANK BAZINDA NOTLAR" bölümü softi'nin rank-tiering yasağına (2026-06-26)
+  // takılır — loader seviyesinde düşer (~0.9KB tasarruf + gating dili sızmaz).
+  if (spikePlanted && side === "defense") {
+    const content = loadFile("general/retake-playbook.md");
+    if (content) {
+      contextualParts.push(`[RETAKE TAKTİK]\n${stripKbWhitespace(stripRankSections(content))}`);
+      files.push("general/retake-playbook.md");
+    }
+  }
+
   // Economy (eco/force/pistol/half_buy — half_buy eklendi 2026-07-19: bonus/yarım-alım
   // round ölümü en öğretilebilir ekonomi round'u olduğu hâlde rehber almıyordu.
   // Kapı economyType sinyali (desktop sözleşmesi: full_buy|force_buy|half_buy|eco|pistol);
@@ -544,6 +648,27 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
       console.warn(
         `[KB] matchup selector matched no file (player '${agent}' vs enemies [${enemyAgents.join(", ")}])`,
       );
+    }
+  }
+
+  // Karşı-ajan kesiti (2026-07-19): killerInfo'da sözlük-eşleşen düşman ajan
+  // varsa o ajanın "Bu Ajana Karşı" bölümü — matchup bloğunun yanında,
+  // cache-SONRASI contextual bölgede (statik önek bozulmaz). Bölüm/eşleşme
+  // yoksa sessiz geç (console.warn YOK — silah-only killerInfo ve bölümsüz
+  // duelist dosyaları normal durum). Ayna-eşleşme guard'ı: killer, oyuncunun
+  // kendi ajanıysa Block 1 zaten aynı bölümü içeriyor — mükerrer token atlanır.
+  if (killerInfo) {
+    const enemyAgent = extractEnemyAgentFromKillerInfo(killerInfo);
+    if (enemyAgent) {
+      const enemyFile = getAgentFile(enemyAgent);
+      const isMirror = !!agent && !!enemyFile && getAgentFile(agent) === enemyFile;
+      if (!isMirror) {
+        const section = loadCounterAgentSection(enemyAgent);
+        if (section) {
+          contextualParts.push(`[KARŞI-AJAN — ${enemyAgent}: seni öldüren ajana karşı böyle oyna]\n${section}`);
+          files.push(`${enemyFile}#bu-ajana-karsi`);
+        }
+      }
     }
   }
 
