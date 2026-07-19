@@ -48,7 +48,8 @@ eq("half_buy spectre artık eco DEĞİL (def→def-wide-hold)", classifyDeath({ 
 eq("alive 0/0 güvenilmez → clutch DEĞİL", classifyDeath({ alliesAlive: 0, enemiesAlive: 0, side: "attack" }), "info-less-push");
 eq("alive 0/2 güvenilir → clutch", classifyDeath({ alliesAlive: 0, enemiesAlive: 2, side: "attack" }), "clutch-lost");
 eq("judge artık eco-silah (crosshair-loss'u bloklar)", classifyDeath({ healthAtDeath: 100, killerInfo: "with judge", side: "attack" }), "info-less-push");
-eq("bulldog artık rifle (crosshair-loss açık)", classifyDeath({ healthAtDeath: 100, killerInfo: "with bulldog", side: "attack" }), "crosshair-loss");
+// denetim fix 2026-07-19: crosshair-loss kapısı hp>=100 yerine full_buy — healthAtDeath artık okunmuyor
+eq("bulldog artık rifle (crosshair-loss açık)", classifyDeath({ economyType: "full_buy", killerInfo: "with bulldog", side: "attack" }), "crosshair-loss");
 eq("op-angle korunur", classifyDeath({ killerInfo: "killed by chamber with operator", side: "defense" }), "op-angle");
 eq("awp kısaltması korunur", classifyDeath({ killerInfo: "awp", side: "defense" }), "op-angle");
 

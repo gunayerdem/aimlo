@@ -55,9 +55,10 @@ eq("EN dil-izolasyonu: 'düşük canla' enjekte ETME",
   false);
 
 // ── cleanCoachText entegrasyonu (boşluk/akış normalize dahil, uçtan uca) ──
+// canlı-test #8 (23099d1): stripHpClaims nitel can iddialarını da siler — beklenti güncellendi
 eq("cleanCoachText TR uçtan uca",
   cleanCoachText("Düşük canla (41 HP) dövüşe girip öldün; Reyna olarak risk aldın.", "tr"),
-  "Düşük canla dövüşe girip öldün; Reyna olarak risk aldın.");
+  "dövüşe girip öldün; Reyna olarak risk aldın.");
 eq("cleanCoachText asla boş dönmez (yalnız HP-öbeği yeniden yazılır)",
   cleanCoachText("41 HP ile öldün.", "tr").length > 0,
   true);
