@@ -12,7 +12,7 @@ verified: 2026-07-19
 
 Bu dosya her oyuncuya aynı derinlikte koçluk verir — hangi içgörüyü vereceğini RANK değil, ÖLÜMÜN TİPİ seçer. Ölümün tipine uyan TEK bloğu seç; hepsini birden verme.
 
-- **COUNTER bir tek-emir değil, bir olay zinciridir:** hangi olay olunca → ne yapacaksın → öncesinde neyi bekleyeceksin. "Crossfire kur" değil; "şu ses kesilince tek adım çık" gibi tetikleyiciye bağlı bir zincir — oyuncu tam olarak hangi ANI bekleyeceğini bilsin.
+- **COUNTER tek bir emir değil, bir olay zinciridir:** hangi olay olunca → ne yapacaksın → öncesinde neyi bekleyeceksin. "Crossfire kur" değil; "şu ses kesilince tek adım çık" gibi tetikleyiciye bağlı bir zincir — oyuncu tam olarak hangi ANI bekleyeceğini bilsin.
 
 ## Aim ve Crosshair Ölümleri
 
@@ -59,7 +59,7 @@ Yanlış yerde durduğun için vuruldun — açıkta kaldın, birden çok yerden
 - **IF** takım arkadaşınla aynı köşeyi yan yana tutuyorsanız
 - **MEANING** saldırgan tek peek'le ikinizi birden görür, iki kişilik ateş gücünüz tek kişilik avantaja düşer
 - **COUNTER** round başlamadan yerleşin: biri klasik köşeye otursun, diğeri o köşeyi görmeyen yüksek ya da alçak açıya geçsin; düşman peek atınca klasik köşedeki ateş etsin, düşman ona dönerken yan açıdaki onu arkadan vurup öldürsün
-- **WHY** saldırgan ikinizi aynı anda göremezse peek atmak ona çok riskli olur, sen bedava bilgi ve geri-alım kazanırsın
+- **WHY** saldırgan ikinizi aynı anda göremezse peek atmak ona çok riskli olur, sen bedava bilgi ve trade kazanırsın
 
 ### Solo peek yerine geri-alım kurulumu
 
@@ -67,14 +67,14 @@ Yanlış yerde durduğun için vuruldun — açıkta kaldın, birden çok yerden
 - **MEANING** ölümün boşa gidiyor, kimse seni hemen geri alamıyor, takım sayı kaybediyor
 - **COUNTER** peek'ten önce yanındakiyle anlaş; "üç deyince" deyip aynı anda hareket edin; sen geniş açıyla peek at, o yan açıda hazır beklesin; vurulursan seni vuranı hemen geri alsın
 - **WHY** her ölüm hemen geri alınırsa sayı avantajın bozulmaz
-- **TRADE EDİLDİYSEN** ölümün takım arkadaşın tarafından hemen geri alındıysa (tradedByAlly) bu ölüm kurulum hatası değil, onay: space alımın işledi, sayı korundu — kurulumu değiştirme, aynı senkronu sonraki girişlerde de tekrarla
+- **TRADE EDİLDİYSEN** takım arkadaşın trade'ini hemen aldıysa (tradedByAlly) bu ölüm kurulum hatası değil, aksine iyi işaret: aldığın açı işe yaradı, sayı korundu — kurulumu değiştirme, sonraki girişlerde de aynı anda hareket et
 
 ### Site'ı ilk seste bırakma
 
 - **IF** site'a ilk temas anında pozisyonu bırakıp çekiliyorsan
 - **MEANING** düşman site'ı bedavaya alır, takımın geri almak zorunda kalır
 - **COUNTER** ilk ayak sesini duyunca kaçma; girişe bir util atıp yavaşlat, çapraz bir pozisyona kay ve bekle; ölmeye çalışma, sadece zamanı al — bir util atıp çekil, başka bir şey yapma
-- **WHY** giriş yavaşlayınca takımın yetişir ve düşman util harcamak zorunda kalır; geri-alım mümkün olur
+- **WHY** giriş yavaşlayınca takımın yetişir ve düşman util harcamak zorunda kalır; trade mümkün olur
 
 ## Zamanlama Ölümleri
 
@@ -93,7 +93,7 @@ Doğru yerdeydin ama yanlış anda çıktın — pencere açıkken değil kapal�
 
 - **IF** seni bir operatör (ya da uzun-hat tek-atış silahı) uzun bir hattan, çoğu zaman aynı açıya aynı anda çıktığında vurduysa
 - **MEANING** operatör tek bir açıya kilitlidir ve sabit timing'le çıkan oyuncuyu bedavaya alır — sen ona kendi ritminde, beklediği anda hediye oldun
-- **COUNTER** o açıya util'siz ikinci kez aynı timing'le çıkma; üç seçenek: (1) takım smoke'uyla hattı kapat ve arkasından geç, (2) operatörcü açıdan çekildiği kısa aralıkta hemen re-peek at, (3) ikinci açıyı farklı yükseklikten ya da daha geniş swing'le zorla ki tek-açı nişanını bozsun
+- **COUNTER** o açıya util'siz ikinci kez aynı timing'le çıkma; üç seçenek: (1) takım smoke'uyla hattı kapat ve arkasından geç, (2) operatörcü açıdan çekildiği kısa aralıkta hemen yeniden peek at, (3) ikinci açıyı farklı yükseklikten ya da daha geniş swing'le zorla ki tek-açı nişanını bozsun
 - **WHY** operatör tek hedefe kilitlidir, ritim-okumaya açıktır — timing'ini değiştirirsen o silah pahalı bir dezavantaja döner; kaçıran operatörcü yakın mesafede en zayıf oyuncudur
 - **TEKRARLA BİRLEŞİRSE** killerInfo'daki silah keskin nişancıysa VE aynı pozisyonda üst üste öldüysen: o hatta üçüncü peek yok — açıyı bir round tamamen boş bırak, ya da ancak takım smoke'u inince farklı yükseklikten zorla; aynı adrese aynı ritimle üçüncü çıkış operatöre bedava atıştır
 
@@ -118,7 +118,7 @@ Doğru yerdeydin ama yanlış anda çıktın — pencere açıkken değil kapal�
 - **COUNTER** smoke'u erken atma; ayak sesini duyunca ya da takımdan "hazır" gelince at; atışı bu somut tetikleyiciye bağla ki smoke takım girerken hâlâ ayakta olsun
 - **WHY** doğru zamanlanan smoke düşmana karşılık verecek pencere bırakmaz
 
-### Geç kalınan düello
+### Düelloya geç kalıyorsun
 
 - **IF** 1v1 ya da 1v2 durumlarında dövüşe sürekli yanlış pozisyonda giriyorsan
 - **MEANING** geç kalıyorsun — kötü yer değiştirme ya da çok uzun bekleme yüzünden açıyı kapatamadan yakalanıyorsun
@@ -214,7 +214,7 @@ Yanlış kararla öldün — almaman gereken dövüşe girdin, düşmanın elini
 - **COUNTER** round bitince ölümünü yeniden düşün: karar bilgine göre doğruysa sonraki clutch'ta tereddütsüz tekrar ver; yanlıştı ama tuttuysa yine de bırak
 - **WHY** doğru karar tekrarlandığında tutarlı sonuç üretir, sonuç eninde sonunda döner
 
-### Dolu ult'la ölme — hazır ult'u cebinde gömme
+### Dolu ult'la ölme — hazır ult'u cebinde çürütme
 
 - **IF** öldüğünde ult'un hazırsa (ultReady) ve bu round hiç kullanılmadıysa
 - **MEANING** tek ölümle iki kayıp verdin: sayı düştün ve round'u çevirecek aracın sahaya hiç çıkmadı — düşman o baskıyı hissetmeden round'u aldı
@@ -230,8 +230,8 @@ Sayı ya da pozisyon avantajındayken eklediğin her gereksiz hamle hata riski �
 ### Sayı üstünlüğünü sadeleştir
 
 - **IF** 4v3 gibi sayı avantajındayken sahayı bölmeye çalışıyor ya da ekstra hamle arıyorsan
-- **MEANING** o round zaten sendeydi; avantaj varken eklediğin her hamle hata riski üretir, düşmana bedava geri-alım fırsatı verir
-- **COUNTER** sayı avantajını gördüğün an ikinci giriş arama; köşeleri temizle, çaprazları kur, bekle; dövüşü sen açma, zamanı işlet, düşmanı sana peek atmaya zorla
+- **MEANING** o round zaten sendeydi; avantaj varken eklediğin her hamle hata riski üretir, düşmana bedava trade fırsatı verir
+- **COUNTER** sayı avantajını gördüğün an ikinci giriş arama; köşeleri temizle, çaprazları kur, bekle; dövüşü sen açma, zamanı oyna, düşmanı sana peek atmaya zorla
 - **WHY** sayı avantajında sade oynamak round'u kilitler; fazla hamle round'u eşitleme riski taşır, kazanmaz
 
 ### Kazanılmış round'da risk ekleme
@@ -308,7 +308,7 @@ Kayıpların büyük kısmı birlikte hareket edememekten gelir; bilgi havadayke
 
 - **IF** pistol round'unda savunmada açık bir hattı tek başına tutup kalabalık girişe öldüysen
 - **MEANING** pistol'de herkesin gücü eşit; açık hatta duran, ilk vuruşu alsa bile ikinci ve üçüncü düşmana sayıyla ezilir
-- **COUNTER** girişin dibini değil, tek adımda kapanacağın köşeyi tut; ilk düşmanı vurduğun AN kapan ve açı değiştir; takım arkadaşınla geri-alım mesafesinde durun — biri düşerse diğeri anında karşılık versin
+- **COUNTER** girişin dibini değil, tek adımda kapanacağın köşeyi tut; ilk düşmanı vurduğun AN kapan ve açı değiştir; takım arkadaşınla trade mesafesinde durun — biri düşerse diğeri anında karşılık versin
 - **WHY** kapanıp açı değiştiren savunmacı kalabalığa sayı vermez; pistol round'u verdirmediğin sayıyla kazanılır
 
 ## Temel Mekanik — Tavan Değil, Zemin
@@ -356,7 +356,7 @@ Spike kurulu ve saldırıdasın: bomba senin için sayıyor, acele etmek zorunda
 - **COUNTER** kurulumdan sonra spike'tan uzaklaş; spike'ı GÖREN ama spike'ta OLMAYAN bir köşeye geç — defuse'a oturan zaten görüş hattına girmek zorunda
 - **WHY** mesafe sana ilk atışı ve çekilme adımını verir; spike'a yapışan ilk temasta düşer
 
-### Arkanı say — retake sarmadan da gelir
+### Arkanı kolla — retake sarmadan da gelir
 
 - **IF** spike kuruluyken site girişine bakarken arkandan vurulduysan
 - **MEANING** retake her zaman ana girişten gelmez; bir savunmacı sarma yoluna döner ve siteye kilitlenen takımı sırtından alır
@@ -365,7 +365,7 @@ Spike kurulu ve saldırıdasın: bomba senin için sayıyor, acele etmek zorunda
 
 ## Retake Ölümleri
 
-Spike kurulu ve savunmadasın: zaman düşmanın lehine işliyor, her hamle defuse'a hizmet etmeli.
+Spike kurulu ve savunmadasın: zaman düşmanın lehine işliyor, her hamlen defuse'a yaramalı.
 
 - **Örnek**: Haven'da C'ye spike kuruldu, takımı beklemeden C Long'dan tek girip post-plant açısına öldün — rotasyonu bekle, util girişle aynı anda insin, tek dalgada girin; sayı sende değilse hiç girme, silahı taşı.
 
@@ -394,7 +394,7 @@ Spike kurulu ve savunmadasın: zaman düşmanın lehine işliyor, her hamle defu
 
 - **IF** site temiz görünürken defuse'a oturup uzaktan gelen util'le ya da saklanan düşmanla öldüysen
 - **MEANING** düşman post-plant'ta util'ini ve peek'ini tam defuse sesine saklar; düz tek hamlelik defuse o tuzağa oturmaktır
-- **COUNTER** defuse'a dokunup hemen bırak — ses, saklanan util'i ve peek'i erken tetikler; takımın o peek'i vursun, sonra gerçek defuse'a otur; çubuk yarıyı geçtiyse ilerleme yarıda saklı kalır, ikinci oturuşta kalan yarıyı çözersin
+- **COUNTER** defuse'a dokunup hemen bırak — ses, saklanan util'i ve peek'i erken tetikler; takımın o peek'i vursun, sonra gerçek defuse'a otur; bar yarıyı geçtiyse ilerleme yarıda saklı kalır, ikinci oturuşta kalan yarıyı çözersin
 - **WHY** sakladığı util'i boşa atan düşmanın elinde defuse'u bozacak bir şey kalmaz; yarım ilerleme ikinci denemeyi kısaltır
 
 ### Tek savunmacıysan retake'i zorlama
@@ -415,7 +415,7 @@ Takım baskı kurarken haritanın uzak kolunda tek başınasın; lurk'ün değer
 - **IF** takımdan kopuk, tek başına haritanın uzak bir bölgesinde (mid/flank) erken lurk yaparken öldüysen (saldırıdasın, takım arkadaşların hayatta ama uzakta)
 - **MEANING** lurk'ün takım baskısından kopuktu; düşman seni rahatça izole edip trade'siz aldı, çünkü lurk ancak takım dikkat çekerken işe yarar
 - **COUNTER** lurk'ünü takımın execute'una senkronla: takım siteye baskı kurup dikkat çekerken sen arka/flank bilgisini al, izole 1v1 peek arama
-- **WHY** lurk'ün değeri bilgi ve rotasyon kesmektir, kill değil — takım baskısı yokken lurk sadece sayısal dezavantaj yaratır, çünkü düşman tek bir hedefe odaklanabilir
+- **WHY** lurk'ün değeri bilgi ve rotasyon kesmektir, kill değil — takım baskısı yokken lurk sadece sayı dezavantajı yaratır, çünkü düşman tek bir hedefe odaklanabilir
 
 ### Keşfedilen lurk'ü bitir, dövüşe çevirme
 

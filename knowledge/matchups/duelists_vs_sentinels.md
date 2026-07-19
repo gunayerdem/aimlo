@@ -50,3 +50,7 @@ Duelist site açar, sentinel o açılışı kapatır. Sentinelin kurulumunu peek
 
 ## Koç Notları
 Üst seviyede iş tamamen okumaya kalır. İyi sentineller kurulumu her round değiştirmekle kalmaz — duelistin elinde hangi yetenek var, tuzağı ona göre yerleştirir: ult'lu takıma karşı teli köşeye değil geçiş ortasına kurar çünkü ult zaten köşeyi temizler; dash'li dueliste karşı botu ikinci açıya koyar — duelist birinci açıyı temizler, bot ikinciden vurur. Duelist içinse kural tek: ikinci ve üçüncü roundda kurulumun değişip değişmediğini kontrol et, ezberle girme.
+
+## Sage Varsa: Beden Tehdidi
+
+Düşman kompunda Sage varsa aldığın kill kesin değildir: sayıyı Sage ölmeden ya da bedeni güvenceye almadan kapanmış sayma. Bedeni gören açıyı tut — dirilten Sage beden başında sabit ve savunmasızdır, kalkan oyuncu silahsız doğar; ikisi de bedava kill.

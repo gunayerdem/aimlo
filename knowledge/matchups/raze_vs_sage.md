@@ -54,7 +54,7 @@ Raze, nade ve sıçrama ile Sage'in duvar ve slow savunmasını kırmaya gelir. 
 ---
 
 **IF** Sage ult'unu Raze birini öldürdükten sonra kullanıp ölen takım arkadaşını canlandırdı
-**MEANING** Raze'in kazandığı trade geri alındı, sayı üstünlüğü silindi.
+**MEANING** Raze'in aldığı kill boşa gitti, sayı üstünlüğü silindi.
 **COUNTER** Raze olarak şunu oku: Sage canlandırdıysa, canlandırılan oyuncu Sage'in dibinde çıkar. İkisi aynı noktada — nade için iki hedef bir arada.
 **WHY** Canlandırma iki oyuncuyu aynı yere toplar. Raze nade alan hasarı verir; iki hedef tek noktada nade için en yüksek değer.
 
@@ -125,3 +125,7 @@ Duvarı giriş noktasına değil kaçış yoluna kur. Raze sıçrama ile duvarı
 
 **Üst seviyede ne yapılır:**
 Sage oynuyorken duvarı Raze'in sıçrama menzilinin ucuna kur — Sıçrama duvarı geçse bile sen duvarın kör açısında pozisyon al. Raze oynuyorken Sage'in duvarını harcattıktan sonra ikinci girişi nade lineup ile aç. Bu iki disiplin çakışırsa crosshair placement ve ilk kurşun isabeti tutan kazanır.
+
+## 8. Diriliş Tehdidi
+
+Düşman kompunda Sage varsa aldığın her kill beden tehdididir: sayıyı Sage ölmeden ya da bedeni güvenceye almadan kesin sayma. Raze'in cevabı net — beden alanını patlayıcıyla yasakla: nade ya da molly bedenin üstüne gitsin; dirilmeye gelen Sage ile beden aynı noktada, tek patlayıcıya iki hedef. Patlayıcın bittiyse bedeni gören açıyı tut: dirilten Sage sabit ve savunmasız, kalkan oyuncu silahsız doğar — ikisi de bedava.

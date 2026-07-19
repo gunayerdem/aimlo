@@ -116,3 +116,7 @@ Ult karşılaşması: Harbor ult'u alanı açar, Sage ult'u trade'i geri alır. 
 - Diriltmeyi ilk ölen anchor için sakla, girişçi için harcama.
 
 **Özet:** Harbor tempo getirir, Sage tepki verir. Sage önce hareket ederse roller tersine döner. Kim önce util koymaya mecbur kalırsa o kaybeder.
+
+## 7. Diriliş Tehdidi
+
+Düşman kompunda Sage varsa takımın aldığı her kill beden tehdididir: sayıyı Sage ölmeden ya da bedeni güvenceye almadan kesin sayma. Harbor'un cevabı alan kesmek — duvarı beden ile Sage'in geliş hattı arasına çek: duvardan geçen Sage yavaşlar ve açığa çıkar, takımın onu bedava vurur. Bedeni gören açıyı takıma tuttur: dirilten Sage beden başında sabit ve savunmasız, kalkan oyuncu silahsız doğar — ikisi de bedava kill.

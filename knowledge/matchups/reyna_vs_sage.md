@@ -118,3 +118,7 @@ Sage oynuyorsan: duvarı hamle sesine göre değil, hamleden önce koy. Yavaşla
 Reyna oynuyorsan: flash desteği olmadan Sage duvarına karşı tek başına hamle yapma. Takımda KAY/O veya Breach varsa flash'ını ya da susturmasını bekle, sonra gir. İlk fırsat açılırsa hemen bitir — heal mi kaçış mı kararını öldürdükten sonra ver, önce değil.
 
 **Koç özeti:** "Reyna ilk öldürmeyle başlar, o yoksa hiçbir şey. Sage olarak Reyna'yı o ilk öldürmeden uzak tut. Duvarını reaktif koyma, proaktif koy. Reyna'nın ruh ekonomisini round başında kır, round biter."
+
+## 8. Diriliş Tehdidi
+
+Düşman kompunda Sage varsa Reyna'nın aldığı kill bile kesin değildir: sayıyı Sage ölmeden ya da bedeni güvenceye almadan kapanmış sayma. Kaçışı geri koşmak için değil, bedeni gören açıya geçmek için kullan — beden açıktaysa Sage ona gelmek zorunda, açıyı tutan Reyna düelloyu peşin kazanır. Dirilten Sage beden başında sabit ve savunmasızdır, kalkan oyuncu silahsız doğar — ikisi de ruh zincirine bedava halka.

@@ -50,3 +50,7 @@ Initiator düşmanın tuzaklarını bulur ve açar. Sentinel tuzaklarını sakla
 
 ## Koç Notları
 Üst seviyede iki taraf da birbirinin kalıbını okur: initiator sentinelin hangi rounda nereye koyacağını tahmin eder, sentinel tarama güzergahını öngörüp tuzağı oradan uzağa koyar. Kalıbı kır — aynı kurulumu arka arkaya tekrarlama; düşman ilk kez görünce ikinci kez bekler. Zamanlama dersi de net: giriş tam kapıya dayandığında tara, daha erken değil.
+
+## Sage Varsa: Beden Tehdidi
+
+Düşman kompunda Sage varsa takımın aldığı kill kesin değildir: sayıyı Sage ölmeden ya da bedeni güvenceye almadan kapanmış sayma. Bedeni gören açıyı tut ya da o alanı yetenekle kilitle — dirilmeye gelen Sage sabit ve savunmasızdır, kalkan oyuncu silahsız doğar; ikisi de bedava kill.

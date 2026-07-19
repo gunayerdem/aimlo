@@ -98,3 +98,7 @@ Matchup iki kurala iner:
 - **Sage oynuyorsan:** Duvarı Jett'in ikinci girişine sakla, ilk girişi yavaşlatmayla kes.
 
 Jett duvarı harcatırsa ikinci girişte Sage'in eli boş kalır. Sage duvarı saklarsa Jett ilk girişten sonra yer değiştiremez.
+
+## 7. Diriliş Tehdidi
+
+Düşman kompunda Sage varsa aldığın her kill bir beden tehdididir: sayıyı Sage ölmeden ya da bedeni güvenceye almadan kesin sayma. Öldürdükten sonra geri çekilme — dash'i bedeni gören açıya geçmek için kullan. Dirilten Sage beden başında sabit ve savunmasızdır: o açıyı tutuyorsan bedava kill. Kalkan oyuncu da silahsız ve savunmasız doğar — o anda bas, düello peşin senin.

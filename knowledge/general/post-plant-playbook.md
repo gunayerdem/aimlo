@@ -46,7 +46,7 @@ Defuse kolay görünür ama çapraz açıyı çok daha rahat kurarsın. Rakip op
 
 **Yayılma (Varsayılan):** Oyuncular ayrı noktalarda; retake'e gelen rakip birini görürken diğeri onu vurur. Az kişiyle yayılma işe yaramaz — her nokta tek başına zayıf kalır.
 
-**Yığılma:** 2-3 oyuncu aynı noktada; kill değişimi garanti. Tek açıyı tutarsın ama rakip diğer taraftan defuse'a kaçabilir.
+**Yığılma:** 2-3 oyuncu aynı noktada; trade garanti. Tek açıyı tutarsın ama rakip diğer taraftan defuse'a kaçabilir.
 
 **Karar:** 4+ oyuncu varsa yayıl, 3 ve altıysa yığıl.
 

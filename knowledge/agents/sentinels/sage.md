@@ -73,12 +73,26 @@ Takımın tek iyileştiricisi, tek dirilticisi sensin. Değerin bilgiden ya da t
 **COUNTER** Duvarı dövüş başlamadan, push'u beklediğin choke'a önceden koy. Tam yükselmesi bir an alır; o an içinde peek atılırsan iş işten geçer.
 **WHY** Duvar anında katı olmaz, aşağıdan yukarı yükselir. Geç koyulan duvar yükselirken altından ya da yanından vurulursun — erken koyulan duvar dövüşü sen istediğin anda başlatır.
 
+**IF** Dirilttiğin arkadaş kalktığı anda ölüyorsa
+**MEANING** Diriltmeyi kaosun ortasında yapıyorsun — arkadaşın süren çatışmanın içine, silahı yerdeyken doğuyor.
+**COUNTER** Anı sen seç: takım açıları tutarken dirilt, doğacağı nokta duvar ya da siper arkasında kalsın — kalktığı anda düelloya zorlanmasın.
+**WHY** Kaosta diriltme sayıyı düzeltmez, düşmana aynı noktadan ikinci sayıyı hediye eder. Doğru anda diriltme takıma tam bir silah döndürür.
+
+### Diriltme Karar Ağacı
+Diriltme ile duvar aynı anda siper istiyorsa sıra duruma bağlı:
+- **Takım bedeni gören açıları zaten tutuyorsa** önce dirilt, duvarı sakla — o duvar sıradaki dövüşte bir görüş hattı keser. İki işi tek yeteneğe yıkma.
+- **Bedeni kimse korumuyorsa** sıra net: önce duvar, arkasında dirilt.
+- **Tek duvar hem bedeni hem düşmanın geliş yolunu kesiyorsa** en yüksek değer orası — duvarı oraya koy, diriltmeyi arkasında yap.
+- **Retake'te** önce site güvenliği, sonra diriltme. Site temizlenmeden diriltirsen post-plant açısındaki düşman hem seni hem kalkan arkadaşını vurur; takım siteyi alırken sen diriltmeye eğilirsen retake bir silah eksik girer. Temizlik bitince dirilt, defuse'u kalabalık koru.
+- **Post-plant'te defuse baskısı varken** önce defuse'çuyu düşür — yerdeki beden defuse'u durdurmaz, ateşin durdurur. Spike korumasız kalacaksa animasyona başlama; diriltme değerini açılar tutulurken üretir.
+- **Diriltmeyi baskıya çevir:** diriltemediğin beden ölü yük değil, koz. Beden yerde kaldıkça bir düşman o açıyı tutmak zorunda — çağrıyı ver, takım o anda öbür koldan bassın. Cebindeki diriltme daha kullanılmadan düşmandan bir silah çalar.
+
 ## 5. Harita Etkileşimleri
 - **Bind:** B hookah penceresine duvar gir, girişi tamamen kapat. B long'da düşman push'una slow at, hareketi parçala.
 - **Split:** Mid'e duvar koy — saldırganları mid kontrolü olmadan A ya da B seçmeye zorlarsın. Split'te dar koridorlar slow'u öldürücü kılar: tek çıkışlı geçide atılan slow düşmanı sıkışık tutar, takım rahat trade'ler.
-- **Icebox:** A Belt duvarı o uzun görüş hattını tamamen kapatır — saldırı Belt'ten eriyorsa duvar oraya. B'de duvarı default plant'in üstüne kur: plant yükselir, Kitchen açısından korunur. Yavaşlatmayı Tube ya da Orange'a at — dar geçişte değeri en yüksek.
+- **Icebox:** A Belt duvarı o uzun görüş hattını tamamen kapatır — saldırı Belt'ten eriyorsa duvar oraya. B'de duvarı default plant'in üstüne kur: plant yükselir, Kitchen açısından korunur. Slow'u Tube ya da Orange'a at — dar geçişte değeri en yüksek.
 - **Sunset:** Courtyard'a çekilen duvar mid kontrolünü kavgasız verir — Courtyard'ı tutan taraf split'i seçer. A Elbow dönüşüne slow at: site'a kıvrılan push dar noktada yavaşlar, sen A site açısından hazır beklersin. B Market kapısı kırılıp geçiliyorsa slow'u kapının ardına bırak — geçen herkes ses verir.
-- **Haven:** C garage girişine duvar ciddi zaman kazandırır. A long push'una atılan slow yüksek kazanç sağlar. Üç site'lı haritada rotasyon uzun — bir choke'u duvarla kapatmak, takımına diğer site'a yetişecek zamanı doğrudan satın alır.
+- **Haven:** C garage girişine duvar ciddi zaman kazandırır. A long push'una atılan slow yüksek kazanç sağlar. Üç site'lı haritada rotasyon uzun — bir choke'u duvarla kapatmak, takımına diğer site'a yetişecek zamanı doğrudan kazandırır.
 - **Ascent:** Mid'i duvarla bölersen takım mid kontrolünü kavgasız alır — Ascent'te mid'i tutan round'u tutar. B site'ta dar girişe duvar koymak retake'i tek başına geciktirir.
 - **Lotus:** Üç girişli site'larda slow daha değerli: dönen kapı ve dar geçitlerde slow düşmanı dar açıda dondurur, duvarı bir girişi tamamen kesmeye sakla.
 
@@ -87,7 +101,7 @@ Takımın tek iyileştiricisi, tek dirilticisi sensin. Değerin bilgiden ya da t
 - **Eco ve force-buy round'larında** güçlüsün — iyileştirme yıpratma hasarını sıfırlar, takımı ayakta tutar.
 - **Pick bazlı oynayan takımlara** karşı ult en yüksek kazancı verir — dirilterek 5v4 dezavantajını sıfırlarsın.
 - **Koordineli hızlı push'lara** karşı zayıfsın — duvar ve slow aynı anda ezilebilir.
-- **Molly atan ajanlara karşı** (ateş hasarı atanlar) iyileştirmen üstün gelir — yıpratma molly'sinin hasarını geri yükler, push'u oradan sürdürürsün.
+- **Molly atan ajanlara karşı** (ateş hasarı atanlar) iyileştirmen üstün gelir — yıpratma molly'sinin götürdüğü canı geri kapatır, push'u oradan sürdürürsün.
 - **Tek kişi lurk eden takımlara karşı** duvarını flank yoluna koymak yerine ana dövüşe odakla — diriltme tehdidin zaten lurk'çuyu beden izlemeye zorlar.
 
 ## 7. Oyuncuya Ne Söylenmeli
