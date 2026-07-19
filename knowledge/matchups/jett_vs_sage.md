@@ -101,4 +101,4 @@ Jett duvarı harcatırsa ikinci girişte Sage'in eli boş kalır. Sage duvarı s
 
 ## 7. Diriliş Tehdidi
 
-Düşman kompunda Sage varsa aldığın her kill bir beden tehdididir: sayıyı Sage ölmeden ya da bedeni güvenceye almadan kesin sayma. Öldürdükten sonra geri çekilme — dash'i bedeni gören açıya geçmek için kullan. Dirilten Sage beden başında sabit ve savunmasızdır: o açıyı tutuyorsan bedava kill. Kalkan oyuncu da silahsız ve savunmasız doğar — o anda bas, düello peşin senin.
+Düşman kompunda Sage varsa aldığın her kill bir beden tehdididir: sayıyı Sage ölmeden ya da bedeni güvenceye almadan kesin sayma. Öldürdükten sonra geri çekilme — dash'i bedeni gören açıya geçmek için kullan. Dirilten Sage beden başında sabit ve savunmasızdır: o açıyı tutuyorsan bedava kill. Kalkan oyuncu silahını geri almış doğar ama kalkış ânında nişanı hazır değildir — o pencerede bas, düelloyu önden başlat.

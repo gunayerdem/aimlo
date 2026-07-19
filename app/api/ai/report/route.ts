@@ -1123,7 +1123,7 @@ ${scoringContext}`;
       // clampWords (2026-07-09): ham .slice kelime ortasında kesiyordu ("rotasy") —
       // kelime sınırına geri çekilen mevcut word-safe clamp kullanılır.
       const clean = (s: string, cap: number) =>
-        clampWords(cleanCoachText(realityCheck(s, [], fg, "generic").text, isTr ? "tr" : "en"), cap);
+        clampWords(cleanCoachText(realityCheck(s, [], fg, "generic", isTr ? "tr" : "en").text, isTr ? "tr" : "en"), cap);
       return {
         ...stats,
         summary: clean(parsed.summary, 1000),

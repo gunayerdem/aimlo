@@ -257,6 +257,9 @@ export function rewriteUnsafeClaims(
   // useless stub). When false, return "" instead so the caller can keep the
   // original advice. Defaults true → every existing caller is byte-identical.
   allowEmptyFallback: boolean = true,
+  // Denetim 2026-07-19 (F5): route istek dilini biliyor — verilirse heuristik
+  // yerine kesin dil kullanılır; verilmezse eski heuristik → eski çağıranlar bayt-aynı.
+  lang?: "tr" | "en",
 ): string {
   if (validation.rewriteLevel === 1) {
     return text; // all claims verified
@@ -268,7 +271,9 @@ export function rewriteUnsafeClaims(
   // ÇIKTININ diliyle eşleşmeli — EN cümleye "kez" enjekte etmek (ve TR cümleye
   // "recently") kelime-düzeyi dil karışmasının kaynağıydı. Türkçe özel harf
   // heuristiği level-3'teki mevcut isTr tespitiyle aynı ailedendir.
-  const trText = /[şçğıöü]/i.test(text);
+  // Denetim 2026-07-19 (F5): lang verilmişse heuristik atlanır (özel-harfsiz TR
+  // cümle EN sayılıp "times/recently" enjekte edilmesin).
+  const trText = lang ? lang === "tr" : /[şçğıöü]/i.test(text);
 
   if (validation.rewriteLevel === 2) {
     // Position valid but count/repetition overclaimed
@@ -319,7 +324,8 @@ export function rewriteUnsafeClaims(
     // No memory support — strip ALL historical and repetition claims.
     // Detect language from the (already-mostly-cleaned) result so the neutral
     // fallback (used only if EVERY sentence gets dropped) matches the language.
-    const isTr = /[şçğıöü]|round'da|maç|tur|round'lar/i.test(result);
+    // Denetim 2026-07-19 (F5): lang verilmişse kesin; verilmezse eski heuristik.
+    const isTr = lang ? lang === "tr" : /[şçğıöü]|round'da|maç|tur|round'lar/i.test(result);
 
     // DROP the ENTIRE sentence that carries an unproven repetition claim,
     // instead of the old in-place keyword→"bu round'da" substitution which
@@ -418,6 +424,15 @@ const TRADE_CLAIM_PATTERNS: RegExp[] = [
   /\btrade\s*['’]?\s*(alamadın|alınmadı|kuramadın|kurulmadı|edilemedin|edilmedi|yapılmadı|olmadı)/gi,
   /\btakım(ın)?\s+(seni\s+)?trade\s+(etmedi|alamadı|kurmadı|edemedi)/gi,
   /\btrade\s*['’]?\s*siz\s+(öldün|kaldın|gittin)/gi,
+  // EN aynası (denetim 2026-07-19 F8): "your death wasn't traded" EN çıktıda
+  // süzülmüyordu. TR ile aynı ilke: yalnız GEÇMİŞ-sonuç iddiaları; öğüt
+  // ("make sure you get traded") listede DEĞİL. EN literal'ler TR metne değemez.
+  /\b(?:wasn['’]?t|was\s+not|couldn['’]?t\s+be|didn['’]?t\s+get|never\s+got)\s+traded\b/gi,
+  /\bwent\s+untraded\b/gi,
+  /\bun-?traded\b/gi,
+  /\bno\s+one\s+traded\s+you\b/gi,
+  /\bnobody\s+traded\s+you\b/gi,
+  /\bteam\s+(?:didn['’]?t|couldn['’]?t|failed\s+to)\s+trade\s+you\b/gi,
 ];
 
 // Agent names for the killer-when-absent guard (2026-06-26 grounding audit).
@@ -489,6 +504,11 @@ export function buildFactGround(
 export function guardUnprovenFacts(
   text: string,
   factGround: FactGround,
+  // Denetim 2026-07-19 (F5): çağıran route istek dilini (reqLang) ZATEN biliyor —
+  // özel-harf heuristiği özel-harfsiz TR cümleyi EN sayıp "an enemy"yi Türkçe
+  // metne enjekte ediyordu. lang verilirse kesin; verilmezse eski heuristik →
+  // mevcut 2-arg çağıranlar bayt-aynı.
+  lang?: "tr" | "en",
 ): string {
   let result = text;
 
@@ -506,17 +526,26 @@ export function guardUnprovenFacts(
   if (factGround.hasKiller === false) {
     // Dil (2026-07-18): "bir düşman" EN çıktıya Türkçe sızdırıyordu — replacement
     // metnin diline uyar (EN kill-fiilleri de token'a eklendi ki STEP2 EN'de tetiklensin).
-    const trText = /[şçğıöü]/i.test(result);
+    // Denetim 2026-07-19 (F5): lang verilmişse heuristik yerine onu kullan.
+    const trText = lang ? lang === "tr" : /[şçğıöü]/i.test(result);
     const AN_ENEMY = trText ? "bir düşman" : "an enemy";
     const NAME_ALT = AGENT_NAMES.map(escapeRe).sort((a, b) => b.length - a.length).join("|");
+    // Denetim 2026-07-19 (F6): EN'de katil adının önündeki "the" artikeli match'e
+    // DAHİL — eski hali "The Cypher killed you" → "The an enemy killed you" üretiyordu
+    // (EN şemanın kendi few-shot kalıbı "the Cypher killed you..." → model bu formu
+    // üretmeye teşvikli). TR metinde "the" geçmez → TR yolu bayt-aynı.
+    const THE = "(?:the\\s+)?";
     const KILLER_TOKEN = `(?:${NAME_ALT}|unknown|bilinmeyen)`;
     const KV2 = "(?:vurup öldürdü|öldürdü|öldürdün|öldürüldün|kestiler|kesti|vuruldun|vurdun|vurdu|düşürdü|indirdi|biçti|aldılar|aldı|avladı|devirdi|götürdü|temizledi|killed you|shot you|killed|shot|picked you off|took you down|caught you)";
     const NLB = "(?<![a-zçğıöşüâîû])", NL = "(?![a-zçğıöşüâîû])";
     // STEP1: ≥2 üyeli katil-disjunction ("X ya da Y ya da Z" / "X or Y") → tek genel-düşman
-    result = result.replace(new RegExp(`${NLB}${KILLER_TOKEN}(?:\\s*(?:ya da|veya|or|/|,)\\s*${KILLER_TOKEN})+`, "gi"), AN_ENEMY);
-    // STEP2: tek isimli katil + aynı clause'da kill-verb → genel-düşman (char-cap YOK)
-    const SINGLE = new RegExp(`${NLB}${KILLER_TOKEN}\\b([^.!?;:—\\n]*?\\s)${KV2}${NL}`, "gi");
-    result = result.replace(SINGLE, (m: string, mid: string) => AN_ENEMY + m.slice(m.indexOf(mid)));
+    result = result.replace(new RegExp(`${NLB}${THE}${KILLER_TOKEN}(?:\\s*(?:ya da|veya|or|/|,)\\s*${THE}${KILLER_TOKEN})+`, "gi"), AN_ENEMY);
+    // STEP2: tek isimli katil + aynı clause'da kill-verb → genel-düşman (char-cap YOK).
+    // Lookahead formu (F6): yalnız "(the) <katil>" token'ı değişir, clause'un geri
+    // kalanı verbatim kalır — eski m.slice(m.indexOf(mid)) hilesi "The " tüketilince
+    // ilk boşluğu "The"nin içinde bulup katil adını geri sızdırıyordu.
+    const SINGLE = new RegExp(`${NLB}${THE}${KILLER_TOKEN}\\b(?=[^.!?;:—\\n]*?\\s${KV2}${NL})`, "gi");
+    result = result.replace(SINGLE, AN_ENEMY);
     // STEP3: kalan stray "unknown"/"bilinmeyen" → genel-düşman
     result = result.replace(new RegExp(`${NLB}(?:unknown|bilinmeyen)${NL}`, "gi"), AN_ENEMY);
     // STEP4: "bir düşman ya da bir düşman" / "an enemy or an enemy" run'larını tek'e çökert
@@ -555,6 +584,10 @@ export function guardUnprovenFacts(
       /\b\d+\s*v\s*\d+\b/gi,                       // "1v3", "2 v 4"
       /\btakım(ın)?\s+\d+\s*kişi\s*(sağ|kaldı|hayatta)/gi,
       /\b\d+\s*kişi\s*(sağ\s*kaldı|hayatta\s*kaldı)/gi,
+      // EN aynası (denetim 2026-07-19 F8): "3 enemies left/alive" EN çıktıda
+      // süzülmüyordu. EN literal'ler TR metinle eşleşemez → TR yolu bayt-aynı.
+      /\b\d+\s*enem(?:y|ies)\s+(?:left|alive|remaining|up)\b/gi,
+      /\b\d+\s*(?:allies|teammates?|players?)\s+(?:left|alive|remaining)\b/gi,
     ];
     for (const re of ALIVE_PATTERNS) result = result.replace(re, "");
   }
@@ -568,6 +601,12 @@ export function guardUnprovenFacts(
       /\bspike\s*['’]?\s*(kuruldu|kurulmuştu|kurulmadı|kurulmamıştı|kurmuştun|açılmıştı)/gi,
       /\b(defuse|defüz)\s*(ediyordun|ettin|etmeye|alıyordun)/gi,
       /\bspike\s*(defuse|çöz)/gi,
+      // EN aynası (denetim 2026-07-19 F8): "the spike was planted/down" iddiası
+      // EN çıktıda süzülmüyordu. Yalnız GEÇMİŞ-iddia formları — öğüt ("plant the
+      // spike", "after the spike is planted" koşulu) listede DEĞİL.
+      /\bspike\s+(?:was|got|had been)\s+(?:planted|down|ticking)\b/gi,
+      /\byou\s+were\s+defusing\b/gi,
+      /\bwhile\s+defusing\b/gi,
     ];
     for (const re of SPIKE_PATTERNS) result = result.replace(re, "");
   }
@@ -586,6 +625,14 @@ export function guardUnprovenFacts(
       /((?<![a-zçğıöşü])seni(?![a-zçğıöşü])[^.;:—!?\n]{0,50}?)kafadan (vurarak|tek atışta) /gi,
       "$1",
     );
+    // EN aynası (denetim 2026-07-19 F8): "one-tapped you / shot you in the head"
+    // EN çıktıda süzülmüyordu. TR guard'la aynı sözleşme: kill-olgusu KORUNUR
+    // ("killed you"), yalnız headshot-iddiası düşer. Öğüt ("aim for the head")
+    // "you" nesne çapası olmadığından DOKUNULMAZ. Sıra: one-tapped önce (çıktısı
+    // ikinci kalıba beslenebilir).
+    result = result.replace(/\b(?:one[- ]?tapped|head-?shott?ed)\s+you\b/gi, "killed you");
+    result = result.replace(/\b(killed|shot|hit|caught)\s+you\s+in\s+the\s+head\b/gi, "$1 you");
+    result = result.replace(/\bwith\s+a\s+headshot\b/gi, "");
   }
 
   // Death-location-when-absent (LAUNCH BLOCKER 2026-06-28): deathLocation OCR'da
@@ -602,6 +649,20 @@ export function guardUnprovenFacts(
         "gi",
       );
       result = result.replace(re, (_m: string, mid: string, verb: string) => `${mid}${verb}`);
+      // EN aynası (denetim 2026-07-19 F8): "you died at B Main" EN çıktıda
+      // süzülmüyordu. TR guard'la aynı sözleşme: ölüm-fiili KALIR, yalnız uydurma
+      // YER düşer. Ölüm-fiiline çapalı → "hold the angle at B Main" öğüdü
+      // DOKUNULMAZ. Yalnız geçmiş-iddia formları ("get caught" öğüt formu yok).
+      const reEnA = new RegExp(
+        `\\b(died|was killed|got killed|was shot|got shot|was caught|got caught|went down)\\s+(?:at|in|near|on)\\s+${escapeRe(pos)}(?![a-z0-9-])`,
+        "gi",
+      );
+      result = result.replace(reEnA, "$1");
+      const reEnB = new RegExp(
+        `\\b(killed|shot|caught|picked)\\s+you(\\s+off)?\\s+(?:at|in|near|on)\\s+${escapeRe(pos)}(?![a-z0-9-])`,
+        "gi",
+      );
+      result = result.replace(reEnB, "$1 you$2");
     }
   }
 
@@ -613,6 +674,15 @@ export function guardUnprovenFacts(
         "gi",
       );
       result = result.replace(re, "");
+      // EN aynası (denetim 2026-07-19 F8): "came through mid / wrapped behind B Main"
+      // rota-kökeni iddiası EN çıktıda süzülmüyordu (EN few-shot SCENARIO A bu dili
+      // bizzat modelliyor). Yalnız GEÇMİŞ formlar — emir/koşul öğüdü ("push through
+      // mid", "rotate from B") listede DEĞİL (TR ROUTE_ORIGIN_VERBS ile aynı ilke).
+      const reEn = new RegExp(
+        `\\b(?:came|pushed|rotated|wrapped|flanked)\\s+(?:in\\s+)?(?:from|through|behind|out\\s+of|via)\\s+${escapeRe(pos)}(?![a-z0-9-])`,
+        "gi",
+      );
+      result = result.replace(reEn, "");
     }
     for (const re of ROUTE_GENERIC_PATTERNS) result = result.replace(re, "");
   }
@@ -656,6 +726,11 @@ export function realityCheck(
   // advice). Omitted ⇒ "death"/"generic" behavior = byte-identical to before;
   // every existing report/insight/feedback caller is unaffected.
   kind?: "death" | "suggestion" | "generic",
+  // Denetim 2026-07-19 (F5): İSTEK dili (route reqLang'den). Verilirse guard +
+  // rewrite replacement metinleri bu dille yazılır (özel-harfsiz TR cümlenin EN
+  // sayılıp "an enemy"/"recently" enjekte edilmesi biter). Verilmezse eski
+  // heuristik → mevcut çağıranlar (eval-vision dahil) bayt-aynı.
+  lang?: "tr" | "en",
 ): { text: string; modified: boolean; rewriteLevel: number } {
   if (!outputText) {
     return { text: outputText, modified: false, rewriteLevel: 1 };
@@ -668,7 +743,7 @@ export function realityCheck(
   // (round 1) because it validates against the current round's facts, not the
   // match's past memory.
   if (factGround) {
-    const guarded = guardUnprovenFacts(text, factGround);
+    const guarded = guardUnprovenFacts(text, factGround, lang);
     if (guarded !== text) {
       text = guarded;
       rewriteLevel = Math.max(rewriteLevel, 2);
@@ -681,7 +756,7 @@ export function realityCheck(
     const claims = extractClaims(text);
     if (claims.claimedCount || claims.claimedPosition || claims.repetitionClaim) {
       const validation = validateClaims(claims, roundHistory);
-      text = rewriteUnsafeClaims(text, claims, validation, kind !== "suggestion");
+      text = rewriteUnsafeClaims(text, claims, validation, kind !== "suggestion", lang);
       rewriteLevel = Math.max(rewriteLevel, validation.rewriteLevel);
     }
   }

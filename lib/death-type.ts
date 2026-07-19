@@ -39,6 +39,7 @@ export type DeathType =
   | "timing-window"
   | "low-hp-no-save"
   | "clutch-lost"
+  | "ult-in-pocket"
   | "lurk-caught"
   | "def-wide-hold"
   | "info-less-push";
@@ -65,6 +66,7 @@ export const DEATH_TYPE_GUIDE: Record<DeathType, { kbBlock: string; angle: strin
   "timing-window":       { kbBlock: "Zamanlama Ölümleri — Beklenti penceresi kapanınca çık", angle: "smoke/duvar daha açılırken, beklenti penceresi açıkken çıktın — pencere kapanınca, düşmanın gevşeme anında peek at", concept: "zamanlama-penceresi" },
   "low-hp-no-save":      { kbBlock: "Karar ve Ekonomi Ölümleri — Düşük canla dövüşü zorlama — silahı kurtar", angle: "düşük canla save etmeyip silahı sundun — düşük HP + dezavantajda silahı kurtar, sonraki round'a yatırım yap", concept: "save-etmedin" },
   "clutch-lost":         { kbBlock: "Karar ve Ekonomi Ölümleri — Clutch'ı 1v1 dizisine indir", angle: "son canlıyken sonuca göre değil panikle oynadın — tek açı izole et, sesle düşmanları ayır, durumu ardışık 1v1'lere indir", concept: "clutch" },
+  "ult-in-pocket":       { kbBlock: "Karar ve Ekonomi Ölümleri — Dolu ult'la ölme — hazır ult'u cebinde çürütme", angle: "ult'un doluyken hiç kullanmadan öldün — ölüm riski yüksek hamleyi ult'suz alma; hamleyi ult'la aç ya da ilk teması takıma bırak", concept: "ult-cepte" },
   "lurk-caught":         { kbBlock: "Lurk Ölümleri", angle: "takımdan kopuk erken lurk'te yakalandın — lurk'ünü execute'a senkronla, takım baskısı havadayken düşmanın yerini öğren", concept: "lurk" },
   "def-wide-hold":       { kbBlock: "Pozisyon ve Açı Ölümleri — Açıkta değil, siperin yanında dur", angle: "savunmada açıyı erken/geniş açtın ve ilk atışı yedin — siperin yanında dur, off-angle al, peek atmadan ilk kontağı bekle", concept: "savunma-genis-aci" },
   "info-less-push":      { kbBlock: "Zamanlama Ölümleri — Tetikleyici bekle — açılışta da, basarken de", angle: "somut bir tetikleyici beklemeden, düşmanın yerini öğrenmeden bastın — ses kesilmesi ya da ilk kontağı bekle, sonra çık", concept: "tetikleyici-yok" },
@@ -81,6 +83,7 @@ export type DeathSignals = {
   alliesAlive?: number;     // 0-4
   enemiesAlive?: number;    // 0-5
   spikePlanted?: boolean;
+  ultReady?: boolean;       // ult charged + unused at death (desktop OCR truth)
   economyType?: string;     // "full_buy" | "force_buy" | "half_buy" | "eco" | "pistol"
   tradedByAlly?: boolean;
   repeatedPosition?: boolean; // derived in route.ts from roundHistory
@@ -115,6 +118,11 @@ export function classifyDeath(b: DeathSignals): DeathType {
   if (isOp) return "op-angle";                                            // weapon-anchored
   if (b.spikePlanted && atk) return "post-plant-solo";                    // attack + spike up
   if (b.spikePlanted && def) return "retake-no-util";                     // defense + spike up = retake
+  // ult-in-pocket (KB pipeline denetimi 2026-07-19): sinyal payload'da VARDI
+  // (route ctx.ultReady) ama classifier dalı yoktu → universal.md "Dolu ult'la
+  // ölme" bloğu deterministik yoldan hiç seçilemiyordu. Spike dallarından SONRA:
+  // post-plant/retake bağlamı dolu-ult dersinden daha spesifik.
+  if (b.ultReady === true) return "ult-in-pocket";                        // died with charged, unused ult
   // Pistol round = kendi bloğu (denetim: universal.md "Erken Round Ölümleri" bölümü
   // hiçbir tipe bağlı değildi = ölü içerik; pistol ölümü eco dersi değil açılış dersi ister).
   if (eco === "pistol") return "pistol-round";

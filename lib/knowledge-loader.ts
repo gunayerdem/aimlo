@@ -183,27 +183,41 @@ function loadMatchupFiles(
   // Sort enemy roster alphabetically for cache-key stability (see comment above).
   const sortedEnemies = [...enemyAgents].sort();
 
-  for (const enemy of sortedEnemies) {
-    if (results.length >= limit) break;
+  // SAGE ÖNE (KB pipeline denetimi 2026-07-19): diriliş-tehdidi modülü *_vs_sage
+  // dosyalarında yaşıyor ve komptaki HER kill'i ilgilendiriyor; alfabede "s" geç
+  // kaldığından vision limit=1'de bu dosyalar neredeyse hiç yüklenmiyordu.
+  // Hoist deterministik (aynı komp → aynı sıra) → cache-key stabil kalır.
+  const slugOf = (a: string) => a.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const prioritizedEnemies = [
+    ...sortedEnemies.filter((e) => slugOf(e) === "sage"),
+    ...sortedEnemies.filter((e) => slugOf(e) !== "sage"),
+  ];
 
-    const enemySlug = enemy.toLowerCase().replace(/[^a-z0-9]/g, "");
-    const enemyRole = resolveAgentRole(enemy);
-
-    // Try specific agent vs agent matchup
-    const specificPath = `matchups/${playerSlug}_vs_${enemySlug}.md`;
-    const specificContent = loadFile(specificPath);
-    if (specificContent) {
-      results.push(specificContent);
-      continue;
+  // İKİ GEÇİŞ (aynı denetim): spesifik ajan-vs-ajan dosyası HER ZAMAN rol-vs-rol
+  // dosyasından önce denenir. Eski tek geçiş "alfabetik ilk dosya-çözen düşmanı"
+  // alıyordu — oyuncu duelist iken 4 rol dosyası hep çözündüğünden spesifik
+  // matchup'lar sıklıkla rol dosyasının gerisinde kalıyordu.
+  const pushedPaths = new Set<string>();
+  const tryPush = (relPath: string): void => {
+    if (results.length >= limit || pushedPaths.has(relPath)) return;
+    const content = loadFile(relPath);
+    if (content) {
+      pushedPaths.add(relPath);
+      results.push(content);
     }
+  };
 
-    // Try role vs role matchup
-    if (playerRole && enemyRole) {
-      const rolePath = `matchups/${playerRole}_vs_${enemyRole}.md`;
-      const roleContent = loadFile(rolePath);
-      if (roleContent) {
-        results.push(roleContent);
-      }
+  // Pass 1: specific agent vs agent matchups (best match wins the budget).
+  for (const enemy of prioritizedEnemies) {
+    tryPush(`matchups/${playerSlug}_vs_${slugOf(enemy)}.md`);
+  }
+
+  // Pass 2: role vs role fallbacks (deduped — two enemies of the same role
+  // no longer push the same file twice).
+  if (playerRole) {
+    for (const enemy of prioritizedEnemies) {
+      const enemyRole = resolveAgentRole(enemy);
+      if (enemyRole) tryPush(`matchups/${playerRole}_vs_${enemyRole}.md`);
     }
   }
 

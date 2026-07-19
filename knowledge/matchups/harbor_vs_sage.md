@@ -12,7 +12,7 @@ tags: [matchup, harbor, sage, controller, sentinel]
 
 ## 1. Matchup Özü
 
-Harbor koridoru duvarla kapatır ve giriş açar. Sage dar geçidi duvarıyla kilitler, girişi keser. İkisi de alan satar ama farklı yoldan: Harbor'un duvarı ilerler, Sage'in duvarı sabit durur. Biri inisiyatifi alır, diğeri tepki verir. Kim önce util koymak zorunda kalırsa o round'da geri düşer.
+Harbor koridoru duvarla kapatır ve giriş açar. Sage dar geçidi duvarıyla kilitler, girişi keser. İkisi de alan satar ama farklı yoldan: Harbor'un duvarı ilerler, Sage'in duvarı sabit durur. Biri inisiyatifi alır, diğeri tepki verir. Kendi planıyla önce koyan kazanır; rakibin util'ine TEPKİ olarak harcamak zorunda kalan round'da geri düşer.
 
 ## 2. Kim Avantajlı?
 
@@ -115,8 +115,8 @@ Ult karşılaşması: Harbor ult'u alanı açar, Sage ult'u trade'i geri alır. 
 - Yavaşlatmayı Harbor kubbesinin alanının dışına at.
 - Diriltmeyi ilk ölen anchor için sakla, girişçi için harcama.
 
-**Özet:** Harbor tempo getirir, Sage tepki verir. Sage önce hareket ederse roller tersine döner. Kim önce util koymaya mecbur kalırsa o kaybeder.
+**Özet:** Harbor tempo getirir, Sage tepki verir. Sage önce hareket ederse roller tersine döner. Rakibin util'ine tepki olarak util harcamaya mecbur kalan taraf kaybeder.
 
 ## 7. Diriliş Tehdidi
 
-Düşman kompunda Sage varsa takımın aldığı her kill beden tehdididir: sayıyı Sage ölmeden ya da bedeni güvenceye almadan kesin sayma. Harbor'un cevabı alan kesmek — duvarı beden ile Sage'in geliş hattı arasına çek: duvardan geçen Sage yavaşlar ve açığa çıkar, takımın onu bedava vurur. Bedeni gören açıyı takıma tuttur: dirilten Sage beden başında sabit ve savunmasız, kalkan oyuncu silahsız doğar — ikisi de bedava kill.
+Düşman kompunda Sage varsa takımın aldığı her kill beden tehdididir: sayıyı Sage ölmeden ya da bedeni güvenceye almadan kesin sayma. Harbor'un cevabı alan kesmek — duvarı beden ile Sage'in geliş hattı arasına çek: duvardan geçen Sage yavaşlar ve açığa çıkar, takımın onu bedava vurur. Bedeni gören açıyı takıma tuttur: dirilten Sage beden başında sabit ve savunmasız — bedava kill; kalkan oyuncu silahıyla doğar ama kalkış ânında nişanı hazır değildir, açı sende kaldıkça ikinci sayı da gelir.

@@ -353,9 +353,18 @@ export function stripHpClaims(text: string, lang: "tr" | "en"): string {
   if (lang === "tr") {
     // "az canla / çok az canla / düşük canla / tam canla / full canla / yarım
     // canla / düşük HP'yle" — sıfat + can/hp + Türkçe ek kuyruğu.
-    t = t.replace(/\b(?:çok\s+)?(?:az|düşük|tam|full|yarım)\s*(?:can|hp)['’]?[a-zçğıöşü]*/gi, "");
-    // "canın azken / canı düşükken / canın azdı" kalıpları.
-    t = t.replace(/\bcan[ıi]n?[ıi]?\s+(?:az|düşük)[a-zçğıöşü]*/gi, "");
+    // Denetim 2026-07-19: (a) orta|sağlam EKLENDİ — stripNumericHp'nin ≥50 kovası
+    // ("orta canla"/"sağlam canla") listede yoktu, sayısaldan türetilen nitel can
+    // iddiası çıktıya sızıyordu (TR kova sızıntısı); (b) baştaki \b → lookbehind
+    // (JS \b "ç"de kırılır — "çok az canla"da "çok" sarkıyordu, dosya başı tuzak
+    // notuyla aynı kök); (c) can(?!avar) — "tam canavar gibi" övgüsü yutulmasın.
+    t = t.replace(/(?<![a-zçğıöşü])(?:çok\s+)?(?:az|düşük|orta|sağlam|tam|full|yarım)\s*(?:can(?!avar)|hp)['’]?[a-zçğıöşü]*/gi, "");
+    // "canın azken / canı düşükken / canın azdı" kalıpları. KAPALI ek listesi
+    // (denetim 2026-07-19): eski açık kuyruk [a-zçğıöşü]* "azal-" fiil kökünü de
+    // yutuyor, koşullu ÖĞÜDÜN koşulunu siliyordu ("canın azalınca save et" →
+    // " save et"). Yalnız iddia-ekleri kapalı listede; "az önce" (zaman zarfı,
+    // can iddiası değil) lookahead ile dışarıda.
+    t = t.replace(/(?<![a-zçğıöşü])can[ıi]n?[ıi]?\s+(?:az(?:ken|d[ıi])?(?!\s*önce)|düşük(?:ken|tü)?)(?![a-zçğıöşü])/gi, "");
   } else {
     // "at/with/on low|full|half|high HP/health" + bare "low HP" + "low on health".
     t = t.replace(/\b(?:at|with|on)\s+(?:low|full|half|high)\s+(?:hp|health)\b/gi, "");

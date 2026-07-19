@@ -173,7 +173,7 @@ Site başına util sırası:
 
 **Omen:** Ascent smoke ister ve Omen'in iki smoke'u hem attack execute hem de defense için yeterli. Flash'ı A Main veya B Main'e giren düşmanlara bas — dar koridorda kör kalan düşman önünü göremeden girer. Kaçış ile Heaven'a veya Market'e atla, pozisyonunu tahmin ettirme. Ult'unu fake veya rotate için kullan, round'u döndür.
 
-**KAY/O:** Killjoy'un tuzağını, bot'unu, Cypher'ın tellerini, Omen'in smoke'larını devre dışı bırak — execute aniden çok kolaylaşır. Flash ile girişi aç, molly'i post-plant veya alan tutmak için kullan. KAY/O olmadan attack oynarsan savunucunun tüm util'iyle teker teker uğraşmak zorunda kalırsın.
+**KAY/O:** Bıçağın Killjoy'un tuzağını, bot'unu, Cypher'ın tellerini bastırma süresi boyunca kapatır, Omen'in yeni smoke atmasını keser (atılmış smoke'u silmez) — o pencerede execute aniden çok kolaylaşır. Flash ile girişi aç, molly'i post-plant veya alan tutmak için kullan. KAY/O olmadan attack oynarsan savunucunun tüm util'iyle teker teker uğraşmak zorunda kalırsın.
 
 **Cypher:** Catwalk, Market, A Short — hepsi dar, hepsi tele uygun. İki tel ile hem mid'i hem flank yolunu kapat, takımın iki ekstra göz kazanır. Kamerayı mid'e bakacak şekilde koy, düşmanın nereden geldiğini gör. Ult attığında retake öncesi düşmanların nerede durduğunu görürsün.
 
@@ -183,7 +183,7 @@ Site başına util sırası:
 
 **Sova:** Recon'u mid'e veya site'a at, entry öncesi bot ile tarama yap. Ascent'in açık alanları Sova için iyi ama KAY/O onun util'ini devre dışı bırakabildiğinde Sova bir kademe geride kalır.
 
-**Fade:** Recon ve bot ile yakın mesafe keşifte ve entry desteğinde Sova'dan güçlüsün. Ama Ascent'in uzun görüş hattını recon daha fazla alan görür — bu yüzden Sova'nın biraz gerisinde durursun.
+**Fade:** Recon ve bot ile yakın mesafe keşifte ve entry desteğinde Sova'dan güçlüsün. Ama Ascent'in uzun görüş hatlarında Sova'nın recon'u daha fazla alan tarar — bu yüzden Fade burada Sova'nın biraz gerisinde kalır.
 
 **Breach:** Molly ve stun ile savunucuları pozisyonlarından sök. Duvar yapısı bazı noktalarda util'ini güçlendirir ama harita genişledikçe Breach'in menzili kısa kalır.
 
@@ -346,7 +346,7 @@ Anti-eco'yu hafife alma. Sheriff her zırhı deler, Classic sağ tık yakında s
 **MEANING:** Saldırı rotalarını kısıtlıyorlar, bedava bilgi topluyorlar.
 
 **COUNTER:**
-- KAY/O varsa bıçağını ya da ult'unu at — tüm sentinel util'i bir anda gider.
+- KAY/O varsa bıçağını ya da ult'unu at — sentinel util'i bastırma süresi boyunca devre dışı kalır, girişini o pencereye sığdır.
 - KAY/O yoksa teker teker kır: Sova bot ile teli tetikle, Raze bot ile tuzağı yok et.
 
-**WHY:** Sentinel kurulumu kırıldığında geriye sadece silah kalır. Kurulumu bozmadan içeri girersen düşmana bedava bilgi verirsin. KAY/O bu yüzden Ascent'te çok güçlü — tek ult ile tüm kurulumu çökertir.
+**WHY:** Sentinel kurulumu kırıldığında geriye sadece silah kalır. Kurulumu bozmadan içeri girersen düşmana bedava bilgi verirsin. KAY/O bu yüzden Ascent'te çok güçlü — tek ult'la tüm kurulumu süresi boyunca susturur.

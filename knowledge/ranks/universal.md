@@ -76,6 +76,13 @@ Yanlış yerde durduğun için vuruldun — açıkta kaldın, birden çok yerden
 - **COUNTER** ilk ayak sesini duyunca kaçma; girişe bir util atıp yavaşlat, çapraz bir pozisyona kay ve bekle; ölmeye çalışma, sadece zamanı al — bir util atıp çekil, başka bir şey yapma
 - **WHY** giriş yavaşlayınca takımın yetişir ve düşman util harcamak zorunda kalır; trade mümkün olur
 
+### Savunmada erken ilk-kanı verme
+
+- **IF** savunmadayken, spike ortada yokken round açılışında takımın ilk ölümü sen olduysan
+- **MEANING** bölgen ilk temasta boş kaldı; takım hem sayıca düştü hem o girişin bilgisini kaybetti — rotasyon kör kaldı, düşman istediği kapıdan girdi
+- **COUNTER** açılışta ilk kontak kill için değil bilgi içindir: tek adımda kapanacağın açıdan tut, ilk vuruşu alınca kapan ve gördüğünü bildir; geniş hattı erken yoklama, düşman sana gelsin
+- **WHY** açılışı yaşayarak kapatan savunmacı bölgeyi ve bilgiyi tutar; erken düşen savunmacı düşmana sayıyı ve boş girişi birden verir, rotasyon şansı ölür
+
 ## Zamanlama Ölümleri
 
 Doğru yerdeydin ama yanlış anda çıktın — pencere açıkken değil kapalıyken hareket ettin, ya da bilgin tazeyken oynamadın. Zamanlama hatası nişan hatası kadar round kaybettirir.
@@ -129,7 +136,7 @@ Doğru yerdeydin ama yanlış anda çıktın — pencere açıkken değil kapal�
 
 Aynı şeyi tekrarladığın için düşman seni okudu. Sorun pozisyonun ya da nişanın değil — tahmin edilebilir oldun; iyi rakip her tekrarını ezberler.
 
-- **Örnek**: Ascent'te dört round üst üste A Long'u aynı recon-sonra-flash sırasıyla zorladın, beşinci round düşman flash'ı bekleyip öldürdü — bir round o açıyı boş bırak ya da sırayı boz, düşman yeniden tahmin etmek zorunda kalsın.
+- **Örnek**: Ascent'te dört round üst üste A Main'i aynı recon-sonra-flash sırasıyla zorladın, beşinci round düşman flash'ı bekleyip öldürdü — bir round o açıyı boş bırak ya da sırayı boz, düşman yeniden tahmin etmek zorunda kalsın.
 
 ### Util sıranı kır
 
@@ -151,6 +158,7 @@ Aynı şeyi tekrarladığın için düşman seni okudu. Sorun pozisyonun ya da n
 - **MEANING** sebep neredeyse hep tek: o pozisyon okundu; pozisyon yanlış değildi, tekrar yüzünden tahmin edilebilir oldu
 - **COUNTER** bir round o pozisyonu tamamen boş bırak ve farklı bir noktada tut; düşman hazırlığını boşa harcayıp orayı kontrol etmeyi bırakınca geri dön — dört round A short tuttuysan ve karşı Raze oraya körlemesine molly atıyorsa, bir round başka noktada molly'sini boşa attırt, sonra dön
 - **WHY** pozisyonu değiştirince düşman elindeki okumayı kullanamaz, dövüş yeniden eşit başlar
+- **SİLAH KESKİN NİŞANCIYSA** killerInfo'daki silah keskin nişancı VE pozisyon tekrarıysa: o hatta üçüncü peek yok — açıyı bir round tamamen boş bırak, ya da ancak takım smoke'u inince farklı yükseklikten zorla
 
 ### Aynı düşmana sürekli ölme — sızıntıyı kapat
 
@@ -190,7 +198,7 @@ Yanlış kararla öldün — almaman gereken dövüşe girdin, düşmanın elini
 
 - **IF** ekonomi kararını — yarı alım mı, tam save mi — düşmanın kredisini okumadan refleksle veriyorsan
 - **MEANING** düşmanın elindeki silahı ve util'i bilmiyorsun; round'u körlemesine kuruyorsun
-- **COUNTER** geçen round'un sonucundan düşmanın kredisini tahmin et: 3900 kredili düşman kalkan ve tam silah alır ama util'i kısıtlıdır, al-ver'i ona göre kur; 1900 kredili düşmanın ucuz silahı var, kaçış util'i yok — üstüne agresif gir; düşman da yarı ekonomideyse save'e geçme, yarım alımla bas; tam silahlıysa save yap
+- **COUNTER** geçen round'un sonucundan düşmanın kredisini tahmin et: 3900 kredili düşman kalkan ve tam silah alır ama util'i kısıtlıdır, al-ver'i ona göre kur; 1900 kredili düşmanın ucuz silahı var, satın alınan util'i yok — ama imza yeteneği (örn. Jett dash) bedava gelir, agresif gir ve kaçışı hesaba kat; düşman da yarı ekonomideyse save'e geçme, yarım alımla bas; tam silahlıysa save yap
 - **WHY** ekonomiyi okuyunca rakibin hamlesini önceden bilirsin; karşı taraf da zayıfken yarı alım baskısı round'u çevirir, tam save çeviremez
 
 ### Düşük canla dövüşü zorlama — silahı kurtar
@@ -221,6 +229,27 @@ Yanlış kararla öldün — almaman gereken dövüşe girdin, düşmanın elini
 - **COUNTER** ult'un dolduğu andan itibaren risk hesabını değiştir: ölüm riski yüksek hamleyi (ilk peek, solo giriş) ult'suz alma — hamleyi ult'la aç ya da ult'u kullanacağın anı görene kadar ilk teması takımına bırak
 - **WHY** dolu ult bedava bir round-çevirme hakkıdır; ult sonraki round'a taşınır ama bu round sensiz ve ult'suz oynandı — o hakkın bedelini bu round ödedi
 
+### Sayı azken silahı taşı
+
+- **IF** round'un son aşamasında, spike ortada yokken, sayı net karşıdayken (iki kişi eksiksin ya da tek kalmışsın) dövüş ararken öldüysen
+- **MEANING** o round sayı matematiğiyle çoktan gitmişti; aradığın dövüş round'u geri getirmez, ölünce silahın da düşmana kalır
+- **COUNTER** dövüş aramayı bırak; tutulmayan yoldan uzaklaş, silahı ve kalan util'i sonraki round'a taşı; spike kurulduysa bu ders geçersiz — o zaman defuse zorunlu, plana göre oyna
+- **WHY** kurtarma pes etmek değil yatırımdır: taşınan tüfek sonraki round'un tam alımıdır; kaybedilmiş sayıda aranan dövüş hem seni hem ekonomini verir
+
+### Operator'ü bedavaya teslim etme
+
+- **IF** elinde Operator varken öldüysen (loadout'unda Operator görünüyor)
+- **MEANING** bu ölüm çift kayıp: takımın en pahalı silahı gitti ve yerde düşmanın alacağı hazır bir Operator kaldı — o silah artık sana karşı hat tutar
+- **COUNTER** atıştan sonra aynı açıda kalma; atış, yer değiştir, yeniden kur döngüsünü hiç bozmadan işlet; yanında trade alacak arkadaş yokken açık düello arama — hattı tut, dövüşü düşman sana gelince aç
+- **WHY** yaşayan Operator her round hattı yeniden kilitler; teslim edilen Operator hem ekonomiyi boşaltır hem düşmana bedava hat kilidi verir
+
+### Tam alımda ilk temas util'in işi
+
+- **IF** tam alım round'unda saldırıdayken round açılışında öldüysen
+- **MEANING** en pahalı anda düştün: tam silahın düşmana geçti, takım util zincirini daha kuramadan sayıca azaldı — tek ölüm bütün alım avantajını eritti
+- **COUNTER** tam alımda ilk teması sen değil util açsın: girişe smoke ya da flash inmeden geniş açıya çıkma; takımın hamlesi başlayınca trade mesafesinde, arkadaşınla aynı anda gir
+- **WHY** tam alım round'u util zinciri ve birlikte giriş üstüne kuruludur; erken düşen tam-silahlı oyuncu düşmana sayıyı, silahı ve round planını birden verir
+
 ## Avantaj Yönetimi — Üstünlüğü Sadeleştir
 
 Sayı ya da pozisyon avantajındayken eklediğin her gereksiz hamle hata riski üretir. Avantajlıyken zamanı oynamak, dövüşü oynamaktan üstündür.
@@ -229,17 +258,10 @@ Sayı ya da pozisyon avantajındayken eklediğin her gereksiz hamle hata riski �
 
 ### Sayı üstünlüğünü sadeleştir
 
-- **IF** 4v3 gibi sayı avantajındayken sahayı bölmeye çalışıyor ya da ekstra hamle arıyorsan
-- **MEANING** o round zaten sendeydi; avantaj varken eklediğin her hamle hata riski üretir, düşmana bedava trade fırsatı verir
-- **COUNTER** sayı avantajını gördüğün an ikinci giriş arama; köşeleri temizle, çaprazları kur, bekle; dövüşü sen açma, zamanı oyna, düşmanı sana peek atmaya zorla
-- **WHY** sayı avantajında sade oynamak round'u kilitler; fazla hamle round'u eşitleme riski taşır, kazanmaz
-
-### Kazanılmış round'da risk ekleme
-
-- **IF** 4v2'desin ve peek atıp 3v2'ye düşüyorsan
-- **MEANING** o round zaten sendeydi, sıfır kazançlı bir risk ekledin
-- **COUNTER** 4v2'ye düştüğün an peek dürtüsünü bırak; köşeni koru, zamanı oyna, düşman sana gelmek zorunda kalana kadar bekle; sen ona değil o sana gelsin
-- **WHY** avantajlıyken her gereksiz peek round'u eşitler, kazanmaz
+- **IF** 4v3 ya da 4v2 gibi sayı avantajındayken sahayı bölmeye çalışıyor, ekstra hamle arıyor ya da peek atıp sayıyı eşitliyorsan
+- **MEANING** o round zaten sendeydi; avantaj varken eklediğin her hamle sıfır kazançlı bir risk, düşmana bedava trade fırsatı
+- **COUNTER** sayı avantajını gördüğün an ikinci giriş ve peek arama; köşeleri temizle, çaprazları kur, zamanı oyna — sen ona değil o sana gelsin, düşman sana gelmek zorunda kalana kadar bekle
+- **WHY** sayı avantajında sade oynamak round'u kilitler; fazla hamle ve her gereksiz peek round'u eşitleme riski taşır, kazanmaz
 
 ### Avantajda sarmayı kilitle
 
@@ -247,6 +269,24 @@ Sayı ya da pozisyon avantajındayken eklediğin her gereksiz hamle hata riski �
 - **MEANING** sayısı azalan düşmanın tek dönüş yolu dağınık oyuncuları tek tek avlamaktır; boş sarma yolu ona o kapıyı açar
 - **COUNTER** bir kişi sarma yolunu tutsun; kalan util'le bir girişi kapat ki düşman tek kapıya sıkışsın; kalanlar çapraz kurup beklesin, kimse tek dolaşmasın
 - **WHY** tek kapıya sıkışan düşman kurduğun çaprazın içine gelmek zorunda; avlanacak dağınık hedef kalmaz
+
+## Seri Kayıp Sonrası Round
+
+Bu bölümü SADECE round geçmişi üst üste üç ya da daha fazla kayıp gösterdiğinde kullan.
+
+- **IF** son round'lar üst üste kaybedildiyse (round geçmişinde 3+ kayıp serisi)
+- **MEANING** seri genelde tek tek düellolardan değil plan karmaşasından gelir: her round başka fikir, util zinciri kopuk, ilk ölüm erken
+- **COUNTER** bir round'u bilerek sadeleştir: tek site, tek plan; util'ler sırayla ve girişten önce insin; ilk ölümü verme — ilk teması util ya da birlikte çıkan takım açsın
+- **WHY** seri karmaşık yeni planla değil ilk temiz round'la kırılır; sade round'da herkes ne yapacağını bilir, trade zinciri kopmaz
+
+## Uzatma ve Maç Sayısı Round'u
+
+Bu bölümü SADECE skor uzatmayı gösterdiğinde ya da taraflardan biri maç sayısındayken kullan.
+
+- **IF** skor uzatmadaysa ya da taraflardan biri maç sayısındaysa
+- **MEANING** tek round'un ağırlığı maçın en yükseğinde; burada denenen yeni fikir yanlış çıkarsa telafi round'u yok
+- **COUNTER** planı sadeleştir: maç boyunca en çok tutan setup'ı oyna, yeni plan deneme; ilk ölümü verme, ilk teması util ya da takım açsın; kahramanlık peek'i arama
+- **WHY** yüksek-ağırlıklı round'da hata geri alınamaz; bilinen plan tereddüt bırakmaz, düşmana okuyacağı yeni bir şey vermez
 
 ## Düşmanı Okuma ve Karşı Hamle
 
@@ -426,7 +466,7 @@ Takım baskı kurarken haritanın uzak kolunda tek başınasın; lurk'ün değer
 
 ## Ölüm Tipini Doğru Eşle
 
-Round mesajında [ÖLÜM-TİPİ İPUCU] varsa tipi ORADAN al, kendin türetme — aşağıdaki eşleme SADECE ipucu yoksa geçerlidir. Bloğu ölümün tipi seçer, rank değil; tipi killerInfo, deathLocation, HP düşüşü ve score'dan türet.
+Round mesajında [ÖLÜM-TİPİ İPUCU] (EN istekte [DEATH-TYPE HINT]) varsa tipi ORADAN al, kendin türetme — aşağıdaki eşleme SADECE ipucu yoksa geçerlidir. Bloğu ölümün tipi seçer, rank değil; tipi killerInfo, deathLocation, HP düşüşü ve score'dan türet.
 
 - **Crosshair / nişan ölümü** (göründüğün an tüfekle vuruldun, HP bir anda sıfıra düştü) → Aim ve Crosshair blokları.
 - **Pozisyon ölümü** (deathLocation site ortası ya da çekiş yolu olmayan açık nokta) → Pozisyon ve Açı blokları.
@@ -435,7 +475,7 @@ Round mesajında [ÖLÜM-TİPİ İPUCU] varsa tipi ORADAN al, kendin türetme �
 - **Tekrar / okunma ölümü** (aynı açı, pozisyon ya da util sırası üst üste) → Okunabilirlik blokları.
 - **Aynı rakibe ölüm** (pozisyon iyi ama hep aynı oyuncuya ölüyorsun) → Sızıntıyı kapat bloğu.
 - **Karar / ekonomi ölümü** (üstünlüksüz dövüş, rakip eli okunmadı, baskıda kötü seçim) → Karar ve Ekonomi blokları.
-- **Eko ölümü** (killerInfo silahı sheriff/spectre/classic gibi ucuz silah) → Rakip eline bak: düşman da zayıf, save'e geçme; yarım alımla bas.
+- **Eko ölümü** (killerInfo silahı sheriff/spectre/classic gibi ucuz silah) → Rakip eline bak: ikiniz de eko/yarı alımdaysanız save'e geçme, yarım alımla bas — ama ucuz silah kazanılmış pistol'ün bonus'u da olabilir, düşman ekonomisini round geçmişinden doğrula.
 - **Düşük can ölümü** (HP 50 altındayken dezavantajda dövüş aradın) → Düşük canla dövüşü zorlama — silahı kurtar.
 - **Avantajlı durumda ölüm** (sayı üstünündeyken gereksiz peek) → Avantaj Yönetimi blokları.
 - **Clutch ölümü** (son canlı sensin, 1vX) → Clutch'ı 1v1 dizisine indir + baskıda üç soru.
@@ -446,3 +486,7 @@ Round mesajında [ÖLÜM-TİPİ İPUCU] varsa tipi ORADAN al, kendin türetme �
 - **Retake ölümü** (spike kurulu + sen savunmadasın) → Retake Ölümleri blokları.
 - **Lurk ölümü** (saldırıda takımdan kopuk, uzak bölgede tek başına) → Lurk Ölümleri bloğu.
 - **Entry / trade'siz ölüm** (saldırıda solo giriş, geri alınmadı) → Pozisyon: solo peek yerine geri-alım kurulumu.
+- **Savunma açılış ölümü** (savunmadasın, spike yokken açılışta takımın ilk ölümü sensin) → Pozisyon: Savunmada erken ilk-kanı verme.
+- **Sayı dezavantajında geç ölüm** (round sonunda sayı net karşıdayken dövüş aradın) → Karar ve Ekonomi: Sayı azken silahı taşı.
+- **Operator kaybı** (loadout'unda Operator varken öldün) → Karar ve Ekonomi: Operator'ü bedavaya teslim etme.
+- **Tam alımda erken ölüm** (tam alım round'u, saldırıda açılışta öldün) → Karar ve Ekonomi: Tam alımda ilk temas util'in işi.

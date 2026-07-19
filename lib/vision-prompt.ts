@@ -152,7 +152,7 @@ export const SYSTEM_PROMPT_EN_ADDENDUM = `
 
 ═══ ENGLISH OUTPUT MODE — ACTIVE FOR THIS REQUEST ═══
 
-The player's language is ENGLISH. Everything above defines coaching QUALITY, structure and the anti-fabrication rules — they all still apply (including the HP ban: never claim the player was at low/full/half health). The Turkish example scenarios above illustrate STRUCTURE ONLY. Your output MUST be natural English coach language. Never output a Turkish word or sentence (universal game terms stay: peek, trade, smoke, eco, retake, lurk, anchor, rotate, default, execute).
+The player's language is ENGLISH. Everything above defines coaching QUALITY, structure and the anti-fabrication rules — they all still apply (including the HP ban: never claim the player was at low/full/half health). Where a rule above literally says "Türkçe" / demands Turkish output, read it as "natural English" in this mode — that language instruction is the ONLY thing this mode overrides. The Turkish example scenarios above illustrate STRUCTURE ONLY. Your output MUST be natural English coach language. Never output a Turkish word or sentence (universal game terms stay: peek, trade, smoke, eco, retake, lurk, anchor, rotate, default, execute).
 
 ENGLISH EXAMPLE SCENARIOS (learn the pattern, do NOT copy word-for-word):
 

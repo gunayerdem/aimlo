@@ -733,6 +733,9 @@ export async function POST(request: NextRequest) {
         alliesAlive: reqBody.alliesAlive,
         enemiesAlive: reqBody.enemiesAlive,
         spikePlanted: reqBody.spikePlanted,
+        // ult-in-pocket dalı (KB pipeline denetimi 2026-07-19): ctx.ultReady zaten
+        // prompt'a giriyordu ama classifier'a hiç ulaşmıyordu — tek kablo burası.
+        ultReady: reqBody.ultReady === true ? true : undefined,
         economyType: reqBody.economyType,
         tradedByAlly: reqBody.tradedByAlly,
         repeatedPosition,
@@ -1038,8 +1041,11 @@ export async function POST(request: NextRequest) {
       // (Ölüm-Veri Sözleşmesi 2026-06-29) — same object that produced the prompt
       // fact-sheet, so the guard strips exactly the facts the model was told were
       // unknown (killer/weapon/location/headshot/alive/spike/route/trade).
-      const checkedAnalysis = realityCheck(fb.deathAnalysis, memoryForCheck, factGround, "death");
-      const checkedSuggestion = realityCheck(fb.nextRoundSuggestion, memoryForCheck, factGround, "suggestion");
+      // reqLang geçirilir (denetim 2026-07-19 F5): guard/rewrite replacement dili
+      // artık özel-harf heuristiği değil, isteğin kendi dili ("Cypher seni B Main'de
+      // vurdu" gibi özel-harfsiz TR cümleye "an enemy" enjekte edilmesin).
+      const checkedAnalysis = realityCheck(fb.deathAnalysis, memoryForCheck, factGround, "death", reqLang);
+      const checkedSuggestion = realityCheck(fb.nextRoundSuggestion, memoryForCheck, factGround, "suggestion", reqLang);
       if (checkedAnalysis.modified || checkedSuggestion.modified) {
         console.log(`[Aimlo AI] Reality check: deathAnalysis rewrite=${checkedAnalysis.rewriteLevel}, suggestion rewrite=${checkedSuggestion.rewriteLevel}`);
       }
@@ -1060,7 +1066,7 @@ export async function POST(request: NextRequest) {
       // önceden HİÇ denetlenmiyordu → killer/rota/sayı uydurması elenmeden çıkıyordu).
       // kind:"suggestion" → tümü stripped olursa "" döner, orijinali koru.
       const enemyAnalysisOut = fb.enemyAnalysis.slice(0, 2).map((s) => {
-        const c = realityCheck(String(s), memoryForCheck, factGround, "suggestion");
+        const c = realityCheck(String(s), memoryForCheck, factGround, "suggestion", reqLang);
         const safe = c.text && c.text.trim() ? c.text : String(s);
         return clampWords(enforceAgentKit(cleanCoachText(safe, reqLang), reqAgent), 180);
       });

@@ -12,6 +12,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--prefix", "C:/Users/GNAYER~1/Desktop/aimlo-desktop"],
       "port": 1420
+    },
+    {
+      "name": "aimlo-landing",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "C:/Users/GNAYER~1/Desktop/aimlo-landing"],
+      "port": 5173
     }
   ]
 }

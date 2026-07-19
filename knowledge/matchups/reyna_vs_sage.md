@@ -30,7 +30,7 @@ Sage duvarı kurar ve yavaşlatmayı atarsa Reyna sıradan bir duelist olur. Rey
 - Yavaşlatma Reyna'nın hamlesinin üstüne düşerse peek hızı kırılır, düelloyu Sage alır.
 - Sage ult'üyle Reyna'nın öldürdüğü oyuncuyu geri kaldırırsa Reyna'nın üstünlük zinciri durur.
 
-**Dengeli:** Ascent ve Haven gibi orta mesafeli haritalarda Sage duvarı uzun açıları kapatır; Reyna yakın mesafeye ulaşmak için duvarı aşmak zorunda kalır. Reyna ilk düşmanı öldürürse harita Reyna'ya döner, öldüremezse Sage alan kontrolünü tutar.
+**Dengeli:** Haven gibi orta mesafeli haritalarda Sage duvarı uzun açıları kapatır; Reyna yakın mesafeye ulaşmak için duvarı aşmak zorunda kalır (Ascent'in uzun açıları bu dengeyi Sage'e hafif kaydırır). Reyna ilk düşmanı öldürürse harita Reyna'ya döner, öldüremezse Sage alan kontrolünü tutar.
 
 ## 3. Önemli Düellolar
 
@@ -121,4 +121,4 @@ Reyna oynuyorsan: flash desteği olmadan Sage duvarına karşı tek başına ham
 
 ## 8. Diriliş Tehdidi
 
-Düşman kompunda Sage varsa Reyna'nın aldığı kill bile kesin değildir: sayıyı Sage ölmeden ya da bedeni güvenceye almadan kapanmış sayma. Kaçışı geri koşmak için değil, bedeni gören açıya geçmek için kullan — beden açıktaysa Sage ona gelmek zorunda, açıyı tutan Reyna düelloyu peşin kazanır. Dirilten Sage beden başında sabit ve savunmasızdır, kalkan oyuncu silahsız doğar — ikisi de ruh zincirine bedava halka.
+Düşman kompunda Sage varsa Reyna'nın aldığı kill bile kesin değildir: sayıyı Sage ölmeden ya da bedeni güvenceye almadan kapanmış sayma. Kaçışı geri koşmak için değil, bedeni gören açıya geçmek için kullan — beden açıktaysa Sage ona gelmek zorunda, açıyı tutan Reyna düelloyu peşin kazanır. Dirilten Sage beden başında sabit ve savunmasızdır — ruh zincirine bedava halka. Kalkan oyuncu silahıyla doğar ama kalkış ânında nişanı hazır değildir; açıyı tutuyorsan ikinci sayı da peşinden gelir.

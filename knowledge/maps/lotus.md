@@ -8,7 +8,7 @@ pool: "rotasyon-dışı — 13.00 rekabetçi havuzunda değil"
 
 # LOTUS — Detaylı Strateji ve Analiz
 
-> Lotus, 3 siteli tek harita. Döner kapı ve kırılabilir duvar burada — başka hiçbir haritada yok. Bu iki mekanik ya seni öldürür ya da seni kurtarır, ortası yok.
+> Lotus 3 siteli bir harita; döner kapı ve kırılabilir duvar ise başka hiçbir haritada yok. Bu iki mekanik ya seni öldürür ya da seni kurtarır, ortası yok.
 
 ## 1. Temel Prensipler
 - Lotus 3 siteli (A, B, C) bir harita — Haven gibi geniş ama mekanik olarak çok daha zengin.
@@ -112,7 +112,7 @@ WHY: Drop'tan giren, savunucunun arkasına düşer; oradan kurtulmak neredeyse i
 ## 5. Koçluk Satırları
 - "Lotus'ta round kapı, duvar, drop'la başlar. Bunları kullanmıyorsan haritanın yarısında yoksun."
 - "Kırılabilir duvarı her round kırmak strateji değil, refleks. Strateji şu: onu ne zaman kırıp ne zaman kırmayacağını seçmek."
-- "Döner kapı ses çıkarır ve dönerken minimap'te herkese görünür — bu seni de satar, düşmanı da. O sesi fake olarak kullan. Kapıyı açıp geçme, sesle kafayı karıştır. Çapraz-site rotate için C Mound↔B Main kapısını kullan; A tarafındaki kapı (A Main↔A Tree) site içi açı içindir."
+- "Döner kapı dönerken herkesin duyacağı bir ses çıkarır — bu seni de satar, düşmanı da. O sesi fake olarak kullan. Kapıyı açıp geçme, sesle kafayı karıştır. Çapraz-site rotate için C Mound↔B Main kapısını kullan; A tarafındaki kapı (A Main↔A Tree) site içi açı içindir."
 - "3 siteli haritada fazla rotate etmek en çok round öldüren şeydir. Ses duydun diye 3 kişi gönderme — önce bilgiyi al, sonra rotate et."
 - "Silent Drop'u saldırıda kullanmıyorsan A execute'un tek yönlü kalır. Savunmada kontrol etmiyorsan arkandan girerler."
 - "B anchor'ın işi öldürmek değil, yaşamak ve bilgi vermek. Sessiz ölürsen takıma sıfır katkın olur."

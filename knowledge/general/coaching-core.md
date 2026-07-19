@@ -116,8 +116,8 @@ WHY defuse'u uzaktan kesersen hem hayatta kalır hem roundu kazanırsın
 
 | Alım Türü | İçerik | Maliyet Aralığı |
 |---|---|---|
-| Full Buy | Vandal/Phantom + Ağır Zırh + util | 3.900-4.700 |
-| Yarı Alım | Spectre/Marshal + Hafif Zırh | 1.600-2.400 |
+| Full Buy | Vandal/Phantom + Ağır Zırh + util | 3,900-4,700 |
+| Yarı Alım | Spectre/Marshal + Hafif Zırh | 1,350-2,400 |
 | Eco | Sheriff/Classic, util yok | 0-900 |
 
 ### Zorlama Kararı
@@ -127,10 +127,10 @@ MEANING bonus roundu zorlamayla oynayıp kaybetsen bile ekonomin sağlam kalır
 COUNTER Spectre + Hafif Zırh ile o roundu oyna
 WHY 2-0'da zorlama kaybı ekonomini bozmaz; kazanırsan 3-0 baskısı kurarsın
 
-IF 0-2 gerideysen
-MEANING üst üste kayıpla bonus biriktirdin, 3. roundda full alım yapabilirsin
-COUNTER eco yap, 3. roundda full alımla gir
-WHY 0-2'de zorlayıp kaybedersen 0-3 olursun ve ekonomin çöker
+IF pistol'ü kaybettiysen (0-1 gerideysen)
+MEANING bonus round'u eco geçersen kayıp bonusuyla 3. roundda full alım yapabilirsin
+COUNTER bonus round'u eco geç, 3. roundda full alımla gir
+WHY bonus'ta zorlayıp kaybedersen krediyi yakarsın, 3. round full alımın da gider
 
 ### Takım Ekonomisi
 

@@ -28,7 +28,7 @@ Raze, nade ve sıçrama ile Sage'in duvar ve slow savunmasını kırmaya gelir. 
 - Slow Raze'in giriş hattına düştüyse: Sıçrama slow içinde başlarsa Raze hedefe varamaz.
 - Sage post-plant duvarla defuse koridorunu kapatırsa: Raze nade lineup'ı yoksa duvarı atlayamaz.
 
-**Eşit avantaj — bu üç haritada (Haven, Ascent, Lotus):** Sage duvarı giriş noktasına değil B Short veya Link gibi kaçış yoluna kurarsa, lineup öğrenmemiş Raze ilk engele takılmaz; ama site içinde duvar yine de Raze'i zorlar.
+**Eşit avantaj — bu iki haritada (Haven, Lotus):** Sage duvarı giriş noktasına değil kaçış ya da rotasyon hattına (Haven'da Garage bağlantısı, Lotus'ta kapı geçişleri gibi) kurarsa, lineup öğrenmemiş Raze ilk engele takılmaz; ama site içinde duvar yine de Raze'i zorlar.
 
 ## 3. Önemli Düellolar
 
@@ -81,7 +81,7 @@ Raze, nade ve sıçrama ile Sage'in duvar ve slow savunmasını kırmaya gelir. 
 
 ## 4. Utility Karşılaştırması
 
-Raze'in elinde: nade + molly + 2x sıçrama + ult (roket). Hepsi hasar ya da hareket.
+Raze'in elinde: bot + nade + 2x sıçrama + ult (roket). Hepsi hasar, bilgi ya da hareket.
 Sage'in elinde: duvar + slow + heal + ult (canlandırma). Hepsi alan kontrolü ya da takım kurtarma.
 
 Bu maçın özeti:
@@ -128,4 +128,4 @@ Sage oynuyorken duvarı Raze'in sıçrama menzilinin ucuna kur — Sıçrama duv
 
 ## 8. Diriliş Tehdidi
 
-Düşman kompunda Sage varsa aldığın her kill beden tehdididir: sayıyı Sage ölmeden ya da bedeni güvenceye almadan kesin sayma. Raze'in cevabı net — beden alanını patlayıcıyla yasakla: nade ya da molly bedenin üstüne gitsin; dirilmeye gelen Sage ile beden aynı noktada, tek patlayıcıya iki hedef. Patlayıcın bittiyse bedeni gören açıyı tut: dirilten Sage sabit ve savunmasız, kalkan oyuncu silahsız doğar — ikisi de bedava.
+Düşman kompunda Sage varsa aldığın her kill beden tehdididir: sayıyı Sage ölmeden ya da bedeni güvenceye almadan kesin sayma. Raze'in cevabı net — beden alanını patlayıcıyla yasakla: nade bedenin üstüne gitsin; dirilmeye gelen Sage ile beden aynı noktada, tek patlayıcıya iki hedef. Nade'in bittiyse bot'u bedene sür ya da bedeni gören açıyı tut: dirilten Sage animasyon boyunca sabit ve savunmasız — kalkan oyuncu silahıyla doğar ama kalkış ânında nişanı hazır değildir, o pencere senin.

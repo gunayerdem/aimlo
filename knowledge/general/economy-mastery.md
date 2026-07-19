@@ -37,8 +37,8 @@ Round kazandığın an sıfırlanır. Kazandıktan sonra kaybedersen yine 1,900'
 ### Round Başı Kredi
 
 - Pistol: 800
-- Pistol kazandıysan 2. round: 3,800
-- Pistol kaybettiysen 2. round: 2,700
+- Pistol kazandıysan 2. round: ~3,800 (pistol'de harcamadıysan)
+- Pistol kaybettiysen 2. round: ~2,700
 - Devre arası: herkes 800'e döner, birikim taşınmaz (overtime kuralı aşağıda kendi bölümünde)
 
 ---
@@ -70,7 +70,7 @@ NEDEN: save'in işi bu round'u kazanmak değil, sonraki round'da herkesin elinde
 
 DURUM: düşman eco'da, sen full'sün.
 NE ANLAMA GELİR: yakına gelip kafana sıkmaya çalışacaklar.
-NE YAPARSIN: Uzak mesafe tut. Spectre veya Ares al, duvarlara spray sık. Op ALMA — yakına gelince işe yaramaz.
+NE YAPARSIN: tüfeğini koru, uzak hattı tut — SMG mesafesine inme, dar köşe dibinde bekleme. Op ALMA — yakına gelince işe yaramaz.
 NEDEN: eco takımı agresif gelir, Sheriff one-tap'leri uçuşur — mesafe seni korur.
 
 ### Tam Alımdayken Eco Silahına Ölmek
@@ -92,7 +92,7 @@ Round bittiğinde takımın ortalamasına bak:
 3,000-3,899 → FORCE mu SAVE mi?
   ├─ 2.+ kayıptaysan → force at
   ├─ 1. kayıptaysan → save, sonraki round full
-  └─ Yarının son round'u → force at (devre arasında krediler sıfırlanır, taşıdığın her kuruş yanar)
+  └─ Devrenin son round'u → force at (devre arasında krediler sıfırlanır, taşıdığın her kuruş yanar)
 2,000-2,999 → ECO
   ├─ Kayıp bonusu maksimumda → force düşün
   └─ Değilse → save
@@ -151,8 +151,8 @@ NEDEN: thrifty round maçı çevirir — 2-3 round'luk değer üretir.
 
 - Elinde: 2,700
 - **Save**: bir sonraki round 5,100 — tam full buy garanti.
-- **Spectre force**: 1,600 + 400 shield = 2,000. Kaybetsen 700 + 2,900 = 3,600 — full alırsın ama util kesersin.
-- **Marshal force**: 950 + 400 shield = 1,350. Kaybetsen 4,250 — rahat full.
+- **Spectre force**: 1,600 + 400 shield = 2,000. Kaybetsen 700 + 2,400 = 3,100 — tüfek çıkar ama kalkana para kalmaz.
+- **Marshal force**: 950 + 400 shield = 1,350. Kaybetsen 1,350 + 2,400 = 3,750 — tüfek + Light çıkar, Heavy'e yetmez.
 - **Doğru hareket**: pistol kaybettiysen save standart, 3. round'da garanti tüfek istiyorsun. Force sadece Raze/Neon/Jett gibi eco'da güçlü ajanların elindeyse mantıklı.
 
 ### Maç Noktası, Sen Geride
@@ -278,4 +278,4 @@ NEDEN: birleşik buy bölük buy'ı her zaman yener, istisnası yok.
 1. **Silah at**: 6,000+ kredisi olan, 2,500 kredili takım arkadaşına tüfek atsın. Onun elinde değeri daha yüksek.
 2. **Buy turunu takım belirler**: tek başına sapma, ya al ya save yap.
 3. **Almadan önce kontrol et**: 5 oyuncunun kredisine bak. 3+ kişi full alamıyorsa takım save.
-4. **Bonus round = Spectre + Light, hepiniz**: tüfek alma, ekonomi tutmaz.
+4. **Pistol'ü kazandıysanız bonus round = Spectre + Light, hepiniz**: tüfek alma, ekonomi tutmaz. Pistol'ü kaybettiyseniz bonus'ta standart save.

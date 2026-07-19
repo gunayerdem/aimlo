@@ -22,7 +22,7 @@ Kullanım: user message'daki [SİLAH+KOMP İPUCU] işaretçisinin gösterdiği b
 **Bunu taşıyorsan:** Gücün ilk mermide — dur, sonra ateş et; koşarken sıkma. Uzun spreye güvenme, crosshair hep kafa hizasında. Phantom'daysan uzun hat düellosunu zorlama, mesafeyi kapat; Guardian'daysan tek tık disiplini, yakın baskında geri çekil.
 
 ### Spectre / Stinger (hafif makineli)
-**Buna öldüysen:** Yakında tüfeği bile ezer, uzakta dağılır. Düşman bunu taşıyorsa zayıf ekodadır: mesafeyi aç, dar köşeyi çıkmadan nişanla, yakın açı verme. Sen tam alımdayken buna öldüysen mesafe seçimini düşman yaptı — tüfeğin gücü orta-uzun hatta; dövüşü oraya çek, dar geçitte SMG mesafesine inme. Bu roundu tam baskıyla al — kaybederlerse yine düşük ekoya düşerler; sen de eco'daysan save yerine yarım alımla bas.
+**Buna öldüysen:** Yakında tüfeği bile ezer, uzakta dağılır. Düşman bunu taşıyorsa ya zayıf ekodadır ya kazandığı pistol'ün bonus'unda: mesafeyi aç, dar köşeyi çıkmadan nişanla, yakın açı verme. Sen tam alımdayken buna öldüysen mesafe seçimini düşman yaptı — tüfeğin gücü orta-uzun hatta; dövüşü oraya çek, dar geçitte SMG mesafesine inme. Bu roundu tam baskıyla al — kaybederlerse yine düşük ekoya düşerler; sen de eco'daysan save yerine yarım alımla bas.
 **Bunu taşıyorsan:** Yakın açı seç, uzun hat düellosuna girme; ilk kontaktan sonra mesafe kapanıyorsa bas, açılıyorsa köşeye çekil.
 
 ### Judge / Bucky / Shorty (pompalı)

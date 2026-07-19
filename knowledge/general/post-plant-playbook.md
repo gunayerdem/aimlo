@@ -48,7 +48,7 @@ Defuse kolay görünür ama çapraz açıyı çok daha rahat kurarsın. Rakip op
 
 **Yığılma:** 2-3 oyuncu aynı noktada; trade garanti. Tek açıyı tutarsın ama rakip diğer taraftan defuse'a kaçabilir.
 
-**Karar:** 4+ oyuncu varsa yayıl, 3 ve altıysa yığıl.
+**Karar:** 4+ oyuncu varsa yayıl; 3 kişiyseniz yığıl — trade mesafesinde, spike'ın dibinde değil; 2 ve altıysanız görünme, defuse'u gören uzak açıya çekil ve sesle oyna.
 
 ### Çapraz Açı Nasıl Kurulur?
 
@@ -78,7 +78,7 @@ Defuse kolay görünür ama çapraz açıyı çok daha rahat kurarsın. Rakip op
 
 **Smoke'u plant'ten önce atma.** Süresi biter, retake tam gelirken saha açık kalır.
 
-**Flash'ı peek'ten önce at.** Sonra atarsan rakip açıya çoktan girmiştir.
+**Flash'ı kendi peek'inden önce at.** Peek'e girdikten sonra atarsan rakip seni çoktan görmüştür.
 
 ## Saldırı — Defuse Sesini Okuma
 
@@ -101,7 +101,7 @@ Yayıl, çapraz açı kur, util'i paylaştır. 4 ayrı noktayı tut, 1 kişi fla
 Yayıl ama bir açıyı boş bırak. Flank izlemek zorunlu, çapraz açıyı yine de kurarsın.
 
 ### 3v5 Plant Sonrası
-Yığılmaya geç. 2 kişi aynı noktada, 1 kişi off-angle'da dursun. Her kayıp kritik — defuse sesini bekle.
+Yığılmaya geç. 2 kişi aynı noktada, 1 kişi off-angle'da dursun. Yığıldığınız nokta spike'ın dibi değil — spike'ı gören siperli açı. Her kayıp kritik — defuse sesini bekle.
 
 ### 2v5 Plant Sonrası
 Defuse sesini duyana kadar görünme. Ses gelince ikiniz aynı anda iki ayrı noktadan peek atın. Yalnız peek atma, biri mutlaka ölür.

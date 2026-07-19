@@ -53,4 +53,4 @@ Duelist site açar, sentinel o açılışı kapatır. Sentinelin kurulumunu peek
 
 ## Sage Varsa: Beden Tehdidi
 
-Düşman kompunda Sage varsa aldığın kill kesin değildir: sayıyı Sage ölmeden ya da bedeni güvenceye almadan kapanmış sayma. Bedeni gören açıyı tut — dirilten Sage beden başında sabit ve savunmasızdır, kalkan oyuncu silahsız doğar; ikisi de bedava kill.
+Düşman kompunda Sage varsa aldığın kill kesin değildir: sayıyı Sage ölmeden ya da bedeni güvenceye almadan kapanmış sayma. Bedeni gören açıyı tut — dirilten Sage beden başında sabit ve savunmasızdır (bedava kill); kalkan oyuncu silahıyla doğar ama kalkış ânında nişanı hazır değildir, o pencere de senindir.

@@ -53,4 +53,4 @@ Initiator düşmanın tuzaklarını bulur ve açar. Sentinel tuzaklarını sakla
 
 ## Sage Varsa: Beden Tehdidi
 
-Düşman kompunda Sage varsa takımın aldığı kill kesin değildir: sayıyı Sage ölmeden ya da bedeni güvenceye almadan kapanmış sayma. Bedeni gören açıyı tut ya da o alanı yetenekle kilitle — dirilmeye gelen Sage sabit ve savunmasızdır, kalkan oyuncu silahsız doğar; ikisi de bedava kill.
+Düşman kompunda Sage varsa takımın aldığı kill kesin değildir: sayıyı Sage ölmeden ya da bedeni güvenceye almadan kapanmış sayma. Bedeni gören açıyı tut ya da o alanı yetenekle kilitle — dirilmeye gelen Sage sabit ve savunmasızdır (bedava kill); kalkan oyuncu silahıyla doğar ama kalkış ânında nişanı hazır değildir, o pencerede düello senindir.
