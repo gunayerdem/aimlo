@@ -66,6 +66,16 @@ Breach duvarın ardına vuran initiator. Flash'ı da, stun'u da, molly'yi de —
 **COUNTER** Tek bir util'le yokla (örneğin uzaktan stun), gerisini gerçek giriş için sakla. Yoklama başka, site açma başka — ikisini aynı util'le karıştırma.
 **WHY** Breach'in değeri girişi açmakta. Util biterse takımın site'a utility'siz dalar, sen de elinde hiçbir şey olmadan ilk kurşunu yersin. Util zamanlaması kadar saklamak da beceridir.
 
+**IF** Round'un ilk saniyelerinde, daha hiçbir util atmadan ilk temasta ölüyorsun
+**MEANING** Kiti duvar arkasından çalışan ajanla açık açıya ilk giren sen olmuşsun — Breach'in gövdesi öncü değil, duvarın bu tarafının oyuncusu
+**COUNTER** İlk temas anında yanında bir duvar, önünde bir kapak olsun. Yoklamayı uzaktan stun'la yap, ilk kurşunu duelist yesin; sen açıyı sarsmadan peek atma.
+**WHY** Breach erken ölünce takımın girişi açacak flash'ı ve sarsması cebinde toprağa gider — kapıyı açacak adam yoksa takım kapalı kapıya yürür
+
+**IF** Stun attıktan sonra takibi tek başına yapıyorsun ve ölümün takasla karşılanmıyor
+**MEANING** Sarsma penceresini solo kovalıyorsun — takım arkanda değilken sersemlemiş düşman bile ezberlediği ortak açıya sıkar ve ölümün karşılıksız kalır
+**COUNTER** Stun'dan sonra peek'i trade mesafesindeki takım arkadaşınla aynı anda at: "sarsma bastı, birlikte." Yakında kimse yoksa peek'i hiç atma — stun'ı bilgi say, pozisyonunu koru.
+**WHY** Sarsma penceresi takım penceresidir, tek kişilik garanti değil; solo takipte düşersen düşman hem sarsmayı atlatır hem sayı avantajını bedavaya alır
+
 ## 5. Saldırı Kullanımı
 - Execute sırası: flash duvar içinden, takım girişin ağzındayken patlasın → stun aynı boşluğa → takım sarsma biterken içeride olsun. Sesli geri sayımla başlat.
 - Molly'yi varsayılan plant noktasına ya da girerken en sıkışık köşeye at — savunucu ya hasarı yer ya açıyı bırakır.
@@ -81,12 +91,17 @@ Breach duvarın ardına vuran initiator. Flash'ı da, stun'u da, molly'yi de —
 - **Ascent**: A main ve B main duvarlarından flash. Varsayılan plant noktalarına molly. Mid'i sıktıktan sonra stun'la rotate'i geciktir.
 - **Bind**: Hookah ve showers duvarının içinden flash kaçınılmaz. Teleporter duvarından atılan molly düşmanı koşturuyor. Burada flash'ı duvar dibinde bekleyen savunmacıya at — Bind'de yakın açılar çok.
 - **Sunset**: B market ve mid koridorları duvar dolu — market kapısının duvarından flash at, tiles'tan geçen rotasyona stun bas. A elbow dar; molly orada tutunacak yer bırakmaz.
+- **Summit**: Geniş harita util menzilini ödüllendirir. A Garden yakın açısını takım site'a girmeden duvar üzerinden stun'la temizle — Garden temizlenmeden plant'a koşan yandan vurulur. B Main push'unda B Tower derin açısına flash'ı duvar içinden bas, takım Tower körken girsin. Mid Fountain çapraz ateşine tek başına peek atma: stun'la bir açıyı boz, takım öbür açıdan bassın.
 - **Rotasyon dışı haritalar**: Fracture — iki taraftan giriş yapısı Breach'e biçilmiş kaftan: bir taraftan stun at, takım öbür taraftan dalsın; ult tek yöne açılan koni, site'ı seç ve koniyi o yöne sür. Pearl — B site duvarları iki açıdan flash'a izin verir; mid kapılarından stun rotate'i keser. Lotus — dönen kapı duvarları flash için doğal yüzey; dar C main koridorunda stun'dan kaçış yok.
 
 ## 8. Eşleşme Notları
 - **Killjoy'a karşı**: Molly'yi duvarın arkasından at, Killjoy'un kurduğu cihazları temizle. Ult'unu doğru açıdan atarsan Killjoy'un site kilidini iptal edersin.
 - **Sage'e karşı**: Molly, Sage duvarını içinden yakar. Stun duvarın ardındaki düşmanı bile sarsar.
 - **Omen'e karşı**: Omen nereye ışınlandı bilemezsin ama duvarın arkasını bilirsin — flash ve stun oradan geçer.
+- **KAY/O'ya karşı**: Suppress bıçağı bütün kitini kapatır — yeteneksiz Breach sıradan bir tüfekten ibaret. Bıçak sesini duyduğunda util'ini o pencereden önce ya da sonra kullan; suppress'teyken duvar arkasında bekle, açık düelloya çıkma.
+- **Chamber'a karşı**: Op tutan Chamber'a açık açıdan peek atma — duvarın arkasından stun'la yerinden söktür. Sarsılmış nişan uzun mesafede çalışmaz; takım tam o pencerede geniş açıyla girsin.
+- **Rush comp'a karşı**: Düşman her round hızlı basıyorsa Breach savunmanın en ucuz cevabı — dar geçide yığıldıkları an duvar içinden sars, koşu bozulur, takımın açık hedefleri toplar. Stun'ı erken yoklamaya değil, ayak sesi yığınına sakla.
+- **Fade ya da Sova ile birlikte**: Keşif ajanı düşmanı ortaya çıkarsın, sen doğrulanmış pozisyona duvar içinden stun bas. Keşif → sarsma → giriş sırası savunucuya toparlanma penceresi bırakmaz — tahmine atılan sarsmadan kat kat değerli.
 - **Duelist ile**: Sen flash at, sen sars — o girsin. Zamanlamanız tutarsa düşman hem kör hem sarsılmış halde karşılaşır.
 
 ## 9. Oyuncuya Ne Söylenmeli
@@ -101,3 +116,11 @@ Breach duvarın ardına vuran initiator. Flash'ı da, stun'u da, molly'yi de —
 
 ### Tahmin edilebilir olunca
 "Aynı duvar, aynı flash, her tur. Düşman flash sesi çıkmadan sırtını dönüyor. Başka duvara geç, açını değiştir, önce stun at arkasından flash bas. Bir tur flash'ı hiç atma, sadece stun'la gir — düşman dönmeye hazırlanırken sen sersemletip dalmış olursun."
+
+## 10. Bu Ajana Karşı
+
+- Kompta Breach varsa duvar dibi köşe tutuşları risklidir — kiti katı yüzeyin arkasına iner. Tutuşunu duvardan bir adım kopuk, geri çekilme yolu olan açılardan kur.
+- Flash'ı duvardan geçer ve gelirken ses verir — sesi duyduğun an görüş hattından çık ya da sırtını dön; kör tutulan köşe bedava ölümdür.
+- Sarsma ve ult'un hemen arkasından giriş gelir — sarsıldıysan o düelloyu alma, bir açı geri çekil ve toparlanan nişanla ikinci temasa hazırlan.
+- Breach'in kiti takip ister — arkasında takım baskısı olmayan yoklama stun'ını pozisyon değiştirme sinyali say: o açıyı okudu, sen artık orada olma.
+- Açık, duvarsız alan Breach'i kitsiz bırakır — düelloları geniş, yüzeyden uzak alanlara çekersen elinde yalnız tüfek kalır.

@@ -3,7 +3,7 @@ type: map
 map: lotus
 patch: "13.00"
 verified: 2026-07-08
-pool: "rotasyon-dışı — 13.00 rekabetçi havuzunda değil"
+pool: "aktif — 13.00 rekabetçi havuzu"
 ---
 
 # LOTUS — Detaylı Strateji ve Analiz
@@ -135,7 +135,7 @@ WHY: Drop'tan giren, savunucunun arkasına düşer; oradan kurtulmak neredeyse i
 - **Omen**: Kaçışınla kapı sesini hiç vermeden rotate et — savunucu kapı sesini beklerken sen çoktan başka açıdan çıkarsın. C Waterfall'a TP at, off-angle al. Smoke'unla 3 site arasına perde çek. Flash'ını A Main ve B Main gibi dar girişlerde kullan, tüm koridoru körleştirir. Ult'unla haritanın herhangi bir yerine geç, savunucunun düzenini boz.
 - **Viper**: Duvarınla A-C arasını ya da B-Mid arasını böl — tek ability ile 2 site'ı etkilersin. Smoke'unla üçüncü site'ı kontrol al. Molly lineup'larını 3 site'ın hepsinde öğren, spike kurulduktan sonra defuse deny için şart. Ult'unu B site gibi kompakt alanlarda kullan, alanın tamamını kapatır.
 - **Skye**: Flash'ını kapı arkası için kullan — kapının diğer tarafına flash at, takım arkadaşın geçsin. Recon'unu dar koridorlara ve kapı geçişlerine sür; onunla kapı arkasını, Silent Drop'u ve mid'i kontrol et. Ult'un 3 siteli haritada tüm düşman pozisyonlarını açığa çıkarır, boşa harcama.
-- **Harbor**: Lotus'ta en güçlü controller — bu haritada S-tier. Duvarınla A Main'den C Main'e kadar görüş hattı kır — tek util ile 3 site arası geçişi smoke'larsın. Kalkan kubbeni spike'ın üstüne at, kubbe içinde defuse yapmak neredeyse imkânsız. Giriş smoke'unu A Main push'unda kullan. Ult'unu geniş site'larda birden fazla düşmanın üstüne bas.
+- **Harbor**: Lotus'ta en güçlü controller — bu haritada S-tier. Duvarınla A Main'den C Main'e kadar görüş hattı kır — tek util ile 3 site arası geçişi smoke'larsın. Kalkan kubbeni plant'çi spike'a dokunduğu an üstüne at — plant'çiyi mermiden korur; retake'de ise tek tehlikeli açıyı kapatmak için sakla. Giriş smoke'unu A Main push'unda kullan. Ult'unu geniş site'larda birden fazla düşmanın üstüne bas.
 
 ## 8. Post-Plant Stratejileri
 - **A Site Post-Plant**: Spike'ı A Default'a, kutuların arkasına dik. Sonra A Main ve A Root'ta crossfire kur — savunucu A Stairs ya da Tree'den gelecek, iki taraftan ateş altında kalacak. Kırılabilir duvarı execute'ta kırdıysan A Link açısı sana ekstra bir crossfire kolu verir, savunucu oraya da bakmak zorunda kalır. Tree'yi smoke'la, yoksa savunucu yüksekten seni görür. Silent Drop'u unutma — biri oradan düşüp spike'a ulaşabilir, birini oraya baktır.

@@ -77,6 +77,7 @@ Sen tek başına iş çeviren bir smoke ajanısın. Görevin sadece duman atmak 
 - **Pearl**: A Main ve B Long'a derin smoke iş görür. B Hall kutularına kısa teleport beklenmedik açı verir. Dar koridorlarda flash bütün geçişi kapatır.
 - **Lotus**: Kapı arkasına smoke at — savunucu geçerken kör olur. Kısa teleportla dönen kapıyı ses çıkarmadan atla; savunucu kapı sesini beklerken sen çoktan karşı taraftasın. Ult'la 3 bölge arasında geçiş çok güçlü.
 - **Corrode**: Dar koridorlar flash'ın etkisini tavana vurdurur — tek atışta bütün geçiş kapanır. Koridor arkasındaki açılara kısa teleportla geç, savunucu nereden geldiğini anlayamaz. Smoke dar bakış açılarını tamamen kapatır.
+- **Summit**: Yeni haritada güçlü seçim — iki smoke geniş görüş hatlarını execute için kapatmaya yeter: A Main görüş hattının ortasına ve Mid Fountain'e öncelik ver; B'de B Tower önünü kör et, derin açının gücü biter. Kısa teleportla Mid alındıktan sonra A Link ya da B Link'ten ani split kur — geniş haritada kimse nereden çıkacağını bilemez. Düşürülebilir duvarlar (A Wall, Mid Wall, B Wall) düştü mü o rota round boyunca kapalı: teleport ve ult varış noktanı kapanan rotanın arkasına seçme, kendi dönüş yolunu kesersin; düşen duvarın altında kalan ölür. Ult'la iki uzak site arasında anlık geçiş Summit'in büyüklüğünde ekstra değerli — spike kurulunca karşı hatta baskı aç.
 
 ## 6. Eşleşme Notları
 - Karşıda çift initiator varsa: Onların recon'u/dronu bilgiyi verdikten hemen sonra teleportla yer değiştir — topladıkları bilgi anında değersizleşir.

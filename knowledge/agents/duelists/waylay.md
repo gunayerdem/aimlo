@@ -87,6 +87,7 @@ WHY: Kullanılmayan yetenek çöpe atılan paradır — hem tur şansına hem ta
 - **Haven — orta/durumsal:** Üç site, çok giriş; mobilite işe yarar ama açık uzun hatlar kısa menzilli kite oturmaz. C Long'da yavaşlatma + dash giriş açar. Körlemesiz uzun hatta tek başına dash'leme.
 - **Ascent — zayıf:** Uzun görüş hatları ve açık mid kite ters; uzaktan görünür kalırsın. Oynaman gerekirse dar A Main girişinde yavaşlat-dal'a güven, açık alanda pencere açmadan girme.
 - **Split — güçlü:** A Ramp ve B Main'deki dar koridorlar kaçış alanını kapatır — yavaşlat, dal, ilk öldürmeyi al. Dikey dash'le heaven/üst açılara çık; dar yapı geri-kaymayı da kolaylaştırır.
+- **Summit — durumsal (yeni harita):** Geniş ve uzun hatlar kısa menzilli kite ters — dash girişini A Garden'lı site ağzı, A Link ve B Tower çevresi gibi dar geçişlere sakla; Mid Fountain'e yavaşlatma atmadan dalma, çapraz açının birini yavaşlatman kessin, öbürünü takım util'i kapatsın. Dikey dash'i geniş B Site'ın kutu bolluğunda (Triples, Close Box) kullan — göz hizasını tarayan savunucuyu üstten geç. Düşürülebilir duvarlar (A Wall, Mid Wall, B Wall) düştü mü round boyunca kapalı: geri-kayma noktanı duvarın kapatacağı tarafa bırakma, dönüş hattın tıkanır; düşen duvarın altında da durma — geri-kayma dokunulmazlığı bile orada kurtarmaz, altında kalan ölür.
 
 ## 6. Eşleşme Notları
 - **Jett'e karşı — dengeli:** İki mobilite duelist'i. Jett dash'le kaçabilir ama önce yavaşlatırsan kaçış penceresini kaparsın — yavaşlatman onun mobilitesini iptal eder.

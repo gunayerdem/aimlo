@@ -114,224 +114,168 @@ Mid Window, Mid hattındaki bilgi ve açı pozisyonu — Mid Wall'a yakın. Duva
 
 **MEANING:** Anchor rolünü değil entry rolünü oynuyorsun. Geniş haritada erken ölen anchor site'ı bir adam eksik bırakır ve takımı retake'e zorlar.
 
-**COUNTER:** Erken çatışmayı sadece destek ya da kaçış yolun varsa al. Bilgi aldıktan sonra geri çekil, util'i retake için sakla. Giriş açısına molly ya da recon at, peek atma.
+**COUNTER:** Erken çatışmayı sadece destek ya da kaçış yolun varsa al. Giriş açısına molly ya da recon at, peek atma; bilgi verdikten sonra geri çekil, util'i retake için sakla.
 
-**WHY:** Anchor düşünce savunma yapısı çöker. Spike kurulduktan sonra siteyi geri almak, hiç kaybetmemekten çok daha zor. Bilgi ver, yaşa, retake'te ol.
+**WHY:** Anchor düşünce savunma yapısı çöker — spike sonrası siteyi geri almak, hiç kaybetmemekten çok daha zor. Bilgi ver, yaşa, retake'te ol.
 
 ### A Site Savunma Setup'ı
 
-A Site daha küçük ve tutması zor — daha çok savunma desteği ve util ister.
+A Site küçük ve tutması zor — sıkı util ister. **Crossfire:** biri A Garden açısını yakından tutar, diğeri site içinden ya da CT'den aynı girişi uzaktan izler — Garden ilk kontağı alınca site içindeki yandan vurur, saldırgan iki açıyı aynı anda temizlemek zorunda kalır. Üçüncü adam A Link çıkışını tutar, Mid-split'i orada yakalar.
 
-**Crossfire:** İki eksen kur: biri A Garden açısını yakın mesafeden tutar, diğeri site içinden ya da CT'den aynı girişi uzaktan izler. Garden'daki adam ilk kontağı alır, saldırganın gözü ona gider; site içindeki tam o anda yandan vurur. Bu crossfire'ı kırmak için saldırganın iki açıyı aynı anda temizlemesi gerekir. Üçüncü adam A Link çıkışını tutar — Mid-split gelirse oradan yakalarsın.
+**Util Kullanımı:** Smoke A Main görüş hattının ortasına — saldırgan smoke'tan çıkmak zorunda kalır, ilk ateşi sen alırsın. Recon ya da tuzak A Link'e — Mid flank'ı erken yakalar. Molly A Main girişine — push başlayınca tetikle.
 
-**Util Kullanımı:**
-- **Smoke:** A Main görüş hattının ortasına at. Saldırgan smoke'tan çıkmak zorunda kalır, ilk ateşi sen alırsın.
-- **Recon ya da tuzak:** A Link'i izlet. Mid'den gelen flank'ı erken yakalarsın.
-- **Molly:** A Main girişine at. Push başlayınca tetikle, saldırganı geri it.
-
-**Anchor vs Rotate:** A site'ta bir adam anchor kalır, geri kalanlar rotate pozisyonunda bekler. Anchor'ın işi push'u yavaşlatmak, bilgi vermek ve hayatta kalmak — agresif peek değil. A site küçük olduğu için anchor erken ölürse site hızla düşer. Rotate Mid'den ya da B'den gelir. A Wall'u savunmada push'u geciktirmek ya da saldırganı izole etmek için düşürebilirsin — kendi rotate'çini o yoldan kilitlediğini hesaba kat.
+**Anchor vs Rotate:** Bir adam anchor kalır; işi push'u yavaşlatmak, bilgi vermek ve hayatta kalmak — agresif peek değil. A küçük: anchor erken ölürse site hızla düşer. Rotate Mid'den ya da B'den gelir. A Wall'u push'u geciktirmek ya da saldırganı izole etmek için düşürebilirsin — kendi rotate'çini o yoldan kilitlediğini hesaba kat.
 
 **IF:** A anchor A Garden açısını her round aynı şekilde tutuyor ve saldırgan onu önceden açı tutup çıkarıyor.
 
-**MEANING:** Pozisyonun tahmin edilebilir oldu. Garden güçlü bir yakın açı ama her round aynı yerde durursan saldırgana bedava bilgi verirsin.
+**MEANING:** Pozisyonun tahmin edilebilir oldu — her round aynı yer, saldırgana bedava bilgi.
 
-**COUNTER:** Garden ile site içi arasında round round değiştir. Garden'da öldürdükten sonra ertesi round site içinden ya da CT'den tut — saldırgan Garden'ı açı tutar, seni bulamaz.
+**COUNTER:** Garden ile site içi arasında round round değiştir; Garden'da öldürdükten sonra ertesi round site içinden ya da CT'den tut.
 
-**WHY:** Off-angle gücü sürpriz değerine bağlı. Aynı yeri tekrar kullanırsan sürpriz biter, avantaj dezavantaja döner.
+**WHY:** Off-angle gücü sürpriz değerine bağlı — aynı yer tekrarlanınca avantaj dezavantaja döner.
 
 ---
 
 **IF:** A Link'ten gelen flank savunucuları arkadan vuruyor — herkes sadece A Main'e bakıyor.
 
-**MEANING:** Mid kontrolü kaybedilmiş, A Link izlenmiyor. Tek yöne bakıyorsun ve flank'a tamamen açıksın.
+**MEANING:** Mid kontrolü kaybedilmiş, A Link izlenmiyor — flank'a tamamen açıksın.
 
-**COUNTER:** A Link'e tuzak ya da recon koy. Util yoksa üçüncü adamı oraya koy. O da yoksa A Link'i smoke'la ve arada kontrol et.
+**COUNTER:** A Link'e tuzak ya da recon koy; util yoksa üçüncü adamı oraya ver ya da Link'i smoke'layıp arada kontrol et.
 
-**WHY:** Mid düşünce A Link doğrudan flank yolu olur. Orası izlenmezse saldırgan arkandan garantili giriş yapar.
+**WHY:** Mid düşünce A Link doğrudan flank yolu olur — izlenmezse saldırgan arkandan garantili girer.
 
 ### B Site Savunma Setup'ı
 
-B Site daha büyük ve post-plant alanı bol — savunmada bu alanı util ile bölmen gerekir.
+B Site büyük, post-plant alanı bol — alanı util ile bölmen gerekir. **Crossfire:** B Tower derin açıyı tutar, site içinden ikinci adam B Main çıkışını yakından izler — çıkan saldırgan iki farklı mesafeden ateş yer. İkinci eksen B Link çıkışı: Mid-split tehdidine karşı site içinden biri orayı izler.
 
-**Crossfire:** B Tower derin açıyı tutar, site içinden ikinci adam B Main çıkışını yakın mesafeden izler — B Main'den çıkan saldırgan iki farklı mesafeden ateş yer. İkinci eksen B Link çıkışı: Mid-split tehdidine karşı site içinden biri orayı izler.
+**Util Kullanımı:** Smoke B Main girişine ya da B Tower önüne — saldırgan görüş hattını kaybeder, sen hazır beklersin. Recon ya da tuzak B Link girişine — Mid split'i erken yakalar. Molly B Main girişine ya da Triples civarına — yığılan grubu topluca yakar.
 
-**Util Kullanımı:**
-- **Smoke:** B Main girişine ya da B Tower önüne at. Saldırgan görüş hattını kaybeder, sen hazır beklersin.
-- **Recon ya da tuzak:** B Link girişine koy. Mid'den gelen split'i erken yakalarsın.
-- **Molly:** B Main girişine ya da Triples civarına at. Push'u yavaşlatır, yığılan grubu topluca yakar.
+**Anchor vs Rotate:** B anchor Tower'da ya da site içinde durur; B büyük, tek anchor geniş alanı ancak util ile tutar. Rotate B CT'den gelir. B Wall'u düşürmeden önce kendi rotate yolunu hesapla.
 
-**Anchor vs Rotate:** B anchor B Tower'da ya da site içinde durur. B büyük olduğu için tek anchor geniş alanı tutmakta zorlanır — util'i doğru anda kullanman şart. Rotate B CT'den gelir. B Wall'u düşürmeden önce kendi rotate yolunu hesapla.
+**IF:** Geniş B'de util atmadan yalın ateşle push'u karşılamaya çalışıyorsun.
 
-**IF:** B site büyük ve post-plant alanı geniş olduğu için, util atmadan yalın ateşle push'u karşılamaya çalışıyorsun.
+**MEANING:** Geniş B Main'den saldırgan sayı avantajıyla akıyor — tek anchor bunu util'siz durduramaz.
 
-**MEANING:** Util kullanmıyorsun. Geniş B Main'den saldırganlar sayı avantajıyla akıyor, tek anchor bunu util'siz durduramaz.
+**COUNTER:** Push sesi gelince önce molly ya da smoke at, sonra pozisyon al; util push'u geciktirir, bu sürede rotate gelir. B Tower açısını koru ama tek başına derin durup yakalanma.
 
-**COUNTER:** Push sesi gelince önce molly ya da smoke at, sonra pozisyon al. Util push'u geciktirir — bu sürede rotate gelir. B Tower açısını koru, ama tek başına derin durup yakalanma.
-
-**WHY:** Geniş alanda util zaman kazandırır, zaman ise rotate demektir. Molly atmadan push karşılamak, saldırganın sayı avantajını doğrudan kabul etmek demek.
+**WHY:** Geniş alanda util zaman kazandırır, zaman rotate demektir — molly'siz push karşılamak saldırganın sayı avantajını kabul etmektir.
 
 ---
 
 **IF:** B Link üzerinden gelen Mid-split'i izlemiyorsun — tüm savunma B Main'e bakıyor.
 
-**MEANING:** Mid kontrolü kaybedilmiş, B Link açık. Saldırgan Mid'den B Link'e geçip seni yandan ve arkadan yakalıyor.
+**MEANING:** Mid kontrolü kaybedilmiş, B Link açık — saldırgan seni yandan ve arkadan yakalıyor.
 
-**COUNTER:** B Link'e tuzak ya da recon koy, site içinden biri o çıkışı izlesin. Geç bir split tehlikeliyse B Wall'u düşürerek o yolu kes.
+**COUNTER:** B Link'e tuzak ya da recon koy, site içinden biri o çıkışı izlesin. Geç split tehlikeliyse B Wall'u düşürerek o yolu kes.
 
-**WHY:** B büyük site, B Link de Mid'e doğrudan bağlanıyor. İzlenmezse saldırgan Mid kontrolünü split'e çevirir ve seni iki yönden sıkıştırır.
+**WHY:** B Link Mid'e doğrudan bağlı — izlenmezse saldırgan Mid kontrolünü split'e çevirir, seni iki yönden sıkıştırır.
 
 ## 5. Retake Stratejileri (Savunma)
 
 ### A Site Retake
 
-**Util Sırası:** (1) bilgi al — recon at, spike etrafındaki düşmanı gör; (2) alanı temizle — molly'yi post-plant pozisyonlarına at, düşmanı oradan sök; (3) giriş aç — flash ile içeri gir.
+**Util Sırası:** (1) bilgi al — recon at, spike etrafını gör; (2) molly'yi post-plant pozisyonlarına bas, düşmanı sök; (3) flash ile gir. Bilgi almadan girersen doğruca crossfire'a yürürsün; süre azsa bile en azından hızlı flash + birlikte giriş — utility'siz tek tek yürümekten her zaman iyidir. A Wall düşmüşse bir yaklaşım kalıcı kapanmıştır, rotayı ona göre kur.
 
-Bilgi almadan retake'e girme. Düşmanın nerede durduğunu bilmiyorsan doğruca crossfire'a yürürsün. A Wall düşmüşse açıların değiştiğini hesaba kat — düşen duvar bir yaklaşım yolunu kalıcı kapatmıştır.
-
-**Giriş Yönleri:** A site'a CT (ana yol) ve A Link (Mid üzerinden yan giriş) yönlerinden girebilirsin. En güçlü retake iki yönden aynı anda gelmektir: CT'den bir grup girerken A Link'ten ikinci grup yandan basar. Saldırgan iki yöne birden bakamaz. Tek yönden retake yaparsan, saldırgan tüm post-plant pozisyonlarını o yöne çevirir.
+**Giriş Yönleri:** CT (ana yol) ve A Link (Mid üzerinden yan giriş). En güçlü retake ikisinden aynı anda gelmektir — tek yönden girersen saldırgan tüm post-plant açılarını o yöne çevirir.
 
 **IF:** Tüm savunucular CT'den tek sıra halinde site'a akıyor.
 
-**MEANING:** Tek yönden sıralı giriş saldırganın post-plant crossfire'ını besler. İlk giren düşer, ikinci giren aynı açıya yakalanır.
+**MEANING:** Tek yönden sıralı giriş saldırganın post-plant crossfire'ını besler — ilk giren düşer, ikinci aynı açıya yakalanır.
 
-**COUNTER:** Retake'i ikiye böl: 2 kişi CT, 1 kişi A Link. Link'teki oyuncu flash atar, CT'dekiler flash patladığı anda swing atar. Aynı anda iki açıdan baskı — saldırgan tek yöne odaklanamaz.
+**COUNTER:** Retake'i böl: 2 kişi CT, 1 kişi A Link. Link'teki flash atar, CT'dekiler flash patladığı anda girer.
 
-**WHY:** Çok yönlü retake saldırganın post-plant avantajını kırar. Bir yöne dönerse diğer yön açılır, pozisyon tutamaz.
-
----
-
-**IF:** Retake'e flash, molly, recon hiç kullanmadan utility'siz giriyorsun.
-
-**MEANING:** Spike baskısıyla util'i atlıyorsun. Post-plant'taki saldırganlar hazır bekler, seni teker teker düşürür.
-
-**COUNTER:** Spike'ta süre varsa retake'e başlamadan en az bir bilgi util'i ve bir flash kullan. Recon ile pozisyon öğren, flash ile gir. Süre azsa hızlı flash + swing at ama yine de utility'siz girme.
-
-**WHY:** Bilgi util'i düşmanın yerini gösterir, doğru açıyı tutarsın. Flash reaksiyon avantajını siler. İkisi birlikte retake başarısını katlar.
+**WHY:** Çok yönlü retake post-plant avantajını kırar — saldırgan bir yöne dönerse diğer yön açılır, pozisyon tutamaz.
 
 ### B Site Retake
 
-**Util Sırası:** (1) B Link ve B Main yolundaki lurker'ı temizle; (2) spike çevresini ve B Tower açısını tara; (3) molly'yi spike'a at, düşmanı yerinden sök; (4) flash ile gir.
+**Util Sırası:** (1) B Link ve B Main yolundaki lurker'ı temizle; (2) spike çevresini ve B Tower açısını tara; (3) molly'yi spike'a bas; (4) flash ile gir. B büyük, saklanacak yer çok — bilgi util'i burada daha da kritik. B Wall düşmüşse hangi yaklaşımın kapandığını hesaba kat.
 
-B büyük ve post-plant alanı geniş — saldırganın saklanacak çok yeri var. Bu yüzden bilgi util'i burada daha da kritik. B Wall düşmüşse hangi yaklaşımın kapandığını hesaba kat.
+**Giriş Yönleri:** CT (güvenli ama tahmin edilebilir) ve B Link (Mid üzerinden yan giriş) — B Main'den retake deneme, saldırgan orayı zaten tutuyor. En güçlü retake CT ve B Link'ten aynı anda gelmektir.
 
-**Giriş Yönleri:** B site'a CT (güvenli ama tahmin edilebilir) ve B Link (Mid üzerinden yan giriş) yönlerinden girebilirsin. B Main'den retake deneme — saldırganlar orayı zaten tutuyor. En güçlü retake CT ve B Link'ten aynı anda gelmektir. Tek yönden girersen geniş site'ta saldırgan seni post-plant açısından durdurur.
+**IF:** Retake'te tüm util'i site girişine harcıyorsun — molly ve smoke giriş noktasına gidiyor.
 
-**IF:** Geniş B site'ta retake'e tüm util'i site girişine harcıyorsun — molly ve smoke giriş noktasına gidiyor.
+**MEANING:** Util yanlış hedefte — asıl hedef spike çevresi ve geniş post-plant alanındaki pozisyonlar.
 
-**MEANING:** Util yanlış hedefe gidiyor. Giriş noktasını temizlemek önemsiz değil ama asıl hedef spike çevresi ve geniş post-plant alanındaki pozisyonlar.
+**COUNTER:** Util'i spike merkezli kur: molly spike'ın yanına (defuse sırasında peek'i keser), smoke spike ile saldırgan pozisyonu arasına, flash girişe. B'nin genişliği yüzünden post-plant açılarını teker teker kapat.
 
-**COUNTER:** Util'i spike merkezli kur: molly'yi spike'ın yanına at (defuse sırasında saldırganın peek etmesini engelle), smoke'u spike ile saldırgan pozisyonu arasına at, flash'i giriş için sakla. B'nin genişliği yüzünden post-plant açılarını teker teker kapatman gerekir.
-
-**WHY:** Retake'in tek amacı spike'ı defuse etmek. Giriş noktasına harcanan util geniş post-plant alanındaki düşmanı yerinden oynatmaz. Defuse anında korumasız kalırsın.
+**WHY:** Retake'in tek amacı defuse — girişe harcanan util post-plant'taki düşmanı yerinden oynatmaz, defuse anında korumasız kalırsın.
 
 ---
 
 **IF:** B Tower açısını kontrol etmeden retake'e giriyorsun ve oradan arkadan vuruluyorsun.
 
-**MEANING:** Derin Tower açısını atladın. Saldırgan post-plant'ta Tower'ı tutuyorsa, sen spike'a bakarken seni oradan keser.
+**MEANING:** Saldırgan post-plant'ta Tower'ı tutuyorsa, sen spike'a bakarken seni derin açıdan keser.
 
-**COUNTER:** Retake'e başlamadan B Tower açısına flash ya da recon at. Temiz olduğunu gördükten sonra spike'a yaklaş. Tek başına Tower'a swing atma — biri flash atsın, biri girsin.
+**COUNTER:** Girmeden önce B Tower'a flash ya da recon at; temizse spike'a yaklaş. Tower'a tek başına geniş açıyla çıkma — biri flash atsın, biri girsin.
 
-**WHY:** B Tower geniş site'ta en derin açı. Temizlemeden geçmek, savunucunun en güçlü pozisyonuna sırtını dönmek demek. O kısa temizleme retake'i ayakta tutar.
+**WHY:** B Tower geniş site'ın en derin açısı — temizlemeden geçmek saldırganın en güçlü pozisyonuna sırt dönmek demek.
 
 ## 6. Mid Kontrol Senaryoları
 
 ### Saldırı Tarafında Mid
 
-Mid'i almak sana iki şey kazandırır: (1) split seçeneği — A Link ya da B Link'ten siteye yan baskı yaparsın; (2) erken rotate zorlama — Mid'deki oyuncun savunucunun rotate yolunu keser. Mid kaybedilirse saldırın tahmin edilebilir tek hatta sıkışır ve retake yavaşlar.
-
-Mid almak istiyorsan en az iki oyuncu commit et: biri Mid Fountain'e flash atar, diğeri swing atar. Tek kişiyle girersen çapraz açıya gömülürsün. Mid Wall hâlâ açıksa, site seçtikten sonra düşürerek savunucunun rotasyonunu kes.
+Mid sana iki şey kazandırır: split seçeneği (A Link ya da B Link'ten yan baskı) ve erken rotate zorlama (Mid'deki oyuncun savunucunun rotate yolunu keser). Almak istiyorsan en az iki oyuncu commit et: biri Mid Fountain'e flash atar, diğeri girer — tek kişi çapraz açıya gömülür. Mid Wall hâlâ açıksa site seçtikten sonra düşür, savunucunun rotasyonunu kesersin.
 
 ### Savunma Tarafında Mid
 
-Mid'i savunmak agresif peek demek değil. Smoke ile Mid Fountain görüş hattını kapat, recon ya da tuzak ile bilgi al. Mid'deki oyuncu ölürse her iki site'ın flank güvenliği biter. Geç bir push'u durdurmak için Mid Wall'u düşürebilirsin.
+Mid'i savunmak agresif peek demek değil: Fountain görüş hattını smoke ile kapat, recon ya da tuzak ile bilgi al. Mid'deki oyuncu ölürse iki site'ın da flank güvenliği biter. Geç bir push'u durdurmak için Mid Wall'u düşürebilirsin.
 
 ### Mid Kontrol Durumları
 
 **IF:** Her round Mid'e tek oyuncu gönderiyorsunuz ve o oyuncu sürekli Mid Fountain'de ölüyor.
 
-**MEANING:** Mid almak için yeterli kaynak koymuyorsunuz. Tek oyuncu merkez kavşaktaki çapraz açıya karşı duramaz.
+**MEANING:** Merkez kavşağın çapraz açısına tek kişi koyuyorsunuz — yeterli kaynak yok.
 
-**COUNTER:**
-- Mid'e iki oyuncu gönder: biri flash atar, diğeri swing atar.
-- Alternatif: Fountain'i smoke'la, contest etme — smoke arkasından Link'e geç.
-- Tek oyuncuyu Mid'e kurban verme.
+**COUNTER:** İki oyuncu gönder: biri flash atar, diğeri girer. Almayacaksan Fountain'i smoke'la, contest etme — smoke arkasından Link'e geç. Tek oyuncuyu Mid'e kurban verme.
 
-**WHY:** Mid Fountain çapraz açı, bilinen pozisyon, hazırlanmış savunucu — kontrolü kırmak için sayı ya da util üstünlüğü lazım. Tek kişiyle girersen bedava kill verirsin.
+**WHY:** Fountain bilinen pozisyon, hazırlanmış savunucu, çapraz açı — kırmak sayı ya da util üstünlüğü ister.
 
 ---
 
 **IF:** Savunma Mid'i tamamen boş bırakıyor — ne util ne oyuncu.
 
-**MEANING:** Takım site'lara fazla kaynak yığmış, Mid'i unutmuş. Saldırganlar Mid'den bedava split ve flank yolu buluyor.
+**MEANING:** Site'lara fazla kaynak yığılmış; saldırgan Mid'den bedava split ve flank yolu buluyor.
 
-**COUNTER:**
-- En az bir recon ya da tuzak koy: Mid Fountain'e bak, Link'e tuzak.
-- Oyuncu atayamasan bile util bilgi alır.
-- Bir savunucu round başında Mid'e bakıp bilgi aldıktan sonra site'a dönebilir.
+**COUNTER:** En az bir recon ya da tuzak koy: Fountain'e bakış, Link'e tuzak — oyuncu atayamasan bile util bilgi alır. İstersen bir savunucu round başında Mid'e bakıp site'ına dönsün.
 
-**WHY:** Mid'i tamamen bırakmak, haritanın ortasını saldırgana vermek demek. Summit'te Mid her iki site'a bağlı — Mid düşünce savunma iki parçaya bölünür, rotate yolları tehlikeye girer.
+**WHY:** Summit'te Mid iki site'a da bağlı — Mid düşünce savunma iki parçaya bölünür, rotate yolları tehlikeye girer.
 
 ---
 
 **IF:** Mid kontrolünü aldınız ama split yapmıyorsunuz — Mid'i alıp bekliyorsunuz.
 
-**MEANING:** Mid'in değeri ancak kullanınca çıkar. Orada beklemek savunucuya pozisyon değiştirme ve util yeniden kurma fırsatı verir.
+**MEANING:** Mid'in değeri ancak kullanınca çıkar; beklemek savunucuya pozisyon değiştirme ve util'i yeniden kurma süresi verir.
 
-**COUNTER:**
-- Mid kontrolünü alır almaz karar ver: A split mi, B split mi?
-- Mid kontrolü geçici avantaj — savunucu fark edince adapte olur.
-- Bilgiyi hemen aksiyona çevir, Mid'de oturma. Site seçtikten sonra Mid Wall'u düşürerek rotasyonu kes.
+**COUNTER:** Kontrol gelir gelmez karar ver: A split mi, B split mi. Bilgiyi hemen aksiyona çevir, Mid'de oturma.
 
-**WHY:** Savunucu Mid kaybını görür, pozisyon değiştirir, util'i yeniden kurar. Hızlı hareket edersen Mid kontrolünün değerini tam kullanırsın.
+**WHY:** Mid kontrolü geçici — savunucu fark edip adapte olmadan kullanırsan değerini tam alırsın.
 
 ## 7. Agent-Specific Savunma
 
 ### Cypher Savunma Setup'ı
 
-Summit'te Cypher bir ayrıntıyı bilirse büyük avantaj sağlar: kamerasını duvar düşmeden önce arkaya koyarsan, duvar düşse bile kamera çalışmaya devam eder. Bu, duvar mekaniğini sana bilgi avantajına çeviriyor.
+Summit'in Cypher'a özel avantajı: kamerayı duvar düşmeden önce ARKAYA koyarsan, duvar düşse bile kamera çalışmaya devam eder — duvar mekaniği bilgi avantajına döner.
 
-**A Site Setup:**
-- Tel #1: A Main görüş hattına. Push başlamadan tetiklenir, takım önceden duyar.
-- Tel #2: A Link'e. Mid'den gelen flank'ı burada yakala.
-- Smoke: A Main girişine. Tel tetiklenince at, push'u yavaşlat.
-- Kamera: A Garden ya da CT yüksek köşesine — A Wall düşmeden arkaya koyarsan duvar kapansa bile bilgi akmaya devam eder. Retake'te kameradan bak, pozisyon al, sonra gir.
-
-**B Site Setup:**
-- Tel #1: B Main girişine. Push gelir, takım hazır olur.
-- Tel #2: B Link'e. Mid-split ya da lurker burada yakalanır.
-- Smoke: B Tower önüne ya da B Main girişine. Tel patlar patlamaz at, geçişi kes.
-- Kamera: B site içinde yüksek bir köşeye, geniş alanı görecek şekilde — B Wall düşmeden arkaya koyarsan kamera kör kalmaz.
-
-Ult'unu retake'e girmeden önce kullan — geniş haritada düşman yerini bilmek, açıya kör girmekten çok daha güvenli.
+- **A Site:** Tel A Main görüş hattına (push erken duyulur) + tel A Link'e (Mid flank'ı yakalar). Smoke A Main girişine — tel tetiklenince at, push'u yavaşlat. Kamera A Garden ya da CT yüksek köşesine, A Wall'dan önce arkaya; retake'te kameradan bak, sonra gir.
+- **B Site:** Tel B Main girişine + tel B Link'e (Mid-split ya da lurker). Smoke B Tower önüne ya da B Main girişine — tel patlar patlamaz at. Kamera B site içinde geniş alanı gören yüksek köşeye, B Wall'dan önce arkaya.
+- **Ult:** Retake'e girmeden önce kullan — düşman yerini bilmek, açıya kör girmekten çok daha güvenli.
 
 ---
 
 ### Sage Savunma Setup'ı
 
-Sage Summit'te duvarları manipüle etmesi ve dikey avantaj sağlamasıyla güçlü. Kendi duvarını harita duvarlarıyla birlikte düşünürsen alan kontrolü katlanır.
-
-- **Duvar:** A Main ya da B Main girişine dik çek, push'u yavaşlat ve dikey avantaj al. Saldırgan duvarı kırmak zorunda kalır, bu süre takımına bilgi ve rotate kazandırır. Duvarı yükseklik kazanmak için de kullan — saldırgan yukarıyı kontrol etmeyi atlarsa oradan vurursun.
-- **Yavaşlatma:** A Garden ya da B Tower yaklaşımına at. Saldırganı yavaşlatır, çapraz açın onu yakalar.
-- **Heal ve Ult:** Heal'i anchor'a ya da kendine sakla, retake'te kullan. Ult'u retake'te kilit duel için sakla — geniş site'ta bir adam fazlası retake'i çevirir.
+- **Duvar:** A Main ya da B Main girişine dik çek — saldırgan kırmak zorunda kalır, takım bilgi ve rotate süresi kazanır. Yükseklik almak için de kullan: saldırgan yukarıyı atlarsa oradan vurursun. Kendi duvarını harita duvarlarıyla birlikte planla — alan kontrolü katlanır.
+- **Yavaşlatma:** A Garden ya da B Tower yaklaşımına — saldırgan yavaşlar, çapraz açın onu yakalar.
+- **Heal ve Ult:** Heal'i anchor'a ya da kendine sakla; ult'u retake'in kilit düellosuna — geniş site'ta bir adam fazlası retake'i çevirir.
 
 ---
 
 ### Killjoy Savunma Setup'ı
 
-Killjoy geniş Summit'te bir girişi tek başına kapatabilir — ama util'ini doğru yere koy, boşa harcama.
+Killjoy geniş Summit'te bir girişi tek başına kapatır — util'i doğru yere koy.
 
-**A Site Setup (küçük site, sıkı tut):**
-- Tuzak: A Link'e baktır. A Main'e bakmasın — saldırganlar önce onu kırar. Link'te daha uzun yaşar, flank'ı da izler.
-- Bot: A Main girişine. Push erken gelir, bot tetiklenir, takım duyar.
-- Molly (x2): Biri A Main girişine — push başlar başlamaz tetikle. Biri spike noktasına — defuse'a kalktıklarında at.
-- Ult: Retake'te kullan. A site küçük olduğu için ult menzili alanın çoğunu alır.
-
-**B Site Setup (geniş site, alanı böl):**
-- Tuzak: B Link girişine baktır. Mid-split ya da lurker'ı takıma bildirir.
-- Bot: B Main girişine. Birden fazla kişi yüklenince yakalar.
-- Molly (x2): B Main girişine ve B Tower civarına. Geniş alanda push'u parçala.
-- Ult: B büyük olduğu için ult'u spike çevresine odakla, tüm site'ı kaplamayabilir — defuse'u korumak için kullan.
+- **A Site (küçük, sıkı tut):** Tuzak A Link'e baktır — A Main'e koyarsan saldırgan önce onu kırar; Link'te uzun yaşar, flank'ı da izler. Bot A Main girişine. Molly'nin biri A Main girişine (push başlayınca tetikle), biri spike noktasına (defuse'a kalkınca). Ult retake'te — A küçük, menzil alanın çoğunu alır.
+- **B Site (geniş, alanı böl):** Tuzak B Link girişine baktır (Mid-split ya da lurker'ı bildirir). Bot B Main girişine. Molly'ler B Main girişine ve B Tower civarına — geniş alanda push'u parçala. Ult'u spike çevresine odakla — B geniş, tamamını kaplamayabilir; defuse'u korumak için kullan.
 
 ## 8. Saldırı Tarafı Hataları
 

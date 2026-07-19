@@ -74,6 +74,7 @@ Chamber kağıt üstünde sentinel ama duelist gibi oyna. Tabancası güçlendir
 - **Ascent**: Mid kontrolünü ult'la ezersin. Mid catwalk'tan market'e veya tiles'a teleport — işe yarayan kurulum bu. Ascent'te mid'i tutan takım round'u tutar; sen ult round'larında mid'i tek başına kilitleyip takıma site rotasyonu kazandırırsın. Mid düştüğünde de teleport sayesinde geri çekilip site'ı yeniden tutabilen tek sentinel'sin.
 - **Lotus**: A main ve B main'de açılar kısa, üç site girişi var. Anchor koyduğun noktayı anında basarlar — ult'u C long gibi daha uzun hatlara sakla. Lotus'un dar geçitlerinde tabancan zayıf kalır; kısa açıda tüfek tutan adam seni her zaman geçer. Bu haritada Chamber'ı oynamak istiyorsan oyununu C long'un uzun hattı etrafında kur, dar site'ları takıma bırak.
 - **Sunset**: Mid ve A main'deki orta-uzun hatlar tabanca için uygun. Mid'i ult'la tutup market kontrolü ver. Dar B'de zorlanırsın — tuzağını B flankine, ağırlığını mid ve A'ya koy.
+- **Summit**: Uzun görüş hatları (A Main, Mid Fountain, B Main) ult ve tabanca için değerli — hattı tut, tek atış yap, teleport ol. Harita büyük: anchor'u peek noktasının yakınına koy; teleport beklemedeyken bu geniş hatlarda açı tutma, trade gelmeden ölürsün. Düşürülebilir duvarların (A/Mid/B Wall) altında durma — düşen duvarın altında kalan ölür.
 
 ## 6. Eşleşme Notları
 - **Jett** hatlardan dash'le kaçar, ult düellolarını 50/50'ye çevirir.
@@ -96,3 +97,9 @@ Chamber kağıt üstünde sentinel ama duelist gibi oyna. Tabancası güçlendir
 **Teleport'u boşa harcıyor:** "Teleport'u erken kullanıyorsun, asıl push geldiğinde beklemede kalıyor. O kaçışı sonuna kadar sakla — seni hayatta tutan tek şey o. İlk gürültüye basma, gerçekten kaçman gerekene kadar bekle."
 
 **Retake'te kayıp:** "Retake'te tabancayla dalıyorsun, yakın mesafede yük oluyorsun. Sen savunma ajanısın, dalan değil. Ult'unu çek, uzaktan site'a açılan hattı kapat, takımın tüfekleri girsin."
+
+## 8. Bu Ajana Karşı
+- Seni Chamber tuttuğu uzun, temiz hattan öldürdüyse (killerInfo'da katil Chamber): tabancası Headhunter tek isabetle kafadan öldürür ama her ıskası ona para kaybı — o hatta aynı dar peek'i ikinci kez verme; açıyı smoke ya da flash ile boz, geniş açıyla peek at ve ilk ıskasında üstüne bas — art arda atışta en zayıf anı odur.
+- Katil Chamber ve killerInfo'daki silah keskin nişancı sınıfıysa: ult'u Tour de Force da bedava bir op gibi çalışır — aynı uzun hatta ikinci kez görünme. O hattı dumanla kapat ya da dövüşü yakın mesafeye taşı: op ritmi yakın dövüşte yavaş kalır, köşeden hızlı çıkan oyuncuya yetişemez.
+- Chamber tek atış yapıp teleport olur — silah sesi kesilip ışınlanma sesi geldiyse açı o an boş: re-peek'i bu pencereye zamanla. Teleport'unu yeni harcadıysa kaçışı beklemede — asıl baskıyı tam o an kur.
+- Tuzağı tek ve menzil-bağlı: en olası flank yoluna kurulur. Aynı flank rotasını round'dan round'a tekrarlama — rota değiştir ki tuzağı tetiklemeden ve okunmadan yaklaş; Chamber'ın tuttuğu bölgeden uzak rotalar tuzaksız kalır.

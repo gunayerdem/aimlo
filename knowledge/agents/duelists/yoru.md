@@ -80,6 +80,8 @@ WHY: TP tek yönlü ve tek hak — geldiğin yere otomatik geri dönemezsin. Gir
 - **TP sesini yem yap:** Gerçekte girmeden, sadece TP sesiyle düşman rotasyonunu çek — küreyi duyan savunucu döner, asıl site'ı eksik bırakır. Sen de boşalan taraftan gir.
 - **Açık haritada sınır:** Breeze ve Icebox gibi uzun-açık hatlarda flash sektirecek duvar az, klon uzaktan vurulup yok edilir. Buralarda Yoru'yu yakın-orta menzilde tut; TP'yi uzun hatta değil, dövüşün gerçekten yaşandığı sıkışık geçişin arkasına göm.
 - **Yükseklik kullanımı:** Dikey katmanı olan haritalarda (Split mid, Icebox B) TP'yi düşmanın göz hizasının dışına — alt kata ya da üst platforma — göm. Düşman yatay tarar; farklı yükseklikten çıkan TP tepki süresini en çok zorlayan giriş açısıdır.
+- **Summit — aldatma alanı geniş (yeni harita):** Üç hatlı Mid ve iki uzak site klon-TP oyununa alan açar: klonu Mid Fountain hattına gönder, savunucu merkez kavşağa dönerken sen A Link ya da B Link'ten gerçek girişini yap. TP'yi A Cave ya da B Trophy gibi az bakılan köşelere göm.
+- **Summit duvar gerçeği:** A Wall, Mid Wall ve B Wall düştü mü round boyunca kapalı — TP'ni duvarın kapatacağı tarafa gömme, döndüğünde oraya saplanırsın. Ult'la düşman hattının arkasını gezerken bile düşen duvarın altından geçme: altında kalan dokunulmazlıkta bile ölür. Ult bilgisini çıkışta flash-swing'e çevir, hangi site eksik tutuluyorsa oraya gir.
 
 ## 6. Eşleşme Notları
 - **Zorlandığın ajanlar:** Fade (keşif ult'u seni içinde işaretler, TP noktalarını açığa çıkarır — işaretleme yerde aktifken TP açma, bitip kaybolunca gir), Sova (keşif oku lurk yolunu açar ve klonu fark eder — lurk'e girmeden önce o oku yok et), Killjoy (bot ile tuzaklar klonu ve TP'yi yakalar, ult'u seni sıkıştırır — botu ve tuzakları temizlenmeden TP açma).

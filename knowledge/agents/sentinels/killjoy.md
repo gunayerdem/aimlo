@@ -91,6 +91,7 @@ Killjoy tek başına site tutan en güçlü ajandır. Botun ve taretin bilgi get
 - **Sunset**: B site'ta güçlü. Dar site geometrisi molly kapsamını en yükseğe çıkarır. Mid'i izleyen botun erken bilgi getirir. Mid'i kapatabilirsen iki site arası rotate kesilir — botu mid'e koyup mid push'u erken oku.
 - **Icebox**: B site'ta güçlü. Botunu Orange girişine koy — ana giriş erken haber verir; taretini Kitchen'dan gelen retake/split'i görecek şekilde kur. Default plant noktasına molly zorunlu. Dikey alan bol — molly'ni plant noktasının üstüne koy ki defuse için açığa çıkmak zorunda kalsınlar.
 - **Corrode**: Dar koridorlar ve sınırlı girişler yeteneğinin değerini ikiye katlar. Molly dar alanda kaçınılmaz hasar verir. Koridor kesişimlerindeki botun birden fazla açıya bilgi getirir.
+- **Summit**: A site küçük — tuzağı A Main'e değil A Link'e baktır (A Main'dekini girmeden kırarlar), botu A Main girişine koy; ult'u retake'e sakla, küçük A'da menzili alanın çoğunu alır. B büyük — molly'leri B Main girişine ve B Tower civarına yay, ult'u tüm site yerine spike çevresine odakla. Mid-split B Link'ten gelir: geniş haritada rotate uyarısı kritik, B Link'i tuzağınla izlet.
 
 ## 7. Eşleşme Notları
 - **Raze** ile karşılaştığında kurulumunu koru — botuyla senin botunu temizler, molly'leriyle botunu ve molly'ni güvenli mesafeden patlatır. Yeteneğini daha iç pozisyonlara al.
@@ -112,3 +113,20 @@ Killjoy tek başına site tutan en güçlü ajandır. Botun ve taretin bilgi get
 **Flank'tan ölüyorsan:** "Botunu baktığın açıya koymuşsun, sırtın boşta. Botu kör noktana — flank hattına — al, gözün olmayan yeri o izlesin."
 **Botun bilgi getiriyor ama tepki vermiyorsan:** "Bot çaldığında crosshair'ini o açıya çevir. Bot sana düşmanın nereden geldiğini söylüyor — sen onu peek zamanlamasına çevir."
 **Post-plant'te molly kalmıyorsa:** "Molly'ni retake'te erken harcamışsın. En az bir molly'yi defuse cezası için sakla — bir molly tam defuse süresini katlar."
+
+### İyi oynuyorken
+**Ne yapıyorsun:** Bot ve molly aynı noktayı örtüyor, bot tetiklendiği an molly patlıyor; en az bir molly post-plant'e saklı, bot birkaç round'da bir farklı off-angle'a taşınıyor.
+**Döngü:** Ana açıyı sen tut, bot kör noktanı izlesin; spike kurulunca molly'yi defuse cezası için beklet, ult'u retake kırılırken aç.
+**Düşman adapte olunca:** Kurulumunu uzaktan utility ile temizlemeye başlarlarsa yeteneklerini iki ayrı açıya yay ve daha iç pozisyona çek — tek alan-hasarı ikisini birden silmesin.
+
+### Zorlanırken
+"Yeteneklerin bilgi getirmeden ölüyor. Botu off-angle'a, molly'yi botun üstüne koy, kurulumu tek koridora yığma. Sen açıyı tut — kim nereden geliyor, onu kurulum söylesin."
+
+### Öngörülebilir olduğunda
+"Düşman botunun yerini ezberledi, molly'nden dolanıyor. Düzeni komple değiştir: farklı açı, farklı molly noktası, bot recon'un ulaşamadığı köşeye. Aynı setup iki round üst üste aynı yerde durmasın."
+
+## 9. Bu Ajana Karşı
+- Taret seni gördüğü an hem hasar baskısı hem "buradan geliyor" bildirimi — taret hattına gövdenle girme: hattı utility ile kır ya da taretin görmediği açıdan vur, sonra ilerle.
+- Setup'lı site'a hızlı giriş Killjoy'a çalışır: bot seni savunmasız bırakır, molly üstüne biner. Giriş sesi verdiysen yavaşla — yetenekleri mesafeden, adım adım temizle, sonra bas.
+- Ult sesini duyduğunda tek kümede koşma — yayıl ve cihaza baskı yap: cihaz vurulup düşürülür; alandan topluca kaçmaya çalışan takım kilitte topluca yakalanır.
+- Killjoy'u kurulumundan menzille ayır: bir site'a sahte baskı verip rotate ettirirsen uzakta kalan yetenekleri devre dışı kalır — setup'ı silahla değil haritayla kır.

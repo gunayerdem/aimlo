@@ -61,10 +61,10 @@ NEDEN: kayıp bonusu yüksekken force etmenin riski düşer — kaybetsen bile g
 
 ### Eco / Save
 
-TAKIM ORTALAMASI: 2,000 altı VE kaybediyorsun
+TAKIM ORTALAMASI: 2,000 altı VE kaybediyorsun VE düşman tam silahlı
 NE ANLAMA GELİR: bu round'u zaten zor kazanırsın, gelecek round'u garantile.
-NE YAPARSIN: Ghost (500) ya da Sheriff (800) al, util ALMA, kalanı sakla.
-NEDEN: save'in işi bu round'u kazanmak değil, sonraki round'da herkesin elinde tüfek olmasını sağlamak.
+NE YAPARSIN: Ghost (500) ya da Sheriff (800) al, util ALMA, kalanı sakla. Düşman da eco ya da yarım alımdaysa save yerine yarım alımla bas — iki taraf da zayıfken baskı round'u çevirir, tam save çeviremez.
+NEDEN: save'in işi bu round'u kazanmak değil, sonraki round'da herkesin elinde tüfek olmasını sağlamak — düşman tam silahlıyken geçerli.
 
 ### Anti-Eco
 
@@ -95,8 +95,9 @@ Round bittiğinde takımın ortalamasına bak:
   └─ Devrenin son round'u → force at (devre arasında krediler sıfırlanır, taşıdığın her kuruş yanar)
 2,000-2,999 → ECO
   ├─ Kayıp bonusu maksimumda → force düşün
-  └─ Değilse → save
-2,000 altı → FULL SAVE, Classic'le oyna
+  ├─ Düşman da eco/yarım alımda → yarım alımla bas
+  └─ Değilse (düşman tam silahlı) → save
+2,000 altı → düşman da eco/yarım alımdaysa yarım alımla bas; tam silahlıysa FULL SAVE, Classic'le oyna
 ```
 
 ---

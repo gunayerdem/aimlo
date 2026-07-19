@@ -84,6 +84,11 @@ WHY: Phoenix'in tek molly'si var; her round'u iyileşmeye harcarsan post-plant't
 - **Breeze:** Uzun görüş hatları flash değerini düşürür. Geniş alanlar ateş duvarını işlevsiz kılar.
 - **Icebox:** Dikey dövüşler yer seviyesi flash'inin etkisini düşürür. Geniş site'lar duvarı seyreltir.
 
+**Summit (yeni harita — durumsal):**
+- Geniş Summit hat seçimini zorunlu kılar: uzun A Main boyu flash menzilini aşar — flash-swing'i A Garden'lı site ağzına ve A Link gibi dar geçişlere kur, körlenen düşmanla dövüş mesafesinde kal.
+- Ateş duvarını Mid Fountain'in çapraz açılarından birini kesmek için at — Fountain'e utility'siz peek atma. B'de duvarı B Tower görüş hattına koy, geniş girişi tek açıya indir.
+- A Wall, Mid Wall ve B Wall düştü mü o rota round boyunca kapalı — daralan tek girişte flash'ın değeri artar, girişini oraya kur. Düşen duvarın altında molly ile iyileşmeye durma ve ult dönüş noktanı duvar düştüğünde takımından kopacağın tarafa koyma; duvarın altında kalan ölür.
+
 **Karar notu (radiant):** Phoenix dar koridorlarda ve tek-açı geçişlerde parlar; geniş açık alanda silikleşir. Bu yüzden haritayı seçemezsin ama nereden gireceğini seçebilirsin: aynı haritada bile dar bir giriş hattı (B Main, Hookah, daracık bir geçit) seç, geniş açık peek'ten kaçın. Flash'in körlüğü kısa — körleşen düşmanla aranda 1-2 metrelik dövüş mesafesi olmalı ki körlük penceresinde temas kurabilesin. Uzun mesafede flash patlar, sen yetişemeden düşman görüşünü toplar. Ateş duvarı bir bütçedir: turun başında "duvarı görüş kesmeye mi, post-plant alan reddetmeye mi saklıyorum" diye karar ver, ortada harcama.
 
 ## 6. Eşleşme Notları

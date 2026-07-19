@@ -95,6 +95,7 @@ Diriltme ile duvar aynı anda siper istiyorsa sıra duruma bağlı:
 - **Haven:** C garage girişine duvar ciddi zaman kazandırır. A long push'una atılan slow yüksek kazanç sağlar. Üç site'lı haritada rotasyon uzun — bir choke'u duvarla kapatmak, takımına diğer site'a yetişecek zamanı doğrudan kazandırır.
 - **Ascent:** Mid'i duvarla bölersen takım mid kontrolünü kavgasız alır — Ascent'te mid'i tutan round'u tutar. B site'ta dar girişe duvar koymak retake'i tek başına geciktirir.
 - **Lotus:** Üç girişli site'larda slow daha değerli: dönen kapı ve dar geçitlerde slow düşmanı dar açıda dondurur, duvarı bir girişi tamamen kesmeye sakla.
+- **Summit:** Yeni haritada kendi duvarını harita duvarlarıyla (A Wall, Mid Wall, B Wall) birlikte planla — alan kontrolü katlanır. Duvarı A Main ya da B Main girişine dik çek: saldırgan kırmak zorunda kalır, takım rotate süresi kazanır; yükseklik almak için de kullan, yukarıyı atlayan saldırganı oradan vur. Slow'u A Garden ya da B Tower yaklaşımına at — yavaşlayan saldırganı çapraz açın yakalar. Harita duvarı düştü mü o rota round boyunca kapalı: bedene kapanan taraftan ulaşamazsın, diriltme kararını duvar durumuna göre ver; düşen duvarın altında diriltmeye eğilme, altında kalan ölür. Ult'u geniş B site retake'inin kilit düellosuna sakla — bir adam fazlası retake'i çevirir.
 
 ## 6. Eşleşme Notları
 - **Raze** karşısında duvarın çabuk kırılır — duvarı engel olarak görme, zaman kazandırıcı olarak kullan, fazla güvenme.

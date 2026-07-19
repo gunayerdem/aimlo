@@ -5,6 +5,8 @@ verified: 2026-07-08
 
 # AJAN: Veto
 
+> Bu ajan yeni — sayısal değerleri yamayla sık değişir. Feedback'te sayı/süre verme; davranış dersini ver.
+
 ## 1. Rol Kimliği
 
 Veto bilgi keser. Önleyicisiyle düşmanın recon araçlarını yok eder, yakınlık tuzağıyla push atan düşmanı yerinde bağlar, ışınlanmasıyla beklenmedik açılara geçer, ultuyla düşman utility'sinin hiçbirini hissetmez — üstelik canı yenilenip silahı hızlanırken.
@@ -16,7 +18,7 @@ Cypher düşmanın yerini görür, Killjoy alan tutar — Veto ise düşmanın g
 - **Yakınlık tuzağı (Q)** — Yere bir tuzak yerleştirirsin. Yere düşünce kurulur ve görünmez olur; menzilindeki görüş hattına bir düşman girdiğinde otomatik tetiklenir. Tetiklenen düşmanı yerinde bağlar, sesini kaybettirir (sağırlaştırır) ve canını eritir. Atılıp anında hasar veren bir molotof değil — kör köşeye, düşmanın geçeceği yere kur. Düşman kurulmadan önce vurup yok edebilir; bu yüzden görünür yere koyma.
 - **Işınlanma (C)** — Yere bir nokta bırakırsın. O noktaya bakarken tekrar bas, oraya ışınlanırsın; nokta uzaktan da (30 metreye kadar) kullanılır ve bir saniyeden kısa sürede kurulur — peek'ten hemen önce koyup çıkmak artık gerçekçi bir hamle. Satın alma aşamasında geri alıp yeniden koyabilirsin. Beklenmedik açı tutmak ve hızlı yer değiştirmek için.
 - **Önleyici (E)** — İmza yeteneğin. İleriye bir önleyici fırlat, tekrar basınca aktive et. Aktifken o bölgeye giren ya da oradan geçen her düşman recon aracını, drone'u ve fırlatılan/seken utility'yi yok eder (recon oku, drone, grenade — silahla kırılabilir utility, Sage duvarı dahil). Düşman onu silahla vurup kırabilir; bu yüzden gizli kur. Geri toplaması hızlandı — düşman hattı değiştirdiyse önleyiciyi söküp yeni hatta taşımak artık makul, yanlış hatta ölü bırakma.
-- **Ult (X)** — Aktive edince üç şey birden olur: hiçbir kötü etki sana işlemez (flash, yetenek kapatma, can eritme, sersemletme — hiçbiri geçmez), canın saniyede 40 yenilenir ve silah kullanımın hızlanır (çekme, atış, şarjör değiştirme, toparlanma). 1v2-1v3'te düşman ne atarsa atsın hem durdurulamazsın hem toparlanırsın — canın erimişken bile ult açmak seni düelloya geri sokar.
+- **Ult (X)** — Aktive edince üç şey birden olur: hiçbir kötü etki sana işlemez (flash, yetenek kapatma, can eritme, sersemletme — hiçbiri geçmez), canın kendini zamanla yeniler ve silah kullanımın hızlanır (çekme, atış, şarjör değiştirme, toparlanma). 1v2-1v3'te düşman ne atarsa atsın hem durdurulamazsın hem toparlanırsın — canın erimişken bile ult açmak seni düelloya geri sokar.
 
 ## 3. Temel Sorumluluklar
 
@@ -64,7 +66,7 @@ Cypher düşmanın yerini görür, Killjoy alan tutar — Veto ise düşmanın g
 
 **IF** Ultu clutch'larda kullanmıyorsun, takım dövüşünde erkenden açıyorsun
 **MEANING** Ultun gücü, düşman tüm utility'sini sana attığında ortaya çıkar. Takım dövüşünde o utility takım arkadaşlarına dağılır.
-**COUNTER** 1v2 veya 1v3'e girdiğinde aç — canın erimişse de aç, saniyede 40 yenilenir ve düelloya geri girersin. Düşman seni durdurmak için her şeyi atar — hiçbiri tutmaz. Takım dövüşünde kapalı tut.
+**COUNTER** 1v2 veya 1v3'e girdiğinde aç — canın erimişse de aç, kendini yeniler ve düelloya geri girersin. Düşman seni durdurmak için her şeyi atar — hiçbiri tutmaz. Takım dövüşünde kapalı tut.
 **WHY** Clutch'ta ult, düşmanın tüm utility yatırımını sıfırlar ve eriyen canını geri doldurur. Erken ult ise düşman zaten util harcamadan bağışıklık demektir.
 
 ---
@@ -116,6 +118,20 @@ Cypher düşmanın yerini görür, Killjoy alan tutar — Veto ise düşmanın g
 **COUNTER** Yeteneğin kapatılacağını hissedince ya da KAY/O ultu duyunca ultunu aç — bu etki sana geçmez, yetenekler açık kalır. Bıçak atıldıysa hızlıca yok et ya da kırılma alanından çık. Util'ini bu beklentiyle erken harcama, çünkü o pencerede yenisini koyamazsın.
 **WHY** Bağışıklık ultun tam olarak yetenek kapatmayı sıfırlamak için var. Doğru anda açarsan düşmanın susturma yatırımı boşa gider; geç açarsan sentinel oyunun çöker.
 
+---
+
+**IF** Savunmada round'un ilk saniyelerinde, site daha baskı görmeden ölüyorsun
+**MEANING** Sentinel olarak fazla öndesin — kurulumun (önleyici, yakınlık tuzağı) daha değer üretemeden gidiyorsun, site bilgisiz ve savunmasız kalıyor.
+**COUNTER** İlk teması silahınla değil kurulumunla karşıla: tuzak tetiklenene ya da önleyici bilgi verene kadar geri açıda dur. Erken düello arama — düello sana gelsin.
+**WHY** Veto'nun değeri round ilerledikçe birikir; tuzak, önleyici ve ışınlanma zamanla çalışır. Erken ölüm bu birikimi sıfırlar, takım site'ı çıplak savunur.
+
+---
+
+**IF** Öldüğünde takım karşılık alamıyor — ölümlerin trade'siz kalıyor
+**MEANING** Çapa pozisyonundan kopuk, ekipten uzak bir açıda ölüyorsun; kimse seni göremediği için ölümün karşılıksız gidiyor.
+**COUNTER** Tuttuğun açıyı takımın ulaşabileceği mesafede seç. Işınlanma noktanı ekibe dönüş hattına koy — agresif açı tutacaksan bile kaçışın trade mesafesinde bitsin.
+**WHY** Sentinel yalnız açıda değer üretmez; ölüm ancak takım karşılığını alabildiğinde kabul edilebilir. Kopuk ölüm hem site'ı hem sayıyı kaybettirir.
+
 ## 6. Harita Etkileşimleri
 
 - **Ascent**: Mid bilgiyle döner. Önleyiciyi mid'e koy — düşman recon mid'den geçemez, ne yapacağını bilemez. A main ve B main'de yakınlık tuzağı push'u durdurur. Işınlanmayla mid-A veya mid-B arası hızlı geç.
@@ -161,3 +177,9 @@ Aynen sürdür: 1. turda ses ipucuyla recon'u yok et ve çağır. 2. turda önle
 ## 9. İleri Okuma — Düşmanın Bilgi Ekonomisi
 
 Veto'nun asıl değeri, düşmanın tüm bilgi stratejisini güvensiz kılmaktır. Düşmanın bilgi ekonomisini oku: recon'a ne zaman bağlandıklarını, ne zaman vazgeçtiklerini ayırt et — vazgeçtiklerinde önleyiciyi spike kurulduktan sonrasına sakla, retake smoke'unu ve heal'ini yer. Ultu KAY/O'nun yetenek kapatması ya da Fade ultu anında aç.
+
+## 10. Bu Ajana Karşı
+- Kompta Veto varsa recon'a bel bağlama — önleyicisi recon okunu, drone'u ve fırlatılan utility'yi yer. İlk recon'u yem olarak at; önleyici açığa çıkınca yerini sesle ve silahla doğrula.
+- Yakınlık tuzağı görünmez kurulur ve kör köşede bekler — köşeleri geniş dön, duvar dibine sürtünerek geçme; tuzağa bağlanan takım arkadaşını gören varsa o açıyı anında tutsun.
+- Işınlanma sesi duyduğunda eski açısına kilitlenme — nokta hızlı kurulur, Veto peek'ten hemen önce koyup beklenmedik açıdan çıkar; yeni açıları da tara.
+- Ult'u açıkken üstüne utility atma — flash, sersemletme, can eritme hiçbiri işlemez. O pencerede düelloyu alma: mesafeyi aç, süreyi bitirt, utility'ni ult sonrasına sakla.

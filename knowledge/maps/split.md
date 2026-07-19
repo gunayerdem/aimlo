@@ -113,6 +113,11 @@ COUNTER:
 - Tower'ı süpürmek için Raze ya da Breach molly'si ya da Sova hasar oku kullan.
 WHY: Yukarıdan bakan her zaman avantajlıdır. Tower'daki rakip seni görür, sen onu göremezsin. Site'ta direnmeye devam edersen bu dezavantajla her saniye savaşırsın.
 
+### Site Bazlı Retake Rotaları
+- **A Retake**: İki kolla gir — ana kol CT'den A Back üzerinden site zeminine, ikinci kol Mid Vent'ten A Tower'a çıkar. Önce Tower'ı al: yukarıdan spike'ı ve Screens arkasını görürsün, defuse eden arkadaşını oradan korursun. Saldırgan post-plant'te A Ramp + A Main crossfire'ına yaslanır — Ramp açısını smoke'la, Screens arkasındaki A Default'a molly bas, flash patlarken iki kol aynı anda girsin.
+- **B Retake**: Ana kol B Back'ten site'a, ikinci kol Mid Mail üzerinden B Tower'a. İlk iş Tower — B'nin hâkim yüksekliğini geri almadan site zeminine yayılırsan yukarıdan tek tek toplanırsın. Tower'daki saldırganı molly ya da flash ile sök, B Main açısını smoke'la, B Default'a molly bas. Tower geri gelince site kontrolü arkasından gelir.
+- Vent ve Mail kolları ancak Mid sizdeyse açılır — Mid kapalıysa iki kolu da CT tarafından kur ve util'i girişten önce harca; kuru giren retake dar girişlerde sırayla ölür.
+
 ## 5. Agent Tier Listesi
 
 **S Tier**
@@ -156,21 +161,19 @@ WHY: Yukarıdan bakan her zaman avantajlıdır. Tower'daki rakip seni görür, s
 **A Tarafı**
 - **A Main**: Saldırının A site'a girdiği ana koridor. Dar ve uzun — savunma buradan seni kolayca durdurur.
 - **A Ramp**: A Main'den A Site'a çıkan rampa. Yükseklik farkı burada — bu bölgeyi kim kontrol ederse A'da üstündür.
-- **A Tower (Heaven)**: A Site'ın üstündeki yükseklik. Halk ağzında Heaven. Savunma için A'nın en güçlü noktası burası.
+- **A Tower (Heaven / A Rafters)**: A Site'ın üstündeki yükseklik — Rafters da aynı yükseltinin adı, ayrı bir bölge değil. Halk ağzında Heaven. Savunma için A'nın en güçlü noktası burası.
 - **A Screens**: A Tower'ın bitişiğindeki ekranlı bölge — Tower ile aynı yer değil, ayrı bir açı, ayrı temizlik ister. Varsayılan plant Screens arkasıdır.
 - **A Elbow**: A Site içindeki dirsek açısı. Off-angle tutmak istiyorsan buraya gir.
 - **A Site**: Spike'ı buraya kurarsın. Varsayılan plant Screens arkası — buna A Default denir.
 - **A Back**: A Site'ın CT Spawn'a yakın arka köşesi. Retake'te savunma buradan gelir.
-- **A Rafters**: A tarafındaki platform. Yükseklik avantajı sağlar.
 - **A Sewer**: A Lobby'yi Mid Bottom'a bağlayan alt geçit (iple inilir). Mid ile A arasında alternatif rotasyon ve flank yolu olarak kullan.
 
 **B Tarafı**
 - **B Main**: Saldırının B'ye girdiği ana koridor. Çok dar — util atmadan buradan geçmeye çalışma.
 - **B Garage**: B Main'in açıldığı geniş alan. Pillar ve siper noktaları var, açıları iyi oku.
-- **B Tower (Heaven)**: B Site'ın üstündeki yükseklik. Tüm B'yi görür — savunma burayı tutarsa B'yi almak zorlaşır.
+- **B Tower (Heaven / B Rafters)**: B Site'ın üstündeki yükseklik — Rafters da aynı yükseltinin adı, ayrı bir bölge değil. Tüm B'yi görür — savunma burayı tutarsa B'yi almak zorlaşır.
 - **B Back**: B Site'ın arka koridoru. Dar ama retake'te savunma buradan işler.
 - **B Pillar**: B Site'ın ortasındaki sütun. Anchor oynuyorsan klasik siper noktası.
-- **B Rafters**: B tarafındaki platform alanı. Yükseklik avantajı verir.
 - **B Site**: Spike'ı buraya kurarsın. Varsayılan plant ortada — buna B Default denir.
 
 **Mid**
@@ -223,7 +226,7 @@ Site'a girme. Mid'de ya da A Ramp'ta ucuza bir düşman öldürmeye bak.
 Spectre bu haritada başka haritalara göre çok daha güçlü. A Main, B Main, Mid — hepsi yakın mesafe. Bonus roundda Vandal + az util yerine Spectre + tam util al.
 
 **Savunma Tarafı Ekonomi**
-Savunmada ekonomin daha rahat. Saldırı gelmeyen tarafa util harcama — bir sonraki round için sakla. Op, Mid Top ve A Tower'da güçlü ama pahalı. 1500 kredinin altındaysan Marshal veya Spectre yeterli.
+Savunmada ekonomin daha rahat. Saldırı gelmeyen tarafa util harcama — bir sonraki round için sakla. Op, Mid Top ve A Tower'da güçlü ama pahalı. Op'a paran yoksa: ~1000 kredide Marshal (950), ~2000 kredide Spectre (1600) yeterli.
 
 ## 10. Anti-Strat
 
@@ -236,7 +239,7 @@ WHY: Aynı noktaya her round aynı şekilde geliyorlarsa, sen her round farklı 
 **Rakip mid kontrolü alıyorsa:**
 IF: Rakip erken baskınla mid kontrolü alıyor.
 MEANING: Mid giderse her iki Tower tehlikeye girer, harita açılır.
-COUNTER: Sage varsa erken duvar at, mid fiziksel olarak kapanır. Sage yoksa erken agresif mid peek at. Killjoy teli veya Cypher kamerası koy, bilgi al.
+COUNTER: Sage varsa erken duvar at, mid fiziksel olarak kapanır. Sage yoksa erken agresif mid peek at. Killjoy alarm botu/tareti ya da Cypher teli-kamerası koy, bilgi al.
 WHY: Mid Split'in kalbi. Mid giderse her yer gider.
 
 **Rakip B rush yapıyorsa:**

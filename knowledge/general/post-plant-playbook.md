@@ -74,7 +74,7 @@ Defuse kolay görünür ama çapraz açıyı çok daha rahat kurarsın. Rakip op
 
 ### Ne Zaman Kullanırsın?
 
-**Defuse sesini duyar duymaz molly at.** Hasar anında başlar; defuse'a oturan rakip geri çekilemez.
+**Molly'yi gerçek oturuşa at.** Tek saniyelik dokun-bırak sesi çoğu zaman yem — tek molly'ni ona yakma. Ses kesilmeden sürüyorsa gerçek oturuştur: o an at; hasar anında başlar, defuse'a oturan rakip geri çekilemez.
 
 **Smoke'u plant'ten önce atma.** Süresi biter, retake tam gelirken saha açık kalır.
 

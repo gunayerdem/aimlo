@@ -46,9 +46,9 @@ COUNTER geri çekil, elindeki util ile zaman kazan, takımın gelene kadar pozis
 WHY geri çekilirken çapraz ateş kurarsın; ilerlersen tek tek erirsiniz
 
 IF takımın sayıca fazlaysa (4v3 veya 5v4)
-MEANING trade yapsan bile önde kalırsın
-COUNTER yanında biri olduğundan emin ol, kontrolü elinde tutarak ilerle
-WHY sayı üstünlüğünü kontrollü ilerlemeyle round kazancına çevirirsin
+MEANING o round zaten senin lehine; eklediğin her fazla hamle sıfır kazançlı risk
+COUNTER alınmış alanı kilitle, çapraz kur, sarma yolunu kapat; yeni alanı ancak gerekiyorsa ve trade dizilimiyle al
+WHY sayı avantajında sade oyun roundu kilitler; gereksiz ilerleme ve peek düşmana eşitleme şansı verir
 
 ---
 
@@ -122,10 +122,10 @@ WHY defuse'u uzaktan kesersen hem hayatta kalır hem roundu kazanırsın
 
 ### Zorlama Kararı
 
-IF 2-0 öndeysen ve rakip eco yapıyorsa
-MEANING bonus roundu zorlamayla oynayıp kaybetsen bile ekonomin sağlam kalır
-COUNTER Spectre + Hafif Zırh ile o roundu oyna
-WHY 2-0'da zorlama kaybı ekonomini bozmaz; kazanırsan 3-0 baskısı kurarsın
+IF pistol'ü kazandıysan (1-0 öndeysen) ve bonus round'a giriyorsan
+MEANING rakip pistol kaybıyla genelde eco'da; bu roundu kaybetsen bile ekonomin sağlam kalır
+COUNTER bonus roundu Spectre + Hafif Zırh ile oyna; 2-0'a çıktıysan 3. roundda tam alım yap
+WHY bonus'ta Spectre alımı krediyi korur; kazanırsan 3. round tam alımla 3-0 baskısı kurarsın
 
 IF pistol'ü kaybettiysen (0-1 gerideysen)
 MEANING bonus round'u eco geçersen kayıp bonusuyla 3. roundda full alım yapabilirsin

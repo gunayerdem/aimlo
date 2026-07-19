@@ -113,3 +113,10 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 
 ### Post-Plant'i Tutamıyorsa
 "Spike kurulduktan sonra senin en güçlü anın ama o ana eli boş giriyorsun. Ağ tuzağını ve ult'unu post-plant için sakla — ağı spike'a koşana at, ult'u defuse'a geleni garanti götürmek için kullan."
+
+## 8. Bu Ajana Karşı
+- Kompta Deadlock varsa koşarak, gürültülü push atma — ses tuzağı koşu, atlama, ateş ve reload sesine tepki verir; dar geçişlerde eğilerek ilerle, sessiz geçiş tuzağı tetiklemez.
+- Duvarla karşılaşınca merkezdeki büyük orbu vur — tamamı birden düşer; yan orbları tek tek kırmak zaman ve pozisyon kaybettirir. Kırmayı bir kişi yapsın, kalanlar açıyı tutsun: kırma sesine peek gelir.
+- Ağ tuzağına yakalanan takım arkadaşın ağı sökene kadar savunmasız — yanındaysan Deadlock'un peek atacağı açıyı önceden tut; o pencerede karşılıksız kalan ağ bedava ölümdür.
+- Koza (ult) vurulursa içindeki kurtulur — koza sesini duyan herkes anında dönüp vursun; koza dar koridora gidiyorsa ateş açısı bulmak için hızlı yer değiştir.
+- Deadlock utility'sini boşaltınca cevapsız kalır — ilk temasta yarım baskıyla duvarını ve ağını çektir, asıl push'u kurulumu tükenmişken at.

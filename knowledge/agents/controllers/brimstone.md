@@ -68,6 +68,21 @@ Brimstone'un smoke'u en güvenilirisi. Sen smoke'u attığın an giriş açılı
 **COUNTER** Savunmada ilk kontağı tek smoke veya pozisyonla yavaşlat, smoke stoğunun çoğunu retake için sakla. Spike basıldıktan sonra dumanla içeri sızıp açıları teker teker temizle.
 **WHY** Brimstone savunmada da retake controller'ı gibi oynar — smoke'la içeri kör girersin, savunucunun (artık atakçının) açısını kapatırsın. Erken yakarsan retake'i çıplak yaparsın.
 
+**IF** Round'un ilk temasında ölen sensin
+**MEANING** Smoke ajanı ilk temasın önünde yürüyor — duelist'in işini sen yapıyorsun; sen düşünce takım hem dumansız hem sayıca eksik kalıyor
+**COUNTER** Girişte duelist'in bir adım arkasında dur. Önce smoke'u at, ilk teması duelist alsın; sen ikinci dalgada gir.
+**WHY** Erken ölen Brimstone'un smoke'u, molly'si ve ult'u round'un geri kalanında yok — takımın görüş kontrolü tek ölümle sıfırlanır.
+
+**IF** Smoke attıktan sonra hep aynı noktada bekliyorsun ve orada üst üste ölüyorsun
+**MEANING** Rakip dumanı değil alışkanlığını okudu — atış sonrası durduğun noktayı ezberledi, seni oradan avlıyor
+**COUNTER** Smoke'u bastıktan sonra yer değiştir. Bir round geri çekil, bir round farklı açıya kay; aynı kapı arkasında iki round üst üste durma.
+**WHY** Smoke'un çıkış yeri seni ele vermez ama sabit bekleme noktan verir. Yer değiştiren controller'ı rakip ancak arayarak bulur — o arama takımına zaman kazandırır.
+
+**IF** Saldırıda kendi smoke'unun kenarında ölüyorsun
+**MEANING** Dumanın kenarında siluet veriyorsun — savunucu dumandan çıkanı değil, kenardaki gölgeni vuruyor
+**COUNTER** Dumanın dibinde durma: ya tamamen arkasından geç ya da dumandan uzak, görüşü açık açıyı tut. Kenar senin değil, hazır bekleyen savunucunun bölgesi.
+**WHY** Duman iki tarafı da keser ama kenarını kesmez — kenardan sızan silueti savunucu hazır crosshair'le bedavaya alır.
+
 ## 5. Harita Etkileşimleri
 - **Bind**: En iyi haritalarından biri. Alan dar, smoke her şeyi örter; Hookah ve Showers gibi dar geçitleri tek smoke kapatır. Teleport sesleri rotayı ele verir — smoke'u o bilgiye göre at. Post-plant: B default plant'e Hookah tarafından güvenli molly at.
 - **Split**: A ve B darboğazları tam smoke yarıçapına oturur; dar mid ve site girişleri tek smoke'la kilitlenir. Post-plant: A default plant'e Screens gerisinden, Heaven'a maruz kalmadan molly at — dar plant alanları molly'yle savunması en kolay olanlardan.

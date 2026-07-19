@@ -68,6 +68,11 @@ KAY/O düşmanın yeteneklerini kapatan ajandır. Bıçağı yakınına indiği 
 **COUNTER** Bıçak açısını ve atış noktasını tura göre değiştir. Bazen mid'den, bazen main'den at; bazen erken yoklama için, bazen execute anında. Belirli bir düşman ajanını (smoke koyan ya da duvar diken) hedefleyecek açıyı seç.
 **WHY** Tahmin edilebilir bıçak, düşmanın güvenli dağılmasına izin verir. Açını değiştirince düşman tekrar kilit riskine girer, dağılması da yeni zayıf nokta açar.
 
+**IF** Saldırıda round'un erken saniyelerinde, girişte ölüyorsun
+**MEANING** Elinde pop-flash varken çıplak giriyorsun — flash'sız giriş, yetenek kapatan ajanın kendi kozunu yakmadan ölmesi demek
+**COUNTER** Girişten hemen önce üst ya da alt atış flash'ı köşeye at, patlama anında gir; bıçağı da aynı execute saniyesine getir ki düşman hem kör hem kilitli olsun
+**WHY** KAY/O'nun giriş gücü nişanından değil, düşmanı çıplak yakalamasından gelir. Flash ve bıçak önden gitmeden yaptığın her giriş, hazır crosshair'e bedava hedef olmaktır.
+
 ## 5. Saldırı Kullanımı
 - Execute sırası: bıçak kilit düşmanlara → kaç kişi vurduğunu söyle → flash → takımla aynı anda gir. Kilit penceresi dar; bıçağı attıysan o saniyelerde bas.
 - Bıçak + flash + molly'yi execute'ta aynı saniyeye getir — üçü dağılırsa düşman tek tek toparlanır.
@@ -109,3 +114,9 @@ KAY/O düşmanın yeteneklerini kapatan ajandır. Bıçağı yakınına indiği 
 **Bıçak attıktan sonra girmiyorsan:** "Bıçak vurdu ama bekledin — kilit kapandı, yetenekleri geri geldi. Attığın an gir, o pencerede düşman çıplak. Kilidi kullanmazsan bıçak yarım iş."
 
 **Düşman ajanını okumayınca:** "Bıçağı boşluğa attın. Kim duvar dikiyor, kim smoke koyuyorsa onu kilitle. Doğru ajanı kapatınca düşmanın bütün tur planı çöker, rastgele yarıçapla bu olmaz."
+
+## 10. Bu Ajana Karşı
+- Kompta KAY/O varsa plan A'yı yeteneğe kurma: bıçağı her an yeteneklerini kapatır — yalnız silahla da tutulan açıyı seç, kaçışı tek bir yeteneğe bağlı pozisyondan uzak dur.
+- Bıçağın menzilinden pozisyonunu ayır: bıçak sesini duyduğun an bir açı geri kay — yarıçapın içinde kalan oyuncu hem yeteneksiz kalır hem sayısı karşı takıma bildirilir.
+- Flash'ı klasik pop-flash — sesi duyunca sırtını dön, patlama biter bitmez crosshair'i giriş hizasına geri getir; KAY/O flash'ının hemen arkasından girer.
+- Ult sesi yürüyen bir kilit alanı demek: alandan çık ve KAY/O'nun gövdesini vur — yere düştüğünde iş bitmedi — takımı onu ayağa kaldırmadan işini bitir.

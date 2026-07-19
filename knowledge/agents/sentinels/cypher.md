@@ -114,3 +114,11 @@ Cypher'ı doğru oynarsan takımın asla kör kalmaz. Site'ı ateş gücüyle de
 **Bilgiyi alıyorsun ama çağrı geç/eksik:** "Tel patladığı an konuş — kaç kişi, hangi yön. 'Düşman var' yetmez; sayı ve yer ver. Öldürmeyi onaylamayı bekleme, ham bilgiyi anında geçir; takım o saniyede rotate kararı verir."
 
 **Post-plant'ta sürekli arkadan/retake'te ölüyorsun:** "Util'inin hepsini girişe harcama. Spike kurulmadan flank/retake yoluna bir tel sakla, kamerayı defuse açısına koy. Sentinel'in asıl işi spike kurulduktan sonra başlar — kurulu bomu tek başına kapatabilmelisin."
+
+## 8. Bu Ajana Karşı
+İyi rakipler Cypher'a karşı şunları dener — Cypher oynuyorsan ön almayı buna göre planla:
+- Girişleri telli varsayıp önce util'le tarar ya da teli gözle arayarak yavaş girerler; tetiklenen tel onları kısa süre açığa çıkarıp sersemlettiği için bu riski almazlar. Teli göz hizasından ve bilinen noktalardan kaçır — alışılmadık yükseklik ve kör nokta, hem gözle aramayı hem util taramasını boşa çıkarır.
+- Tel temizliğini tek kişiye bırakıp kalan ekiple farklı açıdan girerler. Tek kırılma sesini "tek kişi geliyor" diye okuma — kırılan tel de hangi girişi seçtiklerini söyler; çağrıyı yine tam geç, sayıyı kameradan doğrula.
+- Kamera sesini duyan rakip anında yer değiştirir, kamerayı vurur ve o açıda beklemez. Gördüğünü saniyesinde ilet — bekletilen bilgi bayatlar; vurulan kameranın ateş sesi bile sana ikinci bir konum bilgisi verir.
+- Görüş-engelleyen kürenin içinden tek tek değil, ekipçe aynı anda geçip ayrıştırılamayan bir ses karmaşası yaratırlar. Net sayı çıkaramıyorsan sayı verme; "küreden geçiş var" diye çağır, kalan bilgiyi tel ve kamerayla tamamla.
+- Ult sesini duyan rakip hemen pozisyon değiştirir ki aldığın bilgi bayatlasın. Ult bilgisi hızla eskir — pozisyonları aldığın saniye ilet, takım bilgi tazeyken oynasın.

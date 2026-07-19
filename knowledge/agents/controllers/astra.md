@@ -50,7 +50,7 @@ Astra'yı doğru oynarsan harita sana çalışır, sen haritaya değil. Yıldız
 
 **IF** yıldızları amaçsızca geri çekip sürekli başka noktaya taşıyorsun
 **MEANING** Round öncesi planın yok, panikle hareket ediyorsun
-**COUNTER** Her round başında okumana göre yıldız koy: "Son 2 round B'ye pushladılar, yıldızlar B'de." Kesin bilgi gelmedikçe planından sapma.
+**COUNTER** Her round başında okumana göre yıldız koy: "Son 2 round B'ye yüklendiler, yıldızlar B'de." Kesin bilgi gelmedikçe planından sapma.
 **WHY** Amaçsız taşıma yıldızını ve zamanını yer. Planına sadık kalan Astra her taşınan yıldızdan daha fazla değer üretir.
 
 **IF** saldırıda execute sırasında smoke'ları sen koruyup yıldız menzilinde ön safta ölüyorsun
@@ -66,7 +66,7 @@ Astra'yı doğru oynarsan harita sana çalışır, sen haritaya değil. Yıldız
 **IF** stun'ı yıldızı koyduğun an, kimse o açıda yokken patlatıyorsun
 **MEANING** Stun'ı çatışma anına denk getiremiyorsun, boşa gidiyor
 **COUNTER** Stun yıldızını giriş ağzına önceden koy, düşman tam o açıya girdiği anda patlat — hemen arkasından takım swing atsın.
-**WHY** Stun ancak içinde düşman varken değer üretir. Boş açıya patlayan stun, takımına hiçbir avantaj vermez ve cooldown'a girer.
+**WHY** Stun ancak içinde düşman varken değer üretir. Boş açıya patlayan stun takımına hiçbir avantaj vermez ve harcanan yıldız o round geri gelmez — 5 yıldızlık havuzun kalıcı azalır.
 
 **IF** ult duvarını yanlış yere kurup kendi takımının da görüşünü kapatıyorsun
 **MEANING** Duvar her iki yönden de mermi ve sesi kesiyor, sen de takımının dövüşeceği açıyı kapatmış oluyorsun
@@ -101,13 +101,15 @@ Astra'yı doğru oynarsan harita sana çalışır, sen haritaya değil. Yıldız
 
 **Önce ölme, smoke'u besle:** Astra'nın değeri ayakta kalmakta. Sen ölünce açık smoke'lar erkenden dağılır, takım açıkta kalır. Çatışmanın ucuna oynama; yıldızları gerideki güvenli bir noktadan aktive et, peek atmayı entry'lere bırak. Ayakta kalan bir Astra round boyunca beş yıldızını da besler.
 
-**Stun'ı çatışmaya denk getir:** Stun ancak içinde düşman varken altın değerinde. Yıldızı giriş ağzına önceden koy, düşman tam o açıya girdiği an patlat ve aynı anda "şimdi" çağrısı yap — takım o pencerede swing atsın. Boş açıya patlayan stun cooldown'a girer, sana hiçbir şey kazandırmaz.
+**Stun'ı çatışmaya denk getir:** Stun ancak içinde düşman varken altın değerinde. Yıldızı giriş ağzına önceden koy, düşman tam o açıya girdiği an patlat ve aynı anda "şimdi" çağrısı yap — takım o pencerede swing atsın. Boş açıya patlayan stun sana hiçbir şey kazandırmaz — harcanan yıldız o round geri gelmez, havuzundan kalıcı düşer.
 
 **ult'u proaktif kur, clutch'a saklama:** ult 4v4-5v5'te haritayı ikiye bölerek takımın yarısını çatışma dışı bırakır. Bunu execute'in ilk anında ya da retake'e girerken at; duvarı düşmanla takımın arasına kur, site'ı ikiye bölsün — kendi takımının dövüştüğü açının üstüne çekme, yoksa onları da kör edersin. Az kişi kalınca atılan duvar bu makro etkisini tamamen kaybeder.
 
-**Zorlanıyorsan**: "Çatışmanın ortasında yıldız koyma moduna geçmeyi bırak. Yıldızları satın alma aşamasında yerleştir, okumana güven, yerden aktive et. Sen o moddayken bedenin açıkta, ölürsün."
+### Zorlanırken
+"Çatışmanın ortasında yıldız koyma moduna geçmeyi bırak. Yıldızları satın alma aşamasında yerleştir, okumana güven, yerden aktive et. Sen o moddayken bedenin açıkta, ölürsün."
 
-**Tahmin edilebilirsen**: "Düşman yıldız noktalarından kaçınıyor çünkü her round aynı yere koyuyorsun. Önceki round gördüklerine göre her round 2-3 yıldızı farklı noktaya taşı."
+### Tahmin edilebilir olunca
+"Düşman yıldız noktalarından kaçınıyor çünkü her round aynı yere koyuyorsun. Önceki round gördüklerine göre her round 2-3 yıldızı farklı noktaya taşı."
 
 **Sadece smoke oynuyorsan**: "Beş yıldızı da smoke'a harcıyorsun. Bir tanesini dar girişe çekme, bir tanesini push koridoruna stun yap. Çekme ve stun seni gerçek bir Astra yapan şey — yoksa zayıf bir smoke ajanı oynuyorsun."
 

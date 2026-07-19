@@ -112,3 +112,10 @@ Tuzakların ya fazla göze batıyor ya da kimsenin geçmediği yerlerde. Düşma
 
 ### Tahmin edilebilir olunca
 Düşman her tur kurulumunu önceden temizliyor. Pozisyonları değiştir. Aynı açı, farklı nokta bile yeter. Saldırıda önce post-plant dikenini ve duvarını göm — yetenek setinin post-plant'te en sert noktası orası. Sova/Fade varsa tuzakları görüş hattının dışına, kör noktaya gizle. Diken'i hem geciktirme hem peek-yemi olarak kullan: düşman yavaşlarken sen çıkarsın.
+
+## 9. Bu Ajana Karşı
+- Kompta Vyse varsa dar geçitten ilk sen dalma — tuzakları gizli kurar, gözle görülmez. Girişleri önce recon/drone/patlayıcıyla tarat; taranmamış dar geçitten tek sıra geçmeyin.
+- Kör olduysan düz durup dövüşme — Vyse flash tuzağını tam kendi peek'iyle tetikler. Kör süresi boyunca geri çekil; süre bitince açıyı geniş açıyla yeniden al.
+- Dikenden geçtiysen yavaşsın ve hasar yiyorsun — tam o an peek gelir. İleri koşma; geri çık ve açıyı takımın genişletmesini bekle.
+- Duvar tuzağı geçtikten sonra arkanda yükselir ve seni ekipten ayırır — dar kavşaklardan ekipçe aynı anda geçin. Kapanan olursa panik peek atmasın: duvar kısa sürede düşer, düşünce birlikte çıkın.
+- Ult'un metal dikenleri yayıldığında ana silahın kilitlenir — alandan çık; çıkamıyorsan uzun açı alma, tabancayla köşe daralt ve süreyi bitir.

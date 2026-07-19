@@ -67,6 +67,16 @@ Sova'nın silahı bilgi. Recon oku, shock okları ve drone — üçü de her tur
 **COUNTER** Dart zamanlamasını turdan tura kaydır: bazı tur erken tara, bazı tur sakla ve push'u gördükten sonra reaktif at. Savunmada rakip henüz açılmadan atma — boş alan tararsın.
 **WHY** Sabit zamanlama, rakibe dart'tan önce hazırlanma ve taramanın dışında durma fırsatı verir. Değişken zamanlama her seferinde gerçek bilgi yakalar.
 
+**IF** ölümlerin round'un erken saniyelerinde, daha keşif okunu atarken geliyor
+**MEANING** Dart'a nişan alırken silahın inik, gövden sabit ve açıktasın — atış noktan korumasız
+**COUNTER** Dart'ı duvar ya da kapak arkasından, atış açını bir takım arkadaşın tutarken at; noktayı ezbere bil ki nişan süresi kısalsın
+**WHY** Nişan alan Sova oyunun en savunmasız hedefi. Erken round'da açıkta duran keşifçi, takım daha bilgi alamadan düşmana ilk sayıyı hediye eder.
+
+**IF** öldüğünde takımından trade gelmiyor
+**MEANING** Takımın önünde ya da takımdan kopuk ölüyorsun — bilgi ajanı en önde ölmez
+**COUNTER** Dart ve drone önde gitsin, gövden değil: duelist'in bir adım arkasında, trade mesafesinde ilerle
+**WHY** Sen düşünce takımın gözü de düşer; recon'suz kalan takım kör dövüşür. Trade edilemeyen Sova ölümü çifte kayıptır — sayı da gider, bilgi de.
+
 ## 5. Saldırı Kullanımı
 - Execute'tan önce ezberlediğin noktadan recon at, takım girmeden drone'u sür — takım gördüğü yere girsin.
 - İki shock okunu spike kurulana kadar sakla; plant sonrası spike üstü lineup defuse'u keser.
@@ -109,3 +119,9 @@ Sova'nın silahı bilgi. Recon oku, shock okları ve drone — üçü de her tur
 "Rakip dart noktalarını ezberden vuruyor. Aynı site için alternatif nokta lazım — en az iki seçeneğin olsun ki otopilotta seni geçemesinler."
 
 "Recon'u her tur aynı saniyede atıyorsun, rakip takvimini ezberledi. Bazı tur erken tara, bazı tur sakla ve push'u görünce reaktif at — zamanlamanı bozarsan taraman yine canlı bilgi yakalar."
+
+## 10. Bu Ajana Karşı
+- Keşif oku indiğinde durduğun bölgeyi işaretlenmiş say — dart sesini duyduğun an pozisyon değiştir; eski yerinde kalırsan taranmış açıya gelen utility ve hazır crosshair seni bulur. Dart'ı görüyorsan vur, göremiyorsan görüş hattından çık.
+- Drone'a karşı bekleme disiplini: drone seni işaretlemeden vur ya da köşeden tamamen çık; işaretlendiysen o pozisyonda durma — drone'un hemen arkasından takım gelir. Boş açıdaysan drone'a sıkma, ateş sesi yerini ele verir.
+- Ult dalgaları duvardan geçer — sesi duyduğun an bulunduğun hattan yana kay, dar siperde sabit durma.
+- Spike kurulduysa Sova hasar oklarını defuse üstüne saklar — tek seferde tam defuse zorlama: yarım defuse ile okunu üstüne çektir, ok bitince temiz bitir.

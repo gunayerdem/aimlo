@@ -128,6 +128,9 @@ A Main ve B Main girişleri smoke için iyi ama açık mid'de sersemletme kolay 
 ### Icebox
 A site'ın çok katlı yapısı smoke yerleştirmeni zorlar — yükseklik farkı olan alanlarda smoke'u önceden dene. B tünel girişi smoke + sersemletme için uygun ama geniş B site'ta etki dağılır. Bu haritada Viper daha güçlü bir tercih.
 
+### Summit
+Yeni harita — geniş görüş hatları smoke planını sınar. Smoke önceliğin A Main görüş hattının ortası ve Mid Fountain; geniş B site retake'i smoke'suz girilmez, en az bir smoke'u oraya sakla. Hız desteğini uzun giriş koridorlarında (A Main, B Main) entry'den hemen önce bas — arkadaşın açık alanı daha kısa sürede geçer; sersemletmeyi A Garden ya da B Tower gibi dar açıyı tutan savunucuya at. Düşürülebilir duvarlar (A Wall, Mid Wall, B Wall) düştü mü o rota round boyunca kapalı: kapanan girişi hesaba kat, smoke'unu kalan rotaya kaydır ve düşen duvarın altında durma — altında kalan ölür.
+
 ## 7. Eşleşme Notları
 
 ### Omen'e karşı — Deneyim dezavantajı

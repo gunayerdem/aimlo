@@ -28,7 +28,7 @@ verified: 2026-07-08
 5. **İki sıçrama plansız zincirlemek** — İkisini birden harcayıp maksimum mesafeye uçarsan, taramadığın bir noktaya iniyorsun. Birini entry için kullan, birini kaçış için sakla.
 6. **Molly'yi retake'e saklamak** — Molly'nin en değerli anı execute. Post-plant için saklarsan temizleme gücünü boşa harcarsın.
 7. **Botun kimseyi kilitleyemediği anı görmezden gelmek** — Bot kimseyi kovalamasa bile o açının boş olduğunu söylüyor. Bu bilgiyi oku, körlemesine girme.
-8. **Kendi util'inle kendine hasar vermek** — Molly'n ve ult'un sana da hasar verir; sıçraman vermez. Molly'yi at, patlama menzilinden çık — kavgaya yarım canla girme.
+8. **Kendi util'inle kendine hasar vermek** — Molly'n ve ult'un sana da hasar verir; sıçraman vermez. Molly'yi at, patlama menzilinden çık — kendi patlamandan hasar almışken kavgaya girme.
 9. **Sıçrama iner inmez ateş edememek** — Sıçrama havadayken ya da iniş anında nişanın oturmaz; havadayken ya da hareket halindeyken ateş edersen seri kaçar. İnişi düşmana değil, hemen yanındaki bir kapağa/duvara denk getir, yere basınca crosshair'i yerleştir, öyle aç.
 
 ## 4. Kalıp -> Anlam
@@ -57,10 +57,10 @@ MEANING: Öldürmeler execute sırasında değil, temizlik fazında geliyor — 
 COUNTER: Molly'yi round'un başına çek. Sayı toplamak için değil, alan açmak için at.
 WHY: Erken molly savunmayı pozisyonundan söker ve execute'a boşluk açar. Geç molly zaten kazandığın round'a hiçbir şey katmaz.
 
-IF: Round başında util'le kendi canını sıfırlıyorsun, kavgaya yarım canla giriyorsun
+IF: Round başında kendi util'inle hasar alıyorsun, kavgaya hasarlıyken giriyorsun
 MEANING: Molly'yi kendine fazla yakın atıyorsun ya da patlama menzilinde duruyorsun
 COUNTER: Util'i at, geri çekil, patlamayı menzil dışından izle. Hasar düşmana ait, sana değil.
-WHY: Molly'n ve ult'un sana da hasar verir (sıçraman vermez). 100 canla başlaması gereken düelloya 40 canla girersen, alacağın açılışı düşmana hediye edersin.
+WHY: Molly'n ve ult'un sana da hasar verir (sıçraman vermez). Hasarsız başlaman gereken düelloya kendi patlamanın hasarıyla girersen, alacağın açılışı düşmana hediye edersin.
 
 IF: Sıçrama içeri dalıp orta meydana, açık alana iniyorsun
 MEANING: Sıçrama bir kapağın/açının ardına değil, herkesin gördüğü boşluğa atıyorsun
@@ -97,12 +97,18 @@ WHY: Sıçrama seni mesafeden kurtarır ama kör bir köşeye atarsan tava tutul
 
 ### Zorlanırken
 "Bilmediğin yere sıçrama atma. Önce botu gönder, ne gösterdiğine bak, sonra gir."
-"Util'i kendine atma — patlamadan önce menzilden çık. Kavgaya tam canla gir, yarım canla değil."
+"Util'i kendine atma — patlamadan önce menzilden çık. Kavgaya hasar almadan gir; kendi patlamandan hasar aldıysan peek'i ertele, önce geri çekil."
 "Sıçramayla açık alana inme. İnişi bir kapağın ardına denk getir, yere basınca crosshair'i yerleştir, öyle aç."
 
 ### Öngörülebilir olduğunda
 "Botunu daha girişte tarayıp vuruyorlar. Bir tık geciktir ya da farklı açıdan sok."
 "Her round aynı boğaza molly atıyorsun, artık o açıdan çekiliyorlar. Bir round molly'yi atma — onu bekleyenleri girişle yakala."
+
+### Aynı pozisyonda tekrar öldüğünde
+"Aynı noktada üst üste ölüyorsun — rakip artık orayı önceden nişanlıyor. İniş noktanı ve giriş açını her round değiştir; bir round sıçramayı hiç atma, seni bekleyen açıyı takım arkadaşın geniş açıyla alsın."
+
+### Eko/zorlama alım round'unda
+"Eko ve zorlama alımda util'e verdiğin her kredi silahından gider — molly'yi boş alana savurma. Botu bilgi için sür ama patlayıcıyı yalnız kalabalık duyduğun boğaza at; değer alamayacaksan util'i biriktir, tam alıma tam kitle gir."
 
 ## Karşısında: Raze seni öldürdüyse
 - **Molly seni köşeden söktü, çıkışta öldün:** Raze kaçış yönünü bilir — herkes patlamanın tersine kaçar, o da orayı nişanlar. Karşı-hamle: molly'den beklenmedik yöne çık ve çıkar çıkmaz hazır crosshair'le dur — kaçarken değil, yeni açına yerleşmişken dövüş.

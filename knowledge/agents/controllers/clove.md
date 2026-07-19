@@ -11,7 +11,7 @@ Clove sıradan, pasif smoke atan bir controller değil. Öldükten sonra bile sm
 ## 2. Temel Sorumluluklar
 - Hem hayattayken hem öldükten sonra takım için smoke çıkar.
 - Takımın peek atmasından hemen önce can eritme at — düşman zayıflamış halde dövüşsün.
-- Öldürdüğün an kendini iyileştir — fazla canla bir sonraki dövüşe gir.
+- Öldürdüğün an kendini iyileştir — bir sonraki dövüşe canını doldurmadan girme.
 - Diriliş ult'unu yalnızca dönünce kill ya da hasarlı asist alabileceğin zaman kullan — dirilir dirilmez vurulabilirsin, dokunulmazlık yok; süre içinde kill/asist alamazsan otomatik tekrar ölürsün.
 - Önce smoke, sonra dövüş — Clove saldırgan oynar ama controller görevi her zaman kill'den önce gelir.
 - Smoke atmadan ölürsen Clove'u boşa harcadın; smoke atıp ölürsen round'a katkı sundun.
@@ -20,7 +20,7 @@ Clove sıradan, pasif smoke atan bir controller değil. Öldükten sonra bile sm
 - Dirildikten sonra kill ya da hasarlı asist almayı başaramayıp süre dolunca otomatik tekrar ölmek — dirilişin tek şartı budur, dönünce mutlaka angaje olup bir kill ya da hasar çıkar.
 - Smoke atmadan dövüşe dalmak — kill asla smoke'tan önce gelmez.
 - Can eritmeyi takımın aktif olarak dövüşmediği düşmanlara atmak — etkisi boşa gider.
-- Kill sonrası gelen fazla canı, daha tehlikeli açılara dalmak için kullanmak — o can erir, sen erimiş canla dövüşün ortasında kalırsın.
+- Kill sonrası gelen geçici canı, daha tehlikeli açılara dalmak için kullanmak — o etki erir, kendini dövüşün ortasında hasarlı bulursun.
 - Kazanamayacağın bir round'da öldükten sonra smoke yeteneğini boşa harcamak.
 - Round başında bütün smoke'larını birden harcayıp geç gelişen kavgaya smoke'suz girmek — en az birini saklamak gerekir.
 - Diriliş ult'unu, bomba çoktan kurulmuşken ve takım çekilmişken kullanmak — tek başına kill/hasarlı asist alamayacağın boş bir round'a dönüyorsun, süre dolunca yeniden ölürsün.
@@ -44,8 +44,8 @@ Clove sıradan, pasif smoke atan bir controller değil. Öldükten sonra bile sm
 
 **IF** Kendini iyileştirdikten sonra giderek daha riskli açılara giriyorsun
 **MEANING** Geçici can seni yanlış yere cesaretlendiriyor
-**COUNTER** Fazla can erir. O canı daha ileri gitmek için değil, şu anki pozisyonu daha sağlam tutmak için kullan.
-**WHY** Fazla can biterken kendini dezavantajlı bir dövüşün ortasında bulursun.
+**COUNTER** Geçici can erir. O iyileşmeyi daha ileri gitmek için değil, şu anki pozisyonu daha sağlam tutmak için kullan.
+**WHY** Geçici can biterken kendini dezavantajlı bir dövüşün ortasında bulursun.
 
 **IF** Sürekli kill peşinde entry atıyorsun ama takımın smoke'u yok
 **MEANING** Clove'u duelist gibi oynuyorsun, controller görevini bırakmışsın
@@ -69,10 +69,10 @@ Clove sıradan, pasif smoke atan bir controller değil. Öldükten sonra bile sm
 
 ## 5. Harita Etkileşimleri
 - **Sunset**: Mid kavgaları Clove'un saldırgan tarzına oturur. B market ya da mid kapı için öldükten sonra smoke at — takım korunmaya devam etsin. Mid'i sen alırsan iki siteye de hızlı rotasyon açılır; mid kontrolünü kaybetsen bile en az bir smoke'u B'nin retake'i için sakla.
-- **Ascent**: A main ve B main'de saldırgan çık, kendini iyileştirip fazla canını kullan. Mid kapıya atılan can eritme yüksek değer taşır. Bu haritada bombalar açık alanda kurulur, post-plant smoke'u kritiktir — açılışta tek smoke'la idare et, gerisini kuruluş sonrasına sakla.
+- **Ascent**: A main ve B main'de saldırgan çık, kill sonrası kendini iyileştirip ikinci düelloya avantajlı gir. Mid kapıya atılan can eritme yüksek değer taşır. Bu haritada bombalar açık alanda kurulur, post-plant smoke'u kritiktir — açılışta tek smoke'la idare et, gerisini kuruluş sonrasına sakla.
 - **Bind**: Dar geçitler can eritmeyi verimli kılar — düşmanın yana kaçacak yeri yok, etki tam üstünde kalır. Hookah ya da shower'da dirilirsen rotasyona gelen düşmanı hazırlıksız yakalarsın. Teleportlar yüzünden ölüm sonrası smoke'unu yanlış siteye atma riski yüksek; smoke'tan önce sesi dinle, düşman hangi siteden basıyor ona göre kapat.
 - **Haven**: Üç site sana bol peek ve diriliş sonrası yeniden konumlanma fırsatı verir. Üç site = smoke'lar her yere yetmez; bir siteyi açarken diğer ikisinden gelecek rotasyonu okuyup post-plant smoke'unu o eksene sakla.
-- **Split**: Fazla canla mid'i saldırgan al. Ramp'ta öldükten sonra smoke at — takım oyunda kalsın. Bu haritada mid kontrolü tüm round'u belirler; mid düellosunu kazanırsan kendini iyileştirip ikinci düelloya da avantajlı gir, kaybedersen smoke'u takımın geri çekildiği eksene at.
+- **Split**: Mid'i saldırgan al — kill sonrası iyileşmen seni ikinci temasa hazır tutar. Ramp'ta öldükten sonra smoke at — takım oyunda kalsın. Bu haritada mid kontrolü tüm round'u belirler; mid düellosunu kazanırsan kendini iyileştirip ikinci düelloya da avantajlı gir, kaybedersen smoke'u takımın geri çekildiği eksene at.
 
 ## 6. Eşleşme Notları
 - **Sage'e karşı**: Sage duvarına dayanan düşmana, duvarın senin tarafına bakan ağzına can eritme at — duvara yapışıp bekleyeni oradan zayıflatırsın. Can eritme bir fırlatma topu; Sage duvarı topun uçuşunu fiziksel keser, o yüzden duvarın arkasına atmaya çalışma, ağzına at.
@@ -84,12 +84,12 @@ Clove sıradan, pasif smoke atan bir controller değil. Öldükten sonra bile sm
 
 ### İyi performans gösterdiğinde
 **Ne yapıyorsun:** Dövüşe girmeden önce smoke'ları atıyorsun. Takım peek atmadan hemen önce can eritmeyi zamanlıyorsun. Öldürdüğün an kendini iyileştiriyorsun.
-**Düşman ne görüyor:** Dövüşen bir smoke botu görüyor. Asıl tehlikeyi — can eritme zamanlamanı — fark etmiyor. Zayıflamış canla dövüşe giriyorlar.
-**Düşman zorlaması:** Ya zayıflamış canla dövüşüyorlar ve kazanmaları gereken düelloları kaybediyorlar, ya da etkinin geçmesini beklemek için açıdan çekiliyorlar ve tutma pozisyonunu geçici bırakıyorlar. Fazla canın trade'ini de zorlaştırıyor — seni indirmek için fazladan mermi gerekiyor.
+**Düşman ne görüyor:** Dövüşen bir smoke botu görüyor. Asıl tehlikeyi — can eritme zamanlamanı — fark etmiyor. Dövüşe hasarlıyken giriyorlar.
+**Düşman zorlaması:** Ya hasarlıyken dövüşüyorlar ve kazanmaları gereken düelloları kaybediyorlar, ya da etkinin geçmesini beklemek için açıdan çekiliyorlar ve tutma pozisyonunu geçici bırakıyorlar. Geçici canın trade'ini de zorlaştırıyor — seni indirmek için fazladan mermi gerekiyor.
 **Kazanç:** Can eritme üstlerindeyken takımın her düelloya can avantajıyla giriyor. Kill sonrası kendini iyileştirip bir sonraki dövüşe de avantajlı başlıyorsun. Ardışık iki düellodaki can farkı takımın lehine ciddi birikir.
 **Döngü:** Önce smoke'lar → takım peek atmadan önce can eritme → entry → kendini iyileştir → fazla canla sonraki dövüş. Ölürsen: takımın hâlâ açık olan yerini smoke'la — zaten güvenli olan tarafı değil.
-**Düşman adapte olduğunda:** 3-5 round sonra sen smoke atarken seni yakalamak için erken push atabilirler, sen iyileşmeden seni öldürmek için açına önceden nişan alabilirler ya da fazla canını aşmak için çift peek atabilirler.
-**Buna karşı:** Erken push geliyorsa smoke'ları daha geride at, entry'yi takım arkadaşına bırak. Açına önceden nişan alıyorlarsa o açıya önce can eritme at, takım arkadaşın swing atsın. Çift peek geliyorsa ikinci oyuncuya can eritme at — fazla canına karşı zayıflamış girsinler.
+**Düşman adapte olduğunda:** 3-5 round sonra sen smoke atarken seni yakalamak için erken push atabilirler, sen iyileşmeden seni öldürmek için açına önceden nişan alabilirler ya da geçici canını aşmak için çift peek atabilirler.
+**Buna karşı:** Erken push geliyorsa smoke'ları daha geride at, entry'yi takım arkadaşına bırak. Açına önceden nişan alıyorlarsa o açıya önce can eritme at, takım arkadaşın swing atsın. Çift peek geliyorsa ikinci oyuncuya can eritme at — sana hasarlı girsinler.
 
 ### Zorlandığında
 "Smoke atmadan ölüyorsun. Önce smoke'lar, sonra dövüş. Clove saldırgan oynar ama hâlâ bir controller — takımın senin kill'inden önce smoke'una ihtiyacı var."

@@ -73,6 +73,21 @@ Tejo iki işi aynı anda yapabilen tek initiator: önce görür, sonra o görü�
 **COUNTER** Drone'u köşeden, kör açıdan ya da düşmanın bakmadığı yükseklikten sok; düşmanı gördüğün an pulse'ı bas, uçuşu uzatma. Açık koridordan düz sürüş = anında ölü drone.
 **WHY** Görülen drone = vurulan drone = sıfır keşif, sıfır suppress; gizli rota + erken pulse = suppress oturur
 
+**IF** Round'un ilk saniyelerinde, daha drone sürmeden ya da füze atmadan girişte ölüyorsun
+**MEANING** Keşif ajanı keşiften önce gövdesini sokuyor — temas hattına drone yerine sen giriyorsun, kit daha çalışmadan round senin için bitiyor
+**COUNTER** İlk temasa gövden değil drone'un girsin. Sen ilk kurşun menzilinin dışında, bir kapağın gerisinde dur; pulse bilgisi gelmeden koridora adım atma.
+**WHY** Tejo erken ölünce takım hem keşifsiz hem baskısız kalır — drone, stun, füze hepsi cebinde toprağa gider, execute körlemesine yürür
+
+**IF** Drone sürerken ya da füze kilitlerken takımdan kopuk bir noktada ölüyorsun ve ölümün takasla karşılanmıyor
+**MEANING** Util kullanırken dikkatin ekranda kilitli ve yanında trade edecek kimse yok — seni bulan düşmana bedava hedefsin
+**COUNTER** Drone'u ve füze kilidini bir takım arkadaşının görebildiği, sırtı kapalı bir noktadan kullan. Lurker rotasının üstünde util'e gömülme; kopuksan önce güvenli açıya çekil, sonra kilitle.
+**WHY** Takas gelmeyen ölüm çifte kayıp: hem sen düşersin hem yarım kalan util boşa gider — düşman sıfır bedel ödeyip sayı avantajı alır
+
+**IF** Savunmada util'ini round başında boşaltıp sonra açıyı yalnız silahla tutarken ölüyorsun
+**MEANING** Erken yoklamaya harcanan drone ve stun, asıl push geldiğinde elini boş bırakıyor — Tejo'yu sıradan bir açı tutucusuna çevirmişsin
+**COUNTER** Savunmada drone'u push emaresine sakla; stun ile füze mid-round ve retake için dursun. Push gelince önce util açıyı bozsun, silah bitirsin — sıra tersine dönmesin.
+**WHY** Kiti boşalmış Tejo savunmanın asıl anında yeteneksiz yakalanır; util'siz tutulan açı, sarsamadığın ve süpüremediğin düşmana teker teker açılır
+
 ## 7. Harita Etkileşimleri
 - **Bind**: Dar alanlar stun'dan kaçmayı zorlaştırır. Teleporter çıkışlarında çift füze düşmanı her iki yönden sıkıştırır. A short'ta drone → stun → füze tam execute kalitesi verir. Hookah'ta ult bütün koridoru temizler.
 - **Split**: Orta alan kontrolünde drone biçilmiş kaftan — dar mid'de drone gizliliğini korur. A ramp ve B main'de stun'dan kaçmak çok zor. Füzelerle A heaven ile A main'i aynı anda kapatabilirsin. Ult, B main koridoru boyunca savunucuları pozisyonundan söker.
@@ -103,3 +118,21 @@ Her execute öncesi drone'u sürüyor, pulse'ı zamanında basıp suppress'i bin
 **Suppress'i değerlendiremediğinde**: "Pulse bir düşmanı suppress'ledi ama sen ya da takım o açıya swing atmadı. Suppress'teki düşmanın hiçbir kurtarma yeteneği yok — o pencere senin garantili düello anın. Suppress oturduğu an o açıya gir, beklersen pencere kapanır."
 
 **Util'i girişe yığdığında**: "Bütün kit site girişinde bitti, spike dikildikten sonra elinde hiçbir şey kalmadı. Füzeyi sakla — defuse noktasını iki patlama alanıyla kapatır. Tejo post-plant'ta defuse'u kilitleyen ajandır, bu değeri girişe harcama."
+
+## 10. Sık Yapılan Hatalar
+
+- Keşifsiz füze kilitlemek — boş zemini patlatırsın. Füzeyi her zaman drone'dan ya da takım bilgisinden sonra hedefle.
+- Drone'u açık koridordan düz sürmek — pulse'ı basamadan vurulur. Kör açıdan sok, düşmanı gördüğün an bas.
+- Suppress penceresini seyretmek — pulse oturduğu an çağır ve o açıya girilsin; pencere kapanınca düşman tam kapasiteye döner.
+- Stun'lı düşmana dipdibe peek atmak — sersemlemiş nişan bile sıfır mesafede isabet eder. Mesafeli, geniş açıyla gir.
+- Bütün kiti site girişinde bitirmek — post-plant'ta elin boş kalır. Füzeyi ya da stun'ı defuse penceresine sakla.
+- Ult'u tahmine ateşlemek — doğrulanmamış hat pahalı bir havai fişektir. Önce drone ya da takım bilgisiyle konumu doğrula.
+- Util atarken gövdeyi temas hattına sokmak — Tejo yeteneklerini güvenli mesafeden kullanan ajandır; ilk kurşunu drone yesin, sen değil.
+
+## 11. Bu Ajana Karşı
+
+- Kompta Tejo varsa execute'tan önce drone bekle — drone sesini duyduğun an pozisyonunu değiştir ve drone'u hızla düşür; pulse görüşüne girmeden vurulan drone sıfır bilgi verir.
+- Pulse seni yakaladıysa yeteneklerin bir süre kapalı — o pencerede açık düelloya çıkma; kapağa çekil, takım arkadaşının yanında bekle. Suppress biter, silahın hep çalışır.
+- Sabit açı tutma alışkanlığı Tejo'ya karşı pahalı — füze barajı sabit tutucuyu yerinden söker. Aynı açıyı uzun süre tutma, tutuşunu kısa aralıklarla kaydır.
+- Stun'ı köşe arkasına sektirir — köşe dibine yapışıp bekleme; sarsıldıysan o düelloyu alma, geri çekil ve trade'e bırak.
+- Kit sırayla zincirlenir: drone → stun → füze. İlk halkayı kırarsan (drone erken düşerse) kalan util tahmine döner — bu kompta drone avcılığı ekstra değerlidir.

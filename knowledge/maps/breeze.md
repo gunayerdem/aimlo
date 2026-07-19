@@ -5,7 +5,7 @@ verified: 2026-07-08
 
 # BREEZE — Koçluk Rehberi
 
-> Breeze, Patch 12.00 (Ocak 2026) ile oyunun en büyük harita rework'ünü aldı: açılar sadeleşti, açık alanlar daraldı, savunma rotasyonları kısaldı. Bu rehber SADECE rework-sonrası haritayı anlatır. Breeze şu an rekabetçi havuzda değil; Swiftplay/Unrated'de karşına çıkar.
+> Breeze, Patch 12.00 (Ocak 2026) ile oyunun en büyük harita rework'ünü aldı: açılar sadeleşti, açık alanlar daraldı, savunma rotasyonları kısaldı. Bu rehber SADECE rework-sonrası haritayı anlatır. Breeze bu rework'le rekabetçi havuza geri döndü — 13.00 havuzunda aktif.
 
 ## 1. Harita Karakteri
 
@@ -92,6 +92,11 @@ IF: Site düştü; retake'e tek koridordan sırayla giriyorsunuz ve post-plant c
 MEANING: Saldıranın artık gerçek siperi var (A arka kutular, B Cubby) — tek koldan giren, hazır bekleyen iki açıya yürür.
 COUNTER: Rotasyonlar kısa — toplan, iki yönden aynı anda gir. Girmeden önce siper arkasını molly'yle söktür, spike bölgesine smoke at.
 WHY: İki yön post-plant crossfire'ını böler; molly siperin değerini siler. Tek tek giren retake sayı hediye eder.
+
+### Site Bazlı Retake Rotaları
+- **A Retake**: İki kolla aynı anda gir — ana kol savunucu spawn tarafından site zeminine, ikinci kol Mid koridorlarından A'nın Mid bağlantısına basar. Saldırgan post-plant'te A Main + Mid bağlantısı crossfire'ı kurar ve arka-duvar kutularını siper alır: A Main açısını smoke'la, kutuların arkasını molly ile söktür, Pyramid köşesine flash at. Siper boşalınca defuse alanı açılır; Mid kolu saldırganın Mid'i tutan oyuncusunu yandan alır.
+- **B Retake**: Ana kol savunucu spawn tarafından site'a, ikinci kol Mid'den Elbow üzerinden Window hattına iner. Saldırganın siperi Cubby — önce oraya molly bas, B Main açısını smoke'la, Window hattını flash ile temizle. Molly Cubby'yi boşaltırken iki kol aynı anda girsin: siper değiştirmek zorunda kalan saldırgan açıkta yakalanır.
+- İki sitede de sıra aynı: önce bilgi (tel, bot, kapı sesi), sonra siperi söken molly, sonra birlikte giriş. Rotasyonlar rework'le kısaldı — toplanma hızlı, giriş eşzamanlı olsun; tek koldan giren sırayla ölür.
 
 ## 5. Kompozisyon Notları
 

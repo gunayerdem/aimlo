@@ -84,6 +84,9 @@ WHY: Smoke'un kısa süreli; erken attıysan tam geçişte zaten dağılmış ol
 - **Açık, uzun hatlar Jett'in evi:** Breeze ve Icebox gibi geniş, uzun görüş hattını haritalarda Op-Jett en güçlü; dash'le açıyı kapatır, kaçarsan dash'le geri çekilirsin. Dar, çok köşeli haritalarda (Pearl, Fracture, Split) dash daha az iş görür çünkü her köşede yakın dövüş seni bekler — buralarda Op'tan çok tüfekle entry'ye yaslan.
 - **Dikey alanı kullan:** Jett zıplamasıyla rakibin yere bakan crosshair'ini boşa düşürür. Yükseklik avantajı olan noktalarda (kutular, platformlar, üst geçişler) zıplama-entry'si en değerli; düşman seni göz hizasında beklerken sen üstten gelirsin.
 - **Smoke'unu giriş hattına göre planla:** Site execute'unda smoke'unu en tehlikeli tek açıyı (genelde uzun hat ya da arkadan bakan flank açısı) kapatmak için kullan, kendi geçişine değil. Kısa süreli olduğu için tam giriş saniyesine denk getir.
+- **Summit — durumsal (yeni harita):** Uzun A Main, Mid Fountain ve B Main hatları Op-Jett'e alan verir — Op'la uzun hattı tut, öldür, dash'le çekil; ama geniş harita ham dash girişini affetmez, initiator açıyı temizlemeden A Garden ya da B Tower'a dalma.
+- **Summit duvar gerçeği:** A Wall, Mid Wall ve B Wall bir kez düştü mü round boyunca kapalı — dash kaçış hattını duvarın durumuna göre planla ve düşen duvarın altında durma, altında kalan ölür. Mid Wall düştüyse Mid Window açısı kapanır; Op açını A Main ya da B Main'e taşı.
+- **Summit'te zıplamayı geniş B'de kullan:** B Site'ın kutu ve siper bolluğu (Triples, Close Box) zıplama girişine sürpriz açı verir — göz hizasını tarayan savunucuyu üstten geç.
 
 ## 6. Eşleşme Notları
 - **Sana zor:** Chamber (Op'una Op'la cevap verir, tuzağı dash hattını yakalar), Cypher (teli dash hattını yakalar), Killjoy (botu dash yönünü ele verir).
