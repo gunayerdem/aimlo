@@ -716,6 +716,37 @@ export async function POST(request: NextRequest) {
         (r.death_position as string).toLowerCase().includes(loc) &&
         (r.position_confidence === "high" || r.position_confidence === "medium"),
       );
+      // Akıllı-default sinyalleri (KB wiring 2026-07-19): universal.md'nin "Seri
+      // Kayıp Sonrası Round" / "Uzatma ve Maç Sayısı Round'u" blokları yazılıydı
+      // ama deterministik yoldan hiç seçilemiyordu. Seri roundHistory'den, ağırlık
+      // score'dan türetilir. Mevcut round HARİÇ (on-death kaydedildiği için listede
+      // olabilir; sonucu da henüz kesin değil). Ardışıklık round_index üzerinden
+      // doğrulanır — atlanan ya da sonucu bilinmeyen round (outcome_known===false,
+      // R3 UNKNOWN→loss düzeltmesinin alanı) filtrelenir → index boşluğu seriyi kırar.
+      const priorRounds = (Array.isArray(rh) ? (rh as unknown as Record<string, unknown>[]) : [])
+        .filter((r) =>
+          typeof r.round_index === "number" &&
+          r.round_index !== curRound &&
+          typeof r.round_won === "boolean" &&
+          r.outcome_known !== false,
+        )
+        .sort((a, b2) => (b2.round_index as number) - (a.round_index as number));
+      let streakLen = 0;
+      let streakWon: boolean | null = null;
+      for (let i = 0; i < priorRounds.length; i++) {
+        const r = priorRounds[i];
+        if (i > 0 && (r.round_index as number) !== (priorRounds[i - 1].round_index as number) - 1) break;
+        if (streakWon === null) streakWon = r.round_won === true;
+        else if ((r.round_won === true) !== streakWon) break;
+        streakLen++;
+      }
+      const lossStreak = streakWon === false && streakLen >= 3;
+      const winStreak = streakWon === true && streakLen >= 3;
+      // Uzatma/maç sayısı: score "11-12" biçiminden — taraflardan biri ≥12 (standart
+      // 13-round modlarda maç sayısı; 12-12 ve sonrası uzatma). Kısa modlarda (örn.
+      // Spike Rush) eşik hiç tetiklenmez → yanlış pozitif üretmez.
+      const scoreM = typeof reqBody.score === "string" ? reqBody.score.match(/(\d{1,2})\D+(\d{1,2})/) : null;
+      const highStakes = !!scoreM && (parseInt(scoreM[1], 10) >= 12 || parseInt(scoreM[2], 10) >= 12);
       const dtype = classifyDeath({
         side: reqBody.side,
         killerInfo: reqBody.killerInfo,
@@ -739,6 +770,14 @@ export async function POST(request: NextRequest) {
         economyType: reqBody.economyType,
         tradedByAlly: reqBody.tradedByAlly,
         repeatedPosition,
+        // KB wiring 2026-07-19: kendi silahın (op-loss), ajan (Clove ult istisnası),
+        // seri/ağırlık akıllı-default sinyalleri. loadout classifier'da yalnız
+        // sözlük-regex'le sınanır (prompt'a girmez) → ham geçirmek güvenli.
+        loadout: reqBody.loadout,
+        playerAgent: reqAgent,
+        lossStreak,
+        winStreak,
+        highStakes,
       });
       deathTypeOut = dtype;
       // CROSS-ROUND ban (Phase 2-ready): prior rounds' death-types from roundHistory IF the
@@ -749,7 +788,11 @@ export async function POST(request: NextRequest) {
         .map((r: Record<string, unknown>) => (typeof r.death_type === "string" ? r.death_type : ""))
         .filter((s): s is string => s.length > 0) as import("@/lib/death-type").DeathType[];
       deathTypeDirective = buildDeathTypeDirective(dtype, prevDeathTypes, reqLang);
-      console.log(`[Aimlo AI] death-type=${dtype} repeatPos=${repeatedPosition} prevTypes=${prevDeathTypes.length}`);
+      console.log(
+        `[Aimlo AI] death-type=${dtype} repeatPos=${repeatedPosition} ` +
+        `streak=${lossStreak ? `L${streakLen}` : winStreak ? `W${streakLen}` : "-"} stakes=${highStakes} ` +
+        `prevTypes=${prevDeathTypes.length}`,
+      );
     }
 
     // SİLAH+KOMP işaretçisi (2026-07-08, death-type direktifi deseni): katil silahı

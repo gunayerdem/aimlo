@@ -24,7 +24,7 @@
 // gönderirse tek dalla aktive olur; ayrıca desktop roundHistory'de death_type
 // echo'lar, dışarıdan gelen "lurk-caught" ban-listesi yolunda geçerli kalmalı.
 
-import { extractKillerWeapon } from "@/lib/comp-weapon";
+import { extractKillerWeapon, extractLoadoutWeapon } from "@/lib/comp-weapon";
 
 export type DeathType =
   | "repeat-angle"
@@ -34,13 +34,23 @@ export type DeathType =
   | "entry-no-trade"
   | "post-plant-solo"
   | "retake-no-util"
+  | "retake-advantage-thrown"   // KB wiring 2026-07-19: sayı avantajlı retake'i tek tek eritme
   | "over-peek-advantage"
+  | "numbers-down-carry"        // KB wiring 2026-07-19: sayı azken silahı taşı
   | "crosshair-loss"
   | "timing-window"
+  | "late-no-plant"             // KB wiring 2026-07-19: geç round + plant yok (saldırı)
+  | "late-def-no-plant"         // KB wiring 2026-07-19: geç round + plant yok (savunma)
+  | "full-buy-first-contact"    // KB wiring 2026-07-19: tam alımda açılış ölümü
+  | "op-loss"                   // KB wiring 2026-07-19: kendi loadout'unda Operator'le ölüm
   | "low-hp-no-save"
   | "clutch-lost"
   | "ult-in-pocket"
   | "lurk-caught"
+  | "loss-streak"               // KB wiring 2026-07-19: akıllı default — 3+ üst üste kayıp
+  | "win-streak-comfort"        // KB wiring 2026-07-19: akıllı default — 3+ üst üste kazanç
+  | "overtime-matchpoint"       // KB wiring 2026-07-19: akıllı default — uzatma/maç sayısı
+  | "def-no-crossfire"          // KB wiring 2026-07-19: savunmada trade'lenmemiş ölüm
   | "def-wide-hold"
   | "info-less-push";
 
@@ -61,13 +71,23 @@ export const DEATH_TYPE_GUIDE: Record<DeathType, { kbBlock: string; angle: strin
   "entry-no-trade":      { kbBlock: "Pozisyon ve Açı Ölümleri — Solo peek yerine geri-alım kurulumu", angle: "solo giriş yapıp space aldın ama ölümün geri-alınmadı — yanındaki arkadaş trade'e hazır beklerken, senkronlu gir", concept: "trade-yok" },
   "post-plant-solo":     { kbBlock: "Post-Plant Ölümleri", angle: "spike kurulduktan sonra tek açı tuttun ve retake'i tek karşıladın — çapraz post-plant açısı kur, zamanı oyna, sen onlara gitme", concept: "post-plant-tek-aci" },
   "retake-no-util":      { kbBlock: "Retake Ölümleri", angle: "site'ı util'siz/dağınık geri almaya çalıştın — util'i defuse'u geciktirmeye harca ve birlikte sayı bas, tek tek girme", concept: "retake-dagintik" },
+  "retake-advantage-thrown": { kbBlock: "Retake Ölümleri — Sayı avantajlı retake'i tek tek eritme", angle: "retake'te sayı avantajı sendeyken tek tek girip eridin — sayı sendeyken bile trade dizilimiyle aynı anda girin; bir kayıp avantajı eşitler, defuse penceresi daralır", concept: "retake-avantaj" },
   "over-peek-advantage": { kbBlock: "Avantaj Yönetimi — Üstünlüğü Sadeleştir", angle: "sayı üstünündeyken gereksiz peek arayıp avantajı eşitledin — önde olduğun round'da köşe kur, düşmanı sana gelmeye zorla", concept: "avantaj-yaktin" },
-  "crosshair-loss":      { kbBlock: "Aim ve Crosshair Ölümleri", angle: "tam can ve açık düelloda göründüğün an vuruldun, nişanın hazır değildi — crosshair'i baş hizasında tut, dur-ateş-et disiplinine gir", concept: "crosshair" },
+  "numbers-down-carry":  { kbBlock: "Karar ve Ekonomi Ölümleri — Sayı azken silahı taşı", angle: "sayı net karşıdayken dövüş arayıp silahı da teslim ettin — kaybedilmiş sayıda dövüş arama; tutulmayan yoldan çekil, silahı ve util'i sonraki round'a taşı", concept: "sayi-azken-tasi" },
+  "crosshair-loss":      { kbBlock: "Aim ve Crosshair Ölümleri", angle: "tam alım düellosunda göründüğün an vuruldun, nişanın hazır değildi — crosshair'i baş hizasında tut, dur-ateş-et disiplinine gir", concept: "crosshair" },
   "timing-window":       { kbBlock: "Zamanlama Ölümleri — Beklenti penceresi kapanınca çık", angle: "smoke/duvar daha açılırken, beklenti penceresi açıkken çıktın — pencere kapanınca, düşmanın gevşeme anında peek at", concept: "zamanlama-penceresi" },
-  "low-hp-no-save":      { kbBlock: "Karar ve Ekonomi Ölümleri — Düşük canla dövüşü zorlama — silahı kurtar", angle: "düşük canla save etmeyip silahı sundun — düşük HP + dezavantajda silahı kurtar, sonraki round'a yatırım yap", concept: "save-etmedin" },
+  "late-no-plant":       { kbBlock: "Zamanlama Ölümleri — Geç round'da plant yoksa bekleme", angle: "geç round'da spike hâlâ kurulu değilken beklemeye devam ettin — karar ver: ya sadeleşip plant için bas ya da silahları sonraki round'a taşı; ikisinin ortasında bekleme", concept: "gec-plant-yok" },
+  "late-def-no-plant":   { kbBlock: "Zamanlama Ölümleri — Plant yoksa savunmada zaman senin", angle: "savunmada geç round'da spike kurulmamışken dövüş aradın — zaman senin lehine, plant edemeyen saldırı kaybeder; av arayıp silah hediye etme, açını tut", concept: "savunmada-zaman" },
+  "full-buy-first-contact": { kbBlock: "Karar ve Ekonomi Ölümleri — Tam alımda ilk temas util'in işi", angle: "tam alım round'unun açılışında ilk teması sen aldın — ilk temas util'in işi: smoke ya da flash inmeden geniş açıya çıkma, takımla trade mesafesinde gir", concept: "tam-alim-acilis" },
+  "op-loss":             { kbBlock: "Karar ve Ekonomi Ölümleri — Operator'ü bedavaya teslim etme", angle: "elinde Operator varken ölüp silahı düşmana bıraktın — atıştan sonra yer değiştir, trade'siz açık düello arama; hattı tut, dövüşü düşman sana gelince aç", concept: "op-teslim" },
+  "low-hp-no-save":      { kbBlock: "Karar ve Ekonomi Ölümleri — Düşük canla dövüşü zorlama — silahı kurtar", angle: "kaybedilmiş dövüşte save etmeyip silahı sundun — dezavantajdayken dövüş aramayı bırak, silahı kurtar, sonraki round'a yatırım yap", concept: "save-etmedin" },
   "clutch-lost":         { kbBlock: "Karar ve Ekonomi Ölümleri — Clutch'ı 1v1 dizisine indir", angle: "son canlıyken sonuca göre değil panikle oynadın — tek açı izole et, sesle düşmanları ayır, durumu ardışık 1v1'lere indir", concept: "clutch" },
   "ult-in-pocket":       { kbBlock: "Karar ve Ekonomi Ölümleri — Dolu ult'la ölme — hazır ult'u cebinde çürütme", angle: "ult'un doluyken hiç kullanmadan öldün — ölüm riski yüksek hamleyi ult'suz alma; hamleyi ult'la aç ya da ilk teması takıma bırak", concept: "ult-cepte" },
   "lurk-caught":         { kbBlock: "Lurk Ölümleri", angle: "takımdan kopuk erken lurk'te yakalandın — lurk'ünü execute'a senkronla, takım baskısı havadayken düşmanın yerini öğren", concept: "lurk" },
+  "loss-streak":         { kbBlock: "Seri Kayıp Sonrası Round", angle: "üst üste kayıp serisinde plan karmaşasıyla düştün — bir round'u bilerek sadeleştir: tek site tek plan, util sırayla insin, ilk teması util ya da birlikte çıkan takım açsın", concept: "seri-kayip" },
+  "win-streak-comfort":  { kbBlock: "Karar ve Ekonomi Ölümleri — Kazanma serisinde bonus baskınına hazır ol", angle: "kazanma serisinde rahatlayıp düşmanın bonus baskınına yakalandın — düşman en yüksek kayıp bonusunda, force gelir: mesafeni koru, yakın mesafeye inme, anti-eco disipliniyle oyna", concept: "seri-rahatlik" },
+  "overtime-matchpoint": { kbBlock: "Uzatma ve Maç Sayısı Round'u", angle: "maçın en ağır round'unda yeni fikir deneyip düştün — en çok tutan setup'ı oyna, kahramanlık peek'i arama; ilk teması util ya da takım açsın", concept: "yuksek-agirlik" },
+  "def-no-crossfire":    { kbBlock: "Pozisyon ve Açı Ölümleri — Crossfire kur, yan yana durma", angle: "savunmada ölümün trade'lenmedi, açıyı desteksiz tuttun — round başında crossfire kur: biri klasik köşeyi, diğeri onu gören yan açıyı tutsun; düşen anında geri alınsın", concept: "crossfire-yok" },
   "def-wide-hold":       { kbBlock: "Pozisyon ve Açı Ölümleri — Açıkta değil, siperin yanında dur", angle: "savunmada açıyı erken/geniş açtın ve ilk atışı yedin — siperin yanında dur, off-angle al, peek atmadan ilk kontağı bekle", concept: "savunma-genis-aci" },
   "info-less-push":      { kbBlock: "Zamanlama Ölümleri — Tetikleyici bekle — açılışta da, basarken de", angle: "somut bir tetikleyici beklemeden, düşmanın yerini öğrenmeden bastın — ses kesilmesi ya da ilk kontağı bekle, sonra çık", concept: "tetikleyici-yok" },
 };
@@ -79,7 +99,12 @@ export type DeathSignals = {
   killerInfo?: string;      // "killed by jett with vandal"
   deathLocation?: string;
   deathTiming?: string;     // "early" | "mid" | "late"
-  healthAtDeath?: number;   // 0-150
+  // healthAtDeath SINIFLANDIRMADA ARTIK KULLANILMIYOR (canlı-test #8 devamı,
+  // 2026-07-19): ölüm-anı tek HP örneği çatışma-öncesi canı KANITLAYAMAZ (stale
+  // + çatışma-içi hasarı yakalar) — hp>=100 "tam can" kapısı da 50 can + 50
+  // kalkanla kırpılmış oyuncuyu 100 gösteriyordu. Alan geriye-uyumluluk için
+  // duruyor (eski çağıranlar geçmeye devam edebilir); hiçbir dal okumaz.
+  healthAtDeath?: number;   // 0-150 — ölü alan, yalnız back-compat
   alliesAlive?: number;     // 0-4
   enemiesAlive?: number;    // 0-5
   spikePlanted?: boolean;
@@ -87,6 +112,12 @@ export type DeathSignals = {
   economyType?: string;     // "full_buy" | "force_buy" | "half_buy" | "eco" | "pistol"
   tradedByAlly?: boolean;
   repeatedPosition?: boolean; // derived in route.ts from roundHistory
+  // ── KB wiring 2026-07-19 (yeni sinyaller — hepsi opsiyonel, yokken dal atlanır) ──
+  loadout?: string;         // oyuncunun KENDİ silahı, örn. "operator" (op-loss kapısı)
+  playerAgent?: string;     // oyuncu ajanı — Clove ult istisnası (ult yalnız ölüm sonrası)
+  lossStreak?: boolean;     // route.ts türetir: önceki 3+ round üst üste kayıp
+  winStreak?: boolean;      // route.ts türetir: önceki 3+ round üst üste kazanç
+  highStakes?: boolean;     // route.ts türetir (score): uzatma ya da maç sayısı round'u
 };
 
 /** Classify a death into exactly one type. Priority = MOST specific → most generic;
@@ -101,10 +132,18 @@ export function classifyDeath(b: DeathSignals): DeathType {
   const kw = extractKillerWeapon(killer);
   const isOp = kw?.cls === "sniper" || /\b(op|awp)\b/.test(killer);
   const isEcoWeapon = kw ? kw.cls === "pistol" || kw.cls === "smg" || kw.cls === "shotgun" : false;
+  // KENDİ silahın (KB wiring 2026-07-19): loadout OCR — sözlük-bağlı; op-loss dersi
+  // özel olarak Operator içindir (Marshal/Outlaw dahil DEĞİL — "en pahalı silah" dersi).
+  // "op"/"awp" kısaltmaları isOp ile aynı gerekçeyle ayrıca kabul edilir.
+  const ownWeapon = extractLoadoutWeapon(b.loadout);
+  const hasOperator = ownWeapon?.name === "operator" || /\b(op|awp)\b/.test((b.loadout || "").toLowerCase());
+  // Clove istisnası (KB wiring 2026-07-19): Clove ult'u YALNIZ ölüm SONRASI
+  // kullanılabilir (kendini diriltme) — "hamleyi ult'la aç" dersi Clove için
+  // oyun-olgusal imkânsız ve clove.md ile aynı prompt'ta çelişir → dal atlanır.
+  const agentSlug = (b.playerAgent || "").toLowerCase().replace(/[^a-z0-9]/g, "");
   const side = (b.side || "").toLowerCase();
   const atk = side.startsWith("attack");
   const def = side.startsWith("defend") || side.startsWith("defens");
-  const hp = typeof b.healthAtDeath === "number" ? b.healthAtDeath : undefined;
   const aa = b.alliesAlive, ea = b.enemiesAlive;
   const eco = (b.economyType || "").toLowerCase();
   // GÜVENİLİRLİK GUARD'I (denetim, wiring bulgusu-2): reality-checker aynı sinyali
@@ -116,13 +155,20 @@ export function classifyDeath(b: DeathSignals): DeathType {
   // Priority order: specific → generic.
   if (b.repeatedPosition) return "repeat-angle";                          // read by the enemy — top priority
   if (isOp) return "op-angle";                                            // weapon-anchored
+  // retake-advantage-thrown (KB wiring 2026-07-19): retake-no-util'den ÖNCE —
+  // sayı avantajı varken tek tek erime daha spesifik retake hatası. aa>ea STRICT
+  // (over-peek'in aksine eşitlik burada avantaj sayılmaz).
+  if (b.spikePlanted && def && aliveReliable && (aa as number) > (ea as number)) return "retake-advantage-thrown";
   if (b.spikePlanted && atk) return "post-plant-solo";                    // attack + spike up
   if (b.spikePlanted && def) return "retake-no-util";                     // defense + spike up = retake
+  // op-loss (KB wiring 2026-07-19): spike dallarından SONRA (retake/post-plant
+  // bağlamı daha spesifik), ult dalından ÖNCE — Operator kaybı çift kayıptır.
+  if (hasOperator) return "op-loss";                                      // died holding an Operator
   // ult-in-pocket (KB pipeline denetimi 2026-07-19): sinyal payload'da VARDI
   // (route ctx.ultReady) ama classifier dalı yoktu → universal.md "Dolu ult'la
   // ölme" bloğu deterministik yoldan hiç seçilemiyordu. Spike dallarından SONRA:
   // post-plant/retake bağlamı dolu-ult dersinden daha spesifik.
-  if (b.ultReady === true) return "ult-in-pocket";                        // died with charged, unused ult
+  if (b.ultReady === true && agentSlug !== "clove") return "ult-in-pocket"; // died with charged, unused ult
   // Pistol round = kendi bloğu (denetim: universal.md "Erken Round Ölümleri" bölümü
   // hiçbir tipe bağlı değildi = ölü içerik; pistol ölümü eco dersi değil açılış dersi ister).
   if (eco === "pistol") return "pistol-round";
@@ -137,10 +183,52 @@ export function classifyDeath(b: DeathSignals): DeathType {
   // feedback YOK. Tip enum'da + rehberde duruyor (desktop echo + verify-kb
   // çapa uyumu); yalnız erişilemez.
   if (aliveReliable && aa === 0) return "clutch-lost";                    // last alive (sayı okunduysa)
-  if (aliveReliable && (aa as number) > (ea as number)) return "over-peek-advantage"; // man-advantage
+  // numbers-down-carry (denetim fix 2026-07-19): GERÇEK sayı dezavantajı şart —
+  // alliesAlive oyuncu HARİÇ olduğundan ölüm-öncesi dezavantaj aa+1<ea ⇔ aa<ea-1.
+  // Eski aa<ea kapısı aa+1==ea (EŞİT sayı; örn. round'un İLK ölümü 5v5'te aa=4,
+  // ea=5) durumunu da yakalayıp "sayı net karşıdaydı" diye YANLIŞ kesin-iddia
+  // üretiyordu (CAN-iddiası yasağıyla aynı sınıf hata). KB bloğu "Sayı azken GEÇ
+  // dövüş" dediği için deathTiming==='late' şartı da eklendi; erken/orta dezavantaj
+  // ölümleri alttaki spesifik dallara düşer. late-no-plant'ten ÖNCE: geç round +
+  // net dezavantajda "silahı taşı" dersi genel karar dersinden daha keskin.
+  if (aliveReliable && (aa as number) > 0 && (aa as number) < (ea as number) - 1 && b.deathTiming === "late") return "numbers-down-carry"; // numbers against, late
+  // Geç-round plant-yok dalları (KB wiring 2026-07-19): entry-no-trade ve
+  // timing-window'dan ÖNCE — geç round'da "senkron gir / pencereyi bekle"
+  // çerçevesi yanlıştır (round bitiyor), karar dersi gerekir.
+  // spikePlanted === false (denetim fix 2026-07-19): eski !==true kapısı sinyal
+  // YOKKEN (undefined, OCR okuyamadı) "kurulu değil" varsayıp "spike hâlâ kurulu
+  // değilken" kesin-olgusu üretiyordu — AÇIK negatif sinyal şart (aa/ea'daki
+  // aliveReliable guard'ının simetriği; spike dalları zaten önce döner).
+  if (atk && b.deathTiming === "late" && b.spikePlanted === false) return "late-no-plant";
+  if (def && b.deathTiming === "late" && b.spikePlanted === false) return "late-def-no-plant";
   if (atk && b.tradedByAlly === false) return "entry-no-trade";          // un-traded entry
+  // full-buy-first-contact (KB wiring 2026-07-19): timing-window'dan ÖNCE —
+  // ekonomi sinyali pencere dersinden daha spesifik (tam alımda ilk temas util'in işi).
+  if (eco === "full_buy" && atk && b.deathTiming === "early") return "full-buy-first-contact";
   if (b.deathTiming === "early" && atk) return "timing-window";          // peeked into the window
-  if (typeof hp === "number" && hp >= 100 && !isEcoWeapon) return "crosshair-loss"; // full hp, rifle duel
+  // def-no-crossfire (KB wiring 2026-07-19): def-wide-hold default'undan önce —
+  // trade'lenmemiş savunma ölümü ölçülü killfeed sinyali (entry-no-trade simetriği).
+  if (def && b.tradedByAlly === false) return "def-no-crossfire";
+  // over-peek-advantage (denetim fix 2026-07-19): spesifik dallardan SONRAYA taşındı.
+  // aa>=ea kapısı (ölüm-öncesi gerçek üstünlük aa+1>ea ⇔ aa>=ea; alliesAlive oyuncu
+  // HARİÇ) clutch-lost + eski aa<ea dalıyla birlikte TÜM sayı-uzayını kapatıyordu:
+  // aliveReliable olan HER ölüm bu üçlüye düşüyor, plant/trade/timing/eco dalları ve
+  // akıllı default'lar ölü koda dönüyordu. Kapı aynı kaldı (+1 avantaj kapsamı — bu
+  // dalganın amacı — korunur) ama katman değişti: ölçülü sinyalli dallar önce
+  // denenir, sayı-avantajı dersi spesifik sebebi olmayan ölümlere kalır.
+  if (aliveReliable && (aa as number) >= (ea as number)) return "over-peek-advantage"; // man-advantage
+  // crosshair-loss yeni kapısı (canlı-test #8 uyumu, 2026-07-19): hp>=100 kapısı
+  // KALDIRILDI — stale tek HP örneği "tam can" kanıtı sayılamaz (yukarıdaki
+  // low-hp gerekçesinin aynası) ve 50 can + 50 kalkanla kırpılmış oyuncu da 100
+  // görünüyordu. Yerine: tam alımda tüfek-sınıfı silaha ölüm = mekanik düello
+  // kaybı. healthAtDeath hiçbir dalda okunmuyor artık (alan back-compat).
+  if (eco === "full_buy" && !isEcoWeapon) return "crosshair-loss";       // full-buy rifle duel
+  // Akıllı default'lar (KB wiring 2026-07-19): spesifik ölüm-sebebi kalmadıysa
+  // round-BAĞLAMI dersleri generic huniden (def-wide-hold/info-less-push) önce
+  // gelir — generic tekrarını round geçmişi/skor sinyali böler.
+  if (b.highStakes === true) return "overtime-matchpoint";                // overtime / match point
+  if (b.lossStreak === true) return "loss-streak";                        // 3+ consecutive losses
+  if (b.winStreak === true) return "win-streak-comfort";                  // 3+ consecutive wins
   // Side-aware default: a defense death with no specific signal is a wide-angle
   // hold (NOT an attack "push") — info-less-push uses attack language ("bastın")
   // which is wrong on a defender (audit 2026-06-30, S10). Split by side.

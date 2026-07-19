@@ -102,12 +102,28 @@ interface LoadOptions {
 // recycles serverless instances within minutes anyway, so no manual TTL.
 const FILE_CACHE = new Map<string, string>();
 
+/**
+ * YAML frontmatter'ı düş (savunma-derinliği, 2026-07-19): KB dosyalarının başındaki
+ * `--- ... ---` meta bloğu (id/patch/pool/verified alanları) prompt'a İÇERİK olarak
+ * sızıyordu — harita dosyalarındaki pool alanı "lotus yanlış-havuz" sızıntısının
+ * bilinen katmanı. Yalnız dosyanın İLK satırı '---' ise ve kapanış '---' satırı
+ * bulunursa düşer; gövdedeki '---' yatay-çizgi ayraçları (ilk satır değil, örn.
+ * economy-mastery.md bölüm ayraçları) ETKİLENMEZ. Çıktı yalnız KÜÇÜLÜR →
+ * verify-kb'nin statik-blok üst sınırı (≤8.5KB) ve stripKbWhitespace davranışı
+ * değişmez (strip sonrası kalan baş boşluk burada temizlenir).
+ */
+function stripFrontmatter(content: string): string {
+  if (!/^---[ \t]*\r?\n/.test(content)) return content;
+  const m = content.match(/^---[ \t]*\r?\n[\s\S]*?\r?\n---[ \t]*(?:\r?\n|$)/);
+  return m ? content.slice(m[0].length).replace(/^\s+/, "") : content;
+}
+
 function loadFile(relativePath: string): string {
   const cached = FILE_CACHE.get(relativePath);
   if (cached !== undefined) return cached;
   try {
     const fullPath = path.join(KNOWLEDGE_DIR, relativePath);
-    const content = fs.readFileSync(fullPath, "utf-8");
+    const content = stripFrontmatter(fs.readFileSync(fullPath, "utf-8"));
     FILE_CACHE.set(relativePath, content);
     return content;
   } catch {
@@ -490,13 +506,24 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
   if (spikePlanted) {
     const content = loadFile("general/post-plant-playbook.md");
     if (content) {
-      contextualParts.push(`[POST-PLANT TAKTİK]\n${stripKbWhitespace(content)}`);
+      // Side-filtre (2026-07-19): agent/map bloklarında uygulanan filterSectionsBySide
+      // burada unutulmuştu. Dosyanın H2'leri "## Saldırı — ..." (7 bölüm) + "## Savunma —
+      // Retake" (1 bölüm) — filtrenin anahtar kelimeleri ("saldırı"/"savunma") bu
+      // adlandırmayla birebir eşleşiyor (doğrulandı, uyarlama gerekmedi). Savunma
+      // isteğine artık ~6KB saldırı post-plant içeriği girmiyor; retake bölümü +
+      // H2-öncesi giriş korunur. (economy-mastery.md H2'lerinde side kelimesi yok —
+      // filtre no-op olurdu, bilinçli olarak uygulanmadı.)
+      const filtered = filterSectionsBySide(content, side);
+      contextualParts.push(`[POST-PLANT TAKTİK]\n${stripKbWhitespace(filtered)}`);
       files.push("general/post-plant-playbook.md");
     }
   }
 
-  // Economy (only if eco/force/pistol)
-  if (economyType && (economyType === "eco" || economyType === "force_buy" || economyType === "pistol")) {
+  // Economy (eco/force/pistol/half_buy — half_buy eklendi 2026-07-19: bonus/yarım-alım
+  // round ölümü en öğretilebilir ekonomi round'u olduğu hâlde rehber almıyordu.
+  // Kapı economyType sinyali (desktop sözleşmesi: full_buy|force_buy|half_buy|eco|pistol);
+  // full_buy bilinçli olarak hâlâ yüklemez — maliyet disiplini.)
+  if (economyType && (economyType === "eco" || economyType === "force_buy" || economyType === "pistol" || economyType === "half_buy")) {
     const content = loadFile("general/economy-mastery.md");
     if (content) {
       contextualParts.push(`[EKONOMİ REHBERİ]\n${stripKbWhitespace(content)}`);
@@ -510,6 +537,13 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
     if (matchups.length > 0) {
       contextualParts.push(`[EŞLEŞME BİLGİSİ]\n${stripKbWhitespace(matchups[0])}`);
       files.push("matchups/(best-match)");
+    } else {
+      // Agent (satır ~458) / map (satır ~474) seçici uyarılarıyla simetrik (2026-07-19):
+      // matchup kapsam delikleri prod log'unda görünür olsun — hangi ajan × düşman-komp
+      // kombinasyonu spesifik VE rol-fallback dosyasız kaldı?
+      console.warn(
+        `[KB] matchup selector matched no file (player '${agent}' vs enemies [${enemyAgents.join(", ")}])`,
+      );
     }
   }
 

@@ -12,13 +12,13 @@ verified: 2026-07-19
 
 Bu dosya her oyuncuya aynı derinlikte koçluk verir — hangi içgörüyü vereceğini RANK değil, ÖLÜMÜN TİPİ seçer. Ölümün tipine uyan TEK bloğu seç; hepsini birden verme.
 
-- **COUNTER tek bir emir değil, bir olay zinciridir:** hangi olay olunca → ne yapacaksın → öncesinde neyi bekleyeceksin. "Crossfire kur" değil; "şu ses kesilince tek adım çık" gibi tetikleyiciye bağlı bir zincir — oyuncu tam olarak hangi ANI bekleyeceğini bilsin.
+- **COUNTER tek emir değil olay zinciridir:** hangi olay olunca → ne yapacaksın. "Crossfire kur" değil; "şu ses kesilince tek adım çık" gibi tetikleyiciye bağlı — oyuncu hangi ANI bekleyeceğini bilsin.
 
 ## Aim ve Crosshair Ölümleri
 
 Düşmanı gördün ama önce o vurdu, ya da nişanın hazır değildi. Bu tipte sorun mekaniğin kendisinde.
 
-- **Örnek**: Ascent'te A Main'den içeri girerken crosshair'in yerde, düşman A Site'tan kafadan vurup öldürdü — köşeye girmeden crosshair'i o köşeden çıkacak kafanın yüksekliğine oturt, sonra gir.
+- **Örnek**: Ascent'te A Main'den içeri girerken crosshair'in yerde, düşman A Site'tan kafadan vurup öldürdü — köşeye girmeden crosshair'i kafa hizasına oturt, sonra gir.
 
 ### Crosshair'i baş hizasında tut
 
@@ -51,7 +51,7 @@ Yanlış yerde durduğun için vuruldun — açıkta kaldın, birden çok yerden
 
 - **IF** site ortasında ya da açık alanda duruyorsan
 - **MEANING** birden fazla açıdan görünürsün ve vurulunca çekilecek siperin yok
-- **COUNTER** açık alanın ortasını boşalt, bir duvarın ya da kutunun kenarına geç; tek açıya bak ve onu klasik hizadan bir adım kaydırılmış off-angle'dan tut ki köşeyi önceden nişanlayan düşmanın nişanı boşa baksın; peek gelince ilk atışı al, atışı yer yemez tek adımda siperin arkasına kapan
+- **COUNTER** açık alanın ortasını boşalt, bir duvarın ya da kutunun kenarına geç; tek açıyı klasik hizadan bir adım kaydırılmış off-angle'dan tut ki önceden nişanlayan düşmanın nişanı boşa baksın; ilk atışı alınca tek adımda siperin arkasına kapan
 - **WHY** siperin kenarındaysan ilk atışı yedikten sonra çekilip hayatta kalırsın; açıkta o atış seni bitirir
 
 ### Crossfire kur, yan yana durma
@@ -67,27 +67,28 @@ Yanlış yerde durduğun için vuruldun — açıkta kaldın, birden çok yerden
 - **MEANING** ölümün boşa gidiyor, kimse seni hemen geri alamıyor, takım sayı kaybediyor
 - **COUNTER** peek'ten önce yanındakiyle anlaş; "üç deyince" deyip aynı anda hareket edin; sen geniş açıyla peek at, o yan açıda hazır beklesin; vurulursan seni vuranı hemen geri alsın
 - **WHY** her ölüm hemen geri alınırsa sayı avantajın bozulmaz
-- **TRADE EDİLDİYSEN** takım arkadaşın trade'ini hemen aldıysa (tradedByAlly) bu ölüm kurulum hatası değil, aksine iyi işaret: aldığın açı işe yaradı, sayı korundu — kurulumu değiştirme, sonraki girişlerde de aynı anda hareket et
+- **TRADE EDİLDİYSEN** (tradedByAlly) bu ölüm kurulum hatası değil, iyi işaret: açın işe yaradı, sayı korundu — kurulumu değiştirme, sonraki girişlerde de aynı anda hareket et
+- **GEÇ ROUND'DAYSA** (deathTiming geç) kalan sayıya göre ya birlikte kapanıp tek dalgada girin ya silahı sonraki round'a taşı — geç round'da solo peek sadece silahını verir
 
 ### Site'ı ilk seste bırakma
 
 - **IF** site'a ilk temas anında pozisyonu bırakıp çekiliyorsan
 - **MEANING** düşman site'ı bedavaya alır, takımın geri almak zorunda kalır
-- **COUNTER** ilk ayak sesini duyunca kaçma; girişe bir util atıp yavaşlat, çapraz bir pozisyona kay ve bekle; ölmeye çalışma, sadece zamanı al — bir util atıp çekil, başka bir şey yapma
+- **COUNTER** ilk ayak sesini duyunca kaçma; girişe bir util atıp yavaşlat, çapraz bir pozisyona kay ve bekle; ölmeye çalışma, sadece zamanı al
 - **WHY** giriş yavaşlayınca takımın yetişir ve düşman util harcamak zorunda kalır; trade mümkün olur
 
 ### Savunmada erken ilk-kanı verme
 
 - **IF** savunmadayken, spike ortada yokken round açılışında takımın ilk ölümü sen olduysan
-- **MEANING** bölgen ilk temasta boş kaldı; takım hem sayıca düştü hem o girişin bilgisini kaybetti — rotasyon kör kaldı, düşman istediği kapıdan girdi
+- **MEANING** bölgen ilk temasta boş kaldı; takım hem sayıca düştü hem giriş bilgisini kaybetti — rotasyon kör kaldı
 - **COUNTER** açılışta ilk kontak kill için değil bilgi içindir: tek adımda kapanacağın açıdan tut, ilk vuruşu alınca kapan ve gördüğünü bildir; geniş hattı erken yoklama, düşman sana gelsin
-- **WHY** açılışı yaşayarak kapatan savunmacı bölgeyi ve bilgiyi tutar; erken düşen savunmacı düşmana sayıyı ve boş girişi birden verir, rotasyon şansı ölür
+- **WHY** açılışı yaşayarak kapatan savunmacı bölgeyi ve bilgiyi tutar; erken düşen savunmacı düşmana sayıyı ve boş girişi birden verir
 
 ## Zamanlama Ölümleri
 
-Doğru yerdeydin ama yanlış anda çıktın — pencere açıkken değil kapalıyken hareket ettin, ya da bilgin tazeyken oynamadın. Zamanlama hatası nişan hatası kadar round kaybettirir.
+Doğru yerdeydin ama yanlış anda çıktın — pencere açıkken değil kapalıyken hareket ettin. Zamanlama hatası nişan hatası kadar round kaybettirir.
 
-- **Örnek**: Haven'da A Long'da smoke daha açılırken çıkıp Jett operator'la uzun hattan kafadan öldün — smoke tam oturup Heaven sesi kesilince, düşman beklemeyi bıraktığı AN geniş açıyla peek at.
+- **Örnek**: Haven'da A Long'da smoke daha açılırken çıkıp Jett operator'la kafadan öldün — smoke tam oturup Heaven sesi kesilince, düşman beklemeyi bıraktığı AN geniş açıyla peek at.
 
 ### Beklenti penceresi kapanınca çık
 
@@ -100,9 +101,9 @@ Doğru yerdeydin ama yanlış anda çıktın — pencere açıkken değil kapal�
 
 - **IF** seni bir operatör (ya da uzun-hat tek-atış silahı) uzun bir hattan, çoğu zaman aynı açıya aynı anda çıktığında vurduysa
 - **MEANING** operatör tek bir açıya kilitlidir ve sabit timing'le çıkan oyuncuyu bedavaya alır — sen ona kendi ritminde, beklediği anda hediye oldun
-- **COUNTER** o açıya util'siz ikinci kez aynı timing'le çıkma; üç seçenek: (1) takım smoke'uyla hattı kapat ve arkasından geç, (2) operatörcü açıdan çekildiği kısa aralıkta hemen yeniden peek at, (3) ikinci açıyı farklı yükseklikten ya da daha geniş swing'le zorla ki tek-açı nişanını bozsun
-- **WHY** operatör tek hedefe kilitlidir, ritim-okumaya açıktır — timing'ini değiştirirsen o silah pahalı bir dezavantaja döner; kaçıran operatörcü yakın mesafede en zayıf oyuncudur
-- **TEKRARLA BİRLEŞİRSE** killerInfo'daki silah keskin nişancıysa VE aynı pozisyonda üst üste öldüysen: o hatta üçüncü peek yok — açıyı bir round tamamen boş bırak, ya da ancak takım smoke'u inince farklı yükseklikten zorla; aynı adrese aynı ritimle üçüncü çıkış operatöre bedava atıştır
+- **COUNTER** o açıya util'siz ikinci kez aynı timing'le çıkma; üç seçenek: (1) takım smoke'uyla hattı kapat, (2) operatörcü açıdan çekildiği kısa aralıkta hemen yeniden peek at, (3) farklı yükseklikten ya da daha geniş swing'le zorla ki tek-açı nişanını bozsun
+- **WHY** operatör tek hedefe kilitlidir, ritim-okumaya açıktır — timing'ini değiştirirsen o silah pahalı bir dezavantaja döner
+- **TEKRARLA BİRLEŞİRSE** killerInfo keskin nişancı VE aynı pozisyonda üst üste öldüysen: o hatta üçüncü peek yok — bir round tamamen boş bırak ya da takım smoke'u inince farklı yükseklikten zorla
 
 ### Ayak sesi kesilince çık
 
@@ -129,49 +130,63 @@ Doğru yerdeydin ama yanlış anda çıktın — pencere açıkken değil kapal�
 
 - **IF** 1v1 ya da 1v2 durumlarında dövüşe sürekli yanlış pozisyonda giriyorsan
 - **MEANING** geç kalıyorsun — kötü yer değiştirme ya da çok uzun bekleme yüzünden açıyı kapatamadan yakalanıyorsun
-- **COUNTER** daha hızlı nişan almaya çalışma; dövüşten önce bilgini al, açıyı kendi lehine kapatacak pozisyona erken gir; düşman gelmeden açın hazır olsun
+- **COUNTER** daha hızlı nişan almaya çalışma; dövüşten önce bilgini al, açıyı kendi lehine kapatacak pozisyona erken gir
 - **WHY** doğru pozisyona zamanında girmek, dövüşü sen daha ateş açmadan kazandırır
+
+### Geç round'da plant yoksa bekleme
+
+- **IF** saldırıdayken round'un son bölümünde spike hâlâ kurulu değilken öldüysen
+- **MEANING** beklemek artık plan değil kayıptı — süre biterken plant'sız saldırı round'u kendiliğinden verir
+- **COUNTER** karar ikiye iner: sayı ve util yetiyorsa tek site seçip sade basışla plant'ı zorla; yetmiyorsa dövüş arama, silahları taşı — ortada bekleme
+- **WHY** bekleyen saldırı hem süreye hem savunmaya kaybeder; erken verilen sade karar ya plant'ı ya ekonomiyi kurtarır
+
+### Plant yoksa savunmada zaman senin
+
+- **IF** savunmadayken round'un son bölümünde, spike kurulmamışken dövüş ararken öldüysen
+- **MEANING** zaman senin lehineydi — plant edemeyen saldırı süre bitince kaybeder; sen av arayıp bedava dövüş verdin
+- **COUNTER** peek arama: açını tut, rotasyona hazır bekle; save'e çekilen düşmanı kovalama, silah hediye etme
+- **WHY** süre dolarken acele etmek zorunda olan taraf saldırıdır — dövüşü açmak zorunda olan sen değilsin
 
 ## Okunabilirlik ve Bilgi Sızıntısı Ölümleri
 
-Aynı şeyi tekrarladığın için düşman seni okudu. Sorun pozisyonun ya da nişanın değil — tahmin edilebilir oldun; iyi rakip her tekrarını ezberler.
+Aynı şeyi tekrarladığın için düşman seni okudu. Sorun pozisyonun ya da nişanın değil — tahmin edilebilir oldun.
 
-- **Örnek**: Ascent'te dört round üst üste A Main'i aynı recon-sonra-flash sırasıyla zorladın, beşinci round düşman flash'ı bekleyip öldürdü — bir round o açıyı boş bırak ya da sırayı boz, düşman yeniden tahmin etmek zorunda kalsın.
+- **Örnek**: Ascent'te dört round üst üste A Main'i aynı recon-sonra-flash sırasıyla zorladın, beşinci round düşman flash'ı bekleyip öldürdü — bir round açıyı boş bırak ya da sırayı boz.
 
 ### Util sıranı kır
 
 - **IF** round'dan round'a ya da maçtan maça aynı util sırasını çalıştırıyorsan
 - **MEANING** rakip sıranı ezberledi, bir sonrakine ona karşı hazırlanarak giriyor
-- **COUNTER** bir sonraki round bilinen sıranı değiştir; rakip önce recon bekliyorsa bu kez önce smoke at ya da flash'ı sona bırak; alıştığı sırayı görmeyen rakip hazırlığını boşa harcar, sen onu boş bulursun
+- **COUNTER** bir sonraki round bilinen sıranı değiştir; rakip önce recon bekliyorsa bu kez önce smoke at ya da flash'ı sona bırak; alıştığı sırayı görmeyen rakip hazırlığını boşa harcar
 - **WHY** sıra değişince rakip hazırladığı karşı duruşu uygulayamaz, hazırlığı işe yaramaz
 
 ### Aynı açıyı üst üste tutma
 
 - **IF** aynı açıyı iki round üst üste tutuyorsan
 - **MEANING** üçüncü round rakip o açıya hazırlanmış, daha sen çıkmadan nişanını oraya almış girer
-- **COUNTER** iki round aynı pozisyondan baktıysan üçüncü round oraya hiç gitme; rakip nişanını oraya almış gelecek diye varsay, farklı bir noktaya geç; oynamasalar bile oynayacaklarmış gibi davran
+- **COUNTER** iki round aynı pozisyondan baktıysan üçüncü round oraya hiç gitme; rakip nişanını oraya almış gelecek diye varsay, farklı bir noktaya geç
 - **WHY** rakip karşı hamlesini kuramadan değişirsen hazırlığı boşa gider, sen yeni açıdan bedava bilgi alırsın
 
 ### Okunan pozisyonu boş bırak
 
 - **IF** aynı pozisyonda art arda ölüyorsan
 - **MEANING** sebep neredeyse hep tek: o pozisyon okundu; pozisyon yanlış değildi, tekrar yüzünden tahmin edilebilir oldu
-- **COUNTER** bir round o pozisyonu tamamen boş bırak ve farklı bir noktada tut; düşman hazırlığını boşa harcayıp orayı kontrol etmeyi bırakınca geri dön — dört round A short tuttuysan ve karşı Raze oraya körlemesine molly atıyorsa, bir round başka noktada molly'sini boşa attırt, sonra dön
+- **COUNTER** bir round o pozisyonu tamamen boş bırak ve farklı bir noktada tut; düşman hazırlığını boşa harcayıp orayı kontrol etmeyi bırakınca geri dön
 - **WHY** pozisyonu değiştirince düşman elindeki okumayı kullanamaz, dövüş yeniden eşit başlar
-- **SİLAH KESKİN NİŞANCIYSA** killerInfo'daki silah keskin nişancı VE pozisyon tekrarıysa: o hatta üçüncü peek yok — açıyı bir round tamamen boş bırak, ya da ancak takım smoke'u inince farklı yükseklikten zorla
+- **SİLAH KESKİN NİŞANCIYSA** VE pozisyon tekrarıysa: o hatta üçüncü peek yok — bir round tamamen boş bırak ya da takım smoke'u inince farklı yükseklikten zorla
 
 ### Aynı düşmana sürekli ölme — sızıntıyı kapat
 
 - **IF** aynı rakibe tekrar tekrar ölüyorsan ama pozisyonun aslında iyiyse
 - **MEANING** rakip seni bir şeyden okuyor; ayak sesin, util sıran ya da köşeye yaklaşma alışkanlığın bilgi sızdırıyor
-- **COUNTER** pozisyonu değil, sızdıran alışkanlığı değiştir; bu round o açıya sessiz yürü, util'i farklı sırayla at, köşeye farklı mesafeden yaklaş; tekrar eden her ipucunu tek tek kes
+- **COUNTER** pozisyonu değil, sızdıran alışkanlığı değiştir; bu round o açıya sessiz yürü, util'i farklı sırayla at, köşeye farklı mesafeden yaklaş
 - **WHY** sızıntıyı kapatınca rakip seni baştan okumak zorunda kalır; sadece pozisyon değiştirmek bu sorunu çözmez
 
 ## Karar ve Ekonomi Ölümleri
 
 Yanlış kararla öldün — almaman gereken dövüşe girdin, düşmanın elini okumadın ya da baskı altında kötü seçim yaptın.
 
-- **Örnek**: Haven'da C Long'da util'siz ve takımdan uzakken sadece nişanına güvenip dövüşe girdin, düşman açıyı önceden kapatmıştı — üstünlük yokken geri çekil; dövüşü pozisyon, util ya da bilgi avantaj verince aç.
+- **Örnek**: Haven'da C Long'da util'siz ve takımdan uzakken sadece nişanına güvenip dövüşe girdin, düşman açıyı önceden kapatmıştı — üstünlük yokken geri çekil, avantaj kurulunca aç.
 
 ### Üstünlük olmadan dövüşe girme
 
@@ -198,19 +213,19 @@ Yanlış kararla öldün — almaman gereken dövüşe girdin, düşmanın elini
 
 - **IF** ekonomi kararını — yarı alım mı, tam save mi — düşmanın kredisini okumadan refleksle veriyorsan
 - **MEANING** düşmanın elindeki silahı ve util'i bilmiyorsun; round'u körlemesine kuruyorsun
-- **COUNTER** geçen round'un sonucundan düşmanın kredisini tahmin et: 3900 kredili düşman kalkan ve tam silah alır ama util'i kısıtlıdır, al-ver'i ona göre kur; 1900 kredili düşmanın ucuz silahı var, satın alınan util'i yok — ama imza yeteneği (örn. Jett dash) bedava gelir, agresif gir ve kaçışı hesaba kat; düşman da yarı ekonomideyse save'e geçme, yarım alımla bas; tam silahlıysa save yap
+- **COUNTER** geçen round'un sonucundan düşman kredisini tahmin et: yüksek kredi kalkan + tam silah ama kısıtlı util demek; düşük kredi ucuz silah demek — imza yeteneği yine bedava gelir, kaçışı hesaba kat; düşman da yarı ekonomideyse save'e geçme, yarım alımla bas; tam silahlıysa save yap
 - **WHY** ekonomiyi okuyunca rakibin hamlesini önceden bilirsin; karşı taraf da zayıfken yarı alım baskısı round'u çevirir, tam save çeviremez
 
 ### Düşük canla dövüşü zorlama — silahı kurtar
 
-- **IF** canın 50'nin altında ve sayı ya da pozisyon dezavantajındayken hâlâ dövüş arıyorsan
+- **IF** ağır hasar yemişken ve sayı ya da pozisyon dezavantajındayken hâlâ dövüş arıyorsan
 - **MEANING** o dövüş çoktan kaybedilmiş; ölürsen silahın düşmana hediye gider
 - **COUNTER** dövüş aramayı bırak; tutulmayan bir açıdan spawn'a doğru çekil ve tüfeği sonraki round'a taşı; takım save sinyali verdiyse peek hiç atma, sadece hayatta kal
 - **WHY** kurtarılan tüfek sonraki round'un tam alımıdır; ölü tüfek düşmana bedava ikinci silah demektir
 
 ### Clutch'ı 1v1 dizisine indir
 
-- **IF** son canlı sensin ve karşında birden fazla düşman varsa (1vX)
+- **IF** son canlı sensin, karşında birden fazla düşman varsa (1vX) ve kazanma şansı gerçekse (1v2; silahın ve pozisyonun dengin) — 1v3+ ve spike ortada yoksa bu blok değil, "Sayı azken silahı taşı" geçerli
 - **MEANING** aynı anda iki düşmana karşı açı tutulamaz; ikisini birden karşılarsan biri seni mutlaka yandan vurur
 - **COUNTER** geri çekil, tek girişli pozisyon al; ayak seslerinden düşmanları ayır; ilkini izole açıda karşıla, öldürür öldürmez yer değiştir; spike kuruluysa peek arama, zamanı onlara harcat — defuse'a gelmek zorundalar
 - **WHY** 1vX tek dövüşte kaybedilir; ardışık 1v1'ler kazanılır
@@ -231,7 +246,7 @@ Yanlış kararla öldün — almaman gereken dövüşe girdin, düşmanın elini
 
 ### Sayı azken silahı taşı
 
-- **IF** round'un son aşamasında, spike ortada yokken, sayı net karşıdayken (iki kişi eksiksin ya da tek kalmışsın) dövüş ararken öldüysen
+- **IF** round'un son aşamasında, spike ortada yokken, sayı net karşıdayken (iki kişi eksiksin, tek başına 1v3+ kalmışsın ya da takım save sinyali verdiyse) dövüş ararken öldüysen — tek kalmışsın ama karşıda en fazla iki düşman varsa (1v2) bu blok değil, "Clutch'ı 1v1 dizisine indir" geçerli
 - **MEANING** o round sayı matematiğiyle çoktan gitmişti; aradığın dövüş round'u geri getirmez, ölünce silahın da düşmana kalır
 - **COUNTER** dövüş aramayı bırak; tutulmayan yoldan uzaklaş, silahı ve kalan util'i sonraki round'a taşı; spike kurulduysa bu ders geçersiz — o zaman defuse zorunlu, plana göre oyna
 - **WHY** kurtarma pes etmek değil yatırımdır: taşınan tüfek sonraki round'un tam alımıdır; kaybedilmiş sayıda aranan dövüş hem seni hem ekonomini verir
@@ -250,6 +265,13 @@ Yanlış kararla öldün — almaman gereken dövüşe girdin, düşmanın elini
 - **COUNTER** tam alımda ilk teması sen değil util açsın: girişe smoke ya da flash inmeden geniş açıya çıkma; takımın hamlesi başlayınca trade mesafesinde, arkadaşınla aynı anda gir
 - **WHY** tam alım round'u util zinciri ve birlikte giriş üstüne kuruludur; erken düşen tam-silahlı oyuncu düşmana sayıyı, silahı ve round planını birden verir
 
+### Kazanma serisinde bonus baskınına hazır ol
+
+- **IF** takımın üst üste birkaç round kazanmışken bu round beklenmedik şekilde öldüysen
+- **MEANING** kaybeden düşman en yüksek kayıp bonusuna ulaştı — force alım ve yakın mesafe baskını tam bu round gelir
+- **COUNTER** anti-eco disiplini: mesafeni koru, ucuz silahın güçlü olduğu yakın mesafeye inme, açıları uzun hatlardan tut; rush sesinde geri çekilip sayıyla karşıla
+- **WHY** bonus round'unu mesafe ve disiplin kazanır; yakın mesafe düellosunda ucuz silah tam alımı eşitler
+
 ## Avantaj Yönetimi — Üstünlüğü Sadeleştir
 
 Sayı ya da pozisyon avantajındayken eklediğin her gereksiz hamle hata riski üretir. Avantajlıyken zamanı oynamak, dövüşü oynamaktan üstündür.
@@ -260,7 +282,7 @@ Sayı ya da pozisyon avantajındayken eklediğin her gereksiz hamle hata riski �
 
 - **IF** 4v3 ya da 4v2 gibi sayı avantajındayken sahayı bölmeye çalışıyor, ekstra hamle arıyor ya da peek atıp sayıyı eşitliyorsan
 - **MEANING** o round zaten sendeydi; avantaj varken eklediğin her hamle sıfır kazançlı bir risk, düşmana bedava trade fırsatı
-- **COUNTER** sayı avantajını gördüğün an ikinci giriş ve peek arama; köşeleri temizle, çaprazları kur, zamanı oyna — sen ona değil o sana gelsin, düşman sana gelmek zorunda kalana kadar bekle
+- **COUNTER** sayı avantajını gördüğün an ikinci giriş ve peek arama; köşeleri temizle, çaprazları kur, zamanı oyna — sen ona değil o sana gelsin
 - **WHY** sayı avantajında sade oynamak round'u kilitler; fazla hamle ve her gereksiz peek round'u eşitleme riski taşır, kazanmaz
 
 ### Avantajda sarmayı kilitle
@@ -278,6 +300,7 @@ Bu bölümü SADECE round geçmişi üst üste üç ya da daha fazla kayıp gös
 - **MEANING** seri genelde tek tek düellolardan değil plan karmaşasından gelir: her round başka fikir, util zinciri kopuk, ilk ölüm erken
 - **COUNTER** bir round'u bilerek sadeleştir: tek site, tek plan; util'ler sırayla ve girişten önce insin; ilk ölümü verme — ilk teması util ya da birlikte çıkan takım açsın
 - **WHY** seri karmaşık yeni planla değil ilk temiz round'la kırılır; sade round'da herkes ne yapacağını bilir, trade zinciri kopmaz
+- **SAVUNMADAYSAN** site seçmezsin — aynı default setup'ı üçüncü kez okutma, rotasyonu erkene çek
 
 ## Uzatma ve Maç Sayısı Round'u
 
@@ -319,13 +342,13 @@ Bu blokları düşmanın tekrar eden bir alışkanlığını gördüğünde kull
 
 Kayıpların büyük kısmı birlikte hareket edememekten gelir; bilgi havadayken açılan boşluk küçük bir penceredir.
 
-- **Örnek**: Sunset'te takım arkadaşının recon util'i Mid'de düşmanı gösterdi ama kimse basmadı, düşman yeniden açısına oturdu ve taze bilgi boşa gitti — recon biter bitmez, araya süre koymadan geniş açıyla peek at.
+- **Örnek**: Sunset'te recon Mid'de düşmanı gösterdi ama kimse basmadı, düşman yeniden açısına oturdu — recon biter bitmez, süre koymadan geniş açıyla peek at.
 
 ### Bilgi havadayken bas
 
 - **IF** takım arkadaşının recon util'i daha havadayken kimse geniş açıyla peek atmıyorsa
 - **MEANING** o boşlukta savunan düşman yeniden açısına oturdu, taze bilgi boşa gitti
-- **COUNTER** recon düşmanı gösterdiği AN bekleme, geniş açıyla peek at; recon bitmeden, düşman açısını yeniden kurmadan bas; yerini biliyorken o pencerede vur
+- **COUNTER** recon düşmanı gösterdiği AN bekleme, geniş açıyla peek at; recon bitmeden, düşman açısını yeniden kurmadan bas
 - **WHY** bilgi geç kullanılırsa eskir; düşman bir sonraki noktaya geçtiyse elindeki bilgi geçersizdir
 
 ### Util'le açı kapat, sadece öldürmek için harcama
@@ -337,7 +360,7 @@ Kayıpların büyük kısmı birlikte hareket edememekten gelir; bilgi havadayke
 
 ## Erken Round Ölümleri
 
-- **Örnek**: Ascent pistol round'unda util'siz A Site'a koşup hazır bekleyen düşmana öldün — girişi en az bir util ile aç: girişe smoke ya da içeri flash, sonra gir.
+- **Örnek**: Ascent pistol round'unda util'siz A Site'a koşup hazır bekleyen düşmana öldün — girişi en az bir util'le aç, sonra gir.
 
 - **IF** pistol ve ilk silah round'larında ölümlerin yoğunsa
 - **MEANING** ya ekonomi kararı kötü ya da util kullanmadan site'a koşuyorsun; bu karar hatasıdır, nişan hatası değil
@@ -348,53 +371,45 @@ Kayıpların büyük kısmı birlikte hareket edememekten gelir; bilgi havadayke
 
 - **IF** pistol round'unda savunmada açık bir hattı tek başına tutup kalabalık girişe öldüysen
 - **MEANING** pistol'de herkesin gücü eşit; açık hatta duran, ilk vuruşu alsa bile ikinci ve üçüncü düşmana sayıyla ezilir
-- **COUNTER** girişin dibini değil, tek adımda kapanacağın köşeyi tut; ilk düşmanı vurduğun AN kapan ve açı değiştir; takım arkadaşınla trade mesafesinde durun — biri düşerse diğeri anında karşılık versin
+- **COUNTER** girişin dibini değil, tek adımda kapanacağın köşeyi tut; ilk düşmanı vurduğun AN kapan ve açı değiştir; takım arkadaşınla trade mesafesinde durun
 - **WHY** kapanıp açı değiştiren savunmacı kalabalığa sayı vermez; pistol round'u verdirmediğin sayıyla kazanılır
 
 ## Temel Mekanik — Tavan Değil, Zemin
 
-Aşağıdaki temel her seviyede geçerlidir; ileri içgörünün yerine geçmez, üstüne biner. Util'siz site girişinin dersi "Erken Round Ölümleri" bloğundadır — kör/util'siz giriş ölümünde o bloğu kullan.
+Temel her seviyede geçerlidir. Util'siz giriş ölümünde "Erken Round Ölümleri" bloğunu kullan.
 
 ### Ekonomide takımla aynı kararı ver
 
 - **IF** takımın yarısı tam alım yapıp yarısı save yapıyorsa
 - **MEANING** ne tam güçtesin ne de gerçekten save'desin — iki dünyanın da en kötüsü
-- **COUNTER** round başında takım kredisine birlikte bakın ve tek karar verin: kredi herkese yetiyorsa herkes tam alsın, yetmiyorsa herkes save yapsın; yarı yarıya bölünme
+- **COUNTER** round başında takım kredisine birlikte bakın, tek karar verin: yetiyorsa herkes tam alsın, yetmiyorsa herkes save yapsın; yarı yarıya bölünme
 - **WHY** koordineli ekonomi bir sonraki round'a herkesin tam silahla girmesini sağlar
 
 ## Post-Plant Ölümleri
 
-Spike kurulu ve saldırıdasın: bomba senin için sayıyor, acele etmek zorunda olan taraf düşman.
+Spike kurulu ve saldırıdasın: bomba senin için sayıyor, acele etmek zorunda olan taraf düşman. Derin taktik (plant spotu, util sırası, oyuncu sayısına göre plan) spike kuruluyken prompt'a giren POST-PLANT PLAYBOOK bloğunda — detayı oradan al.
 
-- **Örnek**: Bind'de B Site'a spike kurdun, spike'ın dibinde beklerken retake Hookah'tan ve B Long'dan iki koldan girdi ve öldün — spike'ın üstünde durma; defuse'u gören uzak açıya çekil, util'i defuse sesine sakla.
+- **Örnek**: Bind'de B Site'a spike kurdun, dibinde beklerken retake Hookah ve B Long'dan iki koldan girdi — spike'ın üstünde durma; defuse'u gören uzak açıya çekil, util'i defuse sesine sakla.
 
 ### Çapraz açı kur, tek noktadan tutma
 
 - **IF** spike kurulduktan sonra saldırıda tek bir açıdan site'ı tutarken öldüysen (spikePlanted ve sen saldırıdaysan, takım arkadaşların azaldıysa)
-- **MEANING** retake gelen takım senin tek açını kolayca temizledi; bilgiyi tek noktadan verdin ve trade'lenecek arkadaşın yoktu
-- **COUNTER** spike'ı iki ayrı açıdan tut: biri defuse hattını, diğeri giriş hattını görsün; düşman birini temizlerken diğeri trade alsın ya da bilgi versin
-- **WHY** post-plant'ta zaman senin lehine — onlara gitme, onları iki ateş hattına gelmeye zorla; acele eden taraf retake yapandır
+- **COUNTER** spike'ı iki ayrı açıdan tut — biri defuse hattını, diğeri giriş hattını görsün; acele eden taraf retake yapandır, onlara gitme, iki ateş hattına gelmeye zorla
 
 ### Zamanı oyna, defuse sesini bekle
 
 - **IF** spike kuruluyken erken peek atıp öldüysen, oysa beklemen yeterdi
-- **MEANING** avantaj sendeyken gereksiz bilgi aramaya çıktın; bomba zaten senin için sayıyor
-- **COUNTER** post-plant'ta peek arama; defuse başlama sesini ya da ilk kontağı bekle, util'ini (molly/yavaşlatma) defuse'u bozmak için sakla
-- **WHY** retake yapan taraf bombayı çözmek zorunda — bekleyen taraf, sesle tetiklenip util atan taraftır, çünkü inisiyatif zaten sende
+- **COUNTER** post-plant'ta peek arama; bomba senin için sayıyor — defuse başlama sesini ya da ilk kontağı bekle, util'ini defuse'u bozmak için sakla
 
 ### Sayı azken uzak açıya çekil
 
 - **IF** spike kurulu ve sayıca azken (1v2, 2v3) site içinde tutuş verirken öldüysen
-- **MEANING** az kişiyle iki ayrı açı kurulamaz; site içinde kalan, retake util'inin ve çapraz girişin ortasında kalır
-- **COUNTER** site içini bırak, defuse'u gören uzak açıya çekil; peek arama, util'i defuse başladığı AN at, dövüşü ancak o zaman aç
-- **WHY** uzak açı seni retake util'inden çıkarır; spike sayarken tek işin defuse'u bozmak, öldürmek değil
+- **COUNTER** site içini bırak, defuse'u gören uzak açıya çekil — uzak açı seni retake util'inden çıkarır; util'i defuse başladığı AN at, dövüşü ancak o zaman aç
 
 ### Spike'ın dibinde bekleme
 
 - **IF** spike'ın hemen üstünde ya da bitişik köşede beklerken öldüysen
-- **MEANING** retake yapan herkes önce spike'a bakar; oraya yapışan, her util'in ve ilk atışın hedefidir
-- **COUNTER** kurulumdan sonra spike'tan uzaklaş; spike'ı GÖREN ama spike'ta OLMAYAN bir köşeye geç — defuse'a oturan zaten görüş hattına girmek zorunda
-- **WHY** mesafe sana ilk atışı ve çekilme adımını verir; spike'a yapışan ilk temasta düşer
+- **COUNTER** spike'ı GÖREN ama spike'ta OLMAYAN bir köşeye geç — retake yapan herkes önce spike'a bakar; mesafe sana ilk atışı ve çekilme adımını verir
 
 ### Arkanı kolla — retake sarmadan da gelir
 
@@ -407,7 +422,7 @@ Spike kurulu ve saldırıdasın: bomba senin için sayıyor, acele etmek zorunda
 
 Spike kurulu ve savunmadasın: zaman düşmanın lehine işliyor, her hamlen defuse'a yaramalı.
 
-- **Örnek**: Haven'da C'ye spike kuruldu, takımı beklemeden C Long'dan tek girip post-plant açısına öldün — rotasyonu bekle, util girişle aynı anda insin, tek dalgada girin; sayı sende değilse hiç girme, silahı taşı.
+- **Örnek**: Haven'da C'ye spike kuruldu, takımı beklemeden C Long'dan tek girip post-plant açısına öldün — rotasyonu bekle, util girişle aynı anda insin, tek dalgada girin.
 
 ### Util'le defuse'u geciktir, dağınık girme
 
@@ -415,6 +430,7 @@ Spike kurulu ve savunmadasın: zaman düşmanın lehine işliyor, her hamlen def
 - **MEANING** retake'i koordinesiz aldın; düşmanın post-plant açılarına tek tek yem oldun ve defuse için zaman kalmadı
 - **COUNTER** önce util'i (smoke/flash/molly) defuse hattını açmak ve düşman açılarını kapatmak için harca, sonra takımla AYNI anda sayı bas; tek başına entry alma
 - **WHY** retake bir zaman yarışıdır — util düşmanın açısını bozarsa defuse'a yer açılır; dağınık giren her oyuncu ayrı bir 1v1 hediye eder
+- **ULT'UN DOLUYSA** (ultReady) ve ult'un giriş açısını bozan türdense retake'i ult'la aç, takım aynı anda sayı bassın — yalnız ölüm sonrası çalışan diriliş ult'u (Clove) bu derse girmez, onda standart util sırası geçerli
 
 ### Defuse'u böl, çözenin arkasını tut
 
@@ -444,11 +460,18 @@ Spike kurulu ve savunmadasın: zaman düşmanın lehine işliyor, her hamlen def
 - **COUNTER** siteye düz girme; düşman kurulu spike'a güvenip dağılıyorsa sessiz yürü, defuse'u siteden gelen ayak sesi tamamen kesilince aç; ses dönerse bırak ve köşeye kapan; siteden çıkan yoksa silahı taşı
 - **WHY** sessiz defuse tek savunmacının tek gerçek şansıdır; düz giriş düşmana hem sayıyı hem silahı verir
 
+### Sayı avantajlı retake'i tek tek eritme
+
+- **IF** spike kurulu, savunmadasın ve sayı avantajı sendeyken retake'te öldüysen
+- **MEANING** avantajı tek tek girerek erittin — her solo giriş düşmana ardışık bir 1v1 hediye eder; bir kayıp avantajı eşitler, defuse penceresi daralır
+- **COUNTER** sayı sendeyken bile trade dizilimiyle gir: aynı anda, trade mesafesinde, util önden; biri düşerse anında geri alınsın
+- **WHY** avantaj ancak birlikte girişte sayıya dönüşür; tek tek eriyen takım hem sayıyı hem defuse süresini birden kaybeder
+
 ## Lurk Ölümleri
 
 Takım baskı kurarken haritanın uzak kolunda tek başınasın; lurk'ün değeri görünmezlik ve kesilen rotasyondur.
 
-- **Örnek**: Sunset'te takım siteye baskı kurarken Mid'de lurk'teydin, takımın ilk temasından önce dövüş açıp tek öldün — teması beklemeden tetiği çekme; rotasyon sesini önce bildir, düşman siteye dönünce arkadan bas.
+- **Örnek**: Sunset'te takım siteye baskı kurarken Mid'de lurk'teydin, ilk temastan önce dövüş açıp tek öldün — teması beklemeden tetiği çekme, düşman siteye dönünce arkadan bas.
 
 ### Lurk'ü execute'a senkronla
 
@@ -466,27 +489,29 @@ Takım baskı kurarken haritanın uzak kolunda tek başınasın; lurk'ün değer
 
 ## Ölüm Tipini Doğru Eşle
 
-Round mesajında [ÖLÜM-TİPİ İPUCU] (EN istekte [DEATH-TYPE HINT]) varsa tipi ORADAN al, kendin türetme — aşağıdaki eşleme SADECE ipucu yoksa geçerlidir. Bloğu ölümün tipi seçer, rank değil; tipi killerInfo, deathLocation, HP düşüşü ve score'dan türet.
+[ÖLÜM-TİPİ İPUCU] / [DEATH-TYPE HINT] varsa tipi ORADAN al, kendin türetme — bu eşleme SADECE ipucu yoksa geçerlidir; tipi killerInfo, deathLocation ve score'dan türet.
 
-- **Crosshair / nişan ölümü** (göründüğün an tüfekle vuruldun, HP bir anda sıfıra düştü) → Aim ve Crosshair blokları.
-- **Pozisyon ölümü** (deathLocation site ortası ya da çekiş yolu olmayan açık nokta) → Pozisyon ve Açı blokları.
-- **Zamanlama ölümü** (duvar/smoke açılırken girdin, geç çıktın, tetikleyicisiz daldın) → Zamanlama blokları.
-- **Operator ölümü** (killerInfo silahı operator/keskin nişancı, uzun hattan) → Zamanlama: Operatöre karşı timing'ini kır.
-- **Tekrar / okunma ölümü** (aynı açı, pozisyon ya da util sırası üst üste) → Okunabilirlik blokları.
-- **Aynı rakibe ölüm** (pozisyon iyi ama hep aynı oyuncuya ölüyorsun) → Sızıntıyı kapat bloğu.
-- **Karar / ekonomi ölümü** (üstünlüksüz dövüş, rakip eli okunmadı, baskıda kötü seçim) → Karar ve Ekonomi blokları.
-- **Eko ölümü** (killerInfo silahı sheriff/spectre/classic gibi ucuz silah) → Rakip eline bak: ikiniz de eko/yarı alımdaysanız save'e geçme, yarım alımla bas — ama ucuz silah kazanılmış pistol'ün bonus'u da olabilir, düşman ekonomisini round geçmişinden doğrula.
-- **Düşük can ölümü** (HP 50 altındayken dezavantajda dövüş aradın) → Düşük canla dövüşü zorlama — silahı kurtar.
-- **Avantajlı durumda ölüm** (sayı üstünündeyken gereksiz peek) → Avantaj Yönetimi blokları.
-- **Clutch ölümü** (son canlı sensin, 1vX) → Clutch'ı 1v1 dizisine indir + baskıda üç soru.
-- **Erken round ölümü** (pistol / ilk silah round'u) → Erken Round bloğu.
-- **Dolu ult'la ölüm** (ultReady doluyken öldün) → Karar ve Ekonomi: Dolu ult'la ölme.
-- **Kör giriş ölümü** (util'siz açık alanda giriş denemesi) → Erken Round'daki util'le giriş dersi + Pozisyon: siperin yanında dur.
-- **Post-plant ölümü** (spike kurulu + sen saldırıdasın) → Post-Plant Ölümleri blokları.
-- **Retake ölümü** (spike kurulu + sen savunmadasın) → Retake Ölümleri blokları.
-- **Lurk ölümü** (saldırıda takımdan kopuk, uzak bölgede tek başına) → Lurk Ölümleri bloğu.
-- **Entry / trade'siz ölüm** (saldırıda solo giriş, geri alınmadı) → Pozisyon: solo peek yerine geri-alım kurulumu.
-- **Savunma açılış ölümü** (savunmadasın, spike yokken açılışta takımın ilk ölümü sensin) → Pozisyon: Savunmada erken ilk-kanı verme.
-- **Sayı dezavantajında geç ölüm** (round sonunda sayı net karşıdayken dövüş aradın) → Karar ve Ekonomi: Sayı azken silahı taşı.
-- **Operator kaybı** (loadout'unda Operator varken öldün) → Karar ve Ekonomi: Operator'ü bedavaya teslim etme.
-- **Tam alımda erken ölüm** (tam alım round'u, saldırıda açılışta öldün) → Karar ve Ekonomi: Tam alımda ilk temas util'in işi.
+- **Nişan** (göründüğün an tüfekle vuruldun) → Aim ve Crosshair blokları.
+- **Pozisyon** (site ortası, çekiş yolu yok) → Pozisyon ve Açı blokları.
+- **Zamanlama** (smoke açılırken, geç, tetikleyicisiz) → Zamanlama blokları.
+- **Keskin nişancıya ölüm** → Operatöre karşı timing'ini kır.
+- **Tekrar/okunma** (aynı açı/util sırası üst üste) → Okunabilirlik blokları.
+- **Hep aynı rakibe** → Sızıntıyı kapat bloğu.
+- **Karar/ekonomi** (üstünlüksüz dövüş) → Karar ve Ekonomi blokları.
+- **Ucuz silaha ölüm** → Rakip eline bak; düşman ekonomisini round geçmişinden doğrula.
+- **Ağır hasarlıyken dövüş** → Düşük canla dövüşü zorlama — silahı kurtar.
+- **Sayı üstünken gereksiz peek** → Avantaj Yönetimi blokları.
+- **Son canlı (1vX)** → 1v2 ise Clutch'ı 1v1 dizisine indir + baskıda üç soru; 1v3+ ve spike yoksa Sayı azken silahı taşı.
+- **Pistol/ilk silah** → Erken Round bloğu.
+- **ultReady doluyken** → Dolu ult'la ölme.
+- **Util'siz kör giriş** → Erken Round util dersi + siperin yanında dur.
+- **Spike kurulu**: saldırıda → Post-Plant blokları; savunmada → Retake blokları; savunmada sayı avantajıyla → Sayı avantajlı retake'i tek tek eritme.
+- **Lurk** (takımdan kopuk uzakta) → Lurk Ölümleri bloğu.
+- **Solo giriş, trade yok** → Solo peek yerine geri-alım kurulumu.
+- **Savunma açılışında ilk ölüm** → Savunmada erken ilk-kanı verme.
+- **Sayı azken geç dövüş** → Sayı azken silahı taşı.
+- **Loadout'ta Operator** → Operator'ü bedavaya teslim etme.
+- **Tam alımda açılış ölümü** (saldırı) → Tam alımda ilk temas util'in işi.
+- **Geç round, plant yok**: saldırıda → Geç round'da plant yoksa bekleme; savunmada → Plant yoksa savunmada zaman senin.
+- **Seri**: 3+ kayıp → Seri Kayıp Sonrası Round; 3+ kazanç → Kazanma serisinde bonus baskınına hazır ol.
+- **Skor uzatma/maç sayısı** → Uzatma ve Maç Sayısı Round'u.

@@ -52,6 +52,17 @@ export function extractKillerWeapon(killerInfo?: string): { name: string; cls: W
   return m ? { name: m[1].toLowerCase(), cls: WEAPON_CLASS[m[1].toLowerCase()] } : null;
 }
 
+/**
+ * loadout metninden oyuncunun KENDİ silah sınıfını çıkar (2026-07-19).
+ * Aynı sözlük-BAĞLI kural: serbest metin asla silah sayılmaz → anti-uydurma.
+ * Sinyal: loadout (OCR, zaten buildWeaponCompDirective'e geliyor).
+ */
+export function extractLoadoutWeapon(loadout?: string): { name: string; cls: WeaponClass } | null {
+  if (!loadout) return null;
+  const m = loadout.toLowerCase().match(ANY_RE);
+  return m ? { name: m[1].toLowerCase(), cls: WEAPON_CLASS[m[1].toLowerCase()] } : null;
+}
+
 // ── Komp arketipi ─────────────────────────────────────────────
 // weapon-comp-compact.md "## Komp Okuma" H3 slug'larıyla BİREBİR aynı adlar.
 export type CompArchetype =
@@ -112,6 +123,13 @@ export function buildWeaponCompDirective(
   lang: "tr" | "en" = "tr",
 ): string {
   if (!weapon && (!archetype || archetype === "standart")) return "";
+  // İKİNCİ işaretçi (2026-07-19): rehberin her silah-sınıfı bölümündeki "Bunu
+  // taşıyorsan" dersi (oyuncunun KENDİ silahı) yazılıydı ama hiçbir işaretçi onu
+  // seçmiyordu. Sinyal: loadout. Katil-silahı işaretçisi BİRİNCİL kalır; kendi-silah
+  // satırı yalnız sınıf katilinkinden FARKLIYSA eklenir (aynı bölümü iki kez
+  // işaret etmemek + direktifi kısa tutmak için).
+  const own = extractLoadoutWeapon(loadout);
+  const ownDiffers = own !== null && own.cls !== weapon?.cls;
   if (lang === "en") {
     const L: string[] = ["\n[WEAPON+COMP HINT — from the WEAPON + COMP GUIDE in the system prompt (guide is in Turkish)]"];
     if (weapon) {
@@ -119,6 +137,12 @@ export function buildWeaponCompDirective(
         `The weapon that killed you: ${weapon.name} → the guide section titled "${WEAPON_CLASS_LABEL[weapon.cls]}". ` +
         `Tie that section's lesson to THIS round's callout and enemy agent, restated in ENGLISH — do not copy its sentence` +
         (loadout ? `; the player's own weapon is ${loadout}, compare range/duel odds against it.` : "."),
+      );
+    }
+    if (ownDiffers) {
+      L.push(
+        `The player's OWN weapon: ${own.name} → the "Bunu taşıyorsan" line under the guide section titled ` +
+        `"${WEAPON_CLASS_LABEL[own.cls]}" — fit the position/range advice to that weapon, restated in ENGLISH.`,
       );
     }
     if (archetype && archetype !== "standart") {
@@ -135,6 +159,12 @@ export function buildWeaponCompDirective(
       `Seni öldüren silah: ${weapon.name} → rehberin "${WEAPON_CLASS_LABEL[weapon.cls]}" bölümü. ` +
       `O bölümün dersini BU round'un callout'una ve düşman ajanına bağla — cümlesini KOPYALAMA` +
       (loadout ? `; oyuncunun elindeki silah ${loadout}, mesafe/düello kıyasını buna göre yap.` : "."),
+    );
+  }
+  if (ownDiffers) {
+    L.push(
+      `Oyuncunun KENDİ silahı: ${own.name} → rehberin "${WEAPON_CLASS_LABEL[own.cls]}" bölümündeki ` +
+      `"Bunu taşıyorsan" dersi — pozisyon/menzil önerini o silaha göre ver.`,
     );
   }
   if (archetype && archetype !== "standart") {
