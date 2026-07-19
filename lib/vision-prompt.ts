@@ -68,14 +68,14 @@ export function buildFactSheet(
     return `\n\n[DEATH-DATA CONTRACT — DEFINITIVE FOR THIS ROUND]\n`
       + `KNOWN (use ONLY these as facts): ${knownLine}.\n`
       + `UNKNOWN (NEVER name/claim/invent these): ${unknownLine}.\n`
-      + `Rule: never fill in an UNKNOWN fact. If the killer is unknown say "an enemy"; if location/weapon/headshot/counts/spike/route are unknown, do NOT bring that topic up or guess from the screen/roster.`;
+      + `Rule: never fill in an UNKNOWN fact. If the killer is unknown say "an enemy"; if location/weapon/headshot/counts/spike/route are unknown, do NOT bring that topic up or guess from the screen/roster. HP/health claims are ALWAYS banned (never "at low/full health").`;
   }
   const knownLine = known.length ? known.join(", ") : "(bu round net olgu yok)";
   const unknownLine = unknown.length ? unknown.join(", ") : "(yok)";
   return `\n\n[ÖLÜM-VERİ SÖZLEŞMESİ — BU ROUND İÇİN KESİN]\n`
     + `BİLİNEN (yalnız bunları olgu olarak kullan): ${knownLine}.\n`
     + `BİLİNMEYEN (bunları ASLA İSİMLENDİRME/İDDİA ETME, uydurma): ${unknownLine}.\n`
-    + `Kural: BİLİNMEYEN bir olguyu doldurma. Katil bilinmiyorsa "bir düşman" de; yer/silah/headshot/sayı/spike/rota bilinmiyorsa o konuyu AÇMA, ekrandan/roster'dan tahmin etme.`;
+    + `Kural: BİLİNMEYEN bir olguyu doldurma. Katil bilinmiyorsa "bir düşman" de; yer/silah/headshot/sayı/spike/rota bilinmiyorsa o konuyu AÇMA, ekrandan/roster'dan tahmin etme. CAN/HP iddiası HER ZAMAN yasak ("az canla/tam canla" asla yazma).`;
 }
 
 export const ROUND_FEEDBACK_SCHEMA = {
@@ -88,7 +88,7 @@ export const ROUND_FEEDBACK_SCHEMA = {
     properties: {
       deathAnalysis: {
         type: "string",
-        description: "1-2 cümle Türkçe koç sesi. ZORUNLU: 1 somut düzeltme (callout + util/karar). killerInfo VARSA killer ajan + silahı yaz; killerInfo YOKSA ajan ismi UYDURMA, 'bir düşman' de (asla 'X ya da Y' aday-listesi, asla 'unknown'). HEADSHOT bilgisi YOK — 'kafadan vuruldun/öldün' YAZMA (headshot okunmuyor); sadece 'öldürdü/vurdu' de. Muğlak kelime (genelde/biraz) YASAK. Örn (killer biliniyor): 'B Main'de geniş açı tuttun, Cypher seni operator'la öldürdü — smoke atmadan o köşeyi sallama.' Örn (killer yok): 'B Main'de utility'siz geniş açıda kaldın, bir düşman seni oradan vurdu — köşeyi smoke'layıp öyle tut.' Kullanıcı mesajında [ÖLÜM-TİPİ] direktifi geldiyse deathAnalysis'i O tipin dersine çıpala ve 'açıkta/utility'siz' kalıbını yalnızca tip gerçekten util-yokluğu ise kullan.",
+        description: "1-2 cümle Türkçe koç sesi. ZORUNLU: 1 somut düzeltme (callout + util/karar). killerInfo VARSA killer ajan + silahı yaz; killerInfo YOKSA ajan ismi UYDURMA, 'bir düşman' de (asla 'X ya da Y' aday-listesi, asla 'unknown'). HEADSHOT bilgisi YOK — 'kafadan vuruldun/öldün' YAZMA (headshot okunmuyor); sadece 'öldürdü/vurdu' de. CAN/HP İDDİASI YASAK — 'az canla', 'düşük canla', 'tam canla', 'canın azken' ve benzeri HİÇBİR can ifadesi yazma (HP verisi çatışma-öncesi canı kanıtlamaz). Muğlak kelime (genelde/biraz) YASAK. Örn (killer biliniyor): 'B Main'de geniş açı tuttun, Cypher seni operator'la öldürdü — smoke atmadan o köşeyi sallama.' Örn (killer yok): 'B Main'de utility'siz geniş açıda kaldın, bir düşman seni oradan vurdu — köşeyi smoke'layıp öyle tut.' Kullanıcı mesajında [ÖLÜM-TİPİ] direktifi geldiyse deathAnalysis'i O tipin dersine çıpala ve 'açıkta/utility'siz' kalıbını yalnızca tip gerçekten util-yokluğu ise kullan.",
       },
       enemyAnalysis: {
         type: "array",
@@ -121,7 +121,7 @@ const ROUND_FEEDBACK_SCHEMA_EN = {
     properties: {
       deathAnalysis: {
         type: "string",
-        description: "1-2 sentence ENGLISH coach voice. MANDATORY: 1 concrete fix (callout + util/decision). If killerInfo EXISTS, name the killer agent + weapon; if killerInfo is MISSING do NOT invent an agent name, say 'an enemy' (never a candidate list 'X or Y', never 'unknown'). There is NO headshot data — do NOT write 'headshot/one-tapped in the head'; just say 'killed/shot you'. Vague words (generally/a bit) are BANNED. Example (killer known): 'You held a wide angle at B Main and the Cypher killed you with the Operator — don't take that corner without a smoke.' Example (no killer): 'You were caught wide open at B Main without utility and an enemy shot you — smoke the corner before holding it.' If a [DEATH-TYPE] directive is present in the user message, anchor deathAnalysis to THAT type's lesson and use the 'caught without utility' framing ONLY if the type really is a utility-absence type.",
+        description: "1-2 sentence ENGLISH coach voice. MANDATORY: 1 concrete fix (callout + util/decision). If killerInfo EXISTS, name the killer agent + weapon; if killerInfo is MISSING do NOT invent an agent name, say 'an enemy' (never a candidate list 'X or Y', never 'unknown'). There is NO headshot data — do NOT write 'headshot/one-tapped in the head'; just say 'killed/shot you'. HP/HEALTH CLAIMS ARE BANNED — never write 'at low HP', 'low on health', 'at full HP', 'half health' or any health statement (the HP sample cannot prove pre-fight health). Vague words (generally/a bit) are BANNED. Example (killer known): 'You held a wide angle at B Main and the Cypher killed you with the Operator — don't take that corner without a smoke.' Example (no killer): 'You were caught wide open at B Main without utility and an enemy shot you — smoke the corner before holding it.' If a [DEATH-TYPE] directive is present in the user message, anchor deathAnalysis to THAT type's lesson and use the 'caught without utility' framing ONLY if the type really is a utility-absence type.",
       },
       enemyAnalysis: {
         type: "array",
@@ -152,7 +152,7 @@ export const SYSTEM_PROMPT_EN_ADDENDUM = `
 
 ═══ ENGLISH OUTPUT MODE — ACTIVE FOR THIS REQUEST ═══
 
-The player's language is ENGLISH. Everything above defines coaching QUALITY, structure and the anti-fabrication rules — they all still apply. The Turkish example scenarios above illustrate STRUCTURE ONLY. Your output MUST be natural English coach language. Never output a Turkish word or sentence (universal game terms stay: peek, trade, smoke, eco, retake, lurk, anchor, rotate, default, execute).
+The player's language is ENGLISH. Everything above defines coaching QUALITY, structure and the anti-fabrication rules — they all still apply (including the HP ban: never claim the player was at low/full/half health). The Turkish example scenarios above illustrate STRUCTURE ONLY. Your output MUST be natural English coach language. Never output a Turkish word or sentence (universal game terms stay: peek, trade, smoke, eco, retake, lurk, anchor, rotate, default, execute).
 
 ENGLISH EXAMPLE SCENARIOS (learn the pattern, do NOT copy word-for-word):
 
@@ -230,7 +230,7 @@ ANALİZ ÖNCELİK SIRASI
 4. enemyComp (düşman composition counters)
 5. economyType + credits + loadout (ekonomi kararları)
 6. alliesAlive/enemiesAlive + spikePlanted (durum farkındalığı)
-7. can durumu ([ÖLÜM-TİPİ] direktifi taşır: "düşük canla" vb.) — feedback metnine SAYISAL HP DEĞERİ ASLA YAZMA ("41 HP" YASAK); doğal söyle: "düşük canla", "tam canla"
+7. ⚠ CAN/HP İDDİASI TAMAMEN YASAK (canlı-test #8): "az canla", "düşük canla", "tam canla", "canın azken", "yarım canla", sayısal HP ("41 HP") — HİÇBİRİNİ YAZMA. HP verisi ölüm anındaki tek örnektir ve çatışma-öncesi canı KANITLAMAZ; can hakkında herhangi bir iddia = RED BAYRAĞI. Feedback'i cana değil karara/pozisyona/utility'e bağla.
 8. ultReady (ult kullanılabilir miydi)
 9. roundTimerAtDeath (timing baskısı)
 

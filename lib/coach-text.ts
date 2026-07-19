@@ -339,6 +339,33 @@ export function stripNumericHp(text: string, lang: "tr" | "en"): string {
 }
 
 /**
+ * CAN/HP iddiası süzgeci (canlı-test #8, softi 2026-07-19: "tam canla çatışırken
+ * 'az canla peek attın' geldi"). Ölüm anındaki tek HP örneği çatışma-ÖNCESİ canı
+ * kanıtlayamaz → nitel can iddiaları ("az canla", "tam canla", "at low HP"...)
+ * TAMAMEN yasak; prompt yasağını delen her form burada deterministik silinir.
+ * stripNumericHp'nin ürettiği kova ifadeleri ("düşük canla") de dahil — sayısal
+ * form da nihai olarak silinmiş olur. Yalnız İFADE silinir, cümle korunur
+ * ("az canla peek attın" → "peek attın").
+ */
+export function stripHpClaims(text: string, lang: "tr" | "en"): string {
+  if (!text) return text;
+  let t = text;
+  if (lang === "tr") {
+    // "az canla / çok az canla / düşük canla / tam canla / full canla / yarım
+    // canla / düşük HP'yle" — sıfat + can/hp + Türkçe ek kuyruğu.
+    t = t.replace(/\b(?:çok\s+)?(?:az|düşük|tam|full|yarım)\s*(?:can|hp)['’]?[a-zçğıöşü]*/gi, "");
+    // "canın azken / canı düşükken / canın azdı" kalıpları.
+    t = t.replace(/\bcan[ıi]n?[ıi]?\s+(?:az|düşük)[a-zçğıöşü]*/gi, "");
+  } else {
+    // "at/with/on low|full|half|high HP/health" + bare "low HP" + "low on health".
+    t = t.replace(/\b(?:at|with|on)\s+(?:low|full|half|high)\s+(?:hp|health)\b/gi, "");
+    t = t.replace(/\b(?:low|full|half|high)\s+(?:hp|health)\b/gi, "");
+    t = t.replace(/\blow\s+on\s+health\b/gi, "");
+  }
+  return t;
+}
+
+/**
  * Türkçe lokatif ek seçici (beta cilası 2026-07-09): "X'da/de/ta/te" eklerini
  * sabit kodlamak ünlü uyumunu bozuyordu ("Ascent'da" ✗ → "Ascent'te" ✓).
  * Kural: son ünlü kalın (a/ı/o/u) → -da, ince (e/i/ö/ü) → -de; son harf sert
@@ -375,7 +402,9 @@ export function trLocative(word: string): string {
  */
 export function cleanCoachText(text: string, lang: "tr" | "en"): string {
   if (!text) return text;
-  let t = plainifyAbilities(stripNumericHp(text, lang), lang); // HP strip → ability codenames → plain
+  // Sıra: sayısal HP → kova ifadesi (stripNumericHp) → kova dahil TÜM nitel
+  // can iddiaları silinir (stripHpClaims, canlı-test #8) → ability düzlemesi.
+  let t = plainifyAbilities(stripHpClaims(stripNumericHp(text, lang), lang), lang);
   for (const a of CLEAN_AGENT_NAMES) {               // phoenix → Phoenix (both langs)
     t = t.replace(new RegExp("\\b" + a + "\\b", "gi"), a);
   }

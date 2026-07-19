@@ -121,7 +121,13 @@ export function classifyDeath(b: DeathSignals): DeathType {
   // Eco dalı KENDİ ekonomine bakar (denetim: katilin silahından oyuncunun ekonomisini
   // çıkarsamak yanlıştı — half_buy'da spectre'ye ölen "silahı yaktın" dersi alıyordu).
   if (eco === "eco" || eco === "force_buy") return "eco-force-loss";      // economy decision
-  if (typeof hp === "number" && hp > 0 && hp < 50) return "low-hp-no-save"; // should have saved
+  // low-hp-no-save TETİKLEYİCİSİ KALDIRILDI (canlı-test #8, softi 2026-07-19):
+  // ölüme ≤4sn kala alınan HP örneği çatışma İÇİNDEKİ hasarı yakalıyor — tam
+  // canla girip kırpılarak ölen oyuncu "düşük canla, save etmeliydin" dersi
+  // alıyordu (yanlış: ders "dövüşe ZATEN düşük girme" içindir ve tek örnekten
+  // giriş-anı HP'si KANITLANAMAZ). softi kuralı: kesin veri yoksa CAN'la ilgili
+  // feedback YOK. Tip enum'da + rehberde duruyor (desktop echo + verify-kb
+  // çapa uyumu); yalnız erişilemez.
   if (aliveReliable && aa === 0) return "clutch-lost";                    // last alive (sayı okunduysa)
   if (aliveReliable && (aa as number) > (ea as number)) return "over-peek-advantage"; // man-advantage
   if (atk && b.tradedByAlly === false) return "entry-no-trade";          // un-traded entry
