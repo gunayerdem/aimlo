@@ -119,3 +119,15 @@ Ult maliyeti ikisinde de eşit. Neon ult'u direkt kill yapar. Cypher ult'u tek b
 Radiant seviyede Cypher oyuncuları tuzak hattını her round değiştirir. Aynı hattı iki round üst üste koyarlarsa Neon atlatır, bilgi kesilir. Neon tarafında ilk round'u bilgiye ayır — util yak, kamerayı bul, tuzakları öğren. İkinci round o bilgiyle gir.
 
 Bu eşleşmede kim daha çok bilgiye sahipse round o tarafa gider. Neon hız verir ama körü körüne hız bilginin karşısında kaybeder. Cypher bilgi verir ama Neon tuzak hattını öğrenince o bilgi kesilir. Her round bilgi savaşı baştan başlar — bir önceki round öğrendiğini sonrakinde kullan.
+
+## 8. Katman ve Stun Sırası
+
+**IF** aynı pozisyonda üst üste öldün (repeatedPosition)
+**MEANING** Cypher telleri aynı hizaya değil art arda farklı derinliklere dizdi — sen ilk katmanı geçince ikincisine basıyorsun
+**COUNTER** İlk tel tetiklenince sprint'e devam etme: stun'ı telin arkasındaki tutucu açıya sektir, ikinci hattı takım util'iyle aç, sonra bas
+**WHY** Tek katmanı hız geçer; katmanlı kurulumu ancak stun + sıralı giriş geçer — körlemesine sprint ikinci katmanın yemidir
+
+**IF** round'un ilk saniyelerinde öldün (deathTiming=erken)
+**MEANING** Hiçbir şeyi temizlemeden hazır kuruluma sprint ettin
+**COUNTER** Önce duvarla görüş hattını kapat, stun'ı at, tuzakçıyı açısından uzaklaştır — sonra sprint et
+**WHY** Util'siz hız, sadece hızlı ölümdür

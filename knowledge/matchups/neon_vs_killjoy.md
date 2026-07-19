@@ -116,3 +116,15 @@ Neon'un ekipmanı hız ve hasar üzerine: sprint, slide, stun, fast lane. Killjo
 **Pratik çalışma:** Taret otomatik nişan alır ve yakaladığında Neon'u yavaşlatır — yani sprintle önünden geçmek bedava can kaybıdır, çözüm tareti önce susturmak. Özel oyunda şunu çalış: taretin görüş hattına girmeden açıdan tareti tüfekle patlat, sonra sprintle gir. Ult ışınını taretin üstüne tutarsan hızla erir; bunu da tekrarlayıp refleksini oturt.
 
 **Koç testi:** Killjoy seni taret hattına çekmeye çalışır. Sen o hattı bırakıp alternatif koridora geçersin. Matchup bu seçimde döner — koridor sende ise sen kazanırsın, Killjoy'da ise Killjoy.
+
+## 8. Slide Çıkışı ve Zincir Sırası
+
+**IF** aynı pozisyonda üst üste öldün (repeatedPosition)
+**MEANING** Slide çıkış noktan okundu — Killjoy molly'yi girişine değil, slide'ının bittiği noktaya hazırlıyor
+**COUNTER** Slide'ı hep aynı yöne bitirme; çıkış yönünü ve giriş koridorunu round round değiştir
+**WHY** Molly girişte değil çıkışta patlarsa kaçacak yer kalmaz — çıkış noktası okunmayan Neon'a molly boşa gider
+
+**IF** öldün ve takım arkadaşın trade'ini alamadı (tradedByAlly=false)
+**MEANING** Taret-bot-molly zincirini tek başına kırmaya çalıştın
+**COUNTER** İlk halkayı (tareti) takım silahla sustursun; sen hızını ikinci halkada harca — zincir kırıldıktan sonra sprint Killjoy'u yakalar
+**WHY** Zincir sırayla sökülür; solo giren zincirin tamamını tek başına yer
