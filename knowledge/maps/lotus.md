@@ -103,6 +103,12 @@ WHY: Drop'tan giren, savunucunun arkasına düşer; oradan kurtulmak neredeyse i
 - Fake baskıya 3 kişi gönderme — 3 siteli haritada over-rotate = bedava site kaybı.
 - B anchor bilgi vermeden ölürse takım ne olduğunu anlayana kadar site gider. Ölmeden önce sesle ya da yazıyla söyle.
 
+### Site Bazlı Retake Rotaları
+- **A Retake**: A Stairs ve Tree'den iki kolla aynı anda gir. Saldırgan A Main + Root crossfire'ına yaslanır — A Main açısını smoke'la, Root köşesine flash at. Duvar kırıksa A Link açısı da saldırganın elinde: oraya da bir flash ayır. Silent Drop'u boş bırakma — post-plant'te oradan spike'a sarkan olur, bir kişi o hattı tutsun.
+- **B Retake**: Ana giriş B Upper'dan — yüksekten site zeminini görürsün. Saldırgan B Main + kapı tarafı crossfire'ı kurar: B Main açısını smoke'la, C Mound kapısının arkasında bekleyen saldırgana flash ya da molly at, sonra site'a in. Spike üstüne molly bırakılmışsa defuse'u molly sönünce başlat, üstünde erime.
+- **C Retake**: Ana kol C Hall'dan, sessiz kol Waterfall'dan girer. Mound saldırgandaysa yükseklik onun — Mound'a smoke at, o açı kapanmadan site zeminine yayılma. İki kol aynı anda girince C Main'deki saldırgan iki yöne birden bakamaz.
+- Kapı sesi retake'te silahtır: kapıyı açıp geçmek yerine sesi verip karşı koldan gir — post-plant oyuncusu kapıya dönerken asıl kol siteye iner.
+
 ## 5. Koçluk Satırları
 - "Lotus'ta round kapı, duvar, drop'la başlar. Bunları kullanmıyorsan haritanın yarısında yoksun."
 - "Kırılabilir duvarı her round kırmak strateji değil, refleks. Strateji şu: onu ne zaman kırıp ne zaman kırmayacağını seçmek."

@@ -159,6 +159,10 @@ En yaygın hata: smoke atıp flash beklemeden girmek. Savunucu smoke kenarında 
 
 Retake öncesi düşmanın yerini öğren: bot ya da recon at. Sonra takım olarak aynı anda gir.
 
+Site başına util sırası:
+- **A retake:** Generator arkasına molly — saldırgan spike'ı oradan izler. A Main açısına smoke, girişe flash; sonra Heaven + Generator + A Main kollarından aynı anda bas. Wine köşesini temizlemeden defuse'a başlama.
+- **B retake:** Market çıkışına önce flash — post-plant oyuncusu o kapıyı nişanlamış bekler. Closet'a molly, spike ile B Main açısı arasına smoke; Market + CT + Closet kollarından birlikte gir. B kapısı kapatılmışsa kırma sesini girişinle aynı ana denk getir — ses zaten çıkacak, bari saldırgan sana dönemeden çıksın.
+
 **WHY:** Post-plant tutan saldırgan senin nereden geleceğini biliyor ve ona göre durmuş. Tek yönden girersen tek açıya odaklanır, seni öldürür. Birden fazla yönden aynı anda girersen hangi yöne bakacağını seçmek zorunda kalır — o tereddüt senin avantajın.
 
 ## 5. Agent Tier Listesi

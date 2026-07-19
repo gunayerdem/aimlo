@@ -39,8 +39,7 @@ Round kazandığın an sıfırlanır. Kazandıktan sonra kaybedersen yine 1,900'
 - Pistol: 800
 - Pistol kazandıysan 2. round: 3,800
 - Pistol kaybettiysen 2. round: 2,700
-- Devre arası: herkes 800'e döner, birikim taşınmaz
-- Overtime: her round herkese sabit 5,000
+- Devre arası: herkes 800'e döner, birikim taşınmaz (overtime kuralı aşağıda kendi bölümünde)
 
 ---
 
@@ -155,6 +154,20 @@ DURUM: kaybedersen maç biter.
 NE ANLAMA GELİR: "sonraki round" diye bir şey yok.
 NE YAPARSIN: her krediyi harca, ne alabiliyorsan al.
 NEDEN: save etmek anlamsız — para taşımanın bir faydası kalmadı.
+
+---
+
+## Spike ve Ekonomi
+
+DURUM: eco ya da save round'undasın.
+NE ANLAMA GELİR: plant yine de para basar — spike dikilirse kaybetsen bile herkese +300 gelir, rakip retake için util de yakar.
+NE YAPARSIN: round'u kill için değil plant için oyna: hep birlikte tek site'a git, spike'ı dik, kalanını çapraz açıyla tut. Force silahıyla (Spectre) uzak açı kuramazsın — spike'ı siper arkasından yakın tut, defuse sesine oyna.
+NEDEN: +300 × 5 kişi sonraki alımı büyütür — pistol'e özgü değil, her eco'da geçerli.
+
+DURUM: savunmadasın, spike dikildi, sayı ve util gerideysen.
+NE ANLAMA GELİR: retake round'la birlikte tüfeğini de yutar.
+NE YAPARSIN: silahını kurtar — haritanın uzak çıkışından ayrıl, tüfek + kalkanı sonraki round'a taşı. Sayı ve util denk ise retake'e gir; düello kazandıysan yerdeki tüfeği al, round'u hayatta bitirirsen silah sende kalır.
+NEDEN: kurtarılan tüfek 2,900'lük alımı siler; yarım kalan retake hem round'u hem silahı rakibe verir.
 
 ---
 

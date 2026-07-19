@@ -121,6 +121,12 @@ WHY: Herkes farklı yerde farklı plan denerse rakip sizi birer birer yer. Koord
 - **Retake'e dağınık girmek** — Rotate mesafeleri uzun, herkes farklı zamanda gelir. Rakip sizi tek tek yer. Retake her zaman util ile başlar ve takım aynı anda girer.
 - **Eco round'da gereksiz risk almak** — Avantajlı roundda kuru peek atma. Eco'ya karşı yayıl, mesafe koru. Sheriff tek vuruş atar.
 
+### Site Bazlı Retake Rotaları
+- **A Retake**: İki kolla aynı anda gir — bir kol Heaven'dan açı alır, ikinci kol Hell üzerinden site zeminine iner. Saldırgan post-plant'te A Long + A Short crossfire'ı kurar: A Long açısını smoke'la, A Short tarafına flash at, spike çevresine molly bas. Crossfire'ın iki kolu da kırılınca defuse alanı açılır; tek koldan giren retake bu crossfire'a sırayla yem olur.
+- **B Retake**: Ana kol B Back'ten girer, ikinci kol A tarafından bassın. Saldırgan Mid Doors + Mid Window crossfire'ına yaslanır — bu iki açıyı smoke'la kapat. Alan küçük: önce recon ya da bot ile kaç kişi kaldığını öğren, sonra birlikte gir. Killjoy ult'u burada en değerli retake aracı — dar alanı komple süpürür, saldırganı pozisyonundan söker, defuse için bedava pencere açar.
+- **C Retake**: Ana kol Plat'tan yükseklikle girer, ikinci kol CT'den site zeminine. Saldırganın C Long + Garage crossfire'ını kır: C Long açısını smoke'la, Garage kolunu flash ya da molly ile sök. Plat sende olunca spike'ı yukarıdan görürsün — defuse'a başlayan arkadaşını oradan korursun.
+- Üç sitede de sıra aynı: önce bilgi (recon, bot, kamera), sonra util, sonra birlikte giriş. 1 düşman düşünce kalanlar pozisyon değiştirmek zorunda kalır — tam o anda ikinci kol bassın.
+
 ## 6. Ajan Notları
 - **Omen**: Haven'da en iyi controller. Kısa mesafe teleport'la Garage'da bilgi al, ult'uyla B'ye sürpriz geçiş yap, flash'ı dar koridorlara at. 3 site'e smoke dağıtman gerekiyor — Omen'in iki smoke'u ve dolum mekaniği bu yükü taşır, tek smoke'lu controller burada erir.
 - **Killjoy**: B'yi anchor etmek istiyorsan Killjoy al. Turret + bot + molly üçlüsüyle B site'i tek başına tutarsın. Ult'u o dar alanı komple kapatır. Ult + execute sinerjisi: ult'u siteye at, savunucular geri çekilmek zorunda kalır, takım bedavaya girer — B'de daha sık kullan. Killjoy yoksa B tutmak seni her round bir eksik bırakır.

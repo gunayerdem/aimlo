@@ -162,13 +162,17 @@ Sıra hep aynı: (1) düşmanın yerini öğren — recon at ya da kameradan bak
 - Util'i spike merkezli kullan: giriş noktasına değil, spike çevresine. Retake'in tek amacı defuse — molly spike yanına, smoke spike ile düşman açısı arasına, flash girişe.
 - Süre azsa bile kuru girme: hızlı flash + birlikte giriş, her zaman tek tek yürümekten iyidir.
 
+**A Site retake:** Retake A Link'ten gelir ve saldırgan bunu bilir — biri Link çıkışını nişanlamış bekler. Link'ten flash atmadan çıkma; iki kişi aynı anda çıkın, biri düşerse diğeri trade alır. Molly'yi site içi sipere bas — post-plant oyuncusu orada bekler, molly onu açığa itince ikinci kişi vurur. Spike ile A Main açısı arasına smoke koy, defuse'u o perdenin arkasında başlat.
+
+**B Site retake:** İlk iş Tower — B'nin dominant açısı orası, geri almadan site zeminine yayılan yukarıdan tek tek toplanır. Saldırgan Tower'daysa flash ile sök ya da Tower açısını smoke ile kes. Bir kol Tower'ı alırken ikinci kol B Link'ten site'a girsin; B Elbow köşesini flash'la temizle — post-plant oyuncusu o dirsekten tutar. Tower sende olunca defuse eden arkadaşını yukarıdan korursun.
+
 ## 7. Post-Plant (Saldırı) Stratejileri
 
 ### A Site
-Plant sonrası A Main'e geri yığılma — savunucu A Link'ten girer, kimse görmez. Dağıl: biri A Main açısında, biri Link/Yard tarafında, biri site içinde siperde. Spike senin için çalışıyor; savunucu sana gelmek zorunda — gereksiz peek atma, defuse sesini bekle.
+Spike'ı açık ortaya değil, tuttuğun açıların gördüğü sipere dik — A Main'deki ve Link tarafındaki arkadaşın plant noktasını aynı anda görebilsin. Plant sonrası A Main'e geri yığılma — savunucu A Link'ten girer, kimse görmez. Dağıl: biri A Main açısında, biri Link/Yard tarafında, biri site içinde siperde. Spike senin için çalışıyor; savunucu sana gelmek zorunda — gereksiz peek atma, defuse sesini bekle. Defuse sesi gelince molly spike üstüne: Killjoy molly'sini plant noktasına, Viper'ın tek şarjlık molly'sini de buraya sakla.
 
 ### B Site
-B geniş ve açık — plant sonrası iki ayrı açıdan crossfire kur, spike'ın dibinde durma. Tower kontrolündeyse oradan spike'ı izlet; değilse Tower açısını smoke'la kapat. B Main ve B Link girişlerini paylaşın: savunucu hangi yönden gelirse gelsin iki açıdan karşılanır.
+Spike'ı Tower'ın gördüğü tarafa dik — Tower sendeyse plant'i yukarıdan izletirsin; değilse o açıyı smoke'lamadan plant'e başlama. B geniş ve açık — plant sonrası iki ayrı açıdan crossfire kur, spike'ın dibinde durma. Tower kontrolündeyse oradan spike'ı izlet; değilse Tower açısını smoke'la kapat. B Main ve B Link girişlerini paylaşın: savunucu hangi yönden gelirse gelsin iki açıdan karşılanır. Defuse sesi gelince molly spike üstüne — ses gelmeden atılan molly boşa gider, o şarjı bekleterek kazanırsın.
 
 ## 8. Ajan Notları
 
