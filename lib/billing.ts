@@ -74,7 +74,7 @@ export async function getSubscriptionState(
   const svc = createServiceSupabase();
   // Denetim H3: durum filtresi DB'de — bellekte filtrelenip limit(5)
   // uygulandığında, 5'ten fazla abonelik satırı olan (yükseltme/iptal/yeniden
-  // abone) bir Pro müşteri "free" sayılıp kilitlenebiliyordu.
+  // abone) bir AIMLO+ müşterisi "free" sayılıp kilitlenebiliyordu.
   const { data, error } = await svc
     .from("subscriptions")
     .select("*")
@@ -86,7 +86,7 @@ export async function getSubscriptionState(
     if (isTableMissing(error)) return { ready: false, active: null };
     console.error("[billing] getSubscriptionState:", error.message);
     // Denetim M2: geçici DB hatasını "abonelik yok" ile KARIŞTIRMA — hesap
-    // sayfası Pro kullanıcıya "Ücretsiz hesap" + satın-al CTA'sı gösterirse
+    // sayfası AIMLO+ kullanıcısına "Ücretsiz hesap" + satın-al CTA'sı gösterirse
     // kullanıcı İKİNCİ KEZ satın alır (çoklu-satır sorununu bizzat yaratır).
     return { ready: true, active: null, errored: true };
   }

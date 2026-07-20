@@ -168,7 +168,7 @@ export const t = {
     landingFaqs: [
       {
         q: "AIMLO ücretsiz mi?",
-        a: "Evet, AIMLO'nun temel analiz ve koçluk özellikleri tamamen ücretsizdir. Maç kurulumu, round bazlı geri bildirim ve maç sonu raporu gibi tüm çekirdek özellikler ücretsiz planda yer alır. Gelişmiş AI destekli derinlemesine analiz, geçmiş maç karşılaştırması ve kişiselleştirilmiş gelişim haritası gibi premium özellikler ise yakında sunulacaktır.",
+        a: "Ücretsiz hesapla haftada 3 maçını analiz edebilirsin; maç kurulumu, round bazlı geri bildirim ve maç sonu raporu dâhil koçluk özelliklerinin tamamı açık. Sınırsız analiz için AIMLO+ aboneliği var — aylık 499 TL. Beta süresince tüm özellikler sınırsız ve ücretsiz.",
       },
       {
         q: "Nasıl çalışıyor?",
@@ -420,7 +420,7 @@ export const t = {
     landingFaqs: [
       {
         q: "Is AIMLO free?",
-        a: "Yes, AIMLO's core coaching features are completely free. This includes match setup, round-by-round feedback, and end-of-match reports. Premium features like advanced AI-powered deep analysis, historical match comparison, and personalized improvement roadmaps will be available in upcoming plans.",
+        a: "A free account analyses 3 matches a week, with every coaching feature available — match setup, round-by-round feedback and end-of-match reports included. AIMLO+ removes the match limit for $9.99 a month. Everything is unlimited and free during the beta.",
       },
       {
         q: "How does it work?",

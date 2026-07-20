@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { PlusCell } from "@/app/_components/PlusMark";
 
 /* ------------------------------------------------------------------ *
  * FİYATLAR — TEK KAYNAK.
@@ -33,7 +34,7 @@ const COPY = {
     regionLabel: "Türkiye",
     regionOther: "Diğer ülkeler",
     heroTitle: "Her ölümden ders çıkar.",
-    heroSub: "AIMLO Pro — aylık 499 TL. İstediğin zaman iptal et.",
+    heroSub: "AIMLO+ — aylık 499 TL. İstediğin zaman iptal et.",
     heroCta: "Satın Al",
     heroCta2: "Planları gör",
     payMethods: "Güvenli ödeme",
@@ -47,10 +48,14 @@ const COPY = {
     selected: "Seçildi",
     select: "Seç",
     diffTitle: "Farkı keşfet",
-    diffSub: "Ücretsiz hesapla haftada 3 maçını analiz et. Pro'da sınır yok.",
+    /* Ek "abonelik" ismine biniyor, "+" işaretine DEĞİL — "AIMLO+'ta" okunaksız. */
+    diffSub: "Ücretsiz hesapla haftada 3 maçını analiz et. AIMLO+ aboneliğinde sınır yok.",
     betaNote: "Beta süresince tüm özellikler sınırsız ve ücretsiz.",
     colFree: "Ücretsiz hesap",
-    colPro: "AIMLO Pro",
+    colPro: "AIMLO+",
+    /* Ekran okuyucu: artı işareti aria-hidden, anlamı buradan gelir. */
+    a11yIncluded: "var",
+    a11yExcluded: "yok",
     diffRows: [
       { label: "Maç analizi", free: "Haftada 3", pro: "Sınırsız" },
       { label: "Uygulamayı indir ve kur", free: true },
@@ -81,8 +86,8 @@ const COPY = {
     regionLabel: "Türkiye",
     regionOther: "Other countries",
     heroTitle: "Learn from every death.",
-    heroSub: "AIMLO Pro — $9.99 a month. Cancel anytime.",
-    heroCta: "Get AIMLO Pro",
+    heroSub: "AIMLO+ — $9.99 a month. Cancel anytime.",
+    heroCta: "Get AIMLO+",
     heroCta2: "See plans",
     payMethods: "Secure payment",
     monthly: "Monthly",
@@ -95,10 +100,12 @@ const COPY = {
     selected: "Selected",
     select: "Select",
     diffTitle: "See the difference",
-    diffSub: "Analyse 3 matches a week on a free account. Pro removes the limit.",
+    diffSub: "Analyse 3 matches a week on a free account. AIMLO+ removes the limit.",
     betaNote: "Everything is unlimited and free during the beta.",
     colFree: "Free account",
-    colPro: "AIMLO Pro",
+    colPro: "AIMLO+",
+    a11yIncluded: "included",
+    a11yExcluded: "not included",
     diffRows: [
       { label: "Match analysis", free: "3 per week", pro: "Unlimited" },
       { label: "Download and install the app", free: true },
@@ -153,20 +160,25 @@ function CardBadges() {
   );
 }
 
-/* Hücre üç durumlu: true → beyaz tik, false → tire, metin → kota etiketi
-   (ör. "Haftada 3" / "Sınırsız"). */
-function Cell({ v }: { v: boolean | string }) {
+/* Hücre üç durumlu: true → artı işareti, false → tire, metin → kota etiketi
+   (ör. "Haftada 3" / "Sınırsız").
+
+   softi (2026-07-20): beyaz tik yerine marka renginde "+" işareti.
+   `tone` sütuna göre: AIMLO+ sütunu iris tayfında parlar, Ücretsiz sütun
+   nötr kalır — iki sütun da aynı beyaz tik olunca tablo fark anlatmıyordu. */
+function Cell({ v, tone = "brand", label }: { v: boolean | string; tone?: "brand" | "muted"; label: string }) {
   if (typeof v === "string") {
     return <span className="text-[12px] font-bold text-neutral-300">{v}</span>;
   }
-  if (!v) return <span className="block h-[2px] w-4 rounded bg-neutral-700" />;
-  return (
-    <span className="grid h-[22px] w-[22px] place-items-center rounded-full bg-white">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#030711" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="20 6 9 17 4 12" />
-      </svg>
-    </span>
-  );
+  if (!v) {
+    return (
+      <span className="inline-flex items-center justify-center">
+        <span className="block h-[2px] w-4 rounded bg-neutral-700" aria-hidden="true" />
+        <span className="sr-only">{label}</span>
+      </span>
+    );
+  }
+  return <PlusCell tone={tone} label={label} />;
 }
 
 export default function PricingClient({ initialLang = "TR" }: { initialLang?: Lang }) {
@@ -314,12 +326,17 @@ export default function PricingClient({ initialLang = "TR" }: { initialLang?: La
                   <td className="py-4 pr-4 text-[14px] text-neutral-300">{r.label}</td>
                   <td className="py-4">
                     <div className="flex justify-center">
-                      <Cell v={r.free} />
+                      {/* Ücretsiz sütun nötr tonda — artı işareti burada parlamaz */}
+                      <Cell v={r.free} tone="muted" label={r.free ? c.a11yIncluded : c.a11yExcluded} />
                     </div>
                   </td>
                   <td className="py-4">
                     <div className="flex justify-center">
-                      <Cell v={"pro" in r ? (r as { pro: string }).pro : true} />
+                      <Cell
+                        v={"pro" in r ? (r as { pro: string }).pro : true}
+                        tone="brand"
+                        label={c.a11yIncluded}
+                      />
                     </div>
                   </td>
                 </tr>

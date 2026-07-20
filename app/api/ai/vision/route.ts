@@ -382,7 +382,7 @@ export async function POST(request: NextRequest) {
     // ── Ücretsiz katman kotası (2026-07-20) — haftada 3 MAÇ ──
     // ŞU AN KAPALI: yalnızca FREE_TIER_ENFORCED="true" env'i varken çalışır,
     // beta boyunca hiçbir ağ çağrısı bile yapmaz (bayrak ilk kontrol edilir).
-    // Pro abone → sınırsız. Kota AI çağrısından ÖNCE, ücretli iş başlamadan.
+    // AIMLO+ abonesi → sınırsız. Kota AI çağrısından ÖNCE, ücretli iş başlamadan.
     const quota = await checkMatchQuota(auth.userId, (body as VisionRequest).matchId);
     if (!quota.allowed) {
       console.log(
@@ -392,7 +392,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           error: "quota_exceeded",
-          message: `Ücretsiz hesabın haftalık ${quota.limit} maç analizi hakkı doldu. AIMLO Pro ile sınırsız analiz al.`,
+          message: `Ücretsiz hesabın haftalık ${quota.limit} maç analizi hakkı doldu. AIMLO+ ile sınırsız analiz al.`,
           detail: { used: quota.used, limit: quota.limit, resetsAt: quota.resetsAt },
         },
         { status: 402 }, // Payment Required — desktop "yükselt" akışına bağlayabilir

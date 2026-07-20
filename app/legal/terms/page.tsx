@@ -73,7 +73,7 @@ export default function TermsPage() {
             3. Abonelik ve Ücretlendirme
           </h2>
           <p>
-            AIMLO Pro, aylık veya yıllık dönemli ücretli bir abonelik hizmetidir.
+            AIMLO+, aylık veya yıllık dönemli ücretli bir abonelik hizmetidir.
             Güncel plan ve bedeller{" "}
             <Link
               href="/fiyatlandirma"
@@ -94,8 +94,8 @@ export default function TermsPage() {
             </li>
           </ul>
           <p>
-            <strong className="text-white">Fiyatlar KDV dahildir.</strong> AIMLO
-            Pro dijital bir hizmettir ve %20 KDV oranına tabidir; gösterilen
+            <strong className="text-white">Fiyatlar KDV dahildir.</strong> AIMLO+
+            dijital bir hizmettir ve %20 KDV oranına tabidir; gösterilen
             tutarlar tüketicinin ödeyeceği nihai bedeldir. Türkiye&apos;de
             yerleşik müşteriler Türk Lirası üzerinden ücretlendirilir; yabancı
             para birimi yalnızca yurt dışında yerleşik müşteriler için geçerlidir.

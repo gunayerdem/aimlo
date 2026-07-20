@@ -1,6 +1,6 @@
 // Ücretsiz katman kotası — server-only. (2026-07-20, softi kararı)
 //
-// MODEL: Ücretsiz hesap haftada **3 MAÇ** analiz edebilir. AIMLO Pro abonesinde
+// MODEL: Ücretsiz hesap haftada **3 MAÇ** analiz edebilir. AIMLO+ aboneliğinde
 // sınır yok. Birim MAÇ'tır, ölüm değil — bir maçın tüm ölümleri + maç-sonu
 // raporu tek hak sayılır (kullanıcı ürünün tam döngüsünü 3 kez yaşar).
 //
@@ -51,7 +51,7 @@ export type QuotaVerdict = {
   /** Bu hafta kullanılan farklı maç sayısı (bilinmiyorsa null). */
   used: number | null;
   limit: number;
-  /** Pro abone olduğu için sınırsız mı. */
+  /** AIMLO+ abonesi olduğu için sınırsız mı. */
   unlimited: boolean;
   /** Haftalık pencerenin bitişi (ISO) — istemci "ne zaman sıfırlanır" diyebilsin. */
   resetsAt: string | null;
@@ -139,7 +139,7 @@ export async function checkMatchQuota(
     return enforcedBase;
   }
 
-  // Pro abone → sınırsız. Tablo yoksa (migration uygulanmamış) paywall'ı ZORLAMA.
+  // AIMLO+ abonesi → sınırsız. Tablo yoksa (migration uygulanmamış) paywall'ı ZORLAMA.
   try {
     const state = await getSubscriptionState(userId);
     if (!state.ready) {

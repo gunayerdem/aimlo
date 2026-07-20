@@ -22,7 +22,7 @@ export function SubscriptionActions({
     return (
       <p className="rounded-lg border border-white/[0.08] bg-black/20 p-4 text-[13px] leading-relaxed text-neutral-400">
         Aboneliğin <strong className="text-white">{periodEnd}</strong> tarihinde sona erecek.
-        O güne kadar tüm Pro özelliklerini kullanmaya devam edebilirsin. Fikrini
+        O güne kadar tüm AIMLO+ özelliklerini kullanmaya devam edebilirsin. Fikrini
         değiştirirsen{" "}
         <a href="mailto:support@aimlo.gg" className="text-[#FF4655] hover:underline">support@aimlo.gg</a>{" "}
         üzerinden yeniden başlatabiliriz.

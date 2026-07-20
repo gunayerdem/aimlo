@@ -6,7 +6,7 @@ import CheckoutClient from "./checkout-client";
 export const metadata: Metadata = {
   title: "Sipariş Özeti — AIMLO",
   description:
-    "AIMLO abonelik sipariş özeti, ön bilgilendirme ve ödeme onayı adımı.",
+    "AIMLO+ abonelik sipariş özeti, ön bilgilendirme ve ödeme onayı adımı.",
 };
 
 function CheckoutFallback() {

@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { createServerSupabase } from "@/lib/supabase/server";
 import { getSubscriptionState } from "@/lib/billing";
 import { FREE_WEEKLY_MATCH_QUOTA } from "@/lib/entitlements";
+import { PRODUCT_NAME, CTA_BUY } from "@/lib/brand";
 import { SubscriptionActions } from "./SubscriptionActions";
 
 export const metadata: Metadata = {
@@ -60,7 +61,7 @@ export default async function AccountPage() {
           <h2 className="text-[13px] font-bold uppercase tracking-wider text-neutral-400">Abonelik</h2>
 
           {state.errored ? (
-            /* Denetim M2: DB geçici hata verdiyse ne "Pro" ne "ücretsiz" iddia et —
+            /* Denetim M2: DB geçici hata verdiyse ne "abone" ne "ücretsiz" iddia et —
                yanlış "ücretsiz" göstermek kullanıcıyı ikinci kez satın almaya iter. */
             <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 text-[13px] leading-relaxed text-neutral-400">
               Abonelik durumun şu an yüklenemedi. Sayfayı yenilemeyi dene; sorun sürerse{" "}
@@ -74,7 +75,7 @@ export default async function AccountPage() {
             <div className="space-y-4 rounded-2xl border border-[#FF4655]/30 bg-[#FF4655]/[0.04] p-6">
               <div className="flex flex-wrap items-baseline justify-between gap-3">
                 <div>
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-[#FF6B77]">AIMLO Pro</p>
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-[#FF6B77]">{PRODUCT_NAME}</p>
                   <p className="mt-1 text-2xl font-black text-white">
                     {fmtMoney(sub.amount_cents, sub.currency)}
                     <span className="text-[14px] font-medium text-neutral-500">
@@ -120,7 +121,9 @@ export default async function AccountPage() {
                 href="/fiyatlandirma"
                 className="inline-flex rounded-xl bg-[#FF4655] px-6 py-3 text-[13px] font-bold text-white transition hover:bg-[#FF6B77]"
               >
-                AIMLO Pro&apos;ya geç
+                {/* "AIMLO+'ya geç" DEĞİL: apostrof + artı yan yana ("+'ya")
+                    okunaksız. Ek almayan CTA hem temiz hem daha satış odaklı. */}
+                {CTA_BUY.tr}
               </Link>
             </div>
           )}

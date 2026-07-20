@@ -1229,7 +1229,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           error: "quota_exceeded",
-          message: `Ücretsiz hesabın haftalık ${quota.limit} maç analizi hakkı doldu. AIMLO Pro ile sınırsız analiz al.`,
+          message: `Ücretsiz hesabın haftalık ${quota.limit} maç analizi hakkı doldu. AIMLO+ ile sınırsız analiz al.`,
           detail: { used: quota.used, limit: quota.limit, resetsAt: quota.resetsAt },
         },
         { status: 402 },

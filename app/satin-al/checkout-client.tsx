@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { PLAN_NAMES } from "@/lib/brand";
 
 type PlanId = "aylik" | "yillik";
 
@@ -53,7 +54,9 @@ export const CONTRACT_VERSION = "2026-07-20";
 const PLANS: Record<PlanId, Plan> = {
   aylik: {
     id: "aylik",
-    name: "AIMLO Aylık Abonelik",
+    /* lib/brand.ts'ten — sözleşme bedel tablosuyla BİREBİR aynı olmak
+       zorunda; ayrışırsa tüketicinin neyi onayladığı belgeyle kanıtlanamaz. */
+    name: PLAN_NAMES.aylik,
     period: "1 ay",
     renewal: "Her ay otomatik yenilenir",
     total: "499,00 TL",
@@ -63,7 +66,7 @@ const PLANS: Record<PlanId, Plan> = {
   },
   yillik: {
     id: "yillik",
-    name: "AIMLO Yıllık Abonelik",
+    name: PLAN_NAMES.yillik,
     period: "12 ay",
     renewal: "Her yıl otomatik yenilenir",
     total: "4.790,00 TL",

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { PRODUCT_NAME, PLAN_NAMES } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Mesafeli Satış Sözleşmesi ve Ön Bilgilendirme Formu — AIMLO",
   description:
-    "AIMLO Pro dijital abonelik hizmetine ilişkin Mesafeli Satış Sözleşmesi ve Ön Bilgilendirme Formu.",
+    "AIMLO+ dijital abonelik hizmetine ilişkin Mesafeli Satış Sözleşmesi ve Ön Bilgilendirme Formu.",
 };
 
 const PLACEHOLDER =
@@ -107,7 +108,7 @@ export default function MesafeliSatisPage() {
             3. Sözleşme Konusu Hizmetin Temel Nitelikleri
           </h2>
           <p>
-            Sözleşme konusu hizmet, <strong className="text-white">AIMLO Pro</strong>{" "}
+            Sözleşme konusu hizmet, <strong className="text-white">{PRODUCT_NAME}</strong>{" "}
             adlı dijital abonelik hizmetidir. AIMLO, VALORANT oyuncularına yapay
             zekâ destekli koçluk geri bildirimi sunan bir yazılım hizmetidir.
             Abonelik kapsamında sunulan başlıca özellikler:
@@ -160,12 +161,12 @@ export default function MesafeliSatisPage() {
               </thead>
               <tbody className="text-neutral-300">
                 <tr className="border-b border-white/5">
-                  <td className="py-2 pr-4">AIMLO Pro — Aylık</td>
+                  <td className="py-2 pr-4">{PLAN_NAMES.aylik}</td>
                   <td className="py-2 pr-4">499 TL / ay</td>
                   <td className="py-2">9,99 USD / ay</td>
                 </tr>
                 <tr>
-                  <td className="py-2 pr-4">AIMLO Pro — Yıllık</td>
+                  <td className="py-2 pr-4">{PLAN_NAMES.yillik}</td>
                   <td className="py-2 pr-4">4.790 TL / yıl</td>
                   <td className="py-2">95,88 USD / yıl</td>
                 </tr>
@@ -219,8 +220,8 @@ export default function MesafeliSatisPage() {
           <p>
             Hizmet, ödemenin ilgili banka/ödeme kuruluşu tarafından onaylanmasının
             ardından{" "}
-            <strong className="text-white">derhâl (ani) ifa</strong> edilir. Pro
-            abonelik, ödeme onayıyla birlikte ALICI&apos;nın kullanıcı hesabına
+            <strong className="text-white">derhâl (ani) ifa</strong> edilir. AIMLO+
+            aboneliği, ödeme onayıyla birlikte ALICI&apos;nın kullanıcı hesabına
             otomatik olarak tanımlanır ve ALICI hizmetten aynı anda yararlanmaya
             başlar. Ayrıca fiziki bir teslimat süreci veya teslim süresi söz
             konusu değildir.
@@ -242,7 +243,7 @@ export default function MesafeliSatisPage() {
               anında teslim edilen gayrimaddi mallara ilişkin sözleşmelerde cayma
               hakkı kullanılamaz
             </strong>
-            . AIMLO Pro aboneliği, ödeme onayının hemen ardından elektronik
+            . AIMLO+ aboneliği, ödeme onayının hemen ardından elektronik
             ortamda anında ifa edildiğinden bu istisna kapsamındadır.
           </p>
           <p>
@@ -409,7 +410,7 @@ export default function MesafeliSatisPage() {
                 Hizmetin temel nitelikleri
               </h3>
               <p>
-                AIMLO Pro dijital abonelik: VALORANT için yapay zekâ destekli
+                AIMLO+ dijital abonelik: VALORANT için yapay zekâ destekli
                 round sonu koçluk geri bildirimi, maç raporu, web paneli erişimi
                 ve güncellemeler. Hizmet tamamen dijitaldir; Windows masaüstü
                 uygulaması ve web paneli üzerinden sunulur.

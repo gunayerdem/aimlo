@@ -304,7 +304,7 @@ const t = {
     landingFaqs: [
       {
         q: "AIMLO ne kadar?",
-        a: "AIMLO sadece 10$. Bu tek ödemeyle maç analizi, round bazlı geri bildirim, maç sonu raporu ve AI destekli kişiselleştirilmiş koçluk gibi tüm özelliklere erişim sağlarsın. Gelişmiş AI destekli derinlemesine analiz, geçmiş maç karşılaştırması ve kişiselleştirilmiş gelişim haritası gibi premium özellikler de dahildir.",
+        a: "AIMLO+ aylık 499 TL, yıllık 4.790 TL (KDV dahil; yıllıkta aylık karşılığı 399 TL). Yurt dışında yerleşik kullanıcılar için 9,99 USD / ay. Ücretsiz hesapla haftada 3 maçını analiz edebilirsin — koçluk özelliklerinin tamamı iki planda da açık, tek fark analiz edebildiğin maç sayısı. Beta süresince her şey sınırsız ve ücretsiz.",
       },
       {
         q: "Nasıl çalışıyor?",
@@ -588,7 +588,7 @@ const t = {
     landingFaqs: [
       {
         q: "How much does AIMLO cost?",
-        a: "AIMLO is just $10. With this one-time payment you get full access to all features including match analysis, round-by-round feedback, end-of-match reports, and AI-powered personalized coaching. Premium features like advanced AI-powered deep analysis, historical match comparison, and personalized improvement roadmaps are also included.",
+        a: "AIMLO+ is $9.99 a month or $95.88 a year (about $7.99 a month). A free account analyses 3 matches a week — every coaching feature is available on both plans, the only difference is how many matches you can analyse. Everything is unlimited and free during the beta.",
       },
       {
         q: "How does it work?",
@@ -1370,7 +1370,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
                 Ürün→fiyat→sepet akışının giriş noktası; iyzico incelemesi
                 için de ilk ekranda görünür olması gerekiyor. */}
             <Link href="/fiyatlandirma" className="btn-neon hidden sm:block rounded-lg px-5 py-2 text-[12px]">
-              {lang === "tr" ? "Satın Al" : "Get Pro"}
+              {lang === "tr" ? "Satın Al" : "Get AIMLO+"}
             </Link>
             <button onClick={() => setMobileMenu(!mobileMenu)} className="md:hidden p-2 text-neutral-400 hover:text-white transition">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -1387,7 +1387,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             </Link>
             {/* Satın Al — mobilde de birincil eylem (softi 2026-07-20) */}
             <Link href="/fiyatlandirma" onClick={() => setMobileMenu(false)} className="btn-neon block w-full rounded-lg py-2.5 text-center text-sm mt-3">
-              {lang === "tr" ? "Satın Al" : "Get Pro"}
+              {lang === "tr" ? "Satın Al" : "Get AIMLO+"}
             </Link>
             <div className="flex gap-2 pt-3">
               {user ? (
@@ -2152,7 +2152,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
 
           <div className="mt-10 text-center">
             <Link href="/fiyatlandirma" className="btn-neon rounded-xl px-10 py-4 text-[14px] inline-flex items-center gap-2">
-              {lang === "tr" ? "Satın Al" : "Get Pro"}
+              {lang === "tr" ? "Satın Al" : "Get AIMLO+"}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
             </Link>
           </div>
@@ -2209,7 +2209,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
         <div className="flex flex-wrap items-center justify-center gap-3">
           {/* Satın Al — sayfanın ALTINDAKİ birincil eylem (softi 2026-07-20) */}
           <Link href="/fiyatlandirma" className="btn-neon rounded-xl px-8 py-3.5 text-[14px] flex items-center gap-2">
-            {lang === "tr" ? "Satın Al" : "Get Pro"}
+            {lang === "tr" ? "Satın Al" : "Get AIMLO+"}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
           </Link>
           <button onClick={user ? onDashboard : onStartAnalysis} className="rounded-xl border border-white/[0.14] px-8 py-3.5 text-[14px] font-semibold text-white transition hover:bg-white/[0.06]">

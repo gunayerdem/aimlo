@@ -8,7 +8,7 @@ import { SellerInfo } from "@/app/_components/SellerInfo";
 export const metadata: Metadata = {
   title: "Fiyatlandırma — AIMLO",
   description:
-    "AIMLO Pro abonelik fiyatları: aylık 499 TL, yıllık 4.790 TL (KDV dahil). Valorant için yapay zekâ destekli round-sonu koçluk.",
+    "AIMLO+ abonelik fiyatları: aylık 499 TL, yıllık 4.790 TL (KDV dahil). Valorant için yapay zekâ destekli round-sonu koçluk.",
 };
 
 const LEGAL_LINKS = [
