@@ -203,5 +203,19 @@ export async function loginAction(
     };
   }
 
-  redirect("/?verified=true");
+  // Admin hesabı girişte doğrudan Founder Console'a düşer (softi 2026-07-20).
+  // Bu yönlendirme yalnız UX — gerçek kapı /admin/layout'taki getAdminUser
+  // (admins tablosu, fail-closed). Kontrol hatası normal akışı bozmaz.
+  let isAdmin = false;
+  try {
+    const { data: adminRow } = await admin
+      .from("admins")
+      .select("user_id")
+      .eq("user_id", signinData.user.id)
+      .maybeSingle();
+    isAdmin = !!adminRow;
+  } catch (e) {
+    console.error("[Aimlo login] admin-redirect check failed:", (e as Error).message);
+  }
+  redirect(isAdmin ? "/admin" : "/?verified=true");
 }
