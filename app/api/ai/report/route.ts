@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { verifyAuthAndRateLimit } from "@/lib/api-auth";
+import { checkMatchQuota } from "@/lib/entitlements";
 import { saveAiUsage } from "@/lib/ai-usage";
 import { sanitizePromptInput } from "@/lib/prompt-safety";
 import { checkOutputQuality, scoreFields } from "@/evals/generic-detector";
@@ -1214,6 +1215,25 @@ export async function POST(request: NextRequest) {
           e instanceof Error ? e.message : "unknown",
         );
       }
+    }
+
+    // ── Ücretsiz katman kotası (2026-07-20) — haftada 3 MAÇ ──
+    // Denetim bulgusu H1: kota yalnız vision'daydı; maç raporu (ürünün en
+    // değerli çıktısı) paywall dışında kalıyordu. AYNI hafta anahtarını
+    // paylaşır → bir maç iki hak yakmaz, vision'da sayılmış maç burada bedava.
+    // ŞU AN KAPALI (FREE_TIER_ENFORCED). 409 idempotency kontrolünden SONRA:
+    // zaten kaydedilmiş maçın tekrarı kotaya dokunmaz.
+    const quota = await checkMatchQuota(userId, validation.data.matchId);
+    if (!quota.allowed) {
+      console.log(`[QUOTA] report blocked — user=${userId.slice(0, 8)} used=${quota.used}/${quota.limit}`);
+      return NextResponse.json(
+        {
+          error: "quota_exceeded",
+          message: `Ücretsiz hesabın haftalık ${quota.limit} maç analizi hakkı doldu. AIMLO Pro ile sınırsız analiz al.`,
+          detail: { used: quota.used, limit: quota.limit, resetsAt: quota.resetsAt },
+        },
+        { status: 402 },
+      );
     }
 
     const report = await generateAIReport(validation.data, userId);

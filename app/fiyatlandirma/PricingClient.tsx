@@ -47,18 +47,19 @@ const COPY = {
     selected: "Seçildi",
     select: "Seç",
     diffTitle: "Farkı keşfet",
-    diffSub: "Ücretsiz hesapla maçlarını kaydet. Pro ile her ölümün nedenini öğren.",
+    diffSub: "Ücretsiz hesapla haftada 3 maçını analiz et. Pro'da sınır yok.",
+    betaNote: "Beta süresince tüm özellikler sınırsız ve ücretsiz.",
     colFree: "Ücretsiz hesap",
     colPro: "AIMLO Pro",
     diffRows: [
+      { label: "Maç analizi", free: "Haftada 3", pro: "Sınırsız" },
       { label: "Uygulamayı indir ve kur", free: true },
       { label: "Hesap ve maç geçmişi", free: true },
-      { label: "Her ölümde anlık analiz", free: false },
-      { label: "Rakip alışkanlık tespiti", free: false },
-      { label: "Sonraki round önerisi", free: false },
-      { label: "Maç sonu detaylı rapor", free: false },
-      { label: "İlerleme takibi", free: false },
-      { label: "Türkçe ve İngilizce koçluk", free: false },
+      { label: "Her ölümde anlık analiz", free: true },
+      { label: "Rakip alışkanlık tespiti", free: true },
+      { label: "Sonraki round önerisi", free: true },
+      { label: "Maç sonu detaylı rapor", free: true },
+      { label: "Türkçe ve İngilizce koçluk", free: true },
     ],
     payTitle: "Ödemeye geç",
     paySub: "Seçtiğin plan aşağıda. Ödeme adımında sözleşmeleri onaylayacaksın.",
@@ -94,18 +95,19 @@ const COPY = {
     selected: "Selected",
     select: "Select",
     diffTitle: "See the difference",
-    diffSub: "Track your matches with a free account. Go Pro to learn why you die.",
+    diffSub: "Analyse 3 matches a week on a free account. Pro removes the limit.",
+    betaNote: "Everything is unlimited and free during the beta.",
     colFree: "Free account",
     colPro: "AIMLO Pro",
     diffRows: [
+      { label: "Match analysis", free: "3 per week", pro: "Unlimited" },
       { label: "Download and install the app", free: true },
       { label: "Account and match history", free: true },
-      { label: "Instant analysis on every death", free: false },
-      { label: "Enemy pattern detection", free: false },
-      { label: "Next-round suggestion", free: false },
-      { label: "Full post-match report", free: false },
-      { label: "Progress tracking", free: false },
-      { label: "Turkish and English coaching", free: false },
+      { label: "Instant analysis on every death", free: true },
+      { label: "Enemy pattern detection", free: true },
+      { label: "Next-round suggestion", free: true },
+      { label: "Full post-match report", free: true },
+      { label: "Turkish and English coaching", free: true },
     ],
     payTitle: "Continue to payment",
     paySub: "Your selected plan is below. You'll approve the terms at the payment step.",
@@ -151,8 +153,13 @@ function CardBadges() {
   );
 }
 
-function Tick({ on }: { on: boolean }) {
-  if (!on) return <span className="block h-[2px] w-4 rounded bg-neutral-700" />;
+/* Hücre üç durumlu: true → beyaz tik, false → tire, metin → kota etiketi
+   (ör. "Haftada 3" / "Sınırsız"). */
+function Cell({ v }: { v: boolean | string }) {
+  if (typeof v === "string") {
+    return <span className="text-[12px] font-bold text-neutral-300">{v}</span>;
+  }
+  if (!v) return <span className="block h-[2px] w-4 rounded bg-neutral-700" />;
   return (
     <span className="grid h-[22px] w-[22px] place-items-center rounded-full bg-white">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#030711" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
@@ -276,6 +283,11 @@ export default function PricingClient({ initialLang = "TR" }: { initialLang?: La
         <div className="space-y-3 text-center">
           <h2 className="text-3xl font-black tracking-tight text-white">{c.diffTitle}</h2>
           <p className="mx-auto max-w-lg text-[14px] text-neutral-400">{c.diffSub}</p>
+          {/* Beta dürüstlüğü: kota kodda hazır ama KAPALI — şu an kimse sınıra
+              çarpmıyor. Tabloda gelecekteki model, burada bugünkü gerçek. */}
+          <p className="inline-block rounded-full border border-[#FF4655]/30 bg-[#FF4655]/[0.07] px-4 py-1.5 text-[12px] font-semibold text-[#FF6B77]">
+            {c.betaNote}
+          </p>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[420px] border-collapse text-left">
@@ -298,12 +310,12 @@ export default function PricingClient({ initialLang = "TR" }: { initialLang?: La
                   <td className="py-4 pr-4 text-[14px] text-neutral-300">{r.label}</td>
                   <td className="py-4">
                     <div className="flex justify-center">
-                      <Tick on={r.free} />
+                      <Cell v={r.free} />
                     </div>
                   </td>
                   <td className="py-4">
                     <div className="flex justify-center">
-                      <Tick on />
+                      <Cell v={"pro" in r ? (r as { pro: string }).pro : true} />
                     </div>
                   </td>
                 </tr>

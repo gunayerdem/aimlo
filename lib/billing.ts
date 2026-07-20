@@ -61,21 +61,38 @@ export function monthlyCents(amountCents: number, interval: string): number {
 
 // ── Entitlement (ileride özellik kapılama için — şu an beta, herkes ücretsiz) ──
 
-export async function getActiveSubscription(userId: string): Promise<SubscriptionRow | null> {
-  if (!userId) return null;
+/** Abonelik durumu + deponun HAZIR olup olmadığı.
+ *
+ * `ready:false` = subscriptions tablosu henüz yok (migration uygulanmamış).
+ * Bunu "abone değil"den AYIRMAK kritik: entitlements bu durumda paywall'ı
+ * ZORLAMAZ, aksi hâlde bayrak migration'dan önce açılırsa ödeme yapan dâhil
+ * herkes kilitlenirdi (güvenlik denetimi 2026-07-20, bulgu H4). */
+export async function getSubscriptionState(
+  userId: string,
+): Promise<{ ready: boolean; active: SubscriptionRow | null }> {
+  if (!userId) return { ready: true, active: null };
   const svc = createServiceSupabase();
+  // Denetim H3: durum filtresi DB'de — bellekte filtrelenip limit(5)
+  // uygulandığında, 5'ten fazla abonelik satırı olan (yükseltme/iptal/yeniden
+  // abone) bir Pro müşteri "free" sayılıp kilitlenebiliyordu.
   const { data, error } = await svc
     .from("subscriptions")
     .select("*")
     .eq("user_id", userId)
+    .in("status", [...ACTIVE_STATUSES])
     .order("updated_at", { ascending: false })
-    .limit(5);
+    .limit(1);
   if (error) {
-    if (!isTableMissing(error)) console.error("[billing] getActiveSubscription:", error.message);
-    return null;
+    if (isTableMissing(error)) return { ready: false, active: null };
+    console.error("[billing] getSubscriptionState:", error.message);
+    return { ready: true, active: null };
   }
-  const rows = (data ?? []) as SubscriptionRow[];
-  return rows.find((r) => ACTIVE_STATUSES.has(r.status)) ?? null;
+  return { ready: true, active: ((data ?? [])[0] as SubscriptionRow) ?? null };
+}
+
+/** Geriye dönük sarmalayıcı — yalnız "abone mi" sorusu için. */
+export async function getActiveSubscription(userId: string): Promise<SubscriptionRow | null> {
+  return (await getSubscriptionState(userId)).active;
 }
 
 // ── Gelir toplamları (admin /revenue) ──────────────────────────────────────
