@@ -19,19 +19,27 @@
  * Canlı ai_usage (53 çağrı): ortalama 0,00516 USD · prompt 33.298 tok ·
  * cached 15.679 (%47) · output 181. Maliyetin %85'i TAZE prompt token.
  *
- * Ölçülen ilk kırılma noktası: byte 25.979 — policy bloğu içindeki CONFIDENCE
- * satırı. roundHistory uzunluğu 3→4 olunca (calibrating→low→medium→high, maç
- * başına ~3 kez) bu satır değişiyor ve ARDINDAKİ ~60-70 KB (static+agent+
- * abilityHint+map+contextual) komple cache dışı kalıyor.
+ * İLK KIRILMA NOKTASI — ÖLÇÜLDÜ: byte 27.917 = policy bloğu içindeki CONFIDENCE
+ * metni. (Elle yapılan tahmin 25.979'du; MEKANİZMA aynı, sayı ~2 KB kaymış —
+ * bu script ölçtüğü için artık tahmin değil.) Kanıt: buildPolicyBlock("low") vs
+ * ("medium") kendi içinde 8.629. byte'ta ayrılıyor; SYSTEM_PROMPT + ayraç =
+ * 19.288 byte önde → 19.288 + 8.629 = 27.917.
+ * roundHistory uzunluğu 3→4 olunca (calibrating→low→medium→high, maç başına
+ * ~3 kez) bu metin değişiyor ve ARDINDAKİ ~56 KB (static+agent+abilityHint+
+ * map+contextual) komple cache dışı kalıp taze faturalanıyor.
  *
- * BASELINE önek oranları (aşağıdaki BASELINE sabitinde makine-okur hâli):
- *   A) ardışık round (spike/eco farkı)      → önek ~%72
- *   B) confidence kademesi 3→4              → önek ~%29   ← EN BÜYÜK KAYIP
- *   C) devre arası side flip                → önek ~%29
- *   D) tamamen farklı maç                   → önek ~%22
- *   E) side=undefined (OCR side kaçırma)    → önek ~%29
- * (Kesin sayılar BASELINE sabitinde; script her çalıştığında ölçülenle
- *  karşılaştırıp DELTA sütununu basar.)
+ * BASELINE önek oranları — ÖLÇÜLDÜ (makine-okur hâli aşağıdaki BASELINE sabitinde;
+ * script her çalıştığında ölçülenle karşılaştırıp DELTA sütununu basar):
+ *   A) ardışık round (spike/eco farkı)      → önek %81,5  (83.129 / 102.017 B)
+ *   B) confidence kademesi 3→4              → önek %33,3  (27.917 / 83.863 B) ← EN BÜYÜK KAYIP
+ *   C) devre arası side flip                → önek %50,9  (43.065 / 84.660 B)
+ *   D) tamamen farklı maç                   → önek %32,2  (27.917 / 86.776 B)
+ *   E) side=undefined (OCR side kaçırma)    → önek %48,3  (43.258 / 89.530 B)
+ *
+ * (E) SENARYOSUNUN GERÇEK MALİYETİ — ilk kez ölçüldü, bugüne kadar tahmindi:
+ * OCR side'ı kaçırdığında AYNI round için önek %81,5'ten %48,3'e düşüyor;
+ * 46.272 byte (~14.460 token) taze faturalanıyor — yani tek bir kaçırılmış
+ * side OCR'ı, o çağrının cache'lenebilir bölgesinin yarısını yakıyor.
  *
  * HEDEF — adım 1+2+3 (confidence'ı prefix'ten çıkar · side/eco'yu prompt sonuna
  * taşı · statik blokları öne al) uygulandıktan SONRA beklenen:
@@ -101,9 +109,16 @@ function buildSystemPrompt(opts: PromptOpts): string {
       anchorMode: "ocr",
       outputFocusMode: "single",
       enemyGateMode: "vision",
+      // Route ile SENKRON (2026-07-20): confidence metni prefix'ten çıkarılıp
+      // user mesajına taşındı. Bu satır olmazsa script ESKİ prompt'u ölçer ve
+      // yanlış-negatif regresyon sinyali verir.
+      confidenceInPrefix: false,
     }),
   ];
   if (kb.blocks.static) systemSections.push(kb.blocks.static);
+  // Blok 0b — koçluk profili (universal.md). Route'ta static'ten hemen sonra;
+  // replikada da aynı yerde olmalı, yoksa ölçüm gerçeği yansıtmaz.
+  if (kb.blocks.profile) systemSections.push(kb.blocks.profile);
   if (kb.blocks.agent) systemSections.push(kb.blocks.agent);
   const abilityHint = buildAgentAbilityHint(opts.agent, lang);
   if (abilityHint) systemSections.push(abilityHint);
@@ -202,14 +217,16 @@ const SCENARIOS: Scenario[] = [
 /* ══════════════════════════════════════════════════════════
    BASELINE (2026-07-20, adım 1-3 ÖNCESİ) — önce/sonra farkı için sabit
    ══════════════════════════════════════════════════════════
-   İlk kırılma byte'ı: 25.979 (policy içindeki confidence satırı).
-   Aşağıdaki oranlar bu script'in baseline koşusundan alınmıştır. */
+   Bu sayılar bu script'in 2026-07-20 baseline koşusundan ALINDI (tahmin DEĞİL).
+   Adım 1-3 uygulandıktan sonra script tekrar koşulur; DELTA sütunu farkı basar.
+   Bu bloğu adım 1-3 SONRASI GÜNCELLEME — karşılaştırma zemini olarak kalmalı. */
+const BASELINE_FIRST_BREAK = 27_917; // = SYSTEM_PROMPT+ayraç 19.288 + policy-içi confidence 8.629
 const BASELINE: Record<string, { prefixB: number; prefixPct: number }> = {
-  A: { prefixB: 51_648, prefixPct: 72.2 },
-  B: { prefixB: 25_979, prefixPct: 29.3 },
-  C: { prefixB: 25_979, prefixPct: 29.5 },
-  D: { prefixB: 19_186, prefixPct: 22.4 },
-  E: { prefixB: 25_979, prefixPct: 29.3 },
+  A: { prefixB: 83_129, prefixPct: 81.5 },
+  B: { prefixB: 27_917, prefixPct: 33.3 },
+  C: { prefixB: 43_065, prefixPct: 50.9 },
+  D: { prefixB: 27_917, prefixPct: 32.2 },
+  E: { prefixB: 43_258, prefixPct: 48.3 },
 };
 
 /** Adım 1+2+3 sonrası beklenen hedefler (yalnız A ve D icin sozlesme). */
@@ -264,8 +281,12 @@ console.table(rows);
 
 for (const sc of SCENARIOS) console.log(`  ${sc.id} = ${sc.why}`);
 
+const breakDelta = firstBreak - BASELINE_FIRST_BREAK;
 console.log(`\nILK KIRILMA (tum senaryolarin en kisa oneki): ${firstBreak} byte (~${toTokens(firstBreak)} token)`);
-console.log(`BASELINE ilk kirilma: 25979 byte (policy icindeki confidence satiri)`);
+console.log(
+  `BASELINE ilk kirilma: ${BASELINE_FIRST_BREAK} byte (policy icindeki confidence metni) ` +
+  `→ delta ${breakDelta >= 0 ? "+" : ""}${breakDelta} byte`,
+);
 
 const aPct = json.find(r => r.id === "A")?.pct as number | undefined;
 const dPct = json.find(r => r.id === "D")?.pct as number | undefined;

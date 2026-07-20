@@ -1705,7 +1705,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             </button>
             {user ? (
               <>
-                <button onClick={onDashboard} className="btn-neon hidden sm:block rounded-lg px-5 py-2 text-[12px]">
+                <button onClick={onDashboard} className="hidden sm:block text-[13px] text-neutral-400 transition hover:text-white px-2 font-medium">
                   {l.goToDashboard}
                 </button>
                 <button onClick={onSignOut} className="hidden sm:block text-[12px] text-neutral-600 transition hover:text-red-400 px-2">
@@ -1717,11 +1717,17 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
                 <button onClick={onLogin} className="hidden sm:block text-[13px] text-neutral-400 transition hover:text-white px-2 font-medium">
                   {l.authLogin}
                 </button>
-                <button onClick={onRegister} className="btn-neon hidden sm:block rounded-lg px-5 py-2 text-[12px]">
+                <button onClick={onRegister} className="hidden sm:block rounded-lg border border-white/[0.14] px-4 py-2 text-[12px] font-semibold text-white transition hover:bg-white/[0.06]">
                   {l.authRegister}
                 </button>
               </>
             )}
+            {/* Satın Al — sağ üstteki BİRİNCİL eylem (softi 2026-07-20).
+                Ürün→fiyat→sepet akışının giriş noktası; iyzico incelemesi
+                için de ilk ekranda görünür olması gerekiyor. */}
+            <Link href="/fiyatlandirma" className="btn-neon hidden sm:block rounded-lg px-5 py-2 text-[12px]">
+              {lang === "tr" ? "Satın Al" : "Get Pro"}
+            </Link>
             <button onClick={() => setMobileMenu(!mobileMenu)} className="md:hidden p-2 text-neutral-400 hover:text-white transition">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
             </button>
@@ -1735,16 +1741,20 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             <Link href="/fiyatlandirma" onClick={() => setMobileMenu(false)} className="block w-full text-left text-sm text-neutral-400 py-2 hover:text-white transition">
               {lang === "tr" ? "Fiyatlandırma" : "Pricing"}
             </Link>
+            {/* Satın Al — mobilde de birincil eylem (softi 2026-07-20) */}
+            <Link href="/fiyatlandirma" onClick={() => setMobileMenu(false)} className="btn-neon block w-full rounded-lg py-2.5 text-center text-sm mt-3">
+              {lang === "tr" ? "Satın Al" : "Get Pro"}
+            </Link>
             <div className="flex gap-2 pt-3">
               {user ? (
                 <>
-                  <button onClick={() => { setMobileMenu(false); onDashboard(); }} className="btn-neon flex-1 rounded-lg py-2.5 text-sm">{l.goToDashboard}</button>
+                  <button onClick={() => { setMobileMenu(false); onDashboard(); }} className="btn-ghost flex-1 rounded-lg py-2.5 text-sm">{l.goToDashboard}</button>
                   <button onClick={() => { setMobileMenu(false); onSignOut(); }} className="btn-ghost flex-1 rounded-lg py-2.5 text-sm">{l.authSignOut}</button>
                 </>
               ) : (
                 <>
                   <button onClick={() => { setMobileMenu(false); onLogin(); }} className="btn-ghost flex-1 rounded-lg py-2.5 text-sm">{l.authLogin}</button>
-                  <button onClick={() => { setMobileMenu(false); onRegister(); }} className="btn-neon flex-1 rounded-lg py-2.5 text-sm">{l.authRegister}</button>
+                  <button onClick={() => { setMobileMenu(false); onRegister(); }} className="btn-ghost flex-1 rounded-lg py-2.5 text-sm">{l.authRegister}</button>
                 </>
               )}
             </div>
@@ -2677,10 +2687,19 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
         <p className="text-[15px] text-neutral-400 mb-10 max-w-md mx-auto leading-relaxed">
           {l.landingHeroSub}
         </p>
-        <button onClick={user ? onDashboard : onStartAnalysis} className="btn-neon rounded-xl px-8 py-3.5 text-[14px] flex items-center gap-2 mx-auto">
-          {user ? l.goToDashboard : l.landingCTA}
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-        </button>
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          {/* Satın Al — sayfanın ALTINDAKİ birincil eylem (softi 2026-07-20) */}
+          <Link href="/fiyatlandirma" className="btn-neon rounded-xl px-8 py-3.5 text-[14px] flex items-center gap-2">
+            {lang === "tr" ? "Satın Al" : "Get Pro"}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </Link>
+          <button onClick={user ? onDashboard : onStartAnalysis} className="rounded-xl border border-white/[0.14] px-8 py-3.5 text-[14px] font-semibold text-white transition hover:bg-white/[0.06]">
+            {user ? l.goToDashboard : l.landingCTA}
+          </button>
+        </div>
+        <p className="mt-5 text-[12px] text-neutral-600">
+          {lang === "tr" ? "499 TL/ay · KDV dahil · İstediğin zaman iptal et" : "$9.99/mo · VAT included · Cancel anytime"}
+        </p>
       </section>
 
       {/* ─── FOOTER — clean minimal ─── */}

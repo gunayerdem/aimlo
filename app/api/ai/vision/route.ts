@@ -457,9 +457,13 @@ export async function POST(request: NextRequest) {
     const agentLen = kb.blocks.agent?.length ?? 0;
     const mapLen = kb.blocks.map?.length ?? 0;
     const ctxLen = kb.blocks.contextual?.length ?? 0;
-    const kbTotal = staticLen + agentLen + mapLen + ctxLen;
+    // profile = ranks/universal.md — HER istekte bayt-aynı, cache önekinin
+    // en büyük parçası (maliyet optimizasyonu 2026-07-20). Prod telemetride
+    // görünmezse sessiz bir cache regresyonu fark edilmez.
+    const profileLen = kb.blocks.profile?.length ?? 0;
+    const kbTotal = staticLen + agentLen + mapLen + ctxLen + profileLen;
     console.log(
-      `[KB] injected static=${staticLen}b agent=${agentLen}b map=${mapLen}b ctx=${ctxLen}b total=${kbTotal}b ` +
+      `[KB] injected static=${staticLen}b profile=${profileLen}b agent=${agentLen}b map=${mapLen}b ctx=${ctxLen}b total=${kbTotal}b ` +
       `files=[${kb.files.join(", ")}] selectors map=${reqMap ?? "-"} agent=${reqAgent ?? "-"} ` +
       `rank=${reqRank ?? "-"} enemies=${reqEnemyComp?.length ?? 0}`,
     );
