@@ -182,7 +182,10 @@ export default function PricingClient({ initialLang = "TR" }: { initialLang?: La
 
   return (
     <>
-    <div className="space-y-20 pb-24">
+    {/* pb YOK: ödeme panelinin ALTINDA boşluk oluşuyordu (softi: "aşağısında
+        boşluk oluşmuş onu sıfırla"). Sabit çubuğun payı sayfanın EN SONUNA
+        (page.tsx article'ına) verildi — panelle künye arası sıkı kalsın. */}
+    <div className="space-y-20">
       {/* ── Bölge / para birimi — "Türkiye" ↔ "Diğer ülkeler" ── */}
       <div className="flex justify-end pr-rise">
         <div className="inline-flex rounded-lg border border-white/[0.08] p-0.5">

@@ -1401,7 +1401,13 @@ body::after {
 }
 
 /* Sticky ödeme çubuğu */
+/* Sabit ödeme çubuğu.
+   margin: 0 !important — softi: "tam pencerenin altında kalsın". Çubuk
+   article'ın çocuğu ve Tailwind'in space-y-14'ü ona 56px margin veriyordu;
+   position:fixed + bottom:0 olmasına RAĞMEN 56px yukarıda duruyordu.
+   Ölçümle bulundu (getBoundingClientRect bottom=664, viewport=720). */
 .pr-paybar {
+  margin: 0 !important;
   backdrop-filter: blur(18px);
   background: rgba(6,10,20,.86);
   border-top: 1px solid rgba(255,255,255,.08);
@@ -1433,7 +1439,8 @@ body::after {
 }
 
 .pr-backdrop { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-.pr-eye-wrap { position: absolute; top: 50%; left: 50%; translate: -50% -50%; }
+/* Goz YUKARIDA ve kucuk (softi 2026-07-20: "kucuk yukarda olabilir") */
+.pr-eye-wrap { position: absolute; top: 18%; left: 50%; translate: -50% 0; }
 .pr-eye-outer { animation: pr-eye-spin 90s linear infinite, pr-eye-breath 11s ease-in-out infinite; }
 .pr-eye-pupil { animation: pr-pupil-roam 17s ease-in-out infinite; }
 .pr-eye-halo {
