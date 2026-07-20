@@ -25,7 +25,8 @@ export const PRICING = {
   },
 } as const;
 
-type Lang = keyof typeof PRICING;
+export type Lang = keyof typeof PRICING;
+type Plan = "aylik" | "yillik";
 
 const COPY = {
   TR: {
@@ -38,7 +39,8 @@ const COPY = {
     perMonth: (v: string) => `Aylık ${v}`,
     billedMonthly: "Her ay tek çekim",
     billedYearly: "Yılda bir tek çekim",
-    cta: "Satın Al",
+    selected: "Seçildi",
+    select: "Seç",
     featuresTitle: "Her iki planda da:",
     features: [
       "Her ölümde anlık analiz",
@@ -48,6 +50,8 @@ const COPY = {
       "Geçmiş maç arşivi",
       "Türkçe ve İngilizce koçluk",
     ],
+    payTitle: "Ödemeye geç",
+    payCta: "Ödemeye Geç",
     faqTitle: "Soruların mı var?",
     faq: [
       { q: "İstediğim zaman iptal edebilir miyim?", a: "Evet. Taahhüt yok, cayma bedeli yok. İptal ettiğinde ödediğin dönemin sonuna kadar erişimin devam eder." },
@@ -70,7 +74,8 @@ const COPY = {
     perMonth: (v: string) => `${v} per month`,
     billedMonthly: "Billed monthly",
     billedYearly: "Billed once a year",
-    cta: "Get AIMLO Pro",
+    selected: "Selected",
+    select: "Select",
     featuresTitle: "Both plans include:",
     features: [
       "Instant analysis on every death",
@@ -80,6 +85,8 @@ const COPY = {
       "Match history archive",
       "Turkish and English coaching",
     ],
+    payTitle: "Continue to payment",
+    payCta: "Continue to Payment",
     faqTitle: "Questions?",
     faq: [
       { q: "Can I cancel anytime?", a: "Yes. No commitment, no cancellation fee. Access continues until the end of your paid period." },
@@ -102,131 +109,176 @@ function Check() {
   );
 }
 
-export default function PricingClient() {
-  const [lang, setLang] = useState<Lang>("TR");
+export default function PricingClient({ initialLang = "TR" }: { initialLang?: Lang }) {
+  // initialLang sunucudan gelir (Vercel geo başlığı) — TR ise TL, değilse USD.
+  const [lang, setLang] = useState<Lang>(initialLang);
+  const [plan, setPlan] = useState<Plan>("yillik"); // varsayılan: daha avantajlı olan
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const p = PRICING[lang];
   const c = COPY[lang];
+  const sel = plan === "aylik" ? p.monthly : p.yearly;
 
   return (
-    <div className="space-y-14">
-      {/* ── Dil / para birimi ── */}
-      <div className="flex justify-end">
-        <div className="inline-flex rounded-lg border border-white/[0.08] p-0.5">
-          {(["TR", "EN"] as const).map((L) => (
-            <button
-              key={L}
-              onClick={() => setLang(L)}
-              className={`rounded-md px-3 py-1.5 text-[11px] font-semibold transition ${
-                lang === L ? "bg-white/[0.08] text-white" : "text-neutral-500 hover:text-white"
-              }`}
-            >
-              {L === "TR" ? "TR · ₺" : "EN · $"}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* ── Hero ── */}
-      <header className="space-y-4">
-        <h1 className="text-4xl sm:text-5xl font-black text-white tracking-tight leading-[1.1]">
-          {c.heroTitle}
-        </h1>
-        <p className="text-[15px] text-neutral-400">{c.heroSub}</p>
-      </header>
-
-      {/* ── Planlar — yan yana ── */}
-      <div className="grid gap-5 sm:grid-cols-2">
-        {/* Aylık */}
-        <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-7 flex flex-col">
-          <p className="text-[13px] font-bold text-neutral-400 uppercase tracking-wider">{c.monthly}</p>
-          <div className="mt-4 flex items-baseline gap-1.5">
-            <span className="text-4xl font-black text-white tracking-tight">{p.monthly.price}</span>
-            <span className="text-[15px] text-neutral-500">{p.monthly.period}</span>
-          </div>
-          <p className="mt-2 text-[12px] text-neutral-500">
-            {c.vat} · {c.billedMonthly}
-          </p>
-          <Link
-            href="/satin-al?plan=aylik"
-            className="mt-7 rounded-xl border border-white/[0.14] px-6 py-3 text-center text-[14px] font-bold text-white transition hover:bg-white/[0.06]"
-          >
-            {c.cta}
-          </Link>
-        </div>
-
-        {/* Yıllık — vurgulu */}
-        <div className="relative rounded-2xl border border-[#FF4655]/40 bg-[#FF4655]/[0.04] p-7 flex flex-col">
-          <span className="absolute -top-2.5 right-6 rounded-full bg-[#FF4655] px-2.5 py-1 text-[10px] font-black text-white tracking-wide">
-            {c.badge}
-          </span>
-          <p className="text-[13px] font-bold text-[#FF6B77] uppercase tracking-wider">{c.yearly}</p>
-          <div className="mt-4 flex items-baseline gap-1.5">
-            <span className="text-4xl font-black text-white tracking-tight">{p.yearly.price}</span>
-            <span className="text-[15px] text-neutral-500">{p.yearly.period}</span>
-          </div>
-          <p className="mt-2 text-[12px] text-neutral-500">
-            {c.perMonth(p.yearly.perMonth)} · {c.vat} · {c.billedYearly}
-          </p>
-          <Link
-            href="/satin-al?plan=yillik"
-            className="mt-7 rounded-xl bg-[#FF4655] px-6 py-3 text-center text-[14px] font-bold text-white transition hover:bg-[#FF6B77]"
-          >
-            {c.cta}
-          </Link>
-        </div>
-      </div>
-
-      {/* ── Özellikler — tek liste, iki plan da aynı ── */}
-      <section className="space-y-4">
-        <h2 className="text-[13px] font-bold text-neutral-400 uppercase tracking-wider">
-          {c.featuresTitle}
-        </h2>
-        <ul className="grid gap-2.5 sm:grid-cols-2">
-          {c.features.map((f) => (
-            <li key={f} className="flex gap-2.5 text-[14px] text-neutral-300">
-              <Check />
-              {f}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* ── Zorunlu bilgilendirme (kısa) ── */}
-      <p className="text-[12px] text-neutral-600 leading-relaxed">
-        {c.renewNote} {c.tlNote}
-      </p>
-
-      {/* ── SSS ── */}
-      <section className="space-y-4">
-        <h2 className="text-2xl font-black text-white tracking-tight">{c.faqTitle}</h2>
-        <div className="divide-y divide-white/[0.06] border-y border-white/[0.06]">
-          {c.faq.map((f, i) => (
-            <div key={f.q}>
+    <>
+      <div className="space-y-14 pb-28">
+        {/* ── Dil / para birimi ── */}
+        <div className="flex justify-end pr-rise">
+          <div className="inline-flex rounded-lg border border-white/[0.08] p-0.5">
+            {(["TR", "EN"] as const).map((L) => (
               <button
-                onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                className="flex w-full items-center justify-between gap-4 py-4 text-left text-[14px] font-semibold text-white transition hover:text-[#FF6B77]"
-                aria-expanded={openFaq === i}
+                key={L}
+                onClick={() => setLang(L)}
+                className={`rounded-md px-3 py-1.5 text-[11px] font-semibold transition ${
+                  lang === L ? "bg-white/[0.08] text-white" : "text-neutral-500 hover:text-white"
+                }`}
               >
-                {f.q}
-                <span className="shrink-0 text-neutral-500 text-lg leading-none">
-                  {openFaq === i ? "−" : "+"}
-                </span>
+                {L === "TR" ? "TR · ₺" : "EN · $"}
               </button>
-              {openFaq === i && (
-                <p className="pb-4 text-[13px] leading-relaxed text-neutral-400">
-                  {f.a}{" "}
-                  {i === 4 && (
-                    <Link href="/legal/iade" className="text-[#FF4655] hover:underline">
-                      {c.faqLink}
-                    </Link>
-                  )}
-                </p>
-              )}
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </section>
-    </div>
+
+        {/* ── Hero ── */}
+        <header className="space-y-4 pr-hero">
+          <h1 className="text-4xl sm:text-5xl font-black text-white tracking-tight leading-[1.1]">
+            {c.heroTitle}
+          </h1>
+          <p className="text-[15px] text-neutral-400">{c.heroSub}</p>
+        </header>
+
+        {/* ── Planlar — TIKLA-SEÇ ── */}
+        <div className="grid gap-5 sm:grid-cols-2">
+          {(["aylik", "yillik"] as const).map((planKey, i) => {
+            const isYearly = planKey === "yillik";
+            const d = isYearly ? p.yearly : p.monthly;
+            const isSel = plan === planKey;
+            return (
+              <button
+                key={planKey}
+                type="button"
+                onClick={() => setPlan(planKey)}
+                aria-pressed={isSel}
+                style={{ animationDelay: `${180 + i * 110}ms` }}
+                className={`pr-card ${isSel ? "pr-sel" : ""} rounded-2xl border p-7 text-left ${
+                  isSel
+                    ? "border-[#FF4655]/60 bg-[#FF4655]/[0.055]"
+                    : "border-white/[0.08] bg-white/[0.02] hover:border-white/[0.16]"
+                }`}
+              >
+                {isYearly && (
+                  <span className="absolute top-4 right-5 rounded-full bg-[#FF4655] px-2.5 py-1 text-[10px] font-black tracking-wide text-white">
+                    {c.badge}
+                  </span>
+                )}
+
+                <div className="flex items-center gap-2">
+                  <span
+                    className={`grid h-[18px] w-[18px] place-items-center rounded-full border-2 transition ${
+                      isSel ? "border-[#FF4655] bg-[#FF4655]" : "border-white/25"
+                    }`}
+                  >
+                    {isSel && (
+                      <svg key={planKey} className="pr-tick" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    )}
+                  </span>
+                  <span className={`text-[13px] font-bold uppercase tracking-wider ${isSel ? "text-[#FF6B77]" : "text-neutral-400"}`}>
+                    {isYearly ? c.yearly : c.monthly}
+                  </span>
+                </div>
+
+                <div key={`${lang}-${planKey}`} className="pr-price mt-4 flex items-baseline gap-1.5">
+                  <span className="text-4xl font-black tracking-tight text-white">{d.price}</span>
+                  <span className="text-[15px] text-neutral-500">{d.period}</span>
+                </div>
+
+                <p className="mt-2 text-[12px] text-neutral-500">
+                  {isYearly ? `${c.perMonth(p.yearly.perMonth)} · ` : ""}
+                  {c.vat} · {isYearly ? c.billedYearly : c.billedMonthly}
+                </p>
+
+                <p className={`mt-6 text-[12px] font-bold uppercase tracking-wider ${isSel ? "text-[#FF4655]" : "text-neutral-600"}`}>
+                  {isSel ? `✓ ${c.selected}` : c.select}
+                </p>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* ── Özellikler ── */}
+        <section className="space-y-4 pr-rise" style={{ animationDelay: "420ms" }}>
+          <h2 className="text-[13px] font-bold uppercase tracking-wider text-neutral-400">
+            {c.featuresTitle}
+          </h2>
+          <ul className="grid gap-2.5 sm:grid-cols-2">
+            {c.features.map((f) => (
+              <li key={f} className="flex gap-2.5 text-[14px] text-neutral-300">
+                <Check />
+                {f}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* ── Zorunlu bilgilendirme ── */}
+        <p className="text-[12px] leading-relaxed text-neutral-600">
+          {c.renewNote} {c.tlNote}
+        </p>
+
+        {/* ── SSS ── */}
+        <section className="space-y-4">
+          <h2 className="text-2xl font-black tracking-tight text-white">{c.faqTitle}</h2>
+          <div className="divide-y divide-white/[0.06] border-y border-white/[0.06]">
+            {c.faq.map((f, i) => (
+              <div key={f.q}>
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="flex w-full items-center justify-between gap-4 py-4 text-left text-[14px] font-semibold text-white transition hover:text-[#FF6B77]"
+                  aria-expanded={openFaq === i}
+                >
+                  {f.q}
+                  <span className="shrink-0 text-lg leading-none text-neutral-500">
+                    {openFaq === i ? "−" : "+"}
+                  </span>
+                </button>
+                {openFaq === i && (
+                  <p className="pb-4 text-[13px] leading-relaxed text-neutral-400">
+                    {f.a}{" "}
+                    {i === 4 && (
+                      <Link href="/legal/iade" className="text-[#FF4655] hover:underline">
+                        {c.faqLink}
+                      </Link>
+                    )}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      {/* ── STICKY ÖDEME ÇUBUĞU — seçilen plan hep görünür, ödeme hep bir tık ── */}
+      <div className="pr-paybar pr-bar fixed bottom-0 left-0 right-0 z-40" style={{ animationDelay: "700ms" }}>
+        <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 py-3.5 sm:px-0">
+          <div key={`${lang}-${plan}-bar`} className="pr-price min-w-0">
+            <p className="text-[11px] font-bold uppercase tracking-wider text-neutral-500">
+              {plan === "yillik" ? c.yearly : c.monthly}
+            </p>
+            <p className="truncate text-[17px] font-black text-white">
+              {sel.price}
+              <span className="text-[13px] font-medium text-neutral-500">{sel.period}</span>
+              <span className="ml-2 text-[11px] font-medium text-neutral-500">{c.vat}</span>
+            </p>
+          </div>
+          <Link
+            href={`/satin-al?plan=${plan}`}
+            className="btn-neon shrink-0 rounded-xl px-7 py-3 text-[14px] font-bold"
+          >
+            {c.payCta}
+          </Link>
+        </div>
+      </div>
+    </>
   );
 }

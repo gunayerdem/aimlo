@@ -2678,6 +2678,71 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
         <div className="mega-wordmark">AIMLO</div>
       </div>
 
+      {/* ─── FİYATLANDIRMA — ana sayfanın altında tam plan bölümü (softi 2026-07-20).
+            Ziyaretçi sayfayı terk etmeden planı görüp satın almaya geçebilsin. ─── */}
+      <section id="section-pricing" data-animate className="relative z-10 mx-auto max-w-4xl px-5 sm:px-8 pb-24">
+        <div className="section-divider mb-16" />
+        <div className={`transition-all duration-700 ${isVisible("section-pricing") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+          <p className="section-kicker justify-center mb-6">
+            <span className="sk-num">05</span>{lang === "tr" ? "FİYATLANDIRMA" : "PRICING"}
+          </p>
+          <h2 className="section-display text-center mb-4">
+            {lang === "tr" ? "Her ölümden ders çıkar." : "Learn from every death."}
+          </h2>
+          <p className="text-[15px] text-neutral-400 text-center mb-12">
+            {lang === "tr"
+              ? "İstediğin zaman iptal et. Taahhüt yok."
+              : "Cancel anytime. No commitment."}
+          </p>
+
+          <div className="grid gap-5 sm:grid-cols-2 max-w-3xl mx-auto">
+            {/* Aylık */}
+            <Link href="/fiyatlandirma?plan=aylik" className="pr-card rounded-2xl border border-white/[0.08] bg-white/[0.02] p-7 block hover:border-white/[0.16]">
+              <p className="text-[13px] font-bold uppercase tracking-wider text-neutral-400">
+                {lang === "tr" ? "Aylık" : "Monthly"}
+              </p>
+              <div className="mt-4 flex items-baseline gap-1.5">
+                <span className="text-4xl font-black tracking-tight text-white">{lang === "tr" ? "499 TL" : "$9.99"}</span>
+                <span className="text-[15px] text-neutral-500">{lang === "tr" ? "/ay" : "/mo"}</span>
+              </div>
+              <p className="mt-2 text-[12px] text-neutral-500">
+                {lang === "tr" ? "KDV dahil · Her ay tek çekim" : "VAT included · Billed monthly"}
+              </p>
+              <p className="mt-6 text-[12px] font-bold uppercase tracking-wider text-neutral-600">
+                {lang === "tr" ? "Seç →" : "Select →"}
+              </p>
+            </Link>
+
+            {/* Yıllık */}
+            <Link href="/fiyatlandirma?plan=yillik" className="pr-card pr-sel rounded-2xl border border-[#FF4655]/60 bg-[#FF4655]/[0.055] p-7 block">
+              <span className="absolute top-4 right-5 rounded-full bg-[#FF4655] px-2.5 py-1 text-[10px] font-black tracking-wide text-white">
+                {lang === "tr" ? "%20 indirim" : "20% off"}
+              </span>
+              <p className="text-[13px] font-bold uppercase tracking-wider text-[#FF6B77]">
+                {lang === "tr" ? "Yıllık" : "Yearly"}
+              </p>
+              <div className="mt-4 flex items-baseline gap-1.5">
+                <span className="text-4xl font-black tracking-tight text-white">{lang === "tr" ? "4.790 TL" : "$95.88"}</span>
+                <span className="text-[15px] text-neutral-500">{lang === "tr" ? "/yıl" : "/yr"}</span>
+              </div>
+              <p className="mt-2 text-[12px] text-neutral-500">
+                {lang === "tr" ? "Aylık 399 TL · KDV dahil" : "$7.99 per month · VAT included"}
+              </p>
+              <p className="mt-6 text-[12px] font-bold uppercase tracking-wider text-[#FF4655]">
+                {lang === "tr" ? "Seç →" : "Select →"}
+              </p>
+            </Link>
+          </div>
+
+          <div className="mt-10 text-center">
+            <Link href="/fiyatlandirma" className="btn-neon rounded-xl px-10 py-4 text-[14px] inline-flex items-center gap-2">
+              {lang === "tr" ? "Satın Al" : "Get Pro"}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ─── FINAL CTA — like Xtract's footer CTA ─── */}
       <section className="relative z-10 mx-auto max-w-3xl px-5 sm:px-8 pb-28 text-center">
         <div className="section-divider mb-16" />

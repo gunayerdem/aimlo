@@ -1332,3 +1332,83 @@ body::after {
   .auth-aurora { animation: none !important; }
   .auth-agent { animation: none !important; opacity: 0.9 !important; transform: none !important; }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   FİYATLANDIRMA — görkemli giriş + seçim animasyonları (2026-07-20)
+   softi: "baya haşmetli animasyonlar yap o da çok önemli"
+   Tümü prefers-reduced-motion ile kapanır (en altta).
+   ══════════════════════════════════════════════════════════════════ */
+@keyframes pr-hero-in {
+  from { opacity: 0; transform: translateY(30px) scale(.97); filter: blur(14px); }
+  to   { opacity: 1; transform: none; filter: blur(0); }
+}
+@keyframes pr-rise {
+  from { opacity: 0; transform: translateY(34px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes pr-card-in {
+  from { opacity: 0; transform: translateY(46px) scale(.95) rotateX(6deg); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes pr-sel-glow {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(255,70,85,.45), 0 0 34px -10px rgba(255,70,85,.55); }
+  50%      { box-shadow: 0 0 0 1px rgba(255,70,85,.85), 0 0 64px -6px rgba(255,70,85,.9); }
+}
+@keyframes pr-price-swap {
+  from { opacity: 0; transform: translateY(14px) scale(.9); filter: blur(6px); }
+  to   { opacity: 1; transform: none; filter: blur(0); }
+}
+@keyframes pr-bar-up {
+  from { opacity: 0; transform: translateY(120%); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes pr-sheen {
+  0%   { transform: translateX(-130%) skewX(-18deg); }
+  100% { transform: translateX(240%) skewX(-18deg); }
+}
+@keyframes pr-tick-pop {
+  0%   { opacity: 0; transform: scale(.3) rotate(-25deg); }
+  60%  { opacity: 1; transform: scale(1.25) rotate(4deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+.pr-hero   { animation: pr-hero-in .95s cubic-bezier(.16,1,.3,1) both; }
+.pr-rise   { animation: pr-rise .8s cubic-bezier(.16,1,.3,1) both; }
+.pr-price  { animation: pr-price-swap .5s cubic-bezier(.16,1,.3,1) both; }
+.pr-bar    { animation: pr-bar-up .55s cubic-bezier(.16,1,.3,1) both; }
+.pr-tick   { animation: pr-tick-pop .45s cubic-bezier(.16,1,.3,1) both; }
+
+/* Plan kartı — 3D perspektifli giriş, hover yükselme, seçiliyken nabız */
+.pr-card {
+  position: relative;
+  overflow: hidden;
+  animation: pr-card-in .8s cubic-bezier(.16,1,.3,1) both;
+  transition: transform .4s cubic-bezier(.16,1,.3,1), border-color .3s ease, background .3s ease;
+  will-change: transform;
+}
+.pr-card:hover  { transform: translateY(-7px); }
+.pr-card:active { transform: translateY(-3px) scale(.995); }
+.pr-card.pr-sel { animation: pr-card-in .8s cubic-bezier(.16,1,.3,1) both, pr-sel-glow 2.8s ease-in-out 1.1s infinite; }
+
+/* Seçili kartın üzerinden geçen ışık huzmesi */
+.pr-card.pr-sel::after {
+  content: "";
+  position: absolute; top: 0; bottom: 0; left: 0;
+  width: 42%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.07), transparent);
+  animation: pr-sheen 3.4s ease-in-out 1.4s infinite;
+  pointer-events: none;
+}
+
+/* Sticky ödeme çubuğu */
+.pr-paybar {
+  backdrop-filter: blur(18px);
+  background: rgba(6,10,20,.86);
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pr-hero, .pr-rise, .pr-price, .pr-bar, .pr-tick, .pr-card { animation: none !important; }
+  .pr-card:hover { transform: none !important; }
+  .pr-card.pr-sel::after { animation: none !important; }
+}

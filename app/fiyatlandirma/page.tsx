@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PricingClient from "./PricingClient";
+import { headers } from "next/headers";
+import PricingClient, { type Lang } from "./PricingClient";
 
 export const metadata: Metadata = {
   title: "Fiyatlandırma — AIMLO",
@@ -28,7 +29,17 @@ const SELLER = [
   ["MERSİS no", "{{MERSIS}}"],
 ] as const;
 
-export default function PricingPage() {
+export default async function PricingPage() {
+  /* Ülke algılama (softi 2026-07-20): Vercel edge her isteğe ziyaretçinin
+     ülkesini başlıkla ekler. TR → Türk Lirası, diğer → USD. Bu yalnız
+     BAŞLANGIÇ değeri; kullanıcı sayfadaki düğmeyle değiştirebilir.
+     Mevzuat notu: TR'de yerleşik müşteri ödeme adımında HER HÂLÜKÂRDA TL ile
+     ücretlendirilir (Tebliğ 2008-32/34 Md. 8/7) — burada gösterim, orada kural.
+     Başlık yoksa (yerel geliştirme / başka platform) güvenli varsayılan TR. */
+  const h = await headers();
+  const country = (h.get("x-vercel-ip-country") ?? "TR").toUpperCase();
+  const initialLang: Lang = country === "TR" ? "TR" : "EN";
+
   return (
     <main className="min-h-screen bg-[#030711] text-zinc-200 px-4 py-16">
       <article className="mx-auto max-w-3xl space-y-14">
@@ -36,7 +47,7 @@ export default function PricingPage() {
           ← Ana Sayfa
         </Link>
 
-        <PricingClient />
+        <PricingClient initialLang={initialLang} />
 
         {/* Satıcı bilgileri — zorunlu künye */}
         <section className="space-y-3 border-t border-white/10 pt-8">
