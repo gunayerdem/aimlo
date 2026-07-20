@@ -328,6 +328,7 @@ export function loadKnowledge(task: TaskType, options: LoadOptions = {}): string
 /* ══════════════════════════════════════════════════════════
    Vision-specific loader — max 4 files, returns file list
    Priority: map > agent > rank > matchup (1)
+   Blok sırası = değişme sıklığı (statik → profil → ajan → harita → contextual).
    ══════════════════════════════════════════════════════════ */
 
 interface VisionKnowledgeResult {
@@ -335,11 +336,18 @@ interface VisionKnowledgeResult {
   content: string;
   files: string[];
   /**
-   * Separated blocks for 4-block prompt-cache strategy.
+   * Separated blocks for the prompt-cache strategy.
    * Order of stability (most stable → most variable):
+   *   - static:  weapon+comp guide — byte-identical on EVERY request
+   *   - profile: koçluk profili (ranks/universal.md) — byte-identical on EVERY
+   *     request too (rank-gating kaldırıldı, her rank aynı dosyaya map'lenir).
+   *     2026-07-20 ölçümü: contextual bloğunun ~%91'i BU dosyaydı, yani "en
+   *     değişken" blok aslında neredeyse tamamen sabitti ve arkasındaki her
+   *     dinamik parça onu her istekte cache dışına itiyordu. Ayrı bloğa
+   *     çıkarıldı → statik önek uzar, contextual gerçekten değişken kalır.
    *   - agent: rarely changes (player's main agent)
    *   - map: per-match
-   *   - contextual: rank + matchup + post-plant + economy (situational)
+   *   - contextual: matchup + post-plant/retake + economy + karşı-ajan (situational)
    * Splitting these into separate cache_control breakpoints lets cross-match
    * cache reuse work — if user keeps the same agent across matches, the agent
    * block stays cached even when the map block is rewritten.
@@ -354,6 +362,13 @@ interface VisionKnowledgeResult {
      * kullanılacağını user-message'daki [SİLAH+KOMP İPUCU] işaretçisi söyler.
      */
     static?: string;
+    /**
+     * Block 0b — koçluk profili (ranks/universal.md). staticBlock ile aynı
+     * kararlılık sınıfı: içerik istekten BAĞIMSIZ, bayt-aynı. Eskiden contextual
+     * içindeydi ve önündeki tek round-bazlı toggle (spike/eco) bile onu taze
+     * token yapıyordu.
+     */
+    profile?: string;
     agent?: string;
     map?: string;
     contextual?: string;
@@ -579,15 +594,40 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
     console.warn(`[KB] map selector '${map}' matched no maps file (slug '${map.toLowerCase().replace(/[^a-z]/g, "")}')`);
   }
 
-  // ── Block 3: Contextual KB (rank + matchup + situational — most variable) ──
-  const contextualParts: string[] = [];
-
-  // Rank
+  // ── Block 2b: Koçluk profili (ranks/universal.md — istekten BAĞIMSIZ, bayt-aynı) ──
+  // 2026-07-20: bu blok contextual'in İÇİNDEYDİ ve tek başına o bloğun ~%91'iydi.
+  // Contextual'deki round-bazlı tek toggle (spike kuruldu / eco round) bile
+  // önekini bozduğu için ~37 KB sabit içerik her istekte TAZE token faturalanıyordu.
+  // Kendi bloğuna alındı: içerik TEK BAYT değişmedi, yalnız yeri değişti.
+  let profileBlock: string | undefined;
   const rankFile = getRankFile(rank);
   const rankContent = loadFile(`ranks/${rankFile}`);
   if (rankContent) {
-    contextualParts.push(`[KOÇLUK PROFİLİ — her rank için Radiant derinliği, sade dil]\n${stripKbWhitespace(rankContent)}`);
+    profileBlock = `[KOÇLUK PROFİLİ — her rank için Radiant derinliği, sade dil]\n${stripKbWhitespace(rankContent)}`;
     files.push(`ranks/${rankFile}`);
+  }
+
+  // ── Block 3: Contextual KB (gerçekten değişken kısım) ──
+  // İÇ SIRA = değişme sıklığı (kararlı → değişken), prefix-cache kuralı:
+  //   1) matchup      — maç boyunca sabit (ajan × düşman komp)
+  //   2) post-plant / retake / ekonomi — round-round toggle
+  //   3) karşı-ajan   — HER ÖLÜMDE değişir → en sonda
+  const contextualParts: string[] = [];
+
+  // Matchup (1 best match) — maç boyunca sabit, contextual'in en kararlı parçası.
+  if (agent && enemyAgents?.length) {
+    const matchups = loadMatchupFiles(agent, enemyAgents, 1);
+    if (matchups.length > 0) {
+      contextualParts.push(`[EŞLEŞME BİLGİSİ]\n${stripKbWhitespace(matchups[0])}`);
+      files.push("matchups/(best-match)");
+    } else {
+      // Agent (satır ~458) / map (satır ~474) seçici uyarılarıyla simetrik (2026-07-19):
+      // matchup kapsam delikleri prod log'unda görünür olsun — hangi ajan × düşman-komp
+      // kombinasyonu spesifik VE rol-fallback dosyasız kaldı?
+      console.warn(
+        `[KB] matchup selector matched no file (player '${agent}' vs enemies [${enemyAgents.join(", ")}])`,
+      );
+    }
   }
 
   // Post-plant (only if spike planted)
@@ -635,22 +675,6 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
     }
   }
 
-  // Matchup (1 best match)
-  if (agent && enemyAgents?.length) {
-    const matchups = loadMatchupFiles(agent, enemyAgents, 1);
-    if (matchups.length > 0) {
-      contextualParts.push(`[EŞLEŞME BİLGİSİ]\n${stripKbWhitespace(matchups[0])}`);
-      files.push("matchups/(best-match)");
-    } else {
-      // Agent (satır ~458) / map (satır ~474) seçici uyarılarıyla simetrik (2026-07-19):
-      // matchup kapsam delikleri prod log'unda görünür olsun — hangi ajan × düşman-komp
-      // kombinasyonu spesifik VE rol-fallback dosyasız kaldı?
-      console.warn(
-        `[KB] matchup selector matched no file (player '${agent}' vs enemies [${enemyAgents.join(", ")}])`,
-      );
-    }
-  }
-
   // Karşı-ajan kesiti (2026-07-19): killerInfo'da sözlük-eşleşen düşman ajan
   // varsa o ajanın "Bu Ajana Karşı" bölümü — matchup bloğunun yanında,
   // cache-SONRASI contextual bölgede (statik önek bozulmaz). Bölüm/eşleşme
@@ -676,14 +700,18 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
     ? contextualParts.join("\n\n---\n\n")
     : undefined;
 
-  // Joined content (backward-compat).
-  const allParts = [staticBlock, agentBlock, mapBlock, contextualBlock].filter(Boolean) as string[];
+  // Joined content (backward-compat). profileBlock, contextual'den çıkarıldığı için
+  // BURAYA eklenmek ZORUNDA — aksi hâlde `content` alanını kullanan report/insight/
+  // feedback yolları ~37 KB koçluk profilini kaybederdi. Toplam bayt aynı, yalnız
+  // sıra kararlılığa göre: statik → profil → ajan → harita → contextual.
+  const allParts = [staticBlock, profileBlock, agentBlock, mapBlock, contextualBlock].filter(Boolean) as string[];
 
   return {
     content: allParts.join("\n\n---\n\n"),
     files,
     blocks: {
       static: staticBlock,
+      profile: profileBlock,
       agent: agentBlock,
       map: mapBlock,
       contextual: contextualBlock,

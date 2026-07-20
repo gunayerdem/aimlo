@@ -3,7 +3,8 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Kullanım Koşulları — AIMLO",
-  description: "AIMLO kullanım koşulları ve hizmet şartları.",
+  description:
+    "AIMLO kullanım koşulları, hizmet şartları ve abonelik/ücretlendirme esasları.",
 };
 
 export default function TermsPage() {
@@ -21,16 +22,30 @@ export default function TermsPage() {
             Kullanım Koşulları
           </h1>
           <p className="text-sm text-neutral-500">
-            Son güncelleme: 7 Mayıs 2026
+            Son güncelleme: 20 Temmuz 2026
           </p>
         </header>
 
         <section className="space-y-3 text-sm leading-relaxed text-neutral-300">
           <h2 className="text-lg font-bold text-white">1. Hizmet</h2>
           <p>
-            AIMLO, Valorant oyuncularına yapay zekâ destekli post-round
-            koçluk geri bildirimi sunan bir platformdur. Hizmet beta
-            aşamasındadır ve önceden bildirim yapılmaksızın değiştirilebilir.
+            AIMLO, Valorant oyuncularına yapay zekâ destekli round-sonu koçluk
+            geri bildirimi sunan bir Windows masaüstü uygulaması ve web
+            panelidir. Hizmet, ücretli abonelik karşılığında sunulmaktadır.
+          </p>
+          <p>
+            AIMLO, hizmetin özelliklerini geliştirmek amacıyla güncelleme
+            yapabilir. Abonelerin edindiği hakları esaslı biçimde azaltan
+            değişiklikler, yürürlüğe girmeden önce e-posta yoluyla
+            bildirilir; bu değişiklikleri kabul etmeyen abone, aboneliğini
+            iptal edip{" "}
+            <Link
+              href="/legal/iade"
+              className="text-[#FF4655] hover:underline"
+            >
+              İptal ve İade Koşulları
+            </Link>{" "}
+            uyarınca iade talebinde bulunabilir.
           </p>
         </section>
 
@@ -54,7 +69,77 @@ export default function TermsPage() {
         </section>
 
         <section className="space-y-3 text-sm leading-relaxed text-neutral-300">
-          <h2 className="text-lg font-bold text-white">3. AI Çıktısı</h2>
+          <h2 className="text-lg font-bold text-white">
+            3. Abonelik ve Ücretlendirme
+          </h2>
+          <p>
+            AIMLO Pro, aylık veya yıllık dönemli ücretli bir abonelik hizmetidir.
+            Güncel plan ve bedeller{" "}
+            <Link
+              href="/fiyatlandirma"
+              className="text-[#FF4655] hover:underline"
+            >
+              Fiyatlandırma
+            </Link>{" "}
+            sayfasında yayımlanır. Yürürlükteki bedeller şunlardır:
+          </p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>Aylık plan: 499 TL / ay (KDV dahil)</li>
+            <li>
+              Yıllık plan: 4.790 TL / yıl (KDV dahil) — aylık karşılığı 399 TL
+            </li>
+            <li>
+              Yurt dışında yerleşik müşteriler: 9,99 USD / ay veya 95,88 USD /
+              yıl
+            </li>
+          </ul>
+          <p>
+            <strong className="text-white">Fiyatlar KDV dahildir.</strong> AIMLO
+            Pro dijital bir hizmettir ve %20 KDV oranına tabidir; gösterilen
+            tutarlar tüketicinin ödeyeceği nihai bedeldir. Türkiye&apos;de
+            yerleşik müşteriler Türk Lirası üzerinden ücretlendirilir; yabancı
+            para birimi yalnızca yurt dışında yerleşik müşteriler için geçerlidir.
+          </p>
+          <p>
+            <strong className="text-white">
+              Ödeme tek çekim olarak tahsil edilir; hiçbir planda taksit
+              seçeneği sunulmaz.
+            </strong>{" "}
+            Ödemeler, ödeme kuruluşunun güvenli altyapısı üzerinden alınır; kart
+            bilgileri AIMLO tarafından saklanmaz.
+          </p>
+          <p>
+            Abonelik, iptal edilmediği sürece seçilen dönemin sonunda aynı
+            koşullarla otomatik olarak yenilenir ve kayıtlı ödeme yönteminden
+            tahsil edilir. Yenileme öncesinde e-posta ile bilgilendirilirsin.
+            Aboneliğini dilediğin an hesabından iptal edebilirsin; iptal, içinde
+            bulunduğun ödenmiş dönemin sonunda yürürlüğe girer ve o döneme kadar
+            hizmetten yararlanmaya devam edersin.
+          </p>
+          <p>
+            Bedel değişiklikleri yalnızca ileriye dönük olarak uygulanır ve
+            yenileme tarihinden önce bildirilir. Satış işleminin tarafları,
+            teslimat ve ifa koşulları için{" "}
+            <Link
+              href="/legal/mesafeli-satis"
+              className="text-[#FF4655] hover:underline"
+            >
+              Mesafeli Satış Sözleşmesi
+            </Link>
+            ; cayma hakkı, iptal ve iade için{" "}
+            <Link
+              href="/legal/iade"
+              className="text-[#FF4655] hover:underline"
+            >
+              İptal ve İade Koşulları
+            </Link>{" "}
+            geçerlidir. Bu koşullar ile anılan belgeler arasında çelişki
+            bulunması hâlinde, tüketici lehine olan hüküm uygulanır.
+          </p>
+        </section>
+
+        <section className="space-y-3 text-sm leading-relaxed text-neutral-300">
+          <h2 className="text-lg font-bold text-white">4. AI Çıktısı</h2>
           <p>
             AI tarafından üretilen koçluk yorumları yardımcı bilgi
             niteliğindedir. Hata, yanlış pattern tespiti veya eksik
@@ -64,7 +149,7 @@ export default function TermsPage() {
         </section>
 
         <section className="space-y-3 text-sm leading-relaxed text-neutral-300">
-          <h2 className="text-lg font-bold text-white">4. Riot Games</h2>
+          <h2 className="text-lg font-bold text-white">5. Riot Games</h2>
           <p>
             AIMLO Riot Games tarafından desteklenmemekte ve onaylanmamaktadır.
             VALORANT, Riot Games Inc.&apos;in ticari markasıdır. AIMLO Valorant
@@ -74,7 +159,11 @@ export default function TermsPage() {
         </section>
 
         <section className="space-y-3 text-sm leading-relaxed text-neutral-300">
-          <h2 className="text-lg font-bold text-white">5. İletişim</h2>
+          <h2 className="text-lg font-bold text-white">6. İletişim</h2>
+          <p>
+            Hizmet sağlayıcı: {"{{TICARET_UNVANI}}"} · {"{{ADRES}}"} ·{" "}
+            {"{{TELEFON}}"}
+          </p>
           <p>
             <a
               href="mailto:support@aimlo.gg"

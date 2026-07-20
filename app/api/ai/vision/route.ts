@@ -7,7 +7,7 @@ import { loadVisionKnowledge } from "@/lib/knowledge-loader";
 import { sanitizePromptInput } from "@/lib/prompt-safety";
 import { loadPlayerMemory, buildMemoryContext } from "@/lib/player-memory";
 import { isUuidV4 } from "@/lib/uuid";
-import { buildPolicyBlock } from "@/lib/ai-policy";
+import { buildPolicyBlock, CONFIDENCE_PROMPTS } from "@/lib/ai-policy";
 import { buildAgentAbilityHint, enforceAgentKit } from "@/lib/agent-abilities";
 import { cleanCoachText, clampWords, stripNumericHp } from "@/lib/coach-text";
 import { SYSTEM_PROMPT, SYSTEM_PROMPT_EN_ADDENDUM, USER_PROMPT, USER_PROMPT_EN, buildFactSheet, buildRoundFeedbackSchema } from "@/lib/vision-prompt";
@@ -232,9 +232,21 @@ type UserContentBlock = OpenAITextBlock | OpenAIImageBlock;
  * Next death automatically re-attaches the image.
  *
  * Image format: `data:<media_type>;base64,<data>` — OpenAI's data-URL format.
- * `detail: "auto"` lets OpenAI pick — for our 1280×720 screenshots, it
- * typically picks "low" tier which costs ~85 tokens (vs ~765 high). Saves
- * even more vs Anthropic's flat per-pixel pricing.
+ *
+ * GÖRSEL TOKEN MALİYETİ (düzeltme 2026-07-20). Buradaki eski yorum "detail:auto
+ * → ~85 token" diyordu; bu GPT-4o'nun TILE tabanlı fiyatlandırmasıydı ve gpt-5-mini
+ * için YANLIŞ. GPT-5 ailesi PATCH tabanlı fiyatlandırır:
+ *   patch  = ceil(genişlik/32) × ceil(yükseklik/32)
+ *   1280×720 → ceil(1280/32)=40 · ceil(720/32)=23 → 40×23 = 920 patch
+ *   920 ≤ 1536 patch bütçesi olduğu için görsel KÜÇÜLTÜLMEZ (bütçe aşılsaydı
+ *   model görüntüyü 1536 patch'e sığacak şekilde ölçekler).
+ *   token  = patch × 1.62 (gpt-5-mini çarpanı) → 920 × 1.62 ≈ 1490 token
+ * Yani ölümlü bir round'un görseli ~1490 token — eski varsayımın ~17,5 katı.
+ * `detail` parametresi GPT-5 ailesinde YOK SAYILIR (low/high/auto fark etmez),
+ * bu yüzden "auto" bırakmak zararsızdır ve olası model değişiminde güvenli
+ * varsayılan kalır. Görselden tasarrufun TEK yolu onu hiç göndermemektir —
+ * `died !== false` kapısı tam olarak bunu yapar (hayatta kalınan round'da
+ * görsel yok, ~1490 token doğrudan düşer).
  */
 function buildUserContent(
   died: boolean | undefined,
@@ -503,12 +515,29 @@ export async function POST(request: NextRequest) {
         anchorMode: "ocr",
         outputFocusMode: "single",
         enemyGateMode: "vision",
+        // Prompt-cache (2026-07-20): confidence roundHistory.length ile maç içinde
+        // calibrating→low→medium→high diye DEĞİŞİYORDU ve policy bloğu prefix'in
+        // en başında olduğu için her geçişte ARKASINDAKİ ~65KB KB cache'ten
+        // düşüyordu. Artık prefix'e girmiyor; birebir aynı metin
+        // (CONFIDENCE_PROMPTS[visionConfidence]) user mesajına ekleniyor —
+        // emsal: factSheet/deathTypeDirective/weaponCompDirective. `confidence`
+        // argümanı bilinçli KORUNDU: diğer opsiyonlarla tutarlılık + tek satır
+        // değişiklikle geri alınabilirlik.
+        confidenceInPrefix: false,
       }),
     ];
     // Block 0 — statik silah+komp rehberi (2026-07-08): istekten bağımsız TEK içerik,
     // policy'den hemen sonra → tüm kullanıcılar/maçlar arası prefix-cache paylaşır.
     // Bölüm seçimi user-message [SİLAH+KOMP İPUCU] işaretçisinde (cache'e dokunmaz).
     if (kb.blocks.static)     systemSections.push(kb.blocks.static);
+    // Blok 0b — koçluk profili (knowledge/ranks/universal.md). 2026-07-20 ölçümü:
+    // bu dosya rank/map/agent/side'dan BAĞIMSIZ, HER istekte BAYT-AYNI (rank-gating
+    // kaldırıldığından beri her rank aynı dosyaya map'leniyor) ama contextual'ın
+    // ~%91'i olarak dinamik blokların ARKASINDA duruyordu → her round taze
+    // faturalanıyordu. static'ten hemen sonraya alındı: static+profile birlikte
+    // 43.612 B ≈ 13.629 tokenlik KALICI küresel önek oluşturur (tüm kullanıcı ve
+    // maçlar arası paylaşılır). İçerik aynı, yalnızca yeri değişti.
+    if (kb.blocks.profile)    systemSections.push(kb.blocks.profile);
     if (kb.blocks.agent)      systemSections.push(kb.blocks.agent);
     // Agent-ability grounding (2026-06-26): oyuncunun GERÇEK kitini enjekte et →
     // model ajana OLMAYAN yeteneği önermez (canlı bug: Killjoy'a "tel"=Cypher's).
@@ -840,15 +869,25 @@ export async function POST(request: NextRequest) {
       : "";
     // Dil-uzman denetimi 2026-07-18 ★3: EN'de dil emri EN BAŞA (model önce dili
     // görsün) + kalan başlıklar reqLang'de. TR yolunda sıra/bayt birebir eski.
+    // VERİ SEVİYESİ direktifi (prompt-cache 2026-07-20): metin BİREBİR
+    // buildPolicyBlock'un ürettiğiyle aynı — yalnız system prefix'i yerine user
+    // mesajında taşınıyor. Gerekçe: roundHistory uzadıkça calibrating→low→
+    // medium→high değişiyor ve prefix'in başındaki bu tek satır her geçişte
+    // arkasındaki tüm KB'yi cache'ten düşürüyordu. Emsal: factSheet /
+    // deathTypeDirective / weaponCompDirective de aynı sebeple user-msg'de.
+    const confidenceDirective =
+      CONFIDENCE_PROMPTS[visionConfidence] || CONFIDENCE_PROMPTS.medium;
     const clientContext = reqLang === "en"
       ? langDirective +      // dil emri EN BAŞTA — Türkçe bloklardan önce
         factSheet +
+        confidenceDirective +  // VERİ SEVİYESİ — EN'de dil emrinden sonra
         deathTypeDirective +
         weaponCompDirective +
         (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, more reliable than the screenshot]\n${ctxJson}` : "") +
         (patternBlock ? `\n\n[PATTERN — recurring mistake across recent rounds. If present, reference it like a coach inside deathAnalysis or nextRoundSuggestion — do not open an extra field]\n${patternBlock}` : "")
       : factSheet +   // BİLİNEN/BİLİNMEYEN sözleşmesi EN BAŞTA — model olgu-sınırını önce görsün
         langDirective +        // dil emri — olgu sınırından hemen sonra (EN'de aktif)
+        confidenceDirective +  // VERİ SEVİYESİ — system prefix'ten taşındı (per-round, user-msg)
         deathTypeDirective +   // ÖLÜM-TİPİ çıpası — factSheet'ten hemen sonra (per-round, user-msg)
         weaponCompDirective +  // SİLAH+KOMP işaretçisi — statik rehberin bölüm seçicisi (per-round, user-msg)
         (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, screenshot'tan güvenilir]\n${ctxJson}` : "") +

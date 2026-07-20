@@ -348,6 +348,15 @@ export function buildPolicyBlock(options: {
   anchorMode?: "stats" | "ocr";          // fix #2: 'ocr' drops the invent-a-stat pressure
   outputFocusMode?: "multi" | "single";  // fix #3: 'single' matches the vision 1-2 sentence schema
   enemyGateMode?: "strict" | "vision";   // fix #4: 'vision' = concrete-anchor enemy items
+  // Prompt-cache (2026-07-20): CONFIDENCE_PROMPTS sits in the MIDDLE of the system
+  // prefix and flips 3x per match (calibrating→low→medium→high, driven by
+  // roundHistory length). OpenAI caches only the longest common PREFIX, so every
+  // flip invalidates the ~88 KB (~27.5k token) that follows it and re-bills it as
+  // fresh input. Pass `false` to keep confidence OUT of the cached prefix; the
+  // caller then appends the same text at the very END of the prompt (most-volatile
+  // last). Default `!== false` = today's behavior → report/insight/feedback output
+  // stays byte-identical.
+  confidenceInPrefix?: boolean;
 }): string {
   const parts: string[] = [];
 
@@ -364,7 +373,9 @@ export function buildPolicyBlock(options: {
   parts.push(options.outputFocusMode === "single" ? OUTPUT_FOCUS_RULE_VISION : OUTPUT_FOCUS_RULE);
   parts.push(VAGUE_BAN_RULE);
   parts.push(TONE_PROMPTS[options.tone || "strict"] || TONE_PROMPTS.strict);
-  parts.push(CONFIDENCE_PROMPTS[options.confidence || "medium"] || CONFIDENCE_PROMPTS.medium);
+  if (options.confidenceInPrefix !== false) {
+    parts.push(CONFIDENCE_PROMPTS[options.confidence || "medium"] || CONFIDENCE_PROMPTS.medium);
+  }
   parts.push(PERSONALIZATION_RULE);
   parts.push(TIME_BAN_RULE);
   parts.push(HP_BAN_RULE);

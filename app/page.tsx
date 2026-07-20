@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { saveDraft, loadDraft, clearDraft, saveLang, loadLang } from "@/lib/storage";
 import { formatMap, formatAgent, normalizeSide } from "@/lib/format-display";
@@ -1691,6 +1692,12 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
                 <span className="nav-num">0{navIdx + 1}</span>{label}
               </button>
             ))}
+            {/* Fiyatlandırma — gerçek sayfa bağı (scroll değil). Ürün→fiyat→sepet
+                akışının ilk ekranda görünür olması iyzico incelemesi için şart. */}
+            <Link href="/fiyatlandirma" className="text-[13px] text-neutral-400 transition-colors duration-200 hover:text-white font-medium">
+              <span className="nav-num">0{Object.keys(l.landingNav).length + 1}</span>
+              {lang === "tr" ? "Fiyatlandırma" : "Pricing"}
+            </Link>
           </div>
           <div className="flex items-center gap-3">
             <button onClick={onLangToggle} className="rounded-lg border border-white/[0.08] px-2.5 py-1.5 text-[11px] font-semibold text-neutral-500 transition hover:text-white hover:border-white/[0.15]">
@@ -1725,6 +1732,9 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             {Object.entries(l.landingNav).map(([key, label]) => (
               <button key={key} onClick={() => scrollTo(`section-${key}`)} className="block w-full text-left text-sm text-neutral-400 py-2 hover:text-white transition">{label}</button>
             ))}
+            <Link href="/fiyatlandirma" onClick={() => setMobileMenu(false)} className="block w-full text-left text-sm text-neutral-400 py-2 hover:text-white transition">
+              {lang === "tr" ? "Fiyatlandırma" : "Pricing"}
+            </Link>
             <div className="flex gap-2 pt-3">
               {user ? (
                 <>
@@ -1798,7 +1808,24 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
                   </button>
                 </>
               )}
+              {/* Fiyatlandırma — ürün→fiyat→sepet akışının ilk ekranda görünür
+                  olması gerekiyor (iyzico incelemesi siteyi elle geziyor). */}
+              <Link
+                data-magnetic
+                href="/fiyatlandirma"
+                className="btn-ghost rounded-xl px-8 py-3.5 text-[14px] flex items-center gap-2"
+              >
+                {lang === "tr" ? "Fiyatlandırma" : "Pricing"}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+              </Link>
             </div>
+            {/* Fiyat çıpası — sayfada rakamla fiyat geçmesi şart. TL/USD dil
+                seçimine bağlı; TR yerleşiklere TL gösterilir (Tebliğ 2008-32/34). */}
+            <p className="mt-5 text-[12px] text-neutral-500">
+              {lang === "tr"
+                ? "499 TL/ay · yıllık 4.790 TL (KDV dahil) · taksit yok"
+                : "$9.99/mo · $95.88/year (VAT included) · no installments"}
+            </p>
 
             {/* Stats strip — VANGUARD style, honest product claims */}
             <div className="mt-12 pt-8 border-t border-white/[0.08] grid grid-cols-3 gap-6 animate-slide-up stagger-4 max-w-md mx-auto lg:mx-0">
@@ -2577,7 +2604,9 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             {[
               lang === "tr" ? "Otomatik izleme" : "Auto tracking",
               lang === "tr" ? "In-game overlay" : "In-game overlay",
-              lang === "tr" ? "Sadece 10$" : "Only $10",
+              // Fiyat KDV dahil ve dile göre para birimi: TR yerleşiklere dövizle
+              // fiyatlama yasak (Tebliğ 2008-32/34 Md.8/7) → TL göster.
+              lang === "tr" ? "499 TL/ay (KDV dahil)" : "$9.99/mo (VAT incl.)",
             ].map((t2, i2) => (
               <span key={i2} className="flex items-center gap-2.5">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF4655" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -2670,7 +2699,54 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               <button onClick={() => document.getElementById("section-faq")?.scrollIntoView({ behavior: "smooth" })} className="text-[12px] text-neutral-600 hover:text-white transition">{l.landingNav.faq}</button>
             </div>
           </div>
-          <div className="mt-8 pt-6 border-t border-white/[0.04] text-center">
+
+          {/* ─── YASAL BAĞLAR — Mesafeli Sözleşmeler Yönetmeliği bu metinlerin
+                sitede kolayca erişilebilir olmasını zorunlu kılar; ayrıca iyzico
+                incelemesi siteyi elle gezer, ana sayfadan ulaşılamayan sayfayı
+                "yok" sayar. Bu yüzden her bağ gerçek sayfa bağıdır (scroll değil). ─── */}
+          <nav
+            aria-label={lang === "tr" ? "Yasal bilgiler" : "Legal information"}
+            className="mt-10 pt-8 border-t border-white/[0.04]"
+          >
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+              {[
+                { href: "/fiyatlandirma", tr: "Fiyatlandırma", en: "Pricing" },
+                { href: "/legal/mesafeli-satis", tr: "Mesafeli Satış Sözleşmesi", en: "Distance Sales Agreement" },
+                { href: "/legal/iade", tr: "İptal, İade ve Cayma Koşulları", en: "Cancellation & Refund Policy" },
+                { href: "/legal/terms", tr: "Kullanım Koşulları", en: "Terms of Use" },
+                { href: "/legal/privacy", tr: "Gizlilik Politikası", en: "Privacy Policy" },
+                { href: "/legal/kvkk", tr: "KVKK Aydınlatma Metni", en: "KVKK Disclosure" },
+                { href: "/iletisim", tr: "İletişim", en: "Contact" },
+              ].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="text-[12px] text-neutral-500 hover:text-white transition"
+                >
+                  {lang === "tr" ? item.tr : item.en}
+                </Link>
+              ))}
+            </div>
+          </nav>
+
+          {/* ─── SATICI KÜNYESİ + fiyat notu ───────────────────────────────
+                Künye alanları softi tarafından doldurulacak — uydurma şirket
+                bilgisi YAZILMADI, placeholder'lar bilerek görünür bırakıldı.
+                Fiyat notu: Tebliğ 2008-32/34 Md.8/7 uyarınca TR'de yerleşik
+                müşteri dövizle değil TL ile ücretlendirilir. ─── */}
+          <div className="mt-8 pt-6 border-t border-white/[0.04] text-center space-y-2">
+            <p className="text-[11px] text-neutral-600 leading-relaxed">
+              {lang === "tr" ? "Satıcı: " : "Seller: "}
+              {"{{TICARET_UNVANI}}"} · {"{{ADRES}}"} · {"{{TELEFON}}"} · {"{{EPOSTA}}"}
+              <br />
+              {lang === "tr" ? "Vergi Dairesi / No: " : "Tax Office / No: "}
+              {"{{VERGI_DAIRESI}}"} / {"{{VERGI_NO}}"} · MERSİS: {"{{MERSIS}}"}
+            </p>
+            <p className="text-[11px] text-neutral-600 leading-relaxed max-w-2xl mx-auto">
+              {lang === "tr"
+                ? "Tüm fiyatlar KDV dahildir ve hiçbir planda taksit uygulanmaz. Türkiye'de yerleşik müşteriler ödeme adımında TL ile ücretlendirilir."
+                : "All prices include VAT and no plan offers installments. Customers resident in Türkiye are charged in TRY at checkout."}
+            </p>
             <p className="text-[11px] text-neutral-800">{IC.copy} {new Date().getFullYear()} AIMLO. All rights reserved.</p>
           </div>
         </div>
