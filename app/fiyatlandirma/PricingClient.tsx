@@ -181,7 +181,8 @@ export default function PricingClient({ initialLang = "TR" }: { initialLang?: La
     document.getElementById("planlar")?.scrollIntoView({ behavior: "smooth", block: "start" });
 
   return (
-    <div className="space-y-20">
+    <>
+    <div className="space-y-20 pb-24">
       {/* ── Bölge / para birimi — "Türkiye" ↔ "Diğer ülkeler" ── */}
       <div className="flex justify-end pr-rise">
         <div className="inline-flex rounded-lg border border-white/[0.08] p-0.5">
@@ -388,5 +389,31 @@ export default function PricingClient({ initialLang = "TR" }: { initialLang?: La
         </p>
       </section>
     </div>
+
+    {/* ── SABİT ÖDEME ÇUBUĞU (softi 2026-07-20: "geri getir aşağıda") ──
+        Sayfanın en altındaki tam panel DURUYOR; bu ince çubuk ona EK.
+        Nerede olursan ol seçili plan + ödeme bir tık uzakta. Alttaki
+        panelle çakışmasın diye içerik pb-24 ile boşluk bırakıyor. */}
+    <div className="pr-paybar pr-bar fixed bottom-0 left-0 right-0 z-40" style={{ animationDelay: "600ms" }}>
+      <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 py-3">
+        <div key={`${lang}-${plan}-bar`} className="pr-price min-w-0">
+          <p className="text-[10px] font-bold uppercase tracking-wider text-neutral-500">
+            {plan === "yillik" ? c.yearly : c.monthly}
+          </p>
+          <p className="truncate text-[16px] font-black text-white">
+            {sel.price}
+            <span className="text-[12px] font-medium text-neutral-500">{sel.period}</span>
+            <span className="ml-2 text-[10px] font-medium text-neutral-500">{c.vat}</span>
+          </p>
+        </div>
+        <Link
+          href={`/satin-al?plan=${plan}`}
+          className="btn-neon shrink-0 rounded-xl px-6 py-2.5 text-[13px] font-bold"
+        >
+          {c.payCta}
+        </Link>
+      </div>
+    </div>
+    </>
   );
 }

@@ -8,6 +8,8 @@ import { trLocative } from "@/lib/coach-text";
 import { calculateSkillProfile } from "@/lib/skill-system";
 import { analyzePlaystyle } from "@/lib/playstyle-system";
 import { ds } from "@/constants/design";
+import { sortedPosts, relativeTime, readLabel, fullDate } from "@/lib/blog";
+import { useNow } from "./blog/use-blog-time";
 import {
   AGENT_COLORS, AGENT_BORDER, AGENT_ACCENT,
   getAgentRole, getAgentInitials, agentImgUrl,
@@ -295,254 +297,6 @@ const t = {
       "AI destekli Valorant analizleri, rank geçiş rehberleri, meta içgörüleri ve topluluktan en iyi pratikler.",
     landingBlogReadMore: "Devamını Oku",
     landingBlogAll: "Tüm Yazılar",
-    landingBlogPosts: [
-      {
-        category: "Rank Rehberi",
-        title: "Gold'dan Diamond'a: En Sık Yapılan 5 Pozisyonlama Hatası",
-        excerpt: "AIMLO'nun 10.000+ maç analizine göre Gold-Diamond geçişinde oyuncuların %78'inin yaptığı kritik pozisyonlama hataları ve çözümleri.",
-        readTime: "5 dk",
-        date: "3 saat önce",
-        color: "#FF4655",
-        content: `Gold ve Diamond arasındaki fark sadece aim değildir. AIMLO'nun 10.000'den fazla maç analizine göre bu geçişte en çok kaybedilen round'ların %78'i pozisyonlama hatalarından kaynaklanıyor. İşte en kritik 5 hata ve çözümleri:
-
-## 1. Aynı Noktadan İkinci Peek
-
-Oyuncuların %42'si bir round'da aynı açıdan iki kez peek atıyor. Bu, AI'ın tespit ettiği en yaygın hata. Rakip ilk peek'te seni görmediyse bile, sesini duydu ve crosshair'ini oraya sabitledi. İkinci peek = kesin ölüm.
-
-**Çözüm:** Her peek sonrası 2-3 metre yer değiştir. Farklı yükseklikten (headglitch, crouch) peek at. Smoke'lu köşeyi kullan, swing at.
-
-## 2. Kötü Off-angle Kullanımı
-
-Diamond+ oyuncular standart pozisyonlara girmek yerine beklenmeyen açılar kullanır. Gold oyuncularının %63'ü hâlâ default "köşede otur" mantığıyla oynuyor.
-
-**Çözüm:** Her haritada 3 off-angle öğren. Ascent A Site'ta Generator üstü, Bind'da Hookah back veya Ascent Heaven gibi. Her round farklı bir off-angle kullan.
-
-## 3. Trade Mesafesi Hatası
-
-Entry fragger'dan 5+ metre uzakta duruyorsan trade edemezsin. 1 metreden yakınsan utility ile ikiniz birden ölürsünüz. İdeal: 2-3 saniye içinde destek verebileceğin mesafe.
-
-**Çözüm:** Entry'den sonra hemen arkasından değil, yandan destek ver. Farklı açıdan bakabilen pozisyona geç. Entry öldüğünde 2 saniye içinde trade kill alman lazım.
-
-## 4. Crosshair Placement Zayıflığı
-
-AIMLO verilerine göre Gold oyuncuları ortalama %38 daha fazla aim düzeltmesi yapıyor çünkü crosshair'leri yanlış yerde. Yere bakmak, duvara bakmak, havaya bakmak = kaybedilen round.
-
-**Çözüm:** Crosshair her zaman **baş hizasında** ve **rakip olabilecek köşelerde** olmalı. Yürürken bile aim place yap. Bu alışkanlığı custom game'de 15 dakika çalış.
-
-## 5. Sound Cue'ları Görmezden Gelme
-
-Adım, reload, ability sesleri en değerli info kaynağı. Düşük rank oyuncular genellikle müzik dinleyerek oynuyor veya ses seviyesini düşürüyor. Bu %40'a kadar info kaybı demek.
-
-**Çözüm:** İyi headphone kullan. Müziği kapat. Her round başında dinle, callout yap. Sound cue'ları pozisyonlamanın parçası yap.
-
-## Sonuç
-
-Bu 5 hatayı düzelten AIMLO kullanıcılarının ortalama **2-3 ay içinde Diamond'a çıkma oranı %61 arttı**. Pozisyonlama, aim'den daha önemlidir. AI ile her round'unu analiz edersen hangi hataları tekrarladığını görebilir ve hızlıca düzeltebilirsin.`,
-      },
-      {
-        category: "META ANALİZİ",
-        title: "2026 Meta: Duelist Havuzundaki Değişimler",
-        excerpt: "Jett'in gerilemesinden Waylay'in yükselişine. Bu patch'te hangi duelist'ler öne çıkıyor? AI verilerine dayalı detaylı analiz.",
-        readTime: "7 dk",
-        date: "12 saat önce",
-        color: "#4D7CFF",
-        content: `2026 yılının ilk patch'iyle birlikte Valorant duelist havuzu önemli değişimler geçirdi. AIMLO'nun topluluktaki 15.000+ ranked maç verisiyle bu değişimleri inceledik. İşte öne çıkan bulgular:
-
-## Jett'in Gerilemesi
-
-Jett, 3 yıl boyunca Valorant'ın kral duelist'iydi. Ancak AIMLO verilerine göre pick rate'i son 6 ayda **%47'den %28'e** düştü. Win rate'i de %52'den %49'a geriledi.
-
-**Neden?** Dash nerfleri, Cloudburst cooldown değişiklikleri ve haritalara uyum sağlayamama. Özellikle Lotus ve Sunset gibi yeni haritalarda Jett'in mobilitesi yeterince etkili olmuyor.
-
-## Waylay'in Yükselişi
-
-Yeni duelist Waylay, eklenmesinin ardından pick rate'te **%23'e** fırladı. Radiant seviyesinde Waylay win rate'i **%54**, bu tüm duelist'ler arasında en yüksek.
-
-**Neden güçlü?** Light Speed ability'si ile agresif peek'lerden sonra geri çekilme imkanı veriyor. Ultimate'i Fracture ve Bind gibi kapalı haritalarda oyunu tersine çevirebiliyor.
-
-## Raze: Stabil Performans
-
-Raze, pick rate'te küçük düşüşle (%31 → %28) birlikte hâlâ güçlü. Win rate'i **%51.5** ile stabil. Özellikle Icebox ve Split gibi dar koridorlu haritalarda satchel combat mobility sağlıyor.
-
-## Iso: Gizli Şampiyon
-
-Iso hâlâ düşük pick rate'te (%8) ama AIMLO verilerine göre Diamond+ maçlarda **%56 win rate** ile en verimli duelist. Shield ability'si ile 1v1'lerde neredeyse garantili kazanç sağlıyor.
-
-## Neon: Düşüş Yolunda
-
-Neon'un pick rate'i %19'dan %11'e düştü. Nerfler Run It Down mekaniğini yavaşlattı. Ancak Lotus'ta hâlâ Tier S.
-
-## Tahminler
-
-2026'nın ikinci yarısında:
-- **Waylay** meta lider kalacak
-- **Jett** sadece 2 haritada (Ascent, Haven) pick edilecek
-- **Iso** pro maçlarda daha çok görünmeye başlayacak
-- Yeni bir duelist'in Q3'te gelmesi bekleniyor
-
-## Sonuç
-
-Meta değişiyor ve agent havuzunu güncel tutmak rank atlamak için kritik. AIMLO her maçından sonra meta'ya uygun agent önerileri sunar. Şu an **Waylay** veya **Iso** öğrenerek hızla rank atlayabilirsin.`,
-      },
-      {
-        category: "Harita Rehberi",
-        title: "Ascent B Site: Komple Anchor Rehberi",
-        excerpt: "B Main, B Link ve Market kontrolü. Sentinel oyuncuları için step-by-step anchor rehberi ve en iyi setup pozisyonları.",
-        readTime: "6 dk",
-        date: "1 gün önce",
-        color: "#B44DFF",
-        content: `Ascent, Valorant'ın en eski ve en çok oynanan haritalarından biri. B Site ise anchor'lar için en zorlu noktalardan biri. AIMLO'nun Ascent B Site analizlerinden derlediğimiz kapsamlı rehber:
-
-## Harita Dinamiği
-
-B Site Ascent'te **3 farklı giriş noktası** var: B Main, B Link ve Market. Bir anchor olarak bu üç açıyı da kontrol etmen gerekiyor. AIMLO verilerine göre B Site'ta en çok executeler B Main'den (%64) geliyor, Market ise %21 ile ikinci sırada.
-
-## En İyi Anchor Pozisyonları
-
-### 1. CT Default Pozisyonu
-**Stair top'ta** durmak en güvenli ve en yaygın pozisyon. Hem B Main'i hem de Site içini görebilirsin. Fakat bu pozisyon çok bilinen bir spot, swing ile kolayca ölebilirsin.
-
-### 2. Boathouse İçi
-**Boathouse'un içine** gizlenmek sürpriz pozisyon yaratır. B Main'den gelen düşmanlar içeriye girdiğinde arkalarından tarayabilirsin. Özellikle Killjoy ultilarında veya Chamber tripwire'ları ile kombine ederek kullanışlı.
-
-### 3. Default Box Arkası
-Site'ın ortasındaki kutuların arkasında **crouch** ile saklanma taktiği. Düşük rank'te pek kullanılmıyor ama Diamond+ seviyede %58 başarı oranı var.
-
-## Agent Önerileri
-
-- **Killjoy:** Mutlak en iyi B Site anchor. Turret'ı Market'e, Alarm Bot'u B Link'e, Nanoswarm'ları default'a yerleştir. Ultimate ile retake'te sayısal üstünlük yaratırsın.
-
-- **Cypher:** Tripwire'ları Market ve B Main'e koy. Spycam'ı Boathouse'a yönlendir. Ultimate bomb planlama sonrası düşman pozisyonu için paha biçilmez.
-
-- **Chamber:** Trademark'ı B Main'e kur. Headhunter ile uzun mesafeden kill alırsın. Rendezvous ile hem site'ı hem de Link'i kontrol edebilirsin.
-
-- **Sage:** Slow Orb'ları B Main girişine at. Barrier Wall'ı execute zamanı B Main'i kapat. Retake'te kritik değer.
-
-## Kritik Info Noktaları
-
-B Link'ten gelen ses bazen kaçırılır. **Stairs seslerine** özellikle dikkat et. Market'ten gelen footstep'ler 8 saniye içinde default'a gelir, bu süreyi takım rotate'i için kullan.
-
-## Utility Kullanımı
-
-- Site'a execute sırasında **B Main smoke'u** varsa %70 ihtimalle zamana oynarlar
-- **Market flash** geldiğinde hemen dönüp Market girişine bak
-- **Molly sesi** B Link'ten geliyorsa Heaven'a çekil
-
-## Takım Koordinasyonu
-
-Anchor olarak **"1 kill 1 rotate"** kuralına uy. 1 kill aldıktan sonra mutlaka pozisyon değiştir veya rotate çağrısı yap. Single kill ile site tutulmaz.
-
-## Sonuç
-
-B Site'ı anchor etmek disiplin, info yönetimi ve doğru utility kullanımı gerektirir. AIMLO maçlarını analiz ederek anchor performansını ölç ve hangi pozisyonların sana uygun olduğunu bul.`,
-      },
-      {
-        category: "Strateji",
-        title: "Eco Round'u Kazanmanın 3 Altın Kuralı",
-        excerpt: "Eco round'lar sadece şanstan ibaret değil. Pro oyuncuların kullandığı eco kazanma stratejileri ve AI'ın önerdiği optimal yaklaşımlar.",
-        readTime: "4 dk",
-        date: "2 gün önce",
-        color: "#2ECC71",
-        content: `Eco round'lar Valorant'ta en yanlış oynanan round'lardan biri. Oyuncuların %72'si eco round'u "kaybedilecek round" olarak görüyor ve yeterince efor sarfetmiyor. Ama AIMLO verilerine göre **doğru oynanan eco round'ların %31'i kazanılıyor**. İşte 3 altın kural:
-
-## 1. Stack ve Pick Oyna
-
-Eco'da asla açık alanlarda savaşma. **Köşelere saklan, angle hold et, kill al**. Rakip full-buy olduğu için agresif peek atar. Sen sadece bekle.
-
-**Pro Tip:** Tüm takım 1-2 pozisyonda stack olsun. 5 kişi farklı yerlerde = 5 ayrı 1v5. 5 kişi bir arada = 5v5 sahte ekonomi etkisi.
-
-## 2. Ekonomi Hasarı Öncelik
-
-Eco round'u kazanmak güzel ama asıl amaç rakibin ekonomisini bozmak. **Operator çalmak, Vandal çalmak** = sonraki round'da kullanırsın. Rakip yeniden buy etmek zorunda kalır.
-
-**AIMLO Verisi:** Silah çalınan round'lardan sonraki round'ların %44'ü silah çalanın takımı tarafından kazanılıyor.
-
-## 3. Rotate ve Split
-
-Tek site'a basma. Bir-iki oyuncu fake yapsın, gerçek saldırı diğer site'tan gelsin. Eco'da rakip defansı rotate'i tahmin edemez.
-
-**Classic Kombo:** 2 oyuncu A'da noise yap, 3 oyuncu B'den silent rush. Rakip rotate ettiğinde B zaten alınmış olur.
-
-## Bonus: Full Save vs Force Buy
-
-Eğer takım ekonomisi **2000'in altındaysa** full save daha mantıklı. 2000-3000 arasında ise pistol+armor force buy denenebilir. AIMLO AI maç içinde sana optimal ekonomi önerisi sunar.
-
-## Hangi Pistol'ü Al?
-
-- **Sheriff:** Aim iyiyse 1-tap için en iyi seçim
-- **Ghost:** Orta mesafe ve spam için güvenli seçim
-- **Frenzy:** Close-range rush için sürpriz factor
-- **Classic:** Sadece full save durumunda kalır
-
-## Sonuç
-
-Eco round'lar rank atlatacak kadar önemli. Her eco round'u kazanırsan rakibin ekonomisi çöker ve sonraki 2-3 round'u da alma şansın artar. AIMLO ile ekonomi yönetimini optimize et, maç kazanmaya başla.`,
-      },
-      {
-        category: "Ajan Rehberi",
-        title: "Sova Dart'ları: Haven'de 8 Temel Line-up",
-        excerpt: "A Site, B Site ve C Site için AIMLO topluluğunun en çok kullandığı Sova recon dart line-up'ları. Görsel rehberle birlikte.",
-        readTime: "8 dk",
-        date: "4 gün önce",
-        color: "#ECB73E",
-      },
-      {
-        category: "Ajan Rehberi",
-        title: "Clove Rehberi: Yeni Controller'ı Sıfırdan Öğren",
-        excerpt: "Clove'un tüm yeteneklerini, ultimate kombolarını ve hangi haritalarda en etkili olduğunu AI destekli istatistiklerle öğren.",
-        readTime: "9 dk",
-        date: "1 hafta önce",
-        color: "#FF4655",
-      },
-      {
-        category: "Rank Rehberi",
-        title: "Radiant Oyuncuların 5 Ortak Alışkanlığı",
-        excerpt: "AIMLO'nun takip ettiği 200+ Radiant oyuncunun analizi: karar verme hızı, crosshair placement ve iletişim pattern'leri.",
-        readTime: "6 dk",
-        date: "2 hafta önce",
-        color: "#4D7CFF",
-      },
-      {
-        category: "Harita Rehberi",
-        title: "Split Mid Kontrolü: Attack Tarafı Taktikleri",
-        excerpt: "Split'in en kritik bölgesi olan Mid'i nasıl kontrol edersin? AI istatistiklerine göre %63 kazanma oranlı 4 execute stratejisi.",
-        readTime: "7 dk",
-        date: "3 hafta önce",
-        color: "#B44DFF",
-      },
-      {
-        category: "META ANALİZİ",
-        title: "Chamber Rework Sonrası: Hala Viable mi?",
-        excerpt: "Rework sonrası Chamber'ın pick rate'i düştü ama hala kazanma oranı yüksek. Hangi haritalarda ve takım kompozisyonlarında işe yarıyor?",
-        readTime: "5 dk",
-        date: "1 ay önce",
-        color: "#32B8B8",
-      },
-      {
-        category: "Strateji",
-        title: "Round Ekonomisi 101: Loss Bonus Matematiği",
-        excerpt: "Pro maçlarda sıkça görülen ekonomi yönetimi hatalarını önlemek için temel kurallar. Save/force/eco kararlarını veriye dayalı al.",
-        readTime: "6 dk",
-        date: "1 ay önce",
-        color: "#2ECC71",
-      },
-      {
-        category: "Ajan Rehberi",
-        title: "Viper Ultimate Kullanımı: 12 En İyi Post-plant",
-        excerpt: "Viper's Pit ile post-plant'te nasıl dominant olursun? AIMLO verilerinden derlenmiş en yüksek kazanma oranlı 12 pozisyon.",
-        readTime: "10 dk",
-        date: "2 ay önce",
-        color: "#ECB73E",
-      },
-      {
-        category: "Rank Rehberi",
-        title: "Iron'dan Silver'a: Yeni Başlayanlar İçin 7 Altın Kural",
-        excerpt: "Valorant'ta ilk rank maçlarına giren oyuncular için: crosshair ayarları, temel pozisyonlama ve iletişim ipuçları.",
-        readTime: "5 dk",
-        date: "3 ay önce",
-        color: "#FF4655",
-      },
-    ],
     landingHelpText:
       "Sorularınız mı var? Bize e-posta gönderin, en kısa sürede dönüş yapalım.",
     landingHelpEmail: "İletişim: support@aimlo.gg",
@@ -827,104 +581,6 @@ Eco round'lar rank atlatacak kadar önemli. Her eco round'u kazanırsan rakibin 
       "AI-powered Valorant analyses, rank climbing guides, meta insights, and best practices from the community.",
     landingBlogReadMore: "Read More",
     landingBlogAll: "All Posts",
-    landingBlogPosts: [
-      {
-        category: "Rank Guide",
-        title: "Gold to Diamond: Top 5 Positioning Mistakes",
-        excerpt: "Based on AIMLO's analysis of 10,000+ matches, these are the critical positioning mistakes 78% of players make during the Gold-Diamond transition.",
-        readTime: "5 min",
-        date: "3 hours ago",
-        color: "#FF4655",
-      },
-      {
-        category: "Meta Analysis",
-        title: "2026 Meta: Shifts in the Duelist Pool",
-        excerpt: "From Jett's decline to Waylay's rise. Which duelists dominate this patch? A detailed AI-driven data analysis.",
-        readTime: "7 min",
-        date: "12 hours ago",
-        color: "#4D7CFF",
-      },
-      {
-        category: "Map Guide",
-        title: "Ascent B Site: Complete Anchor Guide",
-        excerpt: "B Main, B Link, and Market control. A step-by-step anchoring guide and optimal setup positions for sentinel players.",
-        readTime: "6 min",
-        date: "1 day ago",
-        color: "#B44DFF",
-      },
-      {
-        category: "Strategy",
-        title: "3 Golden Rules for Winning Eco Rounds",
-        excerpt: "Eco rounds are not just luck. Pro player strategies and AI-recommended optimal approaches for winning eco situations.",
-        readTime: "4 min",
-        date: "2 days ago",
-        color: "#2ECC71",
-      },
-      {
-        category: "Agent Guide",
-        title: "Sova Darts: 8 Essential Line-ups on Haven",
-        excerpt: "Most-used Sova recon dart line-ups for A, B, and C sites by the AIMLO community. Includes visual guides.",
-        readTime: "8 min",
-        date: "4 days ago",
-        color: "#ECB73E",
-      },
-      {
-        category: "Agent Guide",
-        title: "Clove Guide: Learn the New Controller from Zero",
-        excerpt: "Master Clove's abilities, ult combos, and best-performing maps with AI-powered stats and scenarios.",
-        readTime: "9 min",
-        date: "1 week ago",
-        color: "#FF4655",
-      },
-      {
-        category: "Rank Guide",
-        title: "5 Common Habits of Radiant Players",
-        excerpt: "An analysis of 200+ Radiant players tracked by AIMLO: decision speed, crosshair placement, and communication patterns.",
-        readTime: "6 min",
-        date: "2 weeks ago",
-        color: "#4D7CFF",
-      },
-      {
-        category: "Map Guide",
-        title: "Split Mid Control: Attack Side Tactics",
-        excerpt: "How to control Split's most critical area. 4 execute strategies with 63% win rates based on AI data.",
-        readTime: "7 min",
-        date: "3 weeks ago",
-        color: "#B44DFF",
-      },
-      {
-        category: "Meta Analysis",
-        title: "Post-Rework Chamber: Still Viable?",
-        excerpt: "Chamber's pick rate dropped after the rework, but his win rate is still high. Which maps and comps does he shine on?",
-        readTime: "5 min",
-        date: "1 month ago",
-        color: "#32B8B8",
-      },
-      {
-        category: "Strategy",
-        title: "Round Economy 101: Loss Bonus Math",
-        excerpt: "Basic rules to avoid economy management mistakes seen in pro matches. Make save/force/eco decisions backed by data.",
-        readTime: "6 min",
-        date: "1 month ago",
-        color: "#2ECC71",
-      },
-      {
-        category: "Agent Guide",
-        title: "Viper Ultimate Usage: 12 Best Post-plants",
-        excerpt: "How to dominate post-plants with Viper's Pit. 12 highest win-rate positions compiled from AIMLO data.",
-        readTime: "10 min",
-        date: "2 months ago",
-        color: "#ECB73E",
-      },
-      {
-        category: "Rank Guide",
-        title: "Iron to Silver: 7 Golden Rules for Beginners",
-        excerpt: "For new players entering ranked: crosshair settings, basic positioning, and communication tips.",
-        readTime: "5 min",
-        date: "3 months ago",
-        color: "#FF4655",
-      },
-    ],
     landingHelpText:
       "Have questions? Send us an email and we'll get back to you as soon as possible.",
     landingHelpEmail: "Contact: support@aimlo.gg",
@@ -1439,8 +1095,6 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
-  const [showAllBlog, setShowAllBlog] = useState(false);
-  const [selectedPost, setSelectedPost] = useState<number | null>(null);
   const [activeFeature, setActiveFeature] = useState(0);
   const [featurePaused, setFeaturePaused] = useState(false);
 
@@ -1452,17 +1106,11 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
     return () => clearInterval(id);
   }, [featurePaused, lang]);
 
-  // ESC to close blog modals
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        if (selectedPost !== null) setSelectedPost(null);
-        else if (showAllBlog) setShowAllBlog(false);
-      }
-    };
-    window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
-  }, [selectedPost, showAllBlog]);
+  // Blog — tek kaynak lib/blog.ts; en yeni 4 yazi.
+  const latestPosts = useMemo(() => sortedPosts().slice(0, 4), []);
+  // Tarih SABIT METIN DEGIL: "x once" tarayicida, sayfa acildigi anda
+  // hesaplanir. Ilk (sunucu) render'da tam tarih gosterilir.
+  const blogNow = useNow();
 
   const { ref: howRevealRef, visible: howRevealVisible } = useScrollReveal(0.15);
   const { ref: diffRevealRef, visible: diffRevealVisible } = useScrollReveal(0.15);
@@ -1686,41 +1334,37 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               AIMLO
             </span>
           </div>
-          <div className="hidden md:flex items-center gap-8">
-            {Object.entries(l.landingNav).map(([key, label], navIdx) => (
-              <button key={key} onClick={() => scrollTo(`section-${key}`)} className="text-[13px] text-neutral-400 transition-colors duration-200 hover:text-white font-medium">
-                <span className="nav-num">0{navIdx + 1}</span>{label}
-              </button>
-            ))}
-            {/* Fiyatlandırma — gerçek sayfa bağı (scroll değil). Ürün→fiyat→sepet
-                akışının ilk ekranda görünür olması iyzico incelemesi için şart. */}
-            <Link href="/fiyatlandirma" className="text-[13px] text-neutral-400 transition-colors duration-200 hover:text-white font-medium">
-              <span className="nav-num">0{Object.keys(l.landingNav).length + 1}</span>
+          {/* Nav SADELEŞTİRİLDİ (softi 2026-07-20): numaralı 4 bağ + 4 buton
+              kalabalıktı. Artık 3 sade bağ + sağda tek birincil eylem.
+              Numara rozetleri (01/02/03) kaldırıldı — görsel gürültüydü. */}
+          <div className="hidden md:flex items-center gap-7">
+            <button onClick={() => scrollTo("section-about")} className="text-[13px] font-medium text-neutral-400 transition-colors duration-200 hover:text-white">
+              {l.landingNav.about}
+            </button>
+            <Link href="/blog" className="text-[13px] font-medium text-neutral-400 transition-colors duration-200 hover:text-white">
+              {l.landingNav.blog}
+            </Link>
+            <Link href="/fiyatlandirma" className="text-[13px] font-medium text-neutral-400 transition-colors duration-200 hover:text-white">
               {lang === "tr" ? "Fiyatlandırma" : "Pricing"}
             </Link>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             <button onClick={onLangToggle} className="rounded-lg border border-white/[0.08] px-2.5 py-1.5 text-[11px] font-semibold text-neutral-500 transition hover:text-white hover:border-white/[0.15]">
               {lang === "tr" ? "TR" : "EN"}
             </button>
             {user ? (
               <>
-                <button onClick={onDashboard} className="hidden sm:block text-[13px] text-neutral-400 transition hover:text-white px-2 font-medium">
+                <Link href="/account" className="hidden sm:block px-2 text-[13px] font-medium text-neutral-400 transition hover:text-white">
+                  {lang === "tr" ? "Hesabım" : "Account"}
+                </Link>
+                <button onClick={onDashboard} className="hidden sm:block px-2 text-[13px] font-medium text-neutral-400 transition hover:text-white">
                   {l.goToDashboard}
-                </button>
-                <button onClick={onSignOut} className="hidden sm:block text-[12px] text-neutral-600 transition hover:text-red-400 px-2">
-                  {l.authSignOut}
                 </button>
               </>
             ) : (
-              <>
-                <button onClick={onLogin} className="hidden sm:block text-[13px] text-neutral-400 transition hover:text-white px-2 font-medium">
-                  {l.authLogin}
-                </button>
-                <button onClick={onRegister} className="hidden sm:block rounded-lg border border-white/[0.14] px-4 py-2 text-[12px] font-semibold text-white transition hover:bg-white/[0.06]">
-                  {l.authRegister}
-                </button>
-              </>
+              <button onClick={onLogin} className="hidden sm:block px-2 text-[13px] font-medium text-neutral-400 transition hover:text-white">
+                {l.authLogin}
+              </button>
             )}
             {/* Satın Al — sağ üstteki BİRİNCİL eylem (softi 2026-07-20).
                 Ürün→fiyat→sepet akışının giriş noktası; iyzico incelemesi
@@ -2334,11 +1978,11 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {l.landingBlogPosts.slice(0, 4).map((post, i) => (
-            <article
-              key={i}
-              onClick={() => setSelectedPost(i)}
-              className="card-xtract group p-7 cursor-pointer relative overflow-hidden"
+          {latestPosts.map((post, i) => (
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="card-xtract group p-7 cursor-pointer relative overflow-hidden block"
               style={{ animationDelay: `${i * 100}ms` }}
             >
               {/* Top accent bar */}
@@ -2346,7 +1990,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
                 className="absolute top-0 left-0 right-0 h-0.5 opacity-60 group-hover:opacity-100 transition-opacity"
                 style={{ background: `linear-gradient(90deg, ${post.color}, transparent)` }}
               />
-              {/* Category + date */}
+              {/* Category + read time */}
               <div className="flex items-center justify-between mb-4">
                 <span
                   className="text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 rounded-md"
@@ -2356,27 +2000,31 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
                     border: `1px solid ${post.color}20`,
                   }}
                 >
-                  {post.category}
+                  {post.category[lang]}
                 </span>
                 <span className="text-[11px] text-neutral-500 flex items-center gap-2">
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                     <circle cx="12" cy="12" r="10" />
                     <polyline points="12 6 12 12 16 14" />
                   </svg>
-                  {post.readTime}
+                  {readLabel(post.readMinutes, lang)}
                 </span>
               </div>
               {/* Title */}
-              <h3 className="text-[18px] sm:text-[20px] font-bold text-white leading-snug mb-3 group-hover:text-white transition-colors" style={{ letterSpacing: '-0.3px' }}>
-                {post.title}
+              <h3 className="text-[18px] sm:text-[20px] font-bold text-white leading-snug mb-3 transition-colors" style={{ letterSpacing: '-0.3px' }}>
+                {post.title[lang]}
               </h3>
               {/* Excerpt */}
               <p className="text-[13px] text-neutral-400 leading-relaxed mb-5">
-                {post.excerpt}
+                {post.excerpt[lang]}
               </p>
-              {/* Footer */}
+              {/* Footer — tarih RUNTIME'da hesaplanir (sabit metin yok) */}
               <div className="flex items-center justify-between pt-4 border-t border-white/[0.06]">
-                <span className="text-[11px] text-neutral-500">{post.date}</span>
+                <span className="text-[11px] text-neutral-500">
+                  {blogNow === null
+                    ? fullDate(post.publishedAt, lang)
+                    : relativeTime(post.publishedAt, lang, blogNow)}
+                </span>
                 <span
                   className="text-[12px] font-semibold flex items-center gap-1.5 group-hover:gap-2.5 transition-all"
                   style={{ color: post.color }}
@@ -2388,12 +2036,12 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
                   </svg>
                 </span>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
         <div className="text-center mt-10">
-          <button
-            onClick={() => setShowAllBlog(true)}
+          <Link
+            href="/blog"
             className="btn-ghost rounded-xl px-8 py-3 text-[13px] inline-flex items-center gap-2"
           >
             {l.landingBlogAll}
@@ -2401,200 +2049,9 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               <line x1="5" y1="12" x2="19" y2="12" />
               <polyline points="12 5 19 12 12 19" />
             </svg>
-          </button>
+          </Link>
         </div>
       </section>
-
-      {/* ─── ALL BLOG POSTS MODAL ─── */}
-      {showAllBlog && (
-        <div
-          className="fixed inset-0 z-[100] flex items-start justify-center p-4 sm:p-8 animate-fade-in overflow-y-auto"
-          style={{ background: "rgba(0,0,0,0.9)", backdropFilter: "blur(12px)" }}
-          onClick={() => setShowAllBlog(false)}
-        >
-          <div
-            className="relative max-w-6xl w-full my-auto bg-[#0b1120] border border-white/10 rounded-2xl shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close button */}
-            <button
-              onClick={() => setShowAllBlog(false)}
-              className="absolute top-5 right-5 z-10 w-11 h-11 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all text-white"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
-            {/* Top accent bar */}
-            <div className="h-1 w-full rounded-t-2xl" style={{ background: "linear-gradient(90deg, #FF4655, #4D7CFF, #B44DFF, #2ECC71)" }} />
-            <div className="p-8 sm:p-12">
-              {/* Header */}
-              <div className="mb-10">
-                <p className="text-[11px] uppercase tracking-[0.2em] text-[#FF4655]/70 font-semibold mb-3">
-                  {l.landingBlogTitle}
-                </p>
-                <h2 className="text-3xl sm:text-[40px] font-bold text-white leading-tight mb-3" style={{ letterSpacing: "-1px" }}>
-                  {lang === "tr" ? "Tüm Blog Yazıları" : "All Blog Posts"}
-                </h2>
-                <p className="text-[14px] text-neutral-400 max-w-2xl">
-                  {l.landingBlogText}
-                </p>
-              </div>
-              {/* All posts grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {l.landingBlogPosts.map((post, i) => (
-                  <article
-                    key={i}
-                    onClick={() => {
-                      setSelectedPost(i);
-                      setShowAllBlog(false);
-                    }}
-                    className="card-xtract group p-5 cursor-pointer relative overflow-hidden"
-                  >
-                    <div
-                      className="absolute top-0 left-0 right-0 h-0.5 opacity-60 group-hover:opacity-100 transition-opacity"
-                      style={{ background: `linear-gradient(90deg, ${post.color}, transparent)` }}
-                    />
-                    <div className="flex items-center justify-between mb-3">
-                      <span
-                        className="text-[9px] font-bold uppercase tracking-[0.15em] px-2 py-0.5 rounded-md"
-                        style={{
-                          color: post.color,
-                          background: `${post.color}12`,
-                          border: `1px solid ${post.color}20`,
-                        }}
-                      >
-                        {post.category}
-                      </span>
-                      <span className="text-[10px] text-neutral-500 flex items-center gap-1">
-                        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                          <circle cx="12" cy="12" r="10" />
-                          <polyline points="12 6 12 12 16 14" />
-                        </svg>
-                        {post.readTime}
-                      </span>
-                    </div>
-                    <h3 className="text-[15px] font-bold text-white leading-snug mb-2" style={{ letterSpacing: "-0.2px" }}>
-                      {post.title}
-                    </h3>
-                    <p className="text-[12px] text-neutral-400 leading-relaxed mb-3 line-clamp-2">
-                      {post.excerpt}
-                    </p>
-                    <div className="flex items-center justify-between pt-3 border-t border-white/[0.06]">
-                      <span className="text-[10px] text-neutral-500">{post.date}</span>
-                      <span
-                        className="text-[11px] font-semibold flex items-center gap-1 group-hover:gap-2 transition-all"
-                        style={{ color: post.color }}
-                      >
-                        {l.landingBlogReadMore}
-                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                          <line x1="5" y1="12" x2="19" y2="12" />
-                          <polyline points="12 5 19 12 12 19" />
-                        </svg>
-                      </span>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ─── BLOG POST MODAL ─── */}
-      {selectedPost !== null && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-fade-in"
-          style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(8px)" }}
-          onClick={() => setSelectedPost(null)}
-        >
-          <div
-            className="relative max-w-3xl w-full max-h-[90vh] overflow-y-auto bg-[#0b1120] border border-white/10 rounded-2xl shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close button */}
-            <button
-              onClick={() => setSelectedPost(null)}
-              className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all text-white"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
-            {/* Top accent bar */}
-            <div
-              className="h-1 w-full rounded-t-2xl"
-              style={{ background: `linear-gradient(90deg, ${l.landingBlogPosts[selectedPost].color}, transparent)` }}
-            />
-            <div className="p-8 sm:p-12">
-              {/* Category + meta */}
-              <div className="flex items-center gap-3 mb-5 flex-wrap">
-                <span
-                  className="text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 rounded-md"
-                  style={{
-                    color: l.landingBlogPosts[selectedPost].color,
-                    background: `${l.landingBlogPosts[selectedPost].color}15`,
-                    border: `1px solid ${l.landingBlogPosts[selectedPost].color}25`,
-                  }}
-                >
-                  {l.landingBlogPosts[selectedPost].category}
-                </span>
-                <span className="text-[11px] text-neutral-500 flex items-center gap-1.5">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <polyline points="12 6 12 12 16 14" />
-                  </svg>
-                  {l.landingBlogPosts[selectedPost].readTime}
-                </span>
-                <span className="text-[11px] text-neutral-500">·</span>
-                <span className="text-[11px] text-neutral-500">{l.landingBlogPosts[selectedPost].date}</span>
-              </div>
-              {/* Title */}
-              <h2 className="text-2xl sm:text-[32px] font-bold text-white leading-tight mb-6" style={{ letterSpacing: "-0.5px" }}>
-                {l.landingBlogPosts[selectedPost].title}
-              </h2>
-              {/* Excerpt as lead */}
-              <p className="text-[15px] text-neutral-300 leading-relaxed mb-8 pl-4 border-l-2" style={{ borderColor: `${l.landingBlogPosts[selectedPost].color}50` }}>
-                {l.landingBlogPosts[selectedPost].excerpt}
-              </p>
-              {/* Full content */}
-              <div className="prose prose-invert max-w-none text-[14px] text-neutral-300 leading-[1.8] space-y-5">
-                {(((l.landingBlogPosts[selectedPost] as { content?: string }).content) || (lang === "tr" ? "İçerik yakında eklenecek..." : "Content coming soon...")).split("\n\n").map((paragraph, pi) => {
-                  if (paragraph.startsWith("## ")) {
-                    return (
-                      <h3 key={pi} className="text-[18px] font-bold text-white mt-8 mb-2" style={{ color: l.landingBlogPosts[selectedPost].color }}>
-                        {paragraph.replace("## ", "")}
-                      </h3>
-                    );
-                  }
-                  if (paragraph.startsWith("### ")) {
-                    return (
-                      <h4 key={pi} className="text-[15px] font-semibold text-white mt-5 mb-1">
-                        {paragraph.replace("### ", "")}
-                      </h4>
-                    );
-                  }
-                  return (
-                    <p key={pi} dangerouslySetInnerHTML={{ __html: paragraph.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>') }} />
-                  );
-                })}
-              </div>
-              {/* Footer close button */}
-              <div className="mt-10 pt-6 border-t border-white/[0.06] flex items-center justify-between">
-                <span className="text-[11px] text-neutral-500">{lang === "tr" ? "Yazıyı kapatmak için ESC'ye bas" : "Press ESC to close"}</span>
-                <button
-                  onClick={() => setSelectedPost(null)}
-                  className="text-[12px] font-semibold px-5 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all text-white"
-                >
-                  {lang === "tr" ? "Kapat" : "Close"}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* ─── DOWNLOAD — Premium card like Xtract ─── */}
       <section id="download-section" data-animate className="relative z-10 mx-auto max-w-4xl px-5 sm:px-8 pb-36 pt-10">

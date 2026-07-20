@@ -1412,3 +1412,38 @@ body::after {
   .pr-card:hover { transform: none !important; }
   .pr-card.pr-sel::after { animation: none !important; }
 }
+
+/* ── Fiyatlandırma arka planı — canlı IRIS gözü (softi 2026-07-20:
+   "bizim logo (oynayan göz bebeği ile birlikte) koy arka plana, boş
+   duruyo, canlandır animasyonlarla"). Dış halka yavaş döner, göz bebeği
+   serbest gezinir, parıltı nefes alır. İçeriğin GERİSİNDE, düşük opaklık. */
+@keyframes pr-eye-spin   { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes pr-eye-breath { 0%,100% { opacity: .045; transform: scale(1); } 50% { opacity: .085; transform: scale(1.04); } }
+@keyframes pr-pupil-roam {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(14px, -9px); }
+  40%  { transform: translate(-11px, 7px); }
+  60%  { transform: translate(9px, 12px); }
+  80%  { transform: translate(-13px, -6px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes pr-halo {
+  0%,100% { opacity: .10; transform: scale(1); }
+  50%     { opacity: .22; transform: scale(1.12); }
+}
+
+.pr-backdrop { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.pr-eye-wrap { position: absolute; top: 50%; left: 50%; translate: -50% -50%; }
+.pr-eye-outer { animation: pr-eye-spin 90s linear infinite, pr-eye-breath 11s ease-in-out infinite; }
+.pr-eye-pupil { animation: pr-pupil-roam 17s ease-in-out infinite; }
+.pr-eye-halo {
+  position: absolute; inset: -22%;
+  background: radial-gradient(circle, rgba(255,70,85,.30), rgba(168,85,247,.14) 45%, transparent 70%);
+  filter: blur(52px);
+  animation: pr-halo 9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pr-eye-outer, .pr-eye-pupil, .pr-eye-halo { animation: none !important; }
+  .pr-eye-outer { opacity: .05; }
+}

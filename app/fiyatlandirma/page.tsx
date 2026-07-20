@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { headers } from "next/headers";
 import PricingClient, { type Lang } from "./PricingClient";
+import { PricingBackdrop } from "./PricingBackdrop";
 
 export const metadata: Metadata = {
   title: "Fiyatlandırma — AIMLO",
@@ -41,8 +42,10 @@ export default async function PricingPage() {
   const initialLang: Lang = country === "TR" ? "TR" : "EN";
 
   return (
-    <main className="min-h-screen bg-[#030711] text-zinc-200 px-4 py-16">
-      <article className="mx-auto max-w-3xl space-y-14">
+    <main className="relative min-h-screen bg-[#030711] px-4 py-16 text-zinc-200">
+      {/* Canlı IRIS gözü — içeriğin gerisinde, boş alanı dolduruyor */}
+      <PricingBackdrop />
+      <article className="relative z-10 mx-auto max-w-3xl space-y-14">
         <Link href="/" className="block text-[12px] text-neutral-500 transition hover:text-[#FF6B77]">
           ← Ana Sayfa
         </Link>
