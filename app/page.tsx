@@ -2640,48 +2640,9 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
         </div>
       </section>
 
-      {/* ─── FAQ — Xtract accordion ─── */}
-      <section id="section-faq" data-animate className="relative z-10 mx-auto max-w-2xl px-5 sm:px-8 pb-36 pt-10">
-        <p className="section-kicker mb-6">
-          <span className="sk-num">05</span>{lang === "tr" ? "SSS" : "FAQ"}
-        </p>
-        <h2 className="section-display mb-16">
-          {l.landingFaqTitle}
-        </h2>
-        <div className="space-y-3">
-          {l.landingFaqs.map((faq, i) => (
-            <div key={i} className="faq-item overflow-hidden">
-              <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between p-5 text-left">
-                <span className="text-[14px] font-medium text-white pr-4">{faq.q}</span>
-                <span className={`shrink-0 text-neutral-500 transition-transform duration-300 ${openFaq === i ? "rotate-45" : ""}`}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                </span>
-              </button>
-              <div className={`overflow-hidden transition-all duration-300 ${openFaq === i ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
-                <div className="px-5 pb-5">
-                  <p className="text-[13px] text-neutral-500 leading-relaxed">{faq.a}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="mt-10 text-center">
-          <p className="text-[13px] text-neutral-600 mb-2">{l.landingHelpText}</p>
-          <a href="mailto:support@aimlo.gg" className="text-[13px] text-[#FF4655] hover:text-[#FF6B77]/70 transition font-medium">
-            support@aimlo.gg
-          </a>
-        </div>
-      </section>
-
-      {/* ─── MEGA WORDMARK — the brand at viewport scale (P13 closer) ─── */}
-      <div className="relative z-10 overflow-hidden px-5 pt-6 pb-2" aria-hidden="true">
-        <div className="mega-wordmark">AIMLO</div>
-      </div>
-
-      {/* ─── FİYATLANDIRMA — ana sayfanın altında tam plan bölümü (softi 2026-07-20).
-            Ziyaretçi sayfayı terk etmeden planı görüp satın almaya geçebilsin. ─── */}
-      <section id="section-pricing" data-animate className="relative z-10 mx-auto max-w-4xl px-5 sm:px-8 pb-24">
-        <div className="section-divider mb-16" />
+      {/* ─── FİYATLANDIRMA — İNDİR bölümünün hemen altında (softi 2026-07-20).
+            Ziyaretçi uygulamayı gördükten hemen sonra planı görüp satın alabilsin. ─── */}
+      <section id="section-pricing" data-animate className="relative z-10 mx-auto max-w-4xl px-5 sm:px-8 pb-32">
         <div className={`transition-all duration-700 ${isVisible("section-pricing") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <p className="section-kicker justify-center mb-6">
             <span className="sk-num">05</span>{lang === "tr" ? "FİYATLANDIRMA" : "PRICING"}
@@ -2690,9 +2651,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             {lang === "tr" ? "Her ölümden ders çıkar." : "Learn from every death."}
           </h2>
           <p className="text-[15px] text-neutral-400 text-center mb-12">
-            {lang === "tr"
-              ? "İstediğin zaman iptal et. Taahhüt yok."
-              : "Cancel anytime. No commitment."}
+            {lang === "tr" ? "İstediğin zaman iptal et. Taahhüt yok." : "Cancel anytime. No commitment."}
           </p>
 
           <div className="grid gap-5 sm:grid-cols-2 max-w-3xl mx-auto">
@@ -2742,6 +2701,44 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
           </div>
         </div>
       </section>
+
+      {/* ─── FAQ — Xtract accordion ─── */}
+      <section id="section-faq" data-animate className="relative z-10 mx-auto max-w-2xl px-5 sm:px-8 pb-36 pt-10">
+        <p className="section-kicker mb-6">
+          <span className="sk-num">06</span>{lang === "tr" ? "SSS" : "FAQ"}
+        </p>
+        <h2 className="section-display mb-16">
+          {l.landingFaqTitle}
+        </h2>
+        <div className="space-y-3">
+          {l.landingFaqs.map((faq, i) => (
+            <div key={i} className="faq-item overflow-hidden">
+              <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between p-5 text-left">
+                <span className="text-[14px] font-medium text-white pr-4">{faq.q}</span>
+                <span className={`shrink-0 text-neutral-500 transition-transform duration-300 ${openFaq === i ? "rotate-45" : ""}`}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </span>
+              </button>
+              <div className={`overflow-hidden transition-all duration-300 ${openFaq === i ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
+                <div className="px-5 pb-5">
+                  <p className="text-[13px] text-neutral-500 leading-relaxed">{faq.a}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-10 text-center">
+          <p className="text-[13px] text-neutral-600 mb-2">{l.landingHelpText}</p>
+          <a href="mailto:support@aimlo.gg" className="text-[13px] text-[#FF4655] hover:text-[#FF6B77]/70 transition font-medium">
+            support@aimlo.gg
+          </a>
+        </div>
+      </section>
+
+      {/* ─── MEGA WORDMARK — the brand at viewport scale (P13 closer) ─── */}
+      <div className="relative z-10 overflow-hidden px-5 pt-6 pb-2" aria-hidden="true">
+        <div className="mega-wordmark">AIMLO</div>
+      </div>
 
       {/* ─── FINAL CTA — like Xtract's footer CTA ─── */}
       <section className="relative z-10 mx-auto max-w-3xl px-5 sm:px-8 pb-28 text-center">
