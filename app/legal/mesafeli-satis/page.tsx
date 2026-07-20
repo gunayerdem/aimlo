@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PRODUCT_NAME, PLAN_NAMES } from "@/lib/brand";
+import { SiteHeader } from "@/app/_components/SiteHeader";
 
 export const metadata: Metadata = {
   title: "Mesafeli Satış Sözleşmesi ve Ön Bilgilendirme Formu — AIMLO",
@@ -13,15 +14,14 @@ const PLACEHOLDER =
 
 export default function MesafeliSatisPage() {
   return (
-    <main className="min-h-screen bg-[#030711] text-zinc-200 px-4 py-16">
+    /* pt-10: SiteHeader kendi 64px yer tutucusunu getiriyor, py-16 üstüne
+       binince tepede çift boşluk oluşuyordu. */
+    <main className="min-h-screen bg-[#030711] text-zinc-200 px-4 pb-16 pt-10">
+      {/* Sitenin tepe paneli — logo/yazıya basınca ana sayfa.
+          Eski "← Ana Sayfa" bağlantısı kaldırıldı: panel aynı işi görüyor. */}
+      <SiteHeader />
       <article className="mx-auto max-w-2xl space-y-8">
         <header className="space-y-3 border-b border-white/10 pb-6">
-          <Link
-            href="/"
-            className="text-[12px] text-neutral-500 hover:text-[#FF6B77]"
-          >
-            ← Ana Sayfa
-          </Link>
           <h1 className="text-3xl font-black text-white tracking-tight">
             Mesafeli Satış Sözleşmesi ve Ön Bilgilendirme Formu
           </h1>

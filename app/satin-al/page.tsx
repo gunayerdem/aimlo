@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import CheckoutClient from "./checkout-client";
+import { SiteHeader } from "@/app/_components/SiteHeader";
 
 export const metadata: Metadata = {
   title: "Sipariş Özeti — AIMLO",
@@ -19,7 +20,11 @@ function CheckoutFallback() {
 
 export default function SatinAlPage() {
   return (
-    <main className="min-h-screen bg-[#030711] text-zinc-200 px-4 py-16">
+    /* py-16 → pb-16 pt-10: SiteHeader kendi 64px yer tutucusunu getiriyor,
+       üstteki 64px padding onun üstüne binip tepede boşluk yapıyordu. */
+    <main className="min-h-screen bg-[#030711] text-zinc-200 px-4 pb-16 pt-10">
+      {/* Sitenin tepe paneli — logo/yazıya basınca ana sayfa. */}
+      <SiteHeader />
       <article className="mx-auto max-w-2xl space-y-8">
         <header className="space-y-3 border-b border-white/10 pb-6">
           <Link

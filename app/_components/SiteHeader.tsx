@@ -91,7 +91,18 @@ function TiltLogo({ size = 32 }: { size?: number }) {
   );
 }
 
-export function SiteHeader({ right }: { right?: React.ReactNode }) {
+/** @param spacer Panel yüksekliği kadar yer tutucu eklensin mi.
+ *   Normal akışlı sayfalarda TRUE (varsayılan) — içerik panelin altında kalmasın.
+ *   FALSE gereken yer: auth düzeni gibi `flex items-center justify-center` olan
+ *   kaplar; orada yer tutucu bir flex öğesi hâline gelir ve dikey ortalamayı
+ *   kaydırır. O sayfalarda panel içeriğin ÜSTÜNE biner (içerik zaten ortada). */
+export function SiteHeader({
+  right,
+  spacer = true,
+}: {
+  right?: React.ReactNode;
+  spacer?: boolean;
+}) {
   return (
     <>
       <header className="nav-xtract fixed left-0 right-0 top-0 z-50">
@@ -122,9 +133,7 @@ export function SiteHeader({ right }: { right?: React.ReactNode }) {
           {right}
         </div>
       </header>
-      {/* Sabit panelin yüksekliği kadar yer tutucu — içerik panelin
-          altında kalmasın. Panel h-16 (64px). */}
-      <div aria-hidden="true" className="h-16" />
+      {spacer && <div aria-hidden="true" className="h-16" />}
     </>
   );
 }

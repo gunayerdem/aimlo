@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SiteHeader } from "@/app/_components/SiteHeader";
 
 export const metadata: Metadata = {
   title: "Kullanım Koşulları — AIMLO",
@@ -9,15 +10,15 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <main className="min-h-screen bg-[#030711] text-zinc-200 px-4 py-16">
+    /* pt-10: SiteHeader kendi 64px yer tutucusunu getiriyor; py-16 üstüne
+       binince tepede çift boşluk oluşuyordu. */
+    <main className="min-h-screen bg-[#030711] text-zinc-200 px-4 pb-16 pt-10">
+      {/* Sitenin tepe paneli — logo/yazıya basınca ana sayfa. */}
+      <SiteHeader />
       <article className="mx-auto max-w-2xl space-y-8">
         <header className="space-y-3 border-b border-white/10 pb-6">
-          <Link
-            href="/"
-            className="text-[12px] text-neutral-500 hover:text-[#FF6B77]"
-          >
-            ← Ana Sayfa
-          </Link>
+          {/* "← Ana Sayfa" bağlantısı KALDIRILDI: tepe panelindeki logo
+              aynı işi yapıyor, ikisi birden gereksiz tekrar. */}
           <h1 className="text-3xl font-black text-white tracking-tight">
             Kullanım Koşulları
           </h1>

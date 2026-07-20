@@ -1,6 +1,7 @@
 import AuthBg from "./AuthBg";
 import AuthStage from "./AuthStage";
 import AuthAgents from "./AuthAgents";
+import { SiteHeader } from "@/app/_components/SiteHeader";
 
 /**
  * Auth route group layout — Fable 5 / IRIS köklü yenileme (2026-06-13).
@@ -10,7 +11,18 @@ import AuthAgents from "./AuthAgents";
  */
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <main className="min-h-screen bg-[#060814] relative flex items-center justify-center px-4 py-12 overflow-hidden">
+    /* pt-20 (py-12 değil): tepe paneli sabit ve 64px. İçerik dikey ortalandığı
+       için KISA ekranlarda kart yukarı çıkıp panelin altına kayıyordu (720px
+       yükseklikte ölçüldü: kart üstü 55px, panel altı 65px). Üst boşluğu
+       panelden büyük tutunca ortalama panelin ALTINDAKİ alanda yapılıyor,
+       kart hiçbir ekran boyunda panele girmiyor. Alt boşluk pb-12 kalıyor. */
+    <main className="min-h-screen bg-[#060814] relative flex items-center justify-center px-4 pb-12 pt-20 overflow-hidden">
+      {/* Sitenin tepe paneli — logo/yazıya basınca ana sayfa.
+          spacer={false}: bu main `flex items-center justify-center` ile
+          dikey ortalıyor; yer tutucu burada flex öğesi olup ortalamayı
+          kaydırırdı. İçerik zaten ortada olduğu için panel onu örtmez. */}
+      <SiteHeader spacer={false} />
+
       <AuthBg />
 
       {/* 3D ajanlar — Jett + Neon (landing hero diliyle) */}

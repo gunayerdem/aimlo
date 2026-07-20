@@ -12,6 +12,7 @@ import {
   type BlogPost,
 } from "@/lib/blog";
 import { PostBody } from "./PostBody";
+import { SiteHeader } from "@/app/_components/SiteHeader";
 
 /* ══════════════════════════════════════════════════════════
    BLOG — İSTEMCİ KATMANI
@@ -130,13 +131,16 @@ export function BlogIndex() {
   const posts = sortedPosts();
 
   return (
-    <main className="min-h-screen bg-[#030711] px-4 py-16 text-zinc-200">
+    /* pt-10: SiteHeader kendi 64px yer tutucusunu getiriyor, py-16 üstüne
+       binince tepede çift boşluk oluyordu. */
+    <main className="min-h-screen bg-[#030711] px-4 pb-16 pt-10 text-zinc-200">
+      {/* Sitenin tepe paneli — logo/yazıya basınca ana sayfa. */}
+      <SiteHeader />
       <div className="mx-auto max-w-5xl">
         <header className="mb-12 border-b border-white/10 pb-8">
-          <div className="mb-4 flex items-center justify-between gap-4">
-            <Link href="/" className="text-[12px] text-neutral-500 hover:text-[#FF6B77]">
-              ← {lang === "tr" ? "Ana Sayfa" : "Home"}
-            </Link>
+          {/* "← Ana Sayfa" bağlantısı KALDIRILDI: tepe panelindeki logo aynı
+              işi yapıyor. Dil düğmesi sağa yaslı kalsın diye justify-end. */}
+          <div className="mb-4 flex items-center justify-end gap-4">
             <LangToggle lang={lang} onChange={setLang} />
           </div>
           <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#FF4655]/70">
@@ -169,7 +173,10 @@ export function PostView({ post }: { post: BlogPost }) {
   const others = relatedPosts(post.slug, 3);
 
   return (
-    <main className="min-h-screen bg-[#030711] px-4 py-16 text-zinc-200">
+    /* pt-10: SiteHeader'ın 64px yer tutucusu ile py-16 üst üste binmesin. */
+    <main className="min-h-screen bg-[#030711] px-4 pb-16 pt-10 text-zinc-200">
+      {/* Sitenin tepe paneli — logo/yazıya basınca ana sayfa. */}
+      <SiteHeader />
       <article className="mx-auto max-w-2xl">
         <header className="mb-8 border-b border-white/10 pb-6">
           <div className="mb-5 flex items-center justify-between gap-4">

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { PlusCell } from "@/app/_components/PlusMark";
+import { PlusCell, PlusMark } from "@/app/_components/PlusMark";
 
 /* ------------------------------------------------------------------ *
  * FİYATLAR — TEK KAYNAK.
@@ -56,15 +56,25 @@ const COPY = {
     /* Ekran okuyucu: artı işareti aria-hidden, anlamı buradan gelir. */
     a11yIncluded: "var",
     a11yExcluded: "yok",
+    /* Tablo KISALTILDI (softi 2026-07-20, "B" kararı): önceki hâlde 8
+       satırın 7'si iki sütunda da aynıydı — tablo fiilen "ücretsiz hesapla
+       AIMLO+ aynı şey" diyordu ve tek gerçek fark (maç kotası) o tekrarın
+       içinde kayboluyordu. Artık tabloda YALNIZ fark var; ortak özellikler
+       aşağıda liste hâlinde duruyor: değer görünmeye devam ediyor ama
+       karşılaştırmayı boğmuyor. */
     diffRows: [
       { label: "Maç analizi", free: "Haftada 3", pro: "Sınırsız" },
-      { label: "Uygulamayı indir ve kur", free: true },
-      { label: "Hesap ve maç geçmişi", free: true },
-      { label: "Her ölümde anlık analiz", free: true },
-      { label: "Rakip alışkanlık tespiti", free: true },
-      { label: "Sonraki round önerisi", free: true },
-      { label: "Maç sonu detaylı rapor", free: true },
-      { label: "Türkçe ve İngilizce koçluk", free: true },
+      { label: "Tüm koçluk özellikleri", free: true },
+    ],
+    sharedTitle: "İki planda da var",
+    shared: [
+      "Uygulamayı indir ve kur",
+      "Hesap ve maç geçmişi",
+      "Her ölümde anlık analiz",
+      "Rakip alışkanlık tespiti",
+      "Sonraki round önerisi",
+      "Maç sonu detaylı rapor",
+      "Türkçe ve İngilizce koçluk",
     ],
     payTitle: "Ödemeye geç",
     paySub: "Seçtiğin plan aşağıda. Ödeme adımında sözleşmeleri onaylayacaksın.",
@@ -108,13 +118,17 @@ const COPY = {
     a11yExcluded: "not included",
     diffRows: [
       { label: "Match analysis", free: "3 per week", pro: "Unlimited" },
-      { label: "Download and install the app", free: true },
-      { label: "Account and match history", free: true },
-      { label: "Instant analysis on every death", free: true },
-      { label: "Enemy pattern detection", free: true },
-      { label: "Next-round suggestion", free: true },
-      { label: "Full post-match report", free: true },
-      { label: "Turkish and English coaching", free: true },
+      { label: "All coaching features", free: true },
+    ],
+    sharedTitle: "On both plans",
+    shared: [
+      "Download and install the app",
+      "Account and match history",
+      "Instant analysis on every death",
+      "Enemy pattern detection",
+      "Next-round suggestion",
+      "Full post-match report",
+      "Turkish and English coaching",
     ],
     payTitle: "Continue to payment",
     paySub: "Your selected plan is below. You'll approve the terms at the payment step.",
@@ -343,6 +357,23 @@ export default function PricingClient({ initialLang = "TR" }: { initialLang?: La
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Ortak özellikler — tablodan ÇIKARILDI, burada liste hâlinde.
+            Tablo artık yalnız farkı gösteriyor; değer görünmeye devam
+            ediyor ama karşılaştırmayı boğmuyor (softi "B" kararı). */}
+        <div className="space-y-3.5 border-t border-white/[0.06] pt-7">
+          <p className="text-[11px] font-bold uppercase tracking-wider text-neutral-500">
+            {c.sharedTitle}
+          </p>
+          <ul className="grid gap-x-7 gap-y-2.5 sm:grid-cols-2">
+            {c.shared.map((s) => (
+              <li key={s} className="flex items-center gap-2.5 text-[13px] text-neutral-400">
+                <PlusMark tone="muted" size={11} />
+                {s}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

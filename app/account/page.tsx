@@ -5,6 +5,7 @@ import { createServerSupabase } from "@/lib/supabase/server";
 import { getSubscriptionState } from "@/lib/billing";
 import { FREE_WEEKLY_MATCH_QUOTA } from "@/lib/entitlements";
 import { PRODUCT_NAME, CTA_BUY } from "@/lib/brand";
+import { SiteHeader } from "@/app/_components/SiteHeader";
 import { SubscriptionActions } from "./SubscriptionActions";
 
 export const metadata: Metadata = {
@@ -46,12 +47,14 @@ export default async function AccountPage() {
   const sub = state.active;
 
   return (
-    <main className="min-h-screen bg-[#030711] px-4 py-16 text-zinc-200">
+    <main className="min-h-screen bg-[#030711] px-4 pb-16 pt-10 text-zinc-200">
+      {/* Sitenin tepe paneli — kendi 64px yer tutucusunu getiriyor,
+          bu yüzden üst padding py-16 yerine pt-10. */}
+      <SiteHeader />
       <article className="mx-auto max-w-2xl space-y-10">
         <header className="space-y-3 border-b border-white/10 pb-6">
-          <Link href="/" className="text-[12px] text-neutral-500 transition hover:text-[#FF6B77]">
-            ← Ana Sayfa
-          </Link>
+          {/* "← Ana Sayfa" bağlantısı KALDIRILDI: tepe panelindeki logo
+              aynı işi yapıyor, ikisi birden gereksiz tekrar. */}
           <h1 className="text-3xl font-black tracking-tight text-white">Hesabım</h1>
           <p className="text-sm text-neutral-500">{user.email}</p>
         </header>

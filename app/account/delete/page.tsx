@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createServerSupabase } from "@/lib/supabase/server";
+import { SiteHeader } from "@/app/_components/SiteHeader";
 import { DeleteForm } from "./DeleteForm";
 
 export const metadata: Metadata = {
@@ -17,14 +17,14 @@ export default async function DeleteAccountPage() {
 
   return (
     <main className="min-h-screen bg-[#030711] text-zinc-200 px-4 py-16 flex items-center justify-center">
+      {/* Sitenin tepe paneli — logo/yazıya basınca ana sayfa.
+          spacer={false}: main `flex items-center justify-center`; yer tutucu
+          burada bir flex öğesi olur ve dikey ortalamayı kaydırırdı. */}
+      <SiteHeader spacer={false} />
       <div className="w-full max-w-md space-y-6">
         <div className="space-y-2 text-center">
-          <Link
-            href="/"
-            className="inline-block text-[12px] text-neutral-500 hover:text-[#FF6B77]"
-          >
-            ← Ana Sayfa
-          </Link>
+          {/* "← Ana Sayfa" bağı kaldırıldı: tepe panelindeki logo aynı işi
+              görüyor, ikisi gereksiz tekrar. */}
           <h1 className="text-3xl font-black text-white tracking-tight">
             Hesabı Sil
           </h1>

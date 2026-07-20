@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SiteHeader } from "@/app/_components/SiteHeader";
 
 export const metadata: Metadata = {
   title: "Güvenlik & Sık Sorulanlar — AIMLO",
@@ -9,15 +10,14 @@ export const metadata: Metadata = {
 
 export default function GuvenlikPage() {
   return (
-    <main className="min-h-screen bg-[#030711] text-zinc-200 px-4 py-16">
+    /* pt-10: SiteHeader kendi 64px yer tutucusunu getiriyor; py-16 ile
+       üst üste binince tepede çift boşluk oluyordu. */
+    <main className="min-h-screen bg-[#030711] text-zinc-200 px-4 pb-16 pt-10">
+      {/* Sitenin tepe paneli — logo/yazıya basınca ana sayfa.
+          Eski "← Ana Sayfa" bağı kaldırıldı: panel aynı işi görüyor. */}
+      <SiteHeader />
       <article className="mx-auto max-w-2xl space-y-8">
         <header className="space-y-3 border-b border-white/10 pb-6">
-          <Link
-            href="/"
-            className="text-[12px] text-neutral-500 hover:text-[#FF6B77]"
-          >
-            ← Ana Sayfa
-          </Link>
           <h1 className="text-3xl font-black text-white tracking-tight">
             Güvenlik &amp; Sık Sorulanlar
           </h1>

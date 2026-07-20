@@ -20,12 +20,9 @@ export default async function LoginPage({
   return (
     <div className="relative z-10 w-full max-w-[440px] space-y-8 animate-slide-up-big">
       <div className="text-center space-y-5">
-        <Link
-          href="/"
-          className="mx-auto inline-flex items-center gap-2 text-[12px] text-neutral-500 transition hover:text-[#22D3EE] hover-underline"
-        >
-          ← Geri
-        </Link>
+        {/* "← Geri" KALDIRILDI: hedefi "/" idi, tepe panelindeki logo aynı
+            işi yapıyor. (forgot-password ve verify'daki Geri bağları duruyor —
+            onlar ana sayfaya değil, login/register'a dönüyor.) */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/aimlo-logo.png?v=3"
