@@ -48,13 +48,12 @@ export default function SatinAlPage() {
         <section className="space-y-3 text-sm leading-relaxed text-neutral-300">
           <h2 className="text-lg font-bold text-white">Satıcı Bilgileri</h2>
           <ul className="space-y-1 text-neutral-400">
-            <li>Ticaret unvanı: {"{{TICARET_UNVANI}}"}</li>
-            <li>Adres: {"{{ADRES}}"}</li>
-            <li>Telefon: {"{{TELEFON}}"}</li>
-            <li>E-posta: {"{{EPOSTA}}"}</li>
-            <li>Vergi dairesi: {"{{VERGI_DAIRESI}}"}</li>
-            <li>Vergi / TCKN no: {"{{VERGI_NO}}"}</li>
-            <li>MERSİS no: {"{{MERSIS}}"}</li>
+            <li>Ticaret unvanı: {"GÜNAY ERDEM VE KAAN DAĞDELEN ADİ ORTAKLIĞI"}</li>
+            <li>Adres: {"Yenişehir Mah. Ankara Cad. 360 Office Kapı No: 405 Daire No: 95 Pendik/İstanbul"}</li>
+            <li>Telefon: {"0534 911 31 81"}</li>
+            <li>E-posta: {"support@aimlo.gg"}</li>
+            <li>Vergi dairesi: {"Pendik Vergi Dairesi"}</li>
+            <li>Vergi / TCKN no: {"44461434066"}</li>
           </ul>
         </section>
 

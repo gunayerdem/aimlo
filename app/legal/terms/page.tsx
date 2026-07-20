@@ -161,8 +161,8 @@ export default function TermsPage() {
         <section className="space-y-3 text-sm leading-relaxed text-neutral-300">
           <h2 className="text-lg font-bold text-white">6. İletişim</h2>
           <p>
-            Hizmet sağlayıcı: {"{{TICARET_UNVANI}}"} · {"{{ADRES}}"} ·{" "}
-            {"{{TELEFON}}"}
+            Hizmet sağlayıcı: {"GÜNAY ERDEM VE KAAN DAĞDELEN ADİ ORTAKLIĞI"} · {"Yenişehir Mah. Ankara Cad. 360 Office Kapı No: 405 Daire No: 95 Pendik/İstanbul"} ·{" "}
+            {"0534 911 31 81"}
           </p>
           <p>
             <a

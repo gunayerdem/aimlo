@@ -72,25 +72,22 @@ export default function IletisimPage() {
           <h2 className="text-lg font-bold text-white">Künye</h2>
           <dl className="rounded-xl border border-white/10 bg-white/[0.02] px-5 py-2">
             <KunyeRow label="Ticaret unvanı">
-              <Ph>{"{{TICARET_UNVANI}}"}</Ph>
+              <Ph>{"GÜNAY ERDEM VE KAAN DAĞDELEN ADİ ORTAKLIĞI"}</Ph>
             </KunyeRow>
             <KunyeRow label="Adres">
-              <Ph>{"{{ADRES}}"}</Ph>
+              <Ph>{"Yenişehir Mah. Ankara Cad. 360 Office Kapı No: 405 Daire No: 95 Pendik/İstanbul"}</Ph>
             </KunyeRow>
             <KunyeRow label="Telefon">
-              <Ph>{"{{TELEFON}}"}</Ph>
+              <Ph>{"0534 911 31 81"}</Ph>
             </KunyeRow>
             <KunyeRow label="E-posta">
-              <Ph>{"{{EPOSTA}}"}</Ph>
+              <Ph>{"support@aimlo.gg"}</Ph>
             </KunyeRow>
             <KunyeRow label="Vergi dairesi">
-              <Ph>{"{{VERGI_DAIRESI}}"}</Ph>
+              <Ph>{"Pendik Vergi Dairesi"}</Ph>
             </KunyeRow>
             <KunyeRow label="Vergi / TC kimlik no">
-              <Ph>{"{{VERGI_NO}}"}</Ph>
-            </KunyeRow>
-            <KunyeRow label="MERSİS no" note="varsa; adi ortaklık/şahıs işletmelerinde bulunmayabilir">
-              <Ph>{"{{MERSIS}}"}</Ph>
+              <Ph>{"44461434066"}</Ph>
             </KunyeRow>
             <KunyeRow label="Web sitesi">
               <a
@@ -125,7 +122,7 @@ export default function IletisimPage() {
                 Genel destek, fatura, iptal ve iade talepleri için:
               </p>
               <p className="text-sm">
-                <Ph>{"{{EPOSTA}}"}</Ph>
+                <Ph>{"support@aimlo.gg"}</Ph>
               </p>
             </div>
           </div>

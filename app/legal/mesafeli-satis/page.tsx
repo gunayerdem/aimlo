@@ -49,35 +49,27 @@ export default function MesafeliSatisPage() {
           <ul className="list-none space-y-1.5 rounded-lg border border-white/10 bg-white/[0.02] p-4">
             <li>
               <span className="text-neutral-500">Ticaret Unvanı: </span>
-              <span className={PLACEHOLDER}>{"{{TICARET_UNVANI}}"}</span>
+              <span className={PLACEHOLDER}>{"GÜNAY ERDEM VE KAAN DAĞDELEN ADİ ORTAKLIĞI"}</span>
             </li>
             <li>
               <span className="text-neutral-500">Adres: </span>
-              <span className={PLACEHOLDER}>{"{{ADRES}}"}</span>
+              <span className={PLACEHOLDER}>{"Yenişehir Mah. Ankara Cad. 360 Office Kapı No: 405 Daire No: 95 Pendik/İstanbul"}</span>
             </li>
             <li>
               <span className="text-neutral-500">Telefon: </span>
-              <span className={PLACEHOLDER}>{"{{TELEFON}}"}</span>
+              <span className={PLACEHOLDER}>{"0534 911 31 81"}</span>
             </li>
             <li>
               <span className="text-neutral-500">E-posta: </span>
-              <span className={PLACEHOLDER}>{"{{EPOSTA}}"}</span>
+              <span className={PLACEHOLDER}>{"support@aimlo.gg"}</span>
             </li>
             <li>
               <span className="text-neutral-500">Vergi Dairesi: </span>
-              <span className={PLACEHOLDER}>{"{{VERGI_DAIRESI}}"}</span>
+              <span className={PLACEHOLDER}>{"Pendik Vergi Dairesi"}</span>
             </li>
             <li>
               <span className="text-neutral-500">Vergi Numarası: </span>
-              <span className={PLACEHOLDER}>{"{{VERGI_NO}}"}</span>
-            </li>
-            <li>
-              <span className="text-neutral-500">MERSİS Numarası: </span>
-              <span className={PLACEHOLDER}>{"{{MERSIS}}"}</span>
-            </li>
-            <li>
-              <span className="text-neutral-500">ETBİS Kayıt Bilgisi: </span>
-              <span className={PLACEHOLDER}>{"{{ETBIS_NO}}"}</span>
+              <span className={PLACEHOLDER}>{"44461434066"}</span>
             </li>
             <li>
               <span className="text-neutral-500">İnternet Sitesi: </span>
@@ -193,7 +185,7 @@ export default function MesafeliSatisPage() {
               <strong className="text-white">
                 lisanslı bir ödeme kuruluşu
               </strong>{" "}
-              (<span className={PLACEHOLDER}>{"{{ODEME_KURULUSU}}"}</span>)
+              (<span className={PLACEHOLDER}>{"iyzico Ödeme Hizmetleri A.Ş."}</span>)
               altyapısı üzerinden güvenli şekilde tahsil edilir. SATICI kart
               bilgilerini saklamaz.
             </li>
@@ -277,7 +269,7 @@ export default function MesafeliSatisPage() {
             <strong className="text-white">14 (on dört) gün</strong> içinde
             hiçbir gerekçe göstermeksizin ve cezai şart ödemeksizin cayma hakkını
             kullanabilir. Cayma bildirimi{" "}
-            <span className={PLACEHOLDER}>{"{{EPOSTA}}"}</span> adresine yazılı
+            <span className={PLACEHOLDER}>{"support@aimlo.gg"}</span> adresine yazılı
             olarak veya kalıcı veri saklayıcısı ile iletilir. Usulüne uygun cayma
             hâlinde ödenen bedel, bildirimin SATICI&apos;ya ulaşmasından itibaren
             14 gün içinde ALICI&apos;ya ödeme yaptığı araçla iade edilir.
@@ -306,7 +298,7 @@ export default function MesafeliSatisPage() {
               <strong className="text-white">istediği zaman</strong>, herhangi bir
               gerekçe göstermeksizin ve ek ücret ödemeksizin hesap ayarlarından
               veya{" "}
-              <span className={PLACEHOLDER}>{"{{EPOSTA}}"}</span> adresine
+              <span className={PLACEHOLDER}>{"support@aimlo.gg"}</span> adresine
               bildirimde bulunarak iptal edebilir.
             </li>
             <li>
@@ -365,8 +357,8 @@ export default function MesafeliSatisPage() {
           </p>
           <p>
             ALICI, şikâyet ve talepleri için öncelikle{" "}
-            <span className={PLACEHOLDER}>{"{{EPOSTA}}"}</span> adresine veya{" "}
-            <span className={PLACEHOLDER}>{"{{TELEFON}}"}</span> numarasına
+            <span className={PLACEHOLDER}>{"support@aimlo.gg"}</span> adresine veya{" "}
+            <span className={PLACEHOLDER}>{"0534 911 31 81"}</span> numarasına
             başvurabilir.
           </p>
         </section>
@@ -402,15 +394,13 @@ export default function MesafeliSatisPage() {
                 Satıcının kimliği ve iletişim bilgileri
               </h3>
               <p>
-                <span className={PLACEHOLDER}>{"{{TICARET_UNVANI}}"}</span> ·{" "}
-                <span className={PLACEHOLDER}>{"{{ADRES}}"}</span> ·{" "}
-                <span className={PLACEHOLDER}>{"{{TELEFON}}"}</span> ·{" "}
-                <span className={PLACEHOLDER}>{"{{EPOSTA}}"}</span> · Vergi
+                <span className={PLACEHOLDER}>{"GÜNAY ERDEM VE KAAN DAĞDELEN ADİ ORTAKLIĞI"}</span> ·{" "}
+                <span className={PLACEHOLDER}>{"Yenişehir Mah. Ankara Cad. 360 Office Kapı No: 405 Daire No: 95 Pendik/İstanbul"}</span> ·{" "}
+                <span className={PLACEHOLDER}>{"0534 911 31 81"}</span> ·{" "}
+                <span className={PLACEHOLDER}>{"support@aimlo.gg"}</span> · Vergi
                 Dairesi/No:{" "}
-                <span className={PLACEHOLDER}>{"{{VERGI_DAIRESI}}"}</span> /{" "}
-                <span className={PLACEHOLDER}>{"{{VERGI_NO}}"}</span> · MERSİS:{" "}
-                <span className={PLACEHOLDER}>{"{{MERSIS}}"}</span> · ETBİS:{" "}
-                <span className={PLACEHOLDER}>{"{{ETBIS_NO}}"}</span>
+                <span className={PLACEHOLDER}>{"Pendik Vergi Dairesi"}</span> /{" "}
+                <span className={PLACEHOLDER}>{"44461434066"}</span>
               </p>
             </div>
 
@@ -441,7 +431,7 @@ export default function MesafeliSatisPage() {
               <h3 className="font-semibold text-white">Ödeme şekli</h3>
               <p>
                 Kredi kartı veya banka kartı ile, lisanslı bir ödeme kuruluşu (
-                <span className={PLACEHOLDER}>{"{{ODEME_KURULUSU}}"}</span>)
+                <span className={PLACEHOLDER}>{"iyzico Ödeme Hizmetleri A.Ş."}</span>)
                 altyapısı üzerinden tek çekim. Taksit seçeneği yoktur.
               </p>
             </div>
@@ -483,8 +473,8 @@ export default function MesafeliSatisPage() {
               </h3>
               <p>
                 Öncelikli başvuru:{" "}
-                <span className={PLACEHOLDER}>{"{{EPOSTA}}"}</span> /{" "}
-                <span className={PLACEHOLDER}>{"{{TELEFON}}"}</span>. Ayrıca
+                <span className={PLACEHOLDER}>{"support@aimlo.gg"}</span> /{" "}
+                <span className={PLACEHOLDER}>{"0534 911 31 81"}</span>. Ayrıca
                 ALICI, ilgili yıl için belirlenen parasal sınırlar dâhilinde
                 Tüketici Hakem Heyetlerine, bu sınırların üzerinde ise Tüketici
                 Mahkemelerine başvurabilir.

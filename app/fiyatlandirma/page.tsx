@@ -3,6 +3,7 @@ import Link from "next/link";
 import { headers } from "next/headers";
 import PricingClient, { type Lang } from "./PricingClient";
 import { PricingBackdrop } from "./PricingBackdrop";
+import { SellerInfo } from "@/app/_components/SellerInfo";
 
 export const metadata: Metadata = {
   title: "Fiyatlandırma — AIMLO",
@@ -18,17 +19,7 @@ const LEGAL_LINKS = [
   { href: "/iletisim", label: "İletişim" },
 ];
 
-/* Satıcı bilgileri — e-ticaret mevzuatı gereği zorunlu künye.
-   Placeholder'lar YAYIN ÖNCESİ doldurulmalıdır. */
-const SELLER = [
-  ["Ticaret unvanı", "{{TICARET_UNVANI}}"],
-  ["Adres", "{{ADRES}}"],
-  ["Telefon", "{{TELEFON}}"],
-  ["E-posta", "{{EPOSTA}}"],
-  ["Vergi dairesi", "{{VERGI_DAIRESI}}"],
-  ["Vergi / TC kimlik no", "{{VERGI_NO}}"],
-  ["MERSİS no", "{{MERSIS}}"],
-] as const;
+/* Künye artık lib/seller.ts'ten (tek kaynak) — 5 sayfada kopyalanmıyor. */
 
 export default async function PricingPage() {
   /* Ülke algılama (softi 2026-07-20): Vercel edge her isteğe ziyaretçinin
@@ -55,20 +46,7 @@ export default async function PricingPage() {
 
         <PricingClient initialLang={initialLang} />
 
-        {/* Satıcı bilgileri — zorunlu künye */}
-        <section className="space-y-3 border-t border-white/10 pt-8">
-          <h2 className="text-[13px] font-bold text-neutral-400 uppercase tracking-wider">
-            Satıcı bilgileri
-          </h2>
-          <dl className="grid gap-x-8 gap-y-2 text-[13px] sm:grid-cols-2">
-            {SELLER.map(([k, v]) => (
-              <div key={k} className="flex gap-2">
-                <dt className="text-neutral-600">{k}:</dt>
-                <dd className="text-neutral-300">{v}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
+        <SellerInfo />
 
         <footer className="flex flex-wrap gap-x-5 gap-y-2 border-t border-white/10 pt-6 text-[13px]">
           {LEGAL_LINKS.map((l) => (

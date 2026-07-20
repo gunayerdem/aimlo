@@ -58,7 +58,7 @@ export default function IadePage() {
             </li>
             <li>
               <strong className="text-white">Destek üzerinden:</strong> uygulama
-              içi destek sistemi veya <Ph>{"{{EPOSTA}}"}</Ph> adresine
+              içi destek sistemi veya <Ph>{"support@aimlo.gg"}</Ph> adresine
               göndereceğiniz bir talep yeterlidir.
             </li>
           </ul>
@@ -103,7 +103,7 @@ export default function IadePage() {
             itibaren <strong className="text-white">14 (on dört) gün</strong>{" "}
             içinde hiçbir gerekçe göstermeksizin ve cezai şart ödemeksizin cayma
             hakkını kullanabilir. Cayma bildirimi{" "}
-            <Ph>{"{{EPOSTA}}"}</Ph> adresine yapılabilir.
+            <Ph>{"support@aimlo.gg"}</Ph> adresine yapılabilir.
           </p>
         </section>
 
@@ -191,7 +191,7 @@ export default function IadePage() {
           </p>
           <ul className="list-disc space-y-1 pl-5">
             <li>
-              E-posta: <Ph>{"{{EPOSTA}}"}</Ph>
+              E-posta: <Ph>{"support@aimlo.gg"}</Ph>
             </li>
             <li>
               Uygulama içi destek sistemi (masaüstü uygulaması ve web panelinde
@@ -224,14 +224,14 @@ export default function IadePage() {
         <section className="space-y-3 border-t border-white/10 pt-6 text-sm leading-relaxed text-neutral-300">
           <h2 className="text-lg font-bold text-white">Satıcı Bilgileri</h2>
           <p>
-            Ticaret unvanı: <Ph>{"{{TICARET_UNVANI}}"}</Ph>
+            Ticaret unvanı: <Ph>{"GÜNAY ERDEM VE KAAN DAĞDELEN ADİ ORTAKLIĞI"}</Ph>
           </p>
           <p>
-            Adres: <Ph>{"{{ADRES}}"}</Ph>
+            Adres: <Ph>{"Yenişehir Mah. Ankara Cad. 360 Office Kapı No: 405 Daire No: 95 Pendik/İstanbul"}</Ph>
           </p>
           <p>
-            E-posta: <Ph>{"{{EPOSTA}}"}</Ph> · Telefon:{" "}
-            <Ph>{"{{TELEFON}}"}</Ph>
+            E-posta: <Ph>{"support@aimlo.gg"}</Ph> · Telefon:{" "}
+            <Ph>{"0534 911 31 81"}</Ph>
           </p>
           <p className="text-neutral-400">
             Tüm künye bilgileri için{" "}
