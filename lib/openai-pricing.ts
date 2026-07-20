@@ -56,10 +56,14 @@ export function computeCost(usage: TokenUsage, model?: string | null): number {
   );
 }
 
-/** Format a USD amount for the admin UI (e.g. $0.0123 or $12.34). */
+/** Format a USD amount for the admin UI (e.g. $0.0123, $12.34, -$4.23).
+ * Negatif değerler işaret-önde biçimlenir (kâr kartı eksiye düşebilir) —
+ * eski hâli negatifte `$-4.2300` gibi kırık string üretiyordu. */
 export function formatUsd(amount: number): string {
-  if (amount === 0) return "$0";
-  if (amount < 0.01) return `$${amount.toFixed(4)}`;
-  if (amount < 1) return `$${amount.toFixed(3)}`;
-  return `$${amount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  const sign = amount < 0 ? "-" : "";
+  const abs = Math.abs(amount);
+  if (abs === 0) return "$0";
+  if (abs < 0.01) return `${sign}$${abs.toFixed(4)}`;
+  if (abs < 1) return `${sign}$${abs.toFixed(3)}`;
+  return `${sign}$${abs.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }

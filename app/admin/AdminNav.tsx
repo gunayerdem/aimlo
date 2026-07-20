@@ -12,7 +12,7 @@ const ITEMS = [
   { href: "/admin/cost", label: "Maliyet", ic: "$" },
   { href: "/admin/feedback", label: "Feedback", ic: "✦" },
   { href: "/admin/support", label: "Yardım / Sorular", ic: "?" },
-  { href: "/admin/revenue", label: "Gelir", ic: "₺" },
+  { href: "/admin/revenue", label: "Gelir", ic: "$" },
 ];
 
 export function AdminNav() {
