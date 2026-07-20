@@ -2704,9 +2704,21 @@ export default function Home() {
   const [user, setUser] = useState<User | null>(null);
   const [authLoading, setAuthLoading] = useState(true);
   useEffect(() => {
+    // Admin hesabı normal siteye değil Founder Console'a gider (softi 2026-07-20).
+    // app_metadata JWT'den gelir ve YALNIZ service-role yazabilir (user_metadata
+    // gibi kullanıcı-yazılabilir değil) → UX-yönlendirme sinyali olarak güvenli;
+    // gerçek kapı /admin/layout'taki getAdminUser (admins tablosu, fail-closed).
+    const bounceAdmin = (u: User | null): boolean => {
+      if (u?.app_metadata?.is_admin === true) {
+        window.location.replace("/admin");
+        return true;
+      }
+      return false;
+    };
     supabase.auth
       .getSession()
       .then(({ data: { session } }) => {
+        if (bounceAdmin(session?.user ?? null)) return;
         setUser(session?.user ?? null);
         setAuthLoading(false);
       })
@@ -2717,6 +2729,7 @@ export default function Home() {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (bounceAdmin(session?.user ?? null)) return;
       setUser(session?.user ?? null);
     });
     return () => subscription.unsubscribe();
