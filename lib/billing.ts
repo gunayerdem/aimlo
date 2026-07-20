@@ -69,7 +69,7 @@ export function monthlyCents(amountCents: number, interval: string): number {
  * herkes kilitlenirdi (güvenlik denetimi 2026-07-20, bulgu H4). */
 export async function getSubscriptionState(
   userId: string,
-): Promise<{ ready: boolean; active: SubscriptionRow | null }> {
+): Promise<{ ready: boolean; active: SubscriptionRow | null; errored?: boolean }> {
   if (!userId) return { ready: true, active: null };
   const svc = createServiceSupabase();
   // Denetim H3: durum filtresi DB'de — bellekte filtrelenip limit(5)
@@ -85,7 +85,10 @@ export async function getSubscriptionState(
   if (error) {
     if (isTableMissing(error)) return { ready: false, active: null };
     console.error("[billing] getSubscriptionState:", error.message);
-    return { ready: true, active: null };
+    // Denetim M2: geçici DB hatasını "abonelik yok" ile KARIŞTIRMA — hesap
+    // sayfası Pro kullanıcıya "Ücretsiz hesap" + satın-al CTA'sı gösterirse
+    // kullanıcı İKİNCİ KEZ satın alır (çoklu-satır sorununu bizzat yaratır).
+    return { ready: true, active: null, errored: true };
   }
   return { ready: true, active: ((data ?? [])[0] as SubscriptionRow) ?? null };
 }
