@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import PricingClient, { type Lang } from "./PricingClient";
 import { PricingBackdrop } from "./PricingBackdrop";
 import { SellerInfo } from "@/app/_components/SellerInfo";
+import { SiteHeader } from "@/app/_components/SiteHeader";
 
 export const metadata: Metadata = {
   title: "Fiyatlandırma — AIMLO",
@@ -33,16 +34,20 @@ export default async function PricingPage() {
   const initialLang: Lang = country === "TR" ? "TR" : "EN";
 
   return (
-    <main className="relative min-h-screen bg-[#030711] px-4 py-16 text-zinc-200">
+    /* main'de yatay padding YOK: tepe paneli kenardan kenara uzansın
+       (ana sayfadaki gibi). Yatay boşluk article'a taşındı. */
+    <main className="relative min-h-screen bg-[#030711] pb-16 text-zinc-200">
+      {/* Sitenin tepe paneli — logo/yazıya basınca ana sayfa.
+          Kendi yer tutucusunu getiriyor, ayrıca pt vermeye gerek yok. */}
+      <SiteHeader />
       {/* Canlı IRIS gözü — içeriğin gerisinde, boş alanı dolduruyor */}
       <PricingBackdrop />
       {/* pb-24: sabit ödeme çubuğunun payı — sayfanın EN SONUNDA, içerik
           aralarında değil. Böylece panel-künye arası sıkı, çubuk hiçbir
           şeyin üstünü örtmüyor. */}
-      <article className="relative z-10 mx-auto max-w-3xl space-y-14 pb-24">
-        <Link href="/" className="block text-[12px] text-neutral-500 transition hover:text-[#FF6B77]">
-          ← Ana Sayfa
-        </Link>
+      <article className="relative z-10 mx-auto max-w-3xl space-y-14 px-4 pb-24 pt-10">
+        {/* "← Ana Sayfa" bağlantısı KALDIRILDI: tepe panelindeki logo
+            aynı işi yapıyor, ikisi birden gereksiz tekrar. */}
 
         <PricingClient initialLang={initialLang} />
 
