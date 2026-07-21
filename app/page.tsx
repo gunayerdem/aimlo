@@ -1481,13 +1481,10 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
               </Link>
             </div>
-            {/* Fiyat çıpası — sayfada rakamla fiyat geçmesi şart. TL/USD dil
-                seçimine bağlı; TR yerleşiklere TL gösterilir (Tebliğ 2008-32/34). */}
-            <p className="mt-5 text-[12px] text-neutral-500">
-              {lang === "tr"
-                ? "499 TL/ay · yıllık 4.790 TL (KDV dahil) · taksit yok"
-                : "$9.99/mo · $95.88/year (VAT included) · no installments"}
-            </p>
+            {/* Hero'daki fiyat çıpası KALDIRILDI (softi 2026-07-21) — hero
+                sadeleşti. Rakamla fiyat sayfada HÂLÂ var (iyzico incelemesi
+                bunu arıyor): aşağıdaki plan kartlarında 499 TL / 4.790 TL /
+                $9.99 / $95.88, ayrıca SSS'te ve /fiyatlandirma sayfasında. */}
 
             {/* Stats strip — VANGUARD style, honest product claims */}
             <div className="mt-12 pt-8 border-t border-white/[0.08] grid grid-cols-3 gap-6 animate-slide-up stagger-4 max-w-md mx-auto lg:mx-0">
