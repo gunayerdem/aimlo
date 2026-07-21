@@ -33,6 +33,14 @@ import type {
   CompTarget,
   SavedReport,
 } from "@/types";
+/** Dil-bazlı fiyatlandırma rotası (softi 2026-07-21): site dili EN →
+ *  /pricing, TR → /fiyatlandirma. Her URL kendi dilini sabitliyor, böylece
+ *  EN kullanıcı Türkçe sayfaya düşmüyor. Landing'deki tüm fiyat/satın-al
+ *  bağlantıları bunu kullanır. */
+function pricingHref(lang: Lang): string {
+  return lang === "en" ? "/pricing" : "/fiyatlandirma";
+}
+
 /* ══════════════════════════════════════════════════════════
    AUTH TOKEN HELPER — for API calls
    ══════════════════════════════════════════════════════════ */
@@ -1344,7 +1352,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             <Link href="/blog" className="text-[13px] font-medium text-neutral-400 transition-colors duration-200 hover:text-white">
               {l.landingNav.blog}
             </Link>
-            <Link href="/fiyatlandirma" className="text-[13px] font-medium text-neutral-400 transition-colors duration-200 hover:text-white">
+            <Link href={pricingHref(lang)} className="text-[13px] font-medium text-neutral-400 transition-colors duration-200 hover:text-white">
               {lang === "tr" ? "Fiyatlandırma" : "Pricing"}
             </Link>
           </div>
@@ -1369,7 +1377,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             {/* Satın Al — sağ üstteki BİRİNCİL eylem (softi 2026-07-20).
                 Ürün→fiyat→sepet akışının giriş noktası; iyzico incelemesi
                 için de ilk ekranda görünür olması gerekiyor. */}
-            <Link href="/fiyatlandirma" className="btn-neon hidden sm:block rounded-lg px-5 py-2 text-[12px]">
+            <Link href={pricingHref(lang)} className="btn-neon hidden sm:block rounded-lg px-5 py-2 text-[12px]">
               {lang === "tr" ? "Satın Al" : "Get AIMLO+"}
             </Link>
             <button onClick={() => setMobileMenu(!mobileMenu)} className="md:hidden p-2 text-neutral-400 hover:text-white transition">
@@ -1382,11 +1390,11 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             {Object.entries(l.landingNav).map(([key, label]) => (
               <button key={key} onClick={() => scrollTo(`section-${key}`)} className="block w-full text-left text-sm text-neutral-400 py-2 hover:text-white transition">{label}</button>
             ))}
-            <Link href="/fiyatlandirma" onClick={() => setMobileMenu(false)} className="block w-full text-left text-sm text-neutral-400 py-2 hover:text-white transition">
+            <Link href={pricingHref(lang)} onClick={() => setMobileMenu(false)} className="block w-full text-left text-sm text-neutral-400 py-2 hover:text-white transition">
               {lang === "tr" ? "Fiyatlandırma" : "Pricing"}
             </Link>
             {/* Satın Al — mobilde de birincil eylem (softi 2026-07-20) */}
-            <Link href="/fiyatlandirma" onClick={() => setMobileMenu(false)} className="btn-neon block w-full rounded-lg py-2.5 text-center text-sm mt-3">
+            <Link href={pricingHref(lang)} onClick={() => setMobileMenu(false)} className="btn-neon block w-full rounded-lg py-2.5 text-center text-sm mt-3">
               {lang === "tr" ? "Satın Al" : "Get AIMLO+"}
             </Link>
             <div className="flex gap-2 pt-3">
@@ -1466,7 +1474,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
                   olması gerekiyor (iyzico incelemesi siteyi elle geziyor). */}
               <Link
                 data-magnetic
-                href="/fiyatlandirma"
+                href={pricingHref(lang)}
                 className="btn-ghost rounded-xl px-8 py-3.5 text-[14px] flex items-center gap-2"
               >
                 {lang === "tr" ? "Fiyatlandırma" : "Pricing"}
@@ -2113,7 +2121,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
 
           <div className="grid gap-5 sm:grid-cols-2 max-w-3xl mx-auto">
             {/* Aylık */}
-            <Link href="/fiyatlandirma?plan=aylik" className="pr-card rounded-2xl border border-white/[0.08] bg-white/[0.02] p-7 block hover:border-white/[0.16]">
+            <Link href={`${pricingHref(lang)}?plan=aylik`} className="pr-card rounded-2xl border border-white/[0.08] bg-white/[0.02] p-7 block hover:border-white/[0.16]">
               <p className="text-[13px] font-bold uppercase tracking-wider text-neutral-400">
                 {lang === "tr" ? "Aylık" : "Monthly"}
               </p>
@@ -2130,7 +2138,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             </Link>
 
             {/* Yıllık */}
-            <Link href="/fiyatlandirma?plan=yillik" className="pr-card pr-sel rounded-2xl border border-[#FF4655]/60 bg-[#FF4655]/[0.055] p-7 block">
+            <Link href={`${pricingHref(lang)}?plan=yillik`} className="pr-card pr-sel rounded-2xl border border-[#FF4655]/60 bg-[#FF4655]/[0.055] p-7 block">
               <span className="absolute top-4 right-5 rounded-full bg-[#FF4655] px-2.5 py-1 text-[10px] font-black tracking-wide text-white">
                 {lang === "tr" ? "%20 indirim" : "20% off"}
               </span>
@@ -2151,7 +2159,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
           </div>
 
           <div className="mt-10 text-center">
-            <Link href="/fiyatlandirma" className="btn-neon rounded-xl px-10 py-4 text-[14px] inline-flex items-center gap-2">
+            <Link href={pricingHref(lang)} className="btn-neon rounded-xl px-10 py-4 text-[14px] inline-flex items-center gap-2">
               {lang === "tr" ? "Satın Al" : "Get AIMLO+"}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
             </Link>
@@ -2208,7 +2216,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
           {/* Satın Al — sayfanın ALTINDAKİ birincil eylem (softi 2026-07-20) */}
-          <Link href="/fiyatlandirma" className="btn-neon rounded-xl px-8 py-3.5 text-[14px] flex items-center gap-2">
+          <Link href={pricingHref(lang)} className="btn-neon rounded-xl px-8 py-3.5 text-[14px] flex items-center gap-2">
             {lang === "tr" ? "Satın Al" : "Get AIMLO+"}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
           </Link>
@@ -2248,7 +2256,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
           >
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
               {[
-                { href: "/fiyatlandirma", tr: "Fiyatlandırma", en: "Pricing" },
+                { href: pricingHref(lang), tr: "Fiyatlandırma", en: "Pricing" },
                 { href: "/legal/mesafeli-satis", tr: "Mesafeli Satış Sözleşmesi", en: "Distance Sales Agreement" },
                 { href: "/legal/iade", tr: "İptal, İade ve Cayma Koşulları", en: "Cancellation & Refund Policy" },
                 { href: "/legal/terms", tr: "Kullanım Koşulları", en: "Terms of Use" },
