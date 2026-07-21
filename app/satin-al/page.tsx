@@ -58,7 +58,7 @@ export default function SatinAlPage() {
             <li>Telefon: {"0534 911 31 81"}</li>
             <li>E-posta: {"support@aimlo.gg"}</li>
             <li>Vergi dairesi: {"Pendik Vergi Dairesi"}</li>
-            <li>Vergi / TCKN no: {"44461434066"}</li>
+            <li>Vergi kimlik no: {"4271175312"}</li>
           </ul>
         </section>
 

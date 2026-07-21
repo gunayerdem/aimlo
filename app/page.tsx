@@ -2278,7 +2278,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               {"GÜNAY ERDEM VE KAAN DAĞDELEN ADİ ORTAKLIĞI"} · {"Yenişehir Mah. Ankara Cad. 360 Office Kapı No: 405 Daire No: 95 Pendik/İstanbul"} · {"0534 911 31 81"} · {"support@aimlo.gg"}
               <br />
               {lang === "tr" ? "Vergi Dairesi / No: " : "Tax Office / No: "}
-              {"Pendik Vergi Dairesi"} / {"44461434066"}
+              {"Pendik Vergi Dairesi"} / {"4271175312"}
             </p>
             <p className="text-[11px] text-neutral-600 leading-relaxed max-w-2xl mx-auto">
               {lang === "tr"

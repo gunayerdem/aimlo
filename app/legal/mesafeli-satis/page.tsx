@@ -70,7 +70,7 @@ export default function MesafeliSatisPage() {
             </li>
             <li>
               <span className="text-neutral-500">Vergi Numarası: </span>
-              <span className={PLACEHOLDER}>{"44461434066"}</span>
+              <span className={PLACEHOLDER}>{"4271175312"}</span>
             </li>
             <li>
               <span className="text-neutral-500">İnternet Sitesi: </span>
@@ -401,7 +401,7 @@ export default function MesafeliSatisPage() {
                 <span className={PLACEHOLDER}>{"support@aimlo.gg"}</span> · Vergi
                 Dairesi/No:{" "}
                 <span className={PLACEHOLDER}>{"Pendik Vergi Dairesi"}</span> /{" "}
-                <span className={PLACEHOLDER}>{"44461434066"}</span>
+                <span className={PLACEHOLDER}>{"4271175312"}</span>
               </p>
             </div>
 

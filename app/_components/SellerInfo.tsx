@@ -13,7 +13,7 @@ export function SellerInfo({ compact = false }: { compact?: boolean }) {
   const items: Array<[string, React.ReactNode]> = [
     ["Ticaret unvanı", SELLER.tradeName],
     ["Vergi dairesi", SELLER.taxOffice],
-    ["Vergi / TCKN no", SELLER.taxNumber],
+    ["Vergi kimlik no", SELLER.taxNumber],
     ["Adres", SELLER.address],
     [
       "Telefon",

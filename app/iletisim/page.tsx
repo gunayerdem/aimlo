@@ -88,7 +88,7 @@ export default function IletisimPage() {
               <Ph>{"Pendik Vergi Dairesi"}</Ph>
             </KunyeRow>
             <KunyeRow label="Vergi / TC kimlik no">
-              <Ph>{"44461434066"}</Ph>
+              <Ph>{"4271175312"}</Ph>
             </KunyeRow>
             <KunyeRow label="Web sitesi">
               <a

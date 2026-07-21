@@ -21,7 +21,12 @@ export const SELLER = {
   phoneHref: "+905349113181",
   email: "support@aimlo.gg",
   taxOffice: "Pendik Vergi Dairesi",
-  taxNumber: "44461434066",
+  /* Adi ortaklığın 10 haneli VERGİ KİMLİK NUMARASI (VKN) — kişisel TCKN DEĞİL.
+     E-Ticaret Yönetmeliği Md.5: MERSİS'i olmayan işletme (adi ortaklığın tüzel
+     kişiliği yok) künyede vergi kimlik numarası göstermeli. Önceden yanlışlıkla
+     11 haneli kişisel TCKN konmuştu; KVKK açısından hassas ve yasanın istediği
+     de o değil. VKN kurumsal ve zaten aleni bir numaradır. */
+  taxNumber: "4271175312",
 } as const;
 
 /** Künye satırları — gösterim sırası. Etiket + değer. */
@@ -31,5 +36,5 @@ export const SELLER_ROWS: ReadonlyArray<readonly [string, string]> = [
   ["Telefon", SELLER.phone],
   ["E-posta", SELLER.email],
   ["Vergi dairesi", SELLER.taxOffice],
-  ["Vergi / TCKN no", SELLER.taxNumber],
+  ["Vergi kimlik no", SELLER.taxNumber],
 ];
