@@ -1166,8 +1166,11 @@ export async function POST(request: NextRequest) {
       // reqLang geçirilir (denetim 2026-07-19 F5): guard/rewrite replacement dili
       // artık özel-harf heuristiği değil, isteğin kendi dili ("Cypher seni B Main'de
       // vurdu" gibi özel-harfsiz TR cümleye "an enemy" enjekte edilmesin).
-      const checkedAnalysis = realityCheck(fb.deathAnalysis, memoryForCheck, factGround, "death", reqLang);
-      const checkedSuggestion = realityCheck(fb.nextRoundSuggestion, memoryForCheck, factGround, "suggestion", reqLang);
+      // reqMap (canlı bug 2026-07-21): oynanan haritaya ait OLMAYAN callout'lar
+      // ayıklanır — Lotus maçında "A Short" uydurması gibi. Harita bilinmiyorsa
+      // (Unknown / gelmedi) davranış eskisiyle aynı.
+      const checkedAnalysis = realityCheck(fb.deathAnalysis, memoryForCheck, factGround, "death", reqLang, reqMap);
+      const checkedSuggestion = realityCheck(fb.nextRoundSuggestion, memoryForCheck, factGround, "suggestion", reqLang, reqMap);
       if (checkedAnalysis.modified || checkedSuggestion.modified) {
         console.log(`[Aimlo AI] Reality check: deathAnalysis rewrite=${checkedAnalysis.rewriteLevel}, suggestion rewrite=${checkedSuggestion.rewriteLevel}`);
       }
@@ -1188,7 +1191,7 @@ export async function POST(request: NextRequest) {
       // önceden HİÇ denetlenmiyordu → killer/rota/sayı uydurması elenmeden çıkıyordu).
       // kind:"suggestion" → tümü stripped olursa "" döner, orijinali koru.
       const enemyAnalysisOut = fb.enemyAnalysis.slice(0, 2).map((s) => {
-        const c = realityCheck(String(s), memoryForCheck, factGround, "suggestion", reqLang);
+        const c = realityCheck(String(s), memoryForCheck, factGround, "suggestion", reqLang, reqMap);
         const safe = c.text && c.text.trim() ? c.text : String(s);
         return clampWords(enforceAgentKit(cleanCoachText(safe, reqLang), reqAgent), 180);
       });

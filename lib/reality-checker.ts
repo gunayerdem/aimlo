@@ -6,6 +6,7 @@
  */
 
 import { extractKillerWeapon } from "@/lib/comp-weapon";
+import { mapKey, MAP_CALLOUTS, UNIVERSAL_CALLOUTS } from "@/lib/map-callouts";
 
 // ── Types ──
 
@@ -717,6 +718,104 @@ export function guardUnprovenFacts(
  *                     existing 2-arg caller is unaffected.
  * @returns Safe text with false claims rewritten
  */
+/** YABANCI CALLOUT AYIKLAYICI (canlı bug 2026-07-21, Kaan/Lotus).
+ *
+ * Koç, OYNANMAYAN haritanın yer adını uydurabiliyor: Lotus maçında "A Short'ta
+ * tek başına girdin" yazdı — Lotus'ta A Short YOKTUR (Ascent/Bind/Haven'da var).
+ * POSITION_NAMES harita-bağımsız tek liste olduğu için doğrulayıcı bunu geçirdi.
+ *
+ * Bu ayıklayıcı, oynanan haritaya AİT OLMAYAN callout'ları metinden çıkarır.
+ * Mevcut `guardUnprovenFacts`'ten BAĞIMSIZ ve ona DİK çalışır: o, ölüm yeri
+ * bilinmiyorken konum iddiasını siler; bu ise ölüm yeri BİLİNSE bile yanlış
+ * haritanın adını siler (rapor özeti gibi ölüm-bağlamı olmayan metinlerde de).
+ *
+ * GÜVENLİK: harita bilinmiyorsa (Unknown / tabloda yok / hiç verilmedi)
+ * fonksiyon metne DOKUNMAZ — davranış eskisiyle bayt-aynı. Ayıklama yalnız
+ * haritayı KESİN bildiğimizde çalışır.
+ *
+ * Cümleyi bozmamak için yalnız YER ADI düşer, cümle yapısı korunur:
+ *   TR "A Short'ta tek başına girdin" → "tek başına girdin"
+ *   EN "you pushed at A Short"        → "you pushed"
+ */
+export function stripForeignCallouts(text: string, map: string | undefined | null): string {
+  if (!text) return text;
+  const k = mapKey(map);
+  if (!k) return text; // harita bilinmiyor → dokunma
+
+  // Meşru = bu haritanın callout'ları + her haritada bulunan evrensel adlar
+  // (spawn'lar). Evrenseller olmasa "defender spawn" gibi doğru bir ifadeyi
+  // yabancı sayıp silerdik — uydurmayı engellerken gerçeği bozmak olurdu.
+  const legit = new Set([
+    ...MAP_CALLOUTS[k].map((c) => c.toLowerCase()),
+    ...UNIVERSAL_CALLOUTS.map((c) => c.toLowerCase()),
+  ]);
+
+  // EN UZUN EŞLEŞME ÖNCE — kritik. İlk uygulamada callout'ları tek tek gezip
+  // "haritaya ait değilse sil" dedim ve MEŞRU METNİ BOZDUM: POSITION_NAMES
+  // içinde çıplak "mound" var, Lotus listesinde ise "c mound" var; kısa olan
+  // önce eşleşince "C Mound'da tek başına kaldın" → "C tek başına kaldın"
+  // oldu. Test bunu yakaladı. Çözüm: tüm adları TEK regex'te, uzunluğa göre
+  // AZALAN sırada alternatif olarak ver — regex alternasyonu soldan sağa
+  // denediği için "c mound" her zaman "mound"dan önce eşleşir. Eşleşen ad
+  // haritaya AİTSE olduğu gibi geri yazılır, değilse düşer.
+  // ADAY HAVUZU = POSITION_NAMES ∪ TÜM haritaların callout'ları.
+  // POSITION_NAMES tek başına YETMİYOR: içinde çıplak "mound" var ama "c mound"
+  // YOK. Havuzda uzun ad hiç bulunmayınca uzunluk sıralaması da kurtarmıyordu —
+  // "mound" eşleşip Lotus'un meşru "C Mound"unu parçalıyordu (test yakaladı).
+  // Tüm harita adlarını havuza katınca "c mound" aday olur, uzunluk sırasıyla
+  // "mound"dan ÖNCE eşleşir ve haritaya ait olduğu için korunur.
+  const pool = new Set<string>(POSITION_NAMES.map((p) => p.toLowerCase()));
+  for (const list of Object.values(MAP_CALLOUTS)) {
+    for (const c of list) pool.add(c.toLowerCase());
+  }
+  const ordered = [...pool].sort((a, b) => b.length - a.length);
+  const ALT = ordered.map(escapeRe).join("|");
+  const keepIfLegit = (whole: string, name: string) =>
+    legit.has(name.trim().toLowerCase()) ? whole : "";
+
+  let result = text;
+
+  // UNICODE KELİME SINIRI — \b KULLANILAMAZ. JS'te \b, \w=[A-Za-z0-9_] ASCII
+  // tanımına dayanır; Türkçe ş/ı/ğ/ü/ö/ç harfleri \w DEĞİLDİR. İki ayrı hasar
+  // doğuruyordu (ikisi de testte görüldü):
+  //   • Kapanış sınırı hiç yokken "gen" (Ascent callout'u) "GENİŞ" kelimesinin
+  //     içinden silindi → "solo geniş açı" → "solo iş açı".
+  //   • Sadece \b konsaydı "yard" callout'u "YARDIm" içinde eşleşirdi, çünkü
+  //     "ı" ASCII \w olmadığı için orada sahte bir sınır var.
+  // Çözüm: \p{L}\p{N} temelli, u-bayraklı bakış işaretleri.
+  const NB = "(?<![\\p{L}\\p{N}_-])"; // önünde harf/rakam OLMAYACAK
+  const NA = "(?![\\p{L}\\p{N}_-])"; // ardında harf/rakam OLMAYACAK
+
+  // 1) EN: edat + yer ("died at A Short", "pushed from Market") — edat da düşer.
+  result = result.replace(
+    new RegExp(
+      `\\s*${NB}(?:at|in|on|near|through|from|toward|towards|into)\\s+(${ALT})${NA}`,
+      "giu",
+    ),
+    keepIfLegit,
+  );
+
+  // 2) TR hâl ekleri + çıplak kullanım + "A Short:" başlık biçimi tek geçişte.
+  //    Ad haritaya aitse (ekli ya da eksiz) olduğu gibi korunur.
+  //    Ek grubu apostrofsuz da çalışır ("Midde") ama ardından yine sınır şart.
+  result = result.replace(
+    new RegExp(
+      `${NB}(${ALT})(?:\\s*['’]\\s*(?:d[ae]n|t[ae]n|d[ae]|t[ae]|y?[ae])|(?:d[ae]n|t[ae]n|d[ae]|t[ae]))?${NA}\\s*:?\\s*`,
+      "giu",
+    ),
+    keepIfLegit,
+  );
+
+  // Ayıklamadan artan boşluk/noktalama onarımı (guardUnprovenFacts ile aynı sözleşme).
+  return result
+    .replace(/\s{2,}/g, " ")
+    .replace(/\s+([,.;:!?])/g, "$1")
+    .replace(/([,;:]\s*){2,}/g, ", ")
+    .replace(/[,;:]\s*([.!?])/g, "$1")
+    .replace(/^[\s,;:.]+/, "")
+    .trim();
+}
+
 export function realityCheck(
   outputText: string,
   roundHistory: RoundMemoryEntry[],
@@ -731,6 +830,10 @@ export function realityCheck(
   // sayılıp "an enemy"/"recently" enjekte edilmesi biter). Verilmezse eski
   // heuristik → mevcut çağıranlar (eval-vision dahil) bayt-aynı.
   lang?: "tr" | "en",
+  // Oynanan harita (canlı bug 2026-07-21): verilirse o haritaya AİT OLMAYAN
+  // callout'lar metinden ayıklanır (Lotus'ta "A Short" gibi). VERİLMEZSE ya da
+  // harita tabloda yoksa hiçbir şey değişmez — tüm mevcut çağıranlar bayt-aynı.
+  map?: string,
 ): { text: string; modified: boolean; rewriteLevel: number } {
   if (!outputText) {
     return { text: outputText, modified: false, rewriteLevel: 1 };
@@ -738,6 +841,17 @@ export function realityCheck(
 
   let text = outputText;
   let rewriteLevel = 1;
+
+  // Yabancı-harita callout ayıklaması — EN BAŞTA çalışır ki sonraki guard'lar
+  // zaten temizlenmiş metin üzerinde işlesin (uydurma yer adı hiçbir aşamaya
+  // sızmasın). Harita bilinmiyorsa no-op.
+  if (map) {
+    const stripped = stripForeignCallouts(text, map);
+    if (stripped !== text) {
+      text = stripped;
+      rewriteLevel = Math.max(rewriteLevel, 2);
+    }
+  }
 
   // Present-fact guard (route/trade) — runs even with EMPTY round history
   // (round 1) because it validates against the current round's facts, not the

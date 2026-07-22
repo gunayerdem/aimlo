@@ -9,6 +9,7 @@ import * as path from "path";
 import { loadVisionKnowledge, loadKnowledge } from "../lib/knowledge-loader";
 import { DEATH_TYPE_GUIDE } from "../lib/death-type";
 import { BANNED_PHRASES } from "../lib/ai-policy";
+import { MAP_CALLOUTS, UNIVERSAL_CALLOUTS } from "../lib/map-callouts";
 
 const KB = path.join(process.cwd(), "knowledge");
 let fail = 0, pass = 0;
@@ -238,6 +239,37 @@ console.log(`\n[11] ajan × aktif-havuz kapsam guard'ı`);
       `havuz kapsamı ${m} (${agentFiles.length - missing.length}/${agentFiles.length} ajan${STRICT_POOL_COVERAGE ? "" : " — uyarı modu"})`,
       STRICT_POOL_COVERAGE ? missing.length === 0 : true,
       `(${missing.length} ajan dosyası ${m} adını içermiyor)`
+    );
+  }
+}
+
+// N) HARİTA CALLOUT TABLOSU ↔ KB TUTARLILIĞI (canlı bug 2026-07-21)
+// lib/map-callouts.ts, koçun uydurma yer adını (Lotus'ta "A Short") ayıklamak
+// için kullanılıyor. Tablo KB'den sessizce SAPARSA iki yönde de zarar var:
+//   • Tabloda olup KB'de olmayan  → gerçekte var olmayan bir adı meşru sayarız
+//   • KB'de olup tabloda olmayan  → MEŞRU koçluk metnini bozarız (daha kötü)
+// Bu kontrol birincisini yakalar; ikincisi için tablo bilerek geniş tutuluyor.
+console.log(`\n[N] Harita callout tablosu ↔ KB tutarlılığı`);
+{
+  const mapFiles = fs.readdirSync(path.join(KB, "maps")).filter((f) => f.endsWith(".md"));
+  const known = new Set(mapFiles.map((f) => f.replace(".md", "")));
+  // Tablodaki her harita gerçekten var mı?
+  for (const m of Object.keys(MAP_CALLOUTS)) {
+    check(`tablo haritası '${m}' KB'de var`, known.has(m), "(knowledge/maps/ altında yok)");
+  }
+  // Her callout, kendi haritasının .md dosyasında geçiyor mu?
+  for (const [m, callouts] of Object.entries(MAP_CALLOUTS)) {
+    if (!known.has(m)) continue;
+    const body = fs.readFileSync(path.join(KB, "maps", `${m}.md`), "utf8").toLowerCase();
+    // Evrensel adlar (spawn'lar) her haritada VAR ama KB dosyaları hepsini tek
+    // tek yazmaz → harita-başına kontrolden muaf.
+    const ghosts = callouts.filter(
+      (c) => !UNIVERSAL_CALLOUTS.includes(c.toLowerCase()) && !body.includes(c.toLowerCase()),
+    );
+    check(
+      `${m}: ${callouts.length - ghosts.length}/${callouts.length} callout KB'de geçiyor`,
+      ghosts.length === 0,
+      ghosts.length ? `(KB'de BULUNMAYAN: ${ghosts.join(", ")})` : "",
     );
   }
 }
