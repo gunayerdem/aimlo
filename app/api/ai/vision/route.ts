@@ -14,6 +14,7 @@ import { cleanCoachText, clampWords, stripNumericHp } from "@/lib/coach-text";
 import { SYSTEM_PROMPT, SYSTEM_PROMPT_EN_ADDENDUM, USER_PROMPT, USER_PROMPT_EN, buildFactSheet, buildRoundFeedbackSchema } from "@/lib/vision-prompt";
 import { classifyDeath, buildDeathTypeDirective } from "@/lib/death-type";
 import { extractKillerWeapon, classifyCompArchetype, buildWeaponCompDirective } from "@/lib/comp-weapon";
+import { mapKey } from "@/lib/map-callouts";
 
 // ── Coach-voice OUTPUT cleaner ─────────────────────────────────────────────
 // cleanCoachText is now the SHARED single-source deterministic net in
@@ -902,10 +903,21 @@ export async function POST(request: NextRequest) {
     // deathTypeDirective / weaponCompDirective de aynı sebeple user-msg'de.
     const confidenceDirective =
       CONFIDENCE_PROMPTS[visionConfidence] || CONFIDENCE_PROMPTS.medium;
+    // HARİTA OKUNAMADI direktifi (2026-07-24, konsey — Omen/Unknown maçı): harita
+    // tespit edilemediyse (mid-match/Spike Rush başlangıcı) modeli callout UYDURMAKTAN
+    // menet — reality-checker'ın deterministik strip'i zaten uydurmayı siliyor, bu
+    // direktif kaynağı kurutuyor (daha temiz çıktı, daha az strip). Yalnız Unknown'da
+    // aktif; bilinen haritada BOŞ string → known-map davranışı bayt-aynı.
+    const mapUnknownDirective = (!reqMap || mapKey(reqMap) === null)
+      ? (reqLang === "en"
+          ? `\n[MAP UNREADABLE] The map could not be read this match. Do NOT invent any callout/position name ("A Short", "B Main", "Mid"...). Use only an OCR-supplied deathLocation if present; otherwise anchor the lesson to agent + weapon + side + decision (trade/util order/timing). Those are specific and true without a map.`
+          : `\n[HARİTA OKUNAMADI] Bu maçta harita okunamadı. HİÇBİR callout/yer adı UYDURMA ("A Short", "B Main", "Mid"...). Yalnız OCR'ın gönderdiği deathLocation varsa onu kullan; yoksa dersi ajan + silah + side + karar (trade/util-sırası/timing) üzerinden çapala. Bunlar harita olmadan da spesifik ve doğru.`)
+      : "";
     const clientContext = reqLang === "en"
       ? langDirective +      // dil emri EN BAŞTA — Türkçe bloklardan önce
         factSheet +
         confidenceDirective +  // VERİ SEVİYESİ — EN'de dil emrinden sonra
+        mapUnknownDirective +
         deathTypeDirective +
         weaponCompDirective +
         (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, more reliable than the screenshot]\n${ctxJson}` : "") +
@@ -913,6 +925,7 @@ export async function POST(request: NextRequest) {
       : factSheet +   // BİLİNEN/BİLİNMEYEN sözleşmesi EN BAŞTA — model olgu-sınırını önce görsün
         langDirective +        // dil emri — olgu sınırından hemen sonra (EN'de aktif)
         confidenceDirective +  // VERİ SEVİYESİ — system prefix'ten taşındı (per-round, user-msg)
+        mapUnknownDirective +  // HARİTA OKUNAMADI — Unknown'da callout uydurmayı menet (per-round)
         deathTypeDirective +   // ÖLÜM-TİPİ çıpası — factSheet'ten hemen sonra (per-round, user-msg)
         weaponCompDirective +  // SİLAH+KOMP işaretçisi — statik rehberin bölüm seçicisi (per-round, user-msg)
         (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, screenshot'tan güvenilir]\n${ctxJson}` : "") +

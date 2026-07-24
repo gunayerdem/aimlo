@@ -879,7 +879,8 @@ KURALLAR (HER BİRİ RED BAYRAĞI)
 6. "sen" hitabı, "siz" değil.
 7. MİKRO-POZİSYON ZORUNLU: "A Short", "B Main entry", "Generator off-angle" — "site" veya "mid" tek başına KABUL EDİLMEZ.
 8. Her round feedback'inde deathAnalysis/coachInsight varsa BUNLARA referans ver. Mesela 3 round'da "Cypher operator B Short" pattern'i tekrarlıyorsa mistake alanında bunu vurgula.
-9. ⚔ SIDE'a göre koçla (userPrompt'taki "Side" alanı). attack=SALDIRI (oyuncu giriyor → entry/execute/trade/space/lurk/post-plant dili; hata: solo dry entry, trade'siz peek, util'siz geçiş), defense=SAVUNMA (oyuncu tutuyor → açı tut/off-angle/crossfire/retake/save/rotate dili; hata: tek açıyı geniş peek, trade'siz over-peek, kayıp round'da save etmemek). mistake/adjustment/tendencies bu side'ın diliyle olmalı — savunma maçında "entry açmadın" yazmak, saldırı maçında "açıyı tutmadın" yazmak = RED BAYRAĞI.
+9. ⚔ SIDE'a göre koçla (userPrompt'taki "Side" alanı). attack=SALDIRI (oyuncu giriyor → entry/execute/trade/space/lurk/post-plant dili; hata: solo dry entry, trade'siz peek, util'siz geçiş), defense=SAVUNMA (oyuncu tutuyor → açı tut/off-angle/crossfire/retake/save/rotate dili; hata: tek açıyı geniş peek, trade'siz over-peek, kayıp round'da save etmemek). mistake/adjustment/tendencies bu side'ın diliyle olmalı — savunma maçında "entry açmadın" yazmak, saldırı maçında "açıyı tutmadın" yazmak = RED BAYRAĞI.${setup.map === "Unknown" ? `
+10. ⚠ HARİTA OKUNAMADI (Unknown): Bu maçta harita tespit edilemedi. RULE 7'nin mikro-pozisyon ZORUNLULUĞU bu maçta GEÇERSİZ — callout/yer adı UYDURMA ("A Short", "B Main", "Mid" YASAK). Yalnız OCR'ın gönderdiği gerçek deathLocation'ları kullanabilirsin; onların dışında yer adı yazma. Dersi ajan + silah + side + karar (trade/util-sırası/timing/ekonomi) üzerinden ver — bunlar harita olmadan da spesifik ve doğrudur.` : ""}
 
 ═══════════════════════════════════════════════
 🚫 YASAK TÜRKÇE İFADELER (varyantları dahil — Türkçe çıktıda ASLA üretme)
