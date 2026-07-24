@@ -53,6 +53,9 @@ export interface FactGround {
   hasSpike?: boolean;         // spike state RELIABLE (only set when true → can't tell false/absent → always false)
   hasTradeData?: boolean;     // tradedByAlly boolean present
   hasRoute?: boolean;         // playerRoute measured
+  // Masaüstünün OCR ile ölçtüğü ölüm yeri (varsa). stripForeignCallouts bunu
+  // HER ZAMAN meşru sayar — tablo eksik olsa bile ölçülen konumu silmez.
+  deathLocation?: string;
 }
 
 // ── Claim Extraction ──
@@ -489,6 +492,7 @@ export function buildFactGround(
     // paylaşır; silah token'ı hiç yoksa guard eskisi gibi strip'ler.
     hasWeapon: killerInfo.length > 0 && extractKillerWeapon(killerInfo) !== null,
     hasDeathLocation: typeof ctx.deathLocation === "string" && (ctx.deathLocation as string).length > 0,
+    deathLocation: typeof ctx.deathLocation === "string" ? (ctx.deathLocation as string) : undefined,
     hasDeathAngle: typeof ctx.deathAngle === "string" && (ctx.deathAngle as string).length > 0,
     hasHeadshot: reqBody.headshot === true,
     hasAliveCount: false,
@@ -737,18 +741,33 @@ export function guardUnprovenFacts(
  *   TR "A Short'ta tek başına girdin" → "tek başına girdin"
  *   EN "you pushed at A Short"        → "you pushed"
  */
-export function stripForeignCallouts(text: string, map: string | undefined | null): string {
+export function stripForeignCallouts(
+  text: string,
+  map: string | undefined | null,
+  // Masaüstünün OCR ile ÖLÇÜP gönderdiği ölüm yeri. HER ZAMAN meşru sayılır.
+  suppliedLocation?: string | null,
+): string {
   if (!text) return text;
   const k = mapKey(map);
   if (!k) return text; // harita bilinmiyor → dokunma
 
   // Meşru = bu haritanın callout'ları + her haritada bulunan evrensel adlar
-  // (spawn'lar). Evrenseller olmasa "defender spawn" gibi doğru bir ifadeyi
-  // yabancı sayıp silerdik — uydurmayı engellerken gerçeği bozmak olurdu.
+  // (spawn'lar) + MASAÜSTÜNÜN GÖNDERDİĞİ ÖLÜM YERİ.
+  //
+  // 🔴 CANLI REGRESYON (2026-07-24, Fracture): masaüstü ölüm yerini "a main"
+  // gönderdi ama tablomda Fracture için "a main" YOKTU (tablo eksikti) → strip
+  // onu "yabancı callout" sanıp SİLDİ → "nerede vurulduğunu söylemiyor".
+  // İLKE: masaüstünün ölçtüğü konumu backend ASLA silmez. O veri yanlışsa
+  // düzeltmek masaüstünün işi; backend'in sessizce silmesi felakettir — çünkü
+  // tablom eksik olduğunda "tabloda yok = uydurma" varsayımı ÇÖKER. Yalnız
+  // AI'ın SIFIRDAN uydurduğu (masaüstünün göndermediği) callout ayıklanmalı.
   const legit = new Set([
     ...MAP_CALLOUTS[k].map((c) => c.toLowerCase()),
     ...UNIVERSAL_CALLOUTS.map((c) => c.toLowerCase()),
   ]);
+  if (suppliedLocation && suppliedLocation.trim()) {
+    legit.add(suppliedLocation.trim().toLowerCase());
+  }
 
   // EN UZUN EŞLEŞME ÖNCE — kritik. İlk uygulamada callout'ları tek tek gezip
   // "haritaya ait değilse sil" dedim ve MEŞRU METNİ BOZDUM: POSITION_NAMES
@@ -770,8 +789,18 @@ export function stripForeignCallouts(text: string, map: string | undefined | nul
   }
   const ordered = [...pool].sort((a, b) => b.length - a.length);
   const ALT = ordered.map(escapeRe).join("|");
-  const keepIfLegit = (whole: string, name: string) =>
-    legit.has(name.trim().toLowerCase()) ? whole : "";
+  const keepIfLegit = (whole: string, name: string) => {
+    const n = name.trim().toLowerCase();
+    if (legit.has(n)) return whole; // bu haritaya ait / evrensel / gönderilen konum
+    // YALNIZ ÇOK-KELİMELİ yabancı callout'ları sil (2026-07-24, konsey rank-5).
+    // Çıplak tek kelimeler ("tree", "mid", "link", "market", "garden") hem sık
+    // gündelik kelime hem birleşik-callout çekirdeği — silmek çok fazla meşru
+    // metni kırıyordu ("geniş"→"iş" gibi). AI'ın uydurduğu yanlış-harita
+    // callout'u ("A Short", "B Long") zaten ÇOK-KELİMELİ olur; tek-kelimelik
+    // yanlış-harita uydurması nadir ve zararı düşük. Occam: az sil, gerçeği koru.
+    if (!n.includes(" ")) return whole;
+    return "";
+  };
 
   let result = text;
 
@@ -844,9 +873,10 @@ export function realityCheck(
 
   // Yabancı-harita callout ayıklaması — EN BAŞTA çalışır ki sonraki guard'lar
   // zaten temizlenmiş metin üzerinde işlesin (uydurma yer adı hiçbir aşamaya
-  // sızmasın). Harita bilinmiyorsa no-op.
+  // sızmasın). Harita bilinmiyorsa no-op. Masaüstünün gönderdiği ölüm yeri
+  // (factGround.deathLocation) HER ZAMAN korunur — tablo eksik olsa bile.
   if (map) {
-    const stripped = stripForeignCallouts(text, map);
+    const stripped = stripForeignCallouts(text, map, factGround?.deathLocation);
     if (stripped !== text) {
       text = stripped;
       rewriteLevel = Math.max(rewriteLevel, 2);

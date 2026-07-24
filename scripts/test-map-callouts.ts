@@ -57,16 +57,46 @@ t("map='Unknown' → aynen", stripForeignCallouts(BUG, "Unknown") === BUG);
 t("map=undefined → aynen", stripForeignCallouts(BUG, undefined) === BUG);
 t("map='' → aynen", stripForeignCallouts(BUG, "") === BUG);
 
-console.log("\n[5] EN metin — yabancı callout düşer, fiil kalır");
+console.log("\n[5] EN metin — ÇOK-KELİMELİ yabancı callout düşer, tek-kelime KALIR");
 const en = "You died at A Short after pushing from Market.";
 const d5 = stripForeignCallouts(en, "Lotus");
 console.log("    SONRA:", d5);
-t("'a short' çıktı", !/a short/i.test(d5));
-t("'market' çıktı (Lotus'ta yok)", !/market/i.test(d5));
+t("'a short' çıktı (çok-kelimeli yabancı)", !/a short/i.test(d5));
+// YENİ POLİTİKA (multi-word-only): tek-kelimelik "Market" artık KORUNUR —
+// gerçek tek-kelime konumları silmemek için bilinçli tercih (konsey rank-5).
+t("'market' KORUNDU (tek kelime, multi-word-only)", /market/i.test(d5));
 t("'you died' korundu", /you died/i.test(d5));
 
 console.log("\n[6] Boş/kısa girdi güvenli");
 t("boş metin", stripForeignCallouts("", "Lotus") === "");
+
+// ── CANLI REGRESYON (2026-07-24, Fracture): masaüstünün gönderdiği ölüm yeri
+//    tablomda olmasa bile SİLİNMEMELİ ──
+console.log("\n[7] REGRESYON — masaüstünün ölçtüğü konum tabloda olmasa da korunur");
+{
+  // Fracture tablosunda 'a main' ve 'b link' YOK (KB'de geçmiyor). Ama masaüstü
+  // bunları ölçüp gönderdi → strip onları SİLMEMELİ.
+  const fr1 = "A Main'de utility'siz kaldın, düşman seni oradan avladı.";
+  const d1 = stripForeignCallouts(fr1, "Fracture", "a main");
+  t("Fracture 'A Main' (gönderilen konum) KORUNDU", /a main/i.test(d1), `→ "${d1}"`);
+
+  const fr2 = "B Link'te açıkta kaldın ve vuruldun.";
+  const d2 = stripForeignCallouts(fr2, "Fracture", "b link");
+  t("Fracture 'B Link' (gönderilen konum) KORUNDU", /b link/i.test(d2), `→ "${d2}"`);
+}
+
+console.log("\n[8] Tek-kelimelik generic ('Tree') artık SİLİNMEZ (multi-word-only)");
+{
+  const d = stripForeignCallouts("A Main'e girdin, Tree'den gelen ateşte öldün.", "Lotus", "a main");
+  t("'Tree' korundu (tek kelime, multi-word-only)", /tree/i.test(d), `→ "${d}"`);
+}
+
+console.log("\n[9] AI'ın UYDURDUĞU çok-kelimeli yabancı callout HÂLÂ silinir");
+{
+  // Lotus'ta 'A Short' YOK ve masaüstü onu göndermedi → uydurma → silinmeli.
+  const d = stripForeignCallouts("A Short'ta tek başına girdin.", "Lotus", "c mound");
+  t("Lotus uydurma 'A Short' silindi", !/a short/i.test(d), `→ "${d}"`);
+}
 
 console.log(`\n══════ ${fail === 0 ? "✅ TÜMÜ GEÇTİ" : `❌ ${fail} BAŞARISIZ`} ══════\n`);
 if (fail > 0) process.exit(1);
