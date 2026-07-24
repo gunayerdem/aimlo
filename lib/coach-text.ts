@@ -270,6 +270,13 @@ const TR_JARGON: [RegExp, string][] = [
   [/((?<![a-zçğıöşü])seni(?![a-zçğıöşü])[^.;:—!?\n]{0,45}?(?<![a-zçğıöşü])(?:arkadan|yandan|önden|uzaktan|yakından|sağdan|soldan|geriden)\s+)(?:aldı|aldılar|kesti|götürdü|temizledi|vurdu|biçti|düşürdü|indirdi|devirdi)(?![a-zçğıöşü])/gi, "$1vurup öldürdü"],
   [/((?<![a-zçğıöşü])seni(?![a-zçğıöşü])[^.;:—!?\n]{0,40}?)(?<!açıyı )(?<!açını )(?<!görüş )(?<!hattını )(?<!koridoru )(?<!alanı )(?<!bölgeyi )(?<!siteyi )(?<!trade )(?<!bilgi )(?<!round )(?<!kontrol )(?<!kontrolü )(?:kesti|kestiler|götürdü|götürdüler|biçti|devirdi)(?![a-zçğıöşü])/gi, "$1öldürdü"],
   [/(?<![a-zçğıöşü])seni ald[ıi](?![a-zçğıöşü])/gi, "seni öldürdü"],
+  // "avla-" ailesi (2026-07-24, softi canlı şikayeti "avladı falan diyor"). NESNE
+  // "seni" ŞART → yalnız oyuncu-nesnesi olan öldürme-euphemizmi düzleştirilir.
+  // KB'nin MEŞRU "düşman dağınık oyuncuları avlar" kavramına (nesne = "seni" değil)
+  // DOKUNMAZ. "seni oradan avladı" → "seni oradan öldürdü".
+  [/((?<![a-zçğıöşü])seni(?![a-zçğıöşü])[^.;:—!?\n]{0,45}?)avlad[ıi](?![a-zçğıöşü])/gi, "$1öldürdü"],
+  [/((?<![a-zçğıöşü])seni(?![a-zçğıöşü])[^.;:—!?\n]{0,45}?)avl(?:ıyor|uyor)(?![a-zçğıöşü])/gi, "$1öldürüyor"],
+  [/((?<![a-zçğıöşü])seni(?![a-zçğıöşü])[^.;:—!?\n]{0,45}?)avlar(?![a-zçğıöşü])/gi, "$1öldürür"],
   // varyant eufemizmler (canlı-test 2026-06-26): "öde-"(made pay), causative
   // "kestir-", "-ip öldürdü", potansiyel "kafadan al-". Hepsi düz öldür-/vur-.
   [/(seni[^.;:—!?\n]{0,45}?)öde(di|cek)(?![a-zçğıöşü])/gi, "$1öldür$2"],

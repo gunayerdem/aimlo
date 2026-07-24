@@ -52,10 +52,21 @@ console.log("\n[3] Ascent'te 'A Short' MEŞRU — dokunulmamalı");
 const asc = "A Short'ta geniş açı aldın.";
 t("Ascent metni DEĞİŞMEDİ", stripForeignCallouts(asc, "Ascent") === asc);
 
-console.log("\n[4] Harita bilinmiyorsa HİÇBİR ŞEY değişmemeli (no-op)");
-t("map='Unknown' → aynen", stripForeignCallouts(BUG, "Unknown") === BUG);
-t("map=undefined → aynen", stripForeignCallouts(BUG, undefined) === BUG);
-t("map='' → aynen", stripForeignCallouts(BUG, "") === BUG);
+console.log("\n[4] UNKNOWN harita — AI'ın uydurduğu cross-map callout SİLİNİR, gönderilen konum KORUNUR");
+// YENİ DAVRANIŞ (2026-07-24 konsey): eskiden Unknown'da no-op'tu → canlı Omen bug'ı
+// (map=Unknown iken AI "A Short/B Main/Mid" uyduruyordu). Artık Unknown'da da çalışır:
+// başka haritaya AİT KANITLI callout ("a short" ∈ Ascent/Haven/Bind) düşer.
+{
+  const dU = stripForeignCallouts(BUG, "Unknown");
+  console.log("    SONRA:", dU);
+  t("Unknown'da uydurma 'A Short' silindi", !/a short/i.test(dU), `→ "${dU}"`);
+  // Gönderilen konum Unknown haritada bile KORUNUR (masaüstü-ölçümlü gerçek).
+  const dUsup = stripForeignCallouts("A Short'ta tek kaldın.", "Unknown", "a short");
+  t("Unknown'da GÖNDERİLEN 'A Short' korundu (supplied)", /a short/i.test(dUsup), `→ "${dUsup}"`);
+  // Hiçbir tabloda olmayan özgün ifade Unknown'da da korunur.
+  const dUnov = stripForeignCallouts("Sağ arka açıda tek kaldın.", "Unknown");
+  t("Unknown'da özgün ifade 'sağ arka açı' korundu", /sağ arka açı/i.test(dUnov), `→ "${dUnov}"`);
+}
 
 console.log("\n[5] EN metin — ÇOK-KELİMELİ yabancı callout düşer, tek-kelime KALIR");
 const en = "You died at A Short after pushing from Market.";
@@ -96,6 +107,21 @@ console.log("\n[9] AI'ın UYDURDUĞU çok-kelimeli yabancı callout HÂLÂ silin
   // Lotus'ta 'A Short' YOK ve masaüstü onu göndermedi → uydurma → silinmeli.
   const d = stripForeignCallouts("A Short'ta tek başına girdin.", "Lotus", "c mound");
   t("Lotus uydurma 'A Short' silindi", !/a short/i.test(d), `→ "${d}"`);
+}
+
+console.log("\n[10] CROSS-MAP KAPISI — hiçbir tabloda olmayan ad, SUPPLIED OLMASA da korunur");
+{
+  // 🔴 Bugünkü canlı bug'ın çekirdeği: masaüstü OCR "A Hall"ı "a hail" okudu → HİÇBİR
+  // harita tablosunda "a hail" YOK. supplied geçilmese bile SİLİNMEMELİ (eski cross-map
+  // öncesi kod silerdi). Yalnız BAŞKA haritada KANITLI callout silinir.
+  const d1 = stripForeignCallouts("A Hail'de utility'siz kaldın ve öldün.", "Fracture");
+  t("Fracture OCR-varyantı 'A Hail' korundu (hiçbir tabloda yok, supplied yok)", /a hail/i.test(d1), `→ "${d1}"`);
+  // Özgün çok-kelimeli ifade (callout değil) korunur.
+  const d2 = stripForeignCallouts("Dar koridorda beklerken vuruldun.", "Fracture");
+  t("Özgün 'dar koridor' korundu", /dar koridor/i.test(d2), `→ "${d2}"`);
+  // Ama BAŞKA haritanın gerçek callout'u (Lotus'ta Ascent'in 'B Lanes'i) hâlâ silinir.
+  const d3 = stripForeignCallouts("B Lanes'ten geldiler.", "Lotus");
+  t("Lotus'ta yabancı 'B Lanes' (Ascent callout'u) silindi", !/b lanes/i.test(d3), `→ "${d3}"`);
 }
 
 console.log(`\n══════ ${fail === 0 ? "✅ TÜMÜ GEÇTİ" : `❌ ${fail} BAŞARISIZ`} ══════\n`);

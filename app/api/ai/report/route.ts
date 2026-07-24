@@ -1116,10 +1116,24 @@ ${scoringContext}`;
         && body.rounds.some((r) => typeof r.killerAgent === "string" && r.killerAgent.length > 0);
       const anyLoc = Array.isArray(body.rounds)
         && body.rounds.some((r) => typeof r.deathLocation === "string" && r.deathLocation.length > 0);
+      // MASAÜSTÜNÜN ÖLÇTÜĞÜ TÜM KONUMLAR (canlı regresyon 2026-07-24): rapor ÖZETİ
+      // birçok round'un konumuna atıfta bulunur ("A Main'de 3 ölüm..."). stripForeign-
+      // Callouts bu konumları HER ZAMAN meşru saymalı — tablo eksik olsa bile. Vision
+      // route tek konumu factGround.deathLocation'dan alıyordu; rapor route ise
+      // buildFactGround({},{}) çağırdığı için deathLocation DAİMA undefined'dı →
+      // özetteki gerçek çok-kelimeli Fracture callout'ları uydurma sanılıp siliniyordu
+      // ("nerede vurulduğunu söylemiyor"). Tüm round'ların (ölen+hayatta) konumlarını
+      // besle; bestRound hayatta-kalma konumunu da kapsasın.
+      const suppliedLocs = Array.isArray(body.rounds)
+        ? [...new Set(body.rounds
+            .map((r) => (typeof r.deathLocation === "string" ? r.deathLocation : ""))
+            .filter((s) => s.length > 0))]
+        : [];
       const fg: FactGround = {
         ...buildFactGround({}, {}),
         hasKiller: anyKiller,
         hasDeathLocation: anyLoc,
+        deathLocation: suppliedLocs,
       };
       // clampWords (2026-07-09): ham .slice kelime ortasında kesiyordu ("rotasy") —
       // kelime sınırına geri çekilen mevcut word-safe clamp kullanılır.

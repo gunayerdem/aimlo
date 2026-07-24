@@ -53,9 +53,11 @@ export interface FactGround {
   hasSpike?: boolean;         // spike state RELIABLE (only set when true → can't tell false/absent → always false)
   hasTradeData?: boolean;     // tradedByAlly boolean present
   hasRoute?: boolean;         // playerRoute measured
-  // Masaüstünün OCR ile ölçtüğü ölüm yeri (varsa). stripForeignCallouts bunu
-  // HER ZAMAN meşru sayar — tablo eksik olsa bile ölçülen konumu silmez.
-  deathLocation?: string;
+  // Masaüstünün OCR ile ölçtüğü ölüm yeri/yerleri (varsa). stripForeignCallouts
+  // bunu HER ZAMAN meşru sayar — tablo eksik olsa bile ölçülen konumu silmez.
+  // Vision route TEK round → string; report route TÜM round'ların konumları → string[]
+  // (rapor ÖZETİ birçok round'un konumuna atıfta bulunur; hepsi korunmalı).
+  deathLocation?: string | string[];
 }
 
 // ── Claim Extraction ──
@@ -744,15 +746,15 @@ export function guardUnprovenFacts(
 export function stripForeignCallouts(
   text: string,
   map: string | undefined | null,
-  // Masaüstünün OCR ile ÖLÇÜP gönderdiği ölüm yeri. HER ZAMAN meşru sayılır.
-  suppliedLocation?: string | null,
+  // Masaüstünün OCR ile ÖLÇÜP gönderdiği ölüm yeri/yerleri. HER ZAMAN meşru.
+  // Vision route TEK string; report route TÜM round'ların konum dizisi.
+  suppliedLocation?: string | string[] | null,
 ): string {
   if (!text) return text;
   const k = mapKey(map);
-  if (!k) return text; // harita bilinmiyor → dokunma
 
-  // Meşru = bu haritanın callout'ları + her haritada bulunan evrensel adlar
-  // (spawn'lar) + MASAÜSTÜNÜN GÖNDERDİĞİ ÖLÜM YERİ.
+  // Meşru = (harita biliniyorsa) o haritanın callout'ları + her haritada bulunan
+  // evrensel adlar (spawn'lar) + MASAÜSTÜNÜN GÖNDERDİĞİ ÖLÜM YERİ/YERLERİ.
   //
   // 🔴 CANLI REGRESYON (2026-07-24, Fracture): masaüstü ölüm yerini "a main"
   // gönderdi ama tablomda Fracture için "a main" YOKTU (tablo eksikti) → strip
@@ -761,12 +763,21 @@ export function stripForeignCallouts(
   // düzeltmek masaüstünün işi; backend'in sessizce silmesi felakettir — çünkü
   // tablom eksik olduğunda "tabloda yok = uydurma" varsayımı ÇÖKER. Yalnız
   // AI'ın SIFIRDAN uydurduğu (masaüstünün göndermediği) callout ayıklanmalı.
-  const legit = new Set([
-    ...MAP_CALLOUTS[k].map((c) => c.toLowerCase()),
-    ...UNIVERSAL_CALLOUTS.map((c) => c.toLowerCase()),
-  ]);
-  if (suppliedLocation && suppliedLocation.trim()) {
-    legit.add(suppliedLocation.trim().toLowerCase());
+  //
+  // UNKNOWN HARİTA (2026-07-24, konsey — Omen/Unknown maçı): eskiden burada
+  // `if (!k) return text` ile NO-OP'tu → harita okunamayınca AI'ın uydurduğu
+  // "A Short/B Main" serbest geçiyordu (canlı bug). Artık Unknown'da da çalışır:
+  // haritanın kendi tablosu yok ama meşru = evrensel + gönderilen konum, ve
+  // aşağıdaki cross-map kapısı yalnız BAŞKA haritaya AİT KANITLI callout'u siler.
+  const legit = new Set<string>(UNIVERSAL_CALLOUTS.map((c) => c.toLowerCase()));
+  if (k) for (const c of MAP_CALLOUTS[k]) legit.add(c.toLowerCase());
+  const supplied = Array.isArray(suppliedLocation)
+    ? suppliedLocation
+    : suppliedLocation != null
+      ? [suppliedLocation]
+      : [];
+  for (const loc of supplied) {
+    if (typeof loc === "string" && loc.trim()) legit.add(loc.trim().toLowerCase());
   }
 
   // EN UZUN EŞLEŞME ÖNCE — kritik. İlk uygulamada callout'ları tek tek gezip
@@ -783,10 +794,16 @@ export function stripForeignCallouts(
   // "mound" eşleşip Lotus'un meşru "C Mound"unu parçalıyordu (test yakaladı).
   // Tüm harita adlarını havuza katınca "c mound" aday olur, uzunluk sırasıyla
   // "mound"dan ÖNCE eşleşir ve haritaya ait olduğu için korunur.
-  const pool = new Set<string>(POSITION_NAMES.map((p) => p.toLowerCase()));
+  // BAŞKA-HARİTAYA-AİT KANITI: yalnız GERÇEK bir Valorant callout'u olan
+  // (herhangi bir haritanın tablosunda geçen) adlar silinebilir. POSITION_NAMES'te
+  // olup hiçbir harita tablosunda olmayan adlar ile OCR varyantları (aşağıda)
+  // bu kümenin DIŞINDA kalır → asla silinmez.
+  const knownMapCallouts = new Set<string>();
   for (const list of Object.values(MAP_CALLOUTS)) {
-    for (const c of list) pool.add(c.toLowerCase());
+    for (const c of list) knownMapCallouts.add(c.toLowerCase());
   }
+  const pool = new Set<string>(POSITION_NAMES.map((p) => p.toLowerCase()));
+  for (const c of knownMapCallouts) pool.add(c);
   const ordered = [...pool].sort((a, b) => b.length - a.length);
   const ALT = ordered.map(escapeRe).join("|");
   const keepIfLegit = (whole: string, name: string) => {
@@ -799,6 +816,13 @@ export function stripForeignCallouts(
     // callout'u ("A Short", "B Long") zaten ÇOK-KELİMELİ olur; tek-kelimelik
     // yanlış-harita uydurması nadir ve zararı düşük. Occam: az sil, gerçeği koru.
     if (!n.includes(" ")) return whole;
+    // CROSS-MAP-KANITI KAPISI (2026-07-24, sağlamlık): yalnız BAŞKA bir haritanın
+    // tablosunda KANITLI olarak var olan callout'u sil ("A Short" ∈ Ascent/Haven/
+    // Bind → Lotus'ta yabancı → sil). Masaüstünün OCR varyantı ("A Hall"→"a hail")
+    // ya da modelin özgün bir ifadesi ("sağ arka açı") hiçbir tabloda YOKTUR →
+    // silinmez. Bu, tablo-eksikliği felaketini kökten bitirir: tabloda-yok artık
+    // "sil" demek DEĞİL; yalnız "başka-haritada-KANITLI-var" silme gerekçesidir.
+    if (!knownMapCallouts.has(n)) return whole;
     return "";
   };
 
@@ -836,12 +860,20 @@ export function stripForeignCallouts(
   );
 
   // Ayıklamadan artan boşluk/noktalama onarımı (guardUnprovenFacts ile aynı sözleşme).
+  // ÖKSÜZ AYIRAÇ (2026-07-24): "A Short — advice" / "A Short: advice" başlığından
+  // callout silinince "— advice" / ": advice" kalıyordu. Bir CÜMLE/SATIR BAŞINDA
+  // (metin başı, ya da . ! ? \n sonrası) öksüz kalan em-dash/tire/iki-nokta/virgül
+  // ayıracını temizle. "B Main — advice" (callout KORUNDU) etkilenmez: oradaki "—"
+  // ayıracın önünde "Main" var, cümle başı değil.
   return result
     .replace(/\s{2,}/g, " ")
     .replace(/\s+([,.;:!?])/g, "$1")
     .replace(/([,;:]\s*){2,}/g, ", ")
     .replace(/[,;:]\s*([.!?])/g, "$1")
-    .replace(/^[\s,;:.]+/, "")
+    .replace(/(^|[.!?\n])\s*[—–\-:;,]+\s*/g, "$1 ")
+    .replace(/^[\s,;:.—–\-]+/, "")
+    .replace(/\s{2,}/g, " ")
+    .replace(/\n /g, "\n")
     .trim();
 }
 
