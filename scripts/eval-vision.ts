@@ -33,6 +33,7 @@ import { cleanCoachText, stripNumericHp } from "../lib/coach-text";
 import { buildAgentAbilityHint, enforceAgentKit } from "../lib/agent-abilities";
 import { sanitizePromptInput } from "../lib/prompt-safety";
 import { classifyDeath, buildDeathTypeDirective } from "../lib/death-type";
+import { buildHistoryBlock, type RoundHistoryEntry } from "../lib/history-block";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
 const CYCLE = process.env.EVAL_CYCLE || "3";
@@ -632,21 +633,13 @@ function buildUserPrompt(s: Scenario): string {
     (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, screenshot'tan güvenilir]\n${ctxJson}` : "") +
     (patternBlock ? `\n\n[PATTERN — son round'lardaki tekrar eden hata. Bu varsa deathAnalysis veya nextRoundSuggestion'da koç gibi referans ver — extra alan açma]\n${patternBlock}` : "");
 
-  const rh = b.roundHistory as Record<string, unknown>[] | undefined;
-  if (rh && rh.length) {
-    const lines = rh.map((r) => {
-      const status = r.died ? "öldü" : "hayatta kaldı";
-      const conf = r.death_detected_confidence === "observed" ? " (güven: observed)" : "";
-      const pos = r.death_position ? ` @ ${r.death_position}` : "";
-      return `R${r.round_index}: ${status}${conf}${pos}`;
-    });
-    const deaths = rh.filter((r) => r.died).length;
-    const total = rh.length;
-    const patternNote = deaths >= total * 0.5
-      ? `Pattern: Son ${total} round'un ${deaths}'${deaths > 1 ? "inde" : "unda"} ölüm → tekrar eden sorun kanıtlanmış`
-      : `Son ${total} round'da ${deaths} ölüm`;
-    prompt += `\n\nSon round geçmişi (gözlemlenmiş):\n${lines.join("\n")}\n${patternNote}`;
-  }
+  // GECMIS BLOGU: route ile AYNI fonksiyon (lib/history-block.ts). Eskiden burada
+  // EKSIK bir kopya vardi (yalniz patternNote) → eval, canlida modelin gordugu
+  // posNote/deathZoneNote kanitini hic gostermiyordu ve olcum canliyi yansitmiyordu.
+  prompt += buildHistoryBlock(
+    b.roundHistory as RoundHistoryEntry[] | undefined,
+    "tr",
+  );
   return prompt;
 }
 

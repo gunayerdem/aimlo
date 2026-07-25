@@ -15,6 +15,7 @@ import { SYSTEM_PROMPT, SYSTEM_PROMPT_EN_ADDENDUM, USER_PROMPT, USER_PROMPT_EN, 
 import { classifyDeath, buildDeathTypeDirective } from "@/lib/death-type";
 import { extractKillerWeapon, classifyCompArchetype, buildWeaponCompDirective } from "@/lib/comp-weapon";
 import { mapKey } from "@/lib/map-callouts";
+import { buildHistoryBlock, type RoundHistoryEntry } from "@/lib/history-block";
 
 // ── Coach-voice OUTPUT cleaner ─────────────────────────────────────────────
 // cleanCoachText is now the SHARED single-source deterministic net in
@@ -934,111 +935,17 @@ export async function POST(request: NextRequest) {
     // Build round history context for the user prompt
     let userPromptWithHistory = (reqLang === "en" ? USER_PROMPT_EN : USER_PROMPT) + clientContext;
     const roundHistory = (body as VisionRequest).roundHistory;
-    if (roundHistory && Array.isArray(roundHistory) && roundHistory.length > 0) {
-      // Dil-duyarlı (canlı-test 2026-07-18 EN: model bu Türkçe olgu-cümlelerini
-      // AYNEN kopyalayıp EN feedback'in içine Türkçe parça sızdırıyordu —
-      // "bölgesinde 2 kez öldün"). Olgu-notları artık reqLang'de yazılır.
-      const en = reqLang === "en";
-      const historyLines = roundHistory.map((r: Record<string, unknown>) => {
-        const status = r.died ? (en ? "died" : "öldü") : (en ? "survived" : "hayatta kaldı");
-        const confidence = r.death_detected_confidence === "observed" ? (en ? " (confidence: observed)" : " (güven: observed)") : "";
-        // Include position info if available
-        const posInfo = r.death_position ? ` @ ${r.death_position}` : "";
-        return `R${r.round_index}: ${status}${confidence}${posInfo}`;
-      });
-      const deathCount = roundHistory.filter((r) => r.died).length;
-      const total = roundHistory.length;
-      const patternNote = deathCount >= total * 0.5
-        ? (en
-            ? `Pattern: died in ${deathCount} of the last ${total} rounds → a repeating problem is proven`
-            : `Pattern: Son ${total} round'un ${deathCount}'${deathCount > 1 ? "inde" : "unda"} ölüm → tekrar eden sorun kanıtlanmış`)
-        : (en
-            ? `${deathCount} death(s) in the last ${total} rounds`
-            : `Son ${total} round'da ${deathCount} ölüm`);
-
-      // Position pattern detection with temporal stability scoring
-      const posEntries = roundHistory
-        .filter((r: Record<string, unknown>) => r.died && r.death_position && (r.position_confidence === "high" || r.position_confidence === "medium"))
-        .map((r: Record<string, unknown>) => ({
-          pos: (r.death_position as string).toLowerCase(),
-          round: r.round_index as number,
-        }));
-
-      const posCounts: Record<string, number> = {};
-      posEntries.forEach(e => { posCounts[e.pos] = (posCounts[e.pos] || 0) + 1; });
-      const topPos = Object.entries(posCounts).sort((a, b) => b[1] - a[1])[0];
-
-      // Temporal stability: check if deaths at same position are RECENT (not spread across 10+ rounds)
-      let posNote = "";
-      if (topPos && topPos[1] >= 2) {
-        const matchingRounds = posEntries.filter(e => e.pos === topPos[0]).map(e => e.round);
-        const recentRounds = matchingRounds.slice(-3); // last 3 occurrences
-        const span = recentRounds.length >= 2 ? recentRounds[recentRounds.length - 1] - recentRounds[0] : 0;
-        const isRecent = span <= 5; // within last 5 rounds = temporally clustered
-        // 🔴 SAYI-PENCERE TUTARSIZLIĞI FIX (KB 10h nöbeti 2026-07-25). ÖNCE: sayı
-        // topPos[1] (TÜM geçmişin toplamı) iken pencere span+1 (yalnız SON 3 tekrarın
-        // aralığı) yazılıyordu → "6 kez, son 5 round içinde" gibi MATEMATİKSEL OLARAK
-        // İMKÂNSIZ cümle (S1: B Main ölümleri R1,3,5,7,9,11 → 6 kez ama pencere R7-R11).
-        // Yani PROMPT'UN KENDİSİ modele uydurma sayı besliyordu; reality-checker'ın
-        // validateClaims'i sonra o sayıyı düşürüp metni yeniden yazmak zorunda kalıyordu
-        // (level-2 rewrite). "OCR = pixel truth, backend olgu uydurmaz" ilkesinin ihlali.
-        // SONRA: sayı da PENCEREDEN sayılır → validateClaims'in pencere hesabıyla birebir
-        // uyuşur → iddia geçerli çıkar, rewrite tetiklenmez.
-        const recentCount = recentRounds.length >= 1
-          ? matchingRounds.filter((r) => r >= recentRounds[0]).length
-          : topPos[1];
-
-        if (topPos[1] >= 3 && isRecent) {
-          posNote = en
-            ? `\nPosition pattern (STRONG — ${recentCount} times within the last ${span + 1} rounds): repeated deaths in the ${topPos[0]} area. The timing of this pattern is consistent too.`
-            : `\nPosition pattern (GÜÇLÜ — ${recentCount} kez, son ${span + 1} round içinde): ${topPos[0]} bölgesinde tekrar eden ölüm. Bu pattern zamanlama olarak da tutarlı.`;
-        } else if (topPos[1] >= 2) {
-          posNote = en
-            ? `\nPosition pattern (PROVEN): you died ${topPos[1]} times in the ${topPos[0]} area`
-            : `\nPosition pattern (KANITLANMIŞ): ${topPos[0]} bölgesinde ${topPos[1]} kez öldün`;
-        }
-      }
-
-      // Death zone pattern — repeated deaths at same location (NOT entry path inference)
-      // We know WHERE the player died, NOT how they got there
-      let deathZoneNote = "";
-      if (posEntries.length >= 2) {
-        // Check consecutive rounds dying at same position
-        let consecutiveCount = 1;
-        let consecutivePos = "";
-        for (let i = 1; i < posEntries.length; i++) {
-          if (posEntries[i].pos === posEntries[i - 1].pos && posEntries[i].round - posEntries[i - 1].round <= 2) {
-            consecutiveCount++;
-            consecutivePos = posEntries[i].pos;
-          } else {
-            consecutiveCount = 1;
-          }
-        }
-
-        // Detect area change — died at different location than before
-        const lastPos = posEntries[posEntries.length - 1]?.pos;
-        const prevPositions = posEntries.slice(0, -1).map(e => e.pos);
-        const isNewArea = lastPos && prevPositions.length > 0 && !prevPositions.includes(lastPos);
-
-        if (consecutiveCount >= 3) {
-          deathZoneNote = en
-            ? `\nDeath zone pattern (STRONG): you died ${consecutiveCount} rounds in a row in the ${consecutivePos} area — you keep getting killed for free from that angle.`
-            : `\nDeath zone pattern (GÜÇLÜ): ${consecutivePos} bölgesinde ${consecutiveCount} round art arda öldün — bu açıdan tekrar tekrar bedavaya öldürülüyorsun.`;
-        } else if (consecutiveCount >= 2) {
-          deathZoneNote = en
-            ? `\nDeath zone pattern: back-to-back deaths in the ${consecutivePos} area — this area may be a problem.`
-            : `\nDeath zone pattern: ${consecutivePos} bölgesinde art arda ölüm — bu bölge sorun oluşturuyor olabilir.`;
-        } else if (isNewArea) {
-          deathZoneNote = en
-            ? `\nDeath area changed: in earlier rounds you were in the ${prevPositions[prevPositions.length - 1]} area, now ${lastPos}.`
-            : `\nÖlüm bölgesi değişti: önceki round'larda ${prevPositions[prevPositions.length - 1]} bölgesindeydin, şimdi ${lastPos}.`;
-        }
-      }
-
-      userPromptWithHistory += en
-        ? `\n\nRecent round history (observed):\n${historyLines.join("\n")}\n${patternNote}${posNote}${deathZoneNote}`
-        : `\n\nSon round geçmişi (gözlemlenmiş):\n${historyLines.join("\n")}\n${patternNote}${posNote}${deathZoneNote}`;
-    }
+    // GECMIS BLOGU — TEK KAYNAK (lib/history-block.ts). Eskiden ~100 satirlik bu mantik
+    // BURADA inline duruyordu ve scripts/eval-vision.ts kendi EKSIK kopyasini kuruyordu:
+    // eval yalniz patternNote uretiyor, posNote/deathZoneNote hic uretmiyordu → olcum
+    // canliyi yansitmiyordu (KB 10h nobeti 2026-07-25). Ortak module tasindi; davranis
+    // birebir korunur, ek olarak (a) pencere-tutarli sayi ve (b) gecmisi-kullan /
+    // gecmis-yok direktifi gelir. Direktif user mesajinin KUYRUGUNDA → prefix cache
+    // BOZULMAZ (sistem oneki tek bayt degismez).
+    userPromptWithHistory += buildHistoryBlock(
+      roundHistory as RoundHistoryEntry[] | undefined,
+      reqLang,
+    );
 
     // Sandviç tekniği (dil-uzman denetimi ★3): üretimden hemen önceki SON satır
     // dil emri olsun — model son talimata en çok ağırlık verir. TR'de eklenmez.
