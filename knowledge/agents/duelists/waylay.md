@@ -25,7 +25,7 @@ verified: 2026-07-08
 ## 3. Sık Yapılan Hatalar
 1. **Yavaşlatmayı atıp beklemeden dalmak** — Yavaşlatma yere otursun, düşman yavaşlasın, ondan SONRA gir; yavaşlamış düşmana nişan almak kolaydır.
 2. **Geri-kayma noktasını kurmadan agresif peek atmak** — Nokta yerde değilse kaybettiğin düelloda kaçacak yerin yok; sıradan bir duelist gibi orada ölürsün.
-3. **Noktayı erken bırakmak** — Nokta 8 saniyede kendiliğinden kaybolur. Turun başında bırakırsan tam düello anında güvencen çoktan silinmiştir. Peek'ten hemen önce bırak; şarjın iki öldürmeyle geri gelir.
+3. **Noktayı erken bırakmak** — Nokta kısa ömürlüdür, kendiliğinden kaybolur. Turun başında bırakırsan tam düello anında güvencen çoktan silinmiştir. Peek'ten hemen önce bırak; şarjın iki öldürmeyle geri gelir.
 4. **İlk öldürmeden sonra açıkta donup kalmak** — Öldürdün ama kalayım mı kayayım mı diye düşünürken ikinci düşman seni basar. Temizse kal, ses varsa geri kay.
 5. **Dash'i hep düz ileri kullanmak** — İlk dash seni yukarı da çıkarır. Hep göz hizasından girersen kutuların üstünden gelen sürpriz açıyı boşa harcarsın.
 6. **Dash kararını basmadan önce vermemek** — Dash tek kullanım: çift dash patlaması mı, tek dash mı — atış anında seçersin, ikinciyi sonraya saklayamazsın. Derin giriş için çift, kısa boşluk için tek; kaçış planın dash değil geri-kayma.
@@ -42,10 +42,10 @@ MEANING: İki aracı tek hamle gibi kullanıyorsun — ikisinin de değerini dü
 COUNTER: Yavaşlatmayı şüphelendiğin köşeye at, yere otursun, düşmanın yavaşladığını gör, ondan SONRA dash ile gir.
 WHY: Yavaşlama düşmana değdiği an senin lehine açılan penceredir; beklemeden dalarsan tam tepki veren bir düşmana karşı düz dövüş yaparsın — yeteneğin avantajı boşa gider.
 
-IF: Agresif peek atıyorsun ama geri-kayma noktası yerde değil ya da çoktan silinmiş
-MEANING: "Kazan kal, kaybet kaç" güvenceni kullanmıyorsun — ya hiç kurmuyorsun ya çok erken kurup kısa ömrünü boşa yakıyorsun
-COUNTER: Noktayı peek'ten HEMEN önce bırak: bırak → peek → kazandıysan kal, kaybettiysen ya da ikinci düşman çıktıysa anında geri kay. Nokta silindiyse yenisini bırakmadan agresif peek atma.
-WHY: Nokta 8 saniyede kaybolur; erken kurulan güvence tam düello anında yok olur. Şarjı iki öldürmeyle yenilenir — öldürme zinciri sürdükçe güvencen de sürer.
+IF: Ölümlerin agresif ilk peek'te, site ağzında ya da dar geçiş girişinde toplanıyorsa (bu bloğu yalnız ölüm yeri/round geçmişi bunu gösteriyorsa kullan)
+MEANING: Peek'i güvencesiz açıyorsun — geri-kayma noktan ya hiç kurulmamış ya turun başında kurulup çoktan silinmiş
+COUNTER: Ölüm yerini adıyla söyle (ör. "Round 5 ve 7'de A Main ağzında ilk peek'te düştün") ve sonraki round sırayı sabitle: nokta → yavaşlat → peek; düelloyu kaybettiğin an geri kay.
+WHY: Nokta kısa ömürlü; turun başında bırakılan güvence tam düello anında yok olur ve güvencesiz Waylay sıradan bir duelist'tir.
 
 IF: İlk öldürmeyi alıyorsun ama hemen ardından ikinci düşmana yakalanıp ölüyorsun
 MEANING: İlk öldürmeden sonra ne kalacağına ne kayacağına karar veremiyorsun — açıkta donup kalıyorsun

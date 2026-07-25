@@ -19,7 +19,7 @@ Bu bilgiyi kendi maçlarında karşılaştığın durumlara bağla — her böl�
 IF rakipte Chamber varsa
 MEANING açıyı ışınlanma güvencesiyle tutar — ilk atışı kaçırsa bile bedavaya kaçar
 COUNTER açısına utility'siz peek atma; ışınlanma sesini duyduğun an bas — güvencesi gidince açıkta
-WHY Chamber'ın gücü bedavaya açı tutmak; ışınlanması gittiği an sıradan bir Op'çudan kolay hedef
+WHY Chamber'ın gücü bedavaya açı tutmak; ışınlanması gittiği an sıradan bir Op'çudan farkı kalmaz — açıyı artık kaçış güvencesi olmadan tutmak zorunda
 
 ### Çift Initiator
 
@@ -30,11 +30,11 @@ WHY tek initiator hem bilgiyi hem desteği aynı anda veremez; birini seçmek zo
 
 ### Controller Haritası
 
-- Viper: Icebox'ta zorunlu. Çıkar, harita kapanır.
-- Harbor: İkinci controller olarak Viper'ın yanına giriyor — belli haritalarda çift smoke için.
-- Clove: Saldırgan controller oynamak istiyorsan Sunset ve Bind'da değerlendir. Agresif pozisyon alıp geriden smoke atar.
+- Viper: Icebox'ta neredeyse zorunlu — duvarıyla uzun hattı ikiye böler, site'ı tek başına kapatır. Viper'sız girdiğin round'da o açık hattı beş kişiyle tutmak zorunda kalırsın.
+- Harbor: Su duvarları görüşü keser ama mermi durdurmaz — arkasına saklanma, arkasından İLERLE; mermi durduran tek yeteneği spike üstüne attığı kubbe. Takım hızlı alım oynuyorsa Viper'ın yanına ikinci controller olarak gir; default oturan takımda değeri yok.
+- Clove: Öldükten sonra bile smoke atabilen tek controller — sen ölsen de takım smoke'suz kalmaz. Saldırgan pozisyon alması bu yüzden mantıklı: önce smoke'u çıkar, sonra dövüşe gir; öldükten sonra bile eksik kalan smoke'u koyabilirsin. Sunset ve Bind gibi kısa rotasyonlu haritalarda değerlendir.
 - Omen: Çoğu haritada varsayılan solo controller.
-- Astra: Ult round'larında etkili ama tek başına seçilmez — kompozisyon ona göre kurulmadıkça zorlama.
+- Astra: Yıldızlarını round başlamadan koyar — hazırlığı önden yapılan tek controller. Düşmanın 2-3 round aynı yoldan geldiğini gördüysen yıldızı oraya koy; smoke, stun ve çekmeyi aynı noktadan çıkarırsın. Çatışmanın ortasında yıldız koymaya kalkma, bedenin açıkta kalır ve bedavaya ölürsün.
 - Miks: Smoke + heal + hız desteği aynı kitte — solo controller alternatifi.
 
 ---
@@ -66,7 +66,7 @@ WHY bu tarzın gücü karmaşıklık; baskı altında o karmaşıklık kendi tak
 
 IF bu tarza karşı oynuyorsan
 MEANING bilgi beklemeden execute ederler, default oynamazlar — bu tarzı taşıyan şey bireysel hareket ve nişan; mekanik düşerse strateji de çöker
-COUNTER site'a stack yap, crossfire kur, utility'yi erken kullan — ilk düşman girer girmez patlat
+COUNTER site'a yığıl, crossfire kur, utility'yi erken kullan — ilk düşman girer girmez patlat
 WHY stack hem sayı avantajını hem sürprizi yok eder
 
 ### Dengeli Saldırgan Takımlar
@@ -76,21 +76,19 @@ MEANING yapılı oyunu patlayıcı bireysel yetenekle birleştirirler — yıld�
 COUNTER ana yıldızı izole düelloya sokma — iki kişilik peek ve utility baskısıyla kapat
 WHY ana yıldızın 1v1 clutch kazanma oranı çok yüksek; onu izole tutarsan takım denklemi bozulur
 
-### Utility-Verimli, Disiplinli Takımlar
+### Rakip Okuması — Yalnız Bu Maçın Kaydından
 
-- Her smoke, flash ve taramanın bir amacı var — boşa harcama yok
-- Post-plant kurulumları önceden çalışılmış: her plant pozisyonu için atış açısı ve crossfire hazır
-- Zayıflık: hazır stratejisi okununca seri içinde yavaş adapte olur — sen adapte oldukça öne geçersin
+IF maç kaydında aynı bölgede iki ya da daha fazla ölüm varsa
+MEANING rakip o açıyı işaretledi ve oraya hazır geliyor — bu tahmin değil, maçın kendi kaydı
+COUNTER o bölgeyi bir sonraki round'da ilk kontak noktan yapma: ya bir kapı öteden aç, ya util'i o açıya harcayıp öyle gir
+WHY tekrar eden ölüm yerini rakip senden önce okur; aynı yere üçüncü kez gelmek round'u kaybetmenin en ucuz yolu
 
-### Ekonomi-Güçlü Takımlar
+IF seni öldüren silah maç boyunca hep aynı sınıfsa (tüfek uzun hatta, SMG ya da pompalı yakın koridorda)
+MEANING kaybettiğin düello mesafesi sabit — sorun nişanın değil, düelloyu yanlış mesafede alman
+COUNTER o silahın güçlü olduğu mesafeye girme: tüfeğe uzun hatta utility'siz peek atma, SMG'ye dar koridorda yaklaşma
+WHY mesafeyi sen seçtiğinde silah eşitsizliği kapanır; rakip seçtiğinde her düelloya geriden başlarsın
 
-- Eco ve force-buy round'larını rakiplerinden yüksek oranda kazanır
-- Zayıflık: uzun, taktiksel maçlarda daha yapılandırılmış takımlara karşı zorlanır
-
-### Esnek Kompo Takımları
-
-- Her haritayı yetkin oynar, harita havuzu geniş
-- Zayıflık: tek baskın stratejisi yok — her şeyde iyi ama hiçbir şeyde zirvede değil
+VERİ YOKSA: elinde tekrar kanıtı (aynı bölge, aynı silah sınıfı, aynı round tipi) yoksa bu dersi HİÇ KURMA — uydurma pattern, hiç yorum yapmamaktan kötüdür.
 
 ---
 
@@ -99,7 +97,7 @@ WHY ana yıldızın 1v1 clutch kazanma oranı çok yüksek; onu izole tutarsan t
 ### Agresif Giriş Duelist'i
 
 IF bu stile karşı oynuyorsan
-MEANING geniş açıyla peek atıp önceden nişanlıyor, jiggle yapmaz, ham reaksiyon hızına güvenir; crosshair'i hep baş seviyesinde (ajan: birincil Jett)
+MEANING geniş açıyla peek atıp köşeyi önceden nişanlıyor, jiggle peek atmaz, ham reaksiyon hızına güvenir; crosshair'i hep baş hizasında (genelde Jett oynar)
 COUNTER agresyonunu bait et — düşman peek attığında trade pozisyonunda dur, ego peek attığı an onu oradan vur
 WHY bu tip oyuncu takım pozisyonunu boşlayıp tek başına peek atar; o açığa utility at ve hemen trade'e gir
 
@@ -113,7 +111,7 @@ WHY izole fight aradığında aynısını ona yapamazsın — sen toplu baskı u
 **Özellikler:**
 - Durup ateş etmeyi ve geniş peek'i tam zamanında yapar
 - Flank kontrolü titiz — minimap'i çoğu duelist'ten sık kontrol eder
-- Ajan: birincil Jett, Raze
+- Genelde Jett ya da Raze oynar
 
 ### Metodolojik Op Duelist
 
@@ -127,10 +125,12 @@ WHY off-angle tutar ve sadece atış için gereken süre kadar peek atar; drone 
 - Op peek zamanlaması minimal: atış için gereken süre kadar peek atıp yeniden pozisyon alır
 - Off-angle tercih eder — beklediğin yerde değildir
 
-### Hata Yapmayan IGL / Çok Rollü Sentinel
+### Utility'yi Sinyalle Yakan Sentinel
 
-- Utility'yi düşman görüldüğünde ya da ses ipucu geldiğinde yakar — ne erken ne geç
-- Her round aynı kararı verir: bilgi gelince utility yak, bilgi yoksa tut
+IF bu stile karşı oynuyorsan
+MEANING util'ini boşa harcamaz — yalnız düşmanı gördüğünde ya da net ses ipucu aldığında yakar, o yüzden retake anında hâlâ elinde util vardır
+COUNTER onu sinyalsiz karar vermeye zorla: sahte ayak sesi bırak, bir taraftan gürültü çıkarıp öbür taraftan gir; util'ini erken yaktırmadan site'a girmen zor
+WHY sinyalle çalışan oyuncu yanlış sinyal aldığında yanlış anda yakar — util'i bitince tuttuğu açı sıradan bir açıya döner
 
 ### Saf Mekanik Duelist
 
@@ -142,9 +142,9 @@ WHY mekaniğine güvenir ama utility baskısı altında tercih yapamazsa o güç
 ### Tutarlılık Odaklı Sentinel/Duelist
 
 IF bu stile karşı oynuyorsan
-MEANING gösterişli oynamaz, her round doğru şeyi yapar — hata oranı düşük
-COUNTER gereksiz risk alma — sen de her round doğru pozisyonu tut, trade buddy'siz peek atma
-WHY her round doğruyu yapmak hata oranını düşürür; bu tipe karşı sen de kendi hatanı sıfırla
+MEANING gösterişli oynamaz, her round aynı sağlam pozisyonu tutar — bedava kill vermez, onu bekleyerek yenemezsin
+COUNTER round'u sen kur: util'i tuttuğu açıya harca, trade buddy'siz peek atma, düelloyu onun seçtiği mesafede alma
+WHY hata beklersen round biter; bu tipten alacağın kill'i utility ve sayı üstünlüğüyle sen üretmek zorundasın
 
 ---
 
@@ -162,7 +162,7 @@ WHY her round doğruyu yapmak hata oranını düşürür; bu tipe karşı sen de
 
 IF hızlı, agresif takıma karşı oynuyorsan
 MEANING sayı üstünlüğüne ve sürprize güvenirler
-COUNTER bekledikleri push site'ına 3 oyuncu stack yap: ilk düşman girer girmez trade edecek sayıda ol, utility yığ (stun + kurulum + duvar)
+COUNTER bekledikleri push site'ına 3 oyuncuyu birden yığ: ilk düşman girer girmez trade edecek sayıda ol, utility'yi de yığ (stun + tel/tuzak + duvar)
 WHY stack hem sayı avantajını hem sürprizi yok eder
 
 IF yavaş default oynayan takıma karşı oynuyorsan
@@ -181,13 +181,6 @@ WHY her utility Op oyuncusunu bir sonraki adıma zorlar — atış, yer değişt
 
 Stratejiyi sorgulamadan döndürmek bedava bilgi verir; rakip ayar yaptıktan sonra değişmemek, kazandığın avantajı geri verir.
 
-### Otopilottan çık
-
-IF düşmanın geçen round ne gösterdiğine bakmadan her round aynı standart açılışı çalıştırıyorsan
-MEANING stratejiyi o kadar otomatik döndürüyorsun ki doğru olup olmadığını sormayı bırakmışsın
-COUNTER round ortasında dur ve sor: "Bu açılış geçen round'a göre hâlâ tutuyor mu?"; düşman geçen round bir karşı hamle gösterdiyse açılışı o anda değiştir, aynısını tekrar çalıştırma
-WHY rakip senin tekrarını okur; sorgulamadan çalıştırmak ona bedava bilgi verir
-
 ### Devre arasında değiş
 
 IF ilk yarıyı bir planla kazandın ama ikinci yarıda hâlâ aynı şeyi çalıştırıyorsan
@@ -201,5 +194,5 @@ WHY rakip ayar yaptıktan sonra değişmemek, ilk yarıda kazandığın avantaj�
 
 IF pro maçlarda gördüğün stratejiyi kendi maçına taşımak istiyorsan
 MEANING tam pro kompo ve koordineli setup solo queue'da birebir çalışmaz — takımın o setup'ı bilmiyor
-COUNTER prensibi al, karmaşıklığı bırak: 2-1-2 yayılım, trade'li ikili hareket, alım kararını sesli söyleme — kompoyu birebir kopyalama
+COUNTER prensibi al, karmaşıklığı bırak: 2-1-2 yayılım, trade'li ikili hareket, alım kararını round başında yüksek sesle duyurmak — kompoyu birebir kopyalama
 WHY round kazandıran şey setup'ın adı değil temel adımları (trade, default yayılım, ekonomi koordinasyonu); bu adımlar her takımda çalışır

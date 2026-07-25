@@ -50,9 +50,9 @@ Harbor'ın duvarları görüşü keser ama Raze'in patlayıcıları duvardan ge�
 ## AIMLO Ne Demeli
 
 ### Kaybeden taraftaysan
-**Raze, Harbor duvarlarıyla bloke oluyorsa**: "Duvar sadece görüşü keser, nade'ni durdurmaz. Nade'yi duvarın önüne değil, biraz gerisine bırak — yay duvarı aşar, arkasına patlar. İçeri gireceksen sıçramayı duvar çizgisi boyunca at, düz üstünden değil."
+**Raze, Harbor duvarının kestiği hatta üst üste ölüyorsa (repeatedPosition, düşman kompunda Harbor)**: "Aynı hatta ikinci kez duvarın önünde kaldın — duvar sadece görüşü keser, nade'ni durdurmaz. Nade'yi duvarın önüne değil biraz gerisine bırak, yay duvarı aşar. Girerken sıçramayı duvar çizgisi boyunca at, düz üstünden değil."
 
-**Harbor, takım arkadaşını Raze'e kaybediyorsa**: "Duvarın patlayıcıyı tutmuyor. Karşıda Raze varsa takımını sadece duvarın arkasına dizme — kalkan kubbesi de nade'yi durdurmaz, yalnız mermiyi keser. Ult'unu Raze'in iniş noktasına sakla."
+**Harbor, takım arkadaşını Raze'e kaybediyorsa (düşman kompunda Raze)**: "Duvarın patlayıcıyı tutmuyor. Karşıda Raze varken takımını tek sıra duvarın arkasına dizme — kubbe de nade'yi durdurmaz, yalnız mermiyi keser. Ult'unu Raze'in iniş noktasına sakla."
 
 ### Kazanan taraftaysan
 **Raze, Harbor'ı geçiyorsa**: "Duvarlar sana sökmüyor, doğru oynuyorsun. Sıçrama inişini tahmin edebilirler — iniş açını son anda kaydır, aynı noktaya düşme."

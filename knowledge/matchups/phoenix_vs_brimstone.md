@@ -75,7 +75,7 @@ Brimstone smoke koyar, açını kapatır, molly ile hasar verir. Phoenix bu zinc
 ---
 
 **IF** Phoenix molly Brimstone'un defuse hattına düştü
-**MEANING** Brimstone o hattan defuse yapamaz, hasar yer ya da durmak zorunda kalır.
+**MEANING** Brimstone o hattan defuse edemez, hasar yer ya da durmak zorunda kalır.
 **COUNTER** Smoke'u molly alanının üstüne koy. Molly içinden görünmeden farklı açıdan defuse dene. Takımla trade et — Phoenix molly'si kısa sürer.
 **WHY** İkisi de molly kullanır. Phoenix molly'si defuse'u engeller, Brimstone smoke'u hasar yemeden konum değiştirir. Molly süresi dolana kadar smoke'un arkasında bekle.
 
@@ -113,6 +113,6 @@ Phoenix flash + molly + duvar — hepsi "kendi canını koru, üstüne gir" üze
 
 ## 7. Koç Notları
 
-**Radiant pattern:** Brimstone oynayanlar smoke'u Phoenix'in duvar koyacağı noktalara göre ayarlar — duvar çıkmadan smoke atmaz, duvarın yerini okur, molly'yi duvarın üstüne atar. Phoenix oynayanlar duvarı Brimstone'un molly hattının tam dışına, smoke kenarına dik açıyla kurar: hem smoke'u böler hem molly alanının dışında kalır.
+**Kazanan kalıp:** Brimstone oynayanlar smoke'u Phoenix'in duvar koyacağı noktalara göre ayarlar — duvar çıkmadan smoke atmaz, duvarın yerini okur, molly'yi duvarın üstüne atar. Phoenix oynayanlar duvarı Brimstone'un molly hattının tam dışına, smoke kenarına dik açıyla kurar: hem smoke'u böler hem molly alanının dışında kalır.
 
 **Özet:** Brimstone alan kurar, Phoenix o alanın içinde hayatta kalmaya çalışır. Duvar + flash ikilini doğru kullanırsan Brimstone'un alanı dağılır. Yanlış kullanırsan molly + smoke ikilisi seni sıfırlar.

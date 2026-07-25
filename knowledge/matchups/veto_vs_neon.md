@@ -15,7 +15,7 @@ Neon dar boğazdan hızla akar ve girişini sektirdiği stunla açar. Veto'nun �
 
 ## Sinyal-Kapılı Dersler
 
-**IF** savunmada round'un ilk saniyelerinde öldün (side=Savunma, deathTiming=erken) ve düşman kompunda Neon var
+**IF** savunmada round açılışında öldün (side=Savunma, deathTiming=erken) ve düşman kompunda Neon var
 **MEANING** Stun + sprint kombosu seni açında yakaladı — önleyici stun hattında değildi
 **COUNTER** Önleyiciyi stunun sektiği giriş hattına kur; stun havada imha olunca peek'i sen kazanırsın
 **WHY** Stunu olmayan Neon hızını silaha çeviremez — açına ancak açık ve savunmasız girer

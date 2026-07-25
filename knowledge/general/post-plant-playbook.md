@@ -124,27 +124,12 @@ Spike'ın düştüğü nokta rakibin nişan hattında — düz koşup almaya gid
 
 ## Savunma — Retake (Plant Geldi, Sen Savunmadasın)
 
-Takımın siteyi kaptırdı, spike dikildi.
+Takımın siteyi kaptırdı, spike dikildi. Sıra sabit: önce nerede olduklarını öğren, util'i giriş anına sakla, sonra gir — spike en son.
 
-- **Util'siz girme.** Flash + molly + smoke olmadan retake girişi başarısız biter.
-- **Önce düşmanın yerini öğren.** Kamera, recon ya da takım callout'u: spike nerede, kaç rakip, hangi açılar — bilmeden girişe yüklenme.
-- **Önce rakibi temizle, sonra spike'a git.** Rakipler hayattayken zaten defuse yapamazsın.
-
-### Retake Util Sırası
-
-1. **Smoke:** Rakibin siteyi tuttuğu en tehlikeli hattı kes — göremeyen rakip girişte ateş açamaz.
-2. **Flash:** Giriş anında öne gönder; takım flash patlarken siteye girer.
-3. **Molly:** Bilinen post-plant köşesini girişle aynı anda sök — rakip ya hasar alır ya açılır.
-4. **Son smoke:** Rakip hâlâ saklanıyorsa spike üstüne at, defuse'u içinde yap — görmeyen vuramaz.
-
-### Giriş Düzeni
-
-İki ayrı yönden AYNI ANDA girin — rakip iki açıyı birden tutamaz, birine dönen diğerine sırtını verir. İkinci yön yoksa tek koridordan trade dizilimiyle girin: ilk giren düşerse hemen arkasındaki aynı açıya ateş açar.
-
-### Sahte Defuse ve Yarım Defuse
-
-Defuse sesi rakibi peek'e zorlar — kendin kullan: spike'a otur, ses ver, bırak, sipere geç; peek atanı takım arkadaşın vursun. Gerçek defuse'ta yarıya kadar sök, rakip görünürse bırak — yarıyı geçtiysen ilerleme kalır, düelloyu kazanınca kalan yarıdan bitirirsin; yarıdan önce bırakırsan sıfırlanır.
-
-### Retake mi, Silah Kurtarma mı?
-
-Retake'in iki bedeli var: round VE silahlar. Sayıca çok gerideysen (2v4 gibi) ve giriş util'in yoksa girme — uzak çıkıştan ayrıl, tüfeğini sonraki round'a taşı. En pahalısı yarım kalan retake: hem round gider hem silahlar rakibe kalır. Kararı rakip seni aramaya çıkmadan ver.
+- **Kör girme.** Kamera, recon ya da takım callout'u olmadan girişe yüklenmek, kurulu çapraz ateşe koşmaktır.
+- **Giriş util'i giriş anına aittir.** Smoke tehlikeli hattı kapatır; flash ve molly siz içeri girerken düşer. Girişten önce boşalan util rakibe yeniden kapanma zamanı verir.
+- **Aynı anda iki yönden girin.** Rakip iki açıyı birden tutamaz, birine dönen diğerine sırtını verir. İkinci yön yoksa tek koridordan trade dizilimiyle girin: ilk giren düşerse arkasındaki aynı açıya ateş açar.
+- **Önce rakibi temizle.** Rakip hayattayken spike'a oturmak sırtını açık bırakmaktır — kill defuse'dan önce gelir.
+- **Son smoke'u spike'ın üstüne at.** Rakip hâlâ saklanıyorsa defuse'u smoke'un içinde yap; görmeyen vuramaz.
+- **Yarım defuse'u silah gibi kullan.** Spike'a otur, ses ver, bırak, sipere geç — peek atanı takım arkadaşın vursun. Yarıyı geçtiysen ilerleme spike'ta kalır, düelloyu kazanan kalan yarıdan bitirir.
+- **Umutsuz retake'e girme.** Sayıca çok gerideysen ve giriş util'in yoksa tutulmayan yoldan ayrıl, tüfeğini sonraki round'a taşı. En pahalısı yarım kalan retake: hem round gider hem silahlar rakibe kalır. Kararı rakip seni aramaya çıkmadan ver.

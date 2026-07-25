@@ -15,7 +15,7 @@ Killjoy sabit cihaz zinciri kurar: taret görür, bot yapışır, molly alanı d
 
 ## Sinyal-Kapılı Dersler
 
-**IF** saldırıda round'un ilk saniyelerinde öldün (side=Saldırı, deathTiming=erken) ve düşman kompunda Killjoy var
+**IF** saldırıda round açılışında öldün (side=Saldırı, deathTiming=erken) ve düşman kompunda Killjoy var
 **MEANING** Taret + bot seni girişte karşıladı — söküm yapmadan zincirin içine yürüdün
 **COUNTER** Alev duvarını taretin görüş hattına çek (duvar arkasını taret göremez), molly'yi cihaza at — kırılır; giriş bu ikisinden sonra gelir
 **WHY** Zincirin gücü sırayla vurmasında — halkalar tek tek söküldüğünde geriye sadece köşede bekleyen bir tüfek kalır

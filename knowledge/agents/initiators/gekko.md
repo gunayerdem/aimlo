@@ -6,7 +6,7 @@ verified: 2026-07-08
 # AJAN: Gekko
 
 ## 1. Rol Kimliği
-Gekko'yu diğer initiator'lardan ayıran tek şey şu: yaratıklarını geri alıp yeniden kullanırsın. Her yaratık işini bitirince yere düşen bir küreye (globül) dönüşür; o küreyi toplarsan o yeteneği aynı tur içinde bir daha kullanırsın — ult dahil: ult globülünü toplarsan aynı ult'u bir kez daha atarsın. Bu döngüyü çalıştırırsan tur başına iki kat yaratık çıkarırsın — başka hiçbir initiator bunu yapamaz. Bot spike diker ve defuse eder, flash yaratığın düşmanı kör eder, molly yere yayılır yayılmaz alandakilere sürekli hasar verir ve kısa bir bekleme sonunda patlayarak ek bir darbe indirir — hem alan-reddi hem patlama aracı. Ult'un yakaladığı düşmanı etkisiz kılar: ne silah ne yetenek kullanabilir. 13.00 ile flash'ın (imza yeteneğin) bekleme süresi 20'den 15 saniyeye indi — döngün hızlandı.
+Gekko'yu diğer initiator'lardan ayıran tek şey şu: yaratıklarını geri alıp yeniden kullanırsın. Her yaratık işini bitirince yere düşen bir küreye (globül) dönüşür; o küreyi toplarsan o yeteneği aynı tur içinde bir daha kullanırsın — ult dahil: ult globülünü toplarsan aynı ult'u bir kez daha atarsın. Bu döngüyü çalıştırırsan tur başına iki kat yaratık çıkarırsın — başka hiçbir initiator bunu yapamaz. Bot spike diker ve defuse eder, flash yaratığın düşmanı kör eder, molly yere yayılır yayılmaz alandakilere sürekli hasar verir ve kısa bir bekleme sonunda patlayarak ek bir darbe indirir — hem alan-reddi hem patlama aracı. Ult'un yakaladığı düşmanı etkisiz kılar: ne silah ne yetenek kullanabilir. 13.00 ile flash'ın (imza yeteneğin) bekleme süresi kısaldı — globülü toplarsan aynı giriş içinde ikinci flash'ı farklı bir açıdan basacak vaktin var.
 
 ## 2. Temel Sorumluluklar
 - Her yaratık kullanımından sonra globülü topla — Gekko'yu Gekko yapan tek şey budur.
@@ -36,7 +36,7 @@ Gekko'yu diğer initiator'lardan ayıran tek şey şu: yaratıklarını geri al�
 **IF** bot plant'a gidiyor ama spike'a ulaşmadan ölüyor
 **MEANING** Site yeterince temizlenmeden botu çapraz ateşin içine gönderiyorsun.
 **COUNTER** Botu ancak site'ta en fazla 1 düşman kaldığında ya da açılar smoke'la kapandığında gönder. Bot bir plant aracıdır, ilk temas aracı değil. Bot plant yaptığında takımın beş kişi silahlı durur — bunu boşa harcama.
-**WHY** Botun canı azdır, çapraz ateşte hemen düşer. Temizlenmiş ya da smoke'la kapanmış site'ta ise plant kesindir ve takımından kimse savunmasız kalmaz.
+**WHY** Bot dayanıksızdır, çapraz ateşte hemen düşer. Temizlenmiş ya da smoke'la kapanmış site'ta ise plant kesindir ve takımından kimse savunmasız kalmaz.
 
 **IF** molly atıyorsun ama düşmanı ne durdurabiliyor ne hasar verebiliyorsun
 **MEANING** Molly'yi düşmanın hiç basmak zorunda olmadığı yere atıyorsun — alana girmeden etrafından dolaşıyor.
@@ -55,7 +55,7 @@ Gekko'yu diğer initiator'lardan ayıran tek şey şu: yaratıklarını geri al�
 
 **IF** globülü toplamak için dövüşün ortasında geri açılıyor ve oradan ölüyorsun
 **MEANING** Geri almayı yanlış zamanlıyorsun — globülü canlı toplama hayali için pozisyonunu bozuyorsun.
-**COUNTER** Globül 20 saniye yerde durur; acele etme. Önce mevcut dövüşü çöz veya takımın açıyı kapatsın, sonra topla. Geri almak senin kazancın ama hayatına mal olacaksa o tur tek kullanımı kabul et.
+**COUNTER** Globül kısa bir süre yerde durur; dövüşün ortasında ona koşma. Önce mevcut dövüşü çöz ya da takımın o açıyı kapatsın, sonra topla. Geri almak senin kazancın ama hayatına mal olacaksa o tur tek kullanımı kabul et.
 **WHY** Ölmüş bir Gekko hiç yaratık çıkaramaz. İkinci yaratık ancak hayatta kalırsan değerli — geri alma her zaman güvenli pencerede yapılır, dövüşün göbeğinde değil.
 
 **IF** botu hep en sona plant için saklıyorsun, hiç keşif için kullanmıyorsun
@@ -65,8 +65,13 @@ Gekko'yu diğer initiator'lardan ayıran tek şey şu: yaratıklarını geri al�
 
 **IF** ult atıyorsun ama kimse ölmüyor, düşman etkiden kurtulup kaçıyor
 **MEANING** Ult'u tek başına bir öldürme yeteneği sanıyorsun — oysa o yakalar ve etkisiz kılar: yakalanan ne silah ne yetenek kullanabilir, ama süre bitince serbest kalır.
-**COUNTER** Ult'u her zaman bir takip vuruşuyla eşle: ya sen ya takımın o pencerede ateş etsin. Yalnızken ult açma — yakaladığını vuracak biri yoksa düşman birkaç saniye sonra serbest kalır. Ult globülünü de unutma: toplarsan aynı ult'u bir kez daha atarsın; attıktan sonra globüle rota planla.
+**COUNTER** Ult'u her zaman bir takip vuruşuyla eşle: ya sen ya takımın o pencerede ateş etsin. Yalnızken ult açma — yakaladığını vuracak biri yoksa pencere kapanınca düşman serbest kalır. Ult globülünü de unutma: toplarsan aynı ult'u bir kez daha atarsın; attıktan sonra globüle rota planla.
 **WHY** Yakalanan düşman bedava hedeftir — ne ateş edebilir ne yetenek kullanabilir. Ult dar alanda birden çok düşmanı aynı anda durdurur, takımın peş peşe öldürür. Takip ateşi olmadan attığın ult sadece düşmanı uyaran bir sesten ibarettir.
+
+**IF** Ölümlerin belirli bir callout'ta tekrar ediyor ve o round'larda yerde toplanmamış globül kalıyor
+**MEANING** Yaratıkları giriş ve keşif aracı olarak değil, öldükten sonra hatırlanan bir koz gibi kullanıyorsun — Gekko'nun döngüsü sen hayattayken çalışır
+**COUNTER** Round geçmişinde aynı yer iki kez geçtiyse o açıya önce yaratık gir: botu köşeye sür, flash'ı duvar üstünden bas, globülü güvenli pencerede topla. Aynı yerde üçüncü kez ilk teması gövdenle alma. Tekrar eden bir yer yoksa bu dersi kurma.
+**WHY** Bot ölse bile globülü kalır; sen ölürsen turun kalanında hiç yaratık çıkmaz. İlk teması yaratığa yıktığın round'larda hem bilgi hem ikinci kullanım elinde kalır.
 
 ## 5. Saldırı Kullanımı
 - Girişten önce flash'ı smoke'un ya da duvarın üzerinden gönder, globülü topla, ikinci flash'ı farklı açıdan bas — savunucu turda bir flash bekler, ikincisine hazırlıksız yakalanır.

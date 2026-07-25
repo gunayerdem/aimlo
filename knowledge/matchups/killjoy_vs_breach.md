@@ -17,15 +17,15 @@ Breach, duvardan geçen sersemletmesi ve hasarıyla Killjoy'un kurduğu her şey
 ## 2. Kim Avantajlı?
 
 **Killjoy lehine:**
-- Dar geçitte (Bind Hookah, Sunset B Main) turret girişi görür ve vurur, Breach sokulamaz.
+- Dar geçitte (Bind Hookah, Sunset B Main) taret girişi görür ve vurur, Breach sokulamaz.
 - Breach yeteneklerini harcadıysa — sersemletme ve flash yokken Killjoy serbestçe kurar.
 - Killjoy ult'u Breach girişinin ortasına düştüyse Breach orada donar, hiçbir şey kullanamaz.
-- Uzun koridorlarda Breach'in menzili kısa kalır, turret uzak hattı tarar.
+- Uzun koridorlarda Breach'in menzili kısa kalır, taret uzak hattı tarar.
 
 **Breach lehine:**
 - Sersemletme Killjoy'un durduğu noktayı duvardan geçerek vurursa siper işe yaramaz — nişanın savrulur, düello penceren kapanır.
-- Molly turret + botun üstüne düşerse duvardan geçen hasar cihazları eritir.
-- Flash peek hattına gelirse Killjoy kör olur — turret hâlâ çalışır ama düello bozulur.
+- Molly taret + botun üstüne düşerse duvardan geçen hasar cihazları eritir.
+- Flash peek hattına gelirse Killjoy kör olur — taret hâlâ çalışır ama düello bozulur.
 - Breach ult'u site'a girerse duvardan geçen sarsıntı anchor'ı savurur, savunma çöker.
 
 **Dengeli:** Haven, Ascent'te matchup ortaya düşer — sarsıntı hattını veya molly noktasını kim önce değiştirirse oraya bükülür.
@@ -39,9 +39,9 @@ Breach, duvardan geçen sersemletmesi ve hasarıyla Killjoy'un kurduğu her şey
 
 ---
 
-**IF** Breach molly'sini turret + botun üstüne attı
+**IF** Breach molly'sini taret + botun üstüne attı
 **MEANING** Duvardan geçen hasar cihazları eritir — kurulumun tek atışta gitmese de hızla biter.
-**COUNTER** Turret'i ve botu Breach'in bilinen lineup hattının dışına koy. Molly sabit bir lineup ister — yerini değiştirirsen o lineup tutmaz. İlk molly geldikten sonra turret'i başka yere taşı, kalan atışlar boşa gitsin.
+**COUNTER** Tareti ve botu Breach'in bilinen lineup hattının dışına koy. Molly sabit bir lineup ister — yerini değiştirirsen o lineup tutmaz. İlk molly geldikten sonra tareti başka yere taşı, kalan atışlar boşa gitsin.
 **WHY** Breach molly'yi her seferinde aynı açıdan atar. Yerini bir kez değiştirirsen koyabileceği ezber kalmaz.
 
 ---
@@ -60,10 +60,10 @@ Breach, duvardan geçen sersemletmesi ve hasarıyla Killjoy'un kurduğu her şey
 
 ---
 
-**IF** Killjoy turret'i Breach'in giriş hattında, Breach sersemletmeyi aynı hatta kullanıyor
-**MEANING** İkisi aynı anda devreye girer — turret ateşi ve sarsıntı çakışır.
-**COUNTER** Breach olarak sersemletmeyi turret'in göremediği köşeden at. Killjoy olarak turret'i sarsıntı hattının dışına koy.
-**WHY** Sarsıntı turret'i durdurmaz — cihaz sersemlemez. Ama Killjoy sersemlerse turret'in verdiği bilgiyi kullanamaz. Açıyı değiştirmek ikisi için de belirleyici.
+**IF** Killjoy tareti Breach'in giriş hattında, Breach sersemletmeyi aynı hatta kullanıyor
+**MEANING** İkisi aynı anda devreye girer — taret ateşi ve sarsıntı çakışır.
+**COUNTER** Breach olarak sersemletmeyi taretin göremediği köşeden at. Killjoy olarak tareti sarsıntı hattının dışına koy.
+**WHY** Sarsıntı tareti durdurmaz — cihaz sersemlemez. Ama Killjoy sersemlerse taretin verdiği bilgiyi kullanamaz. Açıyı değiştirmek ikisi için de belirleyici.
 
 ---
 
@@ -75,9 +75,9 @@ Breach, duvardan geçen sersemletmesi ve hasarıyla Killjoy'un kurduğu her şey
 ---
 
 **IF** Breach flash'ı Killjoy'un peek hattına geldi
-**MEANING** Killjoy kör olur, düello bozulur — ama turret flash'tan etkilenmez, görmeye ve vurmaya devam eder.
-**COUNTER** Flash sesini duyduğunda sipere çekil. Turret zaten çalışıyor — sen körlükten kaçınırsan Breach peşinden gelirken turret ateşiyle karşılaşır.
-**WHY** Turret'in nişanı sana bağlı değil. Kendini flash'tan koruduktan sonra turret'in bilgisini düelloya eklersin — ikili avantaj.
+**MEANING** Killjoy kör olur, düello bozulur — ama taret flash'tan etkilenmez, görmeye ve vurmaya devam eder.
+**COUNTER** Flash sesini duyduğunda sipere çekil. Taret zaten çalışıyor — sen körlükten kaçınırsan Breach peşinden gelirken taret ateşiyle karşılaşır.
+**WHY** Taretin nişanı sana bağlı değil. Kendini flash'tan koruduktan sonra taretin bilgisini düelloya eklersin — ikili avantaj.
 
 ## 4. Yetenek Takası
 
@@ -87,16 +87,16 @@ Somut fark: Breach siperi deler, Killjoy alanı dondurur. Biri pozisyonu kırar,
 
 ## 5. Haritaya Göre Değişim
 
-**Bind / Icebox (Killjoy):** dar geçit turret'i güçlendirir, uzun hatlar Breach menzilini aşar.
+**Bind / Icebox (Killjoy):** dar geçit tareti güçlendirir, uzun hatlar Breach menzilini aşar.
 **Split / Sunset (Breach):** dar koridorlar duvar-aşan sarsıntıyı güçlendirir, Killjoy baskı altında.
 **Ascent / Haven (Dengeli):** ikisi ayrı hatlarda çalışır — orta kontrolü belirleyici.
 
 ## 6. Koç Notları
 
-**Kalıp — Killjoy:** Turret'i ve botu her round farklı noktaya koy — Breach aynı lineup'ı iki round üst üste kullanırsa boşa gider. Breach sarsıntı hattını öğrendiyse bir sonraki round pozisyonunu kaydır.
+**Kalıp — Killjoy:** Tareti ve botu her round farklı noktaya koy — Breach aynı lineup'ı iki round üst üste kullanırsa boşa gider. Breach sarsıntı hattını öğrendiyse bir sonraki round pozisyonunu kaydır.
 
 **Kalıp — Breach:** Yeteneklerini önce ucuz bir round'da harcatarak Killjoy'un cihaz noktalarını öğren. Killjoy util'i o noktaya gömmüşse sonraki round gerçek girişte temiz gir.
 
-**Kritik gerçek:** Sersemletme cihaza işlemez — turret sarsılmaz, onu ancak hasar keser. Sersemletme OYUNCUYA işler — sen savrulursan turret'in bilgisi boşa gider. Cihazını hasardan, kendini sarsıntı hattından koru.
+**Kritik gerçek:** Sersemletme cihaza işlemez — taret sarsılmaz, onu ancak hasar keser. Sersemletme OYUNCUYA işler — sen savrulursan taretin bilgisi boşa gider. Cihazını hasardan, kendini sarsıntı hattından koru.
 
 **Kontrol sorusu:** "Breach'in sarsıntı hattını mı biliyorsun, Killjoy'un cihaz noktasını mı? Hangisini biliyorsan o round'u baştan önde bitirirsin."

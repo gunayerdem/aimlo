@@ -198,7 +198,7 @@ WHY round açılışı, savunucunun gerçekten hazırlıksız olduğu tek an; bi
 IF takımın bir site'a tam yüklendiyse ve spike henüz kurulmadıysa
 MEANING savunucular util'lerini boşalttı, pozisyonlarında gerginlik var
 COUNTER geç execute at — dolu util'li bir savunmaya değil, boşalmış bir savunmaya girersin
-WHY az util = daha temiz giriş; ama koordinasyon kusursuz olsun — flash, smoke ve giriş aynı saniyede
+WHY az util = daha temiz giriş; ama koordinasyon kusursuz olsun — smoke inerken flash gitsin, flash patlar patlamaz ilk oyuncu girsin
 
 ---
 
@@ -211,7 +211,7 @@ WHY okuyamadıkları bir tempoyu önceden karşılamak için adam ya da util yat
 
 IF spike kurulmuşsa ve savunucular retake'e geliyorsa
 MEANING artık baskı onların üzerinde — spike'a ulaşmaları, temizlemeleri ve defuse'u bitirmeleri lazım, hepsi üst üste
-COUNTER util at ve yer değiştirme yap — onların kaybettiği her saniye senin kazancın
+COUNTER util at ve yer değiştir — onları her yeniden toplanmaya zorladığında defuse penceresi daralır
 WHY defuse sabit süreli bir animasyon; o pencereyi defuse süresinin altına çekersen round bitti
 
 ## Spawn Bazlı Okumalar
@@ -234,9 +234,9 @@ WHY util harcamak, her zaman spawn şansına kumar oynamaktan iyidir
 
 ### Counter-Recon
 
-IF düşmanın recon'u aktifse (dart, haunt, recon bıçağı veya recon drone)
+IF düşmanın recon'u aktifse (Sova'nın recon oku, Fade'in izleyen gözü, KAY/O'nun bıçağı ya da drone)
 MEANING o recon yaşadığı sürece pozisyonun düşmana bedava gidiyor
-COUNTER hemen vur ve kır — dart ve haunt tek atışta düşer; drone ve recon bot için birkaç atış gerekir ama yine de önce onları al
+COUNTER hemen vur ve kır — ok ve göz tek atışta düşer; drone ve recon bot için birkaç atış gerekir ama yine de önce onları al
 WHY birkaç mermiyi esirgeyip recon'u yaşatırsan, takımının nerede durduğunu rakibe verirsin — bu takas sana hiçbir şey kazandırmaz
 
 ### Smoke Pozisyonlama
@@ -245,13 +245,6 @@ IF smoke'un tam arkasında duruyorsan
 MEANING smoke'tan geçen düşman çıkışta seni anında görür, sen onu göremezsin
 COUNTER smoke'un tam arkasında durma — yana çekil, off-angle kur; smoke'u geçen düşman seni beklediği yerde bulamasın
 WHY smoke'u push eden, arkasında biri olduğunu bilir ve oraya bakar — yana kayarsan bu okumayı kırarsın
-
-### Bilgi Ekonomisi
-
-IF düşman takımı senden fazla bilgiye sahipse
-MEANING onlar her hamlesini veriye dayandırır, sen tahminle oynarsın
-COUNTER recon util'inle düşmanın yerini öğren, sesinle ve pozisyonunla da bilgi verme — ikisini aynı anda yürüt
-WHY bilgi farkı üst seviyede round'u belirleyen şeydir; elinde daha fazla veri olan takım daha az hata yapar
 
 ---
 
@@ -306,21 +299,21 @@ WHY düşman senin son görüldüğün noktaya açı tutar; orada beklersen kaza
 
 ---
 
-## Mental Oyun
+## Tekrarı Kırmak
 
-### Tilt Tanıma
+### Kanıtlı Tekrar
 
-IF aynı başarısız hamleyi arka arkaya birkaç round tekrarlıyorsan
-MEANING otopilottasın ya da tilt'tesin — adapte olmak yerine alışkanlığa kaçıyorsun
-COUNTER her round'a bilinçli bir değişiklikle gir: farklı pozisyon, farklı yaklaşım, farklı util sırası
-WHY üst seviye rakip round'lar arasında seni okur; aynı şeyi tekrarlıyorsan ona bedava bilgi veriyorsun
+IF maç kaydında aynı bölgede iki ya da daha fazla ölümün varsa, ya da art arda round'larda aynı açıyı aynı şekilde açtıysan
+MEANING artık tahmin değil, kanıt: rakip o noktayı işaretledi ve oraya hazır geliyor
+COUNTER dersi kanıtla birlikte söyle — hangi bölge, kaç kez, hangi round'lar. Sonra bir sonraki round'da o noktayı ilk kontak yerin yapma: üçünden birini değiştir ve hangisini değiştirdiğini kendine söyle — giriş yönü, giriş sırası (util önce mi sen önce mi), giriş anı (takımla mı, takımdan sonra mı)
+WHY rakip aynı yerde ikinci ölümden sonra oraya açı tutar; üçüncü kez aynı yere gelmek round'u bedavaya vermektir
 
-### Otopilot Tuzağı
+### Kanıt Yoksa
 
-IF her round aynı setup, aynı pozisyon, aynı rotasyonla oynuyorsan
-MEANING rakip seni okudu ve hard-counter hazırlıyor
-COUNTER her round en az bir şeyi bilerek değiştir: pozisyon, zamanlama veya util sırası
-WHY Radiant seviyede tahmin edilebilirsen rakibe bedava bilgi verirsin; çeşitlilik bunu keser
+IF elinde tekrar kanıtı yoksa (tek seferlik ölüm, farklı bölgeler, farklı silahlar)
+MEANING ortada pattern yok; tekrar iddiası kurarsan uydurmuş olursun
+COUNTER o round'un kendi kararını konuş: hangi mesafede düello aldın, util elinde miydi, takımın neredeydi
+WHY kanıtsız pattern iddiası oyuncuyu yanlış şeyi düzeltmeye iter — düzeltilecek tekrar yoksa dersi o round'un somut kararından çıkar
 
 ---
 
@@ -355,25 +348,25 @@ MEANING site'taki savunucu tek başına durduramaz
 COUNTER
 - Tek kişiysen: util kullan, push'u yavaşlat, retake pozisyonuna düş
 - İki kişiyseniz: farklı açılardan contest et, rotasyon çağır
-WHY rotasyon gelmeden orada ölmek en kötü senaryo; birkaç saniyelik gecikme bile takımın toplanmasına yeter
+WHY rotasyon gelmeden orada ölmek en kötü senaryo; push'u bir adım bile geciktirmen takımın toplanmasına yeter
 
 ### Ekonomi
 
 IF takım pistol round'u kaybettiyse
 MEANING düşmanın bir sonraki round'da silah ve util üstünlüğü olur
-COUNTER ya hep birlikte hafif silah + kısmi util ile force-buy yapın, ya da hep birlikte tam save edin — karar ortak olsun
-WHY yarısı force yarısı save yaparsa ateş gücünüz tutarsız olur ve krediler çöpe gider
+COUNTER ya hep birlikte hafif silah + kısmi util ile force atın, ya da hep birlikte tam save edin — karar ortak olsun
+WHY yarınız force atıp yarınız save ederse ateş gücünüz tutarsız olur ve krediler çöpe gider
 
-IF full-buy yapabiliyorsunuz ama elinizdeki bonus-round silahlar hâlâ işe yarıyorsa
+IF full buy'a gücünüz yetiyor ama elinizdeki bonus round silahları hâlâ işe yarıyorsa
 MEANING silahlar fonksiyonel, kredi biriktirme şansın var
 COUNTER silahları koru, tüfeğe yükseltme — parayı util'e yatır
 WHY round'u util kazandırır, ham silah yükseltmesi değil; iyi donanımı korurken kredi biriktirirsen 2-3 round sonra full buy bozulmadan döner
 
 ---
 
-## Öncelik Sırası
+## Tek Ders Seçimi
 
-IF bu dosyadaki her şeyi aynı anda uygulamaya çalışıyorsan
-MEANING hepsi birden kas hafızasına oturmaz
-COUNTER önce üçünü otur: crosshair'i baş hizasında tutmak, ses ipucu okumak, post-plant üçgeni — gerisi bunların üstüne oturur
-WHY ileri seviye her beceri bu üçünün üstüne kurulur; temel sağlamsa gerisi kendiliğinden gelir
+IF bir round'da birden fazla hata varsa
+MEANING hepsini birden söylemek dersi eritir — oyuncu hiçbirini uygulamaz
+COUNTER kanıtı en güçlü olanı seç: maç kaydında tekrar eden ölüm yeri varsa onu anlat, yoksa seni öldüren silah ile düello mesafesinin eşleşmesini, o da yoksa bu round'un ekonomi kararını. Tek ders, tek eylem
+WHY tekrar eden hata kanıtlıdır, tek seferlik ölüm çoğu zaman gürültüdür; kanıtı olmayan dersi hiç kurma — yanlış şeyi düzelttirirsin

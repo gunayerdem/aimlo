@@ -15,7 +15,7 @@ Cypher bilinen yolları kapatır; Waylay bilinmeyen yoldan gelir. Dash seni duva
 
 ## Sinyal-Kapılı Dersler
 
-**IF** saldırıda round'un ilk saniyelerinde öldün (side=Saldırı, deathTiming=erken) ve düşman kompunda Cypher var
+**IF** saldırıda round açılışında öldün (side=Saldırı, deathTiming=erken) ve düşman kompunda Cypher var
 **MEANING** Tel hattını görmeden standart kapıdan yürüdün — Cypher'ın kurulumu seni takımına haber verdi
 **COUNTER** Dash'i standart kapıdan değil yüksek ya da yan rotadan kullan; ilk atım yukarı da taşır, tel seviyesinin üstünden geç
 **WHY** Yerdeki tel yerden yürüyeni tutar — Waylay yerden gitmek zorunda olmayan tek taraftır, bu avantajı kapıdan yürüyerek çöpe atma

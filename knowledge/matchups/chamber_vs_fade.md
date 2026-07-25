@@ -44,14 +44,14 @@ Chamber op'la uzun açı tutar, tabancasıyla kısa mesafede de sert vurur. Fade
 
 ## AIMLO Ne Demeli
 ### Kaybeden taraftayken
-**Chamber sürekli taranıyorsa**: "Fade her round seni buluyor. Recon vurdu mu — ya tabancayla peek'i al sonra TP, ya direkt TP çek. Açıda donup kalma, takım seni önceden çapraz tutuyor."
+**Chamber aynı pozisyonda üst üste ölüyorsa (repeatedPosition)**: "Üçüncü kez aynı açıda düştün — Fade'in taraması o köşeyi ezberledi. Recon vurdu mu ya tabancayla peek'i al sonra TP, ya direkt TP çek. Açıda donup kalma, takım seni önceden çapraz tutuyor."
 
-**Fade'in bilgisi boşa gidiyorsa**: "Tarıyorsun ama takımın gelmiyor. Recon yere değdi anında girin, bekleme. Geç kalırsan Chamber çoktan başka açıda olur."
+**Fade ölüyor ve trade gelmiyorsa (tradedByAlly=false)**: "Tarıyorsun ama takımın arkanda değil. Recon yere değdiği an birlikte girin — tek başına taramanın peşinden gidersen Chamber çoktan başka açıya kaymış olur."
 
 ### Kazanan taraftayken
-**Fade Chamber'ı kilitlemişse**: "Recon'un onu açıdan söküyor. Sabitlemeyi TP'nin ineceği noktaya at — durduğu açıya değil, oradan zaten kaçacak."
+**Fade, Chamber'ı aynı açıda buluyorsa (repeatedPosition, düşman kompunda Chamber)**: "Chamber o köşeyi bırakmıyor — taraman onu her round oradan söküyor. Sabitlemeyi durduğu açıya değil, TP'nin ineceği noktaya at."
 
-**Chamber Fade'den kurtuluyorsa**: "TP'n taramayı çöpe atıyor. İniş noktanı her round değiştir, aynı noktayı kullanma yoksa sabitleme tam üstüne düşer."
+**Chamber, Fade'in taramasından kurtuluyorsa**: "TP'n taramayı çöpe atıyor. İniş noktanı her round değiştir — iki round üst üste aynı noktaya inersen sabitleme tam üstüne düşer."
 
 ## Koç Notları
 Okuma-karşı-okuma: Fade, Chamber'ın TP iniş noktasını ezberleyip sabitlemeyi oraya atar; Chamber iniş noktasını her round değiştirip bu ezberi bozar. Kim rakibin alışkanlığını daha erken okursa açıyı o kazanır.

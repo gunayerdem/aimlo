@@ -6,7 +6,7 @@ verified: 2026-07-08
 # AJAN: Neon
 
 ## 1. Rol Kimliği
-- Sen hız duelist'isin. Sprint ve slide ile başka hiçbir ajanın yapamadığı kadar hızlı kapatırsın mesafeyi — savunma crossfire kuramadan site'a dalarsın.
+- Sen hız duelist'isin. Sprint ve slide ile mesafeyi başka hiçbir ajanın kapatamayacağı kadar hızlı kapatırsın — savunma crossfire kuramadan site'a dalarsın.
 - Takım hızlı site almak istiyorsa ve sahada zaten bir Op varsa Jett'i değil seni seçer. Dikey oyun değil, zemin hızı kazandırıyorsun.
 - Senin işin site almayı ayak yarışına çevirmek. Savunma crossfire kurmadan sen içeride olacaksın.
 
@@ -42,10 +42,10 @@ MEANING: Duvarın takım arkadaşlarının açısını kesiyor ya da gruptan ço
 COUNTER: Duvarı takımın içinden geçebileceği açıya kur, etrafından dolanacak şekilde değil. Sprint'e başlarken bir adım geri dur, takım trade menziline girsin.
 WHY: Takımdan kopuk öldürme değersiz. Arkadaşın avantajı kullanamıyorsa trade gelmez.
 
-IF: Ult'unu ya nadiren açıyorsun ya da hep kaybettiğin round'da açıyorsun
-MEANING: Ult'un ne işe yaradığını yanlış okuyorsun — bu bir kurtarma aleti değil, round kazanma aleti
-COUNTER: 2+ düşman hayattayken site'a girerken aç. 1v3'ü kurtarmaya değil, üçüne birden dalmaya kullan.
-WHY: Ult'un gücü çok düşmana karşı hasar çıkarmakta. Geç açarsan bu gücü dönüştüremezsin.
+IF: Ult hazırken (ultReady) ölüyorsan ya da ölümlerin sayıca geride kaldığın anlarda geliyorsa (bu bloğu yalnız ult-hazır bilgisi ya da round geçmişi bunu gösteriyorsa kullan)
+MEANING: Ult'u round kazanma aleti değil kurtarma aleti gibi tutuyorsun — dolu ult'la ölmek round'u iki kez kaybetmektir
+COUNTER: Ult hazırsa girişi ona kur: 2+ düşman hayattayken duvarını açtığın anda ult'u da aç, site'a birlikte gir. Ölüm yerini adıyla söyle (ör. "Round 8'de dolu ult'la B Main'de düştün") ve sonraki round o açıya ult'lu gir.
+WHY: Dolu ult'la ölen Neon takıma hem sayı hem kaynak kaybettirir; ult'un gücü kalabalığa hasar çıkarmakta, 1v3 kurtarmakta değil.
 
 IF: Round açılışında çok erken ölüyorsun
 MEANING: Bilgi almadan hıza yükleniyorsun

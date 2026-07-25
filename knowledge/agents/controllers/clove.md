@@ -11,7 +11,7 @@ Clove sıradan, pasif smoke atan bir controller değil. Öldükten sonra bile sm
 ## 2. Temel Sorumluluklar
 - Hem hayattayken hem öldükten sonra takım için smoke çıkar.
 - Takımın peek atmasından hemen önce can eritme at — düşman zayıflamış halde dövüşsün.
-- Öldürdüğün an kendini iyileştir — bir sonraki dövüşe canını doldurmadan girme.
+- Düşman düştüğü an geçici canı ve hız etkisini topla — pencere kısa, ikinci düelloya girmeden bas.
 - Diriliş ult'unu yalnızca dönünce kill ya da hasarlı asist alabileceğin zaman kullan — dirilir dirilmez vurulabilirsin, dokunulmazlık yok; süre içinde kill/asist alamazsan otomatik tekrar ölürsün.
 - Önce smoke, sonra dövüş — Clove saldırgan oynar ama controller görevi her zaman kill'den önce gelir.
 - Smoke atmadan ölürsen Clove'u boşa harcadın; smoke atıp ölürsen round'a katkı sundun.
@@ -26,6 +26,8 @@ Clove sıradan, pasif smoke atan bir controller değil. Öldükten sonra bile sm
 - Diriliş ult'unu, bomba çoktan kurulmuşken ve takım çekilmişken kullanmak — tek başına kill/hasarlı asist alamayacağın boş bir round'a dönüyorsun, süre dolunca yeniden ölürsün.
 
 ## 4. Kalıp -> Anlam
+
+> KANIT KURALI: Aşağıdaki IF blokları DAVRANIŞ İDDİASIDIR. Bir bloğu ancak veride karşılığı varsa (round geçmişi, ölüm yeri/tipi, öldüren ajan+silah, skor, side, ekonomi) kullan ve dersi o kanıta AÇIKÇA bağla: "son 2 round'da site girişinde ilk ölen sendin — bu round dumanı çıkar, ilk teması duelist alsın". Veri yoksa o bloğu hiç kurma; kanıtsız davranış iddiası uydurmadır.
 
 **IF** Diriliyorsun ama her dirilişten sonra süre dolunca tekrar ölüyorsun
 **MEANING** Diriliş penceresinde kill ya da hasarlı asist alamıyorsun — diriliş ult'unun şartını karşılamıyorsun

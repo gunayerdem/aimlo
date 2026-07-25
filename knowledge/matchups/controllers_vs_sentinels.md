@@ -25,7 +25,7 @@ Sentinel alanı kilitler ve hızlı girişi cezasız bırakmaz; controller o kil
 
 **IF**: Rakip kompta Sage var (enemyComp)
 **MEANING**: Sage ayaktayken düşürdüğün rakip kesin kayıp değildir — düşen oyuncu bedeninin olduğu yerde ayağa kaldırılır ve bitti sandığın düello aynı noktada yeniden başlar.
-**COUNTER**: Bir rakip düşürdüğünde o açıyı hemen çöpe atma: ya düşenin açısını bir an tut ve ayağa kalkanı cezalandır, ya da yer değiştirip eski açına perde bırak.
+**COUNTER**: Bir rakip düşürdüğünde o açıyı hemen çöpe atma: ya düşenin açısını bir an tut ve dirileni tam kalkış anında düşür, ya da yer değiştirip eski açına perde bırak.
 **WHY**: Diriltme hep aynı adreste olur — adresi bilen ve tutan taraf o düelloyu iki kez kazanır.
 
 ## Tekrarlayan Ölüm Ne Anlama Gelir

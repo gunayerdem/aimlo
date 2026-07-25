@@ -10,30 +10,30 @@ tags: [matchup, viper, killjoy, controller_vs_sentinel]
 
 ## 1. Matchup Özü
 
-İkisi de alan kapatır ama yöntemleri farklı. Viper duvarı ve smoke'u ile görüşü keser, zehir ile zarar verir. Killjoy ise kulesi ve botu ile seni duyar, molly ile yakar. Viper saldırıda önce hamle yapar, Killjoy savunmada seni bekler. Aynı takımdaysanız biri bir bölgeyi kapar, öteki diğerini kilitler. Karşı takımdaysanız hangi fazda olduğuna bak: saldırı fazı Viper'ın, savunma fazı Killjoy'un.
+İkisi de alan kapatır ama yöntemleri farklı. Viper duvarı ve smoke'u ile görüşü keser, zehir ile zarar verir. Killjoy ise tareti ve botu ile seni duyar, molly ile yakar. Viper saldırıda önce hamle yapar, Killjoy savunmada seni bekler. Aynı takımdaysanız biri bir bölgeyi kapar, öteki diğerini kilitler. Karşı takımdaysanız hangi fazda olduğuna bak: saldırı fazı Viper'ın, savunma fazı Killjoy'un.
 
 ## 2. Kim Avantajlı?
 
 Haritaya ve faza göre değişir.
 
 - **Saldırıda** Viper avantajlı: duvar görüşü keser, zehir plant sonrası defuse'u durdurur.
-- **Savunmada** Killjoy avantajlı: kule bilgi verir, molly geçişi yakar, ult tek başına retake kazandırır.
+- **Savunmada** Killjoy avantajlı: taret bilgi verir, molly geçişi yakar, ult tek başına retake kazandırır.
 - **Aynı takımdaysan:** ikisini farklı bölgelere yay. Viper A'yı kapar, Killjoy B'yi kilitler — bu ikili Breeze ve Icebox'ta standarttır.
 - **Karşı takımdaysan:** Viper saldırıda ne yaptı, Killjoy savunmada ne yaptı — ikisini ayrı ayrı ölç, aynı fazda kıyaslama.
 
 ## 3. Önemli Düellolar
 
 **IF** Viper A'ya duvar + smoke + zehir ile giriyor, Killjoy A'da bekliyor
-**MEANING** Viper'ın duvarı Killjoy kulesinin görüşünü kapatır — kule kör kalır, bilgi gelmez
-**COUNTER** Killjoy oynuyorsan kuleyi Viper duvarının arkasına koyma. Duvarın dışındaki bir açıya yerleştir — duvar düştüğünde kule devreye girsin, sen de zaten rotate için dışarıda ol
-**WHY** Duvarın içinde kalan kule Viper'ın işine yarar, senin değil. Dışarıdaki kule duvar düşünce saldırıyı yakalar.
+**MEANING** Viper'ın duvarı Killjoy taretinin görüşünü kapatır — taret kör kalır, bilgi gelmez
+**COUNTER** Killjoy oynuyorsan tareti Viper duvarının arkasına koyma. Duvarın dışındaki bir açıya yerleştir — duvar düştüğünde taret devreye girsin, sen de zaten rotate için dışarıda ol
+**WHY** Duvarın içinde kalan taret Viper'ın işine yarar, senin değil. Dışarıdaki taret duvar düşünce saldırıyı yakalar.
 
 ---
 
-**IF** Killjoy kulesini Viper'ın zehir attığı alana koydu
-**MEANING** Zehir cihaz canını hızla eritir — kule zehir bölgesine girince yanar
-**COUNTER** Zehirin hangi köşelere düştüğünü bil. Kuleyi o alanların dışına koy. Zehir bölgelerini ezberle, kuleyi o tarafa hiç sürme
-**WHY** Kule zehire dayanmaz. Yanlış yere koyarsan hem kuleyi hem bilgiyi kaybedersin.
+**IF** Killjoy taretini Viper'ın zehir attığı alana koydu
+**MEANING** Zehir cihaz canını hızla eritir — taret zehir bölgesine girince yanar
+**COUNTER** Zehirin hangi köşelere düştüğünü bil. Tareti o alanların dışına koy. Zehir bölgelerini ezberle, tareti o tarafa hiç sürme
+**WHY** Taret zehire dayanmaz. Yanlış yere koyarsan hem tareti hem bilgiyi kaybedersin.
 
 ---
 
@@ -51,10 +51,10 @@ Haritaya ve faza göre değişir.
 
 ---
 
-**IF** Viper ult'u aktif, Killjoy kulesi ult alanının dışında
-**MEANING** İçerisi Viper'ın kontrolünde, dışarısı Killjoy kulesinin kontrolünde — iki ayrı ölüm bölgesi
-**COUNTER** Aynı takımdaysan kuleyi ult sınırına koy — ulttan çıkan düşmanı kule yakalar. Karşı takımdaysan ultun içine girme, kule seni dışarıda bekler
-**WHY** Ulttan çıkış tek yol. Kule orada durursa çıkan ölür.
+**IF** Viper ult'u aktif, Killjoy tareti ult alanının dışında
+**MEANING** İçerisi Viper'ın kontrolünde, dışarısı Killjoy taretinin kontrolünde — iki ayrı ölüm bölgesi
+**COUNTER** Aynı takımdaysan tareti ult sınırına koy — ulttan çıkan düşmanı taret yakalar. Karşı takımdaysan ultun içine girme, taret seni dışarıda bekler
+**WHY** Ulttan çıkış tek yol. Taret orada durursa çıkan ölür.
 
 ---
 
@@ -75,27 +75,27 @@ Haritaya ve faza göre değişir.
 | İşlev | Viper | Killjoy |
 |---|---|---|
 | Görüş kesme | Duvar + Smoke | Yok |
-| Bilgi | Yok | Kule + Bot |
+| Bilgi | Yok | Taret + Bot |
 | Alan yakma | Zehir | Molly |
 | Ult | Ult (alan kontrolü) | Ult (etkisiz bırakma) |
 
-Viper'ın yakıtı biter — round boyunca dikkatli kullanmazsan duvar düşer. Killjoy'un cihazları kırılır ama her round başında yeniden kurarsın. Aynı takımdaysan Viper görüşü keser, Killjoy bilgi alır — bu iki işlev birbirini tamamlar, çakışmaz. Çakışma şurada olur: duvar Killjoy kulesinin görüşünü kapatır, molly smoke içinde değersizleşir. Bunu önlemek için ikisini ayrı bölgelere yay.
+Viper'ın yakıtı biter — round boyunca dikkatli kullanmazsan duvar düşer. Killjoy'un cihazları kırılır ama her round başında yeniden kurarsın. Aynı takımdaysan Viper görüşü keser, Killjoy bilgi alır — bu iki işlev birbirini tamamlar, çakışmaz. Çakışma şurada olur: duvar Killjoy taretinin görüşünü kapatır, molly smoke içinde değersizleşir. Bunu önlemek için ikisini ayrı bölgelere yay.
 
 ## 5. Haritaya Göre Değişim
 
-**Icebox:** Bu ikili haritanın bel kemiği — Viper duvarı Mid'i keser, Killjoy B'yi kilitler; kuleyi duvarın görüş hattının dışına kur.
+**Icebox:** Bu ikili haritanın bel kemiği — Viper duvarı Mid'i keser, Killjoy B'yi kilitler; tareti duvarın görüş hattının dışına kur.
 
 **Haven:** Üç sitede Killjoy tek siteyi kilitler, Viper duvarı oynanan hatta saklanmalı — boş siteye erken yakıt harcama.
 
-**Ascent:** Killjoy'un kilit haritası — Viper'lı rakibe karşı kuleyi duvarın kapatamayacağı derin köşeye koy.
+**Ascent:** Killjoy'un kilit haritası — Viper'lı rakibe karşı tareti duvarın kapatamayacağı derin köşeye koy.
 
-**Sunset / Split:** Dar geçişlerde molly ve kule değer üretir — Viper'a karşı cihazları smoke hattının dışında tut.
+**Sunset / Split:** Dar geçişlerde molly ve taret değer üretir — Viper'a karşı cihazları smoke hattının dışında tut.
 
-**Bind / Abyss:** İki işlev de çalışır — duvar geçişleri keser, kule flank tutar; ayrı bölgelere yayın.
+**Bind / Abyss:** İki işlev de çalışır — duvar geçişleri keser, taret flank tutar; ayrı bölgelere yayın.
 
 ## 6. Kritik Dönüm Noktaları
 
-1. **Viper duvarı Killjoy kulesini kör bıraktığında.** Saldırı içeri girdi, kule görmüyor — Killjoy bilgisiz, site düştü. Bunu önlemek için kuleyi duvarın dışına koy.
+1. **Viper duvarı Killjoy taretini kör bıraktığında.** Saldırı içeri girdi, taret görmüyor — Killjoy bilgisiz, site düştü. Bunu önlemek için tareti duvarın dışına koy.
 
 2. **Ult + zehir aynı anda basıldığında.** Etkisiz kalan düşman zehirden kaçamaz. Spike kurulduktan sonra ikisini aynı alana bas — defuse imkânsız.
 
@@ -103,12 +103,12 @@ Viper'ın yakıtı biter — round boyunca dikkatli kullanmazsan duvar düşer. 
 
 4. **Takım seçimi kararında.** Aynı takımda ikisini al ama farklı bölgelere yay. Aynı siteye yığma — beceriler çakışır, ikisi de değersizleşir.
 
-5. **Ult + kule sınırında.** İçerisi Viper'ın, dışarısı kulenin. Ulttan çıkan düşman kuleye yakalanır — kuleyi ult kapısına koy.
+5. **Ult + taret sınırında.** İçerisi Viper'ın, dışarısı taretin. Ulttan çıkan düşman tarete yakalanır — tareti ult kapısına koy.
 
 ## 7. Koç Notları
 
-Viper oynuyorsan: Killjoy kulesini round başında bul. Duvarını kule görüş alanını kapatacak şekilde çekme — aynı takımdaysan bu senin hatan olur. Zehir attığın köşeleri belirle, kule oralarda olmasın.
+Viper oynuyorsan: Killjoy taretini round başında bul. Duvarını taret görüş alanını kapatacak şekilde çekme — aynı takımdaysan bu senin hatan olur. Zehir attığın köşeleri belirle, taret oralarda olmasın.
 
-Killjoy oynuyorsan: Viper'ın zehir attığı yerleri ezberle. Kuleyi o alanlara koyma — yanar, bilgi gelmez, iki şeyi birden kaybedersin. Viper duvar çektiğinde kule duvarın dışında kalsın — duvar düşünce kule devreye girsin.
+Killjoy oynuyorsan: Viper'ın zehir attığı yerleri ezberle. Tareti o alanlara koyma — yanar, bilgi gelmez, iki şeyi birden kaybedersin. Viper duvar çektiğinde taret duvarın dışında kalsın — duvar düşünce taret devreye girsin.
 
 Aynı takımda ikisini oynarken becerilerini farklı bölgelere yay, asla üst üste bindirme. Viper A'yı kurar, Killjoy B'yi kilitler — her bölge ayrı bir tehdit. Karşı takımdaysan Viper saldırıda ne yaptı onu ölç, Killjoy savunmada ne yaptı onu ölç. İkisini aynı fazda kıyaslama, yanılırsın.

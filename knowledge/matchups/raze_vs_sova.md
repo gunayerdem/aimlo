@@ -50,7 +50,7 @@ Raze oynuyorsan: yakın mesafede Sova'nın util'i seni durduramaz, üstüne git.
 **IF** Raze molly Sova recon'unu patlattı
 **MEANING** Recon düştü, Sova o round bilgiyi kaybetti.
 **COUNTER** Sova oynuyorsan recon'u Raze'in molly attığı hattın dışından uçur — yüksek ve gizli. Raze oynuyorsan molly atmak zorunda değilsin: recon sesini duyunca sıçrama ile görüş açısından çık, recon boşa çıkar, molly'yi de harcamazsın.
-**WHY** Recon HP'si düşük, molly tek atışta siler. Ama Raze görüş hattından çıkarsa recon zaten bilgi üretemez.
+**WHY** Recon kırılgandır, tek mermi de molly de siler. Ama Raze görüş hattından çıkarsa recon zaten bilgi üretemez.
 
 ---
 
@@ -62,7 +62,7 @@ Raze oynuyorsan: yakın mesafede Sova'nın util'i seni durduramaz, üstüne git.
 ---
 
 **IF** Sova ult'u Raze'in post-plant pozisyonuna girdi
-**MEANING** Duvar geçen hasar, Raze pozisyon değiştirmezse HP kaybeder.
+**MEANING** Ult duvarı deler — Raze pozisyon değiştirmezse vuruşu yer, post-plant açısı da bozulur.
 **COUNTER** Raze oynuyorsan ult sesini duyunca sıçrama ile hattan çık. Post-plant pozisyonunu her round aynı tutma.
 **WHY** Ult sabit yönde gider. Yönünü önceden okuyabilirsen o hatta zaten girme.
 
@@ -109,17 +109,17 @@ Asıl fark şu: Sova util'i round başında çıkar ve biter. Raze util'i esnek,
 
 **Flip 1 — Recon reveal:** Recon görüşünde kaldın, takım trade'e hazırlandı. Giriş anında ikinci düşman gelir, sen düşersin.
 
-**Flip 2 — Hasar oku inişi yakaladı:** Sıçrama ile indin, dart orada bekliyordu. Düşük HP ile round devam eder, sıradaki düelloda bir düşman düşünce sen de düşersin.
+**Flip 2 — Hasar oku inişi yakaladı:** Sıçrama ile indin, dart orada bekliyordu. Sova iniş noktanı ezberlemiş demektir — bir sonraki round aynı noktaya inme, iniş hattını kaydır.
 
 **Flip 3 — Ult anchor'ı yakaladı:** Sova sabit durduysa Raze ult'u tek vurur, Sova'nın util döngüsü biter.
 
-**Flip 4 — Post-plant ult:** Raze'in post-plant pozisyonu Sova ult hattındaydı. Sıçrama yoksa kaçış yok, HP gider.
+**Flip 4 — Post-plant ult:** Raze'in post-plant pozisyonu Sova ult hattındaydı. Sıçrama yoksa hattın dışına çıkış da yok — ult çizgisi seni bulur.
 
 ## 7. Koç Notları
 
 Bu matchup'ta iki oyuncu da lineup kullanır ama amaç farklı — Raze hasar atar, Sova bilgi üretir.
 
-Radiant Raze şunu yapar: Sova recon sesini duyar duymaz sıçrama yönünü değiştirir. Recon zaten yere düştü, bilgi eskidi — şimdi girmek güvenli.
-Radiant Sova şunu yapar: Raze'in sıçrama iniş noktalarını ezberler, hasar oku o noktaya önceden atar. Raze havaya kalkınca dart zaten orada bekler.
+Kazanan Raze şunu yapar: Sova recon sesini duyar duymaz sıçrama yönünü değiştirir. Recon zaten yere düştü, bilgi eskidi — şimdi girmek güvenli.
+Kazanan Sova şunu yapar: Raze'in sıçrama iniş noktalarını ezberler, hasar oku o noktaya önceden atar. Raze havaya kalkınca dart zaten orada bekler.
 
 Kimin util'i daha esnek kullanılıyorsa round o tarafa döner. Raze sabit hattan giriyorsa Sova kazanır. Sova recon'u erken harcıyorsa Raze kazanır.

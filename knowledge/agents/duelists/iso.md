@@ -9,12 +9,12 @@ verified: 2026-07-08
 - Iso'nun işi tek: her düelloyu kazan, her öldürmeden kalkan çıkar, sıradaki dövüşe kalkanlı gir.
 - Takım dar site'larda düşmanı sırayla temizlemeni istiyorsa, Jett'in çıkış oyunu yerine saf izolasyon gerekiyorsa Iso'yu seç.
 - Iso'nun özü her öldürmeyi dayanıklılığa çevirmek. Seni düşürmek için düşman fazladan mermi ve util harcamak zorunda kalır.
-- Dört yeteneğin var: duvar (izolasyon ve giriş), kalkan/küre (her dövüşten önce aç, her öldürmeden sonra topla), ult (1v1 arena) ve Q — duvarın/zeminin içinden geçen ok. Q düştüğü düşmana hem zarar-katlama (aldığı tüm hasar iki katına çıkar) hem bastırma uygular. Bu, kalkanlı düellondan önceki en güçlü kurulum: önce Q'yu yedir, sonra kalkanla 1v1'e gir — düşman çıplak ve iki kat hasar alıyorken sen tam korumalısın.
+- Dört yeteneğin var: duvar (izolasyon ve giriş), kalkan/küre (her dövüşten önce aç, her öldürmeden sonra topla), ult (1v1 arena) ve zayıflatma oku — duvarın/zeminin içinden geçer. Zayıflatma isabet eden düşmana hem zarar-katlama (aldığı tüm hasar iki katına çıkar) hem yetenek kapatma uygular. Bu, kalkanlı düellondan önceki en güçlü kurulum: önce zayıflatmayı yedir, sonra kalkanla 1v1'e gir — düşman yeteneksiz ve iki kat hasar alıyorken sen tam korumalısın.
 - Takımın senden beklediği: her düelloyu kazan, kalkan biriktir, duvarı izolasyon için kullan.
 
 ## Saldırıda Görevin
 - Dövüşe girmeden kalkanı aç. Duvarla savunucuyu kes, onu 1v1'e zorla, site'a öyle gir.
-- Köşeyi dönmeden Q'yu beklediğin açıya/duvar arkasına yedir — isabet eden savunucu iki kat hasar alır ve bastırılır, kalkanlı peek'in garanti dövüşe döner.
+- Köşeyi dönmeden zayıflatmayı beklediğin açıya/duvar arkasına yedir — isabet eden savunucu iki kat hasar alır ve yetenekleri kapanır, kalkanlı peek'in garanti dövüşe döner.
 - Ult'u site'ı tek başına tutan anchor'a sakla.
 
 ## Savunmada Görevin
@@ -31,14 +31,14 @@ verified: 2026-07-08
 7. **Kötü duvar açısı** — Duvarın açısı hangi düşmanı izole ettiğini belirler. Yanlış açı yanlış kişiyi keser ya da savunucuya yeniden konumlanma süresi tanır. Her site için duvar açını ezbere bil.
 8. **Kalkanlıyken çok ileri gidip util'e yakalanmak** — Kalkan mermiyi emer ama düşman util'i (molly, stun, flash) seni hâlâ etkiler. Kalkana güvenip dar geçide dalarsan ateş düellosunu kazanmadan util'le ezilirsin. Kalkan nişan düellosu içindir, util tarama için değil.
 9. **Ult arena'sında kötü konum** — Ult'la rakibi 1v1 arena'ya çektiğinde iş bitmedi. Arena'ya çıplak swing atarsan kalkan avantajını boşa atarsın. Önce kalkanı aç, sonra arena açısını net tut — bu garanti kazanılacak bir dövüş, mahvetme.
-10. **Q'yu hiç kullanmamak** — Q duvarın/zeminin içinden geçer; düşmana isabet ettiğinde aldığı tüm hasarı iki katına çıkarır ve onu kısa süre bastırır. Peek öncesi beklediğin açıya yedirmezsen en güçlü düello kurulumunu boşa atarsın. Önce Q ile düşmanı işaretle, sonra kalkanla gir — düşman iki kat hasar alıyorken senin tek bir doğru atışın yetiyor.
+10. **Zayıflatmayı hiç kullanmamak** — Zayıflatma oku duvarın/zeminin içinden geçer; düşmana isabet ettiğinde aldığı tüm hasarı iki katına çıkarır ve yeteneklerini kısa süre kapatır. Peek öncesi beklediğin açıya yedirmezsen en güçlü düello kurulumunu boşa atarsın. Önce zayıflatmayı yedir, sonra kalkanla gir — düşman iki kat hasar alıyorken senin tek bir doğru atışın yetiyor.
 
 ## 4. Kalıp -> Anlam
 
-IF: Dövüşlerde kalkan nadiren aktif
-MEANING: Peek öncesi kalkanı açmıyorsun ya da öldürme sonrası küreyi kaçırıyorsun
-COUNTER: Her açıya bakmadan önce kalkan açık olsun. Her öldürmeden hemen sonra küreyi vur.
-WHY: Kalkansız Iso, kit avantajı olmayan sıradan bir duelist'tir. Döngü kırılınca farkın kalmaz.
+IF: Aynı köşede/ölüm yerinde art arda round'larda ilk temasta düşüyorsan (bu bloğu yalnız ölüm yeri/round geçmişi bunu gösteriyorsa kullan)
+MEANING: O açıya kalkan açmadan varıyorsun — kalkan kısa ömürlü, koridorda yakıp peek'e kalkansız çıkıyorsun
+COUNTER: Ölüm yerini adıyla söyle (ör. "Round 5 ve 9'da Mid'de aynı açıda düştün") ve o açıya kalkanı köşeyi tam dönerken aç; öldürdüysen küreyi hemen vur, sonra sıradaki açıya geç.
+WHY: Kalkansız Iso kit avantajı olmayan sıradan bir duelist'tir; döngü kırılınca aynı açıda ikinci kez aynı şekilde düşersin.
 
 IF: 2v1 veya 3v1'lerde sık ölüyorsun
 MEANING: Duvarla izole etmeden, tek atımlık kalkanla birden fazla açıya çıkıyorsun
@@ -70,10 +70,10 @@ MEANING: Kit'in sana verdiği avantajı kullanmıyorsun — kalkan doluyken ilk 
 COUNTER: Kalkan aktifken alanı sen al. İlk mermi seni öldürmez, bu pencerede ileri pozisyon tut ve açıyı zorla. Geri çekilmek kalkanı boşa harcamaktır.
 WHY: Iso'nun farkı tek dövüşte bir fazladan mermiye dayanmak. Kalkanlıyken geri çekilirsen o avantajı hiç kullanmadan kaybedersin — sıradan duelist'e dönersin.
 
-IF: Düellolara giriyorsun ama Q'yu hiç yedirmiyorsun
+IF: Düellolara giriyorsun ama zayıflatmayı hiç yedirmiyorsun
 MEANING: En güçlü kurulumunu atlıyorsun — düşmana zarar-katlama uygulamadan kalkanlı 1v1'e giriyorsun
-COUNTER: Köşeyi dönmeden Q'yu beklediğin açıya ya da duvarın arkasına yedir. İsabet eden düşman iki kat hasar alır ve bastırılır — sonra kalkanla gir, tek doğru atış yeter.
-WHY: Q + kalkan, Iso'nun imza kombosu: düşman çıplak ve iki kat hasar alırken sen tam korumalısın. Q'suz girersen sıradan bir kalkanlı duelist olursun, kit avantajının yarısını kullanmamış olursun.
+COUNTER: Köşeyi dönmeden zayıflatmayı beklediğin açıya ya da duvarın arkasına yedir. İsabet eden düşman iki kat hasar alır ve yetenekleri kapanır — sonra kalkanla gir, tek doğru atış yeter.
+WHY: Zayıflatma + kalkan, Iso'nun imza kombosu: düşman yeteneksiz ve iki kat hasar alırken sen tam korumalısın. Zayıflatmasız girersen sıradan bir kalkanlı duelist olursun, kit avantajının yarısını kullanmamış olursun.
 
 IF: Takım seninle entry bekliyor ama sen kalkanı doldurmaya odaklanıyorsun
 MEANING: Öldürme avına çıkıp küre topluyorsun ama takım girişin için orada değilsin — site boş kalıyor
@@ -87,12 +87,12 @@ WHY: Iso bir entry duelist'i — duvar ve kalkan takımı içeri sokmak için. T
 - **Neden dar site'lar Iso'ya yarar:** Açık haritada düşman senden uzakta, util'le döver, kalkanın ilk mermiyi emse de ikinci-üçüncü mesafeli atışa yetişmez. Dar koridor ve kapalı site'ta dövüş tek-tek ve yakın olur — kalkan tam burada belirleyici. O yüzden Split, Pearl uzun, Haven choke'ları senin alanın; Breeze'in A Main'i gibi uzun-açık hatlar değil.
 - **Açık haritalarda nasıl oynamalı:** Icebox'ta ve Breeze'in kalan uzun hatlarında geniş açıya saf swing atma. Duvarı görüş kesmek için değil, düşmanı tek bir yola sıkıştırıp o yolda 1v1'e zorlamak için kur. Mümkünse mesafeyi sen kapat — kalkan yakın dövüşte değer üretir, uzun menzilde mermi sayısı düşmana yarar.
 - **Dikeyle başa çıkma:** Icebox gibi yukarı-aşağı açılı yerlerde duvar yatay keser, üstten gelen açıyı kapatmaz. Önce yüksekliği temizle ya da izole et, sonra yer seviyesinde duvarla böl — yoksa duvarın arkasındaki "güvenli" alana yukarıdan atış yer.
-- **Summit — durumsal (yeni harita):** Geniş açık hatlar izolasyonu zorlaştırır — kalkanlı düelloyu A Garden, A Link ve B Tower çevresi gibi dar geçişlere taşı; Mid Fountain'in çapraz açısına tek kalkanla çıkma, kalkan tek mermi emer. Q'yu köşeyi dönmeden B Tower ya da A Garden açısını tutan savunucuya yedir, sonra kalkanla gir.
+- **Summit — durumsal (yeni harita):** Geniş açık hatlar izolasyonu zorlaştırır — kalkanlı düelloyu A Garden, A Link ve B Tower çevresi gibi dar geçişlere taşı; Mid Fountain'in çapraz açısına tek kalkanla çıkma, kalkan tek mermi emer. zayıflatmayı köşeyi dönmeden B Tower ya da A Garden açısını tutan savunucuya yedir, sonra kalkanla gir.
 - **Summit duvar oyunu:** A Wall, Mid Wall ve B Wall düştü mü o rota round boyunca kapalı — kalan tek girişte kendi duvarınla savunucuyu kes, dövüşü kazanacağın 1v1'e çevir; düşen duvarın altında durma, altında kalan ölür.
-- **Breeze (rework sonrası):** Rework senin lehine çalıştı — Mid koridorlaştı, dövüşler tek-tek ve daha yakın: kalkanlı düellonu Mid koridor ağızlarına ve kapı geçişlerine taşı, Q'yu köşeyi dönmeden koridor arkasına yedir. A Main hâlâ uzun ve açık — kalkan orada mesafeli ikinci-üçüncü atışa yetişmez, o hattı zorlama. B Main'de site içi + B Window çaprazı seni bekler: duvarınla girişi böl, dövüşü kazanabileceğin tek 1v1'e indir.
-- **Corrode:** Stairs–Top Mid uzun hattına tek kalkanla çıkma — kalkan tek hasarı emer, Op mesafesinde ikinci atışa çıplak kalırsın. Dövüşünü Elbow ve Pocket köşelerine taşı: Q'yu köşeyi dönmeden dirseğin arkasına yedir, kalkanla gir — köşe dövüşü tam senin mesafen. B'de Tower yukarıdan bakar: zemin + dikey iki açıya tek kalkanla çıkma — duvarınla site içini böl, önce zemindekiyle 1v1 al, dikeyi takım util'i kapatsın.
-- **Lotus:** Dar koridorlar (A Main, B Main) tam senin mesafen — dövüş tek tek ve yakın. A Main'de Tree + Stairs çapraz ateşi bekler: duvarını iki açının arasına kur, girişi kazanabileceğin tek 1v1'e indir. B Main uzun koridorunu tek açıdan tutan savunucuya Q'yu köşeyi dönmeden yedir, sonra kalkanla gir. C Mound yüksekten bakar: zemin + yüksek iki açıya tek kalkanla çıkma — Mound açısını takım util'i kapatsın, sen zemindekiyle dövüş. Döner kapı geçişinde karşı tarafın peek attığını varsay — kalkanı geçişten hemen önce aç.
-- **Sunset:** Kısa açıların haritası — açıyı bilen kazanır ve kalkan tam bu mesafede belirleyici. A Elbow kapanında Q'yu köşenin arkasına yedir, kalkanla dön — koridor dövüşü senin lehine. Market'te Boba + site içi çaprazı bekler: duvarınla birini kes, kalan tek 1v1'i kalkanla al — Market'te bekleme, karar ver ve geç. B Main dar ve düz: duvarını koridorun sonunu tutan savunucuyu site desteğinden koparmak için kur, teker teker dövüş.
+- **Breeze (rework sonrası):** Rework senin lehine çalıştı — Mid koridorlaştı, dövüşler tek-tek ve daha yakın: kalkanlı düellonu Mid koridor ağızlarına ve kapı geçişlerine taşı, zayıflatmayı köşeyi dönmeden koridor arkasına yedir. A Main hâlâ uzun ve açık — kalkan orada mesafeli ikinci-üçüncü atışa yetişmez, o hattı zorlama. B Main'de site içi + B Window çaprazı seni bekler: duvarınla girişi böl, dövüşü kazanabileceğin tek 1v1'e indir.
+- **Corrode:** Stairs–Top Mid uzun hattına tek kalkanla çıkma — kalkan tek hasarı emer, Op mesafesinde ikinci atışa çıplak kalırsın. Dövüşünü Elbow ve Pocket köşelerine taşı: zayıflatmayı köşeyi dönmeden dirseğin arkasına yedir, kalkanla gir — köşe dövüşü tam senin mesafen. B'de Tower yukarıdan bakar: zemin + dikey iki açıya tek kalkanla çıkma — duvarınla site içini böl, önce zemindekiyle 1v1 al, dikeyi takım util'i kapatsın.
+- **Lotus:** Dar koridorlar (A Main, B Main) tam senin mesafen — dövüş tek tek ve yakın. A Main'de Tree + Stairs çapraz ateşi bekler: duvarını iki açının arasına kur, girişi kazanabileceğin tek 1v1'e indir. B Main uzun koridorunu tek açıdan tutan savunucuya zayıflatmayı köşeyi dönmeden yedir, sonra kalkanla gir. C Mound yüksekten bakar: zemin + yüksek iki açıya tek kalkanla çıkma — Mound açısını takım util'i kapatsın, sen zemindekiyle dövüş. Döner kapı geçişinde karşı tarafın peek attığını varsay — kalkanı geçişten hemen önce aç.
+- **Sunset:** Kısa açıların haritası — açıyı bilen kazanır ve kalkan tam bu mesafede belirleyici. A Elbow kapanında zayıflatmayı köşenin arkasına yedir, kalkanla dön — koridor dövüşü senin lehine. Market'te Boba + site içi çaprazı bekler: duvarınla birini kes, kalan tek 1v1'i kalkanla al — Market'te bekleme, karar ver ve geç. B Main dar ve düz: duvarını koridorun sonunu tutan savunucuyu site desteğinden koparmak için kur, teker teker dövüş.
 
 ## 6. Eşleşme Notları
 - **Zorlandığın ajanlar:** Raze (kalkan patlamayı da tek seferlik emer, ama molly'nin saçılan parçaları ve ikinci patlama kalkansız yakalar — tam menzilden çık, orta mesafede dur), Breach (stun ve flash düello kurulumunu bozar, duvar zamanlamanı karıştırır), KAY/O (bastırma kalkanını kapatır — bastırma bitince gir).

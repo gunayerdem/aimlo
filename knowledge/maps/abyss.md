@@ -12,11 +12,11 @@ pool: "rotasyon-dışı — V26 Act 2'de (Nisan 2026) rekabetçi havuzdan çıkt
 
 Abyss, havuzdaki en farklı harita. Diğer haritalarda duvarla karşılaştığın yerde burada uçurum var. Düşersen ölürsün — respawn yok, trade yok, ekibine yük oldun, o kadar.
 
-Bu yüzden burada sadece düşmanın yerini değil, kendi ayaklarının nerede bastığını da takip edeceksin. Breach mollysi, Raze atlaması, herhangi bir geri-itme — seni direkt haritadan siler.
+Bu yüzden burada sadece düşmanın yerini değil, kendi ayaklarının nerede bastığını da takip edeceksin. Seni haritadan silen şey Raze'in sıçrama paketi ve kendi zıplaman; util hasarı ise seni panikle kenara sürükler, gerisini boşluk halleder.
 
-Kenar pozisyonlarını doğru kullanırsan rakibi hiç beklemediği açıdan vurursun. Yanlış kullanırsan kendi util'inle takım arkadaşını uçurumdan itersin. İkisi de olur, dikkat et.
+Kenar pozisyonlarını doğru kullanırsan rakibi hiç beklemediği açıdan vurursun. Yanlış kullanırsan kendi sıçraman takım arkadaşını kenardan iter. Kenara util atmadan önce arkanda kim var, ona bak.
 
-Bu haritayı öğrenmek callout ezberlemek değil. Uçurum mesafelerini öğreneceksin. Hangi util seni iterek öldürür, onu bileceksin. Güvenli durma sınırını içine işleyeceksin.
+Bu haritayı öğrenmek callout ezberlemek değil: hangi kenardan düşülür, hangi util seni kenara sürükler, peek sonrası geri çekilirken arkanda zemin var mı — bunları öğreneceksin.
 
 Mid bu haritanın kalbi ama tek bir köprü değil — çok şeritli bir bölge. Mid Top ve Mid Bottom iki ayrı yükseklik, Mid Library ve Mid Catwalk yan geçişler, Mid Bend ise B Main'den ascender ile çıkılan kıvrım. Tam ortada ölüm-uçurumu var: yanlış adım atan oradan düşer. Mid'i alan takım A'ya da B'ye split atar, rotate hızını yönetir, rakibin hareket alanını daraltır. Mid kavgası neredeyse her round çıkar.
 
@@ -135,9 +135,9 @@ WHY: Mid kontrolü rotate güvenliğini belirler. Mid savunanı düşerse, mid'd
 IF: Rakip kenar pozisyonlarından site'a beklenmedik açılarla giriyor — sen kenar kontrolü yapmıyorsun.
 MEANING: Abyss'in kenarları saldıran için off-angle hazinesi. Sen kontrol etmezsen rakip hiç görmediğin yerden çıkar.
 COUNTER:
-- Breach molly ya da stun'ını kenar pozisyonlara gönder. Rakibi ya düşürürsün ya geri çekilmeye zorlarsın.
-- Sage'in yavaşlatmasını kenar bölgelere koy. Düşme riski artar, hareketi yavaşlar.
-- Sentinel util'i kenar geçişlerine bak. Tuzak ya da tel orada erken bilgi verir.
+- Breach molly'sini ya da stun'ını kenar hattına at — kenarda ne geri çekilecek zemin ne kaçacak açı var, düşman ya hasarı yer ya açığa çıkar. Düşmesini bekleme, açığa çıkanı silahla al.
+- Sage'in yavaşlatmasını kenar bölgelere koy. Yavaşlayan oyuncu dar zeminde sıçrayarak geçemez, hedef olarak kalır.
+- Sentinel util'ini kenar geçişlerine bakacak şekilde kur. Tuzak ya da tel orada erken bilgi verir.
 
 WHY: Kenar kontrol edilmezse tahmin edemediğin bir açıdan vurulursun. Kenarı kapatırsan kontrol etmen gereken açı sayısı düşer, her duel daha net hale gelir.
 
@@ -146,23 +146,23 @@ WHY: Kenar kontrol edilmezse tahmin edemediğin bir açıdan vurulursun. Kenarı
 **S Tier**
 
 - **Jett**: Bu harita Jett için yapılmış. Dash ve yukarı sıçrama ile uçurumun üstünden atlarsın, kenardan açı açarsın, kimse seni beklemez. Mid'de Op alırsın, uzun hatlarda kimse sana dokunamaz. Uçurum mekaniğiyle en iyi oynayan duelist bu.
-- **Sage**: Duvarı mid geçişine çekersin — bu haritanın en güçlü tek hamlesi. Yavaşlatmayı kenar bölgeye atarsın, düşman düşer. Açık alanda heal altın değerinde. Sage olmadan bu haritada savunma yapamazsın.
+- **Sage**: Duvarı mid geçişine çekersin — bu haritanın en güçlü tek hamlesi, rakibin tempo planını tek başına bozar. Yavaşlatmayı kenar geçişine at: yavaşlayan oyuncu dar zeminde hedef olur, sıçrayarak geçemez. Açık alanda heal altın değerinde. Sage'siz oynuyorsan mid'i kesecek başka bir plan hazırla — duvar yoksa o geçişi smoke + molly ikilisiyle kapat.
 - **Viper**: Duvarla mid'i kesersin ya da siteyi bölersin. Smoke ile site kontrolü alırsın. Duvarını uçurum kenarına çekersin. Haritanın geniş hatları Viper'in her şeyini daha güçlü kılar.
 
 **A Tier**
 
-- **Breach**: Mollysini uçurum kenarına gönderirsin, düşman haritadan düşer. Stun'ı mid'de çok sert çalışır. Kenar mekaniği Breach'in elini güçlendiriyor, başka haritalarda bu kadar değil.
+- **Breach**: Kenar hattında bekleyen düşmana molly'yi bas — kenarda geri çekilecek zemin yok, ya hasarı yer ya senin takımının açısına çıkar. Stun'ı mid geçişinde kullan: sarsılan oyuncu dar zeminde nişan alamaz, takımın bedava trade alır. Kimseyi util'le uçurumdan atamazsın; kenarın işi düşürmek değil, düşmanı seçeneksiz bırakmak.
 - **Raze**: Atlamayla uçurumun üstünden site'a dalarsın. Bot kenar kontrol eder. Kenar oyununda Jett'e yakın mobilite alırsın.
 - **Omen**: Kaçışınla uçurum kenarları arasında kaybolursun, kimse nerede olduğunu bilemez. Smoke'la mid'i kontrol edersin. Flash dar geçişlerde sert çalışır. Yaratıcı oynuyorsan tavanı yüksek.
 - **Killjoy**: Tuzağı uçurum kenarına bakacak şekilde koyarsın, bilgi gelir. Bot mid geçişini kapatır. B site kompakt, ult orada çok güçlü.
-- **Fade**: Bot kenar pozisyonları temizler. Stun'ı uçurum kenarına gider, düşman hem kilitlenir hem düşme riskiyle uğraşır. Recon geniş alanda her şeyi gösterir.
+- **Fade**: Bot'un kenar pozisyonlarını temizler. Stun'ını kenar hattındaki düşmana at — bağlı kaldığı sürece ne geri çekilebilir ne açı değiştirebilir, takımın o pencerede bedava vurur. Recon geniş alanda her şeyi gösterir.
 
 **B Tier**
 
 - **Cypher**: Tel ile kenar geçişlerini izleyebilirsin ama haritanın açık alanları Cypher'i kısıtlıyor. Killjoy tuzağı kadar esnek değil. Yine de bilgi için oynayabilirsin.
 - **Sova**: Recon geniş alanda bilgi verir, molly / hasar oku post-plant'te işe yarar. Ama dikey oyun ve kenar mekaniği Sova'nın elini bağlıyor.
 - **Brimstone**: Post-plant molly'lerin güçlü, smoke hızlı gelir. Ama Viper bu haritada çok daha baskın — ikinci controller seçimi olarak kalırsın.
-- **Phoenix**: Flash'la girişe yardım eder, ult düşmanların yerini gösterir. Ama haritanın geniş alanları Phoenix'in yakın mesafe kitini çok kısıtlıyor.
+- **Phoenix**: Flash'la girişe yardım eder; ult'la bedava can alır — ölmeyi göze alıp kenar hattını ya da site'ı yoklarsın, düştüğünde bilgi takımda kalır. Ama haritanın geniş alanları Phoenix'in yakın mesafe kitini çok kısıtlıyor.
 
 ## 6. Koçluk Satırları
 
@@ -209,6 +209,7 @@ WHY: Kenar kontrol edilmezse tahmin edemediğin bir açıdan vurulursun. Kenarı
 - **Attacker Spawn**: Saldıran spawn noktası.
 - **Ascender (Yükseltici)**: A Site'tan A Tower'a, B Main'den Mid Bend'e çıkaran dikey geçişler. Haritanın imza hareket mekaniği.
 - **Void / Uçurum**: Ağırlıkla mid'de yoğunlaşan ölüm-uçurumu. Düşersen ölürsün — kenar pozisyonlarında mesafeyi kafana koy.
+- **A Default / B Default**: Site içindeki varsayılan plant noktaları — A'da uçurumdan uzak orta zemin, B'de site ortası. Post-plant crossfire'ını bu iki noktaya göre kur; kenara dikilen spike'ı savunma tek açıdan söker, ortaya dikilen spike defuse edeni iki açının arasına sokar.
 
 **Pozisyon Kullanım Rehberi**:
 
@@ -243,7 +244,7 @@ WHY: Post-plant'in tek amacı zamanı yemek ve defuse'u engellemek. Kenarda öl�
 
 ## 9. Ekonomi Stratejileri
 
-**Operator Ekonomisi**: Op Abyss'te çok güçlü — uzun görüş hattını her yerde. Op alan oyuncu mid'e gider, takım onun etrafında round planlar. Op'u uçurumdan düşürürsen para gider, round gider. Bunu yapma.
+**Operator Ekonomisi**: Op Abyss'te çok güçlü — mid ve A'nın uzun hatları her round Op'a iş çıkarır. Op alan oyuncu mid'i tutar, takım round'u onun etrafında kurar. Peek sonrası geri çekilme yönünde zemin olsun: Op'u uçuruma düşürdüğün round hem 4.700 kredi hem round gider.
 
 **Force Buy Kararları**: Force buy'da B'ye rush at. B site kapalı — Spectre ve shotgun orada güçlü. A site'a force buy silahıyla girme, mesafe seni ezer.
 
@@ -260,7 +261,7 @@ WHY: Post-plant'in tek amacı zamanı yemek ve defuse'u engellemek. Kenarda öl�
 
 **Rakip her round mid push yapıyorsa**: Duvar çek, üstüne smoke + molly koy. Duvara rağmen push devam ederse, duvarın arkasında molly ya da yavaşlatma beklet. Mid'de stack yap, ilk push'ta öne gireni bedavaya öldür. Rakip mid'den çekinmeye başlarsa mid agresyonunu bırak.
 
-**Rakip void kenarlarını her round kullanıyorsa**: Breach molly ve stun'ını kenar pozisyonlara gönder. Rakibi kenardan at ya da geri çekilmeye zorla. Molly ve yavaşlatma ile kenar pozisyonları kapat. Tuzak ya da teli kenar geçişine dik — bilgi gelince util gönder.
+**Rakip void kenarlarını her round kullanıyorsa**: Kenar hattına molly ve yavaşlatma bas — kenarda hem zemin hem açı dar, çıkmak zorunda kalır. Kenar geçişine tel ya da tuzak dik; bilgi gelince o açıya iki kişi baksın. Hedefin düşürmek değil, kenar oyununu her round pahalıya getirmek — iki round üst üste bedeli ödeyen rakip o hattı bırakır.
 
 **Rakip her round A rush yapıyorsa**: A Main/A Security'e util dök: flash + molly + yavaşlatma. A Tower'da crossfire kur. A Main'e smoke at, push'u yavaşlat, trade al. Mid kontrolünü elinde tut — Mid'den A Link üzerinden rotate gelsin.
 

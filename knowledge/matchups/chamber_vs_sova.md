@@ -35,14 +35,14 @@ Sova'nın recon'u sen açıdan çıkmadan op pozisyonunu ele veriyor. Drone seni
 
 ## AIMLO Ne Demeli
 ### Kaybeden taraftayken
-**Chamber açığa çıkıp avlanıyorsa**: "Recon sesini duyduğun an TP'ye bas, aynı açıda kalma. Sova recon'u nereye attı değil, takımı nereye yürüyor önemli. Oradan git."
+**Chamber aynı açıda üst üste ölüyorsa (repeatedPosition, düşman kompunda Sova)**: "Aynı açıda ikinci kez düştün — Sova'nın taraması o noktayı işaretledi. Recon sesini duyduğun an TP'ye bas. Sova recon'u nereye attı değil, takımı nereye yürüyor önemli."
 
-**Sova drone kullanırken Chamber'a ölüyorsa**: "Drone'u Chamber'ın gördüğü yerden açıyorsun. Köşenin arkasına çekil, sonra drone'u uçur. Bedenin açıkta kalırsa Chamber seni drone'dan önce vurur."
+**Sova, Chamber'ın tek-atış silahına ölüyorsa (killerInfo: Operator / ağır tabanca)**: "Drone'u Chamber'ın gördüğü yerden açıyorsun — tek atış için sabit hedefsin. Köşenin arkasına çekil, sonra drone'u uçur."
 
 ### Kazanan taraftayken
-**Sova Chamber'ı köşeye sıkıştırıyorsa**: "Her recon'dan sonra takım hemen yürüsün — Chamber TP etse bile yeni açıya hazır olursunuz. Bilgiyi bayatlamadan kullan."
+**Sova, Chamber'ı köşeye sıkıştırıyorsa**: "Recon işliyor — her taramadan sonra takım hemen yürüsün, Chamber TP etse bile yeni açıya hazır olursunuz. Bilgiyi bayatlatma."
 
-**Chamber Sova'nın drone'unu avlıyorsa**: "Drone'un kalktığını gördüğün an baskıyı sürdür — Sova o an hareketsiz. O pencerede çek ya da bas."
+**Chamber, Sova'nın drone'unu avlıyorsa**: "Drone'un kalktığını gördüğün an baskıyı sürdür — Sova o sırada hareketsiz. O pencerede ya çek ya bas."
 
 ## Koç Notları
 Üst seviyede döngü tersine döner: Chamber recon gelmeden TP yapar — önceki roundların recon açısını okuyup pozisyonunu önceden değiştirir. Sova ise TP hedefini ezberleyip o noktaya peşinen dart bırakır. Kim rakibin bir sonraki hamlesini önceden okursa açıyı o kazanır. Sova için pratik kural: bir düşman düştüğünde drone'u o boşluğa sok, hasar okunu tuzağa değil TP noktasına at.

@@ -21,7 +21,7 @@ Neon sprint ve slide'la açıları geçer — durmaz, tutmaz. Chamber Op'u tek a
 **COUNTER**: Chamber Op yerine tabancaya geç — daha hızlı atış, sprint eden hedefe yetişir
 **WHY**: Sprint hızı Op'un tek atış mekaniğini boşa çıkarır
 
-**IF**: Neon site'a slide yaparak ilk Op atışını savuşturuyor
+**IF**: Neon site'a kayarak ilk Op atışını savuşturuyor
 **MEANING**: Op'un işe yaramadığı yakın mesafeye ulaştı
 **COUNTER**: Chamber tuzağını sprint yoluna koy — yakalarsa yavaşlatır, atış fırsatı açılır
 **WHY**: Slide silüeti küçültür ve hızlandırır; yakın mesafede Chamber'ın silahı yetersiz kalır
@@ -40,12 +40,12 @@ Neon sprint ve slide'la açıları geçer — durmaz, tutmaz. Chamber Op'u tek a
 
 **IF**: Chamber TP'yle Neon'un geçtiği açının arkasına çıkıyor
 **MEANING**: Neon çapraz ateşe sprint etti — iki açıyı aynı anda kapsayamaz
-**COUNTER**: Neon, entry öncesi stun'ı TP bölgesine at — Chamber TP'yi kullanırsa stun yer
+**COUNTER**: Neon, girişten önce stun'ı ışınlanma noktasına at — Chamber oraya çıkarsa stun yer
 **WHY**: TP noktası kontrol edilmezse Chamber her zaman ikinci açıyı açar
 
 ## Tekrarlayan Başarısızlık Ne Anlama Gelir
 
-**Neon** sürekli Op'a ölüyorsa: düz, temiz hatlarda sprint ediyor demektir. Önce duvarı at, görüş hattını kapat, sonra geç. Ya da o açıyı geçerken slide yap — silüetin değişir, atış zorlaşır.
+**Neon** sürekli Op'a ölüyorsa: düz, temiz hatlarda sprint ediyor demektir. Önce duvarı at, görüş hattını kapat, sonra geç. Ya da o açıyı kayarak geç — silüetin değişir, atış zorlaşır.
 
 **Chamber** sürekli baskına uğruyorsa: çok yakın açılarda duruyor demektir. Neon düz hatlarda en hızlıdır — yakın mesafede TP kaçışa yetmez. Uzun hatta geç, 1 düşman düştüğünde bile aynı açıda kalma.
 
@@ -53,15 +53,15 @@ Neon sprint ve slide'la açıları geçer — durmaz, tutmaz. Chamber Op'u tek a
 
 ### Kaybeden taraftaysan
 
-**Neon Op'a ölüyorsa**: "Düz hat üzerinde sprint ediyorsun, Chamber'a temiz atış veriyorsun. Önce duvarı at, görüş hattını kapat, sonra geç. Ya da geçerken slide yap — silüetin değişir, atış güçleşir."
+**Neon, Op'a ölüyorsa (killerInfo: Operator)**: "Operator seni düz hat üzerinde sprint ederken yakaladı — Chamber'a temiz atış verdin. Önce duvarı at, görüş hattını kapat, sonra geç. Ya da o açıyı kayarak geç — silüetin değişir, atış güçleşir."
 
-**Chamber Neon'a eziliyorsa**: "Çok yakın açıda duruyorsun. 1 kişi düştüğünde ya da ayak sesi yaklaştığında daha uzun hatta geç. Yakın mesafede TP kaçışa yetmez — mesafeyi sen koru."
+**Chamber aynı açıda üst üste ölüyorsa (repeatedPosition, düşman kompunda Neon)**: "İki round üst üste aynı yakın açıda düştün. İlk kill düştüğünde ya da ayak sesi yaklaştığında daha uzun hatta geç — yakın mesafede ışınlanma kaçışa yetmez, mesafeyi sen koru."
 
 ### Kazanan taraftaysan
 
 **Neon Chamber'ı geçiyorsa**: "Hızın Op'u işe yaramaz hale getiriyor. Duvarla görüş hattını kapatmaya, yakın mesafe dövüşü zorlamaya devam et — TP'ye yetişemeden bitir."
 
-**Chamber Neon'u durduruyorsa**: "Mesafe işe yarıyor. Neon entry yaptığında ya da takımı 1 kişi kaybettiğinde TP'yle boşalan açıyı kapat — aynı hat, farklı derinlik."
+**Chamber Neon'u durduruyorsa**: "Mesafe işe yarıyor. Neon içeri girdiğinde ya da takımı bir kişi kaybettiğinde ışınlanmayla boşalan açıyı kapat — aynı hat, farklı derinlik."
 
 ## Koç Notları
 

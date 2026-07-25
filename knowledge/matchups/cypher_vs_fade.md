@@ -35,12 +35,12 @@ Cypher teli ve kamerayla düşmanın yerini öğrenir — yetenek harcamadan, pa
 
 ## AIMLO Ne Demeli
 ### Kaybeden taraftayken
-**Cypher her round işaretlenip ölüyorsa**: "Recon seni hep aynı köşede yakalıyor. Gözü gördüğün an silahla kır ya da görüş hattından çık. Telin ve kameran işaretlenmez — sen yer değiştir, kurulum çalışmaya devam etsin."
+**Cypher aynı köşede üst üste ölüyorsa (repeatedPosition, düşman kompunda Fade)**: "Tarama seni hep aynı köşede yakalıyor. Gözü gördüğün an silahla kır ya da görüş hattından çık. Telin ve kameran işaretlenmez — sen yer değiştir, kurulum çalışmaya devam etsin."
 
-**Fade botları boşa gidiyorsa**: "Botu kör gönderiyorsun. Önce recon at, iz aldığın hedefe sür."
+**Fade botu boşa gidiyorsa**: "Botu kör gönderiyorsun. Önce tarama at, iz aldığın hedefe sür — izsiz bot sadece ses verir."
 
 ### Kazanan taraftayken
-**Fade Cypher'ı buluyorsa**: "Recon açın işliyor — Cypher köşesini değiştirmiyorsa her round aynı yerden işaretleyip üstüne oyna."
+**Fade, Cypher'ı aynı noktada buluyorsa (repeatedPosition)**: "Tarama açın işliyor — Cypher köşesini değiştirmediği sürece her round aynı yerden işaretleyip üstüne oyna."
 
 **Cypher Fade'e yetenek yaktırıyorsa**: "Gözü kırıyorsun, smoke recon açısını kapıyor — Fade her round harcıyor, sen harcamıyorsun. Bunu bozma."
 

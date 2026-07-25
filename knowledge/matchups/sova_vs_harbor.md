@@ -50,9 +50,9 @@ Sova'nın recon'u ve drone'u, Harbor'ın su duvarlarını her durumda kapatamaz.
 ## AIMLO Ne Demeli
 
 ### Kaybeden taraftaysan
-**Sova bilgisi Harbor tarafından kesilmiş**: "Dart atıyorsun ama duvar araya giriyor. Drone'u duvarın üstünden uçur ve arkasını tara. Ya da dart'ı duvarın üst köşesinden zıplat — dart geçer, tarama başlar. Duvar kapanır kapanmaz dart at, bekleme."
+**Sova, Harbor'lı kompta bilgisiz kalıp aynı hatta ölüyorsa (repeatedPosition, düşman kompunda Harbor)**: "Dart atıyorsun ama duvar araya giriyor, sen de aynı hatta körlemesine giriyorsun. Drone'u duvarın üstünden uçur ve arkasını tara; ya da dart'ı duvarın üst köşesinden zıplat. Duvar kapanır kapanmaz dart at, bekleme."
 
-**Harbor duvarları Sova tarafından atlatılıyor**: "Drone üstünden geçiyor, dart köşeden zıplıyor. Dart sesini duyar duymaz duvarı araya sok. Hasar oku açıları için korunma kubbesini takımının bilinen lineup noktalarına önceden koy — execute başladığında değil."
+**Harbor duvarları Sova tarafından atlatılıyorsa (düşman kompunda Sova)**: "Drone üstünden geçiyor, dart köşeden zıplıyor. Dart sesini duyar duymaz duvarı araya sok. Kubbeyi takımının bilinen hasar-oku noktalarına önceden koy — giriş başladığında değil."
 
 ### Kazanan taraftaysan
 **Sova Harbor'ın savunmasını tarıyorsa**: "Drone duvarların üstünden geçiyor. Dart sesini molly ya da flash sesiyle örttür — Harbor duvar çekme penceresini kaçırır. Aynı düzeni koru ama açını round round değiştir."

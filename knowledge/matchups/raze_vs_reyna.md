@@ -26,7 +26,7 @@ Raze, her haritada. Reyna sadece takım dağınık oynayınca tehlikelidir — h
 ---
 
 **IF** Reyna birini öldürdü ve heal veya kaçış seçecek
-**MEANING** Düşmanı öldürünce ruh düşer. Kaçışı seçerse görünmez olup bölgeden sıyrılır, heal'i seçerse can toplamaya başlar
+**MEANING** Düşmanı öldürünce ruh düşer. Kaçışı seçerse kısa bir dokunulmazlık penceresiyle bölgeden sıyrılır, heal'i seçerse ruhu yiyip toparlanır
 **COUNTER** Heal seçtiyse molly'ni bulunduğu zemine at — alan içinde canı dolmaz, ya çıkar ya erir. Kaçışı seçtiyse sesine kulak ver, yön belli olur. Botu sür, ses takip ediyor
 **WHY** Reyna her öldürmeden sonra bir karar verir ve o karar penceresinde düelloya hazır değil. O pencerede baskı Reyna'yı yanlış seçime zorlar.
 
@@ -49,14 +49,14 @@ Raze, her haritada. Reyna sadece takım dağınık oynayınca tehlikelidir — h
 **IF** Sıçrama ile tepeden iniyorsun, Reyna yerde duruyor
 **MEANING** Yukarıdan geliyorsun, Reyna'nın yere bakacak açısı yok
 **COUNTER** Sıçramanı geniş alanlarda değil dar koridorlarda kullan. Dar giriş Reyna'nın seni görmesini geciktirir
-**WHY** Reyna'nın kaçışı onu görünmez yapar ama hep yerde tutar. Yukarıdan gelen sıçramaya karşı kaçış işe yaramaz — kaçacak yer yok.
+**WHY** Reyna'nın kaçışı onu kısa süre dokunulmaz yapar ama hep yerde tutar. Yukarıdan gelen sıçramaya karşı kaçış sadece zaman kazandırır — dikey açıyı kapatamaz.
 
 ---
 
-**IF** Reyna öldürdü, kaçışla görünmez oldu
+**IF** Reyna öldürdü, kaçışla sıyrıldı
 **MEANING** Reyna kaçmak için kaçış kullandı ama sesi duyuluyor ve hareketi devam ediyor
-**COUNTER** Botu sür, kaçış görünmez yapar ama bot sesle takip eder. Molly'ni geniş alana at, Reyna alanı kesmek zorunda
-**WHY** Kaçış görünmezlik verir ama dokunulmazlık değil. Hasar alır, ses çıkarır. Bot bu durumda doğru karşılık.
+**COUNTER** Botu sür — kaçış penceresinde hasar geçmez ama bot sesle takip eder, pencere kapandığı an üstündedir. Molly'ni geniş alana at, Reyna kaçış bitince o alanı kesmek zorunda kalsın
+**WHY** Kaçış penceresi Reyna'yı kısa süre dokunulmaz yapar — o an ne kurşun ne patlama işler; görünmez DEĞİLDİR (görünmezlik sadece ult açıkken gelir) ve ses çıkarır. Pencere kapanmadan hasar vermeye çalışma: sesten yönünü oku, botu pencerenin biteceği noktaya sür.
 
 ---
 
@@ -69,11 +69,11 @@ Raze, her haritada. Reyna sadece takım dağınık oynayınca tehlikelidir — h
 
 Raze'ın elinde dört şey var: bot köşe tarar, sıçrama iki kez atlatır, molly alana hasar basar, ult roketi öldürür. Kimseyi öldürmesen bile hepsi çalışır — util yenilendikçe tekrar kullanırsın.
 
-Reyna'nın elinde ise şunlar var: kör etme küresi yakın görüşü siler (vurulup kırılabilir, duvardan geçer), heal ruhla can toplar, kaçış ruhla görünmez yapar, ult ateş hızını açar. Öldürmeden heal ve kaçış yok. Öldürmeyen Reyna elinde sadece küreyle kalır.
+Reyna'nın elinde ise şunlar var: kör etme küresi yakın görüşü siler (vurulup kırılabilir, duvardan geçer), heal ruhla toparlar, kaçış ruhla kısa süre dokunulmaz yapar (görünmezlik sadece ult açıkken gelir), ult ateş hızını açar. Öldürmeden heal ve kaçış yok. Öldürmeyen Reyna elinde sadece küreyle kalır.
 
 Bu fark senin için şu anlama gelir: Reyna karşısında botunu ve molly'ni harca — Reyna bunlara karşılık verecek yeteneğe sahip değil. Reyna'nın tek silahı kör etme, sen de kapak arkası ve küreyi vurmakla cevap verirsin.
 
-Ult karşılaştırması: senin ultun geniş alan roketi, direkt hasar. Reyna'nın ultu ateş hızı ve can dolumu verir. Senin ultun bir pozisyonu temizler, Reyna'nın ultu öldürme zinciri olmadan söner. Roketi Reyna'nın tahmin ettiğin pozisyonuna at — kaçışla görünmez olsa bile alan hasarı onu vurur.
+Ult karşılaştırması: senin ultun geniş alan roketi, direkt hasar. Reyna'nın ultu ateş hızı ve can dolumu verir. Senin ultun bir pozisyonu temizler, Reyna'nın ultu öldürme zinciri olmadan söner. Roketi Reyna'nın durduğu noktaya değil, kaçışın onu bırakacağı çıkış hattına at — dokunulmazlık penceresi kapandığında alan hasarı orada olsun.
 
 ## 5. Haritaya Göre Değişim
 
@@ -99,7 +99,7 @@ Ult karşılaştırması: senin ultun geniş alan roketi, direkt hasar. Reyna'n�
 
 3. **Molly heal'i kırdı.** Reyna can toplamaya çalıştı, sen alanı yaktın. Reyna ya öldü ya kaçtı — her iki halde de pozisyon verdi.
 
-4. **Ult roketi Reyna'nın pozisyonuna gitti.** Reyna kaçışla görünmez oldu ama roket geniş alan vurur. Sesi duyuyorsan o yöne bırak — kaçış hasarı engellemez.
+4. **Ult roketi Reyna'nın pozisyonuna gitti.** Kaçış penceresi açıkken roket ona işlemez — ama pencere kısa. Roketi Reyna'nın bulunduğu noktaya değil, kaçışın biteceği çıkış hattına bırak; sesin geldiği yönü referans al.
 
 5. **Reyna kaçışı yanlış anda kullandı.** Kaçışı kaçmak yerine düello içinde kullandıysa pozisyon verdi. Botu sür, ses onu takip eder.
 

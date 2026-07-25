@@ -12,7 +12,7 @@ tags: [matchup, killjoy, chamber, sentinel_vs_sentinel]
 
 Killjoy sahayı kilitler, Chamber Op'la öldürür.
 
-Killjoy turret'ini ve botunu site içine gömer — sen uzakta durursun, düşman cihazlarına gelir. Chamber ise tuzağını ve kaçışını koş-vur-kaç için kullanır. İki sentinel aynı roldeymiş gibi görünür ama değil:
+Killjoy taretini ve botunu site içine gömer — sen uzakta durursun, düşman cihazlarına gelir. Chamber ise tuzağını ve kaçışını koş-vur-kaç için kullanır. İki sentinel aynı roldeymiş gibi görünür ama değil:
 
 - Killjoy: düşman sana gelsin, util savaşsın
 - Chamber: sen düşmana git, Op öldürsün, kaçışla geri dön
@@ -34,13 +34,13 @@ Seçimini haritaya göre yap. Chamber oynuyorsan Op ekonomisini taşımak zorund
 **IF** Chamber Op ile uzak görüş hattında agresif açı tutuyor, Killjoy site içinde kurulmuş
 **MEANING** İki sentinel farklı fazda — Chamber siteye girmeden önce öldürüyor, Killjoy site içinde bekliyor
 **COUNTER** Smoke + flash ikilisiyle Chamber'ın Op açısını kapat. Açı kapanınca Chamber ya çekilir ya kaçışını harcar — iki durumda da pozisyon kaybeder
-**WHY** Op açısı kapanan Chamber değer üretemez. Killjoy cihazları aynı kaybı yemez — turret'i başka açıya taşımak bedava
+**WHY** Op açısı kapanan Chamber değer üretemez. Killjoy cihazları aynı kaybı yemez — tareti başka açıya taşımak bedava
 
 ---
 
 **IF** Chamber kaçış noktasını her round aynı yere koyuyor
 **MEANING** Noktayı ezberledin — takım orayı açıyla tutar, Chamber teleport eder etmez ölür
-**COUNTER** Killjoy turret'ini kaçış noktasına ya da tam çıkışına dik. Chamber teleport yapar yapmaz turret vurur
+**COUNTER** Killjoy taretini kaçış noktasına ya da tam çıkışına dik. Chamber teleport yapar yapmaz taret vurur
 **WHY** Kaçış noktası sabit bir nokta. Killjoy'un cihazları sabit hedef için biçilmiş kaftan. Chamber noktayı değiştirmezse her teleport ölüm riskidir
 
 ---
@@ -54,7 +54,7 @@ Seçimini haritaya göre yap. Chamber oynuyorsan Op ekonomisini taşımak zorund
 
 **IF** Chamber tabancası (kredi harcayan atış) aktif, Killjoy eco round oynuyor
 **MEANING** Bu tabanca eco fazında güçlü — kafadan tek atış öldürür
-**COUNTER** Botunu ve turret'ini hızlı girişi kesecek pozisyona al. Chamber bu tabancayla yakına sokulmak zorunda — cihaz tetiklenirse yeri açığa çıkar
+**COUNTER** Botunu ve taretini hızlı girişi kesecek pozisyona al. Chamber bu tabancayla yakına sokulmak zorunda — cihaz tetiklenirse yeri açığa çıkar
 **WHY** Eco round'da bilgi para eder. Cihazın tetiklenmesi Chamber'ın pozisyonunu bedavaya söyler
 
 ---
@@ -66,10 +66,10 @@ Seçimini haritaya göre yap. Chamber oynuyorsan Op ekonomisini taşımak zorund
 
 ---
 
-**IF** Killjoy turret + molly + bot aynı alanı kilitledi
-**MEANING** O alana girmek için önce turret'i kırmak şart — turret gören ve vuran cihaz, Chamber içeri sokulamaz
-**COUNTER** Chamber tarafındaysan Op ile turret'i uzaktan kır. Turret kırıldıktan sonra alan savunması yarım kalır
-**WHY** Killjoy alan savunması cihaz canına dayanır. Turret kırılırsa zincir bozulur. Op bu iş için en hızlı çözüm
+**IF** Killjoy taret + molly + bot aynı alanı kilitledi
+**MEANING** O alana girmek için önce tareti kırmak şart — taret gören ve vuran cihaz, Chamber içeri sokulamaz
+**COUNTER** Chamber tarafındaysan Op ile tareti uzaktan kır. Taret kırıldıktan sonra alan savunması yarım kalır
+**WHY** Killjoy alan savunması cihaz canına dayanır. Taret kırılırsa zincir bozulur. Op bu iş için en hızlı çözüm
 
 ---
 
@@ -81,7 +81,7 @@ Seçimini haritaya göre yap. Chamber oynuyorsan Op ekonomisini taşımak zorund
 ## 4. Util Karşılaştırması
 
 **Killjoy:**
-- Turret: görür, vurur, haber verir — kırılana kadar çalışır
+- Taret: görür, vurur, haber verir — kırılana kadar çalışır
 - Bot: gizli durur, patlayınca hedefi savunmasız bırakır (aldığı hasar artar)
 - Molly: alan hasarı, post-plant için güçlü
 - Ult (alan kilidi): retake kilidi, alandakileri dondurur
@@ -95,7 +95,7 @@ Seçimini haritaya göre yap. Chamber oynuyorsan Op ekonomisini taşımak zorund
 **Kritik fark:**
 Killjoy round başı tam util ile başlar, cihazları bedelsiz döner. Chamber tabancası ve silahı için kredi harcar. Eco round'da Killjoy avantajlı, Chamber Op'suz gelir.
 
-Killjoy turret'i hem bilgi hem hasar verir — aynı cihaz iki iş yapar. Chamber tuzağı sadece bilgi, tabancası sadece hasar — ayrı ayrı işler.
+Killjoy tareti hem bilgi hem hasar verir — aynı cihaz iki iş yapar. Chamber tuzağı sadece bilgi, tabancası sadece hasar — ayrı ayrı işler.
 
 ## 5. Haritaya Göre Durum
 
@@ -106,14 +106,14 @@ Killjoy turret'i hem bilgi hem hasar verir — aynı cihaz iki iş yapar. Chambe
 
 **Killjoy oynuyorsan:**
 
-Chamber'ın kaçış noktalarını ezberle. Turret'ini o noktaya ya da hemen çıkışına dik — Chamber teleport yapar yapmaz turret devreye girer. Her round aynı yere kurma: round başı farklı noktaya geç.
+Chamber'ın kaçış noktalarını ezberle. Taretini o noktaya ya da hemen çıkışına dik — Chamber teleport yapar yapmaz taret devreye girer. Her round aynı yere kurma: round başı farklı noktaya geç.
 
 **Chamber oynuyorsan:**
 
-Killjoy'un cihaz alanını bil. Op peek'lerini turret görüşünün dışından yap. Smoke geldiyse ve açı kapandıysa Op tutma, tüfeğe geç — smoke içine Op atışı harcama. Kaçış noktanı her round aynı yere koyma: round başı bir tarafa kur, takım rotasyon yapınca noktayı taşı.
+Killjoy'un cihaz alanını bil. Op peek'lerini taret görüşünün dışından yap. Smoke geldiyse ve açı kapandıysa Op tutma, tüfeğe geç — smoke içine Op atışı harcama. Kaçış noktanı her round aynı yere koyma: round başı bir tarafa kur, takım rotasyon yapınca noktayı taşı.
 
 **Yaygın hatalar:**
 
-- Chamber kaçış noktasını round boyu sabit tutar → Killjoy turret'le pusu kurar, her teleport ölüme döner
-- Killjoy turret'ini her round aynı köşeye koyar → Chamber Op atışıyla kırar, savunma yarım kalır
+- Chamber kaçış noktasını round boyu sabit tutar → Killjoy taretle pusu kurar, her teleport ölüme döner
+- Killjoy taretini her round aynı köşeye koyar → Chamber Op atışıyla kırar, savunma yarım kalır
 - Chamber smoke içine Op atar → atış boşa gider, oysa tüfeğe geçmesi gerekirdi

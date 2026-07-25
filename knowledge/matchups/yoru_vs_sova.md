@@ -15,7 +15,7 @@ Sova keşifle oynar: dart tarar, drone işaretler, takımı senin yerini bilerek
 
 ## Sinyal-Kapılı Dersler
 
-**IF** saldırıda round'un ilk saniyelerinde öldün (side=Saldırı, deathTiming=erken) ve düşman kompunda Sova var
+**IF** saldırıda round açılışında öldün (side=Saldırı, deathTiming=erken) ve düşman kompunda Sova var
 **MEANING** Dart seni gösterdi ve hazır bekleyen düşmana girdin — sürprizin daha kapıda bitti
 **COUNTER** Dart çizgisini gördüğün an taranan alandan çık; giriş hamleni tarama bitince yap, açığa çıkmışken commit etme
 **WHY** Yoru'nun bütün değeri belirsizlikten gelir — yeri bilinen Yoru, kiti elinden alınmış bir duelist

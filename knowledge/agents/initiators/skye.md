@@ -6,10 +6,10 @@ verified: 2026-07-08
 # AJAN: Skye
 
 ## 1. Rol Kimliği
-Skye'da hem flash, hem keşif, hem de can yenileme senin elinde — bunu tek başına yapan başka ajan yok. Kuşla düşmanı kör edip takımına giriş açarsın, köpekle hem keşif yaparsın hem düşmanı sersem bırakırsın, can yenilemeyle takımı ayakta tutarsın. Ult'un en yakın düşmanlara arayıcılar gönderir; değdiği düşmanın görüşü daralır — yakını görür, uzağı göremez. Turu takımının ihtiyacına göre sen şekillendirirsin. Bilgi mi lazım? Köpeği gönder. Giriş mi lazım? Kuşu patlat. Takım yaralı mı? İyileştir. Skye oynuyorsan takımın hem gözü hem de kapısı sensin. 13.00 ile kuşun (imza yeteneğin) bekleme süresi 60'tan 50 saniyeye indi — giriş flash'ını daha sık atarsın.
+Skye'da hem flash, hem keşif, hem de iyileştirme senin elinde — bunu tek başına yapan başka ajan yok. Kuşla düşmanı kör edip takımına giriş açarsın, köpekle hem keşif yaparsın hem düşmanı sersem bırakırsın, iyileştirmeyle takımı ayakta tutarsın. Ult'un en yakın düşmanlara arayıcılar gönderir; değdiği düşmanın görüşü daralır — yakını görür, uzağı göremez. Turu takımının ihtiyacına göre sen şekillendirirsin. Bilgi mi lazım? Köpeği gönder. Giriş mi lazım? Kuşu patlat. Takım yaralı mı? İyileştir. Skye oynuyorsan takımın hem gözü hem de kapısı sensin. 13.00 ile kuşun (imza yeteneğin) bekleme süresi kısaldı — turda iki kuş planla: biri giriş flash'ı, öteki retake ya da post-plant için.
 
 ## 2. Temel Sorumluluklar
-- Kuşu, takım arkadaşın peek atmadan tam o an patlat — bir saniye erken atarsan onu kör edersin, düşmanı değil.
+- Kuşu, takım arkadaşın peek atmadan tam o an patlat — bir an erken patlatırsan onu kör edersin, düşmanı değil.
 - Push'tan önce köpeği gönder, düşmanı sersem bırak, takım o boşlukta girsin.
 - Çatışmaların arasında yaralı takım arkadaşlarını iyileştir — kimse bir sonraki dövüşe iyileşmeden girmesin.
 - Düşman sayısı belirsizse ya da geri alım yapıyorsan ult'u aç — arayıcılar en yakın düşmanlara gider, değdiğinin görüşünü daraltır.
@@ -18,11 +18,11 @@ Skye'da hem flash, hem keşif, hem de can yenileme senin elinde — bunu tek ba�
 ## 3. Sık Yapılan Hatalar
 - Kuşu yanlış yönde ya da yanlış anda patlatmak — düşmanı değil, kendi takım arkadaşını kör ediyorsun.
 - Köpeği her tur aynı yerden göndermek — düşman yolu ezberliyor, köpek gelir gelmez vuruyor.
-- Can yenilemeyi tek kişinin çiziği için harcamak — havuzu sıkı kullan, asıl dövüşe sakla.
+- İyileştirmeyi tek kişinin çiziği için harcamak — havuzu sıkı kullan, asıl dövüşe sakla.
 - Ult'u açıkta fırlatmak — arayıcılar düşmana ulaşamadan vurulup düşüyor.
 - Flash atmadan önce takıma söylememek — kimin, ne zaman peek atacağını net konuş.
 - İyileştirmeye dalıp flash ve köpeği unutmak — sen önce giriş açan ajansın, ön plandasın.
-- Kendini iyileştirmeye çalışmak — can yenilemen sana çalışmaz, sadece takım arkadaşını iyileştirir. Kendi canını pozisyonla koru.
+- İyileştirmenin sana da döneceğini sanmak — havuz yalnız takım arkadaşına çalışır. Hayatta kalmanı util sırasına bağla: kuş önde, köpek önde, gövden en son.
 - Köpeği gönderip kontrolü bırakmak — köpeği aktif sür, köşeleri tara; körlemesine ileri sürersen düşmanın yerini öğrenemezsin, sadece sersem makinesine dönüşür.
 
 ## 4. Kalıp -> Anlam
@@ -37,7 +37,7 @@ Skye'da hem flash, hem keşif, hem de can yenileme senin elinde — bunu tek ba�
 **COUNTER** Köpeği kutuların üstünden, smoke'un içinden ya da farklı bir açıdan gönder. Her tur yolu değiştir. Beklenmedik yerden gelince düşman tepki veremez.
 **WHY** Köpek sürpriz olduğunda düşman nişan alamaz. Aynı yolu tekrarlarsan düşman seni bekler, köpek hiçbir şey yapamadan düşer.
 
-**IF** Tur bitiyor ve can yenileme havuzun hâlâ dolu
+**IF** Tur bitiyor ve iyileştirme havuzun hâlâ dolu
 **MEANING** İyileştirmeyi boşuna saklıyorsun — bu koruma değil, harcanmış avantaj
 **COUNTER** Bir dövüş bitti ve 2+ kişi yaralıysa sonraki çatışmadan önce iyileştir. Ekonomi turunda bile bu geçerli — saklamak avantaj değil, kayıptır. Havuzu tur sonuna taşıma, dövüşte kullan.
 **WHY** Çatışmalar arası iyileştirme her dövüşte takımına dayanıklılık avantajı biriktirir. Saklayıp kullanmazsan takımın her dövüşe hasarını taşıyarak, iyileşmeden girer.
@@ -52,15 +52,20 @@ Skye'da hem flash, hem keşif, hem de can yenileme senin elinde — bunu tek ba�
 **COUNTER** Ult'u kapağın arkasından ya da smoke içinden aç. Arayıcıların düşmanlara ulaşması zaman alır, o sürede korunmalısın. Geri alımda ya da düşman konumu belirsizken aç.
 **WHY** Kapaktan açılan ult düşmanlara ulaşır; değdiği düşmanın görüşü daralır — yakını görür, uzağı göremez. O daralmış görüşe takım basar. Açıkta açarsan düşman, arayıcı ulaşamadan onu vurup düşürür.
 
-**IF** Kendi canın düştüğünde iyileştirme bekliyorsun ama hiçbir şey olmuyor
-**MEANING** Skye'ın can yenilemesi sadece takım arkadaşlarını iyileştirir, seni değil — kendini sayıyorsun
-**COUNTER** Can yenilemeyi takım arkadaşların için sakla, kendi canına güvenme. Sen yaralanmışsan duruşunu değiştir, kapağa çekil, dövüşü trade'e bırak. İyileştirmeyi takım arkadaşına ver, kendi HP'ni nişanla ve pozisyonla koru.
-**WHY** Skye'ın havuzu takım canıdır, senin değil. Kendini iyileştireceğini sanıp öne çıkarsan, aldığın her hasar round sonuna kadar üstünde kalır. Sen ön plandaki giriş ajanısın ama kendini iyileştirme imkânın yok — bunu pozisyonla telafi et.
+**IF** İlk temastan sonra aynı açıda kalıp iyileşmeyi bekliyorsun
+**MEANING** Skye'ın iyileştirmesi yalnız takım arkadaşına çalışır — sana dönecek bir sigorta yok, o yüzden ilk temas senin için nihai karardır
+**COUNTER** İlk kurşunu değiştikten sonra o açıda ikinci düelloyu arama: bir açı geri kay, kuşu ya da köpeği önden gönder, ikinci temasa util önde gir. İyileştirmeyi çatışma bitince takım arkadaşına ver.
+**WHY** Kendine dönmeyen bir iyileştirme, hayatta kalmanı tamamen pozisyona ve util sırasına bağlar. Aynı açıya ikinci kez gövdesiyle çıkan Skye takıma hem flash'ını hem gözünü aynı anda kaybettirir.
 
 **IF** Köpeği gönderiyorsun ama düşman pozisyonu hakkında hiçbir şey öğrenemiyorsun
 **MEANING** Köpeği körlemesine ileri sürüyorsun, sersem bırakmaya odaklanıp kontrol etmeyi bırakıyorsun
 **COUNTER** Köpeği aktif sür — köşeleri tara, açıları yokla. Köpek bir düşmana sürtündüğünde ya da vurulduğunda o temas sana düşman konumunu verir. Sersem bırakmadan önce nerede olduklarını öğren, sonra o bilgiyi takıma callout yap.
 **WHY** Köpek tek başına sersem makinesi değil, bir keşif aracıdır. Sürerken aldığı her hasar, her temas sana bir düşman konumu söyler. Sersem bırakma bonus; asıl değer turun başında nerede olduklarını öğrenmen.
+
+**IF** Ölümlerin girişte geliyor ve aynı callout round geçmişinde tekrar ediyor
+**MEANING** Flash'ı atan da ilk gövdeyi sokan da sensin — Skye girişi açar, girişi kendi yapmaz
+**COUNTER** Ölüm yerine bak: aynı yer iki round üst üste geçiyorsa o açıya bir daha gövdenle çıkma. Kuşu o açının üstünden patlat, köpeği önden sür, "flash yediler" onayını duy, sonra ikinci gövde olarak gir. Round geçmişinde tekrar eden bir yer yoksa bu dersi kurma — util sırana bak.
+**WHY** Skye düşerse takım hem flash'ını hem gözünü aynı anda kaybeder, turun kalanı körlemesine açılır. Tekrar eden ölüm yeri nişan sorunu değil, aynı açıya aynı sırayla girme sorunudur.
 
 ## 5. Saldırı Kullanımı
 - Giriş sırası: köpek önden köşeleri tarar → kuş takım arkadaşının peek'iyle aynı anda patlar → takım girer → dövüş arasında iyileştir.
@@ -85,8 +90,8 @@ Skye'da hem flash, hem keşif, hem de can yenileme senin elinde — bunu tek ba�
 
 ## 8. Eşleşme Notları
 - **Jett'e karşı**: Kuşunu Jett'e at — ya dash atar ya kör kalır. Dash attıysa kimseyi öldüremeden yeteneğini harcamış olur. İki sonuç da senin lehine.
-- **Killjoy'a karşı**: Köpekle Killjoy'un util'ini senin HP'n risk altına girmeden tetikle. Bot ve tuzağı köpekle temizle, sonra gir.
-- **Sage ile birlikte**: Senin can yenilemen + Sage'in heal'i aynı takımdaysa takımın bir türlü düşmez. Üst üste dövüşlerden ayakta çıkarsınız.
+- **Killjoy'a karşı**: Köpekle Killjoy'un util'ini gövdeni riske atmadan tetikle. Bot ve tuzağı köpekle temizle, sonra gir.
+- **Sage ile birlikte**: Senin iyileştirmen + Sage'in heal'i aynı takımdaysa takımın bir türlü düşmez. Üst üste dövüşlerden ayakta çıkarsınız.
 - **Smoke kullanan ajanla birlikte**: Smoke'un içinden flash at — neredeyse kaçınılmaz olur. Controller'ın smoke'u senin için giriş kapısıdır.
 
 ## 9. Oyuncuya Ne Söylenmeli
@@ -101,7 +106,7 @@ Skye'da hem flash, hem keşif, hem de can yenileme senin elinde — bunu tek ba�
 
 "Her tur aynı köpek yolunu kullanıyorsun, düşman önceden nişan alıyor. Farklı pozisyondan ya da smoke içinden gönder. Köpek düşmana ulaşamadan düşerse sersem bırakma da olmaz."
 
-"Kendini iyileştirmeye çalışıp öne çıkıyorsun ama can yenilemen sana çalışmaz. Sen yaralandığında geri çekil, dövüşü trade'e bırak. İyileştirmeyi takım arkadaşına ver, kendi canını pozisyonla koru."
+"İyileştirme sana dönmez, o yüzden ilk temas senin için nihai karar. Ölüm yerin round geçmişinde tekrar ediyorsa o açıya bir daha gövdenle çıkma: kuşu o açının üstünden patlat, köpeği önden sür, körlük onayı gelince ikinci gövde olarak gir. İyileştirmeyi çatışma bitince takım arkadaşına ver."
 
 "Köpeği gönderip hemen sersem bırakmaya çalışıyorsun. Önce köşeleri tara, düşmanın yerini öğren, takıma söyle. Sersem bırakma bonus; asıl iş köpekle nerede olduklarını okuman."
 

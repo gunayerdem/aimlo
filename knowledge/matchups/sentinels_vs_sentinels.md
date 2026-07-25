@@ -25,7 +25,7 @@ tags: [matchup, sentinel, mirror, role_fallback]
 
 **IF**: Rakip kompta Sage var (enemyComp)
 **MEANING**: Sage ayaktayken düşürdüğün hiçbir rakip kesin kayıp değildir — düşen oyuncu bedeninin olduğu yerde ayağa kaldırılır ve düello aynı noktada yeniden başlar.
-**COUNTER**: Rakip düşürdüğünde açıyı hemen terk etme, üstünden de körü körüne geçme: ayağa kalkma açısını bir an tut ve kalkanı orada cezalandır; geçmen gerekiyorsa eski açına cihaz bırak.
+**COUNTER**: Rakip düşürdüğünde açıyı hemen terk etme, üstünden de körü körüne geçme: ayağa kalkma açısını bir an tut ve dirileni kalkış anında düşür; geçmen gerekiyorsa eski açına cihaz bırak.
 **WHY**: Diriltme hep aynı adreste olur; o adresi tutan ya da tuzaklayan sentinel aynı düelloyu iki kez kazanır.
 
 ## Tekrarlayan Ölüm Ne Anlama Gelir

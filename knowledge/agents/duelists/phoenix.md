@@ -10,7 +10,7 @@ Phoenix kadroda tek başına entry yapabilen ajan. Flash, ateş duvarı ve molly
 
 Takımda flash yoksa ya da uzun süre hayatta kalıp dövüşmek istiyorsan Phoenix al. Jett'ten farkın şu: kaçışın yok, ama kendini iyileştiriyorsun.
 
-Kimliğin üç şeye dayanır: flash disiplini, kendi becerinden HP kazanmak, ult ile risk almak. Takım senden ilk teması kurmanı bekler: kendi flash'inle girersin, HP avantajıyla daha uzun dövüşürsün. Ult'u düşman yerlerini görmek ya da agresif giriş için kullanırsın — saklamazsın.
+Kimliğin üç şeye dayanır: flash disiplini, molly ile kendini toparlama, ult ile risk alma. Takım senden ilk teması kurmanı bekler: kendi flash'inle girersin, dövüşler arasında kapağın arkasında iyileşip yeniden dövüşe dönersin. Ult'u düşman yerlerini görmek ya da agresif giriş için kullanırsın — saklamazsın.
 
 ## Saldırıda Görevin
 - Flash at, körlük bitmeden swing at.
@@ -20,13 +20,13 @@ Kimliğin üç şeye dayanır: flash disiplini, kendi becerinden HP kazanmak, ul
 ## Savunmada Görevin
 - Agresif açıdan flash atıp peek kazan.
 - Push başladığında ateş duvarını kapıya koy, zaman kazan.
-- Uzun bekleme varsa molly'yi kapak arkasında kendi üstüne koy ve HP doldur.
+- Uzun bekleme varsa molly'yi kapak arkasında kendi üstüne koy ve iyileş.
 
 ## 3. Sık Yapılan Hatalar
 1. **Takım arkadaşını flash'lemek** — Flash köşeyi döner, geniş bir alanı körleştirir. Atmadan önce takımının nerede olduğunu bil. Yönü sesle söyle: "sağ flash."
 2. **Ult'u pasif kullanmak** — Ult açıkken temkinli oynuyorsan ult'un amacını boşa harcıyorsun. Ult aktifken en geniş swing'i, en derin girişi yap.
 3. **Açıkta molly içinde iyileşmek** — Önce kapağın arkasına geç, sonra molly'yi koy. Açıkta dururken molly içinde iyileşiyorsan düşmana bedava kafadan vurma şansı veriyorsun.
-4. **Ateş duvarını sadece iyileşmek için harcamak** — Duvarın asıl işi görüş hattını kesmek. İçinde oturup HP doldurmak için yakıyorsan büyük değer kaybediyorsun.
+4. **Ateş duvarını sadece iyileşmek için harcamak** — Duvarın asıl işi görüş hattını kesmek. İçinde oturup iyileşmek için yakıyorsan büyük değer kaybediyorsun.
 5. **Flash atıp swing atmamak** — Flash'in körlük süresi kısa. Flash patlıyor, sen hâlâ bekliyorsan boşa gitti. Flash atar atmaz çık.
 6. **Her round aynı flash açısı** — Düşman hangi tarafa döneceğini öğreniyor. Sol eğri, sağ eğri, farklı köşe — karıştır.
 7. **Ult'u tehlikeli yere koymak** — Ult seni koyduğun noktaya geri döndürür. O noktayı düşman bastırdıysa, döndüğünde anında ölürsün. Ult'u temizlenmiş, kapağı olan bir yere koy.
@@ -44,10 +44,10 @@ MEANING: Ult'u koyduğun yer düşmanın bastırdığı veya tuttuğu bir nokta
 COUNTER: Ult'u kapağı olan, temizlenmiş bir yere koy. Yanında takım arkadaşın varsa daha iyi. Yoksa en azından düşmanın kolay ulaşamayacağı bir nokta seç.
 WHY: Dönüş noktan güvensizse ult'tan topladığın tüm bilgi ve öldürmeler boşa gider.
 
-IF: Hasarın yüksek ama HP'siz dövüşüyorsun
-MEANING: Dövüşler arasında molly kullanmıyorsun, her dövüşe yarı HP ile giriyorsun
-COUNTER: Her dövüşten sonra kapağın arkasına molly koy ve HP doldur. 30 HP bile sonraki düelloyu kazandırır.
-WHY: Molly'nin iyileştirmesini kullanmamak birikimli bir kayıp — her round'a biraz daha zayıf giriyorsun.
+IF: Round geçmişinde ilk düelloyu alıp aynı round içinde hemen ardından öldüğün roundlar birikiyorsa (bu bloğu yalnız ölüm yeri/round geçmişi bunu gösteriyorsa kullan)
+MEANING: Dövüşler arasında molly'yi hiç kullanmıyorsun — ilk temastan sonra kapağa çekilmeden ikinci açıyı zorluyorsun
+COUNTER: İlk dövüşü kazandığın an kapağın arkasına geç, molly'yi ayağına koy, iyileşme bitmeden çıkma. Ölüm yerini adıyla söyle (ör. "Round 4 ve 9'da Hookah'ta ilk düelloyu aldın, ikisinde de aynı açıda kaldın") ve o açıdan çekilme hattını ezberle.
+WHY: Molly'nin iyileştirmesi Phoenix'in tek toparlanma aracı; kullanmadan devam edersen kitinin yarısını hiç oynamamış olursun, üçüncü düelloda düşersin.
 
 IF: Takım arkadaşların flash yediği için şikayetçi
 MEANING: Flash yönünü söylemiyorsun ya da takımının nerede olduğuna bakmıyorsun
@@ -115,7 +115,7 @@ WHY: Phoenix'in tek molly'si var; her round'u iyileşmeye harcarsan post-plant't
 - Market'te iki açıdan (Boba + site içi) crossfire yersin — ateş duvarıyla birini kes, kalan açıya flash at; Market'te bekleme, karar ver ve geç.
 - Ateş duvarını B Main'in düz hattına koy — savunucu koridorun sonunu tutar, duvar o tek açıyı kapatınca giriş güvenli geçişe döner.
 
-**Karar notu (radiant):** Phoenix dar koridorlarda ve tek-açı geçişlerde parlar; geniş açık alanda silikleşir. Bu yüzden haritayı seçemezsin ama nereden gireceğini seçebilirsin: aynı haritada bile dar bir giriş hattı (B Main, Hookah, daracık bir geçit) seç, geniş açık peek'ten kaçın. Flash'in körlüğü kısa — körleşen düşmanla aranda 1-2 metrelik dövüş mesafesi olmalı ki körlük penceresinde temas kurabilesin. Uzun mesafede flash patlar, sen yetişemeden düşman görüşünü toplar. Ateş duvarı bir bütçedir: turun başında "duvarı görüş kesmeye mi, post-plant alan reddetmeye mi saklıyorum" diye karar ver, ortada harcama.
+**Karar notu:** Phoenix dar koridorlarda ve tek-açı geçişlerde parlar; geniş açık alanda silikleşir. Bu yüzden haritayı seçemezsin ama nereden gireceğini seçebilirsin: aynı haritada bile dar bir giriş hattı (B Main, Hookah, daracık bir geçit) seç, geniş açık peek'ten kaçın. Flash'in körlüğü kısa — körlenen düşmanla aranda yakın-orta dövüş mesafesi olmalı ki körlük penceresi kapanmadan temas kurabilesin. Uzun mesafede flash patlar, sen yetişemeden düşman görüşünü toplar. Ateş duvarı bir bütçedir: turun başında "duvarı görüş kesmeye mi, post-plant alan reddetmeye mi saklıyorum" diye karar ver, ortada harcama.
 
 ## 6. Eşleşme Notları
 **Zorlandığın ajanlar:**
@@ -125,12 +125,12 @@ WHY: Phoenix'in tek molly'si var; her round'u iyileşmeye harcarsan post-plant't
 
 **Baskıladığın ajanlar:**
 - **Cypher:** Tellerini flash ile geç, tuzaklar seni durduramaz.
-- **Sage:** Buz duvarını ateş duvarın yıkamaz (engellere yarı hasar verir, segment canı yüksek), ama flash'inle buz duvarının kenarından peek alırsın — sen flash atıp swing atarken o duvar kuruyor, görüşü kapatamaz.
+- **Sage:** Ateş duvarın buz duvarı yıkmaya yetmez — süresi dolar, duvar ayakta kalır; onu kırmak takımın mermisinin işi. Ama duvar kurulurken görüş hâlâ açıktır: flash'ini duvarın kenarına at, kurulma bitmeden peek'i sen al.
 - Sabit pozisyon tutan her ajan — flash onları açıdan çıkmaya zorlar.
 
 ## 7. Oyuncuya Ne Söylenmeli
 ### İyi oynarken
-**Oyuncu aksiyonu:** Her flash'ten hemen sonra swing atıyorsun, her round sol-sağ eğriyi değiştiriyorsun, dövüş aralarında molly ile HP dolduruyorsun.
+**Oyuncu aksiyonu:** Her flash'ten hemen sonra swing atıyorsun, her round sol-sağ eğriyi değiştiriyorsun, dövüş aralarında kapağın arkasında molly ile iyileşiyorsun.
 
 **Düşman algısı:** Savunucular önceki round'dan hangi tarafa döneceğini tahmin etmeye çalışıyor. Eğriyi değiştirince yanlış tarafa dönüyorlar — tam körlük yiyorlar.
 
@@ -138,7 +138,7 @@ WHY: Phoenix'in tek molly'si var; her round'u iyileşmeye harcarsan post-plant't
 
 **Fırsat penceresi:** Flash patlamasıyla düşmanın görüşünün açılması arasındaki an garantili ilk atış penceresi. Eğriyi değiştirince doğru tahmin edenler bile o anı kaçırıyor.
 
-**Tekrar düzeni:** 1. round sağ eğri, hemen swing. 2. round aynı köşede sol eğri. 3. round farklı köşeden sağ eğri. Her öldürme arasında kapak arkasına molly, bir sonraki dövüşe tam HP gir. Düşman birikmiş hasarla dövüşürken sen her düelloya tam can + kalkanla giriyorsun.
+**Tekrar düzeni:** 1. round sağ eğri, hemen swing. 2. round aynı köşede sol eğri. 3. round farklı köşeden sağ eğri. Her öldürme arasında kapağın arkasına molly koy, iyileşmeyi bitirmeden çıkma. Düşman dövüşten dövüşe yıpranırken sen her düelloyu kapağın arkasında sıfırlamış olarak açıyorsun.
 
 **Düşman adaptasyonu:** 4-5 round sonra önceden arkalarını dönmeye, flash menzilinin dışına çekilmeye ya da sen flash atmadan push atmaya başlarlar.
 

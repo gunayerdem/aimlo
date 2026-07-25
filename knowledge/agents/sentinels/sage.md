@@ -9,13 +9,13 @@ verified: 2026-07-08
 Takımın tek iyileştiricisi, tek dirilticisi sensin. Değerin bilgiden ya da tuzaktan gelmiyor — takımı ayakta tutan kişi sensin. Ama bu seni pasif yapmaz. Kimi iyileştireceğin, duvarı nereye koyacağın, dirilteceğin ya da diriltmeyeceğin — bu kararlar round'u doğrudan belirler. Karar kalitesi seni iyi Sage yapar.
 
 ## 2. Temel Sorumluluklar
-- **İyileştirme:** İlk hasar alan arkadaşı değil, sıradaki dövüşe girecek arkadaşı iyileştir. HP'yi düelloyu kazanacak kişiye ver. Kendini iyileştirmek artık tam değer veriyor — dövüşe eksik canla dönme, köşe arkasında önce kendini doldur.
+- **İyileştirme:** İlk hasar alan arkadaşı değil, sıradaki dövüşe girecek arkadaşı iyileştir. İyileştirmeyi düelloyu kazanacak kişiye ver. Kendini iyileştirmek de tam değer veriyor — hasar yedikten sonra dövüşe hemen dönme, köşe arkasına geç ve iyileştirmeni bitir.
 - **Duvar:** Duvar bir görüş hattını kapatır ya da sana zaman kazandırır. Görüş hattını tam kesecek şekilde çapraz koy; hattı yarım kapatan, kestirme bırakan duvarın üstünden düşman atlar.
 - **Slow:** Düşman push'a çıktığında at. Boş alana erken atma, gelene kadar dağılır.
 - **Ult (diriltme):** Duvar ya da takım koruması yoksa diriltme. İki kişiyi kaybetmek bir kişiyi kaybetmekten kötü. Birden fazla beden varsa dövüşe en hızlı dönecek olanı dirilt: silahı değerli, konumu çatışmaya yakın beden sayıyı anında düzeltir — spawn'a düşmüş beden geç döner.
 
 ## 3. Sık Yapılan Hatalar
-- İlk hasar alan kişiyi iyileştirmek. Lurk eden adam 120 HP'de saklanıyorsa ve entry 100 HP'de dövüşe girecekse — entry'yi iyileştir.
+- İlk hasar alan kişiyi iyileştirmek. Hasar yiyen arkadaş lurk'e gidiyor ve bu round dövüşe girmeyecekse iyileştirmeyi ona harcama — sıradaki girişi kim atacaksa iyileştirme ona gider.
 - Her round aynı noktaya duvar koymak. Düşman 2-3 round sonra üstünden atlayarak ya da kırarak geçmeyi öğrenir.
 - Açık alanda diriltmek. Hem sen ölürsün hem dirilttiğin arkadaş.
 - "Uygun an bekliyorum" diye iyileştirmeyi tutmak, round biterken şarjın hâlâ doluyken.
@@ -31,7 +31,7 @@ Takımın tek iyileştiricisi, tek dirilticisi sensin. Değerin bilgiden ya da t
 **IF** Her round aynı kişiyi iyileştiriyorsan
 **MEANING** Alışkanlıkla oynuyorsun, durumu okumuyorsun.
 **COUNTER** Her dövüşten önce şunu sor: sıradaki çatışmaya kim girecek? Onu iyileştir.
-**WHY** Dövüşe girmeyecek birini iyileştirmek HP'yi çöpe atar. Dövüşecek olanı iyileştirmek o düelloyu kazandırır.
+**WHY** Dövüşe girmeyecek birini iyileştirmek şarjı çöpe atar. Dövüşecek olanı iyileştirmek o düelloyu kazandırır.
 
 **IF** Duvarın 2-3 round içinde etkisini yitiriyorsa
 **MEANING** Düşman duvar pozisyonunu ezberledi — üstünden atlıyor ya da kırıyor.
@@ -110,7 +110,7 @@ Diriltme ile duvar aynı anda siper istiyorsa sıra duruma bağlı:
 ## 7. Oyuncuya Ne Söylenmeli
 
 **İyi oynuyorsa:**
-Entry her dövüşe tam HP giriyor çünkü sen sıradaki dövüşçüyü iyileştiriyorsun. Düşman onun hasardan kaçındığını sanıyor — oysa sen her düellodan önce HP avantajı yaratıyorsun. Çapraz duvarların görüş hattını tamamen kesiyor, üstünden atlanamıyor, kırmak util istiyor. Duvar arkasında yaptığın diriltme düşmanın engelleyemeyeceği bir an açıyor.
+Entry her dövüşe iyileşmiş giriyor çünkü sen sıradaki dövüşçüyü dövüşten önce dolduruyorsun. Düşman onun hasardan kaçındığını sanıyor — oysa avantajı sen her düellodan önce kuruyorsun. Çapraz duvarların görüş hattını tamamen kesiyor, üstünden atlanamıyor, kırmak util istiyor. Duvar arkasında yaptığın diriltme düşmanın engelleyemeyeceği bir an açıyor.
 
 Yap: Her round sıradaki dövüşçüyü belirle, dövüş öncesi onu iyileştir. Duvar açısını her round biraz değiştir. Diriltmeden önce mutlaka duvar koy — sırayı ters çevirme. Slow'u push gelince at, erken atma. Post-plant'te slow'u sakla: düşman spike'a yaklaşırken çevresine at — yavaşlar, ayak sesi verir, sen defuse'çuyu açından vurursun. Dirilttiğin arkadaş düşürdüğü silahı geri almış olarak kalkar; ama kalkış ânında yönü ve nişanı hazır değil — o toparlanana kadar açıyı sen tut. Silahını yerden biri kaptıysa tüfeksiz doğar, o durumda açıyı tamamen sen üstlen. Yaralı arkadaş ve beden aynı anda önündeyse önce dirilt, sonra iyileştir — diriltme takıma bir silah daha ekler; alan güvensizse sırayı ters çevir, diriltmeyi güvence kurulunca yap.
 
@@ -120,7 +120,7 @@ Düşman adapte olunca: Duvar kırmak için util getirmeye başlarlarsa — duva
 Şu an iyileştirme ve duvar birlikte çalışmıyor. Hasar alanı değil, sıradaki dövüşe girecek kişiyi iyileştir. Duvarı sadece geciktirmek için değil, görüş hattını tamamen kesmek için koy. İyileştirirken köşe arkasına geç — açıkta iyileştirmek seni bedava hedef yapar.
 
 **Tahmin edilebilirse:**
-Duvarın her round aynı yerde, düşman biliyor. Açıyı değiştir. Slow'u push'a reaktif at, boş alana erken atma. Duvarı bazı round'lar saldırıda alan açmak için kullan — sadece savunma aracın değil.
+Dersi kanıta bağla — duvarın işe yaramadığı gerçek hattı adıyla söyle: "[giriş/ölüm yeri]'ne her round aynı duvarı koyuyorsun, üstünden atlıyorlar. Bu round duvarı o hattın bir kademe içine, görüş hattını enine tam kesecek şekilde çek; slow'u aynı girişe ama push taahhüt edince at." Yer verisi yoksa nokta uydurma — dersi duvarın işlevi üzerinden ver: hattı yarım kapatan duvar üstünden atlanır, tam kesen duvar util harcatır; duvarı bazı round'lar saldırıda alan açmak için de kullan.
 
 ## 8. Bu Ajana Karşı
 - Sage'in kozu alan reddi: slow alanına bastığın an yavaşlarsın ve her adımın ses verir — yavaşken düello alma; geri çık, alan dağılana kadar bekle ya da rotanı değiştir.
@@ -128,7 +128,4 @@ Duvarın her round aynı yerde, düşman biliyor. Açıyı değiştir. Slow'u pu
 - Sage kendini ve sıradaki dövüşçüyü dövüşten önce iyileştirir — çip hasarına güvenip aynı düelloyu ikinci kez alma; ya bitir ya baştan kur. İyileştirme animasyonunda silah çekemez, o âna denk gelen peek bedavadır.
 - Sage'li takıma karşı her kill yarımdır: beden yerde kaldıkça diriltme tehdidi sürer. Bedeni gören açıyı bırakma — diriltmeye eğilen Sage animasyon boyunca kıpırdayamaz ve silah çekemez; o pencerede tek pozisyondan iki sayı alırsın.
 - Duvar arkasındaki diriltmeyi engelleyemezsin — bedenin kalktığı noktayı gören açıyı kur: diriltilen oyuncu silahıyla doğar ama kalkış ânında sana dönük değildir, ikinci sayı o pencerede senindir.
-
-## Sage'e Karşı Oynarken
-Bu bölüm düşman kompunda Sage varken geçerlidir; ayrıntılı karşı-oyun rehberi "8. Bu Ajana Karşı" bölümünde.
-- Sayı avantajını Sage ölmeden kesin sayma: Sage hayattayken üstünlüğün diriltmeyle eşitlenir — fazladan risk eklemeden önce Sage'i düşürmeyi öncele.
+- Sayı avantajını Sage ölmeden kesin sayma: Sage hayattayken üstünlüğün diriltmeyle eşitlenir — fazladan risk almadan önce Sage'i düşürmeyi öncele.

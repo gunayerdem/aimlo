@@ -70,7 +70,7 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 **IF** Defuse ediyorsun ya da retake'e geçiyorsun ama post-plant'te düşmanı tutamıyorsun
 **MEANING** Ult'unu ya da ağ tuzağını yanlış zamanda harcadın. Spike kurulduktan sonra senin en güçlü anın — elinde kapanış aracı kalmamış.
 **COUNTER** Saldırı durup spike kurulunca utility'ni post-plant için sakla. Ult'u defuse'a gelen düşmanı yakalamak için bekle, ağ tuzağını da spike'a yaklaşan ilk gövdeye at. Açık alandaki spike'ı düşman koruyamaz çünkü her yaklaşımı tutabilirsin.
-**WHY** Deadlock retake ajanı gibi düşünülmez ama post-plant'te muazzam: ağ tuzağı spike'a koşan düşmanı durdurur, ult ise tek defuser'ı garanti götürür. Bu araçları erken yakan oyuncu round'un en kritik 40 saniyesine eli boş girer.
+**WHY** Deadlock retake ajanı gibi düşünülmez ama post-plant'te muazzam: ağ tuzağı spike'a koşan düşmanı durdurur, ult ise tek defuser'ı garanti götürür. Bu araçları erken yakan oyuncu round'un en kritik anına — spike kurulduktan sonraki savunmaya — eli boş girer.
 
 ## 5. Harita Etkileşimleri
 - **Lotus**: Döner kapılar ve dar koridorlar duvar + ağ tuzağı katmanlaması için biçilmiş kaftan. A site iki dar girişle (A main ve A link) gelir — duvarı en çok basılana koy, diğerini tuzakla tut. C site'ın tek ana girişi kilitlenmeye çok uygun; duvarı oraya, tuzağı arkasına katla. Döner kapının sesini düşman kullanırsa zaten haber alırsın — tuzağı kapının ardına değil, geçişten sonraki köşeye koy.
@@ -105,7 +105,7 @@ Deadlock tek bir geçişi cehenneme çevirir. Diğer sentinel'ler utility'yi gen
 - Senin site'ından kaçınıp diğer site'ı basarlarsa: duvarı bir sonraki round oraya döndür ya da retake'e odaklan, ağ tuzağı + ult ile post-plant'i durdur.
 
 ### Zorlanıyorsa
-"Duvar yanlış girişi kapatıyor. İlk birkaç round'a bak — düşman en çok nereden geliyor? Duvarı oraya taşı. Ağ tuzağını elinde tut, düşman o yola girmeden atma."
+Dersi kanıta bağla — girişi round geçmişinden al ve adıyla söyle: "Son round'larda giriş hep [giriş adı] oldu ama duvarın [kapattığın giriş]'i kapatıyor. Bu round duvarı [giriş adı]'na taşı, hemen arkasına ses tuzağını katla; orbu kıran ses geldiği an hazır açıda bekle. Ağı elinde tut — koridora tam girdiklerini duyduğun an at, önceden değil." Elinde giriş/ölüm yeri verisi yoksa yer uydurma; dersi zamanlama üzerinden ver: ağ önceden kurulmaz, düşman koridora girerken atılır.
 
 ### Tahmin Edilebilir Olduysa
 "Düşman duvar yerlerini ezberledi, etrafından dolanıyor. Round değiştir — hangi girişi kilitlediğini değiştir. Duvarın kapamadığı yolu ağ tuzağıyla tut."

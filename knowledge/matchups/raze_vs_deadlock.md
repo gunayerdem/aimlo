@@ -12,7 +12,7 @@ tags: [matchup, raze, deadlock, duelist, sentinel]
 
 ## 1. Matchup Özü
 
-Deadlock seni durdurmak için tek bir şeye oynar: sıçramanı havada yakalamak. Ağı sıçrama sırasında seni tutarsa Raze'in hareket gücü gider, sıradan bir düelliste dönersin. Senin işin net: duvarı nade ile yık, ağın düşüş hattını oku, tuzağı patlat. Sıra bu, oyun bu.
+Deadlock seni durdurmak için tek bir şeye oynar: sıçramanı havada yakalamak. Ağı sıçrama sırasında seni tutarsa Raze'in hareket gücü gider, sıradan bir duelist'e dönersin. Senin işin net: duvarı nade ile yık, ağın düşüş hattını oku, tuzağı patlat. Sıra bu, oyun bu.
 
 ## 2. Kim Avantajlı?
 
@@ -33,9 +33,9 @@ Deadlock seni durdurmak için tek bir şeye oynar: sıçramanı havada yakalamak
 ## 3. Önemli Düellolar
 
 **IF** Deadlock duvarı geçişin önüne koydu
-**MEANING** Duvarın HP'si sınırlı — nade ile sıçrama birlikte atar, ikisi yeter
+**MEANING** Duvarın dayanıklılığı sınırlı — nade ile sıçrama patlaması birlikte atar, ikisi yeter
 **COUNTER** Duvar tam geçit ortasındaysa iki patlamayla çöker. Sen Deadlock oynuyorsan duvarı köşeye, kenara bitişik kur — Raze'in doğrudan atış hattı bulması zorlaşır
-**WHY** Duvar görüşü ve hareketi keser ama HP barı var. Raze'in iki hasarı onu eritir. Tek duvar tek round dayanmaz.
+**WHY** Duvar görüşü ve hareketi keser ama kırılabilir. Raze'in iki patlaması onu söker — tek duvar tek round dayanmaz.
 
 ---
 
@@ -48,8 +48,8 @@ Deadlock seni durdurmak için tek bir şeye oynar: sıçramanı havada yakalamak
 
 **IF** Deadlock tuzağı giriş hattında aktive oldu
 **MEANING** Sersemledin — nişanın ve animasyonun yavaşlar, nade atışın gecikir
-**COUNTER** Sessiz yürüyerek geçmeye kalkma — Raze zaten sessiz gezmez. Tuzağı nade ile patlat, geçmeden önce hattı temizle
-**WHY** Tuzak ses tabanlı — Sıçrama patlama sesini duyar, tetiklenir. Nade ile patlatmak tek atışta iki işi birden bitirir: hem patlama hem tuzağı harcatma.
+**COUNTER** Tuzak hattını iki yoldan geç: ya nade ile patlat, ya da sessiz yürüyerek kes — koşma, zıplama ve sıçrama patlaması tuzağı tetikler. Nade'in varken patlat, yoksa sessiz geç; hattı temizlemeden ilerleme
+**WHY** Tuzak ses tabanlı çalışır — sıçrama patlaması onu doğrudan uyandırır. Nade ile patlatmak tek atışta iki işi bitirir: hattı açar ve Deadlock'un tuzağını harcatır.
 
 ---
 
@@ -113,7 +113,7 @@ Ultunu daha iyi konumda patlatan round'u alır.
 
 **Dönüm 4 — Ultun duvar üstüne patladı:** Deadlock pozisyon değiştirmediyse duvar ile Deadlock aynı anda gider. Değiştirdiyse ult değer kaybeder.
 
-## 7. Radiant Seviye Notlar
+## 7. İleri Kalıplar
 
 **Deadlock oynayanın kitabı:** Araçlarını her round aynı noktaya koyma. Raze nade atış hattını bir round gördü mü, bir sonraki round duvarı başka hatta kur. Araçları site içinde dağıt — Raze'in çift hasarı bir noktayı siler, iki noktayı silemez.
 

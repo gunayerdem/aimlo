@@ -34,7 +34,7 @@ Viper duvar kurar, görüşü keser. Sova bilgi açar, pozisyonları ifşa eder.
 
 **IF** Sova recon Viper duvar hattının arkasına atıldı
 **MEANING** Recon duvar arkasını tarar, takımın ifşa olur, Sova takımı açı tutmaya geçer
-**COUNTER** Recon'u gördüğün an vur — iki mermiyle kırılır. Kıramıyorsan tarama açısının dışına, fiziksel engelin arkasına kay.
+**COUNTER** Recon'u gördüğün an vur — tek mermi yeter. Kıramıyorsan tarama açısının dışına, fiziksel engelin arkasına kay.
 **WHY** Recon görüş hattıyla tarar — arada duvar, kutu, köşe varsa seni işaretleyemez. Duvarın kendisi taramayı durdurmaz; seni kurtaran fiziksel engel ve hızlı yer değiştirme.
 
 ---
@@ -49,7 +49,7 @@ Viper duvar kurar, görüşü keser. Sova bilgi açar, pozisyonları ifşa eder.
 **IF** Viper ult açık, Sova bot ult alanına girdi
 **MEANING** Bot içeriyi tarar, Sova takımı seni önceden hedefleyebilir
 **COUNTER** Bot sesini duyduğun an tüfeğinle vur. İçerideki sis sana görüş verir, bot'u süren Sova dışarıdan reaksiyon verir — sen daha hızlısın. Bot'u vururken yer değiştir — Sova'nın gördüğü pozisyonun artık eski olur.
-**WHY** Bot iki tüfek mermisiyle düşer. Bot düşünce Sova'nın içeri bilgisi biter, kontrol senin. Bot sesinde hem vur hem kay — Sova'ya giden görüntü gerçeği yansıtmaz.
+**WHY** Bot birkaç tüfek mermisiyle düşer. Bot düşünce Sova'nın içeri bilgisi biter, kontrol senin. Bot sesinde hem vur hem kay — Sova'ya giden görüntü gerçeği yansıtmaz.
 
 ---
 
@@ -76,7 +76,7 @@ Viper duvar kurar, görüşü keser. Sova bilgi açar, pozisyonları ifşa eder.
 
 **IF** Sova recon atıldı, recon hattında ses duydun
 **MEANING** Recon ifşa etmeden önce silebilirsin
-**COUNTER** Recon'a bak, rifle ile vur — iki vuruş yeter. Recon silinirse Sova ondan bilgi alamaz.
+**COUNTER** Recon'a bak, tüfekle vur — tek mermi yeter. Recon silinirse Sova ondan bilgi alamaz.
 **WHY** Recon kırılabilir utility. Recon'u silme alışkanlığı Viper takımı için bedava bilgi engelidir — recon unutulursa Sova takımına bedava feed gider.
 
 ## 4. Utility Karşılaştırması

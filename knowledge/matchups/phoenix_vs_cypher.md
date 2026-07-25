@@ -69,7 +69,7 @@ Phoenix oynuyorsan Cypher'ın tellerini util ile temizlemek zorundasın — flas
 
 **IF** Phoenix kendi alevinin içinde iyileşiyor, Cypher kamera ile izledi
 **MEANING** Phoenix yalnız kendi ateşinin içindeyken can toplar — alev görünür, konumunu ilan eder
-**COUNTER** Kamerayı alev alanını görecek açıya kur. İyileşme alevle sınırlı — takım o alana bassın, Phoenix ya alevden çıkar ya eksik canla dövüşür.
+**COUNTER** Kamerayı alev alanını görecek açıya kur. İyileşme alevle sınırlı — takım o alana bassın, Phoenix ya alevi bırakıp kaçar ya da yerini bilen bir takımın önünde dövüşür.
 **WHY** İyileşme Phoenix'i aleve bağlar. Alevin yeri belliyse Phoenix'in yeri de belli — bilgi de fırsat da senin elinde.
 
 ---

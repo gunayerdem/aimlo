@@ -12,7 +12,7 @@ tags: [matchup, raze, viper]
 
 Viper'ın smoke yayıcısı ve duvarı vurularak ya da bombayla YIKILMAZ — Raze kurulumu sökemez. Raze'in kazanma yolu kurulumun üstünden ve zamanlamasından geçmek: sıçramayla duvarı aşmak, smoke sönünce basmak, yakıt penceresini okumak. Viper'ın kazanma yolu Raze'in her girişini hasar bölgesine sokmak. Kim karşının kaynağını (yakıt vs sıçrama/bomba) önce tüketirse kazanır.
 
-Raze oynuyorsan: duvarın ya da smoke'un içinden yürüme — diğer tarafa düşük canla, kaçış yolun kapalı çıkarsın. Duvar round başından beri açıksa yakıt bitmek üzeredir; girişini o pencereye ayarla.
+Raze oynuyorsan: duvarın ya da smoke'un içinden yürüme — diğer tarafa zehirin bedelini ödemiş ve sıçraman harcanmış halde çıkarsın. Duvar round başından beri açıksa yakıt bitmek üzeredir; girişini o pencereye ayarla.
 
 Viper oynuyorsan: duvarı sürekli açık tutma, yakıtın biter. Raze seni oyalarken yakıtın bitti mi duvarsız kalırsın — o an Raze istediği zaman girer.
 
@@ -60,9 +60,9 @@ Viper oynuyorsan: duvarı sürekli açık tutma, yakıtın biter. Raze seni oyal
 
 ## AIMLO Ne Demeli
 
-**Raze Viper'ın kurulumuna kaybediyorsa**: "Kurulumun içinden yürüyorsun. Yayıcı yıkılmaz — sıçramayla üstünden geç ya da smoke sönünce bas. Duvar uzun süredir açıksa yakıt bitmek üzere, o an gir."
+**Raze aynı zehir hattında üst üste ölüyorsa (repeatedPosition, düşman kompunda Viper)**: "Aynı hatta ikinci kez kurulumun içinden yürüdün. Yayıcı yıkılmaz — sıçramayla üstünden geç ya da smoke sönünce bas. Duvar uzun süredir açıksa yakıt bitmek üzeredir, pencere o an açılır."
 
-**Viper kurulumuna rağmen kaybediyorsa**: "Duvarı sürekli açık tutma — Raze yakıtını tüketiyor. Basmıyorken kapat, baskı gelince aç. Sıçrama iniş noktalarına molly hazırla."
+**Viper kurulumuna rağmen kaybediyorsa (düşman kompunda Raze)**: "Duvarı sürekli açık tutma — Raze basmadan yakıtın eriyor. Baskı yokken kapat, geldiğinde aç. Sıçrama iniş noktalarına molly hazırla."
 
 **Raze Viper'ı parçalıyorsa**: "Aynı düzeni koru: bot içeriden bilgi, sıçrama üstünden giriş, smoke sönünce baskı. Viper yakıtı bitene kadar oyala — pencere kendiliğinden açılıyor."
 

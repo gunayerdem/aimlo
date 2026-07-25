@@ -7,14 +7,14 @@ verified: 2026-07-08
 
 ## 1. Rol Kimliği
 
-Fade, Sova gibi lineup ezberlemez. Recon'unu atar, düşmanı ortaya çıkarır, hemen üzerine gider. Kitin tamamı tek bir döngü üzerine kurulu: gör, işaretle, üstüne git. Recon iz bırakır, bot o izi kovalar ve görüşü daraltır, sabitleme kaçış yolunu keser, ult tüm koridoru devre dışı bırakır. Sova keşif yapar ve takımın karar vermesini bekler. Fade görür ve aynı saniye dövüşe girer. Dar haritada hızlı execute oynayan bir takımdaysan, Fade tam bu iş için var. 13.00 ile recon'un (imza yeteneğin) bekleme süresi 60'tan 50 saniyeye indi — döngüyü tur içinde daha sık kurarsın.
+Fade, Sova gibi lineup ezberlemez. Recon'unu atar, düşmanı ortaya çıkarır, hemen üzerine gider. Kitin tamamı tek bir döngü üzerine kurulu: gör, işaretle, üstüne git. Recon iz bırakır, bot o izi kovalar ve görüşü daraltır, sabitleme kaçış yolunu keser, ult tüm koridoru devre dışı bırakır. Sova keşif yapar ve takımın karar vermesini bekler. Fade görür ve aynı anda dövüşe girer. Dar haritada hızlı execute oynayan bir takımdaysan, Fade tam bu iş için var. 13.00 ile recon'un (imza yeteneğin) bekleme süresi kısaldı — zinciri turda iki kez kurabilirsin: ilkini erken okumaya, ikincisini execute anına sakla.
 
 ## 2. Temel Sorumluluklar
 
 - **Recon bir ikilem aracı, tarama değil**: Recon'un işi sadece görmek değil — savunucuya imkânsız bir seçim dayatmak. Gözü vursun: o an entry yolundan bakışını çevirmek zorunda kalır. Görmezden gelsin: iz kalır, bot doğrudan pozisyonuna gider. Recon'u öyle bir yere koy ki, onu yok etmek savunucuyu entry açısından kopartsın. Duvara sektirdiğin recon, savunucuya hem zor bir açı hem de ödeme zorlayan bir karar verir.
 - **Bot üç modda çalışır**: (1) Kovalama: recon'un işaretlediği düşmana gönder, takım swing atmadan önce görüşünü daralt. En yüksek değer burada. (2) Temizleme: köşe, girinti ya da off-angle'a gönder, orada biri var mı kontrol et. Utility'siz peek atamadığın yerde kullan. (3) Keşif: koridora gönder, kilitlenme sesini dinle. Kilitleniyorsa biri var, dolanıyorsa temiz. Keşif modu en düşük değer — kovalama ya da temizleme uygunsa onu seç.
-- **Sabitleme bir hareket tuzağı, nişan bozucu değil**: Sabitleme düşmanı olduğu yere bağlar, sağırlaştırır ve canını yavaşça eritir — ama nişan almaya devam eder ve tam isabetle ateş edebilir. "Sabitlendi, rahat swing atarım" yok: geniş açıyla, trade'e hazır gir. En iyi yerler: dar açı tutan savunucu (artık jiggle yapamaz, çekilemez), spike üstü post-plant (defuse'u durdurur), choke'tan rotate etmeye çalışan oyuncu (açıkta yakalanır).
-- **Ult ekonomisi**: Ult, önüne doğru bir karanlık dalga yollar; dalganın yakaladığı düşmanları sağırlaştırır, canlarını eritir (yaklaşık 75, sonra yavaşça geri dolar) ve üstlerine takip izi bırakır. Takımın birlikte gireceği silahlı turlarda at; eko turda kullanma — düşük silahla iz ve sağırlıktan faydalanılmaz. Force-buy'da tek istisna: 75'lik can eritme, Spectre ve Marshal için düşmanı tek vuruşa getirir. Ult, müsait olduğu silahlı turda yansın — biriktirme.
+- **Sabitleme bir hareket tuzağı, nişan bozucu değil**: Sabitleme düşmanı olduğu yere bağlar, sağırlaştırır ve içinde kaldıkça zayıflatır — ama nişan almaya devam eder ve tam isabetle ateş edebilir. "Sabitlendi, rahat swing atarım" yok: geniş açıyla, trade'e hazır gir. En iyi yerler: dar açı tutan savunucu (artık jiggle yapamaz, çekilemez), spike üstü post-plant (defuse'u durdurur), choke'tan rotate etmeye çalışan oyuncu (açıkta yakalanır).
+- **Ult ekonomisi**: Ult, önüne doğru bir karanlık dalga yollar; dalganın yakaladığı düşmanları sağırlaştırır, ağır şekilde zayıflatır ve üstlerine takip izi bırakır. Takımın birlikte gireceği silahlı turlarda at; eko turda kullanma — düşük silahla iz ve sağırlıktan faydalanılmaz. Force-buy'da tek istisna: zayıflattığın düşmanı Spectre ya da Marshal tek isabette düşürür, ult bedelini o turda çıkarırsın. Ult, müsait olduğu silahlı turda yansın — biriktirme.
 - **Zincir hızı**: Recon ortaya çıkarır, bot izi kovalar, sabitleme kaçış yolunu keser, takım o kaosun içine girer. Aralara boşluk bırakırsan düşman toparlanır, zincir kırılır, her yetenek tek başına zayıf kalır (detay aşağıdaki zincir bloğunda).
 
 ## 3. Sık Yapılan Hatalar
@@ -25,7 +25,7 @@ Fade, Sova gibi lineup ezberlemez. Recon'unu atar, düşmanı ortaya çıkarır,
 - Ult'u savunmada push yavaşlatmak için yakma: bütün bir koridoru sağırlaştırıp zayıflatan bu ultu tek bir geciktirme aracı gibi kullanmak resmen israf. Ult, savunucuları zayıflatıp takımın üstlerine girmesi için var.
 - Yetenekler arasında uzun boşluk bırakma: tur başında recon, sonra çok bekleyip recon'un çoktan unutulduğu yere rastgele bot atma. O noktada düşman çoktan yeniden konumlanmıştır.
 - Recon'u çok yüksek yayla atma: gökyüzünü tarar, düşmanın durduğu yeri değil. Recon düz ya da hafif aşağı yönlü gitmeli — baş hizasından tarasın.
-- Bot bağlandıktan sonra swing atmadan bekleme: görüş daralması birkaç saniyelik bir penceredir. Bot vurduğu an gir — zayıflatma sönerse düşman tam görüşle dönmüş olur, üstüne girersen kör sandığın adam seni temiz vurur.
+- Bot bağlandıktan sonra swing atmadan bekleme: görüş daralması kısa bir penceredir. Bot vurduğu an gir — zayıflatma sönerse düşman tam görüşle dönmüş olur, üstüne girersen kör sandığın adam seni temiz vurur.
 - Sabitlemeyi takımın giriş çizgisine atma: sabitlemeyi düşmanın bastığı noktaya at, kendi swing yolunun üstüne değil — takımın giriş hattını kendi util'inle kirletme.
 
 ## 4. Kalıp -> Anlam
@@ -52,7 +52,7 @@ Fade, Sova gibi lineup ezberlemez. Recon'unu atar, düşmanı ortaya çıkarır,
 
 **IF** Ult uzun süre kullanılmadan tutuluyorsa ya da eko/save turlarında yakılıyorsa
 **MEANING** Ult ekonomin bozuk: ya solo-kurtarmaya biriktiriyorsun ya da takımın faydalanamayacağı turda harcıyorsun.
-**COUNTER** Ult'u müsait olduğun ilk silahlı turda, takım girmeden önce duvar arkasından site'a at. Eko ve save'de sakla — Classic'le koşan takıma iz ve sağırlık işe yaramaz. İstisna: Spectre'lı force-buy'da can eritme düşmanı tek vuruşa getirir, orada değer var.
+**COUNTER** Ult'u müsait olduğun ilk silahlı turda, takım girmeden önce duvar arkasından site'a at. Eko ve save'de sakla — Classic'le koşan takıma iz ve sağırlık işe yaramaz. İstisna: Spectre'lı force-buy'da zayıflattığın düşmanı tek isabette düşürürsün, orada değer var.
 **WHY** Ult'un değeri, takımın birlikte üzerine gidebildiği silahlı turlarda en yüksek. Biriktirmek de yanlış turda yakmak da en çok işe yarayacağı turları kaçırmak demek.
 
 **IF** Recon bilgi getiriyor, düşman da ölüyor ama takım site'a girmiyorsa
@@ -61,7 +61,7 @@ Fade, Sova gibi lineup ezberlemez. Recon'unu atar, düşmanı ortaya çıkarır,
 **WHY** Fade'in döngüsü takım agresyonuyla çalışır. Takip yoksa açtığın bilgi sadece düşmanı yeniden konumlandırır.
 
 **IF** Bot görüşü daraltıyor ama o anda kimse swing atmıyorsa
-**MEANING** Takım botun açtığı avantajı kullanmıyor. Görüş daralması birkaç saniye sürer — o pencerede kimse peek atmazsa yetenek hiçbir şey başaramaz.
+**MEANING** Takım botun açtığı avantajı kullanmıyor. Görüş daralması kısa bir penceredir — bot vurduğu an peek atılmazsa yetenek hiçbir şey başaramaz.
 **COUNTER** Bot bağlandığında "bot vurdu, swing atın" de. Daha iyisi: botu, bir takım arkadaşın zaten swing'in tam üstündeyken at, vuruşla aynı ana denk gelsin.
 **WHY** Görüş daralması penceresi garantili bir avantaj anıdır. O anda kimse girmezse fırsat tamamen boşa gider.
 
@@ -93,7 +93,7 @@ Fade, Sova gibi lineup ezberlemez. Recon'unu atar, düşmanı ortaya çıkarır,
 ## 5. Saldırı Kullanımı
 
 - Execute zinciri: recon savunucunun entry yolundan bakışını koparacak yere → iz çıkar çıkmaz bot → bot bağlanınca kaçış yoluna sabitleme → takım aynı anda girer. Zincir "başla" sinyalidir; takım hazır değilken başlatma.
-- Ult'u takım girmeden önce duvar arkasından site'a at — sağırlaşmış, canı erimiş savunucuların üstüne takım girsin.
+- Ult'u takım girmeden önce duvar arkasından site'a at — sağırlaşmış ve zayıflamış savunucuların üstüne takım aynı anda girsin.
 
 **IF** Sabitleme post-plant'te atılıyor ama düşman içinden defuse edebiliyorsa
 **MEANING** Sabitleme spike'ın tam üstüne değil yakınına iniyor. Düşman tuzağın dışında kalıp menzilin kenarından defuse ediyor.
@@ -111,7 +111,7 @@ Fade, Sova gibi lineup ezberlemez. Recon'unu atar, düşmanı ortaya çıkarır,
 - **Ascent (A-tier)**: A site: A main arka duvarına sektirilen recon generator arkasına düşer — heaven ya da short'tan vurmak zor ama tüm site taranır. A main'den bot, hell girintisini ve wine köşesini temizler. Standart A plant'ta sabitleme, post-plant'te heaven tutucusunu keser. B site: B main duvarı üstünden recon, market'i, şeridi ve arka-site'ı tarar. Market'ten bot, kapı arkasında güvende sanan rotate edeni yakalar. Bottom-mid'den ult, catwalk'u, market penceresini ve orta-avluyu kapatır. Uzun A-short görüş hattı savunuculara recon'u erken vurma şansı verir — sekme açısını buna göre seç.
 - **Split (A-tier)**: Dar choke'lar botu çok güçlü kılar. A main: rampadan yukarı bot, yakın açıyı tutan herkesi ya görüş daralmasını yemekle ya da site'a çekilmekle baş başa bırakır. A ramp'ta sabitleme, heaven oyuncusunu bağlar — ne aşağı atlayabilir ne geri çekilebilir; yükseklik avantajı ve kaçış yolu aynı anda ölür, takım o boşalan dikey alana girer. B site: B main'den bot yakın solu temizler. Ortadan duvar üstünden recon, B heaven'ı ve site'ı aynı anda tarar. A ya da B main'den ult, choke'u ve giriş bölgesini kapatır. Mid kontrolü Split'in kalbi: recon'u mid'den atıp savunucunun mid'i mi siteyi mi tuttuğunu erken oku, execute yönünü ona göre seç.
 - **Bind (A-tier)**: Hookah'tan recon, B site'ı, garden'ı ve arka-site'ı tarar. Hookah'tan bot güçlü bir temizleme aracı. A'da teleporter çıkışında sabitleme, gelen rotate edenleri yakalar. A short duvarı üstünden recon, lamps'ı, heaven'ı ve U-hall'u tarar. Teleporter'dan gönderilen recon varış noktasına ses uyarısı olmadan gelir — savunucu hazırlanamaz. A lobby'den duvar arkasından ult, showers'ı ve A site'ı kapatır.
-- **Haven (B-tier)**: Üç site Fade'in değerini seyreltir — hızlı rotate'ler arasında tek site'ta zincir kurmak zor. C long'dan duvar üstünden recon platformu ve arka-site'ı, A long'dan recon heaven'ı, hell'i ve site'ı tarar. A short savunucusuna sabitleme dar koridorda kilitler. Garajdan B ya da C'ye ult, Haven'ın az sayıdaki güçlü Fade ult çizgisinden biri. Sova tek pozisyondan üç siteyi tarayabildiği için burada daha fazla değer üretir.
+- **Haven (B-tier)**: Üç site Fade'in değerini seyreltir — hızlı rotate'ler arasında tek site'ta zincir kurmak zor. C long'dan duvar üstünden recon platformu ve arka-site'ı, A long'dan recon heaven'ı, hell'i ve site'ı tarar. A short savunucusuna sabitleme dar koridorda kilitler. Garajdan B ya da C'ye ult, Haven'ın az sayıdaki güçlü Fade ult çizgisinden biri. Uzun koridorlar Sova'nın menzilli taramasını ödüllendirir; senin yakın menzilli zincirin ise tek site'a bağlanmayı ister — hangi site'a gideceğine bağlanmadan önce recon'la karar ver.
 - **Lotus**: Üç siteli haritada recon her şeyden değerli — bağlanmadan önce at, hangi site kalabalık oku; boş görünen site boşaltılmıştır, hızlı bas. Botu döner kapı arkasına ve dar koridorlara sok — kapı arkasında bekleyeni gövde harcamadan açığa çıkarırsın. Sabitlemeyi B Main koridorunu tek açıdan tutan savunucuya ya da post-plant'te spike üstüne at. Ult'u A Main ya da B Main'de aç — dar hat tüm grubu yakalar; spike kurulduysa aynı ult defuse'u da keser.
 - **Sunset (A-tier)**: Kısa açılı, yakın mesafeli yapı bilgi + ceza döngünle birebir uyuşur. Recon'u Market'e ya da Mid Courtyard'a fırlat — mid'i kim tutuyorsa split kararını o bilgiyle ver. Botu dar koridora sok: B Main ve Boba'da kovalanan düşmanın kaçacak yeri yok. A Elbow bir kapan — recon o açıyı açmadan takım geçmesin. Sabitlemeyi post-plant'te spike üstüne sakla; A'da A Link, B'de Market kapısı yan açısı takım tarafından kapatılmadan siteye girme.
 - **Rotasyon dışı haritalar**: Pearl — dikey duvarlar recon sekmelerini çeşitlendirir, B main choke'ta sabitleme dar koridorda kilitler.
@@ -133,7 +133,7 @@ Fade, Sova gibi lineup ezberlemez. Recon'unu atar, düşmanı ortaya çıkarır,
 
 ### İyi performans gösterirken
 **Oyuncu Eylemi:** Recon'u bota, botu sabitlemeye ara vermeden zincirliyorsun; recon'u da savunucunun entry yolundan bakışını koparacağı yere koyuyorsun. Ult'u silahlı turlarda yakıyor, eko'larda saklıyorsun.
-**Faydalanma Penceresi:** Bot bağlandığında swing zamanı — o an garantili avantaj. Sabitleme de inmişse o savunucu bağlı hedef; yine de nişanı bozulmadığı için geniş açıyla ve trade'le gir. "Bot vurdu" anonsuyla peek aynı ana denk gelmeli, sonra değil. En keskin oyun, swing'i botun bağlanacağı saniyeye göre önceden başlatmak — zayıflatma inerken sen zaten açıdasın.
+**Faydalanma Penceresi:** Bot bağlandığında swing zamanı — o an garantili avantaj. Sabitleme de inmişse o savunucu bağlı hedef; yine de nişanı bozulmadığı için geniş açıyla ve trade'le gir. "Bot vurdu" anonsuyla peek aynı ana denk gelmeli, sonra değil. En keskin oyun, swing'i botun bağlanacağı ana göre önceden başlatmak — zayıflatma inerken sen zaten açıdasın.
 **Adaptasyon okuma:** Recon iniş noktalarını önceden nişanlamaya başlarlarsa — duvara sektirip gözün son ana kadar gizlendiği farklı açılar kullan, her tur farklı noktadan at. Sabitleme menzilinden kaçmak için derine oynamaya başlarlarsa — önce sabitlemeyi derin pozisyona at, bağlanan düşmanın üstüne recon getir. Sen zincir kurmadan erken push atarlarsa — botu görüş daralması için gönder, kör koşuculara takımca yüklen.
 
 **Zorlanırken:** Yeteneklerin bağlantısız. Recon çıkıyor, çok bekliyorsun, sonra rastgele bot geliyor. Şunu yap: recon at, iz çıkar çıkmaz bot gönder, bot bağlanır bağlanmaz kaçış yoluna sabitleme at, takım girsin. Düşman toparlanacak boşluk bulursa yeteneklerin hiçbir şey başaramaz.

@@ -51,7 +51,7 @@ Cypher kendi bölgesini kilitler. Sova o kilidi kırmaya gelir.
 **IF** Sova drone'u Cypher'ın kurduğu bölgeye girdi
 **MEANING** Sova drone görüntüsünde kamerayı, teli ve seni görüyor — takıma söylüyor
 **COUNTER** Drone'u görür görmez vur — hemen düşer. Drone'a görünmeden köşede kal, dart yeme
-**WHY** Radiant Sova'lar drone'u girişten önce yollar — önce kurulumu bulur, sonra girer. Erken vurursan bu sırayı bozarsın.
+**WHY** İyi Sova'lar drone'u girişten önce yollar — önce kurulumu bulur, sonra girer. Erken vurursan bu sırayı bozarsın.
 
 ---
 
@@ -78,7 +78,7 @@ Cypher kendi bölgesini kilitler. Sova o kilidi kırmaya gelir.
 
 **IF** Cypher kamerası köşede, Sova recon'la bulamıyor
 **MEANING** Cypher bilgi alıyor, Sova kör — bilgi savaşını Cypher kazanıyor
-**COUNTER** (Sova için) Drone yolla — recon utility'yi işaretleyemez, kurulumu sadece drone görür. Radiant Sova'lar tam bu yüzden drone'u erken yollar, girişi sonraya bırakır.
+**COUNTER** (Sova için) Drone yolla — recon utility'yi işaretleyemez, kurulumu sadece drone görür. İyi Sova'lar tam bu yüzden drone'u erken yollar, girişi sonraya bırakır.
 **WHY** Recon oyuncu işaretler, kamera görmez. Köşedeki kamera ancak drone'la bulunur.
 
 ## 4. Util Karşılaştırması
@@ -96,7 +96,7 @@ Eşleşmenin özü şu: Sova aktif olarak Cypher'ın kurduğunu bulup silmeye ç
 
 ## 6. Koç Notları
 
-**Radiant'lar bu eşleşmede ne yapar:**
-Cypher tel yerini her el döndürür — Sova'nın hasar oku ezberi o yerde değilse dart boşa gider. Radiant Sova'lar ise drone'u girişten önce yollar: önce kamerayı ve teli tespit eder, sonra girer. Sırayı bozmak istiyorsan drone'u erken vur.
+**Bu eşleşmede kazanan taraf ne yapar:**
+Cypher tel yerini her el döndürür — Sova'nın hasar oku ezberi o yerde değilse dart boşa gider. Kazanan Sova ise drone'u girişten önce yollar: önce kamerayı ve teli tespit eder, sonra girer. Sırayı bozmak istiyorsan drone'u erken vur.
 
 **Temel kural:** Cypher gizler, Sova bulur. Cypher varyasyon yapmazsa Sova ezberiyle teli siler. Sova drone'u geciktirirse Cypher kör noktayı korur. Hangisi daha az tahmin edilebilirse round onun.

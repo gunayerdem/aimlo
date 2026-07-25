@@ -41,15 +41,15 @@ Smoke perdedir, duvar değil. İçinden geçilir. Bunu ikisi de bilmeli.
 
 ### Kaybeden taraftayken
 
-**Controller duelist baskısına ölüyorsa**: "Kendi smoke'unun dibinde bekleme. Duelist içinden çıkacak ve sen tam önünde olacaksın. Smoke kenarından off-angle oyna — içinden çıkan yanlış tarafa baksın."
+**Controller kendi smoke'unun ağzında ölüyorsa (repeatedPosition + ölüm yeri = kendi smoke hattın)**: "İki round üst üste kendi dumanının dibinde düştün — duelist içinden çıkıyor ve sen tam önünde duruyorsun. Smoke kenarından off-angle oyna, içinden çıkan ters tarafa baksın."
 
-**Duelist controller yeteneklerine ölüyorsa**: "Tek başına smoke'lardan geçmeyi bırak. Adım sesi var mı? Takımın bir şey görüyor mu? Bilgi yoksa girme."
+**Duelist smoke'un içinden geçerken ölüyorsa (tradedByAlly=false)**: "Dumana tek başına girdin, trade mesafesinde kimse yoktu. Adım sesi ya da takım bilgisi olmadan içeri girme — bilgi yoksa duman perde değil, tuzak."
 
 ### Kazanan taraftayken
 
-**Controller duelisti sıkıştırıyorsa**: "Duelistin sevdiği açılar kapalı, zorlanmış hamle yapıyor. O açıları smoke'lamaya devam et — açık bıraktığında peek atar."
+**Controller duelisti sıkıştırıyorsa**: "Duelistin sevdiği açılar kapalı, zorlanmış hamle yapıyor. O açıları kapatmaya devam et — açık bıraktığın ilk round oradan peek atacak."
 
-**Duelist controller'ı eziyorsa**: "Smoke yenileme boşluğunu okuyorsun, iyi. Ama arkası temizlenmemiş yere girme — controller geri döndüğünde alan engeliyle karşılayabilir."
+**Duelist controller'ı eziyorsa**: "Smoke yenileme boşluğunu okuyorsun, iyi. Ama arkası temizlenmemiş yere girme — controller döndüğünde alan engeliyle karşılar."
 
 ## Koç Notları
 Üst seviyede smoke görüş kapatmak için değil, duelistin çıkış pozisyonunu yanlış tahmin ettirmek için konur — controller smoke kenarına off-angle yerleşir, içinden çıkan ters tarafa bakar. Avantaj, karşı tarafın pozisyon alışkanlığını daha iyi okuyana geçer. Temel ders iki taraf için de aynı: smoke perdedir, duvar değil — perdenin hangi tarafında kimin beklediğini bilen kazanır.

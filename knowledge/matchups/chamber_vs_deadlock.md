@@ -104,7 +104,7 @@ Deadlock'un yetenek seti Op alımından bağımsız çalışır. Chamber'ınki O
 ## 6. Koç Notları
 
 **Chamber oynuyorsan:**
-- Teleport anchor'ını round içinde yeniden konumlandır — iniş noktan ezberlenmesin. Deadlock ult sesini duyunca anchor'ının nerede olduğunu bil ve yakalanmadan bas.
+- Teleport anchor'ını round içinde yerini değiştir — iniş noktan ezberlenmesin. Deadlock ult sesini duyunca anchor'ının nerede olduğunu bil ve yakalanmadan bas.
 - Tuzağını teleport hattından uzağa koy — ikisi ayrı hattı tutmalı.
 - Deadlock'un duvarını round başında gör. Yanlış yöndeyse o yönden bas, doğru yöndeyse cepheden gitme.
 

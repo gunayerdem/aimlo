@@ -12,14 +12,14 @@ Vyse tuzaklarla alan kapatan bir sentinel. Killjoy hasar verip geciktirir, Cyphe
 - **Duvar Tuzağı (Q)** — 1 şarj (fiyat patch'e göre değişir). Yere gizli bir tuzak göm; düşman üstünden geçince arkasında bir duvar yükselir ve kısa süre durur. Hasar vermez — işi düşmanı bölmek, kaçışını veya geri çekilişini kesmek. Bir düşmanı içeri kapatıp ekibinden ayır, ya da push eden takımı ikiye böl.
 - **Flash Tuzağı (E)** — bedava, geri toplanabilir. Bir yüzeye gizli bir çiçek koy; tetiklediğinde ona bakan herkesi kör eder. Tuzak görünmez durur — düşman varlığını bilmez. Kullandıktan sonra geri topla, başka yere göm. Sen tetiklersin: tam peek atacağın an aç, kör düşmana çık.
 - **Diken (C)** — 2 şarj (fiyat patch'e göre değişir). Attığın yere gizli iner; tetiklendiğinde geniş bir diken alanına açılır, içinden geçen düşmana hasar verir ve yavaşlatır. Molly mantığında ama gömülü duran bir tuzak gibi — dar geçide göm, üstünden geçen yavaşlar ve hasar yer. İki şarjın var, iki ayrı giriş yolunu kapat.
-- **Ult (X)** — puan maliyeti patch'e göre değişir. Geniş bir alana metal diken yayar; içinde kalan düşmanın ana silahı kilitlenir, ateş edemez. Tabancası ve yetenekleri çalışır ama tüfek/marksman avantajı sıfırlanır. Düşmanı tabanca dövüşüne mecbur bırakırsın — siz tüfekliyken bu turu kazanırsınız.
+- **Ult (X)** — puan maliyeti patch'e göre değişir. Geniş bir alana metal diken yayar; içinde kalan düşmanın ana silahı kilitlenir, ateş edemez. Tabancası ve yetenekleri çalışır ama tüfek/marksman avantajı sıfırlanır. Düşmanı tabanca dövüşüne mecbur bırakırsın — siz tüfekliyken bu round'u kazanırsınız.
 
 ## 3. Temel Sorumluluklar
 - **İki dikeni iki ayrı giriş yoluna göm**: İkisini aynı yere koyma. Düşman geçince yavaşlar, hasar yer; sen geçtiği yolu anında bilirsin.
 - **Flash tuzağını düşmanın geçmek zorunda olduğu yere koy**: Hookah girişi, ramp, dar koridor. Tuzak gizli durur, sen tetikleyene kadar düşman görmez. Tam peek atacağın yere koy ki kör + sen açıdan çık.
 - **Duvar tuzağını kaçış/rotate hattına koy**: Düşman geçince arkasında duvar yükselir — ya içeride kapanır (ekibinden ayrı düşer) ya da geri dönemez. Bir adamı yalnız bırakıp ekibin onu temizlesin.
 - **Ult'u düşman silah avantajını kullanmadan önce aç**: Site'a tüfekle giren ya da Op tutan düşmanı kapsama al; silahı kilitlenince tabancaya düşer, siz tüfekle bastırırsınız.
-- **Flash tuzağını kullandıktan sonra geri topla**: Bedava ekstra tuzak — yerde bırakma. Tur içinde iki kez kullan: göm, tetikle, topla, başka yere göm.
+- **Flash tuzağını kullandıktan sonra geri topla**: Bedava ekstra tuzak — yerde bırakma. Round içinde iki kez kullan: göm, tetikle, topla, başka yere göm.
 - **Tuzak tetiklenince takıma söyle**: "A main'de flash attım, kör girin", "B long'da duvar diktim, ayrıldı" — bu bilgi takımın bir sonraki hamlesidir.
 
 ## 4. Sık Yapılan Hatalar
@@ -60,15 +60,15 @@ Vyse tuzaklarla alan kapatan bir sentinel. Killjoy hasar verip geciktirir, Cyphe
 **COUNTER** Tüfekle giren push'u, Op tutan açıyı veya post-plant'te defuse'a gelen tam-alımlı düşmanı kapsama al. Silah kilitlenince tabancaya düşer, siz tüfekle bastırırsınız.
 **WHY** Doğru an: düşmanın tüfeği kilitli, sizin değil — açık üstünlük. Yanlış an: kilitlenecek silah yok, ult boşa.
 
-**IF** Vyse hayattayken post-plant turları kaybediliyor
+**IF** Vyse hayattayken post-plant round'ları kaybediliyor
 **MEANING** Spike'ın çevresine tuzak konulmamış — Vyse'ın post-plant gücü dikimden önce ön yerleştirme ister
 **COUNTER** Saldırıda en az bir dikeni ve duvarı post-plant için sakla. Spike dikilmeden önce defuse açısına dikeni göm, kaçış hattına duvarı hazırla. Defuse'a gelen düşman ya dikenden geçer (yavaş + hasar, sen peek'lersin) ya da duvarla bölünür.
 **WHY** Post-plant diken: defuse'çu yavaşlar + hasar yer, sen bedava dövüş alırsın. Tuzaksız post-plant: spike savunmasız.
 
-**IF** Tuzak kurulumun her tur aynı
-**MEANING** Düşman kurulumunu ezberledi — tur başında gelip direkt temizliyor
-**COUNTER** Her tur en az bir tuzağın yerini değiştir. A main'e her tur soldan değil; bazen sağdan, bazen daha derinden. Düşman bir yeri kontrol etmeye alışınca farklı yere koy.
-**WHY** Aynı kurulum: düşman tur başında temizler, tuzak sıfır değer. Değişen kurulum: her tur yeni bir bulmaca.
+**IF** Tuzak kurulumun her round aynı
+**MEANING** Düşman kurulumunu ezberledi — round başında gelip direkt temizliyor
+**COUNTER** Her round en az bir tuzağın yerini değiştir. A main'e her round soldan değil; bazen sağdan, bazen daha derinden. Düşman bir yeri kontrol etmeye alışınca farklı yere koy.
+**WHY** Aynı kurulum: düşman round başında temizler, tuzak sıfır değer. Değişen kurulum: her round yeni bir bulmaca.
 
 **IF** Vyse sürekli kullanılmamış tuzaklarla ölüyor
 **MEANING** Dövüşe tuzak atmadan giriyorsun — tuzaksız Vyse sıradan bir ajandır
@@ -89,11 +89,12 @@ Vyse tuzaklarla alan kapatan bir sentinel. Killjoy hasar verip geciktirir, Cyphe
 - **Lotus**: Dönen kapılar ve dar B main, duvar tuzağı ve diken için biçilmiş kaftan — B main'de geçen düşman dikenden yavaşlar, arkasına duvar dikersin, geri dönemez. A main'deki dar geçit flash tuzağının garantili tetiklenmesini sağlar; tam peek hattına göm, kör girene çık. C site'ın çoklu girişleri tuzakları dağıtmayı ödüllendirir — ult'u C retake'te tüfekle giren düşmana aç, silahını kilitle.
 - **Bind**: Teleporter çıkışından çıkan düşman tuzağa düz girer — teleporter çıkışlarına diken koy, çıkar çıkmaz yavaşlasın. A short ve B long kavşaklarına duvar tuzağı, Hookah'a flash tuzağı — Hookah dar geçit, düşman tam o noktadan geçer, kör edersin. Bind'de duvar push eden ekibi A short'ta ikiye bölmek için ideal.
 - **Ascent**: A main ve A tree'ye birer tuzak, iki giriş birden kapanır. B main doğal bir diken koridoru — geçen düşman yavaşlar, sen mercato/lane açısından peek'lersin. Mid catwalk'ta flash tuzağı rotate eden düşmanı tam o anda kör eder. Ult'u A site retake'te tüfekli düşmana aç, silah avantajını al.
-- **Split**: Dar yollar düşmanı yapıların içinden geçmeye zorlar — Vyse cenneti. B heaven'dan B main'e geçişte duvar tuzağı düşmanı heaven'da kapatır, ekibinden ayırır. A ramp'ta diken push'u yavaşlatır + hasar verir, mid'den rotate gelene zaman kazandırır. Mid mail/vent dar geçidine flash, tam peek hattında.
+- **Split**: Dar yollar düşmanı yapıların içinden geçmeye zorlar — Vyse cenneti. Duvar tuzağını B Main'in site'a açıldığı boğaza göm: geçen öncünün arkasında duvar yükselir, B Main'de bekleyen ekibinden kopar, yukarıdan bakan arkadaşın onu tek başına toplar. A ramp'ta diken push'u yavaşlatır + hasar verir, mid'den rotate gelene zaman kazandırır. Mid mail/vent dar geçidine flash, tam peek hattında.
 - **Sunset**: Mid koridoru diken ve flash tuzağı için ana nokta — dar, alternatifi zayıf. A main ve B market'a birer diken; geçen yavaşlar, sen yakın açıdan çıkarsın. Mid geçişte duvar tuzağı rotate eden tek düşmanı bölmek için iyi.
 - **Summit**: Büyük haritada tuzaklarını dar noktalara böl. Flash tuzağını A Garden'a göm — site'a her giriş orayı temizlemek zorunda; sen tetikle, kör girene çık. Dikeni B Main çıkışına koy: geniş girişten dolan push yavaşlar, B Tower çaprazın toplar. Duvar tuzağını A Link ya da B Link rotasyon koridoruna göm — Mid-split'in öncüsünü ekibinden ayırırsın. Düşürülebilir duvarlar (A/Mid/B Wall) düştü mü round boyunca kapalı: kapanan rota bir giriş eksiltir, kalan tuzaklarını sağ kalan girişlere kaydır — düşen duvarın altında kalan ölür, oraya yaklaşma.
 - **Corrode**: A girişi Elbow ve Pocket temizlenmeden güvenli değil — flash tuzağını o köşelerden birine göm: temizlemeye gelen düşmanı tetikleyip kör yakalarsın. Dikeni A Main koridoruna koy; geçen yavaşlar, sen Pocket açından çıkarsın. Duvar tuzağını Mid Window rotasyon kapısına göm — rotate eden tek düşmanı bölmek için haritanın en net kavşağı. Ult'u Stairs/Top Mid hattında Op tutan düşmana sakla: ana silahı kilitlenince haritanın en uzun hattı bedava kalır.
 - **Breeze**: Rework tuzağa alan açtı — kapılar ve koridorlar senin oyunun. Flash tuzağını kapı geçişinin ardına göm: gerçek geçişte sen tetikler, kör düşmana çıkarsın; ses yemse tuzağın yerinde kalır, hiçbir şey kaybetmezsin. Dikeni dar B Main girişine koy — alternatifi Window hattı, o da smoke ister; iki yol da sana çalışır. Duvar tuzağını Elbow'a göm: Mid'den B'ye dönen öncü, arkasında yükselen duvarla ekibinden ayrılır. Nest kalıcı pozisyon değil, standart smoke'la kapanıyor — oraya tuzak yatırma, girişleri kilitle.
+- **Haven**: Üç site tuzaklarını böler — hepsine yetişmeye çalışma, tuttuğun siteyi derin kilitle. Flash tuzağını Mid Doors ya da A Short gibi alternatifi olmayan dar geçide göm, tam çıkacağın an tetikle. Dikenlerden birini Garage geçişine, diğerini C Long girişine koy: ikisinden de koşarak geçmek zorundalar, yavaşlayanı sen ya da C Link'teki arkadaşın toplar. Duvar tuzağını Mid Window–C Link rotasyon hattına göm — rotate eden ya da lurk atan tek düşman arkasında duvar bulur, ekibinden kopar. Ult'u C retake'inde tüfekle giren gruba aç: C Long'un uzun hattında ana silahı kilitlenen düşman o mesafeyi tabancayla kapatamaz.
 - **Genel kural**: Dar geçit = garantili tetikleme. Kavşak/kaçış hattı = duvarın değeri. Peek hattın = flash'ın doğru yeri. Tuzağı haritanın geometrisine göre seç, alışkanlıkla aynı yere değil.
 
 ## 7. Eşleştirme Notları
@@ -108,13 +109,13 @@ Vyse tuzaklarla alan kapatan bir sentinel. Killjoy hasar verip geciktirir, Cyphe
 ## 8. Oyuncuya Ne Söylenmeli
 
 ### İyi oynayınca
-Tuzakları 2-3 ayrı girişe yayıyorsun, flash tuzağını peek hattına koyup tam zamanında tetikliyorsun, post-plant için en az bir diken/duvar saklıyorsun. Aynen devam. Düşman bir açıyı temizleyip ikincisinde de tuzakla karşılaşınca üstünde psikolojik baskı kurarsın — aynı mantığı koru ama her tur en az bir pozisyonu değiştir. Ult'u tüfek avantajına denk getiriyorsan tam doğrusunu yapıyorsun.
+Tuzakları 2-3 ayrı girişe yayıyorsun, flash tuzağını peek hattına koyup tam zamanında tetikliyorsun, post-plant için en az bir diken/duvar saklıyorsun. Aynen devam. Düşman bir açıyı temizleyip ikincisinde de tuzakla karşılaşınca üstünde psikolojik baskı kurarsın — aynı mantığı koru ama her round en az bir pozisyonu değiştir. Ult'u tüfek avantajına denk getiriyorsan tam doğrusunu yapıyorsun.
 
 ### Zorlanınca
-Tuzakların ya fazla göze batıyor ya da kimsenin geçmediği yerlerde. Düşmanın hangi yolları kullandığına bak, tuzakları oraya kaydır. Flash'ı kendi peek hattına koy ve tam çıkacağın an tetikle — kör ile peek aynı anda olmalı. Herhangi bir açıya çıkmadan önce elindeki her şeyi at.
+Dersi kanıta bağla — düşmanın gerçekten bastığı yolu adıyla söyle: "Girişleri [giriş adı]'ndan yapıyorlar ama tuzakların başka hatta duruyor. Bu round dikeni [giriş adı]'na göm, flash tuzağını kendi peek hattına koy ve tam çıkacağın an tetikle — kör ile peek aynı anda olmalı." Giriş ya da ölüm yeri verisi yoksa yer uydurma — dersi tuzak disiplini üzerinden ver: herhangi bir açıya çıkmadan önce elindekini yerleştir, dar geçit garantili tetikleme demektir.
 
 ### Tahmin edilebilir olunca
-Düşman her tur kurulumunu önceden temizliyor. Pozisyonları değiştir. Aynı açı, farklı nokta bile yeter. Saldırıda önce post-plant dikenini ve duvarını göm — yetenek setinin post-plant'te en sert noktası orası. Sova/Fade varsa tuzakları görüş hattının dışına, kör noktaya gizle. Diken'i hem geciktirme hem peek-yemi olarak kullan: düşman yavaşlarken sen çıkarsın.
+Düşman her round kurulumunu önceden temizliyor. Pozisyonları değiştir. Aynı açı, farklı nokta bile yeter. Saldırıda önce post-plant dikenini ve duvarını göm — yetenek setinin post-plant'te en sert noktası orası. Sova/Fade varsa tuzakları görüş hattının dışına, kör noktaya gizle. Diken'i hem geciktirme hem peek-yemi olarak kullan: düşman yavaşlarken sen çıkarsın.
 
 ## 9. Bu Ajana Karşı
 - Kompta Vyse varsa dar geçitten ilk sen dalma — tuzakları gizli kurar, gözle görülmez. Girişleri önce recon/drone/patlayıcıyla tarat; taranmamış dar geçitten tek sıra geçmeyin.

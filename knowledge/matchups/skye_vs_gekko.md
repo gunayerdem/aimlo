@@ -45,7 +45,7 @@ Neden? Gekko'nun molly'si dar ve kapalı sitelerde çok daha sert çalışır. S
 
 **IF** Gekko bot ile spike'ı plant ediyor
 **MEANING** Sen öldürsen bile spike kurulur — botu o işi hallediyor. Savunma takımına baskı gecikmeli geliyor
-**COUNTER** Botu spike mesafesinin dışından vur. Yakına gidersen sesin konum verir — Gekko takımı seni duyar. Bot az HP'li, tek atımda düşer
+**COUNTER** Botu spike mesafesinin dışından vur. Yakına gidersen sesin konum verir — Gekko takımı seni duyar. Bot kırılgandır, kafaya isabette anında gider; gövdeye vuruyorsan ateşi kesme
 **WHY** Bot kırılgan ama savunma için ciddi sorun. Zamanında kesmezsen spike kurulur, retake zorlaşır
 
 ---
@@ -58,7 +58,7 @@ Neden? Gekko'nun molly'si dar ve kapalı sitelerde çok daha sert çalışır. S
 ---
 
 **IF** Gekko molly'yi spike alanına attı
-**MEANING** O bölgede duran zarar görür, defuse yapamazsın. Skye'ın iyileştirmesi molly hasarını karşılayamaz
+**MEANING** O bölgede duran zarar görür, defuse edemezsin. Skye'ın iyileştirmesi molly hasarını karşılayamaz
 **COUNTER** Skye iyileştirmesini molly bölgesinin dışında kullan. Mümkünse spike'ı farklı noktaya koy — molly hep tahmin edilen yere düşer
 **WHY** Molly post-plant silahı. Gekko onu spike kurulduktan sonra saklar — execute sırasında değil, savunma gelince atar
 
@@ -66,7 +66,7 @@ Neden? Gekko'nun molly'si dar ve kapalı sitelerde çok daha sert çalışır. S
 
 **IF** Skye ult attı, 3 yaratık takıma dağıldı
 **MEANING** Yaratık bulduğu herkese yarı-kör uyguluyor — harita genelinde baskı, takım bir anda kör kalabilir
-**COUNTER** Yaratık sesini duyar duymaz kapağa gir ve onu vur. HP'si var, öldürürsün. Açıkta bırakırsan yarı-kör kaçınılmaz
+**COUNTER** Yaratık sesini duyar duymaz kapağa gir ve onu vur — kırılabilir, birkaç mermi yeter. Açıkta bırakırsan yarı-kör kaçınılmaz
 **WHY** Skye ult'u baskı silahı. Gekko ult'u ise tek kişiyi hedef alır, tutuklayıp takıma teslim eder. Skye ult koordinasyonu bozar, Gekko ult round'u kapatır
 
 ---
@@ -151,5 +151,5 @@ Kısa kes: Gekko daha çok yaratık atar. Skye iyileştirme verir ve flash'ını
 **Gekko oynuyorsan:**
 - Molly'yi spike kurulduktan sonra at — execute'ta kullanma, post-plant için sakla
 - Uçan flash ile Skye flash'ı aynı anda havadaysa seninkini beklet, Skye'ınki bitince at — üst üste atarsan boşa gider
-- Bot ile plant yapıyorsan botun konumunu düşman görmeden ayarla — bot görünür, seni ele verir
+- Bot ile spike'ı kuruyorsan botun konumunu düşman görmeden ayarla — bot görünür, seni ele verir
 - Yaratıklarını geri topla: round uzadıkça bu avantaj büyür, unutursan boşa gider

@@ -47,10 +47,10 @@ MEANING: Raze'i entry ajanı gibi değil, geriden hasar veren bir ajan gibi oynu
 COUNTER: Util'in seni doğrudan agresif bir açılışa taşımalı. Bot at, molly at, içeri dal — sıra bu. Geriden oynamak Raze'in her yeteneğini ölü ağırlığa çevirir.
 WHY: Raze'in her yeteneği entry için tasarlandı. Pasif oynarsan kendi avantajını kendin sıfırlarsın.
 
-IF: Botu kullanmadan sık ölüyorsun
-MEANING: Bilgi almadan acele ediyorsun
-COUNTER: Her site açılışında ilk hareketin bot olsun. Öne göndermek sıfır risk, sıfır maliyet.
-WHY: Bot sana bedava bilgi verir. Düşmanın nerede durduğunu görürsen, boş alana inme riskini sıfırlarsın.
+IF: Ölüm yerin site girişi/dar boğaz ve aynı giriş round geçmişinde tekrar ediyorsa (bu bloğu yalnız ölüm yeri/round geçmişi bunu gösteriyorsa kullan)
+MEANING: O girişe util'siz dalıyorsun — savunucunun nerede durduğunu görmeden köşeye yürüyorsun
+COUNTER: Ölüm yerini adıyla söyle (ör. "Round 6 ve 10'da B Main girişinde düştün") ve sonraki round o hatta önce botu sür; bot kimi kilitlerse o noktaya molly at, sıçramayı ondan sonra bas.
+WHY: Bot bedava bilgidir ve maliyeti sıfırdır; tekrar eden bir giriş ölümünü kıran tek şey o girişi util'le açmaktır.
 
 IF: Molly'yle üst üste öldürüyorsun ama round'u yine de kaybediyorsun
 MEANING: Öldürmeler execute sırasında değil, temizlik fazında geliyor — zamanlama yanlış
@@ -121,4 +121,4 @@ WHY: Sıçrama seni mesafeden kurtarır ama kör bir köşeye atarsan tava tutul
 - Sıçramayla havadan gelir ama havadaki Raze isabetli ateş edemez — asıl tehlike indiği an. Panikle havaya sıkma; crosshair'i iniş noktasına indir, yere bastığı an vur.
 - Botu bilgi silahı: vurman pozisyonunu ele verir ve o sese molly gelir. Botu tek-iki mermiyle hızlı indir, ANINDA yer değiştir — eski pozisyonuna düşen molly boşa gider.
 - Ult roketi iz bırakır ve mesafeyi zamanla kat eder — uzaktan gördüğünde kenara çık, açık alanda bekleme. Asıl tehlike yakın mesafe: sıçramayla yaklaşmasına izin verme, mesafeyi sen tut.
-- Kiti zincirle çalışır: bot → molly → sıçrama. Zincirin ilk halkasını gördüğün an pozisyon değiştir — bot göründüyse molly yolda, molly geldiyse giriş bir sonraki saniyede; halkayı kırarsan kalan util boşa iner.
+- Kiti zincirle çalışır: bot → molly → sıçrama. Zincirin ilk halkasını gördüğün an pozisyon değiştir — bot göründüyse molly yolda, molly patladıysa giriş hemen arkasından gelir; halkayı kırarsan kalan util boşa iner.

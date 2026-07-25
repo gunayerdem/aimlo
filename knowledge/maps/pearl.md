@@ -36,7 +36,7 @@ WHY: Op'un açısını kırdığın an rifle ile yakın mesafede avantaj sana ge
 IF: B Main'de kontrolsüz geniş açıyla yükleniyorsun, aynı açıdan üst üste ölüyorsun.
 MEANING: B Main Pearl'ün en uzun görüş hatlarından biri. Geniş açıyla peek attığında bütün vücudunu savunucunun çoktan nişan aldığı noktaya servis ediyorsun.
 COUNTER: Smoke ile görüş hattını kes. Jiggle peek ile bilgi al — tam commit etme. Takım arkadaşın B Hall ya da B Link'ten baskı kurarken sen trade pozisyonu al. B Main'i tek başına contest etme.
-WHY: Uzun görüş hattında mesafe arttıkça hareketin görsel olarak yavaşlar, hedef küçülür. Smoke bu avantajı silip atar. Crossfire ise savunucuyu iki açı arasında böler — ikisine birden nişan alamaz.
+WHY: Uzun görüş hattında strafe'in savunucunun ekranında çok az piksel kat eder — önceden nişan almış crosshair'inin neredeyse hiç oynamasına gerek kalmaz, ilk kurşun garanti onun olur. Smoke bu avantajı tamamen siler. Crossfire ise savunucuyu iki açı arasında böler — ikisine birden nişan alamaz.
 
 **A Art Flank**
 IF: A Art'ı tutmadan A site'a push atıyorsun ve Art'tan flank yiyorsun.
@@ -153,7 +153,7 @@ WHY: Mid kontrolü A Link ve B Link'e erişimi belirler. Mid'i bırakırsan tek 
 - "Mid Plaza'yı kaybedince iki siteye birden split yiyorsun. Mid'i bırakma — util ile alanı kes, peek ile bilgi al."
 - "Post-plant'te açıkta durma. Pearl'de her site'in iki girişi var. Crossfire kur, savunucuyu iki açı arasına sıkıştır."
 - "Her round aynı execute'ı atıyorsan, rakip seni okumuştur. İkinci yarıda planı değiştir — aynı planı iki kez oynamak Pearl'de bedava ölüm yedirir."
-- "Retake'e aceleyle girme. Site'a util atmadan dalarsan, savunucu için bile intihar olan girişlere kendin giriyorsun."
+- "Retake'e aceleyle girme. Util atmadan site'a dalarsan post-plant'te açıyı tutan adama kendini sırayla teslim edersin. Önce smoke ya da molly, sonra birlikte gir."
 - "Savunmada her round pozisyonunu değiştir. Dugout'ta üst üste oturuyorsan, rakip bir sonraki round açını tutar."
 - "Eco round'da A Art'ta agresif Sheriff oyna. Art'ın dar yapısı one-tap'i kolaylaştırır — bu avantajı kullan."
 
@@ -170,7 +170,7 @@ WHY: Mid kontrolü A Link ve B Link'e erişimi belirler. Mid'i bırakırsan tek 
 
 **B Tarafı**
 - **B Club**: Saldırı tarafından B Main'e açılan giriş bölgesi. B rush buradan başlar.
-- **B Main**: B site'a giden ana, uzun görüş hattına sahip yol. Op'çu burayı domine eder — util atmadan geçme. B Club'tan B Site'a uzanan açık koridor.
+- **B Main**: B Club'tan B Site'a uzanan uzun ve açık koridor. Pearl'ün en sert Op hattı — smoke atmadan geniş açıyla çıkma, jiggle peek ile bilgi al.
 - **B Ramp**: B Main üzerindeki rampa/açıklık. Uzun açıları buradan tutarsın; B Main'e ve site'a bakar.
 - **B Hall**: B site girişindeki koridor. Off-angle pozisyonlar için güçlü.
 - **B Screen**: B site içindeki kapak noktası. Anchor buraya oturur.

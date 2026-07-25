@@ -28,7 +28,7 @@ verified: 2026-07-08
 5. **Smoke'u sadece kendine atmak** — Smoke'un kısa, onu takımın geçişine at. Kendini kapatmak için harcama.
 6. **Dash hazır değilken Op tutmak** — Dash'i önce aktive etmen gerekir ve harcandıktan sonra ancak iki öldürmeyle yenilenir. Hakkın hazır değilken Op açısı tutma — ıskaladığın anda ölürsün.
 7. **Plant sonrası ortada kalmak** — Spike'ı diktikten sonra zıplamayla zor temizlenen bir yere çık. Aynı açıda kalma.
-8. **Dash'i takımdan kopuk, çok erken yakmak** — Tek başına site'a dalıp ölürsen takım hâlâ dışarıda kalır ve trade gelmez. Dash'ini takım girişiyle eşle, önünde 10 metre boşluk varken tek başına dalma.
+8. **Dash'i takımdan kopuk, çok erken yakmak** — Tek başına site'a dalıp ölürsen takım hâlâ dışarıda kalır ve trade gelmez. Dash'ini takım girişiyle eşle; arkanda seni trade'leyecek kimse yokken dash'i yakma.
 9. **Op iskaladıktan sonra Op'la inatlaşmak** — İlk Op atışını kaçırdıysan rakip artık üstüne kapanıyor. Op'u indirip tabancaya/tüfeğe geç ya da dash'le açıyı tamamen terk et, aynı yerde ikinci atış kovalama.
 
 ## 4. Kalıp -> Anlam
@@ -42,10 +42,10 @@ MEANING: Entry yapmıyorsun, lurk'e kaçıyorsun
 COUNTER: İlk temasa sen geç. Lurk oynamak istiyorsan Jett'i bırak, başka ajan al.
 WHY: Jett'in tüm yetenekleri açılış için. Lurk Jett oynamak, takıma util'siz bir duelist bırakmaktır.
 
-IF: Skor tablonda öldürme çok ama ilk öldürme yok
-MEANING: Round'u sen açmıyorsun, zaten kazanılmış round'u temizliyorsun
-COUNTER: Toplam öldürmeye değil, ilk düello kazanma oranına bak. Açılışı sen yap.
-WHY: Temizlik öldürmesi round'u çevirmez. Round'u açılış öldürmesi kazandırır.
+IF: Ölümlerin round'un geç anlarında ve site içinde/arkasında toplanıyorsa, ilk temas anlarında adın geçmiyorsa (bu bloğu yalnız ölüm yeri/round geçmişi bunu gösteriyorsa kullan)
+MEANING: Round'u sen açmıyorsun; takım girdikten sonra temizliğe giriyorsun ve dash'in o noktada çoktan bitmiş oluyor
+COUNTER: Girişi ilk temasa çek: ölüm yerini adıyla söyle (ör. "Round 3 ve 7'de A Site içinde, giriş bittikten sonra öldün"), sonraki round dash'i site ağzındaki ilk açıya sakla ve takım util'i inerken ilk peek'i sen at.
+WHY: Site içinde geç alınan öldürme round'u çevirmez; açılış düellosunu kazanan Jett takıma dört kişiyle giriş açar.
 
 IF: Defansta öldürdükten sonra ölüyorsun
 MEANING: Dash'i öldürmeden önce yakmışsın ya da öldürme sonrası aynı açıda kalmışsın
@@ -65,7 +65,7 @@ WHY: Dash tek yönlü ve tek hak — yanlış yöne attıysan geri dönecek arac
 IF: Entry'de ilk öldüğünde takım da geriden trade alamıyor
 MEANING: Takımdan çok önde dash atıyorsun, arkanda kimse yok
 COUNTER: Dash'i takım arkadaşların seni trade'leyebilecek mesafedeyken at. Önce kendin değil, takımla birlikte gir.
-WHY: Entry'nin amacı sadece açmak değil, açılırken trade güvenliği bırakmak. Tek başına 10 metre önde ölürsen takım bilgi de alamaz, sayı da kaybeder.
+WHY: Entry'nin amacı sadece açmak değil, açılırken trade güvenliği bırakmak. Takımdan kopuk önde ölürsen takım bilgi de alamaz, sayı da kaybeder.
 
 IF: Op'u yakın mesafede / dar koridorda taşıyorsun ve kapışıyorsun
 MEANING: Op'u kötü mesafede kullanıyorsun, yakın dövüşte Op yavaş

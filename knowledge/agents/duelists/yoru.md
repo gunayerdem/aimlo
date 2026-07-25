@@ -37,10 +37,10 @@ MEANING: TP noktaların tahmin edilebilir ya da girmeden önce ne yapacağını 
 COUNTER: TP'yi kutunun arkasına, düşmanın dönmek zorunda olduğu köşelere göm. Girmeden önce flash'ı elinde hazır tut.
 WHY: Düşman nereye çıkacağını bilirse seni önceden nişanlar. Beklenmedik çıkış noktası tepki süresini zorlar.
 
-IF: Lurk ölüm oranı yüksek
-MEANING: Her round aynı zamanlamada lurk yapıyor, düşman kalıbı okumuş
-COUNTER: Lurk zamanlamasını değiştir. Bir round takımla oyna, lurk yapma. Düşman flank beklemeyi bıraktığında lurk yap.
-WHY: Tekrar eden zamanlama pozisyonunu düşmana bedavaya verir. Yoru'nun tek silahı olan sürpriz kalkar.
+IF: Ölümlerin takımdan uzak flank/lurk hattında ve round geçmişinde aynı bölgede tekrar ediyorsa (bu bloğu yalnız ölüm yeri/round geçmişi bunu gösteriyorsa kullan)
+MEANING: Lurk hattını ve zamanlamanı tekrar ediyorsun; düşman o hattı önceden tutmaya başlamış
+COUNTER: Ölüm yerini adıyla söyle (ör. "Round 4 ve 8'de takım A'dayken Mid'de düştün") ve sonraki round o hattı bir tur boş bırak; takımla gir, düşman flank beklemeyi bıraktığında geri dön.
+WHY: Tekrar eden lurk hattı pozisyonunu bedavaya verir; Yoru'nun tek silahı olan sürpriz kalkınca lurk sadece sayı dezavantajıdır.
 
 IF: Ult sırasında veya sonrasında öldürme çıkmıyor
 MEANING: Ult'u sadece keşif için kullanıyorsun, çıkışta flash atıp swing atmıyorsun

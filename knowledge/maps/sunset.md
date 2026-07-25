@@ -83,13 +83,13 @@ Aynı koridorda üç kişi aynı anda olmasın. Koridor = sıra, alan = dağıl.
 WHY: Dar koridorda yığılmak savunana sizi sırayla öldürtür, çünkü herkes aynı görüş hattına sırayla giriyor. Zamanlamayı ayırır ve farklı hattan biri gelirse, savunan hangi açıya döneceğini seçmek zorunda kalır.
 
 **Pattern 5: Force Round Pasif Oynama**
-IF: Force round'da Spectre/Judge alıp pasif pozisyon tutuyorsun ve round'u temas kurmadan kaybediyorsun.
+IF: Force round'da Spectre ya da Judge alıp pasif pozisyon tutuyorsun ve round'u temas kurmadan kaybediyorsun.
 MEANING: Sunset kısa görüş hattı dolu. Burası Spectre, Stinger ve shotgun'ın tam menzili. Force silahıyla pasif beklemek, haritanın sana verdiği avantajı çöpe atmak.
 COUNTER: Force round'da agresif oyna:
 - Market'e bas ya da Courtyard'a rush at.
 - Judge ya da Bucky ile Market veya Elbow köşesinde bekle — yakın mesafede one-shot potansiyelin var.
 
-Force'da Sunset'te pasif olmak, round'u baştan kaybetmek. Gerçek eco'da bu alımlar yok: Sheriff/Classic al, kalanı sakla.
+Force'da Sunset'te pasif olmak, round'u baştan kaybetmek. Gerçek eco'da bu alımlar yok: Sheriff ya da Classic al, kalanı sakla.
 WHY: Kısa mesafede pahalı silahın avantajı küçülür. Sunset'te Phantom ile Spectre arasındaki fark küçük — force burada full buy'a yaklaşır. Agresif force rakibi hazırlıksız yakalar, ekonomisini bozar. Haritanın yapısı ucuz silahları güçlendiriyor — bunu kullan.
 
 ## 4. Savunma Stratejileri — Pattern Mapping
@@ -122,7 +122,7 @@ WHY: Agresif pozisyonlar bir kez okununca seni tuzağa çeker. Rakip flash + smo
 IF: Retake'te savunanlar tek tek site'a giriyor ve sırayla ölüyor.
 MEANING: Sunset'in dar girişleri tek tek gireni bedavaya öldürtür. Hepiniz aynı görüş hattına girince, post-plant tutan rakip sizi tek tek vurur. Takım olarak hareket etmiyorsunuz.
 COUNTER: Retake'e girmeden önce toplanın ve plan yapın.
-- Biri smoke/molly ile plant bölgesini temizlerken diğeri farklı açıdan girsin.
+- Biri smoke ya da molly ile plant bölgesini temizlerken diğeri farklı açıdan girsin.
 - Flash ile girin, birlikte swing atın.
 - Retake = takım hareketi, solo değil.
 WHY: Post-plant tutan rakip açısını biliyor ve bekliyor. Tek tek giriş her seferinde aynı düelloyu tekrarlatır, rakibin avantajını katlar. Koordineli giriş, rakibin açı seçimini zorlaştırır ve trade imkânı yaratır.
@@ -146,7 +146,7 @@ WHY: Post-plant tutan rakip açısını biliyor ve bekliyor. Tek tek giriş her 
 - **Fade**: Recon'u Market ya da Courtyard'a fırlat, bot'u dar koridora sok — ısırır. Ult'u post-plant'te güçlü. Yakın mesafe yapısı Fade'in bilgi + ceza döngüsüyle birebir uyuşur.
 
 **B Tier:**
-- **Jett**: Courtyard'da agresif Op oynayabilirsin ama haritanın kısa mesafeleri hareket avantajını eritir. Dash ile Elbow'da play çıkarabilirsin ama üst tier ajanların yerini tutmaz.
+- **Jett**: Courtyard'da agresif Op oynayabilirsin ama haritanın kısa mesafeleri hareket avantajını eritir. Dash'le Elbow'da açıyı çevirip hemen çekilebilirsin ama üst tier ajanların yerini tutmaz.
 - **Sage**: Courtyard'a duvar çekerek Mid kontrolü alabilirsin, slow dar geçitte push'u yavaşlatır. Ama harita hızlı — Sage'in pasif stili burada sürekli baskı altında kalır.
 - **Viper**: Market ve Mid'e duvar çekebilirsin ama kısa görüş hattı uzun duvar avantajını boşa çıkarır. Omen kadar esnek değilsin, tek yönlü smoke'ların sınırlı noktada işe yarar.
 
@@ -154,7 +154,7 @@ WHY: Post-plant tutan rakip açısını biliyor ve bekliyor. Tek tek giriş her 
 
 - "Mid Courtyard'ı kontrol etmiyorsan haritanın yarısını rakibe veriyorsun. Bu kadar basit."
 - "A Elbow'a flash atmadan girme. Savunan orada bekliyor — orası bekleme açısı. Önce flash, sonra geç."
-- "Sunset uzun koridorların haritası değil — yakın dövüş haritası. Op alma, Spectre al."
+- "Sunset uzun koridorların haritası değil — yakın dövüş haritası. Op'u sadece A Elbow ve Mid Top için ayır; başka hatta çıkacaksan Spectre al."
 - "Aynı koridora üç kişi dolmayın. Biri Market'ten baskı yapsın, biri beklesin. Sıra değil, yayılma."
 - "A'da A Link çıkışını, B'de Market kapısını smoke'lamadan site'a girme. Açık bıraktığın yan açı ilk kurşunu atar."
 - "Force round'da köşe başında bekleme. Spectre ve Judge bu mesafelerde rifle ile boy ölçüşür. Swing at, silah çal."
@@ -173,7 +173,7 @@ WHY: Post-plant tutan rakip açısını biliyor ve bekliyor. Tek tek giriş her 
 **B Tarafı:**
 - **B Main**: B site'a giden dar koridor. Yığılırsan toplu ölürsün — dağıl, tek tek gir.
 - **B Site**: Spike plant alanı. Default plant ortadaki yapının arkası. Retake Boba ve Market hattından gelir — post-plant'te o iki hattı izle.
-- **B Market**: B site'ın yan bölgesi. Hem Mid Courtyard'dan (kırılabilir kapı üzerinden) hem Boba'dan girilir. B'ye split yapmak istiyorsan buradan basarsın.
+- **B Market**: B site'ın yan bölgesi. Hem Mid Courtyard'dan (mekanik kapı üzerinden) hem Boba'dan girilir. B'ye split yapmak istiyorsan buradan basarsın.
 - **Boba**: Savunan spawn'ından gelip Mid Top ile B Market'e ayrılan dar geçit. B'ye gelen flank ve rotasyon buradan akar.
 
 **Mid Bölgesi:**
@@ -181,7 +181,7 @@ WHY: Post-plant tutan rakip açısını biliyor ve bekliyor. Tek tek giriş her 
 - **Mid Bottom**: Savunanın mid'deki pozisyonu. Buradan kontrol kaybedersen mid çöker.
 - **Courtyard**: Mid'in açık alanı ve haritanın gerçek merkezi — A ile B arasındaki asıl bağlantı. Geniş görüş var ama her yerden vurulursun; util kullan, yoksa geçme. Burayı kim tutuyorsa split'i o yapar.
 - **Tiles**: Courtyard'dan Mid Top'a açılan ara geçiş. Mid kontrolü için Courtyard ile birlikte tutulur.
-- **B Market Kapısı**: Mid Courtyard ile B Market arasındaki tek kırılabilir/mekanik kapı — Sunset'in imza mekaniği. Saldıran kapıyı kırarak ya da açıkken geçerek Courtyard'dan B Market'e split açar; savunan kapıyı kapalı tutup bu girişi durdurur. Smoke ya da flash atmadan kırıp geçme.
+- **B Market Kapısı**: Mid Courtyard ile B Market arasındaki mekanik kapı — Sunset'in imza mekaniği. Market tarafındaki anahtarla açılıp kapanır, kapalıyken mermi geçirmez. Saldıran ya ateşle kırar (kırılınca round boyunca açık kalır, geri kapanmaz) ya da açıkken geçer; savunan anahtarı kullanıp kapatarak bu girişi keser. Kırma sesi savunanın kulağına gider: ya execute anında kır ve arkasından hemen bas, ya da hiç kırma, sesi fake olarak sakla. Kırdıktan sonra smoke ya da flash atmadan geçme — kapı ağzı tek ve dar.
 
 **Genel:**
 - **CT Spawn**: Savunmanın başladığı yer. Rotasyonunu ve retake'ini buradan organize et.
@@ -202,14 +202,14 @@ COUNTER: Plant sonrası bir oyuncuyu Market girişinde bırak. O oyuncu ölse bi
 WHY: Market hattını kapadığında savunan tek hattan gelmek zorunda kalır. Market'siz post-plant, kapısı açık bir kale savunması gibidir.
 
 **Pattern 3: Yakın Mesafe Post-Plant**
-IF: Takım uzak pozisyon arıyor, spike'i görmeden tutuyor.
+IF: Takım uzak pozisyon arıyor, spike'ı görmeden tutuyor.
 MEANING: Sunset'te uzak post-plant pozisyonu neredeyse yok. Uzak pozisyon aramak haritanın yapısına karşı oynamaktır.
-COUNTER: Yakın köşeleri tut. Spike'i görebilecek ama dar açıda kalacak noktaları seç. Off-angle kullan — retake yapan seni ilk kontrol ettiği açıda bulamasın, sen önce at.
+COUNTER: Yakın köşeleri tut. Spike'ı görebilecek ama dar açıda kalacak noktaları seç. Off-angle kullan — retake yapan seni ilk kontrol ettiği açıda bulamasın, sen önce at.
 WHY: Dar koridorlardan çıkan savunan seni aramak zorunda. Off-angle'daki oyuncu ilk açıda değildir — bu farkı sen kazanırsın.
 
 **Pattern 4: Post-Plant'te Utility Yönetimi**
 IF: Execute'ta tüm util harcandı, retake'e karşı boş elle duruyorsun.
-MEANING: Elinde hiçbir şey kalmadıysa spike'i koruyamazsın.
+MEANING: Elinde hiçbir şey kalmadıysa spike'ı koruyamazsın.
 COUNTER: Her oyuncu execute planında bir util'ini post-plant için saklasın. Controller oyuncusu son smoke'unu plant sonrasına ayırsın. Üç util'i execute'ta harca, birini tut.
 WHY: Bir smoke ya da molly, defuse'u birkaç atış süresi geciktirir. O süre round'u kazandırır.
 
@@ -219,16 +219,16 @@ WHY: Bir smoke ya da molly, defuse'u birkaç atış süresi geciktirir. O süre 
 Sunset'te açılar kısa. Bu yüzden Spectre (1600 kredi) burada rifle'a yakın iş görür. B Main, Market ve Elbow'da Spectre'nin ateş hızı seni kurtarır. Force buy'a giriyorsan ilk Spectre'ye bak.
 
 **Eco Round Planı:**
-Gerçek eco'da alım listesi kısa: Sheriff ya da Classic al, util alma, kalanı sakla. Judge/Stinger alımı force parasıdır — o plan aşağıda. Sunset'in kısa mesafeleri Sheriff'i güçlendirir, bunu şöyle kullan:
-- Sheriff/Classic ile Elbow ya da Market kapısı gibi yakın açıda tek fırsat kolla — kafadan vur, silah çal.
+Gerçek eco'da alım listesi kısa: Sheriff ya da Classic al, util alma, kalanı sakla. Judge ya da Stinger alımı force parasıdır — o plan aşağıda. Sunset'in kısa mesafeleri Sheriff'i güçlendirir, bunu şöyle kullan:
+- Sheriff ya da Classic ile Elbow ya da Market kapısı gibi yakın açıda tek fırsat kolla — kafadan vur, silah çal.
 - Takımca tek site'a gidip spike'ı dikmeye oyna — plant bonusu sonraki alımı büyütür.
 - Bu round'un işi kazanmak değil: krediyi sonraki full buy'a taşı.
 
 **Op Ekonomisi:**
-Op (4700 kredi) Sunset'te sana para kaybettirir. Mantıklı kullanım için sadece iki yer var: A Elbow ve Mid Top. Başka yerde Op alırsan parayı çöpe attın. O parayı Phantom/Vandal + full util'e ver — daha fazla kazanırsın.
+Op (4700 kredi) Sunset'te sana para kaybettirir. Mantıklı kullanım için sadece iki yer var: A Elbow ve Mid Top. Başka yerde Op alırsan parayı çöpe attın. O parayı Phantom ya da Vandal + full util'e ver — daha fazla kazanırsın.
 
 **Force Buy Stratejisi:**
-Force buy'da durma, git. B'ye rush at: Market + B Main combo. Ya da Market'ten agresif gir. Spectre'nin ateş hızı kısa mesafede rifle tutan adamı bile öldürür. Judge/Stinger force'u da bu haritada gerçek seçenek: Market veya Elbow'da Judge/Stinger ile köşe tut ya da Courtyard'a Stinger ile rush at. Force buy'da pasif beklersen kaybedersin.
+Force buy'da durma, git. B'ye rush at: Market + B Main combo. Ya da Market'ten agresif gir. Spectre'nin ateş hızı kısa mesafede rifle tutan adamı bile öldürür. Judge ya da Stinger force'u da bu haritada gerçek seçenek: Market veya Elbow'da Judge ya da Stinger ile köşe tut ya da Courtyard'a Stinger ile rush at. Force buy'da pasif beklersen kaybedersin.
 
 **Bonus Round Yönetimi:**
 Pistol'ü kazandın, silah avantajın var — ama agresif peek atma. Rakip Spectre ya da Stinger alır ve Sunset mesafelerinde seni vurur. Bonus round'da savunma pozisyonu al, rakibin sana gelmesini bekle. Silah avantajını peek'te değil, tutmada kullan.

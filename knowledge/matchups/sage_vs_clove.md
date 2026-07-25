@@ -29,7 +29,7 @@ Aynı haritada iki diriliş var ama ikisi aynı şey değil: Sage takım arkada�
 ## 3. Önemli Düellolar
 
 **IF** Clove can eritmeyi duvarının ağzına atıyor
-**MEANING** Duvarın arkasında güvende değilsin — ağzında bekleyeni Clove oradan eritir, erimiş canla açılan peek kaybedilmiş peek
+**MEANING** Duvarın arkasında güvende değilsin — ağzında bekleyeni Clove oradan eritir; eritme altındayken açılan peek daha başlamadan kaybedilmiştir
 **COUNTER** Duvar ağzında sabit durma: bir hat geriden tut, duvarı siper değil görüş kesici olarak kullan. Eritme üstüne indiyse açıdan çekil, etki geçene kadar peek atma
 **WHY** Can eritme bir fırlatma topu — duvar uçuşunu keser ama ağzına yapışan oyuncuya top zaten ulaşır. Duvarla arana mesafe koyan Sage bu tuzağın dışında kalır
 

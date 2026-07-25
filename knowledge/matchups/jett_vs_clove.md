@@ -36,9 +36,9 @@ Jett hızla girer, Clove ölümüne agresif bir controller olarak karşılar. Cl
 ---
 
 **IF** Clove'un can eritmesi seni yakaladı
-**MEANING** Canın eriyor — bu haliyle düello alırsan eksik canla kaybedersin
-**COUNTER** Etki alanından çık, canın toparlanana kadar peek atma. Dash'i kaçış için kullan, giriş için değil
-**WHY** Clove bunu tam senin peek atacağın ana atar. Erimiş canla açılan her peek bedava ölüm
+**MEANING** Clove'un eritmesi kalkanı es geçer — alan içinde açtığın düello onun şartlarında geçer
+**COUNTER** Etki alanının dışına çık, alanın kenarını geçmeden peek atma. Dash'i kaçış için kullan, giriş için değil
+**WHY** Clove bunu tam senin peek atacağın ana atar. Alanın içinden açılan peek, Clove'un beklediği peek'tir
 
 ---
 

@@ -25,7 +25,7 @@ Cypher tuzak ağıyla senin rotanı okur; Reyna öldürmeden hiçbir şeydir ve 
 **COUNTER** Kurulu siteye takımla gir: tel tetiklense bile arkandaki trade zinciri sayıyı korur
 **WHY** Reyna kill zincirine muhtaç — zincir hiç başlamadan solo düşersen Cypher tek telle round'u kapatmış olur
 
-**IF** round'un ilk saniyelerinde öldün (deathTiming=erken) ve düşman kompunda Cypher var
+**IF** round açılışında öldün (deathTiming=erken) ve düşman kompunda Cypher var
 **MEANING** Tel hattını öğrenmeden hazır kuruluma commit ettin — ilk temas Cypher'ın senaryosuyla oynandı
 **COUNTER** Girişten önce duvardan geçen kör eden gözü köşeye at: tel arkasında bekleyen Cypher bakışını kesmek zorunda kalır, ilk atış sana döner
 **WHY** Göz vurulup kırılsa bile o an Cypher'ın gözü tellerinde değil göz küresindedir — pencere senin

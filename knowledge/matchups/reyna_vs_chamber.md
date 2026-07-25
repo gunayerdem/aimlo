@@ -11,17 +11,17 @@ tags: [matchup, reyna, chamber, duelist, sentinel]
 # MATCHUP: Reyna vs Chamber
 
 ## Matchup Özü
-Chamber tek atışlık silahlarla (Headhunter tabancası, Tour de Force keskin nişancısı) uzun açı tutar; tuzağı girişini haber verir, ışınlanması onu kaybettiği düellodan sıyırır. Reyna'nın dalışı bu kitin tam menüsü: açık açıya düz giren Reyna tek atışa bedava hedeftir. İlk öldürmeyi alamayan Reyna hiçbir şeydir — o ilk öldürmeye tek atış menzilinden değil, kırık timing'le ve izole açıdan ulaş.
+Chamber tek atışlık silahlarla (ağır tabancası, ult keskin nişancısı) uzun açı tutar; tuzağı girişini haber verir, ışınlanması onu kaybettiği düellodan sıyırır. Reyna'nın dalışı bu kitin tam menüsü: açık açıya düz giren Reyna tek atışa bedava hedeftir. İlk öldürmeyi alamayan Reyna hiçbir şeydir — o ilk öldürmeye tek atış menzilinden değil, kırık timing'le ve izole açıdan ulaş.
 
 ## Sinyal-Kapılı Dersler
 
-**IF** öldün ve killerInfo'daki silah Headhunter / Tour de Force / Operator gibi tek-atış silahıysa
+**IF** öldün ve killerInfo'daki silah tek-atış silahıysa (Operator, Marshal ya da Chamber'ın ağır tabancası / ult keskin nişancısı)
 **MEANING** Uzun açıya düz peek attın — tek atış silah ilk görüşte kazanır, sen o görüşü bedava verdin
 **COUNTER** O hatta düz çıkma: duvardan geçen kör eden gözü köşe arkasına at, Chamber bakışını kesince gir; ya da o açıyı tamamen boş bırakıp yakın temas arayan rotayı seç
 **WHY** Kör edilen ya da yaklaşılan Chamber silah değerini kaybeder — mesafe onun silahı, mesafeyi kapatan Reyna'nın
 
-**IF** round'un ilk saniyelerinde öldün (deathTiming=erken) ve düşman kompunda Chamber var
-**MEANING** İlk saniyelerde uzun hatta koştun — Chamber açısı en çok round başında hazırdır
+**IF** round açılışında öldün (deathTiming=erken) ve düşman kompunda Chamber var
+**MEANING** İlk temasa uzun hatta koştun — Chamber açısı en çok round açılışında kuruludur
 **COUNTER** İlk teması kısa mesafeli koridorda ara; uzun açıya ancak takım dumanı inince yönel
 **WHY** Chamber round başında kurulu ve sabittir; kısa koridor onun kitini geçersiz kılar, ilk öldürme zinciri oradan başlar
 

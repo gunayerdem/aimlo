@@ -15,7 +15,7 @@ Killjoy taret + bot + molly zinciri kurar; zincir normal giriş temposuna göre 
 
 ## Sinyal-Kapılı Dersler
 
-**IF** saldırıda round'un ilk saniyelerinde öldün (side=Saldırı, deathTiming=erken) ve düşman kompunda Killjoy var
+**IF** saldırıda round açılışında öldün (side=Saldırı, deathTiming=erken) ve düşman kompunda Killjoy var
 **MEANING** Taret + bot seni girişte karşıladı — hızın kurulumu değil, kurulum hızını yendi
 **COUNTER** Önce taret silahla susturulsun (sen ya da takım), dash'i taret sustuktan sonra harca
 **WHY** Taret otomatik tarar ve seni takımına haber verir; taret ayaktayken atılan dash bedava bilgi ve bedava hasar demektir

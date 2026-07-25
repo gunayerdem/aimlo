@@ -6,7 +6,7 @@ verified: 2026-07-08
 # AJAN: Sova
 
 ## 1. Rol Kimliği
-Sova'nın silahı bilgi. Recon oku, shock okları ve drone — üçü de her tur tekrar tekrar elinde. Takım kör girdiği yere sen kör girme. Ne kadar çok nokta ezberlersen o kadar tehlikelisin. Nokta bilmeden sahaya çıkma. 13.00 ile recon okunun (imza yeteneğin) bekleme süresi 60'tan 50 saniyeye indi — tur içinde daha sık tararsın.
+Sova'nın silahı bilgi. Recon oku, shock okları ve drone — üçü de her tur tekrar tekrar elinde. Takım kör girdiği yere sen kör girme. Ne kadar çok nokta ezberlersen o kadar tehlikelisin. Nokta bilmeden sahaya çıkma. 13.00 ile recon okunun (imza yeteneğin) bekleme süresi kısaldı — turda iki tarama planla: biri erken okuma, öteki execute ya da retake anı.
 
 ## 2. Temel Sorumluluklar
 - Ezberlediğin recon noktalarından dövüş başlamadan düşmanın yerini öğren
@@ -62,12 +62,12 @@ Sova'nın silahı bilgi. Recon oku, shock okları ve drone — üçü de her tur
 **COUNTER** Hasar okunu (shock) iki işe ayır: dar köşede saklanan rakibi açığa çıkar, ya da spike kurulduktan sonra defuse'a oturanı yerinden kaldır. Boş havaya değil, daralttığın açıya at.
 **WHY** Bu dart küçük bir alana yoğun hasar basar. Bilinen bir köşeye ya da spike üstüne atılınca rakibi ya kımıldatır ya yaralar — ikisi de senin lehine. Rastgele atılınca sadece sesten ibaret kalır.
 
-**IF** recon hep bir tur içinde aynı saniyede iniyor (özellikle savunmada erken)
+**IF** recon her tur aynı anda iniyor (özellikle savunmada, rakip daha açılmadan)
 **MEANING** Zamanlamanı okutuyorsun — rakip recon okunu duyunca takvimini biliyor
 **COUNTER** Dart zamanlamasını turdan tura kaydır: bazı tur erken tara, bazı tur sakla ve push'u gördükten sonra reaktif at. Savunmada rakip henüz açılmadan atma — boş alan tararsın.
 **WHY** Sabit zamanlama, rakibe dart'tan önce hazırlanma ve taramanın dışında durma fırsatı verir. Değişken zamanlama her seferinde gerçek bilgi yakalar.
 
-**IF** ölümlerin round'un erken saniyelerinde, daha keşif okunu atarken geliyor
+**IF** ölümlerin round'un açılışında, daha keşif okunu atarken geliyor
 **MEANING** Dart'a nişan alırken silahın inik, gövden sabit ve açıktasın — atış noktan korumasız
 **COUNTER** Dart'ı duvar ya da kapak arkasından, atış açını bir takım arkadaşın tutarken at; noktayı ezbere bil ki nişan süresi kısalsın
 **WHY** Nişan alan Sova oyunun en savunmasız hedefi. Erken round'da açıkta duran keşifçi, takım daha bilgi alamadan düşmana ilk sayıyı hediye eder.
@@ -88,7 +88,7 @@ Sova'nın silahı bilgi. Recon oku, shock okları ve drone — üçü de her tur
 - Retake'te önce recon: kaç kişi nerede tutuyor gör; shock oklarını bilinen köşelere at, açıları daralt.
 
 ## 7. Harita Etkileşimleri
-- **Ascent**: Açık gökyüzü recon'un sekerek A Main'den B Short'a ulaşmasına izin verir. A ve B site kapı önüne dart at — rakip kapıdan çıkarken hasar yer. Ult'i uzun koridorda bekleyen rakibe doğrudan geçir. Orta saha kontrolü kritik; oradan atılan bir recon iki siteyi birden okur, bunu takıma sesli ver.
+- **Ascent**: Açık gökyüzü uzun sekme hatları verir — A Main arka duvarından sektirdiğin recon Generator arkasına düşer, Heaven'dan da A Short'tan da vurulması zordur. Mid Courtyard'dan atılan recon Catwalk ile Market ağzını birlikte okur; sonucu sesli ver, rotasyon kararını takım o bilgiyle versin. Mekanik kapı kırılırken hasar okunu kapı ağzına at — çıkan rakip hasarı yer. Ult'i recon ya da drone'un doğruladığı, uzun ve kapaksız hatta bekleyen rakibe geçir.
 - **Haven**: Üç site, üç kat nokta demek — A, B ve C için ayrı ayrı hazırlan. Uzun koridorlardan drone sür, rakibin yerini erkenden öğren. Üç bombsite'ın hangisinin boş olduğunu erken recon ile bul; rotasyon mesafeleri uzun, bilgiyi erken verirsen takım boş siteye basar.
 - **Bind**: Dar tavanlar bazı recon açılarını kısar — duvardan sekme noktalarına yığıl. Teleporter çıkışına dart at, rakip geçerken hasar yer. Rotasyonlar teleporter'dan döner; recon teleport rotasyonunu açığa çıkarmada en güçlü silahın — "biri ışınlandı" çağrısını hemen yap.
 - **Icebox**: A ve B site üst raflarına recon at — yukarıyı tutan savunmacı anında açığa çıkar. A site açık çatıdan gelen sekme noktaları aynı anda birden fazla rakibi tarar. Çok katmanlı, dikey bir harita; recon'u sadece zemini değil üst kademeleri de tarayacak açıdan at yoksa yarısı kör kalır.
@@ -116,14 +116,14 @@ Sova'nın silahı bilgi. Recon oku, shock okları ve drone — üçü de her tur
 ### Zorlanırken
 "Dart'ların düşük değerli yerlere iniyor. Özel oyuna gir, noktalarını temizle. Nokta olmadan Sova, boş el çantası taşımaktan farksız."
 
-"Recon'u atıyorsun ama peşinden gelen bir plan yok. Dart'ı ateşlemeden önce kararını ver: bilgi gelince ne yapacağını söyle, sonra at. Tek başına izlenen recon boşa gider."
+"Recon'u atıyorsun ama peşinden gelen bir plan yok. Dart'ı ateşlemeden önce kararını ver: 'boşsa A'ya giriyoruz, doluysa mid'e dönüyoruz' de, sonra at. Ölüm yerin round geçmişinde tekrar ediyorsa bir sonraki dart'ı o açıya değil, o açıyı besleyen rotasyon hattına at — aynı taramayı üçüncü kez tekrarlamak bilgi değil alışkanlık."
 
 "Yeteneklere fazla yaslanıp dövüşmeyi bırakmışsın. Recon bittiğinde de tüfeğin elinde — açıyı tut, kafadan vurmaya hazır dur. Sova bilgi verir ama turu kapatan yine senin nişanın."
 
 ### Tahmin edilebilir olunca
 "Rakip dart noktalarını ezberden vuruyor. Aynı site için alternatif nokta lazım — en az iki seçeneğin olsun ki otopilotta seni geçemesinler."
 
-"Recon'u her tur aynı saniyede atıyorsun, rakip takvimini ezberledi. Bazı tur erken tara, bazı tur sakla ve push'u görünce reaktif at — zamanlamanı bozarsan taraman yine canlı bilgi yakalar."
+"Recon'u her tur aynı anda atıyorsun, rakip takvimini ezberledi. Bazı tur erken tara, bazı tur sakla ve push'u görünce reaktif at — zamanlamanı bozarsan taraman yine canlı bilgi yakalar."
 
 ## 10. Bu Ajana Karşı
 - Keşif oku indiğinde durduğun bölgeyi işaretlenmiş say — dart sesini duyduğun an pozisyon değiştir; eski yerinde kalırsan taranmış açıya gelen utility ve hazır crosshair seni bulur. Dart'ı görüyorsan vur, göremiyorsan görüş hattından çık.

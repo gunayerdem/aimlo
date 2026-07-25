@@ -14,21 +14,13 @@ tags: [matchup, raze, cypher, duelist, sentinel]
 
 Raze nade ve sıçrama ile Cypher'ın telini patlatır, dar siteye dalar. Cypher ise telini ve kamerasını kullanıp Raze'in ne zaman geleceğini takıma söyler, Raze'in util'ini boşa harcatır. Kavga şu: Raze teli silmeden girerse Cypher takıma bilgi verir, Raze içeride yalnız kalır. Raze teli patlatarak girerse Cypher kör kalır.
 
-## 2. Kim Avantajlı?
+## 2. Ne Zaman Kimin Penceresi
 
-**Raze lehine:**
-- Dar sitelerde (Bind Hookah, Split B Main, Sunset A Main) nade ve sıçrama teli patlatır, Raze tel hattını bedavaya temizler.
-- Cypher kamera modunda Raze'e bakıyorsa eli kolu bağlı; Raze peek alırsa bedava kill.
-- Cypher'ın teli patladıktan sonra site tutuşu çöker, Raze ikinci girişte serbest kalır.
-- Raze ult hazırsa ult Cypher'ın durduğu yeri patlatır, hiçbir Cypher util'i o roketi durduramaz.
+**Senin pencerelerin (Raze):** dar geçit (Bind Hookah, Split B Main, Sunset A Main) — nade tel hattını siler, sonra gir; Cypher kamera modundayken — o an nişan alamaz, peek'i sen kazanırsın; tel patladıktan sonraki ikinci giriş — site tutuşu çökmüştür; ult elindeyken Cypher'ın sabit anchor noktası.
 
-**Cypher lehine:**
-- Uzun açılı haritalarda (Breeze A, Icebox) nade ve sıçrama yakın mesafe işidir; uzun açıda Cypher rifle basarsa Raze mesafeyi kapatamaz.
-- Raze sıçrama yoksa yavaş kalır; Cypher tel ile rifle çaprazı Raze'i sabit hedefe çevirir.
-- Cypher teli görünmez bir hatta kuruluysa Raze tel'i göremeden nade atamaz, tel çalışır, takım bilgi alır.
-- Raze öldükten sonra Cypher ult atarsa Raze'in takımının yeri açılır, Cypher takımı buna göre oynar.
+**Onun pencereleri (Cypher):** uzun açı (Breeze A, Icebox Rafters) — nade menzili yetmez, mesafeyi Cypher belirler; sıçraman bittiğinde — tel + çapraz seni sabit hedefe çevirir; tel görünmeyen bir hatta kuruluysa — göremediğin tele nade atamazsın; sen öldükten sonra atılan ult — takımının yeri açılır.
 
-**Fark yok:** Haven, Ascent, Lotus — orta mesafeli haritalarda tel ve nade yerleşimini daha iyi bilen kazanır.
+**Karar noktası:** Haven, Ascent, Lotus'ta pencere haritadan değil yerleşimden gelir — tel yerini ve nade hattını round round değiştiren taraf kazanır.
 
 ## 3. Önemli Düellolar
 
@@ -81,7 +73,7 @@ Raze nade ve sıçrama ile Cypher'ın telini patlatır, dar siteye dalar. Cypher
 
 ## 4. Utility Karşılaştırması
 
-Raze: nade (1) + sıçrama (2) + bot (1) + ult. Cypher: tel (2) + smoke (1) + kamera (1) + ult.
+Raze: nade (1) + sıçrama (2) + bot (1) + ult. Cypher: tel (2) + smoke (2) + kamera (1) + ult.
 
 Raze util'i zarar ve hareket için. Cypher util'i bilgi ve site kilitleme için.
 
@@ -95,7 +87,7 @@ Raze ult'ı round'u bitirir. Cypher ult'ı round için zemin hazırlar — ama o
 
 **Split (Raze avantajlı):** A Main ve B Main choke'ları Raze nade'ine göre biçilmiş. Cypher telleri Raze'in nade'leriyle tükenir.
 
-**Sunset (Raze avantajlı):** A Main ve B Market dar, Raze bot ve nade işe yarar. Cypher Sunset'te zayıf seçim, matchup Raze'in.
+**Sunset (Raze avantajlı):** A Main ve B Market dar, Raze bot ve nade işe yarar. Cypher telini bu dar hatlara kurarsa nade menziline girer — tel yerini nade'in düşmeyeceği köşelere taşımak zorunda.
 
 **Haven (Dengeli):** Cypher B ve Garage'ı kamerayla tutar, Raze A Short'tan girer. Farklı sitelerde farklı kavga.
 
@@ -107,13 +99,11 @@ Raze ult'ı round'u bitirir. Cypher ult'ı round için zemin hazırlar — ama o
 
 ## 6. Dönüm Noktaları
 
-**Dönüm 1 — Nade tel'i patlattı:** Raze nade'i Cypher tel hattını yok ettiği an Cypher kör kalır. Raze ikinci girişe hemen geçer.
+**Dönüm 1 — Nade tel'i patlattı:** Cypher o an kör kalır; Raze ikinci girişe hemen geçmeli, bekleyen Raze pencereyi harcar.
 
-**Dönüm 2 — Sıçrama boost tel'i atladı:** Raze tel hattının üstünden geçerse Cypher bilgisiz kalır. Cypher tel yüksekliğini Raze'in boost açısına göre ayarlamalı.
+**Dönüm 2 — Sıçrama tel hattını atladı:** Cypher bilgisiz kalır. Cypher tel yüksekliğini Raze'in boost açısına göre ayarlamalı.
 
-**Dönüm 3 — Ult anchor'a düştü:** Raze ult'ı Cypher'ın durduğu yere gelirse Cypher ölür. Sabit duran Cypher rokete tam hedef olur — ult sesi duyulunca yer değiştir.
-
-**Dönüm 4 — Cypher ult'ı takım yerini açtı:** Doğru kill sonrası atılan ult Raze takımının planını bozar. Yanlış kill sonrası atılan ult bilgisiz kalır.
+**Dönüm 3 — Cypher ult'ı takım yerini açtı:** Doğru kill sonrası atılan ult Raze takımının planını bozar; Raze düşer düşmez takım yer değiştirirse ult bilgisiz kalır.
 
 ## 7. Koç Notları
 
@@ -122,3 +112,20 @@ Raze olarak nade'ini tel için at, choke temizliği için değil. Tel'i patlat, 
 Cypher olarak teli site içine kur, choke'a değil. Choke tel'i Raze içeri girdikten sonra çalıyor, iş işten geçiyor.
 
 Raze nade'i Cypher tel'ini siliyor — bu matchup'ın tek sabit kuralı. Cypher buna karşılık verecekse tel'i Raze'in nade hattından uzakta tutmak zorunda. Bir round Raze tel yerini öğrenirse sonraki round nade oraya gider. Yeri değiştir, Raze'i sıfırla.
+
+## 8. Sinyal-Kapılı Dersler
+
+**IF** aynı pozisyonda üst üste öldün (repeatedPosition) ve düşman kompunda Cypher var
+**MEANING** Tel senin rotanı Cypher'a taşıdı — aynı girişten üçüncü kez geldiğinde hazır açı seni bekliyor
+**COUNTER** Nade'ini o tel hattına at, patlamadan girme; giriş kapısını round round değiştir
+**WHY** Nade teli siler ama asıl kazanç rotanın okunamaz kalması — okunmayan girişe Cypher tel koyamaz
+
+**IF** öldün ve takım arkadaşın trade'ini alamadı (tradedByAlly=false)
+**MEANING** Tel çaldı, Cypher takımını uyardı, sen içeri tek başına girdin — trade gelecek mesafede kimse yoktu
+**COUNTER** Tel sesini duyduğun an dur; takım seni takip edene kadar açıyı tutma, sıçramanı takım arkanda hazırken harca
+**WHY** Cypher'ın teli seni yalnız yakalamak için kurulu — trade mesafesinde bir arkadaş varsa telin verdiği bilgi işe yaramaz
+
+**IF** öldüğünde ult'un doluydu (ultReady) ve düşman kompunda Cypher var
+**MEANING** Roket elinde beklerken Cypher'ın kurduğu hatta silahla girdin
+**COUNTER** Ult'u Cypher'ın sabit anchor noktasına sakla; tel hattını nade ile açtıktan sonra roketi o noktaya bırak
+**WHY** Hiçbir Cypher ekipmanı roketi durduramaz — sabit anchor tutan Cypher ult'un en ucuz hedefidir

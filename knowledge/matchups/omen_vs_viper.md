@@ -111,6 +111,6 @@ Omen oynuyorsan: Viper duvarının ne kadar süredir açık olduğunu oku. Round
 
 Viper oynuyorsan: Omen'ın smoke'larını say. Kısa aralıkla iki smoke attıysa ikisi de yenileniyor — o an agresif duvar al, sahte hamle veya gerçek giriş başlat. Duvarı round başı tam açıp unutma — aç-kapa kullan, yakıtı round boyunca dağıt.
 
-Yaygın hata — Omen: Atak için iki smoke + bir flash aynı anda harcandı, round ortasında Viper duvarı düştü, Omen'ın cevap smoke'u yok. Çözüm: bir smoke her zaman reserve.
+Yaygın hata — Omen: Atak için iki smoke + bir flash aynı anda harcandı, round ortasında Viper duvarı düştü, Omen'ın cevap smoke'u yok. Çözüm: bir smoke her zaman yedekte kalsın.
 
 Yaygın hata — Viper: Duvar round başı açıldı, fuel bitti, round sonu Viper util'siz kaldı. Çözüm: tap tekniği, fuel'i dağıt.

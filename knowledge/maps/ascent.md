@@ -12,11 +12,13 @@ pool: "aktif — V26 Act 3'te (patch 12.08, Nisan 2026) Bind'in yerine havuza d�
 
 Ascent mid-merkezli bir harita. Mid'den hem A'ya hem B'ye doğrudan geçiş var — Catwalk ve Market bu iki yolu birbirine bağlıyor. Mid'i tutan takım haritanın her yerine rotasyon yapabiliyor. Saldırdığında mid'i almadan site'a yürürsen arkandan flank yersin. Savunurken mid'i kaptırırsan iki site aynı anda tehdit altına girer.
 
-Bu harita savunucuyu seviyor. A site'ta Heaven yüksekliği ve açık görüş var. B site'ta dar girişler ve Market bağlantısı crossfire kurmayı kolaylaştırıyor. Bu avantajı kırmak istiyorsan util kullan — utility'siz peek atarak site almaya çalışırsan round'u kaybedersin.
+Bu harita savunucuyu seviyor. A site'ta Heaven yüksekliği ve açık görüş var. B site'ta dar girişler ve Market bağlantısı crossfire kurmayı kolaylaştırıyor. Bu avantajı kırmak istiyorsan Heaven'a smoke, girişe flash düşsün — flash patlarken çık, ilk kurşunu sen ver. Utility'siz peek atarak site almaya çalışırsan uzun hatta ilk kurşunu düşmana vermiş olursun.
 
-Ascent'in imzası iki mekanik kapı: biri Garden'dan A site'a inen geçidi, diğeri savunma spawn tarafından B site'a giren arka geçidi kapatır. Kapı panelden açılıp kapanır, kurşunla kırılır — kırmak ses verir ve zaman yer, kırılan kapı o round geri gelmez. Kapıyı plana kat: savunmada erken kapatıp flank yolunu kes, saldırıda kapalı kapıya körlemesine execute atma — ya paneli ele geçir ya kırarken vereceğin sesi zamanlamana koy. Post-plant'te B kapısını kapatmak CT retake yolunu keser, bedava zaman kazandırır.
+Ascent'in imzası iki mekanik kapı: biri A Link'i (savunma spawn'ını A site'e bağlayan geçit), diğeri Market'i (mid'den B site'e açılan geçit) kapatır. Paneller site içindedir — A'nınki A site'ta, Market'inki B site'taki Switch yükseltisinde. Kapalı kapı mermi geçirmez ama kırılır: kırmak ses verir, zaman yer ve kırılan kapı o round geri gelmez. Kapıyı plana kat: savunmada Market kapısını erken kapatıp mid'den gelecek split'i kes, saldırıda kapalı kapıya körlemesine execute atma — ya paneli ele geçir ya kırarken vereceğin sesi zamanlamana koy. B'ye plant ettikten sonra Market kapısını kapatmak retake'in en kısa kolunu keser: savunma ya kapıyı ateş altında kıracak ya Boathouse/CT'den dolanacak, iki durumda da sana bedava zaman.
 
 ## 2. Ölüm Bölgeleri
+
+> Bu bölümü kullanırken dersi KANITA bağla. Elinde round geçmişi varsa cümleye onunla başla: "B Main'de bu maçta 3. kez düştün", "iki round üst üste Heaven'dan Op'la vuruldun". Yoksa sayı uydurma — o round'un ölüm yerini, öldüren ajanı ve silahı adlandırmakla yetin. Veri yoksa iddia da yok: "sürekli aynı hatayı yapıyorsun" gibi ölçüsüz cümle kurma.
 
 ### A Main
 
@@ -36,11 +38,11 @@ Catwalk bir geçiş noktası, kamp yeri değil. Saldırıda: kontrol etmeden gir
 
 ### Market / B Link
 
-Retake'de Market'i temizlemeden geçersen arkandan vurulursun. Orada lurk eden biri varsa util olmadan geçmek ölüm demek. Her rotasyon öncesi Market'e util at ya da gözle kontrol et.
+Retake'de Market'i temizlemeden geçersen arkandan vurulursun. Orada lurk eden biri varsa util olmadan geçmek ölüm demek. Her rotasyonda Market ağzına molly ya da flash bırak; util'in yoksa bir kişi Market'i tutsun, kimse bakmadan koşarak geçme. Market'te ayak sesi duyduysan rotasyonu Mid Link'ten değil, CT'den yap.
 
-### Kapılar (A Garden / B Arka Geçit)
+### Kapılar (A Link / Market)
 
-Kapalı kapının arkasında sıkışıp ölüyorsan çıkış planın yoktu: kapı kapalıyken o yol yok say, rotanı ona göre kur. Kapıyı kurşunla kırarak açıyorsan o ses tüm site'a "geliyorum" der — kırdıysan bekleme, ya hemen bas ya tamamen vazgeç. Kapalı kapıya güvenip arkasında dikilme: kapı kırılır, sen hazırlıksız yakalanırsın.
+Kapalı kapının arkasında sıkışıp ölüyorsan çıkış planın yoktu: kapı kapalıyken o yol yok say, rotanı ona göre kur. Kapıyı kurşunla kırarak açıyorsan o ses tüm site'a "geliyorum" der — kırdıysan bekleme, ya hemen bas ya tamamen vazgeç. Kapalı kapıya güvenip arkasında dikilme: kapı kırılır, sen hazırlıksız yakalanırsın. Panel site içinde: kapıyı kapatmak istiyorsan önce paneli tutan alanı elinde tutman gerekir.
 
 ## 3. Saldırı Stratejileri — Pattern Mapping
 
@@ -142,7 +144,7 @@ En yaygın hata: smoke atıp flash beklemeden girmek. Savunucu smoke kenarında 
 
 **MEANING:** Mid savunması her iki site'i doğrudan etkiler. Mid düşerse A Short ve Market üzerinden flank tehdidi gelir. Pizza/Cubby bilgi pozisyonu — görevin uzun süre tutmak değil, saldırganların mid'e gelip gelmediğini anlayıp takıma söylemek.
 
-**COUNTER:** Agresif peek atıp ölme. Ölürsen takım mid hakkında kör kalır, her iki site flank tehdidi altına girer. Util kullan: smoke mid'i geçici kapatır, tel erken bilgi verir, tuzak Catwalk'ı izler. Peek yok, util at.
+**COUNTER:** Agresif peek atıp ölme. Ölürsen takım mid hakkında kör kalır, iki site birden flank tehdidi altına girer. Mid ağzına smoke at, Catwalk'a tel ya da tuzak kur — bilgi sana gelsin, sen açıya çıkma. Mid'e kalabalık geldiğini duyduğunda duello arama: Market'e çekil, kapıyı kapat, takımı çağır.
 
 **WHY:** Mid savunucusu ölünce haritanın tamamı tehlikeye girer. Mid düşünce iki site birbirinden kopar, rotate yolları tehdit altına girer. Tek senin ölümün tüm savunma yapısını çökertebilir.
 
@@ -162,29 +164,29 @@ Retake öncesi düşmanın yerini öğren: bot ya da recon at. Sonra takım olar
 
 Site başına util sırası:
 - **A retake:** Generator arkasına molly — saldırgan spike'ı oradan izler. A Main açısına smoke, girişe flash; sonra Heaven + Generator + A Main kollarından aynı anda bas. Wine köşesini temizlemeden defuse'a başlama.
-- **B retake:** Market çıkışına önce flash — post-plant oyuncusu o kapıyı nişanlamış bekler. Closet'a molly, spike ile B Main açısı arasına smoke; Market + CT + Closet kollarından birlikte gir. B kapısı kapatılmışsa kırma sesini girişinle aynı ana denk getir — ses zaten çıkacak, bari saldırgan sana dönemeden çıksın.
+- **B retake:** Market çıkışına önce flash — post-plant oyuncusu o kapıyı nişanlamış bekler. Closet'a molly, spike ile B Main açısı arasına smoke; Market + CT + Boathouse kollarından birlikte gir. Market kapısı kapatılmışsa kırma sesini girişinle aynı ana denk getir — ses zaten çıkacak, bari saldırgan sana dönemeden içeride ol.
 
 **WHY:** Post-plant tutan saldırgan senin nereden geleceğini biliyor ve ona göre durmuş. Tek yönden girersen tek açıya odaklanır, seni öldürür. Birden fazla yönden aynı anda girersen hangi yöne bakacağını seçmek zorunda kalır — o tereddüt senin avantajın.
 
 ### Site Bazlı Retake Rotaları
 
 - **A Retake**: Ana kol Heaven'dan yükseklikle girer, ikinci kol CT'den Hell üzerinden site zeminine iner; A Main tutulmuyorsa üçüncü açı oradan bassın. Saldırganın A Main + A Short crossfire'ını kır — util sırası yukarıda. Wine ve Tree köşeleri temizlenmeden defuse'a başlama; Heaven sende olunca defuse eden arkadaşını yukarıdan korursun.
-- **B Retake**: Ana kol Market'ten girer, ikinci kol CT B'den Switch tarafına basar. Saldırgan post-plant'te B Main + Market crossfire'ına yaslanır — Market çıkışına flash, Closet'a molly ile iki açıyı da sök. Üçüncü seçenek Boathouse: oradan B Main hattının arkasına sarkarsın, post-plant oyuncusu önünü tutarken arkadan düşürürsün. B kapısı kapalıysa kırma sesini girişle aynı ana denk getir.
+- **B Retake**: Ana kol Market'ten girer, ikinci kol CT B'den Switch tarafına basar. Saldırgan post-plant'te B Main + Market crossfire'ına yaslanır — Market çıkışına flash, Closet'a molly ile iki açıyı da sök. Üçüncü seçenek Boathouse: oradan B Main hattının arkasına sarkarsın, post-plant oyuncusu önünü tutarken arkadan düşürürsün. Market kapısı kapalıysa kırma sesini girişle aynı ana denk getir.
 - İki sitede de sıra aynı: önce bilgi (bot ya da recon), sonra util, sonra kollar aynı anda girer. İlk düşman düşünce kalanlar pozisyon değiştirmek zorunda kalır — ikinci kol tam o anda bassın.
 
 ## 5. Agent Tier Listesi
 
 ### S-Tier
 
-**Killjoy:** Killjoy'u Ascent'te oynuyorsan her iki site'i de tek başına tutabilirsin. Ult attığında site retake veya savunma senin lehine döner. Tuzak ile bot'u B Main ya da A Main'e koy — düşman nerede, anında öğrenirsin. Molly'i spike bölgesinin etrafına göm, plant pozisyonunu kapat. Killjoy yoksa savunmanda dev bir delik var, bunu bil.
+**Killjoy:** Killjoy'u Ascent'te oynuyorsan her iki site'i de tek başına tutabilirsin. Bot'unu B Main ya da A Main girişine koy — düşman koridora girdiği an yerini öğrenirsin. Tuzağını site içinde spike alanını gören açıya kur; sen ölsen bile o açı tutulmaya devam eder. Molly'ni plant noktasının üstüne göm: plant'ı geciktirir, post-plant'te defuse'u keser. Ult'unu retake'te aç. Killjoy yoksa savunmanda dev bir delik var, bunu bil.
 
 **Omen:** Ascent smoke ister ve Omen'in iki smoke'u hem attack execute hem de defense için yeterli. Flash'ı A Main veya B Main'e giren düşmanlara bas — dar koridorda kör kalan düşman önünü göremeden girer. Kaçış ile Heaven'a veya Market'e atla, pozisyonunu tahmin ettirme. Ult'unu fake veya rotate için kullan, round'u döndür.
 
-**KAY/O:** Bıçağın Killjoy'un tuzağını, bot'unu, Cypher'ın tellerini bastırma süresi boyunca kapatır, Omen'in yeni smoke atmasını keser (atılmış smoke'u silmez) — o pencerede execute aniden çok kolaylaşır. Flash ile girişi aç, molly'i post-plant veya alan tutmak için kullan. KAY/O olmadan attack oynarsan savunucunun tüm util'iyle teker teker uğraşmak zorunda kalırsın.
+**KAY/O:** Bıçağın patladığı yarıçapta kalan Killjoy tuzağını, bot'unu ve Cypher tellerini bastırma süresince kapatır, o oyuncuların yeni util atmasını keser (atılmış smoke silinmez). Yani bıçağı "site'a doğru" değil, tuzağın ya da telin durduğu köşeye at — girişini o pencereye sığdır. Flash ile girişi aç, molly'i post-plant veya alan tutmak için kullan. KAY/O olmadan attack oynarsan savunucunun tüm util'iyle teker teker uğraşmak zorunda kalırsın.
 
 **Cypher:** Catwalk, Market, A Short — hepsi dar, hepsi tele uygun. İki tel ile hem mid'i hem flank yolunu kapat, takımın iki ekstra göz kazanır. Kamerayı mid'e bakacak şekilde koy, düşmanın nereden geldiğini gör. Ult attığında retake öncesi düşmanların nerede durduğunu görürsün.
 
-**Jett:** A Main ve Mid Top uzun — op oynamak için biçilmiş kaftan. Dash ile agresif peek at, bilgi al, geri çekil. Ult ile A site Heaven'a beklenmedik açıdan çık. Haritanın açık alanlarında diğer duelistlerden mobilite olarak öndesin, op'u sen taşı.
+**Jett:** A Main ve Mid Top uzun — op oynamak için biçilmiş kaftan. Dash ile agresif peek at, bilgi al, geri çekil. Yukarı sıçramanla A Heaven'a ya da Market kutularının üstüne beklenmedik açıdan çık. Ult'unu kendi eco round'unda aç: silah alamadığın round'da bıçaklar elini doldurur, öldürdüğün her düşman bıçaklarını yeniler. Haritanın açık alanlarında diğer duelistlerden mobilite olarak öndesin, op'u sen taşı.
 
 ### A-Tier
 
@@ -196,7 +198,7 @@ Site başına util sırası:
 
 ### B-Tier
 
-**Raze:** B site darlığında bot ve sıçrama util / patlayıcı işe yarar. Ama A site genişliğinde yetersiz kalırsın. Jett op taşırken Raze tercih listesinde ikinci sıraya düşer.
+**Raze:** B site darlığında bot'unu B Main'e yolla, bilgi bedava gelsin. Sıçrama paketiyle Market ağzına ya da site içine beklenmedik açıdan dal; grenade'ini B Main'de yığılan gruba at, dar koridorda kaçacak yer yok. Ama A site genişliğinde yetersiz kalırsın. Jett op taşırken Raze tercih listesinde ikinci sıraya düşer.
 
 **Sage:** Duvar ile mid girişini veya site kapısını kapat, heal ile takımı ayakta tut. Killjoy ve Cypher kadar bilgi ve alan kontrolü veremez, bu yüzden geride kalır.
 
@@ -231,15 +233,16 @@ Site başına util sırası:
 - **Wine:** A site'in arkası. Clutch ve retake için güçlü — ama orada kalmaya devam edersen tahmin edilirsin.
 - **Tree / Window:** A site'a bakan pencere alanı. Garden'dan gelen bakışı buradan kesersin — savunmada güçlü bir geri açı. Saldırıda site'ı temizlerken pencereye bakmadan ilerleme.
 - **Dice:** A site girişinin yanındaki küçük kutu. İçeri girerken arkasını siper olarak kullan.
-- **Garden:** Catwalk'tan A site'e inen bağlantı bölgesi, savunma tarafına yakın; Tree penceresi buraya bakar. Mid kontrolünü aldıktan sonra A'ya split için buradan inersin — kapı kapalıysa bu yol yok, planını ona göre kur. Burada durmak yok, geçmek var: Tree'den tutan biri seni görür görmez vurur.
+- **Garden:** Catwalk/Tree hattından A site'e inen bağlantı bölgesi, savunma tarafına yakın; Tree penceresi buraya bakar. Mid kontrolünü aldıktan sonra A'ya split için buradan inersin. Burada durmak yok, geçmek var: Tree'den ya da Heaven'dan tutan biri seni görür görmez vurur.
+- **A Link:** Savunma spawn'ını A site'e bağlayan geçit — A'nın mekanik kapısı burada, paneli site içinde. Savunmanın A'ya en hızlı rotate yolu bu: site'ı aldıktan sonra ilk buraya smoke ya da molly bırak, retake bu hattan gelir. Kapıyı kapatırsan savunma A'ya Garden ya da Heaven üzerinden dolaşmak zorunda kalır.
 
 ### B Site ve Çevresi
 - **B Main / B Lobby:** B site'e giden ana koridor. Dar ve kapalı — util olmadan dolu girme.
 - **B Lanes:** B Main girişindeki dar geçitler. Tel ve util için biçilmiş konum.
 - **Market / B Link:** Mid'den B'ye geçiş. Rotate da buradan, flank da buradan gelir — gözünü ayırma.
-- **Switch:** B site içindeki yükselti — adını B kapısını açıp kapatan panelden alır. Savunmada burayı tutan hem B'yi kontrol eder hem kapı paneli elinin altındadır.
+- **Switch:** B site içindeki yükselti — adını Market kapısını açıp kapatan panelden alır. Savunmada burayı tutan hem B'yi kontrol eder hem kapı paneli elinin altındadır; post-plant'te saldırgan buradan kapıyı kapatıp retake'in Market kolunu keser.
 - **Closet / Back B:** B site'in arka küçük odası. Clutch pozisyonu ama ilk bakılan yer orası — öngörülebilir.
-- **CT B / Defender Spawn B:** Savunmanın B'ye indiği yol. Rotate'ler buradan gelir; B kapısı kapalıysa bu yol da kapalı demektir.
+- **CT B / Defender Spawn B:** Savunmanın B'ye indiği yol; bu hatta kapı yoktur. Market kapısı kapatıldığında savunmanın B'ye tek hızlı girişi burasıdır — retake'te ilk buraya bak, saldırıda plant sonrası ilk util'i buraya bırak.
 - **Boathouse:** B Lobby yanındaki su kenarı odası. Savunma buradan B push'unun arkasına sarkar — execute öncesi bir kişi kapısına baksın, temizlemeden sırtını dönme.
 
 ### Mid
@@ -282,7 +285,7 @@ Site başına util sırası:
 
 ### Pistol Round (Round 1 ve Round 13)
 
-Saldırıda Ghost + hafif zırh ya da util dolu Classic al. B rush bu haritada pistol ile çalışır — B Main dar, savunucu orayı tek başına tutamaz. A site'a pistol ile gitme, Heaven'daki savunucu uzaktan seni döver.
+Saldırıda 800 kredin var: ya Ghost al ve kalanı util'e ver, ya Classic'te kalıp hafif zırh + util doldur — Ghost ile hafif zırh aynı round'a sığmaz. B rush bu haritada pistol ile çalışır: B Main dar, savunucu orayı tek başına tutamaz. A site'a pistol ile gitme, Heaven'daki savunucu uzaktan seni döver.
 
 ### Eco / Force Buy Kararları
 
@@ -353,7 +356,7 @@ Anti-eco'yu hafife alma. Sheriff her zırhı deler, Classic sağ tık yakında s
 **MEANING:** Saldırı rotalarını kısıtlıyorlar, bedava bilgi topluyorlar.
 
 **COUNTER:**
-- KAY/O varsa bıçağını ya da ult'unu at — sentinel util'i bastırma süresi boyunca devre dışı kalır, girişini o pencereye sığdır.
+- KAY/O varsa bıçağını kurulumun durduğu köşeye at — yalnız o yarıçaptaki tel, tuzak ve bot bastırma süresince kapanır; girişini o pencereye sığdır. Ult'unun alanı daha geniş, site girişini komple kaplayacak şekilde aç.
 - KAY/O yoksa teker teker kır: Sova bot ile teli tetikle, Raze bot ile tuzağı yok et.
 
-**WHY:** Sentinel kurulumu kırıldığında geriye sadece silah kalır. Kurulumu bozmadan içeri girersen düşmana bedava bilgi verirsin. KAY/O bu yüzden Ascent'te çok güçlü — tek ult'la tüm kurulumu süresi boyunca susturur.
+**WHY:** Sentinel kurulumu kırıldığında geriye sadece silah kalır. Kurulumu bozmadan içeri girersen düşmana bedava bilgi verirsin. KAY/O bu yüzden Ascent'te çok güçlü — ama kapsama alanı dışındaki tel ve tuzak çalışmaya devam eder: bastırdığın alanı gördükten sonra gir, "attım, kurulum bitti" diye yürüme.

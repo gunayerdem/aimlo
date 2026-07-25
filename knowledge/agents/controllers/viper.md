@@ -13,7 +13,7 @@ Viper haritayı ikiye böler. Duvarı ve smoke'u tek bir paylaşımlı yakıt ha
 - Smoke'la dar girişi kapat — yakıt bitmeden kapat, post-plant için sakla.
 - Molly lineup'larını ezberle — post-plant'i kazanmanın asıl yolu bu.
 - Ult'u dövüş başlamadan koy — dövüşün ortasında bırakma, çok geç kalırsın.
-- Önce duvarı entry geçişinden sonra kapat, sonra smoke'u aç — sırayla çalıştır, asla aynı anda değil.
+- Duvarı entry'den hemen önce çek, takım geçer geçmez kapat; smoke'u ondan sonra aç — sırayla çalıştır, asla aynı anda değil.
 
 ## 3. Sık Yapılan Hatalar
 - Duvarı ve smoke'u aynı anda sonuna kadar açık tutmak — ikisi birden yanarsa elinde hiçbir şey kalmaz.
@@ -27,6 +27,8 @@ Viper haritayı ikiye böler. Duvarı ve smoke'u tek bir paylaşımlı yakıt ha
 
 ## 4. Kalıp -> Anlam
 
+> KANIT KURALI: Aşağıdaki IF blokları DAVRANIŞ İDDİASIDIR. Bir bloğu ancak veride karşılığı varsa (round geçmişi, ölüm yeri/tipi, öldüren ajan+silah, skor, side, ekonomi) kullan ve dersi o kanıta AÇIKÇA bağla: "iki round üst üste spike kurulduktan sonra site içinde öldün — bu round plant biter bitmez duvarı kapat, molly'yi defuse penceresine sakla". Veri yoksa o bloğu hiç kurma; kanıtsız davranış iddiası uydurmadır.
+
 **IF** yakıt bir round içinde birden fazla kez tamamen bitiyor
 **MEANING** Duvarı ve smoke'u aynı anda çok uzun çalıştırıyorsun
 **COUNTER** Sırayla kullan: takım site'a girerken duvarı aç, geçer geçmez kapat; smoke'u post-plant için sakla. Çok kısa pencereler dışında ikisini aynı anda asla açma.
@@ -39,7 +41,7 @@ Viper haritayı ikiye böler. Duvarı ve smoke'u tek bir paylaşımlı yakıt ha
 
 **IF** duvar her atak round'unda aynı yere gidiyor
 **MEANING** Savunucu seni okuyor, daha sen çıkmadan sana göre yerini alıyor
-**COUNTER** Her site için 2-3 farklı duvar açısı hazırla. 10 derece kaydırmak bile savunucuyu yerini değiştirmeye zorlar.
+**COUNTER** Her site için 2-3 farklı duvar açısı hazırla. Duvarın ucunu geçen round bittiği yerden bir siper öteye kaydır — savunucu ezberlediği yerde duramaz.
 **WHY** Aynı duvar savunucuya bedava avantaj verir. Açıyı değiştirdiğin an o avantajı elinden alırsın.
 
 **IF** ult atılıyor ama oyuncu hemen dışarı çıkıyor ya da dışarıda ölüyor
@@ -69,7 +71,7 @@ Viper haritayı ikiye böler. Duvarı ve smoke'u tek bir paylaşımlı yakıt ha
 
 **IF** savunmada duvarı/smoke'u sadece düşmanı engellemek için kullanıyorsun, içine girip beklemiyorsun
 **MEANING** Viper'ın savunma gücünü tek yönlü kullanıyorsun — kendi dumanın içinden bakma avantajını atlıyorsun
-**COUNTER** Savunmada kendi duvarının/smoke'unun içine otur. Sen düşmanı bulanık da olsa görürsün ama düşman seni hiç göremez; içeri push edeni, canı erimişken yakalarsın.
+**COUNTER** Savunmada kendi duvarının/smoke'unun içine otur. Sen düşmanı bulanık da olsa görürsün ama düşman seni hiç göremez; içeri push edeni, duman onu eritirken yakalarsın.
 **WHY** Viper kendi dumanından nettir, düşman değildir. Bu tek yönlü görüş savunmada bedava açı kazandırır — duvarı sadece kapı gibi kullanırsan bu avantajı çöpe atarsın.
 
 ## 5. Harita Etkileşimleri
@@ -96,20 +98,20 @@ Viper haritayı ikiye böler. Duvarı ve smoke'u tek bir paylaşımlı yakıt ha
 ### İyi performans gösterdiğinde
 **Oyuncu Eylemi:** Takım site'a girerken duvarı açıp geçince kapatıyorsun, spike kurulunca smoke'u devreye alıyorsun, defuse noktasına molly lineup'ı indiriyorsun. Yakıtı round'un üç ayrı aşamasına bölüyorsun.
 **Düşman Algısı:** Savunucu yakıtının ne zaman biteceğini bekliyor ama erken kapattığın için post-plant'te hâlâ açık bir smoke'un var. Push yaparsa can kaybeder, beklerse süre biter.
-**Düşman Tepkisi:** Ya smoke'un içinden retake'e gelir (düşük canla girer), ya bekler (süreyi kaybeder). Molly defuse'u durdurur — iki şarjı üst üste yığınca spike'ı söken oyuncuyu köşeye sıkıştırırsın.
+**Düşman Tepkisi:** Ya smoke'un içinden retake'e gelir (erime yiyerek girer), ya bekler (süreyi kaybeder). Molly defuse'u durdurur — iki şarjı üst üste yığınca spike'ı söken oyuncuyu köşeye sıkıştırırsın.
 **Fırsat Penceresi:** Savunucu yakıtının bitmesini beklerken smoke hâlâ açık — işte bu kararsızlık anı senin kazandığın andır. Her molly defuse süresini kısaltır.
 **Tekrar Stratejisi:** Entry: duvar açık, takım geçince kapat. Post-plant: plant olunca smoke aç. Defuse: defuse sesini duyunca ilk molly, biter bitmez ikinci molly. Her site için 2-3 farklı duvar açısı kullan — savunucu aynı duvara alışmasın.
 **Düşman Adaptasyonu:** 4-5 round sonra savunucu şunları dener: duvarın içinden erken push (sen atmadan seni öldürmek için), molly noktalarını izleyip kaçmak, retake'i iki açıdan bölmek.
-**Karşı Adaptasyon:** Erken push yaparlarsa duvarı biraz daha uzun aç, decay bölgesinde karşıla. Smoke noktanı ezberledilerse o site'ta farklı bir girişe koy — örneğin Breeze'de B main yerine B shore'a. Retake'i bölerlerse molly'yi alternatif defuse noktasına kaydır, diğer açı için takıma çağrı yap.
+**Karşı Adaptasyon:** Erken push yaparlarsa duvarı biraz daha uzun aç, decay bölgesinde karşıla. Smoke noktanı ezberledilerse o site'ta farklı bir hatta koy — örneğin Breeze'de B Main yerine Window hattına. Retake'i bölerlerse molly'yi alternatif defuse noktasına kaydır, diğer açı için takıma çağrı yap.
 
 ### Zorlandığında
 "Yakıt çok hızlı bitiyor. Takım site'ta olunca duvarı kapat. Smoke'u post-plant için sakla. İkisi tek havuzdan beslenir — aynı anda yakarsan ikisi de söner. Bir molly'yi defuse durdurmak için ayır, decay biter bitmez ikinciyi yığ."
 
 ### Tahmin edilebilir olduğunda
-"Her round aynı duvar, savunucu seni okuyor. 10 derece kaydır — site dinamiği değişir, savunucu baştan düşünmek zorunda kalır. Molly'yi de hep aynı anda atma; savunucu kaçış zamanını ezberler."
+"Her round aynı duvar, savunucu seni okuyor. Duvarın ucunu bir siper öteye kaydır — site dinamiği değişir, savunucu baştan düşünmek zorunda kalır. Molly'yi de hep aynı anda atma; savunucu kaçış zamanını ezberler."
 
 ## 8. Bu Ajana Karşı
 - Duvar ve smoke aynı yakıt havuzundan yanar — duman inip duvar söndüğü an push pencerendir; yakıtı biten Viper en savunmasız anındadır.
-- Post-plant'te tek molly defuse'u bitirmez — molly yanarken kenara çekil, söner sönmez defuse'a geri dön; canın doluysa eriyerek sökmeye devam et, ikinci molly gelmeden bitirebilirsin.
+- Post-plant'te tek molly defuse'u bitirmez — molly yanarken kenara çekil, söner sönmez defuse'a geri dön; erimeyi göze alıp sökmeye devam edersen ikinci molly gelmeden bitirebilirsin.
 - Viper kendi dumanının içinden seni görür, sen onu göremezsin — dumanın içine düz yürüme; önce util at ya da dumanın dışından dolan.
 - Molly lineup'ları sabit noktaya çalışılmıştır — spike'ı default yere koymayıp kaydırırsan ezber lineup boşa düşer.

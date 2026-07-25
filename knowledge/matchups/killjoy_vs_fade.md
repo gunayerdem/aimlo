@@ -12,15 +12,15 @@ tags: [matchup, killjoy, fade, sentinel, initiator]
 
 ## 1. Matchup Özü
 
-Killjoy siteyi gizli kurulumla tutar. Fade recon'uyla (karanlık göz) OYUNCULARI işaretler — kurulumu değil. Turret'in ve tuzağın işaretlenmez; açığa çıkan sensin. Matchup tek cümle: Killjoy kendini saklarsa kazanır, Fade Killjoy'u her round bulursa kazanır.
+Killjoy siteyi gizli kurulumla tutar. Fade recon'uyla (karanlık göz) OYUNCULARI işaretler — kurulumu değil. Taretin ve tuzağın işaretlenmez; açığa çıkan sensin. Matchup tek cümle: Killjoy kendini saklarsa kazanır, Fade Killjoy'u her round bulursa kazanır.
 
 ## 2. Kim Avantajlı?
 
 **Killjoy lehine durumlar:**
 - Fade recon ve botunu harcadı — kurulumunu rahatça kur, seni arayan kalmadı
-- Dar geçişli bir sitede oynuyorsun (Bind Hookah, Sunset B) — bot girişi turret görüşüne düşer
+- Dar geçişli bir sitede oynuyorsun (Bind Hookah, Sunset B) — bot girişi taret görüşüne düşer
 - Ult hazır — Fade retake'e gelirken at, alandaki herkes donar
-- Turret botu görür — vurup söker, Fade takip aracını kaybeder
+- Taret botu görür — vurup söker, Fade takip aracını kaybeder
 
 **Fade lehine durumlar:**
 - Recon seni işaretledi — pozisyonun takıma gitti, kurulumundan ayrı yakalanırsın
@@ -34,15 +34,15 @@ Killjoy siteyi gizli kurulumla tutar. Fade recon'uyla (karanlık göz) OYUNCULAR
 
 **IF** Fade recon attı, sen görüş hattındaydın
 **MEANING** İşaretlendin — takım senin yerini biliyor, kurulumun sahipsiz kalacak
-**COUNTER** Recon sesini duyunca görüş hattından çık ya da gözü silahla kır. Turret ve tuzak işaretlenmez — sen saklan, kurulum işini yapsın
+**COUNTER** Recon sesini duyunca görüş hattından çık ya da gözü silahla kır. Taret ve tuzak işaretlenmez — sen saklan, kurulum işini yapsın
 **WHY** Recon oyuncu işaretler, utility göremez. Sen görünmezsen Fade'in bilgisi boş döner, kurulumun sürprizi bozulmaz
 
 ---
 
 **IF** Fade botu izini alıp üstüne geldi
 **MEANING** Nişanını bozar, takım hemen arkasından gelir
-**COUNTER** Bot sesini duyar duymaz turret görüşüne çekil — turret botu otomatik vurup bitirir
-**WHY** Botun canı az, turret söker. Turret görüş hattındaysa Fade botu körü körüne salamaz
+**COUNTER** Bot sesini duyar duymaz taret görüşüne çekil — taret botu otomatik vurup bitirir
+**WHY** Botun canı az, taret söker. Taret görüş hattındaysa Fade botu körü körüne salamaz
 
 ---
 
@@ -74,26 +74,26 @@ Killjoy siteyi gizli kurulumla tutar. Fade recon'uyla (karanlık göz) OYUNCULAR
 
 ---
 
-**IF** Turret round başında Fade'in botunu yakaladı
+**IF** Taret round başında Fade'in botunu yakaladı
 **MEANING** Bot biter, Fade takip aracını ve bilgiyi kaybeder
-**COUNTER** (Fade için) Önce turret'in yerini gözünle ya da takım bilgisiyle öğren — sonra turret görüş hattının dışından bot gönder
-**WHY** Botun canı az, turret söker. Turret'i bot giriş hattını kesecek şekilde kur — bot yine ölür
+**COUNTER** (Fade için) Önce taretin yerini gözünle ya da takım bilgisiyle öğren — sonra taret görüş hattının dışından bot gönder
+**WHY** Botun canı az, taret söker. Tareti bot giriş hattını kesecek şekilde kur — bot yine ölür
 
 ## 4. Utility Karşılaştırması
 
-Killjoy: turret + bot + molly + ult (kurulum + alan + dondurma).
+Killjoy: taret + bot + molly + ult (kurulum + alan + dondurma).
 Fade: recon + bot + sabitleme + ult (oyuncu işaretleme + takip + yere kilitleme).
 
 İkisi de bilgi oyunu oynar, ama ters yönde: Killjoy yerini gizler, Fade oyuncuyu bulur. Killjoy'un kurulumu pasif çalışır; Fade her round yetenek yakar.
 
 ## 5. Haritaya Göre Değişim
 
-**Bind / Sunset (Killjoy):** dar geçişler turret için ideal — bot girişi turret görüşüne düşer.
+**Bind / Sunset (Killjoy):** dar geçişler taret için ideal — bot girişi taret görüşüne düşer.
 **Haven (Fade):** 3 site recon'u verimli kullandırır; Killjoy B'yi tutar, Fade aramaya devam eder.
 **Ascent / Icebox (Dengeli):** kurulum ve recon döngüsünü kim öne alırsa o kazanır.
 
 ## 6. Koç Notları
 
-Bu matchup'ta hem turret'i hem kendini her round başka yere koy. Fade seni bir kez işaretlerse sonraki round takımı doğrudan o noktaya oynar. Yer değiştirirsen Fade her round sıfırdan başlar.
+Bu matchup'ta hem tareti hem kendini her round başka yere koy. Fade seni bir kez işaretlerse sonraki round takımı doğrudan o noktaya oynar. Yer değiştirirsen Fade her round sıfırdan başlar.
 
-Fade tarafındaysan kural net: turret'in yerini bilmeden bot salma. Botun canı az, turret görürse anında bitirir. Önce işaret al, sonra bot — sırayı bozarsan botu bedavaya verirsin.
+Fade tarafındaysan kural net: taretin yerini bilmeden bot salma. Botun canı az, taret görürse anında bitirir. Önce işaret al, sonra bot — sırayı bozarsan botu bedavaya verirsin.

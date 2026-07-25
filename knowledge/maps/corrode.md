@@ -23,18 +23,19 @@ Corrode iki siteyi uzun bir mid şeridiyle bağlar. Mid (Top Mid — Stairs — 
 ## 2. Callout Rehberi
 
 ### A Tarafı
-- **A Main:** A site'a ana giriş koridoru.
+- **A Main:** A siteye ana giriş koridoru.
 - **A Link:** Mid'i A tarafına bağlayan geçiş — split ve rotate yolu.
 - **Elbow:** A yaklaşımındaki dirsek köşesi. Temizlemeden geçersen köşeden ölürsün.
 - **Pocket:** Kısa mesafeli cep köşesi — off-angle tutulan yer.
 - **Yard:** A önündeki geniş açık alan. Smoke'suz cross atılmaz.
+- **Crane (A Crane):** A siteye tepeden bakan vinç yapısı — A'nın dikey kontrol noktası. Siteye girerken yalnız zemini değil bu dikeyi de temizle; Tower B'de neyse Crane A'da odur.
 - **A Site:** Plant alanı.
 
 ### B Tarafı
-- **B Main:** B site'a ana giriş.
+- **B Main:** B siteye ana giriş.
 - **B Link:** Mid'i B tarafına bağlayan geçiş.
 - **B Elbow:** B yaklaşımındaki dirsek köşesi.
-- **Tower:** B'ye yukarıdan bakan yüksek pozisyon. Site'a girerken yukarıyı kontrol etmeyen ölür.
+- **Tower:** B'ye yukarıdan bakan yüksek pozisyon. Siteye girerken yukarıyı kontrol etmeyen ölür.
 - **B Site:** Geniş ve açık plant alanı.
 
 ### Mid
@@ -106,9 +107,9 @@ Açık alan — cross atarken yakalanırsın. Yard'ı smoke'suz koşarak geçme;
 
 **MEANING:** B geniş ve açık, Tower oraya yukarıdan bakıyor. Dikeyi kontrol etmeyen her giriş, Tower'daki savunucuya bedava ölüm verir.
 
-**COUNTER:** B execute'unda ilk util Tower'a gitsin: smoke ya da flash ile o açıyı kapat, sonra site'a yayıl. Girerken bir kişinin crosshair'i hep yüksekte olsun.
+**COUNTER:** B execute'unda ilk util Tower'a gitsin: smoke ya da flash ile o açıyı kapat, sonra siteye yayıl. Girerken bir kişinin crosshair'i hep yüksekte olsun.
 
-**WHY:** Yükseklik savunucuya hem görüş hem siper verir. O açı kapanmadan site'a yayılmak, yukarıdan tek tek toplanmak demektir.
+**WHY:** Yükseklik savunucuya hem görüş hem siper verir. O açı kapanmadan siteye yayılmak, yukarıdan tek tek toplanmak demektir.
 
 ---
 
@@ -154,7 +155,7 @@ Açık alan — cross atarken yakalanırsın. Yard'ı smoke'suz koşarak geçme;
 
 **MEANING:** Takım sitelere yığılmış, haritanın omurgası düşmana kalmış. Mid düşünce iki site birbirinden kopar.
 
-**COUNTER:** En az bir util mid'e: Mid Window'a tel ya da tuzak, Stairs hattına bir bakış. Oyuncu ayıramıyorsan round başında bir kişi mid'den ses alsın, sonra site'ına dönsün.
+**COUNTER:** En az bir util mid'e: Mid Window'a tel ya da tuzak, Stairs hattına bir bakış. Oyuncu ayıramıyorsan round başında bir kişi mid'den ses alsın, sonra sitesine dönsün.
 
 **WHY:** Mid'i bırakan savunma iki ayrı adaya bölünür — rotasyon yolları tehlikeye girer, her site kendi başına kalır.
 
@@ -168,7 +169,7 @@ Sıra hep aynı: (1) düşmanın yerini öğren — recon at ya da kameradan bak
 
 **A Site retake:** Retake A Link'ten gelir ve saldırgan bunu bilir — biri Link çıkışını nişanlamış bekler. Link'ten flash atmadan çıkma; iki kişi aynı anda çıkın, biri düşerse diğeri trade alır. Molly'yi site içi sipere bas — post-plant oyuncusu orada bekler, molly onu açığa itince ikinci kişi vurur. Spike ile A Main açısı arasına smoke koy, defuse'u o perdenin arkasında başlat.
 
-**B Site retake:** İlk iş Tower — B'nin dominant açısı orası, geri almadan site zeminine yayılan yukarıdan tek tek toplanır. Saldırgan Tower'daysa flash ile sök ya da Tower açısını smoke ile kes. Bir kol Tower'ı alırken ikinci kol B Link'ten site'a girsin; B Elbow köşesini flash'la temizle — post-plant oyuncusu o dirsekten tutar. Tower sende olunca defuse eden arkadaşını yukarıdan korursun.
+**B Site retake:** İlk iş Tower — B'nin dominant açısı orası, geri almadan site zeminine yayılan yukarıdan tek tek toplanır. Saldırgan Tower'daysa flash ile sök ya da Tower açısını smoke ile kes. Bir kol Tower'ı alırken ikinci kol B Link'ten siteye girsin; B Elbow köşesini flash'la temizle — post-plant oyuncusu o dirsekten tutar. Tower sende olunca defuse eden arkadaşını yukarıdan korursun.
 
 ## 7. Post-Plant (Saldırı) Stratejileri
 
@@ -180,10 +181,10 @@ Spike'ı Tower'ın gördüğü tarafa dik — Tower sendeyse plant'i yukarıdan 
 
 ## 8. Ajan Notları
 
-- **Controller şart:** Uzun mid şeridi ve Yard cross'u smoke'suz oynanmaz. **Viper** duvarıyla mid hattını ya da geniş B site'ı tek util ile keser; molly'si TEK ŞARJ — en kritik boğaza sakla, boşa atma. **Omen** iki smoke'u ve dolumuyla hem Yard cross'unu hem site girişini taşır.
+- **Controller şart:** Uzun mid şeridi ve Yard cross'u smoke'suz oynanmaz. **Viper** duvarıyla mid hattını ya da geniş B siteyi tek util ile keser; molly'si TEK ŞARJ — en kritik boğaza sakla, boşa atma. **Omen** iki smoke'u ve dolumuyla hem Yard cross'unu hem site girişini taşır.
 - **Sentinel değerli:** **Killjoy** iki molly'sini bölerek kullanır — biri A Main girişine, biri plant noktasına. Bot girişte erken haber verir. **Cypher** iki telini iki ayrı girişe koyar; kamera mid şeridinden sürekli bilgi akıtır.
 - **Initiator:** Uzun mid hattında recon çok değerli — hatta çıkmadan önce tara. Flash'lı initiator A Main ve B Main girişlerini açar; stun duvar arkasındaki savunucuyu pozisyonundan söker.
-- **Duelist:** Uzun hatlar Op'a ve dash'e alan verir — Stairs/Top Mid hattında Op tutan Jett ya da Chamber, vurduktan sonra güvenliğe çekilir. Entry duelist'in görevi belli: flash arkasından ilk açıyı almak.
+- **Duelist:** Uzun hatlar Op'a ve dash'e alan verir — Stairs/Top Mid hattında Op tutan Jett vurduktan sonra dash'le güvenliğe çekilir; aynı hattı sentinel Chamber da TP'siyle oynar. Entry duelist'in görevi belli: flash arkasından ilk açıyı almak.
 
 ## 9. Anti-Strat
 
@@ -213,5 +214,5 @@ Spike'ı Tower'ın gördüğü tarafa dik — Tower sendeyse plant'i yukarıdan 
 1. "Corrode'da mid şeridi kimdeyse rotasyonu o yönetir. Mid'i boş bırakma."
 2. "Aynı girişte tekrar tekrar ölüyorsan sorun nişanın değil, giriş sıran: önce util, sonra sen."
 3. "Yard'ı ve uzun mid hattını smoke'suz geçme. Smoke inince geç — her seferinde."
-4. "B'ye girerken önce yukarı bak: Tower açısı kapanmadan site'a yayılma."
+4. "B'ye girerken önce yukarı bak: Tower açısı kapanmadan siteye yayılma."
 5. "Flash patlamadan çıkma. Önce patlama, sonra peek — sıra hiç değişmez."

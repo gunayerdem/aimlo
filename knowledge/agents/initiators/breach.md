@@ -6,7 +6,7 @@ verified: 2026-07-08
 # AJAN: Breach
 
 ## 1. Rol Kimliği
-Breach duvarın ardına vuran initiator. Flash'ı da, stun'u da, molly'yi de — hiçbiri duvarı yıkmaz ya da delik açmaz; etkileri katı yüzeyin öbür tarafına ulaşır. Sen duvarın bu tarafında kalırsın, kör/sarsma/hasar duvarın arkasındaki düşmana iner. Düşmanı görmen gerekmez; nerede durduğunu bilmen yeter. Ama tek başına hiçbir şey ifade etmezsin: takımın seni takip etmiyorsa attığın her şey boşa gider. Takımın arkandan giriyorsa turu sen açarsın. 13.00 ile stun'un (imza yeteneğin) bekleme süresi 60'tan 50 saniyeye indi — tur içinde daha sık sarsarsın.
+Breach duvarın ardına vuran initiator. Flash'ı da, stun'u da, molly'yi de — hiçbiri duvarı yıkmaz ya da delik açmaz; etkileri katı yüzeyin öbür tarafına ulaşır. Sen duvarın bu tarafında kalırsın, kör/sarsma/hasar duvarın arkasındaki düşmana iner. Düşmanı görmen gerekmez; nerede durduğunu bilmen yeter. Ama tek başına hiçbir şey ifade etmezsin: takımın seni takip etmiyorsa attığın her şey boşa gider. Takımın arkandan giriyorsa turu sen açarsın. 13.00 ile stun'un (imza yeteneğin) bekleme süresi kısaldı — artık bir turda iki sarsma planla: birini mid ya da erken alan kontrolüne, ötekini site girişine ayır.
 
 ## 2. Temel Sorumluluklar
 - Flash'ı duvarın içinden at — düşman seni görmeden kör olsun, takımın o boşluktan girsin.
@@ -54,19 +54,19 @@ Breach duvarın ardına vuran initiator. Flash'ı da, stun'u da, molly'yi de —
 **IF** Flash patlıyor ama takım daha köşeye gelmeden sönüyor
 **MEANING** Flash'ı çok erken atıyorsun — kör etme penceresiyle takımın girişi tutmuyor
 **COUNTER** Flash'ı takım girişin tam ağzındayken at, önce değil. "Üç, iki, bir, flash" diye geri say; sayı bitince hem sen hem takım aynı anda öne çıksın. Flash önde, ayaklar arkasında.
-**WHY** Flash atışla patlama arasında yarım saniye gecikir; bu pencerede sen girişe yetişemezsen kör süresi takım gelmeden boşa akar. Çok erken atarsan düşman dönüp toparlanacak vakit bulur; tam girişte atarsan kör hâldeki düşmana sıfır direnişle dalarsın. Değer zamanlamada, atışta değil.
+**WHY** Flash atıldığı anda patlamaz, kısa bir fitil süresi vardır; bu pencerede sen girişe yetişemezsen körlük takım gelmeden boşa akar. Çok erken atarsan düşman dönüp toparlanacak vakit bulur; tam girişte atarsan kör hâldeki düşmana sıfır direnişle dalarsın. Değer zamanlamada, atışta değil.
 
 **IF** Stun'la girip ölüyorsun ama önce flash atmamışsın
 **MEANING** Stun düşmanı yavaşlatır ama körleştirmez — sersemlemiş düşman hâlâ ezberlediği açına ateş eder
 **COUNTER** Stun'u tek başına giriş aracı sayma. Önce flash'la görüşünü kes, sonra stun'la sabitle, sonra peek at. Ya da stun'u takım dalarken sıkıştırmak için at, kendin ilk çıkan olma.
 **WHY** Sersemleme nişanı ve hareketi bozar ama ekranı karartmaz. Düşman seni göremese bile sesini ve önceki pozisyonunu bilir, körlemesine ortak açına sıkar. Körlük + sersemleme birlikte gelirse direnç sıfırlanır.
 
-**IF** Bütün util'i turun ilk saniyelerinde yoklama için atıyorsun
+**IF** Bütün util'i turun açılışında yoklama için atıyorsun
 **MEANING** Stun ve flash'ı erken harcıyorsun, asıl girişte elin boş kalıyor
 **COUNTER** Tek bir util'le yokla (örneğin uzaktan stun), gerisini gerçek giriş için sakla. Yoklama başka, site açma başka — ikisini aynı util'le karıştırma.
 **WHY** Breach'in değeri girişi açmakta. Util biterse takımın site'a utility'siz dalar, sen de elinde hiçbir şey olmadan ilk kurşunu yersin. Util zamanlaması kadar saklamak da beceridir.
 
-**IF** Round'un ilk saniyelerinde, daha hiçbir util atmadan ilk temasta ölüyorsun
+**IF** Round'un açılışında, daha hiçbir util atmadan ilk temasta ölüyorsun
 **MEANING** Kiti duvar arkasından çalışan ajanla açık açıya ilk giren sen olmuşsun — Breach'in gövdesi öncü değil, duvarın bu tarafının oyuncusu
 **COUNTER** İlk temas anında yanında bir duvar, önünde bir kapak olsun. Yoklamayı uzaktan stun'la yap, ilk kurşunu duelist yesin; sen açıyı sarsmadan peek atma.
 **WHY** Breach erken ölünce takımın girişi açacak flash'ı ve sarsması cebinde toprağa gider — kapıyı açacak adam yoksa takım kapalı kapıya yürür
@@ -116,7 +116,7 @@ Breach duvarın ardına vuran initiator. Flash'ı da, stun'u da, molly'yi de —
 **Adaptasyon okuma:** Duvar dibini terk edip açık alanda oynamaya başlarlarsa — en güçlü açılarını bırakmışlardır, takımın o açılardan utility'siz girer. Sen kurulumunu yapamadan erken çıkarlarsa — stun'la koşuyu durdur, flash'la takip et; duvar içinden vurduğun için koşan düşmana da aynısı işler. Flash sesine sırtlarını dönmeye başlarlarsa — stun'la aç, flash'ı ikinci dalgaya sakla, ezberi boz.
 
 ### Zorlanırken
-"Takımın seni takip etmiyor çünkü ne zaman ne atacağını söylemiyorsun. Her util'i atmadan önce sesli ver: hangi duvar, hangi yetenek. Söylemezsen takım hazırlanamaz, hazırlanamayan takım da girmez. Flash'ı erken atma — takım girişin ağzına gelince geri say, sayı bitince hep birlikte çıkın."
+"Ölüm yerine bak: aynı giriş iki round üst üste geçiyorsa sorun flash değil, o açıya ilk gövdeyi senin sokman. Duvara flash'ı at ama girişi takımla aynı anda yap — 'flash [duvar adı] üzerinden, birlikte' de, sayı bitince çıkın. Round geçmişinde tekrar eden bir yer yoksa util sırana bak: stun'ı yoklamaya harcadığın round'larda giriş anında elin boş kalıyor."
 
 ### Tahmin edilebilir olunca
 "Aynı duvar, aynı flash, her tur. Düşman flash sesi çıkmadan sırtını dönüyor. Başka duvara geç, açını değiştir, önce stun at arkasından flash bas. Bir tur flash'ı hiç atma, sadece stun'la gir — düşman dönmeye hazırlanırken sen sersemletip dalmış olursun."

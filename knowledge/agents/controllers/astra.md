@@ -24,9 +24,11 @@ Astra'yı doğru oynarsan harita sana çalışır, sen haritaya değil. Yıldız
 - Yıldızları düşman bölgesine çok erken koyup düşmanın yok etmesine izin vermek
 - Geri çekme animasyonu sırasında smoke'ta boşluk açmak
 - Round başında beş yıldızını koymadan yıldız moddan çıkmak — sonra yeni yıldız koymak için tekrar moda geçmen gerekir, o da seni boşuna açığa çıkarır
-- Geri çekme bıraktığı sahte smoke'a güvenip onu gerçek kapatma sanmak — o gölge saniyeler içinde dağılır, düşmanı durdurmaz
+- Geri çekme bıraktığı sahte smoke'a güvenip onu gerçek kapatma sanmak — o gölge açılır açılmaz dağılır, düşmanı durdurmaz
 
 ## 4. Kalıp -> Anlam
+
+> KANIT KURALI: Aşağıdaki IF blokları DAVRANIŞ İDDİASIDIR. Bir bloğu ancak veride karşılığı varsa (round geçmişi, ölüm yeri/tipi, öldüren ajan+silah, skor, side, ekonomi) kullan ve dersi o kanıta AÇIKÇA bağla: "son 3 round'da 2 kez A Main'de aynı açıdan öldün — bu round yıldızı A Main ağzına koy, geçiş anında patlat". Veri yoksa o bloğu hiç kurma; kanıtsız davranış iddiası uydurmadır.
 
 **IF** çatışmanın ortasında round başına ikiden fazla kez yıldız koyma moduna geçiyorsun
 **MEANING** O sırada bedenin açıkta, vurulursun
@@ -100,7 +102,7 @@ Astra'yı doğru oynarsan harita sana çalışır, sen haritaya değil. Yıldız
 
 **Döngüyü kır:** Bir round dar girişte çekme + stun aç. Sonraki round aynı yıldızı smoke'a çevir — düşman boşuna çekilir. Üçüncü round farklı bir dar girişe çekme koy. Düşman hangi yıldızın ne yapacağını asla bilemez.
 
-**Düşman adapte olduğunda:** Yıldız yarıçapından uzağa oynarlarsa yıldızı geri çek, daha derine taşı. Yıldızı yok etmeye çalışırlarsa gizli noktalara (kutu arkası, duvar içi) koy — yok etmek onlardan zaman ister. Pozisyonları kademeliyse izole olana çekme, diğerine smoke at, takımın iki kez 5v1 dövüşür. Yıldızı patlatmadan görüp yön değiştiriyorlarsa, smoke beklentisini kullan: smoke koymayıp boş bıraktığın açıdan takımın bekler, düşman güvenli sandığı yerden çıkar.
+**Düşman adapte olduğunda:** Yıldız yarıçapından uzağa oynarlarsa yıldızı geri çek, daha derine taşı. Yıldızı yok etmeye çalışırlarsa gizli noktalara (kutu arkası, duvar içi) koy — yok etmek onlardan zaman ister. Pozisyonları kademeliyse izole olana çekme, arkadakine smoke at — takımın önce tek kalanı, sonra kalanları sayı üstünlüğüyle karşılar. Yıldızı patlatmadan görüp yön değiştiriyorlarsa, smoke beklentisini kullan: smoke koymayıp boş bıraktığın açıdan takımın bekler, düşman güvenli sandığı yerden çıkar.
 
 **Önce ölme, smoke'u besle:** Astra'nın değeri ayakta kalmakta. Sen ölünce açık smoke'lar erkenden dağılır, takım açıkta kalır. Çatışmanın ucuna oynama; yıldızları gerideki güvenli bir noktadan aktive et, peek atmayı entry'lere bırak. Ayakta kalan bir Astra round boyunca beş yıldızını da besler.
 

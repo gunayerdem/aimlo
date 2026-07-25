@@ -8,12 +8,12 @@ verified: 2026-07-08
 ## 1. Rol Kimliği
 - Reyna'nın gücü tamamen öldürmeye bağlı. Öldürdükçe güçlenirsin; öldüremezsen oyunda yoksun.
 - Nişanına güveniyorsan Reyna oyna. Açılış düellolarını düzenli kazanıyorsan Reyna tam sana göre — her kafa atışı bir sonraki düelloyu kolaylaştırır. Nişanın tutarsızsa Reyna seçme; öldürme yoksa takıma verebileceğin hiçbir şey yok.
-- Reyna kartopu gibi büyür: öldür, iyileş, kaç, bir sonrakine tam canla gir. Öldüremezsen takıma katkın sıfır.
+- Reyna kartopu gibi büyür: öldür, heal'i tamamla, gerekiyorsa kaç, bir sonraki düelloya kitin yenilenmiş halde gir. Öldüremezsen takıma katkın sıfır.
 
-- Takımın senden beklentisi: öldür. Öldürmezsen iyileşmenin de kaçışının da hiçbir anlamı kalmaz. Takım senden düelloları kazanmanı, canını korumanı ve baskıyı katlamanı bekler.
+- Takımın senden beklentisi: öldür. Öldürmezsen iyileşmenin de kaçışının da hiçbir anlamı kalmaz. Takım senden düelloları kazanmanı, hayatta kalmanı ve baskıyı katlamanı bekler.
 
 ## Saldırıda Görevin
-- Kör küresini at, kör açılırken çık, kafadan vur. Düşmanı indirdikten sonra kapağın arkasına geç, heal ile tam cana gel, sonra bir sonraki düelloya gir.
+- Kör küresini at, kör açılırken çık, kafadan vur. Düşmanı indirdikten sonra kapağın arkasına geç, heal'i sonuna kadar tamamla, sonra bir sonraki düelloya gir.
 - Açıkta kalıp ikinci açıda bir düşman gördüysen kaçış ile köşeye sıvış.
 - Nişanın iyiyse sen önden git. Nişanın kötüyse takım arkadaşının arkasından gir ve kör küresiyle önünü aç.
 
@@ -22,15 +22,15 @@ verified: 2026-07-08
 - Uzayan savunmada kapağın arkasına çekil, heal ile düelloyu sürdür. Çoklu öldürme kokusu aldıysan ult'u aç.
 
 ## 3. Sık Yapılan Hatalar
-1. **Her öldürmeden sonra kaçış basmak** — Kaçış tehlike altındayken sıvışmak içindir. Kapağın arkasındaysan varsayılan her zaman heal olsun. Heal almadan kaçarsan bir sonraki düelloya yarım canla girersin.
+1. **Her öldürmeden sonra kaçış basmak** — Kaçış tehlike altındayken sıvışmak içindir. Kapağın arkasındaysan varsayılan her zaman heal olsun. Heal'i atlarsan öldürmeden kazandığın tek avantajı çöpe atar, bir sonraki düelloya yarım kitle girersin.
 2. **Kör küresini düşmanın vurabileceği yere atmak** — Kör küresinin canı var, vurulunca yok olur. Düşmanın burnunun dibine açıkta atarsan etki etmeden patlatırlar. Onun yerine duvarın içine ya da düşmanın zor nişan alacağı bir açıya at.
 3. **Alan açmak yerine sadece can koruyup oynamak** — Reyna öldürmek için var. Hep kaçışla hayatta kalıp geç gelen temizleme öldürmeleri topluyorsan takıma öncü değeri katmıyorsun.
 4. **Kör küresini sadece kendin için atmak** — Kör küresi senin tek takım desteğin. Takım arkadaşın önden giriyorsa düşmanı onun için de kör et.
-5. **Ult açıkken açıkta kalmak** — Ult açıkken her öldürme heal'i kendiliğinden tetikler ve seni tam cana çeker (üstü kalıcı fazla can) — güç öldürme zincirinde, kaçışta değil. Kaçış bedava DEĞİL ve ult kötü pozisyonu affetmez: yığılmış düşmanın üstüne dalarsan zincir başlamadan ölürsün. Ult açıkken bile kapağın arkasından çık.
+5. **Ult açıkken açıkta kalmak** — Ult açıkken her öldürme heal'i kendiliğinden tetikler (ult sürerken kazandığın fazlalık da erimez) — güç öldürme zincirinde, kaçışta değil. Kaçış bedava DEĞİL ve ult kötü pozisyonu affetmez: yığılmış düşmanın üstüne dalarsan zincir başlamadan ölürsün. Ult açıkken bile kapağın arkasından çık.
 6. **Nişanın tutmadığı gün Reyna seçmek** — Nişanın tutmuyorsa Reyna oyundaki en işlevsiz ajandır. Fark ettiğin an ya takım arkadaşının arkasına geç ya da ajan değiştir.
 7. **Düşmana doğru kaçış basmak** — Kaçış seni dokunulmaz yapar ama görünür bırakır. Dokunulmazlık bitince oracıkta ölürsün. Kaçışı her zaman kapağa ya da köşeye doğru kullan.
 8. **Takım toplanmadan tek başına erken giriş yapmak** — Reyna'nın trade'i yoktur; öldüğünde takım onu kaybeder. Arkanda kimse yokken giriş yaparsan bir öldürsen bile boşluğu dolduran olmaz, kalan düşmanlar üstüne yığılır. Girişini takım yardımının geleceği ana denkle.
-9. **İlk öldürmeden sonra açıkta kalıp ikinciyi aramak** — İlk düellodan sonra Reyna en savunmasız anındadır: heal yok, can düşük, pozisyon teşhir. Hemen kapağa çekilip tam cana gelmeden ikinci açıyı zorlama; ikinci düşmanı aynı açıdan ölü canla aramak en sık ölüm sebebidir.
+9. **İlk öldürmeden sonra açıkta kalıp ikinciyi aramak** — İlk düellodan sonra Reyna en savunmasız anındadır: heal'ini almamışsın, küren bitmiş, pozisyonun teşhir olmuş. Kapağa çekilip heal'i tamamlamadan ikinci açıyı zorlama; ikinci düşmanı aynı açıdan aramak en sık ölüm sebebidir.
 
 ## 4. Kalıp -> Anlam
 IF: Öldürme sayın yüksek ama ilk öldürme oranın düşük
@@ -38,10 +38,10 @@ MEANING: Öncü olarak oynamıyorsun. Takımın gerisinde kalıp temizleme öld�
 COUNTER: İlk düelloyu sen kap. Kafadan vur, heal yap, bir sonraki düelloya geç. Temizleme öldürmeleri alan açmaz.
 WHY: Heal seni arka arkaya düellolara hazırlar. Geride kalırsan döngü kırılır ve takıma öncü değeri katamazsın.
 
-IF: Heal'in iki katı kadar kaçış kullanıyorsun
-MEANING: Can korumayı alan açmaya tercih ediyorsun. Her düelloya yarım canla giriyorsun.
-COUNTER: Kuralı netleştir: birden fazla açıya açıksan kaçış, kapağın arkasındaysan ya da tek tehdidi temizlediysen heal. Varsayılan heal olsun.
-WHY: Heal her düelloyu tam canla almanı sağlar. Heal almadan kaçarsan her seferinde can açığı birikir.
+IF: Round geçmişinde ilk öldürmeyi alıp aynı round içinde hemen ardından öldüğün roundlar birikiyorsa (bu bloğu yalnız ölüm yeri/round geçmişi bunu gösteriyorsa kullan)
+MEANING: Öldürme sonrası varsayılanın kaçış — kapağa çekilip heal'i tamamlamıyorsun, ikinci düelloyu kitsiz açıyorsun
+COUNTER: Kuralı netleştir: birden fazla açıya açıksan kaçış, kapağın arkasındaysan ya da tek tehdidi temizlediysen heal. Ölüm yerini adıyla söyle (ör. "Round 6 ve 9'da A Short'ta ilk öldürmeyi aldın, ikisinde de aynı açıda kaldın") ve o açıdan kapağa çekilme hattını ezberle.
+WHY: Heal döngüsü ancak kapağın arkasında tamamlanırsa sıradaki düelloyu senin şartlarında açar; öldürdüğü yerde kalan Reyna ikinci düşmanın hazır crosshair'ine yürür.
 
 IF: Yüksek öldürmeli elden sonra sıfır öldürmeli eller geliyor
 MEANING: Klasik kartopu kırılması. Nişanın tutarken yakıp yıkıyorsun ama tutmadığında yedek planın yok.
@@ -55,13 +55,13 @@ WHY: Kör küresi senin tek öncü avantajın. Kullanmadan çıkmak bu avantajda
 
 IF: Ult sırasında sık ölüyorsun
 MEANING: Ult açıkken normalde girmeyeceğin pozisyonlara dalmaya başlıyorsun.
-COUNTER: Ult açıkken bile kapağın arkasından çık. Ult'un gücü zincirde: her öldürme seni kendiliğinden tam cana (üstü kalıcı fazla canla) çeker — ama ilk düelloyu kaybedersen zincir hiç başlamaz.
-WHY: Ult sana bedava kaçış vermez; yanlış açıda ilk mermiyi kafana yersen can yenilemesi devreye bile girmez. Kötü pozisyon ultla da ölümdür.
+COUNTER: Ult açıkken bile kapağın arkasından çık. Ult'un gücü zincirde: her öldürme heal'i kendiliğinden tetikler (ult sürerken kazandığın fazlalık erimez) — ama ilk düelloyu kaybedersen zincir hiç başlamaz.
+WHY: Ult sana bedava kaçış vermez; yanlış açıda ilk mermiyi kafana yersen zincir devreye bile girmez. Kötü pozisyon ultla da ölümdür.
 
 IF: İlk düelloyu kazanıyorsun ama hep ikinci düşman seni hemen indiriyor
-MEANING: Bir öldürüyorsun ama hemen kapağa geçmek yerine açıkta kalıp ikinci düşmanı arıyorsun. Reyna ilk düellodan sonra en savunmasız anındadır — heal yok, can düşük, pozisyon teşhir olmuş.
-COUNTER: İlk öldürmeden sonra hemen kapağa çekil. Açıktaysan kaçış, kapağın arkasındaysan heal. Tam cana gelmeden ikinci açıyı zorlamaya kalkma; ikinci düşmanı takım arkadaşına bırak ya da yeniden konumlanıp gir.
-WHY: İlk öldürmeyle teşhir olduğun yeri düşman zaten biliyor. Tam canla ve yeni bir açıdan tekrar girmek, ölü canla aynı açıdan ikinciyi aramaktan her zaman üstündür.
+MEANING: Bir öldürüyorsun ama hemen kapağa geçmek yerine açıkta kalıp ikinci düşmanı arıyorsun. Reyna ilk düellodan sonra en savunmasız anındadır — heal'ini almamışsın, küren bitmiş, pozisyonun teşhir olmuş.
+COUNTER: İlk öldürmeden sonra hemen kapağa çekil. Açıktaysan kaçış, kapağın arkasındaysan heal. Heal'i tamamlamadan ikinci açıyı zorlamaya kalkma; ikinci düşmanı takım arkadaşına bırak ya da yeniden konumlanıp gir.
+WHY: İlk öldürmeyle teşhir olduğun yeri düşman zaten biliyor. Heal'i tamamlayıp yeni bir açıdan tekrar girmek, aynı açıdan ikinciyi aramaktan her zaman üstündür.
 
 IF: Çok erken, takım toplanmadan tek başına giriş yapıyorsun
 MEANING: Reyna'yı "her el ilk kanı al" diye oynuyorsun ama takım arkanda yok. Bir öldürsen bile arkadan trade gelmiyor, geri kalan düşmanlar üstüne yığılıyor.
@@ -87,16 +87,16 @@ WHY: Reyna'nın tek öncü avantajı sürpriz + kör. Düşman çıkışını ez
 
 ## 6. Eşleşme Notları
 - **Zorlandığın ajanlar:** KAY/O (bastırma yeteneği heal ve kaçışını tamamen kapatır, yeteneksiz kalırsın), Fade (keşif yeteneğiyle seni ve kaçış izini açığa çıkarır, yaratığı sen kaçarken peşine takılır), Chamber (keskin tabancasıyla kör-çıkış zamanlamanı okur, sen küre patlatıp çıkarken o açıdan tek atışta keser).
-- **Baskıladığın ajanlar:** Düz düelloyu kaybeden yavaş, destek yeteneklerine yaslanan ajanlar. Viper'ı doğrudan düelloda ezersin, molly'leri boyunca heal ile dayanırsın. Sage'e karşı da verimlisin: düelloyu hızlı kapatıp duvarı ya da yavaşlatması iş görmeden öldürürsün, öldürdükten sonra heal ile zaten öndesin.
+- **Baskıladığın ajanlar:** Düz düelloyu kaybeden yavaş, destek yeteneklerine yaslanan ajanlar. Viper'ı doğrudan düelloda ezersin — ama molly'sinin içinde durup heal'le dayanmaya kalkma: o alanda aldığın hasar katlanır, önce alandan çık, heal'i dışarıda tamamla. Sage'e karşı da verimlisin: düelloyu hızlı kapatıp duvarı ya da yavaşlatması iş görmeden öldürürsün, öldürdükten sonra heal döngüsü zaten sende.
 - **Uyum:** KAY/O'ya karşı bıçağı bitene kadar bekle, sonra gir. Fade'e karşı bot karşı açıya koşmasın diye kaçışı takım arkadaşına doğru bas, kaçmak için ters yöne değil. Viper duvarı, Sage kalkanı gibi alan kapatan yetenekler açıkken çıkma — yetenek biter bitmez gir.
 
 ## 7. Oyuncuya Ne Söylenmeli
 ### İyi oynarken
-**Oyuncu Aksiyonu:** Kör küresini açıyı görerek köşeye atıyorsun, kör açılırken çıkıyorsun, sonra kapağın arkasına geçip heal ile tam cana geliyorsun.
-**Düşman Algısı:** Her düelloyu tam canla kazanan bir Reyna görüyorlar. Zor atış yaptığını sanıyorlar ama asıl avantaj kör-heal döngüsü: kör avantajıyla giriyor, öldürmeler arasında tam cana dönüyorsun. Sana neden karşılık veremediklerini bir türlü çözemiyorlar.
-**Düşman Tepkisi:** Ya kör hâlde düelloyu kabul ederler (kaybederler) ya da küreyi vurmak için dönerler (nişanlarını giriş açısından bir an çekerler). Heal yüzünden seni yıpratamıyorlar — her düello senin tam canına karşı onların birikmiş hasarına sıfırlanıyor.
-**Fırsat Penceresi:** Duvarın içinden gelen kör küresi düşmanı önceden ateş edemez hâle getirir. Her heal sonraki düelloyu 20-50 can avantajıyla açar.
-**Tekrar Düzeni:** 1. düello: kör küresini duvardan geçir, çık, kafadan vur, kapağın arkasında heal. 2. düello: farklı açıdan kör küresi at, tam canla çık, kafadan vur, heal. 3. düello: ult varsa aç ve zincirle. Birden fazla açıya açıksan kaçış, değilsen varsayılan heal.
+**Oyuncu Aksiyonu:** Kör küresini açıyı görerek köşeye atıyorsun, kör açılırken çıkıyorsun, sonra kapağın arkasına geçip heal'i sonuna kadar tamamlıyorsun.
+**Düşman Algısı:** Kaybettiklerini sandıkları düelloları kazanan bir Reyna görüyorlar. Zor atış yaptığını sanıyorlar ama asıl avantaj kör-heal döngüsü: kör avantajıyla giriyorsun, öldürmeler arasında kapağın arkasında toparlanıyorsun. Sana neden karşılık veremediklerini bir türlü çözemiyorlar.
+**Düşman Tepkisi:** Ya kör hâlde düelloyu kabul ederler (kaybederler) ya da küreyi vurmak için dönerler (nişanlarını giriş açısından bir an çekerler). Heal döngüsü yüzünden yıpratma savaşını kazanamıyorlar — sen her düelloyu kapağın arkasında sıfırlıyorsun.
+**Fırsat Penceresi:** Duvarın içinden gelen kör küre, açıyı tutan savunucunun ilk atışını çalar — o pencerede ilk mermi senin. Heal'i kapağın arkasında tamamladığın her düelloda pencere yeniden açılır.
+**Tekrar Düzeni:** 1. düello: kör küresini duvardan geçir, çık, kafadan vur, kapağın arkasında heal. 2. düello: farklı açıdan kör küresi at, heal'in bittiğinden emin ol, çık, kafadan vur. 3. düello: ult varsa aç ve zincirle. Birden fazla açıya açıksan kaçış, değilsen varsayılan heal.
 **Düşman Uyumu:** 3-4 el sonra kör küresinin ulaşamadığı köşelere geçerler, heal animasyonunda çift açıyla basarlar veya küre kurulmadan önce agresif gelirler.
 **Karşı Uyum:** Küreden kaçınan pozisyon aldıklarında: küreyi açıkta ama yüksekten at, yukarı bakmak zorunda kalsınlar. Çift açı bastıklarında: kaçışla dokunulmaz geç ve yeniden konumlan. Erken geldiklerinde: pasif açı tut, küreye doğru yürümelerini sağla. Küreyi sadece kör etmek için değil, düşman nişanını yönlendirmek için de kullan: düşman küreye bakarken sen çıkarsın — nişan sende değil, kürede.
 
@@ -110,7 +110,7 @@ WHY: Reyna'nın tek öncü avantajı sürpriz + kör. Düşman çıkışını ez
 "Takımdan önce giriyorsun, arkanda kimse yok. Bir öldürsen bile boşluğu dolduran olmuyor. Girişini takımla denkle — sen kör küresiyle aç, hemen arkandan gelsinler."
 
 ### İlk öldürmeden sonra açıkta kaldığında
-"İlk düelloyu kaptın ama hemen ikinciye gittin. O an en savunmasız hâlindesin — heal yok, can düşük. Bir öldür, hemen kapağa çekil, tam cana gel, sonra yeni açıdan gir."
+"İlk düelloyu kaptın ama hemen ikinciye gittin. O an en savunmasız hâlindesin — heal'ini almadın, küren bitti, yerin teşhir oldu. Bir öldür, hemen kapağa çekil, heal'i tamamla, sonra yeni açıdan gir."
 
 ## 8. Bu Ajana Karşı
 - Reyna'nın kozu kör küresi + çıkış: küreyi atar, körlük otururken çıkar. Küre sana doğru geldiği an bir adım geri çekilip körlük alanından çık ve çıkacağı açıya crosshair'i tut — seni kör sanarak çıkar, körlenmediysen ilk atış sende. Kürenin canı var: uzaktan görüyorsan patlat.

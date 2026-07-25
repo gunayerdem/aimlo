@@ -50,9 +50,9 @@ Killjoy'un cihazları yerde sabit durur, kıpırdamaz. Raze'in botu siteye dalı
 ## AIMLO Ne Demeli
 
 ### Kaybeden taraftaysan
-**Killjoy kurulumunu Raze'e kaptırıyorsan**: "Tareti aşağıda bırakırsan nade onu anında götürür, yukarı al. Botunu Raze'in botunun yolundan çek. Molly'lerini birbirinden ayır, hepsini aynı noktaya yığma."
+**Killjoy kurulumunu Raze'e kaptırıyorsan (düşman kompunda Raze)**: "Nade taretini yerde buluyor — tareti yukarı al, botunu Raze'in bot hattından çek. Molly'lerini birbirinden ayır, hepsini aynı noktaya yığma; tek nade hepsini birden silmesin."
 
-**Raze olarak Killjoy kurulumunu temizleyemiyorsan**: "Botu oyuncu öldürmek için harcıyorsun. Önce cihazlara gönder, Killjoy'un botu tetiklensin, sonra tareti nade ile vur. Killjoy'un kurulumu ayaktayken patlayıcını boşa harcama."
+**Raze aynı girişte kuruluma ölüyorsa (repeatedPosition, düşman kompunda Killjoy)**: "Aynı girişte ikinci kez kurulumun içine yürüdün ve botunu oyuncu avlamaya harcadın. Botu önce cihazlara gönder, Killjoy'un botu tetiklensin, sonra tareti nade ile vur — kurulum ayaktayken içeri girme."
 
 ### Kazanan taraftaysan
 **Raze olarak Killjoy cihazlarını siliyorsan**: "Killjoy site'ta etkisiz kaldı. Takım girmeden önce cihazları temizlemeye devam et — o round karşında sadece silah var, kurulum yok."

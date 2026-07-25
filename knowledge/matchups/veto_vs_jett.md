@@ -15,7 +15,7 @@ Veto giriş hazırlığını keser: önleyici cihazı fırlatılan util'i havada
 
 ## Sinyal-Kapılı Dersler
 
-**IF** savunmada round'un ilk saniyelerinde öldün (side=Savunma, deathTiming=erken) ve düşman kompunda Jett var
+**IF** savunmada round açılışında öldün (side=Savunma, deathTiming=erken) ve düşman kompunda Jett var
 **MEANING** Jett'in giriş kozu dash'tir — bağlama alanı giriş ağzında kalırsa dash tek hamlede ötesine iner ve seni alanın örtmediği noktada yakalar
 **COUNTER** Bağlama alanını giriş ağzına değil dash'in bittiği site içi iniş noktasına kur; önleyiciyi Jett'in girişini örten duman hattına yerleştir
 **WHY** Dash alanın üstünden tek hamlede geçer; iniş noktası kilitliyse Jett yakalanır, dumanı havada imha olursa açık girmek zorunda kalır

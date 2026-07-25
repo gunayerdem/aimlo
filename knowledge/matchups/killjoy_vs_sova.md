@@ -12,30 +12,30 @@ tags: [matchup, killjoy, sova, sentinel, initiator]
 
 ## 1. Matchup Özü
 
-Sova seni round başında silmeye gelir: drone'u kurulumunu görür, hasar oku turret'ini patlatır — sonra takımı girerken önünde engel kalmaz. Önemli gerçek: recon yalnızca OYUNCULARI işaretler, turret'i ve botu göstermez — kurulumu ancak drone görür. Senin kozun tek: kurulumu her round aynı yere kurma. Sova'nın ezberi sabit hedef bekler. Hedefi kaydır, ok boşa gider.
+Sova seni round başında silmeye gelir: drone'u kurulumunu görür, hasar oku taretini patlatır — sonra takımı girerken önünde engel kalmaz. Önemli gerçek: recon yalnızca OYUNCULARI işaretler, tareti ve botu göstermez — kurulumu ancak drone görür. Senin kozun tek: kurulumu her round aynı yere kurma. Sova'nın ezberi sabit hedef bekler. Hedefi kaydır, ok boşa gider.
 
 ## 2. Kim Avantajlı?
 
 **Killjoy lehine durumlar:**
-- Dar geçitlerde (Bind Hookah, Sunset B) — turret girişi görür ve ateş açar, Sova kaçacak yer bulamaz.
+- Dar geçitlerde (Bind Hookah, Sunset B) — taret girişi görür ve ateş açar, Sova kaçacak yer bulamaz.
 - Sova drone ve hasar okunu harcadıysa — kurulumun özgür çalışır, kimse yerini bilmez.
 - Ult'un hazırsa — Sova'nın retake'i kapanır, takımın siteyi tutar.
 - Sova hep aynı hatta oynuyorsa — kurulumu o hattan çek, yetenekleri boşa gitsin.
 
 **Sova lehine durumlar:**
 - Uzun görüş hattı haritalarında (Icebox) — açık duran seni recon her round işaretler.
-- Hasar oku ezberlenmiş turret noktasını round başında vurursa — turret gider, Sova takımı boş siteye dalar.
+- Hasar oku ezberlenmiş taret noktasını round başında vurursa — taret gider, Sova takımı boş siteye dalar.
 - Ult'u pozisyonuna gelirse — duvar arkası korumaz, canın erir.
-- Drone'u siteye girerse — molly, bot, turret hepsi görüntüye düşer, kurulumun haritaya çıkar.
+- Drone'u siteye girerse — molly, bot, taret hepsi görüntüye düşer, kurulumun haritaya çıkar.
 
-**Dengeli haritalar:** Haven, Ascent — turret ve bot yerleşimini round başında kaydırırsan Sova'nın önceki bilgisi işe yaramaz; her round yeniden yetenek harcamak zorunda kalır.
+**Dengeli haritalar:** Haven, Ascent — taret ve bot yerleşimini round başında kaydırırsan Sova'nın önceki bilgisi işe yaramaz; her round yeniden yetenek harcamak zorunda kalır.
 
 ## 3. Önemli Düellolar
 
-**IF** Sova hasar oku turret'ini patlattı
-**MEANING** Turret gitti, o round kurulumun yarım — Sova takımı sana karşı bilgi avantajıyla giriyor.
-**COUNTER** Turret'i hasar oku geldiği hattan uzağa, köşe arkasına koy. Her round aynı nokta olmasın — en az iki ayrı yerleşim belirle ve sırayla kullan.
-**WHY** Hasar oku lineup'ı sabit hedefe göre ayarlanır. Turret her round aynı yerdeyse Sova bir kere öğrenir, sonra her round basar.
+**IF** Sova hasar oku taretini patlattı
+**MEANING** Taret gitti, o round kurulumun yarım — Sova takımı sana karşı bilgi avantajıyla giriyor.
+**COUNTER** Tareti hasar oku geldiği hattan uzağa, köşe arkasına koy. Her round aynı nokta olmasın — en az iki ayrı yerleşim belirle ve sırayla kullan.
+**WHY** Hasar oku lineup'ı sabit hedefe göre ayarlanır. Taret her round aynı yerdeyse Sova bir kere öğrenir, sonra her round basar.
 
 ---
 
@@ -61,8 +61,8 @@ Sova seni round başında silmeye gelir: drone'u kurulumunu görür, hasar oku t
 ---
 
 **IF** Sova drone'unu siteye soktu
-**MEANING** Turret, bot, molly hepsi Sova takımının ekranına düşer — kurulumun haritaya çıktı.
-**COUNTER** Drone'u gördüğün an tüfekle vur — hemen düşer. Turret zaten otomatik ateş açar.
+**MEANING** Taret, bot, molly hepsi Sova takımının ekranına düşer — kurulumun haritaya çıktı.
+**COUNTER** Drone'u gördüğün an tüfekle vur — hemen düşer. Taret zaten otomatik ateş açar.
 **WHY** Drone'un canı çok düşük. Vurmazsan o round kurulumun sıfırlanır.
 
 ---
@@ -76,12 +76,12 @@ Sova seni round başında silmeye gelir: drone'u kurulumunu görür, hasar oku t
 
 **IF** Sova drone + hasar oku zinciriyle kurulumunu tek round'da sildi
 **MEANING** Tüm donanım haritaya çıktı ve temizlendi — o round çıplaksın.
-**COUNTER** Kurulumu tek katmana yığma. Turret bir tarafa, bot başka tarafa. Birini kaybedersen diğeri hâlâ çalışır. Sonraki round yerleşimi tamamen değiştir.
+**COUNTER** Kurulumu tek katmana yığma. Taret bir tarafa, bot başka tarafa. Birini kaybedersen diğeri hâlâ çalışır. Sonraki round yerleşimi tamamen değiştir.
 **WHY** Tüm donanım aynı noktadaysa Sova tek hamlede hepsini bitirir. Dağıtırsan zincir kopar.
 
 ## 4. Donanım Karşılaştırması
 
-Killjoy: turret + bot + molly + ult.
+Killjoy: taret + bot + molly + ult.
 Sova: recon + hasar oku + drone + ult.
 
 Sova'nın yetenekleri hızlı harcanır: drone + hasar oku zinciri round başında kurulumunu tamamen açabilir. Senin donanımın daha yavaş ama site kapama gücü yüksek. Ult'un Sova'nın en büyük korkusu — retake tamamen kapanır. Sova'nın ult'u ise senin en büyük korkun — siper arkası korumaz.
@@ -96,8 +96,8 @@ Kural şu: Sova yeteneklerini harcamadan kurulumun tam güçte çalışmaz. Sova
 
 ## 6. Koç Notları
 
-**Killjoy olarak:** Sova seni her round arar — ama her round aynı yerde buldurtma. Turret'i, botu, molly'ni iki ayrı yerleşim planıyla oyna. Birini bilirse diğerine geç.
+**Killjoy olarak:** Sova seni her round arar — ama her round aynı yerde buldurtma. Tareti, botu, molly'ni iki ayrı yerleşim planıyla oyna. Birini bilirse diğerine geç.
 
-**Sova olarak:** Killjoy turret'ini göremiyorsan drone gönder. Recon kurulumu işaretlemez — turret'i, botu ancak drone görüntüsünde görürsün.
+**Sova olarak:** Killjoy taretini göremiyorsan drone gönder. Recon kurulumu işaretlemez — tareti, botu ancak drone görüntüsünde görürsün.
 
 **İkisi için de:** Yerleşimini tahmin ettiren taraf round'u kaybeder.

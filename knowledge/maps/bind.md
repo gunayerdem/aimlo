@@ -33,8 +33,10 @@ Bind'de site'a girmek görece kolay, ama içeri girince düşman her açıdan ge
 
 ## 2. Ölüm Bölgeleri
 
+> Bu bölümü kullanırken dersi KANITA bağla. Round geçmişi elindeyse cümleye onunla başla: "A Bath'ta bu maçta 3. kez düştün", "iki round üst üste Hookah'dan vuruldun". Veri yoksa sayı uydurma — o round'un ölüm yerini, öldüren ajanı ve silahı adlandırmakla yetin. Teleporter sesi, ekonomi ve skor gibi gerçekten verilmiş bilgiyi derse kat; verilmemişse o iddiayı hiç kurma.
+
 **Ölüm Bölgesi 1: A Showers / A Bath (Hamam)**
-A Showers — yani A Bath, Hamam — tek giriş tek çıkış: içeri girdin mi geri dönüş yok. Seni öldüren şey nişanın değil, util kullanmadan girmen. A Bath'a girerken en az bir flash, bir smoke harca. Smoke'suz flash'sız girersen A Short crossfire'ı ve Heaven açısı seni bitirir. Buraya her girişinde ölüyorsan derdin nişan değil, util disiplini.
+A Showers — yani A Bath, Hamam — dar ve tek yönlü akan koridor: içeride siper yok, geri çekilirken sırtın açık. Üstüne B Long teleporter'ı da bu ağza çıkar; arkanı hiç yoklamadan ilerlersen hem önden hem TP'den yersin. Seni öldüren şey nişanın değil, util harcamadan girmen: en az bir flash, bir smoke bırak. Smoke'suz flash'sız girersen A Short crossfire'ı ve Heaven açısı seni bitirir. Buraya her girişinde ölüyorsan derdin nişan değil, util disiplini.
 
 **Ölüm Bölgesi 2: B Long boğaz**
 B Long'u tek başına peek atarak geçemezsin. Elbow'dan ve B Site'tan crossfire gelir — sırayla girerseniz tek tek dökülürsünüz. Çözüm net: takım olarak util dökün, aynı anda girin. Biri öne çıkarken diğerleri arkada beklerse B Long sizi yer.
@@ -110,7 +112,7 @@ COUNTER:
 - Sesin ardından atış sesleri de geliyorsa gerçek split var demektir, o zaman rotate hızlanır.
 WHY: Teleporter sesi ham bilgidir, yorumlanması lazım. Sadece bir oyuncu rotate eder, diğerleri durur. Bu hem gerçek split push'a hazırlık yapar hem fake'e düşmeni önler. Tüm takım sese tepki verirse savunma yapısı bozulur, saldırı tarafına bedava site gider.
 
-**Pattern 4: Retake Protokolü**
+**Pattern 4: Retake Düzeni**
 IF: Site'ı kaybettiniz, retake yapmanız gerekiyor ama oyuncular dağınık girip tek tek ölüyor.
 MEANING: Bind'de site'lar geniş, saldırı tarafı birden fazla açıya yayılır. Dağınık retake saldırının crossfire'ına takılır, retake oyuncuları peş peşe gider. Retake'in çalışması için senkronize giriş şart.
 COUNTER:
@@ -122,13 +124,13 @@ WHY: Bind'in geniş site'leri yüzünden tek yönden retake tüm açılara açı
 ## 5. Agent Tier Listesi
 
 ### S-Tier
-- **Raze**: Bind'de Raze oynamak zorundasın. Bot'unu B Long'a gönder — bedava bilgi, düşman pozisyonu açılır. Sıçrama util / patlayıcı ile agresif entry at. Molly'sini A Bath ve Hookah'a at, karşılıksız hasar ver. Ult'u geniş site'larda birden fazla düşmanı bitirir. Takımında Raze yoksa dezavantajlı başlıyorsun.
+- **Raze**: Bind'de Raze oynamak zorundasın. Bot'unu B Long'a gönder — bedava bilgi, düşman pozisyonu açılır. Sıçrama paketiyle A Bath ağzından site'a ya da Hookah'ya beklenmedik açıdan dal, ilk açıyı sen aç. Molly'sini A Bath ve Hookah'ya at, karşılıksız hasar ver. Ult'u geniş site'larda birden fazla düşmanı bitirir. Takımında Raze yoksa dezavantajlı başlıyorsun.
 - **Skye**: Flash'ı Bind'in dar girişlerinde çift iş yapar — hem kör eder hem düşmanın orada olup olmadığını söyler. Bot'uyla A Bath ve Hookah'yı tek başına temizle. Sert düellodan sonra heal'le takımı ayağa kaldır.
 - **Brimstone**: Harita küçük, smoke menzilin dert değil. A Execute'te Heaven + Lamps + ekstra, B Execute'te Elbow + Hookah + ekstra — üç smoke yeter. Molly'sini post-plant'te spike üstüne bırak, defuse'u engelle. Bu tek başına round kazandırır.
 
 ### A-Tier
-- **Killjoy**: Tuzağını ve bot'unu Hookah'ya koy, kontrol sana gelir. Ult'unu B Site retake'te kullan — tüm site'ı temizler.
-- **Cypher**: Teli A Short ve Hookah'ya göm. Kamerayı teleporter çıkışına bak, takıma bedava bilgi ver. Bind'in iki yollu yapısı senin kitin için biçilmiş kaftan.
+- **Killjoy**: Tuzağını ve bot'unu Hookah'ya koy, kontrol sana gelir. Ult'unu B Site retake'te aç — kapsama alanındaki herkes kilitlenir ama ölmez; takım o pencerede birlikte girsin, kilitlenenleri siz bitirin.
+- **Cypher**: Teli A Short ve Hookah'ya göm. Kamerayı gerçek teleporter çıkışlarına — B Window ve A Lobby/Showers'a — bakacak şekilde koy; çıkan düşmanı takım daha peek atmadan görsün. Bind'in iki yollu yapısı senin kitin için biçilmiş kaftan.
 - **Fade**: Recon'unu site'a girmeden fırlat, düşman pozisyonları açılır. Bot'unu A Bath ve Hookah temizliğinde kullan. Ult'unu post-plant'te spike üstüne at, defuse'u kes.
 - **Omen**: Kaçışını Bind'in teleporter'larıyla birleştir, düşman seni okuyamaz. Flash'ın dar koridorlarda güçlü çalışır. Smoke'ların uzak mesafeye gider, Brimstone yoksa controller sen olursun.
 
@@ -162,6 +164,8 @@ WHY: Bind'in geniş site'leri yüzünden tek yönden retake tüm açılara açı
 - **B Hookah (B Window)**: B Site'ın üstündeki pencere. Burası senin elinde değilse B'ye girme — açık arazide avlanırsın.
 - **B Elbow**: Site içindeki dirsek dönüşü. Anchor olarak dur — B Long'a köşesel atış açısı verir.
 - **B Long**: B Site'a uzanan açık alan. Saldırı buradan gelir. Savunmada burayı boğaz noktası gibi kullan, push'u boğ.
+- **B Short**: B Lobby'den Hookah penceresine çıkan kısa yol. B saldırısının yarısı buradan gelir: saldırıda Hookah'yı B Short'tan al, sonra B Long'a bağlan; savunmada tel ya da bot ile kapat, çünkü buradan çıkan doğrudan yukarı açıya oturur. B Short'u vermeden Hookah düşmez.
+- **B Link**: Hookah ile site arasındaki bağlantı. Rotate ve retake buradan geçer — post-plant'te bu ağzı bir kişi tutsun, savunmanın en sessiz girişi burası.
 - **B Garden (Arka Bahçe)**: Site'in arka kısmı. Spike kurulduktan sonra saldırı buradan çapraz ateş kurar — retake yaparken önce buraya bak.
 - **B Hall**: B Long'dan site'a açılan dar geçiş. Smoke veya flash yoksa buradan geçen düz ölür.
 
@@ -173,7 +177,7 @@ WHY: Bind'in geniş site'leri yüzünden tek yönden retake tüm açılara açı
 ### Off-Angle Pozisyonları
 - **A Lamps deep corner**: Lamps'ın en dip köşesi. Saldırı orayı temizlemeyi atlar. İki round işe yarar — sonra açın tutulur, yerini değiştir.
 - **B Garden wall**: Duvarın kenarında bekle — retake yapan savunmacı seni bu açıda aramaz.
-- **Hookah ceiling peek**: Hookah'nın üst kenarından tut — aşağıdan peek atan saldırgan kafana bakar ama seni göremez.
+- **Hookah üst kenar**: Hookah penceresinin üst kenarından tut. Aşağıdan gelen saldırgan pencerenin ortasını ve alt kenarını nişanlar; kafan onun beklediği hizada olmaz. İlk kurşunu ver, hemen geri kapan — ikinci peek'te aynı yükseklikte durma, o hizayı bir kez gören ikincisinde nişanlar.
 
 ## 8. Post-Plant Stratejileri
 
@@ -218,10 +222,10 @@ WHY: B'de CT'den gelen yol doğrudan B Garden crossfire'ına çarpar, B Long ise
 ## 9. Ekonomi Stratejileri
 
 **Pistol Round (Round 1)**
-B'ye gidiyorsan Hookah'yı önceden al. Pistol'de util yok, Hookah flank'ı tek başına round'u bitirir. Savunmadaysan Hookah'ya bir oyuncu koy — B güvende.
+B'ye gidiyorsan Hookah'yı önceden al: 800 kredin bir tabanca + bir-iki util'e yeter, util'ini Hookah'yı temizlemeye harca. Oradan gelen tek kişi pistol round'unu bitirir. Savunmadaysan Hookah'ya bir oyuncu koy — B güvende, o oyuncu ölse bile bilgi gelir.
 
 **Eco/Force Buy Kararları**
-Bind'de eco'da saldırı tarafındaysan avantajlısın. Mesafe kısa, Sheriff ve Marshal burada işe yarar.
+Bind'de eco'da saldırı tarafındaysan avantajlısın. Mesafeler kısa — Sheriff ve Bandit yakın açıda tüfeğe kafa tutar. Marshal'ı yalnız B Long hattını tutacaksan al; A Bath ve Hookah gibi dar geçişlerde ölü ağırlık.
 
 - A Bath rush veya Hookah push'unu eco'da da dene — açı çok dar, pahalı silahın farkı azalır.
 - Diğer haritalarda eco'da bu push'ları yapmazsın, Bind'de yaparsın.
@@ -235,7 +239,7 @@ Controller'ın smoke'ları yoksa execute atma. Nokta.
 Smoke'suz execute full buy'da bile round kaybettirir. Smoke yoksa execute'u bırak, default oyna, düşmanın yerini öğren.
 
 **Save Round Kararları**
-Teleporter'ı save için kullan. Düşman A'yı aldıysa teleporter'dan B'ye geç. Düşman B'yi aldıysa teleporter'dan A'ya geç. Düşman seni kovalarken sen çoktan karşı tarafa ulaşmış olursun.
+Save'de teleporter'a ancak çıkışın boş olduğunu biliyorsan gir: A Short TP seni B Window'a, B Long TP seni A Lobby/Showers'a bırakır — yani rakibin geldiği koridorlara. Normal çıkış yolun kesildiyse TP sana zaman kazandırır; kesilmediyse silahı spawn yönüne çekerek kurtar. Girmeden önce tek soru: çıkışta beni bekleyen var mı, sesimi kim duyacak?
 
 ## 10. Anti-Strat
 
@@ -256,7 +260,7 @@ IF: Düşman her round teleporter'dan geçerek split push yapıyorsa.
 MEANING: Teleporter çıkışını kim kontrol ederse round'u o kontrol eder.
 COUNTER:
 - Gerçek teleporter çıkışlarına tel koy: B Window/Hookah tarafına (A Short → B teleporter çıkışı) ve A Lobby/Showers'a (B Long → A teleporter çıkışı). A Short çıkış değil giriştir, oraya tel koymak teleporter'dan çıkanı yakalamaz.
-- Bot'unu bu çıkışlara bak — çıkan düşman hem hasar alır hem ses verir.
+- Bot'unu bu çıkışlara bakacak şekilde kur — teleporter'dan çıkan hem hasar alır hem sesiyle kendini ele verir.
 - Çıkışta oyuncu bekletebilirsin — teleporter animasyonu sırasında düşman ateş edemez, sen edebilirsin.
 
 WHY: Teleporter'dan çıkarken kısa bir an savunmasızsın. O anı utille veya oyuncuyla yakalarsan çıkan düşmanı bedavaya vurursun ve bu stratejisi çöker.

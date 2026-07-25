@@ -41,9 +41,9 @@ tags: [matchup, jett, chamber]
 
 ## AIMLO Ne Demeli
 ### Kaybeden taraftayken
-**Jett Chamber'a kaybediyorken**: "Op'una karşı açık görüş hattında durma. Smoke at, mesafeyi kapat — dash mesafesine girince karar anı senin."
+**Jett tek-atış silahına ölüyorsa (killerInfo: Operator / Chamber'ın ult keskin nişancısı)**: "Seni tek atışla düşürdüğü hat açık görüş hattıydı — orada durma. Smoke at, mesafeyi kapat; dash mesafesine girince karar anı senin."
 
-**Chamber Jett'e kaybediyorken**: "Noktanı okuyor, oraya bakarak bekliyor. Her round farklı yere koy. Nereye gideceğin belliyse ışınlanma seni hazır bekleyen Jett'in önüne bırakır."
+**Chamber aynı noktada üst üste ölüyorsa (repeatedPosition)**: "Aynı noktaya ikinci kez döndün, Jett oraya bakarak bekliyor. Işınlanma noktanı her round farklı yere koy — nereye gideceğin belliyse ışınlanma seni hazır bekleyen Jett'in önüne bırakır."
 
 ### Kazanan taraftayken
 **Jett Chamber'ı eziyorken**: "Op'unun işe yaramadığı mesafeye çekiyorsun. Uzak görüş hattını verme, smoke ya da flash ile kapatmaya zorla."

@@ -58,9 +58,9 @@ Sova, Killjoy'un taretini, botunu ve molly'sini daha site'a girmeden söküp ata
 
 ## AIMLO Ne Demeli
 
-**Killjoy Sova tarafından sürekli temizleniyorsa**: "Kurulumun tam Sova'nın beklediği yerde. Tareti ve botu standart açılardan uzağa al. Sova lineup'larını standart dışı atmak zorunda kalırsa isabeti düşer, temizliği tamamlayamaz."
+**Killjoy kurulumu her round aynı yerde sökülüyorsa (düşman kompunda Sova)**: "Kurulumun tam Sova'nın ezberlediği yerde. Tareti ve botu standart açılardan uzağa al — Sova hasar okunu ezber dışı atmak zorunda kalırsa isabeti düşer, temizliği tamamlayamaz."
 
-**Sova Killjoy'u temizleyemiyorsa**: "Oyunculara değil cihazlara odaklan. Recon önce taret ve botu göstermeli. Gördükten sonra hasar okuyla bitir. Kurulum gidince site açılır."
+**Sova aynı girişte kuruluma ölüyorsa (repeatedPosition, düşman kompunda Killjoy)**: "Aynı girişte ikinci kez kurulumun içine girdin — recon'un oyuncuyu arıyor, cihazı değil. Önce taret ve botu göster, gördükten sonra hasar okuyla bitir. Kurulum gidince site açılır."
 
 **Sova Killjoy'u parçalıyorsa**: "Kurulumunu haritanın diğer ucundan bitiriyorsun. Lineup'larını güncel tut, her round önce cihaz pozisyonlarını hedefle."
 

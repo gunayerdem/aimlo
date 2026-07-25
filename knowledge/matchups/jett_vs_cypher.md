@@ -35,9 +35,9 @@ Jett yerden oynamak zorunda değil — Cypher'ın tüm kiti yerde duruyor. Yukar
 
 ## AIMLO Ne Demeli
 ### Kaybeden taraftayken
-**Jett Cypher'a ölüyorken**: "Sıçraman ve dash'in var — kullan. Tel olan kapıdan yürüme. Üstünden geç, kameranın açısına girmeden içeri dal, Cypher takımına haber veremeden bas."
+**Jett aynı girişte üst üste ölüyorsa (repeatedPosition, düşman kompunda Cypher)**: "Aynı kapıdan üçüncü kez yürüdün, tel seni her seferinde haber verdi. Sıçraman ve dash'in var — tel hattının üstünden geç, kameranın açısına girmeden içeri dal."
 
-**Cypher Jett'e kaybediyorken**: "Yerdeki teller Jett'i tutmaz. Telleri sıçrama iniş noktasına koy ya da tel oyununu bırak, silahla pozisyon tut. Jett peek ederken kamerada takılı kalma."
+**Cypher, Jett'e trade alamadan kaybediyorsa (tradedByAlly=false)**: "Yerdeki teller Jett'i tutmuyor ve arkanda kimse yok. Telleri sıçrama iniş noktasına taşı ya da tel oyununu bırakıp silahla açı tut — Jett peek ederken kamerada takılı kalma."
 
 ### Kazanan taraftayken
 **Jett Cypher'ı geçiyorken**: "Üstten oynayıp kitini boşa düşürüyorsun. Kamerayı kör etmeyi ihmal etme — kamera sağken yaptığın her agresif hamle Cypher'a ult davetiyesi çıkarır."

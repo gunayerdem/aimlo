@@ -6,7 +6,7 @@ verified: 2026-07-08
 # AJAN: KAY/O
 
 ## 1. Rol Kimliği
-KAY/O düşmanın yeteneklerini kapatan ajandır. Bıçağı yakınına indiği herkesi 8 saniye yetenek-kilidine sokar, flash'ı klasik bir pop-flash, molly'si art arda patlayan bir alan bombası, ult'u ise ölünce seni ayağa kaldıran yürüyen bir kilit alanı. İşin özü tek: düşmanı yeteneklerinden mahrum bırak, onu çıplak silah dövüşüne zorla. Nişanı sağlam, koordineli takımla en sert vurur. 13.00 ile bıçağın (imza yeteneğin) bekleme süresi 60'tan 50 saniyeye indi — kilidi tur içinde daha sık atarsın.
+KAY/O düşmanın yeteneklerini kapatan ajandır. Bıçağı yakınına indiği herkesi kısa bir süre yetenek-kilidine sokar, flash'ı klasik bir pop-flash, molly'si art arda patlayan bir alan bombası, ult'u ise ölünce seni ayağa kaldıran yürüyen bir kilit alanı. İşin özü tek: düşmanı yeteneklerinden mahrum bırak, onu çıplak silah dövüşüne zorla. Nişanı sağlam, koordineli takımla en sert vurur. 13.00 ile bıçağın (imza yeteneğin) bekleme süresi kısaldı — turda iki bıçak planla: birini erken bilgiye, ötekini site girişine ayır.
 
 ## 2. Temel Sorumluluklar
 - Site'a girmeden önce bıçağı kilit düşmanlara at, savunma yeteneklerini sil
@@ -23,14 +23,14 @@ KAY/O düşmanın yeteneklerini kapatan ajandır. Bıçağı yakınına indiği 
 - Ult sırasında takımdan kopup tek başına ileri çıkmak — ölürsen kimse kaldıramaz
 - Boş açıya bıçak atmak — düşmanın tutmadığı yere giden bıçak negatif değer taşır, push yaptığını ele verir
 - Flash'ı çok uzakta ya da duvar arkasında patlatmak — düşman zaten döner, flash boşa gider
-- Bıçağı atıp kilit penceresini kullanmadan beklemek — kilit kısa sürer; attıysan o saniyelerde gir, yoksa bedava bilgiyi de fırsatı da harcarsın
+- Bıçağı atıp kilit penceresini kullanmadan beklemek — kilit kısa sürer; attıysan o pencerede gir, yoksa bedava bilgiyi de fırsatı da harcarsın
 - Kendi flash'ına bakıp körleşmek — flash'ı atınca açıdan kafanı çevir, sonra geri dön; kör KAY/O peek yapamaz, takıma da yük olur
 
 ## 4. Kalıp -> Anlam
 
 **IF** Bıçak her seferinde sıfır düşman kilitliyor
 **MEANING** Bıçağı yanlış yere atıyorsun ya da düşman henüz yerleşmeden erken atıyorsun
-**COUNTER** Düşmanın hangi açıyı tuttuğunu öğren, bıçağı tam oraya at. Düşman kapıya girip durduğu an at — koşarken değil. Ascent'te A main'e girerken arka köşeyi biri tutar; bıçağı oraya indir.
+**COUNTER** Düşmanın hangi açıyı tuttuğunu öğren, bıçağı tam oraya at. Düşman yerleşip durduğu an at — koşarken değil. Ascent'te A Main'den girerken Generator arkası ile Hell tutulur; bıçağı o ikisinin arasına indir ki iki tutuş da yarıçapa girsin.
 **WHY** Yerine yerleşmiş düşman kilit yerse hem yeteneği gider hem sen kaç kişi olduğunu öğrenirsin. Hareket halinde atarsan ıskalarsın.
 
 **IF** Flash hep üst atışla atılıyor
@@ -53,7 +53,7 @@ KAY/O düşmanın yeteneklerini kapatan ajandır. Bıçağı yakınına indiği 
 **COUNTER** Her bıçaktan sonra anında bağır: "bıçak ikiye vurdu", "bıçak boş". Sıfır gelirse de söyle — o site boş ya da düşman erken çekilmiş demektir, takım ona göre karar versin.
 **WHY** Bu sayı takımın hangi site'a yığılacağını söyler. Söylemezsen takım kör dövüşür.
 
-**IF** Bıçağı attıktan saniyeler sonra giriyorsun, kilit kapanmış oluyor
+**IF** Bıçağı attıktan çok sonra giriyorsun, kilit kapanmış oluyor
 **MEANING** Bilgiyi alıyorsun ama kilit penceresini boşa harcıyorsun — yetenekler geri dönmüş düşmana yürüyorsun
 **COUNTER** Bıçağı takımla aynı anda at, atınca hemen gir. Kilit kısa bir penceredir; o pencere içinde site'a bas. Bilgi için tek başına erken bıçak atacaksan bile, asıl girişi kilit yenilenmeden takımla yap.
 **WHY** Bıçağın iki işi var: bilgi ve kilit. Geç girersen sadece bilgiyi alır, asıl gücünü — düşmanı çıplak yakalamayı — kaçırırsın. Kilitli düşmana zamanında basmak turu çevirir.
@@ -68,14 +68,14 @@ KAY/O düşmanın yeteneklerini kapatan ajandır. Bıçağı yakınına indiği 
 **COUNTER** Bıçak açısını ve atış noktasını tura göre değiştir. Bazen mid'den, bazen main'den at; bazen erken yoklama için, bazen execute anında. Belirli bir düşman ajanını (smoke koyan ya da duvar diken) hedefleyecek açıyı seç.
 **WHY** Tahmin edilebilir bıçak, düşmanın güvenli dağılmasına izin verir. Açını değiştirince düşman tekrar kilit riskine girer, dağılması da yeni zayıf nokta açar.
 
-**IF** Saldırıda round'un erken saniyelerinde, girişte ölüyorsun
+**IF** Saldırıda round'un açılışında, girişte ölüyorsun
 **MEANING** Elinde pop-flash varken çıplak giriyorsun — flash'sız giriş, yetenek kapatan ajanın kendi kozunu yakmadan ölmesi demek
-**COUNTER** Girişten hemen önce üst ya da alt atış flash'ı köşeye at, patlama anında gir; bıçağı da aynı execute saniyesine getir ki düşman hem kör hem kilitli olsun
+**COUNTER** Girişten hemen önce üst ya da alt atış flash'ı köşeye at, patlama anında gir; bıçağı da aynı execute anına getir ki düşman hem kör hem kilitli olsun
 **WHY** KAY/O'nun giriş gücü nişanından değil, düşmanı çıplak yakalamasından gelir. Flash ve bıçak önden gitmeden yaptığın her giriş, hazır crosshair'e bedava hedef olmaktır.
 
 ## 5. Saldırı Kullanımı
-- Execute sırası: bıçak kilit düşmanlara → kaç kişi vurduğunu söyle → flash → takımla aynı anda gir. Kilit penceresi dar; bıçağı attıysan o saniyelerde bas.
-- Bıçak + flash + molly'yi execute'ta aynı saniyeye getir — üçü dağılırsa düşman tek tek toparlanır.
+- Execute sırası: bıçak kilit düşmanlara → kaç kişi vurduğunu söyle → flash → takımla aynı anda gir. Kilit penceresi dar; bıçağı attıysan o pencerede bas.
+- Bıçak + flash + molly'yi execute'ta aynı ana getir — üçü dağılırsa düşman tek tek toparlanır.
 - Molly'yi spike kurulduktan sonraya sakla: spike'ın üstüne sektir, ilk defuse denemesini kes.
 - Ult ile girerken takım 1-2 adım arkanda olsun; düşersen o kısa pencerede kaldırsınlar.
 

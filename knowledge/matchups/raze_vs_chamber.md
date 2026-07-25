@@ -121,7 +121,7 @@ Ult karşılaştırması: Chamber'ınki tutarlı — doğru atış kesin öldür
 
 **Chamber'ın teleport noktasını her round değiştir.** Raze noktayı ilk gördüğü round işaretler, nade lineup'ını ayarlar. Aynı noktada kalırsan bir sonraki round teleportun gider.
 
-**Raze oyuncusuysan önce tuzağı sil, sonra gir.** Tuzak patlamadan entry yaparsan Chamber seni duymuş, hazır bekliyordur.
+**Raze oyuncusuysan önce tuzağı sil, sonra gir.** Tuzak patlamadan girersen Chamber seni duymuş, hazır bekliyordur.
 
 **Chamber teleport menzilinin dışına çıktığında sıradan bir op tutucu olur.** Teleport yoksa matchup Raze lehine döner — menzili her round kontrol et, teleport noktasını hatta kurma.
 

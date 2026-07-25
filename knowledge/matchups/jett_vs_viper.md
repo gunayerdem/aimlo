@@ -12,7 +12,7 @@ tags: [matchup, jett, viper, duelist, controller]
 
 ## 1. Matchup Özü
 
-Jett hızla girer, Viper girişini zorlaştırır. Viper'ın duvarı ve smoke'u açık kaldıkça dash atsan bile içinden geçtiğin anda canın ciddi erir. Viper'ın gücü seni zehir alanında sıkıştırmak — senin gücün onu alan dışına, açık düelloya çekmek. Bu matchup'ta Jett oynuyorsan tek soruyu sor: Viper'ın zehiri şu an aktif mi, değil mi?
+Jett hızla girer, Viper girişini zorlaştırır. Viper'ın duvarı ve smoke'u açık kaldıkça dash atsan bile içinden geçtiğin anda zehirin bedelini ödemiş olursun. Viper'ın gücü seni zehir alanında sıkıştırmak — senin gücün onu alan dışına, açık düelloya çekmek. Bu matchup'ta Jett oynuyorsan tek soruyu sor: Viper'ın zehiri şu an aktif mi, değil mi?
 
 ## 2. Kim Avantajlı?
 
@@ -23,24 +23,24 @@ Jett hızla girer, Viper girişini zorlaştırır. Viper'ın duvarı ve smoke'u 
 - Yakın mesafede dash + tüfek, Viper'ın sabit pozisyonunu yakalar.
 
 **Viper lehine durumlar:**
-- Duvar tam senin dash hattında aktif — içinden geçersen düelloya eksik canla girersin.
-- Molly tam dash'le indiğin noktada — indiğin an can erimesi + hasar yersin, dash'siz halde ölürsün.
-- Viper'ın ultu site üzerinde — alanda kaldıkça canın düşer, görüşün daralır.
-- Post-plant molly plant hattında — defuse kanalı zehir altında, girersen erirsin.
+- Duvar tam senin dash hattında aktif — içinden geçersen düelloyu zehirin bedelini ödemiş halde açarsın; o bedeli ödemeden geçebileceğin hat varken oradan girme.
+- Molly tam dash'le indiğin noktada — indiğin an zehiri yersin ve dash'in gitmiştir, kaçış hakkın kalmaz.
+- Viper'ın ultu site üzerinde — alanda kaldıkça zehir işler, görüşün daralır.
+- Post-plant molly plant hattında — defuse kanalı zehir altında, kanala girmen için önce molly'nin sönmesi gerekir.
 
 **Dengeli haritalar:** Haven, Bind — ne Viper duvarı tam kapsamlı çalışır ne Jett uzun açıyı rahat kullanır. Bu haritalarda düello, kim önce util açarsa ona gider.
 
 ## 3. Önemli Düellolar
 
 **IF** Viper duvarı senin dash hattını tam kapattı
-**MEANING** İçinden geçersen canın erir, karşıya çıktığında düello kayıpsın
+**MEANING** Duvarın içinden geçen Jett, karşıya çıktığı anda zaten dezavantajlı: zehirin bedelini ödemiş, sesini vermiş ve nişanı hazır bir Viper'ın önüne çıkmışsın
 **COUNTER** Dash hattını duvarın bittiği noktanın ötesine kur. Duvar aktifken yukarı sıçrayarak dik açıya çık, altından değil üstünden geç.
-**WHY** Duvarın içinden geçerken zehir işler. Eksik canla girilen düelloda Viper'ın sabit nişanı seni geçer.
+**WHY** Duvarın içinden geçerken hem zehir işler hem görüşün kapanır — Viper zaten o çıkışa nişan almış bekliyor. Duvarı geçtiğin yer değil, dolandığın yer düelloyu belirler.
 
 ---
 
 **IF** Molly tam senin indiğin dash noktasında patlıyor
-**MEANING** İndiğin an zehir + hasar yiyorsun, dash'in gitti, kıpırdayamıyorsun
+**MEANING** İndiğin an zehiri yiyorsun, dash'in gitti — molly sönene kadar o noktada mahsursun
 **COUNTER** Aynı noktaya iki kez inme. Her dash'te farklı bir kapanış noktası seç — molly sabit bir alanı vuruyor, sen sabit durma.
 **WHY** Molly nokta silahı. Hep aynı yere inersen Viper o noktayı ezberler, bedava hasar alırsın.
 
@@ -54,7 +54,7 @@ Jett hızla girer, Viper girişini zorlaştırır. Viper'ın duvarı ve smoke'u 
 ---
 
 **IF** Viper ultu site üzerine atıldı
-**MEANING** Alanda kaldıkça canın düşüyor, görüşün daralıyor
+**MEANING** Alan içinde durmak seçenek değil — zehir işlemeye devam eder, görüşün alanın kenarına kadar daralır
 **COUNTER** Sıçrama + dash ile alanın dışına çık. Post-plant pozisyonunu ult alanının dışında seç — defuse'a gireceksen alan bitene kadar bekle ya da dışarıdan spike'a baskı yap.
 **WHY** Viper'ın ultu içinde durmak seçenek değil. Alan dışından baskı yaparsan Viper ultunu boşa harcar, alan biter, o zaman girersin.
 
@@ -75,9 +75,9 @@ Jett hızla girer, Viper girişini zorlaştırır. Viper'ın duvarı ve smoke'u 
 ---
 
 **IF** Hem duvar hem smoke aynı anda senin hattında
-**MEANING** Zehir üst üste biner — düello başlamadan zaten bitersin
+**MEANING** Zehir katmanları üst üste biner — düello daha başlamadan Viper'ın lehine kurulmuş olur
 **COUNTER** İkisi çakışırken girme. Smoke veya duvar kapanana kadar bekle — çift zehir yüküne asla girme.
-**WHY** Tek zehir canını yarılar, çifti seni öldürmeden öldürür — düşmana çok az iş kalır.
+**WHY** Tek zehir katmanı bile düelloyu senin aleyhine açar; iki katman üst üste binince Viper'ın işi tetiğe basmaya iner. Çift katman varken o hattı hiç kullanma.
 
 ## 4. Utility Karşılaştırması
 

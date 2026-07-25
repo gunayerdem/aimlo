@@ -120,11 +120,14 @@ Rework'ün ilan edilmiş hedefi controller çeşitliliğini açmaktı — "Viper
 
 ## 7. Callout'lar & Pozisyon Rehberi
 - **A Main**: A'ya giden ana uzun hat. Duvar blokları alanı daralttı; açı hâlâ uzun — utility'siz çıkma.
+- **A Shop**: Rework'te A'nın bu tarafına açılan tek kapı. Cave girişi kapatıldı, Shop kapısı genişletildi — A'nın ikinci kolu artık buradan geçiyor. Dar ve tek hat: saldırıda içeri girmeden flash at, çünkü içeride siperin yok; savunmada site içinden ve Pyramid tarafından çapraz tut, kapının ağzına dikilme.
+- **A Cave**: Shop'un yanındaki eski giriş — geçiş kapatıldı ama alan duruyor. Kapalı olması boş olduğu anlamına gelmez: savunma orada dip köşe tutabilir, Shop'tan çıkarken bu köşeyi temizlemeden site'a yürüme.
 - **A Site**: Arka duvar uzatıldı; siper kutuları ve girinti plant/post-plant için korunak verir.
 - **A Pyramid**: Site içindeki piramit yapı — site içi siper; her round aynı yüzünde durma.
 - **Halls**: Eski A flank koridoru kapatıldı — bu rota artık oynanmıyor.
 - **Doors / Chute (Çift Kapı)**: Attacker spawn'ı Mid'e bağlayan, yaklaşınca kendiliğinden açılan çift kapı. İki yönden geçilir, ses verir; eski tek yönlü düşüş yok.
 - **Mid**: Koridorlara bölünmüş orta bölge — pillar'ın bir yüzü kapalı, ip kaldırıldı. Koridor ağızları tutulur: köşe temizlemeden yürüme.
+- **Mid Pillar**: Mid'in ortasındaki sütun. Bir yüzü kapatıldığı için etrafını tek geçişte temizleyemezsin: bir yüzü açarken diğerine util bırak, iki yüzü aynı anda görmeye çalışma. Sütunun arkasında bekleyen savunucuya karşı flash önden gitsin.
 - **Nest**: Mid'in yüksek noktası. Düz zıplama yok — mobilite ya da savunma tarafından ulaşılır; standart smoke'la kapanır.
 - **Elbow**: Mid'den B tarafına dönüş. Kapalı yapı, utility pencereleri var, duvarına tırmanılmıyor.
 - **B Main**: B'nin ana girişi; site içinden ve Window'dan çapraz tutulur.
@@ -137,10 +140,11 @@ Rework'ün ilan edilmiş hedefi controller çeşitliliğini açmaktı — "Viper
 - **Genel**: Spike'ın dibinde bekleme — site hâlâ uzun açılardan izlenir. Siper arkasından defuse sesini dinle, utility ile kes. Retake rotasyonları rework'le kısaldı: post-plant pozisyonunu plant biter bitmez al, gezinme.
 
 ## 9. Ekonomi Stratejileri
+- **Pistol round**: 800 kredin var — ya Ghost alıp kalanı util'e ver, ya Classic'te kalıp hafif zırh + util doldur; Ghost ile hafif zırh aynı round'a sığmaz. Uzun hatta çıkma: round'u Mid koridorlarında ve kapı hattında oyna, kapı sesiyle savunmayı yanlış tarafa çevirip boşalan site'a bas.
 - **Full buy**: Vandal ya da Op öncelik — uzun düello kimliği sürüyor. Dar Mid koridorlarında Phantom da işler.
 - **Op ekonomisi**: Op hâlâ değer üretir ama "tek Op haritayı kilitler" dönemi bitti. Op'la koridor savaşına girme; Op'çu düşerse save düşün.
 - **Yarım alım**: Marshal ya da Outlaw uzun hatlarda işler — Outlaw hafif zırhlıyı gövdeden tek atışta düşürür.
-- **Eco**: Sheriff ya da Bandit ile dar koridorlara (Mid, Elbow) sok kendini — Bandit yakın mesafede hafif zırhlıyı kafadan tek atar. Açık hatta eco silahıyla çıkma.
+- **Eco**: Sheriff ya da Bandit al, düellonu dar koridorlara (Mid, Elbow) taşı — Bandit yakın mesafede hafif zırhlıyı kafadan tek atar. Açık hatta eco silahıyla çıkma, uzaktan tüfeğe kafa tutamazsın.
 - **Kısa menzil uyarısı**: Spectre gibi kısa menzilli silahla uzun hatlara çıkma; alacaksan planını koridor ve site içi düellolara kur.
 
 ## 10. Anti-Strat

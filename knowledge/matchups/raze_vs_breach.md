@@ -66,7 +66,7 @@ Breach seni sersemletir, sen Breach'i patlatırsın. Breach'in stunu sıçrama h
 ---
 
 **IF** Breach molly'si sıçrama ile ineceğin noktaya atılmış
-**MEANING** Sıçrama ile indiğinde molly hasarı alırsın, düelloya eksik canla girersin
+**MEANING** Sıçrama ile indiğin an molly seni karşılar — düelloyu Breach'in seçtiği noktada, onun şartlarında açarsın
 **COUNTER** Molly'nin hangi köşelerden atıldığını öğren — sabit trajektörleri var. O köşelerden uzak bir noktaya in.
 **WHY** Molly de duvar deler. Cover seni korumaz — tek çözüm iniş noktasını doğru seçmek.
 
@@ -74,7 +74,7 @@ Breach seni sersemletir, sen Breach'i patlatırsın. Breach'in stunu sıçrama h
 
 **IF** Sen entry'ye girerken Breach stunu o hat için hazır tutuyor
 **MEANING** Entry hattına girdiğin anda stun yersin, nade + sıçrama aynı anda iptal olur
-**COUNTER** Breach stunu attıktan sonra gir. Önce ult veya nade ile Breach'i pozisyondan çıkar, sonra entry yap. Stun tek kullanımlık — boşa attırınca giriş bedava.
+**COUNTER** Breach stunu attıktan sonra gir. Önce ult veya nade ile Breach'i pozisyondan çıkar, sonra gir. Stun tek kullanımlık — boşa attırınca giriş bedava.
 **WHY** Stun round'da bir kez atılır. Boşa attırırsan Breach'in elinde silahtan başka bir şey kalmaz.
 
 ## 4. Utility Karşılaştırması
@@ -109,9 +109,9 @@ Breach ultunu daha seyrek doldurur — ama attığında alanı tamamen kapatır.
 
 **Dönüş 3 — Ult entry'yi bitirdi:** Breach stun kuramadan ölür, Breach tarafı sayı kaybeder.
 
-**Dönüş 4 — Breach ultu cover'ı aştı:** Saklandığın yerde stun yersin, sıçrama de iptal olur, maçı Breach çevirir.
+**Dönüş 4 — Breach ultu cover'ı aştı:** Saklandığın yerde stun yersin, sıçrama da iptal olur, round'u Breach çevirir.
 
-## 7. Radiant Seviyesi Notlar
+## 7. İleri Kalıplar
 
 Sıçrama iniş noktasını her round değiştir — aynı noktaya iki kez inme. Breach stunu sabit hatlara atılır; o hatları tanı, farklı noktadan in, Breach'in util'i boşa gitsin.
 

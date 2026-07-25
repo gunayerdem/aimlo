@@ -33,7 +33,7 @@ Raze, nade ve sıçrama ile Sage'in duvar ve slow savunmasını kırmaya gelir. 
 ## 3. Önemli Düellolar
 
 **IF** Raze nade'ini lineup ile Sage duvarının arkasına attı
-**MEANING** Nade duvarı aşıp arka alana hasar verir, duvar arkasındaki oyuncular HP kaybeder.
+**MEANING** Nade duvarı aşıp arka alana patlar — duvarın gerisinde bekleyen oyuncular patlamayı doğrudan yer.
 **COUNTER** Duvarı kur ama arkasında durduğun noktayı Raze'in bildik lineup açısının dışına al. Duvarın tam gerisinde bekleme — orası nade'in düştüğü yer.
 **WHY** Duvar görüşü keser, hasarı kesmez. Lineup bilen Raze duvarı bypass eder.
 
@@ -87,7 +87,7 @@ Sage'in elinde: duvar + slow + heal + ult (canlandırma). Hepsi alan kontrolü y
 Bu maçın özeti:
 - Raze nade lineup biliyorsa duvar görüşü keser ama hasarı önleyemez.
 - Raze lineup bilmiyorsa duvarın arkasındaki oyuncu güvende kalır.
-- Ult kıyasında: Sage ult'u ölen oyuncuyu geri getirir, Raze ult'u turu temizler. Sage ult'u bir oyuncuyu kurtarır, Raze ult'u bir alanı temizler — skor başa başsa (10-10) Sage clutch potansiyeli için kritik, öndeysen Raze hızlı round'u kapatır.
+- Ult kıyasında: Sage ult'u ölen oyuncuyu geri getirir, Raze ult'u turu temizler. Sage ult'u bir oyuncuyu kurtarır, Raze ult'u bir alanı temizler — skor yakınken Sage clutch potansiyeli için kritik, öndeysen Raze hızlı round'u kapatır.
 
 ## 5. Haritaya Göre Değişim
 

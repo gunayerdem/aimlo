@@ -10,9 +10,9 @@ Cypher'ı doğru oynarsan takımın asla kör kalmaz. Site'ı ateş gücüyle de
 
 ## 2. Temel Sorumluluklar
 - **Düşmanın yerini öğren, anında ilet**: Tel ve kamera, düşman kapıya dayanmadan iş görmeli. Düşman hangi koridordan geldi, kaç kişi — takım rotate etmeden önce bunu sen söyle.
-- **Flankı kapat**: En az bir tel flank yolunda dursun. Atak round'larında bu pazarlık konusu değil. Tel yalnızca alarm vermez — tetiklenen düşmanı yerinde yakalar, kısa sürede teli kıramazsa onu açığa çıkarır ve sersemletir. Yani flank teli hem haber verir hem de o düşmanı bir an için savunmasız bırakır. Tel artık neredeyse anında kurulur — rotate sonrası toplamak ve yeni hatta yeniden kurmak eskisinden ucuz, teli taşımaktan kaçınma.
-- **Site'ı tut**: Tek başına ya da neredeyse yalnız, site'ı geciktir. Telin ve kameranın kazandırdığı zaman takım arkadaşlarını serbest bırakır — stack atarlar, lurk yaparlar.
-- **Görüş-engelleyen küreni (kafes) kullan**: Cypher'ın kendi taşıdığı bir görüş-engelleyici küresi var (ucuz, round başına yenilenir). Bir açıyı kapatmak, push'u yavaşlatmak ya da güvenli rotate için at. Bu küre düşman içinden geçtiğinde ses çıkarır — yani salt görüşü kesmez, kim geçti onu da sana söyler. Tek başına site tutarken bir açıyı bununla kapatıp dikkatini tehlikeli yöne ver.
+- **Flankı kapat**: En az bir tel flank yolunda dursun. Atak round'larında bu pazarlık konusu değil. Tel yalnızca alarm vermez — tetiklenen düşmanı anında yavaşlatır ve teli hemen vurup kıramazsa onu takıma görünür hale getirir. Yani flank teli hem haber verir hem de o düşmanı yavaş ve yeri belli halde bırakır: kaçamaz, sen açıyı önceden nişanlayıp ilk kurşunu verirsin. Tel neredeyse anında kurulur — rotate sonrası toplamak ve yeni hatta yeniden kurmak ucuz, teli taşımaktan kaçınma.
+- **Site'ı tut**: Tek başına ya da neredeyse yalnız, site'ı geciktir. Telin ve kameranın kazandırdığı zaman takım arkadaşlarını serbest bırakır — stack atarlar, lurk'e çıkarlar.
+- **Görüş kapatan kafeslerini kullan**: Elinde iki tane görüş kapatan kafes var — ucuz ama her round yeniden satın alınır, yani eco round'unda hesabına katma. Bir açıyı kapatmak, push'u yavaşlatmak ya da güvenli rotate için at; kurduğunu toplayıp başka noktaya taşıyabilirsin. Kafes düşman içinden geçtiğinde ses çıkarır — yani salt görüşü kesmez, kim geçti onu da sana söyler. Tek başına site tutarken bir açıyı bununla kapat, dikkatini kalan tehlikeli yöne ver.
 - **Ult zamanlaması**: Ult'u sadece kill onaylamak için harcama. Düşman pozisyonları belirsizken, özellikle takım rotate kararı verecekken aç.
 - **Post-plant kamera**: Spike kurulduktan sonra kamerayı giriş yolunu izlemek için değil, defuse açısını görmek için koy.
 
@@ -33,7 +33,7 @@ Cypher'ı doğru oynarsan takımın asla kör kalmaz. Site'ı ateş gücüyle de
 **COUNTER** Tel tetiklendiği an çağrını yap — düelloyu bitirdikten sonra değil.
 **WHY** Geç gelen bilgi ölü bilgidir. Anında çağrı, takımın daha peek atmadan o açıyı nişanlamasını sağlar.
 
-**IF** Kameran çoğu round daha ilk saniyelerde kırılıyor
+**IF** Kameran çoğu round daha ilk temas gelmeden kırılıyor
 **MEANING** Kamera yerlerin fazla tahmin edilebilir. Düşman nereden bakacağını ezberlemiş.
 **COUNTER** Harita başına 3-4 farklı kamera açısı arasında dön. Temizlemesi zor, off-angle noktalar seç.
 **WHY** Tahmin edilebilir kamera round ortasına dayanamaz. Açıyı değiştirmek düşmanı her round farklı yeri kontrol etmeye zorlar.
@@ -66,10 +66,10 @@ Cypher'ı doğru oynarsan takımın asla kör kalmaz. Site'ı ateş gücüyle de
 **IF** Savunmada tel patladı ama ne çağrı yaptın ne de o yöne baktın
 **MEANING** Teli pasif bir tuzak gibi kullanıyorsun, bilgi kaynağı olarak değil. Tetiklenme sana fayda üretmeden sönüyor.
 **COUNTER** Tel patladığı an iki şey yap: tam sayı ve yön çağrısı geç, sonra crosshair'i o açıya çevir. Tetiklenme bir alarm değil, hareket emridir.
-**WHY** Tel kaç düşmanın o yoldan geldiğini gösterir — bu rotate kararının ham verisidir. Üstelik tetiklenen tel düşmanı yerinde yakalar; teli kısa sürede vurup kıramazsa onu açığa çıkarır ve sersemletir. Yani çağrı geçerken aynı anda peek atarsan yakalanmış, sersemlemiş düşmanı bedavaya vurursun. Sessizce patlayan tel, takım için hiç patlamamış kadar değersizdir.
+**WHY** Tel kaç düşmanın o yoldan geldiğini gösterir — bu rotate kararının ham verisidir. Üstelik tetiklenen tel düşmanı anında yavaşlatır; teli hemen kıramazsa yerini takıma sabitler. Yani çağrıyı geçerken aynı anda açıya dönersen yavaşlamış ve yeri belli olmuş düşmanı karşılarsın — o hızlanamadan sen ilk kurşunu verirsin. Sessizce patlayan tel, takım için hiç patlamamış kadar değersizdir.
 
 **IF** Kamerayı sürekli aynı düz hat üzerinde, kolay görünen yüksekliğe koyuyorsun
-**MEANING** Düşman kamerayı refleksle ilk geçtiği saniyede vuruyor; off-angle bilgi alamıyorsun.
+**MEANING** Düşman kamerayı refleksle ilk geçişte vuruyor; off-angle bilgi alamıyorsun.
 **COUNTER** Kamerayı göz hizasının dışına — çok yükseğe, köşelerin üstüne ya da nesnelerin arkasına — koy. Görmesi için durup tavana bakması gereken yerleri seç.
 **WHY** Oyuncular düz ileriye nişan alır, yukarı tarama yapmaz. Yükseğe ya da off-angle'a giden kamera round ortasına kadar yaşar; asıl bilgiyi push anında verir.
 
@@ -78,21 +78,21 @@ Cypher'ı doğru oynarsan takımın asla kör kalmaz. Site'ı ateş gücüyle de
 **COUNTER** Zayıf round'larda util'i sakla ya da yalnızca bilgi için minimum kurulum yap. Kamerayı topla, tel atma; bir sonraki round'a tam util'le başla.
 **WHY** Cypher util'i round başına yenilenir ama yerleşim zaman ister. Kaybedeceğin round'a yatırılan tel, kazanabileceğin round'da elinde olmaz. Util'i kazanılabilir round'lara biriktir.
 
-**IF** Görüş-engelleyen küreni (kafes) round başında ya da hiç kullanmadan boşa harcıyorsun
+**IF** Görüş kapatan kafesini round başında ya da hiç kullanmadan boşa harcıyorsun
 **MEANING** Cypher'ın görüş kapatma aracını ölü bırakıyorsun. Bir açıyı tek başına tutarken bütün yönleri aynı anda kollamaya çalışıp birinden vuruluyorsun.
-**COUNTER** Küreyi tehdit yönlerinden birini kapatmak için at — geriye tek açı kalır, dikkatini oraya ver. Düşman küreden geçerse çıkardığı ses sana erken haber verir; geçmezse o yönü zaten kapatmış olursun.
-**WHY** Küre hem görüşü keser hem içinden geçeni sesle ele verir. Tek açıya indirgenen savunma, beş açıya bölünmüş dikkatten her zaman daha güçlüdür; bu da bir sentinel'in tek başına site geciktirmesinin temelidir.
+**COUNTER** Kafesi tehdit yönlerinden birini kapatmak için at — geriye tek açı kalır, dikkatini oraya ver. Düşman kafesten geçerse çıkardığı ses sana erken haber verir; geçmezse o yönü zaten kapatmış olursun.
+**WHY** Kafes hem görüşü keser hem içinden geçeni sesle ele verir. Tek açıya indirgenen savunma, beş açıya bölünmüş dikkatten her zaman daha güçlüdür; bu da bir sentinel'in tek başına site geciktirmesinin temelidir.
 
 ## 5. Harita Etkileşimleri
 - **Bind**: Çok güçlüsün. İki site dar, flank yolu bol, teleporter'lar yön değiştirmeyi kolaylaştırır. B site'ı tek başına kilitle, mid'den kamerayla A'ya bilgi ver. Teleporter'lar Bind'in can damarı: bir teli daima TP çıkışına ya da TP'ye giden koridora bırak — düşman ses yapmadan yer değiştiremesin, takım fake rotate'i anında okusun. Mid yok denecek kadar dar olduğundan tek tel + tek kamera tüm mid'i kilitler, kalan util'i site'a yatır.
-- **Haven**: Üç site util'ini zorlar — her yere yetişmeye çalışma, tercihini önceden yap. C site'ı iki telle birden tut, smoke + tel ikilisini kullan; en izole site burası, tek başına en uzun sen burada geciktirirsin. Mid ve garage'ı kamerayla izle: Haven'da rotate mesafeleri uzun, erken mid çağrısı takıma rotate için saniye kazandırır — bu haritada bilgi hızı doğrudan round kazandırır.
+- **Haven**: Üç site util'ini zorlar — her yere yetişmeye çalışma, tercihini önceden yap. C site'ı iki telle birden tut, smoke + tel ikilisini kullan; en izole site burası, tek başına en uzun sen burada geciktirirsin. Mid ve garage'ı kamerayla izle: Haven'da rotate mesafeleri uzun, erken mid çağrısı takıma rotate için zaman kazandırır — bu haritada bilgi hızı doğrudan round kazandırır.
 - **Ascent**: B site'ta güçlüsün. Market ve lane'e koyduğun iki tel iki yaklaşımı birden kapatır. Mid'deki kamera harita geneline bilgi taşır çünkü Ascent'te her şey mid'den akar — mid kontrolünü kaybeden takım iki site'a da geç kalır. Kapılar (mid'i kapatan kapaklar) varsa onların ardını kamerayla izle; kapı açıldığında gelen ses + kamera ikilisi sana erken bilgi verir.
 - **Split**: Mid'de çok iş görürsün. Vent ve mid mail'deki teller en sık kullanılan iki agresyon yolunu kapatır. Split dikey ve dar bir harita — sentinel'in cenneti: rope/vent gibi tek-sıra girişlerde tel atan kaçamaz. Mid'i kilitlersen takım iki site arasında rahat rotate eder; mid düşerse iki site de aynı anda baskı görür. Bu yüzden mid teli bu haritada pazarlık konusu değil.
 - **Sunset**: Mid koridoruna açtığın kamera açıları yüksek değerli. B main ve A elbow'daki teller standart ama iş görüyor. Sunset'te mid hem A'ya hem B'ye köprü — mid kontrolü olan takım istediği site'ı seçer. Mid teli + kamera düşmanın hangi tarafa basacağını erken ele verir; bu çağrıyı geçtiğin an takım doğru site'a yığılır.
 - **Lotus**: Üç site tellerini böler — her yere yetişmeye çalışma, tuttuğun site'ı derin kilitle, kalanını kameraya bırak. Teli döner kapının (C Mound↔B Main) geçiş tarafına koy: kapı sesi yem de gelir, tel tetiklenmesi gerçek rotasyonu doğrular. A tarafını tutuyorsan Silent Drop'u sahipsiz bırakma — altına tel koy, sessiz flank oradan iner; kırılabilir duvar (A Main↔A Link) kırıldığı an ikinci açıyı çağır. Mid Link üç site'a birden bağlanır — tek tel bile orada flank haberini push başlamadan verir.
 - **Corrode**: En rahat ettiğin harita. Dar koridorlar ve sınırlı girişler telin işini kolaylaştırır — saldırgan tetiklemeden geçemez, bilgi garanti. Mid Pipes ve koridor kesişimlerinde kamera çok yüksek değer üretir. Tellerin menzili de haritanın kompakt yapısı sayesinde sorun çıkarmaz. Bu kompaktlık iki yönlü: senin telin garanti çalışırken, düşman da bilebileceği için her round farklı kurulum şart — tahmin edilebilir tel bu haritada en hızlı kırılan tel olur.
 - **Summit**: Summit'in sana özel avantajı kamera-duvar etkileşimi: kamerayı A Wall ya da B Wall düşmeden önce duvarın arkasına koy — duvar düşse bile kamera çalışmaya devam eder, düşman onu susturmak için ayrıca yok etmek zorunda kalır. Telleri giriş + Link olarak böl: A'da A Main ve A Link, B'de B Main ve B Link — Mid-split ve flank Link koridorlarından gelir, tek tel o haberi push başlamadan verir. Harita büyük, rotate mesafeleri uzun; tel tetiklendiği an tam sayı-yön çağrısı geç ki takım doğru site'a erken dönsün. Ult'u retake'e girmeden aç; geç round'da kurulumunu kaydır — aynı tel iki round üst üste aynı yerde durmasın.
-- **Breeze**: Rework senin lehine — kapı ve koridor yapısı tele alan açtı. Bir teli kapı (Doors) hattına koy: kapı sesi yem de gelir, tel tetiklenmesi gerçek geçişi doğrular. İkinci teli Elbow dönüşüne sakla — Mid'den B'ye flank orası. Kamerayı Mid koridorlarını gören off-angle'a koy; rotasyonlar kısaldı, erken Mid çağrısı savunmaya siteyi sayıca eşit karşılatır. Görüş-engelleyen küreni A Main'in uzun hattını anlık kesmek için sakla — uzun düelloda geçişini o örter.
+- **Breeze**: Rework senin lehine — kapı ve koridor yapısı tele alan açtı. Bir teli kapı (Doors) hattına koy: kapı sesi yem de gelir, tel tetiklenmesi gerçek geçişi doğrular. İkinci teli Elbow dönüşüne sakla — Mid'den B'ye flank orası. Kamerayı Mid koridorlarını gören off-angle'a koy; rotasyonlar kısaldı, erken Mid çağrısı savunmaya siteyi sayıca eşit karşılatır. Kafeslerinden birini A Main'in uzun hattını anlık kesmek için sakla — uzun düelloda geçişini o örter.
 
 ## 6. Eşleşme Notları
 - **Sova/Fade**: Zor eşleşme. Pozisyonunu açığa çıkarır, teli yeniden kurmak zorunda kalırsın. Kamera yerlerini sık değiştir.
@@ -110,18 +110,18 @@ Cypher'ı doğru oynarsan takımın asla kör kalmaz. Site'ı ateş gücüyle de
 ### Zorlanırken
 **Util tahmin edilebilir ya da değersiz:** "Tellerin fazla derin, bilgi çok geç geliyor. Erken choke noktalarına çek — push başlamadan çalmalı. Her tetiklenmeyi anında ilet."
 
-**Kurulumların her round temizleniyor:** "Düşman yerlerini ezberlemiş. Harita başına en az 3 farklı kurulum kullan ve her round hangisini kullandığını değiştir."
+**Kurulumların her round temizleniyor:** Dersi kanıta bağla — round geçmişindeki gerçek girişi kullan: "[düşmanın bastığı giriş]'e koyduğun teli üçüncü kez aynı noktaya kurma; bu round o teli aynı bölgenin ikinci girişine kaydır, kamerayı göz hizasının üstüne al ve ilk tetiklenmede sayı-yön çağrısını geç." Elinde giriş ya da ölüm yeri verisi yoksa nokta adı uydurma — dersi kurulum çeşitliliği üzerinden ver: harita başına üç kurulum, hiçbirini üst üste iki round kullanma.
 
 **Erken ölüyorsun, site bilgisiz kalıyor:** "Sentinel olarak ilk düelloya girme. Önce tel ya da kamera sana avantaj versin, sonra peek at. Erken ölen sentinel takımı kör bırakır — sağ kalıp bilgi üreten sentinel, sadece öldüren sentinelden değerlidir."
 
-**Bilgiyi alıyorsun ama çağrı geç/eksik:** "Tel patladığı an konuş — kaç kişi, hangi yön. 'Düşman var' yetmez; sayı ve yer ver. Öldürmeyi onaylamayı bekleme, ham bilgiyi anında geçir; takım o saniyede rotate kararı verir."
+**Bilgiyi alıyorsun ama çağrı geç/eksik:** "Tel patladığı an konuş — kaç kişi, hangi yön. 'Düşman var' yetmez; sayı ve yer ver. Öldürmeyi onaylamayı bekleme, ham bilgiyi anında geçir; takım o an rotate kararı verir."
 
 **Post-plant'ta sürekli arkadan/retake'te ölüyorsun:** "Util'inin hepsini girişe harcama. Spike kurulmadan flank/retake yoluna bir tel sakla, kamerayı defuse açısına koy. Sentinel'in asıl işi spike kurulduktan sonra başlar — kurulu bomu tek başına kapatabilmelisin."
 
 ## 8. Bu Ajana Karşı
 İyi rakipler Cypher'a karşı şunları dener — Cypher oynuyorsan ön almayı buna göre planla:
-- Girişleri telli varsayıp önce util'le tarar ya da teli gözle arayarak yavaş girerler; tetiklenen tel onları kısa süre açığa çıkarıp sersemlettiği için bu riski almazlar. Teli göz hizasından ve bilinen noktalardan kaçır — alışılmadık yükseklik ve kör nokta, hem gözle aramayı hem util taramasını boşa çıkarır.
+- Girişleri telli varsayıp önce util'le tarar ya da teli gözle arayarak yavaş girerler; tetiklenen tel onları yavaşlatıp takıma görünür kıldığı için bu riski almazlar. Teli göz hizasından ve bilinen noktalardan kaçır — alışılmadık yükseklik ve kör nokta, hem gözle aramayı hem util taramasını boşa çıkarır.
 - Tel temizliğini tek kişiye bırakıp kalan ekiple farklı açıdan girerler. Tek kırılma sesini "tek kişi geliyor" diye okuma — kırılan tel de hangi girişi seçtiklerini söyler; çağrıyı yine tam geç, sayıyı kameradan doğrula.
-- Kamera sesini duyan rakip anında yer değiştirir, kamerayı vurur ve o açıda beklemez. Gördüğünü saniyesinde ilet — bekletilen bilgi bayatlar; vurulan kameranın ateş sesi bile sana ikinci bir konum bilgisi verir.
-- Görüş-engelleyen kürenin içinden tek tek değil, ekipçe aynı anda geçip ayrıştırılamayan bir ses karmaşası yaratırlar. Net sayı çıkaramıyorsan sayı verme; "küreden geçiş var" diye çağır, kalan bilgiyi tel ve kamerayla tamamla.
-- Ult sesini duyan rakip hemen pozisyon değiştirir ki aldığın bilgi bayatlasın. Ult bilgisi hızla eskir — pozisyonları aldığın saniye ilet, takım bilgi tazeyken oynasın.
+- Kamera sesini duyan rakip anında yer değiştirir, kamerayı vurur ve o açıda beklemez. Gördüğünü anında ilet — bekletilen bilgi bayatlar; vurulan kameranın ateş sesi bile sana ikinci bir konum bilgisi verir.
+- Kafesin içinden tek tek değil, ekipçe aynı anda geçip ayrıştırılamayan bir ses karmaşası yaratırlar. Net sayı çıkaramıyorsan sayı verme; "kafesten geçiş var" diye çağır, kalan bilgiyi tel ve kamerayla tamamla.
+- Ult sesini duyan rakip hemen pozisyon değiştirir ki aldığın bilgi bayatlasın. Ult bilgisi hızla eskir — pozisyonları aldığın an ilet, takım bilgi tazeyken oynasın.

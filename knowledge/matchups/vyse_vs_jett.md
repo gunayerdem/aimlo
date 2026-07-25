@@ -15,7 +15,7 @@ Jett dash ve sıçramayla hız üzerinden girer; bilgi yerine tempo oynar. Vyse'
 
 ## Sinyal-Kapılı Dersler
 
-**IF** savunmada round'un ilk saniyelerinde öldün (side=Savunma, deathTiming=erken) ve düşman kompunda Jett var
+**IF** savunmada round açılışında öldün (side=Savunma, deathTiming=erken) ve düşman kompunda Jett var
 **MEANING** Jett dash'le kurulumun oturmadan girdi — tuzağın ya yanlış noktada ya geç kuruldu
 **COUNTER** Tuzağı ve gizli duvarı round başında ilk iş kur; giriş ağzına değil, dash'in bittiği iniş noktasına yerleştir
 **WHY** Dash sabit bir noktaya taşır; iniş noktası tuzaklıysa Jett kaçamaz — koridor ortasındaki kurulumun ise üstünden akıp geçer

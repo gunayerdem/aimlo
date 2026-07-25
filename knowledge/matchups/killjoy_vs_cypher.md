@@ -10,7 +10,7 @@ tags: [matchup, killjoy, cypher, sentinel_vs_sentinel]
 
 ## 1. Matchup Özü
 
-Killjoy ve Cypher sentinel rolünü farklı oynar. Killjoy turret, bot ve molly yerleştirir, uzaktan bekler — sen ölsen bile turret çalışmaya devam eder. Cypher tel, kamera ve tuzak kurar, aktif bilgi akıtır — sen ölürsen utility'nin yarısı işe yaramaz. İki sentinel aynı işi yapmaz: Killjoy site kilitler, Cypher bilgi akıtır. Şunu kafana yaz — Killjoy'da ölüm pahalı ama kurtarılır, Cypher'da ölüm round'u bitirir.
+Killjoy ve Cypher sentinel rolünü farklı oynar. Killjoy taret, bot ve molly yerleştirir, uzaktan bekler — sen ölsen bile taret çalışmaya devam eder. Cypher tel, kamera ve tuzak kurar, aktif bilgi akıtır — sen ölürsen utility'nin yarısı işe yaramaz. İki sentinel aynı işi yapmaz: Killjoy site kilitler, Cypher bilgi akıtır. Şunu kafana yaz — Killjoy'da ölüm pahalı ama kurtarılır, Cypher'da ölüm round'u bitirir.
 
 ## 2. Kim Avantajlı?
 
@@ -24,23 +24,23 @@ Harita seçerken şuna bak: site dar ve tek girişliyse Killjoy, flank hattı ç
 
 ## 3. Önemli Düellolar
 
-**IF** Killjoy bir site'a turret, bot ve molly kurdu, Cypher rotasyon hattına tel koydu
+**IF** Killjoy bir site'a taret, bot ve molly kurdu, Cypher rotasyon hattına tel koydu
 **MEANING** İki sentinel farklı görevde — Killjoy site öldürür, Cypher rotasyon bilgisi verir
 **COUNTER** Saldırıyorsan önce Killjoy site'ına sahte baskı koy, Cypher tellerini temizle, sonra gerçek girişi yap
 **WHY** Killjoy utility'si tek noktaya kilitli, Cypher utility'si hatta kurulu. İkisi farklı fazlarda güç kazanır — aynı işi yapmazlar.
 
 ---
 
-**IF** Cypher teli tetiklendi, aynı anda Killjoy turret de tetiklendi
+**IF** Cypher teli tetiklendi, aynı anda Killjoy taret de tetiklendi
 **MEANING** İki utility aynı alanda çalışıyor, bu israf — haritanın diğer yarısı boş
 **COUNTER** Sentinel'leri farklı site veya alana dağıt. İkisi aynı köşeye yığılırsa rakip diğer taraftan gelir
 **WHY** Sentinel değeri dağılımdadır. İki sentinel aynı alanda = haritanın yarısında sentinel yok. Rakip bunu okur, boş tarafa yönelir.
 
 ---
 
-**IF** Killjoy turret geride, Cypher teli önde, ikisi aynı savunma hattında
+**IF** Killjoy taret geride, Cypher teli önde, ikisi aynı savunma hattında
 **MEANING** Katmanlı savunma — Cypher ilk hattı durdurur ve bilgi verir, Killjoy ikinci hatta hasar basar
-**COUNTER** Saldırıyorsan önce Cypher telini bot veya flash ile temizle, sonra Killjoy turret alanına gir. İki katmanı sırayla kırmak util harcatır
+**COUNTER** Saldırıyorsan önce Cypher telini bot veya flash ile temizle, sonra Killjoy taret alanına gir. İki katmanı sırayla kırmak util harcatır
 **WHY** Aynı takımda bu kombo güçlü. Karşı takımda iki sentinel'i aynı hatta koyma — farklı hatları kapat.
 
 ---
@@ -48,7 +48,7 @@ Harita seçerken şuna bak: site dar ve tek girişliyse Killjoy, flank hattı ç
 **IF** Cypher round başında öldü, ult'unu kullanmadı
 **MEANING** Cypher'ın ult'u ve bilgisi sıfırlandı. Kamera hâlâ yerinde ama kimse kullanamaz
 **COUNTER** (Cypher için) Düşmanla yüz yüze düello kurma. Görevin bilgi vermek ve hayatta kalmak. Sen öldüğünde utility'n de ölür
-**WHY** Killjoy öldükten sonra turret çalışır, ult hâlâ atılır. Cypher öldüğünde aktif kontrolü durur. Ölüm maliyeti Cypher'da çok daha yüksek.
+**WHY** Killjoy öldükten sonra taret çalışır, ult hâlâ atılır. Cypher öldüğünde aktif kontrolü durur. Ölüm maliyeti Cypher'da çok daha yüksek.
 
 ---
 
@@ -73,21 +73,22 @@ Harita seçerken şuna bak: site dar ve tek girişliyse Killjoy, flank hattı ç
 
 ## 4. Utility Karşılaştırması
 
-**Killjoy:** turret (görür + vurur), bot (patlayınca hedefi savunmasız bırakır — aldığı hasar artar), molly (alan hasarı, defuse'u caydırır), ult (alanı dondurur)
+**Killjoy:** taret (görür + vurur), bot (patlayınca hedefi savunmasız bırakır — aldığı hasar artar), molly (alan hasarı, defuse'u caydırır), ult (alanı dondurur)
 **Cypher:** tel (bilgi + tutma), kamera (bilgi + işaret dartı), smoke, ult (ölen düşmandan konum okur)
 
 Fark şu: Killjoy utility'si hasar basar, Cypher utility'si basmaz. Bu yüzden Killjoy site savunmasında birinci tercih, Cypher bilgi akışında birinci tercih. Ult karşılaştırması: Killjoy ult'u o round'u kazandırır, Cypher ult'u bir sonraki hamleyi planlatır.
 
 ## 5. Haritaya Göre Değişim
 
-**Icebox / Haven / Split / Sunset (Killjoy):** dar girişler ve üç siteli düzen turret + molly kurulumuna ve ult'a oturur.
-**Bind / Abyss (Cypher):** teleporter geçişleri ve çok katlı yapı tel + kamera için eşsiz.
+**Icebox / Haven / Split / Sunset (Killjoy):** dar girişler ve üç siteli düzen taret + molly kurulumuna ve ult'a oturur.
+**Bind (Cypher):** teleporter geçişleri tel + kamera için eşsiz — her TP çıkışı bedava bilgi noktası.
+**Abyss (Cypher):** çok katlı yapı ve kenarsız zemin teli ödüllendirir — tutulan tel hem bilgi hem düşüş baskısı verir.
 **Ascent (Nötr):** Killjoy A site için, Cypher B için — kompa göre karar ver.
 
 ## 6. Koç Notları
 
 **Killjoy oynuyorsan:**
-- Turret'ı her round aynı yere koyma. Aynı noktayı iki round üst üste görürse rakip açıyı önceden nişanlar. Round ortasında, rakip util döktüğünde turret'ı yeniden konumlandır.
+- Tareti her round aynı yere koyma. Aynı noktayı iki round üst üste görürse rakip açıyı önceden nişanlar. Round ortasında, rakip util döktüğünde tareti yerini değiştir.
 - Ult cihazını koridorun ortasına koy, kenara değil. Kenardaki cihaz erken görülür ve kırılır.
 
 **Cypher oynuyorsan:**

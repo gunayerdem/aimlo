@@ -15,7 +15,7 @@ Raze kurulumu uzaktan söker: nade tuzağı patlatır, sıçrama onu kurulumun �
 
 ## Sinyal-Kapılı Dersler
 
-**IF** savunmada round'un ilk saniyelerinde öldün (side=Savunma, deathTiming=erken) ve düşman kompunda Raze var
+**IF** savunmada round açılışında öldün (side=Savunma, deathTiming=erken) ve düşman kompunda Raze var
 **MEANING** Sıçramayla inen Raze'i tek katman karşıladı — nade kurulumunu girmeden önce süpürdü
 **COUNTER** Tuzağı görünür giriş ağzına değil köşe arkasına, nade hattının ulaşamadığı noktaya kur; gizli duvarı ikinci katman olarak arkasına ekle
 **WHY** Nade ancak gördüğü ya da ezberlediği noktayı temizler; saklı ve katmanlı kurulum Raze'i iniş anında yakalar

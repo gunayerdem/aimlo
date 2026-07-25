@@ -12,19 +12,19 @@ tags: [matchup, killjoy, kayo, sentinel, initiator]
 
 ## 1. Matchup Özü
 
-KAY/O'nun bıçağı SENİ yakalarsa bütün cihazların susar — turret, bot, molly, hepsi kapanır. Cihazlar sana bağlı: sen susturulursan onlar da susar, sen alanın dışındaysan çalışmaya devam ederler. Killjoy oynuyorsan tek bir işin var: kendini bıçağın yakalayamayacağı yerde tut. KAY/O oynuyorsan tek bir işin var: bıçağı cihazlara değil Killjoy'un durduğu noktaya at.
+KAY/O'nun bıçağı SENİ yakalarsa bütün cihazların susar — taret, bot, molly, hepsi kapanır. Cihazlar sana bağlı: sen susturulursan onlar da susar, sen alanın dışındaysan çalışmaya devam ederler. Killjoy oynuyorsan tek bir işin var: kendini bıçağın yakalayamayacağı yerde tut. KAY/O oynuyorsan tek bir işin var: bıçağı cihazlara değil Killjoy'un durduğu noktaya at.
 
 ## 2. Kim Avantajlı?
 
 **Killjoy lehine durumlar:**
 - KAY/O bıçağını boşa attı — susturma gelmedi, cihazların açık, şimdi site'ı kilitle.
-- Dar geçit (Bind Hookah, Sunset B) — turret KAY/O içeri girerken vurur, kaçacak yer yok.
+- Dar geçit (Bind Hookah, Sunset B) — taret KAY/O içeri girerken vurur, kaçacak yer yok.
 - Ult'ın hazır — bıçak menzilinin dışından at, alana bağlanan KAY/O donar.
 - KAY/O yalnız giriyorsa — seni sustursa bile arkası boş, trade gelmez.
 
 **KAY/O lehine durumlar:**
-- Bıçak Killjoy'u yakaladı — turret, bot, molly hepsi kapanır, site boş kalır.
-- Flash Killjoy'un peek anında patladı — nişanı bozulur; turret çalışmaya devam eder ama Killjoy'un kendisi kör.
+- Bıçak Killjoy'u yakaladı — taret, bot, molly hepsi kapanır, site boş kalır.
+- Flash Killjoy'un peek anında patladı — nişanı bozulur; taret çalışmaya devam eder ama Killjoy'un kendisi kör.
 - KAY/O ult'ı açık ve Killjoy alanın içinde — bütün cihazlar kapanır; KAY/O düşse bile takımı kaldırabilir.
 - Molly + bıçak aynı noktaya geldi — hem can hem cihaz gider, iki ceza aynı anda.
 
@@ -33,16 +33,16 @@ KAY/O'nun bıçağı SENİ yakalarsa bütün cihazların susar — turret, bot, 
 ## 3. Önemli Düellolar
 
 **IF** KAY/O bıçağı Killjoy'un durduğu noktaya saplandı
-**MEANING** Susturuldun — turret, bot, molly kapanır, cihazlarından gelen bütün bilgi ve hasar sıfırlanır.
+**MEANING** Susturuldun — taret, bot, molly kapanır, cihazlarından gelen bütün bilgi ve hasar sıfırlanır.
 **COUNTER** Bıçak sesini duyar duymaz alandan çık ya da bıçağı vur, yok et — vurulabilir. Durduğun yer ile cihazların ayrı hatlarda olsun; sen yakalanmazsan cihazlar çalışır.
 **WHY** Bıçak Killjoy'u cihazlarından soyar — ama oyuncuyu yakalamak zorundadır. Bıçağı kırarsan ya da alandan çıkarsan susturma gelmez. Bu matchup'ın dönüm noktası burası.
 
 ---
 
 **IF** KAY/O flash'ı Killjoy'un peek hattına attı
-**MEANING** Nişanın bozulur, kör halde açıkta kalırsın — turret çalışır ama sen savunmasızsın.
-**COUNTER** Flash sesini duyar duymaz köşe al, peek atma. Turret flash'tan etkilenmez — arkanda vurmaya devam eder.
-**WHY** Flash Killjoy'un nişanını bozar, turret'i bozmaz. Köşede beklersen turret işini yapar, sen hasar almadan çıkarsın.
+**MEANING** Nişanın bozulur, kör halde açıkta kalırsın — taret çalışır ama sen savunmasızsın.
+**COUNTER** Flash sesini duyar duymaz köşe al, peek atma. Taret flash'tan etkilenmez — arkanda vurmaya devam eder.
+**WHY** Flash Killjoy'un nişanını bozar, tareti bozmaz. Köşede beklersen taret işini yapar, sen hasar almadan çıkarsın.
 
 ---
 
@@ -60,10 +60,10 @@ KAY/O'nun bıçağı SENİ yakalarsa bütün cihazların susar — turret, bot, 
 
 ---
 
-**IF** Killjoy turret'i KAY/O'nun bıçak atış hattında
-**MEANING** Turret, bıçağı atmaya hazırlanan KAY/O'yu görür ve vurur — atış anında can kaybeder.
-**COUNTER** (KAY/O için) Bıçak atmadan önce turret'i bul, atış pozisyonunu turret açısının dışından seç.
-**WHY** Bıçak atarken KAY/O kısa bir an sabittir. Turret bedava hasar verir. İyi Killjoy oyuncuları turret'i bıçağın gelebileceği açıya değil doğrudan giriş noktasına koyar — bıçak atsan bile turret içeride bekliyor olur.
+**IF** Killjoy tareti KAY/O'nun bıçak atış hattında
+**MEANING** Taret, bıçağı atmaya hazırlanan KAY/O'yu görür ve vurur — atış anında can kaybeder.
+**COUNTER** (KAY/O için) Bıçak atmadan önce tareti bul, atış pozisyonunu taret açısının dışından seç.
+**WHY** Bıçak atarken KAY/O kısa bir an sabittir. Taret bedava hasar verir. İyi Killjoy oyuncuları tareti bıçağın gelebileceği açıya değil doğrudan giriş noktasına koyar — bıçak atsan bile taret içeride bekliyor olur.
 
 ---
 
@@ -81,7 +81,7 @@ KAY/O'nun bıçağı SENİ yakalarsa bütün cihazların susar — turret, bot, 
 
 ## 4. Utility Karşılaştırması
 
-Killjoy: turret + bot + molly + ult. Cihaz ağırlıklı; bilgi ve alan kontrolü.
+Killjoy: taret + bot + molly + ult. Cihaz ağırlıklı; bilgi ve alan kontrolü.
 KAY/O: bıçak + flash + molly + ult. Util kapatma + kör + hasar zinciri.
 
 Bu matchup ters yönlü: KAY/O'nun işi Killjoy gibi cihaz ağırlıklı ajanları etkisizleştirmek. Killjoy'un cevabı kendini bıçaktan uzak tutmak ve bıçağı silahla yok etmek.
@@ -90,7 +90,7 @@ Ult farkı: KAY/O ult'ı Killjoy için en büyük tehdit. KAY/O ult'ını açtı
 
 ## 5. Haritaya Göre Değişim
 
-**Bind / Icebox / Sunset (Killjoy):** dar geçitler turret için ideal, uzun görüş hatları bıçak menzilini zorlar — cihazlar kolay güvende kalır.
+**Bind / Icebox / Sunset (Killjoy):** dar geçitler taret için ideal, uzun görüş hatları bıçak menzilini zorlar — cihazlar kolay güvende kalır.
 **Split (KAY/O):** yakın mesafe bıçak Killjoy savunmasını kapatır.
 **Haven / Ascent (Dengeli):** iş bıçak zamanlamasına kalır — bıçak hattını ezbere öğren.
 

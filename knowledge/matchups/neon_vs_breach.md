@@ -34,7 +34,7 @@ Breach duvardan geçen stun + flash + arka dalgayla Neon'un sprint koridorunu ka
 ## 3. Önemli Düellolar
 
 **IF** Breach stun'u Neon'un sprint hattında patladı
-**MEANING** Sprint kesilir. Neon yavaşlar, slide yapamaz, açıkta kalır.
+**MEANING** Sprint kesilir. Neon yavaşlar, kayamaz, açıkta kalır.
 **COUNTER** Sprint hattını değiştir — her round aynı koridoru kullanma. Breach 2 round sonra o hattı ezberler, 3. roundda zaten orada bekler. Stun sesini duyar duymaz sprint'i kes, köşeye çekil.
 **WHY** Stun duvardan geçer, koridorun tamamını kapatır. Aynı hattı tekrarlarsan Breach seni görmeden yakalar.
 

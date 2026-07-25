@@ -8,11 +8,11 @@ pool: "aktif — 13.00 ile rekabetçi havuza girdi"
 
 # SUMMIT — Koçluk Rehberi
 
-> **DİKKAT:** Summit yeni bir harita (24 Haziran 2026 çıktı). Callout/meta değişebilir — güncel patch'le karşılaştır.
+> **DİKKAT:** Summit yeni bir harita (23 Haziran 2026, Patch 13.00 ile çıktı). Callout/meta değişebilir — güncel patch'le karşılaştır.
 
 ## 1. Harita Karakteri
 
-Summit, Çin dağlarındaki bir Radiant antrenman akademisinde geçen geniş bir harita — Ascent ve Sunset'ten büyük. İki site (A ve B) ve üç hatlı bir Mid var. Ama Summit'i diğer haritalardan ayıran tek şey büyüklük değil: haritada üç tane düşürülebilir duvar var (A Wall, Mid Wall, B Wall). Her duvarın yanında bir anahtar paneli var (125 can) — birkaç el ateş edip paneli kırarsan duvar düşer. Bir hasar yeteneği (Sova'nın patlayan/hasar oku gibi) de paneli anında kırar; ama bilgi/recon oku paneli düşürmez. Bir kez düştü mü round boyunca kapalı kalır — ve altında kalan ölür, dokunulmazlık yeteneklerinde bile. Bu mekanik her kararını etkilemeli.
+Summit, Çin dağlarındaki bir Radiant antrenman akademisinde geçen geniş bir harita — Ascent ve Sunset'ten büyük. İki site (A ve B) ve üç hatlı bir Mid var. Ama Summit'i diğer haritalardan ayıran tek şey büyüklük değil: haritada üç tane düşürülebilir duvar var (A Wall, Mid Wall, B Wall). Her duvarın yanında bir anahtar paneli var — birkaç el ateş edip paneli kırarsan duvar düşer. Bir hasar yeteneği (Sova'nın patlayan oku, Raze ultisi gibi) paneli tek seferde kırar; bilgi oku düşürmez. Bir kez düştü mü round boyunca kapalı kalır — ve altında kalan ölür, dokunulmazlık yeteneklerinde bile. Bu mekanik her kararını etkilemeli.
 
 **Saldırı:** Site'a commit etmeden önce Mid kontrolünü al — büyük harita demek, utility'siz girişlerin bedeli ağır demek. Duvarları alanı aldıktan ya da plant'tan sonra düşür; erken düşürürsen kendi rotate yolunu da kapatırsın.
 
@@ -28,7 +28,7 @@ A Garden, A Site'a girerken karşılaştığın yakın açı. Plant'a koşmadan 
 
 ### B Tower
 
-B Tower savunucuya derin bir açı veriyor. B Main'den ya da B Link'ten geldiğinde Tower'a bakmayı atlarsan, oradan vurulursun. B'ye girerken Tower açısını flash ya da smoke ile kapatmadan ilerleme.
+B Tower savunucuya B'nin en derin açısını veriyor ve iki ayrı yoldan besleniyor: B Gym'den ip ile yukarı çıkılır, Tower'dan da B Drop'a sessizce inilir. B Main'den ya da B Link'ten geldiğinde sadece Tower'ın ağzına bakıp geçersen ya yukarıdan ya da az önce sessizce inmiş bir adamdan arkadan vurulursun. B'ye girerken Tower açısını smoke ile kapat ya da flash at; smoke attıysan Drop'un altını da bir kişi tutsun — smoke Tower'ı kör eder ama aşağı inmesini engellemez.
 
 ### Mid Fountain
 
@@ -279,10 +279,10 @@ Killjoy geniş Summit'te bir girişi tek başına kapatır — util'i doğru yer
 
 ## 8. Saldırı Tarafı Hataları
 
-- Mid'i kontrol etmeden site'a commit etme — Summit büyük, Mid'i bırakırsan saldırın tek hatta sıkışır, okunması kolaylaşır.
-- Duvarı erken düşürme — alanı almadan ya da plant'tan önce düşürürsen savunucunun değil, kendi rotate yolunu kapatırsın.
-- Initiator util'i olmadan duelist'i açılmamış köşeye sokma — geniş haritada temizlenmemiş açı duelist'i ilk kanda öldürür.
 - Entry düştükten sonra aynı yöne akmaya devam etme — geniş alanda trade gelmeden ölürsün, savunucuya bedava çoklu öldürme verirsin.
+- Duvar inerken altından geçmeye çalışma — paneli sen kırdıysan bile hattı boşalt, altında kalan ölür.
+- Mid'i alıp orada oturma — kontrol geçici; savunucu adapte olmadan A ya da B split'ine çevir.
+- Sessiz hattı unutma — B Tower'dan B Drop'a inen adamı hesaba katmadan post-plant kurma.
 
 ## 9. Savunma Tarafı Hataları
 
@@ -313,9 +313,9 @@ Controller şart — geniş görüş hatları smoke'suz kapanmaz (Omen default; 
 
 **Omen:** İki smoke Summit'in geniş görüş hatlarını ve execute'unu kapatmaya yeter. Flash'ı girişe at, açıyı boz. Kaçışıyla flank pozisyonu al ya da Mid'den ani split kur — büyük haritada kimse nerede çıkacağını bilemez.
 
-**Sova:** Ventleri kullanarak recon okunu uzaklara at, geniş alanda bilgi al — Summit'in ventleri menzilini artırır. Hasar okunla bir duvar panelini anında kırıp duvarı düşürebileceğini unutma (bilgi/recon oku paneli kırmaz), zamanlamayı buna göre planla. Ult ile post-plant'ı tara.
+**Sova:** Ventleri kullanarak recon okunu uzaklara at, geniş alanda bilgi al — Summit'in ventleri menzilini artırır. Hasar okunla bir duvar panelini anında kırıp duvarı düşürebileceğini unutma (bilgi oku paneli kırmaz), zamanlamayı buna göre planla. Ult ile post-plant'ı tara.
 
-**Cypher:** Kamerayı duvar düşmeden arkaya koy, duvar kapansa bile bilgi akmaya devam eder — Summit'e özel bir avantaj. Tek tel ile girişleri kapat, Link geçişlerini izle. Ult ile retake öncesi düşman yerini öğren.
+**Cypher:** Tel A Link ve B Link'e — Summit'te flank'ın ikisi de oradan gelir. Tek tel ile bir girişi kapatır, geniş haritada bir oyuncu kazanırsın. Ult'u retake'e girmeden at, kör girme.
 
 **Sage:** Duvarını harita duvarlarıyla birlikte düşün, alan kontrolünü katla. Dikey avantaj al, saldırgan yukarıyı atlarsa oradan vur. Yavaşlatmanla geniş yaklaşımları yavaşlat. Ult retake'te bir adam fazlası demek.
 
@@ -343,9 +343,9 @@ Controller şart — geniş görüş hatları smoke'suz kapanmaz (Omen default; 
 - **A Lobby / A Main:** A site'a girişin ana koridoru. Görüş hattı uzun — util atmadan girme.
 - **A Site:** Plant alanı. A küçük site — tutması zor, plant sonrası iyi siper al.
 - **A Garden:** Site girişindeki yakın açı. Plant'tan önce temizle, yoksa yandan vurulursun.
-- **A Cave:** A site çevresindeki pozisyon. Savunma ve retake açısı için kullanılır.
+- **A Cave:** A Site'ın CT tarafındaki kapalı köşe. Savunmada anchor buraya çekilip retake'i buradan başlatır; saldırıda plant'tan sonra ilk temizlenecek yer burasıdır, yoksa defuse anında arkandan çıkar.
 - **A Link:** A site ile Mid Bend / Mid Fountain'i bağlayan ana rotasyon koridoru. Flank ve split için kritik.
-- **A Art:** A tarafındaki pozisyon, A Wall'a yakın.
+- **A Art:** A Wall'un hemen yanındaki pozisyon. Duvar ayaktayken buradan A Main'e dar bir açı tutulur; duvar düştükten sonra bu açı kalıcı olarak kapanır — A Wall'u düşürmeden önce buradaki adamını çek.
 - **A Wall:** Düşürülebilir duvar (A Art / A Garden civarı). Site'ı aldıktan sonra düşür, retake açılarını kesersin.
 - **CT / Boxes:** Savunmanın A'ya geldiği yol ve site içi siper. Retake buradan gelir.
 
@@ -353,15 +353,20 @@ Controller şart — geniş görüş hatları smoke'suz kapanmaz (Omen default; 
 - **B Lobby / B Main:** B site'a giden ana saldırı rotası. Geniş giriş, B Tower'dan çapraz tutulur.
 - **B Site:** Plant alanı. B büyük site — post-plant alanı bol.
 - **B Link:** Mid Bottom'dan B Site'a bağlanır. Mid-split ve rotate yolu.
-- **B Trophy / B Gym:** B çevresindeki pozisyonlar.
+- **B Trophy:** B Site'ın yan bölgesi, site içi siper hattı. Post-plant'te spike'ı yakından koruyan pozisyon buradan alınır.
+- **B Gym:** B Tower'ın altındaki alan; ip ile yukarı, Tower'a çıkılır. İp sesi karşı tarafa gider — Tower'a çıkacaksan ya push sesiyle birlikte çık ya da hiç çıkma.
+- **B Drop:** Tower'ın altındaki iniş alanı. Tower'dan buraya sessizce inilir — B'de flank ve retake sürprizi bu hattan gelir, post-plant kurarken bir gözü buraya ayır.
 - **B Tower:** Savunucunun derin açısı. Temizlemeden geçme, arkadan vurulursun.
 - **Triples / Plant / Close Box:** B site içi pozisyon ve siper noktaları. Post-plant ve retake için kullanılır.
 - **B Wall:** Düşürülebilir duvar (B Tower / B Site arası). Plant'tan sonra düşür, savunucuyu az rotaya zorlarsın.
 
 ### Mid
 - **Mid Fountain:** Merkez kavşak. Kontrolü A'yı da B'yi de tehdit eder. Utility'siz peek atma.
-- **Mid Bend / Mid Bottom / Mid Top:** Mid hattının bölümleri. Rotate ve split için kullanılır.
-- **Mid Tiles / Double Box:** Mid içi pozisyon ve siper noktaları.
+- **Mid Top:** Mid'e saldırı tarafından ilk basılan uç. Bilgi almak için durulur, çatışmak için değil — Fountain'e util atmadan buradan ilerleme.
+- **Mid Bend:** Fountain ile A Link arasındaki dönüş. Fountain'i tutan savunucunun çapraz kolu buradan gelir; Fountain'e girmeden önce bu köşeyi flash'la.
+- **Mid Bottom:** Mid'in savunma tarafına yakın ucu, B Link'e açılır. Burayı verirsen B split'i açılır.
+- **Mid Tiles:** Mid Top ile Fountain arasındaki ara geçiş. Mid kontrolü Fountain'le birlikte burayı da tutmak demektir.
+- **Double Box:** Mid içi siper. Fountain düellosunu buradan trade'lersin — Fountain'e giren adamın arkasında biri Double Box'ta dursun.
 - **Mid Window:** Mid'deki bilgi ve açı pozisyonu, Mid Wall'a yakın. Duvar açıksa buradan görülürsün.
 - **Mid Wall:** Düşürülebilir duvar (Mid Window / Mid Bottom arası). Site seçtikten sonra düşür, rotasyonu kesersin.
 
