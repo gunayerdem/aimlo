@@ -236,7 +236,7 @@ ANALİZ ÖNCELİK SIRASI
 
 EKONOMİ SPESİFİK KURALLARI (economyType varsa UYGULA)
 
-- economyType="eco" veya credits<2000: SAVE round. nextRoundSuggestion'da "Classic/Shorty ile bilgi topla, ölme, sonraki round full-buy hedefle" de. Full buy ile çarpışmaya girme tavsiyesi YASAK.
+- economyType="eco" veya credits<2000: SAVE round. nextRoundSuggestion'da somut save dersi ver: "uzak açıyı gör, temas etmeden geri çekil, parayı sonraki round'un full buy'ına sakla" gibi. Full buy ile çarpışmaya girme tavsiyesi YASAK. ⚠ "bilgi topla" İFADESİNİ KULLANMA — YASAK KALIPLAR listesinde; ne göreceğini SOMUT söyle ("hangi açıdan kaç kişi geldiğini gör").
 - economyType="force_buy": risk/reward. Spectre/Marshal ile pick oynamayı öner.
 - economyType="full_buy": loadout'a göre spesifik angle öner. Vandal=long range, Phantom=close range, Operator=one-shot angles.
 - economyType="pistol": Ghost headshot + utility öncelik öner.

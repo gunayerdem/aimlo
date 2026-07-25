@@ -11,6 +11,12 @@ tags: [post-plant, spike, lineup, retake-defense, crossfire, spread]
 
 Round'un ikinci yarısı plant'ten sonra başlar: plant'i koyan tutan taraf olur, saat onun lehine çalışır.
 
+**Dersi kanıta bağla.** Spike kurulu round'un elinde kanıt vardır: öldüğün yer, seni öldüren ajan ve silah, kaç kişi kaldığınız, skor, kaçıncı round. Dersi bunlardan en az BİRİNE çapala, sonra ne yapılacağını söyle — çapasız cümle her round'a uyar, hiçbir round'u düzeltmez.
+- Boş: "çapraz açı kur, spike'ı koru."
+- Dolu: "R7'de 3v5'e düşmüşken spike'ın dibinde öldün — spike'ı gören siperli açıya çekil, defuse sesini bekle."
+
+Yalnız sana VERİLEN veriye dayan: round geçmişinde aynı yer iki kez geçiyorsa tekrarı adıyla söyle; geçmiyorsa "tekrar ediyorsun" deme. Sayı, yer, ajan uydurma — veri yoksa o iddiayı hiç kurma.
+
 ## Saldırı — Post-Plant Temel Prensibi
 
 Kimin nerede duracağına ve hangi açıyı tutacağına plant'ten ÖNCE karar ver — plant bittikten sonra düşünmek çok geç.
@@ -19,7 +25,7 @@ Kimin nerede duracağına ve hangi açıyı tutacağına plant'ten ÖNCE karar v
 
 1. **Plant biter bitmez yerini değiştir.** Rakip lineup'larını spike konumuna göre ayarlar; spike dibinde kalan kolayca molly'lenir.
 2. **Çapraz açı kur.** İki oyuncu aynı yönden bakmasın. Defuse'a gelen rakibi iki ayrı noktadan vurabilmelisin.
-3. **En az bir util'ini sakla.** Molly, smoke veya flash olmadan plant sonrası defuse'u durduramazsın.
+3. **En az bir util'ini sakla.** Molly ve flash'ı plant'e kadar harcadıysan defuse'a oturan rakibi yerinden kaldıracak bir şeyin kalmaz — geriye açıyı silahla tutmak kalır, o da tek açı demektir.
 
 ## Saldırı — Plant Spot Seçimi
 
@@ -36,7 +42,7 @@ Defuse kolay görünür ama çapraz açıyı çok daha rahat kurarsın. Rakip op
 
 ### Ne Zaman Hızlı, Ne Zaman Yavaş Plant?
 
-**Hızlı plant:** Site'ta hâlâ rakip varsa veya rotate yaklaşıyorsa hemen koy — beklersen rotate yetişir.
+**Hızlı plant:** Rotate sesi geliyorsa ya da siteyi tam temizleyemeden zaman daralıyorsa bekleme — spike'ı hayattaki rakibin göremeyeceği noktaya, biri sana bakarken dik. Beklersen rotate yetişir ve plant hiç olmaz.
 
 **Yavaş plant:** Site temiz ve flank'tan haber geldiyse çevreyi bir kez daha tara, sonra koy — plant sırasında ölüm riskini sıfırla.
 
@@ -74,7 +80,7 @@ Defuse kolay görünür ama çapraz açıyı çok daha rahat kurarsın. Rakip op
 
 ### Ne Zaman Kullanırsın?
 
-**Molly'yi gerçek oturuşa at.** Tek saniyelik dokun-bırak sesi çoğu zaman yem — tek molly'ni ona yakma. Ses kesilmeden sürüyorsa gerçek oturuştur: o an at; hasar anında başlar, defuse'a oturan rakip geri çekilemez.
+**Molly'yi gerçek oturuşa at.** Dokunup bırakılan kısa ses çoğu zaman yem — tek molly'ni ona yakma. Ses kesilmeden sürüyorsa gerçek oturuştur: o an at. Hasar düştüğü an başlar; rakip ya defuse'u bırakır ya spike'ın üstünde erir.
 
 **Smoke'u plant'ten önce atma.** Süresi biter, retake tam gelirken saha açık kalır.
 
@@ -90,7 +96,7 @@ Defuse sesi üç şey söyler: rakip spike'a kilitlendi, konumu belli, savunmas�
 
 ### Yarım Defuse Tehdidi
 
-Defuse yarı noktasında kaydedilir: yarıyı geçen rakip ikinci oturuşta kalan yarıdan devam eder, çok daha hızlı bitirir. İkinci defuse sesinde beklemeden müdahale et — pencere bu kez yarı yarıya dar.
+Defuse yarı noktasında spike'a kaydedilir: yarıyı geçen rakip bıraksa bile ilerleme durmaz, ikinci oturuşta kalan yarıdan devam eder — üstelik oturan aynı kişi olmak zorunda değil, takım arkadaşı da kaldığı yerden bitirir. Yarıyı geçen defuse'un sesi TİZLEŞİR: bu tiz sesi duyduğun an artık okuma yapma, doğrudan müdahale et — pencere bu kez yarı yarıya dar.
 
 ## Saldırı — Oyuncu Sayısına Göre Plan
 

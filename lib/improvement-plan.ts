@@ -77,7 +77,9 @@ export function generateImprovementPlan(
     .filter(([, c]) => c >= 3)
     .forEach(([loc, count]) => {
       problems.push({
-        issue: `${loc}'de ${count} kez öldün — bu pozisyonu değiştir veya utility kullan`,
+        // "utility kullan" KALDIRILDI (dil denetimi 2026-07-25): ai-policy BANNED_PHRASES
+        // listesinde generik kalıp. Somut karşı-hamleyle değiştirildi.
+        issue: `${loc}'de ${count} kez öldün — o açıyı bir round tamamen boş bırak ya da smoke'unu o hatta at`,
         severity: count,
         category: "positioning",
       });

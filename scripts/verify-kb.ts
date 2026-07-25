@@ -274,6 +274,64 @@ console.log(`\n[N] Harita callout tablosu ↔ KB tutarlılığı`);
   }
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// 9) PROMPT KAYNAKLARI YASAK-KELİME TARAMASI (dil denetimi 2026-07-25)
+// KÖK NEDEN: KB dosyaları [7]'de taranıyordu ama PROMPT kaynak dosyaları HİÇ
+// taranmıyordu. Sonuç: lib/vision-prompt.ts modele `nextRoundSuggestion'da
+// "... bilgi topla ..." de` diye ÖRNEK veriyordu — oysa "bilgi topla"
+// ai-policy.ts BANNED_PHRASES listesindeydi. Yani prompt'un bir yeri yasaklarken
+// başka yeri EMREDİYORDU; canlı eval'de eco/force/pistol senaryolarının 3'ünde
+// yasak kalıp çıktı. Bu kontrol o çelişkiyi sınırda yakalar.
+// NOT: BANNED_PHRASES tanımının KENDİSİ (ai-policy.ts:11 listesi) ve yasağı
+// ANLATAN satırlar meşru — yalnız modele ÖRNEK/EMİR olarak verilen kullanımlar
+// hatadır. Ayrım: "YASAK"/"KULLANMA"/"YAZMA" gibi olumsuzlayıcı bir işaret aynı
+// satırda varsa muaf.
+{
+  const PROMPT_SOURCES = [
+    "lib/vision-prompt.ts",
+    "lib/round-engine.ts",
+    "lib/improvement-plan.ts",
+    "lib/playstyle-system.ts",
+    "lib/skill-system.ts",
+  ];
+  console.log(`\n[12] Prompt kaynaklarında yasak-kalıp taraması (${PROMPT_SOURCES.length} dosya)`);
+  // Muafiyet: yasağı ANLATAN / KÖTÜ ÖRNEK gösteren / yanlış→doğru eşlemesi yapan satırlar.
+  // Bağlam-duyarlı: işaret aynı satırda olmayabilir (çok satırlı "KÖTÜ ÖRNEK" JSON bloğu
+  // gibi) → önceki 6 satıra da bak.
+  const NEGATORS =
+    /YASAK|KULLANMA|YAZMA|DEME\b|ASLA|BANNED|kaldırıldı|KALDIRILDI|KÖTÜ|YANLIŞ|BAD EXAMPLE|karşı-örnek|→/i;
+  for (const rel of PROMPT_SOURCES) {
+    const abs = path.join(process.cwd(), rel);
+    if (!fs.existsSync(abs)) continue;
+    const lines = fs.readFileSync(abs, "utf8").split(/\r?\n/);
+    const hits: string[] = [];
+    lines.forEach((line, i) => {
+      // satırın kendisi VEYA yakın önceki bağlam yasağı işaret ediyorsa muaf
+      const context = lines.slice(Math.max(0, i - 6), i + 1).join("\n");
+      if (NEGATORS.test(context)) return;
+      const low = line.toLowerCase();
+      for (const phrase of BANNED_PHRASES) {
+        const p = phrase.toLowerCase();
+        // Çok kısa/genel kalıpları atla (yanlış-pozitif üretir)
+        if (p.length < 10) continue;
+        // KELİME SINIRI: "bilgi toplayan oyuncu" bir İSİM TAMLAMASI, öğüt değil —
+        // "bilgi topla" alt-dizgisini içerse de ihlal sayılmamalı. Kalıbın ardından
+        // Türkçe harf gelmemeli (çekim eki = farklı sözcük).
+        const idx = low.indexOf(p);
+        if (idx === -1) continue;
+        const after = low.charAt(idx + p.length);
+        if (after && /[a-zçğıöşü]/.test(after)) continue;
+        hits.push(`${rel}:${i + 1} «${phrase}»`);
+      }
+    });
+    check(
+      `${rel} yasak kalıp içermiyor`,
+      hits.length === 0,
+      hits.length ? `\n      ${hits.join("\n      ")}` : "",
+    );
+  }
+}
+
 console.log(`\n══════ SONUÇ: ${pass} geçti, ${fail} başarısız ══════`);
 if (fail > 0) { console.log("❌ KB BOZUK — bir şey kırılmış!"); process.exit(1); }
 console.log("✅ TÜM KB sağlam — hiçbir dosya bozuk/eksik değil, tüm route'lar yüklüyor.");

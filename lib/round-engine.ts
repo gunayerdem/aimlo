@@ -362,9 +362,13 @@ export function generateNextRoundPlan(
   }
 
   if (patterns.recentPerformance === "declining") {
+    // "daha pasif oyna, bilgi topla" KALDIRILDI (dil denetimi 2026-07-25): her iki ifade
+    // de ai-policy.ts BANNED_PHRASES listesinde ("bilgi topla" satır 14). Bu metin
+    // prompt'a ipucu olarak giriyordu → model yasak kalıbı kopyalıyordu (canlı eval'de
+    // eco/force/pistol senaryolarının 3'ünde "bilgi topla" çıktı). Yerine somut ders.
     hint += hint
-      ? ". Performans düşüşte — daha pasif oyna, bilgi topla"
-      : "Performans düşüşte — daha pasif oyna, bilgi topla";
+      ? ". Son round'lar kötü gidiyor — ilk temasa sen girme, açıyı arkadaşınla paylaş"
+      : "Son round'lar kötü gidiyor — ilk temasa sen girme, açıyı arkadaşınla paylaş";
   }
 
   return { strategyHint: hint, avoidLocations: avoid, suggestedApproach: approach };

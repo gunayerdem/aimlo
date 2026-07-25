@@ -188,7 +188,13 @@ const TR_JARGON: [RegExp, string][] = [
   [/\bcrosshair['’]?(ın|in)\b/gi, "nişangâhın"],
   [/\bcrosshair['’]?(d[ae]|t[ae])\b/gi, "nişangâhta"],
   [/\bcrosshair['’]?(y[ae]|[ae])\b/gi, "nişangâha"],
-  [/\bcrosshair['’]?([ıi])\b/gi, "nişangâhı"],
+  // 🔴 TÜRKÇE-\b TUZAĞI FIX (dil denetimi 2026-07-25): sondaki \b, JS'te \w=[A-Za-z0-9_]
+  // tanımına dayanır; "ı" bu kümede DEĞİL. "crosshair'ı"da eşleşme "ı"da biter, ardından
+  // gelen boşluk da \w-dışı olduğu için SINIR OLUŞMAZ → kural atlanır, metin bir alttaki
+  // çıplak kurala düşer ve ekrana "nişangâh'ı" (apostroflu, bozuk) çıkardı. Canlı çıktıda
+  // 4 kez görüldü. Aynı tuzak bu dosyanın 197-199. satırlarında `sightline` için zaten
+  // belgeliydi ama bu satır düzeltilmemişti. Çözüm: \b yerine Türkçe-duyarlı lookahead.
+  [/\bcrosshair['’]?([ıi])(?![a-zçğıöşüA-ZÇĞİÖŞÜ])/gi, "nişangâhı"],
   [/\bcrosshair\b/gi, "nişangâh"],
   [/\bzonel[ae]y([ıi]p|arak)\b/gi, "alanı kapatıp"],       // S6: "zonelayıp" → "alanı kapatıp"
   [/\bzonel[ae][a-zçğıöşü]*/gi, "alanı kapat"],            // zone+TR fiil backstop
@@ -299,8 +305,15 @@ const TR_JARGON: [RegExp, string][] = [
   // "utility'siz ... utility'siz" çift-tekrar (S9): apostrof-normalize sonra dedup
   [/(utility['’]?siz)(,?\s+\1)+/gi, "utility'siz"],
   // slash-liste: util/callout token'ları arasında '/' → ' ya da ' (S8/S16/S19; '+' liste de)
-  [/(?<=[a-zçğıöşü])\/(?=[a-zçğıöşü])/gi, " ya da "],
-  [/\b(bot|tuzak|molly|smoke|flash|duvar|tel|kamera|net|ağ)\s*\+\s*(bot|tuzak|molly|smoke|flash|duvar|tel|kamera|net|ağ)\b/gi, "$1 ve $2"],
+  // BOŞLUKLU/BÜYÜK-HARFLİ FORM (dil denetimi 2026-07-25): eski kural yalnız bitişik-küçük
+  // harf formunu yakalıyordu; canlı çıktıda "crossfire/ trade" (boşluklu) ekrana çöp gibi
+  // düştü. Artık boşluk toleranslı + büyük harf dahil.
+  // İSTİSNA: "A/B split" gibi TEK-HARFLİ site adları terimdir, bozulmamalı — onları
+  // dışarıda bırakmak için iki yanda da en az 2 harf şartı (tek harf → dokunma).
+  [/(?<=[a-zçğıöşüA-ZÇĞİÖŞÜ]{2})\s*\/\s*(?=[a-zçğıöşüA-ZÇĞİÖŞÜ]{2})/g, " ya da "],
+  // '+' birleştirmesi: eski kural KAPALI token listesiyle çalışıyordu; listede olmayan
+  // "tuzak+ult", "bilgi+trade" ekrana '+' işaretiyle çıktı. Genel kurala çevrildi.
+  [/(?<=[a-zçğıöşü'’])\s*\+\s*(?=[a-zçğıöşü])/gi, " ve "],
   // em-dash boşluk normalize (S2 "yüklenme—Showers")
   [/\s*—\s*/g, " — "],
 ];

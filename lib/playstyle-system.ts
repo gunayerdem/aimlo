@@ -162,7 +162,8 @@ export function analyzePlaystyle(
     mismatch = {
       detected: true,
       message:
-        "Agresif oynuyorsun ama kazanma oranın düşük. Entry almadan önce utility kullan.",
+        // "utility kullan" KALDIRILDI (dil denetimi 2026-07-25): BANNED_PHRASES generik kalıbı.
+    "Agresif oynuyorsun ama kazanma oranın düşük. Entry'den önce flash'ını at, arkandan gelecek birini yanına al.",
     };
   } else if (archetype === "chaotic_aggressive") {
     mismatch = {

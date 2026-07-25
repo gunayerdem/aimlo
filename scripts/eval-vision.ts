@@ -320,6 +320,182 @@ const SCENARIOS: Scenario[] = [
       roundHistory: [{ round_index: 1, died: false, round_won: true, death_detected_confidence: "observed", timestamp: 0 }],
     },
   },
+
+  // ── KAPSAM GENİŞLETME (KB 10h nöbeti 2026-07-25) ──────────────────────────
+  // İlk 20 senaryo 11 ajanın KB dosyasına HİÇ dokunmuyordu (reyna, viper,
+  // brimstone, skye, kayo, neon, tejo, vyse, waylay, veto, miks) — o dosyalar
+  // eval ile hiç doğrulanmıyordu. En yeni ajanların (tejo/vyse/waylay/veto/miks)
+  // KB'si en az test edilmiş olan; fix dalgasından sonra regresyon avlamak için
+  // şart. NOT: S1-S20 ID'leri BOZULMADI — A/B karşılaştırması o 20 üzerinden
+  // yapılır, bunlar kapsam taraması.
+  {
+    id: "S21-ascent-reyna-atk-solo",
+    note: "Ascent / Reyna / SALDIRI / solo entry + tekrar eden aynı-açı ölümü",
+    body: {
+      round: 9, score: "4-4", result: "loss", map: "Ascent", agent: "Reyna", rank: "silver",
+      side: "attack", mode: "competitive", enemyComp: ["Killjoy", "Sova", "Omen", "Jett", "Sage"],
+      died: true, killerInfo: "killed by killjoy with vandal", deathLocation: "A Main", deathAngle: "front-right",
+      healthAtDeath: 100, alliesAlive: 4, enemiesAlive: 5, economyType: "full_buy", loadout: "vandal",
+      patternContext: "Son 4 round'da 3 kez A Main'e ilk giren sen oldun ve trade alınmadan öldün.",
+      roundHistory: Array.from({ length: 8 }, (_, i) => ({
+        round_index: i + 1, died: i % 2 === 0, round_won: i % 3 === 0,
+        death_detected_confidence: "observed", timestamp: i,
+        death_position: i % 2 === 0 ? "A Main" : "Mid", position_confidence: "high",
+      })),
+    },
+  },
+  {
+    id: "S22-icebox-viper-def-postplant",
+    note: "Icebox / Viper / SAVUNMA / spike kurulu + post-plant/retake yolu",
+    body: {
+      round: 14, score: "7-6", result: "loss", map: "Icebox", agent: "Viper", rank: "silver",
+      side: "defense", mode: "competitive", enemyComp: ["Jett", "Sova", "Raze", "Omen", "Sage"],
+      died: true, killerInfo: "killed by raze with phantom", deathLocation: "B Site", deathAngle: "back",
+      healthAtDeath: 100, alliesAlive: 1, enemiesAlive: 3, economyType: "full_buy", loadout: "phantom",
+      spikePlanted: true,
+      roundHistory: Array.from({ length: 13 }, (_, i) => ({
+        round_index: i + 1, died: i % 2 === 1, round_won: i % 2 === 0,
+        death_detected_confidence: "observed", timestamp: i,
+        death_position: i % 3 === 0 ? "B Site" : "Mid", position_confidence: "medium",
+      })),
+    },
+  },
+  {
+    id: "S23-split-brimstone-atk-eco",
+    note: "Split / Brimstone / SALDIRI / eco round + ekonomi rehberi yolu",
+    body: {
+      round: 5, score: "1-3", result: "loss", map: "Split", agent: "Brimstone", rank: "silver",
+      side: "attack", mode: "competitive", enemyComp: ["Cypher", "Raze", "Sage", "Sova", "Jett"],
+      died: true, killerInfo: "killed by cypher with sheriff", deathLocation: "A Ramp", deathAngle: "front",
+      healthAtDeath: 100, alliesAlive: 2, enemiesAlive: 4, economyType: "eco", loadout: "classic",
+      roundHistory: Array.from({ length: 4 }, (_, i) => ({
+        round_index: i + 1, died: true, round_won: false,
+        death_detected_confidence: "observed", timestamp: i,
+        death_position: "A Ramp", position_confidence: "high",
+      })),
+    },
+  },
+  {
+    id: "S24-lotus-skye-atk-info",
+    note: "Lotus / Skye / SALDIRI / initiator bilgi-util kullanımı",
+    body: {
+      round: 7, score: "3-3", result: "loss", map: "Lotus", agent: "Skye", rank: "silver",
+      side: "attack", mode: "competitive", enemyComp: ["Chamber", "Viper", "Killjoy", "Fade", "Neon"],
+      died: true, killerInfo: "killed by chamber with operator", deathLocation: "C Mound", deathAngle: "front-left",
+      healthAtDeath: 100, alliesAlive: 3, enemiesAlive: 4, economyType: "full_buy", loadout: "vandal",
+      roundHistory: Array.from({ length: 6 }, (_, i) => ({
+        round_index: i + 1, died: i % 2 === 0, round_won: i % 2 === 1,
+        death_detected_confidence: "observed", timestamp: i,
+        death_position: "C Mound", position_confidence: "high",
+      })),
+    },
+  },
+  {
+    id: "S25-bind-kayo-def-flank",
+    note: "Bind / KAY/O / SAVUNMA / flank ölümü + arka kontrol",
+    body: {
+      round: 11, score: "5-5", result: "loss", map: "Bind", agent: "KAY/O", rank: "silver",
+      side: "defense", mode: "competitive", enemyComp: ["Yoru", "Raze", "Skye", "Brimstone", "Cypher"],
+      died: true, killerInfo: "killed by yoru with vandal", deathLocation: "B Hall", deathAngle: "back",
+      healthAtDeath: 100, alliesAlive: 3, enemiesAlive: 4, economyType: "full_buy", loadout: "phantom",
+      roundHistory: Array.from({ length: 10 }, (_, i) => ({
+        round_index: i + 1, died: i % 3 === 0, round_won: i % 2 === 1,
+        death_detected_confidence: "observed", timestamp: i,
+        death_position: i % 3 === 0 ? "B Hall" : "A Site", position_confidence: "medium",
+      })),
+    },
+  },
+  {
+    id: "S26-breeze-neon-atk-tempo",
+    note: "Breeze / Neon / SALDIRI / hız-tempo ölümü (duelist over-aggression)",
+    body: {
+      round: 6, score: "2-4", result: "loss", map: "Breeze", agent: "Neon", rank: "silver",
+      side: "attack", mode: "competitive", enemyComp: ["Viper", "Cypher", "Sova", "Jett", "Harbor"],
+      died: true, killerInfo: "killed by viper with vandal", deathLocation: "A Main", deathAngle: "front",
+      healthAtDeath: 100, alliesAlive: 4, enemiesAlive: 5, economyType: "full_buy", loadout: "vandal",
+      patternContext: "3 round üst üste takımdan önce girdin ve trade alınmadan öldün.",
+      roundHistory: Array.from({ length: 5 }, (_, i) => ({
+        round_index: i + 1, died: true, round_won: false,
+        death_detected_confidence: "observed", timestamp: i,
+        death_position: "A Main", position_confidence: "high",
+      })),
+    },
+  },
+  {
+    id: "S27-sunset-tejo-atk-newagent",
+    note: "Sunset / Tejo / SALDIRI / EN YENİ ajan — KB doğruluğu kritik",
+    body: {
+      round: 8, score: "4-3", result: "loss", map: "Sunset", agent: "Tejo", rank: "silver",
+      side: "attack", mode: "competitive", enemyComp: ["Killjoy", "Cypher", "Jett", "Omen", "Sova"],
+      died: true, killerInfo: "killed by killjoy with phantom", deathLocation: "B Market", deathAngle: "front-right",
+      healthAtDeath: 100, alliesAlive: 3, enemiesAlive: 4, economyType: "full_buy", loadout: "vandal",
+      roundHistory: Array.from({ length: 7 }, (_, i) => ({
+        round_index: i + 1, died: i % 2 === 0, round_won: i % 3 === 1,
+        death_detected_confidence: "observed", timestamp: i,
+        death_position: "B Market", position_confidence: "medium",
+      })),
+    },
+  },
+  {
+    id: "S28-pearl-vyse-def-newagent",
+    note: "Pearl / Vyse / SAVUNMA / EN YENİ sentinel — KB doğruluğu kritik",
+    body: {
+      round: 10, score: "5-4", result: "loss", map: "Pearl", agent: "Vyse", rank: "silver",
+      side: "defense", mode: "competitive", enemyComp: ["Raze", "Sova", "Astra", "Chamber", "Skye"],
+      died: true, killerInfo: "killed by raze with vandal", deathLocation: "B Link", deathAngle: "front",
+      healthAtDeath: 100, alliesAlive: 2, enemiesAlive: 4, economyType: "full_buy", loadout: "vandal",
+      roundHistory: Array.from({ length: 9 }, (_, i) => ({
+        round_index: i + 1, died: i % 2 === 1, round_won: i % 2 === 0,
+        death_detected_confidence: "observed", timestamp: i,
+        death_position: "B Link", position_confidence: "high",
+      })),
+    },
+  },
+  {
+    id: "S29-fracture-waylay-atk-newagent",
+    note: "Fracture / Waylay / SALDIRI / EN YENİ duelist — KB doğruluğu kritik",
+    body: {
+      round: 12, score: "6-5", result: "loss", map: "Fracture", agent: "Waylay", rank: "silver",
+      side: "attack", mode: "competitive", enemyComp: ["Cypher", "Viper", "Sova", "Killjoy", "Jett"],
+      died: true, killerInfo: "killed by cypher with vandal", deathLocation: "A Hall", deathAngle: "front-left",
+      healthAtDeath: 100, alliesAlive: 3, enemiesAlive: 4, economyType: "full_buy", loadout: "phantom",
+      roundHistory: Array.from({ length: 11 }, (_, i) => ({
+        round_index: i + 1, died: i % 3 === 0, round_won: i % 2 === 0,
+        death_detected_confidence: "observed", timestamp: i,
+        death_position: "A Hall", position_confidence: "medium",
+      })),
+    },
+  },
+  {
+    id: "S30-corrode-veto-def-newagent",
+    note: "Corrode / Veto / SAVUNMA / EN YENİ ajan + en yeni harita — çift risk",
+    body: {
+      round: 7, score: "3-3", result: "loss", map: "Corrode", agent: "Veto", rank: "silver",
+      side: "defense", mode: "competitive", enemyComp: ["Jett", "Sova", "Brimstone", "Sage", "Raze"],
+      died: true, killerInfo: "killed by jett with operator", deathLocation: "Mid", deathAngle: "front",
+      healthAtDeath: 100, alliesAlive: 3, enemiesAlive: 4, economyType: "full_buy", loadout: "vandal",
+      roundHistory: Array.from({ length: 6 }, (_, i) => ({
+        round_index: i + 1, died: i % 2 === 0, round_won: i % 2 === 1,
+        death_detected_confidence: "observed", timestamp: i,
+        death_position: "Mid", position_confidence: "medium",
+      })),
+    },
+  },
+  {
+    id: "S31-summit-miks-atk-newagent",
+    note: "Summit / Miks / SALDIRI / EN YENİ ajan — KB doğruluğu kritik",
+    body: {
+      round: 9, score: "4-4", result: "loss", map: "Summit", agent: "Miks", rank: "silver",
+      side: "attack", mode: "competitive", enemyComp: ["Killjoy", "Cypher", "Sova", "Omen", "Jett"],
+      died: true, killerInfo: "killed by sova with guardian", deathLocation: "A Main", deathAngle: "front-right",
+      healthAtDeath: 100, alliesAlive: 4, enemiesAlive: 4, economyType: "full_buy", loadout: "vandal",
+      roundHistory: Array.from({ length: 8 }, (_, i) => ({
+        round_index: i + 1, died: i % 2 === 1, round_won: i % 3 === 0,
+        death_detected_confidence: "observed", timestamp: i,
+        death_position: "A Main", position_confidence: "high",
+      })),
+    },
+  },
 ];
 
 // ── confidence derivation (route 725-730) ──
@@ -481,9 +657,14 @@ async function callModel(systemMessage: string, userPrompt: string): Promise<unk
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${API_KEY}` },
     body: JSON.stringify({
       model: "gpt-5-mini",
-      max_completion_tokens: 350,
+      // EVAL_MAX_TOKENS / EVAL_EFFORT (KB 10h nöbeti 2026-07-25): canlı route'un
+      // değerleri VARSAYILAN (minimal / 350) — sadakat korunur. Env ile
+      // değiştirilebilir ki "reasoning_effort kaliteyi ne kadar taşıyor?" sorusu
+      // KB değişikliğinden AYRI bir değişken olarak ölçülebilsin (route.ts:1057'deki
+      // "kalite düşerse low/medium'a çıkar" notunun ampirik sınaması).
+      max_completion_tokens: Number(process.env.EVAL_MAX_TOKENS || 350),
       response_format: { type: "json_schema", json_schema: ROUND_FEEDBACK_SCHEMA },
-      reasoning_effort: "minimal",
+      reasoning_effort: (process.env.EVAL_EFFORT || "minimal") as "minimal" | "low" | "medium" | "high",
       messages: [
         { role: "system", content: systemMessage },
         { role: "user", content: userPrompt },

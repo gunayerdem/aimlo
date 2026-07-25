@@ -975,11 +975,23 @@ export async function POST(request: NextRequest) {
         const recentRounds = matchingRounds.slice(-3); // last 3 occurrences
         const span = recentRounds.length >= 2 ? recentRounds[recentRounds.length - 1] - recentRounds[0] : 0;
         const isRecent = span <= 5; // within last 5 rounds = temporally clustered
+        // 🔴 SAYI-PENCERE TUTARSIZLIĞI FIX (KB 10h nöbeti 2026-07-25). ÖNCE: sayı
+        // topPos[1] (TÜM geçmişin toplamı) iken pencere span+1 (yalnız SON 3 tekrarın
+        // aralığı) yazılıyordu → "6 kez, son 5 round içinde" gibi MATEMATİKSEL OLARAK
+        // İMKÂNSIZ cümle (S1: B Main ölümleri R1,3,5,7,9,11 → 6 kez ama pencere R7-R11).
+        // Yani PROMPT'UN KENDİSİ modele uydurma sayı besliyordu; reality-checker'ın
+        // validateClaims'i sonra o sayıyı düşürüp metni yeniden yazmak zorunda kalıyordu
+        // (level-2 rewrite). "OCR = pixel truth, backend olgu uydurmaz" ilkesinin ihlali.
+        // SONRA: sayı da PENCEREDEN sayılır → validateClaims'in pencere hesabıyla birebir
+        // uyuşur → iddia geçerli çıkar, rewrite tetiklenmez.
+        const recentCount = recentRounds.length >= 1
+          ? matchingRounds.filter((r) => r >= recentRounds[0]).length
+          : topPos[1];
 
         if (topPos[1] >= 3 && isRecent) {
           posNote = en
-            ? `\nPosition pattern (STRONG — ${topPos[1]} times within the last ${span + 1} rounds): repeated deaths in the ${topPos[0]} area. The timing of this pattern is consistent too.`
-            : `\nPosition pattern (GÜÇLÜ — ${topPos[1]} kez, son ${span + 1} round içinde): ${topPos[0]} bölgesinde tekrar eden ölüm. Bu pattern zamanlama olarak da tutarlı.`;
+            ? `\nPosition pattern (STRONG — ${recentCount} times within the last ${span + 1} rounds): repeated deaths in the ${topPos[0]} area. The timing of this pattern is consistent too.`
+            : `\nPosition pattern (GÜÇLÜ — ${recentCount} kez, son ${span + 1} round içinde): ${topPos[0]} bölgesinde tekrar eden ölüm. Bu pattern zamanlama olarak da tutarlı.`;
         } else if (topPos[1] >= 2) {
           posNote = en
             ? `\nPosition pattern (PROVEN): you died ${topPos[1]} times in the ${topPos[0]} area`
