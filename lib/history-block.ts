@@ -26,11 +26,17 @@
 export type RoundHistoryEntry = Record<string, unknown>;
 
 /** Geçmiş VARKEN eklenen kullanım direktifi (kısa — her istekte gider). */
+// ⚠ ETİKET SIZINTISI DERSİ (2026-07-25, ilk sürümün ölçülen regresyonu): direktifin
+// ilk hâli "Position pattern satırını ADIYLA kullan" diyordu → model etiketi BİREBİR
+// çıktıya kopyaladı ("Position pattern: b main bölgesinde…"). 31 örneğin 15'inde
+// görüldü (öncesinde 0). Üstelik detector puanı bundan YAPAY yükseldi (etiket callout
+// ve sayı içerdiği için ölçüt kandırılıyordu) — yani metrik iyileşirken GERÇEK kalite
+// düşmüştü. Artık: etiketi YAZMA, içindeki callout+sayıyı KENDİ cümlende kullan.
 export const HISTORY_USE_DIRECTIVE =
-  `\n[GEÇMİŞİ KULLAN] Yukarıda "Position pattern" / "Death zone pattern" satırı varsa nextRoundSuggestion onu ADIYLA kullansın: callout'u ve sayıyı YAZILDIĞI GİBİ kopyala — kendin sayma, toplama, pencere daraltma. Böyle satır yoksa round etiketiyle bağlan ("R7'de de orada öldün"). Listede YAZMAYAN sayı/callout UYDURMA.`;
+  `\n[GEÇMİŞİ KULLAN] Yukarıdaki pattern satırlarında callout ve sayı varsa nextRoundSuggestion bunları KENDİ cümlesinde kullansın ("B Main'de 3 kez aynı açıya gittin — bu round…"). Sayıyı yazıldığı gibi al; kendin sayma, toplama, pencere daraltma. ⚠ "Position pattern", "Death zone pattern", "Pattern:" gibi ETİKETLERİ ÇIKTIYA YAZMA — bunlar iç not, oyuncu görmemeli. Pattern satırı yoksa round etiketiyle bağlan ("R7'de de orada öldün"). Listede YAZMAYAN sayı/callout UYDURMA.`;
 
 export const HISTORY_USE_DIRECTIVE_EN =
-  `\n[USE THE HISTORY] If a "Position pattern" / "Death zone pattern" line appears above, nextRoundSuggestion must name it: copy that callout and number EXACTLY as written — never count, add up or narrow the window yourself. If there is no such line, tie it to a round label ("you died there in R7 too"). Never invent a number or callout that is not listed.`;
+  `\n[USE THE HISTORY] If the pattern lines above contain a callout and a number, nextRoundSuggestion must weave them into ITS OWN sentence ("you went to that same B Main angle 3 times — this round…"). Take the number exactly as written; never count, add up or narrow the window yourself. ⚠ NEVER print the labels "Position pattern", "Death zone pattern" or "Pattern:" in the output — they are internal notes the player must not see. If there is no pattern line, tie it to a round label ("you died there in R7 too"). Never invent a number or callout that is not listed.`;
 
 /** Geçmiş YOKKEN (R1 / calibrating) eklenen çapa direktifi. */
 export const NO_HISTORY_ANCHOR =

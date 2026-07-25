@@ -26,6 +26,19 @@ const TR_JARGON: [RegExp, string][] = [
   // geri yapışıyordu). Niyet açıkça kişi ekiydi. Yakalamayan gruba çevrildi → $1 artık
   // doğru ek. "alıyordu" biçimi de eklendi (eskiden hiç yakalanmıyordu).
   [/\b(?:kill|frag) al[ıi]yor(du|lar|sunuz|sun)?\b/gi, "öldürüyor$1"],
+  // 🔴 İÇ ETİKET SIZINTISI (2026-07-25): prompt'taki analiz notlarının başlıkları
+  // ("Position pattern", "Death zone pattern", "Pattern:") modelin çıktısına birebir
+  // sızıyordu — 31 örneğin 15'inde görüldü. Bunlar İÇ NOT; oyuncu görmemeli.
+  // Prompt'ta da yasaklandı ama deterministik süzgeç savunma katmanı: etiketi (varsa
+  // parantezli niteleyicisiyle ve ardındaki iki nokta/tire ile) söker, cümlenin geri
+  // kalanını KORUR. Cümle başındaysa kalan ilk harf büyütülür.
+  // Etiket + (varsa) parantezli niteleyici + ardından gelen bağlaç/edat birlikte sökülür;
+  // yoksa "Position pattern (GÜÇLÜ) nedeniyle X" → "nedeniyle X" gibi öksüz bir bağlaç
+  // cümle başında kalıyordu.
+  [/\b(?:position pattern|death zone pattern|ölüm bölgesi (?:deseni|pattern'i))\s*(?:\([^)]*\))?\s*(?:ve\s+(?:death zone pattern|position pattern)\s*(?:\([^)]*\))?\s*)?[:—-]?\s*(?:nedeniyle|sebebiyle|raporunda belirtildiği gibi|olduğu için|göz önüne alarak)?[,\s]*/gi, ""],
+  [/(^|[.!?]\s+)pattern\s*[:—-]\s*/gi, "$1"],
+  // Sökme sonrası cümle başında kalan öksüz bağlaç ("ve ", "ile ") temizliği.
+  [/(^|[.!?]\s+)(?:ve|ile)\s+(?=[a-zçğıöşüA-ZÇĞİÖŞÜ])/g, "$1"],
   // "kill al-" ailesi (dil denetimi 2026-07-25): ai-policy.ts:59 BANNED_PHRASES'te
   // TARZANCA olarak yasaklı ("kill aldı" → "öldürdü") ama YALNIZ tek çekimi listede
   // olduğu için diğer çekimler süzülmüyordu; ayrıca aktif KB (retake-playbook.md) ve

@@ -103,6 +103,20 @@ console.log("\n[9] TARZANCA 'kill al-' ailesi + TEMİZLEYİCİNİN ÖZ-ÇELİŞK
   t("yapışık artık yok (öldürüyorkill)", !/öldürüyor[a-zçğıöşü]*kill/i.test(o3), `→ "${o3}"`);
 }
 
+console.log("\n[11] 🔴 İÇ ETİKET SIZINTISI — prompt notu çıktıya kopyalanmamalı");
+{
+  // Kanıta-bağlama direktifinin ilk sürümü modeli etiketi BİREBİR kopyalamaya itti
+  // (31 örneğin 15'inde). Direktif düzeltildi + burada deterministik süzgeç.
+  const o1 = tr("Position pattern: b main bölgesinde tekrar eden ölüm var — bu round tek tutma.");
+  const o2 = tr("Position pattern (GÜÇLÜ — 3 kez) nedeniyle A Ramp'ı aynı şekilde tutma.");
+  const o3 = tr("Position pattern ve Death zone pattern: a main bölgesinde ölüm var.");
+  console.log("    SONRA:", o1, "|", o2, "|", o3);
+  t("etiket söküldü (1)", !/position pattern/i.test(o1), `→ "${o1}"`);
+  t("içerik korundu (1)", /b main/i.test(o1) && /tek tutma/i.test(o1), `→ "${o1}"`);
+  t("parantezli niteleyici de söküldü", !/position pattern/i.test(o2) && /A Ramp/i.test(o2), `→ "${o2}"`);
+  t("çoklu etiket söküldü", !/pattern/i.test(o3) && /a main/i.test(o3), `→ "${o3}"`);
+}
+
 console.log("\n[10] EK ÇEKİMLER — 'kill alıyordu/alıyorlar' ve 'frag alıyor'");
 {
   const a = tr("Sürekli kill alıyordu.");
