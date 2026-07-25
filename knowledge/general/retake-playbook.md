@@ -2,7 +2,8 @@
 id: general_retake_playbook
 type: general
 topic: retake-tactics
-patch: "9.x"
+patch: "13.00"
+verified: 2026-07-25
 tags: [retake, numbers-disadvantage, clutch, utility-stack, defuse]
 ---
 
@@ -19,9 +20,9 @@ Bu üçü belli değilse retake'e girmek gözü kapalı koşmaktır.
 
 ## STANDART RETAKE
 
-### 1. Önce Bilgi Al
+### 1. Girmeden Önce Siteyi Oku
 
-Spike kurulduktan sonra ilk iş siteyi taramak. Recon, kamera, bot — elinde ne varsa at, düşmanı sen okumadan girme. Kaç kişi, hangi açıda, onu öğren. Bilgi olmadan attığın her adım kör adımdır.
+Spike kurulduktan sonra ilk iş siteyi taramak. Recon, kamera, bot — elinde ne varsa at. Öğreneceğin üç şey net: kaç kişi kaldı, hangi açıda duruyorlar, spike hangi spotta. Bunları bilmeden atılan adım, karşı tarafın çoktan tuttuğu açıya atılan adımdır.
 
 ### 2. Util Sırasını Bozma
 
@@ -29,12 +30,13 @@ Spike kurulduktan sonra ilk iş siteyi taramak. Recon, kamera, bot — elinde ne
 - **İkinci:** Smoke. Saldırının siteyi tuttuğu en tehlikeli hattı kes — göremeyen rakip girişte ateş açamaz.
 - **Üçüncü:** Flash. Tam giriş anında öne gönder; takım flash patlarken siteye girer.
 - **Dördüncü:** Molly. Bilinen post-plant köşesini girişle aynı anda sök — rakip ya hasar alır ya açılır.
+- **Beşinci:** Ult. Sıraya girmez, sona kalır — siteyi boşaltan ya da defuse'u koruyan ult'u giriş tuttuktan sonra kullan.
 
 Bu sırayı bozarsan util çöpe gider. Giriş util'ini girişten önce harcarsan rakip kapanıp yeniden pozisyon alır, giriş anında elin boş kalır: flash ve molly giriş anına aittir.
 
 ### 3. Birlikte Gir
 
-En az 2 kişi, aynı anda, farklı açılardan girin. Solo girme — trade yok, util desteği yok, bir kill alsan bile round biter. İlk giren düşerse ikinci anında trade alır. Bu zincir kopmadığı sürece retake yürür.
+En az 2 kişi, aynı anda, farklı açılardan girin. Solo girme — trade yok, util desteği yok, birini öldürsen bile round biter. İlk giren düşerse ikinci anında trade alır. Bu zincir kopmadığı sürece retake yürür.
 
 ### 4. Önce Temizle, Sonra Spike
 
@@ -42,7 +44,7 @@ Spike'a koşma. Saldırı post-plant çapraz ateş kurmuş olur. Bir tarafı tem
 
 ### 5. Defuse
 
-Site temizse bir kişi defuse'a geçer, biri cover verir. Defuse eden her zaman kapağın arkasında durur, açıkta defuse başlatma.
+Site temizse bir kişi defuse'a geçer, biri cover verir. Defuse eden siperin arkasına oturur — açıkta defuse başlatan, siteye dönen ilk rakibe bedava hedef olur.
 
 ## SAYISAL DEZAVANTAJ DURUMLARI
 
@@ -92,32 +94,19 @@ Yapacağın şu:
 
 Ult'un varsa clutch için sakladığın ult round'u çevirir — siteyi boşaltan ya da defuse'u koruyan ult'u burada kullan. Ult elinde dururken ölme — kullanmadıysan zaten kaybettin.
 
-## UTIL SIRASI — NEDEN ÖNEMLİ
-
-Elinde 5 flash olması tek başına bir şey ifade etmez. Yanlış sırayla atılan 5 flash boşa gider.
-
-Sıra şu:
-1. Recon — girişten önce pozisyon öğren.
-2. Smoke — en tehlikeli hattı kes.
-3. Flash — giriş anında öne gönder.
-4. Molly — girişle aynı anda bilinen post-plant köşesine.
-5. Ult — clutch ve defuse koruması için sakla.
-
-Sıra bilgiden girişe akar: önce gör, sonra kapat, giriş util'ini giriş anında at. Erken atılan flash'ı kapanan rakip yemez, giriş anında elin boş kalır.
-
 ## YAYGIN HATALAR
 
 ### Solo Kahraman Girişi
 
-Tek kişi koşar, 1 kill alır, ölür. Trade yok, 1 kill + 1 ölüm = sıfır. Giriş zamanını sen ver — kim nereden, hangi sırayla. Sadece "hadi" demek yetmez.
+Tek kişi koşar, birini öldürür, ölür: bir öldürme + bir ölüm = sıfır, üstüne takımın kalanı bir kişi eksik retake'e kalır. Girişi sen zamanla — kim nereden, hangi util, hangi sırayla; "hadi" demek plan değildir.
 
 ### Dağınık Giriş
 
-Üç kişi üç farklı açıdan ama aynı anda değil. Birinci girer ölür, ikinci girer ölür, üçüncü 1v5'e düşer. Aynı anda olmayan split retake toplu intihardır.
+Üç kişi üç farklı açıdan ama aynı anda değil. Birinci girer ölür, ikinci girer ölür, üçüncü 1v5'e kalır. Aynı anda olmayan split, rakibe üç ayrı 1v5 hediye eder.
 
 ### Defuse'u Öne Almak
 
-Biri spike'a koşar, defuse başlatır, saldırı vurur. Diğerleri trade edemez çünkü plan yoktu. Önce temizle, sonra defuse.
+Biri spike'a koşar, defuse başlatır, post-plant açısından vurulur — trade de gelmez, çünkü o açıyı kimse tutmuyordu.
 
 ### Util'i Plant Öncesi Tüketmek
 
@@ -140,10 +129,9 @@ Rakip aynı spike noktasına sürekli molly atıyor, sen her seferinde tam orada
 - Saldırı site'a yayılmışsa — her açı dolu, giren ölür.
 - Round zaten satılabilir durumdaysa — tutulmayan yoldan ayrıl, tüfeği sonraki round'a taşı; saldırı siteden uzaklaştıysa sessiz defuse'u dene, ses dönerse bırak.
 
-## RANK BAZINDA NOTLAR
+## GİRİŞ ÇEŞİTLİLİĞİ — HER ROUND AYNI YERDEN GİRME
 
-**Gold-Plat:** Retake'e plan yapmadan giriyorsun. Kim nereden girecek, hangi util, hangi sırayla — bunları konuşmadan "go" demek yetmez. Takımda kimse plan söylemiyorsa sen söyle: "Ben A'dan flash atıyorum, sen B'den gir."
+Retake girişin tek noktaya bağlıysa saldırı üçüncü round'da seni orada bekler: aynı açıya nişan alır, aynı molly'yi hazır tutar.
 
-**Diamond-Ascendant:** Util'i biliyorsun ama zamanlamayı kaçırıyorsun. Flash, peek'ten önce patlıyor. Giriş util'ini giriş kararına göre at: recon girişten önce, smoke ilk, flash giriş anında, molly girişle aynı anda.
-
-**Immortal-Radiant:** Karşı takım retake girişini okumuş, seni bekliyor. Sürekli aynı açıdan girersen hazır dururlar. En az 2-3 farklı retake girişin olsun — A site'da ramp'tan gir, CT'den gir, ya da ikisini aynı anda zorla. Her round aynısını yapma. Rotation sesini ve hızını dinle: rakip ayak sesini sakınmadan koşarak dönüyorsa site'a geç kapanmıştır, o boşlukta farklı açıdan gir.
+- **En az iki girişin olsun.** Aynı site'a iki ayrı yoldan girebiliyorsan sırayla kullan, ikisini aynı anda zorlayabiliyorsan split at. Hangi yoldan girdiğini rakip iki round üst üste bildiyse üçüncüde o yol tuzaktır.
+- **Rotasyon sesini oku.** Rakip ayak sesini sakınmadan koşarak dönüyorsa site'a geç kapanmıştır — o boşlukta bekletmeden gir. Sessiz dönüyorsa açı çoktan tutulmuştur: önce smoke ya da flash at, sonra gir.

@@ -82,6 +82,38 @@ console.log("\n[8] SİLAH ADI TUTARLILIĞI — 'operatör' (makine operatörü!)
   t("silah adları büyük harf", /Vandal/.test(o2) && /Sheriff/.test(o2), `→ "${o2}"`);
 }
 
+console.log("\n[9] TARZANCA 'kill al-' ailesi + TEMİZLEYİCİNİN ÖZ-ÇELİŞKİSİ");
+{
+  // coach-text.ts:123 "cezalandırdı"yı "bedavaya kill aldı" diye düzeltiyordu —
+  // oysa "kill aldı" ai-policy.ts:59 BANNED_PHRASES'te. Temizleyici yasak ifade
+  // ÜRETİYORDU (canlı eval'de 2 senaryoda çıktı).
+  const o1 = tr("Jett seni oradan cezalandırdı.");
+  const o2 = tr("Raze o açıdan bedavaya kill aldı.");
+  const o3 = tr("Cypher orada sürekli kill alıyor.");
+  console.log("    SONRA:", o1, "|", o2, "|", o3);
+  t("cezalandırdı → YASAK ifade üretmiyor", !/kill al/i.test(o1), `→ "${o1}"`);
+  t("cezalandırdı → düz Türkçe", /bedavaya öldürdü/i.test(o1), `→ "${o1}"`);
+  t("'kill aldı' → 'öldürdü'", !/kill al/i.test(o2) && /öldürdü/i.test(o2), `→ "${o2}"`);
+  t("'kill alıyor' → 'öldürüyor'", !/kill al/i.test(o3) && /öldürüyor/i.test(o3), `→ "${o3}"`);
+  // SERT KONTROL: ilk sürümde bu testler GEÇTİ ama çıktı "öldürüyorkill" idi —
+  // assertion yalnız "kill al" yokluğuna bakıyordu, yapışık artığı KAÇIRDI
+  // (yanlış-pozitif geçiş). Kök neden: coach-text.ts:24'te (kill|frag) YAKALAMA
+  // grubuydu, $1 yakalanan kelimeyi geri yapıştırıyordu. Artık artık aranıyor.
+  t("'kill' kelimesi metinde HİÇ kalmadı", !/kill/i.test(o2) && !/kill/i.test(o3), `→ "${o2}" | "${o3}"`);
+  t("yapışık artık yok (öldürüyorkill)", !/öldürüyor[a-zçğıöşü]*kill/i.test(o3), `→ "${o3}"`);
+}
+
+console.log("\n[10] EK ÇEKİMLER — 'kill alıyordu/alıyorlar' ve 'frag alıyor'");
+{
+  const a = tr("Sürekli kill alıyordu.");
+  const b = tr("Onlar kill alıyorlar.");
+  const c = tr("Rakip frag alıyor.");
+  console.log("    SONRA:", a, "|", b, "|", c);
+  t("'alıyordu' temiz", !/kill/i.test(a) && /öldürüyordu/i.test(a), `→ "${a}"`);
+  t("'alıyorlar' temiz", !/kill/i.test(b) && /öldürüyorlar/i.test(b), `→ "${b}"`);
+  t("'frag alıyor' temiz", !/frag/i.test(c) && /öldürüyor/i.test(c), `→ "${c}"`);
+}
+
 console.log(`
 ══════ ${fail === 0 ? "✅ TÜMÜ GEÇTİ" : `❌ ${fail} BAŞARISIZ`} ══════
 `);

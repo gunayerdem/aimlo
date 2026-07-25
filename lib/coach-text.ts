@@ -21,7 +21,20 @@ const TR_JARGON: [RegExp, string][] = [
   // negative-lookahead boundary. Direction matters: "frag/kill ALDI" = killed
   // → öldür-; "frag VERDİ" = died → öl-.
   [/\b(kill|frag) ald[ıi](?![a-zçğıöşü])/gi, "öldürdü"],
-  [/\b(kill|frag) al[ıi]yor(lar|sunuz|sun)?\b/gi, "öldürüyor$1"],
+  // 🔴 GRUP-NUMARASI BUG'I FIX (dil denetimi 2026-07-25): (kill|frag) YAKALAMA grubuydu,
+  // yani $1 = "kill" → "kill alıyor" çıktısı "öldürüyorkill" oluyordu (yakalanan kelime
+  // geri yapışıyordu). Niyet açıkça kişi ekiydi. Yakalamayan gruba çevrildi → $1 artık
+  // doğru ek. "alıyordu" biçimi de eklendi (eskiden hiç yakalanmıyordu).
+  [/\b(?:kill|frag) al[ıi]yor(du|lar|sunuz|sun)?\b/gi, "öldürüyor$1"],
+  // "kill al-" ailesi (dil denetimi 2026-07-25): ai-policy.ts:59 BANNED_PHRASES'te
+  // TARZANCA olarak yasaklı ("kill aldı" → "öldürdü") ama YALNIZ tek çekimi listede
+  // olduğu için diğer çekimler süzülmüyordu; ayrıca aktif KB (retake-playbook.md) ve
+  // temizleyicinin kendi cezalandır-kuralı bu ifadeyi ÜRETİYORDU. Kaynaklar
+  // düzeltildi + burada deterministik ağ kuruldu (kaynak ne olursa olsun yakalar).
+  [/\bkill ald[ıi](?![a-zçğıöşü])/gi, "öldürdü"],
+  [/\bkill al[ıi]yor(du|lar)?(?![a-zçğıöşü])/gi, "öldürüyor$1"],
+  [/\bkill al[ıi]r(lar|sın|sınız)?(?![a-zçğıöşü])/gi, "öldürür$1"],
+  [/\bkill alma(sın|dan|ya)?(?![a-zçğıöşü])/gi, "öldürme$1"],
   [/\bfrag verd[ıi](?![a-zçğıöşü])/gi, "öldü"],
   [/\bfrag ver[ıi]yor(lar|sunuz|sun)?\b/gi, "ölüyor$1"],
   // "swing yap-" Tarzanca: bare noun "swing" is WHITELISTED, but verb-ifying it
@@ -119,8 +132,14 @@ const TR_JARGON: [RegExp, string][] = [
   [/\bpick al([ıi]yor|d[ıi]n?|[ıi]r)(?![a-zçğıöşü])/gi, "kill al$1"],
   // cezalandır- (ai-policy NATURAL_COACH_RULE: "cezalandırıyor/cezalandırdı/cezalandıracak" yasak)
   [/\bcezaland[ıi]r[ıi]l[ıi]yorsun(?![a-zçğıöşü])/gi, "aynı açıdan bedavaya öldürülüyorsun"],
-  [/\bcezaland[ıi]r[ıi]yor(du|lar)?(?![a-zçğıöşü])/gi, "bedavaya kill alıyor$1"],
-  [/\bcezaland[ıi]rd[ıi](?![a-zçğıöşün])/gi, "bedavaya kill aldı"],
+  // 🔴 ÖZ-ÇELİŞKİ FIX (dil denetimi 2026-07-25): bu iki kural "cezalandır-"ı
+  // "bedavaya kill alıyor/aldı" diye düzeltiyordu — oysa "kill aldı" ai-policy.ts:59
+  // BANNED_PHRASES listesinde TARZANCA olarak yasaklı ("kill aldı" → "öldürdü").
+  // Yani TEMİZLEYİCİNİN KENDİSİ yasak ifadeyi ÜRETİYORDU. Canlı eval'de 2 senaryoda
+  // "kill aldı" çıktı. Düz Türkçeye çevrildi (alttaki geniş-zaman kuralı zaten
+  // "bedavaya öldürür" diyordu — tutarlılık da sağlandı).
+  [/\bcezaland[ıi]r[ıi]yor(du|lar)?(?![a-zçğıöşü])/gi, "bedavaya öldürüyor$1"],
+  [/\bcezaland[ıi]rd[ıi](?![a-zçğıöşün])/gi, "bedavaya öldürdü"],
   [/\bcezaland[ıi]racak(?![a-zçğıöşü])/gi, "oradan kafadan vuracak"],
   // ── Cycle 2 fix #14 — KB'den sızan çekimleri net'te kapat (council 2026-06-25)
   // KB içeriğinden modele sızabilen ek formlar: cezalandırır (geniş zaman), wide
