@@ -164,6 +164,21 @@ const TR_JARGON: [RegExp, string][] = [
   [/\bfront\s+(açı)/gi, "ön $1"],          // "front açısıyla" → "ön açısıyla"
   [/\bback\s+(açı)/gi, "arka $1"],
   [/\bfront['’](tan|ten)\b/gi, "önden"],    // "front'tan" → "önden"
+  // ÜNLÜ-UYUMLU EK (dil denetimi 2026-07-25): "front-right'ı" gibi formlarda yukarıdaki
+  // kurallar yalnız yön kelimesini çevirip eki HAM bırakıyordu → ekranda "sağ önı"
+  // (ünlü uyumu YANLIŞ; doğrusu "sağ önü"). "ön" ince-yuvarlak ünlüyle biter.
+  // ⚠ Sıra ÖNEMLİ: uzun ekler (dan/da) önce, yoksa kısa kural onları parçalar.
+  // ⚠ \b KULLANILMAZ — "ı" ASCII \w değil (bu dosyanın 191. satırındaki aynı tuzak).
+  [/(sağ|sol)\s+ön['’]?dan(?![a-zçğıöşü])/gi, "$1 önden"],
+  [/(sağ|sol)\s+ön['’]?da(?![a-zçğıöşü])/gi, "$1 önde"],
+  [/(sağ|sol)\s+ön['’]?ı(?![a-zçğıöşü])/gi, "$1 önü"],
+  [/(sağ|sol)\s+ön['’]?a(?![a-zçğıöşü])/gi, "$1 öne"],
+  // ÇIPLAK İNGİLİZCE YÖN BACKSTOP: yukarıdaki kurallar yalnız bilinen kalıpları
+  // (yön+açı, yön+ek) yakalıyordu; "front hattı", "back tarafı" gibi serbest
+  // tamlamalar sızıyordu (canlı çıktıda "front hattı kontrol ediyor" görüldü).
+  // Türkçe metinde İngilizce yön kelimesi ASLA kalmamalı.
+  [/\bfront\s+(?=[a-zçğıöşü])/gi, "ön "],
+  [/\bback\s+(?=[a-zçğıöşü])/gi, "arka "],
   // Jargon kısaltma / tarzanca-fiil / halüsinasyon terim / İngilizce sızıntı
   // "one-tap" → sade Türkçe. ESKİ "tek atışta kafadan" YASAK "kafadan"ı üretiyordu +
   // ek-almış "one-tap'ine"yi "kafadan'ine" gibi BOZUYORDU (audit 2026-06-30). Ek-farkında,
@@ -319,6 +334,9 @@ const TR_JARGON: [RegExp, string][] = [
 ];
 
 const CLEAN_AGENT_NAMES = ["Jett","Raze","Phoenix","Reyna","Yoru","Neon","Iso","Waylay","Sage","Killjoy","Cypher","Chamber","Deadlock","Vyse","Omen","Brimstone","Viper","Astra","Harbor","Clove","Sova","Breach","Skye","Fade","Gekko","Tejo","Veto"];
+// Silah adları — ajan adlarıyla aynı tutarlılık disiplini (dil denetimi 2026-07-25):
+// canlı çıktıda "vandal/Vandal", "sheriff/Sheriff", "operator/operatör" karışıyordu.
+const CLEAN_WEAPON_NAMES = ["Vandal","Phantom","Operator","Sheriff","Guardian","Spectre","Judge","Odin","Ares","Bulldog","Marshal","Outlaw","Stinger","Ghost","Classic","Shorty","Frenzy","Bucky"];
 
 /**
  * Numeric-HP stripper (live-test #5, 2026-07-09). The instantaneous HP OCR
@@ -439,6 +457,21 @@ export function cleanCoachText(text: string, lang: "tr" | "en"): string {
   let t = plainifyAbilities(stripHpClaims(stripNumericHp(text, lang), lang), lang);
   for (const a of CLEAN_AGENT_NAMES) {               // phoenix → Phoenix (both langs)
     t = t.replace(new RegExp("\\b" + a + "\\b", "gi"), a);
+  }
+  // SİLAH ADI NORMALİZASYONU (dil denetimi 2026-07-25): ajan adları normalize
+  // ediliyordu ama silah adları edilmiyordu. Canlı çıktıda AYNI CÜMLEDE hem
+  // "operator" hem "operatör" geçti — üstelik "operatör" Türkçede MAKİNE
+  // OPERATÖRÜ demek, silah adı değil. Önce yanlış-çeviriyi düzelt, sonra
+  // tüm silah adlarını tek biçime getir.
+  // "operatör" + Türkçe ek → "Operator" + apostroflu doğru ek (ünlü uyumu: son ünlü
+  // "o" kalın-yuvarlak → a/ı/u serisi). Ek eşlemesi açık tutulur; bilinmeyen ekte
+  // yalnız gövde düzeltilir.
+  t = t.replace(/\boperatör(e|ü|ün|le|den|de)?(?![a-zçğıöşü])/gi, (_m, ek) => {
+    const map: Record<string, string> = { e: "'a", "ü": "'ı", "ün": "'ın", le: "'la", den: "'dan", de: "'da" };
+    return "Operator" + (ek ? (map[ek.toLowerCase()] ?? "") : "");
+  });
+  for (const w of CLEAN_WEAPON_NAMES) {
+    t = t.replace(new RegExp("\\b" + w + "\\b", "gi"), w);
   }
   if (lang === "tr") {
     for (const [re, rep] of TR_JARGON) t = t.replace(re, rep);

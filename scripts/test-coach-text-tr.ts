@@ -61,3 +61,28 @@ console.log("\n[6] ESKİ DAVRANIŞ KORUNDU — liste-içi '+' hâlâ çalışıy
 
 console.log(`\n══════ ${fail === 0 ? "✅ TÜMÜ GEÇTİ" : `❌ ${fail} BAŞARISIZ`} ══════\n`);
 if (fail > 0) process.exit(1);
+
+console.log("\n[7] YÖN ÇEVİRİCİ — ünlü uyumlu ek (S8 'sağ önı') + çıplak 'front hattı' (S18)");
+{
+  const o1 = tr("Biri front-right'ı tutsun, diğeri içeri baksın.");
+  const o2 = tr("Sova C Long'dan front hattı kontrol ediyor.");
+  console.log("    SONRA:", o1, "|", o2);
+  t("'sağ önı' ÜRETİLMEDİ", !/sağ önı/i.test(o1), `→ "${o1}"`);
+  t("doğru ek 'sağ önü'", /sağ önü/i.test(o1), `→ "${o1}"`);
+  t("'front hattı' Türkçeleşti", !/\bfront\b/i.test(o2) && /ön hattı/i.test(o2), `→ "${o2}"`);
+}
+
+console.log("\n[8] SİLAH ADI TUTARLILIĞI — 'operatör' (makine operatörü!) + karışık büyük/küçük");
+{
+  const o1 = tr("Jett seni operator'la vurdu — operatöre karşı açıyı kapat.");
+  const o2 = tr("vandal ile sheriff arasında seçim yap.");
+  console.log("    SONRA:", o1, "|", o2);
+  t("'operatör' kalmadı", !/operatör/i.test(o1), `→ "${o1}"`);
+  t("tek biçim 'Operator'", (o1.match(/Operator/g) || []).length >= 2, `→ "${o1}"`);
+  t("silah adları büyük harf", /Vandal/.test(o2) && /Sheriff/.test(o2), `→ "${o2}"`);
+}
+
+console.log(`
+══════ ${fail === 0 ? "✅ TÜMÜ GEÇTİ" : `❌ ${fail} BAŞARISIZ`} ══════
+`);
+if (fail > 0) process.exit(1);
