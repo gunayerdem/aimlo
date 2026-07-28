@@ -39,7 +39,13 @@ console.log("\n[2] GEÇMİŞ VARSA kullanım direktifi eklenir");
   const out = buildHistoryBlock(S1, "tr");
   t("[GEÇMİŞİ KULLAN] var", out.includes("[GEÇMİŞİ KULLAN]"));
   t("uydurma yasağı var", /UYDURMA/.test(out));
-  t("kopyala emri var (sayı üretme DEĞİL)", /YAZILDIĞI GİBİ kopyala/.test(out));
+  // Sözleşme: model sayıyı ÜRETMEZ, verilen sayıyı ALIR (uydurma baskısı yaratmamak
+  // için kritik — "her cümlede sayı zorunlu" kuralı geçmişte uydurmaya itmişti).
+  t("kopyala/al emri var (sayı ÜRETME değil)", /yazıldığı gibi al/i.test(out), `→ ${out.slice(-260)}`);
+  t("kendi hesaplaması yasak", /kendin sayma/i.test(out));
+  // 🔴 ETİKET YASAĞI (2026-07-25 regresyonundan doğdu): direktifin ilk sürümü modeli
+  // "Position pattern:" etiketini birebir çıktıya kopyalamaya itmişti (15/31 örnek).
+  t("iç etiketi yazma yasağı var", /ETİKET/i.test(out) && /ÇIKTIYA YAZMA/i.test(out), `→ ${out.slice(-260)}`);
 }
 
 console.log("\n[3] GEÇMİŞ YOKSA bu-round çapası eklenir (R1/calibrating)");
