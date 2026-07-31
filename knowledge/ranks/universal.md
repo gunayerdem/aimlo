@@ -3,7 +3,8 @@ id: ranks_universal
 type: rank
 tags: [rank, universal, coaching]
 patch: "13.00"
-verified: 2026-07-19
+verified: 2026-07-31
+split_note: "B37 (2026-07-31) — bu dosya 45.000B tavanının %99,1'indeydi (44.590B, kalan pay 410B) ve büyüme yolu yoktu. ÇAPASIZ iki H2 (Dersi Kanıta Bağla, Düşmanı Okuma ve Karşı Hamle) ranks/universal-2.md'ye taşındı; ölüm-tipi çapalarının HEPSİ burada kaldı (verify-kb [6] bu dosyayı okur). universal-2.md knowledge-loader'da blocks.profile2 olarak yüklenmezse o iki bölüm prompt'a HİÇ girmez."
 ---
 
 # Evrensel Koçluk Profili — Her Rank İçin Radiant Derinliği
@@ -13,19 +14,6 @@ verified: 2026-07-19
 Bu dosya her oyuncuya aynı derinlikte koçluk verir — hangi içgörüyü vereceğini RANK değil, ÖLÜMÜN TİPİ seçer. Ölümün tipine uyan TEK bloğu seç; hepsini birden verme.
 
 - **COUNTER tek emir değil olay zinciridir:** hangi olay olunca → ne yapacaksın. "Crossfire kur" değil; "şu ses kesilince tek adım çık" gibi tetikleyiciye bağlı — oyuncu hangi ANI bekleyeceğini bilsin.
-
-## Dersi Kanıta Bağla
-
-"Aynı açıyı tekrarlıyorsun" cümlesi ancak elinde "R6 ve R9'da da A Short'ta öldün" varken kurulur. Kanıt varsa dersin İÇİNE göm; yoksa iddiayı hiç kurma.
-
-**Kanıt sayılan TEK kaynak:** `Son round geçmişi` / `Recent round history` satırları (`R7: öldü @ A Short` — round no + öldü/hayatta kaldı + yer; başka hiçbir şey yok) · `Position pattern` · `Death zone pattern` · `[PATTERN]` · `[ROUND CONTEXT]` (yalnız BU round: katil ajan + silah, ölüm yeri, side, skor, sayı, ekonomi, loadout, spike, ult).
-
-**Kalıp — kanıtı ayrı cümle yapma, dersin içine göm:** "R6 ve R9'da da A Short'ta öldün, bu üçüncüsü — Cypher artık o açıya nişanını almış bekliyor; bir round orayı boş bırak."
-
-**Kanıt DEĞİL — yazarsan uydurmadır:**
-- Geçmiş round'un katili/silahı/ekonomisi/sayısı/kazanç-kaybı: geçmiş satırlarında YOK. "Son 3 round'da Operator'a öldün" YAZMA — silah yalnız BU round için gelir.
-- Listede olmayan round numarası; "hep", "her seferinde", "%60" gibi uydurma sıklık — yalnız sayılabilen kezi yaz (2 kez, 3 kez). Tek ölüm pattern değildir; iki FARKLI yerde ölmek "aynı hatayı tekrarlıyorsun" değildir.
-- Kanıt yoksa geçmişi hiç açma, hedge cümlesi de kurma: dersi bu round'un callout + katil ajan + silah + side'ına çapala. Tek round'un kanıtı da kanıttır.
 
 ## Aim ve Crosshair Ölümleri
 
@@ -324,33 +312,6 @@ Bu bölümü SADECE skor uzatmayı gösterdiğinde ya da taraflardan biri maç s
 - **MEANING** tek round'un ağırlığı maçın en yükseğinde; burada denenen yeni fikir yanlış çıkarsa telafi round'u yok
 - **COUNTER** planı sadeleştir: maç boyunca en çok tutan setup'ı oyna, yeni plan deneme; ilk ölümü verme, ilk teması util ya da takım açsın; kahramanlık peek'i arama
 - **WHY** yüksek-ağırlıklı round'da hata geri alınamaz; bilinen plan tereddüt bırakmaz, düşmana okuyacağı yeni bir şey vermez
-
-## Düşmanı Okuma ve Karşı Hamle
-
-Bu blokları düşmanın tekrar eden bir alışkanlığını gördüğünde kullan — savunmadan saldırıya geçiş için.
-
-- **Örnek**: Ascent'te bir düşman üç round üst üste B Main'den takım sesi beklemeden tek peek attı — dördüncü round ayak sesini duyar duymaz oraya flash at, kör peek'i karşıla.
-
-### Tekrar eden peek'i önceden tut
-
-- **IF** bir düşman üst üste birkaç round aynı noktadan, takımının sesini beklemeden peek atıyorsa
-- **MEANING** kör peek onun alışkanlığı; sen zamanını biliyorsan o açı artık senin
-- **COUNTER** bir sonraki round o açıyı önceden hazırla; o noktadan ayak sesi gelir gelmez, peek başlamadan oraya flash at; patlayınca açıyı tutan takım arkadaşın temizlesin
-- **WHY** alışkanlığı yakalayınca zamanlama avantajı sana geçer, peek'e başlamadan kör kalır
-
-### Tekrar eden util'i kendi zamanına karşı çevir
-
-- **IF** düşman her tam ekonomi round'unda spike kurulur kurulmaz aynı yere smoke atıyorsa
-- **MEANING** aynı smoke aynı anda geliyorsa o smoke artık bir saat: nereye ve ne zaman bakacağını sana söylüyor
-- **COUNTER** o smoke'un her zaman geldiği anı bekle; smoke yere inip seni körleştirmeden önce, düşmanın atış animasyonunu gördüğün AN o smoke'un ardındaki açıya bas
-- **WHY** düşmanın tekrarını okursan onu kendi zamanlamasına karşı çevirir, hazır olmadan yakalarsın
-
-### Düşman ajanını oku
-
-- **IF** aynı düşman ajanına karşı tekrar tekrar ölüyorsan
-- **MEANING** o ajanın ne yaptığını okumuyorsun — hangi util'i nereye attığını, hangi açıyı tuttuğunu bilmiyorsun
-- **COUNTER** önce o ajanın sana ne yaptığını net belirle, tek karşı hamleyi tetiğe bağla: recon'u havaya kalktığı AN açıyı boş bırak; smoke attığı geçişi smoke inince başka yoldan al
-- **WHY** tehdidi okumak karşı oynamanın önkoşuludur; ne yaptığını bilmeden açıyı tutmak her round aynı ölümü tekrarlar
 
 ## Takım Koordinasyonu ve Alan Kontrolü
 

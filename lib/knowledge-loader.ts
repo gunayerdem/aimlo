@@ -74,7 +74,11 @@ const DEFAULT_RANK_FILE = "universal.md";
 
 // ── Task types and their knowledge requirements ───────────
 
-type TaskType = "insight" | "feedback" | "report" | "critical-mistake" | "growth-plan";
+// ÖLÜ TİPLER KALDIRILDI (B132, 2026-07-31): "critical-mistake" ve "growth-plan"
+// hiçbir route'tan çağrılmıyordu (grep app/+lib/+scripts: yalnız feedback/insight/
+// report). Yükleme kuralları loader'ın gerçek davranış yüzeyini yanıltıyordu.
+// Davranış değişikliği SIFIR — çağrılmayan dallar silindi.
+type TaskType = "insight" | "feedback" | "report";
 
 interface LoadOptions {
   map?: string;
@@ -183,6 +187,14 @@ function resolveAgentRole(agentName: string): string | null {
   return bySlug ? bySlug[1] : null;
 }
 
+interface MatchupHit {
+  content: string;
+  /** Gerçek KB yolu (telemetri/log için) — ör. "matchups/jett_vs_cypher.md". */
+  path: string;
+  /** true = spesifik ajan-vs-ajan dosyası yoktu, rol-vs-rol dosyasına düşüldü. */
+  fallback: boolean;
+}
+
 /**
  * Load up to `limit` matchup files relevant to the player agent vs enemy agents.
  * Tries specific agent matchups first, then falls back to role-vs-role.
@@ -198,8 +210,12 @@ function loadMatchupFiles(
   playerAgent: string,
   enemyAgents: string[],
   limit: number = 2
-): string[] {
-  const results: string[] = [];
+): MatchupHit[] {
+  // GERÇEK YOL DÖNDÜR (B118, 2026-07-31): eskiden yalnız içerik dönüyordu ve
+  // vision'ın KB-observability log'una "matchups/(best-match)" placeholder'ı
+  // yazılıyordu → prod log'unda hangi matchup seçildiği ve rol-fallback'e düşülüp
+  // düşülmediği görünmüyordu.
+  const results: MatchupHit[] = [];
   const playerRole = resolveAgentRole(playerAgent);
   const playerSlug = playerAgent.toLowerCase().replace(/[^a-z0-9]/g, "");
 
@@ -225,18 +241,18 @@ function loadMatchupFiles(
   // alıyordu — oyuncu duelist iken 4 rol dosyası hep çözündüğünden spesifik
   // matchup'lar sıklıkla rol dosyasının gerisinde kalıyordu.
   const pushedPaths = new Set<string>();
-  const tryPush = (relPath: string): void => {
+  const tryPush = (relPath: string, fallback: boolean): void => {
     if (results.length >= limit || pushedPaths.has(relPath)) return;
     const content = loadFile(relPath);
     if (content) {
       pushedPaths.add(relPath);
-      results.push(content);
+      results.push({ content, path: relPath, fallback });
     }
   };
 
   // Pass 1: specific agent vs agent matchups (best match wins the budget).
   for (const enemy of prioritizedEnemies) {
-    tryPush(`matchups/${playerSlug}_vs_${slugOf(enemy)}.md`);
+    tryPush(`matchups/${playerSlug}_vs_${slugOf(enemy)}.md`, false);
   }
 
   // Pass 2: role vs role fallbacks (deduped — two enemies of the same role
@@ -244,7 +260,7 @@ function loadMatchupFiles(
   if (playerRole) {
     for (const enemy of prioritizedEnemies) {
       const enemyRole = resolveAgentRole(enemy);
-      if (enemyRole) tryPush(`matchups/${playerRole}_vs_${enemyRole}.md`);
+      if (enemyRole) tryPush(`matchups/${playerRole}_vs_${enemyRole}.md`, true);
     }
   }
 
@@ -257,11 +273,9 @@ function loadMatchupFiles(
  * Load concatenated knowledge based on task type and context.
  *
  * Task loading rules:
- *   insight          → core + rank + per-agent file
- *   feedback         → core + rank + map + per-agent + enemy agents + up to 2 matchups
- *   report           → core + rank + map + per-agent + enemy agents + up to 2 matchups + pro-analysis + radiant-tips
- *   critical-mistake → core + rank + map + per-agent
- *   growth-plan      → core + rank + per-agent
+ *   insight  → core + rank + per-agent file
+ *   feedback → core + rank + map + per-agent + düşman "Bu Ajana Karşı" kesitleri + up to 2 matchups
+ *   report   → feedback ile aynı + pro-analysis + radiant-tips
  */
 export function loadKnowledge(task: TaskType, options: LoadOptions = {}): string {
   const { map, agent, rank, enemyAgents, side } = options;
@@ -275,15 +289,22 @@ export function loadKnowledge(task: TaskType, options: LoadOptions = {}): string
   // Rank knowledge is always included
   const rankContent = loadFile(`ranks/${getRankFile(rank)}`);
   if (rankContent) sections.push(rankContent);
+  // 🔴 B37 (2026-07-31): universal.md 45KB tavanına dayandığı için çapasız bölümler
+  // ranks/universal-2.md'ye taşındı. BU FONKSİYON (report/feedback/insight) vision
+  // yolundan AYRI bir yükleyici — ikisini birden bağlamazsan taşınan içerik yalnız
+  // bir yolda kalır. Doğrulama turunda tam olarak bu oldu: vision düzeldi, report ve
+  // feedback hâlâ ~3,5 KB koçluk bilgisini kaybediyordu.
+  const rankContent2 = loadFile("ranks/universal-2.md");
+  if (rankContent2) sections.push(rankContent2);
 
-  // Map knowledge — included for feedback, report, critical-mistake
-  if (map && (task === "feedback" || task === "report" || task === "critical-mistake")) {
+  // Map knowledge — included for feedback, report
+  if (map && (task === "feedback" || task === "report")) {
     const mapSlug = map.toLowerCase().replace(/[^a-z]/g, "");
     const mapContent = loadFile(`maps/${mapSlug}.md`);
     if (mapContent) sections.push(filterSectionsBySide(stripRankSections(mapContent), side));
   }
 
-  // Agent knowledge — included for insight, feedback, report, critical-mistake, growth-plan
+  // Agent knowledge — included for insight, feedback, report
   if (agent) {
     const agentFile = getAgentFile(agent);
     if (agentFile) {
@@ -292,24 +313,40 @@ export function loadKnowledge(task: TaskType, options: LoadOptions = {}): string
     }
   }
 
-  // Enemy agent knowledge — included for feedback and report (per-agent files)
+  // Düşman ajan bilgisi — feedback + report.
+  // KB DİYETİ (B36/B41, 2026-07-31): eskiden her düşman ajanın TAM dosyası
+  // (14-24KB × 5 ≈ 80KB) push ediliyordu → report 223KB / feedback 192KB.
+  // İki sorun vardı: (a) maliyet — tek report çağrısı ~70K token, %0 cache;
+  // (b) perspektif karışıklığı — o dosyalar "bu ajanı OYNAYAN" için yazılmış,
+  // oyuncuya düşmanın kendi kombosu öğütleniyordu. Artık yalnız "Bu Ajana Karşı"
+  // H2 kesiti yükleniyor (vision'ın loadCounterAgentSection'ı ile AYNI mekanizma,
+  // ~0,6-1,4KB/ajan). Kesit 29/29 ajan dosyasında mevcut (doğrulandı) ve
+  // verify-kb [13] guard'ı yeni dosyada eksik kalırsa FAIL veriyor.
   if (enemyAgents?.length && (task === "feedback" || task === "report")) {
     const loadedFiles = new Set<string>();
+    // Ayna guard'ı (vision loader'daki isMirror ile aynı gerekçe): oyuncunun kendi
+    // ajanı düşman komptaysa o dosya yukarıda zaten tam yüklendi — mükerrer token.
+    const ownFile = agent ? getAgentFile(agent) : null;
+    if (ownFile) loadedFiles.add(ownFile);
     for (const enemyAgent of enemyAgents) {
       const enemyFile = getAgentFile(enemyAgent);
-      if (enemyFile && !loadedFiles.has(enemyFile)) {
-        loadedFiles.add(enemyFile);
-        const content = loadFile(enemyFile);
-        if (content) sections.push(stripRankSections(content));
+      if (!enemyFile || loadedFiles.has(enemyFile)) continue;
+      loadedFiles.add(enemyFile);
+      const section = loadCounterAgentSection(enemyAgent);
+      if (section) {
+        sections.push(`[KARŞI-AJAN — ${enemyAgent}: bu düşman ajana karşı böyle oyna]\n${section}`);
+      } else {
+        // Sessiz kapsam kaybı olmasın: bölümü olmayan ajan dosyası prod log'unda görünsün.
+        console.warn(`[KB] '${enemyAgent}' dosyasında "Bu Ajana Karşı" bölümü yok — karşı-ajan kesiti atlandı`);
       }
     }
   }
 
   // Matchup knowledge — included for feedback and report
   if (agent && enemyAgents?.length && (task === "feedback" || task === "report")) {
-    const matchupContents = loadMatchupFiles(agent, enemyAgents, 2);
-    for (const mc of matchupContents) {
-      sections.push(mc);
+    const matchupHits = loadMatchupFiles(agent, enemyAgents, 2);
+    for (const mc of matchupHits) {
+      sections.push(mc.content);
     }
   }
 
@@ -369,6 +406,13 @@ interface VisionKnowledgeResult {
      * token yapıyordu.
      */
     profile?: string;
+    /**
+     * Block 0c — koçluk profilinin ikinci sayfası (ranks/universal-2.md).
+     * profile ile AYNI kararlılık sınıfı (istekten bağımsız, bayt-aynı) ve hemen
+     * ardından gelir → ikisi tek sabit önek bölgesi oluşturur, cache bozulmaz.
+     * B37 (2026-07-31): universal.md 45KB tavanına dayandığı için bölündü.
+     */
+    profile2?: string;
     agent?: string;
     map?: string;
     contextual?: string;
@@ -467,8 +511,13 @@ export function filterSectionsBySide(content: string, side?: string): string {
    killerInfo ham metninde resmi ajan sözlüğüyle (AGENT_ROLE_MAP anahtarları)
    TAM-KELİME eşleşen düşman ajan aranır; bulunursa o ajanın dosyasından YALNIZ
    "Bu Ajana Karşı" H2 bölümü kesilir. Kesit contextual (cache-sonrası) bölgeye
-   gider — statik önek bozulmaz. Bölüm yoksa sessiz geçilir (normal durum:
-   duelist dosyalarında bu bölüm yok). */
+   gider — statik önek bozulmaz.
+   YORUM DÜZELTMESİ (B119, 2026-07-31): buradaki eski not "duelist dosyalarında
+   bu bölüm yok, sessiz geçmek normal" diyordu — ARTIK YANLIŞ. KB dalgaları
+   bölümü 29/29 ajan dosyasına ekledi (doğrulandı) ve verify-kb [13] guard'ı
+   eksik bölümü FAIL sayıyor. Yani bölümün bulunamaması bir SAPMA'dır; bu yol
+   yalnız savunma-derinliği olarak sessiz geçer (yeni ajan dosyası eklerken
+   bölümü atlamak SERBEST DEĞİL). */
 
 /** Kesit sert tavanı (~1.4KB) — aşarsa son tam satırda kesilir. */
 const COUNTER_SECTION_CAP_BYTES = 1400;
@@ -607,6 +656,25 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
     files.push(`ranks/${rankFile}`);
   }
 
+  // ── Block 2c: Koçluk profili — İKİNCİ SAYFA (ranks/universal-2.md) ──
+  // 🔴 B37 (2026-07-31): universal.md 45.000B verify-kb tavanının %99,1'indeydi ve
+  // büyüme yolu yoktu. Çapasız bölümler universal-2.md'ye taşındı — AMA taşıma tek
+  // başına İÇERİK KAYBIDIR: yeni dosyayı yükleyen kod olmadan o ~3KB koçluk bilgisi
+  // her prompt'tan sessizce düşer (doğrulama turunda bu tam olarak olmuştu:
+  // universal.md 44.590B → 41.553B, universal-2.md hiçbir yerden okunmuyordu).
+  // Burada bağlanıyor.
+  //
+  // NEDEN AYRI BLOK, profile'a EKLEMİYORUZ: ikisi de istekten bağımsız ve bayt-aynı,
+  // yani aynı kararlılık sınıfındalar; ayrı tutmak prompt-cache önekini bozmaz
+  // (ardışık iki sabit blok = tek sabit bölge) ama iki dosyanın bağımsız
+  // büyüyebilmesini ve verify-kb'de ayrı tavana tabi olmasını sağlar.
+  let profile2Block: string | undefined;
+  const universal2 = loadFile("ranks/universal-2.md");
+  if (universal2) {
+    profile2Block = `[KOÇLUK PROFİLİ — devam]\n${stripKbWhitespace(universal2)}`;
+    files.push("ranks/universal-2.md");
+  }
+
   // ── Block 3: Contextual KB (gerçekten değişken kısım) ──
   // İÇ SIRA = değişme sıklığı (kararlı → değişken), prefix-cache kuralı:
   //   1) matchup      — maç boyunca sabit (ajan × düşman komp)
@@ -618,8 +686,11 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
   if (agent && enemyAgents?.length) {
     const matchups = loadMatchupFiles(agent, enemyAgents, 1);
     if (matchups.length > 0) {
-      contextualParts.push(`[EŞLEŞME BİLGİSİ]\n${stripKbWhitespace(matchups[0])}`);
-      files.push("matchups/(best-match)");
+      const best = matchups[0];
+      contextualParts.push(`[EŞLEŞME BİLGİSİ]\n${stripKbWhitespace(best.content)}`);
+      // B118 (2026-07-31): placeholder yerine gerçek yol + rol-fallback işareti —
+      // prod KB log'undan matchup kapsam-önceliği verisi çıkarılabilsin.
+      files.push(best.fallback ? `${best.path} [fallback]` : best.path);
     } else {
       // Agent (satır ~458) / map (satır ~474) seçici uyarılarıyla simetrik (2026-07-19):
       // matchup kapsam delikleri prod log'unda görünür olsun — hangi ajan × düşman-komp
@@ -677,10 +748,12 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
 
   // Karşı-ajan kesiti (2026-07-19): killerInfo'da sözlük-eşleşen düşman ajan
   // varsa o ajanın "Bu Ajana Karşı" bölümü — matchup bloğunun yanında,
-  // cache-SONRASI contextual bölgede (statik önek bozulmaz). Bölüm/eşleşme
-  // yoksa sessiz geç (console.warn YOK — silah-only killerInfo ve bölümsüz
-  // duelist dosyaları normal durum). Ayna-eşleşme guard'ı: killer, oyuncunun
-  // kendi ajanıysa Block 1 zaten aynı bölümü içeriyor — mükerrer token atlanır.
+  // cache-SONRASI contextual bölgede (statik önek bozulmaz). EŞLEŞME yoksa sessiz
+  // geç — silah-only killerInfo (ör. "killed by vandal") normal durum, uyarı basmak
+  // log'u kirletir. B119 (2026-07-31) YORUM DÜZELTMESİ: eski not "bölümsüz duelist
+  // dosyaları normal durum" diyordu, YANLIŞ — bölüm 29/29 ajan dosyasında var ve
+  // verify-kb [13] guard'ı eksiğini FAIL sayıyor. Ayna-eşleşme guard'ı: killer,
+  // oyuncunun kendi ajanıysa Block 1 zaten aynı bölümü içeriyor — mükerrer token atlanır.
   if (killerInfo) {
     const enemyAgent = extractEnemyAgentFromKillerInfo(killerInfo);
     if (enemyAgent) {
@@ -704,7 +777,9 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
   // BURAYA eklenmek ZORUNDA — aksi hâlde `content` alanını kullanan report/insight/
   // feedback yolları ~37 KB koçluk profilini kaybederdi. Toplam bayt aynı, yalnız
   // sıra kararlılığa göre: statik → profil → ajan → harita → contextual.
-  const allParts = [staticBlock, profileBlock, agentBlock, mapBlock, contextualBlock].filter(Boolean) as string[];
+  // profile2 de AYNI sebeple burada: `content` alanını kullanan yollar (report /
+  // insight / feedback) universal-2.md'ye taşınan bölümleri yoksa kaybederdi.
+  const allParts = [staticBlock, profileBlock, profile2Block, agentBlock, mapBlock, contextualBlock].filter(Boolean) as string[];
 
   return {
     content: allParts.join("\n\n---\n\n"),
@@ -712,6 +787,7 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
     blocks: {
       static: staticBlock,
       profile: profileBlock,
+      profile2: profile2Block,
       agent: agentBlock,
       map: mapBlock,
       contextual: contextualBlock,

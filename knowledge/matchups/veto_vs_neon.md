@@ -35,5 +35,25 @@ Neon dar boğazdan hızla akar ve girişini sektirdiği stunla açar. Veto'nun �
 **COUNTER** Neon'un bastığını duyduğun an ult'u aç: stunu sana işlemez, düelloyu o pencerede al
 **WHY** Neon'un düello planı stun üstüne kurulu — plan çöktüğünde elinde sadece ayak hızı kalır
 
+**IF** zayıf ekonomide öldün (economyType=eco ya da force_buy)
+**MEANING** Neon eko round'unda en tehlikeli rakip: hız yakın mesafeyi bedava kapatır, sen tabancayla açık alanda kaldın
+**COUNTER** Kurulumu boğaza kur ve boğazın arkasında dur; açık alana çıkma. Bağlama alanı tetiklendiği an takımla birlikte bas, tek başına düello alma
+**WHY** Yavaşlayıp sağırlaşan Neon hızını kaybeder — ekonomi farkını kapatan şey silah değil, onu yerinde tutan kurulumdur
+
+**IF** spike kuruluyken savunmadaydın ve öldün (spikePlanted, side=Savunma)
+**MEANING** Retake'e girerken Neon'un sprintle açı değiştirdiğini hesaba katmadın — post-plant'te sabit açıya nişan aldın
+**COUNTER** Retake'ten önce bağlama alanını spike bölgesine giden dar hatta kur; ışınlanma noktanı ikinci giriş yönü olarak sakla, defuse'u takım arkadaşın çözerken sen açıyı tut
+**WHY** Bağlama alanı defuse penceresini senin lehine uzatır — yerinde bağlanan savunucu ne rotate eder ne de defuse'u keser
+
+**IF** öldün ve killerInfo'daki silah kısa menzilli sınıfsa (Spectre, Judge, Bucky, Stinger)
+**MEANING** Neon yakın mesafeye girdi ve orada hız avantajı en yüksek — sen mesafeyi seçmedin, o seçti
+**COUNTER** Köşe dibine yapışma; boğazın çıkışını bir adım açıktan geniş açıyla tut. Önleyiciyi sektirdiği sersemletme hattına kur, kombosu kırılınca mesafe yine senin olur
+**WHY** Kısa menzilli silah ancak yaklaşabilirse çalışır; sersemletmesi imha edilen Neon açık koridorda mesafe kapatmak zorunda kalır
+
+**IF** round'un geç anında öldün (deathTiming=geç) ve sayı aleyhine dönmüştü
+**MEANING** Neon geç round'da ult'unu panikle açar ve kaosa oynar — sen o kaosun içine yürüdün
+**COUNTER** Sayı azken alanı daralt: dar geçide çekil, ult'unu düşman util'ini üstüne çektikten sonra aç, düelloyu tek açıdan sırayla al
+**WHY** Hız ancak seçenek varken avantajdır — tek dar hatta indirgenen Neon, hızını kullanamadan düello vermek zorunda kalır
+
 ## Koç Notları
 Bağlama alanını koridorun genişlediği yere değil dar boğaza kur: sprint hattı orada tek çizgi, kaçış yanı yok. Neon slide'ını hep aynı köşede bitiriyorsa bir sonraki round alanı tam çıkış noktasına taşı — hız okunan çizgide avantaj olmaktan çıkar.

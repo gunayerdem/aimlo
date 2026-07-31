@@ -1,6 +1,7 @@
 ---
 patch: "13.00"
-verified: 2026-07-08
+verified: 2026-07-31
+depth_note: "B87 (2026-07-31) — bu dosya 29 ajan dosyasının en sığıydı (13.929B) ama Jett en çok oynanan ajan. Kardeş dosyaların (reyna.md/raze.md) bölüm başlıkları KORUNARAK derinleştirildi: yeni hata maddeleri, ölüm-tipi ailelerini karşılayan IF blokları, aktif havuzun 7 haritası için pozisyon dersleri, yeni koçluk satırları. Yeni kit iddiası EKLENMEDİ — yalnız var olan davranış dersleri genişletildi."
 ---
 
 # AJAN: Jett
@@ -30,6 +31,10 @@ verified: 2026-07-08
 7. **Plant sonrası ortada kalmak** — Spike'ı diktikten sonra zıplamayla zor temizlenen bir yere çık. Aynı açıda kalma.
 8. **Dash'i takımdan kopuk, çok erken yakmak** — Tek başına site'a dalıp ölürsen takım hâlâ dışarıda kalır ve trade gelmez. Dash'ini takım girişiyle eşle; arkanda seni trade'leyecek kimse yokken dash'i yakma.
 9. **Op iskaladıktan sonra Op'la inatlaşmak** — İlk Op atışını kaçırdıysan rakip artık üstüne kapanıyor. Op'u indirip tabancaya/tüfeğe geç ya da dash'le açıyı tamamen terk et, aynı yerde ikinci atış kovalama.
+10. **Eko round'unda dash'i giriş için yakmak** — Zayıf ekonomide dash senin kaçış sigortan, giriş biletin değil. Tabancayla dash atıp site'a dalarsan hem sen hem tüfeksiz takım kaybeder. Eko'da dash'i sakla: uzak açıdan düşmanın hangi koldan geldiğini gör, temas etmeden çekil, silahını sonraki round'a taşı.
+11. **Spike kurulduktan sonra yeteneksiz açıda kalmak** — Post-plant'te dash'in yoksa tuttuğun açı tek yönlü kapandır. Plant biter bitmez pozisyonunu al: zıplamayla üst siperi tut ya da dash'i geri çekilme hattına sakla. Retake gelmeden yerini seç, retake başlayınca yer arama.
+12. **Ult'u zorlanınca umut niyetine açmak** — Bıçaklar tabanca hassasiyetinde silah: nişanın gitmediği elde bıçak da tutmaz. Ult'u eko round'unda, anti-eco'da ve tüfek alamadığın elde aç — orada bedava para ve bedava sayı üretir; tam alım düellosunda tüfeği bırakıp bıçağa geçmek kendi kendini silahsızlandırmaktır.
+13. **Ult açıkken tek isabetle yetinip açıkta kalmak** — Öldürdükçe bıçakların yenilenir; zincir kurulduğunda güçlüsün, tek atışta durunca sıradan bir tabancacısın. Bir öldürme aldıysan hemen sıradaki açıya geç, aynı yerde ikinci hedefi bekleme.
 
 ## 4. Kalıp -> Anlam
 IF: Atakta round açılışında sürekli ölüyorsun
@@ -77,6 +82,31 @@ MEANING: Smoke zamanlamasını planlamıyorsun, panikle atıyorsun
 COUNTER: Smoke'u tam giriş anına sakla — tehlikeli açıyı tam geçeceğin saniyede at, erken değil.
 WHY: Smoke'un kısa süreli; erken attıysan tam geçişte zaten dağılmış olur ve açık açıdan geçersin.
 
+IF: Spike kurulduktan sonra saldırıda tek açı tutup ölüyorsun (ölüm yeri site içi ve round geç anında)
+MEANING: Post-plant pozisyonunu plant biterken değil retake başlarken arıyorsun; dash'ini de girişte harcamışsın
+COUNTER: Plant biter bitmez yerini al: bir takım arkadaşın site ağzını, sen zıplamayla çıktığın üst siperi tut — çapraz kur, spike'ın dibinde durma. Dash'i girişte harcadıysan kaçış planın zıplama olsun, yoksa açıyı hiç tutma.
+WHY: Post-plant'te zaman senin lehine; retake edenin sana gelmesi gerekir. Tek açıdan tutulan spike, iki koldan gelen retake'e karşılıksız düşer.
+
+IF: Savunmada spike kurulduktan sonra retake'e tek başına dalıp ölüyorsun
+MEANING: Dash'i "hızlı girerim" diye retake aracı sanıyorsun; hızlı giren tek kişi, hazır bekleyen iki açıya yürüyor
+COUNTER: Retake'i takımla senkronla: util defuse'u geciktirsin, sen dash'i ilk açıyı kapatmak için değil, temizlenmiş bir hattan sürpriz yön almak için kullan. Sayı sende değilse retake'e hiç girme, silahı taşı.
+WHY: Dash tek yönlü ve tek hak; retake'te ölçek sayıdır, hız değil. Tek tek giren Jett retake'i eritir, birlikte giren Jett site'ı geri alır.
+
+IF: Zayıf ekonomide (eko/zorlama alım) tam alım round'u gibi giriş yapıp ölüyorsun
+MEANING: Tabancayla dash atıp tüfekli düşmanın açısına giriyorsun — dash mesafeyi kapatıyor ama düelloyu kazanmıyor
+COUNTER: Eko'da işin sağ kalmak ve düşmanın hangi koldan geldiğini görmek: uzak açıdan bak, temas etmeden çekil, dash'i kaçış için sakla. Zorlama alımda hafif silahla dar koridora çek, uzun hatta çıkma.
+WHY: Silah farkı uzun hatta düelloyu peşinen kaybettirir; kurtardığın silah ve kredi sonraki round'un tam alımını kurar.
+
+IF: Ölümlerin tam alım round'unun ilk saniyelerinde ve senden önce hiç util inmemiş
+MEANING: İlk teması util'in işi olduğu halde sen açıyorsun — dash'in hızı, hazır bekleyen crosshair'in önünde işe yaramıyor
+COUNTER: İlk temasta smoke ya da flash inmeden geniş açıya çıkma. Takım util'ini bekle, dash'i util patladıktan sonraki ilk saniyeye at; hazırlık yoksa açıyı bir takım arkadaşınla birlikte geniş açıyla al.
+WHY: Tam alımda ilk gören değil, ilk hazır olan kazanır. Util inince rakibin nişanı bozulur — dash'in değeri tam o pencerede ortaya çıkar.
+
+IF: Elinde Op varken ölüp silahı düşmana bırakıyorsun
+MEANING: Atıştan sonra yer değiştirmiyorsun; Op'un değeri hattı tutmakta, hattı tutan da dash'i kaçış için saklayan Jett
+COUNTER: Op'la tut, vur, dash'le çekil — üç adım. Atıştan sonra aynı açıda ikinci hedef arama; dash yenilenmediyse o hattı tamamen terk et ve tüfeğe geç.
+WHY: Düşen Op düşmanın eline geçer ve bir sonraki round senin aleyhine döner. Op'lu Jett'in tek sigortası dash'tir; sigortasız Op açısı tutulmaz.
+
 ## 5. Harita Etkileşimleri
 - **Güçlü haritalar:** Ascent (A Short dash, Mid Op), Breeze (uzun açı = Op-Jett), Haven (C Long, A Short), Lotus (A Main, C Main dash açıları).
 - **Zayıf haritalar:** Fracture (çok açı var, dash dağılıyor, yakın dövüş bol), Pearl (dar koridor, dikey alan yok).
@@ -90,6 +120,10 @@ WHY: Smoke'un kısa süreli; erken attıysan tam geçişte zaten dağılmış ol
 - **Breeze (rework sonrası):** Uzun düello kimliği sürüyor — A Main ve B'nin uzun hatlarında Op-Jett hâlâ evinde; ama Mid koridorlaştı, tek Op ortayı kilitleyemez — okunduysan arkan kapılardan alınır, Op'u uzun hatta tut, koridor dövüşünde tüfeğe geç. Nest'e düz zıplama kalktı, yukarı çıkmak mobilite ister — zıplamanla çıkabilen az duelist'tensin: erken bilgi al, smoke gelince in, standart smoke Nest'i artık tam kapatıyor.
 - **Corrode:** Stairs–Top Mid haritanın en uzun hattı ve Op-Jett'in evi — hattı tut, vur, dash'le güvenliğe çekil; aynı açıya ikinci atış kovalama. A girişinde dash'ini Elbow ve Pocket temizlenmeden yakma — köşe dövüşü dash'i affetmez, önce util gör, sonra gir. B'ye girerken önce yukarı bak: Tower kapanmadan site'a yayılma; Yard'ı dash'le açık geçmeye kalkma — dash mesafeyi değil açıyı kapatır, smoke inince geç.
 - **Sunset — zayıf, açı seç:** Kısa koridor haritası hareket avantajını eritir — Op yalnız A Elbow ve Mid Top'ta işler, başka yerde alma, o parayı tüfeğe ver. Mid Courtyard'da agresif Op açısı var ama Courtyard açık alan: bilgi yoksa peek yok. Dash'ini A Elbow geçişine sakla — Elbow koridor değil kapan, önce flash ya da smoke gör, sonra gir. B Main dar ve düz: orada dash mesafe değil hedef kazandırır — girişini Market split'iyle eşle, takım iki koldan bassın.
+- **Ascent — Op ve zıplama haritası:** Mid'in uzun hattı (Catwalk–Mid Top ekseni) Op-Jett'in ana sahası: hattı tut, vur, dash'le Mid Bottom'a çekil, aynı açıya ikinci kez çıkma. A Short girişini iki round üst üste aynı dash'le yapma — üçüncüde önceden nişanlanmış olurlar; zıplamayla üstten gel ya da bir an geciktir. B tarafında Market ve B Lanes dar: dash orada mesafe değil hedef kazandırır, girişini takımın Market baskısıyla senkronla. Savunmada Heaven ve Catwalk zıplamanın değerlendiği yükseklikler — göz hizasını tarayan saldırgana üstten gel, öldür, dash'le in.
+- **Haven — üç site, uzun rotasyon:** C Long ve A Long Op-Jett'in evi, Garage ve Mid Doors dar geçit: uzun hatta Op tut, dar geçitte tüfeğe geç. Üç siteli haritada rotasyon uzun, trade geç gelir — dash'i takımdan kopuk erken yakarsan kimse boşluğu doldurmaz; girişini takım basışıyla aynı saniyeye çek. A Short girişinde dash'i site ağzındaki ilk açıya sakla, Heaven'ı temizlemeden site zeminine yayılma. Savunmada C Long'u Op'la agresif tutabilirsin ama tek atıştan sonra dash'le C Link'e çekil: uzun hatta ikinci atış kovalayan Jett rotasyonu da kaybeder.
+- **Split — dar ve dikey, dash'ten çok zıplama:** Yakın dövüş bol, dash her köşede kapana giriyor — burada asıl kozun dikeylik. A Ramp ve A Rafters, B Rafters ve Heaven zıplama-entry'nin en verimli olduğu noktalar: göz hizasını tarayan savunucuyu üstten geç. Mid'i (Mid Mail, Mid Vent, Rope) almadan site zorlama; Mid alındıysa dash'i A Elbow ya da B Link geçişine sakla. Op yalnız Mid ve B Main'in düz hattında işler, dar koridorda taşıma. Savunmada B Garage ve A Main ağzı kısa agresif peek yerleri: bir öldürme al, dash'le geri kay, aynı açıyı üst üste tutma.
+- **Lotus — üç site, dönen kapı ve sessiz iniş:** A Main ve C Main'in uzun hatlarında dash'li Op değerli; Mid Link ve C Hall dar, orada tüfeğe geç. Dönen kapılar ve Silent Drop rotasyonu hızlandırır — dash'ini kapı ardındaki temizlenmemiş açıya yakma, önce util gör. B Main tek dar boğaz: oraya dash'le tek başına girme, girişini takım util'iyle eşle. Savunmada C Mound ve A Tree yükseklik verir: zıplamayla sürpriz açı al, öldür, dash'le geri kay. Post-plant'te dönen kapıyı kaçış hattına kat — dash'in yoksa kapı senin ikinci kaçışın.
 
 ## 6. Eşleşme Notları
 - **Sana zor:** Chamber (Op'una Op'la cevap verir, tuzağı dash hattını yakalar), Cypher (teli dash hattını yakalar), Killjoy (botu dash yönünü ele verir).
@@ -97,6 +131,9 @@ WHY: Smoke'un kısa süreli; erken attıysan tam geçişte zaten dağılmış ol
 - **Adaptasyon:** Karşıda çift sentinel varsa dash hattını her round değiştir, util'i atlamak için zıplamayı kullan. Karşıda agresif duelist varsa ilk düelloyu sen al, trade'e bırakma.
 - **Tutucu yetenekler dash'ini öldürür:** Düşman bir yere yapışkan tutucu (durdurma/yavaşlatma) attıysa o hatta dash atma — dash bittiği yerde yavaşlar ve tutulursun, hazır crosshair'in önünde hedefsin. Önce o açıyı temizle ya da başka hattan gir.
 - **Recon/bilgi yeteneklerine karşı zaman değiştir:** Düşman tarama/bilgi yeteneğiyle dash zamanını okuyorsa, hep aynı saniyede çıkma. Bilgi yeteneği patladıktan hemen sonraki boşlukta gir ya da bir an bekleyip çık — ritmini bozarsan okuyamazlar.
+- **Kör eden kite karşı girişini geciktir:** Karşıda flash'ıyla açı açan bir ajan varsa dash'ini onun flash'ının hemen ardına yerleştirme — kendi takımının körlüğüne dalarsın. Flash sesini duyduğun an bir an bekle, patlama bitsin, sonra dash'i o açıya at.
+- **Alan hasarına (molotof/patlayıcı) karşı iniş noktanı seç:** Dash bittiği yerde seni yavaşlatan ya da yakan bir alana indiysen kaçışın yok. Yanan hattı gördüğün an dash'i o hatta atma; alan sönene kadar bekle ya da zıplamayla üstten geç.
+- **Ult'lu duelistlere karşı ilk teması sen açma:** Ölünce geri dönen ya da öldürdükçe kendini yenileyen ult'lar açıkken düelloyu uzatma. O pencerede dash'i giriş için değil, takımının trade mesafesine geri dönmek için kullan.
 
 ## 7. Oyuncuya Ne Söylenmeli
 ### İyi oynarken
@@ -117,9 +154,25 @@ WHY: Smoke'un kısa süreli; erken attıysan tam geçişte zaten dağılmış ol
 ### Op'u yanlış kullanırken
 "Op'u dar koridorda taşıma, orada yavaş kalırsın. Op'u uzun hatta tut; köşelerde tüfeğe geç."
 
+### Dash'i kaçış için harcadığında
+"Dash'i giriş yapmadan kaçmak için yaktın; site ağzında dash'siz kaldın. Dash'i ilk açıyı kapatmak için sakla — geri çekilme planın zıplama ve takım arkadaşının açısı olsun."
+
+### Eko / zorlama alım round'unda
+"Bu round işin sağ kalmak. Uzak açıdan hangi koldan geldiklerini gör, temas etmeden çekil, dash'i kaçış için sakla. Tabancayla tüfekli açıya dash atmak hem seni hem silahını harcar."
+
+### Post-plant'te açıkta kaldığında
+"Spike dikildikten sonra yerini plant biterken seç, retake başlarken değil. Zıplamayla üst siperi tut, bir arkadaşın site ağzını tutsun; spike'ın dibinde bekleme, zaman zaten senin lehine."
+
+### Ult'unu cebinde çürüttüğünde
+"Bıçakların doluyken tüfek düellosunda öldün. Ult'u tüfek alamadığın round'a ve anti-eco'ya sakla; açtığında bir öldürme alıp hemen sıradaki açıya geç, aynı yerde ikinciyi bekleme."
+
 ## 8. Bu Ajana Karşı
 - Jett'in kozu dash-peek: açıyı bir anda kapatır ama dash biterken silahını yeni toplar. Dash sesini duyduğun an bir adım geri çekil, crosshair'i dash'in bittiği noktaya kilitle — ilk atışı sen yap.
 - Op'la tutar, vurur, dash'le çekilir. Aynı açıya utility'siz ikinci kez çıkma — açıyı smoke ya da flash ile boz, geniş açıyla peek at. Dash'i yeni harcadıysa kaçışı yok: yenilenmesi iki öldürme ister, baskıyı tam o pencerede kur.
 - Zıplamayla üstten gelir; göz hizasındaki crosshair onu ıskalar. Zıplama sesinde yukarı bak — havada yavaş ve isabetsiz bir hedef, en savunmasız anı iniş: yere değdiği noktayı vur.
 - Smoke'ları kısa ömürlü ve geçiş içindir — Jett smoke attıysa giriş o saniyede geliyor demektir. Dumanın söndüğü an açıyı geri bas; ikinci bir duman hakkı çoğu kez kalmamıştır.
 - Düelloyu Jett'in seçtiği anda alma: ilk peek hep onundur. Açıdan geri çekilip trade pozisyonuna yerleş — ilk teması karşılıksız bırakmadığın her düello Jett'in aleyhine döner.
+- Ult'unda bıçak atar ve öldürdükçe bıçakları yenilenir — zinciri hiç başlatma. Bıçak sesini duyduğun an tek başına düello arama; ilk teması takım ateşiyle bitir, tüfeğin karşısında bıçak mesafe tutamaz. Uzak açıdan dövüş, yakın köşeye girme.
+- Dar koridorda ve yakın mesafede Jett'in kiti işe yaramaz: dash orada kaçış değil, duvara çakılmadır. Düelloyu Op hattından uzağa, köşelere ve dar geçitlere taşı — mesafeyi sen seçtiğin her düello senin lehine.
+- Dash'in bir aktivasyon anı var: kullanmadan önce kısa bir hazırlık penceresi geçer. O sesi duyduğun an sıkmayı bırakma — hazırlıktaki Jett hâlâ vurulabilir ve çoğu Jett dash'i tam o pencerede yer.
+- Yükseklik alışkanlığını not et: iki round üst üste aynı platformdan zıpladıysa üçüncüde crosshair'i o yüksekliğe kilitle. Zıplamayla gelen Jett havada isabetli ateş edemez — asıl vurma anı iniş.

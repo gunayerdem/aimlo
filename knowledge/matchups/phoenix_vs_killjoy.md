@@ -35,5 +35,25 @@ Killjoy sabit cihaz zinciri kurar: taret görür, bot yapışır, molly alanı d
 **COUNTER** Ult'la kurulumun içine gir: düşersen geri doğarsın, taret-bot-molly konumları takıma bedava çıkar
 **WHY** Killjoy'un gücü kurulumunun bilinmemesinde — ult'lu Phoenix o bilgiyi canı yanmadan söker; yalnız geri doğuş noktan bellidir, dönüş anında açık durma
 
+**IF** zayıf ekonomide öldün (economyType=eco ya da force_buy)
+**MEANING** Tabancayla cihaz zincirinin içine yürüdün — taret hasarı silah farkının üstüne bindi
+**COUNTER** Eko round'unda söküm yapma: taretin görüş hattına girme, molly'ni cihaza değil kendi kaçış hattına sakla, düelloyu taretin görmediği dar köşede ara
+**WHY** Taret hem hasar hem haber verir; hattına girmeyen oyuncu ikisini de ödemez ve silahını sonraki round'a taşır
+
+**IF** spike kuruluyken saldırıdaydın ve öldün (spikePlanted, side=Saldırı)
+**MEANING** Post-plant'te site içinde yığıldın — Killjoy ult'unu tam bu duruma saklıyor
+**COUNTER** Plant biter bitmez yayıl ve açını al; ult sesini duyduğun an alandan çık. Alev duvarını defuse hattına sakla, molly'yi defuse ikinci kez başladığında bırak
+**WHY** Ult tek kümede bekleyen takımı topluca yakalar; yayılan ve alandan çıkan takım cihazı vurup round'u bitirir
+
+**IF** öldün ve killerInfo'daki silah kısa menzilli sınıfsa (Judge, Bucky, Spectre, Stinger)
+**MEANING** Killjoy cihazlarının arkasındaki dar açıda seni yakın mesafeye çekti — mesafeyi o seçti
+**COUNTER** Kör köşeye girme; alev duvarını görüş hattına çek, kıvrılan flaşı köşeye at ve o köşeyi flaş patlarken al. Yakın mesafeye ancak taret sustuktan sonra gir
+**WHY** Kısa menzilli silah dar açıda tavan değer üretir; körlenmiş savunucu o mesafeyi kullanamaz
+
+**IF** round'un geç anında öldün (deathTiming=geç) ve sayı aleyhine dönmüştü
+**MEANING** Kit boşken kurulu siteye ikinci hamleyi aldın — molly'nin toparlama penceresini de kullanmamışsın
+**COUNTER** Sayı azken dövüşü uzatma: molly'yi kapak arkasında toparlanmak için kullan, sonra tek açı izole et. Kit tamamen boşsa hamle alma, süreyi oynat
+**WHY** Uzayan düelloda toparlanabilen taraf avantajlı; ama toparlanma penceresi ancak kapak arkasında çalışır, açıkta yanmak yalnızca can eritir
+
 ## Koç Notları
 Killjoy'a karşı acele giriş yok, söküm sırası var: duvar (görüş), molly (cihaz), flaş (köşe), giriş. Sıra tamamsa Killjoy eli boş kalır; taret sesi hâlâ dönüyorsa sıra tamamlanmamış demektir. Spike kurulduysa Killjoy ult'unu retake'e sakladığını unutma — plant sonrası site içinde yığılma, ult sesinde alandan çık.

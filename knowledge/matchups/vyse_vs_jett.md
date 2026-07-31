@@ -35,5 +35,25 @@ Jett dash ve sıçramayla hız üzerinden girer; bilgi yerine tempo oynar. Vyse'
 **COUNTER** Ult'u Jett commit ettiği anda aç: silahı devre dışıyken tuzak + tüfek zinciriyle bitir
 **WHY** Ult giriş penceresinde en değerli — dolu ult'la ölmek en pahalı hata
 
+**IF** zayıf ekonomide öldün (economyType=eco ya da force_buy)
+**MEANING** Kurulumun için para kalmamışken Jett'in açısını tabancayla tutmaya çalıştın — dash mesafeyi kapatırken silah farkı sende kaldı
+**COUNTER** Eko round'unda tek yeteneğini iniş noktasına kur ve o noktaya bakan dar açıda bekle; uzun hattı hiç tutma, düelloyu tuzağın tetiklendiği yerde al
+**WHY** Yavaşlayan ya da körlenen Jett dash'inin bittiği yerde çakılı kalır — ekonomi farkını kapatan tek şey o pencere
+
+**IF** spike kuruluyken savunmadaydın ve öldün (spikePlanted, side=Savunma)
+**MEANING** Retake'e kurulumsuz girdin — post-plant'te Jett açısını dash'le değiştirebiliyor, sen sabit hattan geldin
+**COUNTER** Retake'ten önce gizli duvarı defuse hattına, tuzağı saldırganın çekilme yoluna kur; girişi takımla aynı anda yap. Ult'un varsa girişte aç, silahı bozulan savunmacı açısını tutamaz
+**WHY** Post-plant'te ölçek sayıdır: aynı anda giren iki kol crossfire'ı böler, tek tek giren retake sayıyı düşmana hediye eder
+
+**IF** öldün ve killerInfo'daki silah keskin nişancı sınıfıysa (Operator, Marshal, Outlaw)
+**MEANING** Jett uzun hattı silahla kilitledi; dash'i de kaçış için saklıyor — o hatta ikinci kez göründün
+**COUNTER** O hattı o round boş bırak ve kurulumunu Jett'in çekilme hattına taşı; atış sesinden sonra bas, dash harcandıysa kaçışı yok
+**WHY** Uzun hatta ilk gören kazanır; hattı terk etmek silahı değersizleştirir, çekilme hattını tuzaklamak silahlı Jett'i kurulumun içine sokar
+
+**IF** round'un geç anında öldün (deathTiming=geç) ve sayı aleyhine dönmüştü
+**MEANING** Kurulumun tükendikten sonra düz düello aradın — geç round'da Vyse'ın kozu silah değil, silahı bozan ult
+**COUNTER** Sayı azken dövüşü sen açma: dar açıya çekil, süreyi oynat, ult'u düşman commit ettiği anda aç ve düelloyu ana silahları kilitliyken al
+**WHY** Ana silahı kilitlenen taraf tabancayla dövüşmek zorunda kalır; o pencerede sayı dezavantajı bile telafi edilebilir
+
 ## Koç Notları
 Jett'e karşı Vyse'ın işi giriş yolunu kapatmak değil, iniş noktasını tuzağa çevirmek. Jett nereye dash atıyor, nereye sıçrıyor — kurulum oraya gider. Aynı düzeni iki round üst üste koyma; Jett bir kez okudu mu önce tuzağı temizler, sonra seni.

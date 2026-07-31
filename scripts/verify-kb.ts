@@ -174,6 +174,35 @@ console.log(`\n[9] universal.md boyut tavanı`);
     uniSize <= UNI_CAP_BYTES,
     `(${uniSize}b — tavan aşıldı! Bu bilinçli bir karar olmalı: önce yoğunlaştır, olmuyorsa tavanı gerekçeyle güncelle)`
   );
+
+  // 🔴 universal-2.md — B37 bölünmesinin ikinci sayfası (2026-07-31).
+  // İKİ ayrı guard, çünkü bu bölme bir kez SESSİZ İÇERİK KAYBI üretti: dosya
+  // oluşturuldu, içerik universal.md'den çıkarıldı, ama loader'a bağlanmadığı
+  // için ~3 KB koçluk bilgisi her prompt'tan düştü ve hiçbir test bunu görmedi.
+  const uni2Path = path.join(KB, "ranks", "universal-2.md");
+  const uni2Exists = fs.existsSync(uni2Path);
+  if (uni2Exists) {
+    const UNI2_CAP_BYTES = 8_000;
+    const uni2Size = fs.statSync(uni2Path).size;
+    check(
+      `universal-2.md ≤${UNI2_CAP_BYTES}b (her-istek maliyet tavanı)`,
+      uni2Size <= UNI2_CAP_BYTES,
+      `(${uni2Size}b — tavan aşıldı; universal.md ile TOPLAM maliyet düşünülmeli)`
+    );
+    // Asıl guard: dosya VAR ama yükleyen kod YOKSA içerik ölü demektir.
+    const loaderSrc = fs.readFileSync(path.join(process.cwd(), "lib", "knowledge-loader.ts"), "utf8");
+    check(
+      "universal-2.md loader tarafından YÜKLENİYOR (sessiz içerik kaybı guard'ı)",
+      loaderSrc.includes("universal-2.md") && loaderSrc.includes("profile2"),
+      "(dosya var ama lib/knowledge-loader.ts onu okumuyor → içerik prompt'a HİÇ gitmiyor)"
+    );
+    const visionSrc = fs.readFileSync(path.join(process.cwd(), "app", "api", "ai", "vision", "route.ts"), "utf8");
+    check(
+      "vision route profile2 bloğunu system prompt'a ekliyor",
+      visionSrc.includes("blocks.profile2"),
+      "(loader yüklüyor ama vision yolu bloğu prompt'a koymuyor)"
+    );
+  }
 }
 
 // 10) HARİTA DOSYASI TAVANI — harita bloğu her vision isteğinde prompt'a gider.
@@ -194,12 +223,15 @@ console.log(`\n[10] harita dosyası boyut tavanı (${maps.length} dosya)`);
 
 // 11) AJAN × AKTİF-HAVUZ KAPSAM GUARD'I — pool frontmatter'ı "aktif" olan her
 //     harita, 29 aktif ajan dosyasının her birinde adıyla geçmeli (ajan rehberi
-//     aktif havuzu kapsamalı). ŞİMDİLİK UYARI MODU (FAIL değil): KB süpürme
-//     dalgaları devam ediyor, tüm ajan dosyaları havuz haritalarını işleyince
-//     STRICT_POOL_COVERAGE = true yapıp FAIL'e çevir.
+//     aktif havuzu kapsamalı).
+//     KİLİTLENDİ (B117, 2026-07-31): süpürme dalgaları BİTTİ — 7 aktif harita
+//     (ascent/breeze/haven/lotus/split/summit/sunset) × 29 ajan dosyası kapsamı
+//     tam, 13/13 harita dosyasında pool frontmatter'ı var (doğrulandı). Uyarı
+//     modunun gerekçesi kalmadı; false kaldıkça yeni bir ajan dosyası ya da havuz
+//     rotasyonu kapsamı SESSİZCE delebilirdi. Artık eksik kapsam FAIL.
 console.log(`\n[11] ajan × aktif-havuz kapsam guard'ı`);
 {
-  const STRICT_POOL_COVERAGE = false; // süpürme dalgaları tamamlanınca true → eksik kapsam FAIL olur
+  const STRICT_POOL_COVERAGE = true; // B117: kapsam tamamlandı → eksik kapsam artık FAIL
   const frontmatterOf = (content: string): string => {
     const fm = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
     return fm ? fm[1] : "";
@@ -233,7 +265,7 @@ console.log(`\n[11] ajan × aktif-havuz kapsam guard'ı`);
     const missing = agentFiles.filter((f) => !re.test(fs.readFileSync(f, "utf8")));
     if (missing.length > 0) {
       const names = missing.map((f) => path.basename(f, ".md")).join(", ");
-      console.log(`  ⚠ ${m}: ${missing.length}/${agentFiles.length} ajan dosyasında adı geçmiyor → [${names}] (uyarı — süpürme dalgası tamamlanınca FAIL olacak)`);
+      console.log(`  ⚠ ${m}: ${missing.length}/${agentFiles.length} ajan dosyasında adı geçmiyor → [${names}]${STRICT_POOL_COVERAGE ? " (STRICT: FAIL)" : " (uyarı modu)"}`);
     }
     check(
       `havuz kapsamı ${m} (${agentFiles.length - missing.length}/${agentFiles.length} ajan${STRICT_POOL_COVERAGE ? "" : " — uyarı modu"})`,
@@ -329,6 +361,70 @@ console.log(`\n[N] Harita callout tablosu ↔ KB tutarlılığı`);
       hits.length === 0,
       hits.length ? `\n      ${hits.join("\n      ")}` : "",
     );
+  }
+
+  // ── 12b) ÖZ-ÇELİŞKİ GUARD'I: "kanıtı olmayan olguyu EMREDEN" prompt satırı ──
+  // 🔴 NEDEN (B35, 2026-07-31 — bu sınıf 4. kez): reality-checker düşmanın
+  // util/setup iddiasını SİLERKEN, json_schema description'ı modele tam olarak
+  // o iddiayı yazmasını EMREDİYORDU ("Madde 1 = düşmanın SOMUT setup/util'i",
+  // örnek: "Cypher tuzaklarını B Main girişine dizdi"). OCR payload'ında düşman
+  // util verisi YOK → model uydurmak zorundaydı, guard siliyordu, feedback
+  // fakirleşiyordu. Aynı desen daha önce "bilgi topla" ve "kill al-" ile yaşandı.
+  //
+  // Kural: prompt kaynaklarında modele DÜŞMAN UTIL YERLEŞİMİ yazdıran emir
+  // kipi bulunmamalı. Yasağı anlatan/karşı-örnek gösteren satırlar muaf.
+  const SELF_CONTRADICT = [
+    /düşmanın\s+(?:bu\s+round'?daki\s+)?SOMUT\s+setup/i,
+    /enemy'?s\s+CONCRETE\s+setup/i,
+    /tuzaklarını\s+\w+\s+girişine\s+dizdi/i,
+    /lined\s+his\s+traps/i,
+  ];
+  for (const rel of PROMPT_SOURCES) {
+    const abs = path.join(process.cwd(), rel);
+    if (!fs.existsSync(abs)) continue;
+    const lines = fs.readFileSync(abs, "utf8").split(/\r?\n/);
+    const bad: string[] = [];
+    lines.forEach((line, i) => {
+      // ⚠ BURADA GENİŞ `NEGATORS` MUAFİYETİ KULLANILMAZ (doğrulama turunda öğrenildi):
+      // suçlu json_schema description'ı BAŞKA sebeplerle "YASAK" kelimesini içeriyor
+      // ("generic gözlem YASAK", "İngilizce yön YASAK") → geniş muafiyet guard'ı
+      // tamamen susturuyordu ve hiç ateşlenmeyen bir guard, guard değildir.
+      // Yalnız İKİ dar muafiyet: (a) satır bir KOD YORUMU (bu bloğun kendi açıklaması
+      // gibi), (b) satır açıkça "uydurma" yasağını taşıyor.
+      const s = line.trim();
+      if (s.startsWith("//") || s.startsWith("*") || s.startsWith("/*")) return;
+      if (/UYDURMA|do NOT invent/i.test(line)) return;
+      for (const re of SELF_CONTRADICT) {
+        if (re.test(line)) bad.push(`${rel}:${i + 1} «${line.trim().slice(0, 90)}»`);
+      }
+    });
+    check(
+      `${rel} kanıtsız düşman-util iddiası EMRETMİYOR (öz-çelişki guard'ı)`,
+      bad.length === 0,
+      bad.length ? `\n      ${bad.join("\n      ")}` : "",
+    );
+  }
+}
+
+// 13) "BU AJANA KARŞI" KESİT SÖZLEŞMESİ (B119 + B36/B41, 2026-07-31)
+//     Bu bölüm artık RUNTIME SÖZLEŞMESİ: knowledge-loader hem vision'da
+//     (killerInfo → loadCounterAgentSection) hem feedback/report'ta (düşman komp)
+//     düşman ajan için TAM dosya yerine YALNIZ bu H2 kesitini yüklüyor. Bölüm
+//     yoksa loader sessiz/uyarıyla geçer → o ajan için karşı-oyun bilgisi prompt'a
+//     HİÇ girmez (sessiz kapsam kaybı). Bugün 29/29 dosyada var; yeni bir ajan
+//     dosyası bölümsüz eklenirse BURADA patlasın.
+console.log(`\n[13] her ajan dosyasında "Bu Ajana Karşı" H2 kesiti`);
+{
+  const COUNTER_H2 = /^##\s+.*bu ajana karş[ıi]/im;
+  for (const r of roleDirs) {
+    for (const f of fs.readdirSync(path.join(KB, "agents", r)).filter((x) => x.endsWith(".md"))) {
+      const body = fs.readFileSync(path.join(KB, "agents", r, f), "utf8");
+      check(
+        `agents/${r}/${f} → "Bu Ajana Karşı" H2`,
+        COUNTER_H2.test(body),
+        "(bölüm YOK — loader düşman-ajan kesitini bu dosyadan çıkaramaz, karşı-oyun bilgisi prompt'a girmez)",
+      );
+    }
   }
 }
 

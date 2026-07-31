@@ -35,5 +35,25 @@ Cypher tuzak ağıyla senin rotanı okur; Reyna öldürmeden hiçbir şeydir ve 
 **COUNTER** Ult'u ilk temastan önce aç: öldür, görünmez sıyrıl, kameranın takibinden çık, sıradaki açıya geç
 **WHY** Ult penceresinde kaçışın seni görünmez yapar — Cypher'ın bütün kiti görmeye dayalıdır, görmediği Reyna'yı hiçbir tel tutamaz
 
+**IF** zayıf ekonomide öldün (economyType=eco ya da force_buy)
+**MEANING** Tabancayla kurulu siteye girdin — tel bilgisi hazır atışı kurmuşken senin tek avantajın olan öldürme zinciri hiç başlamadı
+**COUNTER** Eko round'unda giriş yapma: telin haber vermediği uzak açıdan hangi koldan geldiklerini gör, temas etmeden çekil, silahı sonraki round'a taşı
+**WHY** Reyna'nın kiti öldürmeyle açılır; tabancayla kurulu siteye giren Reyna zinciri başlatamadan hem sayıyı hem parayı verir
+
+**IF** spike kuruluyken saldırıdaydın ve öldün (spikePlanted, side=Saldırı)
+**MEANING** Post-plant açını kameranın gördüğü yerde tuttun — Cypher retake'i senin yerini bilerek başlattı
+**COUNTER** Plant biter bitmez kamerayı ara ve vur; pozisyonunu kameranın görmediği dar açıya al. Bir öldürme alınca hemen kapağa çekilip iyileşmeni tamamla
+**WHY** Kamerası kırılan Cypher retake'i kör başlatır; iyileşme döngüsü kapak arkasında tamamlanırsa retake'i tek başına da eritebilirsin
+
+**IF** öldün ve killerInfo'daki silah keskin nişancı sınıfıysa (Operator, Marshal, Outlaw)
+**MEANING** Telin haber verdiği hatta uzun mesafede göründün — kör eden göz o mesafede vurulup patlatılır
+**COUNTER** O hattı boş bırak; düellonu dar geçide taşı, gözü duvar arkasından köşeye at ve patlarken çık. Atış sesinden sonra bas, ikinci atış hazır olmadan gir
+**WHY** Kör eden gözün değeri yakın mesafede; uzakta vurulan göz hem kiti hem sürprizi harcar
+
+**IF** round'un geç anında öldün (deathTiming=geç) ve sayı aleyhine dönmüştü
+**MEANING** Zincir hiç başlamamışken kurulu alanda düello aradın — iyileşmen ve kaçışın kapalıydı
+**COUNTER** Sayı azken tel hattından uzak dar açıya çekil, sesle tek düşman izole et, gözü at ve zinciri o düelloyla başlat; izole edemiyorsan süreyi oynat
+**WHY** Kitsiz Reyna sıradan bir tüfekçi; zincir ancak izole düelloyla başlar, kalabalığa giren geç round Reyna'sı round'u kapatır
+
 ## Koç Notları
 Kamera vurulup silinir — ilk round'u kameranın yerini bulmaya harca, ikinci round'da sil. Bilgisiz kalan Cypher sıradan bir tüfekçidir ve Reyna'nın zinciri tam orada başlar. Tel tetiklediysen geri çekilme kararını hızlı ver: tetiklenen tel üstüne yürümek, hazır düşmana ikinci kez aynı hediyeyi vermektir.

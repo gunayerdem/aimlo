@@ -71,7 +71,9 @@ type PromptOpts = {
 
 /**
  * vision route'undaki systemSections kurulumunun BİREBİR TAKLİDİ.
- * Referans: app/api/ai/vision/route.ts:483-521 (+ join'i 587. satır).
+ * Referans: app/api/ai/vision/route.ts:650-703 (+ join'i 753. satır).
+ * (Satır numaraları karşı-denetim 2026-07-31'de doğrulandı; eski 483-521/587
+ *  referansı kaymıştı ve replikanın güncelliğini kontrol etmeyi zorlaştırıyordu.)
  * Sıra KOPYALANIR, mantık ÇOĞALTILMAZ — yalnız ölçüm amaçlı.
  *
  * Route'ta bunun ARDINDAN gelen iki blok burada YOK, çünkü ikisi de zaten
@@ -119,6 +121,11 @@ function buildSystemPrompt(opts: PromptOpts): string {
   // Blok 0b — koçluk profili (universal.md). Route'ta static'ten hemen sonra;
   // replikada da aynı yerde olmalı, yoksa ölçüm gerçeği yansıtmaz.
   if (kb.blocks.profile) systemSections.push(kb.blocks.profile);
+  // Blok 0c — profilin 2. sayfası (universal-2.md). KARŞI-DENETİM 2026-07-31 (R11):
+  // B37 bölünmesinde route.ts:693 bu bloğu kazandı ama replika güncellenmemişti →
+  // ölçülen statik önek prod'dakinden ~4,5 KB KISA çıkıyor, cache-hit hedefi (A≥%90,
+  // D≥%64) yanlış paydayla değerlendiriliyordu. Route'taki sırayla geri eklendi.
+  if (kb.blocks.profile2) systemSections.push(kb.blocks.profile2);
   if (kb.blocks.agent) systemSections.push(kb.blocks.agent);
   const abilityHint = buildAgentAbilityHint(opts.agent, lang);
   if (abilityHint) systemSections.push(abilityHint);
@@ -219,7 +226,12 @@ const SCENARIOS: Scenario[] = [
    ══════════════════════════════════════════════════════════
    Bu sayılar bu script'in 2026-07-20 baseline koşusundan ALINDI (tahmin DEĞİL).
    Adım 1-3 uygulandıktan sonra script tekrar koşulur; DELTA sütunu farkı basar.
-   Bu bloğu adım 1-3 SONRASI GÜNCELLEME — karşılaştırma zemini olarak kalmalı. */
+   Bu bloğu adım 1-3 SONRASI GÜNCELLEME — karşılaştırma zemini olarak kalmalı.
+
+   KARŞI-DENETİM 2026-07-31 (R11) NOTU: profile2 (universal-2.md) replikaya geri
+   bağlandığı için hem "onek B" hem "toplam B" sütunları baseline'a göre ~4,5 KB
+   büyür. profile2 SABİT önek bölgesinde durduğundan bu ölçüm-düzeltmesi oranları
+   düşürmez; delta okurken bayt farkını içerik büyümesiyle karıştırma. */
 const BASELINE_FIRST_BREAK = 27_917; // = SYSTEM_PROMPT+ayraç 19.288 + policy-içi confidence 8.629
 const BASELINE: Record<string, { prefixB: number; prefixPct: number }> = {
   A: { prefixB: 83_129, prefixPct: 81.5 },
@@ -239,7 +251,7 @@ const TARGET: Record<string, number> = { A: 90, D: 64 };
 const label = process.argv[2] ?? "run";
 
 console.log(`\n[measure-prompt-prefix] etiket=${label} tarih=${new Date().toISOString()}`);
-console.log(`Olculen: vision system prompt (SYSTEM_PROMPT + policy + static + agent + abilityHint + map + contextual)`);
+console.log(`Olculen: vision system prompt (SYSTEM_PROMPT + policy + static + profile + profile2 + agent + abilityHint + map + contextual)`);
 console.log(`Not: memory/patternContext bloklari zaten onekten SONRA — oneki etkilemez.\n`);
 
 const rows: Array<Record<string, string | number>> = [];
