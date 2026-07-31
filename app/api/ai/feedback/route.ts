@@ -199,6 +199,10 @@ class FeedbackAIError extends Error {
 
 async function generateAIFeedback(
   body: FeedbackRequest,
+  // B110 (2026-07-31): userId artık parametre — saveAiUsage'a geçilip
+  // /admin/cost'ta maliyet kullanıcıya atfedilebilsin (eskiden "scope'ta yok"
+  // gerekçesiyle null yazılıyordu). Opsiyonel: eski çağrı şekli bozulmaz.
+  userId?: string,
 ): Promise<FeedbackResponse> {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
@@ -210,10 +214,16 @@ async function generateAIFeedback(
   const isTr = lang === "tr";
 
   // Load knowledge base for context-aware coaching
+  // B116 (2026-07-31): `side` geçilmiyordu → filterSectionsBySide devre dışı
+  // kalıyor, saldırı round'unun feedback'ine savunma stratejileri de giriyordu
+  // (hem token hem alaka kaybı). report/route.ts:840 ile aynı desen; setup.side
+  // zaten VALID_SIDES ile doğrulanmış durumda. NOT: bu yol şu an 410 nedeniyle
+  // ulaşılamaz (B32) — düzeltme, route canlandırılırsa doğru olsun diye kaldı.
   const knowledgeContext = loadKnowledge("feedback", {
     map: setup.map,
     agent: setup.agent,
     enemyAgents: setup.enemyComp?.filter((a: string) => a && a !== "Unknown"),
+    side: setup.side, // side-aware KB: karşı-taraf map/agent bölümlerini düşürür
   });
 
   // Determine confidence level from round data
@@ -498,8 +508,8 @@ ${patternContext}`;
     if (usage) {
       const cached = usage.prompt_tokens_details?.cached_tokens ?? 0;
       console.log(`[Aimlo AI tokens] feedback in=${usage.prompt_tokens ?? 0} cached=${cached} out=${usage.completion_tokens ?? 0}`);
-      // userId isn't in this helper's scope (text-only, cheap call) — track by route.
-      saveAiUsage({ userId: null, routeType: "feedback", model: data?.model ?? "gpt-5-mini", promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, cachedTokens: cached });
+      // B110 (2026-07-31): userId:null → parametreden gelen gerçek kullanıcı.
+      saveAiUsage({ userId, routeType: "feedback", model: data?.model ?? "gpt-5-mini", promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, cachedTokens: cached });
     }
     const text: string = data?.choices?.[0]?.message?.content || "";
 
@@ -619,6 +629,44 @@ Sadece düzeltilmiş metni döndür.`;
    ROUTE HANDLER
    ══════════════════════════════════════════════════════════ */
 export async function POST(request: NextRequest) {
+  /* ── B32 (2026-07-31): BU UÇ NOKTA KULLANIM DIŞI — 410 Gone ──────────────
+   * KANIT (denetimde doğrulandı, tekrar teyit edildi):
+   *   - Desktop yalnız 3 uca gidiyor: ai_client.rs:21 (ai/vision), :23
+   *     (ai/match-report), src/ai/insightService.ts:26 (ai/insight).
+   *   - Web istemcisi yalnız /api/ai/report'a gidiyor (app/page.tsx:3117).
+   *   - Backend genelinde "ai/feedback" araması: yalnız bu dosya + dokümanlar.
+   * Yani SIFIR istemcisi olan bu route, günlük kotanın EN BÜYÜĞÜNE sahipti
+   * (lib/api-auth.ts:39 → feedback: 200) ve her çağrıda ~60K token'lık KB
+   * yüklüyordu → sızan bir JWT ile ~$3.2/gün saf istismar yüzeyi.
+   *
+   * NEDEN SİLMİYORUZ: eski/geri kalmış bir desktop sürümü buraya POST'larsa
+   * 404 HTML yerine ÖNGÖRÜLEBİLİR, YAPISAL bir hata görsün. Gövde bilinçli
+   * olarak {error, message} — uydurma koç metni ASLA döndürülmez (CLAUDE.md
+   * "NO fake AI output"). 410 = "kalıcı olarak kaldırıldı", 404'ten daha
+   * dürüst bir sinyal.
+   *
+   * Aşağıdaki üretim kodu bilinçli olarak yerinde bırakıldı (canlandırmak
+   * gerekirse bu bayrak false yapılır); ulaşılamaz durumda ama bakımı sürüyor.
+   *
+   * ⚠ BAYRAK NEDEN `: boolean` TİPLİ (2026-07-31, doğrulama turu): koşulsuz bir
+   * `return` koyunca TypeScript altındaki tüm gövdeyi "ulaşılamaz" sayıyor ve
+   * ULAŞILAMAZ KODDA TİP DARALTMASI YAPMIYOR → `auth.ok` / `validation.valid`
+   * ayrımları çöküp 15 derleme hatası veriyordu. Açık `boolean` tipi literal
+   * daraltmasını engelliyor: gövde derleyici için "ulaşılabilir" kalıyor,
+   * çalışma zamanında ise her istek 410 alıyor. Davranış aynı, derleme temiz.
+   */
+  const ROUTE_RETIRED: boolean = true;
+  if (ROUTE_RETIRED) {
+    return NextResponse.json(
+      {
+        error: "route_gone",
+        message:
+          "Bu uç nokta kaldırıldı. Round geri bildirimi artık /api/ai/vision üzerinden veriliyor.",
+      },
+      { status: 410 },
+    );
+  }
+
   try {
     // Reject oversized payloads (max 100KB)
     const contentLength = request.headers.get("content-length");
@@ -654,7 +702,8 @@ export async function POST(request: NextRequest) {
 
     let feedback: FeedbackResponse;
     try {
-      feedback = await generateAIFeedback(validation.data);
+      // B110 (2026-07-31): userId artık aşağıya geçiyor (ai_usage atfı).
+      feedback = await generateAIFeedback(validation.data, userId);
     } catch (err) {
       if (err instanceof FeedbackAIError) {
         return NextResponse.json(

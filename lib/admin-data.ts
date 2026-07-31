@@ -335,17 +335,137 @@ export type CostData = {
   total: number;
   today: number;
   week: number;
+  truncated: boolean; // tavan aşıldı → total/token rakamları EKSİK (B103)
+  rowLimit: number;
   byRoute: { route: string; calls: number; cost: number }[];
   daily: { date: string; cost: number; calls: number }[];
   tokens: { input: number; output: number; cached: number };
 };
 
+// Ham-satır tavanı (B103, 2026-07-31) — artık YALNIZ fallback yolunda geçerli.
+// İki somut zarar burada kapatılmıştı ve fallback'te korunuyor:
+//   (1) Sorgu SIRASIZ'dı: tavan aşıldığında Postgres hangi satırları döndüreceğini
+//       garanti etmez, yani "bugün/bu hafta" rastgele eksilebilirdi. created_at DESC
+//       (ai_usage_created_idx ile indeksli) → tavan aşılsa bile EN YENİ satırlar gelir.
+//   (2) Tavana dayanmak SESSİZDİ: `truncated` bayrağı /cost sayfasında görünür
+//       uyarıya bağlandı — toplam artık sessizce yanlış gösterilmiyor.
+const COST_ROW_LIMIT = 100_000;
+
+// supabase/0016_ai_usage_rollup.sql → public.ai_usage_daily_totals(p_since)
+// çıktısının BİREBİR şekli. Fiyat DB'de hesaplanmaz: `model` grup anahtarında
+// olduğu için USD'yi burada, okuma anında lib/openai-pricing.ts hesaplar
+// (fiyat değişince tüm geçmiş backfill'siz yeniden fiyatlanır).
+type UsageRollupRow = {
+  day: string; // "YYYY-MM-DD" (UTC) — JS tarafındaki gün anahtarıyla aynı
+  route_type: string;
+  model: string | null;
+  calls: number;
+  prompt_tokens: number;
+  completion_tokens: number;
+  cached_tokens: number;
+};
+
+/** int8 kolonları PostgREST'ten string gelebilir — güvenli sayıya çevir. */
+function num(v: unknown): number {
+  const n = typeof v === "number" ? v : Number(v);
+  return Number.isFinite(n) ? n : 0;
+}
+
+/** Son 14 günün serisi (gün anahtarı "YYYY-MM-DD", UTC). Ham ve RPC yolları ortak. */
+function buildDailySeries(
+  dailyMap: Map<string, { cost: number; calls: number }>,
+): { date: string; cost: number; calls: number }[] {
+  const daily: { date: string; cost: number; calls: number }[] = [];
+  for (let i = 13; i >= 0; i--) {
+    const day = startOfDayUtc(i).toISOString().slice(0, 10);
+    const d = dailyMap.get(day) ?? { cost: 0, calls: 0 };
+    daily.push({ date: day.slice(5), cost: Number(d.cost.toFixed(4)), calls: d.calls });
+  }
+  return daily;
+}
+
+/**
+ * B103 (2026-07-31) — /cost artık ÖNCE SQL-tarafı rollup'ı okur.
+ * NEDEN: eski yol `ai_usage`'dan 100.000 HAM satır çekip toplamı Node'da
+ * hesaplıyordu; sayfa force-dynamic olduğu için her görüntüleme tüm geçmişi
+ * fonksiyona taşıyordu (büyümeyle lineer yavaşlama) ve tavan aşılınca TOPLAM
+ * sessizce eksik kalıyordu = yanlış maliyet raporu. Rollup satır sayısı
+ * gün × route × model ile sınırlı (yılda ~1.500), büyümeden bağımsız.
+ *
+ * RPC prod'a HENÜZ uygulanmamış olabilir (migration'ı softi elle çalıştıracak)
+ * → hata durumunda eski ham-sorgu yoluna düşülür ve tek satır uyarı loglanır;
+ * panel migration öncesi de aynen çalışmaya devam eder.
+ */
 export async function getCostData(): Promise<CostData> {
   const svc = createServiceSupabase();
+
+  const { data: rollup, error: rollupError } = await svc.rpc("ai_usage_daily_totals", {
+    p_since: null, // tüm geçmiş: panel "TOPLAM" kartını gösteriyor
+  });
+
+  if (!rollupError && Array.isArray(rollup)) {
+    return aggregateRollup(rollup as UsageRollupRow[]);
+  }
+
+  console.warn(
+    `[admin-data] ai_usage_daily_totals RPC yok/başarısız (${rollupError?.message ?? "beklenmeyen yanıt"}) — ham ai_usage taramasına düşülüyor (B103; supabase/0016_ai_usage_rollup.sql uygulanmalı)`,
+  );
+  return getCostDataRaw(svc);
+}
+
+/** RPC yolu: gün×route×model toplamlarını panelin beklediği şekle indirger. */
+function aggregateRollup(rows: UsageRollupRow[]): CostData {
+  // Gün anahtarı karşılaştırması: ISO "YYYY-MM-DD" sözlük sırası = kronolojik
+  // sıra. Ham yoldaki `t >= startOfDayUtc(n)` eşikleri zaten UTC gün sınırı
+  // olduğu için sonuç birebir aynı.
+  const todayKey = startOfDayUtc(0).toISOString().slice(0, 10);
+  const weekKey = startOfDayUtc(7).toISOString().slice(0, 10);
+
+  let calls = 0, total = 0, today = 0, week = 0;
+  let tIn = 0, tOut = 0, tCached = 0;
+  const byRoute = new Map<string, { calls: number; cost: number }>();
+  const dailyMap = new Map<string, { cost: number; calls: number }>();
+
+  for (const row of rows) {
+    const promptTokens = num(row.prompt_tokens);
+    const completionTokens = num(row.completion_tokens);
+    const cachedTokens = num(row.cached_tokens);
+    const rowCalls = num(row.calls);
+    // computeCost token'da lineer ve `model` grup anahtarında → grup başına
+    // hesaplamak, satır satır hesaplayıp toplamakla aynı sonucu verir.
+    const c = computeCost({ promptTokens, completionTokens, cachedTokens }, row.model);
+    const day = String(row.day).slice(0, 10);
+
+    calls += rowCalls;
+    total += c;
+    if (day >= todayKey) today += c;
+    if (day >= weekKey) week += c;
+    tIn += promptTokens; tOut += completionTokens; tCached += cachedTokens;
+
+    const r = byRoute.get(row.route_type) ?? { calls: 0, cost: 0 };
+    r.calls += rowCalls; r.cost += c; byRoute.set(row.route_type, r);
+    const d = dailyMap.get(day) ?? { cost: 0, calls: 0 };
+    d.cost += c; d.calls += rowCalls; dailyMap.set(day, d);
+  }
+
+  return {
+    rows: calls, // "çağrı" sayısı — rollup'ta tavan yok, gerçek toplam
+    total, today, week,
+    truncated: false, // SQL tarafında toplanıyor: eksik-toplam riski yok
+    rowLimit: COST_ROW_LIMIT,
+    byRoute: [...byRoute.entries()].map(([route, v]) => ({ route, ...v })).sort((a, b) => b.cost - a.cost),
+    daily: buildDailySeries(dailyMap),
+    tokens: { input: tIn, output: tOut, cached: tCached },
+  };
+}
+
+/** Fallback: RPC uygulanmadan önceki ham-satır yolu (davranışı değişmedi). */
+async function getCostDataRaw(svc: SupabaseClient): Promise<CostData> {
   const { data } = await svc
     .from("ai_usage")
     .select("route_type, model, prompt_tokens, completion_tokens, cached_tokens, created_at")
-    .limit(100000);
+    .order("created_at", { ascending: false })
+    .limit(COST_ROW_LIMIT);
 
   const usage = (data ?? []) as {
     route_type: string;
@@ -380,18 +500,13 @@ export async function getCostData(): Promise<CostData> {
     d.cost += c; d.calls++; dailyMap.set(day, d);
   }
 
-  const daily: { date: string; cost: number; calls: number }[] = [];
-  for (let i = 13; i >= 0; i--) {
-    const day = startOfDayUtc(i).toISOString().slice(0, 10);
-    const d = dailyMap.get(day) ?? { cost: 0, calls: 0 };
-    daily.push({ date: day.slice(5), cost: Number(d.cost.toFixed(4)), calls: d.calls });
-  }
-
   return {
     rows: usage.length,
     total, today, week,
+    truncated: usage.length >= COST_ROW_LIMIT,
+    rowLimit: COST_ROW_LIMIT,
     byRoute: [...byRoute.entries()].map(([route, v]) => ({ route, ...v })).sort((a, b) => b.cost - a.cost),
-    daily,
+    daily: buildDailySeries(dailyMap), // aynı 14-günlük seri (B103'te ortak yardımcıya taşındı)
     tokens: { input: tIn, output: tOut, cached: tCached },
   };
 }

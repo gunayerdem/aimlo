@@ -31,7 +31,8 @@ export default async function AdminLivePage() {
       ) : (
         <>
           <div className="adm-grid cols-3">
-            <div className="adm-card"><p className="adm-stat-label">ŞU AN ONLINE</p><div className="adm-stat-num iris">{live.onlineNow}</div><p className="adm-stat-sub">son 3 dk'da aktif</p></div>
+            {/* etiket 3 dk → 10 dk (B128, 2026-07-31): pencere admin-analytics'te genişletildi */}
+            <div className="adm-card"><p className="adm-stat-label">ŞU AN ONLINE</p><div className="adm-stat-num iris">{live.onlineNow}</div><p className="adm-stat-sub">son 10 dk&apos;da ölüm/round kaydı</p></div>
             <div className="adm-card"><p className="adm-stat-label">AKTİF MAÇ</p><div className="adm-stat-num">{live.activeMatches}</div></div>
             <div className="adm-card"><p className="adm-stat-label">SON OLAYLAR</p><div className="adm-stat-num">{live.events.length}</div><p className="adm-stat-sub">son ölüm/round kayıtları</p></div>
           </div>

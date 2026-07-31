@@ -35,7 +35,24 @@ export default async function AdminGrowthPage() {
         <div className="adm-card"><p className="adm-stat-label">KAYITLI</p><div className="adm-stat-num iris">{g.registered}</div></div>
         <div className="adm-card"><p className="adm-stat-label">EMAIL ONAYLI</p><div className="adm-stat-num">{g.confirmed}</div><p className="adm-stat-sub">{pct(g.confirmed, g.registered)}</p></div>
         <div className="adm-card"><p className="adm-stat-label">AKTİF (≥1 MAÇ)</p><div className="adm-stat-num">{g.activated}</div><p className="adm-stat-sub">{pct(g.activated, g.registered)} aktivasyon</p></div>
-        <div className="adm-card"><p className="adm-stat-label">GERİ DÖNEN</p><div className="adm-stat-num">{g.returning}</div><p className="adm-stat-sub">≥2 farklı günde oynadı</p></div>
+        <div className="adm-card"><p className="adm-stat-label">GERİ DÖNEN</p><div className="adm-stat-num">{g.returning}</div><p className="adm-stat-sub">≥2 farklı günde oynadı (kümülatif)</p></div>
+      </div>
+
+      {/* D1/D7 kohort kartı (B52, 2026-07-31): "GERİ DÖNEN" kümülatif ve kohortsuz
+          olduğu için zamanla otomatik şişiyor; launch kararının metriği D1'dir.
+          D0 = kullanıcının ilk maç günü; payda yalnız penceresi TAM geçmiş
+          kullanıcılar (devam eden gün sayılmaz). */}
+      <div className="adm-grid cols-2" style={{ marginTop: 14 }}>
+        <div className="adm-card">
+          <p className="adm-stat-label">D1 RETENTION</p>
+          <div className="adm-stat-num iris">{g.d1.rate != null ? `${g.d1.rate}%` : "—"}</div>
+          <p className="adm-stat-sub">ilk maçın ertesi günü dönen: {g.d1.returned}/{g.d1.eligible} kullanıcı</p>
+        </div>
+        <div className="adm-card">
+          <p className="adm-stat-label">D7 RETENTION</p>
+          <div className="adm-stat-num">{g.d7.rate != null ? `${g.d7.rate}%` : "—"}</div>
+          <p className="adm-stat-sub">ilk 7 gün içinde dönen: {g.d7.returned}/{g.d7.eligible} kullanıcı</p>
+        </div>
       </div>
 
       <div className="adm-grid cols-2" style={{ marginTop: 14 }}>

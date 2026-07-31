@@ -88,11 +88,17 @@ export async function getLiveActivity(): Promise<LiveActivity> {
     }
   }
 
-  const threeMinAgo = Date.now() - 3 * 60000;
+  // Online penceresi 3 dk → 10 dk (B128, 2026-07-31): match_events YALNIZ ölümde
+  // ve maç sonunda yazılıyor (0008_match_events.sql: "one row per vision call"),
+  // yani 3 dk ölmeyen ya da round arası bekleyen oyuncu offline görünüyordu —
+  // sayı sistematik olarak DÜŞÜK. 10 dk bir round + ölümsüz seriyi kapsar.
+  // Doğru çözüm watch_started/heartbeat telemetry event'i (B5/B15 ile birlikte).
+  const ONLINE_WINDOW_MS = 10 * 60000;
+  const onlineSince = Date.now() - ONLINE_WINDOW_MS;
   const onlineSet = new Set<string>();
   const matchSet = new Set<string>();
   for (const r of rows) {
-    if (new Date(r.created_at).getTime() >= threeMinAgo) {
+    if (new Date(r.created_at).getTime() >= onlineSince) {
       if (r.user_id) onlineSet.add(r.user_id);
       if (r.match_id) matchSet.add(r.match_id);
     }
@@ -120,12 +126,26 @@ export async function getLiveActivity(): Promise<LiveActivity> {
 
 // ── 2) GROWTH / RETENTION / FUNNEL ───────────────────────────────────────────
 
+// Kohort retention (B52, 2026-07-31). `returning` (>=2 farklı gün) kümülatif ve
+// kohortsuz olduğu için haftalar geçtikçe otomatik şişiyor ve kohortlar
+// karşılaştırılamıyordu — launch'ın en kritik kararı olan "ertesi gün geri
+// dönüyor mu?" sorusunu cevaplamıyor. D0 = kullanıcının İLK maç günü.
+// eligible = pencerenin TAMAMI geçmiş olan kullanıcı sayısı (devam eden gün
+// sayılmaz, yoksa oran yapay olarak düşer); returned = o pencerede maçı olan.
+export type CohortRetention = {
+  eligible: number;
+  returned: number;
+  rate: number | null; // yüzde (0-100); eligible=0 iken null
+};
+
 export type GrowthData = {
   registered: number;
   confirmed: number;
   activated: number; // >=1 match
   engaged: number; // >=5 matches
   returning: number; // matches on >=2 distinct days
+  d1: CohortRetention; // ilk maçın ERTESİ günü (D0+1) maçı olanlar
+  d7: CohortRetention; // D0+1..D0+7 penceresinde maçı olanlar
   signupTrend: { date: string; signups: number }[];
 };
 
@@ -151,6 +171,34 @@ export async function getGrowth(): Promise<GrowthData> {
     if (v.days.size >= 2) returning++;
   }
 
+  // D1/D7 kohort hesabı (B52, 2026-07-31) — veri zaten elde, yalnız hesap eksikti.
+  const DAY_MS = 86_400_000;
+  const todayStartMs = startOfDayUtc(0).getTime();
+  const dayKey = (ms: number) => new Date(ms).toISOString().slice(0, 10);
+  let d1Eligible = 0, d1Returned = 0, d7Eligible = 0, d7Returned = 0;
+  for (const v of matchesByUser.values()) {
+    let d0Ms = Number.POSITIVE_INFINITY;
+    for (const day of v.days) {
+      const ms = Date.parse(`${day}T00:00:00.000Z`);
+      if (Number.isFinite(ms) && ms < d0Ms) d0Ms = ms;
+    }
+    if (!Number.isFinite(d0Ms)) continue;
+
+    // D1: yalnız D0+1 günü tamamen geçmişse say.
+    if (d0Ms + DAY_MS < todayStartMs) {
+      d1Eligible++;
+      if (v.days.has(dayKey(d0Ms + DAY_MS))) d1Returned++;
+    }
+    // D7: D0+1..D0+7 penceresinin tamamı geçmişse say; pencerede TEK maç yeter.
+    if (d0Ms + 7 * DAY_MS < todayStartMs) {
+      d7Eligible++;
+      for (let k = 1; k <= 7; k++) {
+        if (v.days.has(dayKey(d0Ms + k * DAY_MS))) { d7Returned++; break; }
+      }
+    }
+  }
+  const rate = (ret: number, el: number) => (el > 0 ? Math.round((ret / el) * 100) : null);
+
   const trend: { date: string; signups: number }[] = [];
   for (let i = 13; i >= 0; i--) {
     const dayStart = startOfDayUtc(i).getTime();
@@ -169,6 +217,8 @@ export async function getGrowth(): Promise<GrowthData> {
     activated,
     engaged,
     returning,
+    d1: { eligible: d1Eligible, returned: d1Returned, rate: rate(d1Returned, d1Eligible) },
+    d7: { eligible: d7Eligible, returned: d7Returned, rate: rate(d7Returned, d7Eligible) },
     signupTrend: trend,
   };
 }

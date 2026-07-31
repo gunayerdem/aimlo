@@ -17,9 +17,17 @@ function asNum(v: unknown): number | null {
 
 export default async function AdminUserDetailPage({ params }: { params: Promise<{ userId: string }> }) {
   const { userId } = await params;
-  const [detail, admin] = await Promise.all([getUserDetail(userId), getAdminUser()]);
+  // Yetki ÖNCE, veri SONRA (B109, 2026-07-31): Promise.all servis-rol PII
+  // çekimini (getUserDetail → email + maçlar + player_memory) admin kontrolüyle
+  // PARALEL başlatıyordu. Layout notFound() attığında çıktı atılıyor, yani veri
+  // sızmıyordu; ama yetkisiz istek yine de servis-rol sorgularını koşturuyor
+  // (zaman/kaynak yan-kanalı) ve "yetkilendirme veri erişiminden önce gelir"
+  // ilkesi ihlal ediliyordu. Sıralı hale getirildi.
+  const admin = await getAdminUser();
+  if (!admin) notFound();
+  const detail = await getUserDetail(userId);
   if (!detail) notFound();
-  if (admin) void logAdminAudit(admin.id, "view_user_detail", userId);
+  void logAdminAudit(admin.id, "view_user_detail", userId);
 
   const mem = detail.memory ?? {};
   const totalMatches = asNum(mem.totalMatches);

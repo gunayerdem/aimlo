@@ -2,11 +2,12 @@
  * KANONİK MALİYET TAVANI ÖLÇÜMÜ — "bir kullanıcı en kötü günde kaç dolar yakar?"
  *
  * NEDEN VAR (denetim 2026-07-31): aynı soruya kod içinde iki farklı cevap vardı.
- * `lib/api-auth.ts:41` yorumu "~$0.20/gün üst sınır/kullanıcı" diyor; ölçüm ise
- * bunun katlarını çıkarıyor. İki sebep: (a) yorum YALNIZ vision'ı sayıyor,
- * feedback/report/insight günlük kotalarını hiç toplamıyor; (b) yorum yazıldığından
- * beri sistem promptu ve KB büyüdü. Kota/fiyatlama kararları bu yüzden yanlış
- * rakamla veriliyordu — bu script tek doğru kaynağı üretir.
+ * `lib/api-auth.ts` yorumu "~$0.20/gün üst sınır/kullanıcı" DİYORDU; ölçüm ise
+ * bunun katlarını çıkardı. İki sebep: (a) yorum YALNIZ vision'ı sayıyordu,
+ * feedback/report/insight günlük kotalarını hiç toplamıyordu; (b) yorum yazıldığından
+ * beri sistem promptu ve KB büyümüştü. Kota/fiyatlama kararları bu yüzden yanlış
+ * rakamla veriliyordu — bu script tek doğru kaynağı üretir. O yorum ölçülmüş
+ * tabloyla değiştirildi (lib/api-auth.ts, "MALİYET TAVANI — ÖLÇÜLDÜ" bloğu).
  *
  * Elle yazılmış maliyet sabiti YOK: KB yükü gerçek loader'dan ölçülür, fiyat
  * lib/openai-pricing.ts'ten okunur. Yalnız günlük kotalar api-auth.ts'ten elle
@@ -23,7 +24,12 @@ const P = PRICING["gpt-5-mini"];
  * lib/api-auth.ts DAILY_QUOTA ile AYNI olmalı. DAILY_QUOTA export edilmediği için
  * burada tekrarlanıyor — api-auth.ts'te kota değiştirirsen burayı da güncelle.
  */
-const DAILY_QUOTA = { vision: 100, feedback: 200, report: 30, insight: 60 } as const;
+// B29 + B32 (2026-07-31): ayna `feedback: 200` idi ve bayattı → script en-kötü-gün toplamını
+// ~$3 fazla (yani YANLIŞ) raporluyordu. Bugünkü gerçek: lib/api-auth.ts DAILY_QUOTA'da feedback
+// anahtarı HİÇ YOK — route 410 Gone (ROUTE_RETIRED), yani günlük AI maliyeti SIFIR.
+// Satırı 0 kotayla tutuyoruz ki KB yükü + "canlandırılırsa $/çağrı ne olur" görünür kalsın;
+// toplama katkısı yok. Route geri açılırsa buraya da kotayı geri yaz.
+const DAILY_QUOTA = { vision: 100, feedback: 0, report: 30, insight: 60 } as const;
 
 /** Gerçekçi en-kötü girdi: bilinen harita/ajan + 5 düşmanlı tam kadro. */
 const CTX = {
@@ -75,13 +81,18 @@ function main() {
       `  ${task.padEnd(9)} ${(bytes / 1024).toFixed(0).padStart(4)}KB ≈ ${String(tok(bytes)).padStart(6)} tok` +
         ` · cache %${String(Math.round(CACHE[task] * 100)).padStart(2)}` +
         ` · $${per.toFixed(5)}/çağrı × ${String(DAILY_QUOTA[task]).padStart(3)}/gün` +
-        ` = $${day.toFixed(2)}/gün`,
+        ` = $${day.toFixed(2)}/gün` +
+        // B32 (2026-07-31): kotası 0 olan route retired demek — "$0.00/gün" satırını
+        // "bu route bedava" diye okumayı engelle.
+        (DAILY_QUOTA[task] === 0 ? "   ← route 410 Gone, kota yok (referans $/çağrı)" : ""),
     );
   }
 
   console.log(`\n  EN-KÖTÜ GÜN / KULLANICI: $${total.toFixed(2)}   ·   30 günde $${(total * 30).toFixed(0)}`);
   console.log(`  AIMLO+ fiyatı $9.99/ay → kotasız tek kullanıcı fiyatın ${((total * 30) / 9.99).toFixed(1)}× katını yakabilir.`);
-  console.log(`  api-auth.ts:41 yorumu ("~$0.20/gün") ${(total / 0.2).toFixed(0)}× DÜŞÜK — yalnız vision'ı sayıyor.\n`);
+  // B29 (2026-07-31): eski satır "api-auth.ts:41 yorumu (~$0.20/gün) N× DÜŞÜK" diye BASIYORDU.
+  // O yorum artık yok (ölçülmüş tabloyla değiştirildi) → iddia yalan olmuştu; yerine senkron uyarısı.
+  console.log(`  Kota değiştirdiysen: lib/api-auth.ts DAILY_QUOTA + üstündeki maliyet tablosu ile bu dosyayı senkronla.\n`);
 
   // Tipik (abuse olmayan) kullanım: günde 3 maç, maç başına ~12 ölüm + 1 rapor.
   const perMatch = callCost(sizes.vision, CACHE.vision, OUT.vision) * 12 + callCost(sizes.report, 0, OUT.report);

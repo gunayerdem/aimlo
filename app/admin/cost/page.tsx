@@ -21,6 +21,16 @@ export default async function AdminCostPage() {
         </div>
       ) : null}
 
+      {/* Tavan uyarısı (B103, 2026-07-31): getCostData ham satır çekip Node'da
+          topluyor; tavana dayanınca TOPLAM sessizce eksik kalırdı. Artık görünür. */}
+      {c.truncated ? (
+        <div className="adm-note" style={{ marginBottom: 18 }}>
+          <b>Toplam EKSİK gösteriliyor.</b> <code>ai_usage</code> okuması {c.rowLimit.toLocaleString("tr")} satır tavanına dayandı;
+          yalnız en yeni {c.rowLimit.toLocaleString("tr")} çağrı hesaba katıldı (bugün/bu hafta doğru, <b>toplam</b> düşük).
+          Kalıcı çözüm: agregasyonu SQL'e taşıyan RPC.
+        </div>
+      ) : null}
+
       <div className="adm-grid cols-4">
         <div className="adm-card"><p className="adm-stat-label">BUGÜN</p><div className="adm-stat-num iris">{formatUsd(c.today)}</div></div>
         <div className="adm-card"><p className="adm-stat-label">BU HAFTA</p><div className="adm-stat-num">{formatUsd(c.week)}</div></div>
