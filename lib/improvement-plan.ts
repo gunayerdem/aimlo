@@ -51,6 +51,31 @@ interface DetectedProblem {
 
 export function generateImprovementPlan(
   matches: MatchInput[],
+  /**
+   * ⚠ B59 (2026-07-31) — ÖLÜ PARAMETRE, BİLİNÇLİ İŞARETLENDİ.
+   * Bu argümanı ÜRETİMDE HİÇBİR ÇAĞIRAN geçmiyor:
+   *   · app/api/ai/report/route.ts   → generateImprovementPlan([{...}])
+   *   · app/api/ai/feedback/route.ts → generateImprovementPlan([{...}])
+   * Tek geçen yer lib/__tests__/systems.test.ts. Dolayısıyla aşağıdaki
+   * `improvements` / `ongoingIssues` (carry-over / "streak") dalı üretimde
+   * ASLA çalışmıyor ve iki alan da daima boş dizi dönüyor — zaten hiçbir
+   * istemci de okumuyor (grep: yalnız bu dosya).
+   *
+   * BAĞLAMAK İÇİN GEREKEN (bu dosyanın DIŞINDA, o yüzden burada yapılmadı):
+   *   1) planı kalıcılaştır — lib/player-memory.ts (updatePlayerMemory) veya
+   *      analyses satırına bir sütun (migration gerekir),
+   *   2) report route'ta loadPlayerMemory'den okuyup previousPlan olarak geçir,
+   *   3) desktop dashboard'a "haftanın hedefi + streak" kartı.
+   * Bunlar yapılana kadar parametre yalnız test yüzeyidir — SİLİNMEDİ ki
+   * bağlama işi başladığında sözleşme hazır olsun.
+   *
+   * EK GÖZLEM (aynı denetim, kanıt: :56 `if (matches.length < 2)`): iki çağıran
+   * da TEK elemanlı dizi verdiği için fonksiyon üretimde HER ZAMAN
+   * getDefaultPlan() dönüyor — problem tespiti (tekrar eden ölüm yeri, düşük
+   * hayatta kalma vb.) de fiilen ölü. report/route.ts'teki "IMPROVEMENT FOCUS"
+   * satırı bu yüzden daima sabit placeholder metnidir. Guard'ı değiştirmek
+   * lib/__tests__/systems.test.ts beklentilerini etkiler → ayrı iş.
+   */
   previousPlan?: ImprovementPlan | null
 ): ImprovementPlan {
   if (matches.length < 2) return getDefaultPlan();
@@ -211,6 +236,9 @@ export function generateImprovementPlan(
   }
 
   // Check improvements from previous plan
+  // B59 (2026-07-31): ÖLÜ DAL — previousPlan üretimde hiç geçilmediği için bu
+  // blok yalnız testlerde çalışır; iki dizi de üretimde daima boş döner.
+  // Gerekçe ve bağlama adımları için yukarıdaki previousPlan parametre yorumu.
   const improvements: string[] = [];
   const ongoingIssues: string[] = [];
 

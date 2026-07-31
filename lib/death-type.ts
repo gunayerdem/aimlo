@@ -32,6 +32,7 @@ export type DeathType =
   | "pistol-round"
   | "eco-force-loss"
   | "entry-no-trade"
+  | "entry-traded"               // denetim B85 (2026-07-31): trade'LENMİŞ ölüm — azarlanmaz
   | "post-plant-solo"
   | "retake-no-util"
   | "retake-advantage-thrown"   // KB wiring 2026-07-19: sayı avantajlı retake'i tek tek eritme
@@ -69,6 +70,10 @@ export const DEATH_TYPE_GUIDE: Record<DeathType, { kbBlock: string; angle: strin
   "pistol-round":        { kbBlock: "Erken Round Ölümleri", angle: "pistol round'da tüfek-round'u gibi düello aradın — tabanca mesafesinde oyna, util'le açı kapat, ilk ölümü sen olma", concept: "pistol-acilis" },
   "eco-force-loss":      { kbBlock: "Karar ve Ekonomi Ölümleri", angle: "zayıf ekonomide tam-alımmış gibi oynayıp silahı yaktın — düşman elini oku, yarım alımla bas ya da düşmanın yerini öğrenip sağ kal", concept: "ekonomi-karari" },
   "entry-no-trade":      { kbBlock: "Pozisyon ve Açı Ölümleri — Solo peek yerine geri-alım kurulumu", angle: "solo giriş yapıp space aldın ama ölümün geri-alınmadı — yanındaki arkadaş trade'e hazır beklerken, senkronlu gir", concept: "trade-yok" },
+  // TRADE'LENMİŞ ÖLÜM (denetim B85, 2026-07-31): ölüm trade'lendiyse çoğu zaman
+  // DOĞRU oyundur (space alıp trade bırakmak) — ders "hata yaptın" değil, "alınan
+  // alan kullanıldı mı" olmalı. kbBlock takım/alan bölümü (universal.md H2).
+  "entry-traded":        { kbBlock: "Takım Koordinasyonu ve Alan Kontrolü", angle: "ölümün takımın tarafından trade'lendi — space'i doğru ödedin; asıl soru alanın kullanılıp kullanılmadığı: girişin takımın basışıyla aynı anda mıydı, arkandan gelen hazır mıydı", concept: "trade-edilmis-space" },
   "post-plant-solo":     { kbBlock: "Post-Plant Ölümleri", angle: "spike kurulduktan sonra tek açı tuttun ve retake'i tek karşıladın — çapraz post-plant açısı kur, zamanı oyna, sen onlara gitme", concept: "post-plant-tek-aci" },
   "retake-no-util":      { kbBlock: "Retake Ölümleri", angle: "site'ı util'siz/dağınık geri almaya çalıştın — util'i defuse'u geciktirmeye harca ve birlikte sayı bas, tek tek girme", concept: "retake-dagintik" },
   "retake-advantage-thrown": { kbBlock: "Retake Ölümleri — Sayı avantajlı retake'i tek tek eritme", angle: "retake'te sayı avantajı sendeyken tek tek girip eridin — sayı sendeyken bile trade dizilimiyle aynı anda girin; bir kayıp avantajı eşitler, defuse penceresi daralır", concept: "retake-avantaj" },
@@ -104,7 +109,14 @@ export type DeathSignals = {
   // + çatışma-içi hasarı yakalar) — hp>=100 "tam can" kapısı da 50 can + 50
   // kalkanla kırpılmış oyuncuyu 100 gösteriyordu. Alan geriye-uyumluluk için
   // duruyor (eski çağıranlar geçmeye devam edebilir); hiçbir dal okumaz.
-  healthAtDeath?: number;   // 0-150 — ölü alan, yalnız back-compat
+  // ÖLÜ SİNYAL KABLOSU (denetim B114+B131, 2026-07-31): route.ts hâlâ
+  // hpSampleAgeSec ile bu alanı özenle stale-gate'leyip classifier'a geçiriyor,
+  // desktop da "backend stale-gate'ler" gerekçesiyle göndermeye devam ediyor —
+  // ama BURADA HİÇBİR DAL OKUMUYOR (canlı-test #8 BİLİNÇLİ kaldırma kararı).
+  // Pratik etki sıfır; tehlike şu: buraya yeni bir hp-bağımlı dal eklenirse
+  // "kesin veri yoksa CAN feedback'i YOK" kuralı sessizce delinir. Yeni dal
+  // EKLEME — CAN/HP iddiası prompt'ta da, çıktı süzgecinde de yasak.
+  healthAtDeath?: number;   // 0-150 — ölü alan, yalnız back-compat (tüketici YOK)
   alliesAlive?: number;     // 0-4
   enemiesAlive?: number;    // 0-5
   spikePlanted?: boolean;
@@ -240,6 +252,16 @@ export function classifyDeath(b: DeathSignals): DeathType {
   if (b.highStakes === true) return "overtime-matchpoint";                // overtime / match point
   if (b.lossStreak === true) return "loss-streak";                        // 3+ consecutive losses
   if (b.winStreak === true) return "win-streak-comfort";                  // 3+ consecutive wins
+  // ÇİFT-DİREKTİF ÇELİŞKİSİ FIX (denetim B85, 2026-07-31): tradedByAlly=true olan
+  // saldırı ölümü hiçbir spesifik dala düşmediğinde generic "info-less-push"e
+  // (= "tetikleyici beklemeden bastın") iniyordu — oysa AYNI user-mesajında
+  // vision-prompt "tradedByAlly=true: takımın seni TRADE ETTİ — bunu hata gibi
+  // yazma" direktifi var. Model iki zıt emirden birini seçiyor ve oyuncu doğru
+  // oynadığı round'da haksız azar yiyordu ("iyi ölüm" kavramı taksonomide yoktu).
+  // KASITLI OLARAK EN ALTTA: spesifik dallar (op/repeat/spike/eco/timing…) ve
+  // bağlam default'ları (highStakes/seri) ÖNCE denenir — trade sinyali yalnız
+  // generic azarlama default'unun yerini alır, çeşitliliği yutmaz.
+  if (atk && b.tradedByAlly === true) return "entry-traded";
   // Side-aware default: a defense death with no specific signal is a wide-angle
   // hold (NOT an attack "push") — info-less-push uses attack language ("bastın")
   // which is wrong on a defender (audit 2026-06-30, S10). Split by side.
@@ -263,6 +285,10 @@ export function buildDeathTypeDirective(
     .filter((p) => p !== type)
     .map((p) => DEATH_TYPE_GUIDE[p]?.concept)   // optional: ignore unknown types the client may send
     .filter((c): c is string => !!c);
+  // AZARLAMAYAN SARMALAYICI (denetim B85, 2026-07-31): trade'lenmiş ölümde ders
+  // "hata yaptın" değil "alınan alanın bedeli doğru muydu" olmalı — direktif bunu
+  // AÇIKÇA söyler ki prompt'un trade kuralıyla çelişmesin.
+  const tradedNote = type === "entry-traded";
   if (lang === "en") {
     const banLineEn = bannedConcepts.length
       ? `\nEARLIER ROUNDS THIS MATCH ALREADY COVERED: ${bannedConcepts.join(", ")}. Do NOT repeat those angles (or synonyms) — this round has a different death-type, coach a different concept.`
@@ -272,6 +298,9 @@ export function buildDeathTypeDirective(
       `This death's type: ${type}. The KB section in the system prompt for this type is titled "${g.kbBlock}" (the KB is in Turkish).\n` +
       `Base deathAnalysis on THAT section's lesson — but do NOT copy its sentence; restate the lesson in ENGLISH, tied to this round's concrete details (callout + agent + weapon).\n` +
       `Use the "caught in the open / don't push without utility" framing ONLY if this type really is a utility-absence type (info-less-push / entry-no-trade); otherwise give THIS type's own lesson.` +
+      (tradedNote
+        ? `\nThis death WAS traded by a teammate — do NOT frame it as a mistake and do NOT scold. Coach the follow-up instead: was the space you bought actually used, was your entry synced with the team's push?`
+        : "") +
       banLineEn
     );
   }
@@ -288,6 +317,9 @@ export function buildDeathTypeDirective(
     `deathAnalysis'i O KB bölümünün dersine dayandır — ama bölümün cümlesini KOPYALAMA. Bu round'un ` +
     `somut detayına (callout + ajan + silah) bağlayarak, KB'nin derinliğini KENDİ cümlenle ver.\n` +
     `"açıkta kaldın / utility'siz girme" kalıbını SADECE bu tip gerçekten util-yokluğu ise (info-less-push / entry-no-trade) kullan; değilse o tipin KENDİ dersini ver.` +
+    (tradedNote
+      ? `\nBu ölüm takımın tarafından TRADE EDİLDİ — hata gibi yazma, azarlama. Dersi devamına bağla: aldığın alan kullanıldı mı, girişin takımın basışıyla aynı anda mıydı?`
+      : "") +
     banLine
   );
 }

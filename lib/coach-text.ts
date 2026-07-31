@@ -12,6 +12,13 @@
 // refactor, behavior bit-for-bit identical for vision. plainifyAbilities +
 // fixTurkishApostrophe are imported from ability-plain-map (both exported there).
 import { plainifyAbilities, fixTurkishApostrophe } from "@/lib/ability-plain-map";
+// finalizeCoachText (denetim B82, 2026-07-31) — 4 route'un temizleyici zincirini
+// tek yerde toplayan yardımcı için. Döngüsel import YOK (agent-abilities hiçbir
+// şey import etmez). reality-checker BİLEREK import EDİLMEDİ: app/page.tsx bir
+// "use client" bileşeni ve bu dosyadan trLocative alıyor — 48 KB'lık
+// reality-checker'ı statik bağlamak landing bundle'ına girme riski taşır.
+// Onun yerine realityCheck halkası çağrı-yerinden ENJEKTE edilir (opts.check).
+import { enforceAgentKit } from "@/lib/agent-abilities";
 
 const TR_JARGON: [RegExp, string][] = [
   [/\bpredict edilebilir(sin)?\b/gi, "tahmin edilebilirsin"],
@@ -371,6 +378,82 @@ const TR_JARGON: [RegExp, string][] = [
   [/\s*—\s*/g, " — "],
 ];
 
+/**
+ * 2. ÇOĞUL → 2. TEKİL emir kipi neti (denetim B25, 2026-07-31).
+ *
+ * ai-policy OUTPUT_FOCUS_RULE_VISION "TEK KİŞİ — 2. TEKİL: sen→siz kayması YASAK
+ * ('temizleyin', 'girin', 'kurun', 'edin' YAZMA)" diyor ama bu ihlal için
+ * DETERMİNİSTİK net YOKTU — prompt katmanı delinince ihlal doğrudan kullanıcıya
+ * ulaşıyordu. (Kök neden ayrıca vision-prompt few-shot'larının çoğul örnekleriydi;
+ * onlar da B25'te tekile çevrildi — bu net ikinci savunma hattı.)
+ *
+ * KAPSAM DAR: yalnız politikanın adıyla saydığı ve few-shot'ların öğrettiği 4
+ * yüksek-frekanslı çekim. "edin" BİLEREK YOK — "edin-" (edinmek) fiiliyle
+ * çakışır. Türkçe-\b tuzağı: JS \b "ı/ç/ş" harflerinde kırılır → iki yanda da
+ * lookbehind/lookahead sınırı (dosya başındaki nota bak).
+ */
+const TR_PLURAL_IMPERATIVES: [RegExp, string][] = [
+  [/(?<![a-zçğıöşü])aç[ıi]l[ıi]n(?![a-zçğıöşü])/gi, "açıl"],
+  [/(?<![a-zçğıöşü])girin(?![a-zçğıöşü])/gi, "gir"],
+  [/(?<![a-zçğıöşü])kurun(?![a-zçğıöşü])/gi, "kur"],
+  [/(?<![a-zçğıöşü])temizleyin(?![a-zçğıöşü])/gi, "temizle"],
+];
+
+/** Cümle başındaki büyük harfi koruyarak çoğul emri tekile çevirir. */
+function singularizeTrImperatives(text: string): string {
+  let t = text;
+  for (const [re, rep] of TR_PLURAL_IMPERATIVES) {
+    t = t.replace(re, (m) => (/^[A-ZÇĞİÖŞÜ]/.test(m) ? rep.charAt(0).toUpperCase() + rep.slice(1) : rep));
+  }
+  return t;
+}
+
+/**
+ * EN HEDGE NETİ (denetim B84, 2026-07-31).
+ *
+ * TR tarafında hedge 3 katmanla engelleniyordu (BANNED_PHRASES + VERİ SEVİYESİ
+ * talimatı + yukarıdaki TR_JARGON hedge bloğu); EN tarafında yalnız şema
+ * description'ı vardı, yani "maybe they were watching mid" tarzı tahmin dili
+ * EN kullanıcıya ulaşabiliyordu. Koç KESİN konuşur: hedge ibaresi SİLİNİR,
+ * cümle korunur ("Maybe you peeked early" → "You peeked early").
+ * "likely" BİLEREK yok — "unlikely" yanlış-pozitifi üretirdi.
+ */
+const EN_HEDGE: [RegExp, string][] = [
+  [/\bit (?:seems|looks) (?:like|as if|that)\s+/gi, ""],
+  [/\bit (?:seems|looks)\s+/gi, ""],
+  [/\b(?:maybe|perhaps|probably|possibly)\s+/gi, ""],
+  [/\bi think\s+/gi, ""],
+  // 🔴 KALDIRILDI (karşı-denetim, 2026-07-31 gecesi) — buraya İKİ satır daha vardı:
+  //     [/\b(?:might|may|could) have been\b/gi, "was"]
+  //     [/\b(?:might|may|could) be\b/gi,        "is"]
+  // Modal fiili ÖZNEYE BAKMADAN "is"/"was" ile değiştiriyorlardı. Gerçek koşumla
+  // ölçüldü — bu ürünün EN SIK kurduğu cümlelerde bozuk İngilizce üretiyordu:
+  //     "You might be over-peeking B Main."   → "You is over-peeking B Main."
+  //     "They may be rotating."               → "They is rotating."
+  //     "Your teammates may have been trading you." → "...teammates was trading you."
+  // Özne-yüklem uyumu ("you/they/enemies/teammates") regexle güvenilir kurulamaz;
+  // dahası modal→kesinlik dönüşümü bir TAHMİNİ kanıtlanmış olguya çeviriyordu ki
+  // bu, uydurmayı önlemeye çalışan katmanın kendi kuralına aykırı.
+  // Hedge bastırma bu formlar için PROMPT katmanına bırakıldı (ai-policy).
+  // Kalan dört satır özneye dokunmadan SİLME yapar → dilbilgisi güvenli.
+];
+
+/**
+ * EN hedge ibarelerini siler; hedge düşen HER cümlenin başını yeniden büyütür.
+ * (karşı-denetim 2026-07-31: eskiden yalnız metnin EN BAŞINA bakılıyordu; ikinci
+ * cümle "Maybe you..." ile başlıyorsa "... . you peeked early" gibi küçük harfle
+ * kalıyordu. B97 ile 1-2 cümlelik çıktı teşvik edildiği için bu artık sık.)
+ * `t !== text` koşulu korunur: hedge yoksa modelin metnine HİÇ dokunulmaz.
+ */
+function stripEnHedges(text: string): string {
+  let t = text;
+  for (const [re, rep] of EN_HEDGE) t = t.replace(re, rep);
+  if (t !== text) {
+    t = t.replace(/(^|[.!?]\s+)([a-z])/g, (_m, p: string, c: string) => p + c.toUpperCase());
+  }
+  return t;
+}
+
 const CLEAN_AGENT_NAMES = ["Jett","Raze","Phoenix","Reyna","Yoru","Neon","Iso","Waylay","Sage","Killjoy","Cypher","Chamber","Deadlock","Vyse","Omen","Brimstone","Viper","Astra","Harbor","Clove","Sova","Breach","Skye","Fade","Gekko","Tejo","Veto"];
 // Silah adları — ajan adlarıyla aynı tutarlılık disiplini (dil denetimi 2026-07-25):
 // canlı çıktıda "vandal/Vandal", "sheriff/Sheriff", "operator/operatör" karışıyordu.
@@ -513,7 +596,14 @@ export function cleanCoachText(text: string, lang: "tr" | "en"): string {
   }
   if (lang === "tr") {
     for (const [re, rep] of TR_JARGON) t = t.replace(re, rep);
+    // 2. çoğul → 2. tekil (B25, 2026-07-31): TR_JARGON'dan SONRA — jargon
+    // dönüşümleri de çoğul çekim üretebiliyor ("swing yapın" → "swing atın").
+    t = singularizeTrImperatives(t);
     t = fixTurkishApostrophe(t);                     // duvar'i → duvarı (TR plain terms)
+  } else {
+    // EN hedge neti (B84, 2026-07-31): TR'deki 3 katmanlı hedge korumasının
+    // EN karşılığı — koç EN'de de KESİN konuşur.
+    t = stripEnHedges(t);
   }
   // Cycle 3b: collapse an accidental adjacent duplicate of the SAME long word
   // ("utility'siz utility'siz tutma" → "utility'siz tutma"). ≥5 chars only, so
@@ -538,6 +628,56 @@ export function clampWords(s: string, max: number): string {
   const lastSpace = cut.lastIndexOf(" ");
   const out = lastSpace > max * 0.6 ? cut.slice(0, lastSpace) : cut;
   return out.replace(/[\s,;:–-]+$/, "").trim();
+}
+
+/**
+ * TEK TEMİZLEYİCİ ZİNCİR (denetim B82, 2026-07-31).
+ *
+ * KÖK NEDEN: aynı çıktı guard'ları 4 route'ta 4 FARKLI derinlikte uygulanıyordu —
+ * vision tam zincir (realityCheck→cleanCoachText→enforceAgentKit→clampWords),
+ * report enforceAgentKit'siz, feedback yalnız cleanCoachText + ham `.slice(0,500)`
+ * (report'ta canlı kanıtla düzeltilen "kelime ortasından kesme" bug'ının kopyası),
+ * insight yalnız cleanCoachTextDeep. Eksik halkalar tam da geçmiş canlı bug'ların
+ * yamalarıydı. Bu yardımcı zinciri TEK YERDE sabitler; route'lar buna geçince
+ * drift sınıfı yapısal olarak ölür.
+ *
+ * SIRA vision route'un kanıtlanmış sırasıdır ve DEĞİŞTİRİLMEMELİDİR:
+ *   check (opsiyonel realityCheck) → cleanCoachText → boş-guard → enforceAgentKit → clampWords
+ * `check` verilmezse o halka atlanır (feedback/insight'ta round hafızası yok) ve
+ * davranış eskisiyle aynı kalır. realityCheck çağrı-yerinden ENJEKTE edilir —
+ * gerekçe yukarıdaki import notunda (client-bundle).
+ * SAHTE ÇIKTI YOK: hiçbir metin üretilmez, yalnız süzülür; süzgeç metni boşaltırsa
+ * `fallback` (ya da girdi) korunur.
+ *
+ * NOT (2026-07-31): route'lar HENÜZ bu fonksiyona geçirilmedi (dosya sahipliği) —
+ * geçiş app/api/ai/{vision,report,feedback,insight}/route.ts tarafında yapılacak.
+ * Örnek çağrı (vision):
+ *   finalizeCoachText(fb.deathAnalysis, { lang: reqLang, cap: 350, agent: reqAgent,
+ *     check: (t) => realityCheck(t, memoryForCheck, factGround, "death", reqLang, reqMap).text });
+ */
+export function finalizeCoachText(
+  text: string,
+  opts: {
+    lang: "tr" | "en";
+    /** clampWords üst sınırı (vision 350/180, report 500 vb.) */
+    cap: number;
+    /** oyuncunun ajanı — verilirse kit-dışı yetenek önerisi ayıklanır */
+    agent?: string | null;
+    /** realityCheck sarmalayıcısı; VERİLİRSE zincirin ilk halkası olarak çalışır */
+    check?: (text: string) => string;
+    /** süzgeç metni boşaltırsa dönülecek yedek (verilmezse girdi metni) */
+    fallback?: string;
+  },
+): string {
+  if (!text) return text;
+  const { lang, cap, agent, check } = opts;
+  const checked = check ? (check(text) || "") : text;
+  const base = checked && checked.trim() ? checked : (opts.fallback ?? text);
+  const cleaned = cleanCoachText(base, lang);
+  // Boş-guard: stripNumericHp/stripHpClaims silme formları metni TAMAMEN
+  // boşaltabilir (yalnız HP etiketi olan metin) — o zaman bir önceki hâli korunur.
+  const safe = cleaned && cleaned.trim() ? cleaned : base;
+  return clampWords(enforceAgentKit(safe, agent), cap);
 }
 
 /**

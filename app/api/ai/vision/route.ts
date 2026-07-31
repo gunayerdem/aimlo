@@ -8,9 +8,14 @@ import { loadVisionKnowledge } from "@/lib/knowledge-loader";
 import { sanitizePromptInput } from "@/lib/prompt-safety";
 import { loadPlayerMemory, buildMemoryContext } from "@/lib/player-memory";
 import { isUuidV4 } from "@/lib/uuid";
-import { buildPolicyBlock, CONFIDENCE_PROMPTS } from "@/lib/ai-policy";
+// confidencePrompt: B84 (2026-07-31) — dil-duyarlı seçici. Ham CONFIDENCE_PROMPTS
+// tablosu doğrudan okunduğunda EN istekte de Türkçe "VERİ SEVİYESİ" direktifi
+// gidiyordu; seçici lang="tr"/verilmemişse BİREBİR aynı metni döndürür (prompt-cache).
+import { buildPolicyBlock, confidencePrompt } from "@/lib/ai-policy";
 import { buildAgentAbilityHint, enforceAgentKit } from "@/lib/agent-abilities";
-import { cleanCoachText, clampWords, stripNumericHp } from "@/lib/coach-text";
+// stripHpClaims: B47 (2026-07-31) — patternContext GİRİŞ zinciri de çıkış
+// zinciriyle aynı sırayı uygular (stripNumericHp → stripHpClaims).
+import { cleanCoachText, clampWords, stripNumericHp, stripHpClaims } from "@/lib/coach-text";
 import { SYSTEM_PROMPT, SYSTEM_PROMPT_EN_ADDENDUM, USER_PROMPT, USER_PROMPT_EN, buildFactSheet, buildRoundFeedbackSchema } from "@/lib/vision-prompt";
 import { classifyDeath, buildDeathTypeDirective } from "@/lib/death-type";
 import { extractKillerWeapon, classifyCompArchetype, buildWeaponCompDirective } from "@/lib/comp-weapon";
@@ -141,63 +146,14 @@ type VisionRequest = {
   matchId?: string;
 };
 
-type PatternData = {
-  deathLocation?: string;
-  peekType?: string;
-  utilUsed?: boolean;
-  traded?: boolean;
-  deathTiming?: string;
-  enemyWeapon?: string;
-  mapControl?: string;
-  wasRepeatedMistake?: boolean;
-};
-
-const PEEK_TYPES = ["dry_peek", "util_peek", "jiggle", "wide_swing", "holding", "unknown"];
-const DEATH_TIMINGS = ["early", "mid", "late", "post_plant"];
-const MAP_CONTROLS = ["full_control", "partial_control", "no_control", "contested"];
-
-function sanitizePatternData(raw: unknown): PatternData | null {
-  if (!raw || typeof raw !== "object") return null;
-  const src = raw as Record<string, unknown>;
-  const safe: PatternData = {};
-  let hasField = false;
-
-  if (typeof src.deathLocation === "string" && src.deathLocation.length > 0) {
-    safe.deathLocation = src.deathLocation.toLowerCase().replace(/[^a-z0-9_]/g, "").slice(0, 30);
-    hasField = true;
-  }
-  if (typeof src.peekType === "string" && PEEK_TYPES.includes(src.peekType)) {
-    safe.peekType = src.peekType;
-    hasField = true;
-  }
-  if (typeof src.utilUsed === "boolean") {
-    safe.utilUsed = src.utilUsed;
-    hasField = true;
-  }
-  if (typeof src.traded === "boolean") {
-    safe.traded = src.traded;
-    hasField = true;
-  }
-  if (typeof src.deathTiming === "string" && DEATH_TIMINGS.includes(src.deathTiming)) {
-    safe.deathTiming = src.deathTiming;
-    hasField = true;
-  }
-  if (typeof src.enemyWeapon === "string" && src.enemyWeapon.length > 0) {
-    safe.enemyWeapon = src.enemyWeapon.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 20);
-    hasField = true;
-  }
-  if (typeof src.mapControl === "string" && MAP_CONTROLS.includes(src.mapControl)) {
-    safe.mapControl = src.mapControl;
-    hasField = true;
-  }
-  if (typeof src.wasRepeatedMistake === "boolean") {
-    safe.wasRepeatedMistake = src.wasRepeatedMistake;
-    hasField = true;
-  }
-
-  return hasField ? safe : null;
-}
-
+// B111 (2026-07-31): PatternData tipi + sanitizePatternData + PEEK_TYPES /
+// DEATH_TIMINGS / MAP_CONTROLS sabitleri SİLİNDİ — hiçbir yerden çağrılmıyorlardı
+// (grep: tek referans kendi tanımlarıydı). Yanıttaki `patternData: null` alanı
+// AYNEN duruyor: desktop onu deserialize ediyor (ai_client.rs:464-465), sözleşme
+// değişmedi. RoundFeedback'ten de yalnız HİÇ okunmayan opsiyonel alan tanımları
+// (killerAgent/killerWeapon/killfeedConfidence/deathPosition/positionConfidence/
+// positionSignals/patternData) kaldırıldı — bu tip modelin PARSE edilen çıktısını
+// tanımlar, HTTP yanıt gövdesini değil, dolayısıyla yanıt JSON'u etkilenmez.
 type RoundFeedback = {
   round: number;
   score: string;
@@ -208,13 +164,6 @@ type RoundFeedback = {
   nextRoundSuggestion: string;
   // coachInsight removed — purple "KOÇ İÇGÖRÜSÜ" block dropped from overlay design.
   // Pattern-aware insight now folds into deathAnalysis or nextRoundSuggestion when relevant.
-  killerAgent?: string | null;
-  killerWeapon?: string | null;
-  killfeedConfidence?: string;
-  deathPosition?: string | null;
-  positionConfidence?: string;
-  positionSignals?: number;
-  patternData?: unknown;
 };
 
 /* ══════════════════════════════════════════════════════════
@@ -279,6 +228,125 @@ function buildUserContent(
 const BASE64_REGEX = /^[A-Za-z0-9+/]+=*$/;
 const MAX_IMAGE_BYTES = 4_000_000; // 4MB decoded max (~5.3MB base64)
 
+/* ── B124 (2026-07-31): GÖRSEL BOYUT POLİTİKASI ───────────────────────────────
+ * Tek sınır MAX_IMAGE_BYTES'tı; PİKSEL boyutu hiç bakılmıyordu. İki sonuç:
+ *  (a) ölçülemezlik — 1080p gönderen bir istemci ölüm başına ~1000 token fazla
+ *      yakıyor (patch fiyatlaması, aşağıdaki nota bakın) ve bu /cost panelinde
+ *      görünmüyordu; artık her görsel için boyut+patch logu düşer.
+ *  (b) sağlamlık — küçük bir dosyada devasa başlık boyutu bildiren bozuk/kötücül
+ *      bir görsel (decompression-bomb kalıbı) doğrudan modele iletiliyordu.
+ * ÜST SINIR bilinçli olarak ÇOK yüksek (16384 px): en geniş üçlü-4K masaüstü
+ * yakalaması bile ~11520 px — yani gerçek hiçbir kullanıcıyı reddetmez, yalnız
+ * saçma başlıkları eler. Backend RESIZE YAPMAZ (istek gövdesi zaten kodlanmış):
+ * gerçek tasarruf desktop'ın ≤1280×720 göndermesiyle gelir, bu log onu ölçmek
+ * içindir. `died=false` yolunda görsel hiç gönderilmez, log da düşmez.
+ */
+const MAX_IMAGE_DIMENSION = 16_384;
+/** Patch bütçesi (GPT-5 ailesi): bunun üstü model tarafında ölçeklenir → boşa token. */
+const IMAGE_PATCH_BUDGET = 1536;
+/** Başlık okumak için yeterli base64 önek (4'ün katı; ≈6000 çözülmüş bayt). */
+const IMAGE_HEADER_B64_CHARS = 8000;
+
+const byteAt = (s: string, i: number): number => s.charCodeAt(i) & 0xff;
+
+/**
+ * Çözülmüş görsel baytlarından piksel boyutunu okur (PNG IHDR / JPEG SOF /
+ * WebP VP8·VP8L·VP8X). Okunamazsa null döner — ASLA throw etmez ve null
+ * hiçbir zaman reddetme sebebi değildir (bilinmeyen kodlayıcıyı kırmamak için).
+ */
+function readImageDimensions(bin: string): { w: number; h: number } | null {
+  if (bin.length < 24) return null;
+  // PNG: IHDR ilk chunk'tır — genişlik 16-19, yükseklik 20-23 (big-endian).
+  if (byteAt(bin, 0) === 0x89 && bin.slice(1, 4) === "PNG") {
+    if (bin.slice(12, 16) !== "IHDR") return null;
+    const w = (byteAt(bin, 16) << 24) | (byteAt(bin, 17) << 16) | (byteAt(bin, 18) << 8) | byteAt(bin, 19);
+    const h = (byteAt(bin, 20) << 24) | (byteAt(bin, 21) << 16) | (byteAt(bin, 22) << 8) | byteAt(bin, 23);
+    return w > 0 && h > 0 ? { w, h } : null;
+  }
+  // JPEG: SOF (Start Of Frame) işaretçisini tara — boyut orada durur.
+  if (byteAt(bin, 0) === 0xff && byteAt(bin, 1) === 0xd8) {
+    let i = 2;
+    while (i + 9 < bin.length) {
+      if (byteAt(bin, i) !== 0xff) { i++; continue; }
+      const marker = byteAt(bin, i + 1);
+      if (marker === 0xff) { i++; continue; }                            // dolgu baytı
+      if (marker === 0x01 || (marker >= 0xd0 && marker <= 0xd9)) { i += 2; continue; } // uzunluksuz
+      const len = (byteAt(bin, i + 2) << 8) | byteAt(bin, i + 3);
+      const isSof =
+        (marker >= 0xc0 && marker <= 0xc3) || (marker >= 0xc5 && marker <= 0xc7) ||
+        (marker >= 0xc9 && marker <= 0xcb) || (marker >= 0xcd && marker <= 0xcf);
+      if (isSof) {
+        const h = (byteAt(bin, i + 5) << 8) | byteAt(bin, i + 6);
+        const w = (byteAt(bin, i + 7) << 8) | byteAt(bin, i + 8);
+        return w > 0 && h > 0 ? { w, h } : null;
+      }
+      if (len < 2) return null;
+      i += 2 + len;
+    }
+    return null;
+  }
+  // WebP: RIFF konteyneri — üç alt biçim.
+  if (bin.slice(0, 4) === "RIFF" && bin.slice(8, 12) === "WEBP" && bin.length >= 30) {
+    const chunk = bin.slice(12, 16);
+    if (chunk === "VP8X") {
+      const w = 1 + (byteAt(bin, 24) | (byteAt(bin, 25) << 8) | (byteAt(bin, 26) << 16));
+      const h = 1 + (byteAt(bin, 27) | (byteAt(bin, 28) << 8) | (byteAt(bin, 29) << 16));
+      return { w, h };
+    }
+    if (chunk === "VP8 ") {
+      const w = ((byteAt(bin, 27) << 8) | byteAt(bin, 26)) & 0x3fff;
+      const h = ((byteAt(bin, 29) << 8) | byteAt(bin, 28)) & 0x3fff;
+      return w > 0 && h > 0 ? { w, h } : null;
+    }
+    if (chunk === "VP8L") {
+      const b0 = byteAt(bin, 21), b1 = byteAt(bin, 22), b2 = byteAt(bin, 23), b3 = byteAt(bin, 24);
+      const w = 1 + (((b1 & 0x3f) << 8) | b0);
+      const h = 1 + (((b3 & 0x0f) << 10) | (b2 << 2) | ((b1 & 0xc0) >> 6));
+      return { w, h };
+    }
+  }
+  return null;
+}
+
+/** Boyuttan patch + tahmini token (gpt-5-mini çarpanı 1.62). */
+function estimateImageTokens(w: number, h: number): { patches: number; tokens: number } {
+  const patches = Math.ceil(w / 32) * Math.ceil(h / 32);
+  return { patches, tokens: Math.round(Math.min(patches, IMAGE_PATCH_BUDGET) * 1.62) };
+}
+
+/* ── B22 (2026-07-31): roundHistory ŞEMASI ────────────────────────────────────
+ * roundHistory HİÇ doğrulanmıyordu: ne dizi uzunluğu ne eleman tipleri. Değerler
+ * lib/history-block.ts'te prompt'a interpolate ediliyor (death_position) ve
+ * repeat/streak hesaplarına giriyor. 5MB payload tavanı içinde kalan kurcalanmış
+ * bir istemci megabaytlarca metni doğrudan gpt-5-mini'ye faturalatabiliyordu.
+ * KAPI: desktop en fazla 12 giriş yolluyor (aimlo-desktop/src-tauri/src/
+ * ai_client.rs:815 `hist.len().saturating_sub(12)`) — 30 tavanı 2.5× pay bırakır,
+ * yani meşru hiçbir istemciyi reddetmez. İçerik temizliği (sanitizePromptInput)
+ * buildHistoryBlock'ta, defense-in-depth olarak yapılır.
+ */
+const MAX_ROUND_HISTORY_ENTRIES = 30;
+const MAX_HISTORY_STRING_LEN = 200;
+
+function isValidRoundHistory(raw: unknown): boolean {
+  if (raw === undefined || raw === null) return true;   // alan opsiyonel
+  if (!Array.isArray(raw)) return false;
+  if (raw.length > MAX_ROUND_HISTORY_ENTRIES) return false;
+  for (const entry of raw) {
+    if (!entry || typeof entry !== "object" || Array.isArray(entry)) return false;
+    const e = entry as Record<string, unknown>;
+    if (e.round_index !== undefined && (typeof e.round_index !== "number" || !Number.isFinite(e.round_index))) return false;
+    if (e.died !== undefined && typeof e.died !== "boolean") return false;
+    if (e.round_won !== undefined && typeof e.round_won !== "boolean") return false;
+    // Serbest metin alanları: string olmalı ve tek başına prompt'u domine edememeli.
+    for (const key of ["death_position", "position_confidence", "death_detected_confidence", "death_type"]) {
+      const v = e[key];
+      if (v === undefined || v === null) continue;
+      if (typeof v !== "string" || v.length > MAX_HISTORY_STRING_LEN) return false;
+    }
+  }
+  return true;
+}
+
 function isValidVisionRequest(obj: unknown): obj is VisionRequest {
   if (!obj || typeof obj !== "object") return false;
   const o = obj as Record<string, unknown>;
@@ -314,10 +382,24 @@ function isValidVisionRequest(obj: unknown): obj is VisionRequest {
     if (isJpeg && !fmt.includes("jpeg") && !fmt.includes("jpg")) return false;
     if (isWebp && !fmt.includes("webp")) return false;
   }
+  // B124 (2026-07-31): piksel üst sınırı. Boyut OKUNAMAZSA reddetmeyiz (bilinmeyen
+  // kodlayıcı meşru olabilir); yalnız gerçekte imkânsız bir başlık (>16384 px)
+  // elenir — bu, birkaç KB'lik dosyanın dev bir görsel bildirdiği bozuk/kötücül
+  // kalıptır. Gerçek ekran yakalamaları bu sınırın çok altında kalır.
+  const dims = readImageDimensions(bin);
+  if (dims && (dims.w > MAX_IMAGE_DIMENSION || dims.h > MAX_IMAGE_DIMENSION)) {
+    console.warn(`[Aimlo AI] image rejected: implausible dimensions ${dims.w}x${dims.h}`);
+    return false;
+  }
   // matchId optional but if present must be a valid UUID v4. Reject
   // garbage early so the field can't smuggle prompt-injection text past
   // the rest of the validation just because it isn't sanitized.
   if (o.matchId !== undefined && !isUuidV4(o.matchId)) {
+    return false;
+  }
+  // B22 (2026-07-31): roundHistory şeması — prompt'a giren tek doğrulanmamış
+  // dizi buydu (uzunluk + eleman tipleri serbestti).
+  if (!isValidRoundHistory(o.roundHistory)) {
     return false;
   }
   return true;
@@ -367,10 +449,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Auth + rate limit (uses dedicated "vision" tier — 4/min, 30/day —
-    // vision is $0.015+/call so kept tighter than feedback)
+    // Auth + rate limit — "vision" katmanı. GERÇEK SAYILAR İÇİN TEK KAYNAK:
+    // lib/api-auth.ts RATE_LIMITS/DAILY_QUOTA. (B112, 2026-07-31: buradaki eski
+    // "4/min, 30/day — $0.015+/call" yorumu üç rakamda birden bayattı; ölçülen
+    // değer $0.0024/çağrı, limitler 6/dk-100/gün. Sayıyı burada TEKRARLAMIYORUZ
+    // ki bir daha sapmasın — tek kaynağa bakılır.)
     const auth = await verifyAuthAndRateLimit(request, "vision");
     if (!auth.ok) return auth.response;
+    // Daraltılmış userId'yi sabitle: aşağıdaki yardımcı fonksiyon HOISTED olduğu
+    // için TypeScript orada `auth` daraltmasını koruyamıyor (çağrı sırası
+    // kanıtlanamaz) → union tipi görüp derleme hatası veriyordu.
+    const authedUserId = auth.userId;
 
     // Parse body
     const body = await request.json().catch(() => null);
@@ -419,6 +508,35 @@ export async function POST(request: NextRequest) {
       console.log(`[Aimlo AI] imageFormat rejected: "${rawFormat}" → default "image/png"`);
     } else {
       console.log(`[Aimlo AI] imageFormat: ${resolvedMediaType}`);
+    }
+
+    // B124 (2026-07-31): görsel boyutu + tahmini patch/token gözlemlenebilirliği.
+    // Yalnız görselin GERÇEKTEN gönderildiği yolda (died !== false) çalışır ve
+    // sadece BAŞLIK önekini çözer (~6KB) — tam decode maliyeti yok. Böylece
+    // /cost panelindeki vision girdisi ile çözünürlük korele edilebilir.
+    if ((body as VisionRequest).died !== false) {
+      try {
+        const head = atob((body as VisionRequest).image.slice(0, IMAGE_HEADER_B64_CHARS));
+        const dims = readImageDimensions(head);
+        const b64Len = (body as VisionRequest).image.length;
+        const approxBytes = Math.floor((b64Len * 3) / 4);
+        if (dims) {
+          const est = estimateImageTokens(dims.w, dims.h);
+          console.log(
+            `[IMAGE] ${dims.w}x${dims.h} bytes≈${approxBytes} patches=${est.patches} est_tokens≈${est.tokens}`,
+          );
+          if (est.patches > IMAGE_PATCH_BUDGET) {
+            console.warn(
+              `[IMAGE] over patch budget (${est.patches} > ${IMAGE_PATCH_BUDGET}) — model downscales; ` +
+              `desktop should send ≤1280x720 to stop paying for pixels it discards.`,
+            );
+          }
+        } else {
+          console.log(`[IMAGE] dimensions unreadable bytes≈${approxBytes}`);
+        }
+      } catch {
+        // Ölçüm hiçbir zaman isteği düşüremez — log yoksa yok.
+      }
     }
 
     // Resolve maxTokens (default: 400, cap: 512)
@@ -484,9 +602,13 @@ export async function POST(request: NextRequest) {
     // en büyük parçası (maliyet optimizasyonu 2026-07-20). Prod telemetride
     // görünmezse sessiz bir cache regresyonu fark edilmez.
     const profileLen = kb.blocks.profile?.length ?? 0;
-    const kbTotal = staticLen + agentLen + mapLen + ctxLen + profileLen;
+    // profile2 = ranks/universal-2.md — B37 (2026-07-31) bölünmesinin ikinci sayfası.
+    // Toplama DAHİL: aksi hâlde bir sonraki bölme/taşıma yine sessizce içerik
+    // düşürür ve [KB] logu bunu göstermez (bu turda tam olarak öyle oldu).
+    const profile2Len = kb.blocks.profile2?.length ?? 0;
+    const kbTotal = staticLen + agentLen + mapLen + ctxLen + profileLen + profile2Len;
     console.log(
-      `[KB] injected static=${staticLen}b profile=${profileLen}b agent=${agentLen}b map=${mapLen}b ctx=${ctxLen}b total=${kbTotal}b ` +
+      `[KB] injected static=${staticLen}b profile=${profileLen}b profile2=${profile2Len}b agent=${agentLen}b map=${mapLen}b ctx=${ctxLen}b total=${kbTotal}b ` +
       `files=[${kb.files.join(", ")}] selectors map=${reqMap ?? "-"} agent=${reqAgent ?? "-"} ` +
       `rank=${reqRank ?? "-"} enemies=${reqEnemyComp?.length ?? 0}`,
     );
@@ -546,7 +668,7 @@ export async function POST(request: NextRequest) {
         // calibrating→low→medium→high diye DEĞİŞİYORDU ve policy bloğu prefix'in
         // en başında olduğu için her geçişte ARKASINDAKİ ~65KB KB cache'ten
         // düşüyordu. Artık prefix'e girmiyor; birebir aynı metin
-        // (CONFIDENCE_PROMPTS[visionConfidence]) user mesajına ekleniyor —
+        // (confidencePrompt(visionConfidence, reqLang), B84) user mesajına ekleniyor —
         // emsal: factSheet/deathTypeDirective/weaponCompDirective. `confidence`
         // argümanı bilinçli KORUNDU: diğer opsiyonlarla tutarlılık + tek satır
         // değişiklikle geri alınabilirlik.
@@ -565,6 +687,10 @@ export async function POST(request: NextRequest) {
     // 43.612 B ≈ 13.629 tokenlik KALICI küresel önek oluşturur (tüm kullanıcı ve
     // maçlar arası paylaşılır). İçerik aynı, yalnızca yeri değişti.
     if (kb.blocks.profile)    systemSections.push(kb.blocks.profile);
+    // Blok 0c — profilin ikinci sayfası (universal-2.md, B37). profile ile AYNI
+    // kararlılık sınıfında ve HEMEN ardından geliyor → ikisi tek sabit önek bölgesi;
+    // cache davranışı değişmez, yalnız kalıcı önek ~4,5 KB uzar.
+    if (kb.blocks.profile2)   systemSections.push(kb.blocks.profile2);
     if (kb.blocks.agent)      systemSections.push(kb.blocks.agent);
     // Agent-ability grounding (2026-06-26): oyuncunun GERÇEK kitini enjekte et →
     // model ajana OLMAYAN yeteneği önermez (canlı bug: Killjoy'a "tel"=Cypher's).
@@ -750,8 +876,19 @@ export async function POST(request: NextRequest) {
     // .slice re-clamp (security audit M1): the bucket text is longer than the
     // number it replaces, so stripNumericHp can grow past sanitize's 2000 cap —
     // re-clamp so one field can't dominate the prompt budget.
+    // 🔴 B47 (2026-07-31) ÖZ-ÇELİŞKİ FIX: giriş yolu yalnız stripNumericHp'de
+    // kalmıştı; o fonksiyon sayısal HP'yi NİTEL KOVAYA çevirir ("30 HP" →
+    // "düşük canla") ve tam o ifade lib/ai-policy.ts HP_BAN_RULE'da TOTAL yasak,
+    // çıkışta da lib/coach-text.ts:495 stripHpClaims tarafından siliniyor. Yani
+    // prompt modele yasak kalıbı ÖĞRETİYOR, model kopyalıyor, süzgeç sonra silip
+    // kırık cümle bırakıyordu (canlı-test #8'in kök-nedeninin giriş-yolu ikizi).
+    // Artık giriş zinciri çıkış zinciriyle AYNI sırada: stripNumericHp →
+    // stripHpClaims. Kova ifadesi prompt'a hiç girmez.
     const patternBlock = (typeof reqBody.patternContext === "string" && reqBody.patternContext.length > 0)
-      ? stripNumericHp(sanitizePromptInput(reqBody.patternContext, { max: 2000 }) || "", reqLang).slice(0, 2000)
+      ? stripHpClaims(
+          stripNumericHp(sanitizePromptInput(reqBody.patternContext, { max: 2000 }) || "", reqLang),
+          reqLang,
+        ).slice(0, 2000)
       : "";
 
     // Death-Data Contract (Ölüm-Veri Sözleşmesi 2026-06-29): build the ground
@@ -823,15 +960,10 @@ export async function POST(request: NextRequest) {
         killerInfo: reqBody.killerInfo,
         deathLocation: reqBody.deathLocation,
         deathTiming: reqBody.deathTiming,
-        // Stale-gate (2026-07-09): the desktop stamps how old the last-alive HP
-        // sample was at death-confirm; the confirm itself lags 2-3s, so ≤4s means
-        // "as fresh as physically possible". Older builds omit the field → legacy
-        // behavior (use the value) so low-hp classification doesn't vanish there.
-        healthAtDeath:
-          typeof reqBody.hpSampleAgeSec !== "number" ||
-          (Number.isFinite(reqBody.hpSampleAgeSec) && reqBody.hpSampleAgeSec >= 0 && reqBody.hpSampleAgeSec <= 4)
-            ? reqBody.healthAtDeath
-            : undefined,
+        // B114 (2026-07-31): healthAtDeath argümanı KALDIRILDI — lib/death-type.ts
+        // hiçbir dalda okumuyor (bkz. oradaki 107-119 satırlarındaki not, canlı-test
+        // #8 kararı), dolayısıyla hpSampleAgeSec stale-gate'i de ölü kabloydu. HP
+        // yasağı aynen sürüyor: ne sayısal ne nitel can ifadesi prompt'a girmez.
         alliesAlive: reqBody.alliesAlive,
         enemiesAlive: reqBody.enemiesAlive,
         spikePlanted: reqBody.spikePlanted,
@@ -902,8 +1034,9 @@ export async function POST(request: NextRequest) {
     // medium→high değişiyor ve prefix'in başındaki bu tek satır her geçişte
     // arkasındaki tüm KB'yi cache'ten düşürüyordu. Emsal: factSheet /
     // deathTypeDirective / weaponCompDirective de aynı sebeple user-msg'de.
-    const confidenceDirective =
-      CONFIDENCE_PROMPTS[visionConfidence] || CONFIDENCE_PROMPTS.medium;
+    // B84 (2026-07-31): dil paritesi — reqLang="en" iken EN varyantı seçilir.
+    // TR yolunda (reqLang="tr") seçici birebir aynı tabloyu okur → bayt-aynı.
+    const confidenceDirective = confidencePrompt(visionConfidence, reqLang);
     // HARİTA OKUNAMADI direktifi (2026-07-24, konsey — Omen/Unknown maçı): harita
     // tespit edilemediyse (mid-match/Spike Rush başlangıcı) modeli callout UYDURMAKTAN
     // menet — reality-checker'ın deterministik strip'i zaten uydurmayı siliyor, bu
@@ -967,75 +1100,102 @@ export async function POST(request: NextRequest) {
       userPromptWithHistory += `\n\n[REMINDER] Output language: ENGLISH ONLY. All three fields in natural English coach voice — never a Turkish word.`;
     }
 
-    // Call OpenAI GPT-5 mini (Chat Completions API)
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), AI_TIMEOUT_MS);
+    /* ── B70 (2026-07-31): LENGTH-KESİLMESİNDE TEK RETRY ─────────────────────
+     * max_completion_tokens 350'dir ve GPT-5'te reasoning token'ları AYNI
+     * bütçeden düşer (reasoning_effort "minimal" = sıfır değil). Bütçe taşınca
+     * finish_reason="length" gelir, JSON yarıda kesilir ve tek davranış 502
+     * ai_invalid_json'du → o round'un koçluğu TAMAMEN kayboluyordu, otomatik
+     * kurtarma yoktu. Artık kesilme KANITLANDIĞINDA (finish=length + çıktı
+     * kullanılamaz) tek sefer 450 (MAX_TOKENS_CAP) ile yeniden denenir.
+     * SINIRLAR: (a) yalnız başarısız çağrıda → maliyet etkisi ihmal edilebilir,
+     * (b) upstream hatasında (5xx/429) retry YOK — o ayrı bir arıza sınıfı,
+     * (c) iki çağrı ORTAK bir süre bütçesini paylaşır (aiDeadline) → maxDuration
+     * 90s aşılamaz, kalan süre yetmezse retry hiç denenmez,
+     * (d) BAŞARILI bir yanıt asla yeniden denenmez.
+     * SAHTE ÇIKTI YOK: retry de başarısız olursa yapısal hata döner (ürün kuralı).
+     */
+    const aiDeadline = Date.now() + AI_TIMEOUT_MS;
+    const RETRY_MIN_BUDGET_MS = 15_000; // bundan azı kaldıysa retry denenmez
 
-    const response = await fetch(OPENAI_API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        // GPT-5 mini — cheap, vision-capable, JSON-schema strict mode.
-        model: "gpt-5-mini",
-        // GPT-5 family uses max_completion_tokens (max_tokens deprecated for these).
-        max_completion_tokens: resolvedMaxTokens,
-        // Strict JSON enforcement — server rejects malformed schema. Eliminates
-        // the markdown-fence/preamble extraction logic we needed with Anthropic.
-        response_format: { type: "json_schema", json_schema: buildRoundFeedbackSchema(reqLang) },
-        // Minimal reasoning effort — coach output is template-fill, not chain-of-thought.
-        // Saves output tokens + latency. Bump to "low" or "medium" if quality drops.
-        reasoning_effort: "minimal",
-        messages: [
-          { role: "system", content: systemMessage },
-          {
-            role: "user",
-            content: buildUserContent(reqBody.died, body.image, resolvedMediaType, userPromptWithHistory),
+    // OpenAI Chat Completions yanıtının bizim okuduğumuz kısmı (hepsi opsiyonel —
+    // eksik alan varsayılanlara düşer, asla throw etmez).
+    type OpenAIChatResponse = {
+      model?: string;
+      usage?: {
+        prompt_tokens?: number;
+        completion_tokens?: number;
+        prompt_tokens_details?: { cached_tokens?: number };
+      };
+      choices?: { finish_reason?: string; message?: { content?: string } }[];
+    };
+
+    async function callVisionModel(
+      maxTokens: number,
+    ): Promise<{ ok: true; data: OpenAIChatResponse } | { ok: false; status: number }> {
+      // Abort sinyali gövde okumasını da kapsar (eski kod clearTimeout'u
+      // response.json()'dan SONRA çağırıyordu — aynı davranış korunuyor).
+      const remaining = Math.max(1_000, aiDeadline - Date.now());
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), remaining);
+      try {
+        const response = await fetch(OPENAI_API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${apiKey}`,
           },
-        ],
-      }),
-      signal: controller.signal,
-    });
+          body: JSON.stringify({
+            // GPT-5 mini — cheap, vision-capable, JSON-schema strict mode.
+            model: "gpt-5-mini",
+            // GPT-5 family uses max_completion_tokens (max_tokens deprecated for these).
+            max_completion_tokens: maxTokens,
+            // Strict JSON enforcement — server rejects malformed schema. Eliminates
+            // the markdown-fence/preamble extraction logic we needed with Anthropic.
+            response_format: { type: "json_schema", json_schema: buildRoundFeedbackSchema(reqLang) },
+            // Minimal reasoning effort — coach output is template-fill, not chain-of-thought.
+            // Saves output tokens + latency. Bump to "low" or "medium" if quality drops.
+            reasoning_effort: "minimal",
+            messages: [
+              { role: "system", content: systemMessage },
+              {
+                role: "user",
+                content: buildUserContent(reqBody.died, body.image, resolvedMediaType, userPromptWithHistory),
+              },
+            ],
+          }),
+          signal: controller.signal,
+        });
 
-    if (!response.ok) {
-      clearTimeout(timeoutId);
-      const errorBody = await response.text().catch(() => "unreadable");
-      // Security audit 2026-06-11 (M-2): keep the upstream body in the SERVER
-      // log only — do NOT reflect it to the client (info-disclosure habit;
-      // the desktop branches on upstreamStatus alone).
-      console.error(`[Aimlo AI] Vision API ${response.status}: ${errorBody.slice(0, 500)}`);
-      return errorResponse(
-        "ai_upstream_error",
-        `OpenAI API returned ${response.status}`,
-        502,
-        { upstreamStatus: response.status },
-      );
+        if (!response.ok) {
+          const errorBody = await response.text().catch(() => "unreadable");
+          // Security audit 2026-06-11 (M-2): keep the upstream body in the SERVER
+          // log only — do NOT reflect it to the client (info-disclosure habit;
+          // the desktop branches on upstreamStatus alone).
+          console.error(`[Aimlo AI] Vision API ${response.status}: ${errorBody.slice(0, 500)}`);
+          return { ok: false, status: response.status };
+        }
+        return { ok: true, data: await response.json() };
+      } finally {
+        clearTimeout(timeoutId);
+      }
     }
 
-    const data = await response.json();
-    clearTimeout(timeoutId);
-
-    // OpenAI usage object: prompt_tokens, completion_tokens, prompt_tokens_details.cached_tokens
-    const promptTokens = data?.usage?.prompt_tokens ?? 0;
-    const completionTokens = data?.usage?.completion_tokens ?? 0;
-    const cachedTokens = data?.usage?.prompt_tokens_details?.cached_tokens ?? 0;
-    const freshTokens = promptTokens - cachedTokens;
-    const finishReason = data?.choices?.[0]?.finish_reason ?? "unknown";
-    const cacheStatus = cachedTokens > 0 ? "HIT" : "MISS";
-    const cacheRatio = promptTokens > 0 ? ((cachedTokens / promptTokens) * 100).toFixed(1) : "0.0";
-    console.log(`[CACHE ${cacheStatus}] cached=${cachedTokens} fresh=${freshTokens} total_in=${promptTokens} hit_ratio=${cacheRatio}% output=${completionTokens} finish=${finishReason}`);
-    // Persist usage for the admin /cost panel (non-blocking, fail-safe).
-    saveAiUsage({ userId: auth.userId, routeType: "vision", model: data?.model ?? "gpt-5-mini", promptTokens, completionTokens, cachedTokens });
-
-    const text: string = data?.choices?.[0]?.message?.content || "";
-    if (!text) {
-      console.error("[Aimlo AI] Empty response from API. Full data:", JSON.stringify(data).slice(0, 500));
-      return errorResponse("ai_empty_response", "OpenAI returned empty content", 502, { finishReason });
+    /** Kullanım logu + /cost kaydı; finish_reason'ı döndürür. */
+    function trackUsage(d: OpenAIChatResponse, attempt: number): string {
+      // OpenAI usage object: prompt_tokens, completion_tokens, prompt_tokens_details.cached_tokens
+      const promptTokens = d?.usage?.prompt_tokens ?? 0;
+      const completionTokens = d?.usage?.completion_tokens ?? 0;
+      const cachedTokens = d?.usage?.prompt_tokens_details?.cached_tokens ?? 0;
+      const freshTokens = promptTokens - cachedTokens;
+      const finishReason = d?.choices?.[0]?.finish_reason ?? "unknown";
+      const cacheStatus = cachedTokens > 0 ? "HIT" : "MISS";
+      const cacheRatio = promptTokens > 0 ? ((cachedTokens / promptTokens) * 100).toFixed(1) : "0.0";
+      console.log(`[CACHE ${cacheStatus}] cached=${cachedTokens} fresh=${freshTokens} total_in=${promptTokens} hit_ratio=${cacheRatio}% output=${completionTokens} finish=${finishReason}${attempt > 1 ? ` attempt=${attempt}` : ""}`);
+      // Persist usage for the admin /cost panel (non-blocking, fail-safe).
+      // Retry de faturalanır → her deneme ayrı kaydedilir, maliyet paneli gerçeği görsün.
+      saveAiUsage({ userId: authedUserId, routeType: "vision", model: d?.model ?? "gpt-5-mini", promptTokens, completionTokens, cachedTokens });
+      return finishReason;
     }
-    // OpenAI strict JSON mode guarantees valid JSON — but keep extractor as defense.
-    const stopReason = finishReason; // alias for downstream code that still reads `stopReason`
 
     // ── Robust JSON parser: handles markdown fences, trailing junk, BOMs ──
     function extractJSON(raw: string): { ok: true; obj: unknown } | { ok: false; reason: string } {
@@ -1073,27 +1233,119 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const parseResult = extractJSON(text);
-    if (!parseResult.ok) {
-      console.error(`[Aimlo AI] JSON parse failed (${parseResult.reason}). Raw text:`, text.slice(0, 500));
-      return errorResponse("ai_invalid_json", `Model output was not valid JSON: ${parseResult.reason}`, 502, { rawPreview: text.slice(0, 300), stopReason });
-    }
-    const parsed: unknown = parseResult.obj;
+    /**
+     * Tek denemenin ham metnini kullanılabilir feedback'e çevirir. B70 için
+     * ayrı fonksiyona alındı: ilk deneme ile retry AYNI ayrıştırma/şekil
+     * mantığından geçsin (iki kopya = sessiz sapma riski).
+     */
+    type ParseOutcome =
+      | { ok: true; obj: unknown }
+      | {
+          ok: false;
+          code: "ai_empty_response" | "ai_invalid_json" | "ai_invalid_shape";
+          message: string;
+          preview: string;
+        };
 
-    // ── Coerce shape: enemyAnalysis can come as string, normalize to array ──
-    if (parsed && typeof parsed === "object") {
-      const obj = parsed as Record<string, unknown>;
-      if (typeof obj.enemyAnalysis === "string") {
-        // Split by newline, semicolon, or " | " or just wrap as single
-        const s = obj.enemyAnalysis as string;
-        const parts = s.split(/\n|;|\s\|\s/).map((p) => p.trim()).filter((p) => p.length > 0);
-        obj.enemyAnalysis = parts.length > 0 ? parts : [s];
+    function toFeedbackOutcome(raw: string): ParseOutcome {
+      if (!raw) {
+        return { ok: false, code: "ai_empty_response", message: "OpenAI returned empty content", preview: "" };
       }
-      // Nullish-safe defaults so isValidFeedbackShape passes
-      if (typeof obj.deathAnalysis !== "string") obj.deathAnalysis = "";
-      if (typeof obj.nextRoundSuggestion !== "string") obj.nextRoundSuggestion = "";
-      if (!Array.isArray(obj.enemyAnalysis)) obj.enemyAnalysis = [];
+      const pr = extractJSON(raw);
+      if (!pr.ok) {
+        return {
+          ok: false,
+          code: "ai_invalid_json",
+          message: `Model output was not valid JSON: ${pr.reason}`,
+          preview: raw.slice(0, 300),
+        };
+      }
+      const parsedObj: unknown = pr.obj;
+      // ── Coerce shape: enemyAnalysis can come as string, normalize to array ──
+      if (parsedObj && typeof parsedObj === "object") {
+        const obj = parsedObj as Record<string, unknown>;
+        if (typeof obj.enemyAnalysis === "string") {
+          // Split by newline, semicolon, or " | " or just wrap as single
+          const s = obj.enemyAnalysis as string;
+          const parts = s.split(/\n|;|\s\|\s/).map((p) => p.trim()).filter((p) => p.length > 0);
+          obj.enemyAnalysis = parts.length > 0 ? parts : [s];
+        }
+        // Nullish-safe defaults so isValidFeedbackShape passes
+        if (typeof obj.deathAnalysis !== "string") obj.deathAnalysis = "";
+        if (typeof obj.nextRoundSuggestion !== "string") obj.nextRoundSuggestion = "";
+        if (!Array.isArray(obj.enemyAnalysis)) obj.enemyAnalysis = [];
+      }
+      if (!isValidFeedbackShape(parsedObj)) {
+        return {
+          ok: false,
+          code: "ai_invalid_shape",
+          message: "Model output missing required fields (deathAnalysis/enemyAnalysis/nextRoundSuggestion)",
+          preview: JSON.stringify(parsedObj).slice(0, 300),
+        };
+      }
+      return { ok: true, obj: parsedObj };
     }
+
+    // ── 1. deneme ──────────────────────────────────────────────────────────
+    let attemptTokens = resolvedMaxTokens;
+    const firstCall = await callVisionModel(attemptTokens);
+    if (!firstCall.ok) {
+      return errorResponse("ai_upstream_error", `OpenAI API returned ${firstCall.status}`, 502, {
+        upstreamStatus: firstCall.status,
+      });
+    }
+    let data: OpenAIChatResponse = firstCall.data;
+    let finishReason = trackUsage(data, 1);
+    let text: string = data?.choices?.[0]?.message?.content || "";
+    let outcome = toFeedbackOutcome(text);
+
+    // ── 2. deneme (B70) — YALNIZ kanıtlı length-kesilmesinde ───────────────
+    if (
+      !outcome.ok &&
+      finishReason === "length" &&
+      attemptTokens < MAX_TOKENS_CAP &&
+      aiDeadline - Date.now() > RETRY_MIN_BUDGET_MS
+    ) {
+      console.warn(
+        `[Aimlo AI] finish=length → truncated output (${outcome.code}); retrying ONCE with max_completion_tokens=${MAX_TOKENS_CAP}`,
+      );
+      attemptTokens = MAX_TOKENS_CAP;
+      const retryCall = await callVisionModel(attemptTokens);
+      if (retryCall.ok) {
+        data = retryCall.data;
+        finishReason = trackUsage(data, 2);
+        text = data?.choices?.[0]?.message?.content || "";
+        // Retry sonucu ne olursa olsun onu kullanırız: ilk yanıt zaten
+        // kullanılamaz durumdaydı, saklamanın değeri yok.
+        outcome = toFeedbackOutcome(text);
+        console.log(`[Aimlo AI] length-retry result: ${outcome.ok ? "recovered" : outcome.code} finish=${finishReason}`);
+      } else {
+        // Retry upstream'de patladı → ilk denemenin hata sınıfı korunur (aşağıda döner).
+        console.error(`[Aimlo AI] length-retry upstream failed (${retryCall.status}); keeping original failure`);
+      }
+    }
+
+    if (!outcome.ok) {
+      console.error(
+        `[Aimlo AI] vision output unusable (${outcome.code}) finish=${finishReason} preview: ${outcome.preview.slice(0, 300)}`,
+      );
+      if (outcome.code === "ai_empty_response") {
+        // Boş içerikte tek ipucu üst-veridir (eski davranış korunur).
+        console.error("[Aimlo AI] Empty response from API. Full data:", JSON.stringify(data).slice(0, 500));
+      }
+      return errorResponse(
+        outcome.code,
+        outcome.message,
+        502,
+        outcome.code === "ai_invalid_json"
+          ? { rawPreview: outcome.preview, stopReason: finishReason }
+          : outcome.code === "ai_invalid_shape"
+            ? { parsedPreview: outcome.preview }
+            : { finishReason },
+      );
+    }
+
+    const parsed: unknown = outcome.obj;
 
     if (isValidFeedbackShape(parsed)) {
       const fb = parsed as RoundFeedback;
@@ -1167,12 +1419,29 @@ export async function POST(request: NextRequest) {
       });
 
       // Copy meta fields from REQUEST (desktop is source of truth for round/score/result/died).
+      // 🔴 B115 + B111 (2026-07-31) — result eşlemesi iki ayrı hata taşıyordu:
+      //  (1) BÜYÜK/küçük harf: yalnız "win"/"loss"/"WON"/"LOST" literalleri kabul
+      //      ediliyordu; küçük harf "won"/"lost" hiçbir dala uymayıp ternary
+      //      default'una düşüyor ve KAZANILAN round yanıtta "loss" işaretleniyordu.
+      //      Üstelik prompt tarafı (ctx.result) toUpperCase() ile zaten
+      //      harf-toleranslıydı → sözleşmenin iki ucu farklı normalize ediyordu.
+      //  (2) "unknown" ZORLAMASI: desktop 'win'/'loss'/'unknown' gönderir
+      //      (aimlo-desktop lib.rs:1708-1712); unknown sessizce "loss"a
+      //      çevriliyordu — R3'te report route'unda ayıklanan "UNKNOWN'ı loss'a
+      //      zorlama, ASLA uydurma" dersinin vision'daki kalıntısı. Desktop yanıtı
+      //      snapshot'la ezdiği için bugün zararsız, ama başka bir istemci echo'ya
+      //      güvenirse yanlış "Kaybedildi" görür.
+      // Yanıt ANAHTARLARI ve bilinen değerler değişmedi (sözleşme korunur).
       return NextResponse.json({
         round: typeof reqBody.round === "number" ? reqBody.round : 0,
         score: typeof reqBody.score === "string" ? reqBody.score.slice(0, 10) : "?-?",
-        result: reqBody.result === "win" || reqBody.result === "loss" || reqBody.result === "WON" || reqBody.result === "LOST"
-          ? (reqBody.result.toLowerCase() === "won" ? "win" : reqBody.result.toLowerCase() === "lost" ? "loss" : reqBody.result.toLowerCase())
-          : "loss",
+        result: (() => {
+          const r = String(reqBody.result ?? "").toLowerCase();
+          if (r === "win" || r === "won") return "win";
+          if (r === "loss" || r === "lost") return "loss";
+          if (r === "unknown") return "unknown";
+          return "loss";
+        })(),
         died: typeof reqBody.died === "boolean" ? reqBody.died : true,
         deathAnalysis: deathAnalysisOut,
         enemyAnalysis: enemyAnalysisOut,

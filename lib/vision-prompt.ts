@@ -86,20 +86,38 @@ export const ROUND_FEEDBACK_SCHEMA = {
     additionalProperties: false,
     required: ["deathAnalysis", "enemyAnalysis", "nextRoundSuggestion"],
     properties: {
+      // ÜRET-SONRA-SİL ÇELİŞKİSİ FIX (denetim B69, 2026-07-31): şema koşulsuz
+      // "killer ajan + silahı yaz" diyordu, oysa killerInfo silahsız gelebilir
+      // ("killed by jett") — o durumda factSheet "öldüren silah BİLİNMEYEN" der
+      // ve reality-checker silah iddiasını siler. Aynı istekte iki zıt emir vardı;
+      // şema artık silahı KOŞULLU istiyor.
       deathAnalysis: {
         type: "string",
-        description: "1-2 cümle Türkçe koç sesi. ZORUNLU: 1 somut düzeltme (callout + util/karar). killerInfo VARSA killer ajan + silahı yaz; killerInfo YOKSA ajan ismi UYDURMA, 'bir düşman' de (asla 'X ya da Y' aday-listesi, asla 'unknown'). HEADSHOT bilgisi YOK — 'kafadan vuruldun/öldün' YAZMA (headshot okunmuyor); sadece 'öldürdü/vurdu' de. CAN/HP İDDİASI YASAK — 'az canla', 'düşük canla', 'tam canla', 'canın azken' ve benzeri HİÇBİR can ifadesi yazma (HP verisi çatışma-öncesi canı kanıtlamaz). Muğlak kelime (genelde/biraz) YASAK. Örn (killer biliniyor): 'B Main'de geniş açı tuttun, Cypher seni operator'la öldürdü — smoke atmadan o köşeyi sallama.' Örn (killer yok): 'B Main'de utility'siz geniş açıda kaldın, bir düşman seni oradan vurdu — köşeyi smoke'layıp öyle tut.' Kullanıcı mesajında [ÖLÜM-TİPİ] direktifi geldiyse deathAnalysis'i O tipin dersine çıpala ve 'açıkta/utility'siz' kalıbını yalnızca tip gerçekten util-yokluğu ise kullan.",
+        description: "1-2 cümle Türkçe koç sesi. ZORUNLU: 1 somut düzeltme (callout + util/karar). killerInfo VARSA killer ajanını yaz; SİLAHI SADECE killerInfo'nun içinde geçiyorsa yaz ('with vandal' gibi) — killerInfo'da silah YOKSA silah adı UYDURMA, silahtan hiç bahsetme. killerInfo YOKSA ajan ismi UYDURMA, 'bir düşman' de (asla 'X ya da Y' aday-listesi, asla 'unknown'). HEADSHOT bilgisi YOK — 'kafadan vuruldun/öldün' YAZMA (headshot okunmuyor); sadece 'öldürdü/vurdu' de. CAN/HP İDDİASI YASAK — 'az canla', 'düşük canla', 'tam canla', 'canın azken' ve benzeri HİÇBİR can ifadesi yazma (HP verisi çatışma-öncesi canı kanıtlamaz). Muğlak kelime (genelde/biraz) YASAK. Örn (killer biliniyor): 'B Main'de geniş açı tuttun, Cypher seni operator'la öldürdü — smoke atmadan o köşeyi sallama.' Örn (killer yok): 'B Main'de utility'siz geniş açıda kaldın, bir düşman seni oradan vurdu — köşeyi smoke'layıp öyle tut.' Kullanıcı mesajında [ÖLÜM-TİPİ] direktifi geldiyse deathAnalysis'i O tipin dersine çıpala ve 'açıkta/utility'siz' kalıbını yalnızca tip gerçekten util-yokluğu ise kullan.",
       },
+      // 2. TEKİL ÖZ-ÇELİŞKİSİ FIX (denetim B25, 2026-07-31): örnek cümle
+      // "A'dan default açılın, B'yi tek başına zorlamayın" ÇOĞUL emir kipiydi —
+      // oysa ai-policy OUTPUT_FOCUS_RULE_VISION "TEK KİŞİ — 2. TEKİL, sen→siz
+      // kayması YASAK" diyor. json_schema description üretimden hemen önceki en
+      // güçlü sinyal; örnek katmanı politikayla aynı kipe çevrildi.
       enemyAnalysis: {
         type: "array",
-        description: "Tam 2 madde, her biri TEK kısa cümle (noktalı virgül ; ile iki emir BİRLEŞTİRME). Madde başına 'Counter:'/'Karşılık:' gibi ETİKET KOYMA — direkt yaz. Madde 1 = düşmanın bu round'daki SOMUT setup/util/pozisyonu (callout+ajan içermeli). Madde 2 = pratik counter (somut eylem, callout+util ZORUNLU); generic gözlem YASAK. İngilizce yön (front-left) YASAK → Türkçe (sol ön). Örn: ['Cypher tuzaklarını B Main girişine dizdi','A'dan default açılın, B'yi tek başına zorlamayın'].",
+        // 🔴 ÖZ-ÇELİŞKİ FIX (denetim B35, 2026-07-31): bu açıklama modele düşmanın
+        // "SOMUT setup/util'ini" yazmasını EMREDİYORDU ve örneği birebir
+        // "Cypher tuzaklarını B Main girişine dizdi" idi. OCR'da düşman util-kullanımı
+        // verisi YOK (payload'da yalnız killerInfo + roster var) → model bunu
+        // UYDURMAK zorunda kalıyordu; aynı anda reality-checker o iddiayı silmeye
+        // çalışıyordu. Yani sistem bir katmanda emrettiğini başka katmanda cezalandırıyordu
+        // (bu sınıf hata 2026'da 3. kez). Madde 1 artık KANITLI olguya çapalanıyor:
+        // seni öldüren ajan + silahı + (varsa) ölüm yeri — hepsi killerInfo/OCR gerçeği.
+        description: "Tam 2 madde, her biri TEK kısa cümle (noktalı virgül ; ile iki emir BİRLEŞTİRME). Madde başına 'Counter:'/'Karşılık:' gibi ETİKET KOYMA — direkt yaz. Madde 1 = KANITA DAYALI gözlem: yalnız sana VERİLEN olguları kullan (seni öldüren ajan, silahı, ölüm yeri, skor). Düşmanın hangi yeteneği nereye koyduğunu UYDURMA — o veri sende YOK. Madde 2 = pratik karşı-hamle (somut eylem). Generic gözlem YASAK. İngilizce yön (front-left) YASAK → Türkçe (sol ön). Örn: ['Cypher seni B Main'de Vandal'la uzaktan tuttu','B Main'e tek girme, yanına birini çek'].",
         items: { type: "string" },
         minItems: 2,
         maxItems: 2,
       },
       nextRoundSuggestion: {
         type: "string",
-        description: "1-2 cümle: hangi SİTE + neden mantıklı + kısa nasıl. 'simple' deme — somut taktik. Mikro-detay (smoke koordinatı/dash zamanı) yok. Örn: 'Bu round B'yi bırak, takımca A'dan default girin — Cypher util'ini B'ye attı, rotate edip A'yı tutamaz.'",
+        description: "1-2 cümle: hangi SİTE + neden mantıklı + kısa nasıl. 'simple' deme — somut taktik. Mikro-detay (smoke koordinatı/dash zamanı) yok. Örn: 'Bu round B'yi bırak, takımınla A'dan default gir — Cypher util'ini B'ye attı, rotate edip A'yı tutamaz.'",
       },
     },
   },
@@ -119,13 +137,16 @@ const ROUND_FEEDBACK_SCHEMA_EN = {
     additionalProperties: false,
     required: ["deathAnalysis", "enemyAnalysis", "nextRoundSuggestion"],
     properties: {
+      // B69 (2026-07-31) — TR şemadaki koşullu-silah düzeltmesinin EN karşılığı.
       deathAnalysis: {
         type: "string",
-        description: "1-2 sentence ENGLISH coach voice. MANDATORY: 1 concrete fix (callout + util/decision). If killerInfo EXISTS, name the killer agent + weapon; if killerInfo is MISSING do NOT invent an agent name, say 'an enemy' (never a candidate list 'X or Y', never 'unknown'). There is NO headshot data — do NOT write 'headshot/one-tapped in the head'; just say 'killed/shot you'. HP/HEALTH CLAIMS ARE BANNED — never write 'at low HP', 'low on health', 'at full HP', 'half health' or any health statement (the HP sample cannot prove pre-fight health). Vague words (generally/a bit) are BANNED. Example (killer known): 'You held a wide angle at B Main and the Cypher killed you with the Operator — don't take that corner without a smoke.' Example (no killer): 'You were caught wide open at B Main without utility and an enemy shot you — smoke the corner before holding it.' If a [DEATH-TYPE] directive is present in the user message, anchor deathAnalysis to THAT type's lesson and use the 'caught without utility' framing ONLY if the type really is a utility-absence type.",
+        description: "1-2 sentence ENGLISH coach voice. MANDATORY: 1 concrete fix (callout + util/decision). If killerInfo EXISTS, name the killer agent; name the WEAPON only if killerInfo itself contains it (e.g. 'with vandal') — if killerInfo has no weapon, do NOT invent one and do not mention a weapon at all. If killerInfo is MISSING do NOT invent an agent name, say 'an enemy' (never a candidate list 'X or Y', never 'unknown'). There is NO headshot data — do NOT write 'headshot/one-tapped in the head'; just say 'killed/shot you'. HP/HEALTH CLAIMS ARE BANNED — never write 'at low HP', 'low on health', 'at full HP', 'half health' or any health statement (the HP sample cannot prove pre-fight health). Vague words (generally/a bit) are BANNED. Example (killer known): 'You held a wide angle at B Main and the Cypher killed you with the Operator — don't take that corner without a smoke.' Example (no killer): 'You were caught wide open at B Main without utility and an enemy shot you — smoke the corner before holding it.' If a [DEATH-TYPE] directive is present in the user message, anchor deathAnalysis to THAT type's lesson and use the 'caught without utility' framing ONLY if the type really is a utility-absence type.",
       },
       enemyAnalysis: {
         type: "array",
-        description: "Exactly 2 items, each ONE short ENGLISH sentence (do NOT merge two commands with a semicolon). No 'Counter:' style labels — write directly. Item 1 = the enemy's CONCRETE setup/util/position this round (must include callout+agent). Item 2 = a practical counter (concrete action, callout+util MANDATORY); generic observations are BANNED. Example: ['Cypher lined his traps at the B Main entrance','Default out of A together, don't force B solo'].",
+        // B35 (2026-07-31) — TR ile AYNI düzeltme; EN yolu geride kalırsa aynı
+        // uydurma sınıfı yalnız dil değiştirip geri döner.
+        description: "Exactly 2 items, each ONE short ENGLISH sentence (do NOT merge two commands with a semicolon). No 'Counter:' style labels — write directly. Item 1 = an EVIDENCE-BASED observation using ONLY the facts you were given (the agent who killed you, their weapon, the death location, the score). Do NOT invent which utility the enemy placed where — you do not have that data. Item 2 = a practical counter (concrete action). Generic observations are BANNED. Example: ['Cypher held you from range at B Main with a Vandal','Do not enter B Main alone, bring someone with you'].",
         items: { type: "string" },
         minItems: 2,
         maxItems: 2,
@@ -180,12 +201,18 @@ OUTPUT TEMPLATE (EN):
 {
   "deathAnalysis": "<1-2 English sentences: mistake + cause + short fix. Specific callout + agent + weapon/utility.>",
   "enemyAnalysis": [
-    "<1 sentence: what the enemy did this round (setup/utility/position)>",
+    "<1 sentence: evidence-based observation from the facts you were given — who killed you, with what weapon, where. Do NOT invent enemy utility placements (B35)>",
     "<1 sentence: practical counter — concrete action with callout+util>"
   ],
   "nextRoundSuggestion": "<1-2 English sentences: which site, why, short how. No micro-detail.>"
 }`;
 
+// 2. TEKİL ÖZ-ÇELİŞKİSİ (denetim B25, 2026-07-31): aşağıdaki few-shot'lar
+// ("birlikte trade'leyin", "birlikte girin", "execute girin", "default ilerleyin")
+// ÇOĞUL emir kipi öğretiyordu — ai-policy OUTPUT_FOCUS_RULE_VISION ise "TEK KİŞİ —
+// 2. TEKİL, sen→siz kayması YASAK" diyor. Örnekler reasoning:minimal'de birebir
+// taklit edildiği için ihlal kullanıcıya ulaşıyordu (coach-text'te sen→siz için
+// deterministik net YOKTU; B25 ile o net de eklendi). Tüm örnekler 2. tekile çevrildi.
 export const SYSTEM_PROMPT = `Sen AIMLO'sun: Radiant seviye gerçek bir Valorant koçusun. Görevin oyuncuya GERÇEK pattern-aware feedback vermek — generic "iyi nişan al" / "aim well" laflarını YASAKLIYORUM.
 
 KAYNAK=KB kuralı aşağıdaki politika bloğunda (ai-policy KB_SOURCE_RULE) — koçluğu SIFIRDAN UYDURMA, OCR gerçeğini KB ile eşle.
@@ -344,7 +371,7 @@ YASAKLI — DİL'DEN BAĞIMSIZ:
     "wide swing"                     → "geniş açıyla peek / geniş swing"
     "trip" (slang)                   → "tuzak / Cypher tuzağı / tripwire"
     "op var"                         → "Operatör var / OP açıyı tutuyor"
-    "yığ" (emir kipi)                → "yüklenin / basın yerine 'yüklenin'"
+    "yığ" (emir kipi)                → "yüklen" (2. TEKİL — "yüklenin/basın" çoğul formu da YASAK)
     "pick alıyor"                    → "kill alıyor / düşürüyor"
 
 ÖRNEK — AI vs KOÇ TONU:
@@ -374,7 +401,7 @@ SENARYO A — Ascent, Cypher, SAVUNMA, güçlü veri (net pattern):
   "deathAnalysis": "B Main'i tek başına geniş açıyla tuttun, düşman Jett mid'den gelip seni arkadan kafadan vurdu — savunmada o açıyı crossfire'sız tutma, Market'e doğru off-angle al ki tek taraftan yenmeyesin.",
   "enemyAnalysis": [
     "Jett mid'i dash'le hızlı aldı ve B Main'in arkasına sarktı, sen ön açıya bakarken yan taraftan girdi.",
-    "B Main'i tek tutma — Market penceresine bir takım arkadaşı koy, mid'den geleni birlikte trade'leyin."
+    "B Main'i tek tutma — Market penceresine bir takım arkadaşı koy, mid'den geleni birlikte trade'le."
   ],
   "nextRoundSuggestion": "Bu round B'yi yalnız tutma, mid'e erken bir smoke at ve Market'ten crossfire kur — Jett mid kontrolü almadan B'ye sarkamaz."
 }
@@ -384,9 +411,9 @@ SENARYO B — Bind, Sage, SALDIRI, R1 / az veri (pattern YOK ama yine KESİN + S
   "deathAnalysis": "A Showers'a utility'siz girdin, savunan düşman A Main'den seni açık alanda yakaladı — duvar atmadan o boşluğu geçme.",
   "enemyAnalysis": [
     "Düşman A Main açısını tuttu, sen Showers'tan çıkınca açık hedef oldun.",
-    "Showers'ı tek başına dry açma; Sage duvarını giriş açısına çapraz koy, sonra birlikte girin."
+    "Showers'ı tek başına dry açma; Sage duvarını giriş açısına çapraz koy, yanına birini çek ve birlikte gir."
   ],
-  "nextRoundSuggestion": "Bu round A'ya direkt yüklenme — Sage duvarını A Main'e çapraz at, flash'la birlikte execute girin, solo Showers peek'i bırak."
+  "nextRoundSuggestion": "Bu round A'ya direkt yüklenme — Sage duvarını A Main'e çapraz at, flash'la birlikte execute'a gir, solo Showers peek'i bırak."
 }
 
 SENARYO C — Haven, SALDIRI, died=false (ölüm YOK): died=false ise ölümden BAHSETME, round'daki KARAR hatasına odaklan. (NOT: "utility'siz açıkta durdun" kalıbını her round'un varsayılanı yapma — bu örnek bilerek FARKLI bir kavram, avantaj yönetimi.)
@@ -422,10 +449,10 @@ Neden kötü: "tam ortasına / 2 metre soluna / sağ üst köşesine / 1.5 metre
 {
   "deathAnalysis": "<1-2 cümle Türkçe (ya da İngilizce): hata + sebep + kısa düzeltme. Spesifik callout + ajan + silah/utility dahil. Anlaşılır, akıcı dil. Örn TR: 'B Main'den geniş açıyla peek attın, Cypher seni Heaven'dan operator'la oradan bekliyordu — bir sonraki round o açıyı smoke atmadan deneme.'>",
   "enemyAnalysis": [
-    "<1 cümle: düşman bu round'da ne yaptı (setup/utility/pozisyon)>",
+    "<1 cümle: SANA VERİLEN olgulardan kanıta dayalı gözlem — kim öldürdü, hangi silahla, nerede. Düşmanın util'ini nereye koyduğunu UYDURMA (B35)>",
     "<1 cümle: pratik counter — somut eylem, callout+util içerir>"
   ],
-  "nextRoundSuggestion": "<1-2 cümle: basit, işleyen taktik. Hangi site, neden mantıklı, kısa nasıl. Mikro-detay (dash zamanlaması vs) yok. Örn TR: 'Bu round B'yi bırak, takımca A'dan default ilerleyin — Cypher tuzaklarını B'ye dikti, rotate edip A'yı tutamayacak.'>"
+  "nextRoundSuggestion": "<1-2 cümle: basit, işleyen taktik. Hangi site, neden mantıklı, kısa nasıl. Mikro-detay (dash zamanlaması vs) yok. Örn TR: 'Bu round B'yi bırak, takımınla A'dan default ilerle — Cypher tuzaklarını B'ye dikti, rotate edip A'yı tutamayacak.'>"
 }
 
 KURAL:
@@ -436,9 +463,14 @@ KURAL:
 
 NOT: Bu route'ta alan başına EN FAZLA 1-2 cümle — aşağıdaki politikada geçen "Max 4 cümle" üst sınırdır, bu route için geçerli sınır 1-2 cümledir.`;
 
+// UZUNLUK ÇELİŞKİSİ FIX (denetim B97, 2026-07-31): görev satırı "Her alan tek
+// cümle" diyordu ama şema + SYSTEM_PROMPT "1-2 cümle" diyor. Çelişkinin EN SON
+// okunan katmanda (user-msg görev satırı) durması modeli kısa kesmeye itiyordu;
+// ilk düşen şey WHY-ZORUNLU gerekçesi oluyordu (softi: "çok kısa/çok genel").
+// Tek sayıya indirildi: şemayla birebir aynı.
 export const USER_PROMPT = `Valorant round sonu. Aşağıdaki OCR/CLIENT pixel truth — screenshot'tan güvenilir.
 
-GÖREVİN: Gerçek bir koç gibi, kısa ve direkt feedback ver. AI tarzı uzun açıklamalar YASAK. Her alan tek cümle (enemyAnalysis 2 madde × 1 cümle).
+GÖREVİN: Gerçek bir koç gibi, kısa ve direkt feedback ver. AI tarzı uzun açıklamalar YASAK. UZUNLUK: deathAnalysis ve nextRoundSuggestion 1-2 cümle (en fazla), enemyAnalysis 2 madde × 1 cümle.
 
 ÖNCE side'a bak: "side":"attack" ise SALDIRI round'u (sen giriyorsun → entry/execute/trade/space/lurk dilini kullan), "side":"defense" ise SAVUNMA round'u (sen tutuyorsun → açı tut/off-angle/crossfire/retake/save dilini kullan). Feedback'i bu side'a göre yaz — yanlış side dili kullanma.
 
@@ -448,7 +480,7 @@ Sadece JSON döndür — markdown yok, code block yok, başka açıklama yok.`;
 // konuşmalı — Türkçe görev satırı modelin çıktı dilini Türkçeye çekiyordu.
 export const USER_PROMPT_EN = `Valorant round end. The OCR/CLIENT data below is pixel truth — more reliable than the screenshot.
 
-YOUR TASK: give short, direct feedback like a real coach. Long AI-style explanations are BANNED. One sentence per field (enemyAnalysis 2 items × 1 sentence).
+YOUR TASK: give short, direct feedback like a real coach. Long AI-style explanations are BANNED. LENGTH: deathAnalysis and nextRoundSuggestion 1-2 sentences (max), enemyAnalysis 2 items × 1 sentence.
 
 Check the side FIRST: "side":"attack" means an ATTACK round (you are entering → use entry/execute/trade/space/lurk language), "side":"defense" means a DEFENSE round (you are holding → use hold/off-angle/crossfire/retake/save language). Write the feedback for that side — never use the wrong side's language.
 

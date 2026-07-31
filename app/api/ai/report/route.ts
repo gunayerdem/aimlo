@@ -11,7 +11,11 @@ import { generateImprovementPlan } from "@/lib/improvement-plan";
 import { loadPlayerMemory, updatePlayerMemory, buildMemoryContext } from "@/lib/player-memory";
 import { loadKnowledge } from "@/lib/knowledge-loader";
 import { buildPolicyBlock } from "@/lib/ai-policy";
-import { cleanCoachText, stripNumericHp, clampWords, trLocative } from "@/lib/coach-text";
+// B82 (2026-07-31): clampWords ARTIK DOĞRUDAN ÇAĞRILMIYOR — AI çıktısının
+// temizleyici zinciri (realityCheck → cleanCoachText → clampWords) ortak
+// finalizeCoachText'e devredildi. cleanCoachText yalnız DETERMİNİSTİK şablon
+// metninde kalıyor (orada kapak/clamp yok, bkz. generateDeterministicReport).
+import { cleanCoachText, stripNumericHp, finalizeCoachText, trLocative } from "@/lib/coach-text";
 import { formatMap, formatAgent, formatMode, normalizeSide, knownAgent } from "@/lib/format-display";
 import { realityCheck, buildFactGround, type FactGround } from "@/lib/reality-checker";
 import { isUuidV4 } from "@/lib/uuid";
@@ -100,6 +104,17 @@ type ReportResponse = {
   matchWon: boolean;
   /** Set when `persistOnServer` was true and the row was inserted (or already present). */
   savedAnalysisId?: string;
+  /**
+   * B34 (2026-07-31): metin alanları GERÇEK AI çıktısı mı, yoksa deterministik
+   * şablon mu? `false` → AI yapılandırılmamış / timeout / upstream 5xx / JSON
+   * parse hatası nedeniyle şablona düşüldü. Bu route (feedback'ten farklı olarak)
+   * bilinçli şekilde 200 + gerçek istatistik döndürmeye devam ediyor — şablon
+   * metni UYDURMA koç metni DEĞİL, yalnız ölçülen veriden türetilmiş cümlelerdir
+   * (aşağıdaki veri-koşullu şablon). Yine de istemci ikisini ayırt edebilmeli.
+   * Şemaya ADDITIVE: desktop MatchReport (serde) bilinmeyen alanı yok sayar,
+   * web istemcisi alanları tek tek okuyor — sözleşme bozulmaz.
+   */
+  aiGenerated: boolean;
 };
 
 /* ══════════════════════════════════════════════════════════
@@ -464,8 +479,16 @@ function userScopedSupabase(request: NextRequest) {
 }
 
 interface PersistResult {
-  /** "ok" — fresh insert; "conflict" — same matchId already existed (idempotency hit); "error" — anything else. */
-  kind: "ok" | "conflict" | "error";
+  /**
+   * "ok"        — fresh insert;
+   * "conflict"  — AYNI KULLANICIYA ait aynı matchId zaten vardı (idempotency hit);
+   * "collision" — B108 (2026-07-31): matchId analyses.id'de var ama BİZİM
+   *               satırımız değil (RLS SELECT'i boş dönüyor). Eskiden bu da
+   *               "conflict" sayılıp istemciye "kaydedildi" deniyordu → maç
+   *               SESSİZCE kaybediliyordu. Artık ayrı ve görünür.
+   * "error"     — diğer her şey.
+   */
+  kind: "ok" | "conflict" | "collision" | "error";
   id?: string;
   message?: string;
 }
@@ -530,11 +553,37 @@ async function persistAnalysis(
     .single();
 
   if (error) {
-    // Postgres UNIQUE violation. Desktop reads this as "already saved,
-    // drop from queue" and we keep the contract by returning the same
-    // matchId the client sent.
+    // Postgres UNIQUE violation. Desktop reads 409 as "already saved, drop
+    // from queue" — ama ÖNCE satırın GERÇEKTEN bizim olduğunu doğrula.
+    //
+    // B108 (2026-07-31): matchId istemci tarafından seçilen bir UUID ve doğrudan
+    // analyses.id primary key'i oluyor. Çakışma BAŞKA bir kullanıcının satırıyla
+    // olursa RLS SELECT'i boş döner; eski kod bunu koşulsuz "benim satırım zaten
+    // var" sayıp istemciye savedAnalysisId veriyordu → desktop kuyruktan
+    // düşürüyor, maç ASLA kaydedilmiyor (SESSİZ VERİ KAYBI) + verilen bir
+    // UUID'nin tabloda global olarak var olup olmadığına dair varlık-oracle'ı.
+    // Ayrım artık owner-scoped SELECT ile yapılıyor: RLS gereği satır bizimse
+    // GÖRÜNÜR, değilse görünmez — servis-rol anahtarına gerek yok.
     if (error.code === "23505" && body.matchId) {
-      return { kind: "conflict", id: body.matchId };
+      const { data: mine, error: ownErr } = await sb
+        .from("analyses")
+        .select("id")
+        .eq("id", body.matchId)
+        .maybeSingle();
+      if (ownErr) {
+        // Doğrulama sorgusu başarısız (ağ/geçici) — SESSİZ "collision" iddiası
+        // üretmektense muhafazakâr davran ve eski idempotency davranışında kal.
+        console.warn(
+          "[AIMLO] 23505 sahiplik doğrulaması başarısız, idempotency varsayıldı:",
+          ownErr.message,
+        );
+        return { kind: "conflict", id: body.matchId };
+      }
+      if (mine?.id) return { kind: "conflict", id: mine.id };
+      console.error(
+        `[AIMLO] analyses id ÇAKIŞMASI — matchId=${body.matchId} başka bir kullanıcıya ait, maç KAYDEDİLMEDİ`,
+      );
+      return { kind: "collision", message: "match_id_collision" };
     }
     return { kind: "error", message: error.message };
   }
@@ -688,10 +737,48 @@ function generateDeterministicReport(body: ReportRequest): ReportResponse {
       ? "bilinmiyor"
       : "unknown"
     : (setup.enemyComp || []).filter(Boolean).join(", ");
-  const enemyDuelist = (setup.enemyComp || []).find((a) => ["Jett", "Reyna", "Neon", "Raze"].includes(a));
-  const tendencies = isTr
-    ? `Düşman (${enemyAgents}) ort. ${avgEnemy} kişilik gruplarla hareket etti. ${enemyDuelist ? `${enemyDuelist} agresif entry aldı — flash/smoke ile karşıla.` : ""} ${matchWon ? "Baskı yaptılar ama takım trade setup ile karşılık verdi." : `Sayısal üstünlükle ${topDeathLoc !== "N/A" ? topDeathLoc : "site"} baskısı kurdu.`}`
-    : `Enemy (${enemyAgents}) moved in groups avg ${avgEnemy}. ${enemyDuelist ? `${enemyDuelist} took aggressive entries — counter with flash/smoke.` : ""} ${matchWon ? "They pressured but team countered with trade setups." : `Applied numbers pressure on ${topDeathLoc !== "N/A" ? topDeathLoc : "site"}.`}`;
+  // B34 (2026-07-31): unknownEnemyComp=true iken kadro OKUNMAMIŞ demektir —
+  // o durumda "rakip takımda X var" da kanıtsız bir iddiadır, cümle hiç kurulmaz.
+  const enemyDuelist = setup.unknownEnemyComp
+    ? undefined
+    : (setup.enemyComp || []).find((a) => ["Jett", "Reyna", "Neon", "Raze"].includes(a));
+  // ── B34 (2026-07-31): ŞABLON CÜMLELERİ VERİ-KOŞULLU ─────────────────────
+  // Bu dal AI başarısız olduğunda çalışıyor ve HİÇ ÖLÇÜLMEYEN davranışları
+  // kesin dille iddia ediyordu: "takım trade setup ile karşılık verdi"
+  // (tradedByAlly verisi maç raporunda YOK — hasTradeData=false, bkz. :1115) ve
+  // "<duelist> agresif entry aldı" (yalnız KOMP LİSTESİNDEN çıkarılmış davranış
+  // iddiası). OCR-only sözleşmesi (CLAUDE.md): backend oyun olgusu uydurmaz.
+  // Artık her cümle yalnız gerçekten ölçülen alana dayanıyor:
+  //   avgEnemy (round başına enemyCount) · enemyComp · skor · ölüm konumu.
+  const contactAvg = Number(avgEnemy);
+  const hasContactData = nonSkipped.length > 0 && contactAvg > 0;
+  const groupsSentence = hasContactData
+    ? isTr
+      ? `Düşman (${enemyAgents}) ort. ${avgEnemy} kişilik gruplarla temas kurdu.`
+      : `Enemy (${enemyAgents}) engaged in groups of ~${avgEnemy}.`
+    : isTr
+      ? `Rakip kadro: ${enemyAgents}.`
+      : `Enemy roster: ${enemyAgents}.`;
+  // Kompozisyonda düellocu OLMASI, "agresif entry aldı" DEMEK DEĞİLDİR — entry
+  // davranışı ölçülmüyor. Cümle artık kadro-olgusu + hazırlık önerisi.
+  const duelistSentence = enemyDuelist
+    ? isTr
+      ? ` Rakip takımda ${enemyDuelist} var — ilk kontakta flash/smoke ile açıyı kapat.`
+      : ` ${enemyDuelist} is on the enemy roster — close the angle with flash/smoke on first contact.`
+    : "";
+  // "Sayısal üstünlük" iddiası yalnız ölçülen temas ortalaması 2+ iken kurulur.
+  const pressureSentence = matchWon
+    ? isTr
+      ? ` Skoru ${scoreStr} önde kapattın.`
+      : ` You closed the match ahead at ${scoreStr}.`
+    : contactAvg >= 2
+      ? isTr
+        ? ` ${topDeathLoc !== "N/A" ? `${trLocative(topDeathLoc)} ` : ""}ortalama ${avgEnemy} kişiyle, yani sayısal üstünlükle temas kurdular.`
+        : ` They engaged ${topDeathLoc !== "N/A" ? `at ${topDeathLoc} ` : ""}with ${avgEnemy} players on average — a numbers advantage.`
+      : isTr
+        ? ` Skoru ${scoreStr} geride kapattın.`
+        : ` You closed the match behind at ${scoreStr}.`;
+  const tendencies = `${groupsSentence}${duelistSentence}${pressureSentence}`;
   const adjustment = isTr
     ? `${topDeathLoc !== "N/A" ? `${topDeathLoc} yerine off-angle'lardan oyna — bu açı okunuyor. ` : ""}${setup.agent} utility'sini retake/info için sakla, erken harcama. ${matchWon ? "Pozisyon çeşitliliğini artır — aynı setup 2 round üst üste kullanma." : "Retake pozisyonlarına erken geç, site anchor'ını trade destekli kur."}`
     : `${topDeathLoc !== "N/A" ? `Play off-angles instead of ${topDeathLoc} — this angle is being read. ` : ""}Save ${setup.agent} utility for retake/info, don't use early. ${matchWon ? "Increase positional variety — don't repeat same setup 2 rounds in a row." : "Set up retake positions early, anchor site with trade support."}`;
@@ -700,8 +787,11 @@ function generateDeterministicReport(body: ReportRequest): ReportResponse {
   const bestRoundData = nonSkipped.find((r) => r.result === "win" && r.survived);
   const bestRound = bestRoundData
     ? isTr
-      ? `R${bestRoundData.roundNumber}: ${bestRoundData.deathLocation || setup.map} bölgesinde ${setup.agent} olarak hayatta kaldın. Trade setup doğruydu, pozisyon tutma isabetliydi. Bu setup tekrarlanabilir — açıyı hafifçe kaydır.`
-      : `R${bestRoundData.roundNumber}: Survived at ${bestRoundData.deathLocation || setup.map} as ${setup.agent}. Trade setup was correct, positioning was on point. This setup is repeatable — shift the angle slightly.`
+      // B34 (2026-07-31): "Trade setup doğruydu, pozisyon tutma isabetliydi"
+      // KALDIRILDI — trade verisi bu route'a hiç gelmiyor, pozisyon-tutma
+      // ölçülmüyor. Ölçülen olgu: round KAZANILDI + oyuncu HAYATTA KALDI.
+      ? `R${bestRoundData.roundNumber}: ${bestRoundData.deathLocation || setup.map} bölgesinde ${setup.agent} olarak hayatta kaldın ve round'u aldın. Aynı açıyı tekrar dene — konumu bir tık kaydırarak kur.`
+      : `R${bestRoundData.roundNumber}: Survived at ${bestRoundData.deathLocation || setup.map} as ${setup.agent} and won the round. Run that angle again — set up a step off the same spot.`
     : isTr
       ? `Hayatta kalınan round yok. ${setup.agent} olarak trade pozisyonu kur — solo peek'leri azalt, teammate desteği bekle.`
       : `No rounds survived. As ${setup.agent}, set up trade positions — reduce solo peeks, wait for teammate support.`;
@@ -741,6 +831,9 @@ function generateDeterministicReport(body: ReportRequest): ReportResponse {
     winPct,
     scoreStr,
     matchWon,
+    // B34 (2026-07-31): bu fonksiyonun ÜRETTİĞİ metin daima deterministik
+    // şablondur. generateAIReport başarılı olursa bu bayrağı true'ya çevirir.
+    aiGenerated: false,
   };
 }
 
@@ -1136,21 +1229,42 @@ ${scoringContext}`;
         hasDeathLocation: anyLoc,
         deathLocation: suppliedLocs,
       };
-      // clampWords (2026-07-09): ham .slice kelime ortasında kesiyordu ("rotasy") —
-      // kelime sınırına geri çekilen mevcut word-safe clamp kullanılır.
-      const clean = (s: string, cap: number) =>
-        // setup.map (canlı bug 2026-07-21): rapor ÖZETİ'nde de yabancı-harita
-        // callout'u ayıklanır — bug tam olarak burada görülmüştü ("A Short:" ile
-        // başlayan Lotus özeti). "Unknown" tabloda yok → no-op, güvenli.
-        clampWords(cleanCoachText(realityCheck(s, [], fg, "generic", isTr ? "tr" : "en", setup.map).text, isTr ? "tr" : "en"), cap);
+      // ── B82 (2026-07-31): TEK TEMİZLEYİCİ ZİNCİR ────────────────────────
+      // NEDEN: aynı çıktı guard'ları 4 route'ta 4 FARKLI derinlikte elle
+      // kuruluyordu (drift). Zincir artık lib/coach-text.ts:finalizeCoachText'te
+      // TEK YERDE tanımlı; bu route ona devrediyor.
+      // DAVRANIŞ AYNI KALIR:
+      //   · check halkası = birebir aynı realityCheck çağrısı (aynı fg/kind/lang/map),
+      //   · clampWords (2026-07-09) korunur — ham .slice kelime ortasından
+      //     kesiyordu ("rotasy"), word-safe clamp o canlı bug'ın fix'iydi,
+      //   · agent BİLEREK GEÇİLMİYOR: bu route'ta enforceAgentKit hiç çalışmıyordu,
+      //     geçmek davranışı DEĞİŞTİRİRDİ (agent yoksa halka no-op — agent-abilities.ts:98).
+      // TEK EK: süzgeç metni tamamen boşaltırsa (callout-strip + guard her cümleyi
+      // düşürürse) alan BOŞ dönmez; UYDURMA da dönmez — ölçülen veriden türetilmiş
+      // deterministik `stats` karşılığı korunur (no-fake sözleşmesi).
+      const clean = (s: string, cap: number, fallback: string) =>
+        finalizeCoachText(s, {
+          lang: isTr ? "tr" : "en",
+          cap,
+          fallback,
+          // setup.map (canlı bug 2026-07-21): rapor ÖZETİ'nde de yabancı-harita
+          // callout'u ayıklanır — bug tam olarak burada görülmüştü ("A Short:" ile
+          // başlayan Lotus özeti). "Unknown" tabloda yok → no-op, güvenli.
+          check: (t) => realityCheck(t, [], fg, "generic", isTr ? "tr" : "en", setup.map).text,
+        });
       return {
         ...stats,
-        summary: clean(parsed.summary, 1000),
-        mistake: clean(parsed.mistake, 1000),
-        tendencies: clean(parsed.tendencies, 1000),
-        adjustment: clean(parsed.adjustment, 1000),
-        bestRound: clean(parsed.bestRound, 500),
-        decisionScore: clean(parsed.decisionScore, 200),
+        summary: clean(parsed.summary, 1000, stats.summary),
+        mistake: clean(parsed.mistake, 1000, stats.mistake),
+        tendencies: clean(parsed.tendencies, 1000, stats.tendencies),
+        adjustment: clean(parsed.adjustment, 1000, stats.adjustment),
+        bestRound: clean(parsed.bestRound, 500, stats.bestRound),
+        decisionScore: clean(parsed.decisionScore, 200, stats.decisionScore),
+        // B34 (2026-07-31): TEK true noktası — model çıktısı geldi, şeması
+        // doğrulandı ve temizleyici zincirinden geçti. Diğer TÜM dönüş yolları
+        // (apiKey yok / !response.ok / parse başarısız / geçersiz şekil /
+        // timeout / exception) `stats` döner ve aiGenerated=false kalır.
+        aiGenerated: true,
       };
     }
 
@@ -1211,6 +1325,18 @@ export async function POST(request: NextRequest) {
     // Skip the AI call entirely so duplicate desktop retries don't burn
     // OpenAI credits. Spec: 409 with the existing analysis id; desktop
     // reads this as "drop from SQLite write-behind queue".
+    //
+    // B81 (2026-07-31) — BİLİNEN SINIR: bu kontrol ATOMİK DEĞİL. Sıralı
+    // retry'lar korunuyor; ancak desktop timeout-retry'i ilk istek HÂLÂ AI'da
+    // beklerken gelirse ikinci istek de pre-flight'ı geçer ve ikinci bir tam AI
+    // çağrısı yakılır (~$0.02). Kaybeden INSERT 23505 alır ve artık 409 döner
+    // (aşağıdaki persist dalı) — yani SONUÇ doğru, maliyet iki katı.
+    // Gerçek çözüm AI çağrısından önce Upstash SETNX kilididir; BİLİNÇLİ olarak
+    // ertelendi: kilidi alamayan isteğe 409 dönmek, kilit sahibi fonksiyon
+    // platformca öldürülürse (TTL boyunca) meşru retry'ı da "kaydedildi" sayıp
+    // maçı SESSİZCE kaybettirir — mevcut çift-maliyetten daha kötü bir kırılma.
+    // Güvenli hâli desktop tarafında "retry-edilebilir" bir statü sözleşmesi
+    // ister (bkz. rapor: crossFile).
     if (validation.data.persistOnServer && validation.data.matchId) {
       try {
         const sb = userScopedSupabase(request);
@@ -1334,8 +1460,17 @@ Sadece düzeltilmiş metni döndür.`;
           // metin kalır (no-fake ilkesi: yarım metin basmaktansa eldeki tam metin).
           if (refined && refined.length > 30 && rFinish === "stop") {
             // Cycle 2 fix #5: clean the refined field too (same coach-voice net).
-            const refinedClean = cleanCoachText(refined, validation.data.lang === "en" ? "en" : "tr");
-            (report as Record<string, unknown>)[fs.weakest] = clampWords(refinedClean, 600);
+            // B82 (2026-07-31): elle kurulan cleanCoachText + clampWords ikilisi
+            // ortak finalizeCoachText'e geçti (aynı sıra, aynı 600 kapağı,
+            // aynı word-safe kırpma). realityCheck halkası burada da YOK —
+            // refine metni zaten doğrulanmış alanın yeniden yazımı; halkayı
+            // eklemek davranış değişikliği olurdu. fallback=weakText: süzgeç
+            // metni boşaltırsa bu bloğun ilkesi gereği ELDEKİ tam metin kalır.
+            (report as Record<string, unknown>)[fs.weakest] = finalizeCoachText(refined, {
+              lang: validation.data.lang === "en" ? "en" : "tr",
+              cap: 600,
+              fallback: weakText,
+            });
             console.log(`[Aimlo AI] Report field refined: ${fs.weakest}`);
           } else if (refined && rFinish !== "stop") {
             console.warn(`[Aimlo AI] Report refine REJECTED (finish=${rFinish}) — keeping original ${fs.weakest}`);
@@ -1354,8 +1489,38 @@ Sadece düzeltilmiş metni döndür.`;
         validation.data,
         report,
       );
-      if (persist.kind === "ok" || persist.kind === "conflict") {
+      if (persist.kind === "ok") {
         report.savedAnalysisId = persist.id;
+      } else if (persist.kind === "conflict") {
+        // 🔴 GERİ ALINDI (karşı-denetim, 2026-07-31 gecesi). Bu dal kısa süre 409
+        // dönüyordu ("409 = idempotent hit" sözleşmesini tek statüde toplamak için).
+        // Ölçüldü: SESSİZ RAPOR KAYBI üretiyordu.
+        //
+        // Ayrım kritik: 409 sözleşmesi PRE-FLIGHT kontrol içindir (satır ~1326) —
+        // orada AI hiç çağrılmamıştır, "zaten kayıtlı" demek doğru ve ucuzdur.
+        // BURASI ise INSERT'in 23505 alması, yani AI çağrısı ZATEN YAPILMIŞ ve
+        // parası ödenmiş durumda; elimizde kullanıcının beklediği rapor VAR.
+        //
+        // Yarışı desktop'ın kendisi rutin olarak üretiyor: maç sonu satırı önce
+        // SQLite kuyruğuna yazılıyor, sonra canlı POST atılıyor; kuyruk yeniden
+        // denemesi canlı isteği geçerse canlı istek 23505 alır. 409 + gövdesiz
+        // yanıtta kullanıcı maç raporunu HİÇ göremez — üstelik AI parası yanmıştır.
+        // Doğrusu: kaydın id'sini iliştir ve raporu 200 ile teslim et.
+        report.savedAnalysisId = persist.id;
+      } else if (persist.kind === "collision") {
+        // B108 (2026-07-31): matchId başkasının satırıyla çakıştı → maç
+        // KAYDEDİLMEDİ. 409 DÖNME: desktop 409'u "kaydedildi, kuyruktan düşür"
+        // okur ve maç sessizce kaybolur. 422 → 409-dışı 4xx olarak sınıflanır,
+        // sahte "kaydedildi" sinyali üretilmez ve olay loglarda görünür.
+        // (Pratikte UUID v4 ile ~imkânsız; bu bir sessiz-veri-kaybı kapısıdır.)
+        return NextResponse.json(
+          {
+            error: "match_id_collision",
+            message:
+              "Bu matchId başka bir kayıtla çakışıyor. Maç kaydedilmedi — yeni bir matchId ile tekrar gönder.",
+          },
+          { status: 422 },
+        );
       } else {
         // Don't fail the response — AI report is still useful and the
         // client can retry persistence on its own schedule.

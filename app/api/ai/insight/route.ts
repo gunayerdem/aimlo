@@ -180,6 +180,12 @@ export async function POST(request: NextRequest) {
 }
 
 async function handleInsight(request: NextRequest) {
+  // B68 (2026-07-31): toplam AI bütçesi için istek başlangıcı. maxDuration=60 iken
+  // ilk çağrı (30s) + 5xx iç-retry (30s) + kalite-regen (30s) teorik olarak 90s'e
+  // çıkabiliyordu → platform fonksiyonu ortasında kesip route'un yapısal
+  // {error,message} gövdesi yerine opak 504 döndürüyordu. Aşağıdaki regen kapısı
+  // bu damgayı kullanarak kalan bütçeyi kontrol eder.
+  const routeStartedAt = Date.now();
   try {
     // Reject oversized payloads
     const contentLength = request.headers.get("content-length");
@@ -193,6 +199,10 @@ async function handleInsight(request: NextRequest) {
     // Auth + rate limit (uses dedicated insight tier — 10/min, 60/day)
     const auth = await verifyAuthAndRateLimit(request, "insight");
     if (!auth.ok) return auth.response;
+    // B110 (2026-07-31): saveAiUsage'a userId geçebilmek için doğrulanmış id'yi
+    // yakala — aşağıdaki callAI closure'ı bunu kullanır (eskiden userId:null
+    // yazılıyordu, /admin/cost insight maliyetini kullanıcıya atfedemiyordu).
+    const authedUserId = auth.userId;
 
     // Parse body
     const body = await request.json().catch(() => null);
@@ -296,7 +306,8 @@ async function handleInsight(request: NextRequest) {
         if (usage) {
           const cached = usage.prompt_tokens_details?.cached_tokens ?? 0;
           console.log(`[Aimlo AI tokens] insight in=${usage.prompt_tokens ?? 0} cached=${cached} out=${usage.completion_tokens ?? 0}`);
-          saveAiUsage({ userId: null, routeType: "insight", model: d?.model ?? "gpt-5-mini", promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, cachedTokens: cached });
+          // B110 (2026-07-31): userId:null → authedUserId (kullanıcı-başı maliyet görünürlüğü).
+          saveAiUsage({ userId: authedUserId, routeType: "insight", model: d?.model ?? "gpt-5-mini", promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, cachedTokens: cached });
         }
         const t: string = d?.choices?.[0]?.message?.content || "";
         try { return { ok: true, value: JSON.parse(t) }; } catch {
@@ -357,10 +368,21 @@ async function handleInsight(request: NextRequest) {
     console.log(`[Aimlo AI] Insight quality: ${score1}/100`);
 
     // Quality gate: retry once if below threshold (best-effort, non-fatal).
-    if (score1 < 70) {
+    // B68 (2026-07-31) BÜTÇE KAPISI: regen ikinci bir 30s'lik AI çağrısıdır.
+    // İlk çağrı 5xx iç-retry yapıp ~60s yemişse regen maxDuration=60'ı aşar ve
+    // platform fonksiyonu keser → istemci route'un yapısal {error,message}
+    // gövdesi yerine opak 504 alır (tam da "AI kötü gününde"). İki savunma:
+    //   1) kalan bütçe < ~35s ise regen'i HİÇ başlatma (elde geçerli çıktı var),
+    //   2) regen'i attempt=2 ile çağır → callAI'nin kendi 5xx iç-retry'ı kapanır.
+    const REGEN_START_BUDGET_MS = 25_000; // maxDuration 60s − AI_TIMEOUT 30s − 5s tampon
+    const elapsedBeforeRegen = Date.now() - routeStartedAt;
+    if (score1 < 70 && elapsedBeforeRegen >= REGEN_START_BUDGET_MS) {
+      console.warn(`[Aimlo AI] Insight regen SKIPPED — bütçe doldu (${elapsedBeforeRegen}ms geçti, skor ${score1}/100)`);
+    }
+    if (score1 < 70 && elapsedBeforeRegen < REGEN_START_BUDGET_MS) {
       const regenPrompt = baseUserPrompt + "\n\n--- QUALITY ENFORCEMENT ---\nPrevious output was too generic. You MUST:\n- Include specific position names (A Short, B Main, etc.)\n- Reference round numbers or percentages\n- Model enemy behavior explicitly\n- Give a clear actionable fix\nDo NOT return vague coaching.";
 
-      const retry = await callAI(regenPrompt);
+      const retry = await callAI(regenPrompt, 2);
       if (retry.ok && isValidInsightShape(retry.value)) {
         const score2 = scoreOutput(retry.value);
         console.log(`[Aimlo AI] Insight regen quality: ${score2}/100 (was ${score1})`);

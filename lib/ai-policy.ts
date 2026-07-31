@@ -85,6 +85,18 @@ export const BANNED_PHRASES = [
   "sanırım",
   "galiba",
   "belki",
+  // ── EN HEDGE (denetim B84, 2026-07-31): TR hedge'i 3 katman engelliyordu
+  // (bu liste + VERİ SEVİYESİ talimatı + coach-text deterministik net), EN
+  // tarafında yalnız şema description'ı vardı. Bu kalıplar TR koç çıktısında
+  // ASLA geçmez → dil-agnostik substring-check güvenli. "likely" BİLEREK yok:
+  // "unlikely" alt-dizgisi yanlış-pozitif üretirdi.
+  "maybe",
+  "probably",
+  "perhaps",
+  "possibly",
+  "it seems",
+  "it looks like",
+  "might have been",
 ] as const;
 
 // ═══════════════════════════════════════════════════════════
@@ -109,6 +121,25 @@ export const CONFIDENCE_PROMPTS: Record<string, string> = {
 // TONE SYSTEM — single definition for all routes
 // ═══════════════════════════════════════════════════════════
 
+// ── EN VARYANTI (denetim B84, 2026-07-31) ──
+// KÖK NEDEN: CONFIDENCE_PROMPTS yalnız Türkçeydi ve EN istekte de aynen
+// gönderiliyordu (buildPolicyBlock + vision route'un sona eklediği confidence
+// bloğu). EN çıktı üretirken Türkçe direktif daha az ağırlık görüyor; TR'de
+// hedge 3 katmanla (ban listesi + VERİ SEVİYESİ + deterministik net) engellenirken
+// EN'de yalnız şema description'ı vardı. Anahtarlar birebir aynı → TR yolu
+// bayt-aynı kalır, yalnız lang==="en" bu tabloya düşer.
+// 🔴 "might be / may be / could be" AÇIKÇA yasaklandı (karşı-denetim 2026-07-31):
+// bu formlar deterministik süzgeçle temizlenemiyor — modal fiili "is/was" ile
+// değiştirmek özneye bağlı ("you/they/teammates" → "You is..." bozukluğu) ve bir
+// TAHMİNİ kanıtlanmış olguya çeviriyor. Süzgeç katmanından KALDIRILDI, yasak
+// buraya taşındı: model bu kalıbı hiç üretmesin, sonradan onarılmaya çalışılmasın.
+export const CONFIDENCE_PROMPTS_EN: Record<string, string> = {
+  calibrating: `\nDATA LEVEL: CALIBRATING — little HISTORY data. Do NOT make claims about past rounds/patterns — and do NOT hedge them either: simply do NOT bring that topic up. State THIS round's OCR truth (killer agent, death spot, weapon) DEFINITIVELY. Guessing language ("maybe", "probably", "it seems", "perhaps", "might be", "may be", "could be") is BANNED.`,
+  low: `\nDATA LEVEL: LOW — limited history. If you don't know the pattern, leave it out completely; NEVER write "it seems/probably/maybe/might be/could be". State the OCR truth definitively and give one clear fix.`,
+  medium: `\nDATA LEVEL: MEDIUM — speak clearly and DEFINITIVELY. No sweeping "always" generalisations; no guessing language ("maybe/probably/might be/could be") either.`,
+  high: `\nDATA LEVEL: HIGH — direct, definitive statements. Name the patterns outright. No hedging — never "might be"/"could be".`,
+};
+
 export const TONE_PROMPTS: Record<string, string> = {
   strict: `\nTON: SERT KOÇ
 - Doğrudan konuş, yuvarlama
@@ -120,6 +151,33 @@ export const TONE_PROMPTS: Record<string, string> = {
   balanced: `\nTON: DENGELİ — Net ama saygılı. Hataları belirt, açıkla, yönlendir. Öğretici ton.`,
   analytical: `\nTON: ANALİTİK — Sıfır duygu, saf veri ve mantık. Rakamlar ve pattern'ler konuşsun.`,
 };
+
+// EN ton varyantı (denetim B84, 2026-07-31) — TON bloğu EN prefix'ine de push
+// ediliyordu ama Türkçeydi. Anahtarlar aynı; TR yolu değişmez.
+export const TONE_PROMPTS_EN: Record<string, string> = {
+  strict: `\nTONE: STRICT COACH
+- Speak directly, don't soften it
+- If there is a mistake, name it plainly
+- Praise only when it is genuinely earned
+- Short sentences, no fluff
+- Sound like a coach, not like a friend
+- Use the harsh tone ONLY for repeated, serious mistakes — don't repeat the same pattern in every output`,
+  balanced: `\nTONE: BALANCED — clear but respectful. Point out the mistake, explain it, guide. Teaching tone.`,
+  analytical: `\nTONE: ANALYTICAL — zero emotion, pure data and logic. Let the numbers and patterns speak.`,
+};
+
+/** Dil-duyarlı seçiciler (denetim B84, 2026-07-31). Route'lar ve buildPolicyBlock
+ *  bu iki fonksiyondan geçsin ki EN yolunda Türkçe direktif kalmasın. lang
+ *  verilmezse/‘tr’ ise davranış eskisiyle BİREBİR aynı. */
+export function confidencePrompt(confidence?: string, lang?: string): string {
+  const table = lang === "en" ? CONFIDENCE_PROMPTS_EN : CONFIDENCE_PROMPTS;
+  return table[confidence || "medium"] || table.medium;
+}
+
+export function tonePrompt(tone?: string, lang?: string): string {
+  const table = lang === "en" ? TONE_PROMPTS_EN : TONE_PROMPTS;
+  return table[tone || "strict"] || table.strict;
+}
 
 // ═══════════════════════════════════════════════════════════
 // HYBRID LANGUAGE — gaming terms stay English
@@ -303,8 +361,15 @@ export const OUTPUT_FOCUS_RULE_VISION = `\nODAK KURALI:
 // VAGUE BAN — muğlak nicelik/sıklık belirteci yasağı + somut anchor zorunlu
 // ═══════════════════════════════════════════════════════════
 
+// ÖZ-ÇELİŞKİ FIX (denetim B24, 2026-07-31): buradaki "confidence-hedge istisnası"
+// AYNI DOSYADAKİ iki kuralla çelişiyordu — BANNED_PHRASES (satır ~80) 'görünüyor
+// ki/muhtemelen'i TOTAL yasaklıyor ve CONFIDENCE_PROMPTS "tahmin/olasılık dili
+// YASAK" diyor. İstisna tam da vision'ın en sık durumunda (calibrating/low)
+// modeli hedge'e DAVET ediyordu, sonra coach-text.ts hedge-neti o kelimeleri
+// deterministik siliyordu → kırık cümle + çelişik sinyal. İstisna KALDIRILDI;
+// yerine 2026-06-26 kararı: az veri = hedge DEĞİL, OMISSION (o konuyu hiç açma).
 export const VAGUE_BAN_RULE = `
-MUĞLAK DİL YASAĞI: Belirsiz nicelik/sıklık belirteci YASAK — 'biraz', 'genelde', 'genel olarak', 'bazen', 'galiba', 'sanırım', 'şöyle böyle', 'bir şekilde', 'çoğunlukla', 'kabaca', 'aşağı yukarı'. (İstisna: gerçek veri-azlığı için confidence-hedge — 'görünüyor ki', 'muhtemelen', 'erken verilere göre' — SADECE veri azsa serbest.) Her cümle KESİN bir callout (A Short) + ajan (Cypher) + silah/util (operator/smoke) taşımalı. Anchor'sız/muğlak cümle = RED BAYRAĞI, yeniden yaz. Örn YANLIŞ: 'genelde biraz erken peek atıyorsun, dikkatli ol'. DOĞRU: 'B Main'i smoke atmadan peek atma — Cypher Heaven'dan operator tutuyor.'`;
+MUĞLAK DİL YASAĞI: Belirsiz nicelik/sıklık belirteci YASAK — 'biraz', 'genelde', 'genel olarak', 'bazen', 'galiba', 'sanırım', 'şöyle böyle', 'bir şekilde', 'çoğunlukla', 'kabaca', 'aşağı yukarı'. Veri azsa HEDGE ETME: 'görünüyor ki', 'muhtemelen', 'erken verilere göre' de YASAK — bilmediğin konuyu HİÇ AÇMA (VERİ SEVİYESİ kuralına bak). Her cümle KESİN bir callout (A Short) + ajan (Cypher) + silah/util (operator/smoke) taşımalı. Anchor'sız/muğlak cümle = RED BAYRAĞI, yeniden yaz. Örn YANLIŞ: 'genelde biraz erken peek atıyorsun, dikkatli ol'. DOĞRU: 'B Main'i smoke atmadan peek atma — Cypher Heaven'dan operator tutuyor.'`;
 
 // ═══════════════════════════════════════════════════════════
 // DECISION SCORE RUBRIC — anchored scoring
@@ -384,9 +449,11 @@ export function buildPolicyBlock(options: {
   );
   parts.push(options.outputFocusMode === "single" ? OUTPUT_FOCUS_RULE_VISION : OUTPUT_FOCUS_RULE);
   parts.push(VAGUE_BAN_RULE);
-  parts.push(TONE_PROMPTS[options.tone || "strict"] || TONE_PROMPTS.strict);
+  // Dil-duyarlı TON/VERİ SEVİYESİ (denetim B84, 2026-07-31): EN istekte artık
+  // İngilizce varyant gider. lang!=="en" → tablo aynı, çıktı bayt-aynı.
+  parts.push(tonePrompt(options.tone, options.lang));
   if (options.confidenceInPrefix !== false) {
-    parts.push(CONFIDENCE_PROMPTS[options.confidence || "medium"] || CONFIDENCE_PROMPTS.medium);
+    parts.push(confidencePrompt(options.confidence, options.lang));
   }
   parts.push(PERSONALIZATION_RULE);
   parts.push(TIME_BAN_RULE);

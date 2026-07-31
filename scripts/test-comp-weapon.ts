@@ -57,7 +57,16 @@ eq("awp kısaltması korunur", classifyDeath({ killerInfo: "awp", side: "defense
 eq("retake-advantage-thrown (def+spike+aa>ea)", classifyDeath({ spikePlanted: true, side: "defense", alliesAlive: 3, enemiesAlive: 1 }), "retake-advantage-thrown");
 eq("op-loss (kendi loadout Operator)", classifyDeath({ loadout: "operator", side: "attack" }), "op-loss");
 eq("op-loss awp kısaltması (loadout OCR)", classifyDeath({ loadout: "awp", side: "attack" }), "op-loss");
-eq("ult-in-pocket (Jett dolu ult)", classifyDeath({ ultReady: true, playerAgent: "Jett", side: "attack" }), "ult-in-pocket");
+// 🔴 SÖZLEŞME DEĞİŞTİ (canlı-test #7, softi 2026-07-31): ult-in-pocket dersi artık
+// KENDİNE-DÖNÜK dövüş ult'u olan ajanlarda VERİLMİYOR. Jett bıçağını, Reyna
+// İmparatoriçe'sini doğru anı bekleyerek tutmak NORMAL oyun davranışı; softi canlı
+// maçta 6 round'un 3'ünde bu dersi alıp "reyna jett gibi karakterlere gelmemeli,
+// sürekli geliyor" dedi. Ders takım-etkili ult'larda (Sova/Brim/Killjoy/Sage) KALIR —
+// orada cepte çürüyen ult gerçek kayıptır. Bu test o ayrımı kilitler.
+eq("ult-in-pocket ATLANIR (Jett — kendine-dönük dövüş ult'u)", classifyDeath({ ultReady: true, playerAgent: "Jett", side: "attack" }), "info-less-push");
+eq("ult-in-pocket ATLANIR (Reyna)", classifyDeath({ ultReady: true, playerAgent: "Reyna", side: "attack" }), "info-less-push");
+eq("ult-in-pocket KALIR (Sova — takım-etkili ult)", classifyDeath({ ultReady: true, playerAgent: "Sova", side: "attack" }), "ult-in-pocket");
+eq("ult-in-pocket KALIR (ajan bilinmiyorsa muhafazakâr)", classifyDeath({ ultReady: true, side: "attack" }), "ult-in-pocket");
 eq("numbers-down-carry (aa<ea-1 + late)", classifyDeath({ alliesAlive: 1, enemiesAlive: 3, deathTiming: "late", side: "attack" }), "numbers-down-carry");
 eq("late-no-plant (atk+late+spike AÇIK false)", classifyDeath({ side: "attack", deathTiming: "late", spikePlanted: false }), "late-no-plant");
 eq("late-def-no-plant (def+late+spike AÇIK false)", classifyDeath({ side: "defense", deathTiming: "late", spikePlanted: false }), "late-def-no-plant");

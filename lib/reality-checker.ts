@@ -7,6 +7,11 @@
 
 import { extractKillerWeapon } from "@/lib/comp-weapon";
 import { mapKey, MAP_CALLOUTS, UNIVERSAL_CALLOUTS } from "@/lib/map-callouts";
+// Denetim B83 (2026-07-31): katil ajanının RESMİ adı tek kaynaktan (format-display
+// AGENT_NAMES tablosu) gelsin — reality-checker'ın kendi AGENT_NAMES listesi OCR
+// garble'ları da ("Reay") içerdiği için TESPİT'te kullanılır, GERÇEK katil adı
+// olarak yalnız tabloda KANITLI olan resmi ad yazılır.
+import { knownAgent } from "@/lib/format-display";
 
 // ── Types ──
 
@@ -45,12 +50,22 @@ interface ValidationResult {
 // caller (route/trade/killer/location/headshot only) stays type-compatible.
 export interface FactGround {
   hasKiller?: boolean;        // killerInfo OCR present
+  // Denetim B83 (2026-07-31): killerInfo'dan SÖZLÜK-BAĞLI çıkarılan GERÇEK katil
+  // ajanı (varsa). hasKiller=true iken guardUnprovenFacts bunu kullanıp metindeki
+  // YANLIŞ ajan adını düzeltir. Belirsizse (ajan sözlükte yok / iki farklı ad
+  // geçiyor / maç-seviyesi rapor) undefined kalır → guard DOKUNMAZ.
+  killerAgent?: string;
   hasWeapon?: boolean;        // killerInfo contains "with <weapon>" (enemy weapon parsed)
   hasDeathLocation?: boolean; // deathLocation OCR present
   hasDeathAngle?: boolean;    // deathAngle OCR present (NO guard — meşru "arkadan geldi")
   hasHeadshot?: boolean;      // headshot===true (desktop never sends → effectively always false)
   hasAliveCount?: boolean;    // alive counts RELIABLE (desktop can't distinguish 0-vs-unread → always false)
   hasSpike?: boolean;         // spike state RELIABLE (only set when true → can't tell false/absent → always false)
+  // Denetim B35 (2026-07-31): düşmanın YETENEK/SETUP kullanımı OCR'da HİÇ okunmuyor
+  // (payload'da yalnız killerInfo + roster + killfeed sırası var) → DAİMA false,
+  // alive/spike ile aynı sözleşme. Masaüstü ileride yetenek-okuma gönderirse
+  // buildFactGround'da true'ya çevrilir → guard susar.
+  hasEnemyUtil?: boolean;
   hasTradeData?: boolean;     // tradedByAlly boolean present
   hasRoute?: boolean;         // playerRoute measured
   // Masaüstünün OCR ile ölçtüğü ölüm yeri/yerleri (varsa). stripForeignCallouts
@@ -452,6 +467,80 @@ const AGENT_NAMES = [
 // Definite kill verbs (after coach-text's -miş→-di normalization runs upstream).
 const KILL_VERBS = "(öldürdü|öldürdün|kesti|vurdu|düşürdü|indirdi|biçti)";
 
+// ── Ortak ajan-alternasyonu (denetim B35 + B83, 2026-07-31) ──
+// Uzun ad ÖNCE ("KAY/O" > "Kayo"). guardUnprovenFacts içindeki mevcut yerel
+// NAME_ALT BİLİNÇLİ olarak yerinde bırakıldı — hasKiller=false yolu bayt-aynı kalsın.
+const AGENT_NAME_ALT = AGENT_NAMES.map(escapeRe).sort((a, b) => b.length - a.length).join("|");
+
+/**
+ * killerInfo'dan GERÇEK katil ajanını çıkar (denetim B83, 2026-07-31).
+ *
+ * SÖZLÜK-BAĞLI, extractKillerWeapon ile birebir aynı anti-uydurma ilkesi: yalnız
+ * RESMİ ajan tablosunda (format-display.knownAgent) kanıtlı bir ad kabul edilir;
+ * serbest metin ("killed by xhtx") ASLA ajan sayılmaz. İKİ FARKLI resmi ad
+ * geçiyorsa (OCR karışması / killfeed'de iki satır) null döner — belirsizken
+ * metne DOKUNULMAZ. Dönüş: resmi ad ("Cypher", "KAY/O") ya da null.
+ */
+export function extractKillerAgent(killerInfo?: string | null): string | null {
+  if (!killerInfo) return null;
+  const found = new Set<string>();
+  for (const raw of AGENT_NAMES) {
+    const canon = knownAgent(raw);
+    if (!canon) continue; // OCR garble'ı ("Reay") gerçek-katil kaynağı SAYILMAZ
+    const re = new RegExp(`(?<![\\p{L}\\p{N}])${escapeRe(raw)}(?![\\p{L}\\p{N}])`, "iu");
+    if (re.test(killerInfo)) found.add(canon);
+  }
+  return found.size === 1 ? [...found][0] : null;
+}
+
+// ── DÜŞMAN SETUP/UTIL İDDİASI TESPİTİ (denetim B35, 2026-07-31) ──
+// Üç koşul da AYNI CÜMLEDE sağlanmalı: (1) düşman öznesi, (2) util adı,
+// (3) 3. TEKİL GEÇMİŞ util fiili. 2. tekil ("attın/kurdun" = oyuncunun kendi
+// eylemi), emir kipi ("at/aç/kur" = öğüt) ve geniş/koşullu zaman ("atar/atarsa")
+// listede YOK — ROUTE_ORIGIN_VERBS ile aynı ilke: yalnız GEÇMİŞ-İDDİA süzülür.
+const ENEMY_UTIL_NOUNS = [
+  "smoke", "duman", "flash", "molly", "molotof", "tuzak", "trap", "trapwire",
+  "tripwire", "ult", "ultimate", "util", "utility", "yetenek", "duvar", "wall",
+  "drone", "dart", "mayın", "kafes", "stun", "nade",
+];
+const ENEMY_UTIL_PAST_VERBS = [
+  // TR — yalnız 3. tekil geçmiş
+  "attı", "atmıştı", "açtı", "açmıştı", "kurdu", "kurmuştu", "dizdi", "dizmişti",
+  "bıraktı", "bırakmıştı", "yerleştirdi", "yerleştirmişti", "kullandı", "kullanmıştı",
+  "patlattı", "çekti",
+  // EN aynası
+  "threw", "placed", "lined", "popped", "dropped", "flashed", "walled", "used",
+];
+const ENEMY_SUBJECT_RE = new RegExp(
+  `(?<![\\p{L}])(?:${AGENT_NAME_ALT}|düşman|rakip|enem(?:y|ies)|opponent)(?:['’]?[\\p{L}]{0,6})?(?![\\p{L}])`,
+  "iu",
+);
+const ENEMY_UTIL_NOUN_RE = new RegExp(
+  `(?<![\\p{L}])(?:${ENEMY_UTIL_NOUNS.map(escapeRe).join("|")})(?:['’]?[\\p{L}]{0,8})?(?![\\p{L}])`,
+  "iu",
+);
+const ENEMY_UTIL_VERB_RE = new RegExp(
+  `(?<![\\p{L}])(?:${ENEMY_UTIL_PAST_VERBS.map(escapeRe).join("|")}|set\\s+up)(?![\\p{L}])`,
+  "iu",
+);
+// KANITLI ÖLÜM ÇEKİRDEĞİ — bu kalıbı taşıyan cümle util-iddiası yüzünden ASLA
+// düşürülmez (2026-07-24 "nerede vurulduğunu söylemiyor" regresyonunun dersi:
+// uydurmayı silerken GERÇEĞİ kaybetmek en pahalı hata).
+const DEATH_CORE_RE = new RegExp(
+  `(?<![\\p{L}])seni(?![\\p{L}])[^.!?\\n]{0,60}?(?:öldürdü|vurdu|kesti|düşürdü|indirdi|biçti|avladı|devirdi)(?![\\p{L}])`
+  + `|(?<![\\p{L}])(?:öldün|vuruldun|öldürüldün|düştün|yakalandın)(?![\\p{L}])`
+  + `|(?<![\\p{L}])(?:killed|shot|caught|picked|dropped|hit|took)\\s+you(?![\\p{L}])`,
+  "iu",
+);
+
+/** Bir CÜMLE, kanıtsız düşman-setup/util iddiası taşıyor mu? (B35) */
+function isUnprovenEnemyUtilClaim(sentence: string): boolean {
+  if (DEATH_CORE_RE.test(sentence)) return false; // kanıtlı ölüm olgusu → dokunma
+  return ENEMY_SUBJECT_RE.test(sentence)
+    && ENEMY_UTIL_NOUN_RE.test(sentence)
+    && ENEMY_UTIL_VERB_RE.test(sentence);
+}
+
 // Weapon names for the weapon-when-absent guard (Ölüm-Veri Sözleşmesi 2026-06-29).
 // Used to strip a FABRICATED enemy-weapon claim when killerInfo has no "with <X>"
 // (i.e. the killing weapon was never read). 'op'/'awp'/short ambiguous tokens
@@ -485,6 +574,10 @@ export function buildFactGround(
   const killerInfo = typeof reqBody.killerInfo === "string" ? reqBody.killerInfo : "";
   return {
     hasKiller: killerInfo.length > 0,
+    // Denetim B83 (2026-07-31): katil KESİN biliniyorsa adı da taşınır → guard
+    // metindeki yanlış ajanı düzeltebilsin. Sözlükte yoksa/belirsizse null →
+    // undefined kalır ve guard hiç çalışmaz (belirsizken metne dokunmayız).
+    killerAgent: extractKillerAgent(killerInfo) ?? undefined,
     // TEK-KAYNAK (güvenlik denetimi L-1, 2026-07-08): eski /\bwith\s+\S/ kalıbı,
     // OCR'ın "with"i düşürdüğü "by reyna sheriff" formunu KAÇIRIYORDU → [SİLAH+KOMP
     // İPUCU] "silah: sheriff" derken factSheet "silah BİLİNMEYEN" diyor, guard
@@ -499,6 +592,10 @@ export function buildFactGround(
     hasHeadshot: reqBody.headshot === true,
     hasAliveCount: false,
     hasSpike: false,
+    // Denetim B35 (2026-07-31): düşman yetenek/setup kullanımı HİÇ okunmuyor →
+    // HARD-false (alive/spike ile aynı gerekçe). Masaüstü gerçek bir util sinyali
+    // göndermeye başlarsa yalnız burası true olur — backend-only, desktop bağımlılığı yok.
+    hasEnemyUtil: false,
     hasTradeData: typeof reqBody.tradedByAlly === "boolean",
     hasRoute: typeof ctx.playerRoute === "string" && (ctx.playerRoute as string).length > 0,
   };
@@ -558,6 +655,59 @@ export function guardUnprovenFacts(
     // STEP4: "bir düşman ya da bir düşman" / "an enemy or an enemy" run'larını tek'e çökert
     result = result.replace(/bir düşman(?:\s*(?:ya da|veya|\/|,)\s*bir düşman)+/gi, "bir düşman");
     result = result.replace(/an enemy(?:\s*(?:or|\/|,)\s*an enemy)+/gi, "an enemy");
+  }
+
+  // KATİL-TUTARLILIĞI (denetim B83, 2026-07-31): üstteki guard yalnız katilin
+  // BİLİNMEDİĞİ durumu kapsıyordu; killerInfo OCR'da VARKEN model roster'daki
+  // BAŞKA bir ajanı katil gösterirse ("killerInfo=killed by jett" iken "Cypher
+  // seni vurdu") hiçbir katman yakalamıyordu. Burada uydurma ajan adı GERÇEK
+  // katille DEĞİŞTİRİLİR (silme değil düzeltme — ölüm olgusu korunur).
+  //
+  // ÇAPA (dar bilinçli): ajan adı + AYNI virgülsüz clause içinde "seni" + öldürme
+  // fiili (EN'de "killed/shot you"). Bu yüzden oyuncunun KENDİ ajanına yapılan
+  // atıflar eşleşmez: "Jett'inle dash atabilirdin, Reyna seni vurdu" → virgül
+  // clause'u kestiği için "Jett" DOKUNULMAZ. Apostroflu iyelik ("Jett'in ult'u")
+  // da bilinçli DIŞARIDA — Türkçe ek uyumu bozulmasın ("Reyna'in" üretmeyelim).
+  // killerAgent yoksa (sözlükte ajan yok / iki ad / rapor route'u maç-seviyesi)
+  // guard HİÇ çalışmaz → mevcut davranış bayt-aynı.
+  const truthKiller = factGround.killerAgent;
+  if (factGround.hasKiller === true && truthKiller) {
+    // clause sınırı: virgül dahil ayraçlar geçilmez.
+    //
+    // 🔴 AJAN-GEÇİRMEZ (karşı-denetim, 2026-07-31 gecesi): eskiden bu sınıf düz
+    // `[^.,;:!?—\n]` idi ve guard, ölüm çekirdeğine giden yolda BAŞKA bir ajan adı
+    // olsa bile ilk adı katille EZİYORDU. Yani uydurmayı önlemek için konan katman
+    // kendisi uydurma üretiyordu:
+    //     "Sage duvarını beklerken Cypher seni A Short'ta vurdu."
+    //       → "Cypher duvarını beklerken Cypher seni A Short'ta vurdu."  ✗
+    //     "Jett ile dash attın ve Reyna seni vurdu."
+    //       → oyuncunun KENDİ ajanı katilin adıyla değişiyordu (canlı-test #7'de
+    //         OCR tarafında düzelttiğimiz "ajan dönmesi"nin deterministik ikizi).
+    // Çözüm: boşluğun HİÇBİR noktasında bir ajan adı başlamasın. Böylece guard'ın
+    // asıl işi (metindeki YANLIŞ katili doğrusuyla düzeltmek) aynen sürer —
+    // aradaki ikinci ajanı ezme davranışı biter.
+    const CL = `(?:(?!(?<![\\p{L}])(?:${AGENT_NAME_ALT})(?![\\p{L}]))[^.,;:!?—\\n])`;
+    const fixKiller = (m: string, pre: string, name: string) =>
+      name.toLowerCase() === truthKiller.toLowerCase() ? m : `${pre}${truthKiller}`;
+    // TR: "<Ajan> ... seni ... <öl-fiili>"
+    result = result.replace(
+      new RegExp(
+        `(?<![\\p{L}])((?:the\\s+)?)(${AGENT_NAME_ALT})(?![\\p{L}'’])`
+        + `(?=${CL}{0,50}?(?<![\\p{L}])seni(?![\\p{L}])${CL}{0,40}?${KILL_VERBS}(?![\\p{L}]))`,
+        "giu",
+      ),
+      fixKiller,
+    );
+    // EN aynası: "<Agent> ... killed/shot you" (nesne fiilden SONRA gelir).
+    result = result.replace(
+      new RegExp(
+        `(?<![\\p{L}])((?:the\\s+)?)(${AGENT_NAME_ALT})(?![\\p{L}'’])`
+        + `(?=${CL}{0,50}?(?:(?:killed|shot|caught|dropped)\\s+you(?![\\p{L}])`
+        + `|picked\\s+you\\s+off|took\\s+you\\s+down))`,
+        "giu",
+      ),
+      fixKiller,
+    );
   }
 
   // WEAPON-absent (Ölüm-Veri Sözleşmesi #2, 2026-06-29): killerInfo'da "with <silah>"
@@ -696,6 +846,40 @@ export function guardUnprovenFacts(
 
   if (factGround.hasTradeData !== true) {
     for (const re of TRADE_CLAIM_PATTERNS) result = result.replace(re, "");
+  }
+
+  // DÜŞMAN SETUP/UTIL İDDİASI (denetim B35, 2026-07-31): masaüstü düşmanın
+  // YETENEK KULLANIMINI HİÇ okumuyor, buna rağmen model "Cypher tuzaklarını
+  // B Main'e dizdi" / "Omen smoke'unu mid'e attı" sınıfı GEÇMİŞ-KİP setup
+  // iddiaları üretiyor ve hiçbir deterministik katman bunu süzmüyordu.
+  //
+  // İKİ SERT SINIR (regresyon koruması — "çalışanı bozma"):
+  //  1) YALNIZ CÜMLE DÜŞÜRÜR, kelime kırpmaz. "Cypher tuzaklarını dizdi"nin
+  //     ortasından silmek bozuk Türkçe üretir (level-3 rewrite'ın kendi dersi).
+  //  2) TÜM cümleler iddia taşıyorsa metne HİÇ DOKUNMAZ. Boş alan döndürmek
+  //     yasak: rapor route'unda fallback yok (alan boş kalırdı), vision'da ise
+  //     çağıran zaten orijinali geri koyuyor → net etki sıfır. Ayrıca KANITLI
+  //     ölüm çekirdeği ("seni ... öldürdü"/"killed you") taşıyan cümle asla
+  //     düşmez — uydurmayı silerken gerçeği kaybetmeyiz.
+  // NOT (kapsam): enemyAnalysis[0] şu an TEK cümle ve şema bu sınıfı BİZZAT
+  // emrediyor (vision-prompt.ts ROUND_FEEDBACK_SCHEMA "Madde 1 = düşmanın SOMUT
+  // setup/util'i") → orada guard bilinçli olarak no-op. Kalıcı çözüm şema
+  // metnini killerInfo/roster gerçeğine bağlamaktır (crossFile).
+  if (factGround.hasEnemyUtil === false) {
+    // Ayıraçları YAKALAYARAK böl → korunan cümlelerin arasındaki satır sonu
+    // (\n) ve boşluk aynen geri yazılır (rapor alanlarının biçimi bozulmasın).
+    const chunks = result.split(/((?<=[.!?])\s+)/);
+    const total = Math.ceil(chunks.length / 2);
+    if (total > 1) {
+      let dropped = 0;
+      let rebuilt = "";
+      for (let i = 0; i < chunks.length; i += 2) {
+        const sent = chunks[i];
+        if (sent.trim() && isUnprovenEnemyUtilClaim(sent)) { dropped++; continue; }
+        rebuilt += sent + (chunks[i + 1] ?? "");
+      }
+      if (dropped > 0 && dropped < total) result = rebuilt.trim();
+    }
   }
 
   // Collapse spaces and repair orphaned punctuation left by removals.
