@@ -1,0 +1,78 @@
+# AIMLO backend CI — B4 (denetim 2026-07-31)
+#
+# NEDEN VAR: `main`e her push Vercel'de OTOMATİK PROD DEPLOY tetikliyor
+# (CLAUDE.md) ve bu repoda 15 test script'i olmasına rağmen HİÇBİRİ hiçbir
+# yerde zorunlu koşmuyordu — .github/workflows dizini yoktu, .git/hooks'ta
+# yalnız *.sample vardı. "verify-kb 223/0" gibi kanıtlar o anki ELLE koşuma
+# aitti; bir sonraki push'ta sessizce çürüyebilirdi.
+#
+# TASARIM KURALLARI:
+#   1. SIFIR SECRET. Aşağıdaki env'ler kasten SAHTE. lib/supabase/server.ts
+#      import ANINDA NEXT_PUBLIC_SUPABASE_URL/ANON_KEY yoksa throw ediyor
+#      (server.ts:29-30) — testler o modüle dokunduğunda patlamasın diye
+#      dummy veriyoruz. Hiçbir test gerçek ağa çıkmıyor.
+#   2. PARA HARCAYAN/NONDETERMİNİSTİK İŞ YOK. scripts/eval-vision.ts ve
+#      scripts/eval-score.ts OPENAI_API_KEY ister ve gerçek gpt-5-mini
+#      çağırır → CI'ye ASLA girmez (B4 kararı). İhtiyaç olursa ayrı bir
+#      nightly/workflow_dispatch workflow'una konur.
+#   3. Desktop (aimlo-desktop) AYRI bir repo → kendi workflow'u orada.
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+# Aynı dala arka arkaya push'ta eski koşuyu iptal et (CI dakikası + hız).
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: typecheck + deterministic tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    env:
+      # SAHTE DEĞERLER — yalnız import-anı doğrulamalarını geçmek için.
+      # Gerçek bir Supabase projesine işaret ETMEZLER; hiçbir test ağ çağrısı yapmaz
+      # (scripts/test-entitlements.ts bayrak-kapalıyken fetch sayacıyla bunu ispatlıyor).
+      NEXT_PUBLIC_SUPABASE_URL: https://ci-dummy.supabase.co
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-dummy-anon-key
+      SUPABASE_SERVICE_ROLE_KEY: ci-dummy-service-role-key
+      # Upstash TANIMSIZ bırakılıyor → lib/api-auth bellek-fallback'ine düşer
+      # (prod'da fail-closed davranışı NODE_ENV=production'a bağlı, CI'de değil).
+      NEXT_TELEMETRY_DISABLED: "1"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      # DİKKAT — `npm ci` DEĞİL, bilerek: `tsx` devDependencies'e B78 ile YENİ
+      # eklendi ama package-lock.json henüz onu içermiyor ve lock'u yeniden
+      # üretmek yerel `npm install` ister. Lock senkron olmayınca `npm ci`
+      # EUSAGE ile HARD FAIL eder. softi bir kez `npm install` çalıştırıp
+      # güncel package-lock.json'ı commit'lediğinde bu satır `npm ci` olmalı
+      # (daha hızlı + tam deterministik).
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      # Next 16 resmî CI tarifi (node_modules/next/dist/docs/01-app/03-api-reference/
+      # 06-cli/next.md:175-187): route tipleri artık yalnız dev/build sırasında
+      # üretiliyor, bu yüzden çıplak `tsc --noEmit` route tiplerini DOĞRULAMIYOR.
+      # Önce typegen, sonra tsc.
+      - name: Generate Next route types
+        run: npx next typegen
+
+      - name: TypeScript typecheck
+        run: npx tsc --noEmit
+
+      # package.json "test" → 11 deterministik script (B78). Her biri exit 1
+      # disiplinine sahip; ilki patlarsa && zinciri orada durur.
+      - name: Deterministic test suite
+        run: npm test

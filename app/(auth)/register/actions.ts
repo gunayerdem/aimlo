@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { createServiceSupabase } from "@/lib/supabase/server";
 import { generateOtp, hashOtp } from "@/lib/otp";
-import { sendOtpEmail } from "@/lib/email";
+import { sendOtpEmail, emailFailReason } from "@/lib/email";
 import { authRateLimit } from "@/lib/auth-rate-limit";
 import { registerSchema } from "../schemas";
 
@@ -238,12 +238,19 @@ export async function registerAction(
   try {
     await sendOtpEmail({ to: email, code, lang: "tr", purpose: "register" });
   } catch (e) {
-    console.error("[Aimlo register] sendOtpEmail failed:", (e as Error).message);
-    return {
-      ok: false,
-      error: "Doğrulama maili gönderilemedi. Lütfen birkaç dakika sonra dene.",
-      values: echo,
-    };
+    // B31 (2026-07-31): mail gitmezse kullanıcı kayıt sayfasında kör kalıyordu
+    // ("neden olmadı?" + çıkış yolu yok). Oysa bu noktada HESAP ve OTP zaten
+    // oluşturuldu — kullanıcıyı doğrulama sayfasına, GÖRÜNÜR bir uyarı bayrağı
+    // ve hazır "Yeni kod gönder" butonuyla gönderiyoruz. Sebep (kota/anahtar/
+    // geçici) URL'ye taşınıyor ki sayfa doğru metni gösterebilsin.
+    const reason = emailFailReason(e);
+    console.error(
+      `[Aimlo register] sendOtpEmail failed (${reason}):`,
+      (e as Error).message,
+    );
+    redirect(
+      `/verify?email=${encodeURIComponent(email)}&purpose=register&mailfail=${reason}`,
+    );
   }
 
   redirect(`/verify?email=${encodeURIComponent(email)}&purpose=register`);

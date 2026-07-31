@@ -8,6 +8,7 @@
 // anon/authenticated RLS policy).
 import "server-only";
 
+import { after } from "next/server";
 import { createServiceSupabase } from "@/lib/supabase/server";
 
 export type SaveUsageInput = {
@@ -21,13 +22,20 @@ export type SaveUsageInput = {
 
 /**
  * Fire-and-forget insert of a usage row. Returns immediately; the write happens
- * in the background and any failure is logged, never thrown. Do not `await` in a
- * hot path — call `void saveAiUsage(...)`.
+ * after the response is flushed and any failure is logged, never thrown. Do not
+ * `await` in a hot path — call `void saveAiUsage(...)`.
+ *
+ * B67 (2026-07-31): eskiden iş `Promise.resolve().then(...)` mikrotask'ına
+ * atılıyordu. Vercel yanıtı gönderir göndermez lambda'yı DONDURUYOR; çoğu
+ * route'ta saveAiUsage yanıttan yalnız milisaniyeler önce çağrıldığı için
+ * bekleyen insert tamamlanmadan kaybolabiliyordu → /admin/cost maliyet sayımı
+ * sessizce eksik kalıyordu. Next 16 `after()` işi yanıttan SONRA, route'un
+ * maxDuration bütçesi içinde koşturur (docs: 01-app/.../functions/after.md).
+ * İmza ve çağıranlar DEĞİŞMEDİ.
  */
 export function saveAiUsage(input: SaveUsageInput): void {
-  // Defer to a microtask so even the client construction can't block the caller.
-  Promise.resolve()
-    .then(async () => {
+  const work = async () => {
+    try {
       const svc = createServiceSupabase();
       const { error } = await svc.from("ai_usage").insert({
         user_id: input.userId ?? null,
@@ -38,6 +46,16 @@ export function saveAiUsage(input: SaveUsageInput): void {
         cached_tokens: Math.max(0, Math.round(input.cachedTokens ?? 0)),
       });
       if (error) console.error("[ai-usage] insert failed:", error.message);
-    })
-    .catch((e) => console.error("[ai-usage] saveAiUsage error:", (e as Error).message));
+    } catch (e) {
+      console.error("[ai-usage] saveAiUsage error:", (e as Error).message);
+    }
+  };
+
+  try {
+    after(work);
+  } catch {
+    // İstek bağlamı dışında (script/test) after() fırlatır — eski mikrotask
+    // yoluna düş; davranış aynı kalır, çağıran yine bloklanmaz.
+    void work();
+  }
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteHeader } from "@/app/_components/SiteHeader";
+import { SELLER } from "@/lib/seller";
 
 export const metadata: Metadata = {
   title: "Kullanım Koşulları — AIMLO",
@@ -151,26 +152,37 @@ export default function TermsPage() {
 
         <section className="space-y-3 text-sm leading-relaxed text-neutral-300">
           <h2 className="text-lg font-bold text-white">5. Riot Games</h2>
+          {/* B45 (2026-07-31): önceki metin "(Riot ToS uyumlu)" diye KANITSIZ
+              bir uygunluk BEYANI veriyordu — Riot Developer Portal başvurusu
+              henüz yapılmadı, dolayısıyla bunu doğrulayan bir onay yok.
+              Beyan, doğrulanabilir olan teknik gerçeğe (ne yaptığımıza) ve
+              tasarım niyetine indirildi. Başvuru onaylanınca burası
+              güncellenebilir. */}
           <p>
             AIMLO Riot Games tarafından desteklenmemekte ve onaylanmamaktadır.
             VALORANT, Riot Games Inc.&apos;in ticari markasıdır. AIMLO Valorant
-            oyununa hile, makro veya gerçek zamanlı saldırı yardımı SUNMAZ —
-            yalnızca round sonu pasif analiz yapar (Riot ToS uyumlu).
+            oyununa hile, makro veya gerçek zamanlı saldırı yardımı SUNMAZ; oyun
+            dosyalarına, belleğine veya ağ trafiğine müdahale etmez — yalnızca
+            ekran görüntüsü üzerinden round sonu pasif analiz yapar. Hizmet,
+            Riot Games&apos;in kullanım koşullarına ve üçüncü taraf yazılım
+            politikalarına uygun olacak şekilde tasarlanmıştır.
           </p>
         </section>
 
         <section className="space-y-3 text-sm leading-relaxed text-neutral-300">
           <h2 className="text-lg font-bold text-white">6. İletişim</h2>
+          {/* B123 (2026-07-31): künye elle kopyalanmıştı — lib/seller.ts TEK
+              KAYNAK'a bağlandı; adres/telefon değişince tek yerden güncellenir. */}
           <p>
-            Hizmet sağlayıcı: {"GÜNAY ERDEM VE KAAN DAĞDELEN ADİ ORTAKLIĞI"} · {"Yenişehir Mah. Ankara Cad. 360 Office Kapı No: 405 Daire No: 95 Pendik/İstanbul"} ·{" "}
-            {"0534 911 31 81"}
+            Hizmet sağlayıcı: {SELLER.tradeName} · {SELLER.address} ·{" "}
+            {SELLER.phone}
           </p>
           <p>
             <a
-              href="mailto:support@aimlo.gg"
+              href={`mailto:${SELLER.email}`}
               className="text-[#FF4655] hover:underline"
             >
-              support@aimlo.gg
+              {SELLER.email}
             </a>
           </p>
         </section>

@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { createServiceSupabase } from "@/lib/supabase/server";
 import { hashOtp, normalizeOtp } from "@/lib/otp";
 import { generateOtp } from "@/lib/otp";
-import { sendOtpEmail } from "@/lib/email";
+import { sendOtpEmail, emailFailReason } from "@/lib/email";
 import { authRateLimit } from "@/lib/auth-rate-limit";
 import { verifySchema } from "../schemas";
 import { timingSafeEqual } from "node:crypto";
@@ -227,8 +227,22 @@ export async function resendAction(
   try {
     await sendOtpEmail({ to: email, code, lang: "tr", purpose });
   } catch (e) {
-    console.error("[Aimlo resend] sendOtpEmail failed:", (e as Error).message);
-    return { ok: false, error: "Mail gönderilemedi. Lütfen biraz sonra dene." };
+    // B31 (2026-07-31): tek tip "biraz sonra dene" mesajı, kota dolduğunda da
+    // sunucu anahtarı bozukken de aynıydı — kullanıcı boşuna 10 kez deniyordu.
+    // Sebebe göre net yönlendirme ver (mesajlar e-posta VARLIĞINI sızdırmaz;
+    // buraya yalnız kayıtlı kullanıcı için geliniyor ve metinler gönderim
+    // altyapısından bahsediyor).
+    const reason = emailFailReason(e);
+    console.error(`[Aimlo resend] sendOtpEmail failed (${reason}):`, (e as Error).message);
+    const msg =
+      reason === "quota"
+        ? "Mail sağlayıcı sınırına takıldık. Birkaç dakika sonra tekrar dene."
+        : reason === "config"
+          ? "Mail servisimizde bir sorun var. Sürerse support@aimlo.gg'ye yaz."
+          : reason === "invalid"
+            ? "Bu adrese mail iletilemedi. E-postanı kontrol et."
+            : "Mail gönderilemedi. Lütfen biraz sonra dene.";
+    return { ok: false, error: msg };
   }
 
   return { ok: true, resent: true };

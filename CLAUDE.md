@@ -41,7 +41,8 @@ npm run dev        # http://localhost:3000
 ## API routes (`app/api/`) — the desktop contract
 Auth (Supabase JWT bearer) + Upstash rate-limit on all. camelCase fields. Keep shapes stable.
 - **`ai/vision`** — round-end screenshot → coach feedback. `maxDuration 90s`, AI timeout 60s,
-  rate 4/min·30/day. gpt-5-mini, `json_schema` strict. Returns `{deathAnalysis, enemyAnalysis[],
+  rate limitleri **tek kaynak `lib/api-auth.ts`** (bugün 6/min · 100/gün, beta). gpt-5-mini,
+  `json_schema` strict. Returns `{deathAnalysis, enemyAnalysis[],
   nextRoundSuggestion}`. Image optional when `died=false`.
 - **`ai/report`** (alias **`ai/match-report`**, desktop posts here) — match summary
   `{summary, mistake, tendencies, adjustment, bestRound, decisionScore, ...stats, savedAnalysisId?}`.
@@ -50,9 +51,13 @@ Auth (Supabase JWT bearer) + Upstash rate-limit on all. camelCase fields. Keep s
 - **`ai/feedback`** — text-only per-round feedback. `ai/insight` — dashboard long-term insight
   (whitelisted context fields only). **`telemetry`** — PII-free events, user_id SHA256-hashed; must
   stay in sync with desktop `telemetry.rs` `CANONICAL_KIND_LIST` (`lib/telemetry-types.ts`).
+<!-- B112 (2026-07-31): ai/vision satırında "4/min·30/day" yazıyordu, kod 6/min·100/gün'e çıkmıştı.
+     Sayıyı burada tekrarlamak bayatlıyor ve Friday denetiminde sahte alarm üretiyor → tek kaynağa
+     (lib/api-auth.ts RATE_LIMITS/DAILY_QUOTA) işaret ediyoruz. -->
 
 ## lib/ modules
-`api-auth` (JWT + Upstash rate-limit; `DEV_USER_ALLOWLIST` bypass — REMOVE after beta) ·
+`api-auth` (JWT + Upstash rate-limit; env tabanlı bypass YOK — tek bypass yolu admin panelinden
+verilen runtime `grantRateBypass`/`revokeRateBypass`, TTL'li, yalnız limit AŞILDIĞINDA bakılır) ·
 `auth-rate-limit` (auth flows) · `ai-policy` (coach-voice rules, ban list, rubrics) ·
 `knowledge-loader` (fs-reads `knowledge/**/*.md`, cached; needs `outputFileTracingIncludes` in
 `next.config.ts` or Vercel can't find KB) · `round-engine` (death clusters, survival) · `scoring` ·
@@ -60,6 +65,10 @@ Auth (Supabase JWT bearer) + Upstash rate-limit on all. camelCase fields. Keep s
 `prompt-safety` (injection defense: strip tags/bidi/zero-width/role-prefixes, length cap) ·
 `reality-checker` (anti-hallucination) · `otp`/`email` (Resend) · `supabase` (browser) /
 `supabase/server` (service-role, `server-only` guard).
+<!-- B7 (2026-07-31): api-auth satırında "DEV_USER_ALLOWLIST bypass — REMOVE after beta" yazıyordu;
+     YANLIŞTI — o env bypass'ı koddan tamamen kaldırıldı (lib/api-auth.ts, "DEV_USER_ALLOWLIST
+     KALDIRILDI" gerekçe bloğu). Doküman bayat kalırsa denetçi var olmayan bir env'i arar ve
+     gerçek bypass yüzeyini (admin panelinden verilen grantRateBypass) gözden kaçırır. -->
 
 ## Security model
 JWT via `supabase.auth.getUser`. Rate-limit per-user (per-min/daily) + per-IP (3×), Upstash; fails

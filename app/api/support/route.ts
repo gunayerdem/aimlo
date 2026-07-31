@@ -1,7 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, after } from "next/server";
 import { verifyAuthAndRateLimit } from "@/lib/api-auth";
 import { sanitizePromptInput } from "@/lib/prompt-safety";
 import { createServiceSupabase } from "@/lib/supabase/server";
+import { sendSupportNotification } from "@/lib/email";
 
 /**
  * POST /api/support
@@ -25,8 +26,12 @@ import { createServiceSupabase } from "@/lib/supabase/server";
  * Body: { message: string }
  * Response: { ok: true } | { ok: false, error: string }  (camelCase, structured).
  *
- * Note: requires migration supabase/0010_support_messages.sql — NOT yet applied
- * in prod. Until it is, inserts fail and we return a structured 503.
+ * Note: requires migration supabase/0010_support_messages.sql — APPLIED in prod
+ * (B28 denetimi, 2026-07-31: tabloda canlı kayıt var). Tablo bir şekilde
+ * kaybolursa insert patlar ve yapısal 503 döneriz.
+ *
+ * Bildirim: insert BAŞARILI olduktan sonra `after()` ile e-posta gönderilir
+ * (B28). Fire-and-forget — mail hatası ticket'ı ya da yanıtı etkilemez.
  */
 
 // Tight Vercel timeout — a single small INSERT, no AI.
@@ -131,6 +136,26 @@ async function handleSupport(request: NextRequest): Promise<NextResponse> {
       { status: 503 },
     );
   }
+
+  // B28 (2026-07-31): ticket DB'ye yazılıyordu ama softi'ye HİÇBİR sinyal
+  // gitmiyordu — /admin/support'a bakılmadıkça görünmezdi (duyuru günü ilk
+  // kullanıcılar yanıtsız kalır). `after()` yanıt gönderildikten SONRA koşar:
+  // INSERT'i de kullanıcının gördüğü yanıtı da ASLA bloklamaz. Mail hatası
+  // ticket'ı geçersiz kılmaz (kayıt DB'de duruyor) → yalnız loglanır.
+  after(async () => {
+    try {
+      await sendSupportNotification({
+        userEmail: email,
+        userId: auth.userId,
+        message,
+      });
+    } catch (mailErr) {
+      console.error(
+        "[Aimlo support] bildirim maili gönderilemedi (ticket KAYITLI):",
+        (mailErr as Error).message,
+      );
+    }
+  });
 
   return NextResponse.json({ ok: true }, { status: 200 });
 }

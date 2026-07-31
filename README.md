@@ -46,12 +46,18 @@ deprecation notices**.
 ## Security posture
 
 - All `/api/ai/*` routes require a valid Supabase Bearer token.
-- Rate limits: 4–15 req/min per route, 30–200/day, IP-augmented at 3× user limit.
+- Rate limits: per-route per-minute window + daily quota, IP-augmented at 3× the user limit.
+  Single source of truth: `RATE_LIMITS` / `DAILY_QUOTA` in `lib/api-auth.ts`
+  (today the AI routes sit at 5–15 req/min and 30–100/day).
 - Prompt-injection: user-controlled fields run through `lib/prompt-safety.ts`
   before being placed into prompts (strips closing tags, control chars,
   bidi/zero-width unicode, role prefixes).
 - `next.config.ts` sets CSP, HSTS, COOP/CORP, frame-ancestors none.
 - Anthropic + Upstash secrets are server-only — never `NEXT_PUBLIC_*`.
+<!-- B29 (2026-07-31): rate-limit satırında "4–15 req/min, 30–200/day" yazıyordu, bayatlamıştı —
+     feedback günlük kotası 200→30 indirildi, vision 100'e çıktı, artık hiçbir route 4/min değil.
+     Sayıyı README'de tekrarlamak yerine tek kaynağa (lib/api-auth.ts) işaret ediyoruz ki bir
+     sonraki kota değişiminde yine yalan olmasın. -->
 
 ## Where things are
 

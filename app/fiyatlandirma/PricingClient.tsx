@@ -49,8 +49,16 @@ const COPY = {
     select: "Seç",
     diffTitle: "Farkı keşfet",
     /* Ek "abonelik" ismine biniyor, "+" işaretine DEĞİL — "AIMLO+'ta" okunaksız. */
-    diffSub: "Ücretsiz hesapla haftada 3 maçını analiz et. AIMLO+ aboneliğinde sınır yok.",
+    diffSub: "Ücretsiz hesapla haftada 3 maçını analiz et. AIMLO+ aboneliğinde haftalık limit kalkar.",
     betaNote: "Beta süresince tüm özellikler sınırsız ve ücretsiz.",
+    /* B91 (2026-07-31): kota bayrağı AÇILDIĞINDA "beta süresince sınırsız"
+       cümlesi YALAN olur. Metin artık bayrağa bağlı — bu satır, kota
+       uygulanırken betaNote'un YERİNE gösterilir. */
+    quotaNote: "Ücretsiz hesapta haftada 3 maç analizi. AIMLO+ ile adil kullanım kapsamında ayda 100 maç.",
+    /* B14 (2026-07-31): AIMLO+ artık "sınırsız" DEĞİL — birim ekonomi başa baş
+       ≈100 maç/ay olduğu için adil kullanım tavanı kondu (lib/entitlements.ts
+       PLUS_MONTHLY_MATCH_QUOTA). Sayı orada değişirse burası da güncellenmeli. */
+    fairUse: "* Adil kullanım: AIMLO+ aboneliğinde ayda 100 maç analizi. Günde 3 maç oynayan bir oyuncu bu tavanı görmez.",
     colFree: "Ücretsiz hesap",
     colPro: "AIMLO+",
     /* Ekran okuyucu: artı işareti aria-hidden, anlamı buradan gelir. */
@@ -63,7 +71,7 @@ const COPY = {
        aşağıda liste hâlinde duruyor: değer görünmeye devam ediyor ama
        karşılaştırmayı boğmuyor. */
     diffRows: [
-      { label: "Maç analizi", free: "Haftada 3", pro: "Sınırsız" },
+      { label: "Maç analizi", free: "Haftada 3", pro: "Sınırsız*" },
       { label: "Tüm koçluk özellikleri", free: true },
     ],
     sharedTitle: "İki planda da var",
@@ -110,14 +118,16 @@ const COPY = {
     selected: "Selected",
     select: "Select",
     diffTitle: "See the difference",
-    diffSub: "Analyse 3 matches a week on a free account. AIMLO+ removes the limit.",
+    diffSub: "Analyse 3 matches a week on a free account. AIMLO+ removes the weekly limit.",
     betaNote: "Everything is unlimited and free during the beta.",
+    quotaNote: "Free accounts analyse 3 matches a week. AIMLO+ covers 100 matches a month under fair use.",
+    fairUse: "* Fair use: AIMLO+ covers 100 match analyses per month. Playing 3 matches a day never reaches that ceiling.",
     colFree: "Free account",
     colPro: "AIMLO+",
     a11yIncluded: "included",
     a11yExcluded: "not included",
     diffRows: [
-      { label: "Match analysis", free: "3 per week", pro: "Unlimited" },
+      { label: "Match analysis", free: "3 per week", pro: "Unlimited*" },
       { label: "All coaching features", free: true },
     ],
     sharedTitle: "On both plans",
@@ -195,7 +205,17 @@ function Cell({ v, tone = "brand", label }: { v: boolean | string; tone?: "brand
   return <PlusCell tone={tone} label={label} />;
 }
 
-export default function PricingClient({ initialLang = "TR" }: { initialLang?: Lang }) {
+/** B91 (2026-07-31): `quotaEnforced` sunucudan gelir (FREE_TIER_ENFORCED).
+ *  Beta vaadi ("sınırsız ve ücretsiz") ile kota kapısı ayrı ayrı yaşayınca
+ *  metin yalan söylüyordu; artık tek kaynağa bağlı. Varsayılan false =
+ *  bugünkü davranış (beta rozeti). */
+export default function PricingClient({
+  initialLang = "TR",
+  quotaEnforced = false,
+}: {
+  initialLang?: Lang;
+  quotaEnforced?: boolean;
+}) {
   const [lang, setLang] = useState<Lang>(initialLang);
   const [plan, setPlan] = useState<Plan>("yillik");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -313,10 +333,11 @@ export default function PricingClient({ initialLang = "TR" }: { initialLang?: La
         <div className="space-y-3 text-center">
           <h2 className="text-3xl font-black tracking-tight text-white">{c.diffTitle}</h2>
           <p className="mx-auto max-w-lg text-[14px] text-neutral-400">{c.diffSub}</p>
-          {/* Beta dürüstlüğü: kota kodda hazır ama KAPALI — şu an kimse sınıra
-              çarpmıyor. Tabloda gelecekteki model, burada bugünkü gerçek. */}
+          {/* Beta dürüstlüğü: kota kodda hazır ama KAPALIYKEN kimse sınıra
+              çarpmıyor. Bayrak açıldığında "beta süresince sınırsız" cümlesi
+              YALAN olurdu (B91) — o yüzden metin bayrağa bağlı. */}
           <p className="inline-block rounded-full border border-[#FF4655]/30 bg-[#FF4655]/[0.07] px-4 py-1.5 text-[12px] font-semibold text-[#FF6B77]">
-            {c.betaNote}
+            {quotaEnforced ? c.quotaNote : c.betaNote}
           </p>
         </div>
         <div className="overflow-x-auto">
@@ -358,6 +379,13 @@ export default function PricingClient({ initialLang = "TR" }: { initialLang?: La
             </tbody>
           </table>
         </div>
+
+        {/* B14 (2026-07-31): "Sınırsız*" yıldızının karşılığı — adil kullanım
+            tavanı lib/entitlements.ts PLUS_MONTHLY_MATCH_QUOTA'da uygulanıyor.
+            Vaadi kodun gerçekten yaptığı şeye bağlar. */}
+        <p className="text-center text-[11px] leading-relaxed text-neutral-600">
+          {c.fairUse}
+        </p>
 
         {/* Ortak özellikler — tablodan ÇIKARILDI, burada liste hâlinde.
             Tablo artık yalnız farkı gösteriyor; değer görünmeye devam

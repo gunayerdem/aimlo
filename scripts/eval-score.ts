@@ -22,6 +22,13 @@ import { scoreFields } from "../evals/generic-detector";
 
 type Sample = {
   id: string;
+  /* B57 (2026-07-31): eval-vision artık örneğin dilini yazıyor. Bu dosyanın
+   * ölçütlerinin BÜYÜK kısmı TÜRKÇE'ye özgü (BANNED_PHRASES, tarzanca kalıpları,
+   * apostrof/ek kuralları) — EN aynası senaryoları aynı torbada puanlanırsa
+   * "0 ihlal" yanıltıcı bir iyileşme gibi görünür. Alan opsiyonel: eski
+   * cycle*-samples.json dosyalarında YOK → filtre uygulanmazsa davranış
+   * bugünküyle birebir aynı kalır. */
+  lang?: "tr" | "en";
   kbFiles?: string[];
   systemPromptBytes?: number;
   usage?: Record<string, number>;
@@ -37,7 +44,14 @@ const OUT_DIR = path.join(process.cwd(), "scripts", "eval-out");
 function load(cycle: string): Sample[] {
   const p = path.join(OUT_DIR, `cycle${cycle}-samples.json`);
   if (!fs.existsSync(p)) throw new Error(`bulunamadı: ${p}`);
-  return JSON.parse(fs.readFileSync(p, "utf8"));
+  const all: Sample[] = JSON.parse(fs.readFileSync(p, "utf8"));
+  /* B57 (2026-07-31): EVAL_SCORE_LANG=tr|en → yalnız o dilin örnekleri puanlanır.
+   * TANIMSIZSA HİÇBİR FİLTRE YOK = bugünkü davranış birebir korunur (eski
+   * cycle'lar ve mevcut A/B kanıtları etkilenmez). Örnekte lang yoksa "tr"
+   * sayılır — EN alanı 2026-07-31'de eklendi, öncesi tamamen TR korpusuydu. */
+  const want = process.env.EVAL_SCORE_LANG;
+  if (want !== "tr" && want !== "en") return all;
+  return all.filter((s) => (s.lang === "en" ? "en" : "tr") === want);
 }
 
 /** Senaryo id'sinden harita adını çıkar: "S1-ascent-cypher-def-strong" → "ascent" */

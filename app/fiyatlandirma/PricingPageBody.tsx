@@ -41,6 +41,16 @@ const LEGAL_LINKS: Record<Lang, ReadonlyArray<{ href: string; label: string }>> 
 export function PricingPageBody({ lang }: { lang: Lang }) {
   const links = LEGAL_LINKS[lang];
 
+  /* B91 (2026-07-31): "Beta süresince sınırsız ve ücretsiz" sabit metindi;
+     FREE_TIER_ENFORCED açıldığı an sayfa yalan söylerdi. Kural
+     lib/entitlements.isFreeTierEnforced ile AYNI ("true" string'i, tam eşleşme).
+     Oradan import ETMİYORUZ bilerek: lib/entitlements → lib/billing →
+     lib/supabase/server zinciri servis-rol anahtarını import anında doğruluyor;
+     halka açık bir pazarlama sayfasını o zincire bağlamak build/render'ı
+     gereksiz bir sırra bağımlı kılardı. Bayrak Vercel'de değişince redeploy
+     zaten gerekiyor. */
+  const quotaEnforced = process.env.FREE_TIER_ENFORCED === "true";
+
   return (
     /* main'de yatay padding YOK: tepe paneli kenardan kenara uzansın
        (ana sayfadaki gibi). Yatay boşluk article'a taşındı. */
@@ -51,7 +61,7 @@ export function PricingPageBody({ lang }: { lang: Lang }) {
       <PricingBackdrop />
       {/* pb-24: sabit ödeme çubuğunun payı — sayfanın EN SONUNDA. */}
       <article className="relative z-10 mx-auto max-w-3xl space-y-14 px-4 pb-24 pt-10">
-        <PricingClient initialLang={lang} />
+        <PricingClient initialLang={lang} quotaEnforced={quotaEnforced} />
 
         <SellerInfo />
 

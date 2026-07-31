@@ -2086,6 +2086,41 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               </span>
             ))}
           </div>
+          {/* B54 (2026-07-31): Vanguard/anti-cheat güven bloğu. Ekran-yakalama
+              tabanlı koçlarda kullanıcının 1 numaralı itirazı "ban yer miyim";
+              rakipler (GhostCoach/UpForge) mimariyi açıkça anlatıp bu itirazı
+              eritiyor. Bizde ayrıntı /guvenlik sayfasında vardı ama landing'den
+              tek bir bağlantı bile yoktu — indirme kararının TAM önüne koyuldu. */}
+          <div className="mx-auto mb-9 max-w-xl rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 text-left">
+            <p className="flex items-center gap-2 text-[13px] font-semibold text-white">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF4655" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              {lang === "tr" ? "Vanguard ile güvenli" : "Safe with Vanguard"}
+            </p>
+            <ul className="mt-3 space-y-1.5">
+              {(lang === "tr"
+                ? [
+                    "Oyunun belleğini okumaz, yazmaz",
+                    "Oyuna kod/DLL enjekte etmez, oyun dosyalarını değiştirmez",
+                    "Yalnızca görünen ekranı okur — OBS ya da Discord ekran paylaşımı gibi",
+                    "Senin yerine nişan almaz, tuşa basmaz",
+                  ]
+                : [
+                    "Never reads or writes game memory",
+                    "No code/DLL injection, no game files touched",
+                    "Reads only the visible screen — like OBS or Discord screen share",
+                    "Never aims or presses a key for you",
+                  ]
+              ).map((line, li) => (
+                <li key={li} className="flex items-start gap-2 text-[12px] text-neutral-400 leading-relaxed">
+                  <svg className="mt-[3px] shrink-0" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FF4655" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  {line}
+                </li>
+              ))}
+            </ul>
+            <Link href="/guvenlik" className="mt-4 inline-block text-[12px] text-[#FF4655] hover:text-[#FF6B77] transition">
+              {lang === "tr" ? "Nasıl çalıştığını oku →" : "Read how it works →"}
+            </Link>
+          </div>
           <a
             href="/download"
             className="btn-neon rounded-xl px-10 py-4 text-[14px] inline-flex items-center gap-2 mx-auto"
@@ -2093,12 +2128,28 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             {lang === "tr" ? "Windows için İndir" : "Download for Windows"}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="12" y1="3" x2="12" y2="15"/><polyline points="7 10 12 15 17 10"/><line x1="5" y1="21" x2="19" y2="21"/></svg>
           </a>
-          <p className="mt-5 text-[11px] text-neutral-700">Windows 10+ · ~9MB · .msi</p>
-          <p className="mt-2 text-[11px] text-neutral-600 max-w-sm mx-auto leading-relaxed">
-            {lang === "tr"
-              ? 'Kurulumda Windows "bilinmeyen yayıncı" uyarısı çıkarsa "Daha fazla bilgi" → "Yine de çalıştır" deyin.'
-              : 'If Windows shows an "unknown publisher" prompt, click "More info" → "Run anyway".'}
-          </p>
+          <p className="mt-5 text-[11px] text-neutral-700">Windows 10+ · ~12MB · .msi</p>
+          {/* B3 (2026-07-31): SmartScreen rehberi. MSI henüz Authenticode imzalı
+              değil (SSL.com sertifikası bekleniyor) → her yeni kullanıcı
+              "Windows PC'nizi korudu" ekranını görüyor. Buradaki uyarı tek satır,
+              11px gri bir dipnottu; duyuru trafiğinde ilk-kurulum dönüşümünü
+              kaybetmemek için adım adım ve görünür hale getirildi. */}
+          <div className="mx-auto mt-6 max-w-md rounded-xl border border-white/[0.07] bg-white/[0.02] px-4 py-3.5 text-left">
+            <p className="text-[12px] font-semibold text-neutral-300">
+              {lang === "tr"
+                ? "Kurulumda Windows uyarısı çıkarsa (normaldir)"
+                : "If Windows shows a warning (this is normal)"}
+            </p>
+            <ol className="mt-2 space-y-1 text-[11px] text-neutral-500 leading-relaxed">
+              <li>{lang === "tr" ? '1. "Daha fazla bilgi"ye tıkla' : '1. Click "More info"'}</li>
+              <li>{lang === "tr" ? '2. "Yine de çalıştır"ı seç' : '2. Choose "Run anyway"'}</li>
+            </ol>
+            <p className="mt-2.5 text-[11px] text-neutral-600 leading-relaxed">
+              {lang === "tr"
+                ? "Bu ekran, kurulum dosyamızın imza sertifikası henüz tamamlanmadığı için çıkıyor — dosya her zaman aimlo.gg üzerinden dağıtılır ve uygulama güncellemeleri imzayla doğrulanır."
+                : "This screen appears because our installer's signing certificate is still in progress — the file is always served from aimlo.gg and app updates are signature-verified."}
+            </p>
+          </div>
         </div>
       </section>
 
@@ -2757,12 +2808,18 @@ export default function Home() {
     }
     let allReports: SavedReport[] = [];
     try {
+      // B126 (2026-07-31): pencere 50 → 200. Skill profili + oyun-tarzı
+      // hesapları (webSkillProfile/webPlaystyle) BU kesit üzerinden koşuyor;
+      // 50'de yoğun kullanıcının uzun-vadeli trendi kırpılıyor ve desktop
+      // (limitsiz çekiyor) ile web farklı sonuç gösteriyordu. 200 hâlâ sınırlı
+      // bir tavan — kalıcı çözüm sayfalama ya da profili player_memory'den
+      // (kümülatif) okumak; o iş bu dosyanın dışında.
       const { data, error } = await supabase
         .from("analyses")
         .select("*")
         .eq("user_id", user.id)
         .order("created_at", { ascending: false })
-        .limit(50);
+        .limit(200);
       if (error) console.error("[Aimlo] History load error:", error.message);
       else if (data?.length)
         allReports = data.map((row: Record<string, unknown>) =>

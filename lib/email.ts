@@ -16,21 +16,107 @@ import { Resend } from "resend";
  *   3) Create an API key (Production scope) → set RESEND_API_KEY env.
  *   4) Until the domain is verified, use `onboarding@resend.dev` as the
  *      sender — Resend will only let you send to your own account email.
+ *
+ * B31 (2026-07-31): OTP maili + destek bildirimi AYNI Resend kotasını
+ * paylaşır. Ücretsiz katmanda gün içinde 100 mail sınırı dolarsa kayıt
+ * hunisi durur — bu yüzden aşağıdaki `EmailSendError.reason` sınıflandırması
+ * ve "MAIL-KAPALI" log damgası var. Launch öncesi ücretli plan doğrulanmalı.
  */
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const EMAIL_FROM = process.env.EMAIL_FROM || "AIMLO <support@aimlo.gg>";
+/** Destek bildirimlerinin gideceği kutu (B28). Env ile değiştirilebilir. */
+const SUPPORT_NOTIFY_TO = process.env.SUPPORT_NOTIFY_TO || "support@aimlo.gg";
 
 let cachedClient: Resend | null = null;
 
+/* ────────────────────────────────────────────────────────────────
+   B31 (2026-07-31): OTP maili kayıt hunisinin TEK bacağı ve Resend'in
+   ücretsiz katmanı 100/gün. Eskiden her hata tek tip `Error` idi; çağıran
+   "kota mı doldu, anahtar mı yanlış, geçici mi" ayrımını yapamıyor ve
+   kullanıcıya doğru yolu (yeniden gönder / biraz sonra dene) gösteremiyordu.
+   Sebebi sınıflandırıyoruz + kota/anahtar hatasını loglarda GÖRÜNÜR
+   yapıyoruz (aksi halde duyuru günü kayıt sessizce ölür).
+   ──────────────────────────────────────────────────────────────── */
+export type EmailFailReason =
+  /** RESEND_API_KEY yok/geçersiz — deploy sorunu, kullanıcı çözemez. */
+  | "config"
+  /** Günlük/dakikalık gönderim kotası doldu — biraz sonra tekrar dene. */
+  | "quota"
+  /** Alıcı adresi Resend tarafından reddedildi. */
+  | "invalid"
+  /** Ağ/5xx — geçici. */
+  | "transient";
+
+/** Resend SDK'sının hata şekli (gevşek — SDK sürümüne bağlanmıyoruz). */
+type ResendErrorLike = { message?: string; name?: string; statusCode?: number | null };
+
+export class EmailSendError extends Error {
+  readonly reason: EmailFailReason;
+  constructor(reason: EmailFailReason, message: string) {
+    super(message);
+    this.name = "EmailSendError";
+    this.reason = reason;
+  }
+}
+
+/** Bilinmeyen hataları güvenli tarafa ("transient") düşürür. */
+export function emailFailReason(e: unknown): EmailFailReason {
+  return e instanceof EmailSendError ? e.reason : "transient";
+}
+
+function classifyResendError(
+  name: string,
+  message: string,
+  statusCode?: number | null,
+): EmailFailReason {
+  if (statusCode === 429) return "quota";
+  if (statusCode === 401 || statusCode === 403) return "config";
+  if (statusCode === 422) return "invalid";
+
+  const s = `${name} ${message}`.toLowerCase();
+  if (s.includes("api_key") || s.includes("api key") || s.includes("unauthorized") || s.includes("forbidden")) {
+    return "config";
+  }
+  if (s.includes("rate_limit") || s.includes("rate limit") || s.includes("quota") || s.includes("too many")) {
+    return "quota";
+  }
+  if (s.includes("validation") || s.includes("invalid_parameter") || s.includes("invalid to") || s.includes("not a valid")) {
+    return "invalid";
+  }
+  return "transient";
+}
+
+/** Ops'un görmesi gereken iki sınıf için tek satırlık, aranabilir log damgası. */
+function logIfOpsActionable(reason: EmailFailReason, where: string, detail: string): void {
+  if (reason === "quota" || reason === "config") {
+    console.error(
+      `[Aimlo email] MAIL-KAPALI (${reason}) — ${where}: ${detail}. ` +
+        "Resend planını/anahtarını kontrol et; bu sürerken kayıt/destek maili gitmiyor.",
+    );
+  }
+}
+
 function getClient(): Resend {
   if (!RESEND_API_KEY) {
-    throw new Error("RESEND_API_KEY missing — cannot send mail");
+    throw new EmailSendError("config", "RESEND_API_KEY missing — cannot send mail");
   }
   if (!cachedClient) {
     cachedClient = new Resend(RESEND_API_KEY);
   }
   return cachedClient;
+}
+
+/** HTML gövdesine gömülen her kullanıcı metni için — mail istemcisinde
+ *  markup çalışmasın diye (destek mesajı prompt-safety'den geçse bile
+ *  savunma-derinliği olarak burada da kaçırıyoruz). */
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 export type EmailLang = "tr" | "en";
@@ -57,20 +143,102 @@ export async function sendOtpEmail({
       ? `AIMLO doğrulama kodun: ${formatted}`
       : `Your AIMLO verification code: ${formatted}`;
 
-  const { error } = await client.emails.send({
-    from: EMAIL_FROM,
-    to: [to],
-    subject,
-    text: textBody(formatted, lang, purpose),
-    html: htmlBody(formatted, lang, purpose),
-  });
+  // B31 (2026-07-31): ağ katmanı istisnası da atabiliyor — SDK'nın döndürdüğü
+  // `error` ile aynı sınıflandırmadan geçsin ki çağıran tek tip davransın.
+  let error: ResendErrorLike | null = null;
+  try {
+    ({ error } = await client.emails.send({
+      from: EMAIL_FROM,
+      to: [to],
+      subject,
+      text: textBody(formatted, lang, purpose),
+      html: htmlBody(formatted, lang, purpose),
+    }));
+  } catch (e) {
+    const msg = (e as Error).message ?? String(e);
+    const reason = classifyResendError("", msg);
+    logIfOpsActionable(reason, "sendOtpEmail", msg);
+    throw new EmailSendError(reason, `Resend request failed: ${msg}`);
+  }
 
   if (error) {
     // Resend's SDK returns errors instead of throwing on most cases — surface
     // them so the caller's catch can show a useful message to the user.
-    throw new Error(
-      `Resend API error: ${error.message ?? JSON.stringify(error)}`,
-    );
+    const msg = error.message ?? JSON.stringify(error);
+    const reason = classifyResendError(error.name ?? "", msg, error.statusCode);
+    logIfOpsActionable(reason, "sendOtpEmail", msg);
+    throw new EmailSendError(reason, `Resend API error: ${msg}`);
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────
+   B28 (2026-07-31): destek ticket'ı DB'ye yazılıyordu ama softi'ye HİÇBİR
+   sinyal gitmiyordu — /admin/support'a bakılmadıkça ticket görünmezdi.
+   Duyuru günü ilk kullanıcıların (ör. SmartScreen'e takılanlar) yanıtsız
+   kalması en pahalı ilk izlenim kaybı. Bu fonksiyon route'tan `after()` ile
+   ÇAĞRILIR: yanıt gönderildikten sonra koşar, INSERT'i asla bloklamaz.
+   ──────────────────────────────────────────────────────────────── */
+export interface SupportNotifyParams {
+  /** Ticket sahibinin e-postası — Reply-To olarak takılır (yoksa null). */
+  userEmail: string | null;
+  /** Doğrulanmış JWT'den gelen user_id (panelde aramak için). */
+  userId: string;
+  /** ZATEN sanitize edilmiş mesaj (route prompt-safety'den geçiriyor). */
+  message: string;
+}
+
+export async function sendSupportNotification({
+  userEmail,
+  userId,
+  message,
+}: SupportNotifyParams): Promise<void> {
+  const client = getClient();
+
+  // Konu satırı: mesajın ilk satırından kısa bir önizleme — gelen kutusunda
+  // ticket'ı açmadan ayırt edebilmek için.
+  const preview = message.replace(/\s+/g, " ").trim().slice(0, 60);
+  const subject = `[AIMLO destek] ${preview || "yeni ticket"}`;
+
+  const text = [
+    "Yeni destek mesajı — /admin/support",
+    "",
+    `Kullanıcı: ${userEmail ?? "(e-posta yok)"}`,
+    `user_id: ${userId}`,
+    "",
+    "Mesaj:",
+    message,
+  ].join("\n");
+
+  const html = `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;font-size:14px;color:#111;">
+  <p style="margin:0 0 12px 0;"><strong>Yeni destek mesajı</strong> — <a href="https://aimlo.gg/admin/support">/admin/support</a></p>
+  <p style="margin:0 0 4px 0;color:#555;">Kullanıcı: <strong>${escapeHtml(userEmail ?? "(e-posta yok)")}</strong></p>
+  <p style="margin:0 0 16px 0;color:#888;font-size:12px;">user_id: ${escapeHtml(userId)}</p>
+  <pre style="white-space:pre-wrap;word-break:break-word;background:#f5f5f7;border:1px solid #e3e3e8;border-radius:8px;padding:14px;margin:0;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;">${escapeHtml(message)}</pre>
+</div>`;
+
+  let error: ResendErrorLike | null = null;
+  try {
+    ({ error } = await client.emails.send({
+      from: EMAIL_FROM,
+      to: [SUPPORT_NOTIFY_TO],
+      // Doğrudan "yanıtla" ile kullanıcıya dönebilmek için.
+      ...(userEmail ? { replyTo: userEmail } : {}),
+      subject,
+      text,
+      html,
+    }));
+  } catch (e) {
+    const msg = (e as Error).message ?? String(e);
+    const reason = classifyResendError("", msg);
+    logIfOpsActionable(reason, "sendSupportNotification", msg);
+    throw new EmailSendError(reason, `Resend request failed: ${msg}`);
+  }
+
+  if (error) {
+    const msg = error.message ?? JSON.stringify(error);
+    const reason = classifyResendError(error.name ?? "", msg, error.statusCode);
+    logIfOpsActionable(reason, "sendSupportNotification", msg);
+    throw new EmailSendError(reason, `Resend API error: ${msg}`);
   }
 }
 

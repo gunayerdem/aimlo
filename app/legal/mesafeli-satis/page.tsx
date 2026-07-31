@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PRODUCT_NAME, PLAN_NAMES } from "@/lib/brand";
 import { SiteHeader } from "@/app/_components/SiteHeader";
+import { SELLER } from "@/lib/seller";
 
 export const metadata: Metadata = {
   title: "Mesafeli Satış Sözleşmesi ve Ön Bilgilendirme Formu — AIMLO",
@@ -9,7 +10,16 @@ export const metadata: Metadata = {
     "AIMLO+ dijital abonelik hizmetine ilişkin Mesafeli Satış Sözleşmesi ve Ön Bilgilendirme Formu.",
 };
 
-const PLACEHOLDER =
+/* B122 (2026-07-31): eski `PLACEHOLDER` sabiti gerçek künye değerlerini kırmızı
+   mono-font chip'e sarıyordu — hukuki belge "doldurulmamış şablon" gibi
+   görünüyordu (ödeme kuruluşu incelemesinde güven kıran detay). Değerler nötr
+   metin oldu; ad da amacını yansıtacak şekilde `FIELD` yapıldı. */
+const FIELD = "text-neutral-300";
+
+/* Henüz KESİNLEŞMEMİŞ alan (ödeme kuruluşu unvanı — sağlayıcı seçimi
+   sürüyor). Vurgu bilerek duruyor: burası gerçekten doldurulacak bir yer,
+   yayına almadan önce nihai kuruluş adıyla değiştirilmeli. */
+const PENDING =
   "inline-block rounded bg-[#FF4655]/10 px-1.5 py-0.5 font-mono text-[12px] text-[#FF6B77]";
 
 export default function MesafeliSatisPage() {
@@ -46,31 +56,34 @@ export default function MesafeliSatisPage() {
         <section className="space-y-3 text-sm leading-relaxed text-neutral-300">
           <h2 className="text-lg font-bold text-white">1. Taraflar</h2>
 
+          {/* B123 (2026-07-31): künye artık lib/seller.ts TEK KAYNAK'tan —
+              adres/telefon değişince beş sayfa arasında tutarsızlık doğmaz
+              (mesafeli satış mevzuatının cezalandırdığı hata sınıfı). */}
           <h3 className="font-semibold text-white">1.1. SATICI</h3>
           <ul className="list-none space-y-1.5 rounded-lg border border-white/10 bg-white/[0.02] p-4">
             <li>
               <span className="text-neutral-500">Ticaret Unvanı: </span>
-              <span className={PLACEHOLDER}>{"GÜNAY ERDEM VE KAAN DAĞDELEN ADİ ORTAKLIĞI"}</span>
+              <span className={FIELD}>{SELLER.tradeName}</span>
             </li>
             <li>
               <span className="text-neutral-500">Adres: </span>
-              <span className={PLACEHOLDER}>{"Yenişehir Mah. Ankara Cad. 360 Office Kapı No: 405 Daire No: 95 Pendik/İstanbul"}</span>
+              <span className={FIELD}>{SELLER.address}</span>
             </li>
             <li>
               <span className="text-neutral-500">Telefon: </span>
-              <span className={PLACEHOLDER}>{"0534 911 31 81"}</span>
+              <span className={FIELD}>{SELLER.phone}</span>
             </li>
             <li>
               <span className="text-neutral-500">E-posta: </span>
-              <span className={PLACEHOLDER}>{"support@aimlo.gg"}</span>
+              <span className={FIELD}>{SELLER.email}</span>
             </li>
             <li>
               <span className="text-neutral-500">Vergi Dairesi: </span>
-              <span className={PLACEHOLDER}>{"Pendik Vergi Dairesi"}</span>
+              <span className={FIELD}>{SELLER.taxOffice}</span>
             </li>
             <li>
               <span className="text-neutral-500">Vergi Numarası: </span>
-              <span className={PLACEHOLDER}>{"4271175312"}</span>
+              <span className={FIELD}>{SELLER.taxNumber}</span>
             </li>
             <li>
               <span className="text-neutral-500">İnternet Sitesi: </span>
@@ -186,7 +199,7 @@ export default function MesafeliSatisPage() {
               <strong className="text-white">
                 lisanslı bir ödeme kuruluşu
               </strong>{" "}
-              (<span className={PLACEHOLDER}>{"iyzico Ödeme Hizmetleri A.Ş."}</span>)
+              (<span className={PENDING}>{"iyzico Ödeme Hizmetleri A.Ş."}</span>)
               altyapısı üzerinden güvenli şekilde tahsil edilir. SATICI kart
               bilgilerini saklamaz.
             </li>
@@ -270,7 +283,7 @@ export default function MesafeliSatisPage() {
             <strong className="text-white">14 (on dört) gün</strong> içinde
             hiçbir gerekçe göstermeksizin ve cezai şart ödemeksizin cayma hakkını
             kullanabilir. Cayma bildirimi{" "}
-            <span className={PLACEHOLDER}>{"support@aimlo.gg"}</span> adresine yazılı
+            <span className={FIELD}>{SELLER.email}</span> adresine yazılı
             olarak veya kalıcı veri saklayıcısı ile iletilir. Usulüne uygun cayma
             hâlinde ödenen bedel, bildirimin SATICI&apos;ya ulaşmasından itibaren
             14 gün içinde ALICI&apos;ya ödeme yaptığı araçla iade edilir.
@@ -299,7 +312,7 @@ export default function MesafeliSatisPage() {
               <strong className="text-white">istediği zaman</strong>, herhangi bir
               gerekçe göstermeksizin ve ek ücret ödemeksizin hesap ayarlarından
               veya{" "}
-              <span className={PLACEHOLDER}>{"support@aimlo.gg"}</span> adresine
+              <span className={FIELD}>{SELLER.email}</span> adresine
               bildirimde bulunarak iptal edebilir.
             </li>
             <li>
@@ -358,8 +371,8 @@ export default function MesafeliSatisPage() {
           </p>
           <p>
             ALICI, şikâyet ve talepleri için öncelikle{" "}
-            <span className={PLACEHOLDER}>{"support@aimlo.gg"}</span> adresine veya{" "}
-            <span className={PLACEHOLDER}>{"0534 911 31 81"}</span> numarasına
+            <span className={FIELD}>{SELLER.email}</span> adresine veya{" "}
+            <span className={FIELD}>{SELLER.phone}</span> numarasına
             başvurabilir.
           </p>
         </section>
@@ -395,13 +408,13 @@ export default function MesafeliSatisPage() {
                 Satıcının kimliği ve iletişim bilgileri
               </h3>
               <p>
-                <span className={PLACEHOLDER}>{"GÜNAY ERDEM VE KAAN DAĞDELEN ADİ ORTAKLIĞI"}</span> ·{" "}
-                <span className={PLACEHOLDER}>{"Yenişehir Mah. Ankara Cad. 360 Office Kapı No: 405 Daire No: 95 Pendik/İstanbul"}</span> ·{" "}
-                <span className={PLACEHOLDER}>{"0534 911 31 81"}</span> ·{" "}
-                <span className={PLACEHOLDER}>{"support@aimlo.gg"}</span> · Vergi
+                <span className={FIELD}>{SELLER.tradeName}</span> ·{" "}
+                <span className={FIELD}>{SELLER.address}</span> ·{" "}
+                <span className={FIELD}>{SELLER.phone}</span> ·{" "}
+                <span className={FIELD}>{SELLER.email}</span> · Vergi
                 Dairesi/No:{" "}
-                <span className={PLACEHOLDER}>{"Pendik Vergi Dairesi"}</span> /{" "}
-                <span className={PLACEHOLDER}>{"4271175312"}</span>
+                <span className={FIELD}>{SELLER.taxOffice}</span> /{" "}
+                <span className={FIELD}>{SELLER.taxNumber}</span>
               </p>
             </div>
 
@@ -432,7 +445,7 @@ export default function MesafeliSatisPage() {
               <h3 className="font-semibold text-white">Ödeme şekli</h3>
               <p>
                 Kredi kartı veya banka kartı ile, lisanslı bir ödeme kuruluşu (
-                <span className={PLACEHOLDER}>{"iyzico Ödeme Hizmetleri A.Ş."}</span>)
+                <span className={PENDING}>{"iyzico Ödeme Hizmetleri A.Ş."}</span>)
                 altyapısı üzerinden tek çekim. Taksit seçeneği yoktur.
               </p>
             </div>
@@ -474,8 +487,8 @@ export default function MesafeliSatisPage() {
               </h3>
               <p>
                 Öncelikli başvuru:{" "}
-                <span className={PLACEHOLDER}>{"support@aimlo.gg"}</span> /{" "}
-                <span className={PLACEHOLDER}>{"0534 911 31 81"}</span>. Ayrıca
+                <span className={FIELD}>{SELLER.email}</span> /{" "}
+                <span className={FIELD}>{SELLER.phone}</span>. Ayrıca
                 ALICI, ilgili yıl için belirlenen parasal sınırlar dâhilinde
                 Tüketici Hakem Heyetlerine, bu sınırların üzerinde ise Tüketici
                 Mahkemelerine başvurabilir.

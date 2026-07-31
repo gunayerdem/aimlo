@@ -35,10 +35,27 @@ export interface TelemetryEvent {
   route?: string;
   /** Optional round number context. */
   round?: number;
+  /**
+   * B80 (2026-07-31): masaüstü sürümü (örn. "1.0.7" — Rust tarafında
+   * `env!("CARGO_PKG_VERSION")`). Auto-updater canlı olduğu için
+   * "hata yeni sürümden mi geliyor, kaç kullanıcı hâlâ eskide" sorusu her
+   * sürümde doğuyor; sürüm alanı olmadan error_code_count artışı bir
+   * sürüme bağlanamıyordu.
+   *
+   * OPSİYONEL ve additive: mevcut desktop (v1.0.7) bu alanı GÖNDERMİYOR —
+   * alan yoksa event aynen kabul edilir, sözleşme bozulmaz. Ucuz yol
+   * `TelemetryRequest.appVersion` (batch zarfı); event-seviyesi öncelikli.
+   */
+  appVersion?: string;
 }
 
 export interface TelemetryRequest {
   events: TelemetryEvent[];
+  /**
+   * B80 (2026-07-31): batch-zarfı sürüm alanı — tek alan, tek doğrulama.
+   * Event'inde `appVersion` olmayan her olay bunu devralır.
+   */
+  appVersion?: string;
 }
 
 export interface TelemetryRejection {
@@ -73,6 +90,19 @@ const VALID_TYPES: ReadonlySet<TelemetryEventType> = new Set<TelemetryEventType>
   "ocr_frame_budget_ms",
   "match_completed",
 ]);
+
+/**
+ * B80 (2026-07-31): sürüm dizesi doğrulaması — hem event-seviyesi hem
+ * batch-zarfı (`TelemetryRequest.appVersion`) aynı kuralı kullansın diye
+ * dışa açık. Serbest metin değil: yalnız uzunluk + tip kapısı, PII taşımaz.
+ */
+export function isValidAppVersion(v: unknown): v is string {
+  return (
+    typeof v === "string" &&
+    v.length > 0 &&
+    v.length <= TELEMETRY_LIMITS.maxStringLen
+  );
+}
 
 /**
  * Per-event validation. Returns null on success, or a short reason string
@@ -128,6 +158,11 @@ export function validateTelemetryEvent(
     if (typeof e.round !== "number" || !Number.isFinite(e.round) || e.round < 0 || e.round > 1000) {
       return "round_invalid";
     }
+  }
+  // B80 (2026-07-31): sürüm alanı — code/route ile aynı sınır (≤64 char),
+  // aynı anti-bloat gerekçesi. Opsiyonel: yoksa event geçerli kalır.
+  if (e.appVersion !== undefined && !isValidAppVersion(e.appVersion)) {
+    return "app_version_invalid";
   }
 
   // Type-specific shape rules.

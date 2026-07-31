@@ -6,6 +6,13 @@
 // Webhook imza doğrulaması da burada (app/api/billing/webhook kullanır):
 // Stripe-Signature v1 = HMAC-SHA256(`${t}.${rawBody}`, secret), timing-safe
 // karşılaştırma + timestamp toleransı. stripe npm paketi GEREKMEZ.
+//
+// 2026-07-31 (denetim B56/B18): ödeme sağlayıcısı kararı PADDLE olduğu hâlde
+// imza katmanı yalnız Stripe şemasını biliyordu — Paddle bağlanınca HER webhook
+// 400 dönerdi ve "imzayı geçici kapatalım" refleksi doğrulamasız bir yazma
+// endpoint'i açardı. Bu yüzden `verifyPaddleSignature` eklendi; Stripe yolu
+// AYNEN duruyor (hangi sağlayıcının kullanılacağını route env'e göre seçer).
+// paddle npm paketi de GEREKMEZ.
 import "server-only";
 
 import { createHmac, timingSafeEqual } from "node:crypto";
@@ -160,10 +167,34 @@ export async function getRevenueData(): Promise<RevenueData> {
   };
 }
 
-// ── Webhook imza doğrulaması (Stripe-Signature) ────────────────────────────
+// ── Webhook imza doğrulaması (Stripe-Signature / Paddle-Signature) ─────────
 
 /** ±5 dk timestamp toleransı — replay penceresini kapatır. */
 const SIGNATURE_TOLERANCE_SEC = 300;
+
+/** İmza başlıklarını `k=v` çiftlerine ayırır (aynı anahtar birden çok olabilir).
+ *  Stripe virgülle, Paddle noktalı virgülle ayırır — ayırıcı parametre. */
+function parseSignatureHeader(header: string, separator: string): Map<string, string[]> {
+  const parts = new Map<string, string[]>();
+  for (const piece of header.split(separator)) {
+    const idx = piece.indexOf("=");
+    if (idx <= 0) continue;
+    const k = piece.slice(0, idx).trim();
+    const v = piece.slice(idx + 1).trim();
+    if (!parts.has(k)) parts.set(k, []);
+    parts.get(k)!.push(v);
+  }
+  return parts;
+}
+
+/** Hex imzaların timing-safe karşılaştırması (uzunluk farkı erken çıkar). */
+function anySignatureMatches(candidates: string[], expected: string): boolean {
+  const expectedBuf = Buffer.from(expected, "utf8");
+  return candidates.some((sig) => {
+    const sigBuf = Buffer.from(sig, "utf8");
+    return sigBuf.length === expectedBuf.length && timingSafeEqual(sigBuf, expectedBuf);
+  });
+}
 
 /**
  * `Stripe-Signature: t=...,v1=...[,v1=...]` başlığını doğrular.
@@ -172,15 +203,7 @@ const SIGNATURE_TOLERANCE_SEC = 300;
  */
 export function verifyStripeSignature(rawBody: string, header: string | null, secret: string): boolean {
   if (!header || !secret) return false;
-  const parts = new Map<string, string[]>();
-  for (const piece of header.split(",")) {
-    const idx = piece.indexOf("=");
-    if (idx <= 0) continue;
-    const k = piece.slice(0, idx).trim();
-    const v = piece.slice(idx + 1).trim();
-    if (!parts.has(k)) parts.set(k, []);
-    parts.get(k)!.push(v);
-  }
+  const parts = parseSignatureHeader(header, ",");
   // Denetim L2: HMAC ham `t` token'ı üzerinden (kanonik Stripe şeması) —
   // Number-roundtrip baştaki-sıfır gibi biçimlerde meşru imzayı bozabilirdi.
   const tRaw = parts.get("t")?.[0] ?? "";
@@ -190,9 +213,29 @@ export function verifyStripeSignature(rawBody: string, header: string | null, se
   if (Math.abs(Date.now() / 1000 - t) > SIGNATURE_TOLERANCE_SEC) return false;
 
   const expected = createHmac("sha256", secret).update(`${tRaw}.${rawBody}`, "utf8").digest("hex");
-  const expectedBuf = Buffer.from(expected, "utf8");
-  return v1s.some((sig) => {
-    const sigBuf = Buffer.from(sig, "utf8");
-    return sigBuf.length === expectedBuf.length && timingSafeEqual(sigBuf, expectedBuf);
-  });
+  return anySignatureMatches(v1s, expected);
+}
+
+/**
+ * `Paddle-Signature: ts=...;h1=...` başlığını doğrular (Paddle Billing).
+ *
+ * Stripe'tan ÜÇ noktada ayrılır — denetim B56'nın "bağlanınca imza katmanı
+ * çalışmaz" bulgusunun sebebi tam olarak bunlar:
+ *   1. ayırıcı `;` (Stripe `,`),
+ *   2. anahtar `h1` (Stripe `v1`),
+ *   3. imzalanan dizi `${ts}:${rawBody}` — İKİ NOKTA (Stripe nokta kullanır).
+ * Geri kalan model aynı: HMAC-SHA256, timing-safe, ±5 dk pencere, asla throw.
+ * (2026-07-31)
+ */
+export function verifyPaddleSignature(rawBody: string, header: string | null, secret: string): boolean {
+  if (!header || !secret) return false;
+  const parts = parseSignatureHeader(header, ";");
+  const tsRaw = parts.get("ts")?.[0] ?? "";
+  const ts = Number(tsRaw);
+  const h1s = parts.get("h1") ?? [];
+  if (!tsRaw || !Number.isFinite(ts) || h1s.length === 0) return false;
+  if (Math.abs(Date.now() / 1000 - ts) > SIGNATURE_TOLERANCE_SEC) return false;
+
+  const expected = createHmac("sha256", secret).update(`${tsRaw}:${rawBody}`, "utf8").digest("hex");
+  return anySignatureMatches(h1s, expected);
 }

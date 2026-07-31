@@ -119,15 +119,23 @@ export default function CheckoutClient() {
 
   function handlePay() {
     if (!canPay) return;
-    // TODO(iyzico): iyzico Checkout Form entegrasyonu buraya bağlanacak.
-    //   1) POST /api/payments/iyzico/initialize
-    //        { plan: plan.id, consent: buildConsentRecord() }
-    //      → sunucu consent kaydını IP + user-agent + metin hash'i ile
-    //        birlikte siparişe YAZAR (istemciden gelen ana güvenilmez;
-    //        sunucu kendi saatini de kaydeder).
-    //   2) Dönen checkoutFormContent / paymentPageUrl ile ödeme sayfasına yönlendir
-    //   3) callbackUrl → /api/payments/iyzico/callback (imza doğrulaması ZORUNLU)
-    //   4) Başarılı ödeme → subscriptions + billing_events kaydı, aboneliği aktive et
+    // TODO(paddle): ödeme sağlayıcısı entegrasyonu buraya bağlanacak.
+    //
+    // NOT (denetim B18, 2026-07-31): bu TODO eskiden "iyzico" diyordu, oysa
+    // sağlayıcı kararı PADDLE. Yanlış sağlayıcıya göre yazılmış bir plan,
+    // webhook tarafında birebir yaşandı (Stripe imza şeması → her istek 400);
+    // aynı hatayı checkout'ta tekrarlamamak için akış Paddle'a göre yazıldı:
+    //   1) POST /api/billing/checkout  { plan: plan.id, consent: buildConsentRecord() }
+    //      → sunucu consent kaydını IP + user-agent + metin hash'i ile birlikte
+    //        siparişe YAZAR (istemciden gelen an güvenilmez; sunucu kendi
+    //        saatini de kaydeder).
+    //   2) Sunucu, Paddle transaction/checkout oluştururken
+    //      `custom_data.user_id`'yi MUTLAKA `supabase.auth.getUser()` ile
+    //      doğrulanmış oturumdan koyar — ASLA istek gövdesinden. (Webhook
+    //      kullanıcıyı yalnız bu alandan eşliyor: app/api/billing/webhook.)
+    //   3) Dönen transaction id / checkout url ile Paddle overlay'i aç.
+    //   4) Gerçek aktivasyon webhook'tan gelir (subscription.* +
+    //      transaction.completed) — istemcinin "başarılı" demesi yetmez.
     // Entegrasyon bağlanana kadar kanıt kaydı yalnızca hazırlanır.
     void buildConsentRecord();
     setNotice(

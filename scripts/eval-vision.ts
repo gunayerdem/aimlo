@@ -9,8 +9,15 @@
  * produces the actual text a user would see so the language-editor / ai-prompt-
  * expert agents can brutally grade it and the next fix cycle targets REAL defects.
  *
+ * ⚠ SADAKAT SÖZLEŞMESİ (B9, 2026-07-31): aşağıdaki "SAME post-processing" iddiası
+ * bir süre SAHTEYDİ — postProcess prod'dan 5 noktada sapmıştı (detay orada).
+ * KURAL: app/api/ai/vision/route.ts'in son-işlem zinciri (realityCheck →
+ * cleanCoachText → enforceAgentKit → clampWords) DEĞİŞTİĞİNDE burası da AYNI
+ * commit'te güncellenir. Aksi hâlde eval "empirik kanıt" olmaktan çıkıp sahte
+ * güvene döner. Zincirin sıra-testi: scripts/test-pipeline-chain.ts (B10).
+ *
  * Faithfulness: imports the same shared modules the route uses —
- *   - SYSTEM_PROMPT / USER_PROMPT / ROUND_FEEDBACK_SCHEMA  (lib/vision-prompt)
+ *   - SYSTEM_PROMPT(_EN_ADDENDUM) / USER_PROMPT(_EN) / buildRoundFeedbackSchema (lib/vision-prompt)
  *   - buildPolicyBlock (vision opts: ocr/single/vision)    (lib/ai-policy)
  *   - loadVisionKnowledge (real knowledge/**.md RAG)        (lib/knowledge-loader)
  *   - realityCheck                                          (lib/reality-checker)
@@ -25,11 +32,14 @@
  */
 import * as fs from "fs";
 import * as path from "path";
-import { SYSTEM_PROMPT, USER_PROMPT, ROUND_FEEDBACK_SCHEMA } from "../lib/vision-prompt";
+// B57 (2026-07-31): EN aynası için route'un EN parçaları da import edilir
+// (SYSTEM_PROMPT_EN_ADDENDUM / USER_PROMPT_EN / buildRoundFeedbackSchema).
+import { SYSTEM_PROMPT, SYSTEM_PROMPT_EN_ADDENDUM, USER_PROMPT, USER_PROMPT_EN, buildRoundFeedbackSchema } from "../lib/vision-prompt";
 import { buildPolicyBlock } from "../lib/ai-policy";
 import { loadVisionKnowledge } from "../lib/knowledge-loader";
-import { realityCheck } from "../lib/reality-checker";
-import { cleanCoachText, stripNumericHp } from "../lib/coach-text";
+// B9 (2026-07-31): factGround artık ELDE kurulmuyor — route'un buildFactGround'u.
+import { realityCheck, buildFactGround } from "../lib/reality-checker";
+import { cleanCoachText, clampWords, stripNumericHp } from "../lib/coach-text";
 import { buildAgentAbilityHint, enforceAgentKit } from "../lib/agent-abilities";
 import { sanitizePromptInput } from "../lib/prompt-safety";
 import { classifyDeath, buildDeathTypeDirective } from "../lib/death-type";
@@ -57,7 +67,21 @@ type Scenario = {
   note: string; // what this scenario stresses
   body: Record<string, unknown>; // VisionRequest-shaped (no image)
   memoryContext?: string; // optional synthetic cross-match memory block
+  /* B57 (2026-07-31): İSTEK DİLİ — route'un reqLang'i (VisionRequest.lang).
+   * ÖNCEDEN: korpusun 31/31 senaryosu sessizce TR'ydi ve buildPolicyBlock'a
+   * lang:"tr" HARDCODE ediliyordu → EN kullanıcıya giden zincir (SYSTEM_PROMPT_
+   * EN_ADDENDUM + USER_PROMPT_EN + EN şema + cleanCoachText'in EN dalı +
+   * realityCheck'in EN replacement'ları) PROD'DA CANLI olduğu hâlde eval'de
+   * HİÇ egzersiz edilmiyordu. Alan opsiyonel: verilmezse "tr" → mevcut 31
+   * senaryonun davranışı BAYT-AYNI kalır (eski cycle'larla karşılaştırılabilirlik
+   * korunur). */
+  lang?: "tr" | "en";
 };
+
+/** Senaryonun istek dili — route'un reqLang'iyle aynı sözleşme (varsayılan tr). */
+function langOf(s: Scenario): "tr" | "en" {
+  return s.lang === "en" ? "en" : "tr";
+}
 
 // ── 10 scenarios — both sides, died/survived, all confidence + economy tiers,
 //    trade/route fields, newer maps, pattern context, cross-match memory ──
@@ -499,6 +523,36 @@ const SCENARIOS: Scenario[] = [
   },
 ];
 
+/* ── EN AYNA SENARYOLARI — B57 (2026-07-31) ──────────────────────────────────
+ * SORUN: korpusun 31/31 senaryosu TR'ydi. EN dil zinciri 2026-07-18'den beri
+ * PROD'DA CANLI (route reqLang, 4 katman) ama hiçbir senaryo onu LLM çıktısı
+ * üzerinde egzersiz etmiyordu — cleanCoachText/stripHpClaims/realityCheck'in EN
+ * dalları kör noktaydı (yalnız test-strip-hp'de birkaç izole EN vakası vardı).
+ *
+ * TASARIM: gövdeler KOPYALANMIYOR, mevcut senaryolardan TÜRETİLİYOR — TR
+ * senaryosu güncellenince aynası kendiliğinden güncel kalır (kopya-yapıştır
+ * çürümesi yapısal olarak imkânsız). Seçilen 5 senaryo B57'nin işaret ettiği
+ * eksenleri kapsar: S1 tekrar-pattern + yüksek confidence, S3 died=false
+ * (survived yolu — korpusta yalnız 2 tane vardı), S9 route/trade alanları,
+ * S21 solo-giriş, S26 tempo.
+ *
+ * MALİYET: +5 çağrı/koşu (~%16). Yalnızca eval-vision KOŞULDUĞUNDA harcanır;
+ * CI'ye GİRMEZ (.github/workflows/ci.yml'de bilerek dışarıda). Yalnız TR
+ * ölçmek istersen: EVAL_LANG=tr npx tsx scripts/eval-vision.ts
+ */
+const EN_MIRROR_PREFIXES = ["S1-", "S3-", "S9-", "S21-", "S26-"];
+for (const base of SCENARIOS.filter((s) => EN_MIRROR_PREFIXES.some((p) => s.id.startsWith(p)))) {
+  SCENARIOS.push({
+    ...base,
+    id: `${base.id}-en`,
+    note: `[EN AYNASI] ${base.note}`,
+    lang: "en",
+    // body.lang: masaüstünün gerçekte POST'ladığı alan (VisionRequest.lang).
+    // Prompt kurucuları Scenario.lang'i okur; bu alan gövdeyi sadık tutar.
+    body: { ...base.body, lang: "en" },
+  });
+}
+
 // ── confidence derivation (route 725-730) ──
 function deriveConfidence(rh: unknown): "calibrating" | "low" | "medium" | "high" {
   const arr = Array.isArray(rh) ? rh : null;
@@ -511,11 +565,13 @@ function deriveConfidence(rh: unknown): "calibrating" | "low" | "medium" | "high
 // ── system message assembly (route 731-792) ──
 function buildSystemMessage(s: Scenario): string {
   const b = s.body;
+  const lang = langOf(s);                            // B57 (2026-07-31)
   const confidence = deriveConfidence(b.roundHistory);
   const sections: string[] = [
-    SYSTEM_PROMPT,
+    // route.ts:639 — EN'de sistem prompt'una EN eklentisi biner.
+    lang === "en" ? SYSTEM_PROMPT + SYSTEM_PROMPT_EN_ADDENDUM : SYSTEM_PROMPT,
     buildPolicyBlock({
-      confidence, tone: "strict", lang: "tr",
+      confidence, tone: "strict", lang,
       includeEnemyGate: true, includeDecisionRubric: false,
       anchorMode: "ocr", outputFocusMode: "single", enemyGateMode: "vision",
     }),
@@ -532,15 +588,22 @@ function buildSystemMessage(s: Scenario): string {
   if (kb.blocks.agent) sections.push(kb.blocks.agent);
   if (kb.blocks.map) sections.push(kb.blocks.map);
   if (kb.blocks.contextual) sections.push(kb.blocks.contextual);
-  const abilityHint = buildAgentAbilityHint(b.agent as string | undefined, "tr");
+  const abilityHint = buildAgentAbilityHint(b.agent as string | undefined, lang);
   if (abilityHint) sections.push(abilityHint);
   if (s.memoryContext) {
     const capped = s.memoryContext.trim().slice(0, 1200);
+    // route.ts:707-715 — sarmalayıcı reqLang'de (EN'de Türkçe örnek cümle
+    // modelce taklit ediliyordu, canlı-test 2026-07-18 dil sızıntısı).
     sections.push(
-      `[CROSS-MATCH GEÇMİŞİ — uzun vadeli oyuncu profili (kalıcı veriden, bu round'a ait DEĞİL)]\n` +
-      `Bu, oyuncunun geçmiş maçlardan birikmiş profilidir. İlgiliyse koç gibi referans verebilirsin ` +
-      `(ör. "yine A Short'ta öldün — bu senin tekrar eden noktan"); ama bu round'un OCR verisi her zaman önceliklidir. ` +
-      `Buradaki sayıları DEĞİŞTİRME, yeni istatistik UYDURMA.\n${capped}`,
+      lang === "en"
+        ? `[CROSS-MATCH HISTORY — long-term player profile (from persisted data, NOT this round)]\n` +
+          `This is the player's accumulated profile from past matches. You may reference it like a coach when relevant ` +
+          `(e.g. "you died at A Short again — that is your recurring spot"); but this round's OCR data always takes priority. ` +
+          `Do NOT alter these numbers, do NOT invent new statistics.\n${capped}`
+        : `[CROSS-MATCH GEÇMİŞİ — uzun vadeli oyuncu profili (kalıcı veriden, bu round'a ait DEĞİL)]\n` +
+          `Bu, oyuncunun geçmiş maçlardan birikmiş profilidir. İlgiliyse koç gibi referans verebilirsin ` +
+          `(ör. "yine A Short'ta öldün — bu senin tekrar eden noktan"); ama bu round'un OCR verisi her zaman önceliklidir. ` +
+          `Buradaki sayıları DEĞİŞTİRME, yeni istatistik UYDURMA.\n${capped}`,
     );
   }
   if (typeof b.patternContext === "string" && b.patternContext) {
@@ -550,9 +613,29 @@ function buildSystemMessage(s: Scenario): string {
   return { msg: sections.join("\n\n---\n\n"), confidence, kb } as unknown as string;
 }
 
-// ── ctx + user prompt assembly (route 807-996, fields-present subset) ──
+// ── ctx + user prompt assembly (route 769-1101, fields-present subset) ──
+//
+// ⚠ AÇIK SADAKAT BOŞLUĞU — B83 denetimi sırasında ÖLÇÜLDÜ (2026-07-31).
+// B83'ün asıl derdi (factGround eval'de elle kuruluyor) postProcess'te ZATEN
+// kapalı (aşağıya bak). Ama aynı sınıftan bir sapma PROMPT tarafında duruyor:
+// prod'un user mesajı (route.ts:1062-1080) burada ÜRETİLMEYEN iki blok taşıyor:
+//   • factSheet = buildFactSheet(factGround, ctx, lang) — TR'de EN BAŞTA gelir;
+//     "BİLİNEN/BİLİNMEYEN" olgu sözleşmesi, HER round dolu (vision-prompt.ts:21).
+//   • weaponCompDirective = buildWeaponCompDirective(killerWeapon, compArchetype,
+//     loadout, lang) — killerInfo'da silah varken dolu (comp-weapon.ts:117,125).
+// Sapma OLMAYANLAR (yanlış alarm üretmesin diye ölçüldü): mapUnknown/locUnknown
+// direktifleri bu korpusun TAMAMINDA boş çıkar (her senaryonun haritası + ölüm
+// yeri var); confidence direktifi eval'de system prefix'inde (buildPolicyBlock
+// varsayılanı confidenceInPrefix!==false), prod'da user mesajında — İÇERİK aynı,
+// yalnız KONUM farklı.
+// SONUÇ: eval modeli prod'dan DAHA AZ kısıtlar → uydurma oranı prod'dakinden
+// YÜKSEK ölçülür (yanlış-kötümser, yanlış-iyimser değil).
+// NEDEN KAPATILMADI: bu bloklar prompt'a eklenince ölçüm TABANI değişir ve eski
+// cycle'larla A/B kıyaslanabilirlik kırılır — B83'ün tarifi dışı, bilinçli olarak
+// ANA OTURUMA bırakıldı; sessizce yapılmadı.
 function buildUserPrompt(s: Scenario): string {
   const b = s.body;
+  const lang = langOf(s);                            // B57 (2026-07-31)
   const ctx: Record<string, unknown> = {};
   if (typeof b.round === "number") ctx.round = b.round;
   if (typeof b.score === "string") ctx.score = b.score;
@@ -560,8 +643,12 @@ function buildUserPrompt(s: Scenario): string {
   if (typeof b.map === "string") ctx.map = b.map;
   if (typeof b.agent === "string") ctx.agent = b.agent;
   if (typeof b.side === "string") {
-    ctx.side = b.side === "attack" ? "attack (SALDIRI — sen siteye giriyorsun)"
-      : b.side === "defense" ? "defense (SAVUNMA — sen siteyi tutuyorsun)" : b.side;
+    // route.ts:764-766 — side etiketi de reqLang'de.
+    ctx.side = b.side === "attack"
+      ? (lang === "en" ? "attack (ATTACK — you are entering the site)" : "attack (SALDIRI — sen siteye giriyorsun)")
+      : b.side === "defense"
+        ? (lang === "en" ? "defense (DEFENSE — you are holding the site)" : "defense (SAVUNMA — sen siteyi tutuyorsun)")
+        : b.side;
   }
   if (typeof b.mode === "string") ctx.mode = b.mode;
   if (Array.isArray(b.enemyComp) && (b.enemyComp as string[]).length) ctx.enemyRoster = (b.enemyComp as string[]).slice(0, 5);
@@ -594,7 +681,7 @@ function buildUserPrompt(s: Scenario): string {
   }
 
   const ctxJson = Object.keys(ctx).length ? JSON.stringify(ctx, null, 2) : "";
-  const patternBlock = typeof b.patternContext === "string" && b.patternContext ? stripNumericHp(sanitizePromptInput(b.patternContext, { max: 2000 }) || "", "tr") : "";
+  const patternBlock = typeof b.patternContext === "string" && b.patternContext ? stripNumericHp(sanitizePromptInput(b.patternContext, { max: 2000 }) || "", lang) : "";
 
   // DEATH-TYPE directive — MIRROR route.ts (variety fix 2026-06-30) so the eval measures
   // the SAME pipeline the desktop hits. Without this the eval would test the OLD behavior.
@@ -625,26 +712,49 @@ function buildUserPrompt(s: Scenario): string {
       tradedByAlly: b.tradedByAlly as boolean | undefined,
       repeatedPosition,
     });
-    deathTypeDirective = buildDeathTypeDirective(dtype, []);
+    deathTypeDirective = buildDeathTypeDirective(dtype, [], lang);
   }
 
-  let prompt = USER_PROMPT +
+  // B57 (2026-07-31): dil direktifi — route.ts:1013-1014. EN'de EN BAŞA gelir
+  // (route.ts:1048-1049: "model önce dili görsün"); TR'de boş → bayt-aynı.
+  const langDirective = lang === "en"
+    ? `\n[LANGUAGE] The player's language is ENGLISH. Write deathAnalysis, enemyAnalysis and nextRoundSuggestion ONLY in natural English coach language (keep universal game terms: peek, trade, smoke, eco...). The knowledge blocks and some context/instruction lines are in Turkish — use them as source FACTS and LESSONS but always RESTATE them in English. NEVER copy a Turkish sentence or word into your output.`
+    : "";
+
+  let prompt = (lang === "en" ? USER_PROMPT_EN : USER_PROMPT) +
+    langDirective +
     deathTypeDirective +
-    (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, screenshot'tan güvenilir]\n${ctxJson}` : "") +
-    (patternBlock ? `\n\n[PATTERN — son round'lardaki tekrar eden hata. Bu varsa deathAnalysis veya nextRoundSuggestion'da koç gibi referans ver — extra alan açma]\n${patternBlock}` : "");
+    (ctxJson
+      ? (lang === "en"
+          ? `\n\n[ROUND CONTEXT — OCR pixel truth, more reliable than the screenshot]\n${ctxJson}`
+          : `\n\n[ROUND CONTEXT — OCR pixel truth, screenshot'tan güvenilir]\n${ctxJson}`)
+      : "") +
+    (patternBlock
+      ? (lang === "en"
+          ? `\n\n[PATTERN — recurring mistake across recent rounds. If present, reference it like a coach inside deathAnalysis or nextRoundSuggestion — do not open an extra field]\n${patternBlock}`
+          : `\n\n[PATTERN — son round'lardaki tekrar eden hata. Bu varsa deathAnalysis veya nextRoundSuggestion'da koç gibi referans ver — extra alan açma]\n${patternBlock}`)
+      : "");
 
   // GECMIS BLOGU: route ile AYNI fonksiyon (lib/history-block.ts). Eskiden burada
   // EKSIK bir kopya vardi (yalniz patternNote) → eval, canlida modelin gordugu
   // posNote/deathZoneNote kanitini hic gostermiyordu ve olcum canliyi yansitmiyordu.
   prompt += buildHistoryBlock(
     b.roundHistory as RoundHistoryEntry[] | undefined,
-    "tr",
+    lang,
   );
+  // Sandviç tekniği (route.ts:1085-1087): EN'de üretimden hemen önceki SON
+  // satır dil emri olsun. TR'de eklenmez → bayt-aynı.
+  if (lang === "en") {
+    prompt += `\n\n[REMINDER] Output language: ENGLISH ONLY. All three fields in natural English coach voice — never a Turkish word.`;
+  }
   return prompt;
 }
 
 // ── OpenAI call (route 1002-1064) ──
-async function callModel(systemMessage: string, userPrompt: string): Promise<unknown> {
+// B57 (2026-07-31): şema da dile bağlı — route.ts:1140 buildRoundFeedbackSchema(reqLang).
+// json_schema description'ları üretimden hemen önceki EN GÜÇLÜ sinyal (vision-prompt.ts:108-113),
+// EN aynası TR şemayla koşarsa ölçüm prod'u yansıtmaz.
+async function callModel(systemMessage: string, userPrompt: string, lang: "tr" | "en" = "tr"): Promise<unknown> {
   const res = await fetch(OPENAI_API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${API_KEY}` },
@@ -656,7 +766,7 @@ async function callModel(systemMessage: string, userPrompt: string): Promise<unk
       // KB değişikliğinden AYRI bir değişken olarak ölçülebilsin (route.ts:1057'deki
       // "kalite düşerse low/medium'a çıkar" notunun ampirik sınaması).
       max_completion_tokens: Number(process.env.EVAL_MAX_TOKENS || 350),
-      response_format: { type: "json_schema", json_schema: ROUND_FEEDBACK_SCHEMA },
+      response_format: { type: "json_schema", json_schema: buildRoundFeedbackSchema(lang) },
       reasoning_effort: (process.env.EVAL_EFFORT || "minimal") as "minimal" | "low" | "medium" | "high",
       messages: [
         { role: "system", content: systemMessage },
@@ -673,29 +783,84 @@ async function callModel(systemMessage: string, userPrompt: string): Promise<unk
   return { parsed: JSON.parse(text), usage: data?.usage };
 }
 
-// ── post-process (route 1129-1154) ──
+/* ── post-process — PROD ZİNCİRİNİN BİREBİR AYNISI (route.ts:1336-1389) ──────
+ * B9 (2026-07-31): bu fonksiyon prod'dan DRIFT etmişti ve dosyanın başındaki
+ * "applies the SAME post-processing the route does" iddiası SAHTE GÜVEN
+ * üretiyordu. Kapatılan 5 sapma:
+ *   (1) realityCheck'e kind/lang/map GEÇİRİLMİYORDU → map olmadan
+ *       stripForeignCallouts (reality-checker.ts:1081) HİÇ tetiklenmiyordu.
+ *       Yani 2026-07-24'te gerçek ölüm yerini silen ("a hail") feedback-çöküşü
+ *       regresyonunu bu eval YAKALAYAMAZDI. kind eksikliği ayrıca
+ *       suggestion-fallback davranışını prod'dan farklı kılıyordu.
+ *   (2) factGround ELDE kuruluyordu ve route'un buildFactGround'undaki
+ *       `deathLocation` (ham konum dizesi) alanı YOKTU → masaüstünün ölçtüğü
+ *       konumun strip-muafiyeti eval'de çalışmıyordu; killerAgent/hasWeapon/
+ *       hasDeathAngle de eksikti.
+ *   (3) .slice(0, 350) KARAKTER kesiyordu; prod clampWords(…, 350) ile kelime
+ *       sınırında kesiyor (route.ts:1370).
+ *   (4) empty-guard'lar yoktu: cleanCoachText bir metni tamamen boşaltırsa
+ *       (yalnız HP etiketinden ibaret cümle) prod orijinali koruyor, eval boş
+ *       string ölçüyordu.
+ *   (5) enemyAnalysis reality-check'ten HİÇ geçmiyordu (route.ts:1377-1381).
+ * Zincir SIRASI da prod ile aynı: realityCheck → cleanCoachText →
+ * enforceAgentKit → clampWords. */
 function postProcess(s: Scenario, fb: { deathAnalysis: string; enemyAnalysis: string[]; nextRoundSuggestion: string }) {
-  const rh = (s.body.roundHistory as Record<string, unknown>[] | undefined) || [];
+  const b = s.body;
+  const lang = langOf(s);
+  const map = typeof b.map === "string" ? (b.map as string) : undefined;
+  const agent = typeof b.agent === "string" ? (b.agent as string) : undefined;
+
+  const rh = (b.roundHistory as Record<string, unknown>[] | undefined) || [];
   const memoryForCheck = rh.map((r) => ({
     round_index: r.round_index as number, died: !!r.died,
     death_position: r.death_position as string | null | undefined,
     position_confidence: r.position_confidence as string | undefined,
   }));
-  const factGround = {
-    hasRoute: typeof s.body.playerRoute === "string" && (s.body.playerRoute as string).length > 0,
-    hasTradeData: typeof s.body.tradedByAlly === "boolean",
-    // prod ile eşle (2026-06-29): killerInfo varsa hasKiller; headshot HİÇ okunmuyor → daima false.
-    hasKiller: typeof s.body.killerInfo === "string" && (s.body.killerInfo as string).length > 0,
-    hasDeathLocation: typeof s.body.deathLocation === "string" && (s.body.deathLocation as string).length > 0,
-    hasHeadshot: false,
-  };
-  const ca = realityCheck(fb.deathAnalysis, memoryForCheck, factGround);
-  const cs = realityCheck(fb.nextRoundSuggestion, memoryForCheck, factGround);
-  const agent = s.body.agent as string | undefined;
+
+  // factGround: route.ts:894-897 ile AYNI fonksiyon. ctx alanları buildUserPrompt
+  // ile aynı sanitize + aynı died-koşulu altında kurulur (buildFactGround yalnız
+  // ctx.deathLocation / ctx.deathAngle / ctx.playerRoute okur).
+  //
+  // B83 DOĞRULAMASI (2026-07-31): 1. dalgada reality-checker'a eklenen YENİ
+  // FactGround alanları — killerAgent (katil-tutarlılığı guard'ı, reality-checker.ts:
+  // 673-697) ve hasEnemyUtil (düşman-util guard'ı, :854) — burada AYRICA KURULMAZ:
+  // buildFactGround onları killerInfo'dan (extractKillerAgent) ve sabit sözleşmeden
+  // kendisi türetir, yani her iki yeni guard eval'de ZATEN çalışıyor. Elle kurulan
+  // eski nesne B9'da kaldırıldığı için alan-sızması yapısal olarak imkânsız; tip
+  // her zaman tam uyumlu ve reality-checker'a yeni alan eklendiğinde eval onu
+  // kendiliğinden ölçer. BURAYA ELLE ALAN EKLEME — sapma tam oradan doğar.
+  const ctxForFacts: Record<string, unknown> = {};
+  if (b.died === true) {
+    if (typeof b.deathLocation === "string") ctxForFacts.deathLocation = sanitizePromptInput(b.deathLocation, { max: 50, collapseWhitespace: true });
+    if (typeof b.deathAngle === "string") ctxForFacts.deathAngle = sanitizePromptInput(b.deathAngle, { max: 30, collapseWhitespace: true });
+    if (typeof b.playerRoute === "string") ctxForFacts.playerRoute = sanitizePromptInput(b.playerRoute, { max: 120, collapseWhitespace: true });
+  }
+  const factGround = buildFactGround(b as Record<string, unknown>, ctxForFacts);
+
+  const ca = realityCheck(fb.deathAnalysis, memoryForCheck, factGround, "death", lang, map);
+  const cs = realityCheck(fb.nextRoundSuggestion, memoryForCheck, factGround, "suggestion", lang, map);
+
+  // deathAnalysis — route.ts:1369-1373 (clean ÖNCE, empty-guard, sonra clamp).
+  const cleanedAnalysis = cleanCoachText(ca.text, lang);
+  const deathAnalysisOut = clampWords(
+    enforceAgentKit(cleanedAnalysis && cleanedAnalysis.trim() ? cleanedAnalysis : ca.text, agent),
+    350,
+  );
+  // enemyAnalysis — route.ts:1377-1381: dizinin HER elemanı da reality-check'ten geçer.
+  const enemyAnalysisOut = (fb.enemyAnalysis || []).slice(0, 2).map((x) => {
+    const c = realityCheck(String(x), memoryForCheck, factGround, "suggestion", lang, map);
+    const safe = c.text && c.text.trim() ? c.text : String(x);
+    return clampWords(enforceAgentKit(cleanCoachText(safe, lang), agent), 180);
+  });
+  // nextRoundSuggestion — route.ts:1386-1389: "suggestion" kind'ı boş döndürürse
+  // modelin ORİJİNAL tavsiyesi korunur (S9-sınıfı stub regresyonu).
+  const safeSuggestion = cs.text && cs.text.trim() ? cs.text : fb.nextRoundSuggestion;
+  const nextRoundOut = clampWords(enforceAgentKit(cleanCoachText(safeSuggestion, lang), agent), 350);
+
   return {
-    deathAnalysis: enforceAgentKit(cleanCoachText(ca.text, "tr"), agent).slice(0, 350),
-    enemyAnalysis: (fb.enemyAnalysis || []).slice(0, 2).map((x) => enforceAgentKit(cleanCoachText(String(x), "tr"), agent).slice(0, 180)),
-    nextRoundSuggestion: enforceAgentKit(cleanCoachText(cs.text, "tr"), agent).slice(0, 350),
+    deathAnalysis: deathAnalysisOut,
+    enemyAnalysis: enemyAnalysisOut,
+    nextRoundSuggestion: nextRoundOut,
     realityModified: ca.modified || cs.modified,
     rewriteLevels: { death: ca.rewriteLevel, suggestion: cs.rewriteLevel },
   };
@@ -705,18 +870,24 @@ async function main() {
   const results: unknown[] = [];
   // EVAL_ONLY=S1,S9 → sadece bu id-prefix'leri çalıştır (grounding izi için odak).
   const only = process.env.EVAL_ONLY ? process.env.EVAL_ONLY.split(",").map((x) => x.trim()) : null;
-  const list = only ? SCENARIOS.filter((s) => only.some((o) => s.id.startsWith(o))) : SCENARIOS;
-  console.log(`\n══════ EMPIRICAL EVAL — Cycle ${CYCLE} — ${list.length} scenarios ══════\n`);
+  let list = only ? SCENARIOS.filter((s) => only.some((o) => s.id.startsWith(o))) : SCENARIOS;
+  // B57 (2026-07-31): EVAL_LANG=tr|en → yalnız o dilin senaryoları. Tanımsızsa
+  // hepsi (TR korpus + EN aynaları). TR-only koşu eski cycle'larla birebir
+  // karşılaştırılabilir kalsın diye var.
+  const langFilter = process.env.EVAL_LANG === "tr" || process.env.EVAL_LANG === "en" ? process.env.EVAL_LANG : null;
+  if (langFilter) list = list.filter((s) => langOf(s) === langFilter);
+  console.log(`\n══════ EMPIRICAL EVAL — Cycle ${CYCLE} — ${list.length} scenarios${langFilter ? ` (lang=${langFilter})` : ""} ══════\n`);
   for (const s of list) {
     process.stdout.write(`[${s.id}] generating... `);
     try {
       const sm = buildSystemMessage(s) as unknown as { msg: string; confidence: string; kb: { files: string[] } };
       const up = buildUserPrompt(s);
-      const { parsed, usage } = (await callModel(sm.msg, up)) as { parsed: { deathAnalysis: string; enemyAnalysis: string[]; nextRoundSuggestion: string }; usage: unknown };
+      const { parsed, usage } = (await callModel(sm.msg, up, langOf(s))) as { parsed: { deathAnalysis: string; enemyAnalysis: string[]; nextRoundSuggestion: string }; usage: unknown };
       const final = postProcess(s, parsed);
-      console.log(`done (conf=${sm.confidence}, kb=[${sm.kb.files.join(", ")}], reality=${final.realityModified ? "MOD" : "ok"})`);
+      console.log(`done (lang=${langOf(s)}, conf=${sm.confidence}, kb=[${sm.kb.files.join(", ")}], reality=${final.realityModified ? "MOD" : "ok"})`);
       results.push({
-        id: s.id, note: s.note, confidence: sm.confidence, kbFiles: sm.kb.files,
+        // B57: lang örnek dosyasına yazılır → eval-score EN/TR ayrıştırabilsin.
+        id: s.id, note: s.note, lang: langOf(s), confidence: sm.confidence, kbFiles: sm.kb.files,
         systemPromptBytes: sm.msg.length, usage,
         raw: parsed, final,
         // EVAL_DUMP_PROMPTS=1 → grounding izi için TAM enjekte KB + OCR. Böylece

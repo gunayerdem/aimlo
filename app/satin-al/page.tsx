@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import CheckoutClient from "./checkout-client";
 import { SiteHeader } from "@/app/_components/SiteHeader";
+import { SELLER, SELLER_ROWS } from "@/lib/seller";
 
 export const metadata: Metadata = {
   title: "Sipariş Özeti — AIMLO",
@@ -50,15 +51,18 @@ export default function SatinAlPage() {
           <CheckoutClient />
         </Suspense>
 
+        {/* B123 (2026-07-31): künye elle kopyalanmıştı — lib/seller.ts TEK
+            KAYNAK'a bağlandı (SELLER_ROWS gösterim sırasını da taşıyor).
+            Adres/telefon değişince sipariş adımı ile sözleşme sayfaları
+            arasında tutarsızlık doğmaz. */}
         <section className="space-y-3 text-sm leading-relaxed text-neutral-300">
           <h2 className="text-lg font-bold text-white">Satıcı Bilgileri</h2>
           <ul className="space-y-1 text-neutral-400">
-            <li>Ticaret unvanı: {"GÜNAY ERDEM VE KAAN DAĞDELEN ADİ ORTAKLIĞI"}</li>
-            <li>Adres: {"Yenişehir Mah. Ankara Cad. 360 Office Kapı No: 405 Daire No: 95 Pendik/İstanbul"}</li>
-            <li>Telefon: {"0534 911 31 81"}</li>
-            <li>E-posta: {"support@aimlo.gg"}</li>
-            <li>Vergi dairesi: {"Pendik Vergi Dairesi"}</li>
-            <li>Vergi kimlik no: {"4271175312"}</li>
+            {SELLER_ROWS.map(([label, value]) => (
+              <li key={label}>
+                {label}: {value}
+              </li>
+            ))}
           </ul>
         </section>
 
@@ -101,10 +105,10 @@ export default function SatinAlPage() {
           <p className="text-neutral-400">
             Sorularınız için{" "}
             <a
-              href="mailto:support@aimlo.gg"
+              href={`mailto:${SELLER.email}`}
               className="text-[#FF4655] hover:underline"
             >
-              support@aimlo.gg
+              {SELLER.email}
             </a>
           </p>
         </section>

@@ -33,6 +33,17 @@ export interface PlayerMemory {
   // Behavioral tendencies (detected patterns across matches)
   tendencies: string[]; // ["overpeek", "no_trade", "repeated_position"]
 
+  // B58 (2026-07-31): ölüm-tipi dağılımı — tendency tespiti tek kaleme
+  // (repeated_position) takılıydı; oysa backend her ölümde 13+ sınıflı
+  // DETERMİNİSTİK death-type üretiyor (lib/death-type.ts). Maç sonunda
+  // agrege edilince overpeek / no_trade eğilimleri EK AI ÇAĞRISI OLMADAN
+  // çıkıyor. Yalnız DEATH_TYPE_TENDENCY'de tanınan tipler saklanır (anahtar
+  // kümesi sınırlı — kurcalanmış istemci jsonb'yi şişiremez).
+  deathTypeCounts: Record<string, number>;
+  // death-type'ı OKUNABİLEN tüm ölümlerin sayısı (pay/payda: bir ailenin
+  // ölümlerin yüzde kaçını oluşturduğunu bilmeden eşik anlamsız olur).
+  classifiedDeaths: number;
+
   // Improvement tracking
   previousWeakSpots: string[]; // what was weak last check
   improvedAreas: string[]; // patterns that got better
@@ -43,6 +54,34 @@ export interface PlayerMemory {
   overallWinRate: number;
   lastUpdated: string;
 }
+
+/**
+ * B58 (2026-07-31) — ölüm-tipi → davranış ailesi eşlemesi.
+ *
+ * Anahtarlar lib/death-type.ts `DeathType` birliğinden birebir alındı
+ * (verbatim; parafraz YOK). Burada olmayan tipler yok sayılır — hem jsonb
+ * anahtar kümesi sınırlı kalır hem de "her ölüm bir etiket" enflasyonu olmaz.
+ * Değerler PlayerMemory.tendencies'in zaten belgelenmiş etiketleri.
+ */
+const DEATH_TYPE_TENDENCY: Record<string, string> = {
+  // Ölümü geri alınmıyor / desteksiz açı — "trade yok" ailesi
+  "entry-no-trade": "no_trade",
+  "post-plant-solo": "no_trade",
+  "def-no-crossfire": "no_trade",
+  "retake-advantage-thrown": "no_trade",
+  // Gereksiz/erken peek — "fazla peek" ailesi
+  "over-peek-advantage": "overpeek",
+  "info-less-push": "overpeek",
+  "def-wide-hold": "overpeek",
+};
+
+/** Eşikler: gürültüden eğilim üretmemek için hem MUTLAK sayı hem PAY şartı.
+ *  (repeated_position'ın >=5 eşiğiyle aynı büyüklük — tutarlı sertlik.) */
+const TENDENCY_MIN_CLASSIFIED = 8; // en az bu kadar okunabilir ölüm birikmeden etiket yok
+const TENDENCY_MIN_COUNT = 5; // aile en az bu kadar tekrar etmeli
+const TENDENCY_MIN_SHARE = 0.25; // ve ölümlerin en az %25'i o aileden olmalı
+/** Kurcalanmış istemciye karşı: aşırı uzun death-type dizesi sayıma girmez. */
+const MAX_DEATH_TYPE_LEN = 40;
 
 // Load player memory from Supabase using the service-role client
 // (RLS-bypass).
@@ -80,6 +119,10 @@ export async function loadPlayerMemory(
           { wins: number; losses: number }
         >) || {},
       tendencies: (mem?.tendencies as string[]) || [],
+      // B58 (2026-07-31): eski satırlarda bu alanlar YOK — boş/0 ile başlar,
+      // ilk maç sonunda dolmaya başlar (backfill gerekmez).
+      deathTypeCounts: (mem?.deathTypeCounts as Record<string, number>) || {},
+      classifiedDeaths: (mem?.classifiedDeaths as number) || 0,
       previousWeakSpots: (mem?.previousWeakSpots as string[]) || [],
       improvedAreas: (mem?.improvedAreas as string[]) || [],
       totalMatches: (mem?.totalMatches as number) || 0,
@@ -112,6 +155,12 @@ export async function updatePlayerMemory(
       survived?: boolean;
       skipped?: boolean;
       result?: string;
+      /**
+       * B58 (2026-07-31): o round için backend'in ürettiği deterministik
+       * ölüm tipi (lib/death-type.ts). OPSİYONEL — göndermeyen çağıran için
+       * davranış birebir eskisi gibi kalır.
+       */
+      deathType?: string;
     }>;
   },
 ): Promise<void> {
@@ -128,6 +177,8 @@ export async function updatePlayerMemory(
         mapStats: {},
         agentStats: {},
         tendencies: [],
+        deathTypeCounts: {},
+        classifiedDeaths: 0,
         previousWeakSpots: [],
         improvedAreas: [],
         totalMatches: 0,
@@ -159,6 +210,20 @@ export async function updatePlayerMemory(
     if (matchData.won) memory.agentStats[matchData.agent].wins++;
     else memory.agentStats[matchData.agent].losses++;
 
+    // B58 (2026-07-31): ölüm-tipi dağılımını biriktir (maç-içi → cross-match).
+    // Yalnız gerçekten ölünen, atlanmayan roundlar; tip yoksa hiçbir şey sayılmaz.
+    matchData.rounds
+      .filter((r) => !r.skipped && !r.survived)
+      .forEach((r) => {
+        const dt = typeof r.deathType === "string" ? r.deathType.trim().toLowerCase() : "";
+        if (!dt || dt.length > MAX_DEATH_TYPE_LEN) return;
+        memory!.classifiedDeaths++;
+        // Tanınmayan tip: paydaya girer (yüzde dürüst kalsın) ama anahtar olarak
+        // saklanmaz — jsonb anahtar kümesi sınırlı kalır.
+        if (!DEATH_TYPE_TENDENCY[dt]) return;
+        memory!.deathTypeCounts[dt] = (memory!.deathTypeCounts[dt] || 0) + 1;
+      });
+
     // Detect tendencies
     const deathLocs = Object.entries(memory.weakLocations).sort(
       (a, b) => b[1] - a[1],
@@ -167,6 +232,26 @@ export async function updatePlayerMemory(
     if (topDeath && topDeath[1] >= 5) {
       if (!memory.tendencies.includes("repeated_position")) {
         memory.tendencies.push("repeated_position");
+      }
+    }
+
+    // B58 (2026-07-31): İKİNCİ eğilim kaynağı — ölüm-tipi ailesi.
+    // NEDEN: 'AI seni tanıyor' vaadi tek sinyale (repeated_position) takılıydı;
+    // oysa her ölümde deterministik death-type zaten üretiliyor. Agregasyon
+    // bedava (AI çağrısı yok) ve buildMemoryContext tendencies'i prompt'a
+    // zaten basıyor. Çift eşik (mutlak sayı + %pay) tek kötü maçın etiket
+    // yapıştırmasını engeller.
+    if (memory.classifiedDeaths >= TENDENCY_MIN_CLASSIFIED) {
+      const familyCounts: Record<string, number> = {};
+      for (const [type, n] of Object.entries(memory.deathTypeCounts)) {
+        const family = DEATH_TYPE_TENDENCY[type];
+        if (!family) continue;
+        familyCounts[family] = (familyCounts[family] || 0) + n;
+      }
+      for (const [family, n] of Object.entries(familyCounts)) {
+        const share = n / memory.classifiedDeaths;
+        if (n < TENDENCY_MIN_COUNT || share < TENDENCY_MIN_SHARE) continue;
+        if (!memory.tendencies.includes(family)) memory.tendencies.push(family);
       }
     }
 
@@ -208,6 +293,10 @@ export async function updatePlayerMemory(
           mapStats: memory.mapStats,
           agentStats: memory.agentStats,
           tendencies: memory.tendencies,
+          // B58 (2026-07-31): yeni alanlar — memory_data jsonb olduğu için
+          // migration GEREKMEZ; eski satırlar okurken boş/0'a düşer.
+          deathTypeCounts: memory.deathTypeCounts,
+          classifiedDeaths: memory.classifiedDeaths,
           previousWeakSpots: memory.previousWeakSpots,
           improvedAreas: memory.improvedAreas,
           totalMatches: memory.totalMatches,

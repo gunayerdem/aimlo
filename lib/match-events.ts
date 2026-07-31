@@ -4,6 +4,7 @@
 // has → zero extra AI cost. Service-role (match_events has no anon/auth policy).
 import "server-only";
 
+import { after } from "next/server";
 import { createServiceSupabase } from "@/lib/supabase/server";
 
 export type MatchEventInput = {
@@ -20,9 +21,16 @@ export type MatchEventInput = {
   feedback?: Record<string, unknown> | null;
 };
 
+/**
+ * B67 (2026-07-31): mikrotask fire-and-forget → `after()`. Vercel yanıt
+ * gönderilir gönderilmez lambda'yı dondurduğu için mikrotask'a atılmış insert
+ * tamamlanmadan kaybolabiliyordu — /admin/live feed'i sessizce eksik kalıyordu.
+ * Next 16 `after()` işi yanıttan SONRA, route'un maxDuration bütçesi içinde
+ * koşturur. İmza ve çağıranlar DEĞİŞMEDİ; hâlâ bloklamaz, hâlâ patlamaz.
+ */
 export function saveMatchEvent(input: MatchEventInput): void {
-  Promise.resolve()
-    .then(async () => {
+  const work = async () => {
+    try {
       const svc = createServiceSupabase();
       const { error } = await svc.from("match_events").insert({
         user_id: input.userId ?? null,
@@ -38,6 +46,15 @@ export function saveMatchEvent(input: MatchEventInput): void {
         feedback: input.feedback ?? null,
       });
       if (error) console.error("[match-events] insert failed:", error.message);
-    })
-    .catch((e) => console.error("[match-events] saveMatchEvent error:", (e as Error).message));
+    } catch (e) {
+      console.error("[match-events] saveMatchEvent error:", (e as Error).message);
+    }
+  };
+
+  try {
+    after(work);
+  } catch {
+    // İstek bağlamı dışında (script/test) after() fırlatır — eski mikrotask yolu.
+    void work();
+  }
 }

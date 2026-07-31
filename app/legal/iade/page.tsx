@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteHeader } from "@/app/_components/SiteHeader";
+import { SELLER } from "@/lib/seller";
 
 export const metadata: Metadata = {
   title: "İptal, İade ve Cayma Koşulları — AIMLO",
@@ -8,13 +9,13 @@ export const metadata: Metadata = {
     "AIMLO abonelik iptali, cayma hakkı ve iade koşulları. Mesafeli Sözleşmeler Yönetmeliği kapsamında bilgilendirme.",
 };
 
-/** softi tarafından doldurulacak alan — görünür bırakıldı, yayına almadan önce doldur. */
+/** Künye değeri.
+ *
+ * B122 (2026-07-31): eski hâli kırmızı mono-font "doldurulacak alan" chip'iydi;
+ * değerler ARTIK GERÇEK (lib/seller.ts) olduğu için hukuki belgeye taslak
+ * görüntüsü veriyordu. Nötr metne çevrildi. */
 function Ph({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="rounded bg-[#FF4655]/10 px-1.5 py-0.5 font-mono text-[13px] font-bold text-[#FF4655]">
-      {children}
-    </span>
-  );
+  return <span className="text-neutral-200">{children}</span>;
 }
 
 export default function IadePage() {
@@ -59,7 +60,7 @@ export default function IadePage() {
             </li>
             <li>
               <strong className="text-white">Destek üzerinden:</strong> uygulama
-              içi destek sistemi veya <Ph>{"support@aimlo.gg"}</Ph> adresine
+              içi destek sistemi veya <Ph>{SELLER.email}</Ph> adresine
               göndereceğiniz bir talep yeterlidir.
             </li>
           </ul>
@@ -104,7 +105,7 @@ export default function IadePage() {
             itibaren <strong className="text-white">14 (on dört) gün</strong>{" "}
             içinde hiçbir gerekçe göstermeksizin ve cezai şart ödemeksizin cayma
             hakkını kullanabilir. Cayma bildirimi{" "}
-            <Ph>{"support@aimlo.gg"}</Ph> adresine yapılabilir.
+            <Ph>{SELLER.email}</Ph> adresine yapılabilir.
           </p>
         </section>
 
@@ -192,7 +193,7 @@ export default function IadePage() {
           </p>
           <ul className="list-disc space-y-1 pl-5">
             <li>
-              E-posta: <Ph>{"support@aimlo.gg"}</Ph>
+              E-posta: <Ph>{SELLER.email}</Ph>
             </li>
             <li>
               Uygulama içi destek sistemi (masaüstü uygulaması ve web panelinde
@@ -222,17 +223,19 @@ export default function IadePage() {
           </p>
         </section>
 
+        {/* B123 (2026-07-31): künye elle kopyalanmıştı — lib/seller.ts TEK
+            KAYNAK'a bağlandı; adres/telefon değişince sayfalar ayrışmaz. */}
         <section className="space-y-3 border-t border-white/10 pt-6 text-sm leading-relaxed text-neutral-300">
           <h2 className="text-lg font-bold text-white">Satıcı Bilgileri</h2>
           <p>
-            Ticaret unvanı: <Ph>{"GÜNAY ERDEM VE KAAN DAĞDELEN ADİ ORTAKLIĞI"}</Ph>
+            Ticaret unvanı: <Ph>{SELLER.tradeName}</Ph>
           </p>
           <p>
-            Adres: <Ph>{"Yenişehir Mah. Ankara Cad. 360 Office Kapı No: 405 Daire No: 95 Pendik/İstanbul"}</Ph>
+            Adres: <Ph>{SELLER.address}</Ph>
           </p>
           <p>
-            E-posta: <Ph>{"support@aimlo.gg"}</Ph> · Telefon:{" "}
-            <Ph>{"0534 911 31 81"}</Ph>
+            E-posta: <Ph>{SELLER.email}</Ph> · Telefon:{" "}
+            <Ph>{SELLER.phone}</Ph>
           </p>
           <p className="text-neutral-400">
             Tüm künye bilgileri için{" "}
