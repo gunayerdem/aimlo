@@ -128,6 +128,21 @@ console.log("\n[10] EK ÇEKİMLER — 'kill alıyordu/alıyorlar' ve 'frag alıy
   t("'frag alıyor' temiz", !/frag/i.test(c) && /öldürüyor/i.test(c), `→ "${c}"`);
 }
 
+console.log("\n[12] EK HATASI — \"round'ta/round'tan\" → \"round'da/round'dan\" (canlı-test #7)");
+{
+  // DB kanıtı 2026-07-31: model "Bu round'ta erken düştün" üretti. "round" (raund)
+  // yumuşak d ile biter → ünsüz benzeşmesi yok; yanlış uyum ('te/'ten) de düzelmeli.
+  const a = tr("Bu round'ta erken düştün.");
+  const b = tr("Önceki round'tan ders çıkar.");
+  const c = tr("Round'te aynı hatayı yaptın, o round'ten sonra toparladın.");
+  const d = tr("Bu round'da doğruydu.");
+  console.log("    SONRA:", a, "|", b, "|", c, "|", d);
+  t("round'ta → round'da", /round'da/i.test(a) && !/round'ta/i.test(a), `→ "${a}"`);
+  t("round'tan → round'dan", /round'dan/i.test(b) && !/round'tan/i.test(b), `→ "${b}"`);
+  t("yanlış uyum 'te/'ten de düzeldi", /Round'da/.test(c) && /round'dan/.test(c), `→ "${c}"`);
+  t("doğru biçim DOKUNULMADI", /round'da doğruydu/.test(d), `→ "${d}"`);
+}
+
 console.log(`
 ══════ ${fail === 0 ? "✅ TÜMÜ GEÇTİ" : `❌ ${fail} BAŞARISIZ`} ══════
 `);

@@ -914,11 +914,24 @@ export async function POST(request: NextRequest) {
           ? `\n[MAP UNREADABLE] The map could not be read this match. Do NOT invent any callout/position name ("A Short", "B Main", "Mid"...). Use only an OCR-supplied deathLocation if present; otherwise anchor the lesson to agent + weapon + side + decision (trade/util order/timing). Those are specific and true without a map.`
           : `\n[HARİTA OKUNAMADI] Bu maçta harita okunamadı. HİÇBİR callout/yer adı UYDURMA ("A Short", "B Main", "Mid"...). Yalnız OCR'ın gönderdiği deathLocation varsa onu kullan; yoksa dersi ajan + silah + side + karar (trade/util-sırası/timing) üzerinden çapala. Bunlar harita olmadan da spesifik ve doğru.`)
       : "";
+    // ÖLÜM-YERİ OKUNAMADI direktifi (canlı-test #7, 2026-07-31): harita BİLİNSE de
+    // hızlı biten round'da deathLocation boş kalabiliyor (ilk konum örneği ~30sn'de).
+    // Canlı kanıt: R2'de konum boşken model "Rakip Neon hızlı mid kontakı yaptı"
+    // uydurdu — deterministik guard yalnız <konum+ölüm-fiili> kalıbını süzüyor,
+    // "mid kontakı yaptı" gibi dolaylı konum iddiası kaçıyordu. Bu direktif kaynağı
+    // kurutur: konum yokken oyuncunun/temasın NEREDE olduğuna dair HER iddia yasak.
+    // Konum varken BOŞ string → davranış bayt-aynı (prompt-cache'e dokunmaz).
+    const locUnknownDirective = (reqBody.died === true && !ctx.deathLocation)
+      ? (reqLang === "en"
+          ? `\n[DEATH LOCATION UNKNOWN] OCR could not read WHERE you died this round. Do NOT state or imply any location for the death or the enemy contact — no callout, no "mid/site/main", no "took the fight at X". Anchor the lesson to agent + weapon + timing + side + decision instead; those are true without a location.`
+          : `\n[ÖLÜM YERİ OKUNAMADI] Bu round NEREDE öldüğün okunamadı. Ölüm ya da temas için HİÇBİR yer belirtme/ima etme — callout yok, "mid/site/main" yok, "X'te çatışmaya girdi" yok. Dersi ajan + silah + timing + side + karar üzerinden çapala; bunlar konum olmadan da doğru.`)
+      : "";
     const clientContext = reqLang === "en"
       ? langDirective +      // dil emri EN BAŞTA — Türkçe bloklardan önce
         factSheet +
         confidenceDirective +  // VERİ SEVİYESİ — EN'de dil emrinden sonra
         mapUnknownDirective +
+        locUnknownDirective +  // DEATH LOCATION UNKNOWN — no location claim when OCR has none (per-round)
         deathTypeDirective +
         weaponCompDirective +
         (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, more reliable than the screenshot]\n${ctxJson}` : "") +
@@ -927,6 +940,7 @@ export async function POST(request: NextRequest) {
         langDirective +        // dil emri — olgu sınırından hemen sonra (EN'de aktif)
         confidenceDirective +  // VERİ SEVİYESİ — system prefix'ten taşındı (per-round, user-msg)
         mapUnknownDirective +  // HARİTA OKUNAMADI — Unknown'da callout uydurmayı menet (per-round)
+        locUnknownDirective +  // ÖLÜM YERİ OKUNAMADI — konum yokken konum iddiasını menet (per-round)
         deathTypeDirective +   // ÖLÜM-TİPİ çıpası — factSheet'ten hemen sonra (per-round, user-msg)
         weaponCompDirective +  // SİLAH+KOMP işaretçisi — statik rehberin bölüm seçicisi (per-round, user-msg)
         (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, screenshot'tan güvenilir]\n${ctxJson}` : "") +

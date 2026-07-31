@@ -307,6 +307,12 @@ const TR_JARGON: [RegExp, string][] = [
   [/\bcezaland[ıi]r[ıi]l[ıi]r\b/gi, "bedavaya ölür"],      // pasif "cezalandırılır"
   // bare "wide" (jargon) → "geniş" — EN SONDA, "wide swing/peek" spesifikleri zaten çevirdiyse boşa düşer
   [/\bwide\b/gi, "geniş"],                                 // "wide açıdan" → "geniş açıdan"
+  // "round'ta/round'tan" ek hatası (canlı-test #7, 2026-07-31): model DB'de "Bu
+  // round'ta" üretti — "round" (raund) yumuşak d ile biter → ünsüz benzeşmesi YOK,
+  // doğrusu "round'da/round'dan". Yanlış uyum ("round'te/ten") de aynı hedefe
+  // düzelir. $1 büyük/küçük harfi korur; Türkçe-\b tuzağına karşı lookahead sınırı.
+  [/(?<![a-zçğıöşü])(round)['’]t[ae]n(?![a-zçğıöşü])/gi, "$1'dan"],
+  [/(?<![a-zçğıöşü])(round)['’]t[ae](?![a-zçğıöşü])/gi, "$1'da"],
   // Türkçe yön + apostrof-ek backstop (Cycle 4): yön combo dönüşümü dative/acc
   // ekini ("front-right'e" → bare → "sağ ön'e") bırakabiliyor; apostrofu kaldırıp
   // birleştir ("ön'e"→"öne", "arka'dan"→"arkadan"). NOT: JS \b "ö"de kırıldığı için

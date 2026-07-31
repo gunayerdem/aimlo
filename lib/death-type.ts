@@ -168,7 +168,18 @@ export function classifyDeath(b: DeathSignals): DeathType {
   // (route ctx.ultReady) ama classifier dalı yoktu → universal.md "Dolu ult'la
   // ölme" bloğu deterministik yoldan hiç seçilemiyordu. Spike dallarından SONRA:
   // post-plant/retake bağlamı dolu-ult dersinden daha spesifik.
-  if (b.ultReady === true && agentSlug !== "clove") return "ult-in-pocket"; // died with charged, unused ult
+  //
+  // 🔴 MUAFİYET GENİŞLETİLDİ (canlı-test #7, softi 2026-07-31): Jett oynarken
+  // 6 round'un 3'ünde "ultin hazırken öldün" dersi geldi ("sürekli geliyor,
+  // reyna jett gibi karakterlere gelmemeli"). Oyun gerçeği: bu ajanların ult'u
+  // KENDİNE DÖNÜK dövüş aracıdır (Jett bıçak, Reyna İmparatoriçe, Neon Overdrive,
+  // Phoenix geri-dönüş, Iso düello, Chamber ult'u = ult-puanıyla alınan Op) —
+  // doğru anı bekletmek NORMALdir, ult'lu ölüm tek başına hata değildir. Ders,
+  // takım-etkili büyük ult'lar (Sova/Brim/Killjoy/Sage/Breach...) için kalır;
+  // onlarda cepte çürüyen ult gerçek kayıptır. Clove istisnasının gerekçesi ayrı
+  // (ult'u ölüm SONRASI çalışır) ama sonuç aynı: dal atlanır.
+  const ULT_POCKET_EXEMPT = new Set(["clove", "jett", "reyna", "neon", "phoenix", "iso", "chamber"]);
+  if (b.ultReady === true && !ULT_POCKET_EXEMPT.has(agentSlug)) return "ult-in-pocket"; // died with charged, unused ult
   // Pistol round = kendi bloğu (denetim: universal.md "Erken Round Ölümleri" bölümü
   // hiçbir tipe bağlı değildi = ölü içerik; pistol ölümü eco dersi değil açılış dersi ister).
   if (eco === "pistol") return "pistol-round";
