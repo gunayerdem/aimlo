@@ -54,7 +54,14 @@ export const BANNED_PHRASES = [
   // gen-*.mts validators, so those would false-positive EN output.
   "blade storm",
   "blade",
-  "predict",
+  // "predict" → "predict edilebilir" (2026-08-01, canlı eval): çıplak "predict"
+  // Türkçe tarzancayı ("predict edilebilirsin") hedefliyordu ama alt-dizgi olarak
+  // taranıyor ve liste dil-bağımsız → İNGİLİZCE çıktıda tamamen doğru olan
+  // "that makes you predictable" cümlesini ihlal sayıyordu. Bu, dosyanın kendi
+  // uyarısının (yukarıdaki "would false-positive EN output") gözden kaçmış hâli.
+  // Kalıbı Türkçe biçimine daralttım: TR tarzanca yakalanmaya devam eder,
+  // meşru EN koç dili yanlış alarm üretmez.
+  "predict edilebilir",
   "shift walk",
   "kill aldı",
   "frag verdi",

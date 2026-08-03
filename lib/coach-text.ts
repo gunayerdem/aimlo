@@ -609,6 +609,19 @@ export function cleanCoachText(text: string, lang: "tr" | "en"): string {
   // ("utility'siz utility'siz tutma" → "utility'siz tutma"). ≥5 chars only, so
   // legitimate short reduplication ("tek tek", "yan yan") is untouched.
   t = t.replace(/\b([^\s]{5,})\s+\1\b/giu, "$1");
+  // ── YAZIM TUTARLILIĞI (canlı eval 2026-08-01) ──────────────────────────────
+  // 36 örneklik gerçek koşumda iki özensizlik kaldı; ikisi de deterministik:
+  //  1) Kesme işareti: 281 kullanımın 279'u düz ('), 2'si eğri (’) çıktı
+  //     ("Cypher’in"). Görsel tutarsızlık; ayrıca improvement-plan eşleştirmesi
+  //     split("'") ile çalıştığı için düz biçim daha güvenilir. Tek yöne normalize.
+  //  2) Eksik Türkçe harf: model "taret destegi" yazdı ("desteği" olmalı).
+  //     Liste BİLEREK çok dar — yalnız diakritiksiz hâli BAŞKA bir Türkçe sözcük
+  //     OLMAYAN kelimeler girer. ("acisi" GİRMEZ: "acısı"=ağrı ile karışır.)
+  //     Canlı çıktıda yenisi görülürse buraya eklenir, genel bir "diakritik
+  //     onarıcı" YAZILMAZ — o, doğru yazılmış kelimeleri bozma riski taşır.
+  t = t.replace(/[’‘]/g, "'");
+  t = t.replace(/(?<![a-zçğıöşü])deste(g)(i|in|e|imiz)(?![a-zçğıöşü])/gi,
+    (_m, _g, suf: string) => "desteğ" + suf);
   // Strip a dangling clause separator left when the model started a 2nd clause
   // then stopped ("...aynı açıyı tutuyor;" → "...aynı açıyı tutuyor.").
   t = t.replace(/\s*;\s*$/, ".").replace(/\s+([.,!?])/g, "$1");
