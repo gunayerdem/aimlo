@@ -6,7 +6,13 @@
 import Module from "node:module";
 const origResolve = (Module as unknown as { _resolveFilename: (...a: unknown[]) => unknown })._resolveFilename;
 (Module as unknown as { _resolveFilename: (...a: unknown[]) => unknown })._resolveFilename = function (...args: unknown[]) {
-  if (args[0] === "server-only") return origResolve.call(this, "node:path");
+  // ⚠ "path" — "node:path" DEĞİL (CI kırmızıydı, 2026-08-03). `server-only`
+  // paketini zararsız bir yerleşik modüle yönlendiriyoruz; ama _resolveFilename'in
+  // DÖNÜŞ değeri yükleyici için bir dosya yolu gibi işlenir. Node 24 "node:path"i
+  // yerleşik olarak tanıyıp geçiyor, Node 22 (CI runner'ı) onu gerçek bir dosya
+  // sanıp `ENOENT: open 'node:path'` ile patlıyordu. Öneksiz "path" iki sürümde de
+  // yerleşiğe çözülür.
+  if (args[0] === "server-only") return origResolve.call(this, "path");
   return origResolve.apply(this, args);
 };
 

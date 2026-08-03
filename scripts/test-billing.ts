@@ -4,7 +4,9 @@
 import Module from "node:module";
 const origResolve = (Module as unknown as { _resolveFilename: (...a: unknown[]) => unknown })._resolveFilename;
 (Module as unknown as { _resolveFilename: (...a: unknown[]) => unknown })._resolveFilename = function (...args: unknown[]) {
-  if (args[0] === "server-only") return origResolve.call(this, "node:path");
+  // "path" — "node:path" DEĞİL: dönüş değeri dosya yolu gibi işleniyor ve Node 22
+  // (CI) `node:path`i gerçek dosya sanıp ENOENT veriyordu. Bkz. test-entitlements.ts.
+  if (args[0] === "server-only") return origResolve.call(this, "path");
   return origResolve.apply(this, args);
 };
 

@@ -41,7 +41,9 @@ type ResolveFn = (...a: unknown[]) => unknown;
 const origResolve = (Module as unknown as { _resolveFilename: ResolveFn })._resolveFilename;
 (Module as unknown as { _resolveFilename: ResolveFn })._resolveFilename = function (...args: unknown[]) {
   const req = args[0];
-  if (req === "server-only") return origResolve.call(this, "node:path", ...args.slice(1));
+  // "path" — "node:path" DEĞİL: Node 22'de (CI) ENOENT'e yol açıyordu.
+  // Bkz. scripts/test-entitlements.ts'teki ayrıntılı gerekçe.
+  if (req === "server-only") return origResolve.call(this, "path", ...args.slice(1));
   if (typeof req === "string" && req.startsWith("@/")) {
     return origResolve.call(this, path.join(REPO_ROOT, req.slice(2)), ...args.slice(1));
   }
