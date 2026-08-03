@@ -18,7 +18,7 @@ import { buildAgentAbilityHint, enforceAgentKit } from "@/lib/agent-abilities";
 import { cleanCoachText, clampWords, stripNumericHp, stripHpClaims } from "@/lib/coach-text";
 import { SYSTEM_PROMPT, SYSTEM_PROMPT_EN_ADDENDUM, USER_PROMPT, USER_PROMPT_EN, buildFactSheet, buildRoundFeedbackSchema } from "@/lib/vision-prompt";
 import { classifyDeath, buildDeathTypeDirective } from "@/lib/death-type";
-import { extractKillerWeapon, classifyCompArchetype, buildWeaponCompDirective } from "@/lib/comp-weapon";
+import { extractKillerWeapon, classifyCompArchetype, buildWeaponCompDirective, normalizeKillerInfoForPrompt } from "@/lib/comp-weapon";
 import { mapKey } from "@/lib/map-callouts";
 import { buildHistoryBlock, type RoundHistoryEntry } from "@/lib/history-block";
 
@@ -797,7 +797,19 @@ export async function POST(request: NextRequest) {
       if (typeof reqBody.deathTiming === "string") ctx.deathTiming = reqBody.deathTiming;
       if (typeof reqBody.killerInfo === "string" && reqBody.killerInfo.length > 0) {
         const safe = sanitizePromptInput(reqBody.killerInfo, { max: 120, collapseWhitespace: true });
-        if (safe) ctx.killerInfo = safe;
+        // SILAH ALLOW-LIST (canlı-test #8, 2026-08-03): sanitize güvenlik katmanı
+        // (tag/bidi/uzunluk) — OLGU katmanı DEĞİL. Koç "Chamber seni blade ile
+        // öldürdü" derken silah gerçekte Judge'dı; "blade" masaüstünün güvenilmez
+        // Region-3 okumasından gelip prompt'a HAM giriyordu (combat-report
+        // gövdesinde hiçbir silah kelimesi yoktu). Normalize: sözlükte gerçek silah
+        // varsa string aynen geçer, sözlük-dışı token varsa silah iddiası düşer
+        // (uydurmaktansa susmak). Ayrıntılı gerekçe: lib/comp-weapon.ts.
+        // NOT: classifyDeath ve extractKillerWeapon ham reqBody.killerInfo'yu okumaya
+        // devam eder (sözlük-bağlı, "blade" onlarda zaten sinyal üretmez) →
+        // deterministik katmanlar bayt-aynı. buildFactGround ise aşağıda bilerek bu
+        // normalize değerle beslenir (senkron gerekçesi orada).
+        const normalizedKiller = safe ? normalizeKillerInfoForPrompt(safe) : undefined;
+        if (normalizedKiller) ctx.killerInfo = normalizedKiller;
       }
       if (typeof reqBody.deathLocation === "string" && reqBody.deathLocation.length > 0) {
         const safe = sanitizePromptInput(reqBody.deathLocation, { max: 50, collapseWhitespace: true });
@@ -894,8 +906,19 @@ export async function POST(request: NextRequest) {
     // Death-Data Contract (Ölüm-Veri Sözleşmesi 2026-06-29): build the ground
     // truth ONCE here so BOTH the prompt fact-sheet AND the post-process guard
     // read the SAME object (no drift). Same helper is reused by report/route.ts.
+    // canlı-test #8 (2026-08-03) SENKRON ŞARTI: factGround, PROMPT'a GERÇEKTEN giren
+    // killerInfo'yu görmeli. buildFactSheet, hasKiller=true iken metne birebir
+    // `katil=${ctx.killerInfo}` yazıyor (lib/vision-prompt.ts:34) — yani ham gövdeyi
+    // okuyup ctx'i yazmak, ikisi ayrıştığı anda prompt'a "katil=undefined" basar.
+    // Yukarıdaki silah-allow-list'i ctx.killerInfo'yu düşürebildiği için (sözlük-dışı
+    // token → silah iddiası yok) burada ham reqBody.killerInfo yerine ctx'e giren
+    // değeri veriyoruz: fact-sheet + guard + prompt AYNI gerçeği paylaşır.
+    // Sözlükte gerçek silah olan normal round'da ctx.killerInfo === sanitize(ham) →
+    // hasKiller/hasWeapon/killerAgent bayt-aynı, davranış değişmez. Ayrıştığı tek
+    // durumda hasKiller=false olur; bu ANTI-UYDURMA yönüdür (reality-checker
+    // guardUnprovenFacts, hasKiller===false iken uydurma katil iddiasını süzer).
     const factGround = buildFactGround(
-      reqBody as unknown as Record<string, unknown>,
+      { ...(reqBody as unknown as Record<string, unknown>), killerInfo: ctx.killerInfo },
       ctx as unknown as Record<string, unknown>,
     );
     const factSheet = buildFactSheet(factGround, ctx as unknown as Record<string, unknown>, reqLang);

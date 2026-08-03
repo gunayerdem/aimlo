@@ -271,6 +271,28 @@ const TR_JARGON: [RegExp, string][] = [
   [/\bcontest\s+ediyor\b/gi, "zorluyor"],
   [/\bcontest\s+et\b/gi, "zorla"],
   [/\bsingle[- ]?entry\b/gi, "tek başına giriş"],          // "single-entry" → "tek başına giriş"
+  // ── ABARTILI FİİL NETİ (canlı-test #8, 2026-08-03) ──────────────────────
+  // softi'nin canlı çıktısı: "A Nest'te bilgi beklemeden İNFİLAK ETMİŞSİN, Jett
+  // seni oradan öldürdü." Şikâyet birebir: "yakalanmalı, GİRMİŞSİN gibi SADE
+  // olmalı." "infilak et-" ne KB'de ne prompt'ta geçiyor (repo geneli grep: 0
+  // eşleşme) — modelin kendi ürettiği edebi abartı, yani prompt katmanıyla
+  // kapatılamaz; deterministik net ŞART.
+  // HEDEF FİİL "gir-": (a) softi'nin kendi verdiği karşılık, (b) "et-" ile aynı
+  // ünlü sınıfında (ince-düz) olduğu için ekler AYNEN taşınır — "dal-" seçilseydi
+  // ünlü uyumu bozulup "dalmişsin" çıkardı. Tek istisna ünsüz benzeşmesi:
+  // et+ti → gir+di (ilk kural bunu ayrı ele alır).
+  // SIRA: spesifik (ett-/etm-/ed-) ÖNCE, catch-all EN SONDA — "etti"nin
+  // catch-all'a düşüp "girti" olmasını engeller.
+  // Türkçe-\b tuzağı: sol sınır \b DEĞİL, lookbehind (dosya başındaki nota bak);
+  // ayrıca /i bayrağı "İ" (U+0130) ile "i"yi EŞLEŞTİRMEZ → [İi] açıkça yazıldı.
+  // NOT: cümle başındaki "İnfilak etmişsin" → "girmişsin" (küçük harf) çıkar;
+  // TR_JARGON [RegExp,string] tipi olduğu için büyük-harf koruma yapılamıyor.
+  // Türkçe fiil-sonlu bir dil olduğundan cümleye fiille başlamak nadir; yasak
+  // kelimeyi bırakmaktansa kozmetik küçük harf tercih edildi.
+  [/(?<![a-zçğıöşüA-ZÇĞİÖŞÜ])[İi]nfilak\s+ett([ıi][a-zçğıöşü]*)/gi, "gird$1"],   // etti/ettin/ettiğin → girdi/girdin/girdiğin
+  [/(?<![a-zçğıöşüA-ZÇĞİÖŞÜ])[İi]nfilak\s+et(m[ei][a-zçğıöşü]*)/gi, "gir$1"],    // etmiş(sin)/etme/etmeden/etmek/etmiyor → gir…
+  [/(?<![a-zçğıöşüA-ZÇĞİÖŞÜ])[İi]nfilak\s+ed([ei][a-zçğıöşü]*)/gi, "gir$1"],     // ediyor(sun)/eder(sen)/edeceksin → gir…
+  [/(?<![a-zçğıöşüA-ZÇĞİÖŞÜ])[İi]nfilak\s+et([a-zçğıöşü]*)/gi, "gir$1"],         // backstop: "infilak et"/"etsen" → "gir"/"girsen"
   // ── HEDGE/TAHMİN DİLİ NET (2026-06-26, son-savunma) — koç KESİN konuşur.
   //    Prompt+BANNED_PHRASES birincil; bu net olasılık modalını + evidential
   //    -miş'i + tahmin adverb'lerini siler/kesin'e çevirir. SIRA: önce olasılık
@@ -600,6 +622,22 @@ export function cleanCoachText(text: string, lang: "tr" | "en"): string {
     // dönüşümleri de çoğul çekim üretebiliyor ("swing yapın" → "swing atın").
     t = singularizeTrImperatives(t);
     t = fixTurkishApostrophe(t);                     // duvar'i → duvarı (TR plain terms)
+    // ── KIRIK-KELİME ARTIĞI GUARD'I (canlı-test #8, 2026-08-03) ────────────
+    // softi'nin canlı çıktısı: "...retake'i planla: ğunda bir kişi defuse
+    // hattını...". KÖK NEDEN BU DOSYADA DEĞİL, zincirin ÖNCEKİ halkasında:
+    // lib/reality-checker.ts SPIKE_PATTERNS (`/\bspike\s*['’]?\s*(kuruldu|…)/gi`)
+    // SAĞ SINIRSIZ olduğu için "spike kurulduğunda" içinden "spike kuruldu"yu
+    // söküp "ğunda"yı bırakıyor. Birebir üretildi:
+    //   "Retake'i planla: spike kurulduğunda bir kişi defuse hattını tut."
+    //   → "Retake'i planla: ğunda bir kişi defuse hattını tut."   (canlı metnin AYNISI)
+    // Kök fix reality-checker'ın sahibinde; burası SINIR SAVUNMASI (defense-in-
+    // depth): hangi üst katman keserse kessin, kullanıcıya kırık kelime gitmez.
+    // YANLIŞ-POZİTİF RİSKİ SIFIR: Türkçede HİÇBİR kelime "ğ" ile BAŞLAMAZ; token
+    // "ğ" ile başlıyorsa kesinlikle bir ekin artığıdır ("ğunda", "ğinde").
+    // Aynı gerekçe "ı" için GEÇERSİZ ("ışık/ılık/ısrar" var) → kapsam DAR tutuldu,
+    // genel bir "kırık kelime onarıcısı" YAZILMADI (doğru metni bozma riski).
+    // Artık SİLİNİR, cümlenin kalanı korunur → "planla: bir kişi defuse hattını tut."
+    t = t.replace(/(^|[\s:;,—(])ğ[a-zçğıöşü]{1,8}(?![a-zçğıöşü])/gi, "$1");
   } else {
     // EN hedge neti (B84, 2026-07-31): TR'deki 3 katmanlı hedge korumasının
     // EN karşılığı — koç EN'de de KESİN konuşur.

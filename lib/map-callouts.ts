@@ -62,6 +62,18 @@ export const MAP_CALLOUTS: Record<string, readonly string[]> = {
   corrode: ["a link", "a main", "a site", "b elbow", "b link", "b main", "b site", "bottom mid", "elbow", "mid", "mid window", "pocket", "stairs", "top mid", "tower", "yard"],
   fracture: ["a default", "a dish", "a drop", "a hall", "a rope", "a site", "b arcade", "b canteen", "b default", "b generator", "b main", "b site", "b tower", "b tree", "ct spawn", "defender spawn", "mid", "zip line"],
   haven: ["a default", "a heaven", "a hell", "a long", "a short", "a site", "b back", "b default", "b site", "c default", "c link", "c long", "c platform", "c site", "ct spawn", "garage", "mid", "mid doors", "mid window", "plat"],
+  // ⚠ AÇIK EKSİK — KB BOŞLUĞU (canlı-test #8, 2026-08-03): canlı maçta "mid boiler"
+  // (log:1351) ve "b tube" (log:1377) 3/3 stratejiyle TEMİZ okundu, "mid blue" de
+  // ölüm yeri oldu. Bileşik biçimleri bu tabloda YOK; yalnız çıplak "boiler"/"tube"/
+  // "blue" var. Tabloya eklemeyi DENEDİM ve verify-kb [N] guard'ı HAKLI OLARAK
+  // reddetti: knowledge/maps/icebox.md'de Boiler ve Blue hakkında TEK SATIR koçluk
+  // içeriği yok (Tube var, ötekiler yok). Tabloya eklemek, koçun hakkında hiçbir
+  // şey bilmediği bir bölge adını "meşru" ilan etmek olurdu.
+  // KASITLI OLARAK EKLENMEDİ: eksik olan tablo değil, KB. Doğru sıra önce
+  // icebox.md'ye Boiler/Blue koçluk içeriği yazmak (oyun-olgusal doğrulukla),
+  // sonra tabloyu genişletmek. Harita bilgisi UYDURULMAZ.
+  // Bu arada zarar YOK: desktop kanonik eşleyicisi kelime-bazlı kademeye sahip
+  // ("mid" + "boiler" ayrı ayrı tabloda) → doğru okuma zaten geçiyor.
   icebox: ["a belt", "a box", "a default", "a main", "a nest", "a pipes", "a rafters", "a screens", "a site", "a zip", "b default", "b green", "b hall", "b kitchen", "b main", "b orange", "b site", "b snowman", "b yellow", "belt", "blue", "boiler", "ct spawn", "green", "kitchen", "mid", "nest", "orange", "pallet", "pipes", "rafters", "screens", "snowman", "t spawn", "tube", "yellow"],
   lotus: ["a default", "a link", "a main", "a root", "a site", "a stairs", "a tree", "b default", "b main", "b site", "b upper", "c default", "c hall", "c main", "c mound", "c site", "c waterfall", "mid", "mid link", "silent drop", "waterfall"],
   pearl: ["a art", "a ct", "a default", "a dugout", "a flowers", "a link", "a main", "a secret", "a site", "b club", "b default", "b hall", "b link", "b main", "b ramp", "b screen", "b site", "b tower", "b tunnel", "ct spawn", "mid", "mid connector", "mid doors", "mid plaza", "mid shops", "mid top", "t spawn"],

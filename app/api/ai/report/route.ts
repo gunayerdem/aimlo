@@ -838,6 +838,120 @@ function generateDeterministicReport(body: ReportRequest): ReportResponse {
 }
 
 /* ══════════════════════════════════════════════════════════
+   ORTAK ÇIKTI TEMİZLEYİCİSİ — ana AI yolu + kalite-kapısı refine
+   ══════════════════════════════════════════════════════════ */
+/**
+ * 🔴 CANLI-TEST #8 (2026-08-03, Icebox/Jett/Spike Rush) — RAPOR UYDURMA.
+ *
+ * KANIT: düşman kadrosu OCR ile chamber/raze/phoenix okundu; rapor "Mid Boiler'da
+ * SOVA pikiyle duvardan bilgi gönderdi" ve "Blue'da REYNA push yapıp flank aldı"
+ * dedi (ikisi de maçta YOK) + Icebox'ta bulunmayan "A Short" callout'unu yazdı.
+ *
+ * KÖK NEDEN: temizleyici zincir YALNIZ ana AI yolunda kuruluyordu. POST'taki kalite
+ * kapısı (qc.score < 65 → en zayıf alanı ikinci bir AI çağrısıyla yeniden yazdır)
+ * sonucu finalizeCoachText'e `check` PARAMETRESİ VERİLMEDEN yazıyordu → realityCheck
+ * halkasının içindeki stripForeignCallouts (yabancı-harita callout'u = "A Short") ve
+ * guardUnprovenFacts (kanıtsız katil/konum iddiası) refine metnine HİÇ uygulanmıyordu.
+ * Kodun kendi yorumu bunu itiraf ediyordu ("realityCheck halkası burada da YOK").
+ *
+ * FIX: zincir TEK yardımcıya çıkarıldı; hem ana alanlar hem refine çıktısı AYNI
+ * yardımcıyı kullanır. fg türetimi (anyKiller/anyLoc/suppliedLocs) ve realityCheck
+ * çağrısının argümanları AYNEN korundu — ana yolun davranışı bayt-aynı kalır.
+ */
+function buildReportCleaner(
+  body: ReportRequest,
+): (s: string, cap: number, fallback: string) => string {
+  // validateRequest lang'ı "tr"|"en"e sabitliyor; her iki çağrı yeri de aynı
+  // ifadeyi kullanıyordu (generateAIReport: lang === "tr", refine: lang === "en").
+  const lang: "tr" | "en" = body.lang === "en" ? "en" : "tr";
+  const rounds = Array.isArray(body.rounds) ? body.rounds : [];
+
+  // Canlı-test 2026-06-29: report route'ta killer/headshot guard HİÇ yoktu →
+  // mistake/tendencies'te "Reyna ya da unknown kafadan öldürdü" denetimsiz çıkıyordu.
+  // Maç boyu hiç killerAgent okunmadıysa hasKiller=false → uydurma katil "bir
+  // düşman"a iner; headshot daima okunmuyor → "kafadan" silinir. realityCheck
+  // cleanCoachText'ten ÖNCE (killer-collapse + headshot-strip ham metinde çalışsın).
+  // Ölüm-Veri Sözleşmesi 2026-06-29: report is MATCH-level (not a single
+  // reqBody/ctx) → derive the contract flags from the rounds array so the
+  // SAME guards run as in vision. Build a neutral base via buildFactGround
+  // (alive/spike→false, headshot→false) then set match-level aggregates:
+  //   hasKiller       = ANY round read a killerAgent (else collapse to "bir düşman")
+  //   hasDeathLocation= ANY round read a deathLocation (denetim fix #2: blanket-false
+  //                     would kill legit "A Site'te sürekli öldün" coaching; blanket-
+  //                     true would let "A Dish'te öldün" fabrication through. Derive it.)
+  // hasWeapon stays false (report has no enemy weapon string in the AI text path);
+  // hasRoute/hasTradeData false (not measured/sent at match-report time).
+  const anyKiller = rounds.some(
+    (r) => typeof r.killerAgent === "string" && r.killerAgent.length > 0,
+  );
+  const anyLoc = rounds.some(
+    (r) => typeof r.deathLocation === "string" && r.deathLocation.length > 0,
+  );
+  // MASAÜSTÜNÜN ÖLÇTÜĞÜ TÜM KONUMLAR (canlı regresyon 2026-07-24): rapor ÖZETİ
+  // birçok round'un konumuna atıfta bulunur ("A Main'de 3 ölüm..."). stripForeign-
+  // Callouts bu konumları HER ZAMAN meşru saymalı — tablo eksik olsa bile. Vision
+  // route tek konumu factGround.deathLocation'dan alıyordu; rapor route ise
+  // buildFactGround({},{}) çağırdığı için deathLocation DAİMA undefined'dı →
+  // özetteki gerçek çok-kelimeli Fracture callout'ları uydurma sanılıp siliniyordu
+  // ("nerede vurulduğunu söylemiyor"). Tüm round'ların (ölen+hayatta) konumlarını
+  // besle; bestRound hayatta-kalma konumunu da kapsasın.
+  const suppliedLocs = [
+    ...new Set(
+      rounds
+        .map((r) => (typeof r.deathLocation === "string" ? r.deathLocation : ""))
+        .filter((s) => s.length > 0),
+    ),
+  ];
+  const fg: FactGround = {
+    ...buildFactGround({}, {}),
+    hasKiller: anyKiller,
+    hasDeathLocation: anyLoc,
+    deathLocation: suppliedLocs,
+  };
+  // ── B82 (2026-07-31): TEK TEMİZLEYİCİ ZİNCİR ────────────────────────
+  // NEDEN: aynı çıktı guard'ları 4 route'ta 4 FARKLI derinlikte elle
+  // kuruluyordu (drift). Zincir artık lib/coach-text.ts:finalizeCoachText'te
+  // TEK YERDE tanımlı; bu route ona devrediyor.
+  // DAVRANIŞ AYNI KALIR:
+  //   · check halkası = birebir aynı realityCheck çağrısı (aynı fg/kind/lang/map),
+  //   · clampWords (2026-07-09) korunur — ham .slice kelime ortasından
+  //     kesiyordu ("rotasy"), word-safe clamp o canlı bug'ın fix'iydi,
+  //   · agent BİLEREK GEÇİLMİYOR: bu route'ta enforceAgentKit hiç çalışmıyordu,
+  //     geçmek davranışı DEĞİŞTİRİRDİ (agent yoksa halka no-op — agent-abilities.ts:98).
+  // TEK EK: süzgeç metni tamamen boşaltırsa (callout-strip + guard her cümleyi
+  // düşürürse) alan BOŞ dönmez; UYDURMA da dönmez — ölçülen veriden türetilmiş
+  // deterministik `stats` karşılığı korunur (no-fake sözleşmesi).
+  return (s: string, cap: number, fallback: string) =>
+    finalizeCoachText(s, {
+      lang,
+      cap,
+      fallback,
+      // setup.map (canlı bug 2026-07-21): rapor ÖZETİ'nde de yabancı-harita
+      // callout'u ayıklanır — bug tam olarak burada görülmüştü ("A Short:" ile
+      // başlayan Lotus özeti). "Unknown" tabloda yok → no-op, güvenli.
+      // Canlı-test #8: bu halka artık refine çıktısında da çalışıyor (Icebox "A Short").
+      //
+      // roundHistory = [] BİLİNÇLİ (canlı-test #8 denetimi, 2026-08-03). Gerçek
+      // round hafızasını beslemek CAZİP ama bu route'ta ÖLÇÜLEBİLİR REGRESYON
+      // üretiyor — iki kanıtlı kırılma (lib/reality-checker.ts):
+      //   1) COUNT_PATTERNS'te `/(\d+)\s*round/i` var (:87). MAÇ raporu doğası
+      //      gereği "13 round oynandı / 8 round kaybettin" yazar → bu sayı
+      //      "iddia edilen ölüm sayısı" sanılır, ölüm sayısından büyük olduğu
+      //      için countValid=false olur ve level-2 yeniden yazımı (:301-318)
+      //      GERÇEK skor cümlesini bozar ("13 round'da" → "3 kez'da").
+      //   2) extractClaims konumu POSITION_NAMES sırasına göre İLK eşleşmeden
+      //      alır (:196-198). Rapor metni hem ölüm konumunu hem ÖNERİ konumunu
+      //      içerir; öneri konumu listede önce geçerse actualCount=0 → level-3
+      //      (:344-359) DOĞRU olan "Mid'de sürekli öldün" cümlesini komple siler.
+      // İkisi de "guard'ın kendisi regresyon üretir" sınıfı (2026-07-24 strip-
+      // callout felaketinin aynısı). Maç-seviyesi doğrulama reality-checker'da
+      // maç-modu istiyor (round-sayısı ifadelerini count-iddiası saymamak +
+      // ölüm-bağlamlı konum seçimi); o dosya bu pakete ait değil.
+      check: (t) => realityCheck(t, [], fg, "generic", lang, body.setup.map).text,
+    });
+}
+
+/* ══════════════════════════════════════════════════════════
    AI REPORT — with timeout, validation, safe prompt
    ══════════════════════════════════════════════════════════ */
 async function generateAIReport(body: ReportRequest, userId?: string): Promise<ReportResponse> {
@@ -940,6 +1054,24 @@ async function generateAIReport(body: ReportRequest, userId?: string): Promise<R
   const confidenceLevel = patterns.overallConfidence || "medium";
   const knowledgePart = knowledgeContext ? `\nKOÇLUK BİLGİ KAYNAĞI:\n${knowledgeContext}\n` : "";
 
+  // 🔴 KAPALI KADRO KURALI (canlı-test #8, 2026-08-03) — RAPOR UYDURMA.
+  // KANIT: düşman kadrosu OCR ile chamber/raze/phoenix okundu, rapor "SOVA
+  // pikiyle duvardan bilgi gönderdi" + "REYNA push yapıp flank aldı" dedi.
+  // NEDEN AÇIK KALMIŞTI: "DÜŞMAN MODELİ (ZORUNLU)" bloğu modelden düşman
+  // davranışı İSTİYOR ama hangi ajanların var olduğunu SINIRLAMIYORDU; kadro
+  // userPrompt'ta yalnız bir bilgi satırıydı. guardUnprovenFacts da bu boşluğu
+  // kapatmaz — o yalnız KATİL bağlamındaki (kill-fiilli) adı denetler, "Sova
+  // bilgi gönderdi" gibi katil-dışı cümleye DOKUNMAZ (reality-checker.ts:630).
+  // OCR-only sözleşme: backend oyun olgusu uydurmaz → kadro kapalı listedir.
+  const enemyRoster = setup.unknownEnemyComp
+    ? []
+    : (setup.enemyComp || []).filter((a) => a && a !== "Unknown");
+  const rosterRule = enemyRoster.length > 0
+    ? `
+11. 🔒 DÜŞMAN KADROSU KAPALI LİSTEDİR — bu maçta yalnız şu ajanlar vardı: ${enemyRoster.join(", ")}. Listede OLMAYAN bir düşman ajanının adını, yeteneğini ya da davranışını YAZAMAZSIN (uydurma = RED BAYRAĞI). Kadroda olmayan bir rolden söz edeceksen ajan adı verme, "bir düşman" de.`
+    : `
+11. 🔒 DÜŞMAN KADROSU OKUNAMADI: hiçbir düşman ajan adı yazma ("Sova bilgi aldı" gibi cümleler YASAK) — "bir düşman"/"rakip" de. Dersi konum + silah + side + karar üzerinden ver.`;
+
   const systemPrompt = `${knowledgePart}Sen AIMLO'sun: Radiant seviye gerçek bir Valorant koçusun. VCT analisti gibi konuş, empatik değil — keskin ve spesifik.
 
 DİL — ZORUNLU:
@@ -973,7 +1105,7 @@ KURALLAR (HER BİRİ RED BAYRAĞI)
 7. MİKRO-POZİSYON ZORUNLU: "A Short", "B Main entry", "Generator off-angle" — "site" veya "mid" tek başına KABUL EDİLMEZ.
 8. Her round feedback'inde deathAnalysis/coachInsight varsa BUNLARA referans ver. Mesela 3 round'da "Cypher operator B Short" pattern'i tekrarlıyorsa mistake alanında bunu vurgula.
 9. ⚔ SIDE'a göre koçla (userPrompt'taki "Side" alanı). attack=SALDIRI (oyuncu giriyor → entry/execute/trade/space/lurk/post-plant dili; hata: solo dry entry, trade'siz peek, util'siz geçiş), defense=SAVUNMA (oyuncu tutuyor → açı tut/off-angle/crossfire/retake/save/rotate dili; hata: tek açıyı geniş peek, trade'siz over-peek, kayıp round'da save etmemek). mistake/adjustment/tendencies bu side'ın diliyle olmalı — savunma maçında "entry açmadın" yazmak, saldırı maçında "açıyı tutmadın" yazmak = RED BAYRAĞI.${setup.map === "Unknown" ? `
-10. ⚠ HARİTA OKUNAMADI (Unknown): Bu maçta harita tespit edilemedi. RULE 7'nin mikro-pozisyon ZORUNLULUĞU bu maçta GEÇERSİZ — callout/yer adı UYDURMA ("A Short", "B Main", "Mid" YASAK). Yalnız OCR'ın gönderdiği gerçek deathLocation'ları kullanabilirsin; onların dışında yer adı yazma. Dersi ajan + silah + side + karar (trade/util-sırası/timing/ekonomi) üzerinden ver — bunlar harita olmadan da spesifik ve doğrudur.` : ""}
+10. ⚠ HARİTA OKUNAMADI (Unknown): Bu maçta harita tespit edilemedi. RULE 7'nin mikro-pozisyon ZORUNLULUĞU bu maçta GEÇERSİZ — callout/yer adı UYDURMA ("A Short", "B Main", "Mid" YASAK). Yalnız OCR'ın gönderdiği gerçek deathLocation'ları kullanabilirsin; onların dışında yer adı yazma. Dersi ajan + silah + side + karar (trade/util-sırası/timing/ekonomi) üzerinden ver — bunlar harita olmadan da spesifik ve doğrudur.` : ""}${rosterRule}
 
 ═══════════════════════════════════════════════
 🚫 YASAK TÜRKÇE İFADELER (varyantları dahil — Türkçe çıktıda ASLA üretme)
@@ -1191,67 +1323,11 @@ ${scoringContext}`;
     // before returning — tarzanca/codename/apostrophe the model leaks gets
     // corrected on the wire. Shape + persist payload unchanged (only contents).
     if (isValidAITextFields(parsed)) {
-      // Canlı-test 2026-06-29: report route'ta killer/headshot guard HİÇ yoktu →
-      // mistake/tendencies'te "Reyna ya da unknown kafadan öldürdü" denetimsiz çıkıyordu.
-      // Maç boyu hiç killerAgent okunmadıysa hasKiller=false → uydurma katil "bir
-      // düşman"a iner; headshot daima okunmuyor → "kafadan" silinir. realityCheck
-      // cleanCoachText'ten ÖNCE (killer-collapse + headshot-strip ham metinde çalışsın).
-      // Ölüm-Veri Sözleşmesi 2026-06-29: report is MATCH-level (not a single
-      // reqBody/ctx) → derive the contract flags from the rounds array so the
-      // SAME guards run as in vision. Build a neutral base via buildFactGround
-      // (alive/spike→false, headshot→false) then set match-level aggregates:
-      //   hasKiller       = ANY round read a killerAgent (else collapse to "bir düşman")
-      //   hasDeathLocation= ANY round read a deathLocation (denetim fix #2: blanket-false
-      //                     would kill legit "A Site'te sürekli öldün" coaching; blanket-
-      //                     true would let "A Dish'te öldün" fabrication through. Derive it.)
-      // hasWeapon stays false (report has no enemy weapon string in the AI text path);
-      // hasRoute/hasTradeData false (not measured/sent at match-report time).
-      const anyKiller = Array.isArray(body.rounds)
-        && body.rounds.some((r) => typeof r.killerAgent === "string" && r.killerAgent.length > 0);
-      const anyLoc = Array.isArray(body.rounds)
-        && body.rounds.some((r) => typeof r.deathLocation === "string" && r.deathLocation.length > 0);
-      // MASAÜSTÜNÜN ÖLÇTÜĞÜ TÜM KONUMLAR (canlı regresyon 2026-07-24): rapor ÖZETİ
-      // birçok round'un konumuna atıfta bulunur ("A Main'de 3 ölüm..."). stripForeign-
-      // Callouts bu konumları HER ZAMAN meşru saymalı — tablo eksik olsa bile. Vision
-      // route tek konumu factGround.deathLocation'dan alıyordu; rapor route ise
-      // buildFactGround({},{}) çağırdığı için deathLocation DAİMA undefined'dı →
-      // özetteki gerçek çok-kelimeli Fracture callout'ları uydurma sanılıp siliniyordu
-      // ("nerede vurulduğunu söylemiyor"). Tüm round'ların (ölen+hayatta) konumlarını
-      // besle; bestRound hayatta-kalma konumunu da kapsasın.
-      const suppliedLocs = Array.isArray(body.rounds)
-        ? [...new Set(body.rounds
-            .map((r) => (typeof r.deathLocation === "string" ? r.deathLocation : ""))
-            .filter((s) => s.length > 0))]
-        : [];
-      const fg: FactGround = {
-        ...buildFactGround({}, {}),
-        hasKiller: anyKiller,
-        hasDeathLocation: anyLoc,
-        deathLocation: suppliedLocs,
-      };
-      // ── B82 (2026-07-31): TEK TEMİZLEYİCİ ZİNCİR ────────────────────────
-      // NEDEN: aynı çıktı guard'ları 4 route'ta 4 FARKLI derinlikte elle
-      // kuruluyordu (drift). Zincir artık lib/coach-text.ts:finalizeCoachText'te
-      // TEK YERDE tanımlı; bu route ona devrediyor.
-      // DAVRANIŞ AYNI KALIR:
-      //   · check halkası = birebir aynı realityCheck çağrısı (aynı fg/kind/lang/map),
-      //   · clampWords (2026-07-09) korunur — ham .slice kelime ortasından
-      //     kesiyordu ("rotasy"), word-safe clamp o canlı bug'ın fix'iydi,
-      //   · agent BİLEREK GEÇİLMİYOR: bu route'ta enforceAgentKit hiç çalışmıyordu,
-      //     geçmek davranışı DEĞİŞTİRİRDİ (agent yoksa halka no-op — agent-abilities.ts:98).
-      // TEK EK: süzgeç metni tamamen boşaltırsa (callout-strip + guard her cümleyi
-      // düşürürse) alan BOŞ dönmez; UYDURMA da dönmez — ölçülen veriden türetilmiş
-      // deterministik `stats` karşılığı korunur (no-fake sözleşmesi).
-      const clean = (s: string, cap: number, fallback: string) =>
-        finalizeCoachText(s, {
-          lang: isTr ? "tr" : "en",
-          cap,
-          fallback,
-          // setup.map (canlı bug 2026-07-21): rapor ÖZETİ'nde de yabancı-harita
-          // callout'u ayıklanır — bug tam olarak burada görülmüştü ("A Short:" ile
-          // başlayan Lotus özeti). "Unknown" tabloda yok → no-op, güvenli.
-          check: (t) => realityCheck(t, [], fg, "generic", isTr ? "tr" : "en", setup.map).text,
-        });
+      // Zincir + fg türetimi buildReportCleaner'a taşındı (canlı-test #8,
+      // 2026-08-03): AYNI temizleyiciyi POST'taki kalite-kapısı refine yolu da
+      // kullanmak zorunda — orada `check` hiç verilmediği için uydurma ajan/
+      // callout denetimsiz çıkıyordu. Ana yolun davranışı değişmedi.
+      const clean = buildReportCleaner(body);
       return {
         ...stats,
         summary: clean(parsed.summary, 1000, stats.summary),
@@ -1421,11 +1497,47 @@ export async function POST(request: NextRequest) {
     if (qc.score < 65 && fs.weakest && apiKey && typeof (report as Record<string, unknown>)[fs.weakest] === "string") {
       const weakText = (report as Record<string, unknown>)[fs.weakest] as string;
       const fieldMap: Record<string, string> = { summary: "maç özeti", mistake: "ana hata analizi", adjustment: "düzeltme önerisi" };
-      const refinePrompt = `Bu ${fieldMap[fs.weakest] || fs.weakest} zayıf. Yeniden yaz. KURALLAR:
-1. Pozisyon ismi ZORUNLU (A Short, B Main, Mid vb.)
-2. Düşman davranışı ZORUNLU
-3. Somut aksiyon ZORUNLU
-4. "Geliştir", "dikkatli ol" YASAK
+      // ── 🔴 OLGU-BAĞLI REFINE (canlı-test #8, 2026-08-03) ────────────────
+      // ESKİ PROMPT UYDURMAYI EMREDİYORDU: refine çağrısına harita, düşman kadrosu,
+      // round verisi ve ölüm konumları HİÇ gönderilmiyordu; buna rağmen "Pozisyon
+      // ismi ZORUNLU (A Short, B Main, Mid vb.)" + "Düşman davranışı ZORUNLU"
+      // deniyordu. Veri elinden alınmış model zorunluluğu doldurmak için (a)
+      // prompt'un KENDİ ÖRNEĞİNİ birebir kopyaladı (Icebox maçında "A Short" —
+      // Icebox'ta böyle bir callout YOK), (b) kadro bilgisi olmadığı için düşmanları
+      // uydurdu ("Sova pikiyle", "Reyna push yaptı" — kadro chamber/raze/phoenix).
+      // FIX: gerçek olgular prompt'a VERİLİR ve model YALNIZ onlara bağlanır;
+      // örnek callout'lar SİLİNDİ (model onları kopyalıyordu). Kalite kapısının
+      // amacı korunuyor: zayıf alan yine güçlendiriliyor, ama UYDURARAK değil.
+      const rSetup = validation.data.setup;
+      const refineLocs = [
+        ...new Set(
+          validation.data.rounds
+            .map((r) => (typeof r.deathLocation === "string" ? r.deathLocation.trim() : ""))
+            .filter((l) => l.length > 0),
+        ),
+      ].slice(0, 12);
+      // unknownEnemyComp=true → kadro OKUNMADI; "bilinmiyor" demek uydurmadan iyidir.
+      const refineEnemies = rSetup.unknownEnemyComp
+        ? []
+        : (rSetup.enemyComp || []).filter((a) => a && a !== "Unknown");
+      const refineTr = validation.data.lang !== "en";
+      const refinePrompt = `Bu ${fieldMap[fs.weakest] || fs.weakest} zayıf. Yeniden yaz.
+
+BU MAÇTA ÖLÇÜLEN OLGULAR (TEK gerçek kaynak — dışına çıkma):
+- Harita: ${rSetup.map && rSetup.map !== "Unknown" ? rSetup.map : "OKUNAMADI"}
+- Oyuncunun ajanı: ${rSetup.agent && rSetup.agent !== "Unknown" ? rSetup.agent : "OKUNAMADI"}
+- Taraf: ${rSetup.side === "attack" ? "saldırı" : "savunma"}
+- Skor: ${validation.data.score.yours}-${validation.data.score.enemy}
+- Düşman kadrosu: ${refineEnemies.length > 0 ? refineEnemies.join(", ") : "OKUNAMADI"}
+- Ölüm konumları: ${refineLocs.length > 0 ? refineLocs.join(", ") : "OKUNAMADI"}
+
+KURALLAR:
+1. YALNIZ yukarıdaki olguları kullan. Listede OLMAYAN ajan, konum, round ya da skor YAZMA — uydurma YASAK.
+2. Konum: sadece "Ölüm konumları" listesindekilerden birini kullanabilirsin. Liste OKUNAMADI ise hiç yer adı yazma.
+3. Düşman: sadece "Düşman kadrosu" listesindeki ajanlardan bahsedebilirsin. Liste OKUNAMADI ise ajan adı yazma, "bir düşman" de.
+4. Somut aksiyon ZORUNLU — ne yapacağı net olsun.
+5. "Geliştir", "dikkatli ol" gibi genel tavsiye YASAK.
+${refineTr ? "Türkçe yaz." : "Write in English."}
 Mevcut: "${weakText}"
 Sadece düzeltilmiş metni döndür.`;
 
@@ -1443,7 +1555,10 @@ Sadece düzeltilmiş metni döndür.`;
             max_completion_tokens: 500,
             reasoning_effort: "minimal",
             messages: [
-              { role: "system", content: "Radiant Valorant koçu. Her cümlede pozisyon + düşman + aksiyon ZORUNLU." },
+              // Canlı-test #8 (2026-08-03): eski sistem mesajı da "her cümlede
+              // pozisyon + düşman ZORUNLU" diyerek — veri verilmeden — uydurmayı
+              // dayatıyordu. Artık olgu-bağlılık birinci kural.
+              { role: "system", content: "Radiant Valorant koçu. YALNIZ sana verilen olgulara dayanırsın; verilmeyen ajan, konum veya olayı ASLA uydurmazsın. Her cümlede somut aksiyon olsun." },
               { role: "user", content: refinePrompt },
             ],
           }),
@@ -1462,15 +1577,20 @@ Sadece düzeltilmiş metni döndür.`;
             // Cycle 2 fix #5: clean the refined field too (same coach-voice net).
             // B82 (2026-07-31): elle kurulan cleanCoachText + clampWords ikilisi
             // ortak finalizeCoachText'e geçti (aynı sıra, aynı 600 kapağı,
-            // aynı word-safe kırpma). realityCheck halkası burada da YOK —
-            // refine metni zaten doğrulanmış alanın yeniden yazımı; halkayı
-            // eklemek davranış değişikliği olurdu. fallback=weakText: süzgeç
-            // metni boşaltırsa bu bloğun ilkesi gereği ELDEKİ tam metin kalır.
-            (report as Record<string, unknown>)[fs.weakest] = finalizeCoachText(refined, {
-              lang: validation.data.lang === "en" ? "en" : "tr",
-              cap: 600,
-              fallback: weakText,
-            });
+            // aynı word-safe kırpma).
+            //
+            // 🔴 CANLI-TEST #8 (2026-08-03) — KÖK FIX: burada `check` HİÇ
+            // VERİLMİYORDU. Eski gerekçe ("refine, doğrulanmış alanın yeniden
+            // yazımı") YANLIŞ çıktı: refine İKİNCİ bir AI çağrısıdır ve YENİ
+            // metin üretir — o metin realityCheck'ten geçmediği için
+            // stripForeignCallouts (Icebox'ta "A Short") ve guardUnprovenFacts
+            // (kanıtsız katil/konum) hiç çalışmadı, uydurma doğrudan rapora
+            // yazıldı. Artık ana alanlarla AYNI zincir uygulanıyor
+            // (buildReportCleaner → aynı fg, aynı harita, aynı dil).
+            // fallback=weakText: süzgeç metni boşaltırsa bu bloğun ilkesi
+            // gereği ELDEKİ tam metin kalır (no-fake: uydurma metin üretilmez).
+            (report as Record<string, unknown>)[fs.weakest] =
+              buildReportCleaner(validation.data)(refined, 600, weakText);
             console.log(`[Aimlo AI] Report field refined: ${fs.weakest}`);
           } else if (refined && rFinish !== "stop") {
             console.warn(`[Aimlo AI] Report refine REJECTED (finish=${rFinish}) — keeping original ${fs.weakest}`);

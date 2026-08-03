@@ -143,6 +143,55 @@ console.log("\n[12] EK HATASI — \"round'ta/round'tan\" → \"round'da/round'da
   t("doğru biçim DOKUNULMADI", /round'da doğruydu/.test(d), `→ "${d}"`);
 }
 
+console.log("\n[13] ABARTILI FİİL — \"infilak et-\" (canlı-test #8, 2026-08-03)");
+{
+  // softi'nin canlı çıktısı BİREBİR: "A Nest'te bilgi beklemeden infilak
+  // etmişsin, Jett seni oradan öldürdü." Şikâyet: "yakalanmalı, GİRMİŞSİN gibi
+  // SADE olmalı." Kelime KB'de/prompt'ta YOK (repo grep: 0) → model uydurması,
+  // yalnız deterministik net kapatabilir.
+  const a = tr("A Nest'te bilgi beklemeden infilak etmişsin, Jett seni oradan öldürdü.");
+  const b = tr("Bilgi almadan infilak ettin.");
+  const c = tr("Sürekli infilak ediyorsun.");
+  const d = tr("Takım hazır değilken infilak etmiş.");
+  const e = tr("Bilgi beklemeden infilak etme.");
+  console.log("    SONRA:", a, "|", b, "|", c, "|", d, "|", e);
+  t("'infilak' hiçbir çekimde kalmadı", ![a, b, c, d, e].some((s) => /infilak/i.test(s)), `→ "${a}"`);
+  t("etmişsin → girmişsin", /girmişsin/.test(a), `→ "${a}"`);
+  t("cümlenin kalanı korundu", /Jett seni oradan öldürdü/.test(a), `→ "${a}"`);
+  t("ettin → girdin", /girdin/.test(b), `→ "${b}"`);
+  t("ediyorsun → giriyorsun", /giriyorsun/.test(c), `→ "${c}"`);
+  // 3. tekil -miş ayrıca hedge netine düşer: "girmiş" → "girdi" (koç KESİN konuşur)
+  t("etmiş → girdi (hedge neti de çalıştı)", /girdi/.test(d) && !/girmiş/.test(d), `→ "${d}"`);
+  t("etme → girme", /girme(?![a-zçğıöşü])/.test(e), `→ "${e}"`);
+  // Çekim uyumu kanıtı: "girti/girmişin" gibi bozuk ek ÜRETİLMEDİ
+  t("bozuk çekim üretilmedi", ![a, b, c, d, e].some((s) => /girti|girmişin|girdiyor/i.test(s)), `→ "${b}"`);
+}
+
+console.log("\n[14] KIRIK KELİME ARTIĞI — \"ğunda\" (canlı-test #8, 2026-08-03)");
+{
+  // Canlı çıktı: "...retake'i planla: ğunda bir kişi defuse hattını...".
+  // KÖK NEDEN coach-text'te DEĞİL: lib/reality-checker.ts SPIKE_PATTERNS
+  // (/\bspike\s*['’]?\s*(kuruldu|…)/gi) sağ sınırsız olduğu için
+  // "spike kurulduğunda" içinden "spike kuruldu"yu söküyor. Birebir üretildi:
+  //   "Retake'i planla: spike kurulduğunda bir kişi defuse hattını tut."
+  //   → "Retake'i planla: ğunda bir kişi defuse hattını tut."
+  // Buradaki guard SINIR SAVUNMASI: Türkçede hiçbir kelime "ğ" ile BAŞLAMAZ.
+  const a = tr("Retake'i planla: ğunda bir kişi defuse hattını tut.");
+  const b = tr("ğinde açıyı tut.");
+  console.log("    SONRA:", a, "|", b);
+  t("'ğunda' artığı silindi", !/ğunda/.test(a), `→ "${a}"`);
+  t("cümlenin kalanı korundu", /planla: bir kişi defuse hattını tut/.test(a), `→ "${a}"`);
+  t("baştaki 'ğinde' artığı silindi", !/ğinde/.test(b) && /açıyı tut/.test(b), `→ "${b}"`);
+  // YANLIŞ-POZİTİF KONTROLÜ: sağlam Türkçe kelimeler DOKUNULMAZ
+  const c = tr("Spike kurulduğunda bir kişi defuse hattını tut.");
+  const d = tr("Düşman sesini duyduğunda köşeye yaslan.");
+  const e = tr("Yağmur yağdığında bile aynı açıyı tut.");
+  console.log("    NEGATİF:", c, "|", d, "|", e);
+  t("'kurulduğunda' bozulmadı", /kurulduğunda/.test(c), `→ "${c}"`);
+  t("'duyduğunda' bozulmadı", /duyduğunda/.test(d), `→ "${d}"`);
+  t("'yağdığında' bozulmadı", /yağdığında/.test(e), `→ "${e}"`);
+}
+
 console.log(`
 ══════ ${fail === 0 ? "✅ TÜMÜ GEÇTİ" : `❌ ${fail} BAŞARISIZ`} ══════
 `);

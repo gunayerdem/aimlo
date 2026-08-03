@@ -63,6 +63,74 @@ export function extractLoadoutWeapon(loadout?: string): { name: string; cls: Wea
   return m ? { name: m[1].toLowerCase(), cls: WEAPON_CLASS[m[1].toLowerCase()] } : null;
 }
 
+// ── killerInfo prompt-normalizasyonu (canlı-test #8, 2026-08-03) ──────────────
+//
+// KUSUR: koç metni "Chamber seni blade ile öldürdü" dedi; silah aslında JUDGE'dı.
+// KÖK NEDEN (b): killerInfo prompt'a HAM giriyordu. Masaüstü OCR'ının WEAPONS
+// listesi "melee/knife/blade" token'larını da içeriyor (aimlo-desktop
+// src-tauri/src/ocr.rs, `const WEAPONS`) ve bunlar combat-report GÖVDESİNDEN
+// değil, güvenilmez "Region 3" merkez bandından okunabiliyor (aynı dosya,
+// read_killer_info). Yani "with blade" GÖZLENMİŞ bir silah değil, gürültü.
+// Backend'de bu token için ÇALIŞAN hiçbir çıkış kapısı kalmamıştı:
+//   • extractKillerWeapon sözlük-bağlı → "blade" görünce null döner ama ham
+//     string prompt'a yine de giriyordu (model onu kopyaladı),
+//   • reality-checker WEAPON_NAMES listesinde "blade" yok → guard strip'lemedi,
+//   • ai-policy BANNED_PHRASES runtime kapısı DEĞİL (yalnız eval/validator),
+//   • plainifyAbilities yalnız resmi ad "Blade Storm"a bakar, çıplak "blade"e değil.
+//
+// FIX: prompt'a giden metinde silah yuvası ALLOW-LIST'e tabi. Sözlükte gerçek bir
+// silah varsa string'e DOKUNULMAZ (mevcut davranış birebir korunur: "with vandal
+// (full-buy silah)" aynen geçer). Sözlük-dışı bir token varsa silah İDDİASI
+// TAMAMEN düşürülür — uydurmaktansa susmak. Katil AJANI korunur (asıl koçluk
+// gerçeği o).
+//
+// BİLEREK YAPILMAYAN (naif tuzak): "blade" → "bıçak" gibi bir ÇEVİRİ satırı
+// eklemiyoruz. (a) route'taki TR_JARGON yalnız lang==="tr" dalında çalışır, EN
+// çıktı açıkta kalırdı (B84 sınıfı hata); (b) daha kötüsü, doğrulanmamış bir OCR
+// token'ını KENDİNDEN EMİN bir Türkçe silah adına çevirmek uydurmayı düzeltmek
+// yerine cilalar. Doğru davranış: sus.
+
+/** Prompt'a asla girmemesi gereken, gözlem değeri olmayan silah token'ları.
+ *  Kaynak: masaüstü WEAPONS listesindeki sözlük-dışı üçlü. killerInfo İngilizce
+ *  üretilir (OCR "killed by" çapasıyla İngilizce istemciden okur), bu yüzden
+ *  Türkçe karşılık gerekmiyor → ASCII \b güvenli (Türkçe-\b tuzağı yok). */
+const UNTRUSTED_WEAPON_TOKEN_RE = /\b(?:blades?|kni(?:fe|ves)|melee)\b/gi;
+
+/**
+ * killerInfo'yu PROMPT'a girmeden önce normalize et. Deterministik silah/ölüm
+ * sınıflandırıcıları (classifyDeath, extractKillerWeapon) ham gövdeyi okumaya
+ * devam eder — zaten sözlük-bağlı oldukları için "blade" onlarda hiçbir sinyal
+ * üretmez, davranışları değişmez. buildFactGround ise BİLEREK bu normalize
+ * değerle beslenir (bkz. vision/route.ts): fact-sheet `katil=${ctx.killerInfo}`
+ * yazdığı için ikisi ayrışırsa prompt'a "katil=undefined" düşerdi.
+ *
+ * Biçim sözleşmesi (masaüstü ocr.rs): "killed by <ajan> with <silah>",
+ * "killed by <ajan>", "killed with <silah>" (+ opsiyonel " (<eko-tier>)";
+ * masaüstü melee/knife/blade için tier ÜRETMEZ → o dalda kaybedilen bilgi yok).
+ *
+ * @returns normalize metin, ya da geriye anlamlı hiçbir gerçek kalmadıysa undefined.
+ */
+export function normalizeKillerInfoForPrompt(killerInfo?: string): string | undefined {
+  const s = (killerInfo ?? "").trim();
+  if (!s) return undefined;
+  // Sözlükte GERÇEK silah varsa dokunma — regresyon riski sıfır.
+  if (extractKillerWeapon(s)) return s;
+  // Sözlük-dışı: "with ..." kuyruğu (silah yuvası + ona bağlı parantezli tier)
+  // komple düşer. "with" bu biçimde HER ZAMAN silah sınırıdır.
+  let out = s.replace(/\bwith\b[\s\S]*$/i, " ");
+  // Savunma-derinliği: "with" düşmüş OCR biçimi ("by reyna blade") için güvenilmez
+  // token'ları nerede geçerse geçsin temizle.
+  out = out.replace(UNTRUSTED_WEAPON_TOKEN_RE, " ");
+  // Artık bağlaç/noktalama artıklarını topla.
+  out = out.replace(/\(\s*\)/g, " ").replace(/\s{2,}/g, " ").trim();
+  out = out.replace(/[\s,;:\-(]+$/g, "").trim();
+  out = out.replace(/\s+(?:by|with)$/i, "").trim();
+  // Geriye yalnız "killed"/"killed by" gibi içi boş bir kabuk kaldıysa alan hiç
+  // yazılmasın — boş iddia, model için gürültüdür.
+  if (!out || /^killed(?:\s+by)?$/i.test(out)) return undefined;
+  return out;
+}
+
 // ── Komp arketipi ─────────────────────────────────────────────
 // weapon-comp-compact.md "## Komp Okuma" H3 slug'larıyla BİREBİR aynı adlar.
 export type CompArchetype =
