@@ -125,13 +125,28 @@ function hpHits(text: string): string[] {
 /**
  * KOD-AD YASAĞI (SILVER_AUDIENCE_RULE): resmî yetenek adı kullanma.
  * Kaynak = ABILITY_PLAIN_MAP.official (tek kaynak, kopya liste yok).
+ *
+ * 🔴 EN YANLIŞ-ALARMI (ilk EN ölçüm koşusunda yakalandı, 2026-08-04):
+ * Bazı yeteneklerin SADE İngilizcesi resmî adının AYNISI — Turret/turret,
+ * Updraft/updraft, Shock Bolt/shock bolt, Interceptor/interceptor (4/116).
+ * Bu satırlar EN metinde ÖLÇÜLEMEZ bir kural üretiyordu: model doğru sade
+ * İngilizceyi yazsa bile "kod-ad ihlali" sayılıyordu, düzeltmesi İMKÂNSIZDI.
+ * Bu, "kod kendisiyle çelişiyor" sınıfının aynısı (10h ölçüm nöbeti dersi):
+ * bir katman yasaklarken başka katman aynı kelimeyi EMREDİYOR.
+ *
+ * ÇÖZÜM: EN metinde, sade karşılığı resmî adla ÇAKIŞAN yetenekler atlanır —
+ * o kelime EN'de zaten "sade dil"in ta kendisi. TR ölçümü BİREBİR aynı kalır
+ * (TR karşılıkları farklı: taret/zıplama/hasar oku/önleyici), yani geçmiş
+ * TR A/B kanıtları etkilenmez.
  */
-function codenameHits(text: string): string[] {
+function codenameHits(text: string, lang: "tr" | "en" = "tr"): string[] {
   const t = norm(text);
   const hits: string[] = [];
   for (const a of ABILITY_PLAIN_MAP) {
     const off = norm(a.official).trim();
     if (off.length < 4) continue; // "ult" gibi kısa/genel olanları atla
+    // EN'de sade karşılık == resmî ad ise bu bir ihlal DEĞİL, doğru kullanım.
+    if (lang === "en" && a.en && norm(a.en).trim() === off) continue;
     const re = new RegExp(`(?<![\\p{L}\\p{N}])${off.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?![\\p{L}\\p{N}])`, "u");
     if (re.test(t)) hits.push(a.official);
   }
@@ -222,14 +237,18 @@ function scoreSample(s: Sample): Row {
   const banned = bannedHits(text);
   const time = timeHits(text);
   const hp = hpHits(text);
-  const codename = codenameHits(text);
+  // lang aşağıda kuruluyor ama kod-adı ölçümü de dile duyarlı olmalı (EN'de
+  // sade karşılığı resmî adla çakışan yetenekler ihlal sayılmamalı) — bu
+  // yüzden dil burada BİR KEZ türetilip iki yerde de kullanılıyor.
+  const sampleLang: "tr" | "en" = s.lang === "en" ? "en" : "tr";
+  const codename = codenameHits(text, sampleLang);
 
   // B60 (pano özellik dalgası, 2026-08-04): TR-sızıntı YALNIZ EN örneklerde
   // ölçülür (dil-bağımsız değil — TR metin doğal olarak "kirli" görünürdü).
   // en-hedge kesişimi bannedHits'ten düşülür: BANNED_PHRASES'in EN girdileri
   // ("maybe/probably/it seems...") zaten yasak-ifade sayılıyor, aynı ihlali
   // iki kez saymak A/B'yi şişirirdi. Kanıt-kaynağı: evals/en-leak-detector.ts.
-  const lang: "tr" | "en" = s.lang === "en" ? "en" : "tr";
+  const lang = sampleLang;
   const enLeak =
     lang === "en"
       ? [...new Set(
