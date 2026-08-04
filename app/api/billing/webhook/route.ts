@@ -188,6 +188,25 @@ function normalizeStripe(evt: StripeEvent): NormalizedEvent | null {
 // (Stripe `metadata`), tutarlar MINOR-UNIT STRING (Stripe number), dönem
 // sonu ISO string (Stripe unix saniye), durumlar
 // active|trialing|past_due|paused|canceled.
+//
+// ── TODO — PADDLE SANDBOX DOĞRULAMASI (F59/F67, pano dalga, 2026-08-04) ────
+// NEDEN: aşağıdaki alan eşlemesi Paddle Billing dokümantasyonuna göre yazıldı
+// ama HİÇ gerçek Paddle payload'ı görmedi (route prod'da UYKUDA —
+// PADDLE_WEBHOOK_SECRET tanımlı değil, secret'sız her istek 503). Kod bilerek
+// canlı bırakıldı (yorum-taslağa çevirmek önceki dalganın çalışan fix'ini
+// bozardı); riski sıfırlayan şey secret'ın YOKLUĞU. PADDLE_WEBHOOK_SECRET
+// prod'a konmadan ÖNCE Paddle sandbox'ında ("Notifications → Simulate" +
+// gerçek test-checkout) şu maddeler TEK TEK işaretlenmeli
+// (prosedür: docs/LAUNCH_RUNBOOK.md §4 "Paddle onboarding"):
+//   [ ] Paddle-Signature `ts=...;h1=...` sandbox event'iyle verifyPaddleSignature'dan geçiyor
+//   [ ] subscription.activated → data.status="active", items[0].price.unit_price.amount doğru okunuyor
+//   [ ] subscription.canceled → "canceled" özel durumu + scheduled_change.action="cancel" eşlemesi
+//   [ ] transaction.completed → details.totals.grand_total minor-unit STRING geliyor (paddleMinorUnits)
+//   [ ] custom_data.user_id test-checkout'tan ULAŞIYOR (M2: checkout yazılırken
+//       SUNUCU-doğrulamalı oturumdan konacak — istek gövdesinden ASLA)
+//   [ ] current_billing_period.ends_at ISO string → current_period_end doğru
+// Eşleme tutmayan alan varsa düzeltme BURADA (normalizePaddle) yapılır;
+// NormalizedEvent şekli ve DB yazma yolu DEĞİŞMEZ.
 
 type PaddleEvent = {
   event_id?: string;
