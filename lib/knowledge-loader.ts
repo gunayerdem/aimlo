@@ -85,6 +85,14 @@ interface LoadOptions {
   agent?: string;
   rank?: string;
   enemyAgents?: string[];
+  /**
+   * B42/F76 (pano dalga, 2026-08-04): spikePlanted/economyType artık HİÇBİR
+   * loader'da KB seçmiyor — post-plant/retake/ekonomi rehberi her istekte
+   * statik `scenario` bloğunda taşınır, bölüm seçimi user-message'daki
+   * [SENARYO İPUCU] işaretçisiyle yapılır (weapon-comp Block 0 emsali).
+   * Alanlar çağıran-uyumluluğu için korunuyor (vision route + ölçüm
+   * scriptleri hâlâ geçiriyor; fazla alan sessizce yok sayılır).
+   */
   spikePlanted?: boolean;
   economyType?: string;
   /** "attack" | "defense" — when set, side-irrelevant sections are dropped. */
@@ -400,6 +408,19 @@ interface VisionKnowledgeResult {
      */
     static?: string;
     /**
+     * Block 0d — statik senaryo rehberi (post-plant + retake + ekonomi).
+     * 🔴 B42/F76 (pano dalga, 2026-08-04): bu üç dosya eskiden contextual'de
+     * spikePlanted/economyType/side'a GÖRE yükleniyordu — round-round değişen bu
+     * seçim, statik öneği HER geçişte kırıp arkasındaki tüm blokları taze token
+     * yapıyordu (ölçüm: ardışık-round senaryosunda ~21.8KB ≈ 6.8K taze token).
+     * weapon-comp Block 0 emsalinin birebir uygulaması: içerik HER istekte
+     * BAYT-AYNI burada durur (side-filtre BİLİNÇLİ uygulanmaz — filtre isteğe
+     * bağımlılık demektir ve bayt-sabitliği bozar), hangi bölümün geçerli olduğunu
+     * user-message'daki [SENARYO İPUCU] işaretçisi söyler; işaretçi yoksa guard
+     * dili modeli rehberden ders çıkarmaktan meneder.
+     */
+    scenario?: string;
+    /**
      * Block 0b — koçluk profili (ranks/universal.md). staticBlock ile aynı
      * kararlılık sınıfı: içerik istekten BAĞIMSIZ, bayt-aynı. Eskiden contextual
      * içindeydi ve önündeki tek round-bazlı toggle (spike/eco) bile onu taze
@@ -587,7 +608,11 @@ function loadCounterAgentSection(enemyAgent: string): string | null {
 }
 
 export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeResult {
-  const { map, agent, rank, enemyAgents, spikePlanted, economyType, side, killerInfo } = options;
+  // B42/F76 (pano dalga, 2026-08-04): spikePlanted/economyType destructure'dan
+  // çıkarıldı — senaryo rehberi artık koşulsuz statik blokta (aşağıda Block 0d),
+  // bölüm seçimi user-message işaretçisinde. Alanlar LoadOptions'ta duruyor
+  // (çağıran-uyumluluğu); burada okunmadıkları için lint temiz kalsın diye alınmıyor.
+  const { map, agent, rank, enemyAgents, side, killerInfo } = options;
   const files: string[] = [];
 
   // ── Block 0: Statik silah+komp rehberi (istekten BAĞIMSIZ — en kararlı blok) ──
@@ -603,6 +628,51 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
         `gösterdiği bölümü kullan; işaretçi yoksa bu rehberden ders çıkarma]\n` +
         stripKbWhitespace(content);
       files.push("general/weapon-comp-compact.md");
+    }
+  }
+
+  // ── Block 0d: Statik senaryo rehberi (post-plant + retake + ekonomi) ──
+  // 🔴 B42/F76 (pano dalga, 2026-08-04): bu üç dosya eskiden contextual'de
+  // spikePlanted/economyType/side kapılarıyla yükleniyordu. Kapılar round-round
+  // değiştiği için (spike toggle, eco→full_buy geçişi, devre arası side flip)
+  // statik önek her geçişte kırılıyor ve arkasındaki her şey taze faturalanıyordu
+  // — ölçüm (measure-prompt-prefix, 2026-08-04 baseline): ardışık-round
+  // senaryosunda 21.822 B ≈ 6.819 taze token. weapon-comp Block 0 emsalinin
+  // birebir uygulaması: içerik KOŞULSUZ ve HER istekte bayt-aynı yüklenir
+  // (deterministik sıra: post-plant → retake → ekonomi), bölüm seçimi
+  // user-message'daki [SENARYO İPUCU] işaretçisinde (vision route kurar).
+  // side-filtre BİLİNÇLİ uygulanmaz: filterSectionsBySide isteğe bağımlılıktır ve
+  // bayt-sabitliği (cache'in ön koşulu) bozar — yön ayrımını işaretçi yapar.
+  // stripRankSections İSE deterministiktir (isteğe bakmaz) → retake'in
+  // "## RANK BAZINDA NOTLAR" bölümü softi'nin rank-tiering yasağı gereği düşer
+  // (eski contextual yolundaki davranışın birebiri).
+  let scenarioBlock: string | undefined;
+  {
+    const parts: string[] = [];
+    const postPlant = loadFile("general/post-plant-playbook.md");
+    if (postPlant) {
+      parts.push(`[POST-PLANT TAKTİK]\n${stripKbWhitespace(postPlant)}`);
+      files.push("general/post-plant-playbook.md");
+    }
+    const retake = loadFile("general/retake-playbook.md");
+    if (retake) {
+      parts.push(`[RETAKE TAKTİK]\n${stripKbWhitespace(stripRankSections(retake))}`);
+      files.push("general/retake-playbook.md");
+    }
+    const economy = loadFile("general/economy-mastery.md");
+    if (economy) {
+      parts.push(`[EKONOMİ REHBERİ]\n${stripKbWhitespace(economy)}`);
+      files.push("general/economy-mastery.md");
+    }
+    if (parts.length > 0) {
+      // Guard dili weapon-comp Block 0'dan AYNEN kopyalandı ("işaretçi yoksa bu
+      // rehberden ders çıkarma") — işaretçisiz round'da (spike yok + full_buy)
+      // model bu rehberi yok sayar; eski "rehber hiç yüklenmedi" davranışının
+      // işaretçi karşılığı.
+      scenarioBlock =
+        `[SENARYO REHBERİ — post-plant/retake/ekonomi. user message'daki [SENARYO İPUCU] ` +
+        `işaretçisinin gösterdiği bölümü kullan; işaretçi yoksa bu rehberden ders çıkarma]\n` +
+        parts.join("\n\n");
     }
   }
 
@@ -678,8 +748,9 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
   // ── Block 3: Contextual KB (gerçekten değişken kısım) ──
   // İÇ SIRA = değişme sıklığı (kararlı → değişken), prefix-cache kuralı:
   //   1) matchup      — maç boyunca sabit (ajan × düşman komp)
-  //   2) post-plant / retake / ekonomi — round-round toggle
-  //   3) karşı-ajan   — HER ÖLÜMDE değişir → en sonda
+  //   2) karşı-ajan   — HER ÖLÜMDE değişir → en sonda
+  // B42/F76 (pano dalga, 2026-08-04): post-plant/retake/ekonomi buradan Block 0d'ye
+  // (statik senaryo rehberi) TAŞINDI — round-round toggle'lar artık öneği kırmıyor.
   const contextualParts: string[] = [];
 
   // Matchup (1 best match) — maç boyunca sabit, contextual'in en kararlı parçası.
@@ -701,50 +772,16 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
     }
   }
 
-  // Post-plant (only if spike planted)
-  if (spikePlanted) {
-    const content = loadFile("general/post-plant-playbook.md");
-    if (content) {
-      // Side-filtre (2026-07-19): agent/map bloklarında uygulanan filterSectionsBySide
-      // burada unutulmuştu. Dosyanın H2'leri "## Saldırı — ..." (7 bölüm) + "## Savunma —
-      // Retake" (1 bölüm) — filtrenin anahtar kelimeleri ("saldırı"/"savunma") bu
-      // adlandırmayla birebir eşleşiyor (doğrulandı, uyarlama gerekmedi). Savunma
-      // isteğine artık ~6KB saldırı post-plant içeriği girmiyor; retake bölümü +
-      // H2-öncesi giriş korunur. (economy-mastery.md H2'lerinde side kelimesi yok —
-      // filtre no-op olurdu, bilinçli olarak uygulanmadı.)
-      const filtered = filterSectionsBySide(content, side);
-      contextualParts.push(`[POST-PLANT TAKTİK]\n${stripKbWhitespace(filtered)}`);
-      files.push("general/post-plant-playbook.md");
-    }
-  }
-
-  // Retake (2026-07-19): post-plant-playbook'un SAVUNMA-simetriği — spike kurulu
-  // + savunma isteğinde yüklenir (retake ölümü en sık koçlanabilir savunma
-  // senaryosu, rehberi hiç yüklenmiyordu). filterSectionsBySide BİLİNÇLİ olarak
-  // uygulanmadı: dosyanın H2'lerinde side kelimesi yok (STANDART RETAKE / SAYISAL
-  // DEZAVANTAJ / UTIL SIRASI / YAYGIN HATALAR...) → filtre no-op olurdu
-  // (economy-mastery ile aynı gerekçe). stripRankSections İSE uygulanır:
-  // "## RANK BAZINDA NOTLAR" bölümü softi'nin rank-tiering yasağına (2026-06-26)
-  // takılır — loader seviyesinde düşer (~0.9KB tasarruf + gating dili sızmaz).
-  if (spikePlanted && side === "defense") {
-    const content = loadFile("general/retake-playbook.md");
-    if (content) {
-      contextualParts.push(`[RETAKE TAKTİK]\n${stripKbWhitespace(stripRankSections(content))}`);
-      files.push("general/retake-playbook.md");
-    }
-  }
-
-  // Economy (eco/force/pistol/half_buy — half_buy eklendi 2026-07-19: bonus/yarım-alım
-  // round ölümü en öğretilebilir ekonomi round'u olduğu hâlde rehber almıyordu.
-  // Kapı economyType sinyali (desktop sözleşmesi: full_buy|force_buy|half_buy|eco|pistol);
-  // full_buy bilinçli olarak hâlâ yüklemez — maliyet disiplini.)
-  if (economyType && (economyType === "eco" || economyType === "force_buy" || economyType === "pistol" || economyType === "half_buy")) {
-    const content = loadFile("general/economy-mastery.md");
-    if (content) {
-      contextualParts.push(`[EKONOMİ REHBERİ]\n${stripKbWhitespace(content)}`);
-      files.push("general/economy-mastery.md");
-    }
-  }
+  // Post-plant / retake / ekonomi BURADAN KALDIRILDI (B42/F76, pano dalga
+  // 2026-08-04): üçü de artık Block 0d'de (statik senaryo rehberi, yukarıda)
+  // KOŞULSUZ yükleniyor. Eski kapılar (spikePlanted → post-plant; spikePlanted +
+  // side=defense → retake; economyType ∈ {eco, force_buy, pistol, half_buy} →
+  // ekonomi; full_buy bilinçli dışarıda) SİLİNMEDİ — vision route'taki
+  // [SENARYO İPUCU] işaretçisine BİREBİR taşındı: aynı sinyaller artık hangi
+  // bölümün kullanılacağını user-message'da söylüyor. Eski side-filtre kararının
+  // amacı (savunma isteğine saldırı post-plant dersi girmesin) de işaretçide
+  // yaşıyor: savunmada işaretçi RETAKE + post-plant'ın "Savunma — Retake"
+  // bölümünü gösterir.
 
   // Karşı-ajan kesiti (2026-07-19): killerInfo'da sözlük-eşleşen düşman ajan
   // varsa o ajanın "Bu Ajana Karşı" bölümü — matchup bloğunun yanında,
@@ -776,16 +813,20 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
   // Joined content (backward-compat). profileBlock, contextual'den çıkarıldığı için
   // BURAYA eklenmek ZORUNDA — aksi hâlde `content` alanını kullanan report/insight/
   // feedback yolları ~37 KB koçluk profilini kaybederdi. Toplam bayt aynı, yalnız
-  // sıra kararlılığa göre: statik → profil → ajan → harita → contextual.
+  // sıra kararlılığa göre: statik → senaryo → profil → ajan → harita → contextual.
   // profile2 de AYNI sebeple burada: `content` alanını kullanan yollar (report /
   // insight / feedback) universal-2.md'ye taşınan bölümleri yoksa kaybederdi.
-  const allParts = [staticBlock, profileBlock, profile2Block, agentBlock, mapBlock, contextualBlock].filter(Boolean) as string[];
+  // scenarioBlock da AYNI sebeple (B42/F76): contextual'den taşınan post-plant/
+  // retake/ekonomi içeriği `content` tüketicilerinde sessizce kaybolmasın —
+  // taşıma silme değildir (test-kb-content-flow'un kurucu dersi).
+  const allParts = [staticBlock, scenarioBlock, profileBlock, profile2Block, agentBlock, mapBlock, contextualBlock].filter(Boolean) as string[];
 
   return {
     content: allParts.join("\n\n---\n\n"),
     files,
     blocks: {
       static: staticBlock,
+      scenario: scenarioBlock,
       profile: profileBlock,
       profile2: profile2Block,
       agent: agentBlock,

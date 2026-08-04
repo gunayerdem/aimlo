@@ -595,6 +595,10 @@ export async function POST(request: NextRequest) {
     // maps to the single un-gated universal.md, so a missing/empty rank no longer
     // caps insight — depth is selected by death-type RAG inside the file.
     const staticLen = kb.blocks.static?.length ?? 0;
+    // scenario = post-plant/retake/ekonomi statik rehberi (B42/F76, 2026-08-04).
+    // static ile aynı kararlılık sınıfı — toplam ve log'a DAHİL, yoksa bir sonraki
+    // taşıma yine sessiz içerik kaybı üretir (profile2'nin kurucu dersi).
+    const scenarioLen = kb.blocks.scenario?.length ?? 0;
     const agentLen = kb.blocks.agent?.length ?? 0;
     const mapLen = kb.blocks.map?.length ?? 0;
     const ctxLen = kb.blocks.contextual?.length ?? 0;
@@ -606,9 +610,9 @@ export async function POST(request: NextRequest) {
     // Toplama DAHİL: aksi hâlde bir sonraki bölme/taşıma yine sessizce içerik
     // düşürür ve [KB] logu bunu göstermez (bu turda tam olarak öyle oldu).
     const profile2Len = kb.blocks.profile2?.length ?? 0;
-    const kbTotal = staticLen + agentLen + mapLen + ctxLen + profileLen + profile2Len;
+    const kbTotal = staticLen + scenarioLen + agentLen + mapLen + ctxLen + profileLen + profile2Len;
     console.log(
-      `[KB] injected static=${staticLen}b profile=${profileLen}b profile2=${profile2Len}b agent=${agentLen}b map=${mapLen}b ctx=${ctxLen}b total=${kbTotal}b ` +
+      `[KB] injected static=${staticLen}b scenario=${scenarioLen}b profile=${profileLen}b profile2=${profile2Len}b agent=${agentLen}b map=${mapLen}b ctx=${ctxLen}b total=${kbTotal}b ` +
       `files=[${kb.files.join(", ")}] selectors map=${reqMap ?? "-"} agent=${reqAgent ?? "-"} ` +
       `rank=${reqRank ?? "-"} enemies=${reqEnemyComp?.length ?? 0}`,
     );
@@ -626,8 +630,10 @@ export async function POST(request: NextRequest) {
     //   1. SYSTEM_PROMPT  (most stable — coach voice, never changes)
     //   2. Agent KB       (stable across matches — main agent rarely changes)
     //   3. Map KB         (per-match — changes when player switches map)
-    //   4. Contextual KB  (rank + matchup + post-plant + economy — situational)
+    //   4. Contextual KB  (matchup + karşı-ajan — situational)
     //   5. patternContext (every round — DO NOT include in stable prefix)
+    // (B42/F76, pano dalga 2026-08-04: post-plant/retake/ekonomi contextual'den
+    //  çıkıp statik senaryo bloğuna taşındı — aşağıda Blok 0d.)
     //
     // OpenAI auto-cache hits the longest-matching prefix. For Match 2 with the
     // same agent but different map, blocks 1+2 still cache-hit (cached at 90%
@@ -679,6 +685,15 @@ export async function POST(request: NextRequest) {
     // policy'den hemen sonra → tüm kullanıcılar/maçlar arası prefix-cache paylaşır.
     // Bölüm seçimi user-message [SİLAH+KOMP İPUCU] işaretçisinde (cache'e dokunmaz).
     if (kb.blocks.static)     systemSections.push(kb.blocks.static);
+    // Blok 0d — statik senaryo rehberi (post-plant/retake/ekonomi; B42/F76, pano
+    // dalga 2026-08-04): bu içerik eskiden contextual'de spike/eco/side kapılarıyla
+    // yüklenip statik öneği her geçişte kırıyordu (ölçüm: ardışık round'da ~21.8KB
+    // ≈ 6.8K taze token). weapon-comp Block 0 emsali: içerik HER istekte bayt-aynı
+    // BURADA durur, hangi bölümün geçerli olduğunu user-message'daki [SENARYO
+    // İPUCU] işaretçisi söyler (aşağıda scenarioDirective); işaretçisiz round'da
+    // guard dili modeli rehberden ders çıkarmaktan meneder. static ile aynı
+    // kararlılık sınıfı → ardışık sabit bloklar tek sabit önek bölgesi oluşturur.
+    if (kb.blocks.scenario)   systemSections.push(kb.blocks.scenario);
     // Blok 0b — koçluk profili (knowledge/ranks/universal.md). 2026-07-20 ölçümü:
     // bu dosya rank/map/agent/side'dan BAĞIMSIZ, HER istekte BAYT-AYNI (rank-gating
     // kaldırıldığından beri her rank aynı dosyaya map'leniyor) ama contextual'ın
@@ -1041,6 +1056,52 @@ export async function POST(request: NextRequest) {
       console.log(`[Aimlo AI] weapon=${killerWeapon?.name ?? "-"} comp=${compArchetype ?? "-"}`);
     }
 
+    // [SENARYO İPUCU] işaretçisi (B42/F76, pano dalga 2026-08-04): weapon-comp
+    // işaretçi deseninin birebir uygulaması. Post-plant/retake/ekonomi rehberi
+    // artık sistem prompt'un STATİK bölgesinde her istekte duruyor (Blok 0d);
+    // hangi bölümün BU round geçerli olduğunu bu deterministik işaretçi söyler.
+    // Kapılar, kaldırılan loader kapılarının BİREBİR aynısı: spikePlanted →
+    // post-plant (savunmada retake), economyType ∈ {eco, force_buy, pistol,
+    // half_buy} → ekonomi (full_buy bilinçli dışarıda — eski davranış). Eski
+    // side-filtre kararının amacı (savunma isteğine saldırı post-plant dersi
+    // girmesin) bölüm adreslemesinde yaşıyor. Sinyal yokken BOŞ string →
+    // işaretçisiz round'da guard dili rehberi devre dışı bırakır (eski "rehber
+    // hiç yüklenmedi" davranışının karşılığı) ve prompt-cache'e sıfır etki.
+    const scenarioSectionRefs: string[] = [];
+    if (reqSpikePlanted === true) {
+      if (reqSide === "defense") {
+        scenarioSectionRefs.push(reqLang === "en"
+          ? `[RETAKE TAKTİK] plus the "Savunma — Retake" section of [POST-PLANT TAKTİK]`
+          : `[RETAKE TAKTİK] + [POST-PLANT TAKTİK] içindeki "Savunma — Retake" bölümü`);
+      } else if (reqSide === "attack") {
+        scenarioSectionRefs.push(reqLang === "en"
+          ? `[POST-PLANT TAKTİK] (its "Saldırı" sections)`
+          : `[POST-PLANT TAKTİK] ("Saldırı" bölümleri)`);
+      } else {
+        // Side okunamadı → bölümü daraltmadan adresle (eski yol da side'sız
+        // post-plant'i filtresiz yüklüyordu).
+        scenarioSectionRefs.push(`[POST-PLANT TAKTİK]`);
+      }
+    }
+    if (
+      reqEconomyType === "eco" || reqEconomyType === "force_buy" ||
+      reqEconomyType === "pistol" || reqEconomyType === "half_buy"
+    ) {
+      scenarioSectionRefs.push(`[EKONOMİ REHBERİ]`);
+    }
+    const scenarioDirective = scenarioSectionRefs.length > 0
+      ? (reqLang === "en"
+          ? `\n[SENARYO İPUCU — from the SENARYO REHBERİ in the system prompt] This round use ONLY: ` +
+            `${scenarioSectionRefs.join(" and ")}. Tie that section's lesson to THIS round's callout/agent — ` +
+            `do NOT copy its sentences, and ignore the scenario sections not pointed at.`
+          : `\n[SENARYO İPUCU — sistem prompt'undaki SENARYO REHBERİ'nden] Bu round YALNIZ şunu kullan: ` +
+            `${scenarioSectionRefs.join(" ve ")}. O bölümün dersini BU round'un callout'una/ajanına bağla — ` +
+            `cümlesini KOPYALAMA; işaret edilmeyen senaryo bölümlerinden ders çıkarma.`)
+      : "";
+    if (scenarioDirective) {
+      console.log(`[Aimlo AI] scenario-hint=[${scenarioSectionRefs.join(" | ")}]`);
+    }
+
     // Assemble JSON-formatted context — single block, no decorative borders, no header chrome.
     const ctxJson = Object.keys(ctx).length > 0 ? JSON.stringify(ctx, null, 2) : "";
     // Dil direktifi (2026-07-18): SYSTEM_PROMPT'un "kullanıcı dili İngilizce ise →
@@ -1090,6 +1151,7 @@ export async function POST(request: NextRequest) {
         locUnknownDirective +  // DEATH LOCATION UNKNOWN — no location claim when OCR has none (per-round)
         deathTypeDirective +
         weaponCompDirective +
+        scenarioDirective +   // SCENARIO HINT — statik senaryo rehberinin bölüm seçicisi (per-round, user-msg)
         (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, more reliable than the screenshot]\n${ctxJson}` : "") +
         (patternBlock ? `\n\n[PATTERN — recurring mistake across recent rounds. If present, reference it like a coach inside deathAnalysis or nextRoundSuggestion — do not open an extra field]\n${patternBlock}` : "")
       : factSheet +   // BİLİNEN/BİLİNMEYEN sözleşmesi EN BAŞTA — model olgu-sınırını önce görsün
@@ -1099,6 +1161,7 @@ export async function POST(request: NextRequest) {
         locUnknownDirective +  // ÖLÜM YERİ OKUNAMADI — konum yokken konum iddiasını menet (per-round)
         deathTypeDirective +   // ÖLÜM-TİPİ çıpası — factSheet'ten hemen sonra (per-round, user-msg)
         weaponCompDirective +  // SİLAH+KOMP işaretçisi — statik rehberin bölüm seçicisi (per-round, user-msg)
+        scenarioDirective +    // SENARYO işaretçisi — statik senaryo rehberinin bölüm seçicisi (B42/F76, per-round, user-msg)
         (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, screenshot'tan güvenilir]\n${ctxJson}` : "") +
         (patternBlock ? `\n\n[PATTERN — son round'lardaki tekrar eden hata. Bu varsa deathAnalysis veya nextRoundSuggestion'da koç gibi referans ver — extra alan açma]\n${patternBlock}` : "");
 
@@ -1204,7 +1267,7 @@ export async function POST(request: NextRequest) {
     }
 
     /** Kullanım logu + /cost kaydı; finish_reason'ı döndürür. */
-    function trackUsage(d: OpenAIChatResponse, attempt: number): string {
+    function trackUsage(d: OpenAIChatResponse, attempt: number, latencyMs?: number): string {
       // OpenAI usage object: prompt_tokens, completion_tokens, prompt_tokens_details.cached_tokens
       const promptTokens = d?.usage?.prompt_tokens ?? 0;
       const completionTokens = d?.usage?.completion_tokens ?? 0;
@@ -1216,7 +1279,20 @@ export async function POST(request: NextRequest) {
       console.log(`[CACHE ${cacheStatus}] cached=${cachedTokens} fresh=${freshTokens} total_in=${promptTokens} hit_ratio=${cacheRatio}% output=${completionTokens} finish=${finishReason}${attempt > 1 ? ` attempt=${attempt}` : ""}`);
       // Persist usage for the admin /cost panel (non-blocking, fail-safe).
       // Retry de faturalanır → her deneme ayrı kaydedilir, maliyet paneli gerçeği görsün.
-      saveAiUsage({ userId: authedUserId, routeType: "vision", model: d?.model ?? "gpt-5-mini", promptTokens, completionTokens, cachedTokens });
+      // F8 koordinasyonu (pano dalga, 2026-08-04): 0018 kolonları — matchId istekte
+      // varsa (isValidVisionRequest UUID v4 doğruladı) round↔maç korelasyonu için,
+      // latencyMs = o denemenin ölçülen AI çağrı süresi. İkisi de lib/ai-usage.ts'te
+      // OPSİYONEL; migration uygulanmamışsa fallback orada (eski kolon setiyle retry).
+      saveAiUsage({
+        userId: authedUserId,
+        routeType: "vision",
+        model: d?.model ?? "gpt-5-mini",
+        promptTokens,
+        completionTokens,
+        cachedTokens,
+        matchId: (body as VisionRequest).matchId ?? null,
+        latencyMs: latencyMs ?? null,
+      });
       return finishReason;
     }
 
@@ -1311,14 +1387,19 @@ export async function POST(request: NextRequest) {
 
     // ── 1. deneme ──────────────────────────────────────────────────────────
     let attemptTokens = resolvedMaxTokens;
+    // F8 (pano dalga, 2026-08-04): deneme-başına AI çağrı süresi — /cost paneli
+    // latency_ms kolonu. Ölçüm fetch + gövde okumasını kapsar (callVisionModel'in
+    // tamamı); başarısız çağrıda kayıt yok (trackUsage zaten yalnız ok yolunda).
+    const firstCallStart = Date.now();
     const firstCall = await callVisionModel(attemptTokens);
+    const firstLatencyMs = Date.now() - firstCallStart;
     if (!firstCall.ok) {
       return errorResponse("ai_upstream_error", `OpenAI API returned ${firstCall.status}`, 502, {
         upstreamStatus: firstCall.status,
       });
     }
     let data: OpenAIChatResponse = firstCall.data;
-    let finishReason = trackUsage(data, 1);
+    let finishReason = trackUsage(data, 1, firstLatencyMs);
     let text: string = data?.choices?.[0]?.message?.content || "";
     let outcome = toFeedbackOutcome(text);
 
@@ -1333,10 +1414,12 @@ export async function POST(request: NextRequest) {
         `[Aimlo AI] finish=length → truncated output (${outcome.code}); retrying ONCE with max_completion_tokens=${MAX_TOKENS_CAP}`,
       );
       attemptTokens = MAX_TOKENS_CAP;
+      const retryStart = Date.now();
       const retryCall = await callVisionModel(attemptTokens);
+      const retryLatencyMs = Date.now() - retryStart;
       if (retryCall.ok) {
         data = retryCall.data;
-        finishReason = trackUsage(data, 2);
+        finishReason = trackUsage(data, 2, retryLatencyMs);
         text = data?.choices?.[0]?.message?.content || "";
         // Retry sonucu ne olursa olsun onu kullanırız: ilk yanıt zaten
         // kullanılamaz durumdaydı, saklamanın değeri yok.
