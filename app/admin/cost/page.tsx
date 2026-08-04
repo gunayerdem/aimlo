@@ -46,16 +46,20 @@ export default async function AdminCostPage() {
         <div className="adm-card">
           <h3>Route bazlı dağılım</h3>
           <table className="adm-table">
-            <thead><tr><th>Route</th><th className="adm-num">Çağrı</th><th className="adm-num">Maliyet</th></tr></thead>
+            {/* F5+F39 (pano dalga, 2026-08-04): route × cache-oranı kırılımı —
+                hangi route prompt-cache'ten faydalanamıyor, tek bakışta görünsün
+                (cache %'si düşük route = KB/prompt sıralaması bozulmuş demek). */}
+            <thead><tr><th>Route</th><th className="adm-num">Çağrı</th><th className="adm-num">Maliyet</th><th className="adm-num">Cache</th></tr></thead>
             <tbody>
               {c.byRoute.length === 0 ? (
-                <tr><td colSpan={3} style={{ color: "rgba(238,240,248,0.4)" }}>Veri yok.</td></tr>
+                <tr><td colSpan={4} style={{ color: "rgba(238,240,248,0.4)" }}>Veri yok.</td></tr>
               ) : (
                 c.byRoute.map((r) => (
                   <tr key={r.route}>
                     <td style={{ textTransform: "capitalize" }}>{r.route}</td>
                     <td className="adm-num">{r.calls.toLocaleString("tr")}</td>
                     <td className="adm-num">{formatUsd(r.cost)}</td>
+                    <td className="adm-num">{r.cacheRatio != null ? `${r.cacheRatio}%` : "—"}</td>
                   </tr>
                 ))
               )}
@@ -67,6 +71,15 @@ export default async function AdminCostPage() {
             <span className="adm-chip">cache: <b>{(c.tokens.cached / 1000).toFixed(0)}K</b></span>
           </div>
         </div>
+      </div>
+
+      {/* F5+F39 (pano dalga, 2026-08-04): günlük cache trendi — prompt-cache oranı
+          günden güne düşüyorsa (ör. KB blok sıralaması değişti, prompt önekleri
+          kaydı) maliyet sessizce katlanır; bu grafik onu erkenden gösterir.
+          Veri getCostData'nın mevcut 14-günlük serisinden gelir, EK sorgu yok. */}
+      <div className="adm-card" style={{ marginTop: 14 }}>
+        <h3>Günlük cache oranı (son 14 gün, girdi token&apos;ının %&apos;si)</h3>
+        <TrendChart data={c.daily} keys={[{ key: "cachePct", color: "#22D3EE", label: "Cache %" }]} />
       </div>
     </>
   );

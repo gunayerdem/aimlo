@@ -43,6 +43,26 @@ export default async function AdminOverviewPage() {
         <Stat label="AI MALİYETİ (BUGÜN)" value={formatUsd(o.costToday)} sub={o.costRows === 0 ? "izleme yeni başladı — veri birikiyor" : `toplam ${formatUsd(o.costTotal)}`} iris />
       </div>
 
+      {/* F51 (pano dalga, 2026-08-04): D1/D7 kohort kartı — launch kararının asıl
+          metriği ("ertesi gün dönüyor mu?") genel bakışta da görünsün. Sayılar
+          growth sayfasıyla AYNI tanımdan gelir (computeD1D7Cohorts, D0 = ilk maç
+          günü; payda yalnız penceresi TAM geçmiş kullanıcılar) — ek sorgu yok. */}
+      <div className="adm-card" style={{ marginTop: 14, display: "flex", alignItems: "center", gap: 32, flexWrap: "wrap" }}>
+        <div>
+          <p className="adm-stat-label">D1 RETENTION</p>
+          <div className="adm-stat-num iris">{o.d1.rate != null ? `${o.d1.rate}%` : "—"}</div>
+          <p className="adm-stat-sub">ilk maçın ertesi günü dönen: {o.d1.returned}/{o.d1.eligible}</p>
+        </div>
+        <div>
+          <p className="adm-stat-label">D7 RETENTION</p>
+          <div className="adm-stat-num">{o.d7.rate != null ? `${o.d7.rate}%` : "—"}</div>
+          <p className="adm-stat-sub">ilk 7 gün içinde dönen: {o.d7.returned}/{o.d7.eligible}</p>
+        </div>
+        <div style={{ marginLeft: "auto" }}>
+          <Link href="/admin/growth" className="adm-link">Büyüme detayı →</Link>
+        </div>
+      </div>
+
       <div className="adm-grid cols-2" style={{ marginTop: 14 }}>
         <div className="adm-card" style={{ gridColumn: "span 1" }}>
           <h3>Günlük maç trendi (son 14 gün)</h3>

@@ -149,6 +149,51 @@ export type GrowthData = {
   signupTrend: { date: string; signups: number }[];
 };
 
+/**
+ * D1/D7 kohort hesabı — getGrowth'un B52 (2026-07-31) mantığının BİREBİR aynısı,
+ * yalnız saf fonksiyona çıkarıldı (F51, pano dalga, 2026-08-04). NEDEN: genel-bakış
+ * sayfası da aynı kartı gösterecek; hesabı iki yerde kopyalamak iki tanımın zamanla
+ * ayrışması demek (growth sayfası %X, overview %Y gösterirse panele güven biter).
+ * getOverview zaten analyses'i çekiyor → aynı veriden bu helper'ı çağırır, EK sorgu
+ * yok. Girdi: kullanıcı başına maç atılan UTC gün anahtarları ("YYYY-MM-DD").
+ * D0 = ilk maç günü; eligible = penceresi TAMAMEN geçmiş kullanıcı (devam eden gün
+ * sayılmaz, yoksa oran yapay düşer); returned = pencerede >=1 maçı olan.
+ */
+export function computeD1D7Cohorts(
+  matchDaysPerUser: Iterable<Set<string>>,
+): { d1: CohortRetention; d7: CohortRetention } {
+  const DAY_MS = 86_400_000;
+  const todayStartMs = startOfDayUtc(0).getTime();
+  const dayKey = (ms: number) => new Date(ms).toISOString().slice(0, 10);
+  let d1Eligible = 0, d1Returned = 0, d7Eligible = 0, d7Returned = 0;
+  for (const days of matchDaysPerUser) {
+    let d0Ms = Number.POSITIVE_INFINITY;
+    for (const day of days) {
+      const ms = Date.parse(`${day}T00:00:00.000Z`);
+      if (Number.isFinite(ms) && ms < d0Ms) d0Ms = ms;
+    }
+    if (!Number.isFinite(d0Ms)) continue;
+
+    // D1: yalnız D0+1 günü tamamen geçmişse say.
+    if (d0Ms + DAY_MS < todayStartMs) {
+      d1Eligible++;
+      if (days.has(dayKey(d0Ms + DAY_MS))) d1Returned++;
+    }
+    // D7: D0+1..D0+7 penceresinin tamamı geçmişse say; pencerede TEK maç yeter.
+    if (d0Ms + 7 * DAY_MS < todayStartMs) {
+      d7Eligible++;
+      for (let k = 1; k <= 7; k++) {
+        if (days.has(dayKey(d0Ms + k * DAY_MS))) { d7Returned++; break; }
+      }
+    }
+  }
+  const rate = (ret: number, el: number) => (el > 0 ? Math.round((ret / el) * 100) : null);
+  return {
+    d1: { eligible: d1Eligible, returned: d1Returned, rate: rate(d1Returned, d1Eligible) },
+    d7: { eligible: d7Eligible, returned: d7Returned, rate: rate(d7Returned, d7Eligible) },
+  };
+}
+
 export async function getGrowth(): Promise<GrowthData> {
   const svc = createServiceSupabase();
   const [users, analysesRes] = await Promise.all([
@@ -172,32 +217,11 @@ export async function getGrowth(): Promise<GrowthData> {
   }
 
   // D1/D7 kohort hesabı (B52, 2026-07-31) — veri zaten elde, yalnız hesap eksikti.
-  const DAY_MS = 86_400_000;
-  const todayStartMs = startOfDayUtc(0).getTime();
-  const dayKey = (ms: number) => new Date(ms).toISOString().slice(0, 10);
-  let d1Eligible = 0, d1Returned = 0, d7Eligible = 0, d7Returned = 0;
-  for (const v of matchesByUser.values()) {
-    let d0Ms = Number.POSITIVE_INFINITY;
-    for (const day of v.days) {
-      const ms = Date.parse(`${day}T00:00:00.000Z`);
-      if (Number.isFinite(ms) && ms < d0Ms) d0Ms = ms;
-    }
-    if (!Number.isFinite(d0Ms)) continue;
-
-    // D1: yalnız D0+1 günü tamamen geçmişse say.
-    if (d0Ms + DAY_MS < todayStartMs) {
-      d1Eligible++;
-      if (v.days.has(dayKey(d0Ms + DAY_MS))) d1Returned++;
-    }
-    // D7: D0+1..D0+7 penceresinin tamamı geçmişse say; pencerede TEK maç yeter.
-    if (d0Ms + 7 * DAY_MS < todayStartMs) {
-      d7Eligible++;
-      for (let k = 1; k <= 7; k++) {
-        if (v.days.has(dayKey(d0Ms + k * DAY_MS))) { d7Returned++; break; }
-      }
-    }
-  }
-  const rate = (ret: number, el: number) => (el > 0 ? Math.round((ret / el) * 100) : null);
+  // F51 (pano dalga, 2026-08-04): hesap computeD1D7Cohorts'a çıkarıldı ki genel-bakış
+  // sayfası da AYNI tanımla göstersin; mantık ve sonuçlar birebir aynı kaldı.
+  const { d1, d7 } = computeD1D7Cohorts(
+    [...matchesByUser.values()].map((v) => v.days),
+  );
 
   const trend: { date: string; signups: number }[] = [];
   for (let i = 13; i >= 0; i--) {
@@ -217,8 +241,8 @@ export async function getGrowth(): Promise<GrowthData> {
     activated,
     engaged,
     returning,
-    d1: { eligible: d1Eligible, returned: d1Returned, rate: rate(d1Returned, d1Eligible) },
-    d7: { eligible: d7Eligible, returned: d7Returned, rate: rate(d7Returned, d7Eligible) },
+    d1,
+    d7,
     signupTrend: trend,
   };
 }

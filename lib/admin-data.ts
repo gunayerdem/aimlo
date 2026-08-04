@@ -8,6 +8,11 @@ import { createServiceSupabase } from "@/lib/supabase/server";
 import { computeCost } from "@/lib/openai-pricing";
 import { isRateBypassedPublic } from "@/lib/api-auth";
 import { formatMap, formatAgent, formatSide } from "@/lib/format-display";
+// F51 (pano dalga, 2026-08-04): D1/D7 kohort hesabı TEK tanımdan gelsin diye
+// admin-analytics'teki saf helper'ı paylaşıyoruz (growth sayfasıyla aynı mantık,
+// sayılar ayrışamaz). admin-analytics de server-only; döngüsel import yok
+// (admin-analytics admin-data'yı import etmiyor).
+import { computeD1D7Cohorts, type CohortRetention } from "@/lib/admin-analytics";
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -51,6 +56,12 @@ export type OverviewData = {
   costToday: number;
   costTotal: number;
   costRows: number; // how many ai_usage rows exist (0 = logging not capturing yet)
+  // F51 (pano dalga, 2026-08-04): genel-bakış D1/D7 kohort kartı. Zaten çekilen
+  // analyses verisinden hesaplanır — EK sorgu yok. Tanım growth sayfasıyla birebir
+  // aynı (computeD1D7Cohorts). Not: getOverview analyses'i en-yeni-20K tavanıyla
+  // okur; tavana dayanılırsa yaklaşık metriktir (küçük kullanıcı tabanında birebir).
+  d1: CohortRetention;
+  d7: CohortRetention;
 };
 
 export type AdminUserRow = {
@@ -99,6 +110,9 @@ export async function getOverview(): Promise<OverviewData> {
   let matchesToday = 0;
   let matchesWeek = 0;
   const perUser = new Map<string, { matches: number; last: number }>();
+  // F51 (pano dalga, 2026-08-04): D1/D7 kohortu için kullanıcı başına maç günleri
+  // (UTC "YYYY-MM-DD") — getGrowth'taki gün anahtarıyla birebir aynı üretim.
+  const daysByUser = new Map<string, Set<string>>();
 
   for (const a of analyses) {
     const t = new Date(a.created_at).getTime();
@@ -109,6 +123,9 @@ export async function getOverview(): Promise<OverviewData> {
     cur.matches++;
     if (t > cur.last) cur.last = t;
     perUser.set(a.user_id, cur);
+    const days = daysByUser.get(a.user_id) ?? new Set<string>();
+    days.add(new Date(a.created_at).toISOString().slice(0, 10));
+    daysByUser.set(a.user_id, days);
   }
 
   // Daily trend (last 14 days)
@@ -155,6 +172,9 @@ export async function getOverview(): Promise<OverviewData> {
     if (new Date(u.created_at).getTime() >= dayAgo) costToday += c;
   }
 
+  // F51 (pano dalga, 2026-08-04): kohort — mevcut analyses verisinden, ek sorgusuz.
+  const { d1, d7 } = computeD1D7Cohorts(daysByUser.values());
+
   return {
     totalUsers: users.length,
     confirmedUsers: users.filter((u) => !!u.email_confirmed_at).length,
@@ -169,6 +189,8 @@ export async function getOverview(): Promise<OverviewData> {
     costToday,
     costTotal,
     costRows: usage.length,
+    d1,
+    d7,
   };
 }
 
@@ -337,10 +359,22 @@ export type CostData = {
   week: number;
   truncated: boolean; // tavan aşıldı → total/token rakamları EKSİK (B103)
   rowLimit: number;
-  byRoute: { route: string; calls: number; cost: number }[];
-  daily: { date: string; cost: number; calls: number }[];
+  // F5+F39 (pano dalga, 2026-08-04): route ve gün kırılımına cache metrikleri
+  // EKLENDİ (ekleme — mevcut alanlar/şekil değişmedi; /cost ve /revenue tüketicileri
+  // eski alanları aynen görür). cacheRatio = cached/prompt token yüzdesi;
+  // prompt=0 iken null (0% ile "veri yok" ayrımı kaybolmasın).
+  byRoute: { route: string; calls: number; cost: number; promptTokens: number; cachedTokens: number; cacheRatio: number | null }[];
+  daily: { date: string; cost: number; calls: number; cachePct: number }[];
   tokens: { input: number; output: number; cached: number };
 };
+
+/** Cache-hit yüzdesi (0-100, 1 ondalık). prompt=0 → null. (F5+F39, 2026-08-04) */
+function cacheRatioPct(cached: number, prompt: number): number | null {
+  if (prompt <= 0) return null;
+  // computeCost gibi clamp'le: bozuk satırda cached > prompt olursa %100'ü aşmasın.
+  const c = Math.max(0, Math.min(cached, prompt));
+  return Number(((c / prompt) * 100).toFixed(1));
+}
 
 // Ham-satır tavanı (B103, 2026-07-31) — artık YALNIZ fallback yolunda geçerli.
 // İki somut zarar burada kapatılmıştı ve fallback'te korunuyor:
@@ -371,15 +405,23 @@ function num(v: unknown): number {
   return Number.isFinite(n) ? n : 0;
 }
 
-/** Son 14 günün serisi (gün anahtarı "YYYY-MM-DD", UTC). Ham ve RPC yolları ortak. */
+/** Son 14 günün serisi (gün anahtarı "YYYY-MM-DD", UTC). Ham ve RPC yolları ortak.
+ * F5+F39 (2026-08-04): gün başına prompt/cached token da toplanır → cachePct
+ * (günlük cache trendi grafiği). Çağrısız gün 0 basılır (grafikte boşluk yerine
+ * taban çizgisi — mevcut cost serisiyle aynı davranış). */
 function buildDailySeries(
-  dailyMap: Map<string, { cost: number; calls: number }>,
-): { date: string; cost: number; calls: number }[] {
-  const daily: { date: string; cost: number; calls: number }[] = [];
+  dailyMap: Map<string, { cost: number; calls: number; prompt: number; cached: number }>,
+): { date: string; cost: number; calls: number; cachePct: number }[] {
+  const daily: { date: string; cost: number; calls: number; cachePct: number }[] = [];
   for (let i = 13; i >= 0; i--) {
     const day = startOfDayUtc(i).toISOString().slice(0, 10);
-    const d = dailyMap.get(day) ?? { cost: 0, calls: 0 };
-    daily.push({ date: day.slice(5), cost: Number(d.cost.toFixed(4)), calls: d.calls });
+    const d = dailyMap.get(day) ?? { cost: 0, calls: 0, prompt: 0, cached: 0 };
+    daily.push({
+      date: day.slice(5),
+      cost: Number(d.cost.toFixed(4)),
+      calls: d.calls,
+      cachePct: cacheRatioPct(d.cached, d.prompt) ?? 0,
+    });
   }
   return daily;
 }
@@ -423,8 +465,10 @@ function aggregateRollup(rows: UsageRollupRow[]): CostData {
 
   let calls = 0, total = 0, today = 0, week = 0;
   let tIn = 0, tOut = 0, tCached = 0;
-  const byRoute = new Map<string, { calls: number; cost: number }>();
-  const dailyMap = new Map<string, { cost: number; calls: number }>();
+  // F5+F39 (2026-08-04): route kırılımına prompt/cached token toplamları eklendi —
+  // rollup satırları zaten gün×route×model granülünde token taşıyor, EK sorgu yok.
+  const byRoute = new Map<string, { calls: number; cost: number; prompt: number; cached: number }>();
+  const dailyMap = new Map<string, { cost: number; calls: number; prompt: number; cached: number }>();
 
   for (const row of rows) {
     const promptTokens = num(row.prompt_tokens);
@@ -442,10 +486,12 @@ function aggregateRollup(rows: UsageRollupRow[]): CostData {
     if (day >= weekKey) week += c;
     tIn += promptTokens; tOut += completionTokens; tCached += cachedTokens;
 
-    const r = byRoute.get(row.route_type) ?? { calls: 0, cost: 0 };
-    r.calls += rowCalls; r.cost += c; byRoute.set(row.route_type, r);
-    const d = dailyMap.get(day) ?? { cost: 0, calls: 0 };
-    d.cost += c; d.calls += rowCalls; dailyMap.set(day, d);
+    const r = byRoute.get(row.route_type) ?? { calls: 0, cost: 0, prompt: 0, cached: 0 };
+    r.calls += rowCalls; r.cost += c; r.prompt += promptTokens; r.cached += cachedTokens;
+    byRoute.set(row.route_type, r);
+    const d = dailyMap.get(day) ?? { cost: 0, calls: 0, prompt: 0, cached: 0 };
+    d.cost += c; d.calls += rowCalls; d.prompt += promptTokens; d.cached += cachedTokens;
+    dailyMap.set(day, d);
   }
 
   return {
@@ -453,7 +499,16 @@ function aggregateRollup(rows: UsageRollupRow[]): CostData {
     total, today, week,
     truncated: false, // SQL tarafında toplanıyor: eksik-toplam riski yok
     rowLimit: COST_ROW_LIMIT,
-    byRoute: [...byRoute.entries()].map(([route, v]) => ({ route, ...v })).sort((a, b) => b.cost - a.cost),
+    byRoute: [...byRoute.entries()]
+      .map(([route, v]) => ({
+        route,
+        calls: v.calls,
+        cost: v.cost,
+        promptTokens: v.prompt,
+        cachedTokens: v.cached,
+        cacheRatio: cacheRatioPct(v.cached, v.prompt),
+      }))
+      .sort((a, b) => b.cost - a.cost),
     daily: buildDailySeries(dailyMap),
     tokens: { input: tIn, output: tOut, cached: tCached },
   };
@@ -480,8 +535,10 @@ async function getCostDataRaw(svc: SupabaseClient): Promise<CostData> {
   const weekAgo = startOfDayUtc(7).getTime();
   let total = 0, today = 0, week = 0;
   let tIn = 0, tOut = 0, tCached = 0;
-  const byRoute = new Map<string, { calls: number; cost: number }>();
-  const dailyMap = new Map<string, { cost: number; calls: number }>();
+  // F5+F39 (2026-08-04): rollup yolundaki cache kırılımının birebir aynısı —
+  // fallback'te de aynı alanlar dolmalı ki migration uygulanmamışken panel bozulmasın.
+  const byRoute = new Map<string, { calls: number; cost: number; prompt: number; cached: number }>();
+  const dailyMap = new Map<string, { cost: number; calls: number; prompt: number; cached: number }>();
 
   for (const u of usage) {
     const c = computeCost(
@@ -493,11 +550,13 @@ async function getCostDataRaw(svc: SupabaseClient): Promise<CostData> {
     if (t >= dayAgo) today += c;
     if (t >= weekAgo) week += c;
     tIn += u.prompt_tokens; tOut += u.completion_tokens; tCached += u.cached_tokens;
-    const r = byRoute.get(u.route_type) ?? { calls: 0, cost: 0 };
-    r.calls++; r.cost += c; byRoute.set(u.route_type, r);
+    const r = byRoute.get(u.route_type) ?? { calls: 0, cost: 0, prompt: 0, cached: 0 };
+    r.calls++; r.cost += c; r.prompt += u.prompt_tokens; r.cached += u.cached_tokens;
+    byRoute.set(u.route_type, r);
     const day = new Date(u.created_at).toISOString().slice(0, 10);
-    const d = dailyMap.get(day) ?? { cost: 0, calls: 0 };
-    d.cost += c; d.calls++; dailyMap.set(day, d);
+    const d = dailyMap.get(day) ?? { cost: 0, calls: 0, prompt: 0, cached: 0 };
+    d.cost += c; d.calls++; d.prompt += u.prompt_tokens; d.cached += u.cached_tokens;
+    dailyMap.set(day, d);
   }
 
   return {
@@ -505,7 +564,16 @@ async function getCostDataRaw(svc: SupabaseClient): Promise<CostData> {
     total, today, week,
     truncated: usage.length >= COST_ROW_LIMIT,
     rowLimit: COST_ROW_LIMIT,
-    byRoute: [...byRoute.entries()].map(([route, v]) => ({ route, ...v })).sort((a, b) => b.cost - a.cost),
+    byRoute: [...byRoute.entries()]
+      .map(([route, v]) => ({
+        route,
+        calls: v.calls,
+        cost: v.cost,
+        promptTokens: v.prompt,
+        cachedTokens: v.cached,
+        cacheRatio: cacheRatioPct(v.cached, v.prompt),
+      }))
+      .sort((a, b) => b.cost - a.cost),
     daily: buildDailySeries(dailyMap), // aynı 14-günlük seri (B103'te ortak yardımcıya taşındı)
     tokens: { input: tIn, output: tOut, cached: tCached },
   };
