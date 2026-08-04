@@ -2,6 +2,41 @@ import type { RoundData, SetupData } from "@/types";
 
 // ─── Exported Interfaces ────────────────────────────────────────────────────
 
+/* ── B113 (pano dalga, 2026-08-04): RoundEvidenceEntry — TEL ŞEMASININ KANONİK TİPİ ──
+ * NEDEN: desktop, vision isteğinin roundHistory[] girişlerinde death_position /
+ * position_confidence / death_type / outcome_known alanlarını DA yolluyor.
+ * KANIT: app/api/ai/vision/route.ts →
+ *   - isValidRoundHistory (satır ~341) bu alanları tek tek DOĞRULUYOR,
+ *   - satır ~957-962 outcome_known'u, satır ~1014 death_type'ı
+ *     `Record<string, unknown>` cast'iyle OKUYOR,
+ * ama oradaki yerel tip (route.ts:69) bu alanları bildirmiyordu — kod, tipin
+ * yanından cast'lerle dolaşıyordu (tip teli yansıtmıyor = B113 bulgusu).
+ * Kanonik tip artık burada; EK alanlar OPSİYONEL (additive — eski desktop
+ * build'leri yollamayabilir, yokluk = eski davranış). Route'un yerel tip
+ * literal'i başka paketin dosyasında olduğu için bu dalgada DEĞİŞTİRİLMEDİ;
+ * sahibi tek satırla `import type { RoundEvidenceEntry } from "@/lib/round-engine"`
+ * yapıp yerel tanımı silebilir (şekiller alan-alan uyumlu tutuldu).
+ * NOT: round-engine bu tipi bugün TÜKETMİYOR (RoundData ile çalışır) → adapter
+ * bilinçli olarak EKLENMEDİ (kullanılmayan runtime kodu = ölü kod riski);
+ * tip scripts/test-history-block-sanitize.ts'te derleme+şekil testiyle kilitli.
+ */
+export type RoundEvidenceEntry = {
+  round_index: number;
+  died: boolean;
+  round_won: boolean;
+  death_detected_confidence: string;
+  timestamp: number;
+  // ── Telde VAR, tipte YOKTU — B113 additive alanları ──
+  /** Ölüm konumu ham metni; prompt'a girmeden lib/history-block.ts sanitize eder. */
+  death_position?: string;
+  /** "high" | "medium" | "low" — buildHistoryBlock yalnız high/medium'u sayar. */
+  position_confidence?: string;
+  /** 13-tipli deterministik ölüm sınıfı (lib/death-type.ts; Faz-2 cross-round ban için). */
+  death_type?: string;
+  /** false ⇒ round sonucu OCR'dan doğrulanamadı — seri/pencere hesabına girmez. */
+  outcome_known?: boolean;
+};
+
 export interface PatternData {
   // Death patterns
   deathLocationFrequency: Record<string, number>;

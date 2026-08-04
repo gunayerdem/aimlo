@@ -6,7 +6,9 @@
  */
 import * as fs from "fs";
 import * as path from "path";
-import { loadVisionKnowledge, loadKnowledge } from "../lib/knowledge-loader";
+// AGENT_ROLE_MAP + getAgentFile (F29 [16], pano dalga 2026-08-04): sözlük→dosya
+// kapsam guard'ı loader'ın GERÇEK çözümleme yolunu kullanır (ayrı slug kopyası değil).
+import { loadVisionKnowledge, loadKnowledge, AGENT_ROLE_MAP, getAgentFile } from "../lib/knowledge-loader";
 import { DEATH_TYPE_GUIDE } from "../lib/death-type";
 import { BANNED_PHRASES } from "../lib/ai-policy";
 import { MAP_CALLOUTS, UNIVERSAL_CALLOUTS } from "../lib/map-callouts";
@@ -111,13 +113,19 @@ console.log(`\n[6] death-type kbBlock çapaları ↔ universal.md başlıkları`
 //    Runtime seti knowledge-loader'dan türetilir: maps/** + matchups/** + ranks/** +
 //    agents/<rol>/*.md + general'in loader'da geçen 7 dosyası. Yeni bir general
 //    dosyası runtime'a bağlanırsa BURAYA da eklenmeli (yoksa ihlali fail etmez).
+// MODÜL SEVİYESİNE ALINDI (F29, pano dalga 2026-08-04): eskiden [7]'nin blok
+// scope'undaydı; [15] işaretçi-tutarlılık guard'ı bu seti knowledge-loader.ts'in
+// GERÇEK loadFile("general/…") çağrılarıyla iki yönlü kıyaslıyor — "yeni general
+// dosyası runtime'a bağlanırsa BURAYA da eklenmeli" sözleşmesi artık elle değil
+// testle korunuyor. Davranış [7] için değişmedi (aynı set, aynı kullanım).
+const RUNTIME_GENERAL = new Set([
+  "coaching-core.md", "post-plant-playbook.md", "economy-mastery.md",
+  "pro-analysis.md", "radiant-tips.md", "weapon-comp-compact.md",
+  "retake-playbook.md", // knowledge-loader: spikePlanted && side==="defense" (2026-07-19)
+]);
+
 console.log(`\n[7] KB yasak-kelime taraması (${BANNED_PHRASES.length} kalıp)`);
 {
-  const RUNTIME_GENERAL = new Set([
-    "coaching-core.md", "post-plant-playbook.md", "economy-mastery.md",
-    "pro-analysis.md", "radiant-tips.md", "weapon-comp-compact.md",
-    "retake-playbook.md", // knowledge-loader: spikePlanted && side==="defense" (2026-07-19)
-  ]);
   const isRuntimeFile = (rel: string): boolean => {
     const p = rel.replace(/\\/g, "/");
     if (p.startsWith("maps/") || p.startsWith("matchups/") || p.startsWith("ranks/")) return true;
@@ -423,6 +431,128 @@ console.log(`\n[13] her ajan dosyasında "Bu Ajana Karşı" H2 kesiti`);
         `agents/${r}/${f} → "Bu Ajana Karşı" H2`,
         COUNTER_H2.test(body),
         "(bölüm YOK — loader düşman-ajan kesitini bu dosyadan çıkaramaz, karşı-oyun bilgisi prompt'a girmez)",
+      );
+    }
+  }
+}
+
+// 14) BOŞ-BÖLÜM GUARD'I (F29, pano dalga 2026-08-04)
+//     NEDEN: RAG seçimi (death-type çapaları, "Bu Ajana Karşı" kesiti, side/rank
+//     filtreleri) H2 sınırlarıyla çalışır. İçeriği boş bir H2 = başlığı var ama
+//     dersi olmayan ölü işaretçi: çapa "eşleşir", model başlıktan başka hiçbir
+//     şey alamaz ve hiçbir test bunu görmezdi (universal-2.md sessiz-içerik-kaybı
+//     dersinin bölüm-seviyesi eşleniği). Ölçüm 2026-08-04: HEAD'de 0 boş bölüm —
+//     guard mevcut durumu KİLİTLER, davranış değiştirmez.
+//     "Boş" tanımı: başlık satırından sonraki gövde, dekoratif ═-çizgileri ve
+//     yalnız-tire ayraç satırları düşüldükten sonra whitespace'ten ibaretse.
+console.log(`\n[14] boş H2 bölümü guard'ı (${files.length} dosya)`);
+{
+  for (const f of files) {
+    const rel = path.relative(KB, f);
+    const body = fs.readFileSync(f, "utf8");
+    const sections = body.split(/(?=^## )/gm);
+    const empties: string[] = [];
+    for (const s of sections) {
+      const hm = s.match(/^## (.+?)\s*$/m);
+      if (!hm) continue; // H2-öncesi giriş bloğu — bölüm değil
+      const content = s
+        .slice(s.indexOf("\n") + 1)
+        .replace(/^═{3,}\s*$/gm, "")   // stripKbWhitespace'in de sildiği süs çizgileri
+        .replace(/^-{3,}\s*$/gm, "");  // yalnız yatay-çizgi ayraç satırı
+      if (content.trim().length === 0) empties.push(hm[1]);
+    }
+    check(
+      `bölüm doluluğu ${rel}`,
+      empties.length === 0,
+      `(içi BOŞ H2: ${empties.map((h) => `"${h}"`).join(", ")} — başlık var, ders yok)`,
+    );
+  }
+}
+
+// 15) İŞARETÇİ TUTARLILIĞI (F29, pano dalga 2026-08-04)
+//     NEDEN (yaşanmış sınıf): universal-2.md olayında dosya VARDI ama yükleyen
+//     kod yoktu → ~3KB sessiz içerik kaybı ([9]'daki guard o TEK dosyayı korur).
+//     Bu guard sınıfı GENELLER, iki yönde:
+//       (a) knowledge-loader.ts'in koddaki her LİTERAL "…/*.md" işaretçisi diskte
+//           gerçekten VAR olmalı (ölü işaretçi = loadFile catch'i "" döner,
+//           içerik prompt'a HİÇ girmez, hiçbir şey patlamaz — en sessiz kayıp).
+//       (b) [7]'nin RUNTIME_GENERAL seti ↔ loader'ın gerçek general/ çağrıları
+//           BİREBİR aynı olmalı. [7]'nin kendi yorumu "yeni general dosyası
+//           bağlanırsa buraya da eklenmeli (yoksa ihlali fail etmez)" diyordu —
+//           elle hatırlanan sözleşme artık burada zorlanıyor.
+//     Yalnız KOD satırları taranır (yorum satırındaki örnek yol — ör. loader'ın
+//     JSDoc'undaki "matchups/jett_vs_cypher.md" — guard'ı yanlış tetiklemesin).
+console.log(`\n[15] işaretçi tutarlılığı — knowledge-loader.ts ↔ disk ↔ RUNTIME_GENERAL`);
+{
+  const loaderPath = path.join(process.cwd(), "lib", "knowledge-loader.ts");
+  const codeLines = fs
+    .readFileSync(loaderPath, "utf8")
+    .split(/\r?\n/)
+    .filter((l) => {
+      const t = l.trim();
+      return !(t.startsWith("//") || t.startsWith("*") || t.startsWith("/*"));
+    });
+  const litRe = /"((?:general|ranks|maps|matchups|agents)\/[^"$]*?\.md)"/g;
+  const literals = new Set<string>();
+  for (const line of codeLines) {
+    let m: RegExpExecArray | null;
+    while ((m = litRe.exec(line))) literals.add(m[1]);
+  }
+  check("loader'da en az bir literal KB işaretçisi bulundu (tarayıcı sağlığı)", literals.size > 0,
+    "(regex hiç işaretçi bulamadı — guard kör, tarama desenini güncelle)");
+  for (const rel of [...literals].sort()) {
+    check(
+      `loader işaretçisi diskte var: ${rel}`,
+      fs.existsSync(path.join(KB, rel)),
+      "(ÖLÜ İŞARETÇİ — loadFile sessizce \"\" döner, içerik prompt'a hiç girmez)",
+    );
+  }
+  const loaderGenerals = new Set(
+    [...literals].filter((l) => l.startsWith("general/")).map((l) => l.slice("general/".length)),
+  );
+  for (const g of [...loaderGenerals].sort()) {
+    check(
+      `loader general '${g}' RUNTIME_GENERAL'de kayıtlı`,
+      RUNTIME_GENERAL.has(g),
+      "([7] yasak-kelime taraması bu RUNTIME dosyayı runtime-dışı sanıyor → ihlali FAIL etmez)",
+    );
+  }
+  for (const g of [...RUNTIME_GENERAL].sort()) {
+    check(
+      `RUNTIME_GENERAL '${g}' loader'da hâlâ kullanılıyor`,
+      loaderGenerals.has(g),
+      "(bayat kayıt — loader bu dosyayı artık yüklemiyor; set güncellenmeli)",
+    );
+  }
+}
+
+// 16) SÖZLÜK → DOSYA KAPSAM GUARD'I (F29, pano dalga 2026-08-04)
+//     NEDEN: [3] ve [13] ajan listesini DİSKTEN türetiyor — bir ajan dosyası
+//     silinir/yanlış klasöre taşınırsa döngüden sessizce düşer, hiçbir check
+//     fail olmaz (disk-türevli liste kendi eksiğini göremez). Otorite liste
+//     AGENT_ROLE_MAP'tir (loader'ın çözümleme sözlüğü): her sözlük ajanı
+//     getAgentFile ile GERÇEK bir dosyaya çözünmeli. Ters yön de kapalı:
+//     diskteki her ajan dosyasının slug'ı sözlükte olmalı (sözlüksüz dosya =
+//     loader'ın ASLA yükleyemeyeceği ölü KB içeriği).
+console.log(`\n[16] AGENT_ROLE_MAP ↔ disk kapsamı (${Object.keys(AGENT_ROLE_MAP).length} sözlük ajanı)`);
+{
+  for (const agentName of Object.keys(AGENT_ROLE_MAP).sort()) {
+    check(
+      `sözlük ajanı '${agentName}' → per-agent dosya çözünüyor`,
+      getAgentFile(agentName) !== null,
+      "(dosya YOK/yanlış rol klasöründe — bu ajanın KB'si hiçbir route'a yüklenmez)",
+    );
+  }
+  const dictSlugs = new Set(
+    Object.keys(AGENT_ROLE_MAP).map((a) => a.toLowerCase().replace(/[^a-z0-9]/g, "")),
+  );
+  for (const r of roleDirs) {
+    for (const f of fs.readdirSync(path.join(KB, "agents", r)).filter((x) => x.endsWith(".md"))) {
+      const slug = f.replace(/\.md$/, "");
+      check(
+        `disk ajan dosyası agents/${r}/${f} sözlükte var`,
+        dictSlugs.has(slug),
+        "(AGENT_ROLE_MAP'te karşılığı yok — loader bu dosyayı asla seçemez, ölü içerik)",
       );
     }
   }
