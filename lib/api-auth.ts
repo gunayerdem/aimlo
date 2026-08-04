@@ -21,7 +21,7 @@ const STRICT_RATE_LIMIT = process.env.STRICT_RATE_LIMIT === "true";
 
 // ── Rate limiting configuration ──
 
-type RouteKey = "feedback" | "report" | "vision" | "insight" | "telemetry" | "admin" | "support" | "default";
+type RouteKey = "feedback" | "report" | "vision" | "insight" | "ask" | "telemetry" | "admin" | "support" | "default";
 
 const RATE_LIMITS: Record<RouteKey, { window: number; max: number }> = {
   feedback:  { window: 60, max: 15 }, // 15/min
@@ -30,6 +30,11 @@ const RATE_LIMITS: Record<RouteKey, { window: number; max: number }> = {
   // Maliyet: ~$0.0024/çağrı — ÖLÇÜLDÜ 2026-07-31 (B76/B55), eski "~$0.0015-0.002" tahmini bayattı.
   vision:    { window: 60, max: 6 },
   insight:   { window: 60, max: 10 }, // 10/min
+  // B61/F79 (pano özellik dalgası, 2026-08-04): "Koça sor" tek-soru follow-up.
+  // 4/dk BİLİNÇLİ dar: özellik sohbet DEĞİL (tek soru → tek cevap, geçmiş tur
+  // yok); rapor/round başına 1-2 soru gerçek kullanımdır, 4/dk bunu bol bol
+  // karşılar ama script'lenmiş soru-yağmurunu dakika kapısında keser.
+  ask:       { window: 60, max: 4 },
   telemetry: { window: 60, max: 60 }, // 60/min — generous, telemetry must not eat user's AI quota
   admin:     { window: 60, max: 30 }, // 30/min — owner panel; defense-in-depth vs heavy aggregation abuse
   support:   { window: 60, max: 5 },  // 5/min — Destek form; abuse/spam guard (no AI cost, just storage)
@@ -48,8 +53,18 @@ const RATE_LIMITS: Record<RouteKey, { window: number; max: number }> = {
 //   vision     ~$0.0024   × 100           = $0.24   (prompt-cache %86 ile)
 //   report     ~$0.0183   ×  10           = $0.18   (B2: kota 30→10, 2026-08-04)
 //   insight    ~$0.0062   ×  60           = $0.37
+//   ask        ≤$0.0062   ×  20           ≤ $0.12   (ÜST SINIR — aşağıdaki B61 notuna bak)
 //   ────────────────────────────────────────────────
-//   EN-KÖTÜ GÜN / KULLANICI                ≈ $0.79  (B2 öncesi $1.16; B29 öncesi $4.18)
+//   EN-KÖTÜ GÜN / KULLANICI                ≈ $0.91  (ask üst-sınırıyla; B2 öncesi $1.16; B29 öncesi $4.18)
+//
+// B61/F79 ask satırı notu (pano özellik dalgası, 2026-08-04): ask HENÜZ
+// scripts/measure-quota-cost.ts ile ÖLÇÜLMEDİ (route bu dalgada doğdu; script
+// kopyası bu paketin DIŞINDA — ana oturum script'e "ask" ekleyip yeniden
+// koşmalı). Tablodaki $/çağrı bir tahmin DEĞİL, KANITLI ÜST SINIRDIR: ask
+// prompt'u insight'ın KESİN alt kümesinden küçüktür (KB bloğu YOK, context
+// ≤ ~4.3KB whitelist-kırpılmış string + soru ≤300 karakter, çıktı 1-3 cümle
+// ~150 token tavanlı) → per-çağrı maliyet insight'ın ölçülmüş $0.0062'sinin
+// altında kalmak ZORUNDA. 20×$0.0062 = $0.12/gün en-kötü tavan.
 //
 // B2 tablo notu (pano dalga, 2026-08-04): $/çağrı değerleri 2026-07-31
 // ölçümünden AYNEN alındı — kota değişikliği yalnız ÇARPANI etkiler (KB/prompt
@@ -82,6 +97,13 @@ const DAILY_QUOTA: Partial<Record<RouteKey, number>> = {
   report:    10,
   vision:    100, // beta 2026-06-26: 30→100 (~6-10 maç/gün; 30 ~2 maçta bitiyordu). Ölçülen tavan $0.24/gün; /cost panelinden izle
   insight:   60,
+  // B61/F79 (pano özellik dalgası, 2026-08-04): "Koça sor" günlük kotası.
+  // 20/gün: bir günde ~8 maç × 2 soru gerçekçi tavanın üstünde; maliyet tavanı
+  // yukarıdaki tabloda (≤$0.12/gün üst sınır). Bu kota FREE_TIER_ENFORCED
+  // bayrağından BAĞIMSIZ her zaman uygulanır (checkRateLimit DAILY_QUOTA yolu
+  // entitlements'a hiç bakmaz) — beta dâhil sabittir; sözleşme gereği aşımda
+  // 429 + "Daily quota exceeded" + Retry-After döner.
+  ask:       20,
   telemetry: 1000, // generous — desktop batches every 24h, but instrumentation can fire often during a long session
   support:   20, // 20/day — a real user won't file 20 support tickets a day; caps spam
   // B65 (2026-07-31): admin route'larının günlük tavanı YOKTU — yalnız 30/dk

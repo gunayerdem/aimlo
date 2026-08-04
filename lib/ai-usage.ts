@@ -13,7 +13,9 @@ import { createServiceSupabase } from "@/lib/supabase/server";
 
 export type SaveUsageInput = {
   userId: string | null | undefined;
-  routeType: "vision" | "report" | "feedback" | "insight";
+  // B61 (pano özellik dalgası, 2026-08-04): "ask" eklendi — Koça-sor follow-up
+  // route'u. DB kolonu düz text (0007, CHECK yok); union yalnız TS disiplini.
+  routeType: "vision" | "report" | "feedback" | "insight" | "ask";
   model?: string | null;
   promptTokens?: number | null;
   completionTokens?: number | null;

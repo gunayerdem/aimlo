@@ -31,7 +31,10 @@ const P = PRICING["gpt-5-mini"];
 // toplama katkısı yok. Route geri açılırsa buraya da kotayı geri yaz.
 // B2 (pano dalga, 2026-08-04): report 30→10 — lib/api-auth.ts DAILY_QUOTA ile senkron
 // (kota indirimi maliyet tavanını ~$1.16→~$0.79/kullanıcı-gün'e çeker).
-const DAILY_QUOTA = { vision: 100, feedback: 0, report: 10, insight: 60 } as const;
+// B61 (pano özellik dalgası, 2026-08-04): ask 20/gün — Koça-sor follow-up. Bu script
+// ask'ı ÖLÇMÜYOR (KB'siz, insight'ın kesin alt kümesi → per-çağrı ≤ insight); kota
+// kopyası yalnız toplam-tavan aritmetiği görünür kalsın diye burada.
+const DAILY_QUOTA = { vision: 100, feedback: 0, report: 10, insight: 60, ask: 20 } as const;
 
 /** Gerçekçi en-kötü girdi: bilinen harita/ajan + 5 düşmanlı tam kadro. */
 const CTX = {
