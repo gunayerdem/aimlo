@@ -19,6 +19,10 @@ import { BANNED_PHRASES } from "../lib/ai-policy";
 import { MAP_CALLOUTS, UNIVERSAL_CALLOUTS, mapKey } from "../lib/map-callouts";
 import { ABILITY_PLAIN_MAP } from "../lib/ability-plain-map";
 import { scoreFields } from "../evals/generic-detector";
+// B60 (pano özellik dalgası, 2026-08-04): EN çıktı kalitesi hiç ölçülmüyordu —
+// TR-sızıntı detektörü EKLEMELİ bağlandı. Yalnız lang==="en" örneklerde koşar;
+// TR örneklerde enLeak=[] olduğundan violations/rapor BAYT-AYNI kalır.
+import { detectEnLeak } from "../evals/en-leak-detector";
 
 type Sample = {
   id: string;
@@ -203,6 +207,10 @@ type Row = {
   detectorWeak: string | null;
   violations: number;
   promptBytes: number;
+  // B60 (2026-08-04): örneğin dili + EN'de yakalanan TR-sızıntı ihlalleri.
+  // TR örneklerde enLeak HEP boş — mevcut TR ölçümü etkilenmez.
+  lang: "tr" | "en";
+  enLeak: string[];
 };
 
 function scoreSample(s: Sample): Row {
@@ -215,6 +223,21 @@ function scoreSample(s: Sample): Row {
   const time = timeHits(text);
   const hp = hpHits(text);
   const codename = codenameHits(text);
+
+  // B60 (pano özellik dalgası, 2026-08-04): TR-sızıntı YALNIZ EN örneklerde
+  // ölçülür (dil-bağımsız değil — TR metin doğal olarak "kirli" görünürdü).
+  // en-hedge kesişimi bannedHits'ten düşülür: BANNED_PHRASES'in EN girdileri
+  // ("maybe/probably/it seems...") zaten yasak-ifade sayılıyor, aynı ihlali
+  // iki kez saymak A/B'yi şişirirdi. Kanıt-kaynağı: evals/en-leak-detector.ts.
+  const lang: "tr" | "en" = s.lang === "en" ? "en" : "tr";
+  const enLeak =
+    lang === "en"
+      ? [...new Set(
+          detectEnLeak(text).hits
+            .filter((h) => !(h.category === "en-hedge" && banned.includes(h.hit)))
+            .map((h) => `${h.category}:${h.hit}`),
+        )]
+      : [];
 
   let detector = 0;
   let detectorWeak: string | null = null;
@@ -249,8 +272,11 @@ function scoreSample(s: Sample): Row {
     tactical: tacticalHits(text),
     detector,
     detectorWeak,
-    violations: banned.length + time.length + hp.length + codename.length,
+    // B60 (2026-08-04): + enLeak.length EKLEMELİ — TR örnekte enLeak=[] → toplam değişmez.
+    violations: banned.length + time.length + hp.length + codename.length + enLeak.length,
     promptBytes: s.systemPromptBytes || 0,
+    lang,
+    enLeak,
   };
 }
 
@@ -270,6 +296,8 @@ type Agg = {
   avgTactical: number;
   avgDetector: number;
   avgPromptKB: number;
+  // B60 (2026-08-04): EN TR-sızıntı toplamı (TR koşularda hep 0).
+  enLeak: number;
 };
 
 function aggregate(rows: Row[]): Agg {
@@ -291,6 +319,7 @@ function aggregate(rows: Row[]): Agg {
     avgTactical: sum((r) => r.tactical.length) / n,
     avgDetector: sum((r) => r.detector) / n,
     avgPromptKB: sum((r) => r.promptBytes) / n / 1024,
+    enLeak: sum((r) => r.enLeak.length),
   };
 }
 
@@ -305,6 +334,11 @@ function printSingle(cycle: string, rows: Row[]) {
   console.log(`    zaman-tabanlı      : ${a.time}`);
   console.log(`    HP iddiası         : ${a.hp}`);
   console.log(`    kod-ad (yetenek)   : ${a.codename}`);
+  // B60 (2026-08-04): satır YALNIZ korpusta EN örnek varken basılır —
+  // TR-only koşuların konsol çıktısı bayt-aynı kalır (TR akışına dokunma kuralı).
+  if (rows.some((r) => r.lang === "en")) {
+    console.log(`    EN TR-sızıntısı    : ${a.enLeak}`);
+  }
   console.log("\n── SPESİFİKLİK (yüksek iyi) ──");
   console.log(`  Callout kapsamı     : %${f1(a.calloutCoverage)}  (örnek başına ${f1(a.avgCallouts)})`);
   console.log(`  Silah adı kapsamı   : %${f1(a.weaponCoverage)}`);
@@ -323,6 +357,8 @@ function printSingle(cycle: string, rows: Row[]) {
       if (r.time.length) parts.push(`zaman:[${r.time.join(", ")}]`);
       if (r.hp.length) parts.push(`HP:[${r.hp.join(", ")}]`);
       if (r.codename.length) parts.push(`kod-ad:[${r.codename.join(", ")}]`);
+      // B60 (2026-08-04): TR örnekte enLeak hep boş → TR çıktısı değişmez.
+      if (r.enLeak.length) parts.push(`EN-sızıntı:[${r.enLeak.join(", ")}]`);
       console.log(`  ❌ ${r.id} → ${parts.join(" ")}`);
     }
   }
@@ -356,6 +392,11 @@ function printAB(cA: string, rowsA: Row[], cB: string, rowsB: Row[]) {
   line("  zaman-tabanlı", A.time, B.time, false);
   line("  HP iddiası", A.hp, B.hp, false);
   line("  kod-ad", A.codename, B.codename, false);
+  // B60 (2026-08-04): yalnız iki koşudan birinde EN örnek varsa basılır —
+  // eski TR-only A/B kanıt çıktıları bayt-aynı kalır.
+  if (rowsA.some((r) => r.lang === "en") || rowsB.some((r) => r.lang === "en")) {
+    line("  EN TR-sızıntısı", A.enLeak, B.enLeak, false);
+  }
   line("İhlalli örnek", A.violSamples, B.violSamples, false);
 
   console.log("\n── SPESİFİKLİK (yüksek iyi) ──");
