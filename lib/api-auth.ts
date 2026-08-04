@@ -46,10 +46,17 @@ const RATE_LIMITS: Record<RouteKey, { window: number; max: number }> = {
 //
 //   route      $/çağrı    × günlük kota   = $/gün/kullanıcı
 //   vision     ~$0.0024   × 100           = $0.24   (prompt-cache %86 ile)
-//   report     ~$0.0183   ×  30           = $0.55
+//   report     ~$0.0183   ×  10           = $0.18   (B2: kota 30→10, 2026-08-04)
 //   insight    ~$0.0062   ×  60           = $0.37
 //   ────────────────────────────────────────────────
-//   EN-KÖTÜ GÜN / KULLANICI                ≈ $1.16  (B29 öncesi $4.18 idi)
+//   EN-KÖTÜ GÜN / KULLANICI                ≈ $0.79  (B2 öncesi $1.16; B29 öncesi $4.18)
+//
+// B2 tablo notu (pano dalga, 2026-08-04): $/çağrı değerleri 2026-07-31
+// ölçümünden AYNEN alındı — kota değişikliği yalnız ÇARPANI etkiler (KB/prompt
+// değişmedi, per-çağrı maliyet aynı), o yüzden ölçüm scripti yeniden
+// koşulmadı (merkezî doğrulama ana oturumda). DİKKAT: scripts/
+// measure-quota-cost.ts:32'deki DAILY_QUOTA kopyasında report hâlâ 30 —
+// o dosya bu fix paketinin DIŞINDA; ana oturum elle senkronlamalı.
 //
 // feedback satırı B32 (2026-07-31) ile tablodan DÜŞTÜ — route 410 Gone, AI
 // maliyeti sıfır (aşağıdaki nota bak). admin route'unun AI maliyeti yoktur,
@@ -65,7 +72,14 @@ const DAILY_QUOTA: Partial<Record<RouteKey, number>> = {
   // maliyet izlenimi veriyordu. RouteKey'deki "feedback" ve RATE_LIMITS.feedback
   // BİLEREK duruyor: route canlandırılırsa kapı hazır olsun + başka referanslar
   // kırılmasın. Route geri açılırsa buraya kotayı geri eklemeyi UNUTMA.
-  report:    30,
+  // ── B2 (pano dalga, 2026-08-04): report 30 → 10 ──
+  // NEDEN: report maç başına 1 çağrıdır; yoğun bir günde bile 8 maç = 8 report,
+  // 10 bol pay bırakır. report EN PAHALI route (~$0.0183/çağrı — ölçüm
+  // 2026-07-31, B55/B76); 30'luk tavan kullanılmayan ~$0.37/gün'lük ek harcama
+  // yüzeyi açıyordu (sızmış JWT senaryosunda fatura tavanı). Desktop sözleşmesi
+  // DEĞİŞMEDİ: aşımda aynı 429 + "Daily quota exceeded" + Retry-After yolu,
+  // yalnız eşik indi. Vision 100/gün BİLEREK aynen (beta kararı softi'nin).
+  report:    10,
   vision:    100, // beta 2026-06-26: 30→100 (~6-10 maç/gün; 30 ~2 maçta bitiyordu). Ölçülen tavan $0.24/gün; /cost panelinden izle
   insight:   60,
   telemetry: 1000, // generous — desktop batches every 24h, but instrumentation can fire often during a long session

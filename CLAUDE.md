@@ -54,6 +54,10 @@ Auth (Supabase JWT bearer) + Upstash rate-limit on all. camelCase fields. Keep s
 <!-- B112 (2026-07-31): ai/vision satırında "4/min·30/day" yazıyordu, kod 6/min·100/gün'e çıkmıştı.
      Sayıyı burada tekrarlamak bayatlıyor ve Friday denetiminde sahte alarm üretiyor → tek kaynağa
      (lib/api-auth.ts RATE_LIMITS/DAILY_QUOTA) işaret ediyoruz. -->
+<!-- B112 yeniden-denetim (pano dalga, 2026-08-04): buradaki TÜM sayılar kodla birebir doğrulandı —
+     vision 6/min·100/gün (api-auth RATE_LIMITS/DAILY_QUOTA), maxDuration 90s + AI 60s + imaj ≤4MB
+     (vision/route.ts:52/54/229), per-IP 3× (api-auth checkRateLimit). B2 ile report günlük kotası
+     30→10 indi; sayı bu dosyada BİLEREK tekrarlanmıyor, tek kaynak lib/api-auth.ts. -->
 
 ## lib/ modules
 `api-auth` (JWT + Upstash rate-limit; env tabanlı bypass YOK — tek bypass yolu admin panelinden

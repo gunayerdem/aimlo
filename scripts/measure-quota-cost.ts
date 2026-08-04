@@ -29,7 +29,9 @@ const P = PRICING["gpt-5-mini"];
 // anahtarı HİÇ YOK — route 410 Gone (ROUTE_RETIRED), yani günlük AI maliyeti SIFIR.
 // Satırı 0 kotayla tutuyoruz ki KB yükü + "canlandırılırsa $/çağrı ne olur" görünür kalsın;
 // toplama katkısı yok. Route geri açılırsa buraya da kotayı geri yaz.
-const DAILY_QUOTA = { vision: 100, feedback: 0, report: 30, insight: 60 } as const;
+// B2 (pano dalga, 2026-08-04): report 30→10 — lib/api-auth.ts DAILY_QUOTA ile senkron
+// (kota indirimi maliyet tavanını ~$1.16→~$0.79/kullanıcı-gün'e çeker).
+const DAILY_QUOTA = { vision: 100, feedback: 0, report: 10, insight: 60 } as const;
 
 /** Gerçekçi en-kötü girdi: bilinen harita/ajan + 5 düşmanlı tam kadro. */
 const CTX = {

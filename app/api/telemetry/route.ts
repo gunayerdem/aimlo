@@ -31,7 +31,10 @@ import {
  * Limits:
  *   - 100 events per batch (413 if exceeded)
  *   - 60/min, 1000/day per user (rate-limited via verifyAuthAndRateLimit)
- *   - ts must be within ±30d of server time
+ *   - ts must be within ±30 DAYS of server time (TELEMETRY_LIMITS.maxTsDriftMs
+ *     = 30*24*60*60*1000, lib/telemetry-types.ts). B127 (pano dalga,
+ *     2026-08-04): eski "±30d" kısaltması denetimde "30 dk" diye okunabiliyordu;
+ *     kod okundu, gerçek değer 30 GÜN kanıtlandı, kısaltma açık yazıldı.
  *   - value caps at 10 minutes (anti-overflow)
  *   - code/route strings capped at 64 chars
  *   - appVersion (B80, opsiyonel: event ya da batch zarfı) 64 char'da doğrulanır,
