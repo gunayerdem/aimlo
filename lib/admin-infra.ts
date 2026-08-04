@@ -352,10 +352,21 @@ async function checkOpenAI(): Promise<ServiceHealth> {
   }
 }
 
-/** Resend: anahtar varlığı + ücretsiz `GET /domains`. DİKKAT: Resend'in
- *  "sending only" kısıtlı anahtarları bu uca 403 döner — bu anahtarın BOZUK
- *  olduğu anlamına GELMEZ, o yüzden "fail" demiyoruz, "unknown" + açıklama
- *  diyoruz (sahte "fail" de sahte "ok" kadar zararlı). */
+/** Resend: anahtar varlığı + ücretsiz `GET /domains`.
+ *
+ *  🔴 ÖLÇÜLDÜ, VARSAYILMADI (2026-08-04, canlı panelde yanlış alarm sonrası):
+ *  Resend'in "sending only" kısıtlı anahtarı bu uca **403 DEĞİL, 401** döner ve
+ *  gövdesinde `"name":"restricted_api_key"` +
+ *  `"message":"This API key is restricted to only send emails"` bulunur.
+ *  İlk sürüm 403 varsayıp 401'i "anahtar reddedildi → e-posta kırık" saydı ve
+ *  ÇALIŞAN bir gönderim hattını kırık gösterdi. Yanlış alarm, gerçek alarmı
+ *  körelttiği için sahte "ok" kadar zararlıdır.
+ *
+ *  Ayrım artık gövdeden yapılıyor: `restricted_api_key` → anahtar SAĞLAM ve
+ *  doğru yapılandırılmış (yalnız gönderim yetkisi = en güvenli kurulum);
+ *  başka bir 401 → gerçekten geçersiz anahtar. Gönderimin kendisi buradan
+ *  doğrulanamaz (test maili göndermek gerekirdi) — bu yüzden en iyi ihtimalde
+ *  "bilinmiyor" deriz, asla "her şey yolunda" demeyiz. */
 async function checkResend(): Promise<ServiceHealth> {
   const base: ServiceHealth = { key: "resend", label: "Resend (e-posta)", status: "unknown" };
   const key = process.env.RESEND_API_KEY;
@@ -377,16 +388,37 @@ async function checkResend(): Promise<ServiceHealth> {
       }),
     );
     const latencyMs = Date.now() - t0;
-    discardBody(res);
-    if (res.ok) return { ...base, status: "ok", latencyMs, note: "Anahtar geçerli (domain listesi okundu)." };
-    if (res.status === 401) return { ...base, status: "fail", latencyMs, note: "Anahtar reddedildi (401) → e-posta gönderimi kırık." };
-    if (res.status === 403) {
+    if (res.ok) {
+      discardBody(res);
+      return { ...base, status: "ok", latencyMs, note: "Anahtar geçerli (domain listesi okundu)." };
+    }
+    // 401/403 gövdesini OKUMAK gerekiyor: kısıtlı-anahtar ile geçersiz-anahtar
+    // ayrımı yalnız `name` alanından yapılabilir (yukarıdaki ölçüm notu).
+    // Gövde küçük (~120 bayt) ve sır içermez; okuma hatası yutulur.
+    let restricted = false;
+    if (res.status === 401 || res.status === 403) {
+      try {
+        const body = (await res.json()) as { name?: unknown };
+        restricted = body?.name === "restricted_api_key";
+      } catch {
+        /* gövde okunamadı — aşağıdaki muhafazakâr dala düşer */
+      }
+    } else {
+      discardBody(res);
+    }
+    if (restricted) {
       return {
         ...base,
         status: "unknown",
         latencyMs,
-        note: "Anahtar var ama domain okuma izni yok (gönderim-only anahtar olabilir) — gönderim doğrulanamadı.",
+        note: "Anahtar SAĞLAM — yalnız gönderim yetkisi var (en güvenli kurulum), o yüzden okuma uçları reddediyor. Gönderimin kendisi buradan doğrulanamaz.",
       };
+    }
+    if (res.status === 401) {
+      return { ...base, status: "fail", latencyMs, note: "Anahtar geçersiz (401) → OTP, şifre sıfırlama ve destek bildirimi gönderilemez." };
+    }
+    if (res.status === 403) {
+      return { ...base, status: "unknown", latencyMs, note: "Anahtar var ama domain okuma izni yok — gönderim doğrulanamadı." };
     }
     return { ...base, status: "unknown", latencyMs, note: `Beklenmeyen yanıt (HTTP ${res.status}).` };
   } catch {
