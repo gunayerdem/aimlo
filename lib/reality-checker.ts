@@ -68,6 +68,16 @@ export interface FactGround {
   hasEnemyUtil?: boolean;
   hasTradeData?: boolean;     // tradedByAlly boolean present
   hasRoute?: boolean;         // playerRoute measured
+  // Canlı-test #9 (2026-08-04): oyuncunun AJANI istekte okundu mu? Kanıt: maç
+  // onaylanmadan atılan warmup AI çağrısında agent alanı BOŞTU ve model "Phoenix
+  // olarak kendi utilini..." yazdı — oyuncu Brimstone'du. Maç ortasında agent-OCR
+  // boş kalabildiği (bilinen ayrı desktop sorunu) için aynı uydurma o zaman
+  // KULLANICIYA gider. false iken guardUnprovenFacts "<Ajan> olarak" (TR) /
+  // "as <Agent>" (EN) OYUNCU-kendine-yakıştırma kalıplarını deterministik düşürür.
+  // undefined = guard KAPALI → tüm mevcut çağıranlar (report route dahil,
+  // buildFactGround bu alanı SET ETMEZ) bayt-aynı. Yalnız vision route, isteğin
+  // agent alanı boş/Unknown olduğunda bayrağı false'a çeker.
+  playerAgentKnown?: boolean;
   // Masaüstünün OCR ile ölçtüğü ölüm yeri/yerleri (varsa). stripForeignCallouts
   // bunu HER ZAMAN meşru sayar — tablo eksik olsa bile ölçülen konumu silmez.
   // Vision route TEK round → string; report route TÜM round'ların konumları → string[]
@@ -615,6 +625,49 @@ export function guardUnprovenFacts(
   lang?: "tr" | "en",
 ): string {
   let result = text;
+
+  // ── AJAN-BOŞ UYDURMA GUARD'I (canlı-test #9, 2026-08-04) ──────────────────
+  // NEDEN: istek payload'ında oyuncunun ajanı BOŞ/Unknown iken model oyuncuya
+  // ajan YAKIŞTIRABİLİYOR. Canlı kanıt: maç onaylanmadan atılan warmup AI
+  // çağrısında agent alanı boştu ve model "Phoenix olarak kendi utilini..."
+  // yazdı — oyuncu Brimstone'du. Warmup teslim edilmediği için kullanıcı
+  // görmedi; ama maç ortasında agent-OCR boş kalabiliyor (bilinen ayrı desktop
+  // sorunu) ve aynı uydurma o zaman KULLANICIYA gider.
+  // KAPSAM DAR (bilinçli): yalnız OYUNCU-kendine-yakıştırma kalıpları düşer —
+  // TR "<Ajan> olarak", EN "as <Agent>". Katil/düşman cümleleri ("Skye seni
+  // öldürdü") bu kalıbı KURMAZ → onlara hiç dokunulmaz (killerInfo yolları
+  // aşağıdaki mevcut guard'ların işi). Kalıp düşer, cümle akıcı kalır:
+  // "Phoenix olarak kendi utilini kullanmadın" → "kendi utilini kullanmadın".
+  // playerAgentKnown undefined/true iken blok HİÇ çalışmaz → mevcut çağıranlar
+  // (report route dahil) bayt-aynı.
+  // SIRA: killer-when-absent'ten ÖNCE — "Phoenix olarak ... Reyna seni vurdu"
+  // metninde önce kalıp temizlenmezse STEP2 "Phoenix"i katil sanıp
+  // "bir düşman olarak ..." bozuğunu üretebilir.
+  if (factGround.playerAgentKnown === false) {
+    const before = result;
+    // TR: "<Ajan> olarak" (+ opsiyonel virgül). Türkçe-\b TUZAĞI: JS \b,
+    // ş/ç/ğ/ı/ö/ü harflerinde kırılır → (?<![\p{L}]) sınıfı (dosya konvansiyonu).
+    result = result.replace(
+      new RegExp(`(?<![\\p{L}])(?:${AGENT_NAME_ALT})\\s+olarak(?![\\p{L}])\\s*,?\\s*`, "giu"),
+      "",
+    );
+    // EN: "as <Agent>" (+ opsiyonel virgül). "such as Jett" BİLEREK MUAF —
+    // "duelists such as Jett" meşru bir örnekleme, yakıştırma değil.
+    result = result.replace(
+      new RegExp(`(?<![\\p{L}])(?<!such\\s)as\\s+(?:${AGENT_NAME_ALT})(?![\\p{L}])\\s*,?\\s*`, "giu"),
+      "",
+    );
+    if (result !== before) {
+      // Kalıp cümle BAŞINDAN düştüyse kalan ilk harfi büyüt ("kendi utilini..."
+      // → "Kendi utilini..."). Yalnız strip GERÇEKLEŞTİYSE çalışır — dokunulmamış
+      // metnin harfleri değişmez (coach-text stripEnHedges emsali). TR'de
+      // i→İ dönüşümü için toLocaleUpperCase("tr-TR") şart ("i".toUpperCase()="I").
+      const trText = lang ? lang === "tr" : /[şçğıöü]/i.test(result);
+      result = result.replace(/(^|[.!?]\s+)([a-zçğıöşü])/gu, (_m, p: string, c: string) =>
+        p + (trText ? c.toLocaleUpperCase("tr-TR") : c.toUpperCase()),
+      );
+    }
+  }
 
   // Killer-when-absent (grounding audit 2026-06-26): killerInfo OCR'da YOKKEN
   // model belirli bir düşman ajanını katil olarak İSİMLENDİREMEZ (S14: "Cypher

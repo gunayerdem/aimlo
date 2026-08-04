@@ -550,6 +550,16 @@ export async function POST(request: NextRequest) {
     // ── KB context loading (RAG-lite) ──────────────────────
     const reqMap = typeof (body as VisionRequest).map === "string" ? (body as VisionRequest).map : undefined;
     const reqAgent = typeof (body as VisionRequest).agent === "string" ? (body as VisionRequest).agent : undefined;
+    // AJAN BOŞ/UNKNOWN tespiti (canlı-test #9, 2026-08-04): maç onaylanmadan
+    // atılan warmup çağrısında agent alanı BOŞTU ve model "Phoenix olarak kendi
+    // utilini..." yazdı — oyuncu Brimstone'du. Maç ortasında agent-OCR boş
+    // kalabildiği (bilinen ayrı desktop sorunu) için aynı uydurma kullanıcıya da
+    // gidebilir. Bu bayrak iki katmanı besler: (a) user-message'daki
+    // agentUnknownDirective (aşağıda — statik sistem-öneğine DOKUNMAZ, B42 cache
+    // fixi güvende) ve (b) reality-checker'ın deterministik süpürgesi
+    // (factGround.playerAgentKnown). "Unknown" literal'i desktop'un mid-match
+    // okunamama değeri; boş/whitespace de aynı sınıf.
+    const agentUnknown = !reqAgent || reqAgent.trim().length === 0 || reqAgent.trim().toLowerCase() === "unknown";
     const reqRank = typeof (body as VisionRequest).rank === "string" ? (body as VisionRequest).rank : undefined;
     const reqEnemyComp = Array.isArray((body as VisionRequest).enemyComp) ? (body as VisionRequest).enemyComp : undefined;
     const reqPatternContext = typeof (body as VisionRequest).patternContext === "string" ? (body as VisionRequest).patternContext : undefined;
@@ -936,6 +946,13 @@ export async function POST(request: NextRequest) {
       { ...(reqBody as unknown as Record<string, unknown>), killerInfo: ctx.killerInfo },
       ctx as unknown as Record<string, unknown>,
     );
+    // Canlı-test #9 (2026-08-04): ajan boş/Unknown iken reality-checker'ın
+    // "<Ajan> olarak"/"as <Agent>" oyuncu-kendine-yakıştırma süpürgesi açılır.
+    // buildFactGround'a BİLEREK DOKUNULMADI — report route da onu çağırıyor,
+    // orada bayrak undefined kalır → guard kapalı, davranış bayt-aynı. Bayrağı
+    // factSheet'ten önce set etmek güvenli: buildFactSheet yalnız kendi bildiği
+    // alanları açıkça okur (jenerik alan gezmez) → prompt'a etkisi SIFIR.
+    factGround.playerAgentKnown = !agentUnknown;
     const factSheet = buildFactSheet(factGround, ctx as unknown as Record<string, unknown>, reqLang);
 
     // DEATH-TYPE directive (variety fix 2026-06-30, softi canlı-test): in one match all
@@ -1143,12 +1160,26 @@ export async function POST(request: NextRequest) {
           ? `\n[DEATH LOCATION UNKNOWN] OCR could not read WHERE you died this round. Do NOT state or imply any location for the death or the enemy contact — no callout, no "mid/site/main", no "took the fight at X". Anchor the lesson to agent + weapon + timing + side + decision instead; those are true without a location.`
           : `\n[ÖLÜM YERİ OKUNAMADI] Bu round NEREDE öldüğün okunamadı. Ölüm ya da temas için HİÇBİR yer belirtme/ima etme — callout yok, "mid/site/main" yok, "X'te çatışmaya girdi" yok. Dersi ajan + silah + timing + side + karar üzerinden çapala; bunlar konum olmadan da doğru.`)
       : "";
+    // AJAN OKUNAMADI direktifi (canlı-test #9, 2026-08-04): agent alanı boş/
+    // Unknown iken model oyuncuya ajan YAKIŞTIRABİLİYOR — warmup çağrısında
+    // "Phoenix olarak kendi utilini..." üretti (oyuncu Brimstone'du); maç ortası
+    // agent-OCR-boş durumunda aynı metin kullanıcıya gider. reality-checker'daki
+    // deterministik süpürge (playerAgentKnown=false) kalıbı zaten siler; bu
+    // direktif KAYNAĞI kurutur (mapUnknown/locUnknown emsali — aynı sınıf).
+    // User-message'da taşınır → statik sistem-öneği/prompt-cache'e SIFIR etki;
+    // ajan biliniyorken BOŞ string → davranış bayt-aynı.
+    const agentUnknownDirective = agentUnknown
+      ? (reqLang === "en"
+          ? `\n[AGENT UNKNOWN] The PLAYER'S agent could not be read for this request. Do NOT attribute any agent to the player: never write "as Jett/Phoenix/...", do NOT assume which abilities the player has, and give NO agent-specific ability advice. Enemy agents from the killfeed/roster may still be named as ENEMIES. Anchor the lesson to weapon + position + timing + side + decision instead.`
+          : `\n[AJAN OKUNAMADI] Bu istekte OYUNCUNUN ajanı okunamadı. Oyuncuya HİÇBİR ajan yakıştırma: "Phoenix olarak ..." kalıbı KURMA, oyuncunun hangi yeteneklere sahip olduğunu VARSAYMA, ajana özel yetenek tavsiyesi VERME. Killfeed/roster'daki düşman ajanlarını DÜŞMAN olarak anman serbest. Dersi silah + konum + timing + side + karar üzerinden çapala.`)
+      : "";
     const clientContext = reqLang === "en"
       ? langDirective +      // dil emri EN BAŞTA — Türkçe bloklardan önce
         factSheet +
         confidenceDirective +  // VERİ SEVİYESİ — EN'de dil emrinden sonra
         mapUnknownDirective +
         locUnknownDirective +  // DEATH LOCATION UNKNOWN — no location claim when OCR has none (per-round)
+        agentUnknownDirective + // AGENT UNKNOWN — never attribute an agent to the player (canlı-test #9, per-round)
         deathTypeDirective +
         weaponCompDirective +
         scenarioDirective +   // SCENARIO HINT — statik senaryo rehberinin bölüm seçicisi (per-round, user-msg)
@@ -1159,6 +1190,7 @@ export async function POST(request: NextRequest) {
         confidenceDirective +  // VERİ SEVİYESİ — system prefix'ten taşındı (per-round, user-msg)
         mapUnknownDirective +  // HARİTA OKUNAMADI — Unknown'da callout uydurmayı menet (per-round)
         locUnknownDirective +  // ÖLÜM YERİ OKUNAMADI — konum yokken konum iddiasını menet (per-round)
+        agentUnknownDirective + // AJAN OKUNAMADI — oyuncuya ajan yakıştırmayı menet (canlı-test #9, per-round)
         deathTypeDirective +   // ÖLÜM-TİPİ çıpası — factSheet'ten hemen sonra (per-round, user-msg)
         weaponCompDirective +  // SİLAH+KOMP işaretçisi — statik rehberin bölüm seçicisi (per-round, user-msg)
         scenarioDirective +    // SENARYO işaretçisi — statik senaryo rehberinin bölüm seçicisi (B42/F76, per-round, user-msg)
