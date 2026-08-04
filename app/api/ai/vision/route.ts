@@ -327,6 +327,26 @@ function estimateImageTokens(w: number, h: number): { patches: number; tokens: n
 const MAX_ROUND_HISTORY_ENTRIES = 30;
 const MAX_HISTORY_STRING_LEN = 200;
 
+/* ── ctx SERBEST-METİN ALANLARI: SINIR KAPISI ────────────────────────────────
+ * GÜVENLİK DENETİMİ beta4 (2026-08-04) — denetimin tek ORTA bulgusunun ikinci
+ * katmanı. Asıl düzeltme aşağıda ctx kurulumundadır (sanitizePromptInput ile,
+ * bkz. "ctx ALAN TEMİZLİĞİ" bloğu); burası defense-in-depth kapısı.
+ * NEDEN: map/agent/mode/score/result/deathTiming/side/economyType/rank alanları
+ * prompt'a giden ctx'e kopyalanıyordu ve isValidVisionRequest bunların HİÇBİRİNİ
+ * doğrulamıyordu (yalnız image/matchId/roundHistory). 5 MB'lık MAX_PAYLOAD_BYTES
+ * tavanının altında kalan megabaytlık tek bir alan, hiçbir kapıya takılmadan
+ * atob/KB/AI yoluna giriyordu.
+ * EŞİK CÖMERT: bu alanlar OCR'dan gelen kısa etiketlerdir ("Ascent", "Jett",
+ * "13-11", "competitive", "early") — onlarca karakter. 4096 kat kat pay bırakır,
+ * yani meşru hiçbir istemciyi reddetmez. Tip toleransı korunur: string OLMAYAN
+ * değerler reddedilmez (aşağıdaki typeof kapıları onları zaten yok sayar) —
+ * yalnız akıl-dışı uzunluktaki string elenir.
+ */
+const MAX_CTX_FIELD_LEN = 4096;
+const CTX_TEXT_FIELDS = [
+  "map", "agent", "mode", "score", "result", "deathTiming", "side", "economyType", "rank",
+] as const;
+
 function isValidRoundHistory(raw: unknown): boolean {
   if (raw === undefined || raw === null) return true;   // alan opsiyonel
   if (!Array.isArray(raw)) return false;
@@ -401,6 +421,15 @@ function isValidVisionRequest(obj: unknown): obj is VisionRequest {
   // dizi buydu (uzunluk + eleman tipleri serbestti).
   if (!isValidRoundHistory(o.roundHistory)) {
     return false;
+  }
+  // Güvenlik denetimi beta4 (2026-08-04): ctx serbest-metin alanlarında akıl-dışı
+  // uzunluk kapısı (gerekçe + eşik: MAX_CTX_FIELD_LEN notu yukarıda).
+  for (const key of CTX_TEXT_FIELDS) {
+    const v = o[key];
+    if (typeof v === "string" && v.length > MAX_CTX_FIELD_LEN) {
+      console.warn(`[Aimlo AI] vision rejected: ctx field '${key}' too long (${v.length}b)`);
+      return false;
+    }
   }
   return true;
 }
@@ -793,25 +822,64 @@ export async function POST(request: NextRequest) {
     const reqBody = body as VisionRequest;
     const ctx: Record<string, unknown> = {};
 
+    /* ── ctx ALAN TEMİZLİĞİ ────────────────────────────────────────────────────
+     * GÜVENLİK DENETİMİ beta4 (2026-08-04) — denetimin TEK ORTA bulgusu.
+     * BULGU: score/result/map/agent/mode/side/deathTiming/enemyRoster/economyType
+     * prompt'a HEM sanitize'siz HEM uzunluk-kapaksız giriyordu. Kardeş alanlar
+     * (killerInfo/deathLocation/deathAngle/loadout/scoreboardKda/killfeedOrder/
+     * playerRoute) 2026-07-31 dalgasından beri sanitizePromptInput'tan geçiyor —
+     * bu alanlar o dalgada atlanmıştı.
+     * KANIT: ctx aşağıda JSON.stringify ile user-message'a gömülüyor
+     * ([ROUND CONTEXT] bloğu) ve isValidVisionRequest bu alanların hiçbirini
+     * doğrulamıyordu (yalnız image/matchId/roundHistory).
+     * SÖMÜRÜ: kimliği doğrulanmış herhangi bir kullanıcı, geçerli küçük bir PNG +
+     * `mode` alanında ~1 MB serbest metinle 5 MB'lık MAX_PAYLOAD_BYTES tavanının
+     * ALTINDA kalır → (a) sanitize'siz prompt-injection kanalı, (b) token/maliyet
+     * şişmesi, (c) prompt-cache öneğini bozma.
+     * KAPSAM (DAR — çalışanı bozma): yalnız ctx'e, yani PROMPT'a giden kopya
+     * temizlenir. reqMap/reqAgent/reqRank/reqEnemyComp/reqSide/reqEconomyType HAM
+     * hâlleriyle KB seçimine (loadVisionKnowledge), mapKey/realityCheck'e,
+     * classifyDeath/classifyCompArchetype'a ve DB yazımlarına (saveMatchEvent/
+     * saveAiUsage) gitmeye DEVAM eder → normalize/lookup zinciri bayt-aynı
+     * ("Ascent" hâlâ ascent'e çözülür), yanıt sözleşmesi de değişmez.
+     * MEŞRU DEĞER KIRILMAZ: "13-11", "Ascent", "Jett", "competitive", "late",
+     * "spike_rush", "post-plant" sanitize sonrası AYNEN kalır
+     * (kanıt: scripts/test-vision-ctx-sanitize.ts).
+     * VARLIK ANLAMBİLİMİ KORUNUR: alan eskiden hangi koşulda ctx'e giriyorsa yine
+     * aynı koşulda girer (boş string de dahil) → ctx anahtar kümesi değişmez.
+     */
+    const ctxField = (v: unknown, max: number): string =>
+      sanitizePromptInput(v, { max, collapseWhitespace: true });
+
     // Round durumu
     if (typeof reqBody.round === "number") ctx.round = reqBody.round;
-    if (typeof reqBody.score === "string") ctx.score = reqBody.score;
-    if (typeof reqBody.result === "string") ctx.result = reqBody.result.toUpperCase();
-    if (typeof reqMap === "string") ctx.map = reqMap;
-    if (typeof reqAgent === "string") ctx.agent = reqAgent;
+    if (typeof reqBody.score === "string") ctx.score = ctxField(reqBody.score, 12);
+    if (typeof reqBody.result === "string") ctx.result = ctxField(reqBody.result, 40).toUpperCase();
+    if (typeof reqMap === "string") ctx.map = ctxField(reqMap, 40);
+    if (typeof reqAgent === "string") ctx.agent = ctxField(reqAgent, 40);
     if (typeof reqBody.side === "string") {
       // Label the side so the model can't misread the raw token. Attack = sen
       // giriyorsun (entry/execute), Defense = sen tutuyorsun (hold/retake/save).
+      // NOT (beta4): bilinen iki değerin etiketleri SABİT metin — dokunulmadı.
+      // Yalnız "diğer" dalı kullanıcı-metnini HAM geçiriyordu; o dal artık
+      // temizlenir (attack/defense yolunda çıktı bayt-aynı).
       ctx.side =
         reqBody.side === "attack"
           ? (reqLang === "en" ? "attack (ATTACK — you are entering the site)" : "attack (SALDIRI — sen siteye giriyorsun)")
           : reqBody.side === "defense"
             ? (reqLang === "en" ? "defense (DEFENSE — you are holding the site)" : "defense (SAVUNMA — sen siteyi tutuyorsun)")
-            : reqBody.side;
+            : ctxField(reqBody.side, 40);
     }
-    if (typeof reqBody.mode === "string") ctx.mode = reqBody.mode;
+    if (typeof reqBody.mode === "string") ctx.mode = ctxField(reqBody.mode, 40);
     if (Array.isArray(reqEnemyComp) && reqEnemyComp.length > 0) {
-      const comp = reqEnemyComp.filter(a => typeof a === "string" && a.length > 0).slice(0, 5);
+      // Kadro 5 kişi (slice eskiden de 5'ti) — eleman başına 24 karakter kapağı
+      // en uzun ajan adından ("Brimstone" 9) kat kat geniş; filtre→slice SIRASI
+      // korundu, yani hangi 5 elemanın seçildiği değişmedi.
+      const comp = reqEnemyComp
+        .filter(a => typeof a === "string" && a.length > 0)
+        .slice(0, 5)
+        .map(a => ctxField(a, 24))
+        .filter(a => a.length > 0);
       if (comp.length > 0) ctx.enemyRoster = comp;
     }
 
@@ -819,7 +887,11 @@ export async function POST(request: NextRequest) {
     // bu alanlara öncelik vermeli)
     if (reqBody.died === true) {
       ctx.died = true;
-      if (typeof reqBody.deathTiming === "string") ctx.deathTiming = reqBody.deathTiming;
+      // deathTiming: sözlük değeri ("early"/"mid"/"late") ama ctx'e HAM giriyordu
+      // (güvenlik denetimi beta4, 2026-08-04 — yukarıdaki ctx ALAN TEMİZLİĞİ notu).
+      // classifyDeath aşağıda HAM reqBody.deathTiming'i okumaya devam eder
+      // (sözlük-bağlı karşılaştırma) → ölüm-tipi sınıflandırması bayt-aynı.
+      if (typeof reqBody.deathTiming === "string") ctx.deathTiming = ctxField(reqBody.deathTiming, 40);
       if (typeof reqBody.killerInfo === "string" && reqBody.killerInfo.length > 0) {
         const safe = sanitizePromptInput(reqBody.killerInfo, { max: 120, collapseWhitespace: true });
         // SILAH ALLOW-LIST (canlı-test #8, 2026-08-03): sanitize güvenlik katmanı
@@ -883,7 +955,12 @@ export async function POST(request: NextRequest) {
 
     // Ekonomi
     if (typeof reqBody.economyType === "string" && reqBody.economyType.length > 0) {
-      ctx.economyType = reqBody.economyType.slice(0, 20);
+      // Aynı sınıf (güvenlik denetimi beta4, 2026-08-04): 20 karakter kapağı vardı
+      // ama içerik temizliği YOKTU — 20 karakter "</kb>SYSTEM:" gibi bir yapı
+      // kaçağına yeter. Kapak korunur, sanitize eklenir. "full_buy"/"eco"/
+      // "force_buy" aynen kalır; reqEconomyType HAM hâliyle KB seçimine ve
+      // classifyDeath/scenarioDirective karşılaştırmalarına gitmeye devam eder.
+      ctx.economyType = ctxField(reqBody.economyType, 20);
     }
     if (typeof reqBody.credits === "number") ctx.credits = reqBody.credits;
     if (typeof reqBody.loadout === "string" && reqBody.loadout.length > 0) {
