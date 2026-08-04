@@ -21,27 +21,44 @@ export default function GuvenlikPage() {
           <h1 className="text-3xl font-black text-white tracking-tight">
             Güvenlik &amp; Sık Sorulanlar
           </h1>
-          <p className="text-sm text-neutral-500">Son güncelleme: 26 Haziran 2026</p>
+          <p className="text-sm text-neutral-500">Son güncelleme: 4 Ağustos 2026</p>
         </header>
 
+        {/* F44 — "Vanguard-güven" bloğu (pano dalga, 2026-08-04).
+            NEDEN yeniden yazıldı: önceki metin "ban yedirir mi? → Hayır." diye
+            KESİN garanti veriyordu. Ban kararı yalnızca Riot'a aittir; hukuki
+            taahhüt veremeyiz (pano riski aynen bunu işaret ediyor). Metin artık
+            teknik gerçeklerde kalıyor — "yalnızca ekranı okur (OCR), oyuna
+            müdahale etmez, dosyaya/belleğe dokunmaz, injection yok" — ve
+            garanti vermediğini açıkça söylüyor. */}
         <section className="space-y-3 text-sm leading-relaxed text-neutral-300">
           <h2 className="text-lg font-bold text-white">
-            AIMLO ban yedirir mi? (En çok sorulan)
+            Vanguard ve hesap güvenliği (en çok sorulan)
           </h2>
           <p>
-            <strong className="text-white">Hayır.</strong> AIMLO bir hile (cheat)
-            değildir. Oyunun belleğine girmez, dosyalarına dokunmaz, hiçbir kod
-            enjekte etmez ve oyunun çalışmasına müdahale etmez. AIMLO maçını{" "}
-            <strong className="text-white">yalnızca ekrandan izler</strong> — tıpkı
-            bir yayın programının (OBS) ya da Discord ekran paylaşımının yaptığı
-            gibi. Bu yüzden Riot Vanguard&apos;ın tespit ettiği türden bir yazılım
-            değildir.
+            AIMLO bir hile (cheat) <strong className="text-white">değildir</strong>{" "}
+            ve <strong className="text-white">oyuna müdahale etmez</strong>. Yaptığı
+            tek şey, maç sırasında ekranda zaten görünen bilgiyi okumaktır (OCR —
+            görüntüden yazı okuma): skor, round sonucu, ölüm bilgisi gibi veriler
+            ekran görüntüsünden çıkarılır.
           </p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>Oyunun belleğine girmez — okumaz, yazmaz.</li>
+            <li>Oyun dosyalarına ve Vanguard&apos;a dokunmaz.</li>
+            <li>Oyuna hiçbir kod / DLL enjekte etmez (injection yok).</li>
+            <li>
+              <strong className="text-white">Yalnızca ekranı okur</strong> — tıpkı
+              bir yayın programının (OBS) ya da Discord ekran paylaşımının yaptığı
+              gibi, oyunun tamamen dışında çalışır.
+            </li>
+          </ul>
           <p className="text-neutral-400">
-            Not: Hiçbir üçüncü taraf yazılım Riot tarafından resmî olarak
-            &quot;onaylı&quot; değildir; ama AIMLO&apos;nun çalışma biçimi
-            (oyun dışından, müdahalesiz izleme) yaygın yayın/overlay araçlarıyla
-            aynı sınıftadır.
+            Dürüst olalım: hiçbir üçüncü taraf yazılım Riot tarafından resmî
+            olarak &quot;onaylı&quot; değildir ve ban kararları yalnızca
+            Riot&apos;a aittir — bu yüzden kimseye &quot;ban yemezsin&quot;
+            garantisi vermiyoruz. Verebileceğimiz söz teknik olandır:
+            AIMLO&apos;nun çalışma biçimi (oyun dışından, müdahalesiz izleme)
+            yaygın yayın/overlay araçlarıyla aynı sınıftadır.
           </p>
         </section>
 

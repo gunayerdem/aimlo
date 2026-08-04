@@ -84,14 +84,34 @@ const COPY = {
       "Maç sonu detaylı rapor",
       "Türkçe ve İngilizce koçluk",
     ],
+    /* B53/F43 (pano dalga, 2026-08-04): kategori kıyası — "tracker değil, koç"
+       çerçevesi. RAKAM DİSİPLİNİ: yalnız denetim taramasında doğrulanmış üç
+       olgu kullanılır (GhostCoach $17.99/ay + ömür boyu $89.99; tracker'ların
+       ücretsiz katmanı istatistik verir ama koçluk vermez; AIMLO+ 499 TL/$9.99)
+       ve catNote tarih damgası taşır. UYDURMA rakam/iddia ve "dünyada tek"
+       kalıbı (B11) YASAK. */
+    catTitle: "Tracker değil, koç",
+    catSub: "İstatistik siteleri sana ne olduğunu gösterir. AIMLO neden olduğunu ve sonraki round ne yapman gerektiğini söyler.",
+    catRows: [
+      { name: "Tracker'ların ücretsiz katmanı", price: "Ücretsiz", extra: "", desc: "Maç istatistiği verir; koçluk vermez — neden öldüğünü söylemez.", self: false },
+      { name: "GhostCoach", price: "$17.99/ay", extra: "ömür boyu $89.99", desc: "AI koçluk kategorisinde bir başka araç.", self: false },
+      { name: "AIMLO+", price: "499 TL/ay", extra: "Türkiye dışında $9.99/ay", desc: "Round biter bitmez neden öldüğünü ve sonraki round ne yapacağını söyler.", self: true },
+    ],
+    catNote: "Karşılaştırma: 2026-08-04 itibarıyla, herkese açık fiyat sayfalarından. Fiyatlar değişebilir.",
     payTitle: "Ödemeye geç",
     paySub: "Seçtiğin plan aşağıda. Ödeme adımında sözleşmeleri onaylayacaksın.",
     payCta: "Ödemeye Geç",
     faqTitle: "Soruların mı var?",
     faq: [
       { q: "İstediğim zaman iptal edebilir miyim?", a: "Evet. Taahhüt yok, cayma bedeli yok. İptal ettiğinde ödediğin dönemin sonuna kadar erişimin devam eder." },
+      /* B53/F43 (pano dalga, 2026-08-04): kategori kıyası SSS'te de — rakamsız,
+         yalnız çerçeve; rakamlar tarih damgalı catRows bölümünde. */
+      { q: "AIMLO bir tracker'dan farkı ne?", a: "Tracker'lar maçtan sonra istatistik gösterir; AIMLO ise koçluk yapar: her round bittiğinde neden öldüğünü ve sonraki round ne yapman gerektiğini söyler." },
       { q: "Hangi platformlarda çalışıyor?", a: "Windows 10 ve 11. macOS ve Linux desteği yok." },
-      { q: "Valorant hesabım risk altında mı?", a: "Hayır. AIMLO yalnızca ekranı okur; oyun dosyalarına ve belleğine dokunmaz." },
+      /* F44 dil sınırı (pano dalga, 2026-08-04): "Hayır." kesin güvence
+         veriyordu — ban kararı Riot'a ait, hukuki taahhüt yok. Cevap teknik
+         gerçeklerde kalıyor ("oyuna müdahale etmez" düzeyi). */
+      { q: "Valorant hesabım risk altında mı?", a: "AIMLO yalnızca ekranı okur (OCR); oyun dosyalarına ve belleğine dokunmaz, kod enjekte etmez — oyuna müdahale etmeyen yayın araçlarıyla (OBS gibi) aynı sınıfta çalışır. Ayrıntılar aimlo.gg/guvenlik sayfasında." },
       { q: "Faturamı nasıl alırım?", a: "Ödeme sonrası e-arşiv faturan e-posta ile gönderilir." },
       { q: "Hangi ödeme yöntemlerini kabul ediyorsunuz?", a: "Visa, Mastercard, American Express ve Troy kredi/banka kartları. Taksit yok, tek çekim." },
       { q: "İade alabilir miyim?", a: "Koşullar İade ve Cayma Koşulları sayfasında." },
@@ -140,14 +160,28 @@ const COPY = {
       "Full post-match report",
       "Turkish and English coaching",
     ],
+    /* B53/F43 (pano dalga, 2026-08-04): TR bloğunun birebir EN karşılığı —
+       aynı rakam disiplini, aynı tarih damgası. */
+    catTitle: "Not a tracker. A coach.",
+    catSub: "Stat sites show you what happened. AIMLO tells you why — and what to do next round.",
+    catRows: [
+      { name: "Trackers' free tier", price: "Free", extra: "", desc: "Match stats, no coaching — they don't tell you why you died.", self: false },
+      { name: "GhostCoach", price: "$17.99/mo", extra: "lifetime $89.99", desc: "Another tool in the AI coaching category.", self: false },
+      { name: "AIMLO+", price: "$9.99/mo", extra: "499 TL/mo in Türkiye", desc: "Tells you why you died and what to do next round, the moment the round ends.", self: true },
+    ],
+    catNote: "Comparison as of 2026-08-04, from publicly listed prices. Prices may change.",
     payTitle: "Continue to payment",
     paySub: "Your selected plan is below. You'll approve the terms at the payment step.",
     payCta: "Continue to Payment",
     faqTitle: "Questions?",
     faq: [
       { q: "Can I cancel anytime?", a: "Yes. No commitment, no cancellation fee. Access continues until the end of your paid period." },
+      /* B53/F43 (pano dalga, 2026-08-04): kategori kıyası SSS'te — rakamsız. */
+      { q: "How is AIMLO different from a tracker?", a: "Trackers show you stats after the match; AIMLO coaches you: the moment a round ends, it tells you why you died and what to do next round." },
       { q: "Which platforms are supported?", a: "Windows 10 and 11. No macOS or Linux support." },
-      { q: "Is my Valorant account at risk?", a: "No. AIMLO only reads the screen; it never touches game files or memory." },
+      /* F44 dil sınırı (pano dalga, 2026-08-04): "No." kesin güvenceydi —
+         ban kararı Riot'a ait; cevap teknik gerçeklerde kalıyor. */
+      { q: "Is my Valorant account at risk?", a: "AIMLO only reads the screen (OCR); it never touches game files or memory and injects no code — the same class as broadcast tools like OBS that don't interfere with the game. Details at aimlo.gg/guvenlik." },
       { q: "How do I get an invoice?", a: "Your invoice is emailed after payment." },
       { q: "Which payment methods do you accept?", a: "Visa, Mastercard, American Express and Troy credit/debit cards. Single payment, no instalments." },
       { q: "Can I get a refund?", a: "See the Cancellation and Refund Terms page." },
@@ -403,6 +437,39 @@ export default function PricingClient({
             ))}
           </ul>
         </div>
+      </section>
+
+      {/* ── KATEGORİ KIYASI — "tracker değil, koç" (B53/F43, pano dalga 2026-08-04) ──
+          Rakamlar COPY.catRows'ta ve YALNIZ denetim taramasında doğrulanmış
+          olgular; catNote tarih damgası taşır ("Karşılaştırma: 2026-08-04
+          itibarıyla"). Bölüm tamamen EKLEME — mevcut tablo/SSS/ödeme akışına
+          dokunmuyor. "Dünyada tek" benzeri iddia bilinçli olarak YOK (B11). */}
+      <section className="space-y-8 pr-rise">
+        <div className="space-y-3 text-center">
+          <h2 className="text-3xl font-black tracking-tight text-white">{c.catTitle}</h2>
+          <p className="mx-auto max-w-lg text-[14px] text-neutral-400">{c.catSub}</p>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-3">
+          {c.catRows.map((r) => (
+            <div
+              key={r.name}
+              className={`rounded-2xl border p-6 ${
+                r.self
+                  ? "border-[#FF4655]/50 bg-[#FF4655]/[0.05]"
+                  : "border-white/[0.08] bg-white/[0.02]"
+              }`}
+            >
+              <p className={`text-[13px] font-bold ${r.self ? "text-[#FF6B77]" : "text-neutral-300"}`}>
+                {r.name}
+              </p>
+              <p className="mt-3 text-2xl font-black tracking-tight text-white">{r.price}</p>
+              {/* extra boş string olabilir — boşsa satır hiç render edilmez */}
+              {r.extra !== "" && <p className="mt-1 text-[12px] text-neutral-500">{r.extra}</p>}
+              <p className="mt-4 text-[13px] leading-relaxed text-neutral-400">{r.desc}</p>
+            </div>
+          ))}
+        </div>
+        <p className="text-center text-[11px] leading-relaxed text-neutral-600">{c.catNote}</p>
       </section>
 
       {/* ── SSS ── */}
