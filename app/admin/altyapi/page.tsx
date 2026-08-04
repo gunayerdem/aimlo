@@ -69,11 +69,20 @@ function readText(source: unknown, ...keys: string[]): string | null {
   return null;
 }
 
-/** releases/latest.json sürümü deploy'da yoksa, ilgili servis notundan çıkar. */
+/** Kullanıcıların gördüğü masaüstü sürümü (latest.json → version).
+ *
+ *  🔴 FIX (2026-08-04, canlı panelde "bilinmiyor" görüldü): sürüm `deploy`
+ *  nesnesinde ARANIYORDU ama orada hiç yok — `getInfraStatus` onu releases
+ *  SERVİSİNİN üstüne koyuyor (ServiceHealth.version). Yedek yol da servis
+ *  NOTUNDA regex arıyordu; not "Kullanıcıların gördüğü sürüm." olduğu için
+ *  içinde rakam yok → hep null dönüyordu. Artık asıl kaynak önce okunuyor. */
 function versionFrom(infra: Infra): string | null {
+  const rel = infra.services.find((s) => s.key === "releases");
+  const fromService = readText(rel, "version");
+  if (fromService) return fromService;
+  // Yedek: deploy nesnesi ileride taşırsa diye (bugün taşımıyor).
   const direct = readText(infra.deploy, "version", "latestVersion", "release", "desktopVersion");
   if (direct) return direct;
-  const rel = infra.services.find((s) => /release|latest|updater/i.test(s.key));
   const m = rel?.note ? /v?\d+\.\d+\.\d+/.exec(rel.note) : null;
   return m ? m[0] : null;
 }
@@ -127,8 +136,62 @@ function ServiceCard({ s }: { s: Service }) {
         {statusText(s.status)}
       </div>
 
+      {/* Sürüm gibi somut bir değer varsa kartta GÖSTER — nota gömülü kalmasın
+          (2026-08-04: latest.json sürümü okunuyordu ama hiçbir yerde
+          görünmüyordu, panel "bilinmiyor" diyordu). */}
+      {s.version ? (
+        <div style={{ marginTop: 6, fontSize: 13, color: "rgba(238,240,248,0.85)" }}>
+          <span style={{ color: "rgba(238,240,248,0.45)" }}>sürüm: </span>
+          <b className="adm-num">{s.version}</b>
+        </div>
+      ) : null}
+
       {s.note ? <p className="adm-stat-sub" style={{ marginTop: 6 }}>{s.note}</p> : null}
     </div>
+  );
+}
+
+/** Yeniden ölçüm düğmesi — sayfa force-dynamic olduğu için tam yükleme yeter.
+ *  Mor altı-çizili ham link yerine ikonlu, çerçeveli düğme (2026-08-04 softi
+ *  geri bildirimi: "yenileme işareti olsun, düzgün dursun"). */
+function RemeasureButton() {
+  return (
+    <a
+      href="/admin/altyapi"
+      title="Yeniden ölç"
+      aria-label="Yeniden ölç"
+      style={{
+        marginLeft: "auto",
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 7,
+        padding: "6px 12px",
+        borderRadius: 9,
+        border: "1px solid rgba(238,240,248,0.14)",
+        background: "rgba(238,240,248,0.04)",
+        color: "rgba(238,240,248,0.72)",
+        fontSize: 12,
+        fontWeight: 600,
+        textDecoration: "none",
+        lineHeight: 1,
+      }}
+    >
+      <svg
+        width="13"
+        height="13"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
+        <path d="M21 12a9 9 0 1 1-2.64-6.36" />
+        <polyline points="21 3 21 9 15 9" />
+      </svg>
+      Yeniden ölç
+    </a>
   );
 }
 
@@ -224,9 +287,7 @@ export default async function AdminAltyapiPage() {
         <span style={{ fontSize: 12, color: failing > 0 ? "#ff9aa3" : "rgba(238,240,248,0.45)" }}>
           {serviceSummary}
         </span>
-        <a href="/admin/altyapi" className="adm-link" style={{ marginLeft: "auto" }}>
-          Yeniden ölç &rarr;
-        </a>
+        <RemeasureButton />
       </div>
 
       {services.length === 0 ? (
