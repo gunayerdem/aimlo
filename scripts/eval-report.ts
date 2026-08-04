@@ -22,6 +22,8 @@ import * as path from "path";
 import { buildPolicyBlock } from "../lib/ai-policy";
 import { loadKnowledge } from "../lib/knowledge-loader";
 import { cleanCoachText } from "../lib/coach-text";
+// B60 (2026-08-04): EN-native rapor korpusu — aşağıda SCENARIOS'a ekleniyor.
+import { EN_REPORT_SCENARIOS } from "../evals/en-corpus";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
 
@@ -121,6 +123,13 @@ AGGREGATED: Top killers: Chamber operator ×2. Top death locations: A Main ×2.
 PER-ROUND DEATH ANALYSIS: R2: A Main utility'siz girdin, Chamber op aynı açı. R5: aynı hata tekrar.`,
   },
 ];
+
+// ── EN-NATIVE RAPOR KORPUSU — B60 (pano özellik dalgası, 2026-08-04) ──
+// Rapor korpusu %100 Türkçe'ydi (isTr:true); EN rapor yolu HİÇ ölçülmemişti.
+// evals/en-corpus.ts 4 EN-native rapor senaryosu taşıyor ama bağlanmamıştı —
+// korpus yazılıp kullanılmadan duruyordu. Yapısal uyum yeterli (aynı alanlar,
+// isTr:false → EN dalı). Maliyet: +4 gerçek AI çağrısı/koşu.
+SCENARIOS.push(...(EN_REPORT_SCENARIOS as unknown as ReportScenario[]));
 
 async function main() {
   const results: unknown[] = [];

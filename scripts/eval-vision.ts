@@ -41,6 +41,8 @@ import { loadVisionKnowledge } from "../lib/knowledge-loader";
 import { realityCheck, buildFactGround } from "../lib/reality-checker";
 import { cleanCoachText, clampWords, stripNumericHp } from "../lib/coach-text";
 import { buildAgentAbilityHint, enforceAgentKit } from "../lib/agent-abilities";
+// B60 (2026-08-04): EN-native korpus — aşağıda SCENARIOS'a ekleniyor.
+import { EN_VISION_SCENARIOS } from "../evals/en-corpus";
 import { sanitizePromptInput } from "../lib/prompt-safety";
 import { classifyDeath, buildDeathTypeDirective } from "../lib/death-type";
 import { buildHistoryBlock, type RoundHistoryEntry } from "../lib/history-block";
@@ -552,6 +554,18 @@ for (const base of SCENARIOS.filter((s) => EN_MIRROR_PREFIXES.some((p) => s.id.s
     body: { ...base.body, lang: "en" },
   });
 }
+
+// ── EN-NATIVE KORPUS BAĞLANTISI — B60 (pano özellik dalgası, 2026-08-04) ──
+// Yukarıdaki 5 EN-AYNASI, TR senaryolarından türetiliyor: EN yolunun bozulmadığını
+// gösterir ama EN'e ÖZGÜ senaryoları (farklı death-type dağılımı, edge-case'ler)
+// hiç ölçmez. evals/en-corpus.ts 26 EN-native round senaryosu taşıyor; buraya
+// bağlanmadan ölçüme HİÇ girmiyordu — korpus yazıldı ama kullanılmıyordu.
+// Yapısal uyum yeter (aynı id/note/body/memoryContext/lang alanları); id'ler
+// "E" önekli olduğu için S-serisiyle çakışmaz → yalnız EN ölçmek için:
+//   EVAL_ONLY=E npx tsx scripts/eval-vision.ts     (ya da EVAL_LANG=en)
+// MALİYET UYARISI: bu +26 gerçek AI çağrısı demek; koşu ~2 katına çıkar.
+// CI'ye GİRMEZ (eval'ler bilerek CI dışında).
+SCENARIOS.push(...(EN_VISION_SCENARIOS as unknown as Scenario[]));
 
 // ── confidence derivation (route 725-730) ──
 function deriveConfidence(rh: unknown): "calibrating" | "low" | "medium" | "high" {
