@@ -266,6 +266,9 @@ async function handleInsight(request: NextRequest) {
     const callAI = async (userPrompt: string, attempt = 1): Promise<AICallResult> => {
       const ctrl = new AbortController();
       const tid = setTimeout(() => ctrl.abort(), AI_TIMEOUT_MS);
+      // F8 (pano dalga, 2026-08-04): AI çağrı süresi ölçümü — yalnız saveAiUsage'a
+      // latencyMs geçmek için; 5xx retry'ında recursion yeni ölçüm başlatır.
+      const aiStartMs = Date.now();
       try {
         const res = await fetch(OPENAI_API_URL, {
           method: "POST",
@@ -307,7 +310,9 @@ async function handleInsight(request: NextRequest) {
           const cached = usage.prompt_tokens_details?.cached_tokens ?? 0;
           console.log(`[Aimlo AI tokens] insight in=${usage.prompt_tokens ?? 0} cached=${cached} out=${usage.completion_tokens ?? 0}`);
           // B110 (2026-07-31): userId:null → authedUserId (kullanıcı-başı maliyet görünürlüğü).
-          saveAiUsage({ userId: authedUserId, routeType: "insight", model: d?.model ?? "gpt-5-mini", promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, cachedTokens: cached });
+          // F8 (pano dalga, 2026-08-04): latencyMs eklendi (insight'ta matchId yok);
+          // lib/ai-usage.ts migration'sız ortamda eski kolon setine düşer.
+          saveAiUsage({ userId: authedUserId, routeType: "insight", model: d?.model ?? "gpt-5-mini", promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, cachedTokens: cached, latencyMs: Date.now() - aiStartMs });
         }
         const t: string = d?.choices?.[0]?.message?.content || "";
         try { return { ok: true, value: JSON.parse(t) }; } catch {

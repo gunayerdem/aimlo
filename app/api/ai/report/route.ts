@@ -1247,6 +1247,9 @@ ${scoringContext}`;
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), AI_TIMEOUT_MS);
 
+    // F8 (pano dalga, 2026-08-04): AI çağrı süresi ölçümü — yalnız saveAiUsage'a
+    // latencyMs geçmek için; route mantığına dokunmuyor.
+    const aiStartMs = Date.now();
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -1286,7 +1289,9 @@ ${scoringContext}`;
     if (usage) {
       const cached = usage.prompt_tokens_details?.cached_tokens ?? 0;
       console.log(`[Aimlo AI tokens] report in=${usage.prompt_tokens ?? 0} cached=${cached} out=${usage.completion_tokens ?? 0} finish=${stopReason}`);
-      saveAiUsage({ userId, routeType: "report", model: data?.model ?? "gpt-5-mini", promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, cachedTokens: cached });
+      // F8 (pano dalga, 2026-08-04): matchId + latencyMs eklendi — 0018 migration
+      // kolonları; lib/ai-usage.ts migration'sız ortamda eski kolon setine düşer.
+      saveAiUsage({ userId, routeType: "report", model: data?.model ?? "gpt-5-mini", promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, cachedTokens: cached, matchId: body.matchId ?? null, latencyMs: Date.now() - aiStartMs });
     }
 
     // Robust JSON extraction: strips markdown fences, balances braces
