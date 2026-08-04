@@ -220,6 +220,11 @@ const CORS_HEADERS: Record<string, string> = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  // Son-kapı denetimi (2026-08-04): Retry-After CORS safelist'inde DEĞİL —
+  // expose edilmezse cross-origin fetch (tauri.localhost → aimlo.gg) başlığı
+  // HİÇ okuyamaz ve desktop dakika-limitini günlük-kota sanır. Gövdedeki
+  // retryAfter alanı asıl kaynak; başlık yedek olarak da açık dursun.
+  "Access-Control-Expose-Headers": "Retry-After",
   "Access-Control-Max-Age": "86400",
 };
 
