@@ -13,6 +13,9 @@ const ITEMS = [
   { href: "/admin/feedback", label: "Feedback", ic: "✦" },
   { href: "/admin/support", label: "Yardım / Sorular", ic: "?" },
   { href: "/admin/revenue", label: "Gelir", ic: "$" },
+  // Altyapı paneli, 2026-08-04: servis sağlığı + kritik env VARLIK denetimi +
+  // dış konsol linkleri. Sonda duruyor çünkü günlük değil, deploy öncesi bakılır.
+  { href: "/admin/altyapi", label: "Altyapı", ic: "⬢" },
 ];
 
 export function AdminNav() {
