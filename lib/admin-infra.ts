@@ -578,7 +578,12 @@ function buildLinks(): InfraLink[] {
     {
       label: "Upstash — Redis konsolu",
       url: "https://console.upstash.com/redis",
-      note: "AIMLO DB'si (organic-oriole-119981): rate-limit, günlük kota ve indirme sayacı.",
+      // 2026-08-04: ESKİ DB (organic-oriole-119981) softi'nin Upstash hesabında
+      // GÖRÜNMÜYOR (başka hesapta açılmış, muhtemelen eski bir Vercel
+      // entegrasyonuyla). env kazasında kimlik bilgileri kaybolunca yerine
+      // aimlo-ratelimit açıldı. Panelde eski adı yazmak, düzeltmeye giden
+      // kişiyi ulaşamayacağı bir kayda yollar — bilerek güncel ad yazılıyor.
+      note: "AIMLO DB'si: aimlo-ratelimit (Frankfurt/eu-central-1) — rate-limit sayaçları ve kota.",
     },
     {
       label: "OpenAI — Kullanım/maliyet",

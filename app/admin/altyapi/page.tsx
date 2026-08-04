@@ -245,7 +245,11 @@ export default async function AdminAltyapiPage() {
           ? `${unknownCount} servisin durumu bilinmiyor`
           : "hepsi çalışıyor";
   const version = versionFrom(infra);
-  const commit = readText(deploy, "commit");
+  // 🔴 FIX (2026-08-04, canlı panelde "commit: bilinmiyor"): `deploy` nesnesinde
+  // "commit" diye bir alan YOK — getInfraStatus `commitShort` (7 hane) ve
+  // `commitSha` (tam) üretiyor. Sürüm hatasıyla AYNI sınıf: alan adı uyuşmazlığı.
+  // Kısa olan zaten kırpılmış geliyor, tam SHA yedek.
+  const commit = readText(deploy, "commitShort", "commitSha", "commit");
   const region = readText(deploy, "region");
   const envName = readText(deploy, "env", "environment");
 
