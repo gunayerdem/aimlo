@@ -119,8 +119,20 @@ export const BANNED_PHRASES = [
   "kayıtta var",
   "olarak kayıtlı",
   "verilere göre",
+  // ── 'raporlan-' meta-varyantı (canlı-test #11, 2026-08-05 — kanıt F):
+  // rekabetçi canlı testte "Katil Jett olarak raporlanmış" çıktı — 'raporlan-'
+  // ailesi ne burada ne stripMetaTerms'te vardı, iki katmanı da atladı.
+  // Kalıplar BİLEREK DAR (liste alt-dizgi taranır + verify-kb KB'yi de tarar):
+  // "olarak raporlan" gövdesi tüm TR ekleri (raporlanmış/raporlandı/raporlanan)
+  // alt-dizgi olarak yakalar; çıplak "rapor" YOK — "maç raporu"/"rapor oluştur"
+  // ürün terimleri yanlış-pozitif olurdu.
+  "olarak raporlan",
+  "olarak rapor edil",
+  "rapora göre",
   // EN aynası — TR çıktıda asla geçmez, EN çıktıda meta-dil her zaman yanlış.
   "recorded as",
+  "reported as",
+  "as reported",
   "according to the data",
 ] as const;
 
@@ -242,9 +254,11 @@ export const HP_BAN_RULE = `\nCAN/HP İDDİASI TOTAL YASAK: Feedback metnine oyu
 // kendi veri borusunu (OCR/kayıt/sistem/tespit/veri) kaynak olarak anmak.
 // ═══════════════════════════════════════════════════════════
 
-export const META_SOURCE_BAN_RULE = `\nVERİ-KAYNAĞI DİLİ YASAK (meta-dil): Feedback metninde veri kaynaklarından ASLA bahsetme — "OCR", "kayıt/kayıtta/kayıtlı", "sistem", "tespit edildi", "veriye/verilere göre" gibi kaynak-atıflı hiçbir ifade yazma. Olguyu DOĞRUDAN söyle: "Phoenix seni B Exit'te öldürdü." DE; "katil olarak kayıtta var" / "OCR'da görünüyor" DEME. (Oyuncuya oyun-içi ekranı öğütlemek — "killfeed'i oku" — serbest; yasak olan kendi verini kaynak diye anman.)`;
+// 'raporlan-' ailesi eklendi (canlı-test #11, 2026-08-05 — kanıt F: canlıda
+// "Katil Jett olarak raporlanmış" bu kuralı da süzgeci de atladı).
+export const META_SOURCE_BAN_RULE = `\nVERİ-KAYNAĞI DİLİ YASAK (meta-dil): Feedback metninde veri kaynaklarından ASLA bahsetme — "OCR", "kayıt/kayıtta/kayıtlı", "sistem", "tespit edildi", "veriye/verilere göre", "olarak raporlandı/raporlanmış/rapor edildi", "rapora göre" gibi kaynak-atıflı hiçbir ifade yazma. Olguyu DOĞRUDAN söyle: "Phoenix seni B Exit'te öldürdü." DE; "katil olarak kayıtta var" / "OCR'da görünüyor" / "katil Jett olarak raporlanmış" DEME. (Oyuncuya oyun-içi ekranı öğütlemek — "killfeed'i oku" — serbest; yasak olan kendi verini kaynak diye anman.)`;
 
-export const META_SOURCE_BAN_RULE_EN = `\nDATA-SOURCE LANGUAGE BANNED (meta-language): Never mention your data sources in the feedback — no "OCR", "recorded", "the system", "detected", "according to the data", "the logs". State the fact DIRECTLY: say "Phoenix killed you at B Exit." — never "the killer is recorded as Phoenix". (Telling the player to read the in-game killfeed as advice is fine; referring to your own data pipeline is not.)`;
+export const META_SOURCE_BAN_RULE_EN = `\nDATA-SOURCE LANGUAGE BANNED (meta-language): Never mention your data sources in the feedback — no "OCR", "recorded", "reported as", "as reported", "the system", "detected", "according to the data", "the logs". State the fact DIRECTLY: say "Phoenix killed you at B Exit." — never "the killer is recorded as Phoenix" or "the killer was reported as Phoenix". (Telling the player to read the in-game killfeed as advice is fine; referring to your own data pipeline is not.)`;
 
 // ═══════════════════════════════════════════════════════════
 // KATI İNGİLİZCE WHITELIST — TR çıktıda whitelist-dışı İngilizce yasak

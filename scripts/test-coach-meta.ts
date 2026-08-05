@@ -80,11 +80,59 @@ eq("olarak tespit edildi → kuyruk düşer",
 eq("verilere göre öneki düşer + baş harf büyür",
   stripMetaTerms("verilere göre B'ye ağırlık ver."), "B'ye ağırlık ver.");
 
+// ── 'raporlan-' META-VARYANTI (canli-test #11, 2026-08-05, kanıt F) ─────────
+// GERÇEK sızıntı: rekabetçi canlı testte (15:36:47) "Katil Jett olarak
+// raporlanmış" çıktı — 'raporlan-' ailesi ne stripMetaTerms'te ne
+// BANNED_PHRASES'teydi, iki katmanı da atladı. Cerrahinin mevcut kuralı
+// tutarlı uygulanır: "olarak <meta>" kuyruğu düşer, OLGU ("Katil Jett") ve
+// bilgilendirici yan-cümle KORUNUR (F1/F3 ile aynı şekil).
+console.log("── raporlan- ailesi (canli-test #11) ──");
+const F5 = "Katil Jett olarak raporlanmış; A Site'ta seni karşılayan agresif bir duelist var.";
+eq("F5 (canlı sızıntı) olarak-raporlanmış kuyruğu düşer, bilgi kalır",
+  stripMetaTerms(F5),
+  "Katil Jett; A Site'ta seni karşılayan agresif bir duelist var.");
+eq("F5 uçtan uca (cleanCoachText)",
+  cleanCoachText(F5, "tr"),
+  "Katil Jett; A Site'ta seni karşılayan agresif bir duelist var.");
+const F6 = "Phoenix seni A Long'da öldürdü; katil Jett olarak raporlanmış.";
+eq("F6 ayraç-sonrası raporlan- yan-cümlesi komple düşer (F4 şekli)",
+  stripMetaTerms(F6), "Phoenix seni A Long'da öldürdü.");
+const F7 = "Katil Iso olarak rapor edildi.";
+eq("F7 'olarak rapor edildi' kuyruğu düşer, katil kalır",
+  stripMetaTerms(F7), "Katil Iso.");
+eq("'rapora göre' öneki düşer + baş harf büyür",
+  stripMetaTerms("rapora göre B'ye ağırlık ver."), "B'ye ağırlık ver.");
+eq("saf-meta raporlan- cümlesi boşalır (ölüm-yeri öznesi)",
+  stripMetaTerms("Ölüm yerin A Long olarak raporlandı."), "");
+// EN aynası — stripMetaTerms bugün zincirde yalnız TR dalında koşuyor; desenler
+// EN dalına bağlanırsa hazır (prompt yasağı + dedektör EN'i zaten kapsıyor).
+const F8 = "The killer was reported as Jett.";
+eq("EN: 'was reported as' → kopula korunur",
+  stripMetaTerms(F8), "The killer was Jett.");
+const F9 = "Jett killed you at A Long, as reported.";
+eq("EN: cümle-sonu ', as reported' kuyruğu düşer",
+  stripMetaTerms(F9), "Jett killed you at A Long.");
+
+// ── MEŞRU 'rapor' ürün terimleri BAYT-AYNI (desen-dar-kaldı kanıtı) ─────────
+// "maç raporu / raporunda / rapor oluştur" koç metninde zaten hedef alan değil;
+// bu assert'ler desenlerin çıplak "rapor" köküne DOKUNMADIĞINI kanıtlar.
+console.log("── meşru rapor-terimleri (bayt-aynı) ──");
+const RAPOR_LEGIT = [
+  "Maç raporunda bu hatayı görürsün; aynı açıdan iki kez öldün.",
+  "Maç sonunda raporu aç, gelişimini oradan takip et.",
+  "Rapor oluştur ve haftalık gelişimine bak.",
+];
+for (const s of RAPOR_LEGIT) {
+  eq(`bayt-aynı: "${s.slice(0, 30)}..."`, stripMetaTerms(s), s);
+  eq(`dedektör-0: "${s.slice(0, 24)}..."`, findMetaTermHits(s).length, 0);
+}
+
 // ── ÖLÇÜM: findMetaTermHits ham sızıntıyı yakalar, temiz metni yakalamaz ────
 // (bu geceki kör nokta: ölçüm korpusu bu sınıfı HİÇ saymıyordu — eval-score.ts
 // artık bu dedektörü ihlal sınıfı olarak koşuyor.)
 console.log("── meta-terim dedektörü ──");
-for (const [name, f] of [["F1", F1], ["F2", F2], ["F3", F3], ["F4", F4]] as const) {
+for (const [name, f] of [["F1", F1], ["F2", F2], ["F3", F3], ["F4", F4],
+  ["F5", F5], ["F6", F6], ["F7", F7], ["F8", F8], ["F9", F9]] as const) {
   eq(`ham ${name} işaretlenir`, findMetaTermHits(f).length >= 1, true);
   eq(`temiz ${name} işaretlenmez`, findMetaTermHits(stripMetaTerms(f)).length, 0);
 }

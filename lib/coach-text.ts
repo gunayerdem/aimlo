@@ -588,24 +588,33 @@ export function stripHpClaims(text: string, lang: "tr" | "en"): string {
 // SAHTE ÇIKTI YOK: hiçbir metin üretilmez; yalnız meta parça silinir/sadeleşir.
 // ─────────────────────────────────────────────────────────────────────────────
 
-/** Ayraç-sonrası meta yan-cümle: içinde sistem-içi işaret geçen ;/:/— parçası. */
+/** Ayraç-sonrası meta yan-cümle: içinde sistem-içi işaret geçen ;/:/— parçası.
+ *  'raporlan-/rapor edil-/rapora göre' ailesi eklendi (canli-test #11, 2026-08-05):
+ *  canlı sızıntı "Katil Jett olarak raporlanmış" iki katmanı da atlamıştı. Kalıp
+ *  DAR: yalnız 'raporlan' gövdesi + edilgen 'rapor edil-' + 'rapora göre' —
+ *  ürün terimi "maç raporu/raporunda/rapor oluştur" EŞLEŞMEZ (l/a-göre şartı). */
 const TR_META_CLAUSE_RE = new RegExp(
-  String.raw`\s*[;:—]\s*[^.;:!?\n—]*(?<![a-zçğıöşü])(?:ocr|kayıt(?:ta|lı|larda)|kayda\s+geçti|sistemde|tespit\s+edildi|veri(?:de|lerde)|telemetri)[^.;:!?\n—]*`,
+  String.raw`\s*[;:—]\s*[^.;:!?\n—]*(?<![a-zçğıöşü])(?:ocr|kayıt(?:ta|lı|larda)|kayda\s+geçti|sistemde|tespit\s+edildi|veri(?:de|lerde)|telemetri|raporlan|rapor\s+edil|rapor(?:lar)?a\s+göre)[^.;:!?\n—]*`,
   "giu",
 );
 /** Saf-meta cümle: öznesi ölüm-yeri/konum, yüklemi kayıt/OCR — bilgi değeri sıfır. */
 const TR_META_SENTENCE_RE =
-  /(^|[.!?]\s+)(?:öl(?:üm|düğün)\s+yer|ölüm\s+konum|konum)[a-zçğıöşü]*['’]?[a-zçğıöşü]*[^.!?\n]*(?:ocr|kayıt|sistemde|veride|tespit)[^.!?\n]*[.!?]?/giu;
-/** "X olarak <meta>" kuyruğu — olgu (X) korunur, meta kuyruk düşer. */
+  /(^|[.!?]\s+)(?:öl(?:üm|düğün)\s+yer|ölüm\s+konum|konum)[a-zçğıöşü]*['’]?[a-zçğıöşü]*[^.!?\n]*(?:ocr|kayıt|sistemde|veride|tespit|raporlan)[^.!?\n]*[.!?]?/giu;
+/** "X olarak <meta>" kuyruğu — olgu (X) korunur, meta kuyruk düşer.
+ *  'raporlan-/rapor edil-' eklendi (canli-test #11, 2026-08-05): "Katil Jett
+ *  olarak raporlanmış" → "Katil Jett". Açık ek kuyruğu GÜVENLİ — "olarak
+ *  raporlan"/"olarak rapor edil" öneki tek başına meta bağlam garantisi. */
 const TR_OLARAK_META_RE =
-  /\s+olarak\s+(?:kayıt(?:ta|larda)(?:\s+var)?|kayıtlı|kayda geçti|sistemde(?:\s+(?:var|görünüyor|kayıtlı|mevcut))?|ocr['’]?d[ae]n?(?:\s+(?:kesin|kayıtlı|var|doğrulandı))?|tespit edildi|kesin(?:leşti)?|var|net)(?![a-zçğıöşü])/giu;
+  /\s+olarak\s+(?:kayıt(?:ta|larda)(?:\s+var)?|kayıtlı|kayda geçti|sistemde(?:\s+(?:var|görünüyor|kayıtlı|mevcut))?|ocr['’]?d[ae]n?(?:\s+(?:kesin|kayıtlı|var|doğrulandı))?|tespit edildi|raporlan[a-zçğıöşü]*|rapor\s+edil[a-zçğıöşü]*|kesin(?:leşti)?|var|net)(?![a-zçğıöşü])/giu;
 /** "OCR'da kesin/kayıtlı/..." zarf öbeği (olarak'sız biçim — F1 fixture'ı). */
 const TR_OCR_ADVERB_RE =
   /\s*,?\s*ocr['’]?(?:d[ae]n?)?\s+(?:kesin(?:dir)?|kayıtlı|kayıtta|doğrulandı|net|görünüyor|okundu|geldi|var)(?![a-zçğıöşü])/giu;
 /** "katil(in) bilgisi X" → "katil X" (F3: bilgi-sarmalayıcı söküm; çıplak "bilgi" SERBEST). */
 const TR_KATIL_BILGISI_RE = /(?<![a-zçğıöşü])katil(?:in)?\s+bilgisi\s+/giu;
-/** "verilere/kayıtlara/sisteme göre" cümle-başı önekleri — komple düşer. */
-const TR_GORE_PREFIX_RE = /(?<![a-zçğıöşü])(?:veri(?:ye|lere)|kayıtlara|sisteme|ocr['’]?[ae])\s+göre\s*/giu;
+/** "verilere/kayıtlara/sisteme/rapora göre" cümle-başı önekleri — komple düşer.
+ *  'rapor(lar)a göre' eklendi (canli-test #11, 2026-08-05). "maç raporuna göre"
+ *  EŞLEŞMEZ ("raporuna" ≠ "rapora") — ürün terimi korunur. */
+const TR_GORE_PREFIX_RE = /(?<![a-zçğıöşü])(?:veri(?:ye|lere)|kayıtlara|sisteme|rapor(?:lar)?a|ocr['’]?[ae])\s+göre\s*/giu;
 /** "-dığı tespit edildi" → "-dığı net" (dilbilgisi korunur: ortaç özneyi taşır). */
 const TR_TESPIT_PARTICIPLE_RE =
   /([\p{L}'’]*(?:dığı|diği|duğu|düğü|tığı|tiği|tuğu|tüğü)(?:n|nız|niz|nuz|nüz)?)\s+tespit edildi(?![a-zçğıöşü])/giu;
@@ -616,6 +625,15 @@ const TR_LEFTOVER_META_RE =
   /(?<![a-zçğıöşü])(?:kayıtta|kayıtlarda|sistemde|veride|verilerde)\s+(?:var|kayıtlı|görünüyor|mevcut|net|kesin)(?![a-zçğıöşü])/giu;
 /** EN SON backstop: çıplak "OCR" token'ı (opsiyonel apostrof-ekiyle) — koç metninde asla meşru değil. */
 const TR_OCR_BARE_RE = /(?<![\p{L}\p{N}])ocr(?:['’][a-zçğıöşü]{1,6})?(?![\p{L}\p{N}])/giu;
+/** EN aynası (canli-test #11, 2026-08-05): "was reported as Jett" → "was Jett" —
+ *  kopula korunur, meta fiil düşer. NOT: cleanCoachText zincirinde stripMetaTerms
+ *  yalnız TR dalında koşar; bu desenler TR metinde ASLA eşleşmez (İngilizce
+ *  kelimeler), EN dalına bağlanırsa hazır. Prompt yasağı + findMetaTermHits
+ *  ölçümü EN'i bugün de kapsıyor. */
+const EN_REPORTED_AS_RE = /\b(is|was)\s+reported\s+as\b/gi;
+/** ", as reported" kuyruğu — yalnız cümle-sonu biçimi (DAR: "was reported as"
+ *  içindeki "as"e sol-sınır \s+ şartı yüzünden ASLA yapışmaz). */
+const EN_AS_REPORTED_RE = /,?\s+as\s+reported(?=\s*[.!?;]|$)/gi;
 
 /**
  * Sistem-içi meta-dili (OCR/kayıt/sistemde/tespit edildi/veride...) koç
@@ -642,6 +660,10 @@ export function stripMetaTerms(text: string): string {
   t = t.replace(TR_TESPIT_FALLBACK_RE, " var");
   t = t.replace(TR_LEFTOVER_META_RE, "");
   t = t.replace(TR_OCR_BARE_RE, "");
+  // EN aynası (canli-test #11): sıra önemli — önce "was reported as" (kopula
+  // korunur), sonra cümle-sonu ", as reported" kuyruğu.
+  t = t.replace(EN_REPORTED_AS_RE, "$1");
+  t = t.replace(EN_AS_REPORTED_RE, "");
   if (t !== text) {
     // Söküm artıkları: sarkan virgül/ayraç, çift boşluk, öksüz noktalama.
     t = t.replace(/\s*,\s*(?=[.!?;])/g, "");
@@ -678,6 +700,16 @@ export function findMetaTermHits(text: string): string[] {
     /(?<![a-zçğıöşü])veri(?:de|lerde|ye göre|lere göre)(?![a-zçğıöşü])/giu,
     /(?<![a-zçğıöşü])telemetri[a-zçğıöşü]*/giu,
     /(?<![a-zçğıöşü])bilgisi\s+[\p{L}'’-]+\s+olarak\s+(?:var|kayıtlı|kesin|geçiyor)(?![a-zçğıöşü])/giu,
+    // 'raporlan-' ailesi (canli-test #11, 2026-08-05): süzgeçle eş-genişlikte
+    // ölçüm. DAR: 'raporlan' gövdesi + edilgen 'rapor edil-' + 'rapor(lar)a
+    // göre' — ürün terimleri ("maç raporu", "raporunda", "rapor oluştur")
+    // EŞLEŞMEZ (l-şartı / -a-göre şartı sağlanmaz).
+    /(?<![a-zçğıöşü])raporlan[a-zçğıöşü]*/giu,
+    /(?<![a-zçğıöşü])rapor\s+edil[a-zçğıöşü]*/giu,
+    /(?<![a-zçğıöşü])rapor(?:lar)?a\s+göre(?![a-zçğıöşü])/giu,
+    // EN aynası — "reported as" / "as reported" (koç metninde meşru kullanımı yok).
+    /\breported\s+as\b/gi,
+    /\bas\s+reported\b/gi,
   ];
   for (const re of detectors) {
     let m: RegExpExecArray | null;
@@ -855,6 +887,12 @@ export function cleanCoachText(text: string, lang: "tr" | "en"): string {
     // Artık SİLİNİR, cümlenin kalanı korunur → "planla: bir kişi defuse hattını tut."
     t = t.replace(/(^|[\s:;,—(])ğ[a-zçğıöşü]{1,8}(?![a-zçğıöşü])/gi, "$1");
   } else {
+    // META-DİL SÜZGECİ — EN dalı bağlantısı (canlı-test #11, 2026-08-05):
+    // E paketi EN desenlerini ('reported as', 'as reported', 'recorded as')
+    // stripMetaTerms'e eklemişti ama zincirde yalnız TR dalı çağırıyordu —
+    // EN çıktıda aynı sınıf sızıntı süzülmeden geçerdi. TR desenleri EN
+    // metinde eşleşmez (zararsız), EN desenleri artık burada da çalışır.
+    t = stripMetaTerms(t);
     // EN hedge neti (B84, 2026-07-31): TR'deki 3 katmanlı hedge korumasının
     // EN karşılığı — koç EN'de de KESİN konuşur.
     t = stripEnHedges(t);
