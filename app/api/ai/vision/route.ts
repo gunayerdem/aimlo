@@ -12,10 +12,13 @@ import { isUuidV4 } from "@/lib/uuid";
 // tablosu doğrudan okunduğunda EN istekte de Türkçe "VERİ SEVİYESİ" direktifi
 // gidiyordu; seçici lang="tr"/verilmemişse BİREBİR aynı metni döndürür (prompt-cache).
 import { buildPolicyBlock, confidencePrompt } from "@/lib/ai-policy";
-import { buildAgentAbilityHint, enforceAgentKit } from "@/lib/agent-abilities";
+// AGENT_ABILITIES (canlı-test #10 kalite dalgası, 2026-08-05 — S2b): [AJAN KİTİ]
+// işaretçisi oyuncunun GERÇEK kitini user-message'da tekrarlar; kit kaynağı TEK
+// (bu sözlük), liste route'ta KOPYALANMAZ.
+import { buildAgentAbilityHint, enforceAgentKit, AGENT_ABILITIES } from "@/lib/agent-abilities";
 // stripHpClaims: B47 (2026-07-31) — patternContext GİRİŞ zinciri de çıkış
 // zinciriyle aynı sırayı uygular (stripNumericHp → stripHpClaims).
-import { cleanCoachText, clampWords, stripNumericHp, stripHpClaims } from "@/lib/coach-text";
+import { cleanCoachText, clampWords, stripNumericHp, stripHpClaims, enforceSuppliedCallout } from "@/lib/coach-text";
 import { SYSTEM_PROMPT, SYSTEM_PROMPT_EN_ADDENDUM, USER_PROMPT, USER_PROMPT_EN, buildFactSheet, buildRoundFeedbackSchema } from "@/lib/vision-prompt";
 import { classifyDeath, buildDeathTypeDirective } from "@/lib/death-type";
 import { extractKillerWeapon, classifyCompArchetype, buildWeaponCompDirective, normalizeKillerInfoForPrompt } from "@/lib/comp-weapon";
@@ -1250,6 +1253,97 @@ export async function POST(request: NextRequest) {
           ? `\n[AGENT UNKNOWN] The PLAYER'S agent could not be read for this request. Do NOT attribute any agent to the player: never write "as Jett/Phoenix/...", do NOT assume which abilities the player has, and give NO agent-specific ability advice. Enemy agents from the killfeed/roster may still be named as ENEMIES. Anchor the lesson to weapon + position + timing + side + decision instead.`
           : `\n[AJAN OKUNAMADI] Bu istekte OYUNCUNUN ajanı okunamadı. Oyuncuya HİÇBİR ajan yakıştırma: "Phoenix olarak ..." kalıbı KURMA, oyuncunun hangi yeteneklere sahip olduğunu VARSAYMA, ajana özel yetenek tavsiyesi VERME. Killfeed/roster'daki düşman ajanlarını DÜŞMAN olarak anman serbest. Dersi silah + konum + timing + side + karar üzerinden çapala.`)
       : "";
+
+    // ── Canlı-test #10 kalite dalgası (2026-08-05): üç yeni user-message direktifi ──
+    // Üçü de İSTEĞE-BAĞIMLI metin → B42 prompt-cache kısıtı gereği user-message'da
+    // taşınır (statik sistem-önekine TEK BAYT dokunulmaz, cache etkisi SIFIR).
+
+    // (S2a) GÖRÜNTÜDEKİ YETENEK İKONLARI direktifi.
+    // NEDEN: önceki maçta model "ult hazırken öldün" dedi ve bunu ölüm-anı EKRAN
+    // GÖRÜNTÜSÜNDEN okudu — görüntü yetenek/ult durumunu taşıyor ve SYSTEM_PROMPT
+    // "VERİ HİYERARŞİSİ" gereği görüntü İZİNLİ (ikincil) kanıt kanalı; buna rağmen
+    // bu gece 5 feedback'te yetenek koçluğu 2 generik cümleye düşmüştü. Direktif o
+    // kanıtı BİLİNÇLİ kullandırır; NEGATİF KOŞUL ŞART: net görünmüyorsa yetenek
+    // durumu hakkında TEK KELİME yok → uydurma riski sıfır. Üret-sonra-sil (B35
+    // sınıfı) çelişkisi YOK — kontrol edildi: reality-checker'ın enemy-util
+    // süpürgesi DÜŞMAN öznesi arar (lib/reality-checker.ts ENEMY_SUBJECT_RE),
+    // oyuncunun kendi "ultin doluydu" cümlesine dokunmaz. Görüntü yalnız
+    // died!==false yolunda gönderildiği için direktif de died===true kapılı.
+    const abilityVisualDirective = reqBody.died === true
+      ? (reqLang === "en"
+          ? `\n[ABILITY ICONS IN THE SCREENSHOT] Look at the ability/ult icons in the death screenshot. If an UNUSED (full) ability or a ready ult is CLEARLY visible, tie the lesson to it ("your ult was ready and you died holding it — in a spot like that use your kit first"). If ultReady=true is also in the context data, state it confidently. If you can NOT see the ability state clearly, say NOTHING about ability/ult state — guessing is banned. State the fact directly ("your ult was ready"); never write "the screenshot shows".`
+          : `\n[GÖRÜNTÜDEKİ YETENEK İKONLARI] Ölüm anı ekran görüntüsündeki yetenek/ult ikonlarına bak. DOLU görünen kullanılmamış yetenek ya da hazır ult NET seçiliyorsa dersi ona bağla ("ultin doluydu ve kullanmadan öldün — böyle bir durumda önce yeteneğini kullan" sınıfı). Context'te ultReady=true de geldiyse kesin konuş. NET göremiyorsan yetenek/ult durumu hakkında HİÇBİR ŞEY yazma — tahmin YASAK. Olguyu doğrudan söyle ("ultin doluydu"); "görüntüde/ekranda görünüyor" DEME.`)
+      : "";
+
+    // (S2b) [AJAN KİTİ] işaretçisi.
+    // NEDEN: bu gecenin kanıtı — 5 feedback'te yalnız 2 generik util cümlesi,
+    // Raze kiti hiç konuşulmadı. Statik kural OUTPUT_FOCUS_RULE_VISION "KİT
+    // KULLANDIR"da; bu işaretçi ajanın GERÇEK kitini üretimden hemen önce
+    // (recency) tekrarlar ve nextRoundSuggestion'a en az bir somut yetenek
+    // kullanımı dayatır. Ayrıca politikadaki "[AJAN KİTİ] satırı" referansının
+    // user-message karşılığı artık gerçekten var. Kit kaynağı TEK:
+    // lib/agent-abilities.ts AGENT_ABILITIES (import) — abilitiesFor oradan
+    // export edilmediği için yalnız slug-toleranslı ARAMA tekrarlanır (liste
+    // kopyalanmaz). Object.entries yalnız kendi anahtarlarını gezer →
+    // "__proto__"/"toString" sınıfı prototype erişimi imkânsız; direktife
+    // kullanıcı metni DEĞİL sözlükteki KANONİK ad gömülür (injection-safe,
+    // ctxField emsali). Ajan çözülmezse boş → uydurma teşviki yok.
+    const agentSlugOf = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+    const reqAgentSlug = !agentUnknown && reqAgent ? agentSlugOf(reqAgent) : "";
+    const kitHit = reqAgentSlug
+      ? Object.entries(AGENT_ABILITIES).find(([k]) => agentSlugOf(k) === reqAgentSlug) ?? null
+      : null;
+    // Duelist kümesi: rol bilgisi AGENT_ABILITIES'te yalnız YORUM olarak var
+    // (runtime alanı yok) → küçük sabit küme burada. Yeni duelist eklenirse buraya
+    // da eklenmeli; eklenmezse tek kayıp giriş-kalıbı cümlesi (kit zorunluluğu
+    // yine işler, davranış bozulmaz).
+    const DUELIST_SLUGS = new Set(["jett", "raze", "phoenix", "reyna", "yoru", "neon", "iso", "waylay"]);
+    const kitPressureDirective = kitHit
+      ? (reqLang === "en"
+          ? `\n[AGENT KIT — COACHING REQUIREMENT] The player's agent is ${kitHit[0]}; their kit (plain terms): ${kitHit[1].join(", ")}. nextRoundSuggestion MUST include at least ONE concrete use of an ability from THIS kit — plain name + purpose (open the entry / cut an area / get info / cover the fallback).${DUELIST_SLUGS.has(agentSlugOf(kitHit[0])) ? ` This agent is a DUELIST: tie the entry to their own kit — concrete entry patterns like "dash in", "satchel yourself onto site", "flash and enter".` : ""} Never recommend an ability that is not in this kit.`
+          : `\n[AJAN KİTİ — KOÇLUK ZORUNLULUĞU] Oyuncunun ajanı ${kitHit[0]}; kiti (sade terimler): ${kitHit[1].join(", ")}. nextRoundSuggestion bu kitten EN AZ BİR somut yetenek kullanımı içersin — sade adıyla ve amacıyla (giriş açma / alan kesme / bilgi alma / geri çekilişi kapatma).${DUELIST_SLUGS.has(agentSlugOf(kitHit[0])) ? ` Bu ajan bir DUELIST: girişi KENDİ yeteneğine bağla — "dash'le atılarak gir", "patlayıcıyla sekip siteye düş", "flash'la açıp gir" sınıfı somut entry önerisi ver.` : ""} Bu kitte OLMAYAN yeteneği önerme.`)
+      : "";
+
+    // (S3b) [DERS GEÇMİŞİ] işaretçisi — ders-sınıfı rotasyonu.
+    // NEDEN (canlı kanıt): "çapraz/crossfire" 4/5, "tek başına/tek açı" 5/5
+    // round'da geçti — model her round aynı ders SINIFINA düşüyor. roundHistory'nin
+    // GERÇEKTEN taşıdığı alanlardan (isValidRoundHistory sözleşmesi: round_index/
+    // died/round_won/death_position/position_confidence/death_type) önceki
+    // ölümlerin kısa özeti türetilir. YALNIZ var olan veriden: önceki ölüm yoksa
+    // işaretçi HİÇ eklenmez (uydurma teşviki yok). Pozisyon güven filtresi
+    // repeatedPosition/history-block ile AYNI (yalnız high/medium) → prompt kendi
+    // kendisiyle çelişmez. Mevcut round HARİÇ (on-death kaydı listede olabilir —
+    // deathTypeDirective'deki curRound dersinin aynısı). [ÖLÜM-TİPİ İPUCU] ile
+    // ÇELİŞMEZ: tip bu round'un dersini seçer (tip=veri), bu direktif TEKRARI
+    // kırar — metin bunu açıkça söylüyor (KB-10h dersi: kod kendisiyle çelişmesin).
+    let lessonHistoryDirective = "";
+    {
+      const rhForLessons = (body as VisionRequest).roundHistory;
+      const curRoundIdx = typeof reqBody.round === "number" ? reqBody.round : -1;
+      const priorDeathBits = (Array.isArray(rhForLessons) ? (rhForLessons as unknown as Record<string, unknown>[]) : [])
+        .filter((r) => r.died === true && typeof r.round_index === "number" && r.round_index !== curRoundIdx)
+        .sort((a, b2) => (a.round_index as number) - (b2.round_index as number))
+        .slice(-6) // en yeni 6 ölüm — özet kısa kalsın (token disiplini)
+        .map((r) => {
+          const pos =
+            typeof r.death_position === "string" &&
+            (r.position_confidence === "high" || r.position_confidence === "medium")
+              ? sanitizePromptInput(r.death_position, { max: 50, collapseWhitespace: true })
+              : "";
+          const dt = typeof r.death_type === "string"
+            ? sanitizePromptInput(r.death_type, { max: 40, collapseWhitespace: true })
+            : "";
+          const bits = [pos, dt ? (reqLang === "en" ? `type: ${dt}` : `tip: ${dt}`) : ""]
+            .filter(Boolean)
+            .join(", ");
+          return bits ? `R${r.round_index}: ${bits}` : `R${r.round_index}`;
+        });
+      if (priorDeathBits.length > 0) {
+        lessonHistoryDirective = reqLang === "en"
+          ? `\n[LESSON HISTORY] Previous deaths this match: ${priorDeathBits.join(" · ")}. If a [DEATH-TYPE HINT] is present it picks THIS round's lesson (the type is data — keep it); this directive's job is to break repetition: if no type is imposed, pick a DIFFERENT lesson CLASS this round (position / utility / timing / economy / info) — never give the same class with the same concept and the same stock sentence round after round; even inside the same class, anchor the lesson to a DIFFERENT concrete detail of THIS round (weapon / util order / timing / economy). Do not repeat "set a crossfire" / "don't hold alone" in back-to-back rounds. Use ONLY the data in this line — never invent past details, and never print the "[LESSON HISTORY]" label in the output.`
+          : `\n[DERS GEÇMİŞİ] Bu maçtaki önceki ölümler: ${priorDeathBits.join(" · ")}. [ÖLÜM-TİPİ İPUCU] geldiyse bu round'un dersini O seçer (tip veridir, değiştirme); bu direktifin işi TEKRARI kırmak: tip dayatması yoksa bu round FARKLI bir ders SINIFI seç (pozisyon / util / zamanlama / ekonomi / bilgi) — aynı sınıfı aynı kavram ve aynı kalıp cümleyle ÜST ÜSTE verme; aynı sınıfa düşsen bile dersi BU round'un FARKLI somut detayına (silah / util-sırası / zamanlama / ekonomi) bağla. "crossfire kur" / "tek başına tutma" kalıplarını art arda round'larda tekrarlama. YALNIZ bu satırdaki veriyi kullan — geçmiş detayı uydurma; "[DERS GEÇMİŞİ]" etiketini çıktıya YAZMA.`;
+      }
+    }
     const clientContext = reqLang === "en"
       ? langDirective +      // dil emri EN BAŞTA — Türkçe bloklardan önce
         factSheet +
@@ -1257,8 +1351,11 @@ export async function POST(request: NextRequest) {
         mapUnknownDirective +
         locUnknownDirective +  // DEATH LOCATION UNKNOWN — no location claim when OCR has none (per-round)
         agentUnknownDirective + // AGENT UNKNOWN — never attribute an agent to the player (canlı-test #9, per-round)
+        abilityVisualDirective + // ABILITY ICONS — görüntüdeki ult/yetenek kanıtı, negatif-koşullu (canlı-test #10, per-round)
         deathTypeDirective +
+        lessonHistoryDirective + // LESSON HISTORY — ders-sınıfı rotasyonu, yalnız gerçek geçmiş veriden (canlı-test #10, per-round)
         weaponCompDirective +
+        kitPressureDirective + // AGENT KIT — nextRoundSuggestion'a kitten somut yetenek dayatması (canlı-test #10, per-round)
         scenarioDirective +   // SCENARIO HINT — statik senaryo rehberinin bölüm seçicisi (per-round, user-msg)
         (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, more reliable than the screenshot]\n${ctxJson}` : "") +
         (patternBlock ? `\n\n[PATTERN — recurring mistake across recent rounds. If present, reference it like a coach inside deathAnalysis or nextRoundSuggestion — do not open an extra field]\n${patternBlock}` : "")
@@ -1268,8 +1365,11 @@ export async function POST(request: NextRequest) {
         mapUnknownDirective +  // HARİTA OKUNAMADI — Unknown'da callout uydurmayı menet (per-round)
         locUnknownDirective +  // ÖLÜM YERİ OKUNAMADI — konum yokken konum iddiasını menet (per-round)
         agentUnknownDirective + // AJAN OKUNAMADI — oyuncuya ajan yakıştırmayı menet (canlı-test #9, per-round)
+        abilityVisualDirective + // GÖRÜNTÜDEKİ YETENEK İKONLARI — negatif-koşullu görsel kanıt (canlı-test #10, per-round)
         deathTypeDirective +   // ÖLÜM-TİPİ çıpası — factSheet'ten hemen sonra (per-round, user-msg)
+        lessonHistoryDirective + // DERS GEÇMİŞİ — ders-sınıfı rotasyonu, yalnız gerçek geçmiş veriden (canlı-test #10, per-round)
         weaponCompDirective +  // SİLAH+KOMP işaretçisi — statik rehberin bölüm seçicisi (per-round, user-msg)
+        kitPressureDirective + // AJAN KİTİ — nextRoundSuggestion'a kitten somut yetenek dayatması (canlı-test #10, per-round)
         scenarioDirective +    // SENARYO işaretçisi — statik senaryo rehberinin bölüm seçicisi (B42/F76, per-round, user-msg)
         (ctxJson ? `\n\n[ROUND CONTEXT — OCR pixel truth, screenshot'tan güvenilir]\n${ctxJson}` : "") +
         (patternBlock ? `\n\n[PATTERN — son round'lardaki tekrar eden hata. Bu varsa deathAnalysis veya nextRoundSuggestion'da koç gibi referans ver — extra alan açma]\n${patternBlock}` : "");
@@ -1294,6 +1394,37 @@ export async function POST(request: NextRequest) {
     if (reqLang === "en") {
       userPromptWithHistory += `\n\n[REMINDER] Output language: ENGLISH ONLY. All three fields in natural English coach voice — never a Turkish word.`;
     }
+
+    /* ── enemyAnalysis ŞEMA EKİ — çağrı noktasında (canlı-test #10 kalite dalgası,
+     * 2026-08-05 — S1 + S3a) ─────────────────────────────────────────────────
+     * NEDEN: (S1) model olgu-listesinin KAYNAK dilini çıktıya taşıdı ("katil
+     * olarak kayıtta var" sınıfı); (S3a) enemyAnalysis[0] çoğu round
+     * deathAnalysis'in kopyasıydı (ölü bilgi). json_schema description üretimden
+     * hemen önceki en güçlü sinyal (B25/B69/B35 emsalleri). Şemanın kendisi
+     * lib/vision-prompt.ts'te ve o dosya BU dalgada bu paketin alanı DEĞİL → ek,
+     * ÇAĞRI NOKTASINDA sığ-kopya ile yapılır; import edilen sabit MUTATE EDİLMEZ
+     * (modül durumu istekler arası paylaşımlı — yerinde değişiklik her istekte
+     * üst üste binerdi). response_format prompt-cache önekine girmez
+     * (vision-prompt.ts EN-şema notu emsali) → cache etkisi SIFIR; desktop
+     * sözleşmesi değişmez (şekil/required birebir, yalnız description uzar).
+     * Politika eşleri: META_SOURCE_BAN_RULE + ENEMY_ANALYSIS_GATE_VISION
+     * ANTİ-TEKRAR satırı (lib/ai-policy.ts).
+     */
+    const enemyDescAppend = reqLang === "en"
+      ? ` SOURCE-LANGUAGE BAN: never mention data sources in the output ("OCR", "recorded", "the system", "detected", "according to the data") — state the fact directly ("Phoenix killed you at B Exit", never "the killer is recorded as Phoenix"). ANTI-REPEAT: item 1 must NOT restate the deathAnalysis sentence — if the given evidence (killerInfo, round history lines, pattern) shows a REPEATING enemy behaviour, state that (where they play from, what they repeat); otherwise state a facet of the same death you did NOT use in deathAnalysis (weapon / angle / distance / timing). Never invent a behaviour pattern.`
+      : ` KAYNAK-DİLİ YASAK: çıktıda veri kaynağı anma ("OCR", "kayıt/kayıtta", "sistem", "tespit", "verilere göre") — olguyu doğrudan yaz ("Phoenix seni B Exit'te öldürdü" DE, "katil olarak kayıtta var" DEME). ANTİ-TEKRAR: Madde 1 deathAnalysis'in cümlesini TEKRARLAMAZ — kanıtta (killerInfo, geçmiş round satırları, pattern) düşmanın TEKRARLAYAN davranışı varsa onu söyle (nereden oynuyor, neyi tekrarlıyor); yoksa ölümün deathAnalysis'te KULLANMADIĞIN yönünü (silah / açı / mesafe / zamanlama) söyle. Davranış kalıbı UYDURMA.`;
+    const baseSchema = buildRoundFeedbackSchema(reqLang);
+    const baseEnemy = baseSchema.schema.properties.enemyAnalysis;
+    const visionSchema = {
+      ...baseSchema,
+      schema: {
+        ...baseSchema.schema,
+        properties: {
+          ...baseSchema.schema.properties,
+          enemyAnalysis: { ...baseEnemy, description: baseEnemy.description + enemyDescAppend },
+        },
+      },
+    };
 
     /* ── B70 (2026-07-31): LENGTH-KESİLMESİNDE TEK RETRY ─────────────────────
      * max_completion_tokens 350'dir ve GPT-5'te reasoning token'ları AYNI
@@ -1346,7 +1477,9 @@ export async function POST(request: NextRequest) {
             max_completion_tokens: maxTokens,
             // Strict JSON enforcement — server rejects malformed schema. Eliminates
             // the markdown-fence/preamble extraction logic we needed with Anthropic.
-            response_format: { type: "json_schema", json_schema: buildRoundFeedbackSchema(reqLang) },
+            // visionSchema (canlı-test #10 kalite dalgası, 2026-08-05): temel şema +
+            // çağrı-noktası enemyAnalysis description eki (KAYNAK-DİLİ + ANTİ-TEKRAR).
+            response_format: { type: "json_schema", json_schema: visionSchema },
             // Minimal reasoning effort — coach output is template-fill, not chain-of-thought.
             // Saves output tokens + latency. Bump to "low" or "medium" if quality drops.
             reasoning_effort: "minimal",
@@ -1595,19 +1728,30 @@ export async function POST(request: NextRequest) {
       // Empty-guard (security audit L1): stripNumericHp's deletion forms can empty a
       // text that was ONLY an HP label — keep the reality-checked original then
       // (mirrors the enemyAnalysis/safeSuggestion fallback pattern below).
+      // Callout-yazım kilidi (canlı-test #10 kalite dalgası, S5): model verilen
+      // callout'u aynı cevapta bozabiliyor (canlı kanıt: deathLocation="a lamps"
+      // → çıktıda "Lambs gibi"). Verilen değerin bozuk yakın-varyantı orijinal
+      // görünümle değiştirilir; dar kapsam + korumalar lib/coach-text.ts'te.
+      const suppliedLoc = typeof (body as VisionRequest).deathLocation === "string"
+        ? String((body as VisionRequest).deathLocation)
+        : "";
+      const fixCallout = (t: string) => (suppliedLoc ? enforceSuppliedCallout(t, suppliedLoc) : t);
       const cleanedAnalysis = cleanCoachText(checkedAnalysis.text, reqLang);
-      const deathAnalysisOut = clampWords(
+      const deathAnalysisOut = fixCallout(clampWords(
         enforceAgentKit(cleanedAnalysis && cleanedAnalysis.trim() ? cleanedAnalysis : checkedAnalysis.text, reqAgent),
         350,
-      );
+      ));
       // enemyAnalysis de reality-check'ten GEÇER (grounding audit 2026-06-26: bu dizi
       // önceden HİÇ denetlenmiyordu → killer/rota/sayı uydurması elenmeden çıkıyordu).
       // kind:"suggestion" → tümü stripped olursa "" döner, orijinali koru.
+      // .filter (canlı-test #10, S1 dizi-kuralı): stripMetaTerms SAF-META bir
+      // elemanı ("katil bilgisi X olarak kayıtta var" gibi tek-cümlelik kaynak-dili)
+      // '' yapabilir — boş eleman diziden düşer, kullanıcıya boş satır gitmez.
       const enemyAnalysisOut = fb.enemyAnalysis.slice(0, 2).map((s) => {
         const c = realityCheck(String(s), memoryForCheck, factGround, "suggestion", reqLang, reqMap);
         const safe = c.text && c.text.trim() ? c.text : String(s);
-        return clampWords(enforceAgentKit(cleanCoachText(safe, reqLang), reqAgent), 180);
-      });
+        return fixCallout(clampWords(enforceAgentKit(cleanCoachText(safe, reqLang), reqAgent), 180));
+      }).filter((s) => s && s.trim().length > 0);
       // Cycle 3: if reality-check emptied the suggestion (every sentence was an
       // unproven repetition claim → "suggestion" kind returns "" rather than a
       // past-tense death stub), keep the model's original advice — still a valid
@@ -1615,7 +1759,7 @@ export async function POST(request: NextRequest) {
       const safeSuggestion = checkedSuggestion.text && checkedSuggestion.text.trim()
         ? checkedSuggestion.text
         : fb.nextRoundSuggestion;
-      const nextRoundOut = clampWords(enforceAgentKit(cleanCoachText(safeSuggestion, reqLang), reqAgent), 350);
+      const nextRoundOut = fixCallout(clampWords(enforceAgentKit(cleanCoachText(safeSuggestion, reqLang), reqAgent), 350));
 
       // Live match feed (admin /live + /feedback): one row per death with the ACTUAL
       // coaching the user received — piggybacks this vision call, ZERO extra AI cost,

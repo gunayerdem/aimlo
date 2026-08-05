@@ -558,6 +558,215 @@ export function stripHpClaims(text: string, lang: "tr" | "en"): string {
   return t;
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// META-DİL SÜZGECİ (canli-test #10 kalite dalgasi, 2026-08-05)
+//
+// SORUN (S1, log-kanıtlı — 5 round'un 4'ünde): model, olgu-listesinin KAYNAK
+// dilini (sistem-içi meta-dil) kullanıcı metnine taşıyor. Canlı çıktıdan birebir:
+//   "katil olarak Iso OCR'da kesin."
+//   "Bir düşman seni A Tower'da öldürdü; öldüğün yer OCR'da kayıtlı."
+//   "katil bilgisi Phoenix olarak kayıtta var."
+//   "Phoenix seni B Exit'te yakaladı; katil Phoenix olarak kayıtta var."
+// Oyuncu "OCR/kayıt/sistem/veri" kelimelerini ASLA görmemeli — bunlar iç mutfak.
+//
+// TASARIM — CÜMLE-PARÇASI CERRAHİSİ, silme değil kurtarma:
+//   1) Ayraç (;:—) sonrası SAF-META yan-cümle komple atılır, bilgilendirici ana
+//      cümle korunur ("...yakaladı; katil Phoenix olarak kayıtta var." → "...yakaladı.").
+//   2) Öznesi olgu-referansı, yüklemi meta olan TÜM cümle atılır ("öldüğün yer
+//      OCR'da kayıtlı." → "") — bu cümle sınıfında koçluk bilgisi SIFIR.
+//   3) "X olarak kayıtta/kesin/tespit edildi" kuyrukları sökülür, olgu KALIR
+//      ("katil bilgisi Phoenix olarak kayıtta var." → "Katil Phoenix.").
+//   4) Çıplak "OCR" token'ı EN SON backstop olarak silinir (koç metninde meşru
+//      kullanımı YOKTUR — repo genelinde tek meşru bağlam iç loglar).
+// MEŞRU KORUMA: desenler DAR — yalnız "kayıtta/kayıtlı/kayıtlarda" ekli biçimler
+// ("kayıp/kayarak/kaydırma"ya DOKUNMAZ); "bilgi" çıplak hâliyle serbest (koçluk
+// dili: "bilgi almadan girme"), yalnız "katil bilgisi ... olarak" kalıbı hedef.
+// "tespit et-" emir kipi (meşru: "Drone'la tespit et") KORUNUR — yalnız edilgen
+// geçmiş "tespit edildi" (sistem sesi) hedef.
+// Türkçe-\b tuzağı: JS \b, ı/ç/ş... harflerinde kırılır → tüm sınırlar
+// (?<![a-zçğıöşü]) / (?![a-zçğıöşü]) (dosyadaki yerleşik konvansiyon, satır 27).
+// SAHTE ÇIKTI YOK: hiçbir metin üretilmez; yalnız meta parça silinir/sadeleşir.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Ayraç-sonrası meta yan-cümle: içinde sistem-içi işaret geçen ;/:/— parçası. */
+const TR_META_CLAUSE_RE = new RegExp(
+  String.raw`\s*[;:—]\s*[^.;:!?\n—]*(?<![a-zçğıöşü])(?:ocr|kayıt(?:ta|lı|larda)|kayda\s+geçti|sistemde|tespit\s+edildi|veri(?:de|lerde)|telemetri)[^.;:!?\n—]*`,
+  "giu",
+);
+/** Saf-meta cümle: öznesi ölüm-yeri/konum, yüklemi kayıt/OCR — bilgi değeri sıfır. */
+const TR_META_SENTENCE_RE =
+  /(^|[.!?]\s+)(?:öl(?:üm|düğün)\s+yer|ölüm\s+konum|konum)[a-zçğıöşü]*['’]?[a-zçğıöşü]*[^.!?\n]*(?:ocr|kayıt|sistemde|veride|tespit)[^.!?\n]*[.!?]?/giu;
+/** "X olarak <meta>" kuyruğu — olgu (X) korunur, meta kuyruk düşer. */
+const TR_OLARAK_META_RE =
+  /\s+olarak\s+(?:kayıt(?:ta|larda)(?:\s+var)?|kayıtlı|kayda geçti|sistemde(?:\s+(?:var|görünüyor|kayıtlı|mevcut))?|ocr['’]?d[ae]n?(?:\s+(?:kesin|kayıtlı|var|doğrulandı))?|tespit edildi|kesin(?:leşti)?|var|net)(?![a-zçğıöşü])/giu;
+/** "OCR'da kesin/kayıtlı/..." zarf öbeği (olarak'sız biçim — F1 fixture'ı). */
+const TR_OCR_ADVERB_RE =
+  /\s*,?\s*ocr['’]?(?:d[ae]n?)?\s+(?:kesin(?:dir)?|kayıtlı|kayıtta|doğrulandı|net|görünüyor|okundu|geldi|var)(?![a-zçğıöşü])/giu;
+/** "katil(in) bilgisi X" → "katil X" (F3: bilgi-sarmalayıcı söküm; çıplak "bilgi" SERBEST). */
+const TR_KATIL_BILGISI_RE = /(?<![a-zçğıöşü])katil(?:in)?\s+bilgisi\s+/giu;
+/** "verilere/kayıtlara/sisteme göre" cümle-başı önekleri — komple düşer. */
+const TR_GORE_PREFIX_RE = /(?<![a-zçğıöşü])(?:veri(?:ye|lere)|kayıtlara|sisteme|ocr['’]?[ae])\s+göre\s*/giu;
+/** "-dığı tespit edildi" → "-dığı net" (dilbilgisi korunur: ortaç özneyi taşır). */
+const TR_TESPIT_PARTICIPLE_RE =
+  /([\p{L}'’]*(?:dığı|diği|duğu|düğü|tığı|tiği|tuğu|tüğü)(?:n|nız|niz|nuz|nüz)?)\s+tespit edildi(?![a-zçğıöşü])/giu;
+/** Kalan "X tespit edildi" → "X var" (sistem sesi → düz saptama; emir "tespit et" KORUNUR). */
+const TR_TESPIT_FALLBACK_RE = /\s+tespit edildi(?![a-zçğıöşü])/giu;
+/** Kalan "kayıtta/sistemde/veride var|görünüyor|..." öbeği — silinir. */
+const TR_LEFTOVER_META_RE =
+  /(?<![a-zçğıöşü])(?:kayıtta|kayıtlarda|sistemde|veride|verilerde)\s+(?:var|kayıtlı|görünüyor|mevcut|net|kesin)(?![a-zçğıöşü])/giu;
+/** EN SON backstop: çıplak "OCR" token'ı (opsiyonel apostrof-ekiyle) — koç metninde asla meşru değil. */
+const TR_OCR_BARE_RE = /(?<![\p{L}\p{N}])ocr(?:['’][a-zçğıöşü]{1,6})?(?![\p{L}\p{N}])/giu;
+
+/**
+ * Sistem-içi meta-dili (OCR/kayıt/sistemde/tespit edildi/veride...) koç
+ * metninden cerrahi olarak ayıklar (canli-test #10 kalite dalgasi, 2026-08-05).
+ * Bilgilendirici kısım KORUNUR; metin tümüyle meta ise "" döner — dizi
+ * alanlarında (enemyAnalysis) çağıran taraf boş elemanı atmalıdır.
+ * DEĞİŞİKLİK OLMADIYSA metin bayt-aynı döner (meşru cümleye dokunulmaz).
+ * cleanCoachText'in TR dalının İLK halkası → cleanCoachText kullanan TÜM
+ * route'lar (vision/report/feedback/insight/ask) otomatik kapsanır.
+ */
+export function stripMetaTerms(text: string): string {
+  if (!text) return text;
+  let t = text;
+  // SIRA ÖNEMLİ: önce yan-cümle/cümle cerrahisi (bağlam bütünken), sonra
+  // öbek-söküm, en sonda çıplak-OCR backstop'u. Ters sıra F4'te ayracı
+  // marker'sız bırakıp gereksiz "katil Phoenix" kuyruğu üretiyordu.
+  t = t.replace(TR_META_CLAUSE_RE, "");
+  t = t.replace(TR_META_SENTENCE_RE, "$1");
+  t = t.replace(TR_OLARAK_META_RE, "");
+  t = t.replace(TR_OCR_ADVERB_RE, "");
+  t = t.replace(TR_KATIL_BILGISI_RE, "katil ");
+  t = t.replace(TR_GORE_PREFIX_RE, "");
+  t = t.replace(TR_TESPIT_PARTICIPLE_RE, "$1 net");
+  t = t.replace(TR_TESPIT_FALLBACK_RE, " var");
+  t = t.replace(TR_LEFTOVER_META_RE, "");
+  t = t.replace(TR_OCR_BARE_RE, "");
+  if (t !== text) {
+    // Söküm artıkları: sarkan virgül/ayraç, çift boşluk, öksüz noktalama.
+    t = t.replace(/\s*,\s*(?=[.!?;])/g, "");
+    t = t.replace(/\s*;\s*(?=[.!?])/g, "");
+    t = t.replace(/(^|[.!?]\s+)[,;:]\s*/g, "$1");
+    t = t.replace(/\s+([.,;!?])/g, "$1");
+    t = t.replace(/\.{2,}/g, ".");
+    t = t.replace(/\s{2,}/g, " ").trim();
+    // Yalnız noktalama kaldıysa eleman tümüyle meta idi → boş dön (çağıran atar).
+    if (/^[\s.,;:!?—-]*$/.test(t)) return "";
+    // Söküm cümle başını açıkta bırakabilir → TR-duyarlı yeniden büyütme
+    // (toLocaleUpperCase("tr"): i→İ doğru; stripEnHedges'teki desenin TR eşi).
+    t = t.replace(/(^|[.!?]\s+)([a-zçğıöşü])/g, (_m, p: string, c: string) => p + c.toLocaleUpperCase("tr"));
+  }
+  return t;
+}
+
+/**
+ * META-TERİM DEDEKTÖRÜ — ölçüm tarafının kaynağı (canli-test #10, 2026-08-05).
+ * stripMetaTerms'ün CERRAHİ desenlerinden BİLEREK daha GENİŞ: süzgecin kaçırdığı
+ * her varyantı ölçüm yakalasın diye çıplak işaretleyici bazlı tarar (bu gece
+ * ölçüm korpusu bu sınıfı hiç yakalamamıştı — scripts/eval-score.ts buradan
+ * import eder, kopya liste tutulmaz). Temiz koç metninde 0 dönmesi beklenir.
+ */
+export function findMetaTermHits(text: string): string[] {
+  if (!text) return [];
+  const hits: string[] = [];
+  const detectors: RegExp[] = [
+    /(?<![\p{L}\p{N}])ocr(?![\p{L}\p{N}])/giu,
+    /(?<![a-zçğıöşü])kayıt(?:ta|lı|larda|lara göre)(?![a-zçğıöşü])/giu,
+    /(?<![a-zçğıöşü])kayda geçti(?![a-zçğıöşü])/giu,
+    /(?<![a-zçğıöşü])sistem(?:de|e göre)(?![a-zçğıöşü])/giu,
+    /(?<![a-zçğıöşü])tespit edildi(?![a-zçğıöşü])/giu,
+    /(?<![a-zçğıöşü])veri(?:de|lerde|ye göre|lere göre)(?![a-zçğıöşü])/giu,
+    /(?<![a-zçğıöşü])telemetri[a-zçğıöşü]*/giu,
+    /(?<![a-zçğıöşü])bilgisi\s+[\p{L}'’-]+\s+olarak\s+(?:var|kayıtlı|kesin|geçiyor)(?![a-zçğıöşü])/giu,
+  ];
+  for (const re of detectors) {
+    let m: RegExpExecArray | null;
+    while ((m = re.exec(text))) hits.push(m[0]);
+  }
+  return hits;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// VERİLEN-CALLOUT KORUYUCU (S5, canli-test #10 kalite dalgasi, 2026-08-05)
+//
+// SORUN (log-kanıtlı, düşük): model verilen callout'u AYNI cevapta bozabiliyor —
+// deathLocation="a lamps" verildi; cevapta önce "A Lamps'ta" doğru, sonra aynı
+// cümlede "Lambs gibi" bozuk çıktı. Bu, OCR gerçeğinin sessizce çarpıtılmasıdır
+// (OCR-only sözleşmesi ihlali).
+// KAPSAM BİLEREK ÇOK DAR (yanlış-pozitif = yeni regresyon):
+//   - yalnız TEK KELİMELİK, BAŞ HARFİ BÜYÜK token'lar (koç metninde callout'lar
+//     Title-Case; küçük harfli meşru sözcükler — "lamba" — böylece korunur);
+//   - edit-mesafesi 1-2 + aynı baş harf + token ≥4 harf;
+//   - ajan/silah/harita adları DOKUNULMAZ (yakın-mesafe tuzağı: "Ares"↔"apps"
+//     d=2, "Haven"↔"heaven" d=1 — korumasız versiyonda gerçek ad bozulurdu);
+//   - callout'un bitişik-ekli hâli ("Sitede" = site+de) startsWith ile atlanır.
+// Route bağlantısı ana oturumda (vision route supplied değeri verir); burada
+// yalnız saf fonksiyon export edilir.
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Harita adları — CLEAN_AGENT_NAMES/CLEAN_WEAPON_NAMES ile aynı koruma disiplini.
+// map-callouts.ts'ten import EDİLMEDİ: bu dosya app/page.tsx ("use client")
+// tarafından da bağlanıyor; callout tablosunu landing bundle'ına sokma riski
+// (dosya başındaki reality-checker gerekçesinin aynısı). 12 sabit isim yeterli.
+const PROTECTED_MAP_NAMES = [
+  "ascent", "bind", "haven", "split", "icebox", "breeze",
+  "fracture", "pearl", "lotus", "sunset", "abyss", "corrode",
+];
+
+/** Sınırlı Levenshtein — |len farkı| > max ise erken çık (max+1 döner). */
+function editDistance(a: string, b: string, max = 2): number {
+  if (Math.abs(a.length - b.length) > max) return max + 1;
+  const dp = Array.from({ length: a.length + 1 }, (_, i) => i);
+  for (let j = 1; j <= b.length; j++) {
+    let prev = dp[0];
+    dp[0] = j;
+    for (let i = 1; i <= a.length; i++) {
+      const tmp = dp[i];
+      dp[i] = Math.min(dp[i] + 1, dp[i - 1] + 1, prev + (a[i - 1] === b[j - 1] ? 0 : 1));
+      prev = tmp;
+    }
+  }
+  return dp[a.length];
+}
+
+/**
+ * Cevap metnindeki, VERİLEN callout'a çok yakın bozuk varyantları ("Lambs")
+ * orijinal görünümle ("Lamps") değiştirir. supplied = OCR'dan gelen ham
+ * deathLocation (ör. "a lamps"); yoksa/boşsa metin bayt-aynı döner.
+ * Yalnız düzeltir, asla metin üretmez; başka kelimeye DOKUNMAZ.
+ */
+export function enforceSuppliedCallout(text: string, supplied: string | null | undefined): string {
+  if (!text || !supplied) return text;
+  const lowerTr = (s: string) => s.toLocaleLowerCase("tr");
+  // "a lamps" → ["lamps"]: tek harfli site önekleri (a/b/c) ve kısa token'lar
+  // (<4 harf) atlanır — kısa kelimede d≤2 neredeyse her şeyi eşler (tuzak).
+  const words = supplied.trim().split(/\s+/)
+    .map((w) => w.replace(/[^\p{L}\p{N}]/gu, ""))
+    .filter((w) => w.length >= 4);
+  if (!words.length) return text;
+  const protectedNames = new Set(
+    [...CLEAN_AGENT_NAMES, ...CLEAN_WEAPON_NAMES, ...PROTECTED_MAP_NAMES].map(lowerTr),
+  );
+  return text.replace(/[A-ZÇĞİÖŞÜ][A-Za-zÇĞİÖŞÜçğıöşü]+/g, (tok) => {
+    if (tok.length < 4) return tok;
+    const lt = lowerTr(tok);
+    if (protectedNames.has(lt)) return tok;                // ajan/silah/harita adı — asla
+    for (const w of words) {
+      const lw = lowerTr(w);
+      if (lt === lw) return tok;                           // zaten doğru — dokunma
+      if (lt[0] !== lw[0]) continue;                       // aynı baş harf şartı
+      if (lt.startsWith(lw)) continue;                     // callout+bitişik ek ("Sitede") — dokunma
+      const d = editDistance(lt, lw);
+      if (d >= 1 && d <= 2) {
+        // Orijinal görünüm: supplied kelime Title-Case'e çekilir (token zaten
+        // büyük harfle başlıyordu — regex bunu garanti eder).
+        return w[0].toLocaleUpperCase("tr") + w.slice(1);
+      }
+    }
+    return tok;
+  });
+}
+
 /**
  * Türkçe lokatif ek seçici (beta cilası 2026-07-09): "X'da/de/ta/te" eklerini
  * sabit kodlamak ünlü uyumunu bozuyordu ("Ascent'da" ✗ → "Ascent'te" ✓).
@@ -617,6 +826,13 @@ export function cleanCoachText(text: string, lang: "tr" | "en"): string {
     t = t.replace(new RegExp("\\b" + w + "\\b", "gi"), w);
   }
   if (lang === "tr") {
+    // ── META-DİL SÜZGECİ (canli-test #10 kalite dalgasi, 2026-08-05) ───────
+    // TR_JARGON'dan ÖNCE koşar: işaretleyiciler ("OCR'da", "telemetri...")
+    // henüz bozulmamışken cerrahi yapılmalı — TR_JARGON'un telemetr→bilgi
+    // dönüşümü marker'ı yok edip yan-cümle cerrahisini kör bırakırdı.
+    // cleanCoachText merkezi katman olduğu için vision/report/feedback/
+    // insight/ask çıktı yolları otomatik kapsanır (S1 kök kapama).
+    t = stripMetaTerms(t);
     for (const [re, rep] of TR_JARGON) t = t.replace(re, rep);
     // 2. çoğul → 2. tekil (B25, 2026-07-31): TR_JARGON'dan SONRA — jargon
     // dönüşümleri de çoğul çekim üretebiliyor ("swing yapın" → "swing atın").

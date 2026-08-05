@@ -104,6 +104,24 @@ export const BANNED_PHRASES = [
   "it seems",
   "it looks like",
   "might have been",
+  // ── META/KAYNAK DİLİ (canlı-test #10 kalite dalgası, 2026-08-05 — S1):
+  // NEDEN: canlı spike-rush testinde model olgu-listesinin KAYNAK dilini çıktıya
+  // taşıdı ("katil olarak OCR'da kayıtlı" sınıfı). Kalıplar BİLEREK DAR: bu liste
+  // dil-agnostik + alt-dizgi taranır (dosyanın kendi uyarısı) ve verify-kb [7]
+  // runtime KB dosyalarını da tarar — "tespit"/"sistemde"/"veri" TEK kelime olarak
+  // KB'de meşru geçiyor (cypher_vs_sova.md "teli tespit eder", universal.md:219
+  // "bu sistemde YOK"), o yüzden tek-kelime formlar liste DIŞI. Çıplak "ocr" da
+  // yok: EN "mediocre" alt-dizgisi yanlış-pozitif üretirdi. Asıl kaynak-kapatma
+  // aşağıdaki META_SOURCE_BAN_RULE'da; deterministik çıkış süzgeci coach-text'te
+  // (A1 paketi) — iki katman bilinçli.
+  "ocr'da",
+  "ocr’da",
+  "kayıtta var",
+  "olarak kayıtlı",
+  "verilere göre",
+  // EN aynası — TR çıktıda asla geçmez, EN çıktıda meta-dil her zaman yanlış.
+  "recorded as",
+  "according to the data",
 ] as const;
 
 // ═══════════════════════════════════════════════════════════
@@ -213,6 +231,22 @@ export const TIME_BAN_RULE = `\nZAMAN YASAĞI: Saniye/timer tabanlı tavsiye YAS
 export const HP_BAN_RULE = `\nCAN/HP İDDİASI TOTAL YASAK: Feedback metnine oyuncunun CAN durumu hakkında HİÇBİR iddia yazma — ne sayısal ("41 HP", "(100 HP)", "30 canla", "HP 41") ne nitel ("düşük canla", "az canla", "canın azken", "tam canla", "full canla" / "at low HP", "at full HP", "low health"). Ölüm anındaki HP okuması çatışma öncesini kanıtlayamaz; her can iddiası uydurma sayılır ve silinir. Can durumundan HİÇ bahsetme — dersi pozisyon, zamanlama, util ve karar üzerinden ver.`;
 
 // ═══════════════════════════════════════════════════════════
+// META/KAYNAK DİLİ YASAĞI — veri kaynağından bahsetmek yasak
+// (canlı-test #10 kalite dalgası, 2026-08-05 — S1-prompt)
+// NEDEN: canlı spike-rush testinde model olgu-listesinin KAYNAK dilini çıktıya
+// taşıdı ("katil olarak OCR'da kayıtlı" sınıfı) — oyuncu bir koçla konuşuyor,
+// telemetri raporu okumuyor. Bu kural KAYNAĞI kapatır (model hiç üretmesin);
+// deterministik çıkış süzgeci (lib/coach-text, A1 paketi) ikinci katmandır —
+// iki katman BİLİNÇLİ ("üret-sonra-sil" değil: üretme + yine de süz).
+// "killfeed'i oku" gibi OYUN-İÇİ ekran öğüdü serbest — yasak olan, backend'in
+// kendi veri borusunu (OCR/kayıt/sistem/tespit/veri) kaynak olarak anmak.
+// ═══════════════════════════════════════════════════════════
+
+export const META_SOURCE_BAN_RULE = `\nVERİ-KAYNAĞI DİLİ YASAK (meta-dil): Feedback metninde veri kaynaklarından ASLA bahsetme — "OCR", "kayıt/kayıtta/kayıtlı", "sistem", "tespit edildi", "veriye/verilere göre" gibi kaynak-atıflı hiçbir ifade yazma. Olguyu DOĞRUDAN söyle: "Phoenix seni B Exit'te öldürdü." DE; "katil olarak kayıtta var" / "OCR'da görünüyor" DEME. (Oyuncuya oyun-içi ekranı öğütlemek — "killfeed'i oku" — serbest; yasak olan kendi verini kaynak diye anman.)`;
+
+export const META_SOURCE_BAN_RULE_EN = `\nDATA-SOURCE LANGUAGE BANNED (meta-language): Never mention your data sources in the feedback — no "OCR", "recorded", "the system", "detected", "according to the data", "the logs". State the fact DIRECTLY: say "Phoenix killed you at B Exit." — never "the killer is recorded as Phoenix". (Telling the player to read the in-game killfeed as advice is fine; referring to your own data pipeline is not.)`;
+
+// ═══════════════════════════════════════════════════════════
 // KATI İNGİLİZCE WHITELIST — TR çıktıda whitelist-dışı İngilizce yasak
 // ═══════════════════════════════════════════════════════════
 
@@ -304,7 +338,8 @@ export const ENEMY_ANALYSIS_GATE_VISION = `\nDÜŞMAN ANALİZİ (VISION):
 - Madde 1 = SADECE OCR/görselde olan düşman gerçeği (killerInfo ajan+silah, görünen pozisyon). Kanıt yoksa "düşman okuyor" diye UYDURMA — eldeki killer/pozisyon gerçeğine bağla.
 - Madde 2 = oyuncuya PRATİK counter (eylem) — iddia değil tavsiye, callout+util içermeli. ASLA "yeterli veri yok" / "düşman iyi oynadı" yazma.
 - HER İKİ MADDE de TEK kısa cümle (Cycle 3): noktalı virgül (;) ile iki ayrı emir BİRLEŞTİRME, en önemli tek şeyi söyle. Başına "Counter:"/"Karşılık:" gibi ETİKET koyma — direkt söyle.
-- O ajanın GERÇEK yeteneğini kullan (Cycle 3): bir ajana olmayan yeteneği atfetme (ör. Clove'da tel/duvar YOK). Emin değilsen yeteneği adlandırma, düz "util" de.`;
+- O ajanın GERÇEK yeteneğini kullan (Cycle 3): bir ajana olmayan yeteneği atfetme (ör. Clove'da tel/duvar YOK). Emin değilsen yeteneği adlandırma, düz "util" de.
+- ANTİ-TEKRAR (canlı-test #10 kalite dalgası, 2026-08-05): Madde 1, deathAnalysis'in cümlesinin KOPYASI DEĞİLDİR — aynı olguyu ikinci kez yazma (canlı kanıt: enemyAnalysis[0] çoğu round deathAnalysis'in tekrarıydı → ölü bilgi). Eldeki kanıtta (killerInfo, geçmiş round satırları, pattern) düşmanın TEKRARLAYAN davranışı varsa ONU söyle (nereden oynuyor, neyi tekrarlıyor); yoksa aynı ölümün deathAnalysis'te KULLANMADIĞIN yönünü söyle (silah, açı, mesafe, zamanlama). Davranış kalıbı da UYDURULMAZ — yalnız verilen olgu/geçmişten (B35 dersi geçerli).`;
 
 // ═══════════════════════════════════════════════════════════
 // PERSONALIZATION — unified for round + match context
@@ -366,12 +401,13 @@ export const OUTPUT_FOCUS_RULE_VISION = `\nODAK KURALI:
 - KAVRAM-ÇEŞİTLİLİĞİ (Cycle 5 — canlı-test "aynı maçta 5 round 5 kez açıkta/utility'siz"): "açıkta kaldın", "utility'siz girdin/durdun", "açık alanda yakalandın" KAVRAMI her ölümün VARSAYILAN cevabı DEĞİL. Bu kavramı SADECE ölüm gerçekten util-yokluğu / açık-pozisyon ölümüyse (ÖLÜM-TİPİ direktifi: info-less-push veya entry-no-trade) kullan. Diğer tiplerde (op-açısı, ekonomi, tekrar-okunma, avantaj-yakma, crosshair, zamanlama, post-plant, retake, clutch, lurk) o tipin KENDİ dersini ver — eşanlamlısını DEĞİL, FARKLI kavramı. Aynı dersi farklı kelimelerle söylemek de tekrardır; farklı ölüm = farklı FİKİR.
 - 🔴 ALAN AYRIMI — ÜÇ ALAN AYNI ŞEYİ SÖYLEYEMEZ (dil-denetimi 2026-07-25; 20 canlı çıktının 20'sinde enemyAnalysis'in 2. maddesi nextRoundSuggestion'ın TEKRARIYDI — oyuncunun "çok genel/çok kısa" hissinin ASIL kaynağı bu). Her alan FARKLI bir kaldıraç taşır:
   · deathAnalysis     = NE OLDU + NEDEN öldün (bu round'un olayı).
-  · enemyAnalysis[0]  = düşmanın DAVRANIŞ KALIBI — gözlem cümlesi. EMİR KİPİ YASAK ("kur/at/gir/bekle" YAZMA).
+  · enemyAnalysis[0]  = düşmanın DAVRANIŞ KALIBI — gözlem cümlesi. EMİR KİPİ YASAK ("kur/at/gir/bekle" YAZMA). deathAnalysis'in KOPYASI DA YASAK — ölüm cümlesini burada ikinci kez yazma (canlı-test #10 kalite dalgası, 2026-08-05: enemyAnalysis[0] çoğu round deathAnalysis'in tekrarıydı → ölü bilgi).
   · enemyAnalysis[1]  = o kalıba karşı TEK somut karşı-hamle — ama nextRoundSuggestion'dan FARKLI bir kaldıraç olmalı (biri util/açı ise diğeri tempo/eşlik/rotasyon).
   · nextRoundSuggestion = TEK emir, TEK plan.
   Aynı öğüdü iki alanda tekrar etmek = RED BAYRAĞI. Tekrar edeceksen o alanı BAŞKA bir açıdan doldur.
 - 🔴 TEK KİŞİ — 2. TEKİL: Metnin TAMAMI "sen" hitabıyla. Aynı cümlede sen→siz kayması YASAK ("temizleyin", "girin", "kurun", "edin", "alabilelim" YAZMA). Takımdan söz edeceksen: "takımına söyle, X yapsın" / "yanına birini çek".
 - 🔴 KENDİ KİTİ: Oyuncunun KENDİ yeteneğini takımdan İSTEME. Smoke'u olan (Omen/Brimstone/Astra/Harbor/Viper/Clove) takımdan smoke istemez; flash'ı olan (Phoenix/Breach/Skye/KAY/O/Yoru/Reyna) takımdan flash istemez; Sage duvarını kendi diker; Cypher/Killjoy kendi kurulumunu kendi yapar. BAŞKA ajanın adını verip onun yeteneğini önerme ("Skye smoke'u" gibi — Skye'da smoke YOK). Ajan-kit bilgisi user mesajındaki [AJAN KİTİ] satırındadır; ORADA YAZMAYAN yeteneği o ajana ATFETME.
+- 🔴 KİT KULLANDIR (canlı-test #10 kalite dalgası, 2026-08-05): NEDEN — canlı testte 5 feedback'te yalnız 2 generik util cümlesi vardı, oyuncunun kiti (Raze) hiç konuşulmadı. Oyuncunun ajanı biliniyorsa nextRoundSuggestion, [AJAN KİTİ] satırındaki yeteneklerden EN AZ BİRİNİN somut kullanımını içersin — sade adıyla (smoke/flash/molly/dash/duvar/bot...) ve amacıyla (giriş açma / alan kesme / bilgi alma / geri çekilişi kapatma). Duelist oynuyorsa girişi KENDİ yeteneğine bağla: "dash'le atılarak gir", "patlayıcıyla sekip siteye düş", "flash'la açıp gir" sınıfı somut entry önerisi. Ajan bilinmiyorsa ([AJAN OKUNAMADI] direktifi) bu kural devre dışı — yetenek atfetme.
 - 🔴 TEK PLAN: nextRoundSuggestion'da "veya / ya da" ile İKİ ZIT plan sunma ("ya boş bırak ya gir" YASAK). Koç seçenek listesi vermez, TEK emir verir.
 - 🔴 TANIK KİPİ: Maçı İZLEDİN — "-miş/-mış" rivayet kipi YASAK ("yerleştirmiş" değil "yerleştirdi"). Aynı cümlede zaman karıştırma YASAK ("tuttu ... koruyor").
 - 🔴 EKONOMİ TUTARLILIĞI: eco/pistol round'da oyuncunun tüfeği YOKTUR — "tüfeğini koru" deme. Elindeki silahla tutarlı konuş.
@@ -479,6 +515,11 @@ export function buildPolicyBlock(options: {
   parts.push(PERSONALIZATION_RULE);
   parts.push(TIME_BAN_RULE);
   parts.push(HP_BAN_RULE);
+  // META/KAYNAK dili yasağı (canlı-test #10 kalite dalgası, 2026-08-05 — S1):
+  // TÜM AI route'ları için statik bloğa KALICI ekleme. Deploy'la BİR KEZ değişir,
+  // sonra istekten-isteğe yine bayt-aynı → B42 prompt-cache kısıtı korunur
+  // (lang'a bağlı seçim TON/VERİ SEVİYESİ emsaliyle aynı sınıf).
+  parts.push(options.lang === "en" ? META_SOURCE_BAN_RULE_EN : META_SOURCE_BAN_RULE);
   if (options.lang === "en") {
     parts.push(NATURAL_COACH_RULE_EN);
     parts.push(SILVER_AUDIENCE_RULE_EN);

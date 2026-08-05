@@ -23,6 +23,13 @@ import { scoreFields } from "../evals/generic-detector";
 // TR-sızıntı detektörü EKLEMELİ bağlandı. Yalnız lang==="en" örneklerde koşar;
 // TR örneklerde enLeak=[] olduğundan violations/rapor BAYT-AYNI kalır.
 import { detectEnLeak } from "../evals/en-leak-detector";
+// META-TERİM ihlal sınıfı (canli-test #10 kalite dalgasi, 2026-08-05): model
+// sistem-içi meta-dili ("OCR'da kesin", "kayıtta var") kullanıcı metnine taşıdı
+// ve BU GECEKİ ÖLÇÜM KORPUSU BUNU YAKALAMADI — ölçüm kör noktasıydı. Dedektör
+// canlı süzgecin dosyasından (lib/coach-text.ts) import edilir; kopya liste yok,
+// süzgeç deseni genişleyince ölçüm de otomatik genişler. Dedektör süzgeçten
+// BİLEREK geniştir: cerrahinin kaçırdığı varyantı ölçüm yine yakalar.
+import { findMetaTermHits } from "../lib/coach-text";
 
 type Sample = {
   id: string;
@@ -220,6 +227,9 @@ type Row = {
   tactical: string[];
   detector: number; // generic-detector ortalama alan skoru (0-100)
   detectorWeak: string | null;
+  // META-TERİM (canli-test #10, 2026-08-05): sistem-içi dil sızıntısı
+  // ("OCR", "kayıtta var", "tespit edildi"...) — kaynak lib/coach-text.ts.
+  meta: string[];
   violations: number;
   promptBytes: number;
   // B60 (2026-08-04): örneğin dili + EN'de yakalanan TR-sızıntı ihlalleri.
@@ -242,6 +252,9 @@ function scoreSample(s: Sample): Row {
   // yüzden dil burada BİR KEZ türetilip iki yerde de kullanılıyor.
   const sampleLang: "tr" | "en" = s.lang === "en" ? "en" : "tr";
   const codename = codenameHits(text, sampleLang);
+  // META-TERİM (canli-test #10, 2026-08-05): dil-bağımsız ölçülür — "OCR" gibi
+  // sistem-içi kelimeler EN çıktıda da aynı derecede yasak (koç sesi kuralı).
+  const meta = findMetaTermHits(text);
 
   // B60 (pano özellik dalgası, 2026-08-04): TR-sızıntı YALNIZ EN örneklerde
   // ölçülür (dil-bağımsız değil — TR metin doğal olarak "kirli" görünürdü).
@@ -291,8 +304,12 @@ function scoreSample(s: Sample): Row {
     tactical: tacticalHits(text),
     detector,
     detectorWeak,
+    meta,
     // B60 (2026-08-04): + enLeak.length EKLEMELİ — TR örnekte enLeak=[] → toplam değişmez.
-    violations: banned.length + time.length + hp.length + codename.length + enLeak.length,
+    // canli-test #10 (2026-08-05): + meta.length — meta-dil artık ihlal sayılır
+    // (bu geceki sızıntı sınıfı ölçüme bağlandı; eski korpuslarda varsa GÖRÜNÜR
+    // olması bilinçli — kör noktayı kapatmak tam olarak bu).
+    violations: banned.length + time.length + hp.length + codename.length + enLeak.length + meta.length,
     promptBytes: s.systemPromptBytes || 0,
     lang,
     enLeak,
@@ -307,6 +324,8 @@ type Agg = {
   time: number;
   hp: number;
   codename: number;
+  // canli-test #10 (2026-08-05): meta-dil ihlal toplamı (OCR/kayıt/sistemde...).
+  meta: number;
   avgWords: number;
   avgDeathWords: number;
   calloutCoverage: number; // callout içeren örnek oranı (%)
@@ -330,6 +349,7 @@ function aggregate(rows: Row[]): Agg {
     time: sum((r) => r.time.length),
     hp: sum((r) => r.hp.length),
     codename: sum((r) => r.codename.length),
+    meta: sum((r) => r.meta.length),
     avgWords: sum((r) => r.words) / n,
     avgDeathWords: sum((r) => r.deathWords) / n,
     calloutCoverage: (rows.filter((r) => r.callouts.length > 0).length / n) * 100,
@@ -353,6 +373,9 @@ function printSingle(cycle: string, rows: Row[]) {
   console.log(`    zaman-tabanlı      : ${a.time}`);
   console.log(`    HP iddiası         : ${a.hp}`);
   console.log(`    kod-ad (yetenek)   : ${a.codename}`);
+  // canli-test #10 (2026-08-05): meta-dil sınıfı — HEP basılır (bu geceki kör
+  // noktanın kendisi: sınıf raporda görünmüyordu, sızıntı da görünmez kaldı).
+  console.log(`    meta-dil (OCR/kayıt): ${a.meta}`);
   // B60 (2026-08-04): satır YALNIZ korpusta EN örnek varken basılır —
   // TR-only koşuların konsol çıktısı bayt-aynı kalır (TR akışına dokunma kuralı).
   if (rows.some((r) => r.lang === "en")) {
@@ -376,6 +399,7 @@ function printSingle(cycle: string, rows: Row[]) {
       if (r.time.length) parts.push(`zaman:[${r.time.join(", ")}]`);
       if (r.hp.length) parts.push(`HP:[${r.hp.join(", ")}]`);
       if (r.codename.length) parts.push(`kod-ad:[${r.codename.join(", ")}]`);
+      if (r.meta.length) parts.push(`meta:[${r.meta.join(", ")}]`);
       // B60 (2026-08-04): TR örnekte enLeak hep boş → TR çıktısı değişmez.
       if (r.enLeak.length) parts.push(`EN-sızıntı:[${r.enLeak.join(", ")}]`);
       console.log(`  ❌ ${r.id} → ${parts.join(" ")}`);
@@ -411,6 +435,7 @@ function printAB(cA: string, rowsA: Row[], cB: string, rowsB: Row[]) {
   line("  zaman-tabanlı", A.time, B.time, false);
   line("  HP iddiası", A.hp, B.hp, false);
   line("  kod-ad", A.codename, B.codename, false);
+  line("  meta-dil", A.meta, B.meta, false); // canli-test #10 (2026-08-05)
   // B60 (2026-08-04): yalnız iki koşudan birinde EN örnek varsa basılır —
   // eski TR-only A/B kanıt çıktıları bayt-aynı kalır.
   if (rowsA.some((r) => r.lang === "en") || rowsB.some((r) => r.lang === "en")) {
