@@ -517,6 +517,15 @@ export async function verifyAuthAndRateLimit(
             ? "Daily quota exceeded"
             : "Too many requests. Please wait a moment.",
           retryAfter: rateResult.retryAfter,
+          // detail.kind (P9, 2026-08-05): desktop 429'u "günlük kota mı, kısa
+          // pencere mi" diye bununla ayırıyor (ai_client.rs classify_http_error
+          // ÖNCE detail.kind okur). Bu alan yokken yedek yol `message` alanına
+          // bakıyordu ama metnimiz `error` alanında — yani günlük kota PerIp
+          // sanılıp kullanıcıya "3600 sn sonra tekrar dene" deniyordu; doğru
+          // mesaj ("Günlük Limit Doldu") desktop'ta yazılı olduğu hâlde o dala
+          // hiç girilmiyordu. EKLEMELİ: eski sürümlerde detail Option<Value>,
+          // alan yok sayılır; davranış/limit DEĞİŞMEZ, yalnız sınıflama düzelir.
+          ...(isService ? {} : { detail: { kind: isDailyQuota ? "daily" : "ip" } }),
         },
         {
           status: isService ? 503 : 429,
