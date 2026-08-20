@@ -2129,25 +2129,38 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="12" y1="3" x2="12" y2="15"/><polyline points="7 10 12 15 17 10"/><line x1="5" y1="21" x2="19" y2="21"/></svg>
           </a>
           <p className="mt-5 text-[11px] text-neutral-700">Windows 10+ · ~12MB · .msi</p>
-          {/* B3 (2026-07-31): SmartScreen rehberi. MSI henüz Authenticode imzalı
-              değil (SSL.com sertifikası bekleniyor) → her yeni kullanıcı
-              "Windows PC'nizi korudu" ekranını görüyor. Buradaki uyarı tek satır,
-              11px gri bir dipnottu; duyuru trafiğinde ilk-kurulum dönüşümünü
-              kaybetmemek için adım adım ve görünür hale getirildi. */}
+          {/* B3 güncellemesi (2026-08-20): MSI artık Authenticode-İMZALI
+              (SSL.com IV+OV, CN=Günay Erdem, v1.0.14'ten itibaren) — eski
+              "sertifika bekleniyor" metni GERÇEĞE AYKIRI hâle geldi. Yeni
+              gerçek iki katmanlı: (1) UAC artık "Doğrulanmış yayıncı: Günay
+              Erdem" gösterir — güven mesajı olarak öne çıkarıldı; (2) SmartScreen
+              İTİBARI indirme sayısıyla oturur → uyarı ilk haftalarda hâlâ
+              çıkabilir + tarayıcı "yaygın indirilmiyor" engeli (taşınabilirlik
+              denetimi P4) da eklendi — rehber her iki kapıyı da kapsıyor. */}
           <div className="mx-auto mt-6 max-w-md rounded-xl border border-white/[0.07] bg-white/[0.02] px-4 py-3.5 text-left">
             <p className="text-[12px] font-semibold text-neutral-300">
               {lang === "tr"
-                ? "Kurulumda Windows uyarısı çıkarsa (normaldir)"
-                : "If Windows shows a warning (this is normal)"}
+                ? "Kurulum imzalı ve doğrulanmış ✓"
+                : "Installer is signed and verified ✓"}
+            </p>
+            <p className="mt-1.5 text-[11px] text-neutral-500 leading-relaxed">
+              {lang === "tr"
+                ? 'Kurulumda "Doğrulanmış yayıncı: Günay Erdem" görürsün — dosya SSL.com sertifikasıyla imzalıdır ve her zaman aimlo.gg üzerinden dağıtılır.'
+                : 'During install you’ll see "Verified publisher: Günay Erdem" — the file is signed with an SSL.com certificate and always served from aimlo.gg.'}
+            </p>
+            <p className="mt-2.5 text-[12px] font-semibold text-neutral-300">
+              {lang === "tr"
+                ? "Yine de uyarı çıkarsa (yeni sürümlerde normaldir)"
+                : "If a warning still appears (normal for new releases)"}
             </p>
             <ol className="mt-2 space-y-1 text-[11px] text-neutral-500 leading-relaxed">
-              <li>{lang === "tr" ? '1. "Daha fazla bilgi"ye tıkla' : '1. Click "More info"'}</li>
-              <li>{lang === "tr" ? '2. "Yine de çalıştır"ı seç' : '2. Choose "Run anyway"'}</li>
+              <li>{lang === "tr" ? '1. Tarayıcı indirmeyi tutarsa: indirmeler listesinde ⋯ → "Sakla" / "Yine de tut"' : '1. If the browser holds the download: in the downloads list ⋯ → "Keep" / "Keep anyway"'}</li>
+              <li>{lang === "tr" ? '2. SmartScreen çıkarsa: "Daha fazla bilgi" → "Yine de çalıştır"' : '2. If SmartScreen appears: "More info" → "Run anyway"'}</li>
             </ol>
             <p className="mt-2.5 text-[11px] text-neutral-600 leading-relaxed">
               {lang === "tr"
-                ? "Bu ekran, kurulum dosyamızın imza sertifikası henüz tamamlanmadığı için çıkıyor — dosya her zaman aimlo.gg üzerinden dağıtılır ve uygulama güncellemeleri imzayla doğrulanır."
-                : "This screen appears because our installer's signing certificate is still in progress — the file is always served from aimlo.gg and app updates are signature-verified."}
+                ? "Windows, yeni imzalanmış dosyalara itibarı indirme sayısı arttıkça tanır — uyarılar kısa sürede kendiliğinden kaybolur."
+                : "Windows builds reputation for newly signed files as downloads grow — these prompts disappear on their own."}
             </p>
           </div>
         </div>
