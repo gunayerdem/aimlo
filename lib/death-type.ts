@@ -285,14 +285,24 @@ export function buildDeathTypeDirective(
     .filter((p) => p !== type)
     .map((p) => DEATH_TYPE_GUIDE[p]?.concept)   // optional: ignore unknown types the client may send
     .filter((c): c is string => !!c);
+  // (rank-4, 2026-08-24) TEKRAR DALI — A/B KANITLI düzeltme: prev listesi canlanınca
+  // (match-concepts fallback'i) salt diğer-kavram sayımı m3'ü DÜŞÜRMEDİ, YÜKSELTTİ
+  // (real-r4 0.818 / real-r4b 0.909 vs baseline 0.773) — kendi-tip muafiyeti +
+  // "diğerlerini yasakla" birleşimi modeli tekrarlanan kavramın İÇİNE huniliyordu
+  // (kb-findings "rotation" (2) öngörüsü aynen). Tip TEKRAR ediyorsa yasak sayım
+  // değil KALIP yasağı: ders (tip=veri) kalır, cümle sınıfı/kalıp değişir. prev boş
+  // (bugünkü desktop, echo yok, fallback boş) → her iki dal da boş = eski davranış.
+  const repeatCount = prev.filter((p) => p === type).length;
   // AZARLAMAYAN SARMALAYICI (denetim B85, 2026-07-31): trade'lenmiş ölümde ders
   // "hata yaptın" değil "alınan alanın bedeli doğru muydu" olmalı — direktif bunu
   // AÇIKÇA söyler ki prompt'un trade kuralıyla çelişmesin.
   const tradedNote = type === "entry-traded";
   if (lang === "en") {
-    const banLineEn = bannedConcepts.length
-      ? `\nEARLIER ROUNDS THIS MATCH ALREADY COVERED: ${bannedConcepts.join(", ")}. Do NOT repeat those angles (or synonyms) — this round has a different death-type, coach a different concept.`
-      : "";
+    const banLineEn = repeatCount >= 1
+      ? `\nYou already coached this SAME death-type ${repeatCount}x this match — do NOT rebuild an earlier round's stock sentence or pattern; keep the type's lesson but anchor it to a DIFFERENT concrete detail of THIS round.`
+      : bannedConcepts.length
+        ? `\nEARLIER ROUNDS THIS MATCH ALREADY COVERED: ${bannedConcepts.join(", ")}. Do NOT repeat those angles (or synonyms) — this round has a different death-type, coach a different concept.`
+        : "";
     return (
       `\n[DEATH-TYPE HINT — this round's focus]\n` +
       `This death's type: ${type}. The KB section in the system prompt for this type is titled "${g.kbBlock}" (the KB is in Turkish).\n` +
@@ -304,9 +314,11 @@ export function buildDeathTypeDirective(
       banLineEn
     );
   }
-  const banLine = bannedConcepts.length
-    ? `\nBU MAÇTA ÖNCEKİ ROUND'LARDA ŞU AÇILARI ZATEN VERDİN: ${bannedConcepts.join(", ")}. Aynısını (eşanlamlısı dahil) TEKRARLAMA — bu round farklı bir ölüm-tipi, farklı bir kavramdan konuş.`
-    : "";
+  const banLine = repeatCount >= 1
+    ? `\nBu tipin dersini bu maçta ${repeatCount} kez zaten verdin — önceki round'un kalıp cümlesini ve iskeletini YENİDEN KURMA; tipin dersi kalsın ama BU round'un FARKLI bir somut detayına bağla.`
+    : bannedConcepts.length
+      ? `\nBU MAÇTA ÖNCEKİ ROUND'LARDA ŞU AÇILARI ZATEN VERDİN: ${bannedConcepts.join(", ")}. Aynısını (eşanlamlısı dahil) TEKRARLAMA — bu round farklı bir ölüm-tipi, farklı bir kavramdan konuş.`
+      : "";
   // ÖNEMLİ (canlı 2026-06-30, softi "KBye bağlı değil"): direktif HAZIR CÜMLE DAYATMAZ.
   // Önceki sürüm tam-cümle 'angle' veriyordu, model onu kopyalıyordu → KB bypass, robotik.
   // Şimdi sadece ölüm-tipini + KB BÖLÜMÜNÜ işaret eder; modelin KENDİ derin cümlesini

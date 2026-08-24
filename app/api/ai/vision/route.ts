@@ -21,6 +21,10 @@ import { buildAgentAbilityHint, enforceAgentKit, AGENT_ABILITIES } from "@/lib/a
 import { cleanCoachText, clampWords, stripNumericHp, stripHpClaims, enforceSuppliedCallout } from "@/lib/coach-text";
 import { SYSTEM_PROMPT, SYSTEM_PROMPT_EN_ADDENDUM, USER_PROMPT, USER_PROMPT_EN, buildFactSheet, buildRoundFeedbackSchema } from "@/lib/vision-prompt";
 import { classifyDeath, buildDeathTypeDirective } from "@/lib/death-type";
+// match-concepts (rank-4, 2026-08-24): cross-round ban fallback'i — desktop
+// death_type echo'su (Faz2) gelene kadar prevDeathTypes'ı sunucu-yanı Upstash
+// set'inden besler. Her hata yolu sessiz boş liste/no-op → feedback bloklanmaz.
+import { readMatchConcepts, recordMatchConcept } from "@/lib/match-concepts";
 import { extractKillerWeapon, classifyCompArchetype, buildWeaponCompDirective, normalizeKillerInfoForPrompt } from "@/lib/comp-weapon";
 import { mapKey } from "@/lib/map-callouts";
 import { buildHistoryBlock, type RoundHistoryEntry } from "@/lib/history-block";
@@ -1122,14 +1126,27 @@ export async function POST(request: NextRequest) {
       // desktop stamps them (death_type). Until the desktop sends it this is empty → per-death
       // classification alone drives variety (Phase 1). When the desktop echoes deathType back,
       // the in-match same-type repetition ban activates with ZERO further backend change.
-      const prevDeathTypes = (Array.isArray(rh) ? rh : [])
+      let prevDeathTypes = (Array.isArray(rh) ? rh : [])
         .map((r: Record<string, unknown>) => (typeof r.death_type === "string" ? r.death_type : ""))
         .filter((s): s is string => s.length > 0) as import("@/lib/death-type").DeathType[];
+      // (rank-4, 2026-08-24) SUNUCU-YANI FALLBACK: desktop echo'su Faz2'de bekliyor
+      // ve yukarıdaki liste canlıda hep BOŞ (kb-findings "rotation": banLine hiç
+      // ateşlenmiyor → maç-içi aynı-kavram tekrarı). roundHistory death_type
+      // taşımıyorsa matchId+userId anahtarlı Upstash set'inden oku (yazımı yanıt
+      // tarafında). Okunanlar DEATH_TYPE_GUIDE allowlist'inden geçer; Upstash
+      // düşerse / matchId yoksa sessiz boş liste = bugünkü davranış. Echo
+      // gelmeye başlayınca (length>0) fallback hiç okunmaz — roundHistory kazanır.
+      const mcMatchId = (body as VisionRequest).matchId;
+      let prevSource = "rh";
+      if (prevDeathTypes.length === 0 && typeof mcMatchId === "string" && mcMatchId) {
+        prevDeathTypes = await readMatchConcepts(auth.userId, mcMatchId);
+        prevSource = prevDeathTypes.length > 0 ? "mc" : "-";
+      }
       deathTypeDirective = buildDeathTypeDirective(dtype, prevDeathTypes, reqLang);
       console.log(
         `[Aimlo AI] death-type=${dtype} repeatPos=${repeatedPosition} ` +
         `streak=${lossStreak ? `L${streakLen}` : winStreak ? `W${streakLen}` : "-"} stakes=${highStakes} ` +
-        `prevTypes=${prevDeathTypes.length}`,
+        `prevTypes=${prevDeathTypes.length}(${prevSource})`,
       );
     }
 
@@ -1338,10 +1355,16 @@ export async function POST(request: NextRequest) {
             .join(", ");
           return bits ? `R${r.round_index}: ${bits}` : `R${r.round_index}`;
         });
+      // (rank-4, 2026-08-24) SIKIŞTIRILDI (TR sarmalayıcı ÖLÇÜLDÜ 687→386 B): "tip dayatması
+      // yoksa FARKLI ders SINIFI seç" dalı ÖLÜ AĞIRLIKTI — died=true'da tip
+      // ipucu HER ZAMAN var (kb-findings "rotation": route'ta died kapısı) ve
+      // kavram-yasağı artık gerçek listeyle buildDeathTypeDirective banLine'ında
+      // (match-concepts fallback'i) — dayatma rica'dan güçlü. Kalanlar: kalıp/
+      // kavram tekrar yasağı + yalnız-bu-veri (anti-uydurma) + etiket-sızıntı yasağı.
       if (priorDeathBits.length > 0) {
         lessonHistoryDirective = reqLang === "en"
-          ? `\n[LESSON HISTORY] Previous deaths this match: ${priorDeathBits.join(" · ")}. If a [DEATH-TYPE HINT] is present it picks THIS round's lesson (the type is data — keep it); this directive's job is to break repetition: if no type is imposed, pick a DIFFERENT lesson CLASS this round (position / utility / timing / economy / info) — never give the same class with the same concept and the same stock sentence round after round; even inside the same class, anchor the lesson to a DIFFERENT concrete detail of THIS round (weapon / util order / timing / economy). Do not repeat "set a crossfire" / "don't hold alone" in back-to-back rounds. Use ONLY the data in this line — never invent past details, and never print the "[LESSON HISTORY]" label in the output.`
-          : `\n[DERS GEÇMİŞİ] Bu maçtaki önceki ölümler: ${priorDeathBits.join(" · ")}. [ÖLÜM-TİPİ İPUCU] geldiyse bu round'un dersini O seçer (tip veridir, değiştirme); bu direktifin işi TEKRARI kırmak: tip dayatması yoksa bu round FARKLI bir ders SINIFI seç (pozisyon / util / zamanlama / ekonomi / bilgi) — aynı sınıfı aynı kavram ve aynı kalıp cümleyle ÜST ÜSTE verme; aynı sınıfa düşsen bile dersi BU round'un FARKLI somut detayına (silah / util-sırası / zamanlama / ekonomi) bağla. "crossfire kur" / "tek başına tutma" kalıplarını art arda round'larda tekrarlama. YALNIZ bu satırdaki veriyi kullan — geçmiş detayı uydurma; "[DERS GEÇMİŞİ]" etiketini çıktıya YAZMA.`;
+          ? `\n[LESSON HISTORY] Previous deaths this match: ${priorDeathBits.join(" · ")}. If a [DEATH-TYPE HINT] is present it picks the lesson (the type is data); this line's job is breaking repetition: do NOT rebuild an earlier round's stock sentence or concept — anchor the lesson to a DIFFERENT concrete detail of THIS round. Use ONLY the data in this line — never invent past details, never print the "[LESSON HISTORY]" label.`
+          : `\n[DERS GEÇMİŞİ] Bu maçtaki önceki ölümler: ${priorDeathBits.join(" · ")}. [ÖLÜM-TİPİ İPUCU] geldiyse dersi O seçer (tip veridir); bu satırın işi TEKRARI kırmak: önceki round'ların kalıp cümlesini ve kavramını yeniden KURMA — dersi BU round'un farklı somut detayına bağla. YALNIZ bu satırdaki veriyi kullan — geçmiş detayı uydurma; "[DERS GEÇMİŞİ]" etiketini çıktıya YAZMA.`;
       }
     }
 
@@ -1787,6 +1810,16 @@ export async function POST(request: NextRequest) {
       // Live match feed (admin /live + /feedback): one row per death with the ACTUAL
       // coaching the user received — piggybacks this vision call, ZERO extra AI cost,
       // non-blocking + fail-safe.
+      // (rank-4) Kavram hafızası — bu round'un death-type'ı maç set'ine yazılır
+      // (fire-and-forget, saveMatchEvent emsali: yanıtı BLOKLAMAZ, hata sessiz).
+      // Faz2 echo'su gelince roundHistory kazanır, bu yazım okunmadan kalır — zararsız.
+      {
+        const mcId = (body as VisionRequest).matchId;
+        if (deathTypeOut && typeof mcId === "string" && mcId) {
+          void recordMatchConcept(auth.userId, mcId, deathTypeOut as import("@/lib/death-type").DeathType);
+        }
+      }
+
       saveMatchEvent({
         userId: auth.userId,
         matchId: (body as VisionRequest).matchId ?? null,

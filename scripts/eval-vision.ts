@@ -44,10 +44,16 @@ import { buildAgentAbilityHint, enforceAgentKit } from "../lib/agent-abilities";
 // B60 (2026-08-04): EN-native korpus — aşağıda SCENARIOS'a ekleniyor.
 import { EN_VISION_SCENARIOS } from "../evals/en-corpus";
 import { sanitizePromptInput } from "../lib/prompt-safety";
-import { classifyDeath, buildDeathTypeDirective } from "../lib/death-type";
+import { classifyDeath, buildDeathTypeDirective, type DeathType } from "../lib/death-type";
 import { buildHistoryBlock, type RoundHistoryEntry } from "../lib/history-block";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
+
+// (rank-4, 2026-08-24) lib/match-concepts.ts Upstash set'inin koşu-içi simülasyonu:
+// maç başına (id'deki M\d+ öneki) verilen death-type kümesi. Route'taki fallback'in
+// eval karşılığı — sadakat sözleşmesi (B9 sınıfı): iki dosya AYNI commit'te aynı
+// prev listesini kurar. Sentetik id'ler desene uymaz → boş kalır, ölçüm tabanı değişmez.
+const MATCH_CONCEPT_SIM = new Map<string, Set<DeathType>>();
 const CYCLE = process.env.EVAL_CYCLE || "3";
 
 // ── Load OPENAI_API_KEY from .env.local (tsx doesn't auto-load) ──
@@ -742,7 +748,25 @@ function buildUserPrompt(s: Scenario): string {
       tradedByAlly: b.tradedByAlly as boolean | undefined,
       repeatedPosition,
     });
-    deathTypeDirective = buildDeathTypeDirective(dtype, [], lang);
+    // (rank-4, 2026-08-24) MIRROR route.ts cross-round ban + fallback: prev önce
+    // roundHistory[].death_type'tan (route prevDeathTypes), BOŞSA matchId-anahtarlı
+    // koşu-içi hafızadan — lib/match-concepts.ts'in Upstash set'inin in-memory
+    // simülasyonu (eval tek süreç, ağ yok; sıralı koşu = round sırası). Sentetik
+    // korpus id'leri M\d+-R desenine uymaz VE rh'de death_type yok → prev=[] =
+    // eski cycle'larla bayt-aynı (A/B kıyaslanabilirlik korunur).
+    const prevFromRh = (Array.isArray(rh2) ? rh2 : [])
+      .map((r) => (typeof r.death_type === "string" ? r.death_type : ""))
+      .filter((s): s is string => s.length > 0) as DeathType[];
+    const mcKey = /^(M\d+)-R\d+/.exec(s.id)?.[1] ?? "";
+    const prevTypes = prevFromRh.length > 0
+      ? prevFromRh
+      : mcKey ? [...(MATCH_CONCEPT_SIM.get(mcKey) ?? [])] : [];
+    deathTypeDirective = buildDeathTypeDirective(dtype, prevTypes, lang);
+    if (mcKey) {
+      const set = MATCH_CONCEPT_SIM.get(mcKey) ?? new Set<DeathType>();
+      set.add(dtype);
+      MATCH_CONCEPT_SIM.set(mcKey, set);
+    }
   }
 
   // AÇILIŞ-ROTASYONU — MIRROR route.ts (rank-3, 2026-08-24): round % 3 seed'li
