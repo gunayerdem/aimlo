@@ -30,6 +30,11 @@ import { detectEnLeak } from "../evals/en-leak-detector";
 // süzgeç deseni genişleyince ölçüm de otomatik genişler. Dedektör süzgeçten
 // BİLEREK geniştir: cerrahinin kaçırdığı varyantı ölçüm yine yakalar.
 import { findMetaTermHits } from "../lib/coach-text";
+// repeatScore (rank-1, 2026-08-24): maç-içi TEKRAR ölçümü — kavram-aile sözlüğü
+// canlı kuraldan (DEATH_TYPE_GUIDE) TÜRETİLİR, kopya liste yok; guide değişince
+// ölçüm de kendiliğinden değişir. Yalnız M{n}-R{r}- id'li (gerçek-korpus)
+// örneklerde hesaplanır → eski S/E-id'li cycle raporları BAYT-AYNI kalır.
+import { DEATH_TYPE_GUIDE } from "../lib/death-type";
 
 type Sample = {
   id: string;
@@ -65,14 +70,23 @@ function load(cycle: string): Sample[] {
   return all.filter((s) => (s.lang === "en" ? "en" : "tr") === want);
 }
 
-/** Senaryo id'sinden harita adını çıkar: "S1-ascent-cypher-def-strong" → "ascent" */
+/** Gerçek-korpus id'si (rank-1): "M1-R5-ascent-jett" → maç "M1"; S/E-id'de null. */
+function matchOfId(id: string): string | null {
+  const m = /^(M\d+)-R[^-]+-/.exec(id);
+  return m ? m[1] : null;
+}
+
+/** Senaryo id'sinden harita adını çıkar: "S1-ascent-cypher-def-strong" → "ascent".
+ *  Gerçek-korpus id'sinde (M1-R5-ascent-jett) harita/ajan bir slot sağda — rank-1. */
 function mapOfId(id: string): string | null {
   const parts = id.split("-");
-  return parts.length > 1 ? parts[1] : null;
+  const off = matchOfId(id) ? 1 : 0;
+  return parts.length > 1 + off ? parts[1 + off] : null;
 }
 function agentOfId(id: string): string | null {
   const parts = id.split("-");
-  return parts.length > 2 ? parts[2] : null;
+  const off = matchOfId(id) ? 1 : 0;
+  return parts.length > 2 + off ? parts[2 + off] : null;
 }
 
 const norm = (s: string) =>
@@ -211,6 +225,145 @@ function words(text: string): number {
   return text.split(/\s+/).filter(Boolean).length;
 }
 
+/* ── repeatScore — MAÇ-İÇİ TEKRAR METRİĞİ (rank-1, 2026-08-24) ───────────────
+ * Canlı-test #12 ölçümünün (23 gerçek round: aynı açılış iskeleti 17/23, "seni
+ * oradan öldürdü" 9 round'da, dash 23/23) kalıcı ölçüm hâli. Üç bileşen:
+ *   m1 AÇILIŞ-İSKELETİ: deathAnalysis'in normalize ilk 6 token'ı, aynı maçın
+ *      ÖNCEKİ bir round'uyla Jaccard ≥ 0.5 ise round "tekrar açılışlı" sayılır.
+ *   m2 4-GRAM ÇAKIŞMASI: round'un koç metni (3 alan birleşik, norm() İ/i̇
+ *      normalizasyonu) 4-gram'larının aynı maçın önceki round'larında geçen
+ *      payının ortalaması.
+ *   m3 KAVRAM-TEKRARI: DEATH_TYPE_GUIDE'dan türetilen kavram-aile sözlüğünde
+ *      aynı kavramın maç içinde 3. ve sonraki geçişini taşıyan round payı.
+ * repeatScore = 0.4·m1 + 0.4·m2 + 0.2·m3 (0 = hiç tekrar, 1 = tam tekrar).
+ * m1/m2 paydası = önceli olan round'lar (ilk round tekrar edemez). Metrik yalnız
+ * M-id'li maç-gruplarında (≥2 round) hesaplanır; sıra = dosya sırası (korpus
+ * kronolojik yazılır) — R-etiketi parse edilmez (R2b gibi phantom-round
+ * disambiguation'ları sıralamayı bozamaz). */
+
+type ConceptFamily = { concept: string; stems: string[]; re?: RegExp };
+
+/** Kavram-aile sözlüğü: her DEATH_TYPE_GUIDE tipinin canlı 'angle' metninden,
+ *  BAŞKA tiplerde nadir (≤2 tipte geçen) normalize ≥5-harf gövdeler (ilk 5 harf —
+ *  Türkçe ekleri düşürür: okundu/okunma→"okun…"). Parametreler canlı #12
+ *  korpusunda ÖLÇÜLEREK seçildi: 4-harf gövdeler stopword'leri ("seni","gibi",
+ *  "anda") geçiriyor ve m3 0.91'e doyuyordu (ölçemez metrik); 5-harf + ≥3-gövde
+ *  eşiği m3=0.55 (ölçüm başlığı var, iyileşme payı var) ve ateşlenen aileler
+ *  bulgularla örtüşüyor (tam-alım/açıkta/geniş-açı/trade/crossfire/okunma).
+ *  Kopya kelime listesi YOK; guide cümlesi değişince sözlük de değişir.
+ *  + plan'ın istediği ek aile: "açıkta/utility'siz" (buildDeathTypeDirective'in
+ *  kalıp cümlesi, lib/death-type.ts:307 — orada da tek muaf-çift bu ikili). */
+function buildConceptFamilies(): ConceptFamily[] {
+  const entries = Object.values(DEATH_TYPE_GUIDE);
+  const stemsOf = (t: string): string[] => [
+    ...new Set(
+      norm(t)
+        .split(/[^\p{L}\p{N}]+/u)
+        .filter((w) => w.length >= 5)
+        .map((w) => w.slice(0, 5)),
+    ),
+  ];
+  // gövde → kaç FARKLI tipin angle'ında geçiyor (ayırt edicilik filtresi)
+  const df = new Map<string, number>();
+  const perType = entries.map((e) => stemsOf(e.angle));
+  for (const stems of perType) for (const s of stems) df.set(s, (df.get(s) || 0) + 1);
+  const fams: ConceptFamily[] = entries.map((e, i) => ({
+    concept: e.concept,
+    stems: perType[i].filter((s) => (df.get(s) || 0) <= 2),
+  }));
+  fams.push({ concept: "acikta-utilsiz", stems: [], re: /açıkta|util\S{0,4}siz/u });
+  return fams;
+}
+const CONCEPT_FAMILIES = buildConceptFamilies();
+
+/** Round metninde geçen kavramlar. Aile "geçti" sayılır: ≥3 farklı ayırt-edici
+ *  gövde (daha az gövdeli ailede hepsi) — canlı #12'de ölçülen eşik: 2-gövde
+ *  eşiği aile başına 5.8 ateşleme/round üretip m3'ü doyuruyordu. */
+function conceptHits(text: string): string[] {
+  const t = norm(text);
+  const found: string[] = [];
+  for (const f of CONCEPT_FAMILIES) {
+    if (f.re) {
+      if (f.re.test(t)) found.push(f.concept);
+      continue;
+    }
+    let n = 0;
+    for (const s of f.stems) {
+      const re = new RegExp(`(?<![\\p{L}\\p{N}])${s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`, "u");
+      if (re.test(t)) n++;
+    }
+    if (f.stems.length && n >= Math.min(3, f.stems.length)) found.push(f.concept);
+  }
+  return found;
+}
+
+function tokensOf(text: string): string[] {
+  return norm(text).split(/[^\p{L}\p{N}']+/u).filter(Boolean);
+}
+function grams4Of(text: string): string[] {
+  const tok = tokensOf(text);
+  const out = new Set<string>();
+  for (let i = 0; i + 4 <= tok.length; i++) out.add(tok.slice(i, i + 4).join(" "));
+  return [...out];
+}
+
+type RepeatAgg = { score: number; m1: number; m2: number; m3: number; nGrouped: number; matches: number };
+
+/** Maç-gruplu tekrar toplaması — M-id'li grup (≥2 round) yoksa null → eski
+ *  cycle'ların (S/E id) rapor çıktısı BAYT-AYNI kalır. */
+function repeatAggregate(rows: Row[]): RepeatAgg | null {
+  const groups = new Map<string, Row[]>();
+  for (const r of rows) {
+    const m = matchOfId(r.id);
+    if (!m) continue;
+    const g = groups.get(m) || [];
+    g.push(r);
+    groups.set(m, g);
+  }
+  let m1n = 0, m1d = 0, m2sum = 0, m2d = 0, m3n = 0, m3d = 0, total = 0, matches = 0;
+  for (const g of groups.values()) {
+    if (g.length < 2) continue;
+    matches++;
+    total += g.length;
+    const conceptCount = new Map<string, number>();
+    for (let i = 0; i < g.length; i++) {
+      const r = g[i];
+      if (i > 0 && r.openerTokens.length) {
+        m1d++;
+        const cur = new Set(r.openerTokens);
+        let hit = false;
+        for (let j = 0; j < i && !hit; j++) {
+          const prev = new Set(g[j].openerTokens);
+          if (!prev.size) continue;
+          const inter = [...cur].filter((t) => prev.has(t)).length;
+          const uni = new Set([...cur, ...prev]).size;
+          if (uni && inter / uni >= 0.5) hit = true;
+        }
+        if (hit) m1n++;
+      }
+      if (i > 0 && r.grams4.length) {
+        m2d++;
+        const seen = new Set<string>();
+        for (let j = 0; j < i; j++) for (const q of g[j].grams4) seen.add(q);
+        m2sum += r.grams4.filter((q) => seen.has(q)).length / r.grams4.length;
+      }
+      m3d++;
+      let third = false;
+      for (const c of r.concepts) {
+        const n = (conceptCount.get(c) || 0) + 1;
+        conceptCount.set(c, n);
+        if (n >= 3) third = true;
+      }
+      if (third) m3n++;
+    }
+  }
+  if (!total) return null;
+  const m1 = m1d ? m1n / m1d : 0;
+  const m2 = m2d ? m2sum / m2d : 0;
+  const m3 = m3d ? m3n / m3d : 0;
+  return { m1, m2, m3, score: 0.4 * m1 + 0.4 * m2 + 0.2 * m3, nGrouped: total, matches };
+}
+
 // ── ÖRNEK BAŞINA SKOR ───────────────────────────────────────────────────────
 
 type Row = {
@@ -236,6 +389,11 @@ type Row = {
   // TR örneklerde enLeak HEP boş — mevcut TR ölçümü etkilenmez.
   lang: "tr" | "en";
   enLeak: string[];
+  // repeatScore hammaddesi (rank-1, 2026-08-24) — yalnız repeatAggregate okur;
+  // rapor satırlarına girmez, eski cycle çıktıları değişmez.
+  openerTokens: string[];
+  grams4: string[];
+  concepts: string[];
 };
 
 function scoreSample(s: Sample): Row {
@@ -313,6 +471,11 @@ function scoreSample(s: Sample): Row {
     promptBytes: s.systemPromptBytes || 0,
     lang,
     enLeak,
+    // repeatScore hammaddesi (rank-1): m1 = deathAnalysis'in ilk 6 token'ı,
+    // m2 = 3 alan birleşik 4-gram'lar, m3 = kavram-aile geçişleri.
+    openerTokens: tokensOf(f.deathAnalysis || "").slice(0, 6),
+    grams4: grams4Of(text),
+    concepts: conceptHits(text),
   };
 }
 
@@ -390,6 +553,17 @@ function printSingle(cycle: string, rows: Row[]) {
   console.log(`  Ortalama kelime     : ${f1(a.avgWords)}  (ölüm analizi: ${f1(a.avgDeathWords)})`);
   console.log(`  Prompt boyutu       : ${f1(a.avgPromptKB)} KB`);
 
+  // repeatScore (rank-1, 2026-08-24): YALNIZ gerçek-korpus (M-id, maç-gruplu)
+  // koşularında basılır — eski S/E-id cycle raporları bayt-aynı kalır.
+  const rep = repeatAggregate(rows);
+  if (rep) {
+    console.log("\n── TEKRAR (maç-içi, düşük iyi) ──");
+    console.log(`  repeatScore         : ${rep.score.toFixed(3)}  (${rep.matches} maç, ${rep.nGrouped} round)`);
+    console.log(`    m1 açılış-iskeleti: ${rep.m1.toFixed(3)}`);
+    console.log(`    m2 4-gram çakışma : ${rep.m2.toFixed(3)}`);
+    console.log(`    m3 kavram-tekrarı : ${rep.m3.toFixed(3)}`);
+  }
+
   const bad = rows.filter((r) => r.violations > 0);
   if (bad.length) {
     console.log("\n── İHLALLİ ÖRNEKLER ──");
@@ -454,6 +628,25 @@ function printAB(cA: string, rowsA: Row[], cB: string, rowsB: Row[]) {
   line("Ort. kelime", A.avgWords, B.avgWords, true);
   line("Ölüm analizi kelime", A.avgDeathWords, B.avgDeathWords, true);
   line("Prompt KB", A.avgPromptKB, B.avgPromptKB, false, "KB");
+
+  // repeatScore A/B (rank-1, 2026-08-24): kabul çubuğu = sonra ≤ önce·0.5 VE
+  // detector ≥ baseline VE ihlal 0 (plan repetitionMetric). 3 ondalık — f1'in
+  // tek ondalığı 0-1 aralığında ayrım gücü taşımıyor. Yalnız M-id korpusta basılır.
+  const repA = repeatAggregate(rowsA);
+  const repB = repeatAggregate(rowsB);
+  if (repA || repB) {
+    console.log("\n── TEKRAR (maç-içi, düşük iyi) ──");
+    const rline = (label: string, a: number, b: number) => {
+      const d = b - a;
+      const mark = Math.abs(d) < 0.0005 ? "   =" : `${d < 0 ? "✅" : "🔴"} ${d > 0 ? "+" : ""}${d.toFixed(3)}`;
+      console.log(`  ${label.padEnd(24)} ${a.toFixed(3).padStart(7)} → ${b.toFixed(3).padStart(7)}   ${mark}`);
+    };
+    const g = (r: RepeatAgg | null, f: (x: RepeatAgg) => number) => (r ? f(r) : 0);
+    rline("repeatScore", g(repA, (r) => r.score), g(repB, (r) => r.score));
+    rline("  m1 açılış-iskeleti", g(repA, (r) => r.m1), g(repB, (r) => r.m1));
+    rline("  m2 4-gram çakışma", g(repA, (r) => r.m2), g(repB, (r) => r.m2));
+    rline("  m3 kavram-tekrarı", g(repA, (r) => r.m3), g(repB, (r) => r.m3));
+  }
 
   // Senaryo bazlı regresyon avı — hangi örnek KÖTÜLEŞTİ?
   const byId = new Map(rowsA.map((r) => [r.id, r]));

@@ -567,6 +567,22 @@ for (const base of SCENARIOS.filter((s) => EN_MIRROR_PREFIXES.some((p) => s.id.s
 // CI'ye GİRMEZ (eval'ler bilerek CI dışında).
 SCENARIOS.push(...(EN_VISION_SCENARIOS as unknown as Scenario[]));
 
+/* ── GERÇEK-KORPUS YOLU — kanıt altyapısı rank-1 (2026-08-24) ─────────────────
+ * EVAL_CORPUS=real → SCENARIOS yerine evals/real-rounds-23.json yüklenir:
+ * canlı-test #12 masaüstü dump'ındaki 23 GERÇEK round (kullanıcı 6583ac7a,
+ * Ascent/Jett; 1 maçsız ısınma + 22 round'luk maç 13c08622), Scenario şekline
+ * dönüştürülmüş ve roundHistory zinciri korunmuş (her round'un history'si aynı
+ * maçın önceki round'larından kurulur; round_won skor-deltasından türetilir).
+ * Id sözleşmesi: M{n}-R{r}-{map}-{agent} → eval-score maç-gruplu repeatScore'u
+ * bu id'den parse eder. Tanımsızsa davranış BUGÜNKÜYLE BAYT-AYNI (sentetik
+ * korpus; eski cycle A/B'leri etkilenmez). Baseline koşusu:
+ *   EVAL_CYCLE=real-base EVAL_CORPUS=real npx tsx scripts/eval-vision.ts */
+function loadScenarios(): Scenario[] {
+  if (process.env.EVAL_CORPUS !== "real") return SCENARIOS;
+  const p = path.join(process.cwd(), "evals", "real-rounds-23.json");
+  return JSON.parse(fs.readFileSync(p, "utf8")) as Scenario[];
+}
+
 // ── confidence derivation (route 725-730) ──
 function deriveConfidence(rh: unknown): "calibrating" | "low" | "medium" | "high" {
   const arr = Array.isArray(rh) ? rh : null;
@@ -884,7 +900,10 @@ async function main() {
   const results: unknown[] = [];
   // EVAL_ONLY=S1,S9 → sadece bu id-prefix'leri çalıştır (grounding izi için odak).
   const only = process.env.EVAL_ONLY ? process.env.EVAL_ONLY.split(",").map((x) => x.trim()) : null;
-  let list = only ? SCENARIOS.filter((s) => only.some((o) => s.id.startsWith(o))) : SCENARIOS;
+  // rank-1 (2026-08-24): korpus seçimi tek noktadan — EVAL_CORPUS tanımsızsa
+  // loadScenarios() SCENARIOS'un kendisini döndürür (davranış bayt-aynı).
+  const corpus = loadScenarios();
+  let list = only ? corpus.filter((s) => only.some((o) => s.id.startsWith(o))) : corpus;
   // B57 (2026-07-31): EVAL_LANG=tr|en → yalnız o dilin senaryoları. Tanımsızsa
   // hepsi (TR korpus + EN aynaları). TR-only koşu eski cycle'larla birebir
   // karşılaştırılabilir kalsın diye var.

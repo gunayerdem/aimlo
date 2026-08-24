@@ -1,0 +1,2409 @@
+[
+ {
+  "id": "M0-R0-ascent-jett",
+  "note": "[GERÇEK #12] maç-öncesi ısınma round'u (event bf8e822a, 2026-08-24T02:11:23Z) — canlı feedback died=false kanıtı taşıyor",
+  "body": {
+   "round": 0,
+   "score": "0 - 0",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "mode": "competitive",
+   "died": false
+  },
+  "source": {
+   "eventId": "bf8e822a-c6a4-4cf3-b149-5f19d1fadb83",
+   "createdAt": "2026-08-24T02:11:23.53012+00:00"
+  }
+ },
+ {
+  "id": "M1-R1-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R1 (event 2f00a529, skor 0 - 0) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 1,
+   "score": "0 - 0",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "deathLocation": "b site"
+  },
+  "source": {
+   "eventId": "2f00a529-d308-4143-8726-16551a38cdb7",
+   "createdAt": "2026-08-24T02:13:59.083793+00:00"
+  }
+ },
+ {
+  "id": "M1-R2-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R2 (event 877a5990, skor 0 - 1) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 2,
+   "score": "0 - 1",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    }
+   ]
+  },
+  "source": {
+   "eventId": "877a5990-40d1-428a-93d2-b30b028341b1",
+   "createdAt": "2026-08-24T02:15:49.91095+00:00"
+  }
+ },
+ {
+  "id": "M1-R3-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R3 (event eb016a0a, skor 0 - 2) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 3,
+   "score": "0 - 2",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "deathLocation": "a tree",
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    }
+   ]
+  },
+  "source": {
+   "eventId": "eb016a0a-738c-473d-aa33-f0aabee79bde",
+   "createdAt": "2026-08-24T02:17:27.94666+00:00"
+  }
+ },
+ {
+  "id": "M1-R4-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R4 (event e4ed5c1d, skor 0 - 3) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 4,
+   "score": "0 - 3",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 2,
+     "death_position": "a tree",
+     "position_confidence": "high"
+    }
+   ]
+  },
+  "source": {
+   "eventId": "e4ed5c1d-4f0c-4d9d-9350-d583f27af643",
+   "createdAt": "2026-08-24T02:18:17.241069+00:00"
+  }
+ },
+ {
+  "id": "M1-R5-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R5 (event d4984307, skor 0 - 4) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 5,
+   "score": "0 - 4",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "deathLocation": "b main",
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 2,
+     "death_position": "a tree",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 4,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 3
+    }
+   ]
+  },
+  "source": {
+   "eventId": "d4984307-d487-47ed-ba2d-d4919bcaa7e1",
+   "createdAt": "2026-08-24T02:19:40.581026+00:00"
+  }
+ },
+ {
+  "id": "M1-R7-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R7 (event 825fa5ce, skor 0 - 5) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 7,
+   "score": "0 - 5",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "deathLocation": "b site",
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 2,
+     "death_position": "a tree",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 4,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 3
+    },
+    {
+     "round_index": 5,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 4,
+     "death_position": "b main",
+     "position_confidence": "high"
+    }
+   ]
+  },
+  "source": {
+   "eventId": "825fa5ce-0990-4bcf-96ce-3ba54eba200c",
+   "createdAt": "2026-08-24T02:21:52.308059+00:00"
+  }
+ },
+ {
+  "id": "M1-R8-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R8 (event 55178584, skor 0 - 6) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 8,
+   "score": "0 - 6",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "deathLocation": "mid bottom",
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 2,
+     "death_position": "a tree",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 4,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 3
+    },
+    {
+     "round_index": 5,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 4,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 7,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 5,
+     "death_position": "b site",
+     "position_confidence": "high"
+    }
+   ]
+  },
+  "source": {
+   "eventId": "55178584-4b49-4e62-99ed-547b508e88b2",
+   "createdAt": "2026-08-24T02:23:28.53574+00:00"
+  }
+ },
+ {
+  "id": "M1-R9-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R9 (event fdb9d30e, skor 0 - 7) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 9,
+   "score": "0 - 7",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 2,
+     "death_position": "a tree",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 4,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 3
+    },
+    {
+     "round_index": 5,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 4,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 7,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 5,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 8,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 6,
+     "death_position": "mid bottom",
+     "position_confidence": "high"
+    }
+   ]
+  },
+  "source": {
+   "eventId": "fdb9d30e-efe8-4e0d-b75b-798a85ba2bcb",
+   "createdAt": "2026-08-24T02:24:25.215368+00:00"
+  }
+ },
+ {
+  "id": "M1-R10-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R10 (event 4f32c32d, skor 0 - 8) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 10,
+   "score": "0 - 8",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "deathLocation": "b lobby",
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 2,
+     "death_position": "a tree",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 4,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 3
+    },
+    {
+     "round_index": 5,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 4,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 7,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 5,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 8,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 6,
+     "death_position": "mid bottom",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 9,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 7
+    }
+   ]
+  },
+  "source": {
+   "eventId": "4f32c32d-a7df-4722-8a34-65be87d3d26f",
+   "createdAt": "2026-08-24T02:26:29.915169+00:00"
+  }
+ },
+ {
+  "id": "M1-R11-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R11 (event dac3ff46, skor 1 - 8) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 11,
+   "score": "1 - 8",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 2,
+     "death_position": "a tree",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 4,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 3
+    },
+    {
+     "round_index": 5,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 4,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 7,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 5,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 8,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 6,
+     "death_position": "mid bottom",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 9,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 7
+    },
+    {
+     "round_index": 10,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 8,
+     "death_position": "b lobby",
+     "position_confidence": "high"
+    }
+   ]
+  },
+  "source": {
+   "eventId": "dac3ff46-3cc2-4e5c-a28f-2262cc936464",
+   "createdAt": "2026-08-24T02:27:29.42974+00:00"
+  }
+ },
+ {
+  "id": "M1-R12-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R12 (event 29cd21dc, skor 2 - 8) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 12,
+   "score": "2 - 8",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "deathLocation": "a site",
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 2,
+     "death_position": "a tree",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 4,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 3
+    },
+    {
+     "round_index": 5,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 4,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 7,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 5,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 8,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 6,
+     "death_position": "mid bottom",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 9,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 7
+    },
+    {
+     "round_index": 10,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 8,
+     "death_position": "b lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 11,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 9
+    }
+   ]
+  },
+  "source": {
+   "eventId": "29cd21dc-d23c-4b4f-8db0-0d13e752e69c",
+   "createdAt": "2026-08-24T02:29:11.453634+00:00"
+  }
+ },
+ {
+  "id": "M1-R13-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R13 (event 5c0f8ab6, skor 2 - 9) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 13,
+   "score": "2 - 9",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "attacking",
+   "mode": "competitive",
+   "died": true,
+   "deathLocation": "mid courtyard",
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 2,
+     "death_position": "a tree",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 4,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 3
+    },
+    {
+     "round_index": 5,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 4,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 7,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 5,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 8,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 6,
+     "death_position": "mid bottom",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 9,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 7
+    },
+    {
+     "round_index": 10,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 8,
+     "death_position": "b lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 11,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 9
+    },
+    {
+     "round_index": 12,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 10,
+     "death_position": "a site",
+     "position_confidence": "high"
+    }
+   ]
+  },
+  "source": {
+   "eventId": "5c0f8ab6-1376-40a2-90d3-8d149c9828c4",
+   "createdAt": "2026-08-24T02:30:48.240072+00:00"
+  }
+ },
+ {
+  "id": "M1-R15-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R15 (event fd88ac3c, skor 3 - 9) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 15,
+   "score": "3 - 9",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "deathLocation": "a lobby",
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 2,
+     "death_position": "a tree",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 4,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 3
+    },
+    {
+     "round_index": 5,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 4,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 7,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 5,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 8,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 6,
+     "death_position": "mid bottom",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 9,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 7
+    },
+    {
+     "round_index": 10,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 8,
+     "death_position": "b lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 11,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 9
+    },
+    {
+     "round_index": 12,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 10,
+     "death_position": "a site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 13,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 11,
+     "death_position": "mid courtyard",
+     "position_confidence": "high"
+    }
+   ]
+  },
+  "source": {
+   "eventId": "fd88ac3c-8bd1-493b-b953-16a48757a13a",
+   "createdAt": "2026-08-24T02:33:26.176383+00:00"
+  }
+ },
+ {
+  "id": "M1-R16-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R16 (event a80f6ab9, skor 3 - 10) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 16,
+   "score": "3 - 10",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 2,
+     "death_position": "a tree",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 4,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 3
+    },
+    {
+     "round_index": 5,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 4,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 7,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 5,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 8,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 6,
+     "death_position": "mid bottom",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 9,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 7
+    },
+    {
+     "round_index": 10,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 8,
+     "death_position": "b lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 11,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 9
+    },
+    {
+     "round_index": 12,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 10,
+     "death_position": "a site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 13,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 11,
+     "death_position": "mid courtyard",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 15,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 12,
+     "death_position": "a lobby",
+     "position_confidence": "high"
+    }
+   ]
+  },
+  "source": {
+   "eventId": "a80f6ab9-6535-4e31-b7e5-87341b6db9b5",
+   "createdAt": "2026-08-24T02:34:41.175175+00:00"
+  }
+ },
+ {
+  "id": "M1-R17-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R17 (event 5254ee88, skor 3 - 11) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 17,
+   "score": "3 - 11",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "deathLocation": "b main",
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 2,
+     "death_position": "a tree",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 4,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 3
+    },
+    {
+     "round_index": 5,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 4,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 7,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 5,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 8,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 6,
+     "death_position": "mid bottom",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 9,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 7
+    },
+    {
+     "round_index": 10,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 8,
+     "death_position": "b lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 11,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 9
+    },
+    {
+     "round_index": 12,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 10,
+     "death_position": "a site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 13,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 11,
+     "death_position": "mid courtyard",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 15,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 12,
+     "death_position": "a lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 16,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 13
+    }
+   ]
+  },
+  "source": {
+   "eventId": "5254ee88-9244-4dc5-94ea-89a7a064de30",
+   "createdAt": "2026-08-24T02:35:44.92367+00:00"
+  }
+ },
+ {
+  "id": "M1-R18-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R18 (event c03c923e, skor 3 - 11) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 18,
+   "score": "3 - 11",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "deathLocation": "mid link",
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 2,
+     "death_position": "a tree",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 4,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 3
+    },
+    {
+     "round_index": 5,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 4,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 7,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 5,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 8,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 6,
+     "death_position": "mid bottom",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 9,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 7
+    },
+    {
+     "round_index": 10,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 8,
+     "death_position": "b lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 11,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 9
+    },
+    {
+     "round_index": 12,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 10,
+     "death_position": "a site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 13,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 11,
+     "death_position": "mid courtyard",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 15,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 12,
+     "death_position": "a lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 16,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 13
+    },
+    {
+     "round_index": 17,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 14,
+     "death_position": "b main",
+     "position_confidence": "high"
+    }
+   ]
+  },
+  "source": {
+   "eventId": "c03c923e-5c52-4240-8c5b-c142a072076c",
+   "createdAt": "2026-08-24T02:37:33.194412+00:00"
+  }
+ },
+ {
+  "id": "M1-R19-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R19 (event f1f19f23, skor 3 - 12) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 19,
+   "score": "3 - 12",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "deathLocation": "a lobby",
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 2,
+     "death_position": "a tree",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 4,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 3
+    },
+    {
+     "round_index": 5,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 4,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 7,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 5,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 8,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 6,
+     "death_position": "mid bottom",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 9,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 7
+    },
+    {
+     "round_index": 10,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 8,
+     "death_position": "b lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 11,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 9
+    },
+    {
+     "round_index": 12,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 10,
+     "death_position": "a site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 13,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 11,
+     "death_position": "mid courtyard",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 15,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 12,
+     "death_position": "a lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 16,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 13
+    },
+    {
+     "round_index": 17,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 14,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 18,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 15,
+     "death_position": "mid link",
+     "position_confidence": "high"
+    }
+   ]
+  },
+  "source": {
+   "eventId": "f1f19f23-0336-4344-9065-badee15bb895",
+   "createdAt": "2026-08-24T02:38:45.096035+00:00"
+  }
+ },
+ {
+  "id": "M1-R2b-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R2b (event 27ecbadb, skor 4 - 12) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 2,
+   "score": "4 - 12",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "deathLocation": "mid cubby",
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 2,
+     "death_position": "a tree",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 4,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 3
+    },
+    {
+     "round_index": 5,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 4,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 7,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 5,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 8,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 6,
+     "death_position": "mid bottom",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 9,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 7
+    },
+    {
+     "round_index": 10,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 8,
+     "death_position": "b lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 11,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 9
+    },
+    {
+     "round_index": 12,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 10,
+     "death_position": "a site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 13,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 11,
+     "death_position": "mid courtyard",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 15,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 12,
+     "death_position": "a lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 16,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 13
+    },
+    {
+     "round_index": 17,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 14,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 18,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 15,
+     "death_position": "mid link",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 19,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 16,
+     "death_position": "a lobby",
+     "position_confidence": "high"
+    }
+   ]
+  },
+  "source": {
+   "eventId": "27ecbadb-20d9-42df-beea-140b9db2fde0",
+   "createdAt": "2026-08-24T02:41:10.51742+00:00"
+  }
+ },
+ {
+  "id": "M1-R3b-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R3b (event e565dbc4, skor 5 - 12) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 3,
+   "score": "5 - 12",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "attacking",
+   "mode": "competitive",
+   "died": true,
+   "deathLocation": "b site",
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 2,
+     "death_position": "a tree",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 4,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 3
+    },
+    {
+     "round_index": 5,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 4,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 7,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 5,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 8,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 6,
+     "death_position": "mid bottom",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 9,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 7
+    },
+    {
+     "round_index": 10,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 8,
+     "death_position": "b lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 11,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 9
+    },
+    {
+     "round_index": 12,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 10,
+     "death_position": "a site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 13,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 11,
+     "death_position": "mid courtyard",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 15,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 12,
+     "death_position": "a lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 16,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 13
+    },
+    {
+     "round_index": 17,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 14,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 18,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 15,
+     "death_position": "mid link",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 19,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 16,
+     "death_position": "a lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 17,
+     "death_position": "mid cubby",
+     "position_confidence": "high"
+    }
+   ]
+  },
+  "source": {
+   "eventId": "e565dbc4-ce15-41d7-a63c-f6a4e410511b",
+   "createdAt": "2026-08-24T02:43:12.937284+00:00"
+  }
+ },
+ {
+  "id": "M1-R22-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R22 (event 997b4d67, skor 6 - 12) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 22,
+   "score": "6 - 12",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "deathLocation": "a lobby",
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 2,
+     "death_position": "a tree",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 4,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 3
+    },
+    {
+     "round_index": 5,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 4,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 7,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 5,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 8,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 6,
+     "death_position": "mid bottom",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 9,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 7
+    },
+    {
+     "round_index": 10,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 8,
+     "death_position": "b lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 11,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 9
+    },
+    {
+     "round_index": 12,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 10,
+     "death_position": "a site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 13,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 11,
+     "death_position": "mid courtyard",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 15,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 12,
+     "death_position": "a lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 16,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 13
+    },
+    {
+     "round_index": 17,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 14,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 18,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 15,
+     "death_position": "mid link",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 19,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 16,
+     "death_position": "a lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 17,
+     "death_position": "mid cubby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 18,
+     "death_position": "b site",
+     "position_confidence": "high"
+    }
+   ]
+  },
+  "source": {
+   "eventId": "997b4d67-9de3-4b55-83d2-2c2889b8170f",
+   "createdAt": "2026-08-24T02:44:02.615757+00:00"
+  }
+ },
+ {
+  "id": "M1-R24-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R24 (event c8deeb8a, skor 8 - 12) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 24,
+   "score": "8 - 12",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "deathLocation": "b site",
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 2,
+     "death_position": "a tree",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 4,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 3
+    },
+    {
+     "round_index": 5,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 4,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 7,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 5,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 8,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 6,
+     "death_position": "mid bottom",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 9,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 7
+    },
+    {
+     "round_index": 10,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 8,
+     "death_position": "b lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 11,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 9
+    },
+    {
+     "round_index": 12,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 10,
+     "death_position": "a site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 13,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 11,
+     "death_position": "mid courtyard",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 15,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 12,
+     "death_position": "a lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 16,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 13
+    },
+    {
+     "round_index": 17,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 14,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 18,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 15,
+     "death_position": "mid link",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 19,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 16,
+     "death_position": "a lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 17,
+     "death_position": "mid cubby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 18,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 22,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 19,
+     "death_position": "a lobby",
+     "position_confidence": "high"
+    }
+   ]
+  },
+  "source": {
+   "eventId": "c8deeb8a-375d-40a7-ac90-04d39c052e37",
+   "createdAt": "2026-08-24T02:47:16.312178+00:00"
+  }
+ },
+ {
+  "id": "M1-R25-ascent-jett",
+  "note": "[GERÇEK #12] maç 13c08622 R25 (event 86317e54, skor 9 - 12) — killer/ekonomi/komp dump'ta yok (canlı istekte de gönderilmiyordu: rotation bulgusu economyType 0/23); history skor-deltasından türetildi",
+  "body": {
+   "round": 25,
+   "score": "9 - 12",
+   "map": "ascent",
+   "agent": "jett",
+   "rank": "silver",
+   "side": "defending",
+   "mode": "competitive",
+   "died": true,
+   "deathLocation": "a site",
+   "roundHistory": [
+    {
+     "round_index": 1,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 0,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 1
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 2,
+     "death_position": "a tree",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 4,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 3
+    },
+    {
+     "round_index": 5,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 4,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 7,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 5,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 8,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 6,
+     "death_position": "mid bottom",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 9,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 7
+    },
+    {
+     "round_index": 10,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 8,
+     "death_position": "b lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 11,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 9
+    },
+    {
+     "round_index": 12,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 10,
+     "death_position": "a site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 13,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 11,
+     "death_position": "mid courtyard",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 15,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 12,
+     "death_position": "a lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 16,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 13
+    },
+    {
+     "round_index": 17,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 14,
+     "death_position": "b main",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 18,
+     "died": true,
+     "round_won": false,
+     "death_detected_confidence": "observed",
+     "timestamp": 15,
+     "death_position": "mid link",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 19,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 16,
+     "death_position": "a lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 2,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 17,
+     "death_position": "mid cubby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 3,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 18,
+     "death_position": "b site",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 22,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 19,
+     "death_position": "a lobby",
+     "position_confidence": "high"
+    },
+    {
+     "round_index": 24,
+     "died": true,
+     "round_won": true,
+     "death_detected_confidence": "observed",
+     "timestamp": 20,
+     "death_position": "b site",
+     "position_confidence": "high"
+    }
+   ]
+  },
+  "source": {
+   "eventId": "86317e54-3821-47cd-a743-c95e03b6a92e",
+   "createdAt": "2026-08-24T02:49:59.586353+00:00"
+  }
+ }
+]
