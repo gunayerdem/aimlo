@@ -496,6 +496,13 @@ export function buildPolicyBlock(options: {
   anchorMode?: "stats" | "ocr";          // fix #2: 'ocr' drops the invent-a-stat pressure
   outputFocusMode?: "multi" | "single";  // fix #3: 'single' matches the vision 1-2 sentence schema
   enemyGateMode?: "strict" | "vision";   // fix #4: 'vision' = concrete-anchor enemy items
+  // Rank-5 mükerrer budaması (2026-08-24): HYBRID_LANGUAGE_RULE (415 B),
+  // ENGLISH_WHITELIST_RULE'un katı ALT-KÜMESİ — aynı system mesajında iki kez
+  // aynı whitelist. 'dedupe' → TR dalında HYBRID düşer, whitelist tek kaynaktan
+  // gelir. Default 'full' = bugünkü davranış; yalnız vision opt-in yapar
+  // (anchorMode emsali — rapor/insight/feedback bayt-aynı, denetim-gecesi dersi:
+  // guard'ın kendisi regresyon üretmesin).
+  langRulesMode?: "full" | "dedupe";
   // Prompt-cache (2026-07-20): CONFIDENCE_PROMPTS sits in the MIDDLE of the system
   // prefix and flips 3x per match (calibrating→low→medium→high, driven by
   // roundHistory length). OpenAI caches only the longest common PREFIX, so every
@@ -538,7 +545,9 @@ export function buildPolicyBlock(options: {
     parts.push(NATURAL_COACH_RULE_EN);
     parts.push(SILVER_AUDIENCE_RULE_EN);
   } else {
-    parts.push(HYBRID_LANGUAGE_RULE);
+    // 'dedupe' (rank-5, 2026-08-24): HYBRID whitelist'i ENGLISH_WHITELIST_RULE
+    // zaten kapsıyor — vision çift kopyayı düşürür; default 'full' bayt-aynı.
+    if (options.langRulesMode !== "dedupe") parts.push(HYBRID_LANGUAGE_RULE);
     parts.push(ENGLISH_WHITELIST_RULE);
     parts.push(NATURAL_COACH_RULE);
     parts.push(SILVER_AUDIENCE_RULE);

@@ -609,7 +609,9 @@ function buildSystemMessage(s: Scenario): string {
     buildPolicyBlock({
       confidence, tone: "strict", lang,
       includeEnemyGate: true, includeDecisionRubric: false,
+      // Rank-5 (2026-08-24) sadakat: route.ts langRulesMode:'dedupe' — aynı commit.
       anchorMode: "ocr", outputFocusMode: "single", enemyGateMode: "vision",
+      langRulesMode: "dedupe",
     }),
   ];
   const kb = loadVisionKnowledge({

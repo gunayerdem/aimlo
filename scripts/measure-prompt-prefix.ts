@@ -111,6 +111,8 @@ function buildSystemPrompt(opts: PromptOpts): string {
       anchorMode: "ocr",
       outputFocusMode: "single",
       enemyGateMode: "vision",
+      // Route ile SENKRON (rank-5, 2026-08-24): vision langRulesMode:'dedupe'.
+      langRulesMode: "dedupe",
       // Route ile SENKRON (2026-07-20): confidence metni prefix'ten çıkarılıp
       // user mesajına taşındı. Bu satır olmazsa script ESKİ prompt'u ölçer ve
       // yanlış-negatif regresyon sinyali verir.

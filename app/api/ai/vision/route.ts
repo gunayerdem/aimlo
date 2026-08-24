@@ -716,6 +716,9 @@ export async function POST(request: NextRequest) {
         anchorMode: "ocr",
         outputFocusMode: "single",
         enemyGateMode: "vision",
+        // Rank-5 (2026-08-24): HYBRID_LANGUAGE_RULE, ENGLISH_WHITELIST_RULE'un
+        // alt-kümesi — vision'da çift whitelist düşer (−415 B statik önek).
+        langRulesMode: "dedupe",
         // Prompt-cache (2026-07-20): confidence roundHistory.length ile maç içinde
         // calibrating→low→medium→high diye DEĞİŞİYORDU ve policy bloğu prefix'in
         // en başında olduğu için her geçişte ARKASINDAKİ ~65KB KB cache'ten
