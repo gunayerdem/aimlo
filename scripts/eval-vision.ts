@@ -745,6 +745,17 @@ function buildUserPrompt(s: Scenario): string {
     deathTypeDirective = buildDeathTypeDirective(dtype, [], lang);
   }
 
+  // AÇILIŞ-ROTASYONU — MIRROR route.ts (rank-3, 2026-08-24): round % 3 seed'li
+  // deterministik iskelet seçimi; sadakat sözleşmesi B9 — iki dosya AYNI commit'te
+  // AYNI direktifi kurar, yoksa ölçüm canlıyı yansıtmaz. died=false / round yoksa boş.
+  let openerDirective = "";
+  if (b.died === true && typeof b.round === "number" && Number.isFinite(b.round)) {
+    const oi = ((Math.trunc(b.round as number) % 3) + 3) % 3;
+    openerDirective = lang === "en"
+      ? `\n[OPENER] This round open deathAnalysis with: ${["(a) the most critical ROOT cause", "(b) the lesson as an imperative, with its own verb", "(c) what the enemy did — make the ENEMY the subject"][oi]}. The [DEATH-TYPE HINT] picks the lesson; this line only picks the opener.`
+      : `\n[AÇILIŞ] deathAnalysis açılışı bu round: ${["(a) en kritik KÖK neden", "(b) dersin EMİR hali, dersin kendi fiiliyle", "(c) düşmanın yaptığı — öznen RAKİP olsun"][oi]}. [ÖLÜM-TİPİ İPUCU] dersi seçer; bu satır yalnız açılışı seçer.`;
+  }
+
   // B57 (2026-07-31): dil direktifi — route.ts:1013-1014. EN'de EN BAŞA gelir
   // (route.ts:1048-1049: "model önce dili görsün"); TR'de boş → bayt-aynı.
   const langDirective = lang === "en"
@@ -754,6 +765,7 @@ function buildUserPrompt(s: Scenario): string {
   let prompt = (lang === "en" ? USER_PROMPT_EN : USER_PROMPT) +
     langDirective +
     deathTypeDirective +
+    openerDirective + // AÇILIŞ BİÇİMİ — route ile aynı rotasyon (rank-3, per-round)
     (ctxJson
       ? (lang === "en"
           ? `\n\n[ROUND CONTEXT — OCR pixel truth, more reliable than the screenshot]\n${ctxJson}`

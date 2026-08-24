@@ -1344,6 +1344,27 @@ export async function POST(request: NextRequest) {
           : `\n[DERS GEÇMİŞİ] Bu maçtaki önceki ölümler: ${priorDeathBits.join(" · ")}. [ÖLÜM-TİPİ İPUCU] geldiyse bu round'un dersini O seçer (tip veridir, değiştirme); bu direktifin işi TEKRARI kırmak: tip dayatması yoksa bu round FARKLI bir ders SINIFI seç (pozisyon / util / zamanlama / ekonomi / bilgi) — aynı sınıfı aynı kavram ve aynı kalıp cümleyle ÜST ÜSTE verme; aynı sınıfa düşsen bile dersi BU round'un FARKLI somut detayına (silah / util-sırası / zamanlama / ekonomi) bağla. "crossfire kur" / "tek başına tutma" kalıplarını art arda round'larda tekrarlama. YALNIZ bu satırdaki veriyi kullan — geçmiş detayı uydurma; "[DERS GEÇMİŞİ]" etiketini çıktıya YAZMA.`;
       }
     }
+
+    // (rank-3, 2026-08-24) AÇILIŞ-ROTASYONU — round-seed'li deterministik iskelet seçimi.
+    // NEDEN: OUTPUT_FOCUS_RULE_VISION ANTI-ŞABLON kuralı modele "3 açılış arasında DÖN
+    // (a/b/c)" diye RİCA ediyor ama seed vermiyor — reasoning:minimal'de model hep aynı
+    // açılışı seçiyor (canlı kanıt: livetest10 "ton tekdüze"; real-korpus m1=0.14→0.29).
+    // round % 3 rotasyonu DAYATIR (deathTypeDirective emsali: per-round, user-msg →
+    // prefix cache'e sıfır etki). [ÖLÜM-TİPİ İPUCU] dersi seçmeye DEVAM eder (tip=veri,
+    // değişmez); bu satır YALNIZ cümle iskeletini döndürür — kod kendisiyle çelişmez
+    // (KB-10h dersi). died=false ya da round yokken eklenmez → bugünkü davranış.
+    let openerDirective = "";
+    if (reqBody.died === true && typeof reqBody.round === "number" && Number.isFinite(reqBody.round)) {
+      const oi = ((Math.trunc(reqBody.round) % 3) + 3) % 3;
+      // Varyantlar İSKELET dayatır (real-r3/r3b A/B kanıtı): salt konu ipucu
+      // ("dersiyle başla") modelce açılışa aynen kopyalanıyor ve aynı-formlu
+      // round'lar aynı cümle şekline düşüyordu; gramer-iskeleti (neden-öbeği /
+      // EMİR kipi / RAKİP özneli) ilk-token şeklini yapısal ayrıştırır. ≤178 B.
+      openerDirective = reqLang === "en"
+        ? `\n[OPENER] This round open deathAnalysis with: ${["(a) the most critical ROOT cause", "(b) the lesson as an imperative, with its own verb", "(c) what the enemy did — make the ENEMY the subject"][oi]}. The [DEATH-TYPE HINT] picks the lesson; this line only picks the opener.`
+        : `\n[AÇILIŞ] deathAnalysis açılışı bu round: ${["(a) en kritik KÖK neden", "(b) dersin EMİR hali, dersin kendi fiiliyle", "(c) düşmanın yaptığı — öznen RAKİP olsun"][oi]}. [ÖLÜM-TİPİ İPUCU] dersi seçer; bu satır yalnız açılışı seçer.`;
+    }
+
     const clientContext = reqLang === "en"
       ? langDirective +      // dil emri EN BAŞTA — Türkçe bloklardan önce
         factSheet +
@@ -1353,6 +1374,7 @@ export async function POST(request: NextRequest) {
         agentUnknownDirective + // AGENT UNKNOWN — never attribute an agent to the player (canlı-test #9, per-round)
         abilityVisualDirective + // ABILITY ICONS — görüntüdeki ult/yetenek kanıtı, negatif-koşullu (canlı-test #10, per-round)
         deathTypeDirective +
+        openerDirective +      // OPENER FORM — round-seed'li açılış-iskeleti rotasyonu (rank-3, per-round)
         lessonHistoryDirective + // LESSON HISTORY — ders-sınıfı rotasyonu, yalnız gerçek geçmiş veriden (canlı-test #10, per-round)
         weaponCompDirective +
         kitPressureDirective + // AGENT KIT — nextRoundSuggestion'a kitten somut yetenek dayatması (canlı-test #10, per-round)
@@ -1367,6 +1389,7 @@ export async function POST(request: NextRequest) {
         agentUnknownDirective + // AJAN OKUNAMADI — oyuncuya ajan yakıştırmayı menet (canlı-test #9, per-round)
         abilityVisualDirective + // GÖRÜNTÜDEKİ YETENEK İKONLARI — negatif-koşullu görsel kanıt (canlı-test #10, per-round)
         deathTypeDirective +   // ÖLÜM-TİPİ çıpası — factSheet'ten hemen sonra (per-round, user-msg)
+        openerDirective +      // AÇILIŞ BİÇİMİ — round-seed'li açılış-iskeleti rotasyonu (rank-3, per-round)
         lessonHistoryDirective + // DERS GEÇMİŞİ — ders-sınıfı rotasyonu, yalnız gerçek geçmiş veriden (canlı-test #10, per-round)
         weaponCompDirective +  // SİLAH+KOMP işaretçisi — statik rehberin bölüm seçicisi (per-round, user-msg)
         kitPressureDirective + // AJAN KİTİ — nextRoundSuggestion'a kitten somut yetenek dayatması (canlı-test #10, per-round)
