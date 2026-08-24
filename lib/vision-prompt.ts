@@ -17,6 +17,9 @@ import type { FactGround } from "./reality-checker";
  * defense: the model is told exactly which facts are real and which it must
  * never name/invent. The reality-checker guard remains the deterministic second
  * line. Compact single block to keep the uncached token cost low.
+ * HP yasağı burada bilerek 3 kelime (rank-2 mükerrer temizliği, 2026-08-24):
+ * tam kural zaten HP_BAN_RULE (cache'li) + şema description + stripHpClaims'te
+ * — 4. kopyayı her died-round taze faturalamanın gereği yok.
  */
 export function buildFactSheet(
   fg: FactGround,
@@ -68,14 +71,14 @@ export function buildFactSheet(
     return `\n\n[DEATH-DATA CONTRACT — DEFINITIVE FOR THIS ROUND]\n`
       + `KNOWN (use ONLY these as facts): ${knownLine}.\n`
       + `UNKNOWN (NEVER name/claim/invent these): ${unknownLine}.\n`
-      + `Rule: never fill in an UNKNOWN fact. If the killer is unknown say "an enemy"; if location/weapon/headshot/counts/spike/route are unknown, do NOT bring that topic up or guess from the screen/roster. HP/health claims are ALWAYS banned (never "at low/full health").`;
+      + `Rule: never fill in an UNKNOWN fact. If the killer is unknown say "an enemy"; if location/weapon/headshot/counts/spike/route are unknown, do NOT bring that topic up or guess from the screen/roster. HP/health claims are banned.`;
   }
   const knownLine = known.length ? known.join(", ") : "(bu round net olgu yok)";
   const unknownLine = unknown.length ? unknown.join(", ") : "(yok)";
   return `\n\n[ÖLÜM-VERİ SÖZLEŞMESİ — BU ROUND İÇİN KESİN]\n`
     + `BİLİNEN (yalnız bunları olgu olarak kullan): ${knownLine}.\n`
     + `BİLİNMEYEN (bunları ASLA İSİMLENDİRME/İDDİA ETME, uydurma): ${unknownLine}.\n`
-    + `Kural: BİLİNMEYEN bir olguyu doldurma. Katil bilinmiyorsa "bir düşman" de; yer/silah/headshot/sayı/spike/rota bilinmiyorsa o konuyu AÇMA, ekrandan/roster'dan tahmin etme. CAN/HP iddiası HER ZAMAN yasak ("az canla/tam canla" asla yazma).`;
+    + `Kural: BİLİNMEYEN bir olguyu doldurma. Katil bilinmiyorsa "bir düşman" de; yer/silah/headshot/sayı/spike/rota bilinmiyorsa o konuyu AÇMA, ekrandan/roster'dan tahmin etme. CAN/HP iddiası yasak.`;
 }
 
 export const ROUND_FEEDBACK_SCHEMA = {
@@ -468,11 +471,16 @@ NOT: Bu route'ta alan başına EN FAZLA 1-2 cümle — aşağıdaki politikada g
 // okunan katmanda (user-msg görev satırı) durması modeli kısa kesmeye itiyordu;
 // ilk düşen şey WHY-ZORUNLU gerekçesi oluyordu (softi: "çok kısa/çok genel").
 // Tek sayıya indirildi: şemayla birebir aynı.
+// MÜKERRER-TEMİZLİK (maliyet-negatif dalga rank-2, 2026-08-24): buradaki side
+// paragrafı (ölçüldü: TR 301 B / EN 315 B ayraçlarla, her round UNCACHED faturalanıyordu)
+// SYSTEM_PROMPT kural 5b'nin (cache'li, daha detaylı) + route'taki etiketli
+// ctx.side değerinin ("attack (SALDIRI — sen siteye giriyorsun)") 3. kopyasıydı
+// → silindi, yerine 5b'ye tek satır işaretçi. Boşalan bütçeyle görev satırına
+// canlı-koç çapası (KB_SOURCE_RULE'un "canlı izlemişsin gibi" hedefi üretim
+// anına taşındı; "görmediğini anlatma" yarısı B35/reality-checker ile hizalı).
 export const USER_PROMPT = `Valorant round sonu. Aşağıdaki OCR/CLIENT pixel truth — screenshot'tan güvenilir.
 
-GÖREVİN: Gerçek bir koç gibi, kısa ve direkt feedback ver. AI tarzı uzun açıklamalar YASAK. UZUNLUK: deathAnalysis ve nextRoundSuggestion 1-2 cümle (en fazla), enemyAnalysis 2 madde × 1 cümle.
-
-ÖNCE side'a bak: "side":"attack" ise SALDIRI round'u (sen giriyorsun → entry/execute/trade/space/lurk dilini kullan), "side":"defense" ise SAVUNMA round'u (sen tutuyorsun → açı tut/off-angle/crossfire/retake/save dilini kullan). Feedback'i bu side'a göre yaz — yanlış side dili kullanma.
+GÖREVİN: Bu round'u az önce CANLI izlemiş koç gibi konuş — ama yalnız sana verilen olgulardan; görmediğini anlatma. Kısa ve direkt feedback ver. AI tarzı uzun açıklamalar YASAK. UZUNLUK: deathAnalysis ve nextRoundSuggestion 1-2 cümle (en fazla), enemyAnalysis 2 madde × 1 cümle. Feedback'i side alanının diliyle yaz (kural 5b).
 
 Sadece JSON döndür — markdown yok, code block yok, başka açıklama yok.`;
 
@@ -480,8 +488,6 @@ Sadece JSON döndür — markdown yok, code block yok, başka açıklama yok.`;
 // konuşmalı — Türkçe görev satırı modelin çıktı dilini Türkçeye çekiyordu.
 export const USER_PROMPT_EN = `Valorant round end. The OCR/CLIENT data below is pixel truth — more reliable than the screenshot.
 
-YOUR TASK: give short, direct feedback like a real coach. Long AI-style explanations are BANNED. LENGTH: deathAnalysis and nextRoundSuggestion 1-2 sentences (max), enemyAnalysis 2 items × 1 sentence.
-
-Check the side FIRST: "side":"attack" means an ATTACK round (you are entering → use entry/execute/trade/space/lurk language), "side":"defense" means a DEFENSE round (you are holding → use hold/off-angle/crossfire/retake/save language). Write the feedback for that side — never use the wrong side's language.
+YOUR TASK: talk like a coach who just watched this round LIVE — but only from the facts you were given; never describe what you did not see. Keep it short and direct. Long AI-style explanations are BANNED. LENGTH: deathAnalysis and nextRoundSuggestion 1-2 sentences (max), enemyAnalysis 2 items × 1 sentence. Match the coaching language to the side field (rule 5b).
 
 Return ONLY JSON — no markdown, no code block, no extra explanation.`;
