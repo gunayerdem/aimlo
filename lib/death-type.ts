@@ -132,10 +132,34 @@ export type DeathSignals = {
   highStakes?: boolean;     // route.ts türetir (score): uzatma ya da maç sayısı round'u
 };
 
+/** ── DERS AİLELERİ (canlı-test #14, 2026-09-01 — Kaan 8/12 aynı-nakarat vakası) ──
+ *  Kullanıcı KULAĞINDA aynı ders gibi çınlayan tipler tek ailede toplanır:
+ *  over-peek-advantage ("gereksiz geniş peek atma") + def-wide-hold ("açıyı geniş
+ *  açtın") + full-buy-first-contact ("geniş açıya çıkma") üçü de "geniş açı/peek"
+ *  nakaratı. Tekrar sayacı ve bastırma AİLE düzeyinde işler — tip değişse de aynı
+ *  nakarat sürüyorsa tekrar sayılır. Aile üyesi olmayan tipler kendi başına aile. */
+export const DEATH_TYPE_FAMILY: Partial<Record<DeathType, string>> = {
+  "over-peek-advantage": "genis-aci",
+  "def-wide-hold": "genis-aci",
+  "full-buy-first-contact": "genis-aci",
+};
+
+/** Tip → aile anahtarı (ailesizse tipin kendisi). */
+export function deathFamily(t: DeathType): string {
+  return DEATH_TYPE_FAMILY[t] ?? t;
+}
+
 /** Classify a death into exactly one type. Priority = MOST specific → most generic;
  *  the first matching branch wins, so an op death is "op-angle" even if it was also a
- *  solo entry. `info-less-push` is the genuine default (no specific signal). */
-export function classifyDeath(b: DeathSignals): DeathType {
+ *  solo entry. `info-less-push` is the genuine default (no specific signal).
+ *
+ *  `suppress` (canlı-test #14): bastırılan tipin dalı ATLANIR ve akış bir sonraki
+ *  GERÇEK dala düşer — uydurma yok, kanıt-temelli kalır. Yalnız aile-üyesi dallar
+ *  bastırılabilir; yan default'lar (def-wide-hold/info-less-push, satır sonu) asla
+ *  bastırılmaz → sonuç her zaman var (kurtarma-yolu kuralı). Aile-bastırma kararının
+ *  kendisi classifyDeathVaried'de: akış aynı ailenin default'una dönerse bastırma
+ *  İPTAL edilir ve orijinal tip korunur (çeşitlilik o durumda banLine katmanından gelir). */
+export function classifyDeath(b: DeathSignals, suppress?: ReadonlySet<DeathType>): DeathType {
   const killer = (b.killerInfo || "").toLowerCase();
   // Tek-kaynak silah sözlüğü (lib/comp-weapon.ts WEAPON_CLASS) — denetim 2026-07-08:
   // eski yerel regex'te judge EKSİKTİ (eco/force'un ana silahı) ve bulldog (2050
@@ -227,7 +251,7 @@ export function classifyDeath(b: DeathSignals): DeathType {
   if (atk && b.tradedByAlly === false) return "entry-no-trade";          // un-traded entry
   // full-buy-first-contact (KB wiring 2026-07-19): timing-window'dan ÖNCE —
   // ekonomi sinyali pencere dersinden daha spesifik (tam alımda ilk temas util'in işi).
-  if (eco === "full_buy" && atk && b.deathTiming === "early") return "full-buy-first-contact";
+  if (eco === "full_buy" && atk && b.deathTiming === "early" && !suppress?.has("full-buy-first-contact")) return "full-buy-first-contact";
   if (b.deathTiming === "early" && atk) return "timing-window";          // peeked into the window
   // def-no-crossfire (KB wiring 2026-07-19): def-wide-hold default'undan önce —
   // trade'lenmemiş savunma ölümü ölçülü killfeed sinyali (entry-no-trade simetriği).
@@ -239,7 +263,7 @@ export function classifyDeath(b: DeathSignals): DeathType {
   // akıllı default'lar ölü koda dönüyordu. Kapı aynı kaldı (+1 avantaj kapsamı — bu
   // dalganın amacı — korunur) ama katman değişti: ölçülü sinyalli dallar önce
   // denenir, sayı-avantajı dersi spesifik sebebi olmayan ölümlere kalır.
-  if (aliveReliable && (aa as number) >= (ea as number)) return "over-peek-advantage"; // man-advantage
+  if (aliveReliable && (aa as number) >= (ea as number) && !suppress?.has("over-peek-advantage")) return "over-peek-advantage"; // man-advantage
   // crosshair-loss yeni kapısı (canlı-test #8 uyumu, 2026-07-19): hp>=100 kapısı
   // KALDIRILDI — stale tek HP örneği "tam can" kanıtı sayılamaz (yukarıdaki
   // low-hp gerekçesinin aynası) ve 50 can + 50 kalkanla kırpılmış oyuncu da 100
@@ -269,6 +293,27 @@ export function classifyDeath(b: DeathSignals): DeathType {
   return "info-less-push";                                                // attack default
 }
 
+/** ÇEŞİTLİLİK KATMANI (canlı-test #14): önce normal sınıflandır; aynı AİLE bu maçta
+ *  zaten ≥2 kez verildiyse aileyi bastırarak yeniden sınıflandır — akış bir sonraki
+ *  gerçek dala (crosshair-loss / seri / entry-traded / karşı-taraf default'u) iner.
+ *  Bastırılmış akış AYNI ailenin default'una dönerse (Kaan sınıfı: savunma + başka
+ *  sinyal yok → def-wide-hold) bastırma İPTAL edilir, orijinal tip korunur —
+ *  çeşitlilik o durumda dürüstçe banLine'ın iskelet-değişim dayatmasına kalır
+ *  (uydurma alternatif tip YOK). prev boşsa davranış classifyDeath ile birebir. */
+export function classifyDeathVaried(b: DeathSignals, prev: DeathType[] = []): DeathType {
+  const primary = classifyDeath(b);
+  const fam = DEATH_TYPE_FAMILY[primary];
+  if (!fam || prev.length === 0) return primary;
+  const famCount = prev.filter((p) => DEATH_TYPE_FAMILY[p] === fam).length;
+  if (famCount < 2) return primary;
+  const familyMembers = new Set(
+    (Object.keys(DEATH_TYPE_FAMILY) as DeathType[]).filter((t) => DEATH_TYPE_FAMILY[t] === fam),
+  );
+  const alt = classifyDeath(b, familyMembers);
+  if (DEATH_TYPE_FAMILY[alt] === fam) return primary; // aile-default çakışması → iptal
+  return alt;
+}
+
 /** Build the user-message directive: which block + lesson for THIS death, plus a ban
  *  on concepts already used earlier this match. Injected into the USER message (per-round,
  *  uncached) so the SYSTEM prompt-cache prefix is untouched (zero cache-hit impact). */
@@ -290,22 +335,29 @@ export function buildDeathTypeDirective(
   // (real-r4 0.818 / real-r4b 0.909 vs baseline 0.773) — kendi-tip muafiyeti +
   // "diğerlerini yasakla" birleşimi modeli tekrarlanan kavramın İÇİNE huniliyordu
   // (kb-findings "rotation" (2) öngörüsü aynen). Tip TEKRAR ediyorsa yasak sayım
-  // değil KALIP yasağı: ders (tip=veri) kalır, cümle sınıfı/kalıp değişir. prev boş
-  // (bugünkü desktop, echo yok, fallback boş) → her iki dal da boş = eski davranış.
-  const repeatCount = prev.filter((p) => p === type).length;
+  // değil KALIP yasağı: ders (tip=veri) kalır, cümle sınıfı/kalıp değişir.
+  // PREMİS DÜZELTMESİ (canlı-test #14): desktop echo'su v1.0.17'de CANLI
+  // (roundHistory[].death_type dolu geliyor, commit 07a91b1) — prev listesi
+  // artık gerçek veri; "echo yok, fallback boş" cümlesi bayattı.
+  // AİLE-DÜZEYİ SAYIM (canlı-test #14, Kaan 8/12 vakası): tip değişse de aynı
+  // nakarat sürüyorsa (genis-aci ailesi) tekrar SAYILIR — sayaç aile üstünden.
+  const repeatCount = prev.filter((p) => deathFamily(p) === deathFamily(type)).length;
   // AZARLAMAYAN SARMALAYICI (denetim B85, 2026-07-31): trade'lenmiş ölümde ders
   // "hata yaptın" değil "alınan alanın bedeli doğru muydu" olmalı — direktif bunu
   // AÇIKÇA söyler ki prompt'un trade kuralıyla çelişmesin.
   const tradedNote = type === "entry-traded";
   if (lang === "en") {
     const banLineEn = repeatCount >= 1
-      ? `\nYou already coached this SAME death-type ${repeatCount}x this match — do NOT rebuild an earlier round's stock sentence or pattern; keep the type's lesson but anchor it to a DIFFERENT concrete detail of THIS round.`
+      ? `\nYou already gave this lesson (or its close family) ${repeatCount}x this match — change the sentence SKELETON, the opening pattern AND the anchor; use a different sentence class and tie it to a DIFFERENT concrete detail of THIS round.`
       : bannedConcepts.length
         ? `\nEARLIER ROUNDS THIS MATCH ALREADY COVERED: ${bannedConcepts.join(", ")}. Do NOT repeat those angles (or synonyms) — this round has a different death-type, coach a different concept.`
         : "";
+    // Canlı-test #14 (kod-ad sızıntısı): ham enum slug'ı ('over-peek-advantage')
+    // direktiften SİLİNDİ — 3 kez kullanıcı metnine verbatim sızdı. KB bölüm
+    // BAŞLIĞI tek işaretçi olarak yeter (R4 'avantajı sadeleştir' izi kanıtı).
     return (
       `\n[DEATH-TYPE HINT — this round's focus]\n` +
-      `This death's type: ${type}. The KB section in the system prompt for this type is titled "${g.kbBlock}" (the KB is in Turkish).\n` +
+      `The KB section in the system prompt for this death is titled "${g.kbBlock}" (the KB is in Turkish).\n` +
       `Base deathAnalysis on THAT section's lesson — but do NOT copy its sentence; restate the lesson in ENGLISH, tied to this round's concrete details (callout + agent + weapon).\n` +
       `Use the "caught in the open / don't push without utility" framing ONLY if this type really is a utility-absence type (info-less-push / entry-no-trade); otherwise give THIS type's own lesson.` +
       (tradedNote
@@ -315,7 +367,7 @@ export function buildDeathTypeDirective(
     );
   }
   const banLine = repeatCount >= 1
-    ? `\nBu tipin dersini bu maçta ${repeatCount} kez zaten verdin — önceki round'un kalıp cümlesini ve iskeletini YENİDEN KURMA; tipin dersi kalsın ama BU round'un FARKLI bir somut detayına bağla.`
+    ? `\nBu dersi (yakın ailesiyle) bu maçta ${repeatCount} kez zaten verdin — cümle İSKELETİNİ, açılış kalıbını VE çapayı değiştir; farklı bir cümle sınıfıyla BU round'un FARKLI bir somut detayına bağla.`
     : bannedConcepts.length
       ? `\nBU MAÇTA ÖNCEKİ ROUND'LARDA ŞU AÇILARI ZATEN VERDİN: ${bannedConcepts.join(", ")}. Aynısını (eşanlamlısı dahil) TEKRARLAMA — bu round farklı bir ölüm-tipi, farklı bir kavramdan konuş.`
       : "";
@@ -323,9 +375,12 @@ export function buildDeathTypeDirective(
   // Önceki sürüm tam-cümle 'angle' veriyordu, model onu kopyalıyordu → KB bypass, robotik.
   // Şimdi sadece ölüm-tipini + KB BÖLÜMÜNÜ işaret eder; modelin KENDİ derin cümlesini
   // (sistem prompt'undaki tam KB bölümünden) bu round'un somut detayına bağlayarak yazmasını ister.
+  // Canlı-test #14 (kod-ad sızıntısı): 'Bu ölümün tipi: ${type}.' cümlesi SİLİNDİ —
+  // R7/R11/R23'te enum slug'ı kullanıcı metnine verbatim sızdı ('over-peek-advantage
+  // hatasını yaptın'). KB bölüm BAŞLIĞI işaretçi olarak yeterli; ~10 token/istek kâr.
   return (
     `\n[ÖLÜM-TİPİ İPUCU — bu round'un odağı]\n` +
-    `Bu ölümün tipi: ${type}. Sistem prompt'undaki KB'de bu tipe karşılık gelen bölüm: "${g.kbBlock}".\n` +
+    `Bu ölümün KB bölümü: "${g.kbBlock}".\n` +
     `deathAnalysis'i O KB bölümünün dersine dayandır — ama bölümün cümlesini KOPYALAMA. Bu round'un ` +
     `somut detayına (callout + ajan + silah) bağlayarak, KB'nin derinliğini KENDİ cümlenle ver.\n` +
     `"açıkta kaldın / utility'siz girme" kalıbını SADECE bu tip gerçekten util-yokluğu ise (info-less-push / entry-no-trade) kullan; değilse o tipin KENDİ dersini ver.` +

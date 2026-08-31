@@ -78,7 +78,14 @@ export const MAP_CALLOUTS: Record<string, readonly string[]> = {
   lotus: ["a default", "a link", "a main", "a root", "a site", "a stairs", "a tree", "b default", "b main", "b site", "b upper", "c default", "c hall", "c main", "c mound", "c site", "c waterfall", "mid", "mid link", "silent drop", "waterfall"],
   pearl: ["a art", "a ct", "a default", "a dugout", "a flowers", "a link", "a main", "a secret", "a site", "b club", "b default", "b hall", "b link", "b main", "b ramp", "b screen", "b site", "b tower", "b tunnel", "ct spawn", "mid", "mid connector", "mid doors", "mid plaza", "mid shops", "mid top", "t spawn"],
   split: ["a back", "a ct", "a default", "a elbow", "a lobby", "a main", "a rafters", "a ramp", "a screens", "a sewer", "a site", "a tower", "b back", "b ct", "b default", "b garage", "b link", "b main", "b pillar", "b rafters", "b site", "b tower", "ct spawn", "elbow", "garage", "heaven", "link", "lobby", "mail", "mid", "mid bottom", "mid mail", "mid rope", "mid top", "mid vent", "pillar", "rafters", "ramp", "rope", "screens", "sewer", "t spawn", "tower", "vent"],
-  summit: ["a art", "a cave", "a garden", "a link", "a lobby", "a main", "a site", "a wall", "b ct", "b gym", "b link", "b lobby", "b main", "b site", "b tower", "b trophy", "b wall", "boxes", "close box", "ct", "double box", "mid", "mid bend", "mid bottom", "mid fountain", "mid tiles", "mid top", "mid wall", "mid window", "plant", "triples"],
+  // canlı-test #14 (web-doğrulandı, metabot.gg 24-callout listesi): 'a hall' ve
+  // 'b drop' resmi listede VAR ama tabloda yoktu — 'b drop' summit.md §12'de zaten
+  // yazılıydı (tablo-eksikliği meşru adı bozuyordu, map-callouts kendi dokümanının
+  // "daha kötü yön" uyarısı); 'a hall' aynı commit'te summit.md §12'ye de eklendi
+  // (verify-kb tablo→KB yönü ghost üretmesin). NOT: 'b ule' (Kaan OCR'ı) HİÇBİR
+  // kaynakta yok — muhtemel TR 'B KULE'=B Tower artefaktı; dump kanıtı gelmeden
+  // TR-varyant EKLENMEZ (düzeltme katmanı desktop kanonik eşleyicisidir).
+  summit: ["a art", "a cave", "a garden", "a hall", "a link", "a lobby", "a main", "a site", "a wall", "b ct", "b drop", "b gym", "b link", "b lobby", "b main", "b site", "b tower", "b trophy", "b wall", "boxes", "close box", "ct", "double box", "mid", "mid bend", "mid bottom", "mid fountain", "mid tiles", "mid top", "mid wall", "mid window", "plant", "triples"],
   sunset: ["a alley", "a elbow", "a link", "a main", "a site", "b main", "b market", "b market kapısı", "b site", "boba", "courtyard", "ct spawn", "market", "market kapısı", "mid", "mid bottom", "mid courtyard", "mid top", "t spawn", "tiles"],
 };
 

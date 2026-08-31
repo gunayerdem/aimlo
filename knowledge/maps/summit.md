@@ -22,6 +22,12 @@ Summit, Çin dağlarındaki bir Radiant antrenman akademisinde geçen geniş bir
 
 ## 2. Ölüm Bölgeleri
 
+> Bu bölümü kullanırken dersi KANITA bağla. Elinde round geçmişi varsa cümleye onunla başla; yoksa sayı uydurma — o round'un ölüm yerini, öldüren ajanı ve silahı adlandırmakla yetin. Veri yoksa iddia da yok.
+
+### A Main / A Lobby
+
+A Lobby'den A Main'e giren koridor Summit'in en uzun görüş hatlarından — A Art'tan (duvar ayaktayken) dar açıyla, site içinden ve A Garden'dan çapraz tutulur. Utility'siz geniş peek atma; smoke hattın ortasına, flash köşeye, sonra gir. Duvar düşmüşse A Art açısı kapalıdır — rotanı ona göre kur.
+
 ### A Garden
 
 A Garden, A Site'a girerken karşılaştığın yakın açı. Plant'a koşmadan önce burayı temizlemezsen, sen spike'a bakarken Garden'daki savunucu seni yandan vurur. Site'a her girişte önce Garden'ı temizle.
@@ -333,9 +339,7 @@ Controller şart — geniş görüş hatları smoke'suz kapanmaz (Omen default; 
 
 **Jett:** Dash ve dikey hareketi kullanacak alan var ama Summit'in geniş açıları yakın mesafe duelist'ten çok bilgi ve util oyunu ödüllendirir. Op işlevsel ama tek başına haritayı çözmez.
 
-**Iso:** Duel kazanma yeteneği değerli ama Summit'in Mid ve duvar oyunu takım util'i ister — Iso tek başına geniş alanı açamaz.
-
-**Neon:** Hız avantajı büyük haritada cazip görünür ama temizlenmemiş geniş açıya hızla girmek seni ilk kanda öldürür. Initiator desteği olmadan değeri düşer — en az kritik rol.
+**Iso / Neon:** Duel ve hız avantajları değerli ama Summit'in Mid + duvar oyunu takım util'i ister — initiator desteği olmadan ikisinin de değeri düşer.
 
 ## 12. Callout'lar & Pozisyon Rehberi
 
@@ -347,6 +351,7 @@ Controller şart — geniş görüş hatları smoke'suz kapanmaz (Omen default; 
 - **A Link:** A site ile Mid Bend / Mid Fountain'i bağlayan ana rotasyon koridoru. Flank ve split için kritik.
 - **A Art:** A Wall'un hemen yanındaki pozisyon. Duvar ayaktayken buradan A Main'e dar bir açı tutulur; duvar düştükten sonra bu açı kalıcı olarak kapanır — A Wall'u düşürmeden önce buradaki adamını çek.
 - **A Wall:** Düşürülebilir duvar (A Art / A Garden civarı). Site'ı aldıktan sonra düşür, retake açılarını kesersin.
+- **A Hall:** A tarafı geçiş bölgesi.
 - **CT / Boxes:** Savunmanın A'ya geldiği yol ve site içi siper. Retake buradan gelir.
 
 ### B Site ve Çevresi
@@ -410,7 +415,7 @@ Summit büyük bir harita — pistol round'da Mid kontrolü erken bilgi ve split
 
 ### Eco / Force Buy Kararları
 
-Geniş haritada eco round'unda dar açı dövüşü zor — Spectre ile uzun hatlarda zorlanırsın. Force buy kararını verirken haritanın büyüklüğünü hesaba kat: Marshal uzun A Main ya da Mid Fountain hattında round çevirebilir. Ama iki kişi Spectre alırken üç kişi Classic tutuyorsa bu force buy değil, parayı çöpe atmaktır.
+Geniş haritada eco round'unda dar açı dövüşü zor — Spectre ile uzun hatlarda zorlanırsın. Force buy kararını verirken haritanın büyüklüğünü hesaba kat: Marshal uzun A Main ya da Mid Fountain hattında round çevirebilir.
 
 ### Operator Değeri
 

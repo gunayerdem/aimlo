@@ -635,6 +635,73 @@ const EN_REPORTED_AS_RE = /\b(is|was)\s+reported\s+as\b/gi;
  *  içindeki "as"e sol-sınır \s+ şartı yüzünden ASLA yapışmaz). */
 const EN_AS_REPORTED_RE = /,?\s+as\s+reported(?=\s*[.!?;]|$)/gi;
 
+// ══════════════════════════════════════════════════════════════════════════════
+// ÖLÜM-TİPİ KOD-ADI SÜZGECİ (canlı-test #14, 2026-09-01)
+//
+// Kaan'ın TR metnine enum slug'ı 3 kez VERBATIM sızdı: R11 "over-peek-advantage
+// hatasını yaptın", R23 "over peek advantage yüzünden öldün", R7 "def-geniş-hold
+// tipi ile" (YARI-ÇEVRİLİ — tam-eşleşme listesi onu kaçırırdı). Kaynak kurutuldu
+// (death-type.ts direktiflerinden slug cümlesi silindi); burası SINIR SAVUNMASI.
+// KURTARMA YOLU: cümle SİLİNMEZ — slug öbeği elle yazılmış düzyazı karşılığıyla
+// değiştirilir (DEATH_TYPE_GUIDE.concept alanı KULLANILMAZ — o da kod-ad).
+// Desen disiplini: tireli slug zinciri hiçbir dilde doğal düzyazı değildir;
+// meşru tireli koç terimleri (post-plant, off-angle, anti-eco, re-peek) hiçbir
+// desenin TAM eşleşmesi değildir (tek tek kontrol edildi). Ateşlenmezse bayt-aynı.
+// ══════════════════════════════════════════════════════════════════════════════
+const DEATH_TYPE_TOKEN_REWRITES: ReadonlyArray<[RegExp, { tr: string; en: string }]> = [
+  // Gözlenen sızıntı ailesi — tire/boşluk/yarı-çeviri toleranslı (R11+R23+R7 fixture).
+  [/\bover[-\s]?peek[-\s]advantage\b/giu, { tr: "avantajı yakma", en: "over-peeking your advantage" }],
+  [/\bdef[-–][\p{L}]{1,12}[-–]hold\b/giu, { tr: "geniş savunma açısı tutma", en: "wide defensive hold" }],
+  // Kalan enum slug'ları — YALNIZ tam tireli biçim (doğal metinde geçmez).
+  [/\brepeat-angle\b/giu, { tr: "aynı açıdan ölme", en: "dying to the same angle" }],
+  [/\bop-angle\b/giu, { tr: "Operator açısına yakalanma", en: "getting caught by the Operator angle" }],
+  [/\bpistol-round\b/giu, { tr: "pistol round açılışı", en: "pistol-round opening" }],
+  [/\beco-force-loss\b/giu, { tr: "ekonomi kararı", en: "economy call" }],
+  [/\bentry-no-trade\b/giu, { tr: "trade'siz giriş", en: "untraded entry" }],
+  [/\bentry-traded\b/giu, { tr: "trade'lenmiş giriş", en: "traded entry" }],
+  [/\bpost-plant-solo\b/giu, { tr: "post-plant'te tek kalma", en: "playing the post-plant alone" }],
+  [/\bretake-no-util\b/giu, { tr: "util'siz retake", en: "retake without utility" }],
+  [/\bretake-advantage-thrown\b/giu, { tr: "retake avantajını eritme", en: "throwing the retake advantage" }],
+  [/\bnumbers-down-carry\b/giu, { tr: "sayı azken silahı taşımama", en: "not saving while down numbers" }],
+  [/\bcrosshair-loss\b/giu, { tr: "düello kaybı", en: "losing the duel" }],
+  [/\btiming-window\b/giu, { tr: "erken çıkış", en: "peeking into the timing window" }],
+  [/\blate-def-no-plant\b/giu, { tr: "geç round savunma sabrı", en: "late-round defensive patience" }],
+  [/\blate-no-plant\b/giu, { tr: "geç round kararı", en: "late-round call" }],
+  [/\bfull-buy-first-contact\b/giu, { tr: "tam alımda ilk temas", en: "first contact on a full buy" }],
+  [/\bop-loss\b/giu, { tr: "Operator kaybı", en: "losing the Operator" }],
+  [/\blow-hp-no-save\b/giu, { tr: "save etmeme", en: "not saving" }],
+  [/\bclutch-lost\b/giu, { tr: "clutch kaybı", en: "lost clutch" }],
+  [/\bult-in-pocket\b/giu, { tr: "kullanılmamış ult", en: "unused ult" }],
+  [/\blurk-caught\b/giu, { tr: "kopuk lurk", en: "disconnected lurk" }],
+  [/\bloss-streak\b/giu, { tr: "kayıp serisi", en: "loss streak" }],
+  [/\bwin-streak-comfort\b/giu, { tr: "seri rahatlığı", en: "win-streak comfort" }],
+  [/\bovertime-matchpoint\b/giu, { tr: "yüksek ağırlıklı round", en: "high-stakes round" }],
+  [/\bdef-no-crossfire\b/giu, { tr: "crossfire'sız savunma", en: "defending without a crossfire" }],
+  [/\binfo-less-push\b/giu, { tr: "tetikleyicisiz basma", en: "pushing without a trigger" }],
+];
+
+/** Ölüm-tipi kod-adlarını koç metninden söker (dil-BAĞIMSIZ — cleanCoachText'in
+ *  her iki dalında da koşar). Slug öbeği düzyazıyla değiştirilir; ardından kalan
+ *  " tipi" meta-kuyruğu düşürülür ("geniş savunma açısı tutma tipi ile" →
+ *  "geniş savunma açısı tutma ile"). Değişiklik yoksa bayt-aynı döner. */
+export function stripDeathTypeTokens(text: string, lang: "tr" | "en"): string {
+  if (!text) return text;
+  let t = text;
+  for (const [re, rep] of DEATH_TYPE_TOKEN_REWRITES) {
+    t = t.replace(re, lang === "en" ? rep.en : rep.tr);
+  }
+  if (t !== text && lang === "tr") {
+    // Yeniden yazım sonrası sarkan tip-meta kuyruğu (yalnız bizim ikamelerimizin
+    // hemen ardından — genel " tipi" avı DEĞİL, meşru "post-plant tipi" sınıfına
+    // dokunmaz çünkü yalnız ikame metinlerimizi hedefler).
+    for (const [, rep] of DEATH_TYPE_TOKEN_REWRITES) {
+      t = t.replace(new RegExp(rep.tr.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\s+tipi(?![a-zçğıöşü])", "giu"), rep.tr);
+    }
+    t = t.replace(/\s{2,}/g, " ");
+  }
+  return t;
+}
+
 /**
  * Sistem-içi meta-dili (OCR/kayıt/sistemde/tespit edildi/veride...) koç
  * metninden cerrahi olarak ayıklar (canli-test #10 kalite dalgasi, 2026-08-05).
@@ -707,6 +774,11 @@ export function findMetaTermHits(text: string): string[] {
     /(?<![a-zçğıöşü])raporlan[a-zçğıöşü]*/giu,
     /(?<![a-zçğıöşü])rapor\s+edil[a-zçğıöşü]*/giu,
     /(?<![a-zçğıöşü])rapor(?:lar)?a\s+göre(?![a-zçğıöşü])/giu,
+    // Ölüm-tipi kod-adları (canlı-test #14 — süzgeçle eş-genişlik kuralı):
+    // gözlenen varyant ailesi + tam tireli slug'lar (stripDeathTypeTokens listesi).
+    /\bover[-\s]?peek[-\s]advantage\b/giu,
+    /\bdef[-–][\p{L}]{1,12}[-–]hold\b/giu,
+    /\b(?:repeat-angle|op-angle|pistol-round|eco-force-loss|entry-no-trade|entry-traded|post-plant-solo|retake-no-util|retake-advantage-thrown|numbers-down-carry|crosshair-loss|timing-window|late-no-plant|late-def-no-plant|full-buy-first-contact|op-loss|low-hp-no-save|clutch-lost|ult-in-pocket|lurk-caught|loss-streak|win-streak-comfort|overtime-matchpoint|def-no-crossfire|info-less-push)\b/giu,
     // EN aynası — "reported as" / "as reported" (koç metninde meşru kullanımı yok).
     /\breported\s+as\b/gi,
     /\bas\s+reported\b/gi,
@@ -857,6 +929,10 @@ export function cleanCoachText(text: string, lang: "tr" | "en"): string {
   for (const w of CLEAN_WEAPON_NAMES) {
     t = t.replace(new RegExp("\\b" + w + "\\b", "gi"), w);
   }
+  // ÖLÜM-TİPİ KOD-ADI SÜZGECİ (canlı-test #14): dil-BAĞIMSIZ — slug'lar İngilizce
+  // olduğundan TR dalındaki stripMetaTerms onları göremezdi; her iki dilde de
+  // dil dallarından ÖNCE koşar (Kaan R7/R11/R23 sızıntı fixture'ları).
+  t = stripDeathTypeTokens(t, lang);
   if (lang === "tr") {
     // ── META-DİL SÜZGECİ (canli-test #10 kalite dalgasi, 2026-08-05) ───────
     // TR_JARGON'dan ÖNCE koşar: işaretleyiciler ("OCR'da", "telemetri...")

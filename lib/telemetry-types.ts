@@ -18,7 +18,20 @@ export type TelemetryEventType =
   /** Per-frame OCR pipeline budget (M23 instrumentation). */
   | "ocr_frame_budget_ms"
   /** Lifecycle counter — match completed end-to-end. */
-  | "match_completed";
+  | "match_completed"
+  /**
+   * Canlı-test #14 (2026-09-01): dakikalık izleme-sağlığı nabzı — Kaan'ın
+   * kayıp-log gecesinde kör-pencere/OCR-isabet/basınç ayrımı yapılamadı;
+   * bu event tek başına o teşhisi keser. Alan paketlemesi (şema değişmeden):
+   *   value = işlenen tick sayısı (dakika içinde)
+   *   count = atlanan tick sayısı (nofocus + wgc-noframe + diğer)
+   *   round = ROUND_COUNT anlık değeri
+   *   code  = kompakt PII'siz durum dizesi ≤64ch, örn.
+   *           "wgc b3/1 s12+0 p0 6-5" → capture-kaynak, banner cand/confirm,
+   *           skor ok+red, basınç-sn, committed skor. Desktop telemetry.rs
+   *           CANONICAL_KIND_LIST ile SENKRON (CLAUDE.md sözleşmesi).
+   */
+  | "watch_health";
 
 export interface TelemetryEvent {
   /** Discriminator. */
@@ -89,6 +102,7 @@ const VALID_TYPES: ReadonlySet<TelemetryEventType> = new Set<TelemetryEventType>
   "error_code_count",
   "ocr_frame_budget_ms",
   "match_completed",
+  "watch_health", // canlı-test #14 — desktop CANONICAL_KIND_LIST ile senkron
 ]);
 
 /**
@@ -178,6 +192,10 @@ export function validateTelemetryEvent(
       break;
     case "match_completed":
       // No required value — pure counter event.
+      break;
+    case "watch_health":
+      // value (işlenen tick) zorunlu; count/code/round opsiyonel paket alanları.
+      if (typeof e.value !== "number") return "value_required";
       break;
   }
 

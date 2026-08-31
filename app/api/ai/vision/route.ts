@@ -20,7 +20,8 @@ import { buildAgentAbilityHint, enforceAgentKit, AGENT_ABILITIES } from "@/lib/a
 // zinciriyle aynı sırayı uygular (stripNumericHp → stripHpClaims).
 import { cleanCoachText, clampWords, stripNumericHp, stripHpClaims, enforceSuppliedCallout } from "@/lib/coach-text";
 import { SYSTEM_PROMPT, SYSTEM_PROMPT_EN_ADDENDUM, USER_PROMPT, USER_PROMPT_EN, buildFactSheet, buildRoundFeedbackSchema } from "@/lib/vision-prompt";
-import { classifyDeath, buildDeathTypeDirective } from "@/lib/death-type";
+import { classifyDeathVaried, buildDeathTypeDirective } from "@/lib/death-type";
+import { calloutBelongsToMap } from "@/lib/map-callouts";
 // match-concepts (rank-4, 2026-08-24): cross-round ban fallback'i — desktop
 // death_type echo'su (Faz2) gelene kadar prevDeathTypes'ı sunucu-yanı Upstash
 // set'inden besler. Her hata yolu sessiz boş liste/no-op → feedback bloklanmaz.
@@ -1097,7 +1098,25 @@ export async function POST(request: NextRequest) {
       // Spike Rush) eşik hiç tetiklenmez → yanlış pozitif üretmez.
       const scoreM = typeof reqBody.score === "string" ? reqBody.score.match(/(\d{1,2})\D+(\d{1,2})/) : null;
       const highStakes = !!scoreM && (parseInt(scoreM[1], 10) >= 12 || parseInt(scoreM[2], 10) >= 12);
-      const dtype = classifyDeath({
+      // CROSS-ROUND geçmişi ARTIK SINIFLANDIRMADAN ÖNCE hesaplanır (canlı-test #14):
+      // classifyDeathVaried aile-tekrarını görebilsin diye. PREMİS DÜZELTMESİ:
+      // desktop echo'su v1.0.17'de CANLI (roundHistory[].death_type dolu geliyor,
+      // desktop commit 07a91b1) — "echo Faz2'de, liste canlıda boş" cümlesi bayattı;
+      // mc fallback'i yalnız echo BOŞKEN devreye giren yedek katman olarak kalır.
+      let prevDeathTypes = (Array.isArray(rh) ? rh : [])
+        .map((r: Record<string, unknown>) => (typeof r.death_type === "string" ? r.death_type : ""))
+        .filter((s): s is string => s.length > 0) as import("@/lib/death-type").DeathType[];
+      const mcMatchId = (body as VisionRequest).matchId;
+      let prevSource = "rh";
+      if (prevDeathTypes.length === 0 && typeof mcMatchId === "string" && mcMatchId) {
+        prevDeathTypes = await readMatchConcepts(auth.userId, mcMatchId);
+        prevSource = prevDeathTypes.length > 0 ? "mc" : "-";
+      }
+      // classifyDeathVaried (canlı-test #14, Kaan 8/12 aynı-nakarat): aynı ders
+      // AİLESİ bu maçta ≥2 kez verildiyse aile bastırılarak yeniden sınıflandırılır;
+      // gerçek alternatif dal yoksa orijinal tip korunur (uydurma yok) ve banLine'ın
+      // iskelet-değişim dayatması devreye girer.
+      const dtype = classifyDeathVaried({
         side: reqBody.side,
         killerInfo: reqBody.killerInfo,
         deathLocation: reqBody.deathLocation,
@@ -1123,28 +1142,8 @@ export async function POST(request: NextRequest) {
         lossStreak,
         winStreak,
         highStakes,
-      });
+      }, prevDeathTypes);
       deathTypeOut = dtype;
-      // CROSS-ROUND ban (Phase 2-ready): prior rounds' death-types from roundHistory IF the
-      // desktop stamps them (death_type). Until the desktop sends it this is empty → per-death
-      // classification alone drives variety (Phase 1). When the desktop echoes deathType back,
-      // the in-match same-type repetition ban activates with ZERO further backend change.
-      let prevDeathTypes = (Array.isArray(rh) ? rh : [])
-        .map((r: Record<string, unknown>) => (typeof r.death_type === "string" ? r.death_type : ""))
-        .filter((s): s is string => s.length > 0) as import("@/lib/death-type").DeathType[];
-      // (rank-4, 2026-08-24) SUNUCU-YANI FALLBACK: desktop echo'su Faz2'de bekliyor
-      // ve yukarıdaki liste canlıda hep BOŞ (kb-findings "rotation": banLine hiç
-      // ateşlenmiyor → maç-içi aynı-kavram tekrarı). roundHistory death_type
-      // taşımıyorsa matchId+userId anahtarlı Upstash set'inden oku (yazımı yanıt
-      // tarafında). Okunanlar DEATH_TYPE_GUIDE allowlist'inden geçer; Upstash
-      // düşerse / matchId yoksa sessiz boş liste = bugünkü davranış. Echo
-      // gelmeye başlayınca (length>0) fallback hiç okunmaz — roundHistory kazanır.
-      const mcMatchId = (body as VisionRequest).matchId;
-      let prevSource = "rh";
-      if (prevDeathTypes.length === 0 && typeof mcMatchId === "string" && mcMatchId) {
-        prevDeathTypes = await readMatchConcepts(auth.userId, mcMatchId);
-        prevSource = prevDeathTypes.length > 0 ? "mc" : "-";
-      }
       deathTypeDirective = buildDeathTypeDirective(dtype, prevDeathTypes, reqLang);
       console.log(
         `[Aimlo AI] death-type=${dtype} repeatPos=${repeatedPosition} ` +
@@ -1273,6 +1272,24 @@ export async function POST(request: NextRequest) {
           ? `\n[AGENT UNKNOWN] The PLAYER'S agent could not be read for this request. Do NOT attribute any agent to the player: never write "as Jett/Phoenix/...", do NOT assume which abilities the player has, and give NO agent-specific ability advice. Enemy agents from the killfeed/roster may still be named as ENEMIES. Anchor the lesson to weapon + position + timing + side + decision instead.`
           : `\n[AJAN OKUNAMADI] Bu istekte OYUNCUNUN ajanı okunamadı. Oyuncuya HİÇBİR ajan yakıştırma: "Phoenix olarak ..." kalıbı KURMA, oyuncunun hangi yeteneklere sahip olduğunu VARSAYMA, ajana özel yetenek tavsiyesi VERME. Killfeed/roster'daki düşman ajanlarını DÜŞMAN olarak anman serbest. Dersi silah + konum + timing + side + karar üzerinden çapala.`)
       : "";
+    // [HARİTA İPUCU] (canlı-test #14, KB-uptake bulgusu): Kaan'ın 12 TR metninde
+    // her istekte yüklenen 34KB'lık summit bloğundan TEK cümle yoktu — user-msg'de
+    // haritayı işaret eden çapa yoktu ([SENARYO]/[SİLAH+KOMP] emsalinin harita
+    // karşılığı). ÇİFT KAPI (doğrulayıcı düzeltmesi): ölüm yeri DOLU **ve** callout
+    // haritanın kanonik tablosunda — 'b ule' sınıfı OCR artefaktına sahte çapa
+    // verilmez (harita bilinmiyorsa mapKey null → kapı kapalı, fail-closed).
+    // Konum/harita yokken BOŞ string → davranış bayt-aynı; ~25 token, yalnız
+    // loc'lu ölüm roundlarında (bu gece 3/12 ateşlerdi) — bedeli slug-silme öder.
+    const mapHintDirective = (
+      reqBody.died === true &&
+      typeof ctx.deathLocation === "string" && ctx.deathLocation.trim() &&
+      reqMap && mapKey(reqMap) !== null &&
+      calloutBelongsToMap(ctx.deathLocation.trim(), reqMap)
+    )
+      ? (reqLang === "en"
+          ? `\n[MAP HINT] Death location: ${ctx.deathLocation.trim()} — use the HARİTA BİLGİSİ block's lesson for this zone / its nearest callout in deathAnalysis.`
+          : `\n[HARİTA İPUCU] Ölüm yeri: ${ctx.deathLocation.trim()} — deathAnalysis'te HARİTA BİLGİSİ bloğundaki bu bölgeye/en yakın callout'a ait dersi kullan.`)
+      : "";
 
     // ── Canlı-test #10 kalite dalgası (2026-08-05): üç yeni user-message direktifi ──
     // Üçü de İSTEĞE-BAĞIMLI metin → B42 prompt-cache kısıtı gereği user-message'da
@@ -1366,8 +1383,8 @@ export async function POST(request: NextRequest) {
       // kavram tekrar yasağı + yalnız-bu-veri (anti-uydurma) + etiket-sızıntı yasağı.
       if (priorDeathBits.length > 0) {
         lessonHistoryDirective = reqLang === "en"
-          ? `\n[LESSON HISTORY] Previous deaths this match: ${priorDeathBits.join(" · ")}. If a [DEATH-TYPE HINT] is present it picks the lesson (the type is data); this line's job is breaking repetition: do NOT rebuild an earlier round's stock sentence or concept — anchor the lesson to a DIFFERENT concrete detail of THIS round. Use ONLY the data in this line — never invent past details, never print the "[LESSON HISTORY]" label.`
-          : `\n[DERS GEÇMİŞİ] Bu maçtaki önceki ölümler: ${priorDeathBits.join(" · ")}. [ÖLÜM-TİPİ İPUCU] geldiyse dersi O seçer (tip veridir); bu satırın işi TEKRARI kırmak: önceki round'ların kalıp cümlesini ve kavramını yeniden KURMA — dersi BU round'un farklı somut detayına bağla. YALNIZ bu satırdaki veriyi kullan — geçmiş detayı uydurma; "[DERS GEÇMİŞİ]" etiketini çıktıya YAZMA.`;
+          ? `\n[LESSON HISTORY] Previous deaths this match: ${priorDeathBits.join(" · ")}. If a [DEATH-TYPE HINT] is present it picks the lesson (the type is data); this line's job is breaking repetition: do NOT rebuild an earlier round's stock sentence or concept — anchor the lesson to a DIFFERENT concrete detail of THIS round. Use ONLY the data in this line — never invent past details, never print the "[LESSON HISTORY]" label or the type codes.`
+          : `\n[DERS GEÇMİŞİ] Bu maçtaki önceki ölümler: ${priorDeathBits.join(" · ")}. [ÖLÜM-TİPİ İPUCU] geldiyse dersi O seçer (tip veridir); bu satırın işi TEKRARI kırmak: önceki round'ların kalıp cümlesini ve kavramını yeniden KURMA — dersi BU round'un farklı somut detayına bağla. YALNIZ bu satırdaki veriyi kullan — geçmiş detayı uydurma; "[DERS GEÇMİŞİ]" etiketini ve tip kodlarını çıktıya YAZMA.`;
       }
     }
 
@@ -1400,6 +1417,7 @@ export async function POST(request: NextRequest) {
         agentUnknownDirective + // AGENT UNKNOWN — never attribute an agent to the player (canlı-test #9, per-round)
         abilityVisualDirective + // ABILITY ICONS — görüntüdeki ult/yetenek kanıtı, negatif-koşullu (canlı-test #10, per-round)
         deathTypeDirective +
+        mapHintDirective +     // MAP HINT — harita-KB çapası, çift-kapılı (canlı-test #14, per-round)
         openerDirective +      // OPENER FORM — round-seed'li açılış-iskeleti rotasyonu (rank-3, per-round)
         lessonHistoryDirective + // LESSON HISTORY — ders-sınıfı rotasyonu, yalnız gerçek geçmiş veriden (canlı-test #10, per-round)
         weaponCompDirective +
@@ -1415,6 +1433,7 @@ export async function POST(request: NextRequest) {
         agentUnknownDirective + // AJAN OKUNAMADI — oyuncuya ajan yakıştırmayı menet (canlı-test #9, per-round)
         abilityVisualDirective + // GÖRÜNTÜDEKİ YETENEK İKONLARI — negatif-koşullu görsel kanıt (canlı-test #10, per-round)
         deathTypeDirective +   // ÖLÜM-TİPİ çıpası — factSheet'ten hemen sonra (per-round, user-msg)
+        mapHintDirective +     // HARİTA İPUCU — harita-KB çapası, çift-kapılı (canlı-test #14, per-round)
         openerDirective +      // AÇILIŞ BİÇİMİ — round-seed'li açılış-iskeleti rotasyonu (rank-3, per-round)
         lessonHistoryDirective + // DERS GEÇMİŞİ — ders-sınıfı rotasyonu, yalnız gerçek geçmiş veriden (canlı-test #10, per-round)
         weaponCompDirective +  // SİLAH+KOMP işaretçisi — statik rehberin bölüm seçicisi (per-round, user-msg)

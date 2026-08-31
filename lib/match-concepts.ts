@@ -1,16 +1,14 @@
 /**
  * Maç-içi kavram hafızası (rank-4, 2026-08-24) — cross-round ban FALLBACK'i.
  *
- * NEDEN: buildDeathTypeDirective'in ban-satırı prevDeathTypes'a bakar; o liste
- * BUGÜN yalnız roundHistory[].death_type'tan doluyor ve desktop echo'su Faz2'de
- * (route.ts prevDeathTypes yorumu: "Until the desktop sends it this is empty")
- * → ban-satırı canlıda HİÇ ateşlenmiyor, maç-içi aynı-kavram tekrarı ölçülü
- * (real-korpus repeatScore m3, kb-findings "rotation" bulgusu). Bu modül
- * sunucu-yanı fallback: her died-yanıtında death-type matchId+userId anahtarlı
- * Upstash SET'ine yazılır (SADD, TTL 2h); sonraki round'da roundHistory'de
- * death_type BOŞSA buradan okunur (SMEMBERS). Desktop echo'su gelince (Faz2)
- * roundHistory kazanır — fallback o istekte hiç okunmaz, kablo kendiliğinden
- * emekliye ayrılır. Desktop kontratı DEĞİŞMEZ (deathType yanıtta zaten dönüyor).
+ * NEDEN: buildDeathTypeDirective'in ban-satırı prevDeathTypes'a bakar.
+ * PREMİS DÜZELTMESİ (canlı-test #14): desktop echo'su v1.0.17'de CANLI
+ * (roundHistory[].death_type dolu geliyor, desktop commit 07a91b1) — bu modül
+ * artık "echo gelene kadar tek kaynak" değil, echo BOŞKEN devreye giren YEDEK
+ * katman (round-eşleşme kayması / geçici desktop bug'ı sınıfı). SET→LIST göçü
+ * (canlı-test #14): SADD tekrarları yutuyordu → repeatCount 1'e sabitleniyor,
+ * banLine eskalasyonu ölü kalıyordu. Artık RPUSH/LRANGE/LTRIM (sıra + tekrar
+ * sayısı korunur). Desktop kontratı DEĞİŞMEZ (deathType yanıtta zaten dönüyor).
  *
  * GÜVENLİK / DAYANIKLILIK (playerMemory + lib/api-auth.ts emsalleri):
  *  - Okuma/yazma hatası SESSİZ no-op / boş liste → bugünkü davranış birebir;
@@ -41,7 +39,9 @@ function isUpstashConfigured(): boolean {
 }
 
 function keyOf(userId: string, matchId: string): string {
-  return `aimlo:mc:${userId}:${matchId}`;
+  // canlı-test #14: SET→LIST göçü — yeni önek 'mcl' (eski 'mc' SET anahtarlarıyla
+  // WRONGTYPE çakışmasın; eskiler TTL ile 2 saatte kendiliğinden ölür, göç kodu yok).
+  return `aimlo:mcl:${userId}:${matchId}`;
 }
 
 /** Allowlist süzgeci — SET'ten (ya da bellekten) dönen her değer DEATH_TYPE_GUIDE
@@ -54,8 +54,11 @@ function toKnownTypes(values: unknown[]): DeathType[] {
 }
 
 // ── Dev in-memory fallback (api-auth memoryStore emsali) ──
-const memorySets = new Map<string, { types: Set<DeathType>; expiresAt: number }>();
+// canlı-test #14: Set→Array — tekrar SAYISI artık veri (repeatCount SET'te hep 1'e
+// sabitleniyordu, banLine eskalasyonu ölüydü). Tavan LIST tarafıyla aynı (30).
+const memorySets = new Map<string, { types: DeathType[]; expiresAt: number }>();
 const MEMORY_MAX_KEYS = 500; // sınırsız büyüme yok (dev-only zaten)
+const LIST_MAX_LEN = 30; // LTRIM tavanıyla aynı — bir maçın ölüm sayısını fazlasıyla kapsar
 
 function memorySweep(now: number): void {
   if (memorySets.size < MEMORY_MAX_KEYS) return;
@@ -110,18 +113,23 @@ export async function recordMatchConcept(
       memorySweep(now);
       const entry = memorySets.get(key);
       if (!entry || now > entry.expiresAt) {
-        memorySets.set(key, { types: new Set([dtype]), expiresAt: now + TTL_SEC * 1000 });
+        memorySets.set(key, { types: [dtype], expiresAt: now + TTL_SEC * 1000 });
       } else {
-        entry.types.add(dtype);
+        entry.types.push(dtype);
+        if (entry.types.length > LIST_MAX_LEN) entry.types.splice(0, entry.types.length - LIST_MAX_LEN);
       }
       return;
     }
+    // canlı-test #14 (SET→LIST): SADD tekrarları YUTUYORDU — repeatCount asla >1
+    // olamıyor, banLine eskalasyonu ölü kalıyordu (Kaan 8/12 vakasının 2. katmanı).
+    // RPUSH sırayı ve sayıyı korur; LTRIM -30 -1 tavanı sınırsız büyümeyi keser.
     const data = await pipeline([
-      ["SADD", key, dtype],
+      ["RPUSH", key, dtype],
+      ["LTRIM", key, String(-LIST_MAX_LEN), "-1"],
       ["EXPIRE", key, String(TTL_SEC)],
     ]);
     if (data[0]?.error) {
-      console.warn(`[Aimlo] match-concepts SADD failed (silent): ${data[0].error}`);
+      console.warn(`[Aimlo] match-concepts RPUSH failed (silent): ${data[0].error}`);
     }
   } catch (e) {
     console.warn("[Aimlo] match-concepts write failed (silent):", (e as Error).message);
@@ -138,7 +146,9 @@ export async function readMatchConcepts(userId: string, matchId: string): Promis
       if (!entry || Date.now() > entry.expiresAt) return [];
       return toKnownTypes([...entry.types]);
     }
-    const data = await pipeline([["SMEMBERS", key]]);
+    // canlı-test #14: LRANGE 0 -1 — liste sıralı ve TEKRARLI döner (repeatCount
+    // gerçek sayıya kavuşur); her hata yolu yine sessiz boş liste (fail-open).
+    const data = await pipeline([["LRANGE", key, "0", "-1"]]);
     const arr = data[0]?.result;
     if (data[0]?.error || !Array.isArray(arr)) return [];
     return toKnownTypes(arr);
