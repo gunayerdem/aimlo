@@ -782,6 +782,17 @@ function buildUserPrompt(s: Scenario): string {
       : `\n[AÇILIŞ] deathAnalysis açılışı bu round: ${["(a) en kritik KÖK neden", "(b) dersin EMİR hali, dersin kendi fiiliyle", "(c) düşmanın yaptığı — öznen RAKİP olsun"][oi]}. [ÖLÜM-TİPİ İPUCU] dersi seçer; bu satır yalnız açılışı seçer.`;
   }
 
+  // [BAĞLAMSIZ ÖLÜM] — MIRROR route.ts (canlı-test #15 DC4, 2026-09-01): killer +
+  // deathLocation ikisi de boşken roster'ın round-gözlemi gibi sunulmasını menet
+  // (komp-yankısı nakaratı: 8 ölümün 6'sında "kadroda Chamber var, uzun hat").
+  // Sadakat sözleşmesi B9 — route ile AYNI commit'te aynı direktif; mevcut korpus
+  // senaryolarının killer/loc'u dolu → oralarda boş string, ölçüm tabanı değişmez.
+  const contextlessDeathDirective = (b.died === true && !ctx.killerInfo && !ctx.deathLocation)
+    ? (lang === "en"
+        ? `\n[CONTEXTLESS DEATH] Neither the killer nor the death location could be read this round. The enemy ROSTER is static match data, NOT an observation about THIS round — do not present a roster agent as this round's finding ("they have Chamber, watch long angles" style repeats every round and is banned as the main point). Anchor point 1 of enemyAnalysis and the deathAnalysis lesson to the death-type hint, side, timing and numbers (allies/enemies alive). You may mention ONE roster agent at most ONCE, only inside the counter-move (point 2), and only with a concrete action.`
+        : `\n[BAĞLAMSIZ ÖLÜM] Bu round ne katil ne ölüm yeri okunabildi. Rakip KADRO maçın sabit verisidir, BU round'un gözlemi DEĞİL — roster'dan bir ajanı bu round'un bulgusu gibi sunma ("kadroda Chamber var, uzun hatlara dikkat" kalıbı her round aynı çıkar ve ana madde olarak YASAK). enemyAnalysis Madde 1'i ve deathAnalysis dersini ölüm-tipi ipucuna, side'a, timing'e ve sayı durumuna (allies/enemiesAlive) çapala. Roster'dan EN FAZLA BİR ajanı, yalnız Madde 2'nin karşı-hamlesi içinde ve somut bir eylemle anabilirsin.`)
+    : "";
+
   // B57 (2026-07-31): dil direktifi — route.ts:1013-1014. EN'de EN BAŞA gelir
   // (route.ts:1048-1049: "model önce dili görsün"); TR'de boş → bayt-aynı.
   const langDirective = lang === "en"
@@ -790,6 +801,7 @@ function buildUserPrompt(s: Scenario): string {
 
   let prompt = (lang === "en" ? USER_PROMPT_EN : USER_PROMPT) +
     langDirective +
+    contextlessDeathDirective + // BAĞLAMSIZ ÖLÜM — route aynası (canlı-test #15 DC4)
     deathTypeDirective +
     openerDirective + // AÇILIŞ BİÇİMİ — route ile aynı rotasyon (rank-3, per-round)
     (ctxJson

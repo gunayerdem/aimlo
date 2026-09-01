@@ -702,6 +702,50 @@ export function stripDeathTypeTokens(text: string, lang: "tr" | "en"): string {
   return t;
 }
 
+// ── VERİ-ETİKETİ SÜZGECİ (canlı-test #15 DC8, 2026-09-01) ────────────────────
+// Kaan'ın maç raporu kullanıcıya "birkaç round'da ultReady varken risk alıp
+// öldün" yazdı — model, isteğin JSON alan adını (ultReady) koç cümlesine
+// kopyaladı. Alan adları VERİ ETİKETİDİR, koç dili değil. Dil-BAĞIMSIZ süzgeç:
+// etiketler İngilizce-camelCase olduğundan TR meta süzgeci onları göremez
+// (stripDeathTypeTokens ile aynı sınıf). Yalnız BİLİNEN etiketler, whole-token
+// ve BÜYÜK/küçük-duyarlı (meşru "ult ready" ifadesine dokunmaz); ikameler akan
+// cümlede gramer-güvenli kısa adlar ("ultReady varken" → "ult varken").
+// Temiz metinde bayt-aynı döner.
+// İlk harf iki-vaka ([dD] gibi): A/B ölçümünde model etiketi cümle başında
+// PascalCase yazdı ("DeathTiming erken") ve salt-camelCase desen kaçırdı.
+// Gövde büyük/küçük-duyarlı kalır ("ult ready" gibi meşru doğal dile dokunulmaz).
+const FIELD_LABEL_REWRITES: Array<[RegExp, { tr: string; en: string }]> = [
+  [/\b[uU]ltReady\b/g, { tr: "ult", en: "ult" }],
+  [/\b[dD]eathTiming\b/g, { tr: "ölüm zamanlaması", en: "death timing" }],
+  [/\b[kK]illerInfo\b/g, { tr: "katil bilgisi", en: "killer info" }],
+  [/\b[dD]eathLocation\b/g, { tr: "ölüm yeri", en: "death location" }],
+  [/\b[dD]eathAngle\b/g, { tr: "ölüm yönü", en: "death angle" }],
+  [/\b[eE]conomyType\b/g, { tr: "ekonomi", en: "economy" }],
+  [/\b[eE]nemyComp\b/g, { tr: "rakip kadro", en: "enemy comp" }],
+  [/\b[eE]nemyRoster\b/g, { tr: "rakip kadro", en: "enemy roster" }],
+  [/\b[sS]pikePlanted\b/g, { tr: "spike kurulumu", en: "spike plant" }],
+  [/\b[aA]lliesAlive\b/g, { tr: "yaşayan takım arkadaşı sayısı", en: "allies alive" }],
+  [/\b[eE]nemiesAlive\b/g, { tr: "yaşayan düşman sayısı", en: "enemies alive" }],
+  [/\b[rR]oundTimerAtDeath\b/g, { tr: "round zamanı", en: "the round timer" }],
+  [/\b[tT]radedByAlly\b/g, { tr: "trade", en: "trade" }],
+  [/\b[pP]atternContext\b/g, { tr: "tekrarlayan hata", en: "recurring pattern" }],
+];
+
+export function stripFieldLabelTokens(text: string, lang: "tr" | "en"): string {
+  if (!text) return text;
+  let t = text;
+  for (const [re, rep] of FIELD_LABEL_REWRITES) {
+    t = t.replace(re, lang === "en" ? rep.en : rep.tr);
+  }
+  if (t !== text) {
+    // İkame cümle başına düştüyse baş harfi büyüt ("DeathTiming erken" →
+    // "Ölüm zamanlaması erken") — stripMetaTerms'teki desenin eşi.
+    t = t.replace(/(^|[.!?]\s+)([a-zçğıöşü])/g, (_m, p: string, c: string) =>
+      p + (lang === "tr" ? c.toLocaleUpperCase("tr") : c.toUpperCase()));
+  }
+  return t;
+}
+
 /**
  * Sistem-içi meta-dili (OCR/kayıt/sistemde/tespit edildi/veride...) koç
  * metninden cerrahi olarak ayıklar (canli-test #10 kalite dalgasi, 2026-08-05).
@@ -933,6 +977,10 @@ export function cleanCoachText(text: string, lang: "tr" | "en"): string {
   // olduğundan TR dalındaki stripMetaTerms onları göremezdi; her iki dilde de
   // dil dallarından ÖNCE koşar (Kaan R7/R11/R23 sızıntı fixture'ları).
   t = stripDeathTypeTokens(t, lang);
+  // VERİ-ETİKETİ SÜZGECİ (canlı-test #15 DC8): JSON alan adları ("ultReady")
+  // koç cümlesine kopyalanıyordu — aynı dil-bağımsız sınıf, aynı sıra. Merkezi
+  // katman olduğu için vision/report/feedback/insight yolları otomatik kapsanır.
+  t = stripFieldLabelTokens(t, lang);
   if (lang === "tr") {
     // ── META-DİL SÜZGECİ (canli-test #10 kalite dalgasi, 2026-08-05) ───────
     // TR_JARGON'dan ÖNCE koşar: işaretleyiciler ("OCR'da", "telemetri...")

@@ -1107,6 +1107,8 @@ KURALLAR (HER BİRİ RED BAYRAĞI)
 9. ⚔ SIDE'a göre koçla (userPrompt'taki "Side" alanı). attack=SALDIRI (oyuncu giriyor → entry/execute/trade/space/lurk/post-plant dili; hata: solo dry entry, trade'siz peek, util'siz geçiş), defense=SAVUNMA (oyuncu tutuyor → açı tut/off-angle/crossfire/retake/save/rotate dili; hata: tek açıyı geniş peek, trade'siz over-peek, kayıp round'da save etmemek). mistake/adjustment/tendencies bu side'ın diliyle olmalı — savunma maçında "entry açmadın" yazmak, saldırı maçında "açıyı tutmadın" yazmak = RED BAYRAĞI.${setup.map === "Unknown" ? `
 10. ⚠ HARİTA OKUNAMADI (Unknown): Bu maçta harita tespit edilemedi. RULE 7'nin mikro-pozisyon ZORUNLULUĞU bu maçta GEÇERSİZ — callout/yer adı UYDURMA ("A Short", "B Main", "Mid" YASAK). Yalnız OCR'ın gönderdiği gerçek deathLocation'ları kullanabilirsin; onların dışında yer adı yazma. Dersi ajan + silah + side + karar (trade/util-sırası/timing/ekonomi) üzerinden ver — bunlar harita olmadan da spesifik ve doğrudur.` : ""}${rosterRule}
 
+⚠ VERİ-ETİKETİ YASAK (canlı-test #15): Sana gelen JSON alan adları (ultReady, deathTiming, killerInfo, deathLocation, economyType, enemyComp, spikePlanted...) VERİ ETİKETİDİR, koç dili değil — çıktı cümlesinde ASLA geçmez. Olguyu doğal dille söyle: ${isTr ? '"ultReady varken" DEĞİL "ultin doluyken"; "deathTiming late" DEĞİL "round sonunda".' : '"with ultReady" is WRONG — say "with your ult up"; "deathTiming late" is WRONG — say "late in the round".'}
+
 ═══════════════════════════════════════════════
 🚫 YASAK TÜRKÇE İFADELER (varyantları dahil — Türkçe çıktıda ASLA üretme)
 ═══════════════════════════════════════════════

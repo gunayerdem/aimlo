@@ -1272,6 +1272,22 @@ export async function POST(request: NextRequest) {
           ? `\n[AGENT UNKNOWN] The PLAYER'S agent could not be read for this request. Do NOT attribute any agent to the player: never write "as Jett/Phoenix/...", do NOT assume which abilities the player has, and give NO agent-specific ability advice. Enemy agents from the killfeed/roster may still be named as ENEMIES. Anchor the lesson to weapon + position + timing + side + decision instead.`
           : `\n[AJAN OKUNAMADI] Bu istekte OYUNCUNUN ajanı okunamadı. Oyuncuya HİÇBİR ajan yakıştırma: "Phoenix olarak ..." kalıbı KURMA, oyuncunun hangi yeteneklere sahip olduğunu VARSAYMA, ajana özel yetenek tavsiyesi VERME. Killfeed/roster'daki düşman ajanlarını DÜŞMAN olarak anman serbest. Dersi silah + konum + timing + side + karar üzerinden çapala.`)
       : "";
+    /* [BAĞLAMSIZ ÖLÜM] direktifi (canlı-test #15 DC4, 2026-09-01 — Kaan TR
+     * istemci): killer + deathLocation İKİSİ DE boşken elde kalan tek "olgu"
+     * roster oluyor ve model 8 ölümün 6'sında aynı nakaratı üretti ("Rakip
+     * kadrosunda Chamber var; uzun hatlara dikkat" sınıfı — komp-yankısı).
+     * Kadro SABİT veridir: her round aynı 5 isim → roster'dan kurulan "gözlem"
+     * round'a özgü değildir ve tekrar-kırıcı katmanların (aile-bastırma, LIST,
+     * kavram-yasağı) altından aynı biçimde geri sızar. Bu direktif KAYNAĞI
+     * kurutur (mapUnknown/locUnknown/agentUnknown emsali — aynı sınıf):
+     * Madde 1 ölüm-tipi dersine/duruma çapalanır, roster en fazla 1 kez ve
+     * yalnız karşı-hamle içinde. User-message'da taşınır → statik sistem-öneği/
+     * prompt-cache'e SIFIR etki; killer ya da konum bilinirken BOŞ string. */
+    const contextlessDeathDirective = (reqBody.died === true && !ctx.killerInfo && !ctx.deathLocation)
+      ? (reqLang === "en"
+          ? `\n[CONTEXTLESS DEATH] Neither the killer nor the death location could be read this round. The enemy ROSTER is static match data, NOT an observation about THIS round — do not present a roster agent as this round's finding ("they have Chamber, watch long angles" style repeats every round and is banned as the main point). Anchor point 1 of enemyAnalysis and the deathAnalysis lesson to the death-type hint, side, timing and numbers (allies/enemies alive). You may mention ONE roster agent at most ONCE, only inside the counter-move (point 2), and only with a concrete action.`
+          : `\n[BAĞLAMSIZ ÖLÜM] Bu round ne katil ne ölüm yeri okunabildi. Rakip KADRO maçın sabit verisidir, BU round'un gözlemi DEĞİL — roster'dan bir ajanı bu round'un bulgusu gibi sunma ("kadroda Chamber var, uzun hatlara dikkat" kalıbı her round aynı çıkar ve ana madde olarak YASAK). enemyAnalysis Madde 1'i ve deathAnalysis dersini ölüm-tipi ipucuna, side'a, timing'e ve sayı durumuna (allies/enemiesAlive) çapala. Roster'dan EN FAZLA BİR ajanı, yalnız Madde 2'nin karşı-hamlesi içinde ve somut bir eylemle anabilirsin.`)
+      : "";
     // [HARİTA İPUCU] (canlı-test #14, KB-uptake bulgusu): Kaan'ın 12 TR metninde
     // her istekte yüklenen 34KB'lık summit bloğundan TEK cümle yoktu — user-msg'de
     // haritayı işaret eden çapa yoktu ([SENARYO]/[SİLAH+KOMP] emsalinin harita
@@ -1415,6 +1431,7 @@ export async function POST(request: NextRequest) {
         mapUnknownDirective +
         locUnknownDirective +  // DEATH LOCATION UNKNOWN — no location claim when OCR has none (per-round)
         agentUnknownDirective + // AGENT UNKNOWN — never attribute an agent to the player (canlı-test #9, per-round)
+        contextlessDeathDirective + // CONTEXTLESS DEATH — roster is not a per-round observation (canlı-test #15, per-round)
         abilityVisualDirective + // ABILITY ICONS — görüntüdeki ult/yetenek kanıtı, negatif-koşullu (canlı-test #10, per-round)
         deathTypeDirective +
         mapHintDirective +     // MAP HINT — harita-KB çapası, çift-kapılı (canlı-test #14, per-round)
@@ -1431,6 +1448,7 @@ export async function POST(request: NextRequest) {
         mapUnknownDirective +  // HARİTA OKUNAMADI — Unknown'da callout uydurmayı menet (per-round)
         locUnknownDirective +  // ÖLÜM YERİ OKUNAMADI — konum yokken konum iddiasını menet (per-round)
         agentUnknownDirective + // AJAN OKUNAMADI — oyuncuya ajan yakıştırmayı menet (canlı-test #9, per-round)
+        contextlessDeathDirective + // BAĞLAMSIZ ÖLÜM — roster round-gözlemi değildir, komp-yankısını menet (canlı-test #15, per-round)
         abilityVisualDirective + // GÖRÜNTÜDEKİ YETENEK İKONLARI — negatif-koşullu görsel kanıt (canlı-test #10, per-round)
         deathTypeDirective +   // ÖLÜM-TİPİ çıpası — factSheet'ten hemen sonra (per-round, user-msg)
         mapHintDirective +     // HARİTA İPUCU — harita-KB çapası, çift-kapılı (canlı-test #14, per-round)
