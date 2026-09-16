@@ -155,13 +155,23 @@ async function main() {
       `got=${validateTelemetryEvent({ type: "totally_made_up_kind", ts: now, value: 1 }, now)}`,
     );
     t("type alanı yoksa reddedilir", validateTelemetryEvent({ ts: now }, now) === "invalid_type");
-    // Desktop'ın gönderdiği 5 kanonik tip KABUL edilmeli (sözleşme kilidi).
+    // Desktop'ın gönderdiği TÜM kanonik tipler KABUL edilmeli (sözleşme kilidi).
+    // ⚠ 16.09.2026 launch denetimi: bu liste 5 tipte DONMUŞTU; desktop
+    // CANONICAL_KIND_LIST'te 9 tip vardı (telemetry.rs:457-467). Eksik 4'ün
+    // 3'ü (app_open/login_ok/watch_started) backend VALID_TYPES'ta da yoktu →
+    // 31.07.2026'dan beri her biri `invalid_type` ile SESSİZCE düşüyordu ve
+    // "sözleşmeyi çivileyen" bu test onu göremiyordu. Liste artık TAM:
+    // desktop telemetry.rs CANONICAL_KIND_LIST ile birebir 9 tip.
     const KANONIK: [string, Record<string, unknown>][] = [
       ["round_end_latency_ms", { value: 1200 }],
       ["ai_call_duration_ms", { value: 3400, route: "vision" }],
       ["error_code_count", { count: 2, code: "ai_timeout" }],
       ["ocr_frame_budget_ms", { value: 18 }],
       ["match_completed", {}],
+      ["watch_health", { value: 22, count: 26, round: 3, code: "fb b0/0 s2+0/p5/a12 p7 0-0" }],
+      ["app_open", { count: 1 }],
+      ["login_ok", { count: 1 }],
+      ["watch_started", { count: 1 }],
     ];
     for (const [type, extra] of KANONIK) {
       const r = validateTelemetryEvent({ type, ts: now, ...extra }, now);

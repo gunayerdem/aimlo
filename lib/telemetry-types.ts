@@ -31,7 +31,22 @@ export type TelemetryEventType =
    *           skor ok+red, basınç-sn, committed skor. Desktop telemetry.rs
    *           CANONICAL_KIND_LIST ile SENKRON (CLAUDE.md sözleşmesi).
    */
-  | "watch_health";
+  | "watch_health"
+  /**
+   * B15 huni sayaçları (2026-09-16 · launch denetimi): desktop bu üç olayı
+   * 31.07.2026'dan beri GÖNDERİYOR (telemetry.rs CANONICAL_KIND_LIST +
+   * record_app_open/record_login_ok/record_watch_started) ama backend
+   * VALID_TYPES'ta yoktular → route her birini `invalid_type` ile reddedip
+   * 200 döndüğü için 6+ haftadır SESSİZCE kayboluyorlardı. Kanıt: desktop
+   * telemetry.rs:453-457 yorumu bunu zaten belgeliyor; prod telemetry_events
+   * tablosunda bu üç tipten TEK satır yok (02.09-16.09 sorgusu).
+   * Neyi açar: "kurdu → açtı → giriş yaptı → İzle'ye bastı → maç gördü"
+   * hunisi. 14514/vaporeon sınıfı (açtı, 0 maç) vakalar ancak bununla görünür.
+   * Paket: yalnız `count: 1` (record_counter) — value/code/route/round yok.
+   */
+  | "app_open"
+  | "login_ok"
+  | "watch_started";
 
 export interface TelemetryEvent {
   /** Discriminator. */
@@ -103,6 +118,11 @@ const VALID_TYPES: ReadonlySet<TelemetryEventType> = new Set<TelemetryEventType>
   "ocr_frame_budget_ms",
   "match_completed",
   "watch_health", // canlı-test #14 — desktop CANONICAL_KIND_LIST ile senkron
+  // B15 huni sayaçları — desktop 31.07.2026'dan beri gönderiyordu, backend
+  // kabul etmiyordu (launch denetimi 16.09.2026). Artık SENKRON.
+  "app_open",
+  "login_ok",
+  "watch_started",
 ]);
 
 /**
@@ -192,6 +212,12 @@ export function validateTelemetryEvent(
       break;
     case "match_completed":
       // No required value — pure counter event.
+      break;
+    case "app_open":
+    case "login_ok":
+    case "watch_started":
+      // Saf sayaç (desktop record_counter → yalnız count:1). Zorunlu alan yok;
+      // count gelirse yukarıdaki genel count kapısı zaten doğruladı.
       break;
     case "watch_health":
       // value (işlenen tick) zorunlu; count/code/round opsiyonel paket alanları.
