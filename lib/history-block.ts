@@ -24,6 +24,11 @@
  */
 
 import { sanitizePromptInput } from "./prompt-safety";
+// B2 (2026-09-16): Türkçe sayı eki TEK KAYNAK — prompt ile süzgeç bir daha
+// birbiriyle çelişmesin. Yaprak modül (import'u yok) seçildi ki bu prompt
+// katmanı ne denetim katmanına (reality-checker) ne de bundle-hassas
+// coach-text'e (bkz. coach-text.ts:17-21) bağlansın.
+import { trOrdinalLocative } from "./tr-suffix";
 
 export type RoundHistoryEntry = Record<string, unknown>;
 
@@ -132,7 +137,14 @@ export function buildHistoryBlock(
     deathCount >= total * 0.5
       ? en
         ? `Pattern: died in ${deathCount} of the last ${total} rounds → a repeating problem is proven`
-        : `Pattern: Son ${total} round'un ${deathCount}'${deathCount > 1 ? "inde" : "unda"} ölüm → tekrar eden sorun kanıtlanmış`
+        // 🔴 B2 (2026-09-16): eski boolean ek (`deathCount > 1 ? "inde" : "unda"`)
+        // ünlü uyumunu HİÇ gözetmiyordu → ölçülen 7 değerin 6'sı YANLIŞTI
+        // (19'inde ✗ / 9'inde ✗ / 3'inde ✗ / 2'inde ✗ / 1'unda ✗ / 10'inde ✗;
+        // yalnız 21 tesadüfen doğruydu). Prompt modele bozuk Türkçe ÖĞRETİYOR,
+        // süzgeç de aynı bozukluğu temizlemeye çalışıyordu.
+        // (scripts/test-history-block.ts bu satırı assert ETMİYOR — orada test
+        //  edilen posNote satırı: /GÜÇLÜ — (\d+) kez, son (\d+) round içinde/.)
+        : `Pattern: Son ${total} round'un ${trOrdinalLocative(deathCount)} ölüm → tekrar eden sorun kanıtlanmış`
       : en
         ? `${deathCount} death(s) in the last ${total} rounds`
         : `Son ${total} round'da ${deathCount} ölüm`;

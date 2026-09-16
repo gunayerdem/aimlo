@@ -228,10 +228,42 @@ const TR_JARGON: [RegExp, string][] = [
   [/\bone[- ]?on[- ]?one\b/gi, "teke tek"],                // S10: "one-on-one" → "teke tek"
   // Çıplak İngilizce sızıntısı (audit 2026-06-30 S2/S13/S14): info/roster whitelist'te DEĞİL.
   [/\binfo\b/gi, "bilgi"],
-  [/\broster['’]?(ın[ıi]|in[ıi])\b/gi, "kadrosunu"],
-  [/\broster['’]?(ınd[ae]|ind[ae]|d[ae]|t[ae])\b/gi, "kadrosunda"],
-  [/\broster['’]?(ın|in)\b/gi, "kadrosunun"],
-  [/\broster['’]?([ıi])\b/gi, "kadrosunu"],
+  // 🔴 TÜRKÇE-\b TUZAĞI FIX (B3 kanıtı 2026-09-16) — crosshair (:245-251) ve
+  // sightline (:257) için ZATEN belgeli olan tuzağın roster'da unutulmuş hâli.
+  // Sondaki \b, JS'te \w=[A-Za-z0-9_] tanımına dayanır; "ı" bu kümede DEĞİL.
+  // "roster'ı " eşleşmesi "ı"da biter, ardından gelen boşluk da \w-dışı olduğu
+  // için SINIR OLUŞMAZ → kural atlanır, metin çıplak kurala düşer ve ekrana
+  // "kadro'ı" (apostroflu, bozuk) çıkar. Gerçek çıktı: cycletr-posters4 skye-i
+  // "Jett ve Reyna kadro'ı".
+  //
+  // ⚠ SINIRI TEK BAŞINA DÜZELTMEK YETMEZ — YENİ SIZINTI AÇAR (ölçüldü):
+  // "roster'ından" bugün (yanlışlıkla) 4. kurala düşüp "kadrosunundan" veriyor;
+  // sınır düzeltilince o kural da elenir ve metin çıplak kurala düşerek
+  // "kadro'ından" üretir — yani kapatılmak istenen apostrof sınıfının ta kendisi.
+  // Bu yüzden ayrılma/yönelme/vasıta hâlleri de tabloya alındı. Semantik
+  // DEĞİŞMEDİ: mevcut dört kuralın İYELİK okuması ("kadrosu-") aynen sürdürüldü.
+  // SIRA: en uzun ek ÖNCE.
+  [/\broster['’]?(?:ından|inden|undan|ünden)(?![a-zçğıöşüA-ZÇĞİÖŞÜ])/gi, "kadrosundan"],
+  [/\broster['’]?(?:ınd[ae]|ind[ae]|und[ae]|ünd[ae])(?![a-zçğıöşüA-ZÇĞİÖŞÜ])/gi, "kadrosunda"],
+  [/\broster['’]?(?:ıyla|iyle|uyla|üyle)(?![a-zçğıöşüA-ZÇĞİÖŞÜ])/gi, "kadrosuyla"],
+  [/\broster['’]?(?:ın[ıi]|in[ıi]|unu|ünü)(?![a-zçğıöşüA-ZÇĞİÖŞÜ])/gi, "kadrosunu"],
+  [/\broster['’]?(?:ın[ae]|in[ae]|un[ae]|ün[ae])(?![a-zçğıöşüA-ZÇĞİÖŞÜ])/gi, "kadrosuna"],
+  [/\broster['’]?(?:ın|in|un|ün)(?![a-zçğıöşüA-ZÇĞİÖŞÜ])/gi, "kadrosunun"],
+  [/\broster['’]?(?:d[ae]n|t[ae]n)(?![a-zçğıöşüA-ZÇĞİÖŞÜ])/gi, "kadrosundan"],
+  [/\broster['’]?(?:d[ae]|t[ae])(?![a-zçğıöşüA-ZÇĞİÖŞÜ])/gi, "kadrosunda"],
+  [/\broster['’]?(?:yl[ae]|l[ae])(?![a-zçğıöşüA-ZÇĞİÖŞÜ])/gi, "kadrosuyla"],
+  // 🔴 EK KANIT (replay-tr, cycletr-posters3/phoenix-h): çıplak -ı eki Türkçede İKİ
+  // ANLAMLI — belirtme ("roster'ı kontrol et" → kadrosuNU) ya da 3. tekil İYELİK
+  // ("tek bir düşman rosterı var" → kadroSU). Varlık yüklemi (var/yok) geldiğinde
+  // okuma DAİMA iyeliktir; alttaki genel kural oraya "kadrosunu var" (bozuk) yazıyordu.
+  // Eski hâli de bozuktu ("kadroı var") → bu satır o sınıfı kapatır, regresyon DEĞİL.
+  // DAR: yalnız hemen ardından var/yok gelirken ateşlenir; başka hiçbir bağlamı etkilemez.
+  [/\broster['’]?[ıiuü](?=\s+(?:var|yok)(?![a-zçğıöşüA-ZÇĞİÖŞÜ]))/gi, "kadrosu"],
+  [/\broster['’]?[ıiuü](?![a-zçğıöşüA-ZÇĞİÖŞÜ])/gi, "kadrosunu"],
+  [/\broster['’]?(?:y[ae]|[ae])(?![a-zçğıöşüA-ZÇĞİÖŞÜ])/gi, "kadrosuna"],
+  // APOSTROF SIZINTI BACKSTOP: yukarıdaki hiçbir ek eşleşmezse bile çıktıda
+  // "kadro'<ek>" ASLA oluşmasın (softi'nin yasakladığı biçim).
+  [/\broster['’]/gi, "kadro"],
   [/\broster\b/gi, "kadro"],
   [/\bTP['’]?(yi|yı|si|ler|ini)?\b/g, "teleport"],         // S9: Chamber "TP" kısaltması (case-sensitive)
   // crosshair → nişangâh. ESKİ tek-satır ham-ek yapıştırıyordu: "crosshair'i"→"nişangâhi"
@@ -859,6 +891,16 @@ export function findMetaTermHits(text: string): string[] {
 const PROTECTED_MAP_NAMES = [
   "ascent", "bind", "haven", "split", "icebox", "breeze",
   "fracture", "pearl", "lotus", "sunset", "abyss", "corrode",
+  // Koç-alanı terimleri (B1 sınır savunması, 2026-09-16): callout-düzeltici
+  // (enforceSuppliedCallout, :886) bunları GERÇEK callout'a çevirmemeli.
+  // Mekanizma bu denetimde doğrulandı — :907 d≤2 Levenshtein:
+  //   plant↔plaza=2 → supplied "a plaza" + "Plant sonrası…" → "Plaza sonrası…"
+  //   plant↔point=2 → supplied "b point"                   → "Point sonrası…"
+  //   post ↔plat =2 → supplied "plat" (Haven) + "Post-plant'te…" → "Plat-plant'te…"
+  // Bu sınıf BUGÜN de var (korpusta cümle başı "Plant " ile başlayan final'ler);
+  // B1 nötrlemesi "plant sonrası"/"post-plant'te" ürettiği için frekansı artırır
+  // → kök fixle AYNI commit'te gitmeli. Yalnız ENGELLER, yeni ikame üretmez.
+  "plant", "post", "spike",
 ];
 
 /** Sınırlı Levenshtein — |len farkı| > max ise erken çık (max+1 döner). */
