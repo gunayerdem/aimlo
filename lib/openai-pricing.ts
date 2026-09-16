@@ -4,8 +4,15 @@
 // backfill.
 //
 // ⚠️ VERIFY against the live price page when rates change:
-//    https://openai.com/api/pricing/  (confirmed 2026-06-25 for gpt-5-mini)
-//    gpt-5-mini: input $0.25 / output $2.00 / cached input $0.025  per 1M tokens.
+//    https://developers.openai.com/api/docs/pricing  (doğrulandı 2026-09-16)
+//    gpt-5-mini: input $0.25 / output $2.00 / cached input $0.025  per 1M tokens — DEĞİŞMEMİŞ.
+//
+// 📅 GÖÇ TAKVİMİ (model raporu 16.09.2026): `gpt-5-mini-2025-08-07` snapshot'ı
+//    11.12.2026'da KAPANIYOR (resmî deprecations, duyuru 11.06.2026); kısa ad alias
+//    olduğu için o da düşer. Aday model A/B'si başladı (scripts/eval-vision.ts +
+//    EVAL_MODEL), bu yüzden aday satırları ŞİMDİ tabloda olmalı: `pricingFor` bilinmeyen
+//    id'yi sessizce gpt-5-mini fiyatına düşürüyordu → admin /cost paneli aday koşularını
+//    YANLIŞ fiyatlıyordu (luna gerçekte %20 ucuz, panel gpt-5-mini gibi sayıyordu).
 
 export type ModelPricing = {
   /** USD per 1,000,000 fresh (uncached) input tokens. */
@@ -18,7 +25,21 @@ export type ModelPricing = {
 
 export const PRICING: Record<string, ModelPricing> = {
   "gpt-5-mini": { inputPerM: 0.25, outputPerM: 2.0, cachedInputPerM: 0.025 },
+  // ── Göç adayları (fiyatlar developers.openai.com/api/docs/pricing, 16.09.2026) ──
+  // Yalnız ÖLÇÜM için tabloda; üretim modeli hâlâ gpt-5-mini (lib/ai-* rotaları).
+  "gpt-5.6-luna": { inputPerM: 0.2, outputPerM: 1.2, cachedInputPerM: 0.02 },   // birincil aday (≈0.8×)
+  "gpt-5.4-nano": { inputPerM: 0.2, outputPerM: 1.25, cachedInputPerM: 0.02 },  // ikincil aday
+  "gpt-5.6-terra": { inputPerM: 2.0, outputPerM: 12.0, cachedInputPerM: 0.2 },  // resmî yedek (≈8.6× — elendi)
+  "gpt-5-nano": { inputPerM: 0.05, outputPerM: 0.4, cachedInputPerM: 0.005 },
+  "gpt-5.4-mini": { inputPerM: 0.75, outputPerM: 4.5, cachedInputPerM: 0.075 },
+  "gpt-6-astra": { inputPerM: 10.0, outputPerM: 50.0, cachedInputPerM: 1.0 },   // referans (≈40× — elendi)
 };
+
+// ⚠ 5.6+ ailesinde önbellek YAZMA da ücretli (uncached girdinin 1.25×'i, ayrı kalem).
+// Bu tablo yalnız okuma/çıkış/cached-okuma taşıyor; yazma kalemi `ai_usage`'da
+// ölçülmediği için panelde EKSİK kalır (Luna'da ıskalama başına ≈ $0.01).
+// Göçe karar verilirse `ModelPricing.cacheWritePerM` + `TokenUsage.cacheWriteTokens`
+// eklenmeli (OpenAI usage nesnesinde böyle bir alan var mı: DOĞRULANMADI).
 
 /** Pricing used when an exact model id isn't in the table (defensive). */
 const FALLBACK_MODEL = "gpt-5-mini";
