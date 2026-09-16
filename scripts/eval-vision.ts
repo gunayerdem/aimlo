@@ -586,6 +586,9 @@ SCENARIOS.push(...(EN_VISION_SCENARIOS as unknown as Scenario[]));
  * korpus; eski cycle A/B'leri etkilenmez). Baseline koşusu:
  *   EVAL_CYCLE=real-base EVAL_CORPUS=real npx tsx scripts/eval-vision.ts */
 function loadScenarios(): Scenario[] {
+  // EVAL_CORPUS_FILE (2026-09-16): özel senaryo dosyası (ör. pazarlama kartı yeniden-üretimi —
+  // GERÇEK pipeline'dan geçmesi şart, elle yazmak yasak). Verilmezse davranış bayt-aynı.
+  if (process.env.EVAL_CORPUS_FILE) return JSON.parse(fs.readFileSync(process.env.EVAL_CORPUS_FILE, "utf8")) as Scenario[];
   if (process.env.EVAL_CORPUS !== "real") return SCENARIOS;
   const p = path.join(process.cwd(), "evals", "real-rounds-23.json");
   return JSON.parse(fs.readFileSync(p, "utf8")) as Scenario[];
@@ -839,7 +842,11 @@ async function callModel(systemMessage: string, userPrompt: string, lang: "tr" |
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${API_KEY}` },
     body: JSON.stringify({
-      model: "gpt-5-mini",
+      // EVAL_MODEL (model A/B, 2026-09-16): varsayılan prod modeli (gpt-5-mini) —
+      // sadakat korunur; aday model kıyası için env ile değiştirilir. EVAL_EFFORT=omit
+      // → reasoning_effort GÖNDERİLMEZ (parametreyi tanımayan adaylar 400 dönmesin);
+      // EVAL_EFFORT=none → "none" değeri GÖNDERİLİR (5.6 ailesinde geçerli seviye).
+      model: process.env.EVAL_MODEL || "gpt-5-mini",
       // EVAL_MAX_TOKENS / EVAL_EFFORT (KB 10h nöbeti 2026-07-25): canlı route'un
       // değerleri VARSAYILAN (minimal / 350) — sadakat korunur. Env ile
       // değiştirilebilir ki "reasoning_effort kaliteyi ne kadar taşıyor?" sorusu
@@ -847,7 +854,9 @@ async function callModel(systemMessage: string, userPrompt: string, lang: "tr" |
       // "kalite düşerse low/medium'a çıkar" notunun ampirik sınaması).
       max_completion_tokens: Number(process.env.EVAL_MAX_TOKENS || 350),
       response_format: { type: "json_schema", json_schema: buildRoundFeedbackSchema(lang) },
-      reasoning_effort: (process.env.EVAL_EFFORT || "minimal") as "minimal" | "low" | "medium" | "high",
+      ...(process.env.EVAL_EFFORT === "omit"
+        ? {}
+        : { reasoning_effort: (process.env.EVAL_EFFORT || "minimal") as "none" | "minimal" | "low" | "medium" | "high" }),
       messages: [
         { role: "system", content: systemMessage },
         { role: "user", content: userPrompt },
