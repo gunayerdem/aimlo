@@ -4,7 +4,7 @@
  *  YALNIZ süzgeç değişikliğinden gelir (model rastgeleliği yok, maliyet yok). */
 import fs from "node:fs";
 import { realityCheck, buildFactGround } from "../lib/reality-checker";
-import { cleanCoachText, clampWords } from "../lib/coach-text";
+import { cleanCoachText, clampWords, enforceSuppliedCallout } from "../lib/coach-text";
 import { enforceAgentKit } from "../lib/agent-abilities";
 import { sanitizePromptInput } from "../lib/prompt-safety";
 
@@ -35,16 +35,19 @@ function post(s: S, fb: { deathAnalysis: string; enemyAnalysis: string[]; nextRo
     if (typeof b.playerRoute === "string") ctx.playerRoute = sanitizePromptInput(b.playerRoute, { max: 120, collapseWhitespace: true });
   }
   const fg = buildFactGround(b, ctx);
+  // route.ts:1819-1848 — callout duzeltici clampWords'un DISINDA uygulanir (S5).
+  const suppliedLoc = typeof b.deathLocation === "string" ? b.deathLocation : "";
+  const fix = (x: string) => (suppliedLoc ? enforceSuppliedCallout(x, suppliedLoc) : x);
   const ca = realityCheck(fb.deathAnalysis, mem as never, fg, "death", lang, map);
   const cs = realityCheck(fb.nextRoundSuggestion, mem as never, fg, "suggestion", lang, map);
   const cl = cleanCoachText(ca.text, lang);
   return {
-    deathAnalysis: clampWords(enforceAgentKit(cl && cl.trim() ? cl : ca.text, agent), 350),
+    deathAnalysis: fix(clampWords(enforceAgentKit(cl && cl.trim() ? cl : ca.text, agent), 350)),
     enemyAnalysis: (fb.enemyAnalysis || []).slice(0, 2).map((x) => {
       const c = realityCheck(String(x), mem as never, fg, "suggestion", lang, map);
-      return clampWords(enforceAgentKit(cleanCoachText(c.text && c.text.trim() ? c.text : String(x), lang), agent), 180);
-    }),
-    nextRoundSuggestion: clampWords(enforceAgentKit(cleanCoachText(cs.text && cs.text.trim() ? cs.text : fb.nextRoundSuggestion, lang), agent), 350),
+      return fix(clampWords(enforceAgentKit(cleanCoachText(c.text && c.text.trim() ? c.text : String(x), lang), agent), 180));
+    }).filter((s) => s && s.trim().length > 0),
+    nextRoundSuggestion: fix(clampWords(enforceAgentKit(cleanCoachText(cs.text && cs.text.trim() ? cs.text : fb.nextRoundSuggestion, lang), agent), 350)),
   };
 }
 

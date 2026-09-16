@@ -39,7 +39,7 @@ import { buildPolicyBlock } from "../lib/ai-policy";
 import { loadVisionKnowledge } from "../lib/knowledge-loader";
 // B9 (2026-07-31): factGround artık ELDE kurulmuyor — route'un buildFactGround'u.
 import { realityCheck, buildFactGround } from "../lib/reality-checker";
-import { cleanCoachText, clampWords, stripNumericHp } from "../lib/coach-text";
+import { cleanCoachText, clampWords, stripNumericHp, enforceSuppliedCallout } from "../lib/coach-text";
 import { buildAgentAbilityHint, enforceAgentKit } from "../lib/agent-abilities";
 // B60 (2026-08-04): EN-native korpus — aşağıda SCENARIOS'a ekleniyor.
 import { EN_VISION_SCENARIOS } from "../evals/en-corpus";
@@ -929,22 +929,34 @@ function postProcess(s: Scenario, fb: { deathAnalysis: string; enemyAnalysis: st
   const ca = realityCheck(fb.deathAnalysis, memoryForCheck, factGround, "death", lang, map);
   const cs = realityCheck(fb.nextRoundSuggestion, memoryForCheck, factGround, "suggestion", lang, map);
 
-  // deathAnalysis — route.ts:1369-1373 (clean ÖNCE, empty-guard, sonra clamp).
+  // ⚠ B9 SAPMA #6 KAPATILDI (2026-09-16): prod route.ts:1819-1848 clampWords'ün
+  // DIŞINDA `fixCallout = enforceSuppliedCallout(t, body.deathLocation)` uyguluyor
+  // (canlı-test #10 kalite dalgası, S5). Ayna bunu HİÇ uygulamıyordu → eval,
+  // prod'un ÜRETMEDİĞİ metinleri ölçüyordu ve callout-düzelticinin ürettiği
+  // bozulmaları ("Plant sonrası…" + supplied "a plaza" → "Plaza sonrası…")
+  // göremiyordu. NOT: bu halka eklenince ölçüm TABANI kayar — eski cycle'larla
+  // kıyas için base YENİDEN koşulmalı.
+  const suppliedLoc = typeof b.deathLocation === "string" ? String(b.deathLocation) : "";
+  const fixCallout = (t: string) => (suppliedLoc ? enforceSuppliedCallout(t, suppliedLoc) : t);
+  // deathAnalysis — route.ts:1824-1828 (clean ÖNCE, empty-guard, clamp, fixCallout).
   const cleanedAnalysis = cleanCoachText(ca.text, lang);
-  const deathAnalysisOut = clampWords(
+  const deathAnalysisOut = fixCallout(clampWords(
     enforceAgentKit(cleanedAnalysis && cleanedAnalysis.trim() ? cleanedAnalysis : ca.text, agent),
     350,
-  );
-  // enemyAnalysis — route.ts:1377-1381: dizinin HER elemanı da reality-check'ten geçer.
+  ));
+  // enemyAnalysis — route.ts:1837-1841: her eleman reality-check'ten geçer ve
+  // ⚠ B9 SAPMA #7: prod BOŞALAN elemanı .filter ile DÜŞÜRÜR (S1 dizi-kuralı);
+  // ayna düşürmüyordu → eval boş satır ölçüyordu (spike/defuse/pencere silmesi
+  // kısa bir maddeyi tamamen boşaltabilir).
   const enemyAnalysisOut = (fb.enemyAnalysis || []).slice(0, 2).map((x) => {
     const c = realityCheck(String(x), memoryForCheck, factGround, "suggestion", lang, map);
     const safe = c.text && c.text.trim() ? c.text : String(x);
-    return clampWords(enforceAgentKit(cleanCoachText(safe, lang), agent), 180);
-  });
-  // nextRoundSuggestion — route.ts:1386-1389: "suggestion" kind'ı boş döndürürse
+    return fixCallout(clampWords(enforceAgentKit(cleanCoachText(safe, lang), agent), 180));
+  }).filter((s) => s && s.trim().length > 0);
+  // nextRoundSuggestion — route.ts:1843-1848: "suggestion" kind'ı boş döndürürse
   // modelin ORİJİNAL tavsiyesi korunur (S9-sınıfı stub regresyonu).
   const safeSuggestion = cs.text && cs.text.trim() ? cs.text : fb.nextRoundSuggestion;
-  const nextRoundOut = clampWords(enforceAgentKit(cleanCoachText(safeSuggestion, lang), agent), 350);
+  const nextRoundOut = fixCallout(clampWords(enforceAgentKit(cleanCoachText(safeSuggestion, lang), agent), 350));
 
   return {
     deathAnalysis: deathAnalysisOut,
