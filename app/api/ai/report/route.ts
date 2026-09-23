@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
-import { verifyAuthAndRateLimit } from "@/lib/api-auth";
+import { verifyAuthAndRateLimit, authUnavailableResponse } from "@/lib/api-auth";
 import { checkMatchQuota } from "@/lib/entitlements";
 import { saveAiUsage } from "@/lib/ai-usage";
 import { sanitizePromptInput } from "@/lib/prompt-safety";
@@ -20,6 +20,7 @@ import { formatMap, formatAgent, formatMode, normalizeSide, knownAgent } from "@
 import { realityCheck, buildFactGround, type FactGround } from "@/lib/reality-checker";
 import { VISION_ENEMY_ITEM_CAP } from "@/lib/vision-postprocess";
 import { isUuidV4 } from "@/lib/uuid";
+import { pickReportScore } from "@/lib/report-score";
 import type { RoundData as EngineRoundData } from "@/types";
 
 /**
@@ -130,15 +131,7 @@ const AI_TIMEOUT_MS = 30_000;
 const MAX_PROMPT_ROUNDS = 30; // limit rounds sent to AI prompt
 const VALID_LANGS = new Set(["tr", "en"]);
 const VALID_SIDES = new Set(["attack", "defense"]);
-// Overtime fix (backend-review 2026-07-09): eski VALID_SCORES seti 14'te
-// bitiyordu → 15-13/17-15 gibi overtime skorları 400 "Invalid score values"
-// ile REDDEDİLİYORDU (maç hiç rapora dönüşmüyor, desktop kuyruğu takılıyordu).
-// Sayısal aralık kontrolü: 0-40 (OT teorik üst sınırının çok üstünde tampon).
-const MAX_SCORE_VALUE = 40;
-function isValidScoreValue(s: string): boolean {
-  const n = Number(s);
-  return Number.isInteger(n) && n >= 0 && n <= MAX_SCORE_VALUE;
-}
+// Skor aralığı (overtime 0-40) + seçim kuralı lib/report-score.ts'te (A058, B05).
 
 /* ══════════════════════════════════════════════════════════
    VALIDATION
@@ -219,45 +212,16 @@ function validateRequest(
   // lang — default to "tr" if missing (desktop may omit)
   const lang = VALID_LANGS.has(b.lang as string) ? (b.lang as "tr" | "en") : "tr";
 
-  // score — support all 3 shapes:
-  //   1. { score: { yours: "13", enemy: "7" } }    — web nested shape
-  //   2. { score: "13-7" }                          — web string convenience
-  //   3. (no top-level score, but rounds[] present) — desktop A2 flat shape
-  //      ships per-round score in the round entries but omits a match-level
-  //      score field; we pull "yours-enemy" from the last round entry that
-  //      has a parseable "X-Y" score string.
-  let yours = "0";
-  let enemy = "0";
-  if (b.score && typeof b.score === "object") {
-    const scoreObj = b.score as Record<string, unknown>;
-    yours = sanitize(scoreObj.yours, 3);
-    enemy = sanitize(scoreObj.enemy, 3);
-  } else if (typeof b.score === "string") {
-    const parts = b.score.split("-").map((s: string) => s.trim());
-    if (parts.length === 2) {
-      yours = sanitize(parts[0], 3);
-      enemy = sanitize(parts[1], 3);
-    }
-  } else if (Array.isArray(b.rounds)) {
-    // Walk rounds from the end — last round with a "X-Y" score wins.
-    const rs = b.rounds as unknown[];
-    for (let i = rs.length - 1; i >= 0; i--) {
-      const r = rs[i];
-      if (r && typeof r === "object") {
-        const rScore = (r as Record<string, unknown>).score;
-        if (typeof rScore === "string") {
-          const parts = rScore.split("-").map((s) => s.trim());
-          if (parts.length === 2) {
-            yours = sanitize(parts[0], 3);
-            enemy = sanitize(parts[1], 3);
-            break;
-          }
-        }
-      }
-    }
-  }
-  if (!isValidScoreValue(yours) || !isValidScoreValue(enemy)) {
+  // score — 3 biçim (nesne / "13-7" / round'lardan). A058 (B05, 2026-09-24):
+  // round taraması artık SAYISAL olmayan ("?-?") son çifti atlayıp önceki GEÇERLİ
+  // skora bakıyor; hiç geçerli çift yoksa eskisi gibi 400. Ayrıntı: lib/report-score.ts.
+  const picked = pickReportScore(b.rounds, b.score);
+  if (!picked.ok) {
     return { valid: false, error: "Invalid score values" };
+  }
+  const { yours, enemy } = picked;
+  if (picked.skippedInvalid > 0) {
+    console.log(`[Aimlo] report score: ${picked.skippedInvalid} okunamayan son skor atlandı → son geçerli skor ${yours}-${enemy}`);
   }
 
   // rounds — tolerate missing/empty
@@ -1390,8 +1354,17 @@ export async function POST(request: NextRequest) {
         return auth.response;
       }
       userId = auth.userId;
-    } catch {
-      return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+    } catch (e) {
+      // A021 (B05, 2026-09-24): bilinen auth reddi auth.response ile dönüyor; buraya
+      // düşen İSTİSNA altyapı hatasıdır (Supabase/Upstash erişilemedi). Eskiden 401
+      // "Authentication required" dönüyordu → desktop 401'i oturum sonu sayıp
+      // (ai_client.rs:386 AuthExpired) sağlam oturumu yıkıyordu. 503 auth_unavailable
+      // + Retry-After 15 = fail-closed (erişim yok), desktop Upstream sayar (yıkım yok).
+      console.error(
+        "[Aimlo API] Report auth exception:",
+        e instanceof Error ? e.message : "unknown",
+      );
+      return authUnavailableResponse();
     }
 
     let rawBody: unknown;
