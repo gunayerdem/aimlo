@@ -3,7 +3,7 @@ import { verifyAuthAndRateLimit } from "@/lib/api-auth";
 import { checkMatchQuota } from "@/lib/entitlements";
 import { saveAiUsage } from "@/lib/ai-usage";
 import { saveMatchEvent } from "@/lib/match-events";
-import { realityCheck, buildFactGround } from "@/lib/reality-checker";
+import { buildFactGround } from "@/lib/reality-checker";
 import { loadVisionKnowledge } from "@/lib/knowledge-loader";
 import { sanitizePromptInput } from "@/lib/prompt-safety";
 import { loadPlayerMemory, buildMemoryContext } from "@/lib/player-memory";
@@ -15,10 +15,13 @@ import { buildPolicyBlock, confidencePrompt } from "@/lib/ai-policy";
 // AGENT_ABILITIES (canlı-test #10 kalite dalgası, 2026-08-05 — S2b): [AJAN KİTİ]
 // işaretçisi oyuncunun GERÇEK kitini user-message'da tekrarlar; kit kaynağı TEK
 // (bu sözlük), liste route'ta KOPYALANMAZ.
-import { buildAgentAbilityHint, enforceAgentKit, AGENT_ABILITIES } from "@/lib/agent-abilities";
+import { buildAgentAbilityHint, AGENT_ABILITIES } from "@/lib/agent-abilities";
 // stripHpClaims: B47 (2026-07-31) — patternContext GİRİŞ zinciri de çıkış
 // zinciriyle aynı sırayı uygular (stripNumericHp → stripHpClaims).
-import { cleanCoachText, clampWords, stripNumericHp, stripHpClaims, enforceSuppliedCallout } from "@/lib/coach-text";
+import { stripNumericHp, stripHpClaims } from "@/lib/coach-text";
+// Model-sonrası son-işlem zinciri (realityCheck → cleanCoachText → enforceAgentKit →
+// kapak → fixCallout) TEK KAYNAK: lib/vision-postprocess.ts (OLCUM-ARACI-08).
+import { finalizeVisionFeedback } from "@/lib/vision-postprocess";
 import { SYSTEM_PROMPT, SYSTEM_PROMPT_EN_ADDENDUM, USER_PROMPT, USER_PROMPT_EN, buildFactSheet, buildRoundFeedbackSchema } from "@/lib/vision-prompt";
 import { classifyDeathVaried, buildDeathTypeDirective } from "@/lib/death-type";
 import { calloutBelongsToMap } from "@/lib/map-callouts";
@@ -1784,68 +1787,31 @@ export async function POST(request: NextRequest) {
     if (isValidFeedbackShape(parsed)) {
       const fb = parsed as RoundFeedback;
 
-      // Reality check against round memory (modifies text if AI claims contradict observed data)
-      const memoryForCheck = (roundHistory || []).map((r: Record<string, unknown>) => ({
-        round_index: r.round_index as number,
-        died: !!r.died,
-        death_position: r.death_position as string | null | undefined,
-        position_confidence: r.position_confidence as string | undefined,
-      }));
-      // Present-round ground truth (factGround) built ABOVE via buildFactGround
-      // (Ölüm-Veri Sözleşmesi 2026-06-29) — same object that produced the prompt
-      // fact-sheet, so the guard strips exactly the facts the model was told were
-      // unknown (killer/weapon/location/headshot/alive/spike/route/trade).
-      // reqLang geçirilir (denetim 2026-07-19 F5): guard/rewrite replacement dili
-      // artık özel-harf heuristiği değil, isteğin kendi dili ("Cypher seni B Main'de
-      // vurdu" gibi özel-harfsiz TR cümleye "an enemy" enjekte edilmesin).
-      // reqMap (canlı bug 2026-07-21): oynanan haritaya ait OLMAYAN callout'lar
-      // ayıklanır — Lotus maçında "A Short" uydurması gibi. Harita bilinmiyorsa
-      // (Unknown / gelmedi) davranış eskisiyle aynı.
-      const checkedAnalysis = realityCheck(fb.deathAnalysis, memoryForCheck, factGround, "death", reqLang, reqMap);
-      const checkedSuggestion = realityCheck(fb.nextRoundSuggestion, memoryForCheck, factGround, "suggestion", reqLang, reqMap);
-      if (checkedAnalysis.modified || checkedSuggestion.modified) {
-        console.log(`[Aimlo AI] Reality check: deathAnalysis rewrite=${checkedAnalysis.rewriteLevel}, suggestion rewrite=${checkedSuggestion.rewriteLevel}`);
+      // SON-İŞLEM ZİNCİRİ — TEK KAYNAK (OLCUM-ARACI-08, 2026-09-23): realityCheck →
+      // cleanCoachText → boş-guard → enforceAgentKit → clampWords → fixCallout zinciri
+      // lib/vision-postprocess.ts:finalizeVisionFeedback'e taşındı (bayt-aynı; 3776
+      // kayıtlı ham örnekte golden kıyas). eval-vision, test-pipeline-chain ve replay-tr
+      // AYNI fonksiyonu import eder → dört elle kopyalanmış ayna artık yok. factGround
+      // yukarıda buildFactGround ile kurulan, prompt fact-sheet'ini üreten AYNI nesne.
+      const post = finalizeVisionFeedback(fb, {
+        roundHistory,
+        factGround,
+        lang: reqLang,
+        map: reqMap,
+        agent: reqAgent,
+        suppliedLoc: typeof (body as VisionRequest).deathLocation === "string"
+          ? String((body as VisionRequest).deathLocation)
+          : "",
+      });
+      if (post.realityModified) {
+        console.log(`[Aimlo AI] Reality check: deathAnalysis rewrite=${post.rewriteLevels.death}, suggestion rewrite=${post.rewriteLevels.suggestion}`);
       }
 
       // Note: coachInsight field removed — purple "KOÇ İÇGÖRÜSÜ" block dropped from overlay.
       // Pattern-aware insight now folds into deathAnalysis or nextRoundSuggestion when relevant.
-
-      // Final coach text (clean BEFORE slice — plainify/apostrophe can change length).
-      // Empty-guard (security audit L1): stripNumericHp's deletion forms can empty a
-      // text that was ONLY an HP label — keep the reality-checked original then
-      // (mirrors the enemyAnalysis/safeSuggestion fallback pattern below).
-      // Callout-yazım kilidi (canlı-test #10 kalite dalgası, S5): model verilen
-      // callout'u aynı cevapta bozabiliyor (canlı kanıt: deathLocation="a lamps"
-      // → çıktıda "Lambs gibi"). Verilen değerin bozuk yakın-varyantı orijinal
-      // görünümle değiştirilir; dar kapsam + korumalar lib/coach-text.ts'te.
-      const suppliedLoc = typeof (body as VisionRequest).deathLocation === "string"
-        ? String((body as VisionRequest).deathLocation)
-        : "";
-      const fixCallout = (t: string) => (suppliedLoc ? enforceSuppliedCallout(t, suppliedLoc) : t);
-      const cleanedAnalysis = cleanCoachText(checkedAnalysis.text, reqLang);
-      const deathAnalysisOut = fixCallout(clampWords(
-        enforceAgentKit(cleanedAnalysis && cleanedAnalysis.trim() ? cleanedAnalysis : checkedAnalysis.text, reqAgent),
-        350,
-      ));
-      // enemyAnalysis de reality-check'ten GEÇER (grounding audit 2026-06-26: bu dizi
-      // önceden HİÇ denetlenmiyordu → killer/rota/sayı uydurması elenmeden çıkıyordu).
-      // kind:"suggestion" → tümü stripped olursa "" döner, orijinali koru.
-      // .filter (canlı-test #10, S1 dizi-kuralı): stripMetaTerms SAF-META bir
-      // elemanı ("katil bilgisi X olarak kayıtta var" gibi tek-cümlelik kaynak-dili)
-      // '' yapabilir — boş eleman diziden düşer, kullanıcıya boş satır gitmez.
-      const enemyAnalysisOut = fb.enemyAnalysis.slice(0, 2).map((s) => {
-        const c = realityCheck(String(s), memoryForCheck, factGround, "suggestion", reqLang, reqMap);
-        const safe = c.text && c.text.trim() ? c.text : String(s);
-        return fixCallout(clampWords(enforceAgentKit(cleanCoachText(safe, reqLang), reqAgent), 180));
-      }).filter((s) => s && s.trim().length > 0);
-      // Cycle 3: if reality-check emptied the suggestion (every sentence was an
-      // unproven repetition claim → "suggestion" kind returns "" rather than a
-      // past-tense death stub), keep the model's original advice — still a valid
-      // actionable next-round plan. Prevents the S9-class stub regression.
-      const safeSuggestion = checkedSuggestion.text && checkedSuggestion.text.trim()
-        ? checkedSuggestion.text
-        : fb.nextRoundSuggestion;
-      const nextRoundOut = fixCallout(clampWords(enforceAgentKit(cleanCoachText(safeSuggestion, reqLang), reqAgent), 350));
+      const deathAnalysisOut = post.deathAnalysis;
+      const enemyAnalysisOut = post.enemyAnalysis;
+      const nextRoundOut = post.nextRoundSuggestion;
 
       // Live match feed (admin /live + /feedback): one row per death with the ACTUAL
       // coaching the user received — piggybacks this vision call, ZERO extra AI cost,

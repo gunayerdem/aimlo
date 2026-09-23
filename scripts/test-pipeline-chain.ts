@@ -15,13 +15,16 @@
  * test-strip-hp → yalnız stripNumericHp). Bu sınıf hata izole testte
  * GÖRÜNMEZ; ancak metin TAM zincirden PROD SIRASIYLA geçirilince çıkar.
  *
- * ZİNCİR (app/api/ai/vision/route.ts:1356-1389 ile BİREBİR):
+ * ZİNCİR = lib/vision-postprocess.ts:finalizeVisionFeedback — route'un ÇAĞIRDIĞI
+ * FONKSİYONUN KENDİSİ (OLCUM-ARACI-08, 2026-09-23; eskiden burada route.ts:1356-1389
+ * referanslı ELLE bir kopya vardı, bayattı ve fixCallout halkası HİÇ yoktu):
  *   realityCheck(text, memory, factGround, kind, lang, map)
  *     └─ içinde: stripForeignCallouts → guardUnprovenFacts → claim-rewrite
  *   → cleanCoachText(lang)
  *     └─ içinde: stripNumericHp → stripHpClaims → plainifyAbilities → TR jargon
  *   → enforceAgentKit(agent)
- *   → clampWords(350)
+ *   → clampWords (350)
+ *   → fixCallout (enforceSuppliedCallout — gövdede deathLocation varsa)
  *
  * ASSERT BİÇİMİ — bilinçli tercih: birebir "golden string" YERİNE
  * `korunmali` / `silinmeli` invariantları. Gerekçe: golden string, ilgisiz ve
@@ -33,9 +36,10 @@
  * BAKIM: her yeni katman-çelişkisi bug'ında korpusa 1 VAKA EKLE (canlı
  * metniyle, kaynağını yorumda belirterek).
  */
-import { realityCheck, buildFactGround } from "../lib/reality-checker";
-import { cleanCoachText, clampWords } from "../lib/coach-text";
-import { enforceAgentKit } from "../lib/agent-abilities";
+import * as fs from "node:fs";
+import * as path from "node:path";
+import { buildFactGround } from "../lib/reality-checker";
+import { finalizeVisionFeedback } from "../lib/vision-postprocess";
 
 let fail = 0;
 const t = (ad: string, kosul: boolean, detay = "") => {
@@ -60,31 +64,25 @@ type Vaka = {
   silinmeli?: string[];         // çıktıda BULUNMAMALI
 };
 
-/** PROD ZİNCİRİ — route.ts:1356-1389'un BİREBİR kopyası (kind'a göre dallanır). */
+/** PROD ZİNCİRİ — route'un kullandığı finalizeVisionFeedback'in KENDİSİ (kind'a göre alan). */
 function zincir(v: Vaka): string {
-  const memory = (v.roundHistory || []).map((r) => ({
-    round_index: r.round_index,
-    died: r.died,
-    death_position: r.death_position,
-    position_confidence: r.position_confidence,
-  }));
-  const factGround = buildFactGround(v.body || {}, v.ctx || {});
-  const checked = realityCheck(v.metin, memory, factGround, v.kind, v.lang, v.map);
-
-  if (v.kind === "death") {
-    // route.ts:1369-1373 — TEMİZLE ÖNCE, empty-guard, SONRA clamp.
-    // Empty-guard: cleanCoachText metni tamamen boşaltabilir (yalnız HP
-    // etiketinden ibaret cümle) → o zaman reality-check'lenmiş ORİJİNAL korunur.
-    const cleaned = cleanCoachText(checked.text, v.lang);
-    return clampWords(
-      enforceAgentKit(cleaned && cleaned.trim() ? cleaned : checked.text, v.agent),
-      350,
-    );
-  }
-  // route.ts:1386-1389 — "suggestion" kind'ı boş dönebilir (S9-sınıfı stub);
-  // o durumda MODELİN ORİJİNAL tavsiyesi korunur, sonra temizlenir.
-  const safe = checked.text && checked.text.trim() ? checked.text : v.metin;
-  return clampWords(enforceAgentKit(cleanCoachText(safe, v.lang), v.agent), 350);
+  const body = v.body || {};
+  // kind → alan: "death" deathAnalysis, "suggestion" nextRoundSuggestion. Öteki
+  // alanlar boş verilir (realityCheck/cleanCoachText boş girdide erken döner).
+  const fb = v.kind === "death"
+    ? { deathAnalysis: v.metin, enemyAnalysis: [], nextRoundSuggestion: "" }
+    : { deathAnalysis: "", enemyAnalysis: [], nextRoundSuggestion: v.metin };
+  const out = finalizeVisionFeedback(fb, {
+    roundHistory: v.roundHistory,
+    // route: factGround = buildFactGround(gövde, ctx) — ctx route'ta gövdeden kurulur.
+    factGround: buildFactGround(body, v.ctx || {}),
+    lang: v.lang,
+    map: v.map,
+    agent: v.agent,
+    // route: suppliedLoc = body.deathLocation (ham OCR değeri → fixCallout halkası).
+    suppliedLoc: typeof body.deathLocation === "string" ? body.deathLocation : "",
+  });
+  return v.kind === "death" ? out.deathAnalysis : out.nextRoundSuggestion;
 }
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -223,6 +221,43 @@ const KORPUS: Vaka[] = [
     ctx: { deathLocation: "A Hail" },
     korunmali: ["A Hail"],
   },
+  {
+    // OLCUM-ARACI-08: fixCallout halkası ZİNCİRDE (route 1824-1848'in DIŞ halkası).
+    // Eski elle kopya bu halkayı HİÇ içermiyordu → B10 sıra testi onu ölçemezdi.
+    // Pozitif vaka halkanın GERÇEKTEN bağlı olduğunun kanıtı: canlı-test #10 S5
+    // ("a lamps" verilmişken model aynı cevapta "Lambs" yazdı).
+    ad: "fixCallout zincirde — verilen callout'un bozuk varyantı düzelir (Lambs→Lamps)",
+    kaynak: "canlı-test #10 S5 (scripts/test-coach-meta.ts canlı fixture'ı)",
+    metin: "A Lamps'ta öldün; Lambs gibi dar köşede bekleme.",
+    kind: "death", lang: "tr", map: "Lotus", agent: "Omen",
+    body: { died: true, killerInfo: "killed by jett with vandal", deathLocation: "a lamps" },
+    ctx: { deathLocation: "a lamps" },
+    korunmali: ["Lamps gibi"],
+    silinmeli: ["Lambs"],
+  },
+  {
+    // 9355dec notu (B1 sınır savunması): Levenshtein plant↔plaza=2 → supplied
+    // "a plaza" iken callout-düzeltici koç terimini callout'a ÇEVİRMEMELİ.
+    ad: "fixCallout koç terimini bozmaz — 'Plant sonrası' + supplied 'a plaza'",
+    kaynak: "9355dec / lib/coach-text.ts PROTECTED_MAP_NAMES notu",
+    metin: "Plant sonrası uzak açıya çekil.",
+    kind: "suggestion", lang: "tr", map: "Pearl", agent: "Omen",
+    body: { died: true, killerInfo: "killed by jett with vandal", deathLocation: "a plaza" },
+    ctx: { deathLocation: "a plaza" },
+    korunmali: ["Plant sonrası"],
+    silinmeli: ["Plaza sonrası"],
+  },
+  {
+    // Aynı sınıfın ikinci biçimi: post↔plat=2 (Haven "plat").
+    ad: "fixCallout koç terimini bozmaz — 'Post-plant'te' + supplied 'plat'",
+    kaynak: "9355dec / lib/coach-text.ts PROTECTED_MAP_NAMES notu",
+    metin: "Post-plant'te çapraz açı tut.",
+    kind: "death", lang: "tr", map: "Haven", agent: "Omen",
+    body: { died: true, killerInfo: "killed by jett with vandal", deathLocation: "plat" },
+    ctx: { deathLocation: "plat" },
+    korunmali: ["Post-plant'te"],
+    silinmeli: ["Plat-plant"],
+  },
 ];
 
 console.log("\n══════ ZİNCİR SIRA TESTİ — realityCheck → cleanCoachText → enforceAgentKit → clampWords ══════");
@@ -261,6 +296,47 @@ console.log("\n[GENEL] clampWords KELİME sınırında keser (route .slice deği
   t("350 karakteri aşmaz", out.length <= 350, `len=${out.length}`);
   // Kelime sınırında kesildiyse sonu boşluk/kırık-kelime olmaz (clampWords trim eder).
   t("sonu kırık boşlukla bitmez", out === out.trim(), `→ "${out.slice(-30)}"`);
+}
+
+// ── TEK KAYNAK KİLİDİ (OLCUM-ARACI-08, 2026-09-23) ──────────────────────────
+// Vision son-işlem zinciri DÖRT yerde elle kopyalanmıştı (route, eval-vision,
+// test-pipeline-chain, replay-tr) ve her yeni halka yalnız bazı kopyalara
+// ulaşıyordu. Bu kilit, zincirin yeniden ELLE kurulmasını yakalar:
+//   G1 — kapak çağrısının içinde DOĞRUDAN enforceAgentKit çağrısı (elle kopyanın
+//        imzası) scripts/ ve app/ altında HİÇBİR dosyada yok.
+//   G2 — hiçbir dosya hem callout düzelticisini (enforceSuppliedCallout) hem bir
+//        uzunluk kapağını (clampWords / clampToSentence) ÇAĞIRMIYOR: ikisinin
+//        birlikteliği vision zincirinin imzasıdır. Düzelticiyi İZOLE birim-test
+//        eden dosyalar (test-coach-meta, test-tr-guards) kapak çağırmaz → meşru.
+//   G3 — dört tüketici finalizeVisionFeedback'i ÇAĞIRIYOR.
+// Literaller birleştirilerek kurulur ve bu dosyanın yorumları çağrı biçimi
+// (ad + parantez) içermez → dosya kendi kendini eşlemez, ama kendisi de (eski
+// dört kopyadan biri) taranmaya DEVAM eder.
+console.log("\n[TEK KAYNAK] vision son-işlem zinciri elle kopyalanmıyor (grep-guard)");
+{
+  const root = path.join(__dirname, "..");
+  const walk = (d: string): string[] =>
+    fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => {
+      const p = path.join(d, e.name);
+      if (e.isDirectory()) return e.name === "node_modules" || e.name === "eval-out" ? [] : walk(p);
+      return /\.(ts|tsx)$/.test(e.name) ? [p] : [];
+    });
+  const files = [...walk(path.join(root, "scripts")), ...walk(path.join(root, "app"))];
+  const chainCopy = "clampWords(" + "enforceAgentKit(";
+  const fixCall = "enforceSupplied" + "Callout(";
+  const g1: string[] = [], g2: string[] = [];
+  for (const f of files) {
+    const src = fs.readFileSync(f, "utf8");
+    const rel = path.relative(root, f);
+    if (src.includes(chainCopy)) g1.push(rel);
+    if (src.includes(fixCall) && /clamp(?:Words|ToSentence)\(/.test(src)) g2.push(rel);
+  }
+  t(`G1 elle zincir kopyası yok (${files.length} dosya tarandı)`, g1.length === 0, `→ ${g1.join(", ")}`);
+  t("G2 fixCallout + kapak birlikte yalnız lib/vision-postprocess.ts'te", g2.length === 0, `→ ${g2.join(", ")}`);
+  for (const rel of ["app/api/ai/vision/route.ts", "scripts/eval-vision.ts", "scripts/replay-tr.ts", "scripts/test-pipeline-chain.ts"]) {
+    const src = fs.readFileSync(path.join(root, rel), "utf8");
+    t(`G3 ${rel} → finalizeVisionFeedback(`, src.includes("finalizeVision" + "Feedback("));
+  }
 }
 
 console.log(fail === 0 ? "\n✅ ZİNCİR TESTLERİ GEÇTİ" : `\n❌ ${fail} ZİNCİR TESTİ BAŞARISIZ`);

@@ -1,54 +1,55 @@
-/** TR süzgeç yamalarının 39 GERÇEK çıktı üzerindeki etkisini ölçer.
+/** TR süzgeç yamalarının GERÇEK çıktılar üzerindeki etkisini ölçer.
  *  Model YENİDEN ÇAĞRILMAZ: kaydedilmiş `raw` alanları mevcut son-işlem
  *  zincirinden geçirilip kaydedilmiş `final` ile karşılaştırılır → fark
- *  YALNIZ süzgeç değişikliğinden gelir (model rastgeleliği yok, maliyet yok). */
+ *  YALNIZ süzgeç değişikliğinden gelir (model rastgeleliği yok, maliyet yok).
+ *
+ *  OLCUM-ARACI-08 (2026-09-23):
+ *   • Zincir artık ELLE KOPYALANMAZ — prod ile AYNI fonksiyon
+ *     (lib/vision-postprocess.ts:finalizeVisionFeedback). Eskiden dördüncü elle
+ *     kopyalanmış zincirdi; her yeni halka yalnız bazı kopyalara ulaşıyordu.
+ *   • Korpus yolu oturuma özel Temp klasörüne SABİT KODLUYDU (başka makinede
+ *     yeniden üretilemezdi). Artık parametre: REPLAY_CORPUS_DIR = tr-cards*.json /
+ *     tr-posters*.json dosyalarının klasörü. Bu korpuslar Riot kullanıcı adı
+ *     içerebildiği için PII denetimi yapılmadan repoya KOPYALANMADI. Değişken
+ *     yoksa o döngüler atlanır; gerçek-round korpusu (evals/real-rounds-23.json)
+ *     repo içinde olduğundan her zaman koşar.
+ *   • Örnek dosyaları (scripts/eval-out/*-samples.json) gitignore'da; eval-vision
+ *     koşularıyla yeniden üretilir.
+ *  RUN: REPLAY_CORPUS_DIR=<klasör> npx tsx scripts/replay-tr.ts */
 import fs from "node:fs";
-import { realityCheck, buildFactGround } from "../lib/reality-checker";
-import { cleanCoachText, clampWords, enforceSuppliedCallout } from "../lib/coach-text";
-import { enforceAgentKit } from "../lib/agent-abilities";
+import path from "node:path";
+import { buildFactGround } from "../lib/reality-checker";
 import { sanitizePromptInput } from "../lib/prompt-safety";
+import { finalizeVisionFeedback } from "../lib/vision-postprocess";
 
-const SP = "C:/Users/GNAYER~1/AppData/Local/Temp/claude/C--Users-G-nay-Erdem-Desktop-aimlo/37eabe72-d4f9-4576-9780-05e357a57a03/scratchpad/test/";
-const PAIRS: [string, string][] = [
-  ["cycletr-cards", "tr-cards.json"], ["cycletr-cards2", "tr-cards-2.json"],
-  ["cycletr-cards3", "tr-cards-3.json"], ["cycletr-posters", "tr-posters.json"],
-  ["cycletr-posters2", "tr-posters-2.json"], ["cycletr-posters3", "tr-posters-3.json"],
-  ["cycletr-posters4", "tr-posters-4.json"], ["cycleab-base", "../lens/proj/evals/real-rounds-23.json"],
+const CORPUS_DIR = process.env.REPLAY_CORPUS_DIR || "";
+const REPO_EVALS = path.join(process.cwd(), "evals");
+/** [döngü, korpus dosyası, konum]: "ext" = REPLAY_CORPUS_DIR, "repo" = evals/. */
+const PAIRS: [string, string, "ext" | "repo"][] = [
+  ["cycletr-cards", "tr-cards.json", "ext"], ["cycletr-cards2", "tr-cards-2.json", "ext"],
+  ["cycletr-cards3", "tr-cards-3.json", "ext"], ["cycletr-posters", "tr-posters.json", "ext"],
+  ["cycletr-posters2", "tr-posters-2.json", "ext"], ["cycletr-posters3", "tr-posters-3.json", "ext"],
+  ["cycletr-posters4", "tr-posters-4.json", "ext"], ["cycleab-base", "real-rounds-23.json", "repo"],
 ];
 
 type S = { id: string; lang?: string; body: Record<string, unknown> };
 function post(s: S, fb: { deathAnalysis: string; enemyAnalysis: string[]; nextRoundSuggestion: string }) {
   const b = s.body;
   const lang = (s.lang === "en" || b.lang === "en" ? "en" : "tr") as "tr" | "en";
-  const map = typeof b.map === "string" ? b.map : undefined;
-  const agent = typeof b.agent === "string" ? b.agent : undefined;
-  const rh = (b.roundHistory as Record<string, unknown>[] | undefined) || [];
-  const mem = rh.map((r) => ({
-    round_index: r.round_index as number, died: !!r.died,
-    death_position: r.death_position as string | null | undefined,
-    position_confidence: r.position_confidence as string | undefined,
-  }));
   const ctx: Record<string, unknown> = {};
   if (b.died === true) {
     if (typeof b.deathLocation === "string") ctx.deathLocation = sanitizePromptInput(b.deathLocation, { max: 50, collapseWhitespace: true });
     if (typeof b.deathAngle === "string") ctx.deathAngle = sanitizePromptInput(b.deathAngle, { max: 30, collapseWhitespace: true });
     if (typeof b.playerRoute === "string") ctx.playerRoute = sanitizePromptInput(b.playerRoute, { max: 120, collapseWhitespace: true });
   }
-  const fg = buildFactGround(b, ctx);
-  // route.ts:1819-1848 — callout duzeltici clampWords'un DISINDA uygulanir (S5).
-  const suppliedLoc = typeof b.deathLocation === "string" ? b.deathLocation : "";
-  const fix = (x: string) => (suppliedLoc ? enforceSuppliedCallout(x, suppliedLoc) : x);
-  const ca = realityCheck(fb.deathAnalysis, mem as never, fg, "death", lang, map);
-  const cs = realityCheck(fb.nextRoundSuggestion, mem as never, fg, "suggestion", lang, map);
-  const cl = cleanCoachText(ca.text, lang);
-  return {
-    deathAnalysis: fix(clampWords(enforceAgentKit(cl && cl.trim() ? cl : ca.text, agent), 350)),
-    enemyAnalysis: (fb.enemyAnalysis || []).slice(0, 2).map((x) => {
-      const c = realityCheck(String(x), mem as never, fg, "suggestion", lang, map);
-      return fix(clampWords(enforceAgentKit(cleanCoachText(c.text && c.text.trim() ? c.text : String(x), lang), agent), 180));
-    }).filter((s) => s && s.trim().length > 0),
-    nextRoundSuggestion: fix(clampWords(enforceAgentKit(cleanCoachText(cs.text && cs.text.trim() ? cs.text : fb.nextRoundSuggestion, lang), agent), 350)),
-  };
+  return finalizeVisionFeedback(fb, {
+    roundHistory: b.roundHistory as Record<string, unknown>[] | undefined,
+    factGround: buildFactGround(b, ctx),
+    lang,
+    map: typeof b.map === "string" ? b.map : undefined,
+    agent: typeof b.agent === "string" ? b.agent : undefined,
+    suppliedLoc: typeof b.deathLocation === "string" ? b.deathLocation : "",
+  });
 }
 
 // Kabul ölçütü (plan §5): bu desenlerin HİÇBİRİ kalmamalı.
@@ -66,11 +67,14 @@ const texts = (o: { deathAnalysis: string; enemyAnalysis: string[]; nextRoundSug
 let nScen = 0, nChanged = 0;
 const before: Record<string, number> = {}, after: Record<string, number> = {};
 const diffs: string[] = [];
-for (const [cycle, corpusFile] of PAIRS) {
+for (const [cycle, corpusFile, where] of PAIRS) {
   const sf = `scripts/eval-out/${cycle}-samples.json`;
   if (!fs.existsSync(sf)) { console.log(`  · ${cycle}: örnek dosyası yok, atlandı`); continue; }
   const samples = JSON.parse(fs.readFileSync(sf, "utf8")) as { id: string; raw: never; final: never }[];
-  const corpus = JSON.parse(fs.readFileSync(SP + corpusFile, "utf8")) as S[];
+  if (where === "ext" && !CORPUS_DIR) { console.log(`  · ${cycle}: REPLAY_CORPUS_DIR tanımsız, atlandı`); continue; }
+  const corpusPath = where === "ext" ? path.join(CORPUS_DIR, corpusFile) : path.join(REPO_EVALS, corpusFile);
+  if (!fs.existsSync(corpusPath)) { console.log(`  · ${cycle}: korpus yok (${corpusPath}), atlandı`); continue; }
+  const corpus = JSON.parse(fs.readFileSync(corpusPath, "utf8")) as S[];
   const byId = new Map(corpus.map((s) => [s.id, s]));
   for (const smp of samples) {
     const s = byId.get(smp.id);

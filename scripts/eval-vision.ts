@@ -3,7 +3,7 @@
  * ─────────────────────────────────────────────────────────────────────────
  * Reproduces the EXACT vision-route prompt pipeline OFFLINE and generates real
  * gpt-5-mini coach feedback for a battery of realistic round scenarios, then
- * applies the SAME post-processing the route does (realityCheck + cleanCoachText).
+ * applies the SAME post-processing the route does (lib/vision-postprocess.ts).
  *
  * WHY: the KB-audit run must be EMPIRICALLY verified — not reasoned about. This
  * produces the actual text a user would see so the language-editor / ai-prompt-
@@ -11,17 +11,17 @@
  *
  * ⚠ SADAKAT SÖZLEŞMESİ (B9, 2026-07-31): aşağıdaki "SAME post-processing" iddiası
  * bir süre SAHTEYDİ — postProcess prod'dan 5 noktada sapmıştı (detay orada).
- * KURAL: app/api/ai/vision/route.ts'in son-işlem zinciri (realityCheck →
- * cleanCoachText → enforceAgentKit → clampWords) DEĞİŞTİĞİNDE burası da AYNI
- * commit'te güncellenir. Aksi hâlde eval "empirik kanıt" olmaktan çıkıp sahte
- * güvene döner. Zincirin sıra-testi: scripts/test-pipeline-chain.ts (B10).
+ * OLCUM-ARACI-08 (2026-09-23): son-işlem zinciri artık ELLE KOPYALANMAZ — route
+ * ile eval AYNI fonksiyonu çağırır (lib/vision-postprocess.ts:finalizeVisionFeedback).
+ * KURAL (hâlâ geçerli): prompt kurulumu (buildSystemMessage/buildUserPrompt) route
+ * değişince burada AYNI commit'te güncellenir. Zincirin sıra-testi:
+ * scripts/test-pipeline-chain.ts (B10) — o da aynı fonksiyonu koşar.
  *
  * Faithfulness: imports the same shared modules the route uses —
  *   - SYSTEM_PROMPT(_EN_ADDENDUM) / USER_PROMPT(_EN) / buildRoundFeedbackSchema (lib/vision-prompt)
  *   - buildPolicyBlock (vision opts: ocr/single/vision)    (lib/ai-policy)
  *   - loadVisionKnowledge (real knowledge/**.md RAG)        (lib/knowledge-loader)
- *   - realityCheck                                          (lib/reality-checker)
- *   - cleanCoachText                                        (lib/coach-text)
+ *   - finalizeVisionFeedback (tüm son-işlem zinciri)        (lib/vision-postprocess)
  *   - sanitizePromptInput                                   (lib/prompt-safety)
  * The system+user assembly below mirrors app/api/ai/vision/route.ts:731-996.
  * Text-only (no image) — coach-voice quality is independent of the screenshot;
@@ -38,9 +38,11 @@ import { SYSTEM_PROMPT, SYSTEM_PROMPT_EN_ADDENDUM, USER_PROMPT, USER_PROMPT_EN, 
 import { buildPolicyBlock } from "../lib/ai-policy";
 import { loadVisionKnowledge } from "../lib/knowledge-loader";
 // B9 (2026-07-31): factGround artık ELDE kurulmuyor — route'un buildFactGround'u.
-import { realityCheck, buildFactGround } from "../lib/reality-checker";
-import { cleanCoachText, clampWords, stripNumericHp, enforceSuppliedCallout } from "../lib/coach-text";
-import { buildAgentAbilityHint, enforceAgentKit } from "../lib/agent-abilities";
+import { buildFactGround } from "../lib/reality-checker";
+import { stripNumericHp } from "../lib/coach-text";
+// OLCUM-ARACI-08: son-işlem zinciri prod ile AYNI fonksiyon (elle ayna YOK).
+import { finalizeVisionFeedback } from "../lib/vision-postprocess";
+import { buildAgentAbilityHint } from "../lib/agent-abilities";
 // B60 (2026-08-04): EN-native korpus — aşağıda SCENARIOS'a ekleniyor.
 import { EN_VISION_SCENARIOS } from "../evals/en-corpus";
 import { sanitizePromptInput } from "../lib/prompt-safety";
@@ -872,39 +874,23 @@ async function callModel(systemMessage: string, userPrompt: string, lang: "tr" |
   return { parsed: JSON.parse(text), usage: data?.usage };
 }
 
-/* ── post-process — PROD ZİNCİRİNİN BİREBİR AYNISI (route.ts:1336-1389) ──────
- * B9 (2026-07-31): bu fonksiyon prod'dan DRIFT etmişti ve dosyanın başındaki
- * "applies the SAME post-processing the route does" iddiası SAHTE GÜVEN
- * üretiyordu. Kapatılan 5 sapma:
- *   (1) realityCheck'e kind/lang/map GEÇİRİLMİYORDU → map olmadan
- *       stripForeignCallouts (reality-checker.ts:1081) HİÇ tetiklenmiyordu.
- *       Yani 2026-07-24'te gerçek ölüm yerini silen ("a hail") feedback-çöküşü
- *       regresyonunu bu eval YAKALAYAMAZDI. kind eksikliği ayrıca
- *       suggestion-fallback davranışını prod'dan farklı kılıyordu.
- *   (2) factGround ELDE kuruluyordu ve route'un buildFactGround'undaki
- *       `deathLocation` (ham konum dizesi) alanı YOKTU → masaüstünün ölçtüğü
- *       konumun strip-muafiyeti eval'de çalışmıyordu; killerAgent/hasWeapon/
- *       hasDeathAngle de eksikti.
- *   (3) .slice(0, 350) KARAKTER kesiyordu; prod clampWords(…, 350) ile kelime
- *       sınırında kesiyor (route.ts:1370).
- *   (4) empty-guard'lar yoktu: cleanCoachText bir metni tamamen boşaltırsa
- *       (yalnız HP etiketinden ibaret cümle) prod orijinali koruyor, eval boş
- *       string ölçüyordu.
- *   (5) enemyAnalysis reality-check'ten HİÇ geçmiyordu (route.ts:1377-1381).
- * Zincir SIRASI da prod ile aynı: realityCheck → cleanCoachText →
- * enforceAgentKit → clampWords. */
+/* ── post-process — PROD ZİNCİRİNİN KENDİSİ (lib/vision-postprocess.ts) ─────────
+ * OLCUM-ARACI-08 (2026-09-23): bu fonksiyon eskiden route.ts:1788-1848'in ELLE
+ * kopyasıydı ve B9 (2026-07-31) + 9355dec (2026-09-16) dahil YEDİ kez prod'dan
+ * sapmıştı (kind/lang/map eksikliği, elle factGround, .slice, empty-guard,
+ * enemyAnalysis reality-check'i, fixCallout, .filter). Zincir artık route ile
+ * AYNI fonksiyondan geçer: finalizeVisionFeedback (lib/vision-postprocess.ts).
+ * Bir halka değişirse eval kendiliğinden aynı zinciri ölçer — ayna sapması
+ * yapısal olarak imkânsız. ÖLÇÜM TABANI: taşıma bayt-aynı (944 kayıtlı ham örnek
+ * × 4 gövde varyantı = 3776 koşuda eski ayna ile birebir; golden kıyas).
+ *
+ * Buradaki TEK eval-özgü parça factGround kurulumudur (route ctx'i elde yok);
+ * route/eval factGround paritesi B06'nın (prompt-builder tek kaynak) işidir. */
 function postProcess(s: Scenario, fb: { deathAnalysis: string; enemyAnalysis: string[]; nextRoundSuggestion: string }) {
   const b = s.body;
   const lang = langOf(s);
   const map = typeof b.map === "string" ? (b.map as string) : undefined;
   const agent = typeof b.agent === "string" ? (b.agent as string) : undefined;
-
-  const rh = (b.roundHistory as Record<string, unknown>[] | undefined) || [];
-  const memoryForCheck = rh.map((r) => ({
-    round_index: r.round_index as number, died: !!r.died,
-    death_position: r.death_position as string | null | undefined,
-    position_confidence: r.position_confidence as string | undefined,
-  }));
 
   // factGround: route.ts:894-897 ile AYNI fonksiyon. ctx alanları buildUserPrompt
   // ile aynı sanitize + aynı died-koşulu altında kurulur (buildFactGround yalnız
@@ -926,45 +912,14 @@ function postProcess(s: Scenario, fb: { deathAnalysis: string; enemyAnalysis: st
   }
   const factGround = buildFactGround(b as Record<string, unknown>, ctxForFacts);
 
-  const ca = realityCheck(fb.deathAnalysis, memoryForCheck, factGround, "death", lang, map);
-  const cs = realityCheck(fb.nextRoundSuggestion, memoryForCheck, factGround, "suggestion", lang, map);
-
-  // ⚠ B9 SAPMA #6 KAPATILDI (2026-09-16): prod route.ts:1819-1848 clampWords'ün
-  // DIŞINDA `fixCallout = enforceSuppliedCallout(t, body.deathLocation)` uyguluyor
-  // (canlı-test #10 kalite dalgası, S5). Ayna bunu HİÇ uygulamıyordu → eval,
-  // prod'un ÜRETMEDİĞİ metinleri ölçüyordu ve callout-düzelticinin ürettiği
-  // bozulmaları ("Plant sonrası…" + supplied "a plaza" → "Plaza sonrası…")
-  // göremiyordu. NOT: bu halka eklenince ölçüm TABANI kayar — eski cycle'larla
-  // kıyas için base YENİDEN koşulmalı.
-  const suppliedLoc = typeof b.deathLocation === "string" ? String(b.deathLocation) : "";
-  const fixCallout = (t: string) => (suppliedLoc ? enforceSuppliedCallout(t, suppliedLoc) : t);
-  // deathAnalysis — route.ts:1824-1828 (clean ÖNCE, empty-guard, clamp, fixCallout).
-  const cleanedAnalysis = cleanCoachText(ca.text, lang);
-  const deathAnalysisOut = fixCallout(clampWords(
-    enforceAgentKit(cleanedAnalysis && cleanedAnalysis.trim() ? cleanedAnalysis : ca.text, agent),
-    350,
-  ));
-  // enemyAnalysis — route.ts:1837-1841: her eleman reality-check'ten geçer ve
-  // ⚠ B9 SAPMA #7: prod BOŞALAN elemanı .filter ile DÜŞÜRÜR (S1 dizi-kuralı);
-  // ayna düşürmüyordu → eval boş satır ölçüyordu (spike/defuse/pencere silmesi
-  // kısa bir maddeyi tamamen boşaltabilir).
-  const enemyAnalysisOut = (fb.enemyAnalysis || []).slice(0, 2).map((x) => {
-    const c = realityCheck(String(x), memoryForCheck, factGround, "suggestion", lang, map);
-    const safe = c.text && c.text.trim() ? c.text : String(x);
-    return fixCallout(clampWords(enforceAgentKit(cleanCoachText(safe, lang), agent), 180));
-  }).filter((s) => s && s.trim().length > 0);
-  // nextRoundSuggestion — route.ts:1843-1848: "suggestion" kind'ı boş döndürürse
-  // modelin ORİJİNAL tavsiyesi korunur (S9-sınıfı stub regresyonu).
-  const safeSuggestion = cs.text && cs.text.trim() ? cs.text : fb.nextRoundSuggestion;
-  const nextRoundOut = fixCallout(clampWords(enforceAgentKit(cleanCoachText(safeSuggestion, lang), agent), 350));
-
-  return {
-    deathAnalysis: deathAnalysisOut,
-    enemyAnalysis: enemyAnalysisOut,
-    nextRoundSuggestion: nextRoundOut,
-    realityModified: ca.modified || cs.modified,
-    rewriteLevels: { death: ca.rewriteLevel, suggestion: cs.rewriteLevel },
-  };
+  return finalizeVisionFeedback(fb, {
+    roundHistory: b.roundHistory as Record<string, unknown>[] | undefined,
+    factGround,
+    lang,
+    map,
+    agent,
+    suppliedLoc: typeof b.deathLocation === "string" ? String(b.deathLocation) : "",
+  });
 }
 
 async function main() {
