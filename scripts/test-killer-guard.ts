@@ -115,5 +115,35 @@ console.log("\n[5] KOŞULLU ROSTER TAVSİYESİ — STEP1 yalnız katil hedge'ini
   t("'X ya da Y util'ine yakalanıp öldün' hâlâ iner", /bir düşman util'ine yakalanıp öldün/.test(d) && !/Raze|Brimstone/.test(d), `→ "${d}"`);
 }
 
+console.log("\n[6] SİLAH OKUNMAMIŞKEN EN aynası — katil silahı uydurulmaz (CANLI-TEST-06, 2026-09-23)");
+{
+  // HEAD: guardUnprovenFacts'in hasWeapon=false kolu yalnız TR kalıbını tanıyordu →
+  // "Jett killed you with an Operator from long range." DEĞİŞMEDEN çıkıyordu.
+  const nw = (s: string) => realityCheck(s, [] as never, { hasWeapon: false } as never, "death", "en").text;
+  const POS: [string, string][] = [
+    ["Jett killed you with an Operator from long range.", "Jett killed you from long range."],
+    ["Cypher shot you with a Spectre from the front-right.", "Cypher shot you from the front-right."],
+    ["Chamber picked you off with the Operator at B Long.", "Chamber picked you off at B Long."],
+    ["Reyna's Vandal shot you before you could react.", "Reyna shot you before you could react."],
+  ];
+  for (const [src, want] of POS) {
+    const out = nw(src);
+    t(`silah öbeği düştü: "${src.slice(0, 34)}…"`, out === want, `→ "${out}"`);
+  }
+  // NEG: oyuncunun KENDİ loadout'u, öğüt, oyuncu-nesnesiz cümle → bayt-aynı.
+  for (const s of [
+    "You bought a Vandal but lost the duel.",
+    "Buy an Operator next round and hold B Long.",
+    "With an Operator you can hold that angle.",
+    "Jett killed your teammate with a Vandal.",
+  ]) {
+    const out = nw(s);
+    t(`NEG bayt-aynı: "${s.slice(0, 34)}…"`, out === s, `→ "${out}"`);
+  }
+  const g = "Jett killed you with an Operator from long range.";
+  t("hasWeapon:true iken bayt-aynı",
+    realityCheck(g, [] as never, { hasWeapon: true } as never, "death", "en").text === g);
+}
+
 console.log(`\n${fail === 0 ? "TÜM TESTLER GEÇTİ ✓" : `${fail} TEST BAŞARISIZ ✗`}`);
 process.exit(fail ? 1 : 0);

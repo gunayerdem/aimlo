@@ -26,6 +26,7 @@ import {
   type EnLeakCategory,
 } from "../evals/en-leak-detector";
 import { EN_VISION_SCENARIOS, EN_REPORT_SCENARIOS, EN_CORPUS_TOTAL } from "../evals/en-corpus";
+import { realityCheck } from "../lib/reality-checker";
 
 let pass = 0;
 let fail = 0;
@@ -185,6 +186,33 @@ const badIds = [...EN_VISION_SCENARIOS, ...EN_REPORT_SCENARIOS].filter(
   (s) => !/^E[R]?\d+-[a-z]+-[a-z]+-/.test(s.id),
 );
 check("id'ler eval-score mapOfId/agentOfId sözleşmesine uyuyor", badIds.length === 0, badIds.map((s) => s.id).join(", "));
+
+// ── 6) EN ÖLÇÜLMEMİŞ KONUM NÖTRLEYİCİSİ (TR-KALAN-13, 2026-09-23) ────────────
+// HEAD: konum okunmamışken "You held the same corner at A Heaven…" DEĞİŞMEDEN
+// geçiyordu (EN aynası yalnız "died at / killed you at" ölüm fiilini yakalıyordu).
+console.log("\n── 6) EN konum nötrleyici (hasDeathLocation=false) ──");
+{
+  const noLoc = { hasDeathLocation: false } as never;
+  const en = (s: string, rh: unknown[] = []) => realityCheck(s, rh as never, noLoc, "death", "en").text;
+  const a = en("You held the same corner at A Heaven and Jett killed you from there.");
+  check("2. şahıs geçmiş 'you held … at A Heaven' → 'there'",
+    a === "You held the same corner there and Jett killed you from there.", `→ "${a}"`);
+  check("nötrlenen metin sızıntısız (detectEnLeak temiz)", detectEnLeak(a).clean, detectEnLeak(a).hits.map((h) => h.hit).join(", "));
+  const b = en("Jett was waiting for you at B Main.");
+  check("3. şahıs + kurban çapası ('for you') → 'at B Main' kalkar", b === "Jett was waiting for you there.", `→ "${b}"`);
+  // Bayt-aynı kilitleri: emir/öğüt, kurban çapasız müttefik cümlesi, ölçülmüş konum, bayrak.
+  for (const s of [
+    "Hold the angle at A Heaven next round.",
+    "Your teammate held B Main.",
+    "Your teammate was holding at B Main while you pushed.",
+    "You got caught near the window and lost the duel.",
+  ]) check(`bayt-aynı: "${s.slice(0, 40)}…"`, en(s) === s, `→ "${en(s)}"`);
+  const c = "You held the same corner at A Heaven and Jett killed you from there.";
+  check("ölçülmüş konum (roundHistory 'a heaven') bayt-aynı",
+    en(c, [{ round_index: 1, died: true, death_position: "a heaven", position_confidence: "high" }]) === c);
+  check("hasDeathLocation:true iken bayt-aynı",
+    realityCheck(c, [] as never, { hasDeathLocation: true } as never, "death", "en").text === c);
+}
 
 // ── SONUÇ ────────────────────────────────────────────────────────────────────
 console.log(`\n══════ SONUÇ: ${pass} geçti / ${fail} kaldı ══════\n`);

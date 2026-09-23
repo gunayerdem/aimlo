@@ -619,5 +619,19 @@ console.log("\n════ B02 · TEKRAR-ANAHTARI + YAN-CÜMLE SİLME (TR-KALAN
   eq("88 aynı metin suggestion → '' (route orijinali korur)", run("Son maçlarda sürekli aynı pozisyonda öldün.", mem(5, 0), "suggestion"), "");
 }
 
+// ═══════════════════════════════════════════════════════════════════
+console.log("\n════ B02 · JENERİK ROTA SİLMESİ DİKİŞİ (CANLI-TEST-06) ════");
+// ═══════════════════════════════════════════════════════════════════
+{
+  // HEAD (probe-chain): "Rotasyon attın ve geç kaldın. A Main'de açıyı tut." →
+  // "geç kaldın. A Main'de açıyı tut." (öksüz "ve" + küçük harfle başlayan metin).
+  const nr = { hasRoute: false } as never;
+  const run = (s: string) => realityCheck(s, [] as never, nr, "death", "tr").text;
+  eq("89 'Rotasyon attın ve geç kaldın.' → 'Geç kaldın.'", run("Rotasyon attın ve geç kaldın."), "Geç kaldın.");
+  eq("90 ardındaki cümle korunur", run("Rotasyon attın ve geç kaldın. A Main'de açıyı tut."), "Geç kaldın. A Main'de açıyı tut.");
+  const c91 = "Bir sonraki round erken rotasyon at ve B'yi tut.";
+  same("91 öğüt ('rotasyon at') bayt-aynı", run(c91), c91);
+}
+
 console.log(`\n${fail === 0 ? "TAM YEŞİL" : "KIRMIZI"} — ${n - fail}/${n} geçti${fail ? `, ${fail} HATA` : ""}`);
 process.exit(fail ? 1 : 0);

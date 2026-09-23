@@ -1292,6 +1292,24 @@ export function guardUnprovenFacts(
       "gi",
     );
     result = result.replace(re, (_m, pre, mid, verb) => `${pre}${mid}${verb}`);
+    // EN AYNASI (CANLI-TEST-06, 2026-09-23): F8 EN-ayna dalgası (2026-07-19) bu kolu
+    // atlamıştı → "Jett killed you with an Operator from long range." EN çıktıda
+    // DEĞİŞMEDEN geçiyordu (TR karşılığı "Jett seni operator'la öldürdü" → "Jett seni
+    // öldürdü"). Maliyetsiz replay: EN raw'ların baskın ölüm kalıbı tam bu
+    // ("<Ajan> killed/shot you with a <Silah>", 30+ alan); real-rounds-23'te 22/22
+    // ölümde killerInfo silahsız → hasWeapon=false canlıda olağan durum.
+    // TR ile aynı sözleşme: yalnız GEÇMİŞ-kip, OYUNCU-nesneli ("… you with …") —
+    // oyuncunun KENDİ loadout'u ("you bought a Vandal") ve öğüt ("buy an Operator",
+    // "with an Operator you can hold…") çapaya uymaz → DOKUNULMAZ. Ölüm olgusu kalır.
+    result = result.replace(
+      new RegExp(`(?<![\\p{L}])(killed|shot|one-tapped|got|dropped|picked|took)\\s+you(\\s+(?:off|down|out))?\\s+with\\s+(?:(?:a|an|the|his|her|their)\\s+)?(?:${WALT})(?![\\p{L}])`, "giu"),
+      (_m: string, v: string, tail: string | undefined) => `${v} you${tail ?? ""}`,
+    );
+    // İyelikli özne: "Reyna's Vandal shot you" → "Reyna shot you".
+    result = result.replace(
+      new RegExp(`(?<![\\p{L}])((?:the\\s+)?(?:${AGENT_NAME_ALT}))['’]s\\s+(?:${WALT})\\s+(shot|killed)\\s+you(?![\\p{L}])`, "giu"),
+      "$1 $2 you",
+    );
   }
 
   // ALIVE-COUNT-absent (Ölüm-Veri Sözleşmesi #6, 2026-06-29): hayatta-sayısı
@@ -1504,7 +1522,15 @@ export function guardUnprovenFacts(
       );
       result = result.replace(reEn, "");
     }
+    const beforeGeneric = result;
     for (const re of ROUTE_GENERIC_PATTERNS) result = result.replace(re, "");
+    // CANLI-TEST-06 (2026-09-23): jenerik rota silmesi cümle başını açıyordu ve
+    // dikiş onarılmıyordu — "Rotasyon attın ve geç kaldın. A Main'de açıyı tut." →
+    // "geç kaldın. A Main'de açıyı tut." (öksüz "ve" + küçük harf). Ortak dikiş
+    // onarımı yalnız silme GERÇEKLEŞTİYSE ve metin TR ise (desenler TR-only).
+    if (result !== beforeGeneric && (lang ? lang === "tr" : /[şçğıöü]/i.test(beforeGeneric))) {
+      result = repairTrSeam(result, lang, beforeGeneric);
+    }
   }
 
   if (factGround.hasTradeData !== true) {
@@ -1786,6 +1812,7 @@ export function stripForeignCallouts(
  * BAYT-AYNI kalır. Nötrlemeyi öne almak claimedPosition'ı null yapar ve level-3 →
  * level-2 kaymasıyla hafıza katmanının davranışını sessizce değiştirirdi.
  * TR-only: Türkçe lokatif + Türkçe geçmiş-zaman fiili şart → EN bayt-aynı.
+ * EN karşılığı ayrı fonksiyondur: neutralizeUnprovenLocationsEn (TR-KALAN-13).
  */
 const LOC_POOL: readonly string[] = (() => {
   const pool = new Set<string>();
@@ -1867,6 +1894,74 @@ export function neutralizeUnprovenLocations(text: string, supplied: ReadonlySet<
   );
 }
 
+/** EN ÖLÇÜLMEMİŞ KONUM NÖTRLEYİCİSİ (TR-KALAN-13, 2026-09-23).
+ *
+ * NEDEN: B3 nötrleyicisi (yukarıda) yalnız Türkçe lokatif + Türkçe geçmiş fiile
+ * bağlı; EN aynası (guardUnprovenFacts) yalnız ölüm fiilini ("died at / killed you
+ * at") yakalıyor. Konum okunmamışken "You held the same corner at A Heaven and Jett
+ * killed you from there." HİÇBİR katmana takılmadan geçiyordu ("You died at A
+ * Heaven." ise "You died." oluyordu). EN istemci zinciri canlı; EN raw'larda baskın
+ * kalıp "You held a wide angle at B Market / on A Site / in B Long" (replay 9/228).
+ *
+ * SÖZLEŞME (TR ile aynı kapılar): "<edat> <callout>" → "there" (silme değil ikame —
+ * cümle ve ders kalır).
+ *  1) 2. şahıs GEÇMİŞ ("you held/stood/waited/stayed/sat/peeked/got caught…") →
+ *     çapa tek başına yeter; emir/öğüt ("Hold the angle at A Heaven", "Don't wait at
+ *     B Main") özne+geçmiş şartına uymaz → DOKUNULMAZ.
+ *  2) 3. şahıs ("held/was holding/waited/was waiting/killed/shot/caught") yalnız AYNI
+ *     cümlede kurban çapası ("you"/"your", "your teammate/team" HARİÇ) varsa.
+ *  3) ÖLÇÜLEN konum MUAF (supplied = deathLocation + roundHistory).
+ *  4) Callout BÜYÜK harfle yazılmış olmalı ("A Heaven", "B Main") — EN'de havuzdaki
+ *     çıplak adlar gündelik kelimedir ("in green smoke", "near the window").
+ *  Yan-cümle sınırı [.,!?;:—\n]; iyelik ("at A Heaven's edge") dokunulmaz.
+ */
+const EN_LOC_TAIL = `\\s(?:at|in|on|near|around)\\s+(${LOC_ALT})(?![\\p{L}\\p{N}_'’-])`;
+const EN_LOC_SELF_RE = new RegExp(
+  `(?<![\\p{L}])(you\\s+(?:held|were\\s+holding|stood|waited|stayed|sat|were\\s+sitting|got\\s+caught|were\\s+caught|peeked)(?![\\p{L}])[^.,!?;:—\\n]{0,40}?)${EN_LOC_TAIL}`,
+  "giu",
+);
+const EN_LOC_THIRD_RE = new RegExp(
+  `(?<![\\p{L}])((?:held|was\\s+holding|waited|was\\s+waiting|killed|shot|caught)(?![\\p{L}])[^.,!?;:—\\n]{0,40}?)${EN_LOC_TAIL}`,
+  "giu",
+);
+// Kurban çapası = NESNE/İYELİK konumundaki "you/your" (TR "seni/sana/senin"
+// aynası). EN'de "you" özne de olabildiği için cümle başındaki ya da bağlaçtan
+// sonraki "you" SAYILMAZ: "Your teammate was holding at B Main while you pushed."
+// müttefik cümlesidir (TR vaka 43'ün aynası) — ilk sürüm bunu nötrlüyordu (probe).
+const EN_SUBJ_LEAD = new Set(["and", "but", "while", "when", "as", "so", "if", "because", "before", "after", "until", "since", "or", "then", "once", "that", "where"]);
+function hasEnVictimAnchor(sentence: string): boolean {
+  for (const m of sentence.matchAll(/(?<![\p{L}])(you|your)(?![\p{L}'’])/giu)) {
+    const low = m[1].toLowerCase();
+    const rest = sentence.slice((m.index ?? 0) + m[0].length);
+    if (low === "your") {
+      if (!/^\s+(?:team|teammates?|ally|allies|duo|squad)(?![\p{L}])/iu.test(rest)) return true;
+      continue;
+    }
+    const prev = /([\p{L}]+)[^\p{L}]*$/u.exec(sentence.slice(0, m.index ?? 0));
+    if (prev && !EN_SUBJ_LEAD.has(prev[1].toLowerCase())) return true;   // nesne konumu
+  }
+  return false;
+}
+
+export function neutralizeUnprovenLocationsEn(text: string, supplied: ReadonlySet<string>): string {
+  if (!text) return text;
+  const keep = (name: string) => !/^\p{Lu}/u.test(name) || supplied.has(name.trim().toLowerCase());
+  let out = text.replace(EN_LOC_SELF_RE, (whole: string, head: string, name: string) =>
+    (keep(name) ? whole : `${head} there`));
+  out = out.replace(EN_LOC_THIRD_RE, (whole: string, head: string, name: string, offset: number, full: string) => {
+    if (keep(name)) return whole;
+    let start = 0;
+    for (const ch of [".", "!", "?", "\n"]) {
+      const i = full.lastIndexOf(ch, offset - 1);
+      if (i + 1 > start) start = i + 1;
+    }
+    const rel = full.slice(offset).search(/[.!?\n]/);
+    const end = rel < 0 ? full.length : offset + rel;
+    return hasEnVictimAnchor(full.slice(start, end)) ? `${head} there` : whole;
+  });
+  return out;
+}
+
 export function realityCheck(
   outputText: string,
   roundHistory: RoundMemoryEntry[],
@@ -1944,7 +2039,9 @@ export function realityCheck(
   // hasDeathLocation !== false iken (ölçüldü / bayrak hiç verilmedi) HİÇ çalışmaz
   // → konum okunan her round ve bayrağı set etmeyen her çağıran bayt-aynı.
   if (factGround?.hasDeathLocation === false) {
-    const neutralized = neutralizeUnprovenLocations(text, measured);
+    let neutralized = neutralizeUnprovenLocations(text, measured);
+    // TR-KALAN-13: EN aynası yalnız istek dili EN iken (TR yolu bayt-aynı).
+    if (lang === "en") neutralized = neutralizeUnprovenLocationsEn(neutralized, measured);
     if (neutralized !== text) {
       text = neutralized;
       rewriteLevel = Math.max(rewriteLevel, 2);

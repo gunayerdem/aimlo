@@ -14,6 +14,7 @@
  * Koşum: npx tsx scripts/test-coach-text-en.ts   (npm test içinde)
  */
 import * as CT from "../lib/coach-text";
+import { realityCheck } from "../lib/reality-checker";
 const { cleanCoachText } = CT;
 
 const en = (s: string) => cleanCoachText(s, "en");
@@ -91,6 +92,18 @@ console.log("\n[5] B01 (2026-09-23) — EN dalı: yeni TR kuralları EN'e sızma
   const g = "Core problem-solving becomes easier with comms.";
   const gOut = sdl ? sdl(g, "en") : "<fonksiyon yok>";
   t("'Core problem-solving…' bayt-aynı (tire önünde boşluk yok → ayraç değil)", gOut === g, `→ "${gOut}"`);
+}
+
+console.log("\n[6] B02 (2026-09-23) — prod zinciri (realityCheck → cleanCoachText): EN silah aynası (CANLI-TEST-06)");
+{
+  // HEAD probe (realityCheck + cleanCoachText tam zincir, hasWeapon=false):
+  // "Jett killed you with an Operator from long range." → DEĞİŞMEDEN.
+  const chain = (s: string) =>
+    cleanCoachText(realityCheck(s, [] as never, { hasWeapon: false } as never, "death", "en").text, "en");
+  const a = chain("Jett killed you with an Operator from long range.");
+  t("zincir: silah öbeği düşer, cümle kurallı kalır", a === "Jett killed you from long range.", `→ "${a}"`);
+  const b = "Buy an Operator next round and hold B Long.";
+  t("zincir: öğüt bayt-aynı", chain(b) === b, `→ "${chain(b)}"`);
 }
 
 console.log(`\n${fail === 0 ? "TÜM TESTLER GEÇTİ ✓" : `${fail} TEST BAŞARISIZ ✗`}`);
