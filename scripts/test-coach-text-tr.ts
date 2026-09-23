@@ -226,8 +226,25 @@ console.log("\n[15] TR-KALAN-05 — veri-etiketi kesme eki Türkçeleşir (\"kat
   t("enemyComp'u → \"kadro'\" yok", !/kadro['’]/.test(d), `→ "${d}"`);
   t("deathLocation'da → 'Ölüm yerinde öldün.'", e === "Ölüm yerinde öldün.", `→ "${e}"`);
   t("economyType'ı → kesmesiz ('Ekonomiyi düşük.')", f === "Ekonomiyi düşük.", `→ "${f}"`);
-  const g = tr("deathAngle'sındaki açı.");
-  t("tanınmayan ekte de kesme kalmaz", !/['’]/.test(g), `→ "${g}"`);
+  // B01 inceleme: eski assertion yalnız kesme YOKLUĞUNA bakıyordu ve bozuk
+  // "Ölüm yönüsındaki açı." çıktısını GEÇER sayıyordu (test bozuk Türkçeyi kilitliyordu).
+  // Artık TAM beklenen çıktı: iyelik önekli ve çoğul ekler Türkçeleşir.
+  const LBL: [string, string][] = [
+    ["deathAngle'sındaki açı.", "Ölüm yönündeki açı."],
+    ["deathLocation'ında öldün.", "Ölüm yerinde öldün."],
+    ["enemyComp'unda Jett var.", "Rakip kadrosunda Jett var."],
+    ["deathTiming'inde hata var.", "Ölüm zamanlamasında hata var."],
+    ["deathLocation'ları kullan.", "Ölüm yerlerini kullan."],
+    ["deathLocation'larında öldün.", "Ölüm yerlerinde öldün."],
+    ["enemyComp'larında Jett var.", "Rakip kadrolarında Jett var."],
+    ["ultReady'sinde gir.", "Ult'unda gir."],
+  ];
+  for (const [src, want] of LBL) {
+    const out = tr(src);
+    t(`"${src}" → "${want}"`, out === want, `→ "${out}"`);
+  }
+  const g2 = tr("killerInfo'sunda Raze var.");
+  t("killerInfo'sunda → 'bilgisisunda' YOK, killerInfo'da ile aynı sonuç", g2 === a && !/bilgisis/.test(g2), `→ "${g2}" / "${a}"`);
   const h = tr("ultReady'yi kullan.");
   t("yabancı karşılık kesmeyi korur + ek uyumlanır (ultReady'yi → Ult'u)", h === "Ult'u kullan.", `→ "${h}"`);
   const i = tr("deathLocation belirsiz.");
@@ -263,6 +280,11 @@ console.log("\n[16] TR-KALAN-06 — yumuşatılmış ölüm fiili (\"seni oradan
     "Skorda geride düştün.",
     "R1 ve R7'de B Site'ta öldün, R5'te de B Main'de düştün.",
     "Takım arkadaşın A Site'ta düştü.",
+    // B01 inceleme: kalkan ;/—/: sınırında duruyordu → aynı NOKTA-cümlesinde iki "öl-"
+    // (korpus 18 dönüşümün 16'sı). Gerçek raw'lar (cyclereal-r3d3 M1-R18, cyclefinal3 S14):
+    "Son 15 round'un hepsinde öldün; bu round da Mid Link'te düştün, yani aynı tip pozisyonlarda ısrar ediyoruz.",
+    "Son 6 round'un 3'ünde benzer şekilde öldün; R7'de yine Hookah'da düştün — bu round Hookah'ı bırak.",
+    "A Site'ta düştün; zaten R3'te de orada öldün.",
   ];
   for (const s of same) {
     const out = tr(s);
@@ -284,9 +306,19 @@ console.log("\n[17] TR-KALAN-07 — teşhis etiketi soyucu (stripDiagnosisLabel,
     const out = stripDiagnosisLabel(src, "tr");
     t(`"${src.slice(0, 40)}…"`, out === want, `→ "${out}"`);
   }
-  for (const s of ["Bu round'un en kritik anı A girişiydi.", "Pozisyonun A Site'ta sabit kaldı — açıyı değiştir.", "En kritik neden:"]) {
+  for (const s of ["Bu round'un en kritik anı A girişiydi.", "Pozisyonun A Site'ta sabit kaldı — açıyı değiştir.", "En kritik neden:",
+    // B01 inceleme: açık sınıf KONUM ("A Site sorunu:") ve ATIF ("Takım arkadaşının
+    // hatası:") taşıyan etiketi siliyordu — bilgi kaybı. HEAD: ikisi de soyuluyordu.
+    "A Site sorunu: kimse yoktu, sen tek başına kaldın.",
+    "Takım arkadaşının hatası: trade gelmedi.",
+    "B Main hatası: açıyı çok geniş tuttun."]) {
     const out = stripDiagnosisLabel(s, "tr");
     t(`bayt-aynı: "${s.slice(0, 40)}"`, out === s, `→ "${out}"`);
+  }
+  // Korpustaki tek açık-sınıf eşleşmesi (teşhis adı "açı") hâlâ soyulur.
+  {
+    const out = stripDiagnosisLabel("Açı tutma hatası: savunmada aynı köşeyi tuttun.", "tr");
+    t("korpus 'Açı tutma hatası:' soyulur", out === "Savunmada aynı köşeyi tuttun.", `→ "${out}"`);
   }
 }
 
@@ -312,6 +344,12 @@ console.log("\n[18] TR-KALAN-09 — ajan-adı kilidi (enforceAgentNames)");
     "Yorum yapma, oyna.", "Yordu seni.", "Jetti gördün.", "Skyes ekibi.", "Constructor pattern kullan."]) {
     const out = enforceAgentNames(s, all);
     t(`bayt-aynı: "${s}"`, out === s, `→ "${out}"`);
+  }
+  // B01 inceleme: çapa + kesmesiz Türkçe EK bozulma değildir — mesafe-1 eşleşmesi eki
+  // silip nesneyi özneye çeviriyordu ("Viperı gördün." → "Viper gördün."). HEAD: 4'ü de değişiyordu.
+  for (const s of ["Viperı gördün.", "Chambere dikkat et.", "Breachi gördün.", "Vipers geldi."]) {
+    const out = enforceAgentNames(s, ["Viper", "Chamber", "Breach"]);
+    t(`ek korunur (bayt-aynı): "${s}"`, out === s, `→ "${out}"`);
   }
 }
 
@@ -339,6 +377,16 @@ console.log("\n[20] TR-KALAN-24 — metin başı büyük harf (süzgeç küçük
   t("TR locale: 'ı' → 'I' (i→İ tuzağı yok)", d.startsWith("Işık"), `→ "${d}"`);
 }
 
+console.log("\n[20b] B01 inceleme — 'kadrosu' özne kuralı alt-bağlaçta ATEŞLENMEZ");
+{
+  const a = tr("Rakip roster'ı takip et çünkü Jett agresif oynuyor.");
+  t("'… takip et çünkü Jett … oynuyor' → belirtme 'kadrosunu'", a === "Rakip kadrosunu takip et çünkü Jett agresif oynuyor.", `→ "${a}"`);
+  const b = tr("Rakip roster'ı kontrol et ama Jett erken gelebilir.");
+  t("'ama' ile yeni özneli yan-cümle → 'kadrosunu'", /Rakip kadrosunu kontrol et/.test(b), `→ "${b}"`);
+  const c = tr("Chamber roster'ı uzun menzile izin vermiyor.");
+  t("gerçek özne kullanımı (cyclefix1 S12) hâlâ 'kadrosu'", c === "Chamber kadrosu uzun menzile izin vermiyor.", `→ "${c}"`);
+}
+
 console.log("\n[21] CANLI-TEST-07 — finalizeCoachText boşalınca HAM metne dönmez");
 {
   const f = (s: string, fallback?: string) => finalizeCoachText(s, { lang: "tr", cap: 350, fallback });
@@ -353,6 +401,14 @@ console.log("\n[21] CANLI-TEST-07 — finalizeCoachText boşalınca HAM metne d�
   t("fallback de yasaklıysa ''", f("(41 HP)", "(30 HP)") === "", `→ "${f("(41 HP)", "(30 HP)")}"`);
   const normal = "Jett seni A Main'de öldürdü; açıyı değiştir.";
   t("normal metin bayt-aynı", f(normal) === normal, `→ "${f(normal)}"`);
+  // B01 inceleme: check (realityCheck) metni boşaltırsa ve fallback yoksa HAM metin
+  // (süzülmüş ama DOĞRULANMAMIŞ) dönüyordu. HEAD: "Jett seni B Main'de vurdu."
+  const chk = (s: string, fallback?: string) =>
+    finalizeCoachText(s, { lang: "tr", cap: 350, fallback, check: () => "" });
+  t("check boşalttı + fallback yok → ''", chk("Jett seni B Main'de vurdu.") === "", `→ "${chk("Jett seni B Main'de vurdu.")}"`);
+  t("check boşalttı + fallback var → süzülmüş fallback",
+    chk("Jett seni B Main'de vurdu.", "Maçı 11-13 kaybettin.") === "Maçı 11-13 kaybettin.",
+    `→ "${chk("Jett seni B Main'de vurdu.", "Maçı 11-13 kaybettin.")}"`);
 }
 
 console.log(`

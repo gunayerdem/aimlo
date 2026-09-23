@@ -292,7 +292,12 @@ const TR_JARGON: [RegExp, string][] = [
   // regresyonunu üretmesin). Kaçan geniş-zaman ("atar") eski davranışa düşer.
   [new RegExp(
     String.raw`(?<=(?:${AGENT_ALT_CT}|[Rr]akip|[Dd]üşman)(?:\s+(?:ve|ile)\s+(?:${AGENT_ALT_CT}))*\s)roster['’]?[ıiuü](?![\p{L}])` +
-    String.raw`(?=[^.,;:!?—\n]*?(?<![\p{L}])(?:\p{L}*(?:yor|abilir|ebilir|amaz|emez|dı|di|du|dü|tı|ti|tu|tü)|\p{L}{3,}(?:ar|er|ır|ir|ur|ür))(?:lar|ler)?\s*(?:[.,;:!?—\n]|$))`,
+    // BAĞLAÇ KAPISI (B01 inceleme): köprü alt-bağlaç/karşıtlık bağlacı içeremez —
+    // ardından YENİ özneli yan-cümle başlar ("Rakip roster'ı takip et çünkü Jett
+    // agresif oynuyor." → "oynuyor" Jett'in yüklemi; eskiden "kadrosu takip et").
+    // "ve" BİLEREK listede YOK: aynı öznenin iki yüklemini bağlar ("Rakip roster'ı
+    // Jett'i korur ve agresif oynar") — dışlamak o doğru okumayı bozardı.
+    String.raw`(?=(?:(?!(?<![\p{L}])(?:çünkü|zira|ama|fakat|ancak|lakin|yoksa|oysa|ki)(?![\p{L}]))[^.,;:!?—\n])*?(?<![\p{L}])(?:\p{L}*(?:yor|abilir|ebilir|amaz|emez|dı|di|du|dü|tı|ti|tu|tü)|\p{L}{3,}(?:ar|er|ır|ir|ur|ür))(?:lar|ler)?\s*(?:[.,;:!?—\n]|$))`,
     "giu"), "kadrosu"],
   [/\broster['’]?[ıiuü](?![a-zçğıöşüA-ZÇĞİÖŞÜ])/gi, "kadrosunu"],
   [/\broster['’]?(?:y[ae]|[ae])(?![a-zçğıöşüA-ZÇĞİÖŞÜ])/gi, "kadrosuna"],
@@ -454,11 +459,15 @@ const TR_JARGON: [RegExp, string][] = [
   // ÇAPA: fiilden önceki sözcük BULUNMA ekli (-da/-de/-ta/-te) ya da orada/burada/
   // yine/tekrar → "aynı tuzağa düştün" (yönelme) ve 3. şahıs "düştü" dokunulmaz.
   // SOYUT-DURUM KALKANI: "geride/skorda/ekonomide…" ölüm değil durum anlatır.
-  // ÇİFT-FİİL KALKANI: aynı yan-cümlede zaten "öld-" varsa kural ATEŞLENMEZ —
+  // ÇİFT-FİİL KALKANI: aynı CÜMLEDE zaten "öld-" varsa kural ATEŞLENMEZ —
   // koşulsuz ikame ölçülen 41 eşleşmenin 30'unda (%73) aynı cümlede iki "öldün"
-  // üretiyordu (tekrar softi'nin bir numaralı şikâyeti). Sınır [.;:—!?\n]; virgül
-  // aynı cümle sayılır. Bilinen boşluk (kasıtlı): "B'ye sık düştün", "erken düştün".
-  [/((?:[A-ZÇĞİÖŞÜa-zçğıöşü][\wçğıöşüÇĞİÖŞÜ'’]*['’]?[dt][ae]|orada|burada|yine|tekrar)\s+)(?<!öld[^.;:—!?\n]{0,120})(?<!(?:geride|önde|arkada|skorda|rankta|sıralamada|ekonomide|dezavantajda|avantajda|tempoda|moralde|zorda)\s)düş(?:tün|müşsün)(?![a-zçğıöşü])(?![^.;:—!?\n]{0,120}öld)/gi, "$1öldün"],
+  // üretiyordu (tekrar softi'nin bir numaralı şikâyeti). Sınır YALNIZ [.!?\n]
+  // (spec TR-KALAN-06 "aynı CÜMLEDE"): ilk sürüm ;/:/— işaretlerini de cümle sonu
+  // sayıyordu ve korpusta ateşlenen 18 dönüşümün 16'sı aynı nokta-cümlesinde yine
+  // iki ölüm fiili üretiyordu ("…hepsinde öldün; bu round da Mid Link'te öldün").
+  // Model "düştün"ü tam bu yapıda tekrardan kaçmak için kullanıyor → dokunulmaz.
+  // Bilinen boşluk (kasıtlı): "B'ye sık düştün", "erken düştün".
+  [/((?:[A-ZÇĞİÖŞÜa-zçğıöşü][\wçğıöşüÇĞİÖŞÜ'’]*['’]?[dt][ae]|orada|burada|yine|tekrar)\s+)(?<!öld[^.!?\n]{0,160})(?<!(?:geride|önde|arkada|skorda|rankta|sıralamada|ekonomide|dezavantajda|avantajda|tempoda|moralde|zorda)\s)düş(?:tün|müşsün)(?![a-zçğıöşü])(?![^.!?\n]{0,160}öld)/gi, "$1öldün"],
   // "avla-" ailesi (2026-07-24, softi canlı şikayeti "avladı falan diyor"). NESNE
   // "seni" ŞART → yalnız oyuncu-nesnesi olan öldürme-euphemizmi düzleştirilir.
   // KB'nin MEŞRU "düşman dağınık oyuncuları avlar" kavramına (nesne = "seni" değil)
@@ -723,8 +732,15 @@ const TR_OCR_ADVERB_RE =
  *  "killerInfo'da" etiketini artık "katil bilgisinde" diye Türkçeleştiriyor; bu
  *  biçim eklenmeseydi know-g ham metni zincirde "…, katil bilgisinde Raze." diye
  *  meta kuyrukla kalırdı. "bilgisini/bilgisinden" DOKUNULMAZ (sağ sınır). */
+//  KESMELİ DAL YALNIZ BULUNMA EKİ (B01 inceleme): eski ['’][a-zçğıöşü]{1,4} dalı
+//  ayrılma/belirtme ekini de yutuyordu → "Katil bilgisi'nden anlaşılan Raze." →
+//  "Katil anlaşılan Raze." (ek ve anlam kayboluyordu). Canlı sızıntı biçimi
+//  ("katil bilgisi'da", know-g) bulunma ekidir; diğer ekler bayt-aynı kalır.
+//  SAĞ SINIR kesmeyi de kapsar ve veri-yokluğu yüklemi öncesinde ATEŞLENMEZ:
+//  "Katil bilgisi yok ama …" (MISSING_DATA'nın bilerek bıraktığı öğüt cümlesi)
+//  "Katil yok ama …" diye ANLAM DEĞİŞTİRİYORDU (katil yok ≠ katil bilgisi yok).
 const TR_KATIL_BILGISI_RE =
-  /(?<![a-zçğıöşü])katil(?:in)?\s+bilgisi(?:['’][a-zçğıöşü]{1,4}|nde(?:ki)?)?(?![a-zçğıöşü])\s*/giu;
+  /(?<![a-zçğıöşü])katil(?:in)?\s+bilgisi(?:['’](?:[dt][ae](?:ki)?|nd[ae](?:ki)?)|nde(?:ki)?)?(?![a-zçğıöşü'’])(?!\s*(?:gelmedi|yok|eksik|alınamadı|okunamadı|bulunamadı)(?![a-zçğıöşü]))\s*/giu;
 
 // ── B4: TUTANAK DİLİ AİLESİ (TR-KALAN-04, 2026-09-23) ───────────────────────
 // 39 gerçek çağrının 12 çıktısında meta süzgeci GEÇİLDİ. Tasarım eskisiyle aynı:
@@ -735,11 +751,37 @@ const TR_KATIL_BILGISI_RE =
 // siliniyordu; "…bilgisi yok, o yüzden geniş açıyla peek at." → öğüt siliniyordu).
 const TR_SUBJ_PRONOUN_RE = /^(?:sen|siz|biz|ben|onlar|takım|ekip|rakip)(?![a-zçğıöşü])/iu;
 const trLowerCt = (s: string) => s.toLocaleLowerCase("tr");
-/** Bir olgu (ad/konum) metnin ÖNCEKİ kısmında zaten geçiyor mu? Tekrar-kuyruğunu
- *  YENİ bilgi taşıyan kuyruktan ayırır — silme kararının tek ölçütü budur. */
+/** Bir KONUM metnin ÖNCEKİ kısmında zaten geçiyor mu? Tekrar-kuyruğunu YENİ bilgi
+ *  taşıyan kuyruktan ayırır — silme kararının tek ölçütü budur.
+ *  TAM ÖBEK (B01 inceleme): eski hâli ≥3 harfli sözcüklerden BİRİNİN ilk 4 harfini
+ *  arıyordu (.some) ve site harfini hiç karşılaştırmıyordu → "B Main'e rotasyon
+ *  yaparken seni yakaladılar, ölüm A Main'de gerçekleşti." cümlesinde "main" ortak
+ *  diye GERÇEK (tek) ölüm yeri siliniyordu. Artık öbeğin TÜM sözcükleri (tek harfli
+ *  site harfi dahil, kesme-ekleri soyulmuş) aynı sırayla ve sözcük başı sınırıyla
+ *  geçmeli; meta sözcükler ("callout", "bölgesi") karşılaştırmaya girmez. */
+const TR_LOC_META_WORD_RE = /^(?:callout|bölge|bölgesi|bölgesinde|nokta|noktası|noktasında|civarı|civarında|tarafı|tarafında|yakınında)$/u;
+const escCt = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 function mentionedBefore(prefix: string, phrase: string): boolean {
+  const words = trLowerCt(phrase)
+    .split(/\s+/)
+    .map((w) => w.replace(/['’][\p{L}]*$/u, "").replace(/[^\p{L}\p{N}]/gu, ""))
+    .filter((w) => w && !TR_LOC_META_WORD_RE.test(w));
+  if (!words.length) return false;
+  return new RegExp(`(?<![\\p{L}\\p{N}])${words.map(escCt).join("\\s+")}`, "u").test(trLowerCt(prefix));
+}
+/** Katil kuyruğunun OLGULARI önceden geçiyor mu? Müttefik iyeliğiyle anılan ad
+ *  ("Takımın Jett'i") katil tekrarı SAYILMAZ — ayna eşleşmede (iki takımda da Jett)
+ *  katil bilgisi YENİdir. Silah verilmişse o da geçmiş olmalı: "Takımın Jett'i
+ *  kaybetti, öldüren Jett ve silah Vandal." eskiden ad-tekrarı sayılıp siliniyordu. */
+function factsMentionedBefore(prefix: string, name: string, weapon?: string): boolean {
   const p = trLowerCt(prefix);
-  return (phrase.match(/[\p{L}]{3,}/gu) ?? []).some((w) => p.includes(trLowerCt(w).slice(0, 4)));
+  let named = false;
+  for (const m of p.matchAll(new RegExp(`(?<![\\p{L}\\p{N}])${escCt(trLowerCt(name))}`, "gu"))) {
+    const before = p.slice(0, m.index ?? 0);
+    if (!/(?<![\p{L}])(?:takım(?:ın|ının)?|takım\s+arkadaşın(?:ın)?|müttefik(?:in)?)\s+$/u.test(before)) { named = true; break; }
+  }
+  if (!named) return false;
+  return !weapon || new RegExp(`(?<![\\p{L}\\p{N}])${escCt(trLowerCt(weapon))}`, "u").test(p);
 }
 /** (A) "katil/öldüren (ajan|bilgisi)? olarak <Ad> <kayıt-fiili>" — kayıt-fiili
  *  ZORUNLU: fiilsiz "katil olarak Iso" mevcut F1 fixture'ı, ona DOKUNULMAZ.
@@ -749,7 +791,25 @@ const TR_ROL_OLARAK_KAYIT_RE =
 /** (B) "katil net/kesin olarak <Ad>" (astra-e). */
 const TR_ROL_NET_OLARAK_RE =
   /(?<![a-zçğıöşü])(?:[kK]atil|[öÖ]ldüren)(?:\s+(?:ajan|bilgisi|kişi|oyuncu|düşman))?\s+(?:net|kesin)\s+olarak\s+([\p{Lu}][\p{L}]{1,14})(?![a-zçğıöşü])/gu;
-/** (C1) Cümle-SONU onay yan-cümlesi komple düşer (S29). Köprü VİRGÜLSÜZ. */
+/** (C1) Cümle-SONU onay yan-cümlesi komple düşer (S29). Köprü VİRGÜLSÜZ.
+ *  ÖZNE KAPISI (B01 inceleme): köprüde rol/meta öznesi (katil/öldüren/öldürülme/
+ *  silah/ölüm/kayıt/veri/bilgi) YOKSA dokunulmaz — "Omen smoke'u attı ve pozisyonun
+ *  belirlendi." (Sova oku / kamera bağlamında OYUN olgusu) ve "Spike kuruldu ve site
+ *  onaylandı." siliniyordu. Tek istisna: salt VERİ-SESİ fiilleri (doğrulan-/teyit
+ *  edil-/kaydedil-) konum/pozisyon öznesiyle de meta sayılır ("…, pozisyonun
+ *  doğrulandı." — R4 fixture'ı); "belirlen-/onaylan-" oyun anlamı taşıyabildiği
+ *  için yalnız rol/meta öznesiyle düşer. Korpusun 6 eşleşmesinin 6'sı rol/meta özneli
+ *  (S29 "öldürülme silah ve konumuyla doğrulanmış", "öldüren ajan Yoru olarak
+ *  kaydedildi"). "katil <Ad> doğrulandı" biçiminde yalnız FİİL düşer; ad önceden
+ *  geçmiyorsa "katil <Ad>" KALIR (TR_ROL_TAIL tekrarsa siler). */
+const TR_ONAY_META_SUBJ_RE =
+  /(?<![\p{L}])(?:katil|öldüren|öldürül\p{L}*|silah\p{L}*|ölüm\p{L}*|kayıt\p{L}*|kill\p{L}*|veri\p{L}*|ocr|bilgi\p{L}*)(?![\p{L}])/iu;
+const TR_ONAY_DATA_VERB_POS_RE =
+  /(?<![\p{L}])(?:konum\p{L}*|pozisyon\p{L}*)(?![\p{L}])[^.,;:!?\n—]*?(?<![a-zçğıöşü])(?:doğrulan(?:mış|dı|an)|teyit\s+edil(?:di|miş)|kaydedil(?:di|miş))\s*$/iu;
+const TR_ONAY_VERB_TAIL_RE =
+  /\s*(?<![a-zçğıöşü])(?:doğrulan(?:mış|dı|an)|teyit\s+edil(?:di|miş)|onaylan(?:mış|dı)|kaydedil(?:di|miş)|belirlen(?:di|miş))\s*$/iu;
+const TR_ONAY_ROLE_NAME_RE =
+  /^\s*(?:,|;|\s+ve)\s*(?:[kK]atil|[öÖ]ldüren)(?:\s+(?:ajan|kişi|oyuncu|düşman))?\s+[\p{Lu}][\p{L}]{1,14}(?:\s+ve\s+(?:silah\s+)?[\p{Lu}][\p{L}]{1,14})?$/u;
 const TR_ONAY_CLAUSE_RE =
   /\s*(?:,|;|\s+ve)\s*[^.,;:!?\n—]{0,90}?(?<![a-zçğıöşü])(?:doğrulan(?:mış|dı|an)|teyit\s+edil(?:di|miş)|onaylan(?:mış|dı)|kaydedil(?:di|miş)|belirlen(?:di|miş))\s*(?=[.!?]|$)/giu;
 /** (C2) Özel ad sonrası çıplak onay ortacı düşer, olgu KALIR (r3-b). */
@@ -762,10 +822,27 @@ const TR_OLUM_GERCEKLESTI_RE =
   /\s*(?:,|;|\s+ve)\s*ölüm(?:ün|ü)?\s+([^.;:!?\n—]{0,40}?)gerçekleşti(?![a-zçğıöşü])/giu;
 /** (D) Veri-yokluğu yan-cümlesi ("öldüren ajan/cihaz bilgisi gelmedi", "veri
  *  setinde öldüren bilgi yok"). Rol listesinde çıplak 'silah' YOK: "Silah sesi
- *  dışında bilgi yok, ortayı kontrol et." meşru. Köprü ve kuyruk VİRGÜLSÜZ →
- *  komşu emir cümlesi asla yutulmaz. */
+ *  dışında bilgi yok, ortayı kontrol et." meşru.
+ *  KAPALI TUTANAK GRAMERİ (B01 inceleme — ilk sürüm açık uçluydu): "bilgi" Valorant
+ *  koçluğunda INTEL demektir. Rol sözcüğünün sağ sınırı yoktu, köprü sınırsızdı ve
+ *  kuyruk fiilden sonra noktalamaya kadar her şeyi alıyordu → "Katil bilgisi yok ama
+ *  açıyı tutarken crosshair'i kafa hizasında tut." öğüdü, "Seni öldüren Jett'in
+ *  pozisyonu hakkında takımında bilgi yok, bu yüzden …" gerekçesi siliniyordu. Artık:
+ *   · rol HEMEN "bilgi(si)"ye bağlanır — yalnız "ajan/oyuncu/kişi" ve "/ ve veya ya da
+ *     + silah/cihaz/ajan/konum" araya girebilir (korpusun 15 eşleşmesinin tümü bu
+ *     biçimde: "öldüren ajan/cihaz bilgisi", "ölüm yeri veya silah bilgisi");
+ *   · önek ≤32 karakter ve bağlaç içeremez (replacer kapısı) — "…vurdu ve katil
+ *     bilgisi yok" koordinatlı olgu yan-cümlesini yutmaz;
+ *   · yan-cümle FİİLDE biter: ardından yalnız [.,;!?—] ya da metin sonu gelebilir →
+ *     "bilgi yok ama …", "bilgi yok o yüzden …" bayt-aynı kalır.
+ *  Grup 1 = ayraç (boşsa eşleşme CÜMLE BAŞINDA), grup 2 = önek, grup 3 = cümle-başı
+ *  eşleşmenin terminatörü (cümle başındaysa O DA tüketilir; aksi hâlde metin ". Kimse
+ *  seni öldürmedi." diye noktayla başlıyordu). */
 const TR_MISSING_DATA_CLAUSE_RE =
-  /(?:^|(?<=[.!?]\s)|\s*[;,—]\s*)[^.,;:!?\n—]*?(?<![a-zçğıöşü])(?:öldüren|katil|ölüm\s+yeri)[^.,;:!?\n—]*?bilgi(?:si)?\s+(?:gelmedi|yok|eksik|alınamadı|okunamadı|bulunamadı)(?![a-zçğıöşü])[^.,;:!?\n—]*/giu;
+  /(^|(?<=[.!?]\s)|\s*[;,—]\s*)([^.,;:!?\n—]{0,32}?)(?<![a-zçğıöşü])(?:öldüren|katil|ölüm\s+yeri)(?:\s+(?:ajan|oyuncu|kişi))?(?:\s*(?:\/|ve|veya|ya\s+da)\s*(?:silah|cihaz|ajan|konum))?\s+bilgi(?:si)?\s+(?:gelmedi|yok|eksik|alınamadı|okunamadı|bulunamadı)(?![\p{L}])(?=\s*(?:[.,;!?—]|$))(\s*[.!?](?:\s+|$))?/giu;
+/** MISSING_DATA önekinde koordinasyon/karşıtlık bağlacı → önek kendi olgusunu taşıyan
+ *  ayrı bir yan-cümledir ("Jett seni vurdu ve katil bilgisi yok") → dokunulmaz. */
+const TR_MISSING_PREFIX_CONJ_RE = /(?<![\p{L}])(?:ve|ama|fakat|ancak|lakin|çünkü|yoksa|oysa|ki)(?![\p{L}])/iu;
 /** Önek çekimli bir yüklemle mi bitiyor (geçmiş -DI(k/n/m/lar), -yor, -mIş, -mAz,
  *  -mAlI)? Virgülün yan-cümle mi liste mi ayırdığını belirler (MISSING_DATA kalkanı). */
 const TR_FINITE_VERB_END_RE =
@@ -894,20 +971,20 @@ export function stripDeathTypeTokens(text: string, lang: "tr" | "en"): string {
 // EN dalı BAYT-AYNI: gövde değişir, ek olduğu gibi kalır (eski davranış).
 type LabelKind = "poss" | "vowel" | "loan";
 const FIELD_LABEL_REWRITES: Array<[RegExp, { tr: string; en: string; kind: LabelKind }]> = [
-  [/\b[uU]ltReady(?:(['’])([a-zçğıöşü]{1,6}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "ult", en: "ult", kind: "loan" }],
-  [/\b[dD]eathTiming(?:(['’])([a-zçğıöşü]{1,6}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "ölüm zamanlaması", en: "death timing", kind: "poss" }],
-  [/\b[kK]illerInfo(?:(['’])([a-zçğıöşü]{1,6}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "katil bilgisi", en: "killer info", kind: "poss" }],
-  [/\b[dD]eathLocation(?:(['’])([a-zçğıöşü]{1,6}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "ölüm yeri", en: "death location", kind: "poss" }],
-  [/\b[dD]eathAngle(?:(['’])([a-zçğıöşü]{1,6}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "ölüm yönü", en: "death angle", kind: "poss" }],
-  [/\b[eE]conomyType(?:(['’])([a-zçğıöşü]{1,6}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "ekonomi", en: "economy", kind: "vowel" }],
-  [/\b[eE]nemyComp(?:(['’])([a-zçğıöşü]{1,6}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "rakip kadro", en: "enemy comp", kind: "vowel" }],
-  [/\b[eE]nemyRoster(?:(['’])([a-zçğıöşü]{1,6}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "rakip kadro", en: "enemy roster", kind: "vowel" }],
-  [/\b[sS]pikePlanted(?:(['’])([a-zçğıöşü]{1,6}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "spike kurulumu", en: "spike plant", kind: "poss" }],
-  [/\b[aA]lliesAlive(?:(['’])([a-zçğıöşü]{1,6}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "yaşayan takım arkadaşı sayısı", en: "allies alive", kind: "poss" }],
-  [/\b[eE]nemiesAlive(?:(['’])([a-zçğıöşü]{1,6}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "yaşayan düşman sayısı", en: "enemies alive", kind: "poss" }],
-  [/\b[rR]oundTimerAtDeath(?:(['’])([a-zçğıöşü]{1,6}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "round zamanı", en: "the round timer", kind: "poss" }],
-  [/\b[tT]radedByAlly(?:(['’])([a-zçğıöşü]{1,6}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "trade", en: "trade", kind: "loan" }],
-  [/\b[pP]atternContext(?:(['’])([a-zçğıöşü]{1,6}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "tekrarlayan hata", en: "recurring pattern", kind: "vowel" }],
+  [/\b[uU]ltReady(?:(['’])([a-zçğıöşü]{1,8}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "ult", en: "ult", kind: "loan" }],
+  [/\b[dD]eathTiming(?:(['’])([a-zçğıöşü]{1,8}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "ölüm zamanlaması", en: "death timing", kind: "poss" }],
+  [/\b[kK]illerInfo(?:(['’])([a-zçğıöşü]{1,8}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "katil bilgisi", en: "killer info", kind: "poss" }],
+  [/\b[dD]eathLocation(?:(['’])([a-zçğıöşü]{1,8}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "ölüm yeri", en: "death location", kind: "poss" }],
+  [/\b[dD]eathAngle(?:(['’])([a-zçğıöşü]{1,8}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "ölüm yönü", en: "death angle", kind: "poss" }],
+  [/\b[eE]conomyType(?:(['’])([a-zçğıöşü]{1,8}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "ekonomi", en: "economy", kind: "vowel" }],
+  [/\b[eE]nemyComp(?:(['’])([a-zçğıöşü]{1,8}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "rakip kadro", en: "enemy comp", kind: "vowel" }],
+  [/\b[eE]nemyRoster(?:(['’])([a-zçğıöşü]{1,8}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "rakip kadro", en: "enemy roster", kind: "vowel" }],
+  [/\b[sS]pikePlanted(?:(['’])([a-zçğıöşü]{1,8}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "spike kurulumu", en: "spike plant", kind: "poss" }],
+  [/\b[aA]lliesAlive(?:(['’])([a-zçğıöşü]{1,8}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "yaşayan takım arkadaşı sayısı", en: "allies alive", kind: "poss" }],
+  [/\b[eE]nemiesAlive(?:(['’])([a-zçğıöşü]{1,8}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "yaşayan düşman sayısı", en: "enemies alive", kind: "poss" }],
+  [/\b[rR]oundTimerAtDeath(?:(['’])([a-zçğıöşü]{1,8}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "round zamanı", en: "the round timer", kind: "poss" }],
+  [/\b[tT]radedByAlly(?:(['’])([a-zçğıöşü]{1,8}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "trade", en: "trade", kind: "loan" }],
+  [/\b[pP]atternContext(?:(['’])([a-zçğıöşü]{1,8}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "tekrarlayan hata", en: "recurring pattern", kind: "vowel" }],
 ];
 /** Yabancı karşılıkların OKUNUŞ ünlüsü/sertliği (yazımdan türetilemez: trade=treyd). */
 const LOAN_SOUND: Record<string, { vowel: string; hard: boolean }> = {
@@ -916,7 +993,48 @@ const LOAN_SOUND: Record<string, { vowel: string; hard: boolean }> = {
 };
 
 /** Etiketin kesme-sonrası ekini (İngilizce etikete yazılmış hâliyle) Türkçe karşılığa
- *  uyar. Tanınmayan ek → null (çağıran kesmeyi düşürüp eki yapıştırır). */
+ *  uyar. Tanınmayan ek → null (çağıran kesmeyi düşürüp eki yapıştırır).
+ *  İYELİK ÖNEKLİ ve ÇOĞUL EKLER (B01 inceleme): ilk sürüm yalnız çıplak hâl eklerini
+ *  tanıyordu; "deathLocation'ında" → "Ölüm yeriında", "killerInfo'sunda" → "Katil
+ *  bilgisisunda", "enemyComp'unda" → "Rakip kadrounda", "deathLocation'ları" →
+ *  "Ölüm yeriları" (Türkçede olmayan sözcükler) çıkıyordu. Artık:
+ *   · iyelik önekli ek (s?I + n-kaynaştırmalı hâl ya da -ylA): poss karşılık zaten
+ *     iyelikli → yalnız hâl ("ölüm yerinde"); vowel → "sI"+hâl ("kadrosunda"); loan
+ *     → "'I"+hâl ("ult'unda");
+ *   · çoğul (lAr + …): poss → gövde çoğullanır, tamlama iyeliği korunur ("ölüm
+ *     yerleri/yerlerini/yerlerinde"); vowel → "kadrolar/kadroları/kadrolarda"; loan
+ *     çoğulu tanınmaz (null). Çıplak "-lArI" belirtme okunur ("… kullan" nesnesi —
+ *     prompt'un kendi biçimi report/route.ts "deathLocation'ları kullanabilirsin"). */
+type LabelCase = "none" | "loc" | "abl" | "locki" | "acc" | "dat" | "gen" | "ins";
+const lastVowelCt = (w: string) => { const vs = w.match(/[aıoueiöü]/g); return vs ? vs[vs.length - 1] : "e"; };
+const harmA = (v: string) => (/[aıou]/.test(v) ? "a" : "e");
+const harmI = (v: string) => (v === "a" || v === "ı" ? "ı" : v === "o" || v === "u" ? "u" : v === "e" || v === "i" ? "i" : "ü");
+/** Çıplak hâl eki (kaynaştırma harfi opsiyonel). */
+function plainLabelCase(s: string): LabelCase | null {
+  if (/^[dt][ae]$/.test(s)) return "loc";
+  if (/^[dt][ae]n$/.test(s)) return "abl";
+  if (/^[dt][ae]ki$/.test(s)) return "locki";
+  if (/^[yn]?[ıiuü]$/.test(s)) return "acc";
+  if (/^[yn]?[ae]$/.test(s)) return "dat";
+  if (/^n?[ıiuü]n$/.test(s)) return "gen";
+  if (/^y?l[ae]$/.test(s)) return "ins";
+  return null;
+}
+/** İyelik ünlüsünden SONRAKİ parça (n-kaynaştırmalı hâl / -ylA / boş). */
+function possRestCase(r: string): LabelCase | null {
+  if (r === "") return "none";
+  if (/^nd[ae]$/.test(r)) return "loc";
+  if (/^nd[ae]n$/.test(r)) return "abl";
+  if (/^nd[ae]ki$/.test(r)) return "locki";
+  if (/^n[ıiuü]$/.test(r)) return "acc";
+  if (/^n[ae]$/.test(r)) return "dat";
+  if (/^n[ıiuü]n$/.test(r)) return "gen";
+  if (/^yl[ae]$/.test(r)) return "ins";
+  return null;
+}
+/** İyelikli gövdeden sonraki hâl eki (n-kaynaştırmalı). */
+const possCaseTail = (c: LabelCase, A: string, I: string): string =>
+  ({ none: "", loc: `nd${A}`, abl: `nd${A}n`, locki: `nd${A}ki`, acc: `n${I}`, dat: `n${A}`, gen: `n${I}n`, ins: `yl${A}` })[c];
 function harmonizeLabelSuffix(tr: string, kind: LabelKind, suffix: string): string | null {
   const s = suffix.toLocaleLowerCase("tr");
   let lastV: string;
@@ -925,28 +1043,56 @@ function harmonizeLabelSuffix(tr: string, kind: LabelKind, suffix: string): stri
     const snd = LOAN_SOUND[tr] ?? { vowel: "e", hard: false };
     lastV = snd.vowel; hard = snd.hard;
   } else {
-    const vs = tr.match(/[aıoueiöü]/g);
-    lastV = vs ? vs[vs.length - 1] : "e";
+    lastV = lastVowelCt(tr);
   }
-  const A = /[aıou]/.test(lastV) ? "a" : "e";
-  const I = lastV === "a" || lastV === "ı" ? "ı" : lastV === "o" || lastV === "u" ? "u" : lastV === "e" || lastV === "i" ? "i" : "ü";
+  const A = harmA(lastV);
+  const I = harmI(lastV);
   const D = kind === "loan" && hard ? "t" : "d";
-  let c: "loc" | "abl" | "locki" | "acc" | "dat" | "gen" | "ins" | null = null;
-  if (/^[dt][ae]$/.test(s)) c = "loc";
-  else if (/^[dt][ae]n$/.test(s)) c = "abl";
-  else if (/^[dt][ae]ki$/.test(s)) c = "locki";
-  else if (/^[yn]?[ıiuü]$/.test(s)) c = "acc";
-  else if (/^[yn]?[ae]$/.test(s)) c = "dat";
-  else if (/^n?[ıiuü]n$/.test(s)) c = "gen";
-  else if (/^y?l[ae]$/.test(s)) c = "ins";
-  if (!c) return null;
+  const c = plainLabelCase(s);
+  if (c && c !== "none") {
+    if (kind === "poss") return possCaseTail(c, A, I);
+    if (kind === "vowel") {
+      return { loc: `d${A}`, abl: `d${A}n`, locki: `d${A}ki`, acc: `y${I}`, dat: `y${A}`, gen: `n${I}n`, ins: `yl${A}` }[c];
+    }
+    return "'" + { loc: `${D}${A}`, abl: `${D}${A}n`, locki: `${D}${A}ki`, acc: I, dat: A, gen: `${I}n`, ins: `l${A}` }[c];
+  }
+  // İyelik önekli ek: "ında", "sında", "unda", "sı", "ını", "ıyla", "sındaki"…
+  const pm = /^s?[ıiuü](.*)$/.exec(s);
+  const pc = pm ? possRestCase(pm[1]) : null;
+  if (pc) {
+    const head = kind === "poss" ? "" : kind === "vowel" ? `s${I}` : `'${I}`;
+    return head + possCaseTail(pc, A, I);
+  }
+  // Çoğul: "ları", "larda", "larında", "leri"…
+  const pl = /^l[ae]r(.*)$/.exec(s);
+  if (!pl || kind === "loan") return null;
+  const rest = pl[1];
   if (kind === "poss") {
-    return { loc: `nd${A}`, abl: `nd${A}n`, locki: `nd${A}ki`, acc: `n${I}`, dat: `n${A}`, gen: `n${I}n`, ins: `yl${A}` }[c];
+    const stem = tr.replace(/s?[ıiuü]$/, "");
+    const A2 = harmA(lastVowelCt(stem));
+    const I2 = A2 === "a" ? "ı" : "i";
+    let rc: LabelCase | null;
+    if (rest === "") rc = "none";
+    else if (/^[ıiuü]$/.test(rest)) rc = "acc";
+    else if (/^[ıiuü]n$/.test(rest)) rc = "gen";
+    else if (/^[ıiuü]/.test(rest)) rc = possRestCase(rest.slice(1));
+    else rc = plainLabelCase(rest);
+    if (!rc) return null;
+    // Gövde çoğullanır → çağıran tr'yi değil bu tam biçimi kullansın diye "\u0000" işareti.
+    return "\u0000" + stem + `l${A2}r${I2}` + possCaseTail(rc, A2, I2);
   }
-  if (kind === "vowel") {
-    return { loc: `d${A}`, abl: `d${A}n`, locki: `d${A}ki`, acc: `y${I}`, dat: `y${A}`, gen: `n${I}n`, ins: `yl${A}` }[c];
+  // vowel: "kadrolar" + ek (lAr'a göre yeniden uyumlanır)
+  const A2 = A;
+  const I2 = A2 === "a" ? "ı" : "i";
+  let tail: string | null = null;
+  const prc = rest === "" ? "none" : plainLabelCase(rest);
+  if (prc) {
+    tail = ({ none: "", loc: `d${A2}`, abl: `d${A2}n`, locki: `d${A2}ki`, acc: I2, dat: A2, gen: `${I2}n`, ins: `l${A2}` })[prc];
+  } else if (/^[ıiuü]/.test(rest)) {
+    const rc = possRestCase(rest.slice(1));
+    tail = rc ? I2 + possCaseTail(rc, A2, I2) : null;
   }
-  return "'" + { loc: `${D}${A}`, abl: `${D}${A}n`, locki: `${D}${A}ki`, acc: I, dat: A, gen: `${I}n`, ins: `l${A}` }[c];
+  return tail === null ? null : `l${A2}r${tail}`;
 }
 
 export function stripFieldLabelTokens(text: string, lang: "tr" | "en"): string {
@@ -957,7 +1103,8 @@ export function stripFieldLabelTokens(text: string, lang: "tr" | "en"): string {
       if (lang === "en") return rep.en + (apos && suf ? apos + suf : "");
       if (!apos || !suf) return rep.tr;
       const h = harmonizeLabelSuffix(rep.tr, rep.kind, suf);
-      if (h !== null) return rep.tr + h;
+      // "\u0000" = çoğulda gövde de değişti → tam biçim (ör. "ölüm yerlerini").
+      if (h !== null) return h.startsWith("\u0000") ? h.slice(1) : rep.tr + h;
       // Tanınmayan ek: poss/vowel → yalnız kesme düşer; loan → Türkçe kesme kuralı.
       return rep.kind === "loan" ? rep.tr + apos + suf : rep.tr + suf;
     });
@@ -1003,13 +1150,22 @@ export function stripMetaTerms(text: string): string {
   // veya silah bilgisi yok." → "Bu round düşman öldürmesi." (anlamsız). Kalkanla
   // bayt-aynı kalır; "…kimse seni öldürmedi, dolayısıyla katil bilgisi yok." yine
   // temizlenir (önek "öldürmedi" ile bitiyor).
-  t = t.replace(TR_MISSING_DATA_CLAUSE_RE, (m: string, off: number, full: string) => {
-    if (off === 0 && m.trim().length >= full.trim().replace(/[.!?]+$/, "").length) return m;
-    if (/^\s*,/.test(m) && !TR_FINITE_VERB_END_RE.test(full.slice(0, off))) return m;
-    return "";
-  });
+  t = t.replace(TR_MISSING_DATA_CLAUSE_RE,
+    (m: string, lead: string, pre: string, term: string | undefined, off: number, full: string) => {
+      if (off === 0 && m.trim().length >= full.trim().replace(/[.!?]+$/, "").length) return m;
+      if (TR_MISSING_PREFIX_CONJ_RE.test(pre)) return m;
+      if (/^\s*,/.test(m) && !TR_FINITE_VERB_END_RE.test(full.slice(0, off))) return m;
+      // Cümle BAŞINDAKİ eşleşme terminatörüyle birlikte gider (öksüz "." kalmaz);
+      // ayraçla başlayan eşleşmede terminatör ÖNCEKİ yan-cümlenindir → geri yazılır.
+      if (!lead) return "";
+      return term ? term.replace(/^\s+/, "") : "";
+    });
   t = t.replace(TR_KATIL_BILGISI_RE, "katil ");
-  t = t.replace(TR_ONAY_CLAUSE_RE, "");
+  t = t.replace(TR_ONAY_CLAUSE_RE, (m: string) => {
+    if (!TR_ONAY_META_SUBJ_RE.test(m) && !TR_ONAY_DATA_VERB_POS_RE.test(m)) return m;
+    const bare = m.replace(TR_ONAY_VERB_TAIL_RE, "");
+    return TR_ONAY_ROLE_NAME_RE.test(bare) ? bare : "";
+  });
   t = t.replace(TR_ONAY_ORTAC_RE, "");
   // OLUM_GERCEKLESTI, ROL_OLARAK_KAYIT'TAN ÖNCE: "…; katil olarak Raze var ve
   // ölüm A Site'te gerçekleşti." cümlesinde " ve " ayracı önce tüketilirse kuyruk
@@ -1029,8 +1185,8 @@ export function stripMetaTerms(text: string): string {
   t = t.replace(TR_ROL_NET_OLARAK_RE, (_m: string, ad: string) => `katil ${ad}`);
   // Kuyruk EN SONDA (meta ekleri söküldükten sonra görsün); yalnız TEKRAR silinir.
   t = t.replace(TR_ROL_TAIL_RE,
-    (m: string, ad: string, _silah: string | undefined, off: number, full: string) =>
-      mentionedBefore(full.slice(0, off), ad) ? "" : m);
+    (m: string, ad: string, silah: string | undefined, off: number, full: string) =>
+      factsMentionedBefore(full.slice(0, off), ad, silah) ? "" : m);
   t = t.replace(TR_ROL_ETIKET_RE, (_m: string, rol: string, mod?: string) =>
     (mod ? rol + mod : rol) + " ");
   t = t.replace(TR_VERI_SETI_RE, "");
@@ -1050,6 +1206,9 @@ export function stripMetaTerms(text: string): string {
     t = t.replace(/(^|[.!?]\s+)[,;:]\s*/g, "$1");
     t = t.replace(/\s+([.,;!?])/g, "$1");
     t = t.replace(/\.{2,}/g, ".");
+    // Metin başında öksüz terminatör ASLA kalmaz (savunma katmanı; kök yukarıdaki
+    // MISSING_DATA replacer'ında — koç metni "." / "!" ile başlayamaz).
+    t = t.replace(/^[\s.!?]+/, "");
     t = t.replace(/\s{2,}/g, " ").trim();
     // Yalnız noktalama kaldıysa eleman tümüyle meta idi → boş dön (çağıran atar).
     if (/^[\s.,;:!?—-]*$/.test(t)) return "";
@@ -1261,6 +1420,10 @@ export function enforceAgentNames(text: string, anchors: ReadonlyArray<string | 
   const protectedNames = new Set(
     [...CLEAN_AGENT_NAMES, ...CLEAN_WEAPON_NAMES, ...PROTECTED_MAP_NAMES].map(lowerTr),
   );
+  // EK KORUMASI (B01 inceleme): token çapayla BAŞLIYORSA (çapa + kesmesiz Türkçe
+  // ek: "Viperı", "Chambere", "Breachi") bozulma değil ektir — mesafe-1 eşleşmesi
+  // eki silip nesneyi özneye çeviriyordu ("Viperı gördün." → "Viper gördün.").
+  // Yalnız iç harf bozulması (eşit uzunlukta yer değiştirme / eksik harf) düzeltilir.
   return text.replace(/(?<![\p{L}\p{N}])\p{L}+/gu, (tok) => {
     const lt = lowerTr(tok);
     const known = KNOWN_AGENT_GARBLES.get(lt);
@@ -1273,6 +1436,7 @@ export function enforceAgentNames(text: string, anchors: ReadonlyArray<string | 
     for (const a of fuzzyAnchors) {
       const la = lowerTr(a);
       if (lt.slice(0, 2) !== la.slice(0, 2)) continue;
+      if (lt.startsWith(la)) continue;
       if (editDistance(lt, la, 1) === 1) {
         console.log(`[Aimlo AI] agent-name fix: ${tok}→${a}`);
         return a;
@@ -1308,7 +1472,26 @@ const TR_LOCATIVE_EXCEPTIONS: Record<string, string> = {
 // [iİ] SINIFI ZORUNLU: /u bayrağında "İ" (U+0130) basit case-fold'la "i"ye inmez
 // → "EN KRİTİK" ve "İlk temas hatası:" düz /i ile kaçıyordu (Türkçe-İ tuzağı).
 const TR_DIAG_LABEL_RE =
-  /^\s*(?:en\s+kr[iİ]t[iİ]k(?:\s+(?:kök|temel|asıl|ana))?(?:\s*(?:neden|sebep|sorun|hata|kök|nokta))?|(?:kök|temel|asıl|ana)\s+(?:neden|sebep|sorun|hata)|[a-zçğıöşüâîûİ]+(?:\s+[a-zçğıöşüâîûİ]+){0,2}\s+(?:hatası|sorunu|nedeni|sebebi))\s*:\s*/iu;
+  /^\s*(?:en\s+kr[iİ]t[iİ]k(?:\s+(?:kök|temel|asıl|ana))?(?:\s*(?:neden|sebep|sorun|hata|kök|nokta))?|(?:kök|temel|asıl|ana)\s+(?:neden|sebep|sorun|hata))\s*:\s*/iu;
+// AÇIK SINIF AYRI ve KAPALI ADLI (B01 inceleme): "<1-3 sözcük> hatası/sorunu:"
+// biçimi büyük/küçük harf duyarsız ve içeriksizdi → "A Site sorunu: …" (KONUM) ve
+// "Takım arkadaşının hatası: …" (ATIF) etiketlerini silip bilgi düşürüyordu. Artık:
+// ilk sözcük dışında büyük harf YOK ("A Site", callout'lar), tek harfli sözcük YOK
+// (site harfi), tamlayan ekli sözcük YOK ("arkadaşının", "takımın") ve öbek KAPALI
+// listeden bir teşhis adı içermeli. Korpusta açık sınıfın tek eşleşmesi "Açı tutma
+// hatası:" (+ test [17] "İlk temas hatası:") — ikisi de bu kapıdan geçer.
+const TR_DIAG_OPEN_LABEL_RE =
+  /^\s*([\p{L}]{2,}(?:\s+[a-zçğıöşüâîû]{2,}){0,2})\s+(?:hatası|sorunu|nedeni|sebebi)\s*:\s*/u;
+const TR_DIAG_NOUN_RE =
+  /^(?:açı|pozisyon|konum|crosshair|nişan|zamanlama|timing|temas|trade|rotasyon|ekonomi|peek|karar|aim|util|yetenek|iletişim|okuma|tempo|giriş|mesafe|hareket|spray|tutma|tutuş)/u;
+function trOpenDiagLabelLen(text: string): number {
+  const m = TR_DIAG_OPEN_LABEL_RE.exec(text);
+  if (!m) return 0;
+  const words = m[1].split(/\s+/).map((w) => w.toLocaleLowerCase("tr"));
+  if (words.some((w) => /(?:n[ıiuü]n|[ıiuü]n)$/u.test(w) && w.length > 4)) return 0;   // tamlayan eki (atıf)
+  if (!words.some((w) => TR_DIAG_NOUN_RE.test(w))) return 0;
+  return m[0].length;
+}
 // KB BÖLÜM BAŞLIĞI — KAPALI LİSTE (death-type kbBlock başlıkları + korpusta
 // gözlenen parafrazlar). AÇIK SINIF KULLANILMADI: "(…){2,34}(kaybı|hatası)—"
 // biçimi "En kritik neden: erken peek yüzünden tempo kaybı — takım geride
@@ -1330,6 +1513,10 @@ export function stripDiagnosisLabel(text: string, lang: "tr" | "en"): string {
   if (!text) return text;
   const labelRe = lang === "en" ? EN_DIAG_LABEL_RE : TR_DIAG_LABEL_RE;
   let t = text.replace(labelRe, "");
+  if (t === text && lang === "tr") {
+    const n = trOpenDiagLabelLen(text);
+    if (n > 0) t = text.slice(n);
+  }
   if (t === text) return text;
   if (lang === "tr") t = t.replace(TR_KB_HEADING_FRAG_RE, "");
   t = t.trimStart();
@@ -1596,14 +1783,21 @@ export function finalizeCoachText(
     agent?: string | null;
     /** realityCheck sarmalayıcısı; VERİLİRSE zincirin ilk halkası olarak çalışır */
     check?: (text: string) => string;
-    /** süzgeç metni boşaltırsa dönülecek yedek (verilmezse girdi metni) */
+    /** süzgeç (check ya da cleanCoachText) metni boşaltırsa dönülecek yedek; o da
+     *  süzgeçten geçer. Verilmezse sonuç "" (çağıran yapısal hata döner). */
     fallback?: string;
   },
 ): string {
   if (!text) return text;
   const { lang, cap, agent, check } = opts;
   const checked = check ? (check(text) || "") : text;
-  const base = checked && checked.trim() ? checked : (opts.fallback ?? text);
+  // CHECK HALKASI BOŞALTTIYSA ham metne DÜŞÜLMEZ (B01 inceleme): eski `?? text`
+  // realityCheck'in kanıtsız diye sildiği metni (uydurma katil/konum) süzülmüş ama
+  // doğrulanmamış hâliyle geri döndürüyordu — docstring'in "ham girdi ASLA dönmez"
+  // sözünün tek istisnasıydı. Bugün tek check'li çağıran (report) daima fallback
+  // veriyor → davranışı bayt-aynı; fallback'siz yeni bir çağıran artık "" alır.
+  const base = checked && checked.trim() ? checked : (opts.fallback ?? (check ? "" : text));
+  if (!base) return "";
   const cleaned = cleanCoachText(base, lang);
   // BOŞ-GUARD (CANLI-TEST-07, 2026-09-23): eskiden `cleaned` boşsa SÜZÜLMEMİŞ `base`
   // dönüyordu — yani süzgecin sildiği yasaklı içerik GERİ geliyordu. Probe:

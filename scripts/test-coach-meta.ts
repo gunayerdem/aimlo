@@ -272,5 +272,55 @@ eq("uçtan uca know-g ham metni (killerInfo'da → Türkçe ek → meta söküm)
   cleanCoachText("Raze seni A Site'ta aynı bölgeden öldürdü, killerInfo'da Raze olarak kaydedildi.", "tr"),
   "Raze seni A Site'ta aynı bölgeden öldürdü.");
 
+// ── B01 İNCELEME (2026-09-23) — tutanak süzgecinin KENDİ regresyonları ─────────
+// Her vaka c606e0c lib'iyle probe'da KIRMIZI görüldü (commit mesajında).
+console.log("── B01 inceleme: cümle-başı veri-yokluğu öksüz nokta bırakmaz ──");
+eq("F1a 'Bu round'da öldüren bilgi yok. Kimse…' → metin '.' ile başlamaz",
+  stripMetaTerms("Bu round'da öldüren bilgi yok. Kimse seni öldürmedi."), "Kimse seni öldürmedi.");
+eq("F1b 'Katil bilgisi yok. Bir sonraki…'",
+  stripMetaTerms("Katil bilgisi yok. Bir sonraki round geniş açıyla peek at."), "Bir sonraki round geniş açıyla peek at.");
+eq("F1c '!' terminatörü de tüketilir",
+  stripMetaTerms("Öldüren ajan bilgisi yok! Açıyı tut."), "Açıyı tut.");
+eq("F1d metin-ortası cümle",
+  stripMetaTerms("Jett seni vurdu. Katil bilgisi yok. Açıyı tut."), "Jett seni vurdu. Açıyı tut.");
+
+console.log("── B01 inceleme: 'bilgi' = INTEL — öğüt/olgu/gerekçe yutulmaz (bayt-aynı) ──");
+const B01_SAME = [
+  "Katil bilgisi yok ama açıyı tutarken crosshair'i kafa hizasında tut. Sonraki round B'ye rotasyon yap.",
+  "Ölüm yeri bilgisi yok ama Jett seni uzaktan vurdu. Açıyı tut.",
+  "Seni A Main'de vurdular; katil bilgisi yok ama bir sonraki round A Main'i smoke'la kapat.",
+  "Seni öldüren Jett'in pozisyonu hakkında takımında bilgi yok, bu yüzden ölünce callout ver.",
+  "Raze seni A Main'de öldürdü; katil Raze'in ult'u hakkında bilgi yok, dikkat et.",
+  "Jett seni B Main'de vurdu ve katil bilgisi yok.",
+  // mentionedBefore tam öbek: ortak jenerik parça ("Main/Link/Site") tekrar DEĞİL.
+  "B Main'e rotasyon yaparken seni yakaladılar, ölüm A Main'de gerçekleşti.",
+  "B Link'ten geçerken Jett seni öldürdü; ölüm Mid Link'te gerçekleşti.",
+  "B Site'a dönerken Jett seni vurdu; ölüm A Site'ta gerçekleşti.",
+  // Katil kuyruğu: müttefik iyelikli ad tekrar sayılmaz; yeni silah olgusu korunur.
+  "Takımın Jett'i kaybetti, öldüren Jett ve silah Vandal.",
+  "Takımın Jett'i kaybetti, öldüren Jett.",
+  // ONAY özne kapısı: oyun olgusu olabilen onay yan-cümlesi.
+  "Omen smoke'u attı ve pozisyonun belirlendi.",
+  "Spike kuruldu ve site onaylandı.",
+  // KATIL_BILGISI kesmeli dalı yalnız bulunma eki: ayrılma eki yutulmaz.
+  "Katil bilgisi'nden anlaşılan Raze.",
+];
+for (const s of B01_SAME) eq(`bayt-aynı: "${s.slice(0, 44)}..."`, stripMetaTerms(s), s);
+
+console.log("── B01 inceleme: meşru silmeler sürüyor ──");
+eq("tam-öbek tekrar ('A Main' ↔ 'A Main') hâlâ silinir",
+  stripMetaTerms("A Main'de Jett seni vurdu, ölüm A Main'de gerçekleşti."), "A Main'de Jett seni vurdu.");
+eq("meta-sözcüklü konum ('B Main callout'unda') tekrarı silinir",
+  stripMetaTerms("B Main'de seni öldüren bir düşman vardı ve ölüm B Main callout'unda gerçekleşti."),
+  "B Main'de seni öldüren bir düşman vardı.");
+eq("'katil X doğrulandı' → yalnız fiil düşer, YENİ katil olgusu kalır",
+  stripMetaTerms("Takımın trade alamadı, katil Jett doğrulandı."), "Takımın trade alamadı, katil Jett.");
+eq("korpus S29 'öldürülme silah ve konumuyla doğrulanmış' hâlâ düşer",
+  stripMetaTerms("Cypher seni A Hall'dan Vandal'la tutuyor, öldürülme silah ve konumuyla doğrulanmış."),
+  "Cypher seni A Hall'dan Vandal'la tutuyor.");
+eq("korpus 'bu round öldürülmediğin için katil bilgisi yok' (29 krk önek) hâlâ düşer",
+  stripMetaTerms("Bir düşman seni B Site'ta vurdu; bu round öldürülmediğin için katil bilgisi yok."),
+  "Bir düşman seni B Site'ta vurdu.");
+
 console.log(fail ? `\n${fail} FAIL` : "\nTAM YESIL");
 process.exitCode = fail ? 1 : 0;
