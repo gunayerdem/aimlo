@@ -357,9 +357,19 @@ function memoryRateCheck(key: string, limit: number, windowSec: number): RateRes
   return { allowed: entry.count <= limit, remaining: Math.max(0, limit - entry.count) };
 }
 
+// Günlük sayaç sonucu — B04 (A110/A060): `key` + `resetAt` eklendi.
+//  - resetAt: sayacın sıfırlandığı AN (sonraki UTC gece yarısı, ms). Günlük 429'un
+//    Retry-After'ı ve gövdedeki detail.resetsAt buradan türetilir (eskiden sabit 3600).
+//  - key: artırılan sayacın TAM anahtarı. İade (refundDaily) aynı anahtarı kullanır;
+//    anahtarı yeniden hesaplamak UTC gece yarısı dönüşünde YANLIŞ günün sayacını
+//    düşürebilirdi.
+//  - degraded: true ise sayaç bellek yedeğinde artırıldı (Upstash değil) → iade de
+//    bellekte yapılır.
+type DailyResult = RateResult & { key: string; resetAt: number };
+
 // Daily quota — Upstash-backed in prod with TTL to next-midnight (UTC).
 // Uses date-stamped key so the count auto-rolls without explicit reset logic.
-async function dailyQuotaCheck(userId: string, route: string, maxDaily: number): Promise<RateResult> {
+async function dailyQuotaCheck(userId: string, route: string, maxDaily: number): Promise<DailyResult> {
   const now = new Date();
   const yyyy = now.getUTCFullYear();
   const mm = String(now.getUTCMonth() + 1).padStart(2, "0");
@@ -371,10 +381,12 @@ async function dailyQuotaCheck(userId: string, route: string, maxDaily: number):
   const midnight = new Date(Date.UTC(yyyy, now.getUTCMonth(), now.getUTCDate() + 1, 0, 0, 0, 0));
   const ttlSec = Math.max(60, Math.ceil((midnight.getTime() - now.getTime()) / 1000) + 60);
 
+  const resetAt = midnight.getTime();
+
   if (isUpstashConfigured()) {
     try {
       const count = await upstashIncr(key, ttlSec);
-      return { allowed: count <= maxDaily, remaining: Math.max(0, maxDaily - count) };
+      return { allowed: count <= maxDaily, remaining: Math.max(0, maxDaily - count), key, resetAt };
     } catch (e) {
       if (isProduction()) {
         console.error("[Aimlo] Upstash daily quota failed in production — failing closed:", (e as Error).message);
@@ -387,11 +399,68 @@ async function dailyQuotaCheck(userId: string, route: string, maxDaily: number):
   // Dev fallback (in-memory).
   const entry = dailyStore.get(key);
   if (!entry || now.getTime() > entry.resetAt) {
-    dailyStore.set(key, { count: 1, resetAt: midnight.getTime() });
-    return { allowed: true, remaining: maxDaily - 1, degraded: true };
+    dailyStore.set(key, { count: 1, resetAt });
+    return { allowed: true, remaining: maxDaily - 1, degraded: true, key, resetAt };
   }
   entry.count++;
-  return { allowed: entry.count <= maxDaily, remaining: Math.max(0, maxDaily - entry.count), degraded: true };
+  return { allowed: entry.count <= maxDaily, remaining: Math.max(0, maxDaily - entry.count), degraded: true, key, resetAt };
+}
+
+/**
+ * B04 / A060 — günlük sayaç İADESİ (yalnız checkRateLimit'in per-IP reddi dalı).
+ *
+ * NEDEN: checkRateLimit sayaçları sırayla artırır: kullanıcı-dakika → GÜNLÜK →
+ * per-IP. Per-IP reddinde istek hiç işlenmediği hâlde günlük hak yanmış kalıyordu
+ * (sahte Upstash provası: u4'ün reddedilen ilk isteği `daily:u4:vision:<gün>=1`).
+ *
+ * KURALLAR:
+ *  - ASLA throw etmez: bu bir iade, fail-closed kapısı DEĞİL. Upstash hatası/zaman
+ *    aşımı yalnız warn basar; çağıranın 429 dönüşü aynen sürer (en kötü durum =
+ *    bugünkü davranış: 1 hak yanık kalır).
+ *  - Tek iade: çağıran yalnız BU istekte artırılmış anahtar için, bir kez çağırır →
+ *    sayaç bu isteğin INCR'ından önceki değerin altına inemez (kota bypass'ı yok).
+ *  - Aynı depo: sayaç bellek yedeğinde artırıldıysa (degraded) iade de bellekte.
+ *  - EXPIRE aynı pipeline'da yeniden uygulanır (upstashIncr'daki "TTL her istekte
+ *    yeniden uygulanır" kuralının aynası): anahtar INCR ile DECR arasında
+ *    sönümlendiyse DECR TTL'siz bir anahtar yaratmasın.
+ */
+async function refundDaily(key: string, resetAt: number, inMemory: boolean): Promise<void> {
+  if (inMemory || !isUpstashConfigured()) {
+    const entry = dailyStore.get(key);
+    if (entry && entry.count > 0) entry.count--;
+    return;
+  }
+  const url = process.env.UPSTASH_REDIS_REST_URL!;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN!;
+  const ttlSec = Math.max(60, Math.ceil((resetAt - Date.now()) / 1000) + 60);
+  const ctrl = new AbortController();
+  const tid = setTimeout(() => ctrl.abort(), 4000);
+  try {
+    const res = await fetch(`${url}/pipeline`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify([
+        ["DECR", key],
+        ["EXPIRE", key, String(ttlSec)],
+      ]),
+      signal: ctrl.signal,
+    });
+    if (!res.ok) {
+      console.warn(`[Aimlo] daily refund failed: Upstash HTTP ${res.status}`);
+      return;
+    }
+    const data = await res.json().catch(() => null);
+    if (!Array.isArray(data) || data[0]?.error) {
+      console.warn("[Aimlo] daily refund failed: unexpected Upstash body");
+    }
+  } catch (e) {
+    console.warn("[Aimlo] daily refund failed:", (e as Error).message);
+  } finally {
+    clearTimeout(tid);
+  }
 }
 
 // Main rate limit function
@@ -399,7 +468,7 @@ export async function checkRateLimit(
   userId: string,
   route: RouteKey = "default",
   ip?: string
-): Promise<{ allowed: boolean; remaining: number; retryAfter?: number; reason?: string }> {
+): Promise<{ allowed: boolean; remaining: number; retryAfter?: number; reason?: string; resetAt?: number }> {
   cleanupStores();
 
   // B7/B75 (2026-07-31): dev-allowlist short-circuit BURADAN KALDIRILDI.
@@ -422,12 +491,20 @@ export async function checkRateLimit(
     }
 
     // Daily quota check (Upstash in prod)
+    // B04/A060: bu istekte ARTIRILMIŞ günlük sayaç — yalnız per-IP reddinde iade için.
+    let chargedDaily: DailyResult | undefined;
     if (dailyLimit) {
       const dailyResult = await dailyQuotaCheck(userId, route, dailyLimit);
       if (!dailyResult.allowed) {
         if (await isRateBypassed(userId)) return { allowed: true, remaining: Number.MAX_SAFE_INTEGER };
-        return { allowed: false, remaining: 0, retryAfter: 3600, reason: "daily" };
+        // B04/A110: Retry-After = sayacın GERÇEK sıfırlanmasına kalan süre (UTC gece
+        // yarısı = TSİ 03:00). Eskiden sabit 3600 idi → kota 1 saat sonra açılmıyordu,
+        // istemci boşuna yeniden deniyordu. 60 sn taban: gece yarısına saniyeler
+        // kalmışken 0/1 sn'lik Retry-After sıkı döngüye yol açmasın.
+        const retryAfter = Math.max(60, Math.ceil((dailyResult.resetAt - Date.now()) / 1000));
+        return { allowed: false, remaining: 0, retryAfter, reason: "daily", resetAt: dailyResult.resetAt };
       }
+      chargedDaily = dailyResult;
     }
 
     // Per-IP rate check (extra protection)
@@ -437,7 +514,15 @@ export async function checkRateLimit(
         ? await upstashRateCheck(ipKey, limits.max * 3, limits.window)
         : memoryRateCheck(ipKey, limits.max * 3, limits.window);
       if (!ipResult.allowed) {
+        // Sıra BİLİNÇLİ: önce bypass (bypass'lı istek işlenir → günlük hak doğru
+        // şekilde yanmış kalır), sonra iade (reddedilen istek hak yakmaz).
         if (await isRateBypassed(userId)) return { allowed: true, remaining: Number.MAX_SAFE_INTEGER };
+        if (chargedDaily) {
+          await refundDaily(chargedDaily.key, chargedDaily.resetAt, chargedDaily.degraded === true);
+        }
+        // Ölçüm (A060): bu dal bugünkü ölçekte ateşlenmiyor (saha: 60 sn'de en çok 3
+        // vision / IP tavanı 18). Ateşlendiğinde görünsün. IP LOGLANMAZ (PII).
+        console.warn(`[Aimlo] rate ip-reject route=${route}`);
         return { allowed: false, remaining: 0, retryAfter: limits.window, reason: "ip" };
       }
     }
@@ -453,6 +538,45 @@ export async function checkRateLimit(
 }
 
 // ── Auth verification ──
+
+/**
+ * B04 / A021 — "token geçersiz" ile "Auth servisine ulaşılamadı" AYRIMI (saf, test edilir).
+ *
+ * NEDEN: `supabase.auth.getUser` ağ hatasında ve GoTrue 5xx'inde de `error` döndürür
+ * (@supabase/auth-js dist/main/lib/fetch.js: yanıt-olmayan hata ve 502/503/504 →
+ * AuthRetryableFetchError; JSON-olmayan hata gövdesi → AuthUnknownError). Eskiden
+ * hepsi 401 "Invalid or expired token" oluyordu; desktop 401'i KESİN oturum sonu
+ * sayar (ai_client.rs classify_http_error: 401 → AuthExpired → oturum yıkımı) →
+ * Supabase kesintisinde sağlam oturumlar siliniyordu.
+ *
+ * BEYAZ LİSTE — yalnız altyapı sınıfları true; geri kalan HER ŞEY false (bugünkü 401):
+ *  - AuthRetryableFetchError (ağ hatası status 0, 502/503/504)
+ *  - AuthUnknownError (proxy/CF HTML hata sayfası, status yok)
+ *  - status 0 / 429 / ≥500 (ör. AuthApiError 500 JSON, GoTrue kendi rate-limit'i)
+ * 401 / 403 bad_jwt / 400 session_not_found (AuthSessionMissingError) → false → 401.
+ * Güvenlik: 503 de fail-closed'dır (erişim YOK); fark yalnız istemcinin oturumu
+ * yıkmamasıdır. İstemci token'ı seçerek GoTrue'yu 5xx'e zorlasa bile erişim kazanmaz.
+ */
+export function isAuthServiceUnavailable(e: unknown): boolean {
+  if (!e || typeof e !== "object") return false;
+  const { name, status } = e as { name?: unknown; status?: unknown };
+  if (name === "AuthRetryableFetchError" || name === "AuthUnknownError") return true;
+  return typeof status === "number" && (status === 0 || status === 429 || status >= 500);
+}
+
+/**
+ * B04 / A021 — kimlik doğrulama altyapısı geçici olarak yok: 503 + Retry-After 15.
+ * Gövdeye `message` BİLİNÇLİ konmaz: desktop Upstream yolu dolu message'ı olduğu gibi
+ * basar (ai_client.rs user_message); boşken kendi yerelleşmiş TR/EN metnini gösterir.
+ * Route'ların auth istisnası catch'leri de (feedback, report) bunu kullanır.
+ */
+export function authUnavailableResponse(): NextResponse {
+  return NextResponse.json(
+    { error: "auth_unavailable" },
+    { status: 503, headers: { "Retry-After": "15" } },
+  );
+}
+
 export async function verifyAuthAndRateLimit(
   request: NextRequest,
   route: RouteKey = "default",
@@ -488,6 +612,13 @@ export async function verifyAuthAndRateLimit(
   const { data: { user }, error } = await supabase.auth.getUser(token);
 
   if (error || !user) {
+    // B04/A021: altyapı hatası → 503 (desktop oturumu YIKMAZ, Upstream sayar).
+    // Beyaz liste dışı her durum bugünkü 401 — statü ve gövde metni birebir.
+    if (isAuthServiceUnavailable(error)) {
+      const e = error as { name?: string; status?: number };
+      console.error("[Aimlo API] Supabase Auth unavailable:", e.name, e.status);
+      return { ok: false, response: authUnavailableResponse() };
+    }
     return {
       ok: false,
       response: NextResponse.json({ error: "Invalid or expired token" }, { status: 401 }),
@@ -525,7 +656,12 @@ export async function verifyAuthAndRateLimit(
           // mesaj ("Günlük Limit Doldu") desktop'ta yazılı olduğu hâlde o dala
           // hiç girilmiyordu. EKLEMELİ: eski sürümlerde detail Option<Value>,
           // alan yok sayılır; davranış/limit DEĞİŞMEZ, yalnız sınıflama düzelir.
-          ...(isService ? {} : { detail: { kind: isDailyQuota ? "daily" : "ip" } }),
+          //
+          // B04/A110 (EKLEMELİ): günlük aşımda detail.resetsAt = sayacın sıfırlandığı
+          // an (ISO, UTC gece yarısı). Desktop 429'da yalnız kind okur; eski sürümler
+          // alanı yok sayar. kind eşlemesi DEĞİŞMEDİ.
+          ...(isService ? {} : { detail: { kind: isDailyQuota ? "daily" : "ip",
+            ...(isDailyQuota && rateResult.resetAt ? { resetsAt: new Date(rateResult.resetAt).toISOString() } : {}) } }),
         },
         {
           status: isService ? 503 : 429,

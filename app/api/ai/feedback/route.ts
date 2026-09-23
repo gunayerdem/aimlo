@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { verifyAuthAndRateLimit } from "@/lib/api-auth";
+import { authUnavailableResponse, verifyAuthAndRateLimit } from "@/lib/api-auth";
 import { saveAiUsage } from "@/lib/ai-usage";
 import { checkOutputQuality, scoreFields } from "@/evals/generic-detector";
 import { analyzeRoundPatterns, generateDeathContext, generateNextRoundPlan } from "@/lib/round-engine";
@@ -682,8 +682,15 @@ export async function POST(request: NextRequest) {
         return auth.response;
       }
       userId = auth.userId;
-    } catch {
-      return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+    } catch (err) {
+      // B04/A021: bilinen auth reddi zaten auth.response ile (401) döner; buraya
+      // düşen İSTİSNA altyapı demektir (Supabase/Upstash/yapılandırma). 401 desktop'ta
+      // oturumu yıkıyordu → 503 auth_unavailable (geçici, fail-closed).
+      console.error(
+        "[Aimlo API] Feedback auth/rate-limit exception:",
+        err instanceof Error ? err.message : "unknown",
+      );
+      return authUnavailableResponse();
     }
 
     let rawBody: unknown;
