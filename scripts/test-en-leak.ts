@@ -158,14 +158,38 @@ for (const sc of EN_VISION_SCENARIOS) {
     console.log(`  ❌ ${sc.id} → ${r.hits.map((h) => `${h.category}:${h.hit}`).join(", ")}`);
   }
 }
+// B05 (OLCUM-ARACI-11): EN rapor senaryoları artık ReportRequest fixture'ı
+// (evals/report-fixtures/ER*.json). Modele giden SERBEST METİN alanları taranır
+// (kadro/harita/ajan + round konumu, katil bağlamı, analiz, not, hafıza). Prod'un
+// kendi sabit şablon satırları (TR side etiketi, "kim seni en çok öldürdü") korpus
+// değil → prompt'un tamamı taranmaz. Boş girdi taraması sessizce "temiz" demesin
+// diye her fixture'ın analiz metni taşıdığı ayrıca kilitlenir.
+function reportFixtureInputs(sc: (typeof EN_REPORT_SCENARIOS)[number]): string {
+  const b = sc.body as Record<string, unknown>;
+  const parts: string[] = [];
+  for (const k of ["map", "agent", "rank", "mode", "side"]) if (typeof b[k] === "string") parts.push(b[k] as string);
+  for (const k of ["enemyComp", "teamComp"]) if (Array.isArray(b[k])) parts.push((b[k] as string[]).join(" "));
+  for (const r of (Array.isArray(b.rounds) ? b.rounds : []) as Record<string, unknown>[]) {
+    for (const k of ["deathLocation", "killerInfo", "deathAnalysis", "yourNote", "coachInsight", "nextRoundSuggestion"]) {
+      if (typeof r[k] === "string") parts.push(r[k] as string);
+    }
+    if (Array.isArray(r.enemyAnalysis)) parts.push((r.enemyAnalysis as string[]).join(" "));
+  }
+  if (sc.memoryContext) parts.push(sc.memoryContext);
+  return parts.join(" \n ");
+}
+let reportAnalysisChars = 0;
 for (const sc of EN_REPORT_SCENARIOS) {
-  const r = detectEnLeak(sc.userPrompt);
+  const rounds = ((sc.body as Record<string, unknown>).rounds ?? []) as Record<string, unknown>[];
+  reportAnalysisChars += rounds.reduce((n, r) => n + (typeof r.deathAnalysis === "string" ? r.deathAnalysis.length : 0), 0);
+  const r = detectEnLeak(reportFixtureInputs(sc));
   if (!r.clean) {
     corpusLeaks++;
     console.log(`  ❌ ${sc.id} → ${r.hits.map((h) => `${h.category}:${h.hit}`).join(", ")}`);
   }
 }
 check(`korpusun ${EN_CORPUS_TOTAL} senaryosunun model girdileri sızıntısız`, corpusLeaks === 0, `${corpusLeaks} senaryoda sızıntı`);
+check(`EN rapor fixture taraması boş değil (analiz metni ${reportAnalysisChars} kr)`, reportAnalysisChars > 100);
 
 // ── 5) KORPUS KAPSAM GUARD'LARI (görev bandı + karışım) ──────────────────────
 console.log("\n── 5) Korpus kapsamı ──");

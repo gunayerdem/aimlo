@@ -1,0 +1,105 @@
+{
+  "id": "ER1-ascent-cypher-def-loss",
+  "note": "EN RAPOR / Ascent / Cypher / DEFENSE / 11-13 kayıp / B Main tekrar-ölüm pattern (eski ER1)",
+  "memoryContext": "",
+  "body": {
+    "lang": "en",
+    "map": "Ascent",
+    "agent": "Cypher",
+    "rank": "silver",
+    "mode": "competitive",
+    "side": "defense",
+    "teamComp": [
+      "Cypher",
+      "Jett",
+      "Sova",
+      "Omen",
+      "Sage"
+    ],
+    "enemyComp": [
+      "Jett",
+      "Sova",
+      "Omen",
+      "Killjoy",
+      "Reyna"
+    ],
+    "score": "11-13",
+    "rounds": [
+      {
+        "round": 1,
+        "result": "loss",
+        "died": true,
+        "deathLocation": "B Main",
+        "killerInfo": "killed by jett with operator",
+        "deathAnalysis": "You held B Main alone and the Jett hit you from Heaven with the Operator.",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 3,
+        "result": "loss",
+        "died": true,
+        "deathLocation": "B Main",
+        "killerInfo": "killed by jett with operator",
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 5,
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 7,
+        "result": "loss",
+        "died": true,
+        "deathLocation": "Market",
+        "killerInfo": "killed by reyna with vandal",
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 9,
+        "result": "loss",
+        "died": true,
+        "deathLocation": "B Main",
+        "killerInfo": "killed by jett with operator",
+        "deathAnalysis": "Same spot, same angle.",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 12,
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 15,
+        "result": "loss",
+        "died": true,
+        "deathLocation": "A Site",
+        "killerInfo": "killed by killjoy",
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 20,
+        "result": "loss",
+        "died": true,
+        "deathLocation": "B Main",
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      }
+    ]
+  }
+}

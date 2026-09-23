@@ -1,0 +1,103 @@
+{
+  "id": "ER4-icebox-viper-def-overtime",
+  "note": "EN RAPOR / Icebox / Viper / DEFENSE / 12-14 uzatma kaybı / retake pattern + yüksek baskı (eski ER4)",
+  "memoryContext": "",
+  "body": {
+    "lang": "en",
+    "map": "Icebox",
+    "agent": "Viper",
+    "rank": "silver",
+    "mode": "competitive",
+    "side": "defense",
+    "teamComp": [
+      "Viper",
+      "Sage",
+      "Jett",
+      "Killjoy",
+      "Sova"
+    ],
+    "enemyComp": [
+      "Jett",
+      "Sova",
+      "Raze",
+      "Omen",
+      "Sage"
+    ],
+    "score": "12-14",
+    "rounds": [
+      {
+        "round": 1,
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 4,
+        "result": "loss",
+        "died": true,
+        "deathLocation": "B Site",
+        "killerInfo": "killed by raze with phantom",
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": "",
+        "yourNote": "retake"
+      },
+      {
+        "round": 7,
+        "result": "loss",
+        "died": true,
+        "deathLocation": "Kitchen",
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 10,
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 14,
+        "result": "loss",
+        "died": true,
+        "deathLocation": "B Site",
+        "deathAnalysis": "You walked into the B Site retake with no wall active and the Raze cleared you first.",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": "",
+        "yourNote": "retake, spike planted"
+      },
+      {
+        "round": 18,
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 22,
+        "result": "loss",
+        "died": true,
+        "deathLocation": "Mid",
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 26,
+        "result": "loss",
+        "died": true,
+        "deathLocation": "B Site",
+        "deathAnalysis": "Overtime retake, same entry path, no util traded for it.",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": "",
+        "yourNote": "overtime, retake"
+      }
+    ]
+  }
+}

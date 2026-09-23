@@ -1,0 +1,101 @@
+{
+  "id": "ER2-bind-raze-atk-win",
+  "note": "EN RAPOR / Bind / Raze / ATTACK / 13-8 galibiyet (iyi maç — ne işe yaradı) (eski ER2)",
+  "memoryContext": "",
+  "body": {
+    "lang": "en",
+    "map": "Bind",
+    "agent": "Raze",
+    "rank": "silver",
+    "mode": "competitive",
+    "side": "attack",
+    "teamComp": [
+      "Raze",
+      "Skye",
+      "Brimstone",
+      "Viper",
+      "Sage"
+    ],
+    "enemyComp": [
+      "Viper",
+      "Cypher",
+      "Chamber",
+      "Skye",
+      "Brimstone"
+    ],
+    "score": "13-8",
+    "rounds": [
+      {
+        "round": 1,
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 2,
+        "result": "win",
+        "died": false,
+        "deathLocation": "A Site",
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": "",
+        "yourNote": "entry"
+      },
+      {
+        "round": 4,
+        "result": "loss",
+        "died": true,
+        "deathLocation": "Hookah",
+        "killerInfo": "killed by cypher with vandal",
+        "deathAnalysis": "You walked into Hookah alone and the Cypher trap plus vandal ended it.",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 6,
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 8,
+        "result": "win",
+        "died": false,
+        "deathLocation": "B Site",
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 11,
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "You entered A with the boombot and a satchel, took 2 kills and won the clutch.",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": "",
+        "yourNote": "clutch 1v2"
+      },
+      {
+        "round": 14,
+        "result": "loss",
+        "died": true,
+        "deathLocation": "Showers",
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 19,
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      }
+    ]
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "id": "ER3-lotus-omen-atk-close",
+  "note": "EN RAPOR / Lotus / Omen / ATTACK / 13-11 yakın galibiyet / controller + eco yönetimi (eski ER3)",
+  "memoryContext": "",
+  "body": {
+    "lang": "en",
+    "map": "Lotus",
+    "agent": "Omen",
+    "rank": "silver",
+    "mode": "competitive",
+    "side": "attack",
+    "teamComp": [
+      "Omen",
+      "Raze",
+      "Sova",
+      "Killjoy",
+      "Sage"
+    ],
+    "enemyComp": [
+      "Chamber",
+      "Killjoy",
+      "Viper",
+      "Fade",
+      "Sage"
+    ],
+    "score": "13-11",
+    "rounds": [
+      {
+        "round": 2,
+        "result": "loss",
+        "died": true,
+        "deathLocation": "A Main",
+        "killerInfo": "killed by chamber with operator",
+        "deathAnalysis": "You walked into A Main with no smoke up and the Chamber Operator took the same angle.",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 5,
+        "result": "loss",
+        "died": true,
+        "deathLocation": "A Main",
+        "killerInfo": "killed by chamber with operator",
+        "deathAnalysis": "Same mistake, same angle.",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 8,
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 10,
+        "result": "loss",
+        "died": true,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": "",
+        "yourNote": "eco"
+      },
+      {
+        "round": 13,
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 18,
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 22,
+        "result": "loss",
+        "died": true,
+        "deathLocation": "C Site",
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 24,
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      }
+    ]
+  }
+}

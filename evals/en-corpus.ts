@@ -15,8 +15,11 @@
 //   • EnVisionScenario, scripts/eval-vision.ts'in Scenario tipiyle YAPISAL
 //     olarak aynıdır (id/note/body/memoryContext/lang). O tip export edilmiyor;
 //     bağlarken yapısal uyumluluk yeter: SCENARIOS.push(...EN_VISION_SCENARIOS).
-//   • EnReportScenario, scripts/eval-report.ts'in ReportScenario tipiyle aynı
-//     (isTr:false → EN dalı).
+//   • EN_REPORT_SCENARIOS (B05, OLCUM-ARACI-11): 4 EN rapor senaryosu artık
+//     evals/report-fixtures/ER*.json — ReportRequest (desktop düz gövdesi)
+//     şeklinde; eval-report prod'un validateRequest → buildReportPrompts
+//     zincirini koşar. Burada yalnız o fixture'ların EN alt kümesi re-export
+//     edilir (EN_CORPUS_TOTAL ve test-en-leak sayımı değişmez).
 //   • id deseni eval-score.ts'in mapOfId/agentOfId sözleşmesine uyar:
 //     "E1-ascent-jett-atk-..." → parça[1]=harita, parça[2]=ajan (küçük harf).
 //     "E" öneki S-serisiyle çakışmaz → EVAL_ONLY=E ile yalnız EN korpus koşulur.
@@ -29,10 +32,11 @@
 // BAĞLAMA (ana oturum; bu dosya tek başına HİÇBİR akışı değiştirmez):
 //   eval-vision.ts → import { EN_VISION_SCENARIOS } from "../evals/en-corpus";
 //                    SCENARIOS.push(...EN_VISION_SCENARIOS);
-//   eval-report.ts → import { EN_REPORT_SCENARIOS } from "../evals/en-corpus";
-//                    SCENARIOS.push(...EN_REPORT_SCENARIOS);
+//   eval-report.ts → evals/report-fixtures (REPORT_FIXTURES; TR + EN birlikte)
 //   Ölçüm: EVAL_SCORE_LANG=en npx tsx scripts/eval-score.ts <cycle>
 // --------------------------------------------------------------------------
+
+import { REPORT_FIXTURES, type ReportFixture } from "./report-fixtures";
 
 export type EnVisionScenario = {
   id: string;
@@ -42,18 +46,8 @@ export type EnVisionScenario = {
   lang: "en";
 };
 
-export type EnReportScenario = {
-  id: string;
-  note: string;
-  map: string;
-  agent: string;
-  rank: string;
-  side: string;
-  enemyComp: string[];
-  isTr: false;
-  confidence: string;
-  userPrompt: string;
-};
+/** EN maç raporu senaryosu = evals/report-fixtures'taki EN fixture (B05). */
+export type EnReportScenario = ReportFixture;
 
 // Kısayol: roundHistory üretici (TR korpusla aynı alan adları — desktop payload).
 function rh(
@@ -412,65 +406,10 @@ export const EN_VISION_SCENARIOS: EnVisionScenario[] = [
   },
 ];
 
-// ── MAÇ RAPORU SENARYOLARI (eval-report.ts biçimi, isTr:false → EN dalı) ─────
-export const EN_REPORT_SCENARIOS: EnReportScenario[] = [
-  {
-    id: "ER1-ascent-cypher-def-loss",
-    note: "EN RAPOR / Ascent / Cypher / DEFENSE / 11-13 kayıp / B Main tekrar-ölüm pattern",
-    map: "Ascent", agent: "Cypher", rank: "silver", side: "defense",
-    enemyComp: ["Jett", "Sova", "Omen", "Killjoy", "Reyna"], isTr: false, confidence: "high",
-    userPrompt: `Map: Ascent, Agent: Cypher, Side: defense (DEFENSE — the player is holding sites), Rank: silver, Mode: competitive
-Score: 11-13 (LOSS)
-Team: Cypher,Jett,Sova,Omen,Sage vs Enemy: Jett,Sova,Omen,Killjoy,Reyna
-Rounds:
-R1 loss @ B Main (killed by jett operator) | R3 loss @ B Main (killed by jett operator) | R5 win | R7 loss @ Market (killed by reyna vandal) | R9 loss @ B Main (killed by jett operator) | R12 win | R15 loss @ A Site (killed by killjoy) | R20 loss @ B Main
-MATCH INSIGHTS: Top mistake: holding B Main alone. Weakest area: site anchoring. Best round: R12. Decision score: 5/10. Survival rate: 38%.
-AGGREGATED: Top killers: Jett operator x4. Top death locations: B Main x4, Market x2.
-PER-ROUND DEATH ANALYSIS: R1: you held B Main alone and the Jett hit you from Heaven with the Operator. R9: same spot, same angle.`,
-  },
-  {
-    id: "ER2-bind-raze-atk-win",
-    note: "EN RAPOR / Bind / Raze / ATTACK / 13-8 galibiyet (iyi maç — ne işe yaradı)",
-    map: "Bind", agent: "Raze", rank: "silver", side: "attack",
-    enemyComp: ["Viper", "Cypher", "Chamber", "Skye", "Brimstone"], isTr: false, confidence: "high",
-    userPrompt: `Map: Bind, Agent: Raze, Side: attack (ATTACK — the player is entering sites), Rank: silver, Mode: competitive
-Score: 13-8 (WIN)
-Team: Raze,Skye,Brimstone,Viper,Sage vs Enemy: Viper,Cypher,Chamber,Skye,Brimstone
-Rounds:
-R1 win | R2 win @ A Site (entry) | R4 loss @ Hookah | R6 win | R8 win @ B Site | R11 win (clutch 1v2) | R14 loss @ Showers | R19 win
-MATCH INSIGHTS: Top mistake: solo lurk through Hookah. Weakest area: lurk timing. Best round: R11. Decision score: 8/10. Survival rate: 62%.
-AGGREGATED: Top killers: Cypher vandal x2. Top death locations: Hookah x2.
-PER-ROUND DEATH ANALYSIS: R4: you walked into Hookah alone and the Cypher trap plus vandal ended it. R11: you entered A with the boombot and a satchel, took 2 kills and won the clutch.`,
-  },
-  {
-    id: "ER3-lotus-omen-atk-close",
-    note: "EN RAPOR / Lotus / Omen / ATTACK / 13-11 yakın galibiyet / controller + eco yönetimi",
-    map: "Lotus", agent: "Omen", rank: "silver", side: "attack",
-    enemyComp: ["Chamber", "Killjoy", "Viper", "Fade", "Sage"], isTr: false, confidence: "medium",
-    userPrompt: `Map: Lotus, Agent: Omen, Side: attack (ATTACK — the player is entering sites), Rank: silver, Mode: competitive
-Score: 13-11 (WIN)
-Team: Omen,Raze,Sova,Killjoy,Sage vs Enemy: Chamber,Killjoy,Viper,Fade,Sage
-Rounds:
-R2 loss @ A Main (killed by chamber operator) | R5 loss @ A Main (killed by chamber operator) | R8 win | R10 loss on eco | R13 win | R18 win | R22 loss @ C Site | R24 win
-MATCH INSIGHTS: Top mistake: entering A Main without smokes. Weakest area: smoke timing. Best round: R13. Decision score: 6/10. Survival rate: 50%.
-AGGREGATED: Top killers: Chamber operator x2. Top death locations: A Main x2.
-PER-ROUND DEATH ANALYSIS: R2: you walked into A Main with no smoke up and the Chamber Operator took the same angle. R5: same mistake, same angle.`,
-  },
-  {
-    id: "ER4-icebox-viper-def-overtime",
-    note: "EN RAPOR / Icebox / Viper / DEFENSE / 12-14 uzatma kaybı / retake pattern + yüksek baskı",
-    map: "Icebox", agent: "Viper", rank: "silver", side: "defense",
-    enemyComp: ["Jett", "Sova", "Raze", "Omen", "Sage"], isTr: false, confidence: "high",
-    userPrompt: `Map: Icebox, Agent: Viper, Side: defense (DEFENSE — the player is holding sites), Rank: silver, Mode: competitive
-Score: 12-14 (LOSS, overtime)
-Team: Viper,Sage,Jett,Killjoy,Sova vs Enemy: Jett,Sova,Raze,Omen,Sage
-Rounds:
-R1 win | R4 loss @ B Site (killed by raze phantom, retake) | R7 loss @ Kitchen | R10 win | R14 loss @ B Site (retake, spike planted) | R18 win | R22 loss @ Mid | R26 loss @ B Site (overtime, retake)
-MATCH INSIGHTS: Top mistake: retaking B Site without wall or util. Weakest area: retake discipline. Best round: R18. Decision score: 6/10. Survival rate: 46%.
-AGGREGATED: Top killers: Raze phantom x3. Top death locations: B Site x3, Kitchen x1.
-PER-ROUND DEATH ANALYSIS: R14: you walked into the B Site retake with no wall active and the Raze cleared you first. R26: overtime retake, same entry path, no util traded for it.`,
-  },
-];
+// ── MAÇ RAPORU SENARYOLARI — evals/report-fixtures/ER*.json (B05, OLCUM-ARACI-11) ──
+// Eski elle yazılmış userPrompt senaryoları (ER1-ER4) aynı içerikle ReportRequest
+// fixture'larına dönüştürüldü; burada EN alt kümesi re-export edilir.
+export const EN_REPORT_SCENARIOS: EnReportScenario[] = REPORT_FIXTURES.filter((f) => f.body.lang === "en");
 
 /** Toplam senaryo sayısı — test-en-leak.ts görev bandını (20-30) buradan doğrular. */
 export const EN_CORPUS_TOTAL = EN_VISION_SCENARIOS.length + EN_REPORT_SCENARIOS.length;

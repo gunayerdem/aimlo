@@ -1,0 +1,101 @@
+{
+  "id": "R2-bind-raze-atk-win",
+  "note": "Bind / Raze / SALDIRI / 13-8 galibiyet (iyi maç, ne işe yaradı) (eski R2)",
+  "memoryContext": "",
+  "body": {
+    "lang": "tr",
+    "map": "Bind",
+    "agent": "Raze",
+    "rank": "silver",
+    "mode": "competitive",
+    "side": "attack",
+    "teamComp": [
+      "Raze",
+      "Skye",
+      "Brimstone",
+      "Viper",
+      "Sage"
+    ],
+    "enemyComp": [
+      "Viper",
+      "Cypher",
+      "Chamber",
+      "Skye",
+      "Brimstone"
+    ],
+    "score": "13-8",
+    "rounds": [
+      {
+        "round": 1,
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 2,
+        "result": "win",
+        "died": false,
+        "deathLocation": "A Site",
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": "",
+        "yourNote": "entry"
+      },
+      {
+        "round": 4,
+        "result": "loss",
+        "died": true,
+        "deathLocation": "Hookah",
+        "killerInfo": "killed by cypher with vandal",
+        "deathAnalysis": "Hookah'a tek girdin, Cypher tuzak+vandal.",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 6,
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 8,
+        "result": "win",
+        "died": false,
+        "deathLocation": "B Site",
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 11,
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "Bot+satchel ile A'ya entry, 2 kill.",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": "",
+        "yourNote": "clutch 1v2"
+      },
+      {
+        "round": 14,
+        "result": "loss",
+        "died": true,
+        "deathLocation": "Showers",
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 19,
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      }
+    ]
+  }
+}
