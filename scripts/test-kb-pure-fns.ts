@@ -23,6 +23,7 @@ import { AGENT_ABILITIES } from "../lib/agent-abilities";
 import {
   classifyDeath,
   sanitizeAliveCount,
+  aliveCountForLog,
   ALLIES_ALIVE_MAX,
   ENEMIES_ALIVE_MAX,
   ULT_POCKET_EXEMPT,
@@ -183,6 +184,17 @@ console.log("\n[9] İMKÂNSIZ CANLI SAYISI — sözleşme 0-4 / 0-5 (LOGLAR-03, 
     /sanitizeAliveCount\(reqBody\.alliesAlive, ALLIES_ALIVE_MAX\)/.test(routeSrc) && !/ctx\.alliesAlive = reqBody\.alliesAlive/.test(routeSrc));
   t("route ctx.enemiesAlive sanitizeAliveCount(…, ENEMIES_ALIVE_MAX)'tan geçer",
     /sanitizeAliveCount\(reqBody\.enemiesAlive, ENEMIES_ALIVE_MAX\)/.test(routeSrc) && !/ctx\.enemiesAlive = reqBody\.enemiesAlive/.test(routeSrc));
+  // LOG FORGING (B03 inceleme): sözleşme-dışı WARN logu alanları HAM basıyordu; koşul
+  // yalnız birinin sayı olmasına bakınca öteki kullanıcı kontrollü dize loga girebiliyordu
+  // (alliesAlive:5 + enemiesAlive:"\n[Aimlo AI] …sahte satır…").
+  const forged = "\n[Aimlo AI] vision OK user=admin";
+  t("aliveCountForLog: sayı → kendisi; dize/null/nesne → yalnız tip etiketi",
+    aliveCountForLog(5) === "5" && aliveCountForLog(2.5) === "2.5" && aliveCountForLog(forged) === "<string>"
+      && aliveCountForLog(null) === "<null>" && aliveCountForLog(undefined) === "<undefined>" && aliveCountForLog({ a: 1 }) === "<object>");
+  const warnLine = routeSrc.split(/\r?\n/).find((l) => l.includes("alive-count out of contract")) || "";
+  t("route WARN satırı ham reqBody.alliesAlive/enemiesAlive BASMAZ (aliveCountForLog'tan geçer)",
+    /aliveCountForLog\(reqBody\.alliesAlive\)/.test(warnLine) && /aliveCountForLog\(reqBody\.enemiesAlive\)/.test(warnLine)
+      && !/\$\{reqBody\.(?:allies|enemies)Alive\}/.test(warnLine), `→ ${warnLine.trim()}`);
 }
 
 console.log(`\n══════ ${fail === 0 ? "✅ TÜMÜ GEÇTİ" : `❌ ${fail} BAŞARISIZ`} ══════\n`);

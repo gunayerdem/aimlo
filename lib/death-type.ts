@@ -162,6 +162,15 @@ export function sanitizeAliveCount(v: unknown, max: number): number | undefined 
   return typeof v === "number" && Number.isInteger(v) && v >= 0 && v <= max ? v : undefined;
 }
 
+/** Sözleşme-dışı canlı sayısı WARN logu için GÜVENLİ gösterim (B03 inceleme, log
+ *  forging): route logu iki alanı ham basıyordu; koşul yalnız BİRİNİN sayı olmasına
+ *  bakınca öteki alan kullanıcı kontrollü dize ("\n[Aimlo AI] …sahte satır…" ya da
+ *  uzunluk kapısı dışı dev metin) olarak Vercel loguna yazılabiliyordu. Sayı → kendisi
+ *  (String(number) satır sonu/kontrol karakteri içeremez); başka her şey → yalnız tipi. */
+export function aliveCountForLog(v: unknown): string {
+  return typeof v === "number" ? String(v) : `<${v === null ? "null" : typeof v}>`;
+}
+
 /** ult-in-pocket MUAFİYETİ — ult'u kendine dönük dövüş aracı olan (Jett bıçak,
  *  Reyna İmparatoriçe, Neon Overdrive, Phoenix geri-dönüş, Iso düello, Chamber Op)
  *  ya da ölüm SONRASI çalışan (Clove) ajanlar. Gerekçe classifyDeath içindeki
