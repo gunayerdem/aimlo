@@ -171,6 +171,115 @@ export function aliveCountForLog(v: unknown): string {
   return typeof v === "number" ? String(v) : `<${v === null ? "null" : typeof v}>`;
 }
 
+/** computeDeathSignals girdisi — vision isteğinin (VisionRequest) sınıflandırıcıya
+ *  giden alanları. Tipler bilerek gevşek: değerler route'taki gibi HAM geçer. */
+export type DeathSignalsInput = {
+  round?: unknown;
+  score?: unknown;
+  side?: unknown;
+  killerInfo?: unknown;
+  deathLocation?: unknown;
+  deathTiming?: unknown;
+  alliesAlive?: unknown;
+  enemiesAlive?: unknown;
+  spikePlanted?: unknown;
+  ultReady?: unknown;
+  economyType?: unknown;
+  tradedByAlly?: unknown;
+  loadout?: unknown;
+  agent?: unknown;
+  roundHistory?: unknown;
+};
+
+/** ── SİNYAL TÜRETME — TEK KAYNAK (B06 · OLCUM-ARACI-03, 2026-09-24) ──────────
+ *  KÖK: classifyDeathVaried'a giden sinyaller route.ts içinde inline türetiliyordu;
+ *  scripts/eval-vision.ts "MIRROR route.ts" yorumlu bir KOPYA tutuyordu ve kopya
+ *  2026-07-19 KB wiring'i + canlı-test #14 genişlemesini hiç almamıştı: ultReady /
+ *  loadout / playerAgent / lossStreak / winStreak / highStakes eval'de YOKTU,
+ *  repeatedPosition mevcut round'u hariç tutmuyordu, ölü healthAtDeath kapısı
+ *  duruyordu. Ölçüm (eski ayna, aynı prev kaynağı): 7 round'da tip farklı çıkıyordu
+ *  (E11 op-loss↔crosshair-loss, E12 ult-in-pocket↔over-peek-advantage, gerçek
+ *  korpus M1-R4/R5/R10/R18 loss-streak↔def-wide-hold, M1-R2b overtime-matchpoint↔
+ *  def-wide-hold) → eval modele prod'dan FARKLI ders dayatıyordu.
+ *  ÇÖZÜM: türetme BURADA bir kez yazılır; lib/vision-prompt-builder.ts (route + eval)
+ *  bunu çağırır. Kod route.ts'ten BAYT-AYNI davranışla taşındı (değer tipleri de
+ *  ham geçer — route'un sözleşmesi). */
+export function computeDeathSignals(body: DeathSignalsInput): { signals: DeathSignals; streakLen: number } {
+  const rh = body.roundHistory as Record<string, unknown>[] | undefined | null;
+  const loc = ((body.deathLocation as string | undefined) || "").toLowerCase();
+  // CRITICAL (canlı 2026-06-30): roundHistory NOW includes the CURRENT round (recorded
+  // on-death before this call), so the current death matched ITSELF → repeatedPosition was
+  // true for EVERY death → everything classified repeat-angle → every feedback "o açıyı boş
+  // bırak". EXCLUDE the current round (round_index !== current) so a repeat means a PRIOR round.
+  const curRound = typeof body.round === "number" ? body.round : -1;
+  const repeatedPosition = !!loc && Array.isArray(rh) && rh.some((r: Record<string, unknown>) =>
+    r.died === true &&
+    r.round_index !== curRound &&
+    typeof r.death_position === "string" &&
+    (r.death_position as string).toLowerCase().includes(loc) &&
+    (r.position_confidence === "high" || r.position_confidence === "medium"),
+  );
+  // Akıllı-default sinyalleri (KB wiring 2026-07-19): universal.md'nin "Seri
+  // Kayıp Sonrası Round" / "Uzatma ve Maç Sayısı Round'u" blokları yazılıydı
+  // ama deterministik yoldan hiç seçilemiyordu. Seri roundHistory'den, ağırlık
+  // score'dan türetilir. Mevcut round HARİÇ (on-death kaydedildiği için listede
+  // olabilir; sonucu da henüz kesin değil). Ardışıklık round_index üzerinden
+  // doğrulanır — atlanan ya da sonucu bilinmeyen round (outcome_known===false,
+  // R3 UNKNOWN→loss düzeltmesinin alanı) filtrelenir → index boşluğu seriyi kırar.
+  const priorRounds = (Array.isArray(rh) ? rh : [])
+    .filter((r) =>
+      typeof r.round_index === "number" &&
+      r.round_index !== curRound &&
+      typeof r.round_won === "boolean" &&
+      r.outcome_known !== false,
+    )
+    .sort((a, b2) => (b2.round_index as number) - (a.round_index as number));
+  let streakLen = 0;
+  let streakWon: boolean | null = null;
+  for (let i = 0; i < priorRounds.length; i++) {
+    const r = priorRounds[i];
+    if (i > 0 && (r.round_index as number) !== (priorRounds[i - 1].round_index as number) - 1) break;
+    if (streakWon === null) streakWon = r.round_won === true;
+    else if ((r.round_won === true) !== streakWon) break;
+    streakLen++;
+  }
+  const lossStreak = streakWon === false && streakLen >= 3;
+  const winStreak = streakWon === true && streakLen >= 3;
+  // Uzatma/maç sayısı: score "11-12" biçiminden — taraflardan biri ≥12 (standart
+  // 13-round modlarda maç sayısı; 12-12 ve sonrası uzatma). Kısa modlarda (örn.
+  // Spike Rush) eşik hiç tetiklenmez → yanlış pozitif üretmez.
+  const scoreM = typeof body.score === "string" ? body.score.match(/(\d{1,2})\D+(\d{1,2})/) : null;
+  const highStakes = !!scoreM && (parseInt(scoreM[1], 10) >= 12 || parseInt(scoreM[2], 10) >= 12);
+  const signals: DeathSignals = {
+    side: body.side as string | undefined,
+    killerInfo: body.killerInfo as string | undefined,
+    deathLocation: body.deathLocation as string | undefined,
+    deathTiming: body.deathTiming as string | undefined,
+    // B114 (2026-07-31): healthAtDeath argümanı KALDIRILDI — bu dosyada hiçbir dal
+    // okumuyor (DeathSignals.healthAtDeath notu, canlı-test #8 kararı), dolayısıyla
+    // hpSampleAgeSec stale-gate'i de ölü kabloydu. HP yasağı aynen sürüyor: ne
+    // sayısal ne nitel can ifadesi prompt'a girmez.
+    alliesAlive: body.alliesAlive as number | undefined,
+    enemiesAlive: body.enemiesAlive as number | undefined,
+    spikePlanted: body.spikePlanted as boolean | undefined,
+    // ult-in-pocket dalı (KB pipeline denetimi 2026-07-19): ctx.ultReady zaten
+    // prompt'a giriyordu ama classifier'a hiç ulaşmıyordu — tek kablo burası.
+    ultReady: body.ultReady === true ? true : undefined,
+    economyType: body.economyType as string | undefined,
+    tradedByAlly: body.tradedByAlly as boolean | undefined,
+    repeatedPosition,
+    // KB wiring 2026-07-19: kendi silahın (op-loss), ajan (Clove ult istisnası),
+    // seri/ağırlık akıllı-default sinyalleri. loadout classifier'da yalnız
+    // sözlük-regex'le sınanır (prompt'a girmez) → ham geçirmek güvenli.
+    loadout: body.loadout as string | undefined,
+    playerAgent: typeof body.agent === "string" ? body.agent : undefined,
+    lossStreak,
+    winStreak,
+    highStakes,
+  };
+  return { signals, streakLen };
+}
+
 /** ult-in-pocket MUAFİYETİ — ult'u kendine dönük dövüş aracı olan (Jett bıçak,
  *  Reyna İmparatoriçe, Neon Overdrive, Phoenix geri-dönüş, Iso düello, Chamber Op)
  *  ya da ölüm SONRASI çalışan (Clove) ajanlar. Gerekçe classifyDeath içindeki

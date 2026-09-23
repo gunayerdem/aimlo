@@ -177,9 +177,10 @@ console.log("\n[9] İMKÂNSIZ CANLI SAYISI — sözleşme 0-4 / 0-5 (LOGLAR-03, 
   // Pozitif kontrol: sözleşme içindeki gerçek üstünlük dersi KORUNUR.
   t("allies:4, enemies:4 (geçerli) → over-peek-advantage korunur",
     classifyDeath({ alliesAlive: 4, enemiesAlive: 4, side: "defending" }) === "over-peek-advantage");
-  // Route ctx'i aynı kapıdan geçiyor mu (ctx route içinde kurulur, Next route dosyası
-  // saf fonksiyon export edemez → yapı kilidi; test-vision-ctx-sanitize [B] emsali).
-  const routeSrc = fs.readFileSync(path.join(process.cwd(), "app", "api", "ai", "vision", "route.ts"), "utf8");
+  // Route ctx'i aynı kapıdan geçiyor mu. B06 (2026-09-24): ctx kurulumu route.ts'ten
+  // lib/vision-prompt-builder.ts buildVisionContext'e taşındı (route + eval aynı
+  // fonksiyon) → yapı kilidi kurucunun kaynağını okur (test-vision-ctx-sanitize emsali).
+  const routeSrc = fs.readFileSync(path.join(process.cwd(), "lib", "vision-prompt-builder.ts"), "utf8");
   t("route ctx.alliesAlive sanitizeAliveCount(…, ALLIES_ALIVE_MAX)'tan geçer",
     /sanitizeAliveCount\(reqBody\.alliesAlive, ALLIES_ALIVE_MAX\)/.test(routeSrc) && !/ctx\.alliesAlive = reqBody\.alliesAlive/.test(routeSrc));
   t("route ctx.enemiesAlive sanitizeAliveCount(…, ENEMIES_ALIVE_MAX)'tan geçer",

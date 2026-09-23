@@ -15,9 +15,11 @@
  *       gerçekten kırpıyor/temizliyor mu, ve meşru OCR değerleri ("Ascent",
  *       "13-11", "competitive", "late", "spike_rush", "post-plant") AYNEN kalıyor
  *       mu (fix'in meşru davranışı bozmadığının kanıtı).
- *   [B] KAYNAK-YAPI — route.ts'te her alanın gerçekten ctxField(...)'ten geçtiği.
- *       Gerekçe: ctx kurulumu route dosyasının içinde (Next route dosyası HTTP
- *       metotları dışında export EDEMEZ → saf fonksiyon olarak import edilemez).
+ *   [B] KAYNAK-YAPI — ctx kurucusunda her alanın gerçekten ctxField(...)'ten geçtiği.
+ *       B06 (2026-09-24): ctx kurulumu route.ts'ten lib/vision-prompt-builder.ts
+ *       buildVisionContext'e taşındı (route + eval-vision aynı fonksiyonu çağırır;
+ *       Next route dosyası HTTP metotları dışında export EDEMEZ). [5] kurucuyu,
+ *       [6] route'un sınır kapısını okur.
  *       Yapı kilidi olmadan biri sanitize'i sessizce geri alabilir; bu regresyon
  *       guard'ı tam olarak onu yakalar.
  *
@@ -39,6 +41,9 @@ const ctxField = (v: unknown, max: number): string =>
 
 const ROUTE_PATH = join(__dirname, "..", "app", "api", "ai", "vision", "route.ts");
 const src = readFileSync(ROUTE_PATH, "utf8");
+// B06: ctx kurulumu (ctxField zinciri) lib/vision-prompt-builder.ts'te.
+const BUILDER_PATH = join(__dirname, "..", "lib", "vision-prompt-builder.ts");
+const builderSrc = readFileSync(BUILDER_PATH, "utf8");
 
 console.log("\n[1] MEŞRU OCR DEĞERLERİ AYNEN KALIR (fix meşru davranışı bozmuyor)");
 {
@@ -131,10 +136,10 @@ console.log("\n[4] enemyRoster — 50 eleman → 5, her eleman ≤ 24 (route man
   t("string olmayan/boş elemanlar elendi", dirty.join(",") === "Jett,Omen", dirty.join(","));
 }
 
-console.log("\n[5] KAYNAK-YAPI KİLİDİ — route.ts'te her alan ctxField'ten geçiyor");
+console.log("\n[5] KAYNAK-YAPI KİLİDİ — ctx kurucusunda (lib/vision-prompt-builder.ts) her alan ctxField'ten geçiyor");
 {
   t("ctxField tanımı var (sanitizePromptInput + collapseWhitespace)",
-    /const ctxField = \(v: unknown, max: number\): string =>\s*\n\s*sanitizePromptInput\(v, \{ max, collapseWhitespace: true \}\)/.test(src));
+    /const ctxField = \(v: unknown, max: number\): string =>\s*\n\s*sanitizePromptInput\(v, \{ max, collapseWhitespace: true \}\)/.test(builderSrc));
 
   const wired: Array<[string, RegExp]> = [
     ["score (max 12)", /ctx\.score = ctxField\(reqBody\.score, 12\)/],
@@ -148,7 +153,7 @@ console.log("\n[5] KAYNAK-YAPI KİLİDİ — route.ts'te her alan ctxField'ten g
     ["enemyRoster 5 eleman kapağı", /\.slice\(0, 5\)/],
     ["economyType (max 20)", /ctx\.economyType = ctxField\(reqBody\.economyType, 20\)/],
   ];
-  for (const [name, re] of wired) t(`${name} bağlı`, re.test(src));
+  for (const [name, re] of wired) t(`${name} bağlı`, re.test(builderSrc));
 
   // HAM kopya geri gelirse yakala (regresyon guard'ı)
   const rawLeaks: Array<[string, RegExp]> = [
@@ -159,7 +164,8 @@ console.log("\n[5] KAYNAK-YAPI KİLİDİ — route.ts'te her alan ctxField'ten g
     ["ctx.deathTiming = reqBody.deathTiming", /ctx\.deathTiming = reqBody\.deathTiming\s*;/],
     ["ctx.economyType = ...slice(0, 20)", /ctx\.economyType = reqBody\.economyType\.slice/],
   ];
-  for (const [name, re] of rawLeaks) t(`HAM kopya yok: ${name}`, !re.test(src));
+  // Route'a ham kopya geri eklenirse de yakala (iki dosya birden taranır).
+  for (const [name, re] of rawLeaks) t(`HAM kopya yok: ${name}`, !re.test(builderSrc) && !re.test(src));
 }
 
 console.log("\n[6] SINIR KAPISI — isValidVisionRequest akıl-dışı uzunlukta stringi eler");

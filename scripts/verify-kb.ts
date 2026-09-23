@@ -204,9 +204,11 @@ console.log(`\n[9] universal.md boyut tavanı`);
       loaderSrc.includes("universal-2.md") && loaderSrc.includes("profile2"),
       "(dosya var ama lib/knowledge-loader.ts onu okumuyor → içerik prompt'a HİÇ gitmiyor)"
     );
-    const visionSrc = fs.readFileSync(path.join(process.cwd(), "app", "api", "ai", "vision", "route.ts"), "utf8");
+    // B06 (2026-09-24): vision sistem mesajı artık lib/vision-prompt-builder.ts'te
+    // kuruluyor (route + eval-vision + measure-prompt-prefix aynı fonksiyonu çağırır).
+    const visionSrc = fs.readFileSync(path.join(process.cwd(), "lib", "vision-prompt-builder.ts"), "utf8");
     check(
-      "vision route profile2 bloğunu system prompt'a ekliyor",
+      "vision prompt kurucusu profile2 bloğunu system prompt'a ekliyor",
       visionSrc.includes("blocks.profile2"),
       "(loader yüklüyor ama vision yolu bloğu prompt'a koymuyor)"
     );

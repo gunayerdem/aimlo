@@ -20,6 +20,15 @@
  *     İKİNCİ kez çağrılır (ana + refine = 2). Eskiden refine çağrısı ai_usage'a
  *     hiç yazılmıyordu (yalnız ana çağrı) → admin /cost rapor maliyetini eksik sayıyordu.
  *
+ * [V] B06 (TR-KALAN-18/19, OLCUM-ARACI-01/02/04): vision prompt kurulumu route.ts'ten
+ *     lib/vision-prompt-builder.ts'e taşındı. GERÇEK vision POST handler'ı
+ *     (scripts/vision-route-harness.ts) evals/vision-golden vakalarında refactor
+ *     ÖNCESİ route'un OpenAI gövdesiyle (route-prompts.json) BAYT-AYNI kullanıcı
+ *     mesajı + sistem mesajı (sha256; KB değişmediyse) + şema/model/token üretir;
+ *     route'un gövdesi buildVisionSystemMessage/buildVisionUserMessage çıktısına
+ *     eşit; route.ts'te prompt kurulumu kalmadı (grep-guard).
+ *     Golden yenileme (prompt BİLİNÇLİ değişince): UPDATE_VISION_GOLDEN=1.
+ *
  * ⚠ AĞ/AI/DB YOK: model yanıtları sahte (harness.replies); OPENAI_API_KEY sahte
  * bir dize, .env.local OKUNMAZ (eval-report anahtarı yalnız main()'de okur).
  */
@@ -38,6 +47,19 @@ import {
 import { maybeRefineReport, REFINE_CALL, REFINE_SYSTEM_PROMPT, type RefineRequestBody } from "../lib/report-refine";
 import { runReportFixture } from "./eval-report";
 import { REPORT_FIXTURES, type ReportFixture } from "../evals/report-fixtures";
+import { VISION_GOLDEN_CASES } from "../evals/vision-golden";
+import { goldenRecordFor, knowledgeDigest, type VisionGoldenRecord } from "./vision-route-harness";
+import {
+  VISION_CALL,
+  DESKTOP_VISION_MAX_TOKENS,
+  resolveVisionMaxTokens,
+  resolveVisionLang,
+  buildVisionSystemMessage,
+  buildVisionUserMessage,
+  prevDeathTypesFromHistory,
+  type VisionPromptBody,
+} from "../lib/vision-prompt-builder";
+import type { DeathType } from "../lib/death-type";
 
 let pass = 0;
 let fail = 0;
@@ -309,8 +331,128 @@ async function main() {
   }
   delete process.env.OPENAI_API_KEY;
 
+  await visionRouteSection();
+
   console.log(`\n${fail === 0 ? "✅" : "❌"} test-eval-fidelity: ${pass} geçti, ${fail} kırık\n`);
   if (fail > 0) process.exit(1);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   [V] VISION — route ↔ golden ↔ lib/vision-prompt-builder (B06)
+   ══════════════════════════════════════════════════════════════════════════ */
+
+const VISION_GOLDEN_PATH = path.join(__dirname, "..", "evals", "vision-golden", "route-prompts.json");
+type VisionGoldenFile = { note: string; kbDigest: string; records: VisionGoldenRecord[] };
+
+/** İlk farklı karakterin konumu + iki taraftan kısa kesit (kırık teşhisi için). */
+function firstDiff(a: string, b: string): string {
+  let i = 0;
+  while (i < a.length && i < b.length && a[i] === b[i]) i++;
+  if (i === a.length && i === b.length) return "";
+  return `@${i} route="${a.slice(Math.max(0, i - 30), i + 50)}" beklenen="${b.slice(Math.max(0, i - 30), i + 50)}"`;
+}
+
+/** Route'un prev kaynağının aynısı: echo, boşsa (ölüm + matchId varken) maç-kavram listesi. */
+function routePrevTypes(body: Record<string, unknown>, matchConcepts?: string[]): DeathType[] {
+  const echo = prevDeathTypesFromHistory(body.roundHistory);
+  if (body.died === true && echo.length === 0 && typeof body.matchId === "string" && body.matchId) {
+    return [...(matchConcepts ?? [])] as DeathType[];
+  }
+  return echo;
+}
+
+async function visionRouteSection() {
+  console.log("\n── [V] vision route ↔ refactor-öncesi golden ↔ lib/vision-prompt-builder (TR-KALAN-18/19, OLCUM-ARACI-01/02) ──");
+  const golden = JSON.parse(fs.readFileSync(VISION_GOLDEN_PATH, "utf8")) as VisionGoldenFile;
+  if (process.env.UPDATE_VISION_GOLDEN === "1") {
+    const records: VisionGoldenRecord[] = [];
+    for (const c of VISION_GOLDEN_CASES) records.push((await goldenRecordFor(c)).record);
+    const next: VisionGoldenFile = { ...golden, kbDigest: knowledgeDigest(), records };
+    fs.writeFileSync(VISION_GOLDEN_PATH, JSON.stringify(next, null, 2) + "\n", "utf8");
+    golden.kbDigest = next.kbDigest;
+    golden.records = records;
+    console.log(`  ⚠ UPDATE_VISION_GOLDEN=1 → golden yeniden yazıldı (${records.length} vaka). Farkı commit mesajında gerekçelendir.`);
+  }
+  const kbSame = knowledgeDigest() === golden.kbDigest;
+  if (!kbSame) {
+    console.log("  ⚠ knowledge/** golden'dan farklı → sistem mesajı sha256 kıyası ATLANDI (route↔builder paritesi yine koşuyor)");
+  }
+  check(`golden vaka seti eşleşiyor (${VISION_GOLDEN_CASES.length} vaka)`,
+    golden.records.length === VISION_GOLDEN_CASES.length && VISION_GOLDEN_CASES.every((c) => golden.records.some((r) => r.id === c.id)));
+
+  const byId: Record<string, { user: string; sys: string; hasImage: boolean }> = {};
+  for (const c of VISION_GOLDEN_CASES) {
+    const g = golden.records.find((r) => r.id === c.id);
+    if (!g) continue;
+    const { record, capture } = await goldenRecordFor(c);
+    byId[c.id] = { user: capture.userText, sys: capture.systemMessage, hasImage: capture.hasImage };
+    check(`${c.id}: route 200`, record.status === 200, `status=${record.status} ${JSON.stringify(capture.json).slice(0, 160)}`);
+    check(`${c.id}: kullanıcı mesajı refactor-ÖNCESİ route ile BAYT-AYNI (${g.userText.length} kr)`,
+      record.userText === g.userText, firstDiff(record.userText, g.userText));
+    if (kbSame) {
+      check(`${c.id}: sistem mesajı refactor-ÖNCESİ route ile BAYT-AYNI (${g.systemBytes} B, sha256)`,
+        record.systemSha256 === g.systemSha256 && record.systemBytes === g.systemBytes, `bytes=${record.systemBytes}`);
+    }
+    check(`${c.id}: şema/model/token/effort/görsel/ders-tipi golden ile aynı`,
+      record.responseFormatSha256 === g.responseFormatSha256 && record.model === g.model
+        && record.maxCompletionTokens === g.maxCompletionTokens && record.reasoningEffort === g.reasoningEffort
+        && record.hasImage === g.hasImage && record.deathType === g.deathType,
+      show({ ...record, userText: undefined }));
+
+    // Route'un yolladığı = kurucunun ürettiği (tek kaynak).
+    const body = c.body as VisionPromptBody;
+    const lang = resolveVisionLang(c.body);
+    const sys = buildVisionSystemMessage({ body, lang, memoryContext: c.memoryContext ?? "" });
+    const um = buildVisionUserMessage({
+      body, lang, prevDeathTypes: routePrevTypes(c.body, c.matchConcepts), imageAvailable: c.body.died !== false,
+    });
+    check(`${c.id}: route sistem mesajı = buildVisionSystemMessage`, sys.systemMessage === capture.systemMessage,
+      firstDiff(capture.systemMessage, sys.systemMessage));
+    check(`${c.id}: route kullanıcı mesajı = buildVisionUserMessage · ders tipi aynı`,
+      um.userPrompt === capture.userText && (um.deathType ?? null) === (capture.json.deathType ?? null),
+      firstDiff(capture.userText, um.userPrompt));
+  }
+
+  // İçerik kilitleri — prod prompt'unun taşıdığı direktifler (eval'in eskiden üretmedikleri).
+  const u = (id: string) => byId[id]?.user ?? "";
+  const s = (id: string) => byId[id]?.sys ?? "";
+  check("G1 sistem: static/scenario/profile/profile2 + karşı-ajan + hafıza + pattern blokları",
+    ["[SİLAH + KOMP REHBERİ", "[SENARYO REHBERİ", "[KOÇLUK PROFİLİ — her rank", "[KOÇLUK PROFİLİ — devam]", "[KARŞI-AJAN — Jett", "[CROSS-MATCH GEÇMİŞİ", "[PATTERN CONTEXT — Rust Client]"]
+      .every((h) => s("G1-tr-loc-killer-spike-eco").includes(h)));
+  check("G1 kullanıcı: olgu sözleşmesi + silah/komp + ajan kiti + harita + ders geçmişi + senaryo (retake+ekonomi)",
+    ["[ÖLÜM-VERİ SÖZLEŞMESİ", "[SİLAH+KOMP İPUCU", "[AJAN KİTİ", "[HARİTA İPUCU", "[DERS GEÇMİŞİ", "[SENARYO İPUCU", "RETAKE TAKTİK", "[EKONOMİ REHBERİ]", "[GÖRÜNTÜDEKİ YETENEK İKONLARI"]
+      .every((h) => u("G1-tr-loc-killer-spike-eco").includes(h)));
+  check("G1 pattern HP'si prompt'a girmez (stripNumericHp → stripHpClaims)", !/30 HP|düşük canla/.test(u("G1-tr-loc-killer-spike-eco")));
+  check("G2 EN: dil emri başta + sonda, DEATH-DATA CONTRACT, ultReady/deathTiming/timer ctx'te",
+    u("G2-en-loc-killer-route-ult").includes("[LANGUAGE]") && u("G2-en-loc-killer-route-ult").includes("[REMINDER] Output language: ENGLISH ONLY")
+      && u("G2-en-loc-killer-route-ult").includes("[DEATH-DATA CONTRACT") && /"ultReady": true/.test(u("G2-en-loc-killer-route-ult"))
+      && /"deathTiming": "mid"/.test(u("G2-en-loc-killer-route-ult")) && /"roundTimerAtDeath": 38/.test(u("G2-en-loc-killer-route-ult")));
+  check("G3 ajan Unknown + konumsuz + katilsiz: AJAN OKUNAMADI + ÖLÜM YERİ OKUNAMADI + BAĞLAMSIZ ÖLÜM; allies=5 prompt'a girmez",
+    ["[AJAN OKUNAMADI]", "[ÖLÜM YERİ OKUNAMADI]", "[BAĞLAMSIZ ÖLÜM]"].every((h) => u("G3-tr-noloc-nokiller-agent-unknown").includes(h))
+      && !u("G3-tr-noloc-nokiller-agent-unknown").includes("[AJAN KİTİ") && !/müttefik=5|"alliesAlive": 5/.test(u("G3-tr-noloc-nokiller-agent-unknown")));
+  check("G4 harita Unknown + 'with blade': HARİTA OKUNAMADI, sözlük-dışı silah prompt'a girmez",
+    u("G4-tr-map-unknown-blade").includes("[HARİTA OKUNAMADI]") && !/blade/i.test(u("G4-tr-map-unknown-blade"))
+      && u("G4-tr-map-unknown-blade").includes("katil=killed by chamber"));
+  check("G6 hayatta kalındı: görsel yok, görsel/ölüm direktifleri yok",
+    byId["G6-tr-survived"]?.hasImage === false && !u("G6-tr-survived").includes("[GÖRÜNTÜDEKİ YETENEK İKONLARI")
+      && !u("G6-tr-survived").includes("[ÖLÜM-TİPİ İPUCU — bu round'un odağı]"));
+
+  // Çağrı parametreleri (OLCUM-ARACI-04).
+  check(`resolveVisionMaxTokens(${DESKTOP_VISION_MAX_TOKENS}) = 450 (masaüstü) · (undefined) = 350 · (200) = 200 · (0) = 350`,
+    resolveVisionMaxTokens(DESKTOP_VISION_MAX_TOKENS) === 450 && resolveVisionMaxTokens(undefined) === 350
+      && resolveVisionMaxTokens(200) === 200 && resolveVisionMaxTokens(0) === 350 && VISION_CALL.maxTokensCap === 450,
+    `${resolveVisionMaxTokens(DESKTOP_VISION_MAX_TOKENS)}/${resolveVisionMaxTokens(undefined)}`);
+  check("golden'da masaüstü isteği 450 token · gpt-5-mini · minimal ile gidiyor",
+    golden.records.every((r) => r.maxCompletionTokens === 450 && r.model === "gpt-5-mini" && r.reasoningEffort === "minimal"));
+
+  // Grep-guard: route'ta prompt kurulumu kalmadı (tek kaynak = builder).
+  const routeSrc = fs.readFileSync(path.join(__dirname, "..", "app", "api", "ai", "vision", "route.ts"), "utf8");
+  const leftovers = ["systemSections.push(", "loadVisionKnowledge(", "buildFactSheet(", "buildFactGround(", "classifyDeathVaried(", "buildPolicyBlock(", "JSON.parse("]
+    .filter((x) => routeSrc.includes(x));
+  check("route.ts prompt kurmuyor (systemSections/loadVisionKnowledge/buildFactSheet/buildFactGround/classifyDeathVaried/buildPolicyBlock/JSON.parse yok)",
+    leftovers.length === 0, leftovers.join(", "));
+  check("route.ts kurucuyu çağırıyor (buildVisionSystemMessage + buildVisionUserMessage + buildVisionRequestBody + toVisionFeedbackOutcome)",
+    ["buildVisionSystemMessage(", "buildVisionUserMessage(", "buildVisionRequestBody(", "toVisionFeedbackOutcome(", "visionPostprocessOpts("].every((x) => routeSrc.includes(x)));
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });
