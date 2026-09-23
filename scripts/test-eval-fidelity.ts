@@ -309,11 +309,13 @@ async function main() {
     check("200 + refine çağrısı yapıldı (2 OpenAI isteği)", res.status === 200 && harness.fetchCalls.length === 2, `status=${res.status} fetch=${harness.fetchCalls.length}`);
     check("saveAiUsage 2 kez (ana + refine) — önceden 1", u.length === 2, `got=${u.length}`);
     const r = u[1] ?? {};
-    check("refine kaydı: routeType report, refine token'ları, yanıt modeli, matchId, userId",
-      r.routeType === "report" && r.promptTokens === 410 && r.completionTokens === 95 && r.cachedTokens === 0
+    // B05 inceleme: refine kaydı ana çağrıdan AYIRT EDİLEBİLİR (eskiden ikisi de "report").
+    check("refine kaydı: routeType report_refine, refine token'ları, yanıt modeli, matchId, userId",
+      r.routeType === "report_refine" && r.promptTokens === 410 && r.completionTokens === 95 && r.cachedTokens === 0
         && r.model === "gpt-5-mini-refine-test" && r.matchId === lotusBody.matchId && r.userId === "00000000-0000-4000-8000-000000000001", show(r));
     check("refine kaydı latencyMs sayısal", typeof r.latencyMs === "number" && (r.latencyMs as number) >= 0);
-    check("ana kayıt değişmedi (5100/640/1024)", u[0]?.promptTokens === 5100 && u[0]?.completionTokens === 640 && u[0]?.cachedTokens === 1024, show(u[0]));
+    check("ana kayıt değişmedi (routeType report, 5100/640/1024)", u[0]?.routeType === "report" && u[0]?.promptTokens === 5100 && u[0]?.completionTokens === 640 && u[0]?.cachedTokens === 1024, show(u[0]));
+    check("route bazlı ayrım: ana ≠ refine routeType (satırlar ayırt edilebilir)", u[0]?.routeType !== u[1]?.routeType, `${u[0]?.routeType} / ${u[1]?.routeType}`);
     check("refine metni rapora girdi ('A Short' temizlenmiş)", typeof body.mistake === "string" && body.mistake.includes("A Main") && !/A Short/.test(body.mistake), String(body.mistake));
   }
   {

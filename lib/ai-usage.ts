@@ -15,7 +15,11 @@ export type SaveUsageInput = {
   userId: string | null | undefined;
   // B61 (pano özellik dalgası, 2026-08-04): "ask" eklendi — Koça-sor follow-up
   // route'u. DB kolonu düz text (0007, CHECK yok); union yalnız TS disiplini.
-  routeType: "vision" | "report" | "feedback" | "insight" | "ask";
+  // B05 inceleme (2026-09-24): "report_refine" — rapor route'unun kalite-kapısı
+  // refine çağrısı (lib/report-refine.ts). Ana rapor çağrısıyla ("report") aynı
+  // route_type'ı paylaşınca satırlar ayırt edilemiyordu: route bazlı çağrı sayısı
+  // ve latency_ms/$ çağrı başı ortalaması ~500 token'lık refine ile karışıyordu.
+  routeType: "vision" | "report" | "report_refine" | "feedback" | "insight" | "ask";
   model?: string | null;
   promptTokens?: number | null;
   completionTokens?: number | null;

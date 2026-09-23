@@ -419,13 +419,17 @@ export async function POST(request: NextRequest) {
           // OLCUM-ARACI-15 (B05, 2026-09-24): refine İKİNCİ, ücretli bir AI çağrısı ama
           // ai_usage'a HİÇ yazılmıyordu (yalnız ana çağrı, generateAIReport) → admin
           // /cost paneli rapor maliyetini eksik sayıyordu. Yanıt geldiyse token harcanmıştır:
-          // metin kabul de edilse (finish=stop) reddedilse de kaydedilir. routeType
-          // "report" (panel byRoute gruplaması değişmez; ayrı tip admin-data'yı etkilerdi).
+          // metin kabul de edilse (finish=stop) reddedilse de kaydedilir.
+          // B05 inceleme (2026-09-24): routeType "report_refine" (eskiden "report") —
+          // aynı routeType/matchId ile ana çağrıdan AYIRT EDİLEMİYORDU: route bazlı
+          // çağrı sayısı ~%86 raporda 2 sayılıyor, latency_ms / $-çağrı ortalaması
+          // ~500 token'lık refine ile düşük görünüyordu. Şema değişmez (route_type düz
+          // text, CHECK yok — "ask" emsali); toplam maliyet ve match_id eşlemesi aynı.
           const ru = rd?.usage as { prompt_tokens?: number; completion_tokens?: number; prompt_tokens_details?: { cached_tokens?: number } } | undefined;
           if (ru) {
             const rCached = ru.prompt_tokens_details?.cached_tokens ?? 0;
             console.log(`[Aimlo AI tokens] report-refine in=${ru.prompt_tokens ?? 0} cached=${rCached} out=${ru.completion_tokens ?? 0} finish=${rd?.choices?.[0]?.finish_reason ?? "unknown"}`);
-            saveAiUsage({ userId, routeType: "report", model: rd?.model ?? REFINE_CALL.model, promptTokens: ru.prompt_tokens ?? 0, completionTokens: ru.completion_tokens ?? 0, cachedTokens: rCached, matchId: validation.data.matchId ?? null, latencyMs: Date.now() - refineStartMs });
+            saveAiUsage({ userId, routeType: "report_refine", model: rd?.model ?? REFINE_CALL.model, promptTokens: ru.prompt_tokens ?? 0, completionTokens: ru.completion_tokens ?? 0, cachedTokens: rCached, matchId: validation.data.matchId ?? null, latencyMs: Date.now() - refineStartMs });
           }
           return { content: rd?.choices?.[0]?.message?.content, finishReason: rd?.choices?.[0]?.finish_reason };
         }
