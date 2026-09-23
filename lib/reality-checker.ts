@@ -393,6 +393,38 @@ const REPETITION_KEYWORDS = [
   "repeating", "recurring", "persistent", "every time",
 ];
 
+// ── BELİRSİZ TEKRAR ANAHTARLARI (TR-KALAN-25, 2026-09-23) ─────────────────
+// "sürekli", "aynı pozisyon", "aynı bölge" yalın alt-dizge olarak hem ÇAPRAZ-ROUND
+// iddiasını ("son maçlarda sürekli aynı pozisyonda öldün") hem de BU round'un
+// betimini ("aynı pozisyonda beklerken Jett seni vurdu") ya da ÖĞÜDÜ ("pozisyonu
+// sürekli değiştir") taşıyor. Cycle 3'te çıplak "tekrar" aynı gerekçeyle
+// çıkarılmıştı (yukarıda). Ölçülen hasar: maliyetsiz replay'de phoenix-c / skye-b /
+// M1-R16 deathAnalysis'i tümüyle "Bu round beklenen açıdan vuruldun." kalıbına
+// çöküyordu; tarihsel korpusta final DA'ların 12/970'i bu kalıp.
+// Kural: belirsiz anahtar ancak AYNI CÜMLEDE bir çapraz-round çapası varsa sayılır.
+// Belirsiz OLMAYANLAR ("tekrar eden", "tekrar tekrar", "art arda", "hep aynı", EN
+// listesi) değişmez. Türkçe-\b TUZAĞI: \p{L} lookaround (dosya konvansiyonu).
+const AMBIGUOUS_REPETITION = new Set(["sürekli", "aynı pozisyon", "aynı bölge"]);
+const CROSS_ROUND_ANCHOR_RE = new RegExp(
+  "(?<![\\p{L}\\p{N}])(?:r\\d+"
+  + "|round['’]?lar[\\p{L}]*"
+  + "|önceki|geçen|yine|tekrar|\\d+\\s*kez|defa"
+  + "|üst\\s+üste|art\\s+arda|her\\s+round"
+  + "|bu\\s+maç[\\p{L}'’]*|maç\\s+boyunca"
+  // spec listesine EK (ölçülmüş): pencere ifadeleri de çapraz-round çapasıdır —
+  // spec'in kendi negatif vakası "Son maçlarda sürekli aynı pozisyonda öldün."
+  // (hâlâ nötrlenmeli) yalnız bu çapayla yakalanıyor.
+  + "|son\\s+(?:\\d+\\s*)?(?:round|raund|tur|maç)[\\p{L}'’]*|maçlar[\\p{L}]*"
+  + ")(?![\\p{L}])",
+  "iu",
+);
+/** Bu PARÇA tekrar-iddiası taşıyor mu? Belirsiz anahtar için çapa `scope`ta (cümle) aranır. */
+function repetitionKeyIn(segment: string, scope: string): string | undefined {
+  const s = segment.toLowerCase();
+  return REPETITION_KEYWORDS.find((k) =>
+    s.includes(k) && (!AMBIGUOUS_REPETITION.has(k) || CROSS_ROUND_ANCHOR_RE.test(scope)));
+}
+
 // ── İDDİA ÇIKARIMI (TR-KALAN-14/15, 2026-09-23) ──────────────────────────
 //
 // 🔴 CANLI KANIT (r4-a, 3/3 ölüm hepsi high): raw "Son 3 round'da her round öldün
@@ -497,12 +529,17 @@ export function extractClaims(text: string): ExtractedClaims {
   }
   const claimedWindowIsRound = claimedWindow !== null && isRoundWindow(lower, claimedWindow);
 
-  // Detect repetition claim
-  const repKey = REPETITION_KEYWORDS.find((k) => lower.includes(k));
-  const repetitionClaim = repKey !== undefined;
+  // Detect repetition claim — TR-KALAN-25: belirsiz anahtar yalnız aynı cümlede
+  // çapraz-round çapasıyla sayılır (cümle bazında taranır).
+  let repIdx: number | null = null;
+  for (const sm of lower.matchAll(/[^.!?]+[.!?]*/g)) {
+    const key = repetitionKeyIn(sm[0], sm[0]);
+    if (key !== undefined) { repIdx = (sm.index ?? 0) + sm[0].indexOf(key); break; }
+  }
+  const repetitionClaim = repIdx !== null;
 
   // Extract position — iddiaya BAĞLI konum (bkz. yukarıdaki (b)).
-  const claimAnchor = anchor ?? windowIdx ?? (repKey !== undefined ? lower.indexOf(repKey) : null);
+  const claimAnchor = anchor ?? windowIdx ?? repIdx;
   const claimedPosition = claimPosition(lower, claimAnchor);
 
   return { claimedCount, claimedWindow, claimedPosition, repetitionClaim, claimedWindowIsRound };
@@ -694,10 +731,45 @@ export function rewriteUnsafeClaims(
     // instead of the old in-place keyword→"bu round'da" substitution which
     // produced broken Turkish like "Bu bu round'da eden hata". Split on
     // sentence boundaries, keep only sentences with NO repetition keyword.
+    //
+    // TR-KALAN-25 (2026-09-23): silme birimi CÜMLE değil YAN-CÜMLE. Modelin tipik
+    // çıktısı ";" / "—" ile bağlı TEK cümle; cümle bütün düşünce ders ve ölüm olgusu
+    // da gidiyor ve yerine kalıp satır yazılıyordu. Cümle [;—] ile bölünür (virgül
+    // DEĞİL), yalnız tekrar-iddiası taşıyan yan-cümle düşer; kalan yan-cümleler
+    // aradaki ilk ayıraçla birleşir. Kalıp satır YALNIZ hiçbir yan-cümle kalmazsa.
+    // İddia TESPİTİ cümle kapsamında (extractClaims ile aynı); SİLME kararında
+    // belirsiz anahtarın çapası YAN-CÜMLENİN KENDİSİNDE aranır. Ölçüldü: cümle
+    // kapsamı phoenix-c NR'de ("R7'de yine aynı açıdan öldün — bir sonraki round
+    // A Heaven'da aynı pozisyonda bekleme, off-angle al…") çapa ("R7/yine") ilk
+    // yan-cümlede olduğu için ÖĞÜT yan-cümlesini silip geriye yalnız geçmiş-zaman
+    // ölüm satırını bırakıyordu (Cycle 3'ün "öneri alanında ölüm kalıbı" dersi).
     const sentences = result.split(/(?<=[.!?])\s+/);
-    const safe = sentences.filter(
-      (sent) => !REPETITION_KEYWORDS.some((k) => sent.toLowerCase().includes(k)),
-    );
+    const safe: string[] = [];
+    for (const sent of sentences) {
+      if (repetitionKeyIn(sent, sent) === undefined) { safe.push(sent); continue; }
+      const mEnd = /[.!?]+$/.exec(sent);
+      const body = mEnd ? sent.slice(0, mEnd.index) : sent;
+      const end = mEnd ? mEnd[0] : "";
+      const parts = body.split(/(\s*[;—]\s*)/);          // [yan0, ayıraç0, yan1, …]
+      let rebuilt = "";
+      let pendingSep = "";
+      let firstDropped = false;
+      for (let i = 0; i < parts.length; i += 2) {
+        const clause = parts[i];
+        if (!clause.trim() || repetitionKeyIn(clause, clause) !== undefined) {
+          if (i === 0) firstDropped = true;
+          continue;
+        }
+        rebuilt += (rebuilt ? pendingSep : "") + clause;
+        pendingSep = parts[i + 1] ?? "";
+      }
+      rebuilt = rebuilt.trim();
+      if (!rebuilt) continue;                             // cümlenin tamamı iddiaydı
+      if (firstDropped) {
+        rebuilt = rebuilt.replace(/^([a-zçğıöşü])/u, (c) => (isTr ? c.toLocaleUpperCase("tr-TR") : c.toUpperCase()));
+      }
+      safe.push(rebuilt + end);
+    }
     result = safe.join(" ").trim();
     if (!result) {
       // Cycle 3 (council 2026-06-26): a nextRoundSuggestion must NOT be replaced

@@ -574,5 +574,50 @@ console.log("\n════ B02 · ÖLÇÜLMÜŞ KONUM KORUMASI (TR-KALAN-16) �
     realityCheck(c82, [] as never, { hasDeathLocation: true, deathLocation: ["a main", "b link"] } as never, "generic", "tr", "Fracture").text, c82);
 }
 
+// ═══════════════════════════════════════════════════════════════════
+console.log("\n════ B02 · TEKRAR-ANAHTARI + YAN-CÜMLE SİLME (TR-KALAN-25) ════");
+// ═══════════════════════════════════════════════════════════════════
+{
+  const STUB = "Bu round beklenen açıdan vuruldun.";
+  const run = (s: string, m: Mem[], kind: "death" | "suggestion" = "death") =>
+    realityCheck(s, m as never, undefined, kind, "tr").text;
+  // 83 — phoenix-c (canlı raw): "aynı pozisyonda beklerken" BU round'un betimi.
+  //      HEAD: tüm DA → kalıp satır.
+  {
+    const out = run("Açıyı sabit tutma; A Heaven'da aynı pozisyonda beklerken Jett seni oradan öldürdü — savunmada aynı açıda sabit durup bekleme, off-angle al ya da pozisyon değiştir.", mem(6, 0));
+    t("83 phoenix-c kalıp satır DEĞİL, 'Jett seni oradan öldürdü' korunur", out !== STUB && out.includes("Jett seni oradan öldürdü"), `→ "${out}"`);
+  }
+  // 84 — skye-b (canlı raw): "tekrar" çapası ÖĞÜT yan-cümlesinde ("tekrar durma");
+  //      "aynı pozisyonda beklerken" bu round'un betimi → hiçbir yan-cümle silinmez.
+  //      HEAD: kalıp satır.
+  const c84 = "Rakipler açıyı tuttu; Jett/Reyna seni aynı pozisyonda beklerken o açıdan vurdular — savunmada aynı siper yanında tekrar durma, farklı off-angle veya geriye çekilerek bekle.";
+  same("84 skye-b kalıp satır DEĞİL (betim + öğüt korunur)", run(c84, mem(4, 0)), c84);
+  // 84b — yan-cümle silme: çapası KENDİ yan-cümlesinde olan iddia düşer, öğüt kalır.
+  eq("84b çapalı iddia yan-cümlesi düşer, öğüt kalır",
+    run("R2'de ve R3'te sürekli aynı pozisyonda öldün; bir sonraki round off-angle al.", mem(4, 0)),
+    "Bir sonraki round off-angle al.");
+  // 84c — phoenix-c NR (canlı raw): çapa ilk yan-cümlede, belirsiz anahtar ÖĞÜTTE →
+  //       öğüt SİLİNMEZ (öneri alanı geçmiş-zaman ölüm satırına inmez).
+  const c84c = "R7'de yine aynı açıdan öldün — bir sonraki round A Heaven'da aynı pozisyonda bekleme, off-angle al veya Heaven ile Hell arasında yer değiştirip Jett'in dash'ine karşı trade hazırla.";
+  same("84c phoenix-c NR öğüt yan-cümlesi korunur", run(c84c, mem(6, 1, null as never), "suggestion"), c84c);
+  // 85 — M1-R16 (gerçek maç raw), kanıtsız hafıza: 'hep aynı' yan-cümlesi düşer. HEAD: kalıp satır.
+  const m16 = "A Lobby'de sabit bir açı tuttun — savunmada Jett olarak burada öldün çünkü aynı yükseklik/konumla hep aynı açıyı veriyorsun; açıyı değiştir ve Heaven/Generator tarafına ani off-angle alarak bekle.";
+  eq("85 M1-R16 kanıtsız → yan-cümle silme",
+    run(m16, mem(13, 0)), "A Lobby'de sabit bir açı tuttun — açıyı değiştir ve Heaven/Generator tarafına ani off-angle alarak bekle.");
+  // 85b — gerçek rh (13 round'un 13'ünde ölüm, 9'u konumlu): tekrar iddiası KANITLI → bayt-aynı.
+  {
+    const rh: Mem[] = Array.from({ length: 13 }, (_, i) => ({
+      round_index: i + 1, died: true, death_position: i < 9 ? "B Site" : null, position_confidence: i < 9 ? "high" : undefined,
+    }));
+    same("85b M1-R16 gerçek hafıza → bayt-aynı", run(m16, rh), m16);
+  }
+  // 86 — öğütteki 'sürekli' (çapasız) tekrar iddiası DEĞİL. HEAD: kalıp satır.
+  const c86 = "A Lobby'de öldün, Heaven'a crossfire koy ve pozisyonu sürekli değiştir.";
+  same("86 öğüt 'sürekli değiştir' bayt-aynı", run(c86, mem(5, 0)), c86);
+  // 87-88 — KİLİT: kanıtsız çapraz-round iddiası hâlâ nötrlenir.
+  eq("87 'Son maçlarda sürekli aynı pozisyonda öldün.' kanıt yok → nötr", run("Son maçlarda sürekli aynı pozisyonda öldün.", mem(5, 0)), STUB);
+  eq("88 aynı metin suggestion → '' (route orijinali korur)", run("Son maçlarda sürekli aynı pozisyonda öldün.", mem(5, 0), "suggestion"), "");
+}
+
 console.log(`\n${fail === 0 ? "TAM YEŞİL" : "KIRMIZI"} — ${n - fail}/${n} geçti${fail ? `, ${fail} HATA` : ""}`);
 process.exit(fail ? 1 : 0);
