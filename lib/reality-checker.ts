@@ -106,6 +106,12 @@ export interface FactGround {
   // Vision route TEK round → string; report route TÜM round'ların konumları → string[]
   // (rapor ÖZETİ birçok round'un konumuna atıfta bulunur; hepsi korunmalı).
   deathLocation?: string | string[];
+  // TR-KALAN-16 (2026-09-23): ÖLÇÜLMÜŞ konumların TAMAMI — deathLocation +
+  // roundHistory[].death_position (düz toLowerCase). realityCheck kendisi doldurur;
+  // guardUnprovenFacts'in konum-yokken döngüsü bu adlara DOKUNMAZ ("R1'de B
+  // Generator'da öldün" geçmişin ölçülmüş gerçeğidir). Opsiyonel: doğrudan
+  // çağıranlar ve rapor route'u bayt-aynı kalır (verilmezse muafiyet yok).
+  measuredLocations?: string[];
 }
 
 // ── Claim Extraction ──
@@ -1345,26 +1351,38 @@ export function guardUnprovenFacts(
   // hasDeathLocation=true iken DOKUNMA. Yön ("arkadan geldi") lokatif değil → güvenli.
   if (factGround.hasDeathLocation === false) {
     const DEATH_AT_VERBS = "(öldün|öldürüldün|vuruldun|düştün|yakalandın|kaldın|öldürdü|vurdu|düşürdü|kesti|indirdi)";
+    // TR-KALAN-16 (2026-09-23): ÖLÇÜLMÜŞ konum (bu round + geçmiş round'lar)
+    // DOKUNULMAZ — "masaüstünün ölçtüğü konum asla silinmez" ilkesi
+    // (stripForeignCallouts) bu döngüde yalnız hiç uygulanmıyordu:
+    // rh 'b generator' iken "R1'de B Generator'da öldün." → "R1'de B öldün.".
+    const measured = new Set((factGround.measuredLocations ?? []).map((m) => m.trim().toLowerCase().replace(/\s+/g, " ")));
+    const isMeasured = (name: string) => measured.has(name.trim().toLowerCase().replace(/\s+/g, " "));
     for (const pos of POSITION_NAMES) {
+      // Bileşik callout'un SİTE HARFİ de tüketilir (öksüz "B" kalmasın): çıplak
+      // "generator" eşleşince "B Generator'da" → "B " artığı bırakıyordu.
+      // Türkçe-\b TUZAĞI: \p{L} lookbehind (dosya konvansiyonu).
       const re = new RegExp(
-        `\\b${escapeRe(pos)}\\s*['’]?\\s*(?:d[ae]|t[ae])\\s+([^.!?]{0,30}?)${DEATH_AT_VERBS}`,
-        "gi",
+        `(?<![\\p{L}])((?:[abc]\\s+)?${escapeRe(pos)})\\s*['’]?\\s*(?:d[ae]|t[ae])\\s+([^.!?]{0,30}?)${DEATH_AT_VERBS}`,
+        "giu",
       );
-      result = result.replace(re, (_m: string, mid: string, verb: string) => `${mid}${verb}`);
+      result = result.replace(re, (m: string, name: string, mid: string, verb: string) =>
+        (isMeasured(name) ? m : `${mid}${verb}`));
       // EN aynası (denetim 2026-07-19 F8): "you died at B Main" EN çıktıda
       // süzülmüyordu. TR guard'la aynı sözleşme: ölüm-fiili KALIR, yalnız uydurma
       // YER düşer. Ölüm-fiiline çapalı → "hold the angle at B Main" öğüdü
       // DOKUNULMAZ. Yalnız geçmiş-iddia formları ("get caught" öğüt formu yok).
+      // TR-KALAN-16: ölçülmüş konum burada da muaf (aynı ilke, iki dil).
       const reEnA = new RegExp(
-        `\\b(died|was killed|got killed|was shot|got shot|was caught|got caught|went down)\\s+(?:at|in|near|on)\\s+${escapeRe(pos)}(?![a-z0-9-])`,
+        `\\b(died|was killed|got killed|was shot|got shot|was caught|got caught|went down)\\s+(?:at|in|near|on)\\s+(${escapeRe(pos)})(?![a-z0-9-])`,
         "gi",
       );
-      result = result.replace(reEnA, "$1");
+      result = result.replace(reEnA, (m: string, v: string, name: string) => (isMeasured(name) ? m : v));
       const reEnB = new RegExp(
-        `\\b(killed|shot|caught|picked)\\s+you(\\s+off)?\\s+(?:at|in|near|on)\\s+${escapeRe(pos)}(?![a-z0-9-])`,
+        `\\b(killed|shot|caught|picked)\\s+you(\\s+off)?\\s+(?:at|in|near|on)\\s+(${escapeRe(pos)})(?![a-z0-9-])`,
         "gi",
       );
-      result = result.replace(reEnB, "$1 you$2");
+      result = result.replace(reEnB, (m: string, v: string, off: string | undefined, name: string) =>
+        (isMeasured(name) ? m : `${v} you${off ?? ""}`));
     }
   }
 
@@ -1535,9 +1553,26 @@ export function stripForeignCallouts(
   for (const c of knownMapCallouts) pool.add(c);
   const ordered = [...pool].sort((a, b) => b.length - a.length);
   const ALT = ordered.map(escapeRe).join("|");
+  // SİTE-HARFİ BESTESİ (TR-KALAN-17, 2026-09-23): masaüstü resolve() adım-2
+  // (aimlo-desktop src-tauri/src/callouts.rs:346-360) kanonik tek kelimeyi site
+  // harfiyle birleştiriyor ('a' + 'tree' → "a tree"); backend aynı bileşiği
+  // "yabancı" sayıp siliyordu: Ascent'te "A Tree" (real-rounds-23'te rh'de 19 kez,
+  // deathLocation olarak 1 kez — OCR gerçeği), çünkü tabloda yalnız çıplak "tree"
+  // var ve "a tree" Lotus'ta KANITLI. Ayna: "<a|b|c> <w>" ve w bu haritada meşru
+  // ise KORU. CROSS-MAP KAPISI AÇILMASIN diye tek şart daha: haritanın tablosunda
+  // w'nin BAŞKA harfli bir biçimi YOKSA ("long" Bind'da yalnız "b long" olarak
+  // var → "A Long"/"C Long" Bind'da hâlâ yabancı; Lotus'ta çıplak "short" yok →
+  // "A Short" hâlâ siliniyor).
+  const letteredWords = new Set<string>();
+  if (k) for (const c of MAP_CALLOUTS[k]) {
+    const m = /^[abc]\s+(.+)$/.exec(c.toLowerCase());
+    if (m) letteredWords.add(m[1]);
+  }
   const keepIfLegit = (whole: string, name: string) => {
     const n = name.trim().toLowerCase();
     if (legit.has(n)) return whole; // bu haritaya ait / evrensel / gönderilen konum
+    const lettered = /^[abc]\s+(.+)$/.exec(n);
+    if (k && lettered && legit.has(lettered[1]) && !letteredWords.has(lettered[1])) return whole;
     // YALNIZ ÇOK-KELİMELİ yabancı callout'ları sil (2026-07-24, konsey rank-5).
     // Çıplak tek kelimeler ("tree", "mid", "link", "market", "garden") hem sık
     // gündelik kelime hem birleşik-callout çekirdeği — silmek çok fazla meşru
@@ -1758,12 +1793,19 @@ export function realityCheck(
   let text = outputText;
   let rewriteLevel = 1;
 
+  // ÖLÇÜLMÜŞ KONUMLAR (TR-KALAN-16, 2026-09-23) — bu round'un deathLocation'ı +
+  // geçmiş round'ların death_position'ları. Masaüstünün ölçtüğü konum HİÇBİR
+  // katmanda silinmez; eskiden yalnız bu round'unki muaftı ve canlı r4-a'da
+  // "(R1 A Hall, R2 B Generator, R3 B Link)" → "(…, R3 )", M1-R4'te "A Tree
+  // yanında durdun" → "yanında durdun" (20 ayrı cycle final'i) oluyordu.
+  const measured = suppliedLocationSet(factGround?.deathLocation, roundHistory);
+
   // Yabancı-harita callout ayıklaması — EN BAŞTA çalışır ki sonraki guard'lar
   // zaten temizlenmiş metin üzerinde işlesin (uydurma yer adı hiçbir aşamaya
-  // sızmasın). Harita bilinmiyorsa no-op. Masaüstünün gönderdiği ölüm yeri
-  // (factGround.deathLocation) HER ZAMAN korunur — tablo eksik olsa bile.
+  // sızmasın). Harita bilinmiyorsa no-op. Ölçülmüş konumlar HER ZAMAN korunur —
+  // tablo eksik olsa bile.
   if (map) {
-    const stripped = stripForeignCallouts(text, map, factGround?.deathLocation);
+    const stripped = stripForeignCallouts(text, map, [...measured]);
     if (stripped !== text) {
       text = stripped;
       rewriteLevel = Math.max(rewriteLevel, 2);
@@ -1774,7 +1816,7 @@ export function realityCheck(
   // (round 1) because it validates against the current round's facts, not the
   // match's past memory.
   if (factGround) {
-    const guarded = guardUnprovenFacts(text, factGround, lang);
+    const guarded = guardUnprovenFacts(text, { ...factGround, measuredLocations: [...measured] }, lang);
     if (guarded !== text) {
       text = guarded;
       rewriteLevel = Math.max(rewriteLevel, 2);
@@ -1801,12 +1843,8 @@ export function realityCheck(
   // hâliyle görür → claimedPosition ve rewriteLevel bayt-aynı kalır.
   // hasDeathLocation !== false iken (ölçüldü / bayrak hiç verilmedi) HİÇ çalışmaz
   // → konum okunan her round ve bayrağı set etmeyen her çağıran bayt-aynı.
-  // NOT (bilinen sınır): guardUnprovenFacts :854-861 döngüsü DAHA ÖNCE koşuyor ve
-  // POSITION_NAMES'teki adı ölüm-fiili çapasıyla ZATEN söküyor ("R2 B Generator'da
-  // öldün" → "R2 B öldün"); o öksüz-parça sorunu bu katmanın DEĞİL, :854'ün işidir.
   if (factGround?.hasDeathLocation === false) {
-    const supplied = suppliedLocationSet(factGround.deathLocation, roundHistory);
-    const neutralized = neutralizeUnprovenLocations(text, supplied);
+    const neutralized = neutralizeUnprovenLocations(text, measured);
     if (neutralized !== text) {
       text = neutralized;
       rewriteLevel = Math.max(rewriteLevel, 2);

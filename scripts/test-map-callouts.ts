@@ -124,5 +124,25 @@ console.log("\n[10] CROSS-MAP KAPISI — hiçbir tabloda olmayan ad, SUPPLIED OL
   t("Lotus'ta yabancı 'B Lanes' (Ascent callout'u) silindi", !/b lanes/i.test(d3), `→ "${d3}"`);
 }
 
+console.log("\n[11] SİTE-HARFİ BESTESİ (TR-KALAN-17, 2026-09-23) — masaüstü resolve() aynası");
+{
+  // HEAD: "öldün." — Ascent tablosunda yalnız çıplak "tree" var, "a tree" Lotus'ta
+  // KANITLI olduğu için cross-map kapısı siliyordu (real-rounds-23'te rh'de 19 kez).
+  const a = "A Tree'de öldün.";
+  const d = stripForeignCallouts(a, "ascent");
+  t("Ascent 'A Tree' (harf + meşru çıplak 'tree') KORUNDU", d === a, `→ "${d}"`);
+  // Cross-map kapısı AÇILMADI: Lotus'ta çıplak "short" yok → hâlâ yabancı.
+  const l = stripForeignCallouts("A Short'ta öldün.", "lotus");
+  t("Lotus 'A Short' hâlâ siliniyor", !/a short/i.test(l), `→ "${l}"`);
+  // Harfin BAŞKA biçimi haritada varsa ("long" Bind'da yalnız "b long") beste YOK.
+  const b = stripForeignCallouts("C Long'da öldün.", "bind");
+  t("Bind 'C Long' hâlâ siliniyor (tabloda yalnız 'b long')", !/c long/i.test(b), `→ "${b}"`);
+  const b2 = stripForeignCallouts("A Long'da öldün.", "bind");
+  t("Bind 'A Long' hâlâ siliniyor", !/a long/i.test(b2), `→ "${b2}"`);
+  // Harita bilinmiyorsa beste uygulanmaz (meşru küme yalnız evrensel + gönderilen).
+  const u = stripForeignCallouts("A Tree'de öldün.", "Unknown");
+  t("Unknown haritada 'A Tree' (Lotus'ta kanıtlı) eskisi gibi siliniyor", !/a tree/i.test(u), `→ "${u}"`);
+}
+
 console.log(`\n══════ ${fail === 0 ? "✅ TÜMÜ GEÇTİ" : `❌ ${fail} BAŞARISIZ`} ══════\n`);
 if (fail > 0) process.exit(1);

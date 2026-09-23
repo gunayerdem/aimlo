@@ -524,5 +524,50 @@ console.log("\n════ B02 · PENCERE + SAYIM İDDİASI (TR-KALAN-14/15) �
   }
 }
 
+// ═══════════════════════════════════════════════════════════════════
+console.log("\n════ B02 · ÖLÇÜLMÜŞ KONUM KORUMASI (TR-KALAN-16) ════");
+// ═══════════════════════════════════════════════════════════════════
+{
+  const rhR4: Mem[] = [
+    { round_index: 1, died: true, death_position: "a hall", position_confidence: "high" },
+    { round_index: 2, died: true, death_position: "b generator", position_confidence: "high" },
+    { round_index: 3, died: true, death_position: "b link", position_confidence: "high" },
+  ];
+  // 77 — r4-a (canlı): stripForeignCallouts ölçülmüş GEÇMİŞ konumu siliyordu.
+  //      HEAD: "…(R1 A Hall, R2 B Generator, R3 ) — …"
+  {
+    const out = realityCheck("Son 3 round'da her round öldün (R1 A Hall, R2 B Generator, R3 B Link) — bu round da post-plant'te A Link'te öldü; rakip farklı açılarda seni yakalıyor.",
+      rhR4 as never, { hasSpike: false, spikeObservedPlanted: true, hasDeathLocation: true, deathLocation: "a link" } as never, "suggestion", "tr", "fracture").text;
+    t("77 r4-a '(R1 A Hall, R2 B Generator, R3 B Link)' korunur", out.includes("(R1 A Hall, R2 B Generator, R3 B Link)"), `→ "${out}"`);
+  }
+  // 78 — M1-R4 (gerçek maç korpusu, 20 cycle final'i): HEAD "yanında durdun…"
+  {
+    const rhM4: Mem[] = [
+      { round_index: 1, died: true, death_position: "b site", position_confidence: "high" },
+      { round_index: 2, died: true, death_position: null },
+      { round_index: 3, died: true, death_position: "a tree", position_confidence: "high" },
+    ];
+    const src = "A Tree yanında durdun ve aynı round içinde savunmada sabit kaldın — açıkta değildin ama o sipere yakın duruşunu rakip açıdan okuyup seni oradan vurdu.";
+    const out = realityCheck(src, rhM4 as never, { hasDeathLocation: false, hasKiller: true } as never, "death", "tr", "ascent").text;
+    t("78 M1-R4 'A Tree yanında durdun…' korunur", out.startsWith("A Tree yanında durdun"), `→ "${out}"`);
+  }
+  const noLoc = { hasDeathLocation: false } as never;
+  const rhGen: Mem[] = [{ round_index: 1, died: true, death_position: "b generator", position_confidence: "high" }];
+  // 79 — HEAD: "R1'de B öldün." (döngü rh'ye bakmıyordu + öksüz "B")
+  same("79 rh 'b generator' → bayt-aynı",
+    realityCheck("R1'de B Generator'da öldün.", rhGen as never, noLoc, "death", "tr").text, "R1'de B Generator'da öldün.");
+  // 80 — ölçülmemişse konum düşer ama SİTE HARFİ de gider (öksüz "B" yok). HEAD: "R1'de B öldün."
+  eq("80 rh boş → \"R1'de öldün.\" (öksüz B yok)",
+    realityCheck("R1'de B Generator'da öldün.", [] as never, noLoc, "death", "tr").text, "R1'de öldün.");
+  // 81 — EN aynası aynı ilke: ölçülmüş konum muaf, ölçülmemiş düşer.
+  const rhMain: Mem[] = [{ round_index: 1, died: true, death_position: "b main", position_confidence: "high" }];
+  same("81 EN rh 'b main' → bayt-aynı", realityCheck("You died at B Main.", rhMain as never, noLoc, "death", "en").text, "You died at B Main.");
+  eq("81b EN rh boş → 'You died.'", realityCheck("You died at B Main.", [] as never, noLoc, "death", "en").text, "You died.");
+  // 82 — RAPOR ROTASI (fg.deathLocation dizisi, roundHistory = []) bayt-aynı.
+  const c82 = "A Main'de utility'siz kaldın, B Link'te de açıkta vuruldun.";
+  same("82 rapor rotası (deathLocation dizisi) bayt-aynı",
+    realityCheck(c82, [] as never, { hasDeathLocation: true, deathLocation: ["a main", "b link"] } as never, "generic", "tr", "Fracture").text, c82);
+}
+
 console.log(`\n${fail === 0 ? "TAM YEŞİL" : "KIRMIZI"} — ${n - fail}/${n} geçti${fail ? `, ${fail} HATA` : ""}`);
 process.exit(fail ? 1 : 0);
