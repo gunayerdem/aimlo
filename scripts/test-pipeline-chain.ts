@@ -23,7 +23,8 @@
  *   → cleanCoachText(lang)
  *     └─ içinde: stripNumericHp → stripHpClaims → plainifyAbilities → TR jargon
  *   → enforceAgentKit(agent)
- *   → clampWords (350)
+ *   (B03/2: zincirin başına enforceAgentNames, DA'ya stripDiagnosisLabel eklendi)
+ *   → clampToSentence (350; enemyAnalysis 240)
  *   → fixCallout (enforceSuppliedCallout — gövdede deathLocation varsa)
  *
  * ASSERT BİÇİMİ — bilinçli tercih: birebir "golden string" YERİNE
@@ -38,8 +39,14 @@
  */
 import * as fs from "node:fs";
 import * as path from "node:path";
-import { buildFactGround } from "../lib/reality-checker";
-import { finalizeVisionFeedback } from "../lib/vision-postprocess";
+import { buildFactGround, realityCheck } from "../lib/reality-checker";
+import { clampToSentence, clampWords, enforceAgentNames } from "../lib/coach-text";
+import {
+  finalizeVisionFeedback,
+  visionOutputFailure,
+  VISION_ENEMY_ITEM_CAP,
+  VISION_TEXT_CAP,
+} from "../lib/vision-postprocess";
 
 let fail = 0;
 const t = (ad: string, kosul: boolean, detay = "") => {
@@ -79,6 +86,8 @@ function zincir(v: Vaka): string {
     lang: v.lang,
     map: v.map,
     agent: v.agent,
+    // route: enemyComp = body.enemyComp (ajan-adı kilidinin çapası, TR-KALAN-09).
+    enemyComp: Array.isArray(body.enemyComp) ? body.enemyComp : undefined,
     // route: suppliedLoc = body.deathLocation (ham OCR değeri → fixCallout halkası).
     suppliedLoc: typeof body.deathLocation === "string" ? body.deathLocation : "",
   });
@@ -284,7 +293,7 @@ for (const v of KORPUS) {
 }
 
 // ── Zincir-seviyesi genel sözleşmeler ───────────────────────────────────────
-console.log("\n[GENEL] clampWords KELİME sınırında keser (route .slice değil clampWords kullanır)");
+console.log("\n[GENEL] kapak (clampToSentence) kelime ortasından kesmez, cümle sınırında biter");
 {
   // 350'yi aşan tek-cümlelik metin: kelime ortasından kesilmemeli.
   const uzun = "Ascent haritasında " + "A Main'de geniş açıyla peek atıp trade alamadan düştün. ".repeat(12);
@@ -296,6 +305,152 @@ console.log("\n[GENEL] clampWords KELİME sınırında keser (route .slice deği
   t("350 karakteri aşmaz", out.length <= 350, `len=${out.length}`);
   // Kelime sınırında kesildiyse sonu boşluk/kırık-kelime olmaz (clampWords trim eder).
   t("sonu kırık boşlukla bitmez", out === out.trim(), `→ "${out.slice(-30)}"`);
+  // TR-KALAN-08: kapak ateşlese de alan TAM CÜMLE ile biter (eski clampWords 346 kr
+  // "…trade alamadan" gibi kesik bırakıyordu).
+  t("noktalama ile biter (cümle-sınırlı kapak)", /[.!?…]["'”’)\]]*$/.test(out), `→ "${out.slice(-30)}"`);
+}
+
+// ── CÜMLE-SINIRLI KAPAK (TR-KALAN-08, 2026-09-23) ───────────────────────────
+// Fixture'lar scripts/eval-out korpusundaki GERÇEK süzülmüş (kapak-öncesi) metinler.
+console.log("\n[TR-KALAN-08] clampToSentence — monoton sözleşme");
+{
+  const TERM = /[.!?…]["'”’)\]]*$/;
+  // r2-b EA[1] (cycletr-cards): ham 206 → süzgeç sonrası 212 kr. 180 kapağında
+  // clampWords "…böylece Yoru'nun tek" diye kesiyordu (HEAD replay kanıtı).
+  const r2b = "Plant sonrası B Generator köşesini çapraz tutacak birini al ya da Jett smoke ile site içine girip kutu arkası ya da duvar kenarı gibi kapalı bir açıya geç, böylece Yoru'nun tek açılı temizlemesini zorlaştırırsın.";
+  t("kırpılmayan metin bayt-aynı (kapak 240)", clampToSentence(r2b, VISION_ENEMY_ITEM_CAP) === r2b);
+  t("EA kapağı 240 (ölçülen TR tavanı 212 kesilmez)", VISION_ENEMY_ITEM_CAP === 240 && r2b.length <= VISION_ENEMY_ITEM_CAP);
+  t("DA/NR kapağı 350 (değişmedi)", VISION_TEXT_CAP === 350);
+  // 180'e zorlanınca: tek sınır virgül ("geç, böylece") → virgül sınır DEĞİL ve nokta
+  // uydurulmaz → çıktı BUGÜNKÜ clampWords'e eşit (asla bugünden kötü değil).
+  t("r2-b @180: sınır yok → clampWords'e eşit (monoton)", clampToSentence(r2b, 180) === clampWords(r2b, 180),
+    `→ "${clampToSentence(r2b, 180).slice(-40)}"`);
+  // Doğrulayıcının 180 kapağında "SİLİNİYOR" dediği 3 madde: artık asla boş değil.
+  const nonEmpty: [string, string][] = [
+    ["know-d", "Raze'in patlayıcı util'leri A Site'ın sıkışık açılarında etkili, A Garden ya da CT eksenini bir ekip arkadaşıyla crossfire olarak tut veya molly ya da flash ile alanı daraltıp cevap ver."],
+    ["E7", "Do not retake or hold the planted spike alone from the open back angle — have your teammate anchor the close defuse lane so you can trade or use Viper molly/smoke to block that sightline."],
+    ["E16", "Against Raze on A, stop holding a fixed right-side angle solo and either swap to an off-angle toward Lamps or fall back behind a Brimstone smoke so she can't re-peek you for a clean duel."],
+  ];
+  for (const [id, x] of nonEmpty) {
+    const o = clampToSentence(x, 180);
+    t(`${id} @180 boş dönmez; clampWords'e eşit ya da girdinin öneki`,
+      o.trim().length > 0 && (o === clampWords(x, 180) || x.startsWith(o)), `→ "${o}"`);
+  }
+  // ";" yan-cümle sınırı: M1-R9 EA[1] (cycleab-base) — yarım "…seni tek" yerine tam yan-cümle.
+  const r9 = "Bir oyuncu kadrosundan Jett'e karşı op veya uzun hat açan birini koyduysa, onun görüş hattını smoke ile kapatıp farklı bir açıdan çık; yoksa takımınla crossfire kur ve seni tek açıdan tutmalarını engelle.";
+  const r9o = clampToSentence(r9, 180);
+  t("';' sınırı: yan-cümle bütün kalır, ayraç atılır, nokta UYDURULMAZ",
+    r9o === "Bir oyuncu kadrosundan Jett'e karşı op veya uzun hat açan birini koyduysa, onun görüş hattını smoke ile kapatıp farklı bir açıdan çık", `→ "${r9o}"`);
+  // Sıra sayısı "3." cümle sonu DEĞİL (eski yama "…aynı açıya 3." üretiyordu).
+  const ord = "Bu round A Tree'yi bırak, Heaven veya Generator'a çekil ve orada off-angle ile bekle — aynı açıya 3. kez düşme, rotasyonla pozisyonu değiştir.";
+  for (const cap of [120, 125, 138]) {
+    const o = clampToSentence(ord, cap);
+    t(`'3.' ile bitmez (kapak ${cap})`, !/3\.$/.test(o), `→ "${o}"`);
+  }
+  // Virgül sınır DEĞİL: "X değil, Y kullan" karşıtlığı virgülden kesilip "değil." olmaz.
+  const neg = "Mid'den execute başlat ve dash'i ilk temasta değil, util patladıktan sonra kullan.";
+  t("'…değil, … kullan.' virgülden kesilmez", !/değil\.?$/.test(clampToSentence(neg, 60)), `→ "${clampToSentence(neg, 60)}"`);
+  // Kısaltma noktası cümle sonu değil.
+  const abbr = "Smoke, flash vb. util'i takımla senkron kullanıp site'a birlikte gir ve trade mesafesini koru ki tek tek düşmeyesin.";
+  t("'vb.' ile bitmez", !/vb\.$/.test(clampToSentence(abbr, 60)), `→ "${clampToSentence(abbr, 60)}"`);
+  // DA 350 GERÇEK ateşleme biçimi (cyclereal-r3 M1-R18, etiket soyulmuş hâli uzatıldı).
+  const da = "Mid Link'te aynı açık açıda durup savunmayı tek bir hatta tutmuşsun; geniş savunma açısı tutma pozisyonda bir düşman olarak orada beklerken rakip seni öldürdü — Heaven ya da Market rotasını kontrol eden takım seni o hatta bekliyor. Bir sonraki round Mid Link'te sabit bekleyip aynı açıyı tutma, pozisyonu değiştirip Heaven veya Catwalk'i görecek off-angle al ve bu açının bir sonraki round da okunmasını engelle.";
+  const dao = clampToSentence(da, 350);
+  t("DA 350 ateşleyince TAM cümle ile biter", TERM.test(dao) && dao.length <= 350 && da.startsWith(dao), `→ "…${dao.slice(-40)}"`);
+  // Sarkan bağlaç (sınır yoksa): yalnız bağlaç atılır, nokta KONMAZ.
+  const dang = "Yanına birini çek ve takım util'ini bekle sonra birlikte gir ve fazladan uzatma metni buraya kadar";
+  t("sarkan bağlaç atılır, nokta uydurulmaz",
+    clampToSentence(dang, 66) === "Yanına birini çek ve takım util'ini bekle sonra birlikte gir",
+    `→ "${clampToSentence(dang, 66)}"`);
+}
+
+// ── AJAN-ADI KİLİDİ zincirde İLK halka (TR-KALAN-09) ───────────────────────
+console.log("\n[TR-KALAN-09] bozuk ajan adı realityCheck'ten ÖNCE kanonikleşir");
+{
+  const fg = buildFactGround({}, {});   // killerInfo YOK → hasKiller=false
+  const direct = realityCheck(enforceAgentNames("Rejyna seni vurdu, açıyı tut.", ["Jett", "Reyna"]), [], fg, "death", "tr");
+  t("realityCheck(enforceAgentNames('Rejyna seni vurdu…')) → katil-guard Reyna'yı görür",
+    direct.text === "Bir düşman seni vurdu, açıyı tut.", `→ "${direct.text}"`);
+  const out = zincir({
+    ad: "rejyna", kaynak: "HEAD trace (TR-KALAN-09)", metin: "Rejyna seni vurdu, açıyı tut.",
+    kind: "death", lang: "tr", map: "Ascent", agent: "Sage",
+    body: { died: true, enemyComp: ["Jett", "Reyna"] },
+  });
+  t("zincir: uydurma katil iddiası kullanıcıya GİTMEZ", !/Rejyna|Reyna/.test(out) && out.includes("Bir düşman seni vurdu"), `→ "${out}"`);
+  const ea = finalizeVisionFeedback(
+    { deathAnalysis: "Açıyı erken verdin.", enemyAnalysis: ["Eğer Jett varsa köşe dönüşlerinde dash bekle, Reına varsa agresif girişlerde körlük ya da sersemletmeyle önce onu dışarı çıkar."], nextRoundSuggestion: "Reğu varsa sersem sonrası peek at." },
+    { factGround: buildFactGround({ died: true, killerInfo: "killed by jett with vandal" }, {}), lang: "tr", map: "Ascent", agent: "Skye", enemyComp: ["Jett", "Reyna"] },
+  );
+  t("EA: 'Reına varsa' → 'Reyna varsa' (koşullu tavsiye korunur)", !!ea.enemyAnalysis[0]?.includes("Reyna varsa agresif"), `→ ${JSON.stringify(ea.enemyAnalysis)}`);
+  t("NR: 'Reğu varsa' → 'Reyna varsa'", ea.nextRoundSuggestion.startsWith("Reyna varsa"), `→ "${ea.nextRoundSuggestion}"`);
+}
+
+// ── TANI ETİKETİ yalnız deathAnalysis'ten soyulur (TR-KALAN-07 bağlaması) ──
+console.log("\n[TR-KALAN-07] deathAnalysis rapor etiketiyle açılmaz");
+{
+  const da = zincir({
+    ad: "etiket", kaynak: "HEAD replay (cycleab-base M1-R9)", metin: "En kritik neden: savunmada aynı pozisyonda kaldın.",
+    kind: "death", lang: "tr", map: "Ascent", agent: "Jett", body: { died: true, killerInfo: "killed by jett with vandal" },
+  });
+  t("'En kritik neden:' → 'Savunmada aynı pozisyonda kaldın.'", da === "Savunmada aynı pozisyonda kaldın.", `→ "${da}"`);
+  const kb = zincir({
+    ad: "kb-başlık", kaynak: "HEAD replay (M1-R3b)", metin: "En kritik kök: okunabilirlik sızıntısı — B site'te açıkta kaldın ve takım util'ini beklemeden girdin.",
+    kind: "death", lang: "tr", map: "Ascent", agent: "Jett", body: { died: true, killerInfo: "killed by jett with vandal", deathLocation: "b site" }, ctx: { deathLocation: "b site" },
+  });
+  t("KB başlığı parçası da düşer ('okunabilirlik sızıntısı —')", kb.startsWith("B site'te açıkta kaldın"), `→ "${kb}"`);
+  const en = zincir({
+    ad: "en", kaynak: "cycle3 EN korpusu", metin: "Root cause: you held the same angle and got punished.",
+    kind: "death", lang: "en", map: "Ascent", agent: "Jett", body: { died: true, killerInfo: "killed by jett with vandal" },
+  });
+  t("EN 'Root cause:' soyulur", en.startsWith("You held the same angle"), `→ "${en}"`);
+  const legit = "Bu round'un en kritik anı A girişiydi.";
+  const legitOut = zincir({ ad: "meşru", kaynak: "B01 negatif fixture", metin: legit, kind: "death", lang: "tr", map: "Ascent", agent: "Jett", body: { died: true, killerInfo: "killed by jett with vandal" } });
+  t("cümle içi meşru 'en kritik anı' dokunulmaz", legitOut.includes("en kritik anı"), `→ "${legitOut}"`);
+}
+
+// ── BOŞ-GUARD: süzgeç DA'yı boşaltırsa HAM metin DÖNMEZ (CANLI-TEST-07) ─────
+console.log("\n[CANLI-TEST-07] süzülüp boşalan deathAnalysis → yapısal hata, ham metin yok");
+{
+  const fg = buildFactGround({}, {});
+  for (const raw of ["(41 HP)", "41 HP ile.", "Ölüm yeri OCR verisinde yok."]) {
+    const o = finalizeVisionFeedback({ deathAnalysis: raw, enemyAnalysis: [], nextRoundSuggestion: "Açıyı tut." }, { factGround: fg, lang: "tr" });
+    t(`"${raw}" → deathAnalysis "" (ham/tek-nokta DEĞİL)`, o.deathAnalysis === "", `→ "${o.deathAnalysis}"`);
+    const f = visionOutputFailure(o);
+    const body = JSON.stringify(f);
+    t(`"${raw}" → ai_invalid_shape 502; gövdede kullanıcı metni ve "Analiz yapılamadı." YOK`,
+      !!f && f.code === "ai_invalid_shape" && f.status === 502 && !body.includes("Analiz yapılamadı.") && !body.includes("HP") && !body.includes("OCR"),
+      `→ ${body}`);
+  }
+  const ok = finalizeVisionFeedback({ deathAnalysis: "Açıyı erken verdin, geri çekil.", enemyAnalysis: [], nextRoundSuggestion: "Açıyı tut." }, { factGround: fg, lang: "tr" });
+  t("normal deathAnalysis → hata YOK, metin bayt-aynı", visionOutputFailure(ok) === null && ok.deathAnalysis === "Açıyı erken verdin, geri çekil.", `→ "${ok.deathAnalysis}"`);
+}
+
+// ── TR-KALAN-26 (karar b): kanıtsız EA maddesi düşer, SON madde asla ─────────
+console.log("\n[TR-KALAN-26] tümüyle kanıtsız enemyAnalysis maddesi düşer; dizi asla boşalmaz");
+{
+  // roundHistory'de A/B Site'ta TEKRAR eden ölüm YOK → "tekrar eden" iddiası kanıtsız;
+  // realityCheck(suggestion) maddeyi tümüyle boşaltır (eskiden HAM metin geri konuyordu).
+  const rh = [{ round_index: 1, died: true, death_position: "A Main", position_confidence: "high" }, { round_index: 2, died: false }];
+  const kanitsiz = "Düşman A Site'taki tekrar eden açını okuyup seni orada öldürdü.";
+  const kanitsiz2 = "Savunma B Site çevresinde tekrar eden girişlerini okuyup aynı tehdidi bekliyor.";
+  const gecerli = "Jett'e karşı smoke'la açıyı kapat.";
+  const run = (ea: string[]) => finalizeVisionFeedback(
+    { deathAnalysis: "Geniş açı tuttun.", enemyAnalysis: ea, nextRoundSuggestion: "Açıyı tut." },
+    { roundHistory: rh, factGround: buildFactGround({ died: true }, {}), lang: "tr", map: "Lotus", agent: "Omen" },
+  ).enemyAnalysis;
+  const a = run([kanitsiz, gecerli]);
+  t("[kanıtsız, geçerli] → 1 madde (geçerli)", a.length === 1 && a[0] === gecerli, `→ ${JSON.stringify(a)}`);
+  const b = run([gecerli, kanitsiz]);
+  t("[geçerli, kanıtsız] → 1 madde (geçerli)", b.length === 1 && b[0] === gecerli, `→ ${JSON.stringify(b)}`);
+  const c = run([kanitsiz]);
+  t("[kanıtsız] → 1 madde (son madde korunur, dizi boşalmaz)", c.length === 1, `→ ${JSON.stringify(c)}`);
+  const d = run([kanitsiz, kanitsiz2]);
+  t("[kanıtsız, kanıtsız] → 1 madde (SON madde)", d.length === 1 && d[0] === kanitsiz2, `→ ${JSON.stringify(d)}`);
+  const nr = finalizeVisionFeedback(
+    { deathAnalysis: "Geniş açı tuttun.", enemyAnalysis: [gecerli], nextRoundSuggestion: kanitsiz2 },
+    { roundHistory: rh, factGround: buildFactGround({ died: true }, {}), lang: "tr", map: "Lotus", agent: "Omen" },
+  ).nextRoundSuggestion;
+  t("nextRoundSuggestion boşalmaz (karar: ham metin korunur)", nr.length > 0, `→ "${nr}"`);
 }
 
 // ── TEK KAYNAK KİLİDİ (OLCUM-ARACI-08, 2026-09-23) ──────────────────────────
@@ -337,6 +492,10 @@ console.log("\n[TEK KAYNAK] vision son-işlem zinciri elle kopyalanmıyor (grep-
     const src = fs.readFileSync(path.join(root, rel), "utf8");
     t(`G3 ${rel} → finalizeVisionFeedback(`, src.includes("finalizeVision" + "Feedback("));
   }
+  // CANLI-TEST-07: route boşalan deathAnalysis için yapısal hata yardımcısını çağırıyor.
+  const routeSrc = fs.readFileSync(path.join(root, "app/api/ai/vision/route.ts"), "utf8");
+  t("G4 route → visionOutputFailure(post) + errorResponse",
+    routeSrc.includes("visionOutput" + "Failure(post)") && /outputFailure\.code, outputFailure\.message, outputFailure\.status/.test(routeSrc));
 }
 
 console.log(fail === 0 ? "\n✅ ZİNCİR TESTLERİ GEÇTİ" : `\n❌ ${fail} ZİNCİR TESTİ BAŞARISIZ`);

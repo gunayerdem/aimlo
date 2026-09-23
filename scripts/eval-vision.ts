@@ -881,8 +881,11 @@ async function callModel(systemMessage: string, userPrompt: string, lang: "tr" |
  * enemyAnalysis reality-check'i, fixCallout, .filter). Zincir artık route ile
  * AYNI fonksiyondan geçer: finalizeVisionFeedback (lib/vision-postprocess.ts).
  * Bir halka değişirse eval kendiliğinden aynı zinciri ölçer — ayna sapması
- * yapısal olarak imkânsız. ÖLÇÜM TABANI: taşıma bayt-aynı (944 kayıtlı ham örnek
- * × 4 gövde varyantı = 3776 koşuda eski ayna ile birebir; golden kıyas).
+ * yapısal olarak imkânsız. ÖLÇÜM TABANI: taşıma commit'i (B03/1) bayt-aynıydı (944
+ * kayıtlı ham örnek × 4 gövde = 3776 koşuda eski ayna ile birebir); B03/2 zincire
+ * ajan-adı kilidi, DA tanı-etiketi soyucu, boş-guard, EA kanıtsız-madde düşürme ve
+ * cümle-sınırlı kapak (EA 240) ekledi → o commit'ten sonraki cycle'lar eski
+ * cycle'larla doğrudan kıyaslanmaz; replay-tr ile ham örnekten yeniden ölçülür.
  *
  * Buradaki TEK eval-özgü parça factGround kurulumudur (route ctx'i elde yok);
  * route/eval factGround paritesi B06'nın (prompt-builder tek kaynak) işidir. */
@@ -918,6 +921,7 @@ function postProcess(s: Scenario, fb: { deathAnalysis: string; enemyAnalysis: st
     lang,
     map,
     agent,
+    enemyComp: b.enemyComp as unknown[] | undefined,
     suppliedLoc: typeof b.deathLocation === "string" ? String(b.deathLocation) : "",
   });
 }

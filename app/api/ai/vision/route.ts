@@ -21,7 +21,7 @@ import { buildAgentAbilityHint, AGENT_ABILITIES } from "@/lib/agent-abilities";
 import { stripNumericHp, stripHpClaims } from "@/lib/coach-text";
 // Model-sonrası son-işlem zinciri (realityCheck → cleanCoachText → enforceAgentKit →
 // kapak → fixCallout) TEK KAYNAK: lib/vision-postprocess.ts (OLCUM-ARACI-08).
-import { finalizeVisionFeedback } from "@/lib/vision-postprocess";
+import { finalizeVisionFeedback, visionOutputFailure } from "@/lib/vision-postprocess";
 import { SYSTEM_PROMPT, SYSTEM_PROMPT_EN_ADDENDUM, USER_PROMPT, USER_PROMPT_EN, buildFactSheet, buildRoundFeedbackSchema } from "@/lib/vision-prompt";
 import { classifyDeathVaried, buildDeathTypeDirective } from "@/lib/death-type";
 import { calloutBelongsToMap } from "@/lib/map-callouts";
@@ -1787,24 +1787,36 @@ export async function POST(request: NextRequest) {
     if (isValidFeedbackShape(parsed)) {
       const fb = parsed as RoundFeedback;
 
-      // SON-İŞLEM ZİNCİRİ — TEK KAYNAK (OLCUM-ARACI-08, 2026-09-23): realityCheck →
-      // cleanCoachText → boş-guard → enforceAgentKit → clampWords → fixCallout zinciri
-      // lib/vision-postprocess.ts:finalizeVisionFeedback'e taşındı (bayt-aynı; 3776
-      // kayıtlı ham örnekte golden kıyas). eval-vision, test-pipeline-chain ve replay-tr
-      // AYNI fonksiyonu import eder → dört elle kopyalanmış ayna artık yok. factGround
-      // yukarıda buildFactGround ile kurulan, prompt fact-sheet'ini üreten AYNI nesne.
+      // SON-İŞLEM ZİNCİRİ — TEK KAYNAK (OLCUM-ARACI-08, 2026-09-23):
+      // lib/vision-postprocess.ts:finalizeVisionFeedback (enforceAgentNames → [DA:
+      // stripDiagnosisLabel] → realityCheck → cleanCoachText → boş-guard →
+      // enforceAgentKit → clampToSentence → fixCallout). eval-vision,
+      // test-pipeline-chain ve replay-tr AYNI fonksiyonu import eder → elle kopyalanmış
+      // ayna yok. factGround yukarıda buildFactGround ile kurulan, prompt fact-sheet'ini
+      // üreten AYNI nesne.
       const post = finalizeVisionFeedback(fb, {
         roundHistory,
         factGround,
         lang: reqLang,
         map: reqMap,
         agent: reqAgent,
+        // Ajan-adı kilidinin çapası (TR-KALAN-09): katil + kadro + oyuncu ajanı.
+        enemyComp: reqEnemyComp,
         suppliedLoc: typeof (body as VisionRequest).deathLocation === "string"
           ? String((body as VisionRequest).deathLocation)
           : "",
       });
       if (post.realityModified) {
         console.log(`[Aimlo AI] Reality check: deathAnalysis rewrite=${post.rewriteLevels.death}, suggestion rewrite=${post.rewriteLevels.suggestion}`);
+      }
+      // CANLI-TEST-07: süzgeç deathAnalysis'i tamamen boşalttıysa (ör. model yalnız
+      // "(41 HP)" yazdı) eskiden HAM metin dönüyordu → HP/meta yasağı deliniyordu.
+      // Artık mevcut yapısal hata yolu: sahte ya da ham koç metni YOK. Maç kavramı ve
+      // canlı akış kaydı da yazılmaz (kullanıcı bu round'un dersini görmedi).
+      const outputFailure = visionOutputFailure(post);
+      if (outputFailure) {
+        console.error(`[Aimlo AI] vision output unusable after filter (${outputFailure.detail.reason}) field=${outputFailure.detail.field} rewrite=${post.rewriteLevels.death}`);
+        return errorResponse(outputFailure.code, outputFailure.message, outputFailure.status, outputFailure.detail);
       }
 
       // Note: coachInsight field removed — purple "KOÇ İÇGÖRÜSÜ" block dropped from overlay.

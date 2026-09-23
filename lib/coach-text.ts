@@ -1479,6 +1479,84 @@ export function clampWords(s: string, max: number): string {
   return out.replace(/[\s,;:–-]+$/, "").trim();
 }
 
+// ── CÜMLE-SINIRLI KAPAK (TR-KALAN-08 / B7, 2026-09-23) ──────────────────────────
+// KANIT: enemyAnalysis[1] noktalamasız bitiyordu ("…böylece Yoru'nun tek", "…fake
+// ataklarına", "…tek kişiyi izole") — replay-tr (85 senaryo) süzgeç kesiği 8 alan;
+// scripts/eval-out 944 ham örnekte EA[1] noktasız final 49. Modern korpusta HAM
+// model çıktısının 1900/1900 alanı noktalamayla bitiyor → kesen şey MODEL DEĞİL
+// SÜZGEÇ: cleanCoachText slash'ı "/" → " ya da " (+6 kr) açıyor, realityCheck
+// katil adını "bir düşman" ile değiştiriyor (r2-b süzülmüş hâli 212 kr) ve
+// clampWords 180 KARAKTER kapağında yalnız kelime sınırına sarıp cümleyi ortadan
+// kesiyor. clampWords AYNEN kalır (report/ask finalizeCoachText yolu bayt-aynı);
+// vision bu sarmalayıcıyı kullanır.
+// MONOTON SÖZLEŞME (doğrulayıcı V1; "guard'ın kendisi regresyon üretir" dersi):
+//   • Kapısı clampWords'ünkiyle AYNI (s.length <= max) → kırpılmayan metin bayt-aynı.
+//   • ASLA boş dönmez, ASLA madde düşürmez, ASLA kelime/nokta ÜRETMEZ.
+//   • Sınır kümesi yalnız . ! ? … ; — –. VİRGÜL ve İKİ NOKTA sınır DEĞİL: "X değil,
+//     Y kullan" yapısında yüklem Y'dedir; "…girmeden," ulaç yan-cümlesi ana cümle
+//     ister (virgülden kesmek "…ilk temasta değil." gibi ters anlam üretiyordu).
+//   • Rakamdan sonraki nokta ("aynı açıya 3. kez") ve kısaltma noktası (vb./vs./
+//     örn./etc.) cümle sonu DEĞİL — eski yama "…aynı açıya 3." üretiyordu.
+//   • %65 koruma tabanı: son sınır clampWords çıktısının %65'inden azını
+//     bırakıyorsa bilgi kaybı kesiklikten ağır → clampWords çıktısı döner
+//     (koçluk emri kesik de olsa kalır). ; — – sınırında ayraç atılır, yerine nokta
+//     KONMAZ; tam cümle sınırında noktalama (ve ardından gelen kapanış tırnağı/
+//     parantezi) korunur.
+//   • Sınır yoksa/taban tutmazsa: clampWords çıktısından yalnız sarkan bağlaç
+//     ("…bekle ve") atılır — iki dil aynı liste, \b YOK (Türkçe-\b tuzağı).
+const SENTENCE_END_CHARS = ".!?…";
+const CLAUSE_SEP_CHARS = ";—–";
+const CLOSING_AFTER_END = "\"'”’)]";
+const SENTENCE_FLOOR = 0.65;
+const ABBREV_BEFORE_DOT_RE = /(?<![\p{L}\p{N}])(?:vb|vs|örn|etc)$/iu;
+const DANGLING_CONNECTOR_RE =
+  /\s+(?:ve|veya|ya\s+da|ama|ancak|fakat|çünkü|hem|and|or|but|so|then|because)$/iu;
+const stripDanglingTail = (x: string): string =>
+  x.replace(/[\s,;:—–-]+$/u, "").replace(DANGLING_CONNECTOR_RE, "").replace(/[\s,;:—–-]+$/u, "").trim();
+
+/**
+ * clampWords + cümle bütünlüğü (vision alanları). Kırpma yoksa girdinin KENDİSİ
+ * döner; kırpma varsa son tam cümle / yan-cümle sınırına sarar (yukarıdaki sözleşme).
+ */
+export function clampToSentence(s: string, max: number): string {
+  if (!s || s.length <= max) return s;
+  const clamped = clampWords(s, max);
+  const t = clamped.trimEnd();
+  if (!t) return clamped;
+  // t, s'nin baştaki boşluğu atılmış önekidir (clampWords yalnız uçları kırpar).
+  const base = s.length - s.trimStart().length;
+  for (let i = t.length - 1; i >= 0; i--) {
+    const ch = t[i];
+    let kept: string | null = null;
+    if (SENTENCE_END_CHARS.includes(ch)) {
+      if (ch === "." && i > 0 && /\p{N}/u.test(t[i - 1])) continue;          // "3." / "1.5"
+      if (ch === "." && ABBREV_BEFORE_DOT_RE.test(t.slice(0, i))) continue;  // "vb." / "örn."
+      let j = i + 1;
+      while (j < t.length && CLOSING_AFTER_END.includes(t[j])) j++;
+      const next = s.charAt(base + j);
+      if (next && !/\s/u.test(next)) continue;                              // "A.Main" — cümle sonu değil
+      kept = t.slice(0, j).trim();
+    } else if (CLAUSE_SEP_CHARS.includes(ch)) {
+      kept = stripDanglingTail(t.slice(0, i));
+    } else {
+      continue;
+    }
+    // İlk (en sondaki) geçerli sınır: taban tutarsa o; tutmazsa daha öndeki
+    // sınırlar daha da kısa kalır → clampWords yoluna düş.
+    if (kept && kept.length >= t.length * SENTENCE_FLOOR) return kept;
+    break;
+  }
+  return stripDanglingTail(t) || clamped;
+}
+
+/** Metin koç içeriği taşıyor mu (en az bir harf/rakam)? Noktalama-yalnız çıktı
+ *  (".", "()") "dolu" sayılmaz — CANLI-TEST-07 boş-guard'ının TEK tanımı;
+ *  finalizeCoachText ve vision son-işlemi (lib/vision-postprocess.ts) aynı
+ *  yardımcıyı kullanır. */
+export function hasCoachContent(s: string): boolean {
+  return /[\p{L}\p{N}]/u.test(s);
+}
+
 /**
  * TEK TEMİZLEYİCİ ZİNCİR (denetim B82, 2026-07-31).
  *
@@ -1510,7 +1588,9 @@ export function finalizeCoachText(
   text: string,
   opts: {
     lang: "tr" | "en";
-    /** clampWords üst sınırı (vision 350/180, report 500 vb.) */
+    /** clampWords üst sınırı (report 500/600, ask vb.). VISION bu fonksiyonu
+     *  kullanmaz: zinciri lib/vision-postprocess.ts'te, kapağı clampToSentence
+     *  (350 / enemyAnalysis 240) — TR-KALAN-08, 2026-09-23. */
     cap: number;
     /** oyuncunun ajanı — verilirse kit-dışı yetenek önerisi ayıklanır */
     agent?: string | null;
@@ -1533,7 +1613,7 @@ export function finalizeCoachText(
   // Artık: anlamlı (harf/rakam içeren) süzülmüş metin → o; değilse süzülmüş
   // fallback anlamlıysa → o; ikisi de değilse "" (ham metin ASLA). "" → çağıran
   // yapısal hata döner (NO fake AI: sentetik koç metni ÜRETİLMEZ).
-  const meaningful = (s: string) => /[\p{L}\p{N}]/u.test(s);
+  const meaningful = hasCoachContent;
   let safe = "";
   if (cleaned && meaningful(cleaned)) safe = cleaned;
   else if (opts.fallback !== undefined) {

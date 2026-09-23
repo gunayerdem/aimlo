@@ -48,6 +48,7 @@ function post(s: S, fb: { deathAnalysis: string; enemyAnalysis: string[]; nextRo
     lang,
     map: typeof b.map === "string" ? b.map : undefined,
     agent: typeof b.agent === "string" ? b.agent : undefined,
+    enemyComp: b.enemyComp as unknown[] | undefined,
     suppliedLoc: typeof b.deathLocation === "string" ? b.deathLocation : "",
   });
 }
@@ -60,7 +61,23 @@ const BAD: [string, RegExp][] = [
   ["apostroflu kadro", /kadro['’]/],
   ["apostroflu düşman", /bir düşman['’]/],
   ["fazlalık niteleme", /Rakip bir düşman/],
+  // B03 (2026-09-23) kabul ölçütleri:
+  // TR-KALAN-07 — deathAnalysis rapor etiketiyle açılıyor ("En kritik neden:", "Kök neden:").
+  ["tanı-etiketi açılışı", /^\s*(?:en\s+kr[iİ]t[iİ]k|kök\s+neden|temel\s+neden|asıl\s+sorun|ana\s+hata|root\s+cause)[^:.]{0,24}:/iu],
+  // TR-KALAN-09 — modelin harf düzeyinde bozduğu ajan adı (katil-guard'ını atlatıyordu).
+  ["bozuk ajan adı", /(?<!\p{L})(?:Reına|Rejyna|Reğu|Reay|Cyclpher)(?!\p{L})/u],
 ];
+// TR-KALAN-08 — SÜZGEÇ KESİĞİ: ham alan noktalamayla BİTİYOR ama son hâli bitmiyor
+// (kapak cümleyi ortadan kesti). Ham metni zaten noktasız olan model üslubu sayılmaz.
+const TERMINAL = /[.!?…]["'”’)\]]*$/;
+type F = { deathAnalysis: string; enemyAnalysis: string[]; nextRoundSuggestion: string };
+const fieldPairs = (raw: F, fin: F): [string, string][] => [
+  [raw.deathAnalysis, fin.deathAnalysis], [raw.nextRoundSuggestion, fin.nextRoundSuggestion],
+  ...(raw.enemyAnalysis || []).slice(0, 2).map((r, i) => [r, (fin.enemyAnalysis || [])[i] ?? ""] as [string, string]),
+];
+const cutCount = (raw: F, fin: F) =>
+  fieldPairs(raw, fin).filter(([r, f]) => !!f && TERMINAL.test(String(r).trim()) && !TERMINAL.test(f.trim())).length;
+let cutBefore = 0, cutAfter = 0;
 const texts = (o: { deathAnalysis: string; enemyAnalysis: string[]; nextRoundSuggestion: string }) =>
   [o.deathAnalysis, ...(o.enemyAnalysis || []), o.nextRoundSuggestion].filter(Boolean);
 
@@ -82,6 +99,8 @@ for (const [cycle, corpusFile, where] of PAIRS) {
     nScen++;
     const oldF = smp.final as { deathAnalysis: string; enemyAnalysis: string[]; nextRoundSuggestion: string };
     const newF = post(s, smp.raw);
+    cutBefore += cutCount(smp.raw as F, oldF);
+    cutAfter += cutCount(smp.raw as F, newF);
     for (const [label, re] of BAD) {
       if (texts(oldF).some((t) => re.test(t))) before[label] = (before[label] || 0) + 1;
       if (texts(newF).some((t) => re.test(t))) after[label] = (after[label] || 0) + 1;
@@ -104,6 +123,8 @@ for (const [label] of BAD) {
   if (a > 0) bad++;
   console.log(`  ${a === 0 ? "✓" : "✗"} ${label.padEnd(22)} önce ${String(b).padStart(2)} → sonra ${String(a).padStart(2)}`);
 }
+console.log(`  ${cutAfter === 0 ? "✓" : "✗"} ${"süzgeç kesiği (alan)".padEnd(22)} önce ${String(cutBefore).padStart(2)} → sonra ${String(cutAfter).padStart(2)}`);
+if (cutAfter > 0) bad++;
 fs.writeFileSync("scripts/eval-out/replay-tr-diff.txt", diffs.join("\n\n"), "utf8");
 console.log(`\nTam fark dökümü: scripts/eval-out/replay-tr-diff.txt (${diffs.length} alan)`);
 process.exit(bad ? 1 : 0);
