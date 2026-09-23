@@ -1073,7 +1073,35 @@ export function guardUnprovenFacts(
     const KV2 = "(?:vurup öldürdü|öldürdü|öldürdün|öldürüldün|kestiler|kesti|vuruldun|vurdun|vurdu|düşürdü|indirdi|biçti|aldılar|aldı|avladı|devirdi|götürdü|temizledi|killed you|shot you|killed|shot|picked you off|took you down|caught you)";
     const NLB = "(?<![a-zçğıöşüâîû])", NL = "(?![a-zçğıöşüâîû])";
     // STEP1: ≥2 üyeli katil-disjunction ("X ya da Y ya da Z" / "X or Y") → tek genel-düşman
-    result = result.replace(new RegExp(`${NLB}${THE}${KILLER_TOKEN}(?:\\s*(?:ya da|veya|or|/|,)\\s*${THE}${KILLER_TOKEN})+`, "gi"), AN_ENEMY);
+    // TR-KALAN-21 (2026-09-23): STEP1 "çoklu aday = katil hedge'i" varsayımıyla
+    // BAĞLAMSIZ çalışıyordu ve geleceğe dönük/koşullu koç tavsiyesini de indiriyordu:
+    // "Jett/Reyna varsa agresif girişlerde…" → "bir düşman varsa…", "Jett/Reyna'nin
+    // hızlı peek'ine trade verebilecek düzen kur." → "Bir düşmanın hızlı peek'ine…"
+    // (vision-prompt.ts:292 modele enemyComp'u GENEL counter için kullanmasını
+    // bizzat söylüyor). İki kapı — STEP2'nin KV2 şartının aynası:
+    //   · ardından koşul kipi (varsa/yoksa/olursa/ise/oynuyorsa) geliyorsa DOKUNMA;
+    //   · indirme yalnız AYNI yan-cümlede ([.!?;:—\n]) KV2 öldürme fiili ya da
+    //     kurban çapası (seni/sana/senin/you/your) varsa — katil hedge'inin imzası.
+    //   · SPEC SAPMASI (ölçülmüş): 2. şahıs ÖLÜM yüklemi de imzadır. Spec'in iki
+    //     kapısı maliyetsiz replay'de bir katil-hedge'ini SIZDIRDI (cyclehedge/S14,
+    //     katil bilinmiyor): "Raze ya da Brimstone util'ine yakalanıp öldün" — HEAD
+    //     "bir düşman util'ine…" yapıyordu; "öldün" KV2'de ve kurban listesinde yok.
+    const STEP1_COND = /^['’]?\s*(?:varsa|yoksa|olursa|ise|oynuyorsa)(?![a-zçğıöşüâîû])/i;
+    const STEP1_VICTIM = /(?<![\p{L}])(?:seni|sana|senin|you|your)(?![\p{L}])/iu;
+    const STEP1_KILL = new RegExp(`${NLB}${KV2}${NL}`, "i");
+    const STEP1_DEATH = /(?<![\p{L}])(?:öldün|öldürüldün|düştün|yakalandın|elendin|died|got\s+killed|were\s+killed|went\s+down)(?![\p{L}])/iu;
+    result = result.replace(
+      new RegExp(`${NLB}${THE}${KILLER_TOKEN}(?:\\s*(?:ya da|veya|or|/|,)\\s*${THE}${KILLER_TOKEN})+`, "gi"),
+      (m: string, off: number, full: string) => {
+        if (STEP1_COND.test(full.slice(off + m.length))) return m;
+        let s = off;
+        while (s > 0 && !/[.!?;:—\n]/.test(full[s - 1])) s--;
+        let e = off + m.length;
+        while (e < full.length && !/[.!?;:—\n]/.test(full[e])) e++;
+        const clause = full.slice(s, off) + " " + full.slice(off + m.length, e);
+        return STEP1_VICTIM.test(clause) || STEP1_KILL.test(clause) || STEP1_DEATH.test(clause) ? AN_ENEMY : m;
+      },
+    );
     // STEP2: tek isimli katil + aynı clause'da kill-verb → genel-düşman (char-cap YOK).
     // Lookahead formu (F6): yalnız "(the) <katil>" token'ı değişir, clause'un geri
     // kalanı verbatim kalır — eski m.slice(m.indexOf(mid)) hilesi "The " tüketilince

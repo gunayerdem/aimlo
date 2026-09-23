@@ -333,9 +333,14 @@ console.log("\n════ B3 · KONUM / KATİL / ROSTER ════");
       out.startsWith("Bir düşman") && !/Rakip bir düşman/.test(out), `→ "${out}"`);
   }
   {
-    const out = rk("Yoru yerine — Jett/Reyna'nin hızlı peek'ine trade verebilecek düzen kur.");
-    t("50 apostroflu ek artığı YOK ('bir düşman'nin')",
-      !/bir düşman['’]/.test(out) && /bir düşmanın/.test(out), `→ "${out}"`);
+    // BEKLENTİ DÜZELTİLDİ (TR-KALAN-21, 2026-09-23): eski beklenti "bir düşmanın hızlı
+    // peek'ine" bozulmasını DOĞRU diye pinliyordu — bu bir öldürme iddiası değil,
+    // roster'a göre GENEL counter tavsiyesi (kill fiili / kurban çapası yok).
+    const c50 = "Yoru yerine — Jett/Reyna'nin hızlı peek'ine trade verebilecek düzen kur.";
+    same("50 roster tavsiyesi (öldürme iddiası değil) bayt-aynı", rk(c50), c50);
+    // Apostrof-dikişi hâlâ çalışır: kurban çapalı disjunction iner, ek uyumlanır.
+    eq("50b apostroflu ek artığı YOK ('bir düşman'nin')",
+      rk("Jett/Reyna'nin peek'i seni yakaladı."), "Bir düşmanın peek'i seni yakaladı.");
   }
   {
     const out = rk("Jett'ıyla karşılaşınca kaybettin, Jett seni vurdu.");

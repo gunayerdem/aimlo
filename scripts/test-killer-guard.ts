@@ -89,5 +89,31 @@ console.log("\n[4] MİKS KATİLKEN — ad tablosu eksikliği (TR-KALAN-20, 2026-
   t("B83 Miks'te çalışıyor (yanlış katil 'Jett' → 'Miks')", /Miks seni/.test(out) && !/Jett/.test(out), `→ "${out}"`);
 }
 
+console.log("\n[5] KOŞULLU ROSTER TAVSİYESİ — STEP1 yalnız katil hedge'ini indirir (TR-KALAN-21, 2026-09-23)");
+{
+  // HEAD: STEP1 disjunction'ı kill-fiili / kurban çapası aramadan "bir düşman"a
+  // indiriyordu → koç tavsiyesinin öznesi kayboluyordu.
+  const nk = (s: string, lang: "tr" | "en" = "tr") =>
+    realityCheck(s, [] as never, { hasKiller: false } as never, "death", lang).text;
+  for (const s of [
+    "Jett/Reyna varsa agresif girişlerde körlükle önce onu çıkar.",
+    "Jett/Reyna'nin hızlı peek'ine trade verebilecek düzen kur.",
+    "Eğer Jett varsa köşe dönüşlerinde dash bekle, Jett/Reyna varsa agresif girişlerde körlük ile önce onu dışarı çıkar.",
+  ]) {
+    const out = nk(s);
+    t(`koşullu/genel tavsiye bayt-aynı: "${s.slice(0, 36)}…"`, out === s, `→ "${out}"`);
+  }
+  // Katil hedge'i (kurban çapası / öldürme fiili) eskisi gibi iner.
+  const a = nk("Jett/Reyna seni aynı pozisyonda beklerken o açıdan vurdular.");
+  t("kurban çapalı disjunction → 'Bir düşman seni…'", a.startsWith("Bir düşman seni aynı pozisyonda"), `→ "${a}"`);
+  const b = nk("Reyna ya da Jett ya da Deadlock seni öldürdü.");
+  t("canlı-test 2026-06-29 sınıfı → 'Bir düşman seni öldürdü.'", b === "Bir düşman seni öldürdü.", `→ "${b}"`);
+  const c = nk("The Cypher or Jett killed you.", "en");
+  t("EN 'The Cypher or Jett killed you.' → 'An enemy killed you.'", c === "An enemy killed you.", `→ "${c}"`);
+  // 2. şahıs ölüm yüklemi de katil-hedge imzası (replay: cyclehedge/S14 gerçek raw'ı).
+  const d = nk("Hookah'da açıkta dururken Raze ya da Brimstone util'ine yakalanıp öldün.");
+  t("'X ya da Y util'ine yakalanıp öldün' hâlâ iner", /bir düşman util'ine yakalanıp öldün/.test(d) && !/Raze|Brimstone/.test(d), `→ "${d}"`);
+}
+
 console.log(`\n${fail === 0 ? "TÜM TESTLER GEÇTİ ✓" : `${fail} TEST BAŞARISIZ ✗`}`);
 process.exit(fail ? 1 : 0);
