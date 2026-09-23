@@ -5,7 +5,7 @@ import "server-only";
 
 import type { SupabaseClient, User } from "@supabase/supabase-js";
 import { createServiceSupabase } from "@/lib/supabase/server";
-import { computeCost } from "@/lib/openai-pricing";
+import { computeCost, resolvePricing } from "@/lib/openai-pricing";
 import { isRateBypassedPublic } from "@/lib/api-auth";
 import { formatMap, formatAgent, formatSide } from "@/lib/format-display";
 // F51 (pano dalga, 2026-08-04): D1/D7 kohort hesabı TEK tanımdan gelsin diye
@@ -366,6 +366,12 @@ export type CostData = {
   byRoute: { route: string; calls: number; cost: number; promptTokens: number; cachedTokens: number; cacheRatio: number | null }[];
   daily: { date: string; cost: number; calls: number; cachePct: number }[];
   tokens: { input: number; output: number; cached: number };
+  // OLCUM-ARACI-16 (B07, 2026-09-24): fiyat tablosunda (lib/openai-pricing.ts PRICING)
+  // OLMAYAN model id'siyle kaydedilmiş çağrı sayısı + o id'ler. Bu çağrılar fallback
+  // (AI_MODEL) fiyatıyla TAHMİNİ fiyatlandı — eskiden sessizdi (ölçüm: yazım hatalı id
+  // 7,7× eksik fiyat). >0 ise /cost sayfası rozet gösterir. Ekleme: mevcut alanlar aynı.
+  unpriced: number;
+  unpricedModels: string[];
 };
 
 /** Cache-hit yüzdesi (0-100, 1 ondalık). prompt=0 → null. (F5+F39, 2026-08-04) */
@@ -374,6 +380,15 @@ function cacheRatioPct(cached: number, prompt: number): number | null {
   // computeCost gibi clamp'le: bozuk satırda cached > prompt olursa %100'ü aşmasın.
   const c = Math.max(0, Math.min(cached, prompt));
   return Number(((c / prompt) * 100).toFixed(1));
+}
+
+/** OLCUM-ARACI-16 (B07, 2026-09-24): fiyat tablosunda olmayan model id'li çağrıları
+ * say (rollup + ham yol ortak). Fiyat yine computeCost'tan (fallback) gelir; bu
+ * yalnız görünürlük — panel "N çağrı tahmini fiyatlandı" rozetini buradan basar. */
+function tallyUnpriced(acc: { calls: number; models: Set<string> }, model: string | null, calls: number): void {
+  if (resolvePricing(model).known) return;
+  acc.calls += calls;
+  acc.models.add(model ? model : "(boş)");
 }
 
 // Ham-satır tavanı (B103, 2026-07-31) — artık YALNIZ fallback yolunda geçerli.
@@ -389,7 +404,7 @@ const COST_ROW_LIMIT = 100_000;
 // çıktısının BİREBİR şekli. Fiyat DB'de hesaplanmaz: `model` grup anahtarında
 // olduğu için USD'yi burada, okuma anında lib/openai-pricing.ts hesaplar
 // (fiyat değişince tüm geçmiş backfill'siz yeniden fiyatlanır).
-type UsageRollupRow = {
+export type UsageRollupRow = {
   day: string; // "YYYY-MM-DD" (UTC) — JS tarafındaki gün anahtarıyla aynı
   route_type: string;
   model: string | null;
@@ -455,8 +470,9 @@ export async function getCostData(): Promise<CostData> {
   return getCostDataRaw(svc);
 }
 
-/** RPC yolu: gün×route×model toplamlarını panelin beklediği şekle indirger. */
-function aggregateRollup(rows: UsageRollupRow[]): CostData {
+/** RPC yolu: gün×route×model toplamlarını panelin beklediği şekle indirger.
+ * Saf (DB yok) — export yalnız scripts/test-billing.ts için (B07 unpriced sayacı). */
+export function aggregateRollup(rows: UsageRollupRow[]): CostData {
   // Gün anahtarı karşılaştırması: ISO "YYYY-MM-DD" sözlük sırası = kronolojik
   // sıra. Ham yoldaki `t >= startOfDayUtc(n)` eşikleri zaten UTC gün sınırı
   // olduğu için sonuç birebir aynı.
@@ -469,6 +485,7 @@ function aggregateRollup(rows: UsageRollupRow[]): CostData {
   // rollup satırları zaten gün×route×model granülünde token taşıyor, EK sorgu yok.
   const byRoute = new Map<string, { calls: number; cost: number; prompt: number; cached: number }>();
   const dailyMap = new Map<string, { cost: number; calls: number; prompt: number; cached: number }>();
+  const unpriced = { calls: 0, models: new Set<string>() };
 
   for (const row of rows) {
     const promptTokens = num(row.prompt_tokens);
@@ -478,6 +495,7 @@ function aggregateRollup(rows: UsageRollupRow[]): CostData {
     // computeCost token'da lineer ve `model` grup anahtarında → grup başına
     // hesaplamak, satır satır hesaplayıp toplamakla aynı sonucu verir.
     const c = computeCost({ promptTokens, completionTokens, cachedTokens }, row.model);
+    tallyUnpriced(unpriced, row.model, rowCalls);
     const day = String(row.day).slice(0, 10);
 
     calls += rowCalls;
@@ -511,6 +529,8 @@ function aggregateRollup(rows: UsageRollupRow[]): CostData {
       .sort((a, b) => b.cost - a.cost),
     daily: buildDailySeries(dailyMap),
     tokens: { input: tIn, output: tOut, cached: tCached },
+    unpriced: unpriced.calls,
+    unpricedModels: [...unpriced.models].sort(),
   };
 }
 
@@ -539,12 +559,14 @@ async function getCostDataRaw(svc: SupabaseClient): Promise<CostData> {
   // fallback'te de aynı alanlar dolmalı ki migration uygulanmamışken panel bozulmasın.
   const byRoute = new Map<string, { calls: number; cost: number; prompt: number; cached: number }>();
   const dailyMap = new Map<string, { cost: number; calls: number; prompt: number; cached: number }>();
+  const unpriced = { calls: 0, models: new Set<string>() };
 
   for (const u of usage) {
     const c = computeCost(
       { promptTokens: u.prompt_tokens, completionTokens: u.completion_tokens, cachedTokens: u.cached_tokens },
       u.model,
     );
+    tallyUnpriced(unpriced, u.model, 1);
     const t = new Date(u.created_at).getTime();
     total += c;
     if (t >= dayAgo) today += c;
@@ -576,5 +598,7 @@ async function getCostDataRaw(svc: SupabaseClient): Promise<CostData> {
       .sort((a, b) => b.cost - a.cost),
     daily: buildDailySeries(dailyMap), // aynı 14-günlük seri (B103'te ortak yardımcıya taşındı)
     tokens: { input: tIn, output: tOut, cached: tCached },
+    unpriced: unpriced.calls,
+    unpricedModels: [...unpriced.models].sort(),
   };
 }

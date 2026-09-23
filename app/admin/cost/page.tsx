@@ -20,6 +20,17 @@ export default async function AdminCostPage() {
       <h1 className="adm-h1">AI Maliyeti</h1>
       <p className="adm-sub">{`${AI_MODEL} token → USD · canlı (girdi $${rate(p.inputPerM)} / çıktı $${rate(p.outputPerM)} / cache $${rate(p.cachedInputPerM)} per 1M)`}</p>
 
+      {/* OLCUM-ARACI-16 (B07, 2026-09-24): fiyat tablosunda olmayan model id'li
+          çağrılar eskiden SESSİZCE fallback fiyatıyla sayılıyordu (yazım hatalı id
+          7,7× eksik fiyat ölçüldü). Artık görünür; kurtarma = tabloya satır eklemek. */}
+      {c.unpriced > 0 ? (
+        <div className="adm-note" style={{ marginBottom: 18 }}>
+          <b>{c.unpriced.toLocaleString("tr")} çağrı bilinmeyen modelle tahmini fiyatlandı.</b> Fiyat tablosunda olmayan
+          model id&apos;si ({c.unpricedModels.join(", ")}) {AI_MODEL} fiyatıyla sayıldı — toplam gerçek maliyetten sapabilir.
+          Düzeltme: <code>lib/openai-pricing.ts</code> PRICING tablosuna o id&apos;nin satırını ekle.
+        </div>
+      ) : null}
+
       {c.rows === 0 ? (
         <div className="adm-note" style={{ marginBottom: 18 }}>
           <b>İzleme yeni devrede.</b> Henüz <code>ai_usage</code> kaydı yok — bir sonraki AI çağrısından (vision/report/feedback/insight)
