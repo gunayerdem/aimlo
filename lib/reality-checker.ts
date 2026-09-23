@@ -146,26 +146,38 @@ const WINDOW_PATTERNS = [
 // gören) öksüz-bağlaç temizliğini KÖR EDİYOR ve bozuk cümle kullanıcıya gidiyor.
 // Bağlaç deseni oradaki kuralın BİREBİR aynısıdır (ev üslubu).
 //
-// BÜYÜTME YALNIZ 0. KONUMDA: global `(^|[.!?]\s+)([a-zçğıöşü])` formu ölçülmüş
-// bir yanlış-pozitif üretiyor ("Spike kuruldu. vb. açıyı erken tut." →
-// "Vb. Açıyı erken tut." — "Açıyı" cümle ORTASINDA büyüyor). Metin-içi küçük
-// harf artığı bugün de var, bu yama onu KÖTÜLEŞTİRMİYOR (bkz. kapsam dışı B8).
+// BÜYÜTME: metin başı DAİMA; metin-İÇİ yalnız guard'ın YENİ doğurduğu cümle
+// başında (TR-KALAN-11, 2026-09-23). Global `(^|[.!?]\s+)([a-zçğıöşü])` formu
+// ölçülmüş bir yanlış-pozitif üretiyordu ("Spike kuruldu. vb. açıyı erken tut." →
+// "Vb. Açıyı erken tut." — "Açıyı" cümle ORTASINDA büyüyor). Kapı: aynı küçük
+// harfli devam `before` (guard öncesi metin) içinde de bir [.!?] + boşluktan
+// sonra geçiyorsa o küçük harf ÖNCEDEN VARDI → dokunulmaz ("vb. açıyı"). Yoksa
+// silme onu cümle başına taşımıştır → büyütülür ("aldın. sen" → "aldın. Sen").
+// `before` verilmezse metin-içi büyütme HİÇ yapılmaz (eski davranış).
 function repairTrSeam(s: string, lang?: "tr" | "en", before?: string): string {
   // i→İ için toLocaleUpperCase("tr-TR") ŞART ("i".toUpperCase()="I").
   // Dil sezgisi MUTASYON ÖNCESİ metinde çalışır: ı/ş/ğ kanıtını taşıyan kelimeyi
   // guard yeni silmiş olabilir (ölçüldü: "Spike kurulmadı, ikinci turda tekrar
   // dene." → lang verilmezse "Ikinci" çıkıyordu; doğrusu "İkinci").
   const trText = lang ? lang === "tr" : /[şçğıöü]/i.test(before ?? s);
+  const up = (c: string) => (trText ? c.toLocaleUpperCase("tr-TR") : c.toUpperCase());
   const t = s
     .replace(/\s{2,}/g, " ")
     .replace(/\s+([,.;:!?])/g, "$1")
     .replace(/([.!?])\s*\1+/g, "$1")               // "aldın.." → "aldın."
-    .replace(/(^|[.!?;]\s*)\s*[,;]\s*/g, "$1")     // cümle başı öksüz virgül
+    // Cümle başı öksüz virgül. TR-KALAN-11: noktalamadan SONRAKİ boşluk korunur —
+    // eski `$1` biçimi onu da yutuyordu ("çıktın. , yine" → "çıktın.yine").
+    .replace(/(^|[.!?;])\s*[,;]\s*/g, (_m, p: string) => (p ? p + " " : ""))
     .replace(/^[\s,;:.—–-]+/, "")
     .replace(/(^|[.!?]\s+)(?:ve|ile)\s+(?=[a-zçğıöşüA-ZÇĞİÖŞÜ])/g, "$1") // coach-text.ts:48 ile AYNI
     .trim();
-  return t.replace(/^([a-zçğıöşü])/u, (c) =>
-    trText ? c.toLocaleUpperCase("tr-TR") : c.toUpperCase());
+  const head = t.replace(/^([a-zçğıöşü])/u, up);
+  if (before === undefined) return head;
+  return head.replace(/([.!?]\s+)([a-zçğıöşü][\p{L}]*)/gu, (m, p: string, w: string, off: number) => {
+    if (off === 0) return m;
+    const existed = new RegExp(`[.!?]\\s+${escapeRe(w)}(?![\\p{L}])`, "u").test(before);
+    return existed ? m : p + up(w.charAt(0)) + w.slice(1);
+  });
 }
 
 // ── TÜRKÇE PENCERE BİRİMİ (B2 — TR boru hattı denetimi 2026-09-16) ─────────
@@ -1145,11 +1157,21 @@ export function guardUnprovenFacts(
     const SPIKE_DROP: RegExp[] = [
       // Olumsuz iddia: plant gözlenmemişse kanıtsız, gözlenmişse ÇELİŞKİ → daima düşer.
       new RegExp(`${TR_CONJ}${SP}(?:kurulmadı|kurulmamıştı)${NL_S}`, "giu"),
+      // Defuse AMAÇ-ZARFI (TR-KALAN-12, 2026-09-23): "Spike defuse etmeye
+      // çalışırken vuruldun" → eski desen yalnız "defuse etmeye"yi söküp öksüz
+      // ulaç bırakıyordu ("Çalışırken vuruldun."). Zarf öbeği BÜTÜN düşer, dikiş
+      // repairTrSeam'de onarılır → "Vuruldun." Olguyu yeniden yazmak ("defuse
+      // denemesinde") defuse sinyali olmadığı için uydurma olurdu → silme.
+      new RegExp(`${TR_CONJ}(?:${SP})?(?:defuse|defüz)\\s*etme(?:ye|k\\s+için)\\s+(?:çalışırken|uğraşırken|çalıştığın\\s+sırada)${NL_S}`, "giu"),
       // Defuse: sistemde HİÇBİR sinyal yok → spikeUp'tan BAĞIMSIZ, eski davranış.
       // Önündeki "spike" de yutulur (yoksa "Spike ve vuruldun." artığı kalıyordu);
       // TESPİT ÇAPASI DEĞİŞMEDİ — hâlâ defuse fiili. Meşru koç kullanımı
       // ("defuse hattını tut") fiil çapası olmadığı için DOKUNULMAZ.
-      new RegExp(`${TR_CONJ}(?:${SP})?(?:defuse|defüz)\\s*(?:ediyordun|ettin|etmeye|alıyordun)${NL_S}`, "giu"),
+      // TR-KALAN-12: çıplak mastar "etmeye" ÇIKARILDI — tek iddia biçimi
+      // ("etmeye çalışırken") artık üstteki desenin; tek başına mastar ise
+      // öğüt/3. şahıs dilidir ve siliniyordu: "Defuse etmeye çalışan düşmanı
+      // molly ile durdur." → "Çalışan düşmanı molly ile durdur." (ölçüldü, HEAD).
+      new RegExp(`${TR_CONJ}(?:${SP})?(?:defuse|defüz)\\s*(?:ediyordun|ettin|alıyordun)${NL_S}`, "giu"),
       new RegExp(`${TR_CONJ}${NLB_S}spike\\s*(?:defuse|çöz)${NL_S}`, "giu"),
       /(?:\s+(?:and|but|while))?\byou\s+were\s+defusing\b/gi,
       /(?:\s+(?:and|but))?\bwhile\s+defusing\b/gi,

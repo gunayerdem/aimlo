@@ -435,5 +435,35 @@ console.log("\n════ B01 · SAYI + BULUNMA EKİ (TR-KALAN-27) ═══�
   }
 }
 
+// ═══════════════════════════════════════════════════════════════════
+console.log("\n════ B02 · DİKİŞ + DEFUSE ARTIĞI (TR-KALAN-11/12) ════");
+// ═══════════════════════════════════════════════════════════════════
+{
+  const sp = { hasSpike: false, spikeObservedPlanted: false } as never;
+  const run = (s: string, lang: "tr" | "en" | undefined = "tr") => realityCheck(s, [] as never, sp, "death", lang).text;
+  // HEAD: "Açıyı geç aldın. sen açıkta kaldın." (metin-içi küçük harf)
+  eq("61 silme ortada yeni cümle başı doğurunca büyür",
+    run("Açıyı geç aldın. Spike kuruldu ve sen açıkta kaldın."), "Açıyı geç aldın. Sen açıkta kaldın.");
+  // HEAD: "Bu round erken çıktın.yine de siteye girdin." (virgül dikişi boşluğu yutuyordu)
+  eq("62 öksüz virgül sökülürken nokta sonrası boşluk korunur",
+    run("Bu round erken çıktın. Spike kurulmadı, yine de siteye girdin."), "Bu round erken çıktın. Yine de siteye girdin.");
+  {
+    // K5 yanlış-pozitifi: ÖNCEDEN VAR OLAN "vb. açıyı" büyütülmez.
+    const out = run("Spike kuruldu. vb. açıyı erken tut.");
+    t("63 önceden var olan küçük harf ('vb. açıyı') büyümez", /vb\. açıyı/i.test(out) && !/Açıyı/.test(out), `→ "${out}"`);
+  }
+  eq("64 vaka 11 korunur (lang yok → dotted İ)",
+    run("Spike kurulmadı, ikinci turda tekrar dene.", undefined), "İkinci turda tekrar dene.");
+  // TR-KALAN-12 — HEAD: "Çalışırken vuruldun." (öksüz ulaç)
+  eq("65 defuse amaç-zarfı bütün düşer", run("Spike defuse etmeye çalışırken vuruldun."), "Vuruldun.");
+  eq("66 defuse zarfı metin ortasında (11 ile birlikte)",
+    run("Açıyı geç aldın. Spike defuse etmeye çalışırken vuruldun."), "Açıyı geç aldın. Vuruldun.");
+  // HEAD: "Çalışan düşmanı molly ile durdur." (çıplak mastar öğüt dilini siliyordu)
+  for (const s of ["Bir kişi defuse hattını tut.", "Defuse etmeye çalışan düşmanı molly ile durdur."])
+    same(`67 NEG bayt-aynı: "${s.slice(0, 34)}…"`, run(s), s);
+  // İddia biçimleri hâlâ düşer (eski desenin kalan fiilleri).
+  eq("68 'defuse ediyordun' hâlâ düşer", run("Spike defuse ediyordun ve vuruldun."), "Vuruldun.");
+}
+
 console.log(`\n${fail === 0 ? "TAM YEŞİL" : "KIRMIZI"} — ${n - fail}/${n} geçti${fail ? `, ${fail} HATA` : ""}`);
 process.exit(fail ? 1 : 0);
