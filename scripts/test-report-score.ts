@@ -90,6 +90,21 @@ async function main() {
     const n = pick([{ score: "5-3" }, { score: "" }, { score: "dizi" }]);
     check("2-parçalı OLMAYAN son değerler (eskisi gibi) atlanır, sayılmaz → 5-3", n.ok && n.yours === "5" && n.skippedInvalid === 0, show(n));
     check("isValidScoreValue: 0/40 sınırları", isValidScoreValue("0") && isValidScoreValue("40") && !isValidScoreValue("41") && !isValidScoreValue("?"));
+    // B05 inceleme: Number("")===0, Number("1e1")===10, Number("0x1")===1, Number("3.0")===3
+    // eskiden GEÇERLİ sayılıyordu.
+    check("isValidScoreValue: '', '1e1', '0x1', '3.0', '+5', ' 5' geçersiz; '05' geçerli",
+      !isValidScoreValue("") && !isValidScoreValue("1e1") && !isValidScoreValue("0x1") && !isValidScoreValue("3.0")
+        && !isValidScoreValue("+5") && !isValidScoreValue(" 5") && isValidScoreValue("05"));
+    const blank = pick([{ round: 2, score: "5-3" }, { round: 1, score: " - " }]);
+    check("geç ERKEN ' - ' çifti atlanır → 5-3 (HEAD: yours='' → 'Skor:  - ')", blank.ok && blank.yours === "5" && blank.enemy === "3" && blank.skippedInvalid === 1, show(blank));
+    const blankLate = pick([{ round: 1, score: "5-3" }, { round: 2, score: " - " }]);
+    check("SONRAKİ round ' - ' → geçersiz (boş skor final olmaz)", !blankLate.ok, show(blankLate));
+    const sci = pick([{ round: 1, score: "1e1-2" }]);
+    check("'1e1-2' → geçersiz (HEAD: yours '1e1' prompt'a gidiyordu)", !sci.ok, show(sci));
+    const dec = pick([{ round: 1, score: "3.0-2" }]);
+    check("'3.0-2' → geçersiz", !dec.ok, show(dec));
+    const hex = pick(undefined, "0x1-2");
+    check("üst-seviye '0x1-2' → geçersiz", !hex.ok, show(hex));
   }
 
   const route = loadReportRoute();

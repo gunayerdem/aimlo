@@ -37,9 +37,13 @@ import { sanitizePromptInput } from "@/lib/prompt-safety";
 // ile REDDEDİLİYORDU (maç hiç rapora dönüşmüyor, desktop kuyruğu takılıyordu).
 // Sayısal aralık kontrolü: 0-40 (OT teorik üst sınırının çok üstünde tampon).
 export const MAX_SCORE_VALUE = 40;
+// B05 inceleme (2026-09-24): eski `Number(s)` kontrolü "" (→0), "1e1" (→10),
+// "0x1" (→1), "3.0" (→3) değerlerini GEÇERLİ sayıyordu → " - " çifti taramayı
+// durdurup "Skor:  - " basıyor, "1e1-2" prompt'a "Skor: 1e1 - 2" olarak gidiyordu.
+// Yalnız 1-2 haneli ASCII ondalık rakam dizisi (masaüstü "{l} - {r}" biçimi).
+const SCORE_DIGITS = /^\d{1,2}$/;
 export function isValidScoreValue(s: string): boolean {
-  const n = Number(s);
-  return Number.isInteger(n) && n >= 0 && n <= MAX_SCORE_VALUE;
+  return SCORE_DIGITS.test(s) && Number(s) <= MAX_SCORE_VALUE;
 }
 
 /**
