@@ -518,9 +518,14 @@ console.log("\n[B03/DA-400] uzun DA'da düzeltme cümlesi korunur");
 // (aimlo-desktop src/App.tsx loadMatches: fdSrc.enemyAnalysis) onu gösteriyor.
 console.log("\n[B03/REPORT-EA] report route EA'yı vision kapağıyla keser");
 {
+  // B05 (OLCUM-ARACI-10): report validateRequest route.ts'ten lib/report-prompt.ts'e
+  // taşındı (route + eval ortak) — kilit artık kodun YAŞADIĞI dosyayı okur; route'ta
+  // ikinci bir sabit-200 kesici de doğmamalı.
   const routeSrc = fs.readFileSync(path.join(__dirname, "..", "app", "api", "ai", "report", "route.ts"), "utf8");
+  const reportLibSrc = fs.readFileSync(path.join(__dirname, "..", "lib", "report-prompt.ts"), "utf8");
   t("report enemyAnalysis → sanitize(s, VISION_ENEMY_ITEM_CAP) (sabit 200 değil)",
-    /enemyAnalysis[\s\S]{0,200}?sanitize\(s, VISION_ENEMY_ITEM_CAP\)/.test(routeSrc) && !/sanitize\(s, 200\)/.test(routeSrc));
+    /enemyAnalysis[\s\S]{0,200}?sanitize\(s, VISION_ENEMY_ITEM_CAP\)/.test(reportLibSrc)
+      && !/sanitize\(s, 200\)/.test(reportLibSrc) && !/sanitize\(s, 200\)/.test(routeSrc));
   // Davranış: ölçülen TR tavanı (212 kr, cycletr-cards r2-b EA[1]) report kapağında kesilmez.
   const r2b = "Plant sonrası B Generator köşesini çapraz tutacak birini al ya da Jett smoke ile site içine girip kutu arkası ya da duvar kenarı gibi kapalı bir açıya geç, böylece Yoru'nun tek açılı temizlemesini zorlaştırırsın.";
   const cut = (max: number) => sanitizePromptInput(r2b, { max, collapseWhitespace: true });
