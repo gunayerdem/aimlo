@@ -13,7 +13,8 @@
  *
  * Koşum: npx tsx scripts/test-coach-text-en.ts   (npm test içinde)
  */
-import { cleanCoachText } from "../lib/coach-text";
+import * as CT from "../lib/coach-text";
+const { cleanCoachText } = CT;
 
 const en = (s: string) => cleanCoachText(s, "en");
 
@@ -65,6 +66,31 @@ console.log("\n[4] DOKUNULMAZLIK — hedge yoksa metin BİREBİR aynı kalmalı"
   t("temiz metin değişmedi", out === clean, `→ "${out}"`);
   const modal = "You might be able to retake with the Sage wall.";
   t("modal cümle bozulmadan geçti", en(modal).includes("might be able"), `→ "${en(modal)}"`);
+}
+
+console.log("\n[5] B01 (2026-09-23) — EN dalı: yeni TR kuralları EN'e sızmaz, EN eşleri çalışır");
+{
+  // TR-KALAN-24: metin başı büyütme iki dilde de (EN korpusunda 1 gerçek vaka: E25 final).
+  const a = en("an enemy held Hookah and killed you.");
+  t("'an enemy held…' → 'An enemy held…'", a === "An enemy held Hookah and killed you.", `→ "${a}"`);
+  // TR-KALAN-05: EN'de etiket gövdesi değişir, ek AYNEN kalır (eski davranış bayt-aynı).
+  const b = en("Check the killerInfo field.");
+  t("'killerInfo' → 'killer info'", b === "Check the killer info field.", `→ "${b}"`);
+  const c = en("The enemyComp's duelist entered first.");
+  t("EN iyelik eki korunur ('enemy comp's')", c === "The enemy comp's duelist entered first.", `→ "${c}"`);
+  // TR-KALAN-04: TR tutanak desenleri EN metne dokunmaz; EN 'reported as' eşi sürer.
+  const d = "Killer: Jett held the angle from A Heaven.";
+  t("'Killer:' etiketi bayt-aynı (TR 'Katil:' deseni EN'de eşleşmez)", en(d) === d, `→ "${en(d)}"`);
+  const e = en("The killer was reported as Jett.");
+  t("'was reported as' → 'was'", e === "The killer was Jett.", `→ "${e}"`);
+  // TR-KALAN-07: EN teşhis-etiketi soyucu (sınır savunması; zincire bağlama B03'te).
+  const sdl = (CT as unknown as Record<string, unknown>).stripDiagnosisLabel as
+    ((s: string, l: "tr" | "en") => string) | undefined;
+  const f = sdl ? sdl("Root cause: you held the same B Main wide angle.", "en") : "<fonksiyon yok>";
+  t("'Root cause: you held…' → 'You held…'", f === "You held the same B Main wide angle.", `→ "${f}"`);
+  const g = "Core problem-solving becomes easier with comms.";
+  const gOut = sdl ? sdl(g, "en") : "<fonksiyon yok>";
+  t("'Core problem-solving…' bayt-aynı (tire önünde boşluk yok → ayraç değil)", gOut === g, `→ "${gOut}"`);
 }
 
 console.log(`\n${fail === 0 ? "TÜM TESTLER GEÇTİ ✓" : `${fail} TEST BAŞARISIZ ✗`}`);

@@ -14,6 +14,12 @@ import {
   stripRankSections,
   filterSectionsBySide,
 } from "../lib/knowledge-loader";
+import fs from "node:fs";
+import path from "node:path";
+import { knownAgent } from "../lib/format-display";
+import { cleanCoachText } from "../lib/coach-text";
+import { extractKillerAgent } from "../lib/reality-checker";
+import { AGENT_ABILITIES } from "../lib/agent-abilities";
 
 let fail = 0;
 const t = (ad: string, kosul: boolean, detay = "") => {
@@ -89,6 +95,34 @@ console.log("\n[6] filterSectionsBySide — karşı-taraf bölümleri düşer, g
     def.includes("Savunma Kurulumları") && def.includes("hep kalır") && def.includes("Giriş metni"));
   t("side yok → içerik AYNEN döner", filterSectionsBySide(md, undefined) === md);
   t("bilinmeyen side → filtre yok", filterSectionsBySide(md, "spectator") === md);
+}
+
+console.log("\n[7] AJAN TABLOLARI TUTARLI — KB'deki her ajan her tabloda (TR-KALAN-20, 2026-09-23)");
+{
+  // KÖK: ajan adının kanonik kaynağı tek değil. Miks eklenirken format-display
+  // AGENT_NAMES ve coach-text CLEAN_AGENT_NAMES atlandı → knownAgent('miks')
+  // undefined, katil-guard (B83) Miks'i düşürdü, "miks" küçük harf kaldı. Bu test
+  // knowledge/agents/<rol>/<ajan>.md dosyalarından türetilen kümeyi TÜM tablolara
+  // karşı sınar: bir sonraki ajan eklemesinde bir tablo unutulursa KIRMIZI yanar.
+  // Tablolar iç sabit olduğundan her biri DAVRANIŞI üzerinden sınanır.
+  const root = path.join(process.cwd(), "knowledge", "agents");
+  const slugs = fs.readdirSync(root, { withFileTypes: true })
+    .filter((d) => d.isDirectory() && !d.name.startsWith("_"))
+    .flatMap((d) => fs.readdirSync(path.join(root, d.name)).filter((f) => f.endsWith(".md")).map((f) => f.slice(0, -3)));
+  t("KB'de ajan dosyası bulundu (≥29)", slugs.length >= 29, `→ ${slugs.length}`);
+  for (const slug of slugs) {
+    const canon = knownAgent(slug);
+    t(`${slug}: format-display knownAgent`, !!canon, `→ ${String(canon)}`);
+    if (!canon) continue;
+    const lc = canon.toLowerCase();
+    const cased = cleanCoachText(`Rakip ${lc} seni vurdu.`, "tr");
+    t(`${slug}: coach-text CLEAN_AGENT_NAMES casing → ${canon}`, cased.includes(`Rakip ${canon} `), `→ "${cased}"`);
+    const rc = extractKillerAgent(`killed by ${lc} with vandal`);
+    t(`${slug}: reality-checker AGENT_NAMES → ${canon}`, rc === canon, `→ ${String(rc)}`);
+    t(`${slug}: agent-abilities AGENT_ABILITIES[${canon}]`, !!AGENT_ABILITIES[canon]);
+    const kl = extractEnemyAgentFromKillerInfo(`killed by ${slug}`);
+    t(`${slug}: knowledge-loader AGENT_ROLE_MAP → ${canon}`, kl === canon, `→ ${String(kl)}`);
+  }
 }
 
 console.log(`\n══════ ${fail === 0 ? "✅ TÜMÜ GEÇTİ" : `❌ ${fail} BAŞARISIZ`} ══════\n`);

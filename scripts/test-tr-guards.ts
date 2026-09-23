@@ -20,7 +20,8 @@
  * Koşum: npx tsx scripts/test-tr-guards.ts   (npm test içinde)
  */
 import { realityCheck } from "../lib/reality-checker";
-import { cleanCoachText, enforceSuppliedCallout } from "../lib/coach-text";
+import * as CT from "../lib/coach-text";
+const { cleanCoachText, enforceSuppliedCallout } = CT;
 import { trOrdinalLocative } from "../lib/tr-suffix";
 import { buildHistoryBlock } from "../lib/history-block";
 
@@ -350,9 +351,26 @@ console.log("\n════ B3 · KONUM / KATİL / ROSTER ════");
   }
 
   // 54-57 — ROSTER EK TABLOSU (softi'nin yasakladığı "kadro'<ek>" biçimi)
-  eq("54 'roster'ı' → kadrosunu (canlı skye-i: kadro'ı)",
+  // 54 BEKLENTİSİ DÜZELTİLDİ (TR-KALAN-23, 2026-09-23): eski beklenti "kadrosunu
+  // … kontrol ediyor" YANLIŞI doğru sayıyordu — özne konumunda belirtisiz tamlama
+  // iyeliktir ("Jett ve Reyna kadrosu … ediyor"), belirtme hâli değil.
+  eq("54 özne konumu 'roster'ı' → kadrosu (canlı skye-i)",
     cleanCoachText("Jett ve Reyna roster'ı hızla kontrol ediyor.", "tr"),
-    "Jett ve Reyna kadrosunu hızla kontrol ediyor.");
+    "Jett ve Reyna kadrosu hızla kontrol ediyor.");
+  // 54b — özne konumu ölçütü: (i) ajan/rakip öbeği + (ii) yan-cümle sonu 3. şahıs.
+  for (const [src, want] of [
+    ["Jett ve Reyna roster'ı hızla site içi açıları kontrol edip ani peek'lerle seni yakalayabilir.",
+      "Jett ve Reyna kadrosu hızla site içi açıları kontrol edip ani peek'lerle seni yakalayabilir."],
+    ["Chamber roster'ı uzun menzile izin vermiyor.", "Chamber kadrosu uzun menzile izin vermiyor."],
+    // Emir kipi / 2. şahıs → belirtme hâli ("kadrosunu") KORUNUR.
+    ["Roster'ı kontrol et.", "Kadrosunu kontrol et."],
+    ["Rakip roster'ı iyi oku ve bekle.", "Rakip kadrosunu iyi oku ve bekle."],
+    ["Rakip roster'ı okudun ama yine erken çıktın.", "Rakip kadrosunu okudun ama yine erken çıktın."],
+    // 3 harfli emirler "gir/ver/kur" geniş-zaman ekiyle biter — kural ≥5 harf ister.
+    ["Rakip roster'ı görüp gir.", "Rakip kadrosunu görüp gir."],
+  ] as [string, string][]) {
+    eq(`54b "${src.slice(0, 34)}…"`, cleanCoachText(src, "tr"), want);
+  }
   const R55: [string, string][] = [
     ["roster'ından", "kadrosundan"], ["roster'ını", "kadrosunu"], ["roster'ına", "kadrosuna"],
     ["roster'ıyla", "kadrosuyla"], ["roster'a", "kadrosuna"], ["rosterı", "kadrosunu"],
@@ -382,6 +400,39 @@ console.log("\n════ B3 · KONUM / KATİL / ROSTER ════");
   }
   const c57 = "Their roster is aggressive.";
   same("57 EN 'roster' bayt-aynı", cleanCoachText(c57, "en"), c57);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+console.log("\n════ B01 · AJAN-ADI KİLİDİ + KATİL-GUARD ZİNCİRİ (TR-KALAN-09) ════");
+// ═══════════════════════════════════════════════════════════════════
+{
+  // HEAD: "Reyna seni vurdu" nötrleniyor ama bozuk "Rejyna seni vurdu" katil-guard'ı
+  // atlatıp DEĞİŞMEDEN kullanıcıya gidiyordu (katil bilinmezken uydurma iddia).
+  // Kilit realityCheck'ten ÖNCE çalışınca guard kanonik adı görür (bağlama B03'te).
+  const ean = (CT as unknown as Record<string, unknown>).enforceAgentNames as
+    ((s: string, a: string[]) => string) | undefined;
+  const fixed = ean ? ean("Rejyna seni vurdu, açıyı tut.", ["Jett", "Reyna"]) : "Rejyna seni vurdu, açıyı tut.";
+  const out = realityCheck(fixed, [] as never, { hasKiller: false } as never, "death", "tr").text;
+  eq("58 kilit + guard: uydurma katil nötrlenir", out, "Bir düşman seni vurdu, açıyı tut.");
+}
+
+// ═══════════════════════════════════════════════════════════════════
+console.log("\n════ B01 · SAYI + BULUNMA EKİ (TR-KALAN-27) ════");
+// ═══════════════════════════════════════════════════════════════════
+{
+  // HEAD: trLocative("3") → "3'de" (doğrusu 3'te), "6" → "6'de", "40" → "40'de".
+  const want: [string, string][] = [
+    ["1", "1'de"], ["2", "2'de"], ["3", "3'te"], ["4", "4'te"], ["5", "5'te"], ["6", "6'da"],
+    ["7", "7'de"], ["8", "8'de"], ["9", "9'da"], ["10", "10'da"], ["19", "19'da"], ["20", "20'de"],
+    ["30", "30'da"], ["40", "40'ta"], ["60", "60'ta"], ["70", "70'te"], ["90", "90'da"], ["100", "100'de"],
+    ["R3", "R3'te"], ["R40", "R40'ta"],
+  ];
+  for (const [n, w] of want) eq(`59 trLocative("${n}")`, CT.trLocative(n), w);
+  // Callout / harita yolu BAYT-AYNI (bugünkü çağıranlar: report/route.ts, app/page.tsx).
+  for (const [w, exp] of [["A Main", "A Main'de"], ["B Link", "B Link'te"], ["Bind", "Bind'da"],
+    ["Ascent", "Ascent'te"], ["Mid", "Mid'de"]] as [string, string][]) {
+    eq(`60 callout "${w}" bayt-aynı`, CT.trLocative(w), exp);
+  }
 }
 
 console.log(`\n${fail === 0 ? "TAM YEŞİL" : "KIRMIZI"} — ${n - fail}/${n} geçti${fail ? `, ${fail} HATA` : ""}`);

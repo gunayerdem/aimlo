@@ -140,7 +140,9 @@ const KORPUS: Vaka[] = [
     kind: "death", lang: "tr", map: "Ascent", agent: "Jett",
     body: { killerInfo: "killed by cypher with vandal" },
     ctx: { deathLocation: "A Main" },
-    korunmali: ["peek attın"],
+    // B01/TR-KALAN-24 (2026-09-23): "Az canla" silinince açıkta kalan metin başı
+    // artık büyütülüyor → "Peek attın …" (eski çıktı küçük harfle başlıyordu).
+    korunmali: ["Peek attın", "açıyı tutamadın"],
     silinmeli: ["Az canla", "az canla"],
   },
   {

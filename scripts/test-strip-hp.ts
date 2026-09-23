@@ -56,9 +56,12 @@ eq("EN dil-izolasyonu: 'düşük canla' enjekte ETME",
 
 // ── cleanCoachText entegrasyonu (boşluk/akış normalize dahil, uçtan uca) ──
 // canlı-test #8 (23099d1): stripHpClaims nitel can iddialarını da siler — beklenti güncellendi
+// B01/TR-KALAN-24 (2026-09-23): eski beklenti KÜÇÜK harfle başlayan metni doğru
+// sayıyordu ("dövüşe…") — süzgecin cümle başını bozması tam da o bulgunun konusu.
+// Metin başı artık büyütülüyor (yalnız 0. konum, tr-TR locale).
 eq("cleanCoachText TR uçtan uca",
   cleanCoachText("Düşük canla (41 HP) dövüşe girip öldün; Reyna olarak risk aldın.", "tr"),
-  "dövüşe girip öldün; Reyna olarak risk aldın.");
+  "Dövüşe girip öldün; Reyna olarak risk aldın.");
 eq("cleanCoachText asla boş dönmez (yalnız HP-öbeği yeniden yazılır)",
   cleanCoachText("41 HP ile öldün.", "tr").length > 0,
   true);

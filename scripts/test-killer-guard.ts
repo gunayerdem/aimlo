@@ -15,7 +15,7 @@
  *
  * Koşum: npx tsx scripts/test-killer-guard.ts   (npm test içinde)
  */
-import { realityCheck } from "../lib/reality-checker";
+import { realityCheck, extractKillerAgent, buildFactGround } from "../lib/reality-checker";
 
 let fail = 0;
 function t(name: string, ok: boolean, extra = "") {
@@ -71,6 +71,22 @@ console.log("\n[3] KATİL BİLİNMİYORKEN — ad UYDURULMAZ, genelleştirilir")
   console.log("    SONRA:", noKiller);
   t("uydurma ajan adı silindi", !/Sova/i.test(noKiller), `→ "${noKiller}"`);
   t("cümle anlamlı kaldı", /seni A Short'ta vurdu/.test(noKiller), `→ "${noKiller}"`);
+}
+
+console.log("\n[4] MİKS KATİLKEN — ad tablosu eksikliği (TR-KALAN-20, 2026-09-23)");
+{
+  // HEAD probe: knownAgent('miks') → undefined → extractKillerAgent → null →
+  // factGround.killerAgent undefined → B83 katil-tutarlılığı Miks'te HİÇ çalışmıyor.
+  const got = extractKillerAgent("killed by miks with vandal");
+  t("extractKillerAgent('killed by miks with vandal') === 'Miks'", got === "Miks", `→ ${String(got)}`);
+  const fg = buildFactGround({ killerInfo: "killed by miks with vandal" }, {});
+  t("buildFactGround(...).killerAgent === 'Miks'", fg.killerAgent === "Miks", `→ ${String(fg.killerAgent)}`);
+  // Bilinçli davranış değişikliği: guard artık Miks'i gerçek katil olarak görür.
+  const out = realityCheck("Jett seni A Short'ta vurdu.", [] as never,
+    buildFactGround({ killerInfo: "killed by miks with vandal" }, { deathLocation: "A Short" }),
+    "death", "tr", "Ascent").text;
+  console.log("    SONRA:", out);
+  t("B83 Miks'te çalışıyor (yanlış katil 'Jett' → 'Miks')", /Miks seni/.test(out) && !/Jett/.test(out), `→ "${out}"`);
 }
 
 console.log(`\n${fail === 0 ? "TÜM TESTLER GEÇTİ ✓" : `${fail} TEST BAŞARISIZ ✗`}`);

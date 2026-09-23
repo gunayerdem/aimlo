@@ -24,13 +24,16 @@ const MAP_NAMES: Record<string, string> = {
   sunset: "Sunset",
 };
 
-/** OCR slug → resmi ajan adı. Tek özel durum KAY/O (OCR "kayo"/"kay/o" üretebilir). */
+/** OCR slug → resmi ajan adı. Tek özel durum KAY/O (OCR "kayo"/"kay/o" üretebilir).
+ *  'miks' (TR-KALAN-20, 2026-09-23): yeni ajan eklenirken bu tablo atlanmıştı →
+ *  knownAgent('miks') undefined, extractKillerAgent Miks'i düşürüyor, katil-
+ *  tutarlılığı (B83) Miks'te hiç çalışmıyordu. Tutarlılık testi: test-kb-pure-fns [7]. */
 const AGENT_NAMES: Record<string, string> = {
   astra: "Astra", breach: "Breach", brimstone: "Brimstone", chamber: "Chamber",
   clove: "Clove", cypher: "Cypher", deadlock: "Deadlock", fade: "Fade",
   gekko: "Gekko", harbor: "Harbor", iso: "Iso", jett: "Jett",
   "kay/o": "KAY/O", kayo: "KAY/O", "ky/o": "KAY/O",
-  killjoy: "Killjoy", neon: "Neon", omen: "Omen", phoenix: "Phoenix",
+  killjoy: "Killjoy", miks: "Miks", neon: "Neon", omen: "Omen", phoenix: "Phoenix",
   raze: "Raze", reyna: "Reyna", sage: "Sage", skye: "Skye",
   sova: "Sova", tejo: "Tejo", veto: "Veto", viper: "Viper",
   vyse: "Vyse", waylay: "Waylay", yoru: "Yoru",

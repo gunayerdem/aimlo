@@ -175,5 +175,102 @@ eq("meta düşer + bozuk callout düzelir",
   ),
   "A Lamps'ta öldün; Lamps gibi köşede bekleme.");
 
+// ── B4 TUTANAK DİLİ (TR-KALAN-04, 2026-09-23) ──────────────────────────────
+// Fixture'lar TR pipeline denetiminin (2026-09-16) canlı çıktılarından BİREBİR;
+// iki doğrulayıcının (V0 sözleşme, V1 regresyon) düzeltilmiş beklentileriyle.
+console.log("── B4 tutanak dili: canlı sızıntılar ──");
+const B4: [string, string, string][] = [
+  ["B4-1 know-g (kesme-ekli 'katil bilgisi'da' + kaydedildi)",
+    "Raze seni A Site'ta aynı bölgeden öldürdü, katil bilgisi'da Raze olarak kaydedildi.",
+    "Raze seni A Site'ta aynı bölgeden öldürdü."],
+  ["B4-2 omen-b ('olarak doğrulanmış' + tekrar kuyruğu)",
+    "Jett seni B Main'de karşıdan bekliyordu ve öldüren olarak doğrulanmış düşman Jett.",
+    "Jett seni B Main'de karşıdan bekliyordu."],
+  ["B4-3 r2-c ('olarak kaydedildi')",
+    "Yoru seni B Generator'da bekleyip öldürdü, öldüren ajan Yoru olarak kaydedildi.",
+    "Yoru seni B Generator'da bekleyip öldürdü."],
+  ["B4-4 know-d (katil olarak X var + tekrar 'ölüm … gerçekleşti')",
+    "Raze seni A Site'ta öldürdü; katil olarak Raze var ve ölüm A Site'te gerçekleşti.",
+    "Raze seni A Site'ta öldürdü."],
+  ["B4-5 r1-b (etiket tümden kalkar, virgül-splice YOK — V1 beklentisi)",
+    "Katil olarak Miks var ve Classic'le A Hall'daki geniş görüş hattından bedava atış aldı.",
+    "Miks Classic'le A Hall'daki geniş görüş hattından bedava atış aldı."],
+  ["B4-6 r3-b (çıplak onay ortacı düşer, olgu KALIR)",
+    "Katil Jett ve Vandal doğrulanmış; B Link'te seni uzaktan karşılayıp öldürdü.",
+    "Katil Jett ve Vandal; B Link'te seni uzaktan karşılayıp öldürdü."],
+  ["B4-7 omen-c (süzgecin ESKİ regresyonu 'Katil Jett görünüyor' kapanır)",
+    "Katil Jett olarak kayıtlarda görünüyor, B Main'de seni karşıladı.",
+    "Katil Jett, B Main'de seni karşıladı."],
+  ["B4-8 astra-e ('net olarak' + envanter kuyruğu)",
+    "Jett Vandal'la A site içinden uzak mesafeden seni öldürdü, katil net olarak Jett ve silah Vandal.",
+    "Jett Vandal'la A site içinden uzak mesafeden seni öldürdü."],
+  ["B4-9 r1-c (form-alanı iki noktası)",
+    "Katil: Miks, Classic ile A Hall girişini kontrol etmiş ve uzak mesafede seni yakaladı.",
+    "Katil Miks, Classic ile A Hall girişini kontrol etmiş ve uzak mesafede seni yakaladı."],
+  ["B4-10 M0-R0 (veri seti + veri yokluğu)",
+    "Bu round veri setinde öldüren bilgi yok; kimse seni öldürmedi.",
+    "Kimse seni öldürmedi."],
+  ["B4-11 M1-R1 (eksik-veri raporu düşer, olgu kalır)",
+    "Bir düşman seni B Site'te öldürdü; öldüren ajan/cihaz bilgisi gelmedi.",
+    "Bir düşman seni B Site'te öldürdü."],
+  ["B4-12 S29 (yüklem ortaçta cümle KIRILMAZ)",
+    "Cypher seni A Hall'dan Vandal'la tutuyor, öldürülme silah ve konumuyla doğrulanmış.",
+    "Cypher seni A Hall'dan Vandal'la tutuyor."],
+  ["B4-19 cyclereal-r3d3 M1-R1 (sıra kilidi: 'katil yok' kırığı üretilmez)",
+    "Bir düşman seni B Site'ta vurdu; katil bilgisi yok.",
+    "Bir düşman seni B Site'ta vurdu."],
+  ["B4-20 öğüt KORUNUR (virgül köprüyü durdurur)",
+    "Bir düşman seni B Site'te öldürdü; öldüren ajan bilgisi yok, o yüzden geniş açıyla peek at.",
+    "Bir düşman seni B Site'te öldürdü, o yüzden geniş açıyla peek at."],
+  ["R1 komşu meşru yan-cümle ('takımın trade alamadı') KORUNUR",
+    "Jett seni B Main'de öldürdü, takımın trade alamadı, katil Jett doğrulandı.",
+    "Jett seni B Main'de öldürdü, takımın trade alamadı."],
+  ["R4 iki meşru yan-cümle KORUNUR",
+    "Spike'ı kurdun, B Link'i tuttun, pozisyonun doğrulandı.",
+    "Spike'ı kurdun, B Link'i tuttun."],
+  ["R6 öznesi olan devam → iki düzgün cümle (virgül-splice YOK)",
+    "Katil olarak Jett var ve sen A Site'te açıkta kaldın.",
+    "Katil Jett. Sen A Site'te açıkta kaldın."],
+  ["R7 tekrar olan 'ölüm … gerçekleşti' silinir",
+    "Sova bu round seni mid cubby'den öldürdü; ölüm cubby'de gerçekleşti.",
+    "Sova bu round seni mid cubby'den öldürdü."],
+  ["virgül yan-cümle (önek çekimli yüklemle bitiyor) temizlenir",
+    "Bu roundta kimse seni öldürmedi, dolayısıyla katil bilgisi yok.",
+    "Bu roundta kimse seni öldürmedi."],
+];
+for (const [name, input, want] of B4) eq(name, stripMetaTerms(input), want);
+eq("B4-16 mevcut F1 korunur (fiilsiz 'katil olarak Iso')",
+  stripMetaTerms("katil olarak Iso OCR'da kesin."), "Katil olarak Iso.");
+
+console.log("── B4 bayt-aynı guard'lar (guard'ın kendisi regresyon üretmesin) ──");
+const B4_SAME = [
+  "Katil bilgisini takımına ver, sonra rotasyon yap.",                     // B4-13 sağ sınır
+  "Ult'u doğrulanmış düşman yoğunluğuna yönlendir.",                        // B4-14 tejo.md:26
+  "Bu round'da öldüren bilgi yok.",                                          // B4-15 tam-metin guard'ı
+  "Jett seni A Site'te öldürdü. Silah sesi dışında bilgi yok, ortayı kontrol et.", // R2 çıplak 'silah' rol değil
+  "Verisine göre harita Ascent, ölüm Mid Link'te gerçekleşti ve savunmada bir oyuncu seni oradan vurdu.", // R3 TEK konum
+  "Açıyı çok geniş tuttun, öldüren Chamber.",                                // R5 yeni bilgi taşıyan kuyruk
+  "Takımın trade alamadı, açıyı değiştir.",
+  // Korpus ölçümünde yakalanan kendi regresyonumuz (cycleab-luna-none M0-R0):
+  // virgül LİSTE ayırıcısıyken silme "Bu round düşman öldürmesi." kırığı üretiyordu.
+  "Bu round düşman öldürmesi, ölüm yeri veya silah bilgisi yok.",
+];
+for (const s of B4_SAME) eq(`bayt-aynı: "${s.slice(0, 40)}..."`, stripMetaTerms(s), s);
+
+console.log("── B4 dedektör (ölçüm) ──");
+// Asılmama: "Katil: …" dedektörü /g'siz yazılsaydı while(re.exec) sonsuz dönerdi.
+eq("findMetaTermHits('Katil: Miks, …') döner, tam 1 hit",
+  findMetaTermHits("Katil: Miks, Classic ile A Hall girişini kontrol etmiş ve uzak mesafede seni yakaladı.").length, 1);
+eq("ham 'olarak kaydedildi' işaretlenir",
+  findMetaTermHits("öldüren ajan Yoru olarak kaydedildi").length >= 1, true);
+for (const [name, input] of B4) {
+  eq(`temiz ${name.split(" ")[0]} işaretlenmez`, findMetaTermHits(stripMetaTerms(input)).length, 0);
+}
+eq("EN dalı: 'Killer:' etiketi TR deseniyle eşleşmez (bayt-aynı)",
+  cleanCoachText("Killer: Jett held the angle from A Heaven.", "en"), "Killer: Jett held the angle from A Heaven.");
+eq("uçtan uca know-g ham metni (killerInfo'da → Türkçe ek → meta söküm)",
+  cleanCoachText("Raze seni A Site'ta aynı bölgeden öldürdü, killerInfo'da Raze olarak kaydedildi.", "tr"),
+  "Raze seni A Site'ta aynı bölgeden öldürdü.");
+
 console.log(fail ? `\n${fail} FAIL` : "\nTAM YESIL");
 process.exitCode = fail ? 1 : 0;

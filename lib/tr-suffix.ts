@@ -50,3 +50,43 @@ export function trOrdinalLocative(n: number): string {
   const mag = zeros >= 12 ? 12 : zeros >= 9 ? 9 : zeros >= 6 ? 6 : zeros >= 3 ? 3 : 2;
   return `${s}${TR_MAG_LOC[mag]}`;
 }
+
+// ── SAYI + BULUNMA EKİ (TR-KALAN-27, 2026-09-23) ───────────────────────────────
+// lib/coach-text.ts trLocative yalnız HARF ünlü uyumuna bakıyordu; rakamda ünlü
+// olmadığı için her sayıya "'de" veriyordu (HEAD probe: 3'de/6'de/9'de/10'de/
+// 40'de/60'de/90'de — doğrusu 3'te/6'da/9'da/10'da/40'ta/60'ta/90'da). Kural
+// trOrdinalLocative ile AYNI: ek, sayının SON OKUNAN sözüne uyar (ünlü + sertlik).
+/** Son HANE sözü → bulunma eki: bir-de, iki-de, üç-te, dört-te, beş-te, altı-da,
+ *  yedi-de, sekiz-de, dokuz-da; 0 tek başına "sıfır-da". */
+const TR_DIGIT_LOCATIVE: Record<string, string> = {
+  "0": "'da", "1": "'de", "2": "'de", "3": "'te", "4": "'te",
+  "5": "'te", "6": "'da", "7": "'de", "8": "'de", "9": "'da",
+};
+/** Sonu 0 olan sayıda ONLUK sözü: on-da, yirmi-de, otuz-da, kırk-ta, elli-de,
+ *  altmış-ta, yetmiş-te, seksen-de, doksan-da. */
+const TR_TENS_LOCATIVE: Record<string, string> = {
+  "1": "'da", "2": "'de", "3": "'da", "4": "'ta", "5": "'de",
+  "6": "'ta", "7": "'te", "8": "'de", "9": "'da",
+};
+/** yüz-de / bin-de / milyon-da / milyar-da / trilyon-da. */
+const TR_MAG_LOCATIVE: Record<number, string> = {
+  2: "'de", 3: "'de", 6: "'da", 9: "'da", 12: "'da",
+};
+
+/** Sayı + ünlü/sertlik uyumlu bulunma eki: 3 → "3'te", 40 → "40'ta", 100 → "100'de".
+ *  Rakam dizisi olarak verilirse yazım korunur (baştaki sıfırlar yalnız hesapta düşer). */
+export function trNumberLocative(n: number | string): string {
+  const raw = typeof n === "number"
+    ? (Number.isFinite(n) ? String(Math.trunc(Math.abs(n))) : "0")
+    : String(n).trim();
+  if (!/^\d+$/.test(raw)) return `${raw}'de`;
+  const s = raw.replace(/^0+(?=\d)/, "");
+  if (s === "0") return `${raw}${TR_DIGIT_LOCATIVE["0"]}`;
+  const last = s[s.length - 1];
+  if (last !== "0") return `${raw}${TR_DIGIT_LOCATIVE[last]}`;
+  const tens = s.length >= 2 ? s[s.length - 2] : "0";
+  if (tens !== "0") return `${raw}${TR_TENS_LOCATIVE[tens]}`;
+  const zeros = s.length - s.replace(/0+$/, "").length;
+  const mag = zeros >= 12 ? 12 : zeros >= 9 ? 9 : zeros >= 6 ? 6 : zeros >= 3 ? 3 : 2;
+  return `${raw}${TR_MAG_LOCATIVE[mag]}`;
+}
