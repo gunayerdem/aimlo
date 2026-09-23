@@ -30,10 +30,39 @@ const show = (x: unknown) => JSON.stringify(x);
 async function main() {
   console.log("\n── 1) pickReportScore — saf seçim kuralı (A058) ──");
   {
-    const a = pick([{ score: "5-3" }, { score: "?-?" }]);
-    check("son round '?-?' + önceki '5-3' → 5-3 (HEAD: 400)", a.ok && a.yours === "5" && a.enemy === "3" && a.skippedInvalid === 1, show(a));
-    const b = pick([{ score: "7-5" }, { score: "?-?" }, { score: " ? - ? " }]);
-    check("iki okunamayan son round → önceki 7-5, skippedInvalid=2", b.ok && b.yours === "7" && b.enemy === "5" && b.skippedInvalid === 2, show(b));
+    // B05 inceleme (2026-09-24): atlama YALNIZ geç teslim edilen ERKEN round için.
+    // Masaüstü ocr_score maç içinde yapışkan (detection.rs:3372 dışında None'a
+    // dönmüyor) → geç "?-?" pratikte ilk skor okunmadan önceki bir round'dur.
+    const a = pick([{ round: 2, score: "5-3" }, { round: 1, score: "?-?" }]);
+    check("geç teslim edilen ERKEN round '?-?' (R1) + R2 '5-3' → 5-3", a.ok && a.yours === "5" && a.enemy === "3" && a.skippedInvalid === 1, show(a));
+    const b = pick([{ round: 5, score: "7-5" }, { round: 1, score: "?-?" }, { round: 2, score: " ? - ? " }]);
+    check("iki geç ERKEN okunamayan round → R5 7-5, skippedInvalid=2", b.ok && b.yours === "7" && b.enemy === "5" && b.skippedInvalid === 2, show(b));
+    const late = pick([{ round: 1, score: "1-0" }, { round: 2, score: "1-1" }, { round: 3, score: "?-?" }]);
+    check("SON round (R3) '?-?' → geçersiz (bayat 1-1 final ilan edilmez)", !late.ok && (late as { reason?: string }).reason === "late_unreadable", show(late));
+    const unnumbered = pick([{ score: "5-3" }, { score: "?-?" }]);
+    check("numarasız '?-?' atlanamaz (sırası bilinemiyor) → geçersiz (B05 öncesi gibi)", !unnumbered.ok, show(unnumbered));
+    const selUnnumbered = pick([{ score: "5-3" }, { round: 1, score: "?-?" }]);
+    check("seçilen geçerli round numarasız + atlanan var → geçersiz", !selUnnumbered.ok, show(selUnnumbered));
+    const dup = pick([{ round: 2, score: "1-1" }, { round: 3, score: "2-1" }, { round: 3, score: "?-?" }]);
+    check("aynı numaralı (R3) '?-?' seçilenden sonra → geçersiz (eşit = küçük değil)", !dup.ok, show(dup));
+    const realistic = pick([
+      { round: 1, score: "0 - 1", result: "loss" },
+      { round: 2, score: "1 - 1", result: "win" },
+      { round: 3, score: "2 - 1", result: "win" },
+      { round: 1, score: "?-?", result: "loss" },
+    ]);
+    check("gerçekçi: R1..R3 + geç R1 '?-?' → '2 - 1'", realistic.ok && realistic.yours === "2" && realistic.enemy === "1" && realistic.skippedInvalid === 1, show(realistic));
+    const webNum = pick([{ roundNumber: 4, score: "3-1" }, { roundNumber: 2, score: "?-?" }]);
+    check("web 'roundNumber' alanı da okunur (validateRequest ile aynı sıra)", webNum.ok && webNum.yours === "3", show(webNum));
+    const swift: Record<string, unknown>[] = ["1 - 0", "1 - 1", "2 - 1", "2 - 2", "3 - 2", "3 - 3", "4 - 3", "4 - 4"]
+      .map((s, i) => ({ round: i + 1, score: s, result: i % 2 === 0 ? "win" : "loss" }));
+    swift.push({ round: 9, score: "?-?", result: "won" });
+    const sw = pick(swift);
+    check("Swiftplay R8 '4 - 4' + R9 '?-?' result 'won' → geçersiz (HEAD: '4-4 LOSS' persist)", !sw.ok, show(sw));
+    const trailing: Record<string, unknown>[] = [{ round: 1, score: "1 - 0" }, { round: 2, score: "1 - 1" }, { round: 3, score: "2 - 1" }];
+    for (let r = 4; r <= 20; r++) trailing.push({ round: r, score: "?-?", result: r % 4 === 0 ? "win" : "loss" });
+    const tr17 = pick(trailing);
+    check("3 geçerli + 17 sondaki '?-?' → geçersiz (HEAD: 'önde kapattın 2 - 1', gerçek 7W/13L)", !tr17.ok, show(tr17));
     const c = pick([{ score: "?-?" }]);
     check("tek round '?-?' (40ce444f vakası) → geçersiz (400 aynen)", !c.ok, show(c));
     const d = pick([{ score: "?-?" }, { score: "?-?" }]);
@@ -54,8 +83,10 @@ async function main() {
     check("geçersiz üst-seviye nesne → geçersiz (round'a düşmez, değişmedi)", !k.ok, show(k));
     const l = pick([{ score: "5-3" }], "?-?");
     check("geçersiz üst-seviye dize → geçersiz (round'a düşmez, değişmedi)", !l.ok, show(l));
-    const m = pick([{ score: "5-3" }, { score: "41-3" }]);
-    check("aralık dışı (41) son çift atlanır → 5-3", m.ok && m.yours === "5" && m.enemy === "3", show(m));
+    const m = pick([{ round: 2, score: "5-3" }, { round: 1, score: "41-3" }]);
+    check("aralık dışı (41) geç ERKEN çift atlanır → 5-3", m.ok && m.yours === "5" && m.enemy === "3", show(m));
+    const mLate = pick([{ round: 1, score: "5-3" }, { round: 2, score: "41-3" }]);
+    check("aralık dışı (41) SONRAKİ round → geçersiz", !mLate.ok, show(mLate));
     const n = pick([{ score: "5-3" }, { score: "" }, { score: "dizi" }]);
     check("2-parçalı OLMAYAN son değerler (eskisi gibi) atlanır, sayılmaz → 5-3", n.ok && n.yours === "5" && n.skippedInvalid === 0, show(n));
     check("isValidScoreValue: 0/40 sınırları", isValidScoreValue("0") && isValidScoreValue("40") && !isValidScoreValue("41") && !isValidScoreValue("?"));
@@ -81,24 +112,48 @@ async function main() {
     check("bilinen auth reddi auth.response ile AYNEN geçer (401 sözleşmesi)", res.status === 401 && body?.error === "Invalid or expired token", `got=${res.status} ${show(body)}`);
   }
 
-  console.log("\n── 3) Route — son round '?-?' raporu düşürmez (A058) ──");
+  console.log("\n── 3) Route — geç ERKEN '?-?' raporu düşürmez; SON round '?-?' bayat skoru final yapmaz (A058) ──");
   {
     resetHarness();
     delete process.env.OPENAI_API_KEY; // deterministik yol — AI çağrısı YOK
     const desktopFlat = {
+      rounds: [
+        { round: 1, score: "0 - 1", result: "loss", died: true, deathLocation: "A Main", deathAnalysis: "", enemyAnalysis: [], nextRoundSuggestion: "" },
+        { round: 2, score: "1 - 1", result: "win", died: false, deathAnalysis: "", enemyAnalysis: [], nextRoundSuggestion: "" },
+        { round: 3, score: "2 - 1", result: "win", died: false, deathAnalysis: "", enemyAnalysis: [], nextRoundSuggestion: "" },
+        // geç teslim edilen ERKEN round (ilk skor okunmadan önceki snapshot)
+        { round: 1, score: "?-?", result: "loss", died: true, deathAnalysis: "", enemyAnalysis: [], nextRoundSuggestion: "" },
+      ],
+      maxTokens: 800, lang: "tr", map: "ascent", agent: "jett", side: "attacking",
+    };
+    const res = await route.POST(reportRequest(desktopFlat));
+    const body = await res.json().catch(() => ({}));
+    check("geç ERKEN '?-?' → statü 200 (B05 öncesi: 400 Invalid score values)", res.status === 200, `got=${res.status} ${show(body).slice(0, 160)}`);
+    check("scoreStr = en son okunan skor '2 - 1' (uydurma yok), matchWon=true", body?.scoreStr === "2 - 1" && body?.matchWon === true, `got=${body?.scoreStr} won=${body?.matchWon}`);
+    check("aiGenerated=false (anahtar yok → şablon, dürüst bayrak)", body?.aiGenerated === false);
+    check("fetch hiç çağrılmadı", harness.fetchCalls.length === 0);
+  }
+  {
+    resetHarness();
+    const res = await route.POST(reportRequest({
       rounds: [
         { round: 1, score: "1-0", result: "win", died: false, deathAnalysis: "", enemyAnalysis: [], nextRoundSuggestion: "" },
         { round: 2, score: "1-1", result: "loss", died: true, deathLocation: "A Main", deathAnalysis: "", enemyAnalysis: [], nextRoundSuggestion: "" },
         { round: 3, score: "?-?", result: "unknown", died: true, deathAnalysis: "", enemyAnalysis: [], nextRoundSuggestion: "" },
       ],
       maxTokens: 800, lang: "tr", map: "ascent", agent: "jett", side: "attacking",
-    };
-    const res = await route.POST(reportRequest(desktopFlat));
+    }));
     const body = await res.json().catch(() => ({}));
-    check("statü 200 (HEAD: 400 Invalid score values)", res.status === 200, `got=${res.status} ${show(body).slice(0, 160)}`);
-    check("scoreStr = son GEÇERLİ skor '1 - 1' (uydurma yok)", body?.scoreStr === "1 - 1", `got=${body?.scoreStr}`);
-    check("aiGenerated=false (anahtar yok → şablon, dürüst bayrak)", body?.aiGenerated === false);
-    check("fetch hiç çağrılmadı", harness.fetchCalls.length === 0);
+    check("SON round (R3) '?-?' → 400 'Invalid score values' (bayat '1 - 1 geride kapattın' YOK)", res.status === 400 && body?.error === "Invalid score values", `got=${res.status} ${show(body).slice(0, 160)}`);
+  }
+  {
+    resetHarness();
+    const rounds: Record<string, unknown>[] = ["1 - 0", "1 - 1", "2 - 1", "2 - 2", "3 - 2", "3 - 3", "4 - 3", "4 - 4"]
+      .map((s, i) => ({ round: i + 1, score: s, result: i % 2 === 0 ? "win" : "loss", died: i % 2 === 1 }));
+    rounds.push({ round: 9, score: "?-?", result: "won", died: false });
+    const res = await route.POST(reportRequest({ rounds, lang: "tr", map: "bind", agent: "sage", mode: "swiftplay" }));
+    const body = await res.json().catch(() => ({}));
+    check("Swiftplay R9 '?-?' + 'won' → 400 (HEAD: 200 '4 - 4' matchWon=false → DB'ye LOSS)", res.status === 400 && body?.error === "Invalid score values", `got=${res.status} scoreStr=${body?.scoreStr} won=${body?.matchWon}`);
   }
   {
     resetHarness();

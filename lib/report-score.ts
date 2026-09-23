@@ -15,6 +15,15 @@
  *  - Round taramasında sayısal olmayan ("?-?") çift ATLANIR, bir öncekine bakılır.
  *    Seçilen skor masaüstünün GERÇEKTEN okuduğu son geçerli skordur — yeni değer
  *    üretilmez.
+ *  - ATLAMA YALNIZ GEÇ TESLİM EDİLEN ERKEN round için geçerlidir (B05 inceleme,
+ *    2026-09-24): atlanan HER çiftin round numarası, seçilen geçerli round'un
+ *    numarasından KESİN KÜÇÜK olmalı. Seçilenden SONRAKİ (ya da numarası eşit /
+ *    okunamayan) bir round'un skoru okunamadıysa seçilen skor maçın SONU değil,
+ *    maç ortasından bayat bir ara skordur: rapor onu "final" ilan eder, matchWon
+ *    ondan türetilip analyses.raw_result_json.won + player_memory'ye yazılır
+ *    (ölçülen: Swiftplay R8 "4 - 4" + R9 "?-?" result "won" → "Score: 4-4 (LOSS)",
+ *    "Skoru 4 - 4 geride kapattın"). O şekil B05 öncesi gibi GEÇERSİZ (400).
+ *    Numara okuma sırası validateRequest ile aynı: roundNumber (web) → round (desktop).
  *  - Hiç geçerli çift yok ama 2-parçalı geçersiz dizi VARSA → eskisi gibi geçersiz
  *    (400 "Invalid score values"); uydurma 0-0 WIN/LOSS üretilmez.
  *  - Hiç skor alanı yoksa bugünkü 0-0 davranışı AYNEN.
@@ -52,7 +61,19 @@ export type PickedReportScore =
       /** Round taramasında atlanan sayısal-olmayan SON çift sayısı (log/ölçüm için). */
       skippedInvalid: number;
     }
-  | { ok: false };
+  | {
+      ok: false;
+      /** "late_unreadable": seçilen geçerli skordan SONRAKİ (ya da numarasız) bir
+       *  round'un skoru okunamadı → bayat ara skor final ilan edilmez (log için). */
+      reason?: "late_unreadable";
+    };
+
+/** Round numarası — validateRequest ile AYNI okuma sırası (roundNumber → round). */
+function roundNumberOf(r: Record<string, unknown>): number | null {
+  const n = typeof r.roundNumber === "number" ? r.roundNumber
+    : typeof r.round === "number" ? r.round : null;
+  return n !== null && Number.isFinite(n) ? n : null;
+}
 
 /**
  * score — support all 3 shapes:
@@ -61,7 +82,8 @@ export type PickedReportScore =
  *   3. (no top-level score, but rounds[] present) — desktop A2 flat shape
  *      ships per-round score in the round entries but omits a match-level
  *      score field; we pull "yours-enemy" from the last round entry that
- *      has a NUMERIC "X-Y" score string (A058: "?-?" is skipped).
+ *      has a NUMERIC "X-Y" score string (A058: "?-?" is skipped — ONLY when
+ *      every skipped round is numbered strictly BELOW the selected one).
  */
 export function pickReportScore(rounds: unknown, score: unknown): PickedReportScore {
   let yours = "0";
@@ -82,10 +104,13 @@ export function pickReportScore(rounds: unknown, score: unknown): PickedReportSc
     const rs = rounds as unknown[];
     let sawPair = false;
     let found = false;
+    let selectedNum: number | null = null;
+    const skippedNums: (number | null)[] = [];
     for (let i = rs.length - 1; i >= 0; i--) {
       const r = rs[i];
       if (r && typeof r === "object") {
-        const rScore = (r as Record<string, unknown>).score;
+        const rec = r as Record<string, unknown>;
+        const rScore = rec.score;
         if (typeof rScore === "string") {
           const parts = rScore.split("-").map((s) => s.trim());
           if (parts.length === 2) {
@@ -96,15 +121,27 @@ export function pickReportScore(rounds: unknown, score: unknown): PickedReportSc
               yours = y;
               enemy = e;
               found = true;
+              selectedNum = roundNumberOf(rec);
               break;
             }
             skippedInvalid++;
+            skippedNums.push(roundNumberOf(rec));
           }
         }
       }
     }
     // 2-parçalı dizi vardı ama HİÇBİRİ sayısal değil → eskisi gibi geçersiz.
     if (sawPair && !found) return { ok: false };
+    // B05 inceleme: atlanan okunamayan round seçilenden SONRA (ya da sırası
+    // bilinemiyor) → seçilen skor maç sonu değil, bayat ara skor. Uydurma final
+    // yerine B05 öncesi davranış (400). Geç teslim edilen ERKEN round (numarası
+    // seçilenden küçük) atlanmaya devam eder.
+    if (
+      skippedNums.length > 0 &&
+      (selectedNum === null || skippedNums.some((n) => n === null || n >= selectedNum!))
+    ) {
+      return { ok: false, reason: "late_unreadable" };
+    }
   }
   if (!isValidScoreValue(yours) || !isValidScoreValue(enemy)) {
     return { ok: false };

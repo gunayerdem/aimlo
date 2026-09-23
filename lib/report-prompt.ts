@@ -219,8 +219,13 @@ export function validateRequest(
   // score — 3 biçim (nesne / "13-7" / round'lardan). A058 (B05, 2026-09-24):
   // round taraması artık SAYISAL olmayan ("?-?") son çifti atlayıp önceki GEÇERLİ
   // skora bakıyor; hiç geçerli çift yoksa eskisi gibi 400. Ayrıntı: lib/report-score.ts.
+  // B05 inceleme: atlama yalnız GEÇ TESLİM EDİLEN ERKEN round'da; seçilenden sonraki
+  // bir round okunamadıysa bayat ara skor final ilan edilmez → 400 (B05 öncesi gibi).
   const picked = pickReportScore(b.rounds, b.score);
   if (!picked.ok) {
+    if (picked.reason === "late_unreadable") {
+      console.log("[Aimlo] report score: seçilen skordan SONRAKİ bir round'un skoru okunamadı → final skor bilinmiyor, 400 (bayat ara skor final ilan edilmez)");
+    }
     return { valid: false, error: "Invalid score values" };
   }
   const { yours, enemy } = picked;
