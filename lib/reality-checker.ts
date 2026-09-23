@@ -31,6 +31,11 @@ interface ExtractedClaims {
   claimedWindow: number | null;
   claimedPosition: string | null;
   repetitionClaim: boolean;
+  // TR-KALAN-14 (2026-09-23): pencere ROUND birimli mi ("son 10 round", "last 8
+  // rounds")? Round hafızası yalnız bunu doğrulayabilir; "son 5 maç" maçlar arası
+  // iddiadır (player-memory besliyor olabilir) → bilerek doğrulanmaz. Opsiyonel:
+  // elle kurulan eski ExtractedClaims nesneleri tip-uyumlu kalır (undefined = false).
+  claimedWindowIsRound?: boolean;
 }
 
 interface ValidationResult {
@@ -111,6 +116,10 @@ const COUNT_PATTERNS = [
   /(\d+)\s*defa/i,
   /(\d+)'[iu]nde/i,
   /(\d+)'[iu]nda/i,
+  // TR-KALAN-15: kaynaştırmalı/ünlü uyumlu iç nicelik ("2'sinde", "6'sında",
+  // "3'ünde") — eski iki desen yalnız "'inde/'unda"yı görüyordu, "Son 9 round'un
+  // 2'sinde" bu yüzden pencereyi (9) sayı sanıyordu.
+  /(\d+)['’][sşny]?[ıiuü]n[dt][ae]/i,
   // Multilingual
   /(\d+)\s*round/i,
   // English
@@ -378,33 +387,119 @@ const REPETITION_KEYWORDS = [
   "repeating", "recurring", "persistent", "every time",
 ];
 
+// ── İDDİA ÇIKARIMI (TR-KALAN-14/15, 2026-09-23) ──────────────────────────
+//
+// 🔴 CANLI KANIT (r4-a, 3/3 ölüm hepsi high): raw "Son 3 round'da her round öldün
+// (R1 A Hall, R2 B Generator, R3 B Link)" → final "Son 3 round'da 1 kez öldün
+// (R1 A Hall, R2 B Generator, R3 )". DOĞRU iddia, anti-uydurma katmanında YANLIŞ
+// olguya çevriliyordu. İki yüzeysel çıkarım birlikte:
+//   (a) COUNT_PATTERNS'teki `(\d+)\s*round` PENCERE sayısını ("son 3 round")
+//       ölüm sayısı sanıyordu;
+//   (b) konum = POSITION_NAMES sırasındaki İLK includes() eşleşmesi: "link",
+//       "b link"in alt-dizgesi. Sayım LİSTESİ tek-konum iddiası sanılıyordu.
+// ÇÖZÜM:
+//   (a) pencere sayısı ("son/last/past N") ASLA count değildir. Sayısal iddialar
+//       ("3 kez", "3'ünde", "2'sinde") eski öncelik sırasıyla okunur; hiç sayısal
+//       iddia yoksa TR biriminin MUTLAK niceleyicisi ("hepsinde/tümünde/her
+//       round/üst üste") → pencere N. Nicelik yoksa → null.
+//   (b) konumlar SINIRLI (\p{L} lookaround — Türkçe-\b tuzağı) ve EN UZUN önce
+//       taranır. İddianın konumu, iddianın KENDİ yan-cümlesinde ([.!?;:—\n])
+//       ona BAĞLI konumdur: hemen önündeki en yakın konum ("B Main'de 3 kez");
+//       önünde yoksa ardındaki konumlar — TEK farklı konumsa o, ≥2 ise sayım
+//       LİSTESİ → null (sayım genel ölüm sayısıyla doğrulanır, r4-a). Yan-cümlede
+//       hiç konum yoksa iddia GENELDİR → null.
+//   ⚠ SPEC SAPMASI (bilinçli, ölçülmüş): spec'in "metindeki ≥2 farklı konum →
+//   null" kuralı, TR koç metninin neredeyse HER örneğinde bulunan ÖĞÜT
+//   konumlarını (Market/Heaven/CT) da saydığı için konuma-bağlı sayımları genel
+//   ölüm sayısıyla doğruluyordu ve maliyetsiz replay'de YENİ uydurma üretti:
+//   real-rounds-23 M1-R5 (rh'de B Main ölümü 0) "Bu round B Main'de 3 kez benzer
+//   ölüm var — … Market veya CT'den … Heaven" → "B Main'de 2 kez" (HEAD sayıyı
+//   siliyordu); M1-R9/M1-R17 "B Main'de 2/3 kez" (gerçek 1) aynen geçiyordu.
+//   İddiaya BAĞLI konum kuralı r4-a listesini çözer, bu sınıfı doğurmaz.
+//   İddia yoksa (yalnız konum geçen metin) eski anlam korunur: tek konum → o.
+const WINDOW_NUMBER_BEFORE = /(?:son|last|past)\s+$/i;
+const TR_ABSOLUTE_INNER = /^(?:hepsinde|hepsinin|tümünde|tümünün|tamamında|tamamının|her\s+(?:round|tur|maç)|üst\s+üste|art\s+arda)$/iu;
+const POSITION_SCAN_RE = new RegExp(
+  "(?<![\\p{L}\\p{N}])("
+  + [...POSITION_NAMES].sort((a, b) => b.length - a.length).map(escapeRe).join("|")
+  + ")(?![\\p{L}\\p{N}])",
+  "giu",
+);
+const CLAIM_CLAUSE_END = /[.!?;:—\n]/;
+/** Round birimli pencere mi? (TR-KALAN-14 — "maç" birimi bilerek dışarıda.) */
+function isRoundWindow(text: string, n: number): boolean {
+  return new RegExp(`(?:son|last|past)\\s+${n}\\s*(?:round|raund|tur)`, "i").test(text);
+}
+/** İddianın (anchor) yan-cümlesinde ona BAĞLI konum; anchor yoksa metnin tek konumu. */
+function claimPosition(lower: string, anchor: number | null): string | null {
+  const all = [...lower.matchAll(POSITION_SCAN_RE)].map((m) => ({
+    name: m[1], start: m.index ?? 0, end: (m.index ?? 0) + m[0].length,
+  }));
+  if (anchor === null) {
+    const set = new Set(all.map((a) => a.name));
+    return set.size === 1 ? [...set][0] : null;
+  }
+  let cs = anchor;
+  while (cs > 0 && !CLAIM_CLAUSE_END.test(lower[cs - 1])) cs--;
+  let ce = anchor;
+  while (ce < lower.length && !CLAIM_CLAUSE_END.test(lower[ce])) ce++;
+  const inClause = all.filter((a) => a.start >= cs && a.end <= ce);
+  // BAĞLILIK: konum ile iddia arasında virgül yok ve boşluk ≤40 karakter
+  // ("B Main'de 3 kez", "B Site bölgesinde son 3 round içinde 3 kez"). Virgül
+  // ötesi konum çoğunlukla ÖĞÜTTÜR ("…3 kez öldün, bu yüzden A Site'ı bırak").
+  const bound = (gap: string) => !gap.includes(",") && gap.length <= 40;
+  const before = inClause.filter((a) => a.end <= anchor && bound(lower.slice(a.end, anchor)));
+  if (before.length) return before[before.length - 1].name;
+  const afterAll = inClause.filter((a) => a.start >= anchor);
+  const afterNames = new Set(afterAll.map((a) => a.name));
+  if (afterNames.size !== 1) return null;            // 0 = genel iddia, ≥2 = sayım listesi
+  return bound(lower.slice(anchor, afterAll[0].start)) ? afterAll[0].name : null;
+}
+
 export function extractClaims(text: string): ExtractedClaims {
   const lower = text.toLowerCase();
 
-  // Extract count
+  // Extract count — (a) sayısal iddialar eski öncelik sırasıyla, pencere sayısı atlanır.
   let claimedCount: number | null = null;
-  for (const p of COUNT_PATTERNS) {
-    const m = lower.match(p);
-    if (m) { claimedCount = parseInt(m[1]); break; }
+  let anchor: number | null = null;
+  outer: for (const p of COUNT_PATTERNS) {
+    for (const m of lower.matchAll(new RegExp(p.source, "gi"))) {
+      if (WINDOW_NUMBER_BEFORE.test(lower.slice(0, m.index))) continue;
+      claimedCount = parseInt(m[1]);
+      anchor = m.index ?? null;
+      break outer;
+    }
+  }
+  // Sayısal iddia yoksa: TR biriminin MUTLAK niceleyicisi → pencere N.
+  if (claimedCount === null) {
+    for (const u of lower.matchAll(new RegExp(TR_UNIT_RE.source, TR_UNIT_RE.flags))) {
+      const inner = (u[5] ?? "").trim();
+      if (inner && TR_ABSOLUTE_INNER.test(inner)) {
+        claimedCount = parseInt(u[2], 10);
+        anchor = u.index ?? null;
+        break;
+      }
+    }
   }
 
   // Extract window
   let claimedWindow: number | null = null;
+  let windowIdx: number | null = null;
   for (const p of WINDOW_PATTERNS) {
     const m = lower.match(p);
-    if (m) { claimedWindow = parseInt(m[1]); break; }
+    if (m) { claimedWindow = parseInt(m[1]); windowIdx = m.index ?? null; break; }
   }
-
-  // Extract position
-  let claimedPosition: string | null = null;
-  for (const pos of POSITION_NAMES) {
-    if (lower.includes(pos)) { claimedPosition = pos; break; }
-  }
+  const claimedWindowIsRound = claimedWindow !== null && isRoundWindow(lower, claimedWindow);
 
   // Detect repetition claim
-  const repetitionClaim = REPETITION_KEYWORDS.some(k => lower.includes(k));
+  const repKey = REPETITION_KEYWORDS.find((k) => lower.includes(k));
+  const repetitionClaim = repKey !== undefined;
 
-  return { claimedCount, claimedWindow, claimedPosition, repetitionClaim };
+  // Extract position — iddiaya BAĞLI konum (bkz. yukarıdaki (b)).
+  const claimAnchor = anchor ?? windowIdx ?? (repKey !== undefined ? lower.indexOf(repKey) : null);
+  const claimedPosition = claimPosition(lower, claimAnchor);
+
+  return { claimedCount, claimedWindow, claimedPosition, repetitionClaim, claimedWindowIsRound };
 }
 
 // ── Memory Validation ──
@@ -437,7 +532,12 @@ export function validateClaims(
       (r.death_position || "").toLowerCase().includes(posLower)
     ).length;
   } else {
-    actualCount = windowDeaths.length;
+    // TR-KALAN-15: konum iddiası yoksa sayım GENEL ölüm sayısıyla doğrulanır —
+    // ölüm olgusu konum güveninden BAĞIMSIZDIR (FIX #2'nin high/medium süzgeci
+    // KONUMA-bağlı sayım içindir). Eski hâli yalnız konumu okunmuş ölümleri
+    // sayıyordu: real-rounds-23 M1-R24 (20 round, 20 ölüm, 15'i konumlu) "Son 20
+    // round'un hepsinde öldün" DOĞRU iddiası "15'inde"ye indiriliyordu.
+    actualCount = windowEntries.filter((r) => r.died === true).length;
   }
 
   // Validate count — claimed must be <= actual
@@ -449,10 +549,21 @@ export function validateClaims(
   // FIX #4: Repetition requires actualCount >= 2, no exceptions
   const repetitionValid = !claims.repetitionClaim || actualCount >= 2;
 
+  // TR-KALAN-14 (2026-09-23): PENCERE doğrulaması hiç yoktu — "Son 10 round'da"
+  // 2 round'luk hafızada geçiyordu; bugün kısalıyormuş gibi görünmesinin tek
+  // sebebi COUNT_PATTERNS'ın pencere sayısını count sanmasıydı (TR-KALAN-15 ile
+  // birlikte kapatıldı; AYRI commit'lenirse kısaltma kaybolur). Yalnız ROUND
+  // birimli pencere doğrulanır; "son 5 maç" maçlar arası iddiadır → dokunulmaz.
+  const windowValid = claims.claimedWindow === null
+    || claims.claimedWindowIsRound !== true
+    || claims.claimedWindow <= totalRounds;
+
   // Determine rewrite level
   let rewriteLevel: 1 | 2 | 3;
   if (countValid && positionValid && repetitionValid) {
-    rewriteLevel = 1;
+    // Salt-pencere aşımı: kanıt kısmi değil, yalnız pencere büyük → en az 2
+    // (TR'de sayı yerinde KISALIR, EN'de "recently" — ikisi de olgu üretmez).
+    rewriteLevel = windowValid ? 1 : 2;
   } else if (positionValid && actualCount >= 1) {
     rewriteLevel = 2;
   } else {
@@ -539,15 +650,20 @@ export function rewriteUnsafeClaims(
     // bir indirme, isim/ek yerinde); EN yolu eskisi gibi "recently" ile nötrlenir.
     if (claims.claimedWindow !== null && !trText) {
       const w = claims.claimedWindow;
+      // TR-KALAN-14: salt-pencere iddiası artık bu yola ULAŞIYOR → EN çıktısı
+      // dilbilgisel kalmalı. Öndeki edat+artikel ("over the / in the") birlikte
+      // tüketilir (eski hâli "Over the last 12 rounds" → "Over the recently"),
+      // cümle başındaysa büyük harf korunur ("Last 8 rounds" → "Recently").
+      const EN_PRE = "\\b(?:(?:over|in|during|for)\\s+)?(?:the\\s+)?";
       const windowPatterns = [
         new RegExp(`son\\s+${w}\\s*round`, "gi"),
         new RegExp(`son\\s+${w}\\s*maç`, "gi"),
-        new RegExp(`last\\s+${w}\\s*round(s)?`, "gi"),
-        new RegExp(`last\\s+${w}\\s*match(es)?`, "gi"),
-        new RegExp(`past\\s+${w}\\s*round(s)?`, "gi"),
+        new RegExp(`${EN_PRE}last\\s+${w}\\s*round(s)?`, "gi"),
+        new RegExp(`${EN_PRE}last\\s+${w}\\s*match(es)?`, "gi"),
+        new RegExp(`${EN_PRE}past\\s+${w}\\s*round(s)?`, "gi"),
       ];
       for (const re of windowPatterns) {
-        result = result.replace(re, "recently");
+        result = result.replace(re, (m: string) => (/^[A-Z]/.test(m) ? "Recently" : "recently"));
       }
     }
 
@@ -630,12 +746,20 @@ export function rewriteUnsafeClaims(
     // Remove window claims (TR + EN). TR tarafını rewriteTrWindowUnit kaldırdı.
     if (claims.claimedWindow !== null && !isTr) {
       const w = claims.claimedWindow;
+      // TR-KALAN-14: level-2 ile aynı EN öneki — "Over the last 12 rounds you
+      // died…" eskiden "Over the you died…" bırakıyordu.
+      const EN_PRE = "\\b(?:(?:over|in|during|for)\\s+)?(?:the\\s+)?";
       const windowPatterns = [
         new RegExp(`son\\s+${w}\\s*(round|maç)`, "gi"),
-        new RegExp(`last\\s+${w}\\s*(round|match)(es|s)?`, "gi"),
-        new RegExp(`past\\s+${w}\\s*(round|match)(es|s)?`, "gi"),
+        new RegExp(`${EN_PRE}last\\s+${w}\\s*(round|match)(es|s)?`, "gi"),
+        new RegExp(`${EN_PRE}past\\s+${w}\\s*(round|match)(es|s)?`, "gi"),
       ];
+      const beforeWin = result;
       for (const re of windowPatterns) result = result.replace(re, "");
+      // Silme metin başını açtıysa büyük harf korunur (yalnız gerçekten sildiyse).
+      if (result !== beforeWin && /^[A-Z]/.test(beforeWin.trim())) {
+        result = result.replace(/^[\s,;:]*([a-z])/, (_m, c: string) => c.toUpperCase());
+      }
     }
 
     // Remove "pattern" word if no pattern proven
@@ -1661,7 +1785,11 @@ export function realityCheck(
   // unchanged; just operates on the (possibly guard-trimmed) text.
   if (roundHistory.length > 0) {
     const claims = extractClaims(text);
-    if (claims.claimedCount || claims.claimedPosition || claims.repetitionClaim) {
+    // TR-KALAN-14: salt-pencere iddiası ("Son 5 round'da agresif oynadın") kapıyı
+    // tek başına açmıyordu → validateClaims'e hiç ulaşmıyordu. Yalnız ROUND
+    // birimli pencere açar; "son 5 maç" bilerek dışarıda (kapsam kararı).
+    if (claims.claimedCount || claims.claimedPosition || claims.repetitionClaim
+      || (claims.claimedWindow !== null && claims.claimedWindowIsRound === true)) {
       const validation = validateClaims(claims, roundHistory);
       text = rewriteUnsafeClaims(text, claims, validation, kind !== "suggestion", lang);
       rewriteLevel = Math.max(rewriteLevel, validation.rewriteLevel);

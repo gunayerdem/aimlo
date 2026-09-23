@@ -19,7 +19,7 @@
  *
  * Koşum: npx tsx scripts/test-tr-guards.ts   (npm test içinde)
  */
-import { realityCheck } from "../lib/reality-checker";
+import { realityCheck, extractClaims } from "../lib/reality-checker";
 import * as CT from "../lib/coach-text";
 const { cleanCoachText, enforceSuppliedCallout } = CT;
 import { trOrdinalLocative } from "../lib/tr-suffix";
@@ -463,6 +463,65 @@ console.log("\n════ B02 · DİKİŞ + DEFUSE ARTIĞI (TR-KALAN-11/12) �
     same(`67 NEG bayt-aynı: "${s.slice(0, 34)}…"`, run(s), s);
   // İddia biçimleri hâlâ düşer (eski desenin kalan fiilleri).
   eq("68 'defuse ediyordun' hâlâ düşer", run("Spike defuse ediyordun ve vuruldun."), "Vuruldun.");
+}
+
+// ═══════════════════════════════════════════════════════════════════
+console.log("\n════ B02 · PENCERE + SAYIM İDDİASI (TR-KALAN-14/15) ════");
+// ═══════════════════════════════════════════════════════════════════
+{
+  const run = (s: string, m: Mem[], lang: "tr" | "en" = "tr", fg?: unknown, kind: "death" | "suggestion" = "death", map?: string) =>
+    realityCheck(s, m as never, fg as never, kind, lang, map).text;
+  const all = (total: number, positioned: number, pos = "B Site"): Mem[] =>
+    Array.from({ length: total }, (_, i) => ({
+      round_index: i + 1, died: true,
+      death_position: i < positioned ? pos : null,
+      position_confidence: i < positioned ? "high" : undefined,
+    }));
+
+  // 69 — salt-pencere iddiası artık rewriter'a ulaşır; pencere YERİNDE kısalır.
+  //      HEAD: mem(2,0) → "Agresif oynadın, …" (pencere count sanılıp birim silindi)
+  const c69 = "Son 10 round'da agresif oynadın, bu round da erken peek attın.";
+  eq("69 rh=2 → 'Son 2 round'da' (0 ölüm)", run(c69, mem(2, 0)), "Son 2 round'da agresif oynadın, bu round da erken peek attın.");
+  eq("69b rh=2 → 'Son 2 round'da' (1 ölüm)", run(c69, mem(2, 1)), "Son 2 round'da agresif oynadın, bu round da erken peek attın.");
+  same("70 rh=12 → pencere geçerli, bayt-aynı", run(c69, mem(12, 3)), c69);
+  const c71 = "Son 5 maçta bu haritada hep geç açılıyorsun.";
+  same("71 'maç' birimli pencere BİLEREK dokunulmaz", run(c71, mem(2, 1)), c71);
+  // 72 — EN "recently" yolu. HEAD: "Last you pushed early." (count deseni '8 rounds'u siliyordu)
+  eq("72 EN 'Last 8 rounds' + rh=2 → 'Recently'", run("Last 8 rounds you pushed early.", mem(2, 1), "en"), "Recently you pushed early.");
+  same("72b EN pencere geçerli (rh=12) bayt-aynı", run("Last 8 rounds you pushed early.", mem(12, 1), "en"), "Last 8 rounds you pushed early.");
+  eq("72c EN 'Over the last 12 rounds' öneki birlikte düşer",
+    run("Over the last 12 rounds you pushed early.", mem(4, 1), "en"), "Recently you pushed early.");
+
+  // 73 — r4-a (canlı): DOĞRU "her round" iddiası "1 kez" UYDURMASINA çevrilmez.
+  //      HEAD: "Son 3 round'da 1 kez öldün (R1 A Hall, R2 B Generator, R3 ) — …"
+  const rhR4: Mem[] = [
+    { round_index: 1, died: true, death_position: "a hall", position_confidence: "high" },
+    { round_index: 2, died: true, death_position: "b generator", position_confidence: "high" },
+    { round_index: 3, died: true, death_position: "b link", position_confidence: "high" },
+  ];
+  const r4a = "Son 3 round'da her round öldün (R1 A Hall, R2 B Generator, R3 B Link) — bu round da post-plant'te A Link'te öldü; rakip farklı açılarda seni yakalıyor.";
+  {
+    const out = run(r4a, rhR4, "tr", { hasSpike: false, spikeObservedPlanted: true, hasDeathLocation: true, deathLocation: "a link" }, "suggestion", "fracture");
+    t("73 r4-a 'her round öldün' korunur, 'N kez' YOK", out.includes("Son 3 round'da her round öldün") && !/\d+\s*kez/.test(out), `→ "${out}"`);
+  }
+  t("74 extractClaims(\"Son 9 round'un 2'sinde\").claimedCount === 2",
+    extractClaims("Son 9 round'un 2'sinde").claimedCount === 2, JSON.stringify(extractClaims("Son 9 round'un 2'sinde")));
+  // 75 — GENEL ölüm sayısı: 4 round'un 4'ünde ölüm (2'si konumlu) → "hepsinde" DOĞRU.
+  //      HEAD: konumlu ölümleri (2) sayıyordu → "Son 4 round'un 2'sinde öldün".
+  const c75 = "Son 4 round'un hepsinde öldün, açıyı değiştir.";
+  same("75 genel ölüm sayısı (konumsuz ölüm de ölümdür)", run(c75, all(4, 2)), c75);
+  // 76 — SPEC SAPMASI KİLİDİ: iddiaya BAĞLI konum. rh'de B Main ölümü YOK; öğüt
+  //      konumları (Market/CT/Heaven) sayımı "genel"e çevirip uydurma yazdırmamalı.
+  {
+    const rh76: Mem[] = [
+      { round_index: 1, died: true, death_position: "b site", position_confidence: "high" },
+      { round_index: 2, died: true, death_position: null },
+      { round_index: 3, died: true, death_position: "a tree", position_confidence: "high" },
+      { round_index: 4, died: true, death_position: null },
+    ];
+    const out = run("Bu round B Main'de 3 kez benzer ölüm var — sonraki round B Main'i tek başına bırak, takımınla Market veya CT'den crossfire kur ve sen farklı yükseklikten (zıplama/Heaven) tut.", rh76, "tr", undefined, "suggestion");
+    t("76 konuma-bağlı sayım genel sayıyla 'doğrulanmaz' (B Main'de N kez YAZILMAZ)", !/B Main'de \d+ kez/.test(out), `→ "${out}"`);
+  }
 }
 
 console.log(`\n${fail === 0 ? "TAM YEŞİL" : "KIRMIZI"} — ${n - fail}/${n} geçti${fail ? `, ${fail} HATA` : ""}`);
