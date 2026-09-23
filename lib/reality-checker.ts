@@ -106,17 +106,36 @@ export interface FactGround {
   // Vision route TEK round → string; report route TÜM round'ların konumları → string[]
   // (rapor ÖZETİ birçok round'un konumuna atıfta bulunur; hepsi korunmalı).
   deathLocation?: string | string[];
-  // TR-KALAN-16 (2026-09-23): ÖLÇÜLMÜŞ konumların TAMAMI — deathLocation +
-  // roundHistory[].death_position (düz toLowerCase). realityCheck kendisi doldurur;
-  // guardUnprovenFacts'in konum-yokken döngüsü bu adlara DOKUNMAZ ("R1'de B
-  // Generator'da öldün" geçmişin ölçülmüş gerçeğidir). Opsiyonel: doğrudan
-  // çağıranlar ve rapor route'u bayt-aynı kalır (verilmezse muafiyet yok).
+  // TR-KALAN-16 (2026-09-23) + B02 İNCELEME: BU round'un ölçülmüş konum(lar)ı
+  // (deathLocation; düz toLowerCase) — guardUnprovenFacts'in konum-yokken döngüsü
+  // bunlara KOŞULSUZ dokunmaz. realityCheck kendisi doldurur. İlk sürüm buraya
+  // geçmiş round'ların konumlarını da koyuyordu → model geçmiş ölüm yerini bu
+  // round'a yapıştırdığında ("Bu round yine B Main'de vuruldun") uydurma korunuyordu;
+  // geçmiş artık ayrı alanda (historyLocations). Opsiyonel: doğrudan çağıranlar ve
+  // rapor route'u bayt-aynı kalır (verilmezse muafiyet yok).
   measuredLocations?: string[];
+  // Geçmiş round'ların ÖLÇÜLMÜŞ (died===true, position_confidence high/medium) ölüm
+  // yerleri. Muafiyet şartı: aynı yan-cümlede konuma en yakın zaman çapası GEÇMİŞ
+  // ("R2'de", "önceki round", "son 3 round'da", "earlier") olmalı; "bu round/şimdi/
+  // this round" ya da hiç çapa yoksa muaf DEĞİL (historyAnchoredAt).
+  historyLocations?: string[];
 }
 
 // ── Claim Extraction ──
 
+// B02 İNCELEME (2026-09-23): EN'in baskın sayım biçimi "N of the last M rounds"
+// (korpusta 7 raw alan). Pencere sayısı (M) artık count sayılmadığı için (TR-KALAN-15)
+// N hiçbir desene uymuyordu → "You died in 5 of the last 6 rounds" (1 ölüm) L1 ile
+// geçiyordu. EN ÖNCE: aynı metinde "6 rounds" deseni N'den önce denenmesin.
+// OLGU AŞILAMASI YASAĞI (TR_DEATH_MARKER emsali): yalnız ÖLÜM cümlesinde sayılır —
+// "You went first in 3 of the last 4 rounds" giriş sayımıdır, ölüm sayısıyla
+// "doğrulanıp" 3→2 yapılmamalı (korpus cycle3/E5 ölçümünde yakalandı).
+const EN_OF_LAST_COUNT_RE = /(\d+)\s+(?:out\s+)?of\s+(?:the\s+|your\s+|my\s+)?(?:last|past|previous)\s+\d+/i;
+/** Sayım iddiasının ÖLÜM iddiası olduğunu gösteren yüklem (TR + EN). */
+const CLAIM_DEATH_MARKER =
+  /öl(?!dür)(?:dü|üm|üyor|dün)|vurul|düştü|düşmüş|elendin|died|dies|dying|deaths?\b|killed\s+you|(?:got|were|was|been)\s+killed|shot\s+you|caught\s+you|went\s+down/iu;
 const COUNT_PATTERNS = [
+  EN_OF_LAST_COUNT_RE,
   // Turkish
   /(\d+)\s*kez/i,
   /(\d+)\s*defa/i,
@@ -139,7 +158,9 @@ const WINDOW_PATTERNS = [
   // Turkish
   /son\s+(\d+)\s*round/i,
   /son\s+(\d+)\s*maç/i,
-  /son\s+(\d+)/i,
+  // "son 3 kez B Main'de öldün" = SON ÜÇ SEFER (sayım iddiası), pencere DEĞİL —
+  // pencere sayılınca sayım yalnız son 3 round'da aranıp yanlış doğrulanıyordu.
+  /son\s+(\d+)(?!\d)(?!\s*(?:kez|defa))/i,
   // English
   /last\s+(\d+)\s*rounds?/i,
   /last\s+(\d+)\s*matches?/i,
@@ -415,6 +436,11 @@ const CROSS_ROUND_ANCHOR_RE = new RegExp(
   // spec'in kendi negatif vakası "Son maçlarda sürekli aynı pozisyonda öldün."
   // (hâlâ nötrlenmeli) yalnız bu çapayla yakalanıyor.
   + "|son\\s+(?:\\d+\\s*)?(?:round|raund|tur|maç)[\\p{L}'’]*|maçlar[\\p{L}]*"
+  // B02 İNCELEME: 2. şahıs ŞİMDİKİ zaman ölüm/yakalanma yüklemi ALIŞKANLIK bildirir
+  // ("B Main'de sürekli ölüyorsun") → çapraz-round iddiası. Çapa listesinde yoktu →
+  // iddia hiçbir katmana takılmıyordu (rewriteLevel=3 raporlanıp metin değişmiyordu).
+  // Emir/öğüt biçimleri ("sürekli değiştir", "aynı pozisyonda bekleme") ÇAPA DEĞİL.
+  + "|ölüyorsun|vuruluyorsun|yakalanıyorsun|düşüyorsun|öldürülüyorsun"
   + ")(?![\\p{L}])",
   "iu",
 );
@@ -456,6 +482,10 @@ function repetitionKeyIn(segment: string, scope: string): string | undefined {
 //   İddiaya BAĞLI konum kuralı r4-a listesini çözer, bu sınıfı doğurmaz.
 //   İddia yoksa (yalnız konum geçen metin) eski anlam korunur: tek konum → o.
 const WINDOW_NUMBER_BEFORE = /(?:son|last|past)\s+$/i;
+/** Pencere sayısı yalnız ardından PENCERE BİRİMİ geliyorsa atlanır (B02 inceleme):
+ *  "son 3 kez" / "last 3 times" SAYIM iddiasıdır — eski koşulsuz atlama bunları hiç
+ *  doğrulamıyordu ("Son 3 kez B Main'de öldün", 1 ölüm → L3 no-op). */
+const WINDOW_UNIT_AFTER = /^\d+\s*(?:round|raund|tur|maç|match|game)/i;
 const TR_ABSOLUTE_INNER = /^(?:hepsinde|hepsinin|tümünde|tümünün|tamamında|tamamının|her\s+(?:round|tur|maç)|üst\s+üste|art\s+arda)$/iu;
 const POSITION_SCAN_RE = new RegExp(
   "(?<![\\p{L}\\p{N}])("
@@ -502,7 +532,11 @@ export function extractClaims(text: string): ExtractedClaims {
   let anchor: number | null = null;
   outer: for (const p of COUNT_PATTERNS) {
     for (const m of lower.matchAll(new RegExp(p.source, "gi"))) {
-      if (WINDOW_NUMBER_BEFORE.test(lower.slice(0, m.index))) continue;
+      const at = m.index ?? 0;
+      const deathSentence = CLAIM_DEATH_MARKER.test(trSentenceAt(lower, at));
+      // "son N kez" yalnız ÖLÜM cümlesinde sayımdır; pencere birimli sayı hiç değil.
+      if (WINDOW_NUMBER_BEFORE.test(lower.slice(0, at)) && (WINDOW_UNIT_AFTER.test(lower.slice(at)) || !deathSentence)) continue;
+      if (p === EN_OF_LAST_COUNT_RE && !deathSentence) continue;
       claimedCount = parseInt(m[1]);
       anchor = m.index ?? null;
       break outer;
@@ -663,35 +697,54 @@ export function rewriteUnsafeClaims(
       result = rewriteTrWindowUnit(result, validation.actualWindow, validation.actualCount, false, lang);
     }
 
+    // B02 İNCELEME: EN "N of the last M rounds" birimi TEK sahiple yeniden yazılır
+    // (sayı yalnız İNER, pencere yalnız KISALIR); aşağıdaki genel sayım/pencere
+    // desenleri o birime bir daha DOKUNMAZ ("1 of the recently" artığı olmasın).
+    const ofLastHandled = !trText && claims.claimedCount !== null
+      && rewriteEnOfLast(result, validation, false) !== result;
+    if (ofLastHandled) result = rewriteEnOfLast(result, validation, false);
+
     // Position valid but count/repetition overclaimed
-    if (claims.claimedCount !== null && !validation.countValid) {
+    if (claims.claimedCount !== null && !validation.countValid && !ofLastHandled) {
       // Cover Turkish AND English count phrasings — sed only handled "kez".
       const ct = claims.claimedCount;
-      const countPatterns = trText
-        ? [
-            // TR: yalnız İSİMLİ sayaçlar; ek almış biçime DOKUNMA (guard).
-            new RegExp(`${ct}\\s*kez${TR_SUFFIX_GUARD}`, "gi"),
-            new RegExp(`${ct}\\s*defa${TR_SUFFIX_GUARD}`, "gi"),
-          ]
-        : [
-            new RegExp(`${ct}\\s*kez`, "gi"),
-            new RegExp(`${ct}\\s*defa`, "gi"),
-            new RegExp(`${ct}\\s*round(s)?\\s*(in\\s*a\\s*row|straight|consecutive)?`, "gi"),
-            new RegExp(`${ct}\\s*time(s)?`, "gi"),
-            new RegExp(`${ct}\\s*death(s)?`, "gi"),
-            new RegExp(`${ct}\\s*match(es)?\\s*in\\s*a\\s*row`, "gi"),
-          ];
-      const replacement = validation.actualCount >= 2
-        ? (trText ? `${validation.actualCount} kez` : `${validation.actualCount} times`)
-        : "";
-      for (const re of countPatterns) {
-        result = result.replace(re, replacement);
+      if (trText) {
+        // TR: yalnız İSİMLİ sayaçlar; ek almış biçime DOKUNMA (guard). B02 inceleme:
+        // "son N kez" TEK birimdir — sayı düşerken "son" da düşer ("Son 3 kez B
+        // Main'de öldün" → "B Main'de öldün"; eskiden "Son B Main'de öldün").
+        // Sol rakam sınırı: ct=3 "13 kez"in içinden eşleşmesin.
+        const before2 = result;
+        let removed = false;
+        for (const unit of ["kez", "defa"]) {
+          result = result.replace(
+            new RegExp(`(?<![\\p{L}\\p{N}])(son\\s+)?${ct}\\s*${unit}${TR_SUFFIX_GUARD}`, "giu"),
+            (_m: string, son: string | undefined) => {
+              if (validation.actualCount >= 2) return `${son ?? ""}${validation.actualCount} kez`;
+              removed = true;
+              return "";
+            },
+          );
+        }
+        if (removed) result = repairTrSeam(result, lang, before2);
+      } else {
+        const countPatterns = [
+          new RegExp(`${ct}\\s*kez`, "gi"),
+          new RegExp(`${ct}\\s*defa`, "gi"),
+          new RegExp(`${ct}\\s*round(s)?\\s*(in\\s*a\\s*row|straight|consecutive)?`, "gi"),
+          new RegExp(`${ct}\\s*time(s)?`, "gi"),
+          new RegExp(`${ct}\\s*death(s)?`, "gi"),
+          new RegExp(`${ct}\\s*match(es)?\\s*in\\s*a\\s*row`, "gi"),
+        ];
+        const replacement = validation.actualCount >= 2 ? `${validation.actualCount} times` : "";
+        for (const re of countPatterns) {
+          result = result.replace(re, replacement);
+        }
       }
     }
 
     // Pencere iddiası: TR'de rewriteTrWindowUnit sayıyı ZATEN kısalttı (doğru
     // bir indirme, isim/ek yerinde); EN yolu eskisi gibi "recently" ile nötrlenir.
-    if (claims.claimedWindow !== null && !trText) {
+    if (claims.claimedWindow !== null && !trText && !ofLastHandled) {
       const w = claims.claimedWindow;
       // TR-KALAN-14: salt-pencere iddiası artık bu yola ULAŞIYOR → EN çıktısı
       // dilbilgisel kalmalı. Öndeki edat+artikel ("over the / in the") birlikte
@@ -710,12 +763,22 @@ export function rewriteUnsafeClaims(
       }
     }
 
-    // FIX #3+#4: If repetition invalid, strip ALL repetition language at level 2 too
+    // FIX #3+#4: If repetition invalid, strip repetition claims at level 2 too.
+    // B02 İNCELEME: eski hâli anahtarı HAM ALT-DİZGE olarak siliyordu
+    // (new RegExp(keyword,'gi')) → "sürekli aynı pozisyonda ölüyorsun" → "da
+    // ölüyorsun", "your pattern shows" → "your shows" (replay E22), "pattern'e" →
+    // "'e" (M1-R4). Artık stripRepetitionLevel2: NİTELEYİCİ anahtarlar ("tekrar
+    // eden", "tekrar tekrar", "hep aynı", çapalı "sürekli") sözcük sınırıyla YERİNDE
+    // düşer (korpusta "tekrar eden açını" → "açını" doğru çalışan yol korunur); İSİM
+    // anahtarlar ("aynı pozisyon", "pattern", "same spot") yerinde silinemez → o
+    // YAN-CÜMLE düşer. Belirsiz anahtar çapasızsa hiç sayılmaz (öğüt korunur).
     if (!validation.repetitionValid) {
-      for (const keyword of REPETITION_KEYWORDS) {
-        if (result.toLowerCase().includes(keyword)) {
-          result = result.replace(new RegExp(keyword, "gi"), "");
-        }
+      const kept = stripRepetitionLevel2(result, trText);
+      if (kept !== result) {
+        result = kept || (allowEmptyFallback
+          ? (trText ? "Bu round beklenen açıdan vuruldun." : "You were caught at the expected angle this round.")
+          : "");
+        if (!result) return "";
       }
     }
   }
@@ -743,34 +806,7 @@ export function rewriteUnsafeClaims(
     // A Heaven'da aynı pozisyonda bekleme, off-angle al…") çapa ("R7/yine") ilk
     // yan-cümlede olduğu için ÖĞÜT yan-cümlesini silip geriye yalnız geçmiş-zaman
     // ölüm satırını bırakıyordu (Cycle 3'ün "öneri alanında ölüm kalıbı" dersi).
-    const sentences = result.split(/(?<=[.!?])\s+/);
-    const safe: string[] = [];
-    for (const sent of sentences) {
-      if (repetitionKeyIn(sent, sent) === undefined) { safe.push(sent); continue; }
-      const mEnd = /[.!?]+$/.exec(sent);
-      const body = mEnd ? sent.slice(0, mEnd.index) : sent;
-      const end = mEnd ? mEnd[0] : "";
-      const parts = body.split(/(\s*[;—]\s*)/);          // [yan0, ayıraç0, yan1, …]
-      let rebuilt = "";
-      let pendingSep = "";
-      let firstDropped = false;
-      for (let i = 0; i < parts.length; i += 2) {
-        const clause = parts[i];
-        if (!clause.trim() || repetitionKeyIn(clause, clause) !== undefined) {
-          if (i === 0) firstDropped = true;
-          continue;
-        }
-        rebuilt += (rebuilt ? pendingSep : "") + clause;
-        pendingSep = parts[i + 1] ?? "";
-      }
-      rebuilt = rebuilt.trim();
-      if (!rebuilt) continue;                             // cümlenin tamamı iddiaydı
-      if (firstDropped) {
-        rebuilt = rebuilt.replace(/^([a-zçğıöşü])/u, (c) => (isTr ? c.toLocaleUpperCase("tr-TR") : c.toUpperCase()));
-      }
-      safe.push(rebuilt + end);
-    }
-    result = safe.join(" ").trim();
+    result = dropRepetitionClauses(result, isTr);
     if (!result) {
       // Cycle 3 (council 2026-06-26): a nextRoundSuggestion must NOT be replaced
       // by a past-tense death stub — return "" so the caller keeps the original
@@ -800,15 +836,23 @@ export function rewriteUnsafeClaims(
       result = rewriteTrWindowUnit(result, validation.actualWindow, validation.actualCount, true, lang);
     }
 
+    // B02 İNCELEME: EN "N of the last M rounds" birimi kanıt yokken "recently"ye
+    // iner (birim bütün olarak); genel desenler onu bir daha görmez.
+    const ofLast3 = !isTr && claims.claimedCount !== null
+      && rewriteEnOfLast(result, validation, true) !== result;
+    if (ofLast3) result = rewriteEnOfLast(result, validation, true);
+
     // Remove count claims entirely (TR + EN forms).
     // TR_SUFFIX_GUARD (B2): ek almış biçim ("4 round'un", "3 turda") ARTIK
     // buradan silinmez — yetim ek bırakmanın tek yolu buydu.
-    if (claims.claimedCount !== null) {
+    // B02 İNCELEME: TR "son N kez" birimi "son" ile birlikte düşer (öksüz "Son" yok);
+    // sol rakam sınırı ct=3'ün "13 kez"e yapışmasını engeller.
+    if (claims.claimedCount !== null && !ofLast3) {
       const ct = claims.claimedCount;
       const countPatterns = isTr
         ? [
-            new RegExp(`${ct}\\s*kez${TR_SUFFIX_GUARD}`, "gi"),
-            new RegExp(`${ct}\\s*defa${TR_SUFFIX_GUARD}`, "gi"),
+            new RegExp(`(?<![\\p{L}\\p{N}])(?:son\\s+)?${ct}\\s*kez${TR_SUFFIX_GUARD}`, "giu"),
+            new RegExp(`(?<![\\p{L}\\p{N}])(?:son\\s+)?${ct}\\s*defa${TR_SUFFIX_GUARD}`, "giu"),
           ]
         : [
             new RegExp(`${ct}\\s*kez`, "gi"),
@@ -822,7 +866,7 @@ export function rewriteUnsafeClaims(
     }
 
     // Remove window claims (TR + EN). TR tarafını rewriteTrWindowUnit kaldırdı.
-    if (claims.claimedWindow !== null && !isTr) {
+    if (claims.claimedWindow !== null && !isTr && !ofLast3) {
       const w = claims.claimedWindow;
       // TR-KALAN-14: level-2 ile aynı EN öneki — "Over the last 12 rounds you
       // died…" eskiden "Over the you died…" bırakıyordu.
@@ -850,6 +894,97 @@ export function rewriteUnsafeClaims(
   result = result.replace(/\s{2,}/g, " ").trim();
 
   return result.trim();
+}
+
+/** Tekrar-iddiası taşıyan YAN-CÜMLELERİ düşürür (level-3 süzgeci; B02 incelemede
+ *  rewriteUnsafeClaims içinden bu fonksiyona taşındı, davranış AYNEN). Cümle [.!?]
+ *  ile, cümle içi [;—] ile bölünür (virgül DEĞİL — TR-KALAN-25); iddia tespiti cümle
+ *  kapsamında, silme kararı yan-cümlenin KENDİ içinde (belirsiz anahtarın çapası
+ *  dahil). Hiçbir yan-cümle kalmazsa "" döner (çağıran fallback'e karar verir). */
+function dropRepetitionClauses(text: string, isTr: boolean): string {
+  const sentences = text.split(/(?<=[.!?])\s+/);
+  const safe: string[] = [];
+  for (const sent of sentences) {
+    if (repetitionKeyIn(sent, sent) === undefined) { safe.push(sent); continue; }
+    const mEnd = /[.!?]+$/.exec(sent);
+    const body = mEnd ? sent.slice(0, mEnd.index) : sent;
+    const end = mEnd ? mEnd[0] : "";
+    const parts = body.split(/(\s*[;—]\s*)/);          // [yan0, ayıraç0, yan1, …]
+    let rebuilt = "";
+    let pendingSep = "";
+    let firstDropped = false;
+    for (let i = 0; i < parts.length; i += 2) {
+      const clause = parts[i];
+      if (!clause.trim() || repetitionKeyIn(clause, clause) !== undefined) {
+        if (i === 0) firstDropped = true;
+        continue;
+      }
+      rebuilt += (rebuilt ? pendingSep : "") + clause;
+      pendingSep = parts[i + 1] ?? "";
+    }
+    rebuilt = rebuilt.trim();
+    if (!rebuilt) continue;                             // cümlenin tamamı iddiaydı
+    if (firstDropped) {
+      rebuilt = rebuilt.replace(/^([a-zçğıöşü])/u, (c) => (isTr ? c.toLocaleUpperCase("tr-TR") : c.toUpperCase()));
+    }
+    safe.push(rebuilt + end);
+  }
+  return safe.join(" ").trim();
+}
+
+/** Level-2 tekrar süzgeci (B02 inceleme) — bkz. rewriteUnsafeClaims level-2 notu.
+ *  Yerinde silinemeyen İSİM anahtarlar; geri kalanlar NİTELEYİCİDİR. */
+const REPETITION_NOUN_KEYS = new Set(["aynı pozisyon", "aynı bölge", "pattern", "same spot", "same position"]);
+function stripRepetitionLevel2(text: string, isTr: boolean): string {
+  const up = (c: string) => (isTr ? c.toLocaleUpperCase("tr-TR") : c.toUpperCase());
+  const out: string[] = [];
+  for (const sent of text.split(/(?<=[.!?])\s+/)) {
+    if (repetitionKeyIn(sent, sent) === undefined) { out.push(sent); continue; }
+    const mEnd = /[.!?]+$/.exec(sent);
+    const body = mEnd ? sent.slice(0, mEnd.index) : sent;
+    const end = mEnd ? mEnd[0] : "";
+    const parts = body.split(/(\s*[;—]\s*)/);
+    let rebuilt = "";
+    let pendingSep = "";
+    for (let i = 0; i < parts.length; i += 2) {
+      let c = parts[i];
+      if (repetitionKeyIn(c, c) !== undefined) {
+        for (const k of REPETITION_KEYWORDS) {
+          if (REPETITION_NOUN_KEYS.has(k)) continue;
+          if (AMBIGUOUS_REPETITION.has(k) && !CROSS_ROUND_ANCHOR_RE.test(c)) continue;
+          c = c.replace(new RegExp(`(?<![\\p{L}])${escapeRe(k)}(?![\\p{L}])\\s*`, "giu"), "");
+        }
+        c = c.replace(/\s{2,}/g, " ").replace(/\s+([,.;:!?])/g, "$1").trim();
+        if (!c.trim() || repetitionKeyIn(c, c) !== undefined) continue;   // isim anahtar → yan-cümle düşer
+      }
+      rebuilt += (rebuilt ? pendingSep : "") + c;
+      pendingSep = parts[i + 1] ?? "";
+    }
+    rebuilt = rebuilt.trim();
+    if (!rebuilt) continue;
+    if (/^\p{Lu}/u.test(sent.trim())) rebuilt = rebuilt.replace(/^([a-zçğıöşü])/u, (ch) => up(ch));
+    out.push(rebuilt + end);
+  }
+  return out.join(" ").trim();
+}
+
+/** EN "(in) N (out) of the/your last|past M rounds" birimini hafızaya göre yazar
+ *  (B02 inceleme). drop=false (level 2): sayı yalnız İNER (asla yükselmez), pencere
+ *  yalnız KISALIR; ölüm yoksa birim "recently" olur. drop=true (level 3, kanıt yok):
+ *  birim "recently" olur. Birim yoksa metin bayt-aynı döner. */
+const EN_OF_LAST_RE = /(\b(?:in|over|during)\s+)?(\d+)\s+(out\s+)?of\s+(the\s+|your\s+|my\s+)?(last|past|previous)\s+(\d+)\s+rounds?\b/gi;
+function rewriteEnOfLast(text: string, v: ValidationResult, drop: boolean): string {
+  return text.replace(EN_OF_LAST_RE,
+    (m: string, pre: string | undefined, n: string, out: string | undefined, det: string | undefined, lp: string, w: string, off: number, full: string) => {
+      // Olgu aşılaması yasağı: ölüm cümlesi değilse ("went first in 3 of the last 4") dokunma.
+      if (!CLAIM_DEATH_MARKER.test(trSentenceAt(full, off))) return m;
+      const recently = /^[A-Z]/.test(m) ? "Recently" : "recently";
+      if (drop || v.actualCount < 1) return recently;
+      const win = Math.min(parseInt(w, 10), v.actualWindow);
+      const cnt = Math.min(parseInt(n, 10), v.actualCount);
+      if (win === parseInt(w, 10) && cnt === parseInt(n, 10)) return m;
+      return `${pre ?? ""}${cnt} ${out ?? ""}of ${det ?? ""}${lp} ${win} ${win === 1 ? "round" : "rounds"}`;
+    });
 }
 
 // ── Route / Trade Anti-Fabrication Guard ──
@@ -1158,10 +1293,23 @@ export function guardUnprovenFacts(
     //     kapısı maliyetsiz replay'de bir katil-hedge'ini SIZDIRDI (cyclehedge/S14,
     //     katil bilinmiyor): "Raze ya da Brimstone util'ine yakalanıp öldün" — HEAD
     //     "bir düşman util'ine…" yapıyordu; "öldün" KV2'de ve kurban listesinde yok.
-    const STEP1_COND = /^['’]?\s*(?:varsa|yoksa|olursa|ise|oynuyorsa)(?![a-zçğıöşüâîû])/i;
+    //   · B02 İNCELEME (2026-09-23): "gibi" örneklemesi de koşul kipi gibi korunur
+    //     ("Jett/Reyna gibi duelistler …"); KV2'ye 3. ÇOĞUL öldürme biçimleri eklendi
+    //     (öldürdüler/vurdular…); imza BİTİŞİK yan-cümlede de aranır — ama YALNIZ
+    //     disjunction'ın kendi yan-cümlesi GEÇMİŞ-zaman anlatıyla bitiyorsa (TR).
+    //     Gerçek sızıntılar (katil bilinmiyor): cyclesummit/S14 "Hookah girişinde
+    //     öldün; … Raze/Skye çapraz ateşinden yüzünü açtın", cyclefix1/S14
+    //     "Cypher/Viper/Brimstone üçlüsünün kesişen açılarında kaldın — … seni oradan
+    //     öldürdüler". Emir/öğüt yan-cümlesi ("… Skye/Brimstone'dan smoke iste")
+    //     anlatı sonu taşımadığı için komşu ölüm cümlesine rağmen DOKUNULMAZ.
+    const STEP1_COND = /^['’]?\s*(?:varsa|yoksa|olursa|ise|oynuyorsa|gibi)(?![a-zçğıöşüâîû])/i;
     const STEP1_VICTIM = /(?<![\p{L}])(?:seni|sana|senin|you|your)(?![\p{L}])/iu;
-    const STEP1_KILL = new RegExp(`${NLB}${KV2}${NL}`, "i");
+    const STEP1_KILL = new RegExp(`${NLB}(?:${KV2}|öldürdüler|vurdular|düşürdüler|indirdiler|biçtiler|avladılar|temizlediler)${NL}`, "i");
     const STEP1_DEATH = /(?<![\p{L}])(?:öldün|öldürüldün|düştün|yakalandın|elendin|died|got\s+killed|were\s+killed|went\s+down)(?![\p{L}])/iu;
+    // Anlatı sonu: 2./3. şahıs GEÇMİŞ çekimli yüklem ("açtın", "kaldın", "vurdu",
+    // "girmişsin", "bekliyordun"). Emir kökü ("iste", "kur", "tut") EŞLEŞMEZ.
+    const STEP1_NARRATIVE_END = /(?:[dt][ıiuü](?:n|nız|niz|nuz|nüz|lar|ler)?|m[ıiuü]şs[ıiuü]n|yordu(?:n)?)\s*$/iu;
+    const signature = (seg: string) => STEP1_VICTIM.test(seg) || STEP1_KILL.test(seg) || STEP1_DEATH.test(seg);
     result = result.replace(
       new RegExp(`${NLB}${THE}${KILLER_TOKEN}(?:\\s*(?:ya da|veya|or|/|,)\\s*${THE}${KILLER_TOKEN})+`, "gi"),
       (m: string, off: number, full: string) => {
@@ -1171,7 +1319,14 @@ export function guardUnprovenFacts(
         let e = off + m.length;
         while (e < full.length && !/[.!?;:—\n]/.test(full[e])) e++;
         const clause = full.slice(s, off) + " " + full.slice(off + m.length, e);
-        return STEP1_VICTIM.test(clause) || STEP1_KILL.test(clause) || STEP1_DEATH.test(clause) ? AN_ENEMY : m;
+        if (signature(clause)) return AN_ENEMY;
+        if (!trText || !STEP1_NARRATIVE_END.test(full.slice(off + m.length, e))) return m;
+        let S = s;
+        while (S > 0 && !/[.!?\n]/.test(full[S - 1])) S--;
+        let E = e;
+        while (E < full.length && !/[.!?\n]/.test(full[E])) E++;
+        const sentence = full.slice(S, off) + " " + full.slice(off + m.length, E);
+        return signature(sentence) ? AN_ENEMY : m;
       },
     );
     // STEP2: tek isimli katil + aynı clause'da kill-verb → genel-düşman (char-cap YOK).
@@ -1473,8 +1628,15 @@ export function guardUnprovenFacts(
     // DOKUNULMAZ — "masaüstünün ölçtüğü konum asla silinmez" ilkesi
     // (stripForeignCallouts) bu döngüde yalnız hiç uygulanmıyordu:
     // rh 'b generator' iken "R1'de B Generator'da öldün." → "R1'de B öldün.".
-    const measured = new Set((factGround.measuredLocations ?? []).map((m) => m.trim().toLowerCase().replace(/\s+/g, " ")));
-    const isMeasured = (name: string) => measured.has(name.trim().toLowerCase().replace(/\s+/g, " "));
+    // B02 İNCELEME: measuredLocations = YALNIZ bu round'un ölçülmüş konumu (koşulsuz
+    // muaf); historyLocations = geçmişin ölçülmüş konumları, yalnız geçmişe çapalı
+    // yan-cümlede muaf ("R1'de B Generator'da öldün" korunur; "B Main'de öldün" /
+    // "Bu round yine B Main'de vuruldun" geçmiş konum bu round'a yapıştırılmışsa düşer).
+    const norm = (s: string) => s.trim().toLowerCase().replace(/\s+/g, " ");
+    const measured = new Set((factGround.measuredLocations ?? []).map(norm));
+    const history = new Set((factGround.historyLocations ?? []).map(norm));
+    const isMeasured = (name: string, off: number, end: number, full: string) =>
+      measured.has(norm(name)) || (history.has(norm(name)) && historyAnchoredAt(full, off, end));
     for (const pos of POSITION_NAMES) {
       // Bileşik callout'un SİTE HARFİ de tüketilir (öksüz "B" kalmasın): çıplak
       // "generator" eşleşince "B Generator'da" → "B " artığı bırakıyordu.
@@ -1483,8 +1645,8 @@ export function guardUnprovenFacts(
         `(?<![\\p{L}])((?:[abc]\\s+)?${escapeRe(pos)})\\s*['’]?\\s*(?:d[ae]|t[ae])\\s+([^.!?]{0,30}?)${DEATH_AT_VERBS}`,
         "giu",
       );
-      result = result.replace(re, (m: string, name: string, mid: string, verb: string) =>
-        (isMeasured(name) ? m : `${mid}${verb}`));
+      result = result.replace(re, (m: string, name: string, mid: string, verb: string, off: number, full: string) =>
+        (isMeasured(name, off, off + m.length, full) ? m : `${mid}${verb}`));
       // EN aynası (denetim 2026-07-19 F8): "you died at B Main" EN çıktıda
       // süzülmüyordu. TR guard'la aynı sözleşme: ölüm-fiili KALIR, yalnız uydurma
       // YER düşer. Ölüm-fiiline çapalı → "hold the angle at B Main" öğüdü
@@ -1494,13 +1656,14 @@ export function guardUnprovenFacts(
         `\\b(died|was killed|got killed|was shot|got shot|was caught|got caught|went down)\\s+(?:at|in|near|on)\\s+(${escapeRe(pos)})(?![a-z0-9-])`,
         "gi",
       );
-      result = result.replace(reEnA, (m: string, v: string, name: string) => (isMeasured(name) ? m : v));
+      result = result.replace(reEnA, (m: string, v: string, name: string, off: number, full: string) =>
+        (isMeasured(name, off, off + m.length, full) ? m : v));
       const reEnB = new RegExp(
         `\\b(killed|shot|caught|picked)\\s+you(\\s+off)?\\s+(?:at|in|near|on)\\s+(${escapeRe(pos)})(?![a-z0-9-])`,
         "gi",
       );
-      result = result.replace(reEnB, (m: string, v: string, off: string | undefined, name: string) =>
-        (isMeasured(name) ? m : `${v} you${off ?? ""}`));
+      result = result.replace(reEnB, (m: string, v: string, offW: string | undefined, name: string, at: number, full: string) =>
+        (isMeasured(name, at, at + m.length, full) ? m : `${v} you${offW ?? ""}`));
     }
   }
 
@@ -1597,6 +1760,17 @@ export function guardUnprovenFacts(
  *                     existing 2-arg caller is unaffected.
  * @returns Safe text with false claims rewritten
  */
+/** Harita başına çıplak callout kelimesinin SİTESİ — YALNIZ KB'de açıkça yazılı
+ *  olanlar (harita bilgisi UYDURULMAZ). stripForeignCallouts'un site-harfi bestesi
+ *  bunu kullanır: harf uyuşmazsa beste meşru sayılmaz (cross-map kapısına düşer).
+ *  Kanıt: knowledge/maps/ascent.md:119 "A site'i savunuyorsun — Heaven, Generator
+ *  veya Wine'dasın"; :121 "Wine (Tree altı)"; :234 "Tree / Window: A site'a bakan
+ *  pencere alanı"; :236 "Garden: … A site'e inen bağlantı bölgesi"; :173 A Retake
+ *  "CT'den Hell üzerinden site zeminine iner". */
+const CALLOUT_WORD_SITE: Record<string, Record<string, "a" | "b" | "c">> = {
+  ascent: { tree: "a", garden: "a", wine: "a", heaven: "a", generator: "a", hell: "a" },
+};
+
 /** YABANCI CALLOUT AYIKLAYICI (canlı bug 2026-07-21, Kaan/Lotus).
  *
  * Koç, OYNANMAYAN haritanın yer adını uydurabiliyor: Lotus maçında "A Short'ta
@@ -1697,8 +1871,14 @@ export function stripForeignCallouts(
   const keepIfLegit = (whole: string, name: string) => {
     const n = name.trim().toLowerCase();
     if (legit.has(n)) return whole; // bu haritaya ait / evrensel / gönderilen konum
-    const lettered = /^[abc]\s+(.+)$/.exec(n);
-    if (k && lettered && legit.has(lettered[1]) && !letteredWords.has(lettered[1])) return whole;
+    const lettered = /^([abc])\s+(.+)$/.exec(n);
+    if (k && lettered && legit.has(lettered[2]) && !letteredWords.has(lettered[2])) {
+      // B02 İNCELEME: kelimenin sitesi KB'de biliniyorsa harf ona UYMALI — Ascent'te
+      // Tree/Garden A tarafında; "B Tree" (Fracture) / "B Garden" (Bind) cross-map
+      // callout'u artık korunmaz. Tabloda olmayan kelime eski davranış (her harf).
+      const site = CALLOUT_WORD_SITE[k]?.[lettered[2]];
+      if (!site || site === lettered[1]) return whole;
+    }
     // YALNIZ ÇOK-KELİMELİ yabancı callout'ları sil (2026-07-24, konsey rank-5).
     // Çıplak tek kelimeler ("tree", "mid", "link", "market", "garden") hem sık
     // gündelik kelime hem birleşik-callout çekirdeği — silmek çok fazla meşru
@@ -1850,7 +2030,10 @@ const LOC_CLAIM_RE = new RegExp(
   "giu",
 );
 
-/** ÖLÇÜLEN (masaüstünün gönderdiği) konumların kümesi — bunlara ASLA dokunulmaz. */
+/** ÖLÇÜLEN (masaüstünün gönderdiği) konumların TAM kümesi (bu round + TÜM geçmiş) —
+ *  YALNIZ harita meşruiyeti için (stripForeignCallouts): ölçülmüş bir ad hiçbir
+ *  haritada "yabancı" sayılıp silinmez. Ölüm-yeri İDDİASI muafiyeti için
+ *  currentLocationSet + historyLocationSet + historyAnchoredAt kullanılır. */
 function suppliedLocationSet(
   fgLocation: string | string[] | undefined,
   roundHistory: readonly RoundMemoryEntry[],
@@ -1867,12 +2050,116 @@ function suppliedLocationSet(
   return s;
 }
 
-export function neutralizeUnprovenLocations(text: string, supplied: ReadonlySet<string>): string {
+/** BU round'un ölçülmüş ölüm yeri/yerleri (vision: tek string; report: dizi). */
+function currentLocationSet(fgLocation: string | string[] | undefined): Set<string> {
+  return suppliedLocationSet(fgLocation, []);
+}
+
+/** GEÇMİŞ round'ların GÜVENİLİR ölçülmüş ölüm yerleri: died===true ve
+ *  position_confidence high/medium (validateClaims FIX #2 ile aynı ölçüt — LOW
+ *  konum sayılmıyorsa muafiyet de kazandırmaz; ölmeden kaydedilen konum ölüm yeri
+ *  değildir). */
+function historyLocationSet(roundHistory: readonly RoundMemoryEntry[]): Set<string> {
+  const s = new Set<string>();
+  for (const r of roundHistory) {
+    if (r.died !== true) continue;
+    if (r.position_confidence !== "high" && r.position_confidence !== "medium") continue;
+    if (typeof r.death_position === "string" && r.death_position.trim()) s.add(r.death_position.trim().toLowerCase());
+  }
+  return s;
+}
+
+// ── GEÇMİŞ-ROUND ÇAPASI (B02 inceleme, 2026-09-23) ──────────────────────────
+// KANIT (maliyetsiz replay, 944 örnek): 8e99e56 geçmiş round konumunu koşulsuz
+// "ölçülmüş" saydığı için hasDeathLocation=false round'larda 100 alanda geçmiş
+// konum bu round'a yapıştırılmış hâliyle korundu (28'i deathAnalysis): cycleab-base
+// M1-R9 "bu round mid bottom'da öldün" (R9 ölçülmedi, R8=mid bottom), cyclereal-r2b
+// M1-R2 "OCR kaydına göre bu round B site'de öldün". vision-prompt.ts bunu RED
+// BAYRAĞI sayıyor. Kural: konuma aynı yan-cümlede EN YAKIN zaman çapası (önce
+// soldaki, yoksa sağdaki) GEÇMİŞ ise muaf; "bu round/şimdi/this round" ya da hiç
+// çapa yoksa muaf DEĞİL. Türkçe-\b TUZAĞI: \p{L} lookaround (dosya konvansiyonu).
+// Çoklu-round nicelikleri ("2 kez", "iki kez", "roundlarda", "bu maçta") da GEÇMİŞ
+// çapasıdır: iddia birden çok round'u kapsar (korpus base M1-R9 "Bu roundlarda B
+// Site/B Main'de iki kez öldün", r4c M1-R11 "B Main/B Lobby'de 2 kez öldün" — iki
+// konum da geçmişte ölçülmüş). "yine/tekrar" BİLEREK çapa DEĞİL: "B Main'de yine
+// öldün" bu round'un konumunu da iddia eder (uydurma sınıfı).
+const LOC_PAST_ANCHOR_RE = new RegExp(
+  "(?<![\\p{L}\\p{N}])(?:r\\d{1,2}"
+  + "|(?:round|raund|tur)\\s+\\d{1,2}"
+  + "|\\d{1,2}\\.\\s*(?:round|raund|tur)"
+  + "|(?:round|raund|tur)['’]?l[ae]r[\\p{L}'’]*"
+  + "|(?:önceki|geçen)\\s+(?:round|raund|tur|maç)"
+  + "|bu\\s+maç[\\p{L}'’]*|maç\\s+boyunca"
+  + "|daha\\s+önce|geçmişte"
+  + "|son\\s+(?:\\d+|iki|üç|dört|beş|altı|yedi|sekiz|dokuz|on)\\s*(?:round|raund|tur)"
+  + "|\\d+\\s*(?:kez|defa)|(?:iki|üç|dört|beş|altı|birkaç|birçok)\\s+(?:kez|defa)"
+  + "|earlier|previously|twice|\\d+\\s+times|(?:last|past|previous|earlier|prior)\\s+(?:\\d+\\s+)?rounds?"
+  + ")(?![\\p{L}\\p{N}])",
+  "giu",
+);
+const LOC_CURRENT_ANCHOR_RE = new RegExp(
+  "(?<![\\p{L}])(?:bu\\s+(?:round|raund|tur)(?!['’]?l[ae]r)|bu\\s+(?:sefer|kez)|şimdi|az\\s+önce|this\\s+(?:round|time)|just\\s+now|now)(?![\\p{L}])",
+  "giu",
+);
+/** [start,end) aralığındaki konum iddiasına en yakın zaman çapası: "past" | "current" | null. */
+function historyAnchorAt(full: string, start: number, end: number): "past" | "current" | null {
+  let cs = start;
+  while (cs > 0 && !/[.!?;:—\n]/.test(full[cs - 1])) cs--;
+  let ce = end;
+  while (ce < full.length && !/[.!?;:—\n]/.test(full[ce])) ce++;
+  const seg = full.slice(cs, ce);
+  const marks: { at: number; past: boolean }[] = [];
+  for (const m of seg.matchAll(LOC_PAST_ANCHOR_RE)) marks.push({ at: cs + (m.index ?? 0), past: true });
+  for (const m of seg.matchAll(LOC_CURRENT_ANCHOR_RE)) marks.push({ at: cs + (m.index ?? 0), past: false });
+  // Konum iddiasının İÇİNDEKİ ya da SOLUNDAKİ en yakın çapa ("R2'de B Main'de öldün",
+  // "B Main'de bu round öldün"); yoksa SAĞDAKİ ilk çapa ("You died at B Main in R2").
+  const left = marks.filter((x) => x.at < end).sort((a, b) => b.at - a.at)[0];
+  const pick = left ?? marks.filter((x) => x.at >= end).sort((a, b) => a.at - b.at)[0];
+  return pick ? (pick.past ? "past" : "current") : null;
+}
+function historyAnchoredAt(full: string, start: number, end: number): boolean {
+  return historyAnchorAt(full, start, end) === "past";
+}
+/** Memory katmanı sayımı ("2 kez") silmeden ÖNCE geçmişe çapalı anılan geçmiş
+ *  konumlar. Nötrleyici EN SONDA çalıştığı için çapası (sayım) silinmiş olabilir
+ *  ("B Main/B Lobby'de 2 kez öldün" → level-2 → "B Main/B Lobby'de öldün"): o
+ *  konumu çapasız görünce uydurma sanmasın diye adı burada hatırlanır. Açık
+ *  "bu round" çapası yine kazanır (bkz. neutralizer kapısı). */
+function pastAnchoredHistoryNames(text: string, history: ReadonlySet<string>): Set<string> {
+  const out = new Set<string>();
+  for (const name of history) {
+    const re = new RegExp(`(?<![\\p{L}\\p{N}])${escapeRe(name)}(?![\\p{L}\\p{N}])`, "giu");
+    for (const m of text.matchAll(re)) {
+      const at = m.index ?? 0;
+      if (historyAnchorAt(text, at, at + m[0].length) === "past") { out.add(name); break; }
+    }
+  }
+  return out;
+}
+/** Geçmiş konum muafiyeti: çapa GEÇMİŞ ise muaf; çapa yoksa yalnız memory öncesi
+ *  metinde geçmişe çapalı anılmışsa; "bu round/şimdi" çapası varsa ASLA. */
+function historyExempt(
+  key: string, history: ReadonlySet<string>, anchoredBefore: ReadonlySet<string>,
+  full: string, start: number, end: number,
+): boolean {
+  if (!history.has(key)) return false;
+  const a = historyAnchorAt(full, start, end);
+  return a === "past" || (a === null && anchoredBefore.has(key));
+}
+
+export function neutralizeUnprovenLocations(
+  text: string,
+  supplied: ReadonlySet<string>,
+  history: ReadonlySet<string> = new Set(),
+  anchoredBefore: ReadonlySet<string> = new Set(),
+): string {
   if (!text) return text;
   return text.replace(
     LOC_CLAIM_RE,
     (whole: string, name: string, ki: string | undefined, tail: string, offset: number, full: string) => {
-      if (supplied.has(name.trim().toLowerCase())) return whole;   // ÖLÇÜLDÜ → dokunma
+      const key = name.trim().toLowerCase();
+      if (supplied.has(key)) return whole;   // BU round ÖLÇÜLDÜ → dokunma
+      if (historyExempt(key, history, anchoredBefore, full, offset, offset + whole.length)) return whole;   // geçmişin olgusu
       // 3. şahıs fiil: özne müttefik/util olabilir → aynı cümlede kurban çapası şart.
       if (!LOC_SELF_TAIL_RE.test(tail)) {
         let start = 0;
@@ -1943,13 +2230,21 @@ function hasEnVictimAnchor(sentence: string): boolean {
   return false;
 }
 
-export function neutralizeUnprovenLocationsEn(text: string, supplied: ReadonlySet<string>): string {
+export function neutralizeUnprovenLocationsEn(
+  text: string,
+  supplied: ReadonlySet<string>,
+  history: ReadonlySet<string> = new Set(),
+  anchoredBefore: ReadonlySet<string> = new Set(),
+): string {
   if (!text) return text;
-  const keep = (name: string) => !/^\p{Lu}/u.test(name) || supplied.has(name.trim().toLowerCase());
-  let out = text.replace(EN_LOC_SELF_RE, (whole: string, head: string, name: string) =>
-    (keep(name) ? whole : `${head} there`));
+  const keep = (name: string, off: number, end: number, full: string) => {
+    const key = name.trim().toLowerCase();
+    return !/^\p{Lu}/u.test(name) || supplied.has(key) || historyExempt(key, history, anchoredBefore, full, off, end);
+  };
+  let out = text.replace(EN_LOC_SELF_RE, (whole: string, head: string, name: string, offset: number, full: string) =>
+    (keep(name, offset, offset + whole.length, full) ? whole : `${head} there`));
   out = out.replace(EN_LOC_THIRD_RE, (whole: string, head: string, name: string, offset: number, full: string) => {
-    if (keep(name)) return whole;
+    if (keep(name, offset, offset + whole.length, full)) return whole;
     let start = 0;
     for (const ch of [".", "!", "?", "\n"]) {
       const i = full.lastIndexOf(ch, offset - 1);
@@ -1994,6 +2289,11 @@ export function realityCheck(
   // "(R1 A Hall, R2 B Generator, R3 B Link)" → "(…, R3 )", M1-R4'te "A Tree
   // yanında durdun" → "yanında durdun" (20 ayrı cycle final'i) oluyordu.
   const measured = suppliedLocationSet(factGround?.deathLocation, roundHistory);
+  // B02 İNCELEME: ölüm-yeri İDDİASI muafiyeti iki kümeye ayrıldı — bu round'un
+  // ölçülmüş konumu koşulsuz, geçmişin güvenilir konumu yalnız geçmişe çapalı
+  // yan-cümlede (historyAnchoredAt). `measured` (tam küme) yalnız harita meşruiyeti.
+  const currentLocs = currentLocationSet(factGround?.deathLocation);
+  const historyLocs = historyLocationSet(roundHistory);
 
   // Yabancı-harita callout ayıklaması — EN BAŞTA çalışır ki sonraki guard'lar
   // zaten temizlenmiş metin üzerinde işlesin (uydurma yer adı hiçbir aşamaya
@@ -2011,12 +2311,18 @@ export function realityCheck(
   // (round 1) because it validates against the current round's facts, not the
   // match's past memory.
   if (factGround) {
-    const guarded = guardUnprovenFacts(text, { ...factGround, measuredLocations: [...measured] }, lang);
+    const guarded = guardUnprovenFacts(text, { ...factGround, measuredLocations: [...currentLocs], historyLocations: [...historyLocs] }, lang);
     if (guarded !== text) {
       text = guarded;
       rewriteLevel = Math.max(rewriteLevel, 2);
     }
   }
+
+  // Nötrleyici (en sonda) için: memory katmanı çapayı (sayımı) silmeden ÖNCE
+  // geçmişe çapalı anılan geçmiş konumlar (bkz. pastAnchoredHistoryNames).
+  const anchoredBefore = factGround?.hasDeathLocation === false
+    ? pastAnchoredHistoryNames(text, historyLocs)
+    : new Set<string>();
 
   // Memory-based claim check (count/window/position/repetition) — logic
   // unchanged; just operates on the (possibly guard-trimmed) text.
@@ -2039,9 +2345,9 @@ export function realityCheck(
   // hasDeathLocation !== false iken (ölçüldü / bayrak hiç verilmedi) HİÇ çalışmaz
   // → konum okunan her round ve bayrağı set etmeyen her çağıran bayt-aynı.
   if (factGround?.hasDeathLocation === false) {
-    let neutralized = neutralizeUnprovenLocations(text, measured);
+    let neutralized = neutralizeUnprovenLocations(text, currentLocs, historyLocs, anchoredBefore);
     // TR-KALAN-13: EN aynası yalnız istek dili EN iken (TR yolu bayt-aynı).
-    if (lang === "en") neutralized = neutralizeUnprovenLocationsEn(neutralized, measured);
+    if (lang === "en") neutralized = neutralizeUnprovenLocationsEn(neutralized, currentLocs, historyLocs, anchoredBefore);
     if (neutralized !== text) {
       text = neutralized;
       rewriteLevel = Math.max(rewriteLevel, 2);

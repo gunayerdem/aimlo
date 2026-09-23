@@ -142,6 +142,18 @@ console.log("\n[11] SİTE-HARFİ BESTESİ (TR-KALAN-17, 2026-09-23) — masaüst
   // Harita bilinmiyorsa beste uygulanmaz (meşru küme yalnız evrensel + gönderilen).
   const u = stripForeignCallouts("A Tree'de öldün.", "Unknown");
   t("Unknown haritada 'A Tree' (Lotus'ta kanıtlı) eskisi gibi siliniyor", !/a tree/i.test(u), `→ "${u}"`);
+  // B02 İNCELEME: beste YANLIŞ site harfini kabul ediyordu → Ascent'te "B Tree"
+  // (Fracture) / "B Garden" (Bind) cross-map callout'u korunuyordu. KB: ascent.md:234
+  // Tree, :236 Garden → A tarafı. HEAD: ikisi de bayt-aynı.
+  const bt = stripForeignCallouts("B Tree'de öldün.", "ascent");
+  t("Ascent 'B Tree' (yanlış site, Fracture callout'u) siliniyor", !/b tree/i.test(bt), `→ "${bt}"`);
+  const bg = stripForeignCallouts("B Garden'da öldün.", "ascent");
+  t("Ascent 'B Garden' (yanlış site, Bind callout'u) siliniyor", !/b garden/i.test(bg), `→ "${bg}"`);
+  const ag = "A Garden'da öldün.";
+  t("Ascent 'A Garden' (doğru site) KORUNDU", stripForeignCallouts(ag, "ascent") === ag, `→ "${stripForeignCallouts(ag, "ascent")}"`);
+  // Ölçülmüş konum her zaman meşru (masaüstü "b tree" gönderdiyse silinmez).
+  const ms = "B Tree'de öldün.";
+  t("gönderilen konum 'b tree' Ascent'te de KORUNUR", stripForeignCallouts(ms, "ascent", "b tree") === ms, `→ "${stripForeignCallouts(ms, "ascent", "b tree")}"`);
 }
 
 console.log(`\n══════ ${fail === 0 ? "✅ TÜMÜ GEÇTİ" : `❌ ${fail} BAŞARISIZ`} ══════\n`);

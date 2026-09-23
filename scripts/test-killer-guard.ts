@@ -145,5 +145,24 @@ console.log("\n[6] SİLAH OKUNMAMIŞKEN EN aynası — katil silahı uydurulmaz 
     realityCheck(g, [] as never, { hasWeapon: true } as never, "death", "en").text === g);
 }
 
+console.log("\n[7] B02 İNCELEME — katil hedge'i BİTİŞİK yan-cümlede / çoğul fiille (gerçek raw'lar)");
+{
+  const nk7 = (s: string) => realityCheck(s, [] as never, { hasKiller: false } as never, "death", "tr").text;
+  // HEAD (85d1989): ikisi de adları koruyordu (fiil bitişik yan-cümlede / 3. çoğul).
+  const a = nk7("Hookah girişinde öldün; Raze/Skye çapraz ateşinden yüzünü açtın.");
+  t("cyclesummit/S14: 'Raze/Skye çapraz ateşinden' → 'bir düşman …'", /bir düşman çapraz ateşinden/.test(a) && !/Raze|Skye/.test(a), `→ "${a}"`);
+  const b = nk7("Hookah'da nişangâh kaybettin ve Cypher ya da Viper ya da Brimstone üçlüsünün kesişen açılarında kaldın — seni oradan öldürdüler.");
+  t("cyclefix1/S14: çoğul 'öldürdüler' imzası → adlar iner", !/Cypher|Viper|Brimstone/.test(b), `→ "${b}"`);
+  // NEG: emir/öğüt yan-cümlesi komşu ölüm cümlesine rağmen korunur; 'gibi' örneklemesi korunur.
+  for (const s of [
+    "Hookah'ta öldün; bir sonraki round Skye/Brimstone'dan smoke iste.",
+    "Jett/Reyna gibi duelistler seni erken arar, açıyı dar tut.",
+    "Rakipte Skye/Brimstone varsa smoke iste.",
+  ]) {
+    const out = nk7(s);
+    t(`NEG bayt-aynı: "${s.slice(0, 40)}…"`, out === s, `→ "${out}"`);
+  }
+}
+
 console.log(`\n${fail === 0 ? "TÜM TESTLER GEÇTİ ✓" : `${fail} TEST BAŞARISIZ ✗`}`);
 process.exit(fail ? 1 : 0);

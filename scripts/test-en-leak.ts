@@ -208,8 +208,13 @@ console.log("\n── 6) EN konum nötrleyici (hasDeathLocation=false) ──");
     "You got caught near the window and lost the duel.",
   ]) check(`bayt-aynı: "${s.slice(0, 40)}…"`, en(s) === s, `→ "${en(s)}"`);
   const c = "You held the same corner at A Heaven and Jett killed you from there.";
-  check("ölçülmüş konum (roundHistory 'a heaven') bayt-aynı",
-    en(c, [{ round_index: 1, died: true, death_position: "a heaven", position_confidence: "high" }]) === c);
+  // B02 inceleme: geçmiş round konumu yalnız GEÇMİŞE ÇAPALI cümlede muaf ("In R1 …");
+  // çapasız cümle geçmiş konumu bu round'a yapıştırır → nötrlenir.
+  const rhHeaven = [{ round_index: 1, died: true, death_position: "a heaven", position_confidence: "high" }];
+  const cR = "In R1 you held the same corner at A Heaven and Jett killed you from there.";
+  check("ölçülmüş GEÇMİŞ konum (R-çapalı, roundHistory 'a heaven') bayt-aynı", en(cR, rhHeaven) === cR, `→ "${en(cR, rhHeaven)}"`);
+  check("çapasız geçmiş konum nötrlenir ('there')",
+    en(c, rhHeaven) === "You held the same corner there and Jett killed you from there.", `→ "${en(c, rhHeaven)}"`);
   check("hasDeathLocation:true iken bayt-aynı",
     realityCheck(c, [] as never, { hasDeathLocation: true } as never, "death", "en").text === c);
 }

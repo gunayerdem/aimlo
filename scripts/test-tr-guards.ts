@@ -305,8 +305,12 @@ console.log("\n════ B3 · KONUM / KATİL / ROSTER ════");
   }
 
   // 46 — ÖLÇÜLEN konum MUAF (düz toLowerCase; "MID" ≠ Türkçe yerel "mıd")
-  const c46 = "MID'de aynı köşeyi tuttun.";
-  same("46 ölçülen konum (roundHistory) DOKUNULMAZ", run(c46, mem(3, 1, "Mid")), c46);
+  // B02 inceleme: geçmiş konum yalnız GEÇMİŞE ÇAPALI yan-cümlede muaf → vaka
+  // R-etiketiyle kurulur (case-fold kilidi aynen sürer); çapasız hâli artık düşer.
+  const c46 = "R3'te MID'de aynı köşeyi tuttun.";
+  same("46 ölçülen konum (roundHistory, R-çapalı) DOKUNULMAZ", run(c46, mem(3, 1, "Mid")), c46);
+  eq("46b çapasız geçmiş konum bu round'a yapıştırılamaz",
+    run("MID'de aynı köşeyi tuttun.", mem(3, 1, "Mid")), "O açıda aynı köşeyi tuttun.");
 
   // 47 — ÖĞÜT/EMİR KİPİ dokunulmaz (fiil listelerinde emir yok)
   for (const s of [
@@ -546,6 +550,9 @@ console.log("\n════ B02 · ÖLÇÜLMÜŞ KONUM KORUMASI (TR-KALAN-16) �
     t("77 r4-a '(R1 A Hall, R2 B Generator, R3 B Link)' korunur", out.includes("(R1 A Hall, R2 B Generator, R3 B Link)"), `→ "${out}"`);
   }
   // 78 — M1-R4 (gerçek maç korpusu, 20 cycle final'i): HEAD "yanında durdun…"
+  // B02 İNCELEME (ters çevrildi): A Tree R3'ün konumu; R4 ölçülmedi ve cümle çapasız
+  // → bu round'a yapıştırılmış geçmiş konum = uydurma (vision-prompt RED BAYRAĞI).
+  // Doğru çıktı öksüz "yanında durdun" DEĞİL, nötr "O açıda durdun".
   {
     const rhM4: Mem[] = [
       { round_index: 1, died: true, death_position: "b site", position_confidence: "high" },
@@ -554,7 +561,8 @@ console.log("\n════ B02 · ÖLÇÜLMÜŞ KONUM KORUMASI (TR-KALAN-16) �
     ];
     const src = "A Tree yanında durdun ve aynı round içinde savunmada sabit kaldın — açıkta değildin ama o sipere yakın duruşunu rakip açıdan okuyup seni oradan vurdu.";
     const out = realityCheck(src, rhM4 as never, { hasDeathLocation: false, hasKiller: true } as never, "death", "tr", "ascent").text;
-    t("78 M1-R4 'A Tree yanında durdun…' korunur", out.startsWith("A Tree yanında durdun"), `→ "${out}"`);
+    t("78 M1-R4 çapasız 'A Tree yanında durdun' → 'O açıda durdun…' (öksüz ek yok)",
+      out.startsWith("O açıda durdun ve aynı round içinde") && !/A Tree/.test(out), `→ "${out}"`);
   }
   const noLoc = { hasDeathLocation: false } as never;
   const rhGen: Mem[] = [{ round_index: 1, died: true, death_position: "b generator", position_confidence: "high" }];
@@ -566,7 +574,10 @@ console.log("\n════ B02 · ÖLÇÜLMÜŞ KONUM KORUMASI (TR-KALAN-16) �
     realityCheck("R1'de B Generator'da öldün.", [] as never, noLoc, "death", "tr").text, "R1'de öldün.");
   // 81 — EN aynası aynı ilke: ölçülmüş konum muaf, ölçülmemiş düşer.
   const rhMain: Mem[] = [{ round_index: 1, died: true, death_position: "b main", position_confidence: "high" }];
-  same("81 EN rh 'b main' → bayt-aynı", realityCheck("You died at B Main.", rhMain as never, noLoc, "death", "en").text, "You died at B Main.");
+  // B02 İNCELEME (ters çevrildi): çapasız EN cümle geçmiş konumu bu round'a yapıştırır.
+  eq("81 EN rh 'b main' ama çapasız → 'You died.'", realityCheck("You died at B Main.", rhMain as never, noLoc, "death", "en").text, "You died.");
+  same("81c EN R-çapalı geçmiş konum bayt-aynı",
+    realityCheck("You died at B Main in R1.", rhMain as never, noLoc, "death", "en").text, "You died at B Main in R1.");
   eq("81b EN rh boş → 'You died.'", realityCheck("You died at B Main.", [] as never, noLoc, "death", "en").text, "You died.");
   // 82 — RAPOR ROTASI (fg.deathLocation dizisi, roundHistory = []) bayt-aynı.
   const c82 = "A Main'de utility'siz kaldın, B Link'te de açıkta vuruldun.";
@@ -616,7 +627,11 @@ console.log("\n════ B02 · TEKRAR-ANAHTARI + YAN-CÜMLE SİLME (TR-KALAN
   same("86 öğüt 'sürekli değiştir' bayt-aynı", run(c86, mem(5, 0)), c86);
   // 87-88 — KİLİT: kanıtsız çapraz-round iddiası hâlâ nötrlenir.
   eq("87 'Son maçlarda sürekli aynı pozisyonda öldün.' kanıt yok → nötr", run("Son maçlarda sürekli aynı pozisyonda öldün.", mem(5, 0)), STUB);
-  eq("88 aynı metin suggestion → '' (route orijinali korur)", run("Son maçlarda sürekli aynı pozisyonda öldün.", mem(5, 0), "suggestion"), "");
+  // B02 inceleme: başlık düzeltildi — realityCheck "" döner ama vision zinciri NR
+  // alanında HAM metni korur (TR-KALAN-26 kararı (b): NR alanı boş kalamaz). Yani
+  // bu test NR'de kanıtsız iddianın kullanıcıdan SÜZÜLDÜĞÜNÜ kanıtlamaz — bilinen sınır.
+  eq("88 aynı metin suggestion → realityCheck '' (zincir NR'de ham metni korur — bilinen sınır)",
+    run("Son maçlarda sürekli aynı pozisyonda öldün.", mem(5, 0), "suggestion"), "");
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -631,6 +646,135 @@ console.log("\n════ B02 · JENERİK ROTA SİLMESİ DİKİŞİ (CANLI-TES
   eq("90 ardındaki cümle korunur", run("Rotasyon attın ve geç kaldın. A Main'de açıyı tut."), "Geç kaldın. A Main'de açıyı tut.");
   const c91 = "Bir sonraki round erken rotasyon at ve B'yi tut.";
   same("91 öğüt ('rotasyon at') bayt-aynı", run(c91), c91);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+console.log("\n════ B02 İNCELEME · GEÇMİŞ KONUM ÇAPASI (ölüm-yeri launch-blocker sınıfı) ════");
+// ═══════════════════════════════════════════════════════════════════
+{
+  const noLoc = { hasDeathLocation: false } as never;
+  const rhB: Mem[] = [
+    { round_index: 1, died: false, death_position: null },
+    { round_index: 2, died: true, death_position: "b main", position_confidence: "high" },
+    { round_index: 3, died: false, death_position: null },
+  ];
+  const rc = (s: string, rh: Mem[], kind: "death" | "suggestion" = "death", lang: "tr" | "en" = "tr") =>
+    realityCheck(s, rh as never, noLoc, kind, lang).text;
+  // HEAD (8e99e56 sonrası): hepsi DEĞİŞMEDEN geçiyordu (L1).
+  {
+    const o = rc("B Main'de öldün, açıyı değiştir.", rhB);
+    t("92 çapasız 'B Main'de öldün' (R2=b main, R3 ölçülmedi) → konum düşer", !/B Main/.test(o) && /öldün, açıyı değiştir\.$/.test(o), `→ "${o}"`);
+  }
+  eq("93 'Bu round yine B Main'de vuruldun' → konum düşer",
+    rc("Bu round yine B Main'de vuruldun; açıyı değiştir.", rhB), "Bu round yine vuruldun; açıyı değiştir.");
+  eq("94 EN 'You died at B Main again.' → 'You died again.'", rc("You died at B Main again.", rhB, "death", "en"), "You died again.");
+  // Gerçek raw'lar (maliyetsiz replay): cycleab-base M1-R9 NR, cyclereal-r2b M1-R2 EA0.
+  {
+    const rh9: Mem[] = [{ round_index: 8, died: true, death_position: "mid bottom", position_confidence: "high" }];
+    const o = rc("Savunmada control'ü dağıt: bu round mid bottom'da öldün ve önceki turlarda B'de öldün.", rh9, "suggestion");
+    t("95 cycleab-base M1-R9 'bu round mid bottom'da öldün' → konum düşer", !/mid bottom/i.test(o) && /bu round öldün/.test(o), `→ "${o}"`);
+    const rh2: Mem[] = [{ round_index: 1, died: true, death_position: "b site", position_confidence: "high" }];
+    const o2 = rc("OCR kaydına göre bu round B site'de öldün.", rh2, "suggestion");
+    t("96 cyclereal-r2b M1-R2 'bu round B site'de öldün' → konum düşer", !/B site/i.test(o2), `→ "${o2}"`);
+  }
+  // Güven/ölüm kapısı: LOW konum ve ölmeden kaydedilen konum R-çapası olsa bile muaf DEĞİL.
+  {
+    const low: Mem[] = [{ round_index: 2, died: true, death_position: "b main", position_confidence: "low" }];
+    eq("97 LOW-confidence geçmiş konum muaf değil", rc("R2'de B Main'de öldün, açıyı değiştir.", low), "R2'de öldün, açıyı değiştir.");
+    const alive: Mem[] = [{ round_index: 2, died: false, death_position: "b main", position_confidence: "high" }];
+    eq("98 died=false round'un konumu muaf değil", rc("R2'de B Main'de öldün, açıyı değiştir.", alive), "R2'de öldün, açıyı değiştir.");
+  }
+  // Pozitif: geçmişe çapalı olgu KORUNUR (8e99e56'nın meşru hedefi).
+  same("99 R-çapalı geçmiş konum bayt-aynı", rc("R2'de B Main'de öldün, bu round açıyı değiştir.", rhB), "R2'de B Main'de öldün, bu round açıyı değiştir.");
+  eq("100 aynı cümlede geçmiş (R5) korunur, 'bu round' iddiası düşer",
+    rc("R5'te B Main'de öldün ve bu round da B Main'de öldün.", [
+      { round_index: 5, died: true, death_position: "b main", position_confidence: "high" },
+    ]), "R5'te B Main'de öldün ve bu round da öldün.");
+  {
+    const rh8: Mem[] = [
+      { round_index: 1, died: true, death_position: "b site", position_confidence: "high" },
+      { round_index: 5, died: true, death_position: "b main", position_confidence: "high" },
+      { round_index: 7, died: true, death_position: "b site", position_confidence: "high" },
+    ];
+    const c = "Bu roundlarda B Site/B Main'de iki kez öldün, açıyı değiştir.";
+    same("101 çoğul/nicelik çapası ('roundlarda', 'iki kez') bayt-aynı (cyclereal-base M1-R9)", rc(c, rh8, "suggestion"), c);
+    // Sayım memory katmanında silinse de ("2 kez" → "") çapası hatırlanır (r4c M1-R11).
+    const rh10: Mem[] = [
+      { round_index: 5, died: true, death_position: "b main", position_confidence: "high" },
+      { round_index: 10, died: true, death_position: "b lobby", position_confidence: "high" },
+    ];
+    const o = rc("Bu round B'yi tek başına tutma — B Main/B Lobby'de 2 kez öldün, savunurken Heaven'dan bak.", rh10, "suggestion");
+    t("102 sayım silinse de geçmiş konum korunur (öksüz 'B Main/' yok)", /B Main\/B Lobby'de öldün/.test(o), `→ "${o}"`);
+  }
+}
+
+console.log("\n════ B02 İNCELEME · SAYIM İDDİASI ('N of the last M', 'son N kez') ════");
+{
+  const fgA = { hasDeathLocation: true, deathLocation: "a site" } as never;
+  const m6: Mem[] = Array.from({ length: 6 }, (_, i) => ({
+    round_index: i + 1, died: i === 1, death_position: i === 1 ? "b main" : null, position_confidence: i === 1 ? "high" : undefined,
+  }));
+  const rc = (s: string, m: Mem[], lang: "tr" | "en" = "en", kind: "death" | "suggestion" = "death") =>
+    realityCheck(s, m as never, fgA, kind, lang).text;
+  // HEAD: pencere sayısı count sayılmadığı için N hiç doğrulanmıyordu (L1, bayt-aynı).
+  eq("103 EN 'died in 5 of the last 6 rounds' (1 ölüm) → '1 of the last 6'",
+    rc("You died in 5 of the last 6 rounds, change your angle.", m6), "You died in 1 of the last 6 rounds, change your angle.");
+  eq("104 EN konumlu 'at B Main in 5 of the last 6' → '1 of the last 6'",
+    rc("You died at B Main in 5 of the last 6 rounds.", m6), "You died at B Main in 1 of the last 6 rounds.");
+  same("105 EN doğru sayım bayt-aynı", rc("You died in 1 of the last 6 rounds, change your angle.", m6), "You died in 1 of the last 6 rounds, change your angle.");
+  // Olgu aşılaması yasağı: ölüm cümlesi değilse sayım doğrulanmaz (korpus cycle3/E5).
+  same("106 EN ölüm-dışı 'went first in 3 of the last 4' bayt-aynı",
+    rc("You went first in 3 of the last 4 rounds and got no trades.", m6, "en", "suggestion"), "You went first in 3 of the last 4 rounds and got no trades.");
+  const m6b: Mem[] = m6.map((r) => (r.round_index === 2 ? { ...r, death_position: "a site" } : r));
+  eq("107 EN kanıtsız (B Main'de 0 ölüm) → 'recently'",
+    rc("You died at B Main in 5 of the last 6 rounds.", m6b), "You died at B Main recently.");
+  eq("108 TR 'Son 3 kez B Main'de öldün' (1 ölüm) → birim 'son' ile düşer",
+    rc("Son 3 kez B Main'de öldün, açıyı değiştir.", m6, "tr"), "B Main'de öldün, açıyı değiştir.");
+  const m6c: Mem[] = m6.map((r) => (r.round_index === 4 ? { ...r, died: true, death_position: "b main", position_confidence: "high" } : r));
+  eq("109 TR 'Son 3 kez' (2 ölüm) → 'Son 2 kez'",
+    rc("Son 3 kez B Main'de öldün, açıyı değiştir.", m6c, "tr"), "Son 2 kez B Main'de öldün, açıyı değiştir.");
+  same("110 TR ölüm-dışı 'Son 3 kez ilk giren sen oldun' bayt-aynı",
+    rc("Son 3 kez ilk giren sen oldun, bu round bekle.", m6, "tr", "suggestion"), "Son 3 kez ilk giren sen oldun, bu round bekle.");
+}
+
+console.log("\n════ B02 İNCELEME · 'sürekli … ölüyorsun' + level-2 ham anahtar silmesi ════");
+{
+  const fgA = { hasDeathLocation: true, deathLocation: "a site" } as never;
+  const rc = (s: string, m: Mem[], kind: "death" | "suggestion" = "death", lang: "tr" | "en" = "tr") =>
+    realityCheck(s, m as never, fgA, kind, lang).text;
+  const STUB = "Bu round beklenen açıdan vuruldun.";
+  const m3: Mem[] = [
+    { round_index: 1, died: false, death_position: null },
+    { round_index: 2, died: true, death_position: "a site", position_confidence: "high" },
+    { round_index: 3, died: false, death_position: null },
+  ];
+  // HEAD: rewriteLevel=3 raporlanıp metin DEĞİŞMİYORDU (çapa listesinde alışkanlık yüklemi yoktu).
+  eq("111 'B Main'de sürekli ölüyorsun' (B Main'de 0 ölüm) → uydurma iddia düşer",
+    rc("B Main'de sürekli ölüyorsun, oraya tek gitme.", m3), STUB);
+  eq("112 'Sürekli aynı pozisyonda ölüyorsun' (1 ölüm) → uydurma iddia düşer",
+    rc("Sürekli aynı pozisyonda ölüyorsun, açını değiştir.", m3), STUB);
+  // HEAD: "R7'de yine aynı açıdan öldün — da ölüyorsun, off-angle al." (ham alt-dizge silmesi)
+  const m7: Mem[] = Array.from({ length: 7 }, (_, i) => ({
+    round_index: i + 1, died: i === 6, death_position: i === 6 ? "a site" : null, position_confidence: i === 6 ? "high" : undefined,
+  }));
+  eq("113 karışık cümlede bozuk 'da ölüyorsun' üretilmez",
+    rc("R7'de yine aynı açıdan öldün — sürekli aynı pozisyonda ölüyorsun, off-angle al.", m7), "R7'de yine aynı açıdan öldün.");
+  // Niteleyici anahtar YERİNDE düşer (korpus cycleab-luna-none2 M1-R17 EA0 — yan-cümle silinmez).
+  eq("114 'tekrar eden' niteleyicisi yerinde düşer, olgu kalır",
+    rc("Rakip B Main'deki tekrar eden açını okudu; bu maçta B Main'de daha önce de öldün.", [
+      { round_index: 5, died: true, death_position: "b main", position_confidence: "high" },
+      { round_index: 6, died: false, death_position: null },
+    ], "suggestion"),
+    "Rakip B Main'deki açını okudu; bu maçta B Main'de daha önce de öldün.");
+  // HEAD (replay E22): "your pattern shows" → "your shows". İsim anahtar → yan-cümle düşer.
+  {
+    const o = rc("You held a predictable angle on defense and won the round but your pattern shows you died once in R1 from that same side—don't keep anchoring the exact same line every round; vary between Heaven and Gen.",
+      m3, "death", "en");
+    t("115 EN 'your pattern shows' → bozuk 'your shows' üretilmez", !/your shows/.test(o) && /vary between Heaven and Gen\.$/.test(o), `→ "${o}"`);
+  }
+  // Öğüt 'sürekli' (çapasız) hâlâ dokunulmaz.
+  const c86b = "A Lobby'de öldün, Heaven'a crossfire koy ve pozisyonu sürekli değiştir.";
+  same("116 öğüt 'sürekli değiştir' bayt-aynı (level-2 yolunda da)", rc(c86b, m3), c86b);
 }
 
 console.log(`\n${fail === 0 ? "TAM YEŞİL" : "KIRMIZI"} — ${n - fail}/${n} geçti${fail ? `, ${fail} HATA` : ""}`);
