@@ -18,9 +18,12 @@
  *  RUN: REPLAY_CORPUS_DIR=<klasör> npx tsx scripts/replay-tr.ts */
 import fs from "node:fs";
 import path from "node:path";
-import { buildFactGround } from "../lib/reality-checker";
-import { sanitizePromptInput } from "../lib/prompt-safety";
 import { finalizeVisionFeedback } from "../lib/vision-postprocess";
+// B06 (OLCUM-ARACI-07, 2026-09-24): factGround + son-işlem seçenekleri route'un
+// kurucusundan — eskiden burada elle ctx kuruluyordu (ham killerInfo, 3 ctx alanı,
+// playerAgentKnown hiç set edilmiyor → reality-checker'ın ajan-boş guard'ı replay'de
+// hiç açılmıyordu). Artık route/eval ile AYNI türetme.
+import { buildVisionContext, visionPostprocessOpts, type VisionPromptBody } from "../lib/vision-prompt-builder";
 
 const CORPUS_DIR = process.env.REPLAY_CORPUS_DIR || "";
 const REPO_EVALS = path.join(process.cwd(), "evals");
@@ -36,21 +39,9 @@ type S = { id: string; lang?: string; body: Record<string, unknown> };
 function post(s: S, fb: { deathAnalysis: string; enemyAnalysis: string[]; nextRoundSuggestion: string }) {
   const b = s.body;
   const lang = (s.lang === "en" || b.lang === "en" ? "en" : "tr") as "tr" | "en";
-  const ctx: Record<string, unknown> = {};
-  if (b.died === true) {
-    if (typeof b.deathLocation === "string") ctx.deathLocation = sanitizePromptInput(b.deathLocation, { max: 50, collapseWhitespace: true });
-    if (typeof b.deathAngle === "string") ctx.deathAngle = sanitizePromptInput(b.deathAngle, { max: 30, collapseWhitespace: true });
-    if (typeof b.playerRoute === "string") ctx.playerRoute = sanitizePromptInput(b.playerRoute, { max: 120, collapseWhitespace: true });
-  }
-  return finalizeVisionFeedback(fb, {
-    roundHistory: b.roundHistory as Record<string, unknown>[] | undefined,
-    factGround: buildFactGround(b, ctx),
-    lang,
-    map: typeof b.map === "string" ? b.map : undefined,
-    agent: typeof b.agent === "string" ? b.agent : undefined,
-    enemyComp: b.enemyComp as unknown[] | undefined,
-    suppliedLoc: typeof b.deathLocation === "string" ? b.deathLocation : "",
-  });
+  const body = b as VisionPromptBody;
+  const { factGround } = buildVisionContext(body, lang);
+  return finalizeVisionFeedback(fb, visionPostprocessOpts(body, lang, factGround));
 }
 
 // Kabul ölçütü (plan §5): bu desenlerin HİÇBİRİ kalmamalı.

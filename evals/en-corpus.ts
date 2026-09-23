@@ -13,8 +13,10 @@
 //
 // BİÇİM SÖZLEŞMESİ (bilinçli — kopya değil uyum):
 //   • EnVisionScenario, scripts/eval-vision.ts'in Scenario tipiyle YAPISAL
-//     olarak aynıdır (id/note/body/memoryContext/lang). O tip export edilmiyor;
-//     bağlarken yapısal uyumluluk yeter: SCENARIOS.push(...EN_VISION_SCENARIOS).
+//     olarak aynıdır (id/note/body/memoryContext/lang). B06'dan beri o tip export
+//     ediliyor ama bağlama yine yapısal uyumla: SCENARIOS.push(...EN_VISION_SCENARIOS).
+//     body alanları route'un kurucusundan (lib/vision-prompt-builder.ts) AYNEN geçer;
+//     deathTiming bilerek S-serisine eklenmedi (OLCUM-ARACI-03 kararı — taban kaymasın).
 //   • EN_REPORT_SCENARIOS (B05, OLCUM-ARACI-11): 4 EN rapor senaryosu artık
 //     evals/report-fixtures/ER*.json — ReportRequest (desktop düz gövdesi)
 //     şeklinde; eval-report prod'un validateRequest → buildReportPrompts

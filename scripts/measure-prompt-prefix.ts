@@ -12,6 +12,10 @@
  *
  * SADECE OKUR VE ÖLÇER: OpenAI çağrısı YOK, dosya yazma YOK, ağ erişimi YOK.
  * RUN: npx tsx scripts/measure-prompt-prefix.ts [etiket]
+ * B06 (2026-09-24, OLCUM-ARACI-09): ölçülen metin route'un GERÇEK sistem mesajı
+ * (lib/vision-prompt-builder.ts buildVisionSystemMessage) — elle replika YOK. Eski
+ * replikada statik SENARYO REHBERİ (29.669 B) eksikti; "scenario dahil" yeni taban
+ * aşağıda BASELINE_B06'da. scripts/test-eval-fidelity.ts [M] kilitler.
  *
  * ════════════════════════════════════════════════════════════════════════════
  * BAŞLANGIÇ (BASELINE) — 2026-07-20, adım 1-3 UYGULANMADAN ÖNCE
@@ -46,16 +50,13 @@
  *   A ≥ %90   ·   D ≥ %64
  * ════════════════════════════════════════════════════════════════════════════
  */
-import { loadVisionKnowledge } from "../lib/knowledge-loader";
-import { buildPolicyBlock } from "../lib/ai-policy";
-import { buildAgentAbilityHint } from "../lib/agent-abilities";
-import { SYSTEM_PROMPT, SYSTEM_PROMPT_EN_ADDENDUM } from "../lib/vision-prompt";
+import { buildVisionSystemMessage, type VisionPromptBody } from "../lib/vision-prompt-builder";
 
 /* ══════════════════════════════════════════════════════════
    İSTEK MODELİ
    ══════════════════════════════════════════════════════════ */
 
-type PromptOpts = {
+export type PromptOpts = {
   map?: string;
   agent?: string;
   rank?: string;
@@ -70,71 +71,42 @@ type PromptOpts = {
 };
 
 /**
- * vision route'undaki systemSections kurulumunun BİREBİR TAKLİDİ.
- * Referans: app/api/ai/vision/route.ts:650-703 (+ join'i 753. satır).
- * (Satır numaraları karşı-denetim 2026-07-31'de doğrulandı; eski 483-521/587
- *  referansı kaymıştı ve replikanın güncelliğini kontrol etmeyi zorlaştırıyordu.)
- * Sıra KOPYALANIR, mantık ÇOĞALTILMAZ — yalnız ölçüm amaçlı.
+ * Ölçülen metin = vision route'unun GERÇEK sistem mesajı (B06 · OLCUM-ARACI-09,
+ * 2026-09-24). Eskiden burada route'un systemSections kurulumunun ELLE bir
+ * replikası vardı; B42/F76'da static'ten hemen sonraya taşınan SENARYO REHBERİ
+ * (post-plant/retake/ekonomi, 29.669 B) replikaya hiç eklenmemişti → "toplam B"
+ * paydası prod'dan ~29,7 KB kısa, önek oranları yanlış paydayla hesaplanıyordu
+ * (profile2 için 2026-07-31'de yaşanan sınıfın tekrarı). Artık route'un çağırdığı
+ * AYNI fonksiyon çağrılır: lib/vision-prompt-builder.ts buildVisionSystemMessage.
+ * Replika yok → blok taşıması bu ölçüme kendiliğinden yansır.
  *
- * Route'ta bunun ARDINDAN gelen iki blok burada YOK, çünkü ikisi de zaten
- * ölçülen önekten SONRA duruyor ve öneği etkilemiyor:
- *   - playerMemoryBlock (kullanıcıya özel)
- *   - patternContextBlock (her round değişir)
- * Yani buradaki "toplam", cache'lenebilir bölgenin tamamıdır.
+ * Route'ta öneğin ARDINDAN gelen iki blok (playerMemoryBlock, patternContextBlock)
+ * burada boş bırakılır (memoryContext "", patternContext yok): ikisi de ölçülen
+ * önekten SONRA duruyor ve öneği etkilemiyor. Yani buradaki "toplam", cache'lenebilir
+ * bölgenin tamamıdır.
  */
-function buildSystemPrompt(opts: PromptOpts): string {
-  const lang = opts.lang ?? "tr";
-
-  const kb = loadVisionKnowledge({
+export function bodyOf(opts: PromptOpts): VisionPromptBody {
+  return {
     map: opts.map,
     agent: opts.agent,
     rank: opts.rank,
-    enemyAgents: opts.enemyAgents,
+    enemyComp: opts.enemyAgents,
     spikePlanted: opts.spikePlanted,
     economyType: opts.economyType,
     side: opts.side,
     killerInfo: opts.killerInfo,
-  });
+    // Karşı-ajan kesiti route'ta died===true kapılı (ölünmeyen round'da bayat
+    // killerInfo tetiklemesin) — killerInfo'lu ölçüm senaryosu bir ÖLÜM round'udur.
+    died: opts.killerInfo ? true : undefined,
+    // confidence yalnız UZUNLUKTAN türetilir; içerik sistem mesajına girmez.
+    roundHistory: Array.from({ length: opts.roundHistoryLen ?? 0 }, (_, i) => ({ round_index: i + 1 })),
+    lang: opts.lang,
+  };
+}
 
-  // route.ts: confidence roundHistory uzunluğundan türetilir
-  const n = opts.roundHistoryLen ?? 0;
-  const visionConfidence = n === 0 ? "calibrating" : n < 4 ? "low" : n < 8 ? "medium" : "high";
-
-  const systemSections: string[] = [
-    lang === "en" ? SYSTEM_PROMPT + SYSTEM_PROMPT_EN_ADDENDUM : SYSTEM_PROMPT,
-    buildPolicyBlock({
-      confidence: visionConfidence,
-      tone: "strict",
-      lang,
-      includeEnemyGate: true,
-      includeDecisionRubric: false,
-      anchorMode: "ocr",
-      outputFocusMode: "single",
-      enemyGateMode: "vision",
-      // Route ile SENKRON (rank-5, 2026-08-24): vision langRulesMode:'dedupe'.
-      langRulesMode: "dedupe",
-      // Route ile SENKRON (2026-07-20): confidence metni prefix'ten çıkarılıp
-      // user mesajına taşındı. Bu satır olmazsa script ESKİ prompt'u ölçer ve
-      // yanlış-negatif regresyon sinyali verir.
-      confidenceInPrefix: false,
-    }),
-  ];
-  if (kb.blocks.static) systemSections.push(kb.blocks.static);
-  // Blok 0b — koçluk profili (universal.md). Route'ta static'ten hemen sonra;
-  // replikada da aynı yerde olmalı, yoksa ölçüm gerçeği yansıtmaz.
-  if (kb.blocks.profile) systemSections.push(kb.blocks.profile);
-  // Blok 0c — profilin 2. sayfası (universal-2.md). KARŞI-DENETİM 2026-07-31 (R11):
-  // B37 bölünmesinde route.ts:693 bu bloğu kazandı ama replika güncellenmemişti →
-  // ölçülen statik önek prod'dakinden ~4,5 KB KISA çıkıyor, cache-hit hedefi (A≥%90,
-  // D≥%64) yanlış paydayla değerlendiriliyordu. Route'taki sırayla geri eklendi.
-  if (kb.blocks.profile2) systemSections.push(kb.blocks.profile2);
-  if (kb.blocks.agent) systemSections.push(kb.blocks.agent);
-  const abilityHint = buildAgentAbilityHint(opts.agent, lang);
-  if (abilityHint) systemSections.push(abilityHint);
-  if (kb.blocks.map) systemSections.push(kb.blocks.map);
-  if (kb.blocks.contextual) systemSections.push(kb.blocks.contextual);
-
-  return systemSections.join("\n\n---\n\n");
+export function buildSystemPrompt(opts: PromptOpts): string {
+  const lang = opts.lang ?? "tr";
+  return buildVisionSystemMessage({ body: bodyOf(opts), lang, memoryContext: "" }).systemMessage;
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -177,7 +149,7 @@ type Scenario = {
   second: PromptOpts;
 };
 
-const SCENARIOS: Scenario[] = [
+export const SCENARIOS: Scenario[] = [
   {
     id: "A",
     name: "ardisik-round",
@@ -247,66 +219,92 @@ const BASELINE: Record<string, { prefixB: number; prefixPct: number }> = {
 const TARGET: Record<string, number> = { A: 90, D: 64 };
 
 /* ══════════════════════════════════════════════════════════
+   BASELINE-2 — B06 (2026-09-24), "SCENARIO DAHİL" (prod kurucusu)
+   ══════════════════════════════════════════════════════════
+   OLCUM-ARACI-09: B06'ya kadar bu script route'un elle kopyasını ölçüyordu ve
+   kopyada statik SENARYO REHBERİ yoktu. Aşağıdaki sayılar ölçülen metin route'un
+   GERÇEK sistem mesajına bağlandıktan sonraki İLK koşudan ALINDI (tahmin DEĞİL).
+   Yeni bir prefix-cache değişikliği bu tabana göre "delta B06" sütunuyla okunur.
+   Aynı gün ESKİ replikanın (scenario HARİÇ) ölçtüğü değerler — kıyas için:
+     A 145.777/145.777 %100 · B 145.777/145.777 %100 · C 92.938/146.686 %63,4 ·
+     D 92.291/139.213 %66,3 · E 93.131/151.556 %61,4  (ilk kırılma 92.291 B)
+   Yukarıdaki 2026-07-20 BASELINE tarihsel "adım 1-3 öncesi" zeminidir; ikisi
+   birlikte basılır. */
+const BASELINE_B06_FIRST_BREAK = 121_967;
+const BASELINE_B06: Record<string, { prefixB: number; totalB: number; prefixPct: number }> = {
+  A: { prefixB: 175_453, totalB: 175_453, prefixPct: 100 },
+  B: { prefixB: 175_453, totalB: 175_453, prefixPct: 100 },
+  C: { prefixB: 122_614, totalB: 176_362, prefixPct: 69.52 },
+  D: { prefixB: 121_967, totalB: 168_889, prefixPct: 72.22 },
+  E: { prefixB: 122_807, totalB: 181_232, prefixPct: 67.76 },
+};
+
+/* ══════════════════════════════════════════════════════════
    KOŞ
    ══════════════════════════════════════════════════════════ */
 
-const label = process.argv[2] ?? "run";
+export type PrefixRow = { id: string; name: string; prefixB: number; totalB: number; pct: number; freshB: number };
 
-console.log(`\n[measure-prompt-prefix] etiket=${label} tarih=${new Date().toISOString()}`);
-console.log(`Olculen: vision system prompt (SYSTEM_PROMPT + policy + static + profile + profile2 + agent + abilityHint + map + contextual)`);
-console.log(`Not: memory/patternContext bloklari zaten onekten SONRA — oneki etkilemez.\n`);
-
-const rows: Array<Record<string, string | number>> = [];
-const json: Array<Record<string, unknown>> = [];
-let firstBreak = Number.POSITIVE_INFINITY;
-
-for (const sc of SCENARIOS) {
-  const p1 = buildSystemPrompt(sc.first);
-  const p2 = buildSystemPrompt(sc.second);
-
-  const prefixB = commonPrefixBytes(p1, p2);
-  // Payda = 2. istek (faturalanan istek): onun kaci cache'ten gelebilir?
-  const totalB = byteLen(p2);
-  const pct = totalB > 0 ? (prefixB / totalB) * 100 : 0;
-  const freshB = totalB - prefixB;
-
-  if (prefixB < firstBreak) firstBreak = prefixB;
-
-  const base = BASELINE[sc.id];
-  const target = TARGET[sc.id];
-
-  rows.push({
-    senaryo: `${sc.id} ${sc.name}`,
-    "onek B": prefixB,
-    "toplam B": totalB,
-    "onek %": Number(pct.toFixed(1)),
-    "taze B": freshB,
-    "~onek tok": toTokens(prefixB),
-    "~taze tok": toTokens(freshB),
-    "baseline %": base ? base.prefixPct : "-",
-    "delta pp": base ? Number((pct - base.prefixPct).toFixed(1)) : "-",
-    hedef: target ? `>=${target}%  ${pct >= target ? "OK" : "X"}` : "-",
+/** Her senaryo için ortak önek / toplam (payda = 2. istek, yani faturalanan istek). */
+export function measurePrefixScenarios(): PrefixRow[] {
+  return SCENARIOS.map((sc) => {
+    const p1 = buildSystemPrompt(sc.first);
+    const p2 = buildSystemPrompt(sc.second);
+    const prefixB = commonPrefixBytes(p1, p2);
+    const totalB = byteLen(p2);
+    const pct = totalB > 0 ? (prefixB / totalB) * 100 : 0;
+    return { id: sc.id, name: sc.name, prefixB, totalB, pct: Number(pct.toFixed(2)), freshB: totalB - prefixB };
   });
-
-  json.push({ id: sc.id, name: sc.name, prefixB, totalB, pct: Number(pct.toFixed(2)), freshB });
 }
 
-console.table(rows);
+function main(): void {
+  const label = process.argv[2] ?? "run";
 
-for (const sc of SCENARIOS) console.log(`  ${sc.id} = ${sc.why}`);
+  console.log(`\n[measure-prompt-prefix] etiket=${label} tarih=${new Date().toISOString()}`);
+  console.log(`Olculen: vision route'unun GERCEK system prompt'u (lib/vision-prompt-builder buildVisionSystemMessage: SYSTEM_PROMPT + policy + static + scenario + profile + profile2 + agent + abilityHint + map + contextual)`);
+  console.log(`Not: memory/patternContext bloklari zaten onekten SONRA — oneki etkilemez.\n`);
 
-const breakDelta = firstBreak - BASELINE_FIRST_BREAK;
-console.log(`\nILK KIRILMA (tum senaryolarin en kisa oneki): ${firstBreak} byte (~${toTokens(firstBreak)} token)`);
-console.log(
-  `BASELINE ilk kirilma: ${BASELINE_FIRST_BREAK} byte (policy icindeki confidence metni) ` +
-  `→ delta ${breakDelta >= 0 ? "+" : ""}${breakDelta} byte`,
-);
+  const json = measurePrefixScenarios();
+  const firstBreak = Math.min(...json.map((r) => r.prefixB));
+  const rows = json.map((r) => {
+    const base = BASELINE[r.id];
+    const b06 = BASELINE_B06[r.id];
+    const target = TARGET[r.id];
+    return {
+      senaryo: `${r.id} ${r.name}`,
+      "onek B": r.prefixB,
+      "toplam B": r.totalB,
+      "onek %": Number(r.pct.toFixed(1)),
+      "taze B": r.freshB,
+      "~onek tok": toTokens(r.prefixB),
+      "~taze tok": toTokens(r.freshB),
+      "0720 %": base ? base.prefixPct : "-",
+      "B06 %": b06 ? b06.prefixPct : "-",
+      "delta B06 pp": b06 ? Number((r.pct - b06.prefixPct).toFixed(1)) : "-",
+      hedef: target ? `>=${target}%  ${r.pct >= target ? "OK" : "X"}` : "-",
+    };
+  });
 
-const aPct = json.find(r => r.id === "A")?.pct as number | undefined;
-const dPct = json.find(r => r.id === "D")?.pct as number | undefined;
-const pass = (aPct ?? 0) >= TARGET.A && (dPct ?? 0) >= TARGET.D;
-console.log(
-  `HEDEF KONTROL: A=${aPct}% (hedef >=${TARGET.A}%) · D=${dPct}% (hedef >=${TARGET.D}%) → ${pass ? "GECTI" : "HENUZ DEGIL (adim 1-3 uygulanmadi)"}`,
-);
+  console.table(rows);
 
-console.log(JSON.stringify({ label, firstBreak, scenarios: json }, null, 0));
+  for (const sc of SCENARIOS) console.log(`  ${sc.id} = ${sc.why}`);
+
+  const breakDelta = firstBreak - BASELINE_FIRST_BREAK;
+  console.log(`\nILK KIRILMA (tum senaryolarin en kisa oneki): ${firstBreak} byte (~${toTokens(firstBreak)} token)`);
+  console.log(
+    `BASELINE 0720 ilk kirilma: ${BASELINE_FIRST_BREAK} byte (policy icindeki confidence metni) ` +
+    `→ delta ${breakDelta >= 0 ? "+" : ""}${breakDelta} byte · BASELINE B06 (scenario dahil): ${BASELINE_B06_FIRST_BREAK} byte ` +
+    `→ delta ${firstBreak - BASELINE_B06_FIRST_BREAK >= 0 ? "+" : ""}${firstBreak - BASELINE_B06_FIRST_BREAK} byte`,
+  );
+
+  const aPct = json.find((r) => r.id === "A")?.pct;
+  const dPct = json.find((r) => r.id === "D")?.pct;
+  const pass = (aPct ?? 0) >= TARGET.A && (dPct ?? 0) >= TARGET.D;
+  console.log(
+    `HEDEF KONTROL: A=${aPct}% (hedef >=${TARGET.A}%) · D=${dPct}% (hedef >=${TARGET.D}%) → ${pass ? "GECTI" : "HENUZ DEGIL (adim 1-3 uygulanmadi)"}`,
+  );
+
+  console.log(JSON.stringify({ label, firstBreak, scenarios: json }, null, 0));
+}
+
+if (require.main === module) main();

@@ -28,6 +28,14 @@
  *     route'un gövdesi buildVisionSystemMessage/buildVisionUserMessage çıktısına
  *     eşit; route.ts'te prompt kurulumu kalmadı (grep-guard).
  *     Golden yenileme (prompt BİLİNÇLİ değişince): UPDATE_VISION_GOLDEN=1.
+ * [E] B06 (OLCUM-ARACI-01/02/03/04/05/07, CANLI-TEST-10): scripts/eval-vision.ts
+ *     buildEvalRequest ↔ GERÇEK route, 87 korpus senaryosunda (62 sentetik+EN,
+ *     2 yeni, 23 gerçek): sistem mesajı + gövde (model/450/şema/effort) bayt-eşit,
+ *     kullanıcı mesajı yalnız görsel direktifi kadar farklı (imageAvailable:false,
+ *     karar B), ders tipi aynı; eski aynanın 7 sapma round'u prod değerinde; S32/
+ *     S33 factGround = kurucu; eval/measure/replay'de elle kurulum yok (grep-guard).
+ * [M] OLCUM-ARACI-09: measure-prompt-prefix'in ölçtüğü metin = route'un sistem
+ *     mesajı (totalB = Buffer.byteLength, [SENARYO REHBERİ dahil).
  *
  * ⚠ AĞ/AI/DB YOK: model yanıtları sahte (harness.replies); OPENAI_API_KEY sahte
  * bir dize, .env.local OKUNMAZ (eval-report anahtarı yalnız main()'de okur).
@@ -48,7 +56,7 @@ import { maybeRefineReport, REFINE_CALL, REFINE_SYSTEM_PROMPT, type RefineReques
 import { runReportFixture } from "./eval-report";
 import { REPORT_FIXTURES, type ReportFixture } from "../evals/report-fixtures";
 import { VISION_GOLDEN_CASES } from "../evals/vision-golden";
-import { goldenRecordFor, knowledgeDigest, type VisionGoldenRecord } from "./vision-route-harness";
+import { goldenRecordFor, knowledgeDigest, captureVisionCall, type VisionGoldenRecord } from "./vision-route-harness";
 import {
   VISION_CALL,
   DESKTOP_VISION_MAX_TOKENS,
@@ -56,10 +64,14 @@ import {
   resolveVisionLang,
   buildVisionSystemMessage,
   buildVisionUserMessage,
+  buildVisionContext,
   prevDeathTypesFromHistory,
   type VisionPromptBody,
 } from "../lib/vision-prompt-builder";
 import type { DeathType } from "../lib/death-type";
+import { SCENARIOS as VISION_SCENARIOS, buildEvalRequest, EVAL_SCOPE_NOTE, type Scenario as VisionScenario, type MatchConceptSim } from "./eval-vision";
+import * as legacyVision from "./eval-vision-legacy";
+import { measurePrefixScenarios, SCENARIOS as PREFIX_SCENARIOS, bodyOf as prefixBodyOf, buildSystemPrompt as prefixSystemPrompt } from "./measure-prompt-prefix";
 
 let pass = 0;
 let fail = 0;
@@ -332,6 +344,8 @@ async function main() {
   delete process.env.OPENAI_API_KEY;
 
   await visionRouteSection();
+  await evalParitySection();
+  await measurePrefixSection();
 
   console.log(`\n${fail === 0 ? "✅" : "❌"} test-eval-fidelity: ${pass} geçti, ${fail} kırık\n`);
   if (fail > 0) process.exit(1);
@@ -448,11 +462,176 @@ async function visionRouteSection() {
   // Grep-guard: route'ta prompt kurulumu kalmadı (tek kaynak = builder).
   const routeSrc = fs.readFileSync(path.join(__dirname, "..", "app", "api", "ai", "vision", "route.ts"), "utf8");
   const leftovers = ["systemSections.push(", "loadVisionKnowledge(", "buildFactSheet(", "buildFactGround(", "classifyDeathVaried(", "buildPolicyBlock(", "JSON.parse("]
-    .filter((x) => routeSrc.includes(x));
+    .filter((x) => codeOnly(routeSrc).includes(x));
   check("route.ts prompt kurmuyor (systemSections/loadVisionKnowledge/buildFactSheet/buildFactGround/classifyDeathVaried/buildPolicyBlock/JSON.parse yok)",
     leftovers.length === 0, leftovers.join(", "));
   check("route.ts kurucuyu çağırıyor (buildVisionSystemMessage + buildVisionUserMessage + buildVisionRequestBody + toVisionFeedbackOutcome)",
     ["buildVisionSystemMessage(", "buildVisionUserMessage(", "buildVisionRequestBody(", "toVisionFeedbackOutcome(", "visionPostprocessOpts("].every((x) => routeSrc.includes(x)));
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   [E] eval-vision ↔ prod kurucusu ↔ GERÇEK route (B06 · OLCUM-ARACI-01/02/03/
+       04/05/07, TR-KALAN-18/19, CANLI-TEST-10)
+   ══════════════════════════════════════════════════════════════════════════ */
+
+const EVAL_MATCH_ID = "3f2c1a8e-5b7d-4c9e-8a61-2d4f6b8c0e13";
+const IMAGE_DIRECTIVE_HEADERS = ["\n[GÖRÜNTÜDEKİ YETENEK İKONLARI]", "\n[ABILITY ICONS IN THE SCREENSHOT]"];
+
+/** Route metninden görsel direktifini (başlığından bir sonraki "\n[" satırına kadar) keser.
+ *  Direktif yoksa null. */
+function withoutImageDirective(routeUser: string): string | null {
+  for (const h of IMAGE_DIRECTIVE_HEADERS) {
+    const i = routeUser.indexOf(h);
+    if (i < 0) continue;
+    const next = routeUser.indexOf("\n[", i + h.length);
+    return routeUser.slice(0, i) + (next < 0 ? "" : routeUser.slice(next));
+  }
+  return null;
+}
+
+/** Yorumları atar (grep-guard yalnız KODA bakar; yorumda eski fonksiyon adı geçebilir). */
+function codeOnly(src: string): string {
+  return src.replace(/\/\*[\s\S]*?\*\//g, "").replace(/(^|[^:])\/\/.*$/gm, "$1");
+}
+
+async function evalParitySection() {
+  console.log("\n── [E] eval-vision ↔ lib/vision-prompt-builder ↔ GERÇEK route (OLCUM-ARACI-01/02/03/04/05/07, CANLI-TEST-10) ──");
+  const real = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "evals", "real-rounds-23.json"), "utf8")) as VisionScenario[];
+  const corpus: VisionScenario[] = [...VISION_SCENARIOS, ...real];
+  const simEval: MatchConceptSim = new Map();
+  const simRoute = new Map<string, string[]>();
+  const bad = { sys: [] as string[], body: [] as string[], userDiff: [] as string[], img: [] as string[], dtype: [] as string[], status: [] as string[] };
+  const byId: Record<string, { req: ReturnType<typeof buildEvalRequest>; routeType: unknown; routeUser: string }> = {};
+  for (const s of corpus) {
+    const req = buildEvalRequest(s, simEval);
+    const mcKey = /^(M\d+)-R\d+/.exec(s.id)?.[1] ?? "";
+    const cap = await captureVisionCall({ maxTokens: DESKTOP_VISION_MAX_TOKENS, ...s.body, matchId: EVAL_MATCH_ID }, {
+      memoryContext: s.memoryContext ?? "",
+      matchConcepts: mcKey ? simRoute.get(mcKey) ?? [] : [],
+    });
+    if (mcKey && typeof cap.json.deathType === "string") simRoute.set(mcKey, [...(simRoute.get(mcKey) ?? []), cap.json.deathType]);
+    byId[s.id] = { req, routeType: cap.json.deathType ?? null, routeUser: cap.userText };
+    if (cap.status !== 200) bad.status.push(`${s.id}:${cap.status}`);
+    if (req.systemMessage !== cap.systemMessage) bad.sys.push(s.id);
+    // Gövde: mesajlar hariç alanlar (model / 450 / şema / effort) route ile bayt-eşit.
+    const strip = (b: Record<string, unknown> | null) => JSON.stringify({ ...(b ?? {}), messages: undefined });
+    if (strip(req.requestBody as unknown as Record<string, unknown>) !== strip(cap.requestBody)) bad.body.push(s.id);
+    // Kullanıcı mesajı: route'unkinden YALNIZ görsel direktifi kadar farklı (ölüm round'unda).
+    const died = (s.body as Record<string, unknown>).died === true;
+    const cut = withoutImageDirective(cap.userText);
+    const okUser = died ? cut !== null && cut === req.userPrompt : cut === null && cap.userText === req.userPrompt;
+    if (!okUser) bad.userDiff.push(`${s.id} ${firstDiff(cut ?? cap.userText, req.userPrompt).slice(0, 120)}`);
+    if (IMAGE_DIRECTIVE_HEADERS.some((h) => req.userPrompt.includes(h))) bad.img.push(s.id);
+    if ((req.deathType ?? null) !== (cap.json.deathType ?? null)) bad.dtype.push(`${s.id}: eval=${req.deathType} route=${cap.json.deathType}`);
+  }
+  const n = corpus.length;
+  check(`korpus: ${VISION_SCENARIOS.length} sentetik (S+EN aynası+E) + ${real.length} gerçek = ${n}; route hepsinde 200`, bad.status.length === 0, bad.status.join(", "));
+  check(`sistem mesajı eval = GERÇEK route (bayt-eşit) — ${n - bad.sys.length}/${n}`, bad.sys.length === 0, bad.sys.slice(0, 8).join(", "));
+  check(`istek gövdesi (model/max_completion_tokens/response_format/reasoning_effort) eval = route — ${n - bad.body.length}/${n}`, bad.body.length === 0, bad.body.slice(0, 8).join(", "));
+  check(`kullanıcı mesajı eval = route − YALNIZ görsel direktifi (ölüm round'u) / birebir (hayatta kalınan) — ${n - bad.userDiff.length}/${n}`, bad.userDiff.length === 0, bad.userDiff.slice(0, 4).join(" | "));
+  check(`imageAvailable:false → eval'de görsel direktifi YOK (${n}/${n} senaryo) + kapsam notu`,
+    bad.img.length === 0 && /görsel yok/.test(EVAL_SCOPE_NOTE) && EVAL_SCOPE_NOTE.includes("[GÖRÜNTÜDEKİ YETENEK İKONLARI]"), bad.img.join(", "));
+  check(`ders tipi eval = route — ${n - bad.dtype.length}/${n}`, bad.dtype.length === 0, bad.dtype.slice(0, 8).join(" | "));
+
+  // Eski aynanın ölçülen 7 sapma round'u (OLCUM-ARACI-03) — prod değeriyle birebir.
+  const expectType: Record<string, string> = {
+    "E11-breeze-chamber-atk-op-loss": "op-loss", "E12-haven-sova-def-ult-pocket": "ult-in-pocket",
+    "M1-R4-ascent-jett": "loss-streak", "M1-R5-ascent-jett": "loss-streak", "M1-R10-ascent-jett": "loss-streak",
+    "M1-R18-ascent-jett": "loss-streak", "M1-R2b-ascent-jett": "overtime-matchpoint",
+  };
+  const typeMiss = Object.entries(expectType).filter(([id, t]) => byId[id]?.req.deathType !== t || byId[id]?.routeType !== t);
+  check("E11/E12/M1-R4/R5/R10/R18/R2b: eval tipi = route tipi = prod (op-loss, ult-in-pocket, loss-streak×4, overtime-matchpoint)",
+    typeMiss.length === 0, typeMiss.map(([id]) => `${id}: eval=${byId[id]?.req.deathType} route=${byId[id]?.routeType}`).join(" | "));
+
+  // İçerik kilitleri (eval'in eskiden üretmediği prod halkaları).
+  const U = (id: string) => byId[id]?.req.userPrompt ?? "";
+  const S = (id: string) => byId[id]?.req.systemMessage ?? "";
+  check("S1 sistem: [SİLAH + KOMP REHBERİ, [SENARYO REHBERİ, [KOÇLUK PROFİLİ (+ devam), [KARŞI-AJAN",
+    ["[SİLAH + KOMP REHBERİ", "[SENARYO REHBERİ", "[KOÇLUK PROFİLİ — her rank", "[KOÇLUK PROFİLİ — devam]", "[KARŞI-AJAN"].every((h) => S("S1-ascent-cypher-def-strong").includes(h)));
+  check("S1 kullanıcı: [ÖLÜM-VERİ SÖZLEŞMESİ, [SİLAH+KOMP İPUCU, [AJAN KİTİ, [HARİTA İPUCU, [DERS GEÇMİŞİ",
+    ["[ÖLÜM-VERİ SÖZLEŞMESİ", "[SİLAH+KOMP İPUCU", "[AJAN KİTİ", "[HARİTA İPUCU", "[DERS GEÇMİŞİ"].every((h) => U("S1-ascent-cypher-def-strong").includes(h)));
+  check("S6 (spike kurulu, savunma): [SENARYO İPUCU + RETAKE TAKTİK",
+    U("S6-sunset-killjoy-def-retake-lowhp").includes("[SENARYO İPUCU") && U("S6-sunset-killjoy-def-retake-lowhp").includes("RETAKE TAKTİK"));
+  check("gerçek M1-R2 (konum yok): [ÖLÜM YERİ OKUNAMADI] (eski yorum 'bu korpusta hiç ateşlemez' diyordu)",
+    U("M1-R2-ascent-jett").includes("[ÖLÜM YERİ OKUNAMADI]"));
+  check("S16 ctx: \"ultReady\": true · E25 ctx: \"deathTiming\": \"mid\" (masaüstü alanları eval'de de prompt'a girer)",
+    /"ultReady": true/.test(U("S16-sunset-deadlock-def-ult")) && /"deathTiming": "mid"/.test(U("E25-bind-waylay-atk-no-killer")));
+  check("TR-KALAN-19: eval kbFiles = prompt'a giren dosyalar (static/scenario/profile dahil)",
+    ["general/weapon-comp-compact.md", "general/post-plant-playbook.md", "ranks/universal.md"].every((f) => (byId["S1-ascent-cypher-def-strong"]?.req.kbFiles ?? []).includes(f)));
+
+  // İstek gövdesi anlık görüntüsü (OLCUM-ARACI-04).
+  const tr = byId["S1-ascent-cypher-def-strong"]?.req.requestBody as unknown as {
+    model: string; max_completion_tokens: number; reasoning_effort?: string;
+    response_format: { type: string; json_schema: { schema: { properties: { enemyAnalysis: { description: string } } } } };
+    messages: { role: string; content: unknown }[];
+  };
+  const en = byId["S1-ascent-cypher-def-strong-en"]?.req.requestBody as unknown as typeof tr;
+  check("eval gövdesi: gpt-5-mini · max_completion_tokens 450 · minimal · json_schema · kullanıcı içeriği metin bloğu",
+    tr?.model === "gpt-5-mini" && tr?.max_completion_tokens === 450 && tr?.reasoning_effort === "minimal"
+      && tr?.response_format?.type === "json_schema" && Array.isArray(tr?.messages?.[1]?.content), show({ ...tr, messages: undefined, response_format: undefined }));
+  check("eval şeması: enemyAnalysis.description 'KAYNAK-DİLİ YASAK' (TR) / 'SOURCE-LANGUAGE BAN' (EN) içerir",
+    !!tr?.response_format.json_schema.schema.properties.enemyAnalysis.description.includes("KAYNAK-DİLİ YASAK")
+      && !!en?.response_format.json_schema.schema.properties.enemyAnalysis.description.includes("SOURCE-LANGUAGE BAN"));
+
+  // İki yeni senaryo: factGround = kurucunun factGround'u (OLCUM-ARACI-07).
+  for (const id of ["S32-lotus-unknown-def-agentmiss", "S33-split-jett-atk-bladekiller"]) {
+    const sc = corpus.find((x) => x.id === id);
+    const r = byId[id]?.req;
+    if (!sc || !r) { check(`${id}: korpusta`, false); continue; }
+    const ref = buildVisionContext(sc.body as VisionPromptBody, r.lang);
+    check(`${id}: eval factGround deepEqual kurucu (route) factGround`, JSON.stringify(r.factGround) === JSON.stringify(ref.factGround), `${show(r.factGround)} ≠ ${show(ref.factGround)}`);
+  }
+  const s32 = byId["S32-lotus-unknown-def-agentmiss"]?.req;
+  const s33 = byId["S33-split-jett-atk-bladekiller"]?.req;
+  check("S32 (ajan Unknown): playerAgentKnown=false · [AJAN OKUNAMADI] · [AJAN KİTİ yok",
+    s32?.factGround.playerAgentKnown === false && U("S32-lotus-unknown-def-agentmiss").includes("[AJAN OKUNAMADI]") && !U("S32-lotus-unknown-def-agentmiss").includes("[AJAN KİTİ"));
+  const s33ctx = buildVisionContext(corpus.find((x) => x.id === "S33-split-jett-atk-bladekiller")!.body as VisionPromptBody, "tr").ctx;
+  check("S33 ('with blade'): ctx.killerInfo normalize ('killed by chamber'), hasWeapon=false, prompt'ta 'blade' YOK",
+    s33ctx.killerInfo === "killed by chamber" && s33?.factGround.hasWeapon === false && s33?.factGround.hasKiller === true
+      && !/blade/i.test(U("S33-split-jett-atk-bladekiller")), `${String(s33ctx.killerInfo)} · ${show(s33?.factGround)}`);
+  // Sapmayı GÖRÜNÜR kılan kontrol: dondurulmuş eski ayna bu iki senaryoda prod'dan ayrışır.
+  const legacyS32 = legacyVision.buildUserPrompt(corpus.find((x) => x.id === "S32-lotus-unknown-def-agentmiss")!, new Map());
+  const legacyS33 = legacyVision.buildUserPrompt(corpus.find((x) => x.id === "S33-split-jett-atk-bladekiller")!, new Map());
+  check("eski ayna (EVAL_LEGACY_MIRROR) bu sapmayı taşır: S32'de [AJAN OKUNAMADI] yok, S33 prompt'unda 'blade' var — yeni senaryolar ölçülebilir",
+    !legacyS32.includes("[AJAN OKUNAMADI]") && /blade/.test(legacyS33));
+  const legacySys = (legacyVision.buildSystemMessage(corpus.find((x) => x.id === "S1-ascent-cypher-def-strong")!) as unknown as { msg: string }).msg;
+  check("eski ayna dondurulmuş pre-parity: [SENARYO REHBERİ yok, dosya 'DONDURULMUŞ' işaretli",
+    !legacySys.includes("[SENARYO REHBERİ") && fs.readFileSync(path.join(__dirname, "eval-vision-legacy.ts"), "utf8").includes("DONDURULMUŞ ESKİ AYNA"));
+
+  // Grep-guard: eval/measure/replay elle prompt KURMUYOR; eval anahtarı import'ta okumuyor.
+  const src = (rel: string) => fs.readFileSync(path.join(__dirname, rel), "utf8");
+  const evalSrc = src("eval-vision.ts");
+  const forbidden = ["sections.push(", "loadVisionKnowledge(", "buildFactSheet(", "buildFactGround(", "classifyDeathVaried(", "buildPolicyBlock(", "ctxForFacts", "sanitizePromptInput("];
+  for (const rel of ["eval-vision.ts", "measure-prompt-prefix.ts", "replay-tr.ts"]) {
+    const hits = forbidden.filter((x) => codeOnly(src(rel)).includes(x));
+    check(`${rel}: elle prompt/ctx/factGround kurulumu yok (${forbidden.length} desen)`, hits.length === 0, hits.join(", "));
+  }
+  check("eval-vision: kurucu + prod parse + prod son-işlem kullanılıyor; JSON.parse(text) yok",
+    ["buildVisionSystemMessage(", "buildVisionUserMessage(", "buildVisionRequestBody(", "toVisionFeedbackOutcome(", "visionPostprocessOpts(", "finalizeVisionFeedback("].every((x) => evalSrc.includes(x))
+      && !/JSON\.parse\(text\)/.test(evalSrc));
+  check("eval-vision: API anahtarı YALNIZ main() içinde okunur (import yan-etkisiz) + require.main kapısı",
+    !/const API_KEY = loadApiKey\(\)/.test(evalSrc) && /const apiKey = dryRun \? "" : loadApiKey\(\);/.test(evalSrc) && /if \(require\.main === module\)/.test(evalSrc));
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   [M] measure-prompt-prefix = GERÇEK sistem mesajı (OLCUM-ARACI-09)
+   ══════════════════════════════════════════════════════════════════════════ */
+
+async function measurePrefixSection() {
+  console.log("\n── [M] measure-prompt-prefix ölçtüğü metin = route'un sistem mesajı (OLCUM-ARACI-09) ──");
+  const rows = measurePrefixScenarios();
+  check(`${rows.length} önek senaryosu ölçüldü`, rows.length === PREFIX_SCENARIOS.length && rows.length === 5);
+  for (const sc of PREFIX_SCENARIOS) {
+    const row = rows.find((r) => r.id === sc.id);
+    const sys = buildVisionSystemMessage({ body: prefixBodyOf(sc.second), lang: sc.second.lang ?? "tr", memoryContext: "" }).systemMessage;
+    check(`${sc.id} ${sc.name}: totalB = Buffer.byteLength(buildVisionSystemMessage) (${row?.totalB} B) · [SENARYO REHBERİ dahil`,
+      row?.totalB === Buffer.byteLength(sys, "utf8") && sys.includes("[SENARYO REHBERİ"), `${row?.totalB} ≠ ${Buffer.byteLength(sys, "utf8")}`);
+  }
+  // Ölçülen metin, aynı gövdeyle GERÇEK route'un modele yolladığı sistem mesajıdır.
+  const base = PREFIX_SCENARIOS.find((s) => s.id === "A")!.first;
+  const cap = await captureVisionCall({ maxTokens: DESKTOP_VISION_MAX_TOKENS, ...(prefixBodyOf(base) as Record<string, unknown>) });
+  check("A.first: measure sistem metni = GERÇEK route sistem mesajı (bayt-eşit)", cap.status === 200 && prefixSystemPrompt(base) === cap.systemMessage,
+    firstDiff(cap.systemMessage, prefixSystemPrompt(base)));
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

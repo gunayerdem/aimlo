@@ -1,66 +1,88 @@
 /**
  * EMPIRICAL COACH-VOICE EVAL HARNESS — KB brutal-audit Cycle 3 (2026-06-26)
  * ─────────────────────────────────────────────────────────────────────────
- * Reproduces the EXACT vision-route prompt pipeline OFFLINE and generates real
- * gpt-5-mini coach feedback for a battery of realistic round scenarios, then
- * applies the SAME post-processing the route does (lib/vision-postprocess.ts).
+ * Runs the vision-route prompt pipeline OFFLINE and generates real gpt-5-mini
+ * coach feedback for a battery of realistic round scenarios, then applies the
+ * SAME post-processing the route does (lib/vision-postprocess.ts).
  *
  * WHY: the KB-audit run must be EMPIRICALLY verified — not reasoned about. This
  * produces the actual text a user would see so the language-editor / ai-prompt-
  * expert agents can brutally grade it and the next fix cycle targets REAL defects.
  *
- * ⚠ SADAKAT SÖZLEŞMESİ (B9, 2026-07-31): aşağıdaki "SAME post-processing" iddiası
- * bir süre SAHTEYDİ — postProcess prod'dan 5 noktada sapmıştı (detay orada).
- * OLCUM-ARACI-08 (2026-09-23): son-işlem zinciri artık ELLE KOPYALANMAZ — route
- * ile eval AYNI fonksiyonu çağırır (lib/vision-postprocess.ts:finalizeVisionFeedback).
- * KURAL (hâlâ geçerli): prompt kurulumu (buildSystemMessage/buildUserPrompt) route
- * değişince burada AYNI commit'te güncellenir. Zincirin sıra-testi:
- * scripts/test-pipeline-chain.ts (B10) — o da aynı fonksiyonu koşar.
+ * ⚠ SADAKAT SÖZLEŞMESİ (B06, 2026-09-24 — OLCUM-ARACI-01/02/03/04/05/07,
+ * TR-KALAN-18/19, CANLI-TEST-10): bu dosya ARTIK HİÇBİR prompt parçasını
+ * KOPYALAMAZ. Route'un çağırdığı AYNI fonksiyonlar kullanılır:
+ *   buildVisionSystemMessage  (lib/vision-prompt-builder) — policy + tüm KB blokları
+ *                             (static/scenario/profile/profile2/agent/abilityHint/
+ *                             map/contextual + karşı-ajan) + hafıza + pattern
+ *   buildVisionUserMessage    (lib/vision-prompt-builder) — ctx + factGround +
+ *                             factSheet + tüm direktifler + geçmiş bloğu
+ *                             (ölüm-tipi sinyalleri lib/death-type computeDeathSignals)
+ *   buildVisionRequestBody    (lib/vision-prompt-builder) — gpt-5-mini, 450 token
+ *                             (masaüstünün 900'ü → tavan; EVAL_MAX_TOKENS ile
+ *                             değişir), json_schema + enemyAnalysis eki, minimal
+ *   toVisionFeedbackOutcome   (lib/vision-prompt-builder) — prod'un parse'ı
+ *   finalizeVisionFeedback    (lib/vision-postprocess) — son-işlem zinciri,
+ *                             visionPostprocessOpts + kurucunun factGround'u ile
+ * Bilinçli farklar: (1) METİN-ONLY — görsel gönderilmez (imageAvailable:false,
+ * OLCUM-ARACI-05 karar B): görsele dayalı [GÖRÜNTÜDEKİ YETENEK İKONLARI]
+ * direktifi prompt'tan AÇIKÇA düşer ve her örneğe `scope` notu yazılır;
+ * görüntü-bağımlı metrikler (görselden ult/yetenek okuma, görsel kaynaklı
+ * uydurma) bu eval'in kapsamı DIŞINDADIR. (2) I/O yerine senaryo verisi:
+ * oyuncu hafızası = senaryonun memoryContext'i, maç-kavram hafızası =
+ * MATCH_CONCEPT_SIM. (3) Ağ katmanı: route'un 60 sn AbortController'ı ve B70
+ * length-retry'ı yok — finish_reason örneğe yazılır.
+ * Sıra-kilidi: scripts/test-eval-fidelity.ts [E] (her korpus senaryosunda istek
+ * gövdesi kurucuyla, sistem mesajı GERÇEK route'la bayt-eşit).
  *
- * Faithfulness: imports the same shared modules the route uses —
- *   - SYSTEM_PROMPT(_EN_ADDENDUM) / USER_PROMPT(_EN) / buildRoundFeedbackSchema (lib/vision-prompt)
- *   - buildPolicyBlock (vision opts: ocr/single/vision)    (lib/ai-policy)
- *   - loadVisionKnowledge (real knowledge/**.md RAG)        (lib/knowledge-loader)
- *   - finalizeVisionFeedback (tüm son-işlem zinciri)        (lib/vision-postprocess)
- *   - sanitizePromptInput                                   (lib/prompt-safety)
- * The system+user assembly below mirrors app/api/ai/vision/route.ts:731-996.
- * Text-only (no image) — coach-voice quality is independent of the screenshot;
- * died scenarios send the OCR truth the desktop derives, which is what matters.
+ * ÖLÇÜM TABANI (B06): bu değişiklikten ÖNCE koşulan cycle'lar "pre-parity"
+ * tabandır (yarım prompt: senaryo başına ~82,8 KB sistem + 11 direktif eksik).
+ * Onlarla elma-elma kıyas için dondurulmuş eski ayna:
+ *   EVAL_LEGACY_MIRROR=1 npx tsx scripts/eval-vision.ts   (scripts/eval-vision-legacy.ts)
  *
  * RUN:  npx tsx scripts/eval-vision.ts
+ *       EVAL_DRY_RUN=1 → API çağrısı YOK, anahtar okunmaz; prompt boyut/başlık dökümü
  * OUT:  scripts/eval-out/cycle<N>-samples.json  (+ console summary)
+ * Anahtar: OPENAI_API_KEY env ya da .env.local — YALNIZ main() içinde okunur
+ * (modülü import eden testler anahtara/ağa dokunmaz).
  */
 import * as fs from "fs";
 import * as path from "path";
-// B57 (2026-07-31): EN aynası için route'un EN parçaları da import edilir
-// (SYSTEM_PROMPT_EN_ADDENDUM / USER_PROMPT_EN / buildRoundFeedbackSchema).
-import { SYSTEM_PROMPT, SYSTEM_PROMPT_EN_ADDENDUM, USER_PROMPT, USER_PROMPT_EN, buildRoundFeedbackSchema } from "../lib/vision-prompt";
-import { buildPolicyBlock } from "../lib/ai-policy";
-import { loadVisionKnowledge } from "../lib/knowledge-loader";
-// B9 (2026-07-31): factGround artık ELDE kurulmuyor — route'un buildFactGround'u.
-import { buildFactGround } from "../lib/reality-checker";
-import { stripNumericHp } from "../lib/coach-text";
+import {
+  VISION_CALL,
+  DESKTOP_VISION_MAX_TOKENS,
+  resolveVisionMaxTokens,
+  buildVisionSystemMessage,
+  buildVisionUserMessage,
+  prevDeathTypesFromHistory,
+  buildVisionRequestBody,
+  toVisionFeedbackOutcome,
+  visionPostprocessOpts,
+  type VisionPromptBody,
+  type VisionFeedbackShape,
+} from "../lib/vision-prompt-builder";
+import type { FactGround } from "../lib/reality-checker";
 // OLCUM-ARACI-08: son-işlem zinciri prod ile AYNI fonksiyon (elle ayna YOK).
-import { finalizeVisionFeedback } from "../lib/vision-postprocess";
-import { buildAgentAbilityHint } from "../lib/agent-abilities";
+import { finalizeVisionFeedback, visionOutputFailure } from "../lib/vision-postprocess";
 // B60 (2026-08-04): EN-native korpus — aşağıda SCENARIOS'a ekleniyor.
 import { EN_VISION_SCENARIOS } from "../evals/en-corpus";
-import { sanitizePromptInput } from "../lib/prompt-safety";
-import { classifyDeathVaried, buildDeathTypeDirective, sanitizeAliveCount, ALLIES_ALIVE_MAX, ENEMIES_ALIVE_MAX, type DeathType } from "../lib/death-type";
-import { buildHistoryBlock, type RoundHistoryEntry } from "../lib/history-block";
+import type { DeathType } from "../lib/death-type";
+// B06: dondurulmuş pre-parity ayna — yalnız EVAL_LEGACY_MIRROR=1 iken kullanılır.
+import * as legacy from "./eval-vision-legacy";
 
-const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
+export const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
 
-// (rank-4, 2026-08-24) lib/match-concepts.ts Upstash set'inin koşu-içi simülasyonu:
-// maç başına (id'deki M\d+ öneki) verilen death-type kümesi. Route'taki fallback'in
-// eval karşılığı — sadakat sözleşmesi (B9 sınıfı): iki dosya AYNI commit'te aynı
-// prev listesini kurar. Sentetik id'ler desene uymaz → boş kalır, ölçüm tabanı değişmez.
+// (rank-4, 2026-08-24) lib/match-concepts.ts Upstash listesinin koşu-içi simülasyonu:
+// maç başına (id'deki M\d+ öneki) verilen death-type listesi. Route'taki fallback'in
+// eval karşılığı: echo (roundHistory[].death_type) BOŞKEN ve ölüm round'unda okunur.
+// Sentetik id'ler desene uymaz → boş kalır.
 // (canlı-test #14) Set→Array: match-concepts SET→LIST göçünün aynası — tekrar
 // sayısı artık veri (repeatCount), Set onu 1'e sabitliyordu.
-const MATCH_CONCEPT_SIM = new Map<string, DeathType[]>();
+export type MatchConceptSim = Map<string, DeathType[]>;
+const MATCH_CONCEPT_SIM: MatchConceptSim = new Map();
 const CYCLE = process.env.EVAL_CYCLE || "3";
 
-// ── Load OPENAI_API_KEY from .env.local (tsx doesn't auto-load) ──
+// ── Load OPENAI_API_KEY from .env.local (tsx doesn't auto-load) — YALNIZ main() çağırır ──
 function loadApiKey(): string {
   if (process.env.OPENAI_API_KEY) return process.env.OPENAI_API_KEY;
   const envPath = path.join(process.cwd(), ".env.local");
@@ -71,10 +93,9 @@ function loadApiKey(): string {
   }
   throw new Error("OPENAI_API_KEY not found in env or .env.local");
 }
-const API_KEY = loadApiKey();
 
 // ── Scenario type: a realistic round the desktop would POST ──
-type Scenario = {
+export type Scenario = {
   id: string;
   note: string; // what this scenario stresses
   body: Record<string, unknown>; // VisionRequest-shaped (no image)
@@ -91,13 +112,13 @@ type Scenario = {
 };
 
 /** Senaryonun istek dili — route'un reqLang'iyle aynı sözleşme (varsayılan tr). */
-function langOf(s: Scenario): "tr" | "en" {
+export function langOf(s: Scenario): "tr" | "en" {
   return s.lang === "en" ? "en" : "tr";
 }
 
 // ── 10 scenarios — both sides, died/survived, all confidence + economy tiers,
 //    trade/route fields, newer maps, pattern context, cross-match memory ──
-const SCENARIOS: Scenario[] = [
+export const SCENARIOS: Scenario[] = [
   {
     id: "S1-ascent-cypher-def-strong",
     note: "Ascent / Cypher / SAVUNMA / yüksek confidence + güçlü tekrar-pattern (operator B Main)",
@@ -533,6 +554,42 @@ const SCENARIOS: Scenario[] = [
       })),
     },
   },
+
+  // ── B06 (2026-09-24, OLCUM-ARACI-07): factGround paritesini GÖRÜNÜR kılan iki
+  // senaryo. Eski eval factGround'u ham killerInfo ile kuruyor ve playerAgentKnown'u
+  // hiç set etmiyordu; mevcut korpusta fark 0 çıkıyordu (tüm killer'lar sözlükte,
+  // hiç Unknown ajan yok) → sapma ölçülemiyordu. Bu iki senaryo prod'un iki gerçek
+  // sınıfını taşır: maç ortası agent-OCR boşluğu (canlı-test #9) ve güvenilmez
+  // Region-3 okumasından gelen sözlük-dışı silah token'ı (canlı-test #8: "blade",
+  // gerçek silah Judge'dı). Id'ler S1-S31 A/B kıyasını bozmaz (yeni id).
+  {
+    id: "S32-lotus-unknown-def-agentmiss",
+    note: "Lotus / ajan OKUNAMADI ('Unknown' — maç ortası agent-OCR boş) / SAVUNMA — oyuncuya ajan yakıştırma kontrolü (canlı-test #9)",
+    body: {
+      round: 10, score: "4-5", result: "loss", map: "Lotus", agent: "Unknown", rank: "silver",
+      side: "defense", mode: "competitive", enemyComp: ["Raze", "Omen", "Sova", "Killjoy", "Jett"],
+      died: true, killerInfo: "killed by raze with vandal", deathLocation: "A Main", deathAngle: "front",
+      alliesAlive: 3, enemiesAlive: 4, economyType: "full_buy", loadout: "vandal",
+      roundHistory: Array.from({ length: 9 }, (_, i) => ({
+        round_index: i + 1, died: i % 2 === 0, round_won: i % 3 === 0,
+        death_detected_confidence: "observed", timestamp: i,
+      })),
+    },
+  },
+  {
+    id: "S33-split-jett-atk-bladekiller",
+    note: "Split / Jett / SALDIRI / katil 'killed by chamber with blade' — sözlük-dışı silah token'ı prompt'a ve factGround'a girmemeli (canlı-test #8)",
+    body: {
+      round: 6, score: "2-3", result: "loss", map: "Split", agent: "Jett", rank: "silver",
+      side: "attack", mode: "competitive", enemyComp: ["Chamber", "Viper", "Cypher", "Skye", "Raze"],
+      died: true, killerInfo: "killed by chamber with blade", deathLocation: "B Main", deathAngle: "front-right",
+      alliesAlive: 4, enemiesAlive: 5, economyType: "full_buy", loadout: "vandal",
+      roundHistory: Array.from({ length: 5 }, (_, i) => ({
+        round_index: i + 1, died: i % 2 === 1, round_won: i % 2 === 0,
+        death_detected_confidence: "observed", timestamp: i,
+      })),
+    },
+  },
 ];
 
 /* ── EN AYNA SENARYOLARI — B57 (2026-07-31) ──────────────────────────────────
@@ -587,7 +644,7 @@ SCENARIOS.push(...(EN_VISION_SCENARIOS as unknown as Scenario[]));
  * bu id'den parse eder. Tanımsızsa davranış BUGÜNKÜYLE BAYT-AYNI (sentetik
  * korpus; eski cycle A/B'leri etkilenmez). Baseline koşusu:
  *   EVAL_CYCLE=real-base EVAL_CORPUS=real npx tsx scripts/eval-vision.ts */
-function loadScenarios(): Scenario[] {
+export function loadScenarios(): Scenario[] {
   // EVAL_CORPUS_FILE (2026-09-16): özel senaryo dosyası (ör. pazarlama kartı yeniden-üretimi —
   // GERÇEK pipeline'dan geçmesi şart, elle yazmak yasak). Verilmezse davranış bayt-aynı.
   if (process.env.EVAL_CORPUS_FILE) return JSON.parse(fs.readFileSync(process.env.EVAL_CORPUS_FILE, "utf8")) as Scenario[];
@@ -596,375 +653,188 @@ function loadScenarios(): Scenario[] {
   return JSON.parse(fs.readFileSync(p, "utf8")) as Scenario[];
 }
 
-// ── confidence derivation (route 725-730) ──
-function deriveConfidence(rh: unknown): "calibrating" | "low" | "medium" | "high" {
-  const arr = Array.isArray(rh) ? rh : null;
-  if (!arr || !arr.length) return "calibrating";
-  if (arr.length < 4) return "low";
-  if (arr.length < 8) return "medium";
-  return "high";
+/* ══════════════════════════════════════════════════════════════════════════
+   PROMPT + İSTEK — PROD KURUCUSUNUN KENDİSİ (B06, 2026-09-24)
+   ══════════════════════════════════════════════════════════════════════════
+ * ESKİDEN burada route'un ELLE kopyası vardı (buildSystemMessage /
+ * buildUserPrompt / ctxForFacts — "mirrors route.ts:731-996"). Ölçüm (85 korpus
+ * senaryosu, GERÇEK route ↔ kopya): sistem mesajı senaryo başına ~82,8 KB eksik
+ * (static/scenario/profile/profile2 + 53 ölümde [KARŞI-AJAN]), kullanıcı mesajında
+ * 11 direktif yok (factSheet, silah-komp, ajan-kiti, harita-ipucu, ders-geçmişi,
+ * senaryo, konum/harita/ajan-bilinmiyor, yetenek-ikonu; confidence sistem
+ * öneğinde), ders tipi 7 round'da farklı (sinyal kopyası: ultReady/loadout/
+ * playerAgent/seri/ağırlık yok, repeatedPosition mevcut round'u hariç tutmuyor),
+ * factGround elle (ham killerInfo, playerAgentKnown yok), 350 token (prod fiilen
+ * 450), çıplak şema (enemyAnalysis eki yok), çıplak JSON.parse. O kopya
+ * dondurulmuş olarak scripts/eval-vision-legacy.ts'te (EVAL_LEGACY_MIRROR=1). */
+
+/** Metin-only koşunun kapsam notu (OLCUM-ARACI-05, karar B) — her örneğe yazılır. */
+export const EVAL_SCOPE_NOTE =
+  "görsel yok — eval metin-only (imageAvailable:false): görsele dayalı [GÖRÜNTÜDEKİ YETENEK İKONLARI] " +
+  "direktifi prompt'tan AÇIKÇA düşer; görüntü-bağımlı metrikler (görselden ult/yetenek okuma, görsel " +
+  "kaynaklı uydurma) kapsam dışı. Prod'da ölüm round'unda görsel HER ZAMAN ekli (imageAvailable:true).";
+
+/** Varsayılan: masaüstünün gönderdiği 900 → route tavanı 450 (prod'un FİİLÎ değeri). */
+export function evalMaxTokens(): number {
+  return process.env.EVAL_MAX_TOKENS
+    ? Number(process.env.EVAL_MAX_TOKENS)
+    : resolveVisionMaxTokens(DESKTOP_VISION_MAX_TOKENS);
 }
 
-// ── system message assembly (route 731-792) ──
-function buildSystemMessage(s: Scenario): string {
-  const b = s.body;
-  const lang = langOf(s);                            // B57 (2026-07-31)
-  const confidence = deriveConfidence(b.roundHistory);
-  const sections: string[] = [
-    // route.ts:639 — EN'de sistem prompt'una EN eklentisi biner.
-    lang === "en" ? SYSTEM_PROMPT + SYSTEM_PROMPT_EN_ADDENDUM : SYSTEM_PROMPT,
-    buildPolicyBlock({
-      confidence, tone: "strict", lang,
-      includeEnemyGate: true, includeDecisionRubric: false,
-      // Rank-5 (2026-08-24) sadakat: route.ts langRulesMode:'dedupe' — aynı commit.
-      anchorMode: "ocr", outputFocusMode: "single", enemyGateMode: "vision",
-      langRulesMode: "dedupe",
-    }),
-  ];
-  const kb = loadVisionKnowledge({
-    map: b.map as string | undefined,
-    agent: b.agent as string | undefined,
-    rank: b.rank as string | undefined,
-    enemyAgents: b.enemyComp as string[] | undefined,
-    spikePlanted: typeof b.spikePlanted === "boolean" ? (b.spikePlanted as boolean) : undefined,
-    economyType: b.economyType as string | undefined,
-    side: b.side as string | undefined,
-  });
-  if (kb.blocks.agent) sections.push(kb.blocks.agent);
-  if (kb.blocks.map) sections.push(kb.blocks.map);
-  if (kb.blocks.contextual) sections.push(kb.blocks.contextual);
-  const abilityHint = buildAgentAbilityHint(b.agent as string | undefined, lang);
-  if (abilityHint) sections.push(abilityHint);
-  if (s.memoryContext) {
-    const capped = s.memoryContext.trim().slice(0, 1200);
-    // route.ts:707-715 — sarmalayıcı reqLang'de (EN'de Türkçe örnek cümle
-    // modelce taklit ediliyordu, canlı-test 2026-07-18 dil sızıntısı).
-    sections.push(
-      lang === "en"
-        ? `[CROSS-MATCH HISTORY — long-term player profile (from persisted data, NOT this round)]\n` +
-          `This is the player's accumulated profile from past matches. You may reference it like a coach when relevant ` +
-          `(e.g. "you died at A Short again — that is your recurring spot"); but this round's OCR data always takes priority. ` +
-          `Do NOT alter these numbers, do NOT invent new statistics.\n${capped}`
-        : `[CROSS-MATCH GEÇMİŞİ — uzun vadeli oyuncu profili (kalıcı veriden, bu round'a ait DEĞİL)]\n` +
-          `Bu, oyuncunun geçmiş maçlardan birikmiş profilidir. İlgiliyse koç gibi referans verebilirsin ` +
-          `(ör. "yine A Short'ta öldün — bu senin tekrar eden noktan"); ama bu round'un OCR verisi her zaman önceliklidir. ` +
-          `Buradaki sayıları DEĞİŞTİRME, yeni istatistik UYDURMA.\n${capped}`,
-    );
-  }
-  if (typeof b.patternContext === "string" && b.patternContext) {
-    const clean = sanitizePromptInput(b.patternContext, { max: 2000 });
-    if (clean) sections.push(`[PATTERN CONTEXT — Rust Client]\n${clean}`);
-  }
-  return { msg: sections.join("\n\n---\n\n"), confidence, kb } as unknown as string;
-}
+export type EvalRequest = {
+  lang: "tr" | "en";
+  confidence: string;
+  /** Prompt'a GERÇEKTEN giren KB dosyaları (TR-KALAN-19: eskiden yüklenmeyen blokların dosyaları da yazılıyordu). */
+  kbFiles: string[];
+  systemMessage: string;
+  userPrompt: string;
+  /** OpenAI'a giden gövdenin tamamı (route ile aynı alan sırası). */
+  requestBody: ReturnType<typeof buildVisionRequestBody>;
+  /** Kurucunun factGround'u — son-işleme AYNEN geçer (OLCUM-ARACI-07). */
+  factGround: FactGround;
+  deathType: DeathType | null;
+  prevTypes: DeathType[];
+};
 
-// ── ctx + user prompt assembly (route 769-1101, fields-present subset) ──
-//
-// ⚠ AÇIK SADAKAT BOŞLUĞU — B83 denetimi sırasında ÖLÇÜLDÜ (2026-07-31).
-// B83'ün asıl derdi (factGround eval'de elle kuruluyor) postProcess'te ZATEN
-// kapalı (aşağıya bak). Ama aynı sınıftan bir sapma PROMPT tarafında duruyor:
-// prod'un user mesajı (route.ts:1062-1080) burada ÜRETİLMEYEN iki blok taşıyor:
-//   • factSheet = buildFactSheet(factGround, ctx, lang) — TR'de EN BAŞTA gelir;
-//     "BİLİNEN/BİLİNMEYEN" olgu sözleşmesi, HER round dolu (vision-prompt.ts:21).
-//   • weaponCompDirective = buildWeaponCompDirective(killerWeapon, compArchetype,
-//     loadout, lang) — killerInfo'da silah varken dolu (comp-weapon.ts:117,125).
-// Sapma OLMAYANLAR (yanlış alarm üretmesin diye ölçüldü): mapUnknown/locUnknown
-// direktifleri bu korpusun TAMAMINDA boş çıkar (her senaryonun haritası + ölüm
-// yeri var); confidence direktifi eval'de system prefix'inde (buildPolicyBlock
-// varsayılanı confidenceInPrefix!==false), prod'da user mesajında — İÇERİK aynı,
-// yalnız KONUM farklı.
-// SONUÇ: eval modeli prod'dan DAHA AZ kısıtlar → uydurma oranı prod'dakinden
-// YÜKSEK ölçülür (yanlış-kötümser, yanlış-iyimser değil).
-// NEDEN KAPATILMADI: bu bloklar prompt'a eklenince ölçüm TABANI değişir ve eski
-// cycle'larla A/B kıyaslanabilirlik kırılır — B83'ün tarifi dışı, bilinçli olarak
-// ANA OTURUMA bırakıldı; sessizce yapılmadı.
-function buildUserPrompt(s: Scenario): string {
-  const b = s.body;
-  const lang = langOf(s);                            // B57 (2026-07-31)
-  const ctx: Record<string, unknown> = {};
-  if (typeof b.round === "number") ctx.round = b.round;
-  if (typeof b.score === "string") ctx.score = b.score;
-  if (typeof b.result === "string") ctx.result = (b.result as string).toUpperCase();
-  if (typeof b.map === "string") ctx.map = b.map;
-  if (typeof b.agent === "string") ctx.agent = b.agent;
-  if (typeof b.side === "string") {
-    // route.ts:764-766 — side etiketi de reqLang'de.
-    ctx.side = b.side === "attack"
-      ? (lang === "en" ? "attack (ATTACK — you are entering the site)" : "attack (SALDIRI — sen siteye giriyorsun)")
-      : b.side === "defense"
-        ? (lang === "en" ? "defense (DEFENSE — you are holding the site)" : "defense (SAVUNMA — sen siteyi tutuyorsun)")
-        : b.side;
-  }
-  if (typeof b.mode === "string") ctx.mode = b.mode;
-  if (Array.isArray(b.enemyComp) && (b.enemyComp as string[]).length) ctx.enemyRoster = (b.enemyComp as string[]).slice(0, 5);
-  if (b.died === true) {
-    ctx.died = true;
-    if (typeof b.killerInfo === "string") ctx.killerInfo = sanitizePromptInput(b.killerInfo, { max: 120, collapseWhitespace: true });
-    if (typeof b.deathLocation === "string") ctx.deathLocation = sanitizePromptInput(b.deathLocation, { max: 50, collapseWhitespace: true });
-    if (typeof b.deathAngle === "string") ctx.deathAngle = sanitizePromptInput(b.deathAngle, { max: 30, collapseWhitespace: true });
-    // MIRROR route.ts (2026-07-09): healthAtDeath is no longer put into ctx —
-    // numeric HP stays out of the prompt (classifyDeath below still gets the number).
-    // MIRROR route.ts (LOGLAR-03, 2026-09-23): aralık dışı canlı sayısı ctx'e yazılmaz.
-    const alliesAliveOk = sanitizeAliveCount(b.alliesAlive, ALLIES_ALIVE_MAX);
-    const enemiesAliveOk = sanitizeAliveCount(b.enemiesAlive, ENEMIES_ALIVE_MAX);
-    if (alliesAliveOk !== undefined) ctx.alliesAlive = alliesAliveOk;
-    if (enemiesAliveOk !== undefined) ctx.enemiesAlive = enemiesAliveOk;
-    if (b.spikePlanted === true) ctx.spikePlanted = true;
-    if (typeof b.tradedByAlly === "boolean") ctx.tradedByAlly = b.tradedByAlly;
-    if (typeof b.playerRoute === "string") {
-      ctx.playerRoute = sanitizePromptInput(b.playerRoute, { max: 120, collapseWhitespace: true });
-      if (b.routeConfidence) ctx.routeConfidence = b.routeConfidence;
-    }
-  } else if (b.died === false) {
-    ctx.died = false;
-  }
-  if (typeof b.economyType === "string") ctx.economyType = (b.economyType as string).slice(0, 20);
-  if (typeof b.credits === "number") ctx.credits = b.credits;
-  if (typeof b.loadout === "string") ctx.loadout = sanitizePromptInput(b.loadout, { max: 30, collapseWhitespace: true });
-  if (typeof b.playerKills === "number") ctx.playerKills = b.playerKills;
-  if (typeof b.playerDeaths === "number") ctx.playerDeaths = b.playerDeaths;
-  if (typeof b.playerAssists === "number") ctx.playerAssists = b.playerAssists;
-  if (Array.isArray(b.killfeedOrder) && (b.killfeedOrder as string[]).length) {
-    ctx.killfeedOrder = (b.killfeedOrder as string[]).slice(0, 10).map((e) => sanitizePromptInput(e, { max: 60, collapseWhitespace: true }));
-  }
-
-  const ctxJson = Object.keys(ctx).length ? JSON.stringify(ctx, null, 2) : "";
-  const patternBlock = typeof b.patternContext === "string" && b.patternContext ? stripNumericHp(sanitizePromptInput(b.patternContext, { max: 2000 }) || "", lang) : "";
-
-  // DEATH-TYPE directive — MIRROR route.ts (variety fix 2026-06-30) so the eval measures
-  // the SAME pipeline the desktop hits. Without this the eval would test the OLD behavior.
-  let deathTypeDirective = "";
-  if (b.died === true) {
-    const rh2 = b.roundHistory as Record<string, unknown>[] | undefined;
-    const loc = (typeof b.deathLocation === "string" ? b.deathLocation : "").toLowerCase();
-    const repeatedPosition = !!loc && Array.isArray(rh2) && rh2.some((r) =>
-      r.died === true && typeof r.death_position === "string" &&
-      (r.death_position as string).toLowerCase().includes(loc) &&
-      (r.position_confidence === "high" || r.position_confidence === "medium"));
-    // (canlı-test #14) MIRROR route.ts: prev artık SINIFLANDIRMADAN ÖNCE —
-    // classifyDeathVaried aile-tekrarını görebilsin (route ile birebir sıra).
-    const prevFromRh = (Array.isArray(rh2) ? rh2 : [])
-      .map((r) => (typeof r.death_type === "string" ? r.death_type : ""))
-      .filter((s): s is string => s.length > 0) as DeathType[];
-    const mcKey = /^(M\d+)-R\d+/.exec(s.id)?.[1] ?? "";
-    const prevTypes = prevFromRh.length > 0
-      ? prevFromRh
-      : mcKey ? [...(MATCH_CONCEPT_SIM.get(mcKey) ?? [])] : [];
-    const dtype = classifyDeathVaried({
-      side: b.side as string | undefined,
-      killerInfo: b.killerInfo as string | undefined,
-      deathLocation: b.deathLocation as string | undefined,
-      deathTiming: b.deathTiming as string | undefined,
-      // MIRROR route.ts stale-gate (2026-07-09): stale HP (>4s sample age) is
-      // dropped as a classifier signal, exactly like the prod route.
-      healthAtDeath:
-        typeof b.hpSampleAgeSec !== "number" ||
-        (Number.isFinite(b.hpSampleAgeSec) && (b.hpSampleAgeSec as number) >= 0 && (b.hpSampleAgeSec as number) <= 4)
-          ? (b.healthAtDeath as number | undefined)
-          : undefined,
-      alliesAlive: b.alliesAlive as number | undefined,
-      enemiesAlive: b.enemiesAlive as number | undefined,
-      spikePlanted: b.spikePlanted as boolean | undefined,
-      economyType: b.economyType as string | undefined,
-      tradedByAlly: b.tradedByAlly as boolean | undefined,
-      repeatedPosition,
-    }, prevTypes);
-    deathTypeDirective = buildDeathTypeDirective(dtype, prevTypes, lang);
-    if (mcKey) {
-      // (canlı-test #14) SET→LIST aynası: tekrarlar KORUNUR (match-concepts
-      // RPUSH göçünün simülasyonu — repeatCount gerçek sayıya kavuşur).
-      const list = MATCH_CONCEPT_SIM.get(mcKey) ?? [];
-      list.push(dtype);
-      MATCH_CONCEPT_SIM.set(mcKey, list);
-    }
-  }
-
-  // AÇILIŞ-ROTASYONU — MIRROR route.ts (rank-3, 2026-08-24): round % 3 seed'li
-  // deterministik iskelet seçimi; sadakat sözleşmesi B9 — iki dosya AYNI commit'te
-  // AYNI direktifi kurar, yoksa ölçüm canlıyı yansıtmaz. died=false / round yoksa boş.
-  let openerDirective = "";
-  if (b.died === true && typeof b.round === "number" && Number.isFinite(b.round)) {
-    const oi = ((Math.trunc(b.round as number) % 3) + 3) % 3;
-    openerDirective = lang === "en"
-      ? `\n[OPENER] This round open deathAnalysis with: ${["(a) the most critical ROOT cause", "(b) the lesson as an imperative, with its own verb", "(c) what the enemy did — make the ENEMY the subject"][oi]}. The [DEATH-TYPE HINT] picks the lesson; this line only picks the opener.`
-      : `\n[AÇILIŞ] deathAnalysis açılışı bu round: ${["(a) en kritik KÖK neden", "(b) dersin EMİR hali, dersin kendi fiiliyle", "(c) düşmanın yaptığı — öznen RAKİP olsun"][oi]}. [ÖLÜM-TİPİ İPUCU] dersi seçer; bu satır yalnız açılışı seçer.`;
-  }
-
-  // [BAĞLAMSIZ ÖLÜM] — MIRROR route.ts (canlı-test #15 DC4, 2026-09-01): killer +
-  // deathLocation ikisi de boşken roster'ın round-gözlemi gibi sunulmasını menet
-  // (komp-yankısı nakaratı: 8 ölümün 6'sında "kadroda Chamber var, uzun hat").
-  // Sadakat sözleşmesi B9 — route ile AYNI commit'te aynı direktif; mevcut korpus
-  // senaryolarının killer/loc'u dolu → oralarda boş string, ölçüm tabanı değişmez.
-  const contextlessDeathDirective = (b.died === true && !ctx.killerInfo && !ctx.deathLocation)
-    ? (lang === "en"
-        ? `\n[CONTEXTLESS DEATH] Neither the killer nor the death location could be read this round. The enemy ROSTER is static match data, NOT an observation about THIS round — do not present a roster agent as this round's finding ("they have Chamber, watch long angles" style repeats every round and is banned as the main point). Anchor point 1 of enemyAnalysis and the deathAnalysis lesson to the death-type hint, side, timing and numbers (allies/enemies alive). You may mention ONE roster agent at most ONCE, only inside the counter-move (point 2), and only with a concrete action.`
-        : `\n[BAĞLAMSIZ ÖLÜM] Bu round ne katil ne ölüm yeri okunabildi. Rakip KADRO maçın sabit verisidir, BU round'un gözlemi DEĞİL — roster'dan bir ajanı bu round'un bulgusu gibi sunma ("kadroda Chamber var, uzun hatlara dikkat" kalıbı her round aynı çıkar ve ana madde olarak YASAK). enemyAnalysis Madde 1'i ve deathAnalysis dersini ölüm-tipi ipucuna, side'a, timing'e ve sayı durumuna (allies/enemiesAlive) çapala. Roster'dan EN FAZLA BİR ajanı, yalnız Madde 2'nin karşı-hamlesi içinde ve somut bir eylemle anabilirsin.`)
-    : "";
-
-  // B57 (2026-07-31): dil direktifi — route.ts:1013-1014. EN'de EN BAŞA gelir
-  // (route.ts:1048-1049: "model önce dili görsün"); TR'de boş → bayt-aynı.
-  const langDirective = lang === "en"
-    ? `\n[LANGUAGE] The player's language is ENGLISH. Write deathAnalysis, enemyAnalysis and nextRoundSuggestion ONLY in natural English coach language (keep universal game terms: peek, trade, smoke, eco...). The knowledge blocks and some context/instruction lines are in Turkish — use them as source FACTS and LESSONS but always RESTATE them in English. NEVER copy a Turkish sentence or word into your output.`
-    : "";
-
-  let prompt = (lang === "en" ? USER_PROMPT_EN : USER_PROMPT) +
-    langDirective +
-    contextlessDeathDirective + // BAĞLAMSIZ ÖLÜM — route aynası (canlı-test #15 DC4)
-    deathTypeDirective +
-    openerDirective + // AÇILIŞ BİÇİMİ — route ile aynı rotasyon (rank-3, per-round)
-    (ctxJson
-      ? (lang === "en"
-          ? `\n\n[ROUND CONTEXT — OCR pixel truth, more reliable than the screenshot]\n${ctxJson}`
-          : `\n\n[ROUND CONTEXT — OCR pixel truth, screenshot'tan güvenilir]\n${ctxJson}`)
-      : "") +
-    (patternBlock
-      ? (lang === "en"
-          ? `\n\n[PATTERN — recurring mistake across recent rounds. If present, reference it like a coach inside deathAnalysis or nextRoundSuggestion — do not open an extra field]\n${patternBlock}`
-          : `\n\n[PATTERN — son round'lardaki tekrar eden hata. Bu varsa deathAnalysis veya nextRoundSuggestion'da koç gibi referans ver — extra alan açma]\n${patternBlock}`)
-      : "");
-
-  // GECMIS BLOGU: route ile AYNI fonksiyon (lib/history-block.ts). Eskiden burada
-  // EKSIK bir kopya vardi (yalniz patternNote) → eval, canlida modelin gordugu
-  // posNote/deathZoneNote kanitini hic gostermiyordu ve olcum canliyi yansitmiyordu.
-  prompt += buildHistoryBlock(
-    b.roundHistory as RoundHistoryEntry[] | undefined,
-    lang,
-  );
-  // Sandviç tekniği (route.ts:1085-1087): EN'de üretimden hemen önceki SON
-  // satır dil emri olsun. TR'de eklenmez → bayt-aynı.
-  if (lang === "en") {
-    prompt += `\n\n[REMINDER] Output language: ENGLISH ONLY. All three fields in natural English coach voice — never a Turkish word.`;
-  }
-  return prompt;
-}
-
-// ── OpenAI call (route 1002-1064) ──
-// B57 (2026-07-31): şema da dile bağlı — route.ts:1140 buildRoundFeedbackSchema(reqLang).
-// json_schema description'ları üretimden hemen önceki EN GÜÇLÜ sinyal (vision-prompt.ts:108-113),
-// EN aynası TR şemayla koşarsa ölçüm prod'u yansıtmaz.
-async function callModel(systemMessage: string, userPrompt: string, lang: "tr" | "en" = "tr"): Promise<unknown> {
-  const res = await fetch(OPENAI_API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", Authorization: `Bearer ${API_KEY}` },
-    body: JSON.stringify({
-      // EVAL_MODEL (model A/B, 2026-09-16): varsayılan prod modeli (gpt-5-mini) —
-      // sadakat korunur; aday model kıyası için env ile değiştirilir. EVAL_EFFORT=omit
-      // → reasoning_effort GÖNDERİLMEZ (parametreyi tanımayan adaylar 400 dönmesin);
-      // EVAL_EFFORT=none → "none" değeri GÖNDERİLİR (5.6 ailesinde geçerli seviye).
-      model: process.env.EVAL_MODEL || "gpt-5-mini",
-      // EVAL_MAX_TOKENS / EVAL_EFFORT (KB 10h nöbeti 2026-07-25): canlı route'un
-      // değerleri VARSAYILAN (minimal / 350) — sadakat korunur. Env ile
-      // değiştirilebilir ki "reasoning_effort kaliteyi ne kadar taşıyor?" sorusu
-      // KB değişikliğinden AYRI bir değişken olarak ölçülebilsin (route.ts:1057'deki
-      // "kalite düşerse low/medium'a çıkar" notunun ampirik sınaması).
-      max_completion_tokens: Number(process.env.EVAL_MAX_TOKENS || 350),
-      response_format: { type: "json_schema", json_schema: buildRoundFeedbackSchema(lang) },
-      ...(process.env.EVAL_EFFORT === "omit"
-        ? {}
-        : { reasoning_effort: (process.env.EVAL_EFFORT || "minimal") as "none" | "minimal" | "low" | "medium" | "high" }),
-      messages: [
-        { role: "system", content: systemMessage },
-        { role: "user", content: userPrompt },
-      ],
-    }),
-  });
-  if (!res.ok) {
-    const t = await res.text().catch(() => "unreadable");
-    throw new Error(`OpenAI ${res.status}: ${t.slice(0, 300)}`);
-  }
-  const data = await res.json();
-  const text = data?.choices?.[0]?.message?.content || "";
-  return { parsed: JSON.parse(text), usage: data?.usage };
-}
-
-/* ── post-process — PROD ZİNCİRİNİN KENDİSİ (lib/vision-postprocess.ts) ─────────
- * OLCUM-ARACI-08 (2026-09-23): bu fonksiyon eskiden route.ts:1788-1848'in ELLE
- * kopyasıydı ve B9 (2026-07-31) + 9355dec (2026-09-16) dahil YEDİ kez prod'dan
- * sapmıştı (kind/lang/map eksikliği, elle factGround, .slice, empty-guard,
- * enemyAnalysis reality-check'i, fixCallout, .filter). Zincir artık route ile
- * AYNI fonksiyondan geçer: finalizeVisionFeedback (lib/vision-postprocess.ts).
- * Bir halka değişirse eval kendiliğinden aynı zinciri ölçer — ayna sapması
- * yapısal olarak imkânsız. ÖLÇÜM TABANI: taşıma commit'i (B03/1) bayt-aynıydı (944
- * kayıtlı ham örnek × 4 gövde = 3776 koşuda eski ayna ile birebir); B03/2 zincire
- * ajan-adı kilidi, DA tanı-etiketi soyucu, boş-guard, EA kanıtsız-madde düşürme ve
- * cümle-sınırlı kapak (EA 240) ekledi → o commit'ten sonraki cycle'lar eski
- * cycle'larla doğrudan kıyaslanmaz; replay-tr ile ham örnekten yeniden ölçülür.
- *
- * Buradaki TEK eval-özgü parça factGround kurulumudur (route ctx'i elde yok);
- * route/eval factGround paritesi B06'nın (prompt-builder tek kaynak) işidir. */
-function postProcess(s: Scenario, fb: { deathAnalysis: string; enemyAnalysis: string[]; nextRoundSuggestion: string }) {
-  const b = s.body;
+/**
+ * Senaryonun OpenAI isteğini PROD kurucusuyla kurar. Ağ yok, anahtar yok.
+ * `sim` (maç-kavram hafızası) bu çağrıda güncellenir — route'un recordMatchConcept'i.
+ */
+export function buildEvalRequest(s: Scenario, sim: MatchConceptSim = MATCH_CONCEPT_SIM): EvalRequest {
+  const body = s.body as VisionPromptBody;
   const lang = langOf(s);
-  const map = typeof b.map === "string" ? (b.map as string) : undefined;
-  const agent = typeof b.agent === "string" ? (b.agent as string) : undefined;
-
-  // factGround: route.ts:894-897 ile AYNI fonksiyon. ctx alanları buildUserPrompt
-  // ile aynı sanitize + aynı died-koşulu altında kurulur (buildFactGround yalnız
-  // ctx.deathLocation / ctx.deathAngle / ctx.playerRoute okur).
-  //
-  // B83 DOĞRULAMASI (2026-07-31): 1. dalgada reality-checker'a eklenen YENİ
-  // FactGround alanları — killerAgent (katil-tutarlılığı guard'ı, reality-checker.ts:
-  // 673-697) ve hasEnemyUtil (düşman-util guard'ı, :854) — burada AYRICA KURULMAZ:
-  // buildFactGround onları killerInfo'dan (extractKillerAgent) ve sabit sözleşmeden
-  // kendisi türetir, yani her iki yeni guard eval'de ZATEN çalışıyor. Elle kurulan
-  // eski nesne B9'da kaldırıldığı için alan-sızması yapısal olarak imkânsız; tip
-  // her zaman tam uyumlu ve reality-checker'a yeni alan eklendiğinde eval onu
-  // kendiliğinden ölçer. BURAYA ELLE ALAN EKLEME — sapma tam oradan doğar.
-  const ctxForFacts: Record<string, unknown> = {};
-  if (b.died === true) {
-    if (typeof b.deathLocation === "string") ctxForFacts.deathLocation = sanitizePromptInput(b.deathLocation, { max: 50, collapseWhitespace: true });
-    if (typeof b.deathAngle === "string") ctxForFacts.deathAngle = sanitizePromptInput(b.deathAngle, { max: 30, collapseWhitespace: true });
-    if (typeof b.playerRoute === "string") ctxForFacts.playerRoute = sanitizePromptInput(b.playerRoute, { max: 120, collapseWhitespace: true });
-  }
-  const factGround = buildFactGround(b as Record<string, unknown>, ctxForFacts);
-
-  return finalizeVisionFeedback(fb, {
-    roundHistory: b.roundHistory as Record<string, unknown>[] | undefined,
-    factGround,
+  const sys = buildVisionSystemMessage({ body, lang, memoryContext: s.memoryContext ?? "" });
+  // prev kaynağı route ile aynı: echo; echo boşken (ölüm round'u) maç-kavram hafızası.
+  const echo = prevDeathTypesFromHistory(body.roundHistory);
+  const mcKey = /^(M\d+)-R\d+/.exec(s.id)?.[1] ?? "";
+  const prevTypes = echo.length > 0 ? echo : body.died === true && mcKey ? [...(sim.get(mcKey) ?? [])] : [];
+  const user = buildVisionUserMessage({
+    body,
     lang,
-    map,
-    agent,
-    enemyComp: b.enemyComp as unknown[] | undefined,
-    suppliedLoc: typeof b.deathLocation === "string" ? String(b.deathLocation) : "",
+    prevDeathTypes: prevTypes,
+    prevSource: echo.length > 0 ? "rh" : mcKey ? "sim" : "-",
+    imageAvailable: false, // OLCUM-ARACI-05 karar B — metin-only (EVAL_SCOPE_NOTE)
   });
+  if (user.deathType && mcKey) {
+    // (canlı-test #14) SET→LIST aynası: tekrarlar KORUNUR (match-concepts RPUSH).
+    const list = sim.get(mcKey) ?? [];
+    list.push(user.deathType);
+    sim.set(mcKey, list);
+  }
+  // EVAL_MODEL (model A/B, 2026-09-16): varsayılan prod modeli — sadakat korunur.
+  // EVAL_EFFORT=omit → reasoning_effort GÖNDERİLMEZ (parametreyi tanımayan adaylar
+  // 400 dönmesin); EVAL_EFFORT=none → "none" değeri GÖNDERİLİR.
+  const effortEnv = process.env.EVAL_EFFORT;
+  const requestBody = buildVisionRequestBody({
+    systemMessage: sys.systemMessage,
+    // Route görselsiz round'da da içeriği blok dizisi olarak yollar — aynı biçim.
+    userContent: [{ type: "text", text: user.userPrompt }],
+    maxTokens: evalMaxTokens(),
+    lang,
+    model: process.env.EVAL_MODEL || VISION_CALL.model,
+    reasoningEffort: effortEnv === "omit" ? null : effortEnv || VISION_CALL.reasoningEffort,
+  });
+  return {
+    lang,
+    confidence: sys.confidence,
+    kbFiles: sys.kbFiles,
+    systemMessage: sys.systemMessage,
+    userPrompt: user.userPrompt,
+    requestBody,
+    factGround: user.factGround,
+    deathType: user.deathType,
+    prevTypes,
+  };
+}
+
+/** Kurucunun factGround'u ile prod son-işlem zinciri (OLCUM-ARACI-07: ctxForFacts yok). */
+export function postProcess(s: Scenario, fb: VisionFeedbackShape, factGround: FactGround) {
+  return finalizeVisionFeedback(fb, visionPostprocessOpts(s.body as VisionPromptBody, langOf(s), factGround));
+}
+
+/** Kullanıcı mesajındaki direktif başlıkları (dry-run dökümü için). */
+function directiveHeaders(userPrompt: string): string[] {
+  return [...userPrompt.matchAll(/\n\[([^\]\n]{2,60})\]/g)].map((m) => m[1].split(" — ")[0]);
 }
 
 async function main() {
+  const legacyMode = process.env.EVAL_LEGACY_MIRROR === "1";
+  const dryRun = process.env.EVAL_DRY_RUN === "1";
+  const apiKey = dryRun ? "" : loadApiKey();
   const results: unknown[] = [];
   // EVAL_ONLY=S1,S9 → sadece bu id-prefix'leri çalıştır (grounding izi için odak).
   const only = process.env.EVAL_ONLY ? process.env.EVAL_ONLY.split(",").map((x) => x.trim()) : null;
   // rank-1 (2026-08-24): korpus seçimi tek noktadan — EVAL_CORPUS tanımsızsa
-  // loadScenarios() SCENARIOS'un kendisini döndürür (davranış bayt-aynı).
+  // loadScenarios() SCENARIOS'un kendisini döndürür.
   const corpus = loadScenarios();
   let list = only ? corpus.filter((s) => only.some((o) => s.id.startsWith(o))) : corpus;
-  // B57 (2026-07-31): EVAL_LANG=tr|en → yalnız o dilin senaryoları. Tanımsızsa
-  // hepsi (TR korpus + EN aynaları). TR-only koşu eski cycle'larla birebir
-  // karşılaştırılabilir kalsın diye var.
+  // B57 (2026-07-31): EVAL_LANG=tr|en → yalnız o dilin senaryoları.
   const langFilter = process.env.EVAL_LANG === "tr" || process.env.EVAL_LANG === "en" ? process.env.EVAL_LANG : null;
   if (langFilter) list = list.filter((s) => langOf(s) === langFilter);
-  console.log(`\n══════ EMPIRICAL EVAL — Cycle ${CYCLE} — ${list.length} scenarios${langFilter ? ` (lang=${langFilter})` : ""} ══════\n`);
+  const mode = legacyMode ? "LEGACY pre-parity ayna (eval-vision-legacy.ts)" : `prod kurucusu, metin-only, max_completion_tokens=${evalMaxTokens()}`;
+  console.log(`\n══════ EMPIRICAL EVAL — Cycle ${CYCLE} — ${list.length} scenarios${langFilter ? ` (lang=${langFilter})` : ""} — ${mode}${dryRun ? " — DRY-RUN" : ""} ══════\n`);
+  const legacySim = new Map<string, DeathType[]>();
   for (const s of list) {
-    process.stdout.write(`[${s.id}] generating... `);
+    process.stdout.write(`[${s.id}] ${dryRun ? "dry-run" : "generating"}... `);
     try {
-      const sm = buildSystemMessage(s) as unknown as { msg: string; confidence: string; kb: { files: string[] } };
-      const up = buildUserPrompt(s);
-      const { parsed, usage } = (await callModel(sm.msg, up, langOf(s))) as { parsed: { deathAnalysis: string; enemyAnalysis: string[]; nextRoundSuggestion: string }; usage: unknown };
-      const final = postProcess(s, parsed);
-      console.log(`done (lang=${langOf(s)}, conf=${sm.confidence}, kb=[${sm.kb.files.join(", ")}], reality=${final.realityModified ? "MOD" : "ok"})`);
-      results.push({
-        // B57: lang örnek dosyasına yazılır → eval-score EN/TR ayrıştırabilsin.
-        id: s.id, note: s.note, lang: langOf(s), confidence: sm.confidence, kbFiles: sm.kb.files,
-        systemPromptBytes: sm.msg.length, usage,
-        raw: parsed, final,
-        // EVAL_DUMP_PROMPTS=1 → grounding izi için TAM enjekte KB + OCR. Böylece
-        // her çıktı cümlesi KB/OCR/model-bilgisi diye sınıflanabilir.
-        ...(process.env.EVAL_DUMP_PROMPTS === "1" ? { systemMessage: sm.msg, userPrompt: up } : {}),
+      if (legacyMode) {
+        const sm = legacy.buildSystemMessage(s) as unknown as { msg: string; confidence: string; kb: { files: string[] } };
+        const up = legacy.buildUserPrompt(s, legacySim);
+        if (dryRun) { console.log(`sys=${sm.msg.length}c user=${up.length}c (legacy)`); continue; }
+        const { parsed, usage } = (await legacy.callModel(apiKey, sm.msg, up, langOf(s))) as { parsed: VisionFeedbackShape; usage: unknown };
+        const final = legacy.postProcess(s, parsed);
+        console.log(`done (legacy, lang=${langOf(s)}, conf=${sm.confidence}, reality=${final.realityModified ? "MOD" : "ok"})`);
+        results.push({
+          id: s.id, note: s.note, lang: langOf(s), mirror: "legacy-pre-parity", confidence: sm.confidence, kbFiles: sm.kb.files,
+          systemPromptBytes: sm.msg.length, usage, raw: parsed, final,
+          ...(process.env.EVAL_DUMP_PROMPTS === "1" ? { systemMessage: sm.msg, userPrompt: up } : {}),
+        });
+        continue;
+      }
+      const req = buildEvalRequest(s);
+      if (dryRun) {
+        console.log(`sys=${Buffer.byteLength(req.systemMessage, "utf8")}B user=${Buffer.byteLength(req.userPrompt, "utf8")}B max=${req.requestBody.max_completion_tokens} dtype=${req.deathType ?? "-"} [${directiveHeaders(req.userPrompt).join(" | ")}]`);
+        continue;
+      }
+      const res = await fetch(OPENAI_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
+        body: JSON.stringify(req.requestBody),
       });
+      if (!res.ok) {
+        const t = await res.text().catch(() => "unreadable");
+        throw new Error(`OpenAI ${res.status}: ${t.slice(0, 300)}`);
+      }
+      const data = await res.json();
+      const text: string = data?.choices?.[0]?.message?.content || "";
+      const finishReason: string = data?.choices?.[0]?.finish_reason ?? "unknown";
+      const base = {
+        id: s.id, note: s.note, lang: req.lang, mirror: "prod-parity", imageAvailable: false, scope: EVAL_SCOPE_NOTE,
+        confidence: req.confidence, kbFiles: req.kbFiles, systemPromptBytes: req.systemMessage.length,
+        userPromptBytes: req.userPrompt.length, maxCompletionTokens: req.requestBody.max_completion_tokens,
+        finish_reason: finishReason, deathType: req.deathType, usage: data?.usage,
+        ...(process.env.EVAL_DUMP_PROMPTS === "1" ? { systemMessage: req.systemMessage, userPrompt: req.userPrompt } : {}),
+      };
+      // Prod'un parse'ı (extractJSON + coercion + şekil). Başarısızlık prod'da 502 yapısal
+      // hata olurdu → örnek HATA olarak kaydedilir (uydurma yok).
+      const outcome = toVisionFeedbackOutcome(text);
+      if (!outcome.ok) {
+        console.log(`FAILED (${outcome.code}, finish=${finishReason})`);
+        results.push({ ...base, error: `${outcome.code}: ${outcome.message}`, rawPreview: outcome.preview });
+        continue;
+      }
+      const raw = JSON.parse(JSON.stringify(outcome.obj)) as VisionFeedbackShape;
+      const final = postProcess(s, outcome.obj as VisionFeedbackShape, req.factGround);
+      // Süzgeç deathAnalysis'i boşalttıysa prod YAPISAL HATA döner (CANLI-TEST-07) — kaydedilir.
+      const outputFailure = visionOutputFailure(final);
+      console.log(`done (lang=${req.lang}, conf=${req.confidence}, finish=${finishReason}, dtype=${req.deathType ?? "-"}, reality=${final.realityModified ? "MOD" : "ok"}${outputFailure ? `, OUTPUT-FAIL=${outputFailure.detail.reason}` : ""})`);
+      results.push({ ...base, raw, final, ...(outputFailure ? { outputFailure: outputFailure.detail } : {}) });
     } catch (e) {
       console.log(`FAILED: ${(e as Error).message}`);
       results.push({ id: s.id, note: s.note, error: (e as Error).message });
     }
   }
+  if (dryRun) { console.log(`\n(dry-run) API çağrısı yok, örnek dosyası yazılmadı.\n`); return; }
 
   const outDir = path.join(process.cwd(), "scripts", "eval-out");
   fs.mkdirSync(outDir, { recursive: true });
@@ -976,13 +846,19 @@ async function main() {
   for (const r of results as Record<string, unknown>[]) {
     if (r.error) { console.log(`\n### ${r.id} — ERROR: ${r.error}`); continue; }
     const f = r.final as { deathAnalysis: string; enemyAnalysis: string[]; nextRoundSuggestion: string };
-    console.log(`\n### ${r.id}  (conf=${r.confidence})`);
+    console.log(`\n### ${r.id}  (conf=${r.confidence}${r.finish_reason ? `, finish=${r.finish_reason}` : ""})`);
     console.log(`  deathAnalysis:      ${f.deathAnalysis}`);
     console.log(`  enemyAnalysis[0]:   ${f.enemyAnalysis[0] || "(empty)"}`);
     console.log(`  enemyAnalysis[1]:   ${f.enemyAnalysis[1] || "(empty)"}`);
     console.log(`  nextRoundSuggestion:${f.nextRoundSuggestion}`);
   }
+  const rs = results as Record<string, unknown>[];
+  const fin: Record<string, number> = {};
+  for (const r of rs) { const k = String(r.finish_reason ?? (r.error ? "error" : "?")); fin[k] = (fin[k] || 0) + 1; }
+  console.log(`\nÖZET: ${rs.filter((r) => !r.error).length}/${rs.length} örnek · finish=${JSON.stringify(fin)} · output-fail=${rs.filter((r) => r.outputFailure).length}`);
   console.log(`\n✅ wrote ${outFile}\n`);
 }
 
-main().catch((e) => { console.error(e); process.exit(1); });
+if (require.main === module) {
+  main().catch((e) => { console.error(e); process.exit(1); });
+}
