@@ -46,7 +46,46 @@ export type TelemetryEventType =
    */
   | "app_open"
   | "login_ok"
-  | "watch_started";
+  | "watch_started"
+  /**
+   * B08 (2026-09-24 · A026): izleme DURDU + sebebi. WATCHING'i kapatan beş yol
+   * (maç sonu, kullanıcı durdurdu, oturum temizlendi, token süresi doldu,
+   * uygulama kapandı) bugüne kadar yalnız yerel tracing yazıyordu; sunucudan
+   * "sessiz kullanıcı durdurdu mu, oturumu mu düştü" ayrımı yapılamıyordu.
+   * Paket: `code` ZORUNLU = sebep ("match_end" | "user_stop" | "auth_clear" |
+   * "auth_expired" | "app_exit"), `count: 1`, `round` opsiyonel.
+   * SIRA (A006 dersi): backend ÖNCE deploy edilir, desktop (D20) SONRA gönderir;
+   * aksi hâlde olay `invalid_type` ile sessizce düşer.
+   */
+  | "watch_stopped"
+  /**
+   * B08 (2026-09-24 · A014/A024/A042): oturum başına BİR kez kompakt, PII'siz rig
+   * dizesi (Windows build, OCR tanıma dili, yakalama yolu, çerçeve kararı…).
+   * `code` ZORUNLU, ≤64 char (genel code kapısı). Hostname / kullanıcı adı /
+   * GPU model adı / dosya yolu ASLA taşımaz.
+   * KVKK kararı (decisions A024/A030 applied): gizlilik metni DEĞİŞMEDİ ve desktop
+   * bu olayı GÖNDERMİYOR (D20'de RIG_PROFILE_ENABLED=false). Tipin kabul edilmesi
+   * zararsızdır; metin onaylanıp bayrak açılınca veri kaybolmadan akar.
+   */
+  | "rig_profile";
+
+/**
+ * B08 (2026-09-24 · A006/A064): SUNUCUNUN KENDİ yazdığı özet satır tipi — route,
+ * reddettiği olayları `telemetry_events`e `type = "telemetry_rejected"`,
+ * `code = "<sebep>:<gelen tip>"`, `count = adet` olarak yazar. Bilerek
+ * `VALID_TYPES` DIŞINDA: istemci bu tipte olay gönderirse kendisi
+ * `invalid_type` ile reddedilir (sahtelenemez), admin kartı yalnız sunucunun
+ * yazdığı satırları görür.
+ */
+export const TELEMETRY_REJECTED_TYPE = "telemetry_rejected";
+
+/**
+ * Reddedilen olay özetinde bir batch'ten yazılacak EN FAZLA ayrık
+ * `<sebep>:<tip>` satırı. Kötü niyetli istemci 100 farklı sahte tip yollasa bile
+ * satır şişmesi sınırlı kalır; artan çiftler tek `_overflow:*` satırında toplanır
+ * (adet kaybolmaz).
+ */
+export const TELEMETRY_REJECT_MAX_ROWS = 10;
 
 export interface TelemetryEvent {
   /** Discriminator. */
@@ -57,15 +96,21 @@ export interface TelemetryEvent {
   value?: number;
   /** Bucket count for `error_code_count` (≥1). */
   count?: number;
-  /** Error code (matches OverlayError discriminants). */
+  /**
+   * Error code (matches OverlayError discriminants). B08: `watch_stopped`'ta
+   * durma sebebi, `rig_profile`'da kompakt rig dizesi — ikisinde de ZORUNLU.
+   */
   code?: string;
   /** Route name for `ai_call_duration_ms` — `"vision"` | `"report"` | `"match-report"` | `"feedback"` | `"insight"`. */
   route?: string;
   /** Optional round number context. */
   round?: number;
   /**
-   * B80 (2026-07-31): masaüstü sürümü (örn. "1.0.7" — Rust tarafında
-   * `env!("CARGO_PKG_VERSION")`). Auto-updater canlı olduğu için
+   * B80 (2026-07-31): masaüstü sürümü (örn. "1.0.19"). Rust tarafında kaynak
+   * `app.package_info().version` (= tauri.conf.json "version"). B08 düzeltmesi
+   * (A014/A030): `env!("CARGO_PKG_VERSION")` KULLANILMAZ — Cargo.toml
+   * "1.0.0-beta.1"de donmuş durumda, ürün sürümü yalnız tauri.conf.json'da
+   * (release-desktop.ps1 de oradan okur). Auto-updater canlı olduğu için
    * "hata yeni sürümden mi geliyor, kaç kullanıcı hâlâ eskide" sorusu her
    * sürümde doğuyor; sürüm alanı olmadan error_code_count artışı bir
    * sürüme bağlanamıyordu.
@@ -111,7 +156,13 @@ export const TELEMETRY_LIMITS = {
   maxStringLen: 64,
 } as const;
 
-const VALID_TYPES: ReadonlySet<TelemetryEventType> = new Set<TelemetryEventType>([
+/**
+ * Backend'in kabul ettiği TÜM tipler — tek kaynak. Dışa açık çünkü sözleşme
+ * testi (scripts/test-api-contract.ts) her tipin bir kanonik örnek yükle
+ * çivilendiğini TERS yönde de denetler (B08): yeni tip eklenip örneği
+ * unutulursa test kırmızı olur.
+ */
+export const TELEMETRY_EVENT_TYPES: readonly TelemetryEventType[] = [
   "round_end_latency_ms",
   "ai_call_duration_ms",
   "error_code_count",
@@ -123,7 +174,12 @@ const VALID_TYPES: ReadonlySet<TelemetryEventType> = new Set<TelemetryEventType>
   "app_open",
   "login_ok",
   "watch_started",
-]);
+  // B08 (2026-09-24): backend ÖNCE — desktop D20 sonra gönderir. İkisi de code zorunlu.
+  "watch_stopped",
+  "rig_profile",
+];
+
+const VALID_TYPES: ReadonlySet<TelemetryEventType> = new Set<TelemetryEventType>(TELEMETRY_EVENT_TYPES);
 
 /**
  * B80 (2026-07-31): sürüm dizesi doğrulaması — hem event-seviyesi hem
@@ -223,7 +279,74 @@ export function validateTelemetryEvent(
       // value (işlenen tick) zorunlu; count/code/round opsiyonel paket alanları.
       if (typeof e.value !== "number") return "value_required";
       break;
+    case "watch_stopped":
+    case "rig_profile":
+      // B08: sebep / rig dizesi olayın TEK taşıdığı bilgi — code'suz olay
+      // değersizdir, kabul edilmez (uzunluk kapısı yukarıda: ≤64).
+      if (typeof e.code !== "string") return "code_required";
+      break;
   }
 
   return null;
+}
+
+/**
+ * B08 (2026-09-24 · A006/A064): reddedilen olayın `type` alanının log/DB için
+ * GÜVENLİ etiketi. Dize değilse (ya da boşsa) "?". Dizeyse [A-Za-z0-9_.-] dışı
+ * her karakter "_" olur ve 64'te kesilir: istemci kontrolündeki metin log'a /
+ * tabloya ham girmez (log-forging, PII taşıma). Gerçek kind adları snake_case
+ * ASCII olduğundan teşhis bilgisi kaybolmaz.
+ */
+export function rejectedTypeLabel(event: unknown): string {
+  if (!event || typeof event !== "object") return "?";
+  const t = (event as Record<string, unknown>).type;
+  if (typeof t !== "string" || t.length === 0) return "?";
+  return t.slice(0, TELEMETRY_LIMITS.maxStringLen).replace(/[^A-Za-z0-9_.-]/g, "_");
+}
+
+export interface TelemetryRejectionSummary {
+  /** Red sebebi → adet (örn. { invalid_type: 2 }). */
+  reasons: Record<string, number>;
+  /** Reddedilen olayın (güvenli) tip etiketi → adet (örn. { app_open: 1 }). */
+  types: Record<string, number>;
+  /**
+   * Kalıcı iz satırları: `code = "<sebep>:<tip>"` (≤64), `count` = adet.
+   * En fazla TELEMETRY_REJECT_MAX_ROWS ayrık çift; artanlar tek
+   * `_overflow:*` satırında toplanır. Sıra: adet azalan, eşitlikte kod.
+   */
+  rows: { code: string; count: number }[];
+}
+
+/**
+ * B08 (2026-09-24 · A006/A064): reddedilen olayları sebep ve tip bazında toplar.
+ * KÖK: route kısmi başarıda 200 dönüyor ve yalnız red SAYISINI logluyordu;
+ * 31.07→16.09 arası app_open/login_ok/watch_started `invalid_type` ile
+ * düşerken ne sebep ne tip hiçbir yerde görünmedi. Saf fonksiyon: route hem
+ * `[TELEMETRY_REJECTED]` log satırını hem de `telemetry_rejected` satırlarını
+ * buradan üretir.
+ */
+export function summarizeTelemetryRejections(
+  events: readonly unknown[],
+  rejected: readonly TelemetryRejection[],
+): TelemetryRejectionSummary {
+  const reasons: Record<string, number> = {};
+  const types: Record<string, number> = {};
+  const pairs = new Map<string, number>();
+  for (const r of rejected) {
+    const type = rejectedTypeLabel(events[r.idx]);
+    reasons[r.reason] = (reasons[r.reason] ?? 0) + 1;
+    types[type] = (types[type] ?? 0) + 1;
+    const code = `${r.reason}:${type}`.slice(0, TELEMETRY_LIMITS.maxStringLen);
+    pairs.set(code, (pairs.get(code) ?? 0) + 1);
+  }
+  const sorted = [...pairs.entries()]
+    .map(([code, count]) => ({ code, count }))
+    .sort((a, b) => b.count - a.count || (a.code < b.code ? -1 : a.code > b.code ? 1 : 0));
+  let rows = sorted;
+  if (sorted.length > TELEMETRY_REJECT_MAX_ROWS) {
+    const kept = sorted.slice(0, TELEMETRY_REJECT_MAX_ROWS);
+    const rest = sorted.slice(TELEMETRY_REJECT_MAX_ROWS).reduce((n, r) => n + r.count, 0);
+    rows = [...kept, { code: "_overflow:*", count: rest }];
+  }
+  return { reasons, types, rows };
 }

@@ -24,6 +24,7 @@
  *     route-içi private → dışa açılmadan birim-test edilemiyor.
  */
 import Module from "node:module";
+import * as fs from "node:fs";
 import * as path from "node:path";
 
 /* ── Modül çözümleyici yamaları — test-billing.ts/test-entitlements.ts ile
@@ -142,12 +143,13 @@ async function main() {
   }
 
   // ── 3) TELEMETRY KIND SENKRONU — desktop telemetry.rs ile ────────────────
-  // Desktop CANONICAL_KIND_LIST (telemetry.rs:311-317) ile backend VALID_TYPES
-  // birbirinden bağımsız iki liste; ayrışırlarsa desktop'ın gönderdiği event
-  // sessizce "invalid_type" ile düşer. Bu test listeyi ÇİVİLER.
+  // Desktop CANONICAL_KIND_LIST (aimlo-desktop/src-tauri/src/telemetry.rs) ile
+  // backend VALID_TYPES birbirinden bağımsız iki liste; ayrışırlarsa desktop'ın
+  // gönderdiği event sessizce "invalid_type" ile düşer. Bu test listeyi ÇİVİLER.
   console.log("\n[3] TELEMETRY — bilinmeyen kind reddi + kanonik liste");
   {
-    const { validateTelemetryEvent } = await import("../lib/telemetry-types");
+    const tt = await import("../lib/telemetry-types");
+    const { validateTelemetryEvent } = tt;
     const now = Date.now();
     t(
       "bilinmeyen kind reddedilir",
@@ -172,10 +174,93 @@ async function main() {
       ["app_open", { count: 1 }],
       ["login_ok", { count: 1 }],
       ["watch_started", { count: 1 }],
+      // B08 (2026-09-24): backend ÖNCE — desktop D20 sonra gönderir (A006 dersi).
+      ["watch_stopped", { count: 1, code: "user_stop", round: 3 }],
+      ["rig_profile", { count: 1, code: "w26100 wgc1 b1L0 gnv1 1920x1080@100 m1 uitr ocrtr fs1" }],
     ];
     for (const [type, extra] of KANONIK) {
       const r = validateTelemetryEvent({ type, ts: now, ...extra }, now);
       t(`kanonik kind kabul: ${type}`, r === null, `reddedildi: ${r}`);
+    }
+
+    // B08 · A006 SÖZLEŞME KİLİDİ: KANONIK elle yazılmış bir liste — 16.09'da
+    // tam da bu yüzden 5 tipte donmuş ve kaymayı göstermemişti. Desktop repo'su
+    // yan klasördeyse (geliştirici makinesi) CANONICAL_KIND_LIST DOSYADAN okunur
+    // ve HER tipin (a) KANONIK'te örnek yükü olduğu, (b) backend'de kabul
+    // edildiği iddia edilir. CI'da dosya yok → açık ATLANDI satırı (sessiz geçiş
+    // yok). Dosya var ama liste çözümlenemiyorsa bu bir KIRMIZIDIR (format
+    // değiştiyse kilit kör kalmasın).
+    const desktopTelemetry = path.join(REPO_ROOT, "..", "aimlo-desktop", "src-tauri", "src", "telemetry.rs");
+    const kanonikTipler = new Set(KANONIK.map(([type]) => type));
+    if (fs.existsSync(desktopTelemetry)) {
+      const src = fs.readFileSync(desktopTelemetry, "utf8");
+      const m = /const\s+CANONICAL_KIND_LIST\s*:\s*&\[&str\]\s*=\s*&\[([\s\S]*?)\];/.exec(src);
+      const desktopKinds = m
+        ? [...m[1].split(/\r?\n/).map((l) => l.replace(/\/\/.*$/, "")).join("\n").matchAll(/"([^"]+)"/g)].map((x) => x[1])
+        : [];
+      t("desktop CANONICAL_KIND_LIST çözümlendi (≥1 tip)", desktopKinds.length > 0, `dosya=${desktopTelemetry}`);
+      for (const kind of desktopKinds) {
+        t(`desktop kind KANONIK'te örnekli: ${kind}`, kanonikTipler.has(kind), "KANONIK tablosuna örnek yük ekle");
+        const extra = KANONIK.find(([type]) => type === kind)?.[1] ?? {};
+        const r = validateTelemetryEvent({ type: kind, ts: now, ...extra }, now);
+        t(`desktop kind backend'de kabul: ${kind}`, r === null, `reddedildi: ${r} — prod bu olayı SESSİZCE düşürür`);
+      }
+      const yalnizBackend = [...kanonikTipler].filter((k) => !desktopKinds.includes(k));
+      if (yalnizBackend.length > 0) {
+        console.log(`  ℹ  desktop henüz göndermiyor (backend önde, beklenen): ${yalnizBackend.join(", ")}`);
+      }
+    } else {
+      console.log(`  ⏭  ATLANDI — desktop repo yok (${desktopTelemetry}); KANONIK elle tutulan listeye güveniliyor`);
+    }
+
+    // Ters yön: backend'in kabul ettiği HER tipin KANONIK'te örnek yükü olmalı —
+    // yeni tip eklenip zorunlu-alan kuralı test edilmeden kalmasın.
+    const backendTipleri: readonly string[] = (tt as { TELEMETRY_EVENT_TYPES?: readonly string[] }).TELEMETRY_EVENT_TYPES ?? [];
+    t("backend tip listesi dışa açık (TELEMETRY_EVENT_TYPES)", backendTipleri.length > 0);
+    for (const type of backendTipleri) {
+      t(`backend tipi KANONIK'te örnekli: ${type}`, kanonikTipler.has(type));
+    }
+
+    // Zorunlu alanlar (B08): sebep / rig dizesi olmadan olay değersiz.
+    const zorunlu: [string, Record<string, unknown>, string][] = [
+      ["watch_stopped", { count: 1 }, "code_required"],
+      ["rig_profile", { count: 1 }, "code_required"],
+      ["rig_profile", { count: 1, code: "x".repeat(65) }, "code_invalid"],
+    ];
+    for (const [type, extra, want] of zorunlu) {
+      const r = validateTelemetryEvent({ type, ts: now, ...extra }, now);
+      t(`${type} ${JSON.stringify(extra).slice(0, 40)} → ${want}`, r === want, `got=${r}`);
+    }
+    // Sunucunun kendi yazdığı özet tipi istemciden SAHTELENEMEZ.
+    t(
+      "telemetry_rejected istemciden gelirse invalid_type",
+      validateTelemetryEvent({ type: "telemetry_rejected", ts: now, count: 999, code: "x" }, now) === "invalid_type",
+    );
+
+    // A030: sürüm alanı + zenginleşmiş kodlar (desktop D10/D11/D19) bugünkü
+    // kapılardan geçmeli — yeni tip gerektirmezler.
+    t("isValidAppVersion('1.0.19')", tt.isValidAppVersion("1.0.19") === true);
+    t("isValidAppVersion(65 char) → false", tt.isValidAppVersion("1".repeat(65)) === false);
+    t(
+      "error_code_count code 'capture_init_failed:border_noapi:0x80004002' kabul",
+      validateTelemetryEvent({ type: "error_code_count", ts: now, count: 1, code: "capture_init_failed:border_noapi:0x80004002" }, now) === null,
+    );
+    t(
+      "watch_started + code (rig dizesi) kabul",
+      validateTelemetryEvent({ type: "watch_started", ts: now, count: 1, code: "w19045 nv c8 r16 1920x1080@100" }, now) === null,
+    );
+
+    // Red özeti (route [TELEMETRY_REJECTED] satırı + telemetry_rejected satırları).
+    const summarize = (tt as { summarizeTelemetryRejections?: typeof tt.summarizeTelemetryRejections }).summarizeTelemetryRejections;
+    if (typeof summarize !== "function") {
+      t("summarizeTelemetryRejections dışa açık", false, "fonksiyon yok");
+    } else {
+      const s = summarize([{ type: "app_open", ts: now, count: 1 }], [{ idx: 0, reason: "invalid_type" }]);
+      t(
+        "red özeti: types={app_open:1}, reasons={invalid_type:1}, rows=[invalid_type:app_open×1]",
+        JSON.stringify(s) === JSON.stringify({ reasons: { invalid_type: 1 }, types: { app_open: 1 }, rows: [{ code: "invalid_type:app_open", count: 1 }] }),
+        `got=${JSON.stringify(s)}`,
+      );
     }
   }
 

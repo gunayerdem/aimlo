@@ -5,7 +5,9 @@ import { createServiceSupabase } from "@/lib/supabase/server";
 import {
   validateTelemetryEvent,
   isValidAppVersion,
+  summarizeTelemetryRejections,
   TELEMETRY_LIMITS,
+  TELEMETRY_REJECTED_TYPE,
   type TelemetryEvent,
   type TelemetryRejection,
   type TelemetryResponse,
@@ -45,6 +47,9 @@ import {
  *   - Response always 200 with `{ ok: true, accepted: N, rejected: [...] }`.
  *   - Only structural errors (no `events` array, payload too large, auth)
  *     get a non-200 status.
+ *   - B08 (2026-09-24): per-event redler artık görünür — `[TELEMETRY_REJECTED]`
+ *     log satırı (sebep → adet, tip → adet) + `telemetry_events`e
+ *     `type = "telemetry_rejected"` özet satırları. Yanıt şekli DEĞİŞMEDİ.
  */
 
 // Tight Vercel timeout — telemetry is fire-and-forget, must not eat budget.
@@ -81,12 +86,37 @@ function hashUserId(userId: string): string {
  *
  * GİZLİLİK (B127): kullanıcı kimliği yalnız `user_hash` = sha256(user.id)
  * ilk 16 hex olarak yazılır — ham user_id tabloya ASLA girmez.
+ *
+ * NEDEN red satırları (B08 · A006/A064, 2026-09-24): kısmi başarıda route 200
+ * döndüğü ve desktop yalnız HTTP statüsüne baktığı için reddedilen olay İKİ
+ * tarafta da görünmüyordu (31.07→16.09 app_open/login_ok/watch_started 6+ hafta
+ * `invalid_type` ile sessizce düştü). Artık her batch'in redleri
+ * `type = TELEMETRY_REJECTED_TYPE` satırları olarak (sebep:tip → adet, en fazla
+ * TELEMETRY_REJECT_MAX_ROWS+1 satır) kalıcı yazılır; admin /altyapi kartı
+ * bunları okur. Kabul edilenlerden AYRI insert + ayrı hata yakalama: red
+ * satırlarında bir sorun kabul edilen veriyi asla düşürmez. Migration yok
+ * (0015'te type/code yalnız uzunluk CHECK'i taşıyor).
  */
 function persistTelemetryEvents(
   userIdHash: string,
   events: TelemetryEvent[],
   batchAppVersion: string | null,
+  rejectionRows: { code: string; count: number }[] = [],
+  serverNowMs: number = Date.now(),
 ): void {
+  const appVersion = batchAppVersion ? batchAppVersion.slice(0, APP_VERSION_DB_MAX) : null;
+  const rejectRows = rejectionRows.map((r) => ({
+    user_hash: userIdHash,
+    type: TELEMETRY_REJECTED_TYPE,
+    value: null,
+    count: r.count,
+    code: r.code.slice(0, TELEMETRY_LIMITS.maxStringLen),
+    route: null,
+    round: null,
+    app_version: appVersion,
+    // Red anı sunucu saatidir (olayın kendi ts'i geçersiz olabilir).
+    event_ts: new Date(serverNowMs).toISOString(),
+  }));
   const rows = events.map((e) => {
     const version = e.appVersion ?? batchAppVersion;
     return {
@@ -105,12 +135,23 @@ function persistTelemetryEvents(
   });
 
   const work = async () => {
-    try {
-      const svc = createServiceSupabase();
-      const { error } = await svc.from("telemetry_events").insert(rows);
-      if (error) console.error("[telemetry] insert failed:", error.message);
-    } catch (err) {
-      console.error("[telemetry] persist error:", (err as Error).message);
+    if (rows.length > 0) {
+      try {
+        const svc = createServiceSupabase();
+        const { error } = await svc.from("telemetry_events").insert(rows);
+        if (error) console.error("[telemetry] insert failed:", error.message);
+      } catch (err) {
+        console.error("[telemetry] persist error:", (err as Error).message);
+      }
+    }
+    if (rejectRows.length > 0) {
+      try {
+        const svc = createServiceSupabase();
+        const { error } = await svc.from("telemetry_events").insert(rejectRows);
+        if (error) console.error("[telemetry] rejected-summary insert failed:", error.message);
+      } catch (err) {
+        console.error("[telemetry] rejected-summary persist error:", (err as Error).message);
+      }
     }
   };
 
@@ -197,6 +238,25 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       ts: serverNowMs,
     }),
   );
+
+  // B08 (2026-09-24 · A006/A064): red SEBEBİ ve TİPİ artık görünür. Önceki
+  // satır yalnız `rejected: <sayı>` basıyordu; 6 haftalık huni kaybı ancak elle
+  // SQL ile bulundu. Alan adları (`userIdHash`, `reasons`, `types`) Vercel log
+  // araması için sözleşme — sabit tut. Tip etiketi güvenli hâle getirilmiş
+  // (rejectedTypeLabel): istemci metni ham basılmaz.
+  const rejectionSummary =
+    rejected.length > 0 ? summarizeTelemetryRejections(events, rejected) : null;
+  if (rejectionSummary) {
+    console.warn(
+      "[TELEMETRY_REJECTED]",
+      JSON.stringify({
+        userIdHash,
+        reasons: rejectionSummary.reasons,
+        types: rejectionSummary.types,
+      }),
+    );
+  }
+
   if (accepted.length > 0) {
     console.log(
       "[TELEMETRY_EVENTS]",
@@ -213,11 +273,22 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         })),
       }),
     );
+  }
 
-    // B5 (2026-07-31): log'un YANINA kalıcı yazım — console satırları duruyor
-    // (canlı tail için), veri artık telemetry_events'te de kalıyor.
-    // Bloklamaz, patlamaz: after() + iç try/catch (yukarıdaki gerekçe).
-    persistTelemetryEvents(userIdHash, accepted, batchAppVersion);
+  // B5 (2026-07-31): log'un YANINA kalıcı yazım — console satırları duruyor
+  // (canlı tail için), veri artık telemetry_events'te de kalıyor.
+  // Bloklamaz, patlamaz: after() + iç try/catch (yukarıdaki gerekçe).
+  // B08: TÜMÜ reddedilen batch de (tam da 31.07 senaryosu: app_open+login_ok
+  // ikisi de invalid_type) red özetini yazar — eskiden yalnız accepted>0 iken
+  // yazım yapıldığı için böyle bir batch hiç iz bırakmıyordu.
+  if (accepted.length > 0 || rejectionSummary) {
+    persistTelemetryEvents(
+      userIdHash,
+      accepted,
+      batchAppVersion,
+      rejectionSummary?.rows ?? [],
+      serverNowMs,
+    );
   }
 
   const response: TelemetryResponse = {
