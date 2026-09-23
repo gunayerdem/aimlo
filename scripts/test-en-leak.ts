@@ -15,7 +15,8 @@
  *   4) evals/en-corpus.ts'in MODEL GİRDİSİ olan alanları (patternContext,
  *      memoryContext, killerInfo, deathLocation, playerRoute, killfeed,
  *      rapor userPrompt) statik taranır: korpusun kendisi sızıntısız olmalı,
- *   5) korpus boyutu görev bandında (20-30) ve died/survived karışımı var.
+ *   5) korpus boyutu görev bandında (20-31; B60'ın 20-30'u + B05 inceleme ER5
+ *      gerçek-maç rapor fixture'ı) ve died/survived karışımı var.
  *
  * API ÇAĞRISI YOK — tamamen statik/sentetik. RUN: npx tsx scripts/test-en-leak.ts
  */
@@ -193,9 +194,12 @@ check(`EN rapor fixture taraması boş değil (analiz metni ${reportAnalysisChar
 
 // ── 5) KORPUS KAPSAM GUARD'LARI (görev bandı + karışım) ──────────────────────
 console.log("\n── 5) Korpus kapsamı ──");
+// B05 inceleme (2026-09-24): üst sınır 30 → 31. B60 bandı 26 vision + 4 rapor
+// senaryosuyla tam 30'du; ER5 (masaüstü düz gövdesi birebir, tam round listesi —
+// A058 round-skoru yolunu eval'de koşturan TEK EN fixture) eklenince 31 oldu.
 check(
-  `toplam senaryo 20-30 bandında (şu an ${EN_CORPUS_TOTAL})`,
-  EN_CORPUS_TOTAL >= 20 && EN_CORPUS_TOTAL <= 30,
+  `toplam senaryo 20-31 bandında (şu an ${EN_CORPUS_TOTAL})`,
+  EN_CORPUS_TOTAL >= 20 && EN_CORPUS_TOTAL <= 31,
 );
 const died = EN_VISION_SCENARIOS.filter((s) => (s.body as Record<string, unknown>).died === true).length;
 const survived = EN_VISION_SCENARIOS.filter((s) => (s.body as Record<string, unknown>).died === false).length;

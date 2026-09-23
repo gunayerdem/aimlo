@@ -1,0 +1,155 @@
+{
+  "id": "ER5-summit-brimstone-atk-fullmatch",
+  "note": "R4-summit-brimstone-atk-fullmatch'in EN karşılığı (B05 inceleme): AYNI gerçek maç (aimlo-runtime 01.txt 7df93d52) — round listesi, round başı kümülatif skor, sonuçlar, üst-seviye score YOK birebir aynı. Canlı loglarda EN maç yok: analiz metinleri TR AI çıktısının sadık EN çevirisi (TR garble'ları çevrilmedi); deathLocation EN istemcinin okuyacağı karşılık ('istemci b ana' → 'b main'). TR/EN aynı olgularla kıyaslanabilir.",
+  "memoryContext": "",
+  "body": {
+    "rounds": [
+      {
+        "round": 1,
+        "score": "0 - 1",
+        "result": "loss",
+        "died": true,
+        "deathAnalysis": "You played aggressive without utility on the opening, and you keep taking deaths like this in early rounds; as Brimstone, don't step into a wide angle on entry without a molly or smoke — smoke first and wait for your team.",
+        "enemyAnalysis": [
+          "This is a pistol-economy round; even without full rifles, the enemies are dangerous at close range.",
+          "As Brimstone, set up two smoke lines next round — throw one on the entry and save the other for a retake or to cut the side angle."
+        ],
+        "nextRoundSuggestion": "On defense this is a pistol round, so don't swing wide alone toward A or B; close the entry choke with a smoke, save the molly to delay the plant or defuse, and move in with your team."
+      },
+      {
+        "round": 2,
+        "score": "1 - 1",
+        "result": "win",
+        "died": true,
+        "deathAnalysis": "You were left in the open and the enemy shot you from an angle — on defense you didn't sit on the edge with a tight off-angle, so you died to a one-shot angle; as Brimstone, move to the edge and don't leave that corner open without cutting vision with a smoke.",
+        "enemyAnalysis": [
+          "The enemy roster has Chamber, and he held the long sightline; he took you out in one shot from range.",
+          "From now on, close that angle with a smoke and keep a teammate next to you so a single angle can't pick you off quickly."
+        ],
+        "nextRoundSuggestion": "Don't repeat the same mistake on defense this round: close the A or B entry with a smoke, save the molly for the plant or post-plant, and hold an off-angle on the edge to wait out a long-sightline player like Chamber."
+      },
+      {
+        "round": 3,
+        "score": "2 - 1",
+        "result": "win",
+        "died": true,
+        "deathAnalysis": "Late in this round on defense, time was on your side, but you took an early or unnecessary fight and died — your team was still alive, so you could have waited and forced a retake or a rotation.",
+        "enemyAnalysis": [
+          "The enemy roster has Chamber; he held the long sightlines and waited for you.",
+          "With a numbers advantage on defense, split the corners with your team instead of opening up alone; if one player peeks, the other should be ready to trade."
+        ],
+        "nextRoundSuggestion": "This round you could have given up the site and played for time; next round as Brimstone, close the most dangerous line with one smoke and save the molly for post-plant so your team keeps the edge on the retake."
+      },
+      {
+        "round": 4,
+        "score": "3 - 1",
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 5,
+        "score": "4 - 1",
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 6,
+        "score": "5 - 1",
+        "result": "win",
+        "died": true,
+        "deathAnalysis": "This round you died taking an unnecessary risk on defense with your ult ready — instead of opening a solo fight with the ult in hand, you should have used it to take space and push the enemy back.",
+        "enemyAnalysis": [
+          "The enemy roster has Chamber; you're facing an agent who locks down long sightlines and sharp angles.",
+          "Next round, use Brimstone's ult for pressure, not just defensively: break the angle Chamber is holding with the ult and push together with your team."
+        ],
+        "nextRoundSuggestion": "On defense, don't take a solo risk like this round again."
+      },
+      {
+        "round": 7,
+        "score": "6 - 1",
+        "result": "win",
+        "died": true,
+        "deathAnalysis": "Late in the post-plant you were left in the open and died as Brimstone without falling back — next time hold the post-plant from cover at the edge of the site, not out in the open.",
+        "enemyAnalysis": [
+          "The enemy roster has Chamber; he can hold long sightlines and wait for you on a single angle.",
+          "You're playing Brimstone: instead of waiting on the edge alone without a smoke, cover the area around the spike with a molly or smoke and shift your position."
+        ],
+        "nextRoundSuggestion": "On defense, don't wait in the open during the post-plant like this round; save the molly to delay the defuse, close one line with a smoke, then set up a crossfire from different cover."
+      },
+      {
+        "round": 9,
+        "score": "7 - 2",
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 10,
+        "score": "8 - 2",
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 11,
+        "score": "8 - 3",
+        "result": "loss",
+        "died": true,
+        "deathAnalysis": "The enemies squeezed the site toward the end of the round and used the clock; their tempo pressure forced you out of your defensive spot and you lost the timing on your fall-back or smoke — you're Brimstone, so don't stand in front of that window waiting without a smoke or your ult.",
+        "enemyAnalysis": [
+          "An enemy trio finished the attack at high tempo and closed off the post-plant window.",
+          "To break it, one player should save a smoke for the retake or fall-back while another sets up a crossfire to control the area around the spike."
+        ],
+        "nextRoundSuggestion": "On defense, fall back a step and save your smoke for the start of their entry."
+      },
+      {
+        "round": 12,
+        "score": "8 - 4",
+        "result": "loss",
+        "died": true,
+        "deathAnalysis": "You died in B Lobby with your ult ready; sitting on your ult left you with no impact after their entry — as Brimstone, use your ult for defensive pressure or fire it as you retreat.",
+        "enemyAnalysis": [
+          "The enemy roster has Chamber and Neon; be ready for long-sightline and fast-entry combos.",
+          "Don't wait in B Lobby alone or without using utility; close the area with a smoke or molly together with your team, then hold."
+        ],
+        "nextRoundSuggestion": "Don't hold B Lobby alone this defensive round; close the entry line with a smoke, save the molly for post-plant or to delay the defuse, and use your ult to pressure the area.",
+        "deathLocation": "b lobby"
+      },
+      {
+        "round": 13,
+        "score": "9 - 4",
+        "result": "win",
+        "died": true,
+        "deathAnalysis": "You stood in the open at B Main; on attack in a pistol round, dying to an early or late fight like this turns into an economic disadvantage — don't wait on that line with a wide angle without closing the B Main entry with a molly or smoke.",
+        "enemyAnalysis": [
+          "Their roster has Chamber; he holds the long line and creates one-shot opportunities from that angle.",
+          "Close the B Main entry with a smoke or molly, bring a teammate with you and go in together so you're not the lone target."
+        ],
+        "nextRoundSuggestion": "As Brimstone, close the B Main entry with a smoke and save the molly to delay the defuse after the plant — you'll be pushing in with your team, so don't wait alone on a wide angle.",
+        "deathLocation": "b main"
+      }
+    ],
+    "maxTokens": 800,
+    "lang": "en",
+    "map": "summit",
+    "agent": "brimstone",
+    "mode": "competitive",
+    "side": "attacking",
+    "enemyComp": [
+      "chamber",
+      "neon",
+      "harbor",
+      "skye"
+    ]
+  }
+}

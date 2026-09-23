@@ -9,17 +9,28 @@
 // unknown-round çözümleme / deterministik fallback / prompt formatı ölçüme
 // girmiyordu.
 //
-// BİÇİM: her dosya { id, note, memoryContext, body }. `body` desktop'un
-// /api/ai/match-report'a attığı DÜZ gövde şeklindedir (aimlo-desktop
-// ai_client.rs send_match_report: rounds[] {round, result, died, deathLocation,
-// killerInfo ("killed by X with Y"), deathAnalysis, enemyAnalysis,
-// nextRoundSuggestion} + map/agent/rank/mode/side/enemyComp/lang) ve
-// lib/report-prompt.ts validateRequest'ten GEÇER (test-eval-fidelity kilitler).
-// Eski senaryonun içeriği korunarak dönüştürüldü (3 TR + 4 EN; aynı round'lar,
-// konumlar, katiller, analiz cümleleri, skor, kadro). Bilinçli sapmalar:
-//   • Skor üst-seviye "11-13" dizesiyle verilir (validateRequest biçim 2) —
-//     senaryolar maçın yalnız 8 round'unu taşıyor; round-başı kümülatif skor
-//     uydurmamak için round'lara skor yazılmadı.
+// BİÇİM: her dosya { id, note, memoryContext, body }. `body` validateRequest'ten
+// GEÇEN bir ReportRequest'tir (test-eval-fidelity kilitler). İki grup var:
+//
+// (A) R4 / ER5 — MASAÜSTÜ DÜZ GÖVDESİ BİREBİR (B05 inceleme, 2026-09-24):
+//     aimlo-desktop ai_client.rs send_match_report'un attığı şekil —
+//     rounds[] {round, score ("l - r" round başı kümülatif), result, died,
+//     deathAnalysis, enemyAnalysis, nextRoundSuggestion, deathLocation?,
+//     killerInfo?} + maxTokens/lang/map/agent/mode/side/enemyComp; ÜST-SEVİYE
+//     score YOK (masaüstü göndermez) → skor round'lardan seçilir (A058 yolu,
+//     lib/report-score.ts). Kaynak: gerçek maç (aimlo-runtime 01.txt 7df93d52),
+//     survived round'lar dahil tam liste; ER5 aynı maçın EN çevirisi.
+//
+// (B) R1-R3 / ER1-ER4 — eski elle yazılmış senaryoların ReportRequest karşılığı
+//     (3 TR + 4 EN; aynı round'lar, konumlar, katiller, analiz cümleleri, skor,
+//     kadro). Masaüstü gövdesinden BİLİNÇLİ SAPMALAR (bu fixture'lar masaüstü
+//     şekli DEĞİLDİR):
+//   • Skor üst-seviye dizeyle verilir ("11-13", "13-8" …; validateRequest biçim 2 —
+//     web şekli, masaüstü göndermez) → A058 round-skoru yolu bu fixture'larda KOŞMAZ.
+//   • Her senaryo maçın yalnız 8 round'unu taşıyor (masaüstü survived dahil bütün
+//     round'ları gönderir); round-başı kümülatif skor uydurmamak için round'lara
+//     skor yazılmadı → deterministik özet "8 round" ile ör. "Skor 11-13"ü yan
+//     yana taşır.
 //   • "(entry)", "(clutch 1v2)", "eco", "(retake, spike planted)" gibi eski
 //     parantez notları `yourNote` alanına taşındı (prompt'ta <user_note>).
 //   • teamComp korunur (desktop göndermiyor ama web gövdesi gönderebilir;

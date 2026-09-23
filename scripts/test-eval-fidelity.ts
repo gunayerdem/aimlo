@@ -154,7 +154,21 @@ async function main() {
   console.log("\n── [F] eval-report ↔ GERÇEK route paritesi (OLCUM-ARACI-10/11/12/13) ──");
   const tr = REPORT_FIXTURES.filter((f) => f.body.lang === "tr").length;
   const en = REPORT_FIXTURES.filter((f) => f.body.lang === "en").length;
-  check(`fixture seti: 3 TR + 4 EN (eski senaryoların karşılığı) — ${tr} TR + ${en} EN`, tr === 3 && en === 4);
+  // B05 inceleme (2026-09-24): +1 TR +1 EN gerçek-maç fixture'ı (R4/ER5 — masaüstü düz
+  // gövdesi birebir: tam round listesi, round başı skor, üst-seviye score YOK).
+  check(`fixture seti: 3 TR + 4 EN eski senaryo + 1 TR + 1 EN gerçek maç — ${tr} TR + ${en} EN`, tr === 4 && en === 5);
+  for (const id of ["R4-summit-brimstone-atk-fullmatch", "ER5-summit-brimstone-atk-fullmatch"]) {
+    const fx = fixture(id);
+    const rs = (fx.body.rounds ?? []) as Record<string, unknown>[];
+    check(`${id}: masaüstü şekli — üst-seviye score YOK, 12 round, hepsinde numara + 'l - r' skoru`,
+      fx.body.score === undefined && rs.length === 12
+        && rs.every((r) => typeof r.round === "number" && typeof r.score === "string" && /^\d{1,2} - \d{1,2}$/.test(r.score as string)),
+      `score=${show(fx.body.score)} n=${rs.length}`);
+    const v = validated(fx);
+    const { userPrompt } = buildReportPrompts(v, { memoryContext: fx.memoryContext });
+    check(`${id}: skor round'lardan seçildi (A058 yolu) — son round R13 '9 - 4' → 'Score: 9-4 (WIN)'`,
+      v.score.yours === "9" && v.score.enemy === "4" && userPrompt.includes("Score: 9-4 (WIN)"), `${v.score.yours}-${v.score.enemy}`);
+  }
   for (const fx of REPORT_FIXTURES) {
     const v = validateRequest(fx.body);
     check(`${fx.id}: validateRequest'ten geçer`, v.valid, v.valid ? "" : v.error);

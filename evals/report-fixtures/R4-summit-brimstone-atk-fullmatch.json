@@ -1,0 +1,155 @@
+{
+  "id": "R4-summit-brimstone-atk-fullmatch",
+  "note": "GERÇEK masaüstü gövdesi (B05 inceleme): aimlo-runtime 01.txt maç 7df93d52 (01.09, Summit / Brimstone / competitive, manuel END-MATCH). 12 round (R8 masaüstünde kaçmış — gerçek veri), round başı kümülatif 'l - r' skoru, ÜST-SEVİYE score YOK → A058 round-skoru yolu koşar (son round R13 '9 - 4'). Metinler round'un AI raw response satırından birebir; R2/R6/R11 nextRoundSuggestion log satır kesiminden dolayı son tam cümlede kapatıldı. deathLocation vision isteğindeki ham OCR ('b lobby', 'istemci b ana'). patternData/deathType/matchId/persistOnServer gönderilmedi (validateRequest okumuyor / eval'de kalıcı yazım yok).",
+  "memoryContext": "",
+  "body": {
+    "rounds": [
+      {
+        "round": 1,
+        "score": "0 - 1",
+        "result": "loss",
+        "died": true,
+        "deathAnalysis": "Açılışta utility'siz agresif oynadın ve erken round'larda bu tarz ölümler veriyorsun; Brimstone olarak girişte molly veya smoke olmadan geniş açıya çıkma, önce smoke atıp takımınla birlikte bekle.",
+        "enemyAnalysis": [
+          "Bu round pistol ekonomisindeyiz; rakipler tam silah yokken bile yakın mesafede tehlike çıkarıyor.",
+          "Brimstone olarak next round'da iki smoke hattı kura, birini girişe atıp diğerini geri alım veya yan açıyı kapatma için sakla."
+        ],
+        "nextRoundSuggestion": "Savunmada bu round pistol olduğu için A veya B'ye tek başına geniş açıyla çıkma; smoke ile giriş ağzını kapat, molly'yi plant ya da defuse hattını geciktirmek için sakla ve takımınla birlikte gir."
+      },
+      {
+        "round": 2,
+        "score": "1 - 1",
+        "result": "win",
+        "died": true,
+        "deathAnalysis": "Açıkta kaldın ve rakip seni açıdan vurdu — savunmada kenarda durup dar bir off-angle kurmadın, bu yüzden tek atışlık açıda öldün; Brimstone olarak kenara geçip smoke ile görüşü kesmeden o köşeyi açık tutma.",
+        "enemyAnalysis": [
+          "Rakip kadrosunda Chamber var ve uzun hat açısını tuttu; uzak açıdan seni tek seferde çıkardı.",
+          "Bundan sonra o açıyı smoke ile kapat ve yanına birini koy ki tek açıdan seni çabuk kesemesin."
+        ],
+        "nextRoundSuggestion": "Bu round savunmada aynı hatayı tekrarlama: A veya B girişini smoke ile kapat, molly'yi plant ya da post-plant için sakla ve kenarda off-angle tutarak Chamber gibi uzun hattı bekle."
+      },
+      {
+        "round": 3,
+        "score": "2 - 1",
+        "result": "win",
+        "died": true,
+        "deathAnalysis": "Bu round geç aşamada savunmada zaman senin lehindeydi ama sen erken veya gereksiz bir kontağa girdin ve öldün — takımın hâlâ hayattaydı, o yüzden bekleyip retake ya da rotasyonu zorlayabilirdin.",
+        "enemyAnalysis": [
+          "Rakip kadrosunda Chamber var; uzun hat açılarını tutup seni beklemiş.",
+          "Savunmada sayı avantajı varken tek başına açılma yerine takımınla köşeleri paylaştır, biri peek atarsa diğeri trade'e hazır olsun."
+        ],
+        "nextRoundSuggestion": "Bu round site'ı bırakıp zaman oynayabilirdin; next round Brimstone olarak bir smoke ile en tehlikeli hattı kapat ve molly'yi post-plant için sakla ki retake'te takımın avantajı korusun."
+      },
+      {
+        "round": 4,
+        "score": "3 - 1",
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 5,
+        "score": "4 - 1",
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 6,
+        "score": "5 - 1",
+        "result": "win",
+        "died": true,
+        "deathAnalysis": "Bu round ultin doluyken takımın savunmasında gereksiz bir risk alıp öldün — hazır ult elindeyken solo kontak açmak yerine ult ile alanı zorlayıp rakibi geri itmeliydin.",
+        "enemyAnalysis": [
+          "Rakip kadrosunda Chamber var; uzun hat ve keskin açıları kapatan bir ajanla karşılaşıyorsun.",
+          "Sonraki round Brimstone ultunu defansif değil baskı amaçlı kullan: Chamber'ın beklediği açıyı ult ile boz, takımınla aynı anda baskı kur."
+        ],
+        "nextRoundSuggestion": "Savunmada bu round gibi yine solo risk alma."
+      },
+      {
+        "round": 7,
+        "score": "6 - 1",
+        "result": "win",
+        "died": true,
+        "deathAnalysis": "Geç post-plant aşamasında açıkta kaldın ve Brimstone olarak geri pozisyon almadan öldün — sonraki defa spike sonrasını site kenarında değil siper kenarında tut, direk açıkta bekleme.",
+        "enemyAnalysis": [
+          "Rakip kadrosunda Chamber var; uzun hat açılarını tutup seni tek açıda bekleyebilir.",
+          "Brimstone oynuyorsun, bir kişi smoke yokken kenarda beklemek yerine molly veya smoke ile spike çevresini kapatıp pozisyonunu kaydır."
+        ],
+        "nextRoundSuggestion": "Savunmada post-plant'te bu round gibi açıkta bekleme; Aşağı yuvarlakta molly'yi defuse geciktirmek için sakla ve smoke ile bir hattı kapatıp sonra farklı bir siperden crossfire'a yerleş."
+      },
+      {
+        "round": 9,
+        "score": "7 - 2",
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 10,
+        "score": "8 - 2",
+        "result": "win",
+        "died": false,
+        "deathAnalysis": "",
+        "enemyAnalysis": [],
+        "nextRoundSuggestion": ""
+      },
+      {
+        "round": 11,
+        "score": "8 - 3",
+        "result": "loss",
+        "died": true,
+        "deathAnalysis": "Rakipler round sonuna doğru sitei sıkıştırıp zamanı kullandı; düşman takımın tempo baskısıyla defansif pozisyonunu zorladı ve sen geri çekilme ya da smoke zamanlamasını kaybettin — Brimstone'sun, smoke ya da alt hamle olmadan o pencereye önden durup bekleme.",
+        "enemyAnalysis": [
+          "bir düşman üçlüsü saldırıyı hızla tempo olarak bitirip post-plant penceresini kapattı.",
+          "Bunu kırmak için bir oyuncu smoke'u saklayıp retake ya da geri kapanış için kullan, bir diğerin crossfire kurup spike etrafını kontrol etsin."
+        ],
+        "nextRoundSuggestion": "Savunmada bir round geri çekil ve smoke'u girişin başında sakla."
+      },
+      {
+        "round": 12,
+        "score": "8 - 4",
+        "result": "loss",
+        "died": true,
+        "deathAnalysis": "B Lobby'de ult'ün doluyken öldün; hazır ultu cebinde bekletmek seni giriş sonrası bir anda anlamsız bıraktı — Brimstone olarak ultunu defensive baskı için kullan veya retreat anında ateşe ver.",
+        "enemyAnalysis": [
+          "Rakip kadrosunda Chamber ve Neon var, uzun hat ve hızlı giriş kombinasyonlarına hazır olmalısın.",
+          "B Lobby'ye tek başına veya util harcamadan bekleme; takımınla birlikte smoke veya molly ile alanı kapatıp sonra tut."
+        ],
+        "nextRoundSuggestion": "Bu savunma round'unda B Lobby'yi tek başına tutma; bir smoke ile giriş hattını kapat, molly'yi post-plant ya da defuse geciktirme için sakla ve ultunu alan baskısı yapmak için kullan.",
+        "deathLocation": "b lobby"
+      },
+      {
+        "round": 13,
+        "score": "9 - 4",
+        "result": "win",
+        "died": true,
+        "deathAnalysis": "B Main'de açıkta durdun, saldırıda pistol round'da bu tip erken ya da late temasta ölmek ekonomik dezavantaja dönüşür — molly ya da smoke ile B Main girişini kapatmadan o hattı geniş açıyla bekleme.",
+        "enemyAnalysis": [
+          "kadrosunda Chamber var; uzun hat tutup o açıdan tek atış fırsatı yaratıyor.",
+          "B Main'e smoke veya molly ile giriş kapat, yanına birini çekip birlikte gir ki tek kişi hedef olma."
+        ],
+        "nextRoundSuggestion": "Pistol round olduğunuz için parayı koru değil ama Brimstone olarak bir smoke ile B Main girişini kapatıp molly'yi plant sonrası defuse geciktirmek için sakla — takımınla birlikte yükleneceksiniz, tek başına geniş açıda bekleme.",
+        "deathLocation": "istemci b ana"
+      }
+    ],
+    "maxTokens": 800,
+    "lang": "tr",
+    "map": "summit",
+    "agent": "brimstone",
+    "mode": "competitive",
+    "side": "attacking",
+    "enemyComp": [
+      "chamber",
+      "neon",
+      "harbor",
+      "skye"
+    ]
+  }
+}

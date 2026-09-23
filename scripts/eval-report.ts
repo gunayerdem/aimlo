@@ -24,8 +24,10 @@
  * oyuncu hafızası fixture'ın `memoryContext` alanından gelir (route'ta
  * lib/player-memory), maliyet ai_usage'a değil örnek dosyasına yazılır.
  *
- * KORPUS: evals/report-fixtures/*.json (ReportRequest = desktop düz gövdesi;
- * 3 TR + 4 EN, eski senaryoların aynı içerikli karşılığı — bkz. index.ts).
+ * KORPUS: evals/report-fixtures/*.json (ReportRequest). 4 TR + 5 EN:
+ * R4/ER5 masaüstü düz gövdesi BİREBİR (gerçek maç, tam round listesi, üst-seviye
+ * score yok → A058 round-skoru yolu); R1-R3/ER1-ER4 eski senaryoların karşılığı
+ * (web şekli: üst-seviye score + 8 round — sapmalar index.ts başlığında).
  *
  * RUN:  npx tsx scripts/eval-report.ts          (EVAL_ONLY=<id-öneki> alt küme)
  * OUT:  scripts/eval-out/report-samples.json   (+ konsol özeti)

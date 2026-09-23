@@ -410,8 +410,9 @@ export const EN_VISION_SCENARIOS: EnVisionScenario[] = [
 
 // ── MAÇ RAPORU SENARYOLARI — evals/report-fixtures/ER*.json (B05, OLCUM-ARACI-11) ──
 // Eski elle yazılmış userPrompt senaryoları (ER1-ER4) aynı içerikle ReportRequest
-// fixture'larına dönüştürüldü; burada EN alt kümesi re-export edilir.
+// fixture'larına dönüştürüldü; ER5 (B05 inceleme) gerçek maçın masaüstü gövdesi
+// (metinler TR AI çıktısının EN çevirisi). Burada EN alt kümesi re-export edilir.
 export const EN_REPORT_SCENARIOS: EnReportScenario[] = REPORT_FIXTURES.filter((f) => f.body.lang === "en");
 
-/** Toplam senaryo sayısı — test-en-leak.ts görev bandını (20-30) buradan doğrular. */
+/** Toplam senaryo sayısı — test-en-leak.ts görev bandını (20-31; B05 inceleme ER5 ile) buradan doğrular. */
 export const EN_CORPUS_TOTAL = EN_VISION_SCENARIOS.length + EN_REPORT_SCENARIOS.length;
