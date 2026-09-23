@@ -19,7 +19,7 @@ import {
   type ReportRequest,
   type ReportResponse,
 } from "@/lib/report-prompt";
-import { maybeRefineReport, type RefineCallModel } from "@/lib/report-refine";
+import { maybeRefineReport, REFINE_CALL, type RefineCallModel } from "@/lib/report-refine";
 
 /**
  * POST /api/ai/report
@@ -406,6 +406,7 @@ export async function POST(request: NextRequest) {
       ? async (requestBody) => {
           const rc = new AbortController();
           const rt = setTimeout(() => rc.abort(), 10000);
+          const refineStartMs = Date.now();
           const rr = await fetch("https://api.openai.com/v1/chat/completions", {
             method: "POST",
             headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
@@ -415,6 +416,17 @@ export async function POST(request: NextRequest) {
           clearTimeout(rt);
           if (!rr.ok) return null;
           const rd = await rr.json();
+          // OLCUM-ARACI-15 (B05, 2026-09-24): refine İKİNCİ, ücretli bir AI çağrısı ama
+          // ai_usage'a HİÇ yazılmıyordu (yalnız ana çağrı, generateAIReport) → admin
+          // /cost paneli rapor maliyetini eksik sayıyordu. Yanıt geldiyse token harcanmıştır:
+          // metin kabul de edilse (finish=stop) reddedilse de kaydedilir. routeType
+          // "report" (panel byRoute gruplaması değişmez; ayrı tip admin-data'yı etkilerdi).
+          const ru = rd?.usage as { prompt_tokens?: number; completion_tokens?: number; prompt_tokens_details?: { cached_tokens?: number } } | undefined;
+          if (ru) {
+            const rCached = ru.prompt_tokens_details?.cached_tokens ?? 0;
+            console.log(`[Aimlo AI tokens] report-refine in=${ru.prompt_tokens ?? 0} cached=${rCached} out=${ru.completion_tokens ?? 0} finish=${rd?.choices?.[0]?.finish_reason ?? "unknown"}`);
+            saveAiUsage({ userId, routeType: "report", model: rd?.model ?? REFINE_CALL.model, promptTokens: ru.prompt_tokens ?? 0, completionTokens: ru.completion_tokens ?? 0, cachedTokens: rCached, matchId: validation.data.matchId ?? null, latencyMs: Date.now() - refineStartMs });
+          }
           return { content: rd?.choices?.[0]?.message?.content, finishReason: rd?.choices?.[0]?.finish_reason };
         }
       : null;

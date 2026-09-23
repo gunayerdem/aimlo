@@ -16,6 +16,9 @@
  *     finish_reason!=="stop" → değişmez; callModel yok → çağrı yok; istisna →
  *     orijinal kalır; refine metnindeki yabancı-harita callout'u ("A Short",
  *     Lotus'ta YOK — lib/map-callouts.ts:9) ana alanlarla AYNI temizleyiciden silinir.
+ * [C] OLCUM-ARACI-15: GERÇEK POST handler — refine yanıtı geldiğinde saveAiUsage
+ *     İKİNCİ kez çağrılır (ana + refine = 2). Eskiden refine çağrısı ai_usage'a
+ *     hiç yazılmıyordu (yalnız ana çağrı) → admin /cost rapor maliyetini eksik sayıyordu.
  *
  * ⚠ AĞ/AI/DB YOK: model yanıtları sahte (harness.replies); OPENAI_API_KEY sahte
  * bir dize, .env.local OKUNMAZ (eval-report anahtarı yalnız main()'de okur).
@@ -252,6 +255,59 @@ async function main() {
     const out = await maybeRefineReport(rep, lotus, async () => ({ content: "Kısa metin.", finishReason: "stop" }));
     check("≤30 karakter refine reddedilir (eski eşik)", out.attempted && !out.refined && show(rep) === show(before));
   }
+
+  // ── [C] refine maliyet kaydı ─────────────────────────────────────────────
+  console.log("\n── [C] Route — refine çağrısı ai_usage'a yazılır (OLCUM-ARACI-15) ──");
+  const route = loadReportRoute();
+  const lotusBody = { ...fixture("R3-lotus-omen-atk-close").body, matchId: "4b0f7d3e-9c1a-4e2b-8f6d-2a7c9e1b5d30" };
+  {
+    resetHarness();
+    process.env.OPENAI_API_KEY = "sk-test-harness-not-real";
+    harness.replies = [
+      { content: WEAK_JSON, usage: mainUsage },
+      { content: REFINED_TR, finishReason: "stop", usage: refineUsage, model: "gpt-5-mini-refine-test" },
+    ];
+    const res = await route.POST(reportRequest(lotusBody));
+    const body = await res.json() as Record<string, unknown>;
+    const u = harness.usageCalls;
+    check("200 + refine çağrısı yapıldı (2 OpenAI isteği)", res.status === 200 && harness.fetchCalls.length === 2, `status=${res.status} fetch=${harness.fetchCalls.length}`);
+    check("saveAiUsage 2 kez (ana + refine) — önceden 1", u.length === 2, `got=${u.length}`);
+    const r = u[1] ?? {};
+    check("refine kaydı: routeType report, refine token'ları, yanıt modeli, matchId, userId",
+      r.routeType === "report" && r.promptTokens === 410 && r.completionTokens === 95 && r.cachedTokens === 0
+        && r.model === "gpt-5-mini-refine-test" && r.matchId === lotusBody.matchId && r.userId === "00000000-0000-4000-8000-000000000001", show(r));
+    check("refine kaydı latencyMs sayısal", typeof r.latencyMs === "number" && (r.latencyMs as number) >= 0);
+    check("ana kayıt değişmedi (5100/640/1024)", u[0]?.promptTokens === 5100 && u[0]?.completionTokens === 640 && u[0]?.cachedTokens === 1024, show(u[0]));
+    check("refine metni rapora girdi ('A Short' temizlenmiş)", typeof body.mistake === "string" && body.mistake.includes("A Main") && !/A Short/.test(body.mistake), String(body.mistake));
+  }
+  {
+    resetHarness();
+    harness.replies = [
+      { content: WEAK_JSON, usage: mainUsage },
+      { content: `${REFINED_TR} ve sonra rotasy`, finishReason: "length", usage: refineUsage },
+    ];
+    await route.POST(reportRequest(lotusBody));
+    check("refine REDDEDİLSE de (finish=length) token harcandı → 2 kayıt", harness.usageCalls.length === 2, `got=${harness.usageCalls.length}`);
+  }
+  {
+    resetHarness();
+    harness.replies = [
+      { content: WEAK_JSON, usage: mainUsage },
+      { content: "", status: 500 },
+    ];
+    await route.POST(reportRequest(lotusBody));
+    check("refine HTTP 500 → yalnız ana kayıt (1)", harness.usageCalls.length === 1, `got=${harness.usageCalls.length}`);
+  }
+  {
+    resetHarness();
+    harness.replies = [
+      { content: WEAK_JSON, usage: mainUsage },
+      { content: REFINED_TR, finishReason: "stop" },
+    ];
+    await route.POST(reportRequest(lotusBody));
+    check("refine yanıtında usage yoksa kayıt yok (uydurma token yok) → 1", harness.usageCalls.length === 1, `got=${harness.usageCalls.length}`);
+  }
+  delete process.env.OPENAI_API_KEY;
 
   console.log(`\n${fail === 0 ? "✅" : "❌"} test-eval-fidelity: ${pass} geçti, ${fail} kırık\n`);
   if (fail > 0) process.exit(1);
