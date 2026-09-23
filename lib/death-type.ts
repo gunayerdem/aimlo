@@ -149,6 +149,28 @@ export function deathFamily(t: DeathType): string {
   return DEATH_TYPE_FAMILY[t] ?? t;
 }
 
+/** Canlı sayısı sözleşmesi (vision VisionRequest ile aynı): alliesAlive 0-4 (oyuncu
+ *  HARİÇ — ölen oyuncunun kendi takımında en çok 4 canlı kalır), enemiesAlive 0-5. */
+export const ALLIES_ALIVE_MAX = 4;
+export const ENEMIES_ALIVE_MAX = 5;
+
+/** Sözleşme aralığındaki tam sayıyı döndürür; aralık dışı / tam sayı olmayan /
+ *  sayı olmayan değer → undefined ("okunamadı"). LOGLAR-03: masaüstü ölüm anında
+ *  imkânsız alliesAlive=5 okuyabiliyor; route ctx'i ve classifyDeath aynı kapıdan
+ *  geçer (tek tanım). */
+export function sanitizeAliveCount(v: unknown, max: number): number | undefined {
+  return typeof v === "number" && Number.isInteger(v) && v >= 0 && v <= max ? v : undefined;
+}
+
+/** ult-in-pocket MUAFİYETİ — ult'u kendine dönük dövüş aracı olan (Jett bıçak,
+ *  Reyna İmparatoriçe, Neon Overdrive, Phoenix geri-dönüş, Iso düello, Chamber Op)
+ *  ya da ölüm SONRASI çalışan (Clove) ajanlar. Gerekçe classifyDeath içindeki
+ *  canlı-test #7 notunda.
+ *  ⚠ İKİ REPO AYNI LİSTE (canlı-test #7 kuralı; CANLI-TEST-05): karşı liste
+ *  aimlo-desktop/src-tauri/src/detection.rs ULT_PATTERN_EXEMPT. Biri değişirse
+ *  diğeri de değişir; bu küme scripts/test-kb-pure-fns.ts [8]'de pinli. */
+export const ULT_POCKET_EXEMPT: ReadonlySet<string> = new Set(["clove", "jett", "reyna", "neon", "phoenix", "iso", "chamber"]);
+
 /** Classify a death into exactly one type. Priority = MOST specific → most generic;
  *  the first matching branch wins, so an op death is "op-angle" even if it was also a
  *  solo entry. `info-less-push` is the genuine default (no specific signal).
@@ -186,7 +208,14 @@ export function classifyDeath(b: DeathSignals, suppress?: ReadonlySet<DeathType>
   // "desktop 0-ile-okunamadı'yı ayırt edemez" diye güvenilmez sayıyor (hasAliveCount
   // hard-false). aa=0 ∧ ea=0 = "okunamadı" imzası → clutch-lost/over-peek dalları
   // bu durumda ATLANIR; yoksa her okunamayan round yanlış "clutch paniği" dersi alır.
-  const aliveReliable = typeof aa === "number" && typeof ea === "number" && !(aa === 0 && ea === 0);
+  // SÖZLEŞME-DIŞI SAYI (LOGLAR-03, 2026-09-23): ölüm anında alliesAlive=5 (oyuncu
+  // HARİÇ sözleşmede imkânsız) canlı loglarda 6 ölümde okundu (aimlo-runtime 01.txt
+  // :1505/:4407/:4995, gunay-runtime.log:3679, runtimeKAAN:4807) → aa>=ea kapısından
+  // "over-peek-advantage" ve "(5v4) sayısal üstünlükte öldün" sahte dersi doğuyordu.
+  // Aralık dışı (aa∉0..4 / ea∉0..5) sayım da "okunamadı" sayılır → sayı dalları atlanır.
+  const aliveReliable = sanitizeAliveCount(aa, ALLIES_ALIVE_MAX) !== undefined
+    && sanitizeAliveCount(ea, ENEMIES_ALIVE_MAX) !== undefined
+    && !(aa === 0 && ea === 0);
 
   // Priority order: specific → generic.
   if (b.repeatedPosition) return "repeat-angle";                          // read by the enemy — top priority
@@ -214,7 +243,7 @@ export function classifyDeath(b: DeathSignals, suppress?: ReadonlySet<DeathType>
   // takım-etkili büyük ult'lar (Sova/Brim/Killjoy/Sage/Breach...) için kalır;
   // onlarda cepte çürüyen ult gerçek kayıptır. Clove istisnasının gerekçesi ayrı
   // (ult'u ölüm SONRASI çalışır) ama sonuç aynı: dal atlanır.
-  const ULT_POCKET_EXEMPT = new Set(["clove", "jett", "reyna", "neon", "phoenix", "iso", "chamber"]);
+  // Liste modül seviyesinde (ULT_POCKET_EXEMPT, yukarıda) — masaüstü aynasıyla pinli.
   if (b.ultReady === true && !ULT_POCKET_EXEMPT.has(agentSlug)) return "ult-in-pocket"; // died with charged, unused ult
   // Pistol round = kendi bloğu (denetim: universal.md "Erken Round Ölümleri" bölümü
   // hiçbir tipe bağlı değildi = ölü içerik; pistol ölümü eco dersi değil açılış dersi ister).

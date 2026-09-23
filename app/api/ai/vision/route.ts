@@ -23,7 +23,7 @@ import { stripNumericHp, stripHpClaims } from "@/lib/coach-text";
 // kapak → fixCallout) TEK KAYNAK: lib/vision-postprocess.ts (OLCUM-ARACI-08).
 import { finalizeVisionFeedback, visionOutputFailure } from "@/lib/vision-postprocess";
 import { SYSTEM_PROMPT, SYSTEM_PROMPT_EN_ADDENDUM, USER_PROMPT, USER_PROMPT_EN, buildFactSheet, buildRoundFeedbackSchema } from "@/lib/vision-prompt";
-import { classifyDeathVaried, buildDeathTypeDirective } from "@/lib/death-type";
+import { classifyDeathVaried, buildDeathTypeDirective, sanitizeAliveCount, ALLIES_ALIVE_MAX, ENEMIES_ALIVE_MAX } from "@/lib/death-type";
 import { calloutBelongsToMap } from "@/lib/map-callouts";
 // match-concepts (rank-4, 2026-08-24): cross-round ban fallback'i — desktop
 // death_type echo'su (Faz2) gelene kadar prevDeathTypes'ı sunucu-yanı Upstash
@@ -935,8 +935,19 @@ export async function POST(request: NextRequest) {
       // logged "HP 100"), so a numeric HP in the prompt invites a fabricated
       // "(41 HP)" claim. The number stays a classifyDeath signal below; the
       // death-type directive carries the qualitative "düşük canla" state instead.
-      if (typeof reqBody.alliesAlive === "number") ctx.alliesAlive = reqBody.alliesAlive;
-      if (typeof reqBody.enemiesAlive === "number") ctx.enemiesAlive = reqBody.enemiesAlive;
+      // CANLI SAYISI SÖZLEŞMESİ (LOGLAR-03, 2026-09-23): alliesAlive 0-4 (oyuncu HARİÇ),
+      // enemiesAlive 0-5. Masaüstü ölüm anında imkânsız allies=5 okuyabiliyor (canlı
+      // loglarda 6 ölüm; aimlo-runtime 01.txt:1505) ve değer prompt'a "hayatta:
+      // müttefik=5" olarak giriyordu. Aralık dışı sayı ctx'e YAZILMAZ ("?" = bilinmiyor);
+      // classifyDeath aynı kapıdan geçer (lib/death-type.ts sanitizeAliveCount).
+      const alliesAliveOk = sanitizeAliveCount(reqBody.alliesAlive, ALLIES_ALIVE_MAX);
+      const enemiesAliveOk = sanitizeAliveCount(reqBody.enemiesAlive, ENEMIES_ALIVE_MAX);
+      if (alliesAliveOk !== undefined) ctx.alliesAlive = alliesAliveOk;
+      if (enemiesAliveOk !== undefined) ctx.enemiesAlive = enemiesAliveOk;
+      if ((typeof reqBody.alliesAlive === "number" && alliesAliveOk === undefined)
+        || (typeof reqBody.enemiesAlive === "number" && enemiesAliveOk === undefined)) {
+        console.warn(`[Aimlo AI] alive-count out of contract dropped: allies=${reqBody.alliesAlive} enemies=${reqBody.enemiesAlive}`);
+      }
       if (typeof reqBody.roundTimerAtDeath === "number" && reqBody.roundTimerAtDeath > 0) {
         ctx.roundTimerAtDeath = Math.min(Math.max(reqBody.roundTimerAtDeath, 0), 140);
       }

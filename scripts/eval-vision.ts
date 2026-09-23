@@ -46,7 +46,7 @@ import { buildAgentAbilityHint } from "../lib/agent-abilities";
 // B60 (2026-08-04): EN-native korpus — aşağıda SCENARIOS'a ekleniyor.
 import { EN_VISION_SCENARIOS } from "../evals/en-corpus";
 import { sanitizePromptInput } from "../lib/prompt-safety";
-import { classifyDeathVaried, buildDeathTypeDirective, type DeathType } from "../lib/death-type";
+import { classifyDeathVaried, buildDeathTypeDirective, sanitizeAliveCount, ALLIES_ALIVE_MAX, ENEMIES_ALIVE_MAX, type DeathType } from "../lib/death-type";
 import { buildHistoryBlock, type RoundHistoryEntry } from "../lib/history-block";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
@@ -704,8 +704,11 @@ function buildUserPrompt(s: Scenario): string {
     if (typeof b.deathAngle === "string") ctx.deathAngle = sanitizePromptInput(b.deathAngle, { max: 30, collapseWhitespace: true });
     // MIRROR route.ts (2026-07-09): healthAtDeath is no longer put into ctx —
     // numeric HP stays out of the prompt (classifyDeath below still gets the number).
-    if (typeof b.alliesAlive === "number") ctx.alliesAlive = b.alliesAlive;
-    if (typeof b.enemiesAlive === "number") ctx.enemiesAlive = b.enemiesAlive;
+    // MIRROR route.ts (LOGLAR-03, 2026-09-23): aralık dışı canlı sayısı ctx'e yazılmaz.
+    const alliesAliveOk = sanitizeAliveCount(b.alliesAlive, ALLIES_ALIVE_MAX);
+    const enemiesAliveOk = sanitizeAliveCount(b.enemiesAlive, ENEMIES_ALIVE_MAX);
+    if (alliesAliveOk !== undefined) ctx.alliesAlive = alliesAliveOk;
+    if (enemiesAliveOk !== undefined) ctx.enemiesAlive = enemiesAliveOk;
     if (b.spikePlanted === true) ctx.spikePlanted = true;
     if (typeof b.tradedByAlly === "boolean") ctx.tradedByAlly = b.tradedByAlly;
     if (typeof b.playerRoute === "string") {

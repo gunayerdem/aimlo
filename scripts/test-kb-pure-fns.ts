@@ -20,6 +20,13 @@ import { knownAgent } from "../lib/format-display";
 import { cleanCoachText } from "../lib/coach-text";
 import { extractKillerAgent } from "../lib/reality-checker";
 import { AGENT_ABILITIES } from "../lib/agent-abilities";
+import {
+  classifyDeath,
+  sanitizeAliveCount,
+  ALLIES_ALIVE_MAX,
+  ENEMIES_ALIVE_MAX,
+  ULT_POCKET_EXEMPT,
+} from "../lib/death-type";
 
 let fail = 0;
 const t = (ad: string, kosul: boolean, detay = "") => {
@@ -123,6 +130,59 @@ console.log("\n[7] AJAN TABLOLARI TUTARLI — KB'deki her ajan her tabloda (TR-K
     const kl = extractEnemyAgentFromKillerInfo(`killed by ${slug}`);
     t(`${slug}: knowledge-loader AGENT_ROLE_MAP → ${canon}`, kl === canon, `→ ${String(kl)}`);
   }
+}
+
+console.log("\n[8] ULT-MUAFİYET KÜMESİ PİNİ — iki repo aynı liste (CANLI-TEST-05, 2026-09-23)");
+{
+  // Canlı-test #7 kuralı: "İKİ TARAF AYNI LİSTE, biri değişirse diğeri de değişmeli".
+  // İhlal edilmişti: backend Clove'u muaf tutuyor, masaüstü detection.rs
+  // ULT_PATTERN_EXEMPT tutmuyordu → Clove oyuncusuna "ult HAZIR halde öldün" pattern
+  // satırı gidiyordu. Bu pin backend kümesini kilitler; masaüstündeki eş pin testi
+  // (aimlo-desktop detection.rs, D06) AYNI 7 elemanı iddia eder. Biri değişirse
+  // iki test birlikte güncellenmek ZORUNDA.
+  const pinned = ["chamber", "clove", "iso", "jett", "neon", "phoenix", "reyna"];
+  const actual = [...ULT_POCKET_EXEMPT].sort();
+  t("ULT_POCKET_EXEMPT = 7 eleman (sıralı küme birebir)", JSON.stringify(actual) === JSON.stringify(pinned), `→ ${JSON.stringify(actual)}`);
+  t("Clove + ultReady → ult-in-pocket DEĞİL", classifyDeath({ ultReady: true, playerAgent: "Clove", side: "attack" }) !== "ult-in-pocket");
+  t("Sova + ultReady → ult-in-pocket (muaf değil)", classifyDeath({ ultReady: true, playerAgent: "Sova", side: "attack" }) === "ult-in-pocket");
+}
+
+console.log("\n[9] İMKÂNSIZ CANLI SAYISI — sözleşme 0-4 / 0-5 (LOGLAR-03, 2026-09-23)");
+{
+  // Canlı kanıt: aimlo-runtime 01.txt:1505 "[DEATH] Alive counts at death: allies=5
+  // enemies=4" → payload alliesAlive:5 (:1527) → :4444 round 11 'over-peek-advantage'
+  // + pattern "(5v4) sayısal üstünlükte öldün". Ölen oyuncunun takımında en çok 4
+  // canlı kalır (alliesAlive oyuncu HARİÇ).
+  t("sanitizeAliveCount(5, 4) → undefined", sanitizeAliveCount(5, ALLIES_ALIVE_MAX) === undefined);
+  t("sanitizeAliveCount(4, 4) → 4", sanitizeAliveCount(4, ALLIES_ALIVE_MAX) === 4);
+  t("sanitizeAliveCount(0, 4) → 0", sanitizeAliveCount(0, ALLIES_ALIVE_MAX) === 0);
+  t("sanitizeAliveCount(5, 5) → 5 (düşman 5 geçerli)", sanitizeAliveCount(5, ENEMIES_ALIVE_MAX) === 5);
+  t("sanitizeAliveCount(6, 5) → undefined", sanitizeAliveCount(6, ENEMIES_ALIVE_MAX) === undefined);
+  t("sanitizeAliveCount(-1 / 2.5 / '3') → undefined",
+    sanitizeAliveCount(-1, 4) === undefined && sanitizeAliveCount(2.5, 4) === undefined && sanitizeAliveCount("3", 4) === undefined);
+  const imp = classifyDeath({ alliesAlive: 5, enemiesAlive: 4, side: "defending" });
+  t("classifyDeath({allies:5, enemies:4, defending}) → over-peek-advantage DEĞİL", imp !== "over-peek-advantage", `→ ${imp}`);
+  t("…akış sayısız dala düşer (def-wide-hold)", imp === "def-wide-hold", `→ ${imp}`);
+  // Canlı payload'ların BİREBİR sinyalleri (üçü de HEAD'de over-peek-advantage aldı):
+  const live: [string, Parameters<typeof classifyDeath>[0]][] = [
+    ["gunay-runtime.log:3699 (5/5 early def)", { alliesAlive: 5, enemiesAlive: 5, deathTiming: "early", side: "defending" }],
+    ["runtimeKAAN.txt:4828 (5/5 late def)", { alliesAlive: 5, enemiesAlive: 5, deathTiming: "late", side: "defending" }],
+    ["runtime 01.txt:4407 (5/4 late def)", { alliesAlive: 5, enemiesAlive: 4, deathTiming: "late", side: "defending" }],
+  ];
+  for (const [src, sig] of live) {
+    const r = classifyDeath(sig);
+    t(`${src} → over-peek-advantage DEĞİL`, r !== "over-peek-advantage", `→ ${r}`);
+  }
+  // Pozitif kontrol: sözleşme içindeki gerçek üstünlük dersi KORUNUR.
+  t("allies:4, enemies:4 (geçerli) → over-peek-advantage korunur",
+    classifyDeath({ alliesAlive: 4, enemiesAlive: 4, side: "defending" }) === "over-peek-advantage");
+  // Route ctx'i aynı kapıdan geçiyor mu (ctx route içinde kurulur, Next route dosyası
+  // saf fonksiyon export edemez → yapı kilidi; test-vision-ctx-sanitize [B] emsali).
+  const routeSrc = fs.readFileSync(path.join(process.cwd(), "app", "api", "ai", "vision", "route.ts"), "utf8");
+  t("route ctx.alliesAlive sanitizeAliveCount(…, ALLIES_ALIVE_MAX)'tan geçer",
+    /sanitizeAliveCount\(reqBody\.alliesAlive, ALLIES_ALIVE_MAX\)/.test(routeSrc) && !/ctx\.alliesAlive = reqBody\.alliesAlive/.test(routeSrc));
+  t("route ctx.enemiesAlive sanitizeAliveCount(…, ENEMIES_ALIVE_MAX)'tan geçer",
+    /sanitizeAliveCount\(reqBody\.enemiesAlive, ENEMIES_ALIVE_MAX\)/.test(routeSrc) && !/ctx\.enemiesAlive = reqBody\.enemiesAlive/.test(routeSrc));
 }
 
 console.log(`\n══════ ${fail === 0 ? "✅ TÜMÜ GEÇTİ" : `❌ ${fail} BAŞARISIZ`} ══════\n`);
