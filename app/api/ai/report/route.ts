@@ -18,6 +18,7 @@ import { buildPolicyBlock } from "@/lib/ai-policy";
 import { cleanCoachText, stripNumericHp, finalizeCoachText, trLocative } from "@/lib/coach-text";
 import { formatMap, formatAgent, formatMode, normalizeSide, knownAgent } from "@/lib/format-display";
 import { realityCheck, buildFactGround, type FactGround } from "@/lib/reality-checker";
+import { VISION_ENEMY_ITEM_CAP } from "@/lib/vision-postprocess";
 import { isUuidV4 } from "@/lib/uuid";
 import type { RoundData as EngineRoundData } from "@/types";
 
@@ -296,8 +297,12 @@ function validateRequest(
       // hep 0, prompt hayatta kalınan roundu bile "died@?" anlatıyordu. died'den türet.
       survived: typeof r.survived === "boolean" ? r.survived : r.died === false,
       deathAnalysis: typeof r.deathAnalysis === "string" ? sanitize(r.deathAnalysis, 500) : undefined,
+      // EA kapağı = vision'ın ürettiği madde kapağı (B03 inceleme): vision maddeyi
+      // VISION_ENEMY_ITEM_CAP'e (240) kadar üretiyor; burada sabit 200 onu kelime
+      // ortasından kesiyor ve kesik hâl analyses.raw_result_json.rounds'a yazılıp
+      // masaüstü maç geçmişinde gösteriliyordu. İki kapak tek sabitte.
       enemyAnalysis: Array.isArray(r.enemyAnalysis)
-        ? (r.enemyAnalysis as unknown[]).filter((s): s is string => typeof s === "string").slice(0, 5).map((s) => sanitize(s, 200))
+        ? (r.enemyAnalysis as unknown[]).filter((s): s is string => typeof s === "string").slice(0, 5).map((s) => sanitize(s, VISION_ENEMY_ITEM_CAP))
         : undefined,
       nextRoundSuggestion: typeof r.nextRoundSuggestion === "string" ? sanitize(r.nextRoundSuggestion, 500) : undefined,
       coachInsight: typeof r.coachInsight === "string" ? sanitize(r.coachInsight, 500) : undefined,

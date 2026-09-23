@@ -1683,19 +1683,39 @@ export function clampWords(s: string, max: number): string {
 //     Y kullan" yapısında yüklem Y'dedir; "…girmeden," ulaç yan-cümlesi ana cümle
 //     ister (virgülden kesmek "…ilk temasta değil." gibi ters anlam üretiyordu).
 //   • Rakamdan sonraki nokta ("aynı açıya 3. kez") ve kısaltma noktası (vb./vs./
-//     örn./etc.) cümle sonu DEĞİL — eski yama "…aynı açıya 3." üretiyordu.
+//     örn./ör./sn./dk./etc./e.g./i.e.) cümle sonu DEĞİL — eski yama "…aynı açıya
+//     3." üretiyordu; B03 inceleme: "…use utility first, e.g." ve "…öne sür (ör."
+//     cümle sonu sanılıyordu.
+//   • Solunda KAPANMAMIŞ "(" olan sınır cümle sonu DEĞİL (B03 inceleme): "(ör. Sova
+//     oku…)" içindeki nokta kabul edilince çıktı açık parantezle bitiyordu.
 //   • %65 koruma tabanı: son sınır clampWords çıktısının %65'inden azını
 //     bırakıyorsa bilgi kaybı kesiklikten ağır → clampWords çıktısı döner
 //     (koçluk emri kesik de olsa kalır). ; — – sınırında ayraç atılır, yerine nokta
 //     KONMAZ; tam cümle sınırında noktalama (ve ardından gelen kapanış tırnağı/
 //     parantezi) korunur.
+//     NEDEN ";" SINIRINDA NOKTA YOK (cleanCoachText sarkan ";"i "." yapar — bilinçli
+//     fark, B03 inceleme): kapağın çıktısı HER ZAMAN girdinin ÖNEKİDİR (sondaki
+//     ayraç/bağlaç kırpması hariç); "uydurma yok" kanıtı bu önek değişmezidir
+//     (scripts/test-pipeline-chain.ts "girdinin öneki" iddiaları). cleanCoachText'teki
+//     kural modelin KENDİ bitirdiği sarkan ayraç içindir; burada ";" sonrasındaki
+//     yan-cümle vardı ve kapak onu kesti. "—"/"–" sonrası da bağımsız cümle
+//     garantisi taşımaz → üç ayraç tek kuralla (nokta eklemeden) ele alınır.
 //   • Sınır yoksa/taban tutmazsa: clampWords çıktısından yalnız sarkan bağlaç
 //     ("…bekle ve") atılır — iki dil aynı liste, \b YOK (Türkçe-\b tuzağı).
 const SENTENCE_END_CHARS = ".!?…";
 const CLAUSE_SEP_CHARS = ";—–";
 const CLOSING_AFTER_END = "\"'”’)]";
 const SENTENCE_FLOOR = 0.65;
-const ABBREV_BEFORE_DOT_RE = /(?<![\p{L}\p{N}])(?:vb|vs|örn|etc)$/iu;
+const ABBREV_BEFORE_DOT_RE = /(?<![\p{L}\p{N}])(?:vb|vs|örn|ör|sn|dk|etc|e\.g|i\.e)$/iu;
+/** Önekte kapanmamış "(" var mı? (sınır parantez İÇİNDE → cümle sonu değil) */
+const hasUnclosedParen = (x: string): boolean => {
+  let depth = 0;
+  for (const ch of x) {
+    if (ch === "(") depth++;
+    else if (ch === ")" && depth > 0) depth--;
+  }
+  return depth > 0;
+};
 const DANGLING_CONNECTOR_RE =
   /\s+(?:ve|veya|ya\s+da|ama|ancak|fakat|çünkü|hem|and|or|but|so|then|because)$/iu;
 const stripDanglingTail = (x: string): string =>
@@ -1717,13 +1737,15 @@ export function clampToSentence(s: string, max: number): string {
     let kept: string | null = null;
     if (SENTENCE_END_CHARS.includes(ch)) {
       if (ch === "." && i > 0 && /\p{N}/u.test(t[i - 1])) continue;          // "3." / "1.5"
-      if (ch === "." && ABBREV_BEFORE_DOT_RE.test(t.slice(0, i))) continue;  // "vb." / "örn."
+      if (ch === "." && ABBREV_BEFORE_DOT_RE.test(t.slice(0, i))) continue;  // "vb." / "örn." / "e.g."
       let j = i + 1;
       while (j < t.length && CLOSING_AFTER_END.includes(t[j])) j++;
       const next = s.charAt(base + j);
       if (next && !/\s/u.test(next)) continue;                              // "A.Main" — cümle sonu değil
+      if (hasUnclosedParen(t.slice(0, j))) continue;                        // "(ör. Sova oku" — parantez içi
       kept = t.slice(0, j).trim();
     } else if (CLAUSE_SEP_CHARS.includes(ch)) {
+      if (hasUnclosedParen(t.slice(0, i))) continue;                        // parantez içi ayraç
       kept = stripDanglingTail(t.slice(0, i));
     } else {
       continue;
@@ -1777,7 +1799,7 @@ export function finalizeCoachText(
     lang: "tr" | "en";
     /** clampWords üst sınırı (report 500/600, ask vb.). VISION bu fonksiyonu
      *  kullanmaz: zinciri lib/vision-postprocess.ts'te, kapağı clampToSentence
-     *  (350 / enemyAnalysis 240) — TR-KALAN-08, 2026-09-23. */
+     *  (DA 400 / NR 350 / enemyAnalysis 240) — TR-KALAN-08 + B03 inceleme, 2026-09-23. */
     cap: number;
     /** oyuncunun ajanı — verilirse kit-dışı yetenek önerisi ayıklanır */
     agent?: string | null;

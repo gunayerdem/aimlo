@@ -58,11 +58,18 @@ export type VisionPostprocessResult = VisionFeedbackFields & {
   rewriteLevels: { death: number; suggestion: number };
 };
 
-/** Karakter kapakları. DA/NR 350 (değişmedi). EA 180 → 240 (TR-KALAN-08): süzgeçten
+/** Karakter kapakları. NR 350 (değişmedi). EA 180 → 240 (TR-KALAN-08): süzgeçten
  *  geçmiş EA[1] ölçümü TR n=139 p50 133 / p90 171 / p95 186 / MAX 212, EN MAX 187 —
  *  180 her iki dilde maddelerin %6,5'ini cümle ortasından kesiyordu. Bu bir
- *  yanıt-sonrası KARAKTER kapağı; token bütçesi (DEFAULT_MAX_TOKENS 350) değişmedi. */
+ *  yanıt-sonrası KARAKTER kapağı; token bütçesi (DEFAULT_MAX_TOKENS 350) değişmedi.
+ *  DA 350 → 400 (B03 inceleme): cümle-sınırlı kapak ateşlediğinde DA'nın SON cümlesi
+ *  düşüyor — şemada o cümle "ZORUNLU somut düzeltme" (teşhis + düzeltme). Gerçek
+ *  korpusta (scripts/eval-out, 944 örnek) kapak-öncesi DA: p50 196 / p99 299 / MAX
+ *  400; 350'yi aşan 2 örneğin (cyclereal-r3 M1-R18 359, M1-R24 400) ikisinde de
+ *  düzeltme cümlesi tümüyle siliniyordu. 400 ölçülen tavanı karşılar → korpusta kapak
+ *  hiç ateşlemez; clampWords'e (kesik cümle, TR-KALAN-08 sınıfı) geri dönülmez. */
 export const VISION_TEXT_CAP = 350;
+export const VISION_DEATH_CAP = 400;
 export const VISION_ENEMY_ITEM_CAP = 240;
 
 /** Tel roundHistory kaydı → realityCheck'in round hafızası (route'un memoryForCheck'i). */
@@ -148,7 +155,7 @@ export function finalizeVisionFeedback(
   // sildiği HP/meta içerik kullanıcıya GERİ geliyordu; noktalama-yalnız çıktı da
   // "dolu" sayılıyordu. Artık anlamlı değilse "" → route yapısal hata döner.
   const cleanedAnalysis = cleanCoachText(checkedAnalysis.text, lang);
-  const daOut = hasCoachContent(cleanedAnalysis) ? finish(cleanedAnalysis, VISION_TEXT_CAP) : "";
+  const daOut = hasCoachContent(cleanedAnalysis) ? finish(cleanedAnalysis, VISION_DEATH_CAP) : "";
   const deathAnalysis = hasCoachContent(daOut) ? daOut : "";
 
   // enemyAnalysis de reality-check'ten GEÇER (grounding audit 2026-06-26).
@@ -160,12 +167,21 @@ export function finalizeVisionFeedback(
   // Masaüstü 1 maddelik diziyi canlı-test #10'dan beri alıyor; 0 madde test edilmedi.
   // .filter (canlı-test #10, S1 dizi-kuralı): cleanCoachText SAF-META bir elemanı
   // '' yapabilir — boş eleman diziden düşer, kullanıcıya boş satır gitmez.
+  // BOŞ-GUARD EA'ya da (B03 inceleme, CANLI-TEST-07 sınıfı): eski süzgeç
+  // `x.text.trim().length > 0` idi → yalnız HP etiketi olan madde ("41 HP ile.")
+  // stripNumericHp/stripHpClaims'ten "." olarak çıkıp "dolu" sayılıyor, overlay
+  // "› ." madde işareti basıyordu. Artık DA ile AYNI tanım (hasCoachContent):
+  //   • kanıtlı sayılmak için realityCheck çıktısının SÜZÜLMÜŞ hâli içerik taşımalı;
+  //     taşımıyorsa madde kanıtsız muamelesi görür (ad-düzeltilmiş ham metin, aynı
+  //     süzgeçten) — TR-KALAN-26 (b) kuralı aynen işler (kurtarma yolu);
+  //   • süzülmüş ham hâli de içeriksizse madde düşer (ham metne ASLA dönülmez).
   const eaItems = (fb.enemyAnalysis || []).slice(0, 2).map((s) => {
     const src = fixNames(String(s));
     const c = realityCheck(src, memory, factGround, "suggestion", lang, map);
-    const proven = !!(c.text && c.text.trim());
-    return { proven, text: finish(cleanCoachText(proven ? c.text : src, lang), VISION_ENEMY_ITEM_CAP) };
-  }).filter((x) => x.text && x.text.trim().length > 0);
+    const cleanedChecked = c.text && c.text.trim() ? cleanCoachText(c.text, lang) : "";
+    const proven = hasCoachContent(cleanedChecked);
+    return { proven, text: finish(proven ? cleanedChecked : cleanCoachText(src, lang), VISION_ENEMY_ITEM_CAP) };
+  }).filter((x) => hasCoachContent(x.text));
   const provenItems = eaItems.filter((x) => x.proven);
   const enemyAnalysis = (provenItems.length > 0 ? provenItems : eaItems.slice(-1)).map((x) => x.text);
 
@@ -174,10 +190,22 @@ export function finalizeVisionFeedback(
   // past-tense death stub), keep the model's original advice — still a valid
   // actionable next-round plan. Prevents the S9-class stub regression.
   // TR-KALAN-26 kararı: nextRoundSuggestion alanı boş kalamaz → ham metin korunur.
+  // BOŞ-GUARD NR'ye de (B03 inceleme, CANLI-TEST-07 sınıfı): "41 HP ile." süzgeçten
+  // "." çıkıyor ve overlay'in plan satırı tek nokta gösteriyordu. Kararın ruhu
+  // (alan boş kalmasın → ham metin korunur) "içeriksiz" çıktıya da uygulanır:
+  // realityCheck'li metin süzgeçte içeriksiz kalırsa ad-düzeltilmiş HAM metin AYNI
+  // süzgeçten geçirilir; o da içeriksizse (HP/meta'dan ibaret) alan "" döner —
+  // yasaklı ham metne ya da sentetik koç metnine ASLA düşülmez. "" sözleşmede zaten
+  // var (şema-boş NR route.ts toFeedbackOutcome'da "" olarak geçer).
   const safeSuggestion = checkedSuggestion.text && checkedSuggestion.text.trim()
     ? checkedSuggestion.text
     : nrIn;
-  const nextRoundSuggestion = finish(cleanCoachText(safeSuggestion, lang), VISION_TEXT_CAP);
+  let cleanedSuggestion = cleanCoachText(safeSuggestion, lang);
+  if (!hasCoachContent(cleanedSuggestion) && safeSuggestion !== nrIn) {
+    cleanedSuggestion = cleanCoachText(nrIn, lang);
+  }
+  const nrOut = hasCoachContent(cleanedSuggestion) ? finish(cleanedSuggestion, VISION_TEXT_CAP) : "";
+  const nextRoundSuggestion = hasCoachContent(nrOut) ? nrOut : "";
 
   return {
     deathAnalysis,
