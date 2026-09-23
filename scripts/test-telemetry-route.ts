@@ -6,10 +6,16 @@
  * NEDEN VAR: /api/telemetry kısmi başarıda 200 dönüyor ve yalnız red SAYISINI
  * logluyordu; desktop da yalnız HTTP statüsüne baktığı için app_open/login_ok/
  * watch_started 31.07 → 16.09 arası `invalid_type` ile iki tarafta da görünmeden
- * düştü. Bu test route fix'ini kilitler:
+ * düştü. telemetry_events'i okuyan tek bir ekran da yoktu. Bu test iki fix'i
+ * kilitler:
  *   [A] route: GERÇEK POST handler — red sebebi+tipi `[TELEMETRY_REJECTED]`
  *       satırında, `telemetry_rejected` özet satırları DB'ye (TÜMÜ reddedilen
  *       batch dahil), yanıt şekli DEĞİŞMEDEN.
+ *   [B] lib/admin-telemetry: saf toplayıcılar (percentile_cont, sum(count),
+ *       ayrık kullanıcı) + getTelemetrySummary'nin sayfalama / "bilinmiyor"
+ *       (sahte 0 yok) davranışı.
+ *   [C] /admin/altyapi Telemetri kartı render'ı: ölçülemeyen "bilinmiyor",
+ *       tavana dayanan "≥", ölçülmüş boş bölüm açık boş-durum metni.
  *
  * YAKLAŞIM: scripts/vision-route-harness.ts ile aynı kalıp — "server-only" boş
  * modül, "@/..." → repo kökü, bağımlılıklar Module._cache'e sahte `exports`
@@ -279,6 +285,137 @@ async function main() {
     t("yanıt yine 200", r.status === 200);
     t("kabul insert'i yapıldı", fake.inserts.some((i) => i.rows.some((row) => row.type === "app_open")));
     t("red insert hatası loglandı (yutuldu, patlamadı)", r.logs.some((l) => l.includes("rejected-summary insert failed")));
+  }
+
+  // ── [B] admin-telemetry ─────────────────────────────────────────────────────
+  console.log("\n[B1] saf toplayıcılar — 0015 örnek SQL'i ile aynı anlam");
+  const at = await import("../lib/admin-telemetry");
+  {
+    // percentile_cont elle: [100,200,300,400] → p50 konum 1.5 = 250; p95 konum 2.85 = 385.
+    eq("percentileCont p50/p95 (doğrusal enterpolasyon)", [at.percentileCont([100, 200, 300, 400], 0.5), at.percentileCont([100, 200, 300, 400], 0.95)], [250, 385]);
+    eq("percentileCont tek eleman / boş", [at.percentileCont([7], 0.95), at.percentileCont([], 0.5)], [7, null]);
+    const lat = at.aggregateLatency([
+      { route: "vision", value: 400 }, { route: "vision", value: 100 }, { route: "vision", value: 300 }, { route: "vision", value: "200" },
+      { route: "report", value: 5000 }, { route: null, value: 10 }, { route: "vision", value: null },
+    ]);
+    eq("aggregateLatency: route bazlı n/p50/p95, string sayı okunur, null değer atlanır", lat, [
+      { route: "vision", n: 4, p50: 250, p95: 385 },
+      { route: "(yok)", n: 1, p50: 10, p95: 10 },
+      { route: "report", n: 1, p50: 5000, p95: 5000 },
+    ]);
+    const shortSince = now - 24 * 3600e3;
+    const iso = (hAgo: number) => new Date(now - hAgo * 3600e3).toISOString();
+    const errs = at.aggregateErrorCodes([
+      { code: "ai_timeout", count: 2, app_version: null, created_at: iso(1) },
+      { code: "ai_timeout", count: 3, app_version: null, created_at: iso(48) },
+      { code: "ai_timeout", count: 1, app_version: "1.0.20", created_at: iso(2) },
+      { code: "auth_expired", count: null, app_version: null, created_at: iso(3) },
+    ], shortSince);
+    eq("aggregateErrorCodes: kod × sürüm, sum(count) (NULL=0), 24s/7g ayrımı", errs, [
+      { code: "ai_timeout", appVersion: null, hitsShort: 2, hitsLong: 5 },
+      { code: "ai_timeout", appVersion: "1.0.20", hitsShort: 1, hitsLong: 1 },
+      { code: "auth_expired", appVersion: null, hitsShort: 0, hitsLong: 0 },
+    ]);
+    eq("countFunnel: ayrık kullanıcı (aynı kişi 3 kez açtı = 1)", at.countFunnel([
+      { type: "app_open", user_hash: "a" }, { type: "app_open", user_hash: "a" }, { type: "app_open", user_hash: "a" },
+      { type: "app_open", user_hash: "b" }, { type: "login_ok", user_hash: "a" }, { type: "watch_started", user_hash: null },
+    ]), { appOpen: 2, loginOk: 1, watchStarted: 0 });
+    eq("aggregateRejections: ilk ':' ayırıcı, adet toplamı", at.aggregateRejections([
+      { code: "invalid_type:app_open", count: 2 }, { code: "invalid_type:app_open", count: 1 },
+      { code: "value_required:watch_health", count: 1 }, { code: "legacy", count: 4 }, { code: "code_invalid:a:b", count: 1 },
+    ]), [
+      { reason: "legacy", type: "?", hits: 4 },
+      { reason: "invalid_type", type: "app_open", hits: 3 },
+      { reason: "code_invalid", type: "a:b", hits: 1 },
+      { reason: "value_required", type: "watch_health", hits: 1 },
+    ]);
+  }
+
+  console.log("\n[B2] getTelemetrySummary — sorgular, sayfalama, 'bilinmiyor' (sahte 0 yok)");
+  {
+    const typesOf = (q: QueryRecord) => (q.filters.find((f) => f[0] === "in" && f[1] === "type")?.[2] ?? []) as string[];
+    const sinceOf = (q: QueryRecord) => q.filters.find((f) => f[0] === "gte" && f[1] === "created_at")?.[2] as string;
+    const PAGE = at.TELEMETRY_PAGE_SIZE;
+    fake.queries = [];
+    fake.onQuery = (q) => {
+      const types = typesOf(q);
+      if (types.includes("ai_call_duration_ms")) return { data: null, error: { message: "timeout" } };
+      if (types.includes("watch_health")) {
+        // 2 tam sayfa + 1 yarım: sayfalama sonuna kadar okumalı.
+        const [a] = q.range ?? [0, 0];
+        const n = a < 2 * PAGE ? PAGE : 500;
+        return { data: Array.from({ length: n }, (_, i) => ({ user_hash: `u${(a + i) % 1234}` })), error: null };
+      }
+      if (types.includes("error_code_count")) {
+        // Her sayfa tam dolu → tavana dayanır → truncated.
+        return { data: Array.from({ length: PAGE }, () => ({ code: "ai_timeout", count: 1, app_version: null, created_at: new Date(now).toISOString() })), error: null };
+      }
+      if (types.includes("app_open")) {
+        return { data: [{ type: "app_open", user_hash: "a" }, { type: "login_ok", user_hash: "a" }], error: null };
+      }
+      return { data: [], error: null }; // telemetry_rejected: gerçekten boş
+    };
+    const s = await at.getTelemetrySummary(now);
+    t("sorgu hatası → latency null ('bilinmiyor'), 0 DEĞİL", s.latency === null);
+    eq("izleme nabzı: 3 sayfa okundu, ayrık kullanıcı 1234, tavan yok", s.watching, { data: 1234, truncated: false });
+    t("hata kodları: tavana dayanınca truncated=true", s.errors?.truncated === true && s.errors.data[0].hitsLong === PAGE * at.TELEMETRY_MAX_PAGES,
+      `got=${JSON.stringify(s.errors && { t: s.errors.truncated, h: s.errors.data[0]?.hitsLong })}`);
+    eq("huni", s.funnel, { data: { appOpen: 1, loginOk: 1, watchStarted: 0 }, truncated: false });
+    eq("reddedilenler: sorgu başarılı + boş → [] (null değil)", s.rejected, { data: [], truncated: false });
+    const wh = fake.queries.filter((q) => typesOf(q).includes("watch_health"));
+    eq("watch_health sayfa aralıkları", wh.map((q) => q.range), [[0, PAGE - 1], [PAGE, 2 * PAGE - 1], [2 * PAGE, 3 * PAGE - 1]]);
+    t("izleme penceresi 60 dk (desktop 30 dk'lık flush → 2×)", sinceOf(wh[0]) === new Date(now - 60 * 60e3).toISOString(), `got=${sinceOf(wh[0])}`);
+    const ec = fake.queries.find((q) => typesOf(q).includes("error_code_count"));
+    t("hata kodu penceresi 7 gün", !!ec && sinceOf(ec) === new Date(now - 7 * 24 * 3600e3).toISOString());
+    t("sıralama created_at ↑ + id ↑ (kararlı sayfalama)", JSON.stringify(wh[0].order) === JSON.stringify([["created_at", true], ["id", true]]));
+    const rq = fake.queries.find((q) => typesOf(q).includes(REJ));
+    t("reddedilenler yalnız sunucu tipi telemetry_rejected'ı okur", !!rq && JSON.stringify(typesOf(rq)) === JSON.stringify([REJ]));
+    t("tüm sorgular telemetry_events tablosunda", fake.queries.every((q) => q.table === "telemetry_events"));
+    t("dönen yapıda user_hash yok (kimlik sızmaz)", !JSON.stringify(s).includes("user_hash") && !JSON.stringify(s).includes("u1"));
+  }
+
+  // ── [C] admin kartı render — "bilinmiyor" / "≥" / boş-durum metinleri ─────
+  console.log("\n[C] /admin/altyapi Telemetri kartı — sahte 0 yok, tavan '≥' ile");
+  {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { renderToStaticMarkup } = require("react-dom/server") as typeof import("react-dom/server");
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { createElement } = require("react") as typeof import("react");
+    const card = await import("../app/admin/altyapi/TelemetryCard");
+    const html = (tsum: unknown) =>
+      renderToStaticMarkup(createElement(card.TelemetrySectionView, { t: tsum as Parameters<typeof card.TelemetrySectionView>[0]["t"] }));
+
+    const hNull = html(null);
+    t("özet hiç okunamadı → 'Telemetri okunamadı', tablo/sayı yok", hNull.includes("Telemetri okunamadı") && !hNull.includes("<table"));
+
+    const allNull = html({ generatedAt: "x", errors: null, latency: null, funnel: null, watching: null, rejected: null });
+    t("her bölüm null → 4 kutu 'bilinmiyor' + 3 tabloda '0 DEĞİL' notu",
+      (allNull.match(/>bilinmiyor</g) ?? []).length === 4 && (allNull.match(/0 DEĞİL/g) ?? []).length === 3,
+      `bilinmiyor=${(allNull.match(/>bilinmiyor</g) ?? []).length} not=${(allNull.match(/0 DEĞİL/g) ?? []).length}`);
+
+    const full = html({
+      generatedAt: "x",
+      errors: { data: [{ code: "capture_wgc_fallback", appVersion: null, hitsShort: 2, hitsLong: 2 }], truncated: false },
+      latency: { data: [{ route: "vision", n: 37, p50: 4516, p95: 7851.999999999985 }], truncated: false },
+      funnel: { data: { appOpen: 1234, loginOk: 12, watchStarted: 3 }, truncated: true },
+      watching: { data: 2, truncated: false },
+      rejected: { data: [{ reason: "invalid_type", type: "app_open", hits: 5 }], truncated: false },
+    });
+    t("tavana dayanan huni '≥1.234' yazılır", full.includes("≥1.234"), full.slice(0, 200));
+    t("gecikme ms yuvarlanır (4.516 ms / 7.852 ms)", full.includes("4.516 ms") && full.includes("7.852 ms"));
+    t("sürümsüz hata satırı '— (sürüm yok)'", full.includes("— (sürüm yok)"));
+    t("red satırı sebep × tip × adet", full.includes("invalid_type") && full.includes("app_open") && full.includes(">5<"));
+
+    const empty = html({
+      generatedAt: "x",
+      errors: { data: [], truncated: false },
+      latency: { data: [], truncated: false },
+      funnel: { data: { appOpen: 0, loginOk: 0, watchStarted: 0 }, truncated: false },
+      watching: { data: 0, truncated: false },
+      rejected: { data: [], truncated: false },
+    });
+    t("ölçülmüş boş bölüm → açık boş-durum metni ('bilinmiyor' DEĞİL)",
+      empty.includes("reddedilen olay yok") && empty.includes("hata kodu yok") && empty.includes("ölçüm yok") && !empty.includes(">bilinmiyor<"));
   }
 
   console.log(fail === 0 ? `\n✅ TELEMETRİ GÖRÜNÜRLÜK: ${pass} geçti, 0 kırık` : `\n❌ TELEMETRİ GÖRÜNÜRLÜK: ${fail} kırık (${pass} geçti)`);

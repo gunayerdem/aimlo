@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { getAdminUser } from "@/lib/admin-auth";
 import { getInfraStatus } from "@/lib/admin-infra";
+import { getTelemetrySummary, type TelemetrySummary } from "@/lib/admin-telemetry";
+import { TelemetrySectionView } from "./TelemetryCard";
 
 // Canlı sağlık kontrolü — her istekte yeniden koşmalı, ASLA cache'lenmemeli
 // (cache'lenmiş "yeşil" kart, düşmüş bir servisi saatlerce gizler).
@@ -202,6 +204,10 @@ export default async function AdminAltyapiPage() {
   const admin = await getAdminUser();
   if (!admin) notFound();
 
+  // B08: telemetri okuması altyapı kontrolleriyle PARALEL başlar; hatası
+  // yutulur ve kart "okunamadı" yazar — sayfa asla patlamaz.
+  const telemetryPromise: Promise<TelemetrySummary | null> = getTelemetrySummary().catch(() => null);
+
   // Sayfa ASLA patlamamalı: tek bir kontrol hatası bütün ekranı götürmesin.
   let infra: Infra | null = null;
   try {
@@ -209,6 +215,7 @@ export default async function AdminAltyapiPage() {
   } catch {
     infra = null;
   }
+  const telemetry = await telemetryPromise;
 
   if (!infra) {
     return (
@@ -219,6 +226,7 @@ export default async function AdminAltyapiPage() {
           <b>Kontroller çalıştırılamadı.</b> Durum bilinmiyor — bu <i>&quot;her şey yolunda&quot;</i> demek DEĞİL.
           Sayfayı yenile; sorun sürerse Vercel fonksiyon loglarına bak.
         </div>
+        <TelemetrySectionView t={telemetry} />
       </>
     );
   }
@@ -319,6 +327,9 @@ export default async function AdminAltyapiPage() {
           masaüstü sürümü: <b>{version ?? "bilinmiyor"}</b>
         </span>
       </div>
+
+      {/* ------------------------------- TELEMETRİ ------------------------------- */}
+      <TelemetrySectionView t={telemetry} />
 
       {/* --------------------------- ENV VARLIK DENETİMİ --------------------------- */}
       <h2 style={{ fontSize: 15, fontWeight: 700, margin: "26px 0 4px", color: "rgba(238,240,248,0.86)" }}>
