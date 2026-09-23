@@ -37,6 +37,8 @@ import { realityCheck, buildFactGround, type FactGround } from "@/lib/reality-ch
 import { VISION_ENEMY_ITEM_CAP } from "@/lib/vision-postprocess";
 import { isUuidV4 } from "@/lib/uuid";
 import { pickReportScore, sanitizeReportInput } from "@/lib/report-score";
+// Model id + reasoning_effort TEK KAYNAK (B07 · OLCUM-ARACI-17).
+import { AI_MODEL, AI_REASONING_EFFORT } from "@/lib/ai-model";
 import type { RoundData as EngineRoundData } from "@/types";
 
 /* ══════════════════════════════════════════════════════════
@@ -1095,9 +1097,9 @@ ${scoringContext}`;
  * Report schema is rich (multiple optional sections); use json_object mode.
  */
 export const REPORT_CALL = {
-  model: "gpt-5-mini",
+  model: AI_MODEL,
   maxCompletionTokens: 1400,
-  reasoningEffort: "minimal",
+  reasoningEffort: AI_REASONING_EFFORT,
   responseFormat: { type: "json_object" },
 } as const;
 

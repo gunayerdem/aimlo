@@ -10,6 +10,8 @@ import { loadKnowledge } from "@/lib/knowledge-loader";
 import { buildPolicyBlock } from "@/lib/ai-policy";
 import { cleanCoachText } from "@/lib/coach-text";
 import { sanitizePromptInput } from "@/lib/prompt-safety";
+// Model id + reasoning_effort TEK KAYNAK (B07 · OLCUM-ARACI-17).
+import { AI_MODEL, AI_REASONING_EFFORT } from "@/lib/ai-model";
 
 /**
  * POST /api/ai/feedback
@@ -458,9 +460,9 @@ ${patternContext}`;
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: "gpt-5-mini",
+        model: AI_MODEL,
         max_completion_tokens: 500,
-        reasoning_effort: "minimal",
+        reasoning_effort: AI_REASONING_EFFORT,
         // OpenAI auto-caches the prefix; the systemPrompt (KB + base instructions)
         // is the stable prefix, userPrompt has per-call dynamic data.
         response_format: {
@@ -509,7 +511,7 @@ ${patternContext}`;
       const cached = usage.prompt_tokens_details?.cached_tokens ?? 0;
       console.log(`[Aimlo AI tokens] feedback in=${usage.prompt_tokens ?? 0} cached=${cached} out=${usage.completion_tokens ?? 0}`);
       // B110 (2026-07-31): userId:null → parametreden gelen gerçek kullanıcı.
-      saveAiUsage({ userId, routeType: "feedback", model: data?.model ?? "gpt-5-mini", promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, cachedTokens: cached });
+      saveAiUsage({ userId, routeType: "feedback", model: data?.model ?? AI_MODEL, promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, cachedTokens: cached });
     }
     const text: string = data?.choices?.[0]?.message?.content || "";
 
@@ -575,9 +577,9 @@ Sadece düzeltilmiş metni döndür.`;
             method: "POST",
             headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
             body: JSON.stringify({
-              model: "gpt-5-mini",
+              model: AI_MODEL,
               max_completion_tokens: 200,
-              reasoning_effort: "minimal",
+              reasoning_effort: AI_REASONING_EFFORT,
               messages: [
                 { role: "system", content: "Sen Radiant Valorant koçusun. Her cümlede pozisyon + düşman davranışı + aksiyon ZORUNLU. Generic = FAIL." },
                 { role: "user", content: repairPrompt },

@@ -17,8 +17,10 @@
  */
 import { loadKnowledge, loadVisionKnowledge } from "../lib/knowledge-loader";
 import { PRICING } from "../lib/openai-pricing";
+// B07 (OLCUM-ARACI-17): prod model id TEK KAYNAK — model göçünde tavan otomatik yeni fiyattan.
+import { AI_MODEL } from "../lib/ai-model";
 
-const P = PRICING["gpt-5-mini"];
+const P = PRICING[AI_MODEL];
 
 /**
  * lib/api-auth.ts DAILY_QUOTA ile AYNI olmalı. DAILY_QUOTA export edilmediği için
@@ -65,7 +67,7 @@ function callCost(kbBytes: number, cacheHit: number, outTokens: number) {
 }
 
 function main() {
-  console.log("\n══ KANONİK MALİYET TAVANI — gpt-5-mini ══\n");
+  console.log(`\n══ KANONİK MALİYET TAVANI — ${AI_MODEL} ══\n`);
   console.log(`fiyat: taze $${P.inputPerM}/M · cache $${P.cachedInputPerM}/M · çıktı $${P.outputPerM}/M`);
   console.log(`girdi: ${CTX.map} / ${CTX.agent} / ${CTX.enemyAgents.length} düşman\n`);
 

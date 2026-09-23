@@ -17,6 +17,8 @@
  */
 import { checkOutputQuality, scoreFields } from "@/evals/generic-detector";
 import { buildReportCleaner, type ReportRequest, type ReportResponse } from "@/lib/report-prompt";
+// Model id + reasoning_effort TEK KAYNAK (B07 · OLCUM-ARACI-17).
+import { AI_MODEL, AI_REASONING_EFFORT } from "@/lib/ai-model";
 
 /** Refine eşiği: qc.score bunun ALTINDAYSA en zayıf alan yeniden yazdırılır. */
 export const REPORT_REFINE_QC_THRESHOLD = 65;
@@ -28,9 +30,9 @@ export const REPORT_REFINE_QC_THRESHOLD = 65;
  * kesiliyordu (canlı kanıt: summary "...rotasy" / 672 bayt).
  */
 export const REFINE_CALL = {
-  model: "gpt-5-mini",
+  model: AI_MODEL,
   maxCompletionTokens: 500,
-  reasoningEffort: "minimal",
+  reasoningEffort: AI_REASONING_EFFORT,
 } as const;
 
 /**

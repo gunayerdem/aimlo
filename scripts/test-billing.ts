@@ -11,7 +11,7 @@ const origResolve = (Module as unknown as { _resolveFilename: (...a: unknown[]) 
 };
 
 import { createHmac } from "node:crypto";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 // lib/billing → lib/supabase/server import-anında env doğrular; .env.local'ı yükle.
@@ -67,6 +67,43 @@ async function main() {
   eq("negatif küçük", formatUsd(-0.005), "-$0.0050");
   eq("sıfır", formatUsd(0), "$0");
   eq("pozitif", formatUsd(12.34), "$12.34");
+
+  // ── OLCUM-ARACI-17 (B07, 2026-09-24): model kimliği TEK KAYNAK — lib/ai-model.ts ──
+  // Model id 5 route + saveAiUsage fallback'leri + VISION/REPORT/REFINE_CALL + eval
+  // aynaları + FALLBACK_MODEL'da elle yazılıydı; göçte biri atlanırsa route'lar arası
+  // karışık model / yanlış ai_usage etiketi (→ yanlış fiyat). Model değişimi artık
+  // tek satır; bu kilitler göçün eksik kalmasını CI'da yakalar.
+  const { AI_MODEL } = await import("../lib/ai-model");
+  const { PRICING } = await import("../lib/openai-pricing");
+  eq("PRICING[AI_MODEL] tanımlı — model göçünde fiyat satırı AYNI commit'te eklenmeli",
+    Object.prototype.hasOwnProperty.call(PRICING, AI_MODEL), true);
+  const ROOT = join(__dirname, "..");
+  const aiModelSrc = readFileSync(join(ROOT, "lib", "ai-model.ts"), "utf8");
+  eq("lib/ai-model.ts yaprak modül (import/require yok → döngü riski yok)",
+    /^\s*(import\b|export\s[^=]*\bfrom\b)|\brequire\(/m.test(aiModelSrc), false);
+  // Grep-guard: app/ lib/ scripts/ kodunda AI_MODEL'in TIRNAKLI literal'i yalnız
+  // lib/ai-model.ts'te ve fiyat tablosunun anahtarında (tam 1 kez) geçebilir.
+  // Desen AI_MODEL'den kurulur → göçten sonra YENİ id için de aynı kural işler.
+  const modelEsc = AI_MODEL.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const litRe = new RegExp("[\"'`]" + modelEsc + "[\"'`]", "g");
+  const litHits: string[] = [];
+  const walk = (rel: string): void => {
+    for (const e of readdirSync(join(ROOT, rel), { withFileTypes: true })) {
+      const r = `${rel}/${e.name}`;
+      if (e.isDirectory()) {
+        if (e.name === "node_modules" || e.name.startsWith(".")) continue;
+        walk(r);
+        continue;
+      }
+      if (!/\.(ts|tsx|mts|cts|js|mjs|cjs)$/.test(e.name)) continue;
+      const n = (readFileSync(join(ROOT, r), "utf8").match(litRe) ?? []).length;
+      if (n === 0 || r === "lib/ai-model.ts" || (r === "lib/openai-pricing.ts" && n === 1)) continue;
+      litHits.push(`${r}×${n}`);
+    }
+  };
+  for (const d of ["app", "lib", "scripts"]) walk(d);
+  eq(`grep-guard: app/ lib/ scripts/ altında tırnaklı ${AI_MODEL} literal'i yok (izinli: lib/ai-model.ts + fiyat tablosu anahtarı)`,
+    litHits, []);
 
   console.log(fail === 0 ? "\nTÜM TESTLER GEÇTİ ✓" : `\n${fail} TEST BAŞARISIZ ✗`);
   process.exit(fail ? 1 : 0);

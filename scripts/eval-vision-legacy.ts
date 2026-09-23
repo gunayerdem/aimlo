@@ -23,6 +23,7 @@ import { buildAgentAbilityHint } from "../lib/agent-abilities";
 import { sanitizePromptInput } from "../lib/prompt-safety";
 import { classifyDeathVaried, buildDeathTypeDirective, sanitizeAliveCount, ALLIES_ALIVE_MAX, ENEMIES_ALIVE_MAX, type DeathType } from "../lib/death-type";
 import { buildHistoryBlock, type RoundHistoryEntry } from "../lib/history-block";
+import { AI_MODEL } from "../lib/ai-model";
 import type { Scenario } from "./eval-vision";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
@@ -287,7 +288,8 @@ export async function callModel(apiKey: string, systemMessage: string, userPromp
       // sadakat korunur; aday model kıyası için env ile değiştirilir. EVAL_EFFORT=omit
       // → reasoning_effort GÖNDERİLMEZ (parametreyi tanımayan adaylar 400 dönmesin);
       // EVAL_EFFORT=none → "none" değeri GÖNDERİLİR (5.6 ailesinde geçerli seviye).
-      model: process.env.EVAL_MODEL || "gpt-5-mini",
+      // B07 (OLCUM-ARACI-17): prod modeli TEK KAYNAK lib/ai-model.ts (değer aynı).
+      model: process.env.EVAL_MODEL || AI_MODEL,
       // EVAL_MAX_TOKENS / EVAL_EFFORT (KB 10h nöbeti 2026-07-25): canlı route'un
       // değerleri VARSAYILAN (minimal / 350) — sadakat korunur. Env ile
       // değiştirilebilir ki "reasoning_effort kaliteyi ne kadar taşıyor?" sorusu

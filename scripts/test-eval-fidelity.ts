@@ -69,6 +69,8 @@ import {
   type VisionPromptBody,
 } from "../lib/vision-prompt-builder";
 import type { DeathType } from "../lib/death-type";
+// B07 (OLCUM-ARACI-17): model/effort beklentisi tek kaynaktan — göçte test elle değişmez.
+import { AI_MODEL, AI_REASONING_EFFORT } from "../lib/ai-model";
 import { SCENARIOS as VISION_SCENARIOS, buildEvalRequest, EVAL_SCOPE_NOTE, type Scenario as VisionScenario, type MatchConceptSim } from "./eval-vision";
 import * as legacyVision from "./eval-vision-legacy";
 import { measurePrefixScenarios, SCENARIOS as PREFIX_SCENARIOS, bodyOf as prefixBodyOf, buildSystemPrompt as prefixSystemPrompt } from "./measure-prompt-prefix";
@@ -192,8 +194,8 @@ async function main() {
     const sys = b.messages[0].content;
     const usr = b.messages[1].content;
     check("max_completion_tokens 1400 (eski eval 700 — finish=length rejimi)", b.max_completion_tokens === 1400, `got=${b.max_completion_tokens}`);
-    check("model gpt-5-mini · reasoning_effort minimal · response_format json_object",
-      b.model === "gpt-5-mini" && b.reasoning_effort === "minimal" && b.response_format?.type === "json_object");
+    check(`model ${AI_MODEL} · reasoning_effort ${AI_REASONING_EFFORT} · response_format json_object`,
+      b.model === AI_MODEL && b.reasoning_effort === AI_REASONING_EFFORT && b.response_format?.type === "json_object");
     check("enemyComp fixture → 'DÜŞMAN KADROSU KAPALI LİSTEDİR' + kadro adları",
       sys.includes("DÜŞMAN KADROSU KAPALI LİSTEDİR — bu maçta yalnız şu ajanlar vardı: Jett, Sova, Omen, Killjoy, Reyna"));
     check("prod'un eval'de eksik olan blokları geldi (VERİ-ETİKETİ YASAK, DÜŞMAN MODELİ, VERİ KAYNAKLARI)",
@@ -259,7 +261,7 @@ async function main() {
     check("refine metnindeki Lotus-dışı 'A Short' temizleyiciden silindi", !!w && !/A Short/i.test(String(rep[w])) && /A Main/.test(String(rep[w])), String(w && rep[w]));
     const b = calls[0];
     check(`refine gövdesi REFINE_CALL (model ${REFINE_CALL.model}, max ${REFINE_CALL.maxCompletionTokens}, effort ${REFINE_CALL.reasoningEffort})`,
-      b.model === "gpt-5-mini" && b.max_completion_tokens === 500 && b.reasoning_effort === "minimal" && !("response_format" in b), show({ ...b, messages: undefined }));
+      b.model === AI_MODEL && b.max_completion_tokens === 500 && b.reasoning_effort === AI_REASONING_EFFORT && !("response_format" in b), show({ ...b, messages: undefined }));
     check("sistem mesajı olgu-bağlı refine metni", b.messages[0].role === "system" && b.messages[0].content === REFINE_SYSTEM_PROMPT);
     const u = b.messages[1].content;
     check("refine prompt'u ölçülen olguları taşır (harita/kadro/konum/skor)",
@@ -456,8 +458,8 @@ async function visionRouteSection() {
     resolveVisionMaxTokens(DESKTOP_VISION_MAX_TOKENS) === 450 && resolveVisionMaxTokens(undefined) === 350
       && resolveVisionMaxTokens(200) === 200 && resolveVisionMaxTokens(0) === 350 && VISION_CALL.maxTokensCap === 450,
     `${resolveVisionMaxTokens(DESKTOP_VISION_MAX_TOKENS)}/${resolveVisionMaxTokens(undefined)}`);
-  check("golden'da masaüstü isteği 450 token · gpt-5-mini · minimal ile gidiyor",
-    golden.records.every((r) => r.maxCompletionTokens === 450 && r.model === "gpt-5-mini" && r.reasoningEffort === "minimal"));
+  check(`golden'da masaüstü isteği 450 token · ${AI_MODEL} · ${AI_REASONING_EFFORT} ile gidiyor`,
+    golden.records.every((r) => r.maxCompletionTokens === 450 && r.model === AI_MODEL && r.reasoningEffort === AI_REASONING_EFFORT));
 
   // Grep-guard: route'ta prompt kurulumu kalmadı (tek kaynak = builder).
   const routeSrc = fs.readFileSync(path.join(__dirname, "..", "app", "api", "ai", "vision", "route.ts"), "utf8");
@@ -566,8 +568,8 @@ async function evalParitySection() {
     messages: { role: string; content: unknown }[];
   };
   const en = byId["S1-ascent-cypher-def-strong-en"]?.req.requestBody as unknown as typeof tr;
-  check("eval gövdesi: gpt-5-mini · max_completion_tokens 450 · minimal · json_schema · kullanıcı içeriği metin bloğu",
-    tr?.model === "gpt-5-mini" && tr?.max_completion_tokens === 450 && tr?.reasoning_effort === "minimal"
+  check(`eval gövdesi: ${AI_MODEL} · max_completion_tokens 450 · ${AI_REASONING_EFFORT} · json_schema · kullanıcı içeriği metin bloğu`,
+    tr?.model === AI_MODEL && tr?.max_completion_tokens === 450 && tr?.reasoning_effort === AI_REASONING_EFFORT
       && tr?.response_format?.type === "json_schema" && Array.isArray(tr?.messages?.[1]?.content), show({ ...tr, messages: undefined, response_format: undefined }));
   check("eval şeması: enemyAnalysis.description 'KAYNAK-DİLİ YASAK' (TR) / 'SOURCE-LANGUAGE BAN' (EN) içerir",
     !!tr?.response_format.json_schema.schema.properties.enemyAnalysis.description.includes("KAYNAK-DİLİ YASAK")

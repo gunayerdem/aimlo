@@ -1,17 +1,24 @@
 import { getCostData } from "@/lib/admin-data";
-import { formatUsd } from "@/lib/openai-pricing";
+import { formatUsd, PRICING } from "@/lib/openai-pricing";
+import { AI_MODEL } from "@/lib/ai-model";
 import { TrendChart } from "../AdminChart";
 
 export const dynamic = "force-dynamic";
 
+// Alt başlık model adı + oranları TEK KAYNAKTAN (B07 · OLCUM-ARACI-17): eskiden
+// "gpt-5-mini … $0.25 / $2.00 / $0.025" elle yazılıydı, model göçünde yalan söylerdi.
+// Biçim bugünküyle bayt-aynı: 0.25 → "0.25", 2 → "2.00", 0.025 → "0.025".
+const rate = (n: number) => n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+
 export default async function AdminCostPage() {
   const c = await getCostData();
   const cacheRatio = c.tokens.input > 0 ? (c.tokens.cached / c.tokens.input) * 100 : 0;
+  const p = PRICING[AI_MODEL];
 
   return (
     <>
       <h1 className="adm-h1">AI Maliyeti</h1>
-      <p className="adm-sub">gpt-5-mini token → USD · canlı (girdi $0.25 / çıktı $2.00 / cache $0.025 per 1M)</p>
+      <p className="adm-sub">{`${AI_MODEL} token → USD · canlı (girdi $${rate(p.inputPerM)} / çıktı $${rate(p.outputPerM)} / cache $${rate(p.cachedInputPerM)} per 1M)`}</p>
 
       {c.rows === 0 ? (
         <div className="adm-note" style={{ marginBottom: 18 }}>

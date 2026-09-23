@@ -13,6 +13,9 @@
 //    EVAL_MODEL), bu yüzden aday satırları ŞİMDİ tabloda olmalı: `pricingFor` bilinmeyen
 //    id'yi sessizce gpt-5-mini fiyatına düşürüyordu → admin /cost paneli aday koşularını
 //    YANLIŞ fiyatlıyordu (luna gerçekte %20 ucuz, panel gpt-5-mini gibi sayıyordu).
+//    B07 (2026-09-24): üretim model id'si TEK KAYNAK lib/ai-model.ts (AI_MODEL).
+
+import { AI_MODEL } from "./ai-model";
 
 export type ModelPricing = {
   /** USD per 1,000,000 fresh (uncached) input tokens. */
@@ -26,7 +29,7 @@ export type ModelPricing = {
 export const PRICING: Record<string, ModelPricing> = {
   "gpt-5-mini": { inputPerM: 0.25, outputPerM: 2.0, cachedInputPerM: 0.025 },
   // ── Göç adayları (fiyatlar developers.openai.com/api/docs/pricing, 16.09.2026) ──
-  // Yalnız ÖLÇÜM için tabloda; üretim modeli hâlâ gpt-5-mini (lib/ai-* rotaları).
+  // Yalnız ÖLÇÜM için tabloda; üretim modeli hâlâ gpt-5-mini (lib/ai-model.ts AI_MODEL).
   "gpt-5.6-luna": { inputPerM: 0.2, outputPerM: 1.2, cachedInputPerM: 0.02 },   // birincil aday (≈0.8×)
   "gpt-5.4-nano": { inputPerM: 0.2, outputPerM: 1.25, cachedInputPerM: 0.02 },  // ikincil aday
   "gpt-5.6-terra": { inputPerM: 2.0, outputPerM: 12.0, cachedInputPerM: 0.2 },  // resmî yedek (≈8.6× — elendi)
@@ -41,8 +44,10 @@ export const PRICING: Record<string, ModelPricing> = {
 // Göçe karar verilirse `ModelPricing.cacheWritePerM` + `TokenUsage.cacheWriteTokens`
 // eklenmeli (OpenAI usage nesnesinde böyle bir alan var mı: DOĞRULANMADI).
 
-/** Pricing used when an exact model id isn't in the table (defensive). */
-const FALLBACK_MODEL = "gpt-5-mini";
+/** Pricing used when an exact model id isn't in the table (defensive) — the production
+ *  model (lib/ai-model.ts, OLCUM-ARACI-17). scripts/test-billing.ts asserts
+ *  PRICING[AI_MODEL] exists, so a model migration without a price row fails CI. */
+const FALLBACK_MODEL: string = AI_MODEL;
 
 export function pricingFor(model: string | null | undefined): ModelPricing {
   if (model && PRICING[model]) return PRICING[model];

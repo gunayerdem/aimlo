@@ -6,6 +6,8 @@ import { checkOutputQuality } from "@/evals/generic-detector";
 import { buildPolicyBlock } from "@/lib/ai-policy";
 import { cleanCoachTextDeep } from "@/lib/coach-text";
 import { sanitizeJsonStrings } from "@/lib/prompt-safety";
+// Model id + reasoning_effort TEK KAYNAK (B07 · OLCUM-ARACI-17).
+import { AI_MODEL, AI_REASONING_EFFORT } from "@/lib/ai-model";
 
 /**
  * POST /api/ai/insight
@@ -277,9 +279,9 @@ async function handleInsight(request: NextRequest) {
             Authorization: `Bearer ${apiKey}`,
           },
           body: JSON.stringify({
-            model: "gpt-5-mini",
+            model: AI_MODEL,
             max_completion_tokens: 1500,
-            reasoning_effort: "minimal",
+            reasoning_effort: AI_REASONING_EFFORT,
             // OpenAI auto-cache: prefix-based, 90% discount on cached tokens.
             // systemPrompt (KB + policy) is the stable prefix; userPrompt is per-call.
             // No explicit cache_control needed — auto-handled.
@@ -312,7 +314,7 @@ async function handleInsight(request: NextRequest) {
           // B110 (2026-07-31): userId:null → authedUserId (kullanıcı-başı maliyet görünürlüğü).
           // F8 (pano dalga, 2026-08-04): latencyMs eklendi (insight'ta matchId yok);
           // lib/ai-usage.ts migration'sız ortamda eski kolon setine düşer.
-          saveAiUsage({ userId: authedUserId, routeType: "insight", model: d?.model ?? "gpt-5-mini", promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, cachedTokens: cached, latencyMs: Date.now() - aiStartMs });
+          saveAiUsage({ userId: authedUserId, routeType: "insight", model: d?.model ?? AI_MODEL, promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, cachedTokens: cached, latencyMs: Date.now() - aiStartMs });
         }
         const t: string = d?.choices?.[0]?.message?.content || "";
         try { return { ok: true, value: JSON.parse(t) }; } catch {

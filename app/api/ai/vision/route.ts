@@ -732,7 +732,7 @@ export async function POST(request: NextRequest) {
       saveAiUsage({
         userId: authedUserId,
         routeType: "vision",
-        model: d?.model ?? "gpt-5-mini",
+        model: d?.model ?? VISION_CALL.model,
         promptTokens,
         completionTokens,
         cachedTokens,

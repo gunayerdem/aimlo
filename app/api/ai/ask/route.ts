@@ -4,6 +4,8 @@ import { saveAiUsage } from "@/lib/ai-usage";
 import { buildPolicyBlock } from "@/lib/ai-policy";
 import { finalizeCoachText } from "@/lib/coach-text";
 import { sanitizePromptInput } from "@/lib/prompt-safety";
+// Model id + reasoning_effort TEK KAYNAK (B07 · OLCUM-ARACI-17).
+import { AI_MODEL, AI_REASONING_EFFORT } from "@/lib/ai-model";
 
 /**
  * POST /api/ai/ask — "Koça sor" (B61/F79, pano özellik dalgası, 2026-08-04)
@@ -303,10 +305,10 @@ async function handleAsk(request: NextRequest) {
             Authorization: `Bearer ${apiKey}`,
           },
           body: JSON.stringify({
-            model: "gpt-5-mini",
+            model: AI_MODEL,
             // 1-3 cümlelik tek alan — 400 token bol tavan (kesilme riskine pay).
             max_completion_tokens: 400,
-            reasoning_effort: "minimal",
+            reasoning_effort: AI_REASONING_EFFORT,
             // Prompt-cache: systemPrompt (base + policy) istekten bağımsız sabit
             // prefix — dil başına tek cache hattı; userPrompt per-çağrı.
             messages: [
@@ -340,7 +342,7 @@ async function handleAsk(request: NextRequest) {
           saveAiUsage({
             userId: authedUserId,
             routeType: "ask",
-            model: d?.model ?? "gpt-5-mini",
+            model: d?.model ?? AI_MODEL,
             promptTokens: usage.prompt_tokens ?? 0,
             completionTokens: usage.completion_tokens ?? 0,
             cachedTokens: cached,

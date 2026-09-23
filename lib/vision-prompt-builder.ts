@@ -53,6 +53,8 @@ import { calloutBelongsToMap, mapKey } from "@/lib/map-callouts";
 import { extractKillerWeapon, classifyCompArchetype, buildWeaponCompDirective, normalizeKillerInfoForPrompt } from "@/lib/comp-weapon";
 import { buildHistoryBlock, type RoundHistoryEntry } from "@/lib/history-block";
 import type { VisionPostprocessOpts } from "@/lib/vision-postprocess";
+// Model id + reasoning_effort TEK KAYNAK (B07 · OLCUM-ARACI-17).
+import { AI_MODEL, AI_REASONING_EFFORT } from "@/lib/ai-model";
 
 /* ══════════════════════════════════════════════════════════
    TİPLER
@@ -125,8 +127,8 @@ export type VisionConfidence = "calibrating" | "low" | "medium" | "high";
 // (DESKTOP_VISION_MAX_TOKENS) → prod'da HER istek 450 (maxTokensCap) ile gider;
 // defaultMaxTokens=350 yalnız maxTokens göndermeyen istemcide geçerli.
 export const VISION_CALL = {
-  model: "gpt-5-mini",
-  reasoningEffort: "minimal",
+  model: AI_MODEL,
+  reasoningEffort: AI_REASONING_EFFORT,
   defaultMaxTokens: 350,
   maxTokensCap: 450,
 } as const;
