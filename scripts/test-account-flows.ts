@@ -221,6 +221,26 @@ async function main() {
       idx("redirect") === -1 && (htmlWith.match(/autoComplete="one-time-code"|autocomplete="one-time-code"/gi) ?? []).length === 6 &&
         htmlWith.includes("kaan@example.com"));
 
+    // FB02 inceleme · F34: girişte doğrulanmamış hesaba login/actions.ts sessizce bir kod
+    // gönderiyor; e-posta formu (VerifyEmailStartForm → resendAction) İKİNCİ kodu gönderip
+    // ilkini geçersiz kılıyor. Kod ekranı eskiden bunu söylemiyor ve "Yeni kod gönder"
+    // hemen basılabiliyordu (üçüncü kod + resend kotası 3/5 dk). ?sent=1 → uyarı + 60 sn.
+    const LATEST_RE = /en son gelen e-postadaki kodu gir; önceki kodlar geçersiz/u;
+    const COOLDOWN_RE = /Yeni kod talep etmek için[\s\S]{0,80}60s[\s\S]{0,40}bekle/u;
+    const RESEND_BTN_RE = /Kod gelmedi mi\? Yeni kod gönder/u;
+    const htmlSent = renderToStaticMarkup(
+      (await page.default({ searchParams: Promise.resolve({ email: "kaan@example.com", sent: "1" }) })) as Parameters<typeof renderToStaticMarkup>[0]);
+    t("?sent=1: 'en son gelen e-postadaki kodu gir; önceki kodlar geçersiz' + 'Yeni kod gönder' 60 sn beklemede (fix yok: düğme hemen basılır, uyarı yok)",
+      LATEST_RE.test(htmlSent) && COOLDOWN_RE.test(htmlSent) && !RESEND_BTN_RE.test(htmlSent), htmlSent.slice(0, 200));
+    t("sent işareti yokken ekran AYNEN (eski metin + düğme hemen basılabilir)",
+      !LATEST_RE.test(htmlWith) && !COOLDOWN_RE.test(htmlWith) && RESEND_BTN_RE.test(htmlWith) && /Adresine 6 haneli bir kod gönderdik/u.test(htmlWith));
+    const htmlBogus = renderToStaticMarkup(
+      (await page.default({ searchParams: Promise.resolve({ email: "kaan@example.com", sent: "yes" }) })) as Parameters<typeof renderToStaticMarkup>[0]);
+    const htmlFail = renderToStaticMarkup(
+      (await page.default({ searchParams: Promise.resolve({ email: "kaan@example.com", sent: "1", mailfail: "quota" }) })) as Parameters<typeof renderToStaticMarkup>[0]);
+    t("yalnız sabit sent=1 sayılır; mailfail varken 'yeni kod gönderdik' denmez",
+      !LATEST_RE.test(htmlBogus) && RESEND_BTN_RE.test(htmlBogus) && !LATEST_RE.test(htmlFail) && /Kod gönderilemedi/u.test(htmlFail));
+
     // Saf akış: form mevcut resendAction'ı çağırır, başarıda ?email= adresine geçer.
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const vf = require(repoFile("app/(auth)/verify/VerifyForm")) as {
@@ -243,8 +263,8 @@ async function main() {
       );
       t("resend'e normalize e-posta + purpose=register gidiyor",
         sent.length === 1 && sent[0].email === "kaan@example.com" && sent[0].purpose === "register", JSON.stringify(sent));
-      t("başarıda /verify?email=<girilen>&purpose=register adresine geçiliyor",
-        ok.ok === true && nav.length === 1 && nav[0] === "/verify?email=kaan%40example.com&purpose=register", JSON.stringify(nav));
+      t("başarıda /verify?email=<girilen>&purpose=register&sent=1 adresine geçiliyor (FB02 inceleme · F34: 'yeni kod' işareti)",
+        ok.ok === true && nav.length === 1 && nav[0] === "/verify?email=kaan%40example.com&purpose=register&sent=1", JSON.stringify(nav));
 
       const nav2: string[] = [];
       const fd2 = new FormData();

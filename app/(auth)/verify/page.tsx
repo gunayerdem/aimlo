@@ -27,11 +27,14 @@ const MAIL_FAIL_TEXT: Record<string, string> = {
 export default async function VerifyPage({
   searchParams,
 }: {
-  searchParams: Promise<{ email?: string; purpose?: string; mailfail?: string }>;
+  searchParams: Promise<{ email?: string; purpose?: string; mailfail?: string; sent?: string }>;
 }) {
   const sp = await searchParams;
   const email = (sp.email ?? "").trim().toLowerCase();
   const purpose = sp.purpose === "login" ? "login" : "register";
+  // FB02 inceleme · F34: e-posta formundan (VerifyEmailStartForm) gelindi → az önce YENİ
+  // kod gönderildi; girişte sessizce giden önceki kod artık geçersiz. Yalnız sabit "1".
+  const justSent = sp.sent === "1" && !sp.mailfail;
   // Yalnız bilinen anahtarlar — URL'den gelen serbest metin ekrana basılmaz.
   const mailFail = sp.mailfail ? MAIL_FAIL_TEXT[sp.mailfail] ?? MAIL_FAIL_TEXT.transient : null;
 
@@ -98,7 +101,11 @@ export default async function VerifyPage({
             <span className="text-neutral-300">{email}</span>
           </p>
           <p className="mt-1 text-[12px] text-neutral-400">
-            {mailFail ? "Kod gönderilemedi" : "Adresine 6 haneli bir kod gönderdik"}
+            {mailFail
+              ? "Kod gönderilemedi"
+              : justSent
+                ? "Adresine 6 haneli yeni bir kod gönderdik — en son gelen e-postadaki kodu gir; önceki kodlar geçersiz."
+                : "Adresine 6 haneli bir kod gönderdik"}
           </p>
         </div>
       </div>
@@ -112,7 +119,7 @@ export default async function VerifyPage({
         </div>
       )}
 
-      <VerifyForm email={email} purpose={purpose} />
+      <VerifyForm email={email} purpose={purpose} justSent={justSent} />
     </div>
   );
 }

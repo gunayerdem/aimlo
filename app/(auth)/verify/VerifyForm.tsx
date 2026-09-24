@@ -33,9 +33,13 @@ function cleanString(input: string, max: number): string {
 export function VerifyForm({
   email,
   purpose,
+  justSent = false,
 }: {
   email: string;
   purpose: "register" | "login";
+  /** FB02 inceleme · F34: e-posta formundan az önce YENİ kod gönderildi (?sent=1) →
+   *  "Yeni kod gönder" 60 sn beklesin (üçüncü kod + resend kotası yakılmasın). */
+  justSent?: boolean;
 }) {
   const [verifyState, verifyDoAction, verifyPending] = useActionState(
     verifyAction,
@@ -69,7 +73,7 @@ export function VerifyForm({
   // loops; here the dep + ref-gate guarantees it fires at most once per
   // action result. Disable for this single line with the rationale
   // captured here.
-  const [resendCooldown, setResendCooldown] = useState(0);
+  const [resendCooldown, setResendCooldown] = useState(justSent ? 60 : 0);
   const lastResendStateRef = useRef<ResendState | null>(null);
   useEffect(() => {
     if (resendState.resent && resendState !== lastResendStateRef.current) {
@@ -271,10 +275,16 @@ export function VerifyForm({
  * olmayan e-postaya da `{ ok: true, resent: true }`), authRateLimit("resend")
  * ile sınırlı. Aynı yüzey /verify?email=… sayfasındaki "Yeni kod gönder"
  * düğmesinde zaten vardı; enumeration açılmaz. Başarıda kod giriş ekranına
- * (/verify?email=<girilen>&purpose=register) geçilir.
+ * (/verify?email=<girilen>&purpose=register&sent=1) geçilir.
+ *
+ * FB02 inceleme · F34: doğrulanmamış hesapla giriş denemesi login/actions.ts'te
+ * sessizce bir kod üretip gönderiyor; bu form ikinci bir kod gönderip ilkini
+ * geçersiz kılıyor (user_metadata.otp ezilir). `sent=1` işareti kod ekranına
+ * "en son gelen e-postadaki kodu gir" uyarısını ve 60 sn "Yeni kod gönder"
+ * beklemesini taşır (yalnız sabit işaret; URL'den serbest metin basılmaz).
  */
 export function verifyHref(email: string): string {
-  return `/verify?email=${encodeURIComponent(email.trim().toLowerCase())}&purpose=register`;
+  return `/verify?email=${encodeURIComponent(email.trim().toLowerCase())}&purpose=register&sent=1`;
 }
 
 /** Saf akış (test edilebilir): resend'i çağır, başarıda kod ekranına geç. */
