@@ -746,6 +746,38 @@ console.log("\n[Y01/Y03/Y09] F14 halkası: geçmiş dönem korunur, ham TR konum
   }
 }
 
+// ── Yakınsama Y04 İNCELEME: -mIştIn muafiyeti açık "bu round/az önce" çapasını ve F83'ü ezmez ──
+// Gerçek M1-R4 (hafıza R1 b site, R3 a tree; bu round konumu ÖLÇÜLMEDİ). 4acb7c9 nihai metinleri:
+// ilk üç vaka girdisi AYNEN geçiyordu ("Az önce B Site'ta ölmüştün", "Bu round B Site'ta vurulmuştun",
+// "R3'te B Site'ta ölmüştün") — ölçülmemiş round'a geçmiş konum; 25ac869 üçünü de nötrlüyordu.
+console.log("\n[Y04 inceleme] -mIştIn geçmiş kuralı açık bu-round çapasını ve sayısal round kuralını atlamaz");
+{
+  const real = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "evals", "real-rounds-23.json"), "utf8")) as { id: string; body: Record<string, unknown> }[];
+  const b = real.find((x) => x.id === "M1-R4-ascent-jett")!.body as VisionPromptBody;
+  const cases: [string, string, string][] = [
+    ["'Az önce B Site'ta ölmüştün' → nötr",
+      "Az önce B Site'ta ölmüştün; açıyı erken verdin, siperin yanında kal.",
+      "Az önce o açıda ölmüştün; açıyı erken verdin, siperin yanında kal."],
+    ["'Bu round B Site'ta vurulmuştun' → nötr",
+      "Bu round B Site'ta vurulmuştun; açıyı erken verdin.",
+      "Bu round o açıda vurulmuştun; açıyı erken verdin."],
+    ["'R3'te B Site'ta ölmüştün' (R3 = a tree) → nötr",
+      "R3'te B Site'ta ölmüştün; açıyı erken verdin.",
+      "R3'te o açıda ölmüştün; açıyı erken verdin."],
+    ["Y04 hedefi '… ölmeden önce B Site'ta da ölmüştün' (R1 = b site) korunur, A Tree nötr",
+      "Bu round A Tree'de ölmeden önce B Site'ta da ölmüştün; açıyı erken verdin.",
+      "Bu round o açıda ölmeden önce B Site'ta da ölmüştün; açıyı erken verdin."],
+  ];
+  const vb = buildVisionContext(b, "tr");
+  for (const [ad, raw, want] of cases) {
+    const o = finalizeVisionFeedback(
+      { deathAnalysis: raw, enemyAnalysis: [], nextRoundSuggestion: "Siperin yanında kal." },
+      visionPostprocessOpts(b, "tr", vb.factGround),
+    ).deathAnalysis;
+    t(ad, o === want, `→ "${o}"`);
+  }
+}
+
 // ── TEK KAYNAK KİLİDİ (OLCUM-ARACI-08, 2026-09-23) ──────────────────────────
 // Vision son-işlem zinciri DÖRT yerde elle kopyalanmıştı (route, eval-vision,
 // test-pipeline-chain, replay-tr) ve her yeni halka yalnız bazı kopyalara

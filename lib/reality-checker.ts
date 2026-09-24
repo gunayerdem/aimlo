@@ -144,7 +144,7 @@ export interface FactGround {
   // Geçmiş round'ların ÖLÇÜLMÜŞ (died===true, position_confidence high/medium) ölüm
   // yerleri. Muafiyet şartı: aynı yan-cümlede konuma en yakın zaman çapası GEÇMİŞ
   // ("R2'de", "önceki round", "son 3 round'da", "earlier") olmalı; "bu round/şimdi/
-  // this round" ya da hiç çapa yoksa muaf DEĞİL (historyAnchorAt; FB05 · F83: sayısal round
+  // this round" ya da hiç çapa yoksa muaf DEĞİL (historyAnchorPick; FB05 · F83: sayısal round
   // çapasında yalnız o round'un kaydı muaf tutar — historyMatchesAnchor).
   historyLocations?: string[];
   // FB05 · F83 (2026-09-24): geçmiş konumların ROUND'A GÖRE dizini (round_index → ölçülmüş
@@ -3116,11 +3116,6 @@ function historyAnchorPick(full: string, start: number, end: number): { at: numb
   const left = marks.filter((x) => x.at < end).sort((a, b) => b.at - a.at)[0];
   return left ?? marks.filter((x) => x.at >= end).sort((a, b) => a.at - b.at)[0] ?? null;
 }
-/** [start,end) aralığındaki konum iddiasına en yakın zaman çapası: "past" | "current" | null. */
-function historyAnchorAt(full: string, start: number, end: number): "past" | "current" | null {
-  const pick = historyAnchorPick(full, start, end);
-  return pick ? (pick.past ? "past" : "current") : null;
-}
 
 // ── ROUND'A BAĞLI GEÇMİŞ MUAFİYETİ (FB05 · F83, 2026-09-24) ────────────────────────
 // KANIT (exp9, gerçek korpus M1-R4, hafıza R1=b site, R3=a tree, R4 konumu ölçülmedi):
@@ -3192,15 +3187,43 @@ function ownPredicatePluperfect(full: string, calloutEnd: number): boolean {
   }
   return false;
 }
+// Yakınsama Y04 İNCELEME (2026-09-25): -mIştIn kuralı çapa kontrolünden ÖNCE koşuyordu → yukarıdaki
+// "bu round/şimdi çapası varsa ASLA" sözleşmesi ve F83 round kuralı atlanıyordu. KANIT (prod zinciri
+// buildVisionContext + finalizeVisionFeedback, gerçek M1-R4, hafıza R1=b site / R3=a tree, R4 konumu
+// ÖLÇÜLMEDİ; 25ac869 ↔ 4acb7c9): "Az önce B Site'ta ölmüştün" (base: "Az önce o açıda ölmüştün"),
+// "Bu round B Site'ta vurulmuştun" (base: "…o açıda vurulmuştun"), "Bu round açıyı erken verdin, B
+// Site'ta ölmüştün" ve F83'ün kendi sınıfı "R3'te B Site'ta ölmüştün" (R3 = a tree; base "R3'te o
+// açıda ölmüştün") HEAD'de AYNEN geçiyordu — ölçülmemiş round'a geçmiş konum yapıştırma (canlı-test #3
+// launch-blocker sınıfı). KURAL: (1) geçmiş çapası varsa karar YALNIZ historyMatchesAnchor'undur
+// (-mIştIn onu atlayamaz); (2) açık "bu round/şimdi/az önce" çapası -mIştIn'i ancak çapa ile callout
+// arasında ZAMAN AYIRICI varsa bırakır (Y04'ün hedefi "Bu round A Tree'de ölmeden ÖNCE B Site'ta da
+// ölmüştün"); (3) çapa yoksa Y04 aynen. Ayırıcı yalnız SIRALAMA bildirir: önce/sonra/evvel, -mAdAn,
+// -DIktAn, -IncA. -ken (eşzamanlı) ve -ArAk (tarz: "Jett olarak") zamanı AYIRMAZ; "erken" -ken değil.
+// Yön: cümle başındaki çapa virgülden sonraki yan-cümleyi de yönetir ("Bu round açıyı erken verdin,
+// B Site'ta ölmüştün" → nötr); callout'tan SONRA virgülle gelen çapa yalnız kendi yan-cümlesini
+// ("B Site'ta ölmüştün, bu round ise …" → R1 olgusu korunur, 4acb7c9 davranışı).
+const TIME_SEPARATOR_WORD_RE = /^(?:önce|sonra|evvel)$|(?:m[ae]d[ae]n|[ıiuü]nc[ae]|[dt][ıiuü]kt[ae]n)$/u;
+function currentAnchorSeparated(
+  full: string, pick: { at: number; text: string }, calloutStart: number, calloutEnd: number,
+): boolean {
+  const aEnd = pick.at + pick.text.length;
+  const right = pick.at >= calloutEnd;
+  const between = aEnd <= calloutStart ? full.slice(aEnd, calloutStart) : right ? full.slice(calloutEnd, pick.at) : "";
+  if (right && between.includes(",")) return true;
+  return between.split(/\s+/).some((w0) =>
+    TIME_SEPARATOR_WORD_RE.test(w0.toLocaleLowerCase("tr").replace(/[^\p{L}]/gu, "")));
+}
 function historyExempt(
   key: string, history: ReadonlySet<string>, anchoredBefore: ReadonlySet<string>,
   full: string, start: number, end: number, rounds?: ReadonlyMap<number, string>,
 ): boolean {
   if (!history.has(key)) return false;
-  if (ownPredicatePluperfect(full, start + key.length)) return true;   // Y04: -mIştIn yüklemi = geçmiş
-  const a = historyAnchorAt(full, start, end);
-  if (a === "past") return historyMatchesAnchor(key, history, rounds, full, start, end);
-  return a === null && anchoredBefore.has(key);
+  const pick = historyAnchorPick(full, start, end);
+  if (pick?.past) return historyMatchesAnchor(key, history, rounds, full, start, end);   // F83 (Y04 inceleme (1))
+  // Y04: -mIştIn yüklemi = geçmiş; açık "bu round/az önce" çapası ayırıcısız yönetiyorsa DEĞİL (2).
+  if (ownPredicatePluperfect(full, start + key.length)
+    && (pick === null || currentAnchorSeparated(full, pick, start, start + key.length))) return true;
+  return pick === null && anchoredBefore.has(key);
 }
 
 export function neutralizeUnprovenLocations(

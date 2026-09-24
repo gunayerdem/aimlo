@@ -960,6 +960,28 @@ console.log("\n════ FB05 · F52 · KONUM ÖLÇÜLMEMİŞKEN YAN-CÜMLE D
     rc("Maçın başında Ascent B Site'ta da ölmüştün.", rh4), "Maçın başında Ascent B Site'ta da ölmüştün.");
   // Zarf-fiil yüklemi ("ölmeden") geçmiş çapası DEĞİL; ölçülmemiş ad -mIştIn'le de muaf değil.
   eq("148f '-mIştIn' + ölçülmemiş ad (Market) → nötr", rc("Market'te seni bekleyip vurmuşlardı, ölmüştün.", rh4), "O açıda seni bekleyip vurmuşlardı, ölmüştün.");
+  // Yakınsama Y04 İNCELEME: -mIştIn kuralı çapa kontrolünden ÖNCE koşup açık "bu round/az önce"
+  // çapasını ve F83 round kuralını eziyordu. 4acb7c9 (HEAD) çıktıları: 148g-148k girdisi AYNEN geçiyordu;
+  // 25ac869 (Y04 öncesi) hepsini nötrlüyordu. Ölçülmemiş round'a geçmiş konum yapıştırma sınıfı.
+  eq("148g 'Az önce B Site'ta ölmüştün' (açık bu-round çapası) → nötr",
+    rc("Az önce B Site'ta ölmüştün; açıyı erken verdin.", rh4), "Az önce o açıda ölmüştün; açıyı erken verdin.");
+  eq("148h 'Bu round B Site'ta vurulmuştun' → nötr",
+    rc("Bu round B Site'ta vurulmuştun; açıyı erken verdin.", rh4), "Bu round o açıda vurulmuştun; açıyı erken verdin.");
+  eq("148i 'Bu round açıyı erken verdin, B Site'ta ölmüştün' ('erken' ayırıcı değil) → nötr",
+    rc("Bu round açıyı erken verdin, B Site'ta ölmüştün.", rh4), "Bu round açıyı erken verdin, o açıda ölmüştün.");
+  eq("148j 'Bu round Jett olarak B Site'ta ölmüştün' (-ArAk tarz, ayırıcı değil) → nötr",
+    rc("Bu round Jett olarak B Site'ta ölmüştün.", rh4), "Bu round Jett olarak o açıda ölmüştün.");
+  eq("148k F83: 'R3'te B Site'ta ölmüştün' (R3 = a tree) → nötr, -mIştIn round kuralını atlamaz",
+    rc("R3'te B Site'ta ölmüştün; açıyı erken verdin.", rh4), "R3'te o açıda ölmüştün; açıyı erken verdin.");
+  // Y04 kazanımları korunur: zaman ayırıcı (önce/-DIktAn), çapasız -mIştIn, callout'tan SONRA virgülle
+  // gelen çapa (yalnız kendi yan-cümlesini yönetir), doğru sayısal round.
+  for (const s of [
+    "Bu round'dan önce B Site'ta da ölmüştün; açıyı erken verdin.",
+    "Bu round öldükten sonra B Site'ta ölmüştün.",
+    "B Site'ta ölmüştün; açıyı erken verdin.",
+    "B Site'ta ölmüştün, bu round ise açıyı erken verdin.",
+    "R1'de B Site'ta ölmüştün; açıyı erken verdin.",
+  ]) same(`148l Y04 kazanımı bayt-aynı: "${s}"`, rc(s, rh4), s);
   // Konum ÖLÇÜLMÜŞSE bu geçiş hiç çalışmaz (bayrak false değil).
   const c126 = "Rakip seni A Tree köşesinden vuruyor.";
   same("126 hasDeathLocation:true → bayt-aynı",
