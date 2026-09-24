@@ -17,6 +17,7 @@
  */
 import { realityCheck, extractKillerAgent, buildFactGround } from "../lib/reality-checker";
 import { buildReportCleaner, validateRequest } from "../lib/report-prompt";
+import { finalizeVisionFeedback } from "../lib/vision-postprocess";
 
 let fail = 0;
 function t(name: string, ok: boolean, extra = "") {
@@ -269,6 +270,60 @@ console.log("\n[F44] katil ikamesi çevresini onarıyor (öncül/tamlama/tire/pa
   const known = "Düşman Jett seni B Main'de vurdu.";
   t("F44 NEG hasKiller=true iken bayt-aynı",
     realityCheck(known, [] as never, { hasKiller: true } as never, "death", "tr").text === known);
+}
+
+// ── FB07 · F53: katil bilinmezken yüklem-isim / edilgen / "yakaladı" kalıpları ────────
+// Fix olmadan 9 negatif vakanın hepsi DEĞİŞMEDEN geçiyordu (katil uydurması kullanıcıya).
+// Korpus: cycleab-luna-none M1-R19 "düşman Jett seni orada yakaladı", cycleb06-pre-syn-rp
+// E25 EA "Cypher was the killer at Hookah" (killerInfo yok).
+console.log("\n[F53] katil bilinmezken yaygın katil kalıpları nötrleniyor (DA/EA/NR)");
+{
+  const fg53 = { ...buildFactGround({ died: true }, { deathLocation: "Hookah" }), playerAgentKnown: true, playerAgent: "Waylay" } as never;
+  const rc53 = (s: string, lang: "tr" | "en", fg = fg53) => realityCheck(s, [] as never, fg, "death", lang, "bind").text;
+  const NEG9: [string, "tr" | "en", string][] = [
+    ["Cypher was the killer at Hookah.", "en", "An enemy was the killer at Hookah."],
+    ["The killer was Cypher.", "en", "The killer was an enemy."],
+    ["You were killed by Cypher at Hookah.", "en", "You were killed by an enemy at Hookah."],
+    ["You died to Cypher at Hookah.", "en", "You died to an enemy at Hookah."],
+    ["Cypher got you at Hookah.", "en", "An enemy got you at Hookah."],
+    ["Katil Cypher'dı, Hookah'ta seni bekliyordu.", "tr", "Katil bir düşmandı, Hookah'ta seni bekliyordu."],
+    ["Seni öldüren Cypher Hookah'ta bekliyordu.", "tr", "Seni öldüren bir düşman Hookah'ta bekliyordu."],
+    ["Hookah'ta Cypher'a öldün.", "tr", "Hookah'ta bir düşmana öldün."],
+    ["Cypher seni Hookah'ta yakaladı.", "tr", "Bir düşman seni Hookah'ta yakaladı."],
+  ];
+  for (const [src, lang, want] of NEG9) {
+    const out = rc53(src, lang);
+    t(`F53 nötr: "${src}"`, out === want && !/Cypher/.test(out), `→ "${out}"`);
+  }
+  // Pozitif tutarlılık (STEP1'in "Jett/Reyna seni yakaladı" davranışıyla eşit).
+  const p1 = rc53("Jett seni orada yakaladı.", "tr");
+  t("F53 'Jett seni orada yakaladı.' → 'Bir düşman seni orada yakaladı.'", p1 === "Bir düşman seni orada yakaladı.", `→ "${p1}"`);
+  const p2 = rc53("Jett got you.", "en");
+  t("F53 'Jett got you.' → 'An enemy got you.'", p2 === "An enemy got you.", `→ "${p2}"`);
+  // Bayt-aynı: iyelik (util/bilgi gözlemi), katil BİLİNİYORKEN, oyuncunun kendi ajanı "X olarak".
+  const SAME: [string, "tr" | "en", never?][] = [
+    ["Sova'nın okları seni yakaladı.", "tr"],
+    ["Cypher's trip got you at Hookah.", "en"],
+    ["Waylay olarak Hookah'a girdin ve orada yakalandın.", "tr"],
+    ["Waylay olarak girişi açtın, Hookah'ta rakibi yakaladın.", "tr"],
+  ];
+  for (const [s, lang] of SAME) {
+    const out = rc53(s, lang);
+    t(`F53 bayt-aynı: "${s}"`, out === s, `→ "${out}"`);
+  }
+  const fgK = { ...buildFactGround({ died: true, killerInfo: "killed by cypher" }, { deathLocation: "Hookah" }), playerAgentKnown: true, playerAgent: "Waylay" } as never;
+  for (const [s, lang] of [["Katil Cypher'dı, Hookah'ta seni bekliyordu.", "tr"], ["Cypher was the killer at Hookah.", "en"]] as [string, "tr" | "en"][]) {
+    const out = rc53(s, lang, fgK);
+    t(`F53 hasKiller=true bayt-aynı: "${s}"`, out === s, `→ "${out}"`);
+  }
+  // Zincir: EA maddesi (E25'te sızıntı EA'dan geldi) — prod finalizeVisionFeedback.
+  const fin = finalizeVisionFeedback(
+    { deathAnalysis: "Hookah'ta öldün.", enemyAnalysis: ["Cypher was the killer at Hookah and used the map's elevated angle to punish wide swings."], nextRoundSuggestion: "Hold Hookah with a teammate." },
+    { factGround: fg53, lang: "en", map: "bind", agent: "Waylay", roundHistory: [] } as never,
+  );
+  t("F53 zincir EA: 'Cypher was the killer' → 'An enemy was the killer'",
+    fin.enemyAnalysis[0] === "An enemy was the killer at Hookah and used the map's elevated angle to punish wide swings.",
+    `→ ${JSON.stringify(fin.enemyAnalysis)}`);
 }
 
 console.log(`\n${fail === 0 ? "TÜM TESTLER GEÇTİ ✓" : `${fail} TEST BAŞARISIZ ✗`}`);

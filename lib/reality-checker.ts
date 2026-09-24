@@ -1781,6 +1781,39 @@ export function guardUnprovenFacts(
         && /^\s+olarak(?![a-zçğıöşüâîû])/i.test(full.slice(off + m.length))
         ? m
         : AN_ENEMY);
+    // STEP2b (FB07 · F53): STEP2 katil iddiasını yalnız "<Ajan> … <KV2 fiili>" sırasıyla
+    // tanıyordu; aynı olgu yüklem-isimle, edilgen yapıyla ya da listede olmayan fiille
+    // söylenince HİÇBİR katman devreye girmiyordu. Korpus (b9b0564, killerInfo'suz 796
+    // örnek): 7 sızıntı — cycleab-luna-none M1-R19 "bu round düşman Jett seni orada
+    // yakaladı" (gerçek maç verisi), cycleb06-pre-syn-rp E25 "Cypher was the killer at
+    // Hookah" (EA). Kurallar DA/EA/NR'nin üçünde de (realityCheck) çalışır.
+    //  (i) "yakaladı/yakaladılar" (TR) ve "got you" (EN): çok anlamlı ("gördü/bilgi aldı")
+    //      → İYELİK MUAFİYETİ: ajan adından hemen sonra kesme işareti gelirse ("Sova'nın
+    //      okları seni yakaladı", "Cypher's trip got you" = util/bilgi gözlemi) dokunulmaz.
+    //      Oyuncunun kendi ajanı + "olarak" muafiyeti STEP2 ile aynı.
+    const KV2_CATCH = "(?:yakaladılar|yakaladı|got you)";
+    const SINGLE_CATCH = new RegExp(`${NLB}(?:${LEAD_ALT})?${KILLER_TOKEN}(?!['’])\\b(?=[^.!?;:—\\n]*?\\s${KV2_CATCH}${NL})`, "gi");
+    result = result.replace(SINGLE_CATCH, (m: string, off: number, full: string) =>
+      selfAgent
+        && m.replace(/^the\s+/i, "").toLowerCase() === selfAgent
+        && /^\s+olarak(?![a-zçğıöşüâîû])/i.test(full.slice(off + m.length))
+        ? m
+        : AN_ENEMY);
+    //  (ii) yüklem-isim / edilgen / "öldün" kalıpları — yalnız ajan adı iner, cümle kalır.
+    if (trText) {
+      // "Katil Cypher'dı" → "Katil bir düşmandı" (kopula eki aşağıdaki ek tablosunda).
+      result = result.replace(new RegExp(`(${NLB}katil(?:i|in)?\\s+)(?:${NAME_ALT})${NL}`, "gi"), `$1${AN_ENEMY}`);
+      // "Seni öldüren Cypher …" → "Seni öldüren bir düşman …"
+      result = result.replace(new RegExp(`(${NLB}seni\\s+öldüren\\s+)(?:${NAME_ALT})${NL}`, "gi"), `$1${AN_ENEMY}`);
+      // "Cypher'a öldün" → "bir düşman'a öldün" → ek tablosu "bir düşmana öldün".
+      result = result.replace(new RegExp(`${NLB}(?:${LEAD_ALT})?(?:${NAME_ALT})(?=['’]\\s*y?[ae]\\s+öldün${NL})`, "gi"), AN_ENEMY);
+    } else {
+      // "Cypher was the killer" → "an enemy was the killer"; "The killer was Cypher" →
+      // "The killer was an enemy"; "killed by / died to Cypher" → "… an enemy".
+      result = result.replace(new RegExp(`${NLB}(?:${LEAD_ALT})?(?:${NAME_ALT})(?=\\s+was\\s+the\\s+killer${NL})`, "gi"), AN_ENEMY);
+      result = result.replace(new RegExp(`(${NLB}killer\\s+was\\s+)(?:the\\s+)?(?:${NAME_ALT})${NL}`, "gi"), `$1${AN_ENEMY}`);
+      result = result.replace(new RegExp(`(${NLB}(?:killed\\s+by|died\\s+to)\\s+)(?:the\\s+)?(?:${NAME_ALT})${NL}`, "gi"), `$1${AN_ENEMY}`);
+    }
     // STEP3: kalan stray "unknown"/"bilinmeyen" → genel-düşman
     result = result.replace(new RegExp(`${NLB}(?:unknown|bilinmeyen)${NL}`, "gi"), AN_ENEMY);
     // STEP4: "bir düşman ya da bir düşman" / "an enemy or an enemy" run'larını tek'e çökert
@@ -1830,6 +1863,9 @@ export function guardUnprovenFacts(
         [/bir düşman['’]\s*(?:[yn]?[ıiuü])?y?l[ae](?![\p{L}])/giu, "bir düşmanla"],
         [/bir düşman['’]\s*[yn]?[ıiuü](?![\p{L}])/giu, "bir düşmanı"],
         [/bir düşman['’]\s*[yn]?[ae](?![\p{L}])/giu, "bir düşmana"],
+        // FB07 · F53: kopula ("Katil Cypher'dı" → "Katil bir düşman'dı" → "bir düşmandı").
+        [/bir düşman['’]\s*(?:y?d|t)[ıiuü]r(?![\p{L}])/giu, "bir düşmandır"],
+        [/bir düşman['’]\s*(?:y?d|t)[ıiuü](?![\p{L}])/giu, "bir düşmandı"],
         [/bir düşman['’](?![\p{L}])/giu, "bir düşman"],
       ];
       for (const [re, rep] of AN_ENEMY_SUFFIX) result = result.replace(re, rep);
