@@ -156,9 +156,16 @@ export function enforceAgentKit(text: string, agent: string | undefined | null):
   // FB08 inceleme · F40 (medium): EN zincirinde cleanCoachText TR kit terimini İngilizceye ÖNCE
   // çeviriyor (tel→tripwire, duvar→wall, …); bu katman yalnız TR terimleri tanıdığı için eskiden
   // yakaladığı sızıntıyı artık kaçırıyordu (Killjoy "bot/tel" → "bot/tripwire", Jett "smoke/duvar" →
-  // "smoke/wall"). Aynı kural EN karşılıklarıyla da (KIT_TERM_EN) + EN bağlaçları (or/and) kurulur;
-  // yalnız TR karşılığından FARKLI olan terim çiftinde → TR metin bayt-aynı.
-  const connEn = "(?:\\s*/\\s*|\\s+or\\s+|\\s+and\\s+|\\s*,\\s*)";
+  // "smoke/wall"). Aynı kural EN karşılıklarıyla da (KIT_TERM_EN) kurulur; yalnız TR karşılığından
+  // FARKLI olan terim çiftinde → TR metin bayt-aynı.
+  // Yakınsama Y05 (2026-09-24): EN bağlacı YALNIZ seçenek bildiren "/" ve "or" (modelin sızıntı kalıbı:
+  // "smoke/wall", "bot or tripwire"). "and" ve "," düşman/müttefik kitini ya da harita duvarını
+  // ANLATIRKEN doğal olarak geçiyor. KANIT (probe, oyuncu Jett, EN): EA "The enemy Viper used her smoke
+  // and wall to split B Site" → "…used her smoke to split B Site"; "Harbor's smoke, wall and shield
+  // covered their push" → "Harbor's smoke and shield…"; Reyna "The enemy Phoenix used flash and wall"
+  // → "…used flash" (78d54c4 bayt-aynı — eski katman yalnız TR terimleri tanıyordu). Düşman olgusu
+  // kırpılıyordu. TR bağlaç kümesi (ve/,) bu commit'in kapsamı dışında (eski davranış, ayrı sınıf).
+  const connEn = "(?:\\s*/\\s*|\\s+or\\s+)";
   for (const f of forbidden) {
     const fe = KIT_TERM_EN[f] ?? f;
     for (const v of kit) {

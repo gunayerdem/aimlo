@@ -495,11 +495,25 @@ console.log("\n[F86] EN rota guard'ı: 'losses/deaths came from X' ve ölçülm�
     ["Losses came from B Long.", { ...fg, hasDeathLocation: true, deathLocation: "b long" }],
     ["Your kills came from A Short in R3.", { ...fg, hasDeathLocation: true, deathLocation: "a short" }],
   ] as [string, object][]) check(`nedensellik + ÖLÇÜLMÜŞ konum bayt-aynı: "${s}"`, g(s, f) === s, `→ "${g(s, f)}"`);
+  // Yakınsama Y10: eski beklentiler fiil-yalın bozuk İngilizceyi ("Most of your deaths came.",
+  // "Losses came.") KİLİTLİYORDU. Alanın tek içeriğinde konum "there" ile nötrlenir; fiilin ardından
+  // harfle başlayan tamamlayıcı varsa ("in R3") fiil kalır (kurallı).
   for (const [s, want] of [
-    ["Most of your deaths came from Hookah.", "Most of your deaths came."],
-    ["Losses came from B Long.", "Losses came."],
+    ["Most of your deaths came from Hookah.", "Most of your deaths came from there."],
+    ["Losses came from B Long.", "Losses came from there."],
     ["Your kills came from A Short in R3.", "Your kills came in R3."],
+    ["Most of your deaths came from Garden, so rotate earlier.", "Rotate earlier."],
+    ["You won the pistol. Losses came from B Long, and you rotated late.", "You won the pistol. You rotated late."],
   ] as [string, string][]) check(`nedensellik + ÖLÇÜLMEMİŞ konum → konum düşer: "${s}"`, g(s) === want, `→ "${g(s)}"`);
+  // Dar artık kilidi: hiçbir F86 çıktısında özne + yalın "came" + noktalama/son yok.
+  const ORPHAN_CAME = /\b(?:losses|deaths|kills|mistakes|rounds|death|kill)\s+came\s*(?:[.,;]|$)/i;
+  for (const s of ["Most of your deaths came from Hookah.", "Losses came from B Long.", "Most of your deaths came from Garden, so rotate earlier.", "Your death came from B Main."]) {
+    check(`fiil-yalın 'came' artığı yok: "${s}"`, !ORPHAN_CAME.test(g(s)), `→ "${g(s)}"`);
+  }
+  // Rapor temizleyici (ER2, Bind; Garden ölçülmemiş): kullanıcıya giden yol.
+  const er2Garden = er2("You won 13-8. Most of your deaths came from Garden, so rotate earlier.", 1000, "(FALLBACK)");
+  check("ER2 'Most of your deaths came from Garden, so rotate earlier.' → 'Rotate earlier.' (HEAD: '…came, so rotate earlier.')",
+    er2Garden === "You won 13-8. Rotate earlier.", `→ "${er2Garden}"`);
   // Liste: yalnız ölçülmemiş üye düşer; tamamı ölçülmemişse yan-cümle bütün düşer (yüklemsiz artık yok).
   const er2Alt = er2("You won 13-8. Losses came from A Short (R4) and B Long (R14); Hookah death was a solo entry into a Cypher trap with a Vandal.", 1000, "(FALLBACK)");
   check("ER2 'Losses came from A Short (R4) and B Long (R14)' (R4 = Hookah, R14 = Showers) → yan-cümle düşer (HEAD: bayt-aynı)",
@@ -519,6 +533,11 @@ console.log("\n[F86] EN rota guard'ı: 'losses/deaths came from X' ve ölçülm�
   const e1out = finalizeVisionFeedback({ deathAnalysis: "Your death came from B Main after a wide peek into the Operator.", enemyAnalysis: [], nextRoundSuggestion: "Hold a tighter angle." },
     visionPostprocessOpts(e1b, "en", e1fg)).deathAnalysis;
   check("E1 zincir: 'Your death came from B Main …' (ölçülen A Main) → B Main YOK (HEAD: bayt-aynı)", !/B Main/.test(e1out) && /Your death came after a wide peek/.test(e1out), `→ "${e1out}"`);
+  // Yakınsama Y10: vision zincirinde tek cümlelik DA fiil-yalın kalmaz (HEAD: "Most of your deaths came.").
+  const e1solo = finalizeVisionFeedback({ deathAnalysis: "Most of your deaths came from B Main.", enemyAnalysis: [], nextRoundSuggestion: "Hold a tighter angle." },
+    visionPostprocessOpts(e1b, "en", e1fg)).deathAnalysis;
+  check("E1 zincir: 'Most of your deaths came from B Main.' → 'came from there' (fiil-yalın artık yok, B Main yok)",
+    e1solo === "Most of your deaths came from there.", `→ "${e1solo}"`);
   // TR simetrisi: ölçülmüş konum TR rota-kökeninde de silinmez (eski yorumun "TR ile aynı ilke" iddiası).
   const trM = realityCheck("Jett Hookah'tan gelip seni öldürdü.", [] as never, fgHookah as never, "death", "tr").text;
   check("TR ölçülmüş konum: 'Hookah'tan gelip' korunur (HEAD: siliniyordu)", /Hookah'tan gelip seni öldürdü/.test(trM), `→ "${trM}"`);

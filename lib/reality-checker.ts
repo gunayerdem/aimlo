@@ -2551,6 +2551,27 @@ export function guardUnprovenFacts(
           edits.push({ start: cs, end: Math.min(result.length, ce + 1), text: "" });
           continue;
         }
+        // Yakınsama Y10 (2026-09-24): fiil-yalın artık ("Most of your deaths came.", "…came, so rotate
+        // earlier.") bozuk İngilizceydi ve test-en-leak bunu beklenen çıktı diye kilitliyordu. KANIT
+        // (probe): vision E1 "Most of your deaths came from B Main." → "Most of your deaths came.";
+        // rapor ER2 "Most of your deaths came from Garden, so rotate earlier." → "…came, so rotate
+        // earlier." Fiil yalnız ardından HARFLE başlayan bir tamamlayıcı gelirse kalır ("came in R3",
+        // "came after a wide peek" — kurallı). Aksi hâlde:
+        //  (a) kuyruk ", so/and/but …" bağlacıyla sürüyorsa nedensellik parçası bağlaçla birlikte düşer,
+        //      kalan cümle büyük harfle başlar ("Rotate earlier.");
+        //  (b) alanın tek içeriğiyse (düşürülemez — vision NR'de boş alan ham metni geri getirir) konum
+        //      EN nötrleyicisinin yer tutucusuyla ("there") nötrlenir: "Losses came from there."
+        //      Kümelenme iddiası modelin kendi cümlesi; yeni olgu eklenmez, ölçülmemiş YER düşer.
+        if (!/^\s*\p{L}/u.test(restAfter)) {
+          const conj = /^\s*,\s*(?:so|and|but)\s+(?=\p{L})/iu.exec(restAfter);
+          if (conj) {
+            const lead = /^\s*/.exec(result.slice(cs))![0].length;   // cümle arası boşluk korunur
+            edits.push({ start: cs + lead, end: off + whole.length + conj[0].length, text: "" });
+            continue;
+          }
+          edits.push({ start: off, end: off + whole.length, text: `${verb}${prep}there` });
+          continue;
+        }
       }
       edits.push({ start: off, end: off + whole.length, text: verb });
     }

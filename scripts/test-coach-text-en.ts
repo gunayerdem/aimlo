@@ -18,7 +18,7 @@ import { realityCheck } from "../lib/reality-checker";
 import { buildVisionContext, visionPostprocessOpts, type VisionPromptBody } from "../lib/vision-prompt-builder";
 import { finalizeVisionFeedback, toRoundMemory } from "../lib/vision-postprocess";
 import { EN_VISION_SCENARIOS } from "../evals/en-corpus";
-import { buildAgentAbilityHint, AGENT_ABILITIES } from "../lib/agent-abilities";
+import { buildAgentAbilityHint, AGENT_ABILITIES, enforceAgentKit } from "../lib/agent-abilities";
 import { detectEnLeak } from "../evals/en-leak-detector";
 import { SCENARIOS as VISION_SCENARIOS, buildEvalRequest } from "./eval-vision";
 const { cleanCoachText } = CT;
@@ -262,6 +262,25 @@ console.log("\n[9] FB08 · F40 — EN kit terimleri: prompt İngilizce sade teri
   t("F40c Jett 'smoke/duvar' → 'smoke' (wall önerilmez)", !/\bwall\b/i.test(jt) && /throw your smoke before/.test(jt), `→ "${jt}"`);
   const cy = chainKit("cypher");
   t("F40c Cypher kendi kiti (tripwire) korunur, bot düşer", /Set your tripwire on the flank/.test(cy) && !/\bbot\b/.test(cy), `→ "${cy}"`);
+  // Yakınsama Y05: EN "and" / "," düşman kitini ya da harita duvarını anlatır — kırpılmaz (HEAD: bc19cb4
+  // "…used her smoke and wall…" → "…used her smoke…"). Doğrudan guard + prod zinciri (EA dahil).
+  for (const [agent, s] of [
+    ["jett", "The enemy Viper used her smoke and wall to split B Site before they pushed."],
+    ["jett", "Harbor's smoke, wall and shield covered their push."],
+    ["reyna", "The enemy Phoenix used flash and wall to enter."],
+    ["jett", "Hold behind the wall and dash out after the first shot."],
+  ] as [string, string][]) {
+    const o = enforceAgentKit(s, agent);
+    t(`Y05 ${agent} 'and'/',' düşman kiti/harita duvarı bayt-aynı: "${s.slice(0, 40)}…"`, o === s, `→ "${o}"`);
+  }
+  const b5 = { died: true, map: "bind", agent: "jett", side: "defending", lang: "en" } as VisionPromptBody;
+  const ea5 = finalizeVisionFeedback(
+    { deathAnalysis: "You were exposed.", enemyAnalysis: ["The enemy Viper used her smoke and wall to split B Site before they pushed."], nextRoundSuggestion: "Stay near cover." },
+    visionPostprocessOpts(b5, "en", buildVisionContext(b5, "en").factGround),
+  ).enemyAnalysis.join(" ");
+  t("Y05 prod zinciri EA 'smoke and wall' (düşman Viper) korunur", /smoke and wall/.test(ea5), `→ "${ea5}"`);
+  // Seçenek bildiren sızıntı kalıbı hâlâ kırpılır.
+  t("Y05 'smoke or wall' (öneri) hâlâ 'smoke'", enforceAgentKit("Throw your smoke or wall before the peek.", "jett") === "Throw your smoke before the peek.");
 }
 
 console.log(`\n${fail === 0 ? "TÜM TESTLER GEÇTİ ✓" : `${fail} TEST BAŞARISIZ ✗`}`);
