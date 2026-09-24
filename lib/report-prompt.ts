@@ -597,13 +597,20 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
   //   avgEnemy (round başına enemyCount) · enemyComp · skor · ölüm konumu.
   const contactAvg = Number(avgEnemy);
   const hasContactData = nonSkipped.length > 0 && contactAvg > 0;
+  // BOŞ KADRO (W2 followup #94, 2026-09-24): enemyComp boş/yok ve unknownEnemyComp=false
+  // iken `enemyAgents` "" → harness çıktısında "Rakip kadro: ." / "Enemy roster: ." ve
+  // "Düşman () ort. …" basılıyordu. Kadro yoksa ne etiket ne boş parantez: temas cümlesi
+  // parantezsiz kurulur, temas verisi de yoksa kadro cümlesi hiç kurulmaz (uydurma yok).
+  const hasRoster = enemyAgents.length > 0;
   const groupsSentence = hasContactData
     ? isTr
-      ? `Düşman (${enemyAgents}) ort. ${avgEnemy} kişilik gruplarla temas kurdu.`
-      : `Enemy (${enemyAgents}) engaged in groups of ~${avgEnemy}.`
-    : isTr
-      ? `Rakip kadro: ${enemyAgents}.`
-      : `Enemy roster: ${enemyAgents}.`;
+      ? `Düşman${hasRoster ? ` (${enemyAgents})` : ""} ort. ${avgEnemy} kişilik gruplarla temas kurdu.`
+      : `Enemy${hasRoster ? ` (${enemyAgents})` : ""} engaged in groups of ~${avgEnemy}.`
+    : !hasRoster
+      ? ""
+      : isTr
+        ? `Rakip kadro: ${enemyAgents}.`
+        : `Enemy roster: ${enemyAgents}.`;
   // Kompozisyonda düellocu OLMASI, "agresif entry aldı" DEMEK DEĞİLDİR — entry
   // davranışı ölçülmüyor. Cümle artık kadro-olgusu + hazırlık önerisi.
   const duelistSentence = enemyDuelist
@@ -612,6 +619,10 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
       : ` ${enemyDuelist} is on the enemy roster — close the angle with flash/smoke on first contact.`
     : "";
   // "Sayısal üstünlük" iddiası yalnız ölçülen temas ortalaması 2+ iken kurulur.
+  // BERABERLİK (W2 followup #94): matchWon yalnız `yours > enemy`; eşit skorda (ör. 4-4)
+  // eskiden "Skoru 4 - 4 geride kapattın" deniyordu — ölçülen skorla çelişen olgu.
+  // Eşitlikte nötr cümle; matchWon ALANI (sözleşme) değişmedi.
+  const matchTied = Number(score.yours) === Number(score.enemy);
   const pressureSentence = matchWon
     ? isTr
       ? ` Skoru ${scoreStr} önde kapattın.`
@@ -620,10 +631,15 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
       ? isTr
         ? ` ${topDeathLoc !== "N/A" ? `${trLocative(topDeathLoc)} ` : ""}ortalama ${avgEnemy} kişiyle, yani sayısal üstünlükle temas kurdular.`
         : ` They engaged ${topDeathLoc !== "N/A" ? `at ${topDeathLoc} ` : ""}with ${avgEnemy} players on average — a numbers advantage.`
-      : isTr
-        ? ` Skoru ${scoreStr} geride kapattın.`
-        : ` You closed the match behind at ${scoreStr}.`;
-  const tendencies = `${groupsSentence}${duelistSentence}${pressureSentence}`;
+      : matchTied
+        ? isTr
+          ? ` Skor ${scoreStr} berabere bitti.`
+          : ` The match ended level at ${scoreStr}.`
+        : isTr
+          ? ` Skoru ${scoreStr} geride kapattın.`
+          : ` You closed the match behind at ${scoreStr}.`;
+  // Boş kadro cümlesi ("") baştaki boşluğu öksüz bırakmasın.
+  const tendencies = `${groupsSentence}${duelistSentence}${pressureSentence}`.trim();
   const adjustment = isTr
     ? `${topDeathLoc !== "N/A" ? `${topDeathLoc} yerine off-angle'lardan oyna — bu açı okunuyor. ` : ""}${setup.agent} utility'sini retake/info için sakla, erken harcama. ${matchWon ? "Pozisyon çeşitliliğini artır — aynı setup 2 round üst üste kullanma." : "Retake pozisyonlarına erken geç, site anchor'ını trade destekli kur."}`
     : `${topDeathLoc !== "N/A" ? `Play off-angles instead of ${topDeathLoc} — this angle is being read. ` : ""}Save ${setup.agent} utility for retake/info, don't use early. ${matchWon ? "Increase positional variety — don't repeat same setup 2 rounds in a row." : "Set up retake positions early, anchor site with trade support."}`;
@@ -761,6 +777,10 @@ export function buildReportCleaner(
   //   · check halkası = birebir aynı realityCheck çağrısı (aynı fg/kind/lang/map),
   //   · clampWords (2026-07-09) korunur — ham .slice kelime ortasından
   //     kesiyordu ("rotasy"), word-safe clamp o canlı bug'ın fix'iydi,
+  //     W2 followup #63(a) (2026-09-24): kapak artık CÜMLE sınırlı (clamp:"sentence"
+  //     → clampToSentence, clampWords'ün üst kümesi). Ücretli eval-report'ta refine 6
+  //     kabulün 2'sinde 600 kapağı cümle ortasından kesiyordu ("…kısaltacak", "…delay
+  //     your"). Kapak ateşlemeyen metin bayt-aynı (clampToSentence sözleşmesi).
   //   · agent BİLEREK GEÇİLMİYOR: bu route'ta enforceAgentKit hiç çalışmıyordu,
   //     geçmek davranışı DEĞİŞTİRİRDİ (agent yoksa halka no-op — agent-abilities.ts:98).
   // TEK EK: süzgeç metni tamamen boşaltırsa (callout-strip + guard her cümleyi
@@ -771,6 +791,7 @@ export function buildReportCleaner(
       lang,
       cap,
       fallback,
+      clamp: "sentence",
       // setup.map (canlı bug 2026-07-21): rapor ÖZETİ'nde de yabancı-harita
       // callout'u ayıklanır — bug tam olarak burada görülmüştü ("A Short:" ile
       // başlayan Lotus özeti). "Unknown" tabloda yok → no-op, güvenli.

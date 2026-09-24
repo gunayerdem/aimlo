@@ -192,6 +192,56 @@ async function main() {
     check("overtime 15-13 → 200, scoreStr '15 - 13'", res.status === 200 && body?.scoreStr === "15 - 13", `got=${res.status} ${body?.scoreStr}`);
   }
 
+  // ── W2 followup #94: deterministik rapor — boş kadro etiketi ve beraberlik ──────
+  console.log("\n── 5) deterministik rapor: boş kadro 'Rakip kadro: .' yok; berabere skor 'geride' denmez (W2 followup #94) ──");
+  {
+    resetHarness();
+    const res = await route.POST(reportRequest({
+      rounds: [
+        { round: 7, score: "3 - 4", result: "loss", died: true, enemyCount: 0 },
+        { round: 8, score: "4 - 4", result: "win", died: false, enemyCount: 0 },
+      ],
+      lang: "tr", map: "bind", enemyComp: [],
+    }));
+    const body = await res.json().catch(() => ({}));
+    const tn = String(body?.tendencies ?? "");
+    check("TR boş kadro + 4-4 → 'Rakip kadro:' / 'Düşman ()' yok, 'berabere' var, 'geride' yok, baş boşluk yok",
+      res.status === 200 && !/Rakip kadro:\s*\./.test(tn) && !/\(\s*\)/.test(tn) && /4 - 4 berabere/.test(tn) && !/geride/.test(tn) && tn === tn.trim(),
+      `got=${res.status} ${show(tn)}`);
+    resetHarness();
+    const resEn = await route.POST(reportRequest({
+      rounds: [{ round: 8, score: "4 - 4", result: "win", died: false, enemyCount: 0 }],
+      lang: "en", map: "bind",
+    }));
+    const tnEn = String((await resEn.json().catch(() => ({})))?.tendencies ?? "");
+    check("EN boş kadro + 4-4 → 'Enemy roster: .' yok, 'ended level' var, 'behind' yok",
+      !/Enemy roster:\s*\./.test(tnEn) && /ended level at 4 - 4/.test(tnEn) && !/behind/.test(tnEn), show(tnEn));
+    resetHarness();
+    const resLoss = await route.POST(reportRequest({
+      rounds: [{ round: 8, score: "3 - 5", result: "loss", died: true, enemyCount: 0 }],
+      lang: "tr", map: "bind", enemyComp: ["Jett", "Omen", "Sova", "Sage", "Killjoy"],
+    }));
+    const tnLoss = String((await resLoss.json().catch(() => ({})))?.tendencies ?? "");
+    check("kadrolu + gerçek kayıp → eski metin aynen ('Rakip kadro: Jett, …' + 'geride kapattın')",
+      /^Rakip kadro: Jett, Omen, Sova, Sage, Killjoy\./.test(tnLoss) && /Skoru 3 - 5 geride kapattın\./.test(tnLoss), show(tnLoss));
+  }
+
+  // ── W2 followup #63(a)/(c): rapor kapağı cümle-sınırlı + decisionScore etiketi ────
+  console.log("\n── 6) rapor temizleyicisi: 600 kapağı cümle ortasından kesmez; 'decisionScore' etiketi sızmaz (W2 followup #63) ──");
+  {
+    const { buildReportCleaner, validateRequest } = await import("../lib/report-prompt");
+    const v = validateRequest({ rounds: [{ round: 1, score: "1 - 0", result: "win", died: false }], lang: "tr", map: "bind" });
+    if (!v.valid) throw new Error("fixture geçersiz");
+    const clean = buildReportCleaner(v.data);
+    const sent = "B Site girişinde smoke'u erken harcayıp tek başına girme, takımınla aynı anda bas. ";
+    const long = sent.repeat(9) + "Son cümle kapağın ötesinde kesilecek ve yarım kalmamalı";
+    const out = clean(long, 600, "yedek");
+    check("600 kapağı: çıktı tam cümleyle biter (eskiden kelime sınırında yarım cümle), girdinin öneki",
+      out.length <= 600 && /\.$/.test(out) && long.startsWith(out) && out.length >= 390, `len=${out.length} tail=${show(out.slice(-40))}`);
+    const leak = clean("Hayatta kalma %50; decisionScore orta (5/10).", 1000, "yedek");
+    check("'decisionScore' alan adı → 'karar puanı' (ücretli eval R3 summary birebir)", /karar puanı orta \(5\/10\)/.test(leak) && !/decisionScore/.test(leak), show(leak));
+  }
+
   console.log(`\n${fail === 0 ? "✅" : "❌"} test-report-score: ${pass} geçti, ${fail} kırık\n`);
   if (fail > 0) process.exit(1);
 }

@@ -1020,6 +1020,11 @@ const FIELD_LABEL_REWRITES: Array<[RegExp, { tr: string; en: string; kind: Label
   [/\b[rR]oundTimerAtDeath(?:(['’])([a-zçğıöşü]{1,8}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "round zamanı", en: "the round timer", kind: "poss" }],
   [/\b[tT]radedByAlly(?:(['’])([a-zçğıöşü]{1,8}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "trade", en: "trade", kind: "loan" }],
   [/\b[pP]atternContext(?:(['’])([a-zçğıöşü]{1,8}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "tekrarlayan hata", en: "recurring pattern", kind: "vowel" }],
+  // W2 followup #63(c) (2026-09-24): rapor şemasının alan adı. Ücretli eval-report R3
+  // summary ham çıktısı "…hayatta kalma %50; decisionScore orta (5/10)." ve refine çıktısı
+  // "…decisionScore 5/10." (scripts/eval-out/report-samples.json) — kullanıcıya giden
+  // final'de aynen kaldı. Aynı sınıf (JSON alan adı → koç cümlesi), whole-token camelCase.
+  [/\b[dD]ecisionScore(?:(['’])([a-zçğıöşü]{1,8}))?(?![A-Za-z0-9_çğıöşüÇĞİÖŞÜ])/g, { tr: "karar puanı", en: "decision score", kind: "poss" }],
 ];
 /** Yabancı karşılıkların OKUNUŞ ünlüsü/sertliği (yazımdan türetilemez: trade=treyd). */
 const LOAN_SOUND: Record<string, { vowel: string; hard: boolean }> = {
@@ -1873,6 +1878,13 @@ export function finalizeCoachText(
     /** süzgeç (check ya da cleanCoachText) metni boşaltırsa dönülecek yedek; o da
      *  süzgeçten geçer. Verilmezse sonuç "" (çağıran yapısal hata döner). */
     fallback?: string;
+    /** Kapak biçimi. "words" (varsayılan — ask yolu bayt-aynı) = clampWords;
+     *  "sentence" = clampToSentence (kırpılmayan metin bayt-aynı, kırpılırsa son tam
+     *  cümle/yan-cümle sınırı). Rapor bunu kullanır: W2 followup #63(a) — ücretli
+     *  eval-report'ta refine 6 kabulün 2'sinde alanı 600 kapağında cümle ortasından
+     *  kesiyordu (R2 summary "…Chamber'ın kesişlerini kısaltacak", ER2 adjustment
+     *  "…as a lurk: delay your"). */
+    clamp?: "words" | "sentence";
   },
 ): string {
   if (!text) return text;
@@ -1902,7 +1914,9 @@ export function finalizeCoachText(
     if (fb && meaningful(fb)) safe = fb;
   }
   if (!safe) return "";
-  const out = clampWords(enforceAgentKit(safe, agent), cap);
+  const out = opts.clamp === "sentence"
+    ? clampToSentence(enforceAgentKit(safe, agent), cap)
+    : clampWords(enforceAgentKit(safe, agent), cap);
   return meaningful(out) ? out : "";
 }
 
