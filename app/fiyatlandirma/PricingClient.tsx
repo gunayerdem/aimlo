@@ -113,8 +113,10 @@ const COPY = {
          gerçeklerde kalıyor ("oyuna müdahale etmez" düzeyi). */
       /* B11/A101 (2026-09-24): "oyun dosyalarına dokunmaz" mutlak değildi —
          "Tek tıkla ayarla" GameUserSettings.ini ekran modunu yazıyor; istisna
-         cevaba yazıldı (desktop lib.rs fix_valorant_display_mode). */
-      { q: "Valorant hesabım risk altında mı?", a: "AIMLO yalnızca ekranı okur (OCR) ve kod enjekte etmez; oyunun kurulum dosyalarına, belleğine ve Vanguard'a dokunmaz — oyuna müdahale etmeyen yayın araçlarıyla (OBS gibi) aynı sınıfta çalışır. Yalnız sen uygulamadaki “Tek tıkla ayarla”ya basarsan, oyun kapalıyken Valorant'ın kullanıcı ayar dosyasındaki (GameUserSettings.ini) ekran modunu “Pencereli Tam Ekran” yapar; eski dosyanın yedeği .aimlo-bak olarak yanında kalır. Ayrıntılar aimlo.gg/guvenlik sayfasında." },
+         cevaba yazıldı (desktop lib.rs fix_valorant_display_mode).
+         B11 inceleme: aynı yazmayı yapan 3 masaüstü düğme etiketi var → istisna
+         düğmenin İŞLEVİYLE anlatılır; yazma bu PC'deki her hesap klasörüne. */
+      { q: "Valorant hesabım risk altında mı?", a: "AIMLO yalnızca ekranı okur (OCR) ve kod enjekte etmez; oyunun kurulum dosyalarına, belleğine ve Vanguard'a dokunmaz — oyuna müdahale etmeyen yayın araçlarıyla (OBS gibi) aynı sınıfta çalışır. Yalnız sen uygulamadaki tek tıklık ekran modu düğmesine (“Tek tıkla ayarla” ya da “Tek tıkla Pencereli Tam Ekran'a geçir”) basarsan, oyun kapalıyken bu bilgisayardaki Valorant hesaplarının ayar dosyalarında (GameUserSettings.ini) ekran modunu “Pencereli Tam Ekran” yapar; eski dosyaların yedeği .aimlo-bak olarak yanlarında kalır. Ayrıntılar aimlo.gg/guvenlik sayfasında." },
       { q: "Faturamı nasıl alırım?", a: "Ödeme sonrası e-arşiv faturan e-posta ile gönderilir." },
       { q: "Hangi ödeme yöntemlerini kabul ediyorsunuz?", a: "Visa, Mastercard, American Express ve Troy kredi/banka kartları. Taksit yok, tek çekim." },
       { q: "İade alabilir miyim?", a: "Koşullar İade ve Cayma Koşulları sayfasında." },
@@ -185,7 +187,7 @@ const COPY = {
       /* F44 dil sınırı (pano dalga, 2026-08-04): "No." kesin güvenceydi —
          ban kararı Riot'a ait; cevap teknik gerçeklerde kalıyor. */
       /* B11/A101: TR eşiyle aynı istisna. */
-      { q: "Is my Valorant account at risk?", a: "AIMLO only reads the screen (OCR) and injects no code; it never touches the game's installation files, its memory or Vanguard — the same class as broadcast tools like OBS that don't interfere with the game. Only if you press “Set it in one click” in the app does it, while the game is closed, switch the display mode in Valorant's user settings file (GameUserSettings.ini) to “Windowed Fullscreen”; a backup of the old file stays next to it as .aimlo-bak. Details at aimlo.gg/guvenlik." },
+      { q: "Is my Valorant account at risk?", a: "AIMLO only reads the screen (OCR) and injects no code; it never touches the game's installation files, its memory or Vanguard — the same class as broadcast tools like OBS that don't interfere with the game. Only if you press the app's one-click display-mode button (“Set it in one click” or “One-click switch to Windowed Fullscreen”) does it, while the game is closed, switch the display mode to “Windowed Fullscreen” in the settings files (GameUserSettings.ini) of the Valorant accounts on this PC; a backup of each old file stays next to it as .aimlo-bak. Details at aimlo.gg/guvenlik." },
       { q: "How do I get an invoice?", a: "Your invoice is emailed after payment." },
       { q: "Which payment methods do you accept?", a: "Visa, Mastercard, American Express and Troy credit/debit cards. Single payment, no instalments." },
       { q: "Can I get a refund?", a: "See the Cancellation and Refund Terms page." },

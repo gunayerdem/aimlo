@@ -24,7 +24,7 @@ export default function TermsPage() {
             Kullanım Koşulları
           </h1>
           <p className="text-sm text-neutral-500">
-            Son güncelleme: 20 Temmuz 2026
+            Son güncelleme: 24 Eylül 2026
           </p>
         </header>
 
@@ -158,14 +158,27 @@ export default function TermsPage() {
               Beyan, doğrulanabilir olan teknik gerçeğe (ne yaptığımıza) ve
               tasarım niyetine indirildi. Başvuru onaylanınca burası
               güncellenebilir. */}
+          {/* B11/A101 inceleme (2026-09-24): buradaki "oyun dosyalarına müdahale
+              etmez" iddiası MUTLAKTI ve B11'in güncellediği kopyalardan kaçmıştı
+              ("oyun" ile "dosyalarına" ayrı satırdaydı). Desktop lib.rs
+              fix_valorant_display_mode, kullanıcı tek tıklık ekran modu düğmesine
+              basınca (oyun kapalıyken) bu bilgisayardaki TÜM hesap klasörlerinin
+              GameUserSettings.ini'sini yazar + .aimlo-bak bırakır; istisna /guvenlik
+              ile aynı biçimde yazıldı. Kilit: scripts/test-trust-copy.ts [1]. */}
           <p>
             AIMLO Riot Games tarafından desteklenmemekte ve onaylanmamaktadır.
             VALORANT, Riot Games Inc.&apos;in ticari markasıdır. AIMLO Valorant
-            oyununa hile, makro veya gerçek zamanlı saldırı yardımı SUNMAZ; oyun
-            dosyalarına, belleğine veya ağ trafiğine müdahale etmez — yalnızca
-            ekran görüntüsü üzerinden round sonu pasif analiz yapar. Hizmet,
-            Riot Games&apos;in kullanım koşullarına ve üçüncü taraf yazılım
-            politikalarına uygun olacak şekilde tasarlanmıştır.
+            oyununa hile, makro veya gerçek zamanlı saldırı yardımı SUNMAZ; oyunun
+            kurulum dosyalarına, belleğine veya ağ trafiğine müdahale etmez —
+            yalnızca ekran görüntüsü üzerinden round sonu pasif analiz yapar. Tek
+            istisna: kullanıcı uygulamadaki tek tıklık ekran modu düğmesine
+            (&quot;Tek tıkla ayarla&quot; ya da &quot;Tek tıkla Pencereli Tam
+            Ekran&apos;a geçir&quot;) basarsa AIMLO, oyun kapalıyken bu
+            bilgisayardaki Valorant hesaplarının ayar dosyalarında
+            (GameUserSettings.ini) ekran modunu &quot;Pencereli Tam Ekran&quot;
+            yapar ve eski dosyaların .aimlo-bak yedeğini yanlarında bırakır.
+            Hizmet, Riot Games&apos;in kullanım koşullarına ve üçüncü taraf
+            yazılım politikalarına uygun olacak şekilde tasarlanmıştır.
           </p>
         </section>
 

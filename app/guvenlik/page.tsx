@@ -37,6 +37,11 @@ export default function GuvenlikPage() {
             modunu yazar + .aimlo-bak bırakır; istisna metne yazıldı. Yakalama
             kapsamı da koda göre: WGC pencere-hedefli (CreateForWindow), DXGI/GDI
             yedeği Valorant rect'ine kırpılır, rect yoksa tam kare (capture.rs).
+            B11 inceleme (2026-09-24): istisna tek düğme adına bağlı değil — masaüstünde
+            aynı yazmayı yapan 3 etiket var (App.tsx "Tek tıkla ayarla", "Tek tıkla
+            Pencereli Tam Ekran'a geçir", fseDetected "TEK TIKLA …"); yazma bu
+            bilgisayardaki HER hesap klasörüne (lib.rs read_dir döngüsü); bellek
+            iddiası bir üst maddede zaten var (tekrar kaldırıldı).
             Kilit: scripts/test-trust-copy.ts. */}
         <section className="space-y-3 text-sm leading-relaxed text-neutral-300">
           <h2 className="text-lg font-bold text-white">
@@ -52,12 +57,13 @@ export default function GuvenlikPage() {
           <ul className="list-disc pl-5 space-y-1">
             <li>Oyunun belleğine girmez — okumaz, yazmaz.</li>
             <li>
-              Oyunun kurulum dosyalarına, belleğine ve Vanguard&apos;a dokunmaz.
-              Yalnız sen uygulamadaki &quot;Tek tıkla ayarla&quot; düğmesine
-              basarsan, oyun kapalıyken Valorant&apos;ın kullanıcı ayar
-              dosyasındaki (GameUserSettings.ini) ekran modunu &quot;Pencereli Tam
-              Ekran&quot; yapar; eski dosyanın yedeği .aimlo-bak olarak yanında
-              kalır.
+              Oyunun kurulum dosyalarına ve Vanguard&apos;a dokunmaz. Yalnız sen
+              uygulamadaki tek tıklık ekran modu düğmesine (&quot;Tek tıkla
+              ayarla&quot; ya da &quot;Tek tıkla Pencereli Tam Ekran&apos;a
+              geçir&quot;) basarsan, oyun kapalıyken bu bilgisayardaki Valorant
+              hesaplarının ayar dosyalarında (GameUserSettings.ini) ekran modunu
+              &quot;Pencereli Tam Ekran&quot; yapar; eski dosyaların yedeği
+              .aimlo-bak olarak yanlarında kalır.
             </li>
             <li>Oyuna hiçbir kod / DLL enjekte etmez (injection yok).</li>
             <li>
@@ -109,10 +115,10 @@ export default function GuvenlikPage() {
             <li>Fare/klavyeyi senin yerine oynamaz, otomatik nişan almaz.</li>
             <li>
               Oyunun kurulum dosyalarını veya Vanguard&apos;ı değiştirmez. Tek
-              istisna yukarıdaki: &quot;Tek tıkla ayarla&quot;ya sen basarsan,
-              oyun kapalıyken Valorant&apos;ın ayar dosyasındaki
-              (GameUserSettings.ini) ekran modu değişir; eski dosya .aimlo-bak
-              olarak yedeklenir.
+              istisna yukarıdaki: uygulamadaki tek tıklık ekran modu düğmesine
+              sen basarsan, oyun kapalıyken bu bilgisayardaki Valorant
+              hesaplarının ayar dosyalarında (GameUserSettings.ini) ekran modu
+              değişir; eski dosyalar .aimlo-bak olarak yedeklenir.
             </li>
             <li>İzleme kapalıyken veya Valorant kapalıyken hiçbir şey yakalamaz.</li>
           </ul>

@@ -2097,7 +2097,9 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               B11/A101 (2026-09-24): başlık "Vanguard ile güvenli" bir güvenceydi →
               konu başlığı (/guvenlik h2 ile aynı); "oyun dosyalarını değiştirmez"
               mutlak değildi → "Tek tıkla ayarla" GameUserSettings.ini istisnası
-              (desktop lib.rs fix_valorant_display_mode) aynı maddede. */}
+              (desktop lib.rs fix_valorant_display_mode) aynı maddede. B11 inceleme:
+              3 masaüstü düğme etiketi aynı yazmayı yapıyor → düğme işleviyle
+              anlatılır; yazma bu PC'deki her hesap klasörüne. */}
           <div className="mx-auto mb-9 max-w-xl rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 text-left">
             <p className="flex items-center gap-2 text-[13px] font-semibold text-white">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF4655" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
@@ -2107,13 +2109,13 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               {(lang === "tr"
                 ? [
                     "Oyunun belleğini okumaz, yazmaz",
-                    "Oyuna kod/DLL enjekte etmez; oyunun kurulum dosyalarına ve Vanguard'a dokunmaz — tek istisna: “Tek tıkla ayarla”ya sen basarsan, oyun kapalıyken ayar dosyasındaki (GameUserSettings.ini) ekran modunu değiştirir, eskisini .aimlo-bak olarak yedekler",
+                    "Oyuna kod/DLL enjekte etmez; oyunun kurulum dosyalarına ve Vanguard'a dokunmaz — tek istisna: uygulamadaki tek tıklık ekran modu düğmesine sen basarsan, oyun kapalıyken bu bilgisayardaki Valorant hesaplarının ayar dosyalarında (GameUserSettings.ini) ekran modunu değiştirir, eskilerini .aimlo-bak olarak yedekler",
                     "Yalnızca görünen ekranı okur — OBS ya da Discord ekran paylaşımı gibi",
                     "Senin yerine nişan almaz, tuşa basmaz",
                   ]
                 : [
                     "Never reads or writes game memory",
-                    "No code/DLL injection; never touches the game's installation files or Vanguard — the one exception: if you press “Set it in one click”, it changes the display mode in the settings file (GameUserSettings.ini) while the game is closed and keeps the old file as .aimlo-bak",
+                    "No code/DLL injection; never touches the game's installation files or Vanguard — the one exception: if you press the app's one-click display-mode button, it changes the display mode in the settings files (GameUserSettings.ini) of the Valorant accounts on this PC while the game is closed and keeps the old files as .aimlo-bak",
                     "Reads only the visible screen — like OBS or Discord screen share",
                     "Never aims or presses a key for you",
                   ]
