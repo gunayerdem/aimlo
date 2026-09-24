@@ -16,11 +16,26 @@ import { headers } from "next/headers";
  *   - enumerate registered users via /login error timing
  *
  * Backed by Upstash Redis (REST INCR + EXPIRE), with an in-memory
- * fallback for local dev only. Production fails CLOSED if Upstash
+ * fallback for local dev. Production fails CLOSED if Upstash
  * is configured but unreachable.
+ *
+ * FB04 · F47 (2026-09-24): UPSTASH_* env'i HİÇ YOKSA prod'da da bellek yedeği
+ * kullanılır (fail-OPEN: sayaç lambda başına, OTP/giriş kaba-kuvvet koruması
+ * zayıflar) — bu dal "service" ÜRETMEZ; yalnız soğuk başlangıç başına bir kez
+ * `[RATE-LIMIT] UPSTASH_* yok …` console.error'u basar. STRICT_RATE_LIMIT="true"
+ * iken env yokluğu da fail-closed'dır ({allowed:false, reason:"service"}).
  */
 
-const STRICT_RATE_LIMIT = process.env.STRICT_RATE_LIMIT === "true";
+// FB04 · F47: istek anında okunur (lib/api-auth.ts isStrictRateLimit ile aynı kural).
+function isStrictRateLimit(): boolean {
+  return process.env.STRICT_RATE_LIMIT === "true";
+}
+
+/** FB04 · F47: lib/api-auth.ts RATE_LIMIT_MEMORY_FALLBACK_WARNING ile BİREBİR aynı metin. */
+const MEMORY_FALLBACK_WARNING =
+  "[RATE-LIMIT] UPSTASH_* yok — bellek yedeği: lambda başına sayaç, günlük kota küresel DEĞİL (fail-OPEN)";
+let warnedUpstashMissing = false;
+let warnedStrictNoUpstash = false;
 
 interface AuthLimit {
   /** Window length in seconds. */
@@ -52,7 +67,7 @@ interface RateResult {
   reason?: "rate" | "service";
 }
 
-// In-memory fallback (dev). Per-process — useless in prod.
+// In-memory fallback (dev; prod'da yalnız UPSTASH_* yokken — F47, fail-OPEN). Per-process.
 const memStore = new Map<string, { count: number; resetAt: number }>();
 
 function isUpstashConfigured(): boolean {
@@ -60,7 +75,7 @@ function isUpstashConfigured(): boolean {
 }
 
 function isProduction(): boolean {
-  return process.env.NODE_ENV === "production" || STRICT_RATE_LIMIT;
+  return process.env.NODE_ENV === "production" || isStrictRateLimit();
 }
 
 async function upstashIncr(key: string, ttlSec: number): Promise<number> {
@@ -132,6 +147,19 @@ async function checkOne(
   windowSec: number,
 ): Promise<RateResult> {
   if (!isUpstashConfigured()) {
+    // FB04 · F47: STRICT → fail-closed ("service", upstash-erişilemez dalıyla aynı dönüş);
+    // prod → tek seferlik görünür uyarı + bellek yedeği (fail-OPEN, bugünkü davranış).
+    if (isStrictRateLimit()) {
+      if (!warnedStrictNoUpstash) {
+        warnedStrictNoUpstash = true;
+        console.error("[RATE-LIMIT] STRICT_RATE_LIMIT=true ama UPSTASH_* yok — authRL fail-closed");
+      }
+      return { allowed: false, reason: "service", retryAfterSec: 30 };
+    }
+    if (process.env.NODE_ENV === "production" && !warnedUpstashMissing) {
+      warnedUpstashMissing = true;
+      console.error(MEMORY_FALLBACK_WARNING);
+    }
     return memCheck(key, max, windowSec);
   }
   try {

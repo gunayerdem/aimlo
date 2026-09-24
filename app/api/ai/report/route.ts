@@ -317,7 +317,9 @@ export async function POST(request: NextRequest) {
         "[Aimlo API] Report auth exception:",
         e instanceof Error ? e.message : "unknown",
       );
-      return authUnavailableResponse();
+      // FB04 · F88: eski masaüstü (v1.0.19-, UA'sız rapor istemcisi) 503'ü tanımaz → B04
+      // öncesi 401 (auth_expired → diriltilir); sürümlü UA 503 almaya devam eder.
+      return authUnavailableResponse(request);
     }
 
     let rawBody: unknown;
@@ -344,7 +346,7 @@ export async function POST(request: NextRequest) {
     } catch (e) {
       // verifyAuthAndRateLimit istisnasıyla aynı muamele: altyapı hatası → 503 (fail-closed).
       console.error("[Aimlo API] Report daily quota exception:", e instanceof Error ? e.message : "unknown");
-      return authUnavailableResponse();
+      return authUnavailableResponse(request); // F88: eski masaüstüne B04 öncesi 401
     }
 
     // Cost-aware pre-flight: when the client sets persistOnServer + matchId,

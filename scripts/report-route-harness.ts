@@ -233,11 +233,21 @@ export function loadReportRoute(): { POST: (req: Request) => Promise<Response> }
   return routeMod;
 }
 
-/** Desktop'ın attığı biçimde POST (Bearer başlıklı). */
-export function reportRequest(body: unknown): Request {
+/** FB04 · F88: güncel masaüstünün (v1.0.20+) sürümlü UA'sı (aimlo-desktop telemetry.rs
+ *  user_agent(): `aimlo-desktop/<sürüm> (windows)`). */
+export const DESKTOP_UA = "aimlo-desktop/1.0.20 (windows)";
+
+/** Desktop'ın attığı biçimde POST (Bearer başlıklı, sürümlü UA'lı). `headers` başlıkları
+ *  ezer; `"user-agent": null` UA'sız istek (v1.0.19 rapor istemcisi) üretir. */
+export function reportRequest(body: unknown, headers: Record<string, string | null> = {}): Request {
+  const h: Record<string, string> = { "content-type": "application/json", authorization: "Bearer harness.token", "user-agent": DESKTOP_UA };
+  for (const [k, v] of Object.entries(headers)) {
+    if (v === null) delete h[k];
+    else h[k] = v;
+  }
   return new Request("https://aimlo.gg/api/ai/match-report", {
     method: "POST",
-    headers: { "content-type": "application/json", authorization: "Bearer harness.token" },
+    headers: h,
     body: JSON.stringify(body),
   });
 }

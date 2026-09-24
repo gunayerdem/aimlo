@@ -25,11 +25,32 @@
  *   [8] A060 — per-IP reddinde günlük sayaç iade edilir (tek DECR); bypass'ta
  *       iade yok; kullanıcı-dakika reddi günlük sayaca dokunmaz; DECR hatası
  *       isteği bozmaz, throw etmez (prod modunda da).
+ *
+ * FB04 (2026-09-24):
+ *   [6b] F88 — Auth erişilemezken eski masaüstü (UA TAM "aimlo-desktop/1.0" ya da UA'sız
+ *        v1.0.19 rapor/telemetri istemcisi) B04 öncesi 401'i alır; sürümlü UA ve web 503.
+ *   [10] F47 — (f) NODE_ENV=production + UPSTASH_* YOK → görünür console.error (soğuk
+ *        başlangıç başına bir kez), davranış bellek yedeği (fail-OPEN) olarak KİLİTLİ;
+ *        (g) STRICT_RATE_LIMIT=true + env yok → reason "service" / consumeDailyQuota 503
+ *        (eskiden bellek yedeği); lib/auth-rate-limit checkOne aynı iki kural.
+ *        F71 — 503 gövdesi {error:"rate_limiter_unavailable", retryAfter:30}, message YOK.
  */
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import http from "node:http";
 import type { AddressInfo } from "node:net";
+import Module from "node:module";
+
+// FB04 · F47 [10]: lib/auth-rate-limit "server-only" + "next/headers" import ediyor —
+// "server-only" boş modüle ("path"), next/headers aşağıda Module._cache ile sahtelenir
+// (aynı kalıp: scripts/test-entitlements.ts, scripts/vision-route-harness.ts).
+type ResolveFn = (...a: unknown[]) => unknown;
+const MI = Module as unknown as { _resolveFilename: ResolveFn; _cache: Record<string, unknown> };
+const origResolve = MI._resolveFilename;
+MI._resolveFilename = function (this: unknown, ...args: unknown[]) {
+  if (args[0] === "server-only") return origResolve.call(this, "path", ...args.slice(1));
+  return origResolve.apply(this, args);
+};
 
 let fail = 0;
 function ok(cond: boolean, label: string) {
@@ -164,9 +185,11 @@ async function main() {
   const { verifyAuthAndRateLimit, checkRateLimit, isAuthServiceUnavailable } = await import("../lib/api-auth");
   const sb = await import("@supabase/supabase-js");
 
-  const mkReq = (ip = "198.51.100.1") =>
+  // FB04 · F88: varsayılan UA = güncel masaüstünün sürümlü UA'sı (v1.0.20+). null → UA'sız.
+  const DESKTOP_UA = "aimlo-desktop/1.0.20 (windows)";
+  const mkReq = (ip = "198.51.100.1", ua: string | null = DESKTOP_UA) =>
     new NextRequest("http://localhost/api/ai/vision", {
-      headers: { authorization: "Bearer a.b.c", "x-real-ip": ip },
+      headers: { authorization: "Bearer a.b.c", "x-real-ip": ip, ...(ua === null ? {} : { "user-agent": ua }) },
     });
 
   // auth-js ağ hatasında console.error(e) basıyor; test çıktısını kirletmesin.
@@ -237,6 +260,42 @@ async function main() {
     ok(pipelineCalls === before, `${label}: rate-limit adımına gidilmedi`);
   }
   authMode = "ok";
+
+  console.log("[6b] FB04 · F88 — Auth erişilemezken eski masaüstü B04 öncesi 401'i alır");
+  {
+    // KANIT: v1.0.19 (aimlo-desktop 61ee71f) vision istemcisi UA "aimlo-desktop/1.0"
+    // (ai_client.rs:796); rapor (A2 kuyruğu, :1161) ve telemetri (telemetry.rs:309) istemcisi
+    // UA'SIZ (reqwest 0.12 varsayılanı yalnız accept). 503 auth_unavailable'ı tanımaz → kuyruk
+    // satırı ~3 saatte failed_permanent olur ve diriltilmez. v1.0.20+ sürümlü UA → 503 tanır.
+    const uaCases: Array<[string | null, number, string]> = [
+      ["aimlo-desktop/1.0", 401, "UA TAM 'aimlo-desktop/1.0' (v1.0.19 vision istemcisi) → 401"],
+      [null, 401, "UA'sız (v1.0.19 rapor/telemetri istemcisi) → 401"],
+      ["", 401, "boş UA → 401 (UA'sız ile aynı)"],
+      ["aimlo-desktop/1.0.20 (windows)", 503, "sürümlü UA 'aimlo-desktop/1.0.20 (windows)' → 503 (önek DEĞİL eşitlik)"],
+      ["aimlo-desktop/1.0.19", 503, "'aimlo-desktop/1.0.19' → 503 (yalnız TAM eşitlik eski sayılır)"],
+      ["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/128.0 Safari/537.36", 503, "tarayıcı (web) → 503"],
+    ];
+    for (const mode of ["503", "500html"] as AuthMode[]) {
+      authMode = mode;
+      for (const [ua, want, label] of uaCases) {
+        const before = pipelineCalls;
+        const { v: r } = await quiet(() => verifyAuthAndRateLimit(mkReq("198.51.100.9", ua), "vision"));
+        const status = r.ok ? 200 : r.response.status;
+        const body = r.ok ? {} : ((await r.response.json()) as Json);
+        const wantErr = want === 503 ? "auth_unavailable" : "Invalid or expired token";
+        const ra = r.ok ? null : r.response.headers.get("Retry-After");
+        ok(status === want && body.error === wantErr && (want === 503 ? ra === "15" : ra === null) && pipelineCalls === before,
+          `[${mode}] ${label} (gelen ${status} ${JSON.stringify(body)} RA=${ra})`);
+      }
+    }
+    // Token GERÇEKTEN geçersizken (401 modu) UA ne olursa olsun 401 — sözleşme aynen.
+    authMode = "401";
+    for (const ua of ["aimlo-desktop/1.0.20 (windows)", "aimlo-desktop/1.0", null]) {
+      const { v: r } = await quiet(() => verifyAuthAndRateLimit(mkReq("198.51.100.9", ua), "vision"));
+      ok(!r.ok && r.response.status === 401, `token geçersiz + UA ${JSON.stringify(ua)} → 401 (değişmedi)`);
+    }
+    authMode = "ok";
+  }
 
   console.log("[7] A110 günlük 429: gerçek sıfırlama zamanı + detail.resetsAt");
   {
@@ -368,9 +427,78 @@ async function main() {
       try { r5 = (await quiet(() => consumeDailyQuota("u-rep", "report"))).v; }
       finally { env.NODE_ENV = prevEnv; env.UPSTASH_REDIS_REST_URL = prevUrl; }
       const b5 = r5 ? ((await r5.json()) as Json) : {};
-      ok(!!r5 && r5.status === 503 && b5.error === "Rate limiter unavailable — please retry shortly." && !("detail" in b5),
-        `(e) prod + Upstash yok → 503 fail-closed (gelen ${r5?.status} ${JSON.stringify(b5)})`);
+      // FB04 · F71: makine kodu, message YOK, detail YOK; 503 + Retry-After 30 aynı.
+      ok(!!r5 && r5.status === 503 && JSON.stringify(b5) === JSON.stringify({ error: "rate_limiter_unavailable", retryAfter: 30 })
+        && r5.headers.get("Retry-After") === "30",
+        `(e) prod + Upstash erişilemez → 503 {error:"rate_limiter_unavailable", retryAfter:30} (gelen ${r5?.status} ${JSON.stringify(b5)})`);
       authUserId = "user-ok";
+    }
+  }
+
+  console.log("[10] FB04 · F47 — UPSTASH_* env'i HİÇ YOK: prod'da görünür uyarı (fail-OPEN kilitli), STRICT'te fail-closed");
+  {
+    const { consumeDailyQuota, RATE_LIMIT_MEMORY_FALLBACK_WARNING } = await import("../lib/api-auth");
+    const WARN = "[RATE-LIMIT] UPSTASH_* yok — bellek yedeği: lambda başına sayaç, günlük kota küresel DEĞİL (fail-OPEN)";
+    ok(RATE_LIMIT_MEMORY_FALLBACK_WARNING === WARN, "uyarı metni sabiti birebir (Vercel log araması bununla yapılır)");
+    // lib/auth-rate-limit: next/headers sahte (istek bağlamı yok) — resolveIp x-real-ip okur.
+    const nhPath = require.resolve("next/headers");
+    MI._cache[nhPath] = { id: nhPath, filename: nhPath, loaded: true, children: [], paths: [],
+      exports: { headers: async () => new Headers({ "x-real-ip": "203.0.113.47" }) } };
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { authRateLimit } = require("../lib/auth-rate-limit") as typeof import("../lib/auth-rate-limit");
+
+    const env = process.env as Record<string, string | undefined>;
+    const saved = { NODE_ENV: env.NODE_ENV, URL: env.UPSTASH_REDIS_REST_URL, TOK: env.UPSTASH_REDIS_REST_TOKEN, STRICT: env.STRICT_RATE_LIMIT };
+    const restore = () => {
+      env.NODE_ENV = saved.NODE_ENV; env.UPSTASH_REDIS_REST_URL = saved.URL; env.UPSTASH_REDIS_REST_TOKEN = saved.TOK;
+      if (saved.STRICT === undefined) delete env.STRICT_RATE_LIMIT; else env.STRICT_RATE_LIMIT = saved.STRICT;
+    };
+    try {
+      // (f) prod + env HİÇ yok, STRICT yok → bellek yedeği + TEK görünür uyarı.
+      env.NODE_ENV = "production";
+      delete env.UPSTASH_REDIS_REST_URL; delete env.UPSTASH_REDIS_REST_TOKEN; delete env.STRICT_RATE_LIMIT;
+      const upBefore = pipelineCalls;
+      const { v: fr, logs: fl } = await quiet(async () => {
+        const out: Awaited<ReturnType<typeof checkRateLimit>>[] = [];
+        for (let i = 0; i < 7; i++) out.push(await checkRateLimit("u-f47", "vision", "198.51.100.47"));
+        const daily = await consumeDailyQuota("u-f47", "report");
+        return { out, daily };
+      });
+      const warns = fl.filter((l) => l.includes(WARN)).length;
+      ok(warns === 1, `(f) prod + UPSTASH_* yok → console.error '${WARN.slice(0, 32)}…' TAM 1 kez (7 checkRateLimit + 1 consumeDailyQuota; gelen ${warns})`);
+      ok(fr.out.slice(0, 6).every((x) => x.allowed) && !fr.out[6].allowed && fr.out[6].reason === "rate",
+        `(f) davranış bellek yedeği (fail-OPEN, KİLİTLİ): 1-6 izinli, 7. reason "rate" — "service" DEĞİL (gelen ${JSON.stringify(fr.out.map((x) => x.reason ?? "ok"))})`);
+      ok(fr.daily === null, "(f) consumeDailyQuota bellek yedeğinde izinli (null) — 503 ÜRETMEZ");
+      ok(pipelineCalls === upBefore, "(f) Upstash'e 0 çağrı (env yok)");
+      const { v: fa, logs: fal } = await quiet(async () => [
+        await authRateLimit("login", "f47@example.invalid"),
+        await authRateLimit("login", "f47@example.invalid"),
+      ]);
+      ok(fa.every((x) => x.blocked === false) && fal.filter((l) => l.includes(WARN)).length === 1,
+        `(f) authRateLimit: bellek yedeği (engel yok) + aynı uyarı TAM 1 kez (gelen ${JSON.stringify(fa)}, uyarı ${fal.filter((l) => l.includes(WARN)).length})`);
+
+      // (g) STRICT_RATE_LIMIT=true + env yok → fail-closed (eskiden bayrak bu dalda ETKİSİZDİ).
+      env.NODE_ENV = saved.NODE_ENV;
+      env.STRICT_RATE_LIMIT = "true";
+      const { v: gr } = await quiet(() => checkRateLimit("u-g47", "vision", "198.51.100.48"));
+      ok(!gr.allowed && gr.reason === "service" && gr.retryAfter === 30,
+        `(g) STRICT + env yok → checkRateLimit reason "service", retryAfter 30 (gelen ${JSON.stringify(gr)})`);
+      const { v: gd } = await quiet(() => consumeDailyQuota("u-g47", "report"));
+      const gdb = gd ? ((await gd.json()) as Json) : {};
+      ok(!!gd && gd.status === 503 && JSON.stringify(gdb) === JSON.stringify({ error: "rate_limiter_unavailable", retryAfter: 30 })
+        && gd.headers.get("Retry-After") === "30",
+        `(g) STRICT + env yok → consumeDailyQuota 503 {error:"rate_limiter_unavailable", retryAfter:30}, message/detail YOK (gelen ${gd?.status} ${JSON.stringify(gdb)})`);
+      authUserId = "u-g47v";
+      const { v: gv } = await quiet(() => verifyAuthAndRateLimit(mkReq("198.51.100.49"), "vision"));
+      const gvb = gv.ok ? {} : ((await gv.response.json()) as Json);
+      ok(!gv.ok && gv.response.status === 503 && gvb.error === "rate_limiter_unavailable" && !("message" in gvb) && !("detail" in gvb),
+        `(g) STRICT + env yok → verifyAuthAndRateLimit 503 rate_limiter_unavailable (gelen ${gv.ok ? 200 : gv.response.status} ${JSON.stringify(gvb)})`);
+      authUserId = "user-ok";
+      const { v: ga } = await quiet(() => authRateLimit("login", "g47@example.invalid"));
+      ok(ga.blocked === true && ga.retryAfterSec === 30 && ga.error.startsWith("Servis geçici olarak yoğun"),
+        `(g) STRICT + env yok → authRateLimit engelli "servis" (30 sn) (gelen ${JSON.stringify(ga)})`);
+    } finally {
+      restore();
     }
   }
 

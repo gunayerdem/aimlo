@@ -17,8 +17,10 @@ type EnvRow = Infra["envs"][number];
  * NEDEN: bugün `vercel env rm X preview` scope argümanını yok sayıp 6
  * değişkeni Production dahil sildi. Canlı site etkilenmedi (env değişimi
  * çalışan deployment'a işlemez) ama UPSTASH_* yalnız Vercel'de yaşadığı
- * için geri konamadı → bir sonraki deploy'da rate-limit fail-closed
- * davranıp TÜM AI route'larını 503'e düşürecekti. Bu ekranın tek işi:
+ * için geri konamadı → bir sonraki deploy'da rate-limit sessizce lambda-başı
+ * bellek yedeğine düşecekti (fail-OPEN; FB04 · F47 düzeltmesi — eski yorum
+ * "TÜM AI route'ları 503" diyordu, yanlıştı: 503 yalnız env VAR ama Upstash
+ * erişilemezken ya da STRICT_RATE_LIMIT="true" iken gelir). Bu ekranın tek işi:
  * "deploy etmeden önce hangi kritik env eksik / hangi servis düşük"
  * sorusunu tek bakışta yanıtlamak ve konsollara tek tıkla götürmek.
  *
@@ -351,8 +353,9 @@ export default async function AdminAltyapiPage() {
             {missingCritical} kritik değişken eksik — deploy etmeden önce tamamla.
           </div>
           <p className="adm-stat-sub" style={{ marginTop: 6 }}>
-            Eksik kritik env ile yapılan bir deploy, rate-limit fail-closed davrandığı için AI
-            route&apos;larını 503&apos;e düşürebilir. Aşağıdaki tabloda kırmızı satırları Vercel &rarr;
+            Eksik kritik env ile yapılan bir deploy ilgili akışı bozar (her satırın açıklamasına bak).
+            UPSTASH_* eksikse rate-limit 503 VERMEZ, bellek yedeğine düşer (fail-OPEN): sınırlar ve
+            günlük kota küresel olmaktan çıkar. Aşağıdaki tabloda kırmızı satırları Vercel &rarr;
             Settings &rarr; Environment Variables altında yeniden ekle.
           </p>
         </div>

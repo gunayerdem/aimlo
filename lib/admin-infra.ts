@@ -3,9 +3,12 @@
 // NEDEN VAR: 2026-08-04'te `vercel env rm X preview` komutu scope argümanını yok
 // sayıp 6 değişkeni Production dâhil TÜMDEN sildi. Canlı site etkilenmedi (env
 // değişikliği çalışan deployment'a işlemez) ama UPSTASH_REDIS_REST_URL/TOKEN
-// yalnız Vercel'de yaşadığı için geri konamadı → bir sonraki deploy'da
-// rate-limit prod'da FAIL-CLOSED olduğu için TÜM AI route'ları 503'e düşecekti.
-// Bunu deploy'dan ÖNCE gösteren hiçbir yüzey yoktu. Bu modül o boşluğu kapatır:
+// yalnız Vercel'de yaşadığı için geri konamadı → bir sonraki deploy'da rate-limit
+// SESSİZCE lambda-başı bellek yedeğine düşecekti (fail-OPEN: günlük kota ve maliyet
+// tavanı küresel olmaktan çıkar). FB04 · F47 DÜZELTME: bu satır eskiden "TÜM AI
+// route'ları 503'e düşecekti" diyordu — YANLIŞTI; 503 yalnız env VAR ama Upstash
+// erişilemezken (ya da STRICT_RATE_LIMIT="true" iken) üretilir. Bunu deploy'dan ÖNCE
+// gösteren hiçbir yüzey yoktu. Bu modül o boşluğu kapatır:
 // "hangi kritik env eksik" + "dış servisler ayakta mı" tek çağrıda.
 //
 // 🔴 SIR POLİTİKASI — TARTIŞMASIZ:
@@ -250,9 +253,11 @@ async function checkSupabase(): Promise<ServiceHealth> {
 
 /**
  * Upstash — BUGÜNKÜ OLAYI TAM OLARAK YAKALAYAN KART.
- * Env yoksa "fail": prod'da rate-limit FAIL-CLOSED (lib/api-auth.ts) → tüm AI
- * route'ları 503. Yani env eksikliği "eksik yapılandırma" değil, doğrudan
- * TAM KESİNTİ demektir; panelde de öyle görünmeli.
+ * Env yoksa "fail" KALIR — ama sebebi kesinti DEĞİL, koruma kaybıdır (FB04 · F47,
+ * lib/api-auth.ts onUpstashUnconfigured): env eksikken rate-limit prod'da da bellek
+ * yedeğine düşer (fail-OPEN — sayaç lambda başına, günlük kota/maliyet tavanı küresel
+ * DEĞİL, OTP/giriş kaba-kuvvet koruması zayıflar) ve 503 ÜRETMEZ. 503 yalnız env VAR
+ * ama Upstash erişilemezken ya da STRICT_RATE_LIMIT="true" iken gelir.
  */
 async function checkUpstash(): Promise<ServiceHealth> {
   const base: ServiceHealth = { key: "upstash", label: "Upstash Redis (rate-limit)", status: "unknown" };
@@ -262,7 +267,7 @@ async function checkUpstash(): Promise<ServiceHealth> {
     return {
       ...base,
       status: "fail",
-      note: "UPSTASH_REDIS_REST_URL/TOKEN eksik → rate-limit prod'da fail-closed: tüm AI route'ları 503.",
+      note: "UPSTASH_REDIS_REST_URL/TOKEN eksik → bellek yedeği (fail-OPEN), 503 ÜRETMEZ: sayaç lambda başına, günlük kota küresel değil. (STRICT_RATE_LIMIT=\"true\" ise AI route'ları 503.)",
     };
   }
   const t0 = Date.now();
@@ -460,12 +465,12 @@ const ENV_SPEC: { key: string; critical: boolean; purpose: string }[] = [
   {
     key: "UPSTASH_REDIS_REST_URL",
     critical: true,
-    purpose: "Yoksa rate-limit prod'da fail-closed: TÜM AI route'ları 503 (2026-08-04 olayı tam olarak buydu).",
+    purpose: "Yoksa rate-limit bellek yedeğine düşer (fail-OPEN), 503 ÜRETMEZ: lambda başına sayaç, günlük kota ve maliyet tavanı küresel değil (2026-08-04 olayı bu env'in silinmesiydi).",
   },
   {
     key: "UPSTASH_REDIS_REST_TOKEN",
     critical: true,
-    purpose: "Yoksa rate-limit prod'da fail-closed: TÜM AI route'ları 503; indirme sayacı ve kota da ölür.",
+    purpose: "Yoksa rate-limit bellek yedeğine düşer (fail-OPEN), 503 ÜRETMEZ; indirme sayacı ve ücretsiz kota da uygulanmaz.",
   },
   {
     key: "OTP_HMAC_SECRET",
@@ -510,7 +515,7 @@ const ENV_SPEC: { key: string; critical: boolean; purpose: string }[] = [
   {
     key: "STRICT_RATE_LIMIT",
     critical: false,
-    purpose: 'Yalnız yerelde anlamlı: "true" ise dev ortamda da prod katılığı (fail-closed) uygulanır.',
+    purpose: `"true" ise UPSTASH_* YOKKEN de rate-limit fail-closed olur (AI route'ları 503, giriş/OTP "servis yoğun"); yoksa env eksikliği bellek yedeğine düşer (fail-OPEN). Upstash yapılandırılmış ama erişilemezken prod zaten fail-closed.`,
   },
 ];
 

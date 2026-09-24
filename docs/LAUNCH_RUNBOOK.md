@@ -20,7 +20,11 @@ kapalıyken kota yolu tek ağ çağrısı bile yapmaz — flip tamamen geri alı
 
 - [ ] Prod'da `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` tanımlı.
       Yoksa bayrak açık olsa bile kota **sessizce uygulanmaz** (log:
-      `[entitlements] FREE_TIER_ENFORCED açık ama UPSTASH_* eksik`).
+      `[entitlements] FREE_TIER_ENFORCED açık ama UPSTASH_* eksik`) — ve
+      rate-limit de bellek yedeğine düşer (fail-OPEN; bkz. §2 Upstash satırı).
+- [ ] 402 metni katmana göre ayrışıyor (FB04 · F93 — bu kod deploy edilmiş
+      olmalı): AIMLO+ abonesi adil kullanım tavanında "Ücretsiz"/"sınırsız"
+      satış metni DEĞİL, CTA'sız tavan + yenilenme tarihi görür.
 - [ ] `subscriptions` tablosu DB'de var (`supabase/0011` — prod'da uygulı).
       Tablo yoksa kod FAIL-OPEN yapar: paywall zorlanmaz, kimse kilitlenmez.
 - [ ] Desktop'ın yayındaki sürümü 402'yi düzgün karşılıyor (yükseltme
@@ -51,13 +55,20 @@ kapalıyken kota yolu tek ağ çağrısı bile yapmaz — flip tamamen geri alı
      `EXPIRE 691200` (8 gün).
 2. **4. maç** için istek at → hem `/api/ai/vision` hem `/api/ai/report`
    şunu dönmeli: HTTP **402**, gövde
-   `{ "error": "quota_exceeded", "message": "...", "detail": { "used": 3, "limit": 3, "resetsAt": "<ISO>" } }`.
+   `{ "error": "quota_exceeded", "message": "...", "detail": { "used": 3, "limit": 3, "resetsAt": "<ISO>", "reason": "free_tier", "tier": "free" } }`
+   (`reason`/`tier` FB04 · F93 ile EKLENDİ — additive; gövdenin tek kurucusu
+   `lib/entitlements.ts` `quotaExceededBody`).
 3. **Desktop yükseltme akışı:** 402 alan desktop, yükseltme CTA'sını
    göstermeli; koç metni yerine boş/sahte içerik GÖSTERMEMELİ. Aynı maçın
    (aynı `matchId`) tekrar çağrıları yeni hak YAKMAMALI (SET üyeliği).
 4. **AIMLO+ tarafı:** aktif abonelik satırı olan test hesabı haftalık 3'e
-   TAKILMAMALI (aylık 100 fair-use kovasına düşer; aşımda mesaj "abone ol"
-   satışı yapmaz — R14).
+   TAKILMAMALI (aylık 100 fair-use kovasına düşer). Aşımda 402 gövdesi
+   `detail.reason = "fair_use"`, `detail.tier = "plus"` ve mesaj CTA'sız:
+   "AIMLO+ aylık adil kullanım tavanın (100 maç) doldu; hakkın 1 Ekim'de
+   yenilenir." (istek `lang: "en"` ise İngilizcesi). "Ücretsiz" ve "sınırsız"
+   GEÇMEMELİ (R14 / FB04 · F93). NOT: masaüstü EN arayüzü 402'de backend
+   metnini değil kendi "haftalık ücretsiz" metnini gösteriyor — EN'de doğru
+   metin için masaüstünün `detail.reason`'ı okuması gerekir (açık iş).
 5. Vercel loglarında `[QUOTA]` satırlarını gör (aşağıda §2).
 
 ### 1.4 GERİ ALMA (rollback)
@@ -77,7 +88,7 @@ kapalıyken kota yolu tek ağ çağrısı bile yapmaz — flip tamamen geri alı
 |---|---|---|---|
 | AI maliyeti | `aimlo.gg/admin/cost` | günde en az 1 | günlük toplam + kullanıcı-başı uç değerler. Ölçülen en-kötü gün/kullanıcı ≈ **$0.79** (2026-08-04 tablosu, `lib/api-auth.ts`); bunun üstü anomali |
 | Firewall / bot-challenge | Vercel dashboard → Firewall | ilk 48s günde 2 | 403 challenge'a takılan desktop istekleri. GEÇMİŞ DERS: bot-challenge feedback'i sessizce öldürdü; desktop retry'ı var ama challenge oranı artarsa system-bypass kuralını gözden geçir (IP-bazlı çalışıyor, custom-rule bypass ÇALIŞMIYOR) |
-| Upstash | Upstash konsol panosu | günde 1 | komut hacmi, hata oranı, latency. DİKKAT: rate-limit prod'da FAIL-CLOSED — Upstash düşerse AI route'ları kapanır (kullanıcı etkisi anında); kota (entitlements) tarafı FAIL-OPEN, o düşerse yalnız bedava analiz kaçar |
+| Upstash | Upstash konsol panosu + Vercel Logs (arama: `[RATE-LIMIT]`) | günde 1 | komut hacmi, hata oranı, latency. DİKKAT: env TANIMLI ama Upstash düşerse rate-limit prod'da FAIL-CLOSED — AI route'ları 503 (kullanıcı etkisi anında). Env HİÇ YOKSA (ör. yanlış `vercel env rm`) rate-limit 503 VERMEZ, lambda-başı bellek yedeğine düşer (FAIL-OPEN: günlük kota/maliyet tavanı küresel değil) — tek iz her soğuk başlangıçta bir kez düşen `[RATE-LIMIT] UPSTASH_* yok — bellek yedeği…` log satırı ve `/admin/altyapi` Upstash kartının "fail"i (FB04 · F47). Kota (entitlements) tarafı her iki durumda FAIL-OPEN, yalnız bedava analiz kaçar |
 | `[QUOTA]` logları | Vercel → Logs, arama: `[QUOTA]` | ilk 48s günde 2 | vision: `free tier limit reached`, report: `report blocked`, artı AIMLO+ `adil kullanım tavanı doldu` uyarıları. Hacim beklenenden yüksekse bayrak/limit kararını softi'ye taşı |
 | Telemetri hata sayaçları | `telemetry_events` (kind `error_code_count`) — admin/insights | günde 1 | hata kodu artışları; sürüm alanıyla birlikte oku ki yeni desktop sürümü regresyonu eski sürüm gürültüsünden ayrılsın |
 | Destek | `aimlo.gg/admin/support` | günde 2 | yeni ticket'lar — launch günü ilk gerçek-kullanıcı sinyali çoğu zaman buradan gelir |
@@ -104,8 +115,13 @@ vercel rollback            # bir önceki production deployment'a döner
   ve `DAILY_QUOTA` (günlük) değerlerini indir → deploy. KURAL (dosyada
   yazılı): kota değişince `npx tsx scripts/measure-quota-cost.ts` yeniden
   koşulur ve maliyet tablosu güncellenir.
-- `STRICT_RATE_LIMIT="true"` env'i prod'da EK sıkılık GETİRMEZ (prod zaten
-  fail-closed); o bayrak staging'e prod-sertliği vermek içindir.
+- `STRICT_RATE_LIMIT="true"` (FB04 · F47 ile DÜZELTİLDİ — bu satır eskiden
+  "prod'da ek sıkılık getirmez, prod zaten fail-closed" diyordu, YANLIŞTI):
+  Upstash env'i TANIMLI ama erişilemezken prod zaten fail-closed'dır; bayrağın
+  ek etkisi env HİÇ YOKKEN görülür → bellek yedeği yerine fail-closed (AI
+  route'ları 503 `rate_limiter_unavailable`, giriş/OTP "servis geçici olarak
+  yoğun"). ⚠ Bayrağı açmadan ÖNCE `/admin/altyapi`'de UPSTASH_* satırlarının
+  yeşil olduğunu doğrula — env yokken bayrak = tüm AI route'ları kapalı.
 - Tek kullanıcı kötüye kullanıyorsa: limitleri herkese indirmek yerine
   o hesabı softi kararıyla ele al (bypass'ın tersi yok — gerekirse
   Supabase'den hesabı askıya alma kararı softi'nin).
@@ -129,6 +145,35 @@ vercel rollback            # bir önceki production deployment'a döner
 ### 3.5 Kota kapısı acil kapama
 
 - §1.4 ile aynı: env'i kaldır + redeploy. Upstash temizliği gerekmez.
+
+### 3.6 Backend + masaüstü dağıtım SIRASI (FB04 · F39 / F88, 2026-09-24)
+
+Backend'de masaüstü sözleşmesini etkileyen değişiklik varken (yeni telemetri
+tipi, yeni statü/gövde) sıra BİLİNÇLİDİR:
+
+1. **Backend push** (`main` → Vercel auto-deploy). Deploy READY olana dek bekle.
+2. **Deploy doğrulaması:** `GET https://aimlo.gg/api/version` →
+   `{ "telemetryTypes": [...], "contract": 1 }`. Liste masaüstünün
+   `CANONICAL_KIND_LIST`'indeki HER tipi içermeli (app_open, login_ok,
+   watch_started, watch_stopped, rig_profile dahil). 404 = yeni backend canlıda
+   DEĞİL (build düşmüş / rollback). Masaüstü `release-desktop.ps1` 0t adımı
+   (`scripts/check-telemetry-prod.mjs`) bu ucu kendisi yoklar ve eksikte
+   release'i durdurur — elle kontrol yine de ucuzdur. Uç kimliksiz ve statiktir
+   (build'de üretilir, PII/commit SHA taşımaz).
+3. **Aynı pencerede masaüstü release** (v1.0.20). Güncelleme istemini öne çıkar.
+
+**Neden aynı pencere — B04'ün eski istemciye etkisi (F88):** B04 ile Supabase
+Auth'a ulaşılamadığında backend 401 yerine `503 auth_unavailable` döner.
+v1.0.19 ve öncesi bu 503'ü tanımaz: A2 kuyruğundaki maç raporu her denemede
+sayaç yakar, ~3 saat (10. deneme) sonra `failed_permanent` olur ve
+diriltilmez → rapor kalıcı kaybolur (B04 öncesi 401 → `auth_expired` →
+yeniden girişte diriltiliyordu). Ara önlem (FB04 · F88, backend): UA'sı TAM
+OLARAK `aimlo-desktop/1.0` olan ya da UA taşımayan istek (v1.0.19'un rapor ve
+telemetri istemcisi UA göndermez) Auth kesintisinde B04 öncesi 401'i alır —
+eski istemcide oturum yıkımı geri gelir (bugünkü prod davranışı) ama rapor
+diriltilebilir kalır. Sürümlü UA (`aimlo-desktop/1.0.20 (windows)`) ve web
+503 almaya devam eder. İkisi de fail-closed; önlem yalnız eski istemci
+sahadan çekilene kadar anlamlı — v1.0.20 yayını pencereyi kapatır.
 
 ---
 

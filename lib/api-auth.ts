@@ -12,12 +12,52 @@ import { createClient } from "@supabase/supabase-js";
  * (local dev convenience). In prod we FAIL CLOSED if Upstash is configured
  * but unreachable, instead of silently degrading to per-lambda memory which
  * would let an attacker bypass quotas by burst-spawning concurrent calls.
+ *
+ * FB04 · F47 (2026-09-24) — İKİ AYRI DAL, eskiden tek sanılıyordu:
+ *  - Upstash YAPILANDIRILMIŞ ama erişilemiyor → prod'da FAIL-CLOSED (503 "service").
+ *  - UPSTASH_* env'i HİÇ YOK → prod'da da bellek yedeği = FAIL-OPEN: sayaç lambda
+ *    başına, günlük kota küresel DEĞİL. Bu dal 503 ÜRETMEZ; yalnız her soğuk
+ *    başlangıçta bir kez `[RATE-LIMIT] UPSTASH_* yok …` console.error'u basar
+ *    (Vercel loglarında görünür uyarı). Kesin fail-closed geçişi softi kararı.
+ *  - STRICT_RATE_LIMIT="true" → env yokken de FAIL-CLOSED (503 "service").
  */
 
-// Set to "true" in env to force production strictness even without Upstash configured.
-// (Intended for staging.) When unset and Upstash is unavailable, prod still
-// fails closed if NODE_ENV === "production".
-const STRICT_RATE_LIMIT = process.env.STRICT_RATE_LIMIT === "true";
+// FB04 · F47: "true" ise UPSTASH_* env'i YOKKEN de fail-closed (503). Eskiden bu bayrak
+// yalnız "yapılandırılmış ama erişilemiyor" dalını etkiliyordu (o dal prod'da zaten
+// fail-closed) → env yokken ETKİSİZDİ. İstek anında okunur (test edilebilir; prod'da env
+// sabit olduğundan davranış aynı).
+function isStrictRateLimit(): boolean {
+  return process.env.STRICT_RATE_LIMIT === "true";
+}
+
+/** FB04 · F47: görünür uyarının birebir metni (testler bununla arar). */
+export const RATE_LIMIT_MEMORY_FALLBACK_WARNING =
+  "[RATE-LIMIT] UPSTASH_* yok — bellek yedeği: lambda başına sayaç, günlük kota küresel DEĞİL (fail-OPEN)";
+
+let warnedUpstashMissing = false;
+let warnedStrictNoUpstash = false;
+
+/**
+ * FB04 · F47 — UPSTASH_* env'i YOKKEN bellek yedeğine geçmeden ÖNCE çağrılır.
+ *  - STRICT_RATE_LIMIT="true" → "rate-limiter-unavailable" fırlatır; çağıranın mevcut
+ *    catch'i bunu reason "service" (503) yapar — env'in var-ama-erişilemez dalıyla AYNI yol.
+ *  - NODE_ENV=production → soğuk başlangıç başına BİR kez console.error; davranış
+ *    bugünkü gibi bellek yedeği (fail-OPEN). Kesin fail-closed softi onayı bekliyor.
+ *  - dev → sessiz bellek yedeği.
+ */
+function onUpstashUnconfigured(): void {
+  if (isStrictRateLimit()) {
+    if (!warnedStrictNoUpstash) {
+      warnedStrictNoUpstash = true;
+      console.error("[RATE-LIMIT] STRICT_RATE_LIMIT=true ama UPSTASH_* yok — fail-closed: AI route'ları 503");
+    }
+    throw new Error("rate-limiter-unavailable");
+  }
+  if (process.env.NODE_ENV === "production" && !warnedUpstashMissing) {
+    warnedUpstashMissing = true;
+    console.error(RATE_LIMIT_MEMORY_FALLBACK_WARNING);
+  }
+}
 
 // ── Rate limiting configuration ──
 
@@ -224,7 +264,9 @@ export async function revokeRateBypass(userId: string): Promise<void> {
 }
 export async function isRateBypassedPublic(userId: string): Promise<boolean> { return isRateBypassed(userId); }
 
-// In-memory fallback (dev only — see prod-strictness logic in checkRateLimit).
+// In-memory fallback: dev'de; prod'da ise YALNIZ UPSTASH_* env'i hiç yokken (F47 —
+// fail-OPEN, görünür uyarılı; bkz. onUpstashUnconfigured). Yapılandırılmış-ama-erişilemez
+// Upstash prod'da buraya DÜŞMEZ (fail-closed).
 const memoryStore = new Map<string, { count: number; resetAt: number }>();
 const dailyStore  = new Map<string, { count: number; resetAt: number }>();
 
@@ -248,7 +290,7 @@ function isUpstashConfigured(): boolean {
 }
 
 function isProduction(): boolean {
-  return process.env.NODE_ENV === "production" || STRICT_RATE_LIMIT;
+  return process.env.NODE_ENV === "production" || isStrictRateLimit();
 }
 
 // ── Upstash REST helpers (no SDK) ──
@@ -394,9 +436,12 @@ async function dailyQuotaCheck(userId: string, route: string, maxDaily: number):
       }
       console.warn("[Aimlo] Upstash daily quota failed (dev) — memory fallback:", (e as Error).message);
     }
+  } else {
+    // FB04 · F47: env yok → STRICT'te fail-closed (throw), prod'da tek seferlik uyarı.
+    onUpstashUnconfigured();
   }
 
-  // Dev fallback (in-memory).
+  // Dev fallback (in-memory) — prod'da yalnız env YOKKEN (F47, fail-OPEN).
   const entry = dailyStore.get(key);
   if (!entry || now.getTime() > entry.resetAt) {
     dailyStore.set(key, { count: 1, resetAt });
@@ -485,6 +530,9 @@ export async function checkRateLimit(
   try {
     // Per-user rate check
     const userKey = `rate:${userId}:${route}`;
+    // FB04 · F47: env yoksa önce STRICT/prod-uyarı kapısı (STRICT'te throw → aşağıdaki
+    // catch → reason "service" 503).
+    if (!isUpstashConfigured()) onUpstashUnconfigured();
     const rateResult = isUpstashConfigured()
       ? await upstashRateCheck(userKey, limits.max, limits.window)
       : memoryRateCheck(userKey, limits.max, limits.window);
@@ -514,6 +562,7 @@ export async function checkRateLimit(
     // Per-IP rate check (extra protection)
     if (ip) {
       const ipKey = `rate:ip:${ip}:${route}`;
+      if (!isUpstashConfigured()) onUpstashUnconfigured(); // F47 (yukarıdakiyle aynı kapı)
       const ipResult = isUpstashConfigured()
         ? await upstashRateCheck(ipKey, limits.max * 3, limits.window)
         : memoryRateCheck(ipKey, limits.max * 3, limits.window);
@@ -533,7 +582,8 @@ export async function checkRateLimit(
 
     return { allowed: true, remaining: rateResult.remaining };
   } catch (e) {
-    // Fail-closed (only thrown by Upstash helpers in production).
+    // Fail-closed (thrown by Upstash helpers in production, or — F47 — by
+    // onUpstashUnconfigured when STRICT_RATE_LIMIT="true" and UPSTASH_* is unset).
     if ((e as Error).message === "rate-limiter-unavailable") {
       return { allowed: false, remaining: 0, retryAfter: 30, reason: "service" };
     }
@@ -573,12 +623,52 @@ export function isAuthServiceUnavailable(e: unknown): boolean {
  * Gövdeye `message` BİLİNÇLİ konmaz: desktop Upstream yolu dolu message'ı olduğu gibi
  * basar (ai_client.rs user_message); boşken kendi yerelleşmiş TR/EN metnini gösterir.
  * Route'ların auth istisnası catch'leri de (feedback, report) bunu kullanır.
+ *
+ * FB04 · F88 (2026-09-24) — ESKİ MASAÜSTÜ UYUMU: `request` verilirse ve istek eski
+ * masaüstünden geliyorsa (isLegacyDesktopClient) B04 ÖNCESİ yanıt döner: 401
+ * "Invalid or expired token" (bugünkü prod davranışı). NEDEN: v1.0.19 ve öncesi 503
+ * auth_unavailable'ı sıradan Upstream sayar, A2 kuyruğu her denemede sayaç yakar ve 10.
+ * denemede (~3 saat) failed_permanent olan satırı start_watching'teki diriltme TANIMAZ
+ * (auth_unavailable AUTH_TRANSIENT listesinde yok) → maç raporu kalıcı kaybolur; 401 ise
+ * auth_expired olur ve diriltilir. İki yol da FAIL-CLOSED (erişim yok); fark yalnız
+ * istemcinin oturumu yıkıp yıkmaması. Sürümlü UA'lı masaüstü (v1.0.20+) ve web 503 almaya
+ * devam eder.
  */
-export function authUnavailableResponse(): NextResponse {
+export function authUnavailableResponse(request?: { headers: Headers }): NextResponse {
+  if (request && isLegacyDesktopClient(request)) {
+    console.warn("[Aimlo API] auth_unavailable → eski masaüstü istemcisi: B04 öncesi 401 döndü (F88)");
+    return NextResponse.json({ error: "Invalid or expired token" }, { status: 401 });
+  }
   return NextResponse.json(
     { error: "auth_unavailable" },
     { status: 503, headers: { "Retry-After": "15" } },
   );
+}
+
+/** FB04 · F88: v1.0.19 ve öncesinin vision/feedback istemcisinin SABİT UA'sı
+ *  (aimlo-desktop ai_client.rs, 61ee71f:796 `.user_agent("aimlo-desktop/1.0")`). */
+export const LEGACY_DESKTOP_UA = "aimlo-desktop/1.0";
+
+/**
+ * FB04 · F88 — istek B04'ün 503'ünü TANIMAYAN eski masaüstünden mi?
+ *
+ * EŞİTLİKLE karşılaştırılır, önekle DEĞİL: v1.0.20+ `aimlo-desktop/<sürüm> (windows)`
+ * gönderir (D10; ör. "aimlo-desktop/1.0.20 (windows)") ve 503'ü tanır — önek eşleşmesi
+ * tam da korunmak istenen yeni istemciye 401 verirdi.
+ *
+ * UA'SIZ istek de eski sayılır (planın "UA yok → 503" varsayımından BİLİNÇLİ sapma):
+ * v1.0.19'un maç raporu istemcisi (A2 kuyruğu, send_match_report — 61ee71f
+ * ai_client.rs:1161-1163) ve telemetri istemcisi (telemetry.rs:309-311) reqwest'i
+ * `.user_agent(...)` OLMADAN kurar; reqwest 0.12 varsayılan başlıkları yalnız
+ * `accept: *\/*` içerir (async_impl/client.rs:286) → bu istekler UA TAŞIMAZ. F88'in
+ * kaybettirdiği şey tam da bu kuyruktaki rapor olduğu için yalnız "aimlo-desktop/1.0"
+ * eşleşmesi korunmak istenen yolu hiç kapsamazdı. Tarayıcılar her zaman UA gönderir,
+ * v1.0.20'nin üç istemcisi de (vision, rapor, telemetri) sürümlü UA gönderir → UA'sız
+ * meşru yeni istemci yoktur. Güvenlik etkisi yok: 401 de 503 de erişim VERMEZ.
+ */
+export function isLegacyDesktopClient(request: { headers: Headers }): boolean {
+  const ua = request.headers.get("user-agent");
+  return ua === null || ua === "" || ua === LEGACY_DESKTOP_UA;
 }
 
 /** checkRateLimit sonucundan 429/503 yanıtı (verifyAuthAndRateLimit ve consumeDailyQuota
@@ -589,8 +679,14 @@ function rateLimitResponse(rateResult: { retryAfter?: number; reason?: string; r
   const isService = rateResult.reason === "service";
   return NextResponse.json(
     {
+      // FB04 · F71: servis (503) dalı makine kodu taşır — eskiden serbest İngilizce cümleydi
+      // ("Rate limiter unavailable — please retry shortly."); masaüstü `error`'un küçük harflisini
+      // KOD sayar (ai_client.rs classify_http_error) ve geçici-kod listeleri cümleyi tanımıyordu.
+      // `message` BİLİNÇLİ YOK: v1.0.19 dolu Upstream message'ını TR toast'a ham basar; boşken
+      // kendi yerelleşmiş "AI servisine ulaşılamıyor…" metnini gösterir (authUnavailableResponse
+      // ile aynı gerekçe). Statü 503 ve Retry-After 30 DEĞİŞMEDİ.
       error: isService
-        ? "Rate limiter unavailable — please retry shortly."
+        ? "rate_limiter_unavailable"
         : isDailyQuota
         ? "Daily quota exceeded"
         : "Too many requests. Please wait a moment.",
@@ -647,7 +743,7 @@ export async function consumeDailyQuota(userId: string, route: RouteKey): Promis
     const retryAfter = Math.max(60, Math.ceil((r.resetAt - Date.now()) / 1000));
     return rateLimitResponse({ retryAfter, reason: "daily", resetAt: r.resetAt });
   } catch (e) {
-    // Fail-closed (checkRateLimit ile aynı: yalnız prod'da Upstash hatası).
+    // Fail-closed (checkRateLimit ile aynı: prod'da Upstash hatası, ya da F47 — STRICT'te env yok).
     if ((e as Error).message === "rate-limiter-unavailable") {
       return rateLimitResponse({ retryAfter: 30, reason: "service" });
     }
@@ -751,7 +847,8 @@ export async function verifyAuthAndRateLimit(
     if (isAuthServiceUnavailable(error)) {
       const e = error as { name?: string; status?: number };
       console.error("[Aimlo API] Supabase Auth unavailable:", e.name, e.status);
-      return { ok: false, response: authUnavailableResponse() };
+      // FB04 · F88: eski masaüstü (UA "aimlo-desktop/1.0" ya da UA'sız) → B04 öncesi 401.
+      return { ok: false, response: authUnavailableResponse(request) };
     }
     return {
       ok: false,
