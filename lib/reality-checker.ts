@@ -2252,7 +2252,22 @@ const LOC_HEAD_ALT = [...new Set(LOC_POOL.filter((p) => p.includes(" ")).map((p)
   .map(escapeRe)
   .join("|");
 /** Lokatif yerine kullanılan edat-benzeri ekler ("A Elbow civarında"). */
-const LOC_POSTP = "(?:civarında|civarı|yakınında|yanında|tarafında|kenarında|hattında|bölgesinde|üstünde|içinde|açısında|köşesinde|koridorunda|girişinde|çıkışında)";
+// FB05 · F52 (c): "köşesinden|yakınındaki|hattından|kenarından" eklendi (korpus: n14 "seni A
+// Tree köşesinden vuruyor", r2b "seni A Tree yakınındaki siper hattından vurdu"). Bu dördü
+// bulunma hâlinde DEĞİL (ayrılma / -deki) → nötr ikame hâle uyar (locCase / neutralBase).
+const LOC_POSTP = "(?:civarında|civarı|yakınında|yanında|tarafında|kenarında|hattında|bölgesinde|üstünde|içinde|açısında|köşesinde|koridorunda|girişinde|çıkışında|köşesinden|yakınındaki|hattından|kenarından)";
+/** FB05 · F52: callout'a bağlı ek/edatın HÂLİ — nötr ikame aynı hâlde yazılır ("o açıdan",
+ *  "o noktadaki"). Eski LOC_POSTP'lerin hepsi bulunma hâli (+ "civarı") → "loc" (bayt-aynı). */
+function locCase(suffix: string): "loc" | "ki" | "abl" {
+  const x = suffix.trim().toLowerCase();
+  if (/(?:d[ae]n|t[ae]n)$/.test(x)) return "abl";
+  if (/ki$/.test(x)) return "ki";
+  return "loc";
+}
+function neutralBase(kind: "loc" | "ki" | "abl", aciNearby: boolean): string {
+  const head = aciNearby ? "o nokta" : "o açı";
+  return kind === "abl" ? `${head}dan` : kind === "ki" ? `${head}daki` : `${head}da`;
+}
 /** 2. ŞAHIS = oyuncunun kendi geçmişi → çapa tek başına yeter. */
 const LOC_SELF_VERB = "(?:tuttun|tutmuştun|tutuyordun|korudun|koruyordun|bekledin|bekliyordun|durdun|duruyordun|kaldın|kalmıştın|kalıyordun|oturdun|sabitlendin|açıldın|öldün|öldürüldün|vuruldun|düştün|yakalandın)";
 /** 3. ŞAHIS = özne müttefik/util/düşman olabilir → kurban çapası ŞART. */
@@ -2457,14 +2472,140 @@ export function neutralizeUnprovenLocations(
         const end = rel < 0 ? full.length : offset + rel;
         if (!LOC_VICTIM_RE.test(full.slice(start, end))) return whole;
       }
-      // "o açıda ... açıyı" tekrarını önle.
-      let base = /açı/i.test(tail) ? "o noktada" : "o açıda";
-      if (ki) base += "ki";
+      // "o açıda ... açıyı" tekrarını önle. FB05 · F52: ek/edat hâli korunur — eski biçimler
+      // ("'de", "'deki", bulunma edatları, "civarı") için sonuç BAYT-AYNI ("o açıda"/"o açıdaki").
+      const suffixText = whole.slice(name.length, whole.length - tail.length);
+      const base0 = neutralBase(ki ? "ki" : locCase(suffixText), /açı/i.test(tail));
+      let base = base0;
       const atStart = offset === 0 || /[.!?]\s+$/.test(full.slice(0, offset));
       if (atStart) base = base.charAt(0).toLocaleUpperCase("tr-TR") + base.slice(1);
       return base + tail;   // tail daima boşlukla başlar → yapışma imkânsız
     },
   );
+}
+
+// ── YAN-CÜMLE DÜZEYİ KONUM İDDİASI (FB05 · F52, 2026-09-24) ─────────────────────────
+// KANIT: yukarıdaki nötrleyici (LOC_CLAIM_RE) iddiayı "callout + bulunma eki + ≤60 kr + DAR
+// fiil listesi" kalıbıyla tanıyor; guardUnprovenFacts'in ölüm-yeri döngüsü 30 kr pencere +
+// DEATH_AT_VERBS. Model aynı iddiayı başka fiille, ayrılma ekiyle, "-deki" sıfatıyla ya da uzun
+// ara sözle kurunca HİÇBİR katman eşleşmiyordu (HEAD zinciri, konum ölçülmemiş round'lar):
+//   nano-none M1-R4 DA  "A Tree'de siperin yanında beklemeden açıya çıktın, …"
+//   nano-none M1-R4 EA0 "Seni A Tree hattında susturup öldüren tek bir görüş hattı vardı"
+//   r2b M1-R4 EA0       "Bir düşman seni A Tree yakınındaki siper hattından vurdu"
+//   n14 M1-R4 EA1       "Rakip seni A Tree köşesinden vuruyor"
+//   r3d2 M1-R4 EA0      "bu round A Tree'de düşmüş olman, …"
+//   luna-none M1-R9 DA  "Bu round Mid Bottom'da siperin yanını kullanmadan açıya çıktın"
+//   r3c M1-R11 DA       "Jett olarak B Lobby'de o açıyı … (>60 kr) … tek tarafta kaldın"
+//   luna-none M1-R4     "A Tree'deki ölümde düşmanın açısını doğrulayacak bilgi yok"
+// Hepsinde konum ölçülmemiş, geçmişte başka round'un konumu (R3 a tree / R8 mid bottom / R10
+// b lobby) BU round'a yapıştırılıyor (ölüm-yeri launch-blocker sınıfı; 8e99e56 "A Tree"yi
+// tanınan callout yaptığı için 9355dec'teki tesadüfi silme de kalktı).
+// KURAL — üç kapı birden (fix_final (a)-(e); yalnız "seni/sana" varsa nötrle kuralı ÖĞÜT
+// cümlelerinde yanlış-pozitif üretiyordu, ör. "…geri çekil ki rakip seni aynı hatta tutamasın"):
+//  (a) YAN-CÜMLENİN yüklemi bildirme kipinde: son kelime -dı/-dın/-du/-dü… (ünsüz uyumlu:
+//      bekle-di, çık-tı, öl-dü), -yor(du), var/yok, "-mış olman"; ya da yan-cümlede
+//      "öldüren/vuran". Emir ("…tut", "…uzanma"), -masın/-mesin, "ki …" yan-cümlesi ve
+//      "(bir) sonraki round" çapası dışarıda.
+//  (b) Kurban/ölüm çapası AYNI yan-cümlede: seni/sana/senin, 2. şahıs geçmiş fiil (…dın),
+//      ya da "ölüm/ölümde/düşmüş olman/ölmüş olman".
+//  (c) Ekler: bulunma, -deki, ayrılma ve LOC_POSTP.
+//  (d) Pencere yan-cümle sonuna kadar; sınırlar [.,!?;:—\n] + bağlaçlar (ve, ama, fakat,
+//      ancak, çünkü, zira, yoksa, ise, ki). "veya/ya da" BİLEREK sınır değil (koç metninde
+//      çoğunlukla ad bağlıyor: "crossfire veya off-angle almak yerine … kaldın").
+//  (e) En yakın zaman çapası GEÇMİŞ ise dokunulmaz; ölçülen (supplied) ve geçmiş (history,
+//      F83 round kuralıyla) muafiyetleri aynen.
+// İkame hâle uyar: bulunma "o açıda", -deki "o açıdaki", ayrılma "o açıdan" (yan-cümlede "açı"
+// varsa "o nokta…"). Silme yok; ders ve cümle aynen kalır.
+const LOC_CLAUSE_CALLOUT_RE = new RegExp(
+  `(?<![\\p{L}\\p{N}_-])(?<!(?:${LOC_HEAD_ALT})\\s)(${LOC_ALT})`
+  + `((?:\\s*['’]\\s*)?(?:d[ae]n|t[ae]n|d[ae]ki|t[ae]ki|d[ae]|t[ae])|\\s+${LOC_POSTP})(?![\\p{L}\\p{N}_-])`
+  // "de/da" bağlacı ("mid'de de") ikameyle birlikte ünlü uyumuna çekilir ("o açıda da") —
+  // ilk sürüm "o açıda de" üretiyordu (korpus cycleb09-base-real M1-R9, cyclereal-r3c M1-R4).
+  + `(\\s+d[ae](?![\\p{L}\\p{N}_'’-]))?`,
+  "giu",
+);
+/** Ayrılma eki KARŞILAŞTIRMA/zaman bildiriyorsa konum iddiası değildir ("B Site'tan farklı
+ *  bir bölgede", "A Main'den sonra") — korpus cycleab-luna-none2 M1-R9 EA0 ilk sürümde
+ *  "o açıdan farklı bir bölgede" oluyordu. */
+const ABL_NON_LOC_AFTER_RE = /^\s+(?:farklı|başka|ayrı|uzak|önce|sonra|itibaren|beri)(?![\p{L}])/iu;
+/** Yan-cümle sınırı olan bağlaçlar ("veya/ya da" bilerek yok — bkz. (d)). */
+const LOC_CLAUSE_CONJ_RE = /\s(ve|ama|fakat|ancak|çünkü|zira|yoksa|ise|ki)\s/giu;
+/** Ünsüz uyumlu -dI(n) sonu: ünlüden sonra d (bekle-di), sert ünsüzden sonra t (çık-tı),
+ *  yumuşak ünsüzden sonra d (öl-dü). "kapat-ın/tut-un" (emir, ünlü+t) böylece elenir. */
+const PAST_SUFFIX_CORE = "(?:[aıoueiöüâ]d|[çfhkpsşt]t|[bcdgğjlmnrvyzw]d)[ıiuü]";
+const SECOND_PAST_WORD_RE = new RegExp(`(?<![\\p{L}])([\\p{L}]*${PAST_SUFFIX_CORE}n)(?![\\p{L}])`, "giu");
+const INDICATIVE_FINAL_RE = new RegExp(
+  `(?:${PAST_SUFFIX_CORE}(?:n|k|m|nız|niz|nuz|nüz|lar|ler)?|[ıiuü]yor(?:du|dun|dum|sun|lar|lardı|uz|um)?|^var|^yok)$`,
+  "iu",
+);
+/** Ad/sıfat olup -dI(n) ile biten sık kelimeler (korpus taraması: hattı ×12, kendin, kaydı…). */
+const PAST_WORD_STOP = new Set([
+  "hattı", "hattın", "kendi", "kendin", "şimdi", "adı", "adın", "tadı", "üstü", "üstün", "kaydı",
+  "kaydın", "roundun", "kredin", "kadın", "ordu", "ordun", "yurdu", "midi", "bütün", "sağdı",
+]);
+const DEATH_NOMINAL_RE = /(?<![\p{L}])(?:ölüm(?:de|ün|den|ü)?|(?:düşmüş|ölmüş)\s+olman)(?![\p{L}])/iu;
+const PARTICIPLE_RE = /(?<![\p{L}])(?:öldüren|vuran)(?![\p{L}])/iu;
+const LOC_VICTIM_ANY_CASE_RE = new RegExp(LOC_VICTIM_RE.source, "iu");
+const NEXT_ROUND_RE = /(?<![\p{L}])(?:bir\s+)?sonraki\s+(?:round|raund|tur)/iu;
+/** [start,end) konum iddiasını içeren YAN-CÜMLE sınırları ve "ki" ile açılıp açılmadığı. */
+function locClauseBounds(full: string, start: number, end: number): { cs: number; ce: number; kiClause: boolean } {
+  let cs = start;
+  while (cs > 0 && !/[.,!?;:—\n]/.test(full[cs - 1])) cs--;
+  let ce = end;
+  while (ce < full.length && !/[.,!?;:—\n]/.test(full[ce])) ce++;
+  let kiClause = false;
+  for (const m of full.slice(cs, ce).matchAll(LOC_CLAUSE_CONJ_RE)) {
+    const a = cs + (m.index ?? 0), b = a + m[0].length;
+    if (b <= start) { cs = b; kiClause = m[1].toLowerCase() === "ki"; } else if (a >= end) { ce = a; break; }
+  }
+  return { cs, ce, kiClause };
+}
+function clauseHasAnchor(clause: string): boolean {
+  // Büyük/küçük harf duyarsız: cümle başındaki "Seni A Tree hattında…" (LOC_VICTIM_RE'nin
+  // kendisi küçük harfe bağlı — eski geçişin davranışı değişmesin diye ona dokunulmadı).
+  if (LOC_VICTIM_ANY_CASE_RE.test(clause) || DEATH_NOMINAL_RE.test(clause)) return true;
+  for (const m of clause.matchAll(SECOND_PAST_WORD_RE)) {
+    const w = m[1].toLocaleLowerCase("tr");
+    if (w.length >= 4 && !PAST_WORD_STOP.has(w)) return true;
+  }
+  return false;
+}
+function clauseHasIndicative(clause: string): boolean {
+  if (PARTICIPLE_RE.test(clause)) return true;
+  const t = clause.trim().replace(/[\s"'’”)\]]+$/u, "");
+  if (/m[ıiuü]ş\s+olman$/iu.test(t)) return true;
+  const last = (/([\p{L}]+)$/u.exec(t)?.[1] ?? "").toLocaleLowerCase("tr");
+  if (!last || PAST_WORD_STOP.has(last)) return false;
+  return INDICATIVE_FINAL_RE.test(last);
+}
+export function neutralizeUnprovenLocationClauses(
+  text: string,
+  supplied: ReadonlySet<string>,
+  history: ReadonlySet<string> = new Set(),
+  anchoredBefore: ReadonlySet<string> = new Set(),
+  historyRounds?: ReadonlyMap<number, string>,
+): string {
+  if (!text) return text;
+  return text.replace(LOC_CLAUSE_CALLOUT_RE, (whole: string, name: string, suffix: string, clitic: string | undefined, offset: number, full: string) => {
+    const key = name.trim().toLowerCase();
+    const end = offset + whole.length;
+    if (supplied.has(key)) return whole;                                   // (e) bu round ölçüldü
+    // Liste üyesi ("B Main/Mid'deki tekrarları…") tek başına bu round iddiası değil — korpus
+    // cycleb06-parity-real M1-R11 EA1 ilk sürümde "B Main/o noktadaki" oluyordu.
+    if (/\/\s*$/.test(full.slice(0, offset))) return whole;
+    if (locCase(suffix) === "abl" && ABL_NON_LOC_AFTER_RE.test(full.slice(end - (clitic ?? "").length))) return whole;
+    if (historyAnchorAt(full, offset, end) === "past") return whole;        // (e) geçmişe çapalı
+    if (historyExempt(key, history, anchoredBefore, full, offset, end, historyRounds)) return whole;
+    const { cs, ce, kiClause } = locClauseBounds(full, offset, end);
+    if (kiClause) return whole;                                             // (a) "ki …" yan-cümlesi
+    const clause = full.slice(cs, ce);
+    if (NEXT_ROUND_RE.test(clause)) return whole;                          // (a) sonraki round planı
+    if (!clauseHasAnchor(clause) || !clauseHasIndicative(clause)) return whole;   // (b) + (a)
+    let base = neutralBase(locCase(suffix), /açı/i.test(full.slice(end, ce)));
+    const atStart = offset === 0 || /[.!?]\s+$/.test(full.slice(0, offset));
+    if (atStart) base = base.charAt(0).toLocaleUpperCase("tr-TR") + base.slice(1);
+    return clitic ? `${base} da` : base;
+  });
 }
 
 /** EN ÖLÇÜLMEMİŞ KONUM NÖTRLEYİCİSİ (TR-KALAN-13, 2026-09-23).
@@ -2725,6 +2866,9 @@ export function realityCheck(
   // → konum okunan her round ve bayrağı set etmeyen her çağıran bayt-aynı.
   if (factGround?.hasDeathLocation === false) {
     let neutralized = neutralizeUnprovenLocations(text, currentLocs, historyLocs, anchoredBefore, historyRounds);
+    // FB05 · F52: yan-cümle düzeyi ikinci geçiş (eski geçişin kaçırdığı fiil/ek/pencere biçimleri).
+    // TR-only (Türkçe ek + Türkçe yüklem şartı); EN istekte hiç koşmaz (EN yolu bayt-aynı).
+    if (lang !== "en") neutralized = neutralizeUnprovenLocationClauses(neutralized, currentLocs, historyLocs, anchoredBefore, historyRounds);
     // TR-KALAN-13: EN aynası yalnız istek dili EN iken (TR yolu bayt-aynı).
     if (lang === "en") neutralized = neutralizeUnprovenLocationsEn(neutralized, currentLocs, historyLocs, anchoredBefore, historyRounds);
     if (neutralized !== text) {

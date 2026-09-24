@@ -863,6 +863,62 @@ console.log("\n════ FB05 · F14 · ÖLÇÜLMÜŞ KONUMLA ÇELİŞEN ÖL�
 }
 function noLocF14(): never { return { hasDeathLocation: false } as never; }
 
+console.log("\n════ FB05 · F52 · KONUM ÖLÇÜLMEMİŞKEN YAN-CÜMLE DÜZEYİ KONUM İDDİASI ════");
+{
+  // Gerçek korpus raw'ları (scripts/eval-out, konum ölçülmemiş round'lar; hafıza R1 b site, R3
+  // a tree, …). HEAD: hepsi DEĞİŞMEDEN geçiyordu (fiil listesi / 60 kr pencere dışı biçimler).
+  const noLoc = { hasDeathLocation: false } as never;
+  const rh4: Mem[] = [
+    { round_index: 1, died: true, death_position: "b site", position_confidence: "high" },
+    { round_index: 2, died: true, death_position: null },
+    { round_index: 3, died: true, death_position: "a tree", position_confidence: "high" },
+  ];
+  const rh11: Mem[] = [
+    ...rh4,
+    { round_index: 5, died: true, death_position: "b main", position_confidence: "high" },
+    { round_index: 7, died: true, death_position: "b site", position_confidence: "high" },
+    { round_index: 8, died: true, death_position: "mid bottom", position_confidence: "high" },
+    { round_index: 10, died: true, death_position: "b lobby", position_confidence: "high" },
+  ];
+  const rc = (s: string, rh: Mem[], kind: "death" | "suggestion" = "death") =>
+    realityCheck(s, rh as never, noLoc, kind, "tr", "ascent").text;
+  const pos: [string, string, Mem[], "death" | "suggestion", string, string][] = [
+    // [ad, ham metin, hafıza, alan, silinmesi gereken ad, çıktıda olması gereken nötr ifade]
+    ["123a nano-none M1-R4 DA", "A Tree'de siperin yanında beklemeden açıya çıktın, bu yüzden defansta seni tek yerden aldılar.", rh4, "death", "A Tree", "O noktada siperin yanında beklemeden açıya çıktın"],
+    ["123b nano-none M1-R4 EA0", "Seni A Tree hattında susturup öldüren tek bir görüş hattı vardı; açı açıkken yakaladılar.", rh4, "suggestion", "A Tree", "Seni o açıda susturup öldüren"],
+    ["123c r2b M1-R4 EA0", "Bir düşman seni A Tree yakınındaki siper hattından vurdu; bu açı uzun hatta bekleyen bir oyuncuya uygun.", rh4, "suggestion", "A Tree", "seni o açıdaki siper hattından vurdu"],
+    ["123d n14 M1-R4 EA1", "Rakip seni A Tree köşesinden vuruyor; bu açıya karşı crossfire ya da yanına bir takımlı koy ki tek hedef olma.", rh4, "suggestion", "A Tree", "Rakip seni o açıdan vuruyor"],
+    ["123e r3d2 M1-R4 EA0", "Son 3 round'da 3 kez öldün; bu round A Tree'de düşmüş olman, rakibin farklı açılardan seni bekleyip çapraz ateş verdiğini gösteriyor.", rh4, "suggestion", "A Tree", "bu round o açıda düşmüş olman"],
+    ["123f luna-none M1-R9 DA", "Bu round Mid Bottom'da siperin yanını kullanmadan açıya çıktın; bir düşman seni vurdu.", rh11.slice(0, 7), "death", "Mid Bottom", "Bu round o noktada siperin yanını"],
+    ["123g r3c M1-R11 DA (>60 kr pencere)", "Rakip o açıda seni geniş savunma açısı tutma yaparak angle'de tuttu; Jett olarak B Lobby'de o açıyı aynı anda savunacak crossfire veya off-angle almak yerine tek tarafta kaldın — bir sonraki defans roundunda o açıda yalnız bekleme.", rh11, "death", "B Lobby", "Jett olarak o noktada o açıyı"],
+    ["123h luna-none M1-R4 'A Tree'deki ölümde'", "Bu round seni kimin ve hangi silahla öldürdüğü okunmadı; A Tree'deki ölümde düşmanın açısını doğrulayacak bilgi yok.", rh4, "suggestion", "A Tree", "o noktadaki ölümde"],
+  ];
+  for (const [ad, s, rh, kind, gone, want] of pos) {
+    const o = rc(s, rh, kind);
+    t(`${ad} → nötrlenir`, !o.includes(gone) && o.includes(want), `→ "${o}"`);
+  }
+  // Dokunulmaz: öğüt cümleleri (seni/sana var ama yüklem emir / -masın / ki), sonraki round planı,
+  // geçmişe çapalı doğru olgu, müttefik cümleleri (vaka 43 aynası).
+  for (const [ad, s, rh] of [
+    ["124a öğüt 'ki rakip seni … tutamasın'", "B Lobby'de Jett olarak dash'i erken harcama, siperden açı alıp temas sonrası geri çekil ki rakip seni aynı hatta tutamasın.", rh11],
+    ["124b öğüt '… izin verme'", "A Lobby'de Cypher varsa telini giriş hattına koyup seni açıkta beklemeye zorlamasına izin verme; siper kenarından kısa peek atıp dash'le geri çekil.", rh11],
+    ["124c 'Bir sonraki round A Tree'de açıya uzun uzanma'", "Bir sonraki round A Tree'de açıya uzun uzanma: önce tek kısa peek at, karşılık gelince hemen siperine geri dön.", rh4],
+    ["124d geçmişe çapalı 'R3'te A Tree'de öldün'", "R3'te A Tree'de öldün, bu round açını değiştir.", rh4],
+    ["124e müttefik 've geçemedin'", "Sage duvarı A Main'de duruyordu ve geçemedin.", rh4],
+    // İlk sürümün korpus yanlış-pozitifleri (A/B'de yakalandı):
+    ["124f ayrılma = karşılaştırma ('B Site'tan farklı')", "Düşmanın hattını açık bıraktı; ölümün bu kez B Site'tan farklı bir bölgede geldi.", rh11],
+    ["124g liste üyesi ('B Main/Mid'deki tekrarları')", "Karşı hamle: B Main/Mid'deki tekrarları gördülerse seni aynı açıdan bekliyorlar.", rh11],
+  ] as [string, string, Mem[]][]) same(`${ad} bayt-aynı`, rc(s, rh, "suggestion"), s);
+  // "de/da" bağlacı ikameyle birlikte ünlü uyumuna çekilir (ilk sürüm "o açıda de").
+  eq("125 'şimdi mid'de de … tekrarladın' → 'o açıda da'",
+    rc("Birkaç kez öldün ve şimdi mid'de de aynı hatayı tekrarladın.", rh11, "suggestion"),
+    "Birkaç kez öldün ve şimdi o açıda da aynı hatayı tekrarladın.");
+  // Konum ÖLÇÜLMÜŞSE bu geçiş hiç çalışmaz (bayrak false değil).
+  const c126 = "Rakip seni A Tree köşesinden vuruyor.";
+  same("126 hasDeathLocation:true → bayt-aynı",
+    realityCheck(c126, rh4 as never, { hasDeathLocation: true, deathLocation: "b site" } as never, "suggestion", "tr", "ascent").text, c126);
+}
+
 console.log("\n════ FB05 · F83 · GEÇMİŞ KONUM MUAFİYETİ ROUND'A BAĞLI ════");
 {
   // exp9 (gerçek korpus M1-R4): hafıza R1=b site, R2 konumsuz, R3=a tree; R4 konumu ölçülmedi.
