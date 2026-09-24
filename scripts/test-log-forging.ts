@@ -109,7 +109,7 @@ async function main() {
       && streamedU.length >= 2 && streamedS.length >= 2, JSON.stringify({ streamedU, streamedS }).slice(0, 300));
   const routeSrc = read("app/api/ai/vision/route.ts");
   t("route kurucuya onLog veriyor, dönen diziyi sonradan toplu basmıyor",
-    (route.match(/onLog: emitVisionLog/g) ?? []).length === 2 && !/emitVisionLogs\(/.test(route));
+    (routeSrc.match(/onLog: emitVisionLog/g) ?? []).length === 2 && !/emitVisionLogs\(/.test(routeSrc));
 
   // ── [5] W2 inceleme B06-F2: tip-karışık gövde 500 değil; iç hata metni yanıta sızmaz ──
   console.log("\n[5] tip-karışık gövde → 200; iç hata metni yanıt gövdesinde yok");

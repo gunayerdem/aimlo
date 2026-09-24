@@ -40,7 +40,7 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { buildFactGround, realityCheck } from "../lib/reality-checker";
-import { clampToSentence, clampWords, cleanCoachText, enforceAgentNames } from "../lib/coach-text";
+import { clampToSentence, clampWords, enforceAgentNames } from "../lib/coach-text";
 import {
   finalizeVisionFeedback,
   visionOutputFailure,
