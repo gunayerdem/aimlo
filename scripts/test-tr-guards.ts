@@ -24,6 +24,10 @@ import * as CT from "../lib/coach-text";
 const { cleanCoachText, enforceSuppliedCallout } = CT;
 import { trOrdinalLocative } from "../lib/tr-suffix";
 import { buildHistoryBlock } from "../lib/history-block";
+import * as fs from "node:fs";
+import * as path from "node:path";
+import { buildVisionContext, visionPostprocessOpts, type VisionPromptBody } from "../lib/vision-prompt-builder";
+import { finalizeVisionFeedback, toRoundMemory } from "../lib/vision-postprocess";
 
 let fail = 0;
 let n = 0;
@@ -1015,6 +1019,44 @@ console.log("\n════ FB06 · F57 · YAZIYLA SAYI + 'kere' + KONUM LİSTES
   const o130 = realityCheck(nr5, rh5 as never, { hasDeathLocation: true, deathLocation: "b main" } as never, "suggestion", "tr", "ascent").text;
   t("130 cyclereal-r3d M1-R5 NR: uydurma 'üç kez' düşer, ölçülen B Main + öğüt kalır",
     !/üç kez/.test(o130) && /^B Main'de öldüğün/.test(o130) && /bir sonraki round B'yi tek başına tutma/.test(o130), `→ "${o130}"`);
+}
+
+console.log("\n════ FB06 · F51 · ÖNERİ ALANI KUYRUĞA İNMEZ (iddia öbeği / ham metin kurtarması) ════");
+{
+  // Gerçek maç gövdeleri (evals/real-rounds-23.json) + gerçek ham NR'ler (scripts/eval-out),
+  // prod zinciri (finalizeVisionFeedback + buildVisionContext/visionPostprocessOpts).
+  const real = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "evals", "real-rounds-23.json"), "utf8")) as { id: string; body: VisionPromptBody }[];
+  const body = (id: string) => {
+    const r = real.find((x) => x.id === id);
+    if (!r) throw new Error("real-rounds-23'te yok: " + id);
+    return r.body;
+  };
+  const chainNr = (id: string, nr: string) => {
+    const b = body(id);
+    const fg = buildVisionContext(b, "tr").factGround;
+    return finalizeVisionFeedback({ deathAnalysis: "Açıkta kaldın ve bir düşman seni vurdu.", enemyAnalysis: [], nextRoundSuggestion: nr },
+      visionPostprocessOpts(b, "tr", fg)).nextRoundSuggestion;
+  };
+  // M1-R3 (cyclew3-cand3-real): HEAD "Dash'i geri çekilme ya da geri trade için sakla." — tetikleyici
+  // "straight" yanlış-pozitifi F41 ile kapandı; burada zincir kilidi.
+  const nr3 = "Savunmayı değiştir: A Tree'de straight açıkta durma, smoke atıp sonra dash'le farklı bir yüksek açıya gelerek ilk peek'i sen aç — dash'i geri çekilme/geri trade için sakla.";
+  const o3 = chainNr("M1-R3-ascent-jett", nr3);
+  t("131 M1-R3 NR: asıl öğüt ('smoke atıp … ilk peek'i sen aç') çıktıda", /ilk peek'i sen aç/.test(o3) && /^Savunmayı değiştir/.test(o3), `→ "${o3}"`);
+  // M1-R9 (cycleb06-parity-real): HEAD 257 → 53 karakter "Dash ile giriş açma değil, ölürken kaçış
+  // hattı yarat." İddia yan-cümlesi (TR "pattern" + R-listesi) öbek düzeyinde silinemiyor → kalan
+  // metin yarıdan kısa → realityCheck "" → zincir süzülmüş HAM metni gösterir (TR-KALAN-26; bedel:
+  // ham metnin tarih iddiası geri gelir — RW1-F1 bilinen sınırı).
+  const nr9 = "Savunmada bu round B site ve mid pattern'lerini kır: R2·R3·R5·R7 geçmişine bakıp B bölgesini fazla tutma, bir sonraki defansta takım smoke/flash inince sen dash'le hızlı geri çekilme hattı açıp off-angle kur — dash ile giriş açma değil, ölürken kaçış hattı yarat.";
+  const b9 = body("M1-R9-ascent-jett");
+  const fg9 = buildVisionContext(b9, "tr").factGround;
+  const mem9 = toRoundMemory(b9.roundHistory as never);
+  eq("132 M1-R9 realityCheck(suggestion) → '' (kuyruğa inme kapısı)", realityCheck(nr9, mem9, fg9, "suggestion", "tr", "ascent").text, "");
+  const o9 = chainNr("M1-R9-ascent-jett", nr9);
+  t("132b M1-R9 zincir: asıl öğüt ('B bölgesini fazla tutma … off-angle kur') çıktıda",
+    /B bölgesini fazla tutma/.test(o9) && /off-angle kur/.test(o9), `→ "${o9}"`);
+  // Kapsam kilidi: DA (kind="death") yolu DEĞİŞMEZ — yan-cümle eskisi gibi düşer.
+  eq("133 aynı metin kind='death' → eski yan-cümle silmesi (bayt-aynı davranış)",
+    realityCheck(nr9, mem9, fg9, "death", "tr", "ascent").text, "Dash ile giriş açma değil, ölürken kaçış hattı yarat.");
 }
 
 console.log(`\n${fail === 0 ? "TAM YEŞİL" : "KIRMIZI"} — ${n - fail}/${n} geçti${fail ? `, ${fail} HATA` : ""}`);

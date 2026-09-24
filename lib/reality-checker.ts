@@ -1094,12 +1094,15 @@ export function rewriteUnsafeClaims(
     // anahtarlar ("aynı pozisyon", "pattern", "same spot") yerinde silinemez → o
     // YAN-CÜMLE düşer. Belirsiz anahtar çapasızsa hiç sayılmaz (öğüt korunur).
     if (!validation.repetitionValid) {
-      const kept = stripRepetitionLevel2(result, trText);
+      // FB06 · F51: öneri alanında (allowEmptyFallback=false) önce yalnız İDDİA ÖBEĞİ silinir.
+      const rescue = allowEmptyFallback ? undefined : { dropped: false };
+      const kept = stripRepetitionLevel2(result, trText, rescue);
       if (kept !== result) {
         result = kept || (allowEmptyFallback
           ? (trText ? "Bu round beklenen açıdan vuruldun." : "You were caught at the expected angle this round.")
           : "");
         if (!result) return "";
+        if (suggestionShrunkToTail(rescue, result, text)) return "";
       }
     }
   }
@@ -1150,7 +1153,10 @@ export function rewriteUnsafeClaims(
     // A Heaven'da aynı pozisyonda bekleme, off-angle al…") çapa ("R7/yine") ilk
     // yan-cümlede olduğu için ÖĞÜT yan-cümlesini silip geriye yalnız geçmiş-zaman
     // ölüm satırını bırakıyordu (Cycle 3'ün "öneri alanında ölüm kalıbı" dersi).
-    result = dropRepetitionClauses(result, isTr);
+    // FB06 · F51: öneri alanında önce yalnız İDDİA ÖBEĞİ silinir (bkz. CLAIM_PHRASE_RES).
+    const rescue3 = allowEmptyFallback ? undefined : { dropped: false };
+    result = dropRepetitionClauses(result, isTr, rescue3);
+    if (suggestionShrunkToTail(rescue3, result, text)) return "";
     if (!result) {
       // Cycle 3 (council 2026-06-26): a nextRoundSuggestion must NOT be replaced
       // by a past-tense death stub — return "" so the caller keeps the original
@@ -1254,12 +1260,55 @@ export function rewriteUnsafeClaims(
   return result.trim();
 }
 
+// ── ÖNERİ ALANINDA İDDİA ÖBEĞİ SİLME + KUYRUĞA İNME KAPISI (FB06 · F51, 2026-09-24) ──────
+// KANIT: yan-cümle bazlı tekrar silmesi (stripRepetitionLevel2 level-2, dropRepetitionClauses
+// level-3) anahtar taşıyan yan-cümleyi [;—] sınırına kadar TÜMÜYLE düşürüyordu; öneri alanında
+// modelin asıl öğüdü genelde o yan-cümlede. Korpus: cycleb06-pre-syn-rp E22 NR "Keep anchoring A
+// this round; change your positioning from the same spot you used in earlier rounds and place
+// your wall to cut Chamber's long sightline …" → "Keep anchoring A this round." (öğüt gitti);
+// cycleb06-parity-real M1-R9 NR 257 → 53 karakter ("Dash ile giriş açma değil, ölürken kaçış
+// hattı yarat."). Kalan kuyruk "dolu" sayıldığı için vision-postprocess.ts'in NR ham-metin
+// kurtarması (TR-KALAN-26: NR'de ham metin korunur) hiç çalışmıyordu.
+// ÇÖZÜM (yalnız allowEmptyFallback=false — öneri alanı; DA/genel çağıranlar bayt-aynı):
+//   (1) yan-cümle düşmeden önce yalnız İDDİA ÖBEĞİ silinir; öbek silinince yan-cümlede tekrar
+//       anahtarı kalmıyorsa yan-cümle (öbeksiz) kalır;
+//   (2) öbek silinemeyip bir yan-cümle TÜMÜYLE düştüyse ve kalan metin girdinin YARISINDAN
+//       kısaysa "" dönülür → çağıran ham metni süzgeçten geçirip gösterir.
+// ⚠ BEDEL (bilinen sınır, W2 inceleme RW1-F1 / TR-KALAN-26 (b)): (2)'de ham metne dönüş RC'nin
+// REDDETTİĞİ kanıtsız tarih iddiasını (süzgeçten geçmiş hâliyle) geri getirebilir; kararın
+// "NR'de ham metin korunur" lafzıyla uyumlu. Aynı kind="suggestion" EA maddelerine de uygulanır
+// (EA'da "" → madde kanıtsız muamelesi görür, TR-KALAN-26 (b)).
+type ClauseRescue = { dropped: boolean };
+// ⚠ PLAN SAPMASI (ölçülmüş): planın TR örneği "R\d … geçmişine bakıp" öbeği de eklenmişti; korpusta
+// tek geçişi (M1-R9) aynı yan-cümlede TR "pattern" anahtarını da taşıdığı için (F41: TR'de
+// "pattern" belirsiz DEĞİL) öbek silinse de yan-cümle kurtulmuyor, vaka (2) ile ham metne
+// dönüyor. A/B'de hiçbir çıktıyı değiştirmediği için (hiç ateşlenmeyen guard) ÇIKARILDI.
+const CLAIM_PHRASE_RES: readonly RegExp[] = [
+  // EN (korpus E22): "from the same spot you used in earlier rounds"
+  /\s*(?<![\p{L}])(?:from|at|in|on)\s+the\s+same\s+(?:spot|position|angle|line)\s+(?:that\s+)?you\s+(?:used|held|played|took)\s+(?:in|during|over)\s+(?:the\s+)?(?:earlier|previous|past|prior)\s+rounds?(?![\p{L}])/giu,
+];
+/** İddia öbeği silinince yan-cümle tekrar-iddiasız kalıyorsa öbeksiz hâli; yoksa null (ve
+ *  rescue.dropped = true: yan-cümle tümüyle düşecek). rescue verilmezse (DA/genel) null. */
+function rescueClause(clause: string, isTr: boolean, rescue?: ClauseRescue): string | null {
+  if (!rescue) return null;
+  let c = clause;
+  for (const re of CLAIM_PHRASE_RES) c = c.replace(re, "");
+  c = c.replace(/\s{2,}/g, " ").replace(/\s+([,.;:!?])/g, "$1").trim();
+  if (c && c !== clause.trim() && repetitionKeyIn(c, c, isTr) === undefined) return c;
+  rescue.dropped = true;
+  return null;
+}
+/** Öneri alanı bir yan-cümle TÜMÜYLE düşüp girdinin yarısından kısa bir kuyruğa indi mi? */
+function suggestionShrunkToTail(rescue: ClauseRescue | undefined, result: string, input: string): boolean {
+  return !!rescue && rescue.dropped && result.trim().length < input.trim().length / 2;
+}
+
 /** Tekrar-iddiası taşıyan YAN-CÜMLELERİ düşürür (level-3 süzgeci; B02 incelemede
  *  rewriteUnsafeClaims içinden bu fonksiyona taşındı, davranış AYNEN). Cümle [.!?]
  *  ile, cümle içi [;—] ile bölünür (virgül DEĞİL — TR-KALAN-25); iddia tespiti cümle
  *  kapsamında, silme kararı yan-cümlenin KENDİ içinde (belirsiz anahtarın çapası
  *  dahil). Hiçbir yan-cümle kalmazsa "" döner (çağıran fallback'e karar verir). */
-function dropRepetitionClauses(text: string, isTr: boolean): string {
+function dropRepetitionClauses(text: string, isTr: boolean, rescue?: ClauseRescue): string {
   const sentences = text.split(/(?<=[.!?])\s+/);
   const safe: string[] = [];
   for (const sent of sentences) {
@@ -1272,7 +1321,9 @@ function dropRepetitionClauses(text: string, isTr: boolean): string {
     let pendingSep = "";
     let firstDropped = false;
     for (let i = 0; i < parts.length; i += 2) {
-      const clause = parts[i];
+      let clause = parts[i];
+      // FB06 · F51: öneri alanında yan-cümle düşmeden önce yalnız iddia öbeği silinmeyi dener.
+      if (clause.trim() && repetitionKeyIn(clause, clause, isTr) !== undefined) clause = rescueClause(clause, isTr, rescue) ?? clause;
       if (!clause.trim() || repetitionKeyIn(clause, clause, isTr) !== undefined) {
         if (i === 0) firstDropped = true;
         continue;
@@ -1293,7 +1344,7 @@ function dropRepetitionClauses(text: string, isTr: boolean): string {
 /** Level-2 tekrar süzgeci (B02 inceleme) — bkz. rewriteUnsafeClaims level-2 notu.
  *  Yerinde silinemeyen İSİM anahtarlar; geri kalanlar NİTELEYİCİDİR. */
 const REPETITION_NOUN_KEYS = new Set(["aynı pozisyon", "aynı bölge", "pattern", "same spot", "same position"]);
-function stripRepetitionLevel2(text: string, isTr: boolean): string {
+function stripRepetitionLevel2(text: string, isTr: boolean, rescue?: ClauseRescue): string {
   const up = (c: string) => (isTr ? c.toLocaleUpperCase("tr-TR") : c.toUpperCase());
   const out: string[] = [];
   for (const sent of text.split(/(?<=[.!?])\s+/)) {
@@ -1317,6 +1368,8 @@ function stripRepetitionLevel2(text: string, isTr: boolean): string {
         c = c.replace(new RegExp(EN_STRAIGHT_COUNT_SRC, "giu"),
           (m: string) => m.replace(/(?:^|\s+)straight(?=\s|$)/i, "").trim());
         c = c.replace(/\s{2,}/g, " ").replace(/\s+([,.;:!?])/g, "$1").trim();
+        // FB06 · F51: öneri alanında yan-cümle düşmeden önce yalnız iddia öbeği silinmeyi dener.
+        if (c.trim() && repetitionKeyIn(c, c, isTr) !== undefined) c = rescueClause(c, isTr, rescue) ?? c;
         if (!c.trim() || repetitionKeyIn(c, c, isTr) !== undefined) continue;   // isim anahtar → yan-cümle düşer
       }
       rebuilt += (rebuilt ? pendingSep : "") + c;

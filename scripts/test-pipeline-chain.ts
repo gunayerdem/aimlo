@@ -483,12 +483,26 @@ console.log("\n[CANLI-TEST-07/EA+NR] içeriksiz (noktalama-yalnız) EA maddesi d
   // "NR'de ham metin korunur" UYGULANDI (decisions-final) → RC'nin sildiği tekrar
   // iddiası süzülmüş hâliyle GERİ GELİR — bu bilinen sınır (vision-postprocess.ts notu)
   // burada AÇIKÇA kilitlenir ki karar değişirse (seçenek a) test bilinçli güncellensin.
-  t("kurtarma: realityCheck yalnız '41 HP ile.' bırakınca NR içerik taşır, '. '/'..' artığı ve HP YOK",
-    rc.text === "41 HP ile." && !/^[\s.!?,;:]/.test(rec) && !/\.\./.test(rec) && !/HP/.test(rec)
+  // FB06 · F51 BEKLENTİ GÜNCELLENDİ (zincir sonucu `rec` BAYT-AYNI): RC eskiden "41 HP ile."
+  // kuyruğunu döndürüyor, içeriksiz kuyruk vision-postprocess'in hasCoachContent kurtarmasıyla
+  // ham metne dönüyordu. Artık RC öneri alanında bir yan-cümle TÜMÜYLE düşüp kalan metin
+  // girdinin yarısından kısaysa kendisi "" döner (kuyruğa inme kapısı) → aynı ham-metin yolu.
+  t("kurtarma: RC kuyruğa inince '' döner, NR içerik taşır, '. '/'..' artığı ve HP YOK",
+    rc.text === "" && !/^[\s.!?,;:]/.test(rec) && !/\.\./.test(rec) && !/HP/.test(rec)
       && rec === "Savunma B Site çevresinde tekrar eden girişlerini okuyup aynı tehdidi bekliyor.",
     `→ rc="${rc.text}" / "${rec}"`);
   t("bilinen sınır (karar b): RC'nin sildiği 'B Site … tekrar eden' iddiası NR'de geri gelir",
     /tekrar eden/.test(rec) && !/tekrar eden/.test(rc.text), `→ "${rec}"`);
+  // hasCoachContent kurtarma dalı (RC boş DEĞİL ama içeriksiz) hâlâ kilitli: kalan kuyruk
+  // girdinin yarısı kadar → kapı ateşlemez, RC "41 HP ile." döner, süzgeçte içeriksiz kalır.
+  const nrShort = "41 HP ile. Hep aynı.";
+  const rcShort = realityCheck(nrShort, rh, buildFactGround({ died: true }, {}), "suggestion", "tr", "Lotus");
+  const recShort = finalizeVisionFeedback(
+    { deathAnalysis: "Geniş açı tuttun.", enemyAnalysis: [gecerli], nextRoundSuggestion: nrShort },
+    { roundHistory: rh, factGround: buildFactGround({ died: true }, {}), lang: "tr", map: "Lotus", agent: "Omen" },
+  ).nextRoundSuggestion;
+  t("kurtarma dalı (RC içeriksiz kuyruk) hâlâ çalışır: rc '41 HP ile.' → ham metin süzülür",
+    rcShort.text === "41 HP ile." && recShort === "Hep aynı.", `→ rc="${rcShort.text}" / "${recShort}"`);
   // EA meta-kalıntılı vaka (inceleyicinin 2. vakası; eskiden [] idi): RC yalnız meta
   // cümlesini bırakıyor, süzgeç onu "" yapıyor → madde kanıtsız → tek madde olduğu için
   // karar (b) "son madde asla düşmez" → süzülmüş ham hâli (meta cümlesi süzgeçte düşer).

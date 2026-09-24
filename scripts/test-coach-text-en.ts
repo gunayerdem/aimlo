@@ -176,5 +176,27 @@ console.log("\n[7] FB06 · F41 — 'straight' yalnız sayım bağlamında, EN 'p
   t("öğüt 'peek multiple times' bayt-aynı", rcD(adv) === adv, `→ "${rcD(adv)}"`);
 }
 
+console.log("\n[8] FB06 · F51 — öneri alanında yalnız iddia öbeği silinir (yan-cümle öğütle birlikte düşmez)");
+{
+  // Korpus cycleb06-pre-syn-rp / cycler5syn E22 NR. HEAD: "Keep anchoring A this round." — "same spot"
+  // yan-cümlesi asıl öğütle (wall + crossfire) birlikte düşüyordu.
+  const s = EN_VISION_SCENARIOS.find((x) => x.id === "E22-ascent-sage-def-survived");
+  if (!s) throw new Error("E22 senaryosu yok");
+  const b = s.body as VisionPromptBody;
+  const fg = buildVisionContext(b, "en").factGround;
+  const mem = toRoundMemory(b.roundHistory as never);
+  const nr = "Keep anchoring A this round; change your positioning from the same spot you used in earlier rounds and place your wall to cut Chamber's long sightline so the team can set a crossfire for trades.";
+  const o = realityCheck(nr, mem, fg, "suggestion", "en", b.map as string).text;
+  t("E22 NR: iddia öbeği silinir, öğüt yan-cümlesi kalır",
+    o === "Keep anchoring A this round; change your positioning and place your wall to cut Chamber's long sightline so the team can set a crossfire for trades.", `→ "${o}"`);
+  const chain = finalizeVisionFeedback({ deathAnalysis: "You survived the round holding A.", enemyAnalysis: [], nextRoundSuggestion: nr },
+    visionPostprocessOpts(b, "en", fg)).nextRoundSuggestion;
+  t("E22 zincir: 'place your wall … crossfire' çıktıda, 'same spot' iddiası yok",
+    /place your wall to cut Chamber's long sightline/.test(chain) && !/same spot/.test(chain), `→ "${chain}"`);
+  // Kapsam kilidi: DA (kind="death") davranışı değişmez.
+  const d = realityCheck(nr, mem, fg, "death", "en", b.map as string).text;
+  t("E22 kind='death' → eski yan-cümle silmesi (bayt-aynı davranış)", d === "Keep anchoring A this round.", `→ "${d}"`);
+}
+
 console.log(`\n${fail === 0 ? "TÜM TESTLER GEÇTİ ✓" : `${fail} TEST BAŞARISIZ ✗`}`);
 process.exit(fail ? 1 : 0);
