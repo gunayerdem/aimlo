@@ -631,7 +631,8 @@ export function isAuthServiceUnavailable(e: unknown): boolean {
  * denemede (~3 saat) failed_permanent olan satırı start_watching'teki diriltme TANIMAZ
  * (auth_unavailable AUTH_TRANSIENT listesinde yok) → maç raporu kalıcı kaybolur; 401 ise
  * auth_expired olur ve diriltilir. İki yol da FAIL-CLOSED (erişim yok); fark yalnız
- * istemcinin oturumu yıkıp yıkmaması. Sürümlü UA'lı masaüstü (v1.0.20+) ve web 503 almaya
+ * istemcinin oturumu yıkıp yıkmaması. Sürümlü UA'lı masaüstü (v1.0.20+), v1.0.19'un
+ * VISION istemcisi (UA "aimlo-desktop/1.0" — FB04 inceleme, aşağıya bkz.) ve web 503 almaya
  * devam eder.
  */
 export function authUnavailableResponse(request?: { headers: Headers }): NextResponse {
@@ -646,7 +647,8 @@ export function authUnavailableResponse(request?: { headers: Headers }): NextRes
 }
 
 /** FB04 · F88: v1.0.19 ve öncesinin vision/feedback istemcisinin SABİT UA'sı
- *  (aimlo-desktop ai_client.rs, 61ee71f:796 `.user_agent("aimlo-desktop/1.0")`). */
+ *  (aimlo-desktop ai_client.rs, 61ee71f:796 `.user_agent("aimlo-desktop/1.0")`).
+ *  FB04 inceleme: bu UA artık ESKİ SAYILMAZ (isLegacyDesktopClient notu) — sabit belge için. */
 export const LEGACY_DESKTOP_UA = "aimlo-desktop/1.0";
 
 /**
@@ -665,10 +667,20 @@ export const LEGACY_DESKTOP_UA = "aimlo-desktop/1.0";
  * eşleşmesi korunmak istenen yolu hiç kapsamazdı. Tarayıcılar her zaman UA gönderir,
  * v1.0.20'nin üç istemcisi de (vision, rapor, telemetri) sürümlü UA gönderir → UA'sız
  * meşru yeni istemci yoktur. Güvenlik etkisi yok: 401 de 503 de erişim VERMEZ.
+ *
+ * FB04 inceleme (2026-09-24): "aimlo-desktop/1.0" (v1.0.19 VISION istemcisi) ARTIK ESKİ
+ * SAYILMAZ → 503. KANIT: v1.0.19 vision 401'i AuthExpired sayıp oturumu YIKIYOR (61ee71f
+ * ai_client.rs:386 "401 always means your token is gone"; lib.rs AuthExpired teardown:
+ * WATCHING=false, maç durumu sıfırlanır, CURRENT_MATCH_ID ve token silinir) → süren maçın sonu
+ * hiç algılanmaz, rapor KUYRUĞA BİLE GİRMEZ. 503 ise v1.0.19'da Upstream (yalnız toast, teardown
+ * yok; ai_client.rs:458-466 sunucu hatası dalı) → maç sürer, maç sonu raporu UA'sız rapor
+ * istemcisiyle 401 → auth_expired → diriltilir. Yani bu eşleşme F88'e hiçbir katkı vermiyor,
+ * B04'ün sağladığı teardown korumasını geri alıyordu (ilk sürümün kendi notu da "yalnız vision
+ * yolunda oturum yıkımını geri getirirdi" diyordu).
  */
 export function isLegacyDesktopClient(request: { headers: Headers }): boolean {
   const ua = request.headers.get("user-agent");
-  return ua === null || ua === "" || ua === LEGACY_DESKTOP_UA;
+  return ua === null || ua === "";
 }
 
 /** checkRateLimit sonucundan 429/503 yanıtı (verifyAuthAndRateLimit ve consumeDailyQuota
@@ -847,7 +859,7 @@ export async function verifyAuthAndRateLimit(
     if (isAuthServiceUnavailable(error)) {
       const e = error as { name?: string; status?: number };
       console.error("[Aimlo API] Supabase Auth unavailable:", e.name, e.status);
-      // FB04 · F88: eski masaüstü (UA "aimlo-desktop/1.0" ya da UA'sız) → B04 öncesi 401.
+      // FB04 · F88: eski masaüstü (UA'sız v1.0.19 rapor/telemetri istemcisi) → B04 öncesi 401.
       return { ok: false, response: authUnavailableResponse(request) };
     }
     return {

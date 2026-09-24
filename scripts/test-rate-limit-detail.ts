@@ -27,8 +27,9 @@
  *       isteği bozmaz, throw etmez (prod modunda da).
  *
  * FB04 (2026-09-24):
- *   [6b] F88 — Auth erişilemezken eski masaüstü (UA TAM "aimlo-desktop/1.0" ya da UA'sız
- *        v1.0.19 rapor/telemetri istemcisi) B04 öncesi 401'i alır; sürümlü UA ve web 503.
+ *   [6b] F88 — Auth erişilemezken UA'sız v1.0.19 rapor/telemetri istemcisi B04 öncesi 401'i
+ *        alır; v1.0.19 VISION istemcisi (UA "aimlo-desktop/1.0"), sürümlü UA ve web 503
+ *        (FB04 inceleme: vision'a 401 oturumu yıkıp süren maçın raporunu kaybettiriyordu).
  *   [10] F47 — (f) NODE_ENV=production + UPSTASH_* YOK → görünür console.error (soğuk
  *        başlangıç başına bir kez), davranış bellek yedeği (fail-OPEN) olarak KİLİTLİ;
  *        (g) STRICT_RATE_LIMIT=true + env yok → reason "service" / consumeDailyQuota 503
@@ -267,8 +268,12 @@ async function main() {
     // (ai_client.rs:796); rapor (A2 kuyruğu, :1161) ve telemetri (telemetry.rs:309) istemcisi
     // UA'SIZ (reqwest 0.12 varsayılanı yalnız accept). 503 auth_unavailable'ı tanımaz → kuyruk
     // satırı ~3 saatte failed_permanent olur ve diriltilmez. v1.0.20+ sürümlü UA → 503 tanır.
+    // FB04 inceleme: v1.0.19 VISION istemcisi 401'i AuthExpired sayıp oturumu YIKAR (61ee71f
+    // ai_client.rs:386 + lib.rs:5415 teardown: WATCHING=off, maç durumu/UUID/token silinir) →
+    // süren maçın raporu kuyruğa bile girmez. 503 ise Upstream (yalnız toast) → maç sürer, rapor
+    // UA'sız istemciyle 401 → auth_expired → diriltilir. Bu yüzden "aimlo-desktop/1.0" → 503.
     const uaCases: Array<[string | null, number, string]> = [
-      ["aimlo-desktop/1.0", 401, "UA TAM 'aimlo-desktop/1.0' (v1.0.19 vision istemcisi) → 401"],
+      ["aimlo-desktop/1.0", 503, "UA TAM 'aimlo-desktop/1.0' (v1.0.19 vision istemcisi) → 503 (401 teardown'ı raporu kaybettirir)"],
       [null, 401, "UA'sız (v1.0.19 rapor/telemetri istemcisi) → 401"],
       ["", 401, "boş UA → 401 (UA'sız ile aynı)"],
       ["aimlo-desktop/1.0.20 (windows)", 503, "sürümlü UA 'aimlo-desktop/1.0.20 (windows)' → 503 (önek DEĞİL eşitlik)"],

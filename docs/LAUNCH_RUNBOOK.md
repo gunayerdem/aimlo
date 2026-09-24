@@ -66,9 +66,11 @@ kapalıyken kota yolu tek ağ çağrısı bile yapmaz — flip tamamen geri alı
    `detail.reason = "fair_use"`, `detail.tier = "plus"` ve mesaj CTA'sız:
    "AIMLO+ aylık adil kullanım tavanın (100 maç) doldu; hakkın 1 Ekim'de
    yenilenir." (istek `lang: "en"` ise İngilizcesi). "Ücretsiz" ve "sınırsız"
-   GEÇMEMELİ (R14 / FB04 · F93). NOT: masaüstü EN arayüzü 402'de backend
-   metnini değil kendi "haftalık ücretsiz" metnini gösteriyor — EN'de doğru
-   metin için masaüstünün `detail.reason`'ı okuması gerekir (açık iş).
+   GEÇMEMELİ (R14 / FB04 · F93). NOT (FB04 inceleme): masaüstü v1.0.20
+   (aimlo-desktop 1278ece + b78198f) `detail.reason`'ı okuyor; `fair_use`'ta HER İKİ
+   dilde kendi sabit metnini ve tek sıfırlanma cümlesini gösterir (backend
+   metni + göreli tarih eki çift "yenilenir" üretmez). v1.0.19 `reason` okumaz;
+   FREE_TIER_ENFORCED kapalıyken bu 402 hiç ateşlenmez.
 5. Vercel loglarında `[QUOTA]` satırlarını gör (aşağıda §2).
 
 ### 1.4 GERİ ALMA (rollback)
@@ -167,13 +169,17 @@ Auth'a ulaşılamadığında backend 401 yerine `503 auth_unavailable` döner.
 v1.0.19 ve öncesi bu 503'ü tanımaz: A2 kuyruğundaki maç raporu her denemede
 sayaç yakar, ~3 saat (10. deneme) sonra `failed_permanent` olur ve
 diriltilmez → rapor kalıcı kaybolur (B04 öncesi 401 → `auth_expired` →
-yeniden girişte diriltiliyordu). Ara önlem (FB04 · F88, backend): UA'sı TAM
-OLARAK `aimlo-desktop/1.0` olan ya da UA taşımayan istek (v1.0.19'un rapor ve
-telemetri istemcisi UA göndermez) Auth kesintisinde B04 öncesi 401'i alır —
-eski istemcide oturum yıkımı geri gelir (bugünkü prod davranışı) ama rapor
-diriltilebilir kalır. Sürümlü UA (`aimlo-desktop/1.0.20 (windows)`) ve web
-503 almaya devam eder. İkisi de fail-closed; önlem yalnız eski istemci
-sahadan çekilene kadar anlamlı — v1.0.20 yayını pencereyi kapatır.
+yeniden girişte diriltiliyordu). Ara önlem (FB04 · F88, backend): UA TAŞIMAYAN
+istek (v1.0.19'un rapor ve telemetri istemcisi UA göndermez) Auth kesintisinde
+B04 öncesi 401'i alır → kuyruktaki rapor `auth_expired` olur ve diriltilebilir
+kalır. v1.0.19'un VISION istemcisi (UA TAM OLARAK `aimlo-desktop/1.0`) 503
+almaya devam eder (FB04 inceleme): v1.0.19 503'ü Upstream sayar (yalnız toast,
+oturum yıkımı yok) → izleme sürer, maç sonu raporu kuyruğa girer. Ona 401
+verilseydi AuthExpired teardown izlemeyi durdurup maç durumunu sıfırlardı ve
+SÜREN maçın raporu kuyruğa bile girmeden kaybolurdu (yalnız zaten KUYRUKTAKİ
+satır diriltilebilir). Sürümlü UA (`aimlo-desktop/1.0.20 (windows)`) ve web
+de 503 alır. Hepsi fail-closed; önlem yalnız eski istemci sahadan çekilene
+kadar anlamlı — v1.0.20 yayını pencereyi kapatır.
 
 ---
 

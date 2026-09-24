@@ -144,13 +144,19 @@ async function main() {
     // FB04 · F88: eski masaüstü 503'ü tanımaz (A2 kuyruğu satırı ~3 saatte failed_permanent,
     // diriltilmez) → B04 öncesi 401. v1.0.19 rapor istemcisi UA'SIZ (aimlo-desktop 61ee71f
     // ai_client.rs:1161 — reqwest `.user_agent` yok); vision istemcisi "aimlo-desktop/1.0".
-    for (const [ua, label] of [[null, "UA'sız (v1.0.19 rapor istemcisi)"], ["aimlo-desktop/1.0", "UA 'aimlo-desktop/1.0'"]] as const) {
+    for (const [ua, label] of [[null, "UA'sız (v1.0.19 rapor istemcisi)"], ["", "boş UA"]] as const) {
       resetHarness();
       harness.auth = { kind: "throw", message: "upstash fetch failed" };
       const res = await route.POST(reportRequest({ rounds: [{ round: 1, score: "1-0", result: "win", died: false }] }, { "user-agent": ua }));
       const body = await res.json().catch(() => ({}));
       check(`F88: ${label} + auth istisnası → 401 (B04 öncesi; auth_expired → diriltilir)`, res.status === 401 && body?.error === "Invalid or expired token", `got=${res.status} ${show(body)}`);
     }
+    // FB04 inceleme: v1.0.19 VISION istemcisinin UA'sı ("aimlo-desktop/1.0") artık eski sayılmaz →
+    // 503 (401 o istemcide oturumu yıkıp süren maçın raporunu kaybettiriyordu).
+    resetHarness();
+    harness.auth = { kind: "throw", message: "upstash fetch failed" };
+    const resV = await route.POST(reportRequest({ rounds: [{ round: 1, score: "1-0", result: "win", died: false }] }, { "user-agent": "aimlo-desktop/1.0" }));
+    check("F88 inceleme: UA 'aimlo-desktop/1.0' + auth istisnası → 503 auth_unavailable (HEAD: 401 → vision teardown)", resV.status === 503, `got=${resV.status}`);
     resetHarness();
     harness.auth = { kind: "throw", message: "upstash fetch failed" };
     const res = await route.POST(reportRequest({ rounds: [{ round: 1, score: "1-0", result: "win", died: false }] }, { "user-agent": "aimlo-desktop/1.0.20 (windows)" }));

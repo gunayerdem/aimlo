@@ -535,6 +535,11 @@ async function main() {
     eq("appVersion U+202E → app_version_invalid", v({ type: "match_completed", appVersion: "1.0.20\u202E" }), "app_version_invalid");
     t("isValidAppVersion: zarf sürümü de aynı küme ('1.0 beta' → false, '1.0.19' → true)",
       tt.isValidAppVersion("1.0 beta") === false && tt.isValidAppVersion("1.0.19") === true);
+    // FB04 inceleme · F87 (low): masaüstü telemetry.rs looks_like_version [A-Za-z0-9.+-] — semver
+    // derleme üst verisi ("+") kabul edilmeli (HEAD: app_version_invalid → olay düşer, zarf null).
+    eq("appVersion '1.0.21+hotfix1' kabul (masaüstü looks_like_version kümesi)", v({ type: "match_completed", appVersion: "1.0.21+hotfix1" }), null);
+    t("isValidAppVersion: masaüstü kümesinin HER karakteri ([A-Za-z0-9.+-]) kabul",
+      tt.isValidAppVersion("1.0.21+hotfix1") === true && tt.isValidAppVersion("2.0.0-rc.1+build.5") === true && tt.isValidAppVersion("1.0 +x") === false);
   }
 
   console.log("\n[D2] F87 tel-flood — 100k sahte satır (tek hesap) + son 6 saatte 500 gerçek vision_502");
@@ -576,6 +581,39 @@ async function main() {
     t("sel hesabının kodları tavanlı (hitsShort ≤ TELEMETRY_PER_USER_HITS_CAP)",
       errsD.filter((r) => r.code.startsWith("fake_")).every((r) => r.hitsShort <= at.TELEMETRY_PER_USER_HITS_CAP && r.usersShort === 1));
     t("tavana dayanıldı → truncated=true (kart '≥' / 'en ESKİ satırlar düştü' der)", sum.errors?.truncated === true);
+  }
+
+  console.log("\n[D2b] F87 BİLİNEN SINIR — ters dağılım: sel SON saatte (21k satır, tek hesap), gerçek olay 2-12 saat önce");
+  {
+    // FB04 inceleme (low): kök (kullanıcı başı tavan yalnız OKUNAN satırlara uygulanıyor; tavan
+    // 20k SATIR) açık — tek hesap son saatlerde tavanı doldurursa daha ESKİ gerçek olaylar hiç
+    // okunmaz. Kalıcı çözüm SQL/RPC toplaması (prod migration → softi kararı). Bu test SINIRI
+    // kilitler: kart en azından truncated uyarısını gösterir (sessiz eksik sayım yok).
+    type FRow = { id: number; user_hash: string; type: string; code: string; count: number; app_version: string | null; created_at: string };
+    const NOW = Date.parse("2026-09-30T12:00:00Z");
+    const rows: FRow[] = [];
+    let id = 0;
+    for (let i = 0; i < 21_000; i++) {
+      rows.push({ id: id++, user_hash: "attacker0000000", type: "error_code_count", code: `f${i % 5}`, count: 1000, app_version: "1.0.20", created_at: new Date(NOW - 3600_000 + Math.floor((i / 21_000) * 3600_000)).toISOString() });
+    }
+    for (let i = 0; i < 500; i++) {
+      rows.push({ id: id++, user_hash: `real${i % 50}`, type: "error_code_count", code: "vision_502", count: 3, app_version: "1.0.20", created_at: new Date(NOW - 12 * 3600_000 + i * 72_000).toISOString() });
+    }
+    const asc = [...rows].sort((a, b) => a.created_at.localeCompare(b.created_at) || a.id - b.id);
+    const desc = [...asc].reverse();
+    fake.onQuery = (q) => {
+      const types = (q.filters.find((f) => f[0] === "in" && f[1] === "type")?.[2] ?? []) as string[];
+      const since = q.filters.find((f) => f[0] === "gte" && f[1] === "created_at")?.[2] as string | undefined;
+      const until = q.filters.find((f) => f[0] === "lte" && f[1] === "created_at")?.[2] as string | undefined;
+      const ascending = q.order.find((o) => o[0] === "created_at")?.[1] !== false;
+      const [a, b] = q.range ?? [0, 0];
+      const src = (ascending ? asc : desc).filter((r) => types.includes(r.type) && (!since || r.created_at >= since) && (!until || r.created_at <= until));
+      return { data: src.slice(a, b + 1) as unknown as Row[], error: null };
+    };
+    const sum = await at.getTelemetrySummary(NOW);
+    t("ters sel: truncated=true → kart 'eksik olabilir' uyarısını gösterir (sessiz eksik sayım YOK)", sum.errors?.truncated === true);
+    const seen = (sum.errors?.data ?? []).some((r) => r.code === "vision_502");
+    console.log(`  ℹ BİLİNEN SINIR: eski gerçek olay (vision_502) ${seen ? "görünüyor" : "OKUNMADI"} — kalıcı çözüm SQL/RPC toplaması (softi kararı)`);
   }
 
   console.log(fail === 0 ? `\n✅ TELEMETRİ GÖRÜNÜRLÜK: ${pass} geçti, 0 kırık` : `\n❌ TELEMETRİ GÖRÜNÜRLÜK: ${fail} kırık (${pass} geçti)`);

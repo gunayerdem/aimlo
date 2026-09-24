@@ -174,6 +174,14 @@ export const TELEMETRY_LIMITS = {
 export const TELEMETRY_ID_RE = /^[A-Za-z0-9_.:\/-]{1,64}$/;
 
 /**
+ * FB04 inceleme · F87 (low): `appVersion` kümesi = TELEMETRY_ID_RE + "+" (semver derleme üst
+ * verisi, "1.0.21+hotfix1"). KANIT: masaüstü telemetry.rs looks_like_version [A-Za-z0-9.+-] kabul
+ * ediyor; eski küme "+" içeren sürümün diskten geri yüklenen HER olayını app_version_invalid ile
+ * düşürüp zarf sürümünü sessizce null yapardı. "+" ASCII, görüntü aldatması/log bozma riski yok.
+ */
+export const TELEMETRY_VERSION_RE = /^[A-Za-z0-9_.:+\/-]{1,64}$/;
+
+/**
  * FB04 · F87: `code` karakter kümesi — YAZDIRILABİLİR ASCII (U+0020..U+007E), 1..64.
  * Planın önerdiği TELEMETRY_ID_RE `code`a UYGULANMADI, çünkü GERÇEK veride ölçülen
  * yanlış-pozitif %100'dü: watch_health `code`u boşluk ve "+" taşır ("wgc b0/0 s0+0 p0 ?-?",
@@ -221,7 +229,7 @@ export function isValidAppVersion(v: unknown): v is string {
     typeof v === "string" &&
     v.length > 0 &&
     v.length <= TELEMETRY_LIMITS.maxStringLen &&
-    TELEMETRY_ID_RE.test(v)
+    TELEMETRY_VERSION_RE.test(v)
   );
 }
 

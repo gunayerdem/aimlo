@@ -40,7 +40,9 @@ function TelemetryTableCard({
   empty,
   unknown,
   truncated,
-  truncatedNote = "Satır tavanına dayanıldı — en ESKİ satırlar düştü (en yeniler okundu): sayılar EKSİK olabilir (alt sınır).",
+  // FB04 inceleme · F87: bilinen sınır kartta açık — tavan SATIR bazlı; tek hesap son saatlerde
+  // tavanı doldurursa daha eski gerçek olaylar hiç okunmaz (kalıcı çözüm SQL/RPC toplaması).
+  truncatedNote = "Satır tavanına dayanıldı — en ESKİ satırlar düştü (en yeniler okundu): sayılar EKSİK olabilir (alt sınır). Bilinen sınır: tek bir hesap son saatlerde tavanı doldurursa daha ESKİ gerçek olaylar hiç okunmaz — kesin sayım için SQL editöründe 0015 sorgusu.",
 }: {
   title: string;
   sub?: string;

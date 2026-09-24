@@ -48,6 +48,12 @@
 // pencereye girmez). Tek hesabın sıralamayı ele geçirmesine karşı: tablo önce 24s AYRIK
 // KULLANICI sayısına göre sıralanır ve kullanıcı başına katkı TELEMETRY_PER_USER_HITS_CAP
 // ile sınırlanır; gecikme tablosu kesildiğinde "p50/p95 YAKLAŞIK" der (alt sınır değil).
+// ⚠ KALAN AÇIK (FB04 inceleme · F87): kullanıcı başı tavan ve ayrık-kullanıcı sırası yalnız
+// OKUNAN satırlara uygulanır; tavan TELEMETRY_MAX_ROWS SATIRDIR. Tek hesap son saatlerde tavanı
+// doldurursa (~21k satır, ~4 dk'lık sel) daha ESKİ gerçek olaylar hiç OKUNMAZ — kart yalnız
+// "en ESKİ satırlar düştü" + bilinen-sınır notunu gösterir (test-telemetry-route [D2b] kilitler).
+// Kalıcı çözüm SQL/RPC toplaması (group by code, app_version; sum(least(count, cap)),
+// count(distinct user_hash)) — prod migration, softi kararı.
 //
 // GİZLİLİK: yalnız user_hash (sha256 önek) ayrık sayılır; dışarı hiçbir kimlik
 // verilmez. Dönen yapıda user_hash YOK.
