@@ -326,6 +326,54 @@ async function main() {
     ok(dk("u6") === 1, `(e) iade başarısız → sayaç yanık kalır (eski davranış), 1 (gelen ${dk("u6")})`);
   }
 
+  console.log("[9] A058-B (W2 followup #62/#68): günlük kota gövde doğrulamasından SONRA harcanır");
+  {
+    const { consumeDailyQuota } = await import("../lib/api-auth");
+    const day = utcDayKey();
+    const dk = (u: string) => upstash.get(`daily:${u}:report:${day}`) ?? 0;
+    if (typeof consumeDailyQuota !== "function") {
+      ok(false, "consumeDailyQuota lib/api-auth.ts'ten export ediliyor");
+    } else {
+      // (a) deferDaily: JWT + dakika kapısı çalışır, günlük sayaç ARTMAZ.
+      authUserId = "u-rep";
+      const mkRep = (ip: string) => new NextRequest("http://localhost/api/ai/report", { headers: { authorization: "Bearer a.b.c", "x-real-ip": ip } });
+      const r1 = await verifyAuthAndRateLimit(mkRep("198.51.100.20"), "report", { deferDaily: true });
+      ok(r1.ok && dk("u-rep") === 0 && (upstash.get("rate:u-rep:report") ?? 0) === 1,
+        `(a) deferDaily → ok, günlük 0, dakika 1 (gelen ok=${r1.ok}, günlük ${dk("u-rep")}, dakika ${upstash.get("rate:u-rep:report")})`);
+      // (b) varsayılan çağrı (deferDaily yok) eski davranış: günlük sayaç artar.
+      authUserId = "u-rep2";
+      const r2 = await verifyAuthAndRateLimit(mkRep("198.51.100.21"), "report");
+      ok(r2.ok && dk("u-rep2") === 1, `(b) varsayılan çağrı günlük sayacı artırır (eski davranış) — gelen ${dk("u-rep2")}`);
+      // (c) consumeDailyQuota: 10/gün (report) — 10 izin, 11. aynı 429 gövdesi.
+      const results: (Response | null)[] = [];
+      for (let i = 0; i < 11; i++) results.push(await consumeDailyQuota("u-rep", "report"));
+      const last = results[10];
+      const body = last ? ((await last.json()) as Json) : {};
+      const detail = (body.detail ?? {}) as Json;
+      ok(results.slice(0, 10).every((x) => x === null) && dk("u-rep") === 11,
+        `(c) ilk 10 çağrı izinli (null), sayaç 11 (gelen ${dk("u-rep")})`);
+      ok(!!last && last.status === 429 && body.error === "Daily quota exceeded" && detail.kind === "daily"
+        && typeof detail.resetsAt === "string" && typeof body.retryAfter === "number"
+        && last.headers.get("Retry-After") === String(body.retryAfter),
+        `(c) 11. → verifyAuthAndRateLimit'in günlük 429 gövdesinin AYNISI (gelen ${last?.status} ${JSON.stringify(body)})`);
+      // (d) bypass'lı kullanıcı kota aşımında da geçer (checkRateLimit ile aynı).
+      bypassUsers.add("u-rep-bypass");
+      upstash.set(`daily:u-rep-bypass:report:${day}`, 10);
+      ok((await consumeDailyQuota("u-rep-bypass", "report")) === null, "(d) bypass → null (izinli)");
+      // (e) prod + Upstash erişilemez → fail-closed 503 (servis gövdesi, detail YOK).
+      const env = process.env as Record<string, string | undefined>;
+      const prevEnv = env.NODE_ENV, prevUrl = env.UPSTASH_REDIS_REST_URL;
+      env.NODE_ENV = "production"; env.UPSTASH_REDIS_REST_URL = "http://127.0.0.1:9";
+      let r5: Response | null = null;
+      try { r5 = (await quiet(() => consumeDailyQuota("u-rep", "report"))).v; }
+      finally { env.NODE_ENV = prevEnv; env.UPSTASH_REDIS_REST_URL = prevUrl; }
+      const b5 = r5 ? ((await r5.json()) as Json) : {};
+      ok(!!r5 && r5.status === 503 && b5.error === "Rate limiter unavailable — please retry shortly." && !("detail" in b5),
+        `(e) prod + Upstash yok → 503 fail-closed (gelen ${r5?.status} ${JSON.stringify(b5)})`);
+      authUserId = "user-ok";
+    }
+  }
+
   server.close();
   if (fail) {
     console.error("\nTEST BAŞARISIZ — P9/B04 sözleşmesi bozulmuş olabilir (lib/api-auth.ts).");

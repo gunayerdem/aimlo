@@ -467,7 +467,11 @@ async function refundDaily(key: string, resetAt: number, inMemory: boolean): Pro
 export async function checkRateLimit(
   userId: string,
   route: RouteKey = "default",
-  ip?: string
+  ip?: string,
+  // A058-B (W2 followup #62/#68, 2026-09-24): true → günlük sayaç BU çağrıda artırılmaz;
+  // çağıran gövdeyi doğruladıktan SONRA consumeDailyQuota ile harcar. Dakika + per-IP
+  // kapıları aynen burada kalır (anonim/sınırsız gövde-fuzz yüzeyi açılmaz).
+  opts?: { skipDaily?: boolean },
 ): Promise<{ allowed: boolean; remaining: number; retryAfter?: number; reason?: string; resetAt?: number }> {
   cleanupStores();
 
@@ -476,7 +480,7 @@ export async function checkRateLimit(
   // panelinden verilen `grantRateBypass` ve o da yalnızca limit AŞILDIĞINDA
   // kontrol ediliyor (aşağıda) — yani normal trafiğe ek maliyeti yok.
   const limits = RATE_LIMITS[route] || RATE_LIMITS.default;
-  const dailyLimit = DAILY_QUOTA[route];
+  const dailyLimit = opts?.skipDaily ? undefined : DAILY_QUOTA[route];
 
   try {
     // Per-user rate check
@@ -577,9 +581,82 @@ export function authUnavailableResponse(): NextResponse {
   );
 }
 
+/** checkRateLimit sonucundan 429/503 yanıtı (verifyAuthAndRateLimit ve consumeDailyQuota
+ *  AYNI gövdeyi üretsin diye tek yer — desktop sözleşmesi: error metni, retryAfter,
+ *  detail.kind, detail.resetsAt, Retry-After başlığı). */
+function rateLimitResponse(rateResult: { retryAfter?: number; reason?: string; resetAt?: number }): NextResponse {
+  const isDailyQuota = rateResult.reason === "daily";
+  const isService = rateResult.reason === "service";
+  return NextResponse.json(
+    {
+      error: isService
+        ? "Rate limiter unavailable — please retry shortly."
+        : isDailyQuota
+        ? "Daily quota exceeded"
+        : "Too many requests. Please wait a moment.",
+      retryAfter: rateResult.retryAfter,
+      // detail.kind (P9, 2026-08-05): desktop 429'u "günlük kota mı, kısa
+      // pencere mi" diye bununla ayırıyor (ai_client.rs classify_http_error
+      // ÖNCE detail.kind okur). Bu alan yokken yedek yol `message` alanına
+      // bakıyordu ama metnimiz `error` alanında — yani günlük kota PerIp
+      // sanılıp kullanıcıya "3600 sn sonra tekrar dene" deniyordu; doğru
+      // mesaj ("Günlük Limit Doldu") desktop'ta yazılı olduğu hâlde o dala
+      // hiç girilmiyordu. EKLEMELİ: eski sürümlerde detail Option<Value>,
+      // alan yok sayılır; davranış/limit DEĞİŞMEZ, yalnız sınıflama düzelir.
+      //
+      // B04/A110 (EKLEMELİ): günlük aşımda detail.resetsAt = sayacın sıfırlandığı
+      // an (ISO, UTC gece yarısı). Desktop 429'da yalnız kind okur; eski sürümler
+      // alanı yok sayar. kind eşlemesi DEĞİŞMEDİ.
+      ...(isService ? {} : { detail: { kind: isDailyQuota ? "daily" : "ip",
+        ...(isDailyQuota && rateResult.resetAt ? { resetsAt: new Date(rateResult.resetAt).toISOString() } : {}) } }),
+    },
+    {
+      status: isService ? 503 : 429,
+      headers: rateResult.retryAfter ? { "Retry-After": String(rateResult.retryAfter) } : {},
+    },
+  );
+}
+
+/**
+ * A058-B (W2 followup #62/#68, 2026-09-24) — günlük kotayı GÖVDE DOĞRULAMASINDAN SONRA harca.
+ *
+ * KANIT: report route verifyAuthAndRateLimit(request, "report") ile günlük sayacı gövde
+ * doğrulamasından ÖNCE artırıyordu (checkRateLimit → dailyQuotaCheck INCR); 400 alan istek
+ * de 10/gün rapor kotasını yakıyordu. Desktop kalıcı 400'ü (40ce444f, "Invalid score
+ * values") haftalarca yeniden denediği için tek bozuk satır bir günlük kotayı bitirebiliyordu
+ * (aimlo-runtimeKAAN.txt:147/152/3903/3912, 31.08 log :230-239).
+ *
+ * SÖZLEŞME: verifyAuthAndRateLimit(request, route, { deferDaily: true }) JWT + dakika +
+ * per-IP kapılarını AYNEN uygular, yalnız günlük INCR'ı atlar; çağıran geçerli gövdeden
+ * sonra bunu çağırır. Dönüş: null = izinli; aksi hâlde verifyAuthAndRateLimit'in günlük
+ * 429 / fail-closed 503 gövdesinin AYNISI (rateLimitResponse). Bypass yalnız aşımda
+ * bakılır (checkRateLimit ile aynı). 400'de geri alma (DECR) YOK — yarış açar; zaten
+ * INCR hiç yapılmıyor.
+ */
+export async function consumeDailyQuota(userId: string, route: RouteKey): Promise<NextResponse | null> {
+  const dailyLimit = DAILY_QUOTA[route];
+  if (!dailyLimit) return null;
+  try {
+    const r = await dailyQuotaCheck(userId, route, dailyLimit);
+    if (r.allowed) return null;
+    if (await isRateBypassed(userId)) return null;
+    const retryAfter = Math.max(60, Math.ceil((r.resetAt - Date.now()) / 1000));
+    return rateLimitResponse({ retryAfter, reason: "daily", resetAt: r.resetAt });
+  } catch (e) {
+    // Fail-closed (checkRateLimit ile aynı: yalnız prod'da Upstash hatası).
+    if ((e as Error).message === "rate-limiter-unavailable") {
+      return rateLimitResponse({ retryAfter: 30, reason: "service" });
+    }
+    throw e;
+  }
+}
+
 export async function verifyAuthAndRateLimit(
   request: NextRequest,
   route: RouteKey = "default",
+  // A058-B: true → günlük kota bu çağrıda HARCANMAZ; çağıran geçerli gövdeden sonra
+  // consumeDailyQuota'yı çağırmak ZORUNDA (yalnız report route kullanır).
+  opts?: { deferDaily?: boolean },
 ): Promise<
   | { ok: true; userId: string }
   | { ok: false; response: NextResponse }
@@ -634,41 +711,9 @@ export async function verifyAuthAndRateLimit(
   const xffLast = xff ? xff.split(",").pop()?.trim() : undefined;
   const ip = request.headers.get("x-real-ip") || xffLast || undefined;
 
-  const rateResult = await checkRateLimit(user.id, route, ip);
+  const rateResult = await checkRateLimit(user.id, route, ip, { skipDaily: opts?.deferDaily === true });
   if (!rateResult.allowed) {
-    const isDailyQuota = rateResult.reason === "daily";
-    const isService = rateResult.reason === "service";
-    return {
-      ok: false,
-      response: NextResponse.json(
-        {
-          error: isService
-            ? "Rate limiter unavailable — please retry shortly."
-            : isDailyQuota
-            ? "Daily quota exceeded"
-            : "Too many requests. Please wait a moment.",
-          retryAfter: rateResult.retryAfter,
-          // detail.kind (P9, 2026-08-05): desktop 429'u "günlük kota mı, kısa
-          // pencere mi" diye bununla ayırıyor (ai_client.rs classify_http_error
-          // ÖNCE detail.kind okur). Bu alan yokken yedek yol `message` alanına
-          // bakıyordu ama metnimiz `error` alanında — yani günlük kota PerIp
-          // sanılıp kullanıcıya "3600 sn sonra tekrar dene" deniyordu; doğru
-          // mesaj ("Günlük Limit Doldu") desktop'ta yazılı olduğu hâlde o dala
-          // hiç girilmiyordu. EKLEMELİ: eski sürümlerde detail Option<Value>,
-          // alan yok sayılır; davranış/limit DEĞİŞMEZ, yalnız sınıflama düzelir.
-          //
-          // B04/A110 (EKLEMELİ): günlük aşımda detail.resetsAt = sayacın sıfırlandığı
-          // an (ISO, UTC gece yarısı). Desktop 429'da yalnız kind okur; eski sürümler
-          // alanı yok sayar. kind eşlemesi DEĞİŞMEDİ.
-          ...(isService ? {} : { detail: { kind: isDailyQuota ? "daily" : "ip",
-            ...(isDailyQuota && rateResult.resetAt ? { resetsAt: new Date(rateResult.resetAt).toISOString() } : {}) } }),
-        },
-        {
-          status: isService ? 503 : 429,
-          headers: rateResult.retryAfter ? { "Retry-After": String(rateResult.retryAfter) } : {},
-        },
-      ),
-    };
+    return { ok: false, response: rateLimitResponse(rateResult) };
   }
 
   return { ok: true, userId: user.id };

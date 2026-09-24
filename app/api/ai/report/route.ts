@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
-import { verifyAuthAndRateLimit, authUnavailableResponse } from "@/lib/api-auth";
+import { verifyAuthAndRateLimit, authUnavailableResponse, consumeDailyQuota } from "@/lib/api-auth";
 import { checkMatchQuota } from "@/lib/entitlements";
 import { saveAiUsage } from "@/lib/ai-usage";
 import { loadPlayerMemory, updatePlayerMemory, buildMemoryContext } from "@/lib/player-memory";
@@ -281,7 +281,9 @@ export async function POST(request: NextRequest) {
     // Auth + rate limit check — reject unauthenticated/rate-limited requests
     let userId: string;
     try {
-      const auth = await verifyAuthAndRateLimit(request, "report");
+      // A058-B (W2 followup #62/#68): günlük kota burada HARCANMAZ (deferDaily) — gövde
+      // doğrulandıktan SONRA consumeDailyQuota. JWT + dakika + per-IP kapıları aynen burada.
+      const auth = await verifyAuthAndRateLimit(request, "report", { deferDaily: true });
       if (!auth.ok) {
         return auth.response;
       }
@@ -311,6 +313,19 @@ export async function POST(request: NextRequest) {
     const validation = validateRequest(rawBody);
     if (!validation.valid) {
       return NextResponse.json({ error: validation.error }, { status: 400 });
+    }
+
+    // A058-B (W2 followup #62/#68): günlük rapor kotası YALNIZ geçerli gövdede harcanır.
+    // Eskiden 400 alan istek de 10/gün kotayı yakıyordu (desktop kalıcı 400'ü yeniden
+    // denedikçe günlük kota bitiyordu). 429/503 gövdesi verifyAuthAndRateLimit'inkiyle
+    // AYNI (rateLimitResponse). 409 pre-flight'tan ÖNCE (fix_spec A058-B sırası).
+    try {
+      const quotaResponse = await consumeDailyQuota(userId, "report");
+      if (quotaResponse) return quotaResponse;
+    } catch (e) {
+      // verifyAuthAndRateLimit istisnasıyla aynı muamele: altyapı hatası → 503 (fail-closed).
+      console.error("[Aimlo API] Report daily quota exception:", e instanceof Error ? e.message : "unknown");
+      return authUnavailableResponse();
     }
 
     // Cost-aware pre-flight: when the client sets persistOnServer + matchId,

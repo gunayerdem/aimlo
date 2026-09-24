@@ -242,6 +242,36 @@ async function main() {
     check("'decisionScore' alan adı → 'karar puanı' (ücretli eval R3 summary birebir)", /karar puanı orta \(5\/10\)/.test(leak) && !/decisionScore/.test(leak), show(leak));
   }
 
+  // ── A058-B (W2 followup #62/#68): 400 alan istek günlük rapor kotasını YAKMAZ ─────
+  console.log("\n── 7) günlük rapor kotası yalnız GEÇERLİ gövdede harcanır (A058-B) ──");
+  {
+    resetHarness();
+    const bad = await route.POST(reportRequest({
+      rounds: [{ round: 1, score: "?-?", result: "unknown", died: true }], lang: "tr", map: "summit",
+    }));
+    check("geçersiz gövde (40ce444f biçimi) → 400 ve günlük kota HARCANMADI (consumeDailyQuota 0)",
+      bad.status === 400 && harness.dailyCalls === 0, `got=${bad.status} dailyCalls=${harness.dailyCalls}`);
+    check("route verifyAuthAndRateLimit'e { deferDaily: true } veriyor",
+      JSON.stringify(harness.verifyOpts[0]) === JSON.stringify({ deferDaily: true }), show(harness.verifyOpts));
+    resetHarness();
+    const good = await route.POST(reportRequest({
+      rounds: [{ round: 1, score: "1 - 0", result: "win", died: false }], lang: "tr", map: "bind",
+    }));
+    check("geçerli gövde → 200 ve günlük kota TAM 1 kez harcandı", good.status === 200 && harness.dailyCalls === 1,
+      `got=${good.status} dailyCalls=${harness.dailyCalls}`);
+    resetHarness();
+    harness.dailyReject = { status: 429, body: { error: "Daily quota exceeded", retryAfter: 3600, detail: { kind: "daily" } } };
+    process.env.OPENAI_API_KEY = "sk-test-not-real";
+    const full = await route.POST(reportRequest({
+      rounds: [{ round: 1, score: "1 - 0", result: "win", died: false }], lang: "tr", map: "bind",
+    }));
+    delete process.env.OPENAI_API_KEY;
+    const fb = await full.json().catch(() => ({}));
+    check("kota dolu → consumeDailyQuota'nın 429 gövdesi aynen döner, AI çağrısı YOK",
+      full.status === 429 && fb?.error === "Daily quota exceeded" && harness.fetchCalls.length === 0,
+      `got=${full.status} ${show(fb)} fetch=${harness.fetchCalls.length}`);
+  }
+
   console.log(`\n${fail === 0 ? "✅" : "❌"} test-report-score: ${pass} geçti, ${fail} kırık\n`);
   if (fail > 0) process.exit(1);
 }

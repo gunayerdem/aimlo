@@ -9,7 +9,9 @@
  * kalıbı + CJS önbellek sahtesi:
  *   1) "server-only" → boş modül ("path"); "@/..." → repo kökü.
  *   2) Module._cache'e sahte `exports` konur (route CJS require ile yükler):
- *        lib/api-auth      → GERÇEK modül, yalnız verifyAuthAndRateLimit sahte
+ *        lib/api-auth      → GERÇEK modül, yalnız verifyAuthAndRateLimit ve
+ *                            consumeDailyQuota sahte (A058-B: günlük kota çağrıları
+ *                            SAYILIR, ret modu verilebilir; verify'ın opts'u kaydedilir)
  *                            (authUnavailableResponse GERÇEK kalır → 503 gövdesi
  *                            prod ile aynı fonksiyondan gelir)
  *        lib/entitlements  → checkMatchQuota her zaman izinli
@@ -60,6 +62,12 @@ export const harness = {
   fetchCalls: [] as FetchCall[],
   /** Sıradaki OpenAI çağrılarının yanıtları (FIFO). Boşsa fetch THROW eder. */
   replies: [] as ModelReply[],
+  /** A058-B: consumeDailyQuota çağrı sayısı (günlük rapor kotası harcandı mı). */
+  dailyCalls: 0,
+  /** A058-B: verilirse consumeDailyQuota bu yanıtı döner (kota dolu simülasyonu). */
+  dailyReject: null as null | { status: number; body: Record<string, unknown> },
+  /** A058-B: verifyAuthAndRateLimit'e route'un geçtiği 3. argüman (deferDaily). */
+  verifyOpts: [] as unknown[],
 };
 
 export function resetHarness(): void {
@@ -68,6 +76,9 @@ export function resetHarness(): void {
   harness.memoryContext = "";
   harness.fetchCalls = [];
   harness.replies = [];
+  harness.dailyCalls = 0;
+  harness.dailyReject = null;
+  harness.verifyOpts = [];
 }
 
 /** Sahte OpenAI uç noktası — route ve eval AYNI fonksiyonu kullanır. */
@@ -112,13 +123,19 @@ export function loadReportRoute(): { POST: (req: Request) => Promise<Response> }
   const realApiAuth = require(apiAuthPath) as Record<string, unknown>;
   M._cache[apiAuthPath].exports = {
     ...realApiAuth,
-    verifyAuthAndRateLimit: async () => {
+    verifyAuthAndRateLimit: async (_req: unknown, _route: unknown, opts?: unknown) => {
+      harness.verifyOpts.push(opts);
       const a = harness.auth;
       if (a.kind === "throw") throw new Error(a.message);
       if (a.kind === "reject") {
         return { ok: false, response: Response.json(a.body, { status: a.status }) };
       }
       return { ok: true, userId: a.userId };
+    },
+    consumeDailyQuota: async () => {
+      harness.dailyCalls++;
+      const r = harness.dailyReject;
+      return r ? Response.json(r.body, { status: r.status }) : null;
     },
   };
 
