@@ -354,8 +354,12 @@ const MAX_HISTORY_STRING_LEN = 200;
  * yalnız akıl-dışı uzunluktaki string elenir.
  */
 const MAX_CTX_FIELD_LEN = 4096;
+// FB03 · F55 (2026-09-24): + deathLocation. KANIT: kapıda yoktu; aynı alanın DB'ye giden
+// kopyası HAM gövdeden okunuyordu (aşağıda saveMatchEvent) → 1.000.000 karakterlik
+// deathLocation status 200 ile match_events.death_loc'a yazıldı. Sahada en uzun değer 14 kr
+// (5 runtime logu, 22 konum: "mid courtyard", "istemci b ana") → 4096 meşru istemciyi reddetmez.
 const CTX_TEXT_FIELDS = [
-  "map", "agent", "mode", "score", "result", "deathTiming", "side", "economyType", "rank",
+  "map", "agent", "mode", "score", "result", "deathTiming", "side", "economyType", "rank", "deathLocation",
 ] as const;
 
 function isValidRoundHistory(raw: unknown): boolean {
@@ -871,25 +875,36 @@ export async function POST(request: NextRequest) {
       // (rank-4) Kavram hafızası — bu round'un death-type'ı maç set'ine yazılır
       // (fire-and-forget, saveMatchEvent emsali: yanıtı BLOKLAMAZ, hata sessiz).
       // Faz2 echo'su gelince roundHistory kazanır, bu yazım okunmadan kalır — zararsız.
-      {
+      // FB03 · F56 (2026-09-24): ikisi de YALNIZ ölüm round'unda (died === true). KANIT:
+      // masaüstünün warmup çağrısı (ai_client.rs send_warmup_ping: round 0, died=false,
+      // banner "warmup", matchId YOK) her maçta buraya düşüyor ve match_events'e sahte bir
+      // round-0 kind:"death" satırı + koç metni yazıyordu (harness: matchEvents=[{kind:"death",
+      // roundNo:0, matchId:null}]). Güncel masaüstünde died=false vision çağrısının TEK kaynağı
+      // warmup: hayatta kalınan round SKIP-DISPATCH dalında AI'ya hiç gitmez (masaüstü 8f16733 lib.rs:5244-5290);
+      // 5 runtime logunda 59 gövdenin died=false olan 6'sının 6'sı banner=warmup/round 0.
+      // Kota muafiyeti YOK (A110) — checkMatchQuota ve nomatch kovası değişmedi.
+      if (reqBody.died === true) {
         const mcId = (body as VisionRequest).matchId;
         if (deathTypeOut && typeof mcId === "string" && mcId) {
           void recordMatchConcept(auth.userId, mcId, deathTypeOut);
         }
-      }
 
-      saveMatchEvent({
-        userId: auth.userId,
-        matchId: (body as VisionRequest).matchId ?? null,
-        kind: "death",
-        map: reqMap ?? null,
-        agent: reqAgent ?? null,
-        side: (body as VisionRequest).side ?? null,
-        roundNo: (body as VisionRequest).round ?? null,
-        score: (body as VisionRequest).score ?? null,
-        deathLoc: (body as VisionRequest).deathLocation ?? null,
-        feedback: { deathAnalysis: deathAnalysisOut, enemyAnalysis: enemyAnalysisOut, nextRoundSuggestion: nextRoundOut },
-      });
+        saveMatchEvent({
+          userId: auth.userId,
+          matchId: (body as VisionRequest).matchId ?? null,
+          kind: "death",
+          map: reqMap ?? null,
+          agent: reqAgent ?? null,
+          side: (body as VisionRequest).side ?? null,
+          roundNo: (body as VisionRequest).round ?? null,
+          score: (body as VisionRequest).score ?? null,
+          // FB03 · F55: HAM gövde değil, kurucunun temizlediği değer (sanitizePromptInput
+          // max 50 + collapseWhitespace — prompt'a giden AYNI dize). lib/match-events ayrıca
+          // her metin alanını kapaklar (death_loc 100).
+          deathLoc: typeof user.ctx.deathLocation === "string" ? user.ctx.deathLocation : null,
+          feedback: { deathAnalysis: deathAnalysisOut, enemyAnalysis: enemyAnalysisOut, nextRoundSuggestion: nextRoundOut },
+        });
+      }
 
       // Copy meta fields from REQUEST (desktop is source of truth for round/score/result/died).
       // 🔴 B115 + B111 (2026-07-31) — result eşlemesi iki ayrı hata taşıyordu:

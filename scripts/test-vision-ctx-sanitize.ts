@@ -224,7 +224,8 @@ console.log("\n[6] SINIR KAPISI — isValidVisionRequest akıl-dışı uzunlukta
 {
   t("MAX_CTX_FIELD_LEN tanımlı (4096)", /const MAX_CTX_FIELD_LEN = 4096;/.test(src));
   t("CTX_TEXT_FIELDS listesi tanımlı", /const CTX_TEXT_FIELDS = \[/.test(src));
-  for (const f of ["map", "agent", "mode", "score", "result", "deathTiming", "side", "economyType", "rank"]) {
+  // FB03 · F55: + deathLocation (DB'ye giden kopyası ham gövdeden okunuyordu).
+  for (const f of ["map", "agent", "mode", "score", "result", "deathTiming", "side", "economyType", "rank", "deathLocation"]) {
     t(`kapı '${f}' alanını kapsıyor`, new RegExp(`"${f}"`).test(src.split("CTX_TEXT_FIELDS = [")[1]?.split("]")[0] ?? ""));
   }
   t("kapı isValidVisionRequest içinde koşuyor",
@@ -489,9 +490,74 @@ async function memorySection(): Promise<void> {
     JSON.stringify({ w: pr.weakLocations, m: pr.mapStats }));
 }
 
+/* ── FB03 · F55/F56: GERÇEK vision route → match_events (scripts/vision-route-harness) ──
+ * SIRA ÖNEMLİ: düzenek lib/player-memory ve lib/match-events'i Module önbelleğinde
+ * SAHTESİYLE değiştirir → gerçek modüller (memorySection'ın player-memory'si, burada
+ * buildMatchEventRow için match-events) düzenek yüklenmeden ÖNCE require edilir. */
+async function routeSection(): Promise<void> {
+  console.log("\n[10] ROUTE → match_events: deathLocation kapısı + temizlenmiş değer + yalnız ölüm round'u (F55/F56)");
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const me = require(join(REPO_ROOT, "lib/match-events")) as {
+    buildMatchEventRow?: (i: Record<string, unknown>) => Record<string, unknown>;
+  };
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const vh = require("./vision-route-harness") as typeof import("./vision-route-harness");
+  const MID = "7df93d52-123d-4231-9a77-211666f4e285";
+  const death = { maxTokens: 900, died: true, map: "summit", agent: "brimstone", side: "defending", round: 5, score: "3 - 2", result: "loss", lang: "tr", matchId: MID, killerInfo: "killed by neon with vandal" };
+
+  // F55 (a) sınır kapısı: 1.000.000 karakter → 400 (eskiden 200 + 1 MB'lık satır).
+  vh.resetVisionHarness();
+  const big = await vh.captureVisionCall({ ...death, deathLocation: "A".repeat(1_000_000) });
+  t("1.000.000 kr deathLocation → 400, AI çağrısı ve match_events satırı YOK",
+    big.status === 400 && big.requestBody === null && vh.visionHarness.matchEvents.length === 0,
+    `status=${big.status} events=${vh.visionHarness.matchEvents.length} deathLoc_len=${String((vh.visionHarness.matchEvents[0] as Record<string, unknown> | undefined)?.deathLoc ?? "").length}`);
+  // F55 (b) kapı altında kalan uzun değer: DB'ye giden kopya kurucunun temizlediği 50 kr'lik dize.
+  vh.resetVisionHarness();
+  const mid = await vh.captureVisionCall({ ...death, deathLocation: "b lobby " + "x".repeat(3000) });
+  const ev = vh.visionHarness.matchEvents[0] as Record<string, unknown> | undefined;
+  t("3.008 kr deathLocation (kapı altı) → 200, match_events.deathLoc ≤ 100 (= prompt'taki 50 kr'lik temiz dize)",
+    mid.status === 200 && typeof ev?.deathLoc === "string" && (ev.deathLoc as string).length <= 50 && (ev.deathLoc as string).startsWith("b lobby"),
+    `status=${mid.status} len=${String(ev?.deathLoc ?? "").length}`);
+  // Pozitif kontrol: meşru ölüm round'u AYNEN bir satır yazar (deathLoc bayt-aynı).
+  vh.resetVisionHarness();
+  const ok = await vh.captureVisionCall({ ...death, deathLocation: "b lobby" });
+  const okEv = vh.visionHarness.matchEvents[0] as Record<string, unknown> | undefined;
+  t("meşru ölüm round'u: 200 + TEK 'death' satırı, deathLoc 'b lobby' aynen, kavram yazıldı",
+    ok.status === 200 && vh.visionHarness.matchEvents.length === 1 && okEv?.kind === "death" && okEv?.deathLoc === "b lobby" && okEv?.roundNo === 5
+      && vh.visionHarness.recordedConcepts.length === 1, JSON.stringify(okEv));
+  // F56: masaüstü warmup gövdesi (ai_client.rs send_warmup_ping BİREBİR: round 0, died=false,
+  // banner warmup, matchId YOK) → match_events'e sahte round-0 'death' satırı YAZILMAZ.
+  vh.resetVisionHarness();
+  const warm = await vh.captureVisionCall({
+    maxTokens: 900, round: 0, score: "0 - 0", result: "unknown", died: false, deathTiming: "none",
+    bannerType: "warmup", map: "summit", agent: "phoenix", lang: "tr",
+  });
+  t("warmup gövdesi → 200 (yanıt aynen) ama matchEvents=[] ve maç-kavramı yazılmaz",
+    warm.status === 200 && vh.visionHarness.matchEvents.length === 0 && vh.visionHarness.recordedConcepts.length === 0,
+    `status=${warm.status} events=${JSON.stringify(vh.visionHarness.matchEvents.map((e) => ({ kind: e.kind, roundNo: e.roundNo })))}`);
+
+  // F55 (c) ikinci katman — lib/match-events satırı her metin alanını kapaklar.
+  t("lib/match-events buildMatchEventRow export'u var", typeof me.buildMatchEventRow === "function");
+  if (typeof me.buildMatchEventRow === "function") {
+    const X = (n: number) => "x".repeat(n);
+    const row = me.buildMatchEventRow({ map: X(5000), agent: X(5000), side: X(5000), score: X(5000), deathLoc: X(1_000_000), result: X(5000), roundNo: 3 });
+    t("satır kapakları: map/agent 40, side 20, score 12, death_loc 100, result 16",
+      (row.map as string).length === 40 && (row.agent as string).length === 40 && (row.side as string).length === 20
+        && (row.score as string).length === 12 && (row.death_loc as string).length === 100 && (row.result as string).length === 16,
+      JSON.stringify(Object.fromEntries(Object.entries(row).map(([k, v]) => [k, typeof v === "string" ? v.length : v]))));
+    const legit = { userId: "u1", matchId: MID, kind: "death" as const, map: "summit", agent: "brimstone", side: "defending", roundNo: 12, score: "12 - 11", deathLoc: "istemci b ana", result: "unknown", feedback: { deathAnalysis: "x" } };
+    const lr = me.buildMatchEventRow(legit);
+    t("meşru satır bayt-aynı (alan adları + değerler)",
+      JSON.stringify(lr) === JSON.stringify({ user_id: "u1", match_id: MID, kind: "death", map: "summit", agent: "brimstone", side: "defending", round_no: 12, score: "12 - 11", death_loc: "istemci b ana", result: "unknown", feedback: { deathAnalysis: "x" } }), JSON.stringify(lr));
+    const odd = me.buildMatchEventRow({ map: 7 as unknown as string, side: { a: 1 } as unknown as string, roundNo: 2.5 });
+    t("tip-karışık alan null (dize olmayan metin, tam sayı olmayan round)", odd.map === null && odd.side === null && odd.round_no === null, JSON.stringify(odd));
+  }
+}
+
 (async () => {
   try {
     await memorySection();
+    await routeSection();
   } catch (e) {
     t("async bölümler istisnasız koştu", false, (e as Error).stack ?? String(e));
   }
