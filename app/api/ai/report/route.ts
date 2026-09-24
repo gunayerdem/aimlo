@@ -29,7 +29,8 @@ import { maybeRefineReport, REFINE_CALL, type RefineCallModel } from "@/lib/repo
  * Generates end-of-match coaching report.
  *
  * - Migrated to OpenAI GPT-5 mini (May 2026) — uses OPENAI_API_KEY
- * - OPENAI_API_KEY missing → deterministic stats only (no AI text; dev path)
+ * - OPENAI_API_KEY missing → deterministic stats only (no AI text; DEV path only —
+ *   in production (NODE_ENV=production, incl. Vercel preview) it is a 502 structured error)
  * - FB01 · F54 (2026-09-24): key present + AI failure → 502/504 structured error
  *   (never template coach text), nothing persisted, no player_memory update.
  */
@@ -192,12 +193,26 @@ async function persistAnalysis(
 // FB01 · F54 (2026-09-24): dönüş artık ReportAIResult — başarısızlık AYRI sınıf
 // (ai_timeout / ai_upstream_error / ai_invalid_json / ai_invalid_shape); POST handler
 // onu 502/504'e çevirir. Eskiden dört yol da sessizce `stats` (şablon) dönüyordu.
-// Şablon YALNIZ anahtarsız dev yolunda kalır (ok:true, aiGenerated=false).
+// Şablon YALNIZ anahtarsız DEV yolunda kalır (ok:true, aiGenerated=false); prod'da anahtarsız
+// yol da yapılandırılmış hatadır (Y07).
 async function generateAIReport(body: ReportRequest, userId?: string): Promise<ReportAIResult> {
   const apiKey = process.env.OPENAI_API_KEY;
   const stats = generateDeterministicReport(body);
 
-  if (!apiKey) return { ok: true, report: stats };
+  if (!apiKey) {
+    // Yakınsama Y07 (2026-09-24): anahtarsız yol eskiden NODE_ENV'e bakmadan ok:true dönüyordu →
+    // PROD'da env kaybında (bkz. "Vercel env kazası": `vercel env rm … preview` Production'dan da
+    // siler) 200 + şablon koç metni analyses'e yazılıyor, player_memory güncelleniyor ve aynı
+    // matchId 409 ile kalıcı kilitleniyordu (anahtar geri gelince gerçek rapor hiç üretilemez).
+    // Vision/feedback/insight/ask aynı durumda 503 döner. Prod'da (Vercel preview dahil
+    // NODE_ENV=production) → yapılandırılmış hata: ai_upstream_error = 502 + Retry-After + kota
+    // iadesi, hiçbir şey yazılmaz, masaüstü A2 kuyruğu yeniden dener. Şablon YALNIZ dev'de.
+    if (process.env.NODE_ENV === "production") {
+      console.error("[Aimlo AI] Report: OPENAI_API_KEY yok (prod) → 502, rapor kaydedilmedi");
+      return { ok: false, code: "ai_upstream_error" };
+    }
+    return { ok: true, report: stats };
+  }
 
   const { lang } = body;
 

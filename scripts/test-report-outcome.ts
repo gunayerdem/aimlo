@@ -369,6 +369,44 @@ async function main() {
     check("kayıttaki metin AI metni (şablon değil) ve raw_result_json.aiGenerated=true",
       (db.rows.get(MID)?.raw_result_json as Record<string, unknown>)?.aiGenerated === true && /A Main/.test(String(db.rows.get(MID)?.summary)));
     delete process.env.OPENAI_API_KEY;
+
+    // Yakınsama Y07: PROD'da OPENAI_API_KEY yok (env kaybı) → şablon DEĞİL, yapılandırılmış hata.
+    // Fix olmadan: 200 + aiGenerated:false, şablon analyses'e yazılır, hafıza güncellenir,
+    // aynı matchId sonraki istekte 409 (anahtar geri gelince gerçek rapor hiç üretilemez).
+    const env = process.env as Record<string, string | undefined>;
+    const prevNodeEnv = env.NODE_ENV;
+    try {
+      env.NODE_ENV = "production";
+      resetHarness();
+      const pdb = newFakeDb();
+      harness.db = pdb;
+      const r1 = await route.POST(reportRequest(body));
+      const p1 = await r1.json().catch(() => ({})) as Record<string, unknown>;
+      check("Y07 prod + anahtar yok → 502 {error:ai_upstream_error}, Retry-After 30, koç metni YOK (fix yok: 200 + şablon)",
+        r1.status === 502 && p1.error === "ai_upstream_error" && r1.headers.get("retry-after") === "30" && FIELDS.every((f) => !(f in p1)),
+        `status=${r1.status} ${show(p1).slice(0, 160)}`);
+      check("Y07 prod + anahtar yok: INSERT yok, hafıza yok, OpenAI/refine çağrısı yok, günlük hak iade",
+        pdb.calls.filter((m) => m === "POST").length === 0 && pdb.rows.size === 0 && harness.memoryUpdates.length === 0
+          && harness.fetchCalls.length === 0 && harness.dailyCalls === 1 && harness.dailyRefunds === 1,
+        `ins=${pdb.calls.filter((m) => m === "POST").length} mem=${harness.memoryUpdates.length} fetch=${harness.fetchCalls.length} refund=${harness.dailyRefunds}`);
+      // Anahtar geri geldi → aynı matchId 409'a takılmadan AI raporu üretilir.
+      env.OPENAI_API_KEY = "sk-test-harness-not-real";
+      harness.replies = [{ content: GOOD_AI }];
+      const r2 = await route.POST(reportRequest(body));
+      const p2 = await r2.json() as Record<string, unknown>;
+      check("Y07 anahtar geri gelince aynı matchId → 200 (409 DEĞİL), aiGenerated=true, kayıt yazıldı",
+        r2.status === 200 && p2.aiGenerated === true && pdb.rows.has(MID), `status=${r2.status} ${show(p2).slice(0, 120)}`);
+    } finally {
+      env.NODE_ENV = prevNodeEnv;
+      delete process.env.OPENAI_API_KEY;
+    }
+    // Dev (NODE_ENV≠production) anahtarsız yol DEĞİŞMEZ: şablon, 200, aiGenerated:false.
+    resetHarness();
+    harness.db = newFakeDb();
+    const rd = await route.POST(reportRequest(body));
+    const pd = await rd.json() as Record<string, unknown>;
+    check("Y07 dev + anahtar yok → 200 + aiGenerated:false (şablon yalnız dev'de; davranış aynı)",
+      rd.status === 200 && pd.aiGenerated === false, `status=${rd.status}`);
   }
   {
     // GERÇEK refundDailyQuota (bellek deposu): tek iade, harcamadan fazla iade yok.
