@@ -6,9 +6,13 @@
  *   1. Kaan'ın Lotus maçındaki GERÇEK uydurma ("A Short") ayıklanıyor
  *   2. MEŞRU metin (Lotus'un kendi callout'ları, Ascent'te A Short,
  *      bilinmeyen harita) BOZULMUYOR — softi'nin "çalışanı bozma" şartı
+ *   3. (FB05 · F02) masaüstü callouts.rs tablosu bu tabloyla BİREBİR — kardeş repo
+ *      (../aimlo-desktop ya da AIMLO_DESKTOP_DIR) yoksa SKIP, CI kırılmaz.
  */
+import * as fs from "node:fs";
+import * as path from "node:path";
 import { stripForeignCallouts } from "../lib/reality-checker";
-import { calloutBelongsToMap } from "../lib/map-callouts";
+import { calloutBelongsToMap, MAP_CALLOUTS, UNIVERSAL_CALLOUTS } from "../lib/map-callouts";
 
 let fail = 0;
 const t = (ad: string, kosul: boolean, detay = "") => {
@@ -224,6 +228,86 @@ console.log("\n[13] TAM-METİN SENKRONU (B10 inceleme [0], W3-fix) — KB gövde
   // düzeltildi (bind.md:167, fracture.md:150); uydurma olarak yazılırsa silinmeye devam eder.
   t("bind 'B Lobby' (resmi listede yok) hâlâ siliniyor", !/b lobby/i.test(stripForeignCallouts("B Lobby'den çıkarken öldün.", "bind")));
   t("fracture 'B CT' (resmi listede yok) hâlâ siliniyor", !/b ct/i.test(stripForeignCallouts("B CT çıkışında öldün.", "fracture")));
+}
+
+console.log("\n[14] İKİ REPO SENKRONU (FB05 · F02) — masaüstü callouts.rs ↔ lib/map-callouts.ts birebir");
+{
+  // KANIT (F02): backend 2b956b2 MAP_CALLOUTS'a 3 ad ekledi (ascent "market kapısı", haven
+  // "a sewer", icebox "zip line"), masaüstü aynası güncellenmedi. İki repo arasındaki TEK
+  // senkron denetimi masaüstü release betiğindeydi (release-desktop.ps1 0c →
+  // scripts/check-callout-sync.mjs); ne backend `npm test`inde ne masaüstü `cargo test`inde
+  // koşuyordu → ayrışma ancak launch günü release'i durdurunca görülecekti.
+  // ÇÖZÜM: backend tarafı da aynı kıyası `npm test`te yapar. Ayrıştırma ve özet
+  // check-callout-sync.mjs'in BİREBİR aynısıdır (parseDesktopRs regex'leri + FNV-1a 64
+  // "harita|ad\n" / "*|ad\n" beslemesi = callouts.rs d22 pini ile aynı tanım). Backend
+  // tablosu çalışma kopyasından, ÇALIŞAN modülün kendisinden okunur (Object.entries
+  // ekleme sırası = kaynak sırası). Kardeş repo yoksa SKIP (CI/başka makine kırılmaz);
+  // dosya VAR ama ayrıştırılamıyorsa KIRMIZI (sessiz geçiş yok).
+  // BigInt LİTERALİ YOK (1n): Next build'in tip denetimi scripts/'i de tarıyor ve hedef
+  // ES2017 — "BigInt literals are not available" ile build kırılıyordu. BigInt() çağrısı aynı.
+  const FNV = (maps: [string, readonly string[]][], universal: readonly string[]): string => {
+    let h = BigInt("0xcbf29ce484222325");
+    const P = BigInt("0x100000001b3");
+    const M = (BigInt(1) << BigInt(64)) - BigInt(1);
+    const feed = (str: string) => {
+      for (const b of Buffer.from(str, "utf8")) {
+        h ^= BigInt(b);
+        h = (h * P) & M;
+      }
+    };
+    for (const [map, list] of maps) for (const n of list) feed(`${map}|${n}\n`);
+    for (const n of universal) feed(`*|${n}\n`);
+    return h.toString(16).padStart(16, "0");
+  };
+  // Algoritma pini: check-callout-sync.mjs tableDigest'in bu iki girdide verdiği değerler
+  // (2026-09-24, masaüstü ebf30eb'de node ile hesaplandı). Özet tanımı sapmaz.
+  t("özet algoritması check-callout-sync.mjs ile aynı (boş tablo = FNV ofseti)", FNV([], []) === "cbf29ce484222325", FNV([], []));
+  t("özet algoritması check-callout-sync.mjs ile aynı (UTF-8 + evrensel satırı)",
+    FNV([["x", ["a b", "ç"]]], ["c"]) === "91ccf4bbbd116967", FNV([["x", ["a b", "ç"]]], ["c"]));
+
+  const backend = { maps: Object.entries(MAP_CALLOUTS) as [string, readonly string[]][], universal: UNIVERSAL_CALLOUTS };
+  const deskDir = process.env.AIMLO_DESKTOP_DIR
+    ? path.resolve(process.env.AIMLO_DESKTOP_DIR)
+    : path.resolve(__dirname, "..", "..", "aimlo-desktop");
+  const rsPath = path.join(deskDir, "src-tauri", "src", "callouts.rs");
+  if (!fs.existsSync(rsPath)) {
+    console.log(`  ⏭  SKIP — kardeş masaüstü reposu yok (${rsPath}); senkron kapısı release-desktop.ps1 0c'de`);
+  } else {
+    // parseDesktopRs (check-callout-sync.mjs) BİREBİR.
+    const stripComments = (src: string) => src.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/[^\n]*/g, "");
+    const names = (block: string) => [...block.matchAll(/"([^"\\]*)"/g)].map((m) => m[1]);
+    const s = fs.readFileSync(rsPath, "utf8").replace(/\r\n/g, "\n");
+    const u = /pub const UNIVERSAL_CALLOUTS:[^=]*=\s*&\[([\s\S]*?)\];/.exec(s);
+    const m = /pub const MAP_CALLOUTS:[^=]*=\s*&\[([\s\S]*?)\n\];/.exec(s);
+    t("callouts.rs ayrıştırılabildi (UNIVERSAL_CALLOUTS + MAP_CALLOUTS)", !!u && !!m, rsPath);
+    if (u && m) {
+      const desk = {
+        maps: [...stripComments(m[1]).matchAll(/\(\s*"([^"]+)"\s*,\s*&\[([\s\S]*?)\]\s*\)/g)].map((e) => [e[1], names(e[2])] as [string, string[]]),
+        universal: names(stripComments(u[1])),
+      };
+      const total = (t2: { maps: [string, readonly string[]][] }) => t2.maps.reduce((a, [, l]) => a + l.length, 0);
+      const bd = FNV(backend.maps, backend.universal);
+      const dd = FNV(desk.maps, desk.universal);
+      console.log(`    backend  ${backend.maps.length} harita / ${total(backend)} girdi, özet ${bd}`);
+      console.log(`    masaüstü ${desk.maps.length} harita / ${total(desk)} girdi, özet ${dd}`);
+      // diffTables (check-callout-sync.mjs) — okunur fark satırları.
+      const diff: string[] = [];
+      const bMaps = backend.maps.map(([k]) => k), dMaps = desk.maps.map(([k]) => k);
+      if (bMaps.join(",") !== dMaps.join(",")) diff.push(`harita listesi/sırası farklı: [${bMaps.join(", ")}] ↔ [${dMaps.join(", ")}]`);
+      const dIdx = new Map(desk.maps);
+      for (const [map, bl] of backend.maps) {
+        const dl = dIdx.get(map);
+        if (!dl) continue;
+        const missing = bl.filter((n) => !dl.includes(n)), extra = dl.filter((n) => !bl.includes(n));
+        if (missing.length) diff.push(`${map}: masaüstünde EKSİK: ${missing.join(", ")}`);
+        if (extra.length) diff.push(`${map}: masaüstünde FAZLA: ${extra.join(", ")}`);
+        if (!missing.length && !extra.length && bl.join("|") !== dl.join("|")) diff.push(`${map}: girdi SIRASI farklı`);
+      }
+      if (backend.universal.join("|") !== desk.universal.join("|")) diff.push("UNIVERSAL_CALLOUTS farklı");
+      t("iki tablo sıra dahil BİREBİR (özet eşit) — ayrışırsa callouts.rs + d22 pini güncellenmeli",
+        bd === dd && diff.length === 0, `→ ${diff.join(" · ")}`);
+    }
+  }
 }
 
 console.log(`\n══════ ${fail === 0 ? "✅ TÜMÜ GEÇTİ" : `❌ ${fail} BAŞARISIZ`} ══════\n`);
