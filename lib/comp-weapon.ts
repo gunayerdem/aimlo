@@ -46,7 +46,9 @@ const ANY_RE = new RegExp(`\\b(${WEAPON_ALT})\\b`, "i");
 
 /** killerInfo'dan katil silahını çıkar. Sözlükte yoksa null — silah İDDİA EDİLMEZ. */
 export function extractKillerWeapon(killerInfo?: string): { name: string; cls: WeaponClass } | null {
-  if (!killerInfo) return null;
+  // Tip kapısı (W2 inceleme B06-F2): route gövdesi JSON'dan geliyor, killerInfo:5 gibi
+  // tip-karışık değer `.toLowerCase is not a function` ile 500'e düşürüyordu.
+  if (typeof killerInfo !== "string" || !killerInfo) return null;
   const s = killerInfo.toLowerCase();
   const m = s.match(WITH_RE) ?? s.match(ANY_RE);
   return m ? { name: m[1].toLowerCase(), cls: WEAPON_CLASS[m[1].toLowerCase()] } : null;

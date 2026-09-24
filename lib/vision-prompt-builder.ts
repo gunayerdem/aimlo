@@ -18,7 +18,8 @@
 // Kod route.ts'ten BAYT-AYNI davranışla taşındı (kanıt: evals/vision-golden +
 // scripts/test-eval-fidelity.ts [V]). I/O route'ta kalır (oyuncu hafızası,
 // maç-kavram okuması, OpenAI çağrısı, görsel); buradaki her fonksiyon SAF (log
-// satırlarını konsola basmaz, `logs` olarak döndürür — route aynı sırayla basar).
+// satırlarını konsola basmaz, `logs` olarak döndürür; `onLog` alıcısı verilirse satırı
+// ÜRETİLDİĞİ AN ona da iletir — route bunu kullanır, bkz. VisionLogSink).
 //
 // NEDEN route.ts'te DEĞİL: Next route dosyası yalnız HTTP handler'ları ve route
 // config'i export edebilir (node_modules/next/dist/build/webpack/plugins/
@@ -65,6 +66,20 @@ export type VisionLang = "tr" | "en";
 
 /** Kurucunun ürettiği log satırı — route konsola AYNI sırayla basar. */
 export type VisionLogLine = { level: "log" | "warn"; msg: string };
+
+/** Log satırı ALICISI (W2 inceleme B06-F2, 2026-09-24): kurucular satırları yalnız
+ *  `logs` dizisinde biriktirip dönüyordu; kurucu İSTİSNA atarsa (tip-karışık gövde →
+ *  classifyDeath) o ana kadar biriken teşhis satırları (alive-count WARN vb.) route'a
+ *  hiç dönmüyor, Vercel logunda KAYBOLUYORDU. Alıcı verilirse satır üretildiği AN
+ *  iletilir; verilmezse (eval/replay/measure) davranış eskisiyle aynı — yalnız `logs`.
+ *  Başarılı yolda satır SIRASI değişmez (kurucu bağımlılıkları doğrudan console'a
+ *  yazmıyor; knowledge-loader uyarıları yine [KB] satırından önce). */
+export type VisionLogSink = (line: VisionLogLine) => void;
+
+/** `logs`a ekler + alıcıya iletir (into verilirse AYNI diziye yazar). */
+function logCollector(sink?: VisionLogSink, into: VisionLogLine[] = []) {
+  return { logs: into, log: (l: VisionLogLine) => { into.push(l); sink?.(l); } };
+}
 
 /** /api/ai/vision isteğinin prompt'a giren alanları (görsel hariç). Alan anlamları
  *  route.ts VisionRequest'te; değerler JSON'dan geldiği için her okuma typeof
@@ -187,10 +202,12 @@ export function buildVisionSystemMessage(opts: {
   body: VisionPromptBody;
   lang: VisionLang;
   memoryContext?: string | null;
+  /** Satırı üretildiği an alan alıcı (route; bkz. VisionLogSink). */
+  onLog?: VisionLogSink;
 }): VisionSystemMessage {
   const body = opts.body;
   const reqLang = opts.lang;
-  const logs: VisionLogLine[] = [];
+  const { logs, log } = logCollector(opts.onLog);
   const reqMap = typeof body.map === "string" ? body.map : undefined;
   const reqAgent = typeof body.agent === "string" ? body.agent : undefined;
   const reqRank = typeof body.rank === "string" ? body.rank : undefined;
@@ -250,7 +267,7 @@ export function buildVisionSystemMessage(opts: {
   // düşürür ve [KB] logu bunu göstermez (bu turda tam olarak öyle oldu).
   const profile2Len = kb.blocks.profile2?.length ?? 0;
   const kbTotal = staticLen + scenarioLen + agentLen + mapLen + ctxLen + profileLen + profile2Len;
-  logs.push({
+  log({
     level: "log",
     msg:
       `[KB] injected static=${staticLen}b scenario=${scenarioLen}b profile=${profileLen}b profile2=${profile2Len}b agent=${agentLen}b map=${mapLen}b ctx=${ctxLen}b total=${kbTotal}b ` +
@@ -260,10 +277,10 @@ export function buildVisionSystemMessage(opts: {
       `rank=${reqRank === undefined ? "-" : logSafe(reqRank)} enemies=${reqEnemyComp?.length ?? 0}`,
   });
   if (!reqRank) {
-    logs.push({ level: "warn", msg: `[KB] rank MISSING → universal.md served (rank-gating removed; insight depth is death-type driven, not rank).` });
+    log({ level: "warn", msg: `[KB] rank MISSING → universal.md served (rank-gating removed; insight depth is death-type driven, not rank).` });
   }
   if (kbTotal === 0) {
-    logs.push({ level: "warn", msg: `[KB] EMPTY — tracing regression? knowledge/*.md missing from serverless bundle.` });
+    log({ level: "warn", msg: `[KB] EMPTY — tracing regression? knowledge/*.md missing from serverless bundle.` });
   }
 
   // Build system message — flattened for OpenAI Chat Completions API.
@@ -404,7 +421,7 @@ export function buildVisionSystemMessage(opts: {
 
   const systemMessage = systemSections.join("\n\n---\n\n");
   // Council 2026-06-08: prove KB is a real share of the final system prompt.
-  logs.push({
+  log({
     level: "log",
     msg:
       `[PROMPT] system=${systemMessage.length}b KB=${kbTotal}b ` +
@@ -442,10 +459,10 @@ export type VisionContext = {
  * factGround'u BURADAN alır (eski elle kurulan ctxForFacts — ham killerInfo,
  * playerAgentKnown yok — silindi).
  */
-export function buildVisionContext(body: VisionPromptBody, lang: VisionLang): VisionContext {
+export function buildVisionContext(body: VisionPromptBody, lang: VisionLang, onLog?: VisionLogSink): VisionContext {
   const reqBody = body;
   const reqLang = lang;
-  const logs: VisionLogLine[] = [];
+  const { logs, log } = logCollector(onLog);
   const reqMap = typeof body.map === "string" ? body.map : undefined;
   const reqAgent = typeof body.agent === "string" ? body.agent : undefined;
   // AJAN BOŞ/UNKNOWN tespiti (canlı-test #9, 2026-08-04): maç onaylanmadan
@@ -580,7 +597,7 @@ export function buildVisionContext(body: VisionPromptBody, lang: VisionLang): Vi
     if ((typeof reqBody.alliesAlive === "number" && alliesAliveOk === undefined)
       || (typeof reqBody.enemiesAlive === "number" && enemiesAliveOk === undefined)) {
       // Log forging kapısı (B03 inceleme): yalnız sayılar basılır, öteki tipler etiket.
-      logs.push({ level: "warn", msg: `[Aimlo AI] alive-count out of contract dropped: allies=${aliveCountForLog(reqBody.alliesAlive)} enemies=${aliveCountForLog(reqBody.enemiesAlive)}` });
+      log({ level: "warn", msg: `[Aimlo AI] alive-count out of contract dropped: allies=${aliveCountForLog(reqBody.alliesAlive)} enemies=${aliveCountForLog(reqBody.enemiesAlive)}` });
     }
     if (typeof reqBody.roundTimerAtDeath === "number" && reqBody.roundTimerAtDeath > 0) {
       ctx.roundTimerAtDeath = Math.min(Math.max(reqBody.roundTimerAtDeath, 0), 140);
@@ -714,11 +731,15 @@ export function buildVisionUserMessage(opts: {
   prevDeathTypes?: DeathType[];
   prevSource?: string;
   imageAvailable: boolean;
+  /** Satırı üretildiği an alan alıcı (route; bkz. VisionLogSink). */
+  onLog?: VisionLogSink;
 }): VisionUserMessage {
   const body = opts.body;
   const reqBody = body;
   const reqLang = opts.lang;
-  const { ctx, factGround, agentUnknown, logs } = buildVisionContext(body, reqLang);
+  const { ctx, factGround, agentUnknown, logs } = buildVisionContext(body, reqLang, opts.onLog);
+  // Bağlamın satırları alıcıya ZATEN iletildi; buradan sonrakiler aynı diziye + alıcıya.
+  const { log } = logCollector(opts.onLog, logs);
   const reqMap = typeof body.map === "string" ? body.map : undefined;
   const reqAgent = typeof body.agent === "string" ? body.agent : undefined;
   const reqEnemyComp = Array.isArray(body.enemyComp) ? body.enemyComp : undefined;
@@ -773,7 +794,7 @@ export function buildVisionUserMessage(opts: {
     const dtype = classifyDeathVaried(signals, prevDeathTypes);
     deathTypeOut = dtype;
     deathTypeDirective = buildDeathTypeDirective(dtype, prevDeathTypes, reqLang);
-    logs.push({
+    log({
       level: "log",
       msg:
         `[Aimlo AI] death-type=${dtype} repeatPos=${signals.repeatedPosition} ` +
@@ -799,7 +820,7 @@ export function buildVisionUserMessage(opts: {
     reqLang,
   );
   if (weaponCompDirective) {
-    logs.push({ level: "log", msg: `[Aimlo AI] weapon=${killerWeapon?.name ?? "-"} comp=${compArchetype ?? "-"}` });
+    log({ level: "log", msg: `[Aimlo AI] weapon=${killerWeapon?.name ?? "-"} comp=${compArchetype ?? "-"}` });
   }
 
   // [SENARYO İPUCU] işaretçisi (B42/F76, pano dalga 2026-08-04): weapon-comp
@@ -845,7 +866,7 @@ export function buildVisionUserMessage(opts: {
           `cümlesini KOPYALAMA; işaret edilmeyen senaryo bölümlerinden ders çıkarma.`)
     : "";
   if (scenarioDirective) {
-    logs.push({ level: "log", msg: `[Aimlo AI] scenario-hint=[${scenarioSectionRefs.join(" | ")}]` });
+    log({ level: "log", msg: `[Aimlo AI] scenario-hint=[${scenarioSectionRefs.join(" | ")}]` });
   }
 
   // Assemble JSON-formatted context — single block, no decorative borders, no header chrome.

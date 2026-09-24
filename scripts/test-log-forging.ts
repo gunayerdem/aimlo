@@ -12,6 +12,10 @@
  *   [3] DAVRANIŞ — GERÇEK vision POST handler'ı (scripts/vision-route-harness.ts):
  *       sahte satır enjekte eden gövde 200 döner ve hiçbir log girdisi yeni satırla
  *       başlayan sahte "[Aimlo AI] …" satırı taşımaz.
+ *   [4] W2 inceleme B06-F2 — kurucu log satırları onLog alıcısıyla üretildiği an
+ *       iletilir: kurucu istisna atsa da o ana kadarki teşhis satırı kaybolmaz.
+ *   [5] W2 inceleme B06-F2 — tip-karışık gövde (side/killerInfo/… sayı) 500 değil;
+ *       genel catch yanıtına iç hata metni konmaz.
  * RUN: npx tsx scripts/test-log-forging.ts
  */
 import fs from "node:fs";
@@ -77,6 +81,61 @@ async function main() {
   t("sıradan istek: [KB] seçici satırı eski biçimde ('map=Ascent agent=Jett rank=Gold')",
     clean.logs.some((l) => l.includes("selectors map=Ascent agent=Jett rank=Gold enemies=0")),
     JSON.stringify(clean.logs.filter((l) => l.includes("selectors")).map((l) => l.slice(-80))));
+
+  // ── [4] W2 inceleme B06-F2: kurucu log satırları istisna yolunda KAYBOLMAZ ──────
+  // Eskiden buildVisionUserMessage satırları `logs` dizisinde biriktirip dönüyordu;
+  // kurucu istisna atınca (tip-karışık gövde → classifyDeath) route o diziyi hiç
+  // görmüyor, alive-count WARN'ı Vercel logundan düşüyordu. onLog alıcısı satırı
+  // üretildiği an alır. Sahte istisna: alive-count WARN'ından SONRA okunan bir alanın
+  // getter'ı atar (JSON gövdesi bunu yapamaz — yalnız kurucunun sözleşmesini sınar).
+  console.log("\n[4] kurucu log alıcısı — istisna yolunda da satır kaybı yok");
+  const { buildVisionUserMessage, buildVisionSystemMessage } = await import("../lib/vision-prompt-builder");
+  const got: string[] = [];
+  const throwing: Record<string, unknown> = { died: true, round: 2, alliesAlive: 9, enemiesAlive: 1, side: "defending", map: "Ascent", agent: "Jett" };
+  Object.defineProperty(throwing, "roundHistory", { enumerable: true, get() { throw new Error("sahte kurucu istisnası"); } });
+  let threw = false;
+  try {
+    buildVisionUserMessage({ body: throwing as never, lang: "tr", imageAvailable: true, onLog: (l) => got.push(l.msg) });
+  } catch { threw = true; }
+  t("istisna atıldı ve alive-count WARN'ı alıcıya ondan ÖNCE ulaştı",
+    threw && got.some((m) => m.includes("alive-count out of contract dropped: allies=9")), JSON.stringify(got));
+  const okBody = { died: true, round: 3, map: "Ascent", agent: "Jett", rank: "Gold", killerInfo: "killed by jett with vandal", alliesAlive: 9 } as never;
+  const streamedU: string[] = [];
+  const u = buildVisionUserMessage({ body: okBody, lang: "tr", imageAvailable: true, onLog: (l) => streamedU.push(l.msg) });
+  const streamedS: string[] = [];
+  const sy = buildVisionSystemMessage({ body: okBody, lang: "tr", memoryContext: "", onLog: (l) => streamedS.push(l.msg) });
+  t("başarılı yolda alıcıya giden satırlar = dönen `logs` (aynı sıra, aynı içerik)",
+    JSON.stringify(streamedU) === JSON.stringify(u.logs.map((l) => l.msg)) && JSON.stringify(streamedS) === JSON.stringify(sy.logs.map((l) => l.msg))
+      && streamedU.length >= 2 && streamedS.length >= 2, JSON.stringify({ streamedU, streamedS }).slice(0, 300));
+  const routeSrc = read("app/api/ai/vision/route.ts");
+  t("route kurucuya onLog veriyor, dönen diziyi sonradan toplu basmıyor",
+    (route.match(/onLog: emitVisionLog/g) ?? []).length === 2 && !/emitVisionLogs\(/.test(route));
+
+  // ── [5] W2 inceleme B06-F2: tip-karışık gövde 500 değil; iç hata metni yanıta sızmaz ──
+  console.log("\n[5] tip-karışık gövde → 200; iç hata metni yanıt gövdesinde yok");
+  const mixed = await captureVisionCall({
+    died: true, round: 4, map: "Ascent", agent: "Jett", side: 1, killerInfo: 5, deathLocation: 7,
+    deathTiming: 2, economyType: 3, loadout: 9,
+  });
+  t("side/killerInfo/deathLocation/deathTiming/economyType/loadout sayı → 200 (eskiden 500)", mixed.status === 200,
+    `status=${mixed.status} ${JSON.stringify(mixed.json).slice(0, 200)}`);
+  const { loadVisionRoute, visionRequest } = await import("./vision-route-harness");
+  const { harness } = await import("./report-route-harness");
+  const r = loadVisionRoute();
+  harness.replies = []; // sahte OpenAI yanıtı yok → fetch istisna atar → route'un genel catch'i
+  process.env.OPENAI_API_KEY = "sk-test-harness-not-real";
+  const origErr = console.error; const origLog = console.log; const origWarn = console.warn;
+  const errs: string[] = [];
+  console.error = (...a: unknown[]) => { errs.push(a.map(String).join(" ")); };
+  console.log = () => {}; console.warn = () => {};
+  let res: Response;
+  try { res = await r.POST(visionRequest({ died: true, round: 1, map: "Ascent", agent: "Jett" })); }
+  finally { console.error = origErr; console.log = origLog; console.warn = origWarn; delete process.env.OPENAI_API_KEY; }
+  const body = await res.json() as Record<string, unknown>;
+  t("genel catch → 500 ai_internal_error, message genel ('Internal server error'), iç metin YOK",
+    res.status === 500 && body.error === "ai_internal_error" && body.message === "Internal server error"
+      && !JSON.stringify(body).includes("harness"), JSON.stringify(body));
+  t("ayrıntı sunucu loguna yazılıyor (teşhis kaybolmaz)", errs.some((e) => e.includes("Vision route error:") && e.includes("harness")), JSON.stringify(errs));
 
   console.log(`\n══════ ${fail === 0 ? "✅ TÜMÜ GEÇTİ" : `❌ ${fail} BAŞARISIZ`} ══════\n`);
   process.exit(fail > 0 ? 1 : 0);

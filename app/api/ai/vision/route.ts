@@ -439,12 +439,13 @@ function isValidVisionRequest(obj: unknown): obj is VisionRequest {
 // Şekil doğrulayıcı (deathAnalysis/enemyAnalysis/nextRoundSuggestion) →
 // lib/vision-prompt-builder.ts isValidVisionFeedbackShape (eval aynı parse'ı kullanır).
 
-/** Kurucunun döndürdüğü log satırlarını AYNI sırayla basar (kurucu saf kalır). */
-function emitVisionLogs(lines: VisionLogLine[]): void {
-  for (const l of lines) {
-    if (l.level === "warn") console.warn(l.msg);
-    else console.log(l.msg);
-  }
+/** Kurucunun log satırını ÜRETİLDİĞİ AN basar (kurucuya onLog olarak verilir).
+ *  W2 inceleme B06-F2: eskiden satırlar kurucu dönünce topluca basılıyordu → kurucu
+ *  istisna atarsa (tip-karışık gövde) o ana kadarki teşhis satırları kayboluyordu.
+ *  Başarılı yolda sıra ve içerik aynı (test-eval-fidelity [V] log kıyası). */
+function emitVisionLog(l: VisionLogLine): void {
+  if (l.level === "warn") console.warn(l.msg);
+  else console.log(l.msg);
 }
 
 // ── Explicit error response builder (NO canned content fallbacks) ──
@@ -607,8 +608,7 @@ export async function POST(request: NextRequest) {
     } catch (e) {
       console.log(`[Aimlo AI] Vision: player memory unavailable: ${(e as Error).message}`);
     }
-    const sys = buildVisionSystemMessage({ body: reqBody, lang: reqLang, memoryContext });
-    emitVisionLogs(sys.logs);
+    const sys = buildVisionSystemMessage({ body: reqBody, lang: reqLang, memoryContext, onLog: emitVisionLog });
     const systemMessage = sys.systemMessage;
 
     // (2) Cross-round ders geçmişi (canlı-test #14): desktop echo'su
@@ -632,8 +632,8 @@ export async function POST(request: NextRequest) {
       prevDeathTypes,
       prevSource,
       imageAvailable: reqBody.died !== false,
+      onLog: emitVisionLog,
     });
-    emitVisionLogs(user.logs);
     const userPromptWithHistory = user.userPrompt;
     // factGround: prompt fact-sheet'ini üreten AYNI nesne → son-işlem guard'ı da onu okur.
     const factGround = user.factGround;
@@ -923,6 +923,10 @@ export async function POST(request: NextRequest) {
     }
     const msg = err instanceof Error ? err.message : "unknown";
     console.error("[Aimlo AI] Vision route error:", msg);
-    return errorResponse("ai_internal_error", msg, 500);
+    // İç hata metni YANITA konmaz (W2 inceleme B06-F2): tip-karışık gövde eskiden
+    // "(b.side || \"\").toLowerCase is not a function" metnini istemciye sızdırıyordu.
+    // Ayrıntı yukarıdaki sunucu logunda; kod/statü aynı (desktop statüye bakar),
+    // ask route'unun "Internal server error" emsali.
+    return errorResponse("ai_internal_error", "Internal server error", 500);
   }
 }

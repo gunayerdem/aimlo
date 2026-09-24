@@ -205,8 +205,15 @@ export type DeathSignalsInput = {
  *  bunu çağırır. Kod route.ts'ten BAYT-AYNI davranışla taşındı (değer tipleri de
  *  ham geçer — route'un sözleşmesi). */
 export function computeDeathSignals(body: DeathSignalsInput): { signals: DeathSignals; streakLen: number } {
+  // TİP KAPISI (W2 inceleme B06-F2, 2026-09-24): metin sinyalleri eskiden `as string`
+  // ile HAM geçiyordu; classifyDeath `(b.side || "").toLowerCase()` vb. çağırdığı için
+  // tip-karışık gövde (side:1, killerInfo:5, deathLocation:7) route'u 500'e düşürüyor ve
+  // iç hata metni yanıta sızıyordu (fuzz: 2058 koşuda 81 fark, hepsi bu). Dize olmayan
+  // değer "sinyal yok" sayılır (undefined) — desktop dize gönderdiği için geçerli
+  // gövdede davranış bayt-aynı. Sayı/boolean alanlar yalnız karşılaştırılıyor (çökmez).
+  const str = (v: unknown): string | undefined => (typeof v === "string" ? v : undefined);
   const rh = body.roundHistory as Record<string, unknown>[] | undefined | null;
-  const loc = ((body.deathLocation as string | undefined) || "").toLowerCase();
+  const loc = (str(body.deathLocation) || "").toLowerCase();
   // CRITICAL (canlı 2026-06-30): roundHistory NOW includes the CURRENT round (recorded
   // on-death before this call), so the current death matched ITSELF → repeatedPosition was
   // true for EVERY death → everything classified repeat-angle → every feedback "o açıyı boş
@@ -251,10 +258,10 @@ export function computeDeathSignals(body: DeathSignalsInput): { signals: DeathSi
   const scoreM = typeof body.score === "string" ? body.score.match(/(\d{1,2})\D+(\d{1,2})/) : null;
   const highStakes = !!scoreM && (parseInt(scoreM[1], 10) >= 12 || parseInt(scoreM[2], 10) >= 12);
   const signals: DeathSignals = {
-    side: body.side as string | undefined,
-    killerInfo: body.killerInfo as string | undefined,
-    deathLocation: body.deathLocation as string | undefined,
-    deathTiming: body.deathTiming as string | undefined,
+    side: str(body.side),
+    killerInfo: str(body.killerInfo),
+    deathLocation: str(body.deathLocation),
+    deathTiming: str(body.deathTiming),
     // B114 (2026-07-31): healthAtDeath argümanı KALDIRILDI — bu dosyada hiçbir dal
     // okumuyor (DeathSignals.healthAtDeath notu, canlı-test #8 kararı), dolayısıyla
     // hpSampleAgeSec stale-gate'i de ölü kabloydu. HP yasağı aynen sürüyor: ne
@@ -265,13 +272,13 @@ export function computeDeathSignals(body: DeathSignalsInput): { signals: DeathSi
     // ult-in-pocket dalı (KB pipeline denetimi 2026-07-19): ctx.ultReady zaten
     // prompt'a giriyordu ama classifier'a hiç ulaşmıyordu — tek kablo burası.
     ultReady: body.ultReady === true ? true : undefined,
-    economyType: body.economyType as string | undefined,
+    economyType: str(body.economyType),
     tradedByAlly: body.tradedByAlly as boolean | undefined,
     repeatedPosition,
     // KB wiring 2026-07-19: kendi silahın (op-loss), ajan (Clove ult istisnası),
     // seri/ağırlık akıllı-default sinyalleri. loadout classifier'da yalnız
     // sözlük-regex'le sınanır (prompt'a girmez) → ham geçirmek güvenli.
-    loadout: body.loadout as string | undefined,
+    loadout: str(body.loadout),
     playerAgent: typeof body.agent === "string" ? body.agent : undefined,
     lossStreak,
     winStreak,
