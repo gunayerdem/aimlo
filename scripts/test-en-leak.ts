@@ -589,6 +589,16 @@ console.log("\n[F86] EN rota guard'ı: 'losses/deaths came from X' ve ölçülm�
     check("Y29 negatif: ölçülen 'a site' + 'came from B Site' → B Site düşer", !/B Site/.test(gA), `→ "${gA}"`);
     const gL = g("They came through Lamps and caught you.", fgBH);
     check("Y29 negatif: ölçülen 'b hookah' + 'through Lamps' → Lamps düşer", !/Lamps/.test(gL), `→ "${gL}"`);
+    // TR ROUTE_ORIGIN site harfini de tüketir (öksüz "A" kalmaz); harfli ad ölçülenle aynı yerse korunur.
+    const trR = (s: string, f: object) => realityCheck(s, [] as never, f as never, "death", "tr").text;
+    const fgTree = { ...fg, hasDeathLocation: true, deathLocation: "a tree" };
+    check("Y29 TR ölçülmemiş 'A Tree'den çıkıp' → 'Rakip seni vurdu.' (fix yok: öksüz 'Rakip A seni vurdu.')",
+      trR("Rakip A Tree'den çıkıp seni vurdu.", fg) === "Rakip seni vurdu.", `→ "${trR("Rakip A Tree'den çıkıp seni vurdu.", fg)}"`);
+    check("Y29 TR ölçülen 'a tree': 'A Tree'den çıkıp' ve harfsiz 'Tree'den çıkıp' korunur; 'B Tree' düşer",
+      trR("Rakip A Tree'den çıkıp seni vurdu.", fgTree) === "Rakip A Tree'den çıkıp seni vurdu."
+        && trR("Rakip Tree'den çıkıp seni vurdu.", fgTree) === "Rakip Tree'den çıkıp seni vurdu."
+        && trR("Rakip B Tree'den çıkıp seni vurdu.", fgTree) === "Rakip seni vurdu.",
+      `→ "${trR("Rakip B Tree'den çıkıp seni vurdu.", fgTree)}"`);
   }
   check("aynı cümle ölçülmemiş konumda süzülür ('They came and caught you.')", g(m) === "They came and caught you.", `→ "${g(m)}"`);
   // Oyuncu rota iddiası (hasRoute=false, ölçülmemiş konum) SÜZÜLÜR — fiil kalır, cümle yüklemsiz kalmaz.

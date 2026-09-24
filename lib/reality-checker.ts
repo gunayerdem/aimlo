@@ -2516,12 +2516,16 @@ export function guardUnprovenFacts(
     };
     // Origin claims anchored to a known callout: "<callout>'dan çıkıp/gelip..."
     for (const pos of POSITION_NAMES) {
+      // Yakınsama Y29 (2026-09-25): bileşik callout'un SİTE HARFİ de tüketilir (ölüm-yeri guard'ıyla
+      // aynı kalıp). KANIT: ölçülmemiş konumda "Rakip A Tree'den çıkıp seni vurdu." → "Rakip A seni
+      // vurdu." — POSITION_NAMES çekirdeği ('tree') eşleşip öksüz "A" kalıyordu; anahtar da harfli ad
+      // olur (routeMeasured sameRoute ile 'a tree' ~ 'tree').
       const re = new RegExp(
-        `\\b${escapeRe(pos)}\\s*['’]?\\s*(d[ae]n|t[ae]n)\\s+${ROUTE_ORIGIN_VERBS}`,
+        `\\b((?:[abc]\\s+)?${escapeRe(pos)})\\s*['’]?\\s*(d[ae]n|t[ae]n)\\s+${ROUTE_ORIGIN_VERBS}`,
         "gi",
       );
-      result = result.replace(re, (m: string, _suf: string, _verb: string, off: number, full: string) =>
-        (routeMeasured(normR(m.slice(0, pos.length)), null, off, off + m.length, full, false) ? m : ""));
+      result = result.replace(re, (m: string, name: string, _suf: string, _verb: string, off: number, full: string) =>
+        (routeMeasured(normR(name), null, off, off + m.length, full, false) ? m : ""));
       // EN aynası (denetim 2026-07-19 F8): "came through mid / wrapped behind B Main"
       // rota-kökeni iddiası EN çıktıda süzülmüyordu (EN few-shot SCENARIO A bu dili
       // bizzat modelliyor). Yalnız GEÇMİŞ formlar — emir/koşul öğüdü ("push through
