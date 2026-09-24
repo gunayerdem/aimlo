@@ -1862,9 +1862,9 @@ function guardTrEnemyHedges(t: string): { text: string; restore: (s: string) => 
   const saved: string[] = [];
   const text = scan.text.replace(new RegExp(HEDGE3_SRC, "giu"), (m) => {
     saved.push(m);
-    return "" + String.fromCharCode(0xE100 + saved.length - 1);
+    return "\uE000" + String.fromCharCode(0xE100 + saved.length - 1);
   });
-  return { text, restore: (s) => s.replace(/([-])/g, (_m, c: string) => saved[c.charCodeAt(0) - 0xE100] ?? "") };
+  return { text, restore: (s) => s.replace(/\uE000([\uE100-\uE1FF])/g, (_m, c: string) => saved[c.charCodeAt(0) - 0xE100] ?? "") };
 }
 
 export function cleanCoachText(text: string, lang: "tr" | "en"): string {
