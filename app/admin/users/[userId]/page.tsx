@@ -19,10 +19,11 @@ export default async function AdminUserDetailPage({ params }: { params: Promise<
   const { userId } = await params;
   // Yetki ÖNCE, veri SONRA (B109, 2026-07-31): Promise.all servis-rol PII
   // çekimini (getUserDetail → email + maçlar + player_memory) admin kontrolüyle
-  // PARALEL başlatıyordu. Layout notFound() attığında çıktı atılıyor, yani veri
-  // sızmıyordu; ama yetkisiz istek yine de servis-rol sorgularını koşturuyor
-  // (zaman/kaynak yan-kanalı) ve "yetkilendirme veri erişiminden önce gelir"
-  // ilkesi ihlal ediliyordu. Sıralı hale getirildi.
+  // PARALEL başlatıyordu. Sıralı hale getirildi. DÜZELTME (24.09.2026): eski yorum
+  // "layout notFound() attığında çıktı atılıyor, veri sızmıyor" diyordu — YANLIŞ.
+  // Next 16 layout ve page segmentlerini paralel render ediyor; layout 404 atsa da
+  // page'in RSC verisi yanıtta gidiyor (canlı doğrulandı). Bu sayfadaki kapı bu yüzden
+  // ZORUNLU; bkz. scripts/test-admin-gate.ts.
   const admin = await getAdminUser();
   if (!admin) notFound();
   const detail = await getUserDetail(userId);

@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+import { getAdminUser } from "@/lib/admin-auth";
 import { getGrowth } from "@/lib/admin-analytics";
 import { TrendChart } from "../AdminChart";
 
@@ -24,6 +26,15 @@ function FunnelRow({ label, value, of, color }: { label: string; value: number; 
 }
 
 export default async function AdminGrowthPage() {
+  // GÜVENLİK (canlı sızıntı, 24.09.2026): layout.tsx'teki notFound() kapısı bu
+  // sayfanın veri çekimini DURDURMAZ — Next 16 layout ve page segmentlerini paralel
+  // render ediyor; layout 404 atsa da page'in RSC verisi yanıtta gidiyordu
+  // (kimliksiz GET + "RSC: 1" başlığıyla 200). Kapı bu yüzden veri çekiminden
+  // ÖNCE burada da tekrarlanır (revenue/altyapi kalıbı). scripts/test-admin-gate.ts
+  // her admin page'inin ilk await'inin getAdminUser olduğunu kilitler.
+  const admin = await getAdminUser();
+  if (!admin) notFound();
+
   const g = await getGrowth();
 
   return (

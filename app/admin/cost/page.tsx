@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+import { getAdminUser } from "@/lib/admin-auth";
 import { getCostData } from "@/lib/admin-data";
 import { formatUsd } from "@/lib/openai-pricing";
 import { TrendChart } from "../AdminChart";
@@ -5,6 +7,15 @@ import { TrendChart } from "../AdminChart";
 export const dynamic = "force-dynamic";
 
 export default async function AdminCostPage() {
+  // GÜVENLİK (canlı sızıntı, 24.09.2026): layout.tsx'teki notFound() kapısı bu
+  // sayfanın veri çekimini DURDURMAZ — Next 16 layout ve page segmentlerini paralel
+  // render ediyor; layout 404 atsa da page'in RSC verisi yanıtta gidiyordu
+  // (kimliksiz GET + "RSC: 1" başlığıyla 200). Kapı bu yüzden veri çekiminden
+  // ÖNCE burada da tekrarlanır (revenue/altyapi kalıbı). scripts/test-admin-gate.ts
+  // her admin page'inin ilk await'inin getAdminUser olduğunu kilitler.
+  const admin = await getAdminUser();
+  if (!admin) notFound();
+
   const c = await getCostData();
   const cacheRatio = c.tokens.input > 0 ? (c.tokens.cached / c.tokens.input) * 100 : 0;
 
