@@ -22,7 +22,7 @@ Killjoy sabit cihaz zinciri kurar: taret görür, bot yapışır, molly alanı d
 
 **IF** öldün ve takım arkadaşın trade'ini alamadı (tradedByAlly=false)
 **MEANING** Cihaz zincirinin arkasındaki tüfek çaprazına solo girdin — öldüğünde karşılık alacak kimse yoktu
-**COUNTER** Flaşı köşeye kıvır ve takım arkanda girsin; zincire tek tek giren tek tek düşer
+**COUNTER** Flaşı köşeye kıvır ve takım arkanda girsin; zincire tek tek giren tek tek ölür
 **WHY** Killjoy kurulumu solo girişleri yemek için tasarlanmıştır — flaş + trade zinciri o tasarımı ters çevirir
 
 **IF** aynı pozisyonda üst üste öldün (repeatedPosition)
@@ -32,7 +32,7 @@ Killjoy sabit cihaz zinciri kurar: taret görür, bot yapışır, molly alanı d
 
 **IF** öldüğünde ult'un doluydu (ultReady)
 **MEANING** Geri doğuş hakkın elinde bekledi — kurulumun içine risksiz bakma şansını hiç kullanmadın
-**COUNTER** Ult'la kurulumun içine gir: düşersen geri doğarsın, taret-bot-molly konumları takıma bedava çıkar
+**COUNTER** Ult'la kurulumun içine gir: ölürsen geri doğarsın, taret-bot-molly konumları takıma bedava çıkar
 **WHY** Killjoy'un gücü kurulumunun bilinmemesinde — ult'lu Phoenix o bilgiyi canı yanmadan söker; yalnız geri doğuş noktan bellidir, dönüş anında açık durma
 
 **IF** zayıf ekonomide öldün (economyType=eco ya da force_buy)

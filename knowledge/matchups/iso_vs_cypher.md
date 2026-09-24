@@ -48,7 +48,7 @@ Cypher'ın teli sana değil silahına bilgi taşır: tel tetiklendiği an hattı
 **IF** öldün ve killerInfo'daki silah keskin nişancı sınıfıysa (Operator, Marshal, Outlaw)
 **MEANING** Uzun hatta göründün — tek atış silah kalkanı da seni de aynı kurşunda geçebilir, kalkan orada sigorta değil
 **COUNTER** O hattı boş bırak; kurşun geçirmez duvarı hattın önüne sür ve arkasından ilerle, düelloyu yakın mesafeye taşı
-**WHY** Kalkan bir hasar örneğini emer ama tek atışlık silah tek örnekle bitirir — mesafeyi kapatmayan Iso o hatta her round aynı şekilde düşer
+**WHY** Kalkan bir hasar örneğini emer ama tek atışlık silah tek örnekle bitirir — mesafeyi kapatmayan Iso o hatta her round aynı şekilde ölür
 
 **IF** round'un geç anında öldün (deathTiming=geç) ve sayı aleyhine dönmüştü
 **MEANING** Kalkanın sönmüşken düz düello aradın — yenilenmesi öldürme ister, baskı altında dolmaz
