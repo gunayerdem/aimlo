@@ -35,7 +35,7 @@ Sova'nın recon'u sen açıdan çıkmadan op pozisyonunu ele veriyor. Drone seni
 
 ## AIMLO Ne Demeli
 ### Kaybeden taraftayken
-**Chamber aynı açıda üst üste ölüyorsa (repeatedPosition, düşman kompunda Sova)**: "Aynı açıda ikinci kez düştün — Sova'nın taraması o noktayı işaretledi. Recon sesini duyduğun an TP'ye bas. Sova recon'u nereye attı değil, takımı nereye yürüyor önemli."
+**Chamber aynı açıda üst üste ölüyorsa (repeatedPosition, düşman kompunda Sova)**: "Aynı açıda ikinci kez öldün — Sova'nın taraması o noktayı işaretledi. Recon sesini duyduğun an TP'ye bas. Sova recon'u nereye attı değil, takımı nereye yürüyor önemli."
 
 **Sova, Chamber'ın tek-atış silahına ölüyorsa (killerInfo: Operator / ağır tabanca)**: "Drone'u Chamber'ın gördüğü yerden açıyorsun — tek atış için sabit hedefsin. Köşenin arkasına çekil, sonra drone'u uçur."
 

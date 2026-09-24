@@ -38,7 +38,7 @@ Initiator düşmanın tuzaklarını bulur ve açar. Sentinel tuzaklarını sakla
 
 ### Kaybeden taraftayken
 
-**Initiator aynı hattan üst üste ölüyorsa (repeatedPosition)**: "İki round üst üste aynı hatta düştün — keşfin sentinelin vurduğu açıyı hiç görmüyor. Öldüğün noktayı sonraki round önce tara, sonra gir; taramayı takım kapıya dayandığında kullan, daha erken değil."
+**Initiator aynı hattan üst üste ölüyorsa (repeatedPosition)**: "İki round üst üste aynı hatta öldün — keşfin sentinelin vurduğu açıyı hiç görmüyor. Öldüğün noktayı sonraki round önce tara, sonra gir; taramayı takım kapıya dayandığında kullan, daha erken değil."
 
 **Sentinel kurulumu her round sökülüyorsa**: "Her şeyi aynı köşeye yığıyorsun, tek tarama hepsini buluyor. Bir tuzağı tarama hattının dışına koy, sonraki round yerini tamamen değiştir."
 

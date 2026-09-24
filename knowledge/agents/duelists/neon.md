@@ -44,7 +44,7 @@ WHY: Takımdan kopuk öldürme değersiz. Arkadaşın avantajı kullanamıyorsa 
 
 IF: Ult hazırken (ultReady) ölüyorsan ya da ölümlerin sayıca geride kaldığın anlarda geliyorsa (bu bloğu yalnız ult-hazır bilgisi ya da round geçmişi bunu gösteriyorsa kullan)
 MEANING: Ult'u round kazanma aleti değil kurtarma aleti gibi tutuyorsun — dolu ult'la ölmek round'u iki kez kaybetmektir
-COUNTER: Ult hazırsa girişi ona kur: 2+ düşman hayattayken duvarını açtığın anda ult'u da aç, site'a birlikte gir. Ölüm yerini adıyla söyle (ör. "Round 8'de dolu ult'la B Main'de düştün") ve sonraki round o açıya ult'lu gir.
+COUNTER: Ult hazırsa girişi ona kur: 2+ düşman hayattayken duvarını açtığın anda ult'u da aç, site'a birlikte gir. Ölüm yerini adıyla söyle (ör. "Round 8'de dolu ult'la B Main'de öldün") ve sonraki round o açıya ult'lu gir.
 WHY: Dolu ult'la ölen Neon takıma hem sayı hem kaynak kaybettirir; ult'un gücü kalabalığa hasar çıkarmakta, 1v3 kurtarmakta değil.
 
 IF: Round açılışında çok erken ölüyorsun

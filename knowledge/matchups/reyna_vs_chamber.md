@@ -31,7 +31,7 @@ Chamber tek atışlık silahlarla (ağır tabancası, ult keskin nişancısı) u
 **WHY** Tuzak bilgiyi Chamber'a taşır — bilinen giriş, tek atış silah için randevudur
 
 **IF** öldüğünde ult'un doluydu (ultReady)
-**MEANING** Ateş hızı veren ult'un elinde bekledi ve uzun açı düellosunda düştün
+**MEANING** Ateş hızı veren ult'un elinde bekledi ve uzun açı düellosunda öldün
 **COUNTER** Ult'u uzun açı düellosuna değil yakın temasa sakla; o pencerede aç ve zinciri başlat
 **WHY** Ult'un ateş hızı yakın mesafede Chamber'ın tek atış ritmini ezer — uzun açıda ise tek kurşun yine kazanır
 

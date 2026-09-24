@@ -40,7 +40,7 @@ Duelist site açar, sentinel o açılışı kapatır. Sentinelin kurulumunu peek
 
 **Duelist girişte kurulumlara ölüyorsa (deathTiming=erken, düşman kompunda sentinel)**: "Round açılışında yetenek atmadan siteye girdin — bu nişan problemi değil, sıra problemi. Önce tuzağı söktür: takım arkadaşının flash'ı önce gitsin, sen arkadan gir. Molly'nin üstüne koşarsan hızın hiçbir işe yaramaz."
 
-**Sentinel aynı noktada üst üste ölüyorsa (repeatedPosition)**: "Aynı yerde ikinci kez düştün — kurulumun okundu, karşı duelist telinin yerini peek atmadan önce biliyor. Yerini değiştir. Tuzak tetiklendiğinde o açıda hazır ol — alarm sesi saldırı işaretidir, sonradan tepki sinyali değil."
+**Sentinel aynı noktada üst üste ölüyorsa (repeatedPosition)**: "Aynı yerde ikinci kez öldün — kurulumun okundu, karşı duelist telinin yerini peek atmadan önce biliyor. Yerini değiştir. Tuzak tetiklendiğinde o açıda hazır ol — alarm sesi saldırı işaretidir, sonradan tepki sinyali değil."
 
 ### Kazanan taraftayken
 

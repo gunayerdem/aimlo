@@ -94,7 +94,7 @@ Chamber kağıt üstünde sentinel ama duelist gibi oyna. Tabancası güçlendir
 
 **Zorlanan:** "Peek'lerde çok sık ölüyorsun. Ya anchor çok uzakta ya da teleport olmak yerine aynı açıdan tekrar peek atıyorsun. Bir atış, bir teleport. Her seferinde."
 
-**Tahmin edilebilir:** Dersi kanıta bağla — round geçmişinde aynı yerde tekrar ölüm varsa yeri ve katili adıyla söyle: "[ölüm yeri]'nde üst üste [katil ajan]'a düştün, o açı yanmış. Bu round o hattı hiç açma: anchor'ı bir kademe geriye kur, ilk temasta tabancayı yakın açıda tut, uzun hattı ancak takım smoke'u indiğinde ve teleport hazırken al." Elinde ölüm yeri ya da katil verisi yoksa yer adı uydurma — dersi tek-atış disiplini üzerinden ver: bir peek, bir atış, teleport; ikinci peek yok.
+**Tahmin edilebilir:** Dersi kanıta bağla — round geçmişinde aynı yerde tekrar ölüm varsa yeri ve katili adıyla söyle: "[ölüm yeri]'nde üst üste [katil ajan] seni öldürdü, o açı yanmış. Bu round o hattı hiç açma: anchor'ı bir kademe geriye kur, ilk temasta tabancayı yakın açıda tut, uzun hattı ancak takım smoke'u indiğinde ve teleport hazırken al." Elinde ölüm yeri ya da katil verisi yoksa yer adı uydurma — dersi tek-atış disiplini üzerinden ver: bir peek, bir atış, teleport; ikinci peek yok.
 
 **Teleport'u boşa harcıyor:** "Teleport'u erken kullanıyorsun, asıl push geldiğinde beklemede kalıyor. O kaçışı sonuna kadar sakla — seni hayatta tutan tek şey o. İlk gürültüye basma, gerçekten kaçman gerekene kadar bekle."
 

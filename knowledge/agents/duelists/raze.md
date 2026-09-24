@@ -49,7 +49,7 @@ WHY: Raze'in her yeteneği entry için tasarlandı. Pasif oynarsan kendi avantaj
 
 IF: Ölüm yerin site girişi/dar boğaz ve aynı giriş round geçmişinde tekrar ediyorsa (bu bloğu yalnız ölüm yeri/round geçmişi bunu gösteriyorsa kullan)
 MEANING: O girişe util'siz dalıyorsun — savunucunun nerede durduğunu görmeden köşeye yürüyorsun
-COUNTER: Ölüm yerini adıyla söyle (ör. "Round 6 ve 10'da B Main girişinde düştün") ve sonraki round o hatta önce botu sür; bot kimi kilitlerse o noktaya molly at, sıçramayı ondan sonra bas.
+COUNTER: Ölüm yerini adıyla söyle (ör. "Round 6 ve 10'da B Main girişinde öldün") ve sonraki round o hatta önce botu sür; bot kimi kilitlerse o noktaya molly at, sıçramayı ondan sonra bas.
 WHY: Bot bedava bilgidir ve maliyeti sıfırdır; tekrar eden bir giriş ölümünü kıran tek şey o girişi util'le açmaktır.
 
 IF: Molly'yle üst üste öldürüyorsun ama round'u yine de kaybediyorsun

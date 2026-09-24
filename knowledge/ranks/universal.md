@@ -256,7 +256,7 @@ Yanlış kararla öldün — almaman gereken dövüşe girdin, düşmanın elini
 ### Tam alımda ilk temas util'in işi
 
 - **IF** tam alım round'unda saldırıdayken round açılışında öldüysen
-- **MEANING** en pahalı anda düştün: tam silahın düşmana geçti, takım util zincirini daha kuramadan sayıca azaldı — tek ölüm bütün alım avantajını eritti
+- **MEANING** en pahalı anda öldün: tam silahın düşmana geçti, takım util zincirini daha kuramadan sayıca azaldı — tek ölüm bütün alım avantajını eritti
 - **COUNTER** tam alımda ilk teması sen değil util açsın: girişe smoke ya da flash inmeden geniş açıya çıkma; takımın hamlesi başlayınca trade mesafesinde, arkadaşınla aynı anda gir
 - **WHY** tam alım round'u util zinciri ve birlikte giriş üstüne kuruludur; erken düşen tam-silahlı oyuncu düşmana sayıyı, silahı ve round planını birden verir
 
@@ -358,7 +358,7 @@ Spike kurulu ve saldırıdasın: spike senin için sayıyor, acele etmek zorunda
 ### Çapraz açı kur, tek noktadan tutma
 
 - **IF** spike kurulduktan sonra saldırıda tek bir açıdan site'ı tutarken öldüysen (spikePlanted, sen saldırıdasın)
-- **MEANING** tek açı retake'e tek bir 1vX sunar; sen düştüğün an o hat tamamen boşalır ve defuse serbest kalır
+- **MEANING** tek açı retake'e tek bir 1vX sunar; sen öldüğün an o hat tamamen boşalır ve defuse serbest kalır
 - **COUNTER** spike'ı iki ayrı açıdan tut — biri defuse hattını, diğeri giriş hattını görsün; acele eden taraf retake yapandır, onlara gitme, iki ateş hattına gelmeye zorla
 - **WHY** iki ateş hattı retake'i ikiye böler; birini vurduğunda diğeri hâlâ görmediği bir açının altında kalır, defuse'a oturamaz
 
@@ -448,7 +448,7 @@ Takım baskı kurarken haritanın uzak kolunda tek başınasın; lurk'ün değer
 ### Lurk'ü execute'a senkronla
 
 - **IF** takımdan kopuk, tek başına haritanın uzak bir bölgesinde (mid/flank) erken lurk yaparken öldüysen (saldırıdasın, takım arkadaşların hayatta ama uzakta)
-- **MEANING** lurk'ün takım baskısından kopuktu; düşman seni rahatça izole edip trade'siz aldı, çünkü lurk ancak takım dikkat çekerken işe yarar
+- **MEANING** lurk'ün takım baskısından kopuktu; düşman seni rahatça izole edip trade'siz öldürdü, çünkü lurk ancak takım dikkat çekerken işe yarar
 - **COUNTER** lurk'ünü takımın execute'una senkronla: takım siteye baskı kurup dikkat çekerken sen arka/flank bilgisini al, izole 1v1 peek arama
 - **WHY** lurk'ün değeri bilgi ve rotasyon kesmektir, kill değil — takım baskısı yokken lurk sadece sayı dezavantajı yaratır, çünkü düşman tek bir hedefe odaklanabilir
 

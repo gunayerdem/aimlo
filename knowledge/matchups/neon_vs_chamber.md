@@ -55,7 +55,7 @@ Neon sprint ve slide'la açıları geçer — durmaz, tutmaz. Chamber Op'u tek a
 
 **Neon, Op'a ölüyorsa (killerInfo: Operator)**: "Operator seni düz hat üzerinde sprint ederken yakaladı — Chamber'a temiz atış verdin. Önce duvarı at, görüş hattını kapat, sonra geç. Ya da o açıyı kayarak geç — silüetin değişir, atış güçleşir."
 
-**Chamber aynı açıda üst üste ölüyorsa (repeatedPosition, düşman kompunda Neon)**: "İki round üst üste aynı yakın açıda düştün. İlk kill düştüğünde ya da ayak sesi yaklaştığında daha uzun hatta geç — yakın mesafede ışınlanma kaçışa yetmez, mesafeyi sen koru."
+**Chamber aynı açıda üst üste ölüyorsa (repeatedPosition, düşman kompunda Neon)**: "İki round üst üste aynı yakın açıda öldün. İlk kill düştüğünde ya da ayak sesi yaklaştığında daha uzun hatta geç — yakın mesafede ışınlanma kaçışa yetmez, mesafeyi sen koru."
 
 ### Kazanan taraftaysan
 

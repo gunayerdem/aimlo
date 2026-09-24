@@ -37,7 +37,7 @@ verified: 2026-07-08
 
 IF: Aynı köşede/ölüm yerinde art arda round'larda ilk temasta düşüyorsan (bu bloğu yalnız ölüm yeri/round geçmişi bunu gösteriyorsa kullan)
 MEANING: O açıya kalkan açmadan varıyorsun — kalkan kısa ömürlü, koridorda yakıp peek'e kalkansız çıkıyorsun
-COUNTER: Ölüm yerini adıyla söyle (ör. "Round 5 ve 9'da Mid'de aynı açıda düştün") ve o açıya kalkanı köşeyi tam dönerken aç; öldürdüysen küreyi hemen vur, sonra sıradaki açıya geç.
+COUNTER: Ölüm yerini adıyla söyle (ör. "Round 5 ve 9'da Mid'de aynı açıda öldün") ve o açıya kalkanı köşeyi tam dönerken aç; öldürdüysen küreyi hemen vur, sonra sıradaki açıya geç.
 WHY: Kalkansız Iso kit avantajı olmayan sıradan bir duelist'tir; döngü kırılınca aynı açıda ikinci kez aynı şekilde düşersin.
 
 IF: 2v1 veya 3v1'lerde sık ölüyorsun

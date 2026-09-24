@@ -1077,8 +1077,17 @@ export function buildVisionUserMessage(opts: {
     // ("dersiyle başla") modelce açılışa aynen kopyalanıyor ve aynı-formlu
     // round'lar aynı cümle şekline düşüyordu; gramer-iskeleti (neden-öbeği /
     // EMİR kipi / RAKİP özneli) ilk-token şeklini yapısal ayrıştırır. ≤178 B.
+    // B09 / TR-KALAN-07 (2026-09-24): EN (a)'nın "the most critical ROOT cause" AD ÖBEĞİ
+    // modelce etiket olarak kopyalanıyordu (b09-base-en E11/E12 "Root cause: …", E18
+    // "Timing mistake: …" — üçü de (a) round'u). EN (a) artık düz cümle tarifi; ölçüm
+    // (EN 10 örnek, ham; iki aday da odak kuralının (a) değişikliğini içeriyordu, o madde
+    // sonra geri alındı): iki-noktalı açılış 4 → 1 / 0, "Root cause:" 2 → 0. Örnek etiket
+    // VERİLMEZ (V1 F4b). TR (a) ve "iki nokta üst üste ile başlama" ŞEKİL yasağı da
+    // denendi, ölçülüp GERİ ALINDI: TR'de hedef sınıf tabanda 0/58'di, şekil yasağı TR
+    // iki-noktalı açılışı 0/58 → 5/58'e çıkardı (yasağı anmak biçimi çağırıyor), TR (a)'yı
+    // içeren iki aday gerçek korpusta m3/detector'da geriledi (lib/ai-policy.ts B09 ÖLÇÜM NOTU).
     openerDirective = reqLang === "en"
-      ? `\n[OPENER] This round open deathAnalysis with: ${["(a) the most critical ROOT cause", "(b) the lesson as an imperative, with its own verb", "(c) what the enemy did — make the ENEMY the subject"][oi]}. The [DEATH-TYPE HINT] picks the lesson; this line only picks the opener.`
+      ? `\n[OPENER] This round open deathAnalysis with: ${["(a) a plain sentence saying WHY you died", "(b) the lesson as an imperative, with its own verb", "(c) what the enemy did — make the ENEMY the subject"][oi]}. The [DEATH-TYPE HINT] picks the lesson; this line only picks the opener.`
       : `\n[AÇILIŞ] deathAnalysis açılışı bu round: ${["(a) en kritik KÖK neden", "(b) dersin EMİR hali, dersin kendi fiiliyle", "(c) düşmanın yaptığı — öznen RAKİP olsun"][oi]}. [ÖLÜM-TİPİ İPUCU] dersi seçer; bu satır yalnız açılışı seçer.`;
   }
 

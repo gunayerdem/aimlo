@@ -92,7 +92,7 @@ Mid Window, Mid hattındaki bilgi ve açı pozisyonu — Mid Wall'a yakın. Duva
 
 ### Pattern 4: Mid Fountain Utility'siz Peek'leri
 
-**IF:** Mid Fountain'i sürekli util atmadan peek atıp düşüyorsun — merkez kavşağa utility'siz bakıyorsun.
+**IF:** Mid Fountain'i sürekli util atmadan peek atıp ölüyorsun — merkez kavşağa utility'siz bakıyorsun.
 
 **MEANING:** Fountain merkez nokta, savunucu burayı hem Mid Bend hem B Link tarafından çapraz tutuyor. Utility'siz peek atarsan iki açıdan birden vurulursun, Mid kontrolünü alamadan ölürsün.
 

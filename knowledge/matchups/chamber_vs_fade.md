@@ -44,7 +44,7 @@ Chamber op'la uzun açı tutar, tabancasıyla kısa mesafede de sert vurur. Fade
 
 ## AIMLO Ne Demeli
 ### Kaybeden taraftayken
-**Chamber aynı pozisyonda üst üste ölüyorsa (repeatedPosition)**: "Üçüncü kez aynı açıda düştün — Fade'in taraması o köşeyi ezberledi. Recon vurdu mu ya tabancayla peek'i al sonra TP, ya direkt TP çek. Açıda donup kalma, takım seni önceden çapraz tutuyor."
+**Chamber aynı pozisyonda üst üste ölüyorsa (repeatedPosition)**: "Üçüncü kez aynı açıda öldün — Fade'in taraması o köşeyi ezberledi. Recon vurdu mu ya tabancayla peek'i al sonra TP, ya direkt TP çek. Açıda donup kalma, takım seni önceden çapraz tutuyor."
 
 **Fade ölüyor ve trade gelmiyorsa (tradedByAlly=false)**: "Tarıyorsun ama takımın arkanda değil. Recon yere değdiği an birlikte girin — tek başına taramanın peşinden gidersen Chamber çoktan başka açıya kaymış olur."
 

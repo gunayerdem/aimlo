@@ -39,7 +39,7 @@ WHY: Düşman nereye çıkacağını bilirse seni önceden nişanlar. Beklenmedi
 
 IF: Ölümlerin takımdan uzak flank/lurk hattında ve round geçmişinde aynı bölgede tekrar ediyorsa (bu bloğu yalnız ölüm yeri/round geçmişi bunu gösteriyorsa kullan)
 MEANING: Lurk hattını ve zamanlamanı tekrar ediyorsun; düşman o hattı önceden tutmaya başlamış
-COUNTER: Ölüm yerini adıyla söyle (ör. "Round 4 ve 8'de takım A'dayken Mid'de düştün") ve sonraki round o hattı bir tur boş bırak; takımla gir, düşman flank beklemeyi bıraktığında geri dön.
+COUNTER: Ölüm yerini adıyla söyle (ör. "Round 4 ve 8'de takım A'dayken Mid'de öldün") ve sonraki round o hattı bir tur boş bırak; takımla gir, düşman flank beklemeyi bıraktığında geri dön.
 WHY: Tekrar eden lurk hattı pozisyonunu bedavaya verir; Yoru'nun tek silahı olan sürpriz kalkınca lurk sadece sayı dezavantajıdır.
 
 IF: Ult sırasında veya sonrasında öldürme çıkmıyor

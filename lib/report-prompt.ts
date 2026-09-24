@@ -1063,8 +1063,8 @@ MATCH INSIGHTS (pre-computed, deterministic)
 ═══════════════════════════════════════════════
 AGGREGATED PATTERNS (from per-round killer/location data)
 ═══════════════════════════════════════════════
-- Top killers (kim seni en çok öldürdü): ${topKillers || "data yok"}
-- Top death locations (en çok nerede öldün): ${topDeathLocs || "data yok"}
+- ${isTr ? "Top killers (kim seni en çok öldürdü)" : "Top killers (who killed you most)"}: ${topKillers || (isTr ? "data yok" : "no data")}
+- ${isTr ? "Top death locations (en çok nerede öldün)" : "Top death locations (where you died most)"}: ${topDeathLocs || (isTr ? "data yok" : "no data")}
 ${allDeathAnalyses.length > 0 ? `\n═══════════════════════════════════════════════\nPER-ROUND DEATH ANALYSIS (OCR + AI round-by-round feedback)\n═══════════════════════════════════════════════\n${allDeathAnalyses.join("\n")}` : ""}
 ${allCoachInsights.length > 0 ? `\n═══════════════════════════════════════════════\nPER-ROUND COACH INSIGHTS (pattern-level per round)\n═══════════════════════════════════════════════\n${allCoachInsights.join("\n")}` : ""}
 `;
@@ -1089,10 +1089,14 @@ IMPROVEMENT FOCUS: ${plan.dailyFocus.title} — ${plan.dailyFocus.description}
 ${memoryContext}
 `;
 
+  // B09 (2026-09-24): lang='en' iken user prompt'a Türkçe sabitler gidiyordu (side
+  // etiketi "SALDIRI/SAVUNMA — oyuncu site'lara giriyor", yukarıdaki "Top killers (kim
+  // seni en çok öldürdü)" / "data yok"). EN dalı İngilizce karşılığı alır; TR dalı
+  // BAYT-AYNI (scripts/test-prompt-policy.ts [P7] iki yönü de kilitler).
   const sideLabelForPrompt = setup.side === "attack"
-    ? "attack (SALDIRI — oyuncu site'lara giriyor: entry/execute/trade/space)"
+    ? (isTr ? "attack (SALDIRI — oyuncu site'lara giriyor: entry/execute/trade/space)" : "attack (the player enters sites: entry/execute/trade/space)")
     : setup.side === "defense"
-      ? "defense (SAVUNMA — oyuncu site'ları tutuyor: hold/off-angle/retake/save)"
+      ? (isTr ? "defense (SAVUNMA — oyuncu site'ları tutuyor: hold/off-angle/retake/save)" : "defense (the player holds sites: hold/off-angle/retake/save)")
       : setup.side;
   // Enemy bilinmiyorsa satırı HİÇ yazma — "Enemy: unknown" literal'i modele
   // küçük-harf 'unknown'u TR metne sızdırıyordu (canlı vaka: "Reyna ya da

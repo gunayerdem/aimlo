@@ -31,7 +31,7 @@ Cypher tuzak ağıyla senin rotanı okur; Reyna öldürmeden hiçbir şeydir ve 
 **WHY** Göz vurulup kırılsa bile o an Cypher'ın gözü tellerinde değil göz küresindedir — pencere senin
 
 **IF** öldüğünde ult'un doluydu (ultReady)
-**MEANING** Ult penceresi elinde bekledi — görünmez kaçış hakkını hiç açmadan tel hattında düştün
+**MEANING** Ult penceresi elinde bekledi — görünmez kaçış hakkını hiç açmadan tel hattında öldün
 **COUNTER** Ult'u ilk temastan önce aç: öldür, görünmez sıyrıl, kameranın takibinden çık, sıradaki açıya geç
 **WHY** Ult penceresinde kaçışın seni görünmez yapar — Cypher'ın bütün kiti görmeye dayalıdır, görmediği Reyna'yı hiçbir tel tutamaz
 

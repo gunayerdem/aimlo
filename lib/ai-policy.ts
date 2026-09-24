@@ -272,14 +272,22 @@ BU LİSTE DIŞINDA İNGİLİZCE KELİME KULLANMA. Zorunlu çeviri: pre-aim→aç
 // DOĞAL KOÇ DİLİ — anti-kitabi/anti-çeviri (TR ve EN ayrı)
 // ═══════════════════════════════════════════════════════════
 
+// ÖLÜM FİİLİ (B09 / TR-KALAN-06 prompt yarısı, 2026-09-24): yasak listesinde
+// "seni oradan/B Main'den aldı" ve "düştün/düşmüşsün" yoktu (korpus: phoenix-d "Jett seni
+// oradan aldı", know-e "A Site'ta düşmüşsün"); üstelik bu kuralın İLK satırı "cezalandırıyor"
+// yerine "seni oradan kesiyor"u ÖNERİYORDU — aynı kuralın "kesti" yasağıyla çelişki
+// (b09-base-trpc know-a ham: "seni oradan kesiyor"). Öneri kaldırıldı, iki biçim yasağa
+// eklendi; KB'nin aynı fiili öğreten örnek cümleleri aynı commit'te "öldün/öldürdü"ye
+// çevrildi (verify-kb [17] kilitler). ÖLÇÜM (b09-base → b09-cand/cand2, ham, TR 58 örnek):
+// "seni … aldı/kesti/temizledi/indirdi" 13 → 2 / 2, ölüm anlamlı "düş-" 1 → 0 / 0.
 export const NATURAL_COACH_RULE = `\nDOĞAL KOÇ DİLİ: Gerçek bir Radiant koç gibi DOĞRUDAN, sokak ağzıyla konuş. Kitabi/çeviri kelime YASAK:
-"cezalandırıyor/cezalandırdı/cezalandıracak" → "ucuza öldürüyor / aynı açıdan kafadan vuruyor / seni oradan kesiyor"
+"cezalandırıyor/cezalandırdı/cezalandıracak" → "ucuza öldürüyor / aynı açıdan kafadan vuruyor"
 "konumlandırma/pozisyonlandırma/konuşlanma" → "pozisyon / açı"
 "kuru entry/kuru giriş/kuru peek" → "utility'siz giriş / dry peek"
 "pre-aim" → "açıyı önceden tutuyor / köşeyi önceden nişanlamış" (TR'de 'pre-aim' YAZMA)
 "swing yap-" (Tarzanca: İng. isim + TR fiil) → "geniş açıyla peek at- / peek at-" ('swing' tek başına isim olarak SERBEST; 'yap-' ile fiilleştirme YASAK: "swing yapma/yaptın/yapıyor")
 "ilk mermi avantajı/ellerinde olan ilk mermi" gibi DEVRİK kalıp YASAK → "ilk atışı sen yaparsın"
-ÖLÜMÜ DÜZ SÖYLE: oyuncu öldüyse "öldürdü" / "kafadan vurup öldürdü" de. Yumuşatma/argo YASAK: "seni kafadan aldı / kesti / götürdü / temizledi / biçti / düşürdü" → hepsi "öldürdü". (Düşmanın bir AÇIYI/görüş hattını "kesmesi" farklı şeydir, o serbest — yasak olan oyuncuyu öldürmeyi yumuşatmak.)
+ÖLÜMÜ DÜZ SÖYLE: oyuncu öldüyse "öldürdü" / "kafadan vurup öldürdü" de. Yumuşatma/argo YASAK: "seni kafadan aldı / seni oradan aldı / seni B Main'den aldı / kesti / götürdü / temizledi / biçti / düşürdü" → hepsi "öldürdü"; oyuncunun ölümünü "düştün / düşmüşsün" diye de yumuşatma → "öldün". (Düşmanın bir AÇIYI/görüş hattını "kesmesi" farklı şeydir, o serbest — yasak olan oyuncuyu öldürmeyi yumuşatmak.)
 DİLBİLGİSİ: cümleler tam, akıcı ve düzgün kurulsun; devrik/yarım/bozuk Türkçe YASAK. Yüksek sesle
 okununca gerçek bir koç öyle der mi — demezse yeniden yaz. Net, kısa, sert ama spesifik (callout + ne yap).
 ENVANTER-CÜMLE YASAK (Cycle 4): cümleni OCR alanlarını sırayla dizerek kurma (yer+ajan+silah+HP+açı = rapor). Koç her detayı saymaz, en canını sıkan TEK şeye odaklanır.
@@ -401,6 +409,14 @@ export const OUTPUT_FOCUS_RULE = `\nODAK KURALI:
 // (1-2 sentences/field, 1 fix). Aligning to the schema: one most-important
 // problem, one clean fix (alternative not required), 1-2 sentences, no
 // narration. Micro-position still mandatory.
+// B09 ÖLÇÜM NOTU (2026-09-24, TR-KALAN-07): ANTI-ŞABLON (a) "en kritik KÖK nedenle başla" düz
+// cümle tarifine çevrilip "iki nokta üst üste ile biten öbekle başlama" ŞEKİL yasağı eklendi →
+// ölçüldü ve GERİ ALINDI: TR iki-noktalı açılış 0/58 → 5/58 ("Bekle: …", "Açıkta değil, siper
+// yanında dur: …" — yasağı anmak biçimi çağırıyor); şekil yasağı kaldırılmış ikinci aday da
+// (başka maddelerle birlikte) gerçek korpusta m3 0.591 → 0.773, detector 70.0 → 65.2 verdi —
+// etki ayrıştırılamadı. TR'de hedef sınıf (etiketli açılış) tabanda 0/58 olduğundan TR tarafı
+// DEĞİŞTİRİLMEDİ; EN [OPENER] (a) düzeltmesi (Root cause 2/10 → 0) ayrı,
+// lib/vision-prompt-builder.ts. Sınır savunması: lib/coach-text stripDiagnosisLabel (B03).
 export const OUTPUT_FOCUS_RULE_VISION = `\nODAK KURALI:
 - SADECE en önemli 1 soruna odaklan, 1 net fix ver (alternatif şart değil).
 - 1-2 cümle, en fazla. Paragraf/narration YASAK.
@@ -462,6 +478,15 @@ export const DECISION_SCORE_RUBRIC = `\nKARAR SKORU RUBRİK:
 // gpt-5 koçluğu UYDURMAZ; OCR gerçeğini KB ile EŞLER ve KB'nin diliyle verir.
 // ═══════════════════════════════════════════════════════════
 
+// B09 ÖLÇÜM NOTU (2026-09-24, TR-KALAN-22): aşağıdaki "onun cümlesini kullan, kendi cümleni
+// kurma" ↔ "OLDUĞU GİBİ kopyalama" / ANTI-VERBATİM gerilimi iki biçimde uzlaştırılmayı denedi,
+// İKİSİ DE ölçülüp GERİ ALINDI: (1) "KAVRAMINI al, cümleyi KENDİN kur" içeren aday → gerçek
+// korpusta m3 0.591 → 0.818, m1 0.048 → 0.143, detector 70.0 → 68.0; (2) "anlatımını ve
+// terimlerini kullan, yalnız tırnak içi örnek cümleleri/başlıkları birebir yazma" içeren aday →
+// m3 0.773, detector 65.2 (iki aday da başka maddeler içeriyordu; etki ayrıştırılamadı). Hedef
+// sınıf (KB tırnaklı örnek cümlesinin 6-gram birebir geçişi) tabanda 0/58 → ölçülebilir fayda
+// yok, ölçülen zarar var. Kalıcı kaynak düzeltmesi KB tarafında yapıldı (tırnaklı "…düştün"
+// örnekleri → "öldün", verify-kb [17]); bu kural bilinçli olarak bugünkü hâlinde.
 export const KB_SOURCE_RULE = `\n🎯 KAYNAK = KB (knowledge blokları) — EN ÖNEMLİ KURAL:
 Sen koçluğu SIFIRDAN UYDURMAZSIN. OCR'dan gelen gerçeği (ajan + harita + ölüm yeri + düşman + skor) yukarıdaki knowledge bloklarıyla EŞLERSİN ve feedback'i o blokların DİLİYLE verirsin.
 - Bu ölümü KB'deki kalıp/hata bloklarıyla (IF/MEANING/COUNTER/WHY satırları, agent "Sık Yapılan Hatalar", harita "Ölüm Bölgeleri"/"Callout'lar") eşle; başlık adı dosyadan dosyaya değişir, İÇERİĞE bak. En uygun olanı seç.

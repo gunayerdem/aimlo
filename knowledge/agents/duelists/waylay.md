@@ -44,7 +44,7 @@ WHY: Yavaşlama düşmana değdiği an senin lehine açılan penceredir; bekleme
 
 IF: Ölümlerin agresif ilk peek'te, site ağzında ya da dar geçiş girişinde toplanıyorsa (bu bloğu yalnız ölüm yeri/round geçmişi bunu gösteriyorsa kullan)
 MEANING: Peek'i güvencesiz açıyorsun — geri-kayma noktan ya hiç kurulmamış ya turun başında kurulup çoktan silinmiş
-COUNTER: Ölüm yerini adıyla söyle (ör. "Round 5 ve 7'de A Main ağzında ilk peek'te düştün") ve sonraki round sırayı sabitle: nokta → yavaşlat → peek; düelloyu kaybettiğin an geri kay.
+COUNTER: Ölüm yerini adıyla söyle (ör. "Round 5 ve 7'de A Main ağzında ilk peek'te öldün") ve sonraki round sırayı sabitle: nokta → yavaşlat → peek; düelloyu kaybettiğin an geri kay.
 WHY: Nokta kısa ömürlü; turun başında bırakılan güvence tam düello anında yok olur ve güvencesiz Waylay sıradan bir duelist'tir.
 
 IF: İlk öldürmeyi alıyorsun ama hemen ardından ikinci düşmana yakalanıp ölüyorsun

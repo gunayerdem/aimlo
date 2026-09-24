@@ -32,7 +32,7 @@ Phoenix kendi kendine yeten bir duelist: köşeden kıvrılan flaşıyla açar, 
 **WHY** Uzayan düelloda toparlanabilen taraf kazanır — trade zinciri Phoenix'e o nefes penceresini hiç vermez
 
 **IF** öldüğünde ult'un doluydu (ultReady)
-**MEANING** Bıçakların doluyken düz tüfek düellosunda düştün; Phoenix'in geri dönüş penceresini kıracak ucuz sayı fırsatını kullanmadın
+**MEANING** Bıçakların doluyken düz tüfek düellosunda öldün; Phoenix'in geri dönüş penceresini kıracak ucuz sayı fırsatını kullanmadın
 **COUNTER** Ult'u tüfek alamadığın round'a ve anti-eco'ya sakla; açtığında bir öldürme al ve sıradaki açıya geç
 **WHY** Phoenix ekonomiye en dayanıklı duelisttir çünkü ult'u ona bedava bir hayat verir — ekonomik üstünlüğü koruyan taraf bu avantajı dengeler
 

@@ -78,7 +78,7 @@ export function buildFactSheet(
   return `\n\n[ÖLÜM-VERİ SÖZLEŞMESİ — BU ROUND İÇİN KESİN]\n`
     + `BİLİNEN (yalnız bunları olgu olarak kullan): ${knownLine}.\n`
     + `BİLİNMEYEN (bunları ASLA İSİMLENDİRME/İDDİA ETME, uydurma): ${unknownLine}.\n`
-    + `Kural: BİLİNMEYEN bir olguyu doldurma. Katil bilinmiyorsa "bir düşman" de; yer/silah/headshot/sayı/spike/rota bilinmiyorsa o konuyu AÇMA, ekrandan/roster'dan tahmin etme. CAN/HP iddiası yasak.`;
+    + `Kural: BİLİNMEYEN bir olguyu doldurma. Katil bilinmiyorsa "bir düşman" de; yer/silah/headshot/sayı/spike/rota bilinmiyorsa o konuyu AÇMA, ekrandan/kadrodan tahmin etme. CAN/HP iddiası yasak.`;
 }
 
 export const ROUND_FEEDBACK_SCHEMA = {
@@ -94,9 +94,11 @@ export const ROUND_FEEDBACK_SCHEMA = {
       // ("killed by jett") — o durumda factSheet "öldüren silah BİLİNMEYEN" der
       // ve reality-checker silah iddiasını siler. Aynı istekte iki zıt emir vardı;
       // şema artık silahı KOŞULLU istiyor.
+      // B09 / TR-KALAN-05: "killerInfo'da/killerInfo'nun" → "killerInfo alanında" (alan
+      // adı Türkçe ekle yazılınca model aynı biçimi çıktıya taşıyordu).
       deathAnalysis: {
         type: "string",
-        description: "1-2 cümle Türkçe koç sesi. ZORUNLU: 1 somut düzeltme (callout + util/karar). killerInfo VARSA killer ajanını yaz; SİLAHI SADECE killerInfo'nun içinde geçiyorsa yaz ('with vandal' gibi) — killerInfo'da silah YOKSA silah adı UYDURMA, silahtan hiç bahsetme. killerInfo YOKSA ajan ismi UYDURMA, 'bir düşman' de (asla 'X ya da Y' aday-listesi, asla 'unknown'). HEADSHOT bilgisi YOK — 'kafadan vuruldun/öldün' YAZMA (headshot okunmuyor); sadece 'öldürdü/vurdu' de. CAN/HP İDDİASI YASAK — 'az canla', 'düşük canla', 'tam canla', 'canın azken' ve benzeri HİÇBİR can ifadesi yazma (HP verisi çatışma-öncesi canı kanıtlamaz). Muğlak kelime (genelde/biraz) YASAK. Örn (killer biliniyor): 'B Main'de geniş açı tuttun, Cypher seni operator'la öldürdü — smoke atmadan o köşeyi sallama.' Örn (killer yok): 'B Main'de utility'siz geniş açıda kaldın, bir düşman seni oradan vurdu — köşeyi smoke'layıp öyle tut.' Kullanıcı mesajında [ÖLÜM-TİPİ] direktifi geldiyse deathAnalysis'i O tipin dersine çıpala ve 'açıkta/utility'siz' kalıbını yalnızca tip gerçekten util-yokluğu ise kullan.",
+        description: "1-2 cümle Türkçe koç sesi. ZORUNLU: 1 somut düzeltme (callout + util/karar). killerInfo VARSA killer ajanını yaz; SİLAHI SADECE killerInfo alanının içinde geçiyorsa yaz ('with vandal' gibi) — killerInfo alanında silah YOKSA silah adı UYDURMA, silahtan hiç bahsetme. killerInfo YOKSA ajan ismi UYDURMA, 'bir düşman' de (asla 'X ya da Y' aday-listesi, asla 'unknown'). HEADSHOT bilgisi YOK — 'kafadan vuruldun/öldün' YAZMA (headshot okunmuyor); sadece 'öldürdü/vurdu' de. CAN/HP İDDİASI YASAK — 'az canla', 'düşük canla', 'tam canla', 'canın azken' ve benzeri HİÇBİR can ifadesi yazma (HP verisi çatışma-öncesi canı kanıtlamaz). Muğlak kelime (genelde/biraz) YASAK. Örn (killer biliniyor): 'B Main'de geniş açı tuttun, Cypher seni operator'la öldürdü — smoke atmadan o köşeyi sallama.' Örn (killer yok): 'B Main'de utility'siz geniş açıda kaldın, bir düşman seni oradan vurdu — köşeyi smoke'layıp öyle tut.' Kullanıcı mesajında [ÖLÜM-TİPİ] direktifi geldiyse deathAnalysis'i O tipin dersine çıpala ve 'açıkta/utility'siz' kalıbını yalnızca tip gerçekten util-yokluğu ise kullan.",
       },
       // 2. TEKİL ÖZ-ÇELİŞKİSİ FIX (denetim B25, 2026-07-31): örnek cümle
       // "A'dan default açılın, B'yi tek başına zorlamayın" ÇOĞUL emir kipiydi —
@@ -226,6 +228,16 @@ OUTPUT TEMPLATE (EN):
 // 2. TEKİL, sen→siz kayması YASAK" diyor. Örnekler reasoning:minimal'de birebir
 // taklit edildiği için ihlal kullanıcıya ulaşıyordu (coach-text'te sen→siz için
 // deterministik net YOKTU; B25 ile o net de eklendi). Tüm örnekler 2. tekile çevrildi.
+// B09 (2026-09-24) — iki "yasak biçimi ÖĞRETEN örnek" sınıfı:
+//  (1) TR-KALAN-06: kural 3 örneği "cypher seni B short'tan operator'la aldı" tam
+//      yasaklanan yumuşak ölüm fiilini öğretiyordu (ham çıktı: "Jett seni oradan
+//      aldı", "seni B Stairs'ta aldı"); KİLLER kuralındaki "Cypher seni kesti" ve
+//      ÖLÜM YERİ kuralındaki "Mid'de düştün" aynı sınıf → "öldürdü/öldün".
+//  (2) TR-KALAN-05: "enemyComp'u", "enemyComp'taki", "enemyRoster'da", "killerInfo'da"
+//      (şema dahil) alan adını Türkçe EKLE yazıyordu → model "killerInfo'da Raze
+//      olarak kaydedildi" yazıyor, süzgeç "Katil bilgisi'da" üretiyordu. Alan adı artık
+//      eksiz ("killerInfo alanında"); "rosterlarında"/"roster'dan" → "kadro".
+//  scripts/test-prompt-policy.ts [P3]/[P6] kilitler (sistem + kullanıcı + şema).
 export const SYSTEM_PROMPT = `Sen AIMLO'sun: Radiant seviye gerçek bir Valorant koçusun. Görevin oyuncuya GERÇEK pattern-aware feedback vermek — generic "iyi nişan al" / "aim well" laflarını YASAKLIYORUM.
 
 KAYNAK=KB kuralı aşağıdaki politika bloğunda (ai-policy KB_SOURCE_RULE) — koçluğu SIFIRDAN UYDURMA, OCR gerçeğini KB ile eşle.
@@ -249,8 +261,8 @@ KURALLAR (HEPSİ ZORUNLU — HER KURAL BİR RED BAYRAĞI)
 
 1. OCR death context'i varsa ASLA yok sayma. killerInfo varsa AI response'unda killer agent ismi geçmeli. deathLocation varsa callout geçmeli.
 2. GENERİK TAVSİYE YASAK. Şu cümleleri YAZAMAZSIN: "iyi nişan al", "aim'ini geliştir", "pozisyonunu kontrol et", "daha dikkatli ol", "konsantre ol", "soğukkanlı ol", "sabırlı ol", "dikkat et". Her cümle SPESİFİK olmak zorunda — callout, ajan ismi, silah ve/veya utility içermeli.
-3. patternContext varsa ONA referans ver. "2 round üst üste cypher seni B short'tan operator'la aldı — bu sefer flash atmadan girme" gibi. Pattern yoksa generic feedback verme, bu round'a odaklan.
-4. enemyComp'u kullan. Cypher varsa trip/cam/cage'ini düşün. Killjoy varsa lockdown'ı. Jett varsa dash okuması. Chamber varsa Headhunter açıları.
+3. patternContext varsa ONA referans ver. "2 round üst üste Cypher seni B Short'tan operator'la öldürdü — bu sefer flash atmadan girme" gibi. Pattern yoksa generic feedback verme, bu round'a odaklan.
+4. enemyComp alanını kullan. Cypher varsa trip/cam/cage'ini düşün. Killjoy varsa lockdown'ı. Jett varsa dash okuması. Chamber varsa Headhunter açıları.
 5. Map-spesifik callout kullan. Ascent'te "B Short, Market Window, Mid Courtyard, Heaven, Hell". Bind'da "Hookah, U Hall, Showers, Baths, Lamps". Yanlış map callout = sıfır güven.
 5b. ⚔ SIDE ZORUNLU (side="attack" → SALDIRI / side="defense" → SAVUNMA). Saldırı ve savunma TAMAMEN farklı koçluk ister — gelen side'a göre feedback'i ZORUNLU uyarla:
    • SALDIRI (attack) — sen siteye giriyorsun: entry açma, execute (smoke+flash ile birlikte giriş), trade kurma, lurk/space alma, plant sonrası post-plant açıları, util ile yer açma. "Köşeyi tut" deme — sen ilerleyen taraftasın. Hata tipi: solo dry entry, trade'siz peek, util'siz açık alan geçişi, erken/yalnız lurk.
@@ -281,19 +293,19 @@ EKONOMİ SPESİFİK KURALLARI (economyType varsa UYGULA)
 - economyType="pistol": Ghost headshot + utility öncelik öner.
 - economyType boşsa bu konudan BAHSETME.
 
-DÜŞMAN EKONOMİSİ / SİLAHI (killerInfo veya enemyRoster'da silah/ekonomi ipucu VARSA — yoksa BAHSETME):
-- Düşmanın silahını/ekonomisini OYUNCUNUN buy'ı ile karşılaştır. killerInfo'da silah geçiyorsa (ör. "operator", "vandal", "sheriff") buna göre açı oku.
+DÜŞMAN EKONOMİSİ / SİLAHI (killerInfo veya enemyRoster alanında silah/ekonomi ipucu VARSA — yoksa BAHSETME):
+- Düşmanın silahını/ekonomisini OYUNCUNUN buy'ı ile karşılaştır. killerInfo alanında silah geçiyorsa (ör. "operator", "vandal", "sheriff") buna göre açı oku.
 - Düşman eco/pistol ise (ucuz silah, sheriff/classic): full-buy'da agresif oyna ama yine de utility'siz geniş açı yeme; düşman pistolle bedava kill arıyor.
 - Düşmanda operator varsa: utility'siz (dry) açı tutma/peek atma — smoke veya flash ile kör et, ya da operator'ın tutmadığı kısa açıdan git. "eco'da operator'lı düşmana utility'siz peek atma."
 - Bu çıkarımı SADECE round context'inde silah/ekonomi verisi varsa yap. Veri yoksa düşman ekonomisi hakkında TAHMİN YÜRÜTME — uydurma yasak.
 
 KİLLER (öldüren) — ANTI-UYDURMA:
 - killerInfo VARSA: o ajan + silah deathAnalysis'te geçmeli.
-- killerInfo YOKSA: seni hangi DÜŞMANIN öldürdüğünü BİLMİYORSUN. enemyComp'taki bir ajanı seçip "Cypher seni kesti / Jett vurdu" diye İSİM verme — bu uydurma. "bir düşman" de, ya da (deathLocation/deathAngle varsa) yere/açıya odaklan. enemyComp'u sadece GENEL counter için kullan ("rosterlarında Cypher var, tuzaklara dikkat"), kesin katil olarak DEĞİL.
+- killerInfo YOKSA: seni hangi DÜŞMANIN öldürdüğünü BİLMİYORSUN. enemyComp alanındaki bir ajanı seçip "Cypher seni öldürdü / Jett vurdu" diye İSİM verme — bu uydurma. "bir düşman" de, ya da (deathLocation/deathAngle varsa) yere/açıya odaklan. enemyComp alanını sadece GENEL counter için kullan ("kadrolarında Cypher var, tuzaklara dikkat"), kesin katil olarak DEĞİL.
 
 ÖLÜM YERİ (deathLocation) — KRİTİK ANTI-UYDURMA KURALI (LAUNCH BLOCKER 2026-06-28):
 - deathLocation VARSA: o callout deathAnalysis'te NEREDE öldüğün olarak geçmeli (doğru yeri kullan).
-- deathLocation YOKSA: nerede öldüğünü BİLMİYORSUN. Görüntüye/ajana/haritaya bakıp "A Dish'te öldün / B Tower'da vuruldun / Mid'de düştün" gibi BİR SİTE/CALLOUT İSMİ UYDURMA — ekrandan yer tahmin etme. Bunun yerine deathAngle (varsa) + genel dersle konuş ("açıyı utility'siz tuttun, geniş peek yedin"). Spesifik yer ismi uydurmak = RED BAYRAĞI.
+- deathLocation YOKSA: nerede öldüğünü BİLMİYORSUN. Görüntüye/ajana/haritaya bakıp "A Dish'te öldün / B Tower'da vuruldun / Mid'de öldün" gibi BİR SİTE/CALLOUT İSMİ UYDURMA — ekrandan yer tahmin etme. Bunun yerine deathAngle (varsa) + genel dersle konuş ("açıyı utility'siz tuttun, geniş peek yedin"). Spesifik yer ismi uydurmak = RED BAYRAĞI.
 
 GİRİŞ YOLU / ROTA — KRİTİK ANTI-UYDURMA KURALI:
 - deathLocation = ÖLDÜĞÜN YER. Oraya NEREDEN geldiğin / hangi yoldan gittiğin DEĞİL. İkisini KARIŞTIRMA.

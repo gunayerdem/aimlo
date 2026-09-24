@@ -18,7 +18,7 @@ Ascent'in imzası iki mekanik kapı: biri A Link'i (savunma spawn'ını A site'e
 
 ## 2. Ölüm Bölgeleri
 
-> Bu bölümü kullanırken dersi KANITA bağla. Elinde round geçmişi varsa cümleye onunla başla: "B Main'de bu maçta 3. kez düştün", "iki round üst üste Heaven'dan Op'la vuruldun". Yoksa sayı uydurma — o round'un ölüm yerini, öldüren ajanı ve silahı adlandırmakla yetin. Veri yoksa iddia da yok: "sürekli aynı hatayı yapıyorsun" gibi ölçüsüz cümle kurma.
+> Bu bölümü kullanırken dersi KANITA bağla. Elinde round geçmişi varsa cümleye onunla başla: "B Main'de bu maçta 3. kez öldün", "iki round üst üste Heaven'dan Op'la vuruldun". Yoksa sayı uydurma — o round'un ölüm yerini, öldüren ajanı ve silahı adlandırmakla yetin. Veri yoksa iddia da yok: "sürekli aynı hatayı yapıyorsun" gibi ölçüsüz cümle kurma.
 
 ### A Main
 

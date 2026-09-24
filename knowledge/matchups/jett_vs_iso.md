@@ -37,7 +37,7 @@ Iso'nun kozu tek kurşunluk kalkanı: her düelloya bir mermi önde başlar. Jet
 **WHY** Bu eşleşmenin tamamı sayı yalıtımı üzerine kurulu — yalıtılmayan Jett kalkan farkını takımıyla kapatır
 
 **IF** öldüğünde ult'un doluydu (ultReady)
-**MEANING** Bıçakların doluyken tüfek düellosunda düştün; oysa kalkanlı rakibe karşı ucuz ve seri atış penceresi tam senin elindeydi
+**MEANING** Bıçakların doluyken tüfek düellosunda öldün; oysa kalkanlı rakibe karşı ucuz ve seri atış penceresi tam senin elindeydi
 **COUNTER** Ult'u tüfek alamadığın round'a ve anti-eco'ya sakla; açtığında seri isabetle kalkanı kır ve bitir, aynı yerde ikinci hedefi bekleme
 **WHY** Kalkan tek örnek emer, seri atış onu hızla tüketir — pencere açıkken kalkan avantajı Iso'nun elinden alınır
 

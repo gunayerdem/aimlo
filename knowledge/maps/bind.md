@@ -33,7 +33,7 @@ Bind'de site'a girmek görece kolay, ama içeri girince düşman her açıdan ge
 
 ## 2. Ölüm Bölgeleri
 
-> Bu bölümü kullanırken dersi KANITA bağla. Round geçmişi elindeyse cümleye onunla başla: "A Bath'ta bu maçta 3. kez düştün", "iki round üst üste Hookah'dan vuruldun". Veri yoksa sayı uydurma — o round'un ölüm yerini, öldüren ajanı ve silahı adlandırmakla yetin. Teleporter sesi, ekonomi ve skor gibi gerçekten verilmiş bilgiyi derse kat; verilmemişse o iddiayı hiç kurma.
+> Bu bölümü kullanırken dersi KANITA bağla. Round geçmişi elindeyse cümleye onunla başla: "A Bath'ta bu maçta 3. kez öldün", "iki round üst üste Hookah'dan vuruldun". Veri yoksa sayı uydurma — o round'un ölüm yerini, öldüren ajanı ve silahı adlandırmakla yetin. Teleporter sesi, ekonomi ve skor gibi gerçekten verilmiş bilgiyi derse kat; verilmemişse o iddiayı hiç kurma.
 
 **Ölüm Bölgesi 1: A Showers / A Bath (Hamam)**
 A Showers — yani A Bath, Hamam — dar ve tek yönlü akan koridor: içeride siper yok, geri çekilirken sırtın açık. Üstüne B Long teleporter'ı da bu ağza çıkar; arkanı hiç yoklamadan ilerlersen hem önden hem TP'den yersin. Seni öldüren şey nişanın değil, util harcamadan girmen: en az bir flash, bir smoke bırak. Smoke'suz flash'sız girersen A Short crossfire'ı ve Heaven açısı seni bitirir. Buraya her girişinde ölüyorsan derdin nişan değil, util disiplini.

@@ -125,15 +125,17 @@ const RUNTIME_GENERAL = new Set([
   "retake-playbook.md", // knowledge-loader: spikePlanted && side==="defense" (2026-07-19)
 ]);
 
+// Modül seviyesinde (B09, 2026-09-24): [7] ve [17] AYNI runtime tanımını kullanır.
+const isRuntimeFile = (rel: string): boolean => {
+  const p = rel.replace(/\\/g, "/");
+  if (p.startsWith("maps/") || p.startsWith("matchups/") || p.startsWith("ranks/")) return true;
+  if (/^agents\/[^/]+\/[^/]+\.md$/.test(p)) return true; // per-agent dosyaları (rol klasörü altında)
+  if (p.startsWith("general/")) return RUNTIME_GENERAL.has(p.slice("general/".length));
+  return false;
+};
+
 console.log(`\n[7] KB yasak-kelime taraması (${BANNED_PHRASES.length} kalıp)`);
 {
-  const isRuntimeFile = (rel: string): boolean => {
-    const p = rel.replace(/\\/g, "/");
-    if (p.startsWith("maps/") || p.startsWith("matchups/") || p.startsWith("ranks/")) return true;
-    if (/^agents\/[^/]+\/[^/]+\.md$/.test(p)) return true; // per-agent dosyaları (rol klasörü altında)
-    if (p.startsWith("general/")) return RUNTIME_GENERAL.has(p.slice("general/".length));
-    return false;
-  };
   const exemptLine = /(yasak|deme\b|denmez|kullanma|yerine|→|❌)/i;
   let hits = 0, warns = 0;
   for (const f of files) {
@@ -608,6 +610,49 @@ console.log(`\n[16] AGENT_ROLE_MAP ↔ disk kapsamı (${Object.keys(AGENT_ROLE_M
       );
     }
   }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 17) YUMUŞAK ÖLÜM FİİLİ KB'DE ÖĞRETİLMİYOR (B09 / TR-KALAN-06, 2026-09-24)
+// KÖK: ai-policy NATURAL_COACH_RULE oyuncunun ölümünü "seni … aldı" ve "düştün/
+// düşmüşsün" diye yumuşatmayı YASAKLIYOR; KB ise aynı fiili modele tırnaklı ÖRNEK
+// CÜMLE olarak veriyordu (raze.md "Round 6 ve 10'da B Main girişinde düştün", ascent.md
+// "B Main'de bu maçta 3. kez düştün", universal.md "trade'siz aldı" …; HEAD'de 25 satır).
+// Model örneği kopyalıyor, süzgeç (lib/coach-text) ancak bir kısmını geri çeviriyordu —
+// "kod kendisiyle çelişiyor" sınıfı (KB 10h dersi).
+// KURAL: runtime KB satırında 2. tekil ölüm anlamlı "düştün / düşmüşsün / düşüyorsun /
+// düştüğün" ve "seni … aldı" (≤4 ara sözcük) YOK.
+// MECAZ/GERÇEK DÜŞME MUAF (KAPALI liste — her madde KB'deki gerçek kullanım):
+//   "sayı düştün" (universal.md, sayıca eksildin), "3v2'ye düştün" (sayı durumu),
+//   "gözün önüne düştün" (jett_vs_reyna.md, dash'le önüne indin), "uçurumdan/kenardan
+//   düş-" (abyss.md, haritadan fiziksel düşme). Yasağı ANLATAN satır (yasak/deme/denmez/
+//   yazma sözcüğü, \p{L} sınırlı) da muaf.
+// KURTARMA YOLU (ihlalde): cümle ölümü anlatıyorsa "öldün/öldürdü" yaz; gerçekten mecaz
+// ya da fiziksel düşmeyse muafiyet listesine kanıtıyla (dosya:satır + anlam) ekle.
+console.log(`\n[17] KB'de yumuşak ölüm fiili yok ("düştün", "seni … aldı") — NATURAL_COACH_RULE ile çelişmez`);
+{
+  const SOFT_DUS = /(?<!\p{L})düş(?:tün|müşsün|üyorsun|tüğün)(?!\p{L})/u;
+  const SOFT_ALDI = /(?<!\p{L})seni(?:\s+[^\s.;!?"]+){0,4}?\s+ald[ıi](?!\p{L})/u;
+  const FIGURATIVE = /sayı düştün|\d+v\d+['’](?:y?[ae]) düştün|önüne düştün|uçurumdan düş|kenardan düş/iu;
+  // Yasağı ANLATAN satır muafiyeti — Türkçe-\b tuzağına düşmeden (\p{L} sınırı): [7]'nin
+  // /deme\b/'si "kademe"de, "→" ise KB'nin sıra oklarında ("nokta → yavaşlat → peek")
+  // ateşlenip HEAD'deki chamber.md:97 ve waylay.md:47 ihlallerini gizliyordu (ölçüldü).
+  const TEACHES_BAN = /(?<!\p{L})(?:yasak|deme|denmez|yazma)(?!\p{L})/iu;
+  let hits = 0;
+  for (const f of files) {
+    const rel = path.relative(KB, f);
+    if (!isRuntimeFile(rel)) continue;
+    fs.readFileSync(f, "utf8").split(/\r?\n/).forEach((line, i) => {
+      if (TEACHES_BAN.test(line)) return;
+      const dus = SOFT_DUS.test(line.replace(new RegExp(FIGURATIVE.source, "giu"), ""));
+      const aldi = SOFT_ALDI.test(line);
+      if (dus || aldi) {
+        hits++;
+        check(`${rel}:${i + 1}`, false, `(yumuşak ölüm fiili: ${dus ? '"düş-"' : '"seni … aldı"'} → "öldün/öldürdü" yaz; mecazsa muafiyete kanıtıyla ekle)`);
+      }
+    });
+  }
+  check("runtime KB yumuşak ölüm fiili temiz", hits === 0, `(${hits} satır)`);
 }
 
 console.log(`\n══════ SONUÇ: ${pass} geçti, ${fail} başarısız ══════`);

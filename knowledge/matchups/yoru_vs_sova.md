@@ -26,7 +26,7 @@ Sova keşifle oynar: dart tarar, drone işaretler, takımı senin yerini bilerek
 **WHY** Ezber lineup adrese atılır — adresi değiştirip eski adrese kopya koyarsan Sova'nın bilgisi zehre döner
 
 **IF** öldün ve takım arkadaşın trade'ini alamadı (tradedByAlly=false)
-**MEANING** Işınlanmayla takımdan koptun — arkada tek başına düştün ve kimse karşılık alamadı
+**MEANING** Işınlanmayla takımdan koptun — arkada tek başına öldün ve kimse karşılık alamadı
 **COUNTER** Işınlanma çıkışını takımın baskı anına bağla: onlar önden vururken sen arkadan çık, iki cephe aynı anda açılsın
 **WHY** Solo flank ancak zamanlıysa çalışır — takımdan bağımsız çıkan Yoru, keşif takımı için sıradan bir hedef
 
@@ -46,7 +46,7 @@ Sova keşifle oynar: dart tarar, drone işaretler, takımı senin yerini bilerek
 **WHY** Post-plant'te zaman senin lehine; taranmış noktada duran oyuncu utility ile sökülür, yer değiştiren oyuncu defuse penceresini daraltır
 
 **IF** öldün ve killerInfo'daki silah keskin nişancı sınıfıysa (Operator, Marshal, Outlaw)
-**MEANING** Dart hattı gösterdi ve uzun açıdaki silah seni ilk görüşte aldı — sürprizin taramayla bitmişti
+**MEANING** Dart hattı gösterdi ve uzun açıdaki silah seni ilk görüşte öldürdü — sürprizin taramayla bitmişti
 **COUNTER** O hattı boş bırak; kopyayı hatta gönderip atışı ona harcat, sen ışınlanmayla yandan çık. Atış sesinden sonra bas, ikinci atış hazır olmadan gir
 **WHY** Tek atış silahına en ucuz cevap sahte hedeftir — kopyaya harcanan kurşun, sana bedava geçiş penceresi açar
 

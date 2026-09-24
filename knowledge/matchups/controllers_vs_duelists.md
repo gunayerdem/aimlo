@@ -41,7 +41,7 @@ Smoke perdedir, duvar değil. İçinden geçilir. Bunu ikisi de bilmeli.
 
 ### Kaybeden taraftayken
 
-**Controller kendi smoke'unun ağzında ölüyorsa (repeatedPosition + ölüm yeri = kendi smoke hattın)**: "İki round üst üste kendi dumanının dibinde düştün — duelist içinden çıkıyor ve sen tam önünde duruyorsun. Smoke kenarından off-angle oyna, içinden çıkan ters tarafa baksın."
+**Controller kendi smoke'unun ağzında ölüyorsa (repeatedPosition + ölüm yeri = kendi smoke hattın)**: "İki round üst üste kendi dumanının dibinde öldün — duelist içinden çıkıyor ve sen tam önünde duruyorsun. Smoke kenarından off-angle oyna, içinden çıkan ters tarafa baksın."
 
 **Duelist smoke'un içinden geçerken ölüyorsa (tradedByAlly=false)**: "Dumana tek başına girdin, trade mesafesinde kimse yoktu. Adım sesi ya da takım bilgisi olmadan içeri girme — bilgi yoksa duman perde değil, tuzak."
 
