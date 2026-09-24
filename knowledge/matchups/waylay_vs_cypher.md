@@ -26,7 +26,7 @@ Cypher bilinen yolları kapatır; Waylay bilinmeyen yoldan gelir. Dash seni duva
 **WHY** Tuzak yalnızca okuduğu rotayı yakalar — rota değiştikçe Cypher kurulumunu sıfırdan kurmak zorunda kalır
 
 **IF** öldün ve takım arkadaşın trade'ini alamadı (tradedByAlly=false)
-**MEANING** Solo derin girdin ve geri-kayma noktan da takımdan uzaktaydı — düşünce kimse karşılık alamadı
+**MEANING** Solo derin girdin ve geri-kayma noktan da takımdan uzaktaydı — ölünce kimse karşılık alamadı
 **COUNTER** Geri-kayma noktasını her hamle öncesi yeniden ve takımın görebildiği hatta bırak; hep aynı köşeye bırakırsan dönüşünde seni bekleyen olur
 **WHY** Geri-kayma seni bıraktığın noktaya götürür — o nokta okunursa sigorta tuzağa döner, takımsızsa mezara
 

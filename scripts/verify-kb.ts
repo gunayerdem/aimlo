@@ -650,31 +650,69 @@ console.log(`\n[16] AGENT_ROLE_MAP ↔ disk kapsamı (${Object.keys(AGENT_ROLE_M
 //   düş-" (abyss.md, haritadan fiziksel düşme). Yasağı ANLATAN satır (yasak/deme/denmez/
 //   yazma sözcüğü, \p{L} sınırlı) da muaf.
 // KURTARMA YOLU (ihlalde): cümle ölümü anlatıyorsa "öldün/öldürdü" yaz; gerçekten mecaz
-// ya da fiziksel düşmeyse muafiyet listesine kanıtıyla (dosya:satır + anlam) ekle.
-console.log(`\n[17] KB'de yumuşak ölüm fiili yok ("düştün", "seni … aldı") — NATURAL_COACH_RULE ile çelişmez`);
+// ya da fiziksel düşmeyse / "aldı" ölüm anlamı taşımıyorsa muafiyet listesine kanıtıyla
+// (dosya:satır + anlam) ekle — muafiyet HER İKİ desenden önce uygulanır.
+// B09 inceleme [2] (W3-fix 2026-09-24): FIGURATIVE yalnız "düş-" testinden önce siliniyordu,
+// "seni … aldı" ham satıra uygulanıyordu → belgelenen kurtarma yolu "aldı" ihlalinde işe
+// YARAMIYORDU: "Sova dartı seni hedef aldı", "Sage ult ile seni geri aldı", "Op seni nişan
+// aldı", "Takım seni yanına aldı" muafiyete eklense de kırmızıydı (inceleyici denedi). Artık
+// tek muafiyet listesi (EXEMPT) iki desenden de önce satırdan silinir; "hedef/nişan/geri/
+// yanına/içeri al-" ölüm anlamı taşımayan kalıplar olarak listede (cycleb09-cand M1-R5 ham:
+// "seni sürekli hedef alıyor").
+// B09 inceleme [1] (W3-fix): NATURAL_COACH_RULE yasağı ADIYLA "düşürdü"yü sayıyor ama [17]
+// "seni … düşür-"ü görmüyordu → iso_vs_cypher.md:19 MEANING "seni ilk temasta düşürdü" (yasak
+// biçimin kendisi) + aynı fiil iso.md:11/:106, jett_vs_chamber.md:44,
+// controllers_vs_initiators.md:35 → SOFT_DUSUR eklendi, 5 satır "öldür-"e çevrildi. "düşersin/
+// düştüğünde" BİLEREK eklenmedi: runtime KB'de ~60 satırda spike/sayı/takım arkadaşı/koşul
+// anlamında geçiyor (ölçüldü) — guard yanlış-pozitifle meşru metni yeniden yazdırırdı.
+console.log(`\n[17] KB'de yumuşak ölüm fiili yok ("düştün", "seni … aldı/düşürdü") — NATURAL_COACH_RULE ile çelişmez`);
 {
   const SOFT_DUS = /(?<!\p{L})düş(?:tün|müşsün|üyorsun|tüğün)(?!\p{L})/u;
   const SOFT_ALDI = /(?<!\p{L})seni(?:\s+[^\s.;!?"]+){0,4}?\s+ald[ıi](?!\p{L})/u;
-  const FIGURATIVE = /sayı düştün|\d+v\d+['’](?:y?[ae]) düştün|önüne düştün|uçurumdan düş|kenardan düş/iu;
+  const SOFT_DUSUR = /(?<!\p{L})seni(?:\s+[^\s.;!?"]+){0,4}?\s+düşür\p{L}*/iu;
+  // KAPALI muafiyet — her madde gerçek kullanım (dosya/korpus kanıtı yukarıda).
+  const EXEMPT = /sayı düştün|\d+v\d+['’](?:y?[ae]) düştün|önüne düştün|uçurumdan düş|kenardan düş|(?<!\p{L})(?:hedef|nişan|geri|yanına|içeri)\s+al\p{L}*/giu;
   // Yasağı ANLATAN satır muafiyeti — Türkçe-\b tuzağına düşmeden (\p{L} sınırı): [7]'nin
   // /deme\b/'si "kademe"de, "→" ise KB'nin sıra oklarında ("nokta → yavaşlat → peek")
   // ateşlenip HEAD'deki chamber.md:97 ve waylay.md:47 ihlallerini gizliyordu (ölçüldü).
   const TEACHES_BAN = /(?<!\p{L})(?:yasak|deme|denmez|yazma)(?!\p{L})/iu;
+  /** Satırın yumuşak ölüm fiili etiketi (yoksa null) — KB taraması ve öz-testler AYNI yol. */
+  const softVerb = (line: string): string | null => {
+    if (TEACHES_BAN.test(line)) return null;
+    const l = line.replace(EXEMPT, "");
+    if (SOFT_DUS.test(l)) return '"düş-"';
+    if (SOFT_ALDI.test(l)) return '"seni … aldı"';
+    if (SOFT_DUSUR.test(l)) return '"seni … düşür-"';
+    return null;
+  };
   let hits = 0;
   for (const f of files) {
     const rel = path.relative(KB, f);
     if (!isRuntimeFile(rel)) continue;
     fs.readFileSync(f, "utf8").split(/\r?\n/).forEach((line, i) => {
-      if (TEACHES_BAN.test(line)) return;
-      const dus = SOFT_DUS.test(line.replace(new RegExp(FIGURATIVE.source, "giu"), ""));
-      const aldi = SOFT_ALDI.test(line);
-      if (dus || aldi) {
+      const v = softVerb(line);
+      if (v) {
         hits++;
-        check(`${rel}:${i + 1}`, false, `(yumuşak ölüm fiili: ${dus ? '"düş-"' : '"seni … aldı"'} → "öldün/öldürdü" yaz; mecazsa muafiyete kanıtıyla ekle)`);
+        check(`${rel}:${i + 1}`, false, `(yumuşak ölüm fiili: ${v} → "öldün/öldürdü" yaz; mecaz/ölüm-dışıysa EXEMPT'e kanıtıyla ekle)`);
       }
     });
   }
   check("runtime KB yumuşak ölüm fiili temiz", hits === 0, `(${hits} satır)`);
+  // Öz-test: kurtarma yolu İKİ desende de çalışıyor; muafiyet yasak biçimi yutmuyor.
+  const selfCases: [string, boolean][] = [
+    ["Sova dartı seni hedef aldı.", false],
+    ["Sage ult ile seni geri aldı.", false],
+    ["Op seni nişan aldı, açıyı değiştir.", false],
+    ["Takım seni yanına aldı.", false],
+    ["3v2'ye düştün, geri çekil.", false],
+    ["Jett seni oradan aldı.", true],
+    ["Cypher seni B Main'den aldı.", true],
+    ["Round 5'te Mid'de düştün.", true],
+    ["Telin haber verdiği atış seni ilk temasta düşürdü.", true],
+    ["Seni düşürmek için fazladan mermi harcar.", true],
+    ["Spike düştüğünde site'a dön.", false],
+  ];
+  for (const [s, want] of selfCases) check(`[17] öz-test «${s}» → ${want ? "ihlal" : "temiz"}`, (softVerb(s) !== null) === want, `(softVerb=${softVerb(s)})`);
 }
 
 console.log(`\n══════ SONUÇ: ${pass} geçti, ${fail} başarısız ══════`);

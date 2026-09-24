@@ -8,7 +8,7 @@ verified: 2026-07-08
 ## 1. Rol Kimliği
 - Iso'nun işi tek: her düelloyu kazan, her öldürmeden kalkan çıkar, sıradaki dövüşe kalkanlı gir.
 - Takım dar site'larda düşmanı sırayla temizlemeni istiyorsa, Jett'in çıkış oyunu yerine saf izolasyon gerekiyorsa Iso'yu seç.
-- Iso'nun özü her öldürmeyi dayanıklılığa çevirmek. Seni düşürmek için düşman fazladan mermi ve util harcamak zorunda kalır.
+- Iso'nun özü her öldürmeyi dayanıklılığa çevirmek. Seni öldürmek için düşman fazladan mermi ve util harcamak zorunda kalır.
 - Dört yeteneğin var: duvar (izolasyon ve giriş), kalkan/küre (her dövüşten önce aç, her öldürmeden sonra topla), ult (1v1 arena) ve zayıflatma oku — duvarın/zeminin içinden geçer. Zayıflatma isabet eden düşmana hem zarar-katlama (aldığı tüm hasar iki katına çıkar) hem yetenek kapatma uygular. Bu, kalkanlı düellondan önceki en güçlü kurulum: önce zayıflatmayı yedir, sonra kalkanla 1v1'e gir — düşman yeteneksiz ve iki kat hasar alıyorken sen tam korumalısın.
 - Takımın senden beklediği: her düelloyu kazan, kalkan biriktir, duvarı izolasyon için kullan.
 
@@ -35,10 +35,10 @@ verified: 2026-07-08
 
 ## 4. Kalıp -> Anlam
 
-IF: Aynı köşede/ölüm yerinde art arda round'larda ilk temasta düşüyorsan (bu bloğu yalnız ölüm yeri/round geçmişi bunu gösteriyorsa kullan)
+IF: Aynı köşede/ölüm yerinde art arda round'larda ilk temasta ölüyorsan (bu bloğu yalnız ölüm yeri/round geçmişi bunu gösteriyorsa kullan)
 MEANING: O açıya kalkan açmadan varıyorsun — kalkan kısa ömürlü, koridorda yakıp peek'e kalkansız çıkıyorsun
 COUNTER: Ölüm yerini adıyla söyle (ör. "Round 5 ve 9'da Mid'de aynı açıda öldün") ve o açıya kalkanı köşeyi tam dönerken aç; öldürdüysen küreyi hemen vur, sonra sıradaki açıya geç.
-WHY: Kalkansız Iso kit avantajı olmayan sıradan bir duelist'tir; döngü kırılınca aynı açıda ikinci kez aynı şekilde düşersin.
+WHY: Kalkansız Iso kit avantajı olmayan sıradan bir duelist'tir; döngü kırılınca aynı açıda ikinci kez aynı şekilde ölürsün.
 
 IF: 2v1 veya 3v1'lerde sık ölüyorsun
 MEANING: Duvarla izole etmeden, tek atımlık kalkanla birden fazla açıya çıkıyorsun
@@ -103,7 +103,7 @@ WHY: Iso bir entry duelist'i — duvar ve kalkan takımı içeri sokmak için. T
 ### İyi oynarken
 **Oyuncu Aksiyonu:** Her dövüşten önce kalkanı açıyorsun, öldürme sonrası küreyi topluyorsun, duvarla 2v1'leri ikiye bölüp sırayla kazanıyorsun.
 **Düşman Algısı:** Savunucular, öldürmeleri gereken atışta hayatta kaldığını görüyor. Kalkan ilk mermiyi emdi ve sana karşı atış için ekstra bir pencere açtı.
-**Düşman Tepkisi:** Kalkanı kırmak için fazladan mermi harcamak zorunda kalıyorlar — seni düşürme süreleri uzuyor. Duvarın arkasındaki savunucu takım arkadaşına trade atamıyor, sadece bekliyor — sen o sırada kalkanını yeniliyorsun.
+**Düşman Tepkisi:** Kalkanı kırmak için fazladan mermi harcamak zorunda kalıyorlar — seni öldürme süreleri uzuyor. Duvarın arkasındaki savunucu takım arkadaşına trade atamıyor, sadece bekliyor — sen o sırada kalkanını yeniliyorsun.
 **Fırsat Penceresi:** Kalkan düşmanı ekstra mermi harcamaya zorlar, her düelloda pencere senindir. Duvar her dövüşü kalkan avantajlı bir 1v1'e çevirir — crossfire bunu bozamaz.
 **Döngü:** Yaklaşırken kalkanı aç. Duvarla savunucuyu izole et, açıktakine peek at. Öldürmeden hemen sonra küreyi vur. Taze kalkanla sıradakine peek at. Ult'u site'ı tutan anchor'a ya da op'çuya kullan.
 **Düşman Adaptasyonu:** 4-5 round sonra vücut atışıyla kalkanı eritmeye, duvar açılarından kaçınmaya ya da retake'e çekilmeye başlarlar.

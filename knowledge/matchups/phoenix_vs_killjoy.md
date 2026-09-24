@@ -21,7 +21,7 @@ Killjoy sabit cihaz zinciri kurar: taret görür, bot yapışır, molly alanı d
 **WHY** Zincirin gücü sırayla vurmasında — halkalar tek tek söküldüğünde geriye sadece köşede bekleyen bir tüfek kalır
 
 **IF** öldün ve takım arkadaşın trade'ini alamadı (tradedByAlly=false)
-**MEANING** Cihaz zincirinin arkasındaki tüfek çaprazına solo girdin — düştüğünde karşılık alacak kimse yoktu
+**MEANING** Cihaz zincirinin arkasındaki tüfek çaprazına solo girdin — öldüğünde karşılık alacak kimse yoktu
 **COUNTER** Flaşı köşeye kıvır ve takım arkanda girsin; zincire tek tek giren tek tek düşer
 **WHY** Killjoy kurulumu solo girişleri yemek için tasarlanmıştır — flaş + trade zinciri o tasarımı ters çevirir
 

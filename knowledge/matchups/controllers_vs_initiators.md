@@ -32,7 +32,7 @@ Initiator'ın işi seni girişten önce bulmak ve sökmek: keşif işaretler, fl
 Initiator'lı kompa sürekli ölüyorsan ritmi yanlış okuyorsun; zincir hiç değişmez: keşif → dalga → giriş. Zincirin ortasında görünür olmayı bırak: keşifte yer değiştir, dalgada siperde kal, giriş anında perden çoktan inmiş ve sen off-angle'da hazır ol.
 
 ## Koç Notları
-Controller'a karşı initiator'ın tek gerçek hedefi seni erken düşürmektir: controller ölünce takımın perdesi ölür. En değerli alışkanlığın hayatta kalmak — smoke'ların tüfeğinden değerlidir. Rakibin yetenekleri bittiğinde hâlâ ayaktaysan round senin alanında oynanır.
+Controller'a karşı initiator'ın tek gerçek hedefi seni erken öldürmektir: controller ölünce takımın perdesi ölür. En değerli alışkanlığın hayatta kalmak — smoke'ların tüfeğinden değerlidir. Rakibin yetenekleri bittiğinde hâlâ ayaktaysan round senin alanında oynanır.
 
 ## Clove Varsa: Diriliş Penceresi
 

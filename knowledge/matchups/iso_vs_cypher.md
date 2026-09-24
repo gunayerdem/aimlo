@@ -16,7 +16,7 @@ Cypher'ın teli sana değil silahına bilgi taşır: tel tetiklendiği an hattı
 ## Sinyal-Kapılı Dersler
 
 **IF** round açılışında öldün (deathTiming=erken) ve düşman kompunda Cypher var
-**MEANING** Kalkansız girdin — telin haber verdiği hazır atış seni ilk temasta düşürdü
+**MEANING** Kalkansız girdin — telin haber verdiği hazır atış seni ilk temasta öldürdü
 **COUNTER** Kalkanı spawn'da değil temastan hemen önce bas; süresi sınırlı — köşeye vardığında hâlâ üstünde olsun
 **WHY** Kalkan tek kurşun yer ama Cypher'ın planı zaten tek hazır kurşun üstüne kurulu — o kurşun boşa gidince plan da gider
 
