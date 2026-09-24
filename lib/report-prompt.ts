@@ -768,6 +768,13 @@ export function buildReportCleaner(
     hasKiller: anyKiller,
     hasDeathLocation: anyLoc,
     deathLocation: suppliedLocs,
+    // W1 #51 muafiyeti rapor yolunda (W2 inceleme REV-W2, 2026-09-24): katil hiç
+    // okunmamış maçta katil-guard STEP2 "Jett olarak A Main'de beklerken vuruldun"
+    // öbeğini katil sanıp "Bir düşman olarak …" bozuğuna çeviriyordu (vision'da
+    // 15f9e20 ile kapanmıştı; rapor fg'si playerAgent taşımıyordu). Kaynak vision
+    // ile AYNI: resmî tablo (knownAgent) — "Unknown"/boş/tanınmayan → undefined
+    // (muafiyet yok). Yalnız STEP2 muafiyeti okur (reality-checker playerAgent).
+    playerAgent: knownAgent(body.setup?.agent),
   };
   // ── B82 (2026-07-31): TEK TEMİZLEYİCİ ZİNCİR ────────────────────────
   // NEDEN: aynı çıktı guard'ları 4 route'ta 4 FARKLI derinlikte elle

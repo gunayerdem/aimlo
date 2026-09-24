@@ -103,7 +103,8 @@ export interface FactGround {
   playerAgentKnown?: boolean;
   // W1 followup #51 (2026-09-24): oyuncunun OKUNMUŞ ajanı (resmî yazımla; bilinmiyorsa
   // undefined). Katil-guard STEP2 "<oyuncunun ajanı> olarak" öbeğini katil sanmasın diye
-  // (bkz. guardUnprovenFacts STEP2). Yalnız vision kurucusu set eder → rapor yolu bayt-aynı.
+  // (bkz. guardUnprovenFacts STEP2). Set edenler: vision buildVisionContext ve (REV-W2,
+  // 2026-09-24) rapor buildReportCleaner — ikisi de knownAgent ile, aynı kaynaktan.
   playerAgent?: string;
   // Masaüstünün OCR ile ölçtüğü ölüm yeri/yerleri (varsa). stripForeignCallouts
   // bunu HER ZAMAN meşru sayar — tablo eksik olsa bile ölçülen konumu silmez.

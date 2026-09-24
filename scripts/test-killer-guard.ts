@@ -16,6 +16,7 @@
  * Koşum: npx tsx scripts/test-killer-guard.ts   (npm test içinde)
  */
 import { realityCheck, extractKillerAgent, buildFactGround } from "../lib/reality-checker";
+import { buildReportCleaner, validateRequest } from "../lib/report-prompt";
 
 let fail = 0;
 function t(name: string, ok: boolean, extra = "") {
@@ -180,10 +181,42 @@ console.log("\n[#51] oyuncunun kendi ajanı 'X olarak' katil sayılmaz (katil bi
   t("cümle başı 'Jett olarak … vuruldun' korunur", o2 === "Jett olarak orada bekleyip vuruldun.", `→ "${o2}"`);
   const o3 = rc("Jett seni A Main'de vurdu.", "Jett");
   t("katil iddiası ('Jett seni vurdu') oyuncu Jett olsa da İNDİRİLİR (katil bilinmiyor)", /^Bir düşman seni/.test(o3), `→ "${o3}"`);
-  const o4 = rc("Reyna olarak orada beklerken vuruldun.", "Jett");
-  t("BAŞKA ajan + 'olarak' eskisi gibi indirilir (muafiyet yalnız oyuncunun ajanı)", /bir düşman olarak/i.test(o4), `→ "${o4}"`);
+  // İddia İFADEDEN BAĞIMSIZ (W2 inceleme REV-W2, 2026-09-24): eskiden beklenen çıktı
+  // /bir düşman olarak/ idi — #51'in düzelttiği bozuk kalıbın kendisini doğru sayıyordu.
+  // Kilitlenen davranış: muafiyet DAR (başka ajan adı kalmaz, metin dokunulmadan geçmez).
+  const o4in = "Reyna olarak orada beklerken vuruldun.";
+  const o4 = rc(o4in, "Jett");
+  t("BAŞKA ajan + 'olarak' muafiyet almaz: kanıtsız 'Reyna' kalmaz, metin değişir", !/Reyna/.test(o4) && o4 !== o4in, `→ "${o4}"`);
+  console.log(`       BİLİNEN SINIR (kilit DEĞİL): yanlış-ajan yakıştırması bugün "${o4}" olarak iniyor`);
   const o5 = rc("Jett olarak orada bekleyip vuruldun.", undefined);
   t("oyuncu ajanı OKUNMAMIŞSA muafiyet yok (ajan-boş süpürgesi 'X olarak'ı zaten söker)", !/Jett olarak/.test(o5), `→ "${o5}"`);
+}
+
+// ── REV-W2 (2026-09-24): #51 muafiyeti RAPOR yolunda ────────────────────────────
+// buildReportCleaner fg'si playerAgent taşımıyordu → katil okunmamış maçta rapor
+// özeti "Jett olarak A Main'de tek başına beklerken vuruldun." → "Bir düşman olarak …"
+// (probe, HEAD 7fc9df7). Model rapor özetinde "<ajan> olarak" kalıbını kullanıyor
+// (scripts/eval-out/report-samples.json 7 özetin 2'si). Kaynak vision ile aynı (knownAgent).
+console.log("\n[#51-rapor] rapor temizleyicisi: oyuncunun kendi ajanı 'X olarak' katil sayılmaz");
+{
+  const cleanerFor = (agent: unknown) => {
+    const v = validateRequest({ rounds: [{ round: 1, score: "0 - 1", result: "loss", died: true }], lang: "tr", map: "ascent", agent });
+    if (!v.valid) throw new Error("fixture geçersiz");
+    return buildReportCleaner(v.data);
+  };
+  const jett = cleanerFor("jett");
+  const r1 = jett("Jett olarak A Main'de tek başına beklerken vuruldun.", 1000, "YEDEK");
+  t("rapor: 'Jett olarak … beklerken vuruldun' korunur, 'bir düşman olarak' bozuğu YOK",
+    /^Jett olarak/.test(r1) && !/bir düşman olarak/i.test(r1), `→ "${r1}"`);
+  const r2 = jett("Jett seni A Main'de vurdu.", 1000, "YEDEK");
+  t("rapor: katil iddiası ('Jett seni vurdu') oyuncu Jett olsa da İNDİRİLİR", /^Bir düşman seni/.test(r2), `→ "${r2}"`);
+  const r3in = "Reyna olarak orada beklerken vuruldun.";
+  const r3 = jett(r3in, 1000, "YEDEK");
+  t("rapor: BAŞKA ajan + 'olarak' muafiyet almaz (kanıtsız 'Reyna' kalmaz)", !/Reyna/.test(r3) && r3 !== r3in, `→ "${r3}"`);
+  const r4 = cleanerFor(undefined)("Jett olarak orada beklerken vuruldun.", 1000, "YEDEK");
+  t("rapor: ajan okunmamışsa ('Unknown') muafiyet yok", !/Jett olarak/.test(r4), `→ "${r4}"`);
+  const r5 = cleanerFor("kayo")("KAY/O olarak orada beklerken vuruldun.", 1000, "YEDEK");
+  t("rapor: 'kayo' gövdesi → resmî 'KAY/O' (knownAgent) muafiyeti alır", /^KAY\/O olarak/.test(r5), `→ "${r5}"`);
 }
 
 console.log(`\n${fail === 0 ? "TÜM TESTLER GEÇTİ ✓" : `${fail} TEST BAŞARISIZ ✗`}`);
