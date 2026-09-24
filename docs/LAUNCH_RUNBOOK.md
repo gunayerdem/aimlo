@@ -81,6 +81,7 @@ kapalıyken kota yolu tek ağ çağrısı bile yapmaz — flip tamamen geri alı
 | `[QUOTA]` logları | Vercel → Logs, arama: `[QUOTA]` | ilk 48s günde 2 | vision: `free tier limit reached`, report: `report blocked`, artı AIMLO+ `adil kullanım tavanı doldu` uyarıları. Hacim beklenenden yüksekse bayrak/limit kararını softi'ye taşı |
 | Telemetri hata sayaçları | `telemetry_events` (kind `error_code_count`) — admin/insights | günde 1 | hata kodu artışları; sürüm alanıyla birlikte oku ki yeni desktop sürümü regresyonu eski sürüm gürültüsünden ayrılsın |
 | Destek | `aimlo.gg/admin/support` | günde 2 | yeni ticket'lar — launch günü ilk gerçek-kullanıcı sinyali çoğu zaman buradan gelir |
+| Dağıtım egress (MSI) | `aimlo.gg/admin/altyapi` → "Dağıtım egress tahmini" + Supabase dashboard → Usage | ilk hafta günde 1 | kart %60'ı geçince "uyarı" der (tahmin = (indirme + update_started) × MSI boyutu, alt sınır). Kesin rakam Usage sayfasında: cached ve uncached egress ayrı ayrı. Bkz. §4 madde 6 |
 
 ---
 
@@ -155,3 +156,18 @@ vercel rollback            # bir önceki production deployment'a döner
    kalmaması için offline yedek alınacak. Anahtar kaybı = mevcut kurulumlara
    bir daha güncelleme İTİLEMEZ (yeni sürüm ancak elle indirme ile dağıtılır);
    bu yüzden yedek launch-sonrası ilk hafta işi değil, İLK GÜN işidir.
+6. **30.09 ÖNCESİ: Supabase Usage → egress kontrolü** (F31, 2026-09-24).
+   MSI artık ~29.5 MB (1.0.0'daki ~12 MB değil) ve hem `aimlo.gg/download`
+   hem auto-updater (latest.json → aynı `releases` bucket'ı, tam MSI) aynı
+   Supabase projesinden iniyor; aynı proje auth + DB'yi de taşıyor.
+   - [ ] Supabase dashboard → organizasyon **planı** ne? (repodan doğrulanamıyor)
+   - [ ] Usage → **cached** ve **uncached egress** bu dönem ne kadar? Free planda
+         ikisi için ayrı 5 GB/ay var; 5 GB / 29.5 MB ≈ 170 MSI aktarımı
+         (indirme + güncelleme toplamı). Kota sürekli aşılırsa istekler
+         kısıtlanabilir ya da proje duraklatılabilir.
+   - [ ] Free ise karar softi'nin: Pro'ya geç **veya** MSI'ı egress'i ücretsiz bir
+         kanala taşı (GitHub Releases / R2). Taşınırsa `release-desktop.ps1`
+         latest.json url'sini oraya yazar (updater içeriği minisign ile
+         doğruladığı için host değişimi güvenli) ve `app/download/route.ts`
+         içindeki `SUPABASE_STORAGE` önek kontrolü yeni host için genişletilir.
+   - Launch haftası izleme: `/admin/altyapi` egress kartı (§2).

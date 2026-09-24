@@ -153,6 +153,73 @@ function ServiceCard({ s }: { s: Service }) {
   );
 }
 
+/** Ondalık MB/GB (Supabase fatura birimi) — bilinmeyen değer "bilinmiyor". */
+function fmtBytes(n: number | null): string {
+  if (n === null) return "bilinmiyor";
+  if (n >= 1e9) return `${(n / 1e9).toFixed(2)} GB`;
+  return `${(n / 1e6).toFixed(1)} MB`;
+}
+
+/**
+ * F31 (2026-09-24): dağıtım egress kartı. MSI ~12 MB değil ~29.5 MB ve updater
+ * de aynı bucket'tan tam MSI indiriyor; Free planda 5 GB tavanına yaklaşma
+ * launch haftasında fark edilmiyordu. SAHTE VERİ YOK: ölçülemeyen "bilinmiyor",
+ * eksik sayım "en az" diye yazılır (lib/admin-infra.ts estimateEgress).
+ */
+function EgressCard({ e }: { e: Infra["egress"] }) {
+  const warn = e.status === "warn";
+  const pct = e.ratio === null ? null : Math.round(e.ratio * 100);
+  const count = (n: number | null) => (n === null ? "bilinmiyor" : `${e.lowerBound ? "≥ " : ""}${n}`);
+  return (
+    <div
+      className="adm-card"
+      style={{
+        marginTop: 14,
+        ...(warn
+          ? { borderColor: "rgba(255,70,85,0.5)", background: "rgba(255,70,85,0.07)", boxShadow: "0 0 26px rgba(255,70,85,0.13)" }
+          : {}),
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "rgba(238,240,248,0.9)" }}>
+          Dağıtım egress tahmini (son {e.windowDays} gün)
+        </span>
+        <span
+          className={warn ? "adm-badge bad" : e.status === "ok" ? "adm-badge ok" : "adm-badge warn"}
+          style={{ marginLeft: "auto" }}
+        >
+          {warn ? "uyarı" : e.status === "ok" ? "eşiğin altında" : "bilinmiyor"}
+        </span>
+      </div>
+      <div className="adm-chip-row" style={{ marginTop: 10 }}>
+        <span className="adm-chip">
+          MSI: <b>{fmtBytes(e.msiBytes)}</b>
+        </span>
+        <span className="adm-chip">
+          indirme: <b>{count(e.downloads)}</b>
+        </span>
+        <span className="adm-chip">
+          güncelleme (update_started): <b>{count(e.updates)}</b>
+        </span>
+        <span className="adm-chip">
+          tahmin:{" "}
+          <b>
+            {e.estimatedBytes === null
+              ? "bilinmiyor"
+              : `${e.lowerBound ? "≥ " : ""}${fmtBytes(e.estimatedBytes)} / ${fmtBytes(e.quotaBytes)} (%${pct})`}
+          </b>
+        </span>
+      </div>
+      <p className="adm-stat-sub" style={{ marginTop: 8 }}>{e.note}</p>
+      <p className="adm-stat-sub" style={{ marginTop: 4 }}>
+        Tahmin = (indirme + güncelleme) × MSI boyutu, tek 5 GB havuza göre (Free planda cached ve
+        uncached egress ayrı 5 GB). update_started yalnız 1.0.20+ sürümlerden gelir. Kesin rakam ve
+        plan: Supabase dashboard &rarr; Usage.
+      </p>
+    </div>
+  );
+}
+
 /** Yeniden ölçüm düğmesi — sayfa force-dynamic olduğu için tam yükleme yeter.
  *  Mor altı-çizili ham link yerine ikonlu, çerçeveli düğme (2026-08-04 softi
  *  geri bildirimi: "yenileme işareti olsun, düzgün dursun"). */
@@ -327,6 +394,9 @@ export default async function AdminAltyapiPage() {
           masaüstü sürümü: <b>{version ?? "bilinmiyor"}</b>
         </span>
       </div>
+
+      {/* ---------------------------- DAĞITIM EGRESS (F31) ---------------------------- */}
+      <EgressCard e={infra.egress} />
 
       {/* ------------------------------- TELEMETRİ ------------------------------- */}
       <TelemetrySectionView t={telemetry} />

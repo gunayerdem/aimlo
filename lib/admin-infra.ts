@@ -107,6 +107,8 @@ export type InfraStatus = {
   missingCritical: string[];
   /** Sır OLMAYAN çalışma-zamanı bayrakları (yalnız açık/kapalı). */
   flags: { freeTierEnforced: boolean; strictRateLimit: boolean; billingConfigured: boolean };
+  /** F31: dağıtım (MSI) egress tahmini — Free plan 5 GB tavanına yaklaşma uyarısı. */
+  egress: EgressEstimate;
   deploy: DeployInfo;
   links: InfraLink[];
 };
@@ -608,6 +610,227 @@ function buildLinks(): InfraLink[] {
   ];
 }
 
+// ── E) Dağıtım egress tahmini (F31, 2026-09-24) ──────────────────────────────
+//
+// NEDEN: MSI hem aimlo.gg/download'dan (302 → releases bucket) hem de
+// auto-updater'dan (latest.json url'si → AYNI bucket, tam MSI) iniyor. Kapasite
+// notu 1.0.0 dönemindeki ~12 MB MSI'ya göre yazılmıştı (download/route.ts); 1.0.14
+// widget-dist ile 27.6 MB oldu, embedBootstrapper (D21) ile ~29.5 MB. Supabase
+// Free planda cached ve uncached egress için AYRI 5 GB/ay havuzlar var; aynı proje
+// auth ve DB'yi de taşıyor. Plan repodan doğrulanamıyor → yalnız görünür uyarı.
+//
+// TAHMİN = (son 30 gün indirme sayacı + son 30 gün update_started) × MSI boyutu.
+// Bilerek KÖTÜMSER: tüm aktarım tek 5 GB havuza yazılır (CDN hit/miss ayrımı
+// panelden görünmez). Bilerek ALT SINIR: update_started yalnız 1.0.20+ masaüstü
+// sürümlerinden gelir (desktop telemetry.rs mark_update_started → error_code_count
+// code="update_started"); eski sürümlerin güncellemeleri sayılmaz, bot/prefetch ise
+// indirme sayacını şişirebilir. Kesin rakam: Supabase dashboard → Usage.
+
+/** Supabase Free: aylık 5 GB (ondalık GB — Supabase fatura birimi). */
+export const EGRESS_QUOTA_BYTES = 5_000_000_000;
+/** Kotanın %60'ı aşılınca "warn" (launch haftasında hareket payı kalsın). */
+export const EGRESS_WARN_RATIO = 0.6;
+/** Pencere: son 30 UTC günü (fatura döngüsü panelden bilinmiyor; yaklaşık). */
+export const EGRESS_WINDOW_DAYS = 30;
+/** MSI boyutu önbelleği: URL sürümlü (…/v1.0.19/Aimlo_1.0.19_x64_en-US.msi) ve
+ *  değişmez → 6 saat güvenli; her panel açılışında HEAD atılmaz. */
+const MSI_SIZE_TTL_MS = 6 * 60 * 60 * 1000;
+const TELEMETRY_PAGE = 1000;
+const TELEMETRY_MAX_PAGES = 20;
+
+export type EgressStatus = "ok" | "warn" | "unknown";
+
+export type EgressEstimate = {
+  /** ok = ölçülen alt sınır eşiğin altında; warn = eşik aşıldı; unknown = hesaplanamadı. */
+  status: EgressStatus;
+  msiBytes: number | null;
+  downloads: number | null;
+  updates: number | null;
+  /** Sayaçlardan biri tavana dayandıysa ya da okunamadıysa: sayı "en az" demektir. */
+  lowerBound: boolean;
+  estimatedBytes: number | null;
+  ratio: number | null;
+  quotaBytes: number;
+  windowDays: number;
+  note: string;
+};
+
+/**
+ * SAF hesap (test edilir): tahmin = (indirme + güncelleme) × MSI boyutu.
+ * - MSI boyutu yoksa ya da iki sayaç da yoksa → unknown (uydurma yok).
+ * - Sayaçlardan biri okunamadıysa diğeriyle ALT SINIR hesaplanır: eşiği aşıyorsa
+ *   yine "warn" (en az bu kadar), aşmıyorsa "unknown" (eksik sayımla "ok" denmez).
+ */
+export function estimateEgress(input: {
+  msiBytes: number | null;
+  downloads: number | null;
+  updates: number | null;
+  countsTruncated?: boolean;
+  quotaBytes?: number;
+  warnRatio?: number;
+  windowDays?: number;
+}): EgressEstimate {
+  const quotaBytes = input.quotaBytes ?? EGRESS_QUOTA_BYTES;
+  const warnRatio = input.warnRatio ?? EGRESS_WARN_RATIO;
+  const windowDays = input.windowDays ?? EGRESS_WINDOW_DAYS;
+  const valid = (n: number | null) => (typeof n === "number" && Number.isFinite(n) && n >= 0 ? n : null);
+  const msiBytes = valid(input.msiBytes);
+  const downloads = valid(input.downloads);
+  const updates = valid(input.updates);
+  const base = { msiBytes, downloads, updates, quotaBytes, windowDays };
+
+  if (msiBytes === null || msiBytes === 0) {
+    return { ...base, status: "unknown", lowerBound: false, estimatedBytes: null, ratio: null,
+      note: "MSI boyutu okunamadı (latest.json ya da HEAD başarısız) — tahmin yapılmadı." };
+  }
+  if (downloads === null && updates === null) {
+    return { ...base, status: "unknown", lowerBound: false, estimatedBytes: null, ratio: null,
+      note: "İndirme ve güncelleme sayaçları okunamadı — tahmin yapılmadı." };
+  }
+  const lowerBound = downloads === null || updates === null || input.countsTruncated === true;
+  const transfers = (downloads ?? 0) + (updates ?? 0);
+  const estimatedBytes = transfers * msiBytes;
+  const ratio = estimatedBytes / quotaBytes;
+  const pct = Math.round(ratio * 100);
+  if (ratio >= warnRatio) {
+    return { ...base, status: "warn", lowerBound, estimatedBytes, ratio,
+      note: `${lowerBound ? "En az " : ""}%${pct} — Free plandaysa 5 GB tavanına yaklaşılıyor. Supabase → Usage'da egress'i kontrol et; gerekirse Pro'ya geç ya da MSI'ı egress'i ücretsiz bir kanala taşı.` };
+  }
+  if (lowerBound) {
+    return { ...base, status: "unknown", lowerBound, estimatedBytes, ratio,
+      note: `En az %${pct}; sayaçlardan biri eksik okundu, eşiğin altında olduğu söylenemez.` };
+  }
+  return { ...base, status: "ok", lowerBound, estimatedBytes, ratio,
+    note: `%${pct} — eşiğin (%${Math.round(warnRatio * 100)}) altında. Eski sürümlerin güncellemeleri sayılmadığı için gerçek değer daha yüksek olabilir.` };
+}
+
+const msiSizeCache = new Map<string, { bytes: number; at: number }>();
+
+/**
+ * latest.json → MSI URL'i → HEAD → Content-Length. Yalnız kendi storage
+ * host'umuza istek atılır (download/route.ts ile aynı önek kuralı; latest.json ele
+ * geçirilse bile panel yabancı bir hosta istek atmaz). Zaman aşımı: withTimeout.
+ * Önbellek: URL başına 6 saat. Hata → null (kart "bilinmiyor").
+ */
+export async function readMsiBytes(
+  fetchImpl: typeof fetch = fetch,
+  nowMs: number = Date.now(),
+): Promise<number | null> {
+  try {
+    const res = await withTimeout((signal) => fetchImpl(LATEST_JSON_URL, { cache: "no-store", signal }));
+    if (!res.ok) {
+      discardBody(res);
+      return null;
+    }
+    const j = (await res.json()) as { platforms?: Record<string, { url?: unknown }>; url?: unknown };
+    const url = j?.platforms?.["windows-x86_64"]?.url ?? j?.url;
+    if (typeof url !== "string" || !url.startsWith(SUPABASE_STORAGE_BASE)) return null;
+    const hit = msiSizeCache.get(url);
+    if (hit && nowMs - hit.at < MSI_SIZE_TTL_MS) return hit.bytes;
+    const head = await withTimeout((signal) => fetchImpl(url, { method: "HEAD", cache: "no-store", signal }));
+    discardBody(head);
+    if (!head.ok) return null;
+    const len = Number(head.headers.get("content-length"));
+    if (!Number.isFinite(len) || len <= 0) return null;
+    msiSizeCache.set(url, { bytes: len, at: nowMs });
+    return len;
+  } catch {
+    return null;
+  }
+}
+
+/** Son `days` UTC gününün indirme sayacı (download/route.ts `aimlo:dl:YYYY-MM-DD`,
+ *  90 gün TTL). Upstash yoksa/hata → null. */
+async function readDownloadCount(days: number, nowMs: number): Promise<number | null> {
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return null;
+  const keys: string[] = [];
+  for (let i = 0; i < days; i++) {
+    keys.push(`aimlo:dl:${new Date(nowMs - i * 86_400_000).toISOString().slice(0, 10)}`);
+  }
+  try {
+    // /pipeline biçimi download/route.ts'teki yazma ile aynı (kanıtlı yol):
+    // gövde [[komut…]], yanıt [{ result }].
+    const res = await withTimeout((signal) =>
+      fetch(`${url}/pipeline`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+        body: JSON.stringify([["MGET", ...keys]]),
+        cache: "no-store",
+        signal,
+      }),
+    );
+    if (!res.ok) {
+      discardBody(res);
+      return null;
+    }
+    const j = (await res.json()) as { result?: unknown; error?: unknown }[];
+    const result = Array.isArray(j) ? j[0]?.result : undefined;
+    if (!Array.isArray(result)) return null;
+    return result.reduce<number>((sum, v) => {
+      const n = typeof v === "string" || typeof v === "number" ? Number(v) : 0;
+      return sum + (Number.isFinite(n) && n > 0 ? n : 0);
+    }, 0);
+  } catch {
+    return null;
+  }
+}
+
+/** Son `days` günün update_started toplamı (telemetry_events, error_code_count).
+ *  Sayfalı; tavana dayanırsa truncated. Hata → null. */
+async function readUpdateStartedCount(
+  days: number,
+  nowMs: number,
+): Promise<{ total: number; truncated: boolean } | null> {
+  try {
+    const svc = createServiceSupabase();
+    const since = new Date(nowMs - days * 86_400_000).toISOString();
+    let total = 0;
+    let from = 0;
+    for (let page = 0; page < TELEMETRY_MAX_PAGES; page++) {
+      const { data, error } = await withTimeout(
+        async (signal) =>
+          await svc
+            .from("telemetry_events")
+            .select("count")
+            .eq("type", "error_code_count")
+            .eq("code", "update_started")
+            .gte("created_at", since)
+            .order("created_at", { ascending: true })
+            .range(from, from + TELEMETRY_PAGE - 1)
+            .abortSignal(signal),
+      );
+      if (error) return null;
+      const rows = (data ?? []) as { count?: number | null }[];
+      if (rows.length === 0) return { total, truncated: false };
+      for (const r of rows) total += typeof r.count === "number" && r.count > 0 ? r.count : 1;
+      from += rows.length;
+    }
+    return { total, truncated: true };
+  } catch {
+    return null;
+  }
+}
+
+/** Egress kartının verisi — ASLA throw etmez; build sırasında ölçüm yapmaz. */
+export async function getEgressEstimate(nowMs: number = Date.now()): Promise<EgressEstimate> {
+  if (isBuildPhase()) {
+    return estimateEgress({ msiBytes: null, downloads: null, updates: null });
+  }
+  const [msiBytes, downloads, updates] = await Promise.all([
+    readMsiBytes(),
+    readDownloadCount(EGRESS_WINDOW_DAYS, nowMs),
+    readUpdateStartedCount(EGRESS_WINDOW_DAYS, nowMs),
+  ]);
+  return estimateEgress({
+    msiBytes,
+    downloads,
+    updates: updates ? updates.total : null,
+    countsTruncated: updates?.truncated === true,
+  });
+}
+
 // ── Giriş noktası ──────────────────────────────────────────────────────────
 
 /**
@@ -640,6 +863,11 @@ export async function getInfraStatus(): Promise<InfraStatus> {
     { key: "resend", label: "Resend (e-posta)", run: checkResend },
   ];
 
+  // F31: egress tahmini servis kontrolleriyle PARALEL; kendi hatasını yutar.
+  const egressPromise = getEgressEstimate().catch(() =>
+    estimateEgress({ msiBytes: null, downloads: null, updates: null }),
+  );
+
   let services: ServiceHealth[];
   if (isBuildPhase()) {
     // Build sırasında ağ vurmuyoruz (yukarıdaki isBuildPhase notu). Sahte "ok"
@@ -670,6 +898,7 @@ export async function getInfraStatus(): Promise<InfraStatus> {
     envs,
     missingCritical,
     flags,
+    egress: await egressPromise,
     deploy: readDeployInfo(),
     links: buildLinks(),
   };

@@ -13,8 +13,15 @@ const LATEST_URL = `${SUPABASE_STORAGE}releases/latest.json`;
 /**
  * B13 (2026-07-31): indirme sayacı.
  *
- * NEDEN: MSI dağıtım kanalı Supabase public bucket ve her indirme ~12MB
- * egress. Free plan 5GB/ay → ~430 indirmede link yavaşlar/ölür. Bugüne kadar
+ * NEDEN: MSI dağıtım kanalı Supabase public bucket ve her indirme ~30MB
+ * egress (F31, 2026-09-24: 1.0.13 = 12.35 MB, 1.0.14 widget-dist ile 27.6 MB,
+ * D21 embedBootstrapper ile ~29.5 MB). Auto-updater da AYNI bucket'tan tam
+ * MSI indirir (latest.json url'si → releases/v<sürüm>/…msi) ve bu route'tan
+ * GEÇMEZ; o trafik burada sayılmaz (masaüstü 1.0.20+ `update_started`
+ * telemetrisi gönderir). Supabase Free planda cached ve uncached egress için
+ * ayrı 5 GB/ay havuzlar var ve aynı proje auth + DB'yi de taşıyor: 5 GB /
+ * 29.5 MB ≈ 170 MSI aktarımı (indirme + güncelleme toplamı). Tahmin kartı:
+ * /admin/altyapi (lib/admin-infra.ts getEgressEstimate). Bugüne kadar
  * kaç indirme olduğunu ölçen HİÇBİR şey yoktu; duyuru günü tavana ne kadar
  * yaklaştığımızı göremezdik. Ayrıca hunideki ilk adım (indirme) tamamen
  * ölçüsüzdü.
