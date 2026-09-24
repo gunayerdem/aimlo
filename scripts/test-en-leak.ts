@@ -28,10 +28,12 @@ import {
   type EnLeakCategory,
 } from "../evals/en-leak-detector";
 import { EN_VISION_SCENARIOS, EN_REPORT_SCENARIOS, EN_CORPUS_TOTAL } from "../evals/en-corpus";
-import { realityCheck } from "../lib/reality-checker";
+import { realityCheck, buildFactGround } from "../lib/reality-checker";
 import { buildVisionContext, type VisionPromptBody } from "../lib/vision-prompt-builder";
 import { toRoundMemory } from "../lib/vision-postprocess";
 import { buildReportCleaner, validateRequest } from "../lib/report-prompt";
+import { DEATH_TYPE_GUIDE } from "../lib/death-type";
+import { SYSTEM_PROMPT } from "../lib/vision-prompt";
 
 let pass = 0;
 let fail = 0;
@@ -350,6 +352,80 @@ console.log("\n[F84] B35 kişi ayrımı — öz-eleştiri/öğüt korunur, düş
     const out = er2(s, 1000, "(FALLBACK)");
     check(`doğru silme sürer: "${s.slice(0, 40)}…"`, !/Enemy used Cypher/.test(out) && out.length > 0 && out !== "(FALLBACK)", `→ "${out}"`);
   }
+}
+
+// ── FB07 · F45: canlı sayısı "NvM" bağlama bağlı (öğüt/kavram korunur, iddia nötrlenir) ──
+// Korpus (b9b0564) ham metinleri BİREBİR. Fix olmadan her NvM koşulsuz siliniyordu:
+// "tek başına 'e kalmayasın", "force them into a on your terms", "create a cleaner with
+// Vandal", rapor "(R11 clutch )".
+console.log("\n[F45] NvM — kavram (1v1) korunur, iddia nötrlenir, yetim ek/artikel/parantez yok");
+{
+  const fgA = buildFactGround({}, {});
+  const nv = (s: string, lang: "tr" | "en") => realityCheck(s, [] as never, fgA, "generic", lang).text;
+  // Yetim artık: kesmeli ek, boş parantez, isimsiz küçük harf artikel ("into a on"), isimsiz
+  // sıfat ("a cleaner with"), "clutch )". Artikel denetimi büyük/küçük harf DUYARLI ("A or B" site adı).
+  const ORPHAN_I = /(^|\s)['’][a-zçğıöşü]+|\(\s*\)|\b(?:clean|cleaner|controlled|narrower|immediate|Iso-controlled)\s*(?:[.,;]|with|or|on|after|then)\b|clutch\s+\)/iu;
+  const ORPHAN_ART = /\b(?:a|an|the)\s+(?:on|with|where|after|or|to)\b|\b(?:a|an|the)\s*[,.;]/u;
+  const ORPHAN = { test: (s: string) => ORPHAN_I.test(s) || ORPHAN_ART.test(s) };
+  const KEEP: [string, "tr" | "en"][] = [
+    ["in a defending clutch you let the duel turn into a 1v1 sequence instead of forcing a trade or off-angle.", "en"], // cycle3 E13 DA
+    ["Set an off-angle or force a trade with a teammate so Jett can't turn it into a clean 1v1.", "en"],                // cycle3 E13 EA1
+    ["Hold a safer off-angle behind it so you force Neon into a 1v1 on your terms, then open your shield.", "en"],      // cycleb09-cand-en E10 NR
+    ["Dash in as your entry once the slow lands so you create a cleaner 1v1 with Vandal.", "en"],                       // cycleb09-cand-en E25 NR
+    ["Use your wall to split the angle or force Neon into a 1v1 where your shield can matter.", "en"],                  // cyclefb03-base-pool E10 EA1
+    ["Open the wall to bait a single target and use your shield to win the immediate 1v1.", "en"],                     // cyclefb03-cand2-b E10 NR
+    ["A Hall'a girerken crossfire ya da flash ile giriş yap; takımınla trade yarat ki tek başına 1v1'e kalmayasın.", "tr"], // cyclevariety3 S11 EA1
+    ["Stop holding that wide Catwalk line alone and force her to swing into an Iso-controlled 1v1 after you use your wall.", "en"], // cyclew3-base2-en E10 DA
+    ["Use your wall to force a narrower 1v1 or delay their entry so you fight on your terms.", "en"],                   // cyclew3-cand1-en E10 DA
+    ["Use your shield before peeking and play the narrowed 1v1 angle so your Vandal can contest the Phantom.", "en"],   // cyclew3-cand1-en E10 NR
+    ["On defense stop giving duel windows on mid; use your wall to force them into a 1v1 on your terms so Iso's kit matters.", "en"], // cyclew3-cand2-en E10 DA
+    ["Place your wall to cut the catwalk angle and open a controlled 1v1, then hold behind your shield.", "en"],        // cyclew3-cand2-en E10 NR
+  ];
+  for (const [s, lang] of KEEP) {
+    const o = nv(s, lang);
+    check(`F45 kavram (1v1) bayt-aynı: "${s.slice(0, 44)}…"`, o === s, `→ "${o}"`);
+  }
+  const NEUTRAL: [string, "tr" | "en", string][] = [
+    // cycleab-luna-none M1-R4 NR (iddia, çapa "bırakıyor")
+    ["İlk temastan sonra dash'le geri çekil, çünkü üç round üst üste ölüm takımını erken 4v5 bırakıyor.", "tr",
+      "İlk temastan sonra dash'le geri çekil, çünkü üç round üst üste ölüm takımını erken sayıca az bırakıyor."],
+    // cycle3 E14 DA (iddia, çapa "down")
+    ["You pushed into Kitchen — with the site down 1v4 you exposed yourself instead of creating space for trades.", "en",
+      "You pushed into Kitchen — with the site outnumbered you exposed yourself instead of creating space for trades."],
+    // cycleb06-pre-syn-rp E14 NR (artikel + isim)
+    ["Commit to a coordinated A or B approach with your teammate for trades so you don't carry a 1v4 fight again.", "en",
+      "Commit to a coordinated A or B approach with your teammate for trades so you don't carry an outnumbered fight again."],
+    // cycleb06-pre-syn-rp E9 DA (çapasız N>M: sayı düşer, yapı kalır)
+    ["Stop giving single-man retakes; you traded the post-plant 3v1 on B Site — don't peel off for lone fights during a 3v1 retake.", "en",
+      "Stop giving single-man retakes; you traded the post-plant on B Site — don't peel off for lone fights during a retake."],
+    // rapor report-b09-base-en ER2 summary / bestRound, report-samples R2 (clutch betimi)
+    ["Best moments: R1 and R11 (clutch 1v2) where you used boombot + satchel to open and secure site.", "en",
+      "Best moments: R1 and R11 (clutch) where you used boombot + satchel to open and secure site."],
+    ["R11: you used boombot + satchel to isolate and win a 1v2 clutch; that chain created info.", "en",
+      "R11: you used boombot + satchel to isolate and win a clutch; that chain created info."],
+    ["R1, R2 ve R11 hayatta kalıp site aldın; R11'de 1v2 clutch başarılı.", "tr",
+      "R1, R2 ve R11 hayatta kalıp site aldın; R11'de clutch başarılı."],
+    // hasAliveCount=false iken iddia nötrlenir (silinmez), cümle başı büyük harf
+    ["1v3 kaldın ve panikle peek attın.", "tr", "Sayıca az kaldın ve panikle peek attın."],
+    ["You were left in a 1v3 and peeked anyway.", "en", "You were left outnumbered and peeked anyway."],
+    ["Bu round 4v3 öndeyken A Site'a fazladan peek aradın.", "tr", "Bu round sayıca öndeyken A Site'a fazladan peek aradın."],
+    ["Sayısal üstünlükte (5v4) öldün; avantajı bozma.", "tr", "Sayısal üstünlükte öldün; avantajı bozma."],
+  ];
+  for (const [s, lang, want] of NEUTRAL) {
+    const o = nv(s, lang);
+    check(`F45 nötr: "${s.slice(0, 44)}…"`, o === want && !ORPHAN.test(o) && !/\d+\s*v\s*\d+/.test(o.replace(/1v1/g, "")), `→ "${o}"`);
+  }
+  // KAYNAK HİZALAMA: modele örneklenen ifade guard'dan BAYT-AYNI geçmeli (guard'ın silmek
+  // zorunda kaldığı biçimi prompt kendisi öğretmesin). death-type "clutch-lost" angle'ı
+  // (kavram "ardışık 1v1'ler") ve vision-prompt SENARYO C few-shot'u ("sayıca öndeyken").
+  const angle = DEATH_TYPE_GUIDE["clutch-lost"].angle;
+  check("F45 death-type clutch-lost angle guard'dan bayt-aynı geçer", nv(angle, "tr") === angle, `→ "${nv(angle, "tr")}"`);
+  const fewShot = /"deathAnalysis": "(Bu round [^"]*öndeyken[^"]*)"/.exec(SYSTEM_PROMPT)?.[1] ?? "";
+  check("F45 vision-prompt SENARYO C few-shot'u guard'dan bayt-aynı geçer (NvM yok)",
+    !!fewShot && nv(fewShot, "tr") === fewShot && !/\d\s*v\s*\d/.test(fewShot), `→ "${fewShot}"`);
+  // hasAliveCount=true iken (ileride güvenilir sinyal) dokunulmaz.
+  const on = realityCheck("1v3 kaldın ve panikle peek attın.", [] as never, { ...fgA, hasAliveCount: true }, "generic", "tr").text;
+  check("F45 hasAliveCount=true iken bayt-aynı", on === "1v3 kaldın ve panikle peek attın.", `→ "${on}"`);
 }
 
 // ── SONUÇ ────────────────────────────────────────────────────────────────────

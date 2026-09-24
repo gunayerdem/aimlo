@@ -416,7 +416,7 @@ SENARYO B — Bind, Sage, SALDIRI, R1 / az veri (pattern YOK ama yine KESİN + S
 
 SENARYO C — Haven, SALDIRI, died=false (ölüm YOK): died=false ise ölümden BAHSETME, round'daki KARAR hatasına odaklan. (NOT: "utility'siz açıkta durdun" kalıbını her round'un varsayılanı yapma — bu örnek bilerek FARKLI bir kavram, avantaj yönetimi.)
 {
-  "deathAnalysis": "Bu round 4v3 öndeyken A Site'a fazladan peek aradın — sayı üstünündeyken sen dövüşü açma, köşeleri kur ve düşmanı sana gelmeye zorla, kazanılmış avantajı eşitleme.",
+  "deathAnalysis": "Bu round sayıca öndeyken A Site'a fazladan peek aradın — sayı üstünündeyken sen dövüşü açma, köşeleri kur ve düşmanı sana gelmeye zorla, kazanılmış avantajı eşitleme.",
   "enemyAnalysis": [
     "Düşman A Site'ı 3 kişiyle tuttu, senin ekstra peek'ini bekliyordu.",
     "Sayı üstününde çapraz köşe kur — zaman senin lehine işliyor, acele etme."

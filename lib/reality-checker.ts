@@ -1674,6 +1674,88 @@ export function buildFactGround(
   };
 }
 
+// ── CANLI SAYISI "NvM" — BAĞLAMA BAĞLI (FB07 · F45, 2026-09-24) ─────────────────────
+// KANIT: hasAliveCount=false iken /\b\d+\s*v\s*\d+\b/ koşulsuz siliniyordu → öğüt ve kavram
+// kullanımı da gidiyor, artikel/ek/parantez yetim kalıyordu (korpus b9b0564, 22 alan):
+//   cyclevariety3 S11 "tek başına 1v1'e kalmayasın" → "tek başına 'e kalmayasın"
+//   cyclew3-cand2-en E10 "force them into a 1v1 on your terms" → "into a on your terms"
+//   cycleb09-cand-en E25 "create a cleaner 1v1 with Vandal" → "create a cleaner with Vandal"
+//   rapor ER2 "(R11 clutch 1v2)" → "(R11 clutch )".
+// KURAL (plan): ölçülmemiş canlı sayısı İDDİASI (aynı yan-cümlede kaldın/kalmıştın/kaldı/
+// bıraktı(yor) — EN left/were/was/down çapası) SİLİNMEZ, yönü korunarak NÖTRLENİR
+// ("1v3 kaldın" → "sayıca az kaldın", "left in a 1v3" → "left outnumbered"). Eşit sayı
+// (1v1 = düello) kavramdır → dokunulmaz ("1v1'e zorla", "into a 1v1"). Çapasız N≠M:
+// "clutch 1v2" → "clutch"; TR "4v3 öndeyken" → "sayıca öndeyken", hâl ekli biçim → "sayıca
+// azken/az duruma…"; EN "a 1v4 fight" → "an outnumbered fight"; kalan → sayı ekiyle, artikel
+// ve boş parantezle BİRLİKTE silinir (repairTrSeam çağıran tarafta).
+const NVM_SRC = "(?<![\\p{L}\\p{N}])(\\d{1,2})\\s*v\\s*(\\d{1,2})(?![\\p{L}\\p{N}])";
+const EN_MATCHUP_NOUNS = "fight|fights|duel|duels|retake|retakes|situation|situations|scenario|trade|trades|round|rounds|advantage|disadvantage|push|hold|execute|post-plant";
+const TR_ALIVE_ANCHORS = "kaldın|kalmıştın|kaldı|kalmıştı|kaldınız|kaldık|bıraktı|bırakıyor|bıraktın|bırakmıştı";
+
+function neutralizeAliveMatchups(text: string, tr: boolean): { text: string; deleted: boolean } {
+  let t = text;
+  let deleted = false;
+  const del = () => { deleted = true; return ""; };
+  const MK = "\uE010"; // ikame başlangıç işareti (cümle başı büyük harf için; sonda silinir)
+  const dir = (n: string, m: string) => (Number(n) < Number(m) ? "down" : Number(n) > Number(m) ? "up" : "even");
+  const R = (src: string) => new RegExp(src, "giu");
+  // clutch betimi: sayı düşer, "clutch" kalır (iki dil).
+  t = t.replace(R(`(?:(?<![\\p{L}])(an?)\\s+)?${NVM_SRC}\\s+(clutch)`), (_m, art: string | undefined, _n, _mm, c: string) => MK + (art ? "a " : "") + c);
+  t = t.replace(R(`(clutch)\\s+${NVM_SRC}`), "$1");
+  if (tr) {
+    t = t.replace(R(`${NVM_SRC}\\s+(önde|geride)`), (m, n: string, mm: string, w: string) => (n === mm ? m : `${MK}sayıca ${w}`));
+    // İDDİA: çapa aynı yan-cümlede, en çok 2 sözcük sonra ("1v3 kaldın", "erken 4v5 bırakıyor").
+    t = t.replace(
+      R(`${NVM_SRC}(?:['’]\\s*(?:[dt][ae]|y?[ae]))?(?=\\s+(?:[\\p{L}'’]+\\s+){0,2}(?:${TR_ALIVE_ANCHORS})(?![\\p{L}]))`),
+      (_m, n: string, mm: string) => MK + ({ down: "sayıca az", up: "sayıca üstün", even: "eşit sayıda" })[dir(n, mm)],
+    );
+    // Çapasız eşit sayı (1v1 = düello) → kavram, DOKUNULMAZ. Çapasız N≠M:
+    t = t.replace(R(`\\s*\\(\\s*${NVM_SRC}\\s*\\)`), (m, n: string, mm: string) => (n === mm ? m : del()));
+    const suf: [string, Record<"down" | "up", string>][] = [
+      ["['’]\\s*[dt][ae]n", { down: "sayıca az durumdan", up: "sayı üstünlüğünden" }],
+      ["['’]\\s*[dt][ae]", { down: "sayıca azken", up: "sayıca üstünken" }],
+      ["['’]\\s*y?[ae]", { down: "sayıca az duruma", up: "sayı üstünlüğüne" }],
+    ];
+    for (const [s, rep] of suf) {
+      t = t.replace(R(`${NVM_SRC}${s}(?![\\p{L}])`), (m, n: string, mm: string) => (n === mm ? m : MK + rep[dir(n, mm) as "down" | "up"]));
+    }
+    t = t.replace(R(`${NVM_SRC}(?:['’]\\s*\\p{L}+)?`), (m, n: string, mm: string) => (n === mm ? m : del()));
+  } else {
+    // İDDİA: "left/were/was (in) (a) NvM", "down (a) NvM".
+    t = t.replace(
+      R(`(?<![\\p{L}])(left|were|was|down)\\s+(?:in\\s+)?(?:an?\\s+)?${NVM_SRC}`),
+      (_m, v: string, n: string, mm: string) => {
+        const d = dir(n, mm);
+        const w = d === "down" ? "outnumbered" : d === "up" ? "with the numbers advantage" : "in an even fight";
+        return v.toLowerCase() === "down" ? MK + w : `${v} ${w}`;
+      },
+    );
+    // Artikel + N≠M + isim: aşağıda → "an outnumbered <isim>"; yukarıda → sayı düşer.
+    t = t.replace(R(`(?<![\\p{L}])(an?|the)\\s+${NVM_SRC}\\s+(${EN_MATCHUP_NOUNS})(?![\\p{L}])`), (m, art: string, n: string, mm: string, noun: string) => {
+      const d = dir(n, mm);
+      if (d === "even") return m;
+      const isThe = /^the$/i.test(art);
+      const cap = /^[A-Z]/.test(art);
+      if (d === "down") return `${isThe ? art : cap ? "An" : "an"} outnumbered ${noun}`;
+      return `${isThe ? art : (/^[aeiou]/i.test(noun) ? (cap ? "An" : "an") : (cap ? "A" : "a"))} ${noun}`;
+    });
+    // Artikel + N≠M (isim yok): "into a 1v3." → "into an outnumbered fight."
+    t = t.replace(R(`(?<![\\p{L}])(an?)\\s+${NVM_SRC}(?=\\s*(?:[,.;:!?)—–]|$)|\\s+(?:on|in|at|with|and|or|for|to|after|before|then|so|but|where|when|while|if)(?![\\p{L}]))`), (m, art: string, n: string, mm: string) => {
+      const d = dir(n, mm);
+      if (d === "even") return m;
+      const cap = /^[A-Z]/.test(art);
+      return d === "down" ? `${cap ? "An" : "an"} outnumbered fight` : `${cap ? "A" : "a"} numbers advantage`;
+    });
+    t = t.replace(R(`\\s*\\(\\s*${NVM_SRC}\\s*\\)`), (m, n: string, mm: string) => (n === mm ? m : del()));
+    t = t.replace(R(NVM_SRC), (m, n: string, mm: string) => (n === mm ? m : del()));
+  }
+  // Cümle başına düşen ikame büyük harfle başlar ("1v3 kaldın" → "Sayıca az kaldın").
+  t = t.replace(/(^|[.!?]\s+)\uE010(\p{Ll})/gu, (_m, p: string, c: string) =>
+    p + (tr ? c.toLocaleUpperCase("tr-TR") : c.toUpperCase())).replace(/\uE010/g, "");
+  if (deleted) t = t.replace(/\(\s*\)/g, "").replace(/[ \t]{2,}/g, " ").replace(/\s+([,.;:!?)])/g, "$1");
+  return { text: t, deleted };
+}
+
 /**
  * Strip route-origin and trade-outcome claims the supporting fact can't back.
  * Deterministic, grammar-collapsing (same house style as rewriteUnsafeClaims).
@@ -2048,9 +2130,15 @@ export function guardUnprovenFacts(
   // sayı-iddiasını sil. hasAliveCount=true iken (ileride desktop güvenilir sinyal
   // gönderirse) DOKUNMA.
   if (factGround.hasAliveCount === false) {
+    // FB07 · F45: "NvM" artık koşulsuz silinmiyor — bağlama bağlı nötrleme (bkz.
+    // neutralizeAliveMatchups). Silme olduysa dikiş onarılır (TR: repairTrSeam).
+    const trAlive = lang ? lang === "tr" : /[şçğıöü]/i.test(result);
+    const beforeAlive = result;
+    const nv = neutralizeAliveMatchups(result, trAlive);
+    result = nv.text;
+    if (nv.deleted && trAlive) result = repairTrSeam(result, lang, beforeAlive);
     const ALIVE_PATTERNS: RegExp[] = [
       /\b\d+\s*(düşman|rakip)\s*(kaldı|sağ|hayatta|vardı)/gi,
-      /\b\d+\s*v\s*\d+\b/gi,                       // "1v3", "2 v 4"
       /\btakım(ın)?\s+\d+\s*kişi\s*(sağ|kaldı|hayatta)/gi,
       /\b\d+\s*kişi\s*(sağ\s*kaldı|hayatta\s*kaldı)/gi,
       // EN aynası (denetim 2026-07-19 F8): "3 enemies left/alive" EN çıktıda
