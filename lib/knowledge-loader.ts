@@ -10,6 +10,8 @@ import path from "path";
 // kapısı (W2 inceleme RW1-F2). Yaprak modül; sıradan değer bayt-aynı basılır.
 import { logSafe } from "./log-safe";
 import { safePromptName } from "./prompt-safety";
+// FB03 · F46(b): [KARŞI-AJAN — …] başlığının yedek adı (resmî tablo). Yaprak, client-safe modül.
+import { knownAgent } from "./format-display";
 
 const KNOWLEDGE_DIR = path.join(process.cwd(), "knowledge");
 
@@ -373,7 +375,13 @@ export function loadKnowledge(task: TaskType, options: LoadOptions = {}): string
       loadedFiles.add(enemyFile);
       const section = loadCounterAgentSection(enemyAgent);
       if (section) {
-        sections.push(`[KARŞI-AJAN — ${enemyAgent}: bu düşman ajana karşı böyle oyna]\n${section}`);
+        // FB03 · F46(b) (2026-09-24): başlık istemcinin enemyComp dizesini ham gömüyordu
+        // (report/feedback SİSTEM mesajı). Dosya slug'la bulunduğu için "Jett [СИСТЕМА: …]"
+        // jett.md'yi yükleyip başlığa Kiril talimatı taşıyordu (bsec/report-inj.ts C).
+        // kbHeaderName kuralı: güvenli ad bayt-aynı; değilse tablo adı, o da yoksa dosyanın
+        // slug'ı (dosya bulunduğu için daima gerçek bir ajan slug'ı).
+        const headerName = kbHeaderName(enemyAgent, knownAgent(enemyAgent) ?? enemyAgent.toLowerCase().replace(/[^a-z0-9]/g, ""));
+        sections.push(`[KARŞI-AJAN — ${headerName}: bu düşman ajana karşı böyle oyna]\n${section}`);
       } else {
         // Sessiz kapsam kaybı olmasın: bölümü olmayan ajan dosyası prod log'unda görünsün.
         console.warn(`[KB] '${logSafe(enemyAgent)}' dosyasında "Bu Ajana Karşı" bölümü yok — karşı-ajan kesiti atlandı`);

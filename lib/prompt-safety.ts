@@ -124,3 +124,14 @@ const SAFE_PROMPT_NAME_RE = /^[A-Za-z0-9][A-Za-z0-9 './-]{0,39}$/;
 export function safePromptName(raw: string, fallback: string): string {
   return SAFE_PROMPT_NAME_RE.test(raw) ? raw : fallback;
 }
+
+/**
+ * FB03 · F46(c) (2026-09-24): safePromptName'in yüklemi — "fallback" yerine elemek gereken
+ * yerler için (kalıcı player_memory anahtarları: ölüm konumu / harita / ajan). Kural AYNI
+ * (tek kaynak): güvenli ASCII ad → true. Masaüstünün meşru konum değerleri ("b site",
+ * "mid courtyard", "a/lobi", "istemci b ana") bu biçimde — callouts.rs bozulma işaretli
+ * (ı/ş/ç/ğ/ü/ö) okumayı zaten reddediyor. Dize olmayan değer → false.
+ */
+export function isSafePromptName(raw: unknown): raw is string {
+  return typeof raw === "string" && SAFE_PROMPT_NAME_RE.test(raw);
+}
