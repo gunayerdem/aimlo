@@ -121,7 +121,12 @@ export type VisionPromptBody = {
   hpSampleAgeSec?: number;
   ultReady?: boolean;
   /** FB03 · F08 (additive, opsiyonel): ult sensörü ölçülmüş mü. Yoksa ultReady prompt'a
-   *  girmez, ult-in-pocket dersi ve patternContext'in "ult HAZIR" satırı kapalı. */
+   *  girmez, ult-in-pocket dersi ve patternContext'in "ult HAZIR" satırı kapalı.
+   *  ANLAMI İSTEMCİ DÜZEYİNDE (FB03 inceleme): "bu istemcinin ult sensörü ölçülmüş" — ultReady'den
+   *  BAĞIMSIZ, ölçülmüş sensörlü istemcinin HER ölüm gövdesinde gelmelidir. Ölüm başına
+   *  ("yalnız ultReady=true iken") gönderilirse geçmişteki DOĞRU "N round ult HAZIR" satırı,
+   *  ultun dolu olmadığı her ölümde düşer. Bayrak TEK BAŞINA ult iddiası değildir: ctx.ultReady
+   *  ve ult-in-pocket ikisi birden ultReady===true VE bayrak ister. */
   ultReadyReliable?: boolean;
   roundTimerAtDeath?: number;
   playerKills?: number;

@@ -134,6 +134,9 @@ type VisionRequest = {
   ultReady?: boolean; // was ultimate ready when player died
   // FB03 · F08 (additive, opsiyonel): ult sensörü ÖLÇÜLMÜŞ mü. Yalnız true iken ultReady
   // prompt'a girer, ult-in-pocket dersi ve patternContext'in "ult HAZIR" satırı açılır.
+  // İSTEMCİ DÜZEYİNDE bayrak (FB03 inceleme): ölçülmüş sensörlü istemci HER ölüm gövdesinde
+  // gönderir, ultReady false/yok olsa bile — yoksa geçmişteki doğru "ult HAZIR" satırı düşer.
+  // Tek başına ult iddiası DEĞİL (ctx.ultReady / ult-in-pocket ultReady===true da ister).
   ultReadyReliable?: boolean;
   roundTimerAtDeath?: number; // seconds remaining on round timer (0-140)
   // ── FAZ2/FAZ3 additive fields (default-absent) ──

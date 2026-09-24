@@ -413,6 +413,25 @@ console.log("\n[9] ÖLÇÜLMEMİŞ SENSÖR — patternContext satırı + ultRead
   const ue = buildVisionUserMessage({ body: { ...body, lang: "en" }, lang: "en", imageAvailable: true });
   t("[en] 'state it confidently' yalnız bayrakla", ufe.userPrompt.includes("If ultReady=true is also in the context data, state it confidently. If you can NOT see")
     && !ue.userPrompt.includes("state it confidently") && ue.userPrompt.includes("If you can NOT see the ability state clearly"));
+
+  // FB03 inceleme · F08: ultReadyReliable İSTEMCİ düzeyinde ("bu istemcinin ult sensörü ölçülmüş").
+  // Gerçekçi FD03 gövdesi: geçmişte R6/R12 ult dolu ölümler var, BU ölümde ult dolu DEĞİL (ultReady
+  // yok) ama istemci ölçülmüş sensörlü → doğru geçmiş satırı KALMALI, bu ölüm için ult iddiası YOK.
+  // (31.08 kaan replay'inde ult satırı taşıyan 10 gövdenin 5'inde o anki ölümde ultReady yoktu.)
+  const noUlt: Record<string, unknown> = { ...body };
+  delete noUlt.ultReady;
+  const ur = buildVisionUserMessage({ body: { ...noUlt, ultReadyReliable: true }, lang: "tr", imageAvailable: true });
+  t("F08 istemci bayrağı + ultReady YOK: 'ult HAZIR' geçmiş satırı KALIR (ölçülmüş sensörün doğru içgörüsü)",
+    /2 round ult HAZIR halde öldün \(R6, R12\)/.test(ur.userPrompt), ur.userPrompt.slice(0, 200));
+  t("…ama bu ölüm için ult iddiası YOK: ctx.ultReady yok, ders tipi ult-in-pocket DEĞİL, 'kesin konuş' YOK",
+    !("ultReady" in ur.ctx) && ur.deathType !== "ult-in-pocket" && !ur.userPrompt.includes("Context'te ultReady=true de geldiyse kesin konuş."), String(ur.deathType));
+  const urFalse = buildVisionUserMessage({ body: { ...noUlt, ultReady: false, ultReadyReliable: true }, lang: "tr", imageAvailable: true });
+  t("F08 ultReady:false + istemci bayrağı → satır KALIR, ult iddiası YOK", /ult HAZIR halde/.test(urFalse.userPrompt) && !("ultReady" in urFalse.ctx) && urFalse.deathType !== "ult-in-pocket");
+  // Ölüm-başına biçim (masaüstü bf9f1ec/fae4b2b: bayrak YALNIZ ultReady=true iken) → bu gövde
+  // bayraksız gider ve satır düşer. Sözleşme: masaüstü bayrağı her gövdede göndermeli (takip).
+  const perDeath = buildVisionUserMessage({ body: noUlt, lang: "tr", imageAvailable: true });
+  t("F08 ölüm-başına biçim (bayrak yok): satır DÜŞER — bayrak her ölüm gövdesinde gelmeli", !/ult HAZIR/.test(perDeath.userPrompt));
+  t("F08 sözleşme notu kaynakta (VisionPromptBody: İSTEMCİ DÜZEYİNDE)", /ANLAMI İSTEMCİ DÜZEYİNDE/.test(builderSrc));
 }
 
 /* ── FB03 · F46(c): KALICI player_memory anahtarları → SİSTEM mesajı (iki uç) ── */
