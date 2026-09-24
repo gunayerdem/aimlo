@@ -777,5 +777,38 @@ console.log("\n════ B02 İNCELEME · 'sürekli … ölüyorsun' + level-
   same("116 öğüt 'sürekli değiştir' bayt-aynı (level-2 yolunda da)", rc(c86b, m3), c86b);
 }
 
+console.log("\n════ FB05 · F83 · GEÇMİŞ KONUM MUAFİYETİ ROUND'A BAĞLI ════");
+{
+  // exp9 (gerçek korpus M1-R4): hafıza R1=b site, R2 konumsuz, R3=a tree; R4 konumu ölçülmedi.
+  // HEAD: "R3'te B site'ta öldün, …" DEĞİŞMEDEN geçiyordu (küme kuralı: "b site" geçmişte var
+  // + çapa geçmiş → muaf). 9355dec "R3'te öldün, …" diye nötrlüyordu.
+  const noLoc = { hasDeathLocation: false } as never;
+  const rh9: Mem[] = [
+    { round_index: 1, died: true, death_position: "b site", position_confidence: "high" },
+    { round_index: 2, died: true, death_position: null },
+    { round_index: 3, died: true, death_position: "a tree", position_confidence: "high" },
+  ];
+  const rc = (s: string, lang: "tr" | "en" = "tr", fg: never = noLoc) => realityCheck(s, rh9 as never, fg, "death", lang).text;
+  eq("117a 'R3'te B site'ta öldün' (R3 = a tree) → konum düşer", rc("R3'te B site'ta öldün, B'yi tek tutma."), "R3'te öldün, B'yi tek tutma.");
+  eq("117b 'Round 3'te B Site'ta öldün.' → konum düşer", rc("Round 3'te B Site'ta öldün."), "Round 3'te öldün.");
+  eq("117c EN 'You died at B Site in R3' → 'You died in R3'", rc("You died at B Site in R3, hold a safer angle.", "en"), "You died in R3, hold a safer angle.");
+  // EN nötrleyici (neutralizeUnprovenLocationsEn) de aynı kuralı kullanır.
+  eq("117c2 EN nötrleyici 'In R3 you held … at B Site' → 'there'",
+    rc("In R3 you held the same corner at B Site and Jett killed you.", "en"), "In R3 you held the same corner there and Jett killed you.");
+  const c117d = "R1'de B site'ta öldün, B'yi tek tutma.";
+  same("117d DOĞRU round-konum (R1 = b site) bayt-aynı", rc(c117d), c117d);
+  same("117d2 EN doğru round-konum (R1) bayt-aynı",
+    rc("In R1 you held the same corner at B Site and Jett killed you.", "en"), "In R1 you held the same corner at B Site and Jett killed you.");
+  same("117d3 R3 = a tree → 'R3'te A Tree'de öldün' bayt-aynı", rc("R3'te A Tree'de öldün."), "R3'te A Tree'de öldün.");
+  // (e) kararı: en yakın çapa R3 → R3'ün konumu a tree → "B site" düşer (kabul edilen sonuç).
+  const o117e = rc("Son 3 round'da R1 ve R3'te B site'ta öldün.");
+  t("117e 'R1 ve R3'te B site'ta' → en yakın çapa R3 → konum düşer", !/B site/i.test(o117e) && /R3'te öldün/.test(o117e), `→ "${o117e}"`);
+  // Sayısal OLMAYAN çapa eski küme kuralıyla kalır.
+  same("117e2 'Daha önce B site'ta öldün.' (sayısal değil) bayt-aynı", rc("Daha önce B site'ta öldün."), "Daha önce B site'ta öldün.");
+  // (f) konum ölçülmüş yol bu değişiklikten etkilenmez.
+  const c117f = "R3'te B site'ta öldün.";
+  same("117f hasDeathLocation:true yolu bayt-aynı", rc(c117f, "tr", { hasDeathLocation: true, deathLocation: "a site" } as never), c117f);
+}
+
 console.log(`\n${fail === 0 ? "TAM YEŞİL" : "KIRMIZI"} — ${n - fail}/${n} geçti${fail ? `, ${fail} HATA` : ""}`);
 process.exit(fail ? 1 : 0);

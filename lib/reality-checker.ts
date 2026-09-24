@@ -122,8 +122,15 @@ export interface FactGround {
   // Geçmiş round'ların ÖLÇÜLMÜŞ (died===true, position_confidence high/medium) ölüm
   // yerleri. Muafiyet şartı: aynı yan-cümlede konuma en yakın zaman çapası GEÇMİŞ
   // ("R2'de", "önceki round", "son 3 round'da", "earlier") olmalı; "bu round/şimdi/
-  // this round" ya da hiç çapa yoksa muaf DEĞİL (historyAnchoredAt).
+  // this round" ya da hiç çapa yoksa muaf DEĞİL (historyAnchorAt; FB05 · F83: sayısal round
+  // çapasında yalnız o round'un kaydı muaf tutar — historyMatchesAnchor).
   historyLocations?: string[];
+  // FB05 · F83 (2026-09-24): geçmiş konumların ROUND'A GÖRE dizini (round_index → ölçülmüş
+  // ölüm yeri; historyLocations ile AYNI süzgeç: died===true + high/medium). Konuma en yakın
+  // geçmiş çapası SAYISAL bir round ise ("R3'te", "round 3", "3. round") muafiyeti yalnız
+  // o round'un kaydı verir (historyMatchesAnchor). realityCheck kendisi doldurur; verilmezse
+  // eski küme kuralı (doğrudan çağıranlar bayt-aynı).
+  historyRoundLocations?: ReadonlyMap<number, string>;
 }
 
 // ── Claim Extraction ──
@@ -1657,8 +1664,11 @@ export function guardUnprovenFacts(
     const norm = (s: string) => s.trim().toLowerCase().replace(/\s+/g, " ");
     const measured = new Set((factGround.measuredLocations ?? []).map(norm));
     const history = new Set((factGround.historyLocations ?? []).map(norm));
+    // FB05 · F83: geçmiş muafiyeti round'a bağlı — "R3'te B site'ta öldün" ancak R3'ün
+    // ölçülmüş konumu "b site" ise korunur (historyMatchesAnchor; nötrleyicilerle AYNI kural).
+    const rounds = factGround.historyRoundLocations;
     const isMeasured = (name: string, off: number, end: number, full: string) =>
-      measured.has(norm(name)) || (history.has(norm(name)) && historyAnchoredAt(full, off, end));
+      measured.has(norm(name)) || historyMatchesAnchor(norm(name), history, rounds, full, off, end);
     for (const pos of POSITION_NAMES) {
       // Bileşik callout'un SİTE HARFİ de tüketilir (öksüz "B" kalmasın): çıplak
       // "generator" eşleşince "B Generator'da" → "B " artığı bırakıyordu.
@@ -2085,7 +2095,7 @@ const LOC_CLAIM_RE = new RegExp(
 /** ÖLÇÜLEN (masaüstünün gönderdiği) konumların TAM kümesi (bu round + TÜM geçmiş) —
  *  YALNIZ harita meşruiyeti için (stripForeignCallouts): ölçülmüş bir ad hiçbir
  *  haritada "yabancı" sayılıp silinmez. Ölüm-yeri İDDİASI muafiyeti için
- *  currentLocationSet + historyLocationSet + historyAnchoredAt kullanılır. */
+ *  currentLocationSet + historyLocationSet + historyMatchesAnchor kullanılır. */
 function suppliedLocationSet(
   fgLocation: string | string[] | undefined,
   roundHistory: readonly RoundMemoryEntry[],
@@ -2121,6 +2131,18 @@ function historyLocationSet(roundHistory: readonly RoundMemoryEntry[]): Set<stri
   return s;
 }
 
+/** FB05 · F83: historyLocationSet'in ROUND'A GÖRE hâli (aynı süzgeç, aynı normalleştirme). */
+function historyRoundLocationMap(roundHistory: readonly RoundMemoryEntry[]): Map<number, string> {
+  const m = new Map<number, string>();
+  for (const r of roundHistory) {
+    if (r.died !== true) continue;
+    if (r.position_confidence !== "high" && r.position_confidence !== "medium") continue;
+    if (typeof r.round_index !== "number" || !Number.isFinite(r.round_index)) continue;
+    if (typeof r.death_position === "string" && r.death_position.trim()) m.set(r.round_index, r.death_position.trim().toLowerCase());
+  }
+  return m;
+}
+
 // ── GEÇMİŞ-ROUND ÇAPASI (B02 inceleme, 2026-09-23) ──────────────────────────
 // KANIT (maliyetsiz replay, 944 örnek): 8e99e56 geçmiş round konumunu koşulsuz
 // "ölçülmüş" saydığı için hasDeathLocation=false round'larda 100 alanda geçmiş
@@ -2153,50 +2175,84 @@ const LOC_CURRENT_ANCHOR_RE = new RegExp(
   "(?<![\\p{L}])(?:bu\\s+(?:round|raund|tur)(?!['’]?l[ae]r)|bu\\s+(?:sefer|kez)|şimdi|az\\s+önce|this\\s+(?:round|time)|just\\s+now|now)(?![\\p{L}])",
   "giu",
 );
-/** [start,end) aralığındaki konum iddiasına en yakın zaman çapası: "past" | "current" | null. */
-function historyAnchorAt(full: string, start: number, end: number): "past" | "current" | null {
+/** [start,end) aralığındaki konum iddiasına en yakın zaman çapası (metni ile). FB05 · F83:
+ *  historyAnchorAt'in gövdesi buraya taşındı — seçim kuralı AYNEN; ek olarak çapanın metni
+ *  döner ki sayısal round çapası ("R3") o round'un kaydıyla karşılaştırılabilsin. */
+function historyAnchorPick(full: string, start: number, end: number): { at: number; past: boolean; text: string } | null {
   let cs = start;
   while (cs > 0 && !/[.!?;:—\n]/.test(full[cs - 1])) cs--;
   let ce = end;
   while (ce < full.length && !/[.!?;:—\n]/.test(full[ce])) ce++;
   const seg = full.slice(cs, ce);
-  const marks: { at: number; past: boolean }[] = [];
-  for (const m of seg.matchAll(LOC_PAST_ANCHOR_RE)) marks.push({ at: cs + (m.index ?? 0), past: true });
-  for (const m of seg.matchAll(LOC_CURRENT_ANCHOR_RE)) marks.push({ at: cs + (m.index ?? 0), past: false });
+  const marks: { at: number; past: boolean; text: string }[] = [];
+  for (const m of seg.matchAll(LOC_PAST_ANCHOR_RE)) marks.push({ at: cs + (m.index ?? 0), past: true, text: m[0] });
+  for (const m of seg.matchAll(LOC_CURRENT_ANCHOR_RE)) marks.push({ at: cs + (m.index ?? 0), past: false, text: m[0] });
   // Konum iddiasının İÇİNDEKİ ya da SOLUNDAKİ en yakın çapa ("R2'de B Main'de öldün",
   // "B Main'de bu round öldün"); yoksa SAĞDAKİ ilk çapa ("You died at B Main in R2").
   const left = marks.filter((x) => x.at < end).sort((a, b) => b.at - a.at)[0];
-  const pick = left ?? marks.filter((x) => x.at >= end).sort((a, b) => a.at - b.at)[0];
+  return left ?? marks.filter((x) => x.at >= end).sort((a, b) => a.at - b.at)[0] ?? null;
+}
+/** [start,end) aralığındaki konum iddiasına en yakın zaman çapası: "past" | "current" | null. */
+function historyAnchorAt(full: string, start: number, end: number): "past" | "current" | null {
+  const pick = historyAnchorPick(full, start, end);
   return pick ? (pick.past ? "past" : "current") : null;
 }
-function historyAnchoredAt(full: string, start: number, end: number): boolean {
-  return historyAnchorAt(full, start, end) === "past";
+
+// ── ROUND'A BAĞLI GEÇMİŞ MUAFİYETİ (FB05 · F83, 2026-09-24) ────────────────────────
+// KANIT (exp9, gerçek korpus M1-R4, hafıza R1=b site, R3=a tree, R4 konumu ölçülmedi):
+// "R3'te B site'ta öldün, …" HEAD'de DEĞİŞMEDEN geçiyordu (lvl 1); 9355dec "R3'te öldün, …"
+// diye nötrlüyordu. KÖK: TR-KALAN-16 muafiyeti "ad geçmişte ölçülmüş mü (küme) + en yakın
+// çapa geçmiş mi" iki şartına bakıyor, çapadaki round NUMARASINI o round'un death_position'ıyla
+// hiç karşılaştırmıyordu → R1'in konumu R3'e yapıştırılınca korunuyordu. Aynı kural iki
+// katmanda: guardUnprovenFacts isMeasured (TR döngüsü + EN reEnA/reEnB) ve nötrleyicilerin
+// historyExempt'i — ikisi de artık bu yardımcıyı kullanır (yalnız birine yazılsaydı yanlış
+// eşleşme öteki katmandan geçmeye devam ederdi).
+// KURAL: en yakın geçmiş çapası SAYISAL round ise ("R<n>", "round/raund/tur <n>", "<n>.
+// round") muafiyeti yalnız round_index===n, died, high/medium ve death_position'ı ada EŞİT
+// kayıt verir. Sayısal olmayan çapalar ("roundlarda", "N kez", "daha önce", "earlier")
+// eski küme kuralıyla kalır. Dizin verilmezse (doğrudan çağıran) eski küme kuralı.
+const ROUND_NUMBER_ANCHOR_RE = /^(?:r(\d{1,2})|(?:round|raund|tur)\s+(\d{1,2})|(\d{1,2})\.\s*(?:round|raund|tur))$/iu;
+function historyMatchesAnchor(
+  name: string, history: ReadonlySet<string>, rounds: ReadonlyMap<number, string> | undefined,
+  full: string, start: number, end: number,
+): boolean {
+  const key = name.trim().toLowerCase().replace(/\s+/g, " ");
+  const pick = historyAnchorPick(full, start, end);
+  if (!pick || !pick.past) return false;
+  const num = rounds ? ROUND_NUMBER_ANCHOR_RE.exec(pick.text) : null;
+  if (num && rounds) return rounds.get(parseInt(num[1] ?? num[2] ?? num[3], 10)) === key;
+  return history.has(key);
 }
 /** Memory katmanı sayımı ("2 kez") silmeden ÖNCE geçmişe çapalı anılan geçmiş
  *  konumlar. Nötrleyici EN SONDA çalıştığı için çapası (sayım) silinmiş olabilir
  *  ("B Main/B Lobby'de 2 kez öldün" → level-2 → "B Main/B Lobby'de öldün"): o
  *  konumu çapasız görünce uydurma sanmasın diye adı burada hatırlanır. Açık
  *  "bu round" çapası yine kazanır (bkz. neutralizer kapısı). */
-function pastAnchoredHistoryNames(text: string, history: ReadonlySet<string>): Set<string> {
+function pastAnchoredHistoryNames(
+  text: string, history: ReadonlySet<string>, rounds?: ReadonlyMap<number, string>,
+): Set<string> {
   const out = new Set<string>();
   for (const name of history) {
     const re = new RegExp(`(?<![\\p{L}\\p{N}])${escapeRe(name)}(?![\\p{L}\\p{N}])`, "giu");
     for (const m of text.matchAll(re)) {
       const at = m.index ?? 0;
-      if (historyAnchorAt(text, at, at + m[0].length) === "past") { out.add(name); break; }
+      // FB05 · F83: sayısal round çapası o round'un kaydıyla eşleşmeli (historyMatchesAnchor).
+      if (historyMatchesAnchor(name, history, rounds, text, at, at + m[0].length)) { out.add(name); break; }
     }
   }
   return out;
 }
-/** Geçmiş konum muafiyeti: çapa GEÇMİŞ ise muaf; çapa yoksa yalnız memory öncesi
- *  metinde geçmişe çapalı anılmışsa; "bu round/şimdi" çapası varsa ASLA. */
+/** Geçmiş konum muafiyeti: çapa GEÇMİŞ ise muaf (FB05 · F83: sayısal round çapasında yalnız
+ *  o round'un kaydı eşleşirse); çapa yoksa yalnız metinde başka yerde geçmişe çapalı
+ *  anılmışsa; "bu round/şimdi" çapası varsa ASLA. */
 function historyExempt(
   key: string, history: ReadonlySet<string>, anchoredBefore: ReadonlySet<string>,
-  full: string, start: number, end: number,
+  full: string, start: number, end: number, rounds?: ReadonlyMap<number, string>,
 ): boolean {
   if (!history.has(key)) return false;
   const a = historyAnchorAt(full, start, end);
-  return a === "past" || (a === null && anchoredBefore.has(key));
+  if (a === "past") return historyMatchesAnchor(key, history, rounds, full, start, end);
+  return a === null && anchoredBefore.has(key);
 }
 
 export function neutralizeUnprovenLocations(
@@ -2204,6 +2260,8 @@ export function neutralizeUnprovenLocations(
   supplied: ReadonlySet<string>,
   history: ReadonlySet<string> = new Set(),
   anchoredBefore: ReadonlySet<string> = new Set(),
+  // FB05 · F83: round_index → ölçülmüş konum; sayısal round çapası yalnız o round'la eşleşir.
+  historyRounds?: ReadonlyMap<number, string>,
 ): string {
   if (!text) return text;
   return text.replace(
@@ -2211,7 +2269,7 @@ export function neutralizeUnprovenLocations(
     (whole: string, name: string, ki: string | undefined, tail: string, offset: number, full: string) => {
       const key = name.trim().toLowerCase();
       if (supplied.has(key)) return whole;   // BU round ÖLÇÜLDÜ → dokunma
-      if (historyExempt(key, history, anchoredBefore, full, offset, offset + whole.length)) return whole;   // geçmişin olgusu
+      if (historyExempt(key, history, anchoredBefore, full, offset, offset + whole.length, historyRounds)) return whole;   // geçmişin olgusu
       // 3. şahıs fiil: özne müttefik/util olabilir → aynı cümlede kurban çapası şart.
       if (!LOC_SELF_TAIL_RE.test(tail)) {
         let start = 0;
@@ -2287,11 +2345,13 @@ export function neutralizeUnprovenLocationsEn(
   supplied: ReadonlySet<string>,
   history: ReadonlySet<string> = new Set(),
   anchoredBefore: ReadonlySet<string> = new Set(),
+  // FB05 · F83: round_index → ölçülmüş konum; sayısal round çapası yalnız o round'la eşleşir.
+  historyRounds?: ReadonlyMap<number, string>,
 ): string {
   if (!text) return text;
   const keep = (name: string, off: number, end: number, full: string) => {
     const key = name.trim().toLowerCase();
-    return !/^\p{Lu}/u.test(name) || supplied.has(key) || historyExempt(key, history, anchoredBefore, full, off, end);
+    return !/^\p{Lu}/u.test(name) || supplied.has(key) || historyExempt(key, history, anchoredBefore, full, off, end, historyRounds);
   };
   let out = text.replace(EN_LOC_SELF_RE, (whole: string, head: string, name: string, offset: number, full: string) =>
     (keep(name, offset, offset + whole.length, full) ? whole : `${head} there`));
@@ -2343,9 +2403,11 @@ export function realityCheck(
   const measured = suppliedLocationSet(factGround?.deathLocation, roundHistory);
   // B02 İNCELEME: ölüm-yeri İDDİASI muafiyeti iki kümeye ayrıldı — bu round'un
   // ölçülmüş konumu koşulsuz, geçmişin güvenilir konumu yalnız geçmişe çapalı
-  // yan-cümlede (historyAnchoredAt). `measured` (tam küme) yalnız harita meşruiyeti.
+  // yan-cümlede (historyMatchesAnchor). `measured` (tam küme) yalnız harita meşruiyeti.
   const currentLocs = currentLocationSet(factGround?.deathLocation);
   const historyLocs = historyLocationSet(roundHistory);
+  // FB05 · F83: aynı süzgeçle round'a göre dizin (sayısal round çapası muafiyeti).
+  const historyRounds = historyRoundLocationMap(roundHistory);
 
   // Yabancı-harita callout ayıklaması — EN BAŞTA çalışır ki sonraki guard'lar
   // zaten temizlenmiş metin üzerinde işlesin (uydurma yer adı hiçbir aşamaya
@@ -2365,7 +2427,7 @@ export function realityCheck(
   // (round 1) because it validates against the current round's facts, not the
   // match's past memory.
   if (factGround) {
-    const guarded = guardUnprovenFacts(text, { ...factGround, measuredLocations: [...currentLocs], historyLocations: [...historyLocs] }, lang);
+    const guarded = guardUnprovenFacts(text, { ...factGround, measuredLocations: [...currentLocs], historyLocations: [...historyLocs], historyRoundLocations: historyRounds }, lang);
     if (guarded !== text) {
       text = guarded;
       rewriteLevel = Math.max(rewriteLevel, 2);
@@ -2375,7 +2437,7 @@ export function realityCheck(
   // Nötrleyici (en sonda) için: memory katmanı çapayı (sayımı) silmeden ÖNCE
   // geçmişe çapalı anılan geçmiş konumlar (bkz. pastAnchoredHistoryNames).
   const anchoredBefore = factGround?.hasDeathLocation === false
-    ? pastAnchoredHistoryNames(text, historyLocs)
+    ? pastAnchoredHistoryNames(text, historyLocs, historyRounds)
     : new Set<string>();
 
   // Memory-based claim check (count/window/position/repetition) — logic
@@ -2399,9 +2461,9 @@ export function realityCheck(
   // hasDeathLocation !== false iken (ölçüldü / bayrak hiç verilmedi) HİÇ çalışmaz
   // → konum okunan her round ve bayrağı set etmeyen her çağıran bayt-aynı.
   if (factGround?.hasDeathLocation === false) {
-    let neutralized = neutralizeUnprovenLocations(text, currentLocs, historyLocs, anchoredBefore);
+    let neutralized = neutralizeUnprovenLocations(text, currentLocs, historyLocs, anchoredBefore, historyRounds);
     // TR-KALAN-13: EN aynası yalnız istek dili EN iken (TR yolu bayt-aynı).
-    if (lang === "en") neutralized = neutralizeUnprovenLocationsEn(neutralized, currentLocs, historyLocs, anchoredBefore);
+    if (lang === "en") neutralized = neutralizeUnprovenLocationsEn(neutralized, currentLocs, historyLocs, anchoredBefore, historyRounds);
     if (neutralized !== text) {
       text = neutralized;
       rewriteLevel = Math.max(rewriteLevel, 2);
