@@ -58,6 +58,7 @@ import {
   buildVisionRequestBody,
   toVisionFeedbackOutcome,
   visionPostprocessOpts,
+  resolveVisionLang,
   type VisionPromptBody,
   type VisionFeedbackShape,
 } from "../lib/vision-prompt-builder";
@@ -111,9 +112,17 @@ export type Scenario = {
   lang?: "tr" | "en";
 };
 
-/** Senaryonun istek dili — route'un reqLang'iyle aynı sözleşme (varsayılan tr). */
+/** Senaryonun istek dili — route'un reqLang'iyle AYNI kaynak: gövdenin `lang` alanı
+ *  (resolveVisionLang). W2 inceleme B06-F3: eskiden yalnız Scenario.lang okunuyordu;
+ *  dili yalnız body.lang'de EN olan bir senaryo (EVAL_CORPUS_FILE) prod'da EN kurulurken
+ *  eval'de TR prompt ile koşardı. Scenario.lang verilmiş ve gövdeyle ÇELİŞİYORSA senaryo
+ *  tanımı hatalıdır → koşu durur (sessiz sapma yok; bugünkü korpusun hepsi tutarlı). */
 export function langOf(s: Scenario): "tr" | "en" {
-  return s.lang === "en" ? "en" : "tr";
+  const bodyLang = resolveVisionLang(s.body);
+  if (s.lang !== undefined && s.lang !== bodyLang) {
+    throw new Error(`senaryo ${s.id}: lang=${s.lang} ama gövde lang → ${bodyLang} (route yalnız body.lang okur)`);
+  }
+  return bodyLang;
 }
 
 // ── 10 scenarios — both sides, died/survived, all confidence + economy tiers,
@@ -698,7 +707,7 @@ export type EvalRequest = {
 
 /**
  * Senaryonun OpenAI isteğini PROD kurucusuyla kurar. Ağ yok, anahtar yok.
- * `sim` (maç-kavram hafızası) bu çağrıda güncellenir — route'un recordMatchConcept'i.
+ * `sim` (maç-kavram hafızası) burada yalnız OKUNUR; yazım recordEvalConcept'te.
  */
 export function buildEvalRequest(s: Scenario, sim: MatchConceptSim = MATCH_CONCEPT_SIM): EvalRequest {
   const body = s.body as VisionPromptBody;
@@ -715,12 +724,6 @@ export function buildEvalRequest(s: Scenario, sim: MatchConceptSim = MATCH_CONCE
     prevSource: echo.length > 0 ? "rh" : mcKey ? "sim" : "-",
     imageAvailable: false, // OLCUM-ARACI-05 karar B — metin-only (EVAL_SCOPE_NOTE)
   });
-  if (user.deathType && mcKey) {
-    // (canlı-test #14) SET→LIST aynası: tekrarlar KORUNUR (match-concepts RPUSH).
-    const list = sim.get(mcKey) ?? [];
-    list.push(user.deathType);
-    sim.set(mcKey, list);
-  }
   // EVAL_MODEL (model A/B, 2026-09-16): varsayılan prod modeli — sadakat korunur.
   // EVAL_EFFORT=omit → reasoning_effort GÖNDERİLMEZ (parametreyi tanımayan adaylar
   // 400 dönmesin); EVAL_EFFORT=none → "none" değeri GÖNDERİLİR.
@@ -745,6 +748,24 @@ export function buildEvalRequest(s: Scenario, sim: MatchConceptSim = MATCH_CONCE
     deathType: user.deathType,
     prevTypes,
   };
+}
+
+/**
+ * Route'un recordMatchConcept aynası — YALNIZ başarılı yanıttan sonra çağrılır.
+ * W2 inceleme B06-F3: yazım eskiden buildEvalRequest içinde, API çağrısından ÖNCE
+ * yapılıyordu → 429 / parse hatası / outputFailure olan round da maç listesine giriyor,
+ * sonraki round'ların classifyDeathVaried aile-bastırması prod'da oluşamayacak bir
+ * listeyle koşuyordu (repeatScore A/B'si kayar). Route (app/api/ai/vision/route.ts)
+ * kavramı son-işlem + visionOutputFailure kontrolünden SONRA, deathType ve matchId
+ * varken yazar; eval'de matchId karşılığı id'deki M\d+ öneki.
+ */
+export function recordEvalConcept(s: Scenario, deathType: DeathType | null, sim: MatchConceptSim = MATCH_CONCEPT_SIM): void {
+  const mcKey = /^(M\d+)-R\d+/.exec(s.id)?.[1] ?? "";
+  if (!deathType || !mcKey) return;
+  // (canlı-test #14) SET→LIST aynası: tekrarlar KORUNUR (match-concepts RPUSH).
+  const list = sim.get(mcKey) ?? [];
+  list.push(deathType);
+  sim.set(mcKey, list);
 }
 
 /** Kurucunun factGround'u ile prod son-işlem zinciri (OLCUM-ARACI-07: ctxForFacts yok). */
@@ -794,6 +815,7 @@ async function main() {
       const req = buildEvalRequest(s);
       if (dryRun) {
         console.log(`sys=${Buffer.byteLength(req.systemMessage, "utf8")}B user=${Buffer.byteLength(req.userPrompt, "utf8")}B max=${req.requestBody.max_completion_tokens} dtype=${req.deathType ?? "-"} [${directiveHeaders(req.userPrompt).join(" | ")}]`);
+        recordEvalConcept(s, req.deathType); // dry-run her round'u başarılı varsayar (önizleme = başarılı koşunun aynası)
         continue;
       }
       const res = await fetch(OPENAI_API_URL, {
@@ -827,6 +849,8 @@ async function main() {
       const final = postProcess(s, outcome.obj as VisionFeedbackShape, req.factGround);
       // Süzgeç deathAnalysis'i boşalttıysa prod YAPISAL HATA döner (CANLI-TEST-07) — kaydedilir.
       const outputFailure = visionOutputFailure(final);
+      // Route aynası: kavram YALNIZ kullanıcıya ders gittiyse (yapısal hata yoksa) yazılır.
+      if (!outputFailure) recordEvalConcept(s, req.deathType);
       console.log(`done (lang=${req.lang}, conf=${req.confidence}, finish=${finishReason}, dtype=${req.deathType ?? "-"}, reality=${final.realityModified ? "MOD" : "ok"}${outputFailure ? `, OUTPUT-FAIL=${outputFailure.detail.reason}` : ""})`);
       results.push({ ...base, raw, final, ...(outputFailure ? { outputFailure: outputFailure.detail } : {}) });
     } catch (e) {

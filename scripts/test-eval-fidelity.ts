@@ -71,7 +71,7 @@ import {
 import type { DeathType } from "../lib/death-type";
 // B07 (OLCUM-ARACI-17): model/effort beklentisi tek kaynaktan — göçte test elle değişmez.
 import { AI_MODEL, AI_REASONING_EFFORT } from "../lib/ai-model";
-import { SCENARIOS as VISION_SCENARIOS, buildEvalRequest, EVAL_SCOPE_NOTE, type Scenario as VisionScenario, type MatchConceptSim } from "./eval-vision";
+import { SCENARIOS as VISION_SCENARIOS, buildEvalRequest, recordEvalConcept, langOf, EVAL_SCOPE_NOTE, type Scenario as VisionScenario, type MatchConceptSim } from "./eval-vision";
 import * as legacyVision from "./eval-vision-legacy";
 import { measurePrefixScenarios, SCENARIOS as PREFIX_SCENARIOS, bodyOf as prefixBodyOf, buildSystemPrompt as prefixSystemPrompt } from "./measure-prompt-prefix";
 
@@ -568,7 +568,10 @@ async function evalParitySection() {
       memoryContext: s.memoryContext ?? "",
       matchConcepts: mcKey ? simRoute.get(mcKey) ?? [] : [],
     });
-    if (mcKey && typeof cap.json.deathType === "string") simRoute.set(mcKey, [...(simRoute.get(mcKey) ?? []), cap.json.deathType]);
+    // W2 inceleme B06-F3: iki taraf da kavramı YALNIZ başarılı yanıttan sonra yazar
+    // (route: 200 = son-işlem + visionOutputFailure geçti; eval: recordEvalConcept).
+    if (cap.status === 200 && mcKey && typeof cap.json.deathType === "string") simRoute.set(mcKey, [...(simRoute.get(mcKey) ?? []), cap.json.deathType]);
+    if (cap.status === 200) recordEvalConcept(s, req.deathType, simEval);
     byId[s.id] = { req, routeType: cap.json.deathType ?? null, routeUser: cap.userText };
     if (cap.status !== 200) bad.status.push(`${s.id}:${cap.status}`);
     if (req.systemMessage !== cap.systemMessage) bad.sys.push(s.id);
@@ -668,6 +671,32 @@ async function evalParitySection() {
   check("eval-vision: kurucu + prod parse + prod son-işlem kullanılıyor; JSON.parse(text) yok",
     ["buildVisionSystemMessage(", "buildVisionUserMessage(", "buildVisionRequestBody(", "toVisionFeedbackOutcome(", "visionPostprocessOpts(", "finalizeVisionFeedback("].every((x) => evalSrc.includes(x))
       && !/JSON\.parse\(text\)/.test(evalSrc));
+  // W2 inceleme B06-F3 (a): maç-kavram simülasyonu API çağrısından ÖNCE yazılıyordu →
+  // 429/parse/outputFailure round'u listeye giriyor, sonraki round'ların aile-bastırması
+  // prod'da oluşamayacak listeyle koşuyordu. Artık buildEvalRequest sim'i YAZMAZ.
+  {
+    const sim: MatchConceptSim = new Map();
+    const m = real.find((x) => /^M\d+-R\d+/.test(x.id) && (x.body as Record<string, unknown>).died === true)!;
+    const r1 = buildEvalRequest(m, sim);
+    check("buildEvalRequest sim'e YAZMAZ (başarısız çağrı maç listesine girmez)", sim.size === 0 && r1.deathType !== null, `sim=${JSON.stringify([...sim])}`);
+    recordEvalConcept(m, r1.deathType, sim);
+    const key = /^(M\d+)-R\d+/.exec(m.id)![1];
+    check("recordEvalConcept başarılı round'u listeye yazar (route recordMatchConcept aynası)",
+      JSON.stringify(sim.get(key)) === JSON.stringify([r1.deathType]));
+    check("eval-vision main: kavram yalnız outputFailure YOKKEN yazılır",
+      /if \(!outputFailure\) recordEvalConcept\(s, req\.deathType\);/.test(evalSrc));
+  }
+  // W2 inceleme B06-F3 (b): dil route ile AYNI kaynaktan (gövdenin lang'i).
+  {
+    const enBodyOnly = { id: "X-en-body-only", note: "", body: { died: false, lang: "en", map: "Ascent", agent: "Jett" } } as VisionScenario;
+    let threw = false;
+    try { langOf({ ...enBodyOnly, lang: "tr" }); } catch { threw = true; }
+    check("langOf: dil yalnız body.lang'de EN → 'en' (route resolveVisionLang); Scenario.lang çelişirse koşu durur",
+      langOf(enBodyOnly) === "en" && threw && langOf({ ...enBodyOnly, body: { died: false } }) === "tr");
+    const all = [...VISION_SCENARIOS, ...real];
+    const incons = all.filter((x) => { try { langOf(x); return false; } catch { return true; } });
+    check(`bugünkü korpusta Scenario.lang ↔ body.lang tutarlı (${all.length}/${all.length})`, incons.length === 0, incons.map((x) => x.id).join(", "));
+  }
   check("eval-vision: API anahtarı YALNIZ main() içinde okunur (import yan-etkisiz) + require.main kapısı",
     !/const API_KEY = loadApiKey\(\)/.test(evalSrc) && /const apiKey = dryRun \? "" : loadApiKey\(\);/.test(evalSrc) && /if \(require\.main === module\)/.test(evalSrc));
 }
