@@ -437,7 +437,7 @@ console.log("\n════ B01 · SAYI + BULUNMA EKİ (TR-KALAN-27) ═══�
     ["R3", "R3'te"], ["R40", "R40'ta"],
   ];
   for (const [n, w] of want) eq(`59 trLocative("${n}")`, CT.trLocative(n), w);
-  // Callout / harita yolu BAYT-AYNI (bugünkü çağıranlar: report/route.ts, app/page.tsx).
+  // Callout / harita yolu BAYT-AYNI (bugünkü çağıranlar: report/route.ts, app/LandingClient.tsx).
   for (const [w, exp] of [["A Main", "A Main'de"], ["B Link", "B Link'te"], ["Bind", "Bind'da"],
     ["Ascent", "Ascent'te"], ["Mid", "Mid'de"]] as [string, string][]) {
     eq(`60 callout "${w}" bayt-aynı`, CT.trLocative(w), exp);

@@ -13,7 +13,7 @@
  * Bu tabloya İKİ katman muhtaç — lib/history-block.ts (prompt) ve
  * lib/reality-checker.ts (denetim). Biri diğerini import ederse katmanlar
  * yanlış yönde bağlanır. lib/coach-text.ts de uygun DEĞİL: o dosyanın kendi
- * yorumu (coach-text.ts:17-21) app/page.tsx'in ("use client") bu dosyadan
+ * yorumu (coach-text.ts:17-21) app/LandingClient.tsx'in ("use client") bu dosyadan
  * trLocative aldığını ve landing bundle'ına ağır modül sokmama politikasını
  * belgeliyor. Sıfır-import yaprak modül, iki büyük modül arasında HİÇ yeni
  * kenar açmayan tek seçenektir.

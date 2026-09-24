@@ -61,7 +61,7 @@ deprecation notices**.
 
 ## Where things are
 
-- Landing page UI:    `app/page.tsx`
+- Landing page UI:    `app/LandingClient.tsx` ("use client"; `app/page.tsx` yalnız bayrakları sunucuda okuyan ince sarmalayıcı)
 - AI feedback route:  `app/api/ai/feedback/route.ts`
 - AI vision route:    `app/api/ai/vision/route.ts`
 - AI insight route:   `app/api/ai/insight/route.ts`

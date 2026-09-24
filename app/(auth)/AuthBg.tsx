@@ -3,9 +3,9 @@
 import { useMemo } from "react";
 
 /**
- * Mirrors AmbientBg() from app/page.tsx so the auth route group has the
+ * Mirrors AmbientBg() from app/LandingClient.tsx so the auth route group has the
  * same starfield background as the marketing site. Kept as a separate file
- * to avoid pulling app/page.tsx (4.6 kloc) into the (auth) bundle.
+ * to avoid pulling app/LandingClient.tsx (4.6 kloc) into the (auth) bundle.
  *
  * Particle positions are deterministic to avoid SSR/CSR hydration mismatch.
  */

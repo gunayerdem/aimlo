@@ -117,7 +117,7 @@ export function sanitizeJsonStrings<T>(value: T, opts: SanitizeOpts = {}, depth 
  * biçimde (ölçüldü, 631f510). Değilse `fallback` döner: çağıran, eşleşen dosyanın slug'ını
  * ya da sözlüğün KANONİK anahtarını verir. Neden sanitizePromptInput değil: o, satır sonunu
  * ve Kiril / tam-genişlik metni geçirir; etiket yerinde ad dışında hiçbir şeye gerek yok.
- * Bu dosya sıfır-import: agent-abilities coach-text üzerinden app/page.tsx ("use client")
+ * Bu dosya sıfır-import: agent-abilities coach-text üzerinden app/LandingClient.tsx ("use client")
  * paketine giriyor (coach-text.ts:17-21) — kural fs'li knowledge-loader'da kalamazdı.
  */
 const SAFE_PROMPT_NAME_RE = /^[A-Za-z0-9][A-Za-z0-9 './-]{0,39}$/;

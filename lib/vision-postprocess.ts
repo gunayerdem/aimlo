@@ -11,7 +11,7 @@
 // replay-tr bu fonksiyonu import eder. Bir halka değişirse dördü birlikte değişir
 // — ayna sapması (B9 sınıfı) yapısal olarak imkânsız.
 //
-// NEDEN coach-text.ts'te DEĞİL: coach-text app/page.tsx ("use client") tarafından
+// NEDEN coach-text.ts'te DEĞİL: coach-text app/LandingClient.tsx ("use client") tarafından
 // da bağlanıyor; reality-checker'ı oraya statik bağlamak landing bundle'ına girme
 // riski taşır (coach-text.ts başındaki not). Bu modülü yalnız sunucu route'u ve
 // scriptler import eder.

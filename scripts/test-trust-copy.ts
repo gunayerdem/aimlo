@@ -7,7 +7,7 @@
  *     basınca) %LOCALAPPDATA%\VALORANT\Saved\Config\<hesap>\WindowsClient\
  *     GameUserSettings.ini'deki FullscreenMode=0 → 1 yazar ve yanına
  *     .ini.aimlo-bak kopyası bırakır. Web metni bunu söylemiyordu
- *     (guvenlik/page.tsx, PricingClient.tsx TR+EN, app/page.tsx TR+EN).
+ *     (guvenlik/page.tsx, PricingClient.tsx TR+EN, ana sayfa TR+EN — bugün app/LandingClient.tsx).
  *   - /guvenlik "İzleme tüm ekranı kapsar" diyordu; desktop capture.rs'de birincil
  *     yol pencere-hedefli WGC (CreateForWindow), DXGI/GDI yedeği Valorant rect'ine
  *     kırpılır, rect yoksa tam kare.
@@ -28,6 +28,8 @@
  *       istisna bu PC'deki TÜM Valorant hesaplarını söyler (lib.rs read_dir döngüsü).
  *   [5] F15: kaynaksız sosyal kanıt yok — "gerçek geri bildirim" etiketi, ölçülemez
  *       "%NN daha iyi", yorum kartı ve sahte platform istatistiği (landingStats).
+ *   [6] F91: ürün yeteneği / beta durumu koda göre — "düşman pozisyon", "kapalı
+ *       beta", "sınırlı davetli" yok; landing beta cümlesi FREE_TIER_ENFORCED'a bağlı.
  * RUN: npx tsx scripts/test-trust-copy.ts
  */
 import fs from "node:fs";
@@ -109,6 +111,10 @@ function walk(dir: string, out: string[] = []): string[] {
 }
 const pages = walk(path.join(ROOT, "app"));
 const relOf = (p: string) => path.relative(ROOT, p).replace(/\\/g, "/");
+// Landing gövdesi: F91 (2026-09-24) sonrası app/LandingClient.tsx; app/page.tsx yalnız
+// bayrağı sunucuda okuyan ince sarmalayıcı. Dosya yoksa (eski düzen) app/page.tsx'e
+// düşülür ki kilitler çökmeden KIRMIZI dönsün (fix-olmadan kanıtı).
+const LANDING = fs.existsSync(path.join(ROOT, "app/LandingClient.tsx")) ? "app/LandingClient.tsx" : "app/page.tsx";
 
 // [1] SABİT LİSTE DEĞİL, TÜM SAYFALAR (B11 inceleme, 2026-09-24): eski sabit 4 dosyalık
 // COPY_FILES /legal/terms §5'teki çok satırlı mutlak iddiayı ("oyun\n dosyalarına …
@@ -132,7 +138,7 @@ for (const p of pages) {
     total === inUnits && countMentions(rest) === 0, `rest=${countMentions(rest)}`);
 }
 t(`iddia geçen dosyalar bilinen 4 sayfa (guvenlik, fiyat, ana sayfa, koşullar) — ${mentionFiles.length} dosya`,
-  ["app/guvenlik/page.tsx", "app/fiyatlandirma/PricingClient.tsx", "app/page.tsx", "app/legal/terms/page.tsx"]
+  ["app/guvenlik/page.tsx", "app/fiyatlandirma/PricingClient.tsx", LANDING, "app/legal/terms/page.tsx"]
     .every((f) => mentionFiles.includes(f)), JSON.stringify(mentionFiles));
 
 console.log("\n[2] yasak iddialar — kullanıcıya görünen app/**/*.tsx (yorum + app/api hariç)");
@@ -194,7 +200,7 @@ const pr = exceptionUnits("app/fiyatlandirma/PricingClient.tsx");
 t("fiyat SSS'i: TR + EN istisnalı cevap (düğme çekirdeği + tüm hesaplar)",
   pr.some((u) => TR_BUTTON_RE.test(u) && TR_ALL_ACCOUNTS.test(u)) && pr.some((u) => EN_BUTTON_RE.test(u) && EN_ALL_ACCOUNTS.test(u)),
   JSON.stringify(pr.length));
-const home = exceptionUnits("app/page.tsx");
+const home = exceptionUnits(LANDING);
 t("ana sayfa güven bloğu: TR + EN istisnalı madde (düğme çekirdeği + tüm hesaplar)",
   home.some((u) => TR_BUTTON_RE.test(u) && TR_ALL_ACCOUNTS.test(u)) && home.some((u) => EN_BUTTON_RE.test(u) && EN_ALL_ACCOUNTS.test(u)),
   JSON.stringify(home.length));
@@ -203,7 +209,7 @@ t("/guvenlik + /legal/terms (yalnız TR sayfalar): her istisna birimi tüm hesap
   trOnly.length >= 3 && trOnly.every((u) => TR_ALL_ACCOUNTS.test(u)), JSON.stringify(trOnly.filter((u) => !TR_ALL_ACCOUNTS.test(u))));
 t("hiçbir istisna birimi tekil 'kullanıcı ayar dosyası' / 'user settings file' demez",
   mentionFiles.flatMap(exceptionUnits).every((u) => !/kullanıcı ayar dosyası|user settings file/iu.test(u)));
-const homeSrc = stripComments(read("app/page.tsx"));
+const homeSrc = stripComments(read(LANDING));
 t("ana sayfa güven başlığı konu başlığı (TR+EN), güvence değil",
   homeSrc.includes('"Vanguard ve hesap güvenliği"') && homeSrc.includes('"Vanguard & account safety"'));
 
@@ -229,7 +235,7 @@ for (const [ad, re] of SOURCE_CLAIMS) {
   const hits = claimScope.filter((rel) => re.test(visibleText(rel)));
   t(`${ad} → 0 (app/**/*.tsx + constants/i18n.ts)`, hits.length === 0, JSON.stringify(hits));
 }
-const LANDING_FILES = ["app/page.tsx", "constants/i18n.ts"];
+const LANDING_FILES = [LANDING, "constants/i18n.ts"];
 const LANDING_ONLY: [string, RegExp][] = [
   ["'Oyuncular Ne Diyor' / 'What Players Say' bölümü", /Oyuncular Ne Diyor|What Players Say/u],
   ["yorum kartı kalıbı (handle: \"@…\")", /handle:\s*["'`]@/u],
@@ -244,6 +250,45 @@ for (const [ad, re] of LANDING_ONLY) {
 t("ölü landingStats anahtarı yok (landing + i18n)",
   LANDING_FILES.every((rel) => !/landingStats/.test(stripComments(read(rel)))),
   JSON.stringify(LANDING_FILES.filter((rel) => /landingStats/.test(stripComments(read(rel))))));
+
+// [6] F91 (2026-09-24): B11 taraması ürün yeteneği ve beta durumu iddialarını
+// kapsamıyordu. Kök (kanıtlı): masaüstü/backend'de düşman konumunu ÖLÇEN alan yok
+// (enemyPos/enemy_position grep 0; OCR-only sözleşmesi); kayıtta davet/allowlist
+// kontrolü yok (register/actions.ts) ve /download kimliksiz; landing SSS'indeki
+// "Beta süresince her şey sınırsız" cümlesi FREE_TIER_ENFORCED'a bağlı değildi
+// (fiyat sayfası B91'de bağlanmıştı: PricingPageBody.tsx).
+// Ölçüm (fix sonrası): üç yasak kalıp app/**/*.tsx + constants/i18n.ts'te 0 isabet.
+console.log("\n[6] F91 — ürün yeteneği ve beta durumu iddiaları koda göre");
+const F91_FORBIDDEN: [string, RegExp][] = [
+  ["'düşman pozisyon' / 'enemy position'", /düşman pozisyon|enemy position/iu],
+  ["'kapalı beta' / 'closed beta'", /kapalı beta|closed beta/iu],
+  ["'sınırlı (sayıda) davetli'", /sınırlı\s+(?:sayıda\s+)?davetli/iu],
+];
+for (const [ad, re] of F91_FORBIDDEN) {
+  const hits = claimScope.filter((rel) => re.test(visibleText(rel)));
+  t(`${ad} → 0 (app/**/*.tsx + constants/i18n.ts)`, hits.length === 0, JSON.stringify(hits));
+}
+const landingCode = stripComments(read(LANDING));
+t("SSS 'Nasıl çalışıyor?' ölçülen olguları söyler (TR+EN: ölüm yeri, skor, round sonucu, öldüren ajan)",
+  landingCode.includes("ölüm yerini, skoru, round sonucunu ve seni öldüren ajanı ekrandan okur") &&
+    landingCode.includes("death location, the score, the round result and the agent that killed you"));
+// Beta cümlesi YALNIZ betaNote alanında ve render bayrağa bağlı. Toplam = betaNote
+// sayısı → cümle SSS cevabına ya da başka bir metne koşulsuz kopyalanamaz.
+const BETA_RE = /Beta süresince|during the beta/giu;
+const betaTotal = (landingCode.match(BETA_RE) ?? []).length;
+const betaInNote = (landingCode.match(/betaNote:\s*"[^"\n]*(?:Beta süresince|during the beta)/giu) ?? []).length;
+t("landing beta cümlesi yalnız betaNote alanında (TR+EN, SSS cevabına gömülü değil)",
+  betaTotal === 2 && betaInNote === 2, `toplam=${betaTotal} betaNote=${betaInNote}`);
+t("betaNote render'ı bayrağa bağlı (faq.betaNote && !quotaEnforced)",
+  /faq\.betaNote\s*&&\s*!quotaEnforced/.test(landingCode));
+const wrapper = stripComments(read("app/page.tsx"));
+t("app/page.tsx sunucu sarmalayıcısı: 'use client' YOK, FREE_TIER_ENFORCED === \"true\" (PricingPageBody kuralı), prop geçişi",
+  !/^\s*["']use client["']/.test(wrapper) &&
+    /process\.env\.FREE_TIER_ENFORCED\s*===\s*"true"/.test(wrapper) &&
+    /<LandingClient\s+quotaEnforced=\{quotaEnforced\}/.test(wrapper));
+t("/guvenlik beta bölümü olgu: herkes kayıt olup indirebilir + geri bildirim kanalı",
+  /Herkes kayıt olup uygulamayı/u.test(guv) && /aimlo\.gg\/download/.test(guv) &&
+    /Destek ekranından/u.test(guv) && /support@aimlo\.gg/.test(guv));
 
 console.log(`\n${fail === 0 ? "✅" : "❌"} test-trust-copy: ${pass} geçti, ${fail} kırık`);
 if (fail > 0) process.exit(1);

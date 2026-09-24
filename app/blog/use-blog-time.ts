@@ -66,7 +66,7 @@ function subscribeLang(onChange: () => void): () => void {
 }
 
 /* Dil varsayılanı — localStorage'da `aimlo_lang` YOKKEN kullanılır.
-   Ana sayfa (app/page.tsx, `loadLang() || "en"`) ile AYNI olmak ZORUNDA:
+   Ana sayfa (app/LandingClient.tsx, `loadLang() || "en"`) ile AYNI olmak ZORUNDA:
    aksi hâlde ilk kez gelen ziyaretçi ana sayfayı İngilizce, /blog'u
    Türkçe görür. Burayı değiştirirsen orayı da değiştir. */
 const DEFAULT_LANG: BlogLang = "en";

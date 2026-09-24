@@ -8,7 +8,7 @@ import { useCallback, useRef, useState } from "react";
  * softi (2026-07-20): "tepeye de bizim ana menüde olan tepe panelini koy,
  * o panelde AIMLO yazısı ve gözüne basınca ana menüye gitsin".
  *
- * Ana sayfadaki nav (app/page.tsx) sayfaya gömülü ve o sayfaya özgü
+ * Ana sayfadaki nav (app/LandingClient.tsx) sayfaya gömülü ve o sayfaya özgü
  * durumlara bağlı (scrollTo, dil düğmesi, mobil menü, oturum). Onu olduğu
  * gibi taşımak mümkün değildi; bu, her sayfada çalışan sade sürümü:
  * logo + kelime işareti → ana sayfa. Görsel dil birebir aynı (.nav-xtract,

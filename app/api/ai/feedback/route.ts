@@ -635,7 +635,7 @@ export async function POST(request: NextRequest) {
    * KANIT (denetimde doğrulandı, tekrar teyit edildi):
    *   - Desktop yalnız 3 uca gidiyor: ai_client.rs:21 (ai/vision), :23
    *     (ai/match-report), src/ai/insightService.ts:26 (ai/insight).
-   *   - Web istemcisi yalnız /api/ai/report'a gidiyor (app/page.tsx:3117).
+   *   - Web istemcisi yalnız /api/ai/report'a gidiyor (app/LandingClient.tsx:3117).
    *   - Backend genelinde "ai/feedback" araması: yalnız bu dosya + dokümanlar.
    * Yani SIFIR istemcisi olan bu route, günlük kotanın EN BÜYÜĞÜNE sahipti
    * (lib/api-auth.ts:39 → feedback: 200) ve her çağrıda ~60K token'lık KB

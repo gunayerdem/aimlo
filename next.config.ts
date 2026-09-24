@@ -45,7 +45,7 @@ const nextConfig: NextConfig = {
     //     (.../02-guides/content-security-policy.md → "Static vs Dynamic
     //     Rendering with CSP"). Landing bugün statik; bu, launch trafiğinde
     //     doğrudan gecikme + maliyet demek.
-    //  3) style-src'ı nonce'a çevirmek bu kod tabanında ölümcül: app/page.tsx
+    //  3) style-src'ı nonce'a çevirmek bu kod tabanında ölümcül: app/LandingClient.tsx
     //     yüzlerce satır inline `style={{...}}` kullanıyor (gradyanlar, mask,
     //     ajan render'ları). Nonce inline STYLE ATTRIBUTE'unu kurtarmaz →
     //     sayfa görsel olarak çöker.

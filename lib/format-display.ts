@@ -3,7 +3,7 @@
 // "bind", "reyna", "spike_rush", "attacking") ve eski DB satırları bu ham değerlerle
 // ya da İngilizce "Unknown" senteliyle kayıtlı. Bu modül tek noktadan insan-okur
 // biçime çevirir; görüntü katmanı DB'yi asla değiştirmez (eski satırlar kalıcı).
-// CLIENT-SAFE: "server-only" yok — app/page.tsx (client) + admin + API route'lar
+// CLIENT-SAFE: "server-only" yok — app/LandingClient.tsx (client) + admin + API route'lar
 // aynı tabloyu kullanır, casing tek kaynaktan yönetilir.
 
 /** OCR slug → resmi harita adı. ocr.rs MAPS (13) + knowledge/maps (summit) birleşimi. */

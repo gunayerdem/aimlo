@@ -486,7 +486,7 @@ export async function POST(request: NextRequest) {
     await maybeRefineReport(report, validation.data, refineCall);
 
     // Server-side persistence — opt-in via persistOnServer. The web UI
-    // does its own client-side INSERT (saveReportToDb in app/page.tsx)
+    // does its own client-side INSERT (saveReportToDb in app/LandingClient.tsx)
     // and leaves this off, so the two write paths don't double-write.
     if (validation.data.persistOnServer) {
       let persist = await persistAnalysis(

@@ -169,12 +169,20 @@ export default function GuvenlikPage() {
         </section>
 
         <section className="space-y-3 text-sm leading-relaxed text-neutral-300">
+          {/* F91 (2026-09-24): "kapalı beta — sınırlı sayıda davetli" olgusal
+              olarak yanlıştı: kayıtta davet/allowlist kontrolü yok
+              (register/actions.ts registerAction doğrudan createUser),
+              aimlo.gg/download kimliksiz yönlendiriyor (download/route.ts). */}
           <h2 className="text-lg font-bold text-white">
-            Kapalı beta hakkında
+            Beta sürümü hakkında
           </h2>
           <p>
-            Şu an AIMLO kapalı betadadır — sınırlı sayıda davetli test ediyor.
-            Bir sorun yaşarsan ya da geri bildirim vermek istersen{" "}
+            AIMLO şu an beta sürümünde. Herkes kayıt olup uygulamayı{" "}
+            <a href="/download" className="text-[#FF4655] hover:underline">
+              aimlo.gg/download
+            </a>{" "}
+            adresinden indirebilir. Bir sorun yaşarsan ya da geri bildirim
+            vermek istersen uygulamadaki Destek ekranından ya da{" "}
             <a
               href="mailto:support@aimlo.gg"
               className="text-[#FF4655] hover:underline"
