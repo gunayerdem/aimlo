@@ -13,6 +13,7 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import { stripForeignCallouts } from "../lib/reality-checker";
 import { calloutBelongsToMap, MAP_CALLOUTS, UNIVERSAL_CALLOUTS } from "../lib/map-callouts";
+import { CALLOUT_WORDS } from "../lib/coach-text";
 
 let fail = 0;
 const t = (ad: string, kosul: boolean, detay = "") => {
@@ -308,6 +309,26 @@ console.log("\n[14] İKİ REPO SENKRONU (FB05 · F02) — masaüstü callouts.rs
         bd === dd && diff.length === 0, `→ ${diff.join(" · ")}`);
     }
   }
+}
+
+console.log("\n[15] CALLOUT KELİME KOPYASI (FB05 · F11) — coach-text CALLOUT_WORDS ↔ MAP_CALLOUTS birebir");
+{
+  // coach-text.ts landing bundle'ına girdiği için tabloyu import etmiyor; enforceSuppliedCallout'un
+  // "başka callout'u hedef alma" koruması tablonun SABİT kelime kopyasını kullanıyor. Kural:
+  // MAP_CALLOUTS ∪ UNIVERSAL_CALLOUTS adlarının boşlukla bölünmüş ≥4 harfli kelimeleri, sıralı.
+  // Tabloya ad eklenip kopya güncellenmezse yeni ad düzeltici tarafından BAŞKA callout'a
+  // çevrilebilir (F11 sınıfı) → burada KIRMIZI.
+  const derived = new Set<string>();
+  for (const c of [...Object.values(MAP_CALLOUTS).flat(), ...UNIVERSAL_CALLOUTS]) {
+    for (const w of c.split(/\s+/)) if (w.length >= 4) derived.add(w);
+  }
+  const want = [...derived].sort();
+  const have = [...CALLOUT_WORDS];
+  const missing = want.filter((w) => !have.includes(w));
+  const extra = have.filter((w) => !derived.has(w));
+  t(`CALLOUT_WORDS tablodan türetilen kümeyle birebir (${want.length} kelime)`,
+    missing.length === 0 && extra.length === 0 && have.join("|") === want.join("|"),
+    `→ EKSİK: ${missing.join(", ") || "-"} · FAZLA: ${extra.join(", ") || "-"}`);
 }
 
 console.log(`\n══════ ${fail === 0 ? "✅ TÜMÜ GEÇTİ" : `❌ ${fail} BAŞARISIZ`} ══════\n`);

@@ -1392,6 +1392,46 @@ const PROTECTED_MAP_NAMES = [
   "plant", "post", "spike",
 ];
 
+// ── TÜM HARİTALARIN CALLOUT KELİMELERİ (FB05 · F11, 2026-09-24) ─────────────────
+// KANIT: düzeltici "büyük harfli + 2 harf içinde benziyor" tek ölçütüyle BAŞKA bir
+// callout'u verilen callout'a çeviriyordu (korpus HEAD): cyclew3-cand1-en E2 (Bind,
+// deathLocation "b long") "teleporter/Link" → "teleporter/Long"; cyclefix1/fix2/cycle3
+// S18/E3 (Haven, "c long") "C Link" → "C Long"; ayrıca d=1 "Mail"↔"Main", "Hall"↔"Hell",
+// "Link"→"Line". (b)'deki ≤5 harf/d=1 kuralı bu çiftleri KAPATMAZ (hepsi d=1) → hedef
+// token HERHANGİ bir haritanın callout kelimesiyse ASLA değiştirilmez.
+// SABİT KOPYA (bilinçli): bu dosya app/LandingClient.tsx ("use client") tarafından da
+// bağlanıyor; map-callouts.ts'i (tüm tablo + yorumlar) buraya import etmek landing
+// bundle'ına sokar. Kopya = MAP_CALLOUTS ∪ UNIVERSAL_CALLOUTS adlarının boşlukla bölünmüş,
+// ≥4 harfli kelimeleri (daha kısa token düzeltilmez, bkz. aşağıdaki `tok.length < 4`),
+// sıralı. Senkron kilidi: scripts/test-map-callouts.ts [15] kümeyi tablodan yeniden türetip
+// BİREBİR karşılaştırır — tablo değişip bu liste güncellenmezse npm test KIRMIZI.
+export const CALLOUT_WORDS: readonly string[] = [
+  "alley", "arcade", "arka", "ascender", "attacker", "back", "bahçe", "bath", "belt", "bend",
+  "blue", "boathouse", "boba", "boiler", "bottom", "boxes", "bridge", "canteen", "catwalk",
+  "cave", "chute", "close", "closet", "club", "connector", "courtyard", "cubby", "danger",
+  "default", "defender", "dice", "dish", "doors", "double", "drop", "dugout", "elbow",
+  "flowers", "fountain", "garage", "garden", "generator", "green", "hall", "halls", "hamam",
+  "heaven", "hell", "hookah", "kapısı", "kitchen", "lamps", "lanes", "library", "line",
+  "link", "lobby", "long", "mail", "main", "market", "mound", "nest", "orange", "pallet",
+  "pillar", "pipes", "pizza", "plant", "plat", "platform", "plaza", "pocket", "pyramid",
+  "rafters", "ramp", "root", "rope", "screen", "screens", "secret", "security", "sewer",
+  "shops", "short", "showers", "silent", "site", "snowman", "spawn", "stairs", "switch",
+  "teleporter", "tiles", "tower", "tree", "triple", "triples", "trophy", "tube", "tunnel",
+  "upper", "vent", "void", "wall", "waterfall", "window", "wine", "yard", "yellow",
+];
+const CALLOUT_WORD_SET = new Set(CALLOUT_WORDS);
+
+// ── DURDURMA LİSTESİ (FB05 · F11 (c)) — callout-düzelticinin HEDEF alamayacağı sık
+// TR/EN kelimeler. Cümle başında büyük harfle gelir ve kısa callout'a d=1-2 yakındır;
+// korpus/deney kanıtı: "Rakip"→"Ramp" (cycleb06-pre-syn-rp/cycler5syn S23, Split "a ramp";
+// ham TR alanlarının 217/5484'ü "Rakip" ile başlıyor), "Hold"→"Hall", "Make"→"Main",
+// "Siper"→"Site", "Hemen"→"Heaven", "Look"→"Long" (aitext/exp15). Side→Site, Next→Nest,
+// Have→Hall d=1 olduğu için (b) kuralı kapatmaz — yalnız bu liste kapatır.
+const CALLOUT_FIX_STOP = new Set([
+  "rakip", "siper", "hemen", "side", "next", "have", "hold", "make", "look",
+  "skor", "trade", "stop", "help", "since", "mark",
+]);
+
 /** Sınırlı Levenshtein — |len farkı| > max ise erken çık (max+1 döner). */
 function editDistance(a: string, b: string, max = 2): number {
   if (Math.abs(a.length - b.length) > max) return max + 1;
@@ -1430,12 +1470,23 @@ export function enforceSuppliedCallout(text: string, supplied: string | null | u
     if (tok.length < 4) return tok;
     const lt = lowerTr(tok);
     if (protectedNames.has(lt)) return tok;                // ajan/silah/harita adı — asla
+    // FB05 · F11 (a): hedef token HERHANGİ bir haritanın callout kelimesiyse asla —
+    // bir callout başka bir callout'a çevrilmez ("Link"→"Long", "Mail"→"Main"). Düz ve
+    // TR küçültme ikisi de bakılır ("LINK" → tr "lınk"). Verilen kelimenin kendisi ve
+    // bitişik ekli hâli zaten aşağıda dokunulmadan döner.
+    if (CALLOUT_WORD_SET.has(lt) || CALLOUT_WORD_SET.has(tok.toLowerCase())) return tok;
+    // FB05 · F11 (c): sık TR/EN kelimeler ("Rakip", "Hold", "Make", "Siper", "Hemen").
+    if (CALLOUT_FIX_STOP.has(lt) || CALLOUT_FIX_STOP.has(tok.toLowerCase())) return tok;
     for (const w of words) {
       const lw = lowerTr(w);
       if (lt === lw) return tok;                           // zaten doğru — dokunma
       if (lt[0] !== lw[0]) continue;                       // aynı baş harf şartı
       if (lt.startsWith(lw)) continue;                     // callout+bitişik ek ("Sitede") — dokunma
       const d = editDistance(lt, lw);
+      // FB05 · F11 (b): ≤5 harfli token'da YALNIZ d=1 — kısa kelimede d=2 neredeyse her
+      // şeyi eşliyordu ("Rakip"→"Ramp", "Hold"→"Hall", "Make"→"Main" hepsi d=2).
+      // Canlı hedef korunur: "Lambs"→"Lamps" d=1, "Loby"→"Lobby" d=1.
+      if (lt.length <= 5 && d > 1) continue;
       if (d >= 1 && d <= 2) {
         // Orijinal görünüm: supplied kelime Title-Case'e çekilir (token zaten
         // büyük harfle başlıyordu — regex bunu garanti eder).

@@ -596,6 +596,59 @@ console.log("\n[TR-KALAN-26] tümüyle kanıtsız enemyAnalysis maddesi düşer;
   t("nextRoundSuggestion boşalmaz (karar: ham metin korunur)", nr.length > 0, `→ "${nr}"`);
 }
 
+// ── FB05 · F11: callout-yazım kilidi (fixCallout) sıradan kelimeyi ve BAŞKA callout'u çevirmez ──
+// HEAD (korpus, bu commit öncesi zincir): S23 "Rakip Cypher…" → "Ramp Cypher…" (Split, "a ramp");
+// E3/S18 "Garage/C Link" → "Garage/C Long" (Haven, "c long"); E2 "teleporter/Link" →
+// "teleporter/Long" (Bind, "b long"); deney: "Make sure" + b main → "Main sure", "Hold the angle"
+// + a hall → "Hall the angle", "Siper kenarında" + a site → "Site kenarında", "Hemen çekil" +
+// a heaven → "Heaven çekil". Kilit: fixCallout halkası bunlarda NO-OP (verilen konumla ve
+// konumsuz zincir çıktısı BAYT-AYNI); canlı hedef (Lambs→Lamps, Loby→Lobby) korunur.
+// NOT: düzeltici burada doğrudan ÇAĞRILMAZ (G2 grep-guard'ı) — halka zincirin kendisinden,
+// suppliedLoc'lu ve suppliedLoc'suz iki koşunun farkıyla ölçülür (başka her halka aynı).
+console.log("\n[FB05 · F11] fixCallout: sıradan kelime / başka callout değişmez; bozuk verilen callout düzelir");
+{
+  type K = "death" | "suggestion";
+  const run = (metin: string, kind: K, lang: "tr" | "en", map: string, loc: string) => {
+    const fb = kind === "death"
+      ? { deathAnalysis: metin, enemyAnalysis: [], nextRoundSuggestion: "" }
+      : { deathAnalysis: "", enemyAnalysis: [], nextRoundSuggestion: metin };
+    const opts = {
+      factGround: buildFactGround({ died: true, killerInfo: "killed by jett with vandal", deathLocation: loc }, { deathLocation: loc }),
+      lang, map, agent: "Omen", suppliedLoc: loc,
+    };
+    const pick = (o: ReturnType<typeof finalizeVisionFeedback>) => (kind === "death" ? o.deathAnalysis : o.nextRoundSuggestion);
+    return { withLoc: pick(finalizeVisionFeedback(fb, opts)), noLoc: pick(finalizeVisionFeedback(fb, { ...opts, suppliedLoc: "" })) };
+  };
+  const noop: [string, string, K, "tr" | "en", string, string, string][] = [
+    // [ad, ham metin (korpus raw birebir), alan, dil, harita, deathLocation, korunması gereken parça]
+    ["S23 cycleb06-pre-syn-rp/cycler5syn DA (Split, a ramp)",
+      "Rakip Cypher A Ramp açısını tekrar tekrar tutuyor ve bu round da seni sheriff'le orada vurdu — aynı açıda 4 round üst üste ölmüşsün, o köşeyi smoke veya takım flash'ı olmadan tek başına deneme. ",
+      "death", "tr", "Split", "a ramp", "Rakip Cypher"],
+    ["E3 cycle3 NR (Haven, c long)",
+      "Avoid solo wide peeks into C Long on the next round; either stack a two-man entry through Garage/C Link into C or have a teammate flash/push with you so Cypher can't take a clean Ghost duel. ",
+      "suggestion", "en", "Haven", "c long", "Garage/C Link"],
+    ["S18 cyclefix1 EA1 (Haven, c long)",
+      "C Link veya Plat'ten bir takım arkadaşıyla crossfire kur; Sova uzak açıya tek başına ateş edemezse trade gelir. ",
+      "suggestion", "tr", "Haven", "c long", "C Link veya Plat"],
+    ["E2 cyclew3-cand1-en NR (Bind, b long)",
+      "Give up the long B sightline this round and instead use your camera to watch the teleporter/Link and place a tel on the flank path, then smoke the B Long lane to cut the Operator's view so your team can hold tighter crossfires. ",
+      "suggestion", "en", "Bind", "b long", "teleporter/Link"],
+    ["deney 'Make sure' + b main", "Make sure you clear Market first.", "suggestion", "en", "Ascent", "b main", "Make sure"],
+    ["deney 'Hold the angle' + a hall", "Hold the angle with a teammate next round.", "suggestion", "en", "Fracture", "a hall", "Hold the angle"],
+    ["deney 'Siper kenarında' + a site", "Siper kenarında kal, açıyı tut.", "suggestion", "tr", "Ascent", "a site", "Siper kenarında"],
+    ["deney 'Hemen çekil' + a heaven", "A Heaven'da öldün. Hemen çekil ve takımı bekle.", "death", "tr", "Bind", "a heaven", "Hemen çekil"],
+  ];
+  for (const [ad, metin, kind, lang, map, loc, keep] of noop) {
+    const { withLoc, noLoc } = run(metin, kind, lang, map, loc);
+    t(`${ad}: fixCallout NO-OP ve "${keep}" korunur`, withLoc === noLoc && withLoc.includes(keep), `→ "${withLoc}"`);
+  }
+  // Canlı hedef (S5) korunur: verilen callout'un BOZUK yakın varyantı düzelir.
+  const lamps = run("A Lamps'ta öldün; Lambs gibi dar köşede bekleme.", "death", "tr", "Bind", "a lamps");
+  t("Lambs→Lamps korunur (halka hâlâ bağlı)", lamps.withLoc.includes("Lamps gibi") && lamps.noLoc.includes("Lambs gibi"), `→ "${lamps.withLoc}"`);
+  const lobby = run("A Loby'de tek başına kaldın ve öldün.", "death", "tr", "Ascent", "a lobby");
+  t("Loby→Lobby korunur", lobby.withLoc.includes("A Lobby'de") && lobby.noLoc.includes("A Loby'de"), `→ "${lobby.withLoc}"`);
+}
+
 // ── TEK KAYNAK KİLİDİ (OLCUM-ARACI-08, 2026-09-23) ──────────────────────────
 // Vision son-işlem zinciri DÖRT yerde elle kopyalanmıştı (route, eval-vision,
 // test-pipeline-chain, replay-tr) ve her yeni halka yalnız bazı kopyalara
