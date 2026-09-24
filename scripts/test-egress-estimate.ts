@@ -71,11 +71,22 @@ async function main() {
     const est = infra.estimateEgress;
     const MB = 1_000_000;
     const a = est({ msiBytes: 29.5 * MB, downloads: 100, updates: 50 });
-    t("plan örneği: 29.5 MB × (100 indirme + 50 güncelleme) = 4.425 GB → %89 → warn",
-      a.status === "warn" && a.estimatedBytes === 4_425_000_000 && Math.round((a.ratio ?? 0) * 100) === 89 && !a.lowerBound,
+    t("plan örneği: 29.5 MB × (100 indirme + 50 güncelleme) = 4.425 GB → %89 → warn ('En az %89': güncelleme sayacı alt sınır)",
+      a.status === "warn" && a.estimatedBytes === 4_425_000_000 && Math.round((a.ratio ?? 0) * 100) === 89 && a.lowerBound && /^En az %89/.test(a.note),
       JSON.stringify(a));
+    // FB02 inceleme · F31 (2026-09-25): update_started yalnız 1.0.20+ istemcilerden gelir
+    // (desktop updater.ts; olayı güncellemeyi yükleyen istemci atar) → iki sayaç da okunsa
+    // bile güncelleme sayacı YAPISAL alt sınır. Eski kilit bu durumu yeşil "ok (tam sayım)"
+    // diye kilitliyordu — fonksiyonun kendi "eksik sayımla ok denmez" ilkesine aykırı.
     const b = est({ msiBytes: 29.5 * MB, downloads: 50, updates: 20 });
-    t("29.5 MB × 70 = %41 → ok (tam sayım)", b.status === "ok" && Math.round((b.ratio ?? 0) * 100) === 41, JSON.stringify(b));
+    t("iki sayaç okundu, 29.5 MB × 70 = %41 → 'ok' DEĞİL: unknown + 'En az %41' + 1.0.20 notu (güncelleme sayacı yapısal alt sınır)",
+      b.status === "unknown" && b.lowerBound && Math.round((b.ratio ?? 0) * 100) === 41 && /^En az %41/.test(b.note) && /1\.0\.20\+/.test(b.note),
+      JSON.stringify(b));
+    const statuses = new Set<string>();
+    for (const d of [0, 1, 10, 50, 100, 500]) for (const u of [0, 5, 50, null]) {
+      statuses.add(est({ msiBytes: 29.5 * MB, downloads: d, updates: u }).status);
+    }
+    t("hiçbir girdi 'ok' (yeşil 'eşiğin altında') üretmiyor", !statuses.has("ok") && statuses.has("warn") && statuses.has("unknown"), JSON.stringify([...statuses]));
     const edge = est({ msiBytes: 30 * MB, downloads: 100, updates: 0 });
     t("tam eşik (%60) → warn (>=)", edge.status === "warn" && edge.ratio === 0.6, JSON.stringify(edge));
     t("MSI boyutu yok → unknown (uydurma yok)", est({ msiBytes: null, downloads: 100, updates: 50 }).status === "unknown");
@@ -149,6 +160,11 @@ async function main() {
     /30\.09 ÖNCESİ: Supabase Usage → egress kontrolü/.test(runbook));
   const adminPage = read("app/admin/altyapi/page.tsx");
   t("/admin/altyapi egress kartını render ediyor", /<EgressCard e=\{infra\.egress\} \/>/.test(adminPage));
+  const cardStart = adminPage.indexOf("function EgressCard");
+  const card = cardStart < 0 ? "" : adminPage.slice(cardStart, adminPage.indexOf("\n}\n", cardStart));
+  t("F31: EgressCard'da yeşil 'eşiğin altında' rozeti yok; eşik altı tahmin 'alt sınır', güncelleme sayacı hep '≥'",
+    card.length > 0 && !/eşiğin altında/.test(card) && !/adm-badge ok/.test(card) && /"alt sınır"/.test(card) && /count\(e\.updates, true\)/.test(card),
+    card.slice(0, 120));
 
   console.log(`\n${fail === 0 ? "✅" : "❌"} test-egress-estimate: ${pass} geçti, ${fail} kırık`);
   if (fail > 0) process.exit(1);

@@ -644,16 +644,28 @@ const MSI_SIZE_TTL_MS = 6 * 60 * 60 * 1000;
 const TELEMETRY_PAGE = 1000;
 const TELEMETRY_MAX_PAGES = 20;
 
-export type EgressStatus = "ok" | "warn" | "unknown";
+/**
+ * FB02 inceleme · F31 (2026-09-25): "ok" (yeşil "eşiğin altında") durumu KALDIRILDI.
+ * update_started olayını güncellemeyi YÜKLEYEN istemci atar (desktop updater.ts
+ * telemetry_mark_update_started) ve yalnız 1.0.20+ gönderir → 1.0.19 ve öncesinden
+ * yapılan güncellemeler HİÇ sayılmaz; güncelleme sayacı YAPISAL olarak alt sınırdır.
+ * Eksik sayımla "eşiğin altında" denmez (bu fonksiyonun kendi ilkesi): eşik altı →
+ * "unknown" + "en az %N". Eski sürümler sahadan çekilince (telemetri app_version) "ok"
+ * ölçümle geri getirilebilir.
+ */
+export type EgressStatus = "warn" | "unknown";
 
 export type EgressEstimate = {
-  /** ok = ölçülen alt sınır eşiğin altında; warn = eşik aşıldı; unknown = hesaplanamadı. */
+  /** warn = (alt sınır bile) eşiği aştı; unknown = hesaplanamadı ya da eşik altı alt sınır. */
   status: EgressStatus;
   msiBytes: number | null;
   downloads: number | null;
   updates: number | null;
-  /** Sayaçlardan biri tavana dayandıysa ya da okunamadıysa: sayı "en az" demektir. */
+  /** Tahmin "en az" mı? Tahmin yapıldıysa HER ZAMAN true (güncelleme sayacı yapısal alt
+   *  sınır — yukarıdaki F31 notu); ayrıca sayaçlardan biri okunamadıysa/tavana dayandıysa. */
   lowerBound: boolean;
+  /** Sayaçlardan biri okunamadı ya da tavana dayandı (not metnini seçer). */
+  partialCounts: boolean;
   estimatedBytes: number | null;
   ratio: number | null;
   quotaBytes: number;
@@ -666,6 +678,8 @@ export type EgressEstimate = {
  * - MSI boyutu yoksa ya da iki sayaç da yoksa → unknown (uydurma yok).
  * - Sayaçlardan biri okunamadıysa diğeriyle ALT SINIR hesaplanır: eşiği aşıyorsa
  *   yine "warn" (en az bu kadar), aşmıyorsa "unknown" (eksik sayımla "ok" denmez).
+ * - İki sayaç da okunduysa bile güncelleme sayacı yapısal alt sınırdır (F31 notu):
+ *   eşik altı → "unknown" + "en az %N"; "ok" hiç dönmez.
  */
 export function estimateEgress(input: {
   msiBytes: number | null;
@@ -686,28 +700,28 @@ export function estimateEgress(input: {
   const base = { msiBytes, downloads, updates, quotaBytes, windowDays };
 
   if (msiBytes === null || msiBytes === 0) {
-    return { ...base, status: "unknown", lowerBound: false, estimatedBytes: null, ratio: null,
+    return { ...base, status: "unknown", lowerBound: false, partialCounts: false, estimatedBytes: null, ratio: null,
       note: "MSI boyutu okunamadı (latest.json ya da HEAD başarısız) — tahmin yapılmadı." };
   }
   if (downloads === null && updates === null) {
-    return { ...base, status: "unknown", lowerBound: false, estimatedBytes: null, ratio: null,
+    return { ...base, status: "unknown", lowerBound: false, partialCounts: true, estimatedBytes: null, ratio: null,
       note: "İndirme ve güncelleme sayaçları okunamadı — tahmin yapılmadı." };
   }
-  const lowerBound = downloads === null || updates === null || input.countsTruncated === true;
+  const partialCounts = downloads === null || updates === null || input.countsTruncated === true;
+  // F31 (FB02 inceleme): güncelleme sayacı YAPISAL alt sınır → tahmin her zaman "en az".
+  const lowerBound = true;
   const transfers = (downloads ?? 0) + (updates ?? 0);
   const estimatedBytes = transfers * msiBytes;
   const ratio = estimatedBytes / quotaBytes;
   const pct = Math.round(ratio * 100);
   if (ratio >= warnRatio) {
-    return { ...base, status: "warn", lowerBound, estimatedBytes, ratio,
-      note: `${lowerBound ? "En az " : ""}%${pct} — Free plandaysa 5 GB tavanına yaklaşılıyor. Supabase → Usage'da egress'i kontrol et; gerekirse Pro'ya geç ya da MSI'ı egress'i ücretsiz bir kanala taşı.` };
+    return { ...base, status: "warn", lowerBound, partialCounts, estimatedBytes, ratio,
+      note: `En az %${pct} — Free plandaysa 5 GB tavanına yaklaşılıyor. Supabase → Usage'da egress'i kontrol et; gerekirse Pro'ya geç ya da MSI'ı egress'i ücretsiz bir kanala taşı.` };
   }
-  if (lowerBound) {
-    return { ...base, status: "unknown", lowerBound, estimatedBytes, ratio,
-      note: `En az %${pct}; sayaçlardan biri eksik okundu, eşiğin altında olduğu söylenemez.` };
-  }
-  return { ...base, status: "ok", lowerBound, estimatedBytes, ratio,
-    note: `%${pct} — eşiğin (%${Math.round(warnRatio * 100)}) altında. Eski sürümlerin güncellemeleri sayılmadığı için gerçek değer daha yüksek olabilir.` };
+  return { ...base, status: "unknown", lowerBound, partialCounts, estimatedBytes, ratio,
+    note: partialCounts
+      ? `En az %${pct}; sayaçlardan biri eksik okundu, eşiğin altında olduğu söylenemez.`
+      : `En az %${pct}; güncelleme sayacı yalnız 1.0.20+ sürümlerin güncellemelerini sayar (1.0.19 ve öncesininkiler yok), eşiğin (%${Math.round(warnRatio * 100)}) altında olduğu söylenemez. Kesin rakam: Supabase → Usage.` };
 }
 
 const msiSizeCache = new Map<string, { bytes: number; at: number }>();

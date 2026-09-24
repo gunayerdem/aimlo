@@ -171,7 +171,13 @@ function fmtBytes(n: number | null): string {
 function EgressCard({ e }: { e: Infra["egress"] }) {
   const warn = e.status === "warn";
   const pct = e.ratio === null ? null : Math.round(e.ratio * 100);
-  const count = (n: number | null) => (n === null ? "bilinmiyor" : `${e.lowerBound ? "≥ " : ""}${n}`);
+  // FB02 inceleme · F31: yeşil eşik-altı ("ok") rozeti yok — güncelleme sayacı yapısal alt
+  // sınır (lib/admin-infra.ts EgressStatus notu). Tahmin varken eşik altı = "alt sınır".
+  const badge = warn ? "uyarı" : e.estimatedBytes !== null ? "alt sınır" : "bilinmiyor";
+  // İndirme sayacı gün başına kesin (Upstash); "≥" yalnız eksik okunduysa. Güncelleme
+  // sayacı her zaman "≥" (1.0.19 ve öncesi update_started göndermez).
+  const count = (n: number | null, alwaysLower = false) =>
+    n === null ? "bilinmiyor" : `${alwaysLower || e.partialCounts ? "≥ " : ""}${n}`;
   return (
     <div
       className="adm-card"
@@ -186,11 +192,8 @@ function EgressCard({ e }: { e: Infra["egress"] }) {
         <span style={{ fontSize: 14, fontWeight: 600, color: "rgba(238,240,248,0.9)" }}>
           Dağıtım egress tahmini (son {e.windowDays} gün)
         </span>
-        <span
-          className={warn ? "adm-badge bad" : e.status === "ok" ? "adm-badge ok" : "adm-badge warn"}
-          style={{ marginLeft: "auto" }}
-        >
-          {warn ? "uyarı" : e.status === "ok" ? "eşiğin altında" : "bilinmiyor"}
+        <span className={warn ? "adm-badge bad" : "adm-badge warn"} style={{ marginLeft: "auto" }}>
+          {badge}
         </span>
       </div>
       <div className="adm-chip-row" style={{ marginTop: 10 }}>
@@ -201,7 +204,7 @@ function EgressCard({ e }: { e: Infra["egress"] }) {
           indirme: <b>{count(e.downloads)}</b>
         </span>
         <span className="adm-chip">
-          güncelleme (update_started): <b>{count(e.updates)}</b>
+          güncelleme (update_started): <b>{count(e.updates, true)}</b>
         </span>
         <span className="adm-chip">
           tahmin:{" "}
