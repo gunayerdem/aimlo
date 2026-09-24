@@ -428,6 +428,64 @@ console.log("\n[F45] NvM — kavram (1v1) korunur, iddia nötrlenir, yetim ek/ar
   check("F45 hasAliveCount=true iken bayt-aynı", on === "1v3 kaldın ve panikle peek attın.", `→ "${on}"`);
 }
 
+// ── FB08 · F40: TR kit terimleri detektörde (EN çıktıya sızan "kalkan"/"tel") ────────
+// Fix olmadan detectEnLeak('Hold behind your kalkan…') → clean:true (TURKISH_WORDS'te yoktu).
+console.log("\n[F40] TR kit terimi sızıntısı yakalanır; İngilizce benzerleri temiz");
+{
+  for (const s of [
+    "Hold behind your kalkan and use the kalkan to absorb the first shot.", // cyclew3-cand2-en E10
+    "Place a tel on the flank path before you rotate.",                     // cyclew3-cand1-en E2
+    "Killjoy's turret/tels cover B Main.",
+    "Cypher kameras watch A Main.",
+    "Use your duvar to cut the long line.",
+    "Watch for the tuzak on B Main.",
+  ]) {
+    const r = detectEnLeak(s);
+    check(`yakalanır: "${s.slice(0, 40)}…"`, !r.clean && r.hits.some((h) => h.category === "turkish-word"), r.hits.map((h) => h.hit).join(", ") || "temiz sanıldı");
+  }
+  for (const s of [
+    "Tell your team to hold the telephone line near the hotel window.",
+    "Do not telegraph your peek; wait for the teleport sound and the tripwire to trigger.",
+    "Hold behind your shield and place the camera on the flank.",
+  ]) {
+    const r = detectEnLeak(s);
+    check(`temiz: "${s.slice(0, 40)}…"`, r.clean, r.hits.map((h) => `${h.category}:${h.hit}`).join(", "));
+  }
+}
+
+// ── FB08 · F86: EN rota-kökeni guard'ı — nedensellik deyimi ve ölçülmüş konum muaf ──
+// Fix olmadan: ER2 özeti "…Losses came from Hookah (R4) and Showers (R14); …" →
+// "…Losses (R4) and Showers (R14); …"; "Most of your deaths came from Hookah." → "Most of your deaths.".
+console.log("\n[F86] EN rota guard'ı: 'losses/deaths came from X' ve ölçülmüş konum korunur; oyuncu rota iddiası süzülür");
+{
+  const fx = EN_REPORT_SCENARIOS.find((s) => s.id === "ER2-bind-raze-atk-win");
+  if (!fx) throw new Error("ER2 yok");
+  const v = validateRequest(fx.body);
+  if (!v.valid) throw new Error("ER2 geçersiz");
+  const er2 = buildReportCleaner(v.data);
+  // report-b09-cand-en ER2 summary ham metni BİREBİR.
+  const raw = "You won 13-8. Attack rounds largely successful; R1, R2, R6, R8, R11, R19 were wins. Your operator role as entry Raze produced high impact (R11 clutch 1v2). Losses came from Hookah (R4) and Showers (R14); Hookah death was a solo entry into a Cypher trap with a Vandal.";
+  const out = er2(raw, 1000, "(FALLBACK)");
+  check("ER2 summary: 'Losses came from Hookah (R4) and Showers (R14)' korunur", out.includes("Losses came from Hookah (R4) and Showers (R14);"), `→ "${out}"`);
+  const fg = buildFactGround({}, {});
+  const g = (s: string, f: object = fg) => realityCheck(s, [] as never, f as never, "generic", "en").text;
+  for (const s of [
+    "Most of your deaths came from Hookah.",
+    "Losses came from B Long.",
+    "Your kills came from A Short in R3.",
+  ]) check(`nedensellik bayt-aynı: "${s}"`, g(s) === s, `→ "${g(s)}"`);
+  // Ölçülmüş konum (bu round) → rota öbeği silinmez.
+  const fgLoc = { ...fg, hasDeathLocation: true, deathLocation: "hookah" };
+  const m = "They came through Hookah and caught you.";
+  check("ölçülmüş konum (deathLocation 'hookah') bayt-aynı", g(m, fgLoc) === m, `→ "${g(m, fgLoc)}"`);
+  check("aynı cümle ölçülmemiş konumda süzülür ('They came and caught you.')", g(m) === "They came and caught you.", `→ "${g(m)}"`);
+  // Oyuncu rota iddiası (hasRoute=false, ölçülmemiş konum) SÜZÜLÜR — fiil kalır, cümle yüklemsiz kalmaz.
+  const p = g("You pushed through Hookah alone in R4 and died.");
+  check("'You pushed through Hookah alone' → rota kökeni düşer, fiil kalır", p === "You pushed alone in R4 and died.", `→ "${p}"`);
+  const q = g("Jett came from B Main and caught you.");
+  check("'Jett came from B Main' → rota düşer ('came' kalır)", !/B Main/.test(q) && /\bcame and caught you\./.test(q), `→ "${q}"`);
+}
+
 // ── SONUÇ ────────────────────────────────────────────────────────────────────
 console.log(`\n══════ SONUÇ: ${pass} geçti / ${fail} kaldı ══════\n`);
 if (fail > 0) process.exit(1);

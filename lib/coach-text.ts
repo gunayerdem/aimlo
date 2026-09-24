@@ -18,7 +18,7 @@ import { plainifyAbilities, fixTurkishApostrophe } from "@/lib/ability-plain-map
 // "use client" bileşeni ve bu dosyadan trLocative alıyor — 48 KB'lık
 // reality-checker'ı statik bağlamak landing bundle'ına girme riski taşır.
 // Onun yerine realityCheck halkası çağrı-yerinden ENJEKTE edilir (opts.check).
-import { enforceAgentKit } from "@/lib/agent-abilities";
+import { enforceAgentKit, kitTermsForLang } from "@/lib/agent-abilities";
 // Sayı sonlu kelimede bulunma eki (TR-KALAN-27): sıfır-import yaprak modül —
 // landing bundle politikası (yukarıdaki not) bozulmaz.
 import { trNumberLocative } from "@/lib/tr-suffix";
@@ -41,7 +41,57 @@ const escapeReCt = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const AGENT_ALT_CT = [...CLEAN_AGENT_NAMES].sort((a, b) => b.length - a.length).map(escapeReCt).join("|");
 const WEAPON_ALT_CT = [...CLEAN_WEAPON_NAMES].sort((a, b) => b.length - a.length).map(escapeReCt).join("|");
 
-const TR_JARGON: [RegExp, string][] = [
+// ── "cezalandır-" NESNEYE GÖRE (FB08 · F42, 2026-09-24) ──────────────────────────
+// KANIT: TR_JARGON'un üç kuralı (cezalandırıyor / -dı / -ır → "bedavaya öldür-") öndeki
+// nesneye bakmıyordu. Model deyimi hatayı ya da pozisyonu FIRSATA ÇEVİRMEK anlamında da
+// kullanıyor ve nesne korunup fiil değişince anlamsız Türkçe çıkıyordu (korpus replay):
+//   cycleb09-cand2-real M1-R18 "senin sabit açını bedavaya öldürüyor"
+//   cycleb09-base-real M1-R17  "sabit B Main pozisyonunu bedavaya öldürdü"
+//   cycleb09-base-trpc r1-c    "A Hall'da yakın mesafeyi bedavaya öldürdü"
+//   cyclereal-n14 M1-R19       "bilgi sızıntısını bedavaya öldürüyor"
+// KURAL (fiilden önceki 1-3 sözcük, aynı yan-cümle — [.,;:!?—] sınır):
+//   1) oyuncu nesnesi: seni/sizi/onu/onları, -(y)AnI / -(y)AnlArI sıfat-fiili ("tutanı",
+//      "yaklaşanları", "girenleri"), "hedefleri" → ESKİ kural ("bedavaya öldür-"), bayt-aynı;
+//   2) aksi hâlde yakın öncül açı/hat/pozisyon/mesafe/hata/köşe/kol/tema/tutuş/sızıntı/çıkış
+//      (+ giriş/peek — plan listesine EK: korpusta kalan iki bozuk örnek "dash ile girişleri
+//      bedavaya öldürür" cyclew3-base2-trpc phoenix-c, "solo peek'leri bedavaya öldürüyor"
+//      cyclevariety1 S12; ikisi de denetimin bozuk örnek listesinde) sözcüğünün BELİRTME ekli
+//      hâli → "fırsata çevir-" (nesnenin ekine dokunulmaz);
+//   3) diğer her durum → ESKİ kural.
+// Liste sözcüğünün kendi ekli biçimi ("temanı", "mesafeni") sıfat-fiil gibi "-AnI/-enI" ile
+// bitse de oyuncu sayılmaz (liste önceliği). Çıplak yalın "açı"/iyelikli yalın "açısı"
+// (özne) BİLEREK listede YOK: "savunma açısı seni cezalandırıyor" oyuncu kuralına düşer.
+const CEZA_NOUN_ACC_RE = new RegExp(
+  "^(?:açı(?:yı|nı|sını|ları|larını)|hat(?:tı|tını|ları|larını)|pozisyon(?:u|unu|ları|larını)"
+  + "|mesafe(?:yi|ni|sini|leri|lerini)|hata(?:yı|nı|sını|ları|larını)|köşe(?:yi|ni|sini|leri|lerini)"
+  + "|kol(?:u|unu|ları|larını)|tema(?:yı|nı|sını|ları|larını)|tutuş(?:u|unu|ları|larını)"
+  + "|sızıntı(?:yı|nı|sını|ları|larını)|çıkış(?:ı|ını|ları|larını)|giriş(?:i|ini|leri|lerini)"
+  + "|peek'(?:i|ini|leri|lerini))$",
+  "u",
+);
+const CEZA_PLAYER_OBJ_RE = /^(?:seni|sizi|onu|onları|hedefleri|\p{L}{2,}(?:an(?:lar)?ı|en(?:ler)?i))$/u;
+/** cezalandır- fiilinin öncesindeki (aynı yan-cümle, en çok 3 sözcük) nesne sınıfı. */
+function cezaObjectKind(pre: string): "player" | "noun" | null {
+  const clause = pre.slice(pre.search(/[^.,;:!?—–\n()"“”]*$/u));
+  const words = clause.trim().split(/\s+/).filter(Boolean).slice(-3)
+    .map((w) => w.replace(/^[^\p{L}]+|[^\p{L}]+$/gu, "").replace(/’/g, "'").toLocaleLowerCase("tr"));
+  if (words.some((w) => CEZA_PLAYER_OBJ_RE.test(w) && !CEZA_NOUN_ACC_RE.test(w))) return "player";
+  if (words.some((w) => CEZA_NOUN_ACC_RE.test(w))) return "noun";
+  return null;
+}
+type JargonReplacer = (m: string, ...args: unknown[]) => string;
+/** Yalnız sınıf 2'de (isim nesne) "fırsata çevir-" yazar; aksi hâlde eşleşmeyi AYNEN bırakır
+ *  → hemen ardındaki eski kural (değişmedi) aynı metni işler. İlk grup = şahıs/çoğul eki. */
+function cezaNounRewrite(noun: (sfx: string) => string): JargonReplacer {
+  return (m, ...args) => {
+    const full = args[args.length - 1] as string;
+    const off = args[args.length - 2] as number;
+    const sfx = typeof args[0] === "string" ? args[0].toLocaleLowerCase("tr") : "";
+    return cezaObjectKind(full.slice(0, off)) === "noun" ? noun(sfx) : m;
+  };
+}
+
+const TR_JARGON: [RegExp, string | JargonReplacer][] = [
   [/\bpredict edilebilir(sin)?\b/gi, "tahmin edilebilirsin"],
   [/\bpredict\b/gi, "tahmin edilebilir"],
   [/\bduel['’]?(le|la|de|da|ler)?\b/gi, "teke tek"],
@@ -179,6 +229,12 @@ const TR_JARGON: [RegExp, string][] = [
   // Yani TEMİZLEYİCİNİN KENDİSİ yasak ifadeyi ÜRETİYORDU. Canlı eval'de 2 senaryoda
   // "kill aldı" çıktı. Düz Türkçeye çevrildi (alttaki geniş-zaman kuralı zaten
   // "bedavaya öldürür" diyordu — tutarlılık da sağlandı).
+  // FB08 · F42: nesne açı/hat/pozisyon/… (belirtme ekli) ise "fırsata çevir-"; oyuncu
+  // nesnesi ya da diğer her durumda eşleşme AYNEN kalır ve alttaki eski kurallar işler
+  // (bkz. cezaObjectKind). Desenler eski kuralların BİREBİR aynısı (aynı sınırlar).
+  [/\bcezaland[ıi]r[ıi]yor(du|lar)?(?![a-zçğıöşü])/gi, cezaNounRewrite((sfx) => `fırsata çeviriyor${sfx}`)],
+  [/\bcezaland[ıi]rd[ıi](?![a-zçğıöşün])/gi, cezaNounRewrite(() => "fırsata çevirdi")],
+  [/\bcezaland[ıi]r[ıi]r(lar)?(?![a-zçğıöşü])/gi, cezaNounRewrite((sfx) => `fırsata çevirir${sfx ? "ler" : ""}`)], // -lar → -ler (ünlü uyumu)
   [/\bcezaland[ıi]r[ıi]yor(du|lar)?(?![a-zçğıöşü])/gi, "bedavaya öldürüyor$1"],
   [/\bcezaland[ıi]rd[ıi](?![a-zçğıöşün])/gi, "bedavaya öldürdü"],
   [/\bcezaland[ıi]racak(?![a-zçğıöşü])/gi, "oradan kafadan vuracak"],
@@ -484,7 +540,12 @@ const TR_JARGON: [RegExp, string][] = [
   [/((?<![a-zçğıöşü])seni(?![a-zçğıöşü])[^.;:—!?\n]{0,45}?)avlar(?![a-zçğıöşü])/gi, "$1öldürür"],
   // varyant eufemizmler (canlı-test 2026-06-26): "öde-"(made pay), causative
   // "kestir-", "-ip öldürdü", potansiyel "kafadan al-". Hepsi düz öldür-/vur-.
-  [/(seni[^.;:—!?\n]{0,45}?)öde(di|cek)(?![a-zçğıöşü])/gi, "$1öldür$2"],
+  // FB08 · F82 (2026-09-24): ek AÇIK eşlenir. Eski tek kural "öde(di|cek)" ekini "öldür"
+  // köküne olduğu gibi yapıştırıyordu → "öldürdi"/"öldürcek" (ünlü uyumu: öde- düz,
+  // öldür- yuvarlak; -ecek ünsüzle biten köke ünlüsüyle gelir). Korpus: cycleb09-cand2-trpc
+  // skye-b "seni tekrardan öldürdi", phoenix-c "seni öldürdi".
+  [/(seni[^.;:—!?\n]{0,45}?)ödedi(?![a-zçğıöşü])/gi, "$1öldürdü"],
+  [/(seni[^.;:—!?\n]{0,45}?)ödecek(?![a-zçğıöşü])/gi, "$1öldürecek"],
   [/(seni[^.;:—!?\n]{0,45}?)öd(üyor|etiyor)(?![a-zçğıöşü])/gi, "$1öldürüyor"],
   [/(seni[^.;:—!?\n]{0,45}?)öde(r|tir)(?![a-zçğıöşü])/gi, "$1öldürür"],
   [/(seni[^.;:—!?\n]{0,45}?)kestir(di|iyor|ir)(?![a-zçğıöşü])/gi, "$1öldürdü"],
@@ -1202,13 +1263,73 @@ function harmonizeLabelSuffix(tr: string, kind: LabelKind, suffix: string): stri
   return tail === null ? null : `l${A2}r${tail}`;
 }
 
+// ── ÇIPLAK -I EKİNİN İYELİK OKUMASI (FB08 · F94, 2026-09-24) ──────────────────────
+// KANIT (probe, HEAD 4f86159): plainLabelCase çıplak [yn]?[ıiuü] ekini bağlama bakmadan
+// BELİRTME sayıyordu → "economyType'ı düşük." → "Ekonomiyi düşük."; "Takımın economyType'ı
+// yok." → "Takımın ekonomiyi yok."; "Rakip enemyComp'u agresif" → "Rakip kadroyu agresif";
+// "deathAngle'ı dar." → "Ölüm yönünü dar." (test [15] bozuk çıktıyı kilitliyordu). Aynı
+// ikilik roster ikamesinde (TR_JARGON "roster'ı var/yok" + TR-KALAN-23 özne kapısı) çözülmüştü;
+// FIELD_LABEL_REWRITES yolu o kapıları almamıştı.
+// KURAL — varsayılan BELİRTME kalır; iyelik/yalın okuma yalnız şu dar kapılarda:
+//  (a) hemen ardından var/yok;
+//  (b) aynı yan-cümle ([.,;:!?—] ya da metin sonu; alt-bağlaç yok) SIFAT yüklemiyle ya da
+//      3. şahıs çekimli yüklemle bitiyor VE etiketin önünde tamlayan (-(n)In: "Takımın",
+//      "Jett'in"), Rakip/Düşman ya da ajan adı var. Etiket yan-cümlenin BAŞINDAysa (önünde
+//      sözcük yok) yalnız SIFAT yüklemi sayılır — özne düşmüş geçişli 3. şahıs ("enemyComp'u
+//      okudu" = kadroyu okudu) belirtme kalır. (Plan (b)'yi yalnız önekli kurmuştu; test [15]'in
+//      istediği "Ekonomisi düşük." öneksiz → yan-cümle başı + sıfat kapısı bu yüzden eklendi.)
+// Emir / 2. şahıs yüklem ("oku", "kontrol et", "değiştir", "okudun", "okuyorsun") kapıyı
+// açmaz → belirtme okuması kalır ("enemyComp'u oku." → "Rakip kadroyu oku.").
+// İyelik biçimi: vowel → s+I ("ekonomisi", "kadrosu"); poss → ek yok ("ölüm yönü"); loan →
+// kesme+I ("ult'u").
+const LABEL_EXIST_AFTER_RE = /^\s+(?:var|yok)(?![\p{L}])/u;
+const LABEL_SUBORD_RE = /(?<![\p{L}])(?:çünkü|zira|ama|fakat|ancak|lakin|yoksa|oysa|ki)(?![\p{L}])/iu;
+const LABEL_ADJ_PRED_RE = new RegExp(
+  "^(?:düşük|yüksek|zayıf|güçlü|iyi|kötü|agresif|pasif|erken|dar|geniş|net|belirsiz|belli|açık|kapalı"
+  + "|eksik|tam|boş|dolu|önemli|kritik|farklı|aynı|sabit|hızlı|yavaş|uzun|kısa|yakın|uzak|fazla|az|çok"
+  + "|zor|kolay|hazır|orta|bozuk|sağlam|dengeli|var|yok|\\p{L}{2,}(?:lı|li|lu|lü|sız|siz|suz|süz))"
+  + "(?:d[ıiuü]r|t[ıiuü]r)?$",
+  "u",
+);
+// 3. şahıs çekimli yüklem — roster özne kapısıyla (TR_JARGON TR-KALAN-23) aynı ekler. Ek
+// olarak -DIr/-tIr ile biten (geniş-zaman değil) sözcük emir sayılır ("değiştir", "getir").
+const LABEL_FINITE3_RE = /^(?:\p{L}*(?:yor|abilir|ebilir|amaz|emez|dı|di|du|dü|tı|ti|tu|tü)|\p{L}{3,}(?:ar|er|ır|ir|ur|ür))(?:lar|ler)?$/u;
+const LABEL_CAUSATIVE_IMP_RE = /(?<![ıiuü]r)[dt][ıiuü]r$/u;
+const LABEL_SUBJ_PREV_RE = new RegExp(
+  `(?:(?<![\\p{L}])(?:${AGENT_ALT_CT}|Kayo|rakip|düşman)`
+  + `|(?<![\\p{L}])(?!(?:için|bütün|dün|yakın|uzun)\\s)\\p{L}+['’]?n?[ıiuü]n)\\s+$`,
+  "iu",
+);
+function labelSuffixIsPossessive(pre: string, post: string): boolean {
+  if (LABEL_EXIST_AFTER_RE.test(post)) return true;
+  const clause = /^[^.,;:!?—–\n]*/u.exec(post)?.[0] ?? "";
+  if (LABEL_SUBORD_RE.test(clause)) return false;
+  const last = (/(\p{L}+)\s*$/u.exec(clause)?.[1] ?? "").toLocaleLowerCase("tr");
+  if (!last) return false;
+  const adj = LABEL_ADJ_PRED_RE.test(last);
+  if (/(?:^|[.,;:!?—–\n(])\s*$/u.test(pre)) return adj;
+  if (!LABEL_SUBJ_PREV_RE.test(pre)) return false;
+  return adj || (LABEL_FINITE3_RE.test(last) && !LABEL_CAUSATIVE_IMP_RE.test(last));
+}
+/** Etiket karşılığının 3. tekil iyelik (yalın) eki — kind'e göre. */
+function possessiveLabelTail(tr: string, kind: LabelKind): string {
+  if (kind === "poss") return "";
+  const v = kind === "loan" ? (LOAN_SOUND[tr] ?? { vowel: "e" }).vowel : lastVowelCt(tr);
+  return kind === "vowel" ? `s${harmI(v)}` : `'${harmI(v)}`;
+}
+
 export function stripFieldLabelTokens(text: string, lang: "tr" | "en"): string {
   if (!text) return text;
   let t = text;
   for (const [re, rep] of FIELD_LABEL_REWRITES) {
-    t = t.replace(re, (_m: string, apos?: string, suf?: string) => {
+    t = t.replace(re, (m: string, apos: string | undefined, suf: string | undefined, off: number, full: string) => {
       if (lang === "en") return rep.en + (apos && suf ? apos + suf : "");
       if (!apos || !suf) return rep.tr;
+      // FB08 · F94: çıplak -I eki iyelik/yalın okunabilir (bkz. labelSuffixIsPossessive).
+      if (plainLabelCase(suf.toLocaleLowerCase("tr")) === "acc"
+        && labelSuffixIsPossessive(full.slice(0, off), full.slice(off + m.length))) {
+        return rep.tr + possessiveLabelTail(rep.tr, rep.kind);
+      }
       const h = harmonizeLabelSuffix(rep.tr, rep.kind, suf);
       // "\u0000" = çoğulda gövde de değişti → tam biçim (ör. "ölüm yerlerini").
       if (h !== null) return h.startsWith("\u0000") ? h.slice(1) : rep.tr + h;
@@ -1867,6 +1988,10 @@ function guardTrEnemyHedges(t: string): { text: string; restore: (s: string) => 
   return { text, restore: (s) => s.replace(/\uE000([\uE100-\uE1FF])/g, (_m, c: string) => saved[c.charCodeAt(0) - 0xE100] ?? "") };
 }
 
+// FB08 · F40: EN dalında TR kit terimi → İngilizce sade terim (bkz. cleanCoachText EN dalı).
+// Karşılık TEK kaynaktan: agent-abilities kitTermsForLang (KIT_TERM_EN); burada yalnız 5 terim.
+const TR_KIT_TERM_EN_RE = /(?<![\p{L}])(tel|kamera|kalkan|tuzak|duvar)(s)?(?![\p{L}])/giu;
+
 export function cleanCoachText(text: string, lang: "tr" | "en"): string {
   if (!text) return text;
   // Sıra: sayısal HP → kova ifadesi (stripNumericHp) → kova dahil TÜM nitel
@@ -1914,7 +2039,7 @@ export function cleanCoachText(text: string, lang: "tr" | "en"): string {
     // (ya da tek içerikse korunur) — bkz. guardTrEnemyHedges.
     const hedgeGuard = guardTrEnemyHedges(t);
     t = hedgeGuard.text;
-    for (const [re, rep] of TR_JARGON) t = t.replace(re, rep);
+    for (const [re, rep] of TR_JARGON) t = typeof rep === "string" ? t.replace(re, rep) : t.replace(re, rep);
     t = hedgeGuard.restore(t);
     // 2. çoğul → 2. tekil (B25, 2026-07-31): TR_JARGON'dan SONRA — jargon
     // dönüşümleri de çoğul çekim üretebiliyor ("swing yapın" → "swing atın").
@@ -1946,6 +2071,19 @@ export function cleanCoachText(text: string, lang: "tr" | "en"): string {
     // EN hedge neti (B84, 2026-07-31): TR'deki 3 katmanlı hedge korumasının
     // EN karşılığı — koç EN'de de KESİN konuşur.
     t = stripEnHedges(t);
+    // FB08 · F40 (savunma): TR kit terimi EN metne sızarsa İngilizce sade terime çevrilir.
+    // Kaynak kapatıldı (agent-abilities kitTermsForLang, EN prompt artık İngilizce terim
+    // veriyor) ama düşman tarafı sızıntıları TR KB metninden de geliyor ("Cypher cameras/tel",
+    // "Killjoy's turret/tels" — korpus). Dar ve harf-sınırlı: yalnız 5 ASCII terim + EN
+    // çoğul -s; "telephone"/"hotel"/"tell" eşleşmez. EN'de bu sözcüklerin İngilizce anlamı yok.
+    const beforeKit = t;
+    t = t.replace(TR_KIT_TERM_EN_RE, (m: string, w: string, pl: string | undefined) => {
+      const en = kitTermsForLang([w.toLowerCase()], "en")[0] + (pl ? "s" : "");
+      return /^\p{Lu}/u.test(m) ? en.charAt(0).toUpperCase() + en.slice(1) : en;
+    });
+    // Model TR adı parantez içi açıklama olarak da yazıyor ("your shield (kalkan)", korpus
+    // cyclefb03-cand-* E10) → ikame "shield (shield)" tekrarı bırakmasın.
+    if (t !== beforeKit) t = t.replace(/(?<![\p{L}])(tripwire|camera|shield|trap|wall)(s?)\s*\(\s*\1\2\s*\)/giu, "$1$2");
   }
   // Cycle 3b: collapse an accidental adjacent duplicate of the SAME long word
   // ("utility'siz utility'siz tutma" → "utility'siz tutma"). ≥5 chars only, so

@@ -96,6 +96,13 @@ const TURKISH_WORDS: readonly string[] = [
   "senin", "sana", "yine", "yerine", "yeniden",
   "hemen", "zaten", "kadar", "degil", "cunku", "icin",
   "ayni", "boyle", "soyle", "simdi",
+  // FB08 · F40 (2026-09-24): TR kit terimleri (lib/agent-abilities.ts tablosu TR). EN prompt
+  // bunları çevirmeden veriyordu → model EN metne "hold behind your kalkan", "place a tel"
+  // yazıyordu ve detektör kördü (detectEnLeak(…kalkan…) → clean:true). YALNIZ 5 ASCII terim:
+  // "diriliş"/"önleyici" zaten (a) turkish-char'a takılır. "tel" TAM kelime ("tell"/"telephone"/
+  // "hotel" çakışmasın) + EN çoğulu "tels" (korpus: "Killjoy's turret/tels"); diğer dördü gövde —
+  // hiçbir İngilizce kelime kamera/duvar/kalkan/tuzak ile başlamaz ("kameras", "duvarı" da yakalanır).
+  "tel", "tels", "kamera-", "duvar-", "kalkan-", "tuzak-",
 ];
 
 // Sınır sınıfı — görev tarifiyle birebir: (?<![a-zçğıöşü]) ... (?![a-zçğıöşü]).

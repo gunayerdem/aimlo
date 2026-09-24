@@ -35,7 +35,7 @@ import { buildPolicyBlock, confidencePrompt } from "@/lib/ai-policy";
 // AGENT_ABILITIES (canlı-test #10 kalite dalgası, 2026-08-05 — S2b): [AJAN KİTİ]
 // işaretçisi oyuncunun GERÇEK kitini user-message'da tekrarlar; kit kaynağı TEK
 // (bu sözlük), liste burada KOPYALANMAZ.
-import { buildAgentAbilityHint, AGENT_ABILITIES } from "@/lib/agent-abilities";
+import { buildAgentAbilityHint, AGENT_ABILITIES, kitTermsForLang } from "@/lib/agent-abilities";
 // stripHpClaims: B47 (2026-07-31) — patternContext GİRİŞ zinciri de çıkış
 // zinciriyle aynı sırayı uygular (stripNumericHp → stripHpClaims).
 import { stripNumericHp, stripHpClaims } from "@/lib/coach-text";
@@ -1106,7 +1106,7 @@ export function buildVisionUserMessage(opts: {
   const DUELIST_SLUGS = new Set(["jett", "raze", "phoenix", "reyna", "yoru", "neon", "iso", "waylay"]);
   const kitPressureDirective = kitHit
     ? (reqLang === "en"
-        ? `\n[AGENT KIT — COACHING REQUIREMENT] The player's agent is ${kitHit[0]}; their kit (plain terms): ${kitHit[1].join(", ")}. nextRoundSuggestion MUST include at least ONE concrete use of an ability from THIS kit — plain name + purpose (open the entry / cut an area / get info / cover the fallback).${DUELIST_SLUGS.has(agentSlugOf(kitHit[0])) ? ` This agent is a DUELIST: tie the entry to their own kit — concrete entry patterns like "dash in", "satchel yourself onto site", "flash and enter".` : ""} Never recommend an ability that is not in this kit.`
+        ? `\n[AGENT KIT — COACHING REQUIREMENT] The player's agent is ${kitHit[0]}; their kit (plain terms): ${kitTermsForLang(kitHit[1], "en").join(", ")}. nextRoundSuggestion MUST include at least ONE concrete use of an ability from THIS kit — plain name + purpose (open the entry / cut an area / get info / cover the fallback).${DUELIST_SLUGS.has(agentSlugOf(kitHit[0])) ? ` This agent is a DUELIST: tie the entry to their own kit — concrete entry patterns like "dash in", "satchel yourself onto site", "flash and enter".` : ""} Never recommend an ability that is not in this kit.`
         : `\n[AJAN KİTİ — KOÇLUK ZORUNLULUĞU] Oyuncunun ajanı ${kitHit[0]}; kiti (sade terimler): ${kitHit[1].join(", ")}. nextRoundSuggestion bu kitten EN AZ BİR somut yetenek kullanımı içersin — sade adıyla ve amacıyla (giriş açma / alan kesme / bilgi alma / geri çekilişi kapatma).${DUELIST_SLUGS.has(agentSlugOf(kitHit[0])) ? ` Bu ajan bir DUELIST: girişi KENDİ yeteneğine bağla — "dash'le atılarak gir", "patlayıcıyla sekip siteye düş", "flash'la açıp gir" sınıfı somut entry önerisi ver.` : ""} Bu kitte OLMAYAN yeteneği önerme.`)
     : "";
 

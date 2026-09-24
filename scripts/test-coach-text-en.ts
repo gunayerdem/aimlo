@@ -18,6 +18,9 @@ import { realityCheck } from "../lib/reality-checker";
 import { buildVisionContext, visionPostprocessOpts, type VisionPromptBody } from "../lib/vision-prompt-builder";
 import { finalizeVisionFeedback, toRoundMemory } from "../lib/vision-postprocess";
 import { EN_VISION_SCENARIOS } from "../evals/en-corpus";
+import { buildAgentAbilityHint, AGENT_ABILITIES } from "../lib/agent-abilities";
+import { detectEnLeak } from "../evals/en-leak-detector";
+import { SCENARIOS as VISION_SCENARIOS, buildEvalRequest } from "./eval-vision";
 const { cleanCoachText } = CT;
 
 const en = (s: string) => cleanCoachText(s, "en");
@@ -196,6 +199,53 @@ console.log("\n[8] FB06 · F51 — öneri alanında yalnız iddia öbeği silini
   // Kapsam kilidi: DA (kind="death") davranışı değişmez.
   const d = realityCheck(nr, mem, fg, "death", "en", b.map as string).text;
   t("E22 kind='death' → eski yan-cümle silmesi (bayt-aynı davranış)", d === "Keep anchoring A this round.", `→ "${d}"`);
+}
+
+console.log("\n[9] FB08 · F40 — EN kit terimleri: prompt İngilizce sade terim verir, sızan TR kit terimi EN çıktıda çevrilir");
+{
+  // (a) cleanCoachText EN: dar, harf-sınırlı ikame (tekil + EN çoğul -s, büyük harf korunur).
+  const SUB: [string, string][] = [
+    ["Hold behind your kalkan and use the kalkan to absorb the first shot.", "Hold behind your shield and use the shield to absorb the first shot."], // cyclew3-cand2-en E10
+    ["Place a tel on the flank path before you rotate.", "Place a tripwire on the flank path before you rotate."],                     // cyclew3-cand1-en E2
+    ["Killjoy's turret/tels cover B Main.", "Killjoy's turret/tripwires cover B Main."],
+    ["Cypher kameras watch A Main; break the kamera first.", "Cypher cameras watch A Main; break the camera first."],
+    ["Tel on the flank means someone is watching.", "Tripwire on the flank means someone is watching."],
+    ["Use your duvar to cut the long line and hold the tuzak angle.", "Use your wall to cut the long line and hold the trap angle."],
+    ["Open your shield (kalkan) just before the re-peek.", "Open your shield just before the re-peek."],   // cyclefb03-cand-syn E10: "shield (shield)" tekrarı yok
+    ["Keep a trap (tel) near the entrance.", "Keep a trap (tripwire) near the entrance."],             // farklı sözcük → açıklama kalır
+  ];
+  for (const [src, want] of SUB) {
+    const o = en(src);
+    t(`EN ikame: "${src.slice(0, 44)}…"`, o === want, `→ "${o}"`);
+  }
+  // İngilizce sözcüklerin içi/benzerleri DOKUNULMAZ (harf sınırı).
+  for (const s of [
+    "Tell your team to hold the telephone line near the hotel window.",
+    "Their Iso used a shield; do not telegraph your peek.",
+    "Hold the wall angle at A Main and wait for the trap to trigger.",
+  ]) t(`EN bayt-aynı: "${s.slice(0, 44)}…"`, en(s) === s, `→ "${en(s)}"`);
+  // TR dalı etkilenmez (ikame yalnız EN).
+  t("TR dalı: 'tel' TR metinde kalır", /\btel\b/.test(cleanCoachText("Cypher B Main'e tel koydu.", "tr")), `→ "${cleanCoachText("Cypher B Main'e tel koydu.", "tr")}"`);
+
+  // (b) Prompt: EN kit satırı İngilizce, TR satırı BAYT-AYNI (HEAD 4f86159 çıktısı).
+  const h = buildAgentAbilityHint("Cypher", "en");
+  t("EN hint'te 'YOUR KIT (Cypher): tel' YOK, 'tripwire' VAR", !h.includes("YOUR KIT (Cypher): tel") && /YOUR KIT \(Cypher\): tripwire, smoke, camera, recon\./.test(h), `→ "${h.slice(0, 80)}"`);
+  let leaky = "";
+  for (const a of Object.keys(AGENT_ABILITIES)) {
+    const r = detectEnLeak(buildAgentAbilityHint(a, "en"));
+    if (!r.clean) leaky += `${a}:${r.hits.map((x) => x.hit).join("/")} `;
+  }
+  t("her ajanın EN hint'i (kit + 'does NOT have') TR sızıntısız", leaky === "", leaky);
+  const TR_CYPHER = "\nSENİN KİTİN (Cypher): tel, smoke, kamera, recon. Cypher'te ŞU YETENEKLER YOK: flash, molly, heal, bot, duvar, dash, stun, slow, teleport, satchel, drone, turret, tuzak — bunları oyuncuya KENDİ aksiyonu olarak (\"sen smoke at\", \"flash'la aç\", \"duvar kur\") ASLA önerme; oyuncuya SADECE kit listesindeki yetenekleri öner. Olmayan bir yetenek taktiksel olarak gerekiyorsa SADECE TAKIM utility'si olarak çerçevele (\"takım smoke'u bekle\", \"arkadaşının flash'ıyla gir\") — asla \"sen\" diye. (Düşmanın yeteneğini olgu olarak adlandırmak serbest.)";
+  t("TR hint BAYT-AYNI (Cypher)", buildAgentAbilityHint("Cypher", "tr") === TR_CYPHER);
+  // [AGENT KIT] direktifi (kullanıcı mesajı) — prod kurucusu, korpus senaryosu.
+  const e2 = VISION_SCENARIOS.find((s) => s.id === "E2-bind-cypher-def-op-angle");
+  const s1 = VISION_SCENARIOS.find((s) => s.id === "S1-ascent-cypher-def-strong");
+  if (!e2 || !s1) throw new Error("E2/S1 senaryosu yok");
+  const upEn = buildEvalRequest(e2).userPrompt;
+  const upTr = buildEvalRequest(s1).userPrompt;
+  t("EN [AGENT KIT] 'their kit (plain terms): tripwire, smoke, camera, recon.'", upEn.includes("their kit (plain terms): tripwire, smoke, camera, recon."), upEn.match(/their kit[^.]*\./)?.[0] ?? "(yok)");
+  t("TR [AJAN KİTİ] 'kiti (sade terimler): tel, smoke, kamera, recon.' (bayt-aynı)", upTr.includes("kiti (sade terimler): tel, smoke, kamera, recon."), upTr.match(/kiti \(sade[^.]*\./)?.[0] ?? "(yok)");
 }
 
 console.log(`\n${fail === 0 ? "TÜM TESTLER GEÇTİ ✓" : `${fail} TEST BAŞARISIZ ✗`}`);

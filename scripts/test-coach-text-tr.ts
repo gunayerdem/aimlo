@@ -225,9 +225,12 @@ console.log("\n[15] TR-KALAN-05 — veri-etiketi kesme eki Türkçeleşir (\"kat
   t("killerInfo'da → \"bilgisi'\" yok", !/bilgisi['’]/.test(a) && /Raze var/.test(a), `→ "${a}"`);
   t("enemyRoster'da → 'Rakip kadroda Cypher var.'", b === "Rakip kadroda Cypher var.", `→ "${b}"`);
   t("enemyComp'taki → 'Rakip kadrodaki Jett hızlı girer.'", c === "Rakip kadrodaki Jett hızlı girer.", `→ "${c}"`);
-  t("enemyComp'u → \"kadro'\" yok", !/kadro['’]/.test(d), `→ "${d}"`);
+  // FB08 · F94: eski iki beklenti BOZUK Türkçeyi kilitliyordu — :228 yalnız kesme yokluğuna
+  // bakıp "Rakip kadroyu agresif"i, :230 tam eşitlikle "Ekonomiyi düşük."ü geçiriyordu. Sıfat
+  // yüklemi önündeki çıplak -I iyeliktir (bilinçli beklenti güncellemesi).
+  t("enemyComp'u agresif → tam 'Rakip kadrosu agresif' (iyelik)", d === "Rakip kadrosu agresif", `→ "${d}"`);
   t("deathLocation'da → 'Ölüm yerinde öldün.'", e === "Ölüm yerinde öldün.", `→ "${e}"`);
-  t("economyType'ı → kesmesiz ('Ekonomiyi düşük.')", f === "Ekonomiyi düşük.", `→ "${f}"`);
+  t("economyType'ı düşük → 'Ekonomisi düşük.' (iyelik)", f === "Ekonomisi düşük.", `→ "${f}"`);
   // B01 inceleme: eski assertion yalnız kesme YOKLUĞUNA bakıyordu ve bozuk
   // "Ölüm yönüsındaki açı." çıktısını GEÇER sayıyordu (test bozuk Türkçeyi kilitliyordu).
   // Artık TAM beklenen çıktı: iyelik önekli ve çoğul ekler Türkçeleşir.
@@ -459,6 +462,93 @@ console.log("\n[F43] FB07 — hedge'li düşman tahmini kesinleştirilmez; 2. ş
     "Cypher olarak kameranı B Main'e erken koydun. Hookah'ta öldün.",
     "Omen teleport noktasını B Main'e koydu. Hookah'ta öldün.",
   ]) t(`B35 NEG bayt-aynı: "${s.slice(0, 40)}…"`, rc(s) === s, `→ "${rc(s)}"`);
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// FB08 PAKETİ (2026-09-24) — TR dil düzeltmeleri. Her vaka HEAD 4f86159 probe'unda
+// KIRMIZI görüldü (fix-olmadan-kırılır kanıtı commit mesajında).
+// ════════════════════════════════════════════════════════════════════════════
+console.log("\n[FB08 · F42] 'cezalandır-' nesneye göre — isim nesne 'fırsata çevir-', oyuncu nesnesi 'bedavaya öldür-'");
+{
+  // Korpus ham metinleri (replay): nesne açı/hat/pozisyon/mesafe/hata/sızıntı → "bedavaya öldür-" YOK.
+  const NOUN: [string, string][] = [
+    ["Rakip orta hattı kontrol edip senin sabit açını cezalandırıyor.", "Rakip orta hattı kontrol edip senin sabit açını fırsata çeviriyor."], // cycleb09-cand2-real M1-R18
+    ["Rakip B yönünden gelen baskıyı kontrol ediyor ve senin sabit B Main pozisyonunu cezalandırdı.", "Rakip B yönünden gelen baskıyı kontrol ediyor ve senin sabit B Main pozisyonunu fırsata çevirdi."], // cycleb09-base-real M1-R17
+    ["Miks Classic ile A Hall'da yakın mesafeyi cezalandırdı, tabanca kafa isabetiyle tek atış etkili olur.", "Miks Classic ile A Hall'da yakın mesafeyi fırsata çevirdi, tabanca kafa isabetiyle tek atış etkili olur."], // cycleb09-base-trpc r1-c
+    ["Rakip seni aynı şekilde karşılıyor ve aynı hatayı cezalandırıyor.", "Rakip seni aynı şekilde karşılıyor ve aynı hatayı fırsata çeviriyor."], // cyclereal-r3c M1-R9
+    ["Rakipler pozisyon tekrarlarını ezberlemiş ve bilgi sızıntısını cezalandırıyor.", "Rakipler pozisyon tekrarlarını ezberlemiş ve bilgi sızıntısını fırsata çeviriyor."], // cyclereal-n14 M1-R19
+    ["Raze site içindeki tek açıyı cezalandırırlar.", "Raze site içindeki tek açıyı fırsata çevirirler."],   // -ır + lar (cycleb09-base-trpc r4-a)
+    ["Jett Operator'la uzun hattı tek atışla cezalandırıyor.", "Jett Operator'la uzun hattı tek atışla fırsata çeviriyor."], // 1-3 sözcük penceresi (cycler5syn S30)
+    ["Sabit pozisyonunu cezalandırdı.", "Sabit pozisyonunu fırsata çevirdi."],
+    ["Raze sağ taraftan agresif Vandal ile geniş açıları zorluyor, solo peek'leri cezalandırıyor.", "Raze sağ taraftan agresif Vandal ile geniş açıları zorluyor, solo peek'leri fırsata çeviriyor."], // cyclevariety1 S12
+    ["Jett hızlı peek ve dash ile girişleri cezalandırır.", "Jett hızlı peek ve dash ile girişleri fırsata çevirir."], // cyclew3-base2-trpc phoenix-c
+  ];
+  for (const [src, want] of NOUN) {
+    const o = tr(src);
+    t(`isim nesne: "${src.slice(0, 48)}…"`, o === want && !/bedavaya öl/.test(o), `→ "${o}"`);
+  }
+  // Oyuncu nesnesi (seni/-(y)AnI/-(y)AnlArI/hedefleri) ESKİ davranış — "bedavaya öldür-" kalır.
+  const PLAYER: [string, string][] = [
+    ["Jett seni oradan cezalandırdı.", "Jett seni oradan bedavaya öldürdü."],
+    ["Raze A Ramps'in dar açısına yaklaşanları Sheriff ile cezalandırdı.", "Raze A Ramps'in dar açısına yaklaşanları Sheriff ile bedavaya öldürdü."], // cycle3c S4
+    ["Neon Phantom ile açık hedefleri cezalandırdı.", "Neon Phantom ile açık hedefleri bedavaya öldürdü."], // cycle5 S8
+    ["Rakipler açıyı önceden tutanı cezalandırıyorlar.", "Rakipler açıyı önceden tutanı bedavaya öldürüyorlar."], // cyclew3-cand1-trpc r3-b
+    ["Reyna tek tek girenleri cezalandırdı.", "Reyna tek tek girenleri bedavaya öldürdü."],
+    ["Jett seni açıyı tutarken cezalandırdı.", "Jett seni açıyı tutarken bedavaya öldürdü."],   // seni öncelikli
+    ["Karşı savunma açısı seni cezalandırıyor.", "Karşı savunma açısı seni bedavaya öldürüyor."], // "açısı" yalın özne
+    ["Tek başına beklemek seni cezalandırır.", "Tek başına beklemek seni bedavaya öldürür."],
+    ["Bu açı cezalandırır.", "Bu açı bedavaya öldürür."],   // yalın "açı" liste dışı → eski kural
+  ];
+  for (const [src, want] of PLAYER) {
+    const o = tr(src);
+    t(`oyuncu/diğer (eski kural): "${src.slice(0, 44)}…"`, o === want, `→ "${o}"`);
+  }
+}
+
+console.log("\n[FB08 · F82] 'seni … ödedi/ödecek' → 'öldürdü/öldürecek' (ünlü uyumu; 'öldürdi'/'öldürcek' YOK)");
+{
+  const CASES: [string, string][] = [
+    ["Jett seni ödedi.", "Jett seni öldürdü."],
+    ["Bu açı seni yine ödecek.", "Bu açı seni yine öldürecek."],
+    ["Jett katil; tek kontakta seni ödedi.", "Jett katil; tek kontakta seni öldürdü."],   // cycleb09-cand2-trpc phoenix-c
+    ["Aynı açı seni tekrardan ödedi — bu kez off-angle al.", "Aynı açı seni tekrardan öldürdü — bu kez off-angle al."], // skye-b
+  ];
+  for (const [src, want] of CASES) {
+    const o = tr(src);
+    t(`"${src}" → "${want}"`, o === want && !/öldürdi|öldürcek/.test(o), `→ "${o}"`);
+  }
+  // Kardeş kurallar değişmedi.
+  t("'seni ödüyor' → 'seni öldürüyor' (bayt-aynı davranış)", tr("Jett seni ödüyor.") === "Jett seni öldürüyor.", `→ "${tr("Jett seni ödüyor.")}"`);
+}
+
+console.log("\n[FB08 · F94] etiket çıplak -I eki: var/yok ve sıfat/3. şahıs yüklem önünde iyelik; emir/2. şahısta belirtme");
+{
+  const POSS: [string, string][] = [
+    ["Takımın economyType'ı düşük.", "Takımın ekonomisi düşük."],
+    ["Takımın economyType'ı yok.", "Takımın ekonomisi yok."],
+    ["Rakip enemyComp'u var.", "Rakip kadrosu var."],
+    ["deathAngle'ı dar.", "Ölüm yönü dar."],
+    ["deathTiming'i erken.", "Ölüm zamanlaması erken."],
+    ["Rakip enemyComp'u agresif oynuyor.", "Rakip kadrosu agresif oynuyor."],
+  ];
+  for (const [src, want] of POSS) {
+    const o = tr(src);
+    t(`iyelik: "${src}" → "${want}"`, o === want, `→ "${o}"`);
+  }
+  // Belirtme KORUNUR: emir, 2. şahıs, özne düşmüş geçişli 3. şahıs, alt-bağlaç.
+  const ACC: [string, string][] = [
+    ["enemyComp'u oku.", "Rakip kadroyu oku."],
+    ["economyType'ı kontrol et.", "Ekonomiyi kontrol et."],
+    ["Rakip enemyComp'u oku ve B'ye git.", "Rakip kadroyu oku ve B'ye git."],
+    ["enemyComp'u okudu.", "Rakip kadroyu okudu."],
+    ["enemyComp'u okudun.", "Rakip kadroyu okudun."],
+    ["killerInfo'yu oku.", "Katil bilgisini oku."],
+    ["ultReady'yi kullan.", "Ult'u kullan."],
+  ];
+  for (const [src, want] of ACC) {
+    const o = tr(src);
+    t(`belirtme: "${src}" → "${want}"`, o === want, `→ "${o}"`);
+  }
 }
 
 console.log(`

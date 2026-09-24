@@ -2334,6 +2334,23 @@ export function guardUnprovenFacts(
   }
 
   if (factGround.hasRoute !== true) {
+    // FB08 · F86 (2026-09-24): EN rota-kökeni silmesinin İKİ DAR muafiyeti. KANIT (rapor replay,
+    // report-b09-cand-en ER2 summary): "…Losses came from Hookah (R4) and Showers (R14); …" →
+    // "…Losses (R4) and Showers (R14); …" — fiil+edat+callout öbeği özneye bakmadan siliniyor,
+    // nedensellik deyimi ("losses/deaths came from X") yüklemsiz kalıyordu ("Most of your deaths
+    // came from Hookah." → "Most of your deaths."). Muafiyetler:
+    //  (1) NEDENSELLİK ÖZNESİ: eşleşmenin hemen önü soyut sayım ismiyle bitiyorsa (losses/deaths/
+    //      kills/rounds/mistakes/damage/errors/problems/kill/death) rota iddiası DEĞİL → dokunulmaz.
+    //  (2) ÖLÇÜLMÜŞ KONUM: callout bu round'un ölçülmüş konumu (measuredLocations) ya da
+    //      factGround.deathLocation'da (rapor: maçın tüm round konumları) ise silinmez — ölüm-yeri
+    //      guard'ının norm+Set kalıbı (yukarıda). Oyuncu rota iddiası ("You pushed through Hookah
+    //      alone") ölçülmemiş konumda hasRoute=false iken süzülmeye DEVAM eder.
+    const normR = (s: string) => s.trim().toLowerCase().replace(/\s+/g, " ");
+    const fgLocs = factGround.deathLocation;
+    const measuredRoute = new Set(
+      [...(factGround.measuredLocations ?? []), ...(Array.isArray(fgLocs) ? fgLocs : fgLocs ? [fgLocs] : [])].map(normR),
+    );
+    const CAUSAL_SUBJ_EN = /(?<![a-z])(?:losses|deaths|kills|rounds|mistakes|damage|errors|problems|kill|death)\s*$/i;
     // Origin claims anchored to a known callout: "<callout>'dan çıkıp/gelip..."
     for (const pos of POSITION_NAMES) {
       const re = new RegExp(
@@ -2345,11 +2362,16 @@ export function guardUnprovenFacts(
       // rota-kökeni iddiası EN çıktıda süzülmüyordu (EN few-shot SCENARIO A bu dili
       // bizzat modelliyor). Yalnız GEÇMİŞ formlar — emir/koşul öğüdü ("push through
       // mid", "rotate from B") listede DEĞİL (TR ROUTE_ORIGIN_VERBS ile aynı ilke).
+      // FB08 · F86: silmede FİİL KALIR, yalnız rota kökeni (edat + callout) düşer — eski tam
+      // silme cümleyi yüklemsiz bırakıyordu ("You pushed through Hookah alone" → "You alone";
+      // "They came from B Main and caught you" → "They and caught you"). TR ROUTE_ORIGIN ile
+      // aynı ilke: ölçülmemiş olan KONUMdur, eylem değil.
       const reEn = new RegExp(
-        `\\b(?:came|pushed|rotated|wrapped|flanked)\\s+(?:in\\s+)?(?:from|through|behind|out\\s+of|via)\\s+${escapeRe(pos)}(?![a-z0-9-])`,
+        `\\b((?:came|pushed|rotated|wrapped|flanked)(?:\\s+in)?)\\s+(?:from|through|behind|out\\s+of|via)\\s+(${escapeRe(pos)})(?![a-z0-9-])`,
         "gi",
       );
-      result = result.replace(reEn, "");
+      result = result.replace(reEn, (m: string, verb: string, name: string, off: number, full: string) =>
+        (CAUSAL_SUBJ_EN.test(full.slice(Math.max(0, off - 25), off)) || measuredRoute.has(normR(name)) ? m : verb));
     }
     const beforeGeneric = result;
     for (const re of ROUTE_GENERIC_PATTERNS) result = result.replace(re, "");

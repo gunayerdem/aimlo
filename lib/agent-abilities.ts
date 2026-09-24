@@ -52,6 +52,31 @@ const ALL_ABILITY_TERMS = [
   "dash", "stun", "slow", "teleport", "satchel", "drone", "turret", "tuzak",
 ] as const;
 
+// ── EN ÇIKTI HARİTASI (FB08 · F40, 2026-09-24) ──────────────────────────────────
+// KANIT: tablo tek dilli (TR) ve EN prompt onu çevirmeden gömüyordu → "YOUR KIT (Iso): duvar,
+// kalkan, ult" (buildAgentAbilityHint EN) + [AGENT KIT] "their kit (plain terms): tel, smoke,
+// kamera, recon … plain name" (vision-prompt-builder kitPressureDirective EN). Model TR adı EN
+// metne kopyalıyordu (korpus: cyclew3-cand2-en E10 "hold behind your kalkan", cyclew3-cand1-en
+// E2 "place a tel on the flank path"). Harita YALNIZ çıktı üretilirken uygulanır:
+// AGENT_ABILITIES / ALL_ABILITY_TERMS TR KALIR — enforceAgentKit'in TR bağlaç/emir desenleri bu
+// TR terimlere bağlı; TR yolu bayt-aynı. EN karşılıklar ai-policy SILVER_AUDIENCE_RULE_EN'in
+// sade terimleriyle aynı (wall, trap/tripwire, camera) + ability-plain-map EN sütunu (shield,
+// interceptor). Listede olmayan terim (smoke, flash, ult …) zaten İngilizce → aynen.
+const KIT_TERM_EN: Record<string, string> = {
+  tel: "tripwire",
+  kamera: "camera",
+  duvar: "wall",
+  kalkan: "shield",
+  tuzak: "trap",
+  "diriliş": "revive",
+  "önleyici": "interceptor",
+};
+
+/** Kit terimlerini istek diline çevirir (TR → aynen; EN → KIT_TERM_EN). */
+export function kitTermsForLang(terms: readonly string[], lang: "tr" | "en"): string[] {
+  return lang === "en" ? terms.map((t) => KIT_TERM_EN[t] ?? t) : [...terms];
+}
+
 /** Slug-tolerant lookup (OCR "Killjoy"/"KAY/O"/"kayo" hepsi çözülür). */
 function abilitiesFor(agent: string | undefined | null): string[] | null {
   if (!agent) return null;
@@ -92,7 +117,10 @@ export function buildAgentAbilityHint(agent: string | undefined | null, lang: "t
   const canon = Object.keys(AGENT_ABILITIES).find((k) => slugOf(k) === slugOf(agent)) ?? "";
   const name = safePromptName(agent, canon);
   if (lang === "en") {
-    return `\nYOUR KIT (${name}): ${list}. ${name} does NOT have: ${noList} — NEVER tell the player to throw/use any of these as their OWN action; recommend ONLY kit-list abilities for the player. If a missing ability matters tactically, frame it strictly as TEAM utility ("wait for a teammate's flash/smoke"), never "you flash/smoke". Enemy abilities may still be named factually.`;
+    // FB08 · F40: EN listeler İngilizce sade terimle (kit + "does NOT have"); TR dalı aşağıda aynen.
+    const listEn = kitTermsForLang(abilities, "en").join(", ");
+    const noListEn = kitTermsForLang(forbidden, "en").join(", ");
+    return `\nYOUR KIT (${name}): ${listEn}. ${name} does NOT have: ${noListEn} — NEVER tell the player to throw/use any of these as their OWN action; recommend ONLY kit-list abilities for the player. If a missing ability matters tactically, frame it strictly as TEAM utility ("wait for a teammate's flash/smoke"), never "you flash/smoke". Enemy abilities may still be named factually.`;
   }
   return `\nSENİN KİTİN (${name}): ${list}. ${name}'te ŞU YETENEKLER YOK: ${noList} — bunları oyuncuya KENDİ aksiyonu olarak ("sen smoke at", "flash'la aç", "duvar kur") ASLA önerme; oyuncuya SADECE kit listesindeki yetenekleri öner. Olmayan bir yetenek taktiksel olarak gerekiyorsa SADECE TAKIM utility'si olarak çerçevele ("takım smoke'u bekle", "arkadaşının flash'ıyla gir") — asla "sen" diye. (Düşmanın yeteneğini olgu olarak adlandırmak serbest.)`;
 }
