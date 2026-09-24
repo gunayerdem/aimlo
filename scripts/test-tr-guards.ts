@@ -698,6 +698,11 @@ console.log("\n════ B02 İNCELEME · GEÇMİŞ KONUM ÇAPASI (ölüm-yer
     ];
     const c = "Bu roundlarda B Site/B Main'de iki kez öldün, açıyı değiştir.";
     same("101 çoğul/nicelik çapası ('roundlarda', 'iki kez') bayt-aynı (cyclereal-base M1-R9)", rc(c, rh8, "suggestion"), c);
+    // FB06 · F57: 101 eskiden yalnız sayı YAZIYLA olduğu için (doğrulayıcı onu hiç görmüyordu)
+    // geçiyordu. Rakamlı ikizi de bayt-aynı olmalı: liste (B Site/B Main) ölüm TOPLAMI 3 ≥ 2.
+    // HEAD: "…B Site/B Main'de öldün…" (sayım liste yerine yalnız 'b main' ile doğrulanıp siliniyordu).
+    const c101b = "Bu roundlarda B Site/B Main'de 2 kez öldün, açıyı değiştir.";
+    same("101b rakamlı ikiz ('2 kez') bayt-aynı (liste toplamı 3)", rc(c101b, rh8, "suggestion"), c101b);
     // Sayım memory katmanında silinirken GEÇMİŞ ÇAPASI da korunur (r4c M1-R11).
     // FB05 · F14 BEKLENTİ DÜZELTİLDİ: eski beklenti /B Main\/B Lobby'de öldün/ yalnız öksüz
     // "B Main/" olmamasını ölçüyordu ve ÇAPASIZ "B Main/B Lobby'de öldün" çıktısını (geçmiş
@@ -705,13 +710,19 @@ console.log("\n════ B02 İNCELEME · GEÇMİŞ KONUM ÇAPASI (ölüm-yer
     // silinmeden ÖNCE yakalanan anchoredBefore sayesinde korunuyordu. Artık sayım silmesi
     // çapayı KENDİSİ yazar; konum bir listenin parçası olduğu için tek round (R10) yanlış
     // olurdu → "daha önce" (R5 b main + R10 b lobby, ikisi de ölçülmüş).
+    // FB06 · F57 BEKLENTİ DÜZELTİLDİ: sayım DOĞRU (B Main 1 + B Lobby 1 = 2). Eski beklenti
+    // doğru sayımın silinmesini kilitliyordu — claimPosition listeyi son öğeye ('lobby') indirip
+    // 1 ölümle "doğruluyordu". Artık liste toplamıyla doğrulanır → bayt-aynı.
     const rh10: Mem[] = [
       { round_index: 5, died: true, death_position: "b main", position_confidence: "high" },
       { round_index: 10, died: true, death_position: "b lobby", position_confidence: "high" },
     ];
-    const o = rc("Bu round B'yi tek başına tutma — B Main/B Lobby'de 2 kez öldün, savunurken Heaven'dan bak.", rh10, "suggestion");
-    eq("102 sayım silinirken geçmiş çapası korunur ('daha önce'; öksüz 'B Main/' yok)", o,
-      "Bu round B'yi tek başına tutma — daha önce B Main/B Lobby'de öldün, savunurken Heaven'dan bak.");
+    const c102 = "Bu round B'yi tek başına tutma — B Main/B Lobby'de 2 kez öldün, savunurken Heaven'dan bak.";
+    same("102 doğru liste sayımı ('B Main/B Lobby'de 2 kez', gerçek 2) bayt-aynı", rc(c102, rh10, "suggestion"), c102);
+    // Liste sayımı yine de AŞILIRSA çapa yazımı (FB05 · F14) aynen çalışır: 3 > 2 → 2'ye iner.
+    eq("102b liste sayımı aşılırsa ('3 kez', gerçek 2) → '2 kez'",
+      rc("Bu round B'yi tek başına tutma — B Main/B Lobby'de 3 kez öldün, savunurken Heaven'dan bak.", rh10, "suggestion"),
+      "Bu round B'yi tek başına tutma — B Main/B Lobby'de 2 kez öldün, savunurken Heaven'dan bak.");
   }
 }
 
@@ -950,6 +961,60 @@ console.log("\n════ FB05 · F83 · GEÇMİŞ KONUM MUAFİYETİ ROUND'A B
   // (f) konum ölçülmüş yol bu değişiklikten etkilenmez.
   const c117f = "R3'te B site'ta öldün.";
   same("117f hasDeathLocation:true yolu bayt-aynı", rc(c117f, "tr", { hasDeathLocation: true, deathLocation: "a site" } as never), c117f);
+}
+
+console.log("\n════ FB06 · F57 · YAZIYLA SAYI + 'kere' + KONUM LİSTESİ SAYIMI ════");
+{
+  // HEAD: COUNT_PATTERNS yalnız rakam + kez/defa → aşağıdaki pozitiflerin HEPSİ bayt-aynı geçiyordu
+  // (claimedCount=null). Hafıza: R2'de a site (B Main'de ölüm YOK); bu round ölçülen a site.
+  const fgA = { hasDeathLocation: true, deathLocation: "a site" } as never;
+  const m6: Mem[] = Array.from({ length: 6 }, (_, i) => ({
+    round_index: i + 1, died: i === 1, death_position: i === 1 ? "a site" : null, position_confidence: i === 1 ? "high" : undefined,
+  }));
+  const rc = (s: string, m: Mem[], kind: "death" | "suggestion" = "death", fg: never = fgA) =>
+    realityCheck(s, m as never, fg, kind, "tr").text;
+  eq("127 'B Main'de üç kez öldün' (B Main'de 0 ölüm) → sayım + bağlı konum düşer (rakamlı test 120 ile aynı)",
+    rc("B Main'de üç kez öldün, açıyı değiştir.", m6), "Öldün, açıyı değiştir.");
+  eq("127b 'Son üç kez B Main'de öldün' → 'son' ile birlikte düşer",
+    rc("Son üç kez B Main'de öldün, açıyı değiştir.", m6), "Öldün, açıyı değiştir.");
+  eq("127c rakam + 'kere' ('3 kere') → düşer", rc("B Main'de 3 kere öldün, açıyı değiştir.", m6), "Öldün, açıyı değiştir.");
+  eq("127d cümle başı 'İki kez' (toLowerCase U+0307 tuzağı) → düşer", rc("İki kez B Main'de öldün.", m6), "Öldün.");
+  // Level-2: sayı yalnız İNER, yazıyla biçim de rakamla yazılır (prompt idiomu "N kez").
+  const m6c: Mem[] = m6.map((r) => (r.round_index === 4 || r.round_index === 5
+    ? { ...r, died: true, death_position: "b main", position_confidence: "high" } : r));
+  eq("127e 'B Main'de dört kez öldün' (gerçek 2) → '2 kez'",
+    rc("B Main'de dört kez öldün, açıyı değiştir.", m6c), "B Main'de 2 kez öldün, açıyı değiştir.");
+  same("127f DOĞRU yazıyla sayım ('B Main'de iki kez', gerçek 2) bayt-aynı",
+    rc("B Main'de iki kez öldün, açıyı değiştir.", m6c), "B Main'de iki kez öldün, açıyı değiştir.");
+  // ÖĞÜT KALKANI (negatif): yazıyla sayı ölüm yan-cümlesi dışında sayım DEĞİL (korpus biçimleri).
+  for (const [ad, s] of [
+    ["128a 'bir kez daha dene'", "B Main'de öldün; bir kez daha dene ama bu sefer smoke'la gir."],
+    ["128b korpus S5 'A Main'i üç kez aynı açıdan verdin'", "Bu round A Main'i üç kez aynı açıdan verdin; bir round orayı tamamen boş bırak."],
+    ["128c korpus r4c 'bir kere pozisyonunu değiştir'", "B tarafı için bir kere pozisyonunu değiştir: B Lobby'yi tek başına tutma."],
+    ["128d 'bir kerede' (sağ sınır)", "Bir kerede iki açıya bakma, B Main'de öldün."],
+  ] as [string, string][]) same(`${ad} bayt-aynı`, rc(s, m6, "suggestion"), s);
+  // Liste YALNIZ doğrudan koordinasyonla: öğüt konumu ('Market'ten bakarken') listeye girmez →
+  // sayım Market ölümleriyle ŞİŞİRİLMEZ (SPEC SAPMASI, :480-487 notu). Market 2 + B Main 1 = 3
+  // toplamı "3 kez"i doğrulamamalı.
+  const rhM: Mem[] = [
+    { round_index: 1, died: true, death_position: "market", position_confidence: "high" },
+    { round_index: 2, died: true, death_position: "market", position_confidence: "high" },
+    { round_index: 5, died: true, death_position: "b main", position_confidence: "high" },
+  ];
+  const o129 = rc("Market'ten bakarken B Main'de 3 kez öldün, açıyı değiştir.", rhM);
+  t("129 öğüt konumu liste sayılmaz ('3 kez' Market ölümleriyle doğrulanmaz)", !/3 kez/.test(o129), `→ "${o129}"`);
+  // Gerçek korpus regresyon vakası (cyclereal-r3d M1-R5 NR, real-rounds-23 hafızası: R1 b site,
+  // R3 a tree; bu round ölçülen b main). HEAD: bayt-aynı ("üç kez" uydurma sayım kullanıcıya gidiyordu).
+  const rh5: Mem[] = [
+    { round_index: 1, died: true, death_position: "b site", position_confidence: "high" },
+    { round_index: 2, died: true, death_position: null },
+    { round_index: 3, died: true, death_position: "a tree", position_confidence: "high" },
+    { round_index: 4, died: true, death_position: null },
+  ];
+  const nr5 = "B Main'de üç kez öldüğün kayıt var — bir sonraki round B'yi tek başına tutma, Market/CT'ye birini bırakıp sen Heaven/closet yerine off-angle alarak crossfire bekle.";
+  const o130 = realityCheck(nr5, rh5 as never, { hasDeathLocation: true, deathLocation: "b main" } as never, "suggestion", "tr", "ascent").text;
+  t("130 cyclereal-r3d M1-R5 NR: uydurma 'üç kez' düşer, ölçülen B Main + öğüt kalır",
+    !/üç kez/.test(o130) && /^B Main'de öldüğün/.test(o130) && /bir sonraki round B'yi tek başına tutma/.test(o130), `→ "${o130}"`);
 }
 
 console.log(`\n${fail === 0 ? "TAM YEŞİL" : "KIRMIZI"} — ${n - fail}/${n} geçti${fail ? `, ${fail} HATA` : ""}`);

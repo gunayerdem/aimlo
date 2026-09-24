@@ -40,6 +40,11 @@ interface ExtractedClaims {
   // iddiadır (player-memory besliyor olabilir) → bilerek doğrulanmaz. Opsiyonel:
   // elle kurulan eski ExtractedClaims nesneleri tip-uyumlu kalır (undefined = false).
   claimedWindowIsRound?: boolean;
+  // FB06 · F57 (2026-09-24): sayım iddiasına bağlı konum DOĞRUDAN koordineli bir listenin
+  // son öğesiyse ("B Main/B Lobby'de 2 kez") listenin TÜM konumları (≥2 farklı). Sayım bu
+  // konumların ölüm TOPLAMIYLA doğrulanır (claimedPosition = son öğe, konum bulma yolu için
+  // aynen kalır). Opsiyonel: yalnız liste varken set edilir.
+  claimedPositionList?: string[];
 }
 
 interface ValidationResult {
@@ -156,11 +161,54 @@ const EN_OF_LAST_COUNT_RE = /(\d+)\s+(?:out\s+)?of\s+(?:the\s+|your\s+|my\s+)?(?
 /** Sayım iddiasının ÖLÜM iddiası olduğunu gösteren yüklem (TR + EN). */
 const CLAIM_DEATH_MARKER =
   /öl(?!dür)(?:dü|üm|üyor|dün)|vurul|düştü|düşmüş|elendin|died|dies|dying|deaths?\b|killed\s+you|(?:got|were|was|been)\s+killed|shot\s+you|caught\s+you|went\s+down/iu;
+
+// ── TR SAYIM ALTERNASYONU — TEK KAYNAK (FB06 · F57, 2026-09-24) ──────────────────
+// KANIT: COUNT_PATTERNS yalnız rakam + kez/defa tanıyordu → extractClaims("B Main'de üç kez
+// öldün") ve ("3 kere") claimedCount=null, metin bayt-aynı. Korpus cyclereal-r3d M1-R5 NR "B
+// Main'de üç kez öldüğün kayıt var" (hafızada B Main ölümü YOK) kullanıcıya gidiyordu; aynı
+// iddia "3 kez" yazılsa siliniyordu. TR ham çıktıların 94'ünde yazıyla sayı + birim var.
+// ÇÖZÜM: aynı alternasyon çıkarımda (COUNT_PATTERNS) VE TR yeniden yazım desenlerinde
+// (level-2 indirme/silme, level-3 silme, locateCountClaim) kullanılır — yalnız çıkarıma
+// eklenseydi claimedCount dolar ama `${ct}\s*kez` deseni yazıyı görmediği için metin değişmezdi.
+// ÖĞÜT KALKANI: yazıyla sayı YALNIZ ölüm yüklemli YAN-CÜMLEDE sayımdır ("bir kez daha dene",
+// "A Main'i üç kez aynı açıdan verdin" sayım değil). Rakamlı biçimin eski davranışı aynen.
+// "İki": "İ".toLowerCase() = "i\u0307" (i + U+0307) ve /i/iu "İ"yi tutmaz → [iİ]\u0307?.
+const TR_COUNT_WORD_VALUE: Readonly<Record<string, number>> = {
+  bir: 1, iki: 2, "üç": 3, "dört": 4, "beş": 5, "altı": 6, yedi: 7, sekiz: 8, dokuz: 9, on: 10,
+};
+const trCountWordSrc = (w: string) => w.replace(/^i/, "[iİ]\\u0307?");
+const TR_COUNT_NUM_ALT = "\\d+|" + Object.keys(TR_COUNT_WORD_VALUE).map(trCountWordSrc).join("|");
+const TR_COUNT_UNIT_ALT = "(?:kez|defa|kere)";
+/** Sayım belirteci → sayı ("3" → 3, "üç"/"Üç" → 3, "i\u0307ki" → 2); tanınmazsa NaN. */
+function trCountValue(tok: string): number {
+  if (/^\d+$/.test(tok)) return parseInt(tok, 10);
+  return TR_COUNT_WORD_VALUE[tok.toLocaleLowerCase("tr-TR").replace(/\u0307/g, "")] ?? NaN;
+}
+/** ct sayısının metindeki biçimleri: rakam + (1-10 ise) sözcük → "(?:3|üç)". */
+function trCountTokenSrc(ct: number): string {
+  const w = Object.keys(TR_COUNT_WORD_VALUE).find((k) => TR_COUNT_WORD_VALUE[k] === ct);
+  return w ? `(?:${ct}|${trCountWordSrc(w)})` : String(ct);
+}
+/** index'in YAN-CÜMLESİNDE ([.!?;:—\n] sınırlı) ölüm yüklemi var mı? (yazıyla sayı kalkanı) */
+function deathClauseAt(text: string, index: number): boolean {
+  let cs = index;
+  while (cs > 0 && !/[.!?;:—\n]/.test(text[cs - 1])) cs--;
+  let ce = index;
+  while (ce < text.length && !/[.!?;:—\n]/.test(text[ce])) ce++;
+  return CLAIM_DEATH_MARKER.test(text.slice(cs, ce));
+}
+/** Eşleşen sayım belirteci yazıyla mı ve ölüm yan-cümlesi DIŞINDA mı? (öyleyse dokunulmaz) */
+function wordCountOutsideDeathClause(tok: string, full: string, offset: number): boolean {
+  return !/^\d/.test(tok) && !deathClauseAt(full, offset);
+}
+/** TR sayım birimi (rakam | bir…on) + kez|defa|kere; 1. grup sayı. Sağda harf yok ("bir kerede"). */
+const TR_COUNT_RE = new RegExp(`(?<![\\p{L}\\p{N}])(${TR_COUNT_NUM_ALT})\\s*${TR_COUNT_UNIT_ALT}(?![\\p{L}])`, "iu");
+
 const COUNT_PATTERNS = [
   EN_OF_LAST_COUNT_RE,
-  // Turkish
-  /(\d+)\s*kez/i,
-  /(\d+)\s*defa/i,
+  // Turkish — FB06 · F57: rakam | bir…on + kez|defa|kere (TR_COUNT_RE; eskiden (\d+)\s*kez ve
+  // (\d+)\s*defa ayrı iki desendi).
+  TR_COUNT_RE,
   /(\d+)'[iu]nde/i,
   /(\d+)'[iu]nda/i,
   // TR-KALAN-15: kaynaştırmalı/ünlü uyumlu iç nicelik ("2'sinde", "6'sında",
@@ -182,7 +230,8 @@ const WINDOW_PATTERNS = [
   /son\s+(\d+)\s*maç/i,
   // "son 3 kez B Main'de öldün" = SON ÜÇ SEFER (sayım iddiası), pencere DEĞİL —
   // pencere sayılınca sayım yalnız son 3 round'da aranıp yanlış doğrulanıyordu.
-  /son\s+(\d+)(?!\d)(?!\s*(?:kez|defa))/i,
+  // FB06 · F57: "kere" de sayım birimi (TR_COUNT_RE ile aynı birim kümesi).
+  /son\s+(\d+)(?!\d)(?!\s*(?:kez|defa|kere))/i,
   // English
   /last\s+(\d+)\s*rounds?/i,
   /last\s+(\d+)\s*matches?/i,
@@ -551,6 +600,41 @@ function claimPositionSpan(lower: string, anchor: number): { name: string; start
   return bound(lower.slice(anchor, afterAll[0].start)) ? afterAll[0] : null;
 }
 
+// ── SAYIMDAN ÖNCEKİ KONUM LİSTESİ (FB06 · F57 (b), 2026-09-24) ──────────────────────
+// KANIT: claimPositionSpan sayımdan ÖNCEKİ bağlı konumların SONUNCUSUNU döndürüyor →
+// "B Main/B Lobby'de 2 kez öldün" (R5 b main + R10 b lobby, gerçek 2) 'lobby' sayılıp 1 ölümle
+// "doğrulanıyor", DOĞRU sayım siliniyordu (test 102 bunu kilitliyordu); "B Site/B Main'de 2 kez"
+// (rh R1 b site, R5 b main, R7 b site) de aynı yoldan siliniyordu. ÇÖZÜM: son öğeden geriye,
+// adların arasında YALNIZ "/", ",", " ve ", " ile " (+ isteğe bağlı site harfi) varken yürünür;
+// liste ≥2 farklı ad ise sayım bu konumların ölüm TOPLAMIYLA doğrulanır (validateClaims).
+// ⚠ SPEC SAPMASI KORUNUR (yukarıdaki not): koordinasyon ŞART — öğüt konumu ("Market'ten
+// bakarken B Main'de 3 kez") liste sayılmaz, sayım yine yalnız B Main'le doğrulanır.
+const POSITION_DIRECT_SEP_RE = /^\s*(?:\/|,|\s(?:ve|ile)\s)\s*(?:[abc]\s+)?$/u;
+/** Konum adının önünde site harfi varsa ("b lobby") onunla birlikte ad. */
+function positionWithSiteLetter(lower: string, name: string, start: number): string {
+  return !/^[abc]\s/.test(name) && /(?<![\p{L}\p{N}])[abc]\s+$/u.test(lower.slice(0, start))
+    ? `${lower.slice(0, start).trimEnd().slice(-1)} ${name}`
+    : name;
+}
+function claimPositionList(lower: string, anchor: number): string[] | null {
+  const last = claimPositionSpan(lower, anchor);
+  if (!last || last.end > anchor) return null;       // yalnız sayımdan ÖNCEKİ bağlı konum
+  const all = [...lower.matchAll(POSITION_SCAN_RE)].map((m) => ({
+    name: m[1], start: m.index ?? 0, end: (m.index ?? 0) + m[0].length,
+  }));
+  const names = [positionWithSiteLetter(lower, last.name, last.start)];
+  let cur = last;
+  for (;;) {
+    const prev = all.filter((a) => a.end <= cur.start).pop();
+    if (!prev) break;
+    // Ara metinde site harfi varsa ("/b ") ayraç deseni onu da tüketir.
+    if (!POSITION_DIRECT_SEP_RE.test(lower.slice(prev.end, cur.start))) break;
+    names.unshift(positionWithSiteLetter(lower, prev.name, prev.start));
+    cur = prev;
+  }
+  return new Set(names).size >= 2 ? [...new Set(names)] : null;
+}
+
 // ── SAYIM SİLMESİ ÇAPAYI KORUR (FB05 · F14 (2), 2026-09-24) ──────────────────────
 // KANIT: rewriteUnsafeClaims'in TR sayım silmesi (actualCount<2 → "(son )N kez" = "")
 // doğrulanamayan sayıyla birlikte GEÇMİŞ ÇAPASINI da siliyordu → geçmiş iddia çapasız ölüm
@@ -658,13 +742,18 @@ export function extractClaims(text: string): ExtractedClaims {
   let claimedCount: number | null = null;
   let anchor: number | null = null;
   outer: for (const p of COUNT_PATTERNS) {
-    for (const m of lower.matchAll(new RegExp(p.source, "gi"))) {
+    // FB06 · F57: TR_COUNT_RE \p{L} kullanır → "u" bayrağı korunur (eski desenler bayraksızdı).
+    for (const m of lower.matchAll(new RegExp(p.source, p.flags.includes("u") ? "giu" : "gi"))) {
       const at = m.index ?? 0;
       const deathSentence = CLAIM_DEATH_MARKER.test(trSentenceAt(lower, at));
       // "son N kez" yalnız ÖLÜM cümlesinde sayımdır; pencere birimli sayı hiç değil.
       if (WINDOW_NUMBER_BEFORE.test(lower.slice(0, at)) && (WINDOW_UNIT_AFTER.test(lower.slice(at)) || !deathSentence)) continue;
       if (p === EN_OF_LAST_COUNT_RE && !deathSentence) continue;
-      claimedCount = parseInt(m[1]);
+      // FB06 · F57: yazıyla sayı ("üç kez") yalnız ölüm yan-cümlesinde sayımdır (öğüt kalkanı).
+      if (p === TR_COUNT_RE && wordCountOutsideDeathClause(m[1], lower, at)) continue;
+      const value = p === TR_COUNT_RE ? trCountValue(m[1]) : parseInt(m[1]);
+      if (!Number.isFinite(value)) continue;
+      claimedCount = value;
       anchor = m.index ?? null;
       break outer;
     }
@@ -702,8 +791,13 @@ export function extractClaims(text: string): ExtractedClaims {
   // Extract position — iddiaya BAĞLI konum (bkz. yukarıdaki (b)).
   const claimAnchor = anchor ?? windowIdx ?? repIdx;
   const claimedPosition = claimPosition(lower, claimAnchor);
+  // FB06 · F57 (b): yalnız SAYIM iddiasında (anchor) ve doğrudan koordineli listede.
+  const claimedPositionList = anchor !== null && claimedPosition !== null ? claimPositionList(lower, anchor) : null;
 
-  return { claimedCount, claimedWindow, claimedPosition, repetitionClaim, claimedWindowIsRound };
+  return {
+    claimedCount, claimedWindow, claimedPosition, repetitionClaim, claimedWindowIsRound,
+    ...(claimedPositionList ? { claimedPositionList } : {}),
+  };
 }
 
 // ── Memory Validation ──
@@ -731,7 +825,16 @@ export function validateClaims(
   // Count matching position within window
   let actualCount = 0;
   let matchedRounds: number[] = [];
-  if (claims.claimedPosition) {
+  if (claims.claimedPositionList && claims.claimedPositionList.length >= 2) {
+    // FB06 · F57 (b): konum LİSTESİ → listedeki konumların ölüm TOPLAMI (round başına bir kez).
+    const names = claims.claimedPositionList.map((n) => n.toLowerCase());
+    const matched = windowDeaths.filter((r) => {
+      const dp = (r.death_position || "").toLowerCase();
+      return names.some((n) => dp.includes(n));
+    });
+    actualCount = matched.length;
+    matchedRounds = matched.map((r) => r.round_index);
+  } else if (claims.claimedPosition) {
     const posLower = claims.claimedPosition.toLowerCase();
     const matched = windowDeaths.filter(r =>
       (r.death_position || "").toLowerCase().includes(posLower)
@@ -854,25 +957,27 @@ export function rewriteUnsafeClaims(
         // FB05 · F14 (2): kanıt TEK round ise silinen sayımın yerine konuma geçmiş çapası
         // yazılır ("Son 3 kez B Main'de öldün" → "R2'de B Main'de öldün"); liste konumunda
         // "daha önce". Yan-cümle "bu round/şimdi"ye çapalıysa yazılmaz (bkz. locateCountClaim).
+        // FB06 · F57: sayı TEK ortak alternasyonla (rakam | yazıyla) ve kez|defa|kere birimiyle
+        // aranır; yazıyla biçim yalnız ölüm yan-cümlesinde (öğüt "bir kez daha dene" dokunulmaz).
+        const ctSrc = trCountTokenSrc(ct);
         if (validation.actualCount === 1 && claims.claimedPosition) {
           const anchorTr = pastRoundAnchor(validation, "tr");
           const loc = anchorTr
-            ? locateCountClaim(result, new RegExp(`(?<![\\p{L}\\p{N}])(son\\s+)?${ct}\\s*(?:kez|defa)${TR_SUFFIX_GUARD}`, "giu"), claims.claimedPosition)
+            ? locateCountClaim(result, new RegExp(`(?<![\\p{L}\\p{N}])(son\\s+)?${ctSrc}\\s*${TR_COUNT_UNIT_ALT}${TR_SUFFIX_GUARD}`, "giu"), claims.claimedPosition)
             : null;
           if (loc && loc.deathSentence && !loc.currentAnchored && !loc.otherPastAnchor) {
             result = result.slice(0, loc.listStart) + (loc.isList ? "daha önce" : anchorTr) + " " + result.slice(loc.listStart);
           }
         }
-        for (const unit of ["kez", "defa"]) {
-          result = result.replace(
-            new RegExp(`(?<![\\p{L}\\p{N}])(son\\s+)?${ct}\\s*${unit}${TR_SUFFIX_GUARD}`, "giu"),
-            (_m: string, son: string | undefined) => {
-              if (validation.actualCount >= 2) return `${son ?? ""}${validation.actualCount} kez`;
-              removed = true;
-              return "";
-            },
-          );
-        }
+        result = result.replace(
+          new RegExp(`(?<![\\p{L}\\p{N}])(son\\s+)?(${ctSrc})\\s*${TR_COUNT_UNIT_ALT}${TR_SUFFIX_GUARD}`, "giu"),
+          (m: string, son: string | undefined, tok: string, off: number, full: string) => {
+            if (wordCountOutsideDeathClause(tok, full, off + (son ?? "").length)) return m;
+            if (validation.actualCount >= 2) return `${son ?? ""}${validation.actualCount} kez`;
+            removed = true;
+            return "";
+          },
+        );
         if (removed) result = repairTrSeam(result, lang, before2);
       } else {
         const countPatterns = [
@@ -961,7 +1066,7 @@ export function rewriteUnsafeClaims(
     if (claims.claimedCount !== null && cp && validation.actualCount === 0
       && ![...(protectedLocs ?? [])].some((l) => l.includes(cp) || cp.includes(l))) {
       const unitRe = isTr
-        ? new RegExp(`(?<![\\p{L}\\p{N}])(son\\s+)?${claims.claimedCount}\\s*(?:kez|defa)${TR_SUFFIX_GUARD}`, "giu")
+        ? new RegExp(`(?<![\\p{L}\\p{N}])(son\\s+)?${trCountTokenSrc(claims.claimedCount)}\\s*${TR_COUNT_UNIT_ALT}${TR_SUFFIX_GUARD}`, "giu")
         : new RegExp(`(?<![\\p{L}\\p{N}])()${claims.claimedCount}\\s*times?(?![\\p{L}])`, "giu");
       const loc = locateCountClaim(result, unitRe, cp);
       if (loc && !loc.isList && loc.deathSentence) {
@@ -1034,10 +1139,11 @@ export function rewriteUnsafeClaims(
     // sol rakam sınırı ct=3'ün "13 kez"e yapışmasını engeller.
     if (claims.claimedCount !== null && !ofLast3) {
       const ct = claims.claimedCount;
+      // FB06 · F57: TR sayım TEK ortak alternasyonla (rakam | yazıyla; kez|defa|kere) silinir,
+      // "son üç kez" dahil. Yazıyla biçim ölüm yan-cümlesi dışındaysa (öğüt) DOKUNULMAZ.
       const countPatterns = isTr
         ? [
-            new RegExp(`(?<![\\p{L}\\p{N}])(?:son\\s+)?${ct}\\s*kez${TR_SUFFIX_GUARD}`, "giu"),
-            new RegExp(`(?<![\\p{L}\\p{N}])(?:son\\s+)?${ct}\\s*defa${TR_SUFFIX_GUARD}`, "giu"),
+            new RegExp(`(?<![\\p{L}\\p{N}])(son\\s+)?(${trCountTokenSrc(ct)})\\s*${TR_COUNT_UNIT_ALT}${TR_SUFFIX_GUARD}`, "giu"),
           ]
         : [
             new RegExp(`${ct}\\s*kez`, "gi"),
@@ -1048,7 +1154,12 @@ export function rewriteUnsafeClaims(
             new RegExp(`${ct}\\s*match(es)?\\s*in\\s*a\\s*row`, "gi"),
           ];
       const beforeCnt3 = result;
-      for (const re of countPatterns) result = result.replace(re, "");
+      for (const re of countPatterns) {
+        result = isTr
+          ? result.replace(re, (m: string, son: string | undefined, tok: string, off: number, full: string) =>
+            (wordCountOutsideDeathClause(tok, full, off + (son ?? "").length) ? m : ""))
+          : result.replace(re, "");
+      }
       // FB05 · F14: EN silme artığı ("You died , change") — yalnız değiştiyse (TR'yi repairTrSeam onarır).
       if (!isTr && result !== beforeCnt3) result = result.replace(/ +([,.;:!?])/g, "$1");
     }
