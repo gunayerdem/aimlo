@@ -22,6 +22,8 @@ import { enforceAgentKit } from "@/lib/agent-abilities";
 // Sayı sonlu kelimede bulunma eki (TR-KALAN-27): sıfır-import yaprak modül —
 // landing bundle politikası (yukarıdaki not) bozulmaz.
 import { trNumberLocative } from "@/lib/tr-suffix";
+// Komp arketipi slug → sade ad (yaprak modül; client bundle'a güvenle girer).
+import { COMP_ARCHETYPE_PLAIN } from "@/lib/comp-archetypes";
 
 // Ajan/silah ad tabloları TR_JARGON'un ÜSTÜNE taşındı (B01, 2026-09-23): TR_JARGON
 // artık bu tablolardan türetilen kurallar içeriyor (araç ekli "seni … Vandal'la
@@ -946,6 +948,39 @@ export function stripDeathTypeTokens(text: string, lang: "tr" | "en"): string {
   return t;
 }
 
+// ── KOMP ARKETİPİ KOD-ADI SÜZGECİ (W2 followup #70 / W2 inceleme B06-F6, 2026-09-24) ──
+// KANIT: user-message [SİLAH+KOMP İPUCU] işaretçisi modele KB bölüm adı olarak slug
+// veriyor ("Düşman komp arketipi: double-duelist-dive") ve model onu kullanıcı metnine
+// kopyalıyor — canlı: aimlo-runtimeKAAN.txt 18 satır ("Rakip kadrosunda double-duelist-
+// dive var"), eval: 13 tekil ham alan (op-comp ×6, double-duelist-dive ×4,
+// double-controller ×3; cycleb06-parity-syn final'lerinin 7/17'si). Kod-ad yasağı ihlali.
+// Ölüm-tipi slug'larıyla (stripDeathTypeTokens) AYNI sınıf → aynı yöntem: TAM tireli slug
+// sade adla değiştirilir (lib/comp-archetypes.ts tek tablo). Tireli slug doğal düzyazıda
+// geçmez; "standart" tabloda YOK (sıradan Türkçe sözcük). Büyük harfle başlayan eşleşme
+// büyük harfle kalır ("Op-comp var" → "Op'lu komp var", "Double-controller on…" →
+// "Two-controller on…"). Kesme-ekli biçimde ("op-comp'u") karşılık "komp" ile bitiyorsa
+// ek bitiştirilir ("Op'lu kompu" — komp ile comp aynı ünlü/sertlikte okunur); diğerlerinde
+// kesme kalır. Korpusta ekli biçim 0. Prompt kökü (işaretçide slug) B09 prompt dalgasına
+// followup; bu SINIR savunmasıdır. Temiz metinde bayt-aynı.
+const COMP_SLUG_RE = new RegExp(
+  // Slug'lar yalnız [a-z-] içerir; "-" karakter sınıfı DIŞINDA özel değil (u kipinde
+  // "\-" kaçışı GEÇERSİZ) → ham birleştirme güvenli.
+  `(?<![\\p{L}\\p{N}-])(${Object.keys(COMP_ARCHETYPE_PLAIN).join("|")})` +
+    `(?:(['’])([a-zçğıöşü]{1,8}))?(?![\\p{L}\\p{N}-])`,
+  "giu",
+);
+export function stripCompArchetypeTokens(text: string, lang: "tr" | "en"): string {
+  if (!text) return text;
+  return text.replace(COMP_SLUG_RE, (m: string, slug: string, apos: string | undefined, suffix: string | undefined) => {
+    const plain = COMP_ARCHETYPE_PLAIN[slug.toLowerCase() as keyof typeof COMP_ARCHETYPE_PLAIN];
+    if (!plain) return m;
+    let out = lang === "en" ? plain.en : plain.tr;
+    if (/^\p{Lu}/u.test(m)) out = (lang === "tr" ? out.charAt(0).toLocaleUpperCase("tr") : out.charAt(0).toUpperCase()) + out.slice(1);
+    if (suffix) out += /komp$/i.test(out) ? suffix : `${apos ?? "'"}${suffix}`;
+    return out;
+  });
+}
+
 // ── VERİ-ETİKETİ SÜZGECİ (canlı-test #15 DC8, 2026-09-01) ────────────────────
 // Kaan'ın maç raporu kullanıcıya "birkaç round'da ultReady varken risk alıp
 // öldün" yazdı — model, isteğin JSON alan adını (ultReady) koç cümlesine
@@ -1605,6 +1640,9 @@ export function cleanCoachText(text: string, lang: "tr" | "en"): string {
   // olduğundan TR dalındaki stripMetaTerms onları göremezdi; her iki dilde de
   // dil dallarından ÖNCE koşar (Kaan R7/R11/R23 sızıntı fixture'ları).
   t = stripDeathTypeTokens(t, lang);
+  // KOMP ARKETİPİ KOD-ADI SÜZGECİ (W2 followup #70): aynı sınıf (İngilizce tireli slug,
+  // dil-bağımsız), aynı sıra — TR meta süzgeci/TR_JARGON'dan ÖNCE.
+  t = stripCompArchetypeTokens(t, lang);
   // VERİ-ETİKETİ SÜZGECİ (canlı-test #15 DC8): JSON alan adları ("ultReady")
   // koç cümlesine kopyalanıyordu — aynı dil-bağımsız sınıf, aynı sıra. Merkezi
   // katman olduğu için vision/report/feedback/insight yolları otomatik kapsanır.

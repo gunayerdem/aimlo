@@ -91,5 +91,36 @@ eq("overtime > loss-streak (highStakes öncelikli)", classifyDeath({ highStakes:
 eq("def-no-crossfire > over-peek (spesifik dal önce)", classifyDeath({ side: "defense", tradedByAlly: false, alliesAlive: 3, enemiesAlive: 2 }), "def-no-crossfire");
 eq("over-peek katman fix: sinyalsiz aa>=ea hâlâ yakalanır", classifyDeath({ alliesAlive: 2, enemiesAlive: 2, side: "attack" }), "over-peek-advantage");
 
+// ── KOMP-SLUG KOD-ADI SÜZGECİ (W2 followup #70 / W2 inceleme B06-F6, 2026-09-24) ──
+// Canlı kanıt BİREBİR (aimlo-runtimeKAAN.txt) + eval korpusu (cycleb06-parity-syn) dizeleri.
+{
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { cleanCoachText, stripCompArchetypeTokens } = require("../lib/coach-text") as typeof import("../lib/coach-text");
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { COMP_ARCHETYPES, COMP_ARCHETYPE_PLAIN } = require("../lib/comp-archetypes") as typeof import("../lib/comp-archetypes");
+  eq("canlı (Kaan) 'Rakip kadrosunda double-duelist-dive var' → 'çift duelist'",
+    cleanCoachText("Rakip kadrosunda double-duelist-dive var; iki duelist hızlı ilk kontakla sayıyı yıpratıyor.", "tr"),
+    "Rakip kadrosunda çift duelist var; iki duelist hızlı ilk kontakla sayıyı yıpratıyor.");
+  eq("korpus 'Op-comp var' → büyük harf korunur", cleanCoachText("Op-comp var, uzun hatları kapatmak için smoke kullan.", "tr"),
+    "Op'lu komp var, uzun hatları kapatmak için smoke kullan.");
+  eq("korpus 'ki op-comp hattını' → 'Op'lu komp hattını'", cleanCoachText("Girişte bir smoke at ki op-comp hattını bozasın.", "tr"),
+    "Girişte bir smoke at ki Op'lu komp hattını bozasın.");
+  eq("ekli biçim 'op-comp'u' → 'Op'lu kompu' (komp ile comp aynı okunur)", stripCompArchetypeTokens("Rakip op-comp'u kullanıyor.", "tr"),
+    "Rakip Op'lu kompu kullanıyor.");
+  eq("EN korpus 'Double-controller on the enemy' → 'Two-controller on the enemy'",
+    cleanCoachText("Double-controller on the enemy means they can box sightlines.", "en"), "Two-controller on the enemy means they can box sightlines.");
+  eq("EN 'an Op-comp' → 'an Op comp'", stripCompArchetypeTokens("Enemy roster is an Op-comp.", "en"), "Enemy roster is an Op comp.");
+  eq("'standart' sıradan sözcük → DOKUNULMAZ", stripCompArchetypeTokens("Standart bir oyun oyna.", "tr"), "Standart bir oyun oyna.");
+  eq("slug parçası olan başka tireli terim eşleşmez ('op-compact', 'x-op-comp')",
+    stripCompArchetypeTokens("op-compact x-op-comp", "tr"), "op-compact x-op-comp");
+  eq("temiz metin bayt-aynı", stripCompArchetypeTokens("Rakip kadrosunda iki duelist var.", "tr"), "Rakip kadrosunda iki duelist var.");
+  eq("tablo: standart HARİÇ her arketipin TR+EN sade adı var (yeni arketip eklenirse kırmızı)",
+    COMP_ARCHETYPES.filter((a) => a !== "standart").every((a) => !!COMP_ARCHETYPE_PLAIN[a as keyof typeof COMP_ARCHETYPE_PLAIN]?.tr && !!COMP_ARCHETYPE_PLAIN[a as keyof typeof COMP_ARCHETYPE_PLAIN]?.en),
+    true);
+  eq("classifyCompArchetype'ın ürettiği her değer tabloda (tip kaynağı tek)",
+    [classifyCompArchetype(["Jett", "Reyna", "Omen", "Sova", "Sage"]), classifyCompArchetype(["Jett", "Chamber", "Killjoy", "Omen", "Sova"]), classifyCompArchetype(["Jett", "Omen", "Sova", "Cypher", "Miks"])]
+      .every((a) => a !== null && (COMP_ARCHETYPES as readonly string[]).includes(a)), true);
+}
+
 console.log(fail === 0 ? "\nTÜM TESTLER GEÇTİ ✓" : `\n${fail} TEST BAŞARISIZ ✗`);
 process.exit(fail === 0 ? 0 : 1);

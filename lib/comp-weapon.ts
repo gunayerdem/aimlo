@@ -15,6 +15,7 @@
 // (denetim: judge eco listesinde eksikti, bulldog yanlışlıkla eco sayılıyordu).
 
 import { AGENT_ROLE_MAP } from "@/lib/knowledge-loader";
+import type { CompArchetype } from "@/lib/comp-archetypes";
 
 export type WeaponClass = "sniper" | "rifle" | "smg" | "shotgun" | "pistol" | "mg";
 
@@ -135,14 +136,9 @@ export function normalizeKillerInfoForPrompt(killerInfo?: string): string | unde
 
 // ── Komp arketipi ─────────────────────────────────────────────
 // weapon-comp-compact.md "## Komp Okuma" H3 slug'larıyla BİREBİR aynı adlar.
-export type CompArchetype =
-  | "double-duelist-dive"
-  | "double-initiator-util"
-  | "double-sentinel-kale"
-  | "double-controller"
-  | "op-comp"
-  | "no-controller-rush"
-  | "standart";
+// Tip + çalışma-zamanı listesi tek kaynakta: lib/comp-archetypes.ts (W2 followup #70 —
+// son-işlem kod-ad süzgeci ve eval-score dedektörü aynı listeyi okur).
+export type { CompArchetype };
 
 // Op'u en sık taşıyan core ajanlar — op-comp sinyalinin yarısı (diğer yarısı çift sentinel).
 const OP_AGENTS = new Set(["jett", "chamber"]);

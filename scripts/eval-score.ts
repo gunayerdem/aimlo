@@ -35,6 +35,11 @@ import { findMetaTermHits } from "../lib/coach-text";
 // ölçüm de kendiliğinden değişir. Yalnız M{n}-R{r}- id'li (gerçek-korpus)
 // örneklerde hesaplanır → eski S/E-id'li cycle raporları BAYT-AYNI kalır.
 import { DEATH_TYPE_GUIDE } from "../lib/death-type";
+// KOMP-SLUG ihlal sınıfı (W2 inceleme B06-F6, 2026-09-24): kod-ad dedektörü yalnız
+// YETENEK kod-adlarına bakıyordu → cycleb06-parity-syn final'lerinin 7/17'sinde
+// double-duelist-dive / op-comp / double-controller geçtiği hâlde "Toplam ihlal 0.0 → 0.0"
+// yazıyordu. Liste canlı tablodan (lib/comp-archetypes.ts) türetilir, kopya yok.
+import { COMP_ARCHETYPES } from "../lib/comp-archetypes";
 
 type Sample = {
   id: string;
@@ -48,6 +53,10 @@ type Sample = {
   kbFiles?: string[];
   systemPromptBytes?: number;
   usage?: Record<string, number>;
+  /** eval-vision: API/parse hatası (429 dahil) — prod bu örneği kullanıcıya göstermez. */
+  error?: string;
+  /** eval-vision: süzgeç sonrası YAPISAL HATA (CANLI-TEST-07) — prod 502 döner. */
+  outputFailure?: unknown;
   final?: {
     deathAnalysis?: string;
     enemyAnalysis?: string[];
@@ -68,6 +77,17 @@ function load(cycle: string): Sample[] {
   const want = process.env.EVAL_SCORE_LANG;
   if (want !== "tr" && want !== "en") return all;
   return all.filter((s) => (s.lang === "en" ? "en" : "tr") === want);
+}
+
+/** W2 inceleme B06-F6: hatalı satırlar (error / outputFailure / final yok) ortalamalara
+ *  KATILMAZ — prod onları kullanıcıya göstermez; eskiden 429 satırları "boş metin"
+ *  olarak puanlanıp detector'ı 75,0 → 51,6 gösteriyor ve sahte "callout kayboldu"
+ *  regresyonu üretiyordu. Ayrı sayılıp raporlanır. */
+function isScorable(s: Sample): boolean {
+  return !s.error && !s.outputFailure && !!s.final;
+}
+function splitScorable(all: Sample[]): { ok: Sample[]; bad: Sample[] } {
+  return { ok: all.filter(isScorable), bad: all.filter((s) => !isScorable(s)) };
 }
 
 /** Gerçek-korpus id'si (rank-1): "M1-R5-ascent-jett" → maç "M1"; S/E-id'de null. */
@@ -172,6 +192,16 @@ function codenameHits(text: string, lang: "tr" | "en" = "tr"): string[] {
     if (re.test(t)) hits.push(a.official);
   }
   return hits;
+}
+
+/** Komp arketipi slug'ı (kod-ad) — büyük/küçük harf duyarsız, TAM tireli token.
+ *  "standart" hariç (sıradan Türkçe sözcük; slug olarak modele hiç verilmez). */
+const COMP_SLUG_DETECT_RE = new RegExp(
+  `(?<![\\p{L}\\p{N}-])(${COMP_ARCHETYPES.filter((a) => a !== "standart").join("|")})(?![\\p{L}\\p{N}-])`,
+  "giu",
+);
+function compSlugHits(text: string): string[] {
+  return [...text.matchAll(COMP_SLUG_DETECT_RE)].map((m) => m[1].toLowerCase());
 }
 
 // ── SPESİFİKLİK ÖLÇÜTLERİ (softi: "çok genel, nerede vurulduğunu söylemiyor") ──
@@ -383,6 +413,8 @@ type Row = {
   // META-TERİM (canli-test #10, 2026-08-05): sistem-içi dil sızıntısı
   // ("OCR", "kayıtta var", "tespit edildi"...) — kaynak lib/coach-text.ts.
   meta: string[];
+  // KOMP-SLUG (W2 inceleme B06-F6): "double-duelist-dive", "op-comp"… kod-ad sızıntısı.
+  compSlug: string[];
   violations: number;
   promptBytes: number;
   // B60 (2026-08-04): örneğin dili + EN'de yakalanan TR-sızıntı ihlalleri.
@@ -413,6 +445,7 @@ function scoreSample(s: Sample): Row {
   // META-TERİM (canli-test #10, 2026-08-05): dil-bağımsız ölçülür — "OCR" gibi
   // sistem-içi kelimeler EN çıktıda da aynı derecede yasak (koç sesi kuralı).
   const meta = findMetaTermHits(text);
+  const compSlug = compSlugHits(text);
 
   // B60 (pano özellik dalgası, 2026-08-04): TR-sızıntı YALNIZ EN örneklerde
   // ölçülür (dil-bağımsız değil — TR metin doğal olarak "kirli" görünürdü).
@@ -463,11 +496,14 @@ function scoreSample(s: Sample): Row {
     detector,
     detectorWeak,
     meta,
+    compSlug,
     // B60 (2026-08-04): + enLeak.length EKLEMELİ — TR örnekte enLeak=[] → toplam değişmez.
     // canli-test #10 (2026-08-05): + meta.length — meta-dil artık ihlal sayılır
     // (bu geceki sızıntı sınıfı ölçüme bağlandı; eski korpuslarda varsa GÖRÜNÜR
     // olması bilinçli — kör noktayı kapatmak tam olarak bu).
-    violations: banned.length + time.length + hp.length + codename.length + enLeak.length + meta.length,
+    // W2 inceleme B06-F6: + compSlug.length — aynı gerekçe (eski koşularda slug varsa
+    // toplam ihlal ARTMIŞ görünür: bu içerik değişimi değil, kör noktanın kapanmasıdır).
+    violations: banned.length + time.length + hp.length + codename.length + enLeak.length + meta.length + compSlug.length,
     promptBytes: s.systemPromptBytes || 0,
     lang,
     enLeak,
@@ -489,6 +525,7 @@ type Agg = {
   codename: number;
   // canli-test #10 (2026-08-05): meta-dil ihlal toplamı (OCR/kayıt/sistemde...).
   meta: number;
+  compSlug: number;
   avgWords: number;
   avgDeathWords: number;
   calloutCoverage: number; // callout içeren örnek oranı (%)
@@ -513,6 +550,7 @@ function aggregate(rows: Row[]): Agg {
     hp: sum((r) => r.hp.length),
     codename: sum((r) => r.codename.length),
     meta: sum((r) => r.meta.length),
+    compSlug: sum((r) => r.compSlug.length),
     avgWords: sum((r) => r.words) / n,
     avgDeathWords: sum((r) => r.deathWords) / n,
     calloutCoverage: (rows.filter((r) => r.callouts.length > 0).length / n) * 100,
@@ -539,6 +577,7 @@ function printSingle(cycle: string, rows: Row[]) {
   // canli-test #10 (2026-08-05): meta-dil sınıfı — HEP basılır (bu geceki kör
   // noktanın kendisi: sınıf raporda görünmüyordu, sızıntı da görünmez kaldı).
   console.log(`    meta-dil (OCR/kayıt): ${a.meta}`);
+  console.log(`    komp-slug (kod-ad) : ${a.compSlug}`);
   // B60 (2026-08-04): satır YALNIZ korpusta EN örnek varken basılır —
   // TR-only koşuların konsol çıktısı bayt-aynı kalır (TR akışına dokunma kuralı).
   if (rows.some((r) => r.lang === "en")) {
@@ -574,6 +613,7 @@ function printSingle(cycle: string, rows: Row[]) {
       if (r.hp.length) parts.push(`HP:[${r.hp.join(", ")}]`);
       if (r.codename.length) parts.push(`kod-ad:[${r.codename.join(", ")}]`);
       if (r.meta.length) parts.push(`meta:[${r.meta.join(", ")}]`);
+      if (r.compSlug.length) parts.push(`komp-slug:[${r.compSlug.join(", ")}]`);
       // B60 (2026-08-04): TR örnekte enLeak hep boş → TR çıktısı değişmez.
       if (r.enLeak.length) parts.push(`EN-sızıntı:[${r.enLeak.join(", ")}]`);
       console.log(`  ❌ ${r.id} → ${parts.join(" ")}`);
@@ -610,6 +650,7 @@ function printAB(cA: string, rowsA: Row[], cB: string, rowsB: Row[]) {
   line("  HP iddiası", A.hp, B.hp, false);
   line("  kod-ad", A.codename, B.codename, false);
   line("  meta-dil", A.meta, B.meta, false); // canli-test #10 (2026-08-05)
+  line("  komp-slug", A.compSlug, B.compSlug, false); // W2 inceleme B06-F6
   // B60 (2026-08-04): yalnız iki koşudan birinde EN örnek varsa basılır —
   // eski TR-only A/B kanıt çıktıları bayt-aynı kalır.
   if (rowsA.some((r) => r.lang === "en") || rowsB.some((r) => r.lang === "en")) {
@@ -684,9 +725,23 @@ if (!cA) {
 const re = filter ? new RegExp(filter) : null;
 const keep = (rows: Row[]) => (re ? rows.filter((r) => re.test(r.id)) : rows);
 
-const rowsA = keep(load(cA).map(scoreSample));
+// W2 inceleme B06-F6: hatalı satırlar puanlanmaz; sayıları ayrıca basılır. A/B'de ortak
+// id kümesi yalnız İKİ koşuda da puanlanabilir olan id'lerdir (elma-elma).
+const reportExcluded = (cycle: string, bad: Sample[]) => {
+  const kept = bad.filter((s) => !re || re.test(s.id));
+  if (kept.length === 0) return;
+  const err = kept.filter((s) => s.error).length;
+  const of = kept.filter((s) => !s.error && s.outputFailure).length;
+  console.log(`\n⚠ ${cycle}: ${kept.length} örnek puanlamaya KATILMADI (hata ${err} · yapısal-hata ${of} · final yok ${kept.length - err - of}) — prod bunları kullanıcıya göstermez:`);
+  console.log(`   ${kept.map((s) => s.id).join(", ")}`);
+};
+const splitA = splitScorable(load(cA));
+reportExcluded(cA, splitA.bad);
+const rowsA = keep(splitA.ok.map(scoreSample));
 if (cB) {
-  const rowsB = keep(load(cB).map(scoreSample));
+  const splitB = splitScorable(load(cB));
+  reportExcluded(cB, splitB.bad);
+  const rowsB = keep(splitB.ok.map(scoreSample));
   // Elma-elma güvencesi: yalnız İKİ koşuda da bulunan id'ler.
   const idsA = new Set(rowsA.map((r) => r.id));
   const idsB = new Set(rowsB.map((r) => r.id));
