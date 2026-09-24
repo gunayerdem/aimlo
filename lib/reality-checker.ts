@@ -1534,12 +1534,63 @@ const DEATH_CORE_RE = new RegExp(
   "iu",
 );
 
-/** Bir CÜMLE, kanıtsız düşman-setup/util iddiası taşıyor mu? (B35) */
-function isUnprovenEnemyUtilClaim(sentence: string): boolean {
+// FB07 · F84 — KİŞİ AYRIMI. Eski hâli özne kümesinden oyuncunun KENDİ ajanını düşmüyor,
+// EN fiillerde kişiye bakmıyordu ("you used", edilgen "util used" ve emir "Set up" de
+// eşleşiyordu) → öz-eleştiri ve öğüt siliniyordu (exp12 Bind/Brimstone "As Brimstone you
+// used your smokes too early…" silindi; "Anchor A. Set up a crossfire … use your smokes…"
+// → "Anchor A."; rapor ER5 bestRound gerekçesi "…Brimstone stayed off the open line…"
+// silinip yalnız "Repeat the same…" kaldı). Muafiyetler DAR (ayna-pick'te gerçek düşman
+// iddiası sızmasın):
+//  · özne eşleşmesi oyuncunun okunmuş ajanıysa YALNIZ "as <Ajan>" / "<Ajan> olarak"
+//    kalıbında ya da yan-cümle başı özne konumunda (iyeliksiz) sayılmaz; başka bir düşman
+//    öznesi ("Enemy", başka ajan) varsa cümle eskisi gibi düşer;
+//  · EN fiilin doğrudan öznesi "you" ise ("you used/threw/placed") o fiil sayılmaz;
+//  · "set up" yalnız önünde (aynı yan-cümlede) 3. şahıs özne varsa sayılır — cümle ya da
+//    yan-cümle başındaki emir kipi ("Set up a crossfire …") sayılmaz.
+const ENEMY_SUBJECT_RE_G = new RegExp(ENEMY_SUBJECT_RE.source, "giu");
+const ENEMY_UTIL_VERB_RE_G = new RegExp(ENEMY_UTIL_VERB_RE.source, "giu");
+const CLAUSE_START_BEFORE_RE = /(?:^|[,;:—–(]\s*|(?<![\p{L}])(?:and|but|while|so|then|ve|ama)\s+)$/iu;
+const THIRD_PERSON_RE = /(?<![\p{L}])(?:they|he|she|their|enemy|enemies|opponents?|düşman\p{L}*|rakip\p{L}*)(?![\p{L}])/iu;
+
+const agentBase = (tok: string) => tok.replace(/['’][\p{L}]*$/u, "").toLowerCase();
+
+function isSelfAgentRef(tok: string, off: number, s: string, self: string): boolean {
+  if (!self || agentBase(tok) !== self) return false;
+  const before = s.slice(0, off), after = s.slice(off + tok.length);
+  if (/(?<![\p{L}])as\s+$/iu.test(before)) return true;                 // "as Brimstone"
+  if (/^\s+olarak(?![\p{L}])/iu.test(after)) return true;               // "Brimstone olarak"
+  // Yan-cümle başı ÖZNE konumu, iyeliksiz ("…, Brimstone stayed off the open line").
+  return tok.toLowerCase() === self && CLAUSE_START_BEFORE_RE.test(before) && !/^['’]/u.test(after);
+}
+
+/** Bir CÜMLE, kanıtsız düşman-setup/util iddiası taşıyor mu? (B35 + FB07 · F84 kişi ayrımı) */
+function isUnprovenEnemyUtilClaim(sentence: string, factGround?: FactGround): boolean {
   if (DEATH_CORE_RE.test(sentence)) return false; // kanıtlı ölüm olgusu → dokunma
-  return ENEMY_SUBJECT_RE.test(sentence)
-    && ENEMY_UTIL_NOUN_RE.test(sentence)
-    && ENEMY_UTIL_VERB_RE.test(sentence);
+  if (!ENEMY_UTIL_NOUN_RE.test(sentence)) return false;
+  const self = (factGround?.playerAgent ?? "").toLowerCase();
+  const all = [...sentence.matchAll(ENEMY_SUBJECT_RE_G)];
+  if (all.length === 0) return false;
+  // Özne eşleşmelerinin HEPSİ oyuncunun kendi ajanıysa ve en az biri "as/olarak" ya da
+  // yan-cümle başı özne konumundaysa cümle oyuncunun kendisi hakkındadır → düşmez
+  // (ER5: "…, Brimstone stayed off the open line … no Brimstone early death").
+  const subjects = all.filter((m) => !self || agentBase(m[0]) !== self);
+  if (subjects.length === 0 && all.some((m) => isSelfAgentRef(m[0], m.index ?? 0, sentence, self))) return false;
+  if (subjects.length === 0) subjects.push(...all); // ayna-pick: yalnız ad, öz-konum yok → düşman sayılır
+  return [...sentence.matchAll(ENEMY_UTIL_VERB_RE_G)].some((v) => {
+    const at = v.index ?? 0;
+    const before = sentence.slice(0, at);
+    if (/(?<![\p{L}])you\s+(?:(?:just|also|then|already|had|have)\s+)?$/iu.test(before)) return false;
+    if (/^set\s+up$/iu.test(v[0])) {
+      // Aynı yan-cümlede fiilden önce 3. şahıs özne (kişi zamiri ya da kendi-ajanı olmayan
+      // düşman öznesi) yoksa emir kipidir.
+      const clauseStart = Math.max(before.search(/[^,;:—–.!?]*$/u), 0);
+      const clause = before.slice(clauseStart);
+      const hasSubj = THIRD_PERSON_RE.test(clause)
+        || subjects.some((m) => (m.index ?? 0) >= clauseStart && (m.index ?? 0) < at);
+      if (!hasSubj) return false;
+    }
+    return true;
+  });
 }
 
 // Weapon names for the weapon-when-absent guard (Ölüm-Veri Sözleşmesi 2026-06-29).
@@ -2243,7 +2294,7 @@ export function guardUnprovenFacts(
       let rebuilt = "";
       for (let i = 0; i < chunks.length; i += 2) {
         const sent = chunks[i];
-        if (sent.trim() && isUnprovenEnemyUtilClaim(sent)) { dropped++; continue; }
+        if (sent.trim() && isUnprovenEnemyUtilClaim(sent, factGround)) { dropped++; continue; }
         rebuilt += sent + (chunks[i + 1] ?? "");
       }
       if (dropped > 0 && dropped < total) result = rebuilt.trim();

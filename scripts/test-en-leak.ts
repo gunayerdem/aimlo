@@ -31,6 +31,7 @@ import { EN_VISION_SCENARIOS, EN_REPORT_SCENARIOS, EN_CORPUS_TOTAL } from "../ev
 import { realityCheck } from "../lib/reality-checker";
 import { buildVisionContext, type VisionPromptBody } from "../lib/vision-prompt-builder";
 import { toRoundMemory } from "../lib/vision-postprocess";
+import { buildReportCleaner, validateRequest } from "../lib/report-prompt";
 
 let pass = 0;
 let fail = 0;
@@ -302,6 +303,52 @@ console.log("\n── FB06 · F85: EN sayım silmesi '( )' bırakmaz; kanıtsız
   ]) {
     const x = realityCheck(s, mem7 as never, fgA, "suggestion", "en").text;
     check(`bayt-aynı: "${s.slice(0, 44)}…"`, x === s, `→ "${x}"`);
+  }
+}
+
+// ── FB07 · F84: B35 düşman-util guard'ı KİŞİ ayırıyor (EN) ────────────────────────
+// Fix olmadan: oyuncunun kendi ajanıyla öz-eleştirisi ("As Brimstone you used your smokes
+// too early…") ve emir kipindeki öğüt ("Set up a crossfire…") siliniyordu; rapor ER5
+// bestRound gerekçesi düşüp yalnız "Repeat the same…" kalıyordu.
+console.log("\n[F84] B35 kişi ayrımı — öz-eleştiri/öğüt korunur, düşman-util iddiası düşer");
+{
+  const e16 = EN_VISION_SCENARIOS.find((s) => s.id === "E16-bind-brimstone-def-late-def");
+  if (!e16) throw new Error("E16 senaryosu yok");
+  const { factGround: fg16 } = buildVisionContext(e16.body as unknown as VisionPromptBody, "en");
+  const mem16 = toRoundMemory((e16.body as { roundHistory?: Record<string, unknown>[] }).roundHistory ?? []);
+  const rc16 = (s: string, kind: "death" | "suggestion") => realityCheck(s, mem16 as never, fg16, kind, "en", "Bind").text;
+  for (const kind of ["death", "suggestion"] as const) {
+    const a = "Raze killed you on A Site. As Brimstone you used your smokes too early, so the site was open. Keep one smoke for post-plant.";
+    check(`exp12 [${kind}] 'As Brimstone you used your smokes too early…' korunur`, rc16(a, kind) === a, `→ "${rc16(a, kind)}"`);
+    const b = "Anchor A. Set up a crossfire with a teammate from Lamps so Raze can't duel you; use your smokes to delay the retake.";
+    check(`exp12 [${kind}] 'Anchor A. Set up a crossfire…' tam kalır`, rc16(b, kind) === b, `→ "${rc16(b, kind)}"`);
+  }
+  // Düşman-util iddiası hâlâ düşer (3. şahıs "set up" + ayna-pick'te "Enemy" öznesi).
+  const c = rc16("Raze killed you on A Site. Cypher set up a trap at A Lamps. Keep one smoke for post-plant.", "death");
+  check("'Cypher set up a trap at A Lamps.' düşer", c === "Raze killed you on A Site. Keep one smoke for post-plant.", `→ "${c}"`);
+  const d = rc16("Raze killed you on A Site. Enemy Brimstone used smokes on A Main. Keep one smoke for post-plant.", "death");
+  check("ayna-pick 'Enemy Brimstone used smokes…' (oyuncu Brimstone) düşer", d === "Raze killed you on A Site. Keep one smoke for post-plant.", `→ "${d}"`);
+  // Rapor: ER5 bestRound (report-b09-base-en ham metni BİREBİR) gerekçesiyle geri gelir.
+  const cleanerOf = (id: string) => {
+    const fx = EN_REPORT_SCENARIOS.find((s) => s.id === id);
+    if (!fx) throw new Error(`${id} yok`);
+    const v = validateRequest(fx.body);
+    if (!v.valid) throw new Error(`${id} geçersiz`);
+    return buildReportCleaner(v.data);
+  };
+  const er5raw = "R4 — coordinated entry executed: util used before wide peek, Brimstone stayed off the open line and team traded; result: clean site take and no Brimstone early death. Repeat the same util-first, second-man entry pattern at B.";
+  const er5 = cleanerOf("ER5-summit-brimstone-atk-fullmatch")(er5raw, 500, "(FALLBACK)");
+  check("rapor ER5 bestRound gerekçesi geri gelir", er5 === er5raw, `→ "${er5}"`);
+  // 4 DOĞRU silme sürer (ER2, oyuncu Raze; eval-out ham metinleri BİREBİR).
+  const er2 = cleanerOf("ER2-bind-raze-atk-win");
+  for (const s of [
+    "Enemy used Cypher trap at Hookah (R4) to punish solo entry. Opposing setup included defenders able to hold Showers and Hookah angles (deaths at Hookah R4 and Showers R14).",
+    "Enemy used Cypher tripwire to punish lone entries (R4). Chamber and long-hold tools present make off-angle and anchor plays possible.",
+    "Enemy used Cypher to anchor Hookah with trap; Chamber and Brimstone present but not top killers. Hookah showed as weakest area for you (top mistake flagged).",
+    "Enemy used Cypher tripwire to punish isolated Hookah entries (R4). No repeated multi-round deaths, but Hookah is the clear vulnerability.",
+  ]) {
+    const out = er2(s, 1000, "(FALLBACK)");
+    check(`doğru silme sürer: "${s.slice(0, 40)}…"`, !/Enemy used Cypher/.test(out) && out.length > 0 && out !== "(FALLBACK)", `→ "${out}"`);
   }
 }
 
