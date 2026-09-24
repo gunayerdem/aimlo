@@ -52,6 +52,11 @@ const BAD: [string, RegExp][] = [
   ["apostroflu kadro", /kadro['’]/],
   ["apostroflu düşman", /bir düşman['’]/],
   ["fazlalık niteleme", /Rakip bir düşman/],
+  // FB07 · F44 — ikame token'ın öncül/tamlama/tire/parantez artıkları.
+  ["öncüllü ikame", /(?:^|[\s(])(?:düşman|rakibin) bir düşman/i],
+  ["çift ikame", /bir düşman[- ]\(?bir düşman/i],
+  ["EN öncüllü ikame", /enemy an enemy/i],
+  ["EN kadro notu", /includes an enemy/i],
   // B03 (2026-09-23) kabul ölçütleri:
   // TR-KALAN-07 — deathAnalysis rapor etiketiyle açılıyor ("En kritik neden:", "Kök neden:").
   ["tanı-etiketi açılışı", /^\s*(?:en\s+kr[iİ]t[iİ]k|kök\s+neden|temel\s+neden|asıl\s+sorun|ana\s+hata|root\s+cause)[^:.]{0,24}:/iu],

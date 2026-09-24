@@ -219,5 +219,57 @@ console.log("\n[#51-rapor] rapor temizleyicisi: oyuncunun kendi ajanı 'X olarak
   t("rapor: 'kayo' gövdesi → resmî 'KAY/O' (knownAgent) muafiyeti alır", /^KAY\/O olarak/.test(r5), `→ "${r5}"`);
 }
 
+// ── FB07 · F44: ikame token'ın ÇEVRESİ (öncül / tamlama / tire / parantez) ─────────
+// Korpus HEAD (b9b0564) ham metinleri BİREBİR; katil okunmamış (hasKiller=false).
+// Fix olmadan: "Düşman bir düşman seni…", "Rakibin bir düşmandan biri…", "Bir düşman bir
+// düşman kadrosundan…", "An enemy (enemy comp includes an enemy)…", "bir düşman-bir düşman
+// takımının…", "The enemy an enemy killed you".
+console.log("\n[F44] katil ikamesi çevresini onarıyor (öncül/tamlama/tire/parantez)");
+{
+  const nk = (s: string, lang: "tr" | "en" = "tr") =>
+    realityCheck(s, [] as never, { hasKiller: false } as never, "death", lang).text;
+  const CASES: [string, string, string, "tr" | "en"][] = [
+    ["cycleb09-cand-trpc skye-i (öncül 'Düşman')",
+      "Düşman Jett ya da Reyna seni savunmada açık bir yerde gördü ve o açıdan vurdu — açıkta durmak yerine siper kenarına geçip açıyı off-angle'dan tutmalıydın.",
+      "Bir düşman seni savunmada açık bir yerde gördü ve o açıdan vurdu — açıkta durmak yerine siper kenarına geçip açıyı off-angle'dan tutmalıydın.", "tr"],
+    ["cycleb09-cand2-trpc skye-h (öncül 'düşman', cümle ortası)",
+      "Savunan taraftasın; düşman Jett veya Reyna tarafından öldürüldün—ölüm yer okunamadı ama açıda kaldığın için tek açıdan vuruldun.",
+      "Savunan taraftasın; bir düşman tarafından öldürüldün—ölüm yer okunamadı ama açıda kaldığın için tek açıdan vuruldun.", "tr"],
+    ["cycleb09-cand-trpc skye-j (''dan biri')",
+      "Rakibin Jett ya da Reyna'dan biri seni açıkta vurdu—savunmada site kenarında açık alanda kalmak riskli.",
+      "Bir düşman seni açıkta vurdu—savunmada site kenarında açık alanda kalmak riskli.", "tr"],
+    ["cyclew3-cand2-trpc skye-a (öncülde 'Bir')",
+      "Bir düşman Jett veya Reyna kadrosundan hızlı bir tempo ile giriş zamanlamasını kullandı, seni köşede yakalayıp öldürdü.",
+      "Bir düşman hızlı bir tempo ile giriş zamanlamasını kullandı, seni köşede yakalayıp öldürdü.", "tr"],
+    ["cyclew3-cand2-en E25 (parantezli kadro notu)",
+      "Cypher (enemy comp includes Cypher) held Hookah and shot you while you were entering mid — you peeked that angle with a Vandal and lost the duel.",
+      "An enemy held Hookah and shot you while you were entering mid — you peeked that angle with a Vandal and lost the duel.", "en"],
+    ["cyclefix2 S14 (tireli çift + 'takımının')",
+      "Hookah girişinde crosshair'ı kaybettin, Cypher-Viper takımının üst üste açı kontrolü seni oradan vurdu — o açıya tek başına geniş açıyla swing atma.",
+      "Hookah girişinde crosshair'ı kaybettin, rakip takımının üst üste açı kontrolü seni oradan vurdu — o açıya tek başına geniş açıyla swing atma.", "tr"],
+    ["sentetik 'Düşman Jett seni B Main'de vurdu.'",
+      "Düşman Jett seni B Main'de vurdu.", "Bir düşman seni B Main'de vurdu.", "tr"],
+    ["sentetik EN 'The enemy Jett killed you'",
+      "The enemy Jett killed you at B Main.", "An enemy killed you at B Main.", "en"],
+    ["cyclew3-cand2-trpc skye-h (parantezli TR kadro notu)",
+      "Bir düşman (Jett veya Reyna kadrosundan) seni açıkta gördü ve hızlıca tepki verip öldürdü.",
+      "Bir düşman seni açıkta gördü ve hızlıca tepki verip öldürdü.", "tr"],
+    ["cycleb09-cand-trpc skye-h ('Rakip X/Y kombinasyonu', cümle başı)",
+      "Rakip Jett/Reyna kombinasyonu seni savunmada açıkta yakaladı — sen Skye olarak köşede fazla açık kaldın.",
+      "Rakip kombinasyonu seni savunmada açıkta yakaladı — sen Skye olarak köşede fazla açık kaldın.", "tr"],
+  ];
+  const BAD = /(?:^|[\s(])(?:düşman|rakibin) bir düşman|bir düşman[- ]\(?bir düşman|enemy an enemy|includes an enemy|bir düşman['’]?\s*d[ae]n biri/i;
+  for (const [name, src, want, lang] of CASES) {
+    const out = nk(src, lang);
+    t(`F44 ${name}`, out === want && !BAD.test(out), `→ "${out}"`);
+  }
+  // NEG: niceleme "tek bir düşman kadrosu" ikame DEĞİL → dokunulmaz; katil BİLİNİYORKEN bayt-aynı.
+  const neg = "Jett bu round seni bekleyip karşı açıyı kullandı ve tek bir düşman kadrosu var.";
+  t("F44 NEG 'tek bir düşman kadrosu' bayt-aynı", nk(neg) === neg, `→ "${nk(neg)}"`);
+  const known = "Düşman Jett seni B Main'de vurdu.";
+  t("F44 NEG hasKiller=true iken bayt-aynı",
+    realityCheck(known, [] as never, { hasKiller: true } as never, "death", "tr").text === known);
+}
+
 console.log(`\n${fail === 0 ? "TÜM TESTLER GEÇTİ ✓" : `${fail} TEST BAŞARISIZ ✗`}`);
 process.exit(fail ? 1 : 0);

@@ -1694,6 +1694,13 @@ export function guardUnprovenFacts(
     // (EN şemanın kendi few-shot kalıbı "the Cypher killed you..." → model bu formu
     // üretmeye teşvikli). TR metinde "the" geçmez → TR yolu bayt-aynı.
     const THE = "(?:the\\s+)?";
+    // FB07 · F44: ilk token'ın ÖNCÜLÜ ("Düşman Jett…", "Rakibin Jett ya da Reyna'dan
+    // biri…", "Bir düşman Jett veya Reyna kadrosundan…", "The enemy Jett killed you")
+    // eşleşmeye DAHİL — eskiden yalnız token değişip öncül kalıyordu: "Düşman bir düşman
+    // seni…", "The enemy an enemy killed you" (korpus HEAD: cycleb09-cand-trpc skye-i/h/j,
+    // cyclew3-cand2-trpc skye-a). Eşleşince yalnız AN_ENEMY yazılır. "bir " öneki desene
+    // DAHİL (yoksa "Bir bir düşman…"). THE bu kümenin alt kümesi → eski "the" davranışı aynı.
+    const LEAD_ALT = "(?:bir\\s+)?(?:düşman|rakip)\\s+|rakibin\\s+|(?:(?:an?|the)\\s+)?enemy\\s+|the\\s+";
     const KILLER_TOKEN = `(?:${NAME_ALT}|unknown|bilinmeyen)`;
     const KV2 = "(?:vurup öldürdü|öldürdü|öldürdün|öldürüldün|kestiler|kesti|vuruldun|vurdun|vurdu|düşürdü|indirdi|biçti|aldılar|aldı|avladı|devirdi|götürdü|temizledi|killed you|shot you|killed|shot|picked you off|took you down|caught you)";
     const NLB = "(?<![a-zçğıöşüâîû])", NL = "(?![a-zçğıöşüâîû])";
@@ -1728,30 +1735,37 @@ export function guardUnprovenFacts(
     // "girmişsin", "bekliyordun"). Emir kökü ("iste", "kur", "tut") EŞLEŞMEZ.
     const STEP1_NARRATIVE_END = /(?:[dt][ıiuü](?:n|nız|niz|nuz|nüz|lar|ler)?|m[ıiuü]şs[ıiuü]n|yordu(?:n)?)\s*$/iu;
     const signature = (seg: string) => STEP1_VICTIM.test(seg) || STEP1_KILL.test(seg) || STEP1_DEATH.test(seg);
+    // FB07 · F44: öncül "bir düşman"/"an enemy" iken ardından gelen grup-ayrılma eki
+    // ("Bir düşman Jett veya Reyna kadrosundan …" = "kadrodan bir düşman") de tüketilir →
+    // "Bir düşman …". Öncülsüz ya da başka öncüllü kuyruk yerinde kalır (STEP5 onarır).
+    const GROUP_ABL = "(?:kadrosundan|ikilisinden|üçlüsünden)";
     result = result.replace(
-      new RegExp(`${NLB}${THE}${KILLER_TOKEN}(?:\\s*(?:ya da|veya|or|/|,)\\s*${THE}${KILLER_TOKEN})+`, "gi"),
-      (m: string, off: number, full: string) => {
-        if (STEP1_COND.test(full.slice(off + m.length))) return m;
+      new RegExp(`${NLB}(${LEAD_ALT})?${KILLER_TOKEN}(?:\\s*(?:ya da|veya|or|/|,)\\s*${THE}${KILLER_TOKEN})+(\\s+${GROUP_ABL}${NL})?`, "gi"),
+      (m: string, lead: string | undefined, tail: string | undefined, off: number, full: string) => {
+        const coreEnd = off + m.length - (tail ?? "").length;
+        const rep = !tail ? AN_ENEMY : /^(?:bir|an?)\s/i.test(lead ?? "") ? AN_ENEMY : AN_ENEMY + tail;
+        if (STEP1_COND.test(full.slice(coreEnd))) return m;
         let s = off;
         while (s > 0 && !/[.!?;:—\n]/.test(full[s - 1])) s--;
-        let e = off + m.length;
+        let e = coreEnd;
         while (e < full.length && !/[.!?;:—\n]/.test(full[e])) e++;
-        const clause = full.slice(s, off) + " " + full.slice(off + m.length, e);
-        if (signature(clause)) return AN_ENEMY;
-        if (!trText || !STEP1_NARRATIVE_END.test(full.slice(off + m.length, e))) return m;
+        const clause = full.slice(s, off) + " " + full.slice(coreEnd, e);
+        if (signature(clause)) return rep;
+        if (!trText || !STEP1_NARRATIVE_END.test(full.slice(coreEnd, e))) return m;
         let S = s;
         while (S > 0 && !/[.!?\n]/.test(full[S - 1])) S--;
         let E = e;
         while (E < full.length && !/[.!?\n]/.test(full[E])) E++;
-        const sentence = full.slice(S, off) + " " + full.slice(off + m.length, E);
-        return signature(sentence) ? AN_ENEMY : m;
+        const sentence = full.slice(S, off) + " " + full.slice(coreEnd, E);
+        return signature(sentence) ? rep : m;
       },
     );
     // STEP2: tek isimli katil + aynı clause'da kill-verb → genel-düşman (char-cap YOK).
     // Lookahead formu (F6): yalnız "(the) <katil>" token'ı değişir, clause'un geri
     // kalanı verbatim kalır — eski m.slice(m.indexOf(mid)) hilesi "The " tüketilince
     // ilk boşluğu "The"nin içinde bulup katil adını geri sızdırıyordu.
-    const SINGLE = new RegExp(`${NLB}${THE}${KILLER_TOKEN}\\b(?=[^.!?;:—\\n]*?\\s${KV2}${NL})`, "gi");
+    // FB07 · F44: öncül (LEAD_ALT) STEP1 ile aynı — "Düşman Jett seni vurdu" → "Bir düşman seni vurdu".
+    const SINGLE = new RegExp(`${NLB}(?:${LEAD_ALT})?${KILLER_TOKEN}\\b(?=[^.!?;:—\\n]*?\\s${KV2}${NL})`, "gi");
     // OYUNCU-KENDİ-AJANI MUAFİYETİ (W1 followup #51, W2 inceleme M1-R18): "<oyuncunun
     // ajanı> olarak" öbeği ("Jett olarak orada beklerken vuruldun" = oyuncu Jett'le
     // bekliyordu) KATİL İDDİASI DEĞİL; aynı yan-cümlede ölüm fiili geçtiği için STEP2
@@ -1770,8 +1784,9 @@ export function guardUnprovenFacts(
     // STEP3: kalan stray "unknown"/"bilinmeyen" → genel-düşman
     result = result.replace(new RegExp(`${NLB}(?:unknown|bilinmeyen)${NL}`, "gi"), AN_ENEMY);
     // STEP4: "bir düşman ya da bir düşman" / "an enemy or an enemy" run'larını tek'e çökert
-    result = result.replace(/bir düşman(?:\s*(?:ya da|veya|\/|,)\s*bir düşman)+/gi, "bir düşman");
-    result = result.replace(/an enemy(?:\s*(?:or|\/|,)\s*an enemy)+/gi, "an enemy");
+    // FB07 · F44: "-" ayracı da ("Cypher-Viper takımının" → "bir düşman-bir düşman takımının").
+    result = result.replace(/bir düşman(?:\s*(?:ya da|veya|\/|,|-)\s*bir düşman)+/gi, "bir düşman");
+    result = result.replace(/an enemy(?:\s*(?:or|\/|,|-)\s*an enemy)+/gi, "an enemy");
     // STEP5: İKAME DİKİŞİNİ ONAR (B3, 2026-09-16). STEP1-3 yalnız TOKEN'ı
     // değiştiriyordu; token'ın ÇEVRESİ bozuk kalıyordu (gerçek pipeline çıktısı,
     // cycletr-posters4):
@@ -1785,6 +1800,25 @@ export function guardUnprovenFacts(
       // "Rakip" yalnız hemen ardından ikame token'ı gelirse düşer. Sınır BİLEREK
       // gevşek: ek almış hâlde de ("Rakip bir düşmanın dash'i") niteleme fazlalık.
       result = result.replace(/(?<![\p{L}])[Rr]akip\s+(?=bir düşman)/gu, "");
+      // FB07 · F44 — ikame token'ın TAMLAMA çevresi (korpus HEAD; model-yerli ham metinde
+      // bu biçimler 1733 örnekte 0 kez geçiyor → yalnız ikame artığına denk gelir):
+      // (c) parantezli kadro notu: "Bir düşman (bir düşman kadrosundan) seni…" → not düşer.
+      result = result.replace(/\s*\(\s*bir düşman\s+(?:kadrosundan|ikilisinden|üçlüsünden)\s*\)/giu, "");
+      // (a) "<ikame>'dan biri" / "<ikame> üçlüsünden birisi" = "bir düşman" (ek tablosundan ÖNCE;
+      //     yoksa "bir düşmandan biri" kalırdı).
+      result = result.replace(
+        /bir düşman(?:['’]?\s*(?:n?d[ae]n|t[ae]n)|\s+(?:kadrosundan|ikilisinden|üçlüsünden))\s+biri(?:si)?(?![\p{L}])/giu,
+        "bir düşman",
+      );
+      // (b) "<ikame> kadrosu/takımı/ikilisi/üçlüsü/kombinasyonu" → "rakip …" (önek temizliğinden
+      //     SONRA). Plan listesine "üçlüsü" biçimleri EKLENDİ: korpusta 4 kez ("Cypher/Viper/
+      //     Brimstone üçlüsü seni vurdu" → "bir düşman üçlüsü"). "tek bir düşman …" niceleme,
+      //     ikame değil → dokunulmaz. Cümle başındaysa "Rakip".
+      result = result.replace(
+        /(^|[.!?]\s+)?(?<![\p{L}])(?<!tek\s)bir düşman\s+(kadrosu|kadrosundan|kadrosunun|takımı|takımının|ikilisi|ikilisinden|üçlüsü|üçlüsünden|üçlüsünün|kombinasyonu)(?![\p{L}])/giu,
+        (_m: string, lead: string | undefined, noun: string, off: number) =>
+          (lead !== undefined || off === 0 ? `${lead ?? ""}Rakip ` : "rakip ") + noun,
+      );
       // Türkçe ek uyumu: kök ünsüzle biter → kaynaştırma "n" düşer, ünlü uyumu
       // kalın ("düşman" son ünlüsü "a") → -ın/-a/-ı/-da/-dan/-la.
       // ⚠ SIRA: vasıta hâli (l[ae]) belirtme/yönelmeden ÖNCE — "'ıyla" aksi
@@ -1804,6 +1838,9 @@ export function guardUnprovenFacts(
     } else {
       // EN aynası — bugün "The Cypher killed you." → "an enemy killed you."
       // (küçük harf) çıkıyor. Yalnız büyük harf; TR ek tablosu çalışmaz.
+      // FB07 · F44 (c): parantezli kadro notu ikame sonrası anlamsız ("An enemy (enemy comp
+      // includes an enemy) held Hookah…", cyclew3-cand2-en E25) → not düşer.
+      result = result.replace(/\s*\(\s*(?:the\s+)?enemy\s+comp(?:osition)?\s+includes\s+an enemy\s*\)/gi, "");
       result = result.replace(/(^|[.!?]\s+)an(?=\s+enemy)/g, "$1An");
     }
   }
