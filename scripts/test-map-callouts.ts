@@ -11,7 +11,7 @@
  */
 import * as fs from "node:fs";
 import * as path from "node:path";
-import { stripForeignCallouts } from "../lib/reality-checker";
+import { stripForeignCallouts, realityCheck } from "../lib/reality-checker";
 import { calloutBelongsToMap, MAP_CALLOUTS, UNIVERSAL_CALLOUTS } from "../lib/map-callouts";
 import { CALLOUT_WORDS } from "../lib/coach-text";
 
@@ -329,6 +329,46 @@ console.log("\n[15] CALLOUT KELİME KOPYASI (FB05 · F11) — coach-text CALLOUT
   t(`CALLOUT_WORDS tablodan türetilen kümeyle birebir (${want.length} kelime)`,
     missing.length === 0 && extra.length === 0 && have.join("|") === want.join("|"),
     `→ EKSİK: ${missing.join(", ") || "-"} · FAZLA: ${extra.join(", ") || "-"}`);
+}
+
+console.log("\n[16] EN BELİRSİZ ARTİKEL (FB05 · F12) — 'a long' / 'a short' / 'a wall' callout sanılıp silinmez");
+{
+  // HEAD (bu düzeltme öncesi, aitext/exp1 + v1 probe'ları): hepsi artikel+sıfatıyla birlikte
+  // siliniyordu ("Jett held sightline down B Long", "Execute two-man post-plant", "Plant for
+  // and play…", "Hold until…", "Chamber held, static A Main line").
+  const keep: [string, string][] = [
+    ["Jett held a long sightline down B Long with an Operator.", "Bind"],
+    ["Jett sat on a long Operator angle and punished the wide front peek at B Long.", "Bind"],
+    ["Omen was anchoring a long B Main line with a rifle.", "Sunset"],
+    ["You exposed a long sightline without breaking her line.", "Ascent"],
+    ["Execute a short two-man post-plant.", "Icebox"],
+    ["Plant for a default and play off the spike.", "Ascent"],
+    ["Hold a wall until the Sova drone is gone, then swing.", "Bind"],
+    ["Hold a wall until the Sova drone is gone, then swing.", "Summit"],
+    ["Chamber held a long, static A Main line.", "Lotus"],
+    ["A long sightline punished your wide swing.", "Bind"],
+  ];
+  for (const [s, m] of keep) {
+    const d = stripForeignCallouts(s, m, null, "en");
+    t(`EN [${m}] bayt-aynı: "${s.slice(0, 44)}…"`, d === s, `→ "${d}"`);
+  }
+  // Callout HÂLÂ silinir: büyük harfli site öneki + büyük harfli ad (EN ve TR biçimi).
+  const lotusEn = stripForeignCallouts("You died at A Short while pushing alone.", "Lotus", null, "en");
+  t("EN [Lotus] 'You died at A Short' hâlâ siliniyor", lotusEn === "You died while pushing alone.", `→ "${lotusEn}"`);
+  const lotusTr = stripForeignCallouts("A Short'ta öldün.", "Lotus", null, "en");
+  t("EN istek [Lotus] 'A Short'ta öldün.' hâlâ siliniyor (cümle başı 'A' + büyük 'Short')", !/a short/i.test(lotusTr), `→ "${lotusTr}"`);
+  const bindLong = stripForeignCallouts("A long sightline punished you. A Long is not on this map.", "Bind", null, "en");
+  t("EN [Bind] cümle başı 'A long' korunur, 'A Long' (callout) silinir",
+    bindLong.startsWith("A long sightline punished you.") && !/A Long/.test(bindLong), `→ "${bindLong}"`);
+  // lang verilmeyen (TR) yol BAYT-AYNI: lang'sız çağrı = lang "tr" çağrısı (TR yolu değişmedi).
+  for (const [s, m] of [...keep, ["A Short'ta öldün.", "Lotus"], ["Sova A Long'u kapatsın, sen B'yi tut.", "Bind"]] as [string, string][]) {
+    t(`lang'sız = lang "tr": "${s.slice(0, 36)}…" [${m}]`, stripForeignCallouts(s, m) === stripForeignCallouts(s, m, null, "tr"));
+  }
+  // Bağlantı: realityCheck istek dilini strip'e geçiriyor (HEAD: geçirmiyordu → EN'de de siliniyordu).
+  const rcEn = realityCheck("Jett held a long sightline down B Long.", [], undefined, "suggestion", "en", "Bind").text;
+  t("realityCheck(lang=en, Bind) 'a long sightline' korunur", rcEn === "Jett held a long sightline down B Long.", `→ "${rcEn}"`);
+  t("lang'sız yol eskisi gibi: [Bind] 'held a long sightline' (TR yolunda artikel kavramı yok)",
+    stripForeignCallouts("Jett held a long sightline down B Long with an Operator.", "Bind") === "Jett held sightline down B Long with an Operator.");
 }
 
 console.log(`\n══════ ${fail === 0 ? "✅ TÜMÜ GEÇTİ" : `❌ ${fail} BAŞARISIZ`} ══════\n`);

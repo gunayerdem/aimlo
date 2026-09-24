@@ -1818,6 +1818,9 @@ export function stripForeignCallouts(
   // Masaüstünün OCR ile ÖLÇÜP gönderdiği ölüm yeri/yerleri. HER ZAMAN meşru.
   // Vision route TEK string; report route TÜM round'ların konum dizisi.
   suppliedLocation?: string | string[] | null,
+  // FB05 · F12: İSTEK dili. YALNIZ "en" iken İngilizce belirsiz artikel koruması açılır
+  // (aşağıdaki enArticle). Verilmezse / "tr" ise davranış BAYT-AYNI (TR yolu değişmez).
+  lang?: "tr" | "en",
 ): string {
   if (!text) return text;
   const k = mapKey(map);
@@ -1890,7 +1893,34 @@ export function stripForeignCallouts(
     const m = /^[abc]\s+(.+)$/.exec(c.toLowerCase());
     if (m) letteredWords.add(m[1]);
   }
-  const keepIfLegit = (whole: string, name: string) => {
+  // EN BELİRSİZ ARTİKEL KORUMASI (FB05 · F12, 2026-09-24).
+  // KANIT: iki regex de "giu" (büyük/küçük harf duyarsız) → EN'de artikel "a" + sıfat
+  // ("a long", "a short", "a back", "a wall", "a default") başka haritanın "a long" /
+  // "a short" callout'u sanılıp siliniyordu: [Bind] "Jett held a long sightline down B
+  // Long" → "Jett held sightline down B Long"; [Icebox] "Execute a short two-man
+  // post-plant" → "Execute two-man post-plant"; [Ascent] "Play for a default and hold a
+  // wall until…" → "Play for and hold until…". Korpus: 164 EN örneğin 24'ünde 29 öbek,
+  // son prod-parity koşularında 60'ın 13'ü. realityCheck lang'i biliyordu ama
+  // stripForeignCallouts'a geçirmiyordu.
+  // KURAL (yalnız lang === "en"; eşleşen ORİJİNAL metin görülür):
+  //   • ad tek harfli site önekiyle başlıyor ve o harf KÜÇÜKSE ("a long", "b long") → artikel
+  //     /gündelik kullanım sayılır, dokunulmaz (EN koç metninde callout'lar Title-Case;
+  //     neutralizeUnprovenLocationsEn kural 4 ile aynı gerekçe);
+  //   • cümle başındaki büyük "A" belirsizdir: ardından gelen kelime KÜÇÜK harfliyse artikel
+  //     ("A long sightline…" korunur), BÜYÜK harfliyse callout ("A Long" / "A Short" eskisi gibi
+  //     silinir). Cümle ortasındaki büyük "A"/"B"/"C" + küçük kelime eski kurala tabi.
+  const enArticle = (whole: string, name: string, offset: number, full: string): boolean => {
+    if (lang !== "en") return false;
+    const m = /^([abcABC])\s+(\S)/.exec(name);
+    if (!m) return false;
+    if (m[1] === m[1].toLowerCase()) return true;
+    if (m[1] !== "A" || m[2] === m[2].toUpperCase()) return false;
+    // Adın metindeki başlangıcı: regex-1'de ad eşleşmenin SONUNDA, regex-2'de BAŞINDA.
+    const at = whole.startsWith(name) ? offset : offset + whole.lastIndexOf(name);
+    return /(?:^|[.!?\n]\s*)$/.test(full.slice(0, at));
+  };
+  const keepIfLegit = (whole: string, name: string, offset?: number, full?: string) => {
+    if (typeof offset === "number" && typeof full === "string" && enArticle(whole, name, offset, full)) return whole;
     const n = name.trim().toLowerCase();
     if (legit.has(n)) return whole; // bu haritaya ait / evrensel / gönderilen konum
     const lettered = /^([abc])\s+(.+)$/.exec(n);
@@ -2322,7 +2352,9 @@ export function realityCheck(
   // sızmasın). Harita bilinmiyorsa no-op. Ölçülmüş konumlar HER ZAMAN korunur —
   // tablo eksik olsa bile.
   if (map) {
-    const stripped = stripForeignCallouts(text, map, [...measured]);
+    // FB05 · F12: istek dili geçirilir → EN'de belirsiz artikel ("a long sightline") callout
+    // sanılıp silinmez. lang verilmeyen/TR çağrıda strip bayt-aynı.
+    const stripped = stripForeignCallouts(text, map, [...measured], lang);
     if (stripped !== text) {
       text = stripped;
       rewriteLevel = Math.max(rewriteLevel, 2);
