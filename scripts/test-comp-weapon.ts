@@ -114,6 +114,32 @@ eq("over-peek katman fix: sinyalsiz aa>=ea hâlâ yakalanır", classifyDeath({ a
   eq("slug parçası olan başka tireli terim eşleşmez ('op-compact', 'x-op-comp')",
     stripCompArchetypeTokens("op-compact x-op-comp", "tr"), "op-compact x-op-comp");
   eq("temiz metin bayt-aynı", stripCompArchetypeTokens("Rakip kadrosunda iki duelist var.", "tr"), "Rakip kadrosunda iki duelist var.");
+  // ── W2 inceleme REV-W2 (2026-09-24): tekrar + ünlü uyumu (probe HEAD 7fc9df7) ──
+  eq("EN 'No-controller-rush comp.' → 'No-smoke comp.' (eskiden 'No-smoke comp comp.')",
+    cleanCoachText("No-controller-rush comp.", "en"), "No-smoke comp.");
+  eq("EN 'an op-comp comp' → 'an Op comp' (tekrar yok)", stripCompArchetypeTokens("They run an op-comp comp here.", "en"), "They run an Op comp here.");
+  eq("TR 'op-comp komposu' → 'Op'lu komposu' (modelin ekli sözcüğü korunur)",
+    stripCompArchetypeTokens("Rakibin op-comp komposu uzun hatları kilitliyor.", "tr"), "Rakibin Op'lu komposu uzun hatları kilitliyor.");
+  eq("TR 'no-controller-rush kompozisyonu' → 'smoke'suz kompozisyonu'",
+    stripCompArchetypeTokens("Rakibin no-controller-rush kompozisyonu hızlı basıyor.", "tr"), "Rakibin smoke'suz kompozisyonu hızlı basıyor.");
+  eq("'komple'/'complete' komp sözcüğü SAYILMAZ (sade ad aynen)",
+    [stripCompArchetypeTokens("Op-comp komple kilitliyor.", "tr"), stripCompArchetypeTokens("An op-comp completely locks it.", "en")].join(" | "),
+    "Op'lu komp komple kilitliyor. | An Op comp completely locks it.");
+  eq("gözlenen kalıp DEĞİŞMEDİ: 'double-duelist-dive comp' → 'two-duelist comp' (sade ad comp'la bitmiyor)",
+    stripCompArchetypeTokens("They play a double-duelist-dive comp.", "en"), "They play a two-duelist comp.");
+  eq("TR ünlü uyumu: 'double-duelist-dive'a karşı' → 'çift duelist'e karşı' (eskiden duelist'a)",
+    cleanCoachText("Rakip double-duelist-dive'a karşı oyna.", "tr"), "Rakip çift duelist'e karşı oyna.");
+  eq("TR ünlü uyumu + sertleşme: 'double-duelist-dive'da' → 'çift duelist'te'",
+    stripCompArchetypeTokens("Rakip double-duelist-dive'da ısrar ediyor.", "tr"), "Rakip çift duelist'te ısrar ediyor.");
+  eq("TR: 'double-controller'e/'ı', 'double-sentinel-kale'yi', 'double-initiator-util'in'",
+    ["Rakip double-controller'e göre oyna.", "Rakip double-controller'ı kurdu.", "Rakip double-sentinel-kale'yi kurdu.", "Rakip double-initiator-util'in bilgisini kullanıyor."]
+      .map((s) => stripCompArchetypeTokens(s, "tr")).join(" | "),
+    "Rakip çift controller'a göre oyna. | Rakip çift controller'ı kurdu. | Rakip çift sentinel'i kurdu. | Rakip çift initiator'ın bilgisini kullanıyor.");
+  eq("TR tanınmayan ek (çoğul) → eski davranış (model eki aynen)",
+    stripCompArchetypeTokens("Rakip double-controller'lar oynuyor.", "tr"), "Rakip çift controller'lar oynuyor.");
+  eq("EN kesme eki değişmez ('op-comp's' → 'Op comp's', 'double-controller's' → 'two-controller's')",
+    stripCompArchetypeTokens("The op-comp's weak spot is the double-controller's timing.", "en"),
+    "The Op comp's weak spot is the two-controller's timing.");
   eq("tablo: standart HARİÇ her arketipin TR+EN sade adı var (yeni arketip eklenirse kırmızı)",
     COMP_ARCHETYPES.filter((a) => a !== "standart").every((a) => !!COMP_ARCHETYPE_PLAIN[a as keyof typeof COMP_ARCHETYPE_PLAIN]?.tr && !!COMP_ARCHETYPE_PLAIN[a as keyof typeof COMP_ARCHETYPE_PLAIN]?.en),
     true);

@@ -969,14 +969,40 @@ const COMP_SLUG_RE = new RegExp(
     `(?:(['’])([a-zçğıöşü]{1,8}))?(?![\\p{L}\\p{N}-])`,
   "giu",
 );
+// İKİ DİL HATASI (W2 inceleme REV-W2, 2026-09-24 — probe HEAD 7fc9df7):
+//  (1) TEKRAR: sade ad zaten "comp/komp" ile biterken model slug'ın ardına kendi komp
+//      sözcüğünü yazınca "No-controller-rush comp." → "No-smoke comp comp." çıkıyordu.
+//      Model bu alışkanlığı gerçekten taşıyor: korpus+canlı loglarda "double-duelist-dive
+//      comp" ×4, "double-controller comp" ×2, "double-duelist-dive komposu/kompozisyonu"
+//      ×8. Çözüm: SADE ADIN kendi kuyruğu (" comp"/" komp") düşer, MODELİN sözcüğü (ekiyle:
+//      "komposu", "kompozisyonu", "comps") korunur — ek bilgisi kaybolmaz. Sözcük listesi
+//      dar: "komple"/"kompleks"/"complete" gibi başka sözcükler eşleşmez.
+//  (2) ÜNLÜ UYUMU: kesme eki modelin slug'ına göre çekilmişti ("double-duelist-dive'a" →
+//      "çift duelist'a"; doğrusu "duelist'e"). TR'de ek, sade adın SON sözcüğünün
+//      okunuşuna göre yeniden türetilir — veri-etiketi süzgecinin harmonizeLabelSuffix
+//      "loan" yolu (kesme kalır; LOAN_SOUND'a 4 rol adı eklendi). Tanınmayan ek (çoğul
+//      vb.) → eski davranış (model eki aynen). EN dalı değişmez.
+const COMP_WORD_AFTER_RE =
+  /^\s+(?:comps?|compositions?|komp(?:ozisyon\p{L}*|osu\p{L}*|u(?:n|nu|na|nda|ndan)?|a|ta|tan|taki|la|lar\p{L}*)?)(?!\p{L})/iu;
 export function stripCompArchetypeTokens(text: string, lang: "tr" | "en"): string {
   if (!text) return text;
-  return text.replace(COMP_SLUG_RE, (m: string, slug: string, apos: string | undefined, suffix: string | undefined) => {
+  return text.replace(COMP_SLUG_RE, (m: string, slug: string, apos: string | undefined, suffix: string | undefined, offset: number, full: string) => {
     const plain = COMP_ARCHETYPE_PLAIN[slug.toLowerCase() as keyof typeof COMP_ARCHETYPE_PLAIN];
     if (!plain) return m;
     let out = lang === "en" ? plain.en : plain.tr;
     if (/^\p{Lu}/u.test(m)) out = (lang === "tr" ? out.charAt(0).toLocaleUpperCase("tr") : out.charAt(0).toUpperCase()) + out.slice(1);
-    if (suffix) out += /komp$/i.test(out) ? suffix : `${apos ?? "'"}${suffix}`;
+    if (suffix) {
+      if (/komp$/i.test(out)) return out + suffix;
+      if (lang === "tr") {
+        const last = /(\p{L}+)$/u.exec(out)?.[1] ?? "";
+        const h = LOAN_SOUND[last.toLowerCase()] ? harmonizeLabelSuffix(last.toLowerCase(), "loan", suffix) : null;
+        if (h !== null && !h.startsWith("\u0000")) return out + h;
+      }
+      return out + `${apos ?? "'"}${suffix}`;
+    }
+    if (/\s(?:comp|komp)$/i.test(out) && COMP_WORD_AFTER_RE.test(full.slice(offset + m.length))) {
+      out = out.replace(/\s(?:comp|komp)$/i, "");
+    }
     return out;
   });
 }
@@ -1030,6 +1056,13 @@ const FIELD_LABEL_REWRITES: Array<[RegExp, { tr: string; en: string; kind: Label
 const LOAN_SOUND: Record<string, { vowel: string; hard: boolean }> = {
   ult: { vowel: "u", hard: true },
   trade: { vowel: "e", hard: false },
+  // Komp arketipi sade adlarının son sözcüğü (stripCompArchetypeTokens, REV-W2): okunuş
+  // "düelist" (duelist'e/'i/'te), "sentinel" ('e/'i/'de), "kontrolır" ('a/'ı/'da),
+  // "inişietır" ('a/'ı/'da). FIELD_LABEL_REWRITES bu anahtarları kullanmaz.
+  duelist: { vowel: "i", hard: true },
+  sentinel: { vowel: "e", hard: false },
+  controller: { vowel: "ı", hard: false },
+  initiator: { vowel: "ı", hard: false },
 };
 
 /** Etiketin kesme-sonrası ekini (İngilizce etikete yazılmış hâliyle) Türkçe karşılığa
