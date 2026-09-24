@@ -43,7 +43,23 @@ export default async function DeleteAccountPage() {
               <li>Tüm maç analizlerin</li>
               <li>Oyun istatistiklerin (player memory)</li>
               <li>Profil bilgilerin (kullanıcı adı, isim)</li>
+              {/* F50 (2026-09-24): actions.ts deleteUser'dan ÖNCE
+                  support_messages satırlarını siliyor. */}
+              <li>Destek mesajların (destek formundan yazdıkların)</li>
             </ul>
+            {/* F50: bildirim e-postaları (lib/email.ts sendSupportNotification)
+                destek posta kutusuna düştü; DB silmesi onlara ulaşmaz. */}
+            <p className="text-[12px] text-neutral-500">
+              Destek mesajlarının e-posta bildirim kopyaları destek kutumuzda
+              kalabilir. Silinmesini istersen{" "}
+              <a
+                href="mailto:support@aimlo.gg"
+                className="text-[#FF4655] hover:underline"
+              >
+                support@aimlo.gg
+              </a>{" "}
+              adresine yaz.
+            </p>
           </div>
 
           <p className="text-[12px] text-[#FF3D71]">
