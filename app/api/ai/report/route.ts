@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { verifyAuthAndRateLimit, authUnavailableResponse, consumeDailyQuota, refundDailyQuota } from "@/lib/api-auth";
-import { checkMatchQuota } from "@/lib/entitlements";
+import { checkMatchQuota, quotaExceededBody } from "@/lib/entitlements";
 import { saveAiUsage } from "@/lib/ai-usage";
 import { loadPlayerMemory, updatePlayerMemory, buildMemoryContext } from "@/lib/player-memory";
 // B05 (OLCUM-ARACI-10/12/13/14, 2026-09-24): doğrulama, deterministik rapor, prompt
@@ -397,14 +397,9 @@ export async function POST(request: NextRequest) {
     const quota = await checkMatchQuota(userId, validation.data.matchId);
     if (!quota.allowed) {
       console.log(`[QUOTA] report blocked — user=${userId.slice(0, 8)} used=${quota.used}/${quota.limit}`);
-      return NextResponse.json(
-        {
-          error: "quota_exceeded",
-          message: `Ücretsiz hesabın haftalık ${quota.limit} maç analizi hakkı doldu. AIMLO+ ile sınırsız analiz al.`,
-          detail: { used: quota.used, limit: quota.limit, resetsAt: quota.resetsAt },
-        },
-        { status: 402 },
-      );
+      // FB04 · F93: vision ile AYNI kurucu (lib/entitlements quotaExceededBody) — abone adil
+      // kullanım tavanında CTA'sız metin; detail'e reason+tier (additive). Statü 402 aynı.
+      return NextResponse.json(quotaExceededBody(quota, validation.data.lang), { status: 402 });
     }
 
     const ai = await generateAIReport(validation.data, userId);

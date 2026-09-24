@@ -37,10 +37,12 @@
 // FAIL-OPEN tercihi: Upstash/abonelik erişilemezse kota AÇILIR. Burası bir
 // güvenlik sınırı değil, ticari kota; altyapı arızasında ödeme yapan/yapmayan
 // herkesi kilitlemek birkaç bedava analizden kötüdür. (Karşılaştır:
-// lib/api-auth.ts kötüye-kullanım rate-limit'i prod'da FAIL-CLOSED.)
+// lib/api-auth.ts kötüye-kullanım rate-limit'i Upstash erişilemezken prod'da
+// FAIL-CLOSED; UPSTASH_* hiç yokken bellek yedeği + görünür uyarı — FB04 · F47.)
 import "server-only";
 
 import { getSubscriptionState } from "@/lib/billing";
+import { PRODUCT_NAME } from "@/lib/brand";
 
 /** Ücretsiz hesabın haftalık maç analizi hakkı. */
 export const FREE_WEEKLY_MATCH_QUOTA = 3;
@@ -92,6 +94,84 @@ export type QuotaVerdict = {
   /** Geçerli pencerenin bitişi (ISO) — istemci "ne zaman sıfırlanır" diyebilsin. */
   resetsAt: string | null;
 };
+
+/** 402 gövdesi — vision ve report route'larının ORTAK sözleşmesi (FB04 · F93). */
+export type QuotaExceededBody = {
+  error: "quota_exceeded";
+  message: string;
+  detail: {
+    used: number | null;
+    limit: number;
+    resetsAt: string | null;
+    /** Additive (F93): hangi tavan — masaüstü metni buna göre seçebilsin. */
+    reason: QuotaVerdict["reason"];
+    /** Additive (F93): hangi katman. */
+    tier: QuotaVerdict["tier"];
+  };
+};
+
+/** TR ay adları, bulunma ekiyle ("1 Ekim'de"). Ek AY ADINA biner (ünlü uyumu +
+ *  sert ünsüz benzeşmesi elle, tablo sabit — çalışma anında ek üretimi yok). */
+const TR_MONTHS_LOCATIVE = [
+  "Ocak'ta", "Şubat'ta", "Mart'ta", "Nisan'da", "Mayıs'ta", "Haziran'da",
+  "Temmuz'da", "Ağustos'ta", "Eylül'de", "Ekim'de", "Kasım'da", "Aralık'ta",
+] as const;
+const EN_MONTHS = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+] as const;
+
+/** resetsAt (ISO) → UTC gün + ay; geçersizse null. Sıfırlama UTC gece yarısında
+ *  (monthResetsAt) — TSİ'de aynı günün 03:00'ü, yani TR tarihi de aynı gün. */
+function utcDayMonth(iso: string | null): { day: number; month: number } | null {
+  if (!iso) return null;
+  const t = Date.parse(iso);
+  if (!Number.isFinite(t)) return null;
+  const d = new Date(t);
+  return { day: d.getUTCDate(), month: d.getUTCMonth() };
+}
+
+/**
+ * FB04 · F93 (2026-09-24) — 402 quota_exceeded gövdesinin TEK kurucusu.
+ *
+ * KÖK: R14 verdict'e `reason` ekledi ("route mesajı dallandırır" dedi) ama iki route
+ * (vision, report) sabit tek metin yazıyordu: "Ücretsiz hesabın haftalık N maç analizi
+ * hakkı doldu. AIMLO+ ile sınırsız analiz al." → aylık adil kullanım tavanına çarpan
+ * PARA ÖDEYEN aboneye "ücretsiz hesabın haftalık 100 maç" + "sınırsız" satışı yapılıyordu
+ * (FREE_TIER_ENFORCED açılınca).
+ *
+ *  - reason "fair_use" → CTA'SIZ metin (satış yok), tavan + yenilenme tarihi; TR/EN.
+ *  - aksi hâlde        → mevcut ücretsiz metin BAYT-AYNI (dil ne olursa olsun — masaüstü
+ *                        EN'de 402 message'ını zaten kullanmıyor; metin değişikliği ayrı iş).
+ * detail'e `reason` ve `tier` EKLENDİ (additive): eski masaüstü bilinmeyen alanları yok sayar
+ * (ai_client.rs QuotaExceeded yalnız used/limit/resetsAt okur); statü 402 değişmez.
+ */
+export function quotaExceededBody(quota: QuotaVerdict, lang: "tr" | "en" = "tr"): QuotaExceededBody {
+  let message: string;
+  if (quota.reason === "fair_use") {
+    const dm = utcDayMonth(quota.resetsAt);
+    if (lang === "en") {
+      const when = dm ? `on ${EN_MONTHS[dm.month]} ${dm.day} (UTC)` : "at the start of next month";
+      message = `You've reached the ${PRODUCT_NAME} fair-use limit of ${quota.limit} match analyses this month; your allowance renews ${when}.`;
+    } else {
+      const when = dm ? `${dm.day} ${TR_MONTHS_LOCATIVE[dm.month]}` : "ay başında";
+      message = `${PRODUCT_NAME} aylık adil kullanım tavanın (${quota.limit} maç) doldu; hakkın ${when} yenilenir.`;
+    }
+  } else {
+    message = `Ücretsiz hesabın haftalık ${quota.limit} maç analizi hakkı doldu. ${PRODUCT_NAME} ile sınırsız analiz al.`;
+  }
+  return {
+    error: "quota_exceeded",
+    message,
+    detail: {
+      used: quota.used,
+      limit: quota.limit,
+      resetsAt: quota.resetsAt,
+      reason: quota.reason,
+      tier: quota.tier,
+    },
+  };
+}
 
 /** Kota kapısı açık mı? Varsayılan KAPALI — env açıkça "true" olmalı. */
 export function isFreeTierEnforced(): boolean {

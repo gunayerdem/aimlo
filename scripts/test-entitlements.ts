@@ -87,6 +87,81 @@ async function main() {
   // ── Sabitler ──
   eq("haftalık hak 3", ent.FREE_WEEKLY_MATCH_QUOTA, 3);
 
+  // ── FB04 · F93: 402 gövdesi abone/ücretsiz ayrımı yapar ──
+  // KÖK: iki route sabit "Ücretsiz hesabın haftalık N maç … AIMLO+ ile sınırsız analiz al."
+  // yazıyordu → adil kullanım tavanındaki PARA ÖDEYEN aboneye "ücretsiz" + "sınırsız" satışı.
+  console.log("\n[F93] quotaExceededBody — fair_use CTA'sız, free_tier metni bayt-aynı");
+  const qeb = (ent as { quotaExceededBody?: (q: unknown, lang?: "tr" | "en") => { error: string; message: string; detail: Record<string, unknown> } }).quotaExceededBody;
+  const FAIR = { allowed: false, enforced: true, used: 100, limit: 100, unlimited: true, tier: "plus", reason: "fair_use", resetsAt: "2026-10-01T00:00:00.000Z" };
+  const FREE = { allowed: false, enforced: true, used: 3, limit: 3, unlimited: false, tier: "free", reason: "free_tier", resetsAt: "2026-09-28T00:00:00.000Z" };
+  const LEGACY_FREE = "Ücretsiz hesabın haftalık 3 maç analizi hakkı doldu. AIMLO+ ile sınırsız analiz al.";
+  if (typeof qeb !== "function") {
+    eq("quotaExceededBody lib/entitlements'tan export ediliyor", typeof qeb, "function");
+  } else {
+    const trF = qeb(FAIR, "tr");
+    eq("fair_use TR metni (CTA'sız, tavan + yenilenme)", trF.message, "AIMLO+ aylık adil kullanım tavanın (100 maç) doldu; hakkın 1 Ekim'de yenilenir.");
+    eq("fair_use TR: 'Ücretsiz' ve 'sınırsız' YOK", /ücretsiz|sınırsız/i.test(trF.message), false);
+    const enF = qeb(FAIR, "en");
+    eq("fair_use EN metni", enF.message, "You've reached the AIMLO+ fair-use limit of 100 match analyses this month; your allowance renews on October 1 (UTC).");
+    eq("fair_use EN: 'free'/'unlimited' YOK", /\bfree\b|unlimited/i.test(enF.message), false);
+    eq("fair_use detail: used/limit/resetsAt + reason/tier (additive)", trF.detail,
+      { used: 100, limit: 100, resetsAt: "2026-10-01T00:00:00.000Z", reason: "fair_use", tier: "plus" });
+    eq("error kodu değişmedi", trF.error, "quota_exceeded");
+    eq("fair_use resetsAt yok → TR 'ay başında'", qeb({ ...FAIR, resetsAt: null }, "tr").message,
+      "AIMLO+ aylık adil kullanım tavanın (100 maç) doldu; hakkın ay başında yenilenir.");
+    eq("fair_use resetsAt yok → EN 'start of next month'", qeb({ ...FAIR, resetsAt: null }, "en").message,
+      "You've reached the AIMLO+ fair-use limit of 100 match analyses this month; your allowance renews at the start of next month.");
+    eq("TR ay eki tablosu (Ocak'ta / Eylül'de / Aralık'ta)", [
+      qeb({ ...FAIR, resetsAt: "2027-01-01T00:00:00.000Z" }, "tr").message.includes("hakkın 1 Ocak'ta yenilenir"),
+      qeb({ ...FAIR, resetsAt: "2026-09-01T00:00:00.000Z" }, "tr").message.includes("hakkın 1 Eylül'de yenilenir"),
+      qeb({ ...FAIR, resetsAt: "2026-12-01T00:00:00.000Z" }, "tr").message.includes("hakkın 1 Aralık'ta yenilenir"),
+    ], [true, true, true]);
+    eq("'+' işaretine ek YOK (lib/brand.ts kuralı)", /AIMLO\+['’]/.test(trF.message + enF.message), false);
+    eq("free_tier TR metni BAYT-AYNI (eski route metni)", qeb(FREE, "tr").message, LEGACY_FREE);
+    eq("free_tier EN isteğinde de aynı metin (masaüstü EN 402 message'ını kullanmıyor)", qeb(FREE, "en").message, LEGACY_FREE);
+    eq("free_tier detail reason/tier", qeb(FREE, "tr").detail,
+      { used: 3, limit: 3, resetsAt: "2026-09-28T00:00:00.000Z", reason: "free_tier", tier: "free" });
+  }
+
+  // Route düzeyi: iki route da 402'yi AYNI kurucudan üretir (sahte harness, ağ/AI/DB yok).
+  console.log("\n[F93] vision + report route 402 gövdesi (gerçek POST handler)");
+  {
+    const rh = await import("./report-route-harness");
+    const vh = await import("./vision-route-harness");
+    const reportRoute = rh.loadReportRoute();
+    const visionRoute = vh.loadVisionRoute();
+    const validReport = {
+      rounds: [
+        { round: 1, score: "1 - 0", result: "win", died: false, deathAnalysis: "", enemyAnalysis: [], nextRoundSuggestion: "" },
+        { round: 2, score: "1 - 1", result: "loss", died: true, deathLocation: "A Main", deathAnalysis: "", enemyAnalysis: [], nextRoundSuggestion: "" },
+      ],
+      maxTokens: 800, map: "ascent", agent: "jett", side: "attacking",
+    };
+    const cases: [string, () => Promise<Response>][] = [
+      ["report TR", () => reportRoute.POST(rh.reportRequest({ ...validReport, lang: "tr" }))],
+      ["report EN", () => reportRoute.POST(rh.reportRequest({ ...validReport, lang: "en" }))],
+      ["vision TR", () => visionRoute.POST(vh.visionRequest({ died: true, round: 1, map: "Ascent", agent: "Jett", lang: "tr" }))],
+      ["vision EN", () => visionRoute.POST(vh.visionRequest({ died: true, round: 1, map: "Ascent", agent: "Jett", lang: "en" }))],
+    ];
+    for (const [label, call] of cases) {
+      rh.resetHarness();
+      rh.harness.quota = FAIR;
+      const res = await call();
+      const body = (await res.json().catch(() => ({}))) as { error?: string; message?: string; detail?: Record<string, unknown> };
+      const msg = String(body.message ?? "");
+      eq(`${label}: fair_use → 402 quota_exceeded`, [res.status, body.error], [402, "quota_exceeded"]);
+      eq(`${label}: gövdede 'Ücretsiz' ve 'sınırsız' YOK`, /Ücretsiz|sınırsız/.test(msg), false);
+      eq(`${label}: detail.reason = fair_use, tier = plus`, [body.detail?.reason, body.detail?.tier], ["fair_use", "plus"]);
+      eq(`${label}: AI çağrısı yapılmadı`, rh.harness.fetchCalls.length, 0);
+    }
+    rh.resetHarness();
+    rh.harness.quota = FREE;
+    const rf = await reportRoute.POST(rh.reportRequest({ ...validReport, lang: "tr" }));
+    const bf = (await rf.json().catch(() => ({}))) as { message?: string; detail?: Record<string, unknown> };
+    eq("report free_tier → eski metin bayt-aynı + reason free_tier", [rf.status, bf.message, bf.detail?.reason], [402, LEGACY_FREE, "free_tier"]);
+    rh.resetHarness();
+  }
+
   console.log(fail === 0 ? "\nTÜM TESTLER GEÇTİ ✓" : `\n${fail} TEST BAŞARISIZ ✗`);
   process.exit(fail ? 1 : 0);
 }

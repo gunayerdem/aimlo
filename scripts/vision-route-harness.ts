@@ -13,7 +13,8 @@
  *   1) "server-only" → boş modül ("path"); "@/..." → repo kökü.
  *   2) Module._cache'e sahte `exports` konur (route CJS require ile yükler):
  *        lib/api-auth      → GERÇEK modül, yalnız verifyAuthAndRateLimit sahte
- *        lib/entitlements  → checkMatchQuota her zaman izinli
+ *        lib/entitlements  → checkMatchQuota her zaman izinli (FB04 · F93: harness.quota
+ *                            verilirse onu döner); quotaExceededBody GERÇEK
  *        lib/ai-usage      → saveAiUsage çağrıları sayılır
  *        lib/player-memory → buildMemoryContext testin memoryContext'ini döndürür
  *        lib/match-events  → saveMatchEvent kaydedilir (DB yok)
@@ -97,8 +98,12 @@ export function loadVisionRoute(): VisionRouteModule {
     const fn = resolveRepo(rel);
     M._cache[fn] = { id: fn, filename: fn, loaded: true, exports, children: [], paths: [] } as unknown as { exports: unknown };
   };
+  // FB04 · F93: quotaExceededBody GERÇEK modülden (402 gövdesinin tek kurucusu).
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const realEnt = require(resolveRepo("lib/entitlements")) as Record<string, unknown>;
   fakeModule("lib/entitlements", {
-    checkMatchQuota: async () => ({ allowed: true, used: 0, limit: 3, resetsAt: null }),
+    ...realEnt,
+    checkMatchQuota: async () => harness.quota ?? ({ allowed: true, used: 0, limit: 3, resetsAt: null }),
   });
   fakeModule("lib/ai-usage", {
     saveAiUsage: (input: Record<string, unknown>) => { harness.usageCalls.push(input); },

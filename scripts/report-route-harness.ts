@@ -14,7 +14,9 @@
  *                            SAYILIR, ret modu verilebilir; verify'ın opts'u kaydedilir)
  *                            (authUnavailableResponse GERÇEK kalır → 503 gövdesi
  *                            prod ile aynı fonksiyondan gelir)
- *        lib/entitlements  → checkMatchQuota her zaman izinli
+ *        lib/entitlements  → checkMatchQuota her zaman izinli (FB04 · F93: harness.quota
+ *                            verilirse onu döner); quotaExceededBody GERÇEK (402 gövdesi
+ *                            prod ile aynı fonksiyondan gelir)
  *        lib/ai-usage      → saveAiUsage çağrıları SAYILIR (OLCUM-ARACI-15)
  *        lib/player-memory → bellek yükleme/yazma sahte; buildMemoryContext
  *                            testin verdiği memoryContext'i döndürür; FB01: yazma
@@ -90,6 +92,8 @@ export const harness = {
   memoryUpdates: [] as Record<string, unknown>[],
   /** FB01: null → analyses çağrısı eskisi gibi THROW eder. */
   db: null as FakeDb | null,
+  /** FB04 · F93: verilirse checkMatchQuota bu verdict'i döner (402 kota simülasyonu). */
+  quota: null as Record<string, unknown> | null,
 };
 
 export function newFakeDb(): FakeDb {
@@ -108,6 +112,7 @@ export function resetHarness(): void {
   harness.dailyRefunds = 0;
   harness.memoryUpdates = [];
   harness.db = null;
+  harness.quota = null;
 }
 
 /** FB01: sahte PostgREST "analyses" — supabase-js'in gönderdiği GET/POST biçimi. */
@@ -204,8 +209,12 @@ export function loadReportRoute(): { POST: (req: Request) => Promise<Response> }
     const fn = resolveRepo(rel);
     M._cache[fn] = { id: fn, filename: fn, loaded: true, exports, children: [], paths: [] } as unknown as { exports: unknown };
   };
+  // FB04 · F93: quotaExceededBody GERÇEK modülden (402 gövdesinin tek kurucusu).
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const realEnt = require(resolveRepo("lib/entitlements")) as Record<string, unknown>;
   fakeModule("lib/entitlements", {
-    checkMatchQuota: async () => ({ allowed: true, used: 0, limit: 3, resetsAt: null }),
+    ...realEnt,
+    checkMatchQuota: async () => harness.quota ?? ({ allowed: true, used: 0, limit: 3, resetsAt: null }),
   });
   fakeModule("lib/ai-usage", {
     saveAiUsage: (input: UsageCall) => { harness.usageCalls.push(input); },
