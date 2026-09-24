@@ -40,6 +40,7 @@ function TelemetryTableCard({
   empty,
   unknown,
   truncated,
+  truncatedNote = "Satır tavanına dayanıldı — sayılar EKSİK olabilir (alt sınır).",
 }: {
   title: string;
   sub?: string;
@@ -48,6 +49,8 @@ function TelemetryTableCard({
   empty: string;
   unknown: boolean;
   truncated: boolean;
+  /** Tavan notu. Toplamlarda "alt sınır" doğru; yüzdeliklerde DEĞİL (W2 inceleme B08-F2). */
+  truncatedNote?: string;
 }) {
   return (
     <div className="adm-card" style={{ padding: 4 }}>
@@ -56,7 +59,7 @@ function TelemetryTableCard({
         {sub ? <p className="adm-stat-sub" style={{ marginTop: 4 }}>{sub}</p> : null}
         {truncated ? (
           <p className="adm-stat-sub" style={{ marginTop: 4, color: "#fcd28a" }}>
-            Satır tavanına dayanıldı — sayılar EKSİK olabilir (alt sınır).
+            {truncatedNote}
           </p>
         ) : null}
       </div>
@@ -138,7 +141,14 @@ export function TelemetrySectionView({ t }: { t: TelemetrySummary | null }) {
     <>
       {heading}
       <div className="adm-grid cols-4">
-        <TelemetryStat label={`UYGULAMAYI AÇAN · ${W.funnelDays}G`} value={f(funnel?.data.appOpen)} sub="ayrık kullanıcı (app_open)" />
+        {/* W2 inceleme B08-F4: telemetri kimlik ister (app/api/telemetry/route.ts
+            verifyAuthAndRateLimit; desktop telemetry.rs token yoksa flush etmez) → açıp
+            giriş yapmayanın app_open'ı sunucuya hiç ulaşmaz. Kart bunu söylemeli. */}
+        <TelemetryStat
+          label={`UYGULAMAYI AÇAN · ${W.funnelDays}G`}
+          value={f(funnel?.data.appOpen)}
+          sub="ayrık kullanıcı (app_open) — yalnız en az bir kez giriş yapmış cihazlar; açıp giriş yapmayan burada GÖRÜNMEZ"
+        />
         <TelemetryStat label={`GİRİŞ YAPAN · ${W.funnelDays}G`} value={f(funnel?.data.loginOk)} sub="ayrık kullanıcı (login_ok)" />
         <TelemetryStat
           label={`İZLEMEYİ BAŞLATAN · ${W.funnelDays}G`}
@@ -161,6 +171,7 @@ export function TelemetrySectionView({ t }: { t: TelemetrySummary | null }) {
           empty={`Son ${W.latencyHours} saatte ölçüm yok.`}
           unknown={!t.latency}
           truncated={!!t.latency?.truncated}
+          truncatedNote="Satır tavanına dayanıldı — örneklem eksik (en yeni satırlar düştü): p50/p95 YAKLAŞIK, alt sınır DEĞİL."
         />
         <TelemetryTableCard
           title={`Reddedilen olaylar · son ${W.rejectedDays} gün`}

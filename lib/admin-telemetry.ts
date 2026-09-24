@@ -30,8 +30,13 @@
 // SAYFALAMA: Supabase projelerinde API "Max rows" ayarı (proje varsayılanı 1000)
 // istek başına satırı keser ve bunu HATA olarak bildirmez; tek `.limit(20000)`
 // sessizce 1000 satırda kalabilir. Prod'daki ayar repo'dan doğrulanamadığı için
-// güvenli taraf seçildi: 1000'lik sayfalarla okunur; sayfa tam dolarsa bir
-// sonrakine geçilir, TELEMETRY_MAX_PAGES'te durup truncated denir.
+// güvenli taraf seçildi: 1000'lik sayfalarla okunur; ofset OKUNAN satır kadar
+// ilerler, döngü yalnız BOŞ sayfada biter (sunucu sayfayı daha küçük kesse de eksik
+// kalmaz — W2 inceleme B08-F1); TELEMETRY_MAX_ROWS'ta durup truncated denir.
+// TAVAN YÖNÜ (W2 inceleme B08-F2): sıra created_at ↑ olduğu için tavana dayanınca en
+// YENİ satırlar düşer. Bu yüzden hata kodlarının 24 saatlik sütunu KENDİ sorgusuyla
+// okunur (7 günlük küme kesilse de son 24 saat eksiksiz), tablo önce 24s'e göre
+// sıralanır ve gecikme tablosu kesildiğinde "p50/p95 YAKLAŞIK" der (alt sınır değil).
 //
 // GİZLİLİK: yalnız user_hash (sha256 önek) ayrık sayılır; dışarı hiçbir kimlik
 // verilmez. Dönen yapıda user_hash YOK.
@@ -46,6 +51,12 @@ import { TELEMETRY_REJECTED_TYPE } from "@/lib/telemetry-types";
 export const TELEMETRY_PAGE_SIZE = 1000;
 /** Bölüm başına en fazla okunacak sayfa (20 × 1000 = 20.000 satır). */
 export const TELEMETRY_MAX_PAGES = 20;
+/** Bölüm başına satır tavanı (W2 inceleme B08-F1): tavan SATIR sayısıyla tutulur —
+ *  prod "Max rows" 1000'den küçükse sayfa sayısı değil okunan satır belirleyicidir. */
+export const TELEMETRY_MAX_ROWS = TELEMETRY_PAGE_SIZE * TELEMETRY_MAX_PAGES;
+/** İstek tavanı: sunucu sayfayı çok küçük kesse bile (ör. 250) döngü sınırlı kalır;
+ *  ulaşılırsa truncated=true ("≥"). */
+export const TELEMETRY_MAX_REQUESTS = TELEMETRY_MAX_PAGES * 4;
 /** Bölüm başına TOPLAM süre sınırı (tüm sayfalar dahil). Panel bir tanı aracı;
  *  asılı kalan bir sorgu yüzünden admin sayfası beklemesin. */
 const SECTION_TIMEOUT_MS = 8000;
@@ -137,27 +148,43 @@ function cmpStr(a: string, b: string): number {
  * gibi: count NULL/geçersizse 0 sayılır (satır sayısı DEĞİL, olay adedi).
  * `shortSinceMs`ten yeni satırlar ayrıca kısa pencereye yazılır.
  */
-export function aggregateErrorCodes(rows: readonly TelemetryDbRow[], shortSinceMs: number): ErrorCodeRow[] {
+export function aggregateErrorCodes(
+  rows: readonly TelemetryDbRow[],
+  shortSinceMs: number,
+  /** Verilirse kısa pencere (24s) BU satırlardan sayılır (ayrı sorgu — W2 inceleme
+   *  B08-F2: 7 günlük küme tavanda kesilince en yeni satırlar düşüyordu). */
+  shortRows?: readonly TelemetryDbRow[],
+): ErrorCodeRow[] {
   const acc = new Map<string, ErrorCodeRow>();
-  for (const r of rows) {
+  const rowFor = (r: TelemetryDbRow): { row: ErrorCodeRow; hits: number; t: number } => {
     const code = typeof r.code === "string" && r.code.length > 0 ? r.code : "(kodsuz)";
     const appVersion = typeof r.app_version === "string" && r.app_version.length > 0 ? r.app_version : null;
     const key = `${code}\u0000${appVersion ?? ""}`;
     const c = toNum(r.count);
-    const hits = Number.isFinite(c) ? c : 0;
-    const t = r.created_at ? Date.parse(r.created_at) : Number.NaN;
     let row = acc.get(key);
     if (!row) {
       row = { code, appVersion, hitsShort: 0, hitsLong: 0 };
       acc.set(key, row);
     }
+    return { row, hits: Number.isFinite(c) ? c : 0, t: r.created_at ? Date.parse(r.created_at) : Number.NaN };
+  };
+  for (const r of rows) {
+    const { row, hits, t } = rowFor(r);
     row.hitsLong += hits;
-    if (Number.isFinite(t) && t >= shortSinceMs) row.hitsShort += hits;
+    if (!shortRows && Number.isFinite(t) && t >= shortSinceMs) row.hitsShort += hits;
   }
+  if (shortRows) {
+    for (const r of shortRows) {
+      const { row, hits, t } = rowFor(r);
+      if (Number.isFinite(t) && t >= shortSinceMs) row.hitsShort += hits;
+    }
+  }
+  // Önce 24s (W2 inceleme B08-F2): yaşanan olay (7 günde düşük, son saatlerde yüksek kod)
+  // 20 satırlık tabloda üstte görünsün; eşitlikte 7g.
   return [...acc.values()].sort(
     (a, b) =>
-      b.hitsLong - a.hitsLong ||
       b.hitsShort - a.hitsShort ||
+      b.hitsLong - a.hitsLong ||
       cmpStr(a.code, b.code) ||
       cmpStr(a.appVersion ?? "", b.appVersion ?? ""),
   );
@@ -232,6 +259,12 @@ type ServiceClient = ReturnType<typeof createServiceSupabase>;
  * Bir pencere + tip kümesi için satırları SAYFALI okur. Sıra created_at ↑ + id ↑:
  * okuma sırasında gelen yeni satırlar sona eklenir, önceki sayfaları kaydırmaz.
  * Hata / zaman aşımı → null (bölüm "bilinmiyor").
+ *
+ * W2 inceleme B08-F1 (2026-09-24): eskiden `batch.length < TELEMETRY_PAGE_SIZE` "bitti"
+ * sayılıyordu ve ofset sayfa × 1000 ilerliyordu → prod "Max rows" ayarı 1000'den küçükse
+ * (repo'dan doğrulanamıyor) ilk kısa sayfada `truncated:false` ile SESSİZCE eksik sayım —
+ * korunmaya çalışılan hatanın aynısı. Artık ofset OKUNAN satır kadar ilerler ve döngü
+ * yalnız BOŞ sayfada biter (bölüm başına fazladan tek istek); tavan satır sayısıyla.
  */
 async function fetchTelemetryRows(
   svc: ServiceClient,
@@ -242,8 +275,8 @@ async function fetchTelemetryRows(
   const signal = AbortSignal.timeout(SECTION_TIMEOUT_MS);
   const rows: TelemetryDbRow[] = [];
   try {
-    for (let page = 0; page < TELEMETRY_MAX_PAGES; page++) {
-      const from = page * TELEMETRY_PAGE_SIZE;
+    let from = 0;
+    for (let req = 0; req < TELEMETRY_MAX_REQUESTS; req++) {
       const { data, error } = await svc
         .from("telemetry_events")
         .select(columns)
@@ -258,8 +291,10 @@ async function fetchTelemetryRows(
         return null;
       }
       const batch = (data ?? []) as unknown as TelemetryDbRow[];
+      if (batch.length === 0) return { rows, truncated: false };
       rows.push(...batch);
-      if (batch.length < TELEMETRY_PAGE_SIZE) return { rows, truncated: false };
+      from += batch.length;
+      if (rows.length >= TELEMETRY_MAX_ROWS) return { rows, truncated: true };
     }
     return { rows, truncated: true };
   } catch (err) {
@@ -277,8 +312,11 @@ export async function getTelemetrySummary(nowMs: number = Date.now()): Promise<T
   const iso = (msAgo: number) => new Date(nowMs - msAgo).toISOString();
   const W = TELEMETRY_WINDOWS;
 
-  const [errs, lat, fun, watch, rej] = await Promise.all([
+  const [errs, errsShort, lat, fun, watch, rej] = await Promise.all([
     fetchTelemetryRows(svc, ["error_code_count"], iso(W.errorsLongDays * DAY_MS), "code, count, app_version, created_at"),
+    // 24s sütunu kendi sorgusundan (W2 inceleme B08-F2) — 7 günlük küme tavanda kesilse
+    // de son 24 saat eksiksiz kalır.
+    fetchTelemetryRows(svc, ["error_code_count"], iso(W.errorsShortHours * HOUR_MS), "code, count, app_version, created_at"),
     fetchTelemetryRows(svc, ["ai_call_duration_ms"], iso(W.latencyHours * HOUR_MS), "route, value"),
     fetchTelemetryRows(svc, ["app_open", "login_ok", "watch_started"], iso(W.funnelDays * DAY_MS), "type, user_hash"),
     fetchTelemetryRows(svc, ["watch_health"], iso(W.watchingMinutes * 60 * 1000), "user_hash"),
@@ -287,8 +325,11 @@ export async function getTelemetrySummary(nowMs: number = Date.now()): Promise<T
 
   return {
     generatedAt: new Date(nowMs).toISOString(),
-    errors: errs
-      ? { data: aggregateErrorCodes(errs.rows, nowMs - W.errorsShortHours * HOUR_MS), truncated: errs.truncated }
+    errors: errs && errsShort
+      ? {
+        data: aggregateErrorCodes(errs.rows, nowMs - W.errorsShortHours * HOUR_MS, errsShort.rows),
+        truncated: errs.truncated || errsShort.truncated,
+      }
       : null,
     latency: lat ? { data: aggregateLatency(lat.rows), truncated: lat.truncated } : null,
     funnel: fun ? { data: countFunnel(fun.rows), truncated: fun.truncated } : null,

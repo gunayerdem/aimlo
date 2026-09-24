@@ -275,6 +275,20 @@ async function main() {
     const line = JSON.stringify(rejectedLine(r.warns));
     t("log satırında ham '<script>' / '@' / satır sonu yok", !line.includes("<script>") && !line.includes("@") && !line.includes("\\n"), `got=${line}`);
   }
+  // W2 inceleme B08-F3: prototip anahtarlı tipler log sayacını bozuyordu
+  // (`"constructor":"function Object() { [native code] }1"`, `__proto__` sessizce düşüyordu).
+  {
+    const r = await callRoute({
+      events: [{ type: "constructor", ts: now }, { type: "__proto__", ts: now }, { type: "toString", ts: now }, { type: "toString", ts: now }],
+    });
+    const line = rejectedLine(r.warns) as { types?: Record<string, unknown>; reasons?: Record<string, unknown> } | null;
+    const types = line?.types ?? {};
+    t("prototip anahtarlı tipler: log types değerleri SAYI, __proto__ sayılıyor (constructor 1, __proto__ 1, toString 2)",
+      !!line && Object.values(types).every((v) => typeof v === "number")
+        && Object.prototype.hasOwnProperty.call(types, "__proto__") && types["__proto__"] === 1
+        && types["constructor"] === 1 && types["toString"] === 2 && line.reasons?.["invalid_type"] === 4,
+      `got=${JSON.stringify(line)}`);
+  }
 
   // ── [A6] red insert'i düşerse kabul edilen veri etkilenmez ──────────────────
   console.log("\n[A6] ayrı insert + ayrı hata yakalama");
@@ -341,9 +355,10 @@ async function main() {
       const types = typesOf(q);
       if (types.includes("ai_call_duration_ms")) return { data: null, error: { message: "timeout" } };
       if (types.includes("watch_health")) {
-        // 2 tam sayfa + 1 yarım: sayfalama sonuna kadar okumalı.
-        const [a] = q.range ?? [0, 0];
-        const n = a < 2 * PAGE ? PAGE : 500;
+        // Sanal 2500 satırlık tablo: 2 tam sayfa + 1 yarım; sonuna kadar okumalı ve
+        // yalnız BOŞ sayfada durmalı (W2 inceleme B08-F1).
+        const [a, b] = q.range ?? [0, 0];
+        const n = Math.max(0, Math.min(b - a + 1, 2500 - a));
         return { data: Array.from({ length: n }, (_, i) => ({ user_hash: `u${(a + i) % 1234}` })), error: null };
       }
       if (types.includes("error_code_count")) {
@@ -351,7 +366,9 @@ async function main() {
         return { data: Array.from({ length: PAGE }, () => ({ code: "ai_timeout", count: 1, app_version: null, created_at: new Date(now).toISOString() })), error: null };
       }
       if (types.includes("app_open")) {
-        return { data: [{ type: "app_open", user_hash: "a" }, { type: "login_ok", user_hash: "a" }], error: null };
+        // Sanal 2 satırlık tablo (ofset ≥ 2 → boş sayfa; W2 inceleme B08-F1 döngüsü).
+        const all = [{ type: "app_open", user_hash: "a" }, { type: "login_ok", user_hash: "a" }];
+        return { data: all.slice(q.range?.[0] ?? 0), error: null };
       }
       return { data: [], error: null }; // telemetry_rejected: gerçekten boş
     };
@@ -363,7 +380,12 @@ async function main() {
     eq("huni", s.funnel, { data: { appOpen: 1, loginOk: 1, watchStarted: 0 }, truncated: false });
     eq("reddedilenler: sorgu başarılı + boş → [] (null değil)", s.rejected, { data: [], truncated: false });
     const wh = fake.queries.filter((q) => typesOf(q).includes("watch_health"));
-    eq("watch_health sayfa aralıkları", wh.map((q) => q.range), [[0, PAGE - 1], [PAGE, 2 * PAGE - 1], [2 * PAGE, 3 * PAGE - 1]]);
+    eq("watch_health sayfa aralıkları: ofset OKUNAN satır kadar ilerler, boş sayfada biter",
+      wh.map((q) => q.range), [[0, PAGE - 1], [PAGE, 2 * PAGE - 1], [2 * PAGE, 3 * PAGE - 1], [2500, 2500 + PAGE - 1]]);
+    const errQs = fake.queries.filter((q) => typesOf(q).includes("error_code_count"));
+    t("hata kodları: 7 günlük VE ayrı 24 saatlik sorgu (W2 inceleme B08-F2)",
+      errQs.some((q) => sinceOf(q) === new Date(now - 7 * 24 * 3600e3).toISOString())
+        && errQs.some((q) => sinceOf(q) === new Date(now - 24 * 3600e3).toISOString()));
     t("izleme penceresi 60 dk (desktop 30 dk'lık flush → 2×)", sinceOf(wh[0]) === new Date(now - 60 * 60e3).toISOString(), `got=${sinceOf(wh[0])}`);
     const ec = fake.queries.find((q) => typesOf(q).includes("error_code_count"));
     t("hata kodu penceresi 7 gün", !!ec && sinceOf(ec) === new Date(now - 7 * 24 * 3600e3).toISOString());
@@ -372,6 +394,35 @@ async function main() {
     t("reddedilenler yalnız sunucu tipi telemetry_rejected'ı okur", !!rq && JSON.stringify(typesOf(rq)) === JSON.stringify([REJ]));
     t("tüm sorgular telemetry_events tablosunda", fake.queries.every((q) => q.table === "telemetry_events"));
     t("dönen yapıda user_hash yok (kimlik sızmaz)", !JSON.stringify(s).includes("user_hash") && !JSON.stringify(s).includes("u1"));
+  }
+
+  // ── [B3] W2 inceleme B08-F1/F2: prod "Max rows" < 1000 + tavan yönü ────────────
+  console.log("\n[B3] sunucu sayfayı 500'de keserse eksik sayım YOK; 24s sütunu ayrı sorgudan; önce 24s sıralı");
+  {
+    const typesOf = (q: QueryRecord) => (q.filters.find((f) => f[0] === "in" && f[1] === "type")?.[2] ?? []) as string[];
+    fake.queries = [];
+    const TOTAL = 2300, SERVER_MAX = 500; // prod Max rows = 500 simülasyonu
+    fake.onQuery = (q) => {
+      const types = typesOf(q);
+      const [a, b] = q.range ?? [0, 0];
+      if (types.includes("app_open")) {
+        const n = Math.max(0, Math.min(b - a + 1, SERVER_MAX, TOTAL - a));
+        return { data: Array.from({ length: n }, (_, i) => ({ type: "app_open", user_hash: `h${a + i}` })), error: null };
+      }
+      return { data: [], error: null };
+    };
+    const s = await at.getTelemetrySummary(now);
+    eq("huni: 2300 satır, sunucu 500'lük keser → 2300 ayrık kullanıcı, truncated=false (eskiden 500 + truncated=false)",
+      s.funnel, { data: { appOpen: 2300, loginOk: 0, watchStarted: 0 }, truncated: false });
+    const fq = fake.queries.filter((q) => typesOf(q).includes("app_open")).map((q) => q.range?.[0]);
+    eq("huni ofsetleri 0,500,…,2000,2300 (okunan satır kadar)", fq, [0, 500, 1000, 1500, 2000, 2300]);
+    // 24s sütunu ayrı kümeden: 7 günlük küme tavanda kesilip en yeni satırı kaybetse de 24s tam.
+    const shortSince = now - 24 * 3600e3;
+    const longRows = [{ code: "eski_kod", count: 50, app_version: null, created_at: new Date(now - 72 * 3600e3).toISOString() }];
+    const shortRows = [{ code: "yeni_olay", count: 9, app_version: null, created_at: new Date(now - 3600e3).toISOString() }];
+    eq("aggregateErrorCodes(shortRows): kesilmiş 7g kümede OLMAYAN yeni kod 24s'ten görünür ve ÜSTTE (önce 24s sıralı)",
+      at.aggregateErrorCodes(longRows, shortSince, shortRows).map((r) => [r.code, r.hitsShort, r.hitsLong]),
+      [["yeni_olay", 9, 0], ["eski_kod", 0, 50]]);
   }
 
   // ── [C] admin kartı render — "bilinmiyor" / "≥" / boş-durum metinleri ─────
@@ -402,6 +453,15 @@ async function main() {
       rejected: { data: [{ reason: "invalid_type", type: "app_open", hits: 5 }], truncated: false },
     });
     t("tavana dayanan huni '≥1.234' yazılır", full.includes("≥1.234"), full.slice(0, 200));
+    t("huni kartı yalnız girişli cihazları saydığını söylüyor (W2 inceleme B08-F4)",
+      full.includes("yalnız en az bir kez giriş yapmış cihazlar") && full.includes("GÖRÜNMEZ"));
+    const latTrunc = html({
+      generatedAt: "x", errors: { data: [], truncated: true },
+      latency: { data: [{ route: "vision", n: 20000, p50: 4000, p95: 9000 }], truncated: true },
+      funnel: null, watching: null, rejected: null,
+    });
+    t("kesilmiş gecikme tablosu 'YAKLAŞIK, alt sınır DEĞİL' der; toplam tablosu 'alt sınır' (W2 inceleme B08-F2)",
+      latTrunc.includes("p50/p95 YAKLAŞIK, alt sınır DEĞİL") && latTrunc.includes("sayılar EKSİK olabilir (alt sınır)"));
     t("gecikme ms yuvarlanır (4.516 ms / 7.852 ms)", full.includes("4.516 ms") && full.includes("7.852 ms"));
     t("sürümsüz hata satırı '— (sürüm yok)'", full.includes("— (sürüm yok)"));
     t("red satırı sebep × tip × adet", full.includes("invalid_type") && full.includes("app_open") && full.includes(">5<"));

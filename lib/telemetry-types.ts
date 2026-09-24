@@ -329,8 +329,13 @@ export function summarizeTelemetryRejections(
   events: readonly unknown[],
   rejected: readonly TelemetryRejection[],
 ): TelemetryRejectionSummary {
-  const reasons: Record<string, number> = {};
-  const types: Record<string, number> = {};
+  // Prototipsiz sayaçlar (W2 inceleme B08-F3, 2026-09-24): `{}` ile istemci tipi
+  // "constructor"/"toString" sayacı Object.prototype fonksiyonundan başlatıyordu → log
+  // satırında `"constructor":"function Object() { [native code] }1"`; "__proto__" tipi
+  // log'dan SESSİZCE düşüyordu. Object.create(null) ile her anahtar sıradan own-property
+  // (JSON.stringify aynı biçimde basar); DB satırları zaten Map'ten üretiliyordu.
+  const reasons: Record<string, number> = Object.create(null);
+  const types: Record<string, number> = Object.create(null);
   const pairs = new Map<string, number>();
   for (const r of rejected) {
     const type = rejectedTypeLabel(events[r.idx]);
