@@ -291,8 +291,11 @@ export function RegisterForm() {
           <p className="text-[11px] text-[#FF3D71]">{state.fieldErrors.kvkk}</p>
         )}
 
+        {/* B11/A101 (2026-09-24): "ban riski yoktur" kesin bir güvenceydi — ban
+            kararı yalnız Riot'a ait (F44 fb2ff1a /guvenlik: "ban yemezsin garantisi
+            vermiyoruz"); teknik gerçek kaldı, ayrıntı bağlantıda. */}
         <p className="text-[11px] text-neutral-500 leading-relaxed">
-          AIMLO ekranını okur, oyuna müdahale etmez — hile değildir, ban riski yoktur.{" "}
+          AIMLO ekranını okur, oyuna müdahale etmez — hile değildir.{" "}
           <a
             href="/guvenlik"
             target="_blank"

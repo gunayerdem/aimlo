@@ -21,7 +21,7 @@ export default function GuvenlikPage() {
           <h1 className="text-3xl font-black text-white tracking-tight">
             Güvenlik &amp; Sık Sorulanlar
           </h1>
-          <p className="text-sm text-neutral-500">Son güncelleme: 4 Ağustos 2026</p>
+          <p className="text-sm text-neutral-500">Son güncelleme: 24 Eylül 2026</p>
         </header>
 
         {/* F44 — "Vanguard-güven" bloğu (pano dalga, 2026-08-04).
@@ -30,7 +30,14 @@ export default function GuvenlikPage() {
             taahhüt veremeyiz (pano riski aynen bunu işaret ediyor). Metin artık
             teknik gerçeklerde kalıyor — "yalnızca ekranı okur (OCR), oyuna
             müdahale etmez, dosyaya/belleğe dokunmaz, injection yok" — ve
-            garanti vermediğini açıkça söylüyor. */}
+            garanti vermediğini açıkça söylüyor.
+            B11/A101 (2026-09-24): "oyun dosyalarına dokunmaz" MUTLAK değildi —
+            desktop lib.rs fix_valorant_display_mode, kullanıcı "Tek tıkla
+            ayarla"ya basınca (oyun kapalıyken) GameUserSettings.ini'deki ekran
+            modunu yazar + .aimlo-bak bırakır; istisna metne yazıldı. Yakalama
+            kapsamı da koda göre: WGC pencere-hedefli (CreateForWindow), DXGI/GDI
+            yedeği Valorant rect'ine kırpılır, rect yoksa tam kare (capture.rs).
+            Kilit: scripts/test-trust-copy.ts. */}
         <section className="space-y-3 text-sm leading-relaxed text-neutral-300">
           <h2 className="text-lg font-bold text-white">
             Vanguard ve hesap güvenliği (en çok sorulan)
@@ -44,7 +51,14 @@ export default function GuvenlikPage() {
           </p>
           <ul className="list-disc pl-5 space-y-1">
             <li>Oyunun belleğine girmez — okumaz, yazmaz.</li>
-            <li>Oyun dosyalarına ve Vanguard&apos;a dokunmaz.</li>
+            <li>
+              Oyunun kurulum dosyalarına, belleğine ve Vanguard&apos;a dokunmaz.
+              Yalnız sen uygulamadaki &quot;Tek tıkla ayarla&quot; düğmesine
+              basarsan, oyun kapalıyken Valorant&apos;ın kullanıcı ayar
+              dosyasındaki (GameUserSettings.ini) ekran modunu &quot;Pencereli Tam
+              Ekran&quot; yapar; eski dosyanın yedeği .aimlo-bak olarak yanında
+              kalır.
+            </li>
             <li>Oyuna hiçbir kod / DLL enjekte etmez (injection yok).</li>
             <li>
               <strong className="text-white">Yalnızca ekranı okur</strong> — tıpkı
@@ -93,7 +107,13 @@ export default function GuvenlikPage() {
             <li>Oyunun belleğini okumaz / yazmaz.</li>
             <li>Oyuna kod / DLL enjekte etmez.</li>
             <li>Fare/klavyeyi senin yerine oynamaz, otomatik nişan almaz.</li>
-            <li>Oyun dosyalarını veya Vanguard&apos;ı değiştirmez.</li>
+            <li>
+              Oyunun kurulum dosyalarını veya Vanguard&apos;ı değiştirmez. Tek
+              istisna yukarıdaki: &quot;Tek tıkla ayarla&quot;ya sen basarsan,
+              oyun kapalıyken Valorant&apos;ın ayar dosyasındaki
+              (GameUserSettings.ini) ekran modu değişir; eski dosya .aimlo-bak
+              olarak yedeklenir.
+            </li>
             <li>İzleme kapalıyken veya Valorant kapalıyken hiçbir şey yakalamaz.</li>
           </ul>
         </section>
@@ -114,9 +134,14 @@ export default function GuvenlikPage() {
               olarak saklanmaz</strong>; yalnızca o anlık analiz için kullanılır.
             </li>
             <li>
-              İzleme <strong className="text-white">tüm ekranı</strong> kapsar,
-              sadece Valorant penceresini değil. Açık başka pencereler görünürse
-              içerikleri de işlenebilir.
+              İzleme öncelikle{" "}
+              <strong className="text-white">yalnızca Valorant penceresini</strong>{" "}
+              yakalar (Windows Graphics Capture). Bu yol
+              kullanılamazsa (ör. Windows 10&apos;da ya da Windows&apos;un
+              çerçevesiz yakalama izni kapalıyken) ekran tabanlı yakalamaya
+              geçilir ve görüntü Valorant penceresinin alanına kırpılır; bu
+              alanda oyunun üstünde duran başka pencereler görüntüye girebilir.
+              Valorant penceresinin yeri okunamazsa ekranın tamamı işlenebilir.
             </li>
             <li>
               <strong className="text-white">Tavsiye:</strong> izlemeyi başlatmadan

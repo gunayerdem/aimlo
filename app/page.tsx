@@ -1814,11 +1814,14 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
             <div className="relative">
               <h3 className="text-[28px] sm:text-[32px] font-bold mb-3 tracking-tight text-white leading-tight">{l.landingDiffItems[0].title}</h3>
               <p className="text-[15px] text-neutral-300 leading-relaxed max-w-md mb-5">{l.landingDiffItems[0].desc}</p>
-              {/* supporting proof chips — concrete, honest */}
+              {/* supporting proof chips — concrete, honest.
+                  B11/A101 (2026-09-24): "Vanguard-güvenli/Vanguard-safe" kanıtlanamaz
+                  bir güvence (Riot'un allowlist'i yok; F44 fb2ff1a "ban yemezsin
+                  garantisi vermiyoruz") → doğrulanabilir teknik gerçek: enjeksiyon yok. */}
               <div className="flex flex-wrap gap-2">
                 {(lang === "tr"
-                  ? ["Maçını canlı izler", "Vanguard-güvenli", "Sıfır manuel giriş", "Her round otomatik"]
-                  : ["Watches your match live", "Vanguard-safe", "Zero manual input", "Every round, auto"]
+                  ? ["Maçını canlı izler", "Kod enjeksiyonu yok", "Sıfır manuel giriş", "Her round otomatik"]
+                  : ["Watches your match live", "Zero code injection", "Zero manual input", "Every round, auto"]
                 ).map((chip, ci) => (
                   <span key={ci} className="text-[11px] font-medium px-3 py-1.5 rounded-full border border-white/[0.1] bg-white/[0.03] text-neutral-300">
                     {chip}
@@ -2090,23 +2093,27 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
               tabanlı koçlarda kullanıcının 1 numaralı itirazı "ban yer miyim";
               rakipler (GhostCoach/UpForge) mimariyi açıkça anlatıp bu itirazı
               eritiyor. Bizde ayrıntı /guvenlik sayfasında vardı ama landing'den
-              tek bir bağlantı bile yoktu — indirme kararının TAM önüne koyuldu. */}
+              tek bir bağlantı bile yoktu — indirme kararının TAM önüne koyuldu.
+              B11/A101 (2026-09-24): başlık "Vanguard ile güvenli" bir güvenceydi →
+              konu başlığı (/guvenlik h2 ile aynı); "oyun dosyalarını değiştirmez"
+              mutlak değildi → "Tek tıkla ayarla" GameUserSettings.ini istisnası
+              (desktop lib.rs fix_valorant_display_mode) aynı maddede. */}
           <div className="mx-auto mb-9 max-w-xl rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 text-left">
             <p className="flex items-center gap-2 text-[13px] font-semibold text-white">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF4655" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-              {lang === "tr" ? "Vanguard ile güvenli" : "Safe with Vanguard"}
+              {lang === "tr" ? "Vanguard ve hesap güvenliği" : "Vanguard & account safety"}
             </p>
             <ul className="mt-3 space-y-1.5">
               {(lang === "tr"
                 ? [
                     "Oyunun belleğini okumaz, yazmaz",
-                    "Oyuna kod/DLL enjekte etmez, oyun dosyalarını değiştirmez",
+                    "Oyuna kod/DLL enjekte etmez; oyunun kurulum dosyalarına ve Vanguard'a dokunmaz — tek istisna: “Tek tıkla ayarla”ya sen basarsan, oyun kapalıyken ayar dosyasındaki (GameUserSettings.ini) ekran modunu değiştirir, eskisini .aimlo-bak olarak yedekler",
                     "Yalnızca görünen ekranı okur — OBS ya da Discord ekran paylaşımı gibi",
                     "Senin yerine nişan almaz, tuşa basmaz",
                   ]
                 : [
                     "Never reads or writes game memory",
-                    "No code/DLL injection, no game files touched",
+                    "No code/DLL injection; never touches the game's installation files or Vanguard — the one exception: if you press “Set it in one click”, it changes the display mode in the settings file (GameUserSettings.ini) while the game is closed and keeps the old file as .aimlo-bak",
                     "Reads only the visible screen — like OBS or Discord screen share",
                     "Never aims or presses a key for you",
                   ]
