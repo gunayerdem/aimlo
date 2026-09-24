@@ -420,22 +420,36 @@ console.log("\n[9] ÖLÇÜLMEMİŞ SENSÖR — patternContext satırı + ultRead
     && !ue.userPrompt.includes("state it confidently") && ue.userPrompt.includes("If you can NOT see the ability state clearly"));
 
   // FB03 inceleme · F08: ultReadyReliable İSTEMCİ düzeyinde ("bu istemcinin ult sensörü ölçülmüş").
-  // Gerçekçi FD03 gövdesi: geçmişte R6/R12 ult dolu ölümler var, BU ölümde ult dolu DEĞİL (ultReady
-  // yok) ama istemci ölçülmüş sensörlü → doğru geçmiş satırı KALMALI, bu ölüm için ult iddiası YOK.
-  // (31.08 kaan replay'inde ult satırı taşıyan 10 gövdenin 5'inde o anki ölümde ultReady yoktu.)
+  // MASAÜSTÜ SÖZLEŞMESİ (yakınsama Y12/Y31, aimlo-desktop addf74d — ai_client.rs attach_game_context):
+  // detection::ULT_SENSOR_MEASURED açıkken `ultReadyReliable:true` HER vision gövdesinde gider (ult
+  // boşken de); `ultReady:true` yalnız ult doluyken ve bayrak bloğunun İÇİNDE yazılır (bayraksız
+  // ultReady yok). Masaüstü kilidi: fd03_body_tests f08_ult_ready_yalniz_guvenilirlik_bayragiyla +
+  // f08_kaynak_kilidi_ult_ready_bayrakla_esli. Aşağıdaki iki gövde BİREBİR o biçim (alive sayıları
+  // da gönderilmez: detection.rs sanitize_alive_counts_at_death → (0,0), aliveCountsReliable yok).
+  // Senaryo: geçmişte R6/R12 ult dolu ölümler var (desen satırı), BU ölümde ult dolu DEĞİL → doğru
+  // geçmiş satırı KALMALI, bu ölüm için ult iddiası YOK. (31.08 kaan replay'inde ult satırı taşıyan
+  // 10 gövdenin 5'inde o anki ölümde ultReady yoktu.)
   const noUlt: Record<string, unknown> = { ...body };
   delete noUlt.ultReady;
+  delete noUlt.alliesAlive;
+  delete noUlt.enemiesAlive;
   const ur = buildVisionUserMessage({ body: { ...noUlt, ultReadyReliable: true }, lang: "tr", imageAvailable: true });
-  t("F08 istemci bayrağı + ultReady YOK: 'ult HAZIR' geçmiş satırı KALIR (ölçülmüş sensörün doğru içgörüsü)",
+  t("F08 v1.0.20 gövdesi (addf74d) ult BOŞ — bayrak var, ultReady YOK: 'ult HAZIR' geçmiş satırı KALIR (ölçülmüş sensörün doğru içgörüsü)",
     /2 round ult HAZIR halde öldün \(R6, R12\)/.test(ur.userPrompt), ur.userPrompt.slice(0, 200));
   t("…ama bu ölüm için ult iddiası YOK: ctx.ultReady yok, ders tipi ult-in-pocket DEĞİL, 'kesin konuş' YOK",
     !("ultReady" in ur.ctx) && ur.deathType !== "ult-in-pocket" && !ur.userPrompt.includes("Context'te ultReady=true de geldiyse kesin konuş."), String(ur.deathType));
+  const urFull = buildVisionUserMessage({ body: { ...noUlt, ultReady: true, ultReadyReliable: true }, lang: "tr", imageAvailable: true });
+  t("F08 v1.0.20 gövdesi (addf74d) ult DOLU — ultReady + bayrak: ctx.ultReady, ult-in-pocket, 'kesin konuş' ve 'ult HAZIR' satırı KALIR; bayraksız sayı satırı yine DÜŞER",
+    urFull.ctx.ultReady === true && urFull.deathType === "ult-in-pocket" && urFull.userPrompt.includes("Context'te ultReady=true de geldiyse kesin konuş.")
+      && /2 round ult HAZIR halde öldün \(R6, R12\)/.test(urFull.userPrompt) && !/sayısal üstünlükte/.test(urFull.userPrompt), String(urFull.deathType));
   const urFalse = buildVisionUserMessage({ body: { ...noUlt, ultReady: false, ultReadyReliable: true }, lang: "tr", imageAvailable: true });
   t("F08 ultReady:false + istemci bayrağı → satır KALIR, ult iddiası YOK", /ult HAZIR halde/.test(urFalse.userPrompt) && !("ultReady" in urFalse.ctx) && urFalse.deathType !== "ult-in-pocket");
-  // Ölüm-başına biçim (masaüstü bf9f1ec/fae4b2b: bayrak YALNIZ ultReady=true iken) → bu gövde
-  // bayraksız gider ve satır düşer. Sözleşme: masaüstü bayrağı her gövdede göndermeli (takip).
-  const perDeath = buildVisionUserMessage({ body: noUlt, lang: "tr", imageAvailable: true });
-  t("F08 ölüm-başına biçim (bayrak yok): satır DÜŞER — bayrak her ölüm gövdesinde gelmeli", !/ult HAZIR/.test(perDeath.userPrompt));
+  // Bayraksız gövde = ult sensörü ölçülmemiş istemci: v1.0.19 ve öncesi (bayrağı hiç göndermez) ya da
+  // ULT_SENSOR_MEASURED şalteri kapalı bir masaüstü sürümü. Ölçülmemiş sensörün satırı DÜŞER — kurtarma
+  // yolu bilerek yok. (Eski "ölüm-başına biçim → takip" notu addf74d ile kapandı: v1.0.20 bayrağı
+  // ult boşken de gönderiyor, yani bu dal yalnız ölçülmemiş istemcide ateşlenir.)
+  const noFlag = buildVisionUserMessage({ body: noUlt, lang: "tr", imageAvailable: true });
+  t("F08 bayraksız gövde (v1.0.19 ve öncesi / sensör şalteri kapalı): 'ult HAZIR' satırı DÜŞER", !/ult HAZIR/.test(noFlag.userPrompt));
   t("F08 sözleşme notu kaynakta (VisionPromptBody: İSTEMCİ DÜZEYİNDE)", /ANLAMI İSTEMCİ DÜZEYİNDE/.test(builderSrc));
 }
 
