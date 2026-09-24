@@ -1609,12 +1609,16 @@ export function trLocative(word: string): string {
  * Ölçüm: scripts/eval-out 3916 tekil ham alanda HP süzgeci 59 alanı değiştiriyor;
  * bunların HİÇBİRİNDE artık üretmiyor → korpus çıktısı bayt-aynı (0 fark).
  * Sahte metin YOK: yalnız artık noktalama silinir.
+ * DİL (W2 inceleme REV-W2, 2026-09-24): büyütme dile bağlı — tr-locale yalnız TR'de
+ * (i→İ). EN'de tr-locale "Hold. 41 HP, if they push" → "Hold. İf they push" üretiyordu
+ * (U+0130); cleanCoachText sonundaki 0. konum kuralıyla aynı ayrım.
  */
-function tidyHpStripResidue(t: string): string {
+function tidyHpStripResidue(t: string, lang: "tr" | "en"): string {
   return t
     .replace(/([.!?])[ \t]+[.!?]+(?=\s|$)/g, "$1")
     .replace(/^[\s.!?,;:]+/, "")
-    .replace(/([.!?][ \t]+)[,;:][ \t]*(\S)/g, (_m, p: string, c: string) => p + c.toLocaleUpperCase("tr"));
+    .replace(/([.!?][ \t]+)[,;:][ \t]*(\S)/g, (_m, p: string, c: string) =>
+      p + (lang === "tr" ? c.toLocaleUpperCase("tr") : c.toUpperCase()));
 }
 
 export function cleanCoachText(text: string, lang: "tr" | "en"): string {
@@ -1622,7 +1626,7 @@ export function cleanCoachText(text: string, lang: "tr" | "en"): string {
   // Sıra: sayısal HP → kova ifadesi (stripNumericHp) → kova dahil TÜM nitel
   // can iddiaları silinir (stripHpClaims, canlı-test #8) → ability düzlemesi.
   const hpStripped = stripHpClaims(stripNumericHp(text, lang), lang);
-  let t = plainifyAbilities(hpStripped === text ? text : tidyHpStripResidue(hpStripped), lang);
+  let t = plainifyAbilities(hpStripped === text ? text : tidyHpStripResidue(hpStripped, lang), lang);
   for (const a of CLEAN_AGENT_NAMES) {               // phoenix → Phoenix (both langs)
     t = t.replace(new RegExp("\\b" + a + "\\b", "gi"), a);
   }

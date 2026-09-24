@@ -95,5 +95,18 @@ eq("meşru '?!' ve '...' HP süzgeci ateşlese de korunur",
 eq("HP süzgeci ATEŞLEMEZSE onarım koşmaz (metin bayt-aynı)",
   cleanCoachText("Bekle... Sonra gir?! Açıyı tut.", "tr"), "Bekle... Sonra gir?! Açıyı tut.");
 
+// ── EN artık onarımı TR-locale büyütme KULLANMAZ (W2 inceleme REV-W2, 2026-09-24) ──
+// Probe (HEAD 7fc9df7): tidyHpStripResidue lang almıyordu → EN'de "i" → "İ" (U+0130):
+// "Play safe. İt's better to hold.", "Hold. İf they push, fall back.".
+eq("EN virgüllü HP öbeği sonrası 'it's' → 'It's' (U+0130 YOK)",
+  cleanCoachText("Play safe. On low HP, it's better to hold.", "en"), "Play safe. It's better to hold.");
+eq("EN sayısal HP öbeği sonrası 'if' → 'If' (U+0130 YOK)",
+  cleanCoachText("Hold. 41 HP, if they push, fall back.", "en"), "Hold. If they push, fall back.");
+eq("EN 'instead'/'in'/'immediately' başlangıçlarında U+0130 yok",
+  ["Don't re-peek. Low HP, instead play for the trade.", "Wait for util. Low HP, in that spot you lose every duel.",
+    "Reposition. Low HP, immediately fall back"].some((s) => cleanCoachText(s, "en").includes("İ")), false);
+eq("TR eşi değişmedi: 'Bekle. 41 HP ile, içeri girme.' → 'Bekle. İçeri girme.' (tr-locale İ)",
+  cleanCoachText("Bekle. 41 HP ile, içeri girme.", "tr"), "Bekle. İçeri girme.");
+
 console.log(fail ? `\n${fail} FAIL` : "\nTAM YESIL");
 process.exit(fail ? 1 : 0);
