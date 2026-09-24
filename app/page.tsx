@@ -387,13 +387,6 @@ const t = {
         desc: "AI zaman içinde hatalarının nasıl azaldığını ve hangi alanlarda geliştiğini takip eder.",
       },
     ],
-    landingStatsTitle: "Platform İstatistikleri",
-    landingStats: [
-      { value: "10K+", label: "Analiz Edilen Round" },
-      { value: "2.5K+", label: "Maç Raporu" },
-      { value: "500+", label: "Aktif Oyuncu" },
-      { value: "94%", label: "Memnuniyet" },
-    ],
     goToDashboard: "Panele Git",
     homePage: "Ana Sayfa",
     dashTopAgent: "En Çok Kullanılan Ajan",
@@ -674,13 +667,6 @@ const t = {
         title: "Personal Growth Map",
         desc: "AI tracks how your mistakes decrease and where you improve over time.",
       },
-    ],
-    landingStatsTitle: "Platform Stats",
-    landingStats: [
-      { value: "10K+", label: "Rounds Analyzed" },
-      { value: "2.5K+", label: "Match Reports" },
-      { value: "500+", label: "Active Players" },
-      { value: "94%", label: "Satisfaction" },
     ],
     goToDashboard: "Go to Dashboard",
     homePage: "Home",
@@ -1880,93 +1866,16 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
         </div>
       </section>
 
-      {/* ─── ACT III: THE RIVER — community flows past, it doesn't sit in a
-            grid. Duplicated track loops seamlessly; pauses on hover. ─── */}
-      <section className="relative z-10 pb-36 pt-10">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8">
-          <p className="section-kicker mb-6">
-            <span className="sk-num">03</span>{lang === "tr" ? "TOPLULUK" : "COMMUNITY"}
-          </p>
-          <h2 className="section-display mb-4">
-            {lang === "tr" ? "Oyuncular Ne Diyor?" : "What Players Say"}
-          </h2>
-          <p className="text-[14px] text-neutral-500 mb-12 max-w-xl">
-            {lang === "tr"
-              ? "Closed beta'dan oyuncuların gerçek geri bildirimleri. Discord ve in-app feedback formundan toplandı."
-              : "Real feedback from beta players — collected from Discord and the in-app feedback form."}
-          </p>
-        </div>
-        <div className="testi-band">
-          <div className="testi-track">
-          {[0, 1].map((seg) => (
-          <div key={seg} className="flex" aria-hidden={seg === 1}>
-          {(lang === "tr" ? [
-            {
-              handle: "@kahve_op",
-              rank: "Plat 2",
-              maps: "Bind / Lotus",
-              text: "B Long'da sürekli ölme problemim varmış. Üst üste 4 round tek rapor 'aynı açıdan ikinci peek atıyorsun' dedi. Haklıymış. O round'lardan sonra Bind defansta %30 daha iyiyim. Reklam edilen 'Diamond garanti' olayı yok ama kendi hatalarını görmek için işe yarıyor.",
-              color: "#32B8B8",
-            },
-            {
-              handle: "@ash_jett",
-              rank: "Diamond 1",
-              maps: "Ascent",
-              text: "Pattern context bölümü gerçekten son 3-4 round'a referans veriyor — generic copy-paste tavsiye değil. Zayıf round'larda feedback iyi, full util execute round'larında bazen yüzeysel kalıyor. Round başına 2-3 saniye cost ama overlay küçük, oyunu engellemiyor.",
-              color: "#B489FF",
-            },
-            {
-              handle: "@tepe_smoke",
-              rank: "Asc 3 → Imm 1",
-              maps: "Lotus / Sunset",
-              text: "Tek başıma queue atarken takım iletişimi yoktu, AI'in 'savunmacılar son round B stack yaptı, A'ya geç' tarzı çağrıları işime yaradı. Bazı pattern'leri kaçırdığını gördüm (clutch round'larda). Roadmap'lerinde fix etmeye çalışıyorlar, support ekibi cevap veriyor.",
-              color: "#ECB73E",
-            },
-          ] : [
-            {
-              handle: "@kahve_op",
-              rank: "Plat 2",
-              maps: "Bind / Lotus",
-              text: "Found out I was dying on B Long every time — 4 rounds in a row the report said 'second peek same angle.' Fair. Bind defense is ~30% better since. Not a 'climb to Diamond' silver bullet but it makes your own mistakes obvious.",
-              color: "#32B8B8",
-            },
-            {
-              handle: "@ash_jett",
-              rank: "Diamond 1",
-              maps: "Ascent",
-              text: "The pattern-context block actually references the last 3-4 rounds — not generic copy. Feedback is solid on rough rounds, a bit shallow on clean full-util executes. Costs 2-3s per round but the overlay is small and doesn't block gameplay.",
-              color: "#B489FF",
-            },
-            {
-              handle: "@tepe_smoke",
-              rank: "Asc 3 → Imm 1",
-              maps: "Lotus / Sunset",
-              text: "Solo queueing without team comms, AI calls like 'defenders stacked B last round, swing A' were genuinely useful. It misses some clutch patterns. Roadmap mentions fixing it — support actually responds.",
-              color: "#ECB73E",
-            },
-          ]).map((t, i) => (
-            <div key={i} className="testi-card card-xtract p-6">
-              <p className="text-[13px] text-neutral-300 leading-relaxed mb-4">&ldquo;{t.text}&rdquo;</p>
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold" style={{ background: `${t.color}15`, color: t.color, border: `1px solid ${t.color}25` }}>
-                  {t.handle.charAt(1).toUpperCase()}
-                </div>
-                <div>
-                  <p className="text-[12px] font-semibold text-white">{t.handle}</p>
-                  <p className="text-[10px] font-medium text-neutral-500">
-                    <span style={{ color: t.color }}>{t.rank}</span>
-                    <span className="mx-1.5 text-neutral-700">•</span>
-                    {t.maps}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-          </div>
-          ))}
-          </div>
-        </div>
-      </section>
+      {/* F15 (2026-09-24): "Oyuncular Ne Diyor? / What Players Say" bölümü
+          KALDIRILDI. Üç kart (@kahve_op, @ash_jett, @tepe_smoke) a2a8e16'da
+          yer tutucuların (Yusuf K./Elif S./Arda M.) yerine yazılmış metinlerdi;
+          commit mesajı bile "3 realistic specific feedback cards" diyor.
+          "Gerçek geri bildirim / Real feedback" etiketi taşıyorlardı ama repoda,
+          docs/ altında ya da destek kayıtlarında kaynak (izinli mesaj/ticket)
+          yok; üstelik o tarihte olmayan bir kanalı (in-app form, d790172) ve
+          üründe olmayan bir yeteneği ("B stack" çağrısı) anlatıyorlardı.
+          Geri eklenecekse: her kart için kaynak bağlantısı + kullanıcı izni +
+          tarih şart (scripts/test-trust-copy.ts [5] kilidi). */}
 
       {/* Ambient orb — left side lower */}
       <div className="pointer-events-none absolute left-[-150px] top-[3200px] w-[450px] h-[450px] rounded-full bg-[#FF4655]/[0.05] blur-[140px] animate-orb" style={{ zIndex: 0, animationDelay: '10s' }} />
@@ -2065,7 +1974,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       <section id="download-section" data-animate className="relative z-10 mx-auto max-w-4xl px-5 sm:px-8 pb-36 pt-10">
         <div className={`download-card p-12 sm:p-20 text-center transition-all duration-700 ${isVisible("download-section") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <p className="section-kicker justify-center mb-6">
-            <span className="sk-num">04</span>{lang === "tr" ? "İNDİR" : "DOWNLOAD"}
+            <span className="sk-num">03</span>{lang === "tr" ? "İNDİR" : "DOWNLOAD"}
           </p>
           <h2 className="section-display mb-6">
             {lang === "tr" ? "Hemen İndirin, Oynamaya Başlayın" : "Download Now, Start Playing"}
@@ -2180,7 +2089,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       <section id="section-pricing" data-animate className="relative z-10 mx-auto max-w-4xl px-5 sm:px-8 pb-32">
         <div className={`transition-all duration-700 ${isVisible("section-pricing") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <p className="section-kicker justify-center mb-6">
-            <span className="sk-num">05</span>{lang === "tr" ? "FİYATLANDIRMA" : "PRICING"}
+            <span className="sk-num">04</span>{lang === "tr" ? "FİYATLANDIRMA" : "PRICING"}
           </p>
           <h2 className="section-display text-center mb-4">
             {lang === "tr" ? "Her ölümden ders çıkar." : "Learn from every death."}
@@ -2240,7 +2149,7 @@ function LandingPage({ lang, user, onStartAnalysis, onLogin, onRegister, onLangT
       {/* ─── FAQ — Xtract accordion ─── */}
       <section id="section-faq" data-animate className="relative z-10 mx-auto max-w-2xl px-5 sm:px-8 pb-36 pt-10">
         <p className="section-kicker mb-6">
-          <span className="sk-num">06</span>{lang === "tr" ? "SSS" : "FAQ"}
+          <span className="sk-num">05</span>{lang === "tr" ? "SSS" : "FAQ"}
         </p>
         <h2 className="section-display mb-16">
           {l.landingFaqTitle}

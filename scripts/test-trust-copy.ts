@@ -26,6 +26,8 @@
  *   [3b] Kaynak düzeyi JSX boşluk kilidi ("</strong>\n  yakalar" → boşluksuz render).
  *   [4] TR+EN eşliği: fiyat SSS'i ve ana sayfa güven bloğu iki dilde de istisnalı;
  *       istisna bu PC'deki TÜM Valorant hesaplarını söyler (lib.rs read_dir döngüsü).
+ *   [5] F15: kaynaksız sosyal kanıt yok — "gerçek geri bildirim" etiketi, ölçülemez
+ *       "%NN daha iyi", yorum kartı ve sahte platform istatistiği (landingStats).
  * RUN: npx tsx scripts/test-trust-copy.ts
  */
 import fs from "node:fs";
@@ -204,6 +206,44 @@ t("hiçbir istisna birimi tekil 'kullanıcı ayar dosyası' / 'user settings fil
 const homeSrc = stripComments(read("app/page.tsx"));
 t("ana sayfa güven başlığı konu başlığı (TR+EN), güvence değil",
   homeSrc.includes('"Vanguard ve hesap güvenliği"') && homeSrc.includes('"Vanguard & account safety"'));
+
+// [5] F15 (2026-09-24): landing'deki "Oyuncular Ne Diyor?" bölümü a2a8e16'da yer
+// tutucuların yerine yazılmış üç "gerçekçi" karttı ("Real feedback from beta
+// players" etiketiyle); kaynak kaydı (izinli mesaj/ticket) yok. Ölü landingStats
+// ("500+ Aktif Oyuncu", "94% Memnuniyet") de istemci paketine giriyordu.
+// Geri eklemek kaynak kaydı ister → metin geri gelirse bu kilit kırmızı döner.
+// Ölçüm (2026-09-24, fix sonrası): SOURCE_CLAIMS app/**/*.tsx (yorum + app/api hariç)
+// + constants/i18n.ts'te 0 isabet; LANDING_ONLY kalıpları yalnız landing + i18n'de
+// aranır, çünkü "memnuniyeti" /legal/iade'de meşru (müşteri memnuniyeti).
+console.log("\n[5] F15 — kaynaksız sosyal kanıt yok (yorum kartı, 'gerçek geri bildirim', ölçülemez yüzde, sahte istatistik)");
+const visibleText = (rel: string) => {
+  const code = stripComments(read(rel));
+  return `${code.replace(/\s+/g, " ")}\n${jsxText(code)}`;
+};
+const SOURCE_CLAIMS: [string, RegExp][] = [
+  ["'gerçek geri bildirim' / 'Real feedback'", /gerçek geri bildirim|real feedback/iu],
+  ["'%NN daha iyi' / 'NN% better'", /%\s?\d+\s+daha\s+iyi|\d+\s?%\s+better/iu],
+];
+const claimScope = [...pages.map(relOf), "constants/i18n.ts"];
+for (const [ad, re] of SOURCE_CLAIMS) {
+  const hits = claimScope.filter((rel) => re.test(visibleText(rel)));
+  t(`${ad} → 0 (app/**/*.tsx + constants/i18n.ts)`, hits.length === 0, JSON.stringify(hits));
+}
+const LANDING_FILES = ["app/page.tsx", "constants/i18n.ts"];
+const LANDING_ONLY: [string, RegExp][] = [
+  ["'Oyuncular Ne Diyor' / 'What Players Say' bölümü", /Oyuncular Ne Diyor|What Players Say/u],
+  ["yorum kartı kalıbı (handle: \"@…\")", /handle:\s*["'`]@/u],
+  // Hem düz metin ("500+ Aktif") hem sözlük biçimi ({ value: "500+", label: "Aktif Oyuncu" }).
+  ["'500+ Aktif' / '500+ Active' istatistiği", /\d[\d.,]*[KkMm]?\+(?:["'`]\s*,\s*label:\s*["'`]|\s*)(?:Aktif|Active)/u],
+  ["'Memnuniyet' / 'Satisfaction' istatistiği", /Memnuniyet|Satisfaction/u],
+];
+for (const [ad, re] of LANDING_ONLY) {
+  const hits = LANDING_FILES.filter((rel) => re.test(visibleText(rel)));
+  t(`${ad} → 0 (landing + i18n)`, hits.length === 0, JSON.stringify(hits));
+}
+t("ölü landingStats anahtarı yok (landing + i18n)",
+  LANDING_FILES.every((rel) => !/landingStats/.test(stripComments(read(rel)))),
+  JSON.stringify(LANDING_FILES.filter((rel) => /landingStats/.test(stripComments(read(rel))))));
 
 console.log(`\n${fail === 0 ? "✅" : "❌"} test-trust-copy: ${pass} geçti, ${fail} kırık`);
 if (fail > 0) process.exit(1);
