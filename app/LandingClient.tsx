@@ -326,8 +326,8 @@ const t = {
     landingFeatures: [
       {
         icon: "zap",
-        title: "Her Round Sonunda Canlı Koçluk",
-        desc: "Round biter bitmez ekranına o rounda özel koçluk düşer: neden öldün, düşman ne yaptı, sonraki round ne yapmalısın. Ayar yok, veri girmek yok — AIMLO maçını arka planda kendisi izler. Bunu maç içinde, round round yapabilen başka bir araç yok.",
+        title: "Öldüğün Round'un Sonunda Canlı Koçluk",
+        desc: "Öldüğün round biter bitmez ekranına o rounda özel koçluk düşer: neden öldün, düşman ne yaptı, sonraki round ne yapmalısın. Ayar yok, veri girmek yok — AIMLO maçını arka planda kendisi izler. Bunu maç içinde, round round yapabilen başka bir araç yok.",
       },
       {
         icon: "chart",
@@ -594,8 +594,8 @@ const t = {
     landingFeatures: [
       {
         icon: "zap",
-        title: "Live Coaching After Every Round",
-        desc: "The moment a round ends, coaching for that exact round lands on your screen: why you died, what the enemy did, and what to change next round. Nothing to configure, no stats to type — AIMLO watches your match by itself in the background. No other tool does this in-match, round by round.",
+        title: "Live Coaching After Each Round You Die In",
+        desc: "The moment a round you die in ends, coaching for that exact round lands on your screen: why you died, what the enemy did, and what to change next round. Nothing to configure, no stats to type — AIMLO watches your match by itself in the background. No other tool does this in-match, round by round.",
       },
       {
         icon: "chart",
@@ -1399,7 +1399,7 @@ function LandingPage({ lang, user, quotaEnforced, onStartAnalysis, onLogin, onRe
               <span className="hero-kicker">
                 {/* TR ön-büyütülmüş (2026-07-09): CSS text-transform:uppercase'in
                     i→İ dönüşümü tarayıcı/locale bağımlı — literal büyük harf garanti. */}
-                {lang === "tr" ? "AI VALORANT KOÇU — SENİ İZLER, HER ROUND KOÇLUK VERİR" : "AI Valorant Coach — watches your game, coaches every round"}
+                {lang === "tr" ? "AI VALORANT KOÇU — SENİ İZLER, ÖLDÜĞÜN HER ROUND KOÇLUK VERİR" : "AI Valorant Coach — watches your game, coaches every round you die in"}
               </span>
             </div>
 
@@ -1789,8 +1789,8 @@ function LandingPage({ lang, user, quotaEnforced, onStartAnalysis, onLogin, onRe
                   garantisi vermiyoruz") → doğrulanabilir teknik gerçek: enjeksiyon yok. */}
               <div className="flex flex-wrap gap-2">
                 {(lang === "tr"
-                  ? ["Maçını canlı izler", "Kod enjeksiyonu yok", "Sıfır manuel giriş", "Her round otomatik"]
-                  : ["Watches your match live", "Zero code injection", "Zero manual input", "Every round, auto"]
+                  ? ["Maçını canlı izler", "Kod enjeksiyonu yok", "Sıfır manuel giriş", "Her ölümde otomatik"]
+                  : ["Watches your match live", "Zero code injection", "Zero manual input", "Auto on every death"]
                 ).map((chip, ci) => (
                   <span key={ci} className="text-[11px] font-medium px-3 py-1.5 rounded-full border border-white/[0.1] bg-white/[0.03] text-neutral-300">
                     {chip}

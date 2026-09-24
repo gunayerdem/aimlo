@@ -95,7 +95,7 @@ const COPY = {
     catRows: [
       { name: "Tracker'ların ücretsiz katmanı", price: "Ücretsiz", extra: "", desc: "Maç istatistiği verir; koçluk vermez — neden öldüğünü söylemez.", self: false },
       { name: "GhostCoach", price: "$17.99/ay", extra: "ömür boyu $89.99", desc: "AI koçluk kategorisinde bir başka araç.", self: false },
-      { name: "AIMLO+", price: "499 TL/ay", extra: "Türkiye dışında $9.99/ay", desc: "Round biter bitmez neden öldüğünü ve sonraki round ne yapacağını söyler.", self: true },
+      { name: "AIMLO+", price: "499 TL/ay", extra: "Türkiye dışında $9.99/ay", desc: "Öldüğün round biter bitmez neden öldüğünü ve sonraki round ne yapacağını söyler.", self: true },
     ],
     catNote: "Karşılaştırma: 2026-08-04 itibarıyla, herkese açık fiyat sayfalarından. Fiyatlar değişebilir.",
     payTitle: "Ödemeye geç",
@@ -106,7 +106,7 @@ const COPY = {
       { q: "İstediğim zaman iptal edebilir miyim?", a: "Evet. Taahhüt yok, cayma bedeli yok. İptal ettiğinde ödediğin dönemin sonuna kadar erişimin devam eder." },
       /* B53/F43 (pano dalga, 2026-08-04): kategori kıyası SSS'te de — rakamsız,
          yalnız çerçeve; rakamlar tarih damgalı catRows bölümünde. */
-      { q: "AIMLO bir tracker'dan farkı ne?", a: "Tracker'lar maçtan sonra istatistik gösterir; AIMLO ise koçluk yapar: her round bittiğinde neden öldüğünü ve sonraki round ne yapman gerektiğini söyler." },
+      { q: "AIMLO bir tracker'dan farkı ne?", a: "Tracker'lar maçtan sonra istatistik gösterir; AIMLO ise koçluk yapar: öldüğün her round bittiğinde neden öldüğünü ve sonraki round ne yapman gerektiğini söyler." },
       { q: "Hangi platformlarda çalışıyor?", a: "Windows 10 ve 11. macOS ve Linux desteği yok." },
       /* F44 dil sınırı (pano dalga, 2026-08-04): "Hayır." kesin güvence
          veriyordu — ban kararı Riot'a ait, hukuki taahhüt yok. Cevap teknik
@@ -172,7 +172,7 @@ const COPY = {
     catRows: [
       { name: "Trackers' free tier", price: "Free", extra: "", desc: "Match stats, no coaching — they don't tell you why you died.", self: false },
       { name: "GhostCoach", price: "$17.99/mo", extra: "lifetime $89.99", desc: "Another tool in the AI coaching category.", self: false },
-      { name: "AIMLO+", price: "$9.99/mo", extra: "499 TL/mo in Türkiye", desc: "Tells you why you died and what to do next round, the moment the round ends.", self: true },
+      { name: "AIMLO+", price: "$9.99/mo", extra: "499 TL/mo in Türkiye", desc: "Tells you why you died and what to do next round, the moment a round you die in ends.", self: true },
     ],
     catNote: "Comparison as of 2026-08-04, from publicly listed prices. Prices may change.",
     payTitle: "Continue to payment",
@@ -182,7 +182,7 @@ const COPY = {
     faq: [
       { q: "Can I cancel anytime?", a: "Yes. No commitment, no cancellation fee. Access continues until the end of your paid period." },
       /* B53/F43 (pano dalga, 2026-08-04): kategori kıyası SSS'te — rakamsız. */
-      { q: "How is AIMLO different from a tracker?", a: "Trackers show you stats after the match; AIMLO coaches you: the moment a round ends, it tells you why you died and what to do next round." },
+      { q: "How is AIMLO different from a tracker?", a: "Trackers show you stats after the match; AIMLO coaches you: the moment a round you die in ends, it tells you why you died and what to do next round." },
       { q: "Which platforms are supported?", a: "Windows 10 and 11. No macOS or Linux support." },
       /* F44 dil sınırı (pano dalga, 2026-08-04): "No." kesin güvenceydi —
          ban kararı Riot'a ait; cevap teknik gerçeklerde kalıyor. */

@@ -94,7 +94,7 @@ export default function GuvenlikPage() {
               hiçbir şey yapman gerekmez.
             </li>
             <li>
-              Her round bittiğinde, o rounda özel koçluk saniyeler içinde
+              Öldüğün her round bittiğinde, o rounda özel koçluk saniyeler içinde
               ekranına gelir: neden öldün, düşman ne yaptı, sonraki round ne
               yapmalısın.
             </li>

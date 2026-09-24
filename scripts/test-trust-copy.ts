@@ -430,5 +430,34 @@ console.log("\n[9] FB02 inceleme — ölü landing anahtarları ve import edilme
   t("'10$ ile başlayın' / 'Start for just $10' landing paketinde yok", !/10\$ ile başlayın|Start for just \$10/u.test(land));
 }
 
+// [10] Yakınsama Y33 (2026-09-25) · F78 kalıntısı: koç kartı YALNIZ ölünen round'da gelir
+// (aimlo-desktop lib.rs "SKIP DISPATCH FOR SURVIVED ROUNDS": `round_end_event && … && !died_this_round`
+// → AI çağrısı ve overlay kartı yok; ürün kararı "kart yalnız ölümde"). Landing ("Her Round Sonunda
+// Canlı Koçluk", "Live Coaching After Every Round", hero "HER ROUND KOÇLUK VERİR", çip "Her round
+// otomatik / Every round, auto"), /guvenlik ("Her round bittiğinde … koçluk") ve fiyat sayfası
+// ("her round bittiğinde", "the moment a round ends") hâlâ HER round kart vaat ediyordu → ilk 3 round
+// hayatta kalan yeni oyuncu hiç kart görmeyip AIMLO'nun çalışmadığını sanıyordu. "her round'u inceler /
+// reviews every round" (izleme — rapor her round'u kapsar) DOĞRU, kilitlenmez.
+console.log("\n[10] Y33 — koç kartı vaadi 'öldüğün round' (her round değil)");
+{
+  const Y33_FORBIDDEN: [string, RegExp][] = [
+    ["'her round sonunda/bittiğinde/koçluk/otomatik' (öldüğün olmadan)", /(?<!öldüğün\s)(?<![\p{L}])her\s+round\s+(?:sonunda|sonu|bittiğinde|koçluk|otomatik)/iu],
+    ["çıplak 'Round biter bitmez' (öldüğün olmadan)", /(?<!öldüğün\s)(?<![\p{L}'’])round\s+biter\s+bitmez/iu],
+    ["'after every round' / 'coaches every round' (ölüm şartsız)", /after\s+every\s+round|coach(?:es|ing)?\s+every\s+round(?!\s+you\s+die)/i],
+    ["'Every round, auto'", /every\s+round,\s*auto/i],
+    ["'the moment a/the round ends' (ölüm şartsız)", /the\s+moment\s+(?:a|the)\s+round\s+ends/i],
+  ];
+  for (const [ad, re] of Y33_FORBIDDEN) {
+    const hits = claimScope.filter((rel) => re.test(visibleText(rel)));
+    t(`${ad} → 0 (app/**/*.tsx)`, hits.length === 0, JSON.stringify(hits));
+  }
+  const landY33 = visibleText(LANDING);
+  t("landing TR+EN: 'Öldüğün Round'un Sonunda' / 'After Each Round You Die In' + hero 'ÖLDÜĞÜN HER ROUND' / 'every round you die in'",
+    /Öldüğün Round'un Sonunda Canlı Koçluk/u.test(landY33) && /Live Coaching After Each Round You Die In/.test(landY33) &&
+      /ÖLDÜĞÜN HER ROUND KOÇLUK VERİR/u.test(landY33) && /coaches every round you die in/.test(landY33));
+  t("izleme cümlesi DOĞRU olduğu için korunur ('her round'u inceler' / 'reviews every round')",
+    /her round'u inceler/u.test(landY33) && /reviews every round/.test(landY33));
+}
+
 console.log(`\n${fail === 0 ? "✅" : "❌"} test-trust-copy: ${pass} geçti, ${fail} kırık`);
 if (fail > 0) process.exit(1);
