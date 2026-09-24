@@ -51,6 +51,11 @@ async function main() {
     check("ORTADAKİ '?-?' numarası seçilenden BÜYÜK → geçersiz (numara kuralı korunur)", !midLate.ok, show(midLate));
     const late = pick([{ round: 1, score: "1-0" }, { round: 2, score: "1-1" }, { round: 3, score: "?-?" }]);
     check("SON round (R3) '?-?' → geçersiz (bayat 1-1 final ilan edilmez)", !late.ok && (late as { reason?: string }).reason === "late_unreadable", show(late));
+    // FB01 inceleme · F90: late_unreadable taramanın bulduğu son GEÇERLİ skoru taşır (final değil).
+    check("late_unreadable lastValid = son geçerli skor 1-1 (karar validateRequest'te)",
+      !late.ok && show((late as { lastValid?: unknown }).lastValid) === show({ yours: "1", enemy: "1" }), show(late));
+    const noPair = pick([{ round: 1, score: "?-?" }]);
+    check("hiç geçerli çift yok → lastValid YOK", !noPair.ok && (noPair as { lastValid?: unknown }).lastValid === undefined, show(noPair));
     const unnumbered = pick([{ score: "5-3" }, { score: "?-?" }]);
     check("numarasız '?-?' atlanamaz (sırası bilinemiyor) → geçersiz (B05 öncesi gibi)", !unnumbered.ok, show(unnumbered));
     const selUnnumbered = pick([{ score: "5-3" }, { round: 1, score: "?-?" }]);
@@ -176,6 +181,20 @@ async function main() {
     const res = await route.POST(reportRequest(desktopFlat));
     const body = await res.json().catch(() => ({}));
     check("SON eleman geç R1 '?-?' → 400 (F90; 9355dec davranışı)", res.status === 400 && body?.error === "Invalid score values", `got=${res.status} ${show(body).slice(0, 160)}`);
+    // FB01 inceleme · F90: FD01 masaüstü çapa-sonrası tam sıfırlamada '?-?'yi BİLEREK doldurmaz
+    // ve matchComplete:false gönderir (ad311c5 reset_after_anchor). Eskiden 400 → masaüstü
+    // Rejected → kalıcı → rapor kaybı. Artık "kayıttaki son skor" + UNFINISHED.
+    resetHarness();
+    const fd01 = await route.POST(reportRequest({ ...desktopFlat, matchComplete: false, endReason: "valorant_exit" }));
+    const bFd01 = await fd01.json().catch(() => ({}));
+    check("SON eleman '?-?' + matchComplete:false → 200, scoreStr '2 - 1', matchResult UNFINISHED, matchWon null (fix yok: 400 → rapor kaybı)",
+      fd01.status === 200 && bFd01?.scoreStr === "2 - 1" && bFd01?.matchResult === "UNFINISHED" && bFd01?.matchWon === null,
+      `got=${fd01.status} ${show(bFd01).slice(0, 160)}`);
+    check("…metin skoru final ilan etmiyor ('sonuç kesinleşmedi', 'kapattın' yok)",
+      /sonuç kesinleşmedi/.test(String(bFd01?.summary)) && !/kapattın/.test(String(bFd01?.summary) + String(bFd01?.tendencies)), String(bFd01?.summary).slice(0, 120));
+    resetHarness();
+    const mcTrue = await route.POST(reportRequest({ ...desktopFlat, matchComplete: true }));
+    check("SON eleman '?-?' + matchComplete:true → 400 AYNEN (bitiş iddiası var, final skor bilinmiyor)", mcTrue.status === 400, `got=${mcTrue.status}`);
     resetHarness();
     const midFlat = { ...desktopFlat, rounds: [...desktopFlat.rounds, { round: 4, result: "unknown", died: true }] };
     const resMid = await route.POST(reportRequest(midFlat));

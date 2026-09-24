@@ -421,27 +421,37 @@ export async function POST(request: NextRequest) {
     const report = ai.report;
 
     // Update player memory with match data
-    try {
-      if (userId) {
-        const { setup, rounds } = validation.data;
-        // FB01 · F03: sonuç TEK kaynaktan; null (UNFINISHED/DRAW) → wins/losses ARTMAZ.
-        const matchWon = reportOutcome(validation.data).won;
-        await updatePlayerMemory(userId, {
-          map: setup?.map || "",
-          agent: setup?.agent || "",
-          won: matchWon,
-          rounds: rounds.map(r => ({
-            deathLocation: r.deathLocation,
-            survived: r.survived,
-            skipped: r.skipped,
-            // player-memory binary tüketici — unknown, engine'lerdeki gibi loss'a iner
-            result: r.result === "unknown" ? "loss" : r.result,
-          }))
-        });
+    // FB01 inceleme · F18/F48: player_memory yazımı idempotent DEĞİL (matchId'yi tutmuyor —
+    // her çağrı ölüm konumlarını ve W/L'yi yeniden ekler). persistOnServer'da güncelleme
+    // eskiden kalıcılıktan ÖNCE koşuyordu: INSERT kalıcı hata verince route persisted:false
+    // dönüyor, masaüstü (FD05 1c98c49) maçı yeniden gönderiyor ve AYNI maç hafızaya İKİ kez
+    // yazılıyordu. Artık persistOnServer'da hafıza yalnız bu isteğin analyses satırını
+    // GERÇEKTEN yazdığı durumda güncellenir (aşağıda persist sonrası). Web yolu (kalıcılık
+    // istemcide) eskisi gibi burada, aynı sırada.
+    const recordPlayerMemory = async () => {
+      try {
+        if (userId) {
+          const { setup, rounds } = validation.data;
+          // FB01 · F03: sonuç TEK kaynaktan; null (UNFINISHED/DRAW) → wins/losses ARTMAZ.
+          const matchWon = reportOutcome(validation.data).won;
+          await updatePlayerMemory(userId, {
+            map: setup?.map || "",
+            agent: setup?.agent || "",
+            won: matchWon,
+            rounds: rounds.map(r => ({
+              deathLocation: r.deathLocation,
+              survived: r.survived,
+              skipped: r.skipped,
+              // player-memory binary tüketici — unknown, engine'lerdeki gibi loss'a iner
+              result: r.result === "unknown" ? "loss" : r.result,
+            }))
+          });
+        }
+      } catch (e) {
+        console.log("[Aimlo] Player memory update failed");
       }
-    } catch (e) {
-      console.log("[Aimlo] Player memory update failed");
-    }
+    };
+    if (!validation.data.persistOnServer) await recordPlayerMemory();
 
     // Output quality gate + field-level refinement — lib/report-refine.ts
     // maybeRefineReport (OLCUM-ARACI-14): eval aynı kapıyı/prompt'u/kabul kuralını
@@ -492,7 +502,13 @@ export async function POST(request: NextRequest) {
         validation.data,
         report,
       );
+      // F18 yeniden denemesi "conflict" dönerse satırı büyük olasılıkla İLK denememiz yazdı
+      // (hata yanıtı yolda kayboldu) → hafıza bu istekte güncellenir. Kalan dar yarış: ilk
+      // deneme GERÇEKTEN yazmadıysa ve arada eşzamanlı bir kopya yazdıysa o maç bir kez fazla
+      // sayılabilir (B81 atomik-olmayan pre-flight ile aynı sınıf).
+      let firstAttemptErrored = false;
       if (persist.kind === "error") {
+        firstAttemptErrored = true;
         // FB01 · F18 (2026-09-24): geçici PostgREST/ağ hatası (5xx, bağlantı kopması) tek
         // hatada raporu kalıcılıktan düşürüyordu (probe: sahte PGRST303 → 200, savedAnalysisId
         // yok). ~500 ms sonra BİR kez daha dene. persistAnalysis idempotent: ilk INSERT
@@ -503,6 +519,10 @@ export async function POST(request: NextRequest) {
         );
         await new Promise((r) => setTimeout(r, PERSIST_RETRY_DELAY_MS));
         persist = await persistAnalysis(request, userId, validation.data, report);
+      }
+      // FB01 inceleme · F48: hafıza YALNIZ bu isteğin yazdığı satır için (yukarıdaki not).
+      if (persist.kind === "ok" || (persist.kind === "conflict" && firstAttemptErrored)) {
+        await recordPlayerMemory();
       }
       if (persist.kind === "ok") {
         report.savedAnalysisId = persist.id;

@@ -29,6 +29,12 @@
  *    sarılabildiği için (gunay-runtime.log:7159 → :7310 round=2) numarası küçük görünen
  *    son round "geç teslim edilen erken round" sayılamaz. Numara kuralı yalnız ORTADAKİ
  *    (son eleman olmayan) atlanan çift için geçerli.
+ *  - FB01 inceleme · F90 (2026-09-24): late_unreadable'da bulunan son GEÇERLİ skor
+ *    lastValid'de döner. İstemci AÇIKÇA matchComplete:false dediyse (FD01 masaüstü
+ *    çapa-sonrası sıfırlamada '?-?'yi bilerek doldurmaz ve bunu gönderir) validateRequest
+ *    o skoru "kayıttaki son skor" olarak kabul eder — sonuç UNFINISHED (won=null) olduğu
+ *    için bayat skor final İLAN EDİLMEZ, rapor da 400'le kaybolmaz. matchComplete yok
+ *    (v1.0.19) ya da true → 400 AYNEN.
  *  - Hiç geçerli çift yok ama 2-parçalı geçersiz dizi VARSA → eskisi gibi geçersiz
  *    (400 "Invalid score values"); uydurma 0-0 WIN/LOSS üretilmez.
  *  - Hiç skor alanı yoksa bugünkü 0-0 davranışı AYNEN.
@@ -75,6 +81,10 @@ export type PickedReportScore =
       /** "late_unreadable": seçilen geçerli skordan SONRAKİ (ya da numarasız) bir
        *  round'un skoru okunamadı → bayat ara skor final ilan edilmez (log için). */
       reason?: "late_unreadable";
+      /** late_unreadable'da taramanın bulduğu son GEÇERLİ skor (OCR'ın gerçekten okuduğu).
+       *  Final DEĞİLDİR; validateRequest yalnız istemci matchComplete:false dediğinde onu
+       *  "kayıttaki son skor" olarak (sonuç UNFINISHED) kullanır (FB01 inceleme · F90). */
+      lastValid?: { yours: string; enemy: string };
     };
 
 /** Round numarası — validateRequest ile AYNI okuma sırası (roundNumber → round). */
@@ -152,10 +162,13 @@ export function pickReportScore(rounds: unknown, score: unknown): PickedReportSc
     // numarası sıfırlanmış son round {round:1,'?-?'} "geç teslim edilen erken round"
     // sanılıp R19'un '3 - 12' ara skoru final ilan ediliyordu. Dizi sırası = masaüstü
     // MATCH_ROUNDS ekleme (teslim) sırası; SON eleman maçın en son teslim edilen round'u.
-    // D09+ masaüstü sondaki '?-?'yi POST'tan önce son geçerli skorla doldurduğu için bu
-    // dala girmez (yalnız eski istemci).
+    // FB01 inceleme · F90: "D09+ masaüstü bu dala girmez" iddiası YANLIŞTI — FD01
+    // (aimlo-desktop ad311c5) reset_after_anchor çapadan sonra tam sıfırlama olduysa
+    // (UNCONFIRM backstop / oyun kapanışı) sondaki '?-?'yi bilerek doldurmuyor ve
+    // matchComplete:false gönderiyor. Bu dal o gövdede de çalışır; son geçerli skor
+    // lastValid'de döner, final ilan edilip edilmeyeceğine validateRequest karar verir.
     if (lastElementSkipped) {
-      return { ok: false, reason: "late_unreadable" };
+      return { ok: false, reason: "late_unreadable", lastValid: { yours, enemy } };
     }
     // B05 inceleme: ORTADAKİ (son eleman olmayan) atlanan okunamayan round'un numarası
     // seçilenden büyük/eşitse (ya da numarasızsa) → seçilen skor maç sonu değil, bayat
@@ -165,7 +178,7 @@ export function pickReportScore(rounds: unknown, score: unknown): PickedReportSc
       skippedNums.length > 0 &&
       (selectedNum === null || skippedNums.some((n) => n === null || n >= selectedNum!))
     ) {
-      return { ok: false, reason: "late_unreadable" };
+      return { ok: false, reason: "late_unreadable", lastValid: { yours, enemy } };
     }
   }
   if (!isValidScoreValue(yours) || !isValidScoreValue(enemy)) {

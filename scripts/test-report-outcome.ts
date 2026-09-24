@@ -26,7 +26,7 @@ import Module from "node:module";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { harness, resetHarness, loadReportRoute, reportRequest, newFakeDb } from "./report-route-harness";
-import { deriveMatchOutcome, isTerminalScore, normalizeModeToken, MATCH_END_REASONS } from "../lib/match-outcome";
+import { deriveMatchOutcome, isTerminalScore, normalizeModeToken, MATCH_END_REASONS, parseStoredWon, decidedWinRate } from "../lib/match-outcome";
 import { crossedHalfSwap } from "../lib/match-outcome";
 import {
   validateRequest,
@@ -108,7 +108,51 @@ async function main() {
     check("matchComplete=true terminal-olmayan skoru da sonuç sayar (masaüstü bitiş ekranı otoritatif)", o(9, 4, true, "competitive").label === "WIN");
     check("isTerminalScore: tanınmayan mod → null (çıkarım yok)", isTerminalScore(9, 4, "deathmatch") === null && isTerminalScore(9, 4, undefined) === null);
     check("normalizeModeToken: ' Spike Rush ' → spike_rush", normalizeModeToken(" Spike Rush ") === "spike_rush");
-    check("MATCH_END_REASONS masaüstü FD01 listesi (aynı yazım)", show(MATCH_END_REASONS) === show(["end_screen", "manual", "lobby", "progression", "valorant_exit", "new_match"]));
+    // FB01 inceleme: eski test sabit bir diziyi kendisiyle kıyaslıyordu (masaüstü listesiyle
+    // gerçek bir kıyas yoktu). Artık kardeş repo varsa ai_client.rs END_REASON_* sabitleri
+    // KAYNAK SIRASIYLA okunup birebir kıyaslanır; yoksa SKIP (CI kırılmaz).
+    {
+      const deskDir = process.env.AIMLO_DESKTOP_DIR ? path.resolve(process.env.AIMLO_DESKTOP_DIR) : path.resolve(REPO_ROOT, "..", "aimlo-desktop");
+      const rs = path.join(deskDir, "src-tauri", "src", "ai_client.rs");
+      if (!fs.existsSync(rs)) {
+        console.log(`  ⏭  SKIP — kardeş masaüstü reposu yok (${rs}); MATCH_END_REASONS kıyası atlandı`);
+      } else {
+        const src = fs.readFileSync(rs, "utf8");
+        const desk = [...src.matchAll(/pub const END_REASON_[A-Z_]+: &str = "([a-z_]+)";/g)].map((m) => m[1]);
+        check("MATCH_END_REASONS = masaüstü ai_client.rs END_REASON_* (aynı yazım, aynı sıra)",
+          desk.length > 0 && show(MATCH_END_REASONS) === show(desk), `backend=${show(MATCH_END_REASONS)} masaüstü=${show(desk)}`);
+      }
+    }
+    // FB01 inceleme: DERECESİZ 12-12'de tek round sudden death ("Endgame") — 13-12 FİNAL skor.
+    check("derecesiz 13-12 → WIN, 12-13 → LOSS (sudden death; fix yok: UNFINISHED)",
+      o(13, 12, undefined, "unrated").label === "WIN" && o(12, 13, undefined, "unrated").label === "LOSS" && isTerminalScore(13, 12, "unrated") === true,
+      show(o(13, 12, undefined, "unrated")));
+    check("derecesiz 12-12 / 11-9 → UNFINISHED; rekabetçi/premier 13-12 hâlâ UNFINISHED (uzatma)",
+      o(12, 12, undefined, "unrated").label === "UNFINISHED" && o(11, 9, undefined, "unrated").label === "UNFINISHED"
+        && o(13, 12, undefined, "competitive").label === "UNFINISHED" && o(13, 12, undefined, "premier").label === "UNFINISHED");
+  }
+
+  console.log("\n── [F03 web] geçmiş/pano — kayıttaki won=null 'Yenilgi' sayılmaz (app/LandingClient.tsx) ──");
+  {
+    // Eski rowToReport ifadesi (kanıt): null'ı false'a çökertiyor.
+    const legacyRowWon = (raw: unknown) => (raw as boolean) ?? false;
+    check("KANIT: eski `(json.won as boolean) ?? false` null → false (Yenilgi)", legacyRowWon(null) === false && legacyRowWon(undefined) === false);
+    check("parseStoredWon: true/false aynen; null / eksik / 'false' dizesi / 0 → null (bilinmiyor)",
+      parseStoredWon(true) === true && parseStoredWon(false) === false && parseStoredWon(null) === null
+        && parseStoredWon(undefined) === null && parseStoredWon("false") === null && parseStoredWon(0) === null);
+    // Masaüstü persistOnServer satırları: 1 galibiyet, 1 yenilgi, 2 UNFINISHED/DRAW (won=null).
+    const rows = [{ won: true }, { won: false }, { won: null }, { won: null }].map((r) => ({ won: parseStoredWon(r.won) }));
+    const wr = decidedWinRate(rows);
+    const legacyWr = Math.round((rows.map((r) => ({ won: legacyRowWon(r.won) })).filter((r) => r.won).length / rows.length) * 100);
+    check("WR paydası yalnız sonucu bilinen maçlar: 1W/1L + 2 bilinmeyen → %50 (eski kod %25, 3 'L')",
+      wr.pct === 50 && wr.wins === 1 && wr.losses === 1 && wr.decided === 2 && legacyWr === 25, show({ wr, legacyWr }));
+    check("sonucu bilinen maç yoksa pct null (UI '—'; %0 iddiası yok)", decidedWinRate([{ won: null }]).pct === null && decidedWinRate([]).pct === null);
+    const src = fs.readFileSync(path.join(REPO_ROOT, "app", "LandingClient.tsx"), "utf8");
+    check("LandingClient rowToReport parseStoredWon kullanıyor, `?? false` yok",
+      src.includes("won: parseStoredWon(json.won)") && !/json\.won as boolean\)\s*\?\?\s*false/.test(src));
+    check("LandingClient: WR/filtre/sayaçlarda null'ı kayıp sayan truthy kalıp yok",
+      !/filter\(\(?r\)? => !?r\.won\)/.test(src) && !/\.total - [a-z]+\.wins\}L/.test(src) && !/\{(?:entry|vr)\.won \? l\.victory : l\.defeat\}/.test(src));
+    check("nötr rozet metni TR + EN ('Sonuç yok' / 'No result')", src.includes('noResult: "Sonuç yok"') && src.includes('noResult: "No result"'));
   }
 
   console.log("\n── [F03] rapor prompt'u + deterministik şablon (dört kopya tek yardımcıda) ──");
@@ -262,6 +306,20 @@ async function main() {
       a.userPrompt.includes("Side: attack (SALDIRI — oyuncu site'lara giriyor: entry/execute/trade/space)") && !/ side=/.test(a.userPrompt));
     const spike = validated({ rounds: desktopRounds(seq(4, 2)), lang: "tr", map: "bind", mode: "spike_rush", side: "attacking" });
     check("spike rush 6 round (R3'te taraf değişir, masaüstü is_side_swap_probe_round) → mixed", resolveReportSides(spike).mixed);
+
+    // FB01 inceleme · F13 kalıntısı: round tarafları OYBİRLİĞİYLE 'defending', maç seviyesindeki
+    // taraf finalize anında (R13 alım evresinde "Maçı bitir") 'attacking' okunmuş.
+    const def12 = desktopRounds(["loss", "win", "win", "loss", "win", "win", "loss", "win", "loss", "win", "win", "loss"], () => ({ side: "defending" }));
+    const lateSide = validated({ rounds: def12, lang: "tr", map: "summit", agent: "brimstone", mode: "competitive", side: "attacking", matchComplete: false });
+    const lp = buildReportPrompts(lateSide, { memoryContext: "" });
+    check("12×'defending' + setup 'attacking' → raporun tarafı 'defense' (fix yok: 'Side: attack (SALDIRI …)')",
+      lateSide.setup.side === "defense" && lp.userPrompt.includes("Side: defense") && !lp.userPrompt.includes("Side: attack"), lp.userPrompt.split("\n")[0]);
+    check("…savunma KB bölümü prompt'ta, şablon 'Savunma' diyor, mixed DEĞİL",
+      lp.systemPrompt.includes("## 4. Savunma Stratejileri") && /Savunma\./.test(generateDeterministicReport(lateSide).summary) && !resolveReportSides(lateSide).mixed,
+      generateDeterministicReport(lateSide).summary.slice(0, 80));
+    const agree = validated({ rounds: def12, lang: "tr", map: "summit", mode: "competitive", side: "defending" });
+    const noRoundSide = validated({ rounds: desktopRounds(seq(3, 2)), lang: "tr", map: "summit", side: "attacking" });
+    check("taraflar uyumluysa / round'larda taraf yoksa (v1.0.19) setup.side AYNEN", agree.setup.side === "defense" && noRoundSide.setup.side === "attack");
   }
 
   // ══════════════════════════════════════════════════════════════════════
@@ -370,6 +428,24 @@ async function main() {
     const rd = generateDeterministicReport(repeated);
     check("aynı noktada 3 ölüm → tekrar iddiası ölçülmüş, korunur ('okunuyor', 'A Main'de 3 tekrar ölüm')",
       /bu pozisyon okunuyor/.test(rd.summary) && /A Main'de 3 tekrar ölüm/.test(rd.decisionScore), show({ s: rd.summary, d: rd.decisionScore }));
+
+    // FB01 inceleme · F89: 6 ölümden yalnız 2'sinin konumu okunmuş (OCR konumu sık kaçırıyor).
+    const partialLoc = ["A Main", "", "", "B Site", "", ""];
+    let pi = 0;
+    const partial = desktopRounds(["loss", "loss", "win", "loss", "loss", "loss", "loss"]).map((r) => ({ ...r, deathLocation: r.died ? partialLoc[pi++] : "" }));
+    for (const lang of ["tr", "en"] as const) {
+      const pd = generateDeterministicReport(validated({ rounds: partial, lang, map: "bind", agent: "sova" }));
+      check(`${lang}: 6 ölümün 2'si konumlu → 'iki kez ölmedin' / 'never died twice' YOK (fix yok: ölçülmemiş olgu)`,
+        !/iki kez ölmedin|never died twice/.test(pd.mistake) && (lang === "tr" ? /6 ölümünden konumu okunan 2 tanesi 2 farklı noktada\./ : /Of your 6 deaths, the 2 with a read location were at 2 different spots\./).test(pd.mistake),
+        pd.mistake);
+    }
+    const allLoc = generateDeterministicReport(validated({ rounds: desktopRounds(["loss", "win", "loss"]).map((r, i) => ({ ...r, deathLocation: r.died ? (i === 0 ? "A Main" : "B Site") : "" })), lang: "tr", map: "bind" }));
+    check("tüm ölümler konumlu + farklı → 'aynı noktada iki kez ölmedin' KORUNUR (ölçülmüş)", /2 ölümün 2 farklı noktaya dağıldı — aynı noktada iki kez ölmedin\./.test(allLoc.mistake), allLoc.mistake);
+    const survivedNoLoc = generateDeterministicReport(validated({ rounds: desktopRounds(["loss", "win"]).map((r) => ({ ...r, deathLocation: r.died ? "A Main" : "" })), lang: "tr", map: "bind", agent: "sova" }));
+    check("bestRound: konum yokken harita adı konum olmuyor ('Bind bölgesinde' YOK)",
+      /^R2: Sova olarak hayatta kaldın/.test(survivedNoLoc.bestRound) && !/Bind bölgesinde/.test(survivedNoLoc.bestRound), survivedNoLoc.bestRound);
+    const lobby = generateDeterministicReport(validated({ rounds: desktopRounds(["loss", "loss", "loss"]).map((r) => ({ ...r, deathLocation: "b lobby" })), lang: "tr", map: "sunset" }));
+    check("kanonik küçük harf konum resmi yazımla: 'B Lobby' (fix yok: 'b lobby')", /B Lobby/.test(lobby.summary + lobby.mistake) && !/b lobby/.test(lobby.summary + lobby.mistake), lobby.mistake.slice(0, 60));
   }
 
   // ══════════════════════════════════════════════════════════════════════
@@ -384,14 +460,26 @@ async function main() {
     const posts = harness.db.calls.filter((m) => m === "POST").length;
     check("sahte PGRST303 → 200 + persisted:false, savedAnalysisId YOK (fix yok: persisted alanı yok)", res.status === 200 && j.persisted === false && j.savedAnalysisId === undefined, show({ s: res.status, p: j.persisted, id: j.savedAnalysisId }));
     check("INSERT bir kez yeniden denendi (2 POST)", posts === 2, `posts=${posts}`);
+    // FB01 inceleme · F48: kalıcılık başarısızsa hafıza YAZILMAZ — masaüstü persisted:false'ta
+    // maçı yeniden gönderir; eskiden aynı maç player_memory'ye iki kez ekleniyordu.
+    check("persisted:false → player_memory GÜNCELLENMEDİ (fix yok: 1 — yeniden denemede 2. kez eklenir)", harness.memoryUpdates.length === 0, `mem=${harness.memoryUpdates.length}`);
     resetHarness();
     harness.db = newFakeDb();
     const ok = await route.POST(reportRequest({ rounds: desktopRounds(seq(2, 1)), lang: "tr", map: "bind", matchId: MID, persistOnServer: true }));
     const jo = await ok.json() as Record<string, unknown>;
     check("sağlıklı DB → persisted:true + savedAnalysisId", jo.persisted === true && jo.savedAnalysisId === MID);
+    check("…yeniden deneme başarılı → hafıza TAM BİR kez güncellendi (toplam 1)", harness.memoryUpdates.length === 1, `mem=${harness.memoryUpdates.length}`);
+    // İlk INSERT yazıldı ama yanıt kayboldu → yeniden deneme conflict: satır bizim, hafıza 1 kez.
+    resetHarness();
+    harness.db = newFakeDb();
+    harness.db.failFirstInsertAfterWrite = true;
+    const lost = await route.POST(reportRequest({ rounds: desktopRounds(seq(2, 1)), lang: "tr", map: "bind", matchId: MID, persistOnServer: true }));
+    const jl = await lost.json() as Record<string, unknown>;
+    check("ilk INSERT yazıp hata döndü → yeniden deneme conflict: persisted:true, hafıza 1 kez", jl.persisted === true && harness.memoryUpdates.length === 1, show({ p: jl.persisted, mem: harness.memoryUpdates.length }));
     resetHarness();
     const web = await route.POST(reportRequest({ rounds: desktopRounds(seq(2, 1)), lang: "tr", map: "bind" }));
     check("persistOnServer yok (web) → persisted alanı YOK", !("persisted" in (await web.json() as Record<string, unknown>)));
+    check("…web yolu hafızayı eskisi gibi günceller (1)", harness.memoryUpdates.length === 1, `mem=${harness.memoryUpdates.length}`);
   }
 
   // ══════════════════════════════════════════════════════════════════════
@@ -424,6 +512,17 @@ async function main() {
       !hasRefineMetaLanguage("R5'te A Main'e tek girdin; bir sonraki round flaşla gir ve takımı bekle.")
         && !hasRefineMetaLanguage("Rakip kadroda Chamber var; OP'yi listelediği açıya bakma, off-angle tut.")
         && !hasRefineMetaLanguage("You can't win the duel from that angle; swing wide with a flash."));
+    // FB01 inceleme · F48: eval-out gitignore'lu olduğu için temiz klonda/CI'da ölçüm "atlandı"
+    // diye geçiyordu. Sabit korpus (scripts/fixtures/refine-fp-corpus.json — eval-out'un
+    // report-*.json final alanları; 20'si kabul edilmiş refine) HER koşuda ölçülür.
+    {
+      const corpus = JSON.parse(fs.readFileSync(path.join(REPO_ROOT, "scripts", "fixtures", "refine-fp-corpus.json"), "utf8")) as { items: { id: string; field: string; refined: boolean; text: string }[] };
+      const items = corpus.items;
+      const refinedItems = items.filter((x) => x.refined);
+      const hits = items.filter((x) => hasRefineMetaLanguage(x.text)).map((x) => `${x.id}:${x.field}`);
+      check(`yanlış-pozitif (repodaki sabit korpus): ${items.length} final alan / ${refinedItems.length} kabul edilmiş refine → 0 eşleşme`,
+        items.length >= 100 && refinedItems.length >= 10 && hits.length === 0, show(hits));
+    }
     // Yanlış-pozitif ölçümü: eval-out'taki (gitignore'lu, ücretli koşu çıktısı) kabul edilmiş refine alanları.
     const dir = path.join(REPO_ROOT, "scripts", "eval-out");
     const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => /^report-.*\.json$/.test(f)) : [];

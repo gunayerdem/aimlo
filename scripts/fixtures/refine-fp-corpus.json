@@ -1,0 +1,1062 @@
+{
+ "note": "FB01 inceleme · F48: refine meta-dil kapısının (hasRefineMetaLanguage) yanlış-pozitif ölçüm korpusu. Kaynak: scripts/eval-out/report-*.json (gitignore, ücretli koşu çıktısı) final rapor alanları — kabul edilmiş refine alanları refined:true. Model çıktısı, PII yok. Temiz klonda/CI da ölçüm koşsun diye repoda sabit.",
+ "generatedFrom": [
+  "report-b09-base-en.json",
+  "report-b09-cand-en.json",
+  "report-b09-cand2-en.json",
+  "report-base10h.json",
+  "report-samples.json"
+ ],
+ "items": [
+  {
+   "source": "report-b09-base-en",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "summary",
+   "refined": true,
+   "text": "Lost 11-13. You died 4 times at B Main (R1, R3, R9, R20). You died at Market once and at A Site once. You played Cypher on defense against Jett, Sova, Omen, Killjoy, and Reyna. Each B Main death removed your utility and prevented you from anchoring that area; place a tripwire across B Main entry and set a smoke deep in B Main before peeking. Post the tripwire, return to cubby to hold for trades and call the exact enemy push to teammates. When rotating, leave a tripwire in Market or on A Site approach to delay pushes and buy time for teammates to reposition."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) Holding B Main same angle four times (R1, R3, R9, R20) — predictable Operator peeks killed you. 2) Solo anchoring B Main without immediate trade backup (R1, R3, R9) — deaths were unretraded. 3) Market/A site positioning exposed you to flank/utility (R7 Market death by Reyna, R15 A Site by Killjoy) — you left flank lines or post-plant angles unchecked."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "tendencies",
+   "refined": false,
+   "text": "Enemy Jett repeatedly held Heaven with an Operator and beat your B Main peeks (top killer Jett ×3). Reyna punished Market off-angles once; Killjoy closed A post-plant. Pattern: B Main is tracked and pre-aimed by enemy op — they exploit identical holds."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "adjustment",
+   "refined": false,
+   "text": "A) Change B Main sets: Option 1 — stop holding the same Heaven-facing angle; move deeper off-angle (toward the lane edge) one round, then rotate to Market-link the next; call the change so team knows trade windows. Option 2 — anchor with passive tel/camera closer to B Main choke, but do not face Heaven head-on; let a second teammate hold trade distance on the lane. B) If Operator sound or first op kill occurs: do not re-peek that exact angle next round — instead smoke Heaven or pre-flash before any peek, or rotate to Market/CT to cover flank."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R5 — alive. You survived by not engaging early and letting teammates trade; that preserved numbers and won the round. Repeat: survive initial contact, force team trade instead of solo peek to keep numbers advantage."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "3/10 — rationale: repeated predictable B Main holds and solo anchoring led to unretraded deaths and lost advantage; preserving life and varying hold angles would raise this score."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "summary",
+   "refined": false,
+   "text": "You won 13-8. Attack rounds mostly clean; key failure was a solo Hookah entry (R4) where Cypher trap + Vandal killed you. Best moments: R1 and R11 (clutch ) where you used boombot + satchel to open and secure site. Survival 75%, decision score 7/10."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) R4: walked into Hookah alone and died to Cypher trap + Vandal. 2) R14: died in Showers — entry timing/utility unclear. 3) Occasional solo entries instead of paired trade (not frequent but costly when Hookah/Showers are threatened)."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "tendencies",
+   "refined": false,
+   "text": "Opposing setup included defenders able to hold Showers and Hookah angles (deaths at Hookah R4 and Showers R14). No repeat multi-round pattern, but Hookah flagged as weakest area."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "adjustment",
+   "refined": true,
+   "text": "Variation A: Before entering Hookah, send Boombot into Hookah; have a teammate hold trade at the Hookah entrance and immediately trade if the bot triggers a Viper/Cypher/Chamber trap. Variation B: If you must entry Hookah solo, throw a Brimstone smoke on the Hookah entrance then satchel into Hookah behind cover and clear A Site/Showers from Hookah. Alternative: apply Hookah pressure with a visible Boombot then rotate to A Site and execute onto A Site."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R11: used boombot + satchel to create space, got 2 kills and closed a clutch — sequence worked because you forced vision denial and immediately capitalized on cleared angles."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "7/10 — good round choices and clutch, but a solo Hookah entry (R4) cost a round; pair entries/trades would raise this."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "summary",
+   "refined": true,
+   "text": "You won 13-11 as Omen on attack. Die twice at A Main; die once at C Site. Enemies present: Chamber, Killjoy, Viper, Fade, Sage. Act: avoid peeking A Main without smoke or teleport; place flash through A Main before entering; use teleport to reposition off A Main sightlines; smoke A Main angles and clear with utility before committing; when rotating to C Site, use teleport to take alternative angle and check common Chamber sightlines. Decision score 5/10, survival ~50%."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) Entering A Main without smoke and taking the same angle → R2, R5. 2) Predictable teleport/entry pattern into A Main (no variation) → R2, R5. 3) One unnecessary exposure on C Site (single death) → R22."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "tendencies",
+   "refined": false,
+   "text": "Enemy Chamber held A Main with an Operator (two kills R2,R5). Enemy comp includes Chamber and Viper — long-angle and area control. Repeated deaths concentrated on A Main indicate they pre-aim or hold that exact long angle."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "adjustment",
+   "refined": false,
+   "text": "Variation A: Do not walk into A Main without utility — smoke A Main cross or the Operator sightline, then TP to a different high angle and entry with flash from Raze. Variation B: Skip teleport into A Main; have your team smoke A Main and Root, then teleport to Tree or not at all — let Raze/Killjoy clear Root while you create off-angle from Tree. Alternative for C Site (R22): enter C via Mound with a flash first or send a teammate to trade from rotated flank."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R8 — you stayed alive and the team executed cleanly; they avoided predictable A Main solo entries and kept utility for the site take. Replicate the same coordinated utility-first entry pattern used in R8 for future A executes."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "5/10 — repeated same-angle deaths (R2,R5) show failure to adapt; round-level choices otherwise adequate but position diversity and A Main utility timing need fixing."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "summary",
+   "refined": false,
+   "text": "Lost 12-14 on Icebox defense. B Site cost you the match: three deaths at B Site (R4, R14, R26) plus a Kitchen death (R7) and one Mid death (R22). Repeatedly dying on B Site retakes and using the same entry path without wall or traded util left you exposed and gave enemy clean clears."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) Dying on B Site retake three times (R4, R14, R26) — you entered same path without wall or utility. 2) No trade setup on B Site entries (R26 overtime) — solo clearance allowed Raze/Raze-Phantom to punish. 3) Walking into Kitchen/Mid fights without crossfire or anchor (R7 Kitchen, R22 Mid) — you were isolated."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "tendencies",
+   "refined": false,
+   "text": "Enemy consistently punished B Site retakes and close-range clears; Raze was present in a B retake that cleared you (R14). They won retake windows where you had no wall or no trade. Mid death (R22) and Kitchen (R7) show occasional isolation outside of crossfire."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "adjustment",
+   "refined": false,
+   "text": "1) Primary: On B Site retake, do NOT enter the same path without wall — when spike planted, place wall to split site before committing, then hold an off-angle behind box and let teammate trade. OR hold a deeper anchor: stay on Green/Snowman off-angle, call for a flash from Killjoy or Sova, only swing after flash pops. 2) Secondary: If you must retake alone (overtime), never use the identical entry — fake the entry path (bait) then rotate to alternative B approach (Kitchen flank) while teammate clears main. 3) For Kitchen/Mid fights (R7, R22): anchor with crossfire — stay on an off-height inside cover, avoid wide solo peeks; if you get contact, immediately fall to wall and let Killjoy or Sage trade."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R1 — defensive hold succeeded by staying alive on site. You held your post and avoided risky retakes; repeat that discipline on B by keeping wall up and refusing solo entry."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "4/10 — repeated B Site retake pattern and no-trade entries cost rounds; survive-and-trade discipline needed."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER5-summit-brimstone-atk-fullmatch",
+   "field": "summary",
+   "refined": false,
+   "text": "Attack on Summit won 9-4. You died twice around B (B Lobby R12, B Main R13) and several early/late solo fights cost utility and ult impact. Best round R4 showed coordinated entry; survival rate low (33%), decision score 5/10."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER5-summit-brimstone-atk-fullmatch",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) Dying in B Lobby with ult ready (R12) — you held ult instead of using it for pressure. 2) Wide exposed death at B Main in pistol-like situation (R13) — you stood in the open without a smoke/molly. 3) Early solo fights on defense/late round (R3, R6, R11) — you took unnecessary isolated duels and lost tempo."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER5-summit-brimstone-atk-fullmatch",
+   "field": "tendencies",
+   "refined": false,
+   "text": "On attack you tend to hold wide lines at B Main and B Lobby without closing them with smoke/molly. In late rounds you keep taking isolated fights instead of using ult/smoke for area pressure. Enemy comp (Chamber, Neon, Harbor, Skye) punished exposed entries and tempo mistakes."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER5-summit-brimstone-atk-fullmatch",
+   "field": "adjustment",
+   "refined": true,
+   "text": "Variation A: Use Brimstone ult proactively on B Lobby — press X and place the ult on B Lobby when enemies commit entry to force Chamber, Neon, Harbor, or Skye back; then push B Lobby immediately with teammates behind your smokes. Variation B: Hold one Brimstone smoke or molly for B Main entry — deploy smoke on B Main mouth or deploy molly to a deep B Main angle before stepping onto the wide line; if entry fails, fall back to the site edge and hold an off-angle."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER5-summit-brimstone-atk-fullmatch",
+   "field": "bestRound",
+   "refined": false,
+   "text": "Repeat the same util-first, second-man entry pattern at B."
+  },
+  {
+   "source": "report-b09-base-en",
+   "id": "ER5-summit-brimstone-atk-fullmatch",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "5/10 — you made correct choices some rounds but repeated exposed positioning and ult-timing errors reduced your impact; fix ult usage and smoke discipline to raise score."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "summary",
+   "refined": true,
+   "text": "You lost 11-13. Match collapsed around B Main: you died at B Main (multiple rounds) and also died at Market and at A Site. Jett was the top killer with an Operator. Survival rate 25% and decision score 3/10 — repeated same-angle deaths at B Main cost trades and site control."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) Holding B Main alone and repeatedly in the same angle — deaths in R1, R3, R9, R20. 2) No position variation after being killed from Heaven by an Operator (R1 then R9 same). 3) Died Market (R7) and A Site (R15) with no clear crossfire or trade set up — trade failures reduced survival."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "tendencies",
+   "refined": false,
+   "text": "Enemy Jett favored Heaven>B Main Operator angles (3 kills). Enemy comp includes Killjoy and Reyna enabling isolation + long-range cover. Pattern: multiple deaths from identical B Main angle — opponents repeatedly punished that fixed hold."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "adjustment",
+   "refined": false,
+   "text": "Option A: Stop anchoring the exact B Main line — next round leave that Heaven-facing angle empty, hold a rotated off-angle (closer to B Lanes corner) and call for a trade partner in CT/Market. OR Option B: If you must hold B Main, smoke or flash Heaven before peeking and stand tighter behind cover (use off-angle on the box edge, not center line) so Operator can't one-tap you. Secondary: after Market death (R7), place camera covering Market exit and move tel to flank path to catch rotations; request a nearby teammate to trade on B Main peek."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R5 — you survived. Keep the same principle: alive anchor created space for trades. Repeatable part: avoid fixed head-on line, use cover+off-angle and keep a trade partner ready."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "3/10 — repeated same-angle holds at B Main and failure to vary position cost trades and survival; needed pre-planned rotation or utility to deny Operator angles."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "summary",
+   "refined": true,
+   "text": "You won 13-8 on Bind as Raze on attack. Push A Site with satchels and clear corner on first contact; use satchel to enter Showers and immediately throw cluster grenade toward default; engage and eliminate targets at B Site by spamming cubby then retreat to safety with satchel; when entering Hookah, pre-throw a Paint Shell into common Cypher trap lines and peek quickly to avoid trap detonation; on rounds where you die at A Site, commit to vertical satchel reposition to change sightline"
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) R4 Hookah: you entered Hookah alone and triggered Cypher tripwire, died to Vandal — solo dry entry. 2) R14 Showers: died entering Showers without documented trade or prior bot/molly — entry lacked team support. 3) Positioning: overall positioning score flagged (5/10) — you took high-risk direct entries in two lost rounds."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "tendencies",
+   "refined": false,
+   "text": "Chamber and long-hold tools present make off-angle and anchor plays possible; enemy composition supports passive anchor + trap holds. You succeed when you chain bot+molly+scoop entry (R11) and when Brimstone/Viper smokes enable space (multiple wins)."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "adjustment",
+   "refined": false,
+   "text": "1) Primary: Stop solo Hookah entry — in next Hookah contact send boombot first, then molly, then commit with a teammate for trade. OR have Brimstone/Viper smoke Hookah before you go in and let Skye flash from outside before your entry. 2) Secondary: For Showers entries, always force a trade: send boombot then wait for a teammate at trade distance to follow immediately; OR delay your entry and use satchel to reposition to Lamps off-angle after bot forces a reaction. 3) Post-loss routine: after a solo-death at a callout, change your entry pattern next round (vary bot angle or skip Hookah and fake toward A Short)."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R11: you used boombot + satchel to isolate and win a clutch; that chain created info, forced defenders out of angles, then you converted two kills and site control."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "7/10 — good clutch and many successful executes, but two solo entry mistakes into Hookah/Showers cost rounds; fix trade discipline and Hookah approach."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "summary",
+   "refined": false,
+   "text": "You won 13-11 but lost rounds where you walked A Main into a Chamber op: R2 and R5 deaths at A Main by Chamber/Operator. Top mistake concentrated at A Main; survival 50% over sampled rounds."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) Entering A Main without a smoke and taking the same angle — R2, R5. 2) Predictable teleport/entry pattern: A Main used repeatedly (aggregated). 3) One isolated death at C Site (R22) — cleanup positioning error."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "tendencies",
+   "refined": false,
+   "text": "Enemy Chamber held A Main with an Operator and punished identical dry entries (R2, R5). Opposite team also fielded Killjoy and Viper, so crossfire and utility denial are likely on post-plant and retake attempts."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "adjustment",
+   "refined": true,
+   "text": "Option A: On next A execute, place a smoke on A Main Root, flash Tree, then teleport into Root and immediately peek to clear for trades against Chamber and Killjoy. Option B: Skip A Main that round; perform a Silent Drop into A Link, smoke the Operator sightline, then teleport into Link and push to clear C Site for trades against Viper and Fade."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R8: alive — likely avoided A Main dry entry; kept position diversity and traded properly, use that round's approach (different entry or util-first) as template."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "5/10 — repeated same A Main error cost rounds; mixed correct choices elsewhere but lacked entry variety and util sequencing."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "summary",
+   "refined": false,
+   "text": "Loss 12-14. You died in B Site three times (R4, R14, R26) and once in Kitchen (R7) and Mid (R22). Main cause: retake deaths on B with no Viper wall or no utility trade, lowering survival to 38%. Decision score 4/10 reflects repeated same-entry retake losses."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) Died R14 and R26 at B Site on retakes: you entered same path twice with no wall and no trade. 2) Died R4 at B Site vs Raze: you were caught first in the doorway without off-angle or cover. 3) Died R7 at Kitchen: you were exposed in Kitchen cross path instead of holding an off-angle."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "tendencies",
+   "refined": false,
+   "text": "Enemy forces won retakes by clearing the same B entry path. Raze appears in those B clears (R4 noted). Mid death (R22) and Kitchen death (R7) show B-focused weakness with occasional mid punishment. Opponent comp (Jett/Sova/Raze/Omen/Sage) can execute fast and retake with utilities and Raze entry tools."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "adjustment",
+   "refined": true,
+   "text": "A) Primary fix: on B retake (rounds where score implies retake) do NOT enter the same path. Option 1 — hold a hard off-angle at B Site behind the box and wait for a teammate to peek; when teammate peeks, pop wall to split angles and trade. Option 2 — place wall before committing to the retake, then molly the main defuse choke on B Site and let teammate entry first for immediate trade. B) Alternative: rotate one player to Kitchen to cut the flank before committing; if alone, delay and force the enemy to clear your smoke with utility before stepping in."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R1 — alive. You survived by not overcommitting to B and maintained position; keep that defensible structure (hold an off-angle and avoid predictable entries) instead of repeating the same B path. R1 is replicable by holding site angles and forcing enemy to clear util first."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "4/10 — repeated same-entry retake deaths at B and lack of wall/utility usage cost rounds; fix: vary B angles, wall before entry, insist on trade coverage."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER5-summit-brimstone-atk-fullmatch",
+   "field": "summary",
+   "refined": false,
+   "text": "You won 9-4 but survival was low: two deaths at B (B Lobby R12, B Main R13) and multiple early/avoidables across rounds. Best round R4 showed correct timing; weakest area was B Lobby per match insights. These deaths cost utility and ult impact despite the win."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER5-summit-brimstone-atk-fullmatch",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) Playing wide on entries without smoke/molly — R1 and R13. 2) Holding open post-plant / poor cover — R7 and R11. 3) Keeping ult unused and then dying (lost ult impact) — R6 and R12."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER5-summit-brimstone-atk-fullmatch",
+   "field": "tendencies",
+   "refined": false,
+   "text": "You repeatedly take solo wide angles on attack at B Main (R13) and early rounds (R1). On defense you give space instead of holding the site edge and smoke timing, leading to late-round shove deaths (R7, R11). You also sit on ult instead of using it for space (R6, R12)."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER5-summit-brimstone-atk-fullmatch",
+   "field": "adjustment",
+   "refined": true,
+   "text": "Option A: On B Main entry — throw one smoke at B Main choke and a molotov into the B Main corner, then have your team's first player swing; hold the off-angle behind the second smoke to trade. Option B: If splitting B via Link — keep one smoke in pocket for post-plant cover and delay the third smoke until after the plant. Post-plant defense: Move to site-edge cover (close box/plant-adjacent wall), avoid standing in B Lobby; hold smoke or your ult to force the retake angle instead of peeking wide."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER5-summit-brimstone-atk-fullmatch",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R4 — you stayed alive and let the team execute; timing and position were conservative, you avoided a solo wide peek and preserved utility, which maintained post-plant control."
+  },
+  {
+   "source": "report-b09-cand-en",
+   "id": "ER5-summit-brimstone-atk-fullmatch",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "5/10 — correct macro choices some rounds but repeated micro errors: wide early peeks, bad cover on post-plant, and unused ults reduced your impact."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "summary",
+   "refined": false,
+   "text": "You lost 11-13. Match lost because B Main died repeatedly: 4 deaths at B Main (R1, R3, R9, R20) and one at Market (R7) plus A Site (R15). Survival 25% and decision score 3/10 show you held the same off-angle and got one-tapped by an Operator from Heaven multiple times."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) Holding B Main alone and static vs Operator/Heaven — deaths in R1, R3, R9, R20. 2) Repeating same B Main angle after being killed (R9 note: same spot, same angle). 3) No trade setup on anchors at B Main—multiple solo deaths left team without trades (R1, R3, R9)."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "tendencies",
+   "refined": false,
+   "text": "You repeatedly anchored B Main from the same position against an Operator (Jett killed you 3 times). Enemy uses long-angle picks (Operator) on Heaven and also isolated duelist fights (Reyna at Market, Killjoy on A post-plant). Pattern: B Main is exploited every time."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "adjustment",
+   "refined": true,
+   "text": "Option A: Stop holding the exact B Main off-angle. Move to Generator edge or a deeper off-angle out of Heaven's line of sight; place camera on Generator and set tripwire across B Main to delay and call an enemy Operator. Option B: If you hold B Main, position a trade partner at Market ready to peek Market/B Lanes the moment first contact happens; alternate camera placement and tripwire placement each round so enemies on Jett, Sova, Omen, Killjoy, or Reyna cannot pre-aim the same line."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R5 — you stayed alive and the team won. Tactic worked: you avoided early solo peeks and provided info instead of contesting the long Heaven line, which preserved a trade and kept numbers for retake."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "3/10 — repeated static B Main holds cost you rounds; change anchor position or force trades to raise survival and stop giving free Operator picks."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "summary",
+   "refined": false,
+   "text": "You won 13-8. Match decision was sound (75% survival). Key failure: R4 solo entry into Hookah (died to Cypher trap + Vandal). Best moments: R1 clean win and R11 clutch where you used Boombot+satchel to entry and secure two kills."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) R4: solo walked into Hookah alone and died to Cypher trap + Vandal. 2) R14: died at Showers — entered without clearing angles (single occurrence). 3) minor: occasional isolated solo entries (see R4) reduced trade reliability."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "tendencies",
+   "refined": false,
+   "text": "Hookah showed as weakest area for you (top mistake flagged). No repeating death cluster beyond Hookah and Showers single incidents."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "adjustment",
+   "refined": true,
+   "text": "Option A: On Hookah entry, send Boombot first then satchel push; if Boombot dies to a trap, cancel entry. Option B: Do not solo-entry Hookah — wait for Brimstone or Skye utility, then smoke Hookah mouth and trade from elbow. Alternative: fake Hookah pressure, rotate to A Site entry if Hookah contested."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R11: used Boombot + satchel to create space, took 2 kills and closed clutch; worked because utility and bot forced targets into predictable lines, then you committed with trade spacing."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "7/10 — good overall macro and clutch ability; deduct for solo Hookah entry (R4) and one Showers misread (R14)."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "summary",
+   "refined": false,
+   "text": "Match lost rounds where you died came from repeating the same A Main entry; score 13-11 win but A Main deaths cost rounds (R2, R5). Chamber killed you twice with an Operator at A Main; C Site death once (R22). Survival 50%, decision score 5/10."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) Repeated A Main dry entry: died R2 and R5 to Chamber with an Operator. 2) No smoke before A Main entry: both A Main deaths note 'no smoke'. 3) Predictable entry pattern into A Main made you a consistent OP target (R2,R5,R22)."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "tendencies",
+   "refined": false,
+   "text": "Enemy Chamber held the same A Main angle twice and punished unsmoked entries (R2,R5). Team lacked A Main utility timing on your entries. Other enemies (Viper/Fade/Sage) present mean they can hold long angles and punish repeat entries."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "adjustment",
+   "refined": true,
+   "text": "Option A: On the next A execute, smoke Tree/Root from entry, call \"smoke up\", teleport into A Main only after the smoke lands, flash into the swing, and trade the peek. Option B: If Chamber holds the Operator angle, do not push A Main this round — instead take A via Silent Drop or enter through A Link, or run a fake A Main util sequence then commit to C. Vary your teleport points each round and alternate the smoke order."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R8 — alive: you avoided A Main deaths that round; effective variation kept Chamber from pre-aiming that angle, so entry succeeded. Repeat the variation from R8 (use different entry or proper smoke first)."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "5/10 — repeated A Main mistakes (R2,R5) cost rounds; win shows recovery but positioning and utility timing must improve."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "summary",
+   "refined": true,
+   "text": "You lost 12-14 on Icebox defending as Viper. Died at B Site three times, at Kitchen once, and at Mid once. Entered a B Site retake without having Viper wall available and Raze eliminated you first. Survival 38%. Decision score 4/10."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) Died R4/R14/R26 at B Site — same fight path, no wall or util trade. 2) R14 retake: you entered without wall active and took first contact versus Raze. 3) R26 overtime retake: same entry, no utility traded for it; team could not trade your death."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "tendencies",
+   "refined": false,
+   "text": "You repeatedly held/retook B Site on the same entry line (three recent deaths). Enemy roster includes Raze and Jett — close-range clearing and aggressive retakes. Mid death (R22) shows a single missed mid hold, Kitchen death (R7) indicates a flank/inner B angle vulnerability."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "adjustment",
+   "refined": false,
+   "text": "1) Primary: on B Site retake (R14/R26) do NOT enter without wall — when spike is planted, close the wall before you or your teammate contests, then molly the common defuse spot, and let a trade partner contest from Yellow. OR have teammate flash+trade while you hold an off-angle (Green or Snowman) instead of re-entering same path. 2) Alternative: if wall fuel is low, do not solo retake that entry — rotate to a distant angle (Kitchen or Tube line) and force the retake into a crossfire with Killjoy turret or Sage slow, so Raze cannot clear you one-by-one. 3) For Kitchen (R7) and Mid (R22): keep an off-angle closer to cover (Kitchen head-of-corner, Mid Boiler edge) and call for one player to watch Tube/Flank so you are not isolated."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R1 — held site alive. You stayed alive and kept area control, enabling team to finish round. Repeatable: keep that same disciplined hold positioning on B (use wall early, hold off-angle near cover), and force opponents to clear utility before committing."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "4/10 — repeated same B Site retake path and entering without wall or utility cost multiple rounds; survival and trade discipline must improve."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER5-summit-brimstone-atk-fullmatch",
+   "field": "summary",
+   "refined": false,
+   "text": "You won 9-4 but survival was low: 4 deaths in B-area rounds (B Lobby R12, B Main R13 plus other open-entry deaths) and frequent early aggressive entries without smoke or molly. Best round R4 showed coordinated entry; Decision score 5/10 reflects risky solo plays with ult unused or poorly timed."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER5-summit-brimstone-atk-fullmatch",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) Early wide entries without utility — R1 and R13. 2) Holding open post-plant / site edge exposure — R7 and R11. 3) Keeping ult unused until death in B Lobby — R6 and R12."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER5-summit-brimstone-atk-fullmatch",
+   "field": "tendencies",
+   "refined": false,
+   "text": "You habitually enter wide angles on attack at B Main or push lines without a smoke/molly (R1,R13). On post-plant you stayed in the open instead of site-edge cover (R7,R11). You also kept ult in hand instead of trading space or delaying enemy rotate (R6,R12)."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER5-summit-brimstone-atk-fullmatch",
+   "field": "adjustment",
+   "refined": true,
+   "text": "Variation A: On B Main entry (attack), smoke the entry mouth, molly the close corner, then step in and trade with teammates. Variation B: If team is late, hold at B Main with one smoke in pocket; deploy smoke to cut vision, then push together. Post-plant (defensive): hold at B lobby behind cover, use molly or ult to deny defuse rather than solo peeking."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER5-summit-brimstone-atk-fullmatch",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R4 — coordinated entry: utility landed before the swing, you held back until team committed and traded, resulting in clean site take; repeatable by forcing utility-first then synchronized trade entry."
+  },
+  {
+   "source": "report-b09-cand2-en",
+   "id": "ER5-summit-brimstone-atk-fullmatch",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "5/10 — correct map choices at times but repeated risky solo entries, poor ult timing and exposure in B-area rounds lowered overall effectiveness."
+  },
+  {
+   "source": "report-base10h",
+   "id": "R1-ascent-cypher-def-loss",
+   "field": "summary",
+   "refined": false,
+   "text": "Maçı kaybettin çünkü B Main'i tek başına tutup Jett operatörlere üst üste kafadan yediniz; skor 11-13, en çok öldüğün yer B Main (4)."
+  },
+  {
+   "source": "report-base10h",
+   "id": "R1-ascent-cypher-def-loss",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) R1 ve R9: B Main'i tek anchor'ladın, Jett operator'dan kafadan öldürdü — iki round aynı açıda öldün; çözüm: B Main'e iki kişi koy veya tel ya da kamera ve smoke ile op hattını kapat. 2) R3/R20: B Main tekrarları — pozisyon değişikliği yok; çözüm: bir round o açıyı tamamen boş bırak, sonra farklı off-angle ile geri dön. 3) R15: A Site'ta Killjoy kurulumuna yakın durdun ve molly ya da taret seni yavaşlattı; çözüm: taret bot hattını utility ile temizle ya da kamera uzak açıdan koy."
+  },
+  {
+   "source": "report-base10h",
+   "id": "R1-ascent-cypher-def-loss",
+   "field": "tendencies",
+   "refined": false,
+   "text": "Rakip Jett op ile B Main'e odaklanıyor — Jett operatörü R1,R3,R9,R20'de seni B Main'de kafadan vurup öldürdü; Market'te Reyna ya da Raze benzeri yüksek hareketli duelistler var (R7 Reyna öldürüsü). Senin tekrarın: B Main'i üst üste aynı açıdan tutuyorsun, sentinel kurulumunu değiştirmen gerekiyor."
+  },
+  {
+   "source": "report-base10h",
+   "id": "R1-ascent-cypher-def-loss",
+   "field": "adjustment",
+   "refined": false,
+   "text": "A) Hemen uygulama: bir sonraki savunmanda B Main'e mutlaka bir takım arkadaşı iste — ya Jett ya da duelist'e karşı crossfire kurun; sen tel ve kamera Market tarafına, takım arkadaşı Heaven ya da Gen tutsun. B) Alternatif: B Main'i iki round üst üste tuttuysanız üçüncü round o açıyı boş bırakın; o açıyı bekleyen op'u şaşırtmış olursunuz, sonraki round farklı off-angle'dan tutun. C) Killjoy ya da Market tehdidine karşı: kamerayı daha derin bir off-angle'a, taret hattını molly'yle ört; taret ya da robot varsa Omen ya da Sova ile önce util'ı kırın."
+  },
+  {
+   "source": "report-base10h",
+   "id": "R1-ascent-cypher-def-loss",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R12: Hayatta kaldın ve takım kazanmış; doğru hareket etmişsin — bu round'ta trade pozisyonu korumaya çalışıp tek başına anchor olmamışsın, sonuç pozitif oldu."
+  },
+  {
+   "source": "report-base10h",
+   "id": "R1-ascent-cypher-def-loss",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "5/10 — B Main tek başına tutma ve pozisyon tekrarı ana sorun; birkaç round'da pozisyon ve kamera ya da tel yerini değiştirseydiniz survival artardı."
+  },
+  {
+   "source": "report-base10h",
+   "id": "R2-bind-raze-atk-win",
+   "field": "summary",
+   "refined": false,
+   "text": "Maçı 13-8 kazandın. Hookah'da iki kez ölmen (R4,R14) ve Cypher'ın Vandal'ıyla aynı hattı kullanman maç boyunca en belirleyici zayıflıktı; R11'deki doğru bot+satchel entry'siyle turu kopardınız."
+  },
+  {
+   "source": "report-base10h",
+   "id": "R2-bind-raze-atk-win",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) R4 Hookah solo lurk: tek başına Hookah'a girip Cypher teline takıldın — tel patladı, Vandal seni kafadan vurup öldürdü. Çözüm: Hookah'a girmeden önce ya takım flash atsın ya da yanında bir trade partner hazır beklesin. 2) R14 Showers'ta utility'siz giriş: A Showers ya da Showers dar, smoke ya da flash olmadan giriyorsun. Çözüm: Showers'a girmeden önce bir flash at, bot ya da Skye köpeğiyle bilgi al; tek başına giriş bırakma. 3) Lurk timing zafiyeti: teleporter ya da Hookah rotasyonlarına göre zamanlaman tutmuyor — fake ya da execute penceresini beklemeden girdin. Çözüm: takım execute başladığında arka flanke geç veya teleporter sesiyle birlikte hareket et."
+  },
+  {
+   "source": "report-base10h",
+   "id": "R2-bind-raze-atk-win",
+   "field": "tendencies",
+   "refined": false,
+   "text": "- Tekrar eden ölüm noktası: Hookah (R4,R14). Cypher tel+Vandal hattını aynı roundlarda kullandılar ve sen solo Hookah anında orada öldün. - Lurk timing: genelde execute'den önce değil, bağımsız olarak hareket ettiğin anlarda yakalandın. - Pozitif: R11'de bot+satchel zinciriyle A entry'sini sen yaptın; utility sıranı doğru kullandın ve 2 kill aldın."
+  },
+  {
+   "source": "report-base10h",
+   "id": "R2-bind-raze-atk-win",
+   "field": "adjustment",
+   "refined": false,
+   "text": "1) Hookah: bir round daha benzer pozisyona girersen bu kez tam trade kur — sen Hookah'ı alırken yanında bir takım arkadaşı Lamps ya da Elbow'u çapraz beklesin; tel sesi gelirse geri çekil. 2) Lurk timing: takımın 'gireceğiz' sinyali gelene kadar teleporter veya Hookah'a girme; execute penceresinde arkadan giriş yap veya teleporter çıkışında util ile kapat. 3) Showers girişleri: Showers'a util (Skye flash veya Brimstone smoke) gelmeden entry yapma; bot önce, sen sonra. Alternatif: bir round Hookah'ı tamamen boş bırak, rakibin o açıya nişan almasını boz."
+  },
+  {
+   "source": "report-base10h",
+   "id": "R2-bind-raze-atk-win",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R11 — bot+satchel ile A'ya giriş yaptın, iki kill aldın ve clutch pozisyonu yarattın. Sırayı doğru kullandın, trade penceresini kurguladın ve takım için sayı ürettin."
+  },
+  {
+   "source": "report-base10h",
+   "id": "R2-bind-raze-atk-win",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "8/10 — genel kararların sağlam, ama solo Hookah lurk'ları ve lurk timing'inde tutarsızlık var; R11 gibi takımla senkron daha fazla tekrarlanmalı."
+  },
+  {
+   "source": "report-base10h",
+   "id": "R3-lotus-omen-atk-close",
+   "field": "summary",
+   "refined": false,
+   "text": "Maçı 13-11 kazandın. Rakip Chamber iki kez A Main'den op ile seni kafadan vurup öldürdü; maçtaki en büyük hata A Main'e utility'siz giriş yapman ve smoke zamanlaman yanlış olmasıdır."
+  },
+  {
+   "source": "report-base10h",
+   "id": "R3-lotus-omen-atk-close",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) R2 ve R5: A Main'e utility'siz giriş — Chamber op seni aynı hattan kafadan vurup öldürdü. Çözüm: A Main'e girerken önce Tree'yi smoke'la, Stairs yönüne flash at; flash patlayınca swing at. 2) Smoke timing zayıf — smoke'ları takım giriş zamanına bağla, erken atma. 3) Tekrarlı teleporta aynı noktadan gitme riskli — her yarıda teleport noktasını değiştir."
+  },
+  {
+   "source": "report-base10h",
+   "id": "R3-lotus-omen-atk-close",
+   "field": "tendencies",
+   "refined": false,
+   "text": "Rakip Chamber A Main'de op tutuyor; iki ölüm de A Main'de op kaynaklı. Smoke'larını erken atıyorsun (zamanlama zafiyeti) ve A Main'de util eksikliği tekrar eden problem; survival %50 ve en zayıf alanın A Main girişleri."
+  },
+  {
+   "source": "report-base10h",
+   "id": "R3-lotus-omen-atk-close",
+   "field": "adjustment",
+   "refined": false,
+   "text": "A) Standart varyasyon: Rounds'ta A Main'e gelmeden önce Tree'yi smoke'la, Stairs'e high flash at, flash patlar patlamaz swing at; teleport kullanacaksan smoke'tan sonra kapak arkasına teleport ol. B) Alternatif: A Main'i boş bırak bir round, rakibin op nişanını resetle; sonraki round'da duvara ya da duvar kırma ile farklı açıdan gir veya Silent Drop ile alternatif giriş yap. C) Smoke zamanlamı: smoke'u takım 'hazır' dediğinde at — erken atma ki smoke giriş anında ayakta kalsın."
+  },
+  {
+   "source": "report-base10h",
+   "id": "R3-lotus-omen-atk-close",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R13: A Main yerine farklı açıyla yürüdünüz, util zamanlaması doğru oldu ve Chamber op etkisiz kaldı; takım birlikte hareket edip trade aldınız — bu yüzden round döndü."
+  },
+  {
+   "source": "report-base10h",
+   "id": "R3-lotus-omen-atk-close",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "6/10 — A Main girişlerinde tekrar eden util hatası ve smoke zamanlaması düzeltilirse skor daha iyi olur."
+  },
+  {
+   "source": "report-samples",
+   "id": "R1-ascent-cypher-def-loss",
+   "field": "summary",
+   "refined": false,
+   "text": "Maçı kaybettin çünkü B Main'de tekrarlayan ölümler verdin; skor 11-13, survival % düşük (25%). B Main'de en az dört kez öldün, Jett Operator üç kez kafadan aldı; bu tek hata maçı doğrudan etkiledi."
+  },
+  {
+   "source": "report-samples",
+   "id": "R1-ascent-cypher-def-loss",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) R1, R3, R9, R20: B Main'i tek başına tutup Operator'a kafadan yedin — aynı açıdan 4 ölüm. 2) R7: Market'te Reyna ile geniş düelloya girip Vandal ile öldün — off-angle yok. 3) R15: A Site'ta Killjoy kurulumuna karşı post-plant ya da pozisyon hatası; kamerayı ya da bilgi defuse açısını görecek şekilde koymadın."
+  },
+  {
+   "source": "report-samples",
+   "id": "R1-ascent-cypher-def-loss",
+   "field": "tendencies",
+   "refined": false,
+   "text": "Düşman en çok Jett op ile B Main'i bedavaya öldürdü; Reyna yakın mesafede agresif düello arıyor; Killjoy post-plant'te kurulumla defuse'u koruyor. Rakip Jett her B Main girişinde aynı hatayı bedavaya öldürdü — Operator'ı sabit açıda tutuyorlar."
+  },
+  {
+   "source": "report-samples",
+   "id": "R1-ascent-cypher-def-loss",
+   "field": "adjustment",
+   "refined": true,
+   "text": "Varyasyon A: B Main'i tek round tut; bir round B Main'i boş bırak. Bir sonraki B Main roundunda takımın ön flash atmasını iste; sen Heaven'dan o açıyı önceden nişan alan Operator'a karşı off-angle tel veya kamera ile Market yönünü izle ve Operator sesini duyunca hemen bir adım geri çekil. Varyasyon B: B Main'de yer alacaksan kamerayı off-angle yüksekliğe koy; tel flank yoluna at. Operator sesini duyunca hemen bir adım çekil ve Market yönünü tut; takım Operator'ü smoke ile kapatsın."
+  },
+  {
+   "source": "report-samples",
+   "id": "R1-ascent-cypher-def-loss",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R5: hayatta kaldığın round — orayı korurken ya yer değiştirdin ya da trade alındı; net sebep: B Main'de bu round farklı pozisyon ya da yan açı kullandın, Jett op seni sabit açıdan bulamadı. O pozisyonu tekrarla: ani off-angle ve kamera çağrısı ile trade'e hazır bekle."
+  },
+  {
+   "source": "report-samples",
+   "id": "R1-ascent-cypher-def-loss",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "3/10 — sebep: aynı hatayı R1→R3→R9 tekrarladın, hayatta kalma ve trade kurulumu zayıf; basit pozisyon değişikliği ve op kontra smoke ya da flash ile maç çevrilebilirdi."
+  },
+  {
+   "source": "report-samples",
+   "id": "R2-bind-raze-atk-win",
+   "field": "summary",
+   "refined": true,
+   "text": "Maçı 13-8 kazandın. Saldırıda Raze olarak site alma girişimlerinde A Site ve B Site üzerine odaklan; R1, R2, R6, R8, R11 ve R19 hayatta kalıp site aldın. R11'de clutch başardıysan rakipleri tek tek dışarı it: önce Viper veya Cypher pozisyonlarını temizle, sonra Chamber ve Brimstone pozisyonlarına ateş aç, son olarak Skye'nın rotasyonunu kes. Hookah ve Showers girişlerinde savunmayı parçala: Hookah'a girerken tek başına değil, granatalarını kullanarak Cypher telini veya Brimstone yangın hattını rötuşla yok et; Showers'a girerken aynı şekilde kullanım planla ve Chamber'ın kesişlerini kısaltacak"
+  },
+  {
+   "source": "report-samples",
+   "id": "R2-bind-raze-atk-win",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) R4 Hookah: tek başına utility'siz girdiğin için Cypher tel ve Vandal seni öldürdü. 2) R14 Showers: Showers'da util eksikliği veya takım trade yoktu, tekil girişle öldün. 3) Genel: Hookah'ı weakest area olarak bırakıyorsun; oraya tek atılan entry riski taşıyor."
+  },
+  {
+   "source": "report-samples",
+   "id": "R2-bind-raze-atk-win",
+   "field": "tendencies",
+   "refined": false,
+   "text": "Düşman Cypher tel ve Vandal ile Hookah ya da short hattını işaretlemiş; Chamber ya da Cypher kombinasyonu uzun menzilde bilgi verip choke'larda eziyor. Rakip sentinel-cevaplı pozisyonlarda Hookah'ı kontrol ediyorlar."
+  },
+  {
+   "source": "report-samples",
+   "id": "R2-bind-raze-atk-win",
+   "field": "adjustment",
+   "refined": false,
+   "text": "1) Varyasyon A: Hookah'a girmeden önce botu öne sür, tel sesini doğrula; bot birini kilitlerse Skye ya da Brimstone ile molly ya da flash ve entry yap. 2) Varyasyon B: Eğer bot teli tetikler veya görünür bilgi yoksa Hookah'ı bir round boş bırak, sonraki round'ı flash ve trade ile önden kır; tek başına utility'siz entry atma. 3) Showers için: A'ya bot ve satchel combo'nu koru ama Showers'a girerken Skye flash patladığı an içeri gir; trade pozisyonunda Skye veya Brimstone hep hazır olsun."
+  },
+  {
+   "source": "report-samples",
+   "id": "R2-bind-raze-atk-win",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R1: takımla birlikte giriş, util sırası ve trade düzeni tuttu; site temizlendi ve spike kontrolü netti — birlikte hareket ve util zinciri çalıştığında Hookah ya da Showers riskleri kapandı."
+  },
+  {
+   "source": "report-samples",
+   "id": "R2-bind-raze-atk-win",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "7/10 — neden: Genel olarak doğru kararlar ve clutch var, ama Hookah ya da Showers'ta tekil utility'siz girişler birkaç round risk yarattı; çözersen skor daha da artar."
+  },
+  {
+   "source": "report-samples",
+   "id": "R3-lotus-omen-atk-close",
+   "field": "summary",
+   "refined": true,
+   "text": "Maçı 13-11 kazandın. Saldırı tarafında Omen olarak oynadın. R2 ve R5'te A Main'de öldün; ölüm konumları A Main ve C Site. Düşman kadrosunda Chamber, Killjoy, Viper, Fade ve Sage vardı. Hayatta kalma %50; decisionScore 5/10."
+  },
+  {
+   "source": "report-samples",
+   "id": "R3-lotus-omen-atk-close",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) A Main'e utility'siz entry (R2, R5) — Chamber op seni aynı açıdan öldürdü. 2) Pozisyon tekrarı A Main — aynı noktaya üst üste girip okunur oldun (R2 ve R5). 3) Pozisyon çeşitliliği eksikliği, C Site'te de bir kere öldün (R22) — farklı açılar kullanmadın."
+  },
+  {
+   "source": "report-samples",
+   "id": "R3-lotus-omen-atk-close",
+   "field": "tendencies",
+   "refined": false,
+   "text": "Rakip Chamber açıkça A Main op açısını tuttu (2 kill). Takımının diğer kurulumları Killjoy ya da Viper ya da Fade kombinasyonuyla post-plant ve recon tehdidi yaratıyor; A Main beklenen zayıf nokta haline geldi."
+  },
+  {
+   "source": "report-samples",
+   "id": "R3-lotus-omen-atk-close",
+   "field": "adjustment",
+   "refined": false,
+   "text": "1) A Main için iki varyasyon: (A) Bir round A Main'i tamamen boş bırak; sonraki dönüşte önden flash atıp teamle birlikte yüksek zemin veya Root'tan execute yap. (B) Duvar ya da kapı sesi yerine önce Tree'yi smoke'la, Stairs yönüne flash at, flash patlar patlamaz swing at — Operator'ın nişanını bozar. 2) Pozisyon çeşitliliği: bir round Silent Drop ya da Top üzerinden A'ya rotasyon dene ya da A Link yönünden alternatif giriş kur; aynı A Main açısını arka arkaya kullanma."
+  },
+  {
+   "source": "report-samples",
+   "id": "R3-lotus-omen-atk-close",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R8 — hayatta kaldın; bu round A Main'den vazgeçip farklı hatta oynadın veya utility ile açıyı kapattın. Bu yaklaşımı tekrarla: A Main'i util'le temizle veya alternatif giriş kullan."
+  },
+  {
+   "source": "report-samples",
+   "id": "R3-lotus-omen-atk-close",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "5/10 — A Main'deki tekrarlayan hata ve pozisyon çeşitliliği eksikliği kararı zayıflattı; maç kazanılsa da ölümlerin çoğu engellenebilirdi."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "summary",
+   "refined": false,
+   "text": "You lost 11-13. Match fell because you died repeatedly at B Main (R1, R3, R9, R20) to an enemy Jett on Operator and could not survive or be traded; survival 25%, weakest area B Main, best round R5."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) Dying solo at B Main three times (R1, R3, R9) — you held the same angle and Jett killed you. 2) No position variation after repeat deaths — same Heaven angle killed you again (R9). 3) Lack of trade: your B Main deaths were unretraded, shrinking team survival (R1,R3,R9,R20)."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "tendencies",
+   "refined": false,
+   "text": "Enemy pattern: Jett used Operator to anchor Heaven vs B Main repeatedly (3 kills). Reyna took Market kill once (R7). Killjoy punished A Site post-plant (R15). Opponents focused B Main as primary attack vector."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "adjustment",
+   "refined": false,
+   "text": "Variation A: Stop holding B Main alone; move off the default B Main line — play an off-angle behind the lane edge or sit on Market-side cover so Heaven's OP can't one-tap you. OR Variation B: Shift deeper into Market/Back B and use camera/tel to delay before contesting B Main; call for a teammate to trade you. Additionally: when Jett holds Heaven with an Operator, force utility first — ask Omen or Sova to smoke Heaven or flash+trade before you show; never dry-hold that exact B Main angle again."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R5 — you survived. That round worked because you avoided early solo contact and lived to provide info; replicate survival-first B anchoring (call for trade) rather than isolated angle-holding."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER1-ascent-cypher-def-loss",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "3/10 — repeated same-angle deaths at B Main and no trade coordination cost multiple rounds; pick one clear change (move off that angle or demand util+trade) and enforce it."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "summary",
+   "refined": false,
+   "text": "You won 13-8. Attack side succeeded overall; your entry rounds (R1, R2, R6, R8, R11, R19) carried pace. Two solo deaths (R4 Hookah, R14 Showers) are isolated but Hookah flagged as weakest area. Match decision score 7/10, survival 75%. Best round R1 execution worked."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) R4 Hookah — you entered Hookah alone and died to Cypher's tripwire + Vandal. 2) R14 Showers — solo approach into Showers without pre-utility. 3) Occasional solo entries (pattern: R4, R14) — left without a trade buddy."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "tendencies",
+   "refined": false,
+   "text": "Chamber and Brimstone present mean long-angle and smoke support, so isolated dry-peeks into confined chokepoints get punished. No repeated multi-round deaths, but Hookah is the clear vulnerability."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "adjustment",
+   "refined": true,
+   "text": "A) Next round at Hookah: throw bot into Hookah entrance, satchel in to follow and enter immediately to clear; have one teammate hold the Hookah entrance angle to trade the moment you die or get stunned. B) Do not solo raw Hookah entry: satchel-flash over B Short, then satchel into Hookah with a teammate who flashes or mollys simultaneously; swing instantly after utility lands. C) For Showers: throw a flash from A Short into Showers, step into Showers immediately and have a teammate positioned directly behind you to trade on contact. D) If splitting to B Site or A Site as a lurk: delay your"
+  },
+  {
+   "source": "report-samples",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R1 — clean entry: you coordinated utility and traded; result was a fast site control and no solo overpeeks. That exact template (bot/info → utility chain → simultaneous swing with trade) is repeatable."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER2-bind-raze-atk-win",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "7/10 — good round-level choices and clutch in R11, but two solo entry deaths into Hookah/Showers show room to enforce trade discipline and utility-first Hookah approach."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "summary",
+   "refined": false,
+   "text": "Match lost rounds where you died were due to repeating the same A Main entry against a Chamber Operator; score 13-11 win but A Main produced 2 deaths (R2, R5) and C Site one death (R22). Repeated A Main deaths cost tempo in early rounds and made A Main the weakest area."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) A Main entry without smoke twice — R2 and R5 killed by Chamber (Operator). 2) No variation in teleport/entry point — same timing and angle used twice (R2,R5). 3) Exposed on C Site once (R22) — single-site post-entry positioning error."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "tendencies",
+   "refined": false,
+   "text": "Enemy used Chamber on long A angles repeatedly (killed you R2 and R5). Opposing comp holds long sightlines on A and pressure C occasionally (death at C in R22). Chamber was top killer (2 kills vs you)."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "adjustment",
+   "refined": true,
+   "text": "Variation A: Smoke A Main sightline, then flash into Tree and TP to a high off-angle before entry. Variation B: Skip A Main entry one round — fake with duress, then execute A Link push instead. Alternative for C: After entering C, take a deeper corner off the default plant spot and hold a crossfire angle."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R8 — you survived; execute timing and entry stayed coordinated, avoided A Main direct entry, kept utility for mid-round adjustments. That restraint kept Chamber from getting pre-aim kills and preserved numbers for post-plant."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER3-lotus-omen-atk-close",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "5/10 — repeated A Main entries against an Operator show predictable pattern; survival and utility timing inconsistent, but team secured the win by adapting in other rounds."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "summary",
+   "refined": false,
+   "text": "You lost 12-14 on Icebox defense. Match lost because B Site retakes repeatedly failed: three deaths in B Site (R4, R14, R26) and one death in Kitchen (R7). Survival 38%; decision score 4/10. Repeatedly walking same retake path without Viper wall/utility cost you rounds."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "mistake",
+   "refined": false,
+   "text": "1) B Site retake entry: died R14 and R26 — you entered without wall or traded utility. 2) Position repetition: B Site deaths in R4, R14, R26 show same path repeated. 3) No trade support on retake: R4 and R26 had no util or teammate trade to reopen site."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "tendencies",
+   "refined": false,
+   "text": "Enemy used consistent retake pressure on B. Your pattern: three deaths at B Site (R4,R14,R26) and one at Kitchen (R7). They cleared the same entry path each overtime/retake, and Raze handled close-range clearing on at least R14."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "adjustment",
+   "refined": true,
+   "text": "Option A: If spike is planted on B, do not push the same entry path alone — hold and wait for team; then throw a smoke and a flash, cut with Viper wall, and have a teammate trade from Yellow/Green. Option B: Leave that entry empty one round to bait pre-aims; hold a Kitchen off-angle, then retake B from a different angle with the wall up. If solo anchoring, stay on a covered off-angle inside B and use the wall first, then call for coordinated utility and a teammate trade."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "bestRound",
+   "refined": false,
+   "text": "R1 — you won while alive: keep the same defensive discipline (holding site angles, surviving). R1 worked because you stayed alive and denied trades, replicate survival-first holds on B by changing retake path and using wall as a defensive tool."
+  },
+  {
+   "source": "report-samples",
+   "id": "ER4-icebox-viper-def-overtime",
+   "field": "decisionScore",
+   "refined": false,
+   "text": "4/10 — repeated same retake path and poor utility/timing on B; survival and trade discipline cost multiple rounds."
+  }
+ ]
+}

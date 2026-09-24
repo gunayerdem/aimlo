@@ -7,6 +7,7 @@ import { formatMap, formatAgent, normalizeSide } from "@/lib/format-display";
 import { trLocative } from "@/lib/coach-text";
 import { calculateSkillProfile } from "@/lib/skill-system";
 import { analyzePlaystyle } from "@/lib/playstyle-system";
+import { parseStoredWon, decidedWinRate } from "@/lib/match-outcome";
 import { ds } from "@/constants/design";
 import { sortedPosts, relativeTime, readLabel, fullDate } from "@/lib/blog";
 import { useNow } from "./blog/use-blog-time";
@@ -233,6 +234,7 @@ const t = {
     agentPool: "Ajan Havuzu",
     victory: "Zafer",
     defeat: "Yenilgi",
+    noResult: "Sonuç yok",
     survived: "Ölmedim",
     survivedShort: "Hayatta",
     authLogin: "Giriş Yap",
@@ -511,6 +513,7 @@ const t = {
     agentPool: "Agent Pool",
     victory: "Victory",
     defeat: "Defeat",
+    noResult: "No result",
     survived: "I didn't die",
     survivedShort: "Alive",
     authLogin: "Sign In",
@@ -2430,16 +2433,9 @@ export default function LandingClient({ quotaEnforced }: { quotaEnforced: boolea
   // ALL hooks must be above early returns — React rules of hooks
   const finishLockRef = useRef(false);
   const submitLockRef = useRef(false);
-  const winRate = useMemo(
-    () =>
-      savedReports.length > 0
-        ? Math.round(
-            (savedReports.filter((r) => r.won).length / savedReports.length) *
-              100,
-          )
-        : 0,
-    [savedReports],
-  );
+  // FB01 · F03 (web): WR paydası yalnız sonucu BİLİNEN maçlar (won true/false); masaüstünün
+  // won=null (UNFINISHED/DRAW) satırları kayıp sayılmaz. Bilinen maç yoksa null → "—".
+  const winRate = useMemo(() => decidedWinRate(savedReports).pct, [savedReports]);
   const topDeathSpot = useMemo(() => {
     const spots: Record<string, number> = {};
     savedReports.forEach((r) => {
@@ -2461,28 +2457,31 @@ export default function LandingClient({ quotaEnforced }: { quotaEnforced: boolea
   }, [savedReports]);
   // Agent performance: win rate + match count per agent
   const agentPerf = useMemo(() => {
-    const map: Record<string, { wins: number; total: number }> = {};
+    const map: Record<string, { wins: number; losses: number; total: number }> = {};
     savedReports.forEach((r) => {
       if (!r.agent) return;
-      if (!map[r.agent]) map[r.agent] = { wins: 0, total: 0 };
+      if (!map[r.agent]) map[r.agent] = { wins: 0, losses: 0, total: 0 };
       map[r.agent].total++;
-      if (r.won) map[r.agent].wins++;
+      // FB01 · F03: sonucu bilinmeyen (null) maç sayılır ama W/L'ye ve WR paydasına girmez.
+      if (r.won === true) map[r.agent].wins++;
+      else if (r.won === false) map[r.agent].losses++;
     });
     return Object.entries(map)
-      .map(([name, d]) => ({ name, wins: d.wins, total: d.total, wr: d.total > 0 ? Math.round((d.wins / d.total) * 100) : 0 }))
+      .map(([name, d]) => ({ name, wins: d.wins, losses: d.losses, total: d.total, wr: d.wins + d.losses > 0 ? Math.round((d.wins / (d.wins + d.losses)) * 100) : null }))
       .sort((a, b) => b.total - a.total);
   }, [savedReports]);
   // Map performance: win rate + match count per map
   const mapPerf = useMemo(() => {
-    const m: Record<string, { wins: number; total: number }> = {};
+    const m: Record<string, { wins: number; losses: number; total: number }> = {};
     savedReports.forEach((r) => {
       if (!r.map) return;
-      if (!m[r.map]) m[r.map] = { wins: 0, total: 0 };
+      if (!m[r.map]) m[r.map] = { wins: 0, losses: 0, total: 0 };
       m[r.map].total++;
-      if (r.won) m[r.map].wins++;
+      if (r.won === true) m[r.map].wins++;
+      else if (r.won === false) m[r.map].losses++;
     });
     return Object.entries(m)
-      .map(([name, d]) => ({ name, wins: d.wins, total: d.total, wr: d.total > 0 ? Math.round((d.wins / d.total) * 100) : 0 }))
+      .map(([name, d]) => ({ name, wins: d.wins, losses: d.losses, total: d.total, wr: d.wins + d.losses > 0 ? Math.round((d.wins / (d.wins + d.losses)) * 100) : null }))
       .sort((a, b) => b.total - a.total);
   }, [savedReports]);
   // AI summary: most common mistake, strength, area to improve
@@ -2498,9 +2497,9 @@ export default function LandingClient({ quotaEnforced }: { quotaEnforced: boolea
     });
     const topMistake = Object.entries(mistakes).sort((a, b) => b[1] - a[1])[0];
     // Strength — best agent by win rate (min 2 matches)
-    const bestAgent = agentPerf.filter((a) => a.total >= 2).sort((a, b) => b.wr - a.wr)[0];
+    const bestAgent = agentPerf.filter((a) => a.wr !== null && a.wins + a.losses >= 2).sort((a, b) => (b.wr ?? 0) - (a.wr ?? 0))[0];
     // Improvement area — worst map by win rate (min 2 matches)
-    const worstMap = mapPerf.filter((m) => m.total >= 2).sort((a, b) => a.wr - b.wr)[0];
+    const worstMap = mapPerf.filter((m) => m.wr !== null && m.wins + m.losses >= 2).sort((a, b) => (a.wr ?? 0) - (b.wr ?? 0))[0];
     return {
       topMistake: topMistake ? topMistake[0] : null,
       strength: bestAgent ? `${bestAgent.name} (${bestAgent.wr}% WR)` : null,
@@ -2518,10 +2517,11 @@ export default function LandingClient({ quotaEnforced }: { quotaEnforced: boolea
     const topDeath = Object.entries(deathSpots).sort((a, b) => b[1] - a[1])[0];
 
     const recent = savedReports.slice(0, 5);
-    const recentWR = recent.length > 0 ? recent.filter(r => r.won).length / recent.length * 100 : 0;
+    const recentWR = decidedWinRate(recent).pct;
 
     const mapWR: Record<string, { w: number; t: number }> = {};
     savedReports.forEach(r => {
+      if (r.won === null) return; // FB01 · F03: sonucu bilinmeyen maç WR paydasına girmez
       if (!mapWR[r.map]) mapWR[r.map] = { w: 0, t: 0 };
       mapWR[r.map].t++;
       if (r.won) mapWR[r.map].w++;
@@ -2531,13 +2531,13 @@ export default function LandingClient({ quotaEnforced }: { quotaEnforced: boolea
     let text = "";
     if (lang === "tr") {
       if (topDeath) text += `${trLocative(topDeath[0])} ${topDeath[1]} kez öldün — en zayıf bölgen. `;
-      if (recentWR < 40) text += "Son maçlarda performans düşük. ";
-      else if (recentWR > 60) text += "Performansın yükselişte. ";
+      if (recentWR !== null && recentWR < 40) text += "Son maçlarda performans düşük. ";
+      else if (recentWR !== null && recentWR > 60) text += "Performansın yükselişte. ";
       if (worst) text += `${trLocative(worst[0])} winrate %${Math.round(worst[1].w / worst[1].t * 100)} — strateji değişikliği öneriyorum.`;
     } else {
       if (topDeath) text += `Died ${topDeath[1]} times at ${topDeath[0]} — your weakest spot. `;
-      if (recentWR < 40) text += "Recent performance is declining. ";
-      else if (recentWR > 60) text += "Performance is improving. ";
+      if (recentWR !== null && recentWR < 40) text += "Recent performance is declining. ";
+      else if (recentWR !== null && recentWR > 60) text += "Performance is improving. ";
       if (worst) text += `${worst[0]} winrate ${Math.round(worst[1].w / worst[1].t * 100)}% — consider changing strategy.`;
     }
     return text || ll.aiInsightMoreData;
@@ -2552,6 +2552,7 @@ export default function LandingClient({ quotaEnforced }: { quotaEnforced: boolea
     const mapWR: Record<string, { w: number; t: number }> = {};
     savedReports.forEach(r => {
       if (!r.map) return;
+      if (r.won === null) return; // FB01 · F03: sonucu bilinmeyen maç WR paydasına girmez
       if (!mapWR[r.map]) mapWR[r.map] = { w: 0, t: 0 };
       mapWR[r.map].t++;
       if (r.won) mapWR[r.map].w++;
@@ -2619,8 +2620,8 @@ export default function LandingClient({ quotaEnforced }: { quotaEnforced: boolea
         ? `${trLocative(topRepeat[0])} ${topRepeat[1]} ${ll.matchInsightDeaths} — ${ll.matchInsightRepeat}`
         : `${topRepeat[1]} ${ll.matchInsightDeaths} at ${topRepeat[0]} — ${ll.matchInsightRepeat}`;
     }
-    if (entry.won && entry.winPct >= 60) return ll.matchInsightStrong;
-    if (!entry.won && entry.winPct <= 30) return ll.matchInsightBadLoss;
+    if (entry.won === true && entry.winPct >= 60) return ll.matchInsightStrong;
+    if (entry.won === false && entry.winPct <= 30) return ll.matchInsightBadLoss;
     return null;
   }, [lang]);
   // ── Premium dashboard helpers ──
@@ -2633,13 +2634,15 @@ export default function LandingClient({ quotaEnforced }: { quotaEnforced: boolea
     if (top && top[1] >= 2) return lang === "tr"
       ? `${top[0]} bölgesinde ${top[1]} ölüm — pozisyon tekrarı`
       : `${top[1]} deaths at ${top[0]} — position repeat`;
-    if (report.won && Number(report.score?.split(/[-–]/)?.[0]) >= 13) return lang === "tr" ? "Güçlü maç performansı" : "Strong match performance";
-    if (!report.won) return lang === "tr" ? "Gelişim alanları tespit edildi" : "Improvement areas detected";
+    if (report.won === true && Number(report.score?.split(/[-–]/)?.[0]) >= 13) return lang === "tr" ? "Güçlü maç performansı" : "Strong match performance";
+    if (report.won === false) return lang === "tr" ? "Gelişim alanları tespit edildi" : "Improvement areas detected";
     return null;
   }
   function getMatchTagWeb(report: SavedReport): { label: string; color: string } | null {
     const played = report.rounds ? report.rounds.filter(r => !r.skipped).length : 0;
     const survRate = report.rounds ? report.rounds.filter(r => !r.skipped && r.survived).length / Math.max(played, 1) : 0.5;
+    // FB01 · F03: sonuç bilinmiyorsa (null) sonuca dayalı etiket yok.
+    if (report.won === null) return null;
     if (report.won && survRate > 0.55) return { label: "Dominant", color: "#10b981" };
     if (!report.won && survRate < 0.3) return { label: lang === "tr" ? "Riskli" : "Risky", color: "#ef4444" };
     if (report.won) return { label: lang === "tr" ? "Kontrollü" : "Controlled", color: "#22d3ee" };
@@ -2650,14 +2653,11 @@ export default function LandingClient({ quotaEnforced }: { quotaEnforced: boolea
     let filtered = savedReports;
     if (historyFilterMap) filtered = filtered.filter((r) => r.map === historyFilterMap);
     if (historyFilterAgent) filtered = filtered.filter((r) => r.agent === historyFilterAgent);
-    if (historyFilterResult === "wins") filtered = filtered.filter((r) => r.won);
-    if (historyFilterResult === "losses") filtered = filtered.filter((r) => !r.won);
+    if (historyFilterResult === "wins") filtered = filtered.filter((r) => r.won === true);
+    if (historyFilterResult === "losses") filtered = filtered.filter((r) => r.won === false);
     return filtered;
   }, [savedReports, historyFilterMap, historyFilterAgent, historyFilterResult]);
-  const filteredWinRate = useMemo(() => {
-    if (filteredReports.length === 0) return 0;
-    return Math.round((filteredReports.filter((r) => r.won).length / filteredReports.length) * 100);
-  }, [filteredReports]);
+  const filteredWinRate = useMemo(() => decidedWinRate(filteredReports).pct, [filteredReports]);
   // Unique maps and agents for filter dropdowns
   const uniqueMaps = useMemo(() => [...new Set(savedReports.map((r) => r.map).filter(Boolean))].sort(), [savedReports]);
   const uniqueAgents = useMemo(() => [...new Set(savedReports.map((r) => r.agent).filter(Boolean))].sort(), [savedReports]);
@@ -2713,7 +2713,9 @@ export default function LandingClient({ quotaEnforced }: { quotaEnforced: boolea
         agent: formatAgent((json.agent as string) || (row.region as string) || ""),
         side: normalizeSide(json.side),
         score: (json.score as string) || "",
-        won: (json.won as boolean) ?? false,
+        // FB01 · F03: null (masaüstü UNFINISHED/DRAW) ve eksik değer "bilinmiyor" kalır —
+        // eskiden `?? false` her birini "Yenilgi" yapıp WR'ye kayıp olarak katıyordu.
+        won: parseStoredWon(json.won),
         rawDate: isValidDate
           ? parsedDate.toISOString()
           : new Date().toISOString(),
@@ -3237,7 +3239,7 @@ export default function LandingClient({ quotaEnforced }: { quotaEnforced: boolea
                 </div>
                 <div className="w-px h-8 bg-white/[0.06]" />
                 <div>
-                  <span className={`text-2xl font-black ${winRate >= 50 ? 'text-emerald-400' : 'text-red-400'}`}>{savedReports.length > 0 ? `${winRate}%` : '\u2014'}</span>
+                  <span className={`text-2xl font-black ${winRate === null ? 'text-neutral-500' : winRate >= 50 ? 'text-emerald-400' : 'text-red-400'}`}>{winRate !== null ? `${winRate}%` : '\u2014'}</span>
                   <span className="text-xs text-neutral-500 ml-1.5">Win Rate</span>
                 </div>
                 <div className="w-px h-8 bg-white/[0.06]" />
@@ -3406,8 +3408,8 @@ export default function LandingClient({ quotaEnforced }: { quotaEnforced: boolea
                       <img src={agentImgUrl(ap.name)} alt={ap.name} className="h-full w-full object-cover" loading="lazy" />
                     </div>
                     <p className="text-[11px] font-bold text-white truncate">{ap.name}</p>
-                    <p className={`text-xl font-extrabold tabular-nums ${ap.wr >= 50 ? "text-emerald-400" : "text-red-400"}`} style={{ textShadow: ap.wr >= 50 ? '0 0 10px rgba(16,185,129,0.2)' : '0 0 10px rgba(239,68,68,0.2)' }}>{ap.wr}%</p>
-                    <p className="text-[9px] text-neutral-600 font-medium">{ap.wins}W {ap.total - ap.wins}L</p>
+                    <p className={`text-xl font-extrabold tabular-nums ${ap.wr === null ? "text-neutral-500" : ap.wr >= 50 ? "text-emerald-400" : "text-red-400"}`} style={{ textShadow: ap.wr === null ? "none" : ap.wr >= 50 ? '0 0 10px rgba(16,185,129,0.2)' : '0 0 10px rgba(239,68,68,0.2)' }}>{ap.wr !== null ? `${ap.wr}%` : "\u2014"}</p>
+                    <p className="text-[9px] text-neutral-600 font-medium">{ap.wins}W {ap.losses}L</p>
                   </div>
                 ))}
               </div>
@@ -3433,8 +3435,8 @@ export default function LandingClient({ quotaEnforced }: { quotaEnforced: boolea
                       </div>
                     </div>
                     <div className="p-3 text-center bg-gradient-to-b from-[#0a1628]/90 to-[#0d1117]/95">
-                      <p className={`text-xl font-extrabold tabular-nums ${mp.wr >= 50 ? "text-emerald-400" : "text-red-400"}`} style={{ textShadow: mp.wr >= 50 ? '0 0 10px rgba(16,185,129,0.2)' : '0 0 10px rgba(239,68,68,0.2)' }}>{mp.wr}%</p>
-                      <p className="text-[9px] text-neutral-600 font-medium">{mp.wins}W {mp.total - mp.wins}L</p>
+                      <p className={`text-xl font-extrabold tabular-nums ${mp.wr === null ? "text-neutral-500" : mp.wr >= 50 ? "text-emerald-400" : "text-red-400"}`} style={{ textShadow: mp.wr === null ? "none" : mp.wr >= 50 ? '0 0 10px rgba(16,185,129,0.2)' : '0 0 10px rgba(239,68,68,0.2)' }}>{mp.wr !== null ? `${mp.wr}%` : "\u2014"}</p>
+                      <p className="text-[9px] text-neutral-600 font-medium">{mp.wins}W {mp.losses}L</p>
                     </div>
                   </div>
                 ))}
@@ -3477,7 +3479,7 @@ export default function LandingClient({ quotaEnforced }: { quotaEnforced: boolea
                       className="w-full text-left rounded-lg border border-[#1e2a3a]/60 bg-gradient-to-r from-[#0a1628]/80 to-[#0d1117]/90 p-4 flex items-center gap-4 transition-all duration-200 hover:border-[#2d4a6f]/40 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/30 mb-2">
                       <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg ring-1 ring-white/[0.06]">
                         <img src={MAP_IMAGES[entry.map]} alt="" className="h-full w-full object-cover opacity-80" />
-                        <div className={`absolute inset-0 ${entry.won ? 'bg-emerald-500/10' : 'bg-red-500/10'}`} />
+                        <div className={`absolute inset-0 ${entry.won === true ? 'bg-emerald-500/10' : entry.won === false ? 'bg-red-500/10' : 'bg-white/5'}`} />
                       </div>
                       <div className="flex items-center gap-2 shrink-0">
                         <img src={agentImgUrl(entry.agent)} alt="" className="w-8 h-8 rounded-lg ring-1 ring-white/10" style={{ filter: 'saturate(1.2)' }} />
@@ -3494,8 +3496,8 @@ export default function LandingClient({ quotaEnforced }: { quotaEnforced: boolea
                       </div>
                       <div className="text-right shrink-0">
                         <p className="text-lg font-extrabold text-white tracking-tight">{entry.score}</p>
-                        <p className={`text-[10px] font-bold uppercase ${entry.won ? 'text-emerald-400' : 'text-red-400'}`}>
-                          {entry.won ? l.victory : l.defeat}
+                        <p className={`text-[10px] font-bold uppercase ${entry.won === true ? 'text-emerald-400' : entry.won === false ? 'text-red-400' : 'text-neutral-400'}`}>
+                          {entry.won === true ? l.victory : entry.won === false ? l.defeat : l.noResult}
                         </p>
                       </div>
                     </button>
@@ -3534,14 +3536,14 @@ export default function LandingClient({ quotaEnforced }: { quotaEnforced: boolea
                 </div>
                 <div className="w-px h-6 bg-white/[0.06]" />
                 <div className="flex items-center gap-2">
-                  <span className={`text-2xl font-black ${filteredWinRate >= 50 ? "text-emerald-400" : "text-[#FF4655]"}`}>{filteredWinRate}%</span>
+                  <span className={`text-2xl font-black ${filteredWinRate === null ? "text-neutral-500" : filteredWinRate >= 50 ? "text-emerald-400" : "text-[#FF4655]"}`}>{filteredWinRate !== null ? `${filteredWinRate}%` : "\u2014"}</span>
                   <span className="text-[11px] text-neutral-500 uppercase tracking-wider">{l.dashWinRate}</span>
                 </div>
                 <div className="w-px h-6 bg-white/[0.06]" />
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl font-black text-emerald-400">{filteredReports.filter(r => r.won).length}</span>
+                  <span className="text-2xl font-black text-emerald-400">{filteredReports.filter(r => r.won === true).length}</span>
                   <span className="text-[9px] text-neutral-600">W</span>
-                  <span className="text-2xl font-black text-[#FF4655]">{filteredReports.filter(r => !r.won).length}</span>
+                  <span className="text-2xl font-black text-[#FF4655]">{filteredReports.filter(r => r.won === false).length}</span>
                   <span className="text-[9px] text-neutral-600">L</span>
                 </div>
               </div>
@@ -3593,7 +3595,7 @@ export default function LandingClient({ quotaEnforced }: { quotaEnforced: boolea
                   </div>
 
                   {/* Win/loss indicator bar */}
-                  <div className={`absolute left-0 top-0 bottom-0 w-1 ${entry.won ? "bg-emerald-400" : "bg-[#FF4655]"}`} style={{ boxShadow: entry.won ? "0 0 10px rgba(52,211,153,0.4)" : "0 0 10px rgba(255,70,85,0.4)" }} />
+                  <div className={`absolute left-0 top-0 bottom-0 w-1 ${entry.won === true ? "bg-emerald-400" : entry.won === false ? "bg-[#FF4655]" : "bg-neutral-500"}`} style={{ boxShadow: entry.won === true ? "0 0 10px rgba(52,211,153,0.4)" : entry.won === false ? "0 0 10px rgba(255,70,85,0.4)" : "none" }} />
 
                   <div className="relative flex items-center gap-4 p-4 sm:p-5 pl-5">
                     {/* Agent icon */}
@@ -3611,8 +3613,8 @@ export default function LandingClient({ quotaEnforced }: { quotaEnforced: boolea
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-sm font-bold text-white">{entry.map || "—"}</span>
                         <span className="text-[11px] text-neutral-500">{entry.agent || "—"}</span>
-                        <span className={`rounded px-1.5 py-0.5 text-[9px] font-bold uppercase ${entry.won ? "bg-emerald-500/10 text-emerald-400" : "bg-[#FF4655]/10 text-[#FF4655]"}`}>
-                          {entry.won ? l.victory : l.defeat}
+                        <span className={`rounded px-1.5 py-0.5 text-[9px] font-bold uppercase ${entry.won === true ? "bg-emerald-500/10 text-emerald-400" : entry.won === false ? "bg-[#FF4655]/10 text-[#FF4655]" : "bg-white/5 text-neutral-400"}`}>
+                          {entry.won === true ? l.victory : entry.won === false ? l.defeat : l.noResult}
                         </span>
                       </div>
                       <p className="mt-1 text-[10px] text-neutral-600">{entry.date} · {entry.side === "attack" ? l.sideAttack : entry.side === "defense" ? l.sideDefense : "—"}</p>
@@ -3698,8 +3700,8 @@ export default function LandingClient({ quotaEnforced }: { quotaEnforced: boolea
                 <div>
                   <p className={ds.label}>{l.matchResult}</p>
                   <p className="mt-1 text-4xl font-extrabold tracking-tight text-white">{vr.score}</p>
-                  <p className={`mt-1 text-xs font-bold uppercase ${vr.won ? "text-emerald-400" : "text-red-400"}`}>
-                    {vr.won ? l.victory : l.defeat}
+                  <p className={`mt-1 text-xs font-bold uppercase ${vr.won === true ? "text-emerald-400" : vr.won === false ? "text-red-400" : "text-neutral-400"}`}>
+                    {vr.won === true ? l.victory : vr.won === false ? l.defeat : l.noResult}
                   </p>
                 </div>
                 <div className="text-right space-y-1">

@@ -130,3 +130,17 @@ function titleCaseEn(s: string): string {
   if (!s) return s;
   return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
 }
+
+/**
+ * Callout görüntü biçimi: "a site" → "A Site", "b lobby" → "B Lobby", "ct" → "CT".
+ * Masaüstü deathLocation'ı kanonik KÜÇÜK harf gönderir ("b lobby"); insan-okur cümleye
+ * (trLocative ekinden ÖNCE) bu biçimde girer. lib/reality-checker.ts calloutDisplay aynı
+ * kuralı buradan kullanır (FB01 inceleme · F89: rapor şablonu "b lobby'da" basıyordu).
+ */
+export function formatCallout(loc: string): string {
+  return loc
+    .trim()
+    .split(/\s+/)
+    .map((w) => (/^(?:[abc]|ct|t)$/i.test(w) ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1)))
+    .join(" ");
+}

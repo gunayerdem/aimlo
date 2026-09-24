@@ -11,7 +11,7 @@ import { mapKey, MAP_CALLOUTS, UNIVERSAL_CALLOUTS } from "@/lib/map-callouts";
 // AGENT_NAMES tablosu) gelsin — reality-checker'ın kendi AGENT_NAMES listesi OCR
 // garble'ları da ("Reay") içerdiği için TESPİT'te kullanılır, GERÇEK katil adı
 // olarak yalnız tabloda KANITLI olan resmi ad yazılır.
-import { knownAgent } from "@/lib/format-display";
+import { knownAgent, formatCallout } from "@/lib/format-display";
 // B2 (2026-09-16): Türkçe sayı eki TEK KAYNAK — prompt (lib/history-block.ts)
 // ile süzgeç aynı tabloyu kullansın. Yaprak modül: hiçbir import'u yok →
 // döngü yapısal olarak imkânsız.
@@ -3199,7 +3199,7 @@ const DEATH_BIND_PAST_EXTRA_RE = /(?<![\p{L}])(?:önceki|geçen|recently|son\s+z
 const LOC_ALT_ANY_RE = new RegExp(`(?<![\\p{L}\\p{N}_-])(?:${LOC_ALT})(?![\\p{L}\\p{N}_-])`, "iu");
 /** "a site" → "A Site", "mid bottom" → "Mid Bottom" (site harfi / ct büyük). */
 function calloutDisplay(loc: string): string {
-  return loc.trim().split(/\s+/).map((w) => (/^(?:[abc]|ct|t)$/i.test(w) ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1))).join(" ");
+  return formatCallout(loc);
 }
 function correctContradictedDeathLocation(
   text: string, measured: string, mk: string, currentLocs: ReadonlySet<string>, lang?: "tr" | "en",

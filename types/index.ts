@@ -56,7 +56,8 @@ export type SavedReport = {
   agent: string;
   side: string;
   score: string;
-  won: boolean;
+  /** FB01 · F03: null = sonuç bilinmiyor (masaüstü UNFINISHED/DRAW) — WR/W-L'ye girmez. */
+  won: boolean | null;
   date: string;
   rawDate: string;
   summary: string;

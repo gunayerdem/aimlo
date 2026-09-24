@@ -32,7 +32,7 @@ import { buildPolicyBlock } from "@/lib/ai-policy";
 // finalizeCoachText'e devredildi. cleanCoachText yalnız DETERMİNİSTİK şablon
 // metninde kalıyor (orada kapak/clamp yok, bkz. generateDeterministicReport).
 import { cleanCoachText, stripNumericHp, finalizeCoachText, trLocative } from "@/lib/coach-text";
-import { formatMap, formatAgent, formatMode, normalizeSide, knownAgent } from "@/lib/format-display";
+import { formatMap, formatAgent, formatMode, normalizeSide, knownAgent, formatCallout } from "@/lib/format-display";
 import { realityCheck, buildFactGround, type FactGround } from "@/lib/reality-checker";
 // FB07 · F92: ölçülmüş katil silahı sözlük-bağlı (reality-checker ile aynı kaynak).
 import { extractKillerWeapon } from "@/lib/comp-weapon";
@@ -261,15 +261,31 @@ export function validateRequest(
   // B05 inceleme: atlama yalnız GEÇ TESLİM EDİLEN ERKEN round'da; seçilenden sonraki
   // bir round okunamadıysa bayat ara skor final ilan edilmez → 400 (B05 öncesi gibi).
   const picked = pickReportScore(b.rounds, b.score);
+  let yours: string;
+  let enemy: string;
   if (!picked.ok) {
-    if (picked.reason === "late_unreadable") {
-      console.log("[Aimlo] report score: seçilen skordan SONRAKİ bir round'un skoru okunamadı → final skor bilinmiyor, 400 (bayat ara skor final ilan edilmez)");
+    // FB01 inceleme · F90: FD01 masaüstü çapa-sonrası tam sıfırlamada (UNCONFIRM backstop /
+    // oyun kapanışı) sondaki '?-?'yi BİLEREK doldurmaz ve matchComplete:false gönderir
+    // (aimlo-desktop ad311c5 reset_after_anchor). Eskiden bu gövde 400 alıyor, masaüstü
+    // 400'ü Rejected → kalıcı sayıp maçın raporunu kaybediyordu. matchComplete:false iken
+    // sonuç zaten UNFINISHED (won=null): son geçerli skor "kayıttaki son skor" olarak
+    // kullanılır, final İLAN EDİLMEZ. matchComplete yok (v1.0.19) / true → 400 AYNEN.
+    if (picked.reason === "late_unreadable" && picked.lastValid && b.matchComplete === false) {
+      yours = picked.lastValid.yours;
+      enemy = picked.lastValid.enemy;
+      console.log(`[Aimlo] report score: son round skoru okunamadı + matchComplete:false → kayıttaki son skor ${yours}-${enemy} UNFINISHED raporlanır (final ilan edilmez)`);
+    } else {
+      if (picked.reason === "late_unreadable") {
+        console.log("[Aimlo] report score: seçilen skordan SONRAKİ bir round'un skoru okunamadı → final skor bilinmiyor, 400 (bayat ara skor final ilan edilmez)");
+      }
+      return { valid: false, error: "Invalid score values" };
     }
-    return { valid: false, error: "Invalid score values" };
-  }
-  const { yours, enemy } = picked;
-  if (picked.skippedInvalid > 0) {
-    console.log(`[Aimlo] report score: ${picked.skippedInvalid} okunamayan son skor atlandı → son geçerli skor ${yours}-${enemy}`);
+  } else {
+    yours = picked.yours;
+    enemy = picked.enemy;
+    if (picked.skippedInvalid > 0) {
+      console.log(`[Aimlo] report score: ${picked.skippedInvalid} okunamayan son skor atlandı → son geçerli skor ${yours}-${enemy}`);
+    }
   }
 
   // rounds — tolerate missing/empty
@@ -336,6 +352,26 @@ export function validateRequest(
         return s ? { side: s } : {};
       })(),
     }));
+
+  // FB01 inceleme · F13 kalıntısı: round tarafları OYBİRLİĞİYLE tek taraf gösteriyor ve
+  // setup.side (masaüstünün finalize ANINDA okuduğu taraf) onunla çelişiyorsa raporun
+  // tarafı round verisidir. KANIT: FD01 masaüstü maç tarafını hâlâ finalize'da okuyor
+  // (ad311c5 `let v = view.side.clone()`); devre arasından hemen sonra R13 alım evresinde
+  // "Maçı bitir" → R1-R12 'defending' round'ları + setup 'attacking' → probe: "Side: attack
+  // (SALDIRI …)", savunma KB'si atılıyor, 12 savunma round'u saldırı diliyle koçlanıyordu.
+  // Tek noktada düzeltilir: KB filtresi, Side satırı, kural 9, refine sideFact, şablon
+  // sideLabel ve raw_result_json.side hepsi setup.side'dan okur. İki taraf görülürse
+  // resolveReportSides zaten mixed döner; round'larda taraf yoksa (v1.0.19) setup.side AYNEN.
+  {
+    const roundSides = new Set(rounds.map((r) => r.side).filter((s): s is "attack" | "defense" => s === "attack" || s === "defense"));
+    if (roundSides.size === 1) {
+      const only = [...roundSides][0];
+      if (setup.side !== only) {
+        console.log(`[Aimlo] report side: round'ların tamamı '${only}', setup '${String(setup.side)}' (finalize anı) → raporun tarafı '${only}'`);
+        setup.side = only;
+      }
+    }
+  }
 
   // Optional matchId — if present must be a valid UUID v4. Reject hard
   // (don't silently drop) so client bugs surface early.
@@ -637,6 +673,9 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
     });
   const topLoc = Object.entries(locationCounts).sort((a, b) => b[1] - a[1])[0];
   const topDeathLoc = topLoc ? topLoc[0] : "N/A";
+  // FB01 inceleme · F89: masaüstü kanonik küçük harf gönderir ("b lobby") — insan-okur
+  // cümleye (trLocative ekinden ÖNCE) resmi yazımla girer ("B Lobby'de", eskiden "b lobby'da").
+  const topDeathLocText = topDeathLoc === "N/A" ? topDeathLoc : formatCallout(topDeathLoc);
   const topDeathCount = topLoc ? topLoc[1] : 0;
   const avgEnemy =
     nonSkipped.length > 0
@@ -669,6 +708,11 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
   const repeatedSpot = topDeathLoc !== "N/A" && topDeathCount >= 2;
   const deathCount = nonSkipped.filter((r) => !r.survived).length;
   const deathVariety = Object.keys(locationCounts).length;
+  // FB01 inceleme · F89: locationCounts yalnız konumu OKUNAN ölümleri sayar; deathCount hepsini.
+  // "aynı noktada iki kez ölmedin" / "ölümler farklı noktalara dağıldı" ancak TÜM ölümlerin
+  // konumu biliniyorsa ölçülmüş olgudur (6 ölümden 2'si konumlu → eskiden "6 ölümün 2 farklı
+  // noktaya dağıldı — aynı noktada iki kez ölmedin").
+  const locatedDeaths = Object.values(locationCounts).reduce((s, n) => s + n, 0);
   // Temas ortalaması yalnız masaüstü/istemci SAYISAL enemyCount>0 gönderdiyse anlamlı
   // (masaüstü RoundFeedback'te alan yok → eskiden daima "0.0 kişi" basılıyordu).
   const contactAvg = Number(avgEnemy);
@@ -700,13 +744,13 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
   // F03: sonuç kesinleşmediyse skor "final" gibi sunulmaz.
   const scoreNote = outcome.label === "UNFINISHED" ? (isTr ? " (sonuç kesinleşmedi)" : " (result not confirmed)") : "";
   const summary = isTr
-    ? `${head} Skor: ${scoreStr}${scoreNote}. ${total} round, ${won}W/${lost}L${unreadNote}.${survivedText}${repeatedSpot ? ` ${trLocative(topDeathLoc)} ${topDeathCount}x ölüm — bu pozisyon okunuyor.` : ""}${hasContactData ? ` Ort. düşman temas: ${avgEnemy} kişi.` : ""}`
-    : `${head} Score: ${scoreStr}${scoreNote}. ${total} rounds, ${won}W/${lost}L${unreadNote}.${survivedText}${repeatedSpot ? ` ${topDeathCount}x death at ${topDeathLoc} — this position is being read.` : ""}${hasContactData ? ` Avg enemy contact: ${avgEnemy}.` : ""}`;
+    ? `${head} Skor: ${scoreStr}${scoreNote}. ${total} round, ${won}W/${lost}L${unreadNote}.${survivedText}${repeatedSpot ? ` ${trLocative(topDeathLocText)} ${topDeathCount}x ölüm — bu pozisyon okunuyor.` : ""}${hasContactData ? ` Ort. düşman temas: ${avgEnemy} kişi.` : ""}`
+    : `${head} Score: ${scoreStr}${scoreNote}. ${total} rounds, ${won}W/${lost}L${unreadNote}.${survivedText}${repeatedSpot ? ` ${topDeathCount}x death at ${topDeathLocText} — this position is being read.` : ""}${hasContactData ? ` Avg enemy contact: ${avgEnemy}.` : ""}`;
   let mistake: string;
   if (topDeathCount >= 3) {
     mistake = isTr
-      ? `GÖZLEM: ${trLocative(topDeathLoc)} ${topDeathCount} ölüm (${deathRoundStr}). ÇIKARIM: Düşman bu açıyı okuyor, crosshair hazır tutuyor. ÖNERİ: ${agentKnown ? `${setup.agent} olarak off-angle'a geç` : "Off-angle'a geç"} veya utility ile açıyı temizleyip peek at.`
-      : `OBSERVATION: ${topDeathCount} deaths at ${topDeathLoc} (${deathRoundStr}). INFERENCE: Enemy reads this angle, holds crosshair. RECOMMENDATION: ${agentKnown ? `As ${setup.agent}, shift` : "Shift"} to off-angle or clear with utility before peeking.`;
+      ? `GÖZLEM: ${trLocative(topDeathLocText)} ${topDeathCount} ölüm (${deathRoundStr}). ÇIKARIM: Düşman bu açıyı okuyor, crosshair hazır tutuyor. ÖNERİ: ${agentKnown ? `${setup.agent} olarak off-angle'a geç` : "Off-angle'a geç"} veya utility ile açıyı temizleyip peek at.`
+      : `OBSERVATION: ${topDeathCount} deaths at ${topDeathLocText} (${deathRoundStr}). INFERENCE: Enemy reads this angle, holds crosshair. RECOMMENDATION: ${agentKnown ? `As ${setup.agent}, shift` : "Shift"} to off-angle or clear with utility before peeking.`;
   } else if (hasRotateIssue) {
     mistake = isTr
       ? `GÖZLEM: Birden fazla round'da rotasyon sırasında ölüm. ÇIKARIM: Timing hatası — nişan noktası hazır değildi, düşman rotasyonu okuyor. ÖNERİ: ${agentKnown ? `${setup.agent} olarak rotasyonda` : "Rotasyonda"} her köşenin açısını önceden tut, util ile bilgi topla.`
@@ -722,18 +766,22 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
   } else if (repeatedSpot) {
     // Aynı noktada ≥2 ölüm: "tekrarlayan" iddiası ölçülmüş (bugünkü metin, ajan bilinmiyorsa ajansız).
     mistake = isTr
-      ? `GÖZLEM: ${trLocative(topDeathLoc)} tekrarlayan pozisyon hataları. ÇIKARIM: Nişan noktası ve angle seçimi zayıf — düşman ilk peek'i kazanıyor. ÖNERİ: ${agentKnown ? `${setup.agent} olarak off-angle tut` : "Off-angle tut"}, jiggle peek ile bilgi topla.`
-      : `OBSERVATION: Recurring positioning errors at ${topDeathLoc}. INFERENCE: Weak crosshair placement and angle selection — enemy wins first peek. RECOMMENDATION: ${agentKnown ? `As ${setup.agent}, hold` : "Hold"} off-angle, jiggle peek for info.`;
+      ? `GÖZLEM: ${trLocative(topDeathLocText)} tekrarlayan pozisyon hataları. ÇIKARIM: Nişan noktası ve angle seçimi zayıf — düşman ilk peek'i kazanıyor. ÖNERİ: ${agentKnown ? `${setup.agent} olarak off-angle tut` : "Off-angle tut"}, jiggle peek ile bilgi topla.`
+      : `OBSERVATION: Recurring positioning errors at ${topDeathLocText}. INFERENCE: Weak crosshair placement and angle selection — enemy wins first peek. RECOMMENDATION: ${agentKnown ? `As ${setup.agent}, hold` : "Hold"} off-angle, jiggle peek for info.`;
   } else {
     // FB01 · F89: tekrar YOK (her ölüm farklı noktada / konum okunmadı) — "tekrarlayan"
     // ve ölçülmemiş ÇIKARIM kurulmaz; yalnız sayılan olgu + genel öneri.
     const observedTr = deathVariety >= 2
-      ? `${deathCount} ölümün ${deathVariety} farklı noktaya dağıldı — aynı noktada iki kez ölmedin.`
+      ? locatedDeaths === deathCount
+        ? `${deathCount} ölümün ${deathVariety} farklı noktaya dağıldı — aynı noktada iki kez ölmedin.`
+        : `${deathCount} ölümünden konumu okunan ${locatedDeaths} tanesi ${deathVariety} farklı noktada.`
       : deathCount > 0
         ? `${deathCount} round'da öldün.`
         : "Bu maçta hiç ölmedin.";
     const observedEn = deathVariety >= 2
-      ? `Your ${deathCount} deaths were spread across ${deathVariety} different spots — you never died twice at the same spot.`
+      ? locatedDeaths === deathCount
+        ? `Your ${deathCount} deaths were spread across ${deathVariety} different spots — you never died twice at the same spot.`
+        : `Of your ${deathCount} deaths, the ${locatedDeaths} with a read location were at ${deathVariety} different spots.`
       : deathCount > 0
         ? `You died in ${deathCount} round${deathCount === 1 ? "" : "s"}.`
         : "You didn't die in this match.";
@@ -793,8 +841,8 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
       : ` You closed the match ahead at ${scoreStr}.`
     : contactAvg >= 2
       ? isTr
-        ? ` ${topDeathLoc !== "N/A" ? `${trLocative(topDeathLoc)} ` : ""}ortalama ${avgEnemy} kişiyle, yani sayısal üstünlükle temas kurdular.`
-        : ` They engaged ${topDeathLoc !== "N/A" ? `at ${topDeathLoc} ` : ""}with ${avgEnemy} players on average — a numbers advantage.`
+        ? ` ${topDeathLoc !== "N/A" ? `${trLocative(topDeathLocText)} ` : ""}ortalama ${avgEnemy} kişiyle, yani sayısal üstünlükle temas kurdular.`
+        : ` They engaged ${topDeathLoc !== "N/A" ? `at ${topDeathLocText} ` : ""}with ${avgEnemy} players on average — a numbers advantage.`
       : outcome.label === "UNFINISHED"
         ? isTr
           ? ` Kayıttaki son skor ${scoreStr}; maçın sonucu kesinleşmedi.`
@@ -811,13 +859,15 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
   // FB01 · F03: sonuç bilinmiyorsa (null) kayıp-dalının "retake/trade" dersine değil
   // sonuçtan bağımsız cümleye düşer. F89: "bu açı okunuyor" yalnız ≥2 ölüm tekrarında.
   const adjustment = isTr
-    ? `${repeatedSpot ? `${topDeathLoc} yerine off-angle'lardan oyna — bu açı okunuyor. ` : ""}${agentKnown ? `${setup.agent} utility'sini` : "Utility'ni"} retake/info için sakla, erken harcama. ${matchWon !== false ? "Pozisyon çeşitliliğini artır — aynı setup 2 round üst üste kullanma." : "Retake pozisyonlarına erken geç, site anchor'ını trade destekli kur."}`
-    : `${repeatedSpot ? `Play off-angles instead of ${topDeathLoc} — this angle is being read. ` : ""}Save ${agentKnown ? `${setup.agent} utility` : "your utility"} for retake/info, don't use early. ${matchWon !== false ? "Increase positional variety — don't repeat same setup 2 rounds in a row." : "Set up retake positions early, anchor site with trade support."}`;
+    ? `${repeatedSpot ? `${topDeathLocText} yerine off-angle'lardan oyna — bu açı okunuyor. ` : ""}${agentKnown ? `${setup.agent} utility'sini` : "Utility'ni"} retake/info için sakla, erken harcama. ${matchWon !== false ? "Pozisyon çeşitliliğini artır — aynı setup 2 round üst üste kullanma." : "Retake pozisyonlarına erken geç, site anchor'ını trade destekli kur."}`
+    : `${repeatedSpot ? `Play off-angles instead of ${topDeathLocText} — this angle is being read. ` : ""}Save ${agentKnown ? `${setup.agent} utility` : "your utility"} for retake/info, don't use early. ${matchWon !== false ? "Increase positional variety — don't repeat same setup 2 rounds in a row." : "Set up retake positions early, anchor site with trade support."}`;
 
   // Best round — find a won round where player survived
   const bestRoundData = nonSkipped.find((r) => r.result === "win" && r.survived);
   // FB01 · F89: konum/harita/ajan okunmadıysa "Unknown bölgesinde Unknown olarak" kurulmaz.
-  const bestLoc = bestRoundData ? (bestRoundData.deathLocation || (mapKnown ? setup.map : "")) : "";
+  // FB01 inceleme · F89: konum yoksa HARİTA adı konum yerine konmaz ("R2: Bind bölgesinde
+  // hayatta kaldın" ölçülmemiş bir yer iddiası) — cümle konumsuz kurulur.
+  const bestLoc = bestRoundData?.deathLocation ? formatCallout(bestRoundData.deathLocation) : "";
   const bestRound = bestRoundData
     ? isTr
       // B34 (2026-07-31): "Trade setup doğruydu, pozisyon tutma isabetliydi"
@@ -847,11 +897,11 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
   // route'a gelmiyor — yukarıdaki B34 notu) ve "tekrar ölümler" tek ölümde de basılıyordu.
   const survivalPctInt = Math.round(survivalPct * 100);
   const repeatPartTr = repeatedSpot
-    ? `, ${trLocative(topDeathLoc)} ${topDeathCount} tekrar ölüm`
-    : deathVariety >= 3 ? ", ölümler farklı noktalara dağıldı" : "";
+    ? `, ${trLocative(topDeathLocText)} ${topDeathCount} tekrar ölüm`
+    : deathVariety >= 3 ? (locatedDeaths === deathCount ? ", ölümler farklı noktalara dağıldı" : ", konumu okunan ölümler farklı noktalarda") : "";
   const repeatPartEn = repeatedSpot
-    ? `, ${topDeathCount} repeat deaths at ${topDeathLoc}`
-    : deathVariety >= 3 ? ", deaths spread across different spots" : "";
+    ? `, ${topDeathCount} repeat deaths at ${topDeathLocText}`
+    : deathVariety >= 3 ? (locatedDeaths === deathCount ? ", deaths spread across different spots" : ", located deaths at different spots") : "";
   const decisionScore = isTr
     ? `${score_num}/10 — Round kazanma %${winPct}, hayatta kalma %${survivalPctInt}${repeatPartTr}`
     : `${score_num}/10 — ${winPct}% rounds won, ${survivalPctInt}% survival${repeatPartEn}`;

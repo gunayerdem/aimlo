@@ -50,8 +50,15 @@ const MATCH_END_THRESHOLD: Readonly<Record<string, number>> = {
   premier: 13,
 };
 
-/** 12-12'den sonra 2 fark kuralıyla uzayan modlar (desktop valorant_score_shape_plausible). */
-const WIN_BY_TWO_MODES: ReadonlySet<string> = new Set(["competitive", "unrated", "premier"]);
+/**
+ * 12-12'den sonra 2 fark kuralıyla uzayan modlar (desktop valorant_score_shape_plausible).
+ * FB01 inceleme: DERECESİZ (unrated) bu kümede DEĞİL — 12-12'de tek round'luk "Endgame"
+ * (sudden death) oynanır, 13-12 geçerli bir FİNAL skordur (Valorant: Unrated modu; uzatma
+ * yok). Eskiden isTerminalScore(13,12,"unrated") false → eski istemcide ve bitiş ekranını
+ * okuyamayan FD01 istemcisinde maç UNFINISHED görünüyordu. Rekabetçi/premier kuralı AYNEN.
+ * ⚠ Masaüstü terminal_score (lib.rs) aynı tabloyu kullanıyor — orada da düzeltilmeli.
+ */
+const WIN_BY_TWO_MODES: ReadonlySet<string> = new Set(["competitive", "premier"]);
 
 /**
  * Devre arası taraf değişimi — bu round TAMAMLANINCA taraf değişir. aimlo-desktop
@@ -74,8 +81,9 @@ export function normalizeModeToken(raw: unknown): string {
 
 /**
  * Skor maç SONU olabilir mi? null = mod tanınmıyor (karar verilemez).
- * Rekabetçi/derecesiz/premier: max ≥ 13 VE (min ≤ 11 YA DA fark ≥ 2) — 13-11 biter,
- * 13-12 / 12-12 / 14-13 uzatma ortasıdır. Swiftplay/spike rush: max ≥ eşik.
+ * Rekabetçi/premier: max ≥ 13 VE (min ≤ 11 YA DA fark ≥ 2) — 13-11 biter,
+ * 13-12 / 12-12 / 14-13 uzatma ortasıdır. Derecesiz: max ≥ 13 (12-12 → tek round sudden
+ * death, 13-12 biter). Swiftplay/spike rush: max ≥ eşik.
  */
 export function isTerminalScore(yours: number, enemy: number, mode: unknown): boolean | null {
   const m = normalizeModeToken(mode);
@@ -125,4 +133,37 @@ export function crossedHalfSwap(played: number, mode: unknown): boolean | null {
   const swapAfter = HALF_SWAP_AFTER_ROUND[normalizeModeToken(mode)];
   if (swapAfter === undefined) return null;
   return played > swapAfter;
+}
+
+/**
+ * FB01 inceleme · F03 (web tüketicisi, 2026-09-24): kayıttaki (analyses.raw_result_json.won)
+ * maç sonucu. Yalnız GERÇEK boolean sonuçtur; null (UNFINISHED/DRAW — masaüstü
+ * persistOnServer satırları) ve eksik/bozuk değer "bilinmiyor" (null) döner.
+ * KANIT: app/LandingClient.tsx rowToReport `won: (json.won as boolean) ?? false` null'ı
+ * false'a çökertiyordu → web geçmişi/panosu sonucu bilinmeyen her masaüstü maçını
+ * "Yenilgi" gösterip WR paydasına kayıp olarak katıyordu. Masaüstü FD01 (29d687a)
+ * parseMatchWon ile aynı üç durum.
+ */
+export function parseStoredWon(raw: unknown): boolean | null {
+  return typeof raw === "boolean" ? raw : null;
+}
+
+/**
+ * Sonucu BİLİNEN maçlardan kazanma oranı — null sonuç paydaya GİRMEZ.
+ * pct: sonucu bilinen maç yoksa null (UI "—" basar; %0 iddiası yok).
+ */
+export function decidedWinRate(matches: readonly { won: boolean | null }[]): {
+  wins: number;
+  losses: number;
+  decided: number;
+  pct: number | null;
+} {
+  let wins = 0;
+  let losses = 0;
+  for (const m of matches) {
+    if (m.won === true) wins++;
+    else if (m.won === false) losses++;
+  }
+  const decided = wins + losses;
+  return { wins, losses, decided, pct: decided > 0 ? Math.round((wins / decided) * 100) : null };
 }

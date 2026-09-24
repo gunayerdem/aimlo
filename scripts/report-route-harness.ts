@@ -71,6 +71,8 @@ export type FakeDb = {
   failWith?: { status: number; body: Record<string, unknown> } | null;
   /** Yapılan çağrılar ("GET" / "POST") — INSERT sayısı için. */
   calls: string[];
+  /** FB01 inceleme · F48: true → İLK INSERT satırı YAZAR ama 503 döner (yanıt yolda kayboldu). */
+  failFirstInsertAfterWrite?: boolean;
 };
 
 export const harness = {
@@ -134,6 +136,10 @@ async function fakeAnalyses(url: string, init: unknown): Promise<Response> {
     const id = typeof payload.id === "string" ? payload.id : `row-${db.rows.size + 1}`;
     if (db.rows.has(id)) return json({ code: "23505", message: "duplicate key value violates unique constraint" }, 409);
     db.rows.set(id, { ...payload, id });
+    if (db.failFirstInsertAfterWrite) {
+      db.failFirstInsertAfterWrite = false;
+      return json({ message: "harness: bağlantı koptu (satır yazıldı)" }, 503);
+    }
     return json({ id }, 201);
   }
   return json({ message: "harness: desteklenmeyen yöntem" }, 405);
