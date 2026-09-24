@@ -24,6 +24,11 @@
  *    (ölçülen: Swiftplay R8 "4 - 4" + R9 "?-?" result "won" → "Score: 4-4 (LOSS)",
  *    "Skoru 4 - 4 geride kapattın"). O şekil B05 öncesi gibi GEÇERSİZ (400).
  *    Numara okuma sırası validateRequest ile aynı: roundNumber (web) → round (desktop).
+ *  - FB01 · F90 (2026-09-24): okunamayan çift dizinin SON elemanıysa numaraya HİÇ
+ *    bakılmadan geçersiz (late_unreadable) — masaüstü sayacı OCR resync'iyle geri
+ *    sarılabildiği için (gunay-runtime.log:7159 → :7310 round=2) numarası küçük görünen
+ *    son round "geç teslim edilen erken round" sayılamaz. Numara kuralı yalnız ORTADAKİ
+ *    (son eleman olmayan) atlanan çift için geçerli.
  *  - Hiç geçerli çift yok ama 2-parçalı geçersiz dizi VARSA → eskisi gibi geçersiz
  *    (400 "Invalid score values"); uydurma 0-0 WIN/LOSS üretilmez.
  *  - Hiç skor alanı yoksa bugünkü 0-0 davranışı AYNEN.
@@ -87,7 +92,8 @@ function roundNumberOf(r: Record<string, unknown>): number | null {
  *      ships per-round score in the round entries but omits a match-level
  *      score field; we pull "yours-enemy" from the last round entry that
  *      has a NUMERIC "X-Y" score string (A058: "?-?" is skipped — ONLY when
- *      every skipped round is numbered strictly BELOW the selected one).
+ *      it is NOT the array's last element (F90) and every skipped round is
+ *      numbered strictly BELOW the selected one).
  */
 export function pickReportScore(rounds: unknown, score: unknown): PickedReportScore {
   let yours = "0";
@@ -110,6 +116,8 @@ export function pickReportScore(rounds: unknown, score: unknown): PickedReportSc
     let found = false;
     let selectedNum: number | null = null;
     const skippedNums: (number | null)[] = [];
+    // FB01 · F90: atlanan okunamayan çift dizinin SON elemanı mı (teslim sırasında en son)?
+    let lastElementSkipped = false;
     for (let i = rs.length - 1; i >= 0; i--) {
       const r = rs[i];
       if (r && typeof r === "object") {
@@ -130,16 +138,29 @@ export function pickReportScore(rounds: unknown, score: unknown): PickedReportSc
             }
             skippedInvalid++;
             skippedNums.push(roundNumberOf(rec));
+            if (i === rs.length - 1) lastElementSkipped = true;
           }
         }
       }
     }
     // 2-parçalı dizi vardı ama HİÇBİRİ sayısal değil → eskisi gibi geçersiz.
     if (sawPair && !found) return { ok: false };
-    // B05 inceleme: atlanan okunamayan round seçilenden SONRA (ya da sırası
-    // bilinemiyor) → seçilen skor maç sonu değil, bayat ara skor. Uydurma final
-    // yerine B05 öncesi davranış (400). Geç teslim edilen ERKEN round (numarası
-    // seçilenden küçük) atlanmaya devam eder.
+    // FB01 · F90 (2026-09-24): dizinin SON elemanı okunamayan bir çiftse (sondan ilk
+    // atlanan) round numarasına HİÇ bakılmaz → late_unreadable (9355dec / B05 öncesi
+    // davranış). KANIT: masaüstü sayacı OCR resync'iyle geri sarılabiliyor
+    // (gunay-runtime.log:7159 'round2c' → sayaç 19→1, :7310 round=2, :8061 round=22);
+    // numarası sıfırlanmış son round {round:1,'?-?'} "geç teslim edilen erken round"
+    // sanılıp R19'un '3 - 12' ara skoru final ilan ediliyordu. Dizi sırası = masaüstü
+    // MATCH_ROUNDS ekleme (teslim) sırası; SON eleman maçın en son teslim edilen round'u.
+    // D09+ masaüstü sondaki '?-?'yi POST'tan önce son geçerli skorla doldurduğu için bu
+    // dala girmez (yalnız eski istemci).
+    if (lastElementSkipped) {
+      return { ok: false, reason: "late_unreadable" };
+    }
+    // B05 inceleme: ORTADAKİ (son eleman olmayan) atlanan okunamayan round'un numarası
+    // seçilenden büyük/eşitse (ya da numarasızsa) → seçilen skor maç sonu değil, bayat
+    // ara skor → 400. Numarası seçilenden KÜÇÜK olan orta eleman (sonradan teslim
+    // edilmiş erken round) atlanmaya devam eder.
     if (
       skippedNums.length > 0 &&
       (selectedNum === null || skippedNums.some((n) => n === null || n >= selectedNum!))

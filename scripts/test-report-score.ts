@@ -33,10 +33,22 @@ async function main() {
     // B05 inceleme (2026-09-24): atlama YALNIZ geç teslim edilen ERKEN round için.
     // Masaüstü ocr_score maç içinde yapışkan (detection.rs:3372 dışında None'a
     // dönmüyor) → geç "?-?" pratikte ilk skor okunmadan önceki bir round'dur.
+    // FB01 · F90 (2026-09-24): dizinin SON elemanı okunamayan çiftse numaraya BAKILMAZ →
+    // late_unreadable (9355dec davranışı). Masaüstü sayacı OCR resync'iyle geri sarılabildiği
+    // için (gunay-runtime.log:7159 → :7310 round=2) küçük numara "geç teslim edilen erken
+    // round" kanıtı değildir. Numara kuralı yalnız ORTADAKİ (son eleman olmayan) çift için.
     const a = pick([{ round: 2, score: "5-3" }, { round: 1, score: "?-?" }]);
-    check("geç teslim edilen ERKEN round '?-?' (R1) + R2 '5-3' → 5-3", a.ok && a.yours === "5" && a.enemy === "3" && a.skippedInvalid === 1, show(a));
+    check("F90: SON eleman '?-?' (numarası R1, küçük) → geçersiz (numara yok sayılır)", !a.ok && (a as { reason?: string }).reason === "late_unreadable", show(a));
+    const f90 = pick([{ round: 19, score: "3 - 12" }, { round: 1, score: "?-?" }]);
+    check("F90: [R19 '3 - 12', {round:1,'?-?'}] → 400 (HEAD: ok 3-12 bayat ara skor final)", !f90.ok && (f90 as { reason?: string }).reason === "late_unreadable", show(f90));
+    const p4 = pick([{ round: 17, score: "3 - 11" }, { round: 18, score: "3 - 11" }, { round: 19, score: "3 - 12" }, { round: 2, score: "?-?" }]);
+    check("F90: sayaç 19→2 sarması (probe p4) → geçersiz", !p4.ok, show(p4));
     const b = pick([{ round: 5, score: "7-5" }, { round: 1, score: "?-?" }, { round: 2, score: " ? - ? " }]);
-    check("iki geç ERKEN okunamayan round → R5 7-5, skippedInvalid=2", b.ok && b.yours === "7" && b.enemy === "5" && b.skippedInvalid === 2, show(b));
+    check("iki okunamayan SON round → geçersiz (F90)", !b.ok && (b as { reason?: string }).reason === "late_unreadable", show(b));
+    const mid = pick([{ round: 2, score: "5-3" }, { round: 1, score: "?-?" }, { round: 3 }]);
+    check("ORTADAKİ geç ERKEN '?-?' (R1 < R2) + skorsuz son round → 5-3 (numara kuralı korunur)", mid.ok && mid.yours === "5" && mid.enemy === "3" && mid.skippedInvalid === 1, show(mid));
+    const midLate = pick([{ round: 1, score: "1-0" }, { round: 3, score: "?-?" }, { round: 4 }]);
+    check("ORTADAKİ '?-?' numarası seçilenden BÜYÜK → geçersiz (numara kuralı korunur)", !midLate.ok, show(midLate));
     const late = pick([{ round: 1, score: "1-0" }, { round: 2, score: "1-1" }, { round: 3, score: "?-?" }]);
     check("SON round (R3) '?-?' → geçersiz (bayat 1-1 final ilan edilmez)", !late.ok && (late as { reason?: string }).reason === "late_unreadable", show(late));
     const unnumbered = pick([{ score: "5-3" }, { score: "?-?" }]);
@@ -51,9 +63,11 @@ async function main() {
       { round: 3, score: "2 - 1", result: "win" },
       { round: 1, score: "?-?", result: "loss" },
     ]);
-    check("gerçekçi: R1..R3 + geç R1 '?-?' → '2 - 1'", realistic.ok && realistic.yours === "2" && realistic.enemy === "1" && realistic.skippedInvalid === 1, show(realistic));
-    const webNum = pick([{ roundNumber: 4, score: "3-1" }, { roundNumber: 2, score: "?-?" }]);
-    check("web 'roundNumber' alanı da okunur (validateRequest ile aynı sıra)", webNum.ok && webNum.yours === "3", show(webNum));
+    check("R1..R3 + SON eleman geç R1 '?-?' → geçersiz (F90; ayrım yalnız numarayla yapılamaz)", !realistic.ok, show(realistic));
+    const webNum = pick([{ roundNumber: 4, score: "3-1" }, { roundNumber: 2, score: "?-?" }, { roundNumber: 5 }]);
+    check("web 'roundNumber' alanı da okunur (validateRequest ile aynı sıra) — ortadaki R2 < R4", webNum.ok && webNum.yours === "3", show(webNum));
+    const webNumLate = pick([{ roundNumber: 4, score: "3-1" }, { roundNumber: 6, score: "?-?" }, { roundNumber: 7 }]);
+    check("web 'roundNumber': ortadaki R6 > R4 → geçersiz", !webNumLate.ok, show(webNumLate));
     const swift: Record<string, unknown>[] = ["1 - 0", "1 - 1", "2 - 1", "2 - 2", "3 - 2", "3 - 3", "4 - 3", "4 - 4"]
       .map((s, i) => ({ round: i + 1, score: s, result: i % 2 === 0 ? "win" : "loss" }));
     swift.push({ round: 9, score: "?-?", result: "won" });
@@ -83,8 +97,10 @@ async function main() {
     check("geçersiz üst-seviye nesne → geçersiz (round'a düşmez, değişmedi)", !k.ok, show(k));
     const l = pick([{ score: "5-3" }], "?-?");
     check("geçersiz üst-seviye dize → geçersiz (round'a düşmez, değişmedi)", !l.ok, show(l));
-    const m = pick([{ round: 2, score: "5-3" }, { round: 1, score: "41-3" }]);
-    check("aralık dışı (41) geç ERKEN çift atlanır → 5-3", m.ok && m.yours === "5" && m.enemy === "3", show(m));
+    const m = pick([{ round: 2, score: "5-3" }, { round: 1, score: "41-3" }, { round: 3 }]);
+    check("aralık dışı (41) ORTADAKİ geç ERKEN çift atlanır → 5-3", m.ok && m.yours === "5" && m.enemy === "3", show(m));
+    const mLast = pick([{ round: 2, score: "5-3" }, { round: 1, score: "41-3" }]);
+    check("aralık dışı (41) SON eleman → geçersiz (F90)", !mLast.ok, show(mLast));
     const mLate = pick([{ round: 1, score: "5-3" }, { round: 2, score: "41-3" }]);
     check("aralık dışı (41) SONRAKİ round → geçersiz", !mLate.ok, show(mLate));
     const n = pick([{ score: "5-3" }, { score: "" }, { score: "dizi" }]);
@@ -95,8 +111,8 @@ async function main() {
     check("isValidScoreValue: '', '1e1', '0x1', '3.0', '+5', ' 5' geçersiz; '05' geçerli",
       !isValidScoreValue("") && !isValidScoreValue("1e1") && !isValidScoreValue("0x1") && !isValidScoreValue("3.0")
         && !isValidScoreValue("+5") && !isValidScoreValue(" 5") && isValidScoreValue("05"));
-    const blank = pick([{ round: 2, score: "5-3" }, { round: 1, score: " - " }]);
-    check("geç ERKEN ' - ' çifti atlanır → 5-3 (HEAD: yours='' → 'Skor:  - ')", blank.ok && blank.yours === "5" && blank.enemy === "3" && blank.skippedInvalid === 1, show(blank));
+    const blank = pick([{ round: 2, score: "5-3" }, { round: 1, score: " - " }, { round: 3 }]);
+    check("ORTADAKİ geç ERKEN ' - ' çifti atlanır → 5-3 (B05 öncesi: yours='' → 'Skor:  - ')", blank.ok && blank.yours === "5" && blank.enemy === "3" && blank.skippedInvalid === 1, show(blank));
     const blankLate = pick([{ round: 1, score: "5-3" }, { round: 2, score: " - " }]);
     check("SONRAKİ round ' - ' → geçersiz (boş skor final olmaz)", !blankLate.ok, show(blankLate));
     const sci = pick([{ round: 1, score: "1e1-2" }]);
@@ -127,7 +143,7 @@ async function main() {
     check("bilinen auth reddi auth.response ile AYNEN geçer (401 sözleşmesi)", res.status === 401 && body?.error === "Invalid or expired token", `got=${res.status} ${show(body)}`);
   }
 
-  console.log("\n── 3) Route — geç ERKEN '?-?' raporu düşürmez; SON round '?-?' bayat skoru final yapmaz (A058) ──");
+  console.log("\n── 3) Route — ORTADAKİ geç ERKEN '?-?' raporu düşürmez; SON round '?-?' bayat skoru final yapmaz (A058 + F90) ──");
   {
     resetHarness();
     delete process.env.OPENAI_API_KEY; // deterministik yol — AI çağrısı YOK
@@ -136,16 +152,21 @@ async function main() {
         { round: 1, score: "0 - 1", result: "loss", died: true, deathLocation: "A Main", deathAnalysis: "", enemyAnalysis: [], nextRoundSuggestion: "" },
         { round: 2, score: "1 - 1", result: "win", died: false, deathAnalysis: "", enemyAnalysis: [], nextRoundSuggestion: "" },
         { round: 3, score: "2 - 1", result: "win", died: false, deathAnalysis: "", enemyAnalysis: [], nextRoundSuggestion: "" },
-        // geç teslim edilen ERKEN round (ilk skor okunmadan önceki snapshot)
+        // SON eleman: numarası küçük (R1) '?-?' — F90: numara yok sayılır
         { round: 1, score: "?-?", result: "loss", died: true, deathAnalysis: "", enemyAnalysis: [], nextRoundSuggestion: "" },
       ],
       maxTokens: 800, lang: "tr", map: "ascent", agent: "jett", side: "attacking",
     };
     const res = await route.POST(reportRequest(desktopFlat));
     const body = await res.json().catch(() => ({}));
-    check("geç ERKEN '?-?' → statü 200 (B05 öncesi: 400 Invalid score values)", res.status === 200, `got=${res.status} ${show(body).slice(0, 160)}`);
-    check("scoreStr = en son okunan skor '2 - 1' (uydurma yok), matchWon=true", body?.scoreStr === "2 - 1" && body?.matchWon === true, `got=${body?.scoreStr} won=${body?.matchWon}`);
-    check("aiGenerated=false (anahtar yok → şablon, dürüst bayrak)", body?.aiGenerated === false);
+    check("SON eleman geç R1 '?-?' → 400 (F90; 9355dec davranışı)", res.status === 400 && body?.error === "Invalid score values", `got=${res.status} ${show(body).slice(0, 160)}`);
+    resetHarness();
+    const midFlat = { ...desktopFlat, rounds: [...desktopFlat.rounds, { round: 4, result: "unknown", died: true }] };
+    const resMid = await route.POST(reportRequest(midFlat));
+    const bodyMid = await resMid.json().catch(() => ({}));
+    check("ORTADAKİ geç R1 '?-?' + skorsuz son round → 200", resMid.status === 200, `got=${resMid.status} ${show(bodyMid).slice(0, 160)}`);
+    check("scoreStr = en son okunan skor '2 - 1' (uydurma yok), matchWon=true (mod yok → bugünkü kural)", bodyMid?.scoreStr === "2 - 1" && bodyMid?.matchWon === true, `got=${bodyMid?.scoreStr} won=${bodyMid?.matchWon}`);
+    check("aiGenerated=false (anahtar yok → şablon, dürüst bayrak)", bodyMid?.aiGenerated === false);
     check("fetch hiç çağrılmadı", harness.fetchCalls.length === 0);
   }
   {
