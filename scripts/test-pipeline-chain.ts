@@ -684,7 +684,9 @@ console.log("\n[FB05 · F14] 4 gerçek raw: bu round'un konum iddiası ölçüle
       (o) => o.startsWith("Bu round Mid Bottom'da ve diğerlerde de sık öldün — bir sonraki savunmada") && !/B Main/.test(o)],
     ["r4c M1-R8 NR", "M1-R8-ascent-jett",
       "Bu round B Main'de 2, genel olarak son 6 round'da hep öldün; savunmada mid bottom/özellikle B yönlerine tek başına açı verme — birini yanına çek, crossfire kur ve pozisyonunu yüksekliğe veya zıt köşeye değiştir.",
-      (o) => o.startsWith("Bu round Mid Bottom'da 2, genel olarak son 6 round'da hep öldün;") && !/B Main/.test(o)],
+      // FB05 inceleme (low): eski beklenti "Mid Bottom'da 2, …" doğrulanmamış SAYIYI ölçülen konuma
+      // bağlıyordu (tek round'da iki ölüm iddiası). BİLİNÇLİ düzeltildi: sayı da düşer.
+      (o) => o.startsWith("Bu round Mid Bottom'da, genel olarak son 6 round'da hep öldün;") && !/B Main/.test(o) && !/Mid Bottom'da 2/.test(o)],
     ["luna-default M1-R12 NR", "M1-R12-ascent-jett",
       "B Site'a tek başına yapışma; B Main'de 2 kez öldüğün için bu round Market tarafında takımınla crossfire kur ve ilk temastan sonra dash'le geri çekil. Böylece B Main baskısını siper arkasından karşılar, site'ı tek açıya bırakmazsın.",
       (o) => o.includes("R5'te B Main'de öldüğün için bu round Market tarafında takımınla crossfire kur")],

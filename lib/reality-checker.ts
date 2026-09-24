@@ -2997,7 +2997,8 @@ export function neutralizeUnprovenLocations(
 // İkame hâle uyar: bulunma "o açıda", -deki "o açıdaki", ayrılma "o açıdan" (yan-cümlede "açı"
 // varsa "o nokta…"). Silme yok; ders ve cümle aynen kalır.
 const LOC_CLAUSE_CALLOUT_RE = new RegExp(
-  `(?<![\\p{L}\\p{N}_-])(?<!(?:${LOC_HEAD_ALT})\\s)(${LOC_ALT})`
+  // FB05 inceleme (medium): iç lookbehind'da sol kelime sınırı (DEATH_BIND_TR_RE notu).
+  `(?<![\\p{L}\\p{N}_-])(?<!(?<![\\p{L}\\p{N}])(?:${LOC_HEAD_ALT})\\s)(${LOC_ALT})`
   + `((?:\\s*['’]\\s*)?(?:d[ae]n|t[ae]n|d[ae]ki|t[ae]ki|d[ae]|t[ae])|\\s+${LOC_POSTP})(?![\\p{L}\\p{N}_-])`
   // "de/da" bağlacı ("mid'de de") ikameyle birlikte ünlü uyumuna çekilir ("o açıda da") —
   // ilk sürüm "o açıda de" üretiyordu (korpus cycleb09-base-real M1-R9, cyclereal-r3c M1-R4).
@@ -3008,6 +3009,8 @@ const LOC_CLAUSE_CALLOUT_RE = new RegExp(
  *  bir bölgede", "A Main'den sonra") — korpus cycleab-luna-none2 M1-R9 EA0 ilk sürümde
  *  "o açıdan farklı bir bölgede" oluyordu. */
 const ABL_NON_LOC_AFTER_RE = /^\s+(?:farklı|başka|ayrı|uzak|önce|sonra|itibaren|beri)(?![\p{L}])/iu;
+/** "<callout> veya " / "<callout> ya da " — ardından gelen callout bir listenin üyesidir. */
+const LOC_OR_LIST_PREV_RE = new RegExp(`(?<![\\p{L}\\p{N}_-])(?:${LOC_ALT})(?:\\s*['’]\\s*\\p{L}{1,3})?\\s+(?:veya|ya\\s+da)\\s+$`, "iu");
 /** Yan-cümle sınırı olan bağlaçlar ("veya/ya da" bilerek yok — bkz. (d)). */
 const LOC_CLAUSE_CONJ_RE = /\s(ve|ama|fakat|ancak|çünkü|zira|yoksa|ise|ki)\s/giu;
 /** Ünsüz uyumlu -dI(n) sonu: ünlüden sonra d (bekle-di), sert ünsüzden sonra t (çık-tı),
@@ -3058,6 +3061,26 @@ function clauseHasIndicative(clause: string): boolean {
   if (!last || PAST_WORD_STOP.has(last)) return false;
   return INDICATIVE_FINAL_RE.test(last);
 }
+/** FB05 inceleme · F52 (low): "-yor/var" yüklemi TAHMİN ya da ALIŞKANLIK bildirebilir — bu round'un
+ *  ölüm olgusu değil. KANIT (probe, konum yok): "Rakip A Main'de seni bekliyor, o yüzden smoke at"
+ *  → "Rakip o açıda seni bekliyor, …"; "Jett genelde A Main'den seni peek'liyor; drone'la bilgi
+ *  al"; "Heaven'dan seni gören Operator'cü var, oraya smoke at" → plan referansını kaybediyordu.
+ *  Kural: (i) yan-cümlede alışkanlık işareti (genelde, her round, sürekli, hep…) ya da "olabilir";
+ *  (ii) şimdiki zaman/var yüklemi + AYNI cümlede ardından öğüt bağlacı ("o/bu yüzden", "oraya",
+ *  "orayı", "oradan") → dokunma. Geçmiş zaman (-dı/-dın) anlatımı ve tek başına şimdiki zaman
+ *  anlatımı ("Rakip seni A Tree köşesinden vuruyor.") eskisi gibi nötrlenir. */
+const CLAUSE_HABIT_RE = /(?<![\p{L}])(?:genel(?:de|likle)|her\s+(?:round|raund|tur|seferinde|zaman)|sürekli|hep|çoğu\s+zaman|sık\s+sık|olabilir)(?![\p{L}])/iu;
+const PRESENT_FINAL_RE = /(?:[ıiuü]yor(?:lar)?|^var)$/iu;
+const ADVICE_AFTER_RE = /(?<![\p{L}])(?:o\s+yüzden|bu\s+yüzden|bu\s+nedenle|bu\s+sebeple|oraya|orayı|oradan)(?![\p{L}])/iu;
+function isPredictionOrHabitClause(full: string, clause: string, ce: number): boolean {
+  if (CLAUSE_HABIT_RE.test(clause)) return true;
+  const t = clause.trim().replace(/[\s"'’”)\]]+$/u, "");
+  const last = (/([\p{L}'’]+)$/u.exec(t)?.[1] ?? "").toLocaleLowerCase("tr").replace(/^.*['’]/u, "");
+  if (!PRESENT_FINAL_RE.test(last)) return false;
+  const rel = full.slice(ce).search(/[.!?\n]/);
+  const sentenceRest = full.slice(ce, rel < 0 ? full.length : ce + rel);
+  return ADVICE_AFTER_RE.test(sentenceRest);
+}
 export function neutralizeUnprovenLocationClauses(
   text: string,
   supplied: ReadonlySet<string>,
@@ -3073,14 +3096,22 @@ export function neutralizeUnprovenLocationClauses(
     // Liste üyesi ("B Main/Mid'deki tekrarları…") tek başına bu round iddiası değil — korpus
     // cycleb06-parity-real M1-R11 EA1 ilk sürümde "B Main/o noktadaki" oluyordu.
     if (/\/\s*$/.test(full.slice(0, offset))) return whole;
+    // FB05 inceleme: "<callout> veya/ya da <callout>'de" de liste — lookbehind düzeltmesi "veya"
+    // (a ile biter) arkasındaki adı görünür yaptı; korpus cyclefb03-base-realp M0-R0 "A Site veya
+    // Mid'de … bekledin" → "A Site veya o noktada" (yarım nötrleme) üretiyordu.
+    if (LOC_OR_LIST_PREV_RE.test(full.slice(0, offset))) return whole;
     if (locCase(suffix) === "abl" && ABL_NON_LOC_AFTER_RE.test(full.slice(end - (clitic ?? "").length))) return whole;
-    if (historyAnchorAt(full, offset, end) === "past") return whole;        // (e) geçmişe çapalı
+    // (e) geçmişe çapalı ad yalnız o geçmişte ÖLÇÜLMÜŞSE muaf (F83 round kuralı, historyExempt).
+    // FB05 inceleme (low): eskiden "past" çapası KOŞULSUZ dönüyordu → "R3'te B Site'tan seni
+    // vurdular" (R3 = a tree) ve "Daha önce Market'ten seni vurdular" (Market hiç ölçülmedi)
+    // aynen geçiyordu; eski geçiş/F83 aynı iddiayı ("R3'te B Site'ta öldün") nötrlüyordu.
     if (historyExempt(key, history, anchoredBefore, full, offset, end, historyRounds)) return whole;
     const { cs, ce, kiClause } = locClauseBounds(full, offset, end);
     if (kiClause) return whole;                                             // (a) "ki …" yan-cümlesi
     const clause = full.slice(cs, ce);
     if (NEXT_ROUND_RE.test(clause)) return whole;                          // (a) sonraki round planı
     if (!clauseHasAnchor(clause) || !clauseHasIndicative(clause)) return whole;   // (b) + (a)
+    if (isPredictionOrHabitClause(full, clause, ce)) return whole;         // FB05 inceleme: tahmin/öğüt
     let base = neutralBase(locCase(suffix), /açı/i.test(full.slice(end, ce)));
     const atStart = offset === 0 || /[.!?]\s+$/.test(full.slice(0, offset));
     if (atStart) base = base.charAt(0).toLocaleUpperCase("tr-TR") + base.slice(1);
@@ -3185,8 +3216,12 @@ export function neutralizeUnprovenLocationsEn(
 //   • bir listenin parçası değilse ("B Main/B Lobby'de") ve bağlanan aralıkta başka callout yoksa
 // → ölçülen konumla değiştirilir (tabloda kanonikse; TR trLocative ile ek uyumu), değilse
 // "o noktada" / "there" ile nötrlenir. Silme yok: ders ve cümle aynen kalır.
+// FB05 inceleme (medium): iç lookbehind'da SOL KELİME SINIRI — eskiden "(?<!(?:a|b|…)\s)"
+// a/b/c/t ile BİTEN her kelimeden sonraki callout'u görünmez yapıyordu ("Bu round'da B Main'de
+// öldün", "Tek başına A Tree'de", "Savunmada B Main'de"); korpusta TR "<callout>'de … öldün"
+// yapılarının ~%17'si. Artık yalnız bileşik callout'un KENDİ baş kelimesi ("a", "b"…) engeller.
 const DEATH_BIND_TR_RE = new RegExp(
-  `(?<![\\p{L}\\p{N}_-])(?<!(?:${LOC_HEAD_ALT})\\s)(${LOC_ALT})(\\s*['’]?\\s*(?:d[ae]|t[ae]))(?![\\p{L}\\p{N}_-])`
+  `(?<![\\p{L}\\p{N}_-])(?<!(?<![\\p{L}\\p{N}])(?:${LOC_HEAD_ALT})\\s)(${LOC_ALT})(\\s*['’]?\\s*(?:d[ae]|t[ae]))(?![\\p{L}\\p{N}_-])`
   + `(\\s[^.,!?;:—\\n]{0,30}?|\\s+\\d+\\s*,[^.!?;:—\\n]{0,60}?\\s)(öldün|öldüğün[\\p{L}]*|vuruldun)(?![\\p{L}])`,
   "giu",
 );
@@ -3196,6 +3231,49 @@ const DEATH_BIND_EN_RE = new RegExp(
 );
 /** Ring-yerel ek geçmiş çapaları (LOC_PAST_ANCHOR_RE'nin kapsamadığı tekil biçimler). */
 const DEATH_BIND_PAST_EXTRA_RE = /(?<![\p{L}])(?:önceki|geçen|recently|son\s+zamanlarda)(?![\p{L}])/iu;
+/** FB05 inceleme · F14 (high): TEKRAR / ALIŞKANLIK / ZAMANDA GERİ GÖNDERME işaretleri. Bunlardan
+ *  biri callout'un yan-cümlesindeyse iddia BU round'un olgusu değil, geçmiş/örüntü iddiasıdır →
+ *  halka DOKUNMAZ. KANIT (prod zinciri, Ascent, hafıza R2/R4/R5 = b main, ölçülen 'a site'):
+ *  "Sürekli B Main'de öldün" → "Sürekli A Site'ta öldün", "B Main'de üst üste öldün" → "A Site'ta
+ *  üst üste öldün", "İlk round B Main'de öldün", EN "You always died at B Main" / "…again" →
+ *  hepsi ölçülen konuma çevrilip OCR'da OLMAYAN bir tekrar ölüm olgusu üretiyordu.
+ *  ("yine/tekrar" LOC_PAST_ANCHOR_RE'de BİLEREK yok — orası ölçülmemiş konum muafiyeti; burada
+ *  ise ölçülen konuma ÇEVİRMEK tekrar iddiasını uydururdu.) Türkçe-\b tuzağı: \p{L} lookaround. */
+const DEATH_BIND_HABIT_RE = new RegExp(
+  "(?<![\\p{L}\\p{N}])(?:sürekli|hep|hepsinde|üst\\s+üste|tekrar(?:dan)?|yine|gene|defalarca|genel(?:de|likle|\\s+olarak)"
+  + "|her\\s+(?:seferinde|defasında|round(?:da)?|raund(?:da)?|tur(?:da)?|zaman)|çoğu\\s+zaman|sık\\s+sık|bir\\s+(?:kez|kere|defa)\\s+daha"
+  + "|(?:[iİ]lk|[iİ]kinci|üçüncü)\\s+(?:round|raund|tur)|pistol(?:\\s+round)?|geçen\\s+sefer"
+  + "|again|always|kept|every\\s+time|each\\s+time|repeatedly|constantly|usually|often|typically"
+  + "|(?:first|opening|second|pistol)\\s+round|last\\s+time|early\\s+(?:in\\s+the\\s+(?:match|game|half)|on))(?![\\p{L}\\p{N}])",
+  "iu",
+);
+/** "…'de öldüğün round'da …" — sıfat-fiil bir BAŞKA round'a gönderme yapar (geri gönderme). */
+const DEATH_BIND_REL_ROUND_RE = /^\s+(?:round|raund|tur)/iu;
+/** FB05 inceleme (low): ölçülen konum tabloda KANONİK değilse (ham OCR varyantı: 'a hail',
+ *  'a ramps') modelin DOĞRU callout'u ('A Hall') "çelişki" sayılıp "o noktada"ya düşüyordu.
+ *  Aynı site harfi / baş kelime + son kelime düzenleme mesafesi ≤ 2 → aynı yer, dokunma. */
+function editDistance(a: string, b: string): number {
+  const d: number[] = Array.from({ length: b.length + 1 }, (_, j) => j);
+  for (let i = 1; i <= a.length; i++) {
+    let prev = d[0];
+    d[0] = i;
+    for (let j = 1; j <= b.length; j++) {
+      const tmp = d[j];
+      d[j] = Math.min(d[j] + 1, d[j - 1] + 1, prev + (a[i - 1] === b[j - 1] ? 0 : 1));
+      prev = tmp;
+    }
+  }
+  return d[b.length];
+}
+function ocrVariantOf(name: string, measured: string): boolean {
+  const wn = name.trim().toLowerCase().split(/\s+/);
+  const wm = measured.trim().toLowerCase().split(/\s+/);
+  if (wn.length !== wm.length) return false;
+  for (let i = 0; i < wn.length - 1; i++) if (wn[i] !== wm[i]) return false;
+  return editDistance(wn[wn.length - 1], wm[wm.length - 1]) <= 2;
+}
+/** Türkçe'ye özgü harf taşıyan kanonik ad EN metne yazılmaz ("Market Kapısı", "Arka Bahçe"). */
+const TR_SPECIFIC_CHAR_RE = /[çğıöşüâîûİ]/iu;
 const LOC_ALT_ANY_RE = new RegExp(`(?<![\\p{L}\\p{N}_-])(?:${LOC_ALT})(?![\\p{L}\\p{N}_-])`, "iu");
 /** "a site" → "A Site", "mid bottom" → "Mid Bottom" (site harfi / ct büyük). */
 function calloutDisplay(loc: string): string {
@@ -3218,24 +3296,38 @@ function correctContradictedDeathLocation(
     let ce = to;
     while (ce < full.length && !/[.,!?;:—\n]/.test(full[ce])) ce++;
     const seg = full.slice(cs, ce);
-    return new RegExp(LOC_PAST_ANCHOR_RE.source, "iu").test(seg) || DEATH_BIND_PAST_EXTRA_RE.test(seg);
+    return new RegExp(LOC_PAST_ANCHOR_RE.source, "iu").test(seg) || DEATH_BIND_PAST_EXTRA_RE.test(seg)
+      || DEATH_BIND_HABIT_RE.test(seg);                     // FB05 inceleme · F14: tekrar/alışkanlık
   };
   const eligible = (name: string, offset: number, full: string) => {
     const key = name.trim().toLowerCase().replace(/\s+/g, " ");
     if (currentLocs.has(key) || !table.includes(key) || nested(key, measured)) return false;
+    if (!canonical && ocrVariantOf(key, measured)) return false;   // ölçülen ham OCR varyantı = aynı yer
     return !/\/\s*$/.test(full.slice(0, offset));          // liste parçası değil
   };
   let out = text;
   if (lang !== "en") {
     out = out.replace(DEATH_BIND_TR_RE, (whole: string, name: string, _suf: string, mid: string, verb: string, offset: number, full: string) => {
       if (!eligible(name, offset, full) || /^\s*\//.test(mid) || LOC_ALT_ANY_RE.test(mid)) return whole;
+      // FB05 inceleme · F14: "…'de öldüğün round'da" başka bir round'a gönderme → dokunma.
+      if (/^öldüğün/iu.test(verb) && DEATH_BIND_REL_ROUND_RE.test(full.slice(offset + whole.length))) return whole;
+      const numFrag = /^\s+\d+\s*,/.test(mid);
       // Fiilsiz "<sayı>," parçasında çapa yalnız callout'un KENDİ parçasında aranır.
-      const fragComma = /^\s+\d+\s*,/.test(mid) ? offset + name.length + _suf.length + mid.indexOf(",") : offset + whole.length;
+      const fragComma = numFrag ? offset + name.length + _suf.length + mid.indexOf(",") : offset + whole.length;
       if (pastAnchored(full, offset, fragComma)) return whole;
+      // FB05 inceleme · F14 + r4c: "<callout>'de <sayı>," parçası bir SAYIMI konuma bağlar; açık
+      // "bu round / şimdi / az önce" çapası yoksa bu round iddiası sayılmaz (dokunma). Çapa varsa
+      // callout düzeltilir ve doğrulanmamış SAYI da düşer ("Bu round Mid Bottom'da 2, …" üretilmez).
+      if (numFrag) {
+        let fs0 = offset;
+        while (fs0 > 0 && !/[.,!?;:—\n]/.test(full[fs0 - 1])) fs0--;
+        if (!new RegExp(LOC_CURRENT_ANCHOR_RE.source, "iu").test(full.slice(fs0, fragComma))) return whole;
+      }
+      const midOut = numFrag ? mid.slice(mid.indexOf(",")) : mid;
       const atStart = offset === 0 || /[.!?]\s+$/.test(full.slice(0, offset));
       let head = canonical ? trLocative(calloutDisplay(measured)) : "o noktada";
       if (!canonical && atStart) head = "O noktada";
-      return head + mid + verb;
+      return head + midOut + verb;
     });
   }
   if (lang !== "tr") {
@@ -3243,7 +3335,8 @@ function correctContradictedDeathLocation(
       if (!/^\p{Lu}/u.test(name)) return whole;                  // EN'de çıplak küçük ad gündelik kelime
       const at = offset + whole.length - name.length;
       if (!eligible(name, at, full) || pastAnchored(full, offset, offset + whole.length)) return whole;
-      return canonical ? `${verb} ${prep} ${calloutDisplay(measured)}` : `${verb} there`;
+      // FB05 inceleme (low): Türkçe harfli kanonik ad ("Market Kapısı") EN metne yazılmaz.
+      return canonical && !TR_SPECIFIC_CHAR_RE.test(measured) ? `${verb} ${prep} ${calloutDisplay(measured)}` : `${verb} there`;
     });
   }
   return out;

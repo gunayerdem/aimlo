@@ -1746,6 +1746,10 @@ const TR_LOCATIVE_EXCEPTIONS: Record<string, string> = {
   bind: "da", icebox: "ta", abyss: "te", site: "ta", showers: "ta",
   hookah: "da", pearl: "de", corrode: "da", fracture: "da", haven: "da",
   cave: "de", garage: "da", spike: "ta",
+  // FB05 inceleme (low) + FB01 inceleme · F89: okunuşa/iyeliğe uyan ekler — "Market Kapısı'nda"
+  // (iyelikli bileşik, kaynaştırma -n-; eskiden "Kapısı'da"), "CT'de" (se-te okunuşu; eskiden
+  // "CT'te"), "B Lobby'de" ("lobi"; eskiden "Lobby'da" — KB de "lobby'de" yazıyor).
+  "kapısı": "nda", ct: "de", lobby: "de",
 };
 
 // ── TANI-ETİKETİ + KB-BAŞLIĞI SOYUCU (TR-KALAN-07 sınır savunması, 2026-09-23) ──

@@ -967,6 +967,71 @@ console.log("\n════ FB05 · F83 · GEÇMİŞ KONUM MUAFİYETİ ROUND'A B
   same("117f hasDeathLocation:true yolu bayt-aynı", rc(c117f, "tr", { hasDeathLocation: true, deathLocation: "a site" } as never), c117f);
 }
 
+console.log("\n════ FB05 inceleme · F14 tekrar/alışkanlık · lookbehind · OCR varyantı · ek/EN · F52 geçmiş + tahmin ════");
+{
+  // Ascent; hafıza R2/R4/R5 = b main (high); bu round ölçülen a site. HEAD (f797729+): (1)'deki
+  // doğru tekrar/alışkanlık cümlelerinin HEPSİ ölçülen konuma çevriliyordu ("Sürekli A Site'ta
+  // öldün", "You always died at A Site") → OCR'da olmayan tekrar ölüm olgusu.
+  const fgA = { hasDeathLocation: true, deathLocation: "a site" } as never;
+  const m5: Mem[] = [1, 2, 3, 4, 5].map((i) => (i === 2 || i === 4 || i === 5
+    ? { round_index: i, died: true, death_position: "b main", position_confidence: "high" }
+    : { round_index: i, died: false }));
+  const rc = (s: string, lang: "tr" | "en" = "tr", fg: never = fgA, map = "Ascent", m: Mem[] = m5, kind: "death" | "suggestion" = "death") =>
+    realityCheck(s, m as never, fg, kind, lang, map).text;
+  for (const [ad, s, lang] of [
+    ["140a 'Sürekli'", "Sürekli B Main'de öldün.", "tr"],
+    ["140b 'Hep …; B Main'i bırak'", "Hep B Main'de öldün; B Main'i bırak.", "tr"],
+    ["140c 'üst üste'", "B Main'de üst üste öldün, bu round farklı açı al.", "tr"],
+    ["140d 'Genelde'", "Genelde B Main'de öldün.", "tr"],
+    ["140e 'Her seferinde'", "Her seferinde B Main'de öldün.", "tr"],
+    ["140f 'öldüğün round'da' (başka round'a gönderme)", "B Main'de öldüğün round'da da aynı hatayı yaptın.", "tr"],
+    ["140g 'İlk round' (Türkçe-İ tuzağı)", "İlk round B Main'de öldün.", "tr"],
+    ["140h 'Savunmada … üst üste öldüğün' (lookbehind açıldı, alışkanlık korur)", "Savunmada B Main'de üst üste öldüğün için açını değiştir.", "tr"],
+    ["140i EN 'always'", "You always died at B Main.", "en"],
+    ["140j EN 'again'", "You died at B Main again.", "en"],
+    ["140k EN 'Early in the match'", "Early in the match you died at B Main.", "en"],
+  ] as [string, string, "tr" | "en"][]) same(`${ad} bayt-aynı`, rc(s, lang), s);
+  // "<callout>'de <sayı>," açık "bu round" çapası YOKSA bu round iddiası değil (sayım yolu ele alır).
+  const o130l = rc("B Main'de 3, genel olarak son 6 round'da hep öldün.");
+  t("140l '<sayı>,' çapasız → konum ölçülene ÇEVRİLMEZ ('A Site'ta 3' yok)", o130l.startsWith("B Main'de 3,") && !/A Site/.test(o130l), `→ "${o130l}"`);
+  // (2) lookbehind: a/b/c/t ile biten kelimeden sonraki callout artık görünür.
+  eq("141 'Bu round'da B Main'de öldün' → ölçülen konum (HEAD: bayt-aynı geçiyordu)", rc("Bu round'da B Main'de öldün."), "Bu round'da A Site'ta öldün.");
+  eq("141b sade 'Bu round B Main'de öldün' aynen düzelir", rc("Bu round B Main'de öldün."), "Bu round A Site'ta öldün.");
+  // (3) ölçülen konum ham OCR varyantı ('a hail' ~ 'a hall') → modelin doğru adı KALIR; farklı ad hâlâ nötr.
+  const fgHail = { hasDeathLocation: true, deathLocation: "a hail" } as never;
+  same("142a 'a hail' ölçülü + 'A Hall'da öldün' (Fracture) bayt-aynı (HEAD: 'O noktada öldün')", rc("A Hall'da öldün.", "tr", fgHail, "Fracture"), "A Hall'da öldün.");
+  same("142b EN 'You died at A Hall' bayt-aynı (HEAD: 'You died there')", rc("You died at A Hall.", "en", fgHail, "Fracture"), "You died at A Hall.");
+  eq("142c farklı callout ('B Main') hâlâ nötrlenir", rc("B Main'de öldün.", "tr", fgHail, "Fracture"), "O noktada öldün.");
+  // (4) halkanın yazdığı ek / EN metin.
+  eq("143a ölçülen 'market kapısı' → \"Market Kapısı'nda\" (HEAD: \"Kapısı'da\")",
+    rc("Bu round B Main'de öldün.", "tr", { hasDeathLocation: true, deathLocation: "market kapısı" } as never), "Bu round Market Kapısı'nda öldün.");
+  eq("143b ölçülen 'ct' → \"CT'de\" (HEAD: \"CT'te\")",
+    rc("Bu round B Main'de öldün.", "tr", { hasDeathLocation: true, deathLocation: "ct" } as never), "Bu round CT'de öldün.");
+  eq("143c EN + Türkçe harfli kanonik ad → 'there' (HEAD: 'at Market Kapısı')",
+    rc("You died at B Main this round.", "en", { hasDeathLocation: true, deathLocation: "market kapısı" } as never), "You died there this round.");
+  // (5) F52: geçmiş çapası yalnız o round'un ÖLÇÜLMÜŞ konumuyla muaf (F83 kuralı).
+  const noLoc = { hasDeathLocation: false } as never;
+  const rh13: Mem[] = [
+    { round_index: 1, died: true, death_position: "b site", position_confidence: "high" },
+    { round_index: 3, died: true, death_position: "a tree", position_confidence: "high" },
+  ];
+  eq("144a 'R3'te B Site'tan seni vurdular' (R3 = a tree) → nötr (HEAD: bayt-aynı)", rc("R3'te B Site'tan seni vurdular.", "tr", noLoc, "Ascent", rh13), "R3'te o açıdan seni vurdular.");
+  eq("144b 'Daha önce Market'ten seni vurdular' (hiç ölçülmedi) → nötr", rc("Daha önce Market'ten seni vurdular.", "tr", noLoc, "Ascent", rh13), "Daha önce o açıdan seni vurdular.");
+  same("144c doğru round-konum 'R1'de B Site'tan seni vurdular' bayt-aynı", rc("R1'de B Site'tan seni vurdular.", "tr", noLoc, "Ascent", rh13), "R1'de B Site'tan seni vurdular.");
+  eq("144d lookbehind: 'Bu round'da A Tree'de … çıktın' → nötr (HEAD: bayt-aynı)",
+    rc("Bu round'da A Tree'de siperin yanında beklemeden açıya çıktın.", "tr", noLoc, "Ascent", [{ round_index: 3, died: true, death_position: "a tree", position_confidence: "high" }]),
+    "Bu round'da o noktada siperin yanında beklemeden açıya çıktın.");
+  // (6) F52: tahmin/alışkanlık + öğüt cümleleri plan referansını kaybetmez (HEAD: 'o açıda/o açıdan').
+  for (const [ad, s] of [
+    ["145a 'seni bekliyor, o yüzden smoke at'", "Rakip A Main'de seni bekliyor, o yüzden smoke at ve geç gir."],
+    ["145b 'genelde … peek'liyor'", "Jett genelde A Main'den seni peek'liyor; drone'la bilgi al."],
+    ["145c '… var, oraya smoke at'", "Heaven'dan seni gören Operator'cü var, oraya smoke at."],
+    ["145d 'veya' listesi ('A Site veya Mid'de … bekledin')", "Bu round ölmüş değilsin; A Site veya Mid'de takımınla birlikte giriş bekledin."],
+  ] as [string, string][]) same(`${ad} bayt-aynı`, rc(s, "tr", noLoc, "Ascent", rh13, "suggestion"), s);
+  eq("145e tek başına şimdiki zaman anlatımı hâlâ nötrlenir (123d sınıfı)",
+    rc("Rakip seni A Tree köşesinden vuruyor; bu açıya karşı crossfire kur.", "tr", noLoc, "Ascent", rh13, "suggestion"), "Rakip seni o açıdan vuruyor; bu açıya karşı crossfire kur.");
+}
+
 console.log("\n════ FB06 · F57 · YAZIYLA SAYI + 'kere' + KONUM LİSTESİ SAYIMI ════");
 {
   // HEAD: COUNT_PATTERNS yalnız rakam + kez/defa → aşağıdaki pozitiflerin HEPSİ bayt-aynı geçiyordu
