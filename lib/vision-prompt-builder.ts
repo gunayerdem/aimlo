@@ -631,8 +631,16 @@ export function buildVisionContext(body: VisionPromptBody, lang: VisionLang, onL
     // classifyDeath aynı kapıdan geçer (lib/death-type.ts sanitizeAliveCount).
     const alliesAliveOk = sanitizeAliveCount(reqBody.alliesAlive, ALLIES_ALIVE_MAX);
     const enemiesAliveOk = sanitizeAliveCount(reqBody.enemiesAlive, ENEMIES_ALIVE_MAX);
-    if (alliesAliveOk !== undefined) ctx.alliesAlive = alliesAliveOk;
-    if (enemiesAliveOk !== undefined) ctx.enemiesAlive = enemiesAliveOk;
+    // FB03 inceleme · F09 (low): canlı sayıları ctx'e ("OCR pixel truth, screenshot'tan güvenilir"
+    // bloğu) YALNIZ ölçülmüş sensörle (aliveCountsReliable, ctx.ultReady ile AYNI kapı). KANIT:
+    // v1.0.19 count_alive_players şerit zeminini ölçüyor (etiketli karelerin çoğunda yanlış);
+    // bayraksız {alliesAlive:4, enemiesAlive:4} ctx'e "güvenilir" diye giriyor, aynı mesajın
+    // factSheet'i ise "BİLİNMEYEN … kaç kişi hayatta" diyordu (çelişkili sinyal). Ders tipi zaten
+    // bu kapıdan geçiyordu (classifyDeath aliveReliable). Yeni masaüstü (FD03) sayı göndermez →
+    // yalnız sahadaki eski istemciyi etkiler. Aralık kapısı + log satırı AYNEN.
+    const aliveReliable = reqBody.aliveCountsReliable === true;
+    if (aliveReliable && alliesAliveOk !== undefined) ctx.alliesAlive = alliesAliveOk;
+    if (aliveReliable && enemiesAliveOk !== undefined) ctx.enemiesAlive = enemiesAliveOk;
     if ((typeof reqBody.alliesAlive === "number" && alliesAliveOk === undefined)
       || (typeof reqBody.enemiesAlive === "number" && enemiesAliveOk === undefined)) {
       // Log forging kapısı (B03 inceleme): yalnız sayılar basılır, öteki tipler etiket.

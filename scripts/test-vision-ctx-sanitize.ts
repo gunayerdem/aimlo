@@ -399,6 +399,10 @@ console.log("\n[9] ÖLÇÜLMEMİŞ SENSÖR — patternContext satırı + ultRead
   t("kullanıcı mesajında 'sayısal üstünlükte' / 'ult HAZIR' satırı YOK (bayraksız)", !/sayısal üstünlükte|ult HAZIR/.test(u.userPrompt));
   t("kullanıcı mesajında sensör-dışı pattern parçaları KALIR", u.userPrompt.includes("Savunmada 3 round kayıp") && u.userPrompt.includes("5 round geç/post-plant aşamada öldün"));
   t("ctx'te ultReady YOK (bayraksız, F08)", !("ultReady" in u.ctx), JSON.stringify(u.ctx));
+  // FB03 inceleme · F09 (low): bayraksız canlı sayılar "OCR pixel truth, güvenilir" ctx bloğuna
+  // GİRMEZ (HEAD: alliesAlive/enemiesAlive 4/4 ctx'te, aynı mesajın factSheet'i "BİLİNMEYEN … kaç kişi
+  // hayatta" diyordu). Bayrakla (ölçülmüş sensör) girer — aşağıdaki "iki bayrakla" vakası.
+  t("F09 ctx'te alliesAlive/enemiesAlive YOK (bayraksız)", !("alliesAlive" in u.ctx) && !("enemiesAlive" in u.ctx), JSON.stringify(u.ctx));
   t("[GÖRÜNTÜDEKİ YETENEK İKONLARI] 'kesin konuş' cümlesi YOK (bayraksız), görsel kuralı KALIR",
     !u.userPrompt.includes("Context'te ultReady=true de geldiyse kesin konuş.") && u.userPrompt.includes("NET göremiyorsan yetenek/ult durumu hakkında HİÇBİR ŞEY yazma"));
   t("ders tipi sayı dalından gelmez (4v4 bayraksız → over-peek-advantage DEĞİL)", u.deathType !== "over-peek-advantage", String(u.deathType));
@@ -406,6 +410,7 @@ console.log("\n[9] ÖLÇÜLMEMİŞ SENSÖR — patternContext satırı + ultRead
   t("iki bayrakla (ölçülmüş sensör): ultReady ctx'te + 'kesin konuş' + iki satır KALIR + ult-in-pocket (eski davranış; ult dalı sayı dalından önce)",
     uf.ctx.ultReady === true && uf.userPrompt.includes("Context'te ultReady=true de geldiyse kesin konuş. NET göremiyorsan")
       && /sayısal üstünlükte \(5v4\)/.test(uf.userPrompt) && /ult HAZIR halde/.test(uf.userPrompt) && uf.deathType === "ult-in-pocket", String(uf.deathType));
+  t("F09 iki bayrakla ctx'te alliesAlive=4 / enemiesAlive=4 (ölçülmüş sensör)", uf.ctx.alliesAlive === 4 && uf.ctx.enemiesAlive === 4, JSON.stringify(uf.ctx));
   const ua = buildVisionUserMessage({ body: { ...body, aliveCountsReliable: true }, lang: "tr", imageAvailable: true });
   t("yalnız aliveCountsReliable: 4v4 → over-peek-advantage (eski davranış); ult satırı yine düşer, sayı satırı kalır",
     ua.deathType === "over-peek-advantage" && /sayısal üstünlükte \(5v4\)/.test(ua.userPrompt) && !/ult HAZIR/.test(ua.userPrompt) && !("ultReady" in ua.ctx), String(ua.deathType));
