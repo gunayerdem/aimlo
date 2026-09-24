@@ -21,7 +21,11 @@ import { loadVisionKnowledge, loadKnowledge } from "../lib/knowledge-loader";
 const CTX = { map: "Ascent", agent: "Jett", enemyAgents: ["Sova", "Killjoy", "Omen", "Reyna", "Sage"], side: "attack" };
 const KB = path.join(process.cwd(), "knowledge") + path.sep;
 
-const uni2raw = fs.readFileSync(path.join(KB, "ranks", "universal-2.md"), "utf8");
+// CRLF normalizasyonu (W2 inceleme REV-W2, 2026-09-24): autocrlf=true temiz klonda
+// KB dosyaları w/crlf gelir; aşağıdaki frontmatter deseni "\n---\n" arıyordu → eşleşmiyor,
+// işaretçi "tags: [...]" satırı oluyor, 3 sahte ❌ ile npm test zinciri burada duruyordu.
+// Loader frontmatter'ı iki biçimde de söküyor (knowledge-loader.ts \r?\n) — test de aynı.
+const uni2raw = fs.readFileSync(path.join(KB, "ranks", "universal-2.md"), "utf8").replace(/\r\n/g, "\n");
 // Frontmatter'ı (--- ... ---) ATLA: stripKbWhitespace onu zaten söküyor, oradan
 // seçilen bir işaretçi yanlış "kayıp" alarmı verir (ilk denemede tam bu oldu).
 const uni2 = uni2raw.replace(/^---[\s\S]*?\n---\n/, "");
