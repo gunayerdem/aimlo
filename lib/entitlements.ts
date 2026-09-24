@@ -43,6 +43,7 @@ import "server-only";
 
 import { getSubscriptionState } from "@/lib/billing";
 import { PRODUCT_NAME } from "@/lib/brand";
+import { isFreeTierEnforced } from "./flags";
 
 /** Ücretsiz hesabın haftalık maç analizi hakkı. */
 export const FREE_WEEKLY_MATCH_QUOTA = 3;
@@ -173,10 +174,9 @@ export function quotaExceededBody(quota: QuotaVerdict, lang: "tr" | "en" = "tr")
   };
 }
 
-/** Kota kapısı açık mı? Varsayılan KAPALI — env açıkça "true" olmalı. */
-export function isFreeTierEnforced(): boolean {
-  return process.env.FREE_TIER_ENFORCED === "true";
-}
+/** Kota kapısı açık mı? Varsayılan KAPALI. Kural TEK KAYNAKTA: lib/flags.ts (FB02 inceleme ·
+ *  B9 ayna) — landing, fiyat sayfası ve /admin/altyapi aynı fonksiyonu okur. */
+export { isFreeTierEnforced };
 
 function isUpstashConfigured(): boolean {
   return Boolean(process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN);

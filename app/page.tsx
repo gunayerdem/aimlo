@@ -1,4 +1,5 @@
 import LandingClient from "./LandingClient";
+import { isFreeTierEnforced } from "@/lib/flags";
 
 /**
  * Ana sayfa — ince SUNUCU sarmalayıcısı (F91, 2026-09-24).
@@ -10,13 +11,13 @@ import LandingClient from "./LandingClient";
  * okuyamıyordu. Gövde olduğu gibi ./LandingClient.tsx'e taşındı, bayrak burada
  * okunup prop olarak geçiliyor.
  *
- * Kural PricingPageBody.tsx ile AYNI: yalnız tam "true" string'i açık sayılır.
- * lib/entitlements'tan import EDİLMİYOR (aynı gerekçe: o zincir service-role
- * anahtarını import anında doğruluyor; halka açık pazarlama sayfası o sırra
- * bağlanmasın). Bayrak Vercel'de değişince redeploy zaten gerekiyor
- * (docs/LAUNCH_RUNBOOK.md §1.2).
+ * Kural kota kapısı ve PricingPageBody.tsx ile TEK KAYNAKTA: lib/flags.ts
+ * isFreeTierEnforced (yalnız tam "true" string'i açık; FB02 inceleme · B9 ayna —
+ * eskiden burada literal kopyaydı). lib/entitlements'tan import EDİLMİYOR (o zincir
+ * service-role anahtarını import anında doğruluyor; lib/flags sıfır import'lu).
+ * Bayrak Vercel'de değişince redeploy zaten gerekiyor (docs/LAUNCH_RUNBOOK.md §1.2).
  */
 export default function Home() {
-  const quotaEnforced = process.env.FREE_TIER_ENFORCED === "true";
+  const quotaEnforced = isFreeTierEnforced();
   return <LandingClient quotaEnforced={quotaEnforced} />;
 }

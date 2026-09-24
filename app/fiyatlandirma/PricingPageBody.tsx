@@ -3,6 +3,7 @@ import PricingClient, { type Lang } from "./PricingClient";
 import { PricingBackdrop } from "./PricingBackdrop";
 import { SellerInfo } from "@/app/_components/SellerInfo";
 import { SiteHeader } from "@/app/_components/SiteHeader";
+import { isFreeTierEnforced } from "@/lib/flags";
 
 /** Fiyatlandırma sayfasının paylaşılan gövdesi.
  *
@@ -42,14 +43,13 @@ export function PricingPageBody({ lang }: { lang: Lang }) {
   const links = LEGAL_LINKS[lang];
 
   /* B91 (2026-07-31): "Beta süresince sınırsız ve ücretsiz" sabit metindi;
-     FREE_TIER_ENFORCED açıldığı an sayfa yalan söylerdi. Kural
-     lib/entitlements.isFreeTierEnforced ile AYNI ("true" string'i, tam eşleşme).
-     Oradan import ETMİYORUZ bilerek: lib/entitlements → lib/billing →
-     lib/supabase/server zinciri servis-rol anahtarını import anında doğruluyor;
-     halka açık bir pazarlama sayfasını o zincire bağlamak build/render'ı
-     gereksiz bir sırra bağımlı kılardı. Bayrak Vercel'de değişince redeploy
-     zaten gerekiyor. */
-  const quotaEnforced = process.env.FREE_TIER_ENFORCED === "true";
+     FREE_TIER_ENFORCED açıldığı an sayfa yalan söylerdi. Kural kota kapısıyla
+     TEK KAYNAKTA: lib/flags.ts isFreeTierEnforced (FB02 inceleme · B9 ayna;
+     eskiden burada literal kopyaydı). lib/entitlements'tan import ETMİYORUZ
+     bilerek: lib/entitlements → lib/billing → lib/supabase/server zinciri
+     servis-rol anahtarını import anında doğruluyor; lib/flags sıfır import'lu.
+     Bayrak Vercel'de değişince redeploy zaten gerekiyor. */
+  const quotaEnforced = isFreeTierEnforced();
 
   return (
     /* main'de yatay padding YOK: tepe paneli kenardan kenara uzansın

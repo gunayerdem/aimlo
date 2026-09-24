@@ -285,10 +285,51 @@ t("landing beta cümlesi yalnız betaNote alanında (TR+EN, SSS cevabına gömü
 t("betaNote render'ı bayrağa bağlı (faq.betaNote && !quotaEnforced)",
   /faq\.betaNote\s*&&\s*!quotaEnforced/.test(landingCode));
 const wrapper = stripComments(read("app/page.tsx"));
-t("app/page.tsx sunucu sarmalayıcısı: 'use client' YOK, FREE_TIER_ENFORCED === \"true\" (PricingPageBody kuralı), prop geçişi",
+t("app/page.tsx sunucu sarmalayıcısı: 'use client' YOK, bayrak lib/flags isFreeTierEnforced() (kota kapısıyla tek kaynak), prop geçişi",
   !/^\s*["']use client["']/.test(wrapper) &&
-    /process\.env\.FREE_TIER_ENFORCED\s*===\s*"true"/.test(wrapper) &&
+    /import\s*\{\s*isFreeTierEnforced\s*\}\s*from\s*["']@\/lib\/flags["']/.test(wrapper) &&
+    /quotaEnforced\s*=\s*isFreeTierEnforced\(\)/.test(wrapper) &&
     /<LandingClient\s+quotaEnforced=\{quotaEnforced\}/.test(wrapper));
+// FB02 inceleme · B9 ayna (2026-09-25): `process.env.FREE_TIER_ENFORCED === "true"` dört
+// yerde literal kopyaydı (lib/entitlements.ts, PricingPageBody.tsx, app/page.tsx,
+// lib/admin-infra.ts); kilit yalnız landing literal'ini görüyordu → kapı kuralı değişirse
+// pazarlama metni ayrışırdı (F91 sınıfı). Artık kural YALNIZ lib/flags.ts'te (sıfır import).
+{
+  const libDir = path.join(ROOT, "lib");
+  const walkTs = (dir: string, out: string[] = []): string[] => {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const p = path.join(dir, e.name);
+      if (e.isDirectory()) walkTs(p, out);
+      else if (/\.tsx?$/.test(e.name)) out.push(p);
+    }
+    return out;
+  };
+  const scope = [...walkTs(path.join(ROOT, "app")), ...walkTs(libDir)].map(relOf);
+  const FLAG_LITERAL = /process\.env\.FREE_TIER_ENFORCED\s*===/;
+  const literalHits = scope.filter((rel) => FLAG_LITERAL.test(stripComments(read(rel))));
+  t("FREE_TIER_ENFORCED kuralı YALNIZ lib/flags.ts'te (app/** + lib/** literal kopyası yok)",
+    JSON.stringify(literalHits) === JSON.stringify(["lib/flags.ts"]), JSON.stringify(literalHits));
+  const flagsSrc = stripComments(read("lib/flags.ts"));
+  t("lib/flags.ts sıfır import (halka açık sayfalar service-role zincirine bağlanmaz)",
+    !/^\s*import\b/m.test(flagsSrc) && !/\brequire\(/.test(flagsSrc));
+  const readers: [string, RegExp][] = [
+    ["lib/entitlements.ts", /from\s*["']\.\/flags["']/],
+    ["app/fiyatlandirma/PricingPageBody.tsx", /from\s*["']@\/lib\/flags["']/],
+    ["app/page.tsx", /from\s*["']@\/lib\/flags["']/],
+    ["lib/admin-infra.ts", /from\s*["']\.\/flags["']/],
+  ];
+  const missing = readers.filter(([rel, re]) => !(re.test(read(rel)) && /isFreeTierEnforced/.test(stripComments(read(rel))))).map(([rel]) => rel);
+  t("kota kapısı, fiyat sayfası, landing ve /admin/altyapi bayrağı lib/flags'tan okuyor", missing.length === 0, JSON.stringify(missing));
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const flags = require(path.join(ROOT, "lib/flags")) as { isFreeTierEnforced: () => boolean };
+  const env = process.env as Record<string, string | undefined>;
+  const prev = env.FREE_TIER_ENFORCED;
+  const at = (v: string | undefined) => { if (v === undefined) delete env.FREE_TIER_ENFORCED; else env.FREE_TIER_ENFORCED = v; return flags.isFreeTierEnforced(); };
+  const res = [at(undefined), at("1"), at("TRUE"), at("true")];
+  if (prev === undefined) delete env.FREE_TIER_ENFORCED; else env.FREE_TIER_ENFORCED = prev;
+  t("isFreeTierEnforced: yok/'1'/'TRUE' kapalı, yalnız 'true' açık (eski literal kuralla aynı)",
+    JSON.stringify(res) === JSON.stringify([false, false, false, true]), JSON.stringify(res));
+}
 t("/guvenlik beta bölümü olgu: herkes kayıt olup indirebilir + geri bildirim kanalı",
   /Herkes kayıt olup uygulamayı/u.test(guv) && /aimlo\.gg\/download/.test(guv) &&
     /Destek ekranından/u.test(guv) && /support@aimlo\.gg/.test(guv));

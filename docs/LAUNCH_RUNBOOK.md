@@ -220,7 +220,10 @@ kadar anlamlı — v1.0.20 yayını pencereyi kapatır.
          kanala taşı (GitHub Releases / R2). Taşınırsa `release-desktop.ps1`
          latest.json url'sini oraya yazar (updater içeriği minisign ile
          doğruladığı için host değişimi güvenli) ve `app/download/route.ts`
-         içindeki `SUPABASE_STORAGE` önek kontrolü yeni host için genişletilir.
+         içindeki `SUPABASE_STORAGE` ile `lib/admin-infra.ts` içindeki
+         `SUPABASE_STORAGE_BASE` önek kontrolleri yeni host için genişletilir
+         (ikincisi unutulursa egress kartı MSI boyutunu okuyamaz ve sessizce
+         "bilinmiyor"a düşer — FB02 inceleme).
    - Launch haftası izleme: `/admin/altyapi` egress kartı (§2).
 7. **Teslim (surrender) ile biten maçın sonucu — bilinen sınır** (yakınsama Y06,
    2026-09-25). `matchComplete` göndermeyen v1.0.19'da sonuç skordan türetilir

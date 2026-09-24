@@ -28,6 +28,7 @@
 import "server-only";
 
 import { createServiceSupabase } from "@/lib/supabase/server";
+import { isFreeTierEnforced } from "./flags";
 
 // ── Sabitler ───────────────────────────────────────────────────────────────
 
@@ -854,7 +855,8 @@ export async function getInfraStatus(): Promise<InfraStatus> {
   const missingCritical = envs.filter((e) => e.critical && !e.present).map((e) => e.key);
 
   const flags = {
-    freeTierEnforced: process.env.FREE_TIER_ENFORCED === "true",
+    // FB02 inceleme · B9 ayna: kota kapısıyla aynı kural, tek kaynak lib/flags.ts.
+    freeTierEnforced: isFreeTierEnforced(),
     strictRateLimit: process.env.STRICT_RATE_LIMIT === "true",
     // Billing "uykuda mı": iki imza sırrından biri bile varsa webhook açık.
     billingConfigured: has("PADDLE_WEBHOOK_SECRET") || has("STRIPE_WEBHOOK_SECRET"),
