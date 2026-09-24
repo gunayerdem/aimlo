@@ -103,6 +103,15 @@ export function LoginForm() {
             className="rounded-xl bg-[#FF3D71]/[0.06] border border-[#FF3D71]/15 px-4 py-3 animate-scale-in"
           >
             <p className="text-xs text-[#FF3D71] font-semibold">{state.error}</p>
+            {/* F34 (2026-09-24): doğrulanmamış hesap da bu genel hatayı alıyor
+                (login/actions.ts enumeration koruması). Bağlantı HER hatada
+                aynı görünür → hesabın durumu hakkında bilgi sızdırmaz. */}
+            <p className="mt-1.5 text-[11px] text-neutral-400">
+              Kayıt olup kodu girmediysen:{" "}
+              <Link href="/verify" className="text-[#22D3EE] hover-underline">
+                e-posta doğrulama
+              </Link>
+            </p>
           </div>
         )}
 

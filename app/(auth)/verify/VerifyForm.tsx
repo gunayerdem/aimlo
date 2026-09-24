@@ -9,6 +9,7 @@ import {
   type ClipboardEvent,
   type KeyboardEvent,
 } from "react";
+import { useRouter } from "next/navigation";
 import {
   resendAction,
   verifyAction,
@@ -255,6 +256,94 @@ export function VerifyForm({
           )}
         </form>
       </div>
+    </div>
+  );
+}
+
+/**
+ * F34 (2026-09-24): /verify e-posta parametresi olmadan açılırsa (masaüstü
+ * "doğrulama linki" https://aimlo.gg/verify'ı parametresiz açıyor; web girişi
+ * doğrulanmamış hesaba enumeration koruması yüzünden yalnız "Geçersiz e-posta
+ * veya şifre" diyor) sayfa eskiden /login'e atıyordu → kullanıcı hesabını
+ * doğrulayamıyordu. Artık küçük bir e-posta formu gösterilir.
+ *
+ * YENİ UÇ YOK: form MEVCUT resendAction'ı çağırır — tek tip yanıt (kayıtlı
+ * olmayan e-postaya da `{ ok: true, resent: true }`), authRateLimit("resend")
+ * ile sınırlı. Aynı yüzey /verify?email=… sayfasındaki "Yeni kod gönder"
+ * düğmesinde zaten vardı; enumeration açılmaz. Başarıda kod giriş ekranına
+ * (/verify?email=<girilen>&purpose=register) geçilir.
+ */
+export function verifyHref(email: string): string {
+  return `/verify?email=${encodeURIComponent(email.trim().toLowerCase())}&purpose=register`;
+}
+
+/** Saf akış (test edilebilir): resend'i çağır, başarıda kod ekranına geç. */
+export async function startVerification(
+  formData: FormData,
+  resend: (fd: FormData) => Promise<ResendState>,
+  navigate: (href: string) => void,
+): Promise<ResendState> {
+  const email = String(formData.get("email") ?? "").trim().toLowerCase();
+  formData.set("email", email);
+  formData.set("purpose", "register");
+  const res = await resend(formData);
+  if (res.ok && res.resent) navigate(verifyHref(email));
+  return res;
+}
+
+export function VerifyEmailStartForm() {
+  const router = useRouter();
+  const [state, doAction, pending] = useActionState(
+    (prev: ResendState, formData: FormData) =>
+      startVerification(
+        formData,
+        (fd) => resendAction(prev, fd),
+        (href) => router.replace(href),
+      ),
+    initialResend,
+  );
+
+  return (
+    <div className="auth-card rounded-2xl p-7 sm:p-9 relative">
+      <div aria-hidden className="auth-hairline" />
+      <form action={doAction} noValidate className="space-y-5">
+        <div>
+          <label htmlFor="verify-email" className="auth-label">
+            E-POSTA
+          </label>
+          <input
+            id="verify-email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            inputMode="email"
+            autoCapitalize="none"
+            spellCheck={false}
+            required
+            maxLength={254}
+            aria-invalid={state.error ? true : undefined}
+            className="auth-input"
+          />
+        </div>
+
+        {state.error && (
+          <div
+            role="alert"
+            aria-live="polite"
+            className="rounded-xl bg-[#FF3D71]/[0.06] border border-[#FF3D71]/15 px-4 py-3"
+          >
+            <p className="text-xs text-[#FF3D71] font-semibold">{state.error}</p>
+          </div>
+        )}
+
+        <button
+          type="submit"
+          disabled={pending}
+          className="btn-neon w-full rounded-xl py-4 text-sm disabled:opacity-60 disabled:cursor-wait"
+        >
+          {pending ? "Kod gönderiliyor..." : "Doğrulama kodu gönder"}
+        </button>
+      </form>
     </div>
   );
 }

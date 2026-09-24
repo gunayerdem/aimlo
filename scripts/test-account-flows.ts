@@ -15,6 +15,17 @@
  *   hata + support adresi görür (kurtarma yolu); (c) başarı yolu değişmedi
  *   (signOut + "/?deleted=1").
  *
+ * [F34] E-postası doğrulanmamış kullanıcı için doğrulama yolu.
+ *   KÖK: app/(auth)/verify/page.tsx:39-41 email yoksa redirect("/login");
+ *   masaüstü https://aimlo.gg/verify'ı parametresiz açıyor (desktop App.tsx
+ *   :1824/:2582) ve web girişi doğrulanmamış hesaba enumeration koruması
+ *   yüzünden yalnız "Geçersiz e-posta veya şifre" diyor (login/actions.ts) →
+ *   kullanıcı hesabını doğrulayamıyordu.
+ *   Kilit: e-postasız /verify redirect etmez, e-posta formu render eder; form
+ *   MEVCUT resendAction'ı çağırır (yeni uç yok) ve başarıda
+ *   /verify?email=<girilen>&purpose=register'a geçer; hata dönerse geçmez;
+ *   girişteki /verify bağlantısı her hatada aynı (enumeration yok).
+ *
  * YAKLAŞIM: scripts/test-telemetry-route.ts kalıbı — "server-only" boş modül,
  * "@/..." → repo kökü, bağımlılıklar Module._cache'e sahte `exports` olarak
  * konur (tsx action dosyasını CJS require ile yükler). ⚠ AĞ/DB YOK, .env OKUNMAZ.
@@ -167,6 +178,102 @@ async function main() {
     /<li>\s*Destek mesajların/u.test(pageSrc));
   t("silme sayfası posta kutusu kopyaları için support@aimlo.gg'yi söylüyor",
     /bildirim kopyaları/u.test(pageSrc) && /mailto:support@aimlo\.gg/.test(pageSrc));
+
+  // ── [F34] e-postasız /verify ──────────────────────────────────────────────
+  console.log("\n[F34] /verify e-postasız açılınca /login'e atmıyor, mevcut resendAction'a giden form gösteriyor");
+  {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { renderToStaticMarkup } = require("react-dom/server") as typeof import("react-dom/server");
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const page = require(repoFile("app/(auth)/verify/page")) as {
+      default: (p: { searchParams: Promise<Record<string, string | undefined>> }) => Promise<unknown>;
+    };
+    for (const [ad, sp] of [
+      ["parametresiz (masaüstünün açtığı adres)", {}],
+      ["geçersiz e-posta (\"abc\")", { email: "abc" }],
+    ] as const) {
+      calls.length = 0;
+      let el: unknown = null;
+      let threw: unknown = null;
+      try {
+        el = await page.default({ searchParams: Promise.resolve({ ...sp }) });
+      } catch (e) {
+        threw = e;
+      }
+      t(`${ad}: redirect YOK`, threw === null && idx("redirect") === -1,
+        JSON.stringify({ threw: threw ? String(threw) : null, calls }));
+      let html = "";
+      try {
+        html = el ? renderToStaticMarkup(el as Parameters<typeof renderToStaticMarkup>[0]) : "";
+      } catch (e) {
+        html = `RENDER_HATASI ${String(e)}`;
+      }
+      t(`${ad}: e-posta formu render ediliyor (<form> + type=email name=email)`,
+        /<form\b/.test(html) && /<input[^>]*type="email"/.test(html) && /<input[^>]*name="email"/.test(html),
+        html.slice(0, 300));
+    }
+
+    // e-postalı adres eski davranışta kalır: kod giriş ekranı.
+    calls.length = 0;
+    const withEmail = await page.default({ searchParams: Promise.resolve({ email: "Kaan@Example.com" }) });
+    const htmlWith = renderToStaticMarkup(withEmail as Parameters<typeof renderToStaticMarkup>[0]);
+    t("?email= ile kod giriş ekranı (6 kutu) değişmedi",
+      idx("redirect") === -1 && (htmlWith.match(/autoComplete="one-time-code"|autocomplete="one-time-code"/gi) ?? []).length === 6 &&
+        htmlWith.includes("kaan@example.com"));
+
+    // Saf akış: form mevcut resendAction'ı çağırır, başarıda ?email= adresine geçer.
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const vf = require(repoFile("app/(auth)/verify/VerifyForm")) as {
+      startVerification?: (
+        fd: FormData,
+        resend: (fd: FormData) => Promise<{ ok: boolean; error?: string; resent?: boolean }>,
+        navigate: (href: string) => void,
+      ) => Promise<{ ok: boolean; error?: string; resent?: boolean }>;
+    };
+    t("VerifyForm startVerification dışa aktarılıyor", typeof vf.startVerification === "function");
+    if (typeof vf.startVerification === "function") {
+      const sent: { email: string; purpose: string }[] = [];
+      const nav: string[] = [];
+      const fd = new FormData();
+      fd.set("email", "  Kaan@Example.com ");
+      const ok = await vf.startVerification(
+        fd,
+        async (f) => { sent.push({ email: String(f.get("email")), purpose: String(f.get("purpose")) }); return { ok: true, resent: true }; },
+        (href) => nav.push(href),
+      );
+      t("resend'e normalize e-posta + purpose=register gidiyor",
+        sent.length === 1 && sent[0].email === "kaan@example.com" && sent[0].purpose === "register", JSON.stringify(sent));
+      t("başarıda /verify?email=<girilen>&purpose=register adresine geçiliyor",
+        ok.ok === true && nav.length === 1 && nav[0] === "/verify?email=kaan%40example.com&purpose=register", JSON.stringify(nav));
+
+      const nav2: string[] = [];
+      const fd2 = new FormData();
+      fd2.set("email", "kaan@example.com");
+      const bad = await vf.startVerification(fd2, async () => ({ ok: false, error: "Çok fazla deneme" }), (h) => nav2.push(h));
+      t("resend hata dönerse (ör. rate-limit) yönlendirme YOK, hata forma döner",
+        bad.ok === false && bad.error === "Çok fazla deneme" && nav2.length === 0);
+    }
+
+    // Kaynak kilitleri: yeni uç açılmadı; form MEVCUT resendAction'ı çağırıyor;
+    // girişteki bağlantı her hatada aynı (enumeration sızdırmaz).
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const fs = require("node:fs") as typeof import("node:fs");
+    const read = (rel: string) => fs.readFileSync(path.join(REPO_ROOT, rel), "utf8");
+    const actionsSrc = read("app/(auth)/verify/actions.ts");
+    const exported = [...actionsSrc.matchAll(/export\s+async\s+function\s+(\w+)/g)].map((m) => m[1]);
+    t("verify/actions.ts yeni sunucu eylemi açmadı (yalnız verifyAction + resendAction)",
+      JSON.stringify(exported) === JSON.stringify(["verifyAction", "resendAction"]), JSON.stringify(exported));
+    const formSrc = read("app/(auth)/verify/VerifyForm.tsx");
+    const startForm = formSrc.slice(formSrc.indexOf("export function VerifyEmailStartForm"));
+    t("VerifyEmailStartForm mevcut resendAction'ı startVerification üzerinden çağırıyor",
+      formSrc.includes("export function VerifyEmailStartForm") && /startVerification\(/.test(startForm) &&
+        /resendAction\(prev, fd\)/.test(startForm));
+    const loginSrc = read("app/(auth)/login/LoginForm.tsx");
+    const errBlock = loginSrc.slice(loginSrc.indexOf("{state.error && ("));
+    t("LoginForm hata kutusunda koşulsuz /verify bağlantısı (hesap durumuna bağlı değil)",
+      /href="\/verify"/.test(errBlock.slice(0, errBlock.indexOf("<button"))) &&
+        !/needsVerification/.test(loginSrc));
+  }
 
   console.log(`\n${fail === 0 ? "✅" : "❌"} test-account-flows: ${pass} geçti, ${fail} kırık`);
   if (fail > 0) process.exit(1);
