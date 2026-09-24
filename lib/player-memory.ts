@@ -2,6 +2,7 @@ import "server-only";
 
 import { createServiceSupabase } from "@/lib/supabase/server";
 import { isSafePromptName } from "@/lib/prompt-safety";
+import { MAP_CALLOUTS, UNIVERSAL_CALLOUTS } from "@/lib/map-callouts";
 
 /**
  * Cross-match player profile — accumulated death locations, map/agent
@@ -92,10 +93,12 @@ const MAX_DEATH_TYPE_LEN = 40;
  * "memory payload in SYSTEM: true"). Tek kötü rapor sonraki BÜTÜN çağrılara taşınıyordu.
  * mapStats/agentStats anahtarı da aynı sınıf (formatMap/formatAgent tanımadığı adı
  * titleCase'le geçirir) ve worstMap/bestAgent olarak prompt'a girer.
- * KURAL (tek kaynak, KB başlığı ile aynı): lib/prompt-safety isSafePromptName — güvenli
- * ASCII ad (≤40 kr; harf/rakam/boşluk ' . / -). Masaüstünün gönderdiği gerçek konumların
- * hepsi bu biçimde (5 runtime logunda 22/22: "b site", "mid courtyard", "a/lobi", "istemci
- * b ana" …; callouts.rs bozulma işaretli okumayı zaten reddediyor) → meşru hafıza bayt-aynı.
+ * KURAL (isSafeMemoryKey): kanonik callout (lib/map-callouts tabloları — ASCII dışı meşru TR
+ * adlar "market kapısı" / "arka bahçe" dahil) YA DA lib/prompt-safety isSafePromptName
+ * (KB başlığıyla aynı kural: güvenli ASCII ad, ≤40 kr; harf/rakam/boşluk ' . / -).
+ * Masaüstünün gönderdiği gerçek konumların hepsi bu kümede (5 runtime logunda 22/22:
+ * "b site", "mid courtyard", "a/lobi", "istemci b ana" …; callouts.rs bozulma işaretli
+ * okumayı zaten reddediyor) → meşru hafıza bayt-aynı.
  * İKİ UÇ: yazmada yeni anahtar süzülür + anahtar sayısına tavan; okumada (buildMemoryContext)
  * aynı süzgeç — DB'de kalmış eski kötü anahtarlar için (yalnız yazmayı düzeltmek onları
  * temizlemez). Güvensiz konum SAYILMAZ (uydurma yok — eksik veri); güvensiz harita/ajan
@@ -107,9 +110,19 @@ const MAX_WEAK_LOCATIONS = 400;
 /** mapStats/agentStats anahtar tavanı — gerçek küme ~15 harita / ~32 ajan (+ "Unknown"). */
 const MAX_STAT_KEYS = 64;
 
-/** Kalıcı hafızaya yazılacak/okunacak anahtar güvenli mi (tek kural). */
+/** Kanonik callout kümesi (lib/map-callouts tabloları, küçük harf). Tabloda ASCII DIŞI üç
+ *  meşru TR adı var ("market kapısı", "b market kapısı", "arka bahçe") — masaüstü
+ *  callouts.rs aynı tablonun kopyasına snap'lediği için bunları gönderebilir; yalnız
+ *  safePromptName kuralı onları DÜŞÜRÜRDÜ (yanlış-pozitif). */
+const CANONICAL_CALLOUTS: ReadonlySet<string> = new Set([
+  ...UNIVERSAL_CALLOUTS,
+  ...Object.values(MAP_CALLOUTS).flat(),
+]);
+
+/** Kalıcı hafızaya yazılacak/okunacak anahtar güvenli mi: kanonik callout YA DA güvenli
+ *  ASCII ad (lib/prompt-safety isSafePromptName — KB başlığıyla tek kural). */
 export function isSafeMemoryKey(k: unknown): k is string {
-  return isSafePromptName(k);
+  return isSafePromptName(k) || (typeof k === "string" && CANONICAL_CALLOUTS.has(k.toLowerCase()));
 }
 
 /** Kendi (miras OLMAYAN) anahtar mı — "constructor"/"toString" güvenli-ad kuralından geçer
