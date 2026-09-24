@@ -248,8 +248,19 @@ console.log("\n── 6) EN konum nötrleyici (hasDeathLocation=false) ──");
   check("ölçülmüş GEÇMİŞ konum (R-çapalı, roundHistory 'a heaven') bayt-aynı", en(cR, rhHeaven) === cR, `→ "${en(cR, rhHeaven)}"`);
   check("çapasız geçmiş konum nötrlenir ('there')",
     en(c, rhHeaven) === "You held the same corner there and Jett killed you from there.", `→ "${en(c, rhHeaven)}"`);
-  check("hasDeathLocation:true iken bayt-aynı",
+  // FB05 · F14 BEKLENTİ DARALTILDI: eski başlık "hasDeathLocation:true iken bayt-aynı" genel
+  // bir sözleşme gibi okunuyor ve konum biliniyorken "You died at <başka callout>" iddiasının
+  // hiç denetlenmemesini (bulgu F14) doğru davranış diye kilitliyordu. Bu cümle bayt-aynı
+  // kalmalı ama gerekçesi DAR: ölçülen konum değeri yok ve "A Heaven" ölüm fiiline değil
+  // "held"e bağlı (bu round'un pozisyon betimi, nötrleyici bayrağı false değil).
+  check("hasDeathLocation:true, ölçülen konum yok, callout 'held'e bağlı → bayt-aynı",
     realityCheck(c, [] as never, { hasDeathLocation: true } as never, "death", "en").text === c);
+  // Karşı vaka: konum ÖLÇÜLMÜŞ ve metin bu round başka callout'ta öldüğünü söylüyor → ölçülen konum.
+  const fgSite = { hasDeathLocation: true, deathLocation: "a site" } as never;
+  const d = realityCheck("You died at B Main this round, so hold a tighter angle.", [] as never, fgSite, "death", "en", "Ascent").text;
+  check("hasDeathLocation:true + ölçülen 'a site' → 'You died at B Main' → 'at A Site'",
+    d === "You died at A Site this round, so hold a tighter angle.", `→ "${d}"`);
+  check("düzeltilen metin sızıntısız (detectEnLeak temiz)", detectEnLeak(d).clean, detectEnLeak(d).hits.map((h) => h.hit).join(", "));
 }
 
 // ── SONUÇ ────────────────────────────────────────────────────────────────────

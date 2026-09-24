@@ -15,7 +15,11 @@ import { knownAgent } from "@/lib/format-display";
 // B2 (2026-09-16): Türkçe sayı eki TEK KAYNAK — prompt (lib/history-block.ts)
 // ile süzgeç aynı tabloyu kullansın. Yaprak modül: hiçbir import'u yok →
 // döngü yapısal olarak imkânsız.
-import { trOrdinalLocative } from "@/lib/tr-suffix";
+import { trOrdinalLocative, trNumberLocative } from "@/lib/tr-suffix";
+// FB05 · F14: ölçülen konumu Türkçe bulunma ekiyle yazmak için (tek kaynak). Yön
+// reality-checker → coach-text; coach-text reality-checker'ı import etmez (döngü yok,
+// landing bundle politikası etkilenmez).
+import { trLocative } from "@/lib/coach-text";
 
 // ── Types ──
 
@@ -45,6 +49,12 @@ interface ValidationResult {
   actualCount: number;
   actualWindow: number;
   rewriteLevel: 1 | 2 | 3;
+  // FB05 · F14: konum iddiası doğrulanırken EŞLEŞEN round'ların round_index'leri (pencere
+  // içi, high/medium). Sayım silinirken geçmiş çapası bu round'la yazılır ("R2'de").
+  // Opsiyonel: elle kurulan eski ValidationResult nesneleri tip-uyumlu kalır.
+  matchedRounds?: number[];
+  /** Hafızadaki round_index'ler tekil mi (değilse "R<n>" çapası yazılmaz). */
+  roundIndexUnique?: boolean;
 }
 
 // ── Death-Data Contract (Ölüm-Veri Sözleşmesi 2026-06-29) ──
@@ -512,13 +522,18 @@ function isRoundWindow(text: string, n: number): boolean {
 }
 /** İddianın (anchor) yan-cümlesinde ona BAĞLI konum; anchor yoksa metnin tek konumu. */
 function claimPosition(lower: string, anchor: number | null): string | null {
+  if (anchor === null) {
+    const set = new Set([...lower.matchAll(POSITION_SCAN_RE)].map((m) => m[1]));
+    return set.size === 1 ? [...set][0] : null;
+  }
+  return claimPositionSpan(lower, anchor)?.name ?? null;
+}
+/** claimPosition'ın gövdesi (FB05 · F14: konumun ADI yanında metindeki YERİ de döner — sayım
+ *  silinirken geçmiş çapasının yazılacağı / konumun düşeceği yer). Karar kuralı AYNEN. */
+function claimPositionSpan(lower: string, anchor: number): { name: string; start: number; end: number } | null {
   const all = [...lower.matchAll(POSITION_SCAN_RE)].map((m) => ({
     name: m[1], start: m.index ?? 0, end: (m.index ?? 0) + m[0].length,
   }));
-  if (anchor === null) {
-    const set = new Set(all.map((a) => a.name));
-    return set.size === 1 ? [...set][0] : null;
-  }
   let cs = anchor;
   while (cs > 0 && !CLAIM_CLAUSE_END.test(lower[cs - 1])) cs--;
   let ce = anchor;
@@ -529,11 +544,111 @@ function claimPosition(lower: string, anchor: number | null): string | null {
   // ötesi konum çoğunlukla ÖĞÜTTÜR ("…3 kez öldün, bu yüzden A Site'ı bırak").
   const bound = (gap: string) => !gap.includes(",") && gap.length <= 40;
   const before = inClause.filter((a) => a.end <= anchor && bound(lower.slice(a.end, anchor)));
-  if (before.length) return before[before.length - 1].name;
+  if (before.length) return before[before.length - 1];
   const afterAll = inClause.filter((a) => a.start >= anchor);
   const afterNames = new Set(afterAll.map((a) => a.name));
   if (afterNames.size !== 1) return null;            // 0 = genel iddia, ≥2 = sayım listesi
-  return bound(lower.slice(anchor, afterAll[0].start)) ? afterAll[0].name : null;
+  return bound(lower.slice(anchor, afterAll[0].start)) ? afterAll[0] : null;
+}
+
+// ── SAYIM SİLMESİ ÇAPAYI KORUR (FB05 · F14 (2), 2026-09-24) ──────────────────────
+// KANIT: rewriteUnsafeClaims'in TR sayım silmesi (actualCount<2 → "(son )N kez" = "")
+// doğrulanamayan sayıyla birlikte GEÇMİŞ ÇAPASINI da siliyordu → geçmiş iddia çapasız ölüm
+// cümlesine, yani BU round'un konum iddiasına dönüşüyordu: "Son 3 kez B Main'de öldün" (R2
+// B Main, bu round A Site) → "B Main'de öldün, açıyı değiştir." (test 108 bunu kilitliyordu);
+// korpus cycleab-luna-default M1-R12 NR "B Main'de 2 kez öldüğün için" → "B Main'de
+// öldüğün için". EN aynası "You died at B Main 3 times, …" → "You died at B Main , …".
+// ÇÖZÜM: sayım silinirken iddiaya BAĞLI konumun önüne eşleşen round'un çapası yazılır
+// ("R2'de B Main'de öldün"; EN "… at B Main in R2"); konum bir LİSTENİN parçasıysa
+// ("B Main/B Lobby'de") tek round yanlış olur → "daha önce" / "earlier". Yan-cümle açıkça
+// "bu round/şimdi"ye çapalıysa geçmiş çapası YAZILMAZ (kendisiyle çelişen cümle üretmemek
+// için; konum düzeltmesini F14 (1) halkası yapar). Kanıt sıfırsa (level-3, actualCount 0)
+// BAĞLI konum düşer — bu round'un ölçülen konumu ve liste hâli hariç.
+
+/** text.toLowerCase() ile AYNI küçük metin + küçük→orijinal indeks haritası ("İ" iki birime
+ *  açılır; indeks kaymasın). Parça parça küçültme bütünle aynı değilse null (düzenleme yok). */
+function lowerWithMap(text: string): { lower: string; toOrig: number[] } | null {
+  let lower = "";
+  const toOrig: number[] = [];
+  for (let i = 0; i < text.length;) {
+    const ch = String.fromCodePoint(text.codePointAt(i) as number);
+    const l = ch.toLowerCase();
+    lower += l;
+    for (let j = 0; j < l.length; j++) toOrig.push(i);
+    i += ch.length;
+  }
+  toOrig.push(text.length);
+  return lower === text.toLowerCase() ? { lower, toOrig } : null;
+}
+/** Konumun solunda "<konum> /|,|ve|veya|ya da|and|or" varsa liste başına yürümek için. */
+const POSITION_LIST_PREV_RE = new RegExp(
+  "(?<![\\p{L}\\p{N}])(?:"
+  + [...POSITION_NAMES].sort((a, b) => b.length - a.length).map(escapeRe).join("|")
+  + ")\\s*(?:\\/|,|\\s(?:ve|veya|ya\\s+da|and|or)\\s)\\s*$",
+  "iu",
+);
+type CountClaimSpan = {
+  countStart: number; countEnd: number; posStart: number; posEnd: number;
+  listStart: number; isList: boolean;
+  /** İddianın yan-cümlesinde (virgül dahil sınır) iddianın SOLUNDA/İÇİNDE "bu round/şimdi". */
+  currentAnchored: boolean;
+  /** Yan-cümlede sayımın KENDİSİ dışında bir geçmiş çapası ("son 3 round", "R5", "önceki
+   *  round") — sayım silinse de iddia geçmişe çapalı kalır, yeni çapa yazılmaz. */
+  otherPastAnchor: boolean;
+  deathSentence: boolean;
+};
+/** Sayım iddiasının metindeki yeri + ona BAĞLI konum (orijinal indeksler). unitRe (g
+ *  bayraklı, küçük metin üzerinde): 1. grup sayıdan önceki önek (yoksa boş). Yoksa null. */
+function locateCountClaim(text: string, unitRe: RegExp, claimedPosition: string): CountClaimSpan | null {
+  const lm = lowerWithMap(text);
+  if (!lm) return null;
+  const { lower, toOrig } = lm;
+  for (const m of lower.matchAll(unitRe)) {
+    const at = m.index ?? 0;
+    const digit = at + (m[1] ?? "").length;
+    const span = claimPositionSpan(lower, digit);
+    if (!span || span.name !== claimedPosition) continue;
+    // POSITION_NAMES bazı bileşikleri yalnız çekirdek kelimeyle tutar ("lobby" var, "b lobby"
+    // yok) → önündeki SİTE HARFİ konuma dahil edilir (öksüz "B" kalmasın, liste doğru okunsun).
+    const letter = /(?<![\p{L}\p{N}])[abc]\s+$/u.exec(lower.slice(0, span.start));
+    const posStartL = letter ? letter.index : span.start;
+    let listStart = posStartL;
+    for (;;) {
+      const pm = POSITION_LIST_PREV_RE.exec(lower.slice(0, listStart));
+      if (!pm) break;
+      listStart = pm.index;
+    }
+    // Yan-cümle = virgül dahil sınırlar ([.,!?;:—\n]). "…öldüğün için bu round Market'te kur"
+    // gibi SONRAKİ plan yan-cümlesindeki "bu round" iddiayı bu round'a çapalamaz: çapa yalnız
+    // iddianın solunda/içinde aranır.
+    const claimStartL = Math.min(listStart, at), claimEndL = Math.max(span.end, at + m[0].length);
+    let ss = claimStartL;
+    while (ss > 0 && !/[.,!?;:—\n]/.test(lower[ss - 1])) ss--;
+    let se = claimEndL;
+    while (se < lower.length && !/[.,!?;:—\n]/.test(lower[se])) se++;
+    const countEndL = at + m[0].length;
+    const otherPastAnchor = [...lower.slice(ss, se).matchAll(LOC_PAST_ANCHOR_RE)]
+      .some((pm) => { const a = ss + (pm.index ?? 0), b = a + pm[0].length; return b <= at || a >= countEndL; });
+    return {
+      countStart: toOrig[at], countEnd: toOrig[countEndL],
+      posStart: toOrig[posStartL], posEnd: toOrig[span.end],
+      listStart: toOrig[listStart], isList: listStart !== posStartL,
+      currentAnchored: new RegExp(LOC_CURRENT_ANCHOR_RE.source, "iu").test(lower.slice(ss, claimEndL)),
+      otherPastAnchor,
+      deathSentence: CLAIM_DEATH_MARKER.test(trSentenceAt(lower, digit)),
+    };
+  }
+  return null;
+}
+/** Tek eşleşen round'un geçmiş çapası: TR "R2'de" (ünlü uyumlu, trNumberLocative), EN
+ *  "in R2". Eşleşen round TEK değilse null (çapa uydurulmaz). */
+function pastRoundAnchor(v: ValidationResult, lang: "tr" | "en"): string | null {
+  const rounds = v.matchedRounds ?? [];
+  if (rounds.length !== 1 || !Number.isFinite(rounds[0])) return null;
+  // Hafızada aynı round_index birden çok kez varsa (korpus real-rounds-23 M1-R22: R2/R3 iki
+  // kez) "R3" belirsizdir → numarasız geçmiş çapası.
+  if (v.roundIndexUnique === false) return lang === "tr" ? "daha önce" : "earlier";
+  return lang === "tr" ? `R${trNumberLocative(rounds[0])}` : `in R${rounds[0]}`;
 }
 
 export function extractClaims(text: string): ExtractedClaims {
@@ -615,11 +730,14 @@ export function validateClaims(
 
   // Count matching position within window
   let actualCount = 0;
+  let matchedRounds: number[] = [];
   if (claims.claimedPosition) {
     const posLower = claims.claimedPosition.toLowerCase();
-    actualCount = windowDeaths.filter(r =>
+    const matched = windowDeaths.filter(r =>
       (r.death_position || "").toLowerCase().includes(posLower)
-    ).length;
+    );
+    actualCount = matched.length;
+    matchedRounds = matched.map((r) => r.round_index);
   } else {
     // TR-KALAN-15: konum iddiası yoksa sayım GENEL ölüm sayısıyla doğrulanır —
     // ölüm olgusu konum güveninden BAĞIMSIZDIR (FIX #2'nin high/medium süzgeci
@@ -666,6 +784,8 @@ export function validateClaims(
     actualCount,
     actualWindow: windowSize,
     rewriteLevel,
+    matchedRounds,
+    roundIndexUnique: new Set(memory.map((r) => r.round_index)).size === memory.length,
   };
 }
 
@@ -685,6 +805,10 @@ export function rewriteUnsafeClaims(
   // Denetim 2026-07-19 (F5): route istek dilini biliyor — verilirse heuristik
   // yerine kesin dil kullanılır; verilmezse eski heuristik → eski çağıranlar bayt-aynı.
   lang?: "tr" | "en",
+  // FB05 · F14: BU round'un ölçülmüş konum(lar)ı (küçük harf). Kanıtsız sayım iddiasına bağlı
+  // konum düşürülürken bunlar ASLA düşmez (hafıza yalnız GEÇMİŞİ tutar; bu round'un doğru
+  // konumu orada yoktur). Verilmezse boş küme.
+  protectedLocs?: ReadonlySet<string>,
 ): string {
   if (validation.rewriteLevel === 1) {
     return text; // all claims verified
@@ -727,6 +851,18 @@ export function rewriteUnsafeClaims(
         // Sol rakam sınırı: ct=3 "13 kez"in içinden eşleşmesin.
         const before2 = result;
         let removed = false;
+        // FB05 · F14 (2): kanıt TEK round ise silinen sayımın yerine konuma geçmiş çapası
+        // yazılır ("Son 3 kez B Main'de öldün" → "R2'de B Main'de öldün"); liste konumunda
+        // "daha önce". Yan-cümle "bu round/şimdi"ye çapalıysa yazılmaz (bkz. locateCountClaim).
+        if (validation.actualCount === 1 && claims.claimedPosition) {
+          const anchorTr = pastRoundAnchor(validation, "tr");
+          const loc = anchorTr
+            ? locateCountClaim(result, new RegExp(`(?<![\\p{L}\\p{N}])(son\\s+)?${ct}\\s*(?:kez|defa)${TR_SUFFIX_GUARD}`, "giu"), claims.claimedPosition)
+            : null;
+          if (loc && loc.deathSentence && !loc.currentAnchored && !loc.otherPastAnchor) {
+            result = result.slice(0, loc.listStart) + (loc.isList ? "daha önce" : anchorTr) + " " + result.slice(loc.listStart);
+          }
+        }
         for (const unit of ["kez", "defa"]) {
           result = result.replace(
             new RegExp(`(?<![\\p{L}\\p{N}])(son\\s+)?${ct}\\s*${unit}${TR_SUFFIX_GUARD}`, "giu"),
@@ -748,9 +884,23 @@ export function rewriteUnsafeClaims(
           new RegExp(`${ct}\\s*match(es)?\\s*in\\s*a\\s*row`, "gi"),
         ];
         const replacement = validation.actualCount >= 2 ? `${validation.actualCount} times` : "";
+        const beforeCnt = result;
+        // FB05 · F14 (2) EN aynası: "You died at B Main 3 times" (tek kanıt R2) → "… at B Main
+        // in R2" (eskiden "You died at B Main , …": çapa kaybı + boşluk artığı).
+        if (validation.actualCount === 1 && claims.claimedPosition) {
+          const anchorEn = pastRoundAnchor(validation, "en");
+          const loc = anchorEn
+            ? locateCountClaim(result, new RegExp(`(?<![\\p{L}\\p{N}])()${ct}\\s*times?(?![\\p{L}])`, "giu"), claims.claimedPosition)
+            : null;
+          if (loc && loc.deathSentence && !loc.currentAnchored && !loc.otherPastAnchor) {
+            result = result.slice(0, loc.countStart) + (loc.isList ? "earlier" : anchorEn) + result.slice(loc.countEnd);
+          }
+        }
         for (const re of countPatterns) {
           result = result.replace(re, replacement);
         }
+        // Silme noktalamadan önce boşluk bırakmışsa ("B Main , change") onar — yalnız değiştiyse.
+        if (result !== beforeCnt) result = result.replace(/ +([,.;:!?])/g, "$1");
       }
     }
 
@@ -801,6 +951,29 @@ export function rewriteUnsafeClaims(
     // fallback (used only if EVERY sentence gets dropped) matches the language.
     // Denetim 2026-07-19 (F5): lang verilmişse kesin; verilmezse eski heuristik.
     const isTr = lang ? lang === "tr" : /[şçğıöü]|round'da|maç|tur|round'lar/i.test(result);
+
+    // FB05 · F14 (2): sayım iddiasına BAĞLI konumun hafızada HİÇ kanıtı yok (actualCount 0) →
+    // sayım aşağıda silinince kalan "B Main'de öldün" bu round'un konum iddiasına dönüşürdü.
+    // Bağlı konum (+ bulunma eki / EN edatı) burada düşer. Bu round'un ölçülen konumu
+    // (protectedLocs), liste hâli ve ölüm-dışı cümle HARİÇ. Yalnız "kez/defa" (TR) ve
+    // "times" (EN) birimleri — "N of the last M" / pencere birimi kendi yolunda kalır.
+    const cp = claims.claimedPosition;
+    if (claims.claimedCount !== null && cp && validation.actualCount === 0
+      && ![...(protectedLocs ?? [])].some((l) => l.includes(cp) || cp.includes(l))) {
+      const unitRe = isTr
+        ? new RegExp(`(?<![\\p{L}\\p{N}])(son\\s+)?${claims.claimedCount}\\s*(?:kez|defa)${TR_SUFFIX_GUARD}`, "giu")
+        : new RegExp(`(?<![\\p{L}\\p{N}])()${claims.claimedCount}\\s*times?(?![\\p{L}])`, "giu");
+      const loc = locateCountClaim(result, unitRe, cp);
+      if (loc && !loc.isList && loc.deathSentence) {
+        if (isTr) {
+          const suf = /^\s*['’]?\s*(?:d[ae]|t[ae])(?![\p{L}])[ \t]*/u.exec(result.slice(loc.posEnd));
+          if (suf) result = result.slice(0, loc.posStart) + result.slice(loc.posEnd + suf[0].length);
+        } else {
+          const prep = /\s(?:at|in|on|near)\s+$/i.exec(result.slice(0, loc.posStart));
+          if (prep) result = result.slice(0, loc.posStart - prep[0].length) + result.slice(loc.posEnd);
+        }
+      }
+    }
 
     // DROP the ENTIRE sentence that carries an unproven repetition claim,
     // instead of the old in-place keyword→"bu round'da" substitution which
@@ -874,7 +1047,10 @@ export function rewriteUnsafeClaims(
             new RegExp(`${ct}\\s*death(s)?`, "gi"),
             new RegExp(`${ct}\\s*match(es)?\\s*in\\s*a\\s*row`, "gi"),
           ];
+      const beforeCnt3 = result;
       for (const re of countPatterns) result = result.replace(re, "");
+      // FB05 · F14: EN silme artığı ("You died , change") — yalnız değiştiyse (TR'yi repairTrSeam onarır).
+      if (!isTr && result !== beforeCnt3) result = result.replace(/ +([,.;:!?])/g, "$1");
     }
 
     // Remove window claims (TR + EN). TR tarafını rewriteTrWindowUnit kaldırdı.
@@ -2369,6 +2545,89 @@ export function neutralizeUnprovenLocationsEn(
   return out;
 }
 
+// ── ÖLÇÜLMÜŞ KONUMLA ÇELİŞEN ÖLÜM YERİ (FB05 · F14 (1), 2026-09-24) ─────────────────
+// KANIT: konum koruması tek yönlüydü — yalnız "konum bilinmiyor" dalı vardı
+// (hasDeathLocation===false); ölçülmüş deathLocation yalnız muafiyet kümesine giriyordu.
+// Probe: realityCheck("Bu round B Main'de öldün…", rh, {hasDeathLocation:true, deathLocation:
+// 'a site'}) → BAYT-AYNI. Korpus (deathLocation'lı 474 TR örnek, HEAD zinciri): cyclereal-r2b
+// M1-R7 NR "bu round B Main'de öldün" (ölçülen b site), cyclereal-base M1-R8 NR "Bu round B
+// Main'de … öldün" (mid bottom), cyclereal-r4c M1-R8 NR "Bu round B Main'de 2, … öldün" (mid
+// bottom) — tarihsel launch-blocker sınıfı (yanlış ölüm yeri) kullanıcıya gidiyordu.
+// KURAL (dar): 2. şahıs ÖLÜM fiiline bağlı callout (TR "öldün / öldüğün… / vuruldun" ≤30 kr
+// ve virgülsüz — ya da callout'tan sonra yalnız "<sayı>," gelen fiilsiz parça; EN "you died
+// at / killed you at <Callout>"):
+//   • bu round'un ölçülen konumu DEĞİLSE (ve biri ötekinin alt kümesi değilse — kaba OCR
+//     "mid" ile modelin ince "Mid Bottom"u çelişki sayılmaz),
+//   • OYNANAN haritanın tablosunda VARSA (OCR varyantı / özgün ifade dokunulmaz),
+//   • callout'un yan-cümlesi (virgül dahil sınır) geçmişe çapalı DEĞİLSE ("R\d", "önceki",
+//     "N kez", "earlier", "recently"…; "bu round" çapa SAYILMAZ),
+//   • bir listenin parçası değilse ("B Main/B Lobby'de") ve bağlanan aralıkta başka callout yoksa
+// → ölçülen konumla değiştirilir (tabloda kanonikse; TR trLocative ile ek uyumu), değilse
+// "o noktada" / "there" ile nötrlenir. Silme yok: ders ve cümle aynen kalır.
+const DEATH_BIND_TR_RE = new RegExp(
+  `(?<![\\p{L}\\p{N}_-])(?<!(?:${LOC_HEAD_ALT})\\s)(${LOC_ALT})(\\s*['’]?\\s*(?:d[ae]|t[ae]))(?![\\p{L}\\p{N}_-])`
+  + `(\\s[^.,!?;:—\\n]{0,30}?|\\s+\\d+\\s*,[^.!?;:—\\n]{0,60}?\\s)(öldün|öldüğün[\\p{L}]*|vuruldun)(?![\\p{L}])`,
+  "giu",
+);
+const DEATH_BIND_EN_RE = new RegExp(
+  `(?<![\\p{L}])(you\\s+(?:[\\p{L}]+\\s+)?died|killed\\s+you)\\s+(at|in|on|near)\\s+(${LOC_ALT})(?![\\p{L}\\p{N}_'’-])`,
+  "giu",
+);
+/** Ring-yerel ek geçmiş çapaları (LOC_PAST_ANCHOR_RE'nin kapsamadığı tekil biçimler). */
+const DEATH_BIND_PAST_EXTRA_RE = /(?<![\p{L}])(?:önceki|geçen|recently|son\s+zamanlarda)(?![\p{L}])/iu;
+const LOC_ALT_ANY_RE = new RegExp(`(?<![\\p{L}\\p{N}_-])(?:${LOC_ALT})(?![\\p{L}\\p{N}_-])`, "iu");
+/** "a site" → "A Site", "mid bottom" → "Mid Bottom" (site harfi / ct büyük). */
+function calloutDisplay(loc: string): string {
+  return loc.trim().split(/\s+/).map((w) => (/^(?:[abc]|ct|t)$/i.test(w) ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1))).join(" ");
+}
+function correctContradictedDeathLocation(
+  text: string, measured: string, mk: string, currentLocs: ReadonlySet<string>, lang?: "tr" | "en",
+): string {
+  const table = MAP_CALLOUTS[mk];
+  const words = (x: string) => x.split(/\s+/).filter(Boolean);
+  const nested = (a: string, b: string) => {
+    const wa = words(a), wb = words(b);
+    return wa.every((w) => wb.includes(w)) || wb.every((w) => wa.includes(w));
+  };
+  const canonical = table.includes(measured);
+  /** Callout'un yan-cümlesi (virgül dahil sınır) geçmişe çapalı mı? */
+  const pastAnchored = (full: string, from: number, to: number) => {
+    let cs = from;
+    while (cs > 0 && !/[.,!?;:—\n]/.test(full[cs - 1])) cs--;
+    let ce = to;
+    while (ce < full.length && !/[.,!?;:—\n]/.test(full[ce])) ce++;
+    const seg = full.slice(cs, ce);
+    return new RegExp(LOC_PAST_ANCHOR_RE.source, "iu").test(seg) || DEATH_BIND_PAST_EXTRA_RE.test(seg);
+  };
+  const eligible = (name: string, offset: number, full: string) => {
+    const key = name.trim().toLowerCase().replace(/\s+/g, " ");
+    if (currentLocs.has(key) || !table.includes(key) || nested(key, measured)) return false;
+    return !/\/\s*$/.test(full.slice(0, offset));          // liste parçası değil
+  };
+  let out = text;
+  if (lang !== "en") {
+    out = out.replace(DEATH_BIND_TR_RE, (whole: string, name: string, _suf: string, mid: string, verb: string, offset: number, full: string) => {
+      if (!eligible(name, offset, full) || /^\s*\//.test(mid) || LOC_ALT_ANY_RE.test(mid)) return whole;
+      // Fiilsiz "<sayı>," parçasında çapa yalnız callout'un KENDİ parçasında aranır.
+      const fragComma = /^\s+\d+\s*,/.test(mid) ? offset + name.length + _suf.length + mid.indexOf(",") : offset + whole.length;
+      if (pastAnchored(full, offset, fragComma)) return whole;
+      const atStart = offset === 0 || /[.!?]\s+$/.test(full.slice(0, offset));
+      let head = canonical ? trLocative(calloutDisplay(measured)) : "o noktada";
+      if (!canonical && atStart) head = "O noktada";
+      return head + mid + verb;
+    });
+  }
+  if (lang !== "tr") {
+    out = out.replace(DEATH_BIND_EN_RE, (whole: string, verb: string, prep: string, name: string, offset: number, full: string) => {
+      if (!/^\p{Lu}/u.test(name)) return whole;                  // EN'de çıplak küçük ad gündelik kelime
+      const at = offset + whole.length - name.length;
+      if (!eligible(name, at, full) || pastAnchored(full, offset, offset + whole.length)) return whole;
+      return canonical ? `${verb} ${prep} ${calloutDisplay(measured)}` : `${verb} there`;
+    });
+  }
+  return out;
+}
+
 export function realityCheck(
   outputText: string,
   roundHistory: RoundMemoryEntry[],
@@ -2434,12 +2693,6 @@ export function realityCheck(
     }
   }
 
-  // Nötrleyici (en sonda) için: memory katmanı çapayı (sayımı) silmeden ÖNCE
-  // geçmişe çapalı anılan geçmiş konumlar (bkz. pastAnchoredHistoryNames).
-  const anchoredBefore = factGround?.hasDeathLocation === false
-    ? pastAnchoredHistoryNames(text, historyLocs, historyRounds)
-    : new Set<string>();
-
   // Memory-based claim check (count/window/position/repetition) — logic
   // unchanged; just operates on the (possibly guard-trimmed) text.
   if (roundHistory.length > 0) {
@@ -2450,10 +2703,20 @@ export function realityCheck(
     if (claims.claimedCount || claims.claimedPosition || claims.repetitionClaim
       || (claims.claimedWindow !== null && claims.claimedWindowIsRound === true)) {
       const validation = validateClaims(claims, roundHistory);
-      text = rewriteUnsafeClaims(text, claims, validation, kind !== "suggestion", lang);
+      text = rewriteUnsafeClaims(text, claims, validation, kind !== "suggestion", lang, currentLocs);
       rewriteLevel = Math.max(rewriteLevel, validation.rewriteLevel);
     }
   }
+
+  // Nötrleyici (en sonda) için: metinde başka bir yerde geçmişe çapalı anılan geçmiş konumlar
+  // (bkz. pastAnchoredHistoryNames). FB05 · F14 (3): memory katmanından SONRA hesaplanır.
+  // Eskiden sayım silinmeden ÖNCE yakalanıyordu → "Son 3 kez B Main'de öldün" sayımı (çapası)
+  // silinip "B Main'de öldün" kaldığında bile B Main muaf sayılıyordu (test 102 bunu
+  // kilitliyordu). Sayım silmesi artık doğru çapayı KENDİSİ yazdığı için (F14 (2)) önceki
+  // hâli hatırlamaya gerek yok; çapası gerçekten silinmiş konum muaf DEĞİL.
+  const anchoredBefore = factGround?.hasDeathLocation === false
+    ? pastAnchoredHistoryNames(text, historyLocs, historyRounds)
+    : new Set<string>();
 
   // ÖLÇÜLMEMİŞ KONUM NÖTRLEMESİ — EN SON çalışır (B3, 2026-09-16).
   // SIRA BİLİNÇLİ: extractClaims/validateClaims yukarıda callout'u ORİJİNAL
@@ -2466,6 +2729,19 @@ export function realityCheck(
     if (lang === "en") neutralized = neutralizeUnprovenLocationsEn(neutralized, currentLocs, historyLocs, anchoredBefore, historyRounds);
     if (neutralized !== text) {
       text = neutralized;
+      rewriteLevel = Math.max(rewriteLevel, 2);
+    }
+  }
+
+  // ÖLÇÜLMÜŞ KONUMLA ÇELİŞEN ÖLÜM YERİ (FB05 · F14 (1)) — konum biliniyorken metnin
+  // "bu round <başka callout>'da öldün" iddiası. Yalnız vision'ın TEK-round konumunda
+  // (string) ve harita tablosu biliniyorken; rapor yolunun konum DİZİSİ (çok round) kapsam dışı.
+  const measuredOne = typeof factGround?.deathLocation === "string" ? factGround.deathLocation.trim().toLowerCase() : "";
+  const mk = mapKey(map);
+  if (factGround?.hasDeathLocation === true && measuredOne && mk) {
+    const fixed = correctContradictedDeathLocation(text, measuredOne, mk, currentLocs, lang);
+    if (fixed !== text) {
+      text = fixed;
       rewriteLevel = Math.max(rewriteLevel, 2);
     }
   }

@@ -49,6 +49,7 @@ import {
   VISION_TEXT_CAP,
 } from "../lib/vision-postprocess";
 import { sanitizePromptInput } from "../lib/prompt-safety";
+import { buildVisionContext, visionPostprocessOpts, type VisionPromptBody } from "../lib/vision-prompt-builder";
 
 let fail = 0;
 const t = (ad: string, kosul: boolean, detay = "") => {
@@ -647,6 +648,42 @@ console.log("\n[FB05 · F11] fixCallout: sıradan kelime / başka callout deği�
   t("Lambs→Lamps korunur (halka hâlâ bağlı)", lamps.withLoc.includes("Lamps gibi") && lamps.noLoc.includes("Lambs gibi"), `→ "${lamps.withLoc}"`);
   const lobby = run("A Loby'de tek başına kaldın ve öldün.", "death", "tr", "Ascent", "a lobby");
   t("Loby→Lobby korunur", lobby.withLoc.includes("A Lobby'de") && lobby.noLoc.includes("A Loby'de"), `→ "${lobby.withLoc}"`);
+}
+
+// ── FB05 · F14: ölçülmüş konum varken "bu round <başka callout>'da öldün" (4 gerçek raw) ──
+// Kaynak: scripts/eval-out (gitignore) örneklerinin `raw.nextRoundSuggestion` alanları BİREBİR;
+// gövdeler evals/real-rounds-23.json. HEAD zinciri (bu commit öncesi) nihai metinleri:
+//   r2b  M1-R7  (ölçülen b site)     "…; bu round B Main'de öldün, sonraki round …"
+//   base M1-R8  (ölçülen mid bottom) "Bu round B Main'de ve diğerlerde de sık öldün — …"
+//   r4c  M1-R8  (ölçülen mid bottom) "Bu round B Main'de 2, genel olarak son 6 round'da hep öldün; …"
+//   luna-default M1-R12 (ölçülen a site) "…; B Main'de öldüğün için bu round Market…" (silme
+//   "2 kez" ile geçmiş çapasını da siliyordu → R5'in konumu bu round'a yapışıyordu).
+console.log("\n[FB05 · F14] 4 gerçek raw: bu round'un konum iddiası ölçülen konumla çelişmez");
+{
+  const real = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "evals", "real-rounds-23.json"), "utf8")) as { id: string; body: Record<string, unknown> }[];
+  const fixtures: [string, string, string, (o: string) => boolean][] = [
+    ["r2b M1-R7 NR", "M1-R7-ascent-jett",
+      "B Site'i tek başına aynı açıdan tutma; bu round B Main'de öldün, sonraki round bir arkadaşını Market/Heaven tarafına koyup sen farklı bir açıdan rotate ederek crossfire oluştur — çünkü rakip artık tek açıyı okuyor.",
+      (o) => o.includes("bu round B Site'ta öldün, sonraki round") && !/B Main'de öldün/.test(o)],
+    ["base M1-R8 NR", "M1-R8-ascent-jett",
+      "Bu round B Main'de 2 kez ve diğerlerde de sık öldün — bir sonraki savunmada Mid Bottom'da aynı açıyı tamamen bırak, off-angle al veya bir arkadaşla crossfire kur ki tek açıdan yenilme.",
+      (o) => o.startsWith("Bu round Mid Bottom'da ve diğerlerde de sık öldün — bir sonraki savunmada") && !/B Main/.test(o)],
+    ["r4c M1-R8 NR", "M1-R8-ascent-jett",
+      "Bu round B Main'de 2, genel olarak son 6 round'da hep öldün; savunmada mid bottom/özellikle B yönlerine tek başına açı verme — birini yanına çek, crossfire kur ve pozisyonunu yüksekliğe veya zıt köşeye değiştir.",
+      (o) => o.startsWith("Bu round Mid Bottom'da 2, genel olarak son 6 round'da hep öldün;") && !/B Main/.test(o)],
+    ["luna-default M1-R12 NR", "M1-R12-ascent-jett",
+      "B Site'a tek başına yapışma; B Main'de 2 kez öldüğün için bu round Market tarafında takımınla crossfire kur ve ilk temastan sonra dash'le geri çekil. Böylece B Main baskısını siper arkasından karşılar, site'ı tek açıya bırakmazsın.",
+      (o) => o.includes("R5'te B Main'de öldüğün için bu round Market tarafında takımınla crossfire kur")],
+  ];
+  for (const [ad, id, raw, ok] of fixtures) {
+    const b = real.find((x) => x.id === id)!.body;
+    const vb = buildVisionContext(b as VisionPromptBody, "tr");
+    const o = finalizeVisionFeedback(
+      { deathAnalysis: "Açıyı erken verdin.", enemyAnalysis: [], nextRoundSuggestion: raw },
+      visionPostprocessOpts(b as VisionPromptBody, "tr", vb.factGround),
+    ).nextRoundSuggestion;
+    t(`${ad} (ölçülen ${String(b.deathLocation)}): konum iddiası ölçülenle/geçmiş çapasıyla tutarlı`, ok(o), `→ "${o}"`);
+  }
 }
 
 // ── TEK KAYNAK KİLİDİ (OLCUM-ARACI-08, 2026-09-23) ──────────────────────────
