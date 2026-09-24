@@ -473,7 +473,11 @@ console.log("\n[F43] FB07 — hedge'li düşman tahmini kesinleştirilmez; 2. ş
     t(`F43b tek içerik '-yor olabilir': düşmez ama KESİNLEŞMEZ: "${s}"`, o2 === s, `→ "${o2}"`);
   }
   const n1 = tr("Cypher rakip rosterında olduğu için tuzak ve kamera olabilir; B Hall girişine gelmeden takımdan smoke/flash isteyip crossfire kurun.");
-  t("F43b cyclefinal S25 EA1: isim + 'olabilir' kesinleşmez ('tuzak ve kamera;' yok)", !/tuzak ve kamera;/.test(n1) && /olabilir/.test(n1), `→ "${n1}"`);
+  // Yakınsama Y02: hedge'li yan-cümle DÜŞER, emir kipindeki öğüt ("crossfire kurun") öz-yeterli → kalır
+  // (eski beklenti cümlenin tamamını hedge'li sayıp öğüdü EA zincirinde düşürtüyordu).
+  t("F43b cyclefinal S25 EA1: isim + 'olabilir' kesinleşmez ('tuzak ve kamera' yok), öğüt kalır",
+    !/tuzak ve kamera/.test(n1) && /crossfire kur/.test(n1) && onlyFn?.("Cypher rakip rosterında olduğu için tuzak ve kamera olabilir; B Hall girişine gelmeden takımdan smoke/flash isteyip crossfire kurun.", "tr") === false,
+    `→ "${n1}"`);
   // FB07 inceleme (low): düşen yan-cümleden sonra asılı bağlaç / öncülsüz gösterme.
   const c1 = tr("Takım arkadaşın Sova düşmanı görmüş olabilir, ama sen bilgiyi kullanmadın.");
   t("F43c düşen yan-cümle sonrası asılı 'ama' yok (HEAD: 'Ama sen bilgiyi kullanmadın.')", c1 === "Sen bilgiyi kullanmadın.", `→ "${c1}"`);
@@ -499,6 +503,27 @@ console.log("\n[F43] FB07 — hedge'li düşman tahmini kesinleştirilmez; 2. ş
     { factGround: fgH, lang: "tr", map: "haven", agent: "Sova", roundHistory: [] } as never,
   ).enemyAnalysis;
   t("F43d iki madde de hedge'li: son madde RC'li ('kafadan' yok)", h4.length === 1 && !/kafadan/.test(h4[0]), JSON.stringify(h4));
+  // Yakınsama Y02: emir kipi yan-cümlesi öz-yeterli (tam zincir M1-R10 probe metinleri; HEAD çıktıları sağda).
+  const y2a = tr("Rakip B'yi stack'lemiş olabilir, A'ya dön. Takımınla birlikte smoke atıp execute et.");
+  t("Y02a NR 'A'ya dön' kalır (HEAD: 'Takımınla birlikte smoke atıp execute et.')",
+    y2a === "A'ya dön. Takımınla birlikte smoke atıp execute et.", `→ "${y2a}"`);
+  const y2b = tr("Bu round B Lobby'de açıyı geniş tuttun. Killjoy tareti B Main'e kurmuş olabilir, önce util ile temizle. Sonra takımınla gir.");
+  t("Y02b DA 'önce util ile temizle' kalır, asılı 'Sonra' yok (HEAD: '… tuttun. Sonra takımınla gir.')",
+    y2b === "Bu round B Lobby'de açıyı geniş tuttun. Önce util ile temizle. Sonra takımınla gir.", `→ "${y2b}"`);
+  const y2c = eaOnly("Cypher kamerayı B Main'e koymuş olabilir; girmeden önce drone iste ve kamerayı kır.");
+  t("Y02c EA tek karşı-öneri maddesi düşmez, hedge'li yan-cümle düşer", y2c.length === 1 && /drone iste ve kamerayı kır/.test(y2c[0]) && !/koymuş/.test(y2c[0]), JSON.stringify(y2c));
+  const y2d = tr("Rakip A'yı stack'lemiş olabilir, B'ye dönün.");
+  t("Y02d çoğul emir '-(y)In' öz-yeterli", y2d === "B'ye dönün.", `→ "${y2d}"`);
+  // Nesne zamiri özne değil: öznesiz 3. şahıs kalıntı madde hedge'li sayılır (korpus cyclereal-n14 M1-R2 EA0;
+  // HEAD: "Seni B site yönünden izledi ve vurdu.").
+  t("Y02e 'seni … izledi ve vurdu' öznesiz kalıntı → madde bütün hedge'li",
+    onlyFn?.("Cypher ya da benzeri bir bekleyen açıyı tutuyor olabilir, seni B site yönünden izledi ve vurdu.", "tr") === true);
+  // Korpusun HAKLI düşüşleri (öznesiz 3. şahıs yüklem) değişmez.
+  for (const s of [
+    "Killjoy A Hall veya ramp girişine turret/nanoswarm yerlemiş olabilir, uzun açıyı kapatıp trade imkânı bırakmıyor.",
+    "Cypher tuzaklarını ve Brimstone/Skye'nın util'ini Hookah hattına koymuş olabilir, bu açı savunmayı güçlü kılıyor.",
+    "Cypher B veya Garage girişine tel/kamera koymuş olabilir, Operator açısı varsa bu tuzaklar Op desteğiyle birleşir.",
+  ]) t(`Y02f haklı düşüş korunur (madde bütün hedge'li): "${s.slice(0, 40)}…"`, onlyFn?.(s, "tr") === true);
 }
 
 // ════════════════════════════════════════════════════════════════════════════

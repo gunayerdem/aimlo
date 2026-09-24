@@ -1939,12 +1939,38 @@ const HEDGE_DEATH_CORE_RE = /(?<![\p{L}])seni(?![\p{L}])[^.!?\n]{0,60}?(?:öldü
 const TR_FINITE_END_RE = /(?:[dt][ıiuü](?:n|m|k|nız|niz|nuz|nüz|lar|ler)?|m[ıiuü]ş(?:s[ıiuü]n|t[ıiuü]r|lar|ler)?|yor(?:du|dun|sun|lar)?|olabilir(?:ler)?|(?<![\p{L}])(?:var|yok))$/iu;
 const isHedgedEnemyClause = (c: string) => HEDGE3_RE.test(c) && !HEDGE_DEATH_CORE_RE.test(c);
 // Kalan yan-cümlenin kendi öznesi / kipi: düşman öznesi, 2. şahıs ya da gereklilik öğüdü.
+// Yakınsama Y02 (2026-09-24): NESNE zamirleri (seni/sana/seninle) özne DEĞİL → çıkarıldı. KANIT (korpus
+// cyclereal-n14 M1-R2 EA0): "Cypher … tutuyor olabilir, seni B site yönünden izledi ve vurdu." →
+// "Seni B site yönünden izledi ve vurdu." (kimin izlediği yok). "sen/senin" özne/iyelik olarak kalır.
 const SELF_CONTAINED_RE = new RegExp(
   `${HEDGE_ENEMY_SUBJ_RE.source}`
-  + "|(?<![\\p{L}])(?:sen|seni|sana|senin|seninle)(?![\\p{L}])"
+  + "|(?<![\\p{L}])(?:sen|senin)(?![\\p{L}])"
   + "|[\\p{L}](?:[dt][ıiuü]n|m[ıiuü]şs[ıiuü]n|yorsun|[ae]c[ae]ks[ıi]n|m[ae]l[ıi](?:s[ıi]n)?)(?![\\p{L}])",
   "iu",
 );
+// Yakınsama Y02: EMİR KİPİ (öğütün ana biçimi) yan-cümle SONUNDA öz-yeterlidir. KANIT (tam zincir,
+// M1-R10): NR "Rakip B'yi stack'lemiş olabilir, A'ya dön. Takımınla … execute et." → "Takımınla …
+// execute et." (asıl ders "A'ya dön" gidiyordu); DA "…Killjoy tareti B Main'e kurmuş olabilir, önce util
+// ile temizle. Sonra takımınla gir." → "… Sonra takımınla gir." (asılı "Sonra"); EA "Cypher kamerayı
+// B Main'e koymuş olabilir; girmeden önce drone iste ve kamerayı kır." maddesi düşüyordu; korpus
+// cyclefinal/S25 EA1 "…kamera olabilir; B Hall girişine gelmeden … crossfire kurun." (78d54c4'te öğüt
+// kalıyordu). Yorum (:1977-1981) "öğüt kipini taşımıyorsa ASILI" diyordu ama regex emir kipini
+// tanımıyordu. DAR: yalnız yan-cümlenin SON kelimesi, bilinen fiil kökü (2. tekil çıplak) ya da kök +
+// -(y)In/-(y)InIz. Olumsuz emir (-mA: "tutma") BİLEREK yok — "açı tutma" isim öbeğiyle çakışır.
+const IMPERATIVE_STEMS = [
+  "kur", "tut", "dön", "at", "kır", "temizle", "iste", "bekle", "gir", "çık", "yap", "et", "ver", "al",
+  "oyna", "bırak", "koy", "değiştir", "kapat", "aç", "sakla", "izle", "çekil", "geç", "bak", "kullan",
+  "kay", "bas", "dur", "ilerle", "dinle", "hazırla", "zorla", "oyala", "çek", "kes", "patlat", "topla",
+  "ayarla", "sabitle", "taşı", "gönder", "yolla", "planla",
+];
+const IMPERATIVE_END_RE = new RegExp(
+  `(?<![\\p{L}])(?:${IMPERATIVE_STEMS.join("|")})(?:y?[ıiuü]n(?:[ıiuü]z)?)?[\\s"'’”)\\]]*$`,
+  "iu",
+);
+// NOT (Y02, ölçüldü, UYGULANMADI): baştaki öncülsüz zamiri ("…sentinel olabilir, onların setup'ını
+// kırmak için…" → "Onların setup'ını…") asılı saymak korpusta TEK vakada ateşledi (cyclereal-r3b M1-R4
+// EA1) ve o vakada kanıtlı EA0 yanında öğüt maddesinin TAMAMINI düşürdü (Heaven/Gen crossfire dersi
+// kayboluyordu) — okunurluk kusurunu gidermek için gerçek öğüt kaybı net zarar.
 
 type HedgeScan = { text: string; allHedged: boolean };
 
@@ -1982,7 +2008,8 @@ function scanHedgedEnemyClaims(t: string): HedgeScan {
     // uzun açıyı kapatıp trade imkânı bırakmıyor" → "Uzun açıyı kapatıp…"; "…koymuş
     // olabilir, bu açı savunmayı güçlü kılıyor" → "Bu açı…"; korpus ölçümü) → cümlenin
     // tamamı hedge'li sayılır.
-    if (chunks[0] !== kept[0] && !SELF_CONTAINED_RE.test(kept.map((c) => c.text).join(" "))) {
+    if (chunks[0] !== kept[0] && !SELF_CONTAINED_RE.test(kept.map((c) => c.text).join(" "))
+      && !kept.some((c) => IMPERATIVE_END_RE.test(c.text))) {        // Y02: emir kipi öz-yeterli
       out.push(s); fully.push(true); continue;
     }
     // FB07 inceleme (low): düşen yan-cümleden SONRA gelen kalan parçada ona gönderme yapan gösterme
