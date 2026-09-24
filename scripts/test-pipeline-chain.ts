@@ -702,6 +702,43 @@ console.log("\n[FB05 · F14] 4 gerçek raw: bu round'un konum iddiası ölçüle
   }
 }
 
+// ── Yakınsama Y01/Y03/Y09: F14 halkası prod zincirinde (gerçek gövdeler, evals/real-rounds-23) ──
+// HEAD (bu düzeltme öncesi) nihai metinleri:
+//   Y01 M1-R10 (ölçülen b lobby; hafıza R1 b site, R5 b main) "Maçın başında B Site'ta öldün" →
+//       "Maçın başında B Lobby'de öldün"; EN "In the first half you died at B Site" → "…at B Lobby"
+//   Y03 M1-R17 ölçülen 'istemci b ana' (v1.0.19 ham) "Bu round B Main'de … öldün" → "Bu round o noktada …"
+//   Y09 M1-R10 "R3'te B Site'ta öldün" (R3 = a tree) AYNEN geçiyordu.
+console.log("\n[Y01/Y03/Y09] F14 halkası: geçmiş dönem korunur, ham TR konum kanonikleşir, sayısal round doğrulanır");
+{
+  const real = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "evals", "real-rounds-23.json"), "utf8")) as { id: string; body: Record<string, unknown> }[];
+  const cases: [string, string, Record<string, unknown>, "tr" | "en", string, string][] = [
+    ["Y01 TR DA 'Maçın başında B Site'ta öldün' (R1 = b site) korunur", "M1-R10-ascent-jett", {}, "tr",
+      "Maçın başında B Site'ta öldün; bu round da B Lobby'de açıyı geniş tuttun ve vuruldun.",
+      "Maçın başında B Site'ta öldün; bu round da B Lobby'de açıyı geniş tuttun ve vuruldun."],
+    ["Y01 EN DA 'In the first half you died at B Site' korunur", "M1-R10-ascent-jett", {}, "en",
+      "In the first half you died at B Site, and this round you held B Lobby too wide.",
+      "In the first half you died at B Site, and this round you held B Lobby too wide."],
+    ["Y03 'istemci b ana' + modelin doğru 'B Main'i korunur", "M1-R17-ascent-jett", { deathLocation: "istemci b ana" }, "tr",
+      "Bu round B Main'de geniş açıda öldün — siperin yanında kal.",
+      "Bu round B Main'de geniş açıda öldün — siperin yanında kal."],
+    ["Y03 'a/lobi' + çelişen 'B Main' → kanonik 'A Lobby'", "M1-R15-ascent-jett", { deathLocation: "a/lobi" }, "tr",
+      "Bu round B Main'de geniş açıda öldün — siperin yanında kal.",
+      "Bu round A Lobby'de geniş açıda öldün — siperin yanında kal."],
+    ["Y09 'R3'te B Site'ta öldün' (R3 = a tree) → konum düşer", "M1-R10-ascent-jett", {}, "tr",
+      "R3'te B Site'ta öldün; bu round B Lobby'de açıyı geniş tuttun.",
+      "R3'te öldün; bu round B Lobby'de açıyı geniş tuttun."],
+  ];
+  for (const [ad, id, mutate, lang, raw, want] of cases) {
+    const b = { ...real.find((x) => x.id === id)!.body, ...mutate } as VisionPromptBody;
+    const vb = buildVisionContext(b, lang);
+    const o = finalizeVisionFeedback(
+      { deathAnalysis: raw, enemyAnalysis: [], nextRoundSuggestion: lang === "tr" ? "Siperin yanında kal." : "Stay near cover." },
+      visionPostprocessOpts(b, lang, vb.factGround),
+    ).deathAnalysis;
+    t(ad, o === want, `→ "${o}"`);
+  }
+}
+
 // ── TEK KAYNAK KİLİDİ (OLCUM-ARACI-08, 2026-09-23) ──────────────────────────
 // Vision son-işlem zinciri DÖRT yerde elle kopyalanmıştı (route, eval-vision,
 // test-pipeline-chain, replay-tr) ve her yeni halka yalnız bazı kopyalara

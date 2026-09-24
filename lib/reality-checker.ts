@@ -6,7 +6,7 @@
  */
 
 import { extractKillerWeapon } from "@/lib/comp-weapon";
-import { mapKey, MAP_CALLOUTS, UNIVERSAL_CALLOUTS } from "@/lib/map-callouts";
+import { mapKey, MAP_CALLOUTS, UNIVERSAL_CALLOUTS, canonicalCalloutForMap } from "@/lib/map-callouts";
 // Denetim B83 (2026-07-31): katil ajanının RESMİ adı tek kaynaktan (format-display
 // AGENT_NAMES tablosu) gelsin — reality-checker'ın kendi AGENT_NAMES listesi OCR
 // garble'ları da ("Reay") içerdiği için TESPİT'te kullanılır, GERÇEK katil adı
@@ -3439,6 +3439,26 @@ const DEATH_BIND_HABIT_RE = new RegExp(
   + "|(?:first|opening|second|pistol)\\s+round|last\\s+time|early\\s+(?:in\\s+the\\s+(?:match|game|half)|on))(?![\\p{L}\\p{N}])",
   "iu",
 );
+/** Yakınsama Y01 (2026-09-24): MAÇ DÖNEMİ çapaları — "maçın başında", "ilk/ikinci yarıda",
+ *  "savunma yarısında", "pistolde", EN "in the first half", "at the start of the match", "in the
+ *  opening rounds". KANIT (prod zinciri finalizeVisionFeedback, evals/real-rounds-23 M1-R10, hafıza
+ *  R1=b site, R5=b main, bu round ölçülen b lobby): "Maçın başında B Site'ta öldün" → "Maçın başında
+ *  B Lobby'de öldün", "İlk yarıda B Main'de öldüğün için…" → "İlk yarıda B Lobby'de…", EN "In the
+ *  first half you died at B Site" → "…at B Lobby" — DOĞRU geçmiş olgu ölçülen konumla değiştirilip
+ *  OCR'da olmayan bir ölüm yeri üretiliyordu (78d54c4 dördünü de bayt-aynı bırakıyordu). Bu çapalar
+ *  birden çok round'u kapsayan bir DÖNEMİ anlatır → bu round'un olgusu değil, halka dokunmaz.
+ *  "savunmada/on defense" gibi yalın taraf ifadeleri BİLEREK yok (bu round için de doğru olabilir).
+ *  Türkçe-İ tuzağı: /iu "i" ile U+0130'u eşlemez → [iİ]. */
+const DEATH_BIND_PERIOD_RE = new RegExp(
+  "(?<![\\p{L}\\p{N}])(?:maç(?:ın)?\\s+baş(?:ı(?:nda|ndan)?|larında)"
+  + "|(?:[iİ]lk|[iİ]kinci|önceki|öbür|diğer|öteki)\\s+yarı[\\p{L}'’]*"
+  + "|(?:savunma|atak|defans|saldırı|hücum)\\s+yarısı[\\p{L}'’]*"
+  + "|devre\\s+arasından\\s+önce|pistol['’]?d[ae]"
+  + "|(?:first|second|previous|other)\\s+half|(?:start|beginning)\\s+of\\s+the\\s+(?:match|game|half)"
+  + "|(?:first|opening|early)\\s+(?:few\\s+)?rounds"
+  + ")(?![\\p{L}\\p{N}])",
+  "iu",
+);
 /** "…'de öldüğün round'da …" — sıfat-fiil bir BAŞKA round'a gönderme yapar (geri gönderme). */
 const DEATH_BIND_REL_ROUND_RE = /^\s+(?:round|raund|tur)/iu;
 /** FB05 inceleme (low): ölçülen konum tabloda KANONİK değilse (ham OCR varyantı: 'a hail',
@@ -3472,7 +3492,10 @@ function calloutDisplay(loc: string): string {
   return formatCallout(loc);
 }
 function correctContradictedDeathLocation(
-  text: string, measured: string, mk: string, currentLocs: ReadonlySet<string>, lang?: "tr" | "en",
+  text: string, measuredRaw: string, mk: string, currentLocs: ReadonlySet<string>, lang?: "tr" | "en",
+  // Yakınsama Y09: round_index → ölçülmüş geçmiş konum (historyRoundLocationMap). Verilmezse (doğrudan
+  // çağıran) sayısal round çapası eskisi gibi koşulsuz geçmiş sayılır.
+  historyRounds?: ReadonlyMap<number, string>,
 ): string {
   const table = MAP_CALLOUTS[mk];
   const words = (x: string) => x.split(/\s+/).filter(Boolean);
@@ -3480,21 +3503,59 @@ function correctContradictedDeathLocation(
     const wa = words(a), wb = words(b);
     return wa.every((w) => wb.includes(w)) || wb.every((w) => wa.includes(w));
   };
-  const canonical = table.includes(measured);
-  /** Callout'un yan-cümlesi (virgül dahil sınır) geçmişe çapalı mı? */
-  const pastAnchored = (full: string, from: number, to: number) => {
+  // Yakınsama Y03 (2026-09-24): ölçülen değer tabloda kanonik değilse önce masaüstünün TR→EN
+  // eşlemesi + HUD-önek soyma aynasıyla kanonikleştirilir (canonicalCalloutForMap). KANIT (probe,
+  // evals/real-rounds-23 M1-R17/M1-R15): ölçülen 'istemci b ana' + "Bu round B Main'de … öldün" →
+  // "Bu round o noktada … öldün"; 'a/lobi' + "Bu round A Lobby'de… öldün" → "Bu round o noktada…"
+  // (78d54c4 bayt-aynı). Kanonikleşemeyen değer için kanıtlanabilir çelişki ancak tablodaki TEK bir
+  // adın ham OCR varyantıysa var ('a hail' ~ 'a hall' → farklı ad "o noktada"); hiçbirine
+  // benzemiyorsa ('x yz', Sunset'te tabloda olmayan 'a lobi') halka HİÇ çalışmaz.
+  const canonicalName = canonicalCalloutForMap(measuredRaw, mk);
+  const measured = canonicalName ?? measuredRaw;
+  const canonical = canonicalName !== null;
+  if (!canonical && !table.some((t) => ocrVariantOf(t, measuredRaw))) return text;
+  /** Callout'un yan-cümlesi (virgül dahil sınır). */
+  const clauseSeg = (full: string, from: number, to: number) => {
     let cs = from;
     while (cs > 0 && !/[.,!?;:—\n]/.test(full[cs - 1])) cs--;
     let ce = to;
     while (ce < full.length && !/[.,!?;:—\n]/.test(full[ce])) ce++;
-    const seg = full.slice(cs, ce);
+    return { cs, seg: full.slice(cs, ce) };
+  };
+  /** Callout'un yan-cümlesi (virgül dahil sınır) geçmişe çapalı mı? */
+  const pastAnchored = (full: string, from: number, to: number) => {
+    const { seg } = clauseSeg(full, from, to);
     return new RegExp(LOC_PAST_ANCHOR_RE.source, "iu").test(seg) || DEATH_BIND_PAST_EXTRA_RE.test(seg)
-      || DEATH_BIND_HABIT_RE.test(seg);                     // FB05 inceleme · F14: tekrar/alışkanlık
+      || DEATH_BIND_HABIT_RE.test(seg)                      // FB05 inceleme · F14: tekrar/alışkanlık
+      || DEATH_BIND_PERIOD_RE.test(seg);                    // Y01: maç dönemi (ilk yarı, maçın başı…)
+  };
+  // Yakınsama Y09 (2026-09-24): SAYISAL round çapası ("R3", "round 3", "3. round") o round'un
+  // ÖLÇÜLMÜŞ kaydıyla doğrulanır (F83 historyMatchesAnchor'un ölçülmüş-yol aynası). KANIT (prod
+  // zinciri, gerçek M1-R5/R7/R8 gövdeleri, bu round'un konumu ölçülmüş): "R3'te B Site'ta öldün"
+  // (R3 = a tree), "R1'de A Tree'de öldün" (R1 = b site), "R2'de Market'te öldün" (R2 konumsuz)
+  // AYNEN çıkıyordu; aynı cümle konum ölçülmemiş round'da "R3'te öldün"e iniyor (117a). Kök: halka
+  // geçmiş çapası gördüğü an çapadaki round'a bakmadan dönüyordu; F83 kuralı yalnız
+  // hasDeathLocation===false dalındaydı. Eşleşmezse ÇAPA KORUNUR, yalnız konum düşer (117a ile
+  // simetrik). Aynı yer: eşit, masaüstü kanonik adı eşit, ya da iç içe ("mid" ↔ "mid bottom" — halkanın
+  // bu round kuralı). Sayısal OLMAYAN çapalar (önceki, daha önce, ilk round, sürekli, dönem) doğrulanamaz
+  // (FactGround'da güncel round numarası yok) → eskisi gibi dokunulmaz (bilinen sınır).
+  const numericPastMismatch = (key: string, full: string, from: number, to: number): boolean => {
+    if (!historyRounds) return false;
+    const { cs, seg } = clauseSeg(full, from, to);
+    if (DEATH_BIND_PAST_EXTRA_RE.test(seg) || DEATH_BIND_HABIT_RE.test(seg) || DEATH_BIND_PERIOD_RE.test(seg)) return false;
+    const marks = [...seg.matchAll(LOC_PAST_ANCHOR_RE)].map((m) => ({ at: cs + (m.index ?? 0), text: m[0] }));
+    const pick = marks.filter((x) => x.at < to).sort((a, b) => b.at - a.at)[0]
+      ?? marks.filter((x) => x.at >= to).sort((a, b) => a.at - b.at)[0];
+    const num = pick ? ROUND_NUMBER_ANCHOR_RE.exec(pick.text) : null;
+    if (!num) return false;
+    const rv = historyRounds.get(parseInt(num[1] ?? num[2] ?? num[3], 10));
+    if (rv === undefined) return true;
+    return !(rv === key || canonicalCalloutForMap(rv, mk) === key || nested(key, rv));
   };
   const eligible = (name: string, offset: number, full: string) => {
     const key = name.trim().toLowerCase().replace(/\s+/g, " ");
     if (currentLocs.has(key) || !table.includes(key) || nested(key, measured)) return false;
-    if (!canonical && ocrVariantOf(key, measured)) return false;   // ölçülen ham OCR varyantı = aynı yer
+    if (!canonical && ocrVariantOf(key, measuredRaw)) return false;   // ölçülen ham OCR varyantı = aynı yer
     return !/\/\s*$/.test(full.slice(0, offset));          // liste parçası değil
   };
   let out = text;
@@ -3506,7 +3567,13 @@ function correctContradictedDeathLocation(
       const numFrag = /^\s+\d+\s*,/.test(mid);
       // Fiilsiz "<sayı>," parçasında çapa yalnız callout'un KENDİ parçasında aranır.
       const fragComma = numFrag ? offset + name.length + _suf.length + mid.indexOf(",") : offset + whole.length;
-      if (pastAnchored(full, offset, fragComma)) return whole;
+      if (pastAnchored(full, offset, fragComma)) {
+        // Y09: sayısal round çapası o round'un kaydıyla çelişiyorsa konum düşer, çapa + fiil kalır.
+        if (numFrag || !numericPastMismatch(name.trim().toLowerCase().replace(/\s+/g, " "), full, offset, offset + whole.length)) return whole;
+        const rest = mid.replace(/^\s+/, "") + verb;
+        const atStart0 = offset === 0 || /[.!?]\s+$/.test(full.slice(0, offset));
+        return atStart0 ? rest.charAt(0).toLocaleUpperCase("tr-TR") + rest.slice(1) : rest;
+      }
       // FB05 inceleme · F14 + r4c: "<callout>'de <sayı>," parçası bir SAYIMI konuma bağlar; açık
       // "bu round / şimdi / az önce" çapası yoksa bu round iddiası sayılmaz (dokunma). Çapa varsa
       // callout düzeltilir ve doğrulanmamış SAYI da düşer ("Bu round Mid Bottom'da 2, …" üretilmez).
@@ -3526,7 +3593,11 @@ function correctContradictedDeathLocation(
     out = out.replace(DEATH_BIND_EN_RE, (whole: string, verb: string, prep: string, name: string, offset: number, full: string) => {
       if (!/^\p{Lu}/u.test(name)) return whole;                  // EN'de çıplak küçük ad gündelik kelime
       const at = offset + whole.length - name.length;
-      if (!eligible(name, at, full) || pastAnchored(full, offset, offset + whole.length)) return whole;
+      if (!eligible(name, at, full)) return whole;
+      if (pastAnchored(full, offset, offset + whole.length)) {
+        // Y09: "You died at B Site in R3" (R3 = a tree) → "You died in R3" (117c ile simetrik).
+        return numericPastMismatch(name.trim().toLowerCase().replace(/\s+/g, " "), full, offset, offset + whole.length) ? verb : whole;
+      }
       // FB05 inceleme (low): Türkçe harfli kanonik ad ("Market Kapısı") EN metne yazılmaz.
       return canonical && !TR_SPECIFIC_CHAR_RE.test(measured) ? `${verb} ${prep} ${calloutDisplay(measured)}` : `${verb} there`;
     });
@@ -3670,7 +3741,7 @@ export function realityCheck(
     // "bu round <başka callout>'da öldün" iddiası. Yalnız vision'ın TEK-round konumunda
     // (string) ve harita tablosu biliniyorken; rapor yolunun konum DİZİSİ (çok round) kapsam dışı.
     if (factGround?.hasDeathLocation === true && measuredOne && mk) {
-      t = correctContradictedDeathLocation(t, measuredOne, mk, currentLocs, lang);
+      t = correctContradictedDeathLocation(t, measuredOne, mk, currentLocs, lang, historyRounds);
     }
     return t;
   };

@@ -1771,6 +1771,9 @@ const TR_LOCATIVE_EXCEPTIONS: Record<string, string> = {
   // (iyelikli bileşik, kaynaştırma -n-; eskiden "Kapısı'da"), "CT'de" (se-te okunuşu; eskiden
   // "CT'te"), "B Lobby'de" ("lobi"; eskiden "Lobby'da" — KB de "lobby'de" yazıyor).
   "kapısı": "nda", ct: "de", lobby: "de",
+  // Yakınsama Y03: F14 halkası artık Haven TR 'a kanalizasyon'u kanonik "A Sewer"a oturtup yazabiliyor;
+  // harf-ünlü kuralı "Sewer'de" veriyordu. KB/test yazımı okunuşa uyar: "A Sewer'da" (test-map-callouts).
+  sewer: "da",
 };
 
 // ── TANI-ETİKETİ + KB-BAŞLIĞI SOYUCU (TR-KALAN-07 sınır savunması, 2026-09-23) ──

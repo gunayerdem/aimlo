@@ -811,6 +811,7 @@ console.log("\n════ FB05 · F14 · ÖLÇÜLMÜŞ KONUMLA ÇELİŞEN ÖL�
   const m6: Mem[] = Array.from({ length: 6 }, (_, i) => ({
     round_index: i + 1, died: i === 1, death_position: i === 1 ? "b main" : null, position_confidence: i === 1 ? "high" : undefined,
   }));
+  const m6prev: Mem[] = m6.map((r) => (r.round_index === 6 ? { ...r, died: true, death_position: "b main", position_confidence: "high" } : r));
   const rc = (s: string, m: Mem[], fg: never, lang: "tr" | "en" = "tr", map?: string, kind: "death" | "suggestion" = "death") =>
     realityCheck(s, m as never, fg, kind, lang, map).text;
   // (1) HEAD: BAYT-AYNI ("bu round <başka callout>'da öldün" hiç denetlenmiyordu).
@@ -820,20 +821,28 @@ console.log("\n════ FB05 · F14 · ÖLÇÜLMÜŞ KONUMLA ÇELİŞEN ÖL�
     rc("You died at B Main this round, change your angle.", m6, fgA, "en", "Ascent"), "You died at A Site this round, change your angle.");
   eq("118c EN 'Jett killed you at B Main.' → 'at A Site'",
     rc("Jett killed you at B Main.", m6, fgA, "en", "Ascent"), "Jett killed you at A Site.");
-  // Ölçülen konum tabloda KANONİK değilse (A016: masaüstü ham TR gönderebilir) → nötr.
-  eq("118d ölçülen 'a kanalizasyon' (tabloda yok) → 'o noktada'",
+  // Ölçülen konum tabloda KANONİK değilse (A016: masaüstü ham TR gönderebilir) önce masaüstünün
+  // TR→EN eşleme aynasıyla kanonikleşir (yakınsama Y03; eskiden "o noktada" nötrü): Haven
+  // 'a kanalizasyon' = callouts.rs "kanalizasyon"→"sewer" → tablodaki "a sewer".
+  eq("118d ölçülen 'a kanalizasyon' (Haven, TR ham) → masaüstü eşlemesiyle 'A Sewer'da'",
     rc("Bu round C Long'da öldün.", [] as never, { hasDeathLocation: true, deathLocation: "a kanalizasyon" } as never, "tr", "Haven"),
-    "Bu round o noktada öldün.");
+    "Bu round A Sewer'da öldün.");
   // Kapılar (dokunulmaz): harita bilinmiyor · kaba OCR ↔ ince model adı · geçmiş çapası ·
   // bu round'un kendi konumu · tabloda olmayan ad · liste · rapor yolu (konum dizisi) · öğüt.
   const keep: [string, string, Mem[], never, "tr" | "en", string | undefined][] = [
     ["118e harita yok", "Bu round B Main'de öldün, açıyı değiştir.", m6, fgA, "tr", undefined],
     ["118f ölçülen 'mid' ↔ 'Mid Bottom' (iç içe)", "Mid Bottom'da öldün.", m6, { hasDeathLocation: true, deathLocation: "mid" } as never, "tr", "Ascent"],
-    ["118g R-çapalı geçmiş", "R2'de B Main'de öldün, bu round A Site'ta açıyı değiştir.", m6, fgA, "tr", "Ascent"],
-    ["118h 'önceki round' çapası", "Önceki round B Main'de öldün, bu round A'yı tut.", m6, fgA, "tr", "Ascent"],
+    ["118g R-çapalı geçmiş (R2 = b main, doğru olgu)", "R2'de B Main'de öldün, bu round A Site'ta açıyı değiştir.", m6, fgA, "tr", "Ascent"],
+    // Yakınsama Y09: fikstür GERÇEK veriyle — önceki round (R6) b main'de ölmüş. BİLİNEN SINIR: sayısal
+    // OLMAYAN çapa ("önceki round", "ilk round", "daha önce") doğrulanamaz (FactGround'da güncel round
+    // numarası yok) → halka dokunmaz; bu test yanlış olguyu "doğru" saymaz, dokunulmadığını kilitler.
+    ["118h 'önceki round' çapası (R6 = b main; bilinen sınır: doğrulanmaz)", "Önceki round B Main'de öldün, bu round A'yı tut.", m6prev, fgA, "tr", "Ascent"],
     ["118i ölçülen konumun kendisi", "A Site'ta öldün, açıyı değiştir.", m6, fgA, "tr", "Ascent"],
     ["118j OCR varyantı (tabloda yok)", "A Hail'de öldün.", m6, fgA, "tr", "Fracture"],
-    ["118k liste", "B Main/B Lobby'de öldün.", m6, fgA, "tr", "Ascent"],
+    // BİLİNEN SINIR (yakınsama Y09): halka liste parçasına ("B Main/B Lobby") dokunmaz — B Lobby hiç
+    // ölçülmemiş olsa da. Liste üyesi doğrulaması bu halkanın kapsamı dışında; test "doğru çıktı"
+    // değil "dokunulmadı" kilididir.
+    ["118k liste (bilinen sınır: liste üyeleri doğrulanmaz)", "B Main/B Lobby'de öldün.", m6, fgA, "tr", "Ascent"],
     ["118l rapor yolu (konum dizisi)", "Bu round B Main'de öldün.", [] as never, { hasDeathLocation: true, deathLocation: ["a site"] } as never, "tr", "Ascent"],
     ["118m öğüt (ölüm fiili yok)", "Bu round B Main'de açıyı tut.", m6, fgA, "tr", "Ascent"],
     ["118n EN geçmiş çapası", "You died at B Main in R2, change your angle.", m6, fgA, "en", "Ascent"],
@@ -962,9 +971,18 @@ console.log("\n════ FB05 · F83 · GEÇMİŞ KONUM MUAFİYETİ ROUND'A B
   t("117e 'R1 ve R3'te B site'ta' → en yakın çapa R3 → konum düşer", !/B site/i.test(o117e) && /R3'te öldün/.test(o117e), `→ "${o117e}"`);
   // Sayısal OLMAYAN çapa eski küme kuralıyla kalır.
   same("117e2 'Daha önce B site'ta öldün.' (sayısal değil) bayt-aynı", rc("Daha önce B site'ta öldün."), "Daha önce B site'ta öldün.");
-  // (f) konum ölçülmüş yol bu değişiklikten etkilenmez.
-  const c117f = "R3'te B site'ta öldün.";
-  same("117f hasDeathLocation:true yolu bayt-aynı", rc(c117f, "tr", { hasDeathLocation: true, deathLocation: "a site" } as never), c117f);
+  // (f) Yakınsama Y09: ölçülmüş yol da AYNI round kuralını kullanır (F14 halkası, harita biliniyorken).
+  // Eski 117f "R3'te B site'ta öldün." (R3 = a tree) çıktısını haritasız çağrıyla "bayt-aynı" diye
+  // kilitliyordu — yanlış olgu. Doğru veriyle: R3'ün ÖLÇÜLMÜŞ konumu korunur, çelişen konum düşer.
+  const fgA9 = { hasDeathLocation: true, deathLocation: "a site" } as never;
+  const rcM = (s: string, lang: "tr" | "en" = "tr") => realityCheck(s, rh9 as never, fgA9, "death", lang, "Ascent").text;
+  same("117f ölçülmüş yol: DOĞRU round-konum 'R3'te A Tree'de öldün.' bayt-aynı", rcM("R3'te A Tree'de öldün."), "R3'te A Tree'de öldün.");
+  eq("117g ölçülmüş yol: 'R3'te B site'ta öldün.' (R3 = a tree) → konum düşer (117a ile simetrik)",
+    rcM("R3'te B site'ta öldün, B'yi tek tutma."), "R3'te öldün, B'yi tek tutma.");
+  eq("117h ölçülmüş yol EN: 'You died at B Site in R3' (R3 = a tree) → 'You died in R3'",
+    rcM("You died at B Site in R3, hold a safer angle.", "en"), "You died in R3, hold a safer angle.");
+  eq("117i ölçülmüş yol: kaydı olmayan round ('R2'de Market'te') → konum düşer", rcM("R2'de Market'te öldün."), "R2'de öldün.");
+  same("117j ölçülmüş yol: 'R1'de B site'ta öldün' (R1 = b site) bayt-aynı", rcM("R1'de B site'ta öldün."), "R1'de B site'ta öldün.");
 }
 
 console.log("\n════ FB05 inceleme · F14 tekrar/alışkanlık · lookbehind · OCR varyantı · ek/EN · F52 geçmiş + tahmin ════");
@@ -985,12 +1003,33 @@ console.log("\n════ FB05 inceleme · F14 tekrar/alışkanlık · lookbeh
     ["140d 'Genelde'", "Genelde B Main'de öldün.", "tr"],
     ["140e 'Her seferinde'", "Her seferinde B Main'de öldün.", "tr"],
     ["140f 'öldüğün round'da' (başka round'a gönderme)", "B Main'de öldüğün round'da da aynı hatayı yaptın.", "tr"],
-    ["140g 'İlk round' (Türkçe-İ tuzağı)", "İlk round B Main'de öldün.", "tr"],
     ["140h 'Savunmada … üst üste öldüğün' (lookbehind açıldı, alışkanlık korur)", "Savunmada B Main'de üst üste öldüğün için açını değiştir.", "tr"],
     ["140i EN 'always'", "You always died at B Main.", "en"],
     ["140j EN 'again'", "You died at B Main again.", "en"],
     ["140k EN 'Early in the match'", "Early in the match you died at B Main.", "en"],
   ] as [string, string, "tr" | "en"][]) same(`${ad} bayt-aynı`, rc(s, lang), s);
+  // Yakınsama Y09: 140g fikstürü GERÇEK veriyle (eskiden m5'te R1 died:false iken "İlk round B Main'de
+  // öldün" doğru sayılıyordu). BİLİNEN SINIR: "ilk round" sayısal çapa değildir → doğrulanmaz.
+  const m5r1: Mem[] = m5.map((r) => (r.round_index === 1 ? { round_index: 1, died: true, death_position: "b main", position_confidence: "high" } : r));
+  same("140g 'İlk round' (Türkçe-İ tuzağı; R1 = b main) bayt-aynı", rc("İlk round B Main'de öldün.", "tr", fgA, "Ascent", m5r1), "İlk round B Main'de öldün.");
+  // Yakınsama Y01: MAÇ DÖNEMİ çapaları (B Main hafızada R2/R4/R5 ölçülmüş → DOĞRU geçmiş olgu). HEAD:
+  // hepsi ölçülen konuma çevriliyordu ("Maçın başında A Site'ta öldün", "In the first half you died at
+  // A Site") → OCR'da olmayan ölüm yeri.
+  for (const [ad, s, lang, kind] of [
+    ["146a 'Maçın başında'", "Maçın başında B Main'de öldün; bu round farklı açı al.", "tr", "death"],
+    ["146b 'İlk yarıda … öldüğün için bu round …'", "İlk yarıda B Main'de öldüğün için bu round Market'ten crossfire kur.", "tr", "suggestion"],
+    ["146c 'Savunma yarısında'", "Savunma yarısında B Main'de öldün, şimdi atakta farklı gir.", "tr", "death"],
+    ["146d 'İkinci yarının başında'", "İkinci yarının başında B Main'de öldün.", "tr", "death"],
+    ["146e 'Maç başında'", "Maç başında B Main'de öldün.", "tr", "death"],
+    ["146f 'Pistolde'", "Pistolde B Main'de öldün.", "tr", "death"],
+    ["146g EN 'In the first half'", "In the first half you died at B Main.", "en", "death"],
+    ["146h EN '… in the first half, hold …'", "Since you died at B Main in the first half, hold Market with a teammate this round.", "en", "suggestion"],
+    ["146i EN 'At the start of the match'", "At the start of the match you died at B Main.", "en", "death"],
+    ["146j EN 'In the opening rounds'", "In the opening rounds you died at B Main.", "en", "death"],
+  ] as [string, string, "tr" | "en", "death" | "suggestion"][]) same(`${ad} bayt-aynı`, rc(s, lang, fgA, "Ascent", m5, kind), s);
+  // Çapasız ve açık "bu round" iddiası düzeltilmeye DEVAM eder (halkanın asıl hedefi).
+  eq("146k çapasız 'B Main'de öldün, …' → ölçülen konum", rc("B Main'de öldün, bu round farklı açı al."), "A Site'ta öldün, bu round farklı açı al.");
+  eq("146l EN 'You died at B Main this round' → ölçülen konum", rc("You died at B Main this round.", "en"), "You died at A Site this round.");
   // "<callout>'de <sayı>," açık "bu round" çapası YOKSA bu round iddiası değil (sayım yolu ele alır).
   const o130l = rc("B Main'de 3, genel olarak son 6 round'da hep öldün.");
   t("140l '<sayı>,' çapasız → konum ölçülene ÇEVRİLMEZ ('A Site'ta 3' yok)", o130l.startsWith("B Main'de 3,") && !/A Site/.test(o130l), `→ "${o130l}"`);
@@ -1002,6 +1041,19 @@ console.log("\n════ FB05 inceleme · F14 tekrar/alışkanlık · lookbeh
   same("142a 'a hail' ölçülü + 'A Hall'da öldün' (Fracture) bayt-aynı (HEAD: 'O noktada öldün')", rc("A Hall'da öldün.", "tr", fgHail, "Fracture"), "A Hall'da öldün.");
   same("142b EN 'You died at A Hall' bayt-aynı (HEAD: 'You died there')", rc("You died at A Hall.", "en", fgHail, "Fracture"), "You died at A Hall.");
   eq("142c farklı callout ('B Main') hâlâ nötrlenir", rc("B Main'de öldün.", "tr", fgHail, "Fracture"), "O noktada öldün.");
+  // Yakınsama Y03: kanonik OLMAYAN ölçülen konum önce masaüstü eşleme aynasıyla kanonikleşir; olmazsa
+  // (ve tablodaki bir adın OCR varyantı da değilse) kanıtlanabilir çelişki yok → halka çalışmaz.
+  // KANIT (saha v1.0.19 gövdeleri): 'istemci b ana' (aimlo-runtime 01.txt:4974), 'a/lobi'
+  // (aimlo-runtimeKAAN.txt:4226) — HEAD: modelin DOĞRU "B Main"/"A Lobby"si "o noktada"ya iniyordu.
+  const loc = (d: string) => ({ hasDeathLocation: true, deathLocation: d }) as never;
+  same("147a 'istemci b ana' + \"Bu round B Main'de öldün\" bayt-aynı (HEAD: 'o noktada')", rc("Bu round B Main'de öldün.", "tr", loc("istemci b ana")), "Bu round B Main'de öldün.");
+  same("147b 'a/lobi' + \"Bu round A Lobby'de öldün\" bayt-aynı", rc("Bu round A Lobby'de öldün.", "tr", loc("a/lobi")), "Bu round A Lobby'de öldün.");
+  eq("147c 'a/lobi' + \"Bu round B Main'de öldün\" → kanonik 'A Lobby'", rc("Bu round B Main'de öldün.", "tr", loc("a/lobi")), "Bu round A Lobby'de öldün.");
+  same("147d Summit 'a resim' + \"A Art'ta öldün\" bayt-aynı", rc("A Art'ta öldün.", "tr", loc("a resim"), "Summit"), "A Art'ta öldün.");
+  same("147e Haven 'a kanalizasyon' + \"A Sewer'da öldün\" bayt-aynı", rc("A Sewer'da öldün.", "tr", loc("a kanalizasyon"), "Haven"), "A Sewer'da öldün.");
+  same("147f eşlenemeyen 'x yz' + \"Bu round B Main'de öldün\" bayt-aynı (HEAD: 'o noktada')", rc("Bu round B Main'de öldün.", "tr", loc("x yz")), "Bu round B Main'de öldün.");
+  same("147g Sunset 'a lobi' (A016: Sunset tablosunda 'a lobby' yok) bayt-aynı", rc("Bu round B Main'de öldün.", "tr", loc("a lobi"), "Sunset"), "Bu round B Main'de öldün.");
+  eq("147h EN HUD önekli 'iştemcj f b/ bölge' → 'at B Site'", rc("You died at B Main this round.", "en", loc("iştemcj f b/ bölge")), "You died at B Site this round.");
   // (4) halkanın yazdığı ek / EN metin.
   eq("143a ölçülen 'market kapısı' → \"Market Kapısı'nda\" (HEAD: \"Kapısı'da\")",
     rc("Bu round B Main'de öldün.", "tr", { hasDeathLocation: true, deathLocation: "market kapısı" } as never), "Bu round Market Kapısı'nda öldün.");

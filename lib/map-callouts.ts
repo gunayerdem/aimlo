@@ -144,3 +144,64 @@ export function calloutBelongsToMap(callout: string, map: string | undefined | n
   if (!k) return true;
   return MAP_CALLOUTS[k].includes(c);
 }
+
+// ── ÖLÇÜLEN KONUMUN KANONİK ADI (yakınsama Y03, 2026-09-24) ──────────────────────
+// KANIT: reality-checker F14 halkası (correctContradictedDeathLocation) ölçülen deathLocation
+// tabloda KANONİK değilse "çelişki" diye modelin DOĞRU callout'unu "o noktada"ya indiriyordu:
+// saha v1.0.19 gövdeleri 'istemci b ana' (aimlo-runtime 01.txt:4974), 'a/lobi'
+// (aimlo-runtimeKAAN.txt:4226), 'a/kanalizasyon' (LOG.txt:987) — probe: "Bu round B Main'de
+// öldün" → "Bu round o noktada öldün". v1.0.19 masaüstü bu okumaları TR→EN eşlemeden HAM
+// gönderiyor (güncel masaüstü callouts.rs TR_WORD_ALIASES + tidy_callout ile çözüyor).
+// Bu yardımcı YALNIZ karşılaştırma içindir: gönderilen/saklanan değer değişmez (A016).
+// Kural masaüstüyle aynı yönde ve DAR: (1) '/' '\' → boşluk; (2) baştaki HUD token'ları
+// (rakamlı ya da katlanmış hâlde 'emc'/'fps'/'ient'/'surum' içeren, ya da a/b/c dışındaki
+// tek harf — FPS/"İstemci" sayacı kırpıma sızıyor, ocr.rs tidy_callout testleri) atılır;
+// (3) çok-kelimeli ve kelime başına TR→EN eşleme (callouts.rs TR_PHRASE_ALIASES /
+// TR_WORD_ALIASES BİREBİR — test-map-callouts [16] kardeş repoyla kıyaslar); (4) sonuç O
+// HARİTANIN tablosundaysa döner, değilse null (uydurma kanonik ad ÜRETİLMEZ).
+/** callouts.rs TR_WORD_ALIASES birebir (anahtarlar katlanmış: ü→u ş→s ğ→g ç→c ı→i ö→o). */
+export const TR_WORD_ALIASES: readonly (readonly [string, string])[] = [
+  ["lobi", "lobby"], ["lobisi", "lobby"], ["orta", "mid"], ["ana", "main"], ["pazar", "market"],
+  ["cennet", "heaven"], ["cehennem", "hell"], ["bolge", "site"], ["baglanti", "link"], ["kupa", "trophy"],
+  ["bahce", "garden"], ["ust", "top"], ["alt", "bottom"], ["agac", "tree"], ["donemec", "bend"],
+  ["kirisler", "rafters"], ["kiris", "rafters"], ["carsi", "market"], ["hucre", "cubby"], ["cesme", "fountain"],
+  ["resim", "art"], ["pencere", "window"], ["uzun", "long"], ["garaj", "garage"], ["kule", "tower"],
+  ["kanalizasyon", "sewer"], ["kapilar", "doors"], ["seramikler", "tiles"], ["seramik", "tiles"], ["hol", "hall"],
+  ["botge", "site"],
+];
+/** callouts.rs TR_PHRASE_ALIASES birebir (çok-kelimeli TR ad → tek EN kelime). */
+export const TR_PHRASE_ALIASES: readonly (readonly [string, string])[] = [
+  ["spor salonu", "gym"],
+  ["pazar yeri", "market"],
+];
+const TR_FOLD_MAP: Record<string, string> = { "ç": "c", "ğ": "g", "ı": "i", "ö": "o", "ş": "s", "ü": "u", "â": "a", "î": "i", "û": "u" };
+function foldTrWord(w: string): string {
+  return w.toLocaleLowerCase("tr").replace(/\u0307/g, "").replace(/[çğıöşüâîû]/g, (c) => TR_FOLD_MAP[c] ?? c);
+}
+function isHudToken(tok: string): boolean {
+  const f = foldTrWord(tok);
+  if (/\d/.test(f)) return true;
+  if (/emc|fps|ient|surum/.test(f)) return true;
+  return f.replace(/[^a-z]/g, "").length <= 1 && !/^[abc]$/.test(f);
+}
+/** Ölçülen (ham) konumun o haritadaki kanonik adı; eşlenemezse null. Bkz. yukarıdaki not. */
+export function canonicalCalloutForMap(raw: string, mk: string): string | null {
+  const table = MAP_CALLOUTS[mk];
+  if (!table) return null;
+  const low = raw.trim().toLocaleLowerCase("tr").replace(/\u0307/g, "").replace(/[/\\]+/g, " ").replace(/\s+/g, " ").trim();
+  if (!low) return null;
+  if (table.includes(low)) return low;
+  let toks = low.split(" ");
+  while (toks.length > 1 && isHudToken(toks[0])) toks = toks.slice(1);
+  const words = new Map(TR_WORD_ALIASES.map(([a, b]) => [a, b] as [string, string]));
+  const phrases = new Map(TR_PHRASE_ALIASES.map(([a, b]) => [a, b] as [string, string]));
+  const out: string[] = [];
+  for (let i = 0; i < toks.length; i++) {
+    const f = foldTrWord(toks[i]);
+    const pair = i + 1 < toks.length ? phrases.get(`${f} ${foldTrWord(toks[i + 1])}`) : undefined;
+    if (pair) { out.push(pair); i++; continue; }
+    out.push(words.get(f) ?? toks[i]);
+  }
+  const cand = out.join(" ");
+  return table.includes(cand) ? cand : null;
+}

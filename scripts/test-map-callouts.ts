@@ -12,7 +12,7 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { stripForeignCallouts, realityCheck } from "../lib/reality-checker";
-import { calloutBelongsToMap, MAP_CALLOUTS, UNIVERSAL_CALLOUTS } from "../lib/map-callouts";
+import { calloutBelongsToMap, MAP_CALLOUTS, UNIVERSAL_CALLOUTS, canonicalCalloutForMap, TR_WORD_ALIASES, TR_PHRASE_ALIASES } from "../lib/map-callouts";
 import { CALLOUT_WORDS } from "../lib/coach-text";
 
 let fail = 0;
@@ -369,6 +369,52 @@ console.log("\n[16] EN BELİRSİZ ARTİKEL (FB05 · F12) — 'a long' / 'a short
   t("realityCheck(lang=en, Bind) 'a long sightline' korunur", rcEn === "Jett held a long sightline down B Long.", `→ "${rcEn}"`);
   t("lang'sız yol eskisi gibi: [Bind] 'held a long sightline' (TR yolunda artikel kavramı yok)",
     stripForeignCallouts("Jett held a long sightline down B Long with an Operator.", "Bind") === "Jett held sightline down B Long with an Operator.");
+}
+
+console.log("\n[17] ÖLÇÜLEN KONUMUN KANONİK ADI (yakınsama Y03) — TR→EN eşleme aynası + masaüstü senkronu");
+{
+  // Saha v1.0.19 gövdeleri (ham TR / HUD önekli) ve beklenen kanonik ad; eşlenemeyen → null.
+  const cases: [string, string, string | null][] = [
+    ["istemci b ana", "ascent", "b main"],          // aimlo-runtime 01.txt:4974
+    ["a/lobi", "ascent", "a lobby"],                // aimlo-runtimeKAAN.txt:4226
+    ["a kanalizasyon", "haven", "a sewer"],         // LOG.txt:987 'a/kanalizasyon'
+    ["a/kanalizasyon", "haven", "a sewer"],
+    ["a resim", "summit", "a art"],
+    ["b spor salonu", "summit", "b gym"],           // callouts.rs TR_PHRASE_ALIASES
+    ["iştemcj f b/ bölge", "ascent", "b site"],     // HUD öneki + tek harf çöp
+    ["İSTEMCİ B ANA", "ascent", "b main"],          // Türkçe-İ büyük harf
+    ["b main", "ascent", "b main"],                 // zaten kanonik
+    ["a lobi", "sunset", null],                     // A016: Sunset tablosunda 'a lobby' YOK → uydurma kanonik yok
+    ["x yz", "ascent", null],
+    ["a hail", "fracture", null],                   // OCR varyantı eşlemeyle çözülmez (halka ayrıca ele alır)
+    ["orta", "ascent", "mid"],
+    ["b ana", "nonexistent", null],
+  ];
+  for (const [raw, mk, want] of cases) {
+    const got = canonicalCalloutForMap(raw, mk);
+    t(`canonicalCalloutForMap('${raw}', ${mk}) = ${JSON.stringify(want)}`, got === want, `→ ${JSON.stringify(got)}`);
+  }
+  // Masaüstü senkronu: callouts.rs TR_WORD_ALIASES / TR_PHRASE_ALIASES ile SIRA DAHİL birebir (B9 ayna).
+  const deskDir = process.env.AIMLO_DESKTOP_DIR
+    ? path.resolve(process.env.AIMLO_DESKTOP_DIR)
+    : path.resolve(__dirname, "..", "..", "aimlo-desktop");
+  const rsPath = path.join(deskDir, "src-tauri", "src", "callouts.rs");
+  if (!fs.existsSync(rsPath)) {
+    console.log(`  ⏭  SKIP — kardeş masaüstü reposu yok (${rsPath})`);
+  } else {
+    const s = fs.readFileSync(rsPath, "utf8").replace(/\r\n/g, "\n");
+    const stripComments = (src: string) => src.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/[^\n]*/g, "");
+    const pairs = (name: string) => {
+      const m = new RegExp(`const ${name}:[^=]*=\\s*&\\[([\\s\\S]*?)\\n\\];`).exec(s);
+      return m ? [...stripComments(m[1]).matchAll(/\(\s*"([^"]+)"\s*,\s*"([^"]+)"\s*\)/g)].map((e) => `${e[1]}→${e[2]}`) : null;
+    };
+    for (const [name, mine] of [["TR_WORD_ALIASES", TR_WORD_ALIASES], ["TR_PHRASE_ALIASES", TR_PHRASE_ALIASES]] as const) {
+      const desk = pairs(name);
+      const have = mine.map(([a, b]) => `${a}→${b}`);
+      t(`${name} callouts.rs ile birebir (${have.length} çift)`, !!desk && desk.join("|") === have.join("|"),
+        `→ masaüstü: ${desk ? desk.join(", ") : "ayrıştırılamadı"}`);
+    }
+  }
 }
 
 console.log(`\n══════ ${fail === 0 ? "✅ TÜMÜ GEÇTİ" : `❌ ${fail} BAŞARISIZ`} ══════\n`);
