@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
-import { verifyAuthAndRateLimit, authUnavailableResponse, consumeDailyQuota } from "@/lib/api-auth";
+import { verifyAuthAndRateLimit, authUnavailableResponse, consumeDailyQuota, refundDailyQuota } from "@/lib/api-auth";
 import { checkMatchQuota } from "@/lib/entitlements";
 import { saveAiUsage } from "@/lib/ai-usage";
 import { loadPlayerMemory, updatePlayerMemory, buildMemoryContext } from "@/lib/player-memory";
@@ -13,10 +13,12 @@ import {
   generateDeterministicReport,
   buildReportPrompts,
   buildReportRequestBody,
-  parseReportJSON,
-  finalizeReportFields,
+  interpretReportCompletion,
+  buildReportAIFailure,
   reportOutcome,
+  REPORT_AI_FAILURE_WIRE,
   REPORT_CALL,
+  type ReportAIResult,
   type ReportRequest,
   type ReportResponse,
 } from "@/lib/report-prompt";
@@ -27,8 +29,9 @@ import { maybeRefineReport, REFINE_CALL, type RefineCallModel } from "@/lib/repo
  * Generates end-of-match coaching report.
  *
  * - Migrated to OpenAI GPT-5 mini (May 2026) — uses OPENAI_API_KEY
- * - OPENAI_API_KEY missing → deterministic stats only (no AI text)
- * - All paths guaranteed to return valid ReportResponse shape
+ * - OPENAI_API_KEY missing → deterministic stats only (no AI text; dev path)
+ * - FB01 · F54 (2026-09-24): key present + AI failure → 502/504 structured error
+ *   (never template coach text), nothing persisted, no player_memory update.
  */
 
 /* ══════════════════════════════════════════════════════════
@@ -121,6 +124,8 @@ async function persistAnalysis(
       result: report.matchResult,
       ...(body.matchComplete !== undefined ? { matchComplete: body.matchComplete } : {}),
       ...(body.endReason ? { endReason: body.endReason } : {}),
+      // FB01 · F54: geçmiş ekranı şablonu AI raporundan ayırabilsin (anahtarsız dev yolu).
+      aiGenerated: report.aiGenerated,
       winPct: report.winPct,
       roundsWon: report.won,
       roundsLost: report.lost,
@@ -182,11 +187,15 @@ async function persistAnalysis(
 /* ══════════════════════════════════════════════════════════
    AI REPORT — with timeout, validation, safe prompt
    ══════════════════════════════════════════════════════════ */
-async function generateAIReport(body: ReportRequest, userId?: string): Promise<ReportResponse> {
+// FB01 · F54 (2026-09-24): dönüş artık ReportAIResult — başarısızlık AYRI sınıf
+// (ai_timeout / ai_upstream_error / ai_invalid_json / ai_invalid_shape); POST handler
+// onu 502/504'e çevirir. Eskiden dört yol da sessizce `stats` (şablon) dönüyordu.
+// Şablon YALNIZ anahtarsız dev yolunda kalır (ok:true, aiGenerated=false).
+async function generateAIReport(body: ReportRequest, userId?: string): Promise<ReportAIResult> {
   const apiKey = process.env.OPENAI_API_KEY;
   const stats = generateDeterministicReport(body);
 
-  if (!apiKey) return stats;
+  if (!apiKey) return { ok: true, report: stats };
 
   const { lang } = body;
 
@@ -208,6 +217,9 @@ async function generateAIReport(body: ReportRequest, userId?: string): Promise<R
 
   const { systemPrompt, userPrompt } = buildReportPrompts(body, { memoryContext });
 
+  // F54: yanıt gövdesi alındıktan SONRAKİ istisna (son-işlem hatası) altyapı hatası DEĞİL
+  // → ai_invalid_shape (kota iadesi yok); öncesi ağ/OpenAI → ai_upstream_error.
+  let gotResponse = false;
   try {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), AI_TIMEOUT_MS);
@@ -230,11 +242,12 @@ async function generateAIReport(body: ReportRequest, userId?: string): Promise<R
     if (!response.ok) {
       clearTimeout(timeoutId);
       console.error(`[Aimlo AI] Report API ${response.status}`);
-      return stats;
+      return { ok: false, code: "ai_upstream_error" };
     }
 
     const data = await response.json();
     clearTimeout(timeoutId);
+    gotResponse = true;
     const text: string = data?.choices?.[0]?.message?.content || "";
     const stopReason = data?.choices?.[0]?.finish_reason ?? "unknown";
     const usage = data?.usage as { prompt_tokens?: number; completion_tokens?: number; prompt_tokens_details?: { cached_tokens?: number } } | undefined;
@@ -246,30 +259,28 @@ async function generateAIReport(body: ReportRequest, userId?: string): Promise<R
       saveAiUsage({ userId, routeType: "report", model: data?.model ?? REPORT_CALL.model, promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, cachedTokens: cached, matchId: body.matchId ?? null, latencyMs: Date.now() - aiStartMs });
     }
 
-    // Robust JSON extraction (fence/balanced) — lib/report-prompt.ts parseReportJSON (eval ile ortak).
-    const parsed = parseReportJSON(text);
-    if (parsed === null) {
-      console.error(`[Aimlo AI] Report JSON parse failed (finish=${stopReason}). Raw:`, text.slice(0, 300));
-      return stats;
+    // Robust JSON extraction (fence/balanced) + şekil doğrulama + temizleyici zincir +
+    // kapaklar — lib/report-prompt.ts interpretReportCompletion (parseReportJSON +
+    // finalizeReportFields; OLCUM-ARACI-13, eval aynı fonksiyonu çağırır).
+    const result = interpretReportCompletion(text, body, stats);
+    if (!result.ok) {
+      if (result.code === "ai_invalid_json") {
+        console.error(`[Aimlo AI] Report JSON parse failed (finish=${stopReason}). Raw:`, text.slice(0, 300));
+      } else {
+        console.error("[Aimlo AI] Report invalid shape");
+      }
     }
-
-    // Şekil doğrulama + temizleyici zincir + kapaklar (OLCUM-ARACI-13): lib/report-prompt.ts
-    // finalizeReportFields — eval aynı fonksiyonu çağırır. Geçersiz şekil → null → stats.
-    const finalized = finalizeReportFields(parsed, body, stats);
-    if (finalized) return finalized;
-
-    console.error("[Aimlo AI] Report invalid shape");
-    return stats;
+    return result;
   } catch (err) {
     if (err instanceof DOMException && err.name === "AbortError") {
       console.error("[Aimlo AI] Report request timed out");
-    } else {
-      console.error(
-        "[Aimlo AI] Report exception:",
-        err instanceof Error ? err.message : "unknown",
-      );
+      return { ok: false, code: "ai_timeout" };
     }
-    return stats;
+    console.error(
+      "[Aimlo AI] Report exception:",
+      err instanceof Error ? err.message : "unknown",
+    );
+    return { ok: false, code: gotResponse ? "ai_invalid_shape" : "ai_upstream_error" };
   }
 }
 
@@ -394,7 +405,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const report = await generateAIReport(validation.data, userId);
+    const ai = await generateAIReport(validation.data, userId);
+    if (!ai.ok) {
+      // FB01 · F54: AI başarısız → yapılandırılmış hata. persistAnalysis / updatePlayerMemory /
+      // maybeRefineReport ÇAĞRILMAZ → şablon rapor kalıcı yazılmaz, aynı matchId'nin sonraki
+      // denemesi 409 kilidine takılmadan AI'ya gider. Tel kodu masaüstünün Upstream kümesinden
+      // (A2 kuyruğu yeniden dener — REPORT_AI_FAILURE_WIRE notu). Günlük hak yalnız altyapı
+      // hatasında (timeout / OpenAI !ok) iade edilir.
+      if (REPORT_AI_FAILURE_WIRE[ai.code].refundQuota) {
+        await refundDailyQuota(userId, "report");
+      }
+      console.warn(`[Aimlo AI] Report failed (${ai.code}) → ${REPORT_AI_FAILURE_WIRE[ai.code].status}, rapor kaydedilmedi`);
+      const failure = buildReportAIFailure(ai.code, validation.data.lang);
+      return NextResponse.json(failure.body, { status: failure.status, headers: failure.headers });
+    }
+    const report = ai.report;
 
     // Update player memory with match data
     try {

@@ -9,6 +9,9 @@
  *       Fix olmadan: (4,4) LOSS, rekabetçi (9,4) WIN, player_memory null maçı kayıp sayar.
  * [F13] rounds[].side + devre arası çıkarımı: iki taraf görülünce KB side filtresi YOK,
  *       Side "mixed", round satırında side=, kural 9 round-bazlı; ≤12 round tek taraf aynen.
+ * [F54] AI hatası (sahte OpenAI 500 / geçersiz JSON / şekil / timeout) → 502/504 yapılandırılmış
+ *       hata; INSERT yok, hafıza yok, refine yok; aynı matchId ikinci istek 409 DEĞİL, AI'ya gider.
+ *       Fix olmadan: 200 + aiGenerated:false + şablon analyses'e kalıcı yazılır.
  * [F89] deterministik şablon: ajan/harita yok + dağınık ölüm + enemyCount yok → "Unknown",
  *       "okunuyor/tekrarlayan", "0.0", ölçülmemiş trade/utility yargısı YOK (TR+EN) +
  *       Lotus "Hookah'tan girdin." alan-yedeği vakası.
@@ -29,6 +32,9 @@ import {
   resolveReportSides,
   type ReportRequest,
 } from "../lib/report-prompt";
+// GERÇEK api-auth (harness route için sahtesini sonra kurar; bu bağlama o değişmez).
+// Upstash env YOK → günlük sayaç bellek deposunda (harness da UPSTASH_* siler).
+import { consumeDailyQuota, refundDailyQuota } from "../lib/api-auth";
 
 let pass = 0;
 let fail = 0;
@@ -250,6 +256,77 @@ async function main() {
       a.userPrompt.includes("Side: attack (SALDIRI — oyuncu site'lara giriyor: entry/execute/trade/space)") && !/ side=/.test(a.userPrompt));
     const spike = validated({ rounds: desktopRounds(seq(4, 2)), lang: "tr", map: "bind", mode: "spike_rush", side: "attacking" });
     check("spike rush 6 round (R3'te taraf değişir, masaüstü is_side_swap_probe_round) → mixed", resolveReportSides(spike).mixed);
+  }
+
+  // ══════════════════════════════════════════════════════════════════════
+  console.log("\n── [F54] AI hatası → yapılandırılmış hata, kalıcı kayıt / 409 kilidi YOK ──");
+  {
+    const body = {
+      rounds: desktopRounds(["win", "loss", "loss", "win", "loss", "win"]), lang: "tr", map: "ascent", agent: "jett",
+      side: "attacking", matchId: MID, persistOnServer: true,
+    };
+    const cases: { name: string; reply: Parameters<typeof harness.replies.push>[0]; status: number; error: string; reason: string; refund: number }[] = [
+      { name: "sahte OpenAI 500", reply: { content: "", status: 500 }, status: 502, error: "ai_upstream_error", reason: "ai_upstream_error", refund: 1 },
+      { name: "geçersiz JSON", reply: { content: "bu bir json değil {" }, status: 502, error: "ai_upstream_error", reason: "ai_invalid_json", refund: 0 },
+      { name: "geçersiz şekil", reply: { content: JSON.stringify({ summary: "x" }) }, status: 502, error: "ai_upstream_error", reason: "ai_invalid_shape", refund: 0 },
+      { name: "timeout (AbortError)", reply: { content: "", throwAbort: true }, status: 504, error: "ai_timeout", reason: "ai_timeout", refund: 1 },
+    ];
+    for (const c of cases) {
+      resetHarness();
+      harness.db = newFakeDb();
+      process.env.OPENAI_API_KEY = "sk-test-harness-not-real";
+      harness.replies = [c.reply];
+      const res = await route.POST(reportRequest(body));
+      const j = await res.json().catch(() => ({})) as Record<string, unknown>;
+      const inserts = harness.db.calls.filter((m) => m === "POST").length;
+      check(`${c.name} → ${c.status} {error:${c.error}, detail.reason:${c.reason}} (fix yok: 200 + aiGenerated:false)`,
+        res.status === c.status && j.error === c.error && (j.detail as Record<string, unknown>)?.reason === c.reason,
+        `status=${res.status} ${show(j).slice(0, 160)}`);
+      check(`${c.name}: koç metni YOK, Retry-After 30, TR mesaj`,
+        FIELDS.every((f) => !(f in j)) && res.headers.get("retry-after") === "30" && typeof j.message === "string" && /Koç raporu şu an oluşturulamadı/.test(j.message as string));
+      check(`${c.name}: INSERT yok (fix yok: şablon analyses'e yazılıyordu)`, inserts === 0 && harness.db.rows.size === 0, `inserts=${inserts}`);
+      check(`${c.name}: hafıza güncellenmedi, refine çağrılmadı`, harness.memoryUpdates.length === 0 && harness.fetchCalls.length === 1, `mem=${harness.memoryUpdates.length} fetch=${harness.fetchCalls.length}`);
+      check(`${c.name}: günlük kota ${c.refund ? "iade edildi (net 0)" : "harcanmış kalır (model yanıtı ücretlendi; iade = kota delme yüzeyi)"}`,
+        harness.dailyCalls === 1 && harness.dailyRefunds === c.refund, `consume=${harness.dailyCalls} refund=${harness.dailyRefunds}`);
+    }
+    // Aynı matchId ile ikinci istek (OpenAI artık sağlıklı) → 409 DEĞİL, AI çağrılır, kayıt yazılır.
+    resetHarness();
+    const db = newFakeDb();
+    harness.db = db;
+    process.env.OPENAI_API_KEY = "sk-test-harness-not-real";
+    harness.replies = [{ content: "", status: 500 }];
+    await route.POST(reportRequest(body));
+    harness.replies = [{ content: GOOD_AI }];
+    const res2 = await route.POST(reportRequest(body));
+    const j2 = await res2.json() as Record<string, unknown>;
+    check("aynı matchId ikinci istek → 200 (409 DEĞİL), AI çağrıldı, aiGenerated=true",
+      res2.status === 200 && j2.aiGenerated === true && harness.fetchCalls.length >= 2, `status=${res2.status} ${show(j2).slice(0, 120)}`);
+    check("ikinci istekte kayıt yazıldı (savedAnalysisId = matchId)", j2.savedAnalysisId === MID && db.rows.has(MID));
+    check("kayıttaki metin AI metni (şablon değil) ve raw_result_json.aiGenerated=true",
+      (db.rows.get(MID)?.raw_result_json as Record<string, unknown>)?.aiGenerated === true && /A Main/.test(String(db.rows.get(MID)?.summary)));
+    delete process.env.OPENAI_API_KEY;
+  }
+  {
+    // GERÇEK refundDailyQuota (bellek deposu): tek iade, harcamadan fazla iade yok.
+    delete process.env.UPSTASH_REDIS_REST_URL;
+    delete process.env.UPSTASH_REDIS_REST_TOKEN;
+    const u = `refund-test-${Date.now()}`;
+    let allowed = 0;
+    for (let i = 0; i < 10; i++) if ((await consumeDailyQuota(u, "report")) === null) allowed++;
+    const eleventh = await consumeDailyQuota(u, "report");
+    check("gerçek kota: 10/gün harcandı, 11. istek 429", allowed === 10 && eleventh?.status === 429, `allowed=${allowed} 11.=${eleventh?.status}`);
+    const u2 = `refund-test2-${Date.now()}`;
+    for (let i = 0; i < 10; i++) await consumeDailyQuota(u2, "report");
+    const r1 = await refundDailyQuota(u2, "report");
+    const afterRefund = await consumeDailyQuota(u2, "report");
+    const overAgain = await consumeDailyQuota(u2, "report");
+    check("refundDailyQuota: 1 iade → 1 hak geri gelir, sonraki yine 429", r1 === true && afterRefund === null && overAgain?.status === 429, `r1=${r1} after=${afterRefund?.status ?? "ok"} over=${overAgain?.status}`);
+    const u3 = `refund-test3-${Date.now()}`;
+    await consumeDailyQuota(u3, "report");
+    const once = await refundDailyQuota(u3, "report");
+    const twice = await refundDailyQuota(u3, "report");
+    const never = await refundDailyQuota(`never-${Date.now()}`, "report");
+    check("tek iade: aynı harcama iki kez iade edilmez; harcamasız kullanıcıya iade yok (kota bypass'ı yok)", once === true && twice === false && never === false, show({ once, twice, never }));
   }
 
   // ══════════════════════════════════════════════════════════════════════

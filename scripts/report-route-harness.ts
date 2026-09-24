@@ -19,6 +19,7 @@
  *        lib/player-memory → bellek yükleme/yazma sahte; buildMemoryContext
  *                            testin verdiği memoryContext'i döndürür; FB01: yazma
  *                            argümanları harness.memoryUpdates'e kaydedilir
+ *        lib/api-auth refundDailyQuota → FB01 · F54: iade SAYILIR (harness.dailyRefunds)
  * FB01 (F03/F18/F54): harness.db verilirse Supabase PostgREST "analyses" uç noktası bellek
  *   içi sahte tabloya bağlanır (GET = pre-flight/sahiplik SELECT, POST = INSERT);
  *   harness.db.failWith verilirse her çağrı o hatayı döner (ör. 401 PGRST303).
@@ -57,7 +58,9 @@ export type AuthMode =
 export type UsageCall = Record<string, unknown>;
 
 export type FetchCall = { url: string; body: Record<string, unknown> };
-export type ModelReply = { content: string; finishReason?: string; usage?: Record<string, unknown>; model?: string; status?: number };
+export type ModelReply = { content: string; finishReason?: string; usage?: Record<string, unknown>; model?: string; status?: number;
+  /** FB01 · F54: true → fetch AbortError fırlatır (route'un 30 sn AbortController zaman aşımının aynısı). */
+  throwAbort?: boolean };
 
 /** FB01: bellek içi "analyses" tablosu (yalnız harness.db verilince). */
 export type FakeDb = {
@@ -81,6 +84,8 @@ export const harness = {
   dailyReject: null as null | { status: number; body: Record<string, unknown> },
   /** A058-B: verifyAuthAndRateLimit'e route'un geçtiği 3. argüman (deferDaily). */
   verifyOpts: [] as unknown[],
+  /** FB01 · F54: refundDailyQuota çağrı sayısı (günlük hak iadesi). */
+  dailyRefunds: 0,
   /** FB01 · F03: updatePlayerMemory'ye verilen matchData argümanları. */
   memoryUpdates: [] as Record<string, unknown>[],
   /** FB01: null → analyses çağrısı eskisi gibi THROW eder. */
@@ -100,6 +105,7 @@ export function resetHarness(): void {
   harness.dailyCalls = 0;
   harness.dailyReject = null;
   harness.verifyOpts = [];
+  harness.dailyRefunds = 0;
   harness.memoryUpdates = [];
   harness.db = null;
 }
@@ -142,6 +148,7 @@ export const fakeFetch: typeof fetch = async (input: unknown, init?: unknown) =>
   harness.fetchCalls.push({ url, body });
   const r = harness.replies.shift();
   if (!r) throw new Error("harness: sahte model yanıtı kalmadı");
+  if (r.throwAbort) throw new DOMException("The operation was aborted.", "AbortError");
   const payload = {
     model: r.model ?? "gpt-5-mini-2025-08-07",
     choices: [{ message: { content: r.content }, finish_reason: r.finishReason ?? "stop" }],
@@ -186,6 +193,10 @@ export function loadReportRoute(): { POST: (req: Request) => Promise<Response> }
       harness.dailyCalls++;
       const r = harness.dailyReject;
       return r ? Response.json(r.body, { status: r.status }) : null;
+    },
+    refundDailyQuota: async () => {
+      harness.dailyRefunds++;
+      return true;
     },
   };
 

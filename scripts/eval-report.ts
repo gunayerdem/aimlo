@@ -16,7 +16,8 @@
  *   buildReportPrompts         (lib/report-prompt)  — system + user prompt
  *   buildReportRequestBody     (lib/report-prompt)  — REPORT_CALL (1400 token)
  *   parseReportJSON            (lib/report-prompt)  — fence/balanced parse
- *   finalizeReportFields       (lib/report-prompt)  — temizleyici + kapaklar
+ *   interpretReportCompletion  (lib/report-prompt)  — parse + temizleyici + kapaklar;
+ *                                                     AI hatası = yapılandırılmış hata (F54)
  *   maybeRefineReport          (lib/report-refine)  — kalite kapısı + refine
  * Sıra-kilidi: scripts/test-eval-fidelity.ts — her fixture için eval'in istek
  * gövdeleri (ana + refine) ve son metni GERÇEK POST handler'ınkiyle bayt-eşit.
@@ -42,7 +43,8 @@ import {
   buildReportPrompts,
   buildReportRequestBody,
   parseReportJSON,
-  finalizeReportFields,
+  interpretReportCompletion,
+  type ReportAIFailureCode,
   type ReportResponse,
 } from "../lib/report-prompt";
 import { maybeRefineReport, type RefineCallModel } from "../lib/report-refine";
@@ -69,8 +71,11 @@ export type ReportEvalSample = {
   userBytes?: number;
   /** Ana çağrının finish_reason'ı ("http_<status>" = OpenAI hata döndü). */
   finish_reason?: string;
-  /** false → prod bu durumda deterministik şablonu gösterirdi (parse/şekil/HTTP hatası). */
+  /** true → model çıktısı kullanıcıya gitti. FB01 · F54: AI hatasında prod artık şablon
+   *  DEĞİL 502/504 döner — o örnekte aiGenerated=false + aiFailure dolu, final YOK. */
   aiGenerated?: boolean;
+  /** FB01 · F54: prod'un döneceği yapılandırılmış hata sınıfı (lib/report-prompt REPORT_AI_FAILURE_WIRE). */
+  aiFailure?: ReportAIFailureCode;
   /** FB01 · F03: maç sonucu etiketi (WIN/LOSS/DRAW/UNFINISHED) — Score satırına giden değer. */
   matchResult?: string;
   /** parseReportJSON çıktısı (null = parse edilemedi). */
@@ -114,17 +119,38 @@ export async function runReportFixture(
   let finishReason: string;
   let usage: Usage | null = null;
   const res = await post(buildReportRequestBody(systemPrompt, userPrompt));
+  // FB01 · F54 (B9 sadakat): prod AI hatasında şablon DÖNMEZ, 502/504 döner ve refine/
+  // persist/hafıza hiç çalışmaz — eval aynı sınıflamayı (interpretReportCompletion) kaydeder.
+  const failed = (code: ReportAIFailureCode): ReportEvalSample => ({
+    id: fx.id,
+    note: fx.note,
+    lang: body.lang,
+    map: body.setup.map,
+    agent: body.setup.agent,
+    side: body.setup.side,
+    confidence,
+    sysBytes: Buffer.byteLength(systemPrompt, "utf8"),
+    userBytes: Buffer.byteLength(userPrompt, "utf8"),
+    finish_reason: finishReason,
+    aiGenerated: false,
+    aiFailure: code,
+    matchResult: stats.matchResult,
+    raw,
+    usage,
+  });
   if (!res.ok) {
-    // prod: !response.ok → stats (aiGenerated=false); eval aynısını ölçer.
     finishReason = `http_${res.status}`;
-    report = { ...stats };
-  } else {
+    return failed("ai_upstream_error");
+  }
+  {
     const data = await res.json();
     const text: string = data?.choices?.[0]?.message?.content || "";
     finishReason = data?.choices?.[0]?.finish_reason ?? "unknown";
     usage = (data?.usage as Usage | undefined) ?? null;
     raw = parseReportJSON(text);
-    report = (raw === null ? null : finalizeReportFields(raw, body, stats)) ?? { ...stats };
+    const result = interpretReportCompletion(text, body, stats);
+    if (!result.ok) return failed(result.code);
+    report = result.report;
   }
 
   let refineUsage: Usage | null = null;
@@ -187,7 +213,7 @@ async function main() {
       results.push(s);
       console.log(s.error
         ? `FAILED: ${s.error}`
-        : `done (sys=${s.sysBytes}b finish=${s.finish_reason} ai=${s.aiGenerated} result=${s.matchResult} qc=${s.qc?.score} refined=${s.refined}${s.refined ? `:${s.refinedField}` : ""})`);
+        : `done (sys=${s.sysBytes}b finish=${s.finish_reason} ai=${s.aiGenerated}${s.aiFailure ? ` FAIL=${s.aiFailure}` : ""} result=${s.matchResult} qc=${s.qc?.score} refined=${s.refined}${s.refined ? `:${s.refinedField}` : ""})`);
     } catch (e) {
       console.log(`FAILED: ${(e as Error).message}`);
       results.push({ id: fx.id, note: fx.note, error: (e as Error).message });
@@ -200,12 +226,12 @@ async function main() {
 
   console.log(`\n══════ FINAL REPORT TEXT (prod son-işlem + refine) ══════\n`);
   for (const r of results) {
-    if (r.error || !r.final) { console.log(`\n### ${r.id} — ERROR: ${r.error}`); continue; }
+    if (r.error || !r.final) { console.log(`\n### ${r.id} — ${r.aiFailure ? `AI FAILURE (prod 502/504, şablon YOK): ${r.aiFailure}` : `ERROR: ${r.error}`}`); continue; }
     console.log(`\n### ${r.id}  (finish=${r.finish_reason}, ai=${r.aiGenerated}, qc=${r.qc?.score}, refined=${r.refined ? r.refinedField : "no"})`);
     for (const k of FIELDS) console.log(`  ${k}: ${r.final[k]}`);
   }
   const ok = results.filter((r) => !r.error);
-  console.log(`\nÖZET: ${ok.length}/${results.length} örnek · aiGenerated=${ok.filter((r) => r.aiGenerated).length} · finish=stop ${ok.filter((r) => r.finish_reason === "stop").length} · refine denendi ${ok.filter((r) => r.refineAttempted).length} / kabul ${ok.filter((r) => r.refined).length}`);
+  console.log(`\nÖZET: ${ok.length}/${results.length} örnek · aiGenerated=${ok.filter((r) => r.aiGenerated).length} · finish=stop ${ok.filter((r) => r.finish_reason === "stop").length} · AI hatası ${ok.filter((r) => r.aiFailure).length} · refine denendi ${ok.filter((r) => r.refineAttempted).length} / kabul ${ok.filter((r) => r.refined).length}`);
   console.log(`\n✅ wrote ${path.join(outDir, outName)}\n`);
 }
 

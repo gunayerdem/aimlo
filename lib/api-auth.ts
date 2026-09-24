@@ -638,7 +638,11 @@ export async function consumeDailyQuota(userId: string, route: RouteKey): Promis
   if (!dailyLimit) return null;
   try {
     const r = await dailyQuotaCheck(userId, route, dailyLimit);
-    if (r.allowed) return null;
+    if (r.allowed) {
+      // FB01 · F54: bu isteğin harcadığı sayaç — iade (refundDailyQuota) AYNI anahtarı düşürür.
+      rememberDailyCharge(userId, route, r);
+      return null;
+    }
     if (await isRateBypassed(userId)) return null;
     const retryAfter = Math.max(60, Math.ceil((r.resetAt - Date.now()) / 1000));
     return rateLimitResponse({ retryAfter, reason: "daily", resetAt: r.resetAt });
@@ -648,6 +652,59 @@ export async function consumeDailyQuota(userId: string, route: RouteKey): Promis
       return rateLimitResponse({ retryAfter: 30, reason: "service" });
     }
     throw e;
+  }
+}
+
+/**
+ * FB01 · F54 (2026-09-24) — günlük kota İADESİ (AI altyapı hatası).
+ *
+ * NEDEN: report route AI başarısızlığında artık 502/504 döner (şablon rapor YOK); masaüstü
+ * A2 kuyruğu satırı MAX_ATTEMPT_COUNT=10'a kadar yeniden dener. Kota AI'dan ÖNCE harcandığı
+ * için (consumeDailyQuota) bir OpenAI kesintisi 10/gün rapor kotasını bitirip GERÇEK raporu
+ * o gün imkânsız kılıyordu.
+ *
+ * KURALLAR (refundDaily ile aynı): ASLA throw etmez; TEK iade — yalnız bu süreçte
+ * consumeDailyQuota'nın GERÇEKTEN harcadığı bir sayaç kaydı varsa, o kayıt tüketilerek
+ * (anahtar yeniden hesaplanmaz: UTC gece yarısı dönüşünde yanlış günün sayacı düşmesin,
+ * olmayan anahtar DECR ile -1'e inip ertesi güne bedava hak yaratmasın). Kayıt yoksa
+ * no-op → iade sayısı harcama sayısını asla geçemez (kota bypass'ı yok). Kayıtlar süreç
+ * belleğinde, PENDING_CHARGE_TTL_MS sonra budanır (bellek sınırlı).
+ * Hangi hatalarda çağrılacağı çağıranın kararı (report: yalnız timeout / OpenAI !ok —
+ * lib/report-prompt.ts REPORT_AI_FAILURE_WIRE).
+ */
+const PENDING_CHARGE_TTL_MS = 5 * 60_000;
+const pendingDailyCharges = new Map<string, { key: string; resetAt: number; degraded: boolean; at: number }[]>();
+
+function rememberDailyCharge(userId: string, route: RouteKey, r: DailyResult): void {
+  const now = Date.now();
+  for (const [k, list] of pendingDailyCharges) {
+    const fresh = list.filter((c) => now - c.at < PENDING_CHARGE_TTL_MS);
+    if (fresh.length) pendingDailyCharges.set(k, fresh);
+    else pendingDailyCharges.delete(k);
+  }
+  const mapKey = `${userId}:${route}`;
+  const list = pendingDailyCharges.get(mapKey) ?? [];
+  list.push({ key: r.key, resetAt: r.resetAt, degraded: r.degraded === true, at: now });
+  pendingDailyCharges.set(mapKey, list);
+}
+
+export async function refundDailyQuota(userId: string, route: RouteKey): Promise<boolean> {
+  try {
+    const mapKey = `${userId}:${route}`;
+    const list = pendingDailyCharges.get(mapKey);
+    const now = Date.now();
+    let charge: { key: string; resetAt: number; degraded: boolean; at: number } | undefined;
+    while (list && list.length > 0) {
+      const c = list.pop()!;
+      if (now - c.at < PENDING_CHARGE_TTL_MS) { charge = c; break; }
+    }
+    if (list && list.length === 0) pendingDailyCharges.delete(mapKey);
+    if (!charge) return false;
+    await refundDaily(charge.key, charge.resetAt, charge.degraded);
+    return true;
+  } catch (e) {
+    console.warn("[Aimlo] daily quota refund failed:", (e as Error).message);
+    return false;
   }
 }
 

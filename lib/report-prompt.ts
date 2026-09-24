@@ -147,13 +147,12 @@ export type ReportResponse = {
   savedAnalysisId?: string;
   /**
    * B34 (2026-07-31): metin alanları GERÇEK AI çıktısı mı, yoksa deterministik
-   * şablon mu? `false` → AI yapılandırılmamış / timeout / upstream 5xx / JSON
-   * parse hatası nedeniyle şablona düşüldü. Bu route (feedback'ten farklı olarak)
-   * bilinçli şekilde 200 + gerçek istatistik döndürmeye devam ediyor — şablon
-   * metni UYDURMA koç metni DEĞİL, yalnız ölçülen veriden türetilmiş cümlelerdir
-   * (aşağıdaki veri-koşullu şablon). Yine de istemci ikisini ayırt edebilmeli.
-   * Şemaya ADDITIVE: desktop MatchReport (serde) bilinmeyen alanı yok sayar,
-   * web istemcisi alanları tek tek okuyor — sözleşme bozulmaz.
+   * şablon mu? Şemaya ADDITIVE: desktop MatchReport (serde) bilinmeyen alanı yok
+   * sayar, web istemcisi alanları tek tek okuyor — sözleşme bozulmaz.
+   * FB01 · F54 (2026-09-24): B34'ün "AI hatasında 200 + şablon" kararı KALDIRILDI
+   * (CLAUDE.md: AI hatasında yapılandırılmış hata, asla şablon koç metni). Anahtar
+   * VARKEN AI başarısızsa route 502/504 döner (buildReportAIFailure); `false` artık
+   * yalnız OPENAI_API_KEY'siz dev yolunda görülür. raw_result_json'a da yazılır.
    */
   aiGenerated: boolean;
 };
@@ -1408,8 +1407,8 @@ export function parseReportJSON(raw: string): unknown | null {
  * Model çıktısını (parseReportJSON sonrası) doğrular ve temizleyici zincirden
  * geçirir — alan kapakları (summary/mistake/tendencies/adjustment 1000, bestRound
  * 500, decisionScore 200) ve boş-metin fallback'i (stats alanı) TEK YERDE; route
- * ve eval bu fonksiyonu çağırır (OLCUM-ARACI-13). Geçersiz şekil → null (çağıran
- * `stats`a düşer, aiGenerated=false).
+ * ve eval bu fonksiyonu çağırır (OLCUM-ARACI-13). Geçersiz şekil → null
+ * (FB01 · F54: interpretReportCompletion → ai_invalid_shape; şablona DÜŞÜLMEZ).
  */
 export function finalizeReportFields(
   parsed: unknown,
@@ -1435,11 +1434,83 @@ export function finalizeReportFields(
       bestRound: clean(parsed.bestRound, 500, stats.bestRound),
       decisionScore: clean(parsed.decisionScore, 200, stats.decisionScore),
       // B34 (2026-07-31): TEK true noktası — model çıktısı geldi, şeması
-      // doğrulandı ve temizleyici zincirinden geçti. Diğer TÜM dönüş yolları
-      // (apiKey yok / !response.ok / parse başarısız / geçersiz şekil /
-      // timeout / exception) `stats` döner ve aiGenerated=false kalır.
+      // doğrulandı ve temizleyici zincirinden geçti. FB01 · F54: AI hataları artık
+      // yapılandırılmış hata (interpretReportCompletion / REPORT_AI_FAILURE_WIRE);
+      // aiGenerated=false yalnız anahtarsız dev yolunun şablonunda kalır.
       aiGenerated: true,
     };
   }
   return null;
+}
+
+/* ══════════════════════════════════════════════════════════
+   AI BAŞARISIZLIĞI — YAPILANDIRILMIŞ HATA (FB01 · F54, 2026-09-24)
+   ══════════════════════════════════════════════════════════ */
+/**
+ * KANIT (F54): generateAIReport her başarısızlığı (OpenAI !ok, JSON parse, şekil, timeout)
+ * sessizce deterministik şablona çevirip 200 dönüyordu (route.ts:224-267); şablon
+ * analyses'e kalıcı yazılıyor, aynı matchId'nin sonraki denemesi pre-flight'ta 409 alıp
+ * gerçek AI raporunu bir daha hiç üretemiyordu. CLAUDE.md: "on AI failure return a
+ * structured error — never synthesized coach text". Artık başarısızlık AYRI bir sonuç.
+ * Route ve eval-report AYNI yorumlayıcıyı çağırır (B9 sadakat).
+ */
+export type ReportAIFailureCode = "ai_timeout" | "ai_upstream_error" | "ai_invalid_json" | "ai_invalid_shape";
+export type ReportAIResult =
+  | { ok: true; report: ReportResponse }
+  | { ok: false; code: ReportAIFailureCode };
+
+/** Model yanıt METNİ → parse + şekil + temizleyici; başarısızlık sınıfı ayrı döner. */
+export function interpretReportCompletion(
+  text: string,
+  body: ReportRequest,
+  stats: ReportResponse,
+): ReportAIResult {
+  const parsed = parseReportJSON(text);
+  if (parsed === null) return { ok: false, code: "ai_invalid_json" };
+  const finalized = finalizeReportFields(parsed, body, stats);
+  if (!finalized) return { ok: false, code: "ai_invalid_shape" };
+  return { ok: true, report: finalized };
+}
+
+/**
+ * Tel sözleşmesi. ⚠ `error` alanı masaüstünde classify_http_error'ın ÖNCELİKLİ kod
+ * eşlemesine girer (aimlo-desktop ai_client.rs:619-626): "ai_invalid_json" /
+ * "ai_invalid_shape" → InvalidShape → report_flush_is_permanent (lib.rs:7484) → A2
+ * kuyruğu satırı KALICI hata sayar = maç bir daha gönderilmez (veri kaybı). Bu yüzden
+ * rapor yolunda tel kodu YALNIZ masaüstünün Upstream kümesinden ("ai_timeout",
+ * "ai_upstream_error") seçilir; ayrıntılı sınıf additive `detail.reason`'da.
+ * refundQuota (lib/api-auth refundDailyQuota): YALNIZ altyapı hatasında (timeout /
+ * OpenAI !ok). Geçersiz JSON/şekil, modelin ÜRETTİĞİ (ücretlenen) bir yanıttır ve
+ * kullanıcı notlarıyla zorlanabilir — iade edilirse 10/gün kota delinir (maliyet
+ * yükseltme yüzeyi); orada günlük hak harcanmış kalır.
+ */
+export const REPORT_AI_FAILURE_WIRE: Readonly<Record<ReportAIFailureCode, {
+  status: 502 | 504;
+  error: "ai_timeout" | "ai_upstream_error";
+  refundQuota: boolean;
+}>> = {
+  ai_timeout: { status: 504, error: "ai_timeout", refundQuota: true },
+  ai_upstream_error: { status: 502, error: "ai_upstream_error", refundQuota: true },
+  ai_invalid_json: { status: 502, error: "ai_upstream_error", refundQuota: false },
+  ai_invalid_shape: { status: 502, error: "ai_upstream_error", refundQuota: false },
+};
+
+/** AI başarısızlık yanıtı (saf; route NextResponse'a sarar). Asla koç metni taşımaz. */
+export function buildReportAIFailure(code: ReportAIFailureCode, lang: "tr" | "en"): {
+  status: 502 | 504;
+  headers: Record<string, string>;
+  body: { error: string; message: string; detail: { reason: ReportAIFailureCode } };
+} {
+  const wire = REPORT_AI_FAILURE_WIRE[code];
+  return {
+    status: wire.status,
+    headers: { "Retry-After": "30" },
+    body: {
+      error: wire.error,
+      message: lang === "en"
+        ? "The coach report couldn't be generated right now — the AI service didn't return a valid response. Please try again shortly."
+        : "Koç raporu şu an oluşturulamadı — AI servisinden geçerli yanıt alınamadı. Biraz sonra tekrar dene.",
+      detail: { reason: code },
+    },
+  };
 }

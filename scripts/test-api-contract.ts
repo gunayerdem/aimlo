@@ -127,6 +127,30 @@ async function main() {
     );
   }
 
+  // ── 1b) RAPOR AI HATASI TEL KODLARI — FB01 · F54 ─────────────────────────
+  // Rapor route'u AI hatasında artık 502/504 döner (şablon yok). Masaüstü v1.0.19
+  // classify_http_error KOD EŞLEMESİ statüden ÖNCE gelir (aimlo-desktop ai_client.rs:619-626):
+  // "ai_invalid_json"/"ai_invalid_shape" → InvalidShape → report_flush_is_permanent
+  // (lib.rs:7484) → A2 kuyruğu maçı KALICI düşürür. Tel `error` alanı bu yüzden YALNIZ
+  // Upstream kümesinden olabilir (ai_client.rs:623: ai_timeout | ai_unavailable |
+  // ai_upstream_error) ve statü 5xx olmalı — aksi hâlde AI kesintisi maç kaybına döner.
+  console.log("\n[1b] RAPOR AI HATASI — tel kodu masaüstünün Upstream (yeniden denenir) kümesinde");
+  {
+    const rp = await import("../lib/report-prompt");
+    const DESKTOP_UPSTREAM = new Set(["ai_timeout", "ai_unavailable", "ai_upstream_error"]);
+    for (const [code, wire] of Object.entries(rp.REPORT_AI_FAILURE_WIRE)) {
+      const f = rp.buildReportAIFailure(code as Parameters<typeof rp.buildReportAIFailure>[0], "tr");
+      t(`${code} → ${wire.status} error=${wire.error} (Upstream, kalıcı değil) + Retry-After`,
+        DESKTOP_UPSTREAM.has(f.body.error) && f.status >= 500 && f.status < 600 && f.headers["Retry-After"] === "30" && f.body.detail.reason === code,
+        JSON.stringify(f));
+    }
+    t("hata gövdesinde koç metni alanı yok ve 'Analiz yapılamadı.' yok (frontend reddi)",
+      Object.keys(rp.REPORT_AI_FAILURE_WIRE).every((c) => {
+        const f = rp.buildReportAIFailure(c as Parameters<typeof rp.buildReportAIFailure>[0], "en");
+        return !("summary" in f.body) && !JSON.stringify(f.body).includes("Analiz yapılamadı.");
+      }));
+  }
+
   // ── 2) PAYLOAD TAVANI — auth'tan ÖNCE 413 ────────────────────────────────
   // vision/route.ts:441-447: content-length > 5MB ise auth'a bile bakmadan 413.
   console.log("\n[2] PAYLOAD — content-length > 5MB → 413 (auth'tan önce)");
