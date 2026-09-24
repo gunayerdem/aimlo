@@ -110,13 +110,19 @@ type VisionRequest = {
   combatReportVisible?: boolean;
   scoreChanged?: boolean;
   // Game context fields from desktop app
-  side?: string; // "attack" | "defense"
+  // FB03 · F58: masaüstü "attacking" | "defending" gönderir (detection.rs side_from_code);
+  // lib/vision-prompt-builder normalizeSide ile "attack"/"defense"e indirger.
+  side?: string; // "attacking" | "defending" (desktop)
   mode?: string; // "competitive" | "unrated" etc.
   killerInfo?: string; // e.g. "killed by jett with vandal"
   deathLocation?: string; // e.g. "a site", "mid window"
   deathAngle?: string; // e.g. "back-left", "front-right"
   alliesAlive?: number; // 0-4
   enemiesAlive?: number; // 0-5
+  // FB03 · F09 (additive, opsiyonel): canlı-sayı sensörü ÖLÇÜLMÜŞ mü. Yalnız true iken sayı
+  // dersleri (clutch / over-peek / numbers-down / retake-avantaj) ve patternContext'in
+  // "sayısal üstünlükte" satırı açılır. v1.0.19 göndermez → hepsi kapalı.
+  aliveCountsReliable?: boolean;
   credits?: number; // round start credits e.g. 3900
   loadout?: string; // current weapon e.g. "vandal", "spectre"
   lang?: string; // "tr" | "en" — feedback language (desktop Settings; absent = tr, back-compat)
@@ -126,6 +132,9 @@ type VisionRequest = {
   healthAtDeath?: number; // HP + shield at death (0-150)
   hpSampleAgeSec?: number; // 2026-07-09 additive: age of the last-alive HP sample at death-confirm (older desktop builds omit it)
   ultReady?: boolean; // was ultimate ready when player died
+  // FB03 · F08 (additive, opsiyonel): ult sensörü ÖLÇÜLMÜŞ mü. Yalnız true iken ultReady
+  // prompt'a girer, ult-in-pocket dersi ve patternContext'in "ult HAZIR" satırı açılır.
+  ultReadyReliable?: boolean;
   roundTimerAtDeath?: number; // seconds remaining on round timer (0-140)
   // ── FAZ2/FAZ3 additive fields (default-absent) ──
   // Desktop sends these ONLY when its feature flags are on AND the value was
@@ -590,7 +599,7 @@ export async function POST(request: NextRequest) {
 
     // ── PROMPT KURULUMU — TEK KAYNAK (B06 · OLCUM-ARACI-01/02/03, TR-KALAN-18/19) ──
     // Sistem mesajı (SYSTEM_PROMPT + policy + static/scenario/profile/profile2/agent/
-    // abilityHint/map/contextual KB + hafıza + pattern) ve kullanıcı mesajı (ctx →
+    // abilityHint/map/contextual KB + hafıza; pattern F46a’dan beri yalnız kullanıcıda) ve kullanıcı mesajı (ctx →
     // factGround → factSheet → direktif zinciri → geçmiş bloğu) lib/vision-prompt-
     // builder.ts'te kurulur. scripts/eval-vision.ts ve scripts/measure-prompt-prefix.ts
     // AYNI fonksiyonları çağırır; eskiden elle kopyalanmış aynalar prod'dan senaryo

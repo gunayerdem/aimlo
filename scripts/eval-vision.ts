@@ -14,7 +14,7 @@
  * KOPYALAMAZ. Route'un çağırdığı AYNI fonksiyonlar kullanılır:
  *   buildVisionSystemMessage  (lib/vision-prompt-builder) — policy + tüm KB blokları
  *                             (static/scenario/profile/profile2/agent/abilityHint/
- *                             map/contextual + karşı-ajan) + hafıza + pattern
+ *                             map/contextual + karşı-ajan) + hafıza (pattern: kullanıcı mesajında, FB03 F46a)
  *   buildVisionUserMessage    (lib/vision-prompt-builder) — ctx + factGround +
  *                             factSheet + tüm direktifler + geçmiş bloğu
  *                             (ölüm-tipi sinyalleri lib/death-type computeDeathSignals)
@@ -595,6 +595,41 @@ export const SCENARIOS: Scenario[] = [
       alliesAlive: 4, enemiesAlive: 5, economyType: "full_buy", loadout: "vandal",
       roundHistory: Array.from({ length: 5 }, (_, i) => ({
         round_index: i + 1, died: i % 2 === 1, round_won: i % 2 === 0,
+        death_detected_confidence: "observed", timestamp: i,
+      })),
+    },
+  },
+  /* ── MASAÜSTÜ TARAF SÖZLÜĞÜ — FB03 · F58 (2026-09-24) ─────────────────────────
+   * Yukarıdaki S/E serisi side için SENTETİK "attack"/"defense" kullanıyor; masaüstü
+   * ise detection.rs side_from_code ile YALNIZ "attacking"/"defending" gönderir (5 runtime
+   * logunda 50 defending + 3 attacking, 0 attack/defense). Bu yüzden eval, prod'daki
+   * etiket/KB side-filtresi/[SENARYO İPUCU] kırığını hiç görmüyordu. Bu iki senaryo
+   * gövdeyi masaüstünün GERÇEK biçimiyle (küçük harf harita/ajan/konum, ham side)
+   * taşır. */
+  {
+    id: "S34-ascent-sova-def-desktop-retake",
+    note: "Ascent / Sova / SAVUNMA — masaüstü değeri side='defending' + spike kurulu → [RETAKE TAKTİK] işaretçisi + SAVUNMA etiketi + side filtresi (F58)",
+    body: {
+      round: 14, score: "7-6", result: "loss", map: "ascent", agent: "sova", rank: "silver",
+      side: "defending", mode: "competitive", enemyComp: ["jett", "omen", "killjoy", "breach", "reyna"],
+      died: true, killerInfo: "killed by breach with phantom", deathLocation: "b main",
+      alliesAlive: 2, enemiesAlive: 3, spikePlanted: true, economyType: "full_buy", loadout: "vandal",
+      roundHistory: Array.from({ length: 13 }, (_, i) => ({
+        round_index: i + 1, died: i % 3 === 1, round_won: i % 2 === 1,
+        death_detected_confidence: "observed", timestamp: i,
+      })),
+    },
+  },
+  {
+    id: "S35-split-raze-atk-desktop-postplant",
+    note: "Split / Raze / SALDIRI — masaüstü değeri side='attacking' + spike kurulu → [POST-PLANT TAKTİK] (\"Saldırı\" bölümleri) + SALDIRI etiketi + side filtresi (F58)",
+    body: {
+      round: 17, score: "9-7", result: "loss", map: "split", agent: "raze", rank: "silver",
+      side: "attacking", mode: "competitive", enemyComp: ["cypher", "sage", "omen", "jett", "sova"],
+      died: true, killerInfo: "killed by cypher with vandal", deathLocation: "b site",
+      alliesAlive: 2, enemiesAlive: 2, spikePlanted: true, economyType: "full_buy", loadout: "vandal",
+      roundHistory: Array.from({ length: 16 }, (_, i) => ({
+        round_index: i + 1, died: i % 3 === 0, round_won: i % 2 === 0,
         death_detected_confidence: "observed", timestamp: i,
       })),
     },

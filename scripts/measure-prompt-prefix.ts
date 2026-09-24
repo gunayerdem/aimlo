@@ -49,6 +49,22 @@
  * taşı · statik blokları öne al) uygulandıktan SONRA beklenen:
  *   A ≥ %90   ·   D ≥ %64
  * ════════════════════════════════════════════════════════════════════════════
+ *
+ * ════════════════════════════════════════════════════════════════════════════
+ * FB03 · F58 BİLİNÇLİ KABUL (2026-09-24) — masaüstü taraf değerleri (senaryo F)
+ * ════════════════════════════════════════════════════════════════════════════
+ * ÖLÇÜLDÜ (bu script, aynı ağaç, lib/ yalnız HEAD↔F58 farkıyla):
+ *   F58 ÖNCESİ  F attacking→defending: önek 180.727 / 180.727 B = %100 — ama bu bir
+ *               "iyi cache" DEĞİL: KB side filtresi prod değerlerini tanımadığı için HER
+ *               istek iki tarafın bölümlerini birden taşıyordu (E side-undefined ile aynı
+ *               180.727 B; rakip tarafın ~4,9-5,8 KB'ı her istekte prompt'ta).
+ *   F58 SONRASI F: önek 122.277 / 175.861 B = %69,5 (C ile birebir) — devre arasındaki İLK
+ *               istekte 53.584 B (~16,7K token) taze; sonraki her istek saldırıda 174.952 B,
+ *               savunmada 175.861 B (−5.775 / −4.866 B, çoğu cache'li token).
+ * KABUL: yarı başına 2 önek varyantı = maç başına ~1 ek cache-miss (~16,7K taze token ≈
+ * $0,004); karşılığında rakip tarafın bölümleri modele "bu tarafın dersi" diye girmez ve
+ * sentetik C senaryosunun 2026-07-20'den beri ölçtüğü tasarım prod'da ilk kez gerçekleşir.
+ * ════════════════════════════════════════════════════════════════════════════
  */
 import { buildVisionSystemMessage, type VisionPromptBody } from "../lib/vision-prompt-builder";
 
@@ -80,10 +96,10 @@ export type PromptOpts = {
  * AYNI fonksiyon çağrılır: lib/vision-prompt-builder.ts buildVisionSystemMessage.
  * Replika yok → blok taşıması bu ölçüme kendiliğinden yansır.
  *
- * Route'ta öneğin ARDINDAN gelen iki blok (playerMemoryBlock, patternContextBlock)
- * burada boş bırakılır (memoryContext "", patternContext yok): ikisi de ölçülen
- * önekten SONRA duruyor ve öneği etkilemiyor. Yani buradaki "toplam", cache'lenebilir
- * bölgenin tamamıdır.
+ * Route'ta öneğin ARDINDAN gelen blok (playerMemoryBlock) burada boş bırakılır
+ * (memoryContext ""): ölçülen önekten SONRA duruyor ve öneği etkilemiyor. Yani buradaki
+ * "toplam", cache'lenebilir bölgenin tamamıdır. (patternContextBlock FB03 · F46(a) ile
+ * sistem mesajından kalktı — pattern yalnız kullanıcı mesajında.)
  */
 export function bodyOf(opts: PromptOpts): VisionPromptBody {
   return {
@@ -192,6 +208,18 @@ export const SCENARIOS: Scenario[] = [
     why: "OCR side kacirma: side=attack → side=undefined (ayni round!)",
     first: MATCH_1_BASE,
     second: { ...MATCH_1_BASE, side: undefined },
+  },
+  // FB03 · F58 (2026-09-24): masaüstünün GERÇEK taraf değerleri. C/E sentetik "attack"/
+  // "defense" ile ölçüyordu; prod'da masaüstü "attacking"/"defending" gönderir ve F58'e
+  // kadar KB side filtresi bu değerleri tanımadığı için prod öneği yarılar arasında HİÇ
+  // bölünmüyordu (F = %100). F58 filtreyi prod'da gerçekten çalıştırır → F artık C ile
+  // aynı sayıyı verir: yarı başına 2 önek varyantı (bilinçli kabul — aşağıdaki not).
+  {
+    id: "F",
+    name: "side-flip-masaustu",
+    why: "Devre arasi side flip, masaustu degerleri (attacking → defending)",
+    first: { ...MATCH_1_BASE, side: "attacking" },
+    second: { ...MATCH_1_BASE, side: "defending" },
   },
 ];
 

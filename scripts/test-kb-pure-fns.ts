@@ -22,6 +22,7 @@ import { extractKillerAgent } from "../lib/reality-checker";
 import { AGENT_ABILITIES } from "../lib/agent-abilities";
 import {
   classifyDeath,
+  computeDeathSignals,
   sanitizeAliveCount,
   aliveCountForLog,
   ALLIES_ALIVE_MAX,
@@ -145,7 +146,9 @@ console.log("\n[8] ULT-MUAFİYET KÜMESİ PİNİ — iki repo aynı liste (CANLI
   const actual = [...ULT_POCKET_EXEMPT].sort();
   t("ULT_POCKET_EXEMPT = 7 eleman (sıralı küme birebir)", JSON.stringify(actual) === JSON.stringify(pinned), `→ ${JSON.stringify(actual)}`);
   t("Clove + ultReady → ult-in-pocket DEĞİL", classifyDeath({ ultReady: true, playerAgent: "Clove", side: "attack" }) !== "ult-in-pocket");
-  t("Sova + ultReady → ult-in-pocket (muaf değil)", classifyDeath({ ultReady: true, playerAgent: "Sova", side: "attack" }) === "ult-in-pocket");
+  t("Sova + ultReady (+ ölçülmüş sensör bayrağı) → ult-in-pocket (muaf değil)", classifyDeath({ ultReady: true, ultReadyReliable: true, playerAgent: "Sova", side: "attack" }) === "ult-in-pocket");
+  // FB03 · F08: bayraksız (v1.0.19) ultReady ders SEÇTİRMEZ — sensör E yuvasını okuyor (%77 YP).
+  t("Sova + ultReady, bayrak YOK → ult-in-pocket DEĞİL (F08)", classifyDeath({ ultReady: true, playerAgent: "Sova", side: "attack" }) !== "ult-in-pocket");
 }
 
 console.log("\n[9] İMKÂNSIZ CANLI SAYISI — sözleşme 0-4 / 0-5 (LOGLAR-03, 2026-09-23)");
@@ -175,8 +178,19 @@ console.log("\n[9] İMKÂNSIZ CANLI SAYISI — sözleşme 0-4 / 0-5 (LOGLAR-03, 
     t(`${src} → over-peek-advantage DEĞİL`, r !== "over-peek-advantage", `→ ${r}`);
   }
   // Pozitif kontrol: sözleşme içindeki gerçek üstünlük dersi KORUNUR.
-  t("allies:4, enemies:4 (geçerli) → over-peek-advantage korunur",
-    classifyDeath({ alliesAlive: 4, enemiesAlive: 4, side: "defending" }) === "over-peek-advantage");
+  t("allies:4, enemies:4 (geçerli + ölçülmüş sensör bayrağı) → over-peek-advantage korunur",
+    classifyDeath({ alliesAlive: 4, enemiesAlive: 4, aliveCountsReliable: true, side: "defending" }) === "over-peek-advantage");
+  // FB03 · F09: LOGLAR-03 yalnız "5"i maskeliyordu; ≤4 okumalar da gürültü (şerit zemini ölçülüyor,
+  // etiketli 8 karenin 2'si doğru). Bayraksız istemcide sayı dalları KAPALI.
+  t("allies:4, enemies:4 bayraksız (v1.0.19) → over-peek-advantage DEĞİL (F09)",
+    classifyDeath({ alliesAlive: 4, enemiesAlive: 4, side: "defending" }) !== "over-peek-advantage");
+  const sigNoFlag = computeDeathSignals({ side: "defending", alliesAlive: 4, enemiesAlive: 4, ultReady: true });
+  const sigStrFlag = computeDeathSignals({ side: "defending", aliveCountsReliable: "true", ultReadyReliable: 1 });
+  const sigFlag = computeDeathSignals({ side: "defending", aliveCountsReliable: true, ultReadyReliable: true });
+  t("computeDeathSignals: bayrak yalnız gerçek boolean true (yok / 'true' / 1 → undefined)",
+    sigNoFlag.signals.aliveCountsReliable === undefined && sigNoFlag.signals.ultReadyReliable === undefined
+      && sigStrFlag.signals.aliveCountsReliable === undefined && sigStrFlag.signals.ultReadyReliable === undefined
+      && sigFlag.signals.aliveCountsReliable === true && sigFlag.signals.ultReadyReliable === true);
   // Route ctx'i aynı kapıdan geçiyor mu. B06 (2026-09-24): ctx kurulumu route.ts'ten
   // lib/vision-prompt-builder.ts buildVisionContext'e taşındı (route + eval aynı
   // fonksiyon) → yapı kilidi kurucunun kaynağını okur (test-vision-ctx-sanitize emsali).

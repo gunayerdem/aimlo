@@ -119,8 +119,14 @@ export type DeathSignals = {
   healthAtDeath?: number;   // 0-150 — ölü alan, yalnız back-compat (tüketici YOK)
   alliesAlive?: number;     // 0-4
   enemiesAlive?: number;    // 0-5
+  /** FB03 · F09: masaüstü canlı-sayı sensörünü ÖLÇÜLMÜŞ ilan ediyorsa true (gövdede
+   *  aliveCountsReliable===true). Yoksa sayı dalları KAPALI — aşağıdaki aliveReliable notu. */
+  aliveCountsReliable?: boolean;
   spikePlanted?: boolean;
-  ultReady?: boolean;       // ult charged + unused at death (desktop OCR truth)
+  ultReady?: boolean;       // ult charged + unused at death (desktop OCR — yalnız ultReadyReliable ile)
+  /** FB03 · F08: masaüstü ult sensörünü ÖLÇÜLMÜŞ ilan ediyorsa true (gövdede
+   *  ultReadyReliable===true). Yoksa ult-in-pocket dalı KAPALI. */
+  ultReadyReliable?: boolean;
   economyType?: string;     // "full_buy" | "force_buy" | "half_buy" | "eco" | "pistol"
   tradedByAlly?: boolean;
   repeatedPosition?: boolean; // derived in route.ts from roundHistory
@@ -182,8 +188,10 @@ export type DeathSignalsInput = {
   deathTiming?: unknown;
   alliesAlive?: unknown;
   enemiesAlive?: unknown;
+  aliveCountsReliable?: unknown;
   spikePlanted?: unknown;
   ultReady?: unknown;
+  ultReadyReliable?: unknown;
   economyType?: unknown;
   tradedByAlly?: unknown;
   loadout?: unknown;
@@ -268,10 +276,15 @@ export function computeDeathSignals(body: DeathSignalsInput): { signals: DeathSi
     // sayısal ne nitel can ifadesi prompt'a girmez.
     alliesAlive: body.alliesAlive as number | undefined,
     enemiesAlive: body.enemiesAlive as number | undefined,
+    // FB03 · F09: sayılar ancak masaüstü sensörü ölçülmüş ilan ederse güvenilir (yalnız
+    // gerçek boolean true; "true" dizesi / 1 sayılmaz). Bugünkü hiçbir istemci göndermiyor.
+    aliveCountsReliable: body.aliveCountsReliable === true ? true : undefined,
     spikePlanted: body.spikePlanted as boolean | undefined,
     // ult-in-pocket dalı (KB pipeline denetimi 2026-07-19): ctx.ultReady zaten
     // prompt'a giriyordu ama classifier'a hiç ulaşmıyordu — tek kablo burası.
     ultReady: body.ultReady === true ? true : undefined,
+    // FB03 · F08: ultReady yalnız bu bayrakla ele alınır (classifyDeath kapısı).
+    ultReadyReliable: body.ultReadyReliable === true ? true : undefined,
     economyType: str(body.economyType),
     tradedByAlly: body.tradedByAlly as boolean | undefined,
     repeatedPosition,
@@ -338,7 +351,18 @@ export function classifyDeath(b: DeathSignals, suppress?: ReadonlySet<DeathType>
   // :1505/:4407/:4995, gunay-runtime.log:3679, runtimeKAAN:4807) → aa>=ea kapısından
   // "over-peek-advantage" ve "(5v4) sayısal üstünlükte öldün" sahte dersi doğuyordu.
   // Aralık dışı (aa∉0..4 / ea∉0..5) sayım da "okunamadı" sayılır → sayı dalları atlanır.
-  const aliveReliable = sanitizeAliveCount(aa, ALLIES_ALIVE_MAX) !== undefined
+  // 🔴 SENSÖR ÖLÇÜLMEMİŞ (FB03 · F09, 2026-09-24): LOGLAR-03 yalnız "5"i maskeliyordu; ≤4
+  // okumalar da GÜRÜLTÜ. Masaüstü count_alive_players (ocr.rs:4713-4760) portreyi değil takım
+  // şeridinin ZEMİNİNİ ölçüyor (pencere adımı 96 px, güncel HUD'da portre adımı ~66 px;
+  // doygun teal/kırmızı zemin boş yuvayı da "canlı" gösteriyor) — etiketli 8 karenin yalnız
+  // 2'sinde müttefik sayısı doğru; saha: 38 ölümde 4-4 ×6, 4-5 ×5, 3-4 ×5. Bu dallar sahte
+  // "sayı üstünlüğündeyken gereksiz peek" / "clutch" dersi üretiyordu (OCR-only ihlali).
+  // Backend acil kapısı TÜM sahadaki istemcileri anında kapsar (masaüstü düzeltmesi release
+  // ister): sayı dalları YALNIZ masaüstü sensörü ölçülmüş ilan ederse (aliveCountsReliable)
+  // açılır — bugün hiçbir istemci göndermiyor (5 runtime logunda 59 gövdenin 0'ı). Kurtarma
+  // yolu: ölçülmüş sensörlü masaüstü bayrağı gönderince dallar kendiliğinden geri gelir.
+  const aliveReliable = b.aliveCountsReliable === true
+    && sanitizeAliveCount(aa, ALLIES_ALIVE_MAX) !== undefined
     && sanitizeAliveCount(ea, ENEMIES_ALIVE_MAX) !== undefined
     && !(aa === 0 && ea === 0);
 
@@ -369,7 +393,13 @@ export function classifyDeath(b: DeathSignals, suppress?: ReadonlySet<DeathType>
   // onlarda cepte çürüyen ult gerçek kayıptır. Clove istisnasının gerekçesi ayrı
   // (ult'u ölüm SONRASI çalışır) ama sonuç aynı: dal atlanır.
   // Liste modül seviyesinde (ULT_POCKET_EXEMPT, yukarıda) — masaüstü aynasıyla pinli.
-  if (b.ultReady === true && !ULT_POCKET_EXEMPT.has(agentSlug)) return "ult-in-pocket"; // died with charged, unused ult
+  // 🔴 SENSÖR ÖLÇÜLMEMİŞ (FB03 · F08, 2026-09-24): masaüstü detect_ult_ready (ocr.rs:8251-8253,
+  // ölçülmemiş sabit merkez 0.535/0.925) ult yuvasını değil E yeteneği yuvasını örnekliyor:
+  // 307 gerçek 1080p karede READY 87, oyunun kendi X şarj çubuğu 56, kesişim 20 → %77
+  // yanlış-pozitif (v1.0.19 sahada ultReady=true gönderiyor: 5 runtime logunda 5 gövde).
+  // Dal YALNIZ masaüstü sensörü ölçülmüş ilan ederse (ultReadyReliable) açılır — kurtarma
+  // yolu aynı (bayrak gelince ders geri gelir). Sahte "ultin doluydu" olgusu yerine ders yok.
+  if (b.ultReady === true && b.ultReadyReliable === true && !ULT_POCKET_EXEMPT.has(agentSlug)) return "ult-in-pocket"; // died with charged, unused ult
   // Pistol round = kendi bloğu (denetim: universal.md "Erken Round Ölümleri" bölümü
   // hiçbir tipe bağlı değildi = ölü içerik; pistol ölümü eco dersi değil açılış dersi ister).
   if (eco === "pistol") return "pistol-round";

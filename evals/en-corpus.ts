@@ -406,6 +406,33 @@ export const EN_VISION_SCENARIOS: EnVisionScenario[] = [
       roundHistory: rh(4, (i) => i % 2 === 0, (i) => i % 2 === 1),
     },
   },
+  // ── MASAÜSTÜ TARAF SÖZLÜĞÜ — FB03 · F58 (2026-09-24): yukarıdaki senaryolar sentetik
+  // "attack"/"defense" taşıyor; masaüstü YALNIZ "attacking"/"defending" gönderir. Bu iki
+  // senaryo gövdeyi masaüstünün gerçek biçimiyle taşır (küçük harf harita/ajan/konum).
+  {
+    id: "E27-lotus-killjoy-def-desktop-retake",
+    note: "EN / Lotus / Killjoy / DEFENSE — desktop side='defending' + spike planted → [RETAKE TAKTİK] pointer + DEFENSE label + side filter (F58)",
+    lang: "en",
+    body: {
+      lang: "en", round: 11, score: "5-5", result: "loss", map: "lotus", agent: "killjoy", rank: "silver",
+      side: "defending", mode: "competitive", enemyComp: ["raze", "omen", "fade", "jett", "viper"],
+      died: true, killerInfo: "killed by raze with vandal", deathLocation: "b site",
+      alliesAlive: 2, enemiesAlive: 3, spikePlanted: true, economyType: "full_buy", loadout: "phantom",
+      roundHistory: rh(10, (i) => i % 3 === 0, (i) => i % 2 === 0),
+    },
+  },
+  {
+    id: "E28-haven-omen-atk-desktop-side",
+    note: "EN / Haven / Omen / ATTACK — desktop side='attacking', no spike → ATTACK label + side filter (F58)",
+    lang: "en",
+    body: {
+      lang: "en", round: 16, score: "8-7", result: "loss", map: "haven", agent: "omen", rank: "silver",
+      side: "attacking", mode: "competitive", enemyComp: ["chamber", "sova", "killjoy", "jett", "breach"],
+      died: true, killerInfo: "killed by chamber with vandal", deathLocation: "c long",
+      alliesAlive: 4, enemiesAlive: 5, economyType: "full_buy", loadout: "phantom",
+      roundHistory: rh(15, (i) => i % 2 === 1, (i) => i % 3 !== 0),
+    },
+  },
 ];
 
 // ── MAÇ RAPORU SENARYOLARI — evals/report-fixtures/ER*.json (B05, OLCUM-ARACI-11) ──

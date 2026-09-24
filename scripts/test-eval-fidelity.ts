@@ -466,7 +466,8 @@ async function visionRouteSection() {
     ["map", ["[HARİTA BİLGİSİ — "]],
     ["contextual", ["[EŞLEŞME BİLGİSİ]", "[KARŞI-AJAN — "]],
     ["memory", ["[CROSS-MATCH "]],
-    ["pattern", ["[PATTERN CONTEXT"]],
+    // FB03 · F46(a): [PATTERN CONTEXT — Rust Client] SİSTEM bloğu kaldırıldı (enjeksiyon
+    // kanalı; pattern yalnız kullanıcı mesajında) → sıradan çıktı, yokluğu aşağıda kilitli.
   ];
   const orderBad: string[] = [];
   for (const c of VISION_GOLDEN_CASES) {
@@ -484,24 +485,32 @@ async function visionRouteSection() {
       orderBad.push(`${c.id}: zorunlu blok eksik (${found.join(",")})`);
     }
   }
-  const g1Blocks = ["agent", "abilityHint", "map", "contextual", "memory", "pattern"].every((n) =>
+  const g1Blocks = ["agent", "abilityHint", "map", "contextual", "memory"].every((n) =>
     ORDER.find(([k]) => k === n)![1].some((h) => (byId["G1-tr-loc-killer-spike-eco"]?.sys ?? "").includes(SEP + h)));
-  check(`blok sırası KB'den bağımsız kilitli: SYSTEM_PROMPT < policy < static < scenario < profile < profile2 < agent < abilityHint < map < contextual < memory < pattern (${VISION_GOLDEN_CASES.length} vaka; G1 hepsini taşır)`,
+  check(`blok sırası KB'den bağımsız kilitli: SYSTEM_PROMPT < policy < static < scenario < profile < profile2 < agent < abilityHint < map < contextual < memory (${VISION_GOLDEN_CASES.length} vaka; G1 hepsini taşır)`,
     orderBad.length === 0 && g1Blocks, orderBad.join(" | ") || "G1'de blok eksik");
 
   // İçerik kilitleri — prod prompt'unun taşıdığı direktifler (eval'in eskiden üretmedikleri).
   const u = (id: string) => byId[id]?.user ?? "";
   const s = (id: string) => byId[id]?.sys ?? "";
-  check("G1 sistem: static/scenario/profile/profile2 + karşı-ajan + hafıza + pattern blokları",
-    ["[SİLAH + KOMP REHBERİ", "[SENARYO REHBERİ", "[KOÇLUK PROFİLİ — her rank", "[KOÇLUK PROFİLİ — devam]", "[KARŞI-AJAN — Jett", "[CROSS-MATCH GEÇMİŞİ", "[PATTERN CONTEXT — Rust Client]"]
+  check("G1 sistem: static/scenario/profile/profile2 + karşı-ajan + hafıza blokları",
+    ["[SİLAH + KOMP REHBERİ", "[SENARYO REHBERİ", "[KOÇLUK PROFİLİ — her rank", "[KOÇLUK PROFİLİ — devam]", "[KARŞI-AJAN — Jett", "[CROSS-MATCH GEÇMİŞİ"]
       .every((h) => s("G1-tr-loc-killer-spike-eco").includes(h)));
+  // FB03 · F46(a): patternContext SİSTEM mesajına HİÇBİR vakada girmez; G1'in pattern'i
+  // kullanıcı mesajındaki süzülmüş [PATTERN — …] bloğunda (HP zinciri dahil) kalır.
+  check("F46(a): hiçbir golden vakada SİSTEM mesajında [PATTERN CONTEXT yok; G1 pattern'i kullanıcı mesajında",
+    VISION_GOLDEN_CASES.every((c) => !s(c.id).includes("[PATTERN CONTEXT")) && u("G1-tr-loc-killer-spike-eco").includes("\n\n[PATTERN — ")
+      && u("G1-tr-loc-killer-spike-eco").includes("Son 3 round'da 2 kez B Main'i tek tutarken"));
   check("G1 kullanıcı: olgu sözleşmesi + silah/komp + ajan kiti + harita + ders geçmişi + senaryo (retake+ekonomi)",
     ["[ÖLÜM-VERİ SÖZLEŞMESİ", "[SİLAH+KOMP İPUCU", "[AJAN KİTİ", "[HARİTA İPUCU", "[DERS GEÇMİŞİ", "[SENARYO İPUCU", "RETAKE TAKTİK", "[EKONOMİ REHBERİ]", "[GÖRÜNTÜDEKİ YETENEK İKONLARI"]
       .every((h) => u("G1-tr-loc-killer-spike-eco").includes(h)));
   check("G1 pattern HP'si prompt'a girmez (stripNumericHp → stripHpClaims)", !/30 HP|düşük canla/.test(u("G1-tr-loc-killer-spike-eco")));
-  check("G2 EN: dil emri başta + sonda, DEATH-DATA CONTRACT, ultReady/deathTiming/timer ctx'te",
+  // FB03 · F08: G2 gövdesi ultReady:true taşır ama ultReadyReliable YOK (v1.0.19 biçimi) → ctx'te
+  // ultReady yok ve görsel direktifin "state it confidently" cümlesi düşer.
+  check("G2 EN: dil emri başta + sonda, DEATH-DATA CONTRACT, deathTiming/timer ctx'te; bayraksız ultReady ctx'te YOK (F08)",
     u("G2-en-loc-killer-route-ult").includes("[LANGUAGE]") && u("G2-en-loc-killer-route-ult").includes("[REMINDER] Output language: ENGLISH ONLY")
-      && u("G2-en-loc-killer-route-ult").includes("[DEATH-DATA CONTRACT") && /"ultReady": true/.test(u("G2-en-loc-killer-route-ult"))
+      && u("G2-en-loc-killer-route-ult").includes("[DEATH-DATA CONTRACT") && !/"ultReady"/.test(u("G2-en-loc-killer-route-ult"))
+      && !u("G2-en-loc-killer-route-ult").includes("state it confidently") && u("G2-en-loc-killer-route-ult").includes("[ABILITY ICONS IN THE SCREENSHOT]")
       && /"deathTiming": "mid"/.test(u("G2-en-loc-killer-route-ult")) && /"roundTimerAtDeath": 38/.test(u("G2-en-loc-killer-route-ult")));
   check("G3 ajan Unknown + konumsuz + katilsiz: AJAN OKUNAMADI + ÖLÜM YERİ OKUNAMADI + BAĞLAMSIZ ÖLÜM; allies=5 prompt'a girmez",
     ["[AJAN OKUNAMADI]", "[ÖLÜM YERİ OKUNAMADI]", "[BAĞLAMSIZ ÖLÜM]"].every((h) => u("G3-tr-noloc-nokiller-agent-unknown").includes(h))
@@ -600,12 +609,14 @@ async function evalParitySection() {
 
   // Eski aynanın ölçülen 7 sapma round'u (OLCUM-ARACI-03) — prod değeriyle birebir.
   const expectType: Record<string, string> = {
-    "E11-breeze-chamber-atk-op-loss": "op-loss", "E12-haven-sova-def-ult-pocket": "ult-in-pocket",
+    // FB03 · F08: E12 gövdesi ultReady:true taşır ama ultReadyReliable YOK → ult-in-pocket dalı
+    // kapalı; akış crosshair-loss'a iner (tam alım + tüfek). Tip eval = route = prod.
+    "E11-breeze-chamber-atk-op-loss": "op-loss", "E12-haven-sova-def-ult-pocket": "crosshair-loss",
     "M1-R4-ascent-jett": "loss-streak", "M1-R5-ascent-jett": "loss-streak", "M1-R10-ascent-jett": "loss-streak",
     "M1-R18-ascent-jett": "loss-streak", "M1-R2b-ascent-jett": "overtime-matchpoint",
   };
   const typeMiss = Object.entries(expectType).filter(([id, t]) => byId[id]?.req.deathType !== t || byId[id]?.routeType !== t);
-  check("E11/E12/M1-R4/R5/R10/R18/R2b: eval tipi = route tipi = prod (op-loss, ult-in-pocket, loss-streak×4, overtime-matchpoint)",
+  check("E11/E12/M1-R4/R5/R10/R18/R2b: eval tipi = route tipi = prod (op-loss, crosshair-loss [F08: bayraksız ult], loss-streak×4, overtime-matchpoint)",
     typeMiss.length === 0, typeMiss.map(([id]) => `${id}: eval=${byId[id]?.req.deathType} route=${byId[id]?.routeType}`).join(" | "));
 
   // İçerik kilitleri (eval'in eskiden üretmediği prod halkaları).
@@ -619,8 +630,8 @@ async function evalParitySection() {
     U("S6-sunset-killjoy-def-retake-lowhp").includes("[SENARYO İPUCU") && U("S6-sunset-killjoy-def-retake-lowhp").includes("RETAKE TAKTİK"));
   check("gerçek M1-R2 (konum yok): [ÖLÜM YERİ OKUNAMADI] (eski yorum 'bu korpusta hiç ateşlemez' diyordu)",
     U("M1-R2-ascent-jett").includes("[ÖLÜM YERİ OKUNAMADI]"));
-  check("S16 ctx: \"ultReady\": true · E25 ctx: \"deathTiming\": \"mid\" (masaüstü alanları eval'de de prompt'a girer)",
-    /"ultReady": true/.test(U("S16-sunset-deadlock-def-ult")) && /"deathTiming": "mid"/.test(U("E25-bind-waylay-atk-no-killer")));
+  check("S16 ctx: bayraksız ultReady YOK (F08) · E25 ctx: \"deathTiming\": \"mid\" (masaüstü alanları eval'de de prompt'a girer)",
+    !/"ultReady"/.test(U("S16-sunset-deadlock-def-ult")) && /"deathTiming": "mid"/.test(U("E25-bind-waylay-atk-no-killer")));
   check("TR-KALAN-19: eval kbFiles = prompt'a giren dosyalar (static/scenario/profile dahil)",
     ["general/weapon-comp-compact.md", "general/post-plant-playbook.md", "ranks/universal.md"].every((f) => (byId["S1-ascent-cypher-def-strong"]?.req.kbFiles ?? []).includes(f)));
 
@@ -711,7 +722,11 @@ async function evalParitySection() {
 async function measurePrefixSection() {
   console.log("\n── [M] measure-prompt-prefix ölçtüğü metin = route'un sistem mesajı (OLCUM-ARACI-09) ──");
   const rows = measurePrefixScenarios();
-  check(`${rows.length} önek senaryosu ölçüldü`, rows.length === PREFIX_SCENARIOS.length && rows.length === 5);
+  // FB03 · F58: + F (masaüstü taraf değerleri attacking→defending) → 6 senaryo.
+  check(`${rows.length} önek senaryosu ölçüldü`, rows.length === PREFIX_SCENARIOS.length && rows.length === 6);
+  const rowC = rows.find((r) => r.id === "C"), rowF = rows.find((r) => r.id === "F");
+  check("F (masaüstü attacking→defending) = C (sentetik attack→defense): KB side filtresi prod değerlerinde çalışıyor (F58)",
+    !!rowC && !!rowF && rowF.prefixB === rowC.prefixB && rowF.totalB === rowC.totalB && rowF.pct < 100, show({ C: rowC, F: rowF }));
   for (const sc of PREFIX_SCENARIOS) {
     const row = rows.find((r) => r.id === sc.id);
     const sys = buildVisionSystemMessage({ body: prefixBodyOf(sc.second), lang: sc.second.lang ?? "tr", memoryContext: "" }).systemMessage;
