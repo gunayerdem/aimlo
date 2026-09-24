@@ -16,11 +16,14 @@
  * Koşum:  npx tsx scripts/measure-quota-cost.ts
  */
 import { loadKnowledge, loadVisionKnowledge } from "../lib/knowledge-loader";
-import { PRICING } from "../lib/openai-pricing";
+import { resolvePricing } from "../lib/openai-pricing";
 // B07 (OLCUM-ARACI-17): prod model id TEK KAYNAK — model göçünde tavan otomatik yeni fiyattan.
 import { AI_MODEL } from "../lib/ai-model";
 
-const P = PRICING[AI_MODEL];
+// W2 inceleme B07-F1: PRICING[AI_MODEL] satırı yoksa (tarihli pin / unutulan satır) eskiden
+// `P.inputPerM` TypeError ile çöküyordu; resolvePricing ASLA undefined dönmez (tahmini
+// fiyatta uyarı basar).
+const P = resolvePricing(AI_MODEL).pricing;
 
 /**
  * lib/api-auth.ts DAILY_QUOTA ile AYNI olmalı. DAILY_QUOTA export edilmediği için

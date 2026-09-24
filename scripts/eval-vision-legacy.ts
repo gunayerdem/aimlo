@@ -12,6 +12,13 @@
  * çıplak şema + çıplak JSON.parse. Yeni ölçüm VARSAYILAN yoldan (prod kurucusu,
  * lib/vision-prompt-builder.ts) yapılır. Buraya yeni direktif/blok EKLEME —
  * eklenirse eski tabanla kıyaslanabilirlik (tek varlık nedeni) biter.
+ *
+ * MODEL + EFFORT PROD'U İZLER (W2 inceleme B07-F4, 2026-09-24): "dondurulmuş" olan
+ * PROMPT/ÇAĞRI/SON-İŞLEM aynasıdır; model ve reasoning_effort lib/ai-model.ts'ten
+ * (AI_MODEL / AI_REASONING_EFFORT) gelir, EVAL_MODEL / EVAL_EFFORT ile ezilebilir.
+ * Neden literal değil: gpt-5-mini-2025-08-07 11.12.2026'da kapanıyor — literal model
+ * göçten sonra 404 verir; yarım bağlama (model tek kaynaktan, effort literal) ise yeni
+ * modeli eski effort'la çağırıyordu.
  */
 import { SYSTEM_PROMPT, SYSTEM_PROMPT_EN_ADDENDUM, USER_PROMPT, USER_PROMPT_EN, buildRoundFeedbackSchema } from "../lib/vision-prompt";
 import { buildPolicyBlock } from "../lib/ai-policy";
@@ -23,7 +30,7 @@ import { buildAgentAbilityHint } from "../lib/agent-abilities";
 import { sanitizePromptInput } from "../lib/prompt-safety";
 import { classifyDeathVaried, buildDeathTypeDirective, sanitizeAliveCount, ALLIES_ALIVE_MAX, ENEMIES_ALIVE_MAX, type DeathType } from "../lib/death-type";
 import { buildHistoryBlock, type RoundHistoryEntry } from "../lib/history-block";
-import { AI_MODEL } from "../lib/ai-model";
+import { AI_MODEL, AI_REASONING_EFFORT } from "../lib/ai-model";
 import type { Scenario } from "./eval-vision";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
@@ -299,7 +306,10 @@ export async function callModel(apiKey: string, systemMessage: string, userPromp
       response_format: { type: "json_schema", json_schema: buildRoundFeedbackSchema(lang) },
       ...(process.env.EVAL_EFFORT === "omit"
         ? {}
-        : { reasoning_effort: (process.env.EVAL_EFFORT || "minimal") as "none" | "minimal" | "low" | "medium" | "high" }),
+        // W2 inceleme B07-F4: model AI_MODEL'e bağlıydı ama effort literal "minimal" kalmıştı
+        // → göçte (5.6 ailesi + "none") legacy koşusu yeni modeli eski effort'la çağırır,
+        // parametre adayda geçersizse 400. Model gibi effort da prod'u izler (değer bugün aynı).
+        : { reasoning_effort: (process.env.EVAL_EFFORT || AI_REASONING_EFFORT) as "none" | "minimal" | "low" | "medium" | "high" }),
       messages: [
         { role: "system", content: systemMessage },
         { role: "user", content: userPrompt },

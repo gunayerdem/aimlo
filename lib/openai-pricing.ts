@@ -45,16 +45,59 @@ export const PRICING: Record<string, ModelPricing> = {
 // Göçe karar verilirse `ModelPricing.cacheWritePerM` + `TokenUsage.cacheWriteTokens`
 // eklenmeli (OpenAI usage nesnesinde böyle bir alan var mı: DOĞRULANMADI).
 
-/** Pricing used when a model id isn't in the table (defensive) — the production
- *  model (lib/ai-model.ts, OLCUM-ARACI-17). scripts/test-billing.ts asserts
- *  PRICING[AI_MODEL] exists, so a model migration without a price row fails CI. */
-const FALLBACK_MODEL: string = AI_MODEL;
+/** Tarihli snapshot soneki ("gpt-5-mini" + "-2025-08-07"). OpenAI yanıtının `model` alanı
+ *  ve ai_usage satırları bu biçimde gelir (206/206 prod satırı: gpt-5-mini-2025-08-07). */
+const DATED_SNAPSHOT_SUFFIX_RE = /^-\d{4}-\d{2}-\d{2}$/;
+
+/**
+ * Model id → tablo anahtarı: BİREBİR anahtar ya da TARİHLİ SNAPSHOT (anahtar +
+ * "-YYYY-MM-DD"); ikisi de değilse null.
+ * W2 inceleme B07-F2 (2026-09-24): eski döngü `model.startsWith(k)` ile HER öneki bilinen
+ * sayıyordu → kardeş model id'leri sessizce yanlış fiyatlanıyordu (ölçüm:
+ * 'gpt-5.6-luna-mini' → known=true key=gpt-5.6-luna; 'gpt-5-mini-tts' → gpt-5-mini; uyarı
+ * yok, unpriced 0, rozet yok — OLCUM-ARACI-16'nın kökü bu id sınıfı için sürüyordu).
+ * Artık önekten sonra YALNIZ tarih soneki kabul. Own-property kontrolü: "constructor"
+ * gibi id'ler Object.prototype'tan fonksiyon döndürüp computeCost'u NaN yapmasın.
+ */
+export function lookupPricingKey(model: string, table: Record<string, ModelPricing> = PRICING): string | null {
+  if (Object.prototype.hasOwnProperty.call(table, model)) return model;
+  let best: string | null = null;
+  for (const k of Object.keys(table)) {
+    if (model.startsWith(k) && DATED_SNAPSHOT_SUFFIX_RE.test(model.slice(k.length)) && (best === null || k.length > best.length)) best = k;
+  }
+  return best;
+}
+
+/**
+ * Bilinmeyen id'nin TAHMİNİ fiyatının anahtarı.
+ * W2 inceleme B07-F1 (2026-09-24): FALLBACK_MODEL = AI_MODEL idi → PRICING[AI_MODEL]
+ * yoksa (göçte unutulan satır ya da tarihli pin 'gpt-5-mini-2025-08-07') fallback fiyatı
+ * `undefined` dönüyor, computeCost `p.inputPerM`'de TypeError atıyor ve /admin, /admin/cost,
+ * /admin/revenue, /admin/users/[id] 500 veriyordu — B07/2 rozeti tam bu senaryo için
+ * vardı ama render bile edilemiyordu. CI (test-billing) deploy kapısı DEĞİL (main push →
+ * Vercel). Artık: AI_MODEL tabloda (birebir/tarihli) varsa o; yoksa tablodaki EN PAHALI
+ * satır — muhafazakâr: tahmini maliyet asla EKSİK gösterilmez (OLCUM-ARACI-16'nın kökü
+ * eksik fiyattı), rozet "tahmini" diye işaretler.
+ */
+export function pickFallbackPricingKey(table: Record<string, ModelPricing>, aiModel: string): string {
+  const own = lookupPricingKey(aiModel, table);
+  if (own) return own;
+  return Object.keys(table).sort((a, b) =>
+    table[b].outputPerM - table[a].outputPerM || table[b].inputPerM - table[a].inputPerM || (a < b ? -1 : a > b ? 1 : 0),
+  )[0];
+}
+
+/** Tablo-dışı id'nin fiyatlandığı anahtar (bugün AI_MODEL = "gpt-5-mini"). */
+export const FALLBACK_PRICING_KEY: string = pickFallbackPricingKey(PRICING, AI_MODEL);
+/** Modül yüklenirken alınan kopya — tablo çalışma zamanında değişse (test) bile
+ *  resolvePricing ASLA undefined fiyat döndürmez. */
+const FALLBACK_PRICING_SNAPSHOT: ModelPricing = { ...PRICING[FALLBACK_PRICING_KEY] };
 
 export type PricingResolution = {
   pricing: ModelPricing;
-  /** true → id is in the table (exact or dated-snapshot prefix); false → ESTIMATED at FALLBACK_MODEL's rate. */
+  /** true → id is in the table (exact or dated-snapshot "-YYYY-MM-DD" suffix); false → ESTIMATED at FALLBACK_PRICING_KEY's rate. */
   known: boolean;
-  /** Table key that supplied the price (FALLBACK_MODEL when unknown). */
+  /** Table key that supplied the price (FALLBACK_PRICING_KEY when unknown). */
   matchedKey: string;
 };
 
@@ -65,39 +108,32 @@ export type PricingResolution = {
 // yolu: PRICING tablosuna o id'nin satırını eklemek (uyarı metni bunu söyler).
 const warnedUnknownModels = new Set<string>();
 
-function hasPrice(key: string): boolean {
-  // Own-property kontrolü: "constructor" gibi id'ler Object.prototype'tan fonksiyon
-  // döndürüp computeCost'u NaN yapmasın.
-  return Object.prototype.hasOwnProperty.call(PRICING, key);
-}
-
 /**
- * Model id → fiyat + fiyatın tablodan mı geldiği. Birebir anahtar, yoksa tarihli
- * snapshot id'leri ("gpt-5-mini-2025-08-07") için EN UZUN önek eşleşmesi — eskiden
- * Object.keys sırasındaki İLK eşleşme alınıyordu; tabloya "gpt-5" gibi kısa bir
- * anahtar eklenseydi "gpt-5-mini-…" onun fiyatını alırdı. Tabloda olmayan id:
- * FALLBACK_MODEL fiyatı + known:false + id başına tek console.warn.
+ * Model id → fiyat + fiyatın tablodan mı geldiği (lookupPricingKey: birebir ya da
+ * tarihli snapshot; EN UZUN anahtar — eskiden Object.keys sırasındaki İLK eşleşme
+ * alınıyordu). Tabloda olmayan id: FALLBACK_PRICING_KEY fiyatı + known:false + id başına
+ * tek console.warn. ASLA undefined fiyat döndürmez (W2 inceleme B07-F1).
  */
 export function resolvePricing(model: string | null | undefined): PricingResolution {
   if (model) {
-    if (hasPrice(model)) return { pricing: PRICING[model], known: true, matchedKey: model };
-    let best: string | null = null;
-    for (const k of Object.keys(PRICING)) {
-      if (model.startsWith(k) && (best === null || k.length > best.length)) best = k;
-    }
-    if (best !== null) return { pricing: PRICING[best], known: true, matchedKey: best };
+    const key = lookupPricingKey(model);
+    if (key !== null) return { pricing: PRICING[key], known: true, matchedKey: key };
   }
   const label = model ? model : "(boş)";
   if (!warnedUnknownModels.has(label)) {
     warnedUnknownModels.add(label);
     console.warn(
-      `[pricing] unknown model id ${JSON.stringify(model ?? null)} — priced as ${FALLBACK_MODEL} (add a row to PRICING in lib/openai-pricing.ts)`,
+      `[pricing] unknown model id ${JSON.stringify(model ?? null)} — priced as ${FALLBACK_PRICING_KEY} (add a row to PRICING in lib/openai-pricing.ts)`,
     );
   }
-  return { pricing: PRICING[FALLBACK_MODEL], known: false, matchedKey: FALLBACK_MODEL };
+  return {
+    pricing: PRICING[FALLBACK_PRICING_KEY] ?? FALLBACK_PRICING_SNAPSHOT,
+    known: false,
+    matchedKey: FALLBACK_PRICING_KEY,
+  };
 }
 
-/** Backward-compatible wrapper: price only (unknown id → FALLBACK_MODEL, warned once). */
+/** Backward-compatible wrapper: price only (unknown id → FALLBACK_PRICING_KEY, warned once). */
 export function pricingFor(model: string | null | undefined): ModelPricing {
   return resolvePricing(model).pricing;
 }

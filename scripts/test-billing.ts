@@ -84,26 +84,41 @@ async function main() {
   // Grep-guard: app/ lib/ scripts/ kodunda AI_MODEL'in TIRNAKLI literal'i yalnız
   // lib/ai-model.ts'te ve fiyat tablosunun anahtarında (tam 1 kez) geçebilir.
   // Desen AI_MODEL'den kurulur → göçten sonra YENİ id için de aynı kural işler.
-  const modelEsc = AI_MODEL.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const litRe = new RegExp("[\"'`]" + modelEsc + "[\"'`]", "g");
-  const litHits: string[] = [];
-  const walk = (rel: string): void => {
-    for (const e of readdirSync(join(ROOT, rel), { withFileTypes: true })) {
-      const r = `${rel}/${e.name}`;
-      if (e.isDirectory()) {
-        if (e.name === "node_modules" || e.name.startsWith(".")) continue;
-        walk(r);
-        continue;
+  // W2 inceleme B07-F3: guard yorumları ve test fikstürlerini de sayıyordu → AI_MODEL
+  // tarihli bir snapshot'a pinlenince ('gpt-5-mini-2025-08-07') yanlış-pozitif:
+  // ["lib/openai-pricing.ts×2" (yorum), "scripts/report-route-harness.ts×1" (sahte OpenAI
+  // yanıtının model alanı), "scripts/test-billing.ts×8" (GOLDEN_COST/rollup fikstürü)].
+  // Artık yalnız KOD taranır (yorumlar ayıklanır) ve test/harness dosyaları hariç: onlardaki
+  // model id'si prod çağrısı değil, OpenAI'ın döndürdüğü değerin fikstürüdür.
+  const codeOnly = (src: string) => src.replace(/\/\*[\s\S]*?\*\//g, "").replace(/(^|[^:])\/\/.*$/gm, "$1");
+  const isFixtureFile = (r: string) => /^scripts\/(?:test-[^/]+|[^/]+-harness)\.ts$/.test(r);
+  const literalHits = (modelId: string): string[] => {
+    const modelEsc = modelId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const litRe = new RegExp("[\"'`]" + modelEsc + "[\"'`]", "g");
+    const hits: string[] = [];
+    const walk = (rel: string): void => {
+      for (const e of readdirSync(join(ROOT, rel), { withFileTypes: true })) {
+        const r = `${rel}/${e.name}`;
+        if (e.isDirectory()) {
+          if (e.name === "node_modules" || e.name.startsWith(".")) continue;
+          walk(r);
+          continue;
+        }
+        if (!/\.(ts|tsx|mts|cts|js|mjs|cjs)$/.test(e.name) || isFixtureFile(r)) continue;
+        const n = (codeOnly(readFileSync(join(ROOT, r), "utf8")).match(litRe) ?? []).length;
+        if (n === 0 || r === "lib/ai-model.ts" || (r === "lib/openai-pricing.ts" && n === 1)) continue;
+        hits.push(`${r}×${n}`);
       }
-      if (!/\.(ts|tsx|mts|cts|js|mjs|cjs)$/.test(e.name)) continue;
-      const n = (readFileSync(join(ROOT, r), "utf8").match(litRe) ?? []).length;
-      if (n === 0 || r === "lib/ai-model.ts" || (r === "lib/openai-pricing.ts" && n === 1)) continue;
-      litHits.push(`${r}×${n}`);
-    }
+    };
+    for (const d of ["app", "lib", "scripts"]) walk(d);
+    return hits;
   };
-  for (const d of ["app", "lib", "scripts"]) walk(d);
-  eq(`grep-guard: app/ lib/ scripts/ altında tırnaklı ${AI_MODEL} literal'i yok (izinli: lib/ai-model.ts + fiyat tablosu anahtarı)`,
-    litHits, []);
+  eq(`grep-guard: app/ lib/ scripts/ KODUNDA tırnaklı ${AI_MODEL} literal'i yok (izinli: lib/ai-model.ts + fiyat tablosu anahtarı)`,
+    literalHits(AI_MODEL), []);
+  eq("grep-guard yanlış-pozitif yok: tarihli pin 'gpt-5-mini-2025-08-07' simülasyonu → yorum/fikstür sayılmaz",
+    literalHits("gpt-5-mini-2025-08-07"), []);
+  eq("grep-guard hâlâ ateşler: kodda tırnaklı model literal'i yakalanır (codeOnly yorum ayıklar, kodu değil)",
+    (codeOnly("const a = 1; // \"gpt-5-mini\"\nconst m = \"gpt-5-mini\";").match(/"gpt-5-mini"/g) ?? []).length, 1);
 
   // ── OLCUM-ARACI-16 (B07, 2026-09-24): bilinmeyen model id artık UYARILI + SAYILI ──
   // Eskiden pricingFor tablo-dışı id'yi SESSİZCE fallback fiyatına düşürüyordu (ölçüm:
@@ -230,6 +245,44 @@ async function main() {
       eq("aggregateRollup: yalnız prod id'leri (tarihli + AI_MODEL) → unpriced 0 (rozet çıkmaz)",
         [known.unpriced, known.unpricedModels], [0, []]);
     });
+    // (h) W2 inceleme B07-F2: önek yalnız TARİHLİ snapshot sonekiyle "bilinen" sayılır.
+    // Eskiden her önek bilinendi → kardeş model sessizce yanlış fiyatlanıyordu.
+    safe("resolvePricing kardeş id", () => {
+      eq("kardeş id'ler bilinmiyor: gpt-5.6-luna-mini, gpt-5.6-luna-mini-2026-05-01, gpt-5-mini-tts → known=false",
+        ["gpt-5.6-luna-mini", "gpt-5.6-luna-mini-2026-05-01", "gpt-5-mini-tts"].map((m) => resolvePricing(m).known), [false, false, false]);
+      eq("tarihli snapshot hâlâ bilinen: gpt-5.6-luna-2026-05-01 → gpt-5.6-luna",
+        [resolvePricing("gpt-5.6-luna-2026-05-01").known, resolvePricing("gpt-5.6-luna-2026-05-01").matchedKey], [true, "gpt-5.6-luna"]);
+    });
+
+    // (i) W2 inceleme B07-F1: PRICING[AI_MODEL] satırı yoksa panel ÇÖKMEZ.
+    safe("fallback savunması", () => {
+      const { pickFallbackPricingKey, FALLBACK_PRICING_KEY } = pricingMod;
+      const without = Object.fromEntries(Object.entries(PRICING).filter(([k]) => k !== AI_MODEL));
+      eq("pickFallbackPricingKey: AI_MODEL satırı yoksa EN PAHALI satır (tahmini maliyet eksik gösterilmez)",
+        pickFallbackPricingKey(without, AI_MODEL), "gpt-6-astra");
+      eq("pickFallbackPricingKey: tarihli pin (gpt-5-mini-2025-08-07) tablo anahtarına çözülür",
+        pickFallbackPricingKey(PRICING, "gpt-5-mini-2025-08-07"), "gpt-5-mini");
+      eq("bugün FALLBACK_PRICING_KEY = AI_MODEL (fiyat değerleri değişmedi)", FALLBACK_PRICING_KEY, AI_MODEL);
+      const snap = { ...PRICING };
+      try {
+        delete PRICING[AI_MODEL];
+        const c = computeCost({ promptTokens: 1000, completionTokens: 100, cachedTokens: 0 }, "gpt-9-unknown");
+        const r = resolvePricing(AI_MODEL);
+        eq("çalışma zamanında satır silinse de computeCost sonlu, resolvePricing tanımlı (known=false)",
+          [Number.isFinite(c), r.known, typeof r.pricing?.inputPerM], [true, false, "number"]);
+        const day = new Date().toISOString().slice(0, 10);
+        const out = aggregateRollup([{ day, route_type: "vision", model: "gpt-5.7-mini-2026-10-01", calls: 2, prompt_tokens: 2000, completion_tokens: 50, cached_tokens: 0 }]);
+        eq("aggregateRollup atmıyor, bilinmeyen çağrıyı sayıyor", [Number.isFinite(out.total), out.unpriced], [true, 2]);
+      } finally {
+        Object.assign(PRICING, snap);
+      }
+      eq("PRICING test sonrası geri geldi", Object.keys(PRICING).sort(), Object.keys(snap).sort());
+    });
+    const costPage = codeOnly(readFileSync(join(ROOT, "app", "admin", "cost", "page.tsx"), "utf8"));
+    const mqc = codeOnly(readFileSync(join(ROOT, "scripts", "measure-quota-cost.ts"), "utf8"));
+    eq("/admin/cost ve measure-quota-cost PRICING[AI_MODEL] okumuyor, resolvePricing kullanıyor (satır yoksa 500/TypeError yok)",
+      [/PRICING\[AI_MODEL\]/.test(costPage), /resolvePricing\(AI_MODEL\)/.test(costPage), /PRICING\[AI_MODEL\]/.test(mqc), /resolvePricing\(AI_MODEL\)/.test(mqc)],
+      [false, true, false, true]);
   } finally {
     console.warn = origWarn;
   }

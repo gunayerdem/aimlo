@@ -1,5 +1,5 @@
 import { getCostData } from "@/lib/admin-data";
-import { formatUsd, PRICING } from "@/lib/openai-pricing";
+import { formatUsd, resolvePricing, FALLBACK_PRICING_KEY } from "@/lib/openai-pricing";
 import { AI_MODEL } from "@/lib/ai-model";
 import { TrendChart } from "../AdminChart";
 
@@ -13,12 +13,16 @@ const rate = (n: number) => n.toLocaleString("en-US", { minimumFractionDigits: 2
 export default async function AdminCostPage() {
   const c = await getCostData();
   const cacheRatio = c.tokens.input > 0 ? (c.tokens.cached / c.tokens.input) * 100 : 0;
-  const p = PRICING[AI_MODEL];
+  // W2 inceleme B07-F1: PRICING[AI_MODEL] satırı yoksa (göçte unutulan satır / tarihli pin)
+  // eskiden `p.inputPerM` TypeError → sayfa 500. resolvePricing ASLA undefined dönmez;
+  // satır yoksa tahmini fiyat + başlıkta açık uyarı.
+  const pr = resolvePricing(AI_MODEL);
+  const p = pr.pricing;
 
   return (
     <>
       <h1 className="adm-h1">AI Maliyeti</h1>
-      <p className="adm-sub">{`${AI_MODEL} token → USD · canlı (girdi $${rate(p.inputPerM)} / çıktı $${rate(p.outputPerM)} / cache $${rate(p.cachedInputPerM)} per 1M)`}</p>
+      <p className="adm-sub">{`${AI_MODEL} token → USD · canlı (girdi $${rate(p.inputPerM)} / çıktı $${rate(p.outputPerM)} / cache $${rate(p.cachedInputPerM)} per 1M)${pr.known ? "" : " · fiyat satırı yok — TAHMİNİ"}`}</p>
 
       {/* OLCUM-ARACI-16 (B07, 2026-09-24): fiyat tablosunda olmayan model id'li
           çağrılar eskiden SESSİZCE fallback fiyatıyla sayılıyordu (yazım hatalı id
@@ -26,7 +30,7 @@ export default async function AdminCostPage() {
       {c.unpriced > 0 ? (
         <div className="adm-note" style={{ marginBottom: 18 }}>
           <b>{c.unpriced.toLocaleString("tr")} çağrı bilinmeyen modelle tahmini fiyatlandı.</b> Fiyat tablosunda olmayan
-          model id&apos;si ({c.unpricedModels.join(", ")}) {AI_MODEL} fiyatıyla sayıldı — toplam gerçek maliyetten sapabilir.
+          model id&apos;si ({c.unpricedModels.join(", ")}) {FALLBACK_PRICING_KEY} fiyatıyla sayıldı — toplam gerçek maliyetten sapabilir.
           Düzeltme: <code>lib/openai-pricing.ts</code> PRICING tablosuna o id&apos;nin satırını ekle.
         </div>
       ) : null}
