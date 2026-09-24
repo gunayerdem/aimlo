@@ -16,6 +16,12 @@
  *       (sahte 0 yok) davranışı.
  *   [C] /admin/altyapi Telemetri kartı render'ı: ölçülemeyen "bilinmiyor",
  *       tavana dayanan "≥", ölçülmüş boş bölüm açık boş-durum metni.
+ *   [D] FB04 · F87 (2026-09-24): (1) validateTelemetryEvent karakter kümeleri — code
+ *       yazdırılabilir ASCII (U+202E vb. red; gerçek watch_health/rig_profile kodları
+ *       KABUL), route/appVersion kimlik kümesi; error_code_count count ≤ 1000.
+ *       (2) tel-flood: 100k sahte satır (tek hesap) + son 6 saatte 500 gerçek vision_502 →
+ *       kart en YENİ satırları okur, kullanıcı başı tavan + ayrık-kullanıcı sırası →
+ *       vision_502 görünür ve üstte.
  *
  * YAKLAŞIM: scripts/vision-route-harness.ts ile aynı kalıp — "server-only" boş
  * modül, "@/..." → repo kökü, bağımlılıklar Module._cache'e sahte `exports`
@@ -101,6 +107,7 @@ function fakeClient() {
         in(col: string, vals: unknown) { q.filters.push(["in", col, vals]); return builder; },
         eq(col: string, v: unknown) { q.filters.push(["eq", col, v]); return builder; },
         gte(col: string, v: unknown) { q.filters.push(["gte", col, v]); return builder; },
+        lte(col: string, v: unknown) { q.filters.push(["lte", col, v]); return builder; },
         order(col: string, o?: { ascending?: boolean }) { q.order.push([col, o?.ascending]); return builder; },
         range(a: number, b: number) { q.range = [a, b]; return builder; },
         abortSignal() { return builder; },
@@ -320,16 +327,26 @@ async function main() {
     const shortSince = now - 24 * 3600e3;
     const iso = (hAgo: number) => new Date(now - hAgo * 3600e3).toISOString();
     const errs = at.aggregateErrorCodes([
-      { code: "ai_timeout", count: 2, app_version: null, created_at: iso(1) },
-      { code: "ai_timeout", count: 3, app_version: null, created_at: iso(48) },
-      { code: "ai_timeout", count: 1, app_version: "1.0.20", created_at: iso(2) },
-      { code: "auth_expired", count: null, app_version: null, created_at: iso(3) },
+      { code: "ai_timeout", count: 2, app_version: null, created_at: iso(1), user_hash: "ua" },
+      { code: "ai_timeout", count: 3, app_version: null, created_at: iso(48), user_hash: "ub" },
+      { code: "ai_timeout", count: 1, app_version: "1.0.20", created_at: iso(2), user_hash: "ua" },
+      { code: "auth_expired", count: null, app_version: null, created_at: iso(3), user_hash: "uc" },
     ], shortSince);
-    eq("aggregateErrorCodes: kod × sürüm, sum(count) (NULL=0), 24s/7g ayrımı", errs, [
-      { code: "ai_timeout", appVersion: null, hitsShort: 2, hitsLong: 5 },
-      { code: "ai_timeout", appVersion: "1.0.20", hitsShort: 1, hitsLong: 1 },
-      { code: "auth_expired", appVersion: null, hitsShort: 0, hitsLong: 0 },
+    eq("aggregateErrorCodes: kod × sürüm, sum(count) (NULL=0), 24s/7g ayrımı + ayrık kullanıcı (F87)", errs, [
+      { code: "ai_timeout", appVersion: null, hitsShort: 2, hitsLong: 5, usersShort: 1, usersLong: 2 },
+      { code: "ai_timeout", appVersion: "1.0.20", hitsShort: 1, hitsLong: 1, usersShort: 1, usersLong: 1 },
+      { code: "auth_expired", appVersion: null, hitsShort: 0, hitsLong: 0, usersShort: 1, usersLong: 1 },
     ]);
+    // FB04 · F87: kullanıcı başına katkı tavanı + sıra ayrık kullanıcıya göre.
+    const CAP = at.TELEMETRY_PER_USER_HITS_CAP;
+    const capped = at.aggregateErrorCodes([
+      { code: "sel", count: 5000, app_version: null, created_at: iso(1), user_hash: "attacker" },
+      { code: "sel", count: 5000, app_version: null, created_at: iso(2), user_hash: "attacker" },
+      { code: "gercek", count: 1, app_version: null, created_at: iso(1), user_hash: "u1" },
+      { code: "gercek", count: 1, app_version: null, created_at: iso(1), user_hash: "u2" },
+    ], shortSince).map((r) => [r.code, r.usersShort, r.hitsShort, r.hitsLong]);
+    eq(`F87: tek kullanıcının 10.000'lik seli ${CAP}'e tavanlanır; 2 kullanıcılı gerçek kod ÜSTTE`, capped,
+      [["gercek", 2, 2, 2], ["sel", 1, CAP, CAP]]);
     eq("countFunnel: ayrık kullanıcı (aynı kişi 3 kez açtı = 1)", at.countFunnel([
       { type: "app_open", user_hash: "a" }, { type: "app_open", user_hash: "a" }, { type: "app_open", user_hash: "a" },
       { type: "app_open", user_hash: "b" }, { type: "login_ok", user_hash: "a" }, { type: "watch_started", user_hash: null },
@@ -363,7 +380,9 @@ async function main() {
       }
       if (types.includes("error_code_count")) {
         // Her sayfa tam dolu → tavana dayanır → truncated.
-        return { data: Array.from({ length: PAGE }, () => ({ code: "ai_timeout", count: 1, app_version: null, created_at: new Date(now).toISOString() })), error: null };
+        // FB04 · F87: her satır ayrı kullanıcı (user_hash) — kullanıcı başı tavan toplamı değiştirmez.
+        const a0 = q.range?.[0] ?? 0;
+        return { data: Array.from({ length: PAGE }, (_, i) => ({ code: "ai_timeout", count: 1, app_version: null, created_at: new Date(now).toISOString(), user_hash: `e${a0 + i}` })), error: null };
       }
       if (types.includes("app_open")) {
         // Sanal 2 satırlık tablo (ofset ≥ 2 → boş sayfa; W2 inceleme B08-F1 döngüsü).
@@ -389,7 +408,12 @@ async function main() {
     t("izleme penceresi 60 dk (desktop 30 dk'lık flush → 2×)", sinceOf(wh[0]) === new Date(now - 60 * 60e3).toISOString(), `got=${sinceOf(wh[0])}`);
     const ec = fake.queries.find((q) => typesOf(q).includes("error_code_count"));
     t("hata kodu penceresi 7 gün", !!ec && sinceOf(ec) === new Date(now - 7 * 24 * 3600e3).toISOString());
-    t("sıralama created_at ↑ + id ↑ (kararlı sayfalama)", JSON.stringify(wh[0].order) === JSON.stringify([["created_at", true], ["id", true]]));
+    // FB04 · F87: sıra ↓ (tavanda en ESKİ satırlar düşer) + created_at <= now üst sınırı (kararlı sayfalama).
+    t("sıralama created_at ↓ + id ↓ (en yeniler önce — F87)", JSON.stringify(wh[0].order) === JSON.stringify([["created_at", false], ["id", false]]),
+      `got=${JSON.stringify(wh[0].order)}`);
+    t("her sorguda created_at <= now üst sınırı (sıra ↓ iken kararlı sayfalama)",
+      fake.queries.every((q) => q.filters.some((f) => f[0] === "lte" && f[1] === "created_at" && f[2] === new Date(now).toISOString())));
+    t("hata kodu sorguları user_hash okur (ayrık kullanıcı — F87)", errQs.every((q) => q.columns.includes("user_hash")));
     const rq = fake.queries.find((q) => typesOf(q).includes(REJ));
     t("reddedilenler yalnız sunucu tipi telemetry_rejected'ı okur", !!rq && JSON.stringify(typesOf(rq)) === JSON.stringify([REJ]));
     t("tüm sorgular telemetry_events tablosunda", fake.queries.every((q) => q.table === "telemetry_events"));
@@ -446,7 +470,7 @@ async function main() {
 
     const full = html({
       generatedAt: "x",
-      errors: { data: [{ code: "capture_wgc_fallback", appVersion: null, hitsShort: 2, hitsLong: 2 }], truncated: false },
+      errors: { data: [{ code: "capture_wgc_fallback", appVersion: null, hitsShort: 2, hitsLong: 2, usersShort: 1, usersLong: 1 }], truncated: false },
       latency: { data: [{ route: "vision", n: 37, p50: 4516, p95: 7851.999999999985 }], truncated: false },
       funnel: { data: { appOpen: 1234, loginOk: 12, watchStarted: 3 }, truncated: true },
       watching: { data: 2, truncated: false },
@@ -463,6 +487,10 @@ async function main() {
     t("kesilmiş gecikme tablosu 'YAKLAŞIK, alt sınır DEĞİL' der; toplam tablosu 'alt sınır' (W2 inceleme B08-F2)",
       latTrunc.includes("p50/p95 YAKLAŞIK, alt sınır DEĞİL") && latTrunc.includes("sayılar EKSİK olabilir (alt sınır)"));
     t("gecikme ms yuvarlanır (4.516 ms / 7.852 ms)", full.includes("4.516 ms") && full.includes("7.852 ms"));
+    t("F87: hata tablosu ayrık kullanıcı sütunları + kullanıcı başı tavan notu",
+      full.includes("24s kişi") && full.includes("7g kişi") && full.includes(`kullanıcı başına en çok ${at.TELEMETRY_PER_USER_HITS_CAP} sayılır`));
+    t("F87: tavan notları gerçeği söylüyor — en ESKİ satırlar düşer",
+      latTrunc.includes("en ESKİ satırlar düştü") && !latTrunc.includes("en yeni satırlar düştü"));
     t("sürümsüz hata satırı '— (sürüm yok)'", full.includes("— (sürüm yok)"));
     t("red satırı sebep × tip × adet", full.includes("invalid_type") && full.includes("app_open") && full.includes(">5<"));
 
@@ -476,6 +504,78 @@ async function main() {
     });
     t("ölçülmüş boş bölüm → açık boş-durum metni ('bilinmiyor' DEĞİL)",
       empty.includes("reddedilen olay yok") && empty.includes("hata kodu yok") && empty.includes("ölçüm yok") && !empty.includes(">bilinmiyor<"));
+  }
+
+  // ── [D] FB04 · F87 — kaynakta sınırla + kart en yeniyi okusun ─────────────
+  console.log("\n[D1] F87 — validateTelemetryEvent karakter kümeleri + error_code_count count tavanı");
+  {
+    const v = (e: Record<string, unknown>) => tt.validateTelemetryEvent({ ts: now, ...e }, now);
+    eq("U+202E (RLO) içeren code → code_invalid", v({ type: "error_code_count", count: 1, code: "vision\u202E205_noisiv" }), "code_invalid");
+    eq("sıfır-genişlik (U+200B) code → code_invalid", v({ type: "error_code_count", count: 1, code: "ai\u200Btimeout" }), "code_invalid");
+    eq("kontrol karakteri (\\n) code → code_invalid", v({ type: "error_code_count", count: 1, code: "ai_timeout\nFAKE" }), "code_invalid");
+    eq("ASCII dışı (em dash) code → code_invalid", v({ type: "error_code_count", count: 1, code: "rate limiter unavailable \u2014 x" }), "code_invalid");
+    eq("error_code_count count 100000 → count_too_large", v({ type: "error_code_count", count: 100000, code: "ai_timeout" }), "count_too_large");
+    eq("error_code_count count 1001 → count_too_large", v({ type: "error_code_count", count: 1001, code: "ai_timeout" }), "count_too_large");
+    eq("error_code_count count 1000 → kabul (tavan dahil)", v({ type: "error_code_count", count: 1000, code: "ai_timeout" }), null);
+    eq("error_code_count count 1 (masaüstünün tek biçimi, telemetry.rs:330) → kabul", v({ type: "error_code_count", count: 1, code: "ai_timeout" }), null);
+    eq("watch_health count tavanı DEĞİŞMEDİ (genel 100k) → 5000 kabul", v({ type: "watch_health", value: 1, count: 5000, code: "wgc b0/0 s0+0 p0 ?-?" }), null);
+    // GERÇEK veri (runtime [HEARTBEAT] satırları, aimlo-desktop lib.rs watch_health_code): boşluk,
+    // "/", "+", "?" taşır — planın kimlik kümesi bunların HEPSİNİ reddederdi (ölçüm: 31/31).
+    for (const code of ["fb b0/0 s0+0 p0 ?-?", "wgc b0/0 s0+0 p0 ?-?", "wgc otr b3/1 s12+0 p0 6-5", "fb b0/0 s2+0/p5/a12 p7 0-0"]) {
+      eq(`gerçek watch_health code kabul: "${code}"`, v({ type: "watch_health", value: 22, count: 1, round: 3, code }), null);
+    }
+    eq("rig_profile (boşluk + '@') kabul", v({ type: "rig_profile", count: 1, code: "w26100 wgc1 b1L0 gnv1 1920x1080@100 m1 uitr ocrtr fs1" }), null);
+    eq("sunucu serbest-metin hata kodu (boşluk, nokta) kabul", v({ type: "error_code_count", count: 1, code: "invalid json body" }), null);
+    eq("F71 makine kodu kabul", v({ type: "error_code_count", count: 1, code: "rate_limiter_unavailable" }), null);
+    eq("route 'match-report' kabul", v({ type: "ai_call_duration_ms", value: 10, route: "match-report" }), null);
+    eq("route boşluklu → route_invalid", v({ type: "ai_call_duration_ms", value: 10, route: "vision x" }), "route_invalid");
+    eq("route U+202E → route_invalid", v({ type: "ai_call_duration_ms", value: 10, route: "vision\u202E" }), "route_invalid");
+    eq("appVersion '1.0.20' kabul", v({ type: "match_completed", appVersion: "1.0.20" }), null);
+    eq("appVersion '1.0.0-beta.1' kabul", v({ type: "match_completed", appVersion: "1.0.0-beta.1" }), null);
+    eq("appVersion U+202E → app_version_invalid", v({ type: "match_completed", appVersion: "1.0.20\u202E" }), "app_version_invalid");
+    t("isValidAppVersion: zarf sürümü de aynı küme ('1.0 beta' → false, '1.0.19' → true)",
+      tt.isValidAppVersion("1.0 beta") === false && tt.isValidAppVersion("1.0.19") === true);
+  }
+
+  console.log("\n[D2] F87 tel-flood — 100k sahte satır (tek hesap) + son 6 saatte 500 gerçek vision_502");
+  {
+    // Sahte PostgREST: filtre (in/gte/lte), SIRA YÖNÜ (order ascending bayrağı) ve range'e
+    // gerçekten uyar — eski (↑) ve yeni (↓) davranış aynı veride ayrışır.
+    type FRow = { id: number; user_hash: string; type: string; code: string; count: number; app_version: string | null; created_at: string };
+    const NOW = Date.parse("2026-09-30T12:00:00Z");
+    const rows: FRow[] = [];
+    let id = 0;
+    for (let i = 0; i < 100_000; i++) {
+      const tms = NOW - 24 * 3600_000 + Math.floor((i / 100_000) * 24 * 3600_000);
+      rows.push({ id: id++, user_hash: "attacker0000000", type: "error_code_count", code: `fake_${i % 20}`, count: 100_000, app_version: "1.0.99", created_at: new Date(tms).toISOString() });
+    }
+    for (let i = 0; i < 500; i++) {
+      const tms = NOW - 6 * 3600_000 + i * 60_000;
+      rows.push({ id: id++, user_hash: `real${i % 50}`, type: "error_code_count", code: "vision_502", count: 3, app_version: "1.0.20", created_at: new Date(tms).toISOString() });
+    }
+    const asc = [...rows].sort((a, b) => a.created_at.localeCompare(b.created_at) || a.id - b.id);
+    const desc = [...asc].reverse();
+    fake.queries = [];
+    fake.onQuery = (q) => {
+      const types = (q.filters.find((f) => f[0] === "in" && f[1] === "type")?.[2] ?? []) as string[];
+      const since = q.filters.find((f) => f[0] === "gte" && f[1] === "created_at")?.[2] as string | undefined;
+      const until = q.filters.find((f) => f[0] === "lte" && f[1] === "created_at")?.[2] as string | undefined;
+      const ascending = q.order.find((o) => o[0] === "created_at")?.[1] !== false;
+      const [a, b] = q.range ?? [0, 0];
+      const src = (ascending ? asc : desc).filter((r) => types.includes(r.type) && (!since || r.created_at >= since) && (!until || r.created_at <= until));
+      return { data: src.slice(a, b + 1) as unknown as Row[], error: null };
+    };
+    const sum = await at.getTelemetrySummary(NOW);
+    const errsD = sum.errors?.data ?? [];
+    const top20 = errsD.slice(0, 20); // kart en çok 20 satır gösterir (TelemetryCard errorRows)
+    const real = errsD.find((r) => r.code === "vision_502");
+    t("vision_502 kartta (ilk 20 satırda) GÖRÜNÜYOR (eskiden: tüm veride bile yoktu)", top20.some((r) => r.code === "vision_502"),
+      `top=${JSON.stringify(top20.slice(0, 3))}`);
+    t("vision_502 EN ÜSTTE (50 ayrık kullanıcı > sel hesabının 1 kullanıcısı)", errsD[0]?.code === "vision_502", `ilk=${JSON.stringify(errsD[0])}`);
+    t("vision_502 24s ayrık kullanıcı = 50", real?.usersShort === 50, `got=${JSON.stringify(real)}`);
+    t("sel hesabının kodları tavanlı (hitsShort ≤ TELEMETRY_PER_USER_HITS_CAP)",
+      errsD.filter((r) => r.code.startsWith("fake_")).every((r) => r.hitsShort <= at.TELEMETRY_PER_USER_HITS_CAP && r.usersShort === 1));
+    t("tavana dayanıldı → truncated=true (kart '≥' / 'en ESKİ satırlar düştü' der)", sum.errors?.truncated === true);
   }
 
   console.log(fail === 0 ? `\n✅ TELEMETRİ GÖRÜNÜRLÜK: ${pass} geçti, 0 kırık` : `\n❌ TELEMETRİ GÖRÜNÜRLÜK: ${fail} kırık (${pass} geçti)`);

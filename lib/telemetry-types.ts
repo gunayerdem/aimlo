@@ -152,9 +152,38 @@ export const TELEMETRY_LIMITS = {
   maxValueMs: 10 * 60 * 1000, // 10 minutes
   /** Maximum count value. */
   maxCount: 100_000,
+  /**
+   * FB04 · F87: `error_code_count` için count tavanı. Masaüstü HER hata oluşumunu ayrı
+   * olay olarak `count: 1` ile gönderir (aimlo-desktop telemetry.rs record_error → :330
+   * `count: Some(1)`; v1.0.19'da :194 aynı) — istemci tarafında toplama yok. Eski 100.000
+   * tavanı tek bir sahte olayla kartın sum(count)'unu 100 milyona şişirmeye izin veriyordu.
+   * 1000 meşru toplu gönderime bol pay bırakır. Diğer tiplerin count'u (watch_health'te
+   * atlanan tick) genel maxCount'a tabi kalır.
+   */
+  maxErrorCodeCount: 1000,
   /** Maximum length of code/route fields (anti-payload-bloat). */
   maxStringLen: 64,
 } as const;
+
+/**
+ * FB04 · F87: `route` ve `appVersion` karakter kümesi — kimlik benzeri kısa diziler
+ * (gerçek değerler: "vision", "match-report", "1.0.19", "1.0.0-beta.1"). U+202E (RLO),
+ * sıfır-genişlik, kontrol karakteri ve boşluk REDDEDİLİR (admin panelinde görüntü aldatması,
+ * log bozma). Uzunluk kuralı (1..64) regex'in içinde.
+ */
+export const TELEMETRY_ID_RE = /^[A-Za-z0-9_.:\/-]{1,64}$/;
+
+/**
+ * FB04 · F87: `code` karakter kümesi — YAZDIRILABİLİR ASCII (U+0020..U+007E), 1..64.
+ * Planın önerdiği TELEMETRY_ID_RE `code`a UYGULANMADI, çünkü GERÇEK veride ölçülen
+ * yanlış-pozitif %100'dü: watch_health `code`u boşluk ve "+" taşır ("wgc b0/0 s0+0 p0 ?-?",
+ * aimlo-desktop lib.rs watch_health_code; runtime loglarındaki 31/31 [HEARTBEAT] kodunun
+ * 31'i reddedilirdi, bu kümeyle 0), rig_profile boşluk ve "@" taşır ("w26100 wgc1 … 1920x1080@100"),
+ * error_code_count da sunucunun serbest metin hata gövdesini küçük harfle taşıyabilir
+ * ("invalid json body"). Bu küme de U+202E / sıfır-genişlik / kontrol karakteri / ASCII
+ * dışı her şeyi reddeder — amaç (panelde görüntü aldatması ve log bozma) karşılanır.
+ */
+export const TELEMETRY_CODE_RE = /^[\x20-\x7E]{1,64}$/;
 
 /**
  * Backend'in kabul ettiği TÜM tipler — tek kaynak. Dışa açık çünkü sözleşme
@@ -184,13 +213,15 @@ const VALID_TYPES: ReadonlySet<TelemetryEventType> = new Set<TelemetryEventType>
 /**
  * B80 (2026-07-31): sürüm dizesi doğrulaması — hem event-seviyesi hem
  * batch-zarfı (`TelemetryRequest.appVersion`) aynı kuralı kullansın diye
- * dışa açık. Serbest metin değil: yalnız uzunluk + tip kapısı, PII taşımaz.
+ * dışa açık. Serbest metin değil: uzunluk + tip + (FB04 · F87) karakter kümesi
+ * kapısı (TELEMETRY_ID_RE), PII taşımaz.
  */
 export function isValidAppVersion(v: unknown): v is string {
   return (
     typeof v === "string" &&
     v.length > 0 &&
-    v.length <= TELEMETRY_LIMITS.maxStringLen
+    v.length <= TELEMETRY_LIMITS.maxStringLen &&
+    TELEMETRY_ID_RE.test(v)
   );
 }
 
@@ -233,14 +264,20 @@ export function validateTelemetryEvent(
     if (e.count > TELEMETRY_LIMITS.maxCount) {
       return "count_too_large";
     }
+    // FB04 · F87: error_code_count masaüstünde her zaman 1 — tek olayla kartı şişirme kapısı.
+    if (e.type === "error_code_count" && e.count > TELEMETRY_LIMITS.maxErrorCodeCount) {
+      return "count_too_large";
+    }
   }
   if (e.code !== undefined) {
-    if (typeof e.code !== "string" || e.code.length === 0 || e.code.length > TELEMETRY_LIMITS.maxStringLen) {
+    // FB04 · F87: uzunluk (1..64) + yazdırılabilir ASCII (TELEMETRY_CODE_RE) — U+202E vb. red.
+    if (typeof e.code !== "string" || !TELEMETRY_CODE_RE.test(e.code)) {
       return "code_invalid";
     }
   }
   if (e.route !== undefined) {
-    if (typeof e.route !== "string" || e.route.length === 0 || e.route.length > TELEMETRY_LIMITS.maxStringLen) {
+    // FB04 · F87: uzunluk (1..64) + kimlik karakter kümesi (TELEMETRY_ID_RE).
+    if (typeof e.route !== "string" || !TELEMETRY_ID_RE.test(e.route)) {
       return "route_invalid";
     }
   }

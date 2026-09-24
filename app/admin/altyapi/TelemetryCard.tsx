@@ -1,4 +1,4 @@
-import { TELEMETRY_WINDOWS, type TelemetrySummary } from "@/lib/admin-telemetry";
+import { TELEMETRY_PER_USER_HITS_CAP, TELEMETRY_WINDOWS, type TelemetrySummary } from "@/lib/admin-telemetry";
 
 /* ------------------------------------------------------------------ *
  * Telemetri kartı — B08 (2026-09-24 · A064/A006).
@@ -40,7 +40,7 @@ function TelemetryTableCard({
   empty,
   unknown,
   truncated,
-  truncatedNote = "Satır tavanına dayanıldı — sayılar EKSİK olabilir (alt sınır).",
+  truncatedNote = "Satır tavanına dayanıldı — en ESKİ satırlar düştü (en yeniler okundu): sayılar EKSİK olabilir (alt sınır).",
 }: {
   title: string;
   sub?: string;
@@ -131,7 +131,9 @@ export function TelemetrySectionView({ t }: { t: TelemetrySummary | null }) {
   const errorRows = (t.errors?.data ?? []).slice(0, 20).map((r) => [
     r.code,
     r.appVersion ?? "— (sürüm yok)",
+    r.usersShort,
     r.hitsShort,
+    r.usersLong,
     r.hitsLong,
   ]);
   const latencyRows = (t.latency?.data ?? []).map((r) => [r.route, r.n, fmtMs(r.p50), fmtMs(r.p95)]);
@@ -171,7 +173,7 @@ export function TelemetrySectionView({ t }: { t: TelemetrySummary | null }) {
           empty={`Son ${W.latencyHours} saatte ölçüm yok.`}
           unknown={!t.latency}
           truncated={!!t.latency?.truncated}
-          truncatedNote="Satır tavanına dayanıldı — örneklem eksik (en yeni satırlar düştü): p50/p95 YAKLAŞIK, alt sınır DEĞİL."
+          truncatedNote="Satır tavanına dayanıldı — örneklem eksik (en ESKİ satırlar düştü, en yeniler okundu): p50/p95 YAKLAŞIK, alt sınır DEĞİL."
         />
         <TelemetryTableCard
           title={`Reddedilen olaylar · son ${W.rejectedDays} gün`}
@@ -187,8 +189,8 @@ export function TelemetrySectionView({ t }: { t: TelemetrySummary | null }) {
       <div style={{ marginTop: 14 }}>
         <TelemetryTableCard
           title={`Hata kodları · kod × sürüm`}
-          sub={`error_code_count, sum(count) — son ${W.errorsShortHours} saat ve ${W.errorsLongDays} gün (en çok 20 satır)`}
-          headers={["Kod", "Sürüm", `${W.errorsShortHours}s`, `${W.errorsLongDays}g`]}
+          sub={`error_code_count — son ${W.errorsShortHours} saat ve ${W.errorsLongDays} gün: ayrık kullanıcı ("kişi") ve sum(count) (kullanıcı başına en çok ${TELEMETRY_PER_USER_HITS_CAP} sayılır). Sıra: önce ${W.errorsShortHours}s kişi. En çok 20 satır.`}
+          headers={["Kod", "Sürüm", `${W.errorsShortHours}s kişi`, `${W.errorsShortHours}s`, `${W.errorsLongDays}g kişi`, `${W.errorsLongDays}g`]}
           rows={errorRows}
           empty={`Son ${W.errorsLongDays} günde hata kodu yok.`}
           unknown={!t.errors}
