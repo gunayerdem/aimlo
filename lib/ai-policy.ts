@@ -290,10 +290,17 @@ BU LİSTE DIŞINDA İNGİLİZCE KELİME KULLANMA. Zorunlu çeviri: pre-aim→aç
 // çevrildi (verify-kb [17] kilitler). ÖLÇÜM (b09-base → b09-cand/cand2, ham, TR 58 örnek):
 // "seni … aldı/kesti/temizledi/indirdi" 13 → 2 / 2, ölüm anlamlı "düş-" 1 → 0 / 0.
 // W3-fix DOĞRULAMASI (2026-09-24, commit edilen alt küme TEK BAŞINA; taban bc026ac ×3,
-// aday 7fc9df7-içeren HEAD ×3 gerçek korpus, ×2 TR poster/kart + EN): kabul EDİLDİ —
-// ihlal artmadı, detector/m1/m3 farkı koşu-düzeyi gürültü içinde (tablo: B09 inceleme
-// commit'i). ÖNEMLİ: AYNI taban commit'i m3'te 0.591 / 0.727 / 0.591, detector'da 70.0 /
-// 67.2 / 67.3 verdi — "tarihsel olarak sabit 0.591" bir örneklem tesadüfüydü.
+// aday 7fc9df7-içeren HEAD ×3 gerçek korpus, ×2 TR poster/kart + EN; tablo: f9db17a):
+// GEÇİCİ kabul — ihlal artmadı; detector/m1/m3 farkı bu tasarımla gürültüden AYIRT
+// EDİLEMEDİ (bu, "fark gürültüdür" kanıtı DEĞİL). Tasarımın sınırları (REV-W3): 3'e-3 koşu
+// yalnız 20 bölünüş verir → iki yönlü en küçük p=0.10, küçük bir etki burada neredeyse hiç
+// görünmez. Gerçek korpusta detector farkının kaynağı taban#1 (cycleb09-base-real, 05:24 —
+// FARKLI oturum); aynı oturumda (09:35-09:45) taban 67.2/67.3 ↔ aday 67.3/64.9/67.2. EN'de iki
+// aday koşusu da iki tabanın altında (detector 73.2/71.8 → 71.2/70.9; EN [OPENER] değişikliğinin
+// girdiği tek korpus, kabul kapısında incelenmedi). m1 aynı oturumda .095/.095 → .190/.143/.095
+// (hiçbir aday tabanın altında değil). AÇIK KAPI: ≥5 tekrarlı, taban ve aday AYNI oturumda
+// koşan A/B — EN detector ve m1 dahil. Ayrıca AYNI taban commit'i m3'te 0.591 / 0.727 / 0.591
+// verdi — "tarihsel olarak sabit 0.591" bir örneklem tesadüfüydü.
 export const NATURAL_COACH_RULE =`\nDOĞAL KOÇ DİLİ: Gerçek bir Radiant koç gibi DOĞRUDAN, sokak ağzıyla konuş. Kitabi/çeviri kelime YASAK:
 "cezalandırıyor/cezalandırdı/cezalandıracak" → "ucuza öldürüyor / aynı açıdan kafadan vuruyor"
 "konumlandırma/pozisyonlandırma/konuşlanma" → "pozisyon / açı"
@@ -431,9 +438,11 @@ export const OUTPUT_FOCUS_RULE = `\nODAK KURALI:
 // etki ayrıştırılamadı. TR'de hedef sınıf (etiketli açılış) tabanda 0/58 olduğundan TR tarafı
 // DEĞİŞTİRİLMEDİ; EN [OPENER] (a) düzeltmesi (Root cause 2/10 → 0) ayrı,
 // lib/vision-prompt-builder.ts. Sınır savunması: lib/coach-text stripDiagnosisLabel (B03).
-// W3-fix NOTU: m3/detector "gerilemesi" artık kanıt SAYILMAZ — aynı taban commit'i 3 koşuda
-// m3 0.591/0.727/0.591, detector 70.0/67.2/67.3 verdi (aday aralığıyla örtüşüyor). Geri alma
-// kararının dayanağı yalnız hedef-sınıf kanıtı: şekil yasağı TR iki-noktalı açılışı 0 → 5/58.
+// W3-fix NOTU (REV-W3 düzeltmesiyle): m3/detector "gerilemesi" bu 3'e-3 tasarımla gürültüden
+// AYIRT EDİLEMEDİ — aynı taban commit'i 3 koşuda m3 0.591/0.727/0.591, detector 70.0/67.2/67.3
+// verdi (aday aralığıyla örtüşüyor). Bu "zarar yok" kanıtı da DEĞİL (iki yönlü en küçük p=0.10;
+// taban#1 ayrı oturum; bkz. NATURAL_COACH_RULE üstündeki W3-fix notu). Geri alma kararının
+// dayanağı hedef-sınıf kanıtı: şekil yasağı TR iki-noktalı açılışı 0 → 5/58.
 export const OUTPUT_FOCUS_RULE_VISION =`\nODAK KURALI:
 - SADECE en önemli 1 soruna odaklan, 1 net fix ver (alternatif şart değil).
 - 1-2 cümle, en fazla. Paragraf/narration YASAK.
@@ -504,10 +513,12 @@ export const DECISION_SCORE_RUBRIC = `\nKARAR SKORU RUBRİK:
 // sınıf (KB tırnaklı örnek cümlesinin 6-gram birebir geçişi) tabanda 0/58 → ölçülebilir fayda
 // yok, ölçülen zarar var. Kalıcı kaynak düzeltmesi KB tarafında yapıldı (tırnaklı "…düştün"
 // örnekleri → "öldün", verify-kb [17]); bu kural bilinçli olarak bugünkü hâlinde.
-// W3-fix NOTU: yukarıdaki "ölçülen zarar" (m3/m1/detector) taban gürültüsü içinde çıktı — aynı
-// taban commit'i 3 koşuda m3 0.591/0.727/0.591, m1 0.048/0.095/0.095, detector 70.0/67.2/67.3.
-// Geri alma yine doğru (hedef sınıf tabanda 0/58 → fayda yok), ama "zarar kanıtlandı" DENEMEZ;
-// yeniden denemek etki-ayrıştırmalı ve koşu başına ≥3 tekrarlı A/B ister.
+// W3-fix NOTU (REV-W3 düzeltmesiyle): yukarıdaki "ölçülen zarar" (m3/m1/detector) tabanın
+// koşu-varyansıyla örtüşüyor — aynı taban commit'i 3 koşuda m3 0.591/0.727/0.591, m1
+// 0.048/0.095/0.095, detector 70.0/67.2/67.3. Bu tasarımla ne "zarar kanıtlandı" ne de "fark
+// gürültüdür" DENEBİLİR (3'e-3 → iki yönlü en küçük p=0.10; taban#1 ayrı oturum). Geri alma yine
+// doğru (hedef sınıf tabanda 0/58 → fayda yok). Yeniden denemek etki-ayrıştırmalı, ≥5 tekrarlı,
+// taban ve aday AYNI oturumda koşan A/B ister (EN detector ve m1 dahil).
 export const KB_SOURCE_RULE =`\n🎯 KAYNAK = KB (knowledge blokları) — EN ÖNEMLİ KURAL:
 Sen koçluğu SIFIRDAN UYDURMAZSIN. OCR'dan gelen gerçeği (ajan + harita + ölüm yeri + düşman + skor) yukarıdaki knowledge bloklarıyla EŞLERSİN ve feedback'i o blokların DİLİYLE verirsin.
 - Bu ölümü KB'deki kalıp/hata bloklarıyla (IF/MEANING/COUNTER/WHY satırları, agent "Sık Yapılan Hatalar", harita "Ölüm Bölgeleri"/"Callout'lar") eşle; başlık adı dosyadan dosyaya değişir, İÇERİĞE bak. En uygun olanı seç.
