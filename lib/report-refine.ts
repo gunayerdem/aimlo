@@ -19,6 +19,7 @@ import { checkOutputQuality, scoreFields } from "@/evals/generic-detector";
 import {
   buildReportCleaner,
   reportOutcome,
+  resolveReportSides,
   type ReportRequest,
   type ReportResponse,
 } from "@/lib/report-prompt";
@@ -134,12 +135,17 @@ export async function maybeRefineReport(
     const scoreNote = matchOutcome.label === "UNFINISHED"
       ? " (maç sonucu kesinleşmedi — kazandın/kaybettin yazma)"
       : matchOutcome.label === "DRAW" ? " (berabere)" : "";
+    // FB01 · F13: devre arasında taraf değişen maçta tek taraf olgu diye verilmez.
+    const sides = resolveReportSides(body);
+    const sideFact = sides.mixed
+      ? "iki taraf (devre arasında değişti)"
+      : rSetup.side === "attack" ? "saldırı" : "savunma";
     const refinePrompt = `Bu ${fieldMap[fs.weakest] || fs.weakest} zayıf. Yeniden yaz.
 
 BU MAÇTA ÖLÇÜLEN OLGULAR (TEK gerçek kaynak — dışına çıkma):
 - Harita: ${rSetup.map && rSetup.map !== "Unknown" ? rSetup.map : "OKUNAMADI"}
 - Oyuncunun ajanı: ${rSetup.agent && rSetup.agent !== "Unknown" ? rSetup.agent : "OKUNAMADI"}
-- Taraf: ${rSetup.side === "attack" ? "saldırı" : "savunma"}
+- Taraf: ${sideFact}
 - Skor: ${body.score.yours}-${body.score.enemy}${scoreNote}
 - Düşman kadrosu: ${refineEnemies.length > 0 ? refineEnemies.join(", ") : "OKUNAMADI"}
 - Ölüm konumları: ${refineLocs.length > 0 ? refineLocs.join(", ") : "OKUNAMADI"}

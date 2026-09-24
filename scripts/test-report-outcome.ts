@@ -7,6 +7,8 @@
  *       engine/Score satırı, route player_memory, raw_result_json.won). KANIT: 01.txt:5567
  *       "Maçı 9-4 kazandın" (elle bitirilen rekabetçi maç), LOG.txt:4538 "Maçı 4-5 kaybettin".
  *       Fix olmadan: (4,4) LOSS, rekabetçi (9,4) WIN, player_memory null maçı kayıp sayar.
+ * [F13] rounds[].side + devre arası çıkarımı: iki taraf görülünce KB side filtresi YOK,
+ *       Side "mixed", round satırında side=, kural 9 round-bazlı; ≤12 round tek taraf aynen.
  *
  * ⚠ AĞ/AI/DB YOK: scripts/report-route-harness.ts (sahte OpenAI + sahte PostgREST);
  * OPENAI_API_KEY sahte dize; .env.local OKUNMAZ.
@@ -15,11 +17,13 @@ import Module from "node:module";
 import * as path from "node:path";
 import { harness, resetHarness, loadReportRoute, reportRequest, newFakeDb } from "./report-route-harness";
 import { deriveMatchOutcome, isTerminalScore, normalizeModeToken, MATCH_END_REASONS } from "../lib/match-outcome";
+import { crossedHalfSwap } from "../lib/match-outcome";
 import {
   validateRequest,
   generateDeterministicReport,
   buildReportPrompts,
   finalizeReportFields,
+  resolveReportSides,
   type ReportRequest,
 } from "../lib/report-prompt";
 
@@ -197,6 +201,52 @@ async function main() {
     check("raw_result_json.won === null, result 'UNFINISHED', matchComplete/endReason kayıtta", raw.won === null && raw.result === "UNFINISHED" && raw.matchComplete === false && raw.endReason === "manual", show({ won: raw.won, result: raw.result }));
     check("updatePlayerMemory won=null ile çağrıldı (wins/games artmaz)", harness.memoryUpdates.length === 1 && harness.memoryUpdates[0].won === null, show(harness.memoryUpdates.map((m) => m.won)));
     check("kayıt yazıldı (savedAnalysisId = matchId)", body.savedAnalysisId === MID);
+  }
+
+  // ══════════════════════════════════════════════════════════════════════
+  console.log("\n── [F13] round tarafı + devre arası ──");
+  {
+    check("crossedHalfSwap: rekabetçi 13 → true, 12 → false; swiftplay 5 → true; spike_rush 4 → true; bilinmeyen → null",
+      crossedHalfSwap(13, "competitive") === true && crossedHalfSwap(12, "competitive") === false && crossedHalfSwap(5, "swiftplay") === true
+        && crossedHalfSwap(4, "spike_rush") === true && crossedHalfSwap(20, "") === null);
+    const sideRounds = desktopRounds(["loss", "win", "win", "loss", "win", "win", "loss", "win", "loss", "win", "win", "loss", "win"],
+      (i) => ({ side: i < 12 ? "defending" : "attacking" }));
+    const mixed = validated({ rounds: sideRounds, lang: "tr", map: "summit", agent: "brimstone", mode: "competitive", side: "attacking" });
+    const sides = resolveReportSides(mixed);
+    const { systemPrompt, userPrompt } = buildReportPrompts(mixed, { memoryContext: "" });
+    check("13 round, R1-R12 savunma + R13 saldırı → mixed (round verisinden)", sides.mixed && sides.perRound, show(sides));
+    check("Side satırı 'mixed (… R1-R12 defense, R13 attack)'", userPrompt.includes("Side: mixed (İKİ TARAF — devre arasında taraf değişti; R1-R12 defense, R13 attack)"), userPrompt.split("\n")[0]);
+    check("round satırlarında side= var", /R1: loss side=defense died@/.test(userPrompt) && /R13: win side=attack \(alive\)/.test(userPrompt), userPrompt.split("\n").slice(4, 6).join(" | "));
+    check("KB side filtresi YOK → summit savunma bölümü prompt'ta ('## 4. Savunma Stratejileri')", systemPrompt.includes("## 4. Savunma Stratejileri"));
+    check("kural 9 round-bazlı ('Her round'u KENDİ tarafının diliyle koçla')", systemPrompt.includes("Her round'u KENDİ tarafının diliyle koçla") && systemPrompt.includes("Round'un tarafı round satırındaki side= alanıdır"));
+    check("deterministik şablon tek taraf yazmıyor ('Saldırı ve Savunma')", generateDeterministicReport(mixed).summary.includes("Saldırı ve Savunma"));
+    const oneSide = validated({ rounds: desktopRounds(seq(3, 2), () => ({ side: "attacking" })), lang: "tr", map: "summit", mode: "competitive", side: "attacking" });
+    const op = buildReportPrompts(oneSide, { memoryContext: "" });
+    check("tek taraflı maç: KB filtreli (savunma bölümü YOK), eski kural 9", !op.systemPrompt.includes("## 4. Savunma Stratejileri") && op.systemPrompt.includes("savunma maçında \"entry açmadın\" yazmak"));
+
+    const noSide17 = validated({ rounds: desktopRounds(seq(9, 8)), lang: "en", map: "summit", mode: "competitive", side: "attacking" });
+    const n17 = buildReportPrompts(noSide17, { memoryContext: "" });
+    check("side'sız 17 round rekabetçi → 'mixed' (çıkarım), KB filtresiz", n17.userPrompt.includes("Side: mixed (both sides — sides switched at halftime; per-round side not reported)") && n17.systemPrompt.includes("## 4. Savunma Stratejileri"), n17.userPrompt.split("\n")[0]);
+    // 01.txt fixture biçimi: 12 round taşıyor ama son round R13, skor 9-4 (R8 dispatch edilmemiş).
+    const gap = desktopRounds(seq(9, 4).slice(0, 13)).filter((r) => r.round !== 8);
+    const g = validated({ rounds: gap, lang: "tr", map: "summit", mode: "competitive", side: "attacking" });
+    check("12 elemanlı ama son round R13 (skor toplamı 13) → mixed (yalnız rounds.length yetmez)", g.rounds.length === 12 && resolveReportSides(g).mixed);
+
+    // ≤12 round: F13 prompt'u DEĞİŞTİRMEZ — rekabetçi gövde, mod'suz aynı gövdeyle (F13 hiç
+    // devreye giremez) "Mode:" parçası dışında bayt-aynı. (HEAD'e karşı tek seferlik kıyas
+    // commit mesajında.)
+    const ten = desktopRounds(seq(6, 4));
+    const withMode = validated({ rounds: ten, lang: "tr", map: "summit", agent: "brimstone", mode: "competitive", side: "attacking", matchComplete: true });
+    const noMode = validated({ rounds: ten, lang: "tr", map: "summit", agent: "brimstone", side: "attacking", matchComplete: true });
+    const a = buildReportPrompts(withMode, { memoryContext: "" });
+    const b = buildReportPrompts(noMode, { memoryContext: "" });
+    check("10 round rekabetçi → mixed DEĞİL", !resolveReportSides(withMode).mixed);
+    check("10 round: system prompt bayt-aynı, user prompt yalnız ', Mode: Competitive' kadar farklı",
+      a.systemPrompt === b.systemPrompt && a.userPrompt.replace(", Mode: Competitive", "") === b.userPrompt);
+    check("10 round: Side satırı tek taraf, round satırında side= yok",
+      a.userPrompt.includes("Side: attack (SALDIRI — oyuncu site'lara giriyor: entry/execute/trade/space)") && !/ side=/.test(a.userPrompt));
+    const spike = validated({ rounds: desktopRounds(seq(4, 2)), lang: "tr", map: "bind", mode: "spike_rush", side: "attacking" });
+    check("spike rush 6 round (R3'te taraf değişir, masaüstü is_side_swap_probe_round) → mixed", resolveReportSides(spike).mixed);
   }
 
   console.log(`\n${fail === 0 ? "✅" : "❌"} test-report-outcome: ${pass} geçti, ${fail} kırık\n`);

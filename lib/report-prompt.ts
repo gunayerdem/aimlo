@@ -37,10 +37,11 @@ import { realityCheck, buildFactGround, type FactGround } from "@/lib/reality-ch
 import { VISION_ENEMY_ITEM_CAP } from "@/lib/vision-postprocess";
 import { isUuidV4 } from "@/lib/uuid";
 import { pickReportScore, sanitizeReportInput } from "@/lib/report-score";
-// FB01 (F03): maç sonucu TEK KAYNAK (masaüstü tablosunun aynası).
+// FB01 (F03/F13): maç sonucu + devre arası taraf değişimi TEK KAYNAK (masaüstü tablolarının aynası).
 import {
   deriveMatchOutcome,
   parseMatchEndReason,
+  crossedHalfSwap,
   type MatchEndReason,
   type MatchOutcome,
   type MatchOutcomeLabel,
@@ -73,6 +74,12 @@ export type RoundData = {
   killerAgent?: string | null;
   killerWeapon?: string | null;
   deathAngle?: string;
+  /**
+   * FB01 · F13 (2026-09-24): round'un oynandığı taraf (masaüstü FD01 additive gönderir,
+   * DISPATCH ctx-final değeri). Yalnız tanınan değerde alan VAR; v1.0.19 round'larında
+   * alan hiç oluşmaz (round nesnesi bayt-aynı kalır).
+   */
+  side?: "attack" | "defense";
 };
 
 export type ReportRequest = {
@@ -313,6 +320,12 @@ export function validateRequest(
         ? sanitize(r.killerWeapon, 30)
         : parseKillerWeapon(r.killerInfo),
       deathAngle: typeof r.deathAngle === "string" ? sanitize(r.deathAngle, 30) : undefined,
+      // FB01 · F13: round tarafı normalizeSide ile korunur ("attacking"→"attack");
+      // tanınmayan/eksik değerde alan HİÇ eklenmez (v1.0.19 round nesnesi bayt-aynı).
+      ...((): { side?: "attack" | "defense" } => {
+        const s = normalizeSide(r.side);
+        return s ? { side: s } : {};
+      })(),
     }));
 
   // Optional matchId — if present must be a valid UUID v4. Reject hard
@@ -378,7 +391,7 @@ export function validateRequest(
 }
 
 /* ══════════════════════════════════════════════════════════
-   MAÇ SONUCU — FB01 (F03, 2026-09-24)
+   MAÇ SONUCU + TARAF — FB01 (F03/F13, 2026-09-24)
    ══════════════════════════════════════════════════════════ */
 
 /** Doğrulanmış gövdenin maç sonucu — deterministik şablon, prompt, route AYNI çağrı. */
@@ -389,6 +402,61 @@ export function reportOutcome(body: ReportRequest): MatchOutcome {
     matchComplete: body.matchComplete,
     mode: body.setup.mode,
   });
+}
+
+export type ReportSides =
+  | { mixed: false }
+  | {
+      mixed: true;
+      /** true = round başına taraf masaüstünden geldi; false = mod eşiğinden çıkarıldı. */
+      perRound: boolean;
+      /** perRound iken ardışık aynı-taraf aralıkları, round numarasına göre sıralı. */
+      runs: { from: number; to: number; side: "attack" | "defense" }[];
+    };
+
+/**
+ * KANIT (F13): rapor tarafı maç seviyesinde TEK değer sayıyordu — masaüstü onu finalize
+ * anında (ikinci yarı) okuyor (aimlo-runtime 01.txt: DISPATCH:1..7 'defending', :4990 R13
+ * 'attacking', :5556 finalize 'attacking') → R1-R12 savunma round'ları saldırı diliyle
+ * koçlanıyor, savunma KB bölümleri filterSectionsBySide ile atılıyordu.
+ *  - Round'larda İKİ taraf da görülüyorsa → mixed (aralıklar round verisinden).
+ *  - HİÇBİR round'da taraf yoksa (v1.0.19) ve mod tanınıp devre arası geçildiyse → mixed
+ *    (perRound=false). "Oynanan" = max(round sayısı, en büyük round no, skor toplamı):
+ *    yalnız rounds.length yetmez — eval fixture R4 (01.txt'nin kendisi) 12 round
+ *    taşıyor ama son round R13, skor 9-4 (R8 dispatch edilmemiş).
+ *  - Diğer her durum → mixed değil (tek taraf, bugünkü davranış bayt-aynı).
+ */
+export function resolveReportSides(body: ReportRequest): ReportSides {
+  const rounds = Array.isArray(body.rounds) ? body.rounds : [];
+  const withSide = rounds.filter((r) => r.side === "attack" || r.side === "defense");
+  const seen = new Set(withSide.map((r) => r.side));
+  if (seen.size === 2) {
+    const ordered = [...withSide].sort((a, b) => a.roundNumber - b.roundNumber);
+    const runs: { from: number; to: number; side: "attack" | "defense" }[] = [];
+    for (const r of ordered) {
+      const last = runs[runs.length - 1];
+      if (last && last.side === r.side) last.to = r.roundNumber;
+      else runs.push({ from: r.roundNumber, to: r.roundNumber, side: r.side as "attack" | "defense" });
+    }
+    return { mixed: true, perRound: true, runs };
+  }
+  if (withSide.length > 0) return { mixed: false };
+  const maxRoundNo = rounds.reduce((m, r) => (Number.isFinite(r.roundNumber) && r.roundNumber > m ? r.roundNumber : m), 0);
+  const scoreSum = Number(body.score.yours) + Number(body.score.enemy);
+  const played = Math.max(rounds.length, maxRoundNo, Number.isFinite(scoreSum) ? scoreSum : 0);
+  if (crossedHalfSwap(played, body.setup.mode) === true) return { mixed: true, perRound: false, runs: [] };
+  return { mixed: false };
+}
+
+/** "R1-R12 defense, R13+ attack" — son aralık "+" ile açık uçlu; tek round'luk aralık "R5". */
+function formatSideRuns(runs: { from: number; to: number; side: string }[]): string {
+  return runs
+    .map((run, i) => {
+      const last = i === runs.length - 1;
+      const range = last && run.to > run.from ? `R${run.from}+` : run.from === run.to ? `R${run.from}` : `R${run.from}-R${run.to}`;
+      return `${range} ${run.side}`;
+    })
+    .join(", ");
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -568,7 +636,11 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
           nonSkipped.length
         ).toFixed(1)
       : "0";
-  const sideLabel = isTr
+  // FB01 · F13: iki tarafta da oynanmış maçta tek taraf YAZILMAZ.
+  const sides = resolveReportSides(body);
+  const sideLabel = sides.mixed
+    ? (isTr ? "Saldırı ve Savunma" : "Attack and Defense")
+    : isTr
     ? setup.side === "attack"
       ? "Saldırı"
       : "Savunma"
@@ -922,6 +994,8 @@ export function buildReportPrompts(
   const memoryContext = opts.memoryContext;
   // FB01 · F03: maç sonucu TEK kaynaktan (Score satırı, engine girdisi, prompt kuralı).
   const outcome = reportOutcome(body);
+  // FB01 · F13: iki tarafta oynanmış maç (round verisinden ya da mod eşiğinden).
+  const sides = resolveReportSides(body);
 
   // Build round summary — truncated, sanitized, enriched with per-round AI feedback
   const safeRounds = (rounds || []).filter(
@@ -939,7 +1013,9 @@ export function buildReportPrompts(
       const anglePart = r.deathAngle ? ` angle=${r.deathAngle}` : "";
       // "unknown" → "result-unread": model okunamayan round için galibiyet/kayıp
       // iddiası KURAMASIN (OCR-only sözleşme, anti-uydurma).
-      const baseLine = `R${r.roundNumber}: ${r.result === "unknown" ? "result-unread" : r.result}${r.survived ? " (alive)" : ` died@${r.deathLocation || "?"}${killerPart}${anglePart} vs ${r.enemyCount || "?"}`}${note ? ` <user_note>${note}</user_note>` : ""}`;
+      // FB01 · F13: masaüstü round tarafını gönderdiyse satıra girer (yoksa satır bayt-aynı).
+      const sidePart = r.side ? ` side=${r.side}` : "";
+      const baseLine = `R${r.roundNumber}: ${r.result === "unknown" ? "result-unread" : r.result}${sidePart}${r.survived ? " (alive)" : ` died@${r.deathLocation || "?"}${killerPart}${anglePart} vs ${r.enemyCount || "?"}`}${note ? ` <user_note>${note}</user_note>` : ""}`;
       // stripNumericHp (2026-07-09): older per-round feedback rows may still carry
       // "(41 HP)" text — keep the stale number out of the report prompt so the
       // summary can't echo it ("R3'te 41 HP ile direnip" leak).
@@ -1004,7 +1080,9 @@ export function buildReportPrompts(
       agent: setup.agent,
       rank: setup.rank, // rank from client for rank-appropriate coaching
       enemyAgents: setup.enemyComp?.filter(a => a && a !== "Unknown"),
-      side: setup.side, // side-aware KB: drops opposite-side map/agent sections
+      // side-aware KB: drops opposite-side map/agent sections. FB01 · F13: iki tarafta
+      // oynanmış maçta filtre YOK (undefined) — yoksa ilk yarının KB bölümleri atılıyordu.
+      side: sides.mixed ? undefined : setup.side,
     });
   } catch (e) {
     console.log("[Aimlo] Knowledge base not available, using default prompt");
@@ -1042,6 +1120,12 @@ export function buildReportPrompts(
       ? `
 12. ⚖ MAÇ BERABERE BİTTİ (Score satırı DRAW): "kazandın"/"kaybettin" yazma — sonuç beraberlik; "DRAW" veri etiketini metne yazma.`
       : "";
+  // FB01 · F13: kural 9 tek tarafı "RED BAYRAĞI" sayıyordu; devre arasında taraf değişen
+  // maçta ilk yarının round'ları ters tarafın diliyle koçlanıyordu (01.txt R12 savunma
+  // round'u "solo giriş" dersi aldı). Tek taraflı maçta kural 9 bayt-aynı.
+  const sideRule = sides.mixed
+    ? `9. ⚔ SIDE: bu maçta taraf devre arasında DEĞİŞTİ (userPrompt'taki "Side: mixed"). Her round'u KENDİ tarafının diliyle koçla: side=attack round'u SALDIRI (oyuncu giriyor → entry/execute/trade/space/lurk/post-plant dili; hata: solo dry entry, trade'siz peek, util'siz geçiş), side=defense round'u SAVUNMA (oyuncu tutuyor → açı tut/off-angle/crossfire/retake/save/rotate dili; hata: tek açıyı geniş peek, trade'siz over-peek, kayıp round'da save etmemek). ${sides.perRound ? "Round'un tarafı round satırındaki side= alanıdır" : "Round satırlarında side= alanı yok: bir round için saldırı/savunma iddiası kurma, o round'un dersini konum + karar üzerinden ver"}. Bir round'a karşı tarafın dilini yazmak = RED BAYRAĞI.`
+    : `9. ⚔ SIDE'a göre koçla (userPrompt'taki "Side" alanı). attack=SALDIRI (oyuncu giriyor → entry/execute/trade/space/lurk/post-plant dili; hata: solo dry entry, trade'siz peek, util'siz geçiş), defense=SAVUNMA (oyuncu tutuyor → açı tut/off-angle/crossfire/retake/save/rotate dili; hata: tek açıyı geniş peek, trade'siz over-peek, kayıp round'da save etmemek). mistake/adjustment/tendencies bu side'ın diliyle olmalı — savunma maçında "entry açmadın" yazmak, saldırı maçında "açıyı tutmadın" yazmak = RED BAYRAĞI.`;
 
   const systemPrompt = `${knowledgePart}Sen AIMLO'sun: Radiant seviye gerçek bir Valorant koçusun. VCT analisti gibi konuş, empatik değil — keskin ve spesifik.
 
@@ -1075,7 +1159,7 @@ KURALLAR (HER BİRİ RED BAYRAĞI)
 6. "sen" hitabı, "siz" değil.
 7. MİKRO-POZİSYON ZORUNLU: "A Short", "B Main entry", "Generator off-angle" — "site" veya "mid" tek başına KABUL EDİLMEZ.
 8. Her round feedback'inde deathAnalysis/coachInsight varsa BUNLARA referans ver. Mesela 3 round'da "Cypher operator B Short" pattern'i tekrarlıyorsa mistake alanında bunu vurgula.
-9. ⚔ SIDE'a göre koçla (userPrompt'taki "Side" alanı). attack=SALDIRI (oyuncu giriyor → entry/execute/trade/space/lurk/post-plant dili; hata: solo dry entry, trade'siz peek, util'siz geçiş), defense=SAVUNMA (oyuncu tutuyor → açı tut/off-angle/crossfire/retake/save/rotate dili; hata: tek açıyı geniş peek, trade'siz over-peek, kayıp round'da save etmemek). mistake/adjustment/tendencies bu side'ın diliyle olmalı — savunma maçında "entry açmadın" yazmak, saldırı maçında "açıyı tutmadın" yazmak = RED BAYRAĞI.${setup.map === "Unknown" ? `
+${sideRule}${setup.map === "Unknown" ? `
 10. ⚠ HARİTA OKUNAMADI (Unknown): Bu maçta harita tespit edilemedi. RULE 7'nin mikro-pozisyon ZORUNLULUĞU bu maçta GEÇERSİZ — callout/yer adı UYDURMA ("A Short", "B Main", "Mid" YASAK). Yalnız OCR'ın gönderdiği gerçek deathLocation'ları kullanabilirsin; onların dışında yer adı yazma. Dersi ajan + silah + side + karar (trade/util-sırası/timing/ekonomi) üzerinden ver — bunlar harita olmadan da spesifik ve doğrudur.` : ""}${rosterRule}${outcomeRule}
 
 ⚠ VERİ-ETİKETİ YASAK (canlı-test #15): Sana gelen JSON alan adları (ultReady, deathTiming, killerInfo, deathLocation, economyType, enemyComp, spikePlanted...) VERİ ETİKETİDİR, koç dili değil — çıktı cümlesinde ASLA geçmez. Olguyu doğal dille söyle: ${isTr ? '"ultReady varken" DEĞİL "ultin doluyken"; "deathTiming late" DEĞİL "round sonunda".' : '"with ultReady" is WRONG — say "with your ult up"; "deathTiming late" is WRONG — say "late in the round".'}
@@ -1193,7 +1277,13 @@ ${memoryContext}
   // etiketi "SALDIRI/SAVUNMA — oyuncu site'lara giriyor", yukarıdaki "Top killers (kim
   // seni en çok öldürdü)" / "data yok"). EN dalı İngilizce karşılığı alır; TR dalı
   // BAYT-AYNI (scripts/test-prompt-policy.ts [P7] iki yönü de kilitler).
-  const sideLabelForPrompt = setup.side === "attack"
+  // FB01 · F13: iki tarafta oynanmış maçta tek taraf etiketi YAZILMAZ — "mixed" + (varsa)
+  // round aralıkları ("R1-R12 defense, R13+ attack"). Tek taraflı maçta etiket bayt-aynı.
+  const sideLabelForPrompt = sides.mixed
+    ? sides.perRound
+      ? `mixed (${isTr ? "İKİ TARAF — devre arasında taraf değişti" : "both sides — sides switched at halftime"}; ${formatSideRuns(sides.runs)})`
+      : `mixed (${isTr ? "İKİ TARAF — devre arasında taraf değişti; round başına taraf gelmedi" : "both sides — sides switched at halftime; per-round side not reported"})`
+    : setup.side === "attack"
     ? (isTr ? "attack (SALDIRI — oyuncu site'lara giriyor: entry/execute/trade/space)" : "attack (the player enters sites: entry/execute/trade/space)")
     : setup.side === "defense"
       ? (isTr ? "defense (SAVUNMA — oyuncu site'ları tutuyor: hold/off-angle/retake/save)" : "defense (the player holds sites: hold/off-angle/retake/save)")

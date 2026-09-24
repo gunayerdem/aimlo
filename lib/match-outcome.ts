@@ -1,5 +1,5 @@
 /**
- * MAÇ SONUCU — TEK KAYNAK (FB01 · F03, 2026-09-24)
+ * MAÇ SONUCU + TARAF DEĞİŞİMİ — TEK KAYNAK (FB01 · F03/F13, 2026-09-24)
  * ─────────────────────────────────────────────────────────────────────────────
  * KANIT (F03): maç sonucu dört ayrı yerde `yours > enemy ? WIN : LOSS` diye türetiliyordu
  * (report-prompt.ts deterministik şablon + engine girdisi + "Score:" satırı, route.ts
@@ -12,6 +12,8 @@
  * SÖZLEŞME (FD01 ile ORTAK — masaüstü additive gönderir, alan yoksa v1.0.19 davranışı):
  *   matchComplete : boolean  — maç gerçekten bitti mi (bitiş ekranı ya da terminal skor)
  *   endReason     : MATCH_END_REASONS'tan biri — finalize'ı ne tetikledi
+ *   rounds[].side : "attack" | "defense" (masaüstü "attacking"/"defending" de yollayabilir;
+ *                   normalizeSide kanonikleştirir)
  * ⚠ Aşağıdaki sabit listeler aimlo-desktop'taki (FD01) Rust listesiyle AYNI YAZIMLA
  * tutulur; birini değiştiren ikisini birden değiştirir.
  */
@@ -50,6 +52,19 @@ const MATCH_END_THRESHOLD: Readonly<Record<string, number>> = {
 
 /** 12-12'den sonra 2 fark kuralıyla uzayan modlar (desktop valorant_score_shape_plausible). */
 const WIN_BY_TWO_MODES: ReadonlySet<string> = new Set(["competitive", "unrated", "premier"]);
+
+/**
+ * Devre arası taraf değişimi — bu round TAMAMLANINCA taraf değişir. aimlo-desktop
+ * src-tauri/src/detection.rs `is_side_swap_probe_round` / `expected_swap_count` ile
+ * AYNI swap noktaları (spike_rush R3, swiftplay R4, rekabetçi/derecesiz R12).
+ */
+const HALF_SWAP_AFTER_ROUND: Readonly<Record<string, number>> = {
+  spike_rush: 3,
+  swiftplay: 4,
+  competitive: 12,
+  unrated: 12,
+  premier: 12,
+};
 
 /** "Spike Rush" / "spike_rush" / " Competitive " → "spike_rush" / "competitive"; boş → "". */
 export function normalizeModeToken(raw: unknown): string {
@@ -101,3 +116,13 @@ export function deriveMatchOutcome(input: {
   return y > e ? { won: true, label: "WIN" } : { won: false, label: "LOSS" };
 }
 
+/**
+ * Oynanan round sayısına göre devre arası geçildi mi? null = mod tanınmıyor.
+ * `played` = çağıranın ölçtüğü en büyük oynanan-round sayısı (round dizisi uzunluğu,
+ * en büyük round numarası, skor toplamı — hangisi büyükse).
+ */
+export function crossedHalfSwap(played: number, mode: unknown): boolean | null {
+  const swapAfter = HALF_SWAP_AFTER_ROUND[normalizeModeToken(mode)];
+  if (swapAfter === undefined) return null;
+  return played > swapAfter;
+}

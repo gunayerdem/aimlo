@@ -131,9 +131,11 @@ console.log("\n[P7] EN rapor user prompt'unda B09'da düzeltilen 7 Türkçe sabi
     const v = validateRequest(fx.body);
     if (!v.valid) { t(`${fx.id}: validateRequest`, false, v.error); continue; }
     const { userPrompt } = buildReportPrompts(v.data, { memoryContext: fx.memoryContext });
+    // FB01 · F13: devre arası geçilmiş rekabetçi maçta (R1-R4 fixture'larının hepsi) Side
+    // tek taraf değil "mixed (İKİ TARAF — …)" — TR etiketi yine Türkçe.
     t(`${fx.id}: TR user prompt Türkçe etiketleri AYNEN taşıyor`,
       userPrompt.includes("- Top killers (kim seni en çok öldürdü): ") && userPrompt.includes("- Top death locations (en çok nerede öldün): ") &&
-      /Side: (attack \(SALDIRI — oyuncu site'lara giriyor: entry\/execute\/trade\/space\)|defense \(SAVUNMA — oyuncu site'ları tutuyor: hold\/off-angle\/retake\/save\))/.test(userPrompt));
+      /Side: (attack \(SALDIRI — oyuncu site'lara giriyor: entry\/execute\/trade\/space\)|defense \(SAVUNMA — oyuncu site'ları tutuyor: hold\/off-angle\/retake\/save\)|mixed \(İKİ TARAF — devre arasında taraf değişti; [^)\n]+\))/.test(userPrompt));
   }
 }
 
