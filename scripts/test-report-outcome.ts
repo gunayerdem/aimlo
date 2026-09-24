@@ -9,6 +9,9 @@
  *       Fix olmadan: (4,4) LOSS, rekabetçi (9,4) WIN, player_memory null maçı kayıp sayar.
  * [F13] rounds[].side + devre arası çıkarımı: iki taraf görülünce KB side filtresi YOK,
  *       Side "mixed", round satırında side=, kural 9 round-bazlı; ≤12 round tek taraf aynen.
+ * [F89] deterministik şablon: ajan/harita yok + dağınık ölüm + enemyCount yok → "Unknown",
+ *       "okunuyor/tekrarlayan", "0.0", ölçülmemiş trade/utility yargısı YOK (TR+EN) +
+ *       Lotus "Hookah'tan girdin." alan-yedeği vakası.
  *
  * ⚠ AĞ/AI/DB YOK: scripts/report-route-harness.ts (sahte OpenAI + sahte PostgREST);
  * OPENAI_API_KEY sahte dize; .env.local OKUNMAZ.
@@ -247,6 +250,43 @@ async function main() {
       a.userPrompt.includes("Side: attack (SALDIRI — oyuncu site'lara giriyor: entry/execute/trade/space)") && !/ side=/.test(a.userPrompt));
     const spike = validated({ rounds: desktopRounds(seq(4, 2)), lang: "tr", map: "bind", mode: "spike_rush", side: "attacking" });
     check("spike rush 6 round (R3'te taraf değişir, masaüstü is_side_swap_probe_round) → mixed", resolveReportSides(spike).mixed);
+  }
+
+  // ══════════════════════════════════════════════════════════════════════
+  console.log("\n── [F89] deterministik şablon — ölçülmeyen iddia yok ──");
+  for (const lang of ["tr", "en"] as const) {
+    // ajan/harita yok + her ölüm FARKLI konumda + enemyCount yok (masaüstü göndermez)
+    const locs = ["A Main", "B Site", "Mid", "A Link", "B Main"];
+    let li = 0;
+    const rounds = desktopRounds(["loss", "win", "loss", "loss", "win", "loss", "loss"]).map((r) => ({ ...r, deathLocation: r.died ? locs[li++] : "" }));
+    const v = validated({ rounds, lang });
+    const d = generateDeterministicReport(v);
+    const texts = FIELDS.map((f) => `${f}: ${d[f]}`);
+    const hit = (re: RegExp) => texts.filter((t) => re.test(t));
+    check(`${lang}: 6 alanda /\\bUnknown\\b/ yok (fix yok: 'Unknown olarak', 'As Unknown')`, hit(/\bUnknown\b/).length === 0, show(hit(/\bUnknown\b/)));
+    check(`${lang}: tekrar iddiası yok (/okunuyor|tekrarlayan|being read|Recurring/)`, hit(/okunuyor|tekrarlayan|being read|Recurring/).length === 0, show(hit(/okunuyor|tekrarlayan|being read|Recurring/)));
+    check(`${lang}: '0.0' temas satırı yok`, hit(/0\.0/).length === 0, show(hit(/0\.0/)));
+    check(`${lang}: decisionScore'da trade/utility yargısı yok, ölçülen veri var`,
+      !/trade|utility/i.test(d.decisionScore) && (lang === "tr" ? /Round kazanma %\d+, hayatta kalma %\d+/ : /\d+% rounds won, \d+% survival/).test(d.decisionScore), d.decisionScore);
+  }
+  {
+    // Alan-yedeği vakası: model bestRound'u Lotus'ta OLMAYAN callout'la yazar → süzgeç boşaltır →
+    // stats.bestRound yedeği kullanıcıya gider; ajan okunmamışken "Unknown" basılmamalı.
+    const v = validated({ rounds: desktopRounds(["win", "loss", "win"]).map((r) => ({ ...r, died: false })), lang: "tr", map: "lotus" });
+    const stats = generateDeterministicReport(v);
+    const parsed = { summary: "R1 ve R3'te hayatta kaldın; skor önde.", mistake: "R2'de A Main'e tek girdin.", tendencies: "Rakip A Main'i tutuyor.",
+      adjustment: "A Main'e flaşla gir VEYA C'ye dön.", bestRound: "Hookah'tan girdin.", decisionScore: "6/10 — iyi." };
+    const fin = finalizeReportFields(parsed, v, stats)!;
+    check("Lotus + 'Hookah'tan girdin.' → yedek bestRound'da 'Unknown' yok (fix yok: 'Unknown olarak')",
+      !!fin && !/Hookah/.test(fin.bestRound) && !/\bUnknown\b/.test(fin.bestRound) && fin.bestRound.length > 0, show(fin?.bestRound));
+    const oneDeath = validated({ rounds: [{ round: 1, score: "0 - 1", result: "loss", died: true, deathLocation: "B Lobby" }], lang: "tr", map: "sunset", agent: "sova" });
+    const od = generateDeterministicReport(oneDeath);
+    check("tek ölüm → 'bu pozisyon okunuyor' YOK, ajan biliniyorsa 'Sova olarak' kalır",
+      !/okunuyor/.test(od.summary + od.adjustment) && /Sova olarak/.test(od.mistake), show({ s: od.summary, m: od.mistake }));
+    const repeated = validated({ rounds: desktopRounds(["loss", "loss", "loss", "win"]), lang: "tr", map: "ascent", agent: "jett" });
+    const rd = generateDeterministicReport(repeated);
+    check("aynı noktada 3 ölüm → tekrar iddiası ölçülmüş, korunur ('okunuyor', 'A Main'de 3 tekrar ölüm')",
+      /bu pozisyon okunuyor/.test(rd.summary) && /A Main'de 3 tekrar ölüm/.test(rd.decisionScore), show({ s: rd.summary, d: rd.decisionScore }));
   }
 
   console.log(`\n${fail === 0 ? "✅" : "❌"} test-report-outcome: ${pass} geçti, ${fail} kırık\n`);

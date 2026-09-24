@@ -651,6 +651,19 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
   // FB01 · F03: sonuç TEK kaynaktan (lib/match-outcome.ts) — null = bilinmiyor.
   const outcome = reportOutcome(body);
   const matchWon = outcome.won;
+  // FB01 · F89: "Unknown" senteli insan-okur cümleye GİRMEZ — ajan/harita okunmadıysa
+  // "X olarak" / "As X" / "X utility'sini" / "X bölgesinde" öbekleri hiç kurulmaz.
+  const agentKnown = setup.agent !== "Unknown";
+  const mapKnown = setup.map !== "Unknown";
+  const asAgentTr = agentKnown ? `${setup.agent} olarak ` : "";
+  // Tekrar iddiası ("okunuyor"/"tekrarlayan") yalnız aynı noktada ≥2 ölüm varken.
+  const repeatedSpot = topDeathLoc !== "N/A" && topDeathCount >= 2;
+  const deathCount = nonSkipped.filter((r) => !r.survived).length;
+  const deathVariety = Object.keys(locationCounts).length;
+  // Temas ortalaması yalnız masaüstü/istemci SAYISAL enemyCount>0 gönderdiyse anlamlı
+  // (masaüstü RoundFeedback'te alan yok → eskiden daima "0.0 kişi" basılıyordu).
+  const contactAvg = Number(avgEnemy);
+  const hasContactData = nonSkipped.length > 0 && contactAvg > 0;
   const allNotes = nonSkipped
     .map((r) => (r.yourNote || "").toLowerCase())
     .join(" ");
@@ -669,37 +682,55 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
     .map((r) => `R${r.roundNumber}`);
   const deathRoundStr = deathRounds.slice(0, 3).join(", ");
 
-  // İnsan-okur başlık: "Unknown — Unknown Savunma" diye başlamasın (basım
-  // noktasında Türkçeleştir; yapısal "Unknown" senteli DB'de aynen kalır).
-  const mapLabel = setup.map === "Unknown" ? (isTr ? "Bilinmeyen harita" : "Unknown map") : setup.map;
-  const agentLabel = setup.agent === "Unknown" ? (isTr ? "bilinmeyen ajan" : "unknown agent") : setup.agent;
+  // İnsan-okur başlık: "Unknown — Unknown Savunma" diye başlamasın. FB01 · F89: okunmayan
+  // harita/ajan başlığa hiç girmez ("Bilinmeyen harita — bilinmeyen ajan" yerine yalnız
+  // bilinenler); yapısal "Unknown" senteli DB'de aynen kalır.
+  const who = [mapKnown ? setup.map : "", agentKnown ? setup.agent : ""].filter(Boolean).join(" — ");
+  const head = who ? `${who}, ${sideLabel}.` : `${sideLabel}.`;
   const unreadNote = unknownCount > 0 ? (isTr ? ` (${unknownCount} round okunamadı)` : ` (${unknownCount} unread)`) : "";
   // F03: sonuç kesinleşmediyse skor "final" gibi sunulmaz.
   const scoreNote = outcome.label === "UNFINISHED" ? (isTr ? " (sonuç kesinleşmedi)" : " (result not confirmed)") : "";
   const summary = isTr
-    ? `${mapLabel} — ${agentLabel}, ${sideLabel}. Skor: ${scoreStr}${scoreNote}. ${total} round, ${won}W/${lost}L${unreadNote}.${survivedText} ${topDeathLoc !== "N/A" ? `${trLocative(topDeathLoc)} ${topDeathCount}x ölüm — bu pozisyon okunuyor.` : ""} Ort. düşman temas: ${avgEnemy} kişi.`
-    : `${mapLabel} — ${agentLabel}, ${sideLabel}. Score: ${scoreStr}${scoreNote}. ${total} rounds, ${won}W/${lost}L${unreadNote}.${survivedText} ${topDeathLoc !== "N/A" ? `${topDeathCount}x death at ${topDeathLoc} — this position is being read.` : ""} Avg enemy contact: ${avgEnemy}.`;
+    ? `${head} Skor: ${scoreStr}${scoreNote}. ${total} round, ${won}W/${lost}L${unreadNote}.${survivedText}${repeatedSpot ? ` ${trLocative(topDeathLoc)} ${topDeathCount}x ölüm — bu pozisyon okunuyor.` : ""}${hasContactData ? ` Ort. düşman temas: ${avgEnemy} kişi.` : ""}`
+    : `${head} Score: ${scoreStr}${scoreNote}. ${total} rounds, ${won}W/${lost}L${unreadNote}.${survivedText}${repeatedSpot ? ` ${topDeathCount}x death at ${topDeathLoc} — this position is being read.` : ""}${hasContactData ? ` Avg enemy contact: ${avgEnemy}.` : ""}`;
   let mistake: string;
   if (topDeathCount >= 3) {
     mistake = isTr
-      ? `GÖZLEM: ${trLocative(topDeathLoc)} ${topDeathCount} ölüm (${deathRoundStr}). ÇIKARIM: Düşman bu açıyı okuyor, crosshair hazır tutuyor. ÖNERİ: ${setup.agent} olarak off-angle'a geç veya utility ile açıyı temizleyip peek at.`
-      : `OBSERVATION: ${topDeathCount} deaths at ${topDeathLoc} (${deathRoundStr}). INFERENCE: Enemy reads this angle, holds crosshair. RECOMMENDATION: As ${setup.agent}, shift to off-angle or clear with utility before peeking.`;
+      ? `GÖZLEM: ${trLocative(topDeathLoc)} ${topDeathCount} ölüm (${deathRoundStr}). ÇIKARIM: Düşman bu açıyı okuyor, crosshair hazır tutuyor. ÖNERİ: ${agentKnown ? `${setup.agent} olarak off-angle'a geç` : "Off-angle'a geç"} veya utility ile açıyı temizleyip peek at.`
+      : `OBSERVATION: ${topDeathCount} deaths at ${topDeathLoc} (${deathRoundStr}). INFERENCE: Enemy reads this angle, holds crosshair. RECOMMENDATION: ${agentKnown ? `As ${setup.agent}, shift` : "Shift"} to off-angle or clear with utility before peeking.`;
   } else if (hasRotateIssue) {
     mistake = isTr
-      ? `GÖZLEM: Birden fazla round'da rotasyon sırasında ölüm. ÇIKARIM: Timing hatası — nişan noktası hazır değildi, düşman rotasyonu okuyor. ÖNERİ: ${setup.agent} olarak rotasyonda her köşenin açısını önceden tut, util ile bilgi topla.`
-      : `OBSERVATION: Deaths during rotation in multiple rounds. INFERENCE: Timing error — crosshair placement wasn't ready, enemy reads rotations. RECOMMENDATION: As ${setup.agent}, pre-aim every corner during rotation, use ability for info.`;
+      ? `GÖZLEM: Birden fazla round'da rotasyon sırasında ölüm. ÇIKARIM: Timing hatası — nişan noktası hazır değildi, düşman rotasyonu okuyor. ÖNERİ: ${agentKnown ? `${setup.agent} olarak rotasyonda` : "Rotasyonda"} her köşenin açısını önceden tut, util ile bilgi topla.`
+      : `OBSERVATION: Deaths during rotation in multiple rounds. INFERENCE: Timing error — crosshair placement wasn't ready, enemy reads rotations. RECOMMENDATION: ${agentKnown ? `As ${setup.agent}, pre-aim` : "Pre-aim"} every corner during rotation, use ability for info.`;
   } else if (hasSoloIssue) {
     mistake = isTr
-      ? `GÖZLEM: Solo anchor pozisyonlarında izole ölümler. ÇIKARIM: Trade alacak teammate yoktu, ${setup.agent} izole pozisyonda savunmasız. ÖNERİ: Teammate trade açısını bekle, crossfire kur, solo peek atma.`
-      : `OBSERVATION: Isolated deaths in solo anchor positions. INFERENCE: No teammate for trade, ${setup.agent} vulnerable in isolation. RECOMMENDATION: Wait for teammate trade angle, set up crossfire, no solo peeks.`;
+      ? `GÖZLEM: Solo anchor pozisyonlarında izole ölümler. ÇIKARIM: Trade alacak teammate yoktu, ${agentKnown ? `${setup.agent} izole pozisyonda savunmasız` : "izole pozisyonda savunmasız kaldın"}. ÖNERİ: Teammate trade açısını bekle, crossfire kur, solo peek atma.`
+      : `OBSERVATION: Isolated deaths in solo anchor positions. INFERENCE: No teammate for trade, ${agentKnown ? `${setup.agent} vulnerable` : "you were vulnerable"} in isolation. RECOMMENDATION: Wait for teammate trade angle, set up crossfire, no solo peeks.`;
   } else if (hasUtilIssue) {
     mistake = isTr
-      ? `GÖZLEM: ${setup.agent} utility sonrası savunmasız kalınan round'lar var. ÇIKARIM: Util kullandıktan sonra aynı pozisyonda duruyorsun — düşman aynı açıdan bedavaya kill alıyor. ÖNERİ: Util sonrası çekil, yer değiştir, off-angle'a geç.`
-      : `OBSERVATION: Rounds where ${setup.agent} was vulnerable after utility use. INFERENCE: Holding same position after ability — enemy punishes this. RECOMMENDATION: Reposition after utility, shift to off-angle.`;
-  } else {
+      ? `GÖZLEM: ${agentKnown ? `${setup.agent} utility sonrası` : "Utility sonrası"} savunmasız kalınan round'lar var. ÇIKARIM: Util kullandıktan sonra aynı pozisyonda duruyorsun — düşman aynı açıdan bedavaya kill alıyor. ÖNERİ: Util sonrası çekil, yer değiştir, off-angle'a geç.`
+      : `OBSERVATION: Rounds where ${agentKnown ? setup.agent : "you"} ${agentKnown ? "was" : "were"} vulnerable after utility use. INFERENCE: Holding same position after ability — enemy punishes this. RECOMMENDATION: Reposition after utility, shift to off-angle.`;
+  } else if (repeatedSpot) {
+    // Aynı noktada ≥2 ölüm: "tekrarlayan" iddiası ölçülmüş (bugünkü metin, ajan bilinmiyorsa ajansız).
     mistake = isTr
-      ? `GÖZLEM: ${topDeathLoc !== "N/A" ? trLocative(topDeathLoc) : trLocative(mapLabel)} tekrarlayan pozisyon hataları. ÇIKARIM: Nişan noktası ve angle seçimi zayıf — düşman ilk peek'i kazanıyor. ÖNERİ: ${setup.agent} olarak off-angle tut, jiggle peek ile bilgi topla.`
-      : `OBSERVATION: Recurring positioning errors ${topDeathLoc !== "N/A" ? `at ${topDeathLoc}` : `on ${setup.map}`}. INFERENCE: Weak crosshair placement and angle selection — enemy wins first peek. RECOMMENDATION: As ${setup.agent}, hold off-angle, jiggle peek for info.`;
+      ? `GÖZLEM: ${trLocative(topDeathLoc)} tekrarlayan pozisyon hataları. ÇIKARIM: Nişan noktası ve angle seçimi zayıf — düşman ilk peek'i kazanıyor. ÖNERİ: ${agentKnown ? `${setup.agent} olarak off-angle tut` : "Off-angle tut"}, jiggle peek ile bilgi topla.`
+      : `OBSERVATION: Recurring positioning errors at ${topDeathLoc}. INFERENCE: Weak crosshair placement and angle selection — enemy wins first peek. RECOMMENDATION: ${agentKnown ? `As ${setup.agent}, hold` : "Hold"} off-angle, jiggle peek for info.`;
+  } else {
+    // FB01 · F89: tekrar YOK (her ölüm farklı noktada / konum okunmadı) — "tekrarlayan"
+    // ve ölçülmemiş ÇIKARIM kurulmaz; yalnız sayılan olgu + genel öneri.
+    const observedTr = deathVariety >= 2
+      ? `${deathCount} ölümün ${deathVariety} farklı noktaya dağıldı — aynı noktada iki kez ölmedin.`
+      : deathCount > 0
+        ? `${deathCount} round'da öldün.`
+        : "Bu maçta hiç ölmedin.";
+    const observedEn = deathVariety >= 2
+      ? `Your ${deathCount} deaths were spread across ${deathVariety} different spots — you never died twice at the same spot.`
+      : deathCount > 0
+        ? `You died in ${deathCount} round${deathCount === 1 ? "" : "s"}.`
+        : "You didn't die in this match.";
+    mistake = isTr
+      ? `GÖZLEM: ${observedTr} ÖNERİ: ${agentKnown ? `${setup.agent} olarak off-angle tut` : "Off-angle tut"}, jiggle peek ile bilgi topla.`
+      : `OBSERVATION: ${observedEn} RECOMMENDATION: ${agentKnown ? `As ${setup.agent}, hold` : "Hold"} off-angle, jiggle peek for info.`;
   }
   const enemyAgents = setup.unknownEnemyComp
     ? isTr
@@ -719,8 +750,7 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
   // iddiası). OCR-only sözleşmesi (CLAUDE.md): backend oyun olgusu uydurmaz.
   // Artık her cümle yalnız gerçekten ölçülen alana dayanıyor:
   //   avgEnemy (round başına enemyCount) · enemyComp · skor · ölüm konumu.
-  const contactAvg = Number(avgEnemy);
-  const hasContactData = nonSkipped.length > 0 && contactAvg > 0;
+  // (contactAvg / hasContactData FB01 · F89 ile yukarı taşındı — summary de kullanıyor.)
   // BOŞ KADRO (W2 followup #94, 2026-09-24): enemyComp boş/yok ve unknownEnemyComp=false
   // iken `enemyAgents` "" → harness çıktısında "Rakip kadro: ." / "Enemy roster: ." ve
   // "Düşman () ort. …" basılıyordu. Kadro yoksa ne etiket ne boş parantez: temas cümlesi
@@ -770,27 +800,30 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
   // Boş kadro cümlesi ("") baştaki boşluğu öksüz bırakmasın.
   const tendencies = `${groupsSentence}${duelistSentence}${pressureSentence}`.trim();
   // FB01 · F03: sonuç bilinmiyorsa (null) kayıp-dalının "retake/trade" dersine değil
-  // sonuçtan bağımsız cümleye düşer.
+  // sonuçtan bağımsız cümleye düşer. F89: "bu açı okunuyor" yalnız ≥2 ölüm tekrarında.
   const adjustment = isTr
-    ? `${topDeathLoc !== "N/A" ? `${topDeathLoc} yerine off-angle'lardan oyna — bu açı okunuyor. ` : ""}${setup.agent} utility'sini retake/info için sakla, erken harcama. ${matchWon !== false ? "Pozisyon çeşitliliğini artır — aynı setup 2 round üst üste kullanma." : "Retake pozisyonlarına erken geç, site anchor'ını trade destekli kur."}`
-    : `${topDeathLoc !== "N/A" ? `Play off-angles instead of ${topDeathLoc} — this angle is being read. ` : ""}Save ${setup.agent} utility for retake/info, don't use early. ${matchWon !== false ? "Increase positional variety — don't repeat same setup 2 rounds in a row." : "Set up retake positions early, anchor site with trade support."}`;
+    ? `${repeatedSpot ? `${topDeathLoc} yerine off-angle'lardan oyna — bu açı okunuyor. ` : ""}${agentKnown ? `${setup.agent} utility'sini` : "Utility'ni"} retake/info için sakla, erken harcama. ${matchWon !== false ? "Pozisyon çeşitliliğini artır — aynı setup 2 round üst üste kullanma." : "Retake pozisyonlarına erken geç, site anchor'ını trade destekli kur."}`
+    : `${repeatedSpot ? `Play off-angles instead of ${topDeathLoc} — this angle is being read. ` : ""}Save ${agentKnown ? `${setup.agent} utility` : "your utility"} for retake/info, don't use early. ${matchWon !== false ? "Increase positional variety — don't repeat same setup 2 rounds in a row." : "Set up retake positions early, anchor site with trade support."}`;
 
   // Best round — find a won round where player survived
   const bestRoundData = nonSkipped.find((r) => r.result === "win" && r.survived);
+  // FB01 · F89: konum/harita/ajan okunmadıysa "Unknown bölgesinde Unknown olarak" kurulmaz.
+  const bestLoc = bestRoundData ? (bestRoundData.deathLocation || (mapKnown ? setup.map : "")) : "";
   const bestRound = bestRoundData
     ? isTr
       // B34 (2026-07-31): "Trade setup doğruydu, pozisyon tutma isabetliydi"
       // KALDIRILDI — trade verisi bu route'a hiç gelmiyor, pozisyon-tutma
       // ölçülmüyor. Ölçülen olgu: round KAZANILDI + oyuncu HAYATTA KALDI.
-      ? `R${bestRoundData.roundNumber}: ${bestRoundData.deathLocation || setup.map} bölgesinde ${setup.agent} olarak hayatta kaldın ve round'u aldın. Aynı açıyı tekrar dene — konumu bir tık kaydırarak kur.`
-      : `R${bestRoundData.roundNumber}: Survived at ${bestRoundData.deathLocation || setup.map} as ${setup.agent} and won the round. Run that angle again — set up a step off the same spot.`
+      ? `R${bestRoundData.roundNumber}: ${bestLoc ? `${bestLoc} bölgesinde ` : ""}${asAgentTr}hayatta kaldın ve round'u aldın. Aynı açıyı tekrar dene — konumu bir tık kaydırarak kur.`
+      : `R${bestRoundData.roundNumber}: Survived${bestLoc ? ` at ${bestLoc}` : ""}${agentKnown ? ` as ${setup.agent}` : ""} and won the round. Run that angle again — set up a step off the same spot.`
     : isTr
-      ? `Hayatta kalınan round yok. ${setup.agent} olarak trade pozisyonu kur — solo peek'leri azalt, teammate desteği bekle.`
-      : `No rounds survived. As ${setup.agent}, set up trade positions — reduce solo peeks, wait for teammate support.`;
+      // "Hayatta kalınan round yok" yalnız gerçekten hiç hayatta kalınmadıysa (F89:
+      // hayatta kalınıp kaybedilen round'lar varken bu cümle ölçülenle çelişiyordu).
+      ? `${survivedCount > 0 ? "Hem hayatta kalıp hem kazandığın bir round yok." : "Hayatta kalınan round yok."} ${agentKnown ? `${setup.agent} olarak trade pozisyonu kur` : "Trade pozisyonu kur"} — solo peek'leri azalt, teammate desteği bekle.`
+      : `${survivedCount > 0 ? "No round where you both survived and won." : "No rounds survived."} ${agentKnown ? `As ${setup.agent}, set up` : "Set up"} trade positions — reduce solo peeks, wait for teammate support.`;
 
   // Decision score — based on survival, win rate, death repetition
   const survivalPct = nonSkipped.length > 0 ? survivedCount / nonSkipped.length : 0;
-  const deathVariety = Object.keys(locationCounts).length;
   let score_num = 5;
   if (winPct >= 60) score_num += 2;
   else if (winPct >= 45) score_num += 1;
@@ -799,9 +832,20 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
   if (topDeathCount >= 4) score_num -= 2; // very repetitive deaths
   else if (topDeathCount >= 3) score_num -= 1;
   score_num = Math.max(1, Math.min(10, score_num));
+  // FB01 · F89: gerekçe YALNIZ puanı oluşturan ölçülen veriden kurulur (round kazanma %,
+  // hayatta kalma %, ölüm tekrarı/dağılımı). Eski "utility zamanlaması doğru", "trade
+  // setup'lar eksik", "utility'si etkisiz" hiç ölçülmüyordu (trade/utility verisi bu
+  // route'a gelmiyor — yukarıdaki B34 notu) ve "tekrar ölümler" tek ölümde de basılıyordu.
+  const survivalPctInt = Math.round(survivalPct * 100);
+  const repeatPartTr = repeatedSpot
+    ? `, ${trLocative(topDeathLoc)} ${topDeathCount} tekrar ölüm`
+    : deathVariety >= 3 ? ", ölümler farklı noktalara dağıldı" : "";
+  const repeatPartEn = repeatedSpot
+    ? `, ${topDeathCount} repeat deaths at ${topDeathLoc}`
+    : deathVariety >= 3 ? ", deaths spread across different spots" : "";
   const decisionScore = isTr
-    ? `${score_num}/10 — ${score_num >= 7 ? `Pozisyon çeşitliliği iyi, ${setup.agent} utility zamanlaması doğru` : score_num >= 5 ? `${topDeathLoc !== "N/A" ? `${trLocative(topDeathLoc)} tekrar ölümler` : "Tekrarlayan pozisyon hataları"}, trade setup'lar eksik` : `Aynı açılarda ölüm tekrarı, ${setup.agent} utility'si etkisiz kullanılıyor`}`
-    : `${score_num}/10 — ${score_num >= 7 ? `Good positional variety, ${setup.agent} utility timing correct` : score_num >= 5 ? `${topDeathLoc !== "N/A" ? `Repeat deaths at ${topDeathLoc}` : "Recurring position errors"}, trade setups lacking` : `Repeating deaths at same angles, ${setup.agent} utility used ineffectively`}`;
+    ? `${score_num}/10 — Round kazanma %${winPct}, hayatta kalma %${survivalPctInt}${repeatPartTr}`
+    : `${score_num}/10 — ${winPct}% rounds won, ${survivalPctInt}% survival${repeatPartEn}`;
 
   // Cycle 2 fix #8 (EK SAVUNMA): run the shared coach-voice cleaner on the 6
   // text fields so any future deterministic wording is also guarded. Numeric
