@@ -55,6 +55,7 @@ import { buildHistoryBlock, type RoundHistoryEntry } from "@/lib/history-block";
 import type { VisionPostprocessOpts } from "@/lib/vision-postprocess";
 // Model id + reasoning_effort TEK KAYNAK (B07 · OLCUM-ARACI-17).
 import { AI_MODEL, AI_REASONING_EFFORT } from "@/lib/ai-model";
+import { logSafe } from "@/lib/log-safe";
 
 /* ══════════════════════════════════════════════════════════
    TİPLER
@@ -253,8 +254,10 @@ export function buildVisionSystemMessage(opts: {
     level: "log",
     msg:
       `[KB] injected static=${staticLen}b scenario=${scenarioLen}b profile=${profileLen}b profile2=${profile2Len}b agent=${agentLen}b map=${mapLen}b ctx=${ctxLen}b total=${kbTotal}b ` +
-      `files=[${kb.files.join(", ")}] selectors map=${reqMap ?? "-"} agent=${reqAgent ?? "-"} ` +
-      `rank=${reqRank ?? "-"} enemies=${reqEnemyComp?.length ?? 0}`,
+      // Seçiciler istemci dizeleri (≤4096, satır sonu dahil) → logSafe (log forging,
+      // W2 inceleme RW1-F2). Sıradan değer ("Ascent", "Jett") bayt-aynı basılır.
+      `files=[${kb.files.join(", ")}] selectors map=${reqMap === undefined ? "-" : logSafe(reqMap)} agent=${reqAgent === undefined ? "-" : logSafe(reqAgent)} ` +
+      `rank=${reqRank === undefined ? "-" : logSafe(reqRank)} enemies=${reqEnemyComp?.length ?? 0}`,
   });
   if (!reqRank) {
     logs.push({ level: "warn", msg: `[KB] rank MISSING → universal.md served (rank-gating removed; insight depth is death-type driven, not rank).` });

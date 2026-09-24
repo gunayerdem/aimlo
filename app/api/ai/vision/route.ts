@@ -5,6 +5,7 @@ import { saveAiUsage } from "@/lib/ai-usage";
 import { saveMatchEvent } from "@/lib/match-events";
 import { loadPlayerMemory, buildMemoryContext } from "@/lib/player-memory";
 import { isUuidV4 } from "@/lib/uuid";
+import { logSafe } from "@/lib/log-safe";
 // Model-sonrası son-işlem zinciri (realityCheck → cleanCoachText → enforceAgentKit →
 // kapak → fixCallout) TEK KAYNAK: lib/vision-postprocess.ts (OLCUM-ARACI-08).
 import { finalizeVisionFeedback, visionOutputFailure } from "@/lib/vision-postprocess";
@@ -536,7 +537,9 @@ export async function POST(request: NextRequest) {
         ? (rawFormat as ImageFormat)
         : "image/png";
     if (rawFormat && rawFormat !== resolvedMediaType) {
-      console.log(`[Aimlo AI] imageFormat rejected: "${rawFormat}" → default "image/png"`);
+      // Log forging (W2 inceleme RW1-F2): isValidVisionRequest PNG için yalnız
+      // `includes("png")` ister → "png\n[Aimlo AI] …" doğrulamadan geçer; ham basılmaz.
+      console.log(`[Aimlo AI] imageFormat rejected: "${logSafe(rawFormat)}" → default "image/png"`);
     } else {
       console.log(`[Aimlo AI] imageFormat: ${resolvedMediaType}`);
     }
@@ -574,7 +577,8 @@ export async function POST(request: NextRequest) {
     // Kural TEK KAYNAK: lib/vision-prompt-builder.ts resolveVisionMaxTokens (B06).
     const rawMaxTokens = (body as VisionRequest).maxTokens;
     const resolvedMaxTokens = resolveVisionMaxTokens(rawMaxTokens);
-    console.log(`[Aimlo AI] maxTokens: requested=${rawMaxTokens ?? "none"}, resolved=${resolvedMaxTokens}`);
+    // maxTokens tip doğrulamasız gelir (dize/satır sonu) → logSafe (RW1-F2).
+    console.log(`[Aimlo AI] maxTokens: requested=${rawMaxTokens === undefined || rawMaxTokens === null ? "none" : logSafe(rawMaxTokens)}, resolved=${resolvedMaxTokens}`);
 
     const reqBody = body as VisionRequest;
     const reqMap = typeof reqBody.map === "string" ? reqBody.map : undefined;

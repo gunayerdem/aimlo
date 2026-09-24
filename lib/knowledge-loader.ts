@@ -6,6 +6,9 @@
 
 import fs from "fs";
 import path from "path";
+// Seçici uyarıları istemci dizesini basıyor (agent/map/enemyComp) → log forging
+// kapısı (W2 inceleme RW1-F2). Yaprak modül; sıradan değer bayt-aynı basılır.
+import { logSafe } from "./log-safe";
 
 const KNOWLEDGE_DIR = path.join(process.cwd(), "knowledge");
 
@@ -345,7 +348,7 @@ export function loadKnowledge(task: TaskType, options: LoadOptions = {}): string
         sections.push(`[KARŞI-AJAN — ${enemyAgent}: bu düşman ajana karşı böyle oyna]\n${section}`);
       } else {
         // Sessiz kapsam kaybı olmasın: bölümü olmayan ajan dosyası prod log'unda görünsün.
-        console.warn(`[KB] '${enemyAgent}' dosyasında "Bu Ajana Karşı" bölümü yok — karşı-ajan kesiti atlandı`);
+        console.warn(`[KB] '${logSafe(enemyAgent)}' dosyasında "Bu Ajana Karşı" bölümü yok — karşı-ajan kesiti atlandı`);
       }
     }
   }
@@ -694,7 +697,7 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
   // Council 2026-06-08: surface a realistic agent-selector miss (OCR slug/role
   // mismatch) so wrong/empty agent KB is diagnosable instead of silently generic.
   if (agent && !agentBlock) {
-    console.warn(`[KB] agent selector '${agent}' matched no agents file (role/slug miss)`);
+    console.warn(`[KB] agent selector '${logSafe(agent)}' matched no agents file (role/slug miss)`);
   }
 
   // ── Block 2: Map KB (per-match — high cache miss rate across matches) ──
@@ -710,7 +713,7 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
     }
   }
   if (map && !mapBlock) {
-    console.warn(`[KB] map selector '${map}' matched no maps file (slug '${map.toLowerCase().replace(/[^a-z]/g, "")}')`);
+    console.warn(`[KB] map selector '${logSafe(map)}' matched no maps file (slug '${logSafe(map.toLowerCase().replace(/[^a-z]/g, ""))}')`);
   }
 
   // ── Block 2b: Koçluk profili (ranks/universal.md — istekten BAĞIMSIZ, bayt-aynı) ──
@@ -767,7 +770,7 @@ export function loadVisionKnowledge(options: LoadOptions = {}): VisionKnowledgeR
       // matchup kapsam delikleri prod log'unda görünür olsun — hangi ajan × düşman-komp
       // kombinasyonu spesifik VE rol-fallback dosyasız kaldı?
       console.warn(
-        `[KB] matchup selector matched no file (player '${agent}' vs enemies [${enemyAgents.join(", ")}])`,
+        `[KB] matchup selector matched no file (player '${logSafe(agent)}' vs enemies [${enemyAgents.map((a) => logSafe(a)).join(", ")}])`,
       );
     }
   }
