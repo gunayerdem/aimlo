@@ -169,6 +169,21 @@ export function resolveVisionLang(body: { lang?: unknown }): VisionLang {
   return body.lang === "en" ? "en" : "tr";
 }
 
+/** İsteğin enemyComp'u — YALNIZ dize elemanlar (W2 inceleme REV-W2, B06-F2 kök sınıfı,
+ *  2026-09-24). KANIT: isValidVisionRequest enemyComp elemanlarına bakmıyor; eskiden
+ *  burada yalnız `Array.isArray` vardı → ["Jett", null] / ["x", 1] gövdesi
+ *  knowledge-loader loadMatchupFiles slugOf'ta `a.toLowerCase` ile patlıyor, route 500
+ *  ai_internal_error dönüyordu (died true/false ikisinde de). Skaler alanlardaki sözleşme
+ *  (tip-karışık değer = sinyal yok, 200) dizi elemanına uygulanır: dize olmayan eleman
+ *  kadro üyesi değildir, düşer. Tümü dize olan dizi (masaüstünün tek biçimi) AYNEN geçer
+ *  → prompt/son-işlem bayt-aynı. Dört okuma yeri (sistem KB seçicisi, [KB] log satırı,
+ *  ctx.enemyRoster + komp arketipi, son-işlem ajan çapaları) bu tek kaynaktan okur. */
+export function reqEnemyCompOf(body: { enemyComp?: unknown }): string[] | undefined {
+  return Array.isArray(body.enemyComp)
+    ? (body.enemyComp as unknown[]).filter((a): a is string => typeof a === "string")
+    : undefined;
+}
+
 /** roundHistory uzunluğundan veri seviyesi (calibrating→high). */
 export function deriveVisionConfidence(roundHistory: unknown): VisionConfidence {
   const _rh = Array.isArray(roundHistory) ? roundHistory : null;
@@ -212,7 +227,7 @@ export function buildVisionSystemMessage(opts: {
   const reqMap = typeof body.map === "string" ? body.map : undefined;
   const reqAgent = typeof body.agent === "string" ? body.agent : undefined;
   const reqRank = typeof body.rank === "string" ? body.rank : undefined;
-  const reqEnemyComp = Array.isArray(body.enemyComp) ? body.enemyComp : undefined;
+  const reqEnemyComp = reqEnemyCompOf(body);
   const reqPatternContext = typeof body.patternContext === "string" ? body.patternContext : undefined;
   const reqSpikePlanted = typeof body.spikePlanted === "boolean" ? body.spikePlanted : undefined;
   const reqEconomyType = typeof body.economyType === "string" ? body.economyType : undefined;
@@ -476,7 +491,7 @@ export function buildVisionContext(body: VisionPromptBody, lang: VisionLang, onL
   // (factGround.playerAgentKnown). "Unknown" literal'i desktop'un mid-match
   // okunamama değeri; boş/whitespace de aynı sınıf.
   const agentUnknown = !reqAgent || reqAgent.trim().length === 0 || reqAgent.trim().toLowerCase() === "unknown";
-  const reqEnemyComp = Array.isArray(body.enemyComp) ? body.enemyComp : undefined;
+  const reqEnemyComp = reqEnemyCompOf(body);
 
   // Build round context as compact JSON. Replaces previous verbose Turkish text
   // blocks with `═══` borders. Two wins:
@@ -746,7 +761,7 @@ export function buildVisionUserMessage(opts: {
   const { log } = logCollector(opts.onLog, logs);
   const reqMap = typeof body.map === "string" ? body.map : undefined;
   const reqAgent = typeof body.agent === "string" ? body.agent : undefined;
-  const reqEnemyComp = Array.isArray(body.enemyComp) ? body.enemyComp : undefined;
+  const reqEnemyComp = reqEnemyCompOf(body);
   const reqSpikePlanted = typeof body.spikePlanted === "boolean" ? body.spikePlanted : undefined;
   const reqEconomyType = typeof body.economyType === "string" ? body.economyType : undefined;
   const reqSide = typeof body.side === "string" ? body.side : undefined;
@@ -1362,7 +1377,7 @@ export function visionPostprocessOpts(
     map: typeof body.map === "string" ? body.map : undefined,
     agent: typeof body.agent === "string" ? body.agent : undefined,
     // Ajan-adı kilidinin çapası (TR-KALAN-09): katil + kadro + oyuncu ajanı.
-    enemyComp: Array.isArray(body.enemyComp) ? body.enemyComp : undefined,
+    enemyComp: reqEnemyCompOf(body),
     suppliedLoc: typeof body.deathLocation === "string" ? String(body.deathLocation) : "",
   };
 }

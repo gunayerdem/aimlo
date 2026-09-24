@@ -15,7 +15,8 @@
  *   [4] W2 inceleme B06-F2 — kurucu log satırları onLog alıcısıyla üretildiği an
  *       iletilir: kurucu istisna atsa da o ana kadarki teşhis satırı kaybolmaz.
  *   [5] W2 inceleme B06-F2 — tip-karışık gövde (side/killerInfo/… sayı) 500 değil;
- *       genel catch yanıtına iç hata metni konmaz.
+ *       genel catch yanıtına iç hata metni konmaz. REV-W2: dizi ELEMANI tipi de
+ *       (enemyComp ["Jett", null] → 200, dize olmayan eleman düşer).
  * RUN: npx tsx scripts/test-log-forging.ts
  */
 import fs from "node:fs";
@@ -119,6 +120,23 @@ async function main() {
   });
   t("side/killerInfo/deathLocation/deathTiming/economyType/loadout sayı → 200 (eskiden 500)", mixed.status === 200,
     `status=${mixed.status} ${JSON.stringify(mixed.json).slice(0, 200)}`);
+  // W2 inceleme REV-W2 (B06-F2 kök sınıfı, 2026-09-24): DİZİ ELEMANI tipi. Eskiden
+  // enemyComp ["Jett", null] / ["x", 1] → knowledge-loader slugOf `a.toLowerCase` → 500
+  // (died true/false ikisinde de). Dize olmayan eleman düşer; kalan kadro aynen kullanılır.
+  for (const died of [true, false]) {
+    for (const ec of [["Jett", null], ["x", 1], [1, null, {}], [null]] as unknown[][]) {
+      const r = await captureVisionCall({ died, round: 4, map: "Ascent", agent: "Jett", enemyComp: ec });
+      t(`enemyComp ${JSON.stringify(ec)} died=${died} → 200 (eskiden 500), iç hata logu yok`,
+        r.status === 200 && !r.logs.some((l) => l.includes("Vision route error")),
+        `status=${r.status} ${r.logs.filter((l) => l.includes("error")).join(" | ").slice(0, 200)}`);
+    }
+  }
+  const mixedComp = await captureVisionCall({ died: true, round: 4, map: "Ascent", agent: "Jett", enemyComp: ["Sova", null, 7, "Killjoy"] });
+  const compKbLine = mixedComp.logs.find((l) => l.includes("selectors map=Ascent")) ?? "";
+  t("dize olmayan eleman düşer, dize elemanlar aynen kullanılır (enemyRoster [Sova, Killjoy]; KB seçici enemies=2 + matchup yüklendi)",
+    mixedComp.status === 200 && /"enemyRoster": \[\s*"Sova",\s*"Killjoy"\s*\]/.test(mixedComp.userText)
+      && compKbLine.includes("enemies=2") && compKbLine.includes("matchups/jett_vs_"),
+    `status=${mixedComp.status} ${(mixedComp.userText.match(/"enemyRoster": \[[^\]]*\]/) ?? ["(yok)"])[0]} kb=${compKbLine.slice(-120)}`);
   const { loadVisionRoute, visionRequest } = await import("./vision-route-harness");
   const { harness } = await import("./report-route-harness");
   const r = loadVisionRoute();
