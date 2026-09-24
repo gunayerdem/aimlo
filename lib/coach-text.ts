@@ -1551,11 +1551,38 @@ export function trLocative(word: string): string {
  * - TR only: TR_JARGON tarzanca→koç-Türkçesi + apostrophe fix
  * Never invents text — only rewrites banned patterns with synonyms.
  */
+/**
+ * HP SÜZGECİ ARTIĞI ONARIMI (W1 followup #50 / W2 inceleme RW1-F1, 2026-09-24).
+ * KANIT (probe, HEAD 8afefe8): HP'den İBARET bir cümle silinince terminatörü geride
+ * kalıyordu: "41 HP ile. Açıyı tut." → ". Açıyı tut."; "Açıyı tut. 41 HP ile." →
+ * "Açıyı tut.."; "Low HP. Hold the angle." → ". Hold the angle."; "41 HP ile, açıyı
+ * tut." → ", açıyı tut.". NR kurtarma yolu (lib/vision-postprocess.ts) bu artığı
+ * overlay plan satırına taşıyabiliyordu (". Savunma B Site …").
+ * KÖK: stripNumericHp/stripHpClaims yalnız İFADEYİ siler (cümle korunur — doğru);
+ * ifade cümlenin TAMAMIYSA geride içeriksiz "cümle" (yalnız terminatör/ayraç) kalır.
+ * KAPSAM DAR: yalnız HP süzgeci metni DEĞİŞTİRDİYSE çağrılır (çağıran kapısı) ve
+ * yalnız İÇERİKSİZ cümle artığına dokunur:
+ *   · iki terminatör arasında yalnız boşluk ("bekliyor. . Açıyı") → tek terminatör;
+ *   · metin başında öksüz terminatör/ayraç (". Açıyı", ", açıyı") → düşer;
+ *   · cümle başında öksüz ayraç ("Bekle. , açıyı") → düşer, harf büyür (TR i→İ).
+ * Bitişik "?!"/"..." gibi meşru noktalamaya DOKUNMAZ (arada boşluk şartı).
+ * Ölçüm: scripts/eval-out 3916 tekil ham alanda HP süzgeci 59 alanı değiştiriyor;
+ * bunların HİÇBİRİNDE artık üretmiyor → korpus çıktısı bayt-aynı (0 fark).
+ * Sahte metin YOK: yalnız artık noktalama silinir.
+ */
+function tidyHpStripResidue(t: string): string {
+  return t
+    .replace(/([.!?])[ \t]+[.!?]+(?=\s|$)/g, "$1")
+    .replace(/^[\s.!?,;:]+/, "")
+    .replace(/([.!?][ \t]+)[,;:][ \t]*(\S)/g, (_m, p: string, c: string) => p + c.toLocaleUpperCase("tr"));
+}
+
 export function cleanCoachText(text: string, lang: "tr" | "en"): string {
   if (!text) return text;
   // Sıra: sayısal HP → kova ifadesi (stripNumericHp) → kova dahil TÜM nitel
   // can iddiaları silinir (stripHpClaims, canlı-test #8) → ability düzlemesi.
-  let t = plainifyAbilities(stripHpClaims(stripNumericHp(text, lang), lang), lang);
+  const hpStripped = stripHpClaims(stripNumericHp(text, lang), lang);
+  let t = plainifyAbilities(hpStripped === text ? text : tidyHpStripResidue(hpStripped), lang);
   for (const a of CLEAN_AGENT_NAMES) {               // phoenix → Phoenix (both langs)
     t = t.replace(new RegExp("\\b" + a + "\\b", "gi"), a);
   }

@@ -80,5 +80,20 @@ eq("'eriyen' fiil-sıfatı can'sız bağlamda KORUNUR",
   cleanCoachText("Alanda eriyen smoke'un ardından girdin.", "tr").includes("eriyen"),
   true);
 
+// ── HP-yalnız cümle artığı (W1 followup #50 / W2 inceleme RW1-F1, 2026-09-24) ──
+// Probe (HEAD 8afefe8): ifade cümlenin TAMAMIYSA terminatörü öksüz kalıyordu.
+eq("baştaki HP cümlesi → öksüz '. ' kalmaz", cleanCoachText("41 HP ile. Açıyı tut.", "tr"), "Açıyı tut.");
+eq("sondaki HP cümlesi → çift nokta kalmaz", cleanCoachText("Açıyı tut. 41 HP ile.", "tr"), "Açıyı tut.");
+eq("ortadaki HP cümlesi → 'bekliyor.. ' kalmaz",
+  cleanCoachText("Savunma B'de bekliyor. 41 HP ile. Açıyı tut.", "tr"), "Savunma B'de bekliyor. Açıyı tut.");
+eq("EN 'Low HP. Hold the angle.' → öksüz '. ' kalmaz", cleanCoachText("Low HP. Hold the angle.", "en"), "Hold the angle.");
+eq("virgüllü HP öbeği → öksüz ', ' kalmaz, cümle başı büyür", cleanCoachText("41 HP ile, açıyı tut.", "tr"), "Açıyı tut.");
+eq("cümle ortasında virgüllü HP → 'Bekle. İçeri girme.' (TR İ)", cleanCoachText("Bekle. 41 HP ile, içeri girme.", "tr"), "Bekle. İçeri girme.");
+eq("yalnız HP cümlesi → '' (içeriksiz; eskiden '.')", cleanCoachText("41 HP ile.", "tr"), "");
+eq("meşru '?!' ve '...' HP süzgeci ateşlese de korunur",
+  cleanCoachText("Neden?! 41 HP ile. Açıyı tut...", "tr"), "Neden?! Açıyı tut...");
+eq("HP süzgeci ATEŞLEMEZSE onarım koşmaz (metin bayt-aynı)",
+  cleanCoachText("Bekle... Sonra gir?! Açıyı tut.", "tr"), "Bekle... Sonra gir?! Açıyı tut.");
+
 console.log(fail ? `\n${fail} FAIL` : "\nTAM YESIL");
 process.exit(fail ? 1 : 0);

@@ -834,6 +834,12 @@ export async function POST(request: NextRequest) {
       if (post.realityModified) {
         console.log(`[Aimlo AI] Reality check: deathAnalysis rewrite=${post.rewriteLevels.death}, suggestion rewrite=${post.rewriteLevels.suggestion}`);
       }
+      // KAPAK ÖLÇÜMÜ (W2 inceleme RW1-F3): DA kapağı (400) korpus tavanına eşit, pay yok;
+      // ateşlediğinde son cümle (zorunlu düzeltme) düşebilir. Davranış aynı — yalnız
+      // görünürlük: Vercel'de "vision cap fired" araması sınıfın geri dönüşünü sayar.
+      for (const h of post.capHits) {
+        console.warn(`[Aimlo AI] vision cap fired field=${h.field} len=${h.before}→${h.after}`);
+      }
       // CANLI-TEST-07: süzgeç deathAnalysis'i tamamen boşalttıysa (ör. model yalnız
       // "(41 HP)" yazdı) eskiden HAM metin dönüyordu → HP/meta yasağı deliniyordu.
       // Artık mevcut yapısal hata yolu: sahte ya da ham koç metni YOK. Maç kavramı ve
@@ -924,7 +930,7 @@ export async function POST(request: NextRequest) {
     const msg = err instanceof Error ? err.message : "unknown";
     console.error("[Aimlo AI] Vision route error:", msg);
     // İç hata metni YANITA konmaz (W2 inceleme B06-F2): tip-karışık gövde eskiden
-    // "(b.side || \"\").toLowerCase is not a function" metnini istemciye sızdırıyordu.
+    // `(b.side || "").toLowerCase is not a function` metnini istemciye sızdırıyordu.
     // Ayrıntı yukarıdaki sunucu logunda; kod/statü aynı (desktop statüye bakar),
     // ask route'unun "Internal server error" emsali.
     return errorResponse("ai_internal_error", "Internal server error", 500);

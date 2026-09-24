@@ -53,9 +53,23 @@ export type VisionPostprocessOpts = {
   suppliedLoc?: string | null;
 };
 
+/** Karakter kapağının ATEŞLEDİĞİ alan (W2 inceleme RW1-F3): kapak cümle-sınırlı
+ *  kırptığında son cümle (DA'da şemanın "ZORUNLU somut düzeltme"si) düşebilir.
+ *  VISION_DEATH_CAP (400) ölçülen korpus tavanına EŞİT — pay yok; route her ateşlemede
+ *  WARN basar ki sınıfın geri dönüşü prod logunda ölçülebilsin (davranış değişmez). */
+export type VisionCapHit = {
+  field: "deathAnalysis" | "nextRoundSuggestion" | "enemyAnalysis";
+  /** Kapak öncesi (süzülmüş + kit-süzgeçli) uzunluk. */
+  before: number;
+  /** Kapak sonrası uzunluk. */
+  after: number;
+};
+
 export type VisionPostprocessResult = VisionFeedbackFields & {
   realityModified: boolean;
   rewriteLevels: { death: number; suggestion: number };
+  /** Bu çağrıda ateşleyen kapaklar (boş = hiçbiri). */
+  capHits: VisionCapHit[];
 };
 
 /** Karakter kapakları. NR 350 (değişmedi). EA 180 → 240 (TR-KALAN-08): süzgeçten
@@ -67,7 +81,11 @@ export type VisionPostprocessResult = VisionFeedbackFields & {
  *  korpusta (scripts/eval-out, 944 örnek) kapak-öncesi DA: p50 196 / p99 299 / MAX
  *  400; 350'yi aşan 2 örneğin (cyclereal-r3 M1-R18 359, M1-R24 400) ikisinde de
  *  düzeltme cümlesi tümüyle siliniyordu. 400 ölçülen tavanı karşılar → korpusta kapak
- *  hiç ateşlemez; clampWords'e (kesik cümle, TR-KALAN-08 sınıfı) geri dönülmez. */
+ *  hiç ateşlemez; clampWords'e (kesik cümle, TR-KALAN-08 sınıfı) geri dönülmez.
+ *  PAY YOK (W2 inceleme RW1-F3): 400 = korpus MAX; zincir metni uzatabiliyor (katil-guard
+ *  "Jett olarak" → "bir düşman olarak" +6, slash → " ya da "). Kapağı yükseltmek overlay
+ *  görsel kararı (softi göz kontrolü bekliyor, W2 followup) → değer AYNI kaldı; bunun
+ *  yerine her ateşleme `capHits` ile döner ve route WARN basar ("vision cap fired"). */
 export const VISION_TEXT_CAP = 350;
 export const VISION_DEATH_CAP = 400;
 export const VISION_ENEMY_ITEM_CAP = 240;
@@ -146,8 +164,16 @@ export function finalizeVisionFeedback(
   const fixCallout = (t: string) => (suppliedLoc ? enforceSuppliedCallout(t, suppliedLoc) : t);
   // Kapak: clampToSentence (TR-KALAN-08) — kırpılmayan metin bayt-aynı; kırpma
   // olursa son tam cümle / yan-cümle sınırına sarar (lib/coach-text.ts sözleşmesi).
-  const finish = (t: string, cap: number) =>
-    fixCallout(clampToSentence(enforceAgentKit(t, agent), cap));
+  const capHits: VisionCapHit[] = [];
+  const finish = (t: string, cap: number, field: VisionCapHit["field"]) => {
+    // Zincir biçimi tek ifadede kalır (test-pipeline-chain G1 grep-guard'ı bu biçimi
+    // tek tanım olarak arar); ölçüm için kit-süzgeçli uzunluk ayrıca hesaplanır
+    // (enforceAgentKit saf/deterministik — aynı girdiye aynı çıktı).
+    const clamped = clampToSentence(enforceAgentKit(t, agent), cap);
+    const before = enforceAgentKit(t, agent).length;
+    if (before > cap) capHits.push({ field, before, after: clamped.length });
+    return fixCallout(clamped);
+  };
 
   // deathAnalysis — temizle ÖNCE, sonra kapak (plainify/apostrof uzunluğu değiştirir).
   // BOŞ-GUARD (CANLI-TEST-07): cleanCoachText metni tamamen boşaltırsa (ör. yalnız
@@ -155,16 +181,20 @@ export function finalizeVisionFeedback(
   // sildiği HP/meta içerik kullanıcıya GERİ geliyordu; noktalama-yalnız çıktı da
   // "dolu" sayılıyordu. Artık anlamlı değilse "" → route yapısal hata döner.
   const cleanedAnalysis = cleanCoachText(checkedAnalysis.text, lang);
-  const daOut = hasCoachContent(cleanedAnalysis) ? finish(cleanedAnalysis, VISION_DEATH_CAP) : "";
+  const daOut = hasCoachContent(cleanedAnalysis) ? finish(cleanedAnalysis, VISION_DEATH_CAP, "deathAnalysis") : "";
   const deathAnalysis = hasCoachContent(daOut) ? daOut : "";
 
   // enemyAnalysis de reality-check'ten GEÇER (grounding audit 2026-06-26).
   // TR-KALAN-26 (karar varsayılanı b): realityCheck bir maddeyi TÜMÜYLE kanıtsız
   // bulup "" döndürürse eskiden HAM metin geri konuyordu → süzgecin yakaladığı
   // kanıtsız iddia ("3 rundur tekrar eden bu hata") aynen kullanıcıya gidiyordu.
-  // Artık o madde DÜŞER — ama dizi asla boşalmaz: kanıtlı madde kalmazsa SON
-  // madde (ad-düzeltilmiş ham hâliyle, yine tam süzgeçten geçerek) korunur.
-  // Masaüstü 1 maddelik diziyi canlı-test #10'dan beri alıyor; 0 madde test edilmedi.
+  // Artık o madde DÜŞER — ama kanıtlı madde kalmazsa SON madde (ad-düzeltilmiş ham
+  // hâliyle, yine tam süzgeçten geçerek) korunur (kararın "son madde asla düşmez"i).
+  // DİZİ BOŞALABİLİR (W2 inceleme RW1-F4 — eski "dizi asla boşalmaz" yorumu yanlıştı):
+  // korunan son madde süzgeçten İÇERİKSİZ çıkarsa (ör. yalnız "41 HP ile.") o da düşer
+  // ve dizi [] olur — noktalama-yalnız madde gösterilmez. Masaüstü [] şeklini kabul
+  // ediyor (ai_client.rs RoundFeedback enemy_analysis Vec<String>); overlay boş bloğu
+  // için masaüstü followup'ı var (W2 inceleme RW1-F4).
   // .filter (canlı-test #10, S1 dizi-kuralı): cleanCoachText SAF-META bir elemanı
   // '' yapabilir — boş eleman diziden düşer, kullanıcıya boş satır gitmez.
   // BOŞ-GUARD EA'ya da (B03 inceleme, CANLI-TEST-07 sınıfı): eski süzgeç
@@ -174,13 +204,22 @@ export function finalizeVisionFeedback(
   //   • kanıtlı sayılmak için realityCheck çıktısının SÜZÜLMÜŞ hâli içerik taşımalı;
   //     taşımıyorsa madde kanıtsız muamelesi görür (ad-düzeltilmiş ham metin, aynı
   //     süzgeçten) — TR-KALAN-26 (b) kuralı aynen işler (kurtarma yolu);
-  //   • süzülmüş ham hâli de içeriksizse madde düşer (ham metne ASLA dönülmez).
+  //   • süzülmüş ham hâli de içeriksizse madde düşer (içeriksiz metin ASLA gösterilmez).
+  // BİLİNEN SINIR (W2 inceleme RW1-F1, karar TR-KALAN-26 (b) uygulandı): kurtarma
+  // yolunun ateşlemesi için realityCheck çıktısının süzgeçte içeriksiz kalması, ham
+  // metnin ise içerik taşıması gerekir → ham metindeki içerik TANIM GEREĞİ realityCheck'in
+  // SİLDİĞİ kısımdır. Yani bu yol, dizideki SON madde için RC'nin reddettiği iddiayı
+  // (süzgeçten geçmiş hâliyle) geri getirir — kararın lafzı ("son madde asla düşmez")
+  // bunu kapsıyor. Korpus sıklığı 0/7644 (inceleme A/B'si). Yasaklı İÇERİK
+  // (HP/meta/kod-ad) süzgeçten geçtiği için geri gelmez; RC'nin reddettiği kanıtsız
+  // iddia ise gelebilir. Karar değişirse (inceleme seçeneği a) RC çıktısının "boş değil
+  // ama içeriksiz" hâli "RC tüm içeriği reddetti" sayılmalı (NR "", EA maddesi düşer).
   const eaItems = (fb.enemyAnalysis || []).slice(0, 2).map((s) => {
     const src = fixNames(String(s));
     const c = realityCheck(src, memory, factGround, "suggestion", lang, map);
     const cleanedChecked = c.text && c.text.trim() ? cleanCoachText(c.text, lang) : "";
     const proven = hasCoachContent(cleanedChecked);
-    return { proven, text: finish(proven ? cleanedChecked : cleanCoachText(src, lang), VISION_ENEMY_ITEM_CAP) };
+    return { proven, text: finish(proven ? cleanedChecked : cleanCoachText(src, lang), VISION_ENEMY_ITEM_CAP, "enemyAnalysis") };
   }).filter((x) => hasCoachContent(x.text));
   const provenItems = eaItems.filter((x) => x.proven);
   const enemyAnalysis = (provenItems.length > 0 ? provenItems : eaItems.slice(-1)).map((x) => x.text);
@@ -195,8 +234,12 @@ export function finalizeVisionFeedback(
   // (alan boş kalmasın → ham metin korunur) "içeriksiz" çıktıya da uygulanır:
   // realityCheck'li metin süzgeçte içeriksiz kalırsa ad-düzeltilmiş HAM metin AYNI
   // süzgeçten geçirilir; o da içeriksizse (HP/meta'dan ibaret) alan "" döner —
-  // yasaklı ham metne ya da sentetik koç metnine ASLA düşülmez. "" sözleşmede zaten
-  // var (şema-boş NR route.ts toFeedbackOutcome'da "" olarak geçer).
+  // süzülmemiş (yasaklı içerikli) ham metne ya da sentetik koç metnine ASLA düşülmez.
+  // "" sözleşmede zaten var (şema-boş NR route.ts toFeedbackOutcome'da "" olarak geçer).
+  // BİLİNEN SINIR (W2 inceleme RW1-F1): EA'daki notun aynısı — bu kurtarma yolu RC'nin
+  // SİLDİĞİ iddiayı süzülmüş hâliyle geri getirebilir; karar TR-KALAN-26 (b) "NR'de ham
+  // metin korunur" lafzıyla uygulandı. HP-yalnız cümlenin bıraktığı ". " / ".." artığı
+  // cleanCoachText'te onarıldı (tidyHpStripResidue) → kurtarılan metin artıkla başlamaz.
   const safeSuggestion = checkedSuggestion.text && checkedSuggestion.text.trim()
     ? checkedSuggestion.text
     : nrIn;
@@ -204,7 +247,7 @@ export function finalizeVisionFeedback(
   if (!hasCoachContent(cleanedSuggestion) && safeSuggestion !== nrIn) {
     cleanedSuggestion = cleanCoachText(nrIn, lang);
   }
-  const nrOut = hasCoachContent(cleanedSuggestion) ? finish(cleanedSuggestion, VISION_TEXT_CAP) : "";
+  const nrOut = hasCoachContent(cleanedSuggestion) ? finish(cleanedSuggestion, VISION_TEXT_CAP, "nextRoundSuggestion") : "";
   const nextRoundSuggestion = hasCoachContent(nrOut) ? nrOut : "";
 
   return {
@@ -213,6 +256,7 @@ export function finalizeVisionFeedback(
     nextRoundSuggestion,
     realityModified: checkedAnalysis.modified || checkedSuggestion.modified,
     rewriteLevels: { death: checkedAnalysis.rewriteLevel, suggestion: checkedSuggestion.rewriteLevel },
+    capHits,
   };
 }
 

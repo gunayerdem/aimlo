@@ -476,13 +476,48 @@ console.log("\n[CANLI-TEST-07/EA+NR] içeriksiz (noktalama-yalnız) EA maddesi d
     { deathAnalysis: "Geniş açı tuttun.", enemyAnalysis: [gecerli], nextRoundSuggestion: nrRaw },
     { roundHistory: rh, factGround: buildFactGround({ died: true }, {}), lang: "tr", map: "Lotus", agent: "Omen" },
   ).nextRoundSuggestion;
-  // Beklenen = ham metnin AYNI süzgeçten geçmiş hâli (kapak altında). Biçimi burada
-  // kilitlenmez: cleanCoachText'in HP-yalnız cümleyi silerken bıraktığı baştaki "."
-  // artığı ÖNCEDEN VAR olan ayrı bir kusur (HEAD'de DA "41 HP ile. Açıyı tut." →
-  // ". Açıyı tut."; korpusta 0/7644) — followup, bu yolun ürünü değil.
-  t("kurtarma: realityCheck yalnız '41 HP ile.' bırakınca NR = süzülmüş ham metin (boş/'.' değil)",
-    rc.text === "41 HP ile." && rec === cleanCoachText(nrRaw, "tr") && /bekliyor\.$/.test(rec) && !/HP/.test(rec),
+  // W2 inceleme RW1-F1: eski iddia `rec === cleanCoachText(nrRaw)` başta ". " artığı
+  // olan çıktıyı BEKLENEN sayıyordu (". Savunma B Site …"). Artık biçim kilitli: artık
+  // yok (cleanCoachText tidyHpStripResidue), HP yok. İçerik kararı: TR-KALAN-26 (b)
+  // "NR'de ham metin korunur" UYGULANDI (decisions-final) → RC'nin sildiği tekrar
+  // iddiası süzülmüş hâliyle GERİ GELİR — bu bilinen sınır (vision-postprocess.ts notu)
+  // burada AÇIKÇA kilitlenir ki karar değişirse (seçenek a) test bilinçli güncellensin.
+  t("kurtarma: realityCheck yalnız '41 HP ile.' bırakınca NR içerik taşır, '. '/'..' artığı ve HP YOK",
+    rc.text === "41 HP ile." && !/^[\s.!?,;:]/.test(rec) && !/\.\./.test(rec) && !/HP/.test(rec)
+      && rec === "Savunma B Site çevresinde tekrar eden girişlerini okuyup aynı tehdidi bekliyor.",
     `→ rc="${rc.text}" / "${rec}"`);
+  t("bilinen sınır (karar b): RC'nin sildiği 'B Site … tekrar eden' iddiası NR'de geri gelir",
+    /tekrar eden/.test(rec) && !/tekrar eden/.test(rc.text), `→ "${rec}"`);
+  // EA meta-kalıntılı vaka (inceleyicinin 2. vakası; eskiden [] idi): RC yalnız meta
+  // cümlesini bırakıyor, süzgeç onu "" yapıyor → madde kanıtsız → tek madde olduğu için
+  // karar (b) "son madde asla düşmez" → süzülmüş ham hâli (meta cümlesi süzgeçte düşer).
+  const fgA = buildFactGround({ died: true }, {});
+  const eaRun = (ea: string[]) => finalizeVisionFeedback(
+    { deathAnalysis: "Geniş açı tuttun.", enemyAnalysis: ea, nextRoundSuggestion: "Açıyı tut." },
+    { roundHistory: rh, factGround: fgA, lang: "tr", map: "Lotus", agent: "Omen" },
+  ).enemyAnalysis;
+  const eaMeta = eaRun(["Savunma B Site çevresinde tekrar eden girişlerini okuyup aynı tehdidi bekliyor. Ölüm yeri OCR verisinde yok."]);
+  t("EA meta-kalıntı: tek madde korunur (karar b), OCR meta'sı ve '..' yok",
+    eaMeta.length === 1 && !/OCR/.test(eaMeta[0]) && !/\.\./.test(eaMeta[0]) && /bekliyor\.$/.test(eaMeta[0]),
+    `→ ${JSON.stringify(eaMeta)}`);
+  const eaHp = eaRun(["Savunma B Site çevresinde tekrar eden girişlerini okuyup aynı tehdidi bekliyor. 41 HP ile."]);
+  t("EA '… bekliyor. 41 HP ile.' → çift nokta YOK (eskiden 'bekliyor..')",
+    eaHp.length === 1 && !/\.\./.test(eaHp[0]) && !/HP/.test(eaHp[0]), `→ ${JSON.stringify(eaHp)}`);
+}
+
+// ── KAPAK ÖLÇÜMÜ (W2 inceleme RW1-F3): ateşleyen kapak capHits ile döner ──────────
+console.log("\n[RW1-F3] kapak ateşlemesi ölçülebilir (capHits) — davranış aynı");
+{
+  const fg = buildFactGround({ died: true, killerInfo: "killed by jett with vandal" }, {});
+  const kisa = finalizeVisionFeedback({ deathAnalysis: "Geniş açıda kaldın, geri çekil.", enemyAnalysis: ["Açıyı kapat."], nextRoundSuggestion: "Açıyı tut." }, { factGround: fg, lang: "tr" });
+  t("kapak ateşlemeyen çıktı → capHits []", Array.isArray(kisa.capHits) && kisa.capHits.length === 0, JSON.stringify(kisa.capHits));
+  const uzunDa = ("A Main'de geniş açıda tek başına bekledin ve Jett seni ilk temasta vurdu. ").repeat(5) + "Bir sonraki round siperin dibinde dur.";
+  const uzun = finalizeVisionFeedback({ deathAnalysis: uzunDa, enemyAnalysis: [], nextRoundSuggestion: "Açıyı tut." }, { factGround: fg, lang: "tr", map: "Ascent" });
+  const h = uzun.capHits.find((x) => x.field === "deathAnalysis");
+  t("DA 400'ü aşınca capHits'te deathAnalysis (before>400, after≤400) ve metin kapak altında",
+    !!h && h.before > 400 && h.after <= 400 && uzun.deathAnalysis.length === h.after, JSON.stringify(uzun.capHits));
+  const routeSrc = fs.readFileSync(path.join(__dirname, "..", "app", "api", "ai", "vision", "route.ts"), "utf8");
+  t("route her ateşlemede WARN basar ('vision cap fired')", /for \(const h of post\.capHits\)[\s\S]{0,120}console\.warn\(`\[Aimlo AI\] vision cap fired/.test(routeSrc));
 }
 
 // ── DA KAPAĞI 400: düzeltme cümlesi düşmez (B03 inceleme) ────────────────────
