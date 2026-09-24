@@ -261,6 +261,14 @@ const WINDOW_PATTERNS = [
 // sonra geçiyorsa o küçük harf ÖNCEDEN VARDI → dokunulmaz ("vb. açıyı"). Yoksa
 // silme onu cümle başına taşımıştır → büyütülür ("aldın. sen" → "aldın. Sen").
 // `before` verilmezse metin-içi büyütme HİÇ yapılmaz (eski davranış).
+/** FB06 · F85 (2026-09-24): sayım/pencere silmesinin bıraktığı parantez artığı. KANIT: korpus
+ *  E25 NR "…at Hookah multiple times in the match (3 deaths in the last 7 rounds) — …" level-3'te
+ *  "( )" bırakıyordu (9355dec "(3 deaths in the last )"). "( ,"/"(, " → "(", boş "( )" (önündeki
+ *  boşlukla) düşer. YALNIZ çağıran guard metne dokunduysa çağrılır. */
+function repairParenResidue(s: string): string {
+  return s.replace(/\(\s*[,;:]\s*/g, "(").replace(/\s*\(\s*\)/g, "");
+}
+
 function repairTrSeam(s: string, lang?: "tr" | "en", before?: string): string {
   // i→İ için toLocaleUpperCase("tr-TR") ŞART ("i".toUpperCase()="I").
   // Dil sezgisi MUTASYON ÖNCESİ metinde çalışır: ı/ş/ğ kanıtını taşıyan kelimeyi
@@ -486,6 +494,13 @@ const REPETITION_KEYWORDS = [
   "in a row", "consecutive", "consistently",
   "every round", "same spot", "same position",
   "repeating", "recurring", "persistent", "every time",
+  // FB06 · F85: EN çapraz-round NİCELİĞİ (korpus cycleb06-pre-syn-rp / cycler5syn E25 NR "This
+  // round you died at Hookah multiple times in the match (3 deaths in the last 7 rounds) — …").
+  // Level-3 sayımı silip kanıtsız "at Hookah multiple times in the match ( )" bırakıyordu; artık
+  // yan-cümle düşer, öğüt ("avoid solo wide peeks into Hookah") kalır. Çıplak "multiple times"
+  // BİLEREK yok (öğüt: "peek multiple times"). "keep dying/getting" çapa listesinde (F41);
+  // anahtar olarak EKLENMEDİ — korpusta 0 geçiş (hiç ateşlenmeyecek guard yazılmaz).
+  "multiple times in the match", "multiple times this match",
 ];
 
 // ── "straight" YALNIZ SAYIM BAĞLAMINDA (FB06 · F41, 2026-09-24) ──────────────────────
@@ -1043,7 +1058,8 @@ export function rewriteUnsafeClaims(
           result = result.replace(re, replacement);
         }
         // Silme noktalamadan önce boşluk bırakmışsa ("B Main , change") onar — yalnız değiştiyse.
-        if (result !== beforeCnt) result = result.replace(/ +([,.;:!?])/g, "$1");
+        // FB06 · F85: actualCount<2 iken replacement "" → "(3 deaths …)" parantez artığı da onarılır.
+        if (result !== beforeCnt) result = repairParenResidue(result.replace(/ +([,.;:!?])/g, "$1"));
       }
     }
 
@@ -1225,6 +1241,9 @@ export function rewriteUnsafeClaims(
     // anahtarı olduğu sürece dropRepetitionClauses onu taşıyan her yan-cümleyi zaten düşürdüğü
     // için satır no-op'tu; "pattern" BELİRSİZ listeye taşınınca çapasız betimi ("punished the
     // duel pattern") ortasından kesip "the duel ." bırakırdı. Çapalı iddia yukarıda düşüyor.
+    // FB06 · F85: sayım/pencere silmesinin parantez artığı ("( )", "( ,", "(, ") — genel boşluk
+    // temizliğinden ÖNCE ve YALNIZ bu blok metne dokunduysa (dokunulmamış metin bayt-aynı).
+    if (result !== text) result = repairParenResidue(result);
     // Silmeler cümle başında/ortasında boşluk-virgül bırakmış olabilir.
     if (isTr) result = repairTrSeam(result, lang, text);
   }

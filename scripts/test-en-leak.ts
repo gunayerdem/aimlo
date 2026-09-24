@@ -29,6 +29,8 @@ import {
 } from "../evals/en-leak-detector";
 import { EN_VISION_SCENARIOS, EN_REPORT_SCENARIOS, EN_CORPUS_TOTAL } from "../evals/en-corpus";
 import { realityCheck } from "../lib/reality-checker";
+import { buildVisionContext, type VisionPromptBody } from "../lib/vision-prompt-builder";
+import { toRoundMemory } from "../lib/vision-postprocess";
 
 let pass = 0;
 let fail = 0;
@@ -261,6 +263,46 @@ console.log("\n── 6) EN konum nötrleyici (hasDeathLocation=false) ──");
   check("hasDeathLocation:true + ölçülen 'a site' → 'You died at B Main' → 'at A Site'",
     d === "You died at A Site this round, so hold a tighter angle.", `→ "${d}"`);
   check("düzeltilen metin sızıntısız (detectEnLeak temiz)", detectEnLeak(d).clean, detectEnLeak(d).hits.map((h) => h.hit).join(", "));
+}
+
+// ── FB06 · F85 — EN sayım silmesi parantez artığı + "multiple times in the match" ──
+console.log("\n── FB06 · F85: EN sayım silmesi '( )' bırakmaz; kanıtsız çapraz-round niceliği yan-cümlece düşer ──");
+{
+  // Korpus E25 NR (cycleb06-pre-syn-rp / cycler5syn), prod zinciriyle aynı factGround/hafıza.
+  // HEAD: "This round you died at Hookah multiple times in the match ( ) — on the next round …"
+  // (doğru "3 deaths in the last 7 rounds" siliniyor, kanıtsız "at Hookah multiple times" kalıyordu).
+  const sc = EN_VISION_SCENARIOS.find((x) => x.id === "E25-bind-waylay-atk-no-killer");
+  if (!sc) throw new Error("E25 senaryosu yok");
+  const b = sc.body as VisionPromptBody;
+  const fg = buildVisionContext(b, "en").factGround;
+  const nr = "This round you died at Hookah multiple times in the match (3 deaths in the last 7 rounds) — on the next round avoid solo wide peeks into Hookah: have one teammate clear high angle while you hold a tightened crosshair for the head and enter together with a trade ready.";
+  const o = realityCheck(nr, toRoundMemory(b.roundHistory as never), fg, "suggestion", "en", b.map as string).text;
+  check("E25 NR: '( )' artığı yok", !/\(\s*[,;:]?\s*\)/.test(o), `→ "${o}"`);
+  check("E25 NR: kanıtsız 'multiple times in the match' yan-cümlesi düştü", !/multiple times/.test(o), `→ "${o}"`);
+  check("E25 NR: öğüt 'avoid solo wide peeks into Hookah' kaldı", /avoid solo wide peeks into Hookah/.test(o), `→ "${o}"`);
+  check("E25 NR: sonuç sızıntısız (detectEnLeak temiz)", detectEnLeak(o).clean, detectEnLeak(o).hits.map((h) => h.hit).join(", "));
+  // Onarım halkası (level-3): tekrar anahtarı olmayan yan-cümlede sayım + pencere silinir.
+  const mem7 = Array.from({ length: 7 }, (_, i) => ({ round_index: i + 1, died: i % 2 === 1, death_position: null }));
+  const fgA = { hasDeathLocation: true, deathLocation: "a site" } as never;
+  const o3 = realityCheck("You died at Hookah (3 deaths in the last 7 rounds) — avoid solo wide peeks into Hookah.", mem7 as never, fgA, "suggestion", "en").text;
+  check("level-3 onarım: '(3 deaths in the last 7 rounds)' → parantez artığı kalmaz",
+    o3 === "You died at Hookah — avoid solo wide peeks into Hookah.", `→ "${o3}"`);
+  // Onarım halkası (level-2 EN sayım silmesi, actualCount<2 → replacement "").
+  const mem1 = [
+    { round_index: 1, died: false, death_position: null },
+    { round_index: 2, died: true, death_position: "b main", position_confidence: "high" },
+  ];
+  const o2 = realityCheck("You keep losing B Main (3 times) — hold a tighter angle.", mem1 as never, fgA, "suggestion", "en").text;
+  check("level-2 onarım: '(3 times)' silinince '()' kalmaz", o2 === "You keep losing B Main — hold a tighter angle.", `→ "${o2}"`);
+  // Negatif: dokunulmamış metin (parantez dahil) bayt-aynı; öğüt 'multiple times' anahtar değil.
+  for (const s of [
+    "You died at A Site again (R2 · R4 · R6) — hold a tighter angle next round.",
+    "Peek multiple times with your flash before you commit to A Site.",
+    "Swing A Main multiple times this round with a teammate ready to trade.",
+  ]) {
+    const x = realityCheck(s, mem7 as never, fgA, "suggestion", "en").text;
+    check(`bayt-aynı: "${s.slice(0, 44)}…"`, x === s, `→ "${x}"`);
+  }
 }
 
 // ── SONUÇ ────────────────────────────────────────────────────────────────────
