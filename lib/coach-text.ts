@@ -1004,7 +1004,7 @@ const LOAN_SOUND: Record<string, { vowel: string; hard: boolean }> = {
  *   · çoğul (lAr + …): poss → gövde çoğullanır, tamlama iyeliği korunur ("ölüm
  *     yerleri/yerlerini/yerlerinde"); vowel → "kadrolar/kadroları/kadrolarda"; loan
  *     çoğulu tanınmaz (null). Çıplak "-lArI" belirtme okunur ("… kullan" nesnesi —
- *     prompt'un kendi biçimi report/route.ts "deathLocation'ları kullanabilirsin"). */
+ *     prompt'un kendi biçimi lib/report-prompt.ts "deathLocation'ları kullanabilirsin"). */
 type LabelCase = "none" | "loc" | "abl" | "locki" | "acc" | "dat" | "gen" | "ins";
 const lastVowelCt = (w: string) => { const vs = w.match(/[aıoueiöü]/g); return vs ? vs[vs.length - 1] : "e"; };
 const harmA = (v: string) => (/[aıou]/.test(v) ? "a" : "e");

@@ -7,6 +7,10 @@
  *
  * KOVALAR — prompt sırasıyla, kararlıdan değişkene (prefix-cache mantığı):
  *   static     → silah+komp rehberi; HER istekte bayt-aynı (küresel statik önek)
+ *   scenario   → post-plant/retake/ekonomi statik rehberi (B42/F76); static ile aynı
+ *                kararlılık sınıfı. W2 inceleme B06-F4 (2026-09-24): bu kova YOKTU →
+ *                toplam vision başına ~27,5 K karakter eksikti. Artık sayılıyor ve toplam
+ *                kb.blocks'un TÜM değerleriyle kıyaslanıyor (kova-bütünlük kapısı).
  *   profile    → koçluk profili (ranks/universal.md); HER istekte bayt-aynı.
  *                Eskiden `contextual` içinde ölçülüyordu ve "en değişken blok"
  *                diye etiketleniyordu — YANLIŞ okuma: 2026-07-20 ölçümünde
@@ -74,20 +78,31 @@ for (const { name, opts } of MATRIX) {
   // loader + vision route profile2'yi kazandı ama BU SCRIPT saymıyordu → toplam
   // ~4,5 KB eksik çıkıyor, maliyet/cache kararları yanlış rakamla veriliyordu.
   const p2 = kb.blocks.profile2?.length ?? 0; // profilin 2. sayfası — o da istekten BAĞIMSIZ
+  // W2 inceleme B06-F4 (2026-09-24): scenario (post-plant/retake/ekonomi statik rehberi,
+  // B42/F76) kovası YOKTU — vision başına ~29,7 KB kısa payda; profile2 (R11) ve
+  // OLCUM-ARACI-09 olaylarının ikizi. Artık sayılıyor + aşağıdaki kova-bütünlük kapısı.
+  const sc = kb.blocks.scenario?.length ?? 0;
   const a = kb.blocks.agent?.length ?? 0;
   const m = kb.blocks.map?.length ?? 0;
   const c = kb.blocks.contextual?.length ?? 0;
-  const total = s + p + p2 + a + m + c;
+  const total = s + sc + p + p2 + a + m + c;
+  // KOVA-BÜTÜNLÜK KAPISI: loader'a yeni blok eklenip burada sayılmazsa sessiz eksik
+  // toplam bir daha oluşmasın — toplam, kb.blocks'un TÜM değerlerinin toplamına eşit olmalı.
+  const allBlocks = Object.values(kb.blocks).reduce((n, v) => n + (typeof v === "string" ? v.length : 0), 0);
+  if (allBlocks !== total) {
+    console.error(`[measure-kb] HATA — ${name}: kovalar ${total} B, kb.blocks toplamı ${allBlocks} B; kb.blocks anahtarları: ${Object.keys(kb.blocks).join(", ")} — sayılmayan kovayı ekle`);
+    process.exit(1);
+  }
   totalAll += total;
   profileSizes.push({ combo: name, bytes: p });
   profile2Sizes.push({ combo: name, bytes: p2 });
-  // kolon sırası = prompt sırası (static → profile → profile2 → agent → map → contextual)
-  rows.push({ combo: name, static: s, profile: p, profile2: p2, agent: a, map: m, contextual: c, total });
+  // kolon sırası = prompt sırası (static → scenario → profile → profile2 → agent → map → contextual)
+  rows.push({ combo: name, static: s, scenario: sc, profile: p, profile2: p2, agent: a, map: m, contextual: c, total });
 }
 
 // report task (match report KB)
 const report = loadKnowledge("report", { map: "Ascent", agent: "Jett", enemyAgents: ["Omen", "Cypher"], side: "attack" });
-rows.push({ combo: "report-task", profile: 0, profile2: 0, agent: 0, map: 0, contextual: 0, total: report.length });
+rows.push({ combo: "report-task", scenario: 0, profile: 0, profile2: 0, agent: 0, map: 0, contextual: 0, total: report.length });
 totalAll += report.length;
 
 console.log(`\n[measure-kb] etiket=${label} tarih=${new Date().toISOString()}`);
@@ -101,6 +116,11 @@ console.log(
   "NOT (karşı-denetim 2026-07-31): profile2 kovası bu turda ölçüme GERİ bağlandı. " +
     "Bu düzeltmeden ÖNCEKİ koşularla kıyaslarken TOPLAM ~4,5 KB artmış görünür — bu " +
     "içerik büyümesi DEĞİL, script'in universal-2.md'yi saymamasının giderilmesidir.",
+);
+console.log(
+  "NOT (W2 inceleme B06-F4, 2026-09-24): scenario kovası ölçüme bağlandı. Bu düzeltmeden " +
+    "ÖNCEKİ koşularla kıyaslarken TOPLAM 6 × scenario bloğu kadar (6 × 27.514 kr = +165.084) artmış görünür — " +
+    "içerik büyümesi DEĞİL, script'in SENARYO REHBERİ'ni saymamasının giderilmesidir.",
 );
 console.log(JSON.stringify({ label, totalAll, rows }, null, 0));
 

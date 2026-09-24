@@ -54,7 +54,8 @@ export function generateImprovementPlan(
   /**
    * ⚠ B59 (2026-07-31) — ÖLÜ PARAMETRE, BİLİNÇLİ İŞARETLENDİ.
    * Bu argümanı ÜRETİMDE HİÇBİR ÇAĞIRAN geçmiyor:
-   *   · app/api/ai/report/route.ts   → generateImprovementPlan([{...}])
+   *   · lib/report-prompt.ts (buildReportPrompts; B05'te report route'undan taşındı)
+   *                                  → generateImprovementPlan([{...}])
    *   · app/api/ai/feedback/route.ts → generateImprovementPlan([{...}])
    * Tek geçen yer lib/__tests__/systems.test.ts. Dolayısıyla aşağıdaki
    * `improvements` / `ongoingIssues` (carry-over / "streak") dalı üretimde
@@ -72,7 +73,7 @@ export function generateImprovementPlan(
    * EK GÖZLEM (aynı denetim, kanıt: :56 `if (matches.length < 2)`): iki çağıran
    * da TEK elemanlı dizi verdiği için fonksiyon üretimde HER ZAMAN
    * getDefaultPlan() dönüyor — problem tespiti (tekrar eden ölüm yeri, düşük
-   * hayatta kalma vb.) de fiilen ölü. report/route.ts'teki "IMPROVEMENT FOCUS"
+   * hayatta kalma vb.) de fiilen ölü. lib/report-prompt.ts'teki "IMPROVEMENT FOCUS"
    * satırı bu yüzden daima sabit placeholder metnidir. Guard'ı değiştirmek
    * lib/__tests__/systems.test.ts beklentilerini etkiler → ayrı iş.
    */

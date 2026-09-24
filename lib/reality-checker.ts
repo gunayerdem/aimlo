@@ -74,9 +74,9 @@ export interface FactGround {
   // sorusunu yanıtlar ve DAİMA false'tur — desktop spikePlanted'ı yalnız TRUE
   // iken gönderdiği için "kurulmadı" ile "okunamadı" ayrılamıyor. Ama
   // spikePlanted===true gelen ÖLÜM round'unda plant'in kurulduğu ÖLÇÜLMÜŞ bir
-  // OLGUDUR: aynı değer route.ts:899 (died kapısı) → :941 → :1222 → :1460
-  // zinciriyle modele "[ROUND CONTEXT — OCR pixel truth]" başlığıyla zaten
-  // veriliyor.
+  // OLGUDUR: aynı değer lib/vision-prompt-builder.ts buildVisionContext (died kapısı
+  // → ctx.spikePlanted) → buildVisionUserMessage ctx JSON'u zinciriyle modele
+  // "[ROUND CONTEXT — OCR pixel truth]" başlığıyla zaten veriliyor (B06 sonrası atıf).
   //
   // ⚠ hasSpike'tan AYRI TUTULDU (ŞART): hasSpike'ı true yapmak buildFactSheet'i
   // de değiştirir — lib/vision-prompt.ts:55-58 `if (fg.hasSpike) known.push(...)
@@ -1174,17 +1174,20 @@ export function buildFactGround(
     hasAliveCount: false,
     hasSpike: false,
     // B1 (2026-09-16): plant'in KURULDUĞU yönü ölçülmüş olgudur → guard artık
-    // DOĞRU ifadeyi kesmez. İKİ KAPI birden — route'un KENDİ kapısının AYNISI:
-    //   · died===true      → app/api/ai/vision/route.ts:899 ctx bloğunu bu kapıyla
-    //     açıyor (:941 `if (reqBody.spikePlanted === true) ctx.spikePlanted = true;`),
-    //     böylece guard'ın güvendiği olgu, prompt'a giren olgunun TAM AYNISI olur.
+    // DOĞRU ifadeyi kesmez. İKİ KAPI birden — ctx kurucusunun KENDİ kapısının AYNISI:
+    //   · died===true      → lib/vision-prompt-builder.ts buildVisionContext ctx ölüm
+    //     bloğunu bu kapıyla açıyor (`if (reqBody.spikePlanted === true)
+    //     ctx.spikePlanted = true;`), böylece guard'ın güvendiği olgu, prompt'a giren
+    //     olgunun TAM AYNISI olur.
     //   · spikePlanted===true → false/undefined "kurulmadı" DEĞİL "bilinmiyor"
     //     demektir (hasSpike'ın daima-false gerekçesi aynen korunur).
-    // reqBody okunuyor (ctx DEĞİL): vision route ham gövdeyi geçiyor (:1033) ve
-    // scripts/eval-vision.ts:927 `buildFactGround(b as Record<string, unknown>,
-    // ctxForFacts)` ile tüm body'yi geçiyor → AYNA OTOMATİK KAPSANIR.
-    // app/api/ai/report/route.ts:906 `...buildFactGround({}, {})` çağırdığı için
-    // rapor yolunda DAİMA false → rapor davranışı yalnız nötrleme yönünde değişir.
+    // reqBody okunuyor (ctx DEĞİL): buildVisionContext ham gövdeyi (killerInfo'yu
+    // ctx'tekiyle değiştirerek) geçiyor. B06 (2026-09-24) sonrası route, eval-vision ve
+    // replay-tr factGround'u AYNI kurucudan alıyor (eski elle kurulan eval
+    // ctxForFacts aynası silindi) → ayna ayrı bakım istemez. Rapor yolu
+    // (lib/report-prompt.ts buildReportCleaner) `...buildFactGround({}, {})` çağırdığı
+    // için orada DAİMA false → rapor davranışı yalnız nötrleme yönünde değişir.
+    // (Yorum W2 inceleme B06-F5 ile güncellendi: eski satır atıfları B06'da bayatlamıştı.)
     spikeObservedPlanted: reqBody.died === true && reqBody.spikePlanted === true,
     // Denetim B35 (2026-07-31): düşman yetenek/setup kullanımı HİÇ okunmuyor →
     // HARD-false (alive/spike ile aynı gerekçe). Masaüstü gerçek bir util sinyali
@@ -1984,8 +1987,8 @@ export function stripForeignCallouts(
  * deathLocation AYNI ctx.deathLocation'dan türüyor → vision yolunda
  * hasDeathLocation=false iken deathLocation DAİMA undefined. Yani kapı (1)'in
  * ctx yarısı orada ÖLÜ; işleyen muafiyet roundHistory'dir. Kapı, rapor yolu için
- * canlı: app/api/ai/report/route.ts:908-909 `hasDeathLocation: anyLoc,
- * deathLocation: suppliedLocs` (dizi).
+ * canlı: lib/report-prompt.ts buildReportCleaner `hasDeathLocation: anyLoc,
+ * deathLocation: suppliedLocs` (dizi; B05'te route'tan taşındı).
  *
  * SIRA: realityCheck'in EN SONUNDA çalışır — extractClaims/validateClaims
  * callout'u hâlâ ORİJİNAL hâliyle görür, böylece claimedPosition ve rewriteLevel
