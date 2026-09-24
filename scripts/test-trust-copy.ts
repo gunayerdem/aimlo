@@ -233,12 +233,14 @@ const SOURCE_CLAIMS: [string, RegExp][] = [
   ["'gerçek geri bildirim' / 'Real feedback'", /gerçek geri bildirim|real feedback/iu],
   ["'%NN daha iyi' / 'NN% better'", /%\s?\d+\s+daha\s+iyi|\d+\s?%\s+better/iu],
 ];
-const claimScope = [...pages.map(relOf), "constants/i18n.ts"];
+// FB02 inceleme (2026-09-25): hiç import edilmeyen constants/i18n.ts aynası SİLİNDİ (aşağıdaki [9]
+// kilidi); kapsam artık yalnız kullanıcıya görünen app/**/*.tsx.
+const claimScope = pages.map(relOf);
 for (const [ad, re] of SOURCE_CLAIMS) {
   const hits = claimScope.filter((rel) => re.test(visibleText(rel)));
-  t(`${ad} → 0 (app/**/*.tsx + constants/i18n.ts)`, hits.length === 0, JSON.stringify(hits));
+  t(`${ad} → 0 (app/**/*.tsx)`, hits.length === 0, JSON.stringify(hits));
 }
-const LANDING_FILES = [LANDING, "constants/i18n.ts"];
+const LANDING_FILES = [LANDING];
 const LANDING_ONLY: [string, RegExp][] = [
   ["'Oyuncular Ne Diyor' / 'What Players Say' bölümü", /Oyuncular Ne Diyor|What Players Say/u],
   ["yorum kartı kalıbı (handle: \"@…\")", /handle:\s*["'`]@/u],
@@ -248,9 +250,9 @@ const LANDING_ONLY: [string, RegExp][] = [
 ];
 for (const [ad, re] of LANDING_ONLY) {
   const hits = LANDING_FILES.filter((rel) => re.test(visibleText(rel)));
-  t(`${ad} → 0 (landing + i18n)`, hits.length === 0, JSON.stringify(hits));
+  t(`${ad} → 0 (landing)`, hits.length === 0, JSON.stringify(hits));
 }
-t("ölü landingStats anahtarı yok (landing + i18n)",
+t("ölü landingStats anahtarı yok (landing)",
   LANDING_FILES.every((rel) => !/landingStats/.test(stripComments(read(rel)))),
   JSON.stringify(LANDING_FILES.filter((rel) => /landingStats/.test(stripComments(read(rel))))));
 
@@ -269,7 +271,7 @@ const F91_FORBIDDEN: [string, RegExp][] = [
 ];
 for (const [ad, re] of F91_FORBIDDEN) {
   const hits = claimScope.filter((rel) => re.test(visibleText(rel)));
-  t(`${ad} → 0 (app/**/*.tsx + constants/i18n.ts)`, hits.length === 0, JSON.stringify(hits));
+  t(`${ad} → 0 (app/**/*.tsx)`, hits.length === 0, JSON.stringify(hits));
 }
 const landingCode = stripComments(read(LANDING));
 t("SSS 'Nasıl çalışıyor?' ölçülen olguları söyler (TR+EN: ölüm yeri, skor, round sonucu, öldüren ajan)",
@@ -400,7 +402,7 @@ console.log("\n[8] Y08 — veri erişimi vaadi olguya göre (RLS kullanıcılar 
   ];
   for (const [ad, re] of Y08_FORBIDDEN) {
     const hits = claimScope.filter((rel) => re.test(visibleText(rel)));
-    t(`${ad} → 0 (app/**/*.tsx + constants/i18n.ts)`, hits.length === 0, JSON.stringify(hits));
+    t(`${ad} → 0 (app/**/*.tsx)`, hits.length === 0, JSON.stringify(hits));
   }
   const land = visibleText(LANDING);
   t("landing SSS: TR + EN yetkili yönetici erişimini ve ekran görüntüsünün OpenAI'ye gidip AIMLO'da saklanmadığını söyler",
@@ -409,6 +411,23 @@ console.log("\n[8] Y08 — veri erişimi vaadi olguya göre (RLS kullanıcılar 
   const privY08 = visibleText("app/legal/privacy/page.tsx");
   t("Gizlilik: RLS diğer kullanıcılara kapalı + yetkili yönetici erişimi",
     /diğer kullanıcılara kapalıdır/u.test(privY08) && /yetkili AIMLO yöneticileri/u.test(privY08));
+}
+
+// [9] FB02 inceleme (2026-09-25) — ölü ama pakete giren iddialar. F15 landingStats'ı "ölü ama
+// istemci paketine giren sahte sayılar" gerekçesiyle sildi; aynı t objesinde render edilmeyen
+// landingAbout*/landingB2B*/landingB2C* anahtarları olmayan bir ürünü anlatıyordu ("Espor
+// organizasyonları için özel analiz panelleri, toplu oyuncu takibi", "Sadece 10$ ile başlayın" /
+// "Start for just $10"). constants/i18n.ts hiç import edilmiyordu ama eski SSS'yi (koşulsuz
+// "Beta süresince tüm özellikler sınırsız", "girdiğin kısa notları") taşıyan bir B9 aynasıydı.
+// İkisi de silindi; bir anahtar yeniden bağlanırsa ya da ayna geri gelirse kilit kırmızı döner.
+console.log("\n[9] FB02 inceleme — ölü landing anahtarları ve import edilmeyen i18n aynası yok");
+{
+  t("constants/i18n.ts yok (hiç import edilmeyen eski SSS aynası)", !fs.existsSync(path.join(ROOT, "constants/i18n.ts")));
+  const land = stripComments(read(LANDING));
+  const DEAD = ["landingAboutTitle", "landingAboutText", "landingAboutMission", "landingB2BTitle", "landingB2BText", "landingB2CTitle", "landingB2CText"];
+  const still = DEAD.filter((k) => land.includes(k));
+  t("landing t objesinde render edilmeyen About/B2B/B2C anahtarları yok", still.length === 0, JSON.stringify(still));
+  t("'10$ ile başlayın' / 'Start for just $10' landing paketinde yok", !/10\$ ile başlayın|Start for just \$10/u.test(land));
 }
 
 console.log(`\n${fail === 0 ? "✅" : "❌"} test-trust-copy: ${pass} geçti, ${fail} kırık`);

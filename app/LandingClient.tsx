@@ -290,17 +290,6 @@ const t = {
     landingHeroSub:
       "Uygulamayı aç, Valorant oyna. AI her şeyi otomatik izler, maç sonunda kişisel analiz ve gelişim raporu sunar. Sen sadece oyna.",
     landingCTA: "Uygulamayı İndir",
-    landingAboutTitle: "Hakkımızda",
-    landingAboutText:
-      "AIMLO, Valorant oyuncuları için yapay zeka destekli koçluk platformudur. Her maç sonrası detaylı analiz, round bazlı geri bildirim ve kişiselleştirilmiş gelişim önerileri sunar.",
-    landingAboutMission:
-      "Amacımız her seviyeden oyuncunun potansiyelini en üst düzeye çıkarmasına yardımcı olmaktır. Geleneksel istatistik araçları sadece rakamları gösterir; AIMLO neden kaybettiğinizi, hangi hatalarınızı tekrarladığınızı ve bir sonraki round'da ne yapmanız gerektiğini söyler.",
-    landingB2BTitle: "Takımlar & Organizasyonlar",
-    landingB2BText:
-      "Espor organizasyonları ve takımlar için özel analiz panelleri, toplu oyuncu takibi ve koçluk araçları sunuyoruz. Takım performansını veriye dayalı kararlarla optimize edin.",
-    landingB2CTitle: "Bireysel Oyuncular",
-    landingB2CText:
-      "Kendi temponuzda ilerleyin. Her maçınızı analiz edin, hatalarınızı tespit edin ve AI destekli önerilerle rank atlayın. Sadece 10$ ile başlayın, gelişiminizi takip edin.",
     landingFaqTitle: "Sıkça Sorulan Sorular",
     landingBlogTitle: "Blog & İçgörüler",
     landingBlogText:
@@ -569,17 +558,6 @@ const t = {
     landingHeroSub:
       "Launch the app and play Valorant. AI watches everything automatically and delivers your personal analysis and improvement report after each match. You just play.",
     landingCTA: "Download App",
-    landingAboutTitle: "About Us",
-    landingAboutText:
-      "AIMLO is an AI-powered coaching platform for Valorant players. We provide detailed post-match analysis, round-by-round feedback, and personalized improvement suggestions.",
-    landingAboutMission:
-      "Our mission is to help players of all levels reach their full potential. Traditional stat tools only show numbers; AIMLO tells you why you lost, which mistakes you repeat, and what to do next round.",
-    landingB2BTitle: "Teams & Organizations",
-    landingB2BText:
-      "We offer custom analytics dashboards, bulk player tracking, and coaching tools for esports organizations and teams. Optimize your team's performance with data-driven decisions.",
-    landingB2CTitle: "Individual Players",
-    landingB2CText:
-      "Progress at your own pace. Analyze every match, identify your mistakes, and climb ranks with AI-powered suggestions. Start for just $10 and track your improvement.",
     landingFaqTitle: "Frequently Asked Questions",
     landingBlogTitle: "Blog & Insights",
     landingBlogText:
