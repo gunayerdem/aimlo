@@ -222,3 +222,13 @@ kadar anlamlı — v1.0.20 yayını pencereyi kapatır.
          doğruladığı için host değişimi güvenli) ve `app/download/route.ts`
          içindeki `SUPABASE_STORAGE` önek kontrolü yeni host için genişletilir.
    - Launch haftası izleme: `/admin/altyapi` egress kartı (§2).
+7. **Teslim (surrender) ile biten maçın sonucu — bilinen sınır** (yakınsama Y06,
+   2026-09-25). `matchComplete` göndermeyen v1.0.19'da sonuç skordan türetilir
+   (`lib/match-outcome.ts`). Teslim skoru eşiğe (13) ulaşmaz; bitiş ekranı
+   (ZAFER/YENİLGİ) okunup DESYNC yoksa v1.0.19 son round'a `won`/`lost` damgası
+   basar → backend bu damgayı skor yönüyle tutarlıysa WIN/LOSS sayar. Ama izlenen
+   toplam ≤ 11 iken teslim (ör. 5-3) v1.0.19'da DESYNC sayılır, damga gitmez →
+   maç **"sonuç kesinleşmedi" (UNFINISHED)** raporlanır; masaüstü HEAD'de de
+   `is_impossible_finish` aynı teslimi DESYNC sayıyor. Kalıcı çözüm masaüstünde:
+   teslim ekranı metnini ayrı kanıt olarak okumak. Backend'de v1.0.19 gövdesinden
+   bu vaka donmuş defterden ayırt edilemez, bilerek UNFINISHED bırakıldı.

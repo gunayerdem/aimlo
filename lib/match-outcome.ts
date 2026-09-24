@@ -106,18 +106,36 @@ export type MatchOutcome = { won: boolean | null; label: MatchOutcomeLabel };
  *  - matchComplete === true  → skor: eşit → DRAW (won=null), aksi WIN/LOSS.
  *  - matchComplete yok (v1.0.19 ve öncesi): mod tanınıyorsa ve skor terminal değilse
  *    → UNFINISHED; mod bilinmiyorsa bugünkü yours>enemy kuralı (eşitlik artık DRAW).
+ *    İSTİSNA (yakınsama Y06): son round'un HAM result'ı masaüstü bitiş-ekranı damgasıysa
+ *    ("won"/"lost", `endScreenResult`) ve skor yönüyle tutarlıysa sonuç WIN/LOSS.
  * won=null "bilinmiyor" demektir: hiçbir tüketici onu galibiyet/mağlubiyet saymaz.
+ *
+ * Y06 KANIT: v1.0.19 (aimlo-desktop 61ee71f) lib.rs:4952-4983 plan_victory_override —
+ * VICTORY/DEFEAT ekranı OKUNDUYSA (MATCH_END_IS_WIN Some) ve DESYNC yoksa (izlenen toplam
+ * + 1 ≥ eşik, is_impossible_finish :4933) son round'a result "won"/"lost" damgası basar ve
+ * kazanan tarafı YALNIZ +1 artırır; normal round'lar "win"/"loss"/"unknown" yollar
+ * (:3199-3200, :3238-3239, :3415-3416, :3085). Teslimle (surrender) biten maçta skor eşiğe
+ * ulaşmaz ("9 - 3" → "10 - 3") → F03 kuralı ekranda okunmuş ZAFERİ UNFINISHED sayıyordu
+ * (FA öncesi 78d54c4: WIN). Damga yalnız bitiş ekranından geldiği için F03'ün hedefi olan
+ * donmuş defter (elle bitirme; damga YOK, son round "win") bu istisnaya GİRMEZ. Yönle
+ * çelişen damga ("5 - 9" + "won") ve matchComplete gönderen istemci (FD01) istisnasız.
+ * Kalan bilinen sınır: izlenen toplam ≤ 11 iken teslim (v1.0.19 DESYNC → damga yok)
+ * UNFINISHED kalır — masaüstü teslim ekranı kanıtı ister (docs/LAUNCH_RUNBOOK.md §4).
  */
 export function deriveMatchOutcome(input: {
   yours: number | string;
   enemy: number | string;
   matchComplete?: boolean;
   mode?: unknown;
+  endScreenResult?: "won" | "lost";
 }): MatchOutcome {
   const y = Number(input.yours);
   const e = Number(input.enemy);
   if (input.matchComplete === false) return { won: null, label: "UNFINISHED" };
-  if (input.matchComplete !== true && isTerminalScore(y, e, input.mode) === false) {
+  const endScreenAgrees =
+    input.matchComplete === undefined &&
+    ((input.endScreenResult === "won" && y > e) || (input.endScreenResult === "lost" && y < e));
+  if (input.matchComplete !== true && isTerminalScore(y, e, input.mode) === false && !endScreenAgrees) {
     return { won: null, label: "UNFINISHED" };
   }
   if (y === e) return { won: null, label: "DRAW" };

@@ -121,6 +121,14 @@ export type ReportRequest = {
    * mod + terminal-skor kuralına düşer.
    */
   matchComplete?: boolean;
+  /**
+   * Yakınsama Y06 (2026-09-25) — v1.0.19 geri uyumu: gövdedeki SON round'un HAM `result`'ı
+   * masaüstü bitiş-ekranı damgasıysa ("won"/"lost"; lib.rs plan_victory_override — yalnız
+   * VICTORY/DEFEAT ekranı okunup DESYNC yokken). Normalizasyondan ÖNCE yakalanır (round
+   * dizisinde "won" → "win"e iner); yalnız sonuç türetiminde kullanılır, kalıcı YAZILMAZ.
+   * Kural: lib/match-outcome.ts deriveMatchOutcome.
+   */
+  endScreenResult?: "won" | "lost";
   /** FB01 · F03: finalize nedeni (MATCH_END_REASONS); yalnız kayda geçer, sonucu etkilemez. */
   endReason?: MatchEndReason;
 };
@@ -395,6 +403,16 @@ export function validateRequest(
   if (b.endReason !== undefined && !endReason) {
     console.log("[Aimlo] report endReason tanınmadı → yok sayıldı");
   }
+  // Yakınsama Y06: son round'un HAM result'ı bitiş-ekranı damgası mı? (round normalizasyonu
+  // "won"u "win"e indirdiği için burada, ham dizide okunur.) Yalnız GERÇEK "won"/"lost".
+  const endScreenResult = ((): "won" | "lost" | undefined => {
+    if (!Array.isArray(b.rounds) || b.rounds.length === 0) return undefined;
+    const last = b.rounds[b.rounds.length - 1] as unknown;
+    if (!last || typeof last !== "object") return undefined;
+    const raw = (last as Record<string, unknown>).result;
+    const s = typeof raw === "string" ? raw.trim().toLowerCase() : "";
+    return s === "won" || s === "lost" ? s : undefined;
+  })();
 
   // Skor-delta ile unknown round çözümleme (2026-07-09): round snapshot'larından
   // sonuç TÜRETİLEBİLİYORSA türet; belirsizse "unknown" bırak (asla uydurma).
@@ -430,6 +448,7 @@ export function validateRequest(
       persistOnServer,
       // Yalnız gönderildiyse anahtar oluşur (eski gövdeler için data nesnesi bayt-aynı).
       ...(matchComplete !== undefined ? { matchComplete } : {}),
+      ...(endScreenResult ? { endScreenResult } : {}),
       ...(endReason ? { endReason } : {}),
     },
   };
@@ -446,6 +465,7 @@ export function reportOutcome(body: ReportRequest): MatchOutcome {
     enemy: body.score.enemy,
     matchComplete: body.matchComplete,
     mode: body.setup.mode,
+    endScreenResult: body.endScreenResult,
   });
 }
 

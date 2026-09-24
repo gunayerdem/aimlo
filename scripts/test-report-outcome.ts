@@ -263,6 +263,68 @@ async function main() {
   }
 
   // ══════════════════════════════════════════════════════════════════════
+  // Yakınsama Y06: v1.0.19 teslim (surrender) maçı. plan_victory_override (61ee71f lib.rs:4952)
+  // VICTORY/DEFEAT okununca ve DESYNC yokken son round'a "won"/"lost" damgası basıp kazananı
+  // YALNIZ +1 artırır ("9 - 3" → "10 - 3") → skor terminal değil. Fix olmadan UNFINISHED
+  // (FA öncesi 78d54c4: WIN). F03'ün donmuş defter fixture'ı (damgasız, son "win") UNFINISHED KALIR.
+  console.log("\n── [Y06] v1.0.19 bitiş-ekranı damgası ('won'/'lost') + yönle tutarlı skor → WIN/LOSS ──");
+  {
+    const o6 = (y: number, e: number, mc: boolean | undefined, mode: string, esr?: "won" | "lost") =>
+      deriveMatchOutcome({ yours: y, enemy: e, matchComplete: mc, mode, endScreenResult: esr }).label;
+    check("damga 'won' + 10-3 rekabetçi → WIN; 'lost' + 3-10 → LOSS; derecesiz 10-3 'won' → WIN (fix yok: UNFINISHED)",
+      o6(10, 3, undefined, "competitive", "won") === "WIN" && o6(3, 10, undefined, "competitive", "lost") === "LOSS"
+        && o6(10, 3, undefined, "unrated", "won") === "WIN",
+      show([o6(10, 3, undefined, "competitive", "won"), o6(3, 10, undefined, "competitive", "lost")]));
+    check("yönle ÇELİŞEN damga ('5 - 9' + won, '9 - 5' + lost, '6 - 6' + won) → UNFINISHED (istisna yok)",
+      o6(5, 9, undefined, "competitive", "won") === "UNFINISHED" && o6(9, 5, undefined, "competitive", "lost") === "UNFINISHED"
+        && o6(6, 6, undefined, "competitive", "won") === "UNFINISHED");
+    check("damga yok (F03 donmuş defter 9-4) → UNFINISHED AYNEN; matchComplete:false + damga → UNFINISHED (FD01 sözleşmesi önce)",
+      o6(9, 4, undefined, "competitive") === "UNFINISHED" && o6(10, 3, false, "competitive", "won") === "UNFINISHED");
+
+    // Gerçek v1.0.19 biçimli gövde: 12 round "win"/"loss", son round override edilmiş.
+    const surr: Record<string, unknown>[] = desktopRounds(seq(9, 3));
+    surr[surr.length - 1] = { ...surr[surr.length - 1], score: "10 - 3", result: "won" };
+    const sv = validated({ rounds: surr, lang: "tr", map: "ascent", agent: "jett", mode: "competitive", side: "attacking" });
+    const sd = generateDeterministicReport(sv);
+    check("validateRequest: ham son result 'won' → endScreenResult='won'; round dizisinde 'win' (normalizasyon aynen)",
+      sv.endScreenResult === "won" && sv.rounds[sv.rounds.length - 1].result === "win", show({ esr: sv.endScreenResult }));
+    check("teslim 10-3 → deterministik WIN, prompt 'Score: 10-3 (WIN)', 'kesinleşmedi' yok (fix yok: UNFINISHED)",
+      sd.matchWon === true && sd.matchResult === "WIN" && buildReportPrompts(sv, { memoryContext: "" }).userPrompt.includes("Score: 10-3 (WIN)")
+        && !/kesinleşmedi/.test(sd.summary + sd.tendencies),
+      `won=${sd.matchWon} result=${sd.matchResult} ${sd.summary.slice(0, 80)}`);
+    const lostBody: Record<string, unknown>[] = desktopRounds(seq(3, 9));
+    lostBody[lostBody.length - 1] = { ...lostBody[lostBody.length - 1], score: "3 - 10", result: "lost" };
+    const lv = validated({ rounds: lostBody, lang: "en", map: "ascent", mode: "competitive" });
+    check("biz teslim olduk 3-10 'lost' → LOSS (EN gövde)", generateDeterministicReport(lv).matchResult === "LOSS");
+    const clash: Record<string, unknown>[] = desktopRounds(seq(5, 8));
+    clash[clash.length - 1] = { ...clash[clash.length - 1], score: "5 - 9", result: "won" };
+    check("damgalı ama yönle çelişen gövde ('5 - 9' + won) → UNFINISHED",
+      generateDeterministicReport(validated({ rounds: clash, lang: "tr", map: "ascent", mode: "competitive" })).matchResult === "UNFINISHED");
+    const plain = validated({ rounds: desktopRounds(seq(9, 4).slice(0, 13)), lang: "tr", map: "summit", mode: "competitive" });
+    check("damgasız gövdede endScreenResult anahtarı YOK (eski gövdelerin data nesnesi bayt-aynı)", !("endScreenResult" in plain));
+    const midStamp: Record<string, unknown>[] = desktopRounds(seq(9, 3));
+    midStamp[5] = { ...midStamp[5], result: "won" };
+    check("damga yalnız SON round'da sayılır (ara round'daki 'won' → istisna yok, UNFINISHED)",
+      validated({ rounds: midStamp, lang: "tr", map: "ascent", mode: "competitive" }).endScreenResult === undefined
+        && generateDeterministicReport(validated({ rounds: midStamp, lang: "tr", map: "ascent", mode: "competitive" })).matchResult === "UNFINISHED");
+
+    // Route: kayıt + hafıza aynı tek kaynaktan (reportOutcome) — endScreenResult KALICI YAZILMAZ.
+    resetHarness();
+    delete process.env.OPENAI_API_KEY;
+    harness.db = newFakeDb();
+    const res = await route.POST(reportRequest({
+      rounds: surr, lang: "tr", map: "ascent", agent: "jett", mode: "competitive", matchId: MID, persistOnServer: true,
+    }));
+    const body = await res.json() as Record<string, unknown>;
+    const raw = ((harness.db.rows.get(MID) as Record<string, unknown> | undefined)?.raw_result_json ?? {}) as Record<string, unknown>;
+    check("route: 200 + matchWon=true, raw_result_json won=true result WIN, hafıza won=true (fix yok: null/UNFINISHED)",
+      res.status === 200 && body.matchWon === true && raw.won === true && raw.result === "WIN"
+        && harness.memoryUpdates.length === 1 && harness.memoryUpdates[0].won === true,
+      `status=${res.status} won=${body.matchWon} raw=${show({ won: raw.won, result: raw.result })} mem=${show(harness.memoryUpdates.map((m) => m.won))}`);
+    check("route: endScreenResult raw_result_json'a / setup'a yazılmadı", !("endScreenResult" in raw) && !JSON.stringify(raw.setup ?? {}).includes("endScreenResult"));
+  }
+
+  // ══════════════════════════════════════════════════════════════════════
   console.log("\n── [F13] round tarafı + devre arası ──");
   {
     check("crossedHalfSwap: rekabetçi 13 → true, 12 → false; swiftplay 5 → true; spike_rush 4 → true; bilinmeyen → null",
