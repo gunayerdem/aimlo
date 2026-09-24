@@ -17,7 +17,11 @@
  *        lib/entitlements  → checkMatchQuota her zaman izinli
  *        lib/ai-usage      → saveAiUsage çağrıları SAYILIR (OLCUM-ARACI-15)
  *        lib/player-memory → bellek yükleme/yazma sahte; buildMemoryContext
- *                            testin verdiği memoryContext'i döndürür
+ *                            testin verdiği memoryContext'i döndürür; FB01: yazma
+ *                            argümanları harness.memoryUpdates'e kaydedilir
+ * FB01 (F03/F18/F54): harness.db verilirse Supabase PostgREST "analyses" uç noktası bellek
+ *   içi sahte tabloya bağlanır (GET = pre-flight/sahiplik SELECT, POST = INSERT);
+ *   harness.db.failWith verilirse her çağrı o hatayı döner (ör. 401 PGRST303).
  * ⚠ AĞ YOK: globalThis.fetch yalnız testin sahte OpenAI yanıtlarını döndürür;
  * başka her URL THROW eder. OPENAI_API_KEY varsayılan TANIMSIZ (testler kendi
  * sahte değerini koyar); .env.local OKUNMAZ.
@@ -55,6 +59,15 @@ export type UsageCall = Record<string, unknown>;
 export type FetchCall = { url: string; body: Record<string, unknown> };
 export type ModelReply = { content: string; finishReason?: string; usage?: Record<string, unknown>; model?: string; status?: number };
 
+/** FB01: bellek içi "analyses" tablosu (yalnız harness.db verilince). */
+export type FakeDb = {
+  rows: Map<string, Record<string, unknown>>;
+  /** Verilirse HER analyses çağrısı bu PostgREST hatasını döner. */
+  failWith?: { status: number; body: Record<string, unknown> } | null;
+  /** Yapılan çağrılar ("GET" / "POST") — INSERT sayısı için. */
+  calls: string[];
+};
+
 export const harness = {
   auth: { kind: "ok", userId: "00000000-0000-4000-8000-000000000001" } as AuthMode,
   usageCalls: [] as UsageCall[],
@@ -68,7 +81,15 @@ export const harness = {
   dailyReject: null as null | { status: number; body: Record<string, unknown> },
   /** A058-B: verifyAuthAndRateLimit'e route'un geçtiği 3. argüman (deferDaily). */
   verifyOpts: [] as unknown[],
+  /** FB01 · F03: updatePlayerMemory'ye verilen matchData argümanları. */
+  memoryUpdates: [] as Record<string, unknown>[],
+  /** FB01: null → analyses çağrısı eskisi gibi THROW eder. */
+  db: null as FakeDb | null,
 };
+
+export function newFakeDb(): FakeDb {
+  return { rows: new Map(), failWith: null, calls: [] };
+}
 
 export function resetHarness(): void {
   harness.auth = { kind: "ok", userId: "00000000-0000-4000-8000-000000000001" };
@@ -79,11 +100,40 @@ export function resetHarness(): void {
   harness.dailyCalls = 0;
   harness.dailyReject = null;
   harness.verifyOpts = [];
+  harness.memoryUpdates = [];
+  harness.db = null;
+}
+
+/** FB01: sahte PostgREST "analyses" — supabase-js'in gönderdiği GET/POST biçimi. */
+async function fakeAnalyses(url: string, init: unknown): Promise<Response> {
+  const db = harness.db!;
+  const method = ((init as { method?: string } | undefined)?.method ?? "GET").toUpperCase();
+  db.calls.push(method);
+  const json = (body: unknown, status: number) =>
+    new Response(JSON.stringify(body), { status, headers: { "content-type": "application/json" } });
+  if (db.failWith) return json(db.failWith.body, db.failWith.status);
+  if (method === "GET") {
+    const idEq = new URL(url).searchParams.get("id")?.replace(/^eq\./, "");
+    const row = idEq ? db.rows.get(idEq) : undefined;
+    return json(row ? [{ id: row.id }] : [], 200);
+  }
+  if (method === "POST") {
+    const rawBody = (init as { body?: unknown } | undefined)?.body;
+    const payload = JSON.parse(typeof rawBody === "string" ? rawBody : "{}") as Record<string, unknown>;
+    const id = typeof payload.id === "string" ? payload.id : `row-${db.rows.size + 1}`;
+    if (db.rows.has(id)) return json({ code: "23505", message: "duplicate key value violates unique constraint" }, 409);
+    db.rows.set(id, { ...payload, id });
+    return json({ id }, 201);
+  }
+  return json({ message: "harness: desteklenmeyen yöntem" }, 405);
 }
 
 /** Sahte OpenAI uç noktası — route ve eval AYNI fonksiyonu kullanır. */
 export const fakeFetch: typeof fetch = async (input: unknown, init?: unknown) => {
   const url = typeof input === "string" ? input : String((input as { url?: string })?.url ?? input);
+  if (harness.db && url.startsWith(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/analyses`)) {
+    return fakeAnalyses(url, init);
+  }
   if (url !== "https://api.openai.com/v1/chat/completions") {
     throw new Error(`harness: beklenmeyen ağ çağrısı ${url}`);
   }
@@ -151,7 +201,9 @@ export function loadReportRoute(): { POST: (req: Request) => Promise<Response> }
   });
   fakeModule("lib/player-memory", {
     loadPlayerMemory: async () => (harness.memoryContext ? { fake: true } : null),
-    updatePlayerMemory: async () => {},
+    updatePlayerMemory: async (_userId: unknown, matchData: Record<string, unknown>) => {
+      harness.memoryUpdates.push(matchData);
+    },
     buildMemoryContext: () => harness.memoryContext,
   });
 

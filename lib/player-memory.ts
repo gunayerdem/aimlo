@@ -149,7 +149,12 @@ export async function updatePlayerMemory(
   matchData: {
     map: string;
     agent: string;
-    won: boolean;
+    /**
+     * FB01 · F03 (2026-09-24): null = maç sonucu BİLİNMİYOR (bitmemiş maç / beraberlik,
+     * lib/match-outcome.ts). null maç wins/losses'a (dolayısıyla WR paydasına) GİRMEZ;
+     * ölüm konumları ve round sayısı yine birikir (gerçek oynanmış round'lar).
+     */
+    won: boolean | null;
     rounds: Array<{
       deathLocation?: string;
       survived?: boolean;
@@ -200,15 +205,15 @@ export async function updatePlayerMemory(
     if (!memory.mapStats[matchData.map]) {
       memory.mapStats[matchData.map] = { wins: 0, losses: 0 };
     }
-    if (matchData.won) memory.mapStats[matchData.map].wins++;
-    else memory.mapStats[matchData.map].losses++;
+    if (matchData.won === true) memory.mapStats[matchData.map].wins++;
+    else if (matchData.won === false) memory.mapStats[matchData.map].losses++;
 
     // Update agent stats
     if (!memory.agentStats[matchData.agent]) {
       memory.agentStats[matchData.agent] = { wins: 0, losses: 0 };
     }
-    if (matchData.won) memory.agentStats[matchData.agent].wins++;
-    else memory.agentStats[matchData.agent].losses++;
+    if (matchData.won === true) memory.agentStats[matchData.agent].wins++;
+    else if (matchData.won === false) memory.agentStats[matchData.agent].losses++;
 
     // B58 (2026-07-31): ölüm-tipi dağılımını biriktir (maç-içi → cross-match).
     // Yalnız gerçekten ölünen, atlanmayan roundlar; tip yoksa hiçbir şey sayılmaz.

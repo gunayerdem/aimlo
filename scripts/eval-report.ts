@@ -30,7 +30,7 @@
  * (web şekli: üst-seviye score + 8 round — sapmalar index.ts başlığında).
  *
  * RUN:  npx tsx scripts/eval-report.ts          (EVAL_ONLY=<id-öneki> alt küme)
- * OUT:  scripts/eval-out/report-samples.json   (+ konsol özeti)
+ * OUT:  scripts/eval-out/report-samples.json   (+ konsol özeti; EVAL_OUT=<ad>.json ile ad değişir — A/B kolları)
  * Anahtar: OPENAI_API_KEY env ya da .env.local — YALNIZ main() içinde okunur
  * (modülü import eden testler anahtara/ağa dokunmaz).
  */
@@ -71,6 +71,8 @@ export type ReportEvalSample = {
   finish_reason?: string;
   /** false → prod bu durumda deterministik şablonu gösterirdi (parse/şekil/HTTP hatası). */
   aiGenerated?: boolean;
+  /** FB01 · F03: maç sonucu etiketi (WIN/LOSS/DRAW/UNFINISHED) — Score satırına giden değer. */
+  matchResult?: string;
   /** parseReportJSON çıktısı (null = parse edilemedi). */
   raw?: unknown;
   /** Refine ÖNCESİ metin (yalnız refine alanı değiştirdiyse). */
@@ -148,6 +150,7 @@ export async function runReportFixture(
     userBytes: Buffer.byteLength(userPrompt, "utf8"),
     finish_reason: finishReason,
     aiGenerated: report.aiGenerated,
+    matchResult: report.matchResult,
     raw,
     ...(refine.refined ? { preRefine: before } : {}),
     final: pickText(report),
@@ -184,7 +187,7 @@ async function main() {
       results.push(s);
       console.log(s.error
         ? `FAILED: ${s.error}`
-        : `done (sys=${s.sysBytes}b finish=${s.finish_reason} ai=${s.aiGenerated} qc=${s.qc?.score} refined=${s.refined}${s.refined ? `:${s.refinedField}` : ""})`);
+        : `done (sys=${s.sysBytes}b finish=${s.finish_reason} ai=${s.aiGenerated} result=${s.matchResult} qc=${s.qc?.score} refined=${s.refined}${s.refined ? `:${s.refinedField}` : ""})`);
     } catch (e) {
       console.log(`FAILED: ${(e as Error).message}`);
       results.push({ id: fx.id, note: fx.note, error: (e as Error).message });
@@ -192,7 +195,8 @@ async function main() {
   }
   const outDir = path.join(process.cwd(), "scripts", "eval-out");
   fs.mkdirSync(outDir, { recursive: true });
-  fs.writeFileSync(path.join(outDir, "report-samples.json"), JSON.stringify(results, null, 2), "utf8");
+  const outName = /^[\w.-]+\.json$/.test(process.env.EVAL_OUT ?? "") ? process.env.EVAL_OUT! : "report-samples.json";
+  fs.writeFileSync(path.join(outDir, outName), JSON.stringify(results, null, 2), "utf8");
 
   console.log(`\n══════ FINAL REPORT TEXT (prod son-işlem + refine) ══════\n`);
   for (const r of results) {
@@ -202,7 +206,7 @@ async function main() {
   }
   const ok = results.filter((r) => !r.error);
   console.log(`\nÖZET: ${ok.length}/${results.length} örnek · aiGenerated=${ok.filter((r) => r.aiGenerated).length} · finish=stop ${ok.filter((r) => r.finish_reason === "stop").length} · refine denendi ${ok.filter((r) => r.refineAttempted).length} / kabul ${ok.filter((r) => r.refined).length}`);
-  console.log(`\n✅ wrote ${path.join(outDir, "report-samples.json")}\n`);
+  console.log(`\n✅ wrote ${path.join(outDir, outName)}\n`);
 }
 
 if (require.main === module) {

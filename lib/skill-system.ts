@@ -58,7 +58,8 @@ export type SkillRank =
   | "Radiant";
 
 interface MatchInput {
-  won: boolean;
+  /** FB01 · F03: null = sonuç bilinmiyor. Bu modül won'u okumuyor (yalnız tip uyumu). */
+  won: boolean | null;
   rounds: Array<{
     deathLocation?: string;
     survived?: boolean;

@@ -38,7 +38,8 @@ export interface PlaystyleProfile {
 }
 
 interface MatchInput {
-  won: boolean;
+  /** FB01 · F03: null = sonuç bilinmiyor (bitmemiş maç / beraberlik) — WR paydasına girmez. */
+  won: boolean | null;
   agent?: string;
   rounds: Array<{
     deathLocation?: string;
@@ -116,8 +117,12 @@ export function analyzePlaystyle(
   const tradeSuccessRate =
     deaths > 0 ? Math.round((diedAndWon / deaths) * 100) : 50;
 
-  // Win rate
-  const winRate = matches.filter((m) => m.won).length / matches.length;
+  // Win rate — FB01 · F03: yalnız sonucu BİLİNEN maçlar (won true/false); hiç yoksa
+  // eski davranışın nötr karşılığı 0.5 (aşağıdaki "winRate < 0.4" uyarıları tetiklenmez).
+  const decided = matches.filter((m) => m.won === true || m.won === false);
+  const winRate = decided.length > 0
+    ? decided.filter((m) => m.won === true).length / decided.length
+    : 0.5;
 
   // Classification with hysteresis margin
   let archetype: PlaystyleArchetype;

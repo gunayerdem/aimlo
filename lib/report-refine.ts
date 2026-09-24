@@ -16,7 +16,12 @@
  * ama çağrı yapılmaz (eski `apiKey` koşulunun karşılığı).
  */
 import { checkOutputQuality, scoreFields } from "@/evals/generic-detector";
-import { buildReportCleaner, type ReportRequest, type ReportResponse } from "@/lib/report-prompt";
+import {
+  buildReportCleaner,
+  reportOutcome,
+  type ReportRequest,
+  type ReportResponse,
+} from "@/lib/report-prompt";
 // Model id + reasoning_effort TEK KAYNAK (B07 · OLCUM-ARACI-17).
 import { AI_MODEL, AI_REASONING_EFFORT } from "@/lib/ai-model";
 
@@ -123,13 +128,19 @@ export async function maybeRefineReport(
       ? []
       : (rSetup.enemyComp || []).filter((a) => a && a !== "Unknown");
     const refineTr = body.lang !== "en";
+    // FB01 · F03: sonuç kesin değilse refine de "maçı X-Y kaybettin" YAZMASIN (LOG.txt:4538
+    // refine çıktısı tam olarak "Maçı 4-5 kaybettin." ile başlıyordu — 9 round'luk maç).
+    const matchOutcome = reportOutcome(body);
+    const scoreNote = matchOutcome.label === "UNFINISHED"
+      ? " (maç sonucu kesinleşmedi — kazandın/kaybettin yazma)"
+      : matchOutcome.label === "DRAW" ? " (berabere)" : "";
     const refinePrompt = `Bu ${fieldMap[fs.weakest] || fs.weakest} zayıf. Yeniden yaz.
 
 BU MAÇTA ÖLÇÜLEN OLGULAR (TEK gerçek kaynak — dışına çıkma):
 - Harita: ${rSetup.map && rSetup.map !== "Unknown" ? rSetup.map : "OKUNAMADI"}
 - Oyuncunun ajanı: ${rSetup.agent && rSetup.agent !== "Unknown" ? rSetup.agent : "OKUNAMADI"}
 - Taraf: ${rSetup.side === "attack" ? "saldırı" : "savunma"}
-- Skor: ${body.score.yours}-${body.score.enemy}
+- Skor: ${body.score.yours}-${body.score.enemy}${scoreNote}
 - Düşman kadrosu: ${refineEnemies.length > 0 ? refineEnemies.join(", ") : "OKUNAMADI"}
 - Ölüm konumları: ${refineLocs.length > 0 ? refineLocs.join(", ") : "OKUNAMADI"}
 

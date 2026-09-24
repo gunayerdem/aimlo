@@ -15,6 +15,7 @@ import {
   buildReportRequestBody,
   parseReportJSON,
   finalizeReportFields,
+  reportOutcome,
   REPORT_CALL,
   type ReportRequest,
   type ReportResponse,
@@ -114,7 +115,12 @@ async function persistAnalysis(
       agent: body.setup.agent,
       side: body.setup.side,
       score: report.scoreStr,
+      // FB01 · F03: null = sonuç bilinmiyor (UNFINISHED/DRAW) — jsonb, migration gerekmez.
+      // `result` null'ın hangisi olduğunu ayırır (masaüstü FD01 nötr rozeti için).
       won: report.matchWon,
+      result: report.matchResult,
+      ...(body.matchComplete !== undefined ? { matchComplete: body.matchComplete } : {}),
+      ...(body.endReason ? { endReason: body.endReason } : {}),
       winPct: report.winPct,
       roundsWon: report.won,
       roundsLost: report.lost,
@@ -393,8 +399,9 @@ export async function POST(request: NextRequest) {
     // Update player memory with match data
     try {
       if (userId) {
-        const { setup, rounds, score } = validation.data;
-        const matchWon = Number(score.yours) > Number(score.enemy);
+        const { setup, rounds } = validation.data;
+        // FB01 · F03: sonuç TEK kaynaktan; null (UNFINISHED/DRAW) → wins/losses ARTMAZ.
+        const matchWon = reportOutcome(validation.data).won;
         await updatePlayerMemory(userId, {
           map: setup?.map || "",
           agent: setup?.agent || "",

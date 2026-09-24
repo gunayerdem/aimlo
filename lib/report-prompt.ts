@@ -37,6 +37,14 @@ import { realityCheck, buildFactGround, type FactGround } from "@/lib/reality-ch
 import { VISION_ENEMY_ITEM_CAP } from "@/lib/vision-postprocess";
 import { isUuidV4 } from "@/lib/uuid";
 import { pickReportScore, sanitizeReportInput } from "@/lib/report-score";
+// FB01 (F03): maç sonucu TEK KAYNAK (masaüstü tablosunun aynası).
+import {
+  deriveMatchOutcome,
+  parseMatchEndReason,
+  type MatchEndReason,
+  type MatchOutcome,
+  type MatchOutcomeLabel,
+} from "@/lib/match-outcome";
 // Model id + reasoning_effort TEK KAYNAK (B07 · OLCUM-ARACI-17).
 import { AI_MODEL, AI_REASONING_EFFORT } from "@/lib/ai-model";
 import type { RoundData as EngineRoundData } from "@/types";
@@ -96,6 +104,14 @@ export type ReportRequest = {
    * UI does its own client-side INSERT and leaves this `false`/undef.
    */
   persistOnServer?: boolean;
+  /**
+   * FB01 · F03 (2026-09-24) — masaüstü FD01 additive: maç GERÇEKTEN bitti mi?
+   * false → sonuç UNFINISHED (won=null). Yoksa (v1.0.19) lib/match-outcome.ts
+   * mod + terminal-skor kuralına düşer.
+   */
+  matchComplete?: boolean;
+  /** FB01 · F03: finalize nedeni (MATCH_END_REASONS); yalnız kayda geçer, sonucu etkilemez. */
+  endReason?: MatchEndReason;
 };
 
 export type ReportResponse = {
@@ -112,7 +128,14 @@ export type ReportResponse = {
   total: number;
   winPct: number;
   scoreStr: string;
-  matchWon: boolean;
+  /**
+   * FB01 · F03 (2026-09-24): null = sonuç BİLİNMİYOR (maç bitmedi ya da berabere).
+   * Tüketiciler null'ı galibiyet/mağlubiyet saymaz (player_memory, WR). Masaüstü
+   * MatchReport serde'si bu alanı hiç okumaz (ai_client.rs MatchReport) — null güvenli.
+   */
+  matchWon: boolean | null;
+  /** FB01 · F03: sonuç etiketi (WIN/LOSS/DRAW/UNFINISHED) — null'ın hangi "bilinmiyor" olduğunu ayırır. Additive. */
+  matchResult: MatchOutcomeLabel;
   /** Set when `persistOnServer` was true and the row was inserted (or already present). */
   savedAnalysisId?: string;
   /**
@@ -307,6 +330,14 @@ export function validateRequest(
   // queue can rely on a single source of truth.
   const persistOnServer = b.persistOnServer === true;
 
+  // FB01 · F03 (FD01 sözleşmesi, additive): yalnız GERÇEK boolean kabul edilir —
+  // "false" dizesi / 0 gibi değerler yok sayılır (alan yokmuş gibi = v1.0.19 davranışı).
+  const matchComplete = typeof b.matchComplete === "boolean" ? b.matchComplete : undefined;
+  const endReason = parseMatchEndReason(b.endReason);
+  if (b.endReason !== undefined && !endReason) {
+    console.log("[Aimlo] report endReason tanınmadı → yok sayıldı");
+  }
+
   // Skor-delta ile unknown round çözümleme (2026-07-09): round snapshot'larından
   // sonuç TÜRETİLEBİLİYORSA türet; belirsizse "unknown" bırak (asla uydurma).
   resolveUnknownResults(rounds);
@@ -339,8 +370,25 @@ export function validateRequest(
       score: { yours, enemy },
       matchId,
       persistOnServer,
+      // Yalnız gönderildiyse anahtar oluşur (eski gövdeler için data nesnesi bayt-aynı).
+      ...(matchComplete !== undefined ? { matchComplete } : {}),
+      ...(endReason ? { endReason } : {}),
     },
   };
+}
+
+/* ══════════════════════════════════════════════════════════
+   MAÇ SONUCU — FB01 (F03, 2026-09-24)
+   ══════════════════════════════════════════════════════════ */
+
+/** Doğrulanmış gövdenin maç sonucu — deterministik şablon, prompt, route AYNI çağrı. */
+export function reportOutcome(body: ReportRequest): MatchOutcome {
+  return deriveMatchOutcome({
+    yours: body.score.yours,
+    enemy: body.score.enemy,
+    matchComplete: body.matchComplete,
+    mode: body.setup.mode,
+  });
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -528,7 +576,9 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
       ? "Attack"
       : "Defense";
   const scoreStr = `${score.yours} - ${score.enemy}`;
-  const matchWon = Number(score.yours) > Number(score.enemy);
+  // FB01 · F03: sonuç TEK kaynaktan (lib/match-outcome.ts) — null = bilinmiyor.
+  const outcome = reportOutcome(body);
+  const matchWon = outcome.won;
   const allNotes = nonSkipped
     .map((r) => (r.yourNote || "").toLowerCase())
     .join(" ");
@@ -552,9 +602,11 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
   const mapLabel = setup.map === "Unknown" ? (isTr ? "Bilinmeyen harita" : "Unknown map") : setup.map;
   const agentLabel = setup.agent === "Unknown" ? (isTr ? "bilinmeyen ajan" : "unknown agent") : setup.agent;
   const unreadNote = unknownCount > 0 ? (isTr ? ` (${unknownCount} round okunamadı)` : ` (${unknownCount} unread)`) : "";
+  // F03: sonuç kesinleşmediyse skor "final" gibi sunulmaz.
+  const scoreNote = outcome.label === "UNFINISHED" ? (isTr ? " (sonuç kesinleşmedi)" : " (result not confirmed)") : "";
   const summary = isTr
-    ? `${mapLabel} — ${agentLabel}, ${sideLabel}. Skor: ${scoreStr}. ${total} round, ${won}W/${lost}L${unreadNote}.${survivedText} ${topDeathLoc !== "N/A" ? `${trLocative(topDeathLoc)} ${topDeathCount}x ölüm — bu pozisyon okunuyor.` : ""} Ort. düşman temas: ${avgEnemy} kişi.`
-    : `${mapLabel} — ${agentLabel}, ${sideLabel}. Score: ${scoreStr}. ${total} rounds, ${won}W/${lost}L${unreadNote}.${survivedText} ${topDeathLoc !== "N/A" ? `${topDeathCount}x death at ${topDeathLoc} — this position is being read.` : ""} Avg enemy contact: ${avgEnemy}.`;
+    ? `${mapLabel} — ${agentLabel}, ${sideLabel}. Skor: ${scoreStr}${scoreNote}. ${total} round, ${won}W/${lost}L${unreadNote}.${survivedText} ${topDeathLoc !== "N/A" ? `${trLocative(topDeathLoc)} ${topDeathCount}x ölüm — bu pozisyon okunuyor.` : ""} Ort. düşman temas: ${avgEnemy} kişi.`
+    : `${mapLabel} — ${agentLabel}, ${sideLabel}. Score: ${scoreStr}${scoreNote}. ${total} rounds, ${won}W/${lost}L${unreadNote}.${survivedText} ${topDeathLoc !== "N/A" ? `${topDeathCount}x death at ${topDeathLoc} — this position is being read.` : ""} Avg enemy contact: ${avgEnemy}.`;
   let mistake: string;
   if (topDeathCount >= 3) {
     mistake = isTr
@@ -622,8 +674,9 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
   // BERABERLİK (W2 followup #94): matchWon yalnız `yours > enemy`; eşit skorda (ör. 4-4)
   // eskiden "Skoru 4 - 4 geride kapattın" deniyordu — ölçülen skorla çelişen olgu.
   // Eşitlikte nötr cümle; matchWon ALANI (sözleşme) değişmedi.
-  const matchTied = Number(score.yours) === Number(score.enemy);
-  const pressureSentence = matchWon
+  // FB01 · F03: sonuç artık lib/match-outcome.ts'ten; "berabere bitti" yalnız DRAW'da,
+  // UNFINISHED'da (maç bitmedi / defter donmuş olabilir) skor final gibi sunulmaz.
+  const pressureSentence = matchWon === true
     ? isTr
       ? ` Skoru ${scoreStr} önde kapattın.`
       : ` You closed the match ahead at ${scoreStr}.`
@@ -631,18 +684,24 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
       ? isTr
         ? ` ${topDeathLoc !== "N/A" ? `${trLocative(topDeathLoc)} ` : ""}ortalama ${avgEnemy} kişiyle, yani sayısal üstünlükle temas kurdular.`
         : ` They engaged ${topDeathLoc !== "N/A" ? `at ${topDeathLoc} ` : ""}with ${avgEnemy} players on average — a numbers advantage.`
-      : matchTied
+      : outcome.label === "UNFINISHED"
         ? isTr
-          ? ` Skor ${scoreStr} berabere bitti.`
-          : ` The match ended level at ${scoreStr}.`
-        : isTr
-          ? ` Skoru ${scoreStr} geride kapattın.`
-          : ` You closed the match behind at ${scoreStr}.`;
+          ? ` Kayıttaki son skor ${scoreStr}; maçın sonucu kesinleşmedi.`
+          : ` The last recorded score was ${scoreStr}; the match result isn't confirmed.`
+        : outcome.label === "DRAW"
+          ? isTr
+            ? ` Skor ${scoreStr} berabere bitti.`
+            : ` The match ended level at ${scoreStr}.`
+          : isTr
+            ? ` Skoru ${scoreStr} geride kapattın.`
+            : ` You closed the match behind at ${scoreStr}.`;
   // Boş kadro cümlesi ("") baştaki boşluğu öksüz bırakmasın.
   const tendencies = `${groupsSentence}${duelistSentence}${pressureSentence}`.trim();
+  // FB01 · F03: sonuç bilinmiyorsa (null) kayıp-dalının "retake/trade" dersine değil
+  // sonuçtan bağımsız cümleye düşer.
   const adjustment = isTr
-    ? `${topDeathLoc !== "N/A" ? `${topDeathLoc} yerine off-angle'lardan oyna — bu açı okunuyor. ` : ""}${setup.agent} utility'sini retake/info için sakla, erken harcama. ${matchWon ? "Pozisyon çeşitliliğini artır — aynı setup 2 round üst üste kullanma." : "Retake pozisyonlarına erken geç, site anchor'ını trade destekli kur."}`
-    : `${topDeathLoc !== "N/A" ? `Play off-angles instead of ${topDeathLoc} — this angle is being read. ` : ""}Save ${setup.agent} utility for retake/info, don't use early. ${matchWon ? "Increase positional variety — don't repeat same setup 2 rounds in a row." : "Set up retake positions early, anchor site with trade support."}`;
+    ? `${topDeathLoc !== "N/A" ? `${topDeathLoc} yerine off-angle'lardan oyna — bu açı okunuyor. ` : ""}${setup.agent} utility'sini retake/info için sakla, erken harcama. ${matchWon !== false ? "Pozisyon çeşitliliğini artır — aynı setup 2 round üst üste kullanma." : "Retake pozisyonlarına erken geç, site anchor'ını trade destekli kur."}`
+    : `${topDeathLoc !== "N/A" ? `Play off-angles instead of ${topDeathLoc} — this angle is being read. ` : ""}Save ${setup.agent} utility for retake/info, don't use early. ${matchWon !== false ? "Increase positional variety — don't repeat same setup 2 rounds in a row." : "Set up retake positions early, anchor site with trade support."}`;
 
   // Best round — find a won round where player survived
   const bestRoundData = nonSkipped.find((r) => r.result === "win" && r.survived);
@@ -692,10 +751,30 @@ export function generateDeterministicReport(body: ReportRequest): ReportResponse
     winPct,
     scoreStr,
     matchWon,
+    matchResult: outcome.label,
     // B34 (2026-07-31): bu fonksiyonun ÜRETTİĞİ metin daima deterministik
     // şablondur. generateAIReport başarılı olursa bu bayrağı true'ya çevirir.
     aiGenerated: false,
   };
+}
+
+/**
+ * FB01 · F03 (2026-09-24) — SONUÇ ETİKETİ SIZINTISI. Score satırındaki "(UNFINISHED)"
+ * etiketi (maç sonucu kesinleşmedi) TR raporlara İngilizce veri etiketi olarak sızdı:
+ * ücretli A/B (FB01, gpt-5-mini) R4 TR summary 3/3 tekrarda "skor 9-4 (unfinished)" /
+ * "(UNFINISHED)" / "maç UNFINISHED" — kural 12'deki açık yasak + TR kalıp önerisi TR'de
+ * işe yaramadı (EN'de 0/3). Veri-etiketi süzgeci sınıfı (canlı-test #15): yalnız bu
+ * etiket, parantezli her büyüklükte ya da çıplak BÜYÜK HARF. Yanlış-pozitif ölçümü:
+ * scripts/eval-out/*-samples.json (vision + rapor) içinde "unfinished" 0 geçiş.
+ * Temiz metinde bayt-aynı döner.
+ */
+const OUTCOME_LABEL_PAREN_RE = /\(\s*unfinished\s*\)/gi;
+const OUTCOME_LABEL_BARE_RE = /(?<![\p{L}\d_])UNFINISHED(?![\p{L}\d_])/gu;
+export function relabelOutcomeLeak(s: string, lang: "tr" | "en"): string {
+  if (typeof s !== "string" || !/unfinished/i.test(s)) return s;
+  return s
+    .replace(OUTCOME_LABEL_PAREN_RE, lang === "en" ? "(result not confirmed)" : "(sonuç kesinleşmedi)")
+    .replace(OUTCOME_LABEL_BARE_RE, lang === "en" ? "unconfirmed" : "sonucu kesinleşmemiş");
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -794,7 +873,7 @@ export function buildReportCleaner(
   // düşürürse) alan BOŞ dönmez; UYDURMA da dönmez — ölçülen veriden türetilmiş
   // deterministik `stats` karşılığı korunur (no-fake sözleşmesi).
   return (s: string, cap: number, fallback: string) =>
-    finalizeCoachText(s, {
+    finalizeCoachText(relabelOutcomeLeak(s, lang), {
       lang,
       cap,
       fallback,
@@ -841,6 +920,8 @@ export function buildReportPrompts(
   const { setup, rounds, lang, score } = body;
   const isTr = lang === "tr";
   const memoryContext = opts.memoryContext;
+  // FB01 · F03: maç sonucu TEK kaynaktan (Score satırı, engine girdisi, prompt kuralı).
+  const outcome = reportOutcome(body);
 
   // Build round summary — truncated, sanitized, enriched with per-round AI feedback
   const safeRounds = (rounds || []).filter(
@@ -951,6 +1032,17 @@ export function buildReportPrompts(
     : `
 11. 🔒 DÜŞMAN KADROSU OKUNAMADI: hiçbir düşman ajan adı yazma ("Sova bilgi aldı" gibi cümleler YASAK) — "bir düşman"/"rakip" de. Dersi konum + silah + side + karar üzerinden ver.`;
 
+  // FB01 · F03: sonuç kesin değilse (UNFINISHED) ya da berabereyse model sonucu UYDURMASIN.
+  // KANIT: LOG.txt:4538 (9 round, elle bitirme) "Maçı 4-5 kaybettin"; 01.txt:5567 "Maçı 9-4
+  // kazandın" — ikisi de gerçek maç sonu değil. WIN/LOSS'ta prompt bayt-aynı.
+  const outcomeRule = outcome.label === "UNFINISHED"
+    ? `
+12. ⏸ MAÇ SONUCU KESİN DEĞİL (Score satırı UNFINISHED): maçın sonucunu yazma — "kazandın", "kaybettin", "maçı X-Y kazandın/kaybettin/kapattın" gibi cümleler YASAK (uydurma = RED BAYRAĞI). Skoru yalnız ${isTr ? `"kayıttaki son skor X-Y (sonuç kesinleşmedi)"` : `"last recorded score X-Y (result not confirmed)"`} biçiminde anabilirsin; "UNFINISHED" bir veri etiketidir, metne yazma. Yalnız oynanan round'ları koçla.`
+    : outcome.label === "DRAW"
+      ? `
+12. ⚖ MAÇ BERABERE BİTTİ (Score satırı DRAW): "kazandın"/"kaybettin" yazma — sonuç beraberlik; "DRAW" veri etiketini metne yazma.`
+      : "";
+
   const systemPrompt = `${knowledgePart}Sen AIMLO'sun: Radiant seviye gerçek bir Valorant koçusun. VCT analisti gibi konuş, empatik değil — keskin ve spesifik.
 
 DİL — ZORUNLU:
@@ -984,7 +1076,7 @@ KURALLAR (HER BİRİ RED BAYRAĞI)
 7. MİKRO-POZİSYON ZORUNLU: "A Short", "B Main entry", "Generator off-angle" — "site" veya "mid" tek başına KABUL EDİLMEZ.
 8. Her round feedback'inde deathAnalysis/coachInsight varsa BUNLARA referans ver. Mesela 3 round'da "Cypher operator B Short" pattern'i tekrarlıyorsa mistake alanında bunu vurgula.
 9. ⚔ SIDE'a göre koçla (userPrompt'taki "Side" alanı). attack=SALDIRI (oyuncu giriyor → entry/execute/trade/space/lurk/post-plant dili; hata: solo dry entry, trade'siz peek, util'siz geçiş), defense=SAVUNMA (oyuncu tutuyor → açı tut/off-angle/crossfire/retake/save/rotate dili; hata: tek açıyı geniş peek, trade'siz over-peek, kayıp round'da save etmemek). mistake/adjustment/tendencies bu side'ın diliyle olmalı — savunma maçında "entry açmadın" yazmak, saldırı maçında "açıyı tutmadın" yazmak = RED BAYRAĞI.${setup.map === "Unknown" ? `
-10. ⚠ HARİTA OKUNAMADI (Unknown): Bu maçta harita tespit edilemedi. RULE 7'nin mikro-pozisyon ZORUNLULUĞU bu maçta GEÇERSİZ — callout/yer adı UYDURMA ("A Short", "B Main", "Mid" YASAK). Yalnız OCR'ın gönderdiği gerçek deathLocation'ları kullanabilirsin; onların dışında yer adı yazma. Dersi ajan + silah + side + karar (trade/util-sırası/timing/ekonomi) üzerinden ver — bunlar harita olmadan da spesifik ve doğrudur.` : ""}${rosterRule}
+10. ⚠ HARİTA OKUNAMADI (Unknown): Bu maçta harita tespit edilemedi. RULE 7'nin mikro-pozisyon ZORUNLULUĞU bu maçta GEÇERSİZ — callout/yer adı UYDURMA ("A Short", "B Main", "Mid" YASAK). Yalnız OCR'ın gönderdiği gerçek deathLocation'ları kullanabilirsin; onların dışında yer adı yazma. Dersi ajan + silah + side + karar (trade/util-sırası/timing/ekonomi) üzerinden ver — bunlar harita olmadan da spesifik ve doğrudur.` : ""}${rosterRule}${outcomeRule}
 
 ⚠ VERİ-ETİKETİ YASAK (canlı-test #15): Sana gelen JSON alan adları (ultReady, deathTiming, killerInfo, deathLocation, economyType, enemyComp, spikePlanted...) VERİ ETİKETİDİR, koç dili değil — çıktı cümlesinde ASLA geçmez. Olguyu doğal dille söyle: ${isTr ? '"ultReady varken" DEĞİL "ultin doluyken"; "deathTiming late" DEĞİL "round sonunda".' : '"with ultReady" is WRONG — say "with your ult up"; "deathTiming late" is WRONG — say "late in the round".'}
 
@@ -1033,7 +1125,7 @@ DÜŞMAN MODELİ (ZORUNLU)
 ═══════════════════════════════════════════════
 RAPOR ALANLARI
 ═══════════════════════════════════════════════
-- summary: Neden kazanıldı/kaybedildi (1 keskin cümle) + skor, hayatta kalma %, öne çıkan pattern. Spesifik round ve pozisyon referansı ver.
+- summary: ${outcome.label === "UNFINISHED" ? "Oynanan round'ların özü (1 keskin cümle, maç sonucu YOK) + kayıttaki son skor" : outcome.label === "DRAW" ? "Beraberliğe giden neden (1 keskin cümle) + skor" : "Neden kazanıldı/kaybedildi (1 keskin cümle) + skor"}, hayatta kalma %, öne çıkan pattern. Spesifik round ve pozisyon referansı ver.
 - mistake: Top 3 tekrarlayan hata. Her hata round numarası içermeli (R4, R7, R11). Aggregated pattern'leri kullan (top killers, top death locations). Taktiksel neden + spesifik çözüm.
 - tendencies: Düşman pattern özeti. Ajan bazlı analiz. Round referansları ile göster.
 - adjustment: 2+ spesifik pozisyon/utility/rotasyon değişikliği. Harita callout'ları ve ajan ability isimleri kullan.
@@ -1043,7 +1135,7 @@ RAPOR ALANLARI
 ${isTr ? "Türkçe yaz." : "Write in English."}
 Return ONLY valid JSON with exactly these 6 string fields:
 {
-  "summary": "neden kazanıldı/kaybedildi + veriler",
+  "summary": "${outcome.label === "UNFINISHED" ? "oynanan round'ların özü + veriler (maç sonucu yok)" : outcome.label === "DRAW" ? "beraberliğin nedeni + veriler" : "neden kazanıldı/kaybedildi + veriler"}",
   "mistake": "top 3 hata + round referansları",
   "tendencies": "düşman pattern özeti",
   "adjustment": "spesifik değişiklikler (min 2 varyasyon)",
@@ -1077,7 +1169,8 @@ ${allCoachInsights.length > 0 ? `\n═══════════════
 `;
 
   // Calculate player scoring
-  const matchWon = Number(score.yours) > Number(score.enemy);
+  // FB01 · F03: null = sonuç bilinmiyor (improvement-plan WR'ye katmaz; scoring won okumaz).
+  const matchWon = outcome.won;
   const playerScore = calculatePlayerScore(
     [{ won: matchWon, rounds: engineSafe.map(r => ({ ...r, feedback: null })) }] as Parameters<typeof calculatePlayerScore>[0],
     engineSafe.map(r => ({ ...r, feedback: null })) as Parameters<typeof calculatePlayerScore>[1],
@@ -1109,7 +1202,7 @@ ${memoryContext}
   // küçük-harf 'unknown'u TR metne sızdırıyordu (canlı vaka: "Reyna ya da
   // unknown kafadan öldürdü"). Mode display formunda (Spike Rush, snake_case değil).
   const userPrompt = `Map: ${setup.map}, Agent: ${setup.agent}, Side: ${sideLabelForPrompt}${setup.rank ? `, Rank: ${setup.rank}` : ""}${setup.mode ? `, Mode: ${formatMode(setup.mode, "en")}` : ""}
-Score: ${score.yours}-${score.enemy} (${Number(score.yours) > Number(score.enemy) ? "WIN" : "LOSS"})
+Score: ${score.yours}-${score.enemy} (${outcome.label})
 Team: ${(setup.teamComp || []).join(",")}${setup.unknownEnemyComp ? "" : ` vs Enemy: ${(setup.enemyComp || []).join(",")}`}
 Rounds:\n${roundSummary}
 ${insightContext}

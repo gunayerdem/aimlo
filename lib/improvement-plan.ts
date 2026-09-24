@@ -30,7 +30,8 @@ export interface ImprovementPlan {
 }
 
 interface MatchInput {
-  won: boolean;
+  /** FB01 · F03: null = sonuç bilinmiyor (bitmemiş maç / beraberlik) — harita WR'sine girmez. */
+  won: boolean | null;
   map?: string;
   agent?: string;
   rounds: Array<{
@@ -139,8 +140,8 @@ export function generateImprovementPlan(
   matches.forEach((m) => {
     if (!m.map) return;
     if (!mapStats[m.map]) mapStats[m.map] = { w: 0, l: 0 };
-    if (m.won) mapStats[m.map].w++;
-    else mapStats[m.map].l++;
+    if (m.won === true) mapStats[m.map].w++;
+    else if (m.won === false) mapStats[m.map].l++;
   });
   Object.entries(mapStats)
     .filter(([, s]) => s.w + s.l >= 2 && s.w / (s.w + s.l) < 0.3)

@@ -166,8 +166,11 @@ async function main() {
       `score=${show(fx.body.score)} n=${rs.length}`);
     const v = validated(fx);
     const { userPrompt } = buildReportPrompts(v, { memoryContext: fx.memoryContext });
-    check(`${id}: skor round'lardan seçildi (A058 yolu) — son round R13 '9 - 4' → 'Score: 9-4 (WIN)'`,
-      v.score.yours === "9" && v.score.enemy === "4" && userPrompt.includes("Score: 9-4 (WIN)"), `${v.score.yours}-${v.score.enemy}`);
+    // FB01 · F03: bu fixture aimlo-runtime 01.txt'nin KENDİSİ (elle bitirilen rekabetçi maç,
+    // defter 9-4'te donmuş; canlı rapor "Maçı 9-4 kazandın" diyordu). matchComplete yok +
+    // rekabetçi + 9-4 terminal değil → UNFINISHED (eskiden "(WIN)").
+    check(`${id}: skor round'lardan seçildi (A058 yolu) — son round R13 '9 - 4' → 'Score: 9-4 (UNFINISHED)' (F03)`,
+      v.score.yours === "9" && v.score.enemy === "4" && userPrompt.includes("Score: 9-4 (UNFINISHED)"), `${v.score.yours}-${v.score.enemy}`);
   }
   for (const fx of REPORT_FIXTURES) {
     const v = validateRequest(fx.body);
