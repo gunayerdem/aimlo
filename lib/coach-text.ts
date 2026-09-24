@@ -13,8 +13,8 @@
 // fixTurkishApostrophe are imported from ability-plain-map (both exported there).
 import { plainifyAbilities, fixTurkishApostrophe } from "@/lib/ability-plain-map";
 // finalizeCoachText (denetim B82, 2026-07-31) — 4 route'un temizleyici zincirini
-// tek yerde toplayan yardımcı için. Döngüsel import YOK (agent-abilities hiçbir
-// şey import etmez). reality-checker BİLEREK import EDİLMEDİ: app/page.tsx bir
+// tek yerde toplayan yardımcı için. Döngüsel import YOK (agent-abilities yalnız
+// sıfır-import prompt-safety'yi import eder, REV-W3). reality-checker BİLEREK import EDİLMEDİ: app/page.tsx bir
 // "use client" bileşeni ve bu dosyadan trLocative alıyor — 48 KB'lık
 // reality-checker'ı statik bağlamak landing bundle'ına girme riski taşır.
 // Onun yerine realityCheck halkası çağrı-yerinden ENJEKTE edilir (opts.check).

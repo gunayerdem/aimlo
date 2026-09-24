@@ -9,6 +9,7 @@ import path from "path";
 // Seçici uyarıları istemci dizesini basıyor (agent/map/enemyComp) → log forging
 // kapısı (W2 inceleme RW1-F2). Yaprak modül; sıradan değer bayt-aynı basılır.
 import { logSafe } from "./log-safe";
+import { safePromptName } from "./prompt-safety";
 
 const KNOWLEDGE_DIR = path.join(process.cwd(), "knowledge");
 
@@ -180,10 +181,11 @@ function getRankFile(rank: string | undefined | null): string {
  * tr-cards/posters, eval senaryoları, runtime logları; "KAY/O" ve küçük harfli OCR biçimleri
  * dahil) HEPSİ bu biçimde (ölçüldü). Değilse başlığa eşleşen dosyanın slug'ı yazılır: blok
  * yine yüklenir (koçluk kaybı yok), yalnız ham dize sistem mesajına girmez.
+ * REV-W3 (2026-09-24): kural TEK KAYNAK lib/prompt-safety.ts safePromptName — aynı ham ad
+ * agent-abilities buildAgentAbilityHint'te ("SENİN KİTİN (…)") de sistem mesajına giriyordu.
  */
-const KB_HEADER_NAME_RE = /^[A-Za-z0-9][A-Za-z0-9 './-]{0,39}$/;
 export function kbHeaderName(raw: string, slug: string): string {
-  return KB_HEADER_NAME_RE.test(raw) ? raw : slug;
+  return safePromptName(raw, slug);
 }
 
 /**

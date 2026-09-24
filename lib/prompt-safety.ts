@@ -104,3 +104,23 @@ export function sanitizeJsonStrings<T>(value: T, opts: SanitizeOpts = {}, depth 
   }
   return value;
 }
+
+/**
+ * SİSTEM MESAJINDA ETİKET OLARAK GEÇEN AD (W3 followup #3 + REV-W3 inceleme, 2026-09-24).
+ * İstemcinin map/agent dizesi sistem mesajına bir ETİKET olarak girer: KB blok başlığı
+ * ("[AGENT BİLGİSİ — …]", lib/knowledge-loader.ts kbHeaderName) ve kit satırı
+ * ("SENİN KİTİN (…)", lib/agent-abilities.ts buildAgentAbilityHint). Dosya/sözlük eşleşmesi
+ * slug'la yapılır ([a-z0-9] dışı atılır) → slug'ı bozmayan satır sonu, köşeli parantez,
+ * Kiril / tam-genişlik harf eşleşmeyi bozmadan etikete taşınıyordu (ölçüldü).
+ * KURAL: ad güvenli ASCII biçimindeyse (harf/rakamla başlar; harf, rakam, boşluk, ' . / -;
+ * ≤40 kr) BAYT-AYNI döner — gerçek korpusların 57 farklı map/agent değerinin HEPSİ bu
+ * biçimde (ölçüldü, 631f510). Değilse `fallback` döner: çağıran, eşleşen dosyanın slug'ını
+ * ya da sözlüğün KANONİK anahtarını verir. Neden sanitizePromptInput değil: o, satır sonunu
+ * ve Kiril / tam-genişlik metni geçirir; etiket yerinde ad dışında hiçbir şeye gerek yok.
+ * Bu dosya sıfır-import: agent-abilities coach-text üzerinden app/page.tsx ("use client")
+ * paketine giriyor (coach-text.ts:17-21) — kural fs'li knowledge-loader'da kalamazdı.
+ */
+const SAFE_PROMPT_NAME_RE = /^[A-Za-z0-9][A-Za-z0-9 './-]{0,39}$/;
+export function safePromptName(raw: string, fallback: string): string {
+  return SAFE_PROMPT_NAME_RE.test(raw) ? raw : fallback;
+}
