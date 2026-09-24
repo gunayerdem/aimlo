@@ -101,6 +101,10 @@ export interface FactGround {
   // buildFactGround bu alanı SET ETMEZ) bayt-aynı. Yalnız vision route, isteğin
   // agent alanı boş/Unknown olduğunda bayrağı false'a çeker.
   playerAgentKnown?: boolean;
+  // W1 followup #51 (2026-09-24): oyuncunun OKUNMUŞ ajanı (resmî yazımla; bilinmiyorsa
+  // undefined). Katil-guard STEP2 "<oyuncunun ajanı> olarak" öbeğini katil sanmasın diye
+  // (bkz. guardUnprovenFacts STEP2). Yalnız vision kurucusu set eder → rapor yolu bayt-aynı.
+  playerAgent?: string;
   // Masaüstünün OCR ile ölçtüğü ölüm yeri/yerleri (varsa). stripForeignCallouts
   // bunu HER ZAMAN meşru sayar — tablo eksik olsa bile ölçülen konumu silmez.
   // Vision route TEK round → string; report route TÜM round'ların konumları → string[]
@@ -1337,7 +1341,21 @@ export function guardUnprovenFacts(
     // kalanı verbatim kalır — eski m.slice(m.indexOf(mid)) hilesi "The " tüketilince
     // ilk boşluğu "The"nin içinde bulup katil adını geri sızdırıyordu.
     const SINGLE = new RegExp(`${NLB}${THE}${KILLER_TOKEN}\\b(?=[^.!?;:—\\n]*?\\s${KV2}${NL})`, "gi");
-    result = result.replace(SINGLE, AN_ENEMY);
+    // OYUNCU-KENDİ-AJANI MUAFİYETİ (W1 followup #51, W2 inceleme M1-R18): "<oyuncunun
+    // ajanı> olarak" öbeği ("Jett olarak orada beklerken vuruldun" = oyuncu Jett'le
+    // bekliyordu) KATİL İDDİASI DEĞİL; aynı yan-cümlede ölüm fiili geçtiği için STEP2
+    // onu "bir düşman olarak" diye bozuyordu. Ölçüm: scripts/eval-out 1075 örnek zincir
+    // çıktısında 15 tekil "bir düşman olarak" bozuğu, hepsi oyuncu = Jett olan gerçek
+    // korpus (M1-*-ascent-jett). Muafiyet DAR: yalnız OKUNMUŞ oyuncu ajanı
+    // (factGround.playerAgent) + hemen ardından "olarak". Başka ajan + "olarak" ve
+    // "Jett seni vurdu" gibi katil cümleleri eskisi gibi indirilir.
+    const selfAgent = (factGround.playerAgent ?? "").toLowerCase();
+    result = result.replace(SINGLE, (m: string, off: number, full: string) =>
+      selfAgent
+        && m.replace(/^the\s+/i, "").toLowerCase() === selfAgent
+        && /^\s+olarak(?![a-zçğıöşüâîû])/i.test(full.slice(off + m.length))
+        ? m
+        : AN_ENEMY);
     // STEP3: kalan stray "unknown"/"bilinmeyen" → genel-düşman
     result = result.replace(new RegExp(`${NLB}(?:unknown|bilinmeyen)${NL}`, "gi"), AN_ENEMY);
     // STEP4: "bir düşman ya da bir düşman" / "an enemy or an enemy" run'larını tek'e çökert

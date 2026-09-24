@@ -164,5 +164,27 @@ console.log("\n[7] B02 İNCELEME — katil hedge'i BİTİŞİK yan-cümlede / ç
   }
 }
 
+// ── W1 followup #51: katil bilinmiyorken OYUNCUNUN KENDİ ajanı "X olarak" ─────
+// Gerçek korpus (cyclereal-r3 M1-R18, oyuncu Jett, killerInfo yok) BİREBİR:
+// "…pozisyonda Jett olarak orada beklerken rakip seni öldürdü" → STEP2 "bir düşman
+// olarak" bozuğu üretiyordu (1075 örnekte 15 tekil). Muafiyet yalnız okunmuş oyuncu
+// ajanı + "olarak"; katil iddiası ve başka ajan eskisi gibi iner.
+console.log("\n[#51] oyuncunun kendi ajanı 'X olarak' katil sayılmaz (katil bilinmiyor)");
+{
+  const fgSelf = (agent?: string) => ({ ...buildFactGround({ died: true }, {}), playerAgentKnown: !!agent, playerAgent: agent }) as never;
+  const rc = (s: string, agent?: string) => realityCheck(s, [] as never, fgSelf(agent), "death", "tr", "Ascent").text;
+  const m1r18 = "Mid Link'te aynı açık açıda durup savunmayı tek bir hatta tutmuşsun; geniş savunma açısı tutma pozisyonda Jett olarak orada beklerken rakip seni öldürdü.";
+  const o1 = rc(m1r18, "Jett");
+  t("gerçek M1-R18: 'Jett olarak' korunur, 'bir düşman olarak' bozuğu YOK", /Jett olarak orada beklerken/.test(o1) && !/bir düşman olarak/i.test(o1), `→ "${o1}"`);
+  const o2 = rc("Jett olarak orada bekleyip vuruldun.", "Jett");
+  t("cümle başı 'Jett olarak … vuruldun' korunur", o2 === "Jett olarak orada bekleyip vuruldun.", `→ "${o2}"`);
+  const o3 = rc("Jett seni A Main'de vurdu.", "Jett");
+  t("katil iddiası ('Jett seni vurdu') oyuncu Jett olsa da İNDİRİLİR (katil bilinmiyor)", /^Bir düşman seni/.test(o3), `→ "${o3}"`);
+  const o4 = rc("Reyna olarak orada beklerken vuruldun.", "Jett");
+  t("BAŞKA ajan + 'olarak' eskisi gibi indirilir (muafiyet yalnız oyuncunun ajanı)", /bir düşman olarak/i.test(o4), `→ "${o4}"`);
+  const o5 = rc("Jett olarak orada bekleyip vuruldun.", undefined);
+  t("oyuncu ajanı OKUNMAMIŞSA muafiyet yok (ajan-boş süpürgesi 'X olarak'ı zaten söker)", !/Jett olarak/.test(o5), `→ "${o5}"`);
+}
+
 console.log(`\n${fail === 0 ? "TÜM TESTLER GEÇTİ ✓" : `${fail} TEST BAŞARISIZ ✗`}`);
 process.exit(fail ? 1 : 0);

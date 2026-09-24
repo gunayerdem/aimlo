@@ -57,6 +57,7 @@ import type { VisionPostprocessOpts } from "@/lib/vision-postprocess";
 // Model id + reasoning_effort TEK KAYNAK (B07 · OLCUM-ARACI-17).
 import { AI_MODEL, AI_REASONING_EFFORT } from "@/lib/ai-model";
 import { logSafe } from "@/lib/log-safe";
+import { knownAgent } from "@/lib/format-display";
 
 /* ══════════════════════════════════════════════════════════
    TİPLER
@@ -686,6 +687,9 @@ export function buildVisionContext(body: VisionPromptBody, lang: VisionLang, onL
   // factSheet'ten önce set etmek güvenli: buildFactSheet yalnız kendi bildiği
   // alanları açıkça okur (jenerik alan gezmez) → prompt'a etkisi SIFIR.
   factGround.playerAgentKnown = !agentUnknown;
+  // W1 followup #51: okunmuş oyuncu ajanı (resmî yazım) — katil-guard "<ajan> olarak"
+  // öbeğini katil sanmasın. buildFactSheet bu alanı OKUMAZ → prompt bayt-aynı.
+  factGround.playerAgent = agentUnknown ? undefined : knownAgent(reqAgent);
 
   return { ctx, factGround, agentUnknown, logs };
 }
