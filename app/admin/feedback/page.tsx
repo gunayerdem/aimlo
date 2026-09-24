@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+import { getAdminUser } from "@/lib/admin-auth";
 import Link from "next/link";
 import { getRecentFeedback, getRecentDeathFeedback } from "@/lib/admin-analytics";
 
@@ -8,6 +10,15 @@ function fmt(iso: string): string {
 }
 
 export default async function AdminFeedbackPage() {
+  // GÜVENLİK (canlı sızıntı, 24.09.2026): layout.tsx'teki notFound() kapısı bu
+  // sayfanın veri çekimini DURDURMAZ — Next 16 layout ve page segmentlerini paralel
+  // render ediyor; layout 404 atsa da page'in RSC verisi yanıtta gidiyordu
+  // (kimliksiz GET + "RSC: 1" başlığıyla 200). Kapı bu yüzden veri çekiminden
+  // ÖNCE burada da tekrarlanır (revenue/altyapi kalıbı). scripts/test-admin-gate.ts
+  // her admin page'inin ilk await'inin getAdminUser olduğunu kilitler.
+  const admin = await getAdminUser();
+  if (!admin) notFound();
+
   const [deaths, reports] = await Promise.all([getRecentDeathFeedback(30), getRecentFeedback(20)]);
   const deathRows = deaths.filter((d) => !d.tableMissing);
   const tableMissing = deaths.length === 1 && deaths[0].tableMissing;
