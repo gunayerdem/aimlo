@@ -2936,9 +2936,26 @@ function locCase(suffix: string): "loc" | "ki" | "abl" {
   if (/ki$/.test(x)) return "ki";
   return "loc";
 }
-function neutralBase(kind: "loc" | "ki" | "abl", aciNearby: boolean): string {
-  const head = aciNearby ? "o nokta" : "o açı";
+function neutralBase(kind: "loc" | "ki" | "abl", aciNearby: boolean, other = false): string {
+  // Yakınsama Y04: aynı cümlede İKİNCİ, FARKLI bir ad nötrlenirken "o açıda" tekrar yazılmaz
+  // (iki farklı yeri "aynı açı"ya indirip OCR'da olmayan "aynı yerde yine öldün" iması kuruyordu).
+  const head = other ? "başka bir nokta" : aciNearby ? "o nokta" : "o açı";
   return kind === "abl" ? `${head}dan` : kind === "ki" ? `${head}daki` : `${head}da`;
+}
+/** Yakınsama Y04: cümle (yalnız [.!?\n] sınırı — nötr ikameler terminatör eklemez/silmez, dizin
+ *  katmanlar arası sabit) → o cümlede nötrlenmiş adlar. İki TR nötrleyici aynı izleyiciyi paylaşır. */
+type NeutralTracker = Map<number, Set<string>>;
+function sentenceIndexAt(full: string, offset: number): number {
+  return (full.slice(0, offset).match(/[.!?\n]/g) ?? []).length;
+}
+/** Bu cümlede BAŞKA bir ad zaten nötrlendiyse true; adı izleyiciye ekler. */
+function neutralizedOther(tracker: NeutralTracker, full: string, offset: number, key: string): boolean {
+  const si = sentenceIndexAt(full, offset);
+  const set = tracker.get(si) ?? new Set<string>();
+  const other = [...set].some((k) => k !== key);
+  set.add(key);
+  tracker.set(si, set);
+  return other;
 }
 /** 2. ŞAHIS = oyuncunun kendi geçmişi → çapa tek başına yeter. */
 const LOC_SELF_VERB = "(?:tuttun|tutmuştun|tutuyordun|korudun|koruyordun|bekledin|bekliyordun|durdun|duruyordun|kaldın|kalmıştın|kalıyordun|oturdun|sabitlendin|açıldın|öldün|öldürüldün|vuruldun|düştün|yakalandın)";
@@ -3108,11 +3125,35 @@ function pastAnchoredHistoryNames(
 /** Geçmiş konum muafiyeti: çapa GEÇMİŞ ise muaf (FB05 · F83: sayısal round çapasında yalnız
  *  o round'un kaydı eşleşirse); çapa yoksa yalnız metinde başka yerde geçmişe çapalı
  *  anılmışsa; "bu round/şimdi" çapası varsa ASLA. */
+// Yakınsama Y04 (2026-09-24): -mIştI(n) (miş'li geçmiş / "önceki geçmiş") YÜKLEMİ kendi başına geçmiş
+// çapasıdır. KANIT (prod zinciri, gerçek M1-R4, hafıza R1=b site, R3=a tree, R4 konumu ölçülmedi):
+// "Bu round A Tree'de ölmeden önce B Site'ta da ölmüştün" → "Bu round o açıda ölmeden önce o açıda da
+// ölmüştün" — R1'in DOĞRU B Site olgusu silinip ölçülmemiş "aynı yerde yine öldün" iması kuruluyordu
+// (78d54c4 bayt-aynı). KÖK: historyExempt en yakın çapayı sola bakıp "Bu round" (bu round) seçiyordu;
+// callout'un KENDİ yüklemindeki -mIştIn hiç çapa sayılmıyordu. KURAL (dar): callout'tan sonra yan-cümle
+// içindeki İLK yüklem-benzeri kelime (bildirme ya da zarf-fiil: ölmeden/-ken/-ınca/-dıktan/-arak)
+// -mIştI(n|k|m|nız) ise geçmiş sayılır; muafiyet yine yalnız ad hafızada ÖLÇÜLMÜŞSE (küme kuralı).
+// "A Tree'de ölmeden önce" (ilk yüklem zarf-fiil) → geçmiş DEĞİL, eskisi gibi nötrlenir.
+const PLUPERFECT_WORD_RE = /m[ıiuü]şt[ıiuü](?:n|k|m|nız|niz|nuz|nüz)?$/u;
+const CONVERB_WORD_RE = /(?:m[ae]d[ae]n|ken|[ıiuü]nc[ae]|[dt][ıiuü]kt[ae]n|[ae]r[ae]k)$/u;
+function ownPredicatePluperfect(full: string, calloutEnd: number): boolean {
+  let rest = full.slice(calloutEnd).replace(/^(?:\s*['’]\s*)?[\p{L}]*/u, "");
+  const stop = rest.search(/[.,!?;:—\n]/);
+  if (stop >= 0) rest = rest.slice(0, stop);
+  for (const w0 of rest.split(/\s+/).filter(Boolean).slice(0, 6)) {
+    const w = w0.toLocaleLowerCase("tr").replace(/[^\p{L}]/gu, "");
+    if (!w) continue;
+    if (PLUPERFECT_WORD_RE.test(w)) return true;
+    if (CONVERB_WORD_RE.test(w) || (INDICATIVE_FINAL_RE.test(w) && !PAST_WORD_STOP.has(w))) return false;
+  }
+  return false;
+}
 function historyExempt(
   key: string, history: ReadonlySet<string>, anchoredBefore: ReadonlySet<string>,
   full: string, start: number, end: number, rounds?: ReadonlyMap<number, string>,
 ): boolean {
   if (!history.has(key)) return false;
+  if (ownPredicatePluperfect(full, start + key.length)) return true;   // Y04: -mIştIn yüklemi = geçmiş
   const a = historyAnchorAt(full, start, end);
   if (a === "past") return historyMatchesAnchor(key, history, rounds, full, start, end);
   return a === null && anchoredBefore.has(key);
@@ -3125,6 +3166,8 @@ export function neutralizeUnprovenLocations(
   anchoredBefore: ReadonlySet<string> = new Set(),
   // FB05 · F83: round_index → ölçülmüş konum; sayısal round çapası yalnız o round'la eşleşir.
   historyRounds?: ReadonlyMap<number, string>,
+  // Yakınsama Y04: cümle başına nötrlenen adlar (yan-cümle nötrleyicisiyle paylaşılır).
+  tracker: NeutralTracker = new Map(),
 ): string {
   if (!text) return text;
   return text.replace(
@@ -3147,7 +3190,7 @@ export function neutralizeUnprovenLocations(
       // "o açıda ... açıyı" tekrarını önle. FB05 · F52: ek/edat hâli korunur — eski biçimler
       // ("'de", "'deki", bulunma edatları, "civarı") için sonuç BAYT-AYNI ("o açıda"/"o açıdaki").
       const suffixText = whole.slice(name.length, whole.length - tail.length);
-      const base0 = neutralBase(ki ? "ki" : locCase(suffixText), /açı/i.test(tail));
+      const base0 = neutralBase(ki ? "ki" : locCase(suffixText), /açı/i.test(tail), neutralizedOther(tracker, full, offset, key));
       let base = base0;
       const atStart = offset === 0 || /[.!?]\s+$/.test(full.slice(0, offset));
       if (atStart) base = base.charAt(0).toLocaleUpperCase("tr-TR") + base.slice(1);
@@ -3190,7 +3233,12 @@ export function neutralizeUnprovenLocations(
 // varsa "o nokta…"). Silme yok; ders ve cümle aynen kalır.
 const LOC_CLAUSE_CALLOUT_RE = new RegExp(
   // FB05 inceleme (medium): iç lookbehind'da sol kelime sınırı (DEATH_BIND_TR_RE notu).
-  `(?<![\\p{L}\\p{N}_-])(?<!(?<![\\p{L}\\p{N}])(?:${LOC_HEAD_ALT})\\s)(${LOC_ALT})`
+  // Yakınsama Y04: callout'un hemen önündeki çıplak HARİTA ADI ("Ascent Mid Bottom'ta") öbeğe dahil —
+  // nötrlenince birlikte düşer. KANIT (korpus, HEAD zinciri): cyclereal-r3/M1-R9 "Ascent o açıda aynı
+  // yerden bekleyen…", r3b/M1-R2 "Ascent o noktada savunucunun…", r5/M1-R9 "Ascent o noktada Jett
+  // olarak…" (78d54c4'te 0). Nötrlenmezse öbek aynen döner (harita adı kalır).
+  `(?<![\\p{L}\\p{N}_-])(?:(${Object.keys(MAP_CALLOUTS).map(escapeRe).join("|")})\\s+)?`
+  + `(?<!(?<![\\p{L}\\p{N}])(?:${LOC_HEAD_ALT})\\s)(${LOC_ALT})`
   + `((?:\\s*['’]\\s*)?(?:d[ae]n|t[ae]n|d[ae]ki|t[ae]ki|d[ae]|t[ae])|\\s+${LOC_POSTP})(?![\\p{L}\\p{N}_-])`
   // "de/da" bağlacı ("mid'de de") ikameyle birlikte ünlü uyumuna çekilir ("o açıda da") —
   // ilk sürüm "o açıda de" üretiyordu (korpus cycleb09-base-real M1-R9, cyclereal-r3c M1-R4).
@@ -3279,32 +3327,36 @@ export function neutralizeUnprovenLocationClauses(
   history: ReadonlySet<string> = new Set(),
   anchoredBefore: ReadonlySet<string> = new Set(),
   historyRounds?: ReadonlyMap<number, string>,
+  // Yakınsama Y04: cümle başına nötrlenen adlar (LOC_CLAIM nötrleyicisiyle paylaşılır).
+  tracker: NeutralTracker = new Map(),
 ): string {
   if (!text) return text;
-  return text.replace(LOC_CLAUSE_CALLOUT_RE, (whole: string, name: string, suffix: string, clitic: string | undefined, offset: number, full: string) => {
+  return text.replace(LOC_CLAUSE_CALLOUT_RE, (whole: string, mapPre: string | undefined, name: string, suffix: string, clitic: string | undefined, offset: number, full: string) => {
     const key = name.trim().toLowerCase();
     const end = offset + whole.length;
+    // Y04: harita adı öneki varsa callout'un KENDİ başlangıcı (liste/çapa kararları eskisi gibi ona göre).
+    const cStart = mapPre ? end - (clitic ?? "").length - suffix.length - name.length : offset;
     if (supplied.has(key)) return whole;                                   // (e) bu round ölçüldü
     // Liste üyesi ("B Main/Mid'deki tekrarları…") tek başına bu round iddiası değil — korpus
     // cycleb06-parity-real M1-R11 EA1 ilk sürümde "B Main/o noktadaki" oluyordu.
-    if (/\/\s*$/.test(full.slice(0, offset))) return whole;
+    if (/\/\s*$/.test(full.slice(0, cStart))) return whole;
     // FB05 inceleme: "<callout> veya/ya da <callout>'de" de liste — lookbehind düzeltmesi "veya"
     // (a ile biter) arkasındaki adı görünür yaptı; korpus cyclefb03-base-realp M0-R0 "A Site veya
     // Mid'de … bekledin" → "A Site veya o noktada" (yarım nötrleme) üretiyordu.
-    if (LOC_OR_LIST_PREV_RE.test(full.slice(0, offset))) return whole;
+    if (LOC_OR_LIST_PREV_RE.test(full.slice(0, cStart))) return whole;
     if (locCase(suffix) === "abl" && ABL_NON_LOC_AFTER_RE.test(full.slice(end - (clitic ?? "").length))) return whole;
     // (e) geçmişe çapalı ad yalnız o geçmişte ÖLÇÜLMÜŞSE muaf (F83 round kuralı, historyExempt).
     // FB05 inceleme (low): eskiden "past" çapası KOŞULSUZ dönüyordu → "R3'te B Site'tan seni
     // vurdular" (R3 = a tree) ve "Daha önce Market'ten seni vurdular" (Market hiç ölçülmedi)
     // aynen geçiyordu; eski geçiş/F83 aynı iddiayı ("R3'te B Site'ta öldün") nötrlüyordu.
-    if (historyExempt(key, history, anchoredBefore, full, offset, end, historyRounds)) return whole;
-    const { cs, ce, kiClause } = locClauseBounds(full, offset, end);
+    if (historyExempt(key, history, anchoredBefore, full, cStart, end, historyRounds)) return whole;
+    const { cs, ce, kiClause } = locClauseBounds(full, cStart, end);
     if (kiClause) return whole;                                             // (a) "ki …" yan-cümlesi
     const clause = full.slice(cs, ce);
     if (NEXT_ROUND_RE.test(clause)) return whole;                          // (a) sonraki round planı
     if (!clauseHasAnchor(clause) || !clauseHasIndicative(clause)) return whole;   // (b) + (a)
     if (isPredictionOrHabitClause(full, clause, ce)) return whole;         // FB05 inceleme: tahmin/öğüt
-    let base = neutralBase(locCase(suffix), /açı/i.test(full.slice(end, ce)));
+    let base = neutralBase(locCase(suffix), /açı/i.test(full.slice(end, ce)), neutralizedOther(tracker, full, cStart, key));
     const atStart = offset === 0 || /[.!?]\s+$/.test(full.slice(0, offset));
     if (atStart) base = base.charAt(0).toLocaleUpperCase("tr-TR") + base.slice(1);
     return clitic ? `${base} da` : base;
@@ -3728,10 +3780,13 @@ export function realityCheck(
     // hasDeathLocation !== false iken (ölçüldü / bayrak hiç verilmedi) HİÇ çalışmaz
     // → konum okunan her round ve bayrağı set etmeyen her çağıran bayt-aynı.
     if (factGround?.hasDeathLocation === false) {
-      let neutralized = neutralizeUnprovenLocations(t, currentLocs, historyLocs, anchoredBefore, historyRounds);
+      // Yakınsama Y04: iki TR geçişi cümle başına nötrlenen adları paylaşır (ikinci FARKLI ad
+      // "başka bir noktada" olur — "o açıda … o açıda da" yazılmaz).
+      const tracker: NeutralTracker = new Map();
+      let neutralized = neutralizeUnprovenLocations(t, currentLocs, historyLocs, anchoredBefore, historyRounds, tracker);
       // FB05 · F52: yan-cümle düzeyi ikinci geçiş (eski geçişin kaçırdığı fiil/ek/pencere biçimleri).
       // TR-only (Türkçe ek + Türkçe yüklem şartı); EN istekte hiç koşmaz (EN yolu bayt-aynı).
-      if (lang !== "en") neutralized = neutralizeUnprovenLocationClauses(neutralized, currentLocs, historyLocs, anchoredBefore, historyRounds);
+      if (lang !== "en") neutralized = neutralizeUnprovenLocationClauses(neutralized, currentLocs, historyLocs, anchoredBefore, historyRounds, tracker);
       // TR-KALAN-13: EN aynası yalnız istek dili EN iken (TR yolu bayt-aynı).
       if (lang === "en") neutralized = neutralizeUnprovenLocationsEn(neutralized, currentLocs, historyLocs, anchoredBefore, historyRounds);
       t = neutralized;

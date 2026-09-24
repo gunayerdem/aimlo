@@ -937,6 +937,29 @@ console.log("\n════ FB05 · F52 · KONUM ÖLÇÜLMEMİŞKEN YAN-CÜMLE D
   eq("125 'şimdi mid'de de … tekrarladın' → 'o açıda da'",
     rc("Birkaç kez öldün ve şimdi mid'de de aynı hatayı tekrarladın.", rh11, "suggestion"),
     "Birkaç kez öldün ve şimdi o açıda da aynı hatayı tekrarladın.");
+  // Yakınsama Y04 (gerçek korpus/probe; HEAD çıktıları yorumda).
+  // (1) -mIştIn yüklemi geçmiş çapası (ad hafızada ölçülmüşse): HEAD "Bu round o açıda ölmeden önce
+  //     o açıda da ölmüştün" — R1'in DOĞRU B Site'ı silinip "aynı yerde yine öldün" iması kuruluyordu.
+  eq("148a p2 M1-R4 '… ölmeden önce B Site'ta da ölmüştün' (R1 = b site) → B Site korunur, A Tree nötr",
+    rc("Bu round A Tree'de ölmeden önce B Site'ta da ölmüştün; aynı hatayı tekrarlama.", rh4),
+    "Bu round o açıda ölmeden önce B Site'ta da ölmüştün; aynı hatayı tekrarlama.");
+  // (2) aynı cümlede İKİNCİ FARKLI ad aynı yer tutucuya inmez (korpus cyclereal-r3c M1-R4 NR; B Main
+  //     ölçülmemiş → -mIştIn olsa da muaf değil). HEAD: "… o açıda ölmeden önce o açıda da ölmuştun".
+  eq("148b r3c M1-R4 '… B Main'de de ölmuştun' (B Main ölçülmemiş) → 'başka bir noktada da'",
+    rc("Bu round A Tree'de ölmeden önce B Main'de de ölmuştun; A'yı tek başına tutma.", rh4, "suggestion"),
+    "Bu round o açıda ölmeden önce başka bir noktada da ölmuştun; A'yı tek başına tutma.");
+  // Aynı ad iki kez → ikisi de aynı yer (o açı/nokta), "başka bir" YAZILMAZ.
+  const o148c = rc("Bu round A Tree'de açıyı tuttun ve A Tree'den gelen düşman seni vurdu.", rh4);
+  t("148c aynı ad iki kez → 'başka bir' yazılmaz", !/başka bir/.test(o148c) && !/A Tree/.test(o148c), `→ "${o148c}"`);
+  // (3) callout'un önündeki çıplak harita adı ikameyle birlikte düşer (korpus cyclereal-r5 M1-R9 DA;
+  //     HEAD: "Ascent o noktada Jett olarak orada bekleyen…").
+  const o148d = rc("Ascent Mid Bottom'da Jett olarak orada bekleyen açıyı kapatamadın ve rakip seni o açıdan vurdu.", rh11.slice(0, 7));
+  t("148d 'Ascent Mid Bottom'da …' → 'Ascent o …' artığı yok", !/Ascent/.test(o148d) && /^O noktada Jett olarak/.test(o148d), `→ "${o148d}"`);
+  // Harita adı + ölçülmüş (muaf) callout → öbek aynen kalır.
+  same("148e 'Ascent B Site'ta … ölmüştün' (b site ölçülmüş, -mIştIn) bayt-aynı",
+    rc("Maçın başında Ascent B Site'ta da ölmüştün.", rh4), "Maçın başında Ascent B Site'ta da ölmüştün.");
+  // Zarf-fiil yüklemi ("ölmeden") geçmiş çapası DEĞİL; ölçülmemiş ad -mIştIn'le de muaf değil.
+  eq("148f '-mIştIn' + ölçülmemiş ad (Market) → nötr", rc("Market'te seni bekleyip vurmuşlardı, ölmüştün.", rh4), "O açıda seni bekleyip vurmuşlardı, ölmüştün.");
   // Konum ÖLÇÜLMÜŞSE bu geçiş hiç çalışmaz (bayrak false değil).
   const c126 = "Rakip seni A Tree köşesinden vuruyor.";
   same("126 hasDeathLocation:true → bayt-aynı",
