@@ -14,8 +14,13 @@
  *       → %89 → warn. Eksik sayım "alt sınır": eşik altındaysa "ok" DENMEZ.
  *   [B] readMsiBytes: yalnız kendi storage host'una HEAD, Content-Length, URL
  *       başına önbellek, hata → null (sahte değer yok).
- *   [C] metin/kaynak: route yorumu + landing ~30MB, runbook 30.09 egress maddesi,
- *       admin sayfası kartı render ediyor.
+ *   [C] metin/kaynak: route yorumu + landing + runbook 30.09 egress maddesi aynı
+ *       ÖLÇÜLMÜŞ MSI boyutunu söylüyor (FD11#6, 2026-09-25: "~30MB" ne yayındaki
+ *       1.0.19'du — 27 664 384 bayt — ne 1.0.20 adayıdır — 36 540 416 bayt, aimlo-desktop
+ *       40923a2 imzasız ölçüm derlemesi; F67 VCLibs UWPDesktop appx'i + D21 gömülü
+ *       WebView2 önyükleyicisi). MB ve aktarım sayısı masaüstü release-gates.ps1
+ *       Format-MsiEgressNote formülüyle bu testte baytlardan türetilir; admin sayfası
+ *       kartı render ediyor.
  * ⚠ AĞ/DB YOK (fetch sahte), .env OKUNMAZ.
  */
 import Module from "node:module";
@@ -149,15 +154,33 @@ async function main() {
 
   console.log("\n[C] metin ve kaynak");
   const read = (rel: string) => fs.readFileSync(path.join(REPO_ROOT, rel), "utf8");
+  // FD11#6: ölçülen baytlar (masaüstü MSI'ları) — metindeki MB/aktarım bunlardan TÜRETİLİR.
+  // Formül masaüstü scripts/release-gates.ps1 Format-MsiEgressNote ile aynı:
+  // MB = bayt / 1e6 (bir ondalık), aktarım = floor(5e9 / bayt).
+  const MSI_1019_BYTES = 27_664_384; // yayındaki Aimlo_1.0.19_x64_en-US.msi (SHA256 7d3b6965…)
+  const MSI_1020_BYTES = 36_540_416; // 1.0.20 adayı: aimlo-desktop 40923a2, imzasız ölçüm derlemesi
+  const mbOf = (b: number) => (b / 1e6).toFixed(1);
+  const transfersOf = (b: number) => Math.floor(5e9 / b);
+  const bytesTxt = (b: number) => b.toLocaleString("en-US").replace(/,/g, " ");
+  t("formül kendi içinde: 1.0.19 → 27.7 MB / 180 aktarım, 1.0.20 adayı → 36.5 MB / 136 aktarım (release-gates.ps1 çıktısı)",
+    mbOf(MSI_1019_BYTES) === "27.7" && transfersOf(MSI_1019_BYTES) === 180 && mbOf(MSI_1020_BYTES) === "36.5" && transfersOf(MSI_1020_BYTES) === 136);
+  const sizeClaims = (txt: string) =>
+    txt.includes(`${mbOf(MSI_1020_BYTES)} MB (${bytesTxt(MSI_1020_BYTES)} bayt, ≈ ${transfersOf(MSI_1020_BYTES)} aktarım`)
+    && txt.includes(`${mbOf(MSI_1019_BYTES)} MB (${bytesTxt(MSI_1019_BYTES)} bayt, ≈ ${transfersOf(MSI_1019_BYTES)} aktarım)`)
+    && txt.includes(`5 GB / ${mbOf(MSI_1020_BYTES)} MB ≈ ${transfersOf(MSI_1020_BYTES)} MSI aktarımı`);
+  const staleClaims = (txt: string) => /~30 ?MB|~12MB|29\.5 MB ≈|≈ 170/.test(txt);
   const route = read("app/download/route.ts");
-  t("download/route.ts: ~30MB + updater aynı bucket + ayrı cached/uncached havuz notu, ~12MB yok",
-    /~30MB/.test(route) && !/~12MB/.test(route) && /updater/i.test(route) && /cached ve uncached/.test(route));
+  t("download/route.ts: ölçülen 1.0.19 + 1.0.20 boyutu/aktarımı + updater aynı bucket + ayrı cached/uncached havuz notu; ~30MB/~12MB/≈170 yok",
+    sizeClaims(route) && !staleClaims(route) && /updater/i.test(route) && /cached ve uncached/.test(route));
   const landingFile = fs.existsSync(path.join(REPO_ROOT, "app/LandingClient.tsx")) ? "app/LandingClient.tsx" : "app/page.tsx";
   const landing = read(landingFile);
-  t("landing indirme satırı ~30MB (~12MB yok)", landing.includes("Windows 10+ · ~30MB · .msi") && !landing.includes("~12MB"));
+  t(`landing indirme satırı ölçülen 1.0.20 boyutu (~${mbOf(MSI_1020_BYTES)}MB); ~30MB/~12MB yok`,
+    landing.includes(`Windows 10+ · ~${mbOf(MSI_1020_BYTES)}MB · .msi`) && !landing.includes("~30MB") && !landing.includes("~12MB"));
   const runbook = read("docs/LAUNCH_RUNBOOK.md");
   t("LAUNCH_RUNBOOK: 30.09 öncesi Supabase Usage → egress kontrolü maddesi",
     /30\.09 ÖNCESİ: Supabase Usage → egress kontrolü/.test(runbook));
+  t("LAUNCH_RUNBOOK §4/6: route ile AYNI ölçülen boyut/aktarım + release sonrası karşılaştırma maddesi; ≈170/29.5 MB yok",
+    sizeClaims(runbook) && !staleClaims(runbook) && runbook.includes(`"Windows 10+ · ~${mbOf(MSI_1020_BYTES)}MB · .msi"`));
   const adminPage = read("app/admin/altyapi/page.tsx");
   t("/admin/altyapi egress kartını render ediyor", /<EgressCard e=\{infra\.egress\} \/>/.test(adminPage));
   const cardStart = adminPage.indexOf("function EgressCard");

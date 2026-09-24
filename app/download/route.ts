@@ -13,14 +13,19 @@ const LATEST_URL = `${SUPABASE_STORAGE}releases/latest.json`;
 /**
  * B13 (2026-07-31): indirme sayacı.
  *
- * NEDEN: MSI dağıtım kanalı Supabase public bucket ve her indirme ~30MB
- * egress (F31, 2026-09-24: 1.0.13 = 12.35 MB, 1.0.14 widget-dist ile 27.6 MB,
- * D21 embedBootstrapper ile ~29.5 MB). Auto-updater da AYNI bucket'tan tam
+ * NEDEN: MSI dağıtım kanalı Supabase public bucket ve her indirme TAM MSI
+ * kadar egress. ÖLÇÜLEN boyutlar (FD11#6, 2026-09-25; masaüstü
+ * scripts/release-gates.ps1 Format-MsiEgressNote formülü: MB = bayt / 1e6,
+ * aktarım = 5 GB / bayt): 1.0.13 = 12.35 MB, 1.0.14 widget-dist ile 27.6 MB,
+ * bugün yayındaki 1.0.19 = 27.7 MB (27 664 384 bayt, ≈ 180 aktarım);
+ * 1.0.20 adayı = 36.5 MB (36 540 416 bayt, ≈ 136 aktarım — aimlo-desktop
+ * 40923a2'nin imzasız ölçüm derlemesi: D21 gömülü WebView2 önyükleyicisi +
+ * F67 VCLibs UWPDesktop appx'i, 6 757 465 bayt). Auto-updater da AYNI bucket'tan tam
  * MSI indirir (latest.json url'si → releases/v<sürüm>/…msi) ve bu route'tan
  * GEÇMEZ; o trafik burada sayılmaz (masaüstü 1.0.20+ `update_started`
  * telemetrisi gönderir). Supabase Free planda cached ve uncached egress için
- * ayrı 5 GB/ay havuzlar var ve aynı proje auth + DB'yi de taşıyor: 5 GB /
- * 29.5 MB ≈ 170 MSI aktarımı (indirme + güncelleme toplamı). Tahmin kartı:
+ * ayrı 5 GB/ay havuzlar var ve aynı proje auth + DB'yi de taşıyor:
+ * 5 GB / 36.5 MB ≈ 136 MSI aktarımı (1.0.20; indirme + güncelleme toplamı). Tahmin kartı:
  * /admin/altyapi (lib/admin-infra.ts getEgressEstimate). Bugüne kadar
  * kaç indirme olduğunu ölçen HİÇBİR şey yoktu; duyuru günü tavana ne kadar
  * yaklaştığımızı göremezdik. Ayrıca hunideki ilk adım (indirme) tamamen

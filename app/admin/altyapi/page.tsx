@@ -163,7 +163,8 @@ function fmtBytes(n: number | null): string {
 }
 
 /**
- * F31 (2026-09-24): dağıtım egress kartı. MSI ~12 MB değil ~29.5 MB ve updater
+ * F31 (2026-09-24): dağıtım egress kartı. MSI ~12 MB değil (1.0.19 = 27.7 MB, 1.0.20
+ * adayı 36.5 MB — FD11#6 ölçümü; kart gerçek boyutu Content-Length'ten okur) ve updater
  * de aynı bucket'tan tam MSI indiriyor; Free planda 5 GB tavanına yaklaşma
  * launch haftasında fark edilmiyordu. SAHTE VERİ YOK: ölçülemeyen "bilinmiyor",
  * eksik sayım "en az" diye yazılır (lib/admin-infra.ts estimateEgress).

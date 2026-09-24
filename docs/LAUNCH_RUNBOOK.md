@@ -208,14 +208,24 @@ kadar anlamlı — v1.0.20 yayını pencereyi kapatır.
    bir daha güncelleme İTİLEMEZ (yeni sürüm ancak elle indirme ile dağıtılır);
    bu yüzden yedek launch-sonrası ilk hafta işi değil, İLK GÜN işidir.
 6. **30.09 ÖNCESİ: Supabase Usage → egress kontrolü** (F31, 2026-09-24).
-   MSI artık ~29.5 MB (1.0.0'daki ~12 MB değil) ve hem `aimlo.gg/download`
-   hem auto-updater (latest.json → aynı `releases` bucket'ı, tam MSI) aynı
-   Supabase projesinden iniyor; aynı proje auth + DB'yi de taşıyor.
+   MSI boyutu ÖLÇÜLDÜ (FD11#6, 2026-09-25; masaüstü `release-gates.ps1`
+   `Format-MsiEgressNote` formülü: MB = bayt / 1e6, aktarım = 5 GB / bayt):
+   bugün yayındaki 1.0.19 = 27.7 MB (27 664 384 bayt, ≈ 180 aktarım); 1.0.20
+   adayı = 36.5 MB (36 540 416 bayt, ≈ 136 aktarım — aimlo-desktop 40923a2'nin
+   imzasız ölçüm derlemesi; artış D21 gömülü WebView2 önyükleyicisi ile F67
+   VCLibs UWPDesktop appx'inden). 1.0.0'daki ~12 MB artık geçerli değil. Hem
+   `aimlo.gg/download` hem auto-updater (latest.json → aynı `releases` bucket'ı,
+   tam MSI) aynı Supabase projesinden iniyor; aynı proje auth + DB'yi de taşıyor.
    - [ ] Supabase dashboard → organizasyon **planı** ne? (repodan doğrulanamıyor)
    - [ ] Usage → **cached** ve **uncached egress** bu dönem ne kadar? Free planda
-         ikisi için ayrı 5 GB/ay var; 5 GB / 29.5 MB ≈ 170 MSI aktarımı
-         (indirme + güncelleme toplamı). Kota sürekli aşılırsa istekler
+         ikisi için ayrı 5 GB/ay var; 5 GB / 36.5 MB ≈ 136 MSI aktarımı
+         (1.0.20; indirme + güncelleme toplamı). Kota sürekli aşılırsa istekler
          kısıtlanabilir ya da proje duraklatılabilir.
+   - [ ] 1.0.20 release'i bitince `release-desktop.ps1`'in yazdığı "MSI boyutu:
+         … MB (… bayt)" satırını buradaki 36.5 MB ile karşılaştır. Farklıysa bu
+         madde, `app/download/route.ts` yorumu ve landing indirme satırı
+         (`app/LandingClient.tsx`, "Windows 10+ · ~36.5MB · .msi") birlikte
+         güncellenir; `scripts/test-egress-estimate.ts` [C] üçünü aynı sayıya kilitler.
    - [ ] Free ise karar softi'nin: Pro'ya geç **veya** MSI'ı egress'i ücretsiz bir
          kanala taşı (GitHub Releases / R2). Taşınırsa `release-desktop.ps1`
          latest.json url'sini oraya yazar (updater içeriği minisign ile

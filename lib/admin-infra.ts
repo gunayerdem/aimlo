@@ -621,7 +621,9 @@ function buildLinks(): InfraLink[] {
 // NEDEN: MSI hem aimlo.gg/download'dan (302 → releases bucket) hem de
 // auto-updater'dan (latest.json url'si → AYNI bucket, tam MSI) iniyor. Kapasite
 // notu 1.0.0 dönemindeki ~12 MB MSI'ya göre yazılmıştı (download/route.ts); 1.0.14
-// widget-dist ile 27.6 MB oldu, embedBootstrapper (D21) ile ~29.5 MB. Supabase
+// widget-dist ile 27.6 MB oldu, yayındaki 1.0.19 = 27.7 MB; 1.0.20 adayı D21
+// (gömülü WebView2 önyükleyicisi) + F67 (VCLibs UWPDesktop appx) ile 36.5 MB
+// (FD11#6 ölçümü, 36 540 416 bayt). Kart boyutu metinden değil HEAD'den okur. Supabase
 // Free planda cached ve uncached egress için AYRI 5 GB/ay havuzlar var; aynı proje
 // auth ve DB'yi de taşıyor. Plan repodan doğrulanamıyor → yalnız görünür uyarı.
 //
