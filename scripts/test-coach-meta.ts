@@ -237,6 +237,23 @@ const B4: [string, string, string][] = [
   ["virgül yan-cümle (önek çekimli yüklemle bitiyor) temizlenir",
     "Bu roundta kimse seni öldürmedi, dolayısıyla katil bilgisi yok.",
     "Bu roundta kimse seni öldürmedi."],
+  // FB06 · F95: yalın "…-DIğIn kayıt var" tutanak dili — olgu KURTARILIR (silinmez). HEAD: hepsi
+  // bayt-aynı geçiyordu (scripts/eval-out ham NR/EA'ları, birebir).
+  ["B4-21 cyclereal-r3d M1-R5 NR ('öldüğün kayıt var' → 'öldün')",
+    "B Main'de üç kez öldüğün kayıt var — bir sonraki round B'yi tek başına tutma, Market/CT'ye birini bırakıp sen Heaven/closet yerine off-angle alarak crossfire bekle.",
+    "B Main'de üç kez öldün — bir sonraki round B'yi tek başına tutma, Market/CT'ye birini bırakıp sen Heaven/closet yerine off-angle alarak crossfire bekle."],
+  ["B4-22 cycleb09-cand-real M1-R9 NR ('gittiğin kayıt var' → 'gittin')",
+    "Savunmada B bölgesine üç kere gittiğin kayıt var; sonraki round A veya Mid yerine B'yi tek başına tutma — smoke at, dash'le siper kenarına gelip off-angle tutarak ilk kontaktta geri çekil ve takımınla trade'e hazır ol.",
+    "Savunmada B bölgesine üç kere gittin; sonraki round A veya Mid yerine B'yi tek başına tutma — smoke at, dash'le siper kenarına gelip off-angle tutarak ilk kontaktta geri çekil ve takımınla trade'e hazır ol."],
+  ["B4-23 cyclew3-cand1-real M1-R16 EA1 ('kayıtlar var')",
+    "Karşı hamle: B Main'de 2 kez öldüğün kayıtlar var — takım smoke/flash ile o giriş hattını kapatırken sen dash'le farklı bir yükseklikten veya off-angle'dan giriş yap.",
+    "Karşı hamle: B Main'de 2 kez öldün — takım smoke/flash ile o giriş hattını kapatırken sen dash'le farklı bir yükseklikten veya off-angle'dan giriş yap."],
+  ["B4-24 cyclew3-cand3-real M1-R9 NR ('kayıtları da var')",
+    "Savunmada B Main'de üst üste öldüğün kayıtları da var; sonraki round siper kenarını sabit tutma.",
+    "Savunmada B Main'de üst üste öldün; sonraki round siper kenarını sabit tutma."],
+  ["B4-25 cyclereal-r2b M1-R5 NR ('öldüğün kayıtlardan sonra' → 'öldükten sonra')",
+    "Bu round B Main'de üç kez öldüğün kayıtlardan sonra B Main'i solo tutma; savunmada yanına bir takım arkadaşı al.",
+    "Bu round B Main'de üç kez öldükten sonra B Main'i solo tutma; savunmada yanına bir takım arkadaşı al."],
 ];
 for (const [name, input, want] of B4) eq(name, stripMetaTerms(input), want);
 eq("B4-16 mevcut F1 korunur (fiilsiz 'katil olarak Iso')",
@@ -266,6 +283,18 @@ eq("ham 'olarak kaydedildi' işaretlenir",
 for (const [name, input] of B4) {
   eq(`temiz ${name.split(" ")[0]} işaretlenmez`, findMetaTermHits(stripMetaTerms(input)).length, 0);
 }
+// FB06 · F95: ölçüm bu sınıfa kördü (findMetaTermHits ham metinde [] dönüyordu).
+for (const [name, input] of B4.filter(([n]) => /^B4-2[1-5]/.test(n))) {
+  eq(`ham ${name.split(" ")[0]} işaretlenir ('kayıt … var' / 'kayıtlardan')`, findMetaTermHits(input).length >= 1, true);
+}
+eq("F95 uçtan uca: cleanCoachText('B Main'de öldüğün kayıt var, takımı uyar.') → olgu",
+  cleanCoachText("B Main'de öldüğün kayıt var, takımı uyar.", "tr"), "B Main'de öldün, takımı uyar.");
+eq("F95 ünlü uyumu: 'vurulduğun kayıtlardan sonra' → 'vurulduktan sonra'",
+  stripMetaTerms("A Site'ta vurulduğun kayıtlardan sonra açını değiştir."), "A Site'ta vurulduktan sonra açını değiştir.");
+for (const s of [
+  "B Main'de öldüğün an takımına haber ver.",                 // ortaç var, "kayıt" yok
+  "Öldüğün yeri takımına söyle ve açını değiştir.",            // meşru ortaç
+]) eq(`F95 bayt-aynı: "${s.slice(0, 40)}..."`, stripMetaTerms(s), s);
 eq("EN dalı: 'Killer:' etiketi TR deseniyle eşleşmez (bayt-aynı)",
   cleanCoachText("Killer: Jett held the angle from A Heaven.", "en"), "Killer: Jett held the angle from A Heaven.");
 eq("uçtan uca know-g ham metni (killerInfo'da → Türkçe ek → meta söküm)",

@@ -27,6 +27,7 @@ import {
   enforceAgentNames,
   stripDiagnosisLabel,
   hasCoachContent,
+  rewriteKayitVarFacts,
 } from "@/lib/coach-text";
 import { enforceAgentKit } from "@/lib/agent-abilities";
 import { knownAgent } from "@/lib/format-display";
@@ -146,8 +147,13 @@ export function finalizeVisionFeedback(
   // Kök (prompt): B09'da ölçülüp TR tarafı BİLİNÇLİ bırakıldı (TR etiketli açılış
   // tabanda 0/58; TR değişikliğini içeren adaylar m3/detector'da geriledi — ai-policy.ts
   // "B09 ÖLÇÜM NOTU"); yalnız EN [OPENER] (a) değişti. TR için bu soyucu tek savunma.
-  const daIn = stripDiagnosisLabel(fixNames(fb.deathAnalysis), lang);
-  const nrIn = fixNames(fb.nextRoundSuggestion);
+  // "KAYIT VAR" TUTANAK DİLİ → OLGU (FB06 · F95): "B Main'de üç kez öldüğün kayıt var" →
+  // "B Main'de üç kez öldün" realityCheck'ten ÖNCE yazılır ki sayım (F57 yazıyla sayı dahil) ve
+  // konum doğrulaması dönüştürülmüş metinde çalışsın. Aynı dönüşüm cleanCoachText'in ilk meta
+  // halkasında da var (idempotent). Eşleşme yoksa bayt-aynı. NR'nin ham-metin kurtarması (nrIn)
+  // de dönüştürülmüş hâli kullanır — tutanak dili ham metne geri dönmez.
+  const daIn = rewriteKayitVarFacts(stripDiagnosisLabel(fixNames(fb.deathAnalysis), lang));
+  const nrIn = rewriteKayitVarFacts(fixNames(fb.nextRoundSuggestion));
 
   // Reality check against round memory (modifies text if AI claims contradict
   // observed data). factGround = route'un buildFactGround'u (Ölüm-Veri Sözleşmesi
@@ -217,7 +223,7 @@ export function finalizeVisionFeedback(
   // iddia ise gelebilir. Karar değişirse (inceleme seçeneği a) RC çıktısının "boş değil
   // ama içeriksiz" hâli "RC tüm içeriği reddetti" sayılmalı (NR "", EA maddesi düşer).
   const eaItems = (fb.enemyAnalysis || []).slice(0, 2).map((s) => {
-    const src = fixNames(String(s));
+    const src = rewriteKayitVarFacts(fixNames(String(s)));    // FB06 · F95 (bkz. daIn/nrIn)
     const c = realityCheck(src, memory, factGround, "suggestion", lang, map);
     const cleanedChecked = c.text && c.text.trim() ? cleanCoachText(c.text, lang) : "";
     const proven = hasCoachContent(cleanedChecked);

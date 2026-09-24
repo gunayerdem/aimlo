@@ -869,6 +869,35 @@ const TR_TESPIT_FALLBACK_RE = /\s+tespit edildi(?![a-zçğıöşü])/giu;
 /** Kalan "kayıtta/sistemde/veride var|görünüyor|..." öbeği — silinir. */
 const TR_LEFTOVER_META_RE =
   /(?<![a-zçğıöşü])(?:kayıtta|kayıtlarda|sistemde|veride|verilerde)\s+(?:var|kayıtlı|görünüyor|mevcut|net|kesin)(?![a-zçğıöşü])/giu;
+
+// ── "…-DIğIn KAYIT VAR" TUTANAK DİLİ → OLGU (FB06 · F95, 2026-09-24) ────────────────
+// KANIT: TR_META_CLAUSE_RE başta ;/:/— + kayıt(ta|lı|larda), TR_META_SENTENCE_RE konum öznesi,
+// TR_OLARAK_META_RE "olarak", TR_LEFTOVER_META_RE kayıtta/kayıtlarda + var istiyor — yalın
+// "kayıt var" hiçbirine uymuyordu. Korpus (scripts/eval-out, HEAD final'leri): cyclereal-r3d
+// M1-R5 NR "B Main'de üç kez öldüğün kayıt var — …", cycleb09-cand-real M1-R9 NR "Savunmada B
+// bölgesine üç kere gittiğin kayıt var; …", cyclereal-r3/r4c M1-R9 "R5'te B Main'de öldüğün
+// kayıt var, …", cyclew3-cand1-real M1-R16 EA1 "…öldüğün kayıtlar var — …", cyclew3-cand3-real
+// M1-R9 "…üst üste öldüğün kayıtları da var; …", cyclereal-r2b M1-R5 "…öldüğün kayıtlardan sonra
+// B Main'i solo tutma" aynen kullanıcıya gidiyordu (prompt META_SOURCE_BAN_RULE "kayıt"ı yasaklıyor).
+// OLGU KURTARILIR (silinmez): 2. tekil ortaç "-DIğIn" → di'li geçmiş "-DIn" ("öldüğün kayıt var"
+// → "öldün", "gittiğin kayıt var" → "gittin"); "-DIğIn kayıtlardan sonra" → "-DIktAn sonra"
+// ("öldükten sonra"). Vision zincirinde realityCheck'ten ÖNCE de koşar (vision-postprocess)
+// ki sayım/konum doğrulaması dönüştürülmüş metinde çalışsın ("üç kez öldün" → F57).
+// Cümle başı "(önceki) kayıtlardan" dönüşümü EKLENMEDİ: korpus + runtime loglarında 0 geçiş
+// (hiç ateşlenmeyecek guard yazılmaz); dedektör (findMetaTermHits) onu ölçer.
+const TR_KAYIT_VAR_RE =
+  /(?<![\p{L}])([\p{L}]*[dt][ıiuü])ğ[ıiuü]n\s+kayıt(?:lar)?(?:ı)?(?:\s+da)?\s+var(?![\p{L}])/gu;
+const TR_KAYIT_SONRA_RE =
+  /(?<![\p{L}])([\p{L}]*[dt])([ıiuü])ğ[ıiuü]n\s+kayıtlardan\s+sonra(?![\p{L}])/gu;
+/** "…öldüğün kayıt var" → "…öldün"; "…öldüğün kayıtlardan sonra" → "…öldükten sonra".
+ *  Eşleşme yoksa metin bayt-aynı döner. Dil-bağımsız çağrılabilir (TR ortacı EN'de eşleşmez). */
+export function rewriteKayitVarFacts(text: string): string {
+  if (!text || !text.includes("kayıt")) return text;
+  return text
+    .replace(TR_KAYIT_VAR_RE, (_m: string, head: string) => `${head}n`)
+    .replace(TR_KAYIT_SONRA_RE, (_m: string, head: string, v: string) =>
+      `${head}${v}k${/[ıu]/.test(v) ? "tan" : "ten"} sonra`);
+}
 /** EN SON backstop: çıplak "OCR" token'ı (opsiyonel apostrof-ekiyle) — koç metninde asla meşru değil. */
 const TR_OCR_BARE_RE = /(?<![\p{L}\p{N}])ocr(?:['’][a-zçğıöşü]{1,6})?(?![\p{L}\p{N}])/giu;
 /** EN aynası (canli-test #11, 2026-08-05): "was reported as Jett" → "was Jett" —
@@ -1203,6 +1232,10 @@ export function stripFieldLabelTokens(text: string, lang: "tr" | "en"): string {
 export function stripMetaTerms(text: string): string {
   if (!text) return text;
   let t = text;
+  // FB06 · F95: "…öldüğün kayıt var" → "…öldün" (olgu kurtaran dönüşüm) — İLK halka; ürettiği
+  // metinde meta kalmaz, sonraki desenler onu görmez. Vision zinciri bunu realityCheck'ten
+  // önce de uygular (idempotent: ikinci geçişte eşleşme yok).
+  t = rewriteKayitVarFacts(t);
   // SIRA ÖNEMLİ: önce yan-cümle/cümle cerrahisi (bağlam bütünken), sonra
   // öbek-söküm, en sonda çıplak-OCR backstop'u. Ters sıra F4'te ayracı
   // marker'sız bırakıp gereksiz "katil Phoenix" kuyruğu üretiyordu.
@@ -1305,6 +1338,10 @@ export function findMetaTermHits(text: string): string[] {
   const detectors: RegExp[] = [
     /(?<![\p{L}\p{N}])ocr(?![\p{L}\p{N}])/giu,
     /(?<![a-zçğıöşü])kayıt(?:ta|lı|larda|lara göre)(?![a-zçğıöşü])/giu,
+    // FB06 · F95: yalın "kayıt var" / "kayıtlar(ı) (da) var" / "kayıtlardan" — ölçüm bu sınıfa kördü
+    // (korpus M1-R5 "öldüğün kayıt var", M1-R9 "gittiğin kayıt var" → []).
+    /(?<![a-zçğıöşü])kayıt(?:lar)?(?:ı|dan)?(?:\s+da)?\s+var(?![a-zçğıöşü])/giu,
+    /(?<![a-zçğıöşü])kayıtlardan(?![a-zçğıöşü])/giu,
     /(?<![a-zçğıöşü])kayda geçti(?![a-zçğıöşü])/giu,
     /(?<![a-zçğıöşü])sistem(?:de|e göre)(?![a-zçğıöşü])/giu,
     /(?<![a-zçğıöşü])tespit edildi(?![a-zçğıöşü])/giu,

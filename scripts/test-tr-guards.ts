@@ -1057,6 +1057,22 @@ console.log("\n════ FB06 · F51 · ÖNERİ ALANI KUYRUĞA İNMEZ (iddia 
   // Kapsam kilidi: DA (kind="death") yolu DEĞİŞMEZ — yan-cümle eskisi gibi düşer.
   eq("133 aynı metin kind='death' → eski yan-cümle silmesi (bayt-aynı davranış)",
     realityCheck(nr9, mem9, fg9, "death", "tr", "ascent").text, "Dash ile giriş açma değil, ölürken kaçış hattı yarat.");
+
+  console.log("\n════ FB06 · F95 · 'KAYIT VAR' → OLGU, realityCheck'TEN ÖNCEKİ HALKADA ════");
+  // cyclereal-r3d M1-R5 NR (bu round ölçülen b main; hafızada B Main ölümü yok): tutanak dili gider,
+  // yazıyla uydurma sayım (F57) dönüştürülmüş metinde düşer, ölçülen konum + öğüt kalır.
+  // HEAD: "B Main'de öldüğün kayıt var — …" (tutanak dili kullanıcıya gidiyordu).
+  const o134 = chainNr("M1-R5-ascent-jett", "B Main'de üç kez öldüğün kayıt var — bir sonraki round B'yi tek başına tutma, Market/CT'ye birini bırakıp sen Heaven/closet yerine off-angle alarak crossfire bekle.");
+  t("134 M1-R5 zincir: 'kayıt var' yok, 'üç kez' yok, 'B Main'de öldün — …' + öğüt",
+    !/kayıt/.test(o134) && !/üç kez/.test(o134) && /^B Main'de öldün — bir sonraki round B'yi tek başına tutma/.test(o134), `→ "${o134}"`);
+  // HALKA SIRASI KİLİDİ — cyclew3-cand3-real M1-R9 NR (bu round konum ÖLÇÜLMEDİ; B Main yalnız R5'te).
+  // Dönüşüm realityCheck'ten ÖNCE: "B Main'de üst üste öldün" kesin ölüm cümlesi olur, konum
+  // nötrleyicisi çapasız "B Main'de" iddiasını görür ve düşürür. Dönüşüm yalnız cleanCoachText'te
+  // olsaydı RC ortaç biçimini ("öldüğün kayıtları da var") görmez, çıktı "Savunmada B Main'de üst
+  // üste öldün; …" olurdu (A/B'de ölçüldü).
+  const o135 = chainNr("M1-R9-ascent-jett", "Savunmada B Main'de üst üste öldüğün kayıtları da var; sonraki round siper kenarını sabit tutma, smoke ile görüş hattını kapat ve dash'le farklı bir off-angle'dan pozisyona girerek retake/rotate tehdidini azalt.");
+  t("135 M1-R9 zincir: dönüşüm RC'den önce → kanıtsız 'B Main'de' düşer, tutanak dili yok",
+    !/kayıt/.test(o135) && !/B Main/.test(o135) && /^Savunmada üst üste öldün; sonraki round siper kenarını sabit tutma/.test(o135), `→ "${o135}"`);
 }
 
 console.log(`\n${fail === 0 ? "TAM YEŞİL" : "KIRMIZI"} — ${n - fail}/${n} geçti${fail ? `, ${fail} HATA` : ""}`);
