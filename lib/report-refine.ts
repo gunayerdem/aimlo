@@ -14,6 +14,9 @@
  * kapısı ve temizleyici (buildReportCleaner, cap 600, fallback = mevcut metin)
  * route.ts'ten kesilip taşındı. `callModel` null → kapı yine ölçülür/loglanır
  * ama çağrı yapılmaz (eski `apiKey` koşulunun karşılığı).
+ * FB01 (2026-09-24): refine olgu listesine round satırları + sonuç/taraf notu (F48/F03/
+ * F13), kural 1 "verilmeyeni anma, eksik veriyi söyleme" (F48) ve kabul kapısına meta-dil
+ * reddi (F48) eklendi — bu üçü dışında prompt/gövde/kapı aynı.
  */
 import { checkOutputQuality, scoreFields } from "@/evals/generic-detector";
 import {
@@ -28,6 +31,9 @@ import { AI_MODEL, AI_REASONING_EFFORT } from "@/lib/ai-model";
 
 /** Refine eşiği: qc.score bunun ALTINDAYSA en zayıf alan yeniden yazdırılır. */
 export const REPORT_REFINE_QC_THRESHOLD = 65;
+
+/** FB01 · F48: refine olgu listesine giren en fazla round satırı (ana prompt MAX_PROMPT_ROUNDS ile aynı). */
+const REFINE_MAX_ROUND_FACTS = 30;
 
 /**
  * Refine çağrısının parametreleri — TEK KAYNAK.
@@ -62,6 +68,31 @@ export function buildRefineRequestBody(refinePrompt: string) {
 }
 
 export type RefineRequestBody = ReturnType<typeof buildRefineRequestBody>;
+
+/**
+ * FB01 · F48 (2026-09-24) — META-DİL KAPISI. KANIT: aimlo-runtime LOG.txt:4538 (05.08,
+ * Haven) refine çıktısı prompt'un KENDİ kuralını okuyucuya anlattı: "R5 ve R10 bilgisi
+ * listede yok — bunları yazamam … Eğer ölüm konumu listede yoksa konum belirtme." ve
+ * kabul kapısı (yalnız uzunluk + finish_reason) bunu summary'nin yerine yazdı (:4540
+ * "✅ Saved"). Eşleşirse refine REDDEDİLİR, eldeki metin kalır (kurtarma yolu = mevcut
+ * metin; yeni metin üretilmez). Türkçe-\b tuzağı: sınırlar \p{L} lookaround ile.
+ * Yanlış-pozitif ölçümü: scripts/test-report-outcome.ts (eval-out'taki 20 kabul edilmiş
+ * refine alanı + tüm final rapor alanları → 0 eşleşme).
+ */
+const REFINE_META_PATTERNS: readonly RegExp[] = [
+  /(?<!\p{L})listede\s+(?:yok(?:sa)?|olmayan)(?!\p{L})/iu,
+  /(?<!\p{L})yazamam(?!\p{L})/iu,
+  /(?<!\p{L})belirtemem(?!\p{L})/iu,
+  /(?<!\p{L})not\s+in\s+the\s+(?:list|facts)(?!\p{L})/iu,
+  /(?<!\p{L})isn['’]t\s+listed(?!\p{L})/iu,
+  /(?<!\p{L})can(?:['’]t|not)\s+(?:write|mention)(?!\p{L})/iu,
+];
+
+/** Refine metni prompt'un iç kurallarını / eksik veriyi okuyucuya anlatıyor mu? */
+export function hasRefineMetaLanguage(text: string): boolean {
+  return REFINE_META_PATTERNS.some((re) => re.test(text));
+}
+
 /** Model yanıtı: HTTP başarısızsa null; aksi hâlde ham içerik + finish_reason. */
 export type RefineModelResult = { content: unknown; finishReason: unknown } | null;
 export type RefineCallModel = (requestBody: RefineRequestBody) => Promise<RefineModelResult>;
@@ -74,6 +105,8 @@ export type RefineOutcome = {
   /** Zayıf alan refine metniyle DEĞİŞTİRİLDİ mi? */
   refined: boolean;
   finishReason?: string;
+  /** FB01 · F48: refine metni meta-dil kapısında reddedildi (alan değişmedi). */
+  metaRejected?: boolean;
 };
 
 /**
@@ -140,6 +173,20 @@ export async function maybeRefineReport(
     const sideFact = sides.mixed
       ? "iki taraf (devre arasında değişti)"
       : rSetup.side === "attack" ? "saldırı" : "savunma";
+    // FB01 · F48 KÖK: eski olgu listesinde round YOKTU ama kural 1 "listede olmayan round
+    // yazma" diyor, "Mevcut" metin ise R-numaralı — model çelişkiyi kuralı okuyucuya
+    // anlatarak çözüyordu ("R5 ve R10 bilgisi listede yok"). Round satırları (R#, sonuç,
+    // ölüm konumu) ana prompt'taki gibi verilir; eksik alan yazılmaz (yer tutucu yok).
+    const roundFacts = body.rounds
+      .filter((r) => r && !r.skipped)
+      .slice(0, REFINE_MAX_ROUND_FACTS)
+      .map((r) => {
+        const side = r.side === "attack" ? " (saldırı)" : r.side === "defense" ? " (savunma)" : "";
+        const result = r.result === "win" ? "kazanıldı, " : r.result === "loss" ? "kaybedildi, " : "";
+        const loc = typeof r.deathLocation === "string" ? r.deathLocation.trim() : "";
+        const fate = r.survived ? "hayatta kaldın" : `öldün${loc ? ` — ${loc}` : ""}`;
+        return `  R${r.roundNumber}${side}: ${result}${fate}`;
+      });
     const refinePrompt = `Bu ${fieldMap[fs.weakest] || fs.weakest} zayıf. Yeniden yaz.
 
 BU MAÇTA ÖLÇÜLEN OLGULAR (TEK gerçek kaynak — dışına çıkma):
@@ -148,10 +195,12 @@ BU MAÇTA ÖLÇÜLEN OLGULAR (TEK gerçek kaynak — dışına çıkma):
 - Taraf: ${sideFact}
 - Skor: ${body.score.yours}-${body.score.enemy}${scoreNote}
 - Düşman kadrosu: ${refineEnemies.length > 0 ? refineEnemies.join(", ") : "OKUNAMADI"}
-- Ölüm konumları: ${refineLocs.length > 0 ? refineLocs.join(", ") : "OKUNAMADI"}
+- Ölüm konumları: ${refineLocs.length > 0 ? refineLocs.join(", ") : "OKUNAMADI"}${roundFacts.length > 0 ? `
+- Round'lar:
+${roundFacts.join("\n")}` : ""}
 
 KURALLAR:
-1. YALNIZ yukarıdaki olguları kullan. Listede OLMAYAN ajan, konum, round ya da skor YAZMA — uydurma YASAK.
+1. YALNIZ yukarıdaki olguları kullan. Verilmeyen bilgiden (ajan, konum, round, skor, sayı) hiç söz etme ve eksik veriyi okuyucuya söyleme — "listede yok", "yazamam" gibi cümleler YASAK. Uydurma YASAK.
 2. Konum: sadece "Ölüm konumları" listesindekilerden birini kullanabilirsin. Liste OKUNAMADI ise hiç yer adı yazma.
 3. Düşman: sadece "Düşman kadrosu" listesindeki ajanlardan bahsedebilirsin. Liste OKUNAMADI ise ajan adı yazma, "bir düşman" de.
 4. Somut aksiyon ZORUNLU — ne yapacağı net olsun.
@@ -171,7 +220,13 @@ Sadece düzeltilmiş metni döndür.`;
         // kapağına çarpan YARIM refine metni orijinal alanın üzerine yazılıyordu
         // ("...rakip defansif rotasy"). "stop" değilse REDDET — mevcut geçerli
         // metin kalır (no-fake ilkesi: yarım metin basmaktansa eldeki tam metin).
-        if (refined && refined.length > 30 && rFinish === "stop") {
+        // FB01 · F48: meta-dil (prompt kuralını/eksik veriyi okuyucuya anlatan) refine
+        // REDDEDİLİR — mevcut tam metin kalır (no-fake: kötü metinle değiştirilmez).
+        const meta = !!refined && refined.length > 30 && rFinish === "stop" && hasRefineMetaLanguage(refined);
+        if (meta) {
+          outcome.metaRejected = true;
+          console.warn(`[Aimlo AI] Report refine REJECTED (meta-language) — keeping original ${fs.weakest}`);
+        } else if (refined && refined.length > 30 && rFinish === "stop") {
           // Cycle 2 fix #5: clean the refined field too (same coach-voice net).
           // B82 (2026-07-31): elle kurulan cleanCoachText + clampWords ikilisi
           // ortak finalizeCoachText'e geçti (aynı sıra, aynı 600 kapağı,

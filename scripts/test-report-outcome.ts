@@ -16,11 +16,14 @@
  *       "okunuyor/tekrarlayan", "0.0", ölçülmemiş trade/utility yargısı YOK (TR+EN) +
  *       Lotus "Hookah'tan girdin." alan-yedeği vakası.
  * [F18] analyses INSERT kalıcı hata (sahte PGRST303) → 1 yeniden deneme + persisted:false.
+ * [F48] refine meta-dil kapısı: LOG.txt:4538 summary'si sahte refine yanıtı → reddedilir,
+ *       alan orijinal kalır; eval-out'taki kabul edilmiş refine alanlarında yanlış-pozitif 0.
  *
  * ⚠ AĞ/AI/DB YOK: scripts/report-route-harness.ts (sahte OpenAI + sahte PostgREST);
  * OPENAI_API_KEY sahte dize; .env.local OKUNMAZ.
  */
 import Module from "node:module";
+import * as fs from "node:fs";
 import * as path from "node:path";
 import { harness, resetHarness, loadReportRoute, reportRequest, newFakeDb } from "./report-route-harness";
 import { deriveMatchOutcome, isTerminalScore, normalizeModeToken, MATCH_END_REASONS } from "../lib/match-outcome";
@@ -33,6 +36,7 @@ import {
   resolveReportSides,
   type ReportRequest,
 } from "../lib/report-prompt";
+import { maybeRefineReport, hasRefineMetaLanguage, type RefineRequestBody } from "../lib/report-refine";
 // GERÇEK api-auth (harness route için sahtesini sonra kurar; bu bağlama o değişmez).
 // Upstash env YOK → günlük sayaç bellek deposunda (harness da UPSTASH_* siler).
 import { consumeDailyQuota, refundDailyQuota } from "../lib/api-auth";
@@ -80,6 +84,7 @@ const GOOD_AI = JSON.stringify({
   decisionScore: "6/10 — A Main tekrarları dışında karar iyi.",
 });
 const MID = "7c0b4a52-3f1e-4d6a-9b2c-5e8f1a3d7c90";
+const LIVE_4538 = "Maçı 4-5 kaybettin. Savunmada R1'de A/kanalizasyonda tek başına son canlıyken öldün; R5 ve R10 bilgisi listede yok — bunları yazamam. Karşı takım \"bir düşman\" olarak kaydedildi. Hayatta kalma veya decision score gibi ek sayılar listede yok — bunları yazamam. Ne yap: A/kanalizasyon pozisyonunda takım ile birlikte kal ve takımmanın smoke ya da molotovu kullanmasını sağla; elinde Brimstone olarak orbital smokes tetikle ve takımın arkasına çekilerek yeniden pozisyon al. Eğer ölüm konumu listede yoksa konum belirtme.";
 
 async function main() {
   // ══════════════════════════════════════════════════════════════════════
@@ -387,6 +392,67 @@ async function main() {
     resetHarness();
     const web = await route.POST(reportRequest({ rounds: desktopRounds(seq(2, 1)), lang: "tr", map: "bind" }));
     check("persistOnServer yok (web) → persisted alanı YOK", !("persisted" in (await web.json() as Record<string, unknown>)));
+  }
+
+  // ══════════════════════════════════════════════════════════════════════
+  console.log("\n── [F48] refine meta-dil kapısı + olgu listesinde round'lar ──");
+  {
+    const v = validated({
+      rounds: [
+        { round: 1, score: "0 - 1", result: "loss", died: true, deathLocation: "a/kanalizasyon" },
+        { round: 5, score: "2 - 3", result: "loss", died: true },
+        { round: 9, score: "4 - 4", result: "win", died: false },
+        { round: 10, score: "4 - 5", result: "loss", died: true },
+      ],
+      lang: "tr", map: "haven", agent: "brimstone", side: "defending",
+    });
+    const stats = generateDeterministicReport(v);
+    const report = { ...stats, summary: "Maç kaybedildi.", aiGenerated: true };
+    const before = { ...report };
+    const calls: RefineRequestBody[] = [];
+    const out = await maybeRefineReport(report, v, async (b) => { calls.push(b); return { content: LIVE_4538, finishReason: "stop" }; });
+    const w = out.weakest as (typeof FIELDS)[number] | null;
+    check("LOG.txt:4538 summary sahte refine yanıtı → refined=false, metaRejected (fix yok: refined=true)", out.attempted && !out.refined && out.metaRejected === true, show(out));
+    check("alan ORİJİNAL kaldı (meta metin yazılmadı)", !!w && report[w] === before[w] && FIELDS.every((f) => report[f] === before[f]), `${w}: ${w && String(report[w]).slice(0, 60)}`);
+    const u = calls[0]?.messages[1].content ?? "";
+    check("refine olgu listesinde round satırları var (R#, sonuç, ölüm konumu)",
+      u.includes("- Round'lar:") && u.includes("  R1: kaybedildi, öldün — a/kanalizasyon") && u.includes("  R9: kazanıldı, hayatta kaldın") && u.includes("  R5: kaybedildi, öldün\n"), u.slice(u.indexOf("- Round'lar"), u.indexOf("- Round'lar") + 200));
+    check("kural 1: verilmeyeni anma + eksik veriyi söyleme", u.includes("Verilmeyen bilgiden (ajan, konum, round, skor, sayı) hiç söz etme ve eksik veriyi okuyucuya söyleme"));
+    const en = "You lost 4-5. R5 and R10 are not in the list — I can't write about them. Survival numbers aren't in the facts, so I can't mention them. Hold A Sewer with your team.";
+    check("EN karşılığı ('not in the list', 'can't write/mention') meta sayılır", hasRefineMetaLanguage(en));
+    check("normal koç metni meta sayılmaz ('listede' geçse bile: 'kadro listesinde yok' değil)",
+      !hasRefineMetaLanguage("R5'te A Main'e tek girdin; bir sonraki round flaşla gir ve takımı bekle.")
+        && !hasRefineMetaLanguage("Rakip kadroda Chamber var; OP'yi listelediği açıya bakma, off-angle tut.")
+        && !hasRefineMetaLanguage("You can't win the duel from that angle; swing wide with a flash."));
+    // Yanlış-pozitif ölçümü: eval-out'taki (gitignore'lu, ücretli koşu çıktısı) kabul edilmiş refine alanları.
+    const dir = path.join(REPO_ROOT, "scripts", "eval-out");
+    const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => /^report-.*\.json$/.test(f)) : [];
+    if (files.length === 0) {
+      console.log("  ℹ scripts/eval-out/report-*.json yok (temiz klon) — yanlış-pozitif ölçümü atlandı");
+    } else {
+      let refinedFields = 0;
+      let refinedHits = 0;
+      let allFields = 0;
+      const allHits: string[] = [];
+      for (const f of files) {
+        const arr = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { id?: string; refined?: boolean; refinedField?: string; final?: Record<string, string> }[];
+        for (const s of Array.isArray(arr) ? arr : []) {
+          if (!s.final) continue;
+          for (const k of FIELDS) {
+            const t = s.final[k];
+            if (typeof t !== "string") continue;
+            allFields++;
+            if (hasRefineMetaLanguage(t)) allHits.push(`${f}:${s.id}:${k}`);
+          }
+          if (s.refined && s.refinedField && typeof s.final[s.refinedField] === "string") {
+            refinedFields++;
+            if (hasRefineMetaLanguage(s.final[s.refinedField])) refinedHits++;
+          }
+        }
+      }
+      check(`yanlış-pozitif: eval-out'taki ${refinedFields} kabul edilmiş refine alanında 0 eşleşme`, refinedHits === 0 && refinedFields > 0, `hits=${refinedHits}`);
+      check(`yanlış-pozitif: eval-out'taki ${allFields} final rapor alanında 0 eşleşme`, allHits.length === 0, show(allHits));
+    }
   }
 
   console.log(`\n${fail === 0 ? "✅" : "❌"} test-report-outcome: ${pass} geçti, ${fail} kırık\n`);

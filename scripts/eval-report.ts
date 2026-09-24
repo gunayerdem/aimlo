@@ -89,6 +89,8 @@ export type ReportEvalSample = {
   refineAttempted?: boolean;
   refine_finish_reason?: string | null;
   refinedField?: string | null;
+  /** FB01 · F48: refine metni meta-dil kapısında reddedildi (alan değişmedi). */
+  refineMetaRejected?: boolean;
   usage?: Usage | null;
   refineUsage?: Usage | null;
   error?: string;
@@ -185,6 +187,7 @@ export async function runReportFixture(
     refineAttempted: refine.attempted,
     refine_finish_reason: refine.finishReason ?? null,
     refinedField: refine.refined ? refine.weakest : null,
+    refineMetaRejected: refine.metaRejected === true,
     usage,
     refineUsage,
   };
@@ -213,7 +216,7 @@ async function main() {
       results.push(s);
       console.log(s.error
         ? `FAILED: ${s.error}`
-        : `done (sys=${s.sysBytes}b finish=${s.finish_reason} ai=${s.aiGenerated}${s.aiFailure ? ` FAIL=${s.aiFailure}` : ""} result=${s.matchResult} qc=${s.qc?.score} refined=${s.refined}${s.refined ? `:${s.refinedField}` : ""})`);
+        : `done (sys=${s.sysBytes}b finish=${s.finish_reason} ai=${s.aiGenerated}${s.aiFailure ? ` FAIL=${s.aiFailure}` : ""} result=${s.matchResult} qc=${s.qc?.score} refined=${s.refined}${s.refined ? `:${s.refinedField}` : ""}${s.refineMetaRejected ? " META-RED" : ""})`);
     } catch (e) {
       console.log(`FAILED: ${(e as Error).message}`);
       results.push({ id: fx.id, note: fx.note, error: (e as Error).message });
@@ -231,7 +234,7 @@ async function main() {
     for (const k of FIELDS) console.log(`  ${k}: ${r.final[k]}`);
   }
   const ok = results.filter((r) => !r.error);
-  console.log(`\nÖZET: ${ok.length}/${results.length} örnek · aiGenerated=${ok.filter((r) => r.aiGenerated).length} · finish=stop ${ok.filter((r) => r.finish_reason === "stop").length} · AI hatası ${ok.filter((r) => r.aiFailure).length} · refine denendi ${ok.filter((r) => r.refineAttempted).length} / kabul ${ok.filter((r) => r.refined).length}`);
+  console.log(`\nÖZET: ${ok.length}/${results.length} örnek · aiGenerated=${ok.filter((r) => r.aiGenerated).length} · finish=stop ${ok.filter((r) => r.finish_reason === "stop").length} · AI hatası ${ok.filter((r) => r.aiFailure).length} · refine denendi ${ok.filter((r) => r.refineAttempted).length} / kabul ${ok.filter((r) => r.refined).length} / meta-red ${ok.filter((r) => r.refineMetaRejected).length}`);
   console.log(`\n✅ wrote ${path.join(outDir, outName)}\n`);
 }
 
