@@ -480,10 +480,27 @@ const REPETITION_KEYWORDS = [
   "hep aynı", "aynı bölge", "aynı pozisyon",
   "pattern", "kalıcı",
   // English
-  "in a row", "straight", "consecutive", "consistently",
+  // FB06 · F41: çıplak "straight" ÇIKARILDI — "straight duel", "straight-line entry", "straight
+  // front-angle fight" bu round'un betimidir; yalnız SAYIM bağlamı tekrar iddiasıdır
+  // (EN_STRAIGHT_COUNT_RE, repetitionKeyIn).
+  "in a row", "consecutive", "consistently",
   "every round", "same spot", "same position",
   "repeating", "recurring", "persistent", "every time",
 ];
+
+// ── "straight" YALNIZ SAYIM BAĞLAMINDA (FB06 · F41, 2026-09-24) ──────────────────────
+// KANIT: çıplak "straight" alt-dizge eşleşmesi (s.includes) bu round'u anlatan, katili/silahı/
+// konumu ÖLÇÜLMÜŞ EN cümlelerini tekrar iddiası sayıyordu → level-3 yan-cümle silmesi →
+// TR-KALAN-26 (b) gereği EA maddesi düşüyordu. Korpus (maliyetsiz A/B): cycleb09-cand-en E2
+// "Jett held the long sight at B Long with an Operator and punished the straight duel." ve E5/
+// E10, cyclew3-base2-en E5 EA0'ları realityCheck'te {text:"", level:3} → çıktıdan düşüyordu.
+// Sayım bağlamı: "N (rounds|deaths|times|games) straight", "straight rounds/deaths/…",
+// "rounds straight" (N rakam ya da two…ten) — "3 rounds straight", "three straight rounds" hâlâ
+// tekrar iddiasıdır ve kanıtsızken HEAD'deki gibi nötrlenir.
+const EN_STRAIGHT_COUNT_SRC =
+  "(?<![\\p{L}\\p{N}])(?:(?:\\d+|two|three|four|five|six|seven|eight|nine|ten)\\s+(?:(?:rounds?|deaths?|times|games?)\\s+)?straight"
+  + "|straight\\s+(?:rounds?|deaths?|times|games?)|rounds?\\s+straight)(?![\\p{L}])";
+const EN_STRAIGHT_COUNT_RE = new RegExp(EN_STRAIGHT_COUNT_SRC, "iu");
 
 // ── BELİRSİZ TEKRAR ANAHTARLARI (TR-KALAN-25, 2026-09-23) ─────────────────
 // "sürekli", "aynı pozisyon", "aynı bölge" yalın alt-dizge olarak hem ÇAPRAZ-ROUND
@@ -497,6 +514,18 @@ const REPETITION_KEYWORDS = [
 // Belirsiz OLMAYANLAR ("tekrar eden", "tekrar tekrar", "art arda", "hep aynı", EN
 // listesi) değişmez. Türkçe-\b TUZAĞI: \p{L} lookaround (dosya konvansiyonu).
 const AMBIGUOUS_REPETITION = new Set(["sürekli", "aynı pozisyon", "aynı bölge"]);
+// FB06 · F41: EN "pattern" de BELİRSİZ — "punished the mid duel pattern", "Their comp includes
+// an Op-player pattern" bu round'un / rakibin betimi; "your pattern shows you died once in R1"
+// (çapa R1) çapraz-round iddiası. EN çapraz-round çapaları CROSS_ROUND_ANCHOR_RE'ye ÖNCE eklendi
+// (again, every round, keep dying/getting, previous rounds, this match, last N rounds, past
+// rounds, each round, all match) ki çapalı EN iddiası kaçmasın.
+// ⚠ PLAN SAPMASI (ölçülmüş): plan "pattern"i AMBIGUOUS_REPETITION'a (iki dil) taşıyordu. Maliyetsiz
+// A/B'de TR'de 3 kanıtsız tekrar iddiası geri geldi (cyclefinal2 S10 "B Link'te aynı noktada ölme
+// pattern'in var", cyclereal-n14 M1-R8 "Bu round mid bottom'da ölünce pattern devam etmiş",
+// cyclereal-base M1-R4 "ölmen pattern'e eklendi"): TR koç metninde "pattern" korpusun 74 TR
+// cümlesinin HEPSİNDE oyuncunun çapraz-round ölüm kalıbı anlamında; çapası çoğu kez başka
+// yan-cümlede. Belirsizlik yalnız EN'de → TR davranışı bayt-aynı.
+const isAmbiguousRepetition = (k: string, isTr: boolean) => AMBIGUOUS_REPETITION.has(k) || (k === "pattern" && !isTr);
 const CROSS_ROUND_ANCHOR_RE = new RegExp(
   "(?<![\\p{L}\\p{N}])(?:r\\d+"
   + "|round['’]?lar[\\p{L}]*"
@@ -512,14 +541,21 @@ const CROSS_ROUND_ANCHOR_RE = new RegExp(
   // iddia hiçbir katmana takılmıyordu (rewriteLevel=3 raporlanıp metin değişmiyordu).
   // Emir/öğüt biçimleri ("sürekli değiştir", "aynı pozisyonda bekleme") ÇAPA DEĞİL.
   + "|ölüyorsun|vuruluyorsun|yakalanıyorsun|düşüyorsun|öldürülüyorsun"
+  // FB06 · F41: EN çapraz-round çapaları ("pattern" belirsiz listeye taşınmadan ÖNCE).
+  + "|again|every\\s+round|keep\\s+(?:dying|getting)|previous\\s+rounds?|this\\s+match"
+  + "|last\\s+\\d+\\s+rounds?|past\\s+rounds|each\\s+round|all\\s+match"
   + ")(?![\\p{L}])",
   "iu",
 );
-/** Bu PARÇA tekrar-iddiası taşıyor mu? Belirsiz anahtar için çapa `scope`ta (cümle) aranır. */
-function repetitionKeyIn(segment: string, scope: string): string | undefined {
+/** Bu PARÇA tekrar-iddiası taşıyor mu? Belirsiz anahtar için çapa `scope`ta (cümle) aranır.
+ *  Döner: eşleşen anahtar (ya da FB06 · F41 sayım bağlamlı "straight" öbeğinin kendisi).
+ *  isTr (FB06 · F41): metnin dili — "pattern" yalnız EN'de belirsiz. */
+function repetitionKeyIn(segment: string, scope: string, isTr: boolean): string | undefined {
   const s = segment.toLowerCase();
-  return REPETITION_KEYWORDS.find((k) =>
-    s.includes(k) && (!AMBIGUOUS_REPETITION.has(k) || CROSS_ROUND_ANCHOR_RE.test(scope)));
+  const key = REPETITION_KEYWORDS.find((k) =>
+    s.includes(k) && (!isAmbiguousRepetition(k, isTr) || CROSS_ROUND_ANCHOR_RE.test(scope)));
+  if (key !== undefined) return key;
+  return EN_STRAIGHT_COUNT_RE.exec(s)?.[0];
 }
 
 // ── İDDİA ÇIKARIMI (TR-KALAN-14/15, 2026-09-23) ──────────────────────────
@@ -735,8 +771,10 @@ function pastRoundAnchor(v: ValidationResult, lang: "tr" | "en"): string | null 
   return lang === "tr" ? `R${trNumberLocative(rounds[0])}` : `in R${rounds[0]}`;
 }
 
-export function extractClaims(text: string): ExtractedClaims {
+export function extractClaims(text: string, lang?: "tr" | "en"): ExtractedClaims {
   const lower = text.toLowerCase();
+  // FB06 · F41: dil ("pattern" yalnız EN'de belirsiz). Verilmezse rewriteUnsafeClaims ile aynı sezgi.
+  const isTrText = lang ? lang === "tr" : /[şçğıöü]/i.test(text);
 
   // Extract count — (a) sayısal iddialar eski öncelik sırasıyla, pencere sayısı atlanır.
   let claimedCount: number | null = null;
@@ -783,7 +821,7 @@ export function extractClaims(text: string): ExtractedClaims {
   // çapraz-round çapasıyla sayılır (cümle bazında taranır).
   let repIdx: number | null = null;
   for (const sm of lower.matchAll(/[^.!?]+[.!?]*/g)) {
-    const key = repetitionKeyIn(sm[0], sm[0]);
+    const key = repetitionKeyIn(sm[0], sm[0], isTrText);
     if (key !== undefined) { repIdx = (sm.index ?? 0) + sm[0].indexOf(key); break; }
   }
   const repetitionClaim = repIdx !== null;
@@ -1183,8 +1221,10 @@ export function rewriteUnsafeClaims(
       }
     }
 
-    // Remove "pattern" word if no pattern proven
-    result = result.replace(/\bpattern\b/gi, "");
+    // FB06 · F41: eski `result.replace(/\bpattern\b/gi, "")` KALDIRILDI. "pattern" tekrar
+    // anahtarı olduğu sürece dropRepetitionClauses onu taşıyan her yan-cümleyi zaten düşürdüğü
+    // için satır no-op'tu; "pattern" BELİRSİZ listeye taşınınca çapasız betimi ("punished the
+    // duel pattern") ortasından kesip "the duel ." bırakırdı. Çapalı iddia yukarıda düşüyor.
     // Silmeler cümle başında/ortasında boşluk-virgül bırakmış olabilir.
     if (isTr) result = repairTrSeam(result, lang, text);
   }
@@ -1204,7 +1244,7 @@ function dropRepetitionClauses(text: string, isTr: boolean): string {
   const sentences = text.split(/(?<=[.!?])\s+/);
   const safe: string[] = [];
   for (const sent of sentences) {
-    if (repetitionKeyIn(sent, sent) === undefined) { safe.push(sent); continue; }
+    if (repetitionKeyIn(sent, sent, isTr) === undefined) { safe.push(sent); continue; }
     const mEnd = /[.!?]+$/.exec(sent);
     const body = mEnd ? sent.slice(0, mEnd.index) : sent;
     const end = mEnd ? mEnd[0] : "";
@@ -1214,7 +1254,7 @@ function dropRepetitionClauses(text: string, isTr: boolean): string {
     let firstDropped = false;
     for (let i = 0; i < parts.length; i += 2) {
       const clause = parts[i];
-      if (!clause.trim() || repetitionKeyIn(clause, clause) !== undefined) {
+      if (!clause.trim() || repetitionKeyIn(clause, clause, isTr) !== undefined) {
         if (i === 0) firstDropped = true;
         continue;
       }
@@ -1238,7 +1278,7 @@ function stripRepetitionLevel2(text: string, isTr: boolean): string {
   const up = (c: string) => (isTr ? c.toLocaleUpperCase("tr-TR") : c.toUpperCase());
   const out: string[] = [];
   for (const sent of text.split(/(?<=[.!?])\s+/)) {
-    if (repetitionKeyIn(sent, sent) === undefined) { out.push(sent); continue; }
+    if (repetitionKeyIn(sent, sent, isTr) === undefined) { out.push(sent); continue; }
     const mEnd = /[.!?]+$/.exec(sent);
     const body = mEnd ? sent.slice(0, mEnd.index) : sent;
     const end = mEnd ? mEnd[0] : "";
@@ -1247,14 +1287,18 @@ function stripRepetitionLevel2(text: string, isTr: boolean): string {
     let pendingSep = "";
     for (let i = 0; i < parts.length; i += 2) {
       let c = parts[i];
-      if (repetitionKeyIn(c, c) !== undefined) {
+      if (repetitionKeyIn(c, c, isTr) !== undefined) {
         for (const k of REPETITION_KEYWORDS) {
           if (REPETITION_NOUN_KEYS.has(k)) continue;
           if (AMBIGUOUS_REPETITION.has(k) && !CROSS_ROUND_ANCHOR_RE.test(c)) continue;
           c = c.replace(new RegExp(`(?<![\\p{L}])${escapeRe(k)}(?![\\p{L}])\\s*`, "giu"), "");
         }
+        // FB06 · F41: sayım bağlamlı "straight" NİTELEYİCİDİR — eskisi gibi yalnız kelime yerinde
+        // düşer ("3 rounds straight at" → "3 rounds at"); bağlamsız "straight duel" dokunulmaz.
+        c = c.replace(new RegExp(EN_STRAIGHT_COUNT_SRC, "giu"),
+          (m: string) => m.replace(/(?:^|\s+)straight(?=\s|$)/i, "").trim());
         c = c.replace(/\s{2,}/g, " ").replace(/\s+([,.;:!?])/g, "$1").trim();
-        if (!c.trim() || repetitionKeyIn(c, c) !== undefined) continue;   // isim anahtar → yan-cümle düşer
+        if (!c.trim() || repetitionKeyIn(c, c, isTr) !== undefined) continue;   // isim anahtar → yan-cümle düşer
       }
       rebuilt += (rebuilt ? pendingSep : "") + c;
       pendingSep = parts[i + 1] ?? "";
@@ -2948,7 +2992,7 @@ export function realityCheck(
   // Memory-based claim check (count/window/position/repetition) — logic
   // unchanged; just operates on the (possibly guard-trimmed) text.
   if (roundHistory.length > 0) {
-    const claims = extractClaims(text);
+    const claims = extractClaims(text, lang);
     // TR-KALAN-14: salt-pencere iddiası ("Son 5 round'da agresif oynadın") kapıyı
     // tek başına açmıyordu → validateClaims'e hiç ulaşmıyordu. Yalnız ROUND
     // birimli pencere açar; "son 5 maç" bilerek dışarıda (kapsam kararı).

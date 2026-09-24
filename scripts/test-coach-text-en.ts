@@ -15,6 +15,9 @@
  */
 import * as CT from "../lib/coach-text";
 import { realityCheck } from "../lib/reality-checker";
+import { buildVisionContext, visionPostprocessOpts, type VisionPromptBody } from "../lib/vision-prompt-builder";
+import { finalizeVisionFeedback, toRoundMemory } from "../lib/vision-postprocess";
+import { EN_VISION_SCENARIOS } from "../evals/en-corpus";
 const { cleanCoachText } = CT;
 
 const en = (s: string) => cleanCoachText(s, "en");
@@ -104,6 +107,73 @@ console.log("\n[6] B02 (2026-09-23) — prod zinciri (realityCheck → cleanCoac
   t("zincir: silah öbeği düşer, cümle kurallı kalır", a === "Jett killed you from long range.", `→ "${a}"`);
   const b = "Buy an Operator next round and hold B Long.";
   t("zincir: öğüt bayt-aynı", chain(b) === b, `→ "${chain(b)}"`);
+}
+
+console.log("\n[7] FB06 · F41 — 'straight' yalnız sayım bağlamında, EN 'pattern' yalnız çapalıyken tekrar iddiası");
+{
+  // Gerçek korpus EA0'ları (scripts/eval-out cycleb09-cand-en E2/E5/E10, cyclew3-base2-en E5),
+  // prod zinciriyle AYNI factGround/hafıza (buildVisionContext + toRoundMemory). HEAD: dördü de
+  // realityCheck'te {text:"", level:3} → TR-KALAN-26 (b) gereği EA maddesi çıktıdan düşüyordu
+  // (katil + silah + konum ÖLÇÜLMÜŞ cümleler).
+  const sc = (id: string) => {
+    const s = EN_VISION_SCENARIOS.find((x) => x.id === id);
+    if (!s) throw new Error("senaryo yok: " + id);
+    return s.body as VisionPromptBody;
+  };
+  const rcEa = (id: string, text: string) => {
+    const b = sc(id);
+    const fg = buildVisionContext(b, "en").factGround;
+    return realityCheck(text, toRoundMemory(b.roundHistory as never), fg, "suggestion", "en", b.map as string).text;
+  };
+  const kept: [string, string][] = [
+    ["E2-bind-cypher-def-op-angle", "Jett held the long sight at B Long with an Operator and punished the straight duel."],
+    ["E5-lotus-neon-atk-entry-no-trade", "Chamber was holding the long A Main sightline with a Vandal and punished a straight-line entry."],
+    ["E10-abyss-iso-def-over-peek", "Neon pushed the mid duel pattern as a double-duelist entry, using speed and an aggressive checkpoint to win the engagement with a Phantom."],
+    ["E5-lotus-neon-atk-entry-no-trade", "Chamber held the long A Main line and used his Vandal to win the straight front-angle fight."],
+  ];
+  kept.forEach(([id, s], i) => {
+    const o = rcEa(id, s);
+    t(`EA0 bayt-aynı #${i + 1} (${id.split("-")[0]}): "${s.slice(0, 48)}…"`, o === s, `→ "${o}"`);
+  });
+  // Prod zinciri (finalizeVisionFeedback): E2'nin iki EA maddesi de kalır, ölçülmüş katil maddesi başta.
+  {
+    const b = sc("E2-bind-cypher-def-op-angle");
+    const fg = buildVisionContext(b, "en").factGround;
+    const out = finalizeVisionFeedback({
+      deathAnalysis: "Jett held B Long with an Operator and killed you on your wide hold.",
+      enemyAnalysis: [kept[0][1], "They run a double-duelist dive comp (Jett/Raze) so they will try to win first contact and wrap."],
+      nextRoundSuggestion: "Stop holding raw B Long this round; smoke Jett's line and let a teammate trade.",
+    }, visionPostprocessOpts(b, "en", fg));
+    t("zincir: E2 EA iki madde, ölçülmüş katil maddesi düşmüyor", out.enemyAnalysis.length === 2 && out.enemyAnalysis[0] === kept[0][1],
+      JSON.stringify(out.enemyAnalysis));
+  }
+  // NEGATİF (kilit): kanıtsız SAYIM bağlamlı 'straight' HEAD'deki gibi TÜMÜYLE nötrlenir ve
+  // geriye yeni bir konum olgusu ("You died at B Main.") kalmaz. Hafıza: tek ölüm, A Site.
+  const STUB_EN = "You were caught at the expected angle this round.";
+  const m1 = [
+    { round_index: 1, died: false, death_position: null },
+    { round_index: 2, died: true, death_position: "a site", position_confidence: "high" },
+    { round_index: 3, died: false, death_position: null },
+  ];
+  const rcD = (s: string) => realityCheck(s, m1 as never, { hasDeathLocation: true, deathLocation: "a site" } as never, "death", "en").text;
+  for (const s of [
+    "You died 3 rounds straight at B Main.",
+    "You died three rounds straight at B Main.",
+    "You died three straight rounds at B Main.",
+    // Çapalı EN "pattern" hâlâ tekrar iddiası (çapa: "this match").
+    "Your pattern this match is dying at B Main.",
+  ]) {
+    const o = rcD(s);
+    t(`kanıtsız "${s}" → nötr kalıp, konum olgusu yok`, o === STUB_EN && !/B Main/.test(o), `→ "${o}"`);
+  }
+  // Bağlamsız 'straight' / çapasız 'pattern' betimi (tek ölümlü hafızada da) bayt-aynı.
+  for (const s of [
+    "Their comp includes an Op-player pattern on long angles; clear long lanes first.",
+    "You took a straight duel into the Operator at A Site.",
+  ]) t(`betim bayt-aynı: "${s.slice(0, 40)}…"`, rcD(s) === s, `→ "${rcD(s)}"`);
+  // Öğüt biçimi: 'peek multiple times' tekrar iddiası DEĞİL (F85 negatif fixture'ı ile aynı ilke).
+  const adv = "Peek multiple times with your flash before you commit to A Site.";
+  t("öğüt 'peek multiple times' bayt-aynı", rcD(adv) === adv, `→ "${rcD(adv)}"`);
 }
 
 console.log(`\n${fail === 0 ? "TÜM TESTLER GEÇTİ ✓" : `${fail} TEST BAŞARISIZ ✗`}`);
