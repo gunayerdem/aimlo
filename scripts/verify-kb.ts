@@ -143,28 +143,42 @@ console.log(`\n[7] KB yasak-kelime taraması (${BANNED_PHRASES.length} kalıp)`)
   // yüzünden GİZLİYDİ (aynı commit'te düzeltildi). Yasağı ANLATAN satır ("yasak/deme/denmez/
   // kullanma/yerine", ❌) \p{L} sınırlı muaf kalır; "→" artık muafiyet DEĞİL.
   const exemptLine = /(?<!\p{L})(?:yasak\p{L}*|deme|denmez|kullanma|yerine)(?!\p{L})|❌/iu;
+  /** Satırdaki yasak kalıplar (muaf satırda []) — KB taraması ve öz-testler AYNI yol. */
+  const bannedIn = (line: string): string[] => {
+    if (exemptLine.test(line)) return [];
+    const lower = line.toLowerCase();
+    return BANNED_PHRASES.filter((phrase) => lower.includes(phrase.toLowerCase()));
+  };
   let hits = 0, warns = 0;
   for (const f of files) {
     const rel = path.relative(KB, f);
     const runtime = isRuntimeFile(rel);
     const lines = fs.readFileSync(f, "utf8").split("\n");
     lines.forEach((line, i) => {
-      if (exemptLine.test(line)) return;
-      const lower = line.toLowerCase();
-      for (const phrase of BANNED_PHRASES) {
-        if (lower.includes(phrase.toLowerCase())) {
-          if (runtime) {
-            hits++;
-            check(`${rel}:${i + 1}`, false, `(yasak kalıp: "${phrase}")`);
-          } else {
-            warns++;
-          }
+      for (const phrase of bannedIn(line)) {
+        if (runtime) {
+          hits++;
+          check(`${rel}:${i + 1}`, false, `(yasak kalıp: "${phrase}")`);
+        } else {
+          warns++;
         }
       }
     });
   }
   if (warns > 0) console.log(`  ⚠ runtime-dışı (yüklenmeyen) dosyalarda ${warns} yasak-kalıp — fail değil, temizlik adayı`);
   check("KB yasak-kelime temiz (runtime)", hits === 0, `(${hits} ihlal)`);
+  // Öz-test (REV-W3, 2026-09-24): #43'ün gizlediği tek ihlal aynı commit'te düzeltildiği için
+  // KB'de geri dönüşü yakalayacak veri KALMADI — exemptLine eski /(…|deme\b|…|→|❌)/i'ye
+  // dönünce verify-kb 599/0 yeşil kalıyordu (inceleyici mutasyonla ölçtü). Sıra oku ve
+  // sözcük İÇİ "deme" ("kademe") muafiyet SAYILMAZ; yasağı ANLATAN satır muaf kalır.
+  const selfCases: [string, boolean][] = [
+    ["Onların ritmi bellidir: keşif → flash → giriş; büyük ihtimalle öldün.", true],
+    ["kademe kademe büyük ihtimalle", true],
+    ["\"büyük ihtimalle\" deme", false],
+    ["yasaklı: büyük ihtimalle", false],
+    ["❌ büyük ihtimalle öldün", false],
+  ];
+  for (const [s, want] of selfCases) check(`[7] öz-test «${s}» → ${want ? "ihlal" : "temiz"}`, (bannedIn(s).length > 0) === want, `(bannedIn=${JSON.stringify(bannedIn(s))})`);
 }
 
 // 8) Statik silah+komp bloğu vision'a yükleniyor mu?
