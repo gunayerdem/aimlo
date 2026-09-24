@@ -146,6 +146,12 @@ export type ReportResponse = {
   /** Set when `persistOnServer` was true and the row was inserted (or already present). */
   savedAnalysisId?: string;
   /**
+   * FB01 · F18 (2026-09-24): yalnız persistOnServer=true iken. true = satır analyses'te
+   * (yeni ya da zaten vardı); false = INSERT bir yeniden denemeye rağmen başarısız,
+   * savedAnalysisId YOK. Additive — masaüstü serde bilinmeyen alanı yok sayar.
+   */
+  persisted?: boolean;
+  /**
    * B34 (2026-07-31): metin alanları GERÇEK AI çıktısı mı, yoksa deterministik
    * şablon mu? Şemaya ADDITIVE: desktop MatchReport (serde) bilinmeyen alanı yok
    * sayar, web istemcisi alanları tek tek okuyor — sözleşme bozulmaz.

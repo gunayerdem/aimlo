@@ -15,6 +15,7 @@
  * [F89] deterministik şablon: ajan/harita yok + dağınık ölüm + enemyCount yok → "Unknown",
  *       "okunuyor/tekrarlayan", "0.0", ölçülmemiş trade/utility yargısı YOK (TR+EN) +
  *       Lotus "Hookah'tan girdin." alan-yedeği vakası.
+ * [F18] analyses INSERT kalıcı hata (sahte PGRST303) → 1 yeniden deneme + persisted:false.
  *
  * ⚠ AĞ/AI/DB YOK: scripts/report-route-harness.ts (sahte OpenAI + sahte PostgREST);
  * OPENAI_API_KEY sahte dize; .env.local OKUNMAZ.
@@ -364,6 +365,28 @@ async function main() {
     const rd = generateDeterministicReport(repeated);
     check("aynı noktada 3 ölüm → tekrar iddiası ölçülmüş, korunur ('okunuyor', 'A Main'de 3 tekrar ölüm')",
       /bu pozisyon okunuyor/.test(rd.summary) && /A Main'de 3 tekrar ölüm/.test(rd.decisionScore), show({ s: rd.summary, d: rd.decisionScore }));
+  }
+
+  // ══════════════════════════════════════════════════════════════════════
+  console.log("\n── [F18] analyses INSERT hatası → 1 yeniden deneme + persisted:false ──");
+  {
+    resetHarness();
+    delete process.env.OPENAI_API_KEY;
+    harness.db = newFakeDb();
+    harness.db.failWith = { status: 401, body: { code: "PGRST303", message: "JWT expired", details: null, hint: null } };
+    const res = await route.POST(reportRequest({ rounds: desktopRounds(seq(2, 1)), lang: "tr", map: "bind", matchId: MID, persistOnServer: true }));
+    const j = await res.json() as Record<string, unknown>;
+    const posts = harness.db.calls.filter((m) => m === "POST").length;
+    check("sahte PGRST303 → 200 + persisted:false, savedAnalysisId YOK (fix yok: persisted alanı yok)", res.status === 200 && j.persisted === false && j.savedAnalysisId === undefined, show({ s: res.status, p: j.persisted, id: j.savedAnalysisId }));
+    check("INSERT bir kez yeniden denendi (2 POST)", posts === 2, `posts=${posts}`);
+    resetHarness();
+    harness.db = newFakeDb();
+    const ok = await route.POST(reportRequest({ rounds: desktopRounds(seq(2, 1)), lang: "tr", map: "bind", matchId: MID, persistOnServer: true }));
+    const jo = await ok.json() as Record<string, unknown>;
+    check("sağlıklı DB → persisted:true + savedAnalysisId", jo.persisted === true && jo.savedAnalysisId === MID);
+    resetHarness();
+    const web = await route.POST(reportRequest({ rounds: desktopRounds(seq(2, 1)), lang: "tr", map: "bind" }));
+    check("persistOnServer yok (web) → persisted alanı YOK", !("persisted" in (await web.json() as Record<string, unknown>)));
   }
 
   console.log(`\n${fail === 0 ? "✅" : "❌"} test-report-outcome: ${pass} geçti, ${fail} kırık\n`);

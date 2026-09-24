@@ -41,6 +41,8 @@ import { maybeRefineReport, REFINE_CALL, type RefineCallModel } from "@/lib/repo
 // Without this export, Vercel kills the function at 15s on Pro silently.
 export const maxDuration = 60;
 const AI_TIMEOUT_MS = 30_000;
+/** FB01 · F18: başarısız analyses INSERT'inin tek yeniden denemesinden önceki bekleme. */
+const PERSIST_RETRY_DELAY_MS = 500;
 // Tipler, doğrulama sabitleri (MAX_ROUNDS/MAX_NOTE_LENGTH/MAX_PROMPT_ROUNDS/VALID_*)
 // ve skor kuralı lib/report-prompt.ts + lib/report-score.ts'te (B05).
 
@@ -487,14 +489,27 @@ export async function POST(request: NextRequest) {
     // does its own client-side INSERT (saveReportToDb in app/page.tsx)
     // and leaves this off, so the two write paths don't double-write.
     if (validation.data.persistOnServer) {
-      const persist = await persistAnalysis(
+      let persist = await persistAnalysis(
         request,
         userId,
         validation.data,
         report,
       );
+      if (persist.kind === "error") {
+        // FB01 · F18 (2026-09-24): geçici PostgREST/ağ hatası (5xx, bağlantı kopması) tek
+        // hatada raporu kalıcılıktan düşürüyordu (probe: sahte PGRST303 → 200, savedAnalysisId
+        // yok). ~500 ms sonra BİR kez daha dene. persistAnalysis idempotent: ilk INSERT
+        // aslında yazıldıysa pre-flight SELECT onu bulur (conflict → aynı id).
+        console.warn(
+          "[AIMLO] Server-side analyses INSERT failed, 1 kez yeniden deneniyor:",
+          persist.message ?? "unknown",
+        );
+        await new Promise((r) => setTimeout(r, PERSIST_RETRY_DELAY_MS));
+        persist = await persistAnalysis(request, userId, validation.data, report);
+      }
       if (persist.kind === "ok") {
         report.savedAnalysisId = persist.id;
+        report.persisted = true;
       } else if (persist.kind === "conflict") {
         // 🔴 GERİ ALINDI (karşı-denetim, 2026-07-31 gecesi). Bu dal kısa süre 409
         // dönüyordu ("409 = idempotent hit" sözleşmesini tek statüde toplamak için).
@@ -511,6 +526,7 @@ export async function POST(request: NextRequest) {
         // yanıtta kullanıcı maç raporunu HİÇ göremez — üstelik AI parası yanmıştır.
         // Doğrusu: kaydın id'sini iliştir ve raporu 200 ile teslim et.
         report.savedAnalysisId = persist.id;
+        report.persisted = true;
       } else if (persist.kind === "collision") {
         // B108 (2026-07-31): matchId başkasının satırıyla çakıştı → maç
         // KAYDEDİLMEDİ. 409 DÖNME: desktop 409'u "kaydedildi, kuyruktan düşür"
@@ -526,12 +542,14 @@ export async function POST(request: NextRequest) {
           { status: 422 },
         );
       } else {
-        // Don't fail the response — AI report is still useful and the
-        // client can retry persistence on its own schedule.
+        // Don't fail the response — AI report is still useful. FB01 · F18: kalıcılığın
+        // OLMADIĞI artık yanıtta açık (additive persisted:false, savedAnalysisId YOK);
+        // masaüstü tarafında boş id'yi "kaydedilmedi" sayma işi FD tarafında (followup).
         console.warn(
-          "[AIMLO] Server-side analyses INSERT failed:",
+          "[AIMLO] Server-side analyses INSERT failed (yeniden deneme sonrası):",
           persist.message ?? "unknown",
         );
+        report.persisted = false;
       }
     }
 
