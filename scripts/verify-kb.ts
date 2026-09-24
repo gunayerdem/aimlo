@@ -329,17 +329,34 @@ console.log(`\n[N] Harita callout tablosu ↔ KB tutarlılığı`);
 // "a hail" felaketinin aynı sınıfı). HEAD'de 10 ihlal: fracture A Main/A Link/B Link/
 // B Tunnel, ascent A Link, bind B Link, haven A Tower, abyss A Default/B Default,
 // breeze A Cave.
-// KURAL: knowledge/maps/<harita>.md'deki her kalın madde etiketi — "- **X:**" ve
-// "- **X**:" (13 dosyanın 6'sı yalnız ikinci biçimi kullanıyor) — "/" ya da "=" ile
-// ayrılmış eş adlar ayrı ayrı; çok-kelimeli her ad stripForeignCallouts(`${X}'da
-// öldün.`, harita)'dan BAYT-AYNI dönmeli. Tek kelime hiç silinmediği için atlanır.
+// KURAL (B10 inceleme [0], W3-fix 2026-09-24 — ETİKETTEN TAM METNE): ilk sürüm yalnız
+// kalın madde etiketlerini ("- **X:**" / "- **X**:") ayrıştırıyordu. Aynı sınıf üç kör
+// noktada duruyordu: "- **X** (…):" biçimi, kalın OLMAYAN "- X:" listeleri (sunset.md
+// callout bölümünün tamamı) ve düz metin/başlık. Tam metin taraması, guard yeşilken
+// kendi haritasında SİLİNEN 14 satır buldu: bind.md:167 "B Lobby", fracture.md:150
+// "B CT", icebox.md "zip line" ×9 (:11/:15/:61-64/:113/:166-167), ascent.md "Market
+// kapısı" ×3 (:167/:174/:245). Etiket regex'ini genişletmek (inceleyicinin asgari
+// önerisi) bunların HİÇBİRİNİ yakalamıyordu (ölçüldü: 409 etiket, 0 ihlal) — adlar
+// madde gövdesinde/düz metinde geçiyor.
+// ŞİMDİ: knowledge/maps/<harita>.md'nin HER satırında, tüm MAP_CALLOUTS birleşiminin
+// çok-kelimeli her adı (\p{L}/\p{N} sınırlı, büyük/küçük harf duyarsız) aranır; bulunan
+// biçim stripForeignCallouts(`${ad}'da öldün.`, harita)'dan BAYT-AYNI dönmeli. Aday
+// kümesi = tablo birleşimi, çünkü cross-map kapısı YALNIZ bir tabloda kanıtlı adı siler;
+// tek kelime hiç silinmez (13 harita × tüm tek-kelimeli adlar: 0 silme, ölçüldü).
+// Bilerek yazılmış harita-dışı KARŞILAŞTIRMA ("Split'teki X gibi değil") KAPALI izin
+// listesine (N2_ALLOW) "harita.md:ad" + gerekçe ile girer — bugün boş.
 // KURTARMA YOLU (ihlalde): ad resmi/oyun-içi kaynakla doğrulanıyorsa o haritanın
 // lib/map-callouts.ts listesine eklenir (masaüstü callouts.rs aynı listeyi alır);
-// doğrulanamıyorsa KB maddesi çıkarılır ya da tablodaki doğru ada çevrilir. Harita
-// bilgisi UYDURULMAZ.
-console.log(`\n[N2] KB kalın callout etiketleri ↔ stripForeignCallouts (kendi haritasında silinmemeli)`);
+// doğrulanamıyorsa KB metni tablodaki doğru ada ya da tarife çevrilir; bilinçli
+// karşılaştırmaysa N2_ALLOW'a gerekçesiyle eklenir. Harita bilgisi UYDURULMAZ.
+console.log(`\n[N2] KB tam metnindeki callout adları ↔ stripForeignCallouts (kendi haritasında silinmemeli)`);
 {
-  const LABEL_RE = /^\s*[-*]\s+\*\*([^*\n]+?)(?::\*\*|\*\*\s*:)/;
+  /** Bilinçli harita-dışı karşılaştırma izinleri: "harita.md:callout adı (küçük harf)" → gerekçe. */
+  const N2_ALLOW: Record<string, string> = {};
+  const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const names = [...new Set(Object.values(MAP_CALLOUTS).flat().map((c) => c.toLowerCase()))]
+    .filter((c) => c.includes(" ") && !UNIVERSAL_CALLOUTS.includes(c));
+  const nameRes = names.map((c) => ({ c, re: new RegExp(`(?<![\\p{L}\\p{N}])${esc(c)}(?![\\p{L}\\p{N}])`, "giu") }));
   const mapFiles = fs.readdirSync(path.join(KB, "maps")).filter((f) => f.endsWith(".md"));
   let total = 0;
   const bad: string[] = [];
@@ -347,25 +364,30 @@ console.log(`\n[N2] KB kalın callout etiketleri ↔ stripForeignCallouts (kendi
     const m = f.replace(".md", "");
     const lines = fs.readFileSync(path.join(KB, "maps", f), "utf8").split(/\r?\n/);
     lines.forEach((line, i) => {
-      const lm = LABEL_RE.exec(line);
-      if (!lm) return;
-      for (const part of lm[1].split(/\s*[/=]\s*/)) {
-        const name = part.trim();
-        if (!name.includes(" ")) continue;
-        total++;
-        const probe = `${name}'da öldün.`;
-        const got = stripForeignCallouts(probe, m);
-        if (got !== probe) bad.push(`${m}.md:${i + 1} "${name}" → "${got}"`);
+      for (const { c, re } of nameRes) {
+        for (const mm of line.matchAll(re)) {
+          total++;
+          if (N2_ALLOW[`${f}:${c}`]) continue;
+          const probe = `${mm[0]}'da öldün.`;
+          const got = stripForeignCallouts(probe, m);
+          if (got !== probe) bad.push(`${m}.md:${i + 1} "${mm[0]}" → "${got}"`);
+        }
       }
     });
   }
   check(
-    `KB'nin çok-kelimeli kalın etiketleri kendi haritasında korunuyor (${total - bad.length}/${total})`,
+    `KB tam metnindeki çok-kelimeli callout adları kendi haritasında korunuyor (${total - bad.length}/${total})`,
     total > 0 && bad.length === 0,
     bad.length
-      ? `\n     ${bad.join("\n     ")}\n     → doğrulanmışsa lib/map-callouts.ts'e ekle (+ masaüstü callouts.rs), doğrulanamıyorsa KB'den çıkar ya da tablodaki doğru ada çevir`
-      : total === 0 ? "(hiç etiket bulunamadı — LABEL_RE KB biçimiyle uyuşmuyor)" : "",
+      ? `\n     ${bad.join("\n     ")}\n     → doğrulanmışsa lib/map-callouts.ts'e ekle (+ masaüstü callouts.rs), doğrulanamıyorsa KB metnini tablodaki doğru ada/tarife çevir, bilinçli karşılaştırmaysa N2_ALLOW'a gerekçesiyle ekle`
+      : total === 0 ? "(hiç callout adı bulunamadı — tarama KB biçimiyle uyuşmuyor)" : "",
   );
+  // Öz-test: tarayıcı gerçekten tam metinde ve etiket-dışı biçimde yakalıyor (kör kalmasın).
+  const selfHit = (line: string, m: string) =>
+    nameRes.some(({ re }) => [...line.matchAll(re)].some((mm) => stripForeignCallouts(`${mm[0]}'da öldün.`, m) !== `${mm[0]}'da öldün.`));
+  check("[N2] öz-test: düz metinde yabancı ad yakalanır (Bind, \"B Lobby'den\")", selfHit("- **B Short**: B Lobby'den Hookah'ya çıkan yol.", "bind"));
+  check("[N2] öz-test: kalın olmayan '- X:' biçimi yakalanır (Bind, '- B Lobby:')", selfHit("- B Lobby: saldırı girişi", "bind"));
+  check("[N2] öz-test: kendi haritasının adı temiz (Ascent, 'B Lobby')", !selfHit("- B Lobby: savunma girişi", "ascent"));
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

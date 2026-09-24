@@ -197,5 +197,34 @@ console.log("\n[12] KB ↔ TABLO SENKRONU (TR-KALAN-17 / B10) — KB'nin kalın 
   t("summit 'A Cave' (kendi callout'u) KORUNDU", stripForeignCallouts("A Cave'de öldün.", "summit") === "A Cave'de öldün.");
 }
 
+console.log("\n[13] TAM-METİN SENKRONU (B10 inceleme [0], W3-fix) — KB gövdesindeki meşru ad kendi haritasında silinmez");
+{
+  // HEAD (bu düzeltme öncesi): üçü de "öldün."/cümle başı kopuk — ad kendi haritasının KB'sinde
+  // yazılı ama tabloda yoktu, başka haritada (sunset / split / fracture) KANITLIYDI.
+  const legit: [string, string][] = [
+    ["ascent", "Market kapısı kapatıldığında B'ye CT'den dön."], // ascent.md:245
+    ["haven", "A Sewer'da öldün."], // resmi Haven etiketi (haven.md:22 "A Sewers")
+    ["icebox", "A'daki zip line'ı kullanıp Nest'e çık."], // icebox.md:15
+  ];
+  for (const [m, s] of legit) {
+    const d = stripForeignCallouts(s, m);
+    t(`${m} «${s}» KORUNDU`, d === s, `→ "${d}"`);
+  }
+  t("calloutBelongsToMap('a sewer', 'haven')", calloutBelongsToMap("a sewer", "haven"));
+  t("calloutBelongsToMap('zip line', 'icebox')", calloutBelongsToMap("zip line", "icebox"));
+  t("calloutBelongsToMap('market kapısı', 'ascent')", calloutBelongsToMap("market kapısı", "ascent"));
+  // Cross-map kapısı AÇILMADI: eklenen adlar tablo birleşiminde zaten vardı; başka haritada
+  // hâlâ yabancı.
+  const neg: [string, string][] = [["lotus", "A Sewer"], ["ascent", "Zip line"], ["bind", "Market kapısı"]];
+  for (const [m, name] of neg) {
+    const d = stripForeignCallouts(`${name}'da öldün.`, m);
+    t(`${m} '${name}' (başka haritanın callout'u) hâlâ siliniyor`, !new RegExp(name, "i").test(d), `→ "${d}"`);
+  }
+  // Doğrulanamayan iki ad TABLOYA ALINMADI (resmi Bind/Fracture listelerinde yok) — KB metni
+  // düzeltildi (bind.md:167, fracture.md:150); uydurma olarak yazılırsa silinmeye devam eder.
+  t("bind 'B Lobby' (resmi listede yok) hâlâ siliniyor", !/b lobby/i.test(stripForeignCallouts("B Lobby'den çıkarken öldün.", "bind")));
+  t("fracture 'B CT' (resmi listede yok) hâlâ siliniyor", !/b ct/i.test(stripForeignCallouts("B CT çıkışında öldün.", "fracture")));
+}
+
 console.log(`\n══════ ${fail === 0 ? "✅ TÜMÜ GEÇTİ" : `❌ ${fail} BAŞARISIZ`} ══════\n`);
 if (fail > 0) process.exit(1);

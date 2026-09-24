@@ -36,8 +36,9 @@
  *
  * scripts/verify-kb.ts bu tablodaki her callout'un ilgili harita .md dosyasında
  * gerçekten geçtiğini doğrular — tablo KB'den sessizce sapamaz ([N]). Ters yönü
- * [N2] tutar: KB'nin kalın callout maddeleri ("- **X:**") kendi haritasında
- * stripForeignCallouts'tan bayt-aynı geçmeli — KB tablodan sessizce sapamaz.
+ * [N2] tutar: harita KB'sinin TAM METNİNDE geçen çok-kelimeli her callout adı (yalnız
+ * kalın "- **X:**" etiketleri değil) kendi haritasında stripForeignCallouts'tan
+ * bayt-aynı geçmeli — KB tablodan sessizce sapamaz.
  */
 
 /** HER haritada bulunan evrensel konum adları.
@@ -73,15 +74,30 @@ export const UNIVERSAL_CALLOUTS: readonly string[] = [
  *     terimi; bind/fracture/haven/icebox/lotus/pearl/split tablolarıyla aynı kural
  * Breeze "A Cave" EKLENMEDİ: resmi v7.04 notu "A Cave blocked off", güncel resmi
  * ve metabot listelerinde yok → KB maddesi (breeze.md) kaldırıldı.
- * Masaüstü src-tauri/src/callouts.rs MAP_CALLOUTS aynı eklemeleri almalı (D22). */
+ * Masaüstü src-tauri/src/callouts.rs MAP_CALLOUTS aynı eklemeleri almalı (D22).
+ *
+ * TAM-METİN SENKRONU (B10 inceleme [0], W3-fix 2026-09-24): [N2] yalnız "- **X:**"
+ * etiketlerini tarıyordu; tam metin taraması aynı sınıftan üç meşru adı daha buldu
+ * (kendi haritasının KB'sinde yazılı, tabloda yok, başka haritada kanıtlı → siliniyordu):
+ *   • ascent "market kapısı" — ascent.md:167/:174/:245 ("Market kapısı kapatıldığında");
+ *     resmi: "Each site has one door (A Link for A and Market for B)" (yukarıda)
+ *   • haven "a sewer" — resmi Haven etiketi "A Sewer" (wiki.playvalorant.com/en-us/Haven);
+ *     haven.md:22 "A Short = A Sewers". Model resmi tekil adı yazarsa Split kanıtıyla siliniyordu.
+ *   • icebox "zip line" — icebox.md:11/:15/:61-64/:113/:166-167; resmi "Icebox is the first
+ *     map to introduce horizontal ziplines, seen at A Site" (wiki.playvalorant.com/en-us/Icebox)
+ * Üçü de başka bir tabloda zaten vardı (sunset / split / fracture) → tablo birleşimi, yani
+ * silinebilir ad kümesi DEĞİŞMEDİ; başka haritada yeni silme oluşamaz.
+ * Doğrulanamayan iki ad tabloya ALINMADI, KB metni düzeltildi: bind.md:167 "B Lobby" (resmi
+ * Bind listesinde yok) ve fracture.md:150 "B CT" (resmi Fracture listesinde yok).
+ * Masaüstü callouts.rs aynı üç eklemeyi almalı (D22 devamı — followup). */
 export const MAP_CALLOUTS: Record<string, readonly string[]> = {
   abyss: ["a bridge", "a default", "a link", "a lobby", "a main", "a secret", "a security", "a site", "a tower", "a vent", "ascender", "attacker spawn", "b danger", "b default", "b link", "b lobby", "b main", "b nest", "b site", "b tower", "defender spawn", "mid", "mid bend", "mid bottom", "mid catwalk", "mid library", "mid top", "void"],
-  ascent: ["a link", "a lobby", "a main", "a short", "a site", "b lanes", "b link", "b lobby", "b main", "b site", "back b", "boathouse", "catwalk", "closet", "ct", "ct b", "cubby", "defender spawn b", "dice", "garden", "gen", "generator", "heaven", "hell", "market", "mid", "mid bottom", "mid courtyard", "mid link", "mid top", "pizza", "rafters", "switch", "top mid", "tree", "window", "wine"],
+  ascent: ["a link", "a lobby", "a main", "a short", "a site", "b lanes", "b link", "b lobby", "b main", "b site", "back b", "boathouse", "catwalk", "closet", "ct", "ct b", "cubby", "defender spawn b", "dice", "garden", "gen", "generator", "heaven", "hell", "market", "market kapısı", "mid", "mid bottom", "mid courtyard", "mid link", "mid top", "pizza", "rafters", "switch", "top mid", "tree", "window", "wine"],
   bind: ["a bath", "a default", "a heaven", "a hell", "a lamps", "a lobby", "a short", "a showers", "a site", "a tower", "arka bahçe", "b default", "b elbow", "b garden", "b hall", "b hookah", "b link", "b long", "b site", "b window", "bath", "elbow", "garden", "hall", "hamam", "heaven", "hell", "hookah", "lamps", "long", "short", "showers", "teleporter", "triple box", "window"],
   breeze: ["a main", "a pyramid", "a site", "attacker spawn", "b main", "b site", "b window", "chute", "cubby", "defender spawn", "doors", "elbow", "halls", "mid", "nest", "pyramid", "window"],
   corrode: ["a link", "a main", "a site", "b elbow", "b link", "b main", "b site", "bottom mid", "elbow", "mid", "mid window", "pocket", "stairs", "top mid", "tower", "yard"],
   fracture: ["a default", "a dish", "a drop", "a hall", "a link", "a main", "a rope", "a site", "b arcade", "b canteen", "b default", "b generator", "b link", "b main", "b site", "b tower", "b tree", "b tunnel", "ct spawn", "defender spawn", "mid", "zip line"],
-  haven: ["a default", "a heaven", "a hell", "a long", "a short", "a site", "a tower", "b back", "b default", "b site", "c default", "c link", "c long", "c platform", "c site", "ct spawn", "garage", "mid", "mid doors", "mid window", "plat"],
+  haven: ["a default", "a heaven", "a hell", "a long", "a sewer", "a short", "a site", "a tower", "b back", "b default", "b site", "c default", "c link", "c long", "c platform", "c site", "ct spawn", "garage", "mid", "mid doors", "mid window", "plat"],
   // ⚠ AÇIK EKSİK — KB BOŞLUĞU (canlı-test #8, 2026-08-03): canlı maçta "mid boiler"
   // (log:1351) ve "b tube" (log:1377) 3/3 stratejiyle TEMİZ okundu, "mid blue" de
   // ölüm yeri oldu. Bileşik biçimleri bu tabloda YOK; yalnız çıplak "boiler"/"tube"/
@@ -94,7 +110,7 @@ export const MAP_CALLOUTS: Record<string, readonly string[]> = {
   // sonra tabloyu genişletmek. Harita bilgisi UYDURULMAZ.
   // Bu arada zarar YOK: desktop kanonik eşleyicisi kelime-bazlı kademeye sahip
   // ("mid" + "boiler" ayrı ayrı tabloda) → doğru okuma zaten geçiyor.
-  icebox: ["a belt", "a box", "a default", "a main", "a nest", "a pipes", "a rafters", "a screens", "a site", "a zip", "b default", "b green", "b hall", "b kitchen", "b main", "b orange", "b site", "b snowman", "b yellow", "belt", "blue", "boiler", "ct spawn", "green", "kitchen", "mid", "nest", "orange", "pallet", "pipes", "rafters", "screens", "snowman", "t spawn", "tube", "yellow"],
+  icebox: ["a belt", "a box", "a default", "a main", "a nest", "a pipes", "a rafters", "a screens", "a site", "a zip", "b default", "b green", "b hall", "b kitchen", "b main", "b orange", "b site", "b snowman", "b yellow", "belt", "blue", "boiler", "ct spawn", "green", "kitchen", "mid", "nest", "orange", "pallet", "pipes", "rafters", "screens", "snowman", "t spawn", "tube", "yellow", "zip line"],
   lotus: ["a default", "a link", "a main", "a root", "a site", "a stairs", "a tree", "b default", "b main", "b site", "b upper", "c default", "c hall", "c main", "c mound", "c site", "c waterfall", "mid", "mid link", "silent drop", "waterfall"],
   pearl: ["a art", "a ct", "a default", "a dugout", "a flowers", "a link", "a main", "a secret", "a site", "b club", "b default", "b hall", "b link", "b main", "b ramp", "b screen", "b site", "b tower", "b tunnel", "ct spawn", "mid", "mid connector", "mid doors", "mid plaza", "mid shops", "mid top", "t spawn"],
   split: ["a back", "a ct", "a default", "a elbow", "a lobby", "a main", "a rafters", "a ramp", "a screens", "a sewer", "a site", "a tower", "b back", "b ct", "b default", "b garage", "b link", "b main", "b pillar", "b rafters", "b site", "b tower", "ct spawn", "elbow", "garage", "heaven", "link", "lobby", "mail", "mid", "mid bottom", "mid mail", "mid rope", "mid top", "mid vent", "pillar", "rafters", "ramp", "rope", "screens", "sewer", "t spawn", "tower", "vent"],

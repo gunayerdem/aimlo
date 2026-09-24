@@ -164,7 +164,7 @@ WHY: Bind'in geniş site'leri yüzünden tek yönden retake tüm açılara açı
 - **B Hookah (B Window)**: B Site'ın üstündeki pencere. Burası senin elinde değilse B'ye girme — açık arazide avlanırsın.
 - **B Elbow**: Site içindeki dirsek dönüşü. Anchor olarak dur — B Long'a köşesel atış açısı verir.
 - **B Long**: B Site'a uzanan açık alan. Saldırı buradan gelir. Savunmada burayı boğaz noktası gibi kullan, push'u boğ.
-- **B Short**: B Lobby'den Hookah penceresine çıkan kısa yol. B saldırısının yarısı buradan gelir: saldırıda Hookah'yı B Short'tan al, sonra B Long'a bağlan; savunmada tel ya da bot ile kapat, çünkü buradan çıkan doğrudan yukarı açıya oturur. B Short'u vermeden Hookah düşmez.
+- **B Short**: Saldırı tarafından Hookah penceresine çıkan kısa yol. B saldırısının yarısı buradan gelir: saldırıda Hookah'yı B Short'tan al, sonra B Long'a bağlan; savunmada tel ya da bot ile kapat, çünkü buradan çıkan doğrudan yukarı açıya oturur. B Short'u vermeden Hookah düşmez.
 - **B Link**: Hookah ile site arasındaki bağlantı. Rotate ve retake buradan geçer — post-plant'te bu ağzı bir kişi tutsun, savunmanın en sessiz girişi burası.
 - **B Garden (Arka Bahçe)**: Site'in arka kısmı. Spike kurulduktan sonra saldırı buradan çapraz ateş kurar — retake yaparken önce buraya bak.
 - **B Hall**: B Long'dan site'a açılan dar geçiş. Smoke veya flash yoksa buradan geçen düz ölür.

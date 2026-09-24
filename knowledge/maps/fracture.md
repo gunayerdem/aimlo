@@ -147,7 +147,7 @@ WHY: Fracture'ın ortası savunmanın omurgası. Omurga kırılırsa iki siteyi 
 
 ## 11. B Site Saldırı
 - B Tower + B Arcade split, B siteye ana giriş stratejisi. Tower birincil baskı, Arcade ikincil.
-- Smoke: B Tree (savunucunun anchor noktasını kapat) ve B CT çıkışı (rotate yolunu kes).
+- Smoke: B Tree (savunucunun anchor noktasını kapat) ve B'nin CT çıkışı (rotate yolunu kes).
 - B Canteen'den Main'e ilerle, Arcade'den eş zamanlı ikincil baskı gönder. İki grup aynı anda hareket edecek.
 - Raze kullanıyorsan: botunu Tower'a gönder, düşmanın yerini öğren; sonra sıçramayla Arcade'den hızlı giriş yap.
 - Spike plant: B Default, kutuların arkası. Plant sonrası B Main + B Arcade crossfire kur.
