@@ -1084,6 +1084,41 @@ console.log("\n════ FB06 · F57 · YAZIYLA SAYI + 'kere' + KONUM LİSTES
   const o130 = realityCheck(nr5, rh5 as never, { hasDeathLocation: true, deathLocation: "b main" } as never, "suggestion", "tr", "ascent").text;
   t("130 cyclereal-r3d M1-R5 NR: uydurma 'üç kez' düşer, ölçülen B Main + öğüt kalır",
     !/üç kez/.test(o130) && /^B Main'de öldüğün/.test(o130) && /bir sonraki round B'yi tek başına tutma/.test(o130), `→ "${o130}"`);
+
+  // FB06 inceleme · F57 (medium): liste üyesinin HER biri pencerede ≥1 ölümle eşleşmeli. Hafıza
+  // R1 b site, R3 a tree, R5 b site; bu round ölçülen b site; A Main'de ölüm 0. HEAD: toplam
+  // (B Site 2) uydurma A Main'i de "doğruluyordu" ("2 kez" bayt-aynı, "3 kez" → "A Main'de 2 kez").
+  const rhL: Mem[] = [
+    { round_index: 1, died: true, death_position: "b site", position_confidence: "high" },
+    { round_index: 3, died: true, death_position: "a tree", position_confidence: "high" },
+    { round_index: 5, died: true, death_position: "b site", position_confidence: "high" },
+  ];
+  const fgB = { hasDeathLocation: true, deathLocation: "b site" } as never;
+  const rcL = (s: string) => realityCheck(s, rhL as never, fgB, "death", "tr", "Ascent").text;
+  for (const [ad, s] of [
+    ["151a rakamlı 'B Site ve A Main'de 2 kez'", "B Site ve A Main'de 2 kez öldün; açıyı değiştir."],
+    ["151b aşan sayım '… 3 kez' (HEAD: 'A Main'de 2 kez'e YAZIYORDU)", "B Site ve A Main'de 3 kez öldün; açıyı değiştir."],
+    ["151c yazıyla ikiz '… iki kez'", "B Site ve A Main'de iki kez öldün; açıyı değiştir."],
+    ["151d uydurma üye başta ('A Main ve B Site'ta 2 kez')", "A Main ve B Site'ta 2 kez öldün; açıyı değiştir."],
+  ] as [string, string][]) {
+    const o = rcL(s);
+    t(`${ad} → uydurma üye + sayım birlikte kalmaz`, !/A Main/.test(o) && !/(?:2|3|iki) kez/.test(o) && o === "B Site'ta öldün; açıyı değiştir.", `→ "${o}"`);
+  }
+  same("151e tüm üyeler kanıtlı liste ('B Site/A Tree'de 2 kez', toplam 3) bayt-aynı", rcL("B Site/A Tree'de 2 kez öldün; açıyı değiştir."), "B Site/A Tree'de 2 kez öldün; açıyı değiştir.");
+
+  // FB06 inceleme (low): "bir kez/kere daha" deyimi sayım değil (HEAD: "Bu round daha öldün").
+  const fgBM = { hasDeathLocation: true, deathLocation: "b main" } as never;
+  const m5b: Mem[] = [1, 2, 3, 4, 5].map((i) => (i <= 2 ? { round_index: i, died: true, death_position: "b main", position_confidence: "high" } : { round_index: i, died: true }));
+  for (const s of [
+    "Bu round bir kez daha A Main'de öldün; açıyı erken verdin.",
+    "Bir kez daha A Main'de öldün, açıyı erken verdin.",
+    "A Main'de bir kere daha öldün, açıyı erken verdin.",
+  ]) same(`152 '${s.slice(0, 26)}…' yetim 'daha' üretmez (bayt-aynı)`, realityCheck(s, m5b as never, fgBM, "death", "tr", "Ascent").text, s);
+  // FB06 inceleme (low): bileşik yazıyla sayı "on iki" = 12 (HEAD: "iki kez" okunup 2 ≤ 5 "doğru").
+  eq("153a 'Bu maçta on iki kez öldün' (toplam 5 ölüm) → '5 kez' (rakamlı '12 kez' ile aynı yol)",
+    realityCheck("Bu maçta on iki kez öldün.", m5b as never, fgBM, "death", "tr", "Ascent").text, "Bu maçta 5 kez öldün.");
+  eq("153b 'B Main'de on iki kez' (gerçek 2) → '2 kez', öksüz 'on' yok",
+    realityCheck("B Main'de on iki kez öldün, açıyı değiştir.", m5b as never, fgBM, "death", "tr", "Ascent").text, "B Main'de 2 kez öldün, açıyı değiştir.");
 }
 
 console.log("\n════ FB06 · F51 · ÖNERİ ALANI KUYRUĞA İNMEZ (iddia öbeği / ham metin kurtarması) ════");
@@ -1138,6 +1173,40 @@ console.log("\n════ FB06 · F51 · ÖNERİ ALANI KUYRUĞA İNMEZ (iddia 
   const o135 = chainNr("M1-R9-ascent-jett", "Savunmada B Main'de üst üste öldüğün kayıtları da var; sonraki round siper kenarını sabit tutma, smoke ile görüş hattını kapat ve dash'le farklı bir off-angle'dan pozisyona girerek retake/rotate tehdidini azalt.");
   t("135 M1-R9 zincir: dönüşüm RC'den önce → kanıtsız 'B Main'de' düşer, tutanak dili yok",
     !/kayıt/.test(o135) && !/B Main/.test(o135) && /^Savunmada üst üste öldün; sonraki round siper kenarını sabit tutma/.test(o135), `→ "${o135}"`);
+}
+
+console.log("\n════ FB06 inceleme · F51 · KUYRUK KAPISI YEDEĞİ HAM DEĞİL, GUARD'LI METİN ════");
+{
+  // Gerçek gövde M1-R5 (evals/real-rounds-23.json; bu round ölçülen b main, katil OKUNMAMIŞ) +
+  // prod gibi mevcut round hafızada (R5 b main high → B Main gerçek ölüm = 1). HEAD: kuyruk kapısı
+  // realityCheck'i "" yapıyor, zincir HAM nrIn'e dönüyordu → uydurma sayım/katil/silah/headshot
+  // kullanıcıya gidiyordu (F57 ve guardUnprovenFacts'in sildiği sınıflar).
+  const real = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "evals", "real-rounds-23.json"), "utf8")) as { id: string; body: VisionPromptBody }[];
+  const b0 = real.find((x) => x.id === "M1-R5-ascent-jett")!.body as VisionPromptBody & { roundHistory: Record<string, unknown>[] };
+  const cur = { round_index: 5, died: true, round_won: false, death_detected_confidence: "observed", timestamp: 4, death_position: "b main", position_confidence: "high" };
+  const chain = (lang: "tr" | "en", nr: string, ea: string[] = []) => {
+    const b = { ...b0, lang, roundHistory: [...b0.roundHistory, cur] } as VisionPromptBody;
+    const fg = buildVisionContext(b, lang).factGround;
+    return finalizeVisionFeedback({ deathAnalysis: lang === "tr" ? "Açıkta kaldın." : "You were exposed.", enemyAnalysis: ea, nextRoundSuggestion: nr },
+      visionPostprocessOpts(b, lang, fg));
+  };
+  const nrCount = chain("tr", "B Main'de 3 kez öldün ve aynı pozisyonda bekliyorsun, rakip seni artık okuyor; smoke at.").nextRoundSuggestion;
+  t("150a NR 'B Main'de 3 kez … aynı pozisyon' → uydurma '3 kez' YOK, öğüt kalır (HEAD: ham metin '3 kez' dahil)",
+    !/3 kez/.test(nrCount) && /smoke at\.$/.test(nrCount) && /B Main'de öldün/.test(nrCount), `→ "${nrCount}"`);
+  const nrEn = chain("en", "You died at B Main 3 times from the same spot and they are reading you now; smoke first.").nextRoundSuggestion;
+  t("150b EN ikizi → '3 times' YOK, öğüt kalır", !/3 times/.test(nrEn) && /smoke first\.$/.test(nrEn), `→ "${nrEn}"`);
+  const killerRaw = "Bu round Jett seni Operator'la B Main'de kafadan vurdu ve sürekli aynı pozisyonda ölüyorsun, rakip seni okuyor; smoke at.";
+  const nrKill = chain("tr", killerRaw).nextRoundSuggestion;
+  t("150c NR katil bilinmezken 'Jett … Operator'la … kafadan' + tekrar → Jett/Operator/kafadan YOK (HEAD: hepsi geri geliyordu)",
+    !/Jett|Operator|kafadan/.test(nrKill) && /smoke at\.$/.test(nrKill), `→ "${nrKill}"`);
+  const eaOne = chain("tr", "Smoke at ve bekle.", [killerRaw]).enemyAnalysis;
+  t("150d aynı metin TEK EA maddesi → Jett/Operator/kafadan YOK, madde korunur (son madde)",
+    eaOne.length === 1 && !/Jett|Operator|kafadan/.test(eaOne[0]), JSON.stringify(eaOne));
+  const eaTwo = chain("tr", "Smoke at ve bekle.", ["B Main'de Killjoy kurulu, drone'la temizle.", killerRaw]).enemyAnalysis;
+  t("150e kanıtlı madde varken kanıtsız (kuyruğa inen) madde yine DÜŞER (TR-KALAN-26 (b) aynen)",
+    eaTwo.length === 1 && /Killjoy kurulu/.test(eaTwo[0]), JSON.stringify(eaTwo));
+  const rcKill = realityCheck(killerRaw, toRoundMemory([...b0.roundHistory, cur] as never), buildVisionContext({ ...b0, roundHistory: [...b0.roundHistory, cur] } as VisionPromptBody, "tr").factGround, "suggestion", "tr", "ascent");
+  t("150f realityCheck sinyali aynen: text '' + fallbackText guard'lı", rcKill.text === "" && !!rcKill.fallbackText && !/Jett|Operator|kafadan/.test(rcKill.fallbackText), JSON.stringify(rcKill));
 }
 
 console.log(`\n${fail === 0 ? "TAM YEŞİL" : "KIRMIZI"} — ${n - fail}/${n} geçti${fail ? `, ${fail} HATA` : ""}`);

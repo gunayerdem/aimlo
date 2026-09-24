@@ -60,6 +60,8 @@ interface ValidationResult {
   matchedRounds?: number[];
   /** Hafızadaki round_index'ler tekil mi (değilse "R<n>" çapası yazılmaz). */
   roundIndexUnique?: boolean;
+  /** FB06 inceleme · F57: sayım listesinin pencerede HİÇ ölümü olmayan üyeleri (küçük harf). */
+  unseenListMembers?: string[];
 }
 
 // ── Death-Data Contract (Ölüm-Veri Sözleşmesi 2026-06-29) ──
@@ -182,17 +184,33 @@ const TR_COUNT_WORD_VALUE: Readonly<Record<string, number>> = {
   bir: 1, iki: 2, "üç": 3, "dört": 4, "beş": 5, "altı": 6, yedi: 7, sekiz: 8, dokuz: 9, on: 10,
 };
 const trCountWordSrc = (w: string) => w.replace(/^i/, "[iİ]\\u0307?");
-const TR_COUNT_NUM_ALT = "\\d+|" + Object.keys(TR_COUNT_WORD_VALUE).map(trCountWordSrc).join("|");
+// FB06 inceleme · F57 (low): BİLEŞİK yazıyla sayı ("on iki kez") — eskiden tablo yalnız bir…on
+// olduğu için "on iki kez" içindeki "iki kez" eşleşiyor, 12 iddiası 2 diye "doğrulanıyor" ya da
+// silmede öksüz "on" kalıyordu ("Bu maçta on öldün"). Onlar basamağı (on/yirmi/otuz) + isteğe
+// bağlı birler basamağı TEK belirteç; alternasyonda tekil sözcüklerden ÖNCE (en uzun eşleşme).
+const TR_COUNT_TENS: Readonly<Record<string, number>> = { on: 10, yirmi: 20, otuz: 30 };
+const TR_COUNT_UNITS_SRC = Object.keys(TR_COUNT_WORD_VALUE).filter((k) => TR_COUNT_WORD_VALUE[k] < 10).map(trCountWordSrc).join("|");
+const TR_COUNT_COMPOUND_SRC = `(?:${Object.keys(TR_COUNT_TENS).join("|")})\\s+(?:${TR_COUNT_UNITS_SRC})`;
+const TR_COUNT_NUM_ALT = "\\d+|" + TR_COUNT_COMPOUND_SRC + "|" + [...Object.keys(TR_COUNT_WORD_VALUE), "yirmi", "otuz"].map(trCountWordSrc).join("|");
 const TR_COUNT_UNIT_ALT = "(?:kez|defa|kere)";
-/** Sayım belirteci → sayı ("3" → 3, "üç"/"Üç" → 3, "i\u0307ki" → 2); tanınmazsa NaN. */
+/** Sayım belirteci → sayı ("3" → 3, "üç"/"Üç" → 3, "i\u0307ki" → 2, "on iki" → 12); tanınmazsa NaN. */
 function trCountValue(tok: string): number {
   if (/^\d+$/.test(tok)) return parseInt(tok, 10);
-  return TR_COUNT_WORD_VALUE[tok.toLocaleLowerCase("tr-TR").replace(/\u0307/g, "")] ?? NaN;
+  const words = tok.toLocaleLowerCase("tr-TR").replace(/\u0307/g, "").trim().split(/\s+/);
+  if (words.length === 2 && TR_COUNT_TENS[words[0]] !== undefined) {
+    const u = TR_COUNT_WORD_VALUE[words[1]];
+    return u !== undefined && u < 10 ? TR_COUNT_TENS[words[0]] + u : NaN;
+  }
+  return TR_COUNT_WORD_VALUE[words[0]] ?? TR_COUNT_TENS[words[0]] ?? NaN;
 }
-/** ct sayısının metindeki biçimleri: rakam + (1-10 ise) sözcük → "(?:3|üç)". */
+/** ct sayısının metindeki biçimleri: rakam + (1-39 ise) sözcük → "(?:3|üç)", "(?:12|on\s+iki)". */
 function trCountTokenSrc(ct: number): string {
   const w = Object.keys(TR_COUNT_WORD_VALUE).find((k) => TR_COUNT_WORD_VALUE[k] === ct);
-  return w ? `(?:${ct}|${trCountWordSrc(w)})` : String(ct);
+  if (w) return `(?:${ct}|${trCountWordSrc(w)})`;
+  const tens = Object.keys(TR_COUNT_TENS).find((k) => TR_COUNT_TENS[k] === ct - (ct % 10));
+  const unit = Object.keys(TR_COUNT_WORD_VALUE).find((k) => TR_COUNT_WORD_VALUE[k] === ct % 10);
+  if (ct === 20 || ct === 30) return `(?:${ct}|${ct === 20 ? "yirmi" : "otuz"})`;
+  return tens && unit && ct % 10 !== 0 ? `(?:${ct}|${tens}\\s+${trCountWordSrc(unit)})` : String(ct);
 }
 /** index'in YAN-CÜMLESİNDE ([.!?;:—\n] sınırlı) ölüm yüklemi var mı? (yazıyla sayı kalkanı) */
 function deathClauseAt(text: string, index: number): boolean {
@@ -206,8 +224,11 @@ function deathClauseAt(text: string, index: number): boolean {
 function wordCountOutsideDeathClause(tok: string, full: string, offset: number): boolean {
   return !/^\d/.test(tok) && !deathClauseAt(full, offset);
 }
-/** TR sayım birimi (rakam | bir…on) + kez|defa|kere; 1. grup sayı. Sağda harf yok ("bir kerede"). */
+/** TR sayım birimi (rakam | bir…on | bileşik) + kez|defa|kere; 1. grup sayı. Sağda harf yok
+ *  ("bir kerede"). FB06 inceleme (low): "bir kez/kere/defa daha" deyimi ("once again") sayım
+ *  DEĞİL — eskiden claimedCount=1 sayılıp kanıtsız konumda "Bu round daha öldün" üretiyordu. */
 const TR_COUNT_RE = new RegExp(`(?<![\\p{L}\\p{N}])(${TR_COUNT_NUM_ALT})\\s*${TR_COUNT_UNIT_ALT}(?![\\p{L}])`, "iu");
+const TR_ONCE_AGAIN_RE = /^\s+daha(?![\p{L}])/iu;
 
 const COUNT_PATTERNS = [
   EN_OF_LAST_COUNT_RE,
@@ -780,6 +801,35 @@ function locateCountClaim(text: string, unitRe: RegExp, claimedPosition: string)
   }
   return null;
 }
+/** FB06 inceleme · F57: sayım listesinin [listStart, posEnd) yayılımından `unseen` üyeleri çıkarır.
+ *  Ayraçlar korunur; SON üye çıkarsa TR bulunma eki kalan son üyeye taşınır (trLocative ile
+ *  ünlü uyumu: "B Site ve A Main'de" → "B Site'ta"). Hiç üye kalmayacaksa ya da biçim
+ *  çözülemiyorsa metin AYNEN döner. */
+const LIST_MEMBER_SEP_RE = /(\s*(?:\/|,|\s(?:ve|veya|ya\s+da|ile|and|or)\s)\s*)/iu;
+function dropUnseenListMembers(text: string, loc: CountClaimSpan, unseen: readonly string[], isTr: boolean): string {
+  let start = loc.listStart;
+  const letter = /(?<![\p{L}\p{N}])[abc]\s+$/iu.exec(text.slice(0, start));
+  if (letter) start = letter.index;
+  const span = text.slice(start, loc.posEnd);
+  const parts = span.split(LIST_MEMBER_SEP_RE);            // [üye0, ayraç0, üye1, …]
+  const members: { text: string; sepBefore: string }[] = [];
+  for (let i = 0; i < parts.length; i += 2) members.push({ text: parts[i], sepBefore: i > 0 ? parts[i - 1] : "" });
+  const key = (s: string) => s.trim().toLowerCase().replace(/\s+/g, " ");
+  const kept = members.filter((m) => !unseen.includes(key(m.text)));
+  if (kept.length === members.length || kept.length === 0 || members.some((m) => !m.text.trim())) return text;
+  const rebuilt = kept.map((m, i) => (i === 0 ? m.text : m.sepBefore + m.text)).join("");
+  let after = text.slice(loc.posEnd);
+  let head = rebuilt;
+  const lastDropped = unseen.includes(key(members[members.length - 1].text));
+  if (lastDropped && isTr) {
+    const suf = /^\s*['’]\s*(?:d[ae]|t[ae])(ki)?(?![\p{L}])/u.exec(after);
+    if (suf) {
+      head = rebuilt.slice(0, rebuilt.length - kept[kept.length - 1].text.length) + trLocative(kept[kept.length - 1].text.trim()) + (suf[1] ?? "");
+      after = after.slice(suf[0].length);
+    }
+  }
+  return text.slice(0, start) + head + after;
+}
 /** Tek eşleşen round'un geçmiş çapası: TR "R2'de" (ünlü uyumlu, trNumberLocative), EN
  *  "in R2". Eşleşen round TEK değilse null (çapa uydurulmaz). */
 function pastRoundAnchor(v: ValidationResult, lang: "tr" | "en"): string | null {
@@ -809,6 +859,8 @@ export function extractClaims(text: string, lang?: "tr" | "en"): ExtractedClaims
       if (p === EN_OF_LAST_COUNT_RE && !deathSentence) continue;
       // FB06 · F57: yazıyla sayı ("üç kez") yalnız ölüm yan-cümlesinde sayımdır (öğüt kalkanı).
       if (p === TR_COUNT_RE && wordCountOutsideDeathClause(m[1], lower, at)) continue;
+      // FB06 inceleme: "bir kez daha" = deyim (tekrar), sayım iddiası değil.
+      if (p === TR_COUNT_RE && trCountValue(m[1]) === 1 && TR_ONCE_AGAIN_RE.test(lower.slice(at + m[0].length))) continue;
       const value = p === TR_COUNT_RE ? trCountValue(m[1]) : parseInt(m[1]);
       if (!Number.isFinite(value)) continue;
       claimedCount = value;
@@ -883,10 +935,17 @@ export function validateClaims(
   // Count matching position within window
   let actualCount = 0;
   let matchedRounds: number[] = [];
+  let unseenListMembers: string[] = [];
   if (claims.claimedPositionList && claims.claimedPositionList.length >= 2) {
     // FB06 · F57 (b): konum LİSTESİ → listedeki konumların ölüm TOPLAMI (round başına bir kez).
     const names = claims.claimedPositionList.map((n) => n.toLowerCase());
-    const matched = windowDeaths.filter((r) => {
+    // FB06 inceleme · F57 (medium): toplam, pencerede HİÇ ölümü olmayan (uydurma) üyeyi de
+    // "doğruluyordu" — "B Site ve A Main'de 2 kez öldün" (A Main 0, B Site 2) level 1 bayt-aynı,
+    // "… 3 kez" ise "… A Main'de 2 kez"e YAZILIYORDU (uydurma üye sayıyla onaylanıyordu). Artık
+    // her üye ≥1 ölümle eşleşmeli; eşleşmeyen üye varsa kanıt SIFIR sayılır (level-3: sayım
+    // düşer) ve rewriteUnsafeClaims o üyeleri listeden çıkarır.
+    unseenListMembers = names.filter((n) => !windowDeaths.some((r) => (r.death_position || "").toLowerCase().includes(n)));
+    const matched = unseenListMembers.length > 0 ? [] : windowDeaths.filter((r) => {
       const dp = (r.death_position || "").toLowerCase();
       return names.some((n) => dp.includes(n));
     });
@@ -911,8 +970,8 @@ export function validateClaims(
   // Validate count — claimed must be <= actual
   const countValid = claims.claimedCount === null || claims.claimedCount <= actualCount;
 
-  // Validate position exists in windowed memory
-  const positionValid = claims.claimedPosition === null || actualCount > 0;
+  // Validate position exists in windowed memory (FB06 inceleme · F57: listenin HER üyesi)
+  const positionValid = (claims.claimedPosition === null || actualCount > 0) && unseenListMembers.length === 0;
 
   // FIX #4: Repetition requires actualCount >= 2, no exceptions
   const repetitionValid = !claims.repetitionClaim || actualCount >= 2;
@@ -947,6 +1006,7 @@ export function validateClaims(
     rewriteLevel,
     matchedRounds,
     roundIndexUnique: new Set(memory.map((r) => r.round_index)).size === memory.length,
+    ...(unseenListMembers.length > 0 ? { unseenListMembers } : {}),
   };
 }
 
@@ -970,6 +1030,10 @@ export function rewriteUnsafeClaims(
   // konum düşürülürken bunlar ASLA düşmez (hafıza yalnız GEÇMİŞİ tutar; bu round'un doğru
   // konumu orada yoktur). Verilmezse boş küme.
   protectedLocs?: ReadonlySet<string>,
+  // FB06 inceleme · F51: true → tekrar-iddiası silmesi (level-2 stripRepetitionLevel2, level-3
+  // dropRepetitionClauses + kuyruk kapısı) ATLANIR, sayım/pencere/konum yeniden yazımları aynen
+  // uygulanır. Yalnız realityCheck'in öneri-alanı yedeği (fallbackText) için; varsayılan false.
+  opts?: { keepRepetition?: boolean },
 ): string {
   if (validation.rewriteLevel === 1) {
     return text; // all claims verified
@@ -1098,7 +1162,7 @@ export function rewriteUnsafeClaims(
     // düşer (korpusta "tekrar eden açını" → "açını" doğru çalışan yol korunur); İSİM
     // anahtarlar ("aynı pozisyon", "pattern", "same spot") yerinde silinemez → o
     // YAN-CÜMLE düşer. Belirsiz anahtar çapasızsa hiç sayılmaz (öğüt korunur).
-    if (!validation.repetitionValid) {
+    if (!validation.repetitionValid && !opts?.keepRepetition) {
       // FB06 · F51: öneri alanında (allowEmptyFallback=false) önce yalnız İDDİA ÖBEĞİ silinir.
       const rescue = allowEmptyFallback ? undefined : { dropped: false };
       const kept = stripRepetitionLevel2(result, trText, rescue);
@@ -1125,7 +1189,19 @@ export function rewriteUnsafeClaims(
     // (protectedLocs), liste hâli ve ölüm-dışı cümle HARİÇ. Yalnız "kez/defa" (TR) ve
     // "times" (EN) birimleri — "N of the last M" / pencere birimi kendi yolunda kalır.
     const cp = claims.claimedPosition;
+    // FB06 inceleme · F57: sayım LİSTESİNİN pencerede hiç ölümü olmayan üyeleri listeden çıkar
+    // ("B Site ve A Main'de 2 kez öldün" → "B Site'ta öldün"; sayım aşağıda düşer). Bu round'un
+    // ölçülen konumu (protectedLocs) asla çıkarılmaz.
+    if (validation.unseenListMembers && validation.unseenListMembers.length > 0 && claims.claimedCount !== null && cp) {
+      const unseen = validation.unseenListMembers.filter((n) => ![...(protectedLocs ?? [])].some((l) => l === n));
+      const unitReL = isTr
+        ? new RegExp(`(?<![\\p{L}\\p{N}])(son\\s+)?${trCountTokenSrc(claims.claimedCount)}\\s*${TR_COUNT_UNIT_ALT}${TR_SUFFIX_GUARD}`, "giu")
+        : new RegExp(`(?<![\\p{L}\\p{N}])()${claims.claimedCount}\\s*times?(?![\\p{L}])`, "giu");
+      const locL = unseen.length > 0 ? locateCountClaim(result, unitReL, cp) : null;
+      if (locL && locL.isList) result = dropUnseenListMembers(result, locL, unseen, isTr);
+    }
     if (claims.claimedCount !== null && cp && validation.actualCount === 0
+      && !validation.unseenListMembers
       && ![...(protectedLocs ?? [])].some((l) => l.includes(cp) || cp.includes(l))) {
       const unitRe = isTr
         ? new RegExp(`(?<![\\p{L}\\p{N}])(son\\s+)?${trCountTokenSrc(claims.claimedCount)}\\s*${TR_COUNT_UNIT_ALT}${TR_SUFFIX_GUARD}`, "giu")
@@ -1160,7 +1236,7 @@ export function rewriteUnsafeClaims(
     // ölüm satırını bırakıyordu (Cycle 3'ün "öneri alanında ölüm kalıbı" dersi).
     // FB06 · F51: öneri alanında önce yalnız İDDİA ÖBEĞİ silinir (bkz. CLAIM_PHRASE_RES).
     const rescue3 = allowEmptyFallback ? undefined : { dropped: false };
-    result = dropRepetitionClauses(result, isTr, rescue3);
+    if (!opts?.keepRepetition) result = dropRepetitionClauses(result, isTr, rescue3);
     if (suggestionShrunkToTail(rescue3, result, text)) return "";
     if (!result) {
       // Cycle 3 (council 2026-06-26): a nextRoundSuggestion must NOT be replaced
@@ -3360,13 +3436,23 @@ export function realityCheck(
   // callout'lar metinden ayıklanır (Lotus'ta "A Short" gibi). VERİLMEZSE ya da
   // harita tabloda yoksa hiçbir şey değişmez — tüm mevcut çağıranlar bayt-aynı.
   map?: string,
-): { text: string; modified: boolean; rewriteLevel: number } {
+): {
+  text: string;
+  modified: boolean;
+  rewriteLevel: number;
+  /** FB06 inceleme · F51: öneri alanında (kind="suggestion") tekrar-iddiası silmesi metni ""e
+   *  indirdiğinde (kuyruk kapısı / tüm yan-cümleler iddia) çağıranın HAM metin yerine kullanacağı
+   *  yedek: tekrar iddiası KORUNMUŞ ama sayım/pencere/katil/silah/headshot/konum guard'larının
+   *  HEPSİNDEN geçmiş metin. text yine "" — "RC tüm içeriği reddetti" sinyali aynen. */
+  fallbackText?: string;
+} {
   if (!outputText) {
     return { text: outputText, modified: false, rewriteLevel: 1 };
   }
 
   let text = outputText;
   let rewriteLevel = 1;
+  let repetitionFallback: string | undefined;
 
   // ÖLÇÜLMÜŞ KONUMLAR (TR-KALAN-16, 2026-09-23) — bu round'un deathLocation'ı +
   // geçmiş round'ların death_position'ları. Masaüstünün ölçtüğü konum HİÇBİR
@@ -3417,51 +3503,67 @@ export function realityCheck(
     if (claims.claimedCount || claims.claimedPosition || claims.repetitionClaim
       || (claims.claimedWindow !== null && claims.claimedWindowIsRound === true)) {
       const validation = validateClaims(claims, roundHistory);
+      const beforeMemory = text;
       text = rewriteUnsafeClaims(text, claims, validation, kind !== "suggestion", lang, currentLocs);
       rewriteLevel = Math.max(rewriteLevel, validation.rewriteLevel);
+      // FB06 inceleme · F51 (high): öneri alanı ""e indiyse çağıran (vision-postprocess) eskiden
+      // HAM metne dönüyordu → sayım (F57), katil/silah/headshot (guardUnprovenFacts), konum
+      // nötrleyicileri ve F14 halkası HİÇ koşmamış metin kullanıcıya gidiyordu. KANIT (prod
+      // zinciri, M1-R5 + mevcut round b main): NR "Bu round Jett seni Operator'la B Main'de kafadan
+      // vurdu ve sürekli aynı pozisyonda ölüyorsun…" → çıktıda Jett/Operator/kafadan (katil
+      // okunmamış); "B Main'de 3 kez öldün ve aynı pozisyonda…" → uydurma "3 kez". Yedek artık
+      // bu RC'nin kendi guard'larından geçer; bedel yalnız TEKRAR iddiası (TR-KALAN-26 (b)).
+      if (kind === "suggestion" && !text.trim() && beforeMemory.trim()) {
+        repetitionFallback = rewriteUnsafeClaims(beforeMemory, claims, validation, false, lang, currentLocs, { keepRepetition: true });
+      }
     }
   }
 
-  // Nötrleyici (en sonda) için: metinde başka bir yerde geçmişe çapalı anılan geçmiş konumlar
-  // (bkz. pastAnchoredHistoryNames). FB05 · F14 (3): memory katmanından SONRA hesaplanır.
-  // Eskiden sayım silinmeden ÖNCE yakalanıyordu → "Son 3 kez B Main'de öldün" sayımı (çapası)
-  // silinip "B Main'de öldün" kaldığında bile B Main muaf sayılıyordu (test 102 bunu
-  // kilitliyordu). Sayım silmesi artık doğru çapayı KENDİSİ yazdığı için (F14 (2)) önceki
-  // hâli hatırlamaya gerek yok; çapası gerçekten silinmiş konum muaf DEĞİL.
-  const anchoredBefore = factGround?.hasDeathLocation === false
-    ? pastAnchoredHistoryNames(text, historyLocs, historyRounds)
-    : new Set<string>();
-
-  // ÖLÇÜLMEMİŞ KONUM NÖTRLEMESİ — EN SON çalışır (B3, 2026-09-16).
-  // SIRA BİLİNÇLİ: extractClaims/validateClaims yukarıda callout'u ORİJİNAL
-  // hâliyle görür → claimedPosition ve rewriteLevel bayt-aynı kalır.
-  // hasDeathLocation !== false iken (ölçüldü / bayrak hiç verilmedi) HİÇ çalışmaz
-  // → konum okunan her round ve bayrağı set etmeyen her çağıran bayt-aynı.
-  if (factGround?.hasDeathLocation === false) {
-    let neutralized = neutralizeUnprovenLocations(text, currentLocs, historyLocs, anchoredBefore, historyRounds);
-    // FB05 · F52: yan-cümle düzeyi ikinci geçiş (eski geçişin kaçırdığı fiil/ek/pencere biçimleri).
-    // TR-only (Türkçe ek + Türkçe yüklem şartı); EN istekte hiç koşmaz (EN yolu bayt-aynı).
-    if (lang !== "en") neutralized = neutralizeUnprovenLocationClauses(neutralized, currentLocs, historyLocs, anchoredBefore, historyRounds);
-    // TR-KALAN-13: EN aynası yalnız istek dili EN iken (TR yolu bayt-aynı).
-    if (lang === "en") neutralized = neutralizeUnprovenLocationsEn(neutralized, currentLocs, historyLocs, anchoredBefore, historyRounds);
-    if (neutralized !== text) {
-      text = neutralized;
-      rewriteLevel = Math.max(rewriteLevel, 2);
-    }
-  }
-
-  // ÖLÇÜLMÜŞ KONUMLA ÇELİŞEN ÖLÜM YERİ (FB05 · F14 (1)) — konum biliniyorken metnin
-  // "bu round <başka callout>'da öldün" iddiası. Yalnız vision'ın TEK-round konumunda
-  // (string) ve harita tablosu biliniyorken; rapor yolunun konum DİZİSİ (çok round) kapsam dışı.
+  // FB06 inceleme · F51: aşağıdaki konum halkaları hem asıl metne hem de (varsa) öneri-alanı
+  // yedeğine AYNI sırayla uygulanır (tek tanım: finishLocations).
   const measuredOne = typeof factGround?.deathLocation === "string" ? factGround.deathLocation.trim().toLowerCase() : "";
   const mk = mapKey(map);
-  if (factGround?.hasDeathLocation === true && measuredOne && mk) {
-    const fixed = correctContradictedDeathLocation(text, measuredOne, mk, currentLocs, lang);
-    if (fixed !== text) {
-      text = fixed;
-      rewriteLevel = Math.max(rewriteLevel, 2);
-    }
-  }
+  const finishLocations = (input: string): string => {
+    let t = input;
+    // Nötrleyici (en sonda) için: metinde başka bir yerde geçmişe çapalı anılan geçmiş konumlar
+    // (bkz. pastAnchoredHistoryNames). FB05 · F14 (3): memory katmanından SONRA hesaplanır.
+    // Eskiden sayım silinmeden ÖNCE yakalanıyordu → "Son 3 kez B Main'de öldün" sayımı (çapası)
+    // silinip "B Main'de öldün" kaldığında bile B Main muaf sayılıyordu (test 102 bunu
+    // kilitliyordu). Sayım silmesi artık doğru çapayı KENDİSİ yazdığı için (F14 (2)) önceki
+    // hâli hatırlamaya gerek yok; çapası gerçekten silinmiş konum muaf DEĞİL.
+    const anchoredBefore = factGround?.hasDeathLocation === false
+      ? pastAnchoredHistoryNames(t, historyLocs, historyRounds)
+      : new Set<string>();
 
-  return { text, modified: text !== outputText, rewriteLevel };
+    // ÖLÇÜLMEMİŞ KONUM NÖTRLEMESİ — EN SON çalışır (B3, 2026-09-16).
+    // SIRA BİLİNÇLİ: extractClaims/validateClaims yukarıda callout'u ORİJİNAL
+    // hâliyle görür → claimedPosition ve rewriteLevel bayt-aynı kalır.
+    // hasDeathLocation !== false iken (ölçüldü / bayrak hiç verilmedi) HİÇ çalışmaz
+    // → konum okunan her round ve bayrağı set etmeyen her çağıran bayt-aynı.
+    if (factGround?.hasDeathLocation === false) {
+      let neutralized = neutralizeUnprovenLocations(t, currentLocs, historyLocs, anchoredBefore, historyRounds);
+      // FB05 · F52: yan-cümle düzeyi ikinci geçiş (eski geçişin kaçırdığı fiil/ek/pencere biçimleri).
+      // TR-only (Türkçe ek + Türkçe yüklem şartı); EN istekte hiç koşmaz (EN yolu bayt-aynı).
+      if (lang !== "en") neutralized = neutralizeUnprovenLocationClauses(neutralized, currentLocs, historyLocs, anchoredBefore, historyRounds);
+      // TR-KALAN-13: EN aynası yalnız istek dili EN iken (TR yolu bayt-aynı).
+      if (lang === "en") neutralized = neutralizeUnprovenLocationsEn(neutralized, currentLocs, historyLocs, anchoredBefore, historyRounds);
+      t = neutralized;
+    }
+
+    // ÖLÇÜLMÜŞ KONUMLA ÇELİŞEN ÖLÜM YERİ (FB05 · F14 (1)) — konum biliniyorken metnin
+    // "bu round <başka callout>'da öldün" iddiası. Yalnız vision'ın TEK-round konumunda
+    // (string) ve harita tablosu biliniyorken; rapor yolunun konum DİZİSİ (çok round) kapsam dışı.
+    if (factGround?.hasDeathLocation === true && measuredOne && mk) {
+      t = correctContradictedDeathLocation(t, measuredOne, mk, currentLocs, lang);
+    }
+    return t;
+  };
+  const located = finishLocations(text);
+  if (located !== text) {
+    text = located;
+    rewriteLevel = Math.max(rewriteLevel, 2);
+  }
+  const fallbackText = repetitionFallback !== undefined ? finishLocations(repetitionFallback).trim() : "";
+
+  return { text, modified: text !== outputText, rewriteLevel, ...(fallbackText ? { fallbackText } : {}) };
 }

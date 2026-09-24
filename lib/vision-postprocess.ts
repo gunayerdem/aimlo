@@ -231,7 +231,10 @@ export function finalizeVisionFeedback(
     // ise kanıtsız sayılır → dizide kanıtlı madde varsa düşer; yoksa son madde (hedge'i
     // korunmuş, kesinleştirilmemiş hâliyle) kalır.
     const proven = hasCoachContent(cleanedChecked) && !isOnlyHedgedEnemyClaim(c.text, lang);
-    return { proven, text: finish(proven ? cleanedChecked : cleanCoachText(src, lang), VISION_ENEMY_ITEM_CAP, "enemyAnalysis") };
+    // FB06 inceleme · F51: RC tekrar silmesiyle ""e indiyse yedek HAM src değil, RC'nin
+    // guard'larından geçmiş fallbackText (katil/silah/headshot/sayım/konum süzülmüş).
+    const unprovenSrc = c.fallbackText && hasCoachContent(cleanCoachText(c.fallbackText, lang)) ? c.fallbackText : src;
+    return { proven, text: finish(proven ? cleanedChecked : cleanCoachText(unprovenSrc, lang), VISION_ENEMY_ITEM_CAP, "enemyAnalysis") };
   }).filter((x) => hasCoachContent(x.text));
   const provenItems = eaItems.filter((x) => x.proven);
   const enemyAnalysis = (provenItems.length > 0 ? provenItems : eaItems.slice(-1)).map((x) => x.text);
@@ -252,9 +255,12 @@ export function finalizeVisionFeedback(
   // SİLDİĞİ iddiayı süzülmüş hâliyle geri getirebilir; karar TR-KALAN-26 (b) "NR'de ham
   // metin korunur" lafzıyla uygulandı. HP-yalnız cümlenin bıraktığı ". " / ".." artığı
   // cleanCoachText'te onarıldı (tidyHpStripResidue) → kurtarılan metin artıkla başlamaz.
+  // FB06 inceleme · F51: RC öneri alanını tekrar silmesiyle ""e indirdiyse (kuyruk kapısı) HAM
+  // nrIn yerine RC'nin kendi guard'larından geçmiş yedeği (fallbackText: tekrar iddiası korunur,
+  // sayım/pencere/katil/silah/headshot/konum süzülür). Yedek yoksa eski yol (nrIn).
   const safeSuggestion = checkedSuggestion.text && checkedSuggestion.text.trim()
     ? checkedSuggestion.text
-    : nrIn;
+    : (checkedSuggestion.fallbackText && checkedSuggestion.fallbackText.trim() ? checkedSuggestion.fallbackText : nrIn);
   let cleanedSuggestion = cleanCoachText(safeSuggestion, lang);
   if (!hasCoachContent(cleanedSuggestion) && safeSuggestion !== nrIn) {
     cleanedSuggestion = cleanCoachText(nrIn, lang);
