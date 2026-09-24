@@ -3532,6 +3532,28 @@ const DEATH_BIND_PERIOD_RE = new RegExp(
   + ")(?![\\p{L}\\p{N}])",
   "iu",
 );
+/** Yakınsama Y28 (2026-09-25): SAYIM / SIRA işaretleri — "üçüncü kez", "üç kez", "birkaç kez",
+ *  EN "three times", "twice", "the third time", "3 rounds straight", "in a row", "back-to-back".
+ *  KANIT (prod zinciri finalizeVisionFeedback, Ascent, hafıza R2=b main / R4=a site, ölçülen
+ *  'a site'): "B Main'de üçüncü kez öldün" → "A Site'ta üçüncü kez öldün", EN "You died at B Main
+ *  three times" → "…at A Site three times", "That's the third time you died at B Main" → "…at A
+ *  Site" — halka tekrar/sayım iddiasını BU round'un konum iddiası sanıp ölçülen konumu yazıyor,
+ *  hafızada OLMAYAN bir sayım-konum birleşimi (A Site'ta 3. ölüm) uyduruyordu; 78d54c4 üçünü de
+ *  bayt-aynı bırakıyordu. DEATH_BIND_HABIT_RE yalnız sürekli/yine/tekrar ve "üçüncü round"u
+ *  tanıyordu. Sayım iddiası birden çok ölümü anlatır → bu round'un olgusu değil, halka dokunmaz
+ *  (sayımın kendisi F57 sayım doğrulayıcısının işi). "once" (EN "-ince" anlamı) BİLEREK yok;
+ *  "bir kez/kere/defa daha" zaten HABIT'te. Türkçe-İ tuzağı: [iİ]\u0307?. */
+const DEATH_BIND_COUNT_RE = new RegExp(
+  "(?<![\\p{L}\\p{N}])(?:"
+  + "(?:\\d+|bir|[iİ]\\u0307?ki|üç|dört|beş|altı|yedi|sekiz|dokuz|on|yirmi|birkaç|birçok|çok|kaç)\\s*(?:kez|kere|defa|sefer)"
+  + "|(?:[iİ]lk|[iİ]\\u0307?kinci|üçüncü|dördüncü|beşinci|altıncı|yedinci|sekizinci|dokuzuncu|onuncu|\\d+\\.)\\s*(?:kez|kere|defa|sefer)"
+  + "|twice|thrice|(?:\\d+|two|three|four|five|six|seven|eight|nine|ten|several|multiple|many|a\\s+few|a\\s+couple\\s+of)\\s+times"
+  + "|(?:first|second|third|fourth|fifth|sixth|seventh|\\d+(?:st|nd|rd|th))\\s+time"
+  + "|(?:\\d+|two|three|four|five|six|seven|eight|nine|ten)\\s+(?:straight\\s+rounds?|rounds?\\s+(?:straight|in\\s+a\\s+row|running))"
+  + "|in\\s+a\\s+row|back[-\\s]to[-\\s]back"
+  + ")(?![\\p{L}\\p{N}])",
+  "iu",
+);
 /** "…'de öldüğün round'da …" — sıfat-fiil bir BAŞKA round'a gönderme yapar (geri gönderme). */
 const DEATH_BIND_REL_ROUND_RE = /^\s+(?:round|raund|tur)/iu;
 /** FB05 inceleme (low): ölçülen konum tabloda KANONİK değilse (ham OCR varyantı: 'a hail',
@@ -3600,7 +3622,8 @@ function correctContradictedDeathLocation(
     const { seg } = clauseSeg(full, from, to);
     return new RegExp(LOC_PAST_ANCHOR_RE.source, "iu").test(seg) || DEATH_BIND_PAST_EXTRA_RE.test(seg)
       || DEATH_BIND_HABIT_RE.test(seg)                      // FB05 inceleme · F14: tekrar/alışkanlık
-      || DEATH_BIND_PERIOD_RE.test(seg);                    // Y01: maç dönemi (ilk yarı, maçın başı…)
+      || DEATH_BIND_PERIOD_RE.test(seg)                     // Y01: maç dönemi (ilk yarı, maçın başı…)
+      || DEATH_BIND_COUNT_RE.test(seg);                     // Y28: sayım/sıra (üçüncü kez, three times…)
   };
   // Yakınsama Y09 (2026-09-24): SAYISAL round çapası ("R3", "round 3", "3. round") o round'un
   // ÖLÇÜLMÜŞ kaydıyla doğrulanır (F83 historyMatchesAnchor'un ölçülmüş-yol aynası). KANIT (prod
@@ -3615,7 +3638,8 @@ function correctContradictedDeathLocation(
   const numericPastMismatch = (key: string, full: string, from: number, to: number): boolean => {
     if (!historyRounds) return false;
     const { cs, seg } = clauseSeg(full, from, to);
-    if (DEATH_BIND_PAST_EXTRA_RE.test(seg) || DEATH_BIND_HABIT_RE.test(seg) || DEATH_BIND_PERIOD_RE.test(seg)) return false;
+    if (DEATH_BIND_PAST_EXTRA_RE.test(seg) || DEATH_BIND_HABIT_RE.test(seg) || DEATH_BIND_PERIOD_RE.test(seg)
+      || DEATH_BIND_COUNT_RE.test(seg)) return false;
     const marks = [...seg.matchAll(LOC_PAST_ANCHOR_RE)].map((m) => ({ at: cs + (m.index ?? 0), text: m[0] }));
     const pick = marks.filter((x) => x.at < to).sort((a, b) => b.at - a.at)[0]
       ?? marks.filter((x) => x.at >= to).sort((a, b) => a.at - b.at)[0];

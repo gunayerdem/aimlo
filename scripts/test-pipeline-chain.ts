@@ -727,6 +727,13 @@ console.log("\n[Y01/Y03/Y09] F14 halkası: geçmiş dönem korunur, ham TR konum
     ["Y09 'R3'te B Site'ta öldün' (R3 = a tree) → konum düşer", "M1-R10-ascent-jett", {}, "tr",
       "R3'te B Site'ta öldün; bu round B Lobby'de açıyı geniş tuttun.",
       "R3'te öldün; bu round B Lobby'de açıyı geniş tuttun."],
+    // Yakınsama Y28: sayım/sıra cümlesi bu round'un konum iddiası değil (HEAD: ölçülen 'B Lobby' yazılıyordu).
+    ["Y28 TR DA 'B Main'de ikinci kez öldün' (R5 = b main) korunur", "M1-R10-ascent-jett", {}, "tr",
+      "B Main'de ikinci kez öldün; bu round B Lobby'de açıyı geniş tuttun.",
+      "B Main'de ikinci kez öldün; bu round B Lobby'de açıyı geniş tuttun."],
+    ["Y28 EN DA 'That's the second time you died at B Main' korunur", "M1-R10-ascent-jett", {}, "en",
+      "That's the second time you died at B Main — this round you held B Lobby too wide.",
+      "That's the second time you died at B Main — this round you held B Lobby too wide."],
   ];
   for (const [ad, id, mutate, lang, raw, want] of cases) {
     const b = { ...real.find((x) => x.id === id)!.body, ...mutate } as VisionPromptBody;

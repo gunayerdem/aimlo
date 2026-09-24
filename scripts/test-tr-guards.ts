@@ -1077,6 +1077,24 @@ console.log("\n════ FB05 inceleme · F14 tekrar/alışkanlık · lookbeh
   same("147f eşlenemeyen 'x yz' + \"Bu round B Main'de öldün\" bayt-aynı (HEAD: 'o noktada')", rc("Bu round B Main'de öldün.", "tr", loc("x yz")), "Bu round B Main'de öldün.");
   same("147g Sunset 'a lobi' (A016: Sunset tablosunda 'a lobby' yok) bayt-aynı", rc("Bu round B Main'de öldün.", "tr", loc("a lobi"), "Sunset"), "Bu round B Main'de öldün.");
   eq("147h EN HUD önekli 'iştemcj f b/ bölge' → 'at B Site'", rc("You died at B Main this round.", "en", loc("iştemcj f b/ bölge")), "You died at B Site this round.");
+  // Yakınsama Y28: SAYIM / SIRA cümlesi birden çok ölümü anlatır, bu round'un konum iddiası DEĞİL.
+  // HEAD (prod zinciri, kapanis probe9): "B Main'de üçüncü kez öldün" → "A Site'ta üçüncü kez öldün",
+  // EN "You died at B Main three times" → "…at A Site three times", "That's the third time you died at
+  // B Main" → "…at A Site" — halka OCR'da olmayan bir sayım-konum birleşimi uyduruyordu (78d54c4 bayt-aynı).
+  // FIX OLMADAN: 149a/c/d/e/g KIRMIZI (149b ve 149f HEAD'de de geçiyordu; kilit olarak kalır).
+  for (const [ad, s, lang] of [
+    ["149a 'üçüncü kez'", "B Main'de üçüncü kez öldün; açıyı erken verdin.", "tr"],
+    ["149b 'birkaç kez'", "Bu maçta B Main'de birkaç kez öldün.", "tr"],
+    ["149c 'İkinci kez' (Türkçe-İ)", "İkinci kez B Main'de öldün.", "tr"],
+    ["149d EN 'three times'", "You died at B Main three times; you gave the angle too early.", "en"],
+    ["149e EN 'the third time'", "That's the third time you died at B Main — you peeked without utility.", "en"],
+    ["149f EN 'twice'", "You died at B Main twice, so change the angle.", "en"],
+    ["149g EN 'back-to-back'", "You died at B Main back-to-back, so change the angle.", "en"],
+  ] as [string, string, "tr" | "en"][]) same(`${ad} bayt-aynı`, rc(s, lang), s);
+  // Sayımsız çapasız / açık "bu round" iddiası düzeltilmeye DEVAM eder (halkanın asıl hedefi; 141b/146k/146l).
+  eq("149h açık 'Bu round B Main'de öldün' (sayım yok) → ölçülen konum",
+    rc("Bu round B Main'de öldün; açıyı erken verdin."), "Bu round A Site'ta öldün; açıyı erken verdin.");
+  eq("149i EN 'You died at B Main, so …' (sayım yok) → ölçülen konum", rc("You died at B Main, so change the angle.", "en"), "You died at A Site, so change the angle.");
   // (4) halkanın yazdığı ek / EN metin.
   eq("143a ölçülen 'market kapısı' → \"Market Kapısı'nda\" (HEAD: \"Kapısı'da\")",
     rc("Bu round B Main'de öldün.", "tr", { hasDeathLocation: true, deathLocation: "market kapısı" } as never), "Bu round Market Kapısı'nda öldün.");
