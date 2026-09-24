@@ -153,6 +153,11 @@ export interface FactGround {
   // o round'un kaydı verir (historyMatchesAnchor). realityCheck kendisi doldurur; verilmezse
   // eski küme kuralı (doğrudan çağıranlar bayt-aynı).
   historyRoundLocations?: ReadonlyMap<number, string>;
+  // FB08 inceleme · F86 (2026-09-24): RAPOR yolunun round → ölçülmüş konum dizini (buildReportCleaner,
+  // round numarası → deathLocation, küçük harf). Yalnız rota-kökeni guard'ı okur: "Losses came from
+  // Hookah (R4)" / "In R19 you pushed through Hookah" iddiasındaki round çapası o round'un kaydıyla
+  // karşılaştırılır (maçın TÜM konum kümesi round çapası olmadan muafiyet vermez). Vision'da yok.
+  reportRoundLocations?: ReadonlyMap<number, string>;
 }
 
 // ── Claim Extraction ──
@@ -1507,6 +1512,8 @@ function escapeRe(s: string): string {
 // ONLY past-tense / gerund CLAIM forms (çıkıp, geldin, gelerek…). Conditional
 // or future advice ("gelirsen", "gelince", "çıkarsan", aorist "gelir") is
 // deliberately NOT listed — stripping legit advice would degrade coach quality.
+/** FB08 inceleme · F86: EN rota listesi üyesi — callout (+ isteğe bağlı "(R4)" round etiketi). */
+const EN_ROUTE_MEMBER = `(?:${[...POSITION_NAMES].sort((a, b) => b.length - a.length).map(escapeRe).join("|")})(?:\\s*\\(\\s*R\\d{1,2}\\s*\\))?`;
 const ROUTE_ORIGIN_VERBS =
   "(çıkıp|çıktın|çıkmışsın|çıkarak|gelip|geldin|gelmişsin|gelerek|geçip|geçtin|geçmişsin|geçerek|açılıp|açıldın|açılmışsın|girip|girdin|girmişsin|girerek|ilerleyip|ilerledin|gittin|gitmişsin)";
 
@@ -2458,13 +2465,44 @@ export function guardUnprovenFacts(
       [...(factGround.measuredLocations ?? []), ...(Array.isArray(fgLocs) ? fgLocs : fgLocs ? [fgLocs] : [])].map(normR),
     );
     const CAUSAL_SUBJ_EN = /(?<![a-z])(?:losses|deaths|kills|rounds|mistakes|damage|errors|problems|kill|death)\s*$/i;
+    // FB08 inceleme · F86 (high + low): muafiyet (1) "nedensellik öznesi KOŞULSUZ muaf" KALDIRILDI —
+    // ölçülmemiş/ölçülenle çelişen konumu aynen bırakıyordu (E1 Ascent ölçülen A Main: "Your death came
+    // from B Main after a wide peek…" bayt-aynı; ER2 "Losses came from A Short (R4) and B Long (R14)"
+    // bayt-aynı, R4'ün ölçülen yeri Hookah). Muafiyet artık YALNIZ ölçülmüş konum, round çapasına bağlı
+    // (F83 kuralı): çapa "(R4)"/"in R19" sayısalsa o round'un kaydı (rapor: reportRoundLocations, vision:
+    // historyRoundLocations; vision'da kaydı olmayan numara bu round olabilir → bu round'un konumu);
+    // çapa yoksa bu round (vision) / maçın ölçülmüş konumları (rapor); nedensellik öznesinde ("deaths
+    // came from X") geçmişte ölçülmüş konum da yeter, oyuncu rota iddiasında geçmiş çapası şart.
+    // TR ROUTE_ORIGIN da AYNI kuralı kullanır (eski yorumdaki "TR ile aynı ilke" iddiası yanlıştı: TR'de
+    // ölçülmüş konum da siliniyordu).
+    const roundMap = factGround.reportRoundLocations ?? factGround.historyRoundLocations;
+    const isReport = factGround.reportRoundLocations !== undefined;
+    const currentRoute = new Set((factGround.measuredLocations ?? []).map(normR));
+    const historyRoute = new Set((factGround.historyLocations ?? []).map(normR));
+    const routeMeasured = (key: string, tag: number | null, start: number, end: number, full: string, causal: boolean): boolean => {
+      let n = tag;
+      if (n === null) {
+        const pick = historyAnchorPick(full, start, end);
+        const num = pick ? ROUND_NUMBER_ANCHOR_RE.exec(pick.text) : null;
+        if (num) n = parseInt(num[1] ?? num[2] ?? num[3], 10);
+        else if (pick && !pick.past) return currentRoute.has(key) || (isReport && measuredRoute.has(key));
+      }
+      if (n !== null && roundMap) {
+        if (roundMap.has(n)) return roundMap.get(n) === key;
+        return !isReport && currentRoute.has(key);
+      }
+      if (measuredRoute.has(key)) return true;
+      if (causal) return historyRoute.has(key);
+      return historyMatchesAnchor(key, historyRoute, factGround.historyRoundLocations, full, start, end);
+    };
     // Origin claims anchored to a known callout: "<callout>'dan çıkıp/gelip..."
     for (const pos of POSITION_NAMES) {
       const re = new RegExp(
         `\\b${escapeRe(pos)}\\s*['’]?\\s*(d[ae]n|t[ae]n)\\s+${ROUTE_ORIGIN_VERBS}`,
         "gi",
       );
-      result = result.replace(re, "");
+      result = result.replace(re, (m: string, _suf: string, _verb: string, off: number, full: string) =>
+        (routeMeasured(normR(m.slice(0, pos.length)), null, off, off + m.length, full, false) ? m : ""));
       // EN aynası (denetim 2026-07-19 F8): "came through mid / wrapped behind B Main"
       // rota-kökeni iddiası EN çıktıda süzülmüyordu (EN few-shot SCENARIO A bu dili
       // bizzat modelliyor). Yalnız GEÇMİŞ formlar — emir/koşul öğüdü ("push through
@@ -2473,12 +2511,59 @@ export function guardUnprovenFacts(
       // silme cümleyi yüklemsiz bırakıyordu ("You pushed through Hookah alone" → "You alone";
       // "They came from B Main and caught you" → "They and caught you"). TR ROUTE_ORIGIN ile
       // aynı ilke: ölçülmemiş olan KONUMdur, eylem değil.
-      const reEn = new RegExp(
-        `\\b((?:came|pushed|rotated|wrapped|flanked)(?:\\s+in)?)\\s+(?:from|through|behind|out\\s+of|via)\\s+(${escapeRe(pos)})(?![a-z0-9-])`,
-        "gi",
-      );
-      result = result.replace(reEn, (m: string, verb: string, name: string, off: number, full: string) =>
-        (CAUSAL_SUBJ_EN.test(full.slice(Math.max(0, off - 25), off)) || measuredRoute.has(normR(name)) ? m : verb));
+    }
+    // EN: fiil + edat + callout LİSTESİ ("came from Hookah (R4) and Showers (R14)") tek geçişte —
+    // üye başına ölçüm; ölçülmüş üyeler kalır, ölçülmemişler düşer. Hiçbiri kalmazsa FİİL KALIR
+    // (edat + liste düşer); nedensellik öznesinde yan-cümle yalnız o iddiadan ibaretse ve metinde
+    // başka içerik varsa yan-cümle ([.;!?] sınırlı) BÜTÜN düşer (B35 kalıbı: "Losses came and B
+    // Long (R14)" gibi yüklemsiz artık üretilmez).
+    const reEnList = new RegExp(
+      `\\b((?:came|pushed|rotated|wrapped|flanked)(?:\\s+in)?)(\\s+(?:from|through|behind|out\\s+of|via)\\s+)(${EN_ROUTE_MEMBER}(?:\\s*(?:,|and)\\s+${EN_ROUTE_MEMBER})*)(?![a-z0-9-])`,
+      "gi",
+    );
+    const edits: { start: number; end: number; text: string }[] = [];
+    for (const mm of result.matchAll(reEnList)) {
+      const off = mm.index ?? 0;
+      const whole = mm[0];
+      const [, verb, prep, list] = mm;
+      const causal = CAUSAL_SUBJ_EN.test(result.slice(Math.max(0, off - 25), off));
+      const parts = list.split(/(\s*(?:,|and)\s+)/i);
+      const members: { text: string; key: string; tag: number | null }[] = [];
+      for (let i = 0; i < parts.length; i += 2) {
+        const tagM = /\(\s*R(\d{1,2})\s*\)\s*$/i.exec(parts[i]);
+        members.push({ text: parts[i], key: normR(parts[i].replace(/\s*\(\s*R\d{1,2}\s*\)\s*$/i, "")), tag: tagM ? parseInt(tagM[1], 10) : null });
+      }
+      const kept = members.filter((mb) => routeMeasured(mb.key, mb.tag, off, off + whole.length, result, causal));
+      if (kept.length === members.length) continue;
+      if (kept.length > 0) {
+        const rebuilt = kept.map((mb, i) => (i === 0 ? "" : i === kept.length - 1 ? " and " : ", ") + mb.text).join("");
+        edits.push({ start: off, end: off + whole.length, text: verb + prep + rebuilt });
+        continue;
+      }
+      if (causal) {
+        let cs = off;
+        while (cs > 0 && !/[.;!?\n]/.test(result[cs - 1])) cs--;
+        let ce = off + whole.length;
+        while (ce < result.length && !/[.;!?\n]/.test(result[ce])) ce++;
+        const restAfter = result.slice(off + whole.length, ce);
+        const outside = result.slice(0, cs) + result.slice(Math.min(result.length, ce + 1));
+        if (!/[\p{L}\p{N}]/u.test(restAfter) && /\p{L}/u.test(outside)) {
+          edits.push({ start: cs, end: Math.min(result.length, ce + 1), text: "" });
+          continue;
+        }
+      }
+      edits.push({ start: off, end: off + whole.length, text: verb });
+    }
+    if (edits.length > 0) {
+      let rebuiltText = result;
+      let lastStart = Infinity;
+      for (const e of [...edits].sort((a, b) => b.start - a.start)) {
+        if (e.end > lastStart) continue;               // çakışan düzenleme (güvenli: atla)
+        rebuiltText = rebuiltText.slice(0, e.start) + e.text + rebuiltText.slice(e.end);
+        lastStart = e.start;
+      }
+      result = rebuiltText.replace(/[ \t]{2,}/g, " ").replace(/^\s+/, "")
+        .replace(/(^|[.!?]\s+)([a-z])/g, (_m, p: string, c: string) => p + c.toUpperCase());
     }
     const beforeGeneric = result;
     for (const re of ROUTE_GENERIC_PATTERNS) result = result.replace(re, "");

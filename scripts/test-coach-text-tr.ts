@@ -540,6 +540,17 @@ console.log("\n[FB08 · F42] 'cezalandır-' nesneye göre — isim nesne 'fırsa
     const o = tr(src);
     t(`oyuncu/diğer (eski kural): "${src.slice(0, 44)}…"`, o === want, `→ "${o}"`);
   }
+  // FB08 inceleme · F42 (low): en yakın nesne + araya giren zaman ulacı. HEAD: ikisi de "fırsata çevirdi".
+  const F42B: [string, string][] = [
+    ["Rakip tek açıyı tutan oyuncuyu cezalandırdı.", "Rakip tek açıyı tutan oyuncuyu bedavaya öldürdü."],
+    ["Jett açıyı tutarken cezalandırdı.", "Jett açıyı tutarken bedavaya öldürdü."],
+    // -Ip bağlama ulacı nesneyi PAYLAŞIR (korpus cyclereal-base M1-R18 EA0) → isim nesne kuralı aynen.
+    ["Düşmanlar aynı açıları okuyup cezalandırıyor.", "Düşmanlar aynı açıları okuyup fırsata çeviriyor."],
+  ];
+  for (const [src, want] of F42B) {
+    const o = tr(src);
+    t(`F42b: "${src.slice(0, 44)}…"`, o === want, `→ "${o}"`);
+  }
 }
 
 console.log("\n[FB08 · F82] 'seni … ödedi/ödecek' → 'öldürdü/öldürecek' (ünlü uyumu; 'öldürdi'/'öldürcek' YOK)");
@@ -573,7 +584,12 @@ console.log("\n[FB08 · F94] etiket çıplak -I eki: var/yok ve sıfat/3. şahı
     t(`iyelik: "${src}" → "${want}"`, o === want, `→ "${o}"`);
   }
   // Belirtme KORUNUR: emir, 2. şahıs, özne düşmüş geçişli 3. şahıs, alt-bağlaç.
+  // FB08 inceleme · F94 (b): ÖZNE öneki (ajan/Rakip) + geçişli yüklem ve -Ar/-Ir emir kökü de
+  // belirtme (HEAD: "Jett rakip kadrosu okudu", "Rakip kadrosu değiştirdi", "Rakip kadrosu göster").
   const ACC: [string, string][] = [
+    ["Jett enemyComp'u okudu.", "Jett rakip kadroyu okudu."],
+    ["Rakip enemyComp'u değiştirdi.", "Rakip kadroyu değiştirdi."],
+    ["Rakip enemyComp'u göster.", "Rakip kadroyu göster."],
     ["enemyComp'u oku.", "Rakip kadroyu oku."],
     ["economyType'ı kontrol et.", "Ekonomiyi kontrol et."],
     ["Rakip enemyComp'u oku ve B'ye git.", "Rakip kadroyu oku ve B'ye git."],

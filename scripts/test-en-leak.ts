@@ -29,8 +29,8 @@ import {
 } from "../evals/en-leak-detector";
 import { EN_VISION_SCENARIOS, EN_REPORT_SCENARIOS, EN_CORPUS_TOTAL } from "../evals/en-corpus";
 import { realityCheck, buildFactGround } from "../lib/reality-checker";
-import { buildVisionContext, type VisionPromptBody } from "../lib/vision-prompt-builder";
-import { toRoundMemory } from "../lib/vision-postprocess";
+import { buildVisionContext, visionPostprocessOpts, type VisionPromptBody } from "../lib/vision-prompt-builder";
+import { toRoundMemory, finalizeVisionFeedback } from "../lib/vision-postprocess";
 import { buildReportCleaner, validateRequest } from "../lib/report-prompt";
 import { DEATH_TYPE_GUIDE } from "../lib/death-type";
 import { SYSTEM_PROMPT } from "../lib/vision-prompt";
@@ -486,11 +486,44 @@ console.log("\n[F86] EN rota guard'ı: 'losses/deaths came from X' ve ölçülm�
   check("ER2 summary: 'Losses came from Hookah (R4) and Showers (R14)' korunur", out.includes("Losses came from Hookah (R4) and Showers (R14);"), `→ "${out}"`);
   const fg = buildFactGround({}, {});
   const g = (s: string, f: object = fg) => realityCheck(s, [] as never, f as never, "generic", "en").text;
-  for (const s of [
-    "Most of your deaths came from Hookah.",
-    "Losses came from B Long.",
-    "Your kills came from A Short in R3.",
-  ]) check(`nedensellik bayt-aynı: "${s}"`, g(s) === s, `→ "${g(s)}"`);
+  // FB08 inceleme · F86 (high): nedensellik öznesi TEK BAŞINA muafiyet DEĞİL (eski üç "bayt-aynı"
+  // beklentisi ölçülmemiş konumu koruyordu — bilinçli düzeltildi). Ölçülmüş konumda bayt-aynı;
+  // ölçülmemişte konum düşer.
+  const fgHookah = { ...fg, hasDeathLocation: true, deathLocation: "hookah" };
+  for (const [s, f] of [
+    ["Most of your deaths came from Hookah.", fgHookah],
+    ["Losses came from B Long.", { ...fg, hasDeathLocation: true, deathLocation: "b long" }],
+    ["Your kills came from A Short in R3.", { ...fg, hasDeathLocation: true, deathLocation: "a short" }],
+  ] as [string, object][]) check(`nedensellik + ÖLÇÜLMÜŞ konum bayt-aynı: "${s}"`, g(s, f) === s, `→ "${g(s, f)}"`);
+  for (const [s, want] of [
+    ["Most of your deaths came from Hookah.", "Most of your deaths came."],
+    ["Losses came from B Long.", "Losses came."],
+    ["Your kills came from A Short in R3.", "Your kills came in R3."],
+  ] as [string, string][]) check(`nedensellik + ÖLÇÜLMEMİŞ konum → konum düşer: "${s}"`, g(s) === want, `→ "${g(s)}"`);
+  // Liste: yalnız ölçülmemiş üye düşer; tamamı ölçülmemişse yan-cümle bütün düşer (yüklemsiz artık yok).
+  const er2Alt = er2("You won 13-8. Losses came from A Short (R4) and B Long (R14); Hookah death was a solo entry into a Cypher trap with a Vandal.", 1000, "(FALLBACK)");
+  check("ER2 'Losses came from A Short (R4) and B Long (R14)' (R4 = Hookah, R14 = Showers) → yan-cümle düşer (HEAD: bayt-aynı)",
+    !/A Short|B Long/.test(er2Alt) && er2Alt.includes("Hookah death was a solo entry"), `→ "${er2Alt}"`);
+  const er2Mix = er2("You won 13-8. Losses came from Hookah (R4) and B Long (R14); Hookah death was a solo entry.", 1000, "(FALLBACK)");
+  check("ER2 karışık liste: ölçülmüş 'Hookah (R4)' kalır, ölçülmemiş 'B Long (R14)' düşer", er2Mix.includes("Losses came from Hookah (R4);") && !/B Long/.test(er2Mix), `→ "${er2Mix}"`);
+  // FB08 inceleme (low): rapor muafiyeti round çapasına bağlı — maçın konum kümesi tek başına yetmez.
+  const r19 = er2("In R19 you pushed through Hookah alone and got traded late.", 1000, "(FALLBACK)");
+  check("ER2 'In R19 you pushed through Hookah' (Hookah = R4'ün konumu) → rota düşer (HEAD: bayt-aynı)", r19 === "In R19 you pushed alone and got traded late.", `→ "${r19}"`);
+  const r4 = er2("In R4 you pushed through Hookah alone and got traded late.", 1000, "(FALLBACK)");
+  check("ER2 'In R4 … through Hookah' (R4 = Hookah) bayt-aynı", r4 === "In R4 you pushed through Hookah alone and got traded late.", `→ "${r4}"`);
+  // Vision zinciri (E1 Jett/Ascent, ölçülen deathLocation "A Main"): uydurma "B Main" kalmaz.
+  const e1 = EN_VISION_SCENARIOS.find((s) => s.id.startsWith("E1-"));
+  if (!e1) throw new Error("E1 yok");
+  const e1b = { ...e1.body, lang: "en" } as VisionPromptBody;
+  const e1fg = buildVisionContext(e1b, "en").factGround;
+  const e1out = finalizeVisionFeedback({ deathAnalysis: "Your death came from B Main after a wide peek into the Operator.", enemyAnalysis: [], nextRoundSuggestion: "Hold a tighter angle." },
+    visionPostprocessOpts(e1b, "en", e1fg)).deathAnalysis;
+  check("E1 zincir: 'Your death came from B Main …' (ölçülen A Main) → B Main YOK (HEAD: bayt-aynı)", !/B Main/.test(e1out) && /Your death came after a wide peek/.test(e1out), `→ "${e1out}"`);
+  // TR simetrisi: ölçülmüş konum TR rota-kökeninde de silinmez (eski yorumun "TR ile aynı ilke" iddiası).
+  const trM = realityCheck("Jett Hookah'tan gelip seni öldürdü.", [] as never, fgHookah as never, "death", "tr").text;
+  check("TR ölçülmüş konum: 'Hookah'tan gelip' korunur (HEAD: siliniyordu)", /Hookah'tan gelip seni öldürdü/.test(trM), `→ "${trM}"`);
+  const trU = realityCheck("Jett Hookah'tan gelip seni öldürdü.", [] as never, fg as never, "death", "tr").text;
+  check("TR ölçülmemiş konum: rota kökeni düşer (davranış aynen)", !/Hookah/.test(trU), `→ "${trU}"`);
   // Ölçülmüş konum (bu round) → rota öbeği silinmez.
   const fgLoc = { ...fg, hasDeathLocation: true, deathLocation: "hookah" };
   const m = "They came through Hookah and caught you.";

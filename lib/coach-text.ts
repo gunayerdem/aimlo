@@ -69,14 +69,27 @@ const CEZA_NOUN_ACC_RE = new RegExp(
   + "|peek'(?:i|ini|leri|lerini))$",
   "u",
 );
-const CEZA_PLAYER_OBJ_RE = /^(?:seni|sizi|onu|onları|hedefleri|\p{L}{2,}(?:an(?:lar)?ı|en(?:ler)?i))$/u;
-/** cezalandır- fiilinin öncesindeki (aynı yan-cümle, en çok 3 sözcük) nesne sınıfı. */
+// FB08 inceleme · F42 (low): oyuncu nesnesi listesine "oyuncuyu/oyuncuları/rakibi/rakipleri/
+// düşmanı/düşmanları" eklendi (HEAD: "Rakip tek açıyı tutan oyuncuyu cezalandırdı" → pencerede
+// "açıyı" görüldüğü için "oyuncuyu fırsata çevirdi").
+const CEZA_PLAYER_OBJ_RE = /^(?:seni|sizi|onu|onları|hedefleri|oyuncuyu|oyuncuları|rakibi|rakipleri|düşmanı|düşmanları|\p{L}{2,}(?:an(?:lar)?ı|en(?:ler)?i))$/u;
+/** Araya giren başka yüklem (zaman ulacı): önceki belirtme ekli sözcük ONUN nesnesidir ("açıyı
+ *  tutarken"). -Ip/-ArAk BİLEREK yok: bağlama ulacı nesneyi paylaşır ("açıları okuyup
+ *  cezalandırıyor" = açıları fırsata çeviriyor; korpus cyclereal-base M1-R18 EA0). */
+const CEZA_CONVERB_RE = /^(?!erken$)\p{L}+(?:[ae]rken|[ıiuü]rken|[ıiuü]nc[ae]|m[ae]d[ae]n|[dt][ıiuü]kt[ae]n)$/u;
+/** cezalandır- fiilinin öncesindeki (aynı yan-cümle, en çok 3 sözcük) nesne sınıfı. FB08 inceleme ·
+ *  F42: sınıflama fiile EN YAKIN nesneden (sağdan sola) yapılır; araya ulaç girerse ("Jett açıyı
+ *  tutarken cezalandırdı" — "açıyı" tutmak'ın nesnesi) nesne yok sayılır → eski kural. */
 function cezaObjectKind(pre: string): "player" | "noun" | null {
   const clause = pre.slice(pre.search(/[^.,;:!?—–\n()"“”]*$/u));
   const words = clause.trim().split(/\s+/).filter(Boolean).slice(-3)
     .map((w) => w.replace(/^[^\p{L}]+|[^\p{L}]+$/gu, "").replace(/’/g, "'").toLocaleLowerCase("tr"));
-  if (words.some((w) => CEZA_PLAYER_OBJ_RE.test(w) && !CEZA_NOUN_ACC_RE.test(w))) return "player";
-  if (words.some((w) => CEZA_NOUN_ACC_RE.test(w))) return "noun";
+  for (let i = words.length - 1; i >= 0; i--) {
+    const w = words[i];
+    if (CEZA_PLAYER_OBJ_RE.test(w) && !CEZA_NOUN_ACC_RE.test(w)) return "player";
+    if (CEZA_NOUN_ACC_RE.test(w)) return "noun";
+    if (CEZA_CONVERB_RE.test(w)) return null;
+  }
   return null;
 }
 type JargonReplacer = (m: string, ...args: unknown[]) => string;
@@ -1295,11 +1308,16 @@ const LABEL_ADJ_PRED_RE = new RegExp(
 // olarak -DIr/-tIr ile biten (geniş-zaman değil) sözcük emir sayılır ("değiştir", "getir").
 const LABEL_FINITE3_RE = /^(?:\p{L}*(?:yor|abilir|ebilir|amaz|emez|dı|di|du|dü|tı|ti|tu|tü)|\p{L}{3,}(?:ar|er|ır|ir|ur|ür))(?:lar|ler)?$/u;
 const LABEL_CAUSATIVE_IMP_RE = /(?<![ıiuü]r)[dt][ıiuü]r$/u;
-const LABEL_SUBJ_PREV_RE = new RegExp(
-  `(?:(?<![\\p{L}])(?:${AGENT_ALT_CT}|Kayo|rakip|düşman)`
-  + `|(?<![\\p{L}])(?!(?:için|bütün|dün|yakın|uzun)\\s)\\p{L}+['’]?n?[ıiuü]n)\\s+$`,
-  "iu",
-);
+// FB08 inceleme · F94 (low): LABEL_FINITE3_RE'nin geniş-zaman dalı (-Ar/-Ir) bu emir köklerini de
+// yakalıyordu ("Rakip enemyComp'u göster." → "Rakip kadrosu göster.").
+const LABEL_IMP_AR_RE = /^(?:göster|çıkar|getir|bitir|kaçır|düşür|indir|gönder|çevir|geçir)$/u;
+// FB08 inceleme · F94 (b): ÖNEK TÜRÜ AYRILDI. Gerçek tamlayan (-(n)In: "Takımın", "Jett'in") iyelik
+// açar (sıfat ya da 3. şahıs yüklem). ÖZNE öneki (Rakip/Düşman/ajan adı) ise etiketi çoğunlukla
+// geçişli fiilin NESNESİ yapar ("Jett enemyComp'u okudu" = kadroyu okudu; HEAD: "Jett rakip kadrosu
+// okudu", "Rakip kadrosu değiştirdi") → iyelik yalnız sıfat yüklemi ya da etiketin hemen ardından
+// durum/tarz sıfatı + 3. şahıs yüklem ("Rakip kadrosu agresif oynuyor") ile.
+const LABEL_GENITIVE_PREV_RE = /(?<![\p{L}])(?!(?:için|bütün|dün|yakın|uzun)\s)\p{L}+['’]?n?[ıiuü]n\s+$/iu;
+const LABEL_SUBJNOUN_PREV_RE = new RegExp(`(?<![\\p{L}])(?:${AGENT_ALT_CT}|Kayo|rakip|düşman)\\s+$`, "iu");
 function labelSuffixIsPossessive(pre: string, post: string): boolean {
   if (LABEL_EXIST_AFTER_RE.test(post)) return true;
   const clause = /^[^.,;:!?—–\n]*/u.exec(post)?.[0] ?? "";
@@ -1308,8 +1326,11 @@ function labelSuffixIsPossessive(pre: string, post: string): boolean {
   if (!last) return false;
   const adj = LABEL_ADJ_PRED_RE.test(last);
   if (/(?:^|[.,;:!?—–\n(])\s*$/u.test(pre)) return adj;
-  if (!LABEL_SUBJ_PREV_RE.test(pre)) return false;
-  return adj || (LABEL_FINITE3_RE.test(last) && !LABEL_CAUSATIVE_IMP_RE.test(last));
+  const finite = LABEL_FINITE3_RE.test(last) && !LABEL_CAUSATIVE_IMP_RE.test(last) && !LABEL_IMP_AR_RE.test(last);
+  if (LABEL_GENITIVE_PREV_RE.test(pre)) return adj || finite;
+  if (!LABEL_SUBJNOUN_PREV_RE.test(pre)) return false;
+  const first = (/^\s*(\p{L}+)/u.exec(clause)?.[1] ?? "").toLocaleLowerCase("tr");
+  return adj || (finite && first !== last && LABEL_ADJ_PRED_RE.test(first));
 }
 /** Etiket karşılığının 3. tekil iyelik (yalın) eki — kind'e göre. */
 function possessiveLabelTail(tr: string, kind: LabelKind): string {

@@ -1036,6 +1036,13 @@ export function buildReportCleaner(
     // ile AYNI: resmî tablo (knownAgent) — "Unknown"/boş/tanınmayan → undefined
     // (muafiyet yok). Yalnız STEP2 muafiyeti okur (reality-checker playerAgent).
     playerAgent: knownAgent(body.setup?.agent),
+    // FB08 inceleme · F86: round → ölçülmüş konum (yalnız rota-kökeni guard'ı okur; round çapalı
+    // "Losses came from Hookah (R4)" iddiası o round'un kaydıyla doğrulanır).
+    reportRoundLocations: new Map(
+      rounds
+        .filter((r) => typeof r.deathLocation === "string" && r.deathLocation.trim().length > 0 && Number.isFinite(r.roundNumber))
+        .map((r) => [r.roundNumber, r.deathLocation.trim().toLowerCase().replace(/\s+/g, " ")] as [number, string]),
+    ),
     // FB07 · F92: maçta ölçülmüş katil silahları — yalnız sözlükte olanlar
     // (extractKillerWeapon: "blade"/OCR gürültüsü null döner), küçük harf.
     suppliedWeapons: [

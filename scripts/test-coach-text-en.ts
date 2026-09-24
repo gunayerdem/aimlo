@@ -246,6 +246,22 @@ console.log("\n[9] FB08 · F40 — EN kit terimleri: prompt İngilizce sade teri
   const upTr = buildEvalRequest(s1).userPrompt;
   t("EN [AGENT KIT] 'their kit (plain terms): tripwire, smoke, camera, recon.'", upEn.includes("their kit (plain terms): tripwire, smoke, camera, recon."), upEn.match(/their kit[^.]*\./)?.[0] ?? "(yok)");
   t("TR [AJAN KİTİ] 'kiti (sade terimler): tel, smoke, kamera, recon.' (bayt-aynı)", upTr.includes("kiti (sade terimler): tel, smoke, kamera, recon."), upTr.match(/kiti \(sade[^.]*\./)?.[0] ?? "(yok)");
+
+  // (c) FB08 inceleme · F40 (medium): kit guard'ı (enforceAgentKit) EN ikamesinden SONRA çalışıyor —
+  // EN karşılıkları da tanınmalı. HEAD: Killjoy "bot/tel" → "bot/tripwire", Jett "smoke/duvar" →
+  // "smoke/wall" (eskiden guard "bot"/"smoke"a indiriyordu). Prod zinciri (finalizeVisionFeedback).
+  const chainKit = (agent: string) => {
+    const b = { died: true, map: "bind", agent, side: "defending", lang: "en" } as VisionPromptBody;
+    const fg = buildVisionContext(b, "en").factGround;
+    return finalizeVisionFeedback({ deathAnalysis: "You were exposed.", enemyAnalysis: [], nextRoundSuggestion: "Set your bot/tel on the flank, then throw your smoke/duvar before the peek." },
+      visionPostprocessOpts(b, "en", fg)).nextRoundSuggestion;
+  };
+  const kj = chainKit("killjoy");
+  t("F40c Killjoy 'bot/tel' → 'bot' (tripwire önerilmez)", !/tripwire/i.test(kj) && /Set your bot on the flank/.test(kj), `→ "${kj}"`);
+  const jt = chainKit("jett");
+  t("F40c Jett 'smoke/duvar' → 'smoke' (wall önerilmez)", !/\bwall\b/i.test(jt) && /throw your smoke before/.test(jt), `→ "${jt}"`);
+  const cy = chainKit("cypher");
+  t("F40c Cypher kendi kiti (tripwire) korunur, bot düşer", /Set your tripwire on the flank/.test(cy) && !/\bbot\b/.test(cy), `→ "${cy}"`);
 }
 
 console.log(`\n${fail === 0 ? "TÜM TESTLER GEÇTİ ✓" : `${fail} TEST BAŞARISIZ ✗`}`);

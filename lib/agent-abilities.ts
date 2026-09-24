@@ -153,6 +153,22 @@ export function enforceAgentKit(text: string, agent: string | undefined | null):
       t = t.replace(new RegExp(`${before}${f}${sfx}${conn}(${v}${sfx}${after})`, "giu"), "$1");
     }
   }
+  // FB08 inceleme · F40 (medium): EN zincirinde cleanCoachText TR kit terimini İngilizceye ÖNCE
+  // çeviriyor (tel→tripwire, duvar→wall, …); bu katman yalnız TR terimleri tanıdığı için eskiden
+  // yakaladığı sızıntıyı artık kaçırıyordu (Killjoy "bot/tel" → "bot/tripwire", Jett "smoke/duvar" →
+  // "smoke/wall"). Aynı kural EN karşılıklarıyla da (KIT_TERM_EN) + EN bağlaçları (or/and) kurulur;
+  // yalnız TR karşılığından FARKLI olan terim çiftinde → TR metin bayt-aynı.
+  const connEn = "(?:\\s*/\\s*|\\s+or\\s+|\\s+and\\s+|\\s*,\\s*)";
+  for (const f of forbidden) {
+    const fe = KIT_TERM_EN[f] ?? f;
+    for (const v of kit) {
+      if (v === "ult") continue;
+      const ve = KIT_TERM_EN[v] ?? v;
+      if (fe === f && ve === v) continue;        // TR ile aynı çift: yukarıda zaten işlendi
+      t = t.replace(new RegExp(`(${before}${ve}${sfx})${connEn}${fe}${sfx}${after}`, "giu"), "$1");
+      t = t.replace(new RegExp(`${before}${fe}${sfx}${connEn}(${ve}${sfx}${after})`, "giu"), "$1");
+    }
+  }
   // 2. KATMAN — self-action reframe: forbidden yetenek imperatif KULLANIM-fiiliyle
   // ("flash ile zorla", "smoke'la aç") → başına "takım " ekle → meşru takım-utility
   // çerçevesine çevir. Imperatif fiil listesi geçmiş-zamandan (attı/açtı/kurdu)
