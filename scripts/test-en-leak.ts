@@ -287,9 +287,20 @@ console.log("\n── FB06 · F85: EN sayım silmesi '( )' bırakmaz; kanıtsız
   // Onarım halkası (level-3): tekrar anahtarı olmayan yan-cümlede sayım + pencere silinir.
   const mem7 = Array.from({ length: 7 }, (_, i) => ({ round_index: i + 1, died: i % 2 === 1, death_position: null }));
   const fgA = { hasDeathLocation: true, deathLocation: "a site" } as never;
-  const o3 = realityCheck("You died at Hookah (3 deaths in the last 7 rounds) — avoid solo wide peeks into Hookah.", mem7 as never, fgA, "suggestion", "en").text;
-  check("level-3 onarım: '(3 deaths in the last 7 rounds)' → parantez artığı kalmaz",
-    o3 === "You died at Hookah — avoid solo wide peeks into Hookah.", `→ "${o3}"`);
+  // Yakınsama Y13 (2026-09-25): bu kilit eskiden HARİTASIZ çağrıyla, ölçülen konum 'a site' iken
+  // "You died at Hookah …" çıktısını beklenen değer diye sabitliyordu — ölçülenle ÇELİŞEN ölüm yeri
+  // (prod'da map her zaman gelir ve F14 halkası onu 'A Site'a çevirir). Fikstür artık tutarlı:
+  // (a) ölçülen 'hookah' → Hookah doğru ölüm yeri; (b) prod gibi Bind + ölçülen 'a site' → level-3
+  // onarım ile F14 halkası EN'de birlikte: "You died at A Site — …". Parantez onarımı ayrıca kilitli.
+  const PAREN_RESIDUE = /\(\s*[,;:]?\s*\)/;
+  const o3 = realityCheck("You died at Hookah (3 deaths in the last 7 rounds) — avoid solo wide peeks into Hookah.", mem7 as never,
+    { hasDeathLocation: true, deathLocation: "hookah" } as never, "suggestion", "en", "Bind").text;
+  check("level-3 onarım (ölçülen 'hookah', Bind): '(3 deaths in the last 7 rounds)' düşer, parantez artığı kalmaz",
+    o3 === "You died at Hookah — avoid solo wide peeks into Hookah." && !PAREN_RESIDUE.test(o3), `→ "${o3}"`);
+  const o3b = realityCheck("You died at Hookah (3 deaths in the last 7 rounds) — avoid solo wide peeks into Hookah.", mem7 as never,
+    fgA, "suggestion", "en", "Bind").text;
+  check("level-3 onarım + F14 halkası (ölçülen 'a site', Bind): 'You died at A Site — …', parantez artığı yok",
+    o3b === "You died at A Site — avoid solo wide peeks into Hookah." && !PAREN_RESIDUE.test(o3b), `→ "${o3b}"`);
   // Onarım halkası (level-2 EN sayım silmesi, actualCount<2 → replacement "").
   const mem1 = [
     { round_index: 1, died: false, death_position: null },
