@@ -533,6 +533,8 @@ export function buildVisionContext(body: VisionPromptBody, lang: VisionLang, onL
    * classifyDeath/classifyCompArchetype'a ve DB yazımlarına (saveMatchEvent/
    * saveAiUsage) gitmeye DEVAM eder → normalize/lookup zinciri bayt-aynı
    * ("Ascent" hâlâ ascent'e çözülür), yanıt sözleşmesi de değişmez.
+   * İSTİSNA (FB03 · F58): reqSide KB seçimine ve [SENARYO İPUCU]na artık normalizeSide
+   * ile KANONİK gider ("defending" → "defense"); saveMatchEvent'e ham side gitmeye devam eder.
    * MEŞRU DEĞER KIRILMAZ: "13-11", "Ascent", "Jett", "competitive", "late",
    * "spike_rush", "post-plant" sanitize sonrası AYNEN kalır
    * (kanıt: scripts/test-vision-ctx-sanitize.ts).
