@@ -325,5 +325,33 @@ console.log("\n[7] F49 — KVKK/Gizlilik olgusal içerik koda göre");
   t("Gizlilik: Upstash üçüncü taraf listesinde", /Upstash/.test(priv));
 }
 
+// [8] Yakınsama Y08 (2026-09-25): landing SSS "Verilerim güvende mi?" cevabı
+// "yalnızca senin hesabın tarafından görüntülenebilir" / "only viewable by your own
+// account", Gizlilik "Row Level Security ile sadece sahibine açılır" diyordu. Oysa
+// service-role ile çalışan /admin paneli (lib/admin-data.ts getUserDetail: e-posta,
+// analyses summary/weakness/raw_result_json, player_memory; app/admin/users/[userId])
+// ve /admin/insights (lib/admin-analytics.ts match_events) bu verileri yetkili
+// yöneticiye gösteriyor. RLS KULLANICILAR ARASI izolasyondur; vaat buna çekildi.
+// Ölçüm (fix sonrası): üç kalıp app/**/*.tsx + constants/i18n.ts'te 0 isabet.
+console.log("\n[8] Y08 — veri erişimi vaadi olguya göre (RLS kullanıcılar arası; yetkili yönetici erişimi açık)");
+{
+  const Y08_FORBIDDEN: [string, RegExp][] = [
+    ["'yalnızca senin hesabın tarafından'", /yalnızca\s+senin\s+hesabın\s+tarafından/iu],
+    ["'only viewable by your own account'", /only\s+viewable\s+by\s+your\s+own\s+account/iu],
+    ["'sadece sahibine açılır'", /sadece\s+sahibine\s+açılır/iu],
+  ];
+  for (const [ad, re] of Y08_FORBIDDEN) {
+    const hits = claimScope.filter((rel) => re.test(visibleText(rel)));
+    t(`${ad} → 0 (app/**/*.tsx + constants/i18n.ts)`, hits.length === 0, JSON.stringify(hits));
+  }
+  const land = visibleText(LANDING);
+  t("landing SSS: TR + EN yetkili yönetici erişimini ve ekran görüntüsünün OpenAI'ye gidip AIMLO'da saklanmadığını söyler",
+    /yalnızca yetkili AIMLO yöneticileri/u.test(land) && /Only authorized AIMLO administrators/.test(land) &&
+      /OpenAI'ye gönderilir, AIMLO'da saklanmaz/u.test(land) && /not stored by AIMLO/.test(land));
+  const privY08 = visibleText("app/legal/privacy/page.tsx");
+  t("Gizlilik: RLS diğer kullanıcılara kapalı + yetkili yönetici erişimi",
+    /diğer kullanıcılara kapalıdır/u.test(privY08) && /yetkili AIMLO yöneticileri/u.test(privY08));
+}
+
 console.log(`\n${fail === 0 ? "✅" : "❌"} test-trust-copy: ${pass} geçti, ${fail} kırık`);
 if (fail > 0) process.exit(1);

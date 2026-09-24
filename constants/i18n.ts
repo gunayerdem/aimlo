@@ -180,7 +180,7 @@ export const t = {
       },
       {
         q: "Verilerim güvende mi?",
-        a: "Kesinlikle. Tüm kullanıcı verileri Supabase altyapısı üzerinde şifrelenmiş olarak saklanır ve Row Level Security (RLS) politikalarıyla korunur. Hiçbir kullanıcı başka bir kullanıcının verilerine erişemez. Maç analizlerin, round notların ve raporların yalnızca senin hesabın tarafından görüntülenebilir.",
+        a: "Tüm kullanıcı verileri Supabase altyapısı üzerinde şifrelenmiş olarak saklanır ve Row Level Security (RLS) politikalarıyla korunur; başka hiçbir kullanıcı senin maç analizlerine, round notlarına ve raporlarına erişemez. Hizmetin işletilmesi ve destek için yalnızca yetkili AIMLO yöneticileri hesabına ve analizlerine erişebilir. Öldüğün round'daki ekran görüntüsü analiz için OpenAI'ye gönderilir, AIMLO'da saklanmaz.",
       },
       {
         q: "Yardıma ihtiyacım var, nasıl ulaşabilirim?",
@@ -425,7 +425,7 @@ export const t = {
       },
       {
         q: "Is my data safe?",
-        a: "Absolutely. All user data is stored encrypted on Supabase infrastructure and protected by Row Level Security (RLS) policies. No user can access another user's data. Your match analyses, round notes, and reports are only viewable by your own account.",
+        a: "All user data is stored encrypted on Supabase infrastructure and protected by Row Level Security (RLS) policies; no other user can access your match analyses, round notes, or reports. Only authorized AIMLO administrators can access your account and analyses, to operate the service and provide support. The screenshot from a round in which you die is sent to OpenAI for analysis and is not stored by AIMLO.",
       },
       {
         q: "I need help, how can I reach you?",

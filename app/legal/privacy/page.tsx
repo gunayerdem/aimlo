@@ -50,7 +50,8 @@ export default function PrivacyPage() {
           <p>
             Kullanıcı verileri Supabase (AB - eu-central-1) sunucularında
             saklanır. Maç verileri ve oyun istatistikleri Row Level
-            Security ile sadece sahibine açılır.
+            Security ile diğer kullanıcılara kapalıdır; hizmetin işletilmesi
+            ve destek için yalnızca yetkili AIMLO yöneticileri erişebilir.
           </p>
         </section>
 
