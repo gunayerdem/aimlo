@@ -2485,20 +2485,33 @@ export function guardUnprovenFacts(
     const isReport = factGround.reportRoundLocations !== undefined;
     const currentRoute = new Set((factGround.measuredLocations ?? []).map(normR));
     const historyRoute = new Set((factGround.historyLocations ?? []).map(normR));
+    // Yakınsama Y29 (2026-09-25): AYNI YER kuralı F14 halkasının nested()'ı ile aynı — ad eşit ya da
+    // sözcük kümesi iki yönde kapsıyor ('hookah' ~ 'b hookah', 'tree' ~ 'a tree'; 'a site' ≁ 'b site').
+    // KANIT (kapanis/probe3 gerçek buildReportCleaner, Bind, R4 'b hookah' / R14 'b showers'):
+    // "Losses came from Hookah (R4) and Showers (R14); fix your spacing." → "Fix your spacing.";
+    // vision (probe4, ölçülen 'b hookah') "Your death came from Hookah after a wide peek." → "Your death
+    // came after a wide peek." — DOĞRU ölçülmüş yer siliniyordu; aynı gövde çıplak 'hookah' ile gelince
+    // bayt-aynı kalıyordu, ölüm-yeri guard'ı ise "You died at Hookah"yu koruyordu (iki guard çelişkili).
+    const sameRoute = (a: string, b: string): boolean => {
+      if (a === b) return true;
+      const wa = a.split(" "), wb = b.split(" ");
+      return wa.every((w) => wb.includes(w)) || wb.every((w) => wa.includes(w));
+    };
+    const routeHas = (s: ReadonlySet<string>, key: string): boolean => s.has(key) || [...s].some((v) => sameRoute(key, v));
     const routeMeasured = (key: string, tag: number | null, start: number, end: number, full: string, causal: boolean): boolean => {
       let n = tag;
       if (n === null) {
         const pick = historyAnchorPick(full, start, end);
         const num = pick ? ROUND_NUMBER_ANCHOR_RE.exec(pick.text) : null;
         if (num) n = parseInt(num[1] ?? num[2] ?? num[3], 10);
-        else if (pick && !pick.past) return currentRoute.has(key) || (isReport && measuredRoute.has(key));
+        else if (pick && !pick.past) return routeHas(currentRoute, key) || (isReport && routeHas(measuredRoute, key));
       }
       if (n !== null && roundMap) {
-        if (roundMap.has(n)) return roundMap.get(n) === key;
-        return !isReport && currentRoute.has(key);
+        if (roundMap.has(n)) return sameRoute(normR(roundMap.get(n) as string), key);
+        return !isReport && routeHas(currentRoute, key);
       }
-      if (measuredRoute.has(key)) return true;
-      if (causal) return historyRoute.has(key);
+      if (routeHas(measuredRoute, key)) return true;
+      if (causal) return routeHas(historyRoute, key);
       return historyMatchesAnchor(key, historyRoute, factGround.historyRoundLocations, full, start, end);
     };
     // Origin claims anchored to a known callout: "<callout>'dan çıkıp/gelip..."

@@ -558,6 +558,38 @@ console.log("\n[F86] EN rota guard'ı: 'losses/deaths came from X' ve ölçülm�
   const fgLoc = { ...fg, hasDeathLocation: true, deathLocation: "hookah" };
   const m = "They came through Hookah and caught you.";
   check("ölçülmüş konum (deathLocation 'hookah') bayt-aynı", g(m, fgLoc) === m, `→ "${g(m, fgLoc)}"`);
+  // Yakınsama Y29 (2026-09-25): muafiyet tam dize eşitliğiyle karşılaştırıyordu — ölçülen 'b hookah' /
+  // 'b showers' (site harfli kanonik; map-callouts bind tablosunda ikisi de var) iken modelin harfsiz
+  // "Hookah"/"Showers"ı ölçülmemiş sayılıp DOĞRU yer siliniyordu. KANIT (kapanis/probe3-4): ER2 gövdesi
+  // 'b hookah'/'b showers' ile "Losses came from Hookah (R4) and Showers (R14); fix your spacing." →
+  // "Fix your spacing."; vision "Your death came from Hookah after a wide peek." → "Your death came after
+  // a wide peek." — aynı yer ölüm-yeri guard'ında ("You died at Hookah") korunuyordu.
+  {
+    const bodyBH = JSON.parse(JSON.stringify(fx.body)) as { rounds: { roundNumber?: number; round?: number; deathLocation?: string }[] };
+    let swapped = 0;
+    for (const r of bodyBH.rounds) {
+      if (typeof r.deathLocation === "string" && /^hookah$/i.test(r.deathLocation.trim())) { r.deathLocation = "b hookah"; swapped++; }
+      else if (typeof r.deathLocation === "string" && /^showers$/i.test(r.deathLocation.trim())) { r.deathLocation = "b showers"; swapped++; }
+    }
+    const vBH = validateRequest(bodyBH);
+    if (!vBH.valid) throw new Error("ER2 (b hookah) geçersiz");
+    const er2BH = buildReportCleaner(vBH.data);
+    const sBH = "You won 13-8. Losses came from Hookah (R4) and Showers (R14); fix your spacing.";
+    const oBH = er2BH(sBH, 1000, "(FALLBACK)");
+    check(`Y29 ER2 ölçülen 'b hookah'/'b showers' (${swapped} round): 'Losses came from Hookah (R4) and Showers (R14)' korunur (fix yok: 'Fix your spacing.')`,
+      swapped >= 2 && oBH === sBH, `→ "${oBH}"`);
+    const fgBH = { ...fg, hasDeathLocation: true, deathLocation: "b hookah" };
+    for (const s of ["Your death came from Hookah after a wide peek.", "They came through Hookah and caught you."]) {
+      check(`Y29 vision ölçülen 'b hookah': "${s}" bayt-aynı (fix yok: 'Hookah' siliniyordu)`, g(s, fgBH) === s, `→ "${g(s, fgBH)}"`);
+    }
+    const trBH = realityCheck("Jett Hookah'tan gelip seni öldürdü.", [] as never, fgBH as never, "death", "tr").text;
+    check("Y29 TR ölçülen 'b hookah': 'Hookah'tan gelip' korunur", /Hookah'tan gelip seni öldürdü/.test(trBH), `→ "${trBH}"`);
+    // Negatif: farklı site harfi AYNI YER DEĞİL ('a site' ≁ 'b site'); ölçülmemiş komşu ad yine düşer.
+    const gA = g("Most of your deaths came from B Site.", { ...fg, hasDeathLocation: true, deathLocation: "a site" });
+    check("Y29 negatif: ölçülen 'a site' + 'came from B Site' → B Site düşer", !/B Site/.test(gA), `→ "${gA}"`);
+    const gL = g("They came through Lamps and caught you.", fgBH);
+    check("Y29 negatif: ölçülen 'b hookah' + 'through Lamps' → Lamps düşer", !/Lamps/.test(gL), `→ "${gL}"`);
+  }
   check("aynı cümle ölçülmemiş konumda süzülür ('They came and caught you.')", g(m) === "They came and caught you.", `→ "${g(m)}"`);
   // Oyuncu rota iddiası (hasRoute=false, ölçülmemiş konum) SÜZÜLÜR — fiil kalır, cümle yüklemsiz kalmaz.
   const p = g("You pushed through Hookah alone in R4 and died.");
