@@ -283,5 +283,36 @@ console.log("\n[9] FB08 · F40 — EN kit terimleri: prompt İngilizce sade teri
   t("Y05 'smoke or wall' (öneri) hâlâ 'smoke'", enforceAgentKit("Throw your smoke or wall before the peek.", "jett") === "Throw your smoke before the peek.");
 }
 
+console.log("\n── Yakınsama Y30 — ölçülmemiş konumda EN 'N rounds straight' sayımı geçmiş round'a çapalanır ──");
+{
+  // KANIT (kapanis/probe11; bu round konumu ÖLÇÜLMEMİŞ, hafıza R1=a site, R4=b main): HEAD
+  // "You died 3 rounds straight at B Main." → "You died at B Main." — birim çapasız silinip GEÇMİŞ
+  // konum bu round'a yapışıyordu. TR "B Main'de 3 kez öldün" → "R4'te B Main'de öldün" doğruydu;
+  // EN "N times" de ("…at B Main in R4") doğruydu. F41 negatif kilidi (yukarıda) yalnız ölçülmüş yolu
+  // sınıyordu.
+  const m14 = [
+    { round_index: 1, died: true, death_position: "a site", position_confidence: "high" },
+    { round_index: 2, died: false, death_position: null },
+    { round_index: 3, died: false, death_position: null },
+    { round_index: 4, died: true, death_position: "b main", position_confidence: "high" },
+  ];
+  const fgN = { hasDeathLocation: false } as never;
+  const rcN = (s: string) => realityCheck(s, m14 as never, fgN, "death", "en", "Ascent").text;
+  for (const [s, want, note] of [
+    ["You died 3 rounds straight at B Main.", "You died in R4 at B Main.", "fix yok: çapasız 'You died at B Main.'"],
+    ["You died 3 rounds in a row at B Main, change your angle.", "You died in R4 at B Main, change your angle.", "fix yok: çapasız 'You died at B Main,'"],
+    ["You died at B Main 3 times, change your angle.", "You died at B Main in R4, change your angle.", "mevcut 'N times' çapası aynen — kilit"],
+  ] as const) t(`Y30 ölçülmemiş: "${s}" → "${want}" (${note})`, rcN(s) === want, `→ "${rcN(s)}"`);
+  // Prod zinciri (finalizeVisionFeedback) — gerçek son-işlem.
+  const b30 = { died: true, map: "Ascent", agent: "Sova", side: "attacking", lang: "en" } as VisionPromptBody;
+  const fg30 = buildVisionContext(b30, "en").factGround;
+  const o30 = finalizeVisionFeedback(
+    { deathAnalysis: "You died 3 rounds straight at B Main; you peeked without utility.", enemyAnalysis: [], nextRoundSuggestion: "Wait for smoke next round." },
+    { ...visionPostprocessOpts(b30, "en", fg30), roundHistory: m14 as never },
+  ).deathAnalysis;
+  t("Y30 prod zinciri: 'You died 3 rounds straight at B Main; …' → 'in R4', çapasız 'You died at B Main;' YOK",
+    /in R4/.test(o30) && !/You died at B Main[;.]/.test(o30), `→ "${o30}"`);
+}
+
 console.log(`\n${fail === 0 ? "TÜM TESTLER GEÇTİ ✓" : `${fail} TEST BAŞARISIZ ✗`}`);
 process.exit(fail ? 1 : 0);

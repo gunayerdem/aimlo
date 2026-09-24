@@ -1119,10 +1119,16 @@ export function rewriteUnsafeClaims(
         const beforeCnt = result;
         // FB05 · F14 (2) EN aynası: "You died at B Main 3 times" (tek kanıt R2) → "… at B Main
         // in R2" (eskiden "You died at B Main , …": çapa kaybı + boşluk artığı).
+        // Yakınsama Y30 (2026-09-25): aynı çapa "N rounds straight / in a row / consecutive" birimi
+        // için de. KANIT (kapanis/probe11, ölçülmemiş konum, hafıza R1=a site, R4=b main): "You died
+        // 3 rounds straight at B Main." → "You died at B Main." — birim çapasız silinip GEÇMİŞ konum
+        // bu round'a yapışıyordu (prod zinciri: "…; you peeked without utility." aynı); TR karşılığı
+        // "B Main'de 3 kez öldün" → "R4'te B Main'de öldün" doğru çapalanıyordu. Artık "You died in R4
+        // at B Main."
         if (validation.actualCount === 1 && claims.claimedPosition) {
           const anchorEn = pastRoundAnchor(validation, "en");
           const loc = anchorEn
-            ? locateCountClaim(result, new RegExp(`(?<![\\p{L}\\p{N}])()${ct}\\s*times?(?![\\p{L}])`, "giu"), claims.claimedPosition)
+            ? locateCountClaim(result, new RegExp(`(?<![\\p{L}\\p{N}])()${ct}\\s*(?:times?|rounds?\\s*(?:in\\s*a\\s*row|straight|consecutive))(?![\\p{L}])`, "giu"), claims.claimedPosition)
             : null;
           if (loc && loc.deathSentence && !loc.currentAnchored && !loc.otherPastAnchor) {
             result = result.slice(0, loc.countStart) + (loc.isList ? "earlier" : anchorEn) + result.slice(loc.countEnd);
