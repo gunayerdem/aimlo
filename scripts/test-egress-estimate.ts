@@ -161,7 +161,10 @@ async function main() {
   const adminPage = read("app/admin/altyapi/page.tsx");
   t("/admin/altyapi egress kartını render ediyor", /<EgressCard e=\{infra\.egress\} \/>/.test(adminPage));
   const cardStart = adminPage.indexOf("function EgressCard");
-  const card = cardStart < 0 ? "" : adminPage.slice(cardStart, adminPage.indexOf("\n}\n", cardStart));
+  // Kart sonu satır sonundan BAĞIMSIZ aranır: autocrlf=true checkout'ta dosya CRLF gelir, "\n}\n"
+  // bulunamayınca (-1) dilim dosya sonuna uzayıp başka kartların "adm-badge ok"unu yakalıyordu.
+  const cardEnd = cardStart < 0 ? null : /\r?\n\}\r?\n/.exec(adminPage.slice(cardStart));
+  const card = cardStart < 0 || !cardEnd ? "" : adminPage.slice(cardStart, cardStart + cardEnd.index);
   t("F31: EgressCard'da yeşil 'eşiğin altında' rozeti yok; eşik altı tahmin 'alt sınır', güncelleme sayacı hep '≥'",
     card.length > 0 && !/eşiğin altında/.test(card) && !/adm-badge ok/.test(card) && /"alt sınır"/.test(card) && /count\(e\.updates, true\)/.test(card),
     card.slice(0, 120));
