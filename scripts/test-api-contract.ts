@@ -214,6 +214,14 @@ async function main() {
     // edildiği iddia edilir. CI'da dosya yok → açık ATLANDI satırı (sessiz geçiş
     // yok). Dosya var ama liste çözümlenemiyorsa bu bir KIRMIZIDIR (format
     // değiştiyse kilit kör kalmasın).
+    // ⚠ FB04 · F39 — BU KİLİT YEREL KOPYAYA BAKAR, PROD'A DEĞİL: hem desktop
+    // telemetry.rs hem de burada çağrılan validateTelemetryEvent bu makinedeki
+    // ÇALIŞMA KOPYALARIDIR. Yerel backend prod'un önündeyken (push edilmemiş /
+    // Vercel build'i düşmüş / rollback) bu blok YEŞİL kalır ama prod yeni tipleri
+    // invalid_type ile düşürebilir (24.09: prod a60f3dd 5 tipi reddediyordu, bu
+    // kilit yeşildi). DEPLOY EDİLMİŞ listeyi yalnız GET /api/version gösterir —
+    // [5] o ucun sözleşmesini kilitler; masaüstü release kapısı (aimlo-desktop
+    // scripts/check-telemetry-prod.mjs) canlı aimlo.gg/api/version'ı yoklar.
     const desktopTelemetry = path.join(REPO_ROOT, "..", "aimlo-desktop", "src-tauri", "src", "telemetry.rs");
     const kanonikTipler = new Set(KANONIK.map(([type]) => type));
     if (fs.existsSync(desktopTelemetry)) {
@@ -227,7 +235,7 @@ async function main() {
         t(`desktop kind KANONIK'te örnekli: ${kind}`, kanonikTipler.has(kind), "KANONIK tablosuna örnek yük ekle");
         const extra = KANONIK.find(([type]) => type === kind)?.[1] ?? {};
         const r = validateTelemetryEvent({ type: kind, ts: now, ...extra }, now);
-        t(`desktop kind backend'de kabul: ${kind}`, r === null, `reddedildi: ${r} — prod bu olayı SESSİZCE düşürür`);
+        t(`desktop kind backend'de kabul: ${kind}`, r === null, `reddedildi: ${r} — YEREL backend bu olayı SESSİZCE düşürür (prod'u /api/version gösterir)`);
       }
       const yalnizBackend = [...kanonikTipler].filter((k) => !desktopKinds.includes(k));
       if (yalnizBackend.length > 0) {
@@ -327,6 +335,40 @@ async function main() {
       400,
     );
     delete process.env.STRIPE_WEBHOOK_SECRET;
+  }
+
+  // ── 5) GET /api/version — CANLI telemetri sözleşmesi (FB04 · F39) ─────────
+  // Kimliksiz, PII'siz, DB/AI'sız STATİK uç: masaüstü release kapısı (aimlo-desktop
+  // scripts/check-telemetry-prod.mjs evaluateVersionProbe) `{ telemetryTypes: string[] }`
+  // bekler ve CANONICAL_KIND_LIST'in tamamını arar. Commit SHA DÖNDÜRÜLMEZ.
+  console.log("\n[5] GET /api/version — kimliksiz statik telemetri sözleşmesi (F39)");
+  {
+    const tt = await import("../lib/telemetry-types");
+    let mod: Record<string, unknown> | null = null;
+    try {
+      mod = (await import("../app/api/version/route")) as Record<string, unknown>;
+    } catch (e) {
+      t("app/api/version/route.ts yüklenebiliyor", false, (e as Error).message);
+    }
+    if (mod) {
+      const GET = mod.GET as (() => Response | Promise<Response>) | undefined;
+      t("GET export ediliyor", typeof GET === "function");
+      t("yalnız GET (POST/PUT/PATCH/DELETE yok → Next 405)", ["POST", "PUT", "PATCH", "DELETE"].every((m) => !(m in mod!)));
+      t('dynamic = "force-static" (build\'de üretilir, istek başına fonksiyon YOK)', mod.dynamic === "force-static", `got=${String(mod.dynamic)}`);
+      if (typeof GET === "function") {
+        // Argümansız çağrı: istekten hiçbir şey (header/token/query) okunmadığının kanıtı —
+        // Authorization başlığı olmadan 200 döner.
+        const res = await GET();
+        const body = (await res.json()) as Record<string, unknown>;
+        t("kimliksiz GET → 200", res.status === 200, `got=${res.status}`);
+        t("telemetryTypes === TELEMETRY_EVENT_TYPES (sıra dahil)",
+          JSON.stringify(body.telemetryTypes) === JSON.stringify(tt.TELEMETRY_EVENT_TYPES), `got=${JSON.stringify(body.telemetryTypes)}`);
+        t("contract sabit sayı", typeof body.contract === "number" && Number.isInteger(body.contract), `got=${String(body.contract)}`);
+        t("yalnız { telemetryTypes, contract } — commit/sha/env alanı YOK",
+          JSON.stringify(Object.keys(body).sort()) === JSON.stringify(["contract", "telemetryTypes"]), `keys=${Object.keys(body).join(",")}`);
+        t("gövdede commit SHA benzeri 40-hex dizi yok", !/[0-9a-f]{40}/i.test(JSON.stringify(body)));
+      }
+    }
   }
 
   console.log(fail === 0 ? "\n✅ SÖZLEŞME TESTLERİ GEÇTİ" : `\n❌ ${fail} SÖZLEŞME TESTİ BAŞARISIZ`);
