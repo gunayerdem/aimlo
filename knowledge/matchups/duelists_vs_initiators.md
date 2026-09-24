@@ -29,7 +29,7 @@ Initiator seni girişinden önce bulmak, körleştirmek ya da bozmak için var. 
 **WHY**: Bu yetenekler seni öldürmek için değil, öldürülebilir yapmak için atılır. Pencereyi kapatan oyuncuya işlemezler.
 
 ## Tekrarlayan Ölüm Ne Anlama Gelir
-Initiator'lı takıma sürekli ölüyorsan büyük ihtimalle utility dalgasının İÇİNE giriyorsun. Onların ritmi bellidir: keşif → flash → giriş. Sen bu zincirin arasında değil, ya öncesinde (zincir kurulmadan hızlı bas) ya sonrasında (yetenekler bitince bas) oynamalısın.
+Initiator'lı takıma sürekli ölüyorsan utility dalgasının İÇİNE giriyorsun. Onların ritmi bellidir: keşif → flash → giriş. Sen bu zincirin arasında değil, ya öncesinde (zincir kurulmadan hızlı bas) ya sonrasında (yetenekler bitince bas) oynamalısın.
 
 ## Koç Notları
 Initiator'a karşı duelist için en güçlü istatistik harcatılan yetenek sayısıdır. Her boşa giden flash, her erken atılan keşif senin lehine — sahte baskıyla harcat, gerçek girişi eli boş kaldığında yap. Ve tersini unutma: kendi takımının initiator'ı varsa ASLA ondan önce girme; flash'ın arkasından giren duelist, önünden giren duelistin iki katı yaşar.

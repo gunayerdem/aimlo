@@ -1,6 +1,6 @@
 {
   "note": "B06 golden — refactor ÖNCESİ vision route (HEAD 9e8aa54) GERÇEK POST handler çıktısı; üretici scripts/vision-route-harness.ts goldenRecordFor. Yenileme: UPDATE_VISION_GOLDEN=1 npx tsx scripts/test-eval-fidelity.ts · B09 (2026-09-24) BİLİNÇLİ yenileme: EN [OPENER] (a) düz cümle, vision SYSTEM_PROMPT/şema/factSheet örnek düzeltmeleri (seni…aldı/kesti/düştün → öldürdü/öldün; alan adı eksiz, roster→kadro), NATURAL_COACH_RULE ölüm fiili, KB düş-/aldı dalgası (kbDigest).",
-  "kbDigest": "09f9ccb341dfb98f8c46e604bd903f8ebace896b1efe6c088b3d71e22beb942f",
+  "kbDigest": "1e221ec468c49986cab59f589376f7b8d81e78014889640d96417da2c29fabb9",
   "records": [
     {
       "id": "G1-tr-loc-killer-spike-eco",

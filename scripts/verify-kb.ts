@@ -136,7 +136,13 @@ const isRuntimeFile = (rel: string): boolean => {
 
 console.log(`\n[7] KB yasak-kelime taraması (${BANNED_PHRASES.length} kalıp)`);
 {
-  const exemptLine = /(yasak|deme\b|denmez|kullanma|yerine|→|❌)/i;
+  // W3 followup #43 (W3-fix 2026-09-24): eski /(yasak|deme\b|…|→|❌)/i Türkçe-\b tuzağındaydı —
+  // /deme\b/ "kademe"de ateşliyor, "→" KB'nin SIRA oklarını ("keşif → flash → giriş") muaf
+  // sayıyordu. Ölçüm (runtime KB, eski ↔ yeni muafiyet): eski ile 0, yeni ile 1 ihlal —
+  // matchups/duelists_vs_initiators.md:32 "büyük ihtimalle" yalnız satırdaki sıra oku
+  // yüzünden GİZLİYDİ (aynı commit'te düzeltildi). Yasağı ANLATAN satır ("yasak/deme/denmez/
+  // kullanma/yerine", ❌) \p{L} sınırlı muaf kalır; "→" artık muafiyet DEĞİL.
+  const exemptLine = /(?<!\p{L})(?:yasak\p{L}*|deme|denmez|kullanma|yerine)(?!\p{L})|❌/iu;
   let hits = 0, warns = 0;
   for (const f of files) {
     const rel = path.relative(KB, f);
