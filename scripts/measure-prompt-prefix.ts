@@ -229,14 +229,19 @@ const TARGET: Record<string, number> = { A: 90, D: 64 };
      A 145.777/145.777 %100 · B 145.777/145.777 %100 · C 92.938/146.686 %63,4 ·
      D 92.291/139.213 %66,3 · E 93.131/151.556 %61,4  (ilk kırılma 92.291 B)
    Yukarıdaki 2026-07-20 BASELINE tarihsel "adım 1-3 öncesi" zeminidir; ikisi
-   birlikte basılır. */
-const BASELINE_B06_FIRST_BREAK = 121_967;
+   birlikte basılır.
+   ⚠ LF DÜZELTMESİ (W2 inceleme B06-F1, 2026-09-24): ilk sabitlenen değerler (A/B
+   175.453, C 122.614/176.362, D 121.967/168.889, E 122.807/181.232, ilk kırılma
+   121.967) Windows çalışma ağacının CRLF KB baytlarını içeriyordu — prod (LF) bu
+   \r baytlarını HİÇ göndermez. knowledge-loader artık CRLF'i normalize ediyor; aşağıdaki
+   değerler aynı koşunun LF (= prod, git index) ölçümü. Yüzdeler ±0,03 pp içinde. */
+const BASELINE_B06_FIRST_BREAK = 121_487;
 const BASELINE_B06: Record<string, { prefixB: number; totalB: number; prefixPct: number }> = {
-  A: { prefixB: 175_453, totalB: 175_453, prefixPct: 100 },
-  B: { prefixB: 175_453, totalB: 175_453, prefixPct: 100 },
-  C: { prefixB: 122_614, totalB: 176_362, prefixPct: 69.52 },
-  D: { prefixB: 121_967, totalB: 168_889, prefixPct: 72.22 },
-  E: { prefixB: 122_807, totalB: 181_232, prefixPct: 67.76 },
+  A: { prefixB: 174_802, totalB: 174_802, prefixPct: 100 },
+  B: { prefixB: 174_802, totalB: 174_802, prefixPct: 100 },
+  C: { prefixB: 122_125, totalB: 175_711, prefixPct: 69.5 },
+  D: { prefixB: 121_487, totalB: 168_296, prefixPct: 72.19 },
+  E: { prefixB: 122_314, totalB: 180_577, prefixPct: 67.74 },
 };
 
 /* ══════════════════════════════════════════════════════════

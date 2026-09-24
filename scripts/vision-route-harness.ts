@@ -219,7 +219,10 @@ export async function captureVisionCall(
 
 export const sha256 = (s: string): string => crypto.createHash("sha256").update(s, "utf8").digest("hex");
 
-/** knowledge/** içeriğinin özeti — sistem mesajı golden'ı YALNIZ KB aynıyken kıyaslanır. */
+/** knowledge/** içeriğinin özeti — sistem mesajı golden'ı YALNIZ KB aynıyken kıyaslanır.
+ *  CRLF → LF normalize edilmiş içerik üzerinden (W2 inceleme B06-F1): loader da aynı
+ *  normalizasyonu yapıyor; özet artık checkout'un satır sonundan bağımsız (Windows
+ *  autocrlf ağacı, temiz LF klonu, Mac ve Vercel aynı özeti üretir). */
 export function knowledgeDigest(): string {
   const root = path.join(REPO_ROOT, "knowledge");
   const files: string[] = [];
@@ -236,7 +239,7 @@ export function knowledgeDigest(): string {
   for (const f of files) {
     h.update(path.relative(root, f).split(path.sep).join("/"));
     h.update("\u0000");
-    h.update(fs.readFileSync(f));
+    h.update(fs.readFileSync(f, "utf8").replace(/\r\n/g, "\n"), "utf8");
     h.update("\u0000");
   }
   return h.digest("hex");

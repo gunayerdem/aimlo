@@ -445,6 +445,47 @@ async function visionRouteSection() {
       firstDiff(capture.userText, um.userPrompt));
   }
 
+  // KB'DEN BAĞIMSIZ BLOK SIRASI KİLİDİ (W2 inceleme B06-F1): sistem-mesajı sha256 kıyası
+  // yalnız kbDigest aynıyken koşar — her KB düzenlemesinden (B09 dalgası) sonra kendiliğinden
+  // devre dışı kalır, route ve eval AYNI kurucuyu çağırdığı için eşitlik iddiaları da
+  // totolojik geçer. Blok sırası (prefix-cache'in ta kendisi: kararlı → değişken) KB
+  // içeriğinden bağımsız başlıklarla kilitlenir: map'i contextual'ın arkasına alan bir
+  // mutasyon bu iddiayı kırar (commit'te mutasyonla kanıtlandı).
+  const SEP = "\n\n---\n\n";
+  const ORDER: [string, string[]][] = [
+    ["policy", ["\n🎯 "]],
+    ["static", ["[SİLAH + KOMP REHBERİ"]],
+    ["scenario", ["[SENARYO REHBERİ"]],
+    ["profile", ["[KOÇLUK PROFİLİ — her rank"]],
+    ["profile2", ["[KOÇLUK PROFİLİ — devam]"]],
+    ["agent", ["[AGENT BİLGİSİ — "]],
+    ["abilityHint", ["\nSENİN KİTİN (", "\nYOUR KIT ("]],
+    ["map", ["[HARİTA BİLGİSİ — "]],
+    ["contextual", ["[EŞLEŞME BİLGİSİ]", "[KARŞI-AJAN — "]],
+    ["memory", ["[CROSS-MATCH "]],
+    ["pattern", ["[PATTERN CONTEXT"]],
+  ];
+  const orderBad: string[] = [];
+  for (const c of VISION_GOLDEN_CASES) {
+    const sys = byId[c.id]?.sys ?? "";
+    let prev = 0, prevName = "SYSTEM_PROMPT";
+    const found: string[] = [];
+    for (const [name, heads] of ORDER) {
+      const idx = heads.map((h) => sys.indexOf(SEP + h)).filter((i) => i >= 0);
+      if (idx.length === 0) continue;
+      const at = Math.min(...idx);
+      if (at <= prev) orderBad.push(`${c.id}: ${name}@${at} ≤ ${prevName}@${prev}`);
+      prev = at; prevName = name; found.push(name);
+    }
+    if (!sys.startsWith("Sen AIMLO'sun") || !["policy", "static", "scenario", "profile", "profile2"].every((n) => found.includes(n))) {
+      orderBad.push(`${c.id}: zorunlu blok eksik (${found.join(",")})`);
+    }
+  }
+  const g1Blocks = ["agent", "abilityHint", "map", "contextual", "memory", "pattern"].every((n) =>
+    ORDER.find(([k]) => k === n)![1].some((h) => (byId["G1-tr-loc-killer-spike-eco"]?.sys ?? "").includes(SEP + h)));
+  check(`blok sırası KB'den bağımsız kilitli: SYSTEM_PROMPT < policy < static < scenario < profile < profile2 < agent < abilityHint < map < contextual < memory < pattern (${VISION_GOLDEN_CASES.length} vaka; G1 hepsini taşır)`,
+    orderBad.length === 0 && g1Blocks, orderBad.join(" | ") || "G1'de blok eksik");
+
   // İçerik kilitleri — prod prompt'unun taşıdığı direktifler (eval'in eskiden üretmedikleri).
   const u = (id: string) => byId[id]?.user ?? "";
   const s = (id: string) => byId[id]?.sys ?? "";

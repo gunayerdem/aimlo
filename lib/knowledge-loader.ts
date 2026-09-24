@@ -145,7 +145,13 @@ function loadFile(relativePath: string): string {
   if (cached !== undefined) return cached;
   try {
     const fullPath = path.join(KNOWLEDGE_DIR, relativePath);
-    const content = stripFrontmatter(fs.readFileSync(fullPath, "utf-8"));
+    // SATIR SONU NORMALİZASYONU (W2 inceleme B06-F1, 2026-09-24): git index'teki 192 KB
+    // dosyasının hepsi LF (`git ls-files --eol knowledge`: i/lf), ama Windows çalışma
+    // ağacında autocrlf yüzünden 55'i CRLF → dev'de modele prod'un HİÇ göndermediği \r
+    // baytları gidiyor (G1 golden'ında 607 CR), golden sistem-mesajı sha256'sı ve
+    // BASELINE_B06 baytları makineye özel kalıyordu (temiz klonda/Mac'te/Vercel'de
+    // golden kıyası sessizce ATLANIYORDU). Prod'da (LF checkout) no-op; dev = prod bayt.
+    const content = stripFrontmatter(fs.readFileSync(fullPath, "utf-8").replace(/\r\n/g, "\n"));
     FILE_CACHE.set(relativePath, content);
     return content;
   } catch {
