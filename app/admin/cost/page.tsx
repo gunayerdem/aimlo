@@ -38,7 +38,7 @@ export default async function AdminCostPage() {
       {c.rows === 0 ? (
         <div className="adm-note" style={{ marginBottom: 18 }}>
           <b>İzleme yeni devrede.</b> Henüz <code>ai_usage</code> kaydı yok — bir sonraki AI çağrısından (vision/report/feedback/insight)
-          itibaren token & maliyet birikmeye başlayacak. Geçmiş çağrılar (DB'ye yazılmadığı için) burada görünmez; launch'a
+          itibaren token & maliyet birikmeye başlayacak. Geçmiş çağrılar (DB&apos;ye yazılmadığı için) burada görünmez; launch&apos;a
           kadar gerçek maliyet geçmişi oluşacak.
         </div>
       ) : null}
@@ -49,7 +49,7 @@ export default async function AdminCostPage() {
         <div className="adm-note" style={{ marginBottom: 18 }}>
           <b>Toplam EKSİK gösteriliyor.</b> <code>ai_usage</code> okuması {c.rowLimit.toLocaleString("tr")} satır tavanına dayandı;
           yalnız en yeni {c.rowLimit.toLocaleString("tr")} çağrı hesaba katıldı (bugün/bu hafta doğru, <b>toplam</b> düşük).
-          Kalıcı çözüm: agregasyonu SQL'e taşıyan RPC.
+          Kalıcı çözüm: agregasyonu SQL&apos;e taşıyan RPC.
         </div>
       ) : null}
 
@@ -57,7 +57,7 @@ export default async function AdminCostPage() {
         <div className="adm-card"><p className="adm-stat-label">BUGÜN</p><div className="adm-stat-num iris">{formatUsd(c.today)}</div></div>
         <div className="adm-card"><p className="adm-stat-label">BU HAFTA</p><div className="adm-stat-num">{formatUsd(c.week)}</div></div>
         <div className="adm-card"><p className="adm-stat-label">TOPLAM</p><div className="adm-stat-num">{formatUsd(c.total)}</div><p className="adm-stat-sub">{c.rows.toLocaleString("tr")} çağrı</p></div>
-        <div className="adm-card"><p className="adm-stat-label">CACHE ORANI</p><div className="adm-stat-num">{cacheRatio.toFixed(0)}%</div><p className="adm-stat-sub">girdi token'ı cache'ten (tasarruf)</p></div>
+        <div className="adm-card"><p className="adm-stat-label">CACHE ORANI</p><div className="adm-stat-num">{cacheRatio.toFixed(0)}%</div><p className="adm-stat-sub">girdi token&apos;ı cache&apos;ten (tasarruf)</p></div>
       </div>
 
       <div className="adm-grid cols-2" style={{ marginTop: 14 }}>
